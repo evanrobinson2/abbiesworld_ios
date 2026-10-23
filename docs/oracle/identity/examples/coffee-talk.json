@@ -1,0 +1,320 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Coffee Talk",
+    "developer": "Toge Productions",
+    "publisher": "Toge Productions",
+    "release": "2020",
+    "steam_appid": 914800
+  },
+  "core": {
+    "fantasy": "You are the barista of a late-night café, and the drink you make for each tired regular is how you listen.",
+    "pillars": [
+      "Listening is the game",
+      "One small craft verb: make the drink",
+      "Rain outside, warmth inside"
+    ],
+    "signature_moment": "A regular sits down dripping from the rain, tells you a worry, and you hand over exactly the warm drink they needed.",
+    "anti_goals": [
+      "no fail screen",
+      "no rush timer",
+      "no combat"
+    ],
+    "signatures": [
+      {
+        "id": "drink_as_reply",
+        "layer": "mechanics",
+        "description": "Mixing three ingredients is the only big verb, and the drink is your answer to what a customer said.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "counter_frame",
+        "layer": "interaction",
+        "description": "One fixed view across the counter: faces, the cup and the rainy window are the whole stage.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "two_temperatures",
+        "layer": "art",
+        "description": "Warm lamp colours inside against cold blue rain outside set the mood in every frame.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "narrative": 0.5,
+        "fantasy": 0.2,
+        "submission": 0.2,
+        "expression": 0.1
+      },
+      "emotional_targets": {
+        "calm": 0.9,
+        "warmth": 0.8,
+        "melancholy": 0.4
+      },
+      "audience": {
+        "age": "teens and adults",
+        "skill_floor": "reading",
+        "context": "evening, couch"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "listen",
+          "input": "advance text"
+        },
+        {
+          "verb": "brew",
+          "input": "pick three ingredients"
+        },
+        {
+          "verb": "latte art",
+          "input": "drag to pour"
+        },
+        {
+          "verb": "serve",
+          "input": "click"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "customer sits",
+          "talk",
+          "order",
+          "brew",
+          "serve",
+          "reaction"
+        ],
+        "period_s": {
+          "value": 180,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "soft",
+        "scoring": "none; a wrong drink changes the story a little"
+      },
+      "randomness": {
+        "amount": 0.0,
+        "kind": "none"
+      },
+      "information": "partial",
+      "systems": [
+        "ingredient recipe combinations",
+        "branching conversations by drink"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse",
+          "controller"
+        ],
+        "mapping": "cursor"
+      },
+      "camera": {
+        "model": "fixed",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "slots",
+        "undo": "discard the drink",
+        "preview_before_commit": true,
+        "auto_repair": false
+      },
+      "juice": {
+        "sound_on_action": 0.8,
+        "particles": 0.2,
+        "scale_pop": 0.2,
+        "procedural_settle": 0.1,
+        "squash_stretch": 0.0,
+        "screen_shake": 0.0,
+        "hit_stop": 0.0,
+        "camera_kick": 0.0
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "pixel_art",
+        "family": "pixel",
+        "light": "painted_in",
+        "outlines": true,
+        "outline": "inked_in",
+        "surface": "pixel",
+        "post": [
+          "bloom"
+        ],
+        "signature": "Chunky pixel people in one fixed café view; warm lamp colours inside and cold blue rain outside are painted into the palette, not lit.",
+        "lesson": "Mood can come from two colour temperatures in one frame: warm inside, cold outside. No lighting system needed."
+      },
+      "references": [
+        "lo-fi study music videos",
+        "rainy city night illustration",
+        "1990s pixel adventure games"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "social": {
+          "mix": {
+            "spatial": 0.5,
+            "overlay": 0.5
+          },
+          "timing": "on_change",
+          "note": "Faces change expression on the portrait; words appear in a dialogue box.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "overlay": 0.7,
+            "diegetic": 0.3
+          },
+          "timing": "summoned",
+          "note": "The order is spoken; the recipe book is summoned.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "time": {
+          "mix": {
+            "diegetic": 0.6,
+            "meta": 0.4
+          },
+          "timing": "on_change",
+          "note": "Rain, the night and the music carry the time; a short title card starts each night.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.5,
+        "meta": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "world_material",
+        "fade_rule": "Dialogue shows while someone talks; the brewing tray only while you make a drink."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "the night and the weather",
+            "channels": [
+              "light",
+              "music",
+              "sound",
+              "weather"
+            ]
+          }
+        ],
+        "max_channels": 4
+      },
+      "note": "Almost everything is the counter and the faces: who sits down, what they say, how they react to the cup. The recipe book is summoned; the rain and the clock on the night set the mood."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "enacted": 0.7,
+        "evoked": 0.3
+      },
+      "tone": {
+        "cozy_tense": -0.8,
+        "whimsical_grounded": 0.2,
+        "earnest_ironic": -0.3,
+        "quiet_loud": -0.9,
+        "handmade_industrial": -0.5
+      },
+      "themes": [
+        "listening",
+        "belonging",
+        "small kindness"
+      ]
+    },
+    "pacing": {
+      "structure": "campaign",
+      "tension_curve": "flat_calm",
+      "failure_cost": "none"
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.11,
+      "challenge": 0.11,
+      "expression": 0.22,
+      "structure": 1.0,
+      "social": 0.56,
+      "systems": 0.11,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "confidence": 0.75
+  },
+  "ledger": {
+    "style": [
+      "drink-as-reply craft verb",
+      "fixed counter view",
+      "warm inside and cold outside palette",
+      "rain and lo-fi music as mood"
+    ],
+    "expression": [
+      "Coffee Talk's characters, their stories and dialogue",
+      "its pixel art and portraits",
+      "its music"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "mechanics",
+        "target": "Café study",
+        "setting": "Make the drink the reply: one craft verb whose result changes how the customer reacts.",
+        "from_signature": "drink_as_reply"
+      },
+      {
+        "layer": "art",
+        "target": "Café lighting preset",
+        "setting": "Warm lamp key inside, cool blue fill from the window; rain on glass as the mood channel.",
+        "from_signature": "two_temperatures"
+      },
+      {
+        "layer": "interaction",
+        "target": "Café camera",
+        "setting": "A counter view that holds the customer, the cup and the window together.",
+        "from_signature": "counter_frame"
+      }
+    ],
+    "leave": [
+      "adult worries and late-night themes",
+      "long reading",
+      "the fantasy-creature city setting"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

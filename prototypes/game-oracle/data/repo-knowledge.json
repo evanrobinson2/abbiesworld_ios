@@ -408,6 +408,650 @@
    ]
   },
   {
+   "id": "a-little-to-the-left",
+   "file": "docs/oracle/identity/examples/a-little-to-the-left.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "A Little to the Left",
+    "developer": "Max Inferno",
+    "publisher": "Secret Mode",
+    "release": "2022",
+    "steam_appid": 1629520
+   },
+   "core": {
+    "fantasy": "You are a gentle tidier who puts small household things in perfect order, while a cat keeps nudging them out again.",
+    "pillars": [
+     "Order is the pleasure",
+     "More than one right answer",
+     "Mischief, not failure"
+    ],
+    "signature_moment": "The last crooked picture frame clicks straight, the whole scene settles, and then a paw reaches in from the edge.",
+    "anti_goals": [
+     "no timer",
+     "no fail state",
+     "no score"
+    ],
+    "signatures": [
+     {
+      "id": "snap_to_order",
+      "layer": "interaction",
+      "description": "Things click and settle when they line up, and the solved scene gives a soft little flourish.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "many_tidy_answers",
+      "layer": "mechanics",
+      "description": "Several different arrangements count as tidy, so players find their own order.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "cat_interrupts",
+      "layer": "dynamics",
+      "description": "A cat walks in and undoes your work, played as a joke rather than a setback.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "challenge": 0.3,
+      "submission": 0.3,
+      "discovery": 0.25,
+      "expression": 0.15
+     },
+     "emotional_targets": {
+      "satisfaction": 0.9,
+      "calm": 0.8,
+      "amusement": 0.5
+     },
+     "audience": {
+      "age": "everyone",
+      "skill_floor": "none",
+      "context": "short sessions"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "drag",
+       "input": "drag"
+      },
+      {
+       "verb": "rotate",
+       "input": "drag"
+      },
+      {
+       "verb": "sort",
+       "input": "drag"
+      },
+      {
+       "verb": "peel",
+       "input": "drag"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "look at the mess",
+       "try an order",
+       "it clicks",
+       "scene settles"
+      ],
+      "period_s": {
+       "value": 120,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "none",
+      "scoring": "none; a hint and a skip are always there"
+     },
+     "randomness": {
+      "amount": 0.05,
+      "kind": "none"
+     },
+     "information": "perfect",
+     "systems": [
+      "multiple valid end states per puzzle"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 4,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "mouse",
+       "touch",
+       "controller"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "fixed",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "freeform_autofit",
+      "undo": "drag back",
+      "preview_before_commit": false,
+      "auto_repair": false
+     },
+     "juice": {
+      "procedural_settle": 0.6,
+      "sound_on_action": 0.8,
+      "scale_pop": 0.3,
+      "squash_stretch": 0.2,
+      "particles": 0.2,
+      "screen_shake": 0,
+      "hit_stop": 0,
+      "camera_kick": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "painterly",
+      "family": "hand_painted_2d",
+      "light": "flat",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "paper",
+      "post": [],
+      "signature": "Soft hand-drawn objects with gentle ink edges on warm paper-textured backgrounds, lit flat like an illustration.",
+      "lesson": "A paper ground and soft ink lines make tidy puzzles feel homely rather than clinical."
+     },
+     "references": [
+      "household flat-lays",
+      "picture-book illustration",
+      "knolling"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "thing_state": {
+       "mix": {
+        "diegetic": 0.7,
+        "none": 0.3
+       },
+       "timing": "on_change",
+       "note": "Objects show their own order; the solved state clicks into place.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "overlay": 0.5,
+        "diegetic": 0.5
+       },
+       "timing": "summoned",
+       "note": "A hint sketch is summoned on a sticky note.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.1,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.03,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Only the scene and its objects; hints on a note when asked."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "puzzle solved",
+        "channels": [
+         "sound",
+         "music",
+         "animals"
+        ]
+       }
+      ],
+      "max_channels": 3
+     },
+     "note": "The scene is the whole interface: the finished state shows itself by clicking into place. Hints are summoned, and some puzzles accept more than one tidy answer."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "evoked": 0.6,
+      "emergent": 0.4
+     },
+     "tone": {
+      "cozy_tense": -0.8,
+      "whimsical_grounded": -0.3,
+      "earnest_ironic": 0.2,
+      "quiet_loud": -0.8,
+      "handmade_industrial": -0.8
+     },
+     "themes": [
+      "order",
+      "home",
+      "small joys"
+     ]
+    },
+    "pacing": {
+     "structure": "puzzle_levels",
+     "tension_curve": "flat_calm",
+     "failure_cost": "none"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.67,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.11,
+     "chance": 0.56,
+     "session": 0.22
+    },
+    "confidence": 0.7
+   },
+   "ledger": {
+    "style": [
+     "tidy-up puzzles with several right answers",
+     "snap and settle on order",
+     "pet mischief as comedy",
+     "paper-textured hand-drawn look"
+    ],
+    "expression": [
+     "its specific puzzles and household scenes",
+     "its drawings",
+     "the cat character",
+     "its music"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "mechanics",
+      "target": "Café tidy-up chores",
+      "setting": "A tidy puzzle accepts any arrangement that meets the rule (sorted by colour, size or kind).",
+      "from_signature": "many_tidy_answers"
+     },
+     {
+      "layer": "interaction",
+      "target": "GAME_FEEL placement",
+      "setting": "When a set lines up, everything settles together with one soft chord.",
+      "from_signature": "snap_to_order"
+     },
+     {
+      "layer": "dynamics",
+      "target": "Ranch animals",
+      "setting": "An animal that knocks things over is a joke the player laughs at, never a penalty.",
+      "from_signature": "cat_interrupts"
+     }
+    ],
+    "leave": [
+     "its specific puzzles",
+     "its cat"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
+  },
+  {
+   "id": "a-short-hike",
+   "file": "docs/oracle/identity/examples/a-short-hike.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "A Short Hike",
+    "developer": "adamgryu",
+    "publisher": "adamgryu",
+    "release": "2019",
+    "steam_appid": 1055540
+   },
+   "core": {
+    "fantasy": "You are a young bird on a weekend at a park, hiking, climbing and gliding up a little mountain to get a phone signal.",
+    "pillars": [
+     "Climb anywhere, glide down",
+     "Small island, fully readable",
+     "Kind people, no pressure"
+    ],
+    "signature_moment": "Your last golden feather runs out just as you grab the cliff top, and the whole island spreads out below you.",
+    "anti_goals": [
+     "no combat",
+     "no fail screen",
+     "no long tutorial"
+    ],
+    "signatures": [
+     {
+      "id": "feather_stamina",
+      "layer": "mechanics",
+      "description": "Golden feathers you find are your climbing stamina, shown as a small row that empties as you climb.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "readable_island",
+      "layer": "pacing",
+      "description": "A small island you can see whole from the peak; every path is visible before you take it.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "low_res_crisp",
+      "layer": "art",
+      "description": "Low-poly 3D rendered at low resolution and scaled up with crisp pixels.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "glide_as_reward",
+      "layer": "interaction",
+      "description": "Gliding down is the payoff of every climb, and falling is never punished.",
+      "class": "style",
+      "confidence": 0.7
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "discovery": 0.4,
+      "sensation": 0.2,
+      "submission": 0.2,
+      "narrative": 0.2
+     },
+     "emotional_targets": {
+      "freedom": 0.9,
+      "calm": 0.8,
+      "pride": 0.6
+     },
+     "audience": {
+      "age": "everyone, including children",
+      "skill_floor": "low",
+      "context": "one or two evenings"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "walk",
+       "input": "stick"
+      },
+      {
+       "verb": "jump",
+       "input": "button"
+      },
+      {
+       "verb": "climb",
+       "input": "walk into a wall"
+      },
+      {
+       "verb": "glide",
+       "input": "hold jump"
+      },
+      {
+       "verb": "talk",
+       "input": "button"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "look up",
+       "climb until the feathers run out",
+       "land on a ledge",
+       "glide down",
+       "find another feather",
+       "climb higher"
+      ],
+      "period_s": {
+       "value": 120,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "none",
+      "win": "reach the peak",
+      "resources": [
+       "golden feathers",
+       "coins"
+      ]
+     },
+     "randomness": {
+      "amount": 0.05,
+      "kind": "none"
+     },
+     "information": "perfect",
+     "systems": [
+      "stamina climbing",
+      "gliding",
+      "side activities"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 5,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "controller",
+       "keyboard"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "third_person",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "none",
+      "undo": "no",
+      "preview_before_commit": false,
+      "auto_repair": true
+     },
+     "juice": {
+      "particles": 0.4,
+      "sound_on_action": 0.8,
+      "squash_stretch": 0.3,
+      "scale_pop": 0.2,
+      "camera_kick": 0.1,
+      "screen_shake": 0,
+      "hit_stop": 0,
+      "procedural_settle": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "mixed",
+      "family": "pixel_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [
+       "low resolution"
+      ],
+      "signature": "Simple low-poly 3D rendered at a low resolution and scaled up with crisp pixels, so soft colours and shapes read like pixel art.",
+      "lesson": "Rendering small and scaling up crisp is a one-line look that makes simple models charming."
+     },
+     "references": [
+      "summer camps and park trails",
+      "low-resolution 3D of early consoles",
+      "picture-book animals"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "body": {
+       "mix": {
+        "overlay": 0.6,
+        "diegetic": 0.4
+       },
+       "timing": "on_change",
+       "note": "A small row of feathers shows while you climb; the bird slows when tired.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "navigation": {
+       "mix": {
+        "diegetic": 0.7,
+        "overlay": 0.3
+       },
+       "timing": "summoned",
+       "note": "Signs, paths and hikers point the way; a paper map is summoned.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "diegetic": 1
+       },
+       "timing": "on_change",
+       "note": "People tell you what they need; the peak is always in view.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Feathers show while climbing, then hide."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "height and area",
+        "channels": [
+         "music",
+         "weather",
+         "sound"
+        ]
+       }
+      ],
+      "max_channels": 3
+     },
+     "note": "Golden feathers in a small row show how much climb you have; the park's signs, hikers and paths point the way. A paper map is summoned."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "evoked": 0.4,
+      "enacted": 0.3,
+      "emergent": 0.3
+     },
+     "tone": {
+      "cozy_tense": -0.8,
+      "whimsical_grounded": -0.5,
+      "earnest_ironic": -0.3,
+      "quiet_loud": -0.6,
+      "handmade_industrial": -0.8
+     },
+     "themes": [
+      "freedom",
+      "family",
+      "small adventures"
+     ]
+    },
+    "pacing": {
+     "structure": "sandbox",
+     "tension_curve": "flat_calm",
+     "failure_cost": "none"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.33,
+     "expression": 0.56,
+     "structure": 0.22,
+     "social": 0.33,
+     "systems": 0.22,
+     "chance": 0.44,
+     "session": 0.11
+    },
+    "confidence": 0.8
+   },
+   "ledger": {
+    "style": [
+     "collectable climbing stamina",
+     "readable small island",
+     "low-resolution crisp-pixel rendering",
+     "glide as the reward"
+    ],
+    "expression": [
+     "its bird characters and dialogue",
+     "its island layout",
+     "its music"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "mechanics",
+      "target": "School Jump latch climb",
+      "setting": "Climbing uses a small stamina that grows with things you find; running out just slides you down, safely.",
+      "from_signature": "feather_stamina"
+     },
+     {
+      "layer": "interaction",
+      "target": "School Jump feel",
+      "setting": "Every climb ends with a gentle glide or jump down as the reward.",
+      "from_signature": "glide_as_reward"
+     },
+     {
+      "layer": "pacing",
+      "target": "School Jump level",
+      "setting": "Let the goal be visible from the start, with every route readable before you try it.",
+      "from_signature": "readable_island"
+     }
+    ],
+    "leave": [
+     "its characters",
+     "its island",
+     "pixelated rendering as our main look"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
+  },
+  {
    "id": "abbies-world",
    "file": "docs/oracle/identity/examples/abbies-world.json",
    "schema_version": "1.1",
@@ -801,6 +1445,685 @@
     "docs/oracle/identity/GAME_IDENTITY.md",
     "docs/oracle/hud/HUD_STUDY.md",
     "docs/oracle/cards/CARD_ART.md"
+   ]
+  },
+  {
+   "id": "absolver",
+   "file": "docs/oracle/identity/examples/absolver.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Absolver",
+    "developer": "Sloclap",
+    "publisher": "Devolver Digital",
+    "release": "2017",
+    "steam_appid": 473690
+   },
+   "core": {
+    "fantasy": "You are a masked martial artist who builds your own fighting style, move by move, from the fighters you meet.",
+    "pillars": [
+     "Compose your own style",
+     "Stances flow into each other",
+     "Learn by being hit"
+    ],
+    "signature_moment": "You chain four moves you arranged yourself into one flowing combo, switching stance with each strike.",
+    "anti_goals": [
+     "no button mashing",
+     "little HUD"
+    ],
+    "signatures": [
+     {
+      "id": "combat_deck",
+      "layer": "mechanics",
+      "description": "Moves are arranged into a deck of chains across four stances: the player composes the style.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "stance_flow",
+      "layer": "interaction",
+      "description": "Each move ends in a stance that decides which move can come next.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "learn_by_blocking",
+      "layer": "mechanics",
+      "description": "You learn a move by blocking it in fights, then it can go in your deck.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "faceted_bodies",
+      "layer": "art",
+      "description": "Faceted low-poly bodies with flowing cloth and masks; animation carries the beauty.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "challenge": 0.35,
+      "expression": 0.3,
+      "fellowship": 0.15,
+      "sensation": 0.2
+     },
+     "emotional_targets": {
+      "focus": 0.8,
+      "mastery": 0.8,
+      "mystery": 0.4
+     },
+     "audience": {
+      "age": "teens and adults",
+      "skill_floor": "medium",
+      "context": "desk, online"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "move",
+       "input": "stick"
+      },
+      {
+       "verb": "attack",
+       "input": "button"
+      },
+      {
+       "verb": "switch stance",
+       "input": "hold and tilt"
+      },
+      {
+       "verb": "dodge",
+       "input": "button"
+      },
+      {
+       "verb": "arrange deck",
+       "input": "menu"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "wander",
+       "duel",
+       "block and learn moves",
+       "arrange the deck",
+       "duel again"
+      ],
+      "period_s": {
+       "value": 120,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "soft",
+      "win": "beat the area bosses",
+      "resources": [
+       "health",
+       "stamina"
+      ]
+     },
+     "randomness": {
+      "amount": 0.05,
+      "kind": "none"
+     },
+     "information": "perfect",
+     "systems": [
+      "four-stance move chains",
+      "move learning",
+      "stamina"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 5,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "controller",
+       "keyboard and mouse"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "third_person",
+      "constrained": false
+     },
+     "forgiveness": {
+      "snapping": "none",
+      "undo": "no",
+      "preview_before_commit": true,
+      "auto_repair": false
+     },
+     "juice": {
+      "hit_stop": 0.6,
+      "screen_shake": 0.3,
+      "particles": 0.4,
+      "camera_kick": 0.4,
+      "sound_on_action": 0.9,
+      "squash_stretch": 0,
+      "scale_pop": 0,
+      "procedural_settle": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "flat_low_poly",
+      "family": "flat_low_poly",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [
+       "fog",
+       "colour grade"
+      ],
+      "signature": "Faceted low-poly bodies and ruins in flat painted colour with soft fog; the detail is spent on cloth, masks and motion.",
+      "lesson": "Spend detail on what moves (cloth, masks) and keep the rest faceted and flat; animation then carries the beauty."
+     },
+     "references": [
+      "martial-arts film choreography",
+      "low-poly sculpture",
+      "French comics"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "body": {
+       "mix": {
+        "overlay": 0.5,
+        "diegetic": 0.5
+       },
+       "timing": "on_change",
+       "note": "Small health and stamina; the fighter staggers when tired.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "threat": {
+       "mix": {
+        "diegetic": 0.7,
+        "spatial": 0.3
+       },
+       "timing": "on_change",
+       "note": "The other fighter's stance and wind-up tell you what comes next.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "neutral_overlay",
+      "fade_rule": "The HUD appears in a fight and fades when you wander."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "combat starts",
+        "channels": [
+         "music",
+         "camera",
+         "ui"
+        ]
+       }
+      ],
+      "max_channels": 2
+     },
+     "note": "Very little HUD: a small stance indicator and health. The fighter's body and stance tell you what comes next."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "evoked": 0.5,
+      "embedded": 0.3,
+      "emergent": 0.2
+     },
+     "tone": {
+      "cozy_tense": 0.4,
+      "whimsical_grounded": 0.2,
+      "earnest_ironic": -0.5,
+      "quiet_loud": -0.2,
+      "handmade_industrial": -0.2
+     },
+     "themes": [
+      "discipline",
+      "style",
+      "mastery"
+     ]
+    },
+    "pacing": {
+     "structure": "mixed",
+     "tension_curve": "sawtooth",
+     "failure_cost": "retry_level"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.89,
+     "expression": 0.67,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.67,
+     "chance": 0.44,
+     "session": 0.11
+    },
+    "confidence": 0.65
+   },
+   "ledger": {
+    "style": [
+     "combat deck of move chains",
+     "stance flow",
+     "learn moves by blocking",
+     "faceted low-poly bodies with cloth"
+    ],
+    "expression": [
+     "its masks, costumes and world",
+     "its specific moves and animations",
+     "its music"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "mechanics",
+      "target": "Brute Fight move set",
+      "setting": "Let kids arrange their brute's moves into a little chain, so every brute fights in its own style.",
+      "from_signature": "combat_deck"
+     },
+     {
+      "layer": "art",
+      "target": "Character factory",
+      "setting": "Spend detail on what moves (cloth, hats) and keep bodies simple and faceted.",
+      "from_signature": "faceted_bodies"
+     }
+    ],
+    "leave": [
+     "its masks and setting",
+     "its online player-versus-player focus"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
+  },
+  {
+   "id": "animal-crossing-new-horizons",
+   "file": "docs/oracle/identity/examples/animal-crossing-new-horizons.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Animal Crossing: New Horizons",
+    "developer": "Nintendo",
+    "publisher": "Nintendo",
+    "release": "2020",
+    "platforms": [
+     "Nintendo Switch"
+    ],
+    "steam_appid": null
+   },
+   "core": {
+    "fantasy": "You are a new islander whose small daily chores slowly grow a home, a town and friendships, in step with the real calendar.",
+    "pillars": [
+     "The real clock and seasons are the heartbeat",
+     "Neighbours who notice you",
+     "Your island, your way"
+    ],
+    "signature_moment": "The first snowy morning: the island has turned white overnight, a neighbour waves and says they missed you.",
+    "anti_goals": [
+     "no fail state",
+     "no combat",
+     "no rush"
+    ],
+    "signatures": [
+     {
+      "id": "real_time_world",
+      "layer": "pacing",
+      "description": "The game runs on the real date and time: shops open and close, creatures and festivals follow the real seasons.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "rolling_log_world",
+      "layer": "art",
+      "description": "The world curves away from the camera like a rolling log, so the horizon stays close and the island feels cosy.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "neighbours_notice",
+      "layer": "information_grammar",
+      "description": "News and goals come from animal neighbours who talk about what you did.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "summoned_phone",
+      "layer": "interface",
+      "description": "A phone with apps is the only menu, summoned when you want it; the screen is almost empty while you walk.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "expression": 0.3,
+      "fellowship": 0.2,
+      "discovery": 0.2,
+      "submission": 0.2,
+      "fantasy": 0.1
+     },
+     "emotional_targets": {
+      "calm": 0.9,
+      "belonging": 0.8,
+      "pride": 0.6
+     },
+     "audience": {
+      "age": "everyone, including young children",
+      "skill_floor": "none",
+      "context": "daily short sessions, family"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "gather",
+       "input": "button"
+      },
+      {
+       "verb": "catch",
+       "input": "timed press"
+      },
+      {
+       "verb": "craft",
+       "input": "menu"
+      },
+      {
+       "verb": "decorate",
+       "input": "place furniture"
+      },
+      {
+       "verb": "talk",
+       "input": "button"
+      },
+      {
+       "verb": "terraform",
+       "input": "tool"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "wake up",
+       "see what changed",
+       "gather and catch",
+       "sell and buy",
+       "decorate",
+       "talk",
+       "come back tomorrow"
+      ],
+      "period_s": {
+       "value": 1800,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "none",
+      "scoring": "island rating and loan payments, both gentle"
+     },
+     "randomness": {
+      "amount": 0.4,
+      "kind": "input"
+     },
+     "information": "partial",
+     "systems": [
+      "real-time calendar",
+      "neighbour friendship and schedules",
+      "seasonal creatures",
+      "furniture placement grid"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 6,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "controller"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "third_person",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "grid",
+      "undo": "pick it up again",
+      "preview_before_commit": true,
+      "auto_repair": false
+     },
+     "juice": {
+      "sound_on_action": 0.9,
+      "scale_pop": 0.5,
+      "squash_stretch": 0.4,
+      "particles": 0.5,
+      "procedural_settle": 0.4,
+      "screen_shake": 0,
+      "hit_stop": 0,
+      "camera_kick": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "toon",
+      "family": "toon",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+       "bloom",
+       "depth of field"
+      ],
+      "signature": "Soft wrapped light on round chunky toy shapes, with the whole island bent away from the camera like a rolling log so the horizon stays close and cosy.",
+      "lesson": "Curving the world away from the camera keeps a small place feeling big but safe; we can bend the Ranch the same way in a vertex shader."
+     },
+     "references": [
+      "toy figures",
+      "Japanese picture books",
+      "village life"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "time": {
+       "mix": {
+        "diegetic": 0.8,
+        "overlay": 0.2
+       },
+       "timing": "on_change",
+       "note": "Light, music, shops and creatures follow the real hour; the clock shows briefly when you stop.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "social": {
+       "mix": {
+        "spatial": 0.6,
+        "diegetic": 0.4
+       },
+       "timing": "on_change",
+       "note": "Neighbours emote and walk over to talk; speech bubbles with gibberish voices.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "diegetic": 0.5,
+        "overlay": 0.5
+       },
+       "timing": "summoned",
+       "note": "Requests come from neighbours; the phone holds the rest.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "tools": {
+       "mix": {
+        "overlay": 0.8,
+        "diegetic": 0.2
+       },
+       "timing": "summoned",
+       "note": "Tool ring and phone are summoned; the tool shows in your hand.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.6,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.03,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Nothing on screen while you walk; the time card shows when you stop moving."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "real hour and season",
+        "channels": [
+         "light",
+         "music",
+         "npcs",
+         "animals",
+         "weather",
+         "sound"
+        ]
+       }
+      ],
+      "max_channels": 6
+     },
+     "note": "The island carries the information: the real clock sets the light, the season, the shop hours and the creatures. Neighbours tell you news. A phone with apps is summoned; the screen is almost empty while you walk."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "emergent": 0.6,
+      "enacted": 0.2,
+      "evoked": 0.2
+     },
+     "tone": {
+      "cozy_tense": -0.9,
+      "whimsical_grounded": -0.7,
+      "earnest_ironic": -0.4,
+      "quiet_loud": -0.5,
+      "handmade_industrial": -0.6
+     },
+     "themes": [
+      "community",
+      "seasons",
+      "making a home"
+     ]
+    },
+    "pacing": {
+     "structure": "sandbox",
+     "tension_curve": "flat_calm",
+     "failure_cost": "none"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.22,
+     "expression": 0.78,
+     "structure": 0.56,
+     "social": 0.56,
+     "systems": 0.33,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "ledger": {
+    "style": [
+     "real-time calendar world",
+     "curved-horizon camera",
+     "neighbours as news",
+     "summoned phone menu",
+     "hourly music"
+    ],
+    "expression": [
+     "its animal characters and their names",
+     "its furniture, clothes and item designs",
+     "its music",
+     "its art and UI"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "pacing",
+      "target": "Ranch day clock",
+      "setting": "Let the Ranch follow Evan's real hour and season so light, music and animals match his day.",
+      "from_signature": "real_time_world"
+     },
+     {
+      "layer": "art",
+      "target": "Ranch camera shader",
+      "setting": "Bend the far ground away from the camera so the horizon stays close and cosy.",
+      "from_signature": "rolling_log_world"
+     },
+     {
+      "layer": "information_grammar",
+      "target": "Ranch people",
+      "setting": "Neighbours bring news and requests in person, on the character, never as a quest log.",
+      "from_signature": "neighbours_notice"
+     }
+    ],
+    "leave": [
+     "its animal villagers and their names",
+     "its debt-and-loan economy",
+     "its item catalogue"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
    ]
   },
   {
@@ -2147,6 +3470,328 @@
    ]
   },
   {
+   "id": "coffee-talk",
+   "file": "docs/oracle/identity/examples/coffee-talk.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Coffee Talk",
+    "developer": "Toge Productions",
+    "publisher": "Toge Productions",
+    "release": "2020",
+    "steam_appid": 914800
+   },
+   "core": {
+    "fantasy": "You are the barista of a late-night café, and the drink you make for each tired regular is how you listen.",
+    "pillars": [
+     "Listening is the game",
+     "One small craft verb: make the drink",
+     "Rain outside, warmth inside"
+    ],
+    "signature_moment": "A regular sits down dripping from the rain, tells you a worry, and you hand over exactly the warm drink they needed.",
+    "anti_goals": [
+     "no fail screen",
+     "no rush timer",
+     "no combat"
+    ],
+    "signatures": [
+     {
+      "id": "drink_as_reply",
+      "layer": "mechanics",
+      "description": "Mixing three ingredients is the only big verb, and the drink is your answer to what a customer said.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "counter_frame",
+      "layer": "interaction",
+      "description": "One fixed view across the counter: faces, the cup and the rainy window are the whole stage.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "two_temperatures",
+      "layer": "art",
+      "description": "Warm lamp colours inside against cold blue rain outside set the mood in every frame.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "narrative": 0.5,
+      "fantasy": 0.2,
+      "submission": 0.2,
+      "expression": 0.1
+     },
+     "emotional_targets": {
+      "calm": 0.9,
+      "warmth": 0.8,
+      "melancholy": 0.4
+     },
+     "audience": {
+      "age": "teens and adults",
+      "skill_floor": "reading",
+      "context": "evening, couch"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "listen",
+       "input": "advance text"
+      },
+      {
+       "verb": "brew",
+       "input": "pick three ingredients"
+      },
+      {
+       "verb": "latte art",
+       "input": "drag to pour"
+      },
+      {
+       "verb": "serve",
+       "input": "click"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "customer sits",
+       "talk",
+       "order",
+       "brew",
+       "serve",
+       "reaction"
+      ],
+      "period_s": {
+       "value": 180,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "soft",
+      "scoring": "none; a wrong drink changes the story a little"
+     },
+     "randomness": {
+      "amount": 0,
+      "kind": "none"
+     },
+     "information": "partial",
+     "systems": [
+      "ingredient recipe combinations",
+      "branching conversations by drink"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 4,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "mouse",
+       "controller"
+      ],
+      "mapping": "cursor"
+     },
+     "camera": {
+      "model": "fixed",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "slots",
+      "undo": "discard the drink",
+      "preview_before_commit": true,
+      "auto_repair": false
+     },
+     "juice": {
+      "sound_on_action": 0.8,
+      "particles": 0.2,
+      "scale_pop": 0.2,
+      "procedural_settle": 0.1,
+      "squash_stretch": 0,
+      "screen_shake": 0,
+      "hit_stop": 0,
+      "camera_kick": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "pixel_art",
+      "family": "pixel",
+      "light": "painted_in",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "pixel",
+      "post": [
+       "bloom"
+      ],
+      "signature": "Chunky pixel people in one fixed café view; warm lamp colours inside and cold blue rain outside are painted into the palette, not lit.",
+      "lesson": "Mood can come from two colour temperatures in one frame: warm inside, cold outside. No lighting system needed."
+     },
+     "references": [
+      "lo-fi study music videos",
+      "rainy city night illustration",
+      "1990s pixel adventure games"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "social": {
+       "mix": {
+        "spatial": 0.5,
+        "overlay": 0.5
+       },
+       "timing": "on_change",
+       "note": "Faces change expression on the portrait; words appear in a dialogue box.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "overlay": 0.7,
+        "diegetic": 0.3
+       },
+       "timing": "summoned",
+       "note": "The order is spoken; the recipe book is summoned.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "time": {
+       "mix": {
+        "diegetic": 0.6,
+        "meta": 0.4
+       },
+       "timing": "on_change",
+       "note": "Rain, the night and the music carry the time; a short title card starts each night.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.5,
+      "meta": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Dialogue shows while someone talks; the brewing tray only while you make a drink."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "the night and the weather",
+        "channels": [
+         "light",
+         "music",
+         "sound",
+         "weather"
+        ]
+       }
+      ],
+      "max_channels": 4
+     },
+     "note": "Almost everything is the counter and the faces: who sits down, what they say, how they react to the cup. The recipe book is summoned; the rain and the clock on the night set the mood."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "enacted": 0.7,
+      "evoked": 0.3
+     },
+     "tone": {
+      "cozy_tense": -0.8,
+      "whimsical_grounded": 0.2,
+      "earnest_ironic": -0.3,
+      "quiet_loud": -0.9,
+      "handmade_industrial": -0.5
+     },
+     "themes": [
+      "listening",
+      "belonging",
+      "small kindness"
+     ]
+    },
+    "pacing": {
+     "structure": "campaign",
+     "tension_curve": "flat_calm",
+     "failure_cost": "none"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.11,
+     "challenge": 0.11,
+     "expression": 0.22,
+     "structure": 1,
+     "social": 0.56,
+     "systems": 0.11,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.75
+   },
+   "ledger": {
+    "style": [
+     "drink-as-reply craft verb",
+     "fixed counter view",
+     "warm inside and cold outside palette",
+     "rain and lo-fi music as mood"
+    ],
+    "expression": [
+     "Coffee Talk's characters, their stories and dialogue",
+     "its pixel art and portraits",
+     "its music"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "mechanics",
+      "target": "Café study",
+      "setting": "Make the drink the reply: one craft verb whose result changes how the customer reacts.",
+      "from_signature": "drink_as_reply"
+     },
+     {
+      "layer": "art",
+      "target": "Café lighting preset",
+      "setting": "Warm lamp key inside, cool blue fill from the window; rain on glass as the mood channel.",
+      "from_signature": "two_temperatures"
+     },
+     {
+      "layer": "interaction",
+      "target": "Café camera",
+      "setting": "A counter view that holds the customer, the cup and the window together.",
+      "from_signature": "counter_frame"
+     }
+    ],
+    "leave": [
+     "adult worries and late-night themes",
+     "long reading",
+     "the fantasy-creature city setting"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
+  },
+  {
    "id": "dont-starve",
    "file": "docs/oracle/identity/examples/dont-starve.json",
    "schema_version": "1.1",
@@ -2922,6 +4567,1033 @@
    "sources": [
     "Steam store page",
     "public gameplay footage"
+   ]
+  },
+  {
+   "id": "jusant",
+   "file": "docs/oracle/identity/examples/jusant.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Jusant",
+    "developer": "Don't Nod",
+    "publisher": "Don't Nod",
+    "release": "2023",
+    "steam_appid": 1977170
+   },
+   "core": {
+    "fantasy": "You are a lone climber scaling a vast tower of rock, hand over hand, with a rope and a small water creature for company.",
+    "pillars": [
+     "Every hold is a choice of hand",
+     "The rope makes falling safe",
+     "The climb tells the story"
+    ],
+    "signature_moment": "You let go with one hand, swing on the rope across a gap, and catch a hold you could only just see.",
+    "anti_goals": [
+     "no combat",
+     "no fail screens",
+     "almost no HUD"
+    ],
+    "signatures": [
+     {
+      "id": "two_hand_climb",
+      "layer": "interaction",
+      "description": "Each hand is its own trigger: hold to grip, release and reach with the other.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "stamina_on_body",
+      "layer": "information_grammar",
+      "description": "Stamina shows in the climber's breathing and trembling arms, not a bar.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "rope_safety",
+      "layer": "mechanics",
+      "description": "Pitons and a rope turn falls into swings, so risk becomes play.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "height_haze",
+      "layer": "art",
+      "description": "Soft sun-bleached rock with deep haze below sells the height.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "sensation": 0.35,
+      "discovery": 0.3,
+      "submission": 0.2,
+      "narrative": 0.15
+     },
+     "emotional_targets": {
+      "awe": 0.9,
+      "focus": 0.7,
+      "calm": 0.6
+     },
+     "audience": {
+      "age": "everyone, best for older children and up",
+      "skill_floor": "low",
+      "context": "a few evenings"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "reach left hand",
+       "input": "left trigger"
+      },
+      {
+       "verb": "reach right hand",
+       "input": "right trigger"
+      },
+      {
+       "verb": "place piton",
+       "input": "button"
+      },
+      {
+       "verb": "swing",
+       "input": "stick"
+      },
+      {
+       "verb": "wake plants",
+       "input": "echo button"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "look up",
+       "plan a route",
+       "climb hand over hand",
+       "place a piton",
+       "swing or rest",
+       "reach the next ledge"
+      ],
+      "period_s": {
+       "value": 180,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "none",
+      "win": "reach the top",
+      "resources": [
+       "stamina",
+       "rope length"
+      ]
+     },
+     "randomness": {
+      "amount": 0,
+      "kind": "none"
+     },
+     "information": "perfect",
+     "systems": [
+      "two-hand grip",
+      "rope physics",
+      "stamina recovered on ledges"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 5,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "controller",
+       "keyboard and mouse"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "third_person",
+      "constrained": false
+     },
+     "forgiveness": {
+      "snapping": "none",
+      "undo": "no",
+      "preview_before_commit": false,
+      "auto_repair": true
+     },
+     "juice": {
+      "sound_on_action": 0.8,
+      "camera_kick": 0.2,
+      "particles": 0.3,
+      "squash_stretch": 0,
+      "scale_pop": 0,
+      "screen_shake": 0.1,
+      "hit_stop": 0,
+      "procedural_settle": 0.2
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+       "fog",
+       "bloom",
+       "colour grade"
+      ],
+      "signature": "Huge sculpted rock in soft sun-bleached gradients with deep height haze, clean comic-like shapes and no outlines.",
+      "lesson": "Height haze sells scale for climbing: the further down, the paler and bluer the world."
+     },
+     "references": [
+      "Moebius-like clean comic shapes",
+      "desert canyons",
+      "climbing films"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "body": {
+       "mix": {
+        "diegetic": 0.9,
+        "overlay": 0.1
+       },
+       "timing": "on_threshold",
+       "note": "Breathing and trembling arms show stamina; a small ring appears only near empty.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "navigation": {
+       "mix": {
+        "diegetic": 1
+       },
+       "timing": "always_on",
+       "note": "Handholds read by shape and colour on the rock; the summit is always above.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "diegetic": 1
+       },
+       "timing": "absent",
+       "note": "Up is the goal; letters and homes on the way tell the story.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.8,
+      "spatial": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.02,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Nothing on screen except a stamina ring when nearly empty."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "height and time of day",
+        "channels": [
+         "light",
+         "music",
+         "weather",
+         "sound"
+        ]
+       }
+      ],
+      "max_channels": 4
+     },
+     "note": "Almost no HUD: stamina shows in the climber's breathing and trembling arms. Handholds read by their shape and colour on the rock. Story lives in letters and abandoned homes."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "embedded": 0.6,
+      "evoked": 0.4
+     },
+     "tone": {
+      "cozy_tense": -0.2,
+      "whimsical_grounded": 0.2,
+      "earnest_ironic": -0.7,
+      "quiet_loud": -0.7,
+      "handmade_industrial": -0.4
+     },
+     "themes": [
+      "endurance",
+      "loss and renewal",
+      "water"
+     ]
+    },
+    "pacing": {
+     "structure": "campaign",
+     "tension_curve": "rising_to_end",
+     "failure_cost": "none"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.44,
+     "expression": 0.22,
+     "structure": 0.33,
+     "social": 0.33,
+     "systems": 0.44,
+     "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.75
+   },
+   "ledger": {
+    "style": [
+     "two-hand trigger climbing",
+     "stamina on the body",
+     "rope turns falls into swings",
+     "handholds read by shape",
+     "height haze"
+    ],
+    "expression": [
+     "its tower, world and story",
+     "its creature companion",
+     "its art and music"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "information_grammar",
+      "target": "School Jump climb",
+      "setting": "Show tiredness on Abbie's body (puffing, slower reach), not as a bar.",
+      "from_signature": "stamina_on_body"
+     },
+     {
+      "layer": "mechanics",
+      "target": "School Jump safety",
+      "setting": "A rope or latch catches every fall so risk is a swing, never a fail.",
+      "from_signature": "rope_safety"
+     },
+     {
+      "layer": "art",
+      "target": "School Jump film look",
+      "setting": "Height haze: the further down, the paler and bluer the world.",
+      "from_signature": "height_haze"
+     }
+    ],
+    "leave": [
+     "its tower and its story",
+     "its creature",
+     "long solitary pacing"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
+  },
+  {
+   "id": "street-fighter-6",
+   "file": "docs/oracle/identity/examples/street-fighter-6.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Street Fighter 6",
+    "developer": "Capcom",
+    "publisher": "Capcom",
+    "release": "2023",
+    "steam_appid": 1364780
+   },
+   "core": {
+    "fantasy": "You are a fighter in a one-on-one duel where reading the other player matters as much as fast hands.",
+    "pillars": [
+     "Every hit is readable",
+     "Easy to start, deep to master",
+     "Big, stylish moments"
+    ],
+    "signature_moment": "You read the jump, punish it, and a big special bursts across the screen in a splash of bright paint.",
+    "anti_goals": [
+     "no random outcomes in a duel"
+    ],
+    "signatures": [
+     {
+      "id": "hit_readability",
+      "layer": "interaction",
+      "description": "Wind-up, contact pause, splash and reaction make every hit easy to read and feel.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "paint_splash_fx",
+      "layer": "art",
+      "description": "Big moves burst out as bright paint and ink splashes on top of physical materials.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "modern_controls",
+      "layer": "interaction",
+      "description": "A one-button control mode lets newcomers play the same fight as experts.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "shared_gauge",
+      "layer": "mechanics",
+      "description": "One gauge powers defence, offence and big moves; running it out leaves you dizzy and open.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "challenge": 0.45,
+      "sensation": 0.25,
+      "fellowship": 0.2,
+      "fantasy": 0.1
+     },
+     "emotional_targets": {
+      "tension": 0.8,
+      "triumph": 0.8,
+      "flow": 0.6
+     },
+     "audience": {
+      "age": "teens and adults (rated for fighting violence)",
+      "skill_floor": "modern controls help newcomers",
+      "context": "couch versus, online"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "move",
+       "input": "stick"
+      },
+      {
+       "verb": "block",
+       "input": "hold back"
+      },
+      {
+       "verb": "attack",
+       "input": "buttons"
+      },
+      {
+       "verb": "special move",
+       "input": "motion or one button"
+      },
+      {
+       "verb": "parry",
+       "input": "two buttons"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "face off",
+       "poke",
+       "read",
+       "punish",
+       "spend gauge",
+       "win the round"
+      ],
+      "period_s": {
+       "value": 90,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "retry_level",
+      "win": "best of three rounds",
+      "resources": [
+       "health",
+       "power gauge",
+       "drive gauge"
+      ]
+     },
+     "randomness": {
+      "amount": 0,
+      "kind": "none"
+     },
+     "information": "perfect",
+     "systems": [
+      "frame data",
+      "hit-stop and hit reactions",
+      "gauge economy",
+      "combo system"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 5,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "controller",
+       "arcade stick",
+       "keyboard"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "side",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "none",
+      "undo": "no",
+      "preview_before_commit": false,
+      "auto_repair": false
+     },
+     "juice": {
+      "hit_stop": 0.9,
+      "screen_shake": 0.6,
+      "particles": 0.9,
+      "camera_kick": 0.7,
+      "sound_on_action": 1,
+      "squash_stretch": 0.3,
+      "scale_pop": 0.3,
+      "procedural_settle": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+       "bloom",
+       "colour grade"
+      ],
+      "signature": "Physical materials on exaggerated muscular bodies; the style comes from bright paint and ink splashes that burst out of every big hit.",
+      "lesson": "Let the hit effects carry the style: a paint-splash language on top of ordinary materials reads as cartoon impact without gore."
+     },
+     "references": [
+      "street art and graffiti",
+      "action anime",
+      "martial-arts film"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "body": {
+       "mix": {
+        "overlay": 0.7,
+        "spatial": 0.2,
+        "meta": 0.1
+       },
+       "timing": "always_on",
+       "note": "Health and gauges along the top; the fighter turns grey and dizzy when the gauge is gone.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "threat": {
+       "mix": {
+        "spatial": 0.6,
+        "diegetic": 0.4
+       },
+       "timing": "on_change",
+       "note": "Wind-ups and stances on the other fighter show what is coming.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "time": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "always_on",
+       "note": "Round timer in the middle of the top bar.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.1,
+      "meta": 0.1,
+      "overlay": 0.8
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.22,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "neutral_overlay",
+      "fade_rule": "Bars stay on in a match; callouts and combo counts flash and fade."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "round state",
+        "channels": [
+         "music",
+         "sound",
+         "camera",
+         "ui"
+        ]
+       }
+      ],
+      "max_channels": 3
+     },
+     "note": "Health and power bars along the top, a round timer, combo counters and big text callouts. Bodies show stun and fatigue, and a hit's size shows in the hit-stop and the splash."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "evoked": 0.5,
+      "enacted": 0.3,
+      "emergent": 0.2
+     },
+     "tone": {
+      "cozy_tense": 0.7,
+      "whimsical_grounded": 0,
+      "earnest_ironic": -0.2,
+      "quiet_loud": 0.9,
+      "handmade_industrial": 0.3
+     },
+     "themes": [
+      "rivalry",
+      "self-improvement",
+      "respect"
+     ]
+    },
+    "pacing": {
+     "structure": "mixed",
+     "tension_curve": "sawtooth",
+     "failure_cost": "retry_level"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 1,
+     "challenge": 0.89,
+     "expression": 0.22,
+     "structure": 0.67,
+     "social": 0.22,
+     "systems": 0.78,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.75
+   },
+   "ledger": {
+    "style": [
+     "side-on duel camera",
+     "hit-stop and readable wind-ups",
+     "one-button control mode",
+     "paint-splash hit effects",
+     "shared gauge"
+    ],
+    "expression": [
+     "its fighters, names, costumes and move names",
+     "its stages",
+     "its music and voice",
+     "its HUD art"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "interaction",
+      "target": "Brute Fight feel",
+      "setting": "Every hit: a clear wind-up, a 3 to 6 frame freeze on contact, a splash and a big reaction.",
+      "from_signature": "hit_readability"
+     },
+     {
+      "layer": "interaction",
+      "target": "Brute Fight controls",
+      "setting": "One button for a special move, so a young child can play the same fight as a grown-up.",
+      "from_signature": "modern_controls"
+     },
+     {
+      "layer": "art",
+      "target": "Brute Fight effects",
+      "setting": "Cartoon impact through bright paint splashes and stars, never blood or injury.",
+      "from_signature": "paint_splash_fx"
+     }
+    ],
+    "leave": [
+     "its fighters and their moves",
+     "realistic injury and violence",
+     "competitive frame-data depth"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
+  },
+  {
+   "id": "super-smash-bros-ultimate",
+   "file": "docs/oracle/identity/examples/super-smash-bros-ultimate.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Super Smash Bros. Ultimate",
+    "developer": "Bandai Namco Studios and Sora Ltd.",
+    "publisher": "Nintendo",
+    "release": "2018",
+    "platforms": [
+     "Nintendo Switch"
+    ],
+    "steam_appid": null
+   },
+   "core": {
+    "fantasy": "You are a toy-box hero in a bouncy party brawl, where the aim is to knock friends off the stage rather than knock them out.",
+    "pillars": [
+     "Push off the edge, not drain a bar",
+     "Anyone can pick it up",
+     "Chaos you laugh at"
+    ],
+    "signature_moment": "Your friend is at a huge damage number, clinging to the ledge, and one well-timed swing sends them flying off with a star twinkle.",
+    "anti_goals": [
+     "no health bars",
+     "no gore",
+     "no long matches"
+    ],
+    "signatures": [
+     {
+      "id": "ring_out_damage",
+      "layer": "mechanics",
+      "description": "Hits raise a damage number; the bigger it is, the further you fly, and leaving the stage loses a life.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "danger_on_fighter",
+      "layer": "information_grammar",
+      "description": "Danger shows on the fighter: smoke, flashing and a freeze-frame on a finishing hit.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "shared_light_mixed_styles",
+      "layer": "art",
+      "description": "Fighters from many art styles share one rim light, bloom and hit-spark language so they belong together.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "simple_inputs",
+      "layer": "interaction",
+      "description": "Two attack buttons and a direction make every move; no long motion inputs.",
+      "class": "style",
+      "confidence": 0.7
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "fellowship": 0.4,
+      "sensation": 0.25,
+      "challenge": 0.25,
+      "fantasy": 0.1
+     },
+     "emotional_targets": {
+      "laughter": 0.8,
+      "excitement": 0.9,
+      "triumph": 0.6
+     },
+     "audience": {
+      "age": "everyone, including children",
+      "skill_floor": "mash buttons and still have fun",
+      "context": "couch party, family"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "run",
+       "input": "stick"
+      },
+      {
+       "verb": "jump",
+       "input": "button"
+      },
+      {
+       "verb": "attack",
+       "input": "button plus direction"
+      },
+      {
+       "verb": "special",
+       "input": "button plus direction"
+      },
+      {
+       "verb": "shield",
+       "input": "trigger"
+      },
+      {
+       "verb": "grab",
+       "input": "button"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "run in",
+       "trade hits",
+       "build damage",
+       "launch them",
+       "they come back",
+       "last one standing"
+      ],
+      "period_s": {
+       "value": 180,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "retry_level",
+      "win": "most knock-outs or last one standing",
+      "resources": [
+       "damage percent",
+       "lives"
+      ]
+     },
+     "randomness": {
+      "amount": 0.3,
+      "kind": "output"
+     },
+     "information": "perfect",
+     "systems": [
+      "knockback that grows with damage",
+      "items",
+      "ledge recovery",
+      "up to eight players"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 6,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "controller"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "side",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "none",
+      "undo": "no",
+      "preview_before_commit": false,
+      "auto_repair": false
+     },
+     "juice": {
+      "hit_stop": 0.8,
+      "screen_shake": 0.6,
+      "particles": 0.8,
+      "camera_kick": 0.8,
+      "sound_on_action": 1,
+      "squash_stretch": 0.4,
+      "scale_pop": 0.4,
+      "procedural_settle": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+       "bloom"
+      ],
+      "signature": "Every fighter keeps their own home look; one strong rim light, bright bloom and a shared hit-spark style make them belong to one game.",
+      "lesson": "Mixed styles can live together if light, rim and effects are shared. Useful for Abbie's World characters made by different factories."
+     },
+     "references": [
+      "toy boxes of action figures",
+      "party games",
+      "Saturday-morning cartoons"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "body": {
+       "mix": {
+        "overlay": 0.6,
+        "spatial": 0.3,
+        "meta": 0.1
+       },
+       "timing": "always_on",
+       "note": "One damage number per player along the bottom; the fighter smokes and flashes when high.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "threat": {
+       "mix": {
+        "spatial": 0.6,
+        "diegetic": 0.4
+       },
+       "timing": "on_change",
+       "note": "Charge glows, items in hands and the stage edge show danger.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "social": {
+       "mix": {
+        "spatial": 0.7,
+        "overlay": 0.3
+       },
+       "timing": "always_on",
+       "note": "Player tags float over each fighter in big matches.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.1,
+      "meta": 0.2,
+      "overlay": 0.7
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "neutral_overlay",
+      "fade_rule": "Damage numbers stay; tags show when fighters overlap."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "match climax",
+        "channels": [
+         "camera",
+         "sound",
+         "music",
+         "lens"
+        ]
+       }
+      ],
+      "max_channels": 3
+     },
+     "note": "One number per player at the bottom of the screen; the bigger it is the further you fly. Fighters flash and smoke when they are in danger, and a big hit freezes the screen for a moment."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "emergent": 0.8,
+      "evoked": 0.2
+     },
+     "tone": {
+      "cozy_tense": 0.3,
+      "whimsical_grounded": -0.8,
+      "earnest_ironic": 0.1,
+      "quiet_loud": 0.9,
+      "handmade_industrial": 0
+     },
+     "themes": [
+      "play",
+      "friendly rivalry"
+     ]
+    },
+    "pacing": {
+     "structure": "mixed",
+     "tension_curve": "sawtooth",
+     "failure_cost": "retry_level"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 1,
+     "challenge": 0.78,
+     "expression": 0.33,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.67,
+     "chance": 0.44,
+     "session": 0.22
+    },
+    "confidence": 0.8
+   },
+   "ledger": {
+    "style": [
+     "ring-out damage instead of health",
+     "danger shown on the fighter",
+     "shared rim light and hit sparks across styles",
+     "two-button move set"
+    ],
+    "expression": [
+     "its characters, all borrowed from other series",
+     "its stages and items",
+     "its music",
+     "its logo and UI"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "mechanics",
+      "target": "Brute Fight rules",
+      "setting": "Knock the other brute out of the ring instead of draining health: nobody gets hurt, they fly off and bounce back in.",
+      "from_signature": "ring_out_damage"
+     },
+     {
+      "layer": "information_grammar",
+      "target": "Brute Fight HUD",
+      "setting": "Show danger on the brute: puffing, wobbling, glowing; at most one tiny number per player.",
+      "from_signature": "danger_on_fighter"
+     },
+     {
+      "layer": "art",
+      "target": "Character factory",
+      "setting": "Unify models from different makers with one rim light and one effects style.",
+      "from_signature": "shared_light_mixed_styles"
+     }
+    ],
+    "leave": [
+     "its characters and franchises",
+     "its item list",
+     "its stages"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
    ]
   },
   {
@@ -3790,6 +6462,661 @@
     "Pounce Light developer posts",
     "public gameplay footage"
    ]
+  },
+  {
+   "id": "unpacking",
+   "file": "docs/oracle/identity/examples/unpacking.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Unpacking",
+    "developer": "Witch Beam",
+    "publisher": "Humble Games",
+    "release": "2021",
+    "steam_appid": 1135690
+   },
+   "core": {
+    "fantasy": "You are someone moving into a new home, and every object you unpack tells a piece of a life without a single word.",
+    "pillars": [
+     "Story through objects only",
+     "Every placement sounds and feels right",
+     "A clear, satisfying finish"
+    ],
+    "signature_moment": "You pull an old childhood plush out of a box in an adult flat and realise where it has to go.",
+    "anti_goals": [
+     "no words",
+     "no timer",
+     "no fail state",
+     "no score"
+    ],
+    "signatures": [
+     {
+      "id": "objects_tell_story",
+      "layer": "narrative",
+      "description": "The life is told only by which objects come out of which box, and where they end up.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "foley_per_surface",
+      "layer": "audio",
+      "description": "Every object has its own sound on every surface it lands on.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "wrong_place_highlight",
+      "layer": "information_grammar",
+      "description": "At the end of a room, only the objects in the wrong place glow softly.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "submission": 0.3,
+      "discovery": 0.3,
+      "narrative": 0.25,
+      "expression": 0.15
+     },
+     "emotional_targets": {
+      "calm": 0.9,
+      "nostalgia": 0.8,
+      "satisfaction": 0.8
+     },
+     "audience": {
+      "age": "everyone",
+      "skill_floor": "none",
+      "context": "couch, short sessions"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "open box",
+       "input": "click"
+      },
+      {
+       "verb": "take out",
+       "input": "click"
+      },
+      {
+       "verb": "place",
+       "input": "drag"
+      },
+      {
+       "verb": "rotate",
+       "input": "click"
+      },
+      {
+       "verb": "pan room",
+       "input": "drag"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "open box",
+       "take one object",
+       "find its place",
+       "place it",
+       "room complete"
+      ],
+      "period_s": {
+       "value": 600,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "none",
+      "scoring": "none; a room completes when everything is in a sensible place"
+     },
+     "randomness": {
+      "amount": 0,
+      "kind": "none"
+     },
+     "information": "perfect",
+     "systems": [
+      "valid-placement rules per object",
+      "per-surface foley"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 5,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "mouse",
+       "controller",
+       "touch"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "isometric",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "slots",
+      "undo": "pick it up again",
+      "preview_before_commit": true,
+      "auto_repair": false
+     },
+     "juice": {
+      "sound_on_action": 1,
+      "scale_pop": 0.4,
+      "procedural_settle": 0.4,
+      "squash_stretch": 0.3,
+      "particles": 0.1,
+      "screen_shake": 0,
+      "hit_stop": 0,
+      "camera_kick": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "pixel_art",
+      "family": "pixel",
+      "light": "painted_in",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "pixel",
+      "post": [],
+      "signature": "Every object is a crisp little sprite with a soft dark outline, placed in a clean isometric room under flat even light.",
+      "lesson": "Readability first: one even light and a thin outline make hundreds of small objects legible at a glance."
+     },
+     "references": [
+      "pixel-art dollhouses",
+      "flat-lay photography",
+      "moving-day memories"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "thing_state": {
+       "mix": {
+        "diegetic": 0.6,
+        "spatial": 0.4
+       },
+       "timing": "on_threshold",
+       "note": "Objects sit where you put them; misplaced ones glow only at the end of the room.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "diegetic": 0.8,
+        "none": 0.2
+       },
+       "timing": "absent",
+       "note": "The room itself is the goal: empty boxes and a lived-in room mean done.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "time": {
+       "mix": {
+        "diegetic": 1
+       },
+       "timing": "on_change",
+       "note": "A year card between homes; the objects age with the person.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.6,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.03,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Nothing on screen while you unpack; a photo of the room when it is done."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "the year and the home",
+        "channels": [
+         "music",
+         "sound",
+         "light"
+        ]
+       }
+      ],
+      "max_channels": 3
+     },
+     "note": "No words at all: the story lives in the objects and the rooms. A soft highlight shows a thing that is in the wrong place at the end of a level."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "embedded": 0.8,
+      "evoked": 0.2
+     },
+     "tone": {
+      "cozy_tense": -0.8,
+      "whimsical_grounded": 0.3,
+      "earnest_ironic": -0.6,
+      "quiet_loud": -0.8,
+      "handmade_industrial": -0.6
+     },
+     "themes": [
+      "growing up",
+      "home",
+      "memory"
+     ]
+    },
+    "pacing": {
+     "structure": "puzzle_levels",
+     "tension_curve": "flat_calm",
+     "failure_cost": "none"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.22,
+     "expression": 0.78,
+     "structure": 0.44,
+     "social": 0.44,
+     "systems": 0.11,
+     "chance": 0.22,
+     "session": 0
+    },
+    "confidence": 0.75
+   },
+   "ledger": {
+    "style": [
+     "story told only by objects",
+     "per-surface placement sounds",
+     "end-of-room highlight of misplaced things",
+     "fixed isometric room"
+    ],
+    "expression": [
+     "Unpacking's specific objects, rooms and the life they tell",
+     "its sprites",
+     "its music and sound recordings"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "narrative",
+      "target": "Café and Ranch environment storytelling",
+      "setting": "Let objects on shelves and in drawers tell who lives here; no captions.",
+      "from_signature": "objects_tell_story"
+     },
+     {
+      "layer": "audio",
+      "target": "Sound library tags",
+      "setting": "Tag each placeable model with a material so its drop sound changes with the surface.",
+      "from_signature": "foley_per_surface"
+     },
+     {
+      "layer": "information_grammar",
+      "target": "Tidy-up tasks",
+      "setting": "Show what is out of place only when the player says they are done.",
+      "from_signature": "wrong_place_highlight"
+     }
+    ],
+    "leave": [
+     "the specific life story and its objects",
+     "pixel art as our main look"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
+  },
+  {
+   "id": "untitled-goose-game",
+   "file": "docs/oracle/identity/examples/untitled-goose-game.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Untitled Goose Game",
+    "developer": "House House",
+    "publisher": "Panic",
+    "release": "2019",
+    "steam_appid": 837470
+   },
+   "core": {
+    "fantasy": "You are a silly goose in a sleepy village, sneaking up on people to pull pranks from a to-do list.",
+    "pillars": [
+     "Getting caught is funny",
+     "People are the stealth meter",
+     "Sneak, grab, honk, run"
+    ],
+    "signature_moment": "You tiptoe up behind the gardener, snatch his hat, honk, and flap away while he chases you round the garden.",
+    "anti_goals": [
+     "no fail screen",
+     "no violence",
+     "no words on screen in play"
+    ],
+    "signatures": [
+     {
+      "id": "people_are_the_meter",
+      "layer": "information_grammar",
+      "description": "Villagers look up, turn, chase and shoo: their bodies are the whole stealth readout.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "caught_is_comedy",
+      "layer": "mechanics",
+      "description": "Being seen means being chased and shooed, then you try again; never a game over.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "reactive_piano",
+      "layer": "audio",
+      "description": "Piano music follows the action, quiet while sneaking and racing when you are spotted.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "flat_ink_look",
+      "layer": "art",
+      "description": "Flat unlit colour shapes with soft tinted shadows, like a picture book printed in a few inks.",
+      "class": "style",
+      "confidence": 0.7
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "fantasy": 0.3,
+      "challenge": 0.25,
+      "discovery": 0.25,
+      "expression": 0.2
+     },
+     "emotional_targets": {
+      "mischief": 0.9,
+      "laughter": 0.9,
+      "tension": 0.3
+     },
+     "audience": {
+      "age": "everyone, including young children",
+      "skill_floor": "low",
+      "context": "couch, family, two players"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "sneak",
+       "input": "hold crouch"
+      },
+      {
+       "verb": "grab",
+       "input": "button"
+      },
+      {
+       "verb": "drag",
+       "input": "hold"
+      },
+      {
+       "verb": "honk",
+       "input": "button"
+      },
+      {
+       "verb": "flap",
+       "input": "button"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "read the to-do list",
+       "sneak close",
+       "grab or honk",
+       "run off",
+       "hide",
+       "tick it off"
+      ],
+      "period_s": {
+       "value": 120,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "none",
+      "win": "finish the to-do list for each area",
+      "resources": []
+     },
+     "randomness": {
+      "amount": 0.1,
+      "kind": "none"
+     },
+     "information": "perfect",
+     "systems": [
+      "villager sight and reactions",
+      "physics props",
+      "adaptive music"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 5,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      }
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "controller",
+       "keyboard"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "third_person",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "none",
+      "undo": "no",
+      "preview_before_commit": false,
+      "auto_repair": true
+     },
+     "juice": {
+      "sound_on_action": 1,
+      "squash_stretch": 0.4,
+      "particles": 0.2,
+      "scale_pop": 0.2,
+      "camera_kick": 0.1,
+      "screen_shake": 0,
+      "hit_stop": 0,
+      "procedural_settle": 0.2
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "mixed",
+      "family": "graphic_minimal",
+      "light": "flat",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [],
+      "signature": "Flat unlit colour shapes with no textures and soft colour-tinted shadows, like a picture book printed in a few inks.",
+      "lesson": "Tinted shadows instead of grey ones keep a flat-colour world warm and readable from far away."
+     },
+     "references": [
+      "picture books printed in a few colours",
+      "English village gardens",
+      "silent comedy"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "threat": {
+       "mix": {
+        "diegetic": 0.8,
+        "spatial": 0.2
+       },
+       "timing": "on_change",
+       "note": "People look up, turn and run at you; a small exclamation when they spot you.",
+       "confidence": 0.8,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "overlay": 0.6,
+        "diegetic": 0.4
+       },
+       "timing": "summoned",
+       "note": "A handwritten notepad you summon and tick off.",
+       "confidence": 0.8,
+       "source": "estimate"
+      },
+      "social": {
+       "mix": {
+        "diegetic": 0.9,
+        "spatial": 0.1
+       },
+       "timing": "on_change",
+       "note": "Gestures and grumbles, no words.",
+       "confidence": 0.7,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.02,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Nothing on screen while you play; the notepad when you ask for it."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "spotted or sneaking",
+        "channels": [
+         "music",
+         "npcs",
+         "sound"
+        ]
+       }
+      ],
+      "max_channels": 3
+     },
+     "note": "The villagers are the stealth meter: they look up, turn, chase and shoo. The to-do list is a notepad you summon and tick off. Nothing on screen while you play."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "emergent": 0.6,
+      "enacted": 0.3,
+      "evoked": 0.1
+     },
+     "tone": {
+      "cozy_tense": -0.4,
+      "whimsical_grounded": -0.8,
+      "earnest_ironic": 0.5,
+      "quiet_loud": -0.3,
+      "handmade_industrial": -0.7
+     },
+     "themes": [
+      "mischief",
+      "village life"
+     ]
+    },
+    "pacing": {
+     "structure": "puzzle_levels",
+     "tension_curve": "sawtooth",
+     "failure_cost": "none"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.33,
+     "expression": 0.56,
+     "structure": 0.56,
+     "social": 0.22,
+     "systems": 0.44,
+     "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.85
+   },
+   "ledger": {
+    "style": [
+     "people as the stealth meter",
+     "caught means chased, not failed",
+     "music that follows sneaking",
+     "to-do list as the goal",
+     "flat colour with tinted shadows"
+    ],
+    "expression": [
+     "the goose and villagers",
+     "its village layout and pranks",
+     "its piano arrangements",
+     "its notepad art"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "information_grammar",
+      "target": "School Jump stealth",
+      "setting": "The grown-ups are the stealth meter: they look up, turn and walk over; nothing on screen.",
+      "from_signature": "people_are_the_meter"
+     },
+     {
+      "layer": "mechanics",
+      "target": "School Jump rules",
+      "setting": "Being spotted means a friendly chase back to the start of the bit, never a fail screen.",
+      "from_signature": "caught_is_comedy"
+     },
+     {
+      "layer": "audio",
+      "target": "Music director",
+      "setting": "Music drops to soft notes while sneaking and speeds up when someone notices you.",
+      "from_signature": "reactive_piano"
+     }
+    ],
+    "leave": [
+     "the goose and its village",
+     "its specific pranks"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
   }
  ],
  "profiles": [
@@ -3926,6 +7253,269 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "a-little-to-the-left",
+   "file": "docs/oracle/games/a-little-to-the-left.json",
+   "appid": 1629520,
+   "name": "A Little to the Left",
+   "store_url": "https://store.steampowered.com/app/1629520/",
+   "genres": [
+    "Puzzle",
+    "Cozy",
+    "Casual"
+   ],
+   "short_description": "Tidy, sort and straighten household things into satisfying order, while a cat keeps messing it up.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Cozy",
+    "Casual"
+   ],
+   "summary": "Tidy, sort and straighten household things into satisfying order, while a cat keeps messing it up.",
+   "identity": {
+    "core_loop": "Look at a messy little scene, drag things until they line up or sort, the puzzle snaps tidy; a cat sometimes undoes it.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fussy in the nicest way; the snap when things line up is the reward.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.1,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.03,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The scene is the whole interface: the finished state shows itself by clicking into place. Hints are summoned, and some puzzles accept more than one tidy answer.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Soft hand-drawn objects on paper-like backgrounds.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "painterly",
+     "family": "hand_painted_2d",
+     "light": "flat",
+     "outlines": true,
+     "outline": "inked_in",
+     "surface": "paper",
+     "post": [],
+     "signature": "Soft hand-drawn objects with gentle ink edges on warm paper-textured backgrounds, lit flat like an illustration.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.55,
+     "lesson": "A paper ground and soft ink lines make tidy puzzles feel homely rather than clinical."
+    },
+    "palette": null,
+    "audio_mood": "Light piano and plucks; small clicks and rustles for every object.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Order is a pleasure: a puzzle can be 'make it neat' with several right answers. A pet that undoes your work is comedy, not failure."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.67,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.11,
+     "chance": 0.56,
+     "session": 0.22
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "a-short-hike",
+   "file": "docs/oracle/games/a-short-hike.json",
+   "appid": 1055540,
+   "name": "A Short Hike",
+   "store_url": "https://store.steampowered.com/app/1055540/",
+   "genres": [
+    "Adventure",
+    "Exploration",
+    "Cozy"
+   ],
+   "short_description": "Hike, climb and glide around a small island park to reach the peak and get a phone signal.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Adventure",
+    "Exploration",
+    "Cozy"
+   ],
+   "summary": "Hike, climb and glide around a small island park to reach the peak and get a phone signal.",
+   "identity": {
+    "core_loop": "Wander, chat, find golden feathers, climb a cliff until your stamina runs out, glide down, find another way up.",
+    "mechanics": null,
+    "ui_and_game_feel": "Light and free; climbing feels like a small brave push, gliding like a reward.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Golden feathers in a small row show how much climb you have; the park's signs, hikers and paths point the way. A paper map is summoned.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Chunky low-poly world drawn at low resolution with crisp pixels, soft flat colour.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "mixed",
+     "family": "pixel_3d",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "flat_colour",
+     "post": [
+      "low resolution"
+     ],
+     "signature": "Simple low-poly 3D rendered at a low resolution and scaled up with crisp pixels, so soft colours and shapes read like pixel art.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.7,
+     "lesson": "Rendering small and scaling up crisp is a one-line look that makes simple models charming."
+    },
+    "palette": null,
+    "audio_mood": "Bright adaptive music that shifts by area; birds and wind.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Climbing with a visible stamina you grow by exploring; a small island that is fully readable from the peak. Very close to School Jump's latch climb."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.33,
+     "expression": 0.56,
+     "structure": 0.22,
+     "social": 0.33,
+     "systems": 0.22,
+     "chance": 0.44,
+     "session": 0.11
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "absolver",
+   "file": "docs/oracle/games/absolver.json",
+   "appid": 473690,
+   "name": "Absolver",
+   "store_url": "https://store.steampowered.com/app/473690/",
+   "genres": [
+    "Fighting",
+    "Action",
+    "Martial arts"
+   ],
+   "short_description": "Wander a ruined land in a mask and build your own martial-arts style from moves you learn by fighting.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Fighting",
+    "Action",
+    "Martial arts"
+   ],
+   "summary": "Wander a ruined land in a mask and build your own martial-arts style from moves you learn by fighting.",
+   "identity": {
+    "core_loop": "Explore, meet a fighter, duel in stances, learn the moves you blocked, arrange them into your own combat deck, fight better.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deliberate and dance-like; each stance flows into the next move in your deck.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.45,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Very little HUD: a small stance indicator and health. The fighter's body and stance tell you what comes next.",
+     "confidence": 0.65,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Faceted low-poly bodies and ruins in flat painted colour, with flowing cloth and masks.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "flat_low_poly",
+     "family": "flat_low_poly",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "flat_colour",
+     "post": [
+      "fog",
+      "colour grade"
+     ],
+     "signature": "Faceted low-poly bodies and ruins in flat painted colour with soft fog; the detail is spent on cloth, masks and motion.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.6,
+     "lesson": "Spend detail on what moves (cloth, masks) and keep the rest faceted and flat; animation then carries the beauty."
+    },
+    "palette": null,
+    "audio_mood": "Ambient strings and wind; sharp, dry hit sounds.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Let players compose their own fighting style from moves they collect: expression inside a fight. The body is the readout."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.89,
+     "expression": 0.67,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.67,
+     "chance": 0.44,
+     "session": 0.11
+    },
+    "confidence": 0.65
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -4610,6 +8200,95 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "animal-crossing-new-horizons",
+   "file": "docs/oracle/games/animal-crossing-new-horizons.json",
+   "appid": null,
+   "name": "Animal Crossing: New Horizons",
+   "store_url": null,
+   "genres": [
+    "Life sim",
+    "Cozy",
+    "Social"
+   ],
+   "short_description": "Move to an island, gather, build, decorate and befriend animal neighbours in real time, across the real seasons.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Life sim",
+    "Cozy",
+    "Social"
+   ],
+   "summary": "Move to an island, gather, build, decorate and befriend animal neighbours in real time, across the real seasons.",
+   "identity": {
+    "core_loop": "Wake up, see what changed on the island, gather and catch, sell, buy, decorate, talk to neighbours, come back tomorrow.",
+    "mechanics": null,
+    "ui_and_game_feel": "Gentle and generous; a day is short and there is always one more small thing.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.03,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The island carries the information: the real clock sets the light, the season, the shop hours and the creatures. Neighbours tell you news. A phone with apps is summoned; the screen is almost empty while you walk.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Soft rounded toy-like characters and island, with the world curving away from the camera.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "toon",
+     "family": "toon",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "hand_painted",
+     "post": [
+      "bloom",
+      "depth of field"
+     ],
+     "signature": "Soft wrapped light on round chunky toy shapes, with the whole island bent away from the camera like a rolling log so the horizon stays close and cosy.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.7,
+     "lesson": "Curving the world away from the camera keeps a small place feeling big but safe; we can bend the Ranch the same way in a vertex shader."
+    },
+    "palette": null,
+    "audio_mood": "Hourly music that changes through the day; soft footsteps on every ground type.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "The real clock and real seasons as the heartbeat; neighbours who notice what you did. Come back tomorrow is a stronger pull than any goal."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.22,
+     "expression": 0.78,
+     "structure": 0.56,
+     "social": 0.56,
+     "systems": 0.33,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -8833,6 +12512,94 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "coffee-talk",
+   "file": "docs/oracle/games/coffee-talk.json",
+   "appid": 914800,
+   "name": "Coffee Talk",
+   "store_url": "https://store.steampowered.com/app/914800/",
+   "genres": [
+    "Visual novel",
+    "Cozy",
+    "Simulation"
+   ],
+   "short_description": "Run a late-night café on a rainy street, brew drinks for regulars and listen to their stories.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Visual novel",
+    "Cozy",
+    "Simulation"
+   ],
+   "summary": "Run a late-night café on a rainy street, brew drinks for regulars and listen to their stories.",
+   "identity": {
+    "core_loop": "A customer sits, talks, orders; mix three ingredients, serve, listen to how it lands; the night moves on.",
+    "mechanics": null,
+    "ui_and_game_feel": "Slow, warm and quiet; the drink you make is the only button that matters.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "meta": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Almost everything is the counter and the faces: who sits down, what they say, how they react to the cup. The recipe book is summoned; the rain and the clock on the night set the mood.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Chunky pixel art in one fixed café view, warm lamps against a cold rainy window.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "pixel_art",
+     "family": "pixel",
+     "light": "painted_in",
+     "outlines": true,
+     "outline": "inked_in",
+     "surface": "pixel",
+     "post": [
+      "bloom"
+     ],
+     "signature": "Chunky pixel people in one fixed café view; warm lamp colours inside and cold blue rain outside are painted into the palette, not lit.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.6,
+     "lesson": "Mood can come from two colour temperatures in one frame: warm inside, cold outside. No lighting system needed."
+    },
+    "palette": null,
+    "audio_mood": "Lo-fi jazz beats, rain on glass, the hiss of the espresso machine.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A café is a listening game: one small craft verb (make the drink) carried by faces and talk. The window, the rain and the music do the mood with no UI."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.11,
+     "challenge": 0.11,
+     "expression": 0.22,
+     "structure": 1,
+     "social": 0.56,
+     "systems": 0.11,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -18259,6 +22026,95 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "jusant",
+   "file": "docs/oracle/games/jusant.json",
+   "appid": 1977170,
+   "name": "Jusant",
+   "store_url": "https://store.steampowered.com/app/1977170/",
+   "genres": [
+    "Adventure",
+    "Climbing",
+    "Puzzle"
+   ],
+   "short_description": "Climb a vast tower of rock that rises out of a dried-up sea, hand over hand, with a rope and a little water creature.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Adventure",
+    "Climbing",
+    "Puzzle"
+   ],
+   "summary": "Climb a vast tower of rock that rises out of a dried-up sea, hand over hand, with a rope and a little water creature.",
+   "identity": {
+    "core_loop": "Look up, plan a route, reach with the left hand then the right, place a piton, swing, rest on a ledge, read what the old climbers left behind.",
+    "mechanics": null,
+    "ui_and_game_feel": "Physical and patient; each hold is a choice of hand, and the rope makes falling safe.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.8,
+      "spatial": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.02,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Almost no HUD: stamina shows in the climber's breathing and trembling arms. Handholds read by their shape and colour on the rock. Story lives in letters and abandoned homes.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Big sculpted rock in soft gradients, sun-bleached colour and deep atmospheric haze, clean shapes without outlines.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "painterly",
+     "family": "painterly_3d",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "gradient",
+     "post": [
+      "fog",
+      "bloom",
+      "colour grade"
+     ],
+     "signature": "Huge sculpted rock in soft sun-bleached gradients with deep height haze, clean comic-like shapes and no outlines.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.65,
+     "lesson": "Height haze sells scale for climbing: the further down, the paler and bluer the world."
+    },
+    "palette": null,
+    "audio_mood": "Sparse soundscape, wind and stone; music swells as you reach new heights.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Show stamina on the body, not a bar; make the safety rope the fun of falling. Handholds that read by shape are a no-HUD climbing grammar."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.44,
+     "expression": 0.22,
+     "structure": 0.33,
+     "social": 0.33,
+     "systems": 0.44,
+     "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -29241,6 +33097,95 @@
    }
   },
   {
+   "id": "street-fighter-6",
+   "file": "docs/oracle/games/street-fighter-6.json",
+   "appid": 1364780,
+   "name": "Street Fighter 6",
+   "store_url": "https://store.steampowered.com/app/1364780/",
+   "genres": [
+    "Fighting",
+    "Action",
+    "Competitive"
+   ],
+   "short_description": "A side-on one-on-one fighting game with a big cast, a simple control mode for newcomers and a city to explore.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Fighting",
+    "Action",
+    "Competitive"
+   ],
+   "summary": "A side-on one-on-one fighting game with a big cast, a simple control mode for newcomers and a city to explore.",
+   "identity": {
+    "core_loop": "Two fighters face off; read, move, poke, block, punish, spend the gauge on a big move; best of three rounds.",
+    "mechanics": null,
+    "ui_and_game_feel": "Heavy, crunchy and readable; each hit pauses for a beat so you feel it.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "meta": 0.1,
+      "overlay": 0.8
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.22,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Health and power bars along the top, a round timer, combo counters and big text callouts. Bodies show stun and fatigue, and a hit's size shows in the hit-stop and the splash.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Muscular stylised characters with physical materials and bright paint-splash effects on every big move.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "stylised_pbr",
+     "light": "pbr",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pbr",
+     "post": [
+      "bloom",
+      "colour grade"
+     ],
+     "signature": "Physical materials on exaggerated muscular bodies; the style comes from bright paint and ink splashes that burst out of every big hit.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.65,
+     "lesson": "Let the hit effects carry the style: a paint-splash language on top of ordinary materials reads as cartoon impact without gore."
+    },
+    "palette": null,
+    "audio_mood": "Hip-hop and street beats, crowd noise, a live commentator option.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Make every hit readable: wind-up, contact pause, splash, reaction. A one-button 'easy' control mode lets anyone play the same fight."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 1,
+     "challenge": 0.89,
+     "expression": 0.22,
+     "structure": 0.67,
+     "social": 0.22,
+     "systems": 0.78,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "strife",
    "file": "docs/oracle/games/strife.json",
    "appid": 339280,
@@ -29731,6 +33676,94 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "super-smash-bros-ultimate",
+   "file": "docs/oracle/games/super-smash-bros-ultimate.json",
+   "appid": null,
+   "name": "Super Smash Bros. Ultimate",
+   "store_url": null,
+   "genres": [
+    "Fighting",
+    "Platform",
+    "Party"
+   ],
+   "short_description": "A party platform fighter: knock friends off the stage instead of draining a health bar.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Fighting",
+    "Platform",
+    "Party"
+   ],
+   "summary": "A party platform fighter: knock friends off the stage instead of draining a health bar.",
+   "identity": {
+    "core_loop": "Run, jump, attack; every hit raises the other fighter's damage number, and high damage means they fly further; push them off the edge.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic, bouncy, funny; four players and items make every match different.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "meta": 0.2,
+      "overlay": 0.7
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "One number per player at the bottom of the screen; the bigger it is the further you fly. Fighters flash and smoke when they are in danger, and a big hit freezes the screen for a moment.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Each fighter keeps their own home look, held together by strong rim light, bloom and one shared hit-spark language.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "stylised_pbr",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pbr",
+     "post": [
+      "bloom"
+     ],
+     "signature": "Every fighter keeps their own home look; one strong rim light, bright bloom and a shared hit-spark style make them belong to one game.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.6,
+     "lesson": "Mixed styles can live together if light, rim and effects are shared. Useful for Abbie's World characters made by different factories."
+    },
+    "palette": null,
+    "audio_mood": "Huge library of upbeat remixes; loud bright hit sounds.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Push-off-the-edge beats health bars for kids: nobody 'dies', they fly away and come back. Danger shows on the fighter, not in a meter."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 1,
+     "challenge": 0.78,
+     "expression": 0.33,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.67,
+     "chance": 0.44,
+     "session": 0.22
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -33642,6 +37675,178 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "unpacking",
+   "file": "docs/oracle/games/unpacking.json",
+   "appid": 1135690,
+   "name": "Unpacking",
+   "store_url": "https://store.steampowered.com/app/1135690/",
+   "genres": [
+    "Puzzle",
+    "Cozy",
+    "Narrative"
+   ],
+   "short_description": "Unpack boxes into a new home, one move at a time, and learn a life from the things you carry.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Cozy",
+    "Narrative"
+   ],
+   "summary": "Unpack boxes into a new home, one move at a time, and learn a life from the things you carry.",
+   "identity": {
+    "core_loop": "Open a box, pull out one object, find where it belongs, place it; when the box is empty the room tells you who lives here.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tactile and calm; every object clicks and thuds with its own sound.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.03,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "No words at all: the story lives in the objects and the rooms. A soft highlight shows a thing that is in the wrong place at the end of a level.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Clean pixel-art rooms at one fixed isometric angle, every object a readable little sprite.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "pixel_art",
+     "family": "pixel",
+     "light": "painted_in",
+     "outlines": true,
+     "outline": "inked_in",
+     "surface": "pixel",
+     "post": [],
+     "signature": "Every object is a crisp little sprite with a soft dark outline, placed in a clean isometric room under flat even light.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.65,
+     "lesson": "Readability first: one even light and a thin outline make hundreds of small objects legible at a glance."
+    },
+    "palette": null,
+    "audio_mood": "Gentle acoustic music; a different foley sound for every object on every surface.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Tell a story with objects only, and give every placement its own sound. Zero words, zero fail, a clear finish when the room is done."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.22,
+     "expression": 0.78,
+     "structure": 0.44,
+     "social": 0.44,
+     "systems": 0.11,
+     "chance": 0.22,
+     "session": 0
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "untitled-goose-game",
+   "file": "docs/oracle/games/untitled-goose-game.json",
+   "appid": 837470,
+   "name": "Untitled Goose Game",
+   "store_url": "https://store.steampowered.com/app/837470/",
+   "genres": [
+    "Puzzle",
+    "Stealth",
+    "Comedy"
+   ],
+   "short_description": "Be a horrible goose in a sleepy village: sneak, steal and honk your way through a to-do list of mischief.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Stealth",
+    "Comedy"
+   ],
+   "summary": "Be a horrible goose in a sleepy village: sneak, steal and honk your way through a to-do list of mischief.",
+   "identity": {
+    "core_loop": "Read the to-do list, sneak close, grab or honk, run off flapping, hide in a bush, try the next trick.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly and sly; getting caught just means being chased and shooed, never a fail screen.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.02,
+       "source": "estimate",
+       "confidence": 0.59,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The villagers are the stealth meter: they look up, turn, chase and shoo. The to-do list is a notepad you summon and tick off. Nothing on screen while you play.",
+     "confidence": 0.85,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Flat unlit colour shapes with no textures and soft tinted shadows, like a picture book printed in a few inks.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "mixed",
+     "family": "graphic_minimal",
+     "light": "flat",
+     "outlines": false,
+     "outline": "none",
+     "surface": "flat_colour",
+     "post": [],
+     "signature": "Flat unlit colour shapes with no textures and soft colour-tinted shadows, like a picture book printed in a few inks.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.75,
+     "lesson": "Tinted shadows instead of grey ones keep a flat-colour world warm and readable from far away."
+    },
+    "palette": null,
+    "audio_mood": "Piano that follows the action, softer when sneaking and racing when you are spotted.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Kid-friendly stealth: getting caught is funny, not failure; the people are the readout; music reacts to how sneaky you are."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.33,
+     "expression": 0.56,
+     "structure": 0.56,
+     "social": 0.22,
+     "systems": 0.44,
+     "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.85
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
