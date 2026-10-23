@@ -57,6 +57,20 @@
    1.22,
    1.83
   ],
-  "maps": "1024 px base, roughness, normal"
- }
+  "maps": "1024 px base, roughness, normal",
+  "kit": {
+   "structural": false,
+   "snap_m": null,
+   "cells": null,
+   "pivot_offset_m": 0.0,
+   "ground_z_m": -0.016,
+   "pivot_ok": true
+  }
+ },
+ "changes": [
+  {
+   "date": "2026-10-23",
+   "t": "Moved onto its pivot (footprint centre on the origin), the kit rule from the research pass; rebuilt."
+  }
+ ]
 }

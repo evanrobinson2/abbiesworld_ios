@@ -34,6 +34,6 @@ for s in (-1, 1):
         k.window(f'Window{"L" if s < 0 else "R"}{j}', 0.32, 0.5, (s * (W / 2 + 0.03), y, 1.45), face='+X' if s > 0 else '-X', depth=0.1)
 k.tube('PipeRun', [(-W / 2 + 0.25, -L / 2, 2.0), (-W / 2 + 0.25, L / 2, 2.0)], 0.06, 'Metal_Steel', n=8)
 k.torus('Handhold', 0.1, 0.02, (W / 2 - 0.2, 0, 1.25), 'Metal_Hazard', rot=(math.pi / 2, 0, 0), n=10, m=6)
-k.build(HERE, {'id': 'MK-031', 'name': 'Corridor segment, straight, ribbed'}, bake_size=1024,
+k.build(HERE, {'id': 'MK-031', 'name': 'Corridor segment, straight, ribbed', 'pivot': 'pivot on the walkable floor; the shell beds 0.27 m into the ground'}, bake_size=1024,
         view=dict(hero_cam=((3.6, -6.4, 2.4), (0, 0, 1.2)), lens=40, lights=(((0, 0, 2.2), 60),)),
         fps_eye=((-0.3, -2.6, 1.1), (0.0, 2.0, 1.15)))

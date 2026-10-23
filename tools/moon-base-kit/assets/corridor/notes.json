@@ -60,6 +60,18 @@
    4.0,
    3.24
   ],
-  "maps": "1024 px base, roughness, normal"
+  "maps": "1024 px base, roughness, normal",
+  "kit": {
+   "structural": true,
+   "snap_m": 2.0,
+   "cells": [
+    2,
+    2
+   ],
+   "pivot_offset_m": 0.0,
+   "ground_z_m": -0.27,
+   "pivot_ok": true,
+   "pivot": "pivot on the walkable floor; the shell beds 0.27 m into the ground"
+  }
  }
 }
