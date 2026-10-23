@@ -1,3 +1,4 @@
+import { drawIconGlyph, ICON_COLOURS } from '../forge.mjs';
 // Cards v3 faces (AW-STUDY-0014, docs/oracle/cards-v3/CARDS_V3.md). Evan, 2026-10-23: today's cards "read as.. chinese
 // asset farm. I'd like them to read as bespoke works of art", "they are also out of place with the scene itself", and
 // "print ready beautiful artifacts". Three directions, all painted in millimetres like Card Forge (63 x 88 mm, 3 mm
@@ -13,7 +14,11 @@
 // and are drawn by paper.mjs, never printed on the face.
 
 export const CARD = {w: 63, h: 88, bleed: 3, radius: 3}; // mm
-export const STYLES = ['slice', 'print', 'diecut'];
+export const STYLES = ['slice', 'print', 'diecut', 'badge', 'poster'];
+// The two Ranch pack looks Evan picked from the Midjourney proofs (2026-10-23): badge ("I do love this style too": a hex
+// badge, sky, grass, orange earth, ink lines, the name raised) and poster ("this one too for a different version of the
+// game": a mid-century screen print, teal sky, peach ground, flat shadow, fine stipple).
+export const PACK_LOOKS = ['badge', 'poster'];
 
 // Colours measured from the live sandbox (tools/card-beauty/capture.mjs): the table the board stands on, the tile's
 // grass top and its earth edge, so a card in the hand is made of the same stuff as the world above it.
@@ -41,7 +46,7 @@ export function loadImage(src) {
 const boundsCache = new WeakMap();
 function bounds(img) {
  if (boundsCache.has(img)) return boundsCache.get(img);
- const w = img.naturalWidth, h = img.naturalHeight, c = new OffscreenCanvas(w, h), x = c.getContext('2d');
+ const w = img.naturalWidth || img.width, h = img.naturalHeight || img.height, c = new OffscreenCanvas(w, h), x = c.getContext('2d');
  x.drawImage(img, 0, 0); const d = x.getImageData(0, 0, w, h).data;
  let x0 = w, y0 = h, x1 = 0, y1 = 0;
  for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (d[(y * w + i) * 4 + 3] > 24) { if (i < x0) x0 = i; if (i > x1) x1 = i; if (y < y0) y0 = y; if (y > y1) y1 = y; }
@@ -61,15 +66,15 @@ export async function renderFace(spec, opts = {}) {
  const style = STYLES.includes(opts.style) ? opts.style : 'slice', dpi = opts.dpi || 300;
  const P = {...(PLACES[spec.id] || PLACES.ranch), ...(spec.palette || {})};
  await loadFonts();
- const art = spec.art ? await loadImage(spec.art) : null;
+ const art = !spec.art ? null : typeof spec.art === 'string' ? await loadImage(spec.art) : spec.art; // a URL or a ready canvas (pack.mjs model renders)
  const {w, h, b, head} = facePixels({dpi, bleed: opts.bleed, style});
  const canvas = opts.canvas || document.createElement('canvas'); canvas.width = w; canvas.height = h;
  const ctx = canvas.getContext('2d'), px = dpi / 25.4;
  ctx.setTransform(px, 0, 0, px, b * px, (b + head) * px); // trim millimetres from here on; (0,0) = top-left of the cut card
  ctx.clearRect(-b, -b - head, CARD.w + 2 * b, CARD.h + 2 * b + head);
  // Without bleed the face is the cut card: round its corners (the die-cut style rounds its own body).
- if (!b && style !== 'diecut') { round(ctx, 0, 0, CARD.w, CARD.h, CARD.radius); ctx.clip(); }
- const regions = PAINT[style](ctx, {P, art, name: spec.name || P.name, edition: spec.edition, b, set: spec.set || 4});
+  if (!b && style !== 'diecut' && style !== 'badge') { round(ctx, 0, 0, CARD.w, CARD.h, CARD.radius); ctx.clip(); }
+ const regions = PAINT[style](ctx, {P, art, name: spec.name || P.name, edition: spec.edition, b, set: spec.set || 4, spec});
  return {canvas, style, dpi, regions, head, bleed: b};
 }
 
@@ -148,8 +153,99 @@ const PAINT = {
   font(ctx, 500, 2.1, 0.35); ctx.globalAlpha = 0.78; ctx.fillText(`${String(edition ?? P.no).padStart(2, '0')} / ${String(set).padStart(2, '0')}`, 5.2, CARD.h - 4.6);
   ctx.textAlign = 'right'; font(ctx, 900, 2.4, 0.4); ctx.fillText('AW', CARD.w - 5, CARD.h - 4.6); ctx.globalAlpha = 1;
   return {gloss: at ? [at] : [], art: box, cut: 'alpha'};
+ },
+ // Badge: the card is a hex, like the tiles it places (Evan: "if it's a hex, it automatically wins"). A cream rim and
+ // an ink line, sky over a wavy grass band, orange earth with the name in it, and small faceted hex chips for the
+ // card's stats ("it can have a faceted other mini icons too").
+ badge(ctx, {P, art, name, edition, set, spec}) {
+  const B = BADGE, inner = hexPoints(2.6), poly = q => { ctx.beginPath(); q.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath(); };
+  ctx.lineJoin = 'round';
+  poly(hexPoints(0)); ctx.fillStyle = B.rim; ctx.fill();
+  poly(inner); ctx.save(); ctx.clip();
+  const pal = {...B, ...(spec.badge || {}), ...(P.badge || {})}, night = P.night, ground = 50, earthTop = 56;
+  ctx.fillStyle = pal.sky; ctx.fillRect(0, 0, CARD.w, CARD.h);
+  if (night) starfield(ctx, P, ground);
+  for (const [tx, r] of pal.trees ?? [[8.5, 3.4], [55, 3.0], [49.8, 2.2]]) {
+   ctx.fillStyle = pal.trunk; ctx.fillRect(tx - 0.35, ground - 4, 0.7, 4.2);
+   ctx.beginPath(); ctx.arc(tx, ground - 4 - r * 0.7, r, 0, Math.PI * 2); ctx.fillStyle = pal.tree; ctx.fill(); ctx.lineWidth = 0.4; ctx.strokeStyle = pal.ink; ctx.stroke();
+  }
+  ctx.fillStyle = pal.grass; ctx.fillRect(0, ground, CARD.w, earthTop - ground + 2);
+  ctx.beginPath(); ctx.moveTo(0, CARD.h); ctx.lineTo(0, earthTop);
+  for (let i = 0; i <= 24; i++) { const x = i * CARD.w / 24; ctx.lineTo(x, earthTop + Math.sin(i * 1.9) * 0.8 + (i % 2) * 0.5); }
+  ctx.lineTo(CARD.w, CARD.h); ctx.closePath(); ctx.fillStyle = pal.earth; ctx.fill(); ctx.lineWidth = 0.45; ctx.strokeStyle = pal.ink; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0, ground); ctx.lineTo(CARD.w, ground); ctx.lineWidth = 0.4; ctx.stroke();
+  let seed = 3 + (edition ?? 1); const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  ctx.lineWidth = 0.32; ctx.lineCap = 'round';
+  for (let i = 0; i < 9; i++) { const x = 4 + rnd() * 55, y = ground + 1.6 + rnd() * 3.6; ctx.beginPath(); ctx.moveTo(x - 0.7, y - 0.8); ctx.lineTo(x, y); ctx.lineTo(x + 0.8, y - 1); ctx.stroke(); }
+  for (let i = 0; i < 12; i++) { const x = 10 + rnd() * 43, y = earthTop + 13 + rnd() * 9; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 0.9 + rnd(), y); ctx.stroke(); }
+  stand(ctx, art, {x: 7, y: 9, w: 49, h: ground + 3 - 9}, {fill: 0.94, ground: 1, shadow: '#00000024'});
+  // The name, set into the earth in sky blue with an ink edge.
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  const label = name.toUpperCase(); let size = 7.4; font(ctx, 900, size, 0.2); while (ctx.measureText(label).width > 50 && size > 3.6) { size -= 0.2; font(ctx, 900, size, 0.15); }
+  ctx.lineWidth = 0.7; ctx.strokeStyle = pal.ink; ctx.strokeText(label, CARD.w / 2, 64.6); ctx.fillStyle = pal.title; ctx.fillText(label, CARD.w / 2, 64.6);
+  // Faceted hex chips: one per stat, its glyph on top, the value pressed beside it.
+  const stats = spec.stats || [], gap = 9.6, x0 = CARD.w / 2 - (stats.length - 1) * gap / 2;
+  stats.forEach((st, i) => chip(ctx, x0 + i * gap, 73.2, 3.3, st, pal));
+  font(ctx, 600, 1.8, 0.3); ctx.fillStyle = pal.ink; ctx.globalAlpha = 0.72; ctx.fillText(`${String(edition ?? 1).padStart(2, '0')} / ${String(set).padStart(2, '0')} · AW`, CARD.w / 2, 81.4); ctx.globalAlpha = 1;
+  ctx.restore();
+  poly(inner); ctx.lineWidth = 0.6; ctx.strokeStyle = pal.ink; ctx.stroke();
+  return {gloss: [], art: {x: 7, y: 9, w: 49, h: ground - 6}, texture: 'felt'};
+ },
+ // Poster: a mid-century screen print. Cream sheet, a window of flat teal sky over peach ground, the subject in flat
+ // colour with a long flat shadow, fine stipple where the inks thin out, a pencilled edition line under the print.
+ poster(ctx, {P, art, name, edition, set, b, spec}) {
+  const S = POSTER, night = P.night, win = {x: 4, y: 4, w: 55, h: 72}, groundY = win.y + win.h * 0.78;
+  ctx.fillStyle = S.paper; ctx.fillRect(-b, -b, CARD.w + 2 * b, CARD.h + 2 * b);
+  ctx.save(); ctx.beginPath(); ctx.rect(win.x, win.y, win.w, win.h); ctx.clip();
+  ctx.fillStyle = night ? '#24365e' : S.sky; ctx.fillRect(win.x, win.y, win.w, win.h);
+  ctx.fillStyle = night ? '#8f8ba0' : S.ground; ctx.fillRect(win.x, groundY, win.w, win.y + win.h - groundY);
+  let seed = 9; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  // Stipple: pale dots thinning up the sky's lower third, dark dots in the ground.
+  ctx.fillStyle = S.paper;
+  for (let i = 0; i < 900; i++) { const y = groundY - Math.pow(rnd(), 1.8) * win.h * 0.35, x = win.x + rnd() * win.w; ctx.globalAlpha = 0.35; ctx.fillRect(x, y, 0.16, 0.16); }
+  ctx.fillStyle = S.dot;
+  for (let i = 0; i < 700; i++) { const x = win.x + rnd() * win.w, y = groundY + rnd() * (win.y + win.h - groundY); ctx.globalAlpha = 0.22; ctx.fillRect(x, y, 0.16, 0.16); }
+  ctx.globalAlpha = 1;
+  if (art) {
+   const B = bounds(art), box = {x: win.x + 6, y: win.y + 8, w: win.w - 12, h: groundY + 1.5 - (win.y + 8)};
+   const s = Math.min(box.h * 0.9 / B.h, box.w * 0.94 / B.w), w = B.w * s, h = B.h * s, x = box.x + (box.w - w) / 2, y = groundY + 1.5 - h;
+   // The long flat shadow: the silhouette laid down on the ground, away from a low sun on the left.
+   const sil = silhouette(art, B, night ? '#4f4a63' : S.shadow);
+   ctx.save(); ctx.translate(x, y + h); ctx.transform(1, 0, 0.95, -0.22, 0, 0); ctx.globalAlpha = 0.85; ctx.drawImage(sil, 0, 0, B.w, B.h, 0, -h * 0, w, -h); ctx.restore();
+   ctx.drawImage(art, B.x, B.y, B.w, B.h, x, y, w, h);
+  }
+  ctx.restore();
+  ctx.fillStyle = S.pencil; ctx.textBaseline = 'alphabetic';
+  font(ctx, 400, 2.1, 0.15); ctx.textAlign = 'left'; ctx.fillText(name, win.x, 80.6);
+  ctx.textAlign = 'right'; ctx.fillText(`${edition ?? 1}/${set}  AW`, win.x + win.w, 80.6);
+  return {gloss: [], art: win, texture: 'print'};
  }
 };
+
+const BADGE = {rim: '#efe6d4', ink: '#3a2a20', sky: '#8fcbea', grass: '#7cc35d', tree: '#8fc66a', trunk: '#8a5a2b', earth: '#ef8f2f', title: '#8fcbea'};
+// A pointy-top hex filling the card (63 x 88 mm), inset by k mm for the rim.
+export function hexPoints(k = 0) {
+ const t = 17, s = Math.hypot(CARD.w / 2, t) / (CARD.w / 2); // corner and side insets along the slanted edges
+ return [[CARD.w / 2, k * s], [CARD.w - k, t + k * (s - 1) * 0.5 + k * 0.5], [CARD.w - k, CARD.h - t - k * 0.5], [CARD.w / 2, CARD.h - k * s], [k, CARD.h - t - k * 0.5], [k, t + k * 0.5]];
+}
+// A small faceted hex: three tones of the stat's colour (lit, mid, shade), an ink line, its glyph and value.
+function chip(ctx, cx, cy, r, st, pal) {
+ const col = ICON_COLOURS[st.icon] || '#666', v = [...Array(6)].map((_, i) => [cx + r * Math.cos(Math.PI / 6 + i * Math.PI / 3), cy + r * Math.sin(Math.PI / 6 + i * Math.PI / 3)]);
+ const tri = (a, b, f) => { ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(...v[a]); ctx.lineTo(...v[b]); ctx.closePath(); ctx.fillStyle = f; ctx.fill(); };
+ for (let i = 0; i < 6; i++) tri(i, (i + 1) % 6, i >= 3 && i <= 4 ? mix(col, '#ffffff', 0.28) : i === 0 || i === 5 ? col : mix(col, '#000000', 0.22));
+ ctx.beginPath(); v.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath(); ctx.lineWidth = 0.45; ctx.strokeStyle = pal.ink; ctx.stroke();
+ drawIconGlyph(ctx, st.icon, cx, cy, r * 1.15, '#fffaf0');
+ if (st.value > 1) { font(ctx, 900, 2.6, 0); ctx.textAlign = 'left'; ctx.lineWidth = 0.5; ctx.strokeStyle = pal.ink; ctx.strokeText(String(st.value), cx + r * 0.95, cy + r * 0.9); ctx.fillStyle = '#fffaf0'; ctx.fillText(String(st.value), cx + r * 0.95, cy + r * 0.9); ctx.textAlign = 'center'; }
+}
+const POSTER = {paper: '#f1ebdd', sky: '#5aa294', ground: '#f3a982', dot: '#7a4a36', shadow: '#3f6f70', pencil: '#4a4038'};
+// A one-colour copy of the art's silhouette (for flat cast shadows).
+const silCache = new WeakMap();
+function silhouette(art, B, colour) {
+ const key = colour; let m = silCache.get(art); if (!m) silCache.set(art, m = {}); if (m[key]) return m[key];
+ const c = document.createElement('canvas'); c.width = B.w; c.height = B.h; const x = c.getContext('2d');
+ x.drawImage(art, B.x, B.y, B.w, B.h, 0, 0, B.w, B.h); x.globalCompositeOperation = 'source-in'; x.fillStyle = colour; x.fillRect(0, 0, B.w, B.h);
+ return m[key] = c;
+}
 
 // Night places get a few flat stars (never a gradient).
 function starfield(ctx, P, bottom, r = {x: -3, y: -3, w: CARD.w + 6, h: bottom + 3}) {

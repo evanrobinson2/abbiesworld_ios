@@ -1161,3 +1161,6 @@ export async function loadSet(url = new URL('./cards.json', import.meta.url).hre
   return { set: doc.set || {}, cards };
 }
 export function toBlob(canvas, type = 'image/png', q) { return new Promise(r => canvas.toBlob(r, type, q)); }
+
+// Glyphs and colours for other card looks (cards/v3 hex badges draw the same icons on their faceted chips).
+export { drawIconGlyph, ICON_DISC as ICON_COLOURS };
