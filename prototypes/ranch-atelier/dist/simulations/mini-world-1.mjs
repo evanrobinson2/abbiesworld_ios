@@ -48,7 +48,7 @@ import {beginRanchItemPickup,pickupHit,restoreItemPlacements} from './ranch-item
 import {planRanchAsync} from './ranch-generation-client.mjs';
 import {createMoonAdapter} from './moon/moon-adapter.mjs';
 import {createMoonEnvironment} from './moon/moon-environment.mjs';
-import {createRanchWeather} from './ranch-weather.mjs?v=3';
+import {createRanchWeather} from './ranch-weather.mjs?v=4';
 import {attachTileDrag} from './tile-drag.mjs?v=4';
 import {solarCycle} from './simulation/solar-cycle.mjs';
 import {createMotionControls} from './ranch-motion-ui.mjs?v=9';

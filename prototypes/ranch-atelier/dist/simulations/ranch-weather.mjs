@@ -5,9 +5,11 @@ import {WEATHER,easeWeather,frontApproach} from './simulation/weather-state.mjs'
 // Three draws at most: soft lit cloud puffs (one instanced draw), rain/hail/snow (one fixed point pool) and cloud
 // shadows (16 cards that write no colour or depth, so only the sun's shadow map sees them). Per frame the CPU moves 16
 // cloud centres.
-// Clouds frame the board like a snow globe and fade wherever they would cover it on screen: the world is never
-// masked, and a cloud passing over the ranch shows as its shadow sliding across the fields.
+// A cloud passing over the ranch shows twice: the soft puff itself and its shadow sliding across the fields.
 const CLOUDS=16,PUFFS=7;
+// Clouds sail low over the diorama, about 20 m above its highest ground (render units are 0.1 per metre), and stay
+// see-through where they cross the board so the world keeps reading underneath (Evan, 2026-10-23).
+const CLOUD_BASE=20*.1,OVER_BOARD=.8;
 const col=hex=>new T.Color(hex);
 const TONES={dayLit:col('#fffaf1'),warmLit:col('#ffc995'),nightLit:col('#5a6a90'),stormLit:col('#77818f'),
  dayShade:col('#8c9cb4'),warmShade:col('#9a7f98'),nightShade:col('#26304a'),stormShade:col('#38414e'),flash:col('#e9eeff')};
@@ -24,10 +26,10 @@ export function createRanchWeather({scene,assembly,heightAt,seed=1}){
  const mat=new T.ShaderMaterial({transparent:true,depthWrite:false,uniforms,vertexShader:`attribute float phase;uniform float time,kind,wind,motion;varying float vPhase;varying float vBounce;void main(){vPhase=phase;float speed=kind<1.5?1.1:kind<2.5?.85:.13;float t=fract(phase+time*speed);float y=(1.-t)*3.;vBounce=0.;if(kind>1.5&&kind<2.5&&t>.85){float b=(t-.85)/.15;y=sin(b*3.14159)*.18;vBounce=1.;}vec3 p=position;p.y+=y;p.x+=wind*(t-.5)*.5*motion;if(kind>2.5)p.x+=sin(time*.7+phase*50.)*.12*motion;vec4 view=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*view;gl_PointSize=kind<1.5?7.:kind<2.5?3.:4.;}`,fragmentShader:`uniform float amount,kind,brightness,wind;varying float vPhase;varying float vBounce;void main(){if(vPhase>amount)discard;vec2 p=gl_PointCoord-.5;float shape=kind<1.5?1.-smoothstep(.06,.14,abs(p.x+p.y*(.18+wind*.25))):1.-smoothstep(.25,.5,length(p));float a=shape*(kind<1.5?.45:.85);if(a<.01)discard;gl_FragColor=vec4(vec3(.78,.86,.94)*brightness,a);}`});
  const particles=new T.Points(geo,mat);particles.name='Rain, hail and snow';particles.frustumCulled=false;root.add(particles);
  // Cloud field: CLOUDS clusters drifting downwind through a box around the board, wrapping where they are invisible.
- const span=Math.max(maxX-minX,maxZ-minZ,1),margin=span*.55,box={x:minX-margin,z:minZ-margin,w:maxX-minX+margin*2,d:maxZ-minZ+margin*2};
+ const span=Math.max(maxX-minX,maxZ-minZ,1),margin=span*.18,box={x:minX-margin,z:minZ-margin,w:maxX-minX+margin*2,d:maxZ-minZ+margin*2};
  const centre=new T.Vector3((minX+maxX)/2,top*.5,(minZ+maxZ)/2),tileRadius=span*.55;
  const heading=random()*Math.PI*2,drift=new T.Vector2(Math.cos(heading),Math.sin(heading));
- const seeds=Array.from({length:CLOUDS},(_,i)=>({u:random(),v:random(),y:top+span*(.07+random()*.17),size:span*(.13+random()*.09),order:(i+random()*.6)/CLOUDS}));
+ const seeds=Array.from({length:CLOUDS},(_,i)=>({u:random(),v:random(),y:top+CLOUD_BASE*(.9+random()*.3),size:span*(.075+random()*.05),order:(i+random()*.6)/CLOUDS}));
  const puffGeo=new T.InstancedBufferGeometry();puffGeo.index=new T.PlaneGeometry(1,1).index;puffGeo.setAttribute('position',new T.PlaneGeometry(1,1).getAttribute('position'));
  const puff=new Float32Array(CLOUDS*PUFFS*4),meta=new Float32Array(CLOUDS*PUFFS*2);
  for(let c=0;c<CLOUDS;c++)for(let k=0;k<PUFFS;k++){const i=c*PUFFS+k,a=k/PUFFS*Math.PI*2+random(),r=k?.35+random()*.45:0;puff.set([Math.cos(a)*r*1.25,(k?random()*.38-.08:.12),Math.sin(a)*r*.7,k?.55+random()*.45:1.05],i*4);meta.set([c,random()],i*2);}
@@ -35,13 +37,14 @@ export function createRanchWeather({scene,assembly,heightAt,seed=1}){
  const cloudData=Array.from({length:CLOUDS},()=>new T.Vector4()),sunDir=new T.Vector3(0,1,0);
  const cloudAlpha=new Array(CLOUDS).fill(0),cloudUniforms={clouds:{value:cloudData},presence:{value:cloudAlpha},sunDir:{value:sunDir},litColor:{value:new T.Color()},shadeColor:{value:new T.Color()},flash:{value:0},opacity:{value:.9},tileNdc:{value:new T.Vector2()},tileNdcRadius:{value:0},aspect:{value:1}};
  const cloudMat=new T.ShaderMaterial({transparent:true,depthWrite:false,uniforms:cloudUniforms,vertexShader:`
+ #define OVER_BOARD ${OVER_BOARD.toFixed(2)}
  attribute vec4 puff;attribute vec2 meta;uniform vec4 clouds[${CLOUDS}];uniform float presence[${CLOUDS}];uniform vec3 sunDir;uniform vec2 tileNdc;uniform float tileNdcRadius,aspect,opacity;
  varying vec2 vUv;varying float vAlpha,vSeed,vHeight;varying vec3 vSun;
  void main(){
   int i=int(meta.x);vec4 c=clouds[i];vec3 at=c.xyz+puff.xyz*c.w;
   vec4 view=modelViewMatrix*vec4(at,1.);vec4 clip=projectionMatrix*view;
   vec2 d=(clip.xy/max(clip.w,.0001)-tileNdc)*vec2(aspect,1.);
-  float clearOfBoard=tileNdcRadius>0.?smoothstep(tileNdcRadius*.9,tileNdcRadius*1.18,length(d)):1.;
+  float clearOfBoard=tileNdcRadius>0.?mix(OVER_BOARD,1.,smoothstep(tileNdcRadius*.6,tileNdcRadius*1.1,length(d))):1.;
   float nearFade=smoothstep(c.w*.8,c.w*2.4,-view.z);
   view.xy+=position.xy*puff.w*c.w*1.15;gl_Position=projectionMatrix*view;
   vUv=position.xy*2.;vSeed=meta.y;vHeight=puff.y;vAlpha=opacity*presence[i]*clearOfBoard*nearFade;
