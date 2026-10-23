@@ -1,0 +1,237 @@
+{
+  "set": {
+    "id": "events",
+    "name": "World Events",
+    "biome": "meadow",
+    "about": "Cards for the things that happen to the whole world: weather, time of day, sky and space. Same Card Forge, but a night-blue frame with rays, a burst-edged window and a WORLD EVENT banner, so an event is never mistaken for a tile card. Scenes are painted by the forge in the game's own colours; the meteorite is the game model."
+  },
+  "cards": [
+    {
+      "id": "paint-rain",
+      "number": 1,
+      "name": "Paint Rain",
+      "type": "event",
+      "subtype": "Sky · a day",
+      "rarity": "bloom",
+      "artMode": "scene",
+      "color": "#ff3fa4",
+      "stats": [
+        {
+          "icon": "star",
+          "value": 5
+        }
+      ],
+      "rules": "Colourful paint falls. Strange plants sprout where it lands.",
+      "flavour": "Five colours, five kinds of alien plant. The plants glow at night.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "paint-rain"
+    },
+    {
+      "id": "meteorite",
+      "number": 2,
+      "name": "Meteorite",
+      "type": "event",
+      "subtype": "Space · a night",
+      "rarity": "sun",
+      "artMode": "scene",
+      "color": "#35c8e8",
+      "stats": [
+        {
+          "icon": "star",
+          "value": 1
+        }
+      ],
+      "rules": "A glowing rock lands. Dig it out for a shiny prize.",
+      "flavour": "Cyan is the meteorite's colour, only ever the meteorite's.",
+      "art": {
+        "status": "final",
+        "model": "/models/moon-meteorite/model.glb",
+        "view": {
+          "yaw": -20,
+          "pitch": 18,
+          "fill": 1.0
+        }
+      }
+    },
+    {
+      "id": "rain-shower",
+      "number": 3,
+      "name": "Rain Shower",
+      "type": "event",
+      "subtype": "Weather · an hour",
+      "rarity": "seed",
+      "artMode": "scene",
+      "color": "#4aa3ff",
+      "stats": [
+        {
+          "icon": "water",
+          "value": 2
+        }
+      ],
+      "rules": "Crops drink up. Puddles pop up for splashing.",
+      "flavour": "Abbie says rain is just the sky watering the garden.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "rain"
+    },
+    {
+      "id": "thunderstorm",
+      "number": 4,
+      "name": "Thunderstorm",
+      "type": "event",
+      "subtype": "Weather · an hour",
+      "rarity": "bloom",
+      "artMode": "scene",
+      "color": "#ffe45c",
+      "stats": [
+        {
+          "icon": "water",
+          "value": 3
+        },
+        {
+          "icon": "bolt",
+          "value": 1
+        }
+      ],
+      "rules": "Big boom! Animals hurry home. Rain waters every crop.",
+      "flavour": "Bub hides under the couch. Everyone else watches from the window.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "storm"
+    },
+    {
+      "id": "snowfall",
+      "number": 5,
+      "name": "Snowfall",
+      "type": "event",
+      "subtype": "Weather · a day",
+      "rarity": "sprout",
+      "artMode": "scene",
+      "color": "#9fd4ff",
+      "stats": [
+        {
+          "icon": "heart",
+          "value": 2
+        }
+      ],
+      "rules": "Everything turns white. Time for snowballs and cocoa.",
+      "flavour": "The ranch goes quiet, then very loud with snowballs.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "snow"
+    },
+    {
+      "id": "rainbow",
+      "number": 6,
+      "name": "Rainbow",
+      "type": "event",
+      "subtype": "Sky · a few minutes",
+      "rarity": "harvest",
+      "artMode": "scene",
+      "color": "#ff8fb8",
+      "stats": [
+        {
+          "icon": "heart",
+          "value": 3
+        }
+      ],
+      "rules": "Follow it for a surprise. Everyone feels happy.",
+      "flavour": "It always ends somewhere better than where you started.",
+      "art": {
+        "status": "final"
+      }
+    },
+    {
+      "id": "golden-dawn",
+      "number": 7,
+      "name": "Golden Dawn",
+      "type": "event",
+      "subtype": "Time · morning",
+      "rarity": "seed",
+      "artMode": "scene",
+      "color": "#ffcf55",
+      "stats": [
+        {
+          "icon": "sun",
+          "value": 2
+        }
+      ],
+      "rules": "Roosters crow. Animals wake up happy and ready.",
+      "flavour": "The first light always finds the hens already up.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "dawn"
+    },
+    {
+      "id": "starry-night",
+      "number": 8,
+      "name": "Starry Night",
+      "type": "event",
+      "subtype": "Time · night",
+      "rarity": "sprout",
+      "artMode": "scene",
+      "color": "#8f9bff",
+      "stats": [
+        {
+          "icon": "star",
+          "value": 2
+        }
+      ],
+      "rules": "Fireflies glow. Stars come out to play.",
+      "flavour": "Count them with a friend and you will never run out.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "night"
+    },
+    {
+      "id": "morning-fog",
+      "number": 9,
+      "name": "Morning Fog",
+      "type": "event",
+      "subtype": "Weather · a morning",
+      "rarity": "seed",
+      "artMode": "scene",
+      "color": "#c9d8d6",
+      "stats": [
+        {
+          "icon": "water",
+          "value": 1
+        }
+      ],
+      "rules": "Soft mist hides the hills. Listen for the bells.",
+      "flavour": "You hear the cows long before you see them.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "fog"
+    },
+    {
+      "id": "aurora",
+      "number": 10,
+      "name": "Northern Lights",
+      "type": "event",
+      "subtype": "Sky · a night",
+      "rarity": "sun",
+      "artMode": "scene",
+      "color": "#59e6b0",
+      "stats": [
+        {
+          "icon": "star",
+          "value": 3
+        }
+      ],
+      "rules": "Ribbons of green dance above. Wishes feel closer.",
+      "flavour": "Some nights the sky decides to put on a show.",
+      "art": {
+        "status": "final"
+      }
+    }
+  ]
+}
