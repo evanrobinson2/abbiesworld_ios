@@ -593,3 +593,6 @@ the reference art is frozen first (section 9), the couch kit goes into `simulati
   - Everyone then celebrates with a Polaroid of the trip (item `moon-polaroid`), and the chapter ends (`end: chapter-1`).
 - Chapter 2 is the Moon base: `createMission({chapter: 2})` starts at the `arrive` beat: outpost (moon cheese), airlock wires, habitat bugs, Star Child, buggy. `?chapter=2` works on `/studies/moon-mission/world.html` and `/town?mission`.
 - Code: `games.mjs` (flightPlan, cowSwap, moonLanding), `consoles.mjs` (the three 2D canvases and their touch/keys), `hud.mjs` (mounts the console in the player's panel, Polaroid overlay). Tests cover all three with a bot family.
+
+## 19. The standalone test page is gone (Evan, 2026-10-23 21:27Z)
+- Evan rejected `/studies/moon-mission/world.html`: the Moon Mission plays inside the real Winchester board at /town, nowhere else. The page is removed from the site and from whats-new. The modules it used stay (`mission.mjs`, `world3d.mjs`, `hud.mjs`, `consoles.mjs`, `town-mount.mjs`); the in-town build reuses them. `?chapter=` and `?beat=` work on /town?mission.
