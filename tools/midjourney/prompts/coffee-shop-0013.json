@@ -1,0 +1,49 @@
+{
+  "study": "AW-STUDY-0013 - The Coffee Shop",
+  "asked": "Evan, 2026-10-23T04:44Z: proofs of Abbie's café in four views (own tile, in a town tile, outside, inside), 2-3 options each, in three styles. Palette from Leatrice Eiseman, Color: Messages & Meanings, A Pantone Color Resource (Hand Books Press, 2006).",
+  "rules": "Proofs only, model nothing until Evan picks. PG. No children's faces; people are tiny or absent. The score lives on the cafe's painted sign.",
+  "tool": "Midjourney web (v8.2), grid only, no upscale. Each job gives four options.",
+  "styles": {
+    "elegant": {
+      "label": "Elegant contemporary",
+      "eiseman_moods": ["Elegant", "Romantic"],
+      "palette": {"blush rose": "#E8B4B8", "dusty mauve": "#B5838D", "aubergine": "#4A2040", "warm taupe": "#A39382", "champagne gold": "#D9C08C", "ivory": "#F4EDE1"}
+    },
+    "party": {
+      "label": "Cool-kids dance party hangout",
+      "eiseman_moods": ["Energetic", "Playful"],
+      "palette": {"hot magenta pink": "#E6007E", "electric violet": "#7A3CFF", "tangerine": "#FF8A2B", "lime": "#B6E43A", "turquoise": "#00B5C8", "sunshine yellow": "#FFD23F"}
+    },
+    "game": {
+      "label": "Typical modern 3D game",
+      "eiseman_moods": ["Whimsical", "Tranquil"],
+      "palette": {"bubblegum pink": "#F49AC1", "mint": "#8FD9B6", "sky blue": "#7EC8E3", "butter yellow": "#F9E07F", "coral": "#F7836B", "cream": "#FFF6E5"}
+    }
+  },
+  "prompts": [
+    {"name": "tile-elegant", "view": "tile", "style": "elegant",
+     "prompt": "isometric miniature diorama on a single hexagonal grass tile floating on a plain background: an elegant contemporary small cafe pavilion called Abbie's Cafe, slim black steel frame, tall arched glass windows, blush rose and dusty mauve painted wood, champagne gold trim, a painted wooden sign with three gold stars, terrace of ivory bistro tables under a mauve awning, clipped hedges, a gravel path to the tile edge, warm taupe stone, soft morning light, tasteful upscale boutique architecture, tiny tilt-shift scale, no people --ar 1:1 --v 8.2 --no text, letters"},
+    {"name": "tile-party", "view": "tile", "style": "party",
+     "prompt": "isometric miniature diorama on a single hexagonal tile floating on a plain background: Abbie's Cafe as a zany cartoon hangout clubhouse, a chunky curvy building with a giant hot magenta pink coffee cup on the roof, disco ball, string lights, a painted sign with three big yellow stars, electric violet and tangerine stripes, lime green turf, turquoise splash pool, speakers, rooftop dance floor with checker tiles, playful Planet Coaster theme park game art, bold saturated colours, not fairy, not princess, no animals, no people --ar 1:1 --v 8.2 --no text, letters"},
+    {"name": "tile-game", "view": "tile", "style": "game",
+     "prompt": "isometric game asset on a single hexagonal grass tile floating on a plain background: Abbie's Cafe, a cosy stylised cartoon coffee shop like a modern mobile 3D game building, bubblegum pink walls, mint green roof shingles, cream window frames, coral awning, butter yellow wooden sign with three stars, outdoor tables with umbrellas, flower planters, cobble path, sky blue water barrel, clean hand-painted textures, soft ambient occlusion, Unity style 3D render, no people --ar 1:1 --v 8.2 --no text, letters"},
+    {"name": "town-elegant", "view": "town", "style": "elegant",
+     "prompt": "isometric miniature of a small market town square on a hexagonal board game tile: on the corner sits an elegant contemporary cafe called Abbie's Cafe, blush rose and dusty mauve facade, tall arched glass, champagne gold trim, a painted sign with three gold stars, ivory terrace tables; around it timber and stone shops, a bell tower, a fountain, street trees, warm taupe cobbles, two tiny distant figures, soft golden light, tasteful and calm, tilt-shift --ar 16:9 --v 8.2 --no text, letters"},
+    {"name": "town-party", "view": "town", "style": "party",
+     "prompt": "isometric miniature of a cartoon town block on a hexagonal game tile: in the middle is Abbie's Cafe, the coolest hangout in town, a curvy hot magenta pink building with a giant coffee cup on the roof, disco lights and a rooftop dance floor, electric violet and tangerine stripes, a painted sign with three yellow stars; next to it a record shop, a skate ramp, an ice cream stand, a bell tower, turquoise fountain, lime green lawns, bold zany theme park game art, not fairy, not princess, no animals, tiny distant figures only --ar 16:9 --v 8.2 --no text, letters"},
+    {"name": "town-game", "view": "town", "style": "game",
+     "prompt": "isometric stylised town tile like a modern cosy 3D builder game: a small town square with a bell tower, bakery, market stalls and houses, and on the corner Abbie's Cafe with bubblegum pink walls, mint roof, coral awning and a butter yellow sign with three stars, sky blue canal, cream paths, round trees, clean hand-painted textures, Unity style 3D render, soft shadows, tiny distant figures only --ar 16:9 --v 8.2 --no text, letters"},
+    {"name": "exterior-elegant", "view": "exterior", "style": "elegant",
+     "prompt": "eye level photograph of the front of an elegant contemporary small cafe, Abbie's Cafe, blush rose painted wood and black steel, tall arched windows glowing warm, champagne gold door handles, a hand-painted wooden sign with three gold stars, mauve striped awning, ivory bistro chairs, potted olive trees, warm taupe stone pavement, dusk light, architectural photography, refined boutique, nobody in frame --ar 3:2 --v 8.2 --no text, letters"},
+    {"name": "exterior-party", "view": "exterior", "style": "party",
+     "prompt": "eye level cartoon render of the front of Abbie's Cafe, a cool kids dance party hangout spot, wobbly curvy hot magenta pink walls, round porthole windows, a giant neon coffee cup on the roof, disco ball over the door, electric violet and tangerine zigzags, a painted sign with three big yellow stars, lime green steps, turquoise speakers, glowing string lights, playful Planet Zoo style game art, bold and zany, not fairy, not princess, no animals, nobody in frame --ar 3:2 --v 8.2 --no text, letters"},
+    {"name": "exterior-game", "view": "exterior", "style": "game",
+     "prompt": "eye level 3D game render of the front of Abbie's Cafe, a cosy stylised cartoon coffee shop, bubblegum pink walls, mint green door, coral awning, cream window frames, butter yellow hanging wooden sign with three stars, chalkboard easel, flower boxes, sky blue bicycle, cobblestones, clean hand-painted textures, soft global illumination, typical modern 3D game, nobody in frame --ar 3:2 --v 8.2 --no text, letters"},
+    {"name": "interior-elegant", "view": "interior", "style": "elegant",
+     "prompt": "interior of an elegant contemporary small cafe, Abbie's Cafe, blush rose plaster walls, dusty mauve velvet banquette, aubergine accents, champagne gold espresso machine and pendant lights, ivory marble counter with a pastry case, warm taupe oak floor, arched window with soft daylight, a painted sign with three gold stars above the counter, refined interior design photography, nobody in frame --ar 3:2 --v 8.2 --no text, letters"},
+    {"name": "interior-party", "view": "interior", "style": "party",
+     "prompt": "interior of Abbie's Cafe, a zany cartoon dance party hangout, a light-up checker dance floor, a DJ booth made from a giant coffee cup, hot magenta pink and electric violet walls, tangerine and lime beanbags, turquoise milkshake bar with stools, disco ball, glowing star sign with three stars, playful Planet Zoo style game art, bold and fun, not fairy, not princess, no animals, nobody in frame --ar 3:2 --v 8.2 --no text, letters"},
+    {"name": "interior-game", "view": "interior", "style": "game",
+     "prompt": "interior of Abbie's Cafe in a cosy modern 3D game, stylised cartoon coffee shop, bubblegum pink walls, mint green counter, coral stools, cream tiles, butter yellow lamps, sky blue cups on shelves, a pastry case, a wooden sign with three stars, plants, warm light, clean hand-painted textures, Unity style 3D render, nobody in frame --ar 3:2 --v 8.2 --no text, letters"}
+  ]
+}
