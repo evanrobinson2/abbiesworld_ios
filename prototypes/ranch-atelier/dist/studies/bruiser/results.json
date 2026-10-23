@@ -1,7 +1,7 @@
 {
  "study": "AW-STUDY-0021",
  "updated": "2026-10-23T06:40Z",
- "status": "G is the best model; round 5 learns to build it ourselves",
+ "status": "Post-mortem in: the picture is a three-quarter view",
  "camera": "One front camera matched to the reference; every render is scored from it.",
  "arms": [
   {
