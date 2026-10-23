@@ -1,6 +1,6 @@
 import {installTileCarryStyle,landingPulse} from './tile-placement-feedback.mjs?v=15';
 import {sharedImpactSound} from './tile-drop-impact.mjs?v=2';
-import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTilePullStyle} from './tile-pull.mjs?v=4';
+import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTilePullStyle} from './tile-pull.mjs?v=5';
 import {PALETTES,cityPreset,CONFIGURATIONS} from './city/city-settings.mjs';
 import {cityFootprint} from './city/city-footprint.mjs';
 import {SCIENCE_BASE_FACETS} from './moon/science-worlds.mjs';
@@ -154,7 +154,7 @@ const options=panel.querySelector('.tile-options'),status=panel.querySelector('[
   chosenType[g.id]=id;settingsByType[id]=placementSettings(id,base);if(id==='crop')garden=settingsByType[id];dropPremade(g.id);generator=g;rerollSeed=null;generatorRevision++;
   const win=openPrintWindow({name:g.label,at:draft.frame,still:draft.still}),t0=performance.now();
   try{if(!opened)open();cancelDrag();const ok=await load(id,preferredSlot());if(!ok||!asset)throw Error(status.textContent||'This tile could not be printed.');
-   livePreview.setHeld(true);await win.reveal(livePreview,livePreview.canvas,Math.max(2400,5200-(performance.now()-t0)));await win.stamp();await win.close(hero);}
+   livePreview.setHeld(true);await win.reveal(livePreview,livePreview.canvas,900);await win.stamp();await win.close(hero);}
   catch(error){win.fail(error.message);}finally{printing=false;restoreCanvas();refillCard(hero);generatorRevision++;window.RanchView?.changed();}}
  async function dropAt(i){const d=drag;if(!d||d.snapping)return;d.snapping=true;sharedImpactSound().prime();if(d.pending){ghost.classList.add('is-waiting');await selectionReady.catch(()=>{});ghost.classList.remove('is-waiting');if(drag!==d)return;}cancelAnimationFrame(viewFrame);viewFrame=0;canvas.dataset.tileCarry='snapping';ghost.classList.add('is-snapping');carryLabel.textContent='A perfect fit';const ready=asset?.slot===i,pending=ready?null:retarget(i);const slot=slots[i],box=new T.Box3().setFromObject(slot.surface),radius=Math.max(1,box.getSize(new T.Vector3()).x/2),center=box.getCenter(new T.Vector3()).add(new T.Vector3(0,Math.max(3,radius*1.25),0)).project(camera),rect=canvas.getBoundingClientRect();
  const animation=ghost.animate([{left:ghost.style.left,top:ghost.style.top,transform:'translate(-50%,-86%) scale(1)'},{left:rect.left+(center.x+1)*rect.width/2+'px',top:rect.top+(1-center.y)*rect.height/2+'px',transform:'translate(-50%,-60%) scale(.62)'}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:170,easing:'cubic-bezier(.3,1.4,.5,1)',fill:'forwards'});

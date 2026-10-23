@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-tile-reveal",
+      "date": "2026-10-23",
+      "title": "Tiles build themselves",
+      "line": "Drop a tile and it rolls in bare, then every tree, building and fence drops from the air, tumbles, hovers and snaps into place, all in about a second and a half. Accept in the card designer now prints the tile with a laser and signs it with a tick.",
+      "image": "/whats-new/2026-10-23-tile-reveal.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
       "id": "2026-10-23-world-look",
       "date": "2026-10-23",
       "title": "World look: three looks, one switch",
