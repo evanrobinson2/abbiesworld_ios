@@ -440,5 +440,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T17:30:21Z"
+  },
+  {
+    "id": "A6-paint-suit",
+    "prompt": "friendly small grey alien crewmate, big eyes, green accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "4fb29006-9fb8-4a81-8288-0f042b694a03",
+    "files": [
+      "tools/meshy-heroes/refs/A6-paint-suit/mj_4fb29006-9fb8-4a81-8288-0f042b694a03_0.png",
+      "tools/meshy-heroes/refs/A6-paint-suit/mj_4fb29006-9fb8-4a81-8288-0f042b694a03_1.png",
+      "tools/meshy-heroes/refs/A6-paint-suit/mj_4fb29006-9fb8-4a81-8288-0f042b694a03_2.png",
+      "tools/meshy-heroes/refs/A6-paint-suit/mj_4fb29006-9fb8-4a81-8288-0f042b694a03_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:35:19Z"
+  },
+  {
+    "id": "A6-paint-tee",
+    "prompt": "friendly small grey alien crewmate, big eyes, green accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "6197ce08-e68d-4805-a3c1-cc15ccef4634",
+    "files": [
+      "tools/meshy-heroes/refs/A6-paint-tee/mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_0.png",
+      "tools/meshy-heroes/refs/A6-paint-tee/mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_1.png",
+      "tools/meshy-heroes/refs/A6-paint-tee/mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_2.png",
+      "tools/meshy-heroes/refs/A6-paint-tee/mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:35:39Z"
   }
 ]
