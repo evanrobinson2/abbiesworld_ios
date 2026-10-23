@@ -15,7 +15,7 @@ export const LAND = {
  diveAfter: .32,                     // extra zoom-in (log units) past the bottom that starts the dive
  diveSeconds: 1.2, riseSeconds: .9,
  eye: .16, walk: .25, run: .7,       // 1.6 m eyes, 2.5 m/s walk, 7 m/s run
- eyeFov: 52,
+ eyeFov: 52, eyeNear: .05,
  deadZone: .16
 };
 
@@ -89,7 +89,7 @@ export function createLandCamera({camera,orbit,canvas,heightAt,waterY=-Infinity,
   // Stand where you were looking, facing the same way, eyes level with a slight look down the land.
   eye.x=now.x;eye.z=now.z;eye.yaw=now.yaw;eye.pitch=-rad(4);
   transition={from:{position:camera.position.clone(),quaternion:camera.quaternion.clone(),fov:camera.fov},to:'eye',t:0,seconds:reduced?.35:c.diveSeconds};
-  mode='diving';camera.near=Math.min(baseNear,.02);camera.updateProjectionMatrix();
+  mode='diving';camera.near=Math.min(baseNear,c.eyeNear);camera.updateProjectionMatrix();
  }
  function rise(){
   if(mode!=='eye')return;walkTo=null;

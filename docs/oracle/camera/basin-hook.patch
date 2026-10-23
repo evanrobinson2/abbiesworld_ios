@@ -50,10 +50,10 @@ index da84096e..e1625492 100644
  let creator=null;
  // One stage serves both drivers: the relay (?creator=<room>) and live voice mode (no room).
 diff --git a/prototypes/ranch-atelier/dist/simulations/ranch-contours.js b/prototypes/ranch-atelier/dist/simulations/ranch-contours.js
-index 256046d0..1f0a4b9c 100644
+index 256046d0..34de2f2d 100644
 --- a/prototypes/ranch-atelier/dist/simulations/ranch-contours.js
 +++ b/prototypes/ranch-atelier/dist/simulations/ranch-contours.js
-@@ -6,21 +6,24 @@ export function createContours(renderer,render,{samples=4}={}){
+@@ -6,21 +6,25 @@ export function createContours(renderer,render,{samples=4}={}){
   const target=new T.WebGLRenderTarget(1,1,{type:T.HalfFloatType,depthTexture:new T.DepthTexture(1,1,T.UnsignedIntType)});
   target.samples=samples;
   target.texture.minFilter=target.texture.magFilter=T.LinearFilter;
@@ -69,8 +69,9 @@ index 256046d0..1f0a4b9c 100644
   float b=distanceAt(vUV-vec2(0.,pixel.y)),t=distanceAt(vUV+vec2(0.,pixel.y));
   float curve=max(abs(l+r-2.*c),abs(b+t-2.*c))/max(c,.1);
 + // On open land, measure curvature in 1/distance, which is flat for any plane: a slope seen at a grazing angle
-+ // (eye level) stays clean, while silhouettes and creases still ink (AW-STUDY-0018).
-+ curve=mix(curve,max(abs(1./l+1./r-2./c),abs(1./b+1./t-2./c))*c,planar);
++ // (eye level) stays clean. Soft creases between the land's big cells are taken off too, or they ink the ground in
++ // stripes when you stand on it; silhouettes (trees against land, ridges against sky) still ink (AW-STUDY-0018).
++ curve=mix(curve,max(0.,max(abs(1./l+1./r-2./c),abs(1./b+1./t-2./c))*c-60.*c/(near*65536.)),planar);
   float edge=smoothstep(.0015,.008,curve);
   // Lens pass on graded boards: one 12-tap spiral gathers both a focus blur away from the orbit target
   // and a glow from anything brighter than white (lamps, lit windows, sun-struck roofs).
@@ -81,7 +82,7 @@ index 256046d0..1f0a4b9c 100644
    vec3 blurred=vec3(0.),glow=vec3(0.);
    for(int i=0;i<12;i++){float a=float(i)*2.39996,radius=sqrt(float(i)+.5)/3.5;vec2 o=vec2(cos(a),sin(a))*radius;
     blurred+=texture2D(image,vUV+o*unit*blurAmount*5.5).rgb;glow+=max(texture2D(image,vUV+o*unit*16.).rgb-vec3(1.),vec3(0.));}
-@@ -51,5 +54,5 @@ export function createContours(renderer,render,{samples=4}={}){
+@@ -51,5 +55,5 @@ export function createContours(renderer,render,{samples=4}={}){
    uniforms.pixel.value.set(1.5*renderer.getPixelRatio()/size.x,1.5*renderer.getPixelRatio()/size.y);
    uniforms.near.value=view.near;uniforms.far.value=view.far;uniforms.orthographic.value=view.isOrthographicCamera?1:0;
    renderer.setRenderTarget(target);render(world,view);const stats={calls:renderer.info.render.calls,triangles:renderer.info.render.triangles};renderer.setRenderTarget(null);render(scene,camera);return {...stats,postPasses:1};
