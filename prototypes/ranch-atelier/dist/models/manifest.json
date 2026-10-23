@@ -870,6 +870,99 @@
    ]
   },
   {
+   "id": "ranch-borage-charming",
+   "name": "Borage",
+   "style": "charming",
+   "base": "borage",
+   "group": "Ranch tile · charming",
+   "subject": "garden flower",
+   "ask": "a whimsical storybook version of a borage plant clump with soft hairy leaves and star-shaped bright blue flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.714,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-borage-charming/ref.jpg",
+    "glb": "/models/ranch-borage-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.714,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Hero IoU 0.714 at 768 px / 48 samples (0.733 before spreading the flowers in depth), against 0.657 for the normal model on its own hero.",
+    "Reads as the same borage (green mound, blue stars with white eyes) but toy-like: a round squat cushion of big soft leaves and a bouquet of chunky stars bouncing out of it.",
+    "Same footprint proportions, height, materials and roles as the normal one, so it swaps in place."
+   ],
+   "off": [
+    "The hero's leaves are smooth and velvety with soft hairs; flat-shaded 12-triangle paddles read as facetted, slightly cabbage-like up close.",
+    "The hero's stems are thick and fuzzy and carry more leaves among the flowers; there is less green between the stars here (orange in the overlay at mid-left).",
+    "The hero's stars have a dark anther tip on the white centre; left out (too small to read in the tile).",
+    "The hero has no visible red stalks; Stem_Red is kept (short muted neck under each star) to keep the normal model's material set."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "first charming reshape: tiered rosette + dome leaves, 9 big stars on own stems"
+    ],
+    [
+     "Round 2.",
+     "stars x1.3 with broader petals, longer rosette, more stem leaves, rounder footprint"
+    ],
+    [
+     "Round 3.",
+     "steeper rosette with more droop, wider leaf body, stars x1.45"
+    ],
+    [
+     "Round 4.",
+     "fatter petals (notch 0.55), taller body leaves"
+    ],
+    [
+     "Round 5.",
+     "mound rebuilt as two tiers of arching paddle leaves (the stacked-plate look was gone)"
+    ],
+    [
+     "Round 6.",
+     "wider bottom tier, bigger stem leaves, darker greens"
+    ],
+    [
+     "Round 7.",
+     "no right-side skew, right flowers moved out, stars x1.5, depth to 0.30 m; 768 px final 0.733"
+    ],
+    [
+     "Round 8.",
+     "flowers spread +-0.06 m in depth so the side and back read round (IoU cost 0.02, kept); final 768 px / 48 samples"
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "garden flower"
+    ],
+    [
+     "Triangles",
+     "765"
+    ],
+    [
+     "Size",
+     "0.34 × 0.30 × 0.41 m"
+    ],
+    [
+     "Little extras",
+     "Round green buds on spurs and a nodding star at the front left, for bounce."
+    ]
+   ]
+  },
+  {
    "id": "ranch-bramble",
    "name": "Bramble",
    "style": "normal",
@@ -987,6 +1080,91 @@
     [
      "Little extras",
      "A second leaf standing up off the top of the canes to give the arch a leafy band, three-leaf fans at the cane tips, and a deep-shade core so the mound has a shadowed interior."
+    ]
+   ]
+  },
+  {
+   "id": "ranch-bramble-charming",
+   "name": "Bramble",
+   "style": "charming",
+   "base": "bramble",
+   "group": "Ranch tile · charming",
+   "subject": "hedge bramble",
+   "ask": "a whimsical storybook version of a low sprawling blackberry bramble with arching canes, leaves and dark berries, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.611,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-bramble-charming/ref.jpg",
+    "glb": "/models/ranch-bramble-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.611,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Reads as the same bramble in storybook-toy form: a chubby leaf mound, one fat green cane arching over with big berries hanging, lilac buds dotted through, and berries rolled out on the ground.",
+    "Same footprint ratio, origin, material roles and triangle budget as the normal model, so it drops into the same slot.",
+    "Hero IoU 0.611 against the normal model's 0.619 on its own hero."
+   ],
+   "off": [
+    "The hero's leaf mass right of the arch root (between the arch and the mound) and the top of its wide right flank are fuller than 2k triangles allow; the IoU moves about +-0.01 with the leaf random seed.",
+    "The front ground leaves and berries project a little below the hero's flat bottom edge because the model keeps the normal's 1.06 m depth and the hero looks shallower.",
+    "The hero's half-open rose-like blossoms are simplified to closed rounded buds, and its many small drupelets to faceted lumps; at the tile's size they read as buds and berries.",
+    "In-game width is about 82 % of the normal bramble's (taller box, see Size)."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "Charming rebuild from the normal build.py: mound right of centre, fat cane curling left, ground runner, plump 8-tri leaves, 7-drupelet berries, lilac buds. 1,874 tris."
+    ],
+    [
+     "Round 2.",
+     "Bigger berries and buds, darker leaf greens, fewer light leaves, a leafy crown round the right sprig."
+    ],
+    [
+     "Round 3.",
+     "Berries as lumpy faceted 36-tri balls (round toy berries instead of spiky diamonds); leaf pair above the arch moved left and enlarged."
+    ],
+    [
+     "Round 4.",
+     "Buds rounded into two-ring bulbs (20 tris). Tested box heights 1.20 (0.571) and 1.42 (0.619); kept 1.30."
+    ],
+    [
+     "Round 5.",
+     "Higher right flank of the mound; tried moving the crown right/lower (0.595, reverted)."
+    ],
+    [
+     "Round 6.",
+     "Tried a taller arch (0.600, reverted). Final 768 px / 48 samples; to_game.py bramble-charming."
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "hedge bramble"
+    ],
+    [
+     "Triangles",
+     "1,952"
+    ],
+    [
+     "Size",
+     "2.12 × 1.06 × 1.30 m"
+    ],
+    [
+     "Little extras",
+     "Lilac flower buds in green cups (from the hero), a rounded bead at the cane tips, leaves on little stalks along the arch, and toy-big faceted berries rolled out on the ground."
     ]
    ]
   },
@@ -1469,6 +1647,84 @@
    ]
   },
   {
+   "id": "ranch-clover-charming",
+   "name": "Clover",
+   "style": "charming",
+   "base": "clover",
+   "group": "Ranch tile · charming",
+   "subject": "meadow ground cover",
+   "ask": "a whimsical storybook version of a low patch of pasture clover with round white and pink flower heads, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.79,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-clover-charming/ref.jpg",
+    "glb": "/models/ranch-clover-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.79,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Hero IoU 0.790 at the final 768 px / 48 samples render from the matched camera.",
+    "Reads as the same clover patch at tile size, but toy-like: fewer, bigger, rounder leaves, a crown of big plump pink-and-cream heads nodding outward, and a gentle lean.",
+    "Same materials, mesh names, origin and near-identical footprint ratio as the normal model, so it swaps in place."
+   ],
+   "off": [
+    "Under the harness lighting the head caps read almost white; the hero's heads are a warmer pink-cream with visible ribbed florets. The pink shows mainly on the skirt underneath.",
+    "The hero has about 16 heads, some low in the front leaves; this has 14 (budget), mostly in a crown on top.",
+    "The hero's leaves are denser and smaller relative to the heads than 45 trefoils can give within 1k triangles; the front has a few big flat trefoils.",
+    "Footprint ratio 1.21 vs the normal 1.17 (the lean adds width at the top).",
+    "IoU moves about +/-0.03 with the random seed; kept the normal's seed 23 rather than seed-picking."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "First charming build: 40 trefoils with round puffed 4-tri leaflets (46-56 mm), 15 big spheroid heads (22-27 mm) on bowed 2-segment stems, nod 0.35, lean 0.06. Camera calibrated to yaw 10 / elev 25."
+    ],
+    [
+     "Round 2.",
+     "Straight single-segment stems to free triangles for 45 trefoils, leaves layered higher to hide the core, taller heads (1.3x) with more pink, heads spread wider (0.16 x 0.11 m), 14 heads."
+    ],
+    [
+     "Round 3.",
+     "Lean raised to 0.15 (the hero crowds right), lower, rounder mound (0.11 m), heads 24-29 mm, pinker cream. Taller heads (rise up to 0.16 m) and a wider base were tried and dropped (0.65-0.75)."
+    ],
+    [
+     "Round 4.",
+     "Bigger leaflets (50-60 mm) and a stronger head nod (0.5 rad), kept for charm though nod alone cost 0.002. Final 768 px / 48 samples."
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "meadow ground cover"
+    ],
+    [
+     "Triangles",
+     "1,000"
+    ],
+    [
+     "Size",
+     "0.46 × 0.38 × 0.22 m"
+    ],
+    [
+     "Little extras",
+     "Pink drooping skirt under each head for the pink outer florets; heads nod outward like they are bouncing; the whole patch leans a little, as in the hero."
+    ]
+   ]
+  },
+  {
    "id": "ranch-compost-bay",
    "name": "Compost bay",
    "style": "normal",
@@ -1715,6 +1971,99 @@
     [
      "Little extras",
      "Each petal is bent once so the skirt droops more at the tips, and blooms nod slightly towards the viewer so the orange cones read from the tile's high camera."
+    ]
+   ]
+  },
+  {
+   "id": "ranch-coneflower-charming",
+   "name": "Coneflower",
+   "style": "charming",
+   "base": "coneflower",
+   "group": "Ranch tile · charming",
+   "subject": "meadow flower",
+   "ask": "a whimsical storybook version of a clump of purple coneflowers with drooping pink petals and orange-brown cones, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.801,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-coneflower-charming/ref.jpg",
+    "glb": "/models/ranch-coneflower-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.801,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Hero silhouette IoU 0.801 at 768 px / 48 samples (normal model: 0.729 on its own hero).",
+    "Reads as the same coneflower clump, but chunkier: big orange domes on drooping pink spoon-petal skirts, broad leaves, soft shading.",
+    "Same materials and mesh names as the normal model, so seasons and shading roles behave the same."
+   ],
+   "off": [
+    "The hero's petals are ~15 thin ragged strips per bloom; at 1k triangles each bloom has 7 wide spoon petals, so skirts read as bells up close.",
+    "The hero's leaf mass reaches out to the sides at mid-height; the model's tuft is narrower there (orange slivers on the overlay).",
+    "The harness 3/4 'hero' camera does not match a front-on hero and no turnaround exists, so the official harness score is empty (as for the normal model); hero_check.py is the score.",
+    "A little cast shadow remains under the front of the clump in views/hero.png (it sits inside the leaf mass, so it barely affects IoU)."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "Normal build reshaped: 9 blooms from the charming hero, domed 6-sided cones, wide petals, broad 4-tri leaves, thick stems, lean, smooth shading. Blooms too small, tuft too low."
+    ],
+    [
+     "Round 2.",
+     "Bloom scale 1.1 -> 1.35, deeper droop, tuft up to 0.52 of the height, longer base leaves."
+    ],
+    [
+     "Round 3.",
+     "Looked at it: cones read as balls perched on lampshades. Lower, wider domes, shallower droop with a stronger tip bend, more upright base leaves."
+    ],
+    [
+     "Round 4.",
+     "Bloom scale 1.5, bigger stem leaves, softer tip bend."
+    ],
+    [
+     "Round 5.",
+     "Bloom scale 1.42, droop 42-55, narrower crown at the ground."
+    ],
+    [
+     "Round 6.",
+     "7 spoon petals with a rounded nose instead of 8 square strips (gaps show between petals), base leaves 46 -> 40 to stay under 1k."
+    ],
+    [
+     "Round 7.",
+     "Seed sweep (1, 3, 5, 7, 11, 13 at 256 px): 0.77-0.80, seed 11 kept."
+    ],
+    [
+     "Round 8.",
+     "Longer stem leaves set higher (30-70 %); final 768 px / 48 samples."
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "meadow flower"
+    ],
+    [
+     "Triangles",
+     "979"
+    ],
+    [
+     "Size",
+     "0.58 × 0.43 × 0.74 m"
+    ],
+    [
+     "Little extras",
+     "Rounded spoon-tipped petals and domed seed cones give the toy look; blooms splay outward and the clump leans slightly, so it reads bouncy rather than upright."
     ]
    ]
   },
@@ -3564,6 +3913,91 @@
    ]
   },
   {
+   "id": "ranch-hollyhock-charming",
+   "name": "Hollyhock",
+   "style": "charming",
+   "base": "hollyhock",
+   "group": "Ranch tile · charming",
+   "subject": "garden flower",
+   "ask": "a whimsical storybook version of a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.751,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-hollyhock-charming/ref.jpg",
+    "glb": "/models/ranch-hollyhock-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.751,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Hero IoU 0.751 at 768 px / 48 samples: a tall spire of big round pink cups over a low clump of big round leaves.",
+    "989 triangles, under the 1k flower budget.",
+    "Same materials, names, origin and proportions as the normal hollyhock, so it swaps in place."
+   ],
+   "off": [
+    "Lean kept small: sweeps showed the hero spire is nearly straight (lean 0 scored 0.754, 3.5 cm scored 0.71, 6 cm 0.68), so the charming tilt is mostly in the plump, flared blooms and fat buds rather than in a bent stalk.",
+    "The hero's leaves are distinct discs with veins and visible petioles; mine overlap into one round clump at hero size.",
+    "The hero has small leafy bracts among the buds; mine has only the four small stem leaves, mostly hidden behind the blooms.",
+    "The hero's top blooms show their side (trumpet profile) more often; mine face mostly to the front."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "Charming reshape of the normal build: 11 plump flared blooms, chubby buds, thicker stalk, round leaves, 3.5 cm lean."
+    ],
+    [
+     "Round 2.",
+     "Buds 25 % bigger, leaves 22 % bigger and spread out, smaller and lighter rose throats."
+    ],
+    [
+     "Round 3.",
+     "Leaves lowered and pulled in to the normal footprint (0.60 m); lowest blooms bigger (12.5 cm) and set further out."
+    ],
+    [
+     "Round 4.",
+     "Swept lean (0, -2, 1.5, 3.5, 6 cm), spiral phase and bloom front bias: the hero is nearly straight, lean cut to 1.5 cm; phase 3.0 and front bias 1.5 kept."
+    ],
+    [
+     "Round 5.",
+     "Base leaves turned more to the front (leaf_front 1.4) so they read as round discs; buds 20 % bigger."
+    ],
+    [
+     "Round 6.",
+     "Buds rebuilt from gem-like bipyramids into rounded two-ring buds; stalk 4 segments to stay under 1k. Final 768 px / 48 sample render."
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "garden flower"
+    ],
+    [
+     "Triangles",
+     "989"
+    ],
+    [
+     "Size",
+     "0.60 × 0.33 × 1.45 m"
+    ],
+    [
+     "Little extras",
+     "Forward-curling petal tips, buds shading from pink to green up the tip, and a slight lean."
+    ]
+   ]
+  },
+  {
    "id": "ranch-horse",
    "name": "Horse",
    "style": "normal",
@@ -4274,6 +4708,108 @@
    ]
   },
   {
+   "id": "ranch-marigold-charming",
+   "name": "Marigold",
+   "style": "charming",
+   "base": "marigold",
+   "group": "Ranch tile · charming",
+   "subject": "garden flower",
+   "ask": "a whimsical storybook version of a pot marigold plant clump with bright orange and yellow daisy-like flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.749,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-marigold-charming/ref.jpg",
+    "glb": "/models/ranch-marigold-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.749,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Hero silhouette IoU 0.749 at 768 px / 48 samples from the matched camera (best 384 px round 0.755).",
+    "Reads as the same marigold clump at a glance, but with fewer, much bigger, friendlier blooms and fat spoon leaves.",
+    "Fewer triangles than the normal model (1,060 vs 1,080) and the same material set, so it drops in for the normal one."
+   ],
+   "off": [
+    "The hero's petals are soft, rounded and layered with curled tips; mine are flat-shaded-looking square-tipped cards with clear notches, so up close the blooms read a little like paper pinwheels.",
+    "The hero's foliage fills up to the lower blooms all round; mine is fuller at the bottom and sides but thinner in the middle behind the lower blooms.",
+    "Raising the top bloom to show the hero's bare stem gap cost 0.03 IoU (it narrows the relative width), so the top bloom sits closer to the middle one than in the hero.",
+    "Flower_Petal_Gold keeps its name and role but is now a deep orange (the hero's bloom centres), not gold.",
+    "60 triangles over the 1k plant budget, within the 1.2k allowance used for the normal marigold."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "First charming build from the normal script: 7 flat daisies from the hero, spoon leaves, bowed thick stems, crown lean. 1,135 tris."
+    ],
+    [
+     "Round 2.",
+     "Blooms 30 % bigger, wider amber ring, 3-sided stems, longer and wider rosette and upright leaves, bigger core."
+    ],
+    [
+     "Round 3.",
+     "Bloom x positions fanned out x1.12, blooms a bit bigger, flatter rosette."
+    ],
+    [
+     "Round 4.",
+     "Camera calibrated (flat 12-22 deg; set 18). Longer, flatter rosette and wider fan: the bottom spread too far and the score fell."
+    ],
+    [
+     "Round 5.",
+     "Rosette back to shorter; upright leaves longer and splayed out (28-62 deg) to fill the mid height."
+    ],
+    [
+     "Round 6.",
+     "Blooms back down to the measured heights and smaller (x1.15), 13 outer petals, smaller amber ring and heart, deeper amber, more upright leaves."
+    ],
+    [
+     "Round 7.",
+     "Upright leaves fan mostly left and right (the hero's side leaves at mid height), shorter rosette."
+    ],
+    [
+     "Round 8.",
+     "Under-cone through the petal notches only: 1,242 to 1,060 tris, same silhouette; smooth shading on petals and leaves."
+    ],
+    [
+     "Round 9.",
+     "Tried a taller top bloom with a stem gap (0.725) and a seed sweep (0.717-0.728): reverted, seed 3 kept; X_SPREAD and upright-leaf length sweeps confirmed 1.10 and 0.40-0.56."
+    ],
+    [
+     "Round 10.",
+     "Final 768 px / 48 sample render and hero score; to_game.py marigold-charming."
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "garden flower"
+    ],
+    [
+     "Triangles",
+     "1,060"
+    ],
+    [
+     "Size",
+     "0.31 × 0.25 × 0.31 m"
+    ],
+    [
+     "Little extras",
+     "The whole crown leans gently to one side and the two lowest blooms turn square to the viewer like faces in a picture book (no faces painted on), with oversized petals and puffy spoon leaves for the storybook-toy look."
+    ]
+   ]
+  },
+  {
    "id": "ranch-potting-bench",
    "name": "Potting bench",
    "style": "normal",
@@ -4916,6 +5452,88 @@
     [
      "Little extras",
      "A third, offset ring of gold petals so the head edge reads layered as in the hero, and a green receptacle closing the back of the head for the game's other angles."
+    ]
+   ]
+  },
+  {
+   "id": "ranch-sunflower-charming",
+   "name": "Sunflower",
+   "style": "charming",
+   "base": "sunflower",
+   "group": "Ranch tile · charming",
+   "subject": "garden flower",
+   "ask": "a whimsical storybook version of a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.794,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-sunflower-charming/ref.jpg",
+    "glb": "/models/ranch-sunflower-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.794,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Hero silhouette IoU 0.794 (768 px, 48 samples) from the hero's own direction: head size and placement, the four leaves and the stalk line up.",
+    "Reads as the same sunflower but toy-like: a huge buttery head with a fat orange doughnut centre on a chubby stalk with four big cushion leaves.",
+    "Drops in for the normal one: same parts, materials and roles, same height, within budget at 901 triangles."
+   ],
+   "off": [
+    "The hero's petals are soft, rounded, almost clay-like; mine are 10-triangle faceted cards with a raised midrib, blunter and plumper than the normal ones but still faceted.",
+    "The outer amber petals poke out a little more sharply than the hero's soft outer ring.",
+    "The hero shows no soil; I kept a small dirt mound so the parts and materials match the normal model and the plant sits on the ground.",
+    "Footprint: 0.70 x 0.21 m against the normal 0.58 x 0.23 m. The charming head and leaves are wider, as the hero draws them; it is still a flat, face-forward plant.",
+    "Seed_Brown still matches none of the game's role words (role 'plain'), as in the normal model."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "First build from hero measurements: bigger head with doughnut rim and hollow, three rings of blunt plump petals, four oval leaves, chubbier stalk."
+    ],
+    [
+     "Round 2.",
+     "Leaves up 4-5 cm and faced a little less upward, wider petals, base clamped to z = 0."
+    ],
+    [
+     "Round 3.",
+     "Longer upper-left and low-right leaves, upper-right leaf angled down, low-left leaf lower, head left and back petals longer."
+    ],
+    [
+     "Round 4.",
+     "Upper-left leaf up, low-left leaf lower and more sloped, head a touch left and up."
+    ],
+    [
+     "Round 5.",
+     "Cupped the front and mid petal rings forward with higher midribs for a plumper toy head (IoU flat, reads rounder); final 768 px / 48 sample render."
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "garden flower"
+    ],
+    [
+     "Triangles",
+     "901"
+    ],
+    [
+     "Size",
+     "0.70 × 0.21 × 1.59 m"
+    ],
+    [
+     "Little extras",
+     "A fat toy doughnut rim round the seed hollow and cupped front petals so the head reads puffy, and a flared chubby foot on the stalk."
     ]
    ]
   },
