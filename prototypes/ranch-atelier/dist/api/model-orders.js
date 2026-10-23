@@ -100,7 +100,7 @@ function createHandler({ blob = require('@vercel/blob'), fetcher = fetch, env = 
       if (photo) {
         const me = who(req, env);
         if (!me) return json(res, 401, { error: 'Sign in to send a photo. You can send the words without it.' });
-        if (!await purse().charge(me, PRICES.photoCheck)) return json(res, 402, { error: 'Photo checking has used up its magic for now. Send the words without the photo.' });
+        if (!await purse().charge(me, PRICES.photoCheck, 'Checking a photo')) return json(res, 402, { error: 'Photo checking has used up its magic for now. Send the words without the photo.' });
         const checked = await checkPhoto({ fetcher, env, photo });
         if (!checked.ok) return json(res, 422, { error: checked.reason });
         pg = checked.pg;

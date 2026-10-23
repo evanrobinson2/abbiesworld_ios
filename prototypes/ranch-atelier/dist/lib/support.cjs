@@ -1,10 +1,14 @@
-// Supporters: $5 a month through Stripe buys $4 of real-money AI that month (Evan, 2026-10-23: "they can spend up to $4
-// in game credits, we pocket a dollar"). Credit does not roll over: each paid month resets it to $4 on top of what the
-// player had already spent. See SUPPORT.md.
+// Support: $5, $45 or $80 a month through Stripe (Evan, 2026-10-23 07:21Z: "give 5, 45 and 80"). Each paid month buys
+// AI credit "roughly equal to their payment with a tiny markup": (payment minus Stripe's fee) x 0.9, rounded. Because it
+// buys credit it is a purchase, not a tax-deductible donation. Credit does not roll over: each paid month resets it on
+// top of what the player had already spent. See SUPPORT.md.
 // Stripe is called with plain fetch (no SDK). Nothing is stored about the player beyond the account id we already use,
 // the Stripe customer and subscription ids, and the paid-up date.
 const ROOT='support/v1/';
-const MONTHLY_CENTS=500,CREDIT=4;
+// Monthly amount in dollars -> AI credit that month in dollars.
+const TIERS={5:4,45:39,80:69};
+const MONTHLY_CENTS=500,CREDIT=TIERS[5];
+const tierOf=v=>TIERS[Number(v)]?Number(v):5;
 
 function stripeClient(env,fetcher=fetch){
  const key=env.STRIPE_SECRET_KEY;
@@ -30,12 +34,13 @@ function createSupport({env=process.env,store,fetcher,now=()=>Date.now()}={}){
 
  return {
   ready:!!env.STRIPE_SECRET_KEY,
-  // A Stripe Checkout page for $5 a month, tied to this account.
-  async checkout(a,origin){
+  // A Stripe Checkout page for one of the monthly TIERS, tied to this account.
+  async checkout(a,origin,amount=5){
+   const tier=tierOf(amount);
    const s=await stripe('POST','checkout/sessions',{mode:'subscription',client_reference_id:a.id,
-    line_items:{0:{quantity:1,price_data:{currency:'usd',unit_amount:MONTHLY_CENTS,recurring:{interval:'month'},product_data:{name:"Support Abbie's World",description:'$4 of AI magic in the game each month'}}}},
+    line_items:{0:{quantity:1,price_data:{currency:'usd',unit_amount:tier*100,recurring:{interval:'month'},product_data:{name:`Support Abbie's World: $${tier} a month`,description:`$${TIERS[tier]} of AI magic in the game each month`}}}},
     allow_promotion_codes:'false',billing_address_collection:'auto',
-    metadata:{account:a.id},subscription_data:{metadata:{account:a.id}},
+    metadata:{account:a.id,tier},subscription_data:{metadata:{account:a.id,tier}},
     success_url:`${origin}/support/thanks?session={CHECKOUT_SESSION_ID}`,cancel_url:`${origin}/welcome#support`});
    return s.url;
   },
@@ -46,18 +51,21 @@ function createSupport({env=process.env,store,fetcher,now=()=>Date.now()}={}){
    const sub=s.subscription;if(!['active','trialing'].includes(sub.status))return false;
    const had=await read(a);
    const keep=had?.subscription===sub.id&&had.until>=sub.current_period_end*1000;
-   await write(a,{customer:s.customer,subscription:sub.id,...(keep?{base:had.base,until:had.until}:period(spent,sub.current_period_end))});
+   const tier=tierOf(s.metadata?.tier),credit=TIERS[tier];
+   await write(a,{customer:s.customer,subscription:sub.id,tier,credit,...(keep?{base:had.base,until:had.until}:period(spent,sub.current_period_end))});
    return true;
   },
   // This month's plan: {cap} while paid up, null otherwise. Past the paid-up date it asks Stripe once whether the
-  // next month was paid; if so the credit resets to $4 for the new month.
+  // next month was paid; if so the credit resets for the new month.
   async plan(a,spentNow){
    const rec=a&&await read(a);if(!rec?.subscription)return null;
-   if(now()<rec.until)return {cap:rec.base+CREDIT,until:rec.until};
+   const credit=rec.credit??CREDIT;
+   const tier=rec.tier??5;
+   if(now()<rec.until)return {cap:rec.base+credit,until:rec.until,credit,tier};
    if(rec.ended)return null;
    const sub=await stripe('GET',`subscriptions/${rec.subscription}`).catch(()=>null);
    if(sub&&['active','trialing'].includes(sub.status)&&sub.current_period_end*1000>rec.until){
-    const next={...rec,...period(await spentNow(),sub.current_period_end)};await write(a,next);return {cap:next.base+CREDIT,until:next.until};
+    const next={...rec,...period(await spentNow(),sub.current_period_end)};await write(a,next);return {cap:next.base+credit,until:next.until,credit,tier};
    }
    if(sub&&['canceled','incomplete_expired','unpaid'].includes(sub.status))await write(a,{...rec,ended:true});
    return null;
@@ -75,4 +83,4 @@ function createSupport({env=process.env,store,fetcher,now=()=>Date.now()}={}){
 }
 let shared;
 const support=()=>shared??=createSupport({store:require('./wallet.cjs').blobStore()});
-module.exports={createSupport,support,MONTHLY_CENTS,CREDIT};
+module.exports={createSupport,support,TIERS,MONTHLY_CENTS,CREDIT};

@@ -51,6 +51,18 @@ section:last-child{border-bottom:0}
 .card{background:var(--aw-surface,#fbf8f2);border:1px solid var(--aw-line,#e2d8c6);border-radius:var(--aw-radius,16px);padding:28px}
 .card p{color:var(--aw-soft,#6b5d4c)}
 .card .btn{margin:6px 0 10px}
+.tiers{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 4px}
+.tiers .btn{flex:1 1 120px;flex-direction:column;min-height:72px;margin:0;gap:2px}
+.tiers .btn[hidden]{display:none}
+.tiers b{font-size:22px}
+.tiers small{font-weight:500;opacity:.85;font-size:13px}
+.bill{width:100%;border-collapse:collapse;margin:8px 0 24px;font-size:15px}
+.bill th,.bill td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--aw-line,#e2d8c6)}
+.bill td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bill tr.back td{color:var(--aw-accent2,#2f8b87)}
+.stat{display:flex;flex-wrap:wrap;gap:16px;margin:16px 0 8px}
+.stat div{background:var(--aw-surface,#fbf8f2);border:1px solid var(--aw-line,#e2d8c6);border-radius:var(--aw-radius,16px);padding:16px 20px;min-width:150px}
+.stat b{display:block;font-size:26px}
 
 footer{display:flex;align-items:center;gap:16px;max-width:1120px;margin:0 auto;padding:28px 16px 40px;color:var(--aw-soft,#6b5d4c);font-size:15px}
 footer span:nth-child(2){margin-right:auto;font-weight:500;color:var(--aw-ink,#2b2218)}
@@ -65,7 +77,7 @@ footer span:nth-child(2){margin-right:auto;font-weight:500;color:var(--aw-ink,#2
  section{padding:40px 0}
 }
 
-.thanks,.terms{max-width:760px}
+.thanks,.terms,.billing{max-width:760px}
 .terms h2{font-size:22px;margin-top:1.6em}
 .terms p,.terms li{color:var(--aw-soft,#6b5d4c)}
 .terms ul{padding-left:1.2em}

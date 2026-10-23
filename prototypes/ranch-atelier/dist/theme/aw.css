@@ -89,10 +89,11 @@ html.aw-readable body,html.aw-readable body *:not(svg *):not(.aw-avatar){font-fa
   .aws-body{padding:16px 16px 28px}.aws-styles{grid-template-columns:repeat(2,minmax(0,1fr))}
   .aws-hero{flex-wrap:wrap}
 }
-/* Study pages (html[data-aw-skin~=study]) keep their own layouts; the theme sets their paper, ink and letters. */
-html[data-aw-skin~="study"],html[data-aw-skin~="study"] body{background-color:var(--aw-bg)!important;color:var(--aw-ink)!important}
-html[data-aw-skin~="study"] body{font-family:var(--aw-font)}
-html[data-aw-skin~="study"] :is(h1,h2,h3){font-family:var(--aw-display)!important}
+/* Study pages (html[data-aw-skin~=study]) keep their own layouts; the theme sets their paper, ink and letters,
+   unless the study keeps its own look (data-aw-own-look; Evan 07:25Z "allow studies to overrule the app styling"). */
+html[data-aw-skin~="study"]:not([data-aw-own-look]),html[data-aw-skin~="study"]:not([data-aw-own-look]) body{background-color:var(--aw-bg)!important;color:var(--aw-ink)!important}
+html[data-aw-skin~="study"]:not([data-aw-own-look]) body{font-family:var(--aw-font)}
+html[data-aw-skin~="study"]:not([data-aw-own-look]) :is(h1,h2,h3){font-family:var(--aw-display)!important}
 
 /* App nav (theme/appnav.mjs): a solid side rail that folds to icons; a drawer on phones. */
 html.has-awn{--awn:224px}
