@@ -10,6 +10,11 @@ export const MISSIONS = [
  {id: 'moon', title: 'The Moon Mission', line: 'The whole trip, from the driveway to the far side. Finishing it unlocks the Moon tile.', icon: '🚀', charm: 'rocket', page: '/studies/moon-mission/play.html', at: 'cafe', tint: '#ff7eb6', finale: true}
 ];
 
+// Other threads add their missions here (the Effect hunt and jet cart thread, for one):
+//   window.AbbieDemo.registerMission({id, title, line, icon, charm, at: 'cafe' | 'lab' | 'moon' | (stage) => Object3D,
+//     page: '/path' (the mission game, opened over the board), drive: (mission, stage) => {...} (optional: play it by driving there),
+//     needs: 'moon' (optional), tint, beacon: true (a laser beam into the sky while selected)})
+export const registerMission = x => { const i = MISSIONS.findIndex(y => y.id === x.id); if (i >= 0) MISSIONS[i] = {...MISSIONS[i], ...x}; else MISSIONS.splice(MISSIONS.findIndex(y => y.finale), 0, {tint: '#ffd95a', icon: '⭐', ...x}); };
 export const isDone = m => charmCount(m.charm) > 0;
 export const state = () => { try { return JSON.parse(localStorage.getItem('aw-demo') || '{}') || {}; } catch { return {}; } };
 export const save = patch => { try { localStorage.setItem('aw-demo', JSON.stringify({...state(), ...patch})); } catch {} };
