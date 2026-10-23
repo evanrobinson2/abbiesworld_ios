@@ -126,7 +126,14 @@ export async function start() {
  async function launch(m) {
   closeBoard(); stage.halo(null); picked = null; const where = m.at === 'moon' ? [...stage.tiles.values()].find(t => t.userData.kind === 'moon') : null, spot = where ? where.userData.anchor : stage.spots[m.at] || stage.spots.cafe;
   const go = where ? stage.tileView(where.userData.slot) : stage.spotView(stage.spots[m.at] ? m.at : 'cafe', 55);
-  await sleep(.5); await Promise.all([go, smoke(() => { const f = $('#mission'); f.hidden = false; f.querySelector('iframe').src = m.page; }, stage.project(spot))]);
+  await sleep(.5);
+  // the Moon Mission plays inside the real town (it launches from the café roof pad) and hands the camera back on scene-exit
+  const tw = $('#town').contentWindow;
+  if (m.inTown && tw.AbbieTown?.go) {
+   await go; const back = () => { tw.removeEventListener('abbietown:scene-exit', back); refreshBoard(); drawChest(true); openBoard(); };
+   tw.addEventListener('abbietown:scene-exit', back); tw.AbbieTown.go(m.inTown, {crew: true}); return;
+  }
+  await Promise.all([go, smoke(() => { const f = $('#mission'); f.hidden = false; f.querySelector('iframe').src = m.page; }, stage.project(spot))]);
  }
  $('#mission button').onclick = async () => {
   const f = $('#mission');
