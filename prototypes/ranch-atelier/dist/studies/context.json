@@ -2674,6 +2674,60 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cards-v3/CARDS_V3.md"
         }
       ]
+    },
+    "charms": {
+      "items": [
+        {
+          "k": "canon",
+          "t": "HUD study and information grammar (2x2 plus none)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INFO_MANIFEST.md",
+          "note": "Chest slots diegetic, glints spatial, one engraved count"
+        },
+        {
+          "k": "canon",
+          "t": "Backpack study: charms, earnCharm, keychain limit",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md",
+          "note": "Reads CHARMS and earnedCharms(); moon cheese hang limit of two"
+        },
+        {
+          "k": "canon",
+          "t": "Abbie's Town and the seven-hex region",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/abbietown/ABBIETOWN_STUDY.md",
+          "note": "Zones, hex directions and the centre wedge"
+        },
+        {
+          "k": "canon",
+          "t": "GAME_FEEL.md (nothing masks the world)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/index.html",
+          "note": "Smoke puff limited to the place, not the screen"
+        },
+        {
+          "k": "canon",
+          "t": "Paint the World study (a splash hides the swap)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/paint-world",
+          "note": "Applied to the zoom transition"
+        },
+        {
+          "k": "oracle",
+          "t": "Not consulted this round",
+          "note": "No Oracle record read; Evan's idea (locked card plus locate) was the brief"
+        },
+        {
+          "k": "devblog",
+          "t": "None recorded",
+          "note": "No outside dev blog read this round"
+        },
+        {
+          "k": "design",
+          "t": "None recorded",
+          "note": "No outside design blog read this round"
+        },
+        {
+          "k": "tutorial",
+          "t": "None recorded",
+          "note": "No outside tutorial read this round"
+        }
+      ]
     }
   }
 }
