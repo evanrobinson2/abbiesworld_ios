@@ -3,8 +3,10 @@
 const LOOK_KEY='sandbox-look',DEV_KEYS={enabled:'sandbox-developer',cartoon:'sandbox-cartoon',followZoom:'sandbox-zoom-compensated-detail'};
 export const LOOK_LABELS={tiltShift:'Tilt-shift focus',glow:'Glow',grade:'Colour grade and vignette',haze:'Horizon haze'};
 
-export function loadLook(){let saved={};try{saved=JSON.parse(localStorage.getItem(LOOK_KEY)||'{}')||{};}catch{}return Object.fromEntries(Object.keys(LOOK_LABELS).map(k=>[k,saved[k]!==false]));}
-function saveLook(look){try{localStorage.setItem(LOOK_KEY,JSON.stringify(look));}catch{}}
+// Sandbox v2 keeps the world unmasked (Evan, 2026-10-23): no tilt-shift blur, vignette or horizon haze unless turned on.
+const V2_LOOK={tiltShift:false,glow:true,grade:false,haze:false},isV2=()=>document.documentElement.classList.contains('ui-v2'),lookKey=()=>isV2()?LOOK_KEY+'-v2':LOOK_KEY;
+export function loadLook(){let saved={};try{saved=JSON.parse(localStorage.getItem(lookKey())||'{}')||{};}catch{}return Object.fromEntries(Object.keys(LOOK_LABELS).map(k=>[k,typeof saved[k]==='boolean'?saved[k]:isV2()?V2_LOOK[k]:true]));}
+function saveLook(look){try{localStorage.setItem(lookKey(),JSON.stringify(look));}catch{}}
 
 const toBase64Url=bytes=>btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 const fromBase64Url=text=>Uint8Array.from(atob(text.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
