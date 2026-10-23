@@ -2036,7 +2036,15 @@ renderer.setAnimationLoop(() => {
  if (shown) { const s = spotByID[shown]; tmp.set(X(s.x), s.z + (s.far ? 160 : 26), Z(s.y)).project(camera); bubble.style.left = (tmp.x + 1) / 2 * r.width + 'px'; bubble.style.top = (1 - tmp.y) / 2 * r.height + 'px'; }
 });
 </script>
-<script type="module">import {inventory} from '/simulations/inventory.mjs?v=8'; inventory();</script>
+<script type="module">
+// The weather instrument (chronograph) hangs top left, and Abbie's backpack docks on it (Evan, 2026-10-23: the backpack
+// belongs on the weather instrument). The world clock lights the town by time of day through the renderer's exposure.
+import {mountWorldChrono} from '/simulations/chrono-host.mjs?v=1';
+mountWorldChrono();
+const town = window.AbbieTown, stage = town?.stage;
+const EXPO = h => 0.42 + 0.63 * Math.max(0, Math.sin(Math.PI * (h - 5) / 14)) ** 0.6; // dim from dusk to dawn, the town's own 1.05 at midday
+addEventListener('aw-world-clock', e => { if (stage?.renderer) stage.renderer.toneMappingExposure = EXPO(e.detail.hour) * (e.detail.weather === 'Rain' ? 0.82 : e.detail.weather === 'Cloudy' ? 0.92 : 1); });
+</script>
 
 </body>
 </html>
