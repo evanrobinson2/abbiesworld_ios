@@ -20,8 +20,9 @@
    },
    "good": [],
    "off": [
-    "Re-measured: limb, waist and shoulder widths now trace the pick's mask row by row (the recipe picks the rows and parts). Heavier deltoids fused to the traps, thicker arms, wider neck and jaw, pec shelf and ab folds, briefs cut high at the hip, separate knee bands. Same-camera shots for every round come from figures/shot.py. Still softer and rounder than the pick's crisp folds."
-   ]
+    "Round 3, built part by part from your pick. The head is the pick's folded mask: a crown plateau, and a forehead that overhangs a recessed face panel with a nose ridge down its middle. The cheek planes turn to the side and the jaw closes to a chin flap. The neck is a narrow column with cords and a throat strip. Each hand is a palm, four three-joint fingers and a thumb, relaxed under a flared, flap-cut wrist cuff. The limbs carry a raised front ridge with diagonal folds. The kneecap sits in a V notch on the shin shell. Gaps: the torso and arms are still smoother and boxier than the pick's sharp folds, and the arms lack its biceps and forearm mass."
+   ],
+   "outline": 0.897
   },
   {
    "id": "paper-man-3",
@@ -70,9 +71,9 @@
    },
    "good": [],
    "off": [
-    "Round 2, rebuilt part by part to be THIS character: a faceted face shield with a nose ridge, pointed chin and the hood rim as the face outline; real hands with four curled fingers and a thumb; the tall V collar, folded cups, pleated elbow straps, bracers with flaps, and folds pressed into the legs along the pick's creases. Shoulder caps stay at 65% of the pick, as you asked. Still rough: the leg folds are softer than the pick's, the feet are blocky, and the collar is rougher than the pick's."
+    "Round 2, rebuilt part by part to be THIS character: one faceted egg head with a sharp ridge from the crown through the nose to a pointed chin and the face planes set back from it; real hands with four curled fingers and a thumb; angular faceted legs with a long inner thigh plane, a knee fold plate and a flared shin; low pointed paper feet turned out; forearm guards with a flap plate flaring to the wrist; puffed shoulder caps in a few big fold planes, still at 65% of the pick as you asked. Still rough: fewer small folds than the pick, and the collar is rougher."
    ],
-   "outline": 0.882,
+   "outline": 0.87,
    "scores": [
     {
      "label": "Outline match",
