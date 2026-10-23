@@ -77,6 +77,14 @@
       "faces": 1538,
       "change": "straight leg hip (232,650)->(240,652), knee (213,845)->(220,845) in photo px",
       "lesson": "I read joints off the limb's outer edge; a joint sits on the limb's centre line. A size change that scores flat (head) means the miss is placement."
+    },
+    {
+      "round": 8,
+      "iou": 0.869,
+      "smooth_iou": 0.861,
+      "faces": 1538,
+      "change": "crown (494,324)->(500,338) in photo px; sweep 0.863-0.869",
+      "lesson": "Equal-width blue and orange bands on opposite sides of a part mean it is shifted, not mis-sized: move it toward the orange. Gain +0.012; the next flat rep switches pose."
     }
   ],
   "method": "build.py (bpy 5.2, headless) builds 30 named parts, renders silhouette + shaded from the photo's orthographic camera and exports GLB; parts.py renders each part alone; score.py gives IoU against the private mask.",
