@@ -48,10 +48,59 @@ Then "the early stage": Spore's Cell Stage only.
 Play HUD: one glass pill (about 2% of a phone screen) and a round back button, zero words. Captions are Abbie's inner
 voice at story beats (`memory-kit/inner-voice.mjs`). The scene volunteers its manifest (`cell-pond`).
 
-Tour: yes.
+Tour: yes (the science lab is a whole place to visit, and it shows off the lens and couch play).
 
-## Round 2 (Evan 12:49 PM, in progress)
+## Round 2: the brawl (Evan 12:49 PM)
 "we don't have to fake it with raster, we can just build it. you survive by eating and defending .. 5 levels of
 difficulty, cards for boosts etc. it should have a brawl-ha-ha feeling and multiple players at same time, study for me
 this HUD, look/feel, and redesign the evolution stage from single cell creature to the next stage of life. you win
 when you get off the slide ... you get the tardigrade backpack charm that's the first one."
+
+Nothing is raster: the water is a shader, every creature is procedural SVG rebuilt each frame from a rig, and the
+cards are Cards v3 faces painted in millimetres with vector art.
+
+- **The stage is the drop on the slide** (radius 640). Past the meniscus is dry glass. Surface tension holds a cell in
+  gently near the rim; a big hit carries it past and it "dries", twinkles and buds again in the middle two snacks
+  lighter (Brawlhalla and Smash: push off the edge, don't drain a bar). Players never die from hits; wild cells do.
+- **Heat is the gauge.** Every hit raises a player's heat. The cell glows red (an overlay on the membrane) and its
+  portrait in the corner warms; the hotter it is, the further the next hit sends it. Heat cools slowly. A finishing
+  hit on a hot cell freezes the world for a beat. Defending: dodge with a dash, a Bubble card, or stay in the middle.
+- **Couch multiplayer** (`simulations/couch-input.mjs`): up to four on one screen, touch, two keyboard sets (W A S D
+  + Space + E, arrows + Enter + /) and gamepads (stick, A dash, X card, LB/RB pick). Anyone drops in mid-brawl by
+  pressing a button; they take a rival's seat. Empty seats are rivals played by the goo, so solo play is still a brawl.
+  The camera frames every human player.
+- **Five difficulty levels** are the five goo beakers on the lab shelf: the darker and bubblier, the hungrier the goo.
+  They set rival skill, hunter appetite, how many wild cells, the swirl of the water (3+) and giants (3+).
+- **Five growth stages** inside every game: four as a cell (parts gained on each), the fifth as a tardigrade.
+- **Boost cards** (`simulations/boost-cards.mjs`, faces from `cards/v3/face.mjs`, die-cut): Zoom, Bubble, Mega Chomp,
+  Magnet, Splash, Big Snack. You draw one each time you grow, and card bubbles float in the drop. Hand of three in your
+  corner; tap, E, / or X plays it.
+- **Evolution, redesigned:** the next stage of life after one cell is a real microscopic animal that lives in a drop on
+  a slide: the tardigrade. Filling stage four starts it: the nucleus divides 2, 4, 8, 16 (a cell cluster, the step
+  from one cell to many), the body stretches long, and it becomes a water bear (`tardigradeView` in
+  `microbe-kit.mjs`): eight stubby legs with gold claws that plant and step, a bending segmented body, a round snout.
+  It walks rather than swims: slower, heavier, harder to knock away, and it rams.
+- **Win: get off the slide.** When the first water bear appears, a way off glows gold on the rim of the drop. The first
+  water bear to walk into it climbs off the slide. The lens pulls back to the lab bench, the bear walks off the glass,
+  and the win grants the **tardigrade backpack charm** (`earnCharm('tardigrade')`, `simulations/backpack.mjs`, the first
+  charm in the game) and a gold memory coin (`science-lab:off-the-slide`). If a rival gets off first, "One more go?".
+
+## The HUD and look study (Evan: "study for me this HUD, look/feel")
+Records consulted: Spore Cell Stage (`identity/examples/spore.json`), Super Smash Bros. Ultimate
+(`identity/examples/super-smash-bros-ultimate.json`), Brawlhalla (`games/brawlhalla.json`).
+
+| Game | Body / damage | Progress | Threat | Tools | HUD budget |
+|---|---|---|---|---|---|
+| Spore Cell Stage | small health bar, cell flashes when hit | DNA bar along the bottom | size; giants blurred in the layer below | editor on a separate screen, opened by a mating call | ~8% |
+| Smash Ultimate | one damage % per player along the bottom; fighter smokes and flashes when high | stocks by the portrait | stage edge, charge glows | items in hand | ~6% |
+| Brawlhalla | damage shown as the fighter changing colour (white to red) | stocks | stage edge | weapons on the ground | ~8% |
+| **Ours** | **the cell heats red and wobbles; its portrait warms with it** | **food glows inside the cell; five glass beads by the portrait** | **size, a hunter's narrowed eyes, the light cooling, faster minor music; the drop's rim; giants rise faint first** | **boost cards in your corner (the one overlay we want), parts on the body** | **~2% per player** |
+
+What we took: Brawlhalla's colour-as-damage (wordless, on the character), Smash's "further when hotter" and the
+finishing freeze, Spore's size rule and rising giants. What we refused: numbers (a child reads heat, not 87%), bars,
+and a separate editor screen (parts arrive on the body without stopping the brawl; a single touch player still gets
+two lenses to pick from, with a timer, and the game never pauses).
+
+Each player's corner: a glass pill with a live dot of their cell's colour (it heats as they're hit and shrinks when
+they're off the drop), five growth beads, and (player one) Daddy's coins. Rivals' pills are smaller. Phones stack
+rivals top right. Hands of cards sit low, away from the captions. The back button is a small glass button top centre.

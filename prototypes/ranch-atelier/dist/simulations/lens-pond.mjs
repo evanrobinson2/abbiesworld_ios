@@ -11,12 +11,13 @@
 // - One game signal, `mood` (0 calm to 1 danger), cools the light and dims the sun, the way the music and the cells
 //   change with it (the whole game adapts).
 //   const P = lensPond(canvas, {scale: .75})
-//   P.frame({cam: [x, y], zoom, time, mood, lenses: [[sx, sy, r, glow], ...]})   lenses in CSS pixels, up to 12
+//   P.frame({cam: [x, y], zoom, time, mood, lenses: [[sx, sy, r, glow], ...], arena: [sx, sy, r], exit: [sx, sy, r]})
+//     all in CSS pixels; lenses up to 12; arena is the drop's edge on the slide (dry glass beyond), exit a glowing way off
 //   P.resize()   P.ok (false when WebGL is missing: the page falls back to a CSS gradient)
 const MAX = 12;
 const VERT = `attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
 const FRAG = `precision highp float;
-uniform vec2 uRes,uCam;uniform float uZoom,uTime,uMood,uDpr;uniform vec4 uLens[${MAX}];uniform int uN;
+uniform vec2 uRes,uCam;uniform float uZoom,uTime,uMood,uDpr;uniform vec3 uArena,uExit;uniform vec4 uLens[${MAX}];uniform int uN;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
 float fbm(vec2 p){return n(p)*.55+n(p*2.03+7.1)*.3+n(p*4.1+3.3)*.15;}
@@ -49,6 +50,16 @@ vec3 water(vec2 s){
  vec2 gc=floor(w/120.),gf=w-gc*120.;vec2 go=vec2(h(gc+1.7),h(gc+8.3))*120.;float ft=floor(t*12.)/12.;
  float k=.6+.4*h(gc+vec2(ft,ft*1.3));float gd=length(gf-go);
  col+=vec3(.55,1.,.45)*smoothstep(10.,0.,gd)*.18*k*step(.55,h(gc+2.2));
+ // the edge of the drop on the slide: past the meniscus is dry glass; an exit glows on the rim when it's open
+ if(uArena.z>0.){
+  float ad=length(s-uArena.xy*uDpr)-uArena.z*uDpr,wob=sin(atan(s.y-uArena.y*uDpr,s.x-uArena.x*uDpr)*9.+t*.8)*3.*uDpr;ad+=wob;
+  vec3 glass=vec3(.62,.72,.74)+vec3(.12)*smoothstep(.4,.9,n(s/(220.*uDpr)+t*.02))-vec3(.06)*n(s/(14.*uDpr));
+  glass+=vec3(.25)*smoothstep(.97,1.,sin((s.x+s.y)/(60.*uDpr)));
+  col=mix(col,glass,smoothstep(0.,6.*uDpr,ad));
+  col+=vec3(.75,1.,.95)*exp(-pow(ad/(5.*uDpr),2.))*.55;
+  col=mix(col,col*.78,smoothstep(-40.*uDpr,0.,ad)*step(ad,0.)*.5);
+  if(uExit.z>0.){float ed=length(s-uExit.xy*uDpr);float pulse=.6+.4*sin(t*5.);col+=vec3(1.,.85,.35)*exp(-pow(ed/(uExit.z*uDpr),2.))*.7*pulse;}
+ }
  // a little painted grain over everything
  col*=.93+.12*n(s/(3.*uDpr));
  return col;
@@ -82,7 +93,7 @@ export function lensPond(canvas, {scale = .75} = {}) {
  const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG)); gl.linkProgram(prog); gl.useProgram(prog);
  const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
  const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
- const U = {}; for (const k of ['uRes', 'uCam', 'uZoom', 'uTime', 'uMood', 'uDpr', 'uLens', 'uN']) U[k] = gl.getUniformLocation(prog, k);
+ const U = {}; for (const k of ['uRes', 'uCam', 'uZoom', 'uTime', 'uMood', 'uDpr', 'uLens', 'uN', 'uArena', 'uExit']) U[k] = gl.getUniformLocation(prog, k);
  const lens = new Float32Array(MAX * 4);
  let dpr = 1;
  const P = {ok: true, scale,
@@ -91,12 +102,12 @@ export function lensPond(canvas, {scale = .75} = {}) {
    canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
    gl.viewport(0, 0, canvas.width, canvas.height);
   },
-  frame({cam = [0, 0], zoom = 1, time = 0, mood = 0, lenses = []}) {
+  frame({cam = [0, 0], zoom = 1, time = 0, mood = 0, lenses = [], arena = [0, 0, 0], exit = [0, 0, 0]}) {
    const n = Math.min(MAX, lenses.length); lens.fill(0);
    for (let i = 0; i < n; i++) lens.set(lenses[i].slice(0, 4).concat([0, 0, 0, 0]).slice(0, 4), i * 4);
    gl.uniform2f(U.uRes, canvas.width, canvas.height); gl.uniform2f(U.uCam, cam[0], cam[1]);
    gl.uniform1f(U.uZoom, zoom * dpr); gl.uniform1f(U.uTime, time); gl.uniform1f(U.uMood, mood); gl.uniform1f(U.uDpr, dpr);
-   gl.uniform4fv(U.uLens, lens); gl.uniform1i(U.uN, n);
+   gl.uniform4fv(U.uLens, lens); gl.uniform1i(U.uN, n); gl.uniform3f(U.uArena, ...arena); gl.uniform3f(U.uExit, ...exit);
    gl.drawArrays(gl.TRIANGLES, 0, 3);
   }};
  P.resize();

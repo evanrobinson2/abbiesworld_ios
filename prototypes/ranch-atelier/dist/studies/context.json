@@ -1821,6 +1821,18 @@
      "note": "Ranked Spore first; four size classes as the threat grammar"
     },
     {
+     "k": "oracle",
+     "t": "Super Smash Bros. Ultimate, identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/examples/super-smash-bros-ultimate.json",
+     "note": "Push off the edge, not drain a bar; further when hotter; the finishing freeze"
+    },
+    {
+     "k": "oracle",
+     "t": "Brawlhalla, profile",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=brawlhalla",
+     "note": "Damage shown as the fighter changing colour: our heat"
+    },
+    {
      "k": "devblog",
      "t": "Chris Hecker, How to Animate a Character You've Never Seen Before (GDC 2007)",
      "href": "https://chrishecker.com/How_To_Animate_a_Character_You%27ve_Never_Seen_Before",
@@ -1888,6 +1900,16 @@
      "k": "canon",
      "t": "HUD and information study",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Cards v3 faces (die-cut), reused for boost cards",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/cards/v3/face.mjs"
+    },
+    {
+     "k": "canon",
+     "t": "Gamepad mapping (A, X, LB/RB) kept for couch play",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/gamepad.mjs"
     }
    ],
    "recorded": "2026-10-23, as the study was built"
