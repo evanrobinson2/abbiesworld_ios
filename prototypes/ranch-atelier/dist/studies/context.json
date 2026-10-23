@@ -2633,6 +2633,10 @@
     }
    ],
    "recorded": "2026-10-23, recorded while drafting the roster"
+  },
+  "rigging": {
+   "file": "rigging/context.json",
+   "recorded": "2026-10-23, by the study as it was made"
   }
  }
 }
