@@ -1,0 +1,68 @@
+{
+ "head": {
+  "file": "ref/crops/head.png",
+  "ref_box": [
+   416,
+   31,
+   614,
+   214
+  ],
+  "scale": 3.87879,
+  "to_ref": "ref_col = 416 + u / 3.87879; ref_row = 31 + v / 3.87879"
+ },
+ "chest": {
+  "file": "ref/crops/chest.png",
+  "ref_box": [
+   286,
+   116,
+   774,
+   524
+  ],
+  "scale": 1.57377,
+  "to_ref": "ref_col = 286 + u / 1.57377; ref_row = 116 + v / 1.57377"
+ },
+ "armR": {
+  "file": "ref/crops/armR.png",
+  "ref_box": [
+   231,
+   249,
+   456,
+   696
+  ],
+  "scale": 1.71812,
+  "to_ref": "ref_col = 231 + u / 1.71812; ref_row = 249 + v / 1.71812"
+ },
+ "armL": {
+  "file": "ref/crops/armL.png",
+  "ref_box": [
+   593,
+   248,
+   814,
+   707
+  ],
+  "scale": 1.6732,
+  "to_ref": "ref_col = 593 + u / 1.67320; ref_row = 248 + v / 1.67320"
+ },
+ "hips": {
+  "file": "ref/crops/hips.png",
+  "ref_box": [
+   375,
+   430,
+   660,
+   660
+  ],
+  "scale": 2.69474,
+  "to_ref": "ref_col = 375 + u / 2.69474; ref_row = 430 + v / 2.69474"
+ },
+ "legs": {
+  "file": "ref/crops/legs.png",
+  "ref_box": [
+   330,
+   580,
+   720,
+   1020
+  ],
+  "scale": 1.74545,
+  "to_ref": "ref_col = 330 + u / 1.74545; ref_row = 580 + v / 1.74545"
+ }
+}
