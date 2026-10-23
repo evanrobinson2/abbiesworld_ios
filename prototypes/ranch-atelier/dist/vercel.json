@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/explore",
+      "destination": "/explore/index.html"
+    },
+    {
+      "source": "/explore/",
+      "destination": "/explore/index.html"
+    },
+    {
       "source": "/r2/:path*",
       "destination": "https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev/:path*"
     },
@@ -345,6 +353,15 @@
         }
       ],
       "source": "/manifest.webmanifest"
+    },
+    {
+      "source": "/explore/(.*)\\.(js|css)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -355,8 +372,25 @@
     },
     {
       "source": "/",
-      "destination": "/sandbox",
+      "has": [
+        {
+          "type": "host",
+          "value": "explore.abbies.world"
+        }
+      ],
+      "destination": "/explore",
       "permanent": false
+    },
+    {
+      "source": "/",
+      "destination": "/sandbox",
+      "permanent": false,
+      "missing": [
+        {
+          "type": "host",
+          "value": "explore.abbies.world"
+        }
+      ]
     },
     {
       "source": "/town-life",
