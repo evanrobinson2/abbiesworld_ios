@@ -8,7 +8,6 @@ on:
     inputs:
       jobs: { description: 'Job ids from meshy-queue.json, space separated; "check" only tests the key (free balance call)', required: true }
       rig_only: { description: 'Only remesh + rig heroes whose model already exists', type: boolean, default: false }
-      environment: { description: 'GitHub environment holding the key, if it was saved in one (for example Production)', required: false, default: '' }
 permissions:
   contents: write
 concurrency: { group: meshy-run, cancel-in-progress: false }
@@ -16,23 +15,18 @@ jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 120
-    environment: ${{ inputs.environment }}
     steps:
-      - name: Secret names visible to this job (names only, never values)
-        env:
-          ALL: ${{ toJSON(secrets) }}
-        run: python3 -c "import json,os; print(sorted(k for k in json.loads(os.environ['ALL']) if k != 'github_token'))"
       - uses: actions/checkout@v4
       - name: Run Meshy jobs
         env:
-          MESHY_API_KEY: ${{ secrets.MESHY_API_KEY || secrets.MESHY_KEY || secrets.MESHY_TOKEN || secrets.MESHY || secrets.MESHY_API_TOKEN || vars.MESHY_API_KEY }}
+          MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
           GH_TOKEN: ${{ github.token }}
           JOBS: ${{ inputs.jobs }}
           RIG_ONLY: ${{ inputs.rig_only }}
         run: |
           set -eu
           if [ -z "$MESHY_API_KEY" ]; then
-            echo "No Meshy key reached this job (tried secrets MESHY_API_KEY, MESHY_KEY, MESHY_TOKEN, MESHY, MESHY_API_TOKEN and variable MESHY_API_KEY)."
+            echo "The repository secret MESHY_API_KEY did not reach this job."
             echo "Repository environments (a secret saved inside one of these is not visible here):"
             gh api "repos/$GITHUB_REPOSITORY/environments" -q '.environments[].name' || true
             exit 1
