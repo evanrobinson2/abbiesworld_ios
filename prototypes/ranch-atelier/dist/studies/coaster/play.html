@@ -137,6 +137,15 @@ let car = cars[0];
 const saved = (() => { try { return JSON.parse(localStorage.getItem('aw-coaster') || '{}'); } catch { return {}; } })();
 if (saved.car) car = cars.find(c => c.userData.def.id === saved.car) || car;
 if (saved.paint) car.userData.paint(saved.paint);
+// the toy cars made from free Printables models (models/toy-cars.json) park on a second stage in front of the first
+const modelCars = (async () => { const TM = await opt('/simulations/toy-car-models.mjs'); const list = TM.modelCarList ? await TM.modelCarList() : []; if (!list.length) return;
+  const m = (c, o = {}) => new T.MeshStandardMaterial({color: c, roughness: .5, flatShading: true, ...o}), n = list.length, w = n * 2.9 + 1.4;
+  const stage = new T.Mesh(new T.BoxGeometry(w, .3, 3.6), m('#3a2f4f')); stage.position.set(2.2 + w / 2 - .7, .15, 10.2); stage.receiveShadow = true; stage.name = 'garage stage (free models)'; garage.add(stage);
+  await Promise.all(list.map(async (def, i) => { try { const c = await TM.loadModelCar(T, def); const x = 2.9 + i * 2.9;
+    const pad = new T.Mesh(new T.CylinderGeometry(1.05, 1.1, .1, 20), m(['#ffcf3a', '#3ad1e0', '#ff5d8f', '#9be84c', '#c58bff', '#ff7a14', '#f4ece0', '#1fb6c9'][i % 8])); pad.position.set(x, .35, 10.2); pad.name = 'turntable'; garage.add(pad);
+    c.position.set(x, .4, 10.2); c.rotation.y = Math.PI + .5; c.userData.slot = c.position.clone(); c.userData.slotRot = c.rotation.y; tapProxy(c); scene.add(c); cars.push(c);
+    if (saved.car === def.id && S.mode !== 'ride' && car !== c) { const old = car; old.position.copy(old.userData.slot); old.rotation.set(0, old.userData.slotRot, 0); car = c; parkAtStart(c); if (saved.paint) c.userData.paint(saved.paint); }
+  } catch (e) { console.warn('toy car', def.id, e.message); } })); })();
 
 // the mirror charms: whatever Abbie has earned hangs in front of her, inside whichever car she picks
 const charmRig = new T.Group(); charmRig.name = 'mirror charms';

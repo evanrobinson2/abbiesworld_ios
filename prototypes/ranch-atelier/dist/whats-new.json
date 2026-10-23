@@ -13,6 +13,27 @@
       "link": "/town"
     },
     {
+      "id": "2026-10-23-town-sky",
+      "date": "2026-10-23",
+      "title": "A sky behind Winchester, and the café door",
+      "line": "A soft sky now sits behind the town board and follows the clock, the season and the weather, and tapping the café on Main Street takes you inside.",
+      "image": "/whats-new/2026-10-23-town-sky.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "Abbie's Town",
+      "tour": false
+    },
+    {
+      "id": "2026-10-23-toy-car-coaster-3",
+      "date": "2026-10-23",
+      "title": "Coaster: real toy cars, fire wheels and the town clock",
+      "line": "Four free toy-car models from Printables now park in the coaster garage beside our own six. Win the Toy car charm to unlock fire wheels. Tap during the ride to bring up the clock, and night, clouds and rain light the ride.",
+      "image": "/whats-new/2026-10-23-toy-car-coaster-3.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHBUxVuF2cp3znG1VAyAmzx",
+      "threadTitle": "AW-STUDY-0054 - Toy-car coaster ride",
+      "tour": true,
+      "link": "/town?at=town:skate-park"
+    },
+    {
       "id": "2026-10-23-charm-intro",
       "date": "2026-10-23",
       "title": "The charms light the way in",
