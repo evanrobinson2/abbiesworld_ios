@@ -1,0 +1,44 @@
+{
+ "source": "tools/meshy-heroes/meshy/A1-paint-suit/A1-paint-suit_rigged_character_glb.glb",
+ "out": "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/A1-paint-suit.glb",
+ "tris_before": 30472,
+ "tris": 10000,
+ "height_m": 1.201,
+ "bones": [
+  "root",
+  "hips",
+  "spine",
+  "chest",
+  "neck",
+  "head",
+  "clavicle_L",
+  "upperarm_L",
+  "forearm_L",
+  "hand_L",
+  "clavicle_R",
+  "upperarm_R",
+  "forearm_R",
+  "hand_R",
+  "thigh_L",
+  "shin_L",
+  "foot_L",
+  "thigh_R",
+  "shin_R",
+  "foot_R"
+ ],
+ "faces_per_material": {
+  "skin": 1755,
+  "suit": 5590,
+  "boots": 2134,
+  "hair": 521
+ },
+ "skin_colour": [
+  0.765,
+  0.294,
+  0.216
+ ],
+ "max_weights": 4,
+ "texture_px": 1024,
+ "bytes": 1173076,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/cleanup.py"
+}

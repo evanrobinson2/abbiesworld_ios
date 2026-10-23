@@ -1,0 +1,4 @@
+{
+ "about": "Character Studio reads the Meshy heroes from the Moon Mission folder (one copy of each GLB).",
+ "manifest": "/studies/moon-mission/heroes/heroes.json"
+}

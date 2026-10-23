@@ -1,0 +1,35 @@
+{
+ "job": "A4-paint-tee",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16aa1-38c4-77c7-af19-efdbd8e3feea",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view_front.png",
+    "view_side.png",
+    "view_back.png"
+   ]
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16aa2-aad6-72d6-a982-da89b1df43c7",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16aa1-38c4-77c7-af19-efdbd8e3feea",
+    "height_meters": 1.8
+   }
+  }
+ ],
+ "credits": 35
+}

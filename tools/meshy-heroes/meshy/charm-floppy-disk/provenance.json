@@ -1,0 +1,24 @@
+{
+ "job": "charm-floppy-disk",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/image-to-3d",
+   "task_id": "01a16a97-0511-7577-8309-9e59be80de0c",
+   "credits": 20,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": false,
+    "enable_pbr": false,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 8000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "pick.png"
+   ]
+  }
+ ],
+ "credits": 20
+}

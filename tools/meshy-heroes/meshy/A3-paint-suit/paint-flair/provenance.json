@@ -1,0 +1,18 @@
+{
+ "job": "A3-paint-suit-paint-flair",
+ "tasks": [
+  {
+   "stage": "retexture",
+   "task_id": "01a16a98-10c7-71d1-9475-5c83421c3438",
+   "credits": 10,
+   "params": {
+    "input_task_id": "01a16a40-6b71-766d-b490-a41aba0f1152",
+    "enable_original_uv": true,
+    "enable_pbr": true,
+    "text_style_prompt": "same uniform, hand-painted, scuffed Moon dust on the knees and boots, stitched mission patch on the shoulder, painted orange piping"
+   },
+   "image_style": null
+  }
+ ],
+ "credits": 10
+}

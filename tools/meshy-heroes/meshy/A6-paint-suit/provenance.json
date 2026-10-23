@@ -1,0 +1,47 @@
+{
+ "job": "A6-paint-suit",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16a46-b297-7714-b44d-0c91e0ff5a79",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "topology": "triangle",
+    "target_polycount": 12000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view_front.png",
+    "view_side.png",
+    "view_back.png"
+   ]
+  },
+  {
+   "stage": "remesh",
+   "task_id": "01a16a84-bf04-75f5-83c9-96745fbc4cd7",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a46-b297-7714-b44d-0c91e0ff5a79",
+    "target_formats": [
+     "glb"
+    ],
+    "topology": "triangle",
+    "target_polycount": 30000
+   }
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16a86-2528-73a9-9145-a401c301160a",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a84-bf04-75f5-83c9-96745fbc4cd7",
+    "height_meters": 1.0
+   }
+  }
+ ],
+ "credits": 40
+}

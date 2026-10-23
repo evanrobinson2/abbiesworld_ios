@@ -1,0 +1,36 @@
+{
+ "job": "cs-2-plasticine-inventor",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16a99-951c-7270-a588-0160b206da6e",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view0.jpg",
+    "view1.jpg",
+    "view2.jpg",
+    "view3.jpg"
+   ]
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16a9b-d27e-7735-bd77-988dc1658c54",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a99-951c-7270-a588-0160b206da6e",
+    "height_meters": 1.7
+   }
+  }
+ ],
+ "credits": 35
+}

@@ -1,0 +1,44 @@
+{
+ "source": "tools/meshy-heroes/meshy/A2-clay-suit/A2-clay-suit_rigged_character_glb.glb",
+ "out": "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/A2-clay-suit.glb",
+ "tris_before": 30983,
+ "tris": 10000,
+ "height_m": 1.206,
+ "bones": [
+  "root",
+  "hips",
+  "spine",
+  "chest",
+  "neck",
+  "head",
+  "clavicle_L",
+  "upperarm_L",
+  "forearm_L",
+  "hand_L",
+  "clavicle_R",
+  "upperarm_R",
+  "forearm_R",
+  "hand_R",
+  "thigh_L",
+  "shin_L",
+  "foot_L",
+  "thigh_R",
+  "shin_R",
+  "foot_R"
+ ],
+ "faces_per_material": {
+  "skin": 4391,
+  "suit": 3761,
+  "boots": 903,
+  "hair": 945
+ },
+ "skin_colour": [
+  0.188,
+  0.094,
+  0.024
+ ],
+ "max_weights": 4,
+ "texture_px": 1024,
+ "bytes": 1279456,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/cleanup.py"
+}

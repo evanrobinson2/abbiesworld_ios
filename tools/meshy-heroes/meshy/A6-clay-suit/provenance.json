@@ -1,0 +1,47 @@
+{
+ "job": "A6-clay-suit",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16a46-a569-775f-8ead-4ce122a4e5b8",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "topology": "triangle",
+    "target_polycount": 12000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view_front.png",
+    "view_side.png",
+    "view_back.png"
+   ]
+  },
+  {
+   "stage": "remesh",
+   "task_id": "01a16a82-1761-7405-9ef8-f38250171f05",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a46-a569-775f-8ead-4ce122a4e5b8",
+    "target_formats": [
+     "glb"
+    ],
+    "topology": "triangle",
+    "target_polycount": 30000
+   }
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16a83-cccd-729a-9167-c3928b83fc09",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a82-1761-7405-9ef8-f38250171f05",
+    "height_meters": 1.0
+   }
+  }
+ ],
+ "credits": 40
+}

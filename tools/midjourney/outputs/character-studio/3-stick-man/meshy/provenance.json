@@ -1,0 +1,28 @@
+{
+ "job": "cs-3-stick-man",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16a9a-2448-755b-807e-7f14c24803c8",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view0.jpg",
+    "view1.jpg",
+    "view2.jpg",
+    "view3.jpg"
+   ]
+  }
+ ],
+ "credits": 30,
+ "rig_error": "POST /v1/rigging -> 422 {\"message\":\"Pose estimation failed, please provide a valid model\"}"
+}

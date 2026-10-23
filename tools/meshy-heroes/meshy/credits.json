@@ -1,0 +1,446 @@
+{
+ "cap": 2000,
+ "total": 1260,
+ "log": [
+  {
+   "what": "A1-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:26Z"
+  },
+  {
+   "what": "A1-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:26Z"
+  },
+  {
+   "what": "A3-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:36Z"
+  },
+  {
+   "what": "A2-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:37Z"
+  },
+  {
+   "what": "A1-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:57Z"
+  },
+  {
+   "what": "A2-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:57Z"
+  },
+  {
+   "what": "A1-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:13Z"
+  },
+  {
+   "what": "A4-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:15Z"
+  },
+  {
+   "what": "A2-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:37Z"
+  },
+  {
+   "what": "A4-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:38Z"
+  },
+  {
+   "what": "A2-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:41Z"
+  },
+  {
+   "what": "A5-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:41Z"
+  },
+  {
+   "what": "A4-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:22Z"
+  },
+  {
+   "what": "A5-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:23Z"
+  },
+  {
+   "what": "A4-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:35Z"
+  },
+  {
+   "what": "A6-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:35Z"
+  },
+  {
+   "what": "A5-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:38Z"
+  },
+  {
+   "what": "A6-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:38Z"
+  },
+  {
+   "what": "A6-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:42:33Z"
+  },
+  {
+   "what": "A6-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:42:47Z"
+  },
+  {
+   "what": "A5-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:43:03Z"
+  },
+  {
+   "what": "charm-tardigrade 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:49:28Z"
+  },
+  {
+   "what": "A3-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:15:32Z"
+  },
+  {
+   "what": "A3-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:15:32Z"
+  },
+  {
+   "what": "A3-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:18:18Z"
+  },
+  {
+   "what": "A3-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:18:18Z"
+  },
+  {
+   "what": "A1-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:21:12Z"
+  },
+  {
+   "what": "A1-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:21:12Z"
+  },
+  {
+   "what": "A1-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:24:06Z"
+  },
+  {
+   "what": "A1-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:24:06Z"
+  },
+  {
+   "what": "A2-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:27:00Z"
+  },
+  {
+   "what": "A2-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:27:00Z"
+  },
+  {
+   "what": "A2-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:30:05Z"
+  },
+  {
+   "what": "A2-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:30:05Z"
+  },
+  {
+   "what": "A4-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:32:50Z"
+  },
+  {
+   "what": "A4-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:32:50Z"
+  },
+  {
+   "what": "A4-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:35:35Z"
+  },
+  {
+   "what": "A4-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:35:35Z"
+  },
+  {
+   "what": "A5-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:38:30Z"
+  },
+  {
+   "what": "A5-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:38:30Z"
+  },
+  {
+   "what": "A5-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:41:15Z"
+  },
+  {
+   "what": "A5-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:41:15Z"
+  },
+  {
+   "what": "A6-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:44:32Z"
+  },
+  {
+   "what": "A6-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:44:32Z"
+  },
+  {
+   "what": "A6-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:47:26Z"
+  },
+  {
+   "what": "A6-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:47:26Z"
+  },
+  {
+   "what": "charm-brass-key 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-coffee-cup 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-bub 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-floppy-disk 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-heart 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-moon 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-rocket 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:59Z"
+  },
+  {
+   "what": "charm-star 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:59Z"
+  },
+  {
+   "what": "A3-paint-suit-paint-base retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:08:08Z"
+  },
+  {
+   "what": "A3-paint-suit-paint-flair retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:08:32Z"
+  },
+  {
+   "what": "A3-paint-suit-paint-clay retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:08:43Z"
+  },
+  {
+   "what": "brute1-retexture retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:09:21Z"
+  },
+  {
+   "what": "brute2-retexture retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:09:59Z"
+  },
+  {
+   "what": "cs-1-claymation-adventurer 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:12Z"
+  },
+  {
+   "what": "cs-2-plasticine-inventor 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:12Z"
+  },
+  {
+   "what": "cs-3-stick-man 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:48Z"
+  },
+  {
+   "what": "cs-1-claymation-adventurer rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:07Z"
+  },
+  {
+   "what": "cs-2-plasticine-inventor rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:39Z"
+  },
+  {
+   "what": "cs-3-stick-man rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:44Z"
+  },
+  {
+   "what": "cs-4-80s-action-hero 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:12:57Z"
+  },
+  {
+   "what": "A3-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:12:58Z"
+  },
+  {
+   "what": "A3-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:13:31Z"
+  },
+  {
+   "what": "A3-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:14:43Z"
+  },
+  {
+   "what": "cs-4-80s-action-hero rig",
+   "credits": 5,
+   "at": "2026-10-23T21:14:53Z"
+  },
+  {
+   "what": "A3-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:15:06Z"
+  },
+  {
+   "what": "A1-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:15:37Z"
+  },
+  {
+   "what": "A1-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:15:38Z"
+  },
+  {
+   "what": "A2-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:15:46Z"
+  },
+  {
+   "what": "A1-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:17:13Z"
+  },
+  {
+   "what": "A1-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:17:22Z"
+  },
+  {
+   "what": "A2-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:17:42Z"
+  },
+  {
+   "what": "A2-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:17:53Z"
+  },
+  {
+   "what": "A4-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:18:13Z"
+  },
+  {
+   "what": "A4-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:18:32Z"
+  },
+  {
+   "what": "A2-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:19:38Z"
+  },
+  {
+   "what": "A4-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:19:48Z"
+  },
+  {
+   "what": "A4-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:20:07Z"
+  },
+  {
+   "what": "A5-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:20:34Z"
+  },
+  {
+   "what": "A5-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:20:35Z"
+  }
+ ]
+}
