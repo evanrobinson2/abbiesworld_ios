@@ -14,4 +14,4 @@ Evan paused this study to focus on the coffee shop and modeling. State when paus
   C "The Dial" (sun dial only; hold for a watch face with pause, speed, stopwatch, Now, pin). Leaning B.
 - **Cursor.** `img/hud-K.jpg`: the cursor becomes what it is over; right-click or long-press a place for a glass tag from
   the scene's manifest. Share with AW-STUDY-0018 (camera and controls).
-- **Not done.** The write-up of how stylised games draw forests, Midjourney proofs (queued on the PC), the review inbox item.
+- **Not done.** The write-up of how stylised games draw forests, Midjourney proofs (queued on the PC). (The review inbox was killed; link Evan straight to a page.)
