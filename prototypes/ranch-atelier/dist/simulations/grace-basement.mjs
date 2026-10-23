@@ -119,11 +119,11 @@ export function createBasement() {
  // The disk box: Grace's floppies standing in a smoky box, labels toward the chair, each one higher than the last.
  const diskBox = new T.Group(); diskBox.name = 'disk box'; diskBox.position.set(5.26, D.top, -.94); root.add(diskBox);
  const smoke = M('smoked plastic', {color: '#3a3a40', transparent: true, opacity: .55, roughness: .3});
- box('disk box base', .16, .012, .11, smoke, 0, .006, 0, diskBox); for (const z of [-.055, .055]) box('disk box side', .16, .05, .006, smoke, 0, .025, z, diskBox);
- box('disk box back', .006, .07, .11, smoke, .085, .035, 0, diskBox);
+ box('disk box base', .22, .012, .11, smoke, 0, .006, 0, diskBox); for (const z of [-.055, .055]) box('disk box side', .22, .05, .006, smoke, 0, .025, z, diskBox);
+ box('disk box back', .006, .07, .11, smoke, .115, .035, 0, diskBox);
  const disks = DISKS.map((d, i) => {
   const f = createGraceFloppy({label: diskLabel(d)}); f.name = `disk ${d.id}`; f.userData.disk = d;
-  f.rotation.y = -Math.PI / 2; f.rotation.z = .08; f.position.set(-.055 + i * .036, .048 + i * .022, 0); diskBox.add(f);
+  f.rotation.y = -Math.PI / 2; f.rotation.z = .08; f.position.set(-.085 + i * .03, .048 + i * .016, 0); diskBox.add(f);
   f.userData.home = {p: f.position.clone(), r: f.rotation.clone()}; return f;
  });
 

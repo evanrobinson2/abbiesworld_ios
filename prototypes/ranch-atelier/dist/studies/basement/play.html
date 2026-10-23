@@ -31,9 +31,13 @@ import {inventory} from '/simulations/inventory.mjs';
 import {give as giveMemoryCoin} from '/simulations/memory-coins.mjs';
 
 const q = new URLSearchParams(location.search);
-const fromCafe = q.get('from') === 'cafe';
+const embed = q.has('embed');   // inside another page's iframe (the sandbox's "play while you wait"): the way up tells the parent instead
+const fromCafe = q.get('from') === 'cafe' || embed;
 // Both ways up (the door, and the ending) land in the café diorama, which walks her up the stairs.
 const CAFE_EXIT = '/studies/cafe/diorama.html?from=basement';
+const leave = () => { if (embed) parent.postMessage({type: 'basement', event: 'quit'}, '*'); else location.href = CAFE_EXIT; };
+let paused = false;
+addEventListener('message', e => { const t = e.data?.type; if (t !== 'pause' && t !== 'resume') return; paused = t === 'pause'; try { if (paused) pc.v86?.stop(); else pc.v86?.run(); } catch {} });
 const renderer = new T.WebGLRenderer({antialias: false, powerPreference: 'high-performance'});
 renderer.setPixelRatio(1); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.BasicShadowMap;
 renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
@@ -557,16 +561,17 @@ let last = performance.now(), time = 0, hummed = false, opened = false; const sk
 await Promise.race([Promise.all([document.fonts.load('20px VT323')]), new Promise(r => setTimeout(r, 1500))]);
 const headPos = new T.Vector3();
 function frame(now) {
+ if (paused) { last = now; requestAnimationFrame(frame); return; }
  const rdt = Math.min(.25, (now - last) / 1000), dt = Math.min(.05, rdt); last = now; time += dt;
  // Going back up: through the door, it swings shut... then she can't help it (or, from the café, back up she goes).
  // ...and "I have to know" brings her back to the start: the same dark, the same two choices.
  if (me.goneT) { const s = (now - me.goneT) / 1000; me.gone = s < 1 ? s : s < 3 ? 1 : Math.max(0, 4 - s); U.door.rotation.y = s < 1.2 ? -.42 - s * .6 : s < 3 ? -.05 : -.05 - Math.min(1, s - 3) * .37;
   if (ending.leaving) { me.gone = Math.min(1, s); U.door.rotation.y = s < 1.2 ? -.42 - s * .6 : -1.14 + Math.min(1, (s - 1.2) / .6) * 1.09; if (s > 1.8 && !me.shut) { me.shut = true; SFX.door(); ending.offT = time; } }
-  else { if (s > 1.15 && !me.shut) { me.shut = true; SFX.door(); if (fromCafe) setTimeout(() => { location.href = CAFE_EXIT; }, 600); }
+  else { if (s > 1.15 && !me.shut) { me.shut = true; SFX.door(); if (fromCafe) setTimeout(leave, 600); }
   if (!fromCafe && s > 3 && !me.back) { me.back = true; SFX.door(); say("...but what's down there? I have to know."); } if (!fromCafe && s > 4.2) { me.goneT = 0; me.gone = 0; me.shut = me.back = false; if (!lightsOn()) setTimeout(() => { if (!voice.thought?.choices && !lightsOn()) opening(); }, 2600); } } }
  // The ending: wait for the disk's coin to settle, then the room warms and Daddy calls; at the last, the set powers down.
  if (ending.pending && !ending.called && !rewards.length && !flying.length) { ending.wait += dt; if (ending.wait > 2.2) { ending.pending = false; callDown(); } }
- if (ending.offT) { ending.off = Math.min(1, (time - ending.offT) / 1.6); if (ending.off >= 1 && !ending.home) { ending.home = true; if (!q.has('stay')) setTimeout(() => { location.href = CAFE_EXIT; }, 400); } }
+ if (ending.offT) { ending.off = Math.min(1, (time - ending.offT) / 1.6); if (ending.off >= 1 && !ending.home) { ending.home = true; if (!q.has('stay')) setTimeout(leave, 400); } }
  placeKid(dt);
  for (const w of [...rewards]) if (!w.r.update(rdt)) { rewards.splice(rewards.indexOf(w), 1); w.then(); }
  for (const f of [...flying]) { f.t = Math.min(1, f.t + rdt / f.dur); f.step(f.t); if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done(); } }
@@ -622,6 +627,7 @@ const opening = () => say("It's dark in here... it feels old.", {choices: [
  {label: 'Try the switches', go: toSwitches},
  {label: 'Go back up', go: goBack}]});
 requestAnimationFrame(frame);
+if (embed) parent.postMessage({type: 'basement', event: 'ready'}, '*');
 window.basement = {me, pc, cam, chores, sw, flipToggle, sitDown, standUp, walkTo, glide, insertDisk, giveCoin, ending, headHome, callDown, plugIn, powerSwitch, startWash, scrub: uv => scrub(uv), closeUp, leaveClose, U, say, get kid() { return kid; }, get rigged() { return rigged; }, get time() { return time; }};
 </script>
 </body>

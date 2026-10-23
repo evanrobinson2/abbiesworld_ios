@@ -2,6 +2,7 @@
 ECHO.
 ECHO   DIR              see my files
 ECHO   TYPE README.TXT  read my note
+ECHO   GAMES            my games
 ECHO   KEYSTORM         practise your letters
 ECHO   CLS              clear the screen
 ECHO.
