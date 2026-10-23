@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "feed-store",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/feed-store-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "8c23495c-6def-4ec0-a391-69e57bf047ea",
+      "grid_url": "https://www.midjourney.com/jobs/8c23495c-6def-4ec0-a391-69e57bf047ea?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "36a6948d-61db-467c-920b-195c58372a34",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:40:37.126Z",
+      "grid_done_at": "2026-10-22T20:40:55.129Z",
+      "upscale_clicked_at": "2026-10-22T20:41:08.533Z",
+      "downloaded_at": "2026-10-22T20:42:19.054Z",
+      "pick_reason": "whole shed with sign, sacks, shovel and stone base, cleanest silhouette"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "ac2f778e-0fb3-49be-b84a-e2fe3d9328a4",
+      "grid_url": "https://www.midjourney.com/jobs/ac2f778e-0fb3-49be-b84a-e2fe3d9328a4?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "730f6df9-e921-4b8b-827b-e18be82c74ef",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:42:28.123Z",
+      "grid_done_at": "2026-10-22T20:42:46.125Z",
+      "upscale_clicked_at": "2026-10-22T20:43:00.680Z",
+      "downloaded_at": "2026-10-22T20:44:23.630Z",
+      "pick_reason": "front with door, side, back of the same shed, evenly separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "472a008065599bfacc5e527f0c639e6c57d7732d3018565ae1ae295e50d73f82",
+      "bytes": 3462295,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/36a6948d-61db-467c-920b-195c58372a34/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "ef5410cb4879f50571b63e925cabc45d6e2f04e069cedd53e8a9a930cc0d2b62",
+      "bytes": 6517655,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/730f6df9-e921-4b8b-827b-e18be82c74ef/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "7d33ee11cd6dfeab0e39d7eb5b38ed65c755511d2de64c2df3e744b25b1c96ae",
+      "bytes": 2217976,
+      "pixels": [
+        1016,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/feed-store [('front', 84, 1100), ('side', 1100, 1959), ('back', 1959, 2863)]"
+    },
+    "view_side.png": {
+      "sha256": "a1ed5bde3f55d2c4778e138f03bda14cb2ef5b0079790452199bf79a0b3e3714",
+      "bytes": 1907144,
+      "pixels": [
+        859,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/feed-store [('front', 84, 1100), ('side', 1100, 1959), ('back', 1959, 2863)]"
+    },
+    "view_back.png": {
+      "sha256": "cf3d2776df4df5d1828b4d6aa88207d8bfb4505d4da248a79e887c8f75d6b044",
+      "bytes": 1869263,
+      "pixels": [
+        904,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/feed-store [('front', 84, 1100), ('side', 1100, 1959), ('back', 1959, 2863)]"
+    }
+  }
+}

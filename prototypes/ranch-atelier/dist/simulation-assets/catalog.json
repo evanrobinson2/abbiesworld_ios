@@ -7,7 +7,7 @@
     "state": "planned",
     "json": "/simulation-assets/buildings/shelter-planned.json",
     "glb": "/simulation-assets/buildings/shelter-planned.glb",
-    "triangles": 1504,
+    "triangles": 132,
     "simulationMapping": {
       "buildingIds": [
         "shelter",
@@ -15,7 +15,8 @@
       ],
       "stage": "planned",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "shelter-foundation",
@@ -25,7 +26,7 @@
     "state": "foundation",
     "json": "/simulation-assets/buildings/shelter-foundation.json",
     "glb": "/simulation-assets/buildings/shelter-foundation.glb",
-    "triangles": 1504,
+    "triangles": 372,
     "simulationMapping": {
       "buildingIds": [
         "shelter",
@@ -33,7 +34,8 @@
       ],
       "stage": "foundation",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "shelter-frame",
@@ -43,7 +45,7 @@
     "state": "frame",
     "json": "/simulation-assets/buildings/shelter-frame.json",
     "glb": "/simulation-assets/buildings/shelter-frame.glb",
-    "triangles": 3196,
+    "triangles": 1008,
     "simulationMapping": {
       "buildingIds": [
         "shelter",
@@ -51,7 +53,8 @@
       ],
       "stage": "frame",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "shelter-roof",
@@ -61,7 +64,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/shelter-roof.json",
     "glb": "/simulation-assets/buildings/shelter-roof.glb",
-    "triangles": 6972,
+    "triangles": 4040,
     "simulationMapping": {
       "buildingIds": [
         "shelter",
@@ -69,7 +72,8 @@
       ],
       "stage": "roof",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "shelter-complete",
@@ -79,7 +83,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/shelter-complete.json",
     "glb": "/simulation-assets/buildings/shelter-complete.glb",
-    "triangles": 8268,
+    "triangles": 6428,
     "simulationMapping": {
       "buildingIds": [
         "shelter",
@@ -87,7 +91,8 @@
       ],
       "stage": "complete",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "family-home-planned",
@@ -97,7 +102,7 @@
     "state": "planned",
     "json": "/simulation-assets/buildings/family-home-planned.json",
     "glb": "/simulation-assets/buildings/family-home-planned.glb",
-    "triangles": 1504,
+    "triangles": 396,
     "simulationMapping": {
       "buildingIds": [
         "abbie-home",
@@ -105,7 +110,8 @@
       ],
       "stage": "planned",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "family-home-foundation",
@@ -115,7 +121,7 @@
     "state": "foundation",
     "json": "/simulation-assets/buildings/family-home-foundation.json",
     "glb": "/simulation-assets/buildings/family-home-foundation.glb",
-    "triangles": 1504,
+    "triangles": 1044,
     "simulationMapping": {
       "buildingIds": [
         "abbie-home",
@@ -123,7 +129,8 @@
       ],
       "stage": "foundation",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "family-home-frame",
@@ -133,7 +140,7 @@
     "state": "frame",
     "json": "/simulation-assets/buildings/family-home-frame.json",
     "glb": "/simulation-assets/buildings/family-home-frame.glb",
-    "triangles": 3196,
+    "triangles": 1752,
     "simulationMapping": {
       "buildingIds": [
         "abbie-home",
@@ -141,7 +148,8 @@
       ],
       "stage": "frame",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "family-home-roof",
@@ -151,7 +159,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/family-home-roof.json",
     "glb": "/simulation-assets/buildings/family-home-roof.glb",
-    "triangles": 4152,
+    "triangles": 4642,
     "simulationMapping": {
       "buildingIds": [
         "abbie-home",
@@ -159,7 +167,8 @@
       ],
       "stage": "roof",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "family-home-complete",
@@ -169,7 +178,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/family-home-complete.json",
     "glb": "/simulation-assets/buildings/family-home-complete.glb",
-    "triangles": 7476,
+    "triangles": 6990,
     "simulationMapping": {
       "buildingIds": [
         "abbie-home",
@@ -177,7 +186,8 @@
       ],
       "stage": "complete",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "feed-store-planned",
@@ -187,14 +197,15 @@
     "state": "planned",
     "json": "/simulation-assets/buildings/feed-store-planned.json",
     "glb": "/simulation-assets/buildings/feed-store-planned.glb",
-    "triangles": 1504,
+    "triangles": 168,
     "simulationMapping": {
       "buildingIds": [
         "feed"
       ],
       "stage": "planned",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "feed-store-foundation",
@@ -204,14 +215,15 @@
     "state": "foundation",
     "json": "/simulation-assets/buildings/feed-store-foundation.json",
     "glb": "/simulation-assets/buildings/feed-store-foundation.glb",
-    "triangles": 1504,
+    "triangles": 300,
     "simulationMapping": {
       "buildingIds": [
         "feed"
       ],
       "stage": "foundation",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "feed-store-frame",
@@ -221,14 +233,15 @@
     "state": "frame",
     "json": "/simulation-assets/buildings/feed-store-frame.json",
     "glb": "/simulation-assets/buildings/feed-store-frame.glb",
-    "triangles": 3196,
+    "triangles": 744,
     "simulationMapping": {
       "buildingIds": [
         "feed"
       ],
       "stage": "frame",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "feed-store-roof",
@@ -238,14 +251,15 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/feed-store-roof.json",
     "glb": "/simulation-assets/buildings/feed-store-roof.glb",
-    "triangles": 5280,
+    "triangles": 1984,
     "simulationMapping": {
       "buildingIds": [
         "feed"
       ],
       "stage": "roof",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "feed-store-complete",
@@ -255,14 +269,15 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/feed-store-complete.json",
     "glb": "/simulation-assets/buildings/feed-store-complete.glb",
-    "triangles": 7228,
+    "triangles": 3750,
     "simulationMapping": {
       "buildingIds": [
         "feed"
       ],
       "stage": "complete",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-point-planned",
@@ -272,14 +287,15 @@
     "state": "planned",
     "json": "/simulation-assets/buildings/water-point-planned.json",
     "glb": "/simulation-assets/buildings/water-point-planned.glb",
-    "triangles": 1504,
+    "triangles": 168,
     "simulationMapping": {
       "buildingIds": [
         "water"
       ],
       "stage": "planned",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-point-foundation",
@@ -289,14 +305,15 @@
     "state": "foundation",
     "json": "/simulation-assets/buildings/water-point-foundation.json",
     "glb": "/simulation-assets/buildings/water-point-foundation.glb",
-    "triangles": 1504,
+    "triangles": 216,
     "simulationMapping": {
       "buildingIds": [
         "water"
       ],
       "stage": "foundation",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-point-frame",
@@ -306,14 +323,15 @@
     "state": "frame",
     "json": "/simulation-assets/buildings/water-point-frame.json",
     "glb": "/simulation-assets/buildings/water-point-frame.glb",
-    "triangles": 1692,
+    "triangles": 456,
     "simulationMapping": {
       "buildingIds": [
         "water"
       ],
       "stage": "frame",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-point-roof",
@@ -323,14 +341,15 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/water-point-roof.json",
     "glb": "/simulation-assets/buildings/water-point-roof.glb",
-    "triangles": 3008,
+    "triangles": 768,
     "simulationMapping": {
       "buildingIds": [
         "water"
       ],
       "stage": "roof",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-point-complete",
@@ -340,14 +359,15 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/water-point-complete.json",
     "glb": "/simulation-assets/buildings/water-point-complete.glb",
-    "triangles": 3364,
+    "triangles": 2406,
     "simulationMapping": {
       "buildingIds": [
         "water"
       ],
       "stage": "complete",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "cattle-shelter-planned",
@@ -357,14 +377,15 @@
     "state": "planned",
     "json": "/simulation-assets/buildings/cattle-shelter-planned.json",
     "glb": "/simulation-assets/buildings/cattle-shelter-planned.glb",
-    "triangles": 1504,
+    "triangles": 132,
     "simulationMapping": {
       "buildingIds": [
         "build-cow-*"
       ],
       "stage": "planned",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "cattle-shelter-foundation",
@@ -374,14 +395,15 @@
     "state": "foundation",
     "json": "/simulation-assets/buildings/cattle-shelter-foundation.json",
     "glb": "/simulation-assets/buildings/cattle-shelter-foundation.glb",
-    "triangles": 1504,
+    "triangles": 576,
     "simulationMapping": {
       "buildingIds": [
         "build-cow-*"
       ],
       "stage": "foundation",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "cattle-shelter-frame",
@@ -391,14 +413,15 @@
     "state": "frame",
     "json": "/simulation-assets/buildings/cattle-shelter-frame.json",
     "glb": "/simulation-assets/buildings/cattle-shelter-frame.glb",
-    "triangles": 3196,
+    "triangles": 1200,
     "simulationMapping": {
       "buildingIds": [
         "build-cow-*"
       ],
       "stage": "frame",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "cattle-shelter-roof",
@@ -408,14 +431,15 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/cattle-shelter-roof.json",
     "glb": "/simulation-assets/buildings/cattle-shelter-roof.glb",
-    "triangles": 5280,
+    "triangles": 5220,
     "simulationMapping": {
       "buildingIds": [
         "build-cow-*"
       ],
       "stage": "roof",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "cattle-shelter-complete",
@@ -425,14 +449,15 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/cattle-shelter-complete.json",
     "glb": "/simulation-assets/buildings/cattle-shelter-complete.glb",
-    "triangles": 6952,
+    "triangles": 7580,
     "simulationMapping": {
       "buildingIds": [
         "build-cow-*"
       ],
       "stage": "complete",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "goat-shelter-planned",
@@ -442,14 +467,15 @@
     "state": "planned",
     "json": "/simulation-assets/buildings/goat-shelter-planned.json",
     "glb": "/simulation-assets/buildings/goat-shelter-planned.glb",
-    "triangles": 1504,
+    "triangles": 192,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
       ],
       "stage": "planned",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "goat-shelter-foundation",
@@ -459,14 +485,15 @@
     "state": "foundation",
     "json": "/simulation-assets/buildings/goat-shelter-foundation.json",
     "glb": "/simulation-assets/buildings/goat-shelter-foundation.glb",
-    "triangles": 1504,
+    "triangles": 300,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
       ],
       "stage": "foundation",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "goat-shelter-frame",
@@ -476,14 +503,15 @@
     "state": "frame",
     "json": "/simulation-assets/buildings/goat-shelter-frame.json",
     "glb": "/simulation-assets/buildings/goat-shelter-frame.glb",
-    "triangles": 3196,
+    "triangles": 588,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
       ],
       "stage": "frame",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "goat-shelter-roof",
@@ -493,14 +521,15 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/goat-shelter-roof.json",
     "glb": "/simulation-assets/buildings/goat-shelter-roof.glb",
-    "triangles": 5280,
+    "triangles": 1540,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
       ],
       "stage": "roof",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "goat-shelter-complete",
@@ -510,14 +539,15 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/goat-shelter-complete.json",
     "glb": "/simulation-assets/buildings/goat-shelter-complete.glb",
-    "triangles": 6952,
+    "triangles": 3412,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
       ],
       "stage": "complete",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "chicken-coop-planned",
@@ -527,14 +557,15 @@
     "state": "planned",
     "json": "/simulation-assets/buildings/chicken-coop-planned.json",
     "glb": "/simulation-assets/buildings/chicken-coop-planned.glb",
-    "triangles": 1504,
+    "triangles": 180,
     "simulationMapping": {
       "buildingIds": [
         "build-chicken-*"
       ],
       "stage": "planned",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "chicken-coop-foundation",
@@ -544,14 +575,15 @@
     "state": "foundation",
     "json": "/simulation-assets/buildings/chicken-coop-foundation.json",
     "glb": "/simulation-assets/buildings/chicken-coop-foundation.glb",
-    "triangles": 1504,
+    "triangles": 264,
     "simulationMapping": {
       "buildingIds": [
         "build-chicken-*"
       ],
       "stage": "foundation",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "chicken-coop-frame",
@@ -561,14 +593,15 @@
     "state": "frame",
     "json": "/simulation-assets/buildings/chicken-coop-frame.json",
     "glb": "/simulation-assets/buildings/chicken-coop-frame.glb",
-    "triangles": 3196,
+    "triangles": 600,
     "simulationMapping": {
       "buildingIds": [
         "build-chicken-*"
       ],
       "stage": "frame",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "chicken-coop-roof",
@@ -578,14 +611,15 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/chicken-coop-roof.json",
     "glb": "/simulation-assets/buildings/chicken-coop-roof.glb",
-    "triangles": 4152,
+    "triangles": 1632,
     "simulationMapping": {
       "buildingIds": [
         "build-chicken-*"
       ],
       "stage": "roof",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "chicken-coop-complete",
@@ -595,14 +629,15 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/chicken-coop-complete.json",
     "glb": "/simulation-assets/buildings/chicken-coop-complete.glb",
-    "triangles": 6952,
+    "triangles": 2884,
     "simulationMapping": {
       "buildingIds": [
         "build-chicken-*"
       ],
       "stage": "complete",
       "stageNote": ""
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "kitchen-garden-planned",
@@ -697,7 +732,7 @@
     "state": "idle",
     "json": "/simulation-assets/organics/horse-idle.json",
     "glb": "/simulation-assets/organics/horse-idle.glb",
-    "triangles": 5376,
+    "triangles": 2318,
     "simulationMapping": {
       "species": "horse",
       "activities": [
@@ -707,7 +742,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.567
+    "generationSeconds": 0.567,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "horse-feeding",
@@ -717,7 +753,7 @@
     "state": "feeding",
     "json": "/simulation-assets/organics/horse-feeding.json",
     "glb": "/simulation-assets/organics/horse-feeding.glb",
-    "triangles": 5376,
+    "triangles": 2318,
     "simulationMapping": {
       "species": "horse",
       "activities": [
@@ -730,7 +766,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.204
+    "generationSeconds": 0.204,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "horse-rest",
@@ -740,7 +777,7 @@
     "state": "rest",
     "json": "/simulation-assets/organics/horse-rest.json",
     "glb": "/simulation-assets/organics/horse-rest.glb",
-    "triangles": 5376,
+    "triangles": 2318,
     "simulationMapping": {
       "species": "horse",
       "activities": [
@@ -749,7 +786,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.251
+    "generationSeconds": 0.251,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "cow-idle",
@@ -759,7 +797,7 @@
     "state": "idle",
     "json": "/simulation-assets/organics/cow-idle.json",
     "glb": "/simulation-assets/organics/cow-idle.glb",
-    "triangles": 3864,
+    "triangles": 3166,
     "simulationMapping": {
       "species": "cow",
       "activities": [
@@ -769,7 +807,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.22
+    "generationSeconds": 0.22,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "cow-feeding",
@@ -779,7 +818,7 @@
     "state": "feeding",
     "json": "/simulation-assets/organics/cow-feeding.json",
     "glb": "/simulation-assets/organics/cow-feeding.glb",
-    "triangles": 3864,
+    "triangles": 3166,
     "simulationMapping": {
       "species": "cow",
       "activities": [
@@ -792,7 +831,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.242
+    "generationSeconds": 0.242,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "cow-rest",
@@ -802,7 +842,7 @@
     "state": "rest",
     "json": "/simulation-assets/organics/cow-rest.json",
     "glb": "/simulation-assets/organics/cow-rest.glb",
-    "triangles": 3864,
+    "triangles": 3166,
     "simulationMapping": {
       "species": "cow",
       "activities": [
@@ -811,7 +851,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.284
+    "generationSeconds": 0.284,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "goat-idle",
@@ -821,7 +862,7 @@
     "state": "idle",
     "json": "/simulation-assets/organics/goat-idle.json",
     "glb": "/simulation-assets/organics/goat-idle.glb",
-    "triangles": 4032,
+    "triangles": 1338,
     "simulationMapping": {
       "species": "goat",
       "activities": [
@@ -831,7 +872,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.309
+    "generationSeconds": 0.309,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "goat-feeding",
@@ -841,7 +883,7 @@
     "state": "feeding",
     "json": "/simulation-assets/organics/goat-feeding.json",
     "glb": "/simulation-assets/organics/goat-feeding.glb",
-    "triangles": 4032,
+    "triangles": 1338,
     "simulationMapping": {
       "species": "goat",
       "activities": [
@@ -854,7 +896,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.339
+    "generationSeconds": 0.339,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "goat-rest",
@@ -864,7 +907,7 @@
     "state": "rest",
     "json": "/simulation-assets/organics/goat-rest.json",
     "glb": "/simulation-assets/organics/goat-rest.glb",
-    "triangles": 4032,
+    "triangles": 1338,
     "simulationMapping": {
       "species": "goat",
       "activities": [
@@ -873,7 +916,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.37
+    "generationSeconds": 0.37,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "chicken-idle",
@@ -883,7 +927,7 @@
     "state": "idle",
     "json": "/simulation-assets/organics/chicken-idle.json",
     "glb": "/simulation-assets/organics/chicken-idle.glb",
-    "triangles": 3732,
+    "triangles": 1290,
     "simulationMapping": {
       "species": "chicken",
       "activities": [
@@ -893,7 +937,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.411
+    "generationSeconds": 0.411,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "chicken-feeding",
@@ -903,7 +948,7 @@
     "state": "feeding",
     "json": "/simulation-assets/organics/chicken-feeding.json",
     "glb": "/simulation-assets/organics/chicken-feeding.glb",
-    "triangles": 3732,
+    "triangles": 1290,
     "simulationMapping": {
       "species": "chicken",
       "activities": [
@@ -916,7 +961,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.414
+    "generationSeconds": 0.414,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "chicken-rest",
@@ -926,7 +972,7 @@
     "state": "rest",
     "json": "/simulation-assets/organics/chicken-rest.json",
     "glb": "/simulation-assets/organics/chicken-rest.glb",
-    "triangles": 2388,
+    "triangles": 1290,
     "simulationMapping": {
       "species": "chicken",
       "activities": [
@@ -935,7 +981,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.289
+    "generationSeconds": 0.289,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "tree-standing",
@@ -945,7 +992,7 @@
     "state": "standing",
     "json": "/simulation-assets/organics/tree-standing.json",
     "glb": "/simulation-assets/organics/tree-standing.glb",
-    "triangles": 2016,
+    "triangles": 4906,
     "simulationMapping": {
       "species": "tree",
       "activities": [
@@ -954,7 +1001,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.25
+    "generationSeconds": 0.25,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "tree-stump",
@@ -964,7 +1012,7 @@
     "state": "stump",
     "json": "/simulation-assets/organics/tree-stump.json",
     "glb": "/simulation-assets/organics/tree-stump.glb",
-    "triangles": 840,
+    "triangles": 346,
     "simulationMapping": {
       "species": "tree",
       "activities": [
@@ -973,7 +1021,8 @@
       "kind": "static-pose",
       "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
     },
-    "generationSeconds": 0.116
+    "generationSeconds": 0.116,
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "marley-idle",
@@ -1131,7 +1180,7 @@
     "state": "full",
     "json": "/simulation-assets/supplies/hay-full.json",
     "glb": "/simulation-assets/supplies/hay-full.glb",
-    "triangles": 6400,
+    "triangles": 1976,
     "simulationMapping": {
       "resources": [
         "forage",
@@ -1149,7 +1198,8 @@
       ],
       "stateRule": "stock above midpoint",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "hay-partial",
@@ -1159,7 +1209,7 @@
     "state": "partial",
     "json": "/simulation-assets/supplies/hay-partial.json",
     "glb": "/simulation-assets/supplies/hay-partial.glb",
-    "triangles": 6400,
+    "triangles": 1242,
     "simulationMapping": {
       "resources": [
         "forage",
@@ -1177,7 +1227,8 @@
       ],
       "stateRule": "stock positive below midpoint",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "hay-empty",
@@ -1187,7 +1238,7 @@
     "state": "empty",
     "json": "/simulation-assets/supplies/hay-empty.json",
     "glb": "/simulation-assets/supplies/hay-empty.glb",
-    "triangles": 3964,
+    "triangles": 700,
     "simulationMapping": {
       "resources": [
         "forage",
@@ -1205,7 +1256,8 @@
       ],
       "stateRule": "stock zero",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "hay-carried",
@@ -1215,7 +1267,7 @@
     "state": "carried",
     "json": "/simulation-assets/supplies/hay-carried.json",
     "glb": "/simulation-assets/supplies/hay-carried.glb",
-    "triangles": 764,
+    "triangles": 436,
     "simulationMapping": {
       "resources": [
         "forage",
@@ -1233,7 +1285,8 @@
       ],
       "stateRule": "worker cargo positive",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "ration-full",
@@ -1243,7 +1296,7 @@
     "state": "full",
     "json": "/simulation-assets/supplies/ration-full.json",
     "glb": "/simulation-assets/supplies/ration-full.glb",
-    "triangles": 1736,
+    "triangles": 1260,
     "simulationMapping": {
       "resources": [
         "pig-ration",
@@ -1260,7 +1313,8 @@
       ],
       "stateRule": "stock above midpoint",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "ration-partial",
@@ -1270,7 +1324,7 @@
     "state": "partial",
     "json": "/simulation-assets/supplies/ration-partial.json",
     "glb": "/simulation-assets/supplies/ration-partial.glb",
-    "triangles": 1736,
+    "triangles": 1328,
     "simulationMapping": {
       "resources": [
         "pig-ration",
@@ -1287,7 +1341,8 @@
       ],
       "stateRule": "stock positive below midpoint",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "ration-empty",
@@ -1297,7 +1352,7 @@
     "state": "empty",
     "json": "/simulation-assets/supplies/ration-empty.json",
     "glb": "/simulation-assets/supplies/ration-empty.glb",
-    "triangles": 896,
+    "triangles": 1260,
     "simulationMapping": {
       "resources": [
         "pig-ration",
@@ -1314,7 +1369,8 @@
       ],
       "stateRule": "stock zero",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "ration-carried",
@@ -1324,7 +1380,7 @@
     "state": "carried",
     "json": "/simulation-assets/supplies/ration-carried.json",
     "glb": "/simulation-assets/supplies/ration-carried.glb",
-    "triangles": 1736,
+    "triangles": 1260,
     "simulationMapping": {
       "resources": [
         "pig-ration",
@@ -1341,7 +1397,8 @@
       ],
       "stateRule": "worker cargo positive",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-trough-full",
@@ -1351,7 +1408,7 @@
     "state": "full",
     "json": "/simulation-assets/supplies/water-trough-full.json",
     "glb": "/simulation-assets/supplies/water-trough-full.glb",
-    "triangles": 1792,
+    "triangles": 1182,
     "simulationMapping": {
       "resources": [
         "water"
@@ -1363,7 +1420,8 @@
       ],
       "stateRule": "stock above midpoint",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-trough-partial",
@@ -1373,7 +1431,7 @@
     "state": "partial",
     "json": "/simulation-assets/supplies/water-trough-partial.json",
     "glb": "/simulation-assets/supplies/water-trough-partial.glb",
-    "triangles": 1792,
+    "triangles": 1182,
     "simulationMapping": {
       "resources": [
         "water"
@@ -1385,7 +1443,8 @@
       ],
       "stateRule": "stock positive below midpoint",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-trough-empty",
@@ -1395,7 +1454,7 @@
     "state": "empty",
     "json": "/simulation-assets/supplies/water-trough-empty.json",
     "glb": "/simulation-assets/supplies/water-trough-empty.glb",
-    "triangles": 1316,
+    "triangles": 1180,
     "simulationMapping": {
       "resources": [
         "water"
@@ -1407,7 +1466,8 @@
       ],
       "stateRule": "stock zero",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-bucket-full",
@@ -1417,7 +1477,7 @@
     "state": "full",
     "json": "/simulation-assets/supplies/water-bucket-full.json",
     "glb": "/simulation-assets/supplies/water-bucket-full.glb",
-    "triangles": 6824,
+    "triangles": 1296,
     "simulationMapping": {
       "resources": [
         "water"
@@ -1429,7 +1489,8 @@
       ],
       "stateRule": "stock above midpoint",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-bucket-partial",
@@ -1439,7 +1500,7 @@
     "state": "partial",
     "json": "/simulation-assets/supplies/water-bucket-partial.json",
     "glb": "/simulation-assets/supplies/water-bucket-partial.glb",
-    "triangles": 6824,
+    "triangles": 1296,
     "simulationMapping": {
       "resources": [
         "water"
@@ -1451,7 +1512,8 @@
       ],
       "stateRule": "stock positive below midpoint",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-bucket-empty",
@@ -1461,7 +1523,7 @@
     "state": "empty",
     "json": "/simulation-assets/supplies/water-bucket-empty.json",
     "glb": "/simulation-assets/supplies/water-bucket-empty.glb",
-    "triangles": 6572,
+    "triangles": 1274,
     "simulationMapping": {
       "resources": [
         "water"
@@ -1473,7 +1535,8 @@
       ],
       "stateRule": "stock zero",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "water-bucket-carried",
@@ -1483,7 +1546,7 @@
     "state": "carried",
     "json": "/simulation-assets/supplies/water-bucket-carried.json",
     "glb": "/simulation-assets/supplies/water-bucket-carried.glb",
-    "triangles": 6824,
+    "triangles": 1296,
     "simulationMapping": {
       "resources": [
         "water"
@@ -1495,7 +1558,8 @@
       ],
       "stateRule": "worker cargo positive",
       "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
-    }
+    },
+    "source": "tools/ranch-rebuild"
   },
   {
     "id": "compost-full",

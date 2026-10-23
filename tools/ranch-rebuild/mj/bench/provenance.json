@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "bench",
+  "group": "prop",
+  "replaces": "garden-assets/GF-194.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "aaf33b53-0f4a-48d1-8cac-6a8749a565df",
+      "grid_url": "https://www.midjourney.com/jobs/aaf33b53-0f4a-48d1-8cac-6a8749a565df?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "b4ccbf6e-77fd-4bef-bd10-e56e34c08fd8",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:29:33.127Z",
+      "grid_done_at": "2026-10-22T23:29:51.130Z",
+      "upscale_clicked_at": "2026-10-22T23:30:01.093Z",
+      "downloaded_at": "2026-10-22T23:31:11.791Z",
+      "pick_reason": "thick plank seat on clearly splayed legs with a stretcher, whole bench in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "383043a0-a240-4d9c-8719-3fbba11e95f9",
+      "grid_url": "https://www.midjourney.com/jobs/383043a0-a240-4d9c-8719-3fbba11e95f9?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "eee14c61-29d8-436c-af57-f635f02d1625",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:31:20.873Z",
+      "grid_done_at": "2026-10-22T23:31:38.877Z",
+      "upscale_clicked_at": "2026-10-22T23:31:48.929Z",
+      "downloaded_at": "2026-10-22T23:33:10.797Z",
+      "pick_reason": "long side, end view and three-quarter view in one row; the others stacked views in two rows"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "9b1dfb841a15975fe6716d146e9165f84ffd1f497a1d74da21ae443796e31db8",
+      "bytes": 1801869,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/b4ccbf6e-77fd-4bef-bd10-e56e34c08fd8/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "6abdf05730b106e0b3de35d2996bd9cc926aaa46a60f3f0a58cf8b19552ead8a",
+      "bytes": 2011242,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/eee14c61-29d8-436c-af57-f635f02d1625/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "cf4173f63f26884dda366b77e2e9276020aa33cf73f41195213f7af64a797966",
+      "bytes": 775898,
+      "pixels": [
+        1112,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/bench [('front', 91, 1203), ('side', 1203, 1670), ('back', 1702, 2811)]"
+    },
+    "view_side.png": {
+      "sha256": "b112ccfe5aa6d2365f590ae40c98daa212228fc0712ac31afdffa82eded389b6",
+      "bytes": 369895,
+      "pixels": [
+        467,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/bench [('front', 91, 1203), ('side', 1203, 1670), ('back', 1702, 2811)]"
+    },
+    "view_back.png": {
+      "sha256": "7f7e06a3ec33f198e2726970f37a356a0bc0cf1bb5d578c620ab41f9fab66606",
+      "bytes": 838244,
+      "pixels": [
+        1109,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/bench [('front', 91, 1203), ('side', 1203, 1670), ('back', 1702, 2811)]"
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/tree-standing",
+ "name": "tree-standing",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "the main shade tree",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "f1e389fb-7da4-4fac-895e-dbf850b7e427",
+    "grid_url": "https://www.midjourney.com/jobs/f1e389fb-7da4-4fac-895e-dbf850b7e427?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "f19cd8e5-0c81-4952-a1e8-5444abc18050",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:55:56.312Z",
+    "grid_done_at": "2026-10-22T22:56:14.318Z",
+    "upscale_clicked_at": "2026-10-22T22:56:24.097Z",
+    "downloaded_at": "2026-10-22T22:57:34.731Z",
+    "pick_reason": "flared roots, full rounded crown of clustered leaf clumps in two greens, whole tree in frame"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "f8eefa5f-43b2-4df8-90d3-0a3fa92d79cc",
+    "grid_url": "https://www.midjourney.com/jobs/f8eefa5f-43b2-4df8-90d3-0a3fa92d79cc?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "dfaf9e5f-3cfa-4d76-abd7-de070cc37402",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:57:44.154Z",
+    "grid_done_at": "2026-10-22T22:58:02.159Z",
+    "upscale_clicked_at": "2026-10-22T22:58:13.279Z",
+    "downloaded_at": "2026-10-22T22:59:37.123Z",
+    "pick_reason": "three views at the same scale and spacing, flared roots and clumped crown consistent across views"
+   }
+  },
+  "files": {
+   "hero.png": "e01b8e4c8b276cd2f296ec8d8ed1646fdf8d4209d8a41189b6de1d18f16af174",
+   "turnaround.png": "d274ef01687df6d5fd3bde8f82534742266ea74f65feb51e9db9a0aa00c9fd85",
+   "view_front.png": "f3bc84c23e2cc7a62dc6914607107e7b6f68e15c617e71c0237e65ce5275020e",
+   "view_side.png": "58b325dc399f5490476e1c4cda2bdb60483bc43125be4dc5c76585d0a15e9b75",
+   "view_back.png": "357baba586bc5d48e3b8b84202a6c1dc711e2a6b3834d19a5d63122706a995a4"
+  },
+  "folder": "tools/ranch-rebuild/mj/tree-standing"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/tree-standing/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 11 displaced subdiv-3 icosphere clumps (7 bumps), lofted 5-buttress twisting trunk, 5 limbs and 3 twigs; 4,212 tris, over budget.",
+    "mean_iou": 0.622,
+    "hero_iou": 0.815
+   },
+   {
+    "round": 2,
+    "change": "Decimate 0.8 per clump (3,508 tris), 13 sharper bumps, darker greens, broader buttresses, crown top moved left; hero camera fixed at yaw 0 / elev 6 after a grid search.",
+    "mean_iou": 0.62,
+    "hero_iou": 0.835
+   },
+   {
+    "round": 3,
+    "change": "Lumpier clumps (18 bumps), thicker trunk, fork lowered to 1.65 m with longer limbs so the fork shows, centre clumps lifted.",
+    "mean_iou": 0.583,
+    "hero_iou": 0.813
+   },
+   {
+    "round": 4,
+    "change": "Crown top raised, far-left and far-right clumps pulled in and up.",
+    "mean_iou": 0.61,
+    "hero_iou": 0.81
+   },
+   {
+    "round": 5,
+    "change": "Side clumps back out and down, wider root flare: worse.",
+    "mean_iou": 0.604,
+    "hero_iou": 0.793
+   },
+   {
+    "round": 6,
+    "change": "Grid search of whole-crown stretch/lift (no gain), then a hill-climb on clump positions and radii against the hero mask.",
+    "mean_iou": 0.616,
+    "hero_iou": 0.837
+   },
+   {
+    "round": 7,
+    "change": "Clumps rebuilt as clusters (core + 2 sub-blobs of 80-face icospheres) for a bumpier cauliflower read, re-climbed; rounder root buttresses with a blunt toe ring.",
+    "mean_iou": 0.652,
+    "hero_iou": 0.851
+   },
+   {
+    "round": 8,
+    "change": "Shorter, broader roots (less starfish), crown 30 % deeper front-to-back so it reads from the side, round stump cut and bigger chips, whole model scaled to 6.0 m; final 768 px / 48 samples.",
+    "mean_iou": 0.638,
+    "hero_iou": 0.86
+   },
+   {
+    "round": 9,
+    "change": "Art director round: clump blobs made a coarse dark inner fill (Leaf_Deep) and covered with pointed leaf plates angled out and down (Leaf_Light on top, Leaf_Dark at sides and under), buried plates skipped; 4,906 tris; final 768 px / 48 samples.",
+    "mean_iou": 0.601,
+    "hero_iou": 0.847
+   }
+  ],
+  "what_was_done": [
+   [
+    "Targets",
+    "make_views.py copies the hero and the three sheet views into views/ with the ground removed: the harness mask kept the pale floor strip, grass tufts and cast-shadow streaks under the tree (the hero's mask spanned the full image width at the base). Tree pixels are bark brown or leaf green, far more saturated than the cream floor, so only saturated pixels in the largest connected piece are kept. The sheet views are scored from views/; the sheet draws a narrower, taller tree (h/w 1.34 to 1.52 against the hero's 1.0), so it was used only to check the crown reads from the side and back, and the official mean IoU is low by design."
+   ],
+   [
+    "Hero check",
+    "hero_check.py renders the model with the harness lens from the hero's own direction and scores it against views/hero.png. A yaw/elevation grid search (hero_check.py search) put the best match straight at the front (-Y); I use yaw 0, elevation 6 deg because the hero looks slightly down on the root flare. Clump positions and radii were then tuned with a small hill-climb on this score (160 px renders, moves of 0.2 m / 0.08 m, at most 0.6 m / 0.25 m from the hand layout) and checked by eye."
+   ],
+   [
+    "Crown",
+    "11 leaf clumps laid out from the hero (positions and sizes unchanged since round 8): a big crown-top clump left of centre, a big clump upper right, a top-left and a back-top clump, then front-centre, under-centre, far-left, low-left, far-right, back-left and back-right clumps underneath and at the sides. Round 9 (art director): each clump's blobs are now a coarse 20-face dark inner fill (Leaf_Deep, 0.74 x the old size), covered with pointed 8-triangle leaf plates (about 0.44 m tip to centre in the 6 m model) on fibonacci directions over the old blob surface, tips angled outward and slightly down along the surface and twisted at random, so the clump edges are jagged and leafy. Upward-facing plates are Leaf_Light and side/under plates Leaf_Dark (the top clumps lean light, the lower ones dark); plates buried inside a neighbouring clump are skipped. Approach adapted from the maple's leaf rosettes; materials are double-sided so plates show from below."
+   ],
+   [
+    "Trunk",
+    "One Bark_Brown mesh: a 30-sided lofted trunk to a fork at 1.5 m (scaled), with five root buttresses that twist 70 degrees on the way up and flare out to blunt toes at the ground; five 7-sided limbs (left, up-centre, right, back-left, back-right) curving out into the clumps, plus three twigs, so limbs show in the gap under the crown and between clumps."
+   ],
+   [
+    "Stump",
+    "variants/stump.glb: the same trunk loft cut at 0.66 m with a slight axe slant, the top ring rounded so the cut is a near-round pale disc (Timber_Cut) while the buttress ridges slope away below it, and four wedge chips (Timber_Chip) lying on the ground around it."
+   ],
+   [
+    "Game readiness",
+    "4,906 triangles standing (budget raised to 5k by the art director for leaf plates), 346 stump. Materials: Bark_Brown (timber), Leaf_Light, Leaf_Dark and Leaf_Deep (all foliage, so seasons recolour them), Timber_Cut, Timber_Chip; one material per object (trunk, leaves_light, leaves_dark, crown_fill), flat colours. 6.0 m tall, origin at the trunk base on the ground. to_game.py tree-standing ran clean (scaled x0.361 to the old footprint)."
+   ]
+  ],
+  "creative_additions": "Twisting buttress ridges that spiral up the trunk, a slight axe slant on the stump's cut, and wedge-shaped chips (thick at one edge, thin at the other)."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   6.184044361114502,
+   4.302206516265869,
+   5.913036346435547
+  ],
+  "triangles": 4906,
+  "materials": [
+   "Leaf_Deep",
+   "Leaf_Dark",
+   "Leaf_Light",
+   "Bark_Brown"
+  ],
+  "parts": [
+   {
+    "name": "crown_fill",
+    "materials": [
+     "Leaf_Deep"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_light",
+    "materials": [
+     "Leaf_Light"
+    ]
+   },
+   {
+    "name": "trunk",
+    "materials": [
+     "Bark_Brown"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "standing",
+  "stump"
+ ],
+ "validation": {
+  "outline_iou": 0.601,
+  "hero_iou": 0.847,
+  "per_view": {
+   "front": 0.611,
+   "side": 0.67,
+   "back": 0.523
+  },
+  "triangle_budget": 5000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.86 from the hero's direction: the umbrella crown width, the drooping left and right sides, the high left-of-centre crown top, the visible fork and the root flare all line up.",
+   "Leafy at tile size: jagged leaf-plate edges, yellow-green plates on top over deep-green side and under plates, with a darker inner fill showing between them, on a light-brown trunk.",
+   "The crown is 4.6 m deep, so it reads as a full round crown from the side and back too (checked in the side/back renders), not a flat card.",
+   "Standing and stump come from one build.py (STATE switch via argv) and share the trunk loft, so the stump's roots match the tree's."
+  ],
+  "off": [
+   "Mean IoU against the sheet is only 0.638 (front 0.647, side 0.693, back 0.573): the sheet's tree is much narrower and taller than the hero. Per the art direction the hero wins, so I kept its 1.6:1 spread and did not narrow the crown to chase the sheet.",
+   "The clumps now read as leaves, but with many plates over every clump the separate clump bulges are softer than in round 8 (the crown reads more as one leafy mass with lumps); the hero's leaves are also much smaller and more numerous than 5k triangles allows.",
+   "The hero's trunk splits into two stems that cross over each other before the limbs; mine is one twisting trunk with lobes and a five-way fork. Crossing stems would need more triangles than the budget allows next to the crown.",
+   "Cast-shadow remains: views/hero.png still keeps a thin strip of ground to the left of the roots, which costs a little hero IoU at the base.",
+   "Hero IoU dropped slightly, from 0.86 to 0.847: plates leave small see-through gaps inside the silhouette and soften the clump bulges at the outline."
+  ]
+ },
+ "exports": {
+  "runtime": "tree-standing.glb",
+  "variants": {
+   "standing": "variants/standing.glb",
+   "stump": "variants/stump.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/tree-standing.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/tree-stump.json"
+   ]
+  }
+ },
+ "files": {
+  "tree-standing.glb": {
+   "sha256": "b645a5edb5afd74d8c0e92dcdbcfba753ee018bc0f32855333db217de8802a1b",
+   "bytes": 364472
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "90a5c27f4d3376c9f93f224fd96f55c9ca440555",
+  "path": "tools/ranch-rebuild/models/tree-standing"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

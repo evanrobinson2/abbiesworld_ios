@@ -1,0 +1,306 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/barn-shelter",
+ "name": "barn-shelter",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "general barn / work shelter",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "c2901753-25c3-49a9-9e1b-62cf5dcf63f7",
+    "grid_url": "https://www.midjourney.com/jobs/c2901753-25c3-49a9-9e1b-62cf5dcf63f7?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "fa3c2e7d-5718-4546-9099-f414eb21a304",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:36:15.248Z",
+    "grid_done_at": "2026-10-22T22:36:33.252Z",
+    "upscale_clicked_at": "2026-10-22T22:36:44.523Z",
+    "downloaded_at": "2026-10-22T22:37:56.103Z",
+    "pick_reason": "wide open doorway with workbench inside, hayloft opening, stone foundation, cleanest framing"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "b44c8744-9544-4ee4-8a08-9279e1836c86",
+    "grid_url": "https://www.midjourney.com/jobs/b44c8744-9544-4ee4-8a08-9279e1836c86?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "0d853048-952d-43f1-b282-202cf060a094",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:38:04.549Z",
+    "grid_done_at": "2026-10-22T22:38:22.553Z",
+    "upscale_clicked_at": "2026-10-22T22:38:33.195Z",
+    "downloaded_at": "2026-10-22T22:39:56.043Z",
+    "pick_reason": "front with open doorway and workbench, three-quarter side, closed back; same barn, evenly spaced"
+   }
+  },
+  "files": {
+   "hero.png": "55d09e34a4214c8febeb91b3e19753443c113fe733d7dc50deefc3e50a1c24b3",
+   "turnaround.png": "d53cd2a274edebe2c5af42f931d1b64a6a25c01374bb9648bb66a885d3e555e6",
+   "view_front.png": "a5568d0f108484bb88d5c1e9baeeaf9f80108eb11d0558cab77aef4d94b823f3",
+   "view_side.png": "67a3a8ab4b0bf089f5123bf853bd40983066b123f1cb98b5962fb2fac9ce3e7c",
+   "view_back.png": "4f330f89f3824aedc47c73de5a2e128ac57add5cba165940a134618ca65f23bd"
+  },
+  "folder": "tools/ranch-rebuild/mj/barn-shelter"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/barn-shelter/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 4.0 x 4.4 m, tie beam 2.85 m, 42 deg, doorway recess, bench, tool rack, hayloft, door leaf; views made (all three sheet views; side scored as a 3/4).",
+    "mean_iou": 0.889,
+    "hero_iou": 0.7
+   },
+   {
+    "round": 2,
+    "change": "Swept eave/pitch/depth against hero + sheet: lower and deeper (tie beam 2.6, 40 deg, 4.6 m deep), lintel down to 2.05 m; recalibrated the 3/4 and hero cameras.",
+    "mean_iou": 0.833,
+    "hero_iou": 0.827
+   },
+   {
+    "round": 3,
+    "change": "Heavier ridge beam kicked up at both ends with a 0.55 m front overhang, shorter tie-beam ends, more back overhang, leaf swung closer to the wall, wider footing, stepping stones.",
+    "mean_iou": 0.836,
+    "hero_iou": 0.824
+   },
+   {
+    "round": 4,
+    "change": "Narrower and deeper plan (3.8 x 4.9), 2.0 m doorway and 0.9 m leaf, greyer timber; recalibrated cameras (3/4 at 28 deg, hero at 38 deg).",
+    "mean_iou": 0.857,
+    "hero_iou": 0.846
+   },
+   {
+    "round": 5,
+    "change": "Front braces shortened clear of the door jambs, lighter recess planks, thicker tool handles, deeper hayloft ledge; a sweep of gable overhang, ridge kick, footing and pitch found no further gain.",
+    "mean_iou": 0.857,
+    "hero_iou": 0.846
+   },
+   {
+    "round": 6,
+    "change": "Final 768 px / 48 sample render and score.",
+    "mean_iou": 0.855,
+    "hero_iou": 0.843
+   }
+  ],
+  "what_was_done": [
+   [
+    "Orientation",
+    "Gable end with the open doorway faces -Y; the door leaf hangs on the right jamb, swung outward to lie 10 degrees off the front wall; the back gable is closed."
+   ],
+   [
+    "Views",
+    "All three sheet views are scored (make_views.py cuts the ground band at the stone base and clips the lumber pile the sheet drew beside the corners). The sheet's middle view is not side-on: it is a 3/4 from the front right, so check.py renders it orthographically from 28 deg yaw / 8 deg up instead of using the harness side camera. The hero is scored from its own direction (front gable on the right, -X side on the left, 38 deg yaw, 2 deg up, harness lens) against views/hero.png with the ground shadow streak removed. Angles were grid-calibrated in round 4."
+   ],
+   [
+    "Massing",
+    "3.8 x 4.9 m walls, tie beams at 2.6 m, 40 deg roof, 0.42 m side eaves, 0.32 m front / 0.32 m back gable overhang, heavy ridge beam (0.34 x 0.32) overhanging the front by 0.55 m with both ends kicked up and a strut under the front end; total height about 5 m."
+   ],
+   [
+    "Frame",
+    "Weathered grey-brown corner posts, side and back mid posts, sills, wall plates, tie beams sticking out past the corners, a heavy lintel over 2.0 m door jambs, a collar beam above the hayloft, diagonal corner braces on every wall (knee braces on the gables, top and foot braces on the long sides), and for the frame stage principal rafters, common rafters, ridge beam and purlins."
+   ],
+   [
+    "Craft",
+    "Two-tone rose vertical planks at alternating depths, about 10 courses of individually laid jittered teal shingle tabs with lifted butts and a ridge cap, bargeboards, chunky jittered grey-teal footing stones with a gap and stepping stones at the doorway, a real 0.95 m deep plank-lined recess behind the doorway with a workbench (lower shelf, wood block, iron vise with a wooden jaw), a stump, and a two-rail back-wall rack of hanging saws, hammers, axes and long-handled tools; a dark hayloft opening with a trim frame and a bracketed ledge; the door leaf has ledges, a Z brace, two iron strap hinges and a latch."
+   ],
+   [
+    "Game readiness",
+    "6,428 triangles (budget 9k), 14 meshes, one flat material per mesh named by role (Plank_Rose, Plank_RoseDark, Plank_Interior, Plank_Shadow, Plank_Floor, Timber_Grey, Timber_Bench, Roof_Teal, Stone_Teal, Metal_Iron; Rope_String in the planned stage), no animation. Variants planned/foundation/frame/roof/complete come from the same build.py STATE groups; to_game.py installed them as buildings/shelter-*."
+   ]
+  ],
+  "creative_additions": "A strut under the ridge-beam overhang, stepping stones at the doorway, a stump beside the bench, a latch on the leaf, and a squaring diagonal in the planned stage's string lines."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   5.045421600341797,
+   6.210000038146973,
+   4.994289398193359
+  ],
+  "triangles": 6428,
+  "materials": [
+   "Timber_Bench",
+   "Plank_Rose",
+   "Timber_Grey",
+   "Plank_Floor",
+   "Plank_Interior",
+   "Plank_Shadow",
+   "Metal_Iron",
+   "Plank_RoseDark",
+   "Roof_Teal",
+   "Stone_Teal"
+  ],
+  "parts": [
+   {
+    "name": "bench",
+    "materials": [
+     "Timber_Bench"
+    ]
+   },
+   {
+    "name": "door_leaf",
+    "materials": [
+     "Plank_Rose"
+    ]
+   },
+   {
+    "name": "door_ledges",
+    "materials": [
+     "Timber_Grey"
+    ]
+   },
+   {
+    "name": "floor",
+    "materials": [
+     "Plank_Floor"
+    ]
+   },
+   {
+    "name": "interior",
+    "materials": [
+     "Plank_Interior"
+    ]
+   },
+   {
+    "name": "interior_shadow",
+    "materials": [
+     "Plank_Shadow"
+    ]
+   },
+   {
+    "name": "iron",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "loft_trim",
+    "materials": [
+     "Timber_Grey"
+    ]
+   },
+   {
+    "name": "plank_walls",
+    "materials": [
+     "Plank_Rose"
+    ]
+   },
+   {
+    "name": "plank_walls_dark",
+    "materials": [
+     "Plank_RoseDark"
+    ]
+   },
+   {
+    "name": "roof_shingles",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "roof_timbers",
+    "materials": [
+     "Timber_Grey"
+    ]
+   },
+   {
+    "name": "stone_footing",
+    "materials": [
+     "Stone_Teal"
+    ]
+   },
+   {
+    "name": "timber_frame",
+    "materials": [
+     "Timber_Grey"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "complete",
+  "foundation",
+  "frame",
+  "planned",
+  "roof"
+ ],
+ "validation": {
+  "outline_iou": 0.861,
+  "hero_iou": 0.843,
+  "per_view": {
+   "front": 0.897,
+   "side": 0.834,
+   "back": 0.852
+  },
+  "triangle_budget": 9000,
+  "within_budget": true,
+  "good": [
+   "Front gable IoU 0.897 and back 0.852 against the sheet; the 3/4 sheet view 0.816 and the hero 0.843 from their own directions.",
+   "At small size the big teal roof, the kicked ridge beam, the dark open doorway with the bench inside, the stone base and the dark hayloft square all read.",
+   "Construction stages read as a sequence: stakes and string lines, footing with plank floor, full timber frame with rafters, roof on the open frame, finished barn."
+  ],
+  "off": [
+   "The sheet draws a taller, narrower barn than the hero (front ridge/width about 1.24 vs about 1.1). Round 1 matched the sheet (mean 0.889) but the hero fell to 0.70; the final proportions favour the hero, so the front and back views lose a few points at the side walls and apex.",
+   "The hero's ridge beam bows along its length; mine is three straight segments with raised ends.",
+   "The hero shows the door leaf in the plane of the opening; per the brief it is hung open outward to the right, nearly flat against the front wall.",
+   "The hanging tools are simple sticks and blocks and only read as a busy rack at game size.",
+   "Stones are plain jittered blocks, not rounded cobbles.",
+   "Scores come from check.py (custom 3/4 and hero cameras, calibrated on the model), so they are a guide; the plain harness score (side camera side-on) is 0.861 mean."
+  ]
+ },
+ "exports": {
+  "runtime": "barn-shelter.glb",
+  "variants": {
+   "complete": "variants/complete.glb",
+   "foundation": "variants/foundation.glb",
+   "frame": "variants/frame.glb",
+   "planned": "variants/planned.glb",
+   "roof": "variants/roof.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-planned.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-foundation.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-frame.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-roof.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-complete.json"
+   ]
+  }
+ },
+ "files": {
+  "barn-shelter.glb": {
+   "sha256": "c5fd359430f2b5990047c8ada5835e66a2493aa3d2a6b9df28d2c3dbf781e306",
+   "bytes": 357868
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "50e4d831eec1cc46e317470e7e909ac25d473c83",
+  "path": "tools/ranch-rebuild/models/barn-shelter"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

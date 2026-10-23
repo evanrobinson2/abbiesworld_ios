@@ -1,0 +1,86 @@
+{
+ "what_i_did": [
+  [
+   "Views",
+   "views/ are the harness masks with the ground cut away: the sheet's painted ground strip and long cast shadow run the full width of every view, so each sheet target is cut where the trunk meets the pad; in the hero only the small grass pad's columns are kept below that line (make_views.py). The three sheet views are used as labelled."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py renders from the hero's own direction, nearly level (8 deg up) instead of the harness's steep hero camera, and scores against views/hero.png. A yaw/elevation calibration grid was flat (+-0.01), since a round crown looks alike from every side."
+  ],
+  [
+   "Trunk",
+   "A 9-sided tube swept along a Catmull-Rom S-curve measured on the hero (left at the base, a strong bend right at 0.9 m, back to the centre at 1.5 m), with a depth spiral, a 3-lobed cross-section that twists 1.6 turns up its length, and a flared foot. Four 6-sided twisting limbs fan out from the top of the trunk into the crown and show under its rim."
+  ],
+  [
+   "Crown",
+   "A domed outline measured on the hero (3.5 m wide, z 1.45 to 3.9 m, widest at 2.1 m, slightly drooping skirt), filled with 32 jittered faceted leaf-cluster tufts (icosahedra, Leaf_Dark and Leaf_Light) over two inner core blobs, then 330 pointed folded leaf cards spread evenly by area over the surface and leaning out and up, which make the jagged edge."
+  ],
+  [
+   "Apples",
+   "46 chunky faceted apples (squashed icosahedra, 0.26 to 0.32 m across, Fruit_Red) sit half out of the crown surface all over it, plus a hanging cluster of 5 on short stems below the right-hand rim as in the hero, and one on the left."
+  ],
+  [
+   "Game readiness",
+   "2,980 triangles (budget 3k), 8 meshes, one flat material each: Bark_Brown, Leaf_Dark, Leaf_Light, Fruit_Red, Grass_Green. 4.0 m tall, origin at the trunk base on the ground. No animation. to_game.py apple-tree ran cleanly (GF-153.glb and the catalogs updated)."
+  ]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.824: the umbrella dome, the S-curved trunk and the hanging apple cluster on the right all line up.",
+  "The red apples read clearly against the two greens at small size; the crown edge is jagged with leaf tips, not a smooth ball.",
+  "Under budget at 2,980 triangles, mostly spent on the crown silhouette (tufts and leaf cards) and the apples."
+ ],
+ "off": [
+  "The sheet's three trees are taller and narrower (height/width 1.2 to 1.33) than the hero's crown (about 1.09) and each leans its own way, so they are not views of one tree. Per the AD the hero wins, which caps the sheet views at about 0.66 to 0.74.",
+  "The hero's crown is hundreds of small individual leaves; mine is faceted tufts with 330 leaf cards, so the flat facets of the tufts still show between leaves close up.",
+  "The hero's trunk is a thick, gnarled, partly split S with a knot; mine is a single lobed twisting tube with a softer S.",
+  "The hero has about 80 apples; I kept to the AD's 30 to 50 (46 plus 6 hanging) to stay in budget.",
+  "The hero camera yaw is not identifiable for a round tree, so the trunk was laid out for yaw 0 (the orientation that scored best on the sheet), and the hero number is a guide."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build: S-trunk from hero measurements, 20 smooth subdiv-2 blobs on a measured dome outline, 150 leaf cards, 40 apples, grass pad. Apples were buried in the blobs; 3,508 tris.",
+   "mean_iou": 0.708,
+   "hero_iou": 0.805
+  },
+  {
+   "round": 2,
+   "change": "Blobs swapped for 36 faceted icosahedron tufts sitting inside the outline, 320 leaf cards, apples moved onto the surface, crown underside raised, trunk clamped at z 0. 3,028 tris.",
+   "mean_iou": 0.702,
+   "hero_iou": 0.813
+  },
+  {
+   "round": 3,
+   "change": "Bigger apples (0.13 to 0.16 m radius, 48), inner core blob raised out of the trunk gap, darker greens, hanging apples moved to the hero's right.",
+   "mean_iou": 0.698,
+   "hero_iou": 0.809
+  },
+  {
+   "round": 4,
+   "change": "Hanging cluster lower and further in (6 apples).",
+   "mean_iou": 0.697,
+   "hero_iou": 0.812
+  },
+  {
+   "round": 5,
+   "change": "Stronger trunk lobes, limbs lowered so they show under the crown, 330 bigger leaf cards laid more along the surface.",
+   "mean_iou": 0.695,
+   "hero_iou": 0.817
+  },
+  {
+   "round": 6,
+   "change": "Stronger S in the lower trunk; orientation scan over 8 yaws (0.664 to 0.702 mean), picked yaw 0.",
+   "mean_iou": 0.702,
+   "hero_iou": 0.828
+  },
+  {
+   "round": 7,
+   "change": "Final 768 px / 48 sample render and score; to_game.py apple-tree.",
+   "mean_iou": 0.702,
+   "hero_iou": 0.824
+  }
+ ],
+ "moving_parts": "None. The game poses and recolours the tree itself (leaf and grass materials follow the seasons).",
+ "creative_additions": "Short brown stems on the hanging apples, a ragged grass pad with a few blades at the trunk foot, and the limbs peeking out under the crown rim."
+}

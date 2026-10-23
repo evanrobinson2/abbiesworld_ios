@@ -1,0 +1,215 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/sunflower",
+ "name": "sunflower",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "5a446795-909c-4550-9ac3-86e8cbe64313",
+    "grid_url": "https://www.midjourney.com/jobs/5a446795-909c-4550-9ac3-86e8cbe64313?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "fc756828-9db3-4549-a053-db630b16d678",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:51:17.889Z",
+    "grid_done_at": "2026-10-22T23:51:35.891Z",
+    "upscale_clicked_at": "2026-10-22T23:51:45.594Z",
+    "downloaded_at": "2026-10-22T23:52:54.273Z",
+    "pick_reason": "big face-on flower head, broad leaves on a sturdy stem, centered and whole"
+   }
+  },
+  "files": {
+   "hero.png": "63bda55161c3ebb48681fbb6717a5d03010a6288aeb94e593bff6f3d873f749b"
+  },
+  "folder": "tools/ranch-rebuild/mj/sunflower"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/sunflower/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build from hero measurements (6 leaves, 2 petal rings, disc, wavy stalk, dirt patch); fixed a petiole midpoint bug that spiked the bounds.",
+    "mean_iou": 0.682
+   },
+   {
+    "round": 2,
+    "change": "Leaves re-placed from the overlay: upper-right up and flatter, upper-left lower and further out, right leaf back up, left leaf lower; thicker stalk; flatter wider soil.",
+    "mean_iou": 0.737
+   },
+   {
+    "round": 3,
+    "change": "Less droop on the side leaves, wider upper-left leaf, head shifted left; stalk and soil shifted left to match the hero's offset.",
+    "mean_iou": 0.76
+   },
+   {
+    "round": 4,
+    "change": "Third petal ring, broader petals, darker leaf green and deeper gold, flatter disc dip, coarser stalk to stay in budget.",
+    "mean_iou": 0.762
+   },
+   {
+    "round": 5,
+    "change": "Head petals slightly shorter (a longer head lost 0.04), right leaf more horizontal, front leaf right; seed sweep showed +-0.003 noise.",
+    "mean_iou": 0.797
+   },
+   {
+    "round": 6,
+    "change": "Uniform scale to the old GLB's 1.585 m height, base clamped to z = 0; final 768 px / 48 sample render and hero check.",
+    "mean_iou": 0.791
+   }
+  ],
+  "what_was_done": [
+   [
+    "Views",
+    "No turnaround for this job, so it is scored on the hero alone. make_views.py keys the hero against both edges of the backdrop and drops the soft grey ground shadow (near the ground only saturated pixels in a band round the stalk are kept), giving views/hero.png."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders front-on, 5 deg up, with the harness lens (YAW 0, ELEV 5), as the hero is drawn nearly level. A calibration grid over yaw -20..20 and elevation 0..12 put yaw 0 / elev 0-5 at the top, so the direction was held there."
+   ],
+   [
+    "Stalk",
+    "One 6-sided faceted tube (Stem_Green) along a slightly wavy centreline taken from the hero, radius 3.4 cm at the base tapering to 2.4 cm under the head, standing on a 9-sided irregular, slightly domed dirt patch (Soil_Dirt) about 30 x 22 cm."
+   ],
+   [
+    "Leaves",
+    "Six heart-shaped leaf cards (Leaf_Green, 18 triangles each, double-sided) with lobes reaching back past the petiole, folded along a centre crease and drooping towards the tip, on short 3-sided petioles. Placed from the hero: upper right just under the head, a big front-facing upper-left leaf with a smaller one behind it, a right leaf mid-stalk, a left leaf below it and a front leaf low down, all turned to face the viewer and a little up."
+   ],
+   [
+    "Head",
+    "A face-forward head tilted 8 deg down, about 0.53 m across (a third of the height): a 12-sided Seed_Brown disc with a raised rim, a shallow trough and a low dome; three rings of pointed, ridged petals (8 triangles each: a raised midrib and a faceted tip), 22 Petal_Amber behind and 20 + 20 Petal_Gold in front with alternating offsets, so the edge reads as layered petals; a green receptacle cone closes the back where the stalk enters."
+   ],
+   [
+    "Game readiness",
+    "905 triangles (budget 1k), 7 meshes, one flat material each: Stem_Green, Leaf_Green, Petal_Gold, Petal_Amber, Seed_Brown, Soil_Dirt. The plant is scaled so its top sits at 1.585 m like GF-567.glb (to_game copies the GLB with no rescale); 0.58 x 0.23 x 1.585 m, origin at the base on the ground. No animation, no variants (plant group)."
+   ]
+  ],
+  "creative_additions": "A third, offset ring of gold petals so the head edge reads layered as in the hero, and a green receptacle closing the back of the head for the game's other angles."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.578727126121521,
+   0.22950531542301178,
+   1.5855679512023926
+  ],
+  "triangles": 905,
+  "materials": [
+   "Leaf_Green",
+   "Petal_Amber",
+   "Petal_Gold",
+   "Seed_Brown",
+   "Soil_Dirt",
+   "Stem_Green"
+  ],
+  "parts": [
+   {
+    "name": "leaves",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "petals_back",
+    "materials": [
+     "Petal_Amber"
+    ]
+   },
+   {
+    "name": "petals_front",
+    "materials": [
+     "Petal_Gold"
+    ]
+   },
+   {
+    "name": "petals_mid",
+    "materials": [
+     "Petal_Gold"
+    ]
+   },
+   {
+    "name": "seed_disc",
+    "materials": [
+     "Seed_Brown"
+    ]
+   },
+   {
+    "name": "soil",
+    "materials": [
+     "Soil_Dirt"
+    ]
+   },
+   {
+    "name": "stem",
+    "materials": [
+     "Stem_Green"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.791,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.79 with a matched front-on camera: the head size and height, the stalk and the alternating leaf placement line up with the hero almost leaf for leaf.",
+   "Reads as a sunflower at a glance: a big gold disc of layered petals with a dark centre on a tall green stalk with broad hearts of leaves.",
+   "Within budget at 905 triangles, most of it on the petals (496) and leaves and petioles."
+  ],
+  "off": [
+   "The hero's petals are softer and more crumpled, with many more facets; mine are 8-triangle ridged cards, crisper and a touch more regular.",
+   "The hero's seed disc shows a darker hollow centre; with one flat Seed_Brown material mine reads the rim and dip by shading only.",
+   "Footprint: width 0.58 m matches the old 0.60 m, but depth is 0.23 m against the old 0.59 m. The hero draws a flat, face-forward plant with leaves to the left and right, so I kept it flat rather than spreading leaves front to back.",
+   "Seed_Brown matches none of the game's role words (to_game role 'plain'), as the art director named it; Flower_Seed would make it foliage-recoloured if wanted."
+  ]
+ },
+ "exports": {
+  "runtime": "sunflower.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-567.glb"
+   ]
+  }
+ },
+ "files": {
+  "sunflower.glb": {
+   "sha256": "8508a56c8ac3beefb691673c5237d574b755b12d0ca5f61c7f5a3b30489f4555",
+   "bytes": 75840
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "6497c84851c56681f02c1821cab950de0a4e115d",
+  "path": "tools/ranch-rebuild/models/sunflower"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

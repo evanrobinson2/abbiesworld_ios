@@ -1,0 +1,9 @@
+{
+ "front": {
+  "iou": 0.413,
+  "aspect_target": 1.08,
+  "aspect_render": 0.451,
+  "mean_color_dist": 0.113
+ },
+ "mean_iou": 0.413
+}

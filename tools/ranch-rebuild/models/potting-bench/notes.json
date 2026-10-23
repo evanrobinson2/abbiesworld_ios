@@ -1,0 +1,33 @@
+{
+ "what_i_did": [
+  ["Target", "Per the art director, the hero is the only target. The turnaround sheet drew a different bench (tall and narrow, with a solid plank back), so view_front, view_side and view_back are all dropped and not scored. make_views.py keys the hero by hand: the hero's cast shadow is the same orange-brown as the wood, so the harness mask kept it and filled the gaps under the shelf. Above the ground line it keeps everything that differs from the cream backdrop. Below that line it keeps only pixels inside hand-traced polygons around the legs and stretchers. The result is views/hero_mask.png."],
+  ["Hero camera", "hero_check.py renders from the hero's own direction: 30 deg off the front towards -X (the hero sees the front and the left end) and 24 deg up, with the harness lens and distance. It scores against views/hero_mask.png. The direction was calibrated over yaw/elevation grids, and also over camera distance, which didn't help. The grid is flat (0.63 to 0.65 between -26/30 and -34/24), so I fixed it between the grid best and an estimate from the leg and stretcher slopes (about -34/20), then held it fixed."],
+  ["Massing", "Top 1.50 x 0.56 m at 0.75 m, made of 4 thick (0.09 m) boards along X with 14 mm gaps, ragged ends and a slight twist. A deep apron sits nearly flush under the front and back, and the ends overhang about 0.2 m. Four chunky 0.11 m legs splay from (+-0.49, +-0.20) under the top to (+-0.66, +-0.29) at the feet. Low stretchers run on the front and both sides. Two back posts stand at x -0.53 and +0.38 (off-centre, as in the hero) and carry a 1.12 m back shelf with its top at 1.05 m, a back rail behind it, and a rail under it."],
+  ["Props", "Three tapered terracotta pots with rolled rims and open tops on the shelf (large, small, medium). The two empty ones show a dark inside floor. The right one is filled with soil and holds a 7-leaf succulent rosette (Leaf_Green). On the top are a 0.46 x 0.28 m terracotta seed tray with a 6 x 4 grid of clay ridges over dark soil, and a trowel with a pointed, dished iron blade and a turned wooden handle."],
+  ["Game readiness", "1,858 triangles (garden prop budget 2k) in 9 meshes, one flat material each: Timber_Oak (frame), Plank_Oak (top and shelf), Clay_Terracotta, Soil_Dark, Leaf_Green, Metal_Iron, Timber_Handle. All wood boxes have a 10 mm bevel for the worn, softened edges. Origin at the footprint centre on the ground, front at -Y. No animation and no variants (prop). to_game.py potting-bench ran cleanly and installed garden-assets/GF-020.glb."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.646 from the matched camera at the final 768 px / 48 samples render. The low wide plank top, the splayed A-frame legs with low stretchers, and the raised back shelf with three pots all read at tile size.",
+  "The pots, seed tray and trowel are chunky colour blocks (terracotta, dark soil, green, iron) that still read when the bench is ~100 px tall.",
+  "Under budget at 1.86k triangles. The bevels on the wood take most of it."
+ ],
+ "off": [
+  "Overall IoU stays in the mid 0.6s. The silhouette is mostly thin legs, rails and gaps, so a few pixels of offset cost a lot, and the hero's perspective is painterly rather than one consistent camera. The yaw/elevation grid stayed flat at 0.63 to 0.65 for every shape change.",
+  "The hero proportions came out wider than the brief's 1.2 m. The top is 1.50 m (1.43 m leg footprint), because narrower builds left the hero's left and right ends uncovered. Depth 0.56 m, top 0.75 m and shelf 1.05 m match the brief.",
+  "The hero's wood is hand-carved with grain, cracks and uneven, tapered legs. Mine is flat-shaded bevelled boxes with only slight twists in the boards. The rendered oak is a little more orange than the hero's yellow-brown under the harness lighting.",
+  "The hero's seed tray has softer, lighter cells, and its trowel is a broad scoop. My tray grid is crisp clay ridges and my blade is a flat pointed plate.",
+  "The sheet views are not scored at all (AD), so the back and the ends are built from the hero alone."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build from the brief (top 1.24 x 0.56 m at 0.75 m, shelf 1.05 m). Camera calibrated at yaw -25, elev 32.", "mean_iou": 0.624},
+  {"round": 2, "change": "Longer top (1.34 m) for overhang, shelf lowered to 1.01 m, camera recalibrated (-30/30).", "mean_iou": 0.643},
+  {"round": 3, "change": "Chunkier legs (0.11 m) splayed further, thicker top and apron, shelf back to 1.06 m. Camera fixed at the analytic -32/22 instead (0.631, then 0.628).", "mean_iou": 0.628},
+  {"round": 4, "change": "Shelf raised to 1.10 m with posts and rails, pots, tray and trowel enlarged, darker oak, camera -30/24.", "mean_iou": 0.64},
+  {"round": 5, "change": "Less X splay and the shelf recentred (0.622): worse, so the splay was restored (0.633).", "mean_iou": 0.633},
+  {"round": 6, "change": "Widened to a 1.50 m top, with legs and the shelf assembly moved outwards to match the hero's width to height ratio.", "mean_iou": 0.644},
+  {"round": 7, "change": "Shelf back to the brief's 1.05 m (0.639). Tried the top at 0.80 m (0.628) and reverted it.", "mean_iou": 0.639},
+  {"round": 8, "change": "Front and back apron nearly flush under the top, raised clay cell ridges on the seed tray, yellower oak. Final render at 768 px / 48 samples.", "mean_iou": 0.646}
+ ],
+ "moving_parts": "None. A static garden prop, exported with export_animations=False.",
+ "creative_additions": "The ragged, slightly twisted board ends, a dark inside floor that reads as an empty pot, and soil filling the succulent's pot."
+}

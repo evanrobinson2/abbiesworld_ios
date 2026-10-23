@@ -1,0 +1,265 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/birch",
+ "name": "birch",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "woodland edge tree",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "5e455e41-8e74-4a31-8887-53494a045dd5",
+    "grid_url": "https://www.midjourney.com/jobs/5e455e41-8e74-4a31-8887-53494a045dd5?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "5da2de5d-2260-498e-a827-ac81bf45cd17",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:59:53.582Z",
+    "grid_done_at": "2026-10-22T23:00:11.584Z",
+    "upscale_clicked_at": "2026-10-22T23:00:21.653Z",
+    "downloaded_at": "2026-10-22T23:01:30.192Z",
+    "pick_reason": "slender trunk with clear white bark and black markings, drooping bright green clusters, whole tree in frame"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "1ecda5f9-fc54-4d47-a7a6-6aaa6625124a",
+    "grid_url": "https://www.midjourney.com/jobs/1ecda5f9-fc54-4d47-a7a6-6aaa6625124a?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "56545071-24d8-4762-8ec7-e9a4b4c44a15",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:01:39.129Z",
+    "grid_done_at": "2026-10-22T23:01:57.134Z",
+    "upscale_clicked_at": "2026-10-22T23:02:07.524Z",
+    "downloaded_at": "2026-10-22T23:03:27.431Z",
+    "pick_reason": "three separated views at the same scale, crowns not cropped at the top"
+   }
+  },
+  "files": {
+   "hero.png": "e61e99f26f7d41fcd9a264016c8f80fd82c3dbde6b19d11e2cda26700ea13b99",
+   "turnaround.png": "9605fffaeddbd970feb442a73080998dbc479c8ed93a3f8d709c446e347dc224",
+   "view_front.png": "97cb15bdf88c65baebea57869fc38065f7e0d79bed338066493b00f34d29cfc7",
+   "view_side.png": "d42b6d840308ff17a661e77fcd2423ce9801ebd61ac7c66ad3d1d4d68d300596",
+   "view_back.png": "04286fd9670355a0ce6c30c7a7dd4e24e0b0ebf6de0508a670dfef7c78832055"
+  },
+  "folder": "tools/ranch-rebuild/mj/birch"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/birch/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: S-curved trunk, bark patches, 11 arching branches, wide (0.42 m) smooth V-section ribbons hanging to 2.0 to 2.7 m. Read as a banana plant. Targets re-keyed in views/ to get the white trunk back and drop the ground line. Hero scored at a 45/12 guess.",
+    "mean_iou": 0.473,
+    "hero_iou": 0.683
+   },
+   {
+    "round": 2,
+    "change": "Ribbons replaced by chains of twisted sawtooth leaf cards; narrower crown (radius 1.65), curtains end higher (2.6 to 3.4 m). Hero camera calibrated to 30/10.",
+    "mean_iou": 0.547,
+    "hero_iou": 0.651
+   },
+   {
+    "round": 3,
+    "change": "Wider, lower crown for the hero (radius 1.8, tips 2.3 to 3.0 m, long strands on the +X side to 1.5 to 2.0 m), cheaper 3-sided branches.",
+    "mean_iou": 0.53,
+    "hero_iou": 0.733
+   },
+   {
+    "round": 4,
+    "change": "Crown top leans -X as in the hero; fewer card rows and inner curtains to get under 3k. The gaps that opened cost IoU.",
+    "mean_iou": 0.501,
+    "hero_iou": 0.712
+   },
+   {
+    "round": 5,
+    "change": "Fuller cards (0.5 m, neck 0.5, twist 15 deg), crown radius x0.85, 12 branches x 4 curtains.",
+    "mean_iou": 0.604,
+    "hero_iou": 0.792
+   },
+   {
+    "round": 6,
+    "change": "Narrower crown top, a 20 deg window in the curtains so the trunk shows, Leaf_Light toned down.",
+    "mean_iou": 0.601,
+    "hero_iou": 0.768
+   },
+   {
+    "round": 7,
+    "change": "13 branches, using the triangles freed in round 6.",
+    "mean_iou": 0.608,
+    "hero_iou": 0.775
+   },
+   {
+    "round": 8,
+    "change": "Bark: bigger black diamonds below 2 m, thin bands above, taller ragged dark base (0.75 m).",
+    "mean_iou": 0.613,
+    "hero_iou": 0.781
+   },
+   {
+    "round": 9,
+    "change": "Half the outer curtains Leaf_Dark (was a third), Leaf_Light slightly duller, for the hero's mix of greens.",
+    "mean_iou": 0.613,
+    "hero_iou": 0.781
+   },
+   {
+    "round": 10,
+    "change": "Final 768 px / 48 sample render and score; to_game.py birch.",
+    "mean_iou": 0.615,
+    "hero_iou": 0.779
+   },
+   {
+    "round": 11,
+    "change": "AD round: curtains rebuilt as about 80 thinner threads of loose, randomised diamond leaf cards (size, spacing, turn, tilt), one green per thread with 20% of cards in the other, dark threads inside, threads fanned per branch so the crown is open, branch crests above the leaves, broader crown top, budget 4k. Final 768/48.",
+    "mean_iou": 0.511,
+    "hero_iou": 0.558
+   }
+  ],
+  "what_was_done": [
+   [
+    "Orientation and size",
+    "Z up, metres, origin at the trunk base on the ground, front -Y. 6.97 m tall, crown about 3.2 x 3.0 m. No animation and no variants (tree group), exported with export_animations=False."
+   ],
+   [
+    "Views",
+    "views/ holds re-keyed targets made by make_views.py. The harness mask lost most of the white trunk (white bark on a cream backdrop is under its colour threshold, and what survived was removed by its shadow and size filters), and kept the ground line and cast shadow. make_views.py uses a lower threshold, applies the shadow filter only near the ground, closes the trunk pieces together, and cuts everything below the trunk base. All three sheet views are kept. They are three different individual trees rather than one tree turned, and front and side are lopsided in directions that contradict the hero, so they score lower than the back. views/hero.png is the hero keyed the same way."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders from the hero's own direction, 30 deg off the front towards +X and 10 deg up, with the harness lens and distance. A yaw/elevation grid barely separated the candidates (a weeping tree is nearly round), so the hero's near-level view was chosen and held fixed from round 2."
+   ],
+   [
+    "Trunk",
+    "A 7-sided faceted tube along a Catmull-Rom S-curve (bends +X low, -X through the crown, back near the top). It flares to 0.15 m radius at the ground and tapers to 0.03 m at 6.75 m. A dark rough Bark_Dark sleeve with a ragged top covers the base up to about 0.75 m. 36 wrapped Bark_Black patches sit on it: big black diamonds below 2 m and thin bands higher up."
+   ],
+   [
+    "Crown",
+    "12 thin Bark_White branches (3-sided) arch out and up from the trunk between 3.7 and 6.4 m, then over and down. Their crests show above the leaves at the crown top. Each branch drops 6 hanging threads, and 10 short dark inner threads add depth. Each thread hangs from a random point past the middle of its arch, within +-9 deg of the branch, so there is open sky between one branch's curtain and the next, and the trunk and arches show through in several places. A thread is a string of loose diamond leaf cards (2 triangles each), each with its own size (0.5-1.3x, smaller towards the tip), spacing, turn (+-50 deg) and tilt (+-25 deg). A thread takes one main green, with about 20% of its cards in the other. Threads hanging nearer the trunk are dark. Tips end anywhere from 2.0 to 4.2 m, and longer threads on the +X side reach 1.4 to 2.0 m as in the hero."
+   ],
+   [
+    "Game readiness",
+    "3,789 triangles (budget raised to 4k), 6 meshes, one flat material each: Bark_White, Bark_Dark, Bark_Black, Leaf_Light, Leaf_Dark. Single-plane cards with doubleSided materials (the game keeps double-sided materials for regional plants). to_game.py birch ran cleanly."
+   ]
+  ],
+  "creative_additions": "The ragged dark base sleeve, and leaf cards that shrink towards each thread's tip."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   3.3961181640625,
+   3.4834389686584473,
+   6.999723434448242
+  ],
+  "triangles": 3789,
+  "materials": [
+   "Bark_Black",
+   "Bark_White",
+   "Leaf_Dark",
+   "Leaf_Light",
+   "Bark_Dark"
+  ],
+  "parts": [
+   {
+    "name": "bark_marks",
+    "materials": [
+     "Bark_Black"
+    ]
+   },
+   {
+    "name": "branches",
+    "materials": [
+     "Bark_White"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_light",
+    "materials": [
+     "Leaf_Light"
+    ]
+   },
+   {
+    "name": "trunk",
+    "materials": [
+     "Bark_White"
+    ]
+   },
+   {
+    "name": "trunk_base",
+    "materials": [
+     "Bark_Dark"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": 0.511,
+  "hero_iou": 0.558,
+  "per_view": {
+   "front": 0.503,
+   "side": 0.444,
+   "back": 0.587
+  },
+  "triangle_budget": 3000,
+  "within_budget": false,
+  "good": [
+   "It reads as an airy weeping birch: fine threads of loose leaf cards with sky between them, the white trunk with black patches visible up through the crown, and arching branch tops above the leaves.",
+   "Mixed greens per thread, darker inside, with no striping.",
+   "3.8k triangles, under the 4k budget."
+  ],
+  "off": [
+   "IoU is lower than in round 10 (hero 0.558, sheet mean 0.511) because the target masks are solid and every gap now counts against it. The AD asked for openness over IoU.",
+   "The sheet's front and side views are different lopsided trees, as noted before.",
+   "The hero crown is denser and fuller than this one. Matching its hundreds of tiny leaves within 4k triangles means fewer, larger cards and more sky.",
+   "The dark base reads as a smooth brown sleeve rather than rough bark."
+  ]
+ },
+ "exports": {
+  "runtime": "birch.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/WW-139.glb"
+   ]
+  }
+ },
+ "files": {
+  "birch.glb": {
+   "sha256": "80dfe84ef8159496ddff5f7a7a4256d8d861c227258a7e36d9bc77c25d619749",
+   "bytes": 209940
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "71357a298dba18d2be48e32b6a705b3e3833cbda",
+  "path": "tools/ranch-rebuild/models/birch"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

@@ -1,0 +1,33 @@
+{
+ "what_i_did": [
+  ["Orientation", "Gable end with the Dutch door faces -Y as in the hero; the door sits slightly right of centre (+0.16 m) with the hay rack between it and the right corner post."],
+  ["Views", "views/view_front.png is mj view_front with the ground strip cut and the sheet's left lean-to (not in the hero) replaced by the mirrored right half, stretched so ridge/wall-width matches the hero (1.19). views/view_side.png is mj view_back, which is really the long eave side, stretched so wall length is 1.1x the front wall width (AD ratio). The back view is dropped (the sheet has no back gable; its middle view is a 3/4 with a lean-to). hero_check.py scores views/hero.png from the hero's own direction (front gable on the right, -X side on the left, ~32 deg yaw, ~5 deg up), because the harness hero camera looks from the opposite side."],
+  ["Massing", "4.6 x 5.5 m walls, tie beams at 2.6 m, 44 deg roof lifted 0.55 m above the wall line so the 0.7 m eaves end at about wall-top height as in the hero, 0.5 m gable overhang, ridge board 0.3 m proud at the front with a 0.2 m upward kick; total height 5.6 m."],
+  ["Frame", "Corner posts, side-wall mid posts with V braces (hero), sill beams, wall plates, protruding tie beams, front/back trusses with king post, two raking braces and purlin stubs poking through the gable, ridge beam, purlins and common rafters whose tails show under the eaves."],
+  ["Craft", "Two-tone rose vertical planks with alternating depth, ~11 courses of individually laid jittered shingle tabs with lifted butts and a ridge cap, jittered stone footing with a gap at the door, Dutch door lower leaf with ledges, Z brace, strap hinges and ring handle, a real 0.9 m dark recess behind the open upper half, wall hay rack with a heaped hay mound and straws."],
+  ["Game readiness", "7,580 triangles (budget 9k), 12 meshes, one flat material per mesh named by role (Plank_Rose, Plank_RoseDark, Plank_RoseLight, Plank_Shadow, Timber_Brown, Roof_Teal, Stone_Teal, Hay_Straw, Metal_Iron, Soil_Floor, Rope_String), no animation. Variants planned/foundation/frame/roof/complete from the same build.py STATE groups."]
+ ],
+ "good": [
+  "Front gable silhouette IoU 0.874 against the corrected sheet: pitch, eave depth and ridge line agree.",
+  "Hero silhouette 0.819 from the hero's direction; the big teal roof mass, deep eaves, timber frame pattern, open upper door and hay rack all read at small size.",
+  "Construction stages read as a sequence: stakes and string lines, footing with floor, full timber frame with rafters, roof on an open frame, finished stable."
+ ],
+ "off": [
+  "The plan is 1:1.2 rather than the AD's 1:1.1; the extra depth fixed the side and hero aspect (side 0.71 -> 0.82, hero 0.78 -> 0.82) so I kept it.",
+  "The hero's ridge board curves along its whole length; mine is straight with a raised front end.",
+  "Stones are plain jittered blocks, not the hero's rounded cobbles (bevels would cost ~2k triangles).",
+  "The sheet views were drawn as a taller, narrower shed, so both targets are stretched; their IoU measures shape against the hero's proportions, not the raw sheet.",
+  "Hero camera direction was calibrated (4x4 grid) on the round-1 model, so the hero number is a guide."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build: 4.2 x 4.6 m, eave 2.55, 48 deg, 0.62 m eaves; views made (front de-lean-to'd and stretched, side = sheet back view); hero camera calibrated to 32 deg yaw / 5 deg up.", "mean_iou": 0.796, "hero_iou": 0.765},
+  {"round": 2, "change": "Wider (4.6 x 5.05), eave 2.7, 0.8 m eaves, shorter ridge overhang, teal ridge cap under the ridge board.", "mean_iou": 0.759, "hero_iou": 0.811},
+  {"round": 3, "change": "Lower roof (46 deg, smaller lift), thicker shingle butts and deck; remeasured the hero ridge/width ratio (1.27 -> 1.19) for the front target stretch.", "mean_iou": 0.748, "hero_iou": 0.843},
+  {"round": 4, "change": "Roof lifted 0.55 m above the wall line at 44 deg so the eave tips sit at wall-top height (sheet and hero both show this); plank frieze closes the gap on the long sides; rafters follow the roof.", "mean_iou": 0.802, "hero_iou": 0.782},
+  {"round": 5, "change": "Deeper plan (5.5 m) and 0.5 m gable overhang to match the side and hero aspect ratios.", "mean_iou": 0.854, "hero_iou": 0.819},
+  {"round": 6, "change": "Wider shingle tabs (fewer, bolder), bigger hay rack and hay mound, warmer hay colour.", "mean_iou": 0.847, "hero_iou": 0.819},
+  {"round": 7, "change": "Two-tone alternating planks, chunkier ridge board; final 768 px / 48 samples render.", "mean_iou": 0.842, "hero_iou": 0.819}
+ ],
+ "moving_parts": "None (the game poses buildings itself); construction stages are exported as variants/planned, foundation, frame, roof, complete.",
+ "creative_additions": "Purlin stubs through the gables, rafter tails under the eaves, a trodden earth threshold, and a squaring diagonal in the planned stage's string lines."
+}

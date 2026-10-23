@@ -1,0 +1,35 @@
+{
+ "what_i_did": [
+  ["Views", "The sheet's labels are right (front = face, side = near/left side with the head on the left, back = rump). make_views.py copies them to views/ and only removes the soft cast shadows that streak sideways from the hooves: they survived the harness shadow filter and widened the front and back bounding boxes from 0.32 H to 0.36 H and pushed them off centre. Front and back are scored at full weight. The side view is slightly three-quarter (near and far legs are 0.3 m apart along the body, the far side of the chest shows), so I used it for heights (withers 0.76 H, belly 0.42 H, poll 0.95 H, muzzle 0.63 to 0.70 H) and the overall length, and only partly followed its leg spacing: the legs are staggered 0.22 m (near legs back), not the sheet's 0.3 m."],
+  ["Massing", "Withers 1.62 m, ear tips 2.14 m, 2.1 m nose to tail, 0.7 m across the barrel: a short, deep, stocky draught pony. Body is one 12-ring loft with a deep chest, a dipped back and a round croup; a thick crested neck; a long head with a big jowl; legs are 8-sided lofts with heavy forearms and thighs."],
+  ["Parts and pivots", "27 named parts in a hierarchy, each with its origin at its joint: body > neck (pivot low in the chest) > head (pivot at the throat latch) > muzzle, blaze, eyes, ear_l, ear_r, forelock; neck > mane; body > tail (pivot at the tail root); body > leg_<fl|fr|hl|hr>_upper (shoulder/hip) > _lower (knee/hock) > _hoof (fetlock) > _sock. Poses are only rotations of these parts plus a drop of the body."],
+  ["Poses", "idle: as the hero. feeding: the neck swings down about its chest pivot and the head nods back so the face ends 12 degrees nearer vertical than in idle; build.py searches the neck angle (97.7 deg) until the muzzle is 3 cm above the ground. rest: the body drops onto its barrel, the forearms fold forward with the cannons tucked back under them, the hind legs fold forward and out to the sides, the tail lies back along the ground, the neck dips 8 degrees and the head stays up."],
+  ["Look", "Faceted flat-shaded planes (low-sided lofts with 3.5 % vertex jitter), a cream blaze strip down the face into a cream muzzle, cream socks from fetlock to lower cannon over dark hooves, dark eyes and nostrils, upright pyramid ears, 16 jagged chunky locks falling on the near (+X) side with a short fringe over the far side and a forelock, and a long thick tail with ragged strands at the end."],
+  ["Game readiness", "2,318 triangles in every pose (budget 4k), one flat material per object: Fur_Sorrel (the chestnut coat), Fur_Cream, Hair_Dark, Horn_Hoof, Horn_Eye. Exported as horse.glb and variants/idle, feeding, rest.glb with export_animations=False; to_game.py horse ran clean and horse-idle.json has the muzzle at +X (x 0.97 m)."]
+ ],
+ "good": [
+  "Front 0.889 and back 0.895 IoU: barrel width, leg spacing, head width, ear spread and the tail showing between the legs all line up with the sheet.",
+  "Heights in the side view match the sheet within about 2 % of the height (withers, back line, belly, poll, muzzle).",
+  "It reads at tile size: chestnut block, dark mane on the near side, cream blaze and socks, dark hooves.",
+  "All three poses come from one build.py by rotating parts, and the feeding pose solves its own neck angle, so it stays right if the proportions change."
+ ],
+ "off": [
+  "Material name: the brief asked for Fur_Chestnut, but to_game.py's role patterns test 'food' (which contains 'nut') before 'skin', so Fur_Chestnut became role 'food' in the game JSON. I named the coat Fur_Sorrel (the horse word for a chestnut coat) so it gets the 'skin' role. If the art director prefers Fur_Chestnut, change the food pattern in to_game.py to a word match (\\bnut) and rename COL/mat in build.py.",
+  "Side IoU is 0.742: most of the difference is the sheet's three-quarter angle (its near and far legs are spread 0.3 m apart along the body and the far chest shows); my orthographic side has both pairs of legs overlapping more.",
+  "The socks use Fur_Cream as listed in the brief; the hero's socks are a little darker and more tan than its blaze.",
+  "The hero has more, smaller facets with strong light/shade contrast; mine are larger planes with flatter colour.",
+  "Hero check (hero_check.py, from the hero's own direction, about 35 deg off the side) is 0.53 and only a guide: the hero's target mask keeps a big part of its cast shadow on the ground.",
+  "No feathering at the fetlocks (the sheet draws a little); it would be under 3 % of the size in the tile.",
+  "In the rest pose the tail lies straight back as a stiff rod rather than curling on the ground."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build from named parts: body, neck, head, muzzle, blaze, ears, eyes, mane, forelock, tail and four 3-part legs with socks; scored on the raw mj views.", "mean_iou": 0.596},
+  {"round": 2, "change": "Scored on views/ (cast-shadow streaks at the hooves removed); body 7 % shorter (YS 0.93), legs 15 % thicker and staggered, bigger mane, tail pulled in, neck pivot lowered so the feeding pose can reach the ground.", "mean_iou": 0.818},
+  {"round": 3, "change": "Front legs moved back and hind legs further back to match the sheet's leg positions, slimmer throat at the base of the neck, neck pivot lowered again (feeding neck 120 -> 100 deg).", "mean_iou": 0.833},
+  {"round": 4, "change": "Head 6 % bigger and longer, wider blaze, thicker tail, 16 longer mane locks along the whole crest, browner coat and tan cream; rest pose re-folded so the barrel rests on the ground instead of the hind hooves.", "mean_iou": 0.84},
+  {"round": 5, "change": "Tried stronger facet jitter (5 %): slightly worse on every view, reverted to 3.5 %.", "mean_iou": 0.836},
+  {"round": 6, "change": "Coat material renamed Fur_Sorrel for the game's skin role; final 768 px / 48 sample render and score.", "mean_iou": 0.842}
+ ],
+ "moving_parts": "None animated (the game poses animals itself). The model is rigid parts in a joint hierarchy; variants/idle, feeding and rest are rotations of the neck, head, tail and the leg segments around their joints plus a drop of the body.",
+ "creative_additions": "A short fringe of mane over the far side and a forelock between the ears, dark nostrils, a slight stance with the near legs set back, and ragged strands at the end of the tail."
+}

@@ -1,0 +1,34 @@
+{
+ "what_i_did": [
+  ["Views", "The cow is cream on a cream backdrop, so the harness's own target masks lost most of the back and flank. make_views.py rebuilds the masks (low colour threshold plus closing and hole filling above the belly line, the harness mask with ground streaks opened away below it, so the gaps between the legs survive) and writes them as dark silhouettes in views/. Front and back are scored at full weight (views/). The sheet's side view is drawn slightly three-quarter (head turned, body foreshortened to about 1.16 tall:long), so it lives in views/side/ and is scored separately as a proportion guide only: it gave the withers at about 0.72 of the horn-tip height and the belly line. hero_check.py scores the MJ hero from its own direction (cow's right side, -X, 36 deg yaw, 3 deg up, calibrated on a 5x3 grid)."],
+  ["Massing", "About 1.39 m at the withers, 1.9 m to the horn tips, 2.3 m nose to tail. The barrel is lofted from 10 section rows (Catmull-Rom smoothed to 19) with a pear-shaped section: narrow over the withers and hips, widest low in the belly, as the front and back sheet views show (0.61 m wide body, 0.37 m over the shoulders). A thick neck rises forward to a head held above the back, face tilted 38 deg; the head group is scaled 1.14 around the poll."],
+  ["Parts and pivots", "30 named meshes in a hierarchy: body > leg_*_upper > leg_*_lower > leg_*_hoof (shoulder/hip, knee/hock, fetlock pivots), body > neck > head > muzzle, eyes, ears (+ pink inner ears), horns, head_patches; neck > collar > bell; body > tail > tail_tuft; body > udder, body_patches. Leg names follow +-X (fl/hl = -X, the cow's right side)."],
+  ["Poses", "idle: as the hero. feeding: the neck and head rotate down; build.py searches the smallest neck angle at which the muzzle reaches 6 cm above the grass with the face near plumb (neck 98 deg, head -64 deg), front legs shift a few degrees. rest: the body drops 0.45 m so the belly is on the ground, front forearms point forward-down with the cannons folded back under the chest, hind legs splay 20 deg with the cannons lying forward beside the belly, udder tucked 0.14 m up, tail lowered, head up. In every pose the bell is re-hung plumb from the collar's lowest centre point."],
+  ["Colour", "Hero colours: Fur_Cream body, larger warm rust Fur_Brown patches as separate flat pieces projected onto the body (BVH ray casts, 3 rings of 14 points each, 12 mm proud): a big one over the shoulder carrying on over the withers, a big flank patch, hip, belly and small spots on the hero (-X) side, two large and one small on the other side, two on the rump top, plus a patch round the right eye and one on the brow. Skin_Pink muzzle and udder, Skin_EarPink ear insides, Horn_Gold horns, Horn_Hoof hooves, Fur_TailTuft tuft, Cloth_Leather collar, Metal_Brass bell, Skin_EyeDark eyes and nostrils."],
+  ["Game readiness", "3,166 triangles (budget 4k), one flat material per mesh, no textures, no animation. variants/idle, feeding, rest from the same build.py; to_game.py cow writes cow-idle/feeding/rest.json with the head at +X."]
+ ],
+ "good": [
+  "Front 0.871 and back 0.864 against the cleaned sheet views: width profile, horn U, ear span, leg spacing and belly line all agree within about 2 % of height.",
+  "The bell is a chunky 19 cm brass bell with a rim and clapper that reads in front of the chest from the hero angle, and it hangs plumb in all three poses.",
+  "The rust patches follow the hero's layout (big shoulder band over the withers, big flank patch) and read clearly at small size.",
+  "Poses are pure rotations of the same parts plus a body drop, so the three game files share one design."
+ ],
+ "off": [
+  "The side view scores 0.557 because the sheet's side is a three-quarter view; it was used only for proportion, as directed.",
+  "Hero silhouette 0.739: the hero's head is turned toward the camera and held a little closer to the shoulders than mine, and its upper legs are more sculpted (knees and hocks); my legs are straight tapered prisms.",
+  "The hero's body is softer and more rounded with a slight dip behind the withers; mine is a faceted barrel with a straight top line.",
+  "Horns are 6-sided arcs; from the side they read as fairly straight upward spikes rather than the hero's crescent.",
+  "In the feeding pose the top of the bell grazes the bottom of the chest by a few centimetres, because the lowered neck brings the throat back toward the brisket."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build: lofted pear-section barrel, neck, tilted head with muzzle, ears, horns, collar, bell, udder, tail, jointed legs, projected patches (patches hidden by inward normals).", "mean_iou": 0.768},
+  {"round": 2, "change": "Recalculated normals so the patches show; neck and head raised about 0.1 m; feeding pose solver (neck + head down to the grass); hero camera calibrated (36 deg yaw).", "mean_iou": 0.837},
+  {"round": 3, "change": "Thicker legs and hooves, head group x1.14, bigger collar and bell, larger shoulder and flank patches (looked closer to the hero but widened the front silhouette).", "mean_iou": 0.808},
+  {"round": 4, "change": "Narrower neck and shoulder tops, legs 1.5 cm closer to the centre line, ears moved up toward the horns.", "mean_iou": 0.847},
+  {"round": 5, "change": "Narrower head and muzzle; horns rebuilt as arcs rising from the poll; ears 0.20 m.", "mean_iou": 0.870},
+  {"round": 6, "change": "Collar tilted the other way so the bell hangs in front of the chest; thicker horn bases; flush eyes and nostrils; rest pose rebuilt (body on the ground, legs folded).", "mean_iou": 0.873},
+  {"round": 7, "change": "Rounder barrel (9-point half section, smoothed rows), irregular lobed patches with denser rings, upper section narrowed again, tail hangs straighter and longer, warmer cream, bell hung from the collar's lowest centre point; final 768 px / 48 sample render.", "mean_iou": 0.867}
+ ],
+ "moving_parts": "No animation (the game poses the model). Pivots: body; shoulders/hips, knees/hocks and fetlocks on each leg; neck at the withers; head at the poll; ears and horns at their roots; collar on the neck with the bell re-hung plumb; tail at its root. idle, feeding and rest are rotations of these (rest also drops the body 0.45 m and tucks the udder).",
+ "creative_additions": "A clapper ball peeking out of the bell, dark nostrils on the pink nose, pink-lined ears, and a brown brow patch like the hero's."
+}
