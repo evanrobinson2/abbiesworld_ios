@@ -1,0 +1,5 @@
+{"t": 1792742386.5, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3819363222871994, "loss": 0.6700704081489262}
+{"t": 1792742510.8, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.38224590590070184, "loss": 0.6654512745029091}
+{"t": 1792742553.6, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3840026118184786, "loss": 0.6640797672100714}
+{"t": 1792742584.1, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3846705337939125, "loss": 0.6640637350745295}
+{"t": 1792742602.0, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3846705337939125, "loss": 0.662616276927223}
