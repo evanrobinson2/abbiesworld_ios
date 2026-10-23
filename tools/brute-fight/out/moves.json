@@ -1,0 +1,116 @@
+{
+ "fps": 30,
+ "clips": {
+  "idle": {
+   "loop": true,
+   "length": 1.1
+  },
+  "walk_fwd": {
+   "loop": true,
+   "length": 0.8
+  },
+  "walk_back": {
+   "loop": true,
+   "length": 0.8
+  },
+  "jump": {
+   "loop": false,
+   "length": 0.95
+  },
+  "block": {
+   "loop": false,
+   "length": 0.5
+  },
+  "jab": {
+   "loop": false,
+   "length": 0.45
+  },
+  "heavy": {
+   "loop": false,
+   "length": 0.82
+  },
+  "uppercut": {
+   "loop": false,
+   "length": 0.82
+  },
+  "axe": {
+   "loop": false,
+   "length": 1.12
+  },
+  "hit_jab": {
+   "loop": false,
+   "length": 0.45
+  },
+  "hit_heavy": {
+   "loop": false,
+   "length": 0.72
+  },
+  "hit_uppercut": {
+   "loop": false,
+   "length": 0.92
+  },
+  "hit_axe": {
+   "loop": false,
+   "length": 1.1
+  },
+  "block_hit": {
+   "loop": false,
+   "length": 0.35
+  },
+  "block_heavy": {
+   "loop": false,
+   "length": 0.6
+  },
+  "hurt": {
+   "loop": false,
+   "length": 0.5
+  },
+  "fall": {
+   "loop": false,
+   "length": 1.3
+  },
+  "getup": {
+   "loop": false,
+   "length": 1.25
+  },
+  "victory": {
+   "loop": true,
+   "length": 2.0
+  }
+ },
+ "moves": {
+  "jab": {
+   "hit": 0.15,
+   "reach": 1.45,
+   "damage": 6,
+   "react": "hit_jab",
+   "blocked": "block_hit",
+   "push": 0.1
+  },
+  "heavy": {
+   "hit": 0.36,
+   "reach": 1.6,
+   "damage": 14,
+   "react": "hit_heavy",
+   "blocked": "block_heavy",
+   "push": 0.35
+  },
+  "uppercut": {
+   "hit": 0.38,
+   "reach": 1.3,
+   "damage": 16,
+   "react": "hit_uppercut",
+   "blocked": "block_heavy",
+   "push": 0.3
+  },
+  "axe": {
+   "hit": 0.58,
+   "reach": 1.4,
+   "damage": 22,
+   "react": "hit_axe",
+   "blocked": "block_heavy",
+   "push": 0.25,
+   "knockdown": true
+  }
+ }
+}

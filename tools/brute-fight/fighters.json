@@ -1,0 +1,36 @@
+{
+ "study": "AW-STUDY-0027 Brute fight",
+ "note": "Both fighters start from Meshy (image-to-3D) and go through the Bruiser study's cleanup (tools/bruiser-study/scale): weld, rings per named part, decimate to about 3,000 faces. This study adds paint, a shared skeleton and the move set.",
+ "fighters": {
+  "red": {
+   "name": "Brute one",
+   "hero": "../bruiser-study/meshy/canonical/meshy_canonical.glb",
+   "spec": "../bruiser-study/scale/spec/spec.json",
+   "meshy_task": "01a167ca-e56f-7279-8a8a-45d952e01751",
+   "picture": "../bruiser-study/ref/bruiser.png",
+   "paint": {
+    "Skin": "#e2a77f",
+    "TankTop": "#f3eee2",
+    "Shorts": "#c8322f",
+    "shadow": "#5a2b3c",
+    "brow": "#3b2418"
+   }
+  },
+  "blue": {
+   "name": "Brute two",
+   "hero": "../bruiser-study/meshy2/aligned.glb",
+   "spec": "../bruiser-study/scale/spec2/spec.json",
+   "meshy_task": "01a16806-f882-743e-ae4e-ec866c693b4d",
+   "picture": "../bruiser-study/ref/bruiser-2-queued.png",
+   "paint": {
+    "Skin": "#9a6646",
+    "TankTop": "#f2c53d",
+    "Shorts": "#2f5fc4",
+    "shadow": "#3a2434",
+    "brow": "#22150f"
+   }
+  }
+ },
+ "ratio": 0.1,
+ "texture": 1024
+}
