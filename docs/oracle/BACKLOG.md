@@ -39,3 +39,4 @@ Record a short timeline for one representative scene from each game (timestamp, 
 - Each style becomes a preset in `overlays.js` (cards, subtitles, choice timing, HUD parts), so the same scene can be switched between styles.
 - Pacing notes become defaults for the director: shot lengths, hold times and how long to wait before a prompt.
 - Kid-fit notes decide when a style should read aloud, show pictures instead of words, or slow down.
+- The score study (AW-STUDY-0010, `score/SCORE_STUDY.md`, page https://claude.ai/artifact/5Es88srv8cG13XiYU6FFCW) holds the Music Bible (canon) and the listening room; music for new titles follows its identity and `trace` metadata.
