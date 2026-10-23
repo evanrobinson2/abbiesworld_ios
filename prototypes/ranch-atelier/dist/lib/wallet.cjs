@@ -19,7 +19,8 @@ const PRICES={
  composeCall:0.02,           // one tile plan
  inventCall:0.02,            // one Make design (api/invent.js); a wish already in the shared cache is free
  photoCheck:0.005,           // one PG look at a photo sent with a model order
- elevenChar:0.0001           // ElevenLabs flash, per character spoken
+ elevenChar:0.0001,          // ElevenLabs flash, per character spoken
+ advisorCall:0.002           // one short gpt-6-luna line from a town character (api/advisor.js)
 };
 
 function blobStore(){

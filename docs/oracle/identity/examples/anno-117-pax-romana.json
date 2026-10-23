@@ -1,0 +1,327 @@
+{
+ "schema_version": "1.0",
+ "game": {
+  "title": "Anno 117: Pax Romana",
+  "steam_appid": 3274580,
+  "developer": "Ubisoft Mainz",
+  "publisher": "Ubisoft",
+  "release": "2025",
+  "engine": {
+   "value": "proprietary Anno engine",
+   "source": "estimate",
+   "confidence": 0.5,
+   "method": "public knowledge of the game (announcements, previews, public footage) in our own words; not yet measured in a play session"
+  }
+ },
+ "core": {
+  "fantasy": "You are the governor of a Roman-era province who turns empty islands into prosperous, interlocking cities, and chooses how far the local culture becomes Roman.",
+  "pillars": [
+   "Production chains that span islands",
+   "Population tiers whose needs keep growing",
+   "Beautiful, dense cities you can zoom into street by street"
+  ],
+  "signature_moment": "Zooming from the whole province, ships and chains humming, down into a single street where the residents you just satisfied are walking, trading and celebrating.",
+  "anti_goals": [
+   "no direct control of individual citizens",
+   "no fail-fast arcade pressure"
+  ],
+  "signatures": [
+   {
+    "id": "tiered_needs",
+    "layer": "mechanics",
+    "description": "Residences belong to tiers; each tier needs more goods and services, and a house that has what the next tier needs can be upgraded.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "workforce_per_tier",
+    "layer": "dynamics",
+    "description": "Each tier supplies its own workforce, and production buildings need a particular tier's workers, so a city that upgrades everyone starves its lower chains.",
+    "class": "style",
+    "confidence": 0.75
+   },
+   {
+    "id": "multi_island_chains",
+    "layer": "mechanics",
+    "description": "Raw goods grow on fertile land of a particular island; processing buildings turn them into goods; ships carry them along trade routes to where they are needed.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "service_radius",
+    "layer": "mechanics",
+    "description": "Public buildings (market, baths, temples) serve houses within a reach measured along roads.",
+    "class": "style",
+    "confidence": 0.7
+   },
+   {
+    "id": "culture_choice",
+    "layer": "narrative",
+    "description": "A second province with a local culture where the player decides how far to Romanise or keep local ways, changing goods and needs.",
+    "class": "style",
+    "confidence": 0.55
+   },
+   {
+    "id": "roman_setting",
+    "layer": "narrative",
+    "description": "Its specific provinces, tier names, characters, story, music, art and UI.",
+    "class": "expression",
+    "confidence": 0.9
+   }
+  ],
+  "recognisability": {
+   "value": 0.7,
+   "source": "estimate",
+   "confidence": 0.3,
+   "method": "public knowledge of the game (announcements, previews, public footage) in our own words; not yet measured in a play session"
+  }
+ },
+ "layers": {
+  "aesthetics": {
+   "fun_mix": {
+    "challenge": 0.3,
+    "discovery": 0.15,
+    "expression": 0.3,
+    "fantasy": 0.15,
+    "narrative": 0.1
+   },
+   "motivations": {
+    "strategy": 0.8,
+    "mastery": 0.6,
+    "achievement": 0.6,
+    "creativity": 0.7,
+    "immersion": 0.7,
+    "social": 0.1
+   }
+  },
+  "mechanics": {
+   "verbs": [
+    {
+     "verb": "place a building",
+     "input": "pick from build menu, click to place"
+    },
+    {
+     "verb": "lay a road",
+     "input": "drag"
+    },
+    {
+     "verb": "upgrade a residence",
+     "input": "automatic when needs are met, or blocked by the player"
+    },
+    {
+     "verb": "set a trade route",
+     "input": "menu, ships and stops"
+    },
+    {
+     "verb": "choose a policy or culture path",
+     "input": "menu"
+    }
+   ],
+   "core_loop": {
+    "steps": [
+     "settle an island",
+     "build housing",
+     "chain raw goods into goods",
+     "meet a tier's needs",
+     "houses upgrade",
+     "new needs and new workers appear"
+    ],
+    "period_s": {
+     "value": 300,
+     "source": "estimate",
+     "confidence": 0.3,
+     "method": "public knowledge of the game (announcements, previews, public footage) in our own words; not yet measured in a play session",
+     "unit": "s"
+    }
+   },
+   "meta_loop": {
+    "steps": [
+     "settle a new island or province",
+     "link it by trade",
+     "reach the highest tier"
+    ]
+   },
+   "rules": {
+    "failure_model": "soft",
+    "win": "scenario goals or sandbox",
+    "loss": "bankruptcy or losing all islands in conflict modes"
+   },
+   "randomness": {
+    "amount": 0.2,
+    "kind": "output"
+   },
+   "information": "perfect",
+   "systems": [
+    "population tiers",
+    "needs (goods and services)",
+    "workforce",
+    "production chains",
+    "fertility per island",
+    "trade routes",
+    "service radius",
+    "fire and illness",
+    "culture",
+    "military (optional)"
+   ]
+  },
+  "dynamics": {
+   "emergent_behaviours": [
+    "bottlenecks in one chain cascade into downgrades",
+    "dense blocks around service buildings",
+    "whole islands specialised in one chain"
+   ],
+   "decision_density_per_min": {
+    "value": 5,
+    "source": "estimate",
+    "confidence": 0.3,
+    "method": "public knowledge of the game (announcements, previews, public footage) in our own words; not yet measured in a play session",
+    "unit": "/min"
+   },
+   "skill_strategy_chance": {
+    "skill": 0.05,
+    "strategy": 0.8,
+    "chance": 0.15
+   }
+  },
+  "interaction": {
+   "input": {
+    "devices": [
+     "mouse",
+     "keyboard"
+    ],
+    "mapping": "cursor"
+   },
+   "camera": {
+    "model": "orbit_diorama",
+    "constrained": true
+   },
+   "forgiveness": {
+    "snapping": "grid",
+    "undo": "none",
+    "preview_before_commit": true
+   },
+   "juice": {
+    "particles": 0.5,
+    "screen_shake": 0,
+    "scale_pop": 0.3,
+    "sound_on_action": 0.7,
+    "hit_stop": 0
+   }
+  },
+  "art": {
+   "rendering": {
+    "style": "stylised_pbr"
+   },
+   "proportion_and_scale": {
+    "stylisation": 0.35,
+    "toyness": 0.35
+   },
+   "references": [
+    "sunlit classical diorama",
+    "miniature city at tilt-shift zoom"
+   ]
+  },
+  "assets": {
+   "kit": "modular",
+   "materials": {
+    "texture_strategy": "pbr_scanned"
+   }
+  },
+  "interface": {
+   "ui_mode_mix": {
+    "diegetic": 0.4,
+    "non_diegetic": 0.4,
+    "spatial": 0.15,
+    "meta": 0.05
+   },
+   "onboarding": "tutorial_mode"
+  },
+  "audio": {
+   "sfx_character": "realistic_foley"
+  },
+  "narrative": {
+   "narrative_mode": {
+    "evoked": 0.4,
+    "enacted": 0.2,
+    "embedded": 0.1,
+    "emergent": 0.3
+   },
+   "tone": {
+    "cozy_tense": 0.3,
+    "whimsical_grounded": 0.7,
+    "earnest_ironic": 0.2
+   },
+   "themes": [
+    "prosperity",
+    "empire and local culture",
+    "stewardship"
+   ]
+  },
+  "pacing": {
+   "structure": "sandbox",
+   "tension_curve": "rising_to_end",
+   "failure_cost": "none",
+   "unlocks": [
+    "tiers",
+    "buildings",
+    "islands",
+    "provinces"
+   ]
+  },
+  "market": {
+   "genre": "city builder",
+   "audience": "PC strategy players, all ages"
+  }
+ },
+ "ledger": {
+  "style": [
+   "residence tiers whose needs grow and unlock upgrades",
+   "workforce tied to tiers",
+   "production chains of raw goods, workshops and goods",
+   "service reach along roads",
+   "trade between places by ship",
+   "a choice of culture that changes needs"
+  ],
+  "expression": [
+   "the Roman setting as Anno presents it: its provinces, tier names, characters, story",
+   "its buildings, art, UI, music and sound",
+   "its words and names"
+  ]
+ },
+ "assimilation": {
+  "take": [
+   {
+    "layer": "mechanics",
+    "target": "AW-STUDY-0033 hex city",
+    "setting": "Four kinds of household (settlers, townsfolk, artisans, patrons) with cumulative needs; a block grows into the next kind when it has everything that kind needs.",
+    "from_signature": "tiered_needs"
+   },
+   {
+    "layer": "dynamics",
+    "target": "AW-STUDY-0033 hex city",
+    "setting": "Each kind does its own work; the council holds some blocks back when their work would go undone.",
+    "from_signature": "workforce_per_tier"
+   },
+   {
+    "layer": "mechanics",
+    "target": "AW-STUDY-0033 hex city",
+    "setting": "Chains run across the countryside around the town tile, on the real soil (alluvium, terra rossa, clay, pasture, woods), worked by people who walk out.",
+    "from_signature": "multi_island_chains"
+   },
+   {
+    "layer": "mechanics",
+    "target": "AW-STUDY-0033 hex city",
+    "setting": "Service reach is walking time over the real streets and slopes.",
+    "from_signature": "service_radius"
+   }
+  ],
+  "leave": [
+   "roman_setting: expression, never used",
+   "culture_choice: needs its own study before borrowing"
+  ]
+ },
+ "sources": [
+  "Oracle profile docs/oracle/games/anno-117-pax-romana.json (2026-10-23)",
+  "public knowledge of the game (announcements, previews, public footage) in our own words; not yet measured in a play session"
+ ]
+}
