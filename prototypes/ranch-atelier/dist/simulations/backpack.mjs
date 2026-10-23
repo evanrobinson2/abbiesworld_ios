@@ -37,7 +37,14 @@ export const FACETS = [
   {id: 'rainbow', name: 'Rainbow', strap: '#ff7a59', metal: '#ffd23f', rainbow: true}, {id: 'black-chrome', name: 'Black and chrome', strap: '#262a30', metal: '#dfe5ec'}]},
  {id: 'lining', name: 'Lining', options: [
   {id: 'lemon', name: 'Lemon', c: '#ffe98a'}, {id: 'lilac', name: 'Lilac', c: '#cdb6f2'}, {id: 'seaglass', name: 'Sea glass', c: '#a9e3d6'},
-  {id: 'peach', name: 'Peach', c: '#ffc4a3'}, {id: 'night', name: 'Starry night', c: '#26306b', stars: true}, {id: 'rainbow', name: 'Rainbow', c: '#ffffff', rainbow: true}]}
+  {id: 'peach', name: 'Peach', c: '#ffc4a3'}, {id: 'night', name: 'Starry night', c: '#26306b', stars: true}, {id: 'rainbow', name: 'Rainbow', c: '#ffffff', rainbow: true}]},
+ // Her notebook rides in the backpack and holds her quests (Evan, 23:39Z: "let her pick her notebook as a facet of her
+ // backpack", fluffy covers like his picture). It is hers whatever the style, so a new style keeps it (keep: true).
+ // Drawn by notebook.mjs.
+ {id: 'notebook', name: 'Notebook', keep: true, options: [
+  {id: 'strawberry', name: 'Strawberry', c: '#ff4fa3'}, {id: 'unicorn', name: 'Unicorn', c: '#f6f2ee'}, {id: 'puppy', name: 'Puppy', c: '#ffe45a'},
+  {id: 'rainbow-bear', name: 'Rainbow bear', c: '#ff9a5c'}, {id: 'bunny', name: 'Bunny', c: '#ffc9d6'}, {id: 'kitty', name: 'Kitty', c: '#c6a4f0'},
+  {id: 'teddy', name: 'Teddy', c: '#ffb0c2'}]}
 ];
 
 // ---------- the ten styles (MJ proofs: tools/midjourney/outputs/backpack-0046/) ----------
@@ -93,7 +100,7 @@ export function look(v = saved()) {
 }
 export function setLook(patch) {
  const v = saved(), next = {...v, ...patch};
- if (patch.style && patch.style !== v.style) for (const f of FACETS) if (!(f.id in patch)) next[f.id] = styleOf(patch.style).look[f.id];
+ if (patch.style && patch.style !== v.style) for (const f of FACETS) if (!(f.id in patch) && !f.keep) next[f.id] = styleOf(patch.style).look[f.id];
  save(next); return look(next);
 }
 export const onLook = fn => { const h = () => fn(look()); addEventListener(EVENT, h); return () => removeEventListener(EVENT, h); };
@@ -806,7 +813,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  // backpack, or tapping it, puts that choice on.
  let deck = null;
  async function mountDeck(first = 'style') {
-  const {cardDeck} = await import('./backpack-cards.mjs?v=5');
+  const {cardDeck} = await import('./backpack-cards.mjs?v=6');
   if (deck || !alive) return;
   deck = cardDeck(deckHost || el, {look: () => state.l, split: !!deckHost,
    onDrop: (facet, value, x, y) => { const f = facet === 'style' ? 'style' : facet; const over = x == null || hitPart(x, y) != null || !!overSlot?.(x, y, f); if (!over) return false; apply(f, value); return true; }});
@@ -820,7 +827,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  }
  function change(patch, styleChange = false) {
   let nl = {...state.l, ...patch};
-  if (styleChange) nl = {...styleOf(patch.style).look, style: patch.style};
+  if (styleChange) nl = {...styleOf(patch.style).look, notebook: state.l.notebook, style: patch.style};
   state.l = nl; rebuild(); if (glow) highlight(glow); onChange?.(nl);
   if (bp) bp.group.scale.setScalar(.9);
  }
