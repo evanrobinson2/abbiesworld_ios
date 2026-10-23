@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-rig-hero",
+      "date": "2026-10-23",
+      "title": "Your hero, rigged",
+      "line": "The flying hero you pasted is now cut into parts on a named skeleton with hair, belt and scarf as decorations, and it turns. A Unity-style export is included (not yet run in Unity).",
+      "image": "/whats-new/2026-10-23-rig-hero.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMY1cycvjR6PnahcM7wX7rx",
+      "threadTitle": "AW-STUDY-0047 - Rigged Hero Cut-Out",
+      "tour": false,
+      "link": "/studies/rig-hero/"
+    },
+    {
       "id": "2026-10-23-cafe-diorama",
       "date": "2026-10-23",
       "title": "Walk into the café",

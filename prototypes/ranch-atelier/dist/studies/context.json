@@ -2356,6 +2356,29 @@
           "note": "style on figures only, nothing masks the world, no words on the play screen"
         }
       ]
+    },
+    "rig-hero": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Character Studio bone names (AW-STUDY-0037)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/character-studio/CHARACTER_STUDIO.md",
+          "note": "the shared bone names the rig follows"
+        },
+        {
+          "k": "tutorial",
+          "t": "Unity 2D Animation package manual",
+          "href": "https://docs.unity3d.com/Packages/com.unity.2d.animation@latest",
+          "note": "sprite skinning route noted as the soft-mesh upgrade; not used here"
+        },
+        {
+          "k": "reference",
+          "t": "Pasted hero picture from Evan",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/tools/rig-cutout/example",
+          "note": "the source of every part sprite"
+        }
+      ]
     }
   }
 }
