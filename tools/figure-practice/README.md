@@ -17,3 +17,13 @@ watermarked stock photo, kept private: it is never committed or published.
 - `notes.json`: Evan's asks and each round's score and lesson (round 3: IoU 0.80, 1,538 faces).
 - `banana-split/`: the mannequin in the toon set (shader copied from `docs/oracle/rendering/shaders-article.html`),
   "banana split day", with a still per look.
+
+## Rest pose for rigging (handed to AW-STUDY-0037 Character Studio)
+- `REST=1 python build.py`: standing A-pose (arms 22 degrees out), facing +Z in glTF, feet on y=0, true bone lengths.
+  `mannequin-rest.glb` (low poly) and `mannequin-rest-smooth.glb` (`SMOOTH=1`), same 30 named parts.
+- `rest-joints.json`: joint positions in glTF axes (x right = figure's left, y up, z forward). Names: hc (hip centre),
+  waist, neck, crown; per side R/L (figure's own right/left): s shoulder, e elbow, w wrist, f fingertip, h hip,
+  k knee, a ankle, t toe.
+- Part to bone (rigid, a wooden mannequin has no skin): hips = pelvis, hip_R/L; abdomen (pivot hc) = abdomen;
+  chest (pivot waist) = waist_joint, chest, shoulder_R/L; head (pivot neck) = neck, head; upper arm (s) = upper_arm;
+  forearm (e) = elbow, forearm; hand (w) = wrist, hand; thigh (h) = thigh; shin (k) = knee, shin; foot (a) = ankle, foot.

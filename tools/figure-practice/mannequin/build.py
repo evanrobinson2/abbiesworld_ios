@@ -20,6 +20,18 @@ for a,b,L,sg in CHAINS:
     dx=J2[b][0]-J2[a][0]; dy=J2[b][1]-J2[a][1]; l=math.hypot(dx,dy)
     DEPTH[b]=DEPTH[a]+sg*math.sqrt(max(L*L-l*l,0))
 P={k:Vector(((x)*S, DEPTH.get(k,0)*S, -(y)*S)) for k,(x,y) in J2.items()}
+if os.environ.get('REST')=='1':
+    # rest pose for rigging: standing A-pose, facing -Y (toward the camera), true bone lengths, feet on z=0
+    import math as _m
+    def V(x,y,z): return Vector((x,y,z))
+    hz=0.12+2.02+1.98; P={}
+    P["hc"]=V(0,0,hz); P["waist"]=V(0,0.04,hz+1.46); P["neck"]=V(0,0,hz+2.92); P["crown"]=V(0,-0.05,hz+3.95)
+    a=_m.radians(22)
+    for side,sx in (("R",-1),("L",1)):
+        P["h"+side]=V(0.30*sx,0,hz); P["k"+side]=V(0.30*sx,-0.02,hz-1.98); P["a"+side]=V(0.30*sx,0,0.12); P["t"+side]=V(0.30*sx,-0.70,0.04)
+        s_=V(0.60*sx,0.02,hz+2.72); d=V(sx*_m.sin(a),0,-_m.cos(a))
+        P["s"+side]=s_; P["e"+side]=s_+d*1.30; P["w"+side]=P["e"+side]+d*1.27; P["f"+side]=P["w"+side]+d*0.62
+
 bpy.ops.wm.read_factory_settings(use_empty=True)
 mats={}
 def mat(name,rgb):
@@ -74,7 +86,7 @@ ellipsoid("chest","waist","neck",76,66,48,t=0.53,taper=-0.15)
 ball("waist_joint","waist",24)
 ellipsoid("abdomen","hc","waist",66,60,44,t=0.55,taper=0.12)
 pel=(P["hR"]+P["hL"])/2
-ellipsoid("pelvis",pel+Vector((0,0,-0.05)),pel+Vector((0.18,0,0.6)),38,56,40,t=0.15)
+ellipsoid("pelvis",pel+Vector((0,0,-0.05)),pel+(Vector((0,0,0.6)) if os.environ.get("REST")=="1" else Vector((0.18,0,0.6))),38,56,40,t=0.15)
 THICK=dict(R=dict(sh=20,ua=(17,14,4),el=14,fa=(15,10,3),wr=10,hand=(15,8)),
            L=dict(sh=23,ua=(19,15,5),el=15,fa=(17,11,4),wr=11,hand=(17,8)))
 for side in ("R","L"):
@@ -110,5 +122,5 @@ bpy.ops.wm.save_as_mainfile(filepath=sys.argv[-1]+'.blend')
 for o in list(bpy.data.objects):
     if o.type=='CAMERA': bpy.data.objects.remove(o)
 bpy.ops.export_scene.gltf(filepath=sys.argv[-1]+".glb",export_format='GLB',export_apply=True)
-json.dump({k:[round(c,3) for c in v] for k,v in P.items()},open(sys.argv[-1]+"_joints.json","w"))
+json.dump({k:[round(v.x,4),round(v.z,4),round(-v.y,4)] for k,v in P.items()},open(sys.argv[-1]+"_joints.json","w"))
 print("faces",sum(len(o.data.polygons) for o in bpy.data.objects if o.type=='MESH'))
