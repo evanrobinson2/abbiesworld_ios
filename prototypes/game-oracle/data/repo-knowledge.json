@@ -5055,11 +5055,71 @@
      "complexity": {
       "verb_count": {
        "value": 5,
-       "source": "estimate",
-       "confidence": 0.4,
-       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+       "source": "store_page",
+       "confidence": 0.5,
+       "method": "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+      },
+      "size_steps": {
+       "value": 10,
+       "source": "store_page",
+       "confidence": 0.7,
+       "method": "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+      },
+      "part_count": {
+       "value": 12,
+       "source": "store_page",
+       "confidence": 0.7,
+       "method": "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+      },
+      "starting_parts": {
+       "value": 6,
+       "source": "store_page",
+       "confidence": 0.6,
+       "method": "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
       }
-     }
+     },
+     "size_classes": {
+      "prey": "smaller than you: food, no threat",
+      "peer": "your size: a fair fight; beating one drops 3 meat chunks",
+      "predator": "bigger: kills you in two hits",
+      "epic": "giant: kills you in one hit; only clever play beats it"
+     },
+     "growth": "Five size stages, each split in two (ten steps). Each step needs about five pieces of food; every step turns your old peers into prey. Seeing the seafloor means you are nearly ready to leave the water.",
+     "food": [
+      "small green plant bits and big seaweed (herbivore)",
+      "meat chunks from beaten cells (carnivore)",
+      "eggs later in the stage: anyone can eat them, left alone they hatch predators",
+      "living cells drained with a proboscis"
+     ],
+     "world_objects": [
+      "meteor fragments to ram open for parts",
+      "unbreakable debris and shells",
+      "air bubbles",
+      "currents that speed you up with them and slow you against them",
+      "poison clouds from poison parts"
+     ],
+     "parts": {
+      "flagellum": "speed",
+      "jet": "bursts of speed",
+      "cilia": "turning and control",
+      "spikes": "only protect and hit where they point; long ones catch on terrain",
+      "poison": "leaves a cloud behind that slows and hurts chasers",
+      "electric": "charges up then zaps around you",
+      "proboscis": "drains other cells; omnivore mouth",
+      "jaw": "carnivore mouth and weapon",
+      "filter or beak": "herbivore mouth",
+      "eyes": "without eyes your view is restricted"
+     },
+     "diet": "Diet is a sliding timeline from herbivore to carnivore: you start in the middle, plants push one way, meat and kills the other, and later choices count less. The final diet sets a bonus that carries into the next stage.",
+     "editor_flow": [
+      "press Call Mate (or the key) at any time",
+      "a mate appears and calls; follow the sound",
+      "swim into the mate",
+      "the cell editor opens in a top-down view of your cell",
+      "drag parts on (placement matters: spikes cover only where they sit, a thin body is harder to hit), paint, sell parts back for DNA",
+      "first time: name your creature",
+      "leave: you hatch as the new design and swim on"
+     ]
     },
     "interaction": {
      "input": {
@@ -5067,7 +5127,8 @@
        "mouse",
        "keyboard"
       ],
-      "mapping": "direct"
+      "mapping": "direct",
+      "controls": "WASD or arrow keys, or click to set a destination; + and - zoom; one key pauses (camera and commands still work while paused)."
      },
      "camera": {
       "model": "top_down",
@@ -5120,7 +5181,7 @@
         "diegetic": 0.4
        },
        "timing": "on_change",
-       "note": "A small health bar; the cell flashes and wobbles when hit.",
+       "note": "Your cell picture and health sit in the bottom-right corner. When anything is hit, a small bar appears above it: green for health left, red for the last hit, black for what was lost before.",
        "confidence": 0.6,
        "source": "estimate"
       },
@@ -5130,7 +5191,7 @@
         "spatial": 0.3
        },
        "timing": "always_on",
-       "note": "Size and spikes show danger; bigger creatures loom as blurred shapes in the layer below before they rise.",
+       "note": "Size is the threat readout: smaller is food, same size is a fair fight, bigger is a predator and giants are epics. The next size class drifts blurred in the layer below before you reach it.",
        "confidence": 0.7,
        "source": "estimate"
       },
@@ -5140,7 +5201,7 @@
         "diegetic": 0.3
        },
        "timing": "always_on",
-       "note": "The DNA bar fills toward the next evolution; meteor fragments glint where new parts are.",
+       "note": "A progress bar along the bottom fills with DNA toward the next evolution; when it is full the bottom-right button becomes the advance button. Meteor fragments in the world hold new parts.",
        "confidence": 0.6,
        "source": "estimate"
       },
@@ -5179,7 +5240,8 @@
        "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
       },
       "drawn_as": "neutral_overlay",
-      "fade_rule": "Only health and the DNA bar while you swim; the editor is summoned."
+      "fade_rule": "Only health and the DNA bar while you swim; the editor is summoned.",
+      "layout": "Health portrait bottom right, progress bar along the bottom, Call Mate button; damage bars appear on whoever is hit, then fade."
      },
      "adaptive_state": {
       "signals": [
@@ -5220,6 +5282,15 @@
      "structure": "campaign",
      "tension_curve": "rising_to_end",
      "failure_cost": "none"
+    },
+    "audio": {
+     "music": {
+      "genre": "generative ambient (Brian Eno with the audio team)",
+      "adaptive": "generative, always changing",
+      "note": "Procedural music that keeps changing rather than looping one track."
+     },
+     "sfx_character": "mixed",
+     "voice": "gibberish"
     }
    },
    "dna": {
@@ -5289,7 +5360,40 @@
    "sources": [
     "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
     "tools/steam-study/owned_notes.py (profile row)",
-    "tools/steam-study/rendering_notes.py (How it's drawn)"
+    "tools/steam-study/rendering_notes.py (How it's drawn)",
+    "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+   ],
+   "study_notes": {
+    "date": "2026-10-23",
+    "why": "Evan asked for a video of the Cell Stage for Abbie's science adventure (AW-STUDY-0047).",
+    "sources_read": [
+     "https://strategywiki.org/wiki/Spore/Cell_Stage",
+     "https://www.gamerevolution.com/guides/41924-spore-faqwalkthrough",
+     "https://en.wikipedia.org/wiki/Spore_(2008_video_game)",
+     "https://www.cgw.com/Publications/CGW/2008/Volume-31-Issue-10-Oct-2008-/Evolutionary-Chain.aspx",
+     "https://www.synthtopia.com/content/2008/09/24/brian-enos-music-for-spore/"
+    ],
+    "video": "Cloud sessions cannot reach YouTube, so public video was studied through written guides. A private recording from Evan's own copy on his PC was requested; its notes replace these estimates when it lands. Frames and recordings are study only and are never committed or published.",
+    "findings_for_the_science_adventure": [
+     "Movement is on one flat plane inside a 3D pool: a top-down 2D game with real depth behind it.",
+     "Ten small growth steps of about five foods each keep a reward every minute or so.",
+     "Prey, peer, predator, epic: four size classes are the whole threat grammar, readable at a glance.",
+     "Damage bars live on the creature that was hit, not in a corner.",
+     "The mate call makes editing a moment in the world (follow the sound), not a menu.",
+     "Parts work only where you put them, so the editor is a real decision, not decoration.",
+     "Eggs that hatch into predators if left: a gentle clock without a timer.",
+     "Currents and poison clouds make the water itself part of play."
+    ]
+   },
+   "history": [
+    {
+     "date": "2026-10-23",
+     "change": "First record from public knowledge (PR #338)."
+    },
+    {
+     "date": "2026-10-23",
+     "change": "Deepened from public guides: size classes, growth steps, parts, editor flow, HUD layout, music."
+    }
    ]
   },
   {
