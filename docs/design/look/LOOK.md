@@ -100,3 +100,8 @@ bottom); less padding everywhere.
   hide (`[` and `]`) and drag wider, and remember.
 - Models: one screen. A hero bar with the name, the picture and the model side by side sized to the window, the strip
   under them, and "Your feedback" in a right-side panel that hides. The review inbox page was retired (05:38Z).
+- Pictures are never cropped (Evan, 07:25Z "images should not crop like that"): cards, list thumbnails and the details
+  picture show the whole image (`object-fit: contain` on a neutral backdrop).
+- Studies may overrule the app styling (Evan, 07:25Z): a study page that wants its own look puts `data-aw-own-look` on
+  its `<html>`. It keeps the access settings and the `--aw-*` tokens, but its own palette and letters win over the
+  chosen style. A study page without boot.js keeps its own look too.
