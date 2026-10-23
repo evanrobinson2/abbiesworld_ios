@@ -102,5 +102,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T15:54:30Z"
+  },
+  {
+    "id": "A5-clay",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "315447ad-ae4f-4249-b6fd-296ce10d2f79",
+    "files": [
+      "tools/meshy-heroes/refs/A5-clay/mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_0.png",
+      "tools/meshy-heroes/refs/A5-clay/mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_1.png",
+      "tools/meshy-heroes/refs/A5-clay/mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_2.png",
+      "tools/meshy-heroes/refs/A5-clay/mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:55:06Z"
+  },
+  {
+    "id": "A5-paint",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "bad0de50-2fa2-40c4-a23b-c0126c7b3a36",
+    "files": [
+      "tools/meshy-heroes/refs/A5-paint/mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_0.png",
+      "tools/meshy-heroes/refs/A5-paint/mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_1.png",
+      "tools/meshy-heroes/refs/A5-paint/mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_2.png",
+      "tools/meshy-heroes/refs/A5-paint/mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:55:35Z"
   }
 ]
