@@ -1,0 +1,81 @@
+{
+ "what_i_did": [
+  [
+   "Start",
+   "Copied models/water-bucket (build.py, make_views.py, hero_check.py, run.sh) and reshaped it: same four fill states (full, partial, empty, carried), same origin (footprint centre on the ground), front -Y, ears on +-X turned 20 deg, same 8 meshes and the same 4 materials (Wood_Stave, Metal_Iron, Rope_Jute, Water). No new materials."
+  ],
+  [
+   "Target",
+   "Hero only (no turnaround for this asset). The harness mask keeps the hero's warm cast shadow falling to the left, so make_views.py keys it as for the normal bucket: saturation/darkness above the ground line (CUT 1340), and below it only a hand-traced outline of the lower body. Scored by hero_check.py against views/hero.png."
+  ],
+  [
+   "Body",
+   "Taller plump barrel: H 0.38 (normal 0.35), r 0.15 at the base to 0.18 at the rim plus a 16 mm sine belly at mid height, and a rounded 14 mm tuck over the bottom 30 mm so it sits like a soft toy. Staves are sampled in 6 rings so the belly reads."
+  ],
+  [
+   "Staves",
+   "12 chunky staves, 32 mm thick (normal 22) with 10 mm bevels and chamfered tops jittered +-16 mm, so the rim reads as a ring of fat rounded blocks as in the hero."
+  ],
+  [
+   "Hoops and rivets",
+   "Two very wide (70-80 mm) iron bands standing 13 mm proud with bevelled edges and a slightly rounded belly, and 9 big rivet nubs per band."
+  ],
+  [
+   "Handle",
+   "Fat twisted rope (19 mm radius, normal 12.5) on a tall arc to 0.72 m that leans 14 deg towards the front about the ear axis and has its crown pushed 5 cm to +X, so it reads lopsided and hand-made. Bigger loose knots (46 mm) at the ears."
+  ],
+  [
+   "Water and fill states",
+   "full / carried at z 0.335 (45 mm below the rim), partial at z 0.20, empty shows the wooden floor. All from build.py's STATE switch into variants/."
+  ],
+  [
+   "Colour",
+   "Sampled from the charming hero: lighter tan-orange wood, grey-brown iron, lighter orange-brown jute, pale grey-teal water."
+  ],
+  [
+   "Game readiness",
+   "1,840 triangles full / partial / carried, 1,818 empty (supply budget 2k). Footprint 0.44 x 0.41 m (W/D 1.08; normal 1.11). to_game.py water-bucket-charming installed all four states into simulation-assets-charming/supplies, scaled x1.489 to the old footprint."
+  ]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.868 from the hero's direction (normal model 0.859 against its own hero).",
+  "Reads at tile size as the same bucket, but chubbier: fat rim blocks, two heavy dark bands, a thick leaning rope loop.",
+  "Drops in for the normal bucket: same states, mesh names, materials and roles, near-identical width/depth ratio."
+ ],
+ "off": [
+  "The bucket is taller relative to its width than the normal one (height/width 1.66 vs 1.51, mostly the taller handle), so after the footprint rescale it stands a bit taller in the tile.",
+  "The hero's knots are big loose multi-loop wraps hanging outside the rim; mine are single lumpy balls.",
+  "The hero's belly bulge is subtle and its staves carry painted grain and highlights; mine are flat colours with bevels only.",
+  "The hero's water is rippled and translucent; mine is a flat opaque disk.",
+  "Calibration preferred the ear axis turned +20 deg (as in the normal model) even though in the hero the right knot looks closer to the viewer; the forward lean of the arc is what matched the hero's handle shape."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "Copied the normal model and made it charming: taller (H 0.40), belly bulge and base tuck, thicker staves and bevels, wide bevelled hoops, big rivets, fat rope on a 0.78 m arc leaning 14 deg forward with a skewed crown, bigger knots. 2,536 tris (over budget). Camera -15 / 35.",
+   "mean_iou": 0.76
+  },
+  {
+   "round": 2,
+   "change": "Cut to 1,840 tris (fewer stave rings, 20 hoop segments, 24 rope steps); camera / ear angle / lean sweep picked camera -15 / 40, ear angle 20, lean 14; arc top lowered to 0.72 m.",
+   "mean_iou": 0.859
+  },
+  {
+   "round": 3,
+   "change": "Body H 0.38 with hoops, ear straps and water lowered to match.",
+   "mean_iou": 0.866
+  },
+  {
+   "round": 4,
+   "change": "Colours resampled from the charming hero (lighter wood and rope, greyer water). Silhouette unchanged.",
+   "mean_iou": 0.866
+  },
+  {
+   "round": 5,
+   "change": "Final 768 px / 48 sample render and score; to_game.py water-bucket-charming (x1.489 footprint scale).",
+   "mean_iou": 0.868
+  }
+ ],
+ "moving_parts": "None: a static supply, exported with export_animations=False. Fill states are separate GLBs in variants/.",
+ "creative_additions": "The lopsided, forward-leaning rope arc and the tucked toy-like base give the tilt and softness of the storybook style without tilting the water."
+}
