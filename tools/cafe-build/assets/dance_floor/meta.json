@@ -1,0 +1,366 @@
+{
+ "id": "dance_floor",
+ "name": "LED dance floor",
+ "group": "Room shell",
+ "tier": "hero",
+ "intent": "The pink-peach and violet checker in the middle of the room, raised 50 mm, each tile its own part.",
+ "real": "8 x 7 LED dance tiles, 600 mm square, 12 mm frosted acrylic over an RGB LED matrix, about 16 kg each",
+ "moving": "none; every tile is addressable (tag `led`) so the party signal and the dance game light them",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  4.794,
+  4.194,
+  0.05
+ ],
+ "triangles": 2464,
+ "mass_kg": 896.0,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  0.025
+ ],
+ "materials": [
+  "Glass_LedTile",
+  "Glass_LedTileViolet"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "tile_0_0",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_0_1",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_0_2",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_0_3",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_0_4",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_0_5",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_0_6",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_0_7",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_1_0",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_1_1",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_1_2",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_1_3",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_1_4",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_1_5",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_1_6",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_1_7",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_2_0",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_2_1",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_2_2",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_2_3",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_2_4",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_2_5",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_2_6",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_2_7",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_3_0",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_3_1",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_3_2",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_3_3",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_3_4",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_3_5",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_3_6",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_3_7",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_4_0",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_4_1",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_4_2",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_4_3",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_4_4",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_4_5",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_4_6",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_4_7",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_5_0",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_5_1",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_5_2",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_5_3",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_5_4",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_5_5",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_5_6",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_5_7",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_6_0",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_6_1",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_6_2",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_6_3",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_6_4",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_6_5",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_6_6",
+   "material": "Glass_LedTile",
+   "mass_kg": 16.0,
+   "made": "given"
+  },
+  {
+   "part": "tile_6_7",
+   "material": "Glass_LedTileViolet",
+   "mass_kg": 16.0,
+   "made": "given"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

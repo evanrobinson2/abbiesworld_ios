@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Café Photo Booth</title>
+<style>
+/* AW-STUDY-0013: the café photo booth, played. You see through the booth's camera. The booth itself tells you what to do:
+   the pose card glows on the camera bezel, the ring of bulbs counts down, the flash pops, the strip drops out of the slot.
+   On the screen there are only three pose buttons (pictures, no words). In-game characters only: no real camera, ever. */
+:root{--glass:rgba(255,255,255,.16);--edge:rgba(255,255,255,.42);--pink:#ff5aa8;--teal:#3fe0d6}
+html,body{margin:0;height:100%;background:#14060f;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+canvas{display:block;width:100vw;height:100dvh}
+#poses{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:14px}
+#poses button{width:64px;height:64px;border-radius:50%;border:1px solid var(--edge);padding:0;cursor:pointer;
+ background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.55),rgba(255,255,255,.08) 45%,rgba(255,90,168,.25));
+ box-shadow:inset 0 -6px 12px rgba(0,0,0,.25),inset 0 4px 10px rgba(255,255,255,.35),0 6px 16px rgba(0,0,0,.35);transition:transform .12s}
+#poses button:active{transform:scale(.92)}
+#poses button.on{outline:3px solid var(--teal);outline-offset:2px}
+#poses svg{width:40px;height:40px;display:block;margin:auto}
+#poses[hidden]{display:none}
+#strip{position:fixed;right:max(16px,env(safe-area-inset-right));top:-80vh;width:min(28vw,150px);transition:top 1.6s cubic-bezier(.3,1.3,.5,1);
+ box-shadow:0 10px 30px rgba(0,0,0,.5);border-radius:4px;cursor:pointer}
+#strip.out{top:max(16px,env(safe-area-inset-top))}
+#again{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);width:72px;height:72px;border-radius:50%;
+ border:1px solid var(--edge);background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.6),rgba(63,224,214,.35));cursor:pointer}
+#again svg{width:38px;height:38px}
+#again[hidden]{display:none}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+</head>
+<body>
+<div id="poses" hidden></div>
+<button id="again" aria-label="Take more pictures"><svg viewBox="0 0 24 24" fill="none" stroke="#14060f" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="13" r="5"/><path d="M4 8h3l2-3h6l2 3h3v11H4z"/></svg></button>
+<img id="strip" alt="Your photo strip">
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from '/vendor/loaders/GLTFLoader.js';
+import {playerCamera} from '/simulations/presentation-layer.mjs';
+
+// ---------- the poses: what the booth asks for, and how a character does it ----------
+const ICON = {
+ wave:   '<circle cx="12" cy="5" r="2.6"/><path d="M12 8v7M12 15l-3 6M12 15l3 6M12 10l-4 2M12 10l4-4l1-4"/>',
+ hooray: '<circle cx="12" cy="7" r="2.6"/><path d="M12 10v6M12 16l-3 5M12 16l3 5M12 11l-5-6M12 11l5-6"/>',
+ silly:  '<circle cx="10" cy="6" r="2.6"/><path d="M11 9l1 7M12 16l-3 5M12 16l3 5M11.5 11l-6 1M11.5 11l6 -1"/><path d="M8.6 6.6h2.6"/>',
+ jump:   '<circle cx="12" cy="4" r="2.6"/><path d="M12 7v6M12 13l-4 3l1 3M12 13l4 3l-1 3M12 9l-5-2M12 9l5-2"/><path d="M6 22h12" stroke-dasharray="2 2"/>',
+ shades: '<circle cx="12" cy="9" r="6"/><path d="M6.5 8h11"/><rect x="7" y="8" width="4" height="2.6" rx="1" fill="#14060f"/><rect x="13" y="8" width="4" height="2.6" rx="1" fill="#14060f"/><path d="M9.5 13q2.5 2 5 0"/>',
+ hat:    '<path d="M8 11L12 2l4 9z" fill="#ff5aa8"/><circle cx="12" cy="2" r="1.3" fill="#ffd24a"/><circle cx="12" cy="15" r="5"/><path d="M10 16q2 1.6 4 0"/>'
+};
+const svg = (k, c = '#14060f') => `<svg viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
+const POSES = Object.keys(ICON);
+
+const q = new URLSearchParams(location.search);
+const renderer = new T.WebGLRenderer({antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = T.SRGBColorSpace;
+document.body.prepend(renderer.domElement);
+const scene = new T.Scene(); scene.background = new T.Color('#14060f');
+const camera = playerCamera(new T.PerspectiveCamera(58, 1, .02, 30));
+const hemi = new T.HemisphereLight('#ffe6f2', '#3a1630', 1.1); scene.add(hemi);
+const key = new T.PointLight('#ffd9b0', 2.2, 4, 1.6); scene.add(key);
+const roof = new T.PointLight('#ffb3d6', 1.2, 3, 1.5); scene.add(roof);
+const flash = new T.PointLight('#ffffff', 0, 5, 1.2); scene.add(flash);
+
+// ---------- sound: the booth's own beeps and the flash pop (diegetic) ----------
+let ac = null;
+function audio() { if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { ac = null; } } if (ac?.state === 'suspended') ac.resume(); return ac; }
+function beep(f = 880, t = .09, g = .07, type = 'sine') {
+ const a = audio(); if (!a) return; const o = a.createOscillator(), v = a.createGain(), n = a.currentTime;
+ o.type = type; o.frequency.value = f; v.gain.setValueAtTime(g, n); v.gain.exponentialRampToValueAtTime(.0001, n + t); o.connect(v).connect(a.destination); o.start(n); o.stop(n + t + .02);
+}
+function pop() { beep(1800, .05, .09, 'square'); setTimeout(() => beep(240, .18, .06, 'triangle'), 30); }
+
+// ---------- the booth and the kids ----------
+const loader = new GLTFLoader();
+const load = url => new Promise((ok, no) => loader.load(url, g => ok(g.scene), undefined, no));
+const booth = await load('/models/cafe-photo-booth/model.glb'); scene.add(booth);
+const byName = n => { let f = null; booth.traverse(o => { if (!f && o.name === n) f = o; }); return f; };
+const softbox = byName('flash_softbox'), ring = [];
+for (let i = 0; i < 10; i++) { const b = byName('pose_light_' + i); if (b) { b.material = b.material.clone(); ring.push(b); } }
+if (softbox) softbox.material = softbox.material.clone();
+const stool = byName('stool'); if (stool) stool.visible = false;   // the kids stand for the pictures
+const camNode = byName('camera'); booth.updateMatrixWorld(true);
+const camPos = camNode ? camNode.getWorldPosition(new T.Vector3()) : new T.Vector3(-.19, 1.15, -.47);
+camera.position.copy(camPos).add(new T.Vector3(0, 0, .02));
+key.position.copy(camPos).add(new T.Vector3(0, .35, .05)); roof.position.set(camPos.x, 1.85, camPos.z + .6); flash.position.copy(camPos).add(new T.Vector3(0, .3, .04));
+const target = new T.Vector3(camPos.x, .8, camPos.z + .8); camera.lookAt(target);
+
+// the pose card glows on the bezel just above the camera window (a little texture the booth paints)
+const cardCanvas = document.createElement('canvas'); cardCanvas.width = cardCanvas.height = 128;
+const cardTex = new T.CanvasTexture(cardCanvas); cardTex.colorSpace = T.SRGBColorSpace;
+const card = new T.Mesh(new T.PlaneGeometry(.11, .11), new T.MeshBasicMaterial({map: cardTex, toneMapped: false}));
+card.position.set(camPos.x + .26, camPos.y - .02, camPos.z + .006); card.rotation.y = 0; scene.add(card);
+function paintCard(k) {
+ const g = cardCanvas.getContext('2d'); g.fillStyle = '#ffe9f4'; g.fillRect(0, 0, 128, 128); g.strokeStyle = '#ff5aa8'; g.lineWidth = 8; g.strokeRect(4, 4, 120, 120);
+ if (!k) { cardTex.needsUpdate = true; return; }
+ const img = new Image(); img.onload = () => { g.drawImage(img, 14, 14, 100, 100); cardTex.needsUpdate = true; };
+ img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg(k));
+}
+paintCard(null);
+
+const FRIENDS = ['ani', 'alexis', 'jeff'];
+const friend = FRIENDS.includes(q.get('with')) ? q.get('with') : FRIENDS[Math.floor(Math.random() * FRIENDS.length)];
+function rig(root) {
+ // the workers are rigid parts; give each arm a shoulder pivot and the head a neck pivot so they can pose
+ const parts = []; root.traverse(o => { if (o.isMesh) parts.push(o); });
+ const box = o => new T.Box3().setFromObject(o);
+ const all = box(root), mid = all.getCenter(new T.Vector3());
+ const nm = o => o.name.replace(/_/g, ' ');   // GLTFLoader turns spaces into underscores
+ const pick = re => parts.filter(p => re.test(nm(p)));
+ const pivotAt = (p, objs) => { const g = new T.Group(); g.position.copy(root.worldToLocal(p.clone())); root.add(g); root.updateMatrixWorld(true); objs.forEach(o => g.attach(o)); return g; };
+ const arms = [], C = o => box(o).getCenter(new T.Vector3());
+ const sleeves = pick(/^Shirt sleeve/), limbs = pick(/^(Forearm|Mitten hand)/);
+ for (const sl of sleeves) {
+  const side = Math.sign(C(sl).x - mid.x) || 1;
+  const rest = limbs.filter(o => sleeves.reduce((best, s2) => C(o).distanceTo(C(s2)) < C(o).distanceTo(C(best)) ? s2 : best, sleeves[0]) === sl);   // each forearm and hand goes with its nearest sleeve
+  const b = box(sl), bc = C(sl), bs = b.getSize(new T.Vector3());
+  const sh = new T.Vector3(bc.x - side * bs.x * .2, b.max.y - bs.y * .15, bc.z);   // shoulder: top, a little inboard
+  const g = pivotAt(sh, [sl, ...rest]); g.userData.side = side;
+  const outward = a => { g.rotation.z = a; root.updateMatrixWorld(true); return side * (C(g).x - mid.x); };
+  g.userData.dir = outward(1.2) > outward(-1.2) ? 1 : -1; g.rotation.z = 0; arms.push(g);   // which way swings this arm up and OUT (not across the face)
+ }
+ const headParts = pick(/^(Head|Hair|Ear|Button eye|Eye glint|Small nose|Gentle smile|Side swept fringe|Rounded bob)/);
+ let head = null;
+ if (headParts.length) { const nb = box(pick(/^Neck/)[0] || headParts[0]); head = pivotAt(new T.Vector3(mid.x, nb.max.y, nb.getCenter(new T.Vector3()).z), headParts); }
+ // props: sunglasses and a party hat, hidden until asked for
+ const hb = head ? box(head) : all, hc = hb.getCenter(new T.Vector3()), hs = hb.getSize(new T.Vector3());
+ const shades = new T.Group(), dark = new T.MeshStandardMaterial({color: '#1a0b16', roughness: .2, metalness: .3}), rim = new T.MeshStandardMaterial({color: '#ff5aa8', roughness: .4});
+ for (const s of [-1, 1]) { const l = new T.Mesh(new T.BoxGeometry(hs.x * .3, hs.y * .16, .01), dark); l.position.set(s * hs.x * .2, 0, 0); shades.add(l); }
+ const br = new T.Mesh(new T.BoxGeometry(hs.x * .74, hs.y * .04, .012), rim); br.position.y = hs.y * .07; shades.add(br);
+ const hat = new T.Mesh(new T.ConeGeometry(hs.x * .28, hs.y * .62, 10), new T.MeshStandardMaterial({color: '#ff5aa8', roughness: .6, flatShading: true}));
+ const pom = new T.Mesh(new T.IcosahedronGeometry(hs.x * .08, 0), new T.MeshStandardMaterial({color: '#ffd24a', flatShading: true})); pom.position.y = hs.y * .33; hat.add(pom);
+ const holder = head || root;
+ const local = v => holder.worldToLocal(v.clone());
+ shades.position.copy(local(new T.Vector3(hc.x, hc.y + hs.y * .04, hb.min.z - .006)));   // the face is the side nearest the camera
+ hat.position.copy(local(new T.Vector3(hc.x, hb.max.y + hs.y * .2, hc.z)));
+ hat.rotation.z = .25; shades.visible = hat.visible = false; holder.add(shades, hat);
+ return {root, arms, head, shades, hat, base: root.position.clone()};
+}
+async function kid(name, x) {
+ const g = await load(`/simulation-assets/workers/${name}-idle.glb`);
+ const holder = new T.Group(); holder.add(g); scene.add(holder);
+ let b = new T.Box3().setFromObject(g), s = b.getSize(new T.Vector3());
+ g.scale.setScalar((name === 'abbie' ? .92 : .97) / s.y);
+ b = new T.Box3().setFromObject(g); const c = b.getCenter(new T.Vector3());
+ g.position.sub(new T.Vector3(c.x, b.min.y, c.z));
+ // face the camera: the eyes are on the front of the head
+ let eye = null, hd = null; g.traverse(o => { const n = o.name.replace(/_/g, ' '); if (!eye && /^Button eye/.test(n)) eye = o; if (!hd && /^Head/.test(n)) hd = o; });
+ holder.position.set(x, booth.position.y + .08, camPos.z + .78); holder.updateMatrixWorld(true);
+ if (eye && hd) { const e = new T.Box3().setFromObject(eye).getCenter(new T.Vector3()), h = new T.Box3().setFromObject(hd).getCenter(new T.Vector3()); if (e.z > h.z) holder.rotation.y = Math.PI; }
+ holder.updateMatrixWorld(true);
+ return rig(holder);
+}
+const kids = [await kid('abbie', camPos.x - .13), await kid(friend, camPos.x + .18)];
+
+// ---------- doing a pose ----------
+const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+function goal(p) {
+ const up = Math.PI * .68, out = Math.PI * .45;   // short chibi arms: past ~125 degrees the hands hide behind the head
+ return {
+  wave: {arms: [0, up], head: .1, lean: 0, lift: 0}, hooray: {arms: [up, up], head: 0, lean: 0, lift: .02},
+  silly: {arms: [out, out], head: .4, lean: .14, lift: 0}, jump: {arms: [up * .8, up * .8], head: -.1, lean: 0, lift: .16},
+  shades: {arms: [0, Math.PI * .35], head: -.08, lean: .05, lift: 0, shades: 1}, hat: {arms: [Math.PI * .25, Math.PI * .25], head: .15, lean: -.06, lift: 0, hat: 1},
+  rest: {arms: [0, 0], head: 0, lean: 0, lift: 0}, blink: {arms: [.1, .1], head: -.25, lean: .04, lift: 0}
+ }[p];
+}
+const anim = [];
+function strike(k, p, delay = 0) {
+ const g = goal(p), from = {arms: k.arms.map(a => a.rotation.z * a.userData.dir), head: k.head ? k.head.rotation.z : 0, lean: k.root.rotation.z, lift: k.root.position.y - k.base.y};
+ k.shades.visible = !!g.shades; k.hat.visible = !!g.hat;
+ anim.push({k, from, g, t0: performance.now() + delay, d: 380});
+}
+function step(now) {
+ for (let i = anim.length - 1; i >= 0; i--) {
+  const a = anim[i], t = Math.min(1, Math.max(0, (now - a.t0) / a.d)); if (now < a.t0) continue; const e = ease(t), L = (x, y) => x + (y - x) * e;
+  a.k.arms.forEach((arm, j) => { const s = arm.userData.side; arm.rotation.z = arm.userData.dir * L(a.from.arms[j] ?? 0, a.g.arms[s < 0 ? 0 : 1]); });
+  if (a.k.head) a.k.head.rotation.z = L(a.from.head, a.g.head);
+  a.k.root.rotation.z = L(a.from.lean, a.g.lean); a.k.root.position.y = a.k.base.y + L(a.from.lift, a.g.lift);
+  if (t >= 1) anim.splice(i, 1);
+ }
+}
+
+// ---------- the round: four poses, four flashes, one strip ----------
+const posesEl = document.getElementById('poses'), againEl = document.getElementById('again'), stripEl = document.getElementById('strip');
+const wait = ms => new Promise(r => setTimeout(r, ms));
+let chosen = null, frames = [];
+function setRing(n, colour = '#ffcf7a') { ring.forEach((b, i) => { const on = i < n; b.material.emissive.set(on ? colour : '#000000'); b.material.emissiveIntensity = on ? 6 : 0; b.material.color.set(on ? '#fff1c9' : '#4a3640'); }); }
+function snap() {
+ renderer.render(scene, camera);
+ const c = document.createElement('canvas'), w = 360, h = Math.round(w * renderer.domElement.height / renderer.domElement.width);
+ const s = Math.min(w, h); c.width = c.height = s;
+ c.getContext('2d').drawImage(renderer.domElement, (renderer.domElement.width - renderer.domElement.width * s / w) / 2, (renderer.domElement.height - renderer.domElement.width * s / w) / 2,
+  renderer.domElement.width * s / w, renderer.domElement.width * s / w, 0, 0, s, s);
+ return c;
+}
+function printStrip() {
+ const fw = 300, pad = 18, c = document.createElement('canvas'); c.width = fw + pad * 2; c.height = pad + frames.length * (fw + pad) + 60;
+ const g = c.getContext('2d'); g.fillStyle = '#fff6fb'; g.fillRect(0, 0, c.width, c.height);
+ frames.forEach((f, i) => { g.drawImage(f, pad, pad + i * (fw + pad), fw, fw); });
+ g.fillStyle = '#ff5aa8'; const cy = c.height - 32;
+ for (const [x, r] of [[c.width / 2 - 40, 9], [c.width / 2, 14], [c.width / 2 + 40, 9]]) { g.beginPath(); for (let k = 0; k < 10; k++) { const a = -Math.PI / 2 + k * Math.PI / 5, rr = k % 2 ? r * .45 : r; g.lineTo(x + rr * Math.cos(a), cy + rr * Math.sin(a)); } g.fill(); }
+ return c.toDataURL('image/jpeg', .9);
+}
+function keep(url) { try { const k = 'aw-cafe-booth-strips', a = JSON.parse(localStorage.getItem(k) || '[]'); a.unshift({at: Date.now(), with: friend, url}); localStorage.setItem(k, JSON.stringify(a.slice(0, 6))); } catch {} }
+async function round() {
+ againEl.hidden = true; stripEl.classList.remove('out'); frames = [];
+ kids.forEach(k => strike(k, 'rest'));
+ for (let shot = 0; shot < 4; shot++) {
+  const want = POSES[Math.floor(Math.random() * POSES.length)];
+  const opts = [want, ...POSES.filter(p => p !== want).sort(() => Math.random() - .5).slice(0, 2)].sort(() => Math.random() - .5);
+  posesEl.innerHTML = opts.map(p => `<button data-p="${p}" aria-label="${p}">${svg(p)}</button>`).join(''); posesEl.hidden = false;
+  paintCard(want); chosen = null; beep(660, .12);
+  setRing(10);
+  for (let n = 10; n > 0; n--) { await wait(330); setRing(n - 1); if (n % 3 === 1) beep(990, .05, .05); }
+  const right = chosen === want;
+  if (!chosen) kids.forEach(k => strike(k, 'blink'));
+  await wait(chosen ? 60 : 380);
+  // the flash: the booth's softbox and a burst of light, then the picture
+  pop(); flash.intensity = 3; if (softbox) softbox.material.emissiveIntensity = 14;
+  frames.push(snap());
+  await wait(140); flash.intensity = 0; if (softbox) softbox.material.emissiveIntensity = 6;
+  if (right) setRing(10, '#3fe0d6'), beep(1320, .1, .05);
+  await wait(700); setRing(0); kids.forEach(k => strike(k, 'rest'));
+  await wait(450);
+ }
+ posesEl.hidden = true; paintCard(null);
+ // the strip drops out of the print slot
+ beep(300, .5, .03, 'sawtooth');
+ const url = printStrip(); stripEl.src = url; await wait(200); stripEl.classList.add('out'); keep(url);
+ await wait(1200); againEl.hidden = false;
+}
+posesEl.addEventListener('click', e => {
+ const b = e.target.closest('button'); if (!b || chosen) return; chosen = b.dataset.p; b.classList.add('on'); audio();
+ kids[0].shades && strike(kids[0], chosen); strike(kids[1], chosen, 220);   // the friend follows Abbie's lead
+});
+againEl.addEventListener('click', () => { audio(); round(); });
+stripEl.addEventListener('click', () => stripEl.classList.toggle('out'));
+
+function size() { const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w < h ? 78 : 60; camera.updateProjectionMatrix(); }
+addEventListener('resize', size); size();
+renderer.setAnimationLoop(now => { step(now); renderer.render(scene, camera); });
+if (q.has('auto')) round();
+if (POSES.includes(q.get('pose'))) kids.forEach(k => strike(k, q.get('pose')));   // a still of one pose, for the study page
+</script>
+</body>
+</html>

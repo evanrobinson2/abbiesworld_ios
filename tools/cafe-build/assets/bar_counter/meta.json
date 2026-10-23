@@ -1,0 +1,547 @@
+{
+ "id": "bar_counter",
+ "name": "Milkshake bar",
+ "group": "Bar",
+ "tier": "hero",
+ "intent": "The teal milkshake bar that curves round to the wall, a mint top, brass foot rail and a pink glow under the top.",
+ "real": "bar counter: 18 mm ply carcass with gloss teal fluted front, 20 mm solid-surface top with a bullnose, brass foot rail on brackets, stainless ice well and glass racks on the staff side, lift-up flap",
+ "moving": "the staff flap lifts; the ice-well lid slides",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  2.265,
+  5.645,
+  1.1
+ ],
+ "triangles": 2712,
+ "mass_kg": 704.754,
+ "centre_of_mass": [
+  3.233,
+  -0.688,
+  0.842
+ ],
+ "materials": [
+  "Glass_Clear",
+  "Glass_NeonPink",
+  "Metal_Brass",
+  "Metal_Steel",
+  "Plank_Counter",
+  "Plank_TealFront",
+  "Plastic_Black",
+  "Stone_MintTop"
+ ],
+ "joints": [
+  {
+   "part": "ice_well_lid",
+   "kind": "slide",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.3,
+   "note": ""
+  },
+  {
+   "part": "staff_flap",
+   "kind": "hinge",
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "min": 0,
+   "max": 1.6,
+   "note": "lift to walk behind the bar"
+  }
+ ],
+ "parts": [
+  {
+   "part": "bar_top",
+   "material": "Stone_MintTop",
+   "mass_kg": 274.3233,
+   "made": "solid"
+  },
+  {
+   "part": "bar_front",
+   "material": "Plank_TealFront",
+   "mass_kg": 85.6892,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "foot_rail",
+   "material": "Metal_Brass",
+   "mass_kg": 85.1743,
+   "made": "solid"
+  },
+  {
+   "part": "bar_back_panel",
+   "material": "Plank_Counter",
+   "mass_kg": 67.6083,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "staff_shelf",
+   "material": "Plank_Counter",
+   "mass_kg": 34.65,
+   "made": "solid"
+  },
+  {
+   "part": "staff_flap_top",
+   "material": "Stone_MintTop",
+   "mass_kg": 33.6,
+   "made": "solid"
+  },
+  {
+   "part": "ice_well_lid",
+   "material": "Metal_Steel",
+   "mass_kg": 9.48,
+   "made": "solid"
+  },
+  {
+   "part": "glass_rack_0_tray",
+   "material": "Plastic_Black",
+   "mass_kg": 6.72,
+   "made": "solid"
+  },
+  {
+   "part": "glass_rack_1_tray",
+   "material": "Plastic_Black",
+   "mass_kg": 6.72,
+   "made": "solid"
+  },
+  {
+   "part": "glass_rack_2_tray",
+   "material": "Plastic_Black",
+   "mass_kg": 6.72,
+   "made": "solid"
+  },
+  {
+   "part": "ice_well",
+   "material": "Metal_Steel",
+   "mass_kg": 3.871,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "flute_0",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_1",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_10",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_11",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_12",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_13",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_14",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_15",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_16",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_17",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_18",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_19",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_2",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_20",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_21",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_22",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_23",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_24",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_25",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_26",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_27",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_28",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_29",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_3",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_30",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_31",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_32",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_33",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_34",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_35",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_36",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_4",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_5",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_6",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_7",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_8",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "flute_9",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.1483,
+   "made": "solid"
+  },
+  {
+   "part": "glow_strip",
+   "material": "Glass_NeonPink",
+   "mass_kg": 1.8991,
+   "made": "solid"
+  },
+  {
+   "part": "rail_bracket_0",
+   "material": "Metal_Brass",
+   "mass_kg": 0.5028,
+   "made": "solid"
+  },
+  {
+   "part": "rail_bracket_1",
+   "material": "Metal_Brass",
+   "mass_kg": 0.5028,
+   "made": "solid"
+  },
+  {
+   "part": "rail_bracket_2",
+   "material": "Metal_Brass",
+   "mass_kg": 0.5028,
+   "made": "solid"
+  },
+  {
+   "part": "rail_bracket_3",
+   "material": "Metal_Brass",
+   "mass_kg": 0.5028,
+   "made": "solid"
+  },
+  {
+   "part": "rail_bracket_4",
+   "material": "Metal_Brass",
+   "mass_kg": 0.5028,
+   "made": "solid"
+  },
+  {
+   "part": "glass_0_0_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_0_0_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_0_0_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_0_1_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_0_1_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_0_1_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_0_2_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_0_2_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_0_2_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_0_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_0_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_0_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_1_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_1_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_1_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_2_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_2_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_1_2_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_0_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_0_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_0_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_1_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_1_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_1_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_2_0",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_2_1",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "glass_2_2_2",
+   "material": "Glass_Clear",
+   "mass_kg": 0.2333,
+   "made": "shell 4.0 mm"
+  }
+ ],
+ "built": "2026-10-23T08:59Z"
+}

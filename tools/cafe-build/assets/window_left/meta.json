@@ -1,0 +1,66 @@
+{
+ "id": "window_left",
+ "name": "Small window",
+ "group": "Room shell",
+ "tier": "dressing",
+ "intent": "",
+ "real": "timber window, 1.4 x 1.4 m",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  0.12,
+  1.4,
+  1.4
+ ],
+ "triangles": 200,
+ "mass_kg": 64.66,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  0.509
+ ],
+ "materials": [
+  "Glass_Window",
+  "Timber_Trim"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "window_l_glass",
+   "material": "Glass_Window",
+   "mass_kg": 31.752,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "window_l_frame_0",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4408,
+   "made": "solid"
+  },
+  {
+   "part": "window_l_frame_1",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4408,
+   "made": "solid"
+  },
+  {
+   "part": "window_l_frame_2",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4408,
+   "made": "solid"
+  },
+  {
+   "part": "window_l_frame_3",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4408,
+   "made": "solid"
+  },
+  {
+   "part": "window_l_mullion_1",
+   "material": "Timber_Trim",
+   "mass_kg": 3.145,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:38Z"
+}

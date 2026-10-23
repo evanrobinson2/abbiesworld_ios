@@ -1,0 +1,122 @@
+{
+ "id": "ceiling",
+ "name": "Ceiling",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "Magenta ceiling, stepped soffits around a raised coffer over the dance floor, teal and pink cove light.",
+ "real": "painted plasterboard ceiling at 4.2 m with a stepped coffer to 4.5 m and LED cove strips",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  12.0,
+  10.0,
+  0.35
+ ],
+ "triangles": 220,
+ "mass_kg": 1832.636,
+ "centre_of_mass": [
+  0.002,
+  0.004,
+  0.065
+ ],
+ "materials": [
+  "Glass_NeonPink",
+  "Glass_NeonTeal",
+  "Plaster_Magenta",
+  "Plaster_Violet"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "ceiling_front",
+   "material": "Plaster_Magenta",
+   "mass_kg": 515.1,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "ceiling_back",
+   "material": "Plaster_Magenta",
+   "mass_kg": 334.35,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "ceiling_left",
+   "material": "Plaster_Magenta",
+   "mass_kg": 273.825,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "ceiling_right",
+   "material": "Plaster_Magenta",
+   "mass_kg": 224.775,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "coffer_top",
+   "material": "Plaster_Violet",
+   "mass_kg": 164.7625,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "soffit_0_b",
+   "material": "Plaster_Magenta",
+   "mass_kg": 45.7875,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "soffit_0_f",
+   "material": "Plaster_Magenta",
+   "mass_kg": 45.7875,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "soffit_1_b",
+   "material": "Plaster_Magenta",
+   "mass_kg": 40.5375,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "soffit_1_f",
+   "material": "Plaster_Magenta",
+   "mass_kg": 40.5375,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "soffit_0_l",
+   "material": "Plaster_Magenta",
+   "mass_kg": 36.0375,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "soffit_0_r",
+   "material": "Plaster_Magenta",
+   "mass_kg": 36.0375,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "soffit_1_l",
+   "material": "Plaster_Magenta",
+   "mass_kg": 30.7875,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "soffit_1_r",
+   "material": "Plaster_Magenta",
+   "mass_kg": 30.7875,
+   "made": "shell 12.5 mm"
+  },
+  {
+   "part": "cove_0",
+   "material": "Glass_NeonTeal",
+   "mass_kg": 7.2732,
+   "made": "solid"
+  },
+  {
+   "part": "cove_1",
+   "material": "Glass_NeonPink",
+   "mass_kg": 6.2508,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

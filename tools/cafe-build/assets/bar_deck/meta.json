@@ -1,0 +1,156 @@
+{
+ "id": "bar_deck",
+ "name": "Bar deck",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "The darker raised floor under the bar and stools, with a rounded front edge and a step up.",
+ "real": "raised timber platform, 300 mm, stained oak boards, bullnose edge and one step",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  2.88,
+  10.0,
+  0.3
+ ],
+ "triangles": 300,
+ "mass_kg": 816.472,
+ "centre_of_mass": [
+  0.075,
+  0.0,
+  0.077
+ ],
+ "materials": [
+  "Plank_Counter",
+  "Plank_Dark"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "deck_frame",
+   "material": "Plank_Counter",
+   "mass_kg": 366.5551,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "step",
+   "material": "Plank_Dark",
+   "mass_kg": 43.0939,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_0",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_1",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_10",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_11",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_12",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_13",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_14",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_15",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_16",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_17",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_2",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_3",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_4",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_5",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_6",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_7",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_8",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "deck_board_9",
+   "material": "Plank_Dark",
+   "mass_kg": 21.6113,
+   "made": "solid"
+  },
+  {
+   "part": "bullnose",
+   "material": "Plank_Dark",
+   "mass_kg": 17.8191,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:35Z"
+}

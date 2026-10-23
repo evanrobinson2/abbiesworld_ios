@@ -1,0 +1,559 @@
+{
+ "id": "wall_right",
+ "name": "Right wall",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "",
+ "real": "stud wall, purple above, pink boards below, the big window over the bar",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  0.175,
+  10.3,
+  4.5
+ ],
+ "triangles": 1056,
+ "mass_kg": 1541.769,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  1.791
+ ],
+ "materials": [
+  "Plank_PinkPanel",
+  "Plaster_Purple",
+  "Timber_Trim"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "wall_r_a",
+   "material": "Plaster_Purple",
+   "mass_kg": 543.375,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_r_b",
+   "material": "Plaster_Purple",
+   "mass_kg": 543.375,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_r_head",
+   "material": "Plaster_Purple",
+   "mass_kg": 149.775,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_r_sill",
+   "material": "Plaster_Purple",
+   "mass_kg": 149.775,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "right_rail_0",
+   "material": "Timber_Trim",
+   "mass_kg": 16.25,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_0",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_1",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_10",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_11",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_12",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_13",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_14",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_15",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_16",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_17",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_18",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_19",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_2",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_20",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_21",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_22",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_23",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_24",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_25",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_26",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_27",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_28",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_29",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_3",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_30",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_31",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_32",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_33",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_34",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_35",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_36",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_37",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_38",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_39",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_4",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_40",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_41",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_42",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_43",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_44",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_45",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_46",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_47",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_48",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_49",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_5",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_50",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_51",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_52",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_53",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_54",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_55",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_56",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_57",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_58",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_59",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_6",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_60",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_61",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_62",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_63",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_64",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_65",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_66",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_67",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_68",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_69",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_7",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_70",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_71",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_72",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_73",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_74",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_75",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_76",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_77",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_78",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_79",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_8",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_80",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_81",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_82",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  },
+  {
+   "part": "right_board_0_9",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.6773,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:38Z"
+}

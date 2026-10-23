@@ -1,0 +1,689 @@
+{
+ "id": "plank_floor",
+ "name": "Plank floor",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "Warm honey boards everywhere at floor level. Boards run left to right with 3 mm gaps.",
+ "real": "22 mm oak boards, 180 mm wide, laid along X on a timber subfloor",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  12.0,
+  9.997,
+  0.022
+ ],
+ "triangles": 1320,
+ "mass_kg": 1817.054,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  0.011
+ ],
+ "materials": [
+  "Plank_Honey"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "board_0_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_12_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_15_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_18_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_21_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_24_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_27_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_30_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_33_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_36_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_39_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_3_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_42_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_45_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_48_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_51_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_54_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_6_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_9_1",
+   "material": "Plank_Honey",
+   "mass_kg": 22.0221,
+   "made": "solid"
+  },
+  {
+   "part": "board_10_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_13_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_16_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_19_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_1_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_22_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_25_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_28_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_31_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_34_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_37_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_40_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_43_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_46_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_49_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_4_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_52_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_7_1",
+   "material": "Plank_Honey",
+   "mass_kg": 18.993,
+   "made": "solid"
+  },
+  {
+   "part": "board_11_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_14_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_17_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_20_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_23_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_26_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_29_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_2_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_32_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_35_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_38_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_41_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_44_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_47_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_50_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_53_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_5_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_8_0",
+   "material": "Plank_Honey",
+   "mass_kg": 17.0736,
+   "made": "solid"
+  },
+  {
+   "part": "board_11_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_14_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_17_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_20_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_23_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_26_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_29_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_2_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_32_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_35_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_38_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_41_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_44_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_47_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_50_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_53_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_5_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_8_1",
+   "material": "Plank_Honey",
+   "mass_kg": 15.9638,
+   "made": "solid"
+  },
+  {
+   "part": "board_10_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_13_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_16_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_19_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_1_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_22_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_25_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_28_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_31_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_34_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_37_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_40_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_43_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_46_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_49_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_4_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_52_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_7_0",
+   "material": "Plank_Honey",
+   "mass_kg": 14.0444,
+   "made": "solid"
+  },
+  {
+   "part": "board_0_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_12_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_15_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_18_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_21_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_24_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_27_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_30_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_33_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_36_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_39_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_3_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_42_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_45_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_48_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_51_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_54_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_6_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  },
+  {
+   "part": "board_9_0",
+   "material": "Plank_Honey",
+   "mass_kg": 11.0152,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:37Z"
+}

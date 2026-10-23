@@ -1,0 +1,158 @@
+{
+ "id": "back_stars",
+ "name": "Back-bar neon stars",
+ "group": "Back bar",
+ "tier": "support",
+ "intent": "One big pink star and two cyan stars for the wall behind the machines. Facing -Y, wall at +Y.",
+ "real": "LED neon flex bent into stars on clear 5 mm acrylic backers, wall-mounted on stand-offs",
+ "moving": "none; the game pulses them with the party signal",
+ "reference": "studies/cafe/img/r2/backbar-front_0.jpg",
+ "size_m": [
+  1.956,
+  0.061,
+  0.97
+ ],
+ "triangles": 768,
+ "mass_kg": 6.677,
+ "centre_of_mass": [
+  0.0,
+  -0.006,
+  -0.002
+ ],
+ "materials": [
+  "Glass_Clear",
+  "Glass_NeonCyan",
+  "Glass_NeonPink",
+  "Metal_Chrome"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "star_pink_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 3.658,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_cyan_l_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 1.0037,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_cyan_r_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 0.6719,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_pink_tube",
+   "material": "Glass_NeonPink",
+   "mass_kg": 0.6471,
+   "made": "solid"
+  },
+  {
+   "part": "star_cyan_l_tube",
+   "material": "Glass_NeonCyan",
+   "mass_kg": 0.3389,
+   "made": "solid"
+  },
+  {
+   "part": "star_cyan_r_tube",
+   "material": "Glass_NeonCyan",
+   "mass_kg": 0.2773,
+   "made": "solid"
+  },
+  {
+   "part": "star_cyan_l_standoff_0",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_l_standoff_2",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_l_standoff_4",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_l_standoff_6",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_l_standoff_8",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_r_standoff_0",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_r_standoff_2",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_r_standoff_4",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_r_standoff_6",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_cyan_r_standoff_8",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_pink_standoff_0",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_pink_standoff_2",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_pink_standoff_4",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_pink_standoff_6",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "star_pink_standoff_8",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0053,
+   "made": "shell 1.2 mm"
+  }
+ ],
+ "built": "2026-10-23T08:17Z"
+}

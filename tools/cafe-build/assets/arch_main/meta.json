@@ -1,0 +1,238 @@
+{
+ "id": "arch_main",
+ "name": "Main arch",
+ "group": "Room shell",
+ "tier": "hero",
+ "intent": "The big glowing arch at the back, where friends arrive.",
+ "real": "tangerine-painted timber arch frame with 30 warm marquee bulbs and aubergine double doors",
+ "moving": "the two doors swing open; the bulbs chase with the party signal",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  3.16,
+  0.36,
+  3.48
+ ],
+ "triangles": 936,
+ "mass_kg": 350.339,
+ "centre_of_mass": [
+  0.0,
+  1.449,
+  0.514
+ ],
+ "materials": [
+  "Glass_Porthole",
+  "Light_Bulb",
+  "Metal_Brass",
+  "Plaster_Tangerine",
+  "Timber_DoorDark"
+ ],
+ "joints": [
+  {
+   "part": "arch_door_l",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": -1.6,
+   "note": "opens into the caf\u00e9"
+  },
+  {
+   "part": "arch_door_r",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.6,
+   "note": "opens into the caf\u00e9"
+  }
+ ],
+ "parts": [
+  {
+   "part": "arch_door_l_panel",
+   "material": "Timber_DoorDark",
+   "mass_kg": 122.9219,
+   "made": "solid"
+  },
+  {
+   "part": "arch_door_r_panel",
+   "material": "Timber_DoorDark",
+   "mass_kg": 122.9219,
+   "made": "solid"
+  },
+  {
+   "part": "arch_frame",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 95.2266,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "arch_door_l_glass",
+   "material": "Glass_Porthole",
+   "mass_kg": 1.6875,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "arch_door_r_glass",
+   "material": "Glass_Porthole",
+   "mass_kg": 1.6875,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "arch_door_l_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 1.4906,
+   "made": "solid"
+  },
+  {
+   "part": "arch_door_r_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 1.4906,
+   "made": "solid"
+  },
+  {
+   "part": "arch_door_l_porthole",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 1.2096,
+   "made": "solid"
+  },
+  {
+   "part": "arch_door_r_porthole",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 1.2096,
+   "made": "solid"
+  },
+  {
+   "part": "bulb_0",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_1",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_10",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_11",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_12",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_13",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_14",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_15",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_16",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_17",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_18",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_19",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_2",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_20",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_3",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_4",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_5",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_6",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_7",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_8",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "bulb_9",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0235,
+   "made": "shell 0.8 mm"
+  }
+ ],
+ "built": "2026-10-23T08:35Z"
+}

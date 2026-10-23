@@ -1,0 +1,301 @@
+{
+ "id": "cup_topper",
+ "name": "Cream topper",
+ "group": "Party",
+ "tier": "support",
+ "intent": "The whipped-cream swirl that crowns the cup, with a wafer cone, cherries and sprinkles.",
+ "real": "a sculpted topper: expanded-polystyrene swirl with a hard-coat of pink and cream paint, a wafer cone and three cherries, about 1.3 m tall",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  3.17,
+  3.17,
+  1.611
+ ],
+ "triangles": 1384,
+ "mass_kg": 102.879,
+ "centre_of_mass": [
+  -0.004,
+  0.002,
+  0.011
+ ],
+ "materials": [
+  "Food_Cherry",
+  "Food_Cream",
+  "Food_CreamPink",
+  "Food_Sprinkles",
+  "Food_Wafer",
+  "Plaster_Lime",
+  "Plastic_Lime",
+  "Plastic_Violet",
+  "Plastic_Yellow"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "swirl_0",
+   "material": "Food_Cream",
+   "mass_kg": 39.0444,
+   "made": "solid"
+  },
+  {
+   "part": "swirl_1",
+   "material": "Food_CreamPink",
+   "mass_kg": 26.6758,
+   "made": "solid"
+  },
+  {
+   "part": "swirl_2",
+   "material": "Food_Cream",
+   "mass_kg": 17.166,
+   "made": "solid"
+  },
+  {
+   "part": "swirl_3",
+   "material": "Food_CreamPink",
+   "mass_kg": 10.1482,
+   "made": "solid"
+  },
+  {
+   "part": "swirl_4",
+   "material": "Food_Cream",
+   "mass_kg": 5.2557,
+   "made": "solid"
+  },
+  {
+   "part": "swirl_5",
+   "material": "Food_CreamPink",
+   "mass_kg": 2.122,
+   "made": "solid"
+  },
+  {
+   "part": "wafer_cone",
+   "material": "Food_Wafer",
+   "mass_kg": 0.9996,
+   "made": "solid"
+  },
+  {
+   "part": "swirl_tip",
+   "material": "Food_Cream",
+   "mass_kg": 0.7004,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_0_fruit",
+   "material": "Food_Cherry",
+   "mass_kg": 0.2314,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_1_fruit",
+   "material": "Food_Cherry",
+   "mass_kg": 0.2314,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_2_fruit",
+   "material": "Food_Cherry",
+   "mass_kg": 0.2314,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_0_stem",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.004,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_1_stem",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.004,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_2_stem",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.004,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_0",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_1",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_10",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_12",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_13",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_14",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_16",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_17",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_18",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_2",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_20",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_21",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_22",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_24",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_25",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_26",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_28",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_29",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_4",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_5",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_6",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_8",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_9",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "sprinkle_11",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0012,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "sprinkle_15",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0012,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "sprinkle_19",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0012,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "sprinkle_23",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0012,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "sprinkle_27",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0012,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "sprinkle_3",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0012,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "sprinkle_7",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0012,
+   "made": "shell 3.0 mm"
+  }
+ ],
+ "built": "2026-10-23T08:26Z"
+}

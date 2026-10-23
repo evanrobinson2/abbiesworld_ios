@@ -1,0 +1,659 @@
+{
+ "id": "espresso_machine",
+ "name": "Espresso machine",
+ "group": "Back bar",
+ "tier": "hero",
+ "intent": "Pink enamel body on a teal plinth and orange skirt (the round-2 low-poly pick), chrome group, cup warmer rail,\nviolet wand and handle. Inside: copper boiler with heating element, vibration pump, solenoid, pressurestat, OPV and\ncopper pipes, all named, because the espresso game is fixing this system.",
+ "real": "single-group prosumer espresso machine (E61-style group, 1.8 L copper boiler, vibration pump), about 380 x 440 x 420 mm",
+ "moving": "portafilter twists in and lifts out; steam wand swings; steam knob turns; three buttons press; drip tray slides out and its grate lifts; water tank lifts out; right side panel lifts off to show the boiler, pump and valves",
+ "reference": "studies/cafe/img/r2/asset-espresso-lowpoly_0.jpg (Midjourney round 2, low poly, Evan picked low poly 2026-10-23 08:02Z)",
+ "size_m": [
+  0.41,
+  0.463,
+  0.474
+ ],
+ "triangles": 2412,
+ "mass_kg": 24.525,
+ "centre_of_mass": [
+  0.0,
+  -0.0,
+  0.047
+ ],
+ "materials": [
+  "Clay_CupLime",
+  "Clay_CupOrange",
+  "Coffee",
+  "Glass_Gauge",
+  "Glass_Tank",
+  "Light_Bulb",
+  "Metal_Brass",
+  "Metal_Chrome",
+  "Metal_ChromeBrass",
+  "Metal_Copper",
+  "Metal_Dark",
+  "Metal_OrangeEnamel",
+  "Metal_PinkEnamel",
+  "Metal_Steel",
+  "Metal_TealEnamel",
+  "Plaster_Cream",
+  "Plastic_Lime",
+  "Plastic_Orange",
+  "Plastic_Pink",
+  "Plastic_Red",
+  "Plastic_Teal",
+  "Plastic_Violet",
+  "Rubber_Black",
+  "Water"
+ ],
+ "joints": [
+  {
+   "part": "button_brew",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.004,
+   "note": "brew"
+  },
+  {
+   "part": "button_hot_water",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.004,
+   "note": "hot_water"
+  },
+  {
+   "part": "button_power",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.004,
+   "note": "power"
+  },
+  {
+   "part": "cup_lime",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "cup_orange",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "drip_tray",
+   "kind": "slide",
+   "axis": [
+    0,
+    -1,
+    0
+   ],
+   "min": 0,
+   "max": 0.16,
+   "note": "pull to empty"
+  },
+  {
+   "part": "drip_grate",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": "lifts off to clean"
+  },
+  {
+   "part": "water_tank",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": "lifts out through the top to fill; holds 2.2 L"
+  },
+  {
+   "part": "portafilter",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -0.8,
+   "max": 0,
+   "note": "twist to lock (lifts out when unlocked)"
+  },
+  {
+   "part": "side_panel_right",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": "unscrew to reach the boiler, pump and valves"
+  },
+  {
+   "part": "steam_knob",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 4.7,
+   "note": "opens the steam valve (about 1.5 turns)"
+  },
+  {
+   "part": "steam_wand",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -0.9,
+   "max": 0.9,
+   "note": "swings out over a jug"
+  },
+  {
+   "part": "tank_lid",
+   "kind": "hinge",
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "min": 0,
+   "max": 1.6,
+   "note": "lift to fill the tank"
+  }
+ ],
+ "parts": [
+  {
+   "part": "cup_warmer",
+   "material": "Metal_Steel",
+   "mass_kg": 2.9009,
+   "made": "solid"
+  },
+  {
+   "part": "group_body",
+   "material": "Metal_ChromeBrass",
+   "mass_kg": 2.5914,
+   "made": "solid"
+  },
+  {
+   "part": "skirt",
+   "material": "Metal_OrangeEnamel",
+   "mass_kg": 2.3569,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "plinth",
+   "material": "Metal_TealEnamel",
+   "mass_kg": 2.2634,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "tank_water",
+   "material": "Water",
+   "mass_kg": 2.2185,
+   "made": "solid"
+  },
+  {
+   "part": "body_column",
+   "material": "Metal_PinkEnamel",
+   "mass_kg": 2.1584,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "body_head",
+   "material": "Metal_PinkEnamel",
+   "mass_kg": 1.8754,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "boiler",
+   "material": "Metal_Copper",
+   "mass_kg": 1.1623,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "pump",
+   "material": "Metal_Dark",
+   "mass_kg": 1.005,
+   "made": "solid"
+  },
+  {
+   "part": "water_tank",
+   "material": "Glass_Tank",
+   "mass_kg": 0.8728,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "tank_lid",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.8464,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "group_collar",
+   "material": "Metal_ChromeBrass",
+   "mass_kg": 0.4896,
+   "made": "solid"
+  },
+  {
+   "part": "drip_tray",
+   "material": "Metal_Steel",
+   "mass_kg": 0.3965,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "side_panel_right",
+   "material": "Metal_OrangeEnamel",
+   "mass_kg": 0.3945,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "cup_rail",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.3326,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "solenoid_valve",
+   "material": "Metal_Brass",
+   "mass_kg": 0.306,
+   "made": "solid"
+  },
+  {
+   "part": "pressurestat",
+   "material": "Metal_Dark",
+   "mass_kg": 0.2826,
+   "made": "solid"
+  },
+  {
+   "part": "cup_lime_body",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2383,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_orange_body",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.2383,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "portafilter_basket",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.1357,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "trim_left",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.1274,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "heating_element",
+   "material": "Metal_Steel",
+   "mass_kg": 0.0967,
+   "made": "solid"
+  },
+  {
+   "part": "pipe_steam",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0936,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "gauge_bezel",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0854,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "pipe_pump_boiler",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0669,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "wand_pipe",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0572,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_rim",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.055,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "opv_valve",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0539,
+   "made": "solid"
+  },
+  {
+   "part": "steam_knob_base",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0497,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "safety_valve",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0462,
+   "made": "solid"
+  },
+  {
+   "part": "shower_screen",
+   "material": "Metal_Steel",
+   "mass_kg": 0.0427,
+   "made": "solid"
+  },
+  {
+   "part": "grate_bar_0",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_bar_1",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_bar_2",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_bar_3",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_bar_4",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_bar_5",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_bar_6",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_bar_7",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "grate_bar_8",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0303,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "hot_water_spout",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0251,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "portafilter_grip",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0244,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "pipe_boiler_group",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0211,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "portafilter_neck",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0198,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "wand_ball",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0189,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "group_gasket",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0187,
+   "made": "solid"
+  },
+  {
+   "part": "button_brew_ring",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.018,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "button_hot_water_ring",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.018,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "button_power_ring",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.018,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "pipe_tank_pump",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0173,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "gauge_lens",
+   "material": "Glass_Gauge",
+   "mass_kg": 0.0166,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "coffee_puck",
+   "material": "Coffee",
+   "mass_kg": 0.0159,
+   "made": "solid"
+  },
+  {
+   "part": "wand_sleeve",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0157,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "steam_knob_cap",
+   "material": "Plastic_Orange",
+   "mass_kg": 0.0135,
+   "made": "solid"
+  },
+  {
+   "part": "wand_tip",
+   "material": "Metal_Steel",
+   "mass_kg": 0.0131,
+   "made": "solid"
+  },
+  {
+   "part": "foot_0",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0104,
+   "made": "solid"
+  },
+  {
+   "part": "foot_1",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0104,
+   "made": "solid"
+  },
+  {
+   "part": "foot_2",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0104,
+   "made": "solid"
+  },
+  {
+   "part": "foot_3",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0104,
+   "made": "solid"
+  },
+  {
+   "part": "rail_post_0",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0099,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "rail_post_1",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0099,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "rail_post_2",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0099,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "rail_post_3",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0099,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spout_l",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0067,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spout_r",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0067,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "cup_lime_handle",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.0061,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_orange_handle",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.0061,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "button_brew",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0053,
+   "made": "solid"
+  },
+  {
+   "part": "button_hot_water",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0053,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "button_power",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0053,
+   "made": "solid"
+  },
+  {
+   "part": "gauge_face",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0049,
+   "made": "solid"
+  },
+  {
+   "part": "portafilter_lug_l",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0048,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "portafilter_lug_r",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0048,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "power_lamp",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0005,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "gauge_needle",
+   "material": "Plastic_Red",
+   "mass_kg": 0.0001,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:14Z"
+}

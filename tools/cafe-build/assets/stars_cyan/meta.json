@@ -1,0 +1,54 @@
+{
+ "id": "stars_cyan",
+ "name": "Cyan stars",
+ "group": "Party",
+ "tier": "hero",
+ "intent": "",
+ "real": "cyan LED neon stars, 1.0 m and 0.7 m, on the right wall",
+ "moving": "pulse with the party signal",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  0.051,
+  9.087,
+  1.075
+ ],
+ "triangles": 312,
+ "mass_kg": 11.639,
+ "centre_of_mass": [
+  -0.0,
+  -0.0,
+  -0.015
+ ],
+ "materials": [
+  "Glass_Clear",
+  "Glass_NeonCyan"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "star_big_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 5.0008,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_big_tube",
+   "material": "Glass_NeonCyan",
+   "mass_kg": 3.9788,
+   "made": "solid"
+  },
+  {
+   "part": "star_mid_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 1.8003,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_mid_tube",
+   "material": "Glass_NeonCyan",
+   "mass_kg": 0.8594,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:37Z"
+}

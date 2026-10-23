@@ -1,0 +1,35 @@
+{
+ "id": "beanbag_lime_big",
+ "name": "Big lime beanbag",
+ "group": "Party",
+ "tier": "support",
+ "intent": "",
+ "real": "1.1 m canvas beanbag",
+ "moving": "",
+ "reference": "studies/cafe/img/r2/asset-beanbag-lowpoly_0.jpg (round 2, low poly, Evan picked low poly)",
+ "size_m": [
+  1.141,
+  1.063,
+  0.53
+ ],
+ "triangles": 80,
+ "mass_kg": 6.0,
+ "centre_of_mass": [
+  0.009,
+  -0.033,
+  0.062
+ ],
+ "materials": [
+  "Cloth_Lime"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "bag",
+   "material": "Cloth_Lime",
+   "mass_kg": 6.0,
+   "made": "given"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

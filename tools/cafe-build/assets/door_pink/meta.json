@@ -1,0 +1,94 @@
+{
+ "id": "door_pink",
+ "name": "Pink door",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "",
+ "real": "pink-painted solid-core door in a tangerine arch surround, brass knob",
+ "moving": "door hinges open; the knob turns",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  1.22,
+  0.166,
+  2.53
+ ],
+ "triangles": 272,
+ "mass_kg": 103.398,
+ "centre_of_mass": [
+  -0.0,
+  0.0,
+  1.101
+ ],
+ "materials": [
+  "Metal_Brass",
+  "Plaster_Magenta",
+  "Plaster_Pink",
+  "Plaster_Sun",
+  "Plaster_Tangerine"
+ ],
+ "joints": [
+  {
+   "part": "door_leaf",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.6,
+   "note": "staff door"
+  },
+  {
+   "part": "door_knob",
+   "kind": "knob",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 1.2,
+   "note": ""
+  }
+ ],
+ "parts": [
+  {
+   "part": "door_panel",
+   "material": "Plaster_Pink",
+   "mass_kg": 60.2744,
+   "made": "solid"
+  },
+  {
+   "part": "door_surround",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 32.4028,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "door_inlay_0",
+   "material": "Plaster_Magenta",
+   "mass_kg": 4.9769,
+   "made": "solid"
+  },
+  {
+   "part": "door_inlay_1",
+   "material": "Plaster_Magenta",
+   "mass_kg": 4.9769,
+   "made": "solid"
+  },
+  {
+   "part": "door_knob",
+   "material": "Metal_Brass",
+   "mass_kg": 0.582,
+   "made": "solid"
+  },
+  {
+   "part": "door_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.1852,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:37Z"
+}

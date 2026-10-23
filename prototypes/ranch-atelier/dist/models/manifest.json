@@ -3,6 +3,1245 @@
  "updated": "2026-10-23",
  "models": [
   {
+   "id": "cafe-room",
+   "name": "The whole café",
+   "group": "Café · low poly",
+   "subject": "the dance-party café room",
+   "style": "low poly",
+   "ask": "Evan's locked dance-party picture, built whole: every model placed, iso and first person",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-room/model.glb",
+    "render": "/models/cafe-room/hero.jpg"
+   },
+   "outline": "Hero render from the picture's camera. Every part carries material, density, mass and joints.",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-back-counter",
+   "name": "Back counter",
+   "group": "Café · low poly",
+   "subject": "back counter",
+   "style": "low poly",
+   "ask": "The staff counter along the right wall that holds every machine. Long axis along Y; the staff side (doors) faces -X.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-back-counter/render.jpg",
+    "glb": "/models/cafe-back-counter/model.glb",
+    "render": "/models/cafe-back-counter/render.jpg"
+   },
+   "outline": "900 triangles, 235.047 kg, 0.68 x 3.62 x 1.21 m, 7 moving parts. Real: back-bar cabinet run: 18 mm lacquered plywood carcass on a kick plinth, 20 mm solid-surface top, stainless sink, 4.8 m x 0.65 m x 0.90 m",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-cash-register",
+   "name": "Cash register",
+   "group": "Café · low poly",
+   "subject": "cash register",
+   "style": "low poly",
+   "ask": "The till at the end of the back counter. Its drawer hides the brass basement key: Abbie finds it, her inner voice says\n\"Interesting... this key will come in handy.\", it goes in her inventory, and it opens basement_door (a secret unlock).",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-cash-register/model.glb",
+    "render": "/models/cafe-cash-register/render.jpg"
+   },
+   "outline": "1,524 triangles, 9.637 kg, 0.41 x 0.45 x 0.42 m, 22 moving parts. Real: 1950s-style mechanical cash register: pressed-steel case in pink enamel over a cast base, brass trim, three rows of plunger keys, pop-up price flags behind glass, side crank, spring cash drawer with a wooden coin tray",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-espresso-machine",
+   "name": "Espresso machine",
+   "group": "Café · low poly",
+   "subject": "espresso machine",
+   "style": "low poly",
+   "ask": "Pink enamel body on a teal plinth and orange skirt (the round-2 low-poly pick), chrome group, cup warmer rail,\nviolet wand and handle. Inside: copper boiler with heating element, vibration pump, solenoid, pressurestat, OPV and\ncopper pipes, all named, because the espresso game is fixing this system.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/asset-espresso-lowpoly_0.jpg",
+    "glb": "/models/cafe-espresso-machine/model.glb",
+    "render": "/models/cafe-espresso-machine/render.jpg"
+   },
+   "outline": "2,412 triangles, 24.525 kg, 0.41 x 0.46 x 0.47 m, 13 moving parts. Real: single-group prosumer espresso machine (E61-style group, 1.8 L copper boiler, vibration pump), about 380 x 440 x 420 mm",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-crt-terminal",
+   "name": "Grace's computer",
+   "group": "Café · low poly",
+   "subject": "grace's computer",
+   "style": "low poly",
+   "ask": "Aunt Grace's 1986 computer, a quiet nod (Evan was six, playing in her basement). The screen is a named part\n(`crt_screen`) that the game paints with the C:\\GRACE> shell from simulations/grace-dos.mjs.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-crt-terminal/render.jpg",
+    "glb": "/models/cafe-crt-terminal/model.glb",
+    "render": "/models/cafe-crt-terminal/render.jpg"
+   },
+   "outline": "4,192 triangles, 15.173 kg, 0.52 x 0.69 x 0.47 m, 81 moving parts. Real: a 1986 beige personal computer: system unit with two 5.25-inch floppy drives, 12-inch green-phosphor monitor, 84-key keyboard on a coiled cable",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-smoothie-machine",
+   "name": "Smoothie machine",
+   "group": "Café · low poly",
+   "subject": "smoothie machine",
+   "style": "low poly",
+   "ask": "Faceted pink base on an orange foot ring with an orange speed dial and four coloured buttons (the low-poly\npick), a faceted Tritan jar with a pink handle, a violet lid, and a strawberry smoothie inside. The motor,\ncoupling and blade set are real parts because the smoothie game times the drop, blend and pour.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/asset-smoothie-lowpoly_0.jpg",
+    "glb": "/models/cafe-smoothie-machine/model.glb",
+    "render": "/models/cafe-smoothie-machine/render.jpg"
+   },
+   "outline": "892 triangles, 6.344 kg, 0.28 x 0.23 x 0.52 m, 9 moving parts. Real: commercial countertop blender, 1.5 kW motor, 2 L Tritan jar, about 210 x 230 x 470 mm",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-back-stars",
+   "name": "Back-bar neon stars",
+   "group": "Café · low poly",
+   "subject": "back-bar neon stars",
+   "style": "low poly",
+   "ask": "One big pink star and two cyan stars for the wall behind the machines. Facing -Y, wall at +Y.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/backbar-front_0.jpg",
+    "glb": "/models/cafe-back-stars/model.glb",
+    "render": "/models/cafe-back-stars/render.jpg"
+   },
+   "outline": "768 triangles, 6.677 kg, 1.96 x 0.06 x 0.97 m, 0 moving parts. Real: LED neon flex bent into stars on clear 5 mm acrylic backers, wall-mounted on stand-offs",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-grinder",
+   "name": "Coffee grinder",
+   "group": "Café · low poly",
+   "subject": "coffee grinder",
+   "style": "low poly",
+   "ask": "Pink enamel tower, chrome collar and chute, glass bean hopper full of beans, a fork for the portafilter.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/backbar-machines_0.jpg",
+    "glb": "/models/cafe-grinder/model.glb",
+    "render": "/models/cafe-grinder/render.jpg"
+   },
+   "outline": "584 triangles, 8.193 kg, 0.20 x 0.26 x 0.52 m, 3 moving parts. Real: on-demand flat-burr grinder, 64 mm burrs, 1.2 kg bean hopper, about 200 x 260 x 480 mm",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-cup-shelves",
+   "name": "Cup shelves",
+   "group": "Café · low poly",
+   "subject": "cup shelves",
+   "style": "low poly",
+   "ask": "Floating shelves over the back counter: stacks of teal, lime and orange cups and jars of straws and sweets.\nLong axis along Y; the wall is at +X (the shelves hang on the right wall).",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-cup-shelves/render.jpg",
+    "glb": "/models/cafe-cup-shelves/model.glb",
+    "render": "/models/cafe-cup-shelves/render.jpg"
+   },
+   "outline": "2,720 triangles, 47.338 kg, 0.24 x 1.60 x 1.18 m, 15 moving parts. Real: three 30 mm oak shelves on powder-coated brackets, 1.6 m long, with cups and glass jars",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-urn",
+   "name": "Hot water urn",
+   "group": "Café · low poly",
+   "subject": "hot water urn",
+   "style": "low poly",
+   "ask": "Chrome urn on three pink feet, a sight glass, a lever tap, side handles and a lid knob.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/backbar-machines_0.jpg",
+    "glb": "/models/cafe-urn/model.glb",
+    "render": "/models/cafe-urn/render.jpg"
+   },
+   "outline": "456 triangles, 21.667 kg, 0.39 x 0.37 x 0.55 m, 2 moving parts. Real: 10 L stainless hot water urn with sight gauge and lever tap, about 300 x 340 x 520 mm",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-menu-board",
+   "name": "Menu board",
+   "group": "Café · low poly",
+   "subject": "menu board",
+   "style": "low poly",
+   "ask": "The menu as pictures, no words (Evan's rule): a coffee cup, a smoothie, a donut, a cookie, a star for the\nparty, with chalk dots for price. Hangs on the wall at +Y facing -Y.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-menu-board/render.jpg",
+    "glb": "/models/cafe-menu-board/model.glb",
+    "render": "/models/cafe-menu-board/render.jpg"
+   },
+   "outline": "908 triangles, 30.343 kg, 1.40 x 0.04 x 1.16 m, 0 moving parts. Real: 8 mm slate chalkboard in a 40 mm painted timber frame, 1.4 x 0.9 m, hung on two chains",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-pastry-case",
+   "name": "Pastry case",
+   "group": "Café · low poly",
+   "subject": "pastry case",
+   "style": "low poly",
+   "ask": "A pink-based glass case with croissants, iced donuts, muffins and cookies on two shelves.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-pastry-case/render.jpg",
+    "glb": "/models/cafe-pastry-case/model.glb",
+    "render": "/models/cafe-pastry-case/render.jpg"
+   },
+   "outline": "1,140 triangles, 21.62 kg, 0.70 x 0.45 x 0.38 m, 10 moving parts. Real: countertop glass display case, two glass shelves, rear sliding doors, about 700 x 420 x 380 mm",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-tutor-manual",
+   "name": "Typing tutor manual",
+   "group": "Café · low poly",
+   "subject": "typing tutor manual",
+   "style": "low poly",
+   "ask": "Our own typing tutor's manual (style yes, expression never), yellow cover with a pink star, a wire spiral.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-tutor-manual/render.jpg",
+    "glb": "/models/cafe-tutor-manual/model.glb",
+    "render": "/models/cafe-tutor-manual/render.jpg"
+   },
+   "outline": "1,528 triangles, 0.336 kg, 0.16 x 0.21 x 0.02 m, 1 moving parts. Real: A5 spiral-bound manual, 120 pages of 80 gsm paper in laminated card covers, 22 wire loops",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-giant-sundaes",
+   "name": "Giant sundae",
+   "group": "Café · low poly",
+   "subject": "giant sundae",
+   "style": "low poly",
+   "ask": "One giant sundae (the layout puts three on the bar: these are the bar's signs, read from across the room).",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-giant-sundaes/model.glb",
+    "render": "/models/cafe-giant-sundaes/render.jpg"
+   },
+   "outline": "436 triangles, 6.93 kg, 0.34 x 0.32 x 0.91 m, 0 moving parts. Real: a display sundae prop on the bar: 600 mm cast pink acrylic goblet, foam ice cream with a hard coat, a resin cherry and two straws",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-bar-counter",
+   "name": "Milkshake bar",
+   "group": "Café · low poly",
+   "subject": "milkshake bar",
+   "style": "low poly",
+   "ask": "The teal milkshake bar that curves round to the wall, a mint top, brass foot rail and a pink glow under the top.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-bar-counter/model.glb",
+    "render": "/models/cafe-bar-counter/render.jpg"
+   },
+   "outline": "2,712 triangles, 704.754 kg, 2.27 x 5.64 x 1.10 m, 2 moving parts. Real: bar counter: 18 mm ply carcass with gloss teal fluted front, 20 mm solid-surface top with a bullnose, brass foot rail on brackets, stainless ice well and glass racks on the staff side, lift-up flap",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-bar-stools",
+   "name": "Bar stool",
+   "group": "Café · low poly",
+   "subject": "bar stool",
+   "style": "low poly",
+   "ask": "One stool (the layout places six along the bar).",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/asset-stool-lowpoly_0.jpg",
+    "glb": "/models/cafe-bar-stools/model.glb",
+    "render": "/models/cafe-bar-stools/render.jpg"
+   },
+   "outline": "488 triangles, 17.735 kg, 0.45 x 0.45 x 0.76 m, 1 moving parts. Real: swivel bar stool: 380 mm vinyl seat on foam, plum powder-coated post with a gas lift, chrome foot ring, 450 mm steel base; seat 750 mm; about 11 kg",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-bar-bits",
+   "name": "Bar bits",
+   "group": "Café · low poly",
+   "subject": "bar bits",
+   "style": "low poly",
+   "ask": "Built as one group laid out along a 1.6 m stretch of bar top (Y along). The service bell is how a customer\ncalls the staff: a sound in the world, not a UI tick.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-bar-bits/model.glb",
+    "render": "/models/cafe-bar-bits/render.jpg"
+   },
+   "outline": "1,368 triangles, 9.775 kg, 0.13 x 1.65 x 0.33 m, 11 moving parts. Real: the small things on a milkshake bar: a service bell, napkin dispenser, straw jar, three syrup bottles, a cherry jar, shake tins and a tip jar",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-disco-ball-big",
+   "name": "Big disco ball",
+   "group": "Café · low poly",
+   "subject": "big disco ball",
+   "style": "low poly",
+   "ask": "Hangs from the ceiling (origin at the ceiling).",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-disco-ball-big/model.glb",
+    "render": "/models/cafe-disco-ball-big/render.jpg"
+   },
+   "outline": "424 triangles, 23.304 kg, 0.80 x 0.80 x 1.30 m, 1 moving parts. Real: 800 mm mirror ball, glass mirror tiles on a polystyrene core, ceiling motor",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-stars-cyan",
+   "name": "Cyan stars",
+   "group": "Café · low poly",
+   "subject": "cyan stars",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-stars-cyan/model.glb",
+    "render": "/models/cafe-stars-cyan/render.jpg"
+   },
+   "outline": "312 triangles, 11.639 kg, 0.05 x 9.09 x 1.07 m, 0 moving parts. Real: cyan LED neon stars, 1.0 m and 0.7 m, on the right wall",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-cup-dj-booth",
+   "name": "Giant cup DJ booth",
+   "group": "Café · low poly",
+   "subject": "giant cup dj booth",
+   "style": "low poly",
+   "ask": "The pink cup on its saucer with a glowing window to the dance floor (window faces -Y). A DJ stands inside;\nthe console has two turntables, a mixer and a cyan neon strip. Height to the lip 2.2 m; the cream topper sits on it.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-cup-dj-booth/model.glb",
+    "render": "/models/cafe-cup-dj-booth/render.jpg"
+   },
+   "outline": "2,240 triangles, 1405.36 kg, 3.72 x 3.16 x 2.22 m, 18 moving parts. Real: a walk-in DJ booth shaped like a 2.2 m cup: 40 mm glazed GRC shell on a steel frame, saucer plinth, a staff door at the back; inside, a DJ console at 1 m",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-photo-booth",
+   "name": "Photo booth",
+   "group": "Café · low poly",
+   "subject": "photo booth",
+   "style": "low poly",
+   "ask": "A teal and pink photo booth in the front-left corner. Sit inside, the booth calls four poses, the flash pops for each,\nand a strip of four pictures of the in-game characters drops out of the slot (no real camera: kids' photos stay private).",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-photo-booth/render.jpg",
+    "glb": "/models/cafe-photo-booth/model.glb",
+    "render": "/models/cafe-photo-booth/render.jpg"
+   },
+   "outline": "1,208 triangles, 195.185 kg, 1.26 x 1.03 x 2.46 m, 3 moving parts. Real: coin-op photo booth: 18 mm ply cabinet on a steel plinth, gloss teal paint with pink trim, velvet curtain on a brass rail, swivel stool on a screw lift, camera behind a smoked window with a soft-box flash, a marquee of warm bulbs, a print slot for the strip",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-beanbag-lime-big",
+   "name": "Big lime beanbag",
+   "group": "Café · low poly",
+   "subject": "big lime beanbag",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/asset-beanbag-lowpoly_0.jpg",
+    "glb": "/models/cafe-beanbag-lime-big/model.glb",
+    "render": "/models/cafe-beanbag-lime-big/render.jpg"
+   },
+   "outline": "80 triangles, 6 kg, 1.14 x 1.06 x 0.53 m, 0 moving parts. Real: 1.1 m canvas beanbag",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-beanbag-orange-big",
+   "name": "Big orange beanbag",
+   "group": "Café · low poly",
+   "subject": "big orange beanbag",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/asset-beanbag-lowpoly_0.jpg",
+    "glb": "/models/cafe-beanbag-orange-big/model.glb",
+    "render": "/models/cafe-beanbag-orange-big/render.jpg"
+   },
+   "outline": "80 triangles, 6.16 kg, 1.22 x 1.06 x 0.51 m, 0 moving parts. Real: 1.1 m canvas beanbag, EPS beads, about 5 kg",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-cup-topper",
+   "name": "Cream topper",
+   "group": "Café · low poly",
+   "subject": "cream topper",
+   "style": "low poly",
+   "ask": "The whipped-cream swirl that crowns the cup, with a wafer cone, cherries and sprinkles.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-cup-topper/model.glb",
+    "render": "/models/cafe-cup-topper/render.jpg"
+   },
+   "outline": "1,384 triangles, 102.879 kg, 3.17 x 3.17 x 1.61 m, 0 moving parts. Real: a sculpted topper: expanded-polystyrene swirl with a hard-coat of pink and cream paint, a wafer cone and three cherries, about 1.3 m tall",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-beanbag-lime",
+   "name": "Lime beanbag",
+   "group": "Café · low poly",
+   "subject": "lime beanbag",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/asset-beanbag-lowpoly_0.jpg",
+    "glb": "/models/cafe-beanbag-lime/model.glb",
+    "render": "/models/cafe-beanbag-lime/render.jpg"
+   },
+   "outline": "80 triangles, 3.05 kg, 0.83 x 0.81 x 0.37 m, 0 moving parts. Real: 0.8 m canvas beanbag",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-beanbag-orange",
+   "name": "Orange beanbag",
+   "group": "Café · low poly",
+   "subject": "orange beanbag",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/asset-beanbag-lowpoly_0.jpg",
+    "glb": "/models/cafe-beanbag-orange/model.glb",
+    "render": "/models/cafe-beanbag-orange/render.jpg"
+   },
+   "outline": "80 triangles, 3.05 kg, 0.82 x 0.80 x 0.39 m, 0 moving parts. Real: 0.8 m canvas beanbag",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-beanbags-pink",
+   "name": "Pink beanbag",
+   "group": "Café · low poly",
+   "subject": "pink beanbag",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/r2/asset-beanbag-lowpoly_0.jpg",
+    "glb": "/models/cafe-beanbags-pink/model.glb",
+    "render": "/models/cafe-beanbags-pink/render.jpg"
+   },
+   "outline": "80 triangles, 3.05 kg, 0.81 x 0.83 x 0.40 m, 0 moving parts. Real: 0.8 m canvas beanbag (the layout places two by the pink door)",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-stars-pink",
+   "name": "Pink stars",
+   "group": "Café · low poly",
+   "subject": "pink stars",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-stars-pink/model.glb",
+    "render": "/models/cafe-stars-pink/render.jpg"
+   },
+   "outline": "468 triangles, 3.702 kg, 0.04 x 5.62 x 0.48 m, 0 moving parts. Real: pink LED neon stars high on the right wall",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-disco-ball-small",
+   "name": "Small disco ball",
+   "group": "Café · low poly",
+   "subject": "small disco ball",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-disco-ball-small/model.glb",
+    "render": "/models/cafe-disco-ball-small/render.jpg"
+   },
+   "outline": "424 triangles, 13.066 kg, 0.50 x 0.50 x 0.95 m, 1 moving parts. Real: 500 mm mirror ball on a ceiling motor",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-speakers",
+   "name": "Speakers",
+   "group": "Café · low poly",
+   "subject": "speakers",
+   "style": "low poly",
+   "ask": "One floor speaker (the layout places two, either side of the arch). Faces -Y.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-speakers/model.glb",
+    "render": "/models/cafe-speakers/render.jpg"
+   },
+   "outline": "680 triangles, 31.621 kg, 0.49 x 0.45 x 1.30 m, 3 moving parts. Real: a pair of 15-inch two-way PA speakers, 450 x 420 x 1300 mm, about 32 kg each",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-stars-arch",
+   "name": "Warm stars round the arch",
+   "group": "Café · low poly",
+   "subject": "warm stars round the arch",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-stars-arch/model.glb",
+    "render": "/models/cafe-stars-arch/render.jpg"
+   },
+   "outline": "936 triangles, 11.462 kg, 6.40 x 0.04 x 1.69 m, 0 moving parts. Real: warm-white LED neon stars, 300 to 500 mm, on the back wall",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-boombox",
+   "name": "Boombox",
+   "group": "Café · low poly",
+   "subject": "boombox",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-boombox/model.glb",
+    "render": "/models/cafe-boombox/render.jpg"
+   },
+   "outline": "452 triangles, 6.06 kg, 0.60 x 0.17 x 0.40 m, 7 moving parts. Real: portable stereo, 600 x 160 x 340 mm, 6 kg",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-jukebox",
+   "name": "Jukebox",
+   "group": "Café · low poly",
+   "subject": "jukebox",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-jukebox/model.glb",
+    "render": "/models/cafe-jukebox/render.jpg"
+   },
+   "outline": "724 triangles, 158.206 kg, 0.90 x 0.68 x 1.55 m, 11 moving parts. Real: arched-top jukebox, 0.9 x 0.65 x 1.55 m, about 130 kg",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-star-decals",
+   "name": "Painted stars",
+   "group": "Café · low poly",
+   "subject": "painted stars",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-star-decals/model.glb",
+    "render": "/models/cafe-star-decals/render.jpg"
+   },
+   "outline": "612 triangles, 0.912 kg, 11.43 x 9.28 x 2.27 m, 0 moving parts. Real: sun-yellow painted stars on the walls",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-plush-toys",
+   "name": "Plush toys",
+   "group": "Café · low poly",
+   "subject": "plush toys",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-plush-toys/model.glb",
+    "render": "/models/cafe-plush-toys/render.jpg"
+   },
+   "outline": "200 triangles, 0.694 kg, 0.89 x 0.34 x 0.47 m, 2 moving parts. Real: two plush toys, minky with fibre fill: a star and a cloud",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-sticker-collage",
+   "name": "Sticker collage",
+   "group": "Café · low poly",
+   "subject": "sticker collage",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-sticker-collage/model.glb",
+    "render": "/models/cafe-sticker-collage/render.jpg"
+   },
+   "outline": "1,560 triangles, 1.069 kg, 3.26 x 0.09 x 1.77 m, 0 moving parts. Real: a wall of vinyl stickers: hearts, stars, circles, lightning, cups",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-wall-art",
+   "name": "Wall art",
+   "group": "Café · low poly",
+   "subject": "wall art",
+   "style": "low poly",
+   "ask": "Abstract paintings on the left wall. The art auction game swaps and sells these.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-wall-art/model.glb",
+    "render": "/models/cafe-wall-art/render.jpg"
+   },
+   "outline": "348 triangles, 26.358 kg, 0.05 x 3.15 x 0.90 m, 3 moving parts. Real: three painted canvases in oak frames, 600 to 900 mm",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-abstract-shapes",
+   "name": "Wall shapes",
+   "group": "Café · low poly",
+   "subject": "wall shapes",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-abstract-shapes/model.glb",
+    "render": "/models/cafe-abstract-shapes/render.jpg"
+   },
+   "outline": "448 triangles, 22.61 kg, 2.58 x 0.18 x 1.24 m, 0 moving parts. Real: tangerine and sun MDF cut-outs on the back-left wall: rings, a squiggle, a triangle, dots",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-basement-door",
+   "name": "Basement door",
+   "group": "Café · low poly",
+   "subject": "basement door",
+   "style": "low poly",
+   "ask": "The secret door behind the bar, in the back wall on the bar deck. It does not glow or call out: it looks like an old\ndoor the café grew around. Locked (lock tag names the key); opening it goes to /studies/basement/play.html?from=cafe and\nsets localStorage aw-basement-unlocked = 1 (the basement thread reads both).",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-basement-door/render.jpg",
+    "glb": "/models/cafe-basement-door/model.glb",
+    "render": "/models/cafe-basement-door/render.jpg"
+   },
+   "outline": "616 triangles, 52.084 kg, 0.99 x 0.19 x 2.12 m, 2 moving parts. Real: old ledged-and-braced tongue-and-groove door in dark stained pine, black iron strap hinges, a brass mortice lock with an escutcheon, in a painted timber casing; it is older than the rest of the café",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-booth-stage",
+   "name": "Booth stage",
+   "group": "Café · low poly",
+   "subject": "booth stage",
+   "style": "low poly",
+   "ask": "The round pink stage the giant cup stands on, with a neon rim and steps down to the dance floor.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-booth-stage/model.glb",
+    "render": "/models/cafe-booth-stage/render.jpg"
+   },
+   "outline": "488 triangles, 402.465 kg, 3.83 x 3.22 x 0.30 m, 0 moving parts. Real: round timber stage, 300 mm, painted pink, LED neon edge, two steps",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-dance-floor",
+   "name": "LED dance floor",
+   "group": "Café · low poly",
+   "subject": "led dance floor",
+   "style": "low poly",
+   "ask": "The pink-peach and violet checker in the middle of the room, raised 50 mm, each tile its own part.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-dance-floor/model.glb",
+    "render": "/models/cafe-dance-floor/render.jpg"
+   },
+   "outline": "2,464 triangles, 896 kg, 4.79 x 4.19 x 0.05 m, 0 moving parts. Real: 8 x 7 LED dance tiles, 600 mm square, 12 mm frosted acrylic over an RGB LED matrix, about 16 kg each",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-arch-main",
+   "name": "Main arch",
+   "group": "Café · low poly",
+   "subject": "main arch",
+   "style": "low poly",
+   "ask": "The big glowing arch at the back, where friends arrive.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-arch-main/model.glb",
+    "render": "/models/cafe-arch-main/render.jpg"
+   },
+   "outline": "936 triangles, 350.339 kg, 3.16 x 0.36 x 3.48 m, 2 moving parts. Real: tangerine-painted timber arch frame with 30 warm marquee bulbs and aubergine double doors",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-wall-back",
+   "name": "Back wall",
+   "group": "Café · low poly",
+   "subject": "back wall",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-wall-back/model.glb",
+    "render": "/models/cafe-wall-back/render.jpg"
+   },
+   "outline": "692 triangles, 1579.42 kg, 12.30 x 0.17 x 4.50 m, 0 moving parts. Real: stud wall with the main arch opening, the pink door and two portholes",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-bar-deck",
+   "name": "Bar deck",
+   "group": "Café · low poly",
+   "subject": "bar deck",
+   "style": "low poly",
+   "ask": "The darker raised floor under the bar and stools, with a rounded front edge and a step up.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-bar-deck/model.glb",
+    "render": "/models/cafe-bar-deck/render.jpg"
+   },
+   "outline": "300 triangles, 816.472 kg, 2.88 x 10.00 x 0.30 m, 0 moving parts. Real: raised timber platform, 300 mm, stained oak boards, bullnose edge and one step",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-window-right",
+   "name": "Big window",
+   "group": "Café · low poly",
+   "subject": "big window",
+   "style": "low poly",
+   "ask": "The window over the bar, with a sill, two casements (they open) and a view of palms outside.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-window-right/model.glb",
+    "render": "/models/cafe-window-right/render.jpg"
+   },
+   "outline": "572 triangles, 132.428 kg, 5.01 x 9.00 x 5.01 m, 2 moving parts. Real: timber casement window, 2.8 x 1.4 m, double glazed, with the palms and sky outside",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-ceiling",
+   "name": "Ceiling",
+   "group": "Café · low poly",
+   "subject": "ceiling",
+   "style": "low poly",
+   "ask": "Magenta ceiling, stepped soffits around a raised coffer over the dance floor, teal and pink cove light.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-ceiling/model.glb",
+    "render": "/models/cafe-ceiling/render.jpg"
+   },
+   "outline": "220 triangles, 1832.64 kg, 12.00 x 10.00 x 0.35 m, 0 moving parts. Real: painted plasterboard ceiling at 4.2 m with a stepped coffer to 4.5 m and LED cove strips",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-dance-floor-rim",
+   "name": "Dance floor rim",
+   "group": "Café · low poly",
+   "subject": "dance floor rim",
+   "style": "low poly",
+   "ask": "The honey timber edge that frames the dance floor.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-dance-floor-rim/model.glb",
+    "render": "/models/cafe-dance-floor-rim/render.jpg"
+   },
+   "outline": "176 triangles, 51.683 kg, 4.96 x 4.36 x 0.06 m, 0 moving parts. Real: beech trim, 80 x 60 mm, rounded top edge",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-wall-front",
+   "name": "Front wall",
+   "group": "Café · low poly",
+   "subject": "front wall",
+   "style": "low poly",
+   "ask": "The street side. Tagged cutaway: iso, so the iso camera can hide it and look in like the picture.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/models/cafe-wall-front/render.jpg",
+    "glb": "/models/cafe-wall-front/model.glb",
+    "render": "/models/cafe-wall-front/render.jpg"
+   },
+   "outline": "944 triangles, 1969.76 kg, 12.30 x 0.17 x 4.50 m, 2 moving parts. Real: shop front: stud wall with a glazed double door and two shop windows",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-wall-left",
+   "name": "Left wall",
+   "group": "Café · low poly",
+   "subject": "left wall",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-wall-left/model.glb",
+    "render": "/models/cafe-wall-left/render.jpg"
+   },
+   "outline": "1,056 triangles, 1594.27 kg, 0.17 x 10.30 x 4.50 m, 0 moving parts. Real: stud wall, plasterboard, matt purple above, painted pink boards below, one window",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-door-pink",
+   "name": "Pink door",
+   "group": "Café · low poly",
+   "subject": "pink door",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-door-pink/model.glb",
+    "render": "/models/cafe-door-pink/render.jpg"
+   },
+   "outline": "272 triangles, 103.398 kg, 1.22 x 0.17 x 2.53 m, 2 moving parts. Real: pink-painted solid-core door in a tangerine arch surround, brass knob",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-plank-floor",
+   "name": "Plank floor",
+   "group": "Café · low poly",
+   "subject": "plank floor",
+   "style": "low poly",
+   "ask": "Warm honey boards everywhere at floor level. Boards run left to right with 3 mm gaps.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-plank-floor/model.glb",
+    "render": "/models/cafe-plank-floor/render.jpg"
+   },
+   "outline": "1,320 triangles, 1817.05 kg, 12.00 x 10.00 x 0.02 m, 0 moving parts. Real: 22 mm oak boards, 180 mm wide, laid along X on a timber subfloor",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-arch-niches",
+   "name": "Portholes",
+   "group": "Café · low poly",
+   "subject": "portholes",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-arch-niches/model.glb",
+    "render": "/models/cafe-arch-niches/render.jpg"
+   },
+   "outline": "376 triangles, 43.275 kg, 4.72 x 0.14 x 0.82 m, 0 moving parts. Real: two round glazed portholes in tangerine surrounds, back-lit",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-wall-right",
+   "name": "Right wall",
+   "group": "Café · low poly",
+   "subject": "right wall",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-wall-right/model.glb",
+    "render": "/models/cafe-wall-right/render.jpg"
+   },
+   "outline": "1,056 triangles, 1541.77 kg, 0.17 x 10.30 x 4.50 m, 0 moving parts. Real: stud wall, purple above, pink boards below, the big window over the bar",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-soffit-teal",
+   "name": "Teal soffit",
+   "group": "Café · low poly",
+   "subject": "teal soffit",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-soffit-teal/model.glb",
+    "render": "/models/cafe-soffit-teal/render.jpg"
+   },
+   "outline": "24 triangles, 413.175 kg, 2.04 x 10.00 x 0.64 m, 0 moving parts. Real: painted plasterboard bulkhead over the bar, 600 mm deep, with a pink LED strip",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-ceiling-vent",
+   "name": "Ceiling vent",
+   "group": "Café · low poly",
+   "subject": "ceiling vent",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-ceiling-vent/model.glb",
+    "render": "/models/cafe-ceiling-vent/render.jpg"
+   },
+   "outline": "360 triangles, 122.859 kg, 0.96 x 0.96 x 0.11 m, 1 moving parts. Real: round ventilation diffuser, 900 mm, painted tangerine, black louvres",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-confetti-carpet",
+   "name": "Confetti carpet",
+   "group": "Café · low poly",
+   "subject": "confetti carpet",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-confetti-carpet/model.glb",
+    "render": "/models/cafe-confetti-carpet/render.jpg"
+   },
+   "outline": "700 triangles, 13.275 kg, 2.60 x 1.60 x 0.01 m, 0 moving parts. Real: printed nylon carpet tiles with confetti dots",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-downlights",
+   "name": "Downlights",
+   "group": "Café · low poly",
+   "subject": "downlights",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-downlights/model.glb",
+    "render": "/models/cafe-downlights/render.jpg"
+   },
+   "outline": "1,008 triangles, 22.472 kg, 9.54 x 7.95 x 0.61 m, 0 moving parts. Real: recessed LED downlights, 120 mm, warm 2700 K",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-window-left",
+   "name": "Small window",
+   "group": "Café · low poly",
+   "subject": "small window",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-window-left/model.glb",
+    "render": "/models/cafe-window-left/render.jpg"
+   },
+   "outline": "200 triangles, 64.66 kg, 0.12 x 1.40 x 1.40 m, 0 moving parts. Real: timber window, 1.4 x 1.4 m",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-star-rug",
+   "name": "Star rug",
+   "group": "Café · low poly",
+   "subject": "star rug",
+   "style": "low poly",
+   "ask": "",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-star-rug/model.glb",
+    "render": "/models/cafe-star-rug/render.jpg"
+   },
+   "outline": "96 triangles, 19.422 kg, 2.50 x 2.00 x 0.02 m, 0 moving parts. Real: tufted wool rug, 12 mm pile, magenta with a sun-yellow star inlay",
+   "good": [],
+   "off": []
+  },
+  {
    "id": "paper-man-1",
    "name": "Paper man 1",
    "style": "",

@@ -1,0 +1,198 @@
+{
+ "id": "downlights",
+ "name": "Downlights",
+ "group": "Room shell",
+ "tier": "dressing",
+ "intent": "",
+ "real": "recessed LED downlights, 120 mm, warm 2700 K",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  9.543,
+  7.95,
+  0.614
+ ],
+ "triangles": 1008,
+ "mass_kg": 22.472,
+ "centre_of_mass": [
+  0.0,
+  -0.0,
+  0.006
+ ],
+ "materials": [
+  "Light_Warm",
+  "Metal_Dark"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "downlight_1_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_2_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_11_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_12_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_13_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_14_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_3_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_4_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_5_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_6_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_7_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_8_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_9_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_10_trim",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5573,
+   "made": "solid"
+  },
+  {
+   "part": "downlight_1_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_2_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_11_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_12_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_13_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_14_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_3_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_4_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_5_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_6_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_7_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_8_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_9_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "downlight_10_lens",
+   "material": "Light_Warm",
+   "mass_kg": 0.0479,
+   "made": "shell 1.0 mm"
+  }
+ ],
+ "built": "2026-10-23T08:37Z"
+}

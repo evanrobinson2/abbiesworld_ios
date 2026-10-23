@@ -1,0 +1,523 @@
+{
+ "id": "cup_dj_booth",
+ "name": "Giant cup DJ booth",
+ "group": "Party",
+ "tier": "hero",
+ "intent": "The pink cup on its saucer with a glowing window to the dance floor (window faces -Y). A DJ stands inside;\nthe console has two turntables, a mixer and a cyan neon strip. Height to the lip 2.2 m; the cream topper sits on it.",
+ "real": "a walk-in DJ booth shaped like a 2.2 m cup: 40 mm glazed GRC shell on a steel frame, saucer plinth, a staff door at the back; inside, a DJ console at 1 m",
+ "moving": "both turntables spin, tonearms swing, crossfader and channel faders slide, knobs turn; the back door hinges",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick); studies/cafe/img/r2/asset-cup-booth-lowpoly_0.jpg (round 2, low poly, Evan picked low poly)",
+ "size_m": [
+  3.718,
+  3.16,
+  2.22
+ ],
+ "triangles": 2240,
+ "mass_kg": 1405.361,
+ "centre_of_mass": [
+  -0.083,
+  -0.01,
+  0.645
+ ],
+ "materials": [
+  "Clay_PinkGlaze",
+  "Cloth_Speaker",
+  "Food_Cream",
+  "Glass_NeonCyan",
+  "Glass_NeonPink",
+  "Glass_NeonWarm",
+  "Light_Warm",
+  "Metal_Aluminium",
+  "Metal_Chrome",
+  "Plank_BlackPly",
+  "Plank_Dark",
+  "Plaster_Sun",
+  "Plaster_Tangerine",
+  "Plastic_Black",
+  "Plastic_Cyan",
+  "Plastic_Lime",
+  "Plastic_Orange",
+  "Plastic_Pink",
+  "Plastic_Violet",
+  "Plastic_White"
+ ],
+ "joints": [
+  {
+   "part": "booth_door",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": -1.5,
+   "note": "staff door into the booth"
+  },
+  {
+   "part": "crossfader",
+   "kind": "slide",
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "min": -0.05,
+   "max": 0.05,
+   "note": "crossfader"
+  },
+  {
+   "part": "eq_0_0",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "eq_0_1",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "eq_0_2",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "eq_1_0",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "eq_1_1",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "eq_1_2",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "eq_2_0",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "eq_2_1",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "eq_2_2",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": ""
+  },
+  {
+   "part": "fader_0",
+   "kind": "slide",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.08,
+   "note": "channel volume"
+  },
+  {
+   "part": "fader_1",
+   "kind": "slide",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.08,
+   "note": "channel volume"
+  },
+  {
+   "part": "fader_2",
+   "kind": "slide",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.08,
+   "note": "channel volume"
+  },
+  {
+   "part": "tonearm_l",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.5,
+   "note": "drop the needle"
+  },
+  {
+   "part": "turntable_l_platter",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 6.283,
+   "note": "33 rpm, scratchable"
+  },
+  {
+   "part": "tonearm_r",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.5,
+   "note": "drop the needle"
+  },
+  {
+   "part": "turntable_r_platter",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 6.283,
+   "note": "33 rpm, scratchable"
+  }
+ ],
+ "parts": [
+  {
+   "part": "cup_shell",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 488.6567,
+   "made": "shell 15.0 mm"
+  },
+  {
+   "part": "saucer",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 472.2119,
+   "made": "shell 15.0 mm"
+  },
+  {
+   "part": "cup_floor",
+   "material": "Plank_Dark",
+   "mass_kg": 120.9825,
+   "made": "solid"
+  },
+  {
+   "part": "cup_lid",
+   "material": "Food_Cream",
+   "mass_kg": 101.9247,
+   "made": "solid"
+  },
+  {
+   "part": "cup_handle",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 69.1996,
+   "made": "shell 15.0 mm"
+  },
+  {
+   "part": "booth_door_panel",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 40.0339,
+   "made": "solid"
+  },
+  {
+   "part": "console_top",
+   "material": "Plastic_Black",
+   "mass_kg": 37.0272,
+   "made": "solid"
+  },
+  {
+   "part": "console_desk",
+   "material": "Plank_BlackPly",
+   "mass_kg": 30.5871,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "window_neon",
+   "material": "Glass_NeonWarm",
+   "mass_kg": 12.2217,
+   "made": "solid"
+  },
+  {
+   "part": "saucer_rim_neon",
+   "material": "Glass_NeonPink",
+   "mass_kg": 11.2839,
+   "made": "solid"
+  },
+  {
+   "part": "mixer_body",
+   "material": "Plastic_Black",
+   "mass_kg": 6.4102,
+   "made": "solid"
+  },
+  {
+   "part": "platter_l",
+   "material": "Metal_Aluminium",
+   "mass_kg": 2.7676,
+   "made": "solid"
+  },
+  {
+   "part": "platter_r",
+   "material": "Metal_Aluminium",
+   "mass_kg": 2.7676,
+   "made": "solid"
+  },
+  {
+   "part": "monitor_speaker_l_box",
+   "material": "Plank_BlackPly",
+   "mass_kg": 2.2655,
+   "made": "shell 12.0 mm"
+  },
+  {
+   "part": "monitor_speaker_r_box",
+   "material": "Plank_BlackPly",
+   "mass_kg": 2.2655,
+   "made": "shell 12.0 mm"
+  },
+  {
+   "part": "turntable_l_plinth",
+   "material": "Plastic_Violet",
+   "mass_kg": 1.2616,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "turntable_r_plinth",
+   "material": "Plastic_Violet",
+   "mass_kg": 1.2616,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "console_neon",
+   "material": "Glass_NeonCyan",
+   "mass_kg": 0.6368,
+   "made": "solid"
+  },
+  {
+   "part": "booth_door_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.3629,
+   "made": "solid"
+  },
+  {
+   "part": "record_l",
+   "material": "Plastic_Black",
+   "mass_kg": 0.2794,
+   "made": "solid"
+  },
+  {
+   "part": "record_r",
+   "material": "Plastic_Black",
+   "mass_kg": 0.2794,
+   "made": "solid"
+  },
+  {
+   "part": "booth_light",
+   "material": "Light_Warm",
+   "mass_kg": 0.2487,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "tonearm_l_tube",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0768,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "tonearm_r_tube",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0768,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "tonearm_l_pivot",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0563,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "tonearm_r_pivot",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0563,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "monitor_speaker_l_cone",
+   "material": "Cloth_Speaker",
+   "mass_kg": 0.0213,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "monitor_speaker_r_cone",
+   "material": "Cloth_Speaker",
+   "mass_kg": 0.0213,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "label_l",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0125,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "label_r",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0125,
+   "made": "solid"
+  },
+  {
+   "part": "crossfader",
+   "material": "Plastic_Orange",
+   "mass_kg": 0.011,
+   "made": "solid"
+  },
+  {
+   "part": "fader_1",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0094,
+   "made": "solid"
+  },
+  {
+   "part": "fader_2",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0094,
+   "made": "solid"
+  },
+  {
+   "part": "fader_0",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0085,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "eq_0_0",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  },
+  {
+   "part": "eq_0_1",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  },
+  {
+   "part": "eq_0_2",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  },
+  {
+   "part": "eq_1_0",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  },
+  {
+   "part": "eq_1_1",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  },
+  {
+   "part": "eq_1_2",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  },
+  {
+   "part": "eq_2_0",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  },
+  {
+   "part": "eq_2_1",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  },
+  {
+   "part": "eq_2_2",
+   "material": "Plastic_White",
+   "mass_kg": 0.0059,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:29Z"
+}

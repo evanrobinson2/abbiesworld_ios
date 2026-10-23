@@ -1,0 +1,280 @@
+{
+ "id": "confetti_carpet",
+ "name": "Confetti carpet",
+ "group": "Room shell",
+ "tier": "dressing",
+ "intent": "",
+ "real": "printed nylon carpet tiles with confetti dots",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  2.6,
+  1.6,
+  0.01
+ ],
+ "triangles": 700,
+ "mass_kg": 13.275,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  0.004
+ ],
+ "materials": [
+  "Cloth_Confetti",
+  "Plaster_CyanPaint",
+  "Plaster_Lime",
+  "Plaster_Sun",
+  "Plaster_Tangerine",
+  "Plaster_Violet"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "carpet_body",
+   "material": "Cloth_Confetti",
+   "mass_kg": 13.112,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_0",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_1",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_10",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_11",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_12",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_13",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_14",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_15",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_16",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_17",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_18",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_19",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_2",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_20",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_21",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_22",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_23",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_24",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_25",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_26",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_27",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_28",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_29",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_3",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_30",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_31",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_32",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_33",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_34",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_35",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_36",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_37",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_38",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_39",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_4",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_5",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_6",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_7",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_8",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  },
+  {
+   "part": "confetti_9",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

@@ -1,0 +1,102 @@
+{
+ "id": "stars_arch",
+ "name": "Warm stars round the arch",
+ "group": "Party",
+ "tier": "support",
+ "intent": "",
+ "real": "warm-white LED neon stars, 300 to 500 mm, on the back wall",
+ "moving": "twinkle with the party signal",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  6.398,
+  0.044,
+  1.685
+ ],
+ "triangles": 936,
+ "mass_kg": 11.462,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  -0.012
+ ],
+ "materials": [
+  "Glass_Clear",
+  "Glass_NeonWarm"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "star_0_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 2.4504,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_2_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 1.8003,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_0_tube",
+   "material": "Glass_NeonWarm",
+   "mass_kg": 1.3647,
+   "made": "solid"
+  },
+  {
+   "part": "star_5_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 1.2502,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_1_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 0.9681,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_2_tube",
+   "material": "Glass_NeonWarm",
+   "mass_kg": 0.8594,
+   "made": "solid"
+  },
+  {
+   "part": "star_3_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 0.8001,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_4_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 0.6481,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_5_tube",
+   "material": "Glass_NeonWarm",
+   "mass_kg": 0.4974,
+   "made": "solid"
+  },
+  {
+   "part": "star_1_tube",
+   "material": "Glass_NeonWarm",
+   "mass_kg": 0.3389,
+   "made": "solid"
+  },
+  {
+   "part": "star_3_tube",
+   "material": "Glass_NeonWarm",
+   "mass_kg": 0.2546,
+   "made": "solid"
+  },
+  {
+   "part": "star_4_tube",
+   "material": "Glass_NeonWarm",
+   "mass_kg": 0.2292,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:37Z"
+}

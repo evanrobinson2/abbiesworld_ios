@@ -1,0 +1,302 @@
+{
+ "id": "jukebox",
+ "name": "Jukebox",
+ "group": "Party",
+ "tier": "dressing",
+ "intent": "",
+ "real": "arched-top jukebox, 0.9 x 0.65 x 1.55 m, about 130 kg",
+ "moving": "record carousel turns; selector buttons press; bubble tubes glow",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  0.9,
+  0.675,
+  1.55
+ ],
+ "triangles": 724,
+ "mass_kg": 158.206,
+ "centre_of_mass": [
+  0.0,
+  0.394,
+  0.361
+ ],
+ "materials": [
+  "Cloth_Speaker",
+  "Glass_Clear",
+  "Glass_NeonCyan",
+  "Glass_NeonPink",
+  "Metal_Steel",
+  "Plaster_Pink",
+  "Plastic_Black",
+  "Plastic_Cyan",
+  "Plastic_Yellow"
+ ],
+ "joints": [
+  {
+   "part": "record_carousel",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 6.283,
+   "note": ""
+  },
+  {
+   "part": "select_0",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 1"
+  },
+  {
+   "part": "select_1",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 2"
+  },
+  {
+   "part": "select_2",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 3"
+  },
+  {
+   "part": "select_3",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 4"
+  },
+  {
+   "part": "select_4",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 5"
+  },
+  {
+   "part": "select_5",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 6"
+  },
+  {
+   "part": "select_6",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 7"
+  },
+  {
+   "part": "select_7",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 8"
+  },
+  {
+   "part": "select_8",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 9"
+  },
+  {
+   "part": "select_9",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "song 10"
+  }
+ ],
+ "parts": [
+  {
+   "part": "mechanism",
+   "material": "Metal_Steel",
+   "mass_kg": 70.0,
+   "made": "given"
+  },
+  {
+   "part": "cabinet",
+   "material": "Plaster_Pink",
+   "mass_kg": 68.0484,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "bubble_arc",
+   "material": "Glass_NeonPink",
+   "mass_kg": 11.8371,
+   "made": "solid"
+  },
+  {
+   "part": "window",
+   "material": "Glass_Clear",
+   "mass_kg": 3.772,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "bubble_arc_inner",
+   "material": "Glass_NeonCyan",
+   "mass_kg": 3.5973,
+   "made": "solid"
+  },
+  {
+   "part": "grille",
+   "material": "Cloth_Speaker",
+   "mass_kg": 0.1672,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "record_0",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1,
+   "made": "solid"
+  },
+  {
+   "part": "record_1",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1,
+   "made": "solid"
+  },
+  {
+   "part": "record_2",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1,
+   "made": "solid"
+  },
+  {
+   "part": "record_3",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1,
+   "made": "solid"
+  },
+  {
+   "part": "record_4",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1,
+   "made": "solid"
+  },
+  {
+   "part": "record_5",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1,
+   "made": "solid"
+  },
+  {
+   "part": "select_0",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_1",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_2",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_3",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_4",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_5",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_6",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_7",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_8",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  },
+  {
+   "part": "select_9",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0184,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:37Z"
+}
