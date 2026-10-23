@@ -1,0 +1,175 @@
+{
+ "fighter": "red",
+ "joints": {
+  "root": [
+   0,
+   0,
+   0
+  ],
+  "hips": [
+   0.0285,
+   -0.007,
+   0.95
+  ],
+  "spine": [
+   0.036,
+   -0.0147,
+   1.15
+  ],
+  "chest": [
+   0.0398,
+   0.0123,
+   1.38
+  ],
+  "neck": [
+   0.0339,
+   0.0434,
+   1.66
+  ],
+  "head": [
+   0.0432,
+   0.0556,
+   1.77
+  ],
+  "head_end": [
+   0.0432,
+   0.0356,
+   1.99
+  ],
+  "upperarm_R": [
+   -0.3329,
+   0.075,
+   1.5844
+  ],
+  "clavicle_R": [
+   -0.0361,
+   0.0634,
+   1.6444
+  ],
+  "forearm_R": [
+   -0.408,
+   0.084,
+   1.2308
+  ],
+  "hand_R": [
+   -0.4713,
+   -0.0331,
+   0.898
+  ],
+  "hand_end_R": [
+   -0.4846,
+   -0.066,
+   0.69
+  ],
+  "thigh_R": [
+   -0.1093,
+   -0.0062,
+   0.93
+  ],
+  "shin_R": [
+   -0.1394,
+   0.0749,
+   0.5
+  ],
+  "foot_R": [
+   -0.1788,
+   0.1091,
+   0.09
+  ],
+  "foot_end_R": [
+   -0.1877,
+   -0.0509,
+   0.02
+  ],
+  "upperarm_L": [
+   0.3892,
+   0.0747,
+   1.5844
+  ],
+  "clavicle_L": [
+   0.1039,
+   0.0634,
+   1.6444
+  ],
+  "forearm_L": [
+   0.4658,
+   0.0832,
+   1.2308
+  ],
+  "hand_L": [
+   0.5295,
+   -0.0378,
+   0.898
+  ],
+  "hand_end_L": [
+   0.5448,
+   -0.0645,
+   0.69
+  ],
+  "thigh_L": [
+   0.1682,
+   -0.0071,
+   0.93
+  ],
+  "shin_L": [
+   0.2001,
+   0.0759,
+   0.5
+  ],
+  "foot_L": [
+   0.2366,
+   0.1126,
+   0.09
+  ],
+  "foot_end_L": [
+   0.2485,
+   -0.0474,
+   0.02
+  ]
+ },
+ "bones": [
+  "root",
+  "hips",
+  "spine",
+  "chest",
+  "neck",
+  "head",
+  "clavicle_R",
+  "upperarm_R",
+  "forearm_R",
+  "hand_R",
+  "clavicle_L",
+  "upperarm_L",
+  "forearm_L",
+  "hand_L",
+  "thigh_R",
+  "shin_R",
+  "foot_R",
+  "thigh_L",
+  "shin_L",
+  "foot_L"
+ ],
+ "parent": {
+  "hips": "root",
+  "spine": "hips",
+  "chest": "spine",
+  "neck": "chest",
+  "head": "neck",
+  "clavicle_R": "chest",
+  "upperarm_R": "clavicle_R",
+  "forearm_R": "upperarm_R",
+  "hand_R": "forearm_R",
+  "clavicle_L": "chest",
+  "upperarm_L": "clavicle_L",
+  "forearm_L": "upperarm_L",
+  "hand_L": "forearm_L",
+  "thigh_R": "hips",
+  "shin_R": "thigh_R",
+  "foot_R": "shin_R",
+  "thigh_L": "hips",
+  "shin_L": "thigh_L",
+  "foot_L": "shin_L"
+ },
+ "faces": 2997,
+ "vertices": 1511
+}

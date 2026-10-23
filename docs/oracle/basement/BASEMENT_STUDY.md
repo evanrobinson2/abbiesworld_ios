@@ -73,3 +73,39 @@ turn on the power, put in a disk. She sits only when you tap the chair.
 2. The manual's pages, readable in the scene.
 3. The café door is agreed; add the tour stop once it is live.
 4. Coins kept on the player's account rather than the browser.
+
+## How it was made, and how to be faster next time
+Evan's routine (09:20Z): after every natural-language minigame, look at the process and find ways to go faster.
+Times are local (UTC-4) on 2026-10-23.
+
+| Round | Evan's words | Advance play | Live | Words to live |
+|---|---|---|---|---|
+| 1: basement, computer, KEYSTORM, coins | 3:32-3:51 AM | 4:15 AM | 4:21 AM | about 50 min |
+| 2: real DOS, 3 switches, clipboard chores, rigged girl, music | 4:25-4:41 AM (+ glitter 5:15) | 5:12 AM | 5:20 AM | about 55 min |
+| 3: CRT warm-up, child's head, switch lamp, careful stairs, captions | 5:17-5:18 AM | 5:45 AM | 5:51 AM | about 33 min |
+
+Where the time went:
+- Real DOS was most of round 2: finding FreeDOS, SeaBIOS and v86 sources through blocked mirrors (gitlab worked), writing a
+  FAT12 image builder, and debugging KEYSTORM in assembly (a clobbered SI register crashed it once).
+- Software WebGL in the test browser runs the game several times slower than real time. Fixed sleeps in tests
+  captured the wrong moments and cost reruns; waiting on game state fixed that (`tools/minigame-test/basement-flow.cjs`).
+- The advance artifact can't serve .bin, .gz or .gltf files, so it needed a base64 shim and path rewriting, done by hand
+  each round.
+- Each round rewrote parts of one 600-line `play.html`. Captions, close-ups, chores, CRT and reward logic all live there.
+
+Speedups for the next minigame:
+1. **Minigame kit.** Move captions with "> " choices, close-up camera, chore list on paper, CRT warm-up, pixel and dither
+   pass, and the coin reward hookup out of `play.html` into `simulations/` modules. A new place should be its room
+   recipe plus a script of beats.
+2. **One-command advance artifact.** A script that copies a play page and its imports, rewrites absolute paths, and
+   base64-wraps binaries, so the advance preview is a single call rather than ten minutes of bundling.
+3. **Test by state, not by clock.** Start from the flow harness above. Use `?noboot`, `?lit`, `?done` and `?sit` to
+   jump to any beat.
+4. **One child character.** The rig, the child's head and slimmer build (`grace-kid.mjs`) should become the shared
+   kid, so no game rebuilds faces.
+5. **Emulator kit stays.** `tools/grace-dos` (FAT12 builder, COM1 signal, build script) makes any new DOS-era game a
+   small .asm file and a build line.
+
+What this game added to the canon: bottom captions in the place's era font with terminal "> " choices
+(`docs/design/INTERACTION_GRAMMAR.md` rules 7-8); approach is not commitment (sit only by touching the chair); lists
+are paper; the gold coins are Daddy's core memories.
