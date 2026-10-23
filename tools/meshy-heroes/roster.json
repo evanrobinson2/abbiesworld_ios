@@ -23,13 +23,16 @@
    "group": "astronaut",
    "accent": "pink",
    "mj_prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A1-clay-suit.jpg",
+   "pick": "mj_f8bd68b3-5764-43db-8da0-91b86303f358_0.png",
+   "views_ok": true
   },
   {
    "id": "A1-clay-tee",
@@ -39,13 +42,16 @@
    "group": "astronaut",
    "accent": "pink",
    "mj_prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A1-clay-tee.jpg",
+   "pick": "mj_a4a65ca1-115e-4909-9b4c-005b45fcb789_0.png",
+   "views_ok": true
   },
   {
    "id": "A1-paint-suit",
@@ -55,13 +61,16 @@
    "group": "astronaut",
    "accent": "pink",
    "mj_prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A1-paint-suit.jpg",
+   "pick": "mj_858315e9-3e87-4778-9a44-bf5b29b36e99_2.png",
+   "views_ok": true
   },
   {
    "id": "A1-paint-tee",
@@ -71,13 +80,16 @@
    "group": "astronaut",
    "accent": "pink",
    "mj_prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A1-paint-tee.jpg",
+   "pick": "mj_7a945f66-ee08-48be-83b9-a09a214d04a0_0.png",
+   "views_ok": true
   },
   {
    "id": "A2-clay-suit",
@@ -87,13 +99,16 @@
    "group": "astronaut",
    "accent": "purple",
    "mj_prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A2-clay-suit.jpg",
+   "pick": "mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_3.png",
+   "views_ok": false
   },
   {
    "id": "A2-clay-tee",
@@ -103,13 +118,16 @@
    "group": "astronaut",
    "accent": "purple",
    "mj_prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A2-clay-tee.jpg",
+   "pick": "mj_56800351-ba17-4541-978f-1247557fb146_3.png",
+   "views_ok": true
   },
   {
    "id": "A2-paint-suit",
@@ -119,13 +137,16 @@
    "group": "astronaut",
    "accent": "purple",
    "mj_prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A2-paint-suit.jpg",
+   "pick": "mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_1.png",
+   "views_ok": true
   },
   {
    "id": "A2-paint-tee",
@@ -135,13 +156,16 @@
    "group": "astronaut",
    "accent": "purple",
    "mj_prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A2-paint-tee.jpg",
+   "pick": "mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_1.png",
+   "views_ok": true
   },
   {
    "id": "A3-clay-suit",
@@ -151,13 +175,16 @@
    "group": "astronaut",
    "accent": "orange",
    "mj_prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A3-clay-suit.jpg",
+   "pick": "mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_1.png",
+   "views_ok": false
   },
   {
    "id": "A3-clay-tee",
@@ -167,13 +194,16 @@
    "group": "astronaut",
    "accent": "orange",
    "mj_prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A3-clay-tee.jpg",
+   "pick": "mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_2.png",
+   "views_ok": true
   },
   {
    "id": "A3-paint-suit",
@@ -183,13 +213,16 @@
    "group": "astronaut",
    "accent": "orange",
    "mj_prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A3-paint-suit.jpg",
+   "pick": "mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_0.png",
+   "views_ok": true
   },
   {
    "id": "A3-paint-tee",
@@ -199,13 +232,16 @@
    "group": "astronaut",
    "accent": "orange",
    "mj_prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A3-paint-tee.jpg",
+   "pick": "mj_32d9ff43-e6a1-43f1-9551-2694be291120_0.png",
+   "views_ok": true
   },
   {
    "id": "A4-clay-suit",
@@ -215,13 +251,16 @@
    "group": "astronaut",
    "accent": "cyan",
    "mj_prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A4-clay-suit.jpg",
+   "pick": "mj_eaee0f84-0288-4181-ba94-779652d0cadf_2.png",
+   "views_ok": true
   },
   {
    "id": "A4-clay-tee",
@@ -231,13 +270,16 @@
    "group": "astronaut",
    "accent": "cyan",
    "mj_prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A4-clay-tee.jpg",
+   "pick": "mj_a5fe144c-a9d6-4ad6-a024-cd01663adc35_2.png",
+   "views_ok": true
   },
   {
    "id": "A4-paint-suit",
@@ -247,13 +289,16 @@
    "group": "astronaut",
    "accent": "cyan",
    "mj_prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A4-paint-suit.jpg",
+   "pick": "mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_3.png",
+   "views_ok": true
   },
   {
    "id": "A4-paint-tee",
@@ -263,13 +308,16 @@
    "group": "astronaut",
    "accent": "cyan",
    "mj_prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A4-paint-tee.jpg",
+   "pick": "mj_a3a2f06e-201f-4174-8434-d80e93d260bf_1.png",
+   "views_ok": true
   },
   {
    "id": "A5-clay-suit",
@@ -279,13 +327,16 @@
    "group": "astronaut",
    "accent": "yellow",
    "mj_prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A5-clay-suit.jpg",
+   "pick": "mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_1.png",
+   "views_ok": true
   },
   {
    "id": "A5-clay-tee",
@@ -295,13 +346,16 @@
    "group": "astronaut",
    "accent": "yellow",
    "mj_prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A5-clay-tee.jpg",
+   "pick": "mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_1.png",
+   "views_ok": false
   },
   {
    "id": "A5-paint-suit",
@@ -311,13 +365,16 @@
    "group": "astronaut",
    "accent": "yellow",
    "mj_prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A5-paint-suit.jpg",
+   "pick": "mj_94fb29e4-62d1-40c0-a540-efd5a4231972_2.png",
+   "views_ok": true
   },
   {
    "id": "A5-paint-tee",
@@ -327,13 +384,16 @@
    "group": "astronaut",
    "accent": "yellow",
    "mj_prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A5-paint-tee.jpg",
+   "pick": "mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_0.png",
+   "views_ok": false
   },
   {
    "id": "A6-clay-suit",
@@ -343,13 +403,16 @@
    "group": "astronaut",
    "accent": "green",
    "mj_prompt": "friendly small grey alien crewmate, big eyes, green accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A6-clay-suit.jpg",
+   "pick": "mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_1.png",
+   "views_ok": false
   },
   {
    "id": "A6-clay-tee",
@@ -359,13 +422,16 @@
    "group": "astronaut",
    "accent": "green",
    "mj_prompt": "friendly small grey alien crewmate, big eyes, green accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A6-clay-tee.jpg",
+   "pick": "mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_2.png",
+   "views_ok": false
   },
   {
    "id": "A6-paint-suit",
@@ -375,13 +441,16 @@
    "group": "astronaut",
    "accent": "green",
    "mj_prompt": "friendly small grey alien crewmate, big eyes, green accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A6-paint-suit.jpg",
+   "pick": "mj_4fb29006-9fb8-4a81-8288-0f042b694a03_2.png",
+   "views_ok": false
   },
   {
    "id": "A6-paint-tee",
@@ -391,13 +460,16 @@
    "group": "astronaut",
    "accent": "green",
    "mj_prompt": "friendly small grey alien crewmate, big eyes, green accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "multi-image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A6-paint-tee.jpg",
+   "pick": "mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_3.png",
+   "views_ok": true
   }
  ],
  "bodies": [
