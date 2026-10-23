@@ -84,6 +84,30 @@ closing lines, and the voiced lines, keyed by text. Young Daddy has a blond mop 
   - Overlay: only the timing glass and the score chip.
 - **HUD:** zero words; a back chevron, one score chip, and a timing glass only while needed.
 
+## Context engineering (what this study consulted)
+
+This was added retroactively under Evan's org-wide rule (2026-10-23 13:55Z). The study page shows it as the right-side
+card.
+
+- **Oracle consultation.**
+  - The memory-places review (https://claude.ai/artifact/1qPFbCMZ81PTMb44cSfZcN).
+  - The Oracle's free studies-only consult. It matched building games, and we kept only "no wrong moves".
+  - Catalog entries for Monaco, Shadow Tactics and Shadow of Mordor.
+  - The Shaders article and rendering index (https://claude.ai/artifact/2qnHmuYv8iy5TV7BR4cW9z).
+  - The HUD study, GAME_FEEL, INTERACTION_GRAMMAR and SCHOOL_STUDY.
+- **Game dev blogs and talks.**
+  - Valve, "Illustrative Rendering in Team Fortress 2" (2007).
+  - Valve, "Stylization with a Purpose" (GDC 2008).
+  - Maddy Thorson on Celeste's hidden forgiveness (via Gigazine).
+- **Game design blogs.**
+  - Critical Points, "Stealth game spotting deconstruction".
+  - Destructoid on Breath of the Wild's cut climbing rest.
+- **Tutorials.**
+  - hexaquo, a toon light shader in Godot.
+  - UMBC, ramp and toon shaders.
+- **Lesson.** The Oracle's free plan has no climbing or stealth studies yet. A study of a climbing game (A Short Hike,
+  Jusant) and a stealth game for kids would make the next consult useful.
+
 ## How it was made, and how to be faster next time
 
 Timeline, local time (UTC-4):

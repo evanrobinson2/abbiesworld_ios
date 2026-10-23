@@ -11,7 +11,13 @@
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6efe6;--paper:#fffaf3;--ink:#2a2230;--muted:#6f6377;--line:#e0d3c4;--accent:#a8641a;--brick:#a8462a;color-scheme:light}}
 :root[data-theme="light"]{--bg:#f6efe6;--paper:#fffaf3;--ink:#2a2230;--muted:#6f6377;--line:#e0d3c4;--accent:#a8641a;--brick:#a8462a;color-scheme:light}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);padding:20px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
-.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+.page{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:32px}
+.wrap{max-width:1100px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:44px;min-width:0}
+/* the context-engineering card (org rule, Evan 2026-10-23 13:55Z): what this study consulted, on the right */
+.context{border:1px solid var(--line);border-radius:14px;background:var(--paper);padding:16px 18px;display:grid;gap:12px;align-content:start;font-size:14px;line-height:1.45}
+.context h2{font-size:28px;color:var(--accent)} .context h3{margin:6px 0 0;font:500 11px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--brick)}
+.context ul{padding-left:16px;gap:6px} .context a{color:var(--ink)} .context .took{display:block;color:var(--muted)} .context code{font-size:12px}
+@media (min-width:1180px){.page{grid-template-columns:minmax(0,1fr) 320px}.context{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto}}
 h1,h2{font-family:var(--display);font-weight:400;margin:0;letter-spacing:.02em;text-wrap:balance}
 h1{font-size:clamp(44px,8vw,76px);line-height:.9;color:var(--accent)} h2{font-size:34px;line-height:1}
 p{margin:0;max-width:68ch} .muted{color:var(--muted)}
@@ -33,6 +39,7 @@ iframe{width:100%;aspect-ratio:4/3;border:1px solid var(--line);border-radius:12
 ol,ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
 @media (max-width:700px){.pair{grid-template-columns:1fr}}
 </style>
+<div class="page">
 <div class="wrap">
  <header>
   <div class="eyebrow">AW-STUDY-0032</div>
@@ -130,5 +137,34 @@ ol,ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
   </ul>
   <p class="muted">The full review: <code>docs/oracle/school/SCHOOL_READY_STUDY.md</code>.</p>
  </section>
+</div>
+<aside class="context" aria-label="Context engineering">
+ <h2>Context engineering</h2>
+ <p class="muted">What this study read before building, and what it took from each.</p>
+ <h3>Oracle consultation</h3>
+ <ul>
+  <li><a href="https://claude.ai/artifact/1qPFbCMZ81PTMb44cSfZcN">Memory places review</a><span class="took">The dog is the hook, headlights on a rhythm, busted means slide back to cover, the climb verb in the shared kit, one timing ring.</span></li>
+  <li>Oracle consult, studies-only plan (2026-10-23)<span class="took">It matched building games (Bricktales, Tiny Glade). We kept one rule: no wrong moves, so a tap that can't land is resolved, not rejected.</span></li>
+  <li>Oracle catalog: Monaco, Shadow Tactics, Shadow of Mordor<span class="took">Stealth read from light and vision. Being seen is a short build-up, not an instant fail.</span></li>
+  <li><a href="https://claude.ai/artifact/2qnHmuYv8iy5TV7BR4cW9z">Shaders article and rendering index</a> (62 games)<span class="took">Sunday Toon: soft bands, sky-tinted shadows, a warm rim, no outlines, as in Evan's five favourites.</span></li>
+  <li>Abbie's World canon: <code>docs/oracle/hud/HUD_STUDY.md</code>, <code>GAME_FEEL.md</code>, <code>INTERACTION_GRAMMAR.md</code>, <code>SCHOOL_STUDY.md</code><span class="took">Zero words on screen, 8% HUD, diegetic first, two layers that never mix.</span></li>
+ </ul>
+ <h3>Game dev blogs and talks</h3>
+ <ul>
+  <li><a href="https://www.advances.realtimerendering.com/s2007/Mitchell-IllustrativeRenderingInTF2(Siggraph07%20Course%20Notes).pdf">Illustrative Rendering in Team Fortress 2</a> (Valve, 2007)<span class="took">Wrap the light half-way round, then push it through a ramp. Shadows never go black.</span></li>
+  <li><a href="https://cdn.fastly.steamstatic.com/apps/valve/2008/GDC2008_StylizationWithAPurpose_TF2.pdf">Stylization with a Purpose</a> (Valve, GDC 2008)<span class="took">Silhouettes and readable shapes first, so a child reads the kid against the brick.</span></li>
+  <li><a href="https://gigazine.net/gsc_news/en/20200317-celeste-action-feel-things">Celeste's hidden forgiveness</a> (Maddy Thorson)<span class="took">Cheat in the player's favour: generous thumb targets, the game picks the hand, no dead ends.</span></li>
+ </ul>
+ <h3>Game design blogs</h3>
+ <ul>
+  <li><a href="https://critpoints.net/2015/03/30/stealth-game-spotting-deconstruction/">Stealth game spotting, deconstructed</a> (Critical Points)<span class="took">A detection meter with grace time, and guards going to your last known position. Our version is the burning headlights and sliding back to cover.</span></li>
+  <li><a href="https://www.destructoid.com/you-could-originally-regain-stamina-while-climbing-in-zelda-breath-of-the-wild-but-miyamoto-nixed-it/">Breath of the Wild's cut climbing rest</a><span class="took">Nintendo cut resting mid-climb for realism. For a child, we keep it: two hands on, and your arms recover.</span></li>
+ </ul>
+ <h3>Game design tutorials</h3>
+ <ul>
+  <li><a href="https://hexaquo.at/pages/understanding-godot-light-shaders-and-light-calculations-by-implementing-a-toon-light-shader/">A toon light shader, step by step</a> (hexaquo)<span class="took">Band the light term per light with smoothstep, which is how <code>toon-kit.mjs</code> patches three's own lighting.</span></li>
+  <li><a href="https://userpages.umbc.edu/~bailey/Courses/Tutorials/RenderingDemo/RampToonShader.html">Ramp and toon shaders</a> (UMBC)<span class="took">Ramp shading in Maya, with a hand-drawn pencil ramp. The idea of a ramp you can repaint per place carries over to the Moonbase's hard two bands.</span></li>
+ </ul>
+</aside>
 </div>
 </html>
