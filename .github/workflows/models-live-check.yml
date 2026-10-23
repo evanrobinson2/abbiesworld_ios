@@ -6,8 +6,10 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container: mcr.microsoft.com/playwright:v1.48.2-jammy
     steps:
-      - run: npm i playwright@1.48.2 && npx playwright install --with-deps chromium webkit
+      - run: npm i playwright@1.48.2
       - run: |
           cat > c.js <<'JS'
           const { chromium, webkit } = require('playwright');
