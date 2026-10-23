@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 840,
+ "total": 885,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -321,6 +321,26 @@
    "what": "cs-2-plasticine-inventor 3d",
    "credits": 30,
    "at": "2026-10-23T21:10:12Z"
+  },
+  {
+   "what": "cs-3-stick-man 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:48Z"
+  },
+  {
+   "what": "cs-1-claymation-adventurer rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:07Z"
+  },
+  {
+   "what": "cs-2-plasticine-inventor rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:39Z"
+  },
+  {
+   "what": "cs-3-stick-man rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:44Z"
   }
  ]
 }
