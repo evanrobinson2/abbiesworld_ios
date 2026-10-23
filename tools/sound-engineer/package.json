@@ -1,0 +1,17 @@
+{
+  "name": "abbies-sound-engineer",
+  "private": true,
+  "type": "module",
+  "description": "Picks, cuts, levels and stores sounds for Abbie's World from the Sonniss GDC bundles; catalogue in R2 and Postgres.",
+  "scripts": {
+    "index": "node index.mjs",
+    "pick": "node pick.mjs",
+    "build": "node build.mjs",
+    "store": "node store.mjs",
+    "test": "node --test test.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.700.0",
+    "pg": "^8.13.1"
+  }
+}

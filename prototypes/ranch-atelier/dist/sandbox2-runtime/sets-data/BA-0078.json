@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0078",
+  "name": "Market footpath junction",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 40,
+    "triangles": 1686,
+    "bounds_min": [
+      -1.1540896892547607,
+      -1.6189419031143188,
+      0.002499999478459358
+    ],
+    "bounds_max": [
+      1.649999976158142,
+      1.6189419031143188,
+      0.03750000149011612
+    ],
+    "dimensions_m": [
+      2.8041,
+      3.2379,
+      0.035
+    ],
+    "material_slots": [
+      "Stone",
+      "ClayLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Stone",
+    "ClayLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0078",
+  "intent": "Three worn pedestrian routes meeting between stalls.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0078",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

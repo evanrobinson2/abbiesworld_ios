@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "hay-rack",
+  "group": "supply",
+  "replaces": "simulation-assets/supplies/hay-{full,partial,empty,carried}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "2d85b88f-87e9-4797-8809-b657a4a87d57",
+      "grid_url": "https://www.midjourney.com/jobs/2d85b88f-87e9-4797-8809-b657a4a87d57?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "34c609a9-cb52-45fc-86cb-5c6363e914d6",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:33:25.249Z",
+      "grid_done_at": "2026-10-22T23:33:43.254Z",
+      "upscale_clicked_at": "2026-10-22T23:33:53Z",
+      "downloaded_at": "2026-10-22T23:35:02.629Z",
+      "pick_reason": "clear V-shaped slatted rack on four legs heaped with golden hay. upscale_clicked is approximate (tool connection dropped)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "688ee8f7-9515-490a-94c4-d4a1fe235711",
+      "grid_url": "https://www.midjourney.com/jobs/688ee8f7-9515-490a-94c4-d4a1fe235711?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "0530af0f-196f-4426-b25f-755b5186c9d6",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:35:14.422Z",
+      "grid_done_at": "2026-10-22T23:35:32.425Z",
+      "upscale_clicked_at": "2026-10-22T23:35:43.585Z",
+      "downloaded_at": "2026-10-22T23:37:09.223Z",
+      "pick_reason": "front, narrower end view and back of one rack, large and well separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "1c4ea6a5268d5f403b67ae096661f5bef2bb37e183cc6dd4cfdcea63f579e785",
+      "bytes": 2364154,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/34c609a9-cb52-45fc-86cb-5c6363e914d6/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "54c8cd95ddacc9e0f189e061640dc626425abdfbd285be9912ff806d24ee4f13",
+      "bytes": 3474015,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/0530af0f-196f-4426-b25f-755b5186c9d6/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "0279de1dbddafbf9ef24e43263ad652f8d81853b88b024636e44930ba96603bd",
+      "bytes": 1047306,
+      "pixels": [
+        822,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hay-rack [('front', 203, 1025), ('side', 1071, 1838), ('back', 1857, 2735)]"
+    },
+    "view_side.png": {
+      "sha256": "b8ada198d37c8255a1420ab027f602fa9fa3ed08cc113040c16c8d2465976462",
+      "bytes": 1001280,
+      "pixels": [
+        767,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hay-rack [('front', 203, 1025), ('side', 1071, 1838), ('back', 1857, 2735)]"
+    },
+    "view_back.png": {
+      "sha256": "a2dbf8a8543f953c1d8d6db51a6f2409d4190dcebdbd2b5d7da2e9b007607d5e",
+      "bytes": 1100041,
+      "pixels": [
+        878,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hay-rack [('front', 203, 1025), ('side', 1071, 1838), ('back', 1857, 2735)]"
+    }
+  }
+}

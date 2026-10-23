@@ -1,0 +1,213 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/compost-bay",
+ "name": "compost-bay",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden compost",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "80995128-6475-4e5e-b396-bc6f37c7c596",
+    "grid_url": "https://www.midjourney.com/jobs/80995128-6475-4e5e-b396-bc6f37c7c596?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "71ed9b82-ac07-4803-8f66-d990b731ce72",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:19:52.954Z",
+    "grid_done_at": "2026-10-22T23:20:10.960Z",
+    "upscale_clicked_at": "2026-10-22T23:20:21.836Z",
+    "downloaded_at": "2026-10-22T23:21:33.575Z",
+    "pick_reason": "dark compost clearly visible under green clippings, slatted sides, whole bay in frame. Every variant drew a closed four-sided box rather than a three-sided bay"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "a04370ae-0dc5-48e6-9faa-df257a394c24",
+    "grid_url": "https://www.midjourney.com/jobs/a04370ae-0dc5-48e6-9faa-df257a394c24?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "802c6a62-f06c-4aef-bd46-a2310cfac76f",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:21:43.115Z",
+    "grid_done_at": "2026-10-22T23:22:01.122Z",
+    "upscale_clicked_at": "2026-10-22T23:22:11.084Z",
+    "downloaded_at": "2026-10-22T23:23:30.661Z",
+    "pick_reason": "largest views, well separated, including a straight-on view; still a four-sided box like every variant"
+   }
+  },
+  "files": {
+   "hero.png": "c89308659602ce44a5fc38df958f01110a1e95ce21eda524abe576f927372a68",
+   "turnaround.png": "78a61892dcb0d95346910627f95dcc686154799e3cd2abe37f5449e83ad2b2b7",
+   "view_front.png": "9e11c95d45f08b76e77da205ca782ef36d6fd08356d5f333745e82a49f156b66",
+   "view_side.png": "4fbf708bb69b1dce300840a39cf0daf5ecdb072eb69dedc3e03f6e09ad5b3f47",
+   "view_back.png": "4113966bdeb4a682276473ff10d0a7b3cd5ac1989c8d1e1fe208372de2997c89"
+  },
+  "folder": "tools/ranch-rebuild/mj/compost-bay"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/compost-bay/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 1.8 x 1.3 m, 0.78 m posts poking above 0.73 m walls, 3 plank rows (2 at the front), mounded heap (base 0.66, mound 0.08), two sparse clumps of 86 small leaves. Hero scored with the harness perspective lens from -X/-Y (best grid camera -45/12).",
+    "mean_iou": null,
+    "hero_iou": 0.889
+   },
+   {
+    "round": 2,
+    "change": "Posts cut to wall height (0.755 corner, flush mids), heap raised nearer the brim (0.68) and flatter, more and bigger leaves, darker timber. Hero camera switched to orthographic and recalibrated to -45/18.",
+    "mean_iou": null,
+    "hero_iou": 0.944
+   },
+   {
+    "round": 3,
+    "change": "Heap flatter (mound 0.035) and lumpier (0.05), front slope ends at 0.52; clumps widened to match the hero (168 broader leaves); timber darkened again.",
+    "mean_iou": null,
+    "hero_iou": 0.944
+   },
+   {
+    "round": 4,
+    "change": "26 pyramid clods on the heap for the hero's chunky compost; planks set deeper so mid posts finish flush with the corner posts (footprint now 1.81 x 1.31 instead of 1.90 x 1.40). Final 768 px / 48 samples render; sheet front view scored for reference.",
+    "mean_iou": 0.413,
+    "hero_iou": 0.946
+   }
+  ],
+  "what_was_done": [
+   [
+    "Orientation",
+    "The front (-Y) is a long 1.8 m wall and is the open working side: it is one board lower (2 planks, top at 0.48 m) and its two mid posts stop at 0.49 m, so the heap slopes down to it. The other three walls have 3 planks (top 0.73 m). The MJ hero shows a short end wall on the left and a long wall on the right, so it is matched from off the front-left corner (-X, -Y)."
+   ],
+   [
+    "Views",
+    "The hero wins. views/hero.png is the MJ hero keyed by hue (backdrop and its large cast shadow are warm and pale; timber is redder, compost darker) with a wide closing to fill the pale rim highlights. The turnaround sheet drew a near-cube box, so it is used for detail only (post rhythm, gaps, heap colour), not proportions. Its only orthographic view (split.py's view_back.png, a straight-on wall) is scored as views/view_front.png for reference; the two 3/4 views are dropped."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders from the hero's own direction, 45 deg off the front towards -X and 18 deg up, with an orthographic camera (the hero reads near-isometric; the harness's close 50 mm lens converges far more). Calibrated over a yaw/elevation grid on the round-2 model, then fixed."
+   ],
+   [
+    "Massing",
+    "1.81 x 1.31 m footprint, 0.755 m corner posts (0.13 m square), walls 0.73 m. Mid posts (0.10 x 0.06 m) stand proud of the planks and finish flush with the corner posts: two per wall. Planks 0.20 m tall, 0.045 m thick, with 0.055 m real gaps through which the heap's dark sides show. Each board has a small random skew and tilt."
+   ],
+   [
+    "Heap",
+    "Soil_Compost: a closed 14 x 10 grid, jittered and displaced (lumps up to 5 cm), mounding 3.5 cm in the middle and sloping down to the low front board, flat shaded, plus 26 loose pyramid clods on top. Its sides run down to the ground so the plank gaps show compost, not air."
+   ],
+   [
+    "Clippings",
+    "Leaf_Green: 168 folded diamond leaf cards (2 tris each) in two clumps: a large one over the left (-X) half and a strip along the back right, as in the hero."
+   ],
+   [
+    "Game",
+    "4 objects, one material each: posts Timber_Post, planks Plank_Brown, compost Soil_Compost, clippings Leaf_Green (seasons recolour the leaves). 1848 triangles (budget 2k). No animation, export_animations=False."
+   ]
+  ],
+  "creative_additions": "The heap slopes down to the low front board like a turned working face, and loose clods sit on the surface."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.809347152709961,
+   1.308870792388916,
+   0.8195384740829468
+  ],
+  "triangles": 1848,
+  "materials": [
+   "Leaf_Green",
+   "Soil_Compost",
+   "Plank_Brown",
+   "Timber_Post"
+  ],
+  "parts": [
+   {
+    "name": "clippings",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "compost",
+    "materials": [
+     "Soil_Compost"
+    ]
+   },
+   {
+    "name": "planks",
+    "materials": [
+     "Plank_Brown"
+    ]
+   },
+   {
+    "name": "posts",
+    "materials": [
+     "Timber_Post"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": 0.413,
+  "hero_iou": 0.946,
+  "per_view": {
+   "front": 0.413
+  },
+  "triangle_budget": 2000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.946 from the calibrated hero camera.",
+   "Reads at small size as a low brown slatted box with a dark top and two green patches; the lowered front wall marks the working side.",
+   "Real gaps between the planks show the compost behind them."
+  ],
+  "off": [
+   "The front wall is one board lower than in the hero, by art direction, so the hero's right-hand wall is lower than drawn.",
+   "The sheet view scores 0.41: it drew a near-cube (taller than wide), which the art director told us to ignore.",
+   "The hero's clippings are dense, fine-cut sprigs; 2-triangle leaf cards read as a coarser, spikier patch.",
+   "The hero doubles the near corner post (each wall ends in its own post); one square post per corner here.",
+   "No wood grain or knots: flat colours only, per the game rules."
+  ]
+ },
+ "exports": {
+  "runtime": "compost-bay.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/garden-assets/GF-019.glb"
+   ]
+  }
+ },
+ "files": {
+  "compost-bay.glb": {
+   "sha256": "d484d7185ece1328459f853349626cee9b16ed4d4c1d9ad3eb3159cdfcca7a4e",
+   "bytes": 121376
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "1dbb84c410ac2e6a97177a0e16cbac8f1213143d",
+  "path": "tools/ranch-rebuild/models/compost-bay"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

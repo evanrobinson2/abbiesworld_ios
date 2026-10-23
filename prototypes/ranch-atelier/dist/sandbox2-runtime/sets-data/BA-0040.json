@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0040",
+  "name": "Sealed clay parcel tag",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 6,
+    "triangles": 176,
+    "bounds_min": [
+      -0.15172410011291504,
+      -0.04500000178813934,
+      0.0
+    ],
+    "bounds_max": [
+      0.16262926161289215,
+      0.06538808345794678,
+      0.05299999937415123
+    ],
+    "dimensions_m": [
+      0.3144,
+      0.1104,
+      0.053
+    ],
+    "material_slots": [
+      "Clay",
+      "ClayLight",
+      "Rope"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Clay",
+    "ClayLight",
+    "Rope"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0040",
+  "intent": "A clay lump bearing a cord impression and merchant emblem.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0040",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

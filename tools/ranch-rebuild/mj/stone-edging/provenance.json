@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "stone-edging",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-010.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a short straight row of rounded garden edging stones with small white and yellow flowers growing between them, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "86f3f28c-9054-4351-b5b0-9d7b617737bc",
+      "grid_url": "https://www.midjourney.com/jobs/86f3f28c-9054-4351-b5b0-9d7b617737bc?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "8d314f0f-96a2-4fea-8fff-60dfaa638b9e",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:45:43.105Z",
+      "grid_done_at": "2026-10-22T23:46:01.108Z",
+      "upscale_clicked_at": "2026-10-22T23:46:11.245Z",
+      "downloaded_at": "2026-10-22T23:47:20.599Z",
+      "pick_reason": "short straight row of rounded stones with white and yellow flowers between them, whole row in frame"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "fb24a3e9c79b961d2784c4b28e2a0322c78858b72a996360001866e392869d54",
+      "bytes": 3940846,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/8d314f0f-96a2-4fea-8fff-60dfaa638b9e/0_0.png"
+    }
+  }
+}

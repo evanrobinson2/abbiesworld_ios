@@ -1,0 +1,890 @@
+{
+  "schemaVersion": 1,
+  "pack": "Zombie survival gear",
+  "batch": 1,
+  "count": 10,
+  "items": [
+    {
+      "id": "ZG001",
+      "name": "Scavenger backpack",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG001.glb",
+      "preview": "/survival-gear/output/ZG001.png",
+      "dimensions": {
+        "x": 0.51,
+        "y": 0.345,
+        "z": 0.53,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.5099999904632568,
+        0.3450000286102295,
+        0.5299999713897705
+      ],
+      "reimportDimensionsM": [
+        0.5099999904632568,
+        0.3450000286102295,
+        0.5299999713897705
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG001.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 1,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Boxy field rucksack with flap, front pouch, side pockets and shoulder straps.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.075404
+    },
+    {
+      "id": "ZG002",
+      "name": "Open carrier vest",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG002.glb",
+      "preview": "/survival-gear/output/ZG002.png",
+      "dimensions": {
+        "x": 0.4506,
+        "y": 0.365,
+        "z": 0.4275,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.4505999982357025,
+        0.36500000953674316,
+        0.4274999499320984
+      ],
+      "reimportDimensionsM": [
+        0.4505999982357025,
+        0.36500000953674316,
+        0.4274999499320984
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG002.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 2,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Empty wearable plate carrier with separated front/back panels, shoulder bridges and three utility pouches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.076232
+    },
+    {
+      "id": "ZG003",
+      "name": "Rimmed patrol helmet",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG003.glb",
+      "preview": "/survival-gear/output/ZG003.png",
+      "dimensions": {
+        "x": 0.324,
+        "y": 0.363,
+        "z": 0.1919,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3240000009536743,
+        0.3630000054836273,
+        0.1918560266494751
+      ],
+      "reimportDimensionsM": [
+        0.3240000009536743,
+        0.3630000054836273,
+        0.1918560266494751
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG003.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 3,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Hollow domed protective helmet with rim and front equipment mount.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.077354
+    },
+    {
+      "id": "ZG004",
+      "name": "Filter respirator",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG004.glb",
+      "preview": "/survival-gear/output/ZG004.png",
+      "dimensions": {
+        "x": 0.28,
+        "y": 0.201,
+        "z": 0.258,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2800000011920929,
+        0.20100000500679016,
+        0.2580000162124634
+      ],
+      "reimportDimensionsM": [
+        0.2800000011920929,
+        0.20100000500679016,
+        0.2580000162124634
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG004.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 4,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Empty respirator face cup with two cylindrical filters and head strap.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.077972
+    },
+    {
+      "id": "ZG005",
+      "name": "Utility waist belt",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG005.glb",
+      "preview": "/survival-gear/output/ZG005.png",
+      "dimensions": {
+        "x": 0.45,
+        "y": 0.41,
+        "z": 0.17,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.45000001788139343,
+        0.4100000262260437,
+        0.17000000178813934
+      ],
+      "reimportDimensionsM": [
+        0.45000001788139343,
+        0.4100000262260437,
+        0.17000000178813934
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG005.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 5,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Open waist belt with front buckle and twin equipment pouches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.078764
+    },
+    {
+      "id": "ZG006",
+      "name": "Shin guard pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG006.glb",
+      "preview": "/survival-gear/output/ZG006.png",
+      "dimensions": {
+        "x": 0.4167,
+        "y": 0.182,
+        "z": 0.4404,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.41669124364852905,
+        0.18200001120567322,
+        0.44044989347457886
+      ],
+      "reimportDimensionsM": [
+        0.41669124364852905,
+        0.18200001120567322,
+        0.44044989347457886
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG006.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 6,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Paired shin armor plates with knee protection and retention bands.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.079421
+    },
+    {
+      "id": "ZG007",
+      "name": "Field boot pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG007.glb",
+      "preview": "/survival-gear/output/ZG007.png",
+      "dimensions": {
+        "x": 0.4,
+        "y": 0.298,
+        "z": 0.291,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3999999761581421,
+        0.2979999780654907,
+        0.29100000858306885
+      ],
+      "reimportDimensionsM": [
+        0.3999999761581421,
+        0.2979999780654907,
+        0.29100000858306885
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG007.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 7,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 14,
+      "brief": "Paired ankle boots with soles, toe boxes, laces and visible empty shaft openings.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.079977
+    },
+    {
+      "id": "ZG008",
+      "name": "Armored glove pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG008.glb",
+      "preview": "/survival-gear/output/ZG008.png",
+      "dimensions": {
+        "x": 0.4383,
+        "y": 0.116,
+        "z": 0.2645,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.43828076124191284,
+        0.11599999666213989,
+        0.2644999921321869
+      ],
+      "reimportDimensionsM": [
+        0.43828076124191284,
+        0.11599999666213989,
+        0.2644999921321869
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG008.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 8,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 16,
+      "brief": "Paired protective gloves with individual fingers, wrist openings and knuckle plates.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.0806231
+    },
+    {
+      "id": "ZG009",
+      "name": "Headlamp harness",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG009.glb",
+      "preview": "/survival-gear/output/ZG009.png",
+      "dimensions": {
+        "x": 0.304,
+        "y": 0.332,
+        "z": 0.065,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.30399999022483826,
+        0.3319999873638153,
+        0.06499999761581421
+      ],
+      "reimportDimensionsM": [
+        0.30399999022483826,
+        0.3319999873638153,
+        0.06499999761581421
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG009.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 9,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Open elastic head harness with compact front lamp.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.081179
+    },
+    {
+      "id": "ZG010",
+      "name": "Rain poncho",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG010.glb",
+      "preview": "/survival-gear/output/ZG010.png",
+      "dimensions": {
+        "x": 0.86,
+        "y": 0.5,
+        "z": 0.662,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.8600000143051147,
+        0.5,
+        0.6620000004768372
+      ],
+      "reimportDimensionsM": [
+        0.8600000143051147,
+        0.5,
+        0.6620000004768372
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG010.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 10,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 2,
+      "brief": "Open-bottom rain poncho with open collar and draped tapered panels.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.0818849
+    }
+  ],
+  "assets": [
+    {
+      "id": "ZG001",
+      "name": "Scavenger backpack",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG001.glb",
+      "preview": "/survival-gear/output/ZG001.png",
+      "dimensions": {
+        "x": 0.51,
+        "y": 0.345,
+        "z": 0.53,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.5099999904632568,
+        0.3450000286102295,
+        0.5299999713897705
+      ],
+      "reimportDimensionsM": [
+        0.5099999904632568,
+        0.3450000286102295,
+        0.5299999713897705
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG001.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 1,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Boxy field rucksack with flap, front pouch, side pockets and shoulder straps.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.075404
+    },
+    {
+      "id": "ZG002",
+      "name": "Open carrier vest",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG002.glb",
+      "preview": "/survival-gear/output/ZG002.png",
+      "dimensions": {
+        "x": 0.4506,
+        "y": 0.365,
+        "z": 0.4275,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.4505999982357025,
+        0.36500000953674316,
+        0.4274999499320984
+      ],
+      "reimportDimensionsM": [
+        0.4505999982357025,
+        0.36500000953674316,
+        0.4274999499320984
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG002.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 2,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Empty wearable plate carrier with separated front/back panels, shoulder bridges and three utility pouches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.076232
+    },
+    {
+      "id": "ZG003",
+      "name": "Rimmed patrol helmet",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG003.glb",
+      "preview": "/survival-gear/output/ZG003.png",
+      "dimensions": {
+        "x": 0.324,
+        "y": 0.363,
+        "z": 0.1919,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3240000009536743,
+        0.3630000054836273,
+        0.1918560266494751
+      ],
+      "reimportDimensionsM": [
+        0.3240000009536743,
+        0.3630000054836273,
+        0.1918560266494751
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG003.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 3,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Hollow domed protective helmet with rim and front equipment mount.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.077354
+    },
+    {
+      "id": "ZG004",
+      "name": "Filter respirator",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG004.glb",
+      "preview": "/survival-gear/output/ZG004.png",
+      "dimensions": {
+        "x": 0.28,
+        "y": 0.201,
+        "z": 0.258,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2800000011920929,
+        0.20100000500679016,
+        0.2580000162124634
+      ],
+      "reimportDimensionsM": [
+        0.2800000011920929,
+        0.20100000500679016,
+        0.2580000162124634
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG004.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 4,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Empty respirator face cup with two cylindrical filters and head strap.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.077972
+    },
+    {
+      "id": "ZG005",
+      "name": "Utility waist belt",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG005.glb",
+      "preview": "/survival-gear/output/ZG005.png",
+      "dimensions": {
+        "x": 0.45,
+        "y": 0.41,
+        "z": 0.17,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.45000001788139343,
+        0.4100000262260437,
+        0.17000000178813934
+      ],
+      "reimportDimensionsM": [
+        0.45000001788139343,
+        0.4100000262260437,
+        0.17000000178813934
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG005.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 5,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Open waist belt with front buckle and twin equipment pouches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.078764
+    },
+    {
+      "id": "ZG006",
+      "name": "Shin guard pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG006.glb",
+      "preview": "/survival-gear/output/ZG006.png",
+      "dimensions": {
+        "x": 0.4167,
+        "y": 0.182,
+        "z": 0.4404,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.41669124364852905,
+        0.18200001120567322,
+        0.44044989347457886
+      ],
+      "reimportDimensionsM": [
+        0.41669124364852905,
+        0.18200001120567322,
+        0.44044989347457886
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG006.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 6,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Paired shin armor plates with knee protection and retention bands.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.079421
+    },
+    {
+      "id": "ZG007",
+      "name": "Field boot pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG007.glb",
+      "preview": "/survival-gear/output/ZG007.png",
+      "dimensions": {
+        "x": 0.4,
+        "y": 0.298,
+        "z": 0.291,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3999999761581421,
+        0.2979999780654907,
+        0.29100000858306885
+      ],
+      "reimportDimensionsM": [
+        0.3999999761581421,
+        0.2979999780654907,
+        0.29100000858306885
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG007.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 7,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 14,
+      "brief": "Paired ankle boots with soles, toe boxes, laces and visible empty shaft openings.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.079977
+    },
+    {
+      "id": "ZG008",
+      "name": "Armored glove pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG008.glb",
+      "preview": "/survival-gear/output/ZG008.png",
+      "dimensions": {
+        "x": 0.4383,
+        "y": 0.116,
+        "z": 0.2645,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.43828076124191284,
+        0.11599999666213989,
+        0.2644999921321869
+      ],
+      "reimportDimensionsM": [
+        0.43828076124191284,
+        0.11599999666213989,
+        0.2644999921321869
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG008.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 8,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 16,
+      "brief": "Paired protective gloves with individual fingers, wrist openings and knuckle plates.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.0806231
+    },
+    {
+      "id": "ZG009",
+      "name": "Headlamp harness",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG009.glb",
+      "preview": "/survival-gear/output/ZG009.png",
+      "dimensions": {
+        "x": 0.304,
+        "y": 0.332,
+        "z": 0.065,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.30399999022483826,
+        0.3319999873638153,
+        0.06499999761581421
+      ],
+      "reimportDimensionsM": [
+        0.30399999022483826,
+        0.3319999873638153,
+        0.06499999761581421
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG009.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 9,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Open elastic head harness with compact front lamp.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.081179
+    },
+    {
+      "id": "ZG010",
+      "name": "Rain poncho",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG010.glb",
+      "preview": "/survival-gear/output/ZG010.png",
+      "dimensions": {
+        "x": 0.86,
+        "y": 0.5,
+        "z": 0.662,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.8600000143051147,
+        0.5,
+        0.6620000004768372
+      ],
+      "reimportDimensionsM": [
+        0.8600000143051147,
+        0.5,
+        0.6620000004768372
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG010.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 10,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 2,
+      "brief": "Open-bottom rain poncho with open collar and draped tapered panels.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.0818849
+    }
+  ]
+}

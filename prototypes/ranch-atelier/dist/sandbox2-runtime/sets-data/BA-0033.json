@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0033",
+  "name": "Stone weight set",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 15,
+    "triangles": 604,
+    "bounds_min": [
+      -0.3199999928474426,
+      -0.15000000596046448,
+      0.0
+    ],
+    "bounds_max": [
+      0.3199999928474426,
+      0.15000000596046448,
+      0.17100000381469727
+    ],
+    "dimensions_m": [
+      0.64,
+      0.3,
+      0.171
+    ],
+    "material_slots": [
+      "Stone",
+      "TimberLight",
+      "ClayLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Stone",
+    "TimberLight",
+    "ClayLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0033",
+  "intent": "A nested group of distinct weight sizes with consistent fictional markings.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0033",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,54 @@
+{
+  "id": "aw.ranch.asset.ba-0042",
+  "name": "Grain sample display",
+  "dependencies": [
+    "BA-0034"
+  ],
+  "geometry": {
+    "mesh_objects": 58,
+    "triangles": 5888,
+    "bounds_min": [
+      -0.38199999928474426,
+      -0.29296019673347473,
+      0.0
+    ],
+    "bounds_max": [
+      0.5299999713897705,
+      0.19999998807907104,
+      0.31599998474121094
+    ],
+    "dimensions_m": [
+      0.912,
+      0.493,
+      0.316
+    ],
+    "material_slots": [
+      "Grain",
+      "Rope",
+      "Timber",
+      "TimberLight",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 5
+  },
+  "materials": [
+    "Grain",
+    "Rope",
+    "Timber",
+    "TimberLight",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0042",
+  "intent": "Open measures, small grain heaps, and one tied sack.",
+  "family": "Food displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0042",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

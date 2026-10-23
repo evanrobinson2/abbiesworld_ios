@@ -1,0 +1,144 @@
+{
+ "name": "cedar-whimsical",
+ "asset": "cedar",
+ "style": "whimsical",
+ "stats": {
+  "triangles": 7625,
+  "meshes": 17,
+  "bounds_min": [
+   -6.550387859344482,
+   -5.199999809265137,
+   -0.18000000715255737
+  ],
+  "bounds_max": [
+   6.669071674346924,
+   5.199999809265137,
+   14.479999542236328
+  ],
+  "dimensions_m": [
+   13.219459533691406,
+   10.399999618530273,
+   14.65999984741211
+  ],
+  "animations": [
+   "Scene"
+  ]
+ },
+ "views_used": "models/cedar-whimsical/views",
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "score": {
+  "front": {
+   "iou": 0.518,
+   "aspect_target": 1.275,
+   "aspect_render": 1.114,
+   "mean_color_dist": 0.259
+  },
+  "side": {
+   "iou": 0.583,
+   "aspect_target": 1.436,
+   "aspect_render": 1.414,
+   "mean_color_dist": 0.237
+  },
+  "back": {
+   "iou": 0.418,
+   "aspect_target": 1.591,
+   "aspect_render": 1.114,
+   "mean_color_dist": 0.107
+  },
+  "mean_iou": 0.506
+ },
+ "hero_iou": 0.59,
+ "notes": {
+  "what_i_did": [
+   [
+    "Views",
+    "The turnaround labels are right (front and side show the door, back shows the swing), but each crop had the sheet's shadow band and a sliver of the neighbouring tree; prep_views.py cleans them into views/ and scoring uses that folder."
+   ],
+   [
+    "Trunk",
+    "A custom swept spline (Catmull-Rom, parallel-transport frames) tapering from 2.55 m to 0.42 m, with five flutes twisting 1.1 turns. It follows the hero's big S: hard right at the base (+2.3 m), back left through the middle (-1.2 m), right again into the crown. The flared base is about 5 m wide and swallows the door; four tapered roots."
+   ],
+   [
+    "Canopy",
+    "Three tiers of cloud pads. Each pad is 6 to 9 overlapping flattened UV-sphere puffs of varied size, smooth shaded: a raised central dome, then a ring of smaller lumps with squashed, rounded undersides that make a bulging lip, so no edge is a vertical wall. The crown is 9.9 m wide and 2.7 m deep (3.6:1). Up-facing faces get LeafLight."
+   ],
+   [
+    "Branches",
+    "Each pad sits on its own tapered swept arm from the trunk, with two forked twigs reaching into the pad."
+   ],
+   [
+    "Swing",
+    "The low branch reaches 5.6 m out to the left with its own small plate. The two knotted ropes and the bevelled seat hang 3.7 m from it, well clear of the trunk."
+   ],
+   [
+    "Base",
+    "Arched red plank door with iron hinges and knob in a dark recess between two roots at the front (-Y), a grass disc, bushes, rocks and a stepping-stone path to the door."
+   ],
+   [
+    "Colours",
+    "Art-director palette, stored exactly in the GLB (sRGB hex converted to linear with c^2.2): Leaf #4F8A3C, LeafLight #7DAF55, Bark #8B7A70, Grass #5E9A3F."
+   ]
+  ],
+  "good": [
+   "Plump S-twisting trunk with root flare and the door at its roots reads as the hero's storybook tree.",
+   "Tiered flat-bottomed cloud pads with a lighter top and a leafy fringe give the bonsai and cloud look.",
+   "7,625 triangles (under the 8k budget), 14.6 m tall, origin at trunk base on the ground, front faces -Y."
+  ],
+  "off": [
+   "The pads are smooth puff clusters. The hero's carved swirl relief and fine leaf texture are not modelled.",
+   "Mean IoU fell from 0.570 to 0.506 over the art-director rounds. Following the hero's wide S-gesture, its far-out swing and rounder pad lumps moves the silhouette away from the turnaround, which draws a narrower, straighter four-tier tree with spiky leaf fringes and the swing close to the trunk (back view 0.42).",
+   "The greens are now mid-green, but the shading between lobes is shallower than the hero's sculpted canopy.",
+   "The bark has no grooves or streaks beyond the twisted flutes.",
+   "After round 8, at the art director's request, the 0.72/0.85 pre-darkening was reverted so the GLB holds the true palette; the harness's bright lighting makes the final renders look more lime than the palette (a harness lighting issue, not the asset)."
+  ],
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: swept twisted trunk, 5 thin puff pads, swing, door, base (8,397 tris, over budget).",
+    "mean_iou": 0.495
+   },
+   {
+    "round": 2,
+    "change": "Taller tree (pads raised ~1 m), thicker pads, darker greens and bark, smaller ground disc, fewer root/bush polys to get under budget (7,453 tris).",
+    "mean_iou": 0.549
+   },
+   {
+    "round": 3,
+    "change": "Added the scalloped drooping leaf fringe under every pad and plumped the lower trunk.",
+    "mean_iou": 0.574
+   },
+   {
+    "round": 4,
+    "change": "Widened the crown to 5 m radius (hero), widened right pad, pushed left pad forward (-Y).",
+    "mean_iou": 0.566
+   },
+   {
+    "round": 5,
+    "change": "Kept the wide crown, reverted the left pad's depth move (it cost side IoU).",
+    "mean_iou": 0.571
+   },
+   {
+    "round": 6,
+    "change": "Brought the door forward out of the trunk so the red planks show; final 768 px / 48 sample render.",
+    "mean_iou": 0.57
+   },
+   {
+    "round": 7,
+    "change": "Art-director round: S-trunk amplitude about 2.5x, longer trunk and 5 m flared base, canopy rebuilt as flat 4:1 lobed plates in 3 tiers with stacked inset scallop rings, 10 m-wide crown, swing branch 5.6 m out to the left with its own plate, AD palette, fewer roots and bushes; final 768 px / 48 sample render.",
+    "mean_iou": 0.535
+   },
+   {
+    "round": 8,
+    "change": "Art-director round 2: pads rebuilt as clusters of 6 to 9 flattened, overlapping puffs with domed tops and rounded underside lips (dropped the slabs and fringe skirts); crown 3.6:1; leaf, grass and bark inputs pre-darkened to compensate for the harness lighting (greens now mid, not lime); final 768 px / 48 sample render.",
+    "mean_iou": 0.506
+   }
+  ],
+  "moving_parts": "Every pad and its branch hangs under its own pivot (sway_crown, sway_left, sway_right, sway_back, sway_swing) at the branch root. Each one sways 1.6 to 2.6 degrees on two axes with offset phases. The rope swing (swing_pivot, a child of sway_swing) swings +-22 degrees about its branch, twice per loop. Frames 1 to 120 at 24 fps, all sine-based, so the loop is seamless, and it exports as one 'Scene' clip.",
+  "creative_additions": "Stepping-stone path leading to the door, iron hinges and a knob on the door, knots where the swing ropes meet the branch, small bushes and rocks around the roots, a back plate so the tree reads in the round, and the swing riding on its swaying branch (the hierarchy makes the two motions combine)."
+ },
+ "glb_bytes": 195880
+}

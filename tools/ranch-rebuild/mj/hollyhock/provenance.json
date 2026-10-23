@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "hollyhock",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-634.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "75ebc3ef-489e-4703-b7c6-7847aceab84f",
+      "grid_url": "https://www.midjourney.com/jobs/75ebc3ef-489e-4703-b7c6-7847aceab84f?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "e8075318-94bc-4104-a75f-7adabb7f827f",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:53:07.136Z",
+      "grid_done_at": "2026-10-22T23:53:25.139Z",
+      "upscale_clicked_at": "2026-10-22T23:53:35.491Z",
+      "downloaded_at": "2026-10-22T23:54:44.240Z",
+      "pick_reason": "tall spire of stacked pink cups with big round base leaves, tip not cropped"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "68b5cd93db915999b41f2263147e5b8073364bceb9286111f2ff2d90b324b38c",
+      "bytes": 1702754,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/e8075318-94bc-4104-a75f-7adabb7f827f/0_0.png"
+    }
+  }
+}

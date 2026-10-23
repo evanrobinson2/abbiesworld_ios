@@ -1,0 +1,50 @@
+{
+  "id": "aw.ranch.asset.ba-0077",
+  "name": "Hoof print ground patch",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 25,
+    "triangles": 1100,
+    "bounds_min": [
+      -0.4749999940395355,
+      -1.0,
+      0.0
+    ],
+    "bounds_max": [
+      0.4749999940395355,
+      1.0,
+      0.023000001907348633
+    ],
+    "dimensions_m": [
+      0.95,
+      2.0,
+      0.023
+    ],
+    "material_slots": [
+      "Timber",
+      "ClayLight",
+      "Clay"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Timber",
+    "ClayLight",
+    "Clay"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Print darkness reuses Timber material semantically as shadow; geometry is a relief approximation, not Boolean terrain excavation.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0077",
+  "intent": "A clustered trail between the tether station and the road.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0077",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

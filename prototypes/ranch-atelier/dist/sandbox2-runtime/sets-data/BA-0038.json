@@ -1,0 +1,49 @@
+{
+  "id": "aw.ranch.asset.ba-0038",
+  "name": "Clay sale record tablet",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 17,
+    "triangles": 103,
+    "bounds_min": [
+      -0.125,
+      -0.10111631453037262,
+      -0.000499999150633812
+    ],
+    "bounds_max": [
+      0.20893050730228424,
+      0.14111630618572235,
+      0.054999999701976776
+    ],
+    "dimensions_m": [
+      0.3339,
+      0.2422,
+      0.0555
+    ],
+    "material_slots": [
+      "Clay",
+      "Reed",
+      "ClayLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Clay",
+    "Reed",
+    "ClayLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Marks are decorative geometry, not a transcription of historical writing.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0038",
+  "intent": "A small tablet carrying fictional impressed marks for a transaction.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0038",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

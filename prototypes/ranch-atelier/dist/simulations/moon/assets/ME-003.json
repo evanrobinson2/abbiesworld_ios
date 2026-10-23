@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.1.0",
+  "id": "ME-003",
+  "name": "Fixed surface solar array",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-exterior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Tilted framed cells on unequal-height supports connect sunlight to equipment. Scientific fiction; not certified engineering.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-exterior/me-003",
+  "biome": "moon-base-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 60,
+    "triangles": 454,
+    "bounds_min": [
+      -1.834999918937683,
+      -0.6850000619888306,
+      0.0
+    ],
+    "bounds_max": [
+      1.834999918937683,
+      0.6849998831748962,
+      1.6350001096725464
+    ],
+    "dimensions_m": [
+      3.67,
+      1.37,
+      1.635
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "power-generator",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "deploy",
+      "connect",
+      "inspect"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "power",
+        "position_blender_m": [
+          0.0,
+          0.5,
+          0.30000001192092896
+        ],
+        "role": "power"
+      },
+      {
+        "id": "service",
+        "position_blender_m": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "role": "service"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "deployed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "folded",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "dusty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "clean",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Tilted framed cells on unequal-height supports connect sunlight to equipment. Scientific fiction; not certified engineering. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See solar(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-exterior/batch_moon_exterior.py",
+    "entry_point": "solar",
+    "source_sha256": "4a01f7ea8ee6f39ffe62d85c23c7f5d2fc8f48867d8e16ba8a75dea34291806a",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-exterior batch_moon_exterior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "ME-003"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable silhouette and material separation in rendered contact-sheet inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable silhouette and material separation in rendered contact-sheet inspection"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "ME-003.glb",
+    "sha256": "334d333612049cd1b14cc2e7ba64d0208dcb1795736ed02dd97e58e4339215d2",
+    "bytes": 30540
+  }
+}

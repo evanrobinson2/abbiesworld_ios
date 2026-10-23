@@ -15,12 +15,13 @@ documents; what is built lives in the status documents. Keep these three apart.
 
 ## Ground rules
 - All work stays in this repo (evanrobinson2/abbiesworld_ios). No other repos and no local-only copies.
-- The live Ranch Atelier site is built from branch `claude/live-snapshot-2026-10-22`
-  (`prototypes/ranch-atelier/dist`); `main` does not carry it. Ranch work merges into that branch.
+- `main` is the source for everything, including the live Ranch Atelier site: Vercel project `abbies-ranch-atelier`
+  builds production from `main` (`prototypes/ranch-atelier/dist`). Branch from `main` and open PRs against `main`.
+  The old `claude/live-snapshot-2026-10-22` branch is an archive, merged into `main` on 2026-10-23; don't use it.
 - Evan uses Ranch Atelier as a home-screen app on his iPhone. Every Ranch deploy he can see adds an entry, with a
-  picture and your thread id, to `prototypes/ranch-atelier/dist/whats-new.json` (live branch); it becomes the app's
+  picture and your thread id, to `prototypes/ranch-atelier/dist/whats-new.json`; it becomes the app's
   "new version ready" card. His notes from the app's feedback button come back through the Feedback inbox PR
-  (branch `feedback-inbox`). See `prototypes/ranch-atelier/dist/FEEDBACK.md` on the live branch.
+  (branch `feedback-inbox`). See `prototypes/ranch-atelier/dist/FEEDBACK.md`.
 - Integrate the modeler vision incrementally. Don't overwrite existing conventions, file formats or loaders; extend them.
 
 ## How Abbie's World shows information
@@ -46,9 +47,10 @@ Follow these principles; they matter more than any UI grammar. The full study is
 - Keep what Evan likes: liquid glass (as objects with depth, not flat frosted panels), rich colours and live previews.
   Check a HUD with `tools/hud-rubric/check_hud.py`.
 - In practice: load the `abbies-world-designer` skill (`.claude/skills/`) for any player-facing work. It gives the
-  design card to fill first, the presentation-layer API (`presentation()`, `perceivable()`, the scene information
+  design card to fill first, the presentation-layer API (`prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs`:
+  `presentation()`, `developerHelper()`, `renderWorldOnly()`, `perceivable()`, `volunteer()` for the scene information
   manifest in `docs/design/INFO_MANIFEST.md`) and the review. Every PR runs the `game-feel` check: a lint for engine
-  artifacts and world masks, and a ratchet that fails a change hiding more of the world. Briefs: `docs/design/briefs/`.
+  artifacts and world masks, and a ratchet that fails a change hiding more of the world (/sandbox). Briefs: `docs/design/briefs/`.
 
 ## Modeling work
 - Every model made to match an image is shown with an interactive 3D viewer next to its inspiration image.
@@ -62,6 +64,7 @@ Follow these principles; they matter more than any UI grammar. The full study is
 - Change requests make a new version of an asset with the request recorded; never silently replace history.
 
 ## Where things are
+- `prototypes/ranch-atelier/dist/`: the live Ranch Atelier site (abbies-ranch-atelier.vercel.app, ranch.abbies.world).
 - `tools/model-challenge/`: brief, modeler brief, scoring harness (`harness.py`), turnaround splitter, publisher.
 - `tools/ranch-rebuild/`: the Ranch tile rebuild, `to_game.py` (GLB to the tile's mesh format) and `PROFILE.md`.
 - `tools/midjourney/`: driving Midjourney in Evan's browser. `tools/model-store/`: R2 and Postgres asset storage.

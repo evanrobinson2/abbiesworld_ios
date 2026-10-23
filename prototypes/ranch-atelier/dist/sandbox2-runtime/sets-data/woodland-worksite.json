@@ -1,0 +1,337 @@
+{
+  "schema_version": "0.1.0",
+  "diorama_id": "aw.ranch.diorama.woodland-worksite.timber-supply",
+  "world": "abbies-world",
+  "project_branch": "abbies-ranch",
+  "region": "aw.ranch.region.woodland-worksite",
+  "biome": [
+    "managed-woodland",
+    "woodland-edge"
+  ],
+  "era": "fictional-bronze-age",
+  "source_project_link": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/woodland-worksite",
+  "source_library": "../market-village/outputs/market-village.blend",
+  "taxonomy_version": "0.1.0",
+  "units": "metres",
+  "authoring_up": "Z",
+  "gltf_up": "Y",
+  "interaction_state": "static",
+  "asset_ids": [
+    "BA-0001",
+    "BA-0011",
+    "BA-0018",
+    "BA-0022",
+    "BA-0024",
+    "BA-0057",
+    "BA-0058",
+    "BA-0059",
+    "BA-0063",
+    "BA-0082",
+    "BA-0087",
+    "BA-0088"
+  ],
+  "placements": [
+    {
+      "asset_id": "BA-0087",
+      "canonical_id": "aw.ranch.asset.ba-0087",
+      "group": "WW-04",
+      "position": [
+        4,
+        2.5,
+        0
+      ],
+      "rotation_z": 0.2,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0001",
+      "canonical_id": "aw.ranch.asset.ba-0001",
+      "group": "WW-06",
+      "position": [
+        -4,
+        3,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1.45
+    },
+    {
+      "asset_id": "BA-0011",
+      "canonical_id": "aw.ranch.asset.ba-0011",
+      "group": "WW-06",
+      "position": [
+        -4,
+        2,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0057",
+      "canonical_id": "aw.ranch.asset.ba-0057",
+      "group": "WW-06",
+      "position": [
+        -4,
+        2,
+        0.97
+      ],
+      "rotation_z": 0,
+      "scale": 0.85
+    },
+    {
+      "asset_id": "BA-0059",
+      "canonical_id": "aw.ranch.asset.ba-0059",
+      "group": "WW-06",
+      "position": [
+        -2.7,
+        2,
+        0.97
+      ],
+      "rotation_z": 0,
+      "scale": 0.55
+    },
+    {
+      "asset_id": "BA-0058",
+      "canonical_id": "aw.ranch.asset.ba-0058",
+      "group": "WW-06",
+      "position": [
+        -6.8,
+        0.5,
+        0
+      ],
+      "rotation_z": 0.4,
+      "scale": 0.9
+    },
+    {
+      "asset_id": "BA-0082",
+      "canonical_id": "aw.ranch.asset.ba-0082",
+      "group": "WW-06",
+      "position": [
+        -4,
+        3.3,
+        0
+      ],
+      "rotation_z": 0.05,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0018",
+      "canonical_id": "aw.ranch.asset.ba-0018",
+      "group": "WW-06",
+      "position": [
+        -6.5,
+        3,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0063",
+      "canonical_id": "aw.ranch.asset.ba-0063",
+      "group": "WW-07",
+      "position": [
+        -8,
+        -5,
+        0
+      ],
+      "rotation_z": 0.2,
+      "scale": 0.8
+    },
+    {
+      "asset_id": "BA-0024",
+      "canonical_id": "aw.ranch.asset.ba-0024",
+      "group": "WW-07",
+      "position": [
+        -6.6,
+        -5.6,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0022",
+      "canonical_id": "aw.ranch.asset.ba-0022",
+      "group": "WW-07",
+      "position": [
+        -7,
+        -4.4,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0088",
+      "canonical_id": "aw.ranch.asset.ba-0088",
+      "group": "WW-07",
+      "position": [
+        -6,
+        -7,
+        0
+      ],
+      "rotation_z": -0.3,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0018",
+      "canonical_id": "aw.ranch.asset.ba-0018",
+      "group": "WW-07",
+      "position": [
+        -8.4,
+        -3.5,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    }
+  ],
+  "context_groups": [
+    {
+      "id": "WW-01",
+      "intent": "Village path enters the woodland clearing"
+    },
+    {
+      "id": "WW-02",
+      "intent": "Living trees and retained woodland edge"
+    },
+    {
+      "id": "WW-03",
+      "intent": "Regrowth and selective cutting"
+    },
+    {
+      "id": "WW-04",
+      "intent": "Fresh logs become usable timber"
+    },
+    {
+      "id": "WW-05",
+      "intent": "Raised timber dries beside the route"
+    },
+    {
+      "id": "WW-06",
+      "intent": "Handwork shelter connects timber to village wheels"
+    },
+    {
+      "id": "WW-07",
+      "intent": "Water and rest at the arrival edge"
+    }
+  ],
+  "counting": "Context groups and reused instances do not increment the 5,000-asset ledger.",
+  "geometry": {
+    "mesh_objects": 1120,
+    "triangles": 47724,
+    "bounds_min": [
+      -15.793861389160156,
+      -18.0,
+      -1.100000023841858
+    ],
+    "bounds_max": [
+      15.588457107543945,
+      18.0,
+      7.119999885559082
+    ],
+    "dimensions_m": [
+      31.3823,
+      36.0,
+      8.22
+    ]
+  },
+  "limitations": [
+    "Static diorama; no gameplay or NPC simulation.",
+    "Fictional Bronze Age visual setting, not a reconstruction of a named historical culture."
+  ],
+  "encounter": {
+    "sequence": [
+      "arrive",
+      "work",
+      "trace"
+    ],
+    "entry": "Follow the village wheel seller back to timber supply.",
+    "first_familiar_good": "cart wheel",
+    "next_discoveries": [
+      {
+        "clue": "bronze tool",
+        "destination": "metalworking and ore supply",
+        "status": "planned"
+      }
+    ]
+  },
+  "camera_stops": [
+    {
+      "id": "arrive",
+      "label": "Arrive",
+      "target": [
+        -5,
+        1,
+        5
+      ],
+      "position": [
+        24,
+        27,
+        35
+      ]
+    },
+    {
+      "id": "work",
+      "label": "Shape",
+      "target": [
+        -3,
+        1,
+        -1
+      ],
+      "position": [
+        16,
+        20,
+        26
+      ]
+    },
+    {
+      "id": "trace",
+      "label": "Trace",
+      "target": [
+        5,
+        1,
+        -4
+      ],
+      "position": [
+        26,
+        25,
+        19
+      ]
+    }
+  ],
+  "views": [
+    {
+      "label": "Arrive",
+      "target": [
+        -5,
+        1,
+        5
+      ],
+      "distance": 38,
+      "intent": "Follow the village path to the timber clearing."
+    },
+    {
+      "label": "Shape",
+      "target": [
+        -3,
+        1,
+        -1
+      ],
+      "distance": 29,
+      "intent": "Find the familiar wheel beside hand-shaped timber."
+    },
+    {
+      "label": "Trace",
+      "target": [
+        5,
+        1,
+        -4
+      ],
+      "distance": 32,
+      "intent": "Connect logs and seasoning stock to retained woodland."
+    }
+  ]
+}

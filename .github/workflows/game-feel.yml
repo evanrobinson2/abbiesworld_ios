@@ -4,7 +4,7 @@
 name: game-feel
 on:
   pull_request:
-    branches: [main, claude/live-snapshot-2026-10-22]
+    branches: [main]
     paths: ['prototypes/**', 'tools/game-feel-check/**']
 jobs:
   lint:

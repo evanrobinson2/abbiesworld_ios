@@ -1,0 +1,340 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/chicken-coop",
+ "name": "chicken-coop",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "home for the hens",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "72a29531-09f7-4171-aaf5-6ce40346623f",
+    "grid_url": "https://www.midjourney.com/jobs/72a29531-09f7-4171-aaf5-6ce40346623f?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "4baf1bb1-a077-4b15-8258-ae8b31a014ac",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:32:17.776Z",
+    "grid_done_at": "2026-10-22T22:32:35.780Z",
+    "upscale_clicked_at": "2026-10-22T22:32:47.344Z",
+    "downloaded_at": "2026-10-22T22:33:59.709Z",
+    "pick_reason": "stout legs, ramp to pop door, nest box on the side, mesh window, whole coop in frame"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "79ca1b04-8ac5-4ccb-84ce-7752ac355ccb",
+    "grid_url": "https://www.midjourney.com/jobs/79ca1b04-8ac5-4ccb-84ce-7752ac355ccb?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "19a5ae04-dac2-4d2c-8183-5cd6d6dc2c8f",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:34:08.939Z",
+    "grid_done_at": "2026-10-22T22:34:26.944Z",
+    "upscale_clicked_at": "2026-10-22T22:34:37.661Z",
+    "downloaded_at": "2026-10-22T22:35:58.068Z",
+    "pick_reason": "front with ramp and pop door, side with nest box, back with mesh window; one consistent coop, well separated"
+   }
+  },
+  "files": {
+   "hero.png": "d8a8c67efcdd41a20efec98ca15e14ecbaa37d3d326b22d804faa379438f595d",
+   "turnaround.png": "4eae6185da53bece818b9a420011bf0381d78fa8122bcb8c067d4a02140f75e1",
+   "view_front.png": "bd4d0189042db464fa3fc0ae120001fcfcb4ab1ccfde56187e21cca3a69e19ff",
+   "view_side.png": "d2fc33c8774e553d8b548af674e2ed69ed14323cb48f3495eb72d86b6305e3af",
+   "view_back.png": "91ef034b6e586b3f5e6de7f873525b0c4d3a7715988320da8adffab030ea9886"
+  },
+  "folder": "tools/ranch-rebuild/mj/chicken-coop"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/chicken-coop/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 1.5 x 1.1 m, 0.86 m walls, 57 deg roof. Views made: side = mirrored sheet gable, back = sheet eave wall, both unstretched, front dropped. Hero camera grid-calibrated to 38 deg / 5 deg up.",
+    "mean_iou": 0.547,
+    "hero_iou": 0.801
+   },
+   {
+    "round": 2,
+    "change": "Proportions from the hero: 1.4 x 1.2 m plan, 0.95 m walls, 50 deg roof, roof edge at the band, ridge sag.",
+    "mean_iou": 0.534,
+    "hero_iou": 0.808
+   },
+   {
+    "round": 3,
+    "change": "Plan stretched to 1.6 m, ramp widened to 0.68 m, deeper sag, longer crossed bargeboard tips, no coplanar overlaps at the sill/band corners, solid wall core. Sheet views stretched to the model's proportions and the ramp edge painted into the side target.",
+    "mean_iou": 0.74,
+    "hero_iou": 0.832
+   },
+   {
+    "round": 4,
+    "change": "Taller and wider door, bolder and fewer shingle tabs, bigger and lower nest box, muted timber colour.",
+    "mean_iou": 0.75,
+    "hero_iou": 0.827
+   },
+   {
+    "round": 5,
+    "change": "Ramp run cut from 1.2 to 1.0 m (the hero ramp is steep); hero camera refined to 40 deg / 8 deg up.",
+    "mean_iou": 0.749,
+    "hero_iou": 0.864
+   },
+   {
+    "round": 6,
+    "change": "Legs inset toward the sheet's leg spacing: 0.07 m scored 0.763 / 0.853, so I kept a 0.03 m compromise because the hero wins.",
+    "mean_iou": 0.754,
+    "hero_iou": 0.86
+   },
+   {
+    "round": 7,
+    "change": "Fixed black faces (no vertex merging between touching boxes, offset coplanar faces), ridge-beam end blocks, nest-box entry hole and latch, bigger door ring. Final 768 px / 48 sample render.",
+    "mean_iou": 0.757,
+    "hero_iou": 0.857
+   }
+  ],
+  "what_was_done": [
+   [
+    "Orientation",
+    "The hero wins. The long eave wall with the door, ramp and nest box faces -Y, with the nest box at the front-left (-X) and the door just right of centre (+0.05 m). The gable ends face +-X, and the mesh window sits on the +X gable, which is the gable you see in the hero."
+   ],
+   [
+    "Views (views/, built by make_views.py)",
+    "view_front is dropped. The sheet's left view is a 3/4 view of a gable end with an arched pop door (the AD said to ignore the arch), and the sheet has no orthographic view of our door wall. view_side.png is mj view_back, the gable with the mesh window. I mirrored it so its nest-box bump sits at the front (-Y is image-left from +X), cut the ground shadow while keeping the legs by column, and stretched it to the model's gable width/height. The sheet's ramp sits on the other gable, so I painted a 0.10 m thick ramp edge from the sheet's sill down to the ground 1.0 m out, using the model's hero-matched numbers. view_back.png is mj view_side, the long eave wall without a door, used as our back wall and for the leg spacing. Its nest box lies inside the wall outline, so I didn't edit it. I stretched it to the model's length/height (x1.30). hero.png is the mj hero with its greenish cast shadow and the orange ground glow painted out."
+   ],
+   [
+    "Hero check (hero_check.py)",
+    "The harness hero camera already sits on the correct side (+X/-Y), but higher and nearer the front than the MJ shot. I grid-calibrated yaw/elevation on the round-1 model (38 deg / 5 deg up) and refined it once in round 5 to 40 deg / 8 deg up, because the ramp foot drops below the leg feet in the hero and that needs some elevation. The camera is fixed from then on. The harness lens and distance are kept."
+   ],
+   [
+    "Massing",
+    "A 1.6 x 1.2 m box of cream walls (sill top 0.63 m, band 1.58 m). It stands on four 0.15 m legs 0.44 m tall with knee braces in both directions, a proud floor frame, and a 50 deg roof with a 0.08 m ridge sag, 0.14 m gable and 0.06 m eave overhangs. Total height is 2.6 m. The ramp is 0.68 m wide plus its rails and runs 1.0 m out from the sill to the ground."
+   ],
+   [
+    "Craft",
+    "Horizontal cream plank courses, each 1 in 3 a shade darker, with jittered depth and a solid core so plank gaps never show daylight. The gable triangles are planked and cut to the rake. Light-timber corner posts, door posts, sill and band all round, tie-beam ends and a king post on each gable. There are 5 courses of individually laid teal shingle tabs with lifted butts that follow the sag. Bargeboards cross above the ridge, and the ridge beam overhangs both ends with chunky end blocks. The door has 3 planks, a ledge, trim, two iron strap hinges with knuckles and an 8-sided iron ring. The ramp has 9 jittered slats on two darker stringers. The nest box has base and corner trim, a sloped lid with lid cheeks, a latch and a dark entry hole. The mesh window has a trimmed frame and lintel, a recessed dark Metal_Mesh plane and a dark backing."
+   ],
+   [
+    "Game readiness",
+    "2,884 triangles (budget 9k) and 19 meshes, each with one flat material named by role: Plank_Cream, Plank_CreamShade, Timber_Light, Timber_Shade, Roof_Teal, Metal_Mesh, Metal_Iron, Stone_Grey, Plank_Shadow, Rope_String (planned only). No animation. The planned/foundation/frame/roof/complete variants all come from build.py STATE groups."
+   ]
+  ],
+  "creative_additions": "Iron strap hinges with knuckles, a latch and entry hole on the nest box, darker ramp stringers, stone pads under the legs, and ramp-foot marker stakes in the planned stage."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   2.061616897583008,
+   2.4159340858459473,
+   2.597111940383911
+  ],
+  "triangles": 2884,
+  "materials": [
+   "Plank_Cream",
+   "Timber_Light",
+   "Timber_Shade",
+   "Plank_Shadow",
+   "Metal_Iron",
+   "Metal_Mesh",
+   "Plank_CreamShade",
+   "Roof_Teal",
+   "Stone_Grey"
+  ],
+  "parts": [
+   {
+    "name": "door",
+    "materials": [
+     "Plank_Cream"
+    ]
+   },
+   {
+    "name": "floor_deck",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "floor_frame",
+    "materials": [
+     "Timber_Shade"
+    ]
+   },
+   {
+    "name": "interior",
+    "materials": [
+     "Plank_Shadow"
+    ]
+   },
+   {
+    "name": "iron_fittings",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "legs",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "mesh",
+    "materials": [
+     "Metal_Mesh"
+    ]
+   },
+   {
+    "name": "nest_box",
+    "materials": [
+     "Plank_Cream"
+    ]
+   },
+   {
+    "name": "nest_hole",
+    "materials": [
+     "Plank_Shadow"
+    ]
+   },
+   {
+    "name": "nest_lid",
+    "materials": [
+     "Plank_CreamShade"
+    ]
+   },
+   {
+    "name": "plank_walls",
+    "materials": [
+     "Plank_Cream"
+    ]
+   },
+   {
+    "name": "plank_walls_shade",
+    "materials": [
+     "Plank_CreamShade"
+    ]
+   },
+   {
+    "name": "ramp",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "ramp_rails",
+    "materials": [
+     "Timber_Shade"
+    ]
+   },
+   {
+    "name": "roof_shingles",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "roof_timbers",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "stone_pads",
+    "materials": [
+     "Stone_Grey"
+    ]
+   },
+   {
+    "name": "timber_frame",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "trim",
+    "materials": [
+     "Timber_Light"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "complete",
+  "foundation",
+  "frame",
+  "planned",
+  "roof"
+ ],
+ "validation": {
+  "outline_iou": 0.757,
+  "hero_iou": 0.857,
+  "per_view": {
+   "side": 0.759,
+   "back": 0.755
+  },
+  "triangle_budget": 9000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette 0.857 from the hero's direction. The four stout braced legs, the long ramp, the nest-box bump, the steep teal roof with its sagging ridge and crossed bargeboard tips, and the trimmed mesh window all read at small size.",
+   "The coop keeps the hero's colour blocks: cream walls inside light timber trim and a teal roof.",
+   "Construction stages read as a sequence: stakes and string lines with leg and ramp marks, then pads with braced legs and the floor deck, then the full timber box frame with rafters, then the roof on an open frame, then the finished coop."
+  ],
+  "off": [
+   "Mean IoU is only 0.757. Both sheet views come from a narrower, taller coop with a squarer plan and a lower, wider-flaring roof, so even stretched they disagree with the hero's roof line (back view) and the sheet's chunky splayed legs and under-floor ramp (side view).",
+   "The side target's ramp is painted in, not drawn by Midjourney, so the side score measures the model against hero-derived numbers there.",
+   "The legs stand on small grey stone pads that the hero doesn't show. I kept them so the foundation stage has a footing.",
+   "The shingles are slightly smaller than the hero's (5 courses rather than 4), and the hero's wood grain and plank wear are not modelled.",
+   "Timber reads a little more orange than the hero's muted tan under the harness sun.",
+   "The hero camera was calibrated on the model itself (grid search), so the hero number is a guide."
+  ]
+ },
+ "exports": {
+  "runtime": "chicken-coop.glb",
+  "variants": {
+   "complete": "variants/complete.glb",
+   "foundation": "variants/foundation.glb",
+   "frame": "variants/frame.glb",
+   "planned": "variants/planned.glb",
+   "roof": "variants/roof.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-planned.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-foundation.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-frame.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-roof.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-complete.json"
+   ]
+  }
+ },
+ "files": {
+  "chicken-coop.glb": {
+   "sha256": "b0c7f8d161bb6a1ab4a2bb818f6b703edb890c6a99fce9ddb92b2c5ebcf4da8b",
+   "bytes": 169448
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "29f349eb318576a7ba0784b37ce4304780745a60",
+  "path": "tools/ranch-rebuild/models/chicken-coop"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

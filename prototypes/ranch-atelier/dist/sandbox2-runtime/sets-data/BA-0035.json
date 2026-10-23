@@ -1,0 +1,46 @@
+{
+  "id": "aw.ranch.asset.ba-0035",
+  "name": "Grain leveling stick",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 2,
+    "triangles": 88,
+    "bounds_min": [
+      -0.23499999940395355,
+      -0.042500000447034836,
+      0.010999999940395355
+    ],
+    "bounds_max": [
+      0.3199999928474426,
+      0.042500000447034836,
+      0.04749999940395355
+    ],
+    "dimensions_m": [
+      0.555,
+      0.085,
+      0.0365
+    ],
+    "material_slots": [
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0035",
+  "intent": "A flat wooden blade spanning the capacity measure.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0035",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

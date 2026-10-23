@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.1.0",
+  "id": "WW-064",
+  "name": "Pegged woodland tool wall",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "working-woodland",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Give shared tools clear hanging locations and a small maintenance ledge.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/working-woodland/ww-064",
+  "biome": "working-woodland",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 12,
+    "triangles": 400,
+    "bounds_min": [
+      -0.6499999761581421,
+      -0.3710915446281433,
+      4.6566128730773926e-09
+    ],
+    "bounds_max": [
+      0.6499999761581421,
+      0.04500000178813934,
+      1.5134217739105225
+    ],
+    "dimensions_m": [
+      1.3,
+      0.41609,
+      1.51342
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "tool-organization",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "hang",
+      "retrieve",
+      "inspect"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "access.001",
+        "position_blender_m": [
+          0.0,
+          -0.699999988079071,
+          0.013421858660876751
+        ],
+        "role": "access"
+      },
+      {
+        "id": "ledge",
+        "position_blender_m": [
+          0.0,
+          -0.15000000596046448,
+          0.5134218335151672
+        ],
+        "role": "ledge"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for working-woodland",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "empty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "organized",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "mixed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "worn",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "repaired",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Give shared tools clear hanging locations and a small maintenance ledge. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See toolwall(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "working-woodland/batch_woodland_7.py",
+    "entry_point": "toolwall",
+    "source_sha256": "66267784b4f64f64fd3f6e695541818cad0f70f90ba44761585a83666a1db2da",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- working-woodland batch_woodland_7.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "WW-064"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: coherent geometry, readable silhouette and material details; static prototype",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: coherent geometry, readable silhouette and material details; static prototype"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "WW-064.glb",
+    "sha256": "7e63b247db078d75de9559f6b3b7ff500cd49f55b2c870d6345ef61336d31235",
+    "bytes": 27208
+  }
+}

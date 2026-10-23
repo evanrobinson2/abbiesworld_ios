@@ -1,0 +1,70 @@
+{
+ "id": "morning-comes",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "aed8be002f18206ff041020cca30be2c22fdd70ea64c69fe8a9d7a5c4a299cc9"
+  }
+ ],
+ "title": "Morning Comes",
+ "kind": "interlude",
+ "brief": "Night turns to day: bird-like flute flutters and the horn bring the sun up in D.",
+ "uses": [
+  "dawn",
+  "night to day",
+  "before Ranch Morning"
+ ],
+ "tags": [
+  "transition",
+  "dawn",
+  "morning"
+ ],
+ "score": "tools/composer/cues/interludes.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/interludes.py",
+  "bpm": 70,
+  "meter": "4/4",
+  "key": "D major",
+  "bars": 4,
+  "instruments": [
+   "bass",
+   "cellos",
+   "flute",
+   "flute_stac",
+   "glock",
+   "horn",
+   "violas",
+   "violins"
+  ],
+  "percussion": [
+   "triangle"
+  ],
+  "hall_seconds": 2.6,
+  "target_lufs": -17.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "main": {
+   "audio": "/music/composer/morning-comes.mp3",
+   "sha256": "aed8be002f18206ff041020cca30be2c22fdd70ea64c69fe8a9d7a5c4a299cc9",
+   "bytes": 321933,
+   "duration": 15.957,
+   "loudness": -17.0,
+   "peak": -3.1,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}

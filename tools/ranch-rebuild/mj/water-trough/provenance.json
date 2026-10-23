@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "water-trough",
+  "group": "supply",
+  "replaces": "simulation-assets/supplies/water-trough-{full,partial,empty}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a long wooden plank water trough on short feet with iron corner bands, full of clear water, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "9a798216-8d1d-4708-86eb-69150534433b",
+      "grid_url": "https://www.midjourney.com/jobs/9a798216-8d1d-4708-86eb-69150534433b?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "a4ce7ead-c9cb-403b-912e-e03ee5fd364f",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:41:14.044Z",
+      "grid_done_at": "2026-10-22T23:41:32.049Z",
+      "upscale_clicked_at": "2026-10-22T23:41:42.138Z",
+      "downloaded_at": "2026-10-22T23:42:50.902Z",
+      "pick_reason": "whole trough centered with iron corner bands, short feet and clear water"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a long wooden plank water trough on short feet with iron corner bands, full of clear water, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "af08508f-612c-448e-a64a-2d10fb6009c8",
+      "grid_url": "https://www.midjourney.com/jobs/af08508f-612c-448e-a64a-2d10fb6009c8?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "b9900cd3-c05d-4d5b-ab41-1e732d69fe8b",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:43:00.081Z",
+      "grid_done_at": "2026-10-22T23:43:18.086Z",
+      "upscale_clicked_at": "2026-10-22T23:43:57.878Z",
+      "downloaded_at": "2026-10-22T23:45:22.511Z",
+      "pick_reason": "best of two runs: a row of three end views (front, open-ended back, end) above one large three-quarter view of the long side. Midjourney would not fit three views of a long trough in one row, so the sheet has two rows and the column-based split views overlap; use hero.png and the full sheet",
+      "rejected_grids": [
+        {
+          "grid_job_id": "a0b7c163-89b3-4d05-a971-7104f82ac838",
+          "submitted_at": "2026-10-22T23:43:26.030Z",
+          "grid_done_at": "2026-10-22T23:43:44.031Z",
+          "reason": "rerun of the same prompt because no variant of the first run had three views in a row; the rerun was no better"
+        }
+      ]
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "85bfd48cb8b8f811e6bb9ddee262dbfe2e49fcaf443113f1c2b890208a025cad",
+      "bytes": 2082372,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/a4ce7ead-c9cb-403b-912e-e03ee5fd364f/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "0c8162e5e5accc2d056a35adff00c8590f90caaaa8c9beaf19391327f3c246ef",
+      "bytes": 5214439,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/b9900cd3-c05d-4d5b-ab41-1e732d69fe8b/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "3a8c72c6430a45c73a447bab8a60597041c1f63537654c7cd0f8e1cf70a164b3",
+      "bytes": 1026045,
+      "pixels": [
+        704,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-trough [('front', 211, 915), ('side', 915, 1896), ('back', 1896, 2727)]"
+    },
+    "view_side.png": {
+      "sha256": "2b2e658fca96f5645ae94dc53189259e4089e6a860bc632e171cae669d87ba56",
+      "bytes": 1839224,
+      "pixels": [
+        981,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-trough [('front', 211, 915), ('side', 915, 1896), ('back', 1896, 2727)]"
+    },
+    "view_back.png": {
+      "sha256": "6b33ce3049cdf02947ec1699d647bf46832708a21e2f533184b7a05fdc10108c",
+      "bytes": 1487826,
+      "pixels": [
+        831,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-trough [('front', 211, 915), ('side', 915, 1896), ('back', 1896, 2727)]"
+    }
+  }
+}

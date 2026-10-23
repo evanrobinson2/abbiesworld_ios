@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "balance-upgrade",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a Bronze Age portable merchant beam balance on a timber stand, a carved wooden gantry with a crossbar, a bronze beam with a pointer needle, two shallow bronze pans hung on three cords each, rope lashings, a small stone weight set at the base, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "81870e18-d976-453b-9bab-32c03464d6e5",
+      "grid_url": "https://www.midjourney.com/jobs/81870e18-d976-453b-9bab-32c03464d6e5?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "b7466fcb-6231-4c1f-90a1-4b24fd286b9d",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a Bronze Age portable merchant beam balance on a timber stand, a carved wooden gantry with a crossbar, a bronze beam with a pointer needle, two shallow bronze pans hung on three cords each, rope lashings, a small stone weight set at the base, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "a997a917-63d1-447d-9391-e4690e008a55",
+      "grid_url": "https://www.midjourney.com/jobs/a997a917-63d1-447d-9391-e4690e008a55?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "1d6a611f-4504-4f52-83f0-c0e5d29f9c99",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "2195332fcc73f4609fe7725fff9b74e3309a27875e3cde1e66cd2f659291586e",
+      "bytes": 1433268,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/b7466fcb-6231-4c1f-90a1-4b24fd286b9d/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "9b6c0ca1c301908976389f95404a692eca7ef09a84699abb1c12c91591d710fa",
+      "bytes": 2885971,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/1d6a611f-4504-4f52-83f0-c0e5d29f9c99/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "bcaeb589a5d21bb622b86a2d303465e7e0afc49020048f85402ca6addb6f3d5b",
+      "bytes": 983873,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "bb05779fb4ef67375057f7490fb28f808a52678da0a527b46bffdc06d78d43b0",
+      "bytes": 842023,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "869a701575ab49d2dbfc7dff1d23040814ba758e42158cf68f2cedf5759eee09",
+      "bytes": 1004981,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 0 is the one with a gantry crossbar and stone weights at the base. Turnaround pick 3 is the only sheet with a true edge-on side view (pans hidden behind the post)."
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "MI-024",
+  "name": "Bolted communal dining table",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-interior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Bolted communal dining table; fictional static hardware, not certified engineering or operational safety guidance.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-interior/mi-024",
+  "biome": "moon-base-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 13,
+    "triangles": 1476,
+    "bounds_min": [
+      -1.1200000047683716,
+      -1.1200000047683716,
+      0.0
+    ],
+    "bounds_max": [
+      1.1200000047683716,
+      1.1200000047683716,
+      0.9200000166893005
+    ],
+    "dimensions_m": [
+      2.24,
+      2.24,
+      0.92
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "social-space",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "sit",
+      "share-meal",
+      "clean"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "access.003",
+        "position_blender_m": [
+          0.0,
+          -0.699999988079071,
+          0.0
+        ],
+        "role": "access"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "installed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "in-use",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "service",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "detached",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Bolted communal dining table; fictional static hardware, not certified engineering or operational safety guidance. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See table(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-interior/batch_moon_interior_3.py",
+    "entry_point": "table",
+    "source_sha256": "ec44b73c5fd0ee9536aa4207c0f4c5dba6c485bc05ceb237a5b69067862d4874",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-interior batch_moon_interior_3.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "MI-024"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "MI-024.glb",
+    "sha256": "0219906c9157da07a18f1f8fbae83c8d560200fd7b10f5bef147aaf77b157be5",
+    "bytes": 68936
+  }
+}

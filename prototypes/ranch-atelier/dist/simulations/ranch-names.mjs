@@ -1,0 +1,3 @@
+const FIRST=['Birch','Clover','Maple','Fox','Willow','Apple','Cedar','Alder','Juniper','Chestnut','Hazel','Fern','Golden','Bramble','Hickory','Meadow','Stone','Laurel','Oak','Walnut','Robin','Pine','Blueberry','Thistle'];
+const SECOND=['Hollow','Brook','Ridge','Hill','Vale','Glen','Meadow','Creek','Orchard','Crossing','Field','Grove','Run','Bend','Pond','Pasture'];
+export function ranchName(seed){let n=(Number(seed)>>>0)^0x7f4a7c15;const next=()=>{n=Math.imul(n^(n>>>16),0x45d9f3b);n=Math.imul(n^(n>>>16),0x45d9f3b);return (n^=n>>>16)>>>0;};const first=FIRST[next()%FIRST.length],second=SECOND[next()%SECOND.length],suffix=['Farm','Ranch','Homestead'][next()%3];return `${first} ${second} ${suffix}`;}

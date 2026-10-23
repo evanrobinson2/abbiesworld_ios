@@ -1,0 +1,1428 @@
+{
+  "CE-001": {
+    "id": "CE-001",
+    "name": "Banked coastal salt evaporation pan",
+    "path": "/coastal-assets/CE-001.glb",
+    "dimensions": [
+      2.12,
+      1.58,
+      0.31
+    ],
+    "purpose": "Hold shallow brine for evaporation beside the shore.",
+    "bounds": {
+      "min": [
+        -1.059999942779541,
+        -0.7900000214576721,
+        0.0
+      ],
+      "max": [
+        1.059999942779541,
+        0.7900000214576721,
+        0.3100000023841858
+      ]
+    }
+  },
+  "CE-002": {
+    "id": "CE-002",
+    "name": "Wooden salt gathering rake",
+    "path": "/coastal-assets/CE-002.glb",
+    "dimensions": [
+      0.68,
+      0.20489,
+      1.22793
+    ],
+    "purpose": "Gather salt crust with a broad toothed wooden head.",
+    "bounds": {
+      "min": [
+        -0.3400000035762787,
+        -0.1728949099779129,
+        9.313225746154785e-10
+      ],
+      "max": [
+        0.3400000035762787,
+        0.03199998661875725,
+        1.2279319763183594
+      ]
+    }
+  },
+  "CE-003": {
+    "id": "CE-003",
+    "name": "Open coastal fish drying frame",
+    "path": "/coastal-assets/CE-003.glb",
+    "dimensions": [
+      1.9,
+      0.78792,
+      1.61837
+    ],
+    "purpose": "Suspend prepared fish with ventilation above the shore ground.",
+    "bounds": {
+      "min": [
+        -0.949999988079071,
+        -0.393960565328598,
+        2.0489096641540527e-08
+      ],
+      "max": [
+        0.949999988079071,
+        0.3939604163169861,
+        1.618367314338684
+      ]
+    }
+  },
+  "CE-004": {
+    "id": "CE-004",
+    "name": "Long woven fish carrying basket",
+    "path": "/coastal-assets/CE-004.glb",
+    "dimensions": [
+      1.27633,
+      0.62493,
+      0.54355
+    ],
+    "purpose": "Carry fish in a ventilated elongated basket with raised handles.",
+    "bounds": {
+      "min": [
+        -0.6381649971008301,
+        -0.3124626874923706,
+        -4.889466609370174e-10
+      ],
+      "max": [
+        0.6381649971008301,
+        0.31246277689933777,
+        0.5435469746589661
+      ]
+    }
+  },
+  "CE-005": {
+    "id": "CE-005",
+    "name": "Padded boat repair cradle",
+    "path": "/coastal-assets/CE-005.glb",
+    "dimensions": [
+      2.29,
+      1.45,
+      0.715
+    ],
+    "purpose": "Support a small hull above ground for inspection and repairs.",
+    "bounds": {
+      "min": [
+        -1.0,
+        -0.7250000238418579,
+        0.0
+      ],
+      "max": [
+        1.2899999618530273,
+        0.7250000238418579,
+        0.7150000333786011
+      ]
+    }
+  },
+  "CE-006": {
+    "id": "CE-006",
+    "name": "Small open coastal rowing boat",
+    "path": "/coastal-assets/CE-006.glb",
+    "dimensions": [
+      4.1,
+      1.36,
+      0.83483
+    ],
+    "purpose": "Carry near-shore loads in a hollow ribbed hull with thwarts and paddle.",
+    "bounds": {
+      "min": [
+        -2.049999952316284,
+        -0.6800000071525574,
+        0.0
+      ],
+      "max": [
+        2.049999952316284,
+        0.6800000071525574,
+        0.8348311185836792
+      ]
+    }
+  },
+  "CE-007": {
+    "id": "CE-007",
+    "name": "Coastal net and boat worker",
+    "path": "/coastal-assets/CE-007.glb",
+    "dimensions": [
+      0.75772,
+      0.51194,
+      1.59
+    ],
+    "purpose": "Connect fishing, shore handling and boat care through a static worker.",
+    "bounds": {
+      "min": [
+        -0.35577693581581116,
+        -0.37194013595581055,
+        0.0
+      ],
+      "max": [
+        0.40194010734558105,
+        0.14000000059604645,
+        1.590000033378601
+      ]
+    }
+  },
+  "CE-008": {
+    "id": "CE-008",
+    "name": "Separate woven boatworker vest",
+    "path": "/coastal-assets/CE-008.glb",
+    "dimensions": [
+      0.48843,
+      0.35179,
+      0.46049
+    ],
+    "purpose": "Provide a continuous sleeveless garment fitted over the coastal worker tunic.",
+    "bounds": {
+      "min": [
+        -0.2442159652709961,
+        -0.18800000846385956,
+        0.7595076560974121
+      ],
+      "max": [
+        0.2442159652709961,
+        0.1637931764125824,
+        1.2200000286102295
+      ]
+    }
+  },
+  "CE-009": {
+    "id": "CE-009",
+    "name": "Standing estuary seabird",
+    "path": "/coastal-assets/CE-009.glb",
+    "dimensions": [
+      0.75117,
+      0.266,
+      0.51645
+    ],
+    "purpose": "Represent a shore bird with folded wings, toes and a distinct beak.",
+    "bounds": {
+      "min": [
+        -0.36000001430511475,
+        -0.132999986410141,
+        2.3283064365386963e-10
+      ],
+      "max": [
+        0.391167014837265,
+        0.132999986410141,
+        0.516446053981781
+      ]
+    }
+  },
+  "CE-010": {
+    "id": "CE-010",
+    "name": "Tide marker and stranded shore detail",
+    "path": "/coastal-assets/CE-010.glb",
+    "dimensions": [
+      0.91814,
+      0.60077,
+      1.33146
+    ],
+    "purpose": "Indicate changing water levels through a marked shore post and natural debris.",
+    "bounds": {
+      "min": [
+        -0.47999998927116394,
+        -0.28076592087745667,
+        0.0
+      ],
+      "max": [
+        0.43813762068748474,
+        0.3199999928474426,
+        1.3314590454101562
+      ]
+    }
+  },
+  "CE-011": {
+    "id": "CE-011",
+    "name": "Rooted eelgrass patch",
+    "path": "/coastal-assets/CE-011.glb",
+    "dimensions": [
+      0.46757,
+      0.45279,
+      0.5
+    ],
+    "purpose": "Narrow ribbon blades form a low submerged meadow plant.",
+    "bounds": {
+      "min": [
+        -0.21732313930988312,
+        -0.2179543375968933,
+        0.0
+      ],
+      "max": [
+        0.25024503469467163,
+        0.2348322570323944,
+        0.5
+      ]
+    }
+  },
+  "CE-012": {
+    "id": "CE-012",
+    "name": "Broad-bladed kelp holdfast",
+    "path": "/coastal-assets/CE-012.glb",
+    "dimensions": [
+      0.2934,
+      0.22,
+      1.02
+    ],
+    "purpose": "Large blades branch from a flexible stipe above a grasping holdfast.",
+    "bounds": {
+      "min": [
+        -0.16231347620487213,
+        -0.10999999195337296,
+        0.0
+      ],
+      "max": [
+        0.1310824304819107,
+        0.10999999195337296,
+        1.0199999809265137
+      ]
+    }
+  },
+  "CE-013": {
+    "id": "CE-013",
+    "name": "Bladderwrack frond cluster",
+    "path": "/coastal-assets/CE-013.glb",
+    "dimensions": [
+      0.44,
+      0.12,
+      0.26993
+    ],
+    "purpose": "Forked fronds carry paired air bladders at intertidal scale.",
+    "bounds": {
+      "min": [
+        -0.2199999988079071,
+        -0.05999999865889549,
+        -4.656612873077393e-10
+      ],
+      "max": [
+        0.2199999988079071,
+        0.05999999865889549,
+        0.2699304223060608
+      ]
+    }
+  },
+  "CE-014": {
+    "id": "CE-014",
+    "name": "Succulent saltmarsh samphire",
+    "path": "/coastal-assets/CE-014.glb",
+    "dimensions": [
+      0.23608,
+      0.21331,
+      0.3224
+    ],
+    "purpose": "Segmented fleshy branches distinguish a salt-tolerant shore plant.",
+    "bounds": {
+      "min": [
+        -0.1170756071805954,
+        -0.11849407106637955,
+        0.0
+      ],
+      "max": [
+        0.11900358647108078,
+        0.09481845051050186,
+        0.3224000036716461
+      ]
+    }
+  },
+  "CE-015": {
+    "id": "CE-015",
+    "name": "Spined sea-holly rosette",
+    "path": "/coastal-assets/CE-015.glb",
+    "dimensions": [
+      0.34217,
+      0.35097,
+      0.53
+    ],
+    "purpose": "Spiked basal leaves and a bracted flower head mark a dune-edge plant.",
+    "bounds": {
+      "min": [
+        -0.16217440366744995,
+        -0.17548702657222748,
+        0.0
+      ],
+      "max": [
+        0.18000000715255737,
+        0.17548702657222748,
+        0.5299999713897705
+      ]
+    }
+  },
+  "CE-016": {
+    "id": "CE-016",
+    "name": "Eight-legged shore crab",
+    "path": "/coastal-assets/CE-016.glb",
+    "dimensions": [
+      0.34419,
+      0.26004,
+      0.09294
+    ],
+    "purpose": "Jointed walking legs, pincers and raised eyes provide a crab silhouette.",
+    "bounds": {
+      "min": [
+        -0.17209337651729584,
+        -0.16499999165534973,
+        2.3283064365386963e-10
+      ],
+      "max": [
+        0.17209337651729584,
+        0.09504000842571259,
+        0.09294334053993225
+      ]
+    }
+  },
+  "CE-017": {
+    "id": "CE-017",
+    "name": "Rock-attached mussel colony",
+    "path": "/coastal-assets/CE-017.glb",
+    "dimensions": [
+      0.38042,
+      0.32078,
+      0.101
+    ],
+    "purpose": "Separate elongated bivalves cluster over a shared rocky substrate.",
+    "bounds": {
+      "min": [
+        -0.19021157920360565,
+        -0.15999998152256012,
+        0.0
+      ],
+      "max": [
+        0.19021157920360565,
+        0.16077518463134766,
+        0.10100000351667404
+      ]
+    }
+  },
+  "CE-018": {
+    "id": "CE-018",
+    "name": "Ridged estuary oyster",
+    "path": "/coastal-assets/CE-018.glb",
+    "dimensions": [
+      0.19299,
+      0.14,
+      0.061
+    ],
+    "purpose": "Layered irregular shell valves and a hinge distinguish an oyster.",
+    "bounds": {
+      "min": [
+        -0.09788849949836731,
+        -0.06999999284744263,
+        0.0
+      ],
+      "max": [
+        0.09510578960180283,
+        0.06999999284744263,
+        0.060999996960163116
+      ]
+    }
+  },
+  "CE-019": {
+    "id": "CE-019",
+    "name": "Limpet-bearing intertidal rock",
+    "path": "/coastal-assets/CE-019.glb",
+    "dimensions": [
+      0.41847,
+      0.34,
+      0.15106
+    ],
+    "purpose": "Conical ridged shells cling to a small shore rock.",
+    "bounds": {
+      "min": [
+        -0.20923273265361786,
+        -0.16999998688697815,
+        0.0
+      ],
+      "max": [
+        0.20923273265361786,
+        0.16999998688697815,
+        0.15106354653835297
+      ]
+    }
+  },
+  "CE-020": {
+    "id": "CE-020",
+    "name": "Resting coastal seal",
+    "path": "/coastal-assets/CE-020.glb",
+    "dimensions": [
+      1.61121,
+      0.88,
+      0.47
+    ],
+    "purpose": "Rounded torso, muzzle, whiskers and paired flippers depict a distinct marine mammal.",
+    "bounds": {
+      "min": [
+        -0.7799999713897705,
+        -0.4399999976158142,
+        0.0
+      ],
+      "max": [
+        0.8312101364135742,
+        0.4399999976158142,
+        0.4699999988079071
+      ]
+    }
+  },
+  "CE-021": {
+    "id": "CE-021",
+    "name": "Raised tidal brine intake gate",
+    "path": "/coastal-assets/CE-021.glb",
+    "dimensions": [
+      1.5,
+      0.98,
+      0.975
+    ],
+    "purpose": "Masonry intake and lifting gate admit brine toward saltworks.",
+    "bounds": {
+      "min": [
+        -0.75,
+        -0.49000000953674316,
+        0.0
+      ],
+      "max": [
+        0.75,
+        0.49000000953674316,
+        0.9749999642372131
+      ]
+    }
+  },
+  "CE-022": {
+    "id": "CE-022",
+    "name": "Open brine settling cistern",
+    "path": "/coastal-assets/CE-022.glb",
+    "dimensions": [
+      1.47021,
+      1.48,
+      0.85075
+    ],
+    "purpose": "Thick-walled vessel separates sediment before concentration.",
+    "bounds": {
+      "min": [
+        -0.7351057529449463,
+        -0.7400000095367432,
+        0.0
+      ],
+      "max": [
+        0.7351057529449463,
+        0.7400000095367432,
+        0.850746214389801
+      ]
+    }
+  },
+  "CE-023": {
+    "id": "CE-023",
+    "name": "Salt-boiling hearth and shallow vessel",
+    "path": "/coastal-assets/CE-023.glb",
+    "dimensions": [
+      1.0,
+      0.78,
+      0.59
+    ],
+    "purpose": "A firebox supports an open boiling vessel above fuel.",
+    "bounds": {
+      "min": [
+        -0.5,
+        -0.38999998569488525,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.38999998569488525,
+        0.5899999737739563
+      ]
+    }
+  },
+  "CE-024": {
+    "id": "CE-024",
+    "name": "Briquetage salt-cake mold set",
+    "path": "/coastal-assets/CE-024.glb",
+    "dimensions": [
+      0.7,
+      0.5,
+      0.22
+    ],
+    "purpose": "Six open tapered clay forms shape individual salt cakes.",
+    "bounds": {
+      "min": [
+        -0.3499999940395355,
+        -0.25,
+        0.0
+      ],
+      "max": [
+        0.3499999940395355,
+        0.25,
+        0.2199999988079071
+      ]
+    }
+  },
+  "CE-025": {
+    "id": "CE-025",
+    "name": "Ventilated salt-cake drying rack",
+    "path": "/coastal-assets/CE-025.glb",
+    "dimensions": [
+      0.9,
+      0.58,
+      0.85
+    ],
+    "purpose": "Two slatted shelves hold discrete formed salt cones.",
+    "bounds": {
+      "min": [
+        -0.44999998807907104,
+        -0.28999999165534973,
+        0.0
+      ],
+      "max": [
+        0.44999998807907104,
+        0.28999999165534973,
+        0.8500000238418579
+      ]
+    }
+  },
+  "CE-026": {
+    "id": "CE-026",
+    "name": "Broad wooden salt crust scraper",
+    "path": "/coastal-assets/CE-026.glb",
+    "dimensions": [
+      0.36,
+      0.671,
+      0.07799
+    ],
+    "purpose": "A flat reinforced blade lifts crust without duplicating the toothed rake.",
+    "bounds": {
+      "min": [
+        -0.18000000715255737,
+        -0.11999999731779099,
+        0.0
+      ],
+      "max": [
+        0.18000000715255737,
+        0.5509997606277466,
+        0.07798515260219574
+      ]
+    }
+  },
+  "CE-027": {
+    "id": "CE-027",
+    "name": "Raised salt storage bin and cover",
+    "path": "/coastal-assets/CE-027.glb",
+    "dimensions": [
+      1.74,
+      0.96,
+      1.1
+    ],
+    "purpose": "Elevated open bin keeps salt above damp ground with a separate cover.",
+    "bounds": {
+      "min": [
+        -0.47999998927116394,
+        -0.47999998927116394,
+        0.0
+      ],
+      "max": [
+        1.2599999904632568,
+        0.47999998927116394,
+        1.100000023841858
+      ]
+    }
+  },
+  "CE-028": {
+    "id": "CE-028",
+    "name": "Salt-grading sieve worktable",
+    "path": "/coastal-assets/CE-028.glb",
+    "dimensions": [
+      0.85,
+      0.594,
+      0.77
+    ],
+    "purpose": "A framed crossed mesh separates coarse crystals over a worktable.",
+    "bounds": {
+      "min": [
+        -0.42500001192092896,
+        -0.296999990940094,
+        0.0
+      ],
+      "max": [
+        0.42500001192092896,
+        0.296999990940094,
+        0.7700000405311584
+      ]
+    }
+  },
+  "CE-029": {
+    "id": "CE-029",
+    "name": "Counterbalanced salt carrying yoke",
+    "path": "/coastal-assets/CE-029.glb",
+    "dimensions": [
+      1.54787,
+      0.34787,
+      0.79877
+    ],
+    "purpose": "A curved shoulder beam suspends two small woven containers.",
+    "bounds": {
+      "min": [
+        -0.7739325761795044,
+        -0.17393258213996887,
+        1.0486345125571006e-09
+      ],
+      "max": [
+        0.7739325761795044,
+        0.17393258213996887,
+        0.7987735867500305
+      ]
+    }
+  },
+  "CE-030": {
+    "id": "CE-030",
+    "name": "Counterweighted brine lifting lever",
+    "path": "/coastal-assets/CE-030.glb",
+    "dimensions": [
+      2.00168,
+      0.6,
+      1.82962
+    ],
+    "purpose": "Pivoted timber and a counterweight lift an open brine vessel.",
+    "bounds": {
+      "min": [
+        -0.7416797876358032,
+        -0.30000001192092896,
+        0.0
+      ],
+      "max": [
+        1.2599999904632568,
+        0.30000001192092896,
+        1.829619288444519
+      ]
+    }
+  },
+  "CE-031": {
+    "id": "CE-031",
+    "name": "Stone-built quay edge segment",
+    "path": "/coastal-assets/CE-031.glb",
+    "dimensions": [
+      2.58,
+      0.82,
+      0.955
+    ],
+    "purpose": "Layered masonry and projecting capstones form a durable loading edge.",
+    "bounds": {
+      "min": [
+        -1.2599999904632568,
+        -0.4099999964237213,
+        0.0
+      ],
+      "max": [
+        1.3200000524520874,
+        0.4099999964237213,
+        0.9550000429153442
+      ]
+    }
+  },
+  "CE-032": {
+    "id": "CE-032",
+    "name": "Cross-batten loading gangplank",
+    "path": "/coastal-assets/CE-032.glb",
+    "dimensions": [
+      0.69,
+      2.55,
+      0.128
+    ],
+    "purpose": "Five long boards and transverse battens bridge between quay and cargo deck.",
+    "bounds": {
+      "min": [
+        -0.3449999988079071,
+        -1.350000023841858,
+        0.0
+      ],
+      "max": [
+        0.3449999988079071,
+        1.2000000476837158,
+        0.12800000607967377
+      ]
+    }
+  },
+  "CE-033": {
+    "id": "CE-033",
+    "name": "Crossbar timber hauling capstan",
+    "path": "/coastal-assets/CE-033.glb",
+    "dimensions": [
+      1.45,
+      1.2,
+      0.9
+    ],
+    "purpose": "A rotating barrel with crossed bars takes a wrapped hauling line.",
+    "bounds": {
+      "min": [
+        -0.6000000238418579,
+        -0.6000000238418579,
+        0.0
+      ],
+      "max": [
+        0.8500000238418579,
+        0.6000000238418579,
+        0.8999999761581421
+      ]
+    }
+  },
+  "CE-034": {
+    "id": "CE-034",
+    "name": "Bound rope hull fender",
+    "path": "/coastal-assets/CE-034.glb",
+    "dimensions": [
+      0.23388,
+      0.24,
+      0.684
+    ],
+    "purpose": "Dense transverse bindings and a suspension loop cushion a hull contact.",
+    "bounds": {
+      "min": [
+        -0.11694221198558807,
+        -0.11999998986721039,
+        0.0
+      ],
+      "max": [
+        0.11694221198558807,
+        0.11999998986721039,
+        0.6839999556541443
+      ]
+    }
+  },
+  "CE-035": {
+    "id": "CE-035",
+    "name": "Pierced stone mooring anchor",
+    "path": "/coastal-assets/CE-035.glb",
+    "dimensions": [
+      0.68069,
+      0.6348,
+      0.51
+    ],
+    "purpose": "A stone mass surrounds a real line aperture with a threaded rope.",
+    "bounds": {
+      "min": [
+        -0.2900000214576721,
+        -0.2199999988079071,
+        0.0
+      ],
+      "max": [
+        0.39068761467933655,
+        0.41480323672294617,
+        0.5099999904632568
+      ]
+    }
+  },
+  "CE-036": {
+    "id": "CE-036",
+    "name": "Master-eye cargo lifting sling",
+    "path": "/coastal-assets/CE-036.glb",
+    "dimensions": [
+      0.6,
+      0.5867,
+      0.88421
+    ],
+    "purpose": "Two lifting loops meet above a wrapped cargo bundle.",
+    "bounds": {
+      "min": [
+        -0.30000001192092896,
+        -0.29271915555000305,
+        0.0
+      ],
+      "max": [
+        0.30000001192092896,
+        0.2939770817756653,
+        0.8842098712921143
+      ]
+    }
+  },
+  "CE-037": {
+    "id": "CE-037",
+    "name": "Pointed-amphora transport rack",
+    "path": "/coastal-assets/CE-037.glb",
+    "dimensions": [
+      1.2,
+      0.64,
+      0.8
+    ],
+    "purpose": "Retaining rails support two open pointed transport jars.",
+    "bounds": {
+      "min": [
+        -0.6000000238418579,
+        -0.3199999928474426,
+        0.0
+      ],
+      "max": [
+        0.6000000238418579,
+        0.3199999928474426,
+        0.800000011920929
+      ]
+    }
+  },
+  "CE-038": {
+    "id": "CE-038",
+    "name": "Stevedore lever and stone fulcrum",
+    "path": "/coastal-assets/CE-038.glb",
+    "dimensions": [
+      1.63211,
+      0.51,
+      0.42824
+    ],
+    "purpose": "Long timber, wear shoe and fulcrum provide a cargo-positioning tool.",
+    "bounds": {
+      "min": [
+        -0.625,
+        -0.17999999225139618,
+        0.0
+      ],
+      "max": [
+        1.00711190700531,
+        0.32999998331069946,
+        0.42823800444602966
+      ]
+    }
+  },
+  "CE-039": {
+    "id": "CE-039",
+    "name": "Matched split cargo tally pair",
+    "path": "/coastal-assets/CE-039.glb",
+    "dimensions": [
+      0.23,
+      0.55,
+      0.066
+    ],
+    "purpose": "Matching notch patterns on split halves record a fictional shipment agreement.",
+    "bounds": {
+      "min": [
+        -0.11499999463558197,
+        -0.2750000059604645,
+        0.0
+      ],
+      "max": [
+        0.11499999463558197,
+        0.2750000059604645,
+        0.06599999964237213
+      ]
+    }
+  },
+  "CE-040": {
+    "id": "CE-040",
+    "name": "Upturned timber shore cargo sled",
+    "path": "/coastal-assets/CE-040.glb",
+    "dimensions": [
+      2.20736,
+      0.85,
+      0.43
+    ],
+    "purpose": "Two curved runners and a hauling bridle move loads over a prepared shore.",
+    "bounds": {
+      "min": [
+        -0.8500000238418579,
+        -0.42500004172325134,
+        2.9812170510012947e-09
+      ],
+      "max": [
+        1.3573580980300903,
+        0.42500001192092896,
+        0.4299999475479126
+      ]
+    }
+  },
+  "CE-041": {
+    "id": "CE-041",
+    "name": "Hull-seam caulking workbench",
+    "path": "/coastal-assets/CE-041.glb",
+    "dimensions": [
+      1.0,
+      0.58225,
+      0.735
+    ],
+    "purpose": "A packed plank seam lies beside a mallet and bronze caulking tool.",
+    "bounds": {
+      "min": [
+        -0.5,
+        -0.3100000023841858,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.2722499966621399,
+        0.7350000143051147
+      ]
+    }
+  },
+  "CE-042": {
+    "id": "CE-042",
+    "name": "Pitch melting pot and application brush",
+    "path": "/coastal-assets/CE-042.glb",
+    "dimensions": [
+      0.85063,
+      0.5643,
+      0.64256
+    ],
+    "purpose": "Open warm-pitch vessel, stirrer and brush support seam sealing.",
+    "bounds": {
+      "min": [
+        -0.2106340527534485,
+        -0.2830309271812439,
+        0.0
+      ],
+      "max": [
+        0.6399999856948853,
+        0.2812739610671997,
+        0.6425644159317017
+      ]
+    }
+  },
+  "CE-043": {
+    "id": "CE-043",
+    "name": "Tensioned sailcloth sewing frame",
+    "path": "/coastal-assets/CE-043.glb",
+    "dimensions": [
+      1.36,
+      0.06,
+      1.35
+    ],
+    "purpose": "Continuous cloth, vertical seams and edge lacing expose sail repair work.",
+    "bounds": {
+      "min": [
+        -0.6799999475479126,
+        -0.030000027269124985,
+        0.0
+      ],
+      "max": [
+        0.6799999475479126,
+        0.029999999329447746,
+        1.350000023841858
+      ]
+    }
+  },
+  "CE-044": {
+    "id": "CE-044",
+    "name": "Wooden sail pulley block",
+    "path": "/coastal-assets/CE-044.glb",
+    "dimensions": [
+      0.19021,
+      0.15,
+      0.4153
+    ],
+    "purpose": "Separate cheek pieces surround a sheave with an external rope strop.",
+    "bounds": {
+      "min": [
+        -0.09510578960180283,
+        -0.07500000298023224,
+        0.0
+      ],
+      "max": [
+        0.09510578960180283,
+        0.07500000298023224,
+        0.4152999818325043
+      ]
+    }
+  },
+  "CE-045": {
+    "id": "CE-045",
+    "name": "Socketed timber mast step",
+    "path": "/coastal-assets/CE-045.glb",
+    "dimensions": [
+      1.0,
+      0.4,
+      0.375
+    ],
+    "purpose": "A true square socket is built into a reinforced longitudinal timber.",
+    "bounds": {
+      "min": [
+        -0.5,
+        -0.20000000298023224,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.20000000298023224,
+        0.375
+      ]
+    }
+  },
+  "CE-046": {
+    "id": "CE-046",
+    "name": "Paired thole-pin oar support",
+    "path": "/coastal-assets/CE-046.glb",
+    "dimensions": [
+      0.6425,
+      0.34,
+      0.42
+    ],
+    "purpose": "Two pins rise from a gunwale sample beside a spare replacement.",
+    "bounds": {
+      "min": [
+        -0.30000001192092896,
+        -0.17000000178813934,
+        0.0
+      ],
+      "max": [
+        0.3425000011920929,
+        0.17000000178813934,
+        0.41999998688697815
+      ]
+    }
+  },
+  "CE-047": {
+    "id": "CE-047",
+    "name": "Sail yard and central suspension sling",
+    "path": "/coastal-assets/CE-047.glb",
+    "dimensions": [
+      2.45217,
+      0.1,
+      0.21977
+    ],
+    "purpose": "A long spar with ties and central sling carries a sail edge.",
+    "bounds": {
+      "min": [
+        -1.226084589958191,
+        -0.05000000074505806,
+        1.8393215839296317e-09
+      ],
+      "max": [
+        1.226084589958191,
+        0.05000000074505806,
+        0.21976995468139648
+      ]
+    }
+  },
+  "CE-048": {
+    "id": "CE-048",
+    "name": "Stone-weighted sounding line",
+    "path": "/coastal-assets/CE-048.glb",
+    "dimensions": [
+      0.54155,
+      0.28995,
+      0.35282
+    ],
+    "purpose": "A compact weight and knotted line measure depth without duplicating fishing rigs.",
+    "bounds": {
+      "min": [
+        -0.06657405197620392,
+        -0.1449759304523468,
+        0.0
+      ],
+      "max": [
+        0.47497594356536865,
+        0.1449759304523468,
+        0.35281938314437866
+      ]
+    }
+  },
+  "CE-049": {
+    "id": "CE-049",
+    "name": "Bound-interval harbor depth pole",
+    "path": "/coastal-assets/CE-049.glb",
+    "dimensions": [
+      0.11355,
+      0.05794,
+      1.85
+    ],
+    "purpose": "Regular markings and a wear shoe support direct shallow-water probing.",
+    "bounds": {
+      "min": [
+        -0.08457790315151215,
+        -0.028971107676625252,
+        0.0
+      ],
+      "max": [
+        0.028971107676625252,
+        0.028971107676625252,
+        1.850000023841858
+      ]
+    }
+  },
+  "CE-050": {
+    "id": "CE-050",
+    "name": "Transverse-bladed shipwright adze",
+    "path": "/coastal-assets/CE-050.glb",
+    "dimensions": [
+      0.2,
+      0.7793,
+      0.18871
+    ],
+    "purpose": "Curved handle and broad transverse bronze edge identify hull-shaping work.",
+    "bounds": {
+      "min": [
+        -0.10000000149011612,
+        -0.2956920862197876,
+        -1.862645149230957e-09
+      ],
+      "max": [
+        0.10000000149011612,
+        0.483607679605484,
+        0.1887078881263733
+      ]
+    }
+  },
+  "CE-051": {
+    "id": "CE-051",
+    "name": "Shell-dye extraction vat and paddle",
+    "path": "/coastal-assets/CE-051.glb",
+    "dimensions": [
+      1.05,
+      0.8,
+      0.88949
+    ],
+    "purpose": "Open liquor vat, broad stirrer and sample cloth represent shore dye work.",
+    "bounds": {
+      "min": [
+        -0.4000000059604645,
+        -0.4000000059604645,
+        0.0
+      ],
+      "max": [
+        0.6499999761581421,
+        0.4000000059604645,
+        0.8894945979118347
+      ]
+    }
+  },
+  "CE-052": {
+    "id": "CE-052",
+    "name": "Lever shell-crushing bed",
+    "path": "/coastal-assets/CE-052.glb",
+    "dimensions": [
+      0.58,
+      0.8855,
+      0.83485
+    ],
+    "purpose": "Pivoted timber applies a stone crusher to shells on a fixed bed.",
+    "bounds": {
+      "min": [
+        -0.28999999165534973,
+        -0.6604979634284973,
+        0.0
+      ],
+      "max": [
+        0.28999999165534973,
+        0.22499999403953552,
+        0.8348532319068909
+      ]
+    }
+  },
+  "CE-053": {
+    "id": "CE-053",
+    "name": "Open-front shell-lime kiln",
+    "path": "/coastal-assets/CE-053.glb",
+    "dimensions": [
+      1.21,
+      1.2,
+      1.48
+    ],
+    "purpose": "Firing jambs support a hollow shaft charged with marine shells.",
+    "bounds": {
+      "min": [
+        -0.6050000190734863,
+        -0.6000000238418579,
+        0.0
+      ],
+      "max": [
+        0.6050000190734863,
+        0.6000000238418579,
+        1.4800000190734863
+      ]
+    }
+  },
+  "CE-054": {
+    "id": "CE-054",
+    "name": "Shell-ornament bow-drilling bench",
+    "path": "/coastal-assets/CE-054.glb",
+    "dimensions": [
+      0.75,
+      0.4455,
+      1.195
+    ],
+    "purpose": "A spindle, palm bearing and bow align over a small shell blank.",
+    "bounds": {
+      "min": [
+        -0.375,
+        -0.2227500081062317,
+        0.0
+      ],
+      "max": [
+        0.375,
+        0.2227500081062317,
+        1.1949999332427979
+      ]
+    }
+  },
+  "CE-055": {
+    "id": "CE-055",
+    "name": "Weighted-cover fish-sauce fermenter",
+    "path": "/coastal-assets/CE-055.glb",
+    "dimensions": [
+      1.13,
+      0.64,
+      0.735
+    ],
+    "purpose": "Open vessel, batch marks and a weighted separate lid depict fermentation.",
+    "bounds": {
+      "min": [
+        -0.3199999928474426,
+        -0.3199999928474426,
+        0.0
+      ],
+      "max": [
+        0.8100000023841858,
+        0.3199999928474426,
+        0.7350000143051147
+      ]
+    }
+  },
+  "CE-056": {
+    "id": "CE-056",
+    "name": "Seaweed soaking trough",
+    "path": "/coastal-assets/CE-056.glb",
+    "dimensions": [
+      1.16,
+      1.16,
+      0.33
+    ],
+    "purpose": "Floating fronds sit beneath retaining sticks in a hollow trough.",
+    "bounds": {
+      "min": [
+        -0.5799999833106995,
+        -0.5799999833106995,
+        0.0
+      ],
+      "max": [
+        0.5799999833106995,
+        0.5799999833106995,
+        0.32999998331069946
+      ]
+    }
+  },
+  "CE-057": {
+    "id": "CE-057",
+    "name": "Open-slot pearl grading comb",
+    "path": "/coastal-assets/CE-057.glb",
+    "dimensions": [
+      0.55,
+      0.3225,
+      0.09
+    ],
+    "purpose": "Increasing gaps and small reference pearls organize size grading.",
+    "bounds": {
+      "min": [
+        -0.2750000059604645,
+        -0.1599999964237213,
+        0.0
+      ],
+      "max": [
+        0.2750000059604645,
+        0.16250000894069672,
+        0.09000000357627869
+      ]
+    }
+  },
+  "CE-058": {
+    "id": "CE-058",
+    "name": "Bronze-toothed oakum teasing comb",
+    "path": "/coastal-assets/CE-058.glb",
+    "dimensions": [
+      0.65962,
+      0.50045,
+      0.21
+    ],
+    "purpose": "A toothed block separates coarse rope into caulking fibers.",
+    "bounds": {
+      "min": [
+        -0.22499999403953552,
+        -0.3604467213153839,
+        0.0
+      ],
+      "max": [
+        0.4346163868904114,
+        0.14000000059604645,
+        0.20999999344348907
+      ]
+    }
+  },
+  "CE-059": {
+    "id": "CE-059",
+    "name": "Branching coral trade specimen",
+    "path": "/coastal-assets/CE-059.glb",
+    "dimensions": [
+      0.42,
+      0.32,
+      0.45435
+    ],
+    "purpose": "A branched specimen and clay tag intentionally reveal distant marine trade.",
+    "bounds": {
+      "min": [
+        -0.20999999344348907,
+        -0.1599999964237213,
+        0.0
+      ],
+      "max": [
+        0.20999999344348907,
+        0.1599999964237213,
+        0.45434847474098206
+      ]
+    }
+  },
+  "CE-060": {
+    "id": "CE-060",
+    "name": "Shell-offering shore votive niche",
+    "path": "/coastal-assets/CE-060.glb",
+    "dimensions": [
+      0.78,
+      0.52,
+      1.015
+    ],
+    "purpose": "A small stone niche frames an abstract figure and shell offerings.",
+    "bounds": {
+      "min": [
+        -0.38999998569488525,
+        -0.2800000011920929,
+        0.0
+      ],
+      "max": [
+        0.38999998569488525,
+        0.23999999463558197,
+        1.0149999856948853
+      ]
+    }
+  },
+  "CE-076": {
+    "id": "CE-076",
+    "name": "Hinged timber storm window shutter",
+    "path": "/coastal-assets/CE-076.glb",
+    "dimensions": [
+      1.005,
+      0.505,
+      1.0
+    ],
+    "purpose": "Framed window has one closed leaf and one open leaf with physical access through its opening.",
+    "bounds": {
+      "min": [
+        -0.5149999856948853,
+        -0.4300000071525574,
+        0.0
+      ],
+      "max": [
+        0.49000000953674316,
+        0.07500000298023224,
+        1.0
+      ]
+    }
+  },
+  "CE-077": {
+    "id": "CE-077",
+    "name": "Open timber village entrance door",
+    "path": "/coastal-assets/CE-077.glb",
+    "dimensions": [
+      1.125,
+      0.94358,
+      2.14
+    ],
+    "purpose": "Full-height jamb and right-angle open leaf expose the entrance; sliding wood bolt and braces are modeled.",
+    "bounds": {
+      "min": [
+        -0.5649999976158142,
+        -0.8535811901092529,
+        0.0
+      ],
+      "max": [
+        0.5600000023841858,
+        0.09000000357627869,
+        2.1399998664855957
+      ]
+    }
+  }
+}

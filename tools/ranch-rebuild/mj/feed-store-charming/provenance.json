@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "feed-store-charming",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/feed-store-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "c428bb24-106d-4d48-a038-cf19559e2967",
+      "grid_url": "https://www.midjourney.com/jobs/c428bb24-106d-4d48-a038-cf19559e2967?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "70141f00-20d6-4585-8077-7d9e40bb5e2d",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:08:34.598Z",
+      "grid_done_at": "2026-10-23T00:08:52.604Z",
+      "upscale_clicked_at": "2026-10-23T00:09:02.469Z",
+      "downloaded_at": "2026-10-23T00:10:14.140Z",
+      "pick_reason": "crooked chubby shed with sign above the plank door, sacks and scoop by the door, stone foundation, whole in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "e717262d-bce8-41c1-ac82-527ed4df2d24",
+      "grid_url": "https://www.midjourney.com/jobs/e717262d-bce8-41c1-ac82-527ed4df2d24?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "42fa6433-5bed-4d71-bfa8-6f83f57b7e14",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:10:23.626Z",
+      "grid_done_at": "2026-10-23T00:10:41.632Z",
+      "upscale_clicked_at": "2026-10-23T00:10:52.646Z",
+      "downloaded_at": "2026-10-23T00:12:16.591Z",
+      "pick_reason": "front with sign and door, three-quarter side, plain back; one crooked shed, well separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "d4f2d639760848762ce192343f6d39a0c49e3d6cdd8d27c2743129d094bc3b37",
+      "bytes": 3358470,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/70141f00-20d6-4585-8077-7d9e40bb5e2d/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "e4dcd552076f1e384bc4b400e95e40cfb066a616a18563684762e76bb6d05b00",
+      "bytes": 3388943,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/42fa6433-5bed-4d71-bfa8-6f83f57b7e14/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "0cf3f97877b14886e7a0c9f31d1b6914d67e9c4d5cee0cc757759a588f8b8929",
+      "bytes": 986833,
+      "pixels": [
+        904,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/feed-store-charming [('front', 133, 1037), ('side', 1037, 1963), ('back', 1963, 2758)]"
+    },
+    "view_side.png": {
+      "sha256": "d18417d92ab839fd7a8a70c6b2bc9cfd90a21113584bf84e25de5657d95b4a9e",
+      "bytes": 1264315,
+      "pixels": [
+        926,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/feed-store-charming [('front', 133, 1037), ('side', 1037, 1963), ('back', 1963, 2758)]"
+    },
+    "view_back.png": {
+      "sha256": "69187531e5f062ddef5082b4f618cfd2ed57e2a09d28e5c1f85b437c1150f864",
+      "bytes": 1007920,
+      "pixels": [
+        795,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/feed-store-charming [('front', 133, 1037), ('side', 1037, 1963), ('back', 1963, 2758)]"
+    }
+  }
+}

@@ -1,0 +1,1770 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+23:00:18 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:18 | INFO: Starting glTF 2.0 export
+23:00:18 | INFO: Extracting primitive: Cube.005
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.006
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.007
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.008
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.001
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.002
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.003
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.004
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Finished glTF 2.0 export in 0.009000539779663086 s
+
+23:00:18 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:18 | INFO: Starting glTF 2.0 export
+23:00:18 | INFO: Extracting primitive: Cube.009
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.010
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.011
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.012
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.013
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.014
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.015
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.016
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Finished glTF 2.0 export in 0.009002685546875 s
+
+23:00:18 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:18 | INFO: Starting glTF 2.0 export
+23:00:18 | INFO: Extracting primitive: Cube.022
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.023
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.024
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.025
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.031
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.032
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.026
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.027
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.028
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.029
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.030
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.017
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.018
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.019
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.020
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.021
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Extracting primitive: Cube.033
+23:00:18 | INFO: Primitives created: 1
+23:00:18 | INFO: Finished glTF 2.0 export in 0.014510631561279297 s
+
+23:00:19 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:19 | INFO: Starting glTF 2.0 export
+23:00:19 | INFO: Extracting primitive: Cube.053
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.039
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.040
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.041
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.042
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.051
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.052
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.043
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.044
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.045
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.046
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.048
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.049
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.047
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.050
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.034
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.054
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.055
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.035
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.036
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.037
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.038
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Finished glTF 2.0 export in 0.020513534545898438 s
+
+23:00:19 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:19 | INFO: Starting glTF 2.0 export
+23:00:19 | INFO: Extracting primitive: Cube.075
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.079
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.080
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.081
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.061
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.062
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.063
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.064
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.073
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.074
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.083
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.065
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.066
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.067
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.068
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Sphere
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.082
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.070
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.071
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.069
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.072
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.056
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.076
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.077
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.057
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.058
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.059
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.060
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.078
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Finished glTF 2.0 export in 0.02699422836303711 s
+
+FAMILY_READY shelter
+23:00:19 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:19 | INFO: Starting glTF 2.0 export
+23:00:19 | INFO: Extracting primitive: Cube.088
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.089
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.090
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.091
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.084
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.085
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.086
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.087
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Finished glTF 2.0 export in 0.011005878448486328 s
+
+23:00:19 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:19 | INFO: Starting glTF 2.0 export
+23:00:19 | INFO: Extracting primitive: Cube.092
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.093
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.094
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.095
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.096
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.097
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.098
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Extracting primitive: Cube.099
+23:00:19 | INFO: Primitives created: 1
+23:00:19 | INFO: Finished glTF 2.0 export in 0.010008096694946289 s
+
+23:00:20 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:20 | INFO: Starting glTF 2.0 export
+23:00:20 | INFO: Extracting primitive: Cube.105
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.106
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.107
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.108
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.114
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.115
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.109
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.110
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.111
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.112
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.113
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.100
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.101
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.102
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.103
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.104
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.116
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Finished glTF 2.0 export in 0.014504194259643555 s
+
+23:00:20 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:20 | INFO: Starting glTF 2.0 export
+23:00:20 | INFO: Extracting primitive: Cube.136
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.122
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.123
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.124
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.125
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.134
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.135
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.126
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.127
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.128
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.129
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.131
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.132
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.130
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.133
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.117
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.137
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.138
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.118
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.119
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.120
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Extracting primitive: Cube.121
+23:00:20 | INFO: Primitives created: 1
+23:00:20 | INFO: Finished glTF 2.0 export in 0.02545952796936035 s
+
+23:00:21 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:21 | INFO: Starting glTF 2.0 export
+23:00:21 | INFO: Extracting primitive: Cube.158
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.164
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.168
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.172
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.173
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.144
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.145
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.146
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.147
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.162
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Sphere.001
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.156
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.157
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.161
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.148
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.149
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.150
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.151
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Sphere.002
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Sphere.003
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.153
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.154
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.174
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.175
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.152
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.155
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.139
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.159
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.160
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.140
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.141
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.142
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.143
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.171
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.163
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.167
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.165
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.169
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.166
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.170
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Finished glTF 2.0 export in 0.04400229454040527 s
+
+FAMILY_READY family-home
+23:00:21 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:21 | INFO: Starting glTF 2.0 export
+23:00:21 | INFO: Extracting primitive: Cube.180
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.181
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.182
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.183
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.176
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.177
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.178
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.179
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Finished glTF 2.0 export in 0.009001493453979492 s
+
+23:00:21 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:21 | INFO: Starting glTF 2.0 export
+23:00:21 | INFO: Extracting primitive: Cube.184
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.185
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.186
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.187
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.188
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.189
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.190
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Extracting primitive: Cube.191
+23:00:21 | INFO: Primitives created: 1
+23:00:21 | INFO: Finished glTF 2.0 export in 0.011000394821166992 s
+
+23:00:22 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:22 | INFO: Starting glTF 2.0 export
+23:00:22 | INFO: Extracting primitive: Cube.197
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.198
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.199
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.200
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.206
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.207
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.201
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.202
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.203
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.204
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.205
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.192
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.193
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.194
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.195
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.196
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.208
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Finished glTF 2.0 export in 0.015999317169189453 s
+
+23:00:22 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:22 | INFO: Starting glTF 2.0 export
+23:00:22 | INFO: Extracting primitive: Cube.228
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.214
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.215
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.216
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.217
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.226
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.227
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.218
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.219
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.220
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.221
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.223
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.224
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.222
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.225
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.209
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.229
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.230
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.210
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.211
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.212
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Extracting primitive: Cube.213
+23:00:22 | INFO: Primitives created: 1
+23:00:22 | INFO: Finished glTF 2.0 export in 0.02100515365600586 s
+
+23:00:23 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:23 | INFO: Starting glTF 2.0 export
+23:00:23 | INFO: Extracting primitive: Cube.250
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.236
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.237
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.238
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.239
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.248
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.249
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.257
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Sphere.004
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Sphere.005
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Sphere.006
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.240
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.241
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.242
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.243
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Sphere.007
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Sphere.008
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Sphere.009
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.253
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.245
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.246
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.244
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.247
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.231
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.254
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.255
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.256
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.251
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.252
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.232
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.233
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.234
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Extracting primitive: Cube.235
+23:00:23 | INFO: Primitives created: 1
+23:00:23 | INFO: Finished glTF 2.0 export in 0.03099966049194336 s
+
+FAMILY_READY feed-store
+23:00:24 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:24 | INFO: Starting glTF 2.0 export
+23:00:24 | INFO: Extracting primitive: Cube.262
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.263
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.264
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.265
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.258
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.259
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.260
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.261
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Finished glTF 2.0 export in 0.009999752044677734 s
+
+23:00:24 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:24 | INFO: Starting glTF 2.0 export
+23:00:24 | INFO: Extracting primitive: Cube.266
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.267
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.268
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.269
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.270
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.271
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.272
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.273
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Finished glTF 2.0 export in 0.011000394821166992 s
+
+23:00:24 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:24 | INFO: Starting glTF 2.0 export
+23:00:24 | INFO: Extracting primitive: Cube.279
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.280
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.281
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.282
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.274
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.275
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.276
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.277
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Extracting primitive: Cube.278
+23:00:24 | INFO: Primitives created: 1
+23:00:24 | INFO: Finished glTF 2.0 export in 0.011002540588378906 s
+
+23:00:25 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:25 | INFO: Starting glTF 2.0 export
+23:00:25 | INFO: Extracting primitive: Cube.288
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.289
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.290
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.291
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.283
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.297
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.284
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.285
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.286
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.287
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.298
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.293
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.294
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.292
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.295
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Extracting primitive: Cube.296
+23:00:25 | INFO: Primitives created: 1
+23:00:25 | INFO: Finished glTF 2.0 export in 0.016005516052246094 s
+
+23:00:26 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:26 | INFO: Starting glTF 2.0 export
+23:00:26 | INFO: Extracting primitive: Cube.304
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.305
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.306
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.307
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.299
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.313
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.300
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.301
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.302
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.303
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.314
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Sphere.010
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.309
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.310
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.308
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.311
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.312
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.315
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Finished glTF 2.0 export in 0.01950979232788086 s
+
+FAMILY_READY water-point
+23:00:26 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:26 | INFO: Starting glTF 2.0 export
+23:00:26 | INFO: Extracting primitive: Cube.320
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.321
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.322
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.323
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.316
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.317
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.318
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.319
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Finished glTF 2.0 export in 0.01051187515258789 s
+
+23:00:26 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:26 | INFO: Starting glTF 2.0 export
+23:00:26 | INFO: Extracting primitive: Cube.324
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.325
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.326
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.327
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.328
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.329
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.330
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Extracting primitive: Cube.331
+23:00:26 | INFO: Primitives created: 1
+23:00:26 | INFO: Finished glTF 2.0 export in 0.010999441146850586 s
+
+23:00:27 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:27 | INFO: Starting glTF 2.0 export
+23:00:27 | INFO: Extracting primitive: Cube.337
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.338
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.339
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.340
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.346
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.347
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.341
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.342
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.343
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.344
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.345
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.332
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.333
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.334
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.335
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.336
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Extracting primitive: Cube.348
+23:00:27 | INFO: Primitives created: 1
+23:00:27 | INFO: Finished glTF 2.0 export in 0.029000043869018555 s
+
+23:00:28 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:28 | INFO: Starting glTF 2.0 export
+23:00:28 | INFO: Extracting primitive: Cube.368
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.354
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.355
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.356
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.357
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.366
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.367
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.358
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.359
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.360
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.361
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.363
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.364
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.362
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.365
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.349
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.369
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.370
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.350
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.351
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.352
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Extracting primitive: Cube.353
+23:00:28 | INFO: Primitives created: 1
+23:00:28 | INFO: Finished glTF 2.0 export in 0.021996498107910156 s
+
+23:00:30 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:30 | INFO: Starting glTF 2.0 export
+23:00:30 | INFO: Extracting primitive: Cube.390
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.394
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.395
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.396
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.399
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.400
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.376
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.377
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.378
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.379
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.388
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.389
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.398
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.380
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.381
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.382
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.383
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Sphere.011
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.397
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.385
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.386
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.384
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.387
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.371
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.391
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.392
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.372
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.373
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.374
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.375
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.393
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Finished glTF 2.0 export in 0.032531023025512695 s
+
+FAMILY_READY cattle-shelter
+23:00:30 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:30 | INFO: Starting glTF 2.0 export
+23:00:30 | INFO: Extracting primitive: Cube.405
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.406
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.407
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.408
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.401
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.402
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.403
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Extracting primitive: Cube.404
+23:00:30 | INFO: Primitives created: 1
+23:00:30 | INFO: Finished glTF 2.0 export in 0.010999202728271484 s
+
+23:00:31 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:31 | INFO: Starting glTF 2.0 export
+23:00:31 | INFO: Extracting primitive: Cube.409
+23:00:31 | INFO: Primitives created: 1
+23:00:31 | INFO: Extracting primitive: Cube.410
+23:00:31 | INFO: Primitives created: 1
+23:00:31 | INFO: Extracting primitive: Cube.411
+23:00:31 | INFO: Primitives created: 1
+23:00:31 | INFO: Extracting primitive: Cube.412
+23:00:31 | INFO: Primitives created: 1
+23:00:31 | INFO: Extracting primitive: Cube.413
+23:00:31 | INFO: Primitives created: 1
+23:00:31 | INFO: Extracting primitive: Cube.414
+23:00:31 | INFO: Primitives created: 1
+23:00:31 | INFO: Extracting primitive: Cube.415
+23:00:31 | INFO: Primitives created: 1
+23:00:31 | INFO: Extracting primitive: Cube.416
+23:00:31 | INFO: Primitives created: 1
+23:00:31 | INFO: Finished glTF 2.0 export in 0.01200103759765625 s
+
+23:00:32 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:32 | INFO: Starting glTF 2.0 export
+23:00:32 | INFO: Extracting primitive: Cube.422
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.423
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.424
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.425
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.431
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.432
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.426
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.427
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.428
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.429
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.430
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.417
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.418
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.419
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.420
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.421
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Extracting primitive: Cube.433
+23:00:32 | INFO: Primitives created: 1
+23:00:32 | INFO: Finished glTF 2.0 export in 0.016526222229003906 s
+
+23:00:33 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:33 | INFO: Starting glTF 2.0 export
+23:00:33 | INFO: Extracting primitive: Cube.453
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.439
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.440
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.441
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.442
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.451
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.452
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.443
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.444
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.445
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.446
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.448
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.449
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.447
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.450
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.434
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.454
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.455
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.435
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.436
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.437
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Extracting primitive: Cube.438
+23:00:33 | INFO: Primitives created: 1
+23:00:33 | INFO: Finished glTF 2.0 export in 0.021997451782226562 s
+
+23:00:35 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:35 | INFO: Starting glTF 2.0 export
+23:00:35 | INFO: Extracting primitive: Cube.475
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.479
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.480
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.481
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.461
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.462
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.463
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.464
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.473
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.474
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.483
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.465
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.466
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.467
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.468
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.485
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.484
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Sphere.012
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.482
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.470
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.471
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.469
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.472
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.456
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.476
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.477
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.457
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.458
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.459
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.460
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.478
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Finished glTF 2.0 export in 0.029999971389770508 s
+
+FAMILY_READY goat-shelter
+23:00:35 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:35 | INFO: Starting glTF 2.0 export
+23:00:35 | INFO: Extracting primitive: Cube.490
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.491
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.492
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.493
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.486
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.487
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.488
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Extracting primitive: Cube.489
+23:00:35 | INFO: Primitives created: 1
+23:00:35 | INFO: Finished glTF 2.0 export in 0.011999845504760742 s
+
+23:00:36 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:36 | INFO: Starting glTF 2.0 export
+23:00:36 | INFO: Extracting primitive: Cube.494
+23:00:36 | INFO: Primitives created: 1
+23:00:36 | INFO: Extracting primitive: Cube.495
+23:00:36 | INFO: Primitives created: 1
+23:00:36 | INFO: Extracting primitive: Cube.496
+23:00:36 | INFO: Primitives created: 1
+23:00:36 | INFO: Extracting primitive: Cube.497
+23:00:36 | INFO: Primitives created: 1
+23:00:36 | INFO: Extracting primitive: Cube.498
+23:00:36 | INFO: Primitives created: 1
+23:00:36 | INFO: Extracting primitive: Cube.499
+23:00:36 | INFO: Primitives created: 1
+23:00:36 | INFO: Extracting primitive: Cube.500
+23:00:36 | INFO: Primitives created: 1
+23:00:36 | INFO: Extracting primitive: Cube.501
+23:00:36 | INFO: Primitives created: 1
+23:00:36 | INFO: Finished glTF 2.0 export in 0.013007640838623047 s
+
+23:00:37 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:37 | INFO: Starting glTF 2.0 export
+23:00:37 | INFO: Extracting primitive: Cube.507
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.508
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.509
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.510
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.516
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.517
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.511
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.512
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.513
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.514
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.515
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.502
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.503
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.504
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.505
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.506
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Extracting primitive: Cube.518
+23:00:37 | INFO: Primitives created: 1
+23:00:37 | INFO: Finished glTF 2.0 export in 0.017813682556152344 s
+
+23:00:38 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:38 | INFO: Starting glTF 2.0 export
+23:00:38 | INFO: Extracting primitive: Cube.538
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.524
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.525
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.526
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.527
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.536
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.537
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.528
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.529
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.530
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.531
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.533
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.534
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.532
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.535
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.519
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.539
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.540
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.520
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.521
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.522
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Extracting primitive: Cube.523
+23:00:38 | INFO: Primitives created: 1
+23:00:38 | INFO: Finished glTF 2.0 export in 0.03099822998046875 s
+
+23:00:41 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:41 | INFO: Starting glTF 2.0 export
+23:00:41 | INFO: Extracting primitive: Cube.573
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.560
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.564
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.565
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.566
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.546
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.547
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.548
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.549
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.558
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.559
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.568
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.550
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.551
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.552
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.553
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Sphere.013
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.567
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.571
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.572
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.555
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.556
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.574
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.575
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.576
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.554
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.557
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.541
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.569
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.561
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.562
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.542
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.543
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.544
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.545
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.570
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Extracting primitive: Cube.563
+23:00:41 | INFO: Primitives created: 1
+23:00:41 | INFO: Finished glTF 2.0 export in 0.036000967025756836 s
+
+FAMILY_READY chicken-coop
+23:00:42 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:42 | INFO: Starting glTF 2.0 export
+23:00:42 | INFO: Extracting primitive: Cube.581
+23:00:42 | INFO: Primitives created: 1
+23:00:42 | INFO: Extracting primitive: Cube.582
+23:00:42 | INFO: Primitives created: 1
+23:00:42 | INFO: Extracting primitive: Cube.583
+23:00:42 | INFO: Primitives created: 1
+23:00:42 | INFO: Extracting primitive: Cube.584
+23:00:42 | INFO: Primitives created: 1
+23:00:42 | INFO: Extracting primitive: Cube.577
+23:00:42 | INFO: Primitives created: 1
+23:00:42 | INFO: Extracting primitive: Cube.578
+23:00:42 | INFO: Primitives created: 1
+23:00:42 | INFO: Extracting primitive: Cube.579
+23:00:42 | INFO: Primitives created: 1
+23:00:42 | INFO: Extracting primitive: Cube.580
+23:00:42 | INFO: Primitives created: 1
+23:00:42 | INFO: Finished glTF 2.0 export in 0.011956930160522461 s
+
+23:00:43 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:43 | INFO: Starting glTF 2.0 export
+23:00:43 | INFO: Extracting primitive: Cube.585
+23:00:43 | INFO: Primitives created: 1
+23:00:43 | INFO: Extracting primitive: Cube.586
+23:00:43 | INFO: Primitives created: 1
+23:00:43 | INFO: Extracting primitive: Cube.587
+23:00:43 | INFO: Primitives created: 1
+23:00:43 | INFO: Extracting primitive: Cube.588
+23:00:43 | INFO: Primitives created: 1
+23:00:43 | INFO: Extracting primitive: Cube.589
+23:00:43 | INFO: Primitives created: 1
+23:00:43 | INFO: Extracting primitive: Cube.590
+23:00:43 | INFO: Primitives created: 1
+23:00:43 | INFO: Extracting primitive: Cube.591
+23:00:43 | INFO: Primitives created: 1
+23:00:43 | INFO: Extracting primitive: Cube.592
+23:00:43 | INFO: Primitives created: 1
+23:00:43 | INFO: Finished glTF 2.0 export in 0.01192927360534668 s
+
+23:00:44 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:44 | INFO: Starting glTF 2.0 export
+23:00:44 | INFO: Extracting primitive: Cube.599
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.600
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.604
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.605
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.601
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.602
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.606
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.607
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.598
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.603
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.593
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.594
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.595
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.596
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Extracting primitive: Cube.597
+23:00:44 | INFO: Primitives created: 1
+23:00:44 | INFO: Finished glTF 2.0 export in 0.015961170196533203 s
+
+23:00:46 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:46 | INFO: Starting glTF 2.0 export
+23:00:46 | INFO: Extracting primitive: Cube.614
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.615
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.619
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.620
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.616
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.617
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.621
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.622
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.613
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.618
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.608
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.609
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.610
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.611
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.612
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.625
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.626
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.627
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.623
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Extracting primitive: Cube.624
+23:00:46 | INFO: Primitives created: 1
+23:00:46 | INFO: Finished glTF 2.0 export in 0.02200484275817871 s
+
+23:00:48 | INFO: Draco mesh compression is available, use library at C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\lib\site-packages\extern_draco.dll
+23:00:48 | INFO: Starting glTF 2.0 export
+23:00:48 | INFO: Extracting primitive: Cube.634
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.635
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.639
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.640
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.648
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.650
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.636
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.637
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.641
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.642
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.649
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.651
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.633
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.638
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.628
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.629
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.630
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.631
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.632
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.652
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.653
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.654
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.655
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.645
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.646
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.647
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.643
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Extracting primitive: Cube.644
+23:00:48 | INFO: Primitives created: 1
+23:00:48 | INFO: Finished glTF 2.0 export in 0.031857967376708984 s
+
+FAMILY_READY kitchen-garden
+Blender 4.1.1 (hash e1743a0317bc built 2024-04-15 23:33:30)
+Read prefs: "C:\Users\Evan Robinson\AppData\Roaming\Blender Foundation\Blender\4.1\config\userpref.blend"
+Info: Total files 0 | Changed 0 | Failed 0
+Fra:1 Mem:85.06M (Peak 86.13M) | Time:00:00.20 | Syncing Sun
+Fra:1 Mem:85.06M (Peak 86.13M) | Time:00:00.20 | Syncing Area
+Fra:1 Mem:85.06M (Peak 86.13M) | Time:00:00.20 | Syncing Camera
+Fra:1 Mem:85.06M (Peak 86.13M) | Time:00:00.20 | Syncing Back panel.001
+Fra:1 Mem:85.11M (Peak 86.13M) | Time:00:00.21 | Syncing Back wall batten
+Fra:1 Mem:85.13M (Peak 86.13M) | Time:00:00.21 | Syncing Back wall batten.001
+Fra:1 Mem:85.15M (Peak 86.13M) | Time:00:00.21 | Syncing Back wall batten.002
+Fra:1 Mem:85.17M (Peak 86.13M) | Time:00:00.21 | Syncing Corner post.008
+Fra:1 Mem:85.18M (Peak 86.13M) | Time:00:00.21 | Syncing Corner post.009
+Fra:1 Mem:85.20M (Peak 86.13M) | Time:00:00.21 | Syncing Corner post.010
+Fra:1 Mem:85.22M (Peak 86.13M) | Time:00:00.21 | Syncing Corner post.011
+Fra:1 Mem:85.24M (Peak 86.13M) | Time:00:00.21 | Syncing Eave beam.004
+Fra:1 Mem:85.25M (Peak 86.13M) | Time:00:00.21 | Syncing Eave beam.005
+Fra:1 Mem:85.27M (Peak 86.13M) | Time:00:00.21 | Syncing Feed manger
+Fra:1 Mem:85.29M (Peak 86.13M) | Time:00:00.21 | Syncing Gable rafter.008
+Fra:1 Mem:85.31M (Peak 86.13M) | Time:00:00.21 | Syncing Gable rafter.009
+Fra:1 Mem:85.32M (Peak 86.13M) | Time:00:00.21 | Syncing Gable rafter.010
+Fra:1 Mem:85.34M (Peak 86.13M) | Time:00:00.21 | Syncing Gable rafter.011
+Fra:1 Mem:85.36M (Peak 86.13M) | Time:00:00.21 | Syncing Hay in manger
+Fra:1 Mem:85.38M (Peak 86.13M) | Time:00:00.21 | Syncing Low side rail
+Fra:1 Mem:85.40M (Peak 86.13M) | Time:00:00.21 | Syncing Padded roof plane.002
+Fra:1 Mem:85.41M (Peak 86.13M) | Time:00:00.21 | Syncing Padded roof plane.003
+Fra:1 Mem:85.43M (Peak 86.13M) | Time:00:00.21 | Syncing Ridge beam.002
+Fra:1 Mem:85.45M (Peak 86.13M) | Time:00:00.21 | Syncing Ridge cap.001
+Fra:1 Mem:85.47M (Peak 86.13M) | Time:00:00.21 | Syncing Rounded stone footing.003
+Fra:1 Mem:85.49M (Peak 86.13M) | Time:00:00.21 | Syncing Side panel.002
+Fra:1 Mem:85.50M (Peak 86.13M) | Time:00:00.21 | Syncing Side panel.003
+Fra:1 Mem:85.52M (Peak 86.13M) | Time:00:00.21 | Syncing Sill beam.012
+Fra:1 Mem:85.54M (Peak 86.13M) | Time:00:00.21 | Syncing Sill beam.013
+Fra:1 Mem:85.56M (Peak 86.13M) | Time:00:00.21 | Syncing Sill beam.014
+Fra:1 Mem:85.57M (Peak 86.13M) | Time:00:00.21 | Syncing Sill beam.015
+Fra:1 Mem:85.59M (Peak 86.13M) | Time:00:00.21 | Syncing Straw resting pad
+Fra:1 Mem:85.61M (Peak 86.13M) | Time:00:00.21 | Syncing Back panel.003
+Fra:1 Mem:85.63M (Peak 86.13M) | Time:00:00.21 | Syncing Blue window
+Fra:1 Mem:85.65M (Peak 86.13M) | Time:00:00.21 | Syncing Blue window.001
+Fra:1 Mem:85.66M (Peak 86.13M) | Time:00:00.21 | Syncing Chimney
+Fra:1 Mem:85.68M (Peak 86.13M) | Time:00:00.21 | Syncing Chimney cap
+Fra:1 Mem:85.70M (Peak 86.13M) | Time:00:00.21 | Syncing Corner post.020
+Fra:1 Mem:85.72M (Peak 86.13M) | Time:00:00.21 | Syncing Corner post.021
+Fra:1 Mem:85.73M (Peak 86.13M) | Time:00:00.21 | Syncing Corner post.022
+Fra:1 Mem:85.75M (Peak 86.13M) | Time:00:00.21 | Syncing Corner post.023
+Fra:1 Mem:85.77M (Peak 86.13M) | Time:00:00.21 | Syncing Door
+Fra:1 Mem:85.79M (Peak 86.13M) | Time:00:00.21 | Syncing Door knob
+Fra:1 Mem:85.80M (Peak 86.13M) | Time:00:00.21 | Syncing Eave beam.010
+Fra:1 Mem:85.82M (Peak 86.13M) | Time:00:00.21 | Syncing Eave beam.011
+Fra:1 Mem:85.84M (Peak 86.13M) | Time:00:00.21 | Syncing Front wall
+Fra:1 Mem:85.86M (Peak 86.13M) | Time:00:00.21 | Syncing Gable rafter.020
+Fra:1 Mem:85.87M (Peak 86.13M) | Time:00:00.21 | Syncing Gable rafter.021
+Fra:1 Mem:85.89M (Peak 86.13M) | Time:00:00.21 | Syncing Gable rafter.022
+Fra:1 Mem:85.91M (Peak 86.13M) | Time:00:00.21 | Syncing Gable rafter.023
+Fra:1 Mem:85.93M (Peak 86.13M) | Time:00:00.21 | Syncing Herb cushion
+Fra:1 Mem:85.94M (Peak 86.13M) | Time:00:00.21 | Syncing Herb cushion.001
+Fra:1 Mem:85.96M (Peak 86.13M) | Time:00:00.21 | Syncing Padded roof plane.006
+Fra:1 Mem:85.98M (Peak 86.13M) | Time:00:00.21 | Syncing Padded roof plane.007
+Fra:1 Mem:86.00M (Peak 86.13M) | Time:00:00.21 | Syncing Planter
+Fra:1 Mem:86.01M (Peak 86.13M) | Time:00:00.21 | Syncing Planter.001
+Fra:1 Mem:86.03M (Peak 86.13M) | Time:00:00.21 | Syncing Ridge beam.005
+Fra:1 Mem:86.05M (Peak 86.13M) | Time:00:00.21 | Syncing Ridge cap.003
+Fra:1 Mem:86.07M (Peak 86.13M) | Time:00:00.21 | Syncing Rounded stone footing.007
+Fra:1 Mem:86.08M (Peak 86.13M) | Time:00:00.21 | Syncing Side panel.006
+Fra:1 Mem:86.10M (Peak 86.13M) | Time:00:00.21 | Syncing Side panel.007
+Fra:1 Mem:86.12M (Peak 86.13M) | Time:00:00.21 | Syncing Sill beam.028
+Fra:1 Mem:86.14M (Peak 86.14M) | Time:00:00.21 | Syncing Sill beam.029
+Fra:1 Mem:86.15M (Peak 86.15M) | Time:00:00.21 | Syncing Sill beam.030
+Fra:1 Mem:86.17M (Peak 86.17M) | Time:00:00.21 | Syncing Sill beam.031
+Fra:1 Mem:86.19M (Peak 86.19M) | Time:00:00.21 | Syncing Welcoming step
+Fra:1 Mem:86.21M (Peak 86.21M) | Time:00:00.21 | Syncing Window frame
+Fra:1 Mem:86.22M (Peak 86.22M) | Time:00:00.21 | Syncing Window frame.001
+Fra:1 Mem:86.24M (Peak 86.24M) | Time:00:00.21 | Syncing Window mullion
+Fra:1 Mem:86.26M (Peak 86.26M) | Time:00:00.21 | Syncing Window mullion.001
+Fra:1 Mem:86.28M (Peak 86.28M) | Time:00:00.21 | Syncing Window sill
+Fra:1 Mem:86.29M (Peak 86.29M) | Time:00:00.21 | Syncing Window sill.001
+Fra:1 Mem:86.31M (Peak 86.31M) | Time:00:00.21 | Syncing Back panel.005
+Fra:1 Mem:86.33M (Peak 86.33M) | Time:00:00.21 | Syncing Corner post.032
+Fra:1 Mem:86.35M (Peak 86.35M) | Time:00:00.21 | Syncing Corner post.033
+Fra:1 Mem:86.36M (Peak 86.36M) | Time:00:00.21 | Syncing Corner post.034
+Fra:1 Mem:86.38M (Peak 86.38M) | Time:00:00.21 | Syncing Corner post.035
+Fra:1 Mem:86.40M (Peak 86.40M) | Time:00:00.21 | Syncing Eave beam.016
+Fra:1 Mem:86.42M (Peak 86.42M) | Time:00:00.21 | Syncing Eave beam.017
+Fra:1 Mem:86.43M (Peak 86.43M) | Time:00:00.21 | Syncing Feed sign
+Fra:1 Mem:86.45M (Peak 86.45M) | Time:00:00.21 | Syncing Full feed sack
+Fra:1 Mem:86.47M (Peak 86.47M) | Time:00:00.21 | Syncing Full feed sack.001
+Fra:1 Mem:86.48M (Peak 86.48M) | Time:00:00.21 | Syncing Full feed sack.002
+Fra:1 Mem:86.50M (Peak 86.50M) | Time:00:00.21 | Syncing Gable rafter.032
+Fra:1 Mem:86.52M (Peak 86.52M) | Time:00:00.21 | Syncing Gable rafter.033
+Fra:1 Mem:86.54M (Peak 86.54M) | Time:00:00.21 | Syncing Gable rafter.034
+Fra:1 Mem:86.55M (Peak 86.55M) | Time:00:00.21 | Syncing Gable rafter.035
+Fra:1 Mem:86.57M (Peak 86.57M) | Time:00:00.21 | Syncing Grain emblem
+Fra:1 Mem:86.59M (Peak 86.59M) | Time:00:00.21 | Syncing Grain emblem.001
+Fra:1 Mem:86.64M (Peak 86.64M) | Time:00:00.21 | Syncing Grain emblem.002
+Fra:1 Mem:86.65M (Peak 86.65M) | Time:00:00.21 | Syncing Half door
+Fra:1 Mem:86.67M (Peak 86.67M) | Time:00:00.21 | Syncing Padded roof plane.010
+Fra:1 Mem:86.69M (Peak 86.69M) | Time:00:00.21 | Syncing Padded roof plane.011
+Fra:1 Mem:86.70M (Peak 86.70M) | Time:00:00.21 | Syncing Ridge beam.008
+Fra:1 Mem:86.72M (Peak 86.72M) | Time:00:00.21 | Syncing Ridge cap.005
+Fra:1 Mem:86.74M (Peak 86.74M) | Time:00:00.21 | Syncing Rounded stone footing.011
+Fra:1 Mem:86.76M (Peak 86.76M) | Time:00:00.21 | Syncing Sack tie
+Fra:1 Mem:86.78M (Peak 86.78M) | Time:00:00.21 | Syncing Sack tie.001
+Fra:1 Mem:86.79M (Peak 86.79M) | Time:00:00.21 | Syncing Sack tie.002
+Fra:1 Mem:86.81M (Peak 86.81M) | Time:00:00.21 | Syncing Side panel.010
+Fra:1 Mem:86.83M (Peak 86.83M) | Time:00:00.21 | Syncing Side panel.011
+Fra:1 Mem:86.85M (Peak 86.85M) | Time:00:00.21 | Syncing Sill beam.044
+Fra:1 Mem:86.86M (Peak 86.86M) | Time:00:00.21 | Syncing Sill beam.045
+Fra:1 Mem:86.88M (Peak 86.88M) | Time:00:00.21 | Syncing Sill beam.046
+Fra:1 Mem:86.90M (Peak 86.90M) | Time:00:00.21 | Syncing Sill beam.047
+Fra:1 Mem:86.92M (Peak 86.92M) | Time:00:00.21 | Syncing Corner post.044
+Fra:1 Mem:86.93M (Peak 86.93M) | Time:00:00.21 | Syncing Corner post.045
+Fra:1 Mem:86.95M (Peak 86.95M) | Time:00:00.21 | Syncing Corner post.046
+Fra:1 Mem:86.97M (Peak 86.97M) | Time:00:00.21 | Syncing Corner post.047
+Fra:1 Mem:86.99M (Peak 86.99M) | Time:00:00.21 | Syncing Rounded stone footing.015
+Fra:1 Mem:87.00M (Peak 87.00M) | Time:00:00.21 | Syncing Service mast.001
+Fra:1 Mem:87.02M (Peak 87.02M) | Time:00:00.21 | Syncing Sill beam.060
+Fra:1 Mem:87.04M (Peak 87.04M) | Time:00:00.21 | Syncing Sill beam.061
+Fra:1 Mem:87.06M (Peak 87.06M) | Time:00:00.21 | Syncing Sill beam.062
+Fra:1 Mem:87.07M (Peak 87.07M) | Time:00:00.21 | Syncing Sill beam.063
+Fra:1 Mem:87.09M (Peak 87.09M) | Time:00:00.21 | Syncing Spout.001
+Fra:1 Mem:87.11M (Peak 87.11M) | Time:00:00.21 | Syncing Tap handle
+Fra:1 Mem:87.12M (Peak 87.12M) | Time:00:00.21 | Syncing Trough end.002
+Fra:1 Mem:87.14M (Peak 87.14M) | Time:00:00.21 | Syncing Trough end.003
+Fra:1 Mem:87.16M (Peak 87.16M) | Time:00:00.21 | Syncing Trough floor.001
+Fra:1 Mem:87.18M (Peak 87.18M) | Time:00:00.21 | Syncing Trough side.002
+Fra:1 Mem:87.19M (Peak 87.19M) | Time:00:00.21 | Syncing Trough side.003
+Fra:1 Mem:87.21M (Peak 87.21M) | Time:00:00.21 | Syncing Water surface
+Fra:1 Mem:87.23M (Peak 87.23M) | Time:00:00.21 | Syncing Back panel.007
+Fra:1 Mem:87.25M (Peak 87.25M) | Time:00:00.21 | Syncing Back wall batten.003
+Fra:1 Mem:87.27M (Peak 87.27M) | Time:00:00.21 | Syncing Back wall batten.004
+Fra:1 Mem:87.28M (Peak 87.28M) | Time:00:00.21 | Syncing Back wall batten.005
+Fra:1 Mem:87.30M (Peak 87.30M) | Time:00:00.21 | Syncing Centre partition
+Fra:1 Mem:87.32M (Peak 87.32M) | Time:00:00.21 | Syncing Centre partition.001
+Fra:1 Mem:87.34M (Peak 87.34M) | Time:00:00.21 | Syncing Corner post.056
+Fra:1 Mem:87.35M (Peak 87.35M) | Time:00:00.21 | Syncing Corner post.057
+Fra:1 Mem:87.37M (Peak 87.37M) | Time:00:00.21 | Syncing Corner post.058
+Fra:1 Mem:87.39M (Peak 87.39M) | Time:00:00.21 | Syncing Corner post.059
+Fra:1 Mem:87.41M (Peak 87.41M) | Time:00:00.21 | Syncing Eave beam.022
+Fra:1 Mem:87.43M (Peak 87.43M) | Time:00:00.21 | Syncing Eave beam.023
+Fra:1 Mem:87.44M (Peak 87.44M) | Time:00:00.21 | Syncing Feed manger.001
+Fra:1 Mem:87.46M (Peak 87.46M) | Time:00:00.21 | Syncing Gable rafter.044
+Fra:1 Mem:87.48M (Peak 87.48M) | Time:00:00.21 | Syncing Gable rafter.045
+Fra:1 Mem:87.50M (Peak 87.50M) | Time:00:00.21 | Syncing Gable rafter.046
+Fra:1 Mem:87.51M (Peak 87.51M) | Time:00:00.21 | Syncing Gable rafter.047
+Fra:1 Mem:87.53M (Peak 87.53M) | Time:00:00.21 | Syncing Hay in manger.001
+Fra:1 Mem:87.55M (Peak 87.55M) | Time:00:00.21 | Syncing Low side rail.001
+Fra:1 Mem:87.56M (Peak 87.56M) | Time:00:00.21 | Syncing Padded roof plane.014
+Fra:1 Mem:87.58M (Peak 87.58M) | Time:00:00.21 | Syncing Padded roof plane.015
+Fra:1 Mem:87.60M (Peak 87.60M) | Time:00:00.21 | Syncing Ridge beam.011
+Fra:1 Mem:87.62M (Peak 87.62M) | Time:00:00.21 | Syncing Ridge cap.007
+Fra:1 Mem:87.63M (Peak 87.63M) | Time:00:00.21 | Syncing Rounded stone footing.019
+Fra:1 Mem:87.65M (Peak 87.65M) | Time:00:00.21 | Syncing Side panel.014
+Fra:1 Mem:87.67M (Peak 87.67M) | Time:00:00.21 | Syncing Side panel.015
+Fra:1 Mem:87.69M (Peak 87.69M) | Time:00:00.21 | Syncing Sill beam.076
+Fra:1 Mem:87.70M (Peak 87.70M) | Time:00:00.21 | Syncing Sill beam.077
+Fra:1 Mem:87.72M (Peak 87.72M) | Time:00:00.21 | Syncing Sill beam.078
+Fra:1 Mem:87.74M (Peak 87.74M) | Time:00:00.21 | Syncing Sill beam.079
+Fra:1 Mem:87.76M (Peak 87.76M) | Time:00:00.21 | Syncing Straw resting pad.001
+Fra:1 Mem:87.77M (Peak 87.77M) | Time:00:00.21 | Syncing Back panel.009
+Fra:1 Mem:87.79M (Peak 87.79M) | Time:00:00.21 | Syncing Back wall batten.006
+Fra:1 Mem:87.81M (Peak 87.81M) | Time:00:00.21 | Syncing Back wall batten.007
+Fra:1 Mem:87.83M (Peak 87.83M) | Time:00:00.21 | Syncing Back wall batten.008
+Fra:1 Mem:87.84M (Peak 87.84M) | Time:00:00.21 | Syncing Corner post.068
+Fra:1 Mem:87.86M (Peak 87.86M) | Time:00:00.21 | Syncing Corner post.069
+Fra:1 Mem:87.88M (Peak 87.88M) | Time:00:00.21 | Syncing Corner post.070
+Fra:1 Mem:87.90M (Peak 87.90M) | Time:00:00.21 | Syncing Corner post.071
+Fra:1 Mem:87.91M (Peak 87.91M) | Time:00:00.21 | Syncing Eave beam.028
+Fra:1 Mem:87.93M (Peak 87.93M) | Time:00:00.21 | Syncing Eave beam.029
+Fra:1 Mem:87.95M (Peak 87.95M) | Time:00:00.21 | Syncing Feed manger.002
+Fra:1 Mem:87.97M (Peak 87.97M) | Time:00:00.21 | Syncing Gable rafter.056
+Fra:1 Mem:87.98M (Peak 87.98M) | Time:00:00.21 | Syncing Gable rafter.057
+Fra:1 Mem:88.00M (Peak 88.00M) | Time:00:00.21 | Syncing Gable rafter.058
+Fra:1 Mem:88.02M (Peak 88.02M) | Time:00:00.21 | Syncing Gable rafter.059
+Fra:1 Mem:88.04M (Peak 88.04M) | Time:00:00.21 | Syncing Goat climbing step
+Fra:1 Mem:88.05M (Peak 88.05M) | Time:00:00.21 | Syncing Goat resting platform
+Fra:1 Mem:88.07M (Peak 88.07M) | Time:00:00.21 | Syncing Hay in manger.002
+Fra:1 Mem:88.09M (Peak 88.09M) | Time:00:00.21 | Syncing Low side rail.002
+Fra:1 Mem:88.10M (Peak 88.10M) | Time:00:00.21 | Syncing Padded roof plane.018
+Fra:1 Mem:88.12M (Peak 88.12M) | Time:00:00.21 | Syncing Padded roof plane.019
+Fra:1 Mem:88.14M (Peak 88.14M) | Time:00:00.21 | Syncing Ridge beam.014
+Fra:1 Mem:88.16M (Peak 88.16M) | Time:00:00.21 | Syncing Ridge cap.009
+Fra:1 Mem:88.17M (Peak 88.17M) | Time:00:00.21 | Syncing Rounded stone footing.023
+Fra:1 Mem:88.19M (Peak 88.19M) | Time:00:00.21 | Syncing Side panel.018
+Fra:1 Mem:88.21M (Peak 88.21M) | Time:00:00.21 | Syncing Side panel.019
+Fra:1 Mem:88.23M (Peak 88.23M) | Time:00:00.21 | Syncing Sill beam.092
+Fra:1 Mem:88.24M (Peak 88.24M) | Time:00:00.21 | Syncing Sill beam.093
+Fra:1 Mem:88.26M (Peak 88.26M) | Time:00:00.21 | Syncing Sill beam.094
+Fra:1 Mem:88.28M (Peak 88.28M) | Time:00:00.21 | Syncing Sill beam.095
+Fra:1 Mem:88.30M (Peak 88.30M) | Time:00:00.21 | Syncing Straw resting pad.002
+Fra:1 Mem:88.31M (Peak 88.31M) | Time:00:00.21 | Syncing Access ramp
+Fra:1 Mem:88.33M (Peak 88.33M) | Time:00:00.21 | Syncing Back panel.011
+Fra:1 Mem:88.35M (Peak 88.35M) | Time:00:00.21 | Syncing Back wall batten.009
+Fra:1 Mem:88.37M (Peak 88.37M) | Time:00:00.21 | Syncing Back wall batten.010
+Fra:1 Mem:88.38M (Peak 88.38M) | Time:00:00.21 | Syncing Back wall batten.011
+Fra:1 Mem:88.40M (Peak 88.40M) | Time:00:00.22 | Syncing Corner post.080
+Fra:1 Mem:88.42M (Peak 88.42M) | Time:00:00.22 | Syncing Corner post.081
+Fra:1 Mem:88.44M (Peak 88.44M) | Time:00:00.22 | Syncing Corner post.082
+Fra:1 Mem:88.45M (Peak 88.45M) | Time:00:00.22 | Syncing Corner post.083
+Fra:1 Mem:88.47M (Peak 88.47M) | Time:00:00.22 | Syncing Eave beam.034
+Fra:1 Mem:88.49M (Peak 88.49M) | Time:00:00.22 | Syncing Eave beam.035
+Fra:1 Mem:88.51M (Peak 88.51M) | Time:00:00.22 | Syncing Feed manger.003
+Fra:1 Mem:88.52M (Peak 88.52M) | Time:00:00.22 | Syncing Gable rafter.068
+Fra:1 Mem:88.54M (Peak 88.54M) | Time:00:00.22 | Syncing Gable rafter.069
+Fra:1 Mem:88.56M (Peak 88.56M) | Time:00:00.22 | Syncing Gable rafter.070
+Fra:1 Mem:88.58M (Peak 88.58M) | Time:00:00.22 | Syncing Gable rafter.071
+Fra:1 Mem:88.59M (Peak 88.59M) | Time:00:00.22 | Syncing Hay in manger.003
+Fra:1 Mem:88.61M (Peak 88.61M) | Time:00:00.22 | Syncing Low side rail.003
+Fra:1 Mem:88.63M (Peak 88.63M) | Time:00:00.22 | Syncing Nest box
+Fra:1 Mem:88.64M (Peak 88.64M) | Time:00:00.22 | Syncing Nest lid
+Fra:1 Mem:88.66M (Peak 88.66M) | Time:00:00.22 | Syncing Padded roof plane.022
+Fra:1 Mem:88.68M (Peak 88.68M) | Time:00:00.22 | Syncing Padded roof plane.023
+Fra:1 Mem:88.70M (Peak 88.70M) | Time:00:00.22 | Syncing Ramp tread
+Fra:1 Mem:88.71M (Peak 88.71M) | Time:00:00.22 | Syncing Ramp tread.001
+Fra:1 Mem:88.73M (Peak 88.73M) | Time:00:00.22 | Syncing Ramp tread.002
+Fra:1 Mem:88.75M (Peak 88.75M) | Time:00:00.22 | Syncing Ridge beam.017
+Fra:1 Mem:88.77M (Peak 88.77M) | Time:00:00.22 | Syncing Ridge cap.011
+Fra:1 Mem:88.78M (Peak 88.78M) | Time:00:00.22 | Syncing Rounded stone footing.027
+Fra:1 Mem:88.80M (Peak 88.80M) | Time:00:00.22 | Syncing Secure coop front
+Fra:1 Mem:88.82M (Peak 88.82M) | Time:00:00.22 | Syncing Side panel.022
+Fra:1 Mem:88.84M (Peak 88.84M) | Time:00:00.22 | Syncing Side panel.023
+Fra:1 Mem:88.85M (Peak 88.85M) | Time:00:00.22 | Syncing Sill beam.108
+Fra:1 Mem:88.87M (Peak 88.87M) | Time:00:00.22 | Syncing Sill beam.109
+Fra:1 Mem:88.89M (Peak 88.89M) | Time:00:00.22 | Syncing Sill beam.110
+Fra:1 Mem:88.91M (Peak 88.91M) | Time:00:00.22 | Syncing Sill beam.111
+Fra:1 Mem:88.92M (Peak 88.92M) | Time:00:00.22 | Syncing Small pop hole
+Fra:1 Mem:88.94M (Peak 88.94M) | Time:00:00.22 | Syncing Straw resting pad.003
+Fra:1 Mem:88.96M (Peak 88.96M) | Time:00:00.22 | Syncing Bed end.008
+Fra:1 Mem:88.98M (Peak 88.98M) | Time:00:00.22 | Syncing Bed end.009
+Fra:1 Mem:88.99M (Peak 88.99M) | Time:00:00.22 | Syncing Bed end.010
+Fra:1 Mem:89.01M (Peak 89.01M) | Time:00:00.22 | Syncing Bed end.011
+Fra:1 Mem:89.03M (Peak 89.03M) | Time:00:00.22 | Syncing Bed marker
+Fra:1 Mem:89.05M (Peak 89.05M) | Time:00:00.22 | Syncing Bed marker.001
+Fra:1 Mem:89.06M (Peak 89.06M) | Time:00:00.22 | Syncing Bed side.008
+Fra:1 Mem:89.08M (Peak 89.08M) | Time:00:00.22 | Syncing Bed side.009
+Fra:1 Mem:89.10M (Peak 89.10M) | Time:00:00.22 | Syncing Bed side.010
+Fra:1 Mem:89.12M (Peak 89.12M) | Time:00:00.22 | Syncing Bed side.011
+Fra:1 Mem:89.13M (Peak 89.13M) | Time:00:00.22 | Syncing Marker stake
+Fra:1 Mem:89.15M (Peak 89.15M) | Time:00:00.22 | Syncing Marker stake.001
+Fra:1 Mem:89.17M (Peak 89.17M) | Time:00:00.22 | Syncing Prepared soil.004
+Fra:1 Mem:89.18M (Peak 89.18M) | Time:00:00.22 | Syncing Prepared soil.005
+Fra:1 Mem:89.20M (Peak 89.20M) | Time:00:00.22 | Syncing Rounded stone footing.031
+Fra:1 Mem:89.22M (Peak 89.22M) | Time:00:00.22 | Syncing Sill beam.124
+Fra:1 Mem:89.24M (Peak 89.24M) | Time:00:00.22 | Syncing Sill beam.125
+Fra:1 Mem:89.25M (Peak 89.25M) | Time:00:00.22 | Syncing Sill beam.126
+Fra:1 Mem:89.27M (Peak 89.27M) | Time:00:00.22 | Syncing Sill beam.127
+Fra:1 Mem:89.29M (Peak 89.29M) | Time:00:00.22 | Syncing Stepping stone
+Fra:1 Mem:89.31M (Peak 89.31M) | Time:00:00.22 | Syncing Stepping stone.001
+Fra:1 Mem:89.32M (Peak 89.32M) | Time:00:00.22 | Syncing Stepping stone.002
+Fra:1 Mem:89.34M (Peak 89.34M) | Time:00:00.22 | Syncing Stepping stone.003
+Fra:1 Mem:89.36M (Peak 89.36M) | Time:00:00.22 | Syncing Trellis rail.003
+Fra:1 Mem:89.38M (Peak 89.38M) | Time:00:00.22 | Syncing Trellis rail.004
+Fra:1 Mem:89.39M (Peak 89.39M) | Time:00:00.22 | Syncing Trellis rail.005
+Fra:1 Mem:89.41M (Peak 89.41M) | Time:00:00.22 | Syncing Trellis upright.002
+Fra:1 Mem:89.43M (Peak 89.43M) | Time:00:00.22 | Syncing Trellis upright.003
+Fra:1 Mem:89.15M (Peak 89.43M) | Time:00:00.22 | Rendering 1 / 64 samples
+Fra:1 Mem:86.84M (Peak 89.43M) | Time:00:00.26 | Rendering 26 / 64 samples
+Fra:1 Mem:86.84M (Peak 89.43M) | Time:00:00.29 | Rendering 51 / 64 samples
+Fra:1 Mem:86.84M (Peak 89.43M) | Time:00:00.30 | Rendering 64 / 64 samples
+Saved: 'C:\Users\Evan Robinson\Documents\Codex\2026-10-17\pro\outputs\bedroom-world\dist\simulation-assets\buildings\review-complete.png'
+Time: 00:00.45 (Saving: 00:00.13)
+
+Info: Saved "building-states.blend"
+
+Blender quit

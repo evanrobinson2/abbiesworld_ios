@@ -1,0 +1,233 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Paper Helmet Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (~68ch) with wide figure rows that break out to 1100px; a lab-notebook report. */
+:root{
+  --bg:#f3f4f2; --panel:#ffffff; --ink:#151816; --ink2:#4a504c; --muted:#7a807b; --rule:#d9dcd8;
+  --accent:#3b5bdb; --good:#2f7d4f; --bad:#b4472a;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#c98500;
+  --display:"Archivo",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141615; --panel:#1c1f1d; --ink:#eceeea; --ink2:#b9beb9; --muted:#8a908b; --rule:#323633;
+  --accent:#8fa6ff; --good:#6cc28f; --bad:#e88a6c; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#eda100; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141615; --panel:#1c1f1d; --ink:#eceeea; --ink2:#b9beb9; --muted:#8a908b; --rule:#323633;
+  --accent:#8fa6ff; --good:#6cc28f; --bad:#e88a6c; --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#eda100; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+.col{max-width:68ch}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.55rem;font-weight:700;margin-bottom:12px}
+h3{font-size:1.1rem;font-weight:700;margin:18px 0 6px}
+p{margin:0 0 12px} ul{margin:0 0 12px;padding-left:20px} li{margin-bottom:6px}
+.eyebrow{font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:1.15rem;color:var(--ink2)}
+.verdict{border-left:3px solid var(--accent);padding:4px 0 4px 16px}
+code,.mono{font-family:var(--mono);font-size:.88em}
+.row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:800px){.row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+figure{margin:0}
+.tile img{display:block;width:100%;border-radius:4px;background:var(--panel)}
+.tile figcaption{display:flex;justify-content:space-between;gap:8px;font-size:.85rem;margin-top:6px;color:var(--ink2)}
+.tile b{font-family:var(--display);color:var(--ink)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.win b{color:var(--good)}
+.chart{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:16px;position:relative}
+.chart svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.85rem;color:var(--ink2);margin-bottom:8px}
+.legend span::before{content:"";display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle;background:var(--c)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font:12px/1.4 var(--mono);padding:6px 8px;border-radius:4px;white-space:nowrap}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;font-size:.88rem;min-width:640px;width:100%}
+th,td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+th{font:600 .75rem var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+tr.best td{font-weight:600}
+.crops{display:flex;flex-direction:column;gap:10px}
+.crops .lab{font:500 .75rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.crophead{display:grid;grid-template-columns:repeat(5,1fr);font:500 .75rem var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.crops img{width:100%;display:block;border-radius:3px}
+.pair{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:700px){.pair{grid-template-columns:1fr}}
+.wide img{width:100%;display:block;border-radius:4px}
+.note{font-size:.9rem;color:var(--ink2)}
+.files li{font-family:var(--mono);font-size:.85rem;word-break:break-all}
+</style>
+
+<div class="wrap">
+
+<header class="col" style="display:flex;flex-direction:column;gap:14px">
+  <div class="eyebrow">Imagination machine · helmet study · 22 Oct 2026</div>
+  <h1>Paper Helmet Study</h1>
+  <p class="lede">Three competing ways to rebuild one helmet from one Midjourney image, all scored by the same loss and shown from the same camera.</p>
+  <div class="verdict">
+    <p><b>The hybrid won, as you bet.</b> On the judged loss, lower is better: geometry-first scored 0.62, grammar-only 0.88, and the hybrid 0.43. The hybrid also has the best silhouette (IoU 0.91) and the closest crease structure to the reference.</p>
+    <p><b>It is not a faithful recreation yet.</b> The biggest finding is why. Fitting to a single view quietly erased the very features that make this helmet what it is. The crest shrank to a thin card, the brow ledge turned inside out and the eye slot closed, because none of those things change the outline. When I made those features fixed rules that the fit can't break, the identity came back.</p>
+  </div>
+</header>
+
+<section id="compare">
+  <h2>Same camera, side by side</h2>
+  <p class="note col">Every render uses the same fitted camera and the same 768 px judge (48 samples). The score is the judged total loss; lower is better.</p>
+  <div class="row" id="tiles"></div>
+</section>
+
+<section id="loss">
+  <h2>Loss curve</h2>
+  <p class="note col">Best render loss so far, per variant, across every rendered evaluation (384 px, 12 samples). Each experiment also ran a fast silhouette-only geometry fit before these renders; those steps are counted in the provenance file. C+rules starts from the Opus critic's edits, so its curve starts higher.</p>
+  <div class="chart" id="chart">
+    <div class="legend" id="legend"></div>
+    <svg id="svg" viewBox="0 0 900 340" role="img" aria-label="Best render loss so far for each variant"></svg>
+    <div class="tip" id="tip" hidden></div>
+  </div>
+</section>
+
+<section id="crops">
+  <h2>Part crops at full resolution</h2>
+  <p class="note col">The loss scores these five crops separately, so small parts can't hide inside the whole-image average. The columns are the reference, then A, B, C and C+rules.</p>
+  <div class="crops" id="crops"></div>
+</section>
+
+<section id="score">
+  <h2>Score breakdown</h2>
+  <div class="tbl"><table id="tbl"></table></div>
+  <p class="note col" style="margin-top:8px">IoU is silhouette overlap. Landmarks is the mean error, in pixels, of 6 points (crest ends, cheek tips, neck guard, boss). Straight is the gap to the reference in how much of the crease ink lies on straight lines. Style is the gap in the distributions of gradient strength and edge coherence. Tone is colour and exposure.</p>
+</section>
+
+<section class="col" id="learned">
+  <h2>What I learned</h2>
+
+  <h3>1. Geometry-first gets the outline, then the paper filter makes clay</h3>
+  <p>A fits about 60 shape numbers to the silhouette and part crops using smooth geometry, then applies the generic paper filter the warrior used: decimate, then crumple. Before the filter, the outline is good (IoU 0.89) but the surface is smooth plastic. After it, the surface looks like wet clay, not folded paper.</p>
+  <p>In round 1 the loss actually <i>preferred</i> the crumpled version (0.39 down to 0.33). The style term rewarded noise because noise adds gradients, and so does the reference's faceting. That is the same blind spot you spotted on the warrior. I added a <b>straight-crease term</b>: what share of the edge lines lie on straight segments. The reference scores 0.66, the clean model 0.77 and the crumpled one 0.48. In round 2 the same filter costs points (0.54 up to 0.62), so the loss now agrees with your eye about noise.</p>
+  <figure class="pair">
+    <div class="tile"><img src="ref.jpg" alt="Reference helmet"><figcaption><b>Reference</b></figcaption></div>
+    <div class="tile"><img src="r1_A.jpg" alt="Round 1 geometry-first with crumple filter"><figcaption><b>Round 1, A + crumple</b><span class="num">the old loss liked this</span></figcaption></div>
+    <div class="tile"><img src="A.jpg" alt="Round 2 geometry-first"><figcaption><b>Round 2, A + crumple</b><span class="num">now penalised</span></figcaption></div>
+  </figure>
+
+  <h3>2. The grammar alone makes paper, but not this helmet</h3>
+  <p>B builds every part from the rules: a facet shell, hemmed plates folded from the centre, a brow ledge and folded crest blades with ridge creases. Only the pose and the rule settings were tuned, not the proportions. Square inch for square inch, it looks the most like paper, with clean planes, hems that catch light and crisp blades. But it is a generic helmet. Its silhouette IoU is 0.67 and its landmarks are 83 px off. Rules on their own reconstruct the style, not the object.</p>
+
+  <h3>3. The hybrid wins, and then cheats</h3>
+  <p>C takes A's fitted shape, rebuilds it with B's rules, and tunes both together. It has the best total (0.43), the best silhouette (0.91), and a crease structure within 0.011 of the reference. But reading its numbers shows what the optimizer traded away:</p>
+  <ul>
+    <li>Crest width went to 0.06, a 6% card. From this camera the crest's thickness barely changes the outline, so it was free to vanish. This is the warrior's "thin crest from the front" bug, now explained.</li>
+    <li>The brow ledge depth went negative, so the ledge turned inward.</li>
+    <li>The eye slot depth went negative, so the slot closed and the cheek guards could fill pixels instead.</li>
+  </ul>
+  <p>A single-view silhouette can't see depth. Anything that is mostly depth (thickness, overhang, a hole you look into) is negotiable to the optimizer, and those are exactly the features that carry the papercraft look.</p>
+
+  <h3>4. Opus saw it; the loss said no</h3>
+  <p>I ran 5 Opus critic rounds ($0.90). Each round showed it the reference, the render and the overlay. Its diagnoses were right every time: the crest should hook forward over the brow, the forehead should be a deep V-shaped plate with a dark eye slot under it, the plates need deeper folds and raised hems, and the neck guard should flare. <b>The loss rejected all five rounds.</b> Applying its edits together scores 0.58 against C's 0.43. At this point the loss is the bottleneck, not the optimizer. It still pays more for pixels in the outline than for the things a person reads first.</p>
+  <figure class="wide"><img src="critic_view.jpg" alt="What the critic saw: reference, render and silhouette overlay"></figure>
+
+  <h3>5. Rules as hard limits keep the identity</h3>
+  <p>For C+rules I restarted from the critic's edits and made the style features <b>hard limits</b> that the fit can't break. The crest must be at least 22% of the dome's width, the ledge must stick out, the eye slot must exist, and hems and folds must stay visible. It scores 0.47, slightly worse than the unconstrained hybrid on the loss, but it keeps a real crest and brow. This puts your "reconstruct the rules" point in concrete terms: a grammar is more than how to fold the paper. It also lists what the fit may never optimize away.</p>
+
+  <h3>6. What still fails, in order of importance</h3>
+  <ul>
+    <li><b>The Corinthian face.</b> The reference reads as a mask: a T-shaped opening with cheek guards that frame it. Ours reads as a dome on a band with flaps. The grammar has no "mask plate with cut-out eyes" yet, and that is the next rule to write.</li>
+    <li><b>The dome is too tall.</b> In the reference, the dome is low and mostly hidden behind the crest holder.</li>
+    <li><b>The crest has one layer.</b> The reference has a curved inner holder plus chunky outer blocks that hook forward.</li>
+    <li><b>The light is too clean.</b> Ours is whiter and flatter, while the reference has warm occlusion in every fold (tone gap 0.09).</li>
+  </ul>
+
+  <h3>7. The architecture this points to</h3>
+  <p>The work splits into three layers. The <b>shape program</b> says what the object is: about 60 numbers. The <b>style grammar</b> says how it's made: facets, hems, folds and blades. The <b>invariants</b> say what must survive the fit. The loss then needs two more things. It needs a critic's vote inside it, because Opus already sees what the pixel terms miss. And it needs more than one view, for example a Midjourney turnaround sheet, so that depth stops being free to trade away.</p>
+
+  <h3>Your question from the warrior thread</h3>
+  <p>The mesh is generated procedurally in Blender with Python, from numbers. Nothing starts from an existing mesh. Each evaluation rebuilds the helmet from scratch: 900 to 1,000 triangles in grammar mode, and about 5,000 in smooth mode. Helmet runs took about 2 to 3 seconds per Cycles render on 4 CPU cores, and about 25 minutes of compute in total.</p>
+</section>
+
+<section class="col" id="ridge">
+  <h2>For Fritigern: the late-Roman ridge helmet</h2>
+  <p>A crested Corinthian helmet reads as Classical Greece and early Rome. By the Gothic war (376 to 378 AD), the Roman soldier at the gate wears a <b>ridge helmet</b>. The <b>Intercisa</b> type is the common infantry helmet: two bowl halves riveted to a central ridge strip, a narrow brow band, separate cheek pieces, a small neck guard, and no crest. The <b>Berkasovo</b> type is the officer's version. It is heavier, with a nasal guard, and often silver-gilt sheeting. That makes it a good fit for "a helmet taken from a Roman officer" that then travels as a story object.</p>
+  <p>The grammar carries over unchanged, and only the shape numbers move. The facet shell becomes the bowl. The ridge is a folded strip, the same hemmed-strip rule the crest holder uses. The cheek pieces and neck guard are hemmed plates. The brow ledge shrinks to a narrow band. The blade stack isn't used. Below is a first pass from the same grammar and light as the hybrid, with no reference image yet, so it is a placeholder, not a fitted model. A papercraft Intercisa image from Midjourney would let it go through the same loop. For an officer's Berkasovo, the next rule to add is a nasal plate.</p>
+  <figure class="wide"><img src="ridge.jpg" alt="Late-Roman ridge helmet from the papercraft grammar, four views"></figure>
+</section>
+
+<section class="col" id="files">
+  <h2>Files and provenance</h2>
+  <p class="note">The code is on abbiesworld_ios, under <code>tools/paper-helmet</code>. The GLBs are at real-world scale (about 24 cm wide). Each has a parameter file and a provenance record. The reference is Evan's Midjourney helmet image, and the mask was cut with isnet-general-use via rembg.</p>
+  <ul class="files">
+    <li>tools/paper-helmet/out/helmet_C_rules.glb (hybrid + rules, 980 tris)</li>
+    <li>tools/paper-helmet/out/helmet_C.glb (hybrid, best loss, 920 tris)</li>
+    <li>tools/paper-helmet/out/helmet_A.glb (geometry-first + filter)</li>
+    <li>tools/paper-helmet/out/ridge_helmet.glb (late-Roman placeholder, 704 tris)</li>
+    <li>tools/paper-helmet/out/loss_log.jsonl (every evaluation)</li>
+    <li>tools/paper-helmet/provenance.json</li>
+  </ul>
+</section>
+</div>
+
+<script id="data" type="application/json">{"render": {"A": [[0, 0.5514, 0.5514, "A2 light (smooth)"], [1, 0.5514, 0.5974, "A2 light (smooth)"], [2, 0.5514, 0.5655, "A2 light (smooth)"], [3, 0.5514, 0.566, "A2 light (smooth)"], [4, 0.5514, 0.5664, "A2 light (smooth)"], [5, 0.5514, 0.567, "A2 light (smooth)"], [6, 0.5514, 0.5796, "A2 light (smooth)"], [7, 0.5514, 0.5799, "A2 light (smooth)"], [8, 0.5159, 0.5159, "A2 light (smooth)"], [9, 0.5159, 0.5179, "A2 light (smooth)"], [10, 0.5159, 0.608, "A2 light (smooth)"], [11, 0.5159, 0.6012, "A2 light (smooth)"], [12, 0.5159, 0.5351, "A2 light (smooth)"], [13, 0.5159, 0.5898, "A2 light (smooth)"], [14, 0.5159, 0.5225, "A2 light (smooth)"], [15, 0.5159, 0.5735, "A2 light (smooth)"], [16, 0.5159, 0.5993, "A2 light (smooth)"], [17, 0.5159, 0.5654, "A2 light (smooth)"], [18, 0.5159, 0.5743, "A2 light (smooth)"], [19, 0.5159, 0.57, "A2 light (smooth)"], [20, 0.5159, 0.5858, "A2 light (smooth)"], [21, 0.5159, 0.5216, "A2 light (smooth)"], [22, 0.5159, 0.5351, "A2 light (smooth)"], [23, 0.5159, 0.5555, "A2 light (smooth)"], [24, 0.5159, 0.5923, "A2 light (smooth)"], [25, 0.5159, 0.5994, "A2 light (smooth)"], [26, 0.5159, 0.5302, "A3 generic paper filter"], [27, 0.5051, 0.5051, "A3 generic paper filter"], [28, 0.5051, 0.5228, "A3 generic paper filter"], [29, 0.5051, 0.5557, "A3 generic paper filter"], [30, 0.5051, 0.5082, "A3 generic paper filter"], [31, 0.5051, 0.5285, "A3 generic paper filter"], [32, 0.5051, 0.5654, "A3 generic paper filter"], [33, 0.5051, 0.5661, "A3 generic paper filter"], [34, 0.5051, 0.5607, "A3 generic paper filter"], [35, 0.5051, 0.5606, "A3 generic paper filter"], [36, 0.5051, 0.5979, "A3 generic paper filter"], [37, 0.4955, 0.4955, "A3 generic paper filter"], [38, 0.4955, 0.4974, "A3 generic paper filter"], [39, 0.4955, 0.5555, "A3 generic paper filter"], [40, 0.4955, 0.4973, "A3 generic paper filter"], [41, 0.4955, 0.5022, "A3 generic paper filter"], [42, 0.4955, 0.5118, "A3 generic paper filter"], [43, 0.4955, 0.6216, "A3 generic paper filter"], [44, 0.4955, 0.6007, "A3 generic paper filter"], [45, 0.4955, 0.4977, "A3 generic paper filter"], [46, 0.4955, 0.5284, "A3 generic paper filter"], [47, 0.4955, 0.5133, "A3 generic paper filter"], [48, 0.4955, 0.504, "A3 generic paper filter"], [49, 0.4955, 0.4997, "A3 generic paper filter"], [50, 0.4955, 0.5502, "A3 generic paper filter"], [51, 0.4942, 0.4942, "A3 generic paper filter"], [52, 0.4942, 0.5215, "A3 generic paper filter"], [53, 0.4942, 0.5099, "A3 generic paper filter"], [54, 0.4942, 0.5529, "A3 generic paper filter"], [55, 0.4942, 0.524, "A3 generic paper filter"], [56, 0.4942, 0.5763, "A3 generic paper filter"]], "B": [[0, 1.0189, 1.0189, "B2 grammar + light"], [1, 1.0189, 1.0216, "B2 grammar + light"], [2, 1.0189, 1.0467, "B2 grammar + light"], [3, 1.0189, 1.0359, "B2 grammar + light"], [4, 1.0189, 1.0276, "B2 grammar + light"], [5, 1.0189, 1.0247, "B2 grammar + light"], [6, 1.0189, 1.0309, "B2 grammar + light"], [7, 1.0189, 1.0226, "B2 grammar + light"], [8, 1.0114, 1.0114, "B2 grammar + light"], [9, 1.0114, 1.0114, "B2 grammar + light"], [10, 1.0114, 1.0436, "B2 grammar + light"], [11, 0.9789, 0.9789, "B2 grammar + light"], [12, 0.9789, 0.9979, "B2 grammar + light"], [13, 0.9767, 0.9767, "B2 grammar + light"], [14, 0.9767, 0.991, "B2 grammar + light"], [15, 0.9717, 0.9717, "B2 grammar + light"], [16, 0.9717, 1.0162, "B2 grammar + light"], [17, 0.969, 0.969, "B2 grammar + light"], [18, 0.969, 0.9717, "B2 grammar + light"], [19, 0.969, 0.983, "B2 grammar + light"], [20, 0.9588, 0.9588, "B2 grammar + light"], [21, 0.9588, 1.0014, "B2 grammar + light"], [22, 0.9588, 0.9718, "B2 grammar + light"], [23, 0.9588, 0.9895, "B2 grammar + light"], [24, 0.9588, 1.0109, "B2 grammar + light"], [25, 0.9267, 0.9267, "B2 grammar + light"], [26, 0.9254, 0.9254, "B2 grammar + light"], [27, 0.9254, 0.9712, "B2 grammar + light"], [28, 0.9254, 0.9786, "B2 grammar + light"], [29, 0.9254, 0.9896, "B2 grammar + light"], [30, 0.9254, 0.9465, "B2 grammar + light"], [31, 0.9254, 0.956, "B2 grammar + light"], [32, 0.9254, 0.937, "B2 grammar + light"], [33, 0.9254, 0.974, "B2 grammar + light"], [34, 0.9254, 0.9752, "B2 grammar + light"], [35, 0.9254, 0.9995, "B2 grammar + light"], [36, 0.9254, 0.9579, "B2 grammar + light"], [37, 0.9254, 0.9349, "B2 grammar + light"], [38, 0.9254, 0.9673, "B2 grammar + light"], [39, 0.9254, 0.9471, "B2 grammar + light"], [40, 0.9254, 0.9515, "B2 grammar + light"], [41, 0.9254, 0.9705, "B2 grammar + light"], [42, 0.9254, 1.066, "B2 grammar + light"], [43, 0.9254, 0.9541, "B2 grammar + light"], [44, 0.9254, 0.9503, "B2 grammar + light"], [45, 0.9254, 0.9497, "B2 grammar + light"], [46, 0.9254, 0.9649, "B2 grammar + light"], [47, 0.9254, 0.9456, "B2 grammar + light"], [48, 0.9254, 0.9952, "B2 grammar + light"], [49, 0.9254, 0.9697, "B2 grammar + light"], [50, 0.9254, 0.9703, "B2 grammar + light"], [51, 0.9254, 0.9611, "B2 grammar + light"], [52, 0.9238, 0.9238, "B2 grammar + light"], [53, 0.9238, 0.9608, "B2 grammar + light"], [54, 0.9238, 0.9802, "B2 grammar + light"], [55, 0.9238, 0.9336, "B2 grammar + light"], [56, 0.9238, 0.9541, "B2 grammar + light"], [57, 0.9238, 0.9968, "B2 grammar + light"], [58, 0.9238, 1.0237, "B2 grammar + light"], [59, 0.9238, 0.9305, "B2 grammar + light"], [60, 0.9238, 0.9797, "B2 grammar + light"], [61, 0.9238, 0.9445, "B2 grammar + light"], [62, 0.9238, 0.9422, "B2 grammar + light"], [63, 0.9238, 0.9269, "B2 grammar + light"], [64, 0.9238, 0.9851, "B2 grammar + light"], [65, 0.9238, 1.0128, "B2 grammar + light"], [66, 0.9238, 0.9751, "B2 grammar + light"], [67, 0.9238, 0.9357, "B2 grammar + light"], [68, 0.9238, 0.9433, "B2 grammar + light"], [69, 0.9225, 0.9225, "B2 grammar + light"], [70, 0.9225, 0.9425, "B2 grammar + light"]], "C": [[0, 0.5683, 0.5683, "C1 grammar on fitted geometry"], [1, 0.5683, 0.5954, "C1 grammar on fitted geometry"], [2, 0.5543, 0.5543, "C1 grammar on fitted geometry"], [3, 0.5543, 0.6013, "C1 grammar on fitted geometry"], [4, 0.5543, 0.5889, "C1 grammar on fitted geometry"], [5, 0.5238, 0.5238, "C1 grammar on fitted geometry"], [6, 0.5238, 0.5768, "C1 grammar on fitted geometry"], [7, 0.5238, 0.5872, "C1 grammar on fitted geometry"], [8, 0.5238, 0.5355, "C1 grammar on fitted geometry"], [9, 0.5238, 0.5822, "C1 grammar on fitted geometry"], [10, 0.5238, 0.6148, "C1 grammar on fitted geometry"], [11, 0.5238, 0.5859, "C1 grammar on fitted geometry"], [12, 0.5238, 0.5918, "C1 grammar on fitted geometry"], [13, 0.5238, 0.5563, "C1 grammar on fitted geometry"], [14, 0.5238, 0.6041, "C1 grammar on fitted geometry"], [15, 0.5238, 0.605, "C1 grammar on fitted geometry"], [16, 0.5238, 0.561, "C1 grammar on fitted geometry"], [17, 0.5238, 0.5798, "C1 grammar on fitted geometry"], [18, 0.5238, 0.5238, "C1 grammar on fitted geometry"], [19, 0.5238, 0.6082, "C1 grammar on fitted geometry"], [20, 0.5238, 0.5857, "C1 grammar on fitted geometry"], [21, 0.5238, 0.5271, "C1 grammar on fitted geometry"], [22, 0.5238, 0.6013, "C1 grammar on fitted geometry"], [23, 0.5238, 0.5722, "C1 grammar on fitted geometry"], [24, 0.5238, 0.543, "C1 grammar on fitted geometry"], [25, 0.5238, 0.5462, "C1 grammar on fitted geometry"], [26, 0.5238, 0.6031, "C1 grammar on fitted geometry"], [27, 0.5238, 0.5312, "C1 grammar on fitted geometry"], [28, 0.5238, 0.5935, "C1 grammar on fitted geometry"], [29, 0.5238, 0.5846, "C1 grammar on fitted geometry"], [30, 0.5238, 0.595, "C1 grammar on fitted geometry"], [31, 0.5238, 0.6028, "C1 grammar on fitted geometry"], [32, 0.5238, 0.5963, "C1 grammar on fitted geometry"], [33, 0.5238, 0.5616, "C1 grammar on fitted geometry"], [34, 0.5238, 0.543, "C1 grammar on fitted geometry"], [35, 0.5238, 0.615, "C1 grammar on fitted geometry"], [36, 0.5238, 0.637, "C1 grammar on fitted geometry"], [37, 0.5238, 0.5778, "C1 grammar on fitted geometry"], [38, 0.5238, 0.5754, "C1 grammar on fitted geometry"], [39, 0.5238, 0.5658, "C1 grammar on fitted geometry"], [40, 0.5238, 0.6028, "C1 grammar on fitted geometry"], [41, 0.5238, 0.5238, "C2 joint shape + grammar"], [42, 0.5133, 0.5133, "C2 joint shape + grammar"], [43, 0.5133, 0.5815, "C2 joint shape + grammar"], [44, 0.5133, 0.5247, "C2 joint shape + grammar"], [45, 0.4963, 0.4963, "C2 joint shape + grammar"], [46, 0.4963, 0.5599, "C2 joint shape + grammar"], [47, 0.4963, 0.5388, "C2 joint shape + grammar"], [48, 0.4963, 0.4994, "C2 joint shape + grammar"], [49, 0.4963, 0.5116, "C2 joint shape + grammar"], [50, 0.4963, 0.5651, "C2 joint shape + grammar"], [51, 0.4963, 0.4963, "C2 joint shape + grammar"], [52, 0.4963, 0.5194, "C2 joint shape + grammar"], [53, 0.4963, 0.5689, "C2 joint shape + grammar"], [54, 0.4963, 0.5419, "C2 joint shape + grammar"], [55, 0.4963, 0.5767, "C2 joint shape + grammar"], [56, 0.4963, 0.5208, "C2 joint shape + grammar"], [57, 0.4963, 0.5436, "C2 joint shape + grammar"], [58, 0.4963, 0.5337, "C2 joint shape + grammar"], [59, 0.4963, 0.5044, "C2 joint shape + grammar"], [60, 0.4963, 0.5288, "C2 joint shape + grammar"], [61, 0.4963, 0.5589, "C2 joint shape + grammar"], [62, 0.4963, 0.5288, "C2 joint shape + grammar"], [63, 0.4963, 0.5546, "C2 joint shape + grammar"], [64, 0.4963, 0.4963, "C2 joint shape + grammar"], [65, 0.4963, 0.4963, "C2 joint shape + grammar"], [66, 0.4963, 0.501, "C2 joint shape + grammar"], [67, 0.4963, 0.5374, "C2 joint shape + grammar"], [68, 0.4963, 0.5203, "C2 joint shape + grammar"], [69, 0.4963, 0.5143, "C2 joint shape + grammar"], [70, 0.4963, 0.5021, "C2 joint shape + grammar"], [71, 0.4963, 0.5079, "C2 joint shape + grammar"], [72, 0.4963, 0.5627, "C2 joint shape + grammar"], [73, 0.4963, 0.505, "C2 joint shape + grammar"], [74, 0.4963, 0.4999, "C2 joint shape + grammar"], [75, 0.4963, 0.5293, "C2 joint shape + grammar"], [76, 0.4963, 0.537, "C2 joint shape + grammar"], [77, 0.4963, 0.5434, "C2 joint shape + grammar"], [78, 0.4963, 0.5395, "C2 joint shape + grammar"], [79, 0.4955, 0.4955, "C2 joint shape + grammar"], [80, 0.4955, 0.51, "C2 joint shape + grammar"], [81, 0.4955, 0.5225, "C2 joint shape + grammar"], [82, 0.4955, 0.5235, "C2 joint shape + grammar"], [83, 0.4955, 0.497, "C2 joint shape + grammar"], [84, 0.4955, 0.5069, "C2 joint shape + grammar"], [85, 0.4955, 0.5547, "C2 joint shape + grammar"], [86, 0.4955, 0.5167, "C2 joint shape + grammar"], [87, 0.4955, 0.5246, "C2 joint shape + grammar"], [88, 0.4955, 0.563, "C2 joint shape + grammar"], [89, 0.4955, 0.4955, "C2 joint shape + grammar"], [90, 0.4955, 0.5626, "C2 joint shape + grammar"], [91, 0.4955, 0.5073, "C2 joint shape + grammar"], [92, 0.4955, 0.527, "C2 joint shape + grammar"], [93, 0.4955, 0.4994, "C2 joint shape + grammar"], [94, 0.4955, 0.5182, "C2 joint shape + grammar"], [95, 0.4955, 0.525, "C2 joint shape + grammar"], [96, 0.4955, 0.4955, "C2 joint shape + grammar"], [97, 0.4955, 0.5184, "C2 joint shape + grammar"], [98, 0.4955, 0.5252, "C2 joint shape + grammar"], [99, 0.4955, 0.5831, "C2 joint shape + grammar"], [100, 0.4955, 0.4971, "C2 joint shape + grammar"], [101, 0.493, 0.493, "C2 joint shape + grammar"], [102, 0.493, 0.648, "C3 opus critic"], [103, 0.493, 0.5161, "C3 opus critic"], [104, 0.493, 0.5489, "C3 opus critic"], [105, 0.493, 0.5974, "C3 opus critic"], [106, 0.493, 0.5758, "C3 opus critic"]], "C+rules": [[0, 0.5689, 0.5689, "C4 rules as constraints: render"], [1, 0.5689, 0.5925, "C4 rules as constraints: render"], [2, 0.5689, 0.6103, "C4 rules as constraints: render"], [3, 0.5689, 0.5842, "C4 rules as constraints: render"], [4, 0.5689, 0.6103, "C4 rules as constraints: render"], [5, 0.5689, 0.6015, "C4 rules as constraints: render"], [6, 0.5689, 0.6213, "C4 rules as constraints: render"], [7, 0.5689, 0.6276, "C4 rules as constraints: render"], [8, 0.5689, 0.6034, "C4 rules as constraints: render"], [9, 0.5689, 0.5977, "C4 rules as constraints: render"], [10, 0.5689, 0.5706, "C4 rules as constraints: render"], [11, 0.5689, 0.617, "C4 rules as constraints: render"], [12, 0.537, 0.537, "C4 rules as constraints: render"], [13, 0.537, 0.5723, "C4 rules as constraints: render"], [14, 0.537, 0.5771, "C4 rules as constraints: render"], [15, 0.537, 0.5751, "C4 rules as constraints: render"], [16, 0.537, 0.5906, "C4 rules as constraints: render"], [17, 0.537, 0.5859, "C4 rules as constraints: render"], [18, 0.537, 0.6339, "C4 rules as constraints: render"], [19, 0.537, 0.5825, "C4 rules as constraints: render"], [20, 0.537, 0.6288, "C4 rules as constraints: render"], [21, 0.537, 0.5802, "C4 rules as constraints: render"], [22, 0.537, 0.5994, "C4 rules as constraints: render"], [23, 0.537, 0.6054, "C4 rules as constraints: render"], [24, 0.537, 0.5838, "C4 rules as constraints: render"], [25, 0.537, 0.537, "C4 rules as constraints: render"], [26, 0.5176, 0.5176, "C4 rules as constraints: render"], [27, 0.5176, 0.5755, "C4 rules as constraints: render"], [28, 0.5176, 0.5759, "C4 rules as constraints: render"], [29, 0.5176, 0.549, "C4 rules as constraints: render"], [30, 0.5176, 0.6003, "C4 rules as constraints: render"], [31, 0.5176, 0.5862, "C4 rules as constraints: render"], [32, 0.5176, 0.6054, "C4 rules as constraints: render"], [33, 0.5176, 0.5658, "C4 rules as constraints: render"], [34, 0.5176, 0.6133, "C4 rules as constraints: render"], [35, 0.5176, 0.5721, "C4 rules as constraints: render"], [36, 0.5176, 0.5971, "C4 rules as constraints: render"], [37, 0.5176, 0.5816, "C4 rules as constraints: render"], [38, 0.5176, 0.5864, "C4 rules as constraints: render"], [39, 0.5176, 0.597, "C4 rules as constraints: render"], [40, 0.5176, 0.5333, "C4 rules as constraints: render"]]}, "finals": {"init": {"sil": 0.295, "cham": 0.04, "kp": 0.1119, "iou_crest": 0.8626, "iou_brow": 0.9159, "iou_cheek_near": 0.6942, "iou_cheek_far": 0.7288, "iou_neck_guard": 0.4074, "parts_iou": 0.2782, "ssim": 0.1714, "ssim_crest": 0.69, "ssim_brow": 0.7, "ssim_cheek_near": 0.6395, "ssim_cheek_far": 0.5559, "ssim_neck_guard": 0.7105, "parts_ssim": 0.3408, "tone": 0.1101, "style": 0.2083, "crease": 0.0224, "straight_r": 0.8046, "straight": 0.1484, "total": 1.045, "tris": 864.0}, "start": {"sil": 0.2954, "cham": 0.0405, "kp": 0.0872, "iou_crest": 0.8767, "iou_brow": 0.9285, "iou_cheek_near": 0.5874, "iou_cheek_far": 0.6352, "iou_neck_guard": 0.5767, "parts_iou": 0.2791, "ssim": 0.1603, "ssim_crest": 0.7188, "ssim_brow": 0.7151, "ssim_cheek_near": 0.6699, "ssim_cheek_far": 0.5809, "ssim_neck_guard": 0.7027, "parts_ssim": 0.3225, "tone": 0.1026, "style": 0.2221, "crease": 0.0207, "straight_r": 0.7529, "straight": 0.0967, "total": 0.909, "tris": 864.0}, "A_geom": {"sil": 0.1045, "cham": 0.012, "kp": 0.014, "iou_crest": 0.9367, "iou_brow": 0.9585, "iou_cheek_near": 0.9324, "iou_cheek_far": 0.762, "iou_neck_guard": 0.7765, "parts_iou": 0.1268, "ssim": 0.1586, "ssim_crest": 0.7005, "ssim_brow": 0.7408, "ssim_cheek_near": 0.6754, "ssim_cheek_far": 0.5343, "ssim_neck_guard": 0.7175, "parts_ssim": 0.3263, "tone": 0.1041, "style": 0.2064, "crease": 0.0209, "straight_r": 0.7466, "straight": 0.0904, "total": 0.5352, "tris": 7160.0}, "A": {"sil": 0.1061, "cham": 0.0126, "kp": 0.014, "iou_crest": 0.9396, "iou_brow": 0.9618, "iou_cheek_near": 0.9295, "iou_cheek_far": 0.758, "iou_neck_guard": 0.7963, "parts_iou": 0.1229, "ssim": 0.1604, "ssim_crest": 0.7028, "ssim_brow": 0.7419, "ssim_cheek_near": 0.6671, "ssim_cheek_far": 0.5365, "ssim_neck_guard": 0.7044, "parts_ssim": 0.3295, "tone": 0.1037, "style": 0.1891, "crease": 0.0204, "straight_r": 0.4728, "straight": 0.1834, "total": 0.6187, "tris": 5326.0}, "B": {"sil": 0.3289, "cham": 0.0438, "kp": 0.0806, "iou_crest": 0.8599, "iou_brow": 0.9342, "iou_cheek_near": 0.529, "iou_cheek_far": 0.6019, "iou_neck_guard": 0.6491, "parts_iou": 0.2852, "ssim": 0.16, "ssim_crest": 0.7332, "ssim_brow": 0.7243, "ssim_cheek_near": 0.6703, "ssim_cheek_far": 0.5748, "ssim_neck_guard": 0.7125, "parts_ssim": 0.317, "tone": 0.094, "style": 0.2153, "crease": 0.0241, "straight_r": 0.7158, "straight": 0.0596, "total": 0.8811, "tris": 932.0}, "C": {"sil": 0.089, "cham": 0.0136, "kp": 0.0142, "iou_crest": 0.9268, "iou_brow": 0.9567, "iou_cheek_near": 0.9436, "iou_cheek_far": 0.8701, "iou_neck_guard": 0.7925, "parts_iou": 0.1021, "ssim": 0.1522, "ssim_crest": 0.7466, "ssim_brow": 0.7365, "ssim_cheek_near": 0.6578, "ssim_cheek_far": 0.5529, "ssim_neck_guard": 0.7112, "parts_ssim": 0.319, "tone": 0.0924, "style": 0.1898, "crease": 0.0206, "straight_r": 0.645, "straight": 0.0112, "total": 0.4314, "tris": 920.0}, "C_eye": {"sil": 0.1215, "cham": 0.024, "kp": 0.0416, "iou_crest": 0.9058, "iou_brow": 0.9372, "iou_cheek_near": 0.92, "iou_cheek_far": 0.8625, "iou_neck_guard": 0.7871, "parts_iou": 0.1175, "ssim": 0.1551, "ssim_crest": 0.7594, "ssim_brow": 0.7237, "ssim_cheek_near": 0.6465, "ssim_cheek_far": 0.5705, "ssim_neck_guard": 0.7115, "parts_ssim": 0.3177, "tone": 0.0921, "style": 0.2332, "crease": 0.0228, "straight_r": 0.6697, "straight": 0.0135, "total": 0.576, "tris": 980.0}, "C_rules": {"sil": 0.0967, "cham": 0.0198, "kp": 0.0177, "iou_crest": 0.9284, "iou_brow": 0.9498, "iou_cheek_near": 0.9351, "iou_cheek_far": 0.8415, "iou_neck_guard": 0.8451, "parts_iou": 0.1, "ssim": 0.1607, "ssim_crest": 0.712, "ssim_brow": 0.7064, "ssim_cheek_near": 0.6388, "ssim_cheek_far": 0.5609, "ssim_neck_guard": 0.7152, "parts_ssim": 0.3333, "tone": 0.0934, "style": 0.2007, "crease": 0.0199, "straight_r": 0.6287, "straight": 0.0274, "total": 0.4727, "tris": 980.0}}, "round1": {"A_geom": {"sil": 0.0956, "cham": 0.0138, "kp": 0.0052, "iou_crest": 0.9434, "iou_brow": 0.9608, "iou_cheek_near": 0.9582, "iou_cheek_far": 0.768, "iou_neck_guard": 0.8571, "parts_iou": 0.1025, "ssim": 0.1724, "ssim_crest": 0.7146, "ssim_brow": 0.6853, "ssim_cheek_near": 0.6671, "ssim_cheek_far": 0.5459, "ssim_neck_guard": 0.7287, "parts_ssim": 0.3317, "tone": 0.1051, "style": 0.1794, "crease": 0.0195, "total": 0.3939, "tris": 7160.0}, "A": {"sil": 0.1013, "cham": 0.0156, "kp": 0.0052, "iou_crest": 0.9372, "iou_brow": 0.9542, "iou_cheek_near": 0.9584, "iou_cheek_far": 0.7722, "iou_neck_guard": 0.8845, "parts_iou": 0.0987, "ssim": 0.1911, "ssim_crest": 0.6402, "ssim_brow": 0.66, "ssim_cheek_near": 0.6452, "ssim_cheek_far": 0.5161, "ssim_neck_guard": 0.6984, "parts_ssim": 0.368, "tone": 0.1129, "style": 0.0544, "crease": 0.0154, "total": 0.3328, "tris": 3380.0}}, "critic": {"cost_usd": 0.897}}</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const F = D.finals;
+const V = [
+  {k:'A', img:'A.jpg', name:'A · geometry-first', c:'--s1'},
+  {k:'B', img:'B.jpg', name:'B · grammar only', c:'--s2'},
+  {k:'C', img:'C.jpg', name:'C · hybrid', c:'--s3'},
+  {k:'C_rules', img:'C_rules.jpg', name:'C + rules', c:'--s4'},
+];
+// tiles
+const tiles = document.getElementById('tiles');
+const mk = (img, name, score, win) => `<figure class="tile${win?' win':''}"><img src="${img}" alt="${name}" loading="lazy"><figcaption><b>${name}</b><span class="num">${score}</span></figcaption></figure>`;
+tiles.innerHTML = mk('ref.jpg','Reference','target') + V.map(v => mk(v.img, v.name, F[v.k].total.toFixed(3), v.k==='C')).join('');
+// table
+const rows = [['Start (shared pose)','start'],['A · geometry, smooth','A_geom'],['A · + paper filter','A'],['B · grammar only','B'],['C · hybrid','C'],['C · Opus edits applied','C_eye'],['C + rules','C_rules']];
+const cols = [['Total','total',3],['IoU',x=>1-x.sil,3],['Landmarks px',x=>x.kp*1024,0],['Part IoU',x=>1-x.parts_iou,3],['Straight','straight',3],['Style','style',3],['Crease','crease',4],['Tone','tone',3]];
+document.getElementById('tbl').innerHTML = '<tr><th>Variant</th>' + cols.map(c=>`<th>${c[0]}</th>`).join('') + '</tr>' +
+  rows.map(([n,k]) => `<tr${k==='C'?' class="best"':''}><td>${n}</td>` + cols.map(c => {const v = typeof c[1]==='string'? F[k][c[1]] : c[1](F[k]); return `<td>${v.toFixed(c[2])}</td>`}).join('') + '</tr>').join('');
+// crops
+const parts = [['crest','Crest'],['brow','Brow and forehead'],['cheek_near','Near cheek guard'],['cheek_far','Far cheek guard'],['neck_guard','Neck guard']];
+document.getElementById('crops').innerHTML = '<div class="crophead"><span>Reference</span><span>A</span><span>B</span><span>C</span><span>C+rules</span></div>' +
+  parts.map(([k,n]) => `<div><div class="lab">${n}</div><img src="crop_${k}.jpg" alt="${n}: reference, A, B, C, C+rules" loading="lazy"></div>`).join('');
+// chart
+const S = [['A','A','--s1'],['B','B','--s2'],['C','C','--s3'],['C+rules','C+rules','--s4']];
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const svg = document.getElementById('svg'), tip = document.getElementById('tip');
+function draw(){
+  const W=900,H=340,L=56,R=86,T=14,B=40;
+  const all = S.flatMap(([k]) => D.render[k].map(p=>p[1]));
+  const ymin = 0.45, ymax = 1.05, xmax = Math.max(...S.map(([k])=>D.render[k].length-1));
+  const x = i => L + (W-L-R)*i/xmax, y = v => T + (H-T-B)*(ymax-Math.min(ymax,v))/(ymax-ymin);
+  let g = '';
+  for (let v=0.5; v<=1.0001; v+=0.1){ g += `<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="${css('--rule')}" stroke-width="1"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end" font-size="12" fill="${css('--muted')}" font-family="IBM Plex Mono">${v.toFixed(1)}</text>`; }
+  for (let i=0;i<=xmax;i+=20){ g += `<text x="${x(i)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${css('--muted')}" font-family="IBM Plex Mono">${i}</text>`; }
+  g += `<text x="${(L+W-R)/2}" y="${H-4}" text-anchor="middle" font-size="12" fill="${css('--ink2')}">rendered evaluations</text>`;
+  g += `<text x="14" y="${(T+H-B)/2}" transform="rotate(-90 14 ${(T+H-B)/2})" text-anchor="middle" font-size="12" fill="${css('--ink2')}">loss (lower is better)</text>`;
+  const labelY = [];
+  S.forEach(([k,n,c]) => {
+    const pts = D.render[k];
+    g += `<polyline fill="none" stroke="${css(c)}" stroke-width="2" stroke-linejoin="round" points="${pts.map(p=>x(p[0])+','+y(p[1])).join(' ')}"/>`;
+    const last = pts[pts.length-1];
+    g += `<circle cx="${x(last[0])}" cy="${y(last[1])}" r="4" fill="${css(c)}" stroke="${css('--panel')}" stroke-width="2"/>`;
+    let ly = y(last[1])+4; while (labelY.some(q=>Math.abs(q-ly)<14)) ly += 14; labelY.push(ly);
+    g += `<text x="${x(last[0])+8}" y="${ly}" font-size="12" fill="${css('--ink')}" font-family="IBM Plex Sans">${n} ${last[1].toFixed(3)}</text>`;
+  });
+  g += `<line id="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="${css('--muted')}" stroke-width="1" visibility="hidden"/>`;
+  svg.innerHTML = g;
+  document.getElementById('legend').innerHTML = S.map(([k,n,c]) => `<span style="--c:var(${c})">${n}</span>`).join('');
+  svg.onmousemove = e => {
+    const r = svg.getBoundingClientRect(); const px = (e.clientX - r.left) * W / r.width;
+    const i = Math.round((px - L) / (W-L-R) * xmax); if (i<0||i>xmax){tip.hidden=true;return}
+    const xh = svg.getElementById ? svg.querySelector('#xh') : null; xh.setAttribute('x1',x(i)); xh.setAttribute('x2',x(i)); xh.setAttribute('visibility','visible');
+    tip.innerHTML = `eval ${i}<br>` + S.map(([k,n]) => { const p = D.render[k][i]; return p ? `${n}: ${p[1].toFixed(3)} <span style="opacity:.7">${p[3]}</span>` : '' }).filter(Boolean).join('<br>');
+    tip.hidden = false; const cr = document.getElementById('chart').getBoundingClientRect();
+    let lx = e.clientX - cr.left + 12; if (lx > cr.width - 260) lx = e.clientX - cr.left - 270; tip.style.left = lx + 'px'; tip.style.top = (e.clientY - cr.top + 10) + 'px';
+  };
+  svg.onmouseleave = () => { tip.hidden = true; const xh = svg.querySelector('#xh'); if (xh) xh.setAttribute('visibility','hidden'); };
+}
+draw();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+new MutationObserver(draw).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+</script>
+
+</body></html>

@@ -1,0 +1,27 @@
+{
+ "source": "docs/music/MUSIC_BIBLE.md section 1",
+ "bpm": 124,
+ "key": "D major",
+ "meter": "4/4, 3+3+2",
+ "palette": "glockenspiel lead, handbell chords, plucked strings (second pass), bouncing bass, handclaps and soft kick (second pass), shaker, shimmer pad",
+ "motifs": [
+  {
+   "id": "hook-late",
+   "title": "Later hook (four phrases)",
+   "contour": "D-E-F#-A | B-A-F#-E | D-F#-A-B | A-E-F#-D",
+   "harmony": "D6/9 -> G6 -> A(add9) -> D6/9",
+   "audio": "hook-late.mp3",
+   "midi": "hook-late.mid",
+   "duration_s": 19.92
+  },
+  {
+   "id": "early-sep13",
+   "title": "Early motif (13 Sept, with the G-sharp)",
+   "contour": "D-F#-A-B-G#-A | F#-E-D",
+   "harmony": "D6/9 | Bm7 | Gmaj7 | A(add9) | D/F# | Gmaj7 | Em7-A | D6/9",
+   "audio": "early-sep13.mp3",
+   "midi": "early-sep13.mid",
+   "duration_s": 19.92
+  }
+ ]
+}

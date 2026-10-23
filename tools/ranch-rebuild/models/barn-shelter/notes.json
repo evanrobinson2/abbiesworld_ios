@@ -1,0 +1,33 @@
+{
+ "what_i_did": [
+  ["Orientation", "Gable end with the open doorway faces -Y; the door leaf hangs on the right jamb, swung outward to lie 10 degrees off the front wall; the back gable is closed."],
+  ["Views", "All three sheet views are scored (make_views.py cuts the ground band at the stone base and clips the lumber pile the sheet drew beside the corners). The sheet's middle view is not side-on: it is a 3/4 from the front right, so check.py renders it orthographically from 28 deg yaw / 8 deg up instead of using the harness side camera. The hero is scored from its own direction (front gable on the right, -X side on the left, 38 deg yaw, 2 deg up, harness lens) against views/hero.png with the ground shadow streak removed. Angles were grid-calibrated in round 4."],
+  ["Massing", "3.8 x 4.9 m walls, tie beams at 2.6 m, 40 deg roof, 0.42 m side eaves, 0.32 m front / 0.32 m back gable overhang, heavy ridge beam (0.34 x 0.32) overhanging the front by 0.55 m with both ends kicked up and a strut under the front end; total height about 5 m."],
+  ["Frame", "Weathered grey-brown corner posts, side and back mid posts, sills, wall plates, tie beams sticking out past the corners, a heavy lintel over 2.0 m door jambs, a collar beam above the hayloft, diagonal corner braces on every wall (knee braces on the gables, top and foot braces on the long sides), and for the frame stage principal rafters, common rafters, ridge beam and purlins."],
+  ["Craft", "Two-tone rose vertical planks at alternating depths, about 10 courses of individually laid jittered teal shingle tabs with lifted butts and a ridge cap, bargeboards, chunky jittered grey-teal footing stones with a gap and stepping stones at the doorway, a real 0.95 m deep plank-lined recess behind the doorway with a workbench (lower shelf, wood block, iron vise with a wooden jaw), a stump, and a two-rail back-wall rack of hanging saws, hammers, axes and long-handled tools; a dark hayloft opening with a trim frame and a bracketed ledge; the door leaf has ledges, a Z brace, two iron strap hinges and a latch."],
+  ["Game readiness", "6,428 triangles (budget 9k), 14 meshes, one flat material per mesh named by role (Plank_Rose, Plank_RoseDark, Plank_Interior, Plank_Shadow, Plank_Floor, Timber_Grey, Timber_Bench, Roof_Teal, Stone_Teal, Metal_Iron; Rope_String in the planned stage), no animation. Variants planned/foundation/frame/roof/complete come from the same build.py STATE groups; to_game.py installed them as buildings/shelter-*."]
+ ],
+ "good": [
+  "Front gable IoU 0.897 and back 0.852 against the sheet; the 3/4 sheet view 0.816 and the hero 0.843 from their own directions.",
+  "At small size the big teal roof, the kicked ridge beam, the dark open doorway with the bench inside, the stone base and the dark hayloft square all read.",
+  "Construction stages read as a sequence: stakes and string lines, footing with plank floor, full timber frame with rafters, roof on the open frame, finished barn."
+ ],
+ "off": [
+  "The sheet draws a taller, narrower barn than the hero (front ridge/width about 1.24 vs about 1.1). Round 1 matched the sheet (mean 0.889) but the hero fell to 0.70; the final proportions favour the hero, so the front and back views lose a few points at the side walls and apex.",
+  "The hero's ridge beam bows along its length; mine is three straight segments with raised ends.",
+  "The hero shows the door leaf in the plane of the opening; per the brief it is hung open outward to the right, nearly flat against the front wall.",
+  "The hanging tools are simple sticks and blocks and only read as a busy rack at game size.",
+  "Stones are plain jittered blocks, not rounded cobbles.",
+  "Scores come from check.py (custom 3/4 and hero cameras, calibrated on the model), so they are a guide; the plain harness score (side camera side-on) is 0.861 mean."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build: 4.0 x 4.4 m, tie beam 2.85 m, 42 deg, doorway recess, bench, tool rack, hayloft, door leaf; views made (all three sheet views; side scored as a 3/4).", "mean_iou": 0.889, "hero_iou": 0.700},
+  {"round": 2, "change": "Swept eave/pitch/depth against hero + sheet: lower and deeper (tie beam 2.6, 40 deg, 4.6 m deep), lintel down to 2.05 m; recalibrated the 3/4 and hero cameras.", "mean_iou": 0.833, "hero_iou": 0.827},
+  {"round": 3, "change": "Heavier ridge beam kicked up at both ends with a 0.55 m front overhang, shorter tie-beam ends, more back overhang, leaf swung closer to the wall, wider footing, stepping stones.", "mean_iou": 0.836, "hero_iou": 0.824},
+  {"round": 4, "change": "Narrower and deeper plan (3.8 x 4.9), 2.0 m doorway and 0.9 m leaf, greyer timber; recalibrated cameras (3/4 at 28 deg, hero at 38 deg).", "mean_iou": 0.857, "hero_iou": 0.846},
+  {"round": 5, "change": "Front braces shortened clear of the door jambs, lighter recess planks, thicker tool handles, deeper hayloft ledge; a sweep of gable overhang, ridge kick, footing and pitch found no further gain.", "mean_iou": 0.857, "hero_iou": 0.846},
+  {"round": 6, "change": "Final 768 px / 48 sample render and score.", "mean_iou": 0.855, "hero_iou": 0.843}
+ ],
+ "moving_parts": "None (the game poses buildings itself); construction stages are exported as variants/planned, foundation, frame, roof, complete.",
+ "creative_additions": "A strut under the ridge-beam overhang, stepping stones at the doorway, a stump beside the bench, a latch on the leaf, and a squaring diagonal in the planned stage's string lines."
+}

@@ -1,0 +1,1 @@
+const {test}=require('node:test'); const {spawnSync}=require('node:child_process'); const path=require('node:path'); test('Tile Game Mechanic packaged invariants',()=>{const r=spawnSync(process.execPath,['--test',path.join(__dirname,'tile-game-invariants.mjs'),path.join(__dirname,'tile-game-inertia.mjs')],{encoding:'utf8'});if(r.status!==0)throw Error(r.stdout+r.stderr);});

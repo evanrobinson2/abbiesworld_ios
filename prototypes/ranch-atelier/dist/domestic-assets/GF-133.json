@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-133",
+  "name": "Capped dry fuel storage alcove",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Keep processing fuel sheltered beside a working hearth.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-133",
+  "biome": "garden-farm",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 22,
+    "triangles": 776,
+    "bounds_min": [
+      -0.675000011920929,
+      -0.41499999165534973,
+      0.0
+    ],
+    "bounds_max": [
+      0.675000011920929,
+      0.41499999165534973,
+      0.9750000238418579
+    ],
+    "dimensions_m": [
+      1.35,
+      0.83,
+      0.975
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "fuel-storage",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "stack",
+      "retrieve",
+      "clean"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "access",
+        "position_blender_m": [
+          0.0,
+          -0.800000011920929,
+          0.0
+        ],
+        "role": "access"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for garden-farm",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "stocked",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "depleted",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "damp",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "restocked",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Keep processing fuel sheltered beside a working hearth. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See build_GF_133(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/batch_garden_14.py",
+    "entry_point": "build_GF_133",
+    "source_sha256": "f6eef09fa0c642a1d505ddec31f2bd168b726bbf52c5ba9d04294389d7ba641f",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- garden-farm batch_garden_14.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "GF-133"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: coherent geometry, readable silhouette and material details; static prototype",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: coherent geometry, readable silhouette and material details; static prototype"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-133.glb",
+    "sha256": "60e3bea16c2ce6a83cd42fa0884d6936e5ca5f989bb764e33f7a9a901bebd362",
+    "bytes": 48252
+  }
+}

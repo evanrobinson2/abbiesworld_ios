@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RI-007",
+  "name": "Ship systems engineer",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocketship-interior",
+  "batch": 1,
+  "category": "animate",
+  "intent": "Represent a crew engineer inspecting equipment with a hand probe.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-interior/ri-007",
+  "biome": "rocketship-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 24,
+    "triangles": 1012,
+    "bounds_min": [
+      -0.3849869966506958,
+      -0.27000001072883606,
+      0.0
+    ],
+    "bounds_max": [
+      0.41452455520629883,
+      0.2010384052991867,
+      1.600000023841858
+    ],
+    "dimensions_m": [
+      0.79951,
+      0.47104,
+      1.6
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "ship-engineer",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "walk",
+      "inspect",
+      "service",
+      "rest"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "left-hand",
+        "position_blender_m": [
+          -0.25,
+          -0.23000000417232513,
+          0.8600000143051147
+        ],
+        "role": "left-hand"
+      },
+      {
+        "id": "right-hand",
+        "position_blender_m": [
+          0.36000001430511475,
+          -0.23000000417232513,
+          1.1699999570846558
+        ],
+        "role": "right-hand"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "working",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "inspecting",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "resting",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "injured",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "deceased",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Represent a crew engineer inspecting equipment with a hand probe. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See engineer(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-interior/batch_rocket_interior.py",
+    "entry_point": "engineer",
+    "source_sha256": "1a50ca93954f9acebd495f308fa094a17f866c3ead457bda637408ac8b65e94c",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-interior batch_rocket_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RI-007"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RI-007.glb",
+    "sha256": "5d9b63b9867f078cb8ae05d6b1e726211460508780e5fa839ed5c5647375d41c",
+    "bytes": 74844
+  }
+}

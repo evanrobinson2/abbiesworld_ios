@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "seller-whimsical",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical chibi produce seller, a big round head, rosy cheeks, a giant floppy sun hat with a carrot tucked in, an oversized basket overflowing with vegetables, a patched apron, a cheerful pose, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "383ec00b-e6d8-40e4-89f6-dcc1e4bc50fe",
+      "grid_url": "https://www.midjourney.com/jobs/383ec00b-e6d8-40e4-89f6-dcc1e4bc50fe?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "883b1233-d3f4-4340-b7c2-bf309f30f05f",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical chibi produce seller, a big round head, rosy cheeks, a giant floppy sun hat with a carrot tucked in, an oversized basket overflowing with vegetables, a patched apron, a cheerful pose, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "bab701da-7f43-46de-8dad-d3913813d7e3",
+      "grid_url": "https://www.midjourney.com/jobs/bab701da-7f43-46de-8dad-d3913813d7e3?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "a8b2f692-2c6d-428c-b277-a91801d65c3e",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "91195396d3c1d25a210805523aac5ed566a6c789dc6ad2445fc724642fdbf9fc",
+      "bytes": 3599259,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/883b1233-d3f4-4340-b7c2-bf309f30f05f/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "bcd723c01aa98d32115af859d33e38e9c5da9c6927883d922ed560cc975f2144",
+      "bytes": 4342850,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/a8b2f692-2c6d-428c-b277-a91801d65c3e/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "b5762616677eeccfc734e4c38c3154af7a146442ec29a08d6ccba34e28be7551",
+      "bytes": 1404919,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "4cb3bed585b4a6171c3bee5db21c20356b44fcc065f20fc2c34332902caaf1d3",
+      "bytes": 1422156,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "a896f9857ae7ac1faf3b31b7ca219e210305903ffaff55ad59ca65f84fe3d593",
+      "bytes": 1427938,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 1 is a full figure with feet visible, carrot in the hat, overflowing basket and patched apron. Turnaround pick 2 has a square front, a side and a back view of one consistent character."
+}

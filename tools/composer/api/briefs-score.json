@@ -1,0 +1,29 @@
+{
+  "about": "Briefs that follow Abbie's World's existing score: the six Suno songs on the iOS World 2 playlist (Bright New Day, Cliffside Morning, Family Adventure, Joyful Bounce, We'll Make a Way, Working Song) and Abbie's World Reimagined. Measured 2026-10-22 (librosa): mostly 129-136 bpm, D major / G major (A minor, D minor for two), bright mixes (spectral centroid 1.5-3 kHz), light percussion (7-23% percussive energy), a strong bass line. Reimagined is the slow exception: D minor, 89 bpm, beat-heavy lo-fi. Style only: the original audio is never sent to any API.",
+  "palette": {
+    "positive": ["upbeat family adventure soundtrack", "bright, warm and joyful", "catchy instrumental hook", "light, bouncy percussion", "strong melodic bass line", "polished modern production", "instrumental"],
+    "negative": ["vocals", "lyrics", "singing", "humming", "dark", "aggressive", "heavy drums", "EDM drop", "dubstep", "distorted guitar", "cheesy", "kazoo", "8-bit"]
+  },
+  "cues": [
+    {"id": "ranch-morning", "kind": "bed", "title": "Ranch Morning", "lufs": -18,
+     "styles": ["D major", "130 bpm", "sunny morning on a family farm", "bright new day feeling", "gentle build"],
+     "sections": [["Intro", ["light and open"], 20000], ["Hook", ["the main hook enters"], 40000], ["Lift", ["fuller, happy"], 40000], ["Outro", ["eases back so it loops"], 20000]]},
+    {"id": "ranch-workday", "kind": "bed", "title": "Ranch Workday", "lufs": -18,
+     "styles": ["G major", "132 bpm", "busy working song", "chores getting done together", "bouncy groove"],
+     "sections": [["Groove", ["groove sets in"], 20000], ["Hook", ["playful hook"], 40000], ["Variation", ["call and answer between instruments"], 40000], ["Turnaround", ["back to the groove so it loops"], 20000]]},
+    {"id": "ranch-night", "kind": "bed", "title": "Ranch Night", "lufs": -18,
+     "styles": ["D major", "88 bpm", "the same soundtrack at bedtime", "soft and cosy", "laid-back beat", "warm lo-fi texture"],
+     "sections": [["Settle", ["soft and sparse"], 24000], ["Hook", ["the hook played gently"], 36000], ["Drift", ["dreamy"], 36000], ["Fade", ["sparse again so it loops"], 24000]]},
+    {"id": "wonder", "kind": "bed", "title": "Wonder", "lufs": -18,
+     "styles": ["D major", "129 bpm", "family adventure into a magical new world", "sense of discovery", "soaring hook"],
+     "sections": [["Arrival", ["sparkling, curious"], 20000], ["Explore", ["adventure groove"], 40000], ["Soar", ["the biggest, happiest part"], 40000], ["Settle", ["back down so it loops"], 20000]]},
+    {"id": "sting-arrival", "kind": "sting", "title": "Arrival", "lufs": -16, "styles": ["D major", "bright flourish into a big happy chord", "you have arrived somewhere wonderful"], "sections": [["Sting", ["short, complete, rings out"], 5000]]},
+    {"id": "sting-teleport", "kind": "sting", "title": "Teleport", "lufs": -16, "styles": ["D major", "rising sparkly whoosh made of music", "lifts off then lands"], "sections": [["Sting", ["short, complete"], 4000]]},
+    {"id": "sting-reveal", "kind": "sting", "title": "Reveal", "lufs": -16, "styles": ["D major", "tiny pause then a bright burst", "ta-da"], "sections": [["Sting", ["short, complete"], 4000]]},
+    {"id": "sting-victory", "kind": "sting", "title": "Victory", "lufs": -16, "styles": ["D major", "joyful celebration", "big finish on the tonic"], "sections": [["Sting", ["short fanfare, complete"], 6000]]},
+    {"id": "sting-discovery", "kind": "sting", "title": "Discovery", "lufs": -16, "styles": ["D major", "curious little question and answer", "you found something"], "sections": [["Sting", ["very short"], 3000]]},
+    {"id": "sting-small-win", "kind": "sting", "title": "Small Win", "lufs": -16, "styles": ["D major", "tiny happy flourish", "well done"], "sections": [["Sting", ["very short"], 3000]]},
+    {"id": "interlude-world-intro", "kind": "interlude", "title": "World Intro", "lufs": -17, "styles": ["D major", "130 bpm", "title card", "the soundtrack's main hook, stated proudly"], "sections": [["Intro", ["build"], 6000], ["Hook", ["full hook"], 14000], ["Cadence", ["clear ending"], 5000]]},
+    {"id": "interlude-night-falls", "kind": "interlude", "title": "Night Falls", "lufs": -17, "styles": ["D major", "day turning to night", "slows and softens", "cosy"], "sections": [["Dusk", ["from bright to hushed"], 10000], ["Night", ["settles on a soft chord"], 6000]]}
+  ]
+}

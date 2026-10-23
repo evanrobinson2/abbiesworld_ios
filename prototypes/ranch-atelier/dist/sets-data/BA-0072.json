@@ -1,0 +1,45 @@
+{
+  "id": "aw.ranch.asset.ba-0072",
+  "name": "Cart rutted market tile",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 3,
+    "triangles": 60,
+    "bounds_min": [
+      -2.0,
+      -2.002448558807373,
+      -0.14000000059604645
+    ],
+    "bounds_max": [
+      2.0,
+      2.002797842025757,
+      0.003000000026077032
+    ],
+    "dimensions_m": [
+      4.0,
+      4.0052,
+      0.143
+    ],
+    "material_slots": [
+      "Path",
+      "Earth"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Path",
+    "Earth"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0072",
+  "intent": "Parallel wheel tracks that connect to departing roads.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0072",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

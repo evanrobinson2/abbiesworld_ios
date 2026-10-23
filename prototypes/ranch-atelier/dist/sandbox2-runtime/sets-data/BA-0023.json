@@ -1,0 +1,44 @@
+{
+  "id": "aw.ranch.asset.ba-0023",
+  "name": "Lidded reed merchandise hamper",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 57,
+    "triangles": 1548,
+    "bounds_min": [
+      -0.34767767786979675,
+      -0.20900000631809235,
+      0.0
+    ],
+    "bounds_max": [
+      0.34767767786979675,
+      0.717677652835846,
+      0.3799999952316284
+    ],
+    "dimensions_m": [
+      0.6954,
+      0.9267,
+      0.38
+    ],
+    "material_slots": [
+      "Reed"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 1
+  },
+  "materials": [
+    "Reed"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0023",
+  "intent": "A rectangular woven container with a separate fitted lid.",
+  "family": "Trade containers",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0023",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,2510 @@
+{
+  "version": 1,
+  "world": "Abbie’s World",
+  "project": "Abbie’s Ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "sets": [
+    {
+      "id": "SET-RANCH",
+      "slug": "ranch",
+      "title": "Ranch",
+      "intent": "A home, a clearing, and the life around it.",
+      "parent": null,
+      "viewer": "ranch",
+      "preview": "/sets-media/ranch.png",
+      "pieces": [
+        {
+          "id": "R-01",
+          "intent": "A clearing to call home",
+          "family": "Ranch"
+        },
+        {
+          "id": "R-02",
+          "intent": "Barn and sheltered work",
+          "family": "Ranch"
+        },
+        {
+          "id": "R-03",
+          "intent": "Old cedar · shade and gathering",
+          "family": "Ranch"
+        },
+        {
+          "id": "R-04",
+          "intent": "Woodland edge · shelter and habitat",
+          "family": "Ranch"
+        },
+        {
+          "id": "R-05",
+          "intent": "Stream · water through the land",
+          "family": "Ranch"
+        },
+        {
+          "id": "R-06",
+          "intent": "Footpath and bridge · connect the clearing",
+          "family": "Ranch"
+        },
+        {
+          "id": "R-07",
+          "intent": "Garden beds · grow food",
+          "family": "Ranch"
+        },
+        {
+          "id": "R-08",
+          "intent": "Fence · mark the paddock",
+          "family": "Ranch"
+        }
+      ]
+    },
+    {
+      "id": "SET-MARKET",
+      "slug": "market",
+      "title": "Market",
+      "intent": "Where the ranch meets the wider world.",
+      "parent": null,
+      "viewer": "glb",
+      "preview": "/sets-media/market.png",
+      "model": "/sets-media/market.glb",
+      "pieces": [
+        {
+          "id": "BA-0001",
+          "intent": "Open timber stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0002",
+          "intent": "Cloth shade stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0003",
+          "intent": "Reed screen stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0004",
+          "intent": "Low ground selling shelter",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0005",
+          "intent": "Double bay market shelter",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0006",
+          "intent": "Folded traveling stall frame",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0007",
+          "intent": "Market canopy corner",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0008",
+          "intent": "Market canopy end panel",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0009",
+          "intent": "Stall post socket stone",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0010",
+          "intent": "Canopy rope anchor",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0011",
+          "intent": "Broad plank selling counter",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0012",
+          "intent": "Low woven selling table",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0013",
+          "intent": "Stepped pottery display",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0014",
+          "intent": "Hanging cloth display rail",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0015",
+          "intent": "Upright wheel display stand",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0016",
+          "intent": "Tilted produce tray stand",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0017",
+          "intent": "Bronze goods display board",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0018",
+          "intent": "Vendor sitting stool",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0019",
+          "intent": "Merchant document table",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0020",
+          "intent": "Under counter storage rack",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0021",
+          "intent": "Wide shallow produce basket",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0022",
+          "intent": "Tall grain carrying basket",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0023",
+          "intent": "Lidded reed merchandise hamper",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0024",
+          "intent": "Handled ceramic market jar",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0025",
+          "intent": "Small stoppered oil flask",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0026",
+          "intent": "Woven grain sack",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0027",
+          "intent": "Folded cloth parcel",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0028",
+          "intent": "Rope bound timber merchandise box",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0029",
+          "intent": "Divided small goods tray",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0030",
+          "intent": "Shoulder carrying basket",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0031",
+          "intent": "Portable beam balance",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0032",
+          "intent": "Balance support stand",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0033",
+          "intent": "Stone weight set",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0034",
+          "intent": "Grain capacity measure",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0035",
+          "intent": "Grain leveling stick",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0036",
+          "intent": "Liquid measuring cup",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0037",
+          "intent": "Merchant counting pebble tray",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0038",
+          "intent": "Clay sale record tablet",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0039",
+          "intent": "Merchant seal and cord",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0040",
+          "intent": "Sealed clay parcel tag",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0041",
+          "intent": "Mixed garden produce display",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0042",
+          "intent": "Grain sample display",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0043",
+          "intent": "Flatbread selling tray",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0044",
+          "intent": "Fresh cheese selling board",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0045",
+          "intent": "Dried fruit display",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0046",
+          "intent": "Fresh fish selling mat",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0047",
+          "intent": "Salt mound selling tray",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0048",
+          "intent": "Onion and garlic hanging bundle",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0049",
+          "intent": "Leafy herb selling bundles",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0050",
+          "intent": "Prepared food serving station",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0051",
+          "intent": "Pottery merchant assortment",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0052",
+          "intent": "Undyed cloth merchant assortment",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0053",
+          "intent": "Yarn skein display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0054",
+          "intent": "Basket seller nested stack",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0055",
+          "intent": "Leather strap seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0056",
+          "intent": "Sandal seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0057",
+          "intent": "Carpentry offcut sample display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0058",
+          "intent": "Cart wheel seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0059",
+          "intent": "Bronze tool seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0060",
+          "intent": "Bead merchant display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0061",
+          "intent": "Communal drinking water station",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0062",
+          "intent": "Pack animal tether station",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0063",
+          "intent": "Market animal watering trough",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0064",
+          "intent": "Cargo unloading platform",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0065",
+          "intent": "Porter carrying pole",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0066",
+          "intent": "Vendor handwashing station",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0067",
+          "intent": "Market sweeping kit",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0068",
+          "intent": "Goods repair mat",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0069",
+          "intent": "Lost goods keeping shelf",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0070",
+          "intent": "Market steward shade shelter",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0071",
+          "intent": "Packed earth market tile",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0072",
+          "intent": "Cart rutted market tile",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0073",
+          "intent": "Market drainage edge",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0074",
+          "intent": "Market puddle depression",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0075",
+          "intent": "Trampled straw ground scatter",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0076",
+          "intent": "Pottery sherd ground scatter",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0077",
+          "intent": "Hoof print ground patch",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0078",
+          "intent": "Market footpath junction",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0079",
+          "intent": "Stone edged market tree bed",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0080",
+          "intent": "Raised market gathering step",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0081",
+          "intent": "Ranch produce seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0082",
+          "intent": "Traveling wheel seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0083",
+          "intent": "Village pottery seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0084",
+          "intent": "Cloth and yarn seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0085",
+          "intent": "Bronze goods trader",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0086",
+          "intent": "River fish seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0087",
+          "intent": "Market porter",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0088",
+          "intent": "Household shopper",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0089",
+          "intent": "Older market regular",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0090",
+          "intent": "Child accompanying a shopper",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0091",
+          "intent": "Opening market setup",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0092",
+          "intent": "Completed sale handoff",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0093",
+          "intent": "Wheel inquiry scene",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0094",
+          "intent": "New caravan arrival",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0095",
+          "intent": "Fresh river delivery",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0096",
+          "intent": "Quiet midday shade gathering",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0097",
+          "intent": "Spilled grain cleanup",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0098",
+          "intent": "Disputed measure scene",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0099",
+          "intent": "Rain covered market goods",
+          "family": "Market storytelling"
+        },
+        {
+          "id": "BA-0100",
+          "intent": "Closing market pack down",
+          "family": "Market storytelling"
+        }
+      ]
+    },
+    {
+      "id": "BA-0091",
+      "slug": "market/ba-0091",
+      "title": "Opening market setup",
+      "intent": "A folded stall, stacked furniture, and partially unpacked goods.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0091.png",
+      "model": "/sets-media/BA-0091.glb",
+      "pieces": [
+        {
+          "id": "BA-0006",
+          "intent": "Folded traveling stall frame",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0011",
+          "intent": "Broad plank selling counter",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0023",
+          "intent": "Lidded reed merchandise hamper",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0028",
+          "intent": "Rope bound timber merchandise box",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0081",
+          "intent": "Ranch produce seller",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "BA-0092",
+      "slug": "market/ba-0092",
+      "title": "Completed sale handoff",
+      "intent": "Seller and shopper positions with a removable purchase parcel.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0092.png",
+      "model": "/sets-media/BA-0092.glb",
+      "pieces": [
+        {
+          "id": "BA-0002",
+          "intent": "Cloth shade stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0011",
+          "intent": "Broad plank selling counter",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0027",
+          "intent": "Folded cloth parcel",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0041",
+          "intent": "Mixed garden produce display",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0081",
+          "intent": "Ranch produce seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0088",
+          "intent": "Household shopper",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "BA-0093",
+      "slug": "market/ba-0093",
+      "title": "Wheel inquiry scene",
+      "intent": "Wheel seller, customer position, display wheel, and a route pointing toward the workshop.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0093.png",
+      "model": "/sets-media/BA-0093.glb",
+      "pieces": [
+        {
+          "id": "BA-0001",
+          "intent": "Open timber stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0057",
+          "intent": "Carpentry offcut sample display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0058",
+          "intent": "Cart wheel seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0082",
+          "intent": "Traveling wheel seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0088",
+          "intent": "Household shopper",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "BA-0094",
+      "slug": "market/ba-0094",
+      "title": "New caravan arrival",
+      "intent": "Arrival staging with cargo space and reusable traveler attachment points.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0094.png",
+      "model": "/sets-media/BA-0094.glb",
+      "pieces": [
+        {
+          "id": "BA-0023",
+          "intent": "Lidded reed merchandise hamper",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0026",
+          "intent": "Woven grain sack",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0028",
+          "intent": "Rope bound timber merchandise box",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0062",
+          "intent": "Pack animal tether station",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0085",
+          "intent": "Bronze goods trader",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0087",
+          "intent": "Market porter",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "BA-0095",
+      "slug": "market/ba-0095",
+      "title": "Fresh river delivery",
+      "intent": "Wet baskets, delivery space, and a path leading toward the landing.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0095.png",
+      "model": "/sets-media/BA-0095.glb",
+      "pieces": [
+        {
+          "id": "BA-0024",
+          "intent": "Handled ceramic market jar",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0046",
+          "intent": "Fresh fish selling mat",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0064",
+          "intent": "Cargo unloading platform",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0086",
+          "intent": "River fish seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0087",
+          "intent": "Market porter",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "BA-0096",
+      "slug": "market/ba-0096",
+      "title": "Quiet midday shade gathering",
+      "intent": "Seats and resting positions under a shared canopy.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0096.png",
+      "model": "/sets-media/BA-0096.glb",
+      "pieces": [
+        {
+          "id": "BA-0005",
+          "intent": "Double bay market shelter",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0018",
+          "intent": "Vendor sitting stool",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0061",
+          "intent": "Communal drinking water station",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0080",
+          "intent": "Raised market gathering step",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0088",
+          "intent": "Household shopper",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0089",
+          "intent": "Older market regular",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0090",
+          "intent": "Child accompanying a shopper",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "BA-0097",
+      "slug": "market/ba-0097",
+      "title": "Spilled grain cleanup",
+      "intent": "A spilled sack, grain scatter, scoop, and worker attachment point.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0097.png",
+      "model": "/sets-media/BA-0097.glb",
+      "pieces": [
+        {
+          "id": "BA-0026",
+          "intent": "Woven grain sack",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0034",
+          "intent": "Grain capacity measure",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0067",
+          "intent": "Market sweeping kit",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0087",
+          "intent": "Market porter",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "BA-0098",
+      "slug": "market/ba-0098",
+      "title": "Disputed measure scene",
+      "intent": "Two customer positions, a balance, and a market steward position.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0098.png",
+      "model": "/sets-media/BA-0098.glb",
+      "pieces": [
+        {
+          "id": "BA-0011",
+          "intent": "Broad plank selling counter",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0031",
+          "intent": "Portable beam balance",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0033",
+          "intent": "Stone weight set",
+          "family": "Measures and exchange"
+        },
+        {
+          "id": "BA-0085",
+          "intent": "Bronze goods trader",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0088",
+          "intent": "Household shopper",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0089",
+          "intent": "Older market regular",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "BA-0099",
+      "slug": "market/ba-0099",
+      "title": "Rain covered market goods",
+      "intent": "Raised containers and fitted covers that show a change in weather.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0099.png",
+      "model": "/sets-media/BA-0099.glb",
+      "pieces": [
+        {
+          "id": "BA-0002",
+          "intent": "Cloth shade stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0011",
+          "intent": "Broad plank selling counter",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0023",
+          "intent": "Lidded reed merchandise hamper",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0028",
+          "intent": "Rope bound timber merchandise box",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0074",
+          "intent": "Market puddle depression",
+          "family": "Market ground"
+        }
+      ]
+    },
+    {
+      "id": "BA-0100",
+      "slug": "market/ba-0100",
+      "title": "Closing market pack down",
+      "intent": "Tied parcels, covered counters, and cleared central walking space.",
+      "parent": "market",
+      "viewer": "glb",
+      "preview": "/sets-media/BA-0100.png",
+      "model": "/sets-media/BA-0100.glb",
+      "pieces": [
+        {
+          "id": "BA-0001",
+          "intent": "Open timber stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0006",
+          "intent": "Folded traveling stall frame",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0011",
+          "intent": "Broad plank selling counter",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0027",
+          "intent": "Folded cloth parcel",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0028",
+          "intent": "Rope bound timber merchandise box",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0067",
+          "intent": "Market sweeping kit",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0084",
+          "intent": "Cloth and yarn seller",
+          "family": "Market characters"
+        }
+      ]
+    },
+    {
+      "id": "SET-VILLAGE-01",
+      "slug": "first-village",
+      "title": "First village",
+      "intent": "Cross the stream. Meet your neighbors. Find where things are made.",
+      "parent": null,
+      "viewer": "glb",
+      "preview": "/sets-media/first-village.png",
+      "model": "/sets-media/first-village.glb",
+      "metadata": "/sets-data/first-village.json",
+      "exposure": 0.95,
+      "shadows": true,
+      "pieces": [
+        {
+          "id": "FV-01",
+          "intent": "Land and connected paths",
+          "family": "Village"
+        },
+        {
+          "id": "FV-02",
+          "intent": "Stream crossing and arrival",
+          "family": "Village"
+        },
+        {
+          "id": "FV-03",
+          "intent": "Trade at the shared square",
+          "family": "Village"
+        },
+        {
+          "id": "FV-04",
+          "intent": "Shared water and shade",
+          "family": "Village"
+        },
+        {
+          "id": "FV-05",
+          "intent": "Homes around the common",
+          "family": "Village"
+        },
+        {
+          "id": "FV-06",
+          "intent": "Timber and clay workyards",
+          "family": "Village"
+        },
+        {
+          "id": "FV-07",
+          "intent": "Gardens and grain plots",
+          "family": "Village"
+        },
+        {
+          "id": "FV-08",
+          "intent": "Trees and onward paths",
+          "family": "Village"
+        },
+        {
+          "id": "BA-0001",
+          "intent": "Open timber stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0002",
+          "intent": "Cloth shade stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0003",
+          "intent": "Reed screen stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0011",
+          "intent": "Broad plank selling counter",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0013",
+          "intent": "Stepped pottery display",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0018",
+          "intent": "Vendor sitting stool",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0022",
+          "intent": "Tall grain carrying basket",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0024",
+          "intent": "Handled ceramic market jar",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0026",
+          "intent": "Woven grain sack",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0041",
+          "intent": "Mixed garden produce display",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0043",
+          "intent": "Flatbread selling tray",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0048",
+          "intent": "Onion and garlic hanging bundle",
+          "family": "Food displays"
+        },
+        {
+          "id": "BA-0051",
+          "intent": "Pottery merchant assortment",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0054",
+          "intent": "Basket seller nested stack",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0057",
+          "intent": "Carpentry offcut sample display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0058",
+          "intent": "Cart wheel seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0059",
+          "intent": "Bronze tool seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0061",
+          "intent": "Communal drinking water station",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0063",
+          "intent": "Market animal watering trough",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0068",
+          "intent": "Goods repair mat",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0080",
+          "intent": "Raised market gathering step",
+          "family": "Market ground"
+        },
+        {
+          "id": "BA-0081",
+          "intent": "Ranch produce seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0082",
+          "intent": "Traveling wheel seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0083",
+          "intent": "Village pottery seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0087",
+          "intent": "Market porter",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0088",
+          "intent": "Household shopper",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0089",
+          "intent": "Older market regular",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0090",
+          "intent": "Child accompanying a shopper",
+          "family": "Market characters"
+        }
+      ],
+      "views": [
+        {
+          "label": "1 · Arrive",
+          "target": [
+            -11,
+            1,
+            7.8
+          ],
+          "distance": 18,
+          "intent": "A bridge, a drink, and a path into the village."
+        },
+        {
+          "label": "2 · Meet",
+          "target": [
+            -1,
+            1,
+            0
+          ],
+          "distance": 24,
+          "intent": "Trade ranch produce and meet the people who live here."
+        },
+        {
+          "label": "3 · Discover",
+          "target": [
+            9,
+            1,
+            4.5
+          ],
+          "distance": 21,
+          "intent": "Follow a market wheel or pot back to its maker."
+        }
+      ]
+    },
+    {
+      "id": "BA-0001",
+      "slug": "market/ba-0001",
+      "title": "Open timber stall",
+      "intent": "Four posts and a pitched reed canopy; the reusable market stall frame.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0001.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0001.json"
+    },
+    {
+      "id": "BA-0002",
+      "slug": "market/ba-0002",
+      "title": "Cloth shade stall",
+      "intent": "Four freestanding posts, fabric canopy, and visible rope ties.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0002.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0002.json"
+    },
+    {
+      "id": "BA-0003",
+      "slug": "market/ba-0003",
+      "title": "Reed screen stall",
+      "intent": "An enclosed rear screen and open customer side for exposed market edges.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0003.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0003.json"
+    },
+    {
+      "id": "BA-0004",
+      "slug": "market/ba-0004",
+      "title": "Low ground selling shelter",
+      "intent": "A shallow canopy over a woven ground mat for small traders.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0004.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0004.json"
+    },
+    {
+      "id": "BA-0005",
+      "slug": "market/ba-0005",
+      "title": "Double bay market shelter",
+      "intent": "Two adjoining vendor bays with a shared central support.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0005.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0005.json"
+    },
+    {
+      "id": "BA-0006",
+      "slug": "market/ba-0006",
+      "title": "Folded traveling stall frame",
+      "intent": "A tied bundle of poles and folding supports ready for transport.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0006.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0006.json"
+    },
+    {
+      "id": "BA-0007",
+      "slug": "market/ba-0007",
+      "title": "Market canopy corner",
+      "intent": "A corner roof piece connecting two perpendicular stall fronts.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0007.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0007.json"
+    },
+    {
+      "id": "BA-0008",
+      "slug": "market/ba-0008",
+      "title": "Market canopy end panel",
+      "intent": "A triangular end screen that closes an exposed canopy.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0008.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0008.json"
+    },
+    {
+      "id": "BA-0009",
+      "slug": "market/ba-0009",
+      "title": "Stall post socket stone",
+      "intent": "A heavy stone footing with a fitted timber socket.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0009.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0009.json"
+    },
+    {
+      "id": "BA-0010",
+      "slug": "market/ba-0010",
+      "title": "Canopy rope anchor",
+      "intent": "A stake, tensioned rope, and knot assembly securing a stall canopy.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Stall structures",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0010.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0010.json"
+    },
+    {
+      "id": "BA-0011",
+      "slug": "market/ba-0011",
+      "title": "Broad plank selling counter",
+      "intent": "A rough plank surface on trestles with clearance for baskets below.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0011.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0011.json"
+    },
+    {
+      "id": "BA-0012",
+      "slug": "market/ba-0012",
+      "title": "Low woven selling table",
+      "intent": "A lightweight reed surface supported by short wooden legs.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0012.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0012.json"
+    },
+    {
+      "id": "BA-0013",
+      "slug": "market/ba-0013",
+      "title": "Stepped pottery display",
+      "intent": "Three shallow timber steps sized for pots of different heights.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0013.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0013.json"
+    },
+    {
+      "id": "BA-0014",
+      "slug": "market/ba-0014",
+      "title": "Hanging cloth display rail",
+      "intent": "A horizontal rail for cloth lengths with removable hanging ties.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0014.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0014.json"
+    },
+    {
+      "id": "BA-0015",
+      "slug": "market/ba-0015",
+      "title": "Upright wheel display stand",
+      "intent": "A braced wooden support that presents one cart wheel vertically.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0015.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0015.json"
+    },
+    {
+      "id": "BA-0016",
+      "slug": "market/ba-0016",
+      "title": "Tilted produce tray stand",
+      "intent": "A shallow inclined frame for removable produce trays.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0016.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0016.json"
+    },
+    {
+      "id": "BA-0017",
+      "slug": "market/ba-0017",
+      "title": "Bronze goods display board",
+      "intent": "A plain timber panel with pegs and resting ledges for tools.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0017.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0017.json"
+    },
+    {
+      "id": "BA-0018",
+      "slug": "market/ba-0018",
+      "title": "Vendor sitting stool",
+      "intent": "A low three legged stool tucked behind the selling surface.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0018.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0018.json"
+    },
+    {
+      "id": "BA-0019",
+      "slug": "market/ba-0019",
+      "title": "Merchant document table",
+      "intent": "A small flat work surface with raised edges to retain tablets.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0019.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0019.json"
+    },
+    {
+      "id": "BA-0020",
+      "slug": "market/ba-0020",
+      "title": "Under counter storage rack",
+      "intent": "A two level open rack sized for baskets and bundled goods.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Display furniture",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0020.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0020.json"
+    },
+    {
+      "id": "BA-0021",
+      "slug": "market/ba-0021",
+      "title": "Wide shallow produce basket",
+      "intent": "An open woven basket whose contents can be swapped.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0021.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0021.json"
+    },
+    {
+      "id": "BA-0022",
+      "slug": "market/ba-0022",
+      "title": "Tall grain carrying basket",
+      "intent": "A deep basket with reinforced rim and two carrying loops.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0022.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0022.json"
+    },
+    {
+      "id": "BA-0023",
+      "slug": "market/ba-0023",
+      "title": "Lidded reed merchandise hamper",
+      "intent": "A rectangular woven container with a separate fitted lid.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0023.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0023.json"
+    },
+    {
+      "id": "BA-0024",
+      "slug": "market/ba-0024",
+      "title": "Handled ceramic market jar",
+      "intent": "A transport jar with two handles, broad base, and separate stopper.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0024.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0024.json"
+    },
+    {
+      "id": "BA-0025",
+      "slug": "market/ba-0025",
+      "title": "Small stoppered oil flask",
+      "intent": "A narrow necked ceramic vessel with a removable stopper.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0025.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0025.json"
+    },
+    {
+      "id": "BA-0026",
+      "slug": "market/ba-0026",
+      "title": "Woven grain sack",
+      "intent": "A soft container with tied mouth and a readable grain filled silhouette.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0026.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0026.json"
+    },
+    {
+      "id": "BA-0027",
+      "slug": "market/ba-0027",
+      "title": "Folded cloth parcel",
+      "intent": "A square bundle tied at opposing corners for small purchases.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0027.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0027.json"
+    },
+    {
+      "id": "BA-0028",
+      "slug": "market/ba-0028",
+      "title": "Rope bound timber merchandise box",
+      "intent": "A plank box held closed by external cord bindings.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0028.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0028.json"
+    },
+    {
+      "id": "BA-0029",
+      "slug": "market/ba-0029",
+      "title": "Divided small goods tray",
+      "intent": "A shallow wooden tray with compartments for beads or fittings.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0029.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0029.json"
+    },
+    {
+      "id": "BA-0030",
+      "slug": "market/ba-0030",
+      "title": "Shoulder carrying basket",
+      "intent": "A basket and broad strap assembly worn by a market customer.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Trade containers",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0030.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0030.json"
+    },
+    {
+      "id": "BA-0031",
+      "slug": "market/ba-0031",
+      "title": "Portable beam balance",
+      "intent": "A suspended beam, two pans, cords, and a handhold.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0031.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0031.json"
+    },
+    {
+      "id": "BA-0032",
+      "slug": "market/ba-0032",
+      "title": "Balance support stand",
+      "intent": "A tabletop upright with a hook for the portable balance.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0032.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0032.json"
+    },
+    {
+      "id": "BA-0033",
+      "slug": "market/ba-0033",
+      "title": "Stone weight set",
+      "intent": "A nested group of distinct weight sizes with consistent fictional markings.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0033.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0033.json"
+    },
+    {
+      "id": "BA-0034",
+      "slug": "market/ba-0034",
+      "title": "Grain capacity measure",
+      "intent": "An open cylinder with a straight rim for leveling grain.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0034.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0034.json"
+    },
+    {
+      "id": "BA-0035",
+      "slug": "market/ba-0035",
+      "title": "Grain leveling stick",
+      "intent": "A flat wooden blade spanning the capacity measure.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0035.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0035.json"
+    },
+    {
+      "id": "BA-0036",
+      "slug": "market/ba-0036",
+      "title": "Liquid measuring cup",
+      "intent": "A small ceramic cup used to portion a purchased liquid.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0036.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0036.json"
+    },
+    {
+      "id": "BA-0037",
+      "slug": "market/ba-0037",
+      "title": "Merchant counting pebble tray",
+      "intent": "A recessed tray with movable pebbles for a fictional counting practice.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0037.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0037.json"
+    },
+    {
+      "id": "BA-0038",
+      "slug": "market/ba-0038",
+      "title": "Clay sale record tablet",
+      "intent": "A small tablet carrying fictional impressed marks for a transaction.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0038.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0038.json"
+    },
+    {
+      "id": "BA-0039",
+      "slug": "market/ba-0039",
+      "title": "Merchant seal and cord",
+      "intent": "A carved seal on a carrying cord with a distinct trade emblem.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0039.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0039.json"
+    },
+    {
+      "id": "BA-0040",
+      "slug": "market/ba-0040",
+      "title": "Sealed clay parcel tag",
+      "intent": "A clay lump bearing a cord impression and merchant emblem.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Measures and exchange",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0040.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0040.json"
+    },
+    {
+      "id": "BA-0041",
+      "slug": "market/ba-0041",
+      "title": "Mixed garden produce display",
+      "intent": "A composed basket display of local vegetables; individual crops belong to the garden chunk.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0041.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0041.json"
+    },
+    {
+      "id": "BA-0042",
+      "slug": "market/ba-0042",
+      "title": "Grain sample display",
+      "intent": "Open measures, small grain heaps, and one tied sack.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0042.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0042.json"
+    },
+    {
+      "id": "BA-0043",
+      "slug": "market/ba-0043",
+      "title": "Flatbread selling tray",
+      "intent": "A woven tray holding overlapping flat loaves and a covering cloth.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0043.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0043.json"
+    },
+    {
+      "id": "BA-0044",
+      "slug": "market/ba-0044",
+      "title": "Fresh cheese selling board",
+      "intent": "A board with whole and cut cheese forms and a cloth cover.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0044.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0044.json"
+    },
+    {
+      "id": "BA-0045",
+      "slug": "market/ba-0045",
+      "title": "Dried fruit display",
+      "intent": "Compartmented trays of dried orchard fruit.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0045.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0045.json"
+    },
+    {
+      "id": "BA-0046",
+      "slug": "market/ba-0046",
+      "title": "Fresh fish selling mat",
+      "intent": "Fish arranged on a damp reed mat beside a water vessel.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0046.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0046.json"
+    },
+    {
+      "id": "BA-0047",
+      "slug": "market/ba-0047",
+      "title": "Salt mound selling tray",
+      "intent": "A low tray with a coarse salt mound and a portioning scoop.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0047.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0047.json"
+    },
+    {
+      "id": "BA-0048",
+      "slug": "market/ba-0048",
+      "title": "Onion and garlic hanging bundle",
+      "intent": "Braided stems suspended from the stall rail.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0048.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0048.json"
+    },
+    {
+      "id": "BA-0049",
+      "slug": "market/ba-0049",
+      "title": "Leafy herb selling bundles",
+      "intent": "Several tied herb bundles in a shallow water dish.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0049.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0049.json"
+    },
+    {
+      "id": "BA-0050",
+      "slug": "market/ba-0050",
+      "title": "Prepared food serving station",
+      "intent": "A food pot, serving bowl, ladle, and low customer counter.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Food displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0050.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0050.json"
+    },
+    {
+      "id": "BA-0051",
+      "slug": "market/ba-0051",
+      "title": "Pottery merchant assortment",
+      "intent": "A coherent arrangement of cooking, storage, and serving vessels.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0051.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0051.json"
+    },
+    {
+      "id": "BA-0052",
+      "slug": "market/ba-0052",
+      "title": "Undyed cloth merchant assortment",
+      "intent": "Rolled and folded cloth in clearly different weave weights.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0052.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0052.json"
+    },
+    {
+      "id": "BA-0053",
+      "slug": "market/ba-0053",
+      "title": "Yarn skein display",
+      "intent": "Skeins hanging from a bar with fiber samples beneath.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0053.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0053.json"
+    },
+    {
+      "id": "BA-0054",
+      "slug": "market/ba-0054",
+      "title": "Basket seller nested stack",
+      "intent": "A nested stack showing carrying and storage basket sizes.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0054.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0054.json"
+    },
+    {
+      "id": "BA-0055",
+      "slug": "market/ba-0055",
+      "title": "Leather strap seller display",
+      "intent": "Cut straps, tied bundles, and a pierced sample strip.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0055.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0055.json"
+    },
+    {
+      "id": "BA-0056",
+      "slug": "market/ba-0056",
+      "title": "Sandal seller display",
+      "intent": "Pairs of simple sandals arranged by size on a mat.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0056.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0056.json"
+    },
+    {
+      "id": "BA-0057",
+      "slug": "market/ba-0057",
+      "title": "Carpentry offcut sample display",
+      "intent": "Timber samples with shaped edges and visible joints.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0057.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0057.json"
+    },
+    {
+      "id": "BA-0058",
+      "slug": "market/ba-0058",
+      "title": "Cart wheel seller display",
+      "intent": "A wheel on its stand with a hub blank and axle sample.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0058.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0058.json"
+    },
+    {
+      "id": "BA-0059",
+      "slug": "market/ba-0059",
+      "title": "Bronze tool seller display",
+      "intent": "A restrained assortment of finished bronze tools on a board.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0059.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0059.json"
+    },
+    {
+      "id": "BA-0060",
+      "slug": "market/ba-0060",
+      "title": "Bead merchant display",
+      "intent": "Bead strings, loose beads, and small sample stones in trays.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Craft displays",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0060.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0060.json"
+    },
+    {
+      "id": "BA-0061",
+      "slug": "market/ba-0061",
+      "title": "Communal drinking water station",
+      "intent": "A large vessel, dipping cup, jar stand, and splash area.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0061.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0061.json"
+    },
+    {
+      "id": "BA-0062",
+      "slug": "market/ba-0062",
+      "title": "Pack animal tether station",
+      "intent": "Timber rail, tether loops, and space for removable animals.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0062.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0062.json"
+    },
+    {
+      "id": "BA-0063",
+      "slug": "market/ba-0063",
+      "title": "Market animal watering trough",
+      "intent": "A broad shallow trough placed away from foot traffic.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0063.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0063.json"
+    },
+    {
+      "id": "BA-0064",
+      "slug": "market/ba-0064",
+      "title": "Cargo unloading platform",
+      "intent": "A low raised edge helping people transfer loads from carts.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0064.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0064.json"
+    },
+    {
+      "id": "BA-0065",
+      "slug": "market/ba-0065",
+      "title": "Porter carrying pole",
+      "intent": "A shaped pole with suspended basket ties at both ends.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0065.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0065.json"
+    },
+    {
+      "id": "BA-0066",
+      "slug": "market/ba-0066",
+      "title": "Vendor handwashing station",
+      "intent": "Pouring jug, catch basin, and a cloth on a simple peg.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0066.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0066.json"
+    },
+    {
+      "id": "BA-0067",
+      "slug": "market/ba-0067",
+      "title": "Market sweeping kit",
+      "intent": "A bound twig broom, shallow scoop, and waste basket.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0067.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0067.json"
+    },
+    {
+      "id": "BA-0068",
+      "slug": "market/ba-0068",
+      "title": "Goods repair mat",
+      "intent": "A mat with binding cord, awl, patches, and a small work support.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0068.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0068.json"
+    },
+    {
+      "id": "BA-0069",
+      "slug": "market/ba-0069",
+      "title": "Lost goods keeping shelf",
+      "intent": "An open shelf in the fictional market steward's sheltered space.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0069.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0069.json"
+    },
+    {
+      "id": "BA-0070",
+      "slug": "market/ba-0070",
+      "title": "Market steward shade shelter",
+      "intent": "A small public shelter with a seat and record keeping surface.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market services",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0070.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0070.json"
+    },
+    {
+      "id": "BA-0071",
+      "slug": "market/ba-0071",
+      "title": "Packed earth market tile",
+      "intent": "A seamless compacted surface with subdued foot wear.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0071.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0071.json"
+    },
+    {
+      "id": "BA-0072",
+      "slug": "market/ba-0072",
+      "title": "Cart rutted market tile",
+      "intent": "Parallel wheel tracks that connect to departing roads.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0072.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0072.json"
+    },
+    {
+      "id": "BA-0073",
+      "slug": "market/ba-0073",
+      "title": "Market drainage edge",
+      "intent": "A shallow sloped channel along the market perimeter.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0073.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0073.json"
+    },
+    {
+      "id": "BA-0074",
+      "slug": "market/ba-0074",
+      "title": "Market puddle depression",
+      "intent": "An irregular low patch with a separate water surface.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0074.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0074.json"
+    },
+    {
+      "id": "BA-0075",
+      "slug": "market/ba-0075",
+      "title": "Trampled straw ground scatter",
+      "intent": "Short broken straw and chaff concentrated near produce stalls.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0075.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0075.json"
+    },
+    {
+      "id": "BA-0076",
+      "slug": "market/ba-0076",
+      "title": "Pottery sherd ground scatter",
+      "intent": "A small nonblocking cluster near the pottery seller.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0076.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0076.json"
+    },
+    {
+      "id": "BA-0077",
+      "slug": "market/ba-0077",
+      "title": "Hoof print ground patch",
+      "intent": "A clustered trail between the tether station and the road.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0077.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0077.json"
+    },
+    {
+      "id": "BA-0078",
+      "slug": "market/ba-0078",
+      "title": "Market footpath junction",
+      "intent": "Three worn pedestrian routes meeting between stalls.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0078.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0078.json"
+    },
+    {
+      "id": "BA-0079",
+      "slug": "market/ba-0079",
+      "title": "Stone edged market tree bed",
+      "intent": "A protected planting pocket that can accept an existing tree.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0079.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0079.json"
+    },
+    {
+      "id": "BA-0080",
+      "slug": "market/ba-0080",
+      "title": "Raised market gathering step",
+      "intent": "A broad low earthen step with stone edging at a meeting point.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market ground",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0080.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0080.json"
+    },
+    {
+      "id": "BA-0081",
+      "slug": "market/ba-0081",
+      "title": "Ranch produce seller",
+      "intent": "Practical work clothing, carrying apron, and a recognizable produce basket.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0081.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0081.json"
+    },
+    {
+      "id": "BA-0082",
+      "slug": "market/ba-0082",
+      "title": "Traveling wheel seller",
+      "intent": "Travel clothing with a wheel sample and woodworking belongings.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0082.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0082.json"
+    },
+    {
+      "id": "BA-0083",
+      "slug": "market/ba-0083",
+      "title": "Village pottery seller",
+      "intent": "Cloth head covering, clay marked workwear, and a vessel carrying pose.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0083.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0083.json"
+    },
+    {
+      "id": "BA-0084",
+      "slug": "market/ba-0084",
+      "title": "Cloth and yarn seller",
+      "intent": "Layered woven clothing and a bundle of fabric samples.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0084.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0084.json"
+    },
+    {
+      "id": "BA-0085",
+      "slug": "market/ba-0085",
+      "title": "Bronze goods trader",
+      "intent": "A tool roll and balance pouch distinguish the metal trade.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0085.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0085.json"
+    },
+    {
+      "id": "BA-0086",
+      "slug": "market/ba-0086",
+      "title": "River fish seller",
+      "intent": "River work clothing and net carrying accessories.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0086.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0086.json"
+    },
+    {
+      "id": "BA-0087",
+      "slug": "market/ba-0087",
+      "title": "Market porter",
+      "intent": "A carrying pad and pole with an unobstructed load bearing silhouette.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0087.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0087.json"
+    },
+    {
+      "id": "BA-0088",
+      "slug": "market/ba-0088",
+      "title": "Household shopper",
+      "intent": "Everyday clothing and a removable shoulder basket.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0088.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0088.json"
+    },
+    {
+      "id": "BA-0089",
+      "slug": "market/ba-0089",
+      "title": "Older market regular",
+      "intent": "An older adult with a walking support and a small purchase bundle.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0089.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0089.json"
+    },
+    {
+      "id": "BA-0090",
+      "slug": "market/ba-0090",
+      "title": "Child accompanying a shopper",
+      "intent": "A child scaled outfit and small basket; shares the household's visual language.",
+      "parent": "market",
+      "kind": "asset",
+      "family": "Market characters",
+      "viewer": "glb",
+      "model": "/sets-media/BA-0090.glb",
+      "pieces": [],
+      "metadata": "/sets-data/BA-0090.json"
+    },
+    {
+      "id": "SET-WOODLAND-01",
+      "slug": "woodland-worksite",
+      "title": "Woodland worksite",
+      "intent": "Follow a village wheel back to the woodland and its makers.",
+      "parent": null,
+      "viewer": "glb",
+      "preview": "/sets-media/woodland-worksite.png",
+      "model": "/sets-media/woodland-worksite.glb",
+      "metadata": "/sets-data/woodland-worksite.json",
+      "pieces": [
+        {
+          "id": "WW-01",
+          "intent": "Village path enters the woodland clearing",
+          "family": "Woodland"
+        },
+        {
+          "id": "WW-02",
+          "intent": "Living trees and retained woodland edge",
+          "family": "Woodland"
+        },
+        {
+          "id": "WW-03",
+          "intent": "Regrowth and selective cutting",
+          "family": "Woodland"
+        },
+        {
+          "id": "WW-04",
+          "intent": "Fresh logs become usable timber",
+          "family": "Woodland"
+        },
+        {
+          "id": "WW-05",
+          "intent": "Raised timber dries beside the route",
+          "family": "Woodland"
+        },
+        {
+          "id": "WW-06",
+          "intent": "Handwork shelter connects timber to village wheels",
+          "family": "Woodland"
+        },
+        {
+          "id": "WW-07",
+          "intent": "Water and rest at the arrival edge",
+          "family": "Woodland"
+        },
+        {
+          "id": "BA-0001",
+          "intent": "Open timber stall",
+          "family": "Stall structures"
+        },
+        {
+          "id": "BA-0011",
+          "intent": "Broad plank selling counter",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0018",
+          "intent": "Vendor sitting stool",
+          "family": "Display furniture"
+        },
+        {
+          "id": "BA-0022",
+          "intent": "Tall grain carrying basket",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0024",
+          "intent": "Handled ceramic market jar",
+          "family": "Trade containers"
+        },
+        {
+          "id": "BA-0057",
+          "intent": "Carpentry offcut sample display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0058",
+          "intent": "Cart wheel seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0059",
+          "intent": "Bronze tool seller display",
+          "family": "Craft displays"
+        },
+        {
+          "id": "BA-0063",
+          "intent": "Market animal watering trough",
+          "family": "Market services"
+        },
+        {
+          "id": "BA-0082",
+          "intent": "Traveling wheel seller",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0087",
+          "intent": "Market porter",
+          "family": "Market characters"
+        },
+        {
+          "id": "BA-0088",
+          "intent": "Household shopper",
+          "family": "Market characters"
+        }
+      ],
+      "views": [
+        {
+          "label": "Arrive",
+          "target": [
+            -5,
+            1,
+            5
+          ],
+          "distance": 38,
+          "intent": "Follow the village path to the timber clearing."
+        },
+        {
+          "label": "Shape",
+          "target": [
+            -3,
+            1,
+            -1
+          ],
+          "distance": 29,
+          "intent": "Find the familiar wheel beside hand-shaped timber."
+        },
+        {
+          "label": "Trace",
+          "target": [
+            5,
+            1,
+            -4
+          ],
+          "distance": 32,
+          "intent": "Connect logs and seasoning stock to retained woodland."
+        }
+      ],
+      "exposure": 0.95,
+      "shadows": true
+    }
+  ]
+}

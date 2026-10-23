@@ -1,0 +1,991 @@
+{
+  "BA-0012": {
+    "id": "BA-0012",
+    "name": "Low woven selling table",
+    "path": "/domestic-assets/BA-0012.glb",
+    "dimensions": [
+      1.4878,
+      0.9336,
+      0.551
+    ],
+    "purpose": "A lightweight reed surface supported by short wooden legs.",
+    "bounds": {
+      "min": [
+        -0.7477951645851135,
+        -0.4667988717556,
+        -0.005963359493762255
+      ],
+      "max": [
+        0.7400000095367432,
+        0.4667988717556,
+        0.5450000166893005
+      ]
+    }
+  },
+  "BA-0018": {
+    "id": "BA-0018",
+    "name": "Vendor sitting stool",
+    "path": "/domestic-assets/BA-0018.glb",
+    "dimensions": [
+      0.5084,
+      0.5157,
+      0.5071
+    ],
+    "purpose": "A low three legged stool tucked behind the selling surface.",
+    "bounds": {
+      "min": [
+        -0.25,
+        -0.2657143175601959,
+        0.012930835597217083
+      ],
+      "max": [
+        0.2584451735019684,
+        0.25,
+        0.5199999809265137
+      ]
+    }
+  },
+  "BA-0024": {
+    "id": "BA-0024",
+    "name": "Handled ceramic market jar",
+    "path": "/domestic-assets/BA-0024.glb",
+    "dimensions": [
+      0.8948,
+      0.566,
+      0.673
+    ],
+    "purpose": "A transport jar with two handles, broad base, and separate stopper.",
+    "bounds": {
+      "min": [
+        -0.3748394250869751,
+        -0.28300002217292786,
+        0.0
+      ],
+      "max": [
+        0.5200000405311584,
+        0.28300002217292786,
+        0.6729999780654907
+      ]
+    }
+  },
+  "BA-0043": {
+    "id": "BA-0043",
+    "name": "Flatbread selling tray",
+    "path": "/domestic-assets/BA-0043.glb",
+    "dimensions": [
+      0.715,
+      0.49,
+      0.112
+    ],
+    "purpose": "A woven tray holding overlapping flat loaves and a covering cloth.",
+    "bounds": {
+      "min": [
+        -0.35750001668930054,
+        -0.24500000476837158,
+        0.0
+      ],
+      "max": [
+        0.35750001668930054,
+        0.24500000476837158,
+        0.1119999960064888
+      ]
+    }
+  },
+  "BA-0083": {
+    "id": "BA-0083",
+    "name": "Village pottery seller",
+    "path": "/domestic-assets/BA-0083.glb",
+    "dimensions": [
+      0.7108,
+      0.6149,
+      1.6393
+    ],
+    "purpose": "Cloth head covering, clay marked workwear, and a vessel carrying pose.",
+    "bounds": {
+      "min": [
+        -0.3553956151008606,
+        -0.45590001344680786,
+        0.0
+      ],
+      "max": [
+        0.3553956151008606,
+        0.1589723825454712,
+        1.6393001079559326
+      ]
+    }
+  },
+  "BA-0088": {
+    "id": "BA-0088",
+    "name": "Household shopper",
+    "path": "/domestic-assets/BA-0088.glb",
+    "dimensions": [
+      0.8191,
+      0.4146,
+      1.6224
+    ],
+    "purpose": "Everyday clothing and a removable shoulder basket.",
+    "bounds": {
+      "min": [
+        -0.35173171758651733,
+        -0.23699088394641876,
+        0.0
+      ],
+      "max": [
+        0.46739086508750916,
+        0.17759999632835388,
+        1.6224000453948975
+      ]
+    }
+  },
+  "GF-004": {
+    "id": "GF-004",
+    "name": "Onion crop patch",
+    "path": "/domestic-assets/GF-004.glb",
+    "dimensions": [
+      0.65281,
+      0.50119,
+      0.44
+    ],
+    "purpose": "Grow bulbs in short hand-tended rows.",
+    "bounds": {
+      "min": [
+        -0.3128115236759186,
+        -0.23559509217739105,
+        0.0
+      ],
+      "max": [
+        0.3400000035762787,
+        0.26559507846832275,
+        0.4399999976158142
+      ]
+    }
+  },
+  "GF-004.curing-bulbs": {
+    "id": "GF-004.curing-bulbs",
+    "name": "GF-004.curing-bulbs",
+    "path": "/domestic-assets/GF-004.curing-bulbs.glb",
+    "dimensions": [
+      0.4044,
+      0.206,
+      0.15175
+    ],
+    "purpose": "Dry-neck curing state of the same onion identity.",
+    "bounds": {
+      "min": [
+        -0.20219971239566803,
+        -0.10300000011920929,
+        0.0
+      ],
+      "max": [
+        0.20219971239566803,
+        0.10300000011920929,
+        0.15174633264541626
+      ]
+    }
+  },
+  "GF-004.harvested-bulbs": {
+    "id": "GF-004.harvested-bulbs",
+    "name": "GF-004.harvested-bulbs",
+    "path": "/domestic-assets/GF-004.harvested-bulbs.glb",
+    "dimensions": [
+      0.26293,
+      0.25584,
+      0.15175
+    ],
+    "purpose": "Harvested state of existing onion crop, not a new species or base.",
+    "bounds": {
+      "min": [
+        -0.1333216279745102,
+        -0.10639552772045135,
+        0.0
+      ],
+      "max": [
+        0.12961088120937347,
+        0.14944159984588623,
+        0.15174633264541626
+      ]
+    }
+  },
+  "GF-007": {
+    "id": "GF-007",
+    "name": "Bound stone garden hoe",
+    "path": "/domestic-assets/GF-007.glb",
+    "dimensions": [
+      0.23,
+      0.32,
+      1.23613
+    ],
+    "purpose": "Loosen soil and weed beds with a hand tool.",
+    "bounds": {
+      "min": [
+        -0.03999999910593033,
+        -0.23999999463558197,
+        0.0
+      ],
+      "max": [
+        0.1899999976158142,
+        0.07999999821186066,
+        1.2361266613006592
+      ]
+    }
+  },
+  "GF-008": {
+    "id": "GF-008",
+    "name": "Garden tender",
+    "path": "/domestic-assets/GF-008.glb",
+    "dimensions": [
+      0.77277,
+      0.40328,
+      1.595
+    ],
+    "purpose": "Inspect crop health and connect water, tools and harvest work.",
+    "bounds": {
+      "min": [
+        -0.38638705015182495,
+        -0.2682788074016571,
+        0.0
+      ],
+      "max": [
+        0.38638705015182495,
+        0.13500000536441803,
+        1.5950000286102295
+      ]
+    }
+  },
+  "GF-010": {
+    "id": "GF-010",
+    "name": "Flowered stone garden edge",
+    "path": "/domestic-assets/GF-010.glb",
+    "dimensions": [
+      1.25044,
+      0.42662,
+      0.222
+    ],
+    "purpose": "Frame the working bed with small stones and volunteer flowers.",
+    "bounds": {
+      "min": [
+        -0.625219464302063,
+        -0.12478087097406387,
+        0.0
+      ],
+      "max": [
+        0.625219464302063,
+        0.301836758852005,
+        0.22200000286102295
+      ]
+    }
+  },
+  "GF-014": {
+    "id": "GF-014",
+    "name": "Cradled garden water jar",
+    "path": "/domestic-assets/GF-014.glb",
+    "dimensions": [
+      1.08224,
+      0.70856,
+      1.04776
+    ],
+    "purpose": "Store hand-carried water in a supported hollow jar with a separate cover.",
+    "bounds": {
+      "min": [
+        -0.412244975566864,
+        -0.3542775511741638,
+        6.51925802230835e-09
+      ],
+      "max": [
+        0.6699999570846558,
+        0.3542775511741638,
+        1.047763705253601
+      ]
+    }
+  },
+  "GF-017": {
+    "id": "GF-017",
+    "name": "Reed roof garden rest shelter",
+    "path": "/domestic-assets/GF-017.glb",
+    "dimensions": [
+      2.722,
+      1.95109,
+      2.18
+    ],
+    "purpose": "Provide shade and a resting bench beside the garden work paths.",
+    "bounds": {
+      "min": [
+        -1.3610001802444458,
+        -0.9758077263832092,
+        0.0
+      ],
+      "max": [
+        1.3609999418258667,
+        0.9752850532531738,
+        2.179999828338623
+      ]
+    }
+  },
+  "GF-023": {
+    "id": "GF-023",
+    "name": "Raised sealed seed jar store",
+    "path": "/domestic-assets/GF-023.glb",
+    "dimensions": [
+      1.1,
+      0.67,
+      0.645
+    ],
+    "purpose": "Keep separate seed lots in capped jars above damp soil.",
+    "bounds": {
+      "min": [
+        -0.550000011920929,
+        -0.33500000834465027,
+        0.0
+      ],
+      "max": [
+        0.550000011920929,
+        0.33500000834465027,
+        0.6449999809265137
+      ]
+    }
+  },
+  "GF-025": {
+    "id": "GF-025",
+    "name": "Ventilated harvest carrying crate",
+    "path": "/domestic-assets/GF-025.glb",
+    "dimensions": [
+      1.17544,
+      0.785,
+      0.47725
+    ],
+    "purpose": "Move fragile harvested produce with airflow and rope handles.",
+    "bounds": {
+      "min": [
+        -0.5877199769020081,
+        -0.39249998331069946,
+        0.0
+      ],
+      "max": [
+        0.5877199769020081,
+        0.39249998331069946,
+        0.47725000977516174
+      ]
+    }
+  },
+  "GF-026": {
+    "id": "GF-026",
+    "name": "Sand packed root storage pit",
+    "path": "/domestic-assets/GF-026.glb",
+    "dimensions": [
+      2.055,
+      1.44,
+      0.33
+    ],
+    "purpose": "Buffer stored roots with dry packing and a removable planked cover.",
+    "bounds": {
+      "min": [
+        -0.7200000286102295,
+        -0.7200000286102295,
+        0.0
+      ],
+      "max": [
+        1.3350000381469727,
+        0.7200000286102295,
+        0.33000001311302185
+      ]
+    }
+  },
+  "GF-027": {
+    "id": "GF-027",
+    "name": "Three tier bulb curing rack",
+    "path": "/domestic-assets/GF-027.glb",
+    "dimensions": [
+      1.17,
+      0.77,
+      1.25215
+    ],
+    "purpose": "Spread harvested bulbs across ventilated shelves for drying.",
+    "bounds": {
+      "min": [
+        -0.5850000381469727,
+        -0.38499999046325684,
+        0.0
+      ],
+      "max": [
+        0.5850000381469727,
+        0.38499999046325684,
+        1.25215482711792
+      ]
+    }
+  },
+  "GF-029": {
+    "id": "GF-029",
+    "name": "Saddle quern and meal bowl",
+    "path": "/domestic-assets/GF-029.glb",
+    "dimensions": [
+      1.30553,
+      0.6,
+      0.385
+    ],
+    "purpose": "Grind small grain portions using a saddle stone and hand rubbing stone.",
+    "bounds": {
+      "min": [
+        -0.47552892565727234,
+        -0.29999998211860657,
+        0.0
+      ],
+      "max": [
+        0.8299999833106995,
+        0.29999998211860657,
+        0.3850000202655792
+      ]
+    }
+  },
+  "GF-030": {
+    "id": "GF-030",
+    "name": "Three basin harvest sorting station",
+    "path": "/domestic-assets/GF-030.glb",
+    "dimensions": [
+      1.87177,
+      0.788,
+      0.85387
+    ],
+    "purpose": "Separate usable produce, seed stock and rejects at a reachable bench.",
+    "bounds": {
+      "min": [
+        -0.800000011920929,
+        -0.39399999380111694,
+        -3.026798367500305e-09
+      ],
+      "max": [
+        1.0717741250991821,
+        0.39399999380111694,
+        0.8538725972175598
+      ]
+    }
+  },
+  "GF-081": {
+    "id": "GF-081",
+    "name": "Root washing and draining basin",
+    "path": "/domestic-assets/GF-081.glb",
+    "dimensions": [
+      1.22,
+      1.22,
+      0.475
+    ],
+    "purpose": "Rinse harvested roots and drain them on a removable grate.",
+    "bounds": {
+      "min": [
+        -0.6100000143051147,
+        -0.6100000143051147,
+        0.0
+      ],
+      "max": [
+        0.6100000143051147,
+        0.6100000143051147,
+        0.4749999940395355
+      ]
+    }
+  },
+  "GF-133": {
+    "id": "GF-133",
+    "name": "Capped dry fuel storage alcove",
+    "path": "/domestic-assets/GF-133.glb",
+    "dimensions": [
+      1.35,
+      0.83,
+      0.975
+    ],
+    "purpose": "Keep processing fuel sheltered beside a working hearth.",
+    "bounds": {
+      "min": [
+        -0.675000011920929,
+        -0.41499999165534973,
+        0.0
+      ],
+      "max": [
+        0.675000011920929,
+        0.41499999165534973,
+        0.9750000238418579
+      ]
+    }
+  },
+  "GF-149": {
+    "id": "GF-149",
+    "name": "Creeping tiny leaved thyme",
+    "path": "/domestic-assets/GF-149.glb",
+    "dimensions": [
+      0.37575,
+      0.37226,
+      0.14145
+    ],
+    "purpose": "Represent low woody herb spread with small paired leaves.",
+    "bounds": {
+      "min": [
+        -0.1827477514743805,
+        -0.18613140285015106,
+        4.656612873077393e-10
+      ],
+      "max": [
+        0.19300000369548798,
+        0.18613140285015106,
+        0.1414477378129959
+      ]
+    }
+  },
+  "GF-171": {
+    "id": "GF-171",
+    "name": "Garden household cat",
+    "path": "/domestic-assets/GF-171.glb",
+    "dimensions": [
+      0.77853,
+      0.20049,
+      0.59321
+    ],
+    "purpose": "Represent a small feline companion with pointed ears, whiskers and raised tail.",
+    "bounds": {
+      "min": [
+        -0.45765045285224915,
+        -0.10024523735046387,
+        0.0
+      ],
+      "max": [
+        0.3208792805671692,
+        0.10024523735046387,
+        0.5932123064994812
+      ]
+    }
+  },
+  "GF-191": {
+    "id": "GF-191",
+    "name": "Enclosed courtyard household",
+    "path": "/domestic-assets/GF-191.glb",
+    "dimensions": [
+      5.6,
+      4.68123,
+      2.53623
+    ],
+    "purpose": "Home entry and sheltered rooms around an open domestic yard.",
+    "bounds": {
+      "min": [
+        -2.8000001907348633,
+        -2.375,
+        0.0
+      ],
+      "max": [
+        2.8000001907348633,
+        2.306227445602417,
+        2.5362253189086914
+      ]
+    }
+  },
+  "GF-192": {
+    "id": "GF-192",
+    "name": "Domestic cooking hearth and suspension support",
+    "path": "/domestic-assets/GF-192.glb",
+    "dimensions": [
+      1.56,
+      1.2,
+      1.195
+    ],
+    "purpose": "Stone-ring cooking hearth with braced timber bail support.",
+    "bounds": {
+      "min": [
+        -0.7799999713897705,
+        -0.5999999642372131,
+        0.0
+      ],
+      "max": [
+        0.7799999713897705,
+        0.5999999642372131,
+        1.1950000524520874
+      ]
+    }
+  },
+  "GF-193": {
+    "id": "GF-193",
+    "name": "Open bail-handled cooking pot",
+    "path": "/domestic-assets/GF-193.glb",
+    "dimensions": [
+      0.6456,
+      0.6,
+      0.8839
+    ],
+    "purpose": "Hollow ceramic vessel whose bail fits GF-192 crossbar when origin is at z=.29m.",
+    "bounds": {
+      "min": [
+        -0.32279759645462036,
+        -0.30000001192092896,
+        0.0
+      ],
+      "max": [
+        0.32279759645462036,
+        0.30000001192092896,
+        0.8838974237442017
+      ]
+    }
+  },
+  "GF-193.prepared-meal": {
+    "id": "GF-193.prepared-meal",
+    "name": "GF-193.prepared-meal",
+    "path": "/domestic-assets/GF-193.prepared-meal.glb",
+    "dimensions": [
+      0.41,
+      0.41,
+      0.048
+    ],
+    "purpose": "Prepared stew contents state for the existing cooking pot; scene may separately reuse BA-0043 bread tray.",
+    "bounds": {
+      "min": [
+        -0.20499999821186066,
+        -0.20499999821186066,
+        0.0
+      ],
+      "max": [
+        0.20499999821186066,
+        0.20499999821186066,
+        0.04800000041723251
+      ]
+    }
+  },
+  "GF-194": {
+    "id": "GF-194",
+    "name": "Low shared household dining bench",
+    "path": "/domestic-assets/GF-194.glb",
+    "dimensions": [
+      1.75,
+      0.52008,
+      0.4737
+    ],
+    "purpose": "Three joined planks on splayed legs seat two companions.",
+    "bounds": {
+      "min": [
+        -0.875,
+        -0.2600405812263489,
+        4.190951585769653e-09
+      ],
+      "max": [
+        0.875,
+        0.26004061102867126,
+        0.47370344400405884
+      ]
+    }
+  },
+  "GF-195": {
+    "id": "GF-195",
+    "name": "Low companion feeding and water dish",
+    "path": "/domestic-assets/GF-195.glb",
+    "dimensions": [
+      0.48,
+      0.48,
+      0.094
+    ],
+    "purpose": "Accessible shallow ceramic basin with a rounded lip.",
+    "bounds": {
+      "min": [
+        -0.23999999463558197,
+        -0.23999999463558197,
+        0.0
+      ],
+      "max": [
+        0.23999999463558197,
+        0.23999999463558197,
+        0.09400000423192978
+      ]
+    }
+  },
+  "GF-196": {
+    "id": "GF-196",
+    "name": "Woven companion resting bed",
+    "path": "/domestic-assets/GF-196.glb",
+    "dimensions": [
+      0.94787,
+      0.72796,
+      0.17957
+    ],
+    "purpose": "Small oval wicker bed with modeled crossing weave and a cloth liner.",
+    "bounds": {
+      "min": [
+        -0.4739331901073456,
+        -0.3639777898788452,
+        7.223732723105059e-11
+      ],
+      "max": [
+        0.4739331901073456,
+        0.3639777898788452,
+        0.17957279086112976
+      ]
+    }
+  },
+  "RF-001": {
+    "id": "RF-001",
+    "name": "Exposed clay gathering bank",
+    "path": "/domestic-assets/RF-001.glb",
+    "dimensions": [
+      2.56692,
+      2.06911,
+      1.65
+    ],
+    "purpose": "Reveal sediment layers and a reachable clay cutting ledge.",
+    "bounds": {
+      "min": [
+        -1.3655400276184082,
+        -0.9184665679931641,
+        0.0
+      ],
+      "max": [
+        1.20137619972229,
+        1.1506400108337402,
+        1.6500000953674316
+      ]
+    }
+  },
+  "RF-001.loose-clay": {
+    "id": "RF-001.loose-clay",
+    "name": "RF-001.loose-clay",
+    "path": "/domestic-assets/RF-001.loose-clay.glb",
+    "dimensions": [
+      0.44657,
+      0.307,
+      0.113
+    ],
+    "purpose": "Workable material contents derived from existing clay bank.",
+    "bounds": {
+      "min": [
+        -0.21328702569007874,
+        -0.16699999570846558,
+        0.0
+      ],
+      "max": [
+        0.2332870364189148,
+        0.13999998569488525,
+        0.11299999803304672
+      ]
+    }
+  },
+  "RF-041": {
+    "id": "RF-041",
+    "name": "Overflow clay levigation chambers",
+    "path": "/domestic-assets/RF-041.glb",
+    "dimensions": [
+      2.06,
+      0.82,
+      0.48
+    ],
+    "purpose": "Separate settling and fine-clay receiving beds through an overflow wall.",
+    "bounds": {
+      "min": [
+        -1.0299999713897705,
+        -0.4099999964237213,
+        0.0
+      ],
+      "max": [
+        1.0299999713897705,
+        0.4099999964237213,
+        0.47999998927116394
+      ]
+    }
+  },
+  "RF-042": {
+    "id": "RF-042",
+    "name": "Flywheel potters throwing stand",
+    "path": "/domestic-assets/RF-042.glb",
+    "dimensions": [
+      0.86,
+      0.86,
+      0.945
+    ],
+    "purpose": "Show a rotating head, central spindle and lower momentum wheel.",
+    "bounds": {
+      "min": [
+        -0.4300000071525574,
+        -0.4300000071525574,
+        4.474323134218139e-10
+      ],
+      "max": [
+        0.4300000071525574,
+        0.4300000071525574,
+        0.9449999928474426
+      ]
+    }
+  },
+  "RF-043": {
+    "id": "RF-043",
+    "name": "Open coiled clay vessel in progress",
+    "path": "/domestic-assets/RF-043.glb",
+    "dimensions": [
+      0.8,
+      0.6,
+      0.537
+    ],
+    "purpose": "Expose hand-laid clay coils before smoothing and firing.",
+    "bounds": {
+      "min": [
+        -0.30000001192092896,
+        -0.30000001192092896,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.30000001192092896,
+        0.5370000004768372
+      ]
+    }
+  },
+  "RF-044": {
+    "id": "RF-044",
+    "name": "Chimney pottery firing kiln",
+    "path": "/domestic-assets/RF-044.glb",
+    "dimensions": [
+      1.45,
+      1.8,
+      1.8
+    ],
+    "purpose": "Provide a hollow curved firing chamber with front access and a chimney.",
+    "bounds": {
+      "min": [
+        -0.7250000238418579,
+        -1.0750000476837158,
+        0.0
+      ],
+      "max": [
+        0.7250000238418579,
+        0.7250000238418579,
+        1.7999999523162842
+      ]
+    }
+  },
+  "UP-007": {
+    "id": "UP-007",
+    "name": "Upland shepherd dog",
+    "path": "/domestic-assets/UP-007.glb",
+    "dimensions": [
+      1.33758,
+      0.34,
+      1.01
+    ],
+    "purpose": "Represent a distinct companion animal associated with flock movement.",
+    "bounds": {
+      "min": [
+        -0.675223708152771,
+        -0.16999998688697815,
+        0.0
+      ],
+      "max": [
+        0.6623606085777283,
+        0.16999998688697815,
+        1.0099999904632568
+      ]
+    }
+  },
+  "WW-001": {
+    "id": "WW-001",
+    "name": "Regrowing coppice stool",
+    "path": "/domestic-assets/WW-001.glb",
+    "dimensions": [
+      1.15376,
+      1.11897,
+      1.61167
+    ],
+    "purpose": "Keep an established woody rootstock productive through cycles of cutting and regrowth.",
+    "bounds": {
+      "min": [
+        -0.5748060345649719,
+        -0.530267059803009,
+        0.0
+      ],
+      "max": [
+        0.5789581537246704,
+        0.5886984467506409,
+        1.6116745471954346
+      ]
+    }
+  },
+  "WW-003": {
+    "id": "WW-003",
+    "name": "Bound split-fuel bundle",
+    "path": "/domestic-assets/WW-003.glb",
+    "dimensions": [
+      1.2,
+      0.53335,
+      0.43348
+    ],
+    "purpose": "Keep hand-split billets together for carrying and controlled fuel allocation.",
+    "bounds": {
+      "min": [
+        -0.6000000238418579,
+        -0.2674626111984253,
+        3.725290298461914e-09
+      ],
+      "max": [
+        0.6000000238418579,
+        0.2658909261226654,
+        0.4334840476512909
+      ]
+    }
+  },
+  "WW-051": {
+    "id": "WW-051",
+    "name": "Charcoal grading worker",
+    "path": "/domestic-assets/WW-051.glb",
+    "dimensions": [
+      0.69945,
+      0.61,
+      1.59
+    ],
+    "purpose": "Inspect a hand-held charcoal screen before fuel is packed.",
+    "bounds": {
+      "min": [
+        -0.3497258424758911,
+        -0.45499998331069946,
+        0.0
+      ],
+      "max": [
+        0.3497258424758911,
+        0.1549999862909317,
+        1.590000033378601
+      ]
+    }
+  },
+  "EH-001.sunward-castle": {
+    "id": "EH-001.sunward-castle",
+    "name": "Sunward Castle",
+    "path": "/castle-assets/EH-001.sunward-castle.glb",
+    "dimensions": [
+      40.29832077026367,
+      43.473506927490234,
+      12.85999983549118
+    ],
+    "purpose": "static castle landmark; no economic production",
+    "bounds": {
+      "min": [
+        -20.149160385131836,
+        -21.736753463745117,
+        -0.699999988079071
+      ],
+      "max": [
+        20.149160385131836,
+        21.736753463745117,
+        12.15999984741211
+      ]
+    }
+  },
+  "EH-002.iron-crown": {
+    "id": "EH-002.iron-crown",
+    "name": "Iron Crown Fortress",
+    "path": "/castle-assets/EH-002.iron-crown.glb",
+    "dimensions": [
+      40.29832077026367,
+      43.473506927490234,
+      15.259999454021454
+    ],
+    "purpose": "static castle landmark; no economic production",
+    "bounds": {
+      "min": [
+        -20.149160385131836,
+        -21.736753463745117,
+        -0.699999988079071
+      ],
+      "max": [
+        20.149160385131836,
+        21.736753463745117,
+        14.559999465942383
+      ]
+    }
+  }
+}

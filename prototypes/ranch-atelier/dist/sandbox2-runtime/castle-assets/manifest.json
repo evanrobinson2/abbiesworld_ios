@@ -1,0 +1,207 @@
+{
+  "source": "reviewed castle kit",
+  "assets": [
+    {
+      "id": "EH-001.sunward-castle",
+      "assemblyId": "epic.castle.friendly",
+      "sha256": "c576f9e5153ba76c3b8e1e6820b78f0d11beb248de74093265f2df695ccb7df4",
+      "sourceFootprint": {
+        "orientation": "flat-top",
+        "hex_circumradius_m": 7,
+        "axial_coordinate_system": "x=1.5*R*q; y=sqrt(3)*R*(r+q/2)",
+        "cells": [
+          {
+            "axial": [
+              0,
+              0
+            ],
+            "centre_m": [
+              0.0,
+              0.0,
+              0
+            ]
+          },
+          {
+            "axial": [
+              1,
+              0
+            ],
+            "centre_m": [
+              10.5,
+              6.062178,
+              0
+            ]
+          },
+          {
+            "axial": [
+              1,
+              -1
+            ],
+            "centre_m": [
+              10.5,
+              -6.062178,
+              0
+            ]
+          },
+          {
+            "axial": [
+              0,
+              -1
+            ],
+            "centre_m": [
+              0.0,
+              -12.124356,
+              0
+            ]
+          },
+          {
+            "axial": [
+              -1,
+              0
+            ],
+            "centre_m": [
+              -10.5,
+              -6.062178,
+              0
+            ]
+          },
+          {
+            "axial": [
+              -1,
+              1
+            ],
+            "centre_m": [
+              -10.5,
+              6.062178,
+              0
+            ]
+          },
+          {
+            "axial": [
+              0,
+              1
+            ],
+            "centre_m": [
+              0.0,
+              12.124356,
+              0
+            ]
+          }
+        ],
+        "cell_count": 7
+      },
+      "boardCells": 1,
+      "geometryUp": "Y",
+      "metadataUp": "Z",
+      "units": "metres",
+      "scale": 1,
+      "limitations": [
+        "Static original fantasy castle; no simulation or historical authenticity claim.",
+        "Keeps are exterior masses without interior rooms.",
+        "Assemblies reuse the ten source modules; placement instances and faction material remaps are not additional bases.",
+        "No collision or navigation bake. Static rendering is not a gameplay validation."
+      ]
+    },
+    {
+      "id": "EH-002.iron-crown",
+      "assemblyId": "epic.castle.enemy",
+      "sha256": "612789e336c048a8fa39d4aacc418b6bc533aab15dc62a348265c83f4aee8180",
+      "sourceFootprint": {
+        "orientation": "flat-top",
+        "hex_circumradius_m": 7,
+        "axial_coordinate_system": "x=1.5*R*q; y=sqrt(3)*R*(r+q/2)",
+        "cells": [
+          {
+            "axial": [
+              0,
+              0
+            ],
+            "centre_m": [
+              0.0,
+              0.0,
+              0
+            ]
+          },
+          {
+            "axial": [
+              1,
+              0
+            ],
+            "centre_m": [
+              10.5,
+              6.062178,
+              0
+            ]
+          },
+          {
+            "axial": [
+              1,
+              -1
+            ],
+            "centre_m": [
+              10.5,
+              -6.062178,
+              0
+            ]
+          },
+          {
+            "axial": [
+              0,
+              -1
+            ],
+            "centre_m": [
+              0.0,
+              -12.124356,
+              0
+            ]
+          },
+          {
+            "axial": [
+              -1,
+              0
+            ],
+            "centre_m": [
+              -10.5,
+              -6.062178,
+              0
+            ]
+          },
+          {
+            "axial": [
+              -1,
+              1
+            ],
+            "centre_m": [
+              -10.5,
+              6.062178,
+              0
+            ]
+          },
+          {
+            "axial": [
+              0,
+              1
+            ],
+            "centre_m": [
+              0.0,
+              12.124356,
+              0
+            ]
+          }
+        ],
+        "cell_count": 7
+      },
+      "boardCells": 1,
+      "geometryUp": "Y",
+      "metadataUp": "Z",
+      "units": "metres",
+      "scale": 1,
+      "limitations": [
+        "Static original fantasy castle; no simulation or historical authenticity claim.",
+        "Keeps are exterior masses without interior rooms.",
+        "Assemblies reuse the ten source modules; placement instances and faction material remaps are not additional bases.",
+        "No collision or navigation bake. Static rendering is not a gameplay validation."
+      ]
+    }
+  ]
+}

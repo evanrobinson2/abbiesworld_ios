@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RI-001",
+  "name": "Wraparound cockpit console",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocketship-interior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Arrange instruments and paired hand controls around a seated pilot position.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-interior/ri-001",
+  "biome": "rocketship-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 29,
+    "triangles": 1228,
+    "bounds_min": [
+      -0.9767346382141113,
+      -0.45500004291534424,
+      0.0
+    ],
+    "bounds_max": [
+      0.9767346382141113,
+      0.42499998211860657,
+      1.399999976158142
+    ],
+    "dimensions_m": [
+      1.95347,
+      0.88,
+      1.4
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "flight-control",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "operate",
+      "service"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "left-control",
+        "position_blender_m": [
+          -0.11999999731779099,
+          -0.36000001430511475,
+          1.090000033378601
+        ],
+        "role": "left-control"
+      },
+      {
+        "id": "pilot",
+        "position_blender_m": [
+          0.0,
+          -0.8999999761581421,
+          0.0
+        ],
+        "role": "pilot"
+      },
+      {
+        "id": "right-control",
+        "position_blender_m": [
+          0.11999999731779099,
+          -0.36000001430511475,
+          1.090000033378601
+        ],
+        "role": "right-control"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "standby",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "active",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "alert",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "service",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "isolated",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Arrange instruments and paired hand controls around a seated pilot position. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See console(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-interior/batch_rocket_interior.py",
+    "entry_point": "console",
+    "source_sha256": "1a50ca93954f9acebd495f308fa094a17f866c3ead457bda637408ac8b65e94c",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-interior batch_rocket_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RI-001"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RI-001.glb",
+    "sha256": "3a16c68df2f176e55fa59e6124119a9e867dcfae7fab678947e10d884f4c192a",
+    "bytes": 74084
+  }
+}

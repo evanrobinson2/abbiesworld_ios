@@ -1,0 +1,15 @@
+{
+  "sourceSha256": "7e5a7fe7d2ae35803b3c724743113da91ce971d95b811762fffb6724254832cf",
+  "wasmSha256": "d6db5a5e8a0cf7afee2abc848acfcdc5e33d04c766bbd4e4a62488b94055cabc",
+  "compiler": "clang version 23.1.0-wasi-sdk (https://github.com/llvm/llvm-project 895aa2c896ada719451be2e3673c83da8ddf1141)\nTarget: wasm32-unknown-wasip1\nThread model: posix\nInstalledDir: /private/tmp/ranch-wasi-sdk/wasi-sdk-34.0-arm64-macos/bin\nConfiguration file: /private/tmp/ranch-wasi-sdk/wasi-sdk-34.0-arm64-macos/bin/clang.cfg\n",
+  "flags": [
+    "-O3",
+    "-ffp-contract=off",
+    "-mexec-model=reactor",
+    "-Wl,--export=obstacle_buffer",
+    "-Wl,--export=peer_buffer",
+    "-Wl,--export=result_buffer",
+    "-Wl,--export=avoid_pen_step"
+  ],
+  "bytes": 34907
+}

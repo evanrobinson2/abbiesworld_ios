@@ -77,9 +77,8 @@ Pick the mode. The payload's `mode` is `auto` unless Evan chose one:
   photos means bespoke; a one-line tweak means quick). Default to standard.
 
 - Read `CLAUDE.md`, `VISION.md` and, for modeling, `docs/MODELER_VISION.md`. Follow the repo rules.
-- Work on the payload's `branch` (`claude/dispatch-<id>`). Create it from `main`, unless CLAUDE.md says
-  that kind of work lives on another branch (Ranch Atelier work: start from and merge into
-  `claude/live-snapshot-2026-10-22`). For a revision or resume, reuse the existing branch.
+- Work on the payload's `branch` (`claude/dispatch-<id>`). Create it from `main` (Ranch Atelier work
+  included: `main` carries the live site). For a revision or resume, reuse the existing branch.
 - Commit in small, meaningful steps and push. Open a PR, and merge it yourself when the work is done
   (standing rule). Deploy the way the project instructions say (Vercel through GitHub) when the
   request implies it should be live.

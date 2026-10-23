@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RF-042",
+  "name": "Flywheel potters throwing stand",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocky-foothills",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Show a rotating head, central spindle and lower momentum wheel.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocky-foothills/rf-042",
+  "biome": "rocky-foothills",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 7,
+    "triangles": 436,
+    "bounds_min": [
+      -0.4300000071525574,
+      -0.4300000071525574,
+      4.474323134218139e-10
+    ],
+    "bounds_max": [
+      0.4300000071525574,
+      0.4300000071525574,
+      0.9449999928474426
+    ],
+    "dimensions_m": [
+      0.86,
+      0.86,
+      0.945
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "pottery-forming",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "center",
+      "turn",
+      "shape",
+      "clean"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "work.001",
+        "position_blender_m": [
+          0.0,
+          -0.6000000238418579,
+          0.03499995172023773
+        ],
+        "role": "work"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocky-foothills",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "empty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "loaded",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "turning",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "cleaned",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Show a rotating head, central spindle and lower momentum wheel. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See potterwheel(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocky-foothills/batch_foothills_5.py",
+    "entry_point": "potterwheel",
+    "source_sha256": "c60c6a957b5de28c03a534e1f1fc38aae2bff80776b98f29bbc7495906e91856",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocky-foothills batch_foothills_5.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RF-042"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Passed rendered PNG contact-sheet inspection: intended functional silhouette, material separation and readable working detail.",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Passed rendered PNG contact-sheet inspection: intended functional silhouette, material separation and readable working detail."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RF-042.glb",
+    "sha256": "075993ce46a6f79a2f0241acda30512b634156a542756cd9ff4ef740f507517f",
+    "bytes": 26420
+  }
+}

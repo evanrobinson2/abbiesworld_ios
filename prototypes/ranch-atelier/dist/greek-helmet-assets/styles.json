@@ -1,0 +1,42 @@
+[
+  {
+    "id": "reference",
+    "name": "01 \u00b7 High fan"
+  },
+  {
+    "id": "swept",
+    "name": "02 \u00b7 Swept crest"
+  },
+  {
+    "id": "transverse",
+    "name": "03 \u00b7 Transverse fan"
+  },
+  {
+    "id": "bare",
+    "name": "04 \u00b7 Uncrested shell"
+  },
+  {
+    "id": "ridge",
+    "name": "05 \u00b7 Low bronze ridge"
+  },
+  {
+    "id": "open",
+    "name": "06 \u00b7 Open cheek guards"
+  },
+  {
+    "id": "neck",
+    "name": "07 \u00b7 Flared neck guard"
+  },
+  {
+    "id": "visor",
+    "name": "08 \u00b7 Angular brow"
+  },
+  {
+    "id": "split",
+    "name": "09 \u00b7 Twin crests"
+  },
+  {
+    "id": "ceremonial",
+    "name": "10 \u00b7 Tall ceremonial"
+  }
+]

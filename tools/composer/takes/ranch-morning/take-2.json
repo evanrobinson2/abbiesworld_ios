@@ -1,0 +1,19 @@
+{
+ "id": "ranch-morning",
+ "take": 2,
+ "title": "Ranch Morning",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "l9quiz7FQZFziam3L2fm",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, pastoral, D major, 76 bpm, flowing harp arpeggios, breathing strings, solo flute melody, french horn answer, sunlit farm morning. Opening: harp and soft strings alone, settling in. Theme: flute carries the melody, harp keeps moving. Answer: horn answers the flute, fuller strings. Return: thins back to harp and strings, ends where it began so it loops. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 120000
+ },
+ "date": "2026-10-22",
+ "sha256": "d79137cdfc1c797873b62aeda92a80451a3b1a156f6a6f7f93545a4f594f9ac5",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-2.master.mp3"
+}

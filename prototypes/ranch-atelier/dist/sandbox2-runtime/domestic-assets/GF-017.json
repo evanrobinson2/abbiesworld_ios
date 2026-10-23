@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-017",
+  "name": "Reed roof garden rest shelter",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 2,
+  "category": "structure",
+  "intent": "Provide shade and a resting bench beside the garden work paths.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-017",
+  "biome": "settled-river-valley",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 58,
+    "triangles": 1672,
+    "bounds_min": [
+      -1.3610001802444458,
+      -0.9758077263832092,
+      0.0
+    ],
+    "bounds_max": [
+      1.3609999418258667,
+      0.9752850532531738,
+      2.179999828338623
+    ],
+    "dimensions_m": [
+      2.722,
+      1.95109,
+      2.18
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed asset affordances; map to canonical scene contract",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "worker-shelter",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "rest",
+      "shelter",
+      "repair"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "entry",
+        "position_blender_m": [
+          0.0,
+          -1.25,
+          0.0
+        ],
+        "role": "entry"
+      },
+      {
+        "id": "rest",
+        "position_blender_m": [
+          0.0,
+          0.10000000149011612,
+          0.0
+        ],
+        "role": "rest"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "garden work paths",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "intact",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "weathered",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "storm-damaged",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "rethatch",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Provide shade and a resting bench beside the garden work paths. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See build_GF_017(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/batch_structures.py",
+    "entry_point": "build_GF_017",
+    "source_sha256": "740f27d7d04a6fdf5669d2677a244c12f6f27ade6b3c12f60f96893e7ed72c6e",
+    "rebuild": "blender --background --python garden-farm/build_remaining.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable base silhouette/materials at card size",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable base silhouette/materials at card size"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-017.glb",
+    "sha256": "279bc09863c9b77a12eef41f5799c9cca942a23ebf3f613043018654b7fb6e66",
+    "bytes": 87788
+  }
+}

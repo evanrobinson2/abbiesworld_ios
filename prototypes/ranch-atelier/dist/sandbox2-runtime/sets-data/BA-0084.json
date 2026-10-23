@@ -1,0 +1,62 @@
+{
+  "id": "aw.ranch.asset.ba-0084",
+  "name": "Cloth and yarn seller",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 85,
+    "triangles": 5492,
+    "bounds_min": [
+      -0.37477409839630127,
+      -0.3499999940395355,
+      0.0
+    ],
+    "bounds_max": [
+      0.37477409839630127,
+      0.1850000023841858,
+      1.690000057220459
+    ],
+    "dimensions_m": [
+      0.7495,
+      0.535,
+      1.69
+    ],
+    "material_slots": [
+      "CharacterHair",
+      "CharacterLeather",
+      "CharacterSkinDeep",
+      "CharacterEye",
+      "CharacterClay",
+      "CharacterLinen",
+      "CharacterSage",
+      "CharacterOchre"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 8
+  },
+  "materials": [
+    "CharacterHair",
+    "CharacterLeather",
+    "CharacterSkinDeep",
+    "CharacterEye",
+    "CharacterClay",
+    "CharacterLinen",
+    "CharacterSage",
+    "CharacterOchre"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0084",
+  "intent": "Layered woven clothing and a bundle of fabric samples.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0084",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

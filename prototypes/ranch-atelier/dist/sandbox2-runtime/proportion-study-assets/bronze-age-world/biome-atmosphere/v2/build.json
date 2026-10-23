@@ -1,0 +1,13 @@
+{
+  "version": "V2.2",
+  "id": "b0e8bd6b2a",
+  "files": {
+    "index.html": "bdb37beee3b38e26a878483862a1c5c1e7a11aa827d5ad5a65d48a090f406fb2",
+    "app.mjs": "d92c53fb159ada6472cdd0ba6f858d3719cbb795d86fad8e0e45591b8defb091",
+    "generator.mjs": "b6e31abda03374325c1a70f05f0f7047acc0437bd4e8329cecfaca1ac1a09fdf",
+    "connections.mjs": "c4947ef99ba453c1a18453d064e14d75c4cc0d1adacfaeca0a1114bc4302dafc",
+    "landscape.mjs": "9fbbf724b855f540cb9dbddf5ba20cf8fb602c0a82e5bd6b392e68bf7ef43eac",
+    "catalog.json": "3c66cafd964862aec44ae08272a2013e31b6a3b30f37613033d955da243081df"
+  },
+  "status": "local prototype; not PC integrated"
+}

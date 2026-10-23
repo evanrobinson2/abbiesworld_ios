@@ -1,0 +1,52 @@
+{
+  "id": "aw.ranch.asset.ba-0008",
+  "name": "Market canopy end panel",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 34,
+    "triangles": 712,
+    "bounds_min": [
+      -0.04945846647024155,
+      -1.1701359748840332,
+      -0.0250001959502697
+    ],
+    "bounds_max": [
+      0.04945846647024155,
+      1.1701360940933228,
+      0.7245622277259827
+    ],
+    "dimensions_m": [
+      0.0989,
+      2.3403,
+      0.7496
+    ],
+    "material_slots": [
+      "Timber",
+      "TimberLight",
+      "Rope",
+      "Reed"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "Timber",
+    "TimberLight",
+    "Rope",
+    "Reed"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Module rests at local ground; assembly must lift it to the chosen eave height.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0008",
+  "intent": "A triangular end screen that closes an exposed canopy.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0008",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

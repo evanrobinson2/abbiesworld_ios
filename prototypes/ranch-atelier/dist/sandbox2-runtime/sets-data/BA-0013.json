@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0013",
+  "name": "Stepped pottery display",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 18,
+    "triangles": 792,
+    "bounds_min": [
+      -0.8999999761581421,
+      -0.67249995470047,
+      0.0
+    ],
+    "bounds_max": [
+      0.8999999761581421,
+      0.6190000176429749,
+      0.7200000286102295
+    ],
+    "dimensions_m": [
+      1.8,
+      1.2915,
+      0.72
+    ],
+    "material_slots": [
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0013",
+  "intent": "Three shallow timber steps sized for pots of different heights.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0013",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

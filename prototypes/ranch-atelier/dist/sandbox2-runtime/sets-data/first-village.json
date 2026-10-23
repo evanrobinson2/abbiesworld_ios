@@ -1,0 +1,597 @@
+{
+  "schema_version": "0.1.0",
+  "diorama_id": "aw.ranch.diorama.first-village.first-encounter",
+  "world": "abbies-world",
+  "project_branch": "abbies-ranch",
+  "region": "aw.ranch.region.first-village",
+  "biome": [
+    "river-valley",
+    "cultivated-lowland",
+    "woodland-edge"
+  ],
+  "era": "fictional-bronze-age",
+  "source_project_link": "https://abbies-ranch-atelier.vercel.app/sets/first-village",
+  "source_library": "../market-village/outputs/market-village.blend",
+  "taxonomy_version": "0.1.0",
+  "units": "metres",
+  "authoring_up": "Z",
+  "gltf_up": "Y",
+  "interaction_state": "static",
+  "asset_ids": [
+    "BA-0001",
+    "BA-0002",
+    "BA-0003",
+    "BA-0011",
+    "BA-0013",
+    "BA-0018",
+    "BA-0022",
+    "BA-0024",
+    "BA-0026",
+    "BA-0041",
+    "BA-0043",
+    "BA-0048",
+    "BA-0051",
+    "BA-0054",
+    "BA-0057",
+    "BA-0058",
+    "BA-0059",
+    "BA-0061",
+    "BA-0063",
+    "BA-0068",
+    "BA-0080",
+    "BA-0081",
+    "BA-0082",
+    "BA-0083",
+    "BA-0087",
+    "BA-0088",
+    "BA-0089",
+    "BA-0090"
+  ],
+  "placements": [
+    {
+      "asset_id": "BA-0087",
+      "canonical_id": "aw.ranch.asset.ba-0087",
+      "group": "FV-02",
+      "position": [
+        -8.4,
+        -7.7,
+        0
+      ],
+      "rotation_z": -0.8,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0022",
+      "canonical_id": "aw.ranch.asset.ba-0022",
+      "group": "FV-02",
+      "position": [
+        -8.7,
+        -8.7,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0063",
+      "canonical_id": "aw.ranch.asset.ba-0063",
+      "group": "FV-02",
+      "position": [
+        -6.6,
+        -8.8,
+        0
+      ],
+      "rotation_z": 0.3,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0002",
+      "canonical_id": "aw.ranch.asset.ba-0002",
+      "group": "FV-03",
+      "position": [
+        -4,
+        -1.5,
+        0
+      ],
+      "rotation_z": -0.12,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0011",
+      "canonical_id": "aw.ranch.asset.ba-0011",
+      "group": "FV-03",
+      "position": [
+        -4,
+        -2,
+        0
+      ],
+      "rotation_z": -0.12,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0041",
+      "canonical_id": "aw.ranch.asset.ba-0041",
+      "group": "FV-03",
+      "position": [
+        -4.4,
+        -2,
+        0.97
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0043",
+      "canonical_id": "aw.ranch.asset.ba-0043",
+      "group": "FV-03",
+      "position": [
+        -3.3,
+        -2.1,
+        0.97
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0081",
+      "canonical_id": "aw.ranch.asset.ba-0081",
+      "group": "FV-03",
+      "position": [
+        -4,
+        -0.7,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0088",
+      "canonical_id": "aw.ranch.asset.ba-0088",
+      "group": "FV-03",
+      "position": [
+        -3.7,
+        -3.6,
+        0
+      ],
+      "rotation_z": 0.2,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0003",
+      "canonical_id": "aw.ranch.asset.ba-0003",
+      "group": "FV-03",
+      "position": [
+        3,
+        2,
+        0
+      ],
+      "rotation_z": 0.15,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0013",
+      "canonical_id": "aw.ranch.asset.ba-0013",
+      "group": "FV-03",
+      "position": [
+        3,
+        1.2,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0051",
+      "canonical_id": "aw.ranch.asset.ba-0051",
+      "group": "FV-03",
+      "position": [
+        4.4,
+        1.4,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0083",
+      "canonical_id": "aw.ranch.asset.ba-0083",
+      "group": "FV-03",
+      "position": [
+        3,
+        2.7,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0090",
+      "canonical_id": "aw.ranch.asset.ba-0090",
+      "group": "FV-03",
+      "position": [
+        1,
+        -1.8,
+        0
+      ],
+      "rotation_z": 0.2,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0061",
+      "canonical_id": "aw.ranch.asset.ba-0061",
+      "group": "FV-04",
+      "position": [
+        -5,
+        4,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0080",
+      "canonical_id": "aw.ranch.asset.ba-0080",
+      "group": "FV-04",
+      "position": [
+        -0.8,
+        3.5,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0089",
+      "canonical_id": "aw.ranch.asset.ba-0089",
+      "group": "FV-04",
+      "position": [
+        -0.8,
+        3.2,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0024",
+      "canonical_id": "aw.ranch.asset.ba-0024",
+      "group": "FV-04",
+      "position": [
+        -4,
+        4,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0018",
+      "canonical_id": "aw.ranch.asset.ba-0018",
+      "group": "FV-04",
+      "position": [
+        -2,
+        4,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0024",
+      "canonical_id": "aw.ranch.asset.ba-0024",
+      "group": "FV-05",
+      "position": [
+        9,
+        4.35,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 0.9
+    },
+    {
+      "asset_id": "BA-0054",
+      "canonical_id": "aw.ranch.asset.ba-0054",
+      "group": "FV-05",
+      "position": [
+        7,
+        4.25,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 0.65
+    },
+    {
+      "asset_id": "BA-0024",
+      "canonical_id": "aw.ranch.asset.ba-0024",
+      "group": "FV-05",
+      "position": [
+        2,
+        8.15,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 0.9
+    },
+    {
+      "asset_id": "BA-0054",
+      "canonical_id": "aw.ranch.asset.ba-0054",
+      "group": "FV-05",
+      "position": [
+        0,
+        8.05,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 0.65
+    },
+    {
+      "asset_id": "BA-0024",
+      "canonical_id": "aw.ranch.asset.ba-0024",
+      "group": "FV-05",
+      "position": [
+        -4.4,
+        7.4,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 0.9
+    },
+    {
+      "asset_id": "BA-0054",
+      "canonical_id": "aw.ranch.asset.ba-0054",
+      "group": "FV-05",
+      "position": [
+        -6.4,
+        7.300000000000001,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 0.65
+    },
+    {
+      "asset_id": "BA-0024",
+      "canonical_id": "aw.ranch.asset.ba-0024",
+      "group": "FV-05",
+      "position": [
+        13,
+        0.25,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 0.9
+    },
+    {
+      "asset_id": "BA-0054",
+      "canonical_id": "aw.ranch.asset.ba-0054",
+      "group": "FV-05",
+      "position": [
+        11,
+        0.15000000000000002,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 0.65
+    },
+    {
+      "asset_id": "BA-0001",
+      "canonical_id": "aw.ranch.asset.ba-0001",
+      "group": "FV-06",
+      "position": [
+        8,
+        -6,
+        0
+      ],
+      "rotation_z": 0.2,
+      "scale": 1.2
+    },
+    {
+      "asset_id": "BA-0011",
+      "canonical_id": "aw.ranch.asset.ba-0011",
+      "group": "FV-06",
+      "position": [
+        8,
+        -6.7,
+        0
+      ],
+      "rotation_z": 0.2,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0057",
+      "canonical_id": "aw.ranch.asset.ba-0057",
+      "group": "FV-06",
+      "position": [
+        8,
+        -6.7,
+        0.97
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0058",
+      "canonical_id": "aw.ranch.asset.ba-0058",
+      "group": "FV-06",
+      "position": [
+        6,
+        -5.6,
+        0
+      ],
+      "rotation_z": 0.3,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0059",
+      "canonical_id": "aw.ranch.asset.ba-0059",
+      "group": "FV-06",
+      "position": [
+        8.6,
+        -6.5,
+        0.97
+      ],
+      "rotation_z": 0,
+      "scale": 0.65
+    },
+    {
+      "asset_id": "BA-0082",
+      "canonical_id": "aw.ranch.asset.ba-0082",
+      "group": "FV-06",
+      "position": [
+        7.7,
+        -5.5,
+        0
+      ],
+      "rotation_z": 0.2,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0068",
+      "canonical_id": "aw.ranch.asset.ba-0068",
+      "group": "FV-06",
+      "position": [
+        10,
+        -1.9,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0051",
+      "canonical_id": "aw.ranch.asset.ba-0051",
+      "group": "FV-06",
+      "position": [
+        10.5,
+        -2.3,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0024",
+      "canonical_id": "aw.ranch.asset.ba-0024",
+      "group": "FV-06",
+      "position": [
+        12,
+        -2.7,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0026",
+      "canonical_id": "aw.ranch.asset.ba-0026",
+      "group": "FV-07",
+      "position": [
+        6,
+        -12.7,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    },
+    {
+      "asset_id": "BA-0048",
+      "canonical_id": "aw.ranch.asset.ba-0048",
+      "group": "FV-07",
+      "position": [
+        -0.2,
+        8.3,
+        0
+      ],
+      "rotation_z": 0,
+      "scale": 1
+    }
+  ],
+  "context_groups": [
+    {
+      "id": "FV-01",
+      "intent": "Land and connected paths"
+    },
+    {
+      "id": "FV-02",
+      "intent": "Stream crossing and arrival"
+    },
+    {
+      "id": "FV-03",
+      "intent": "Trade at the shared square"
+    },
+    {
+      "id": "FV-04",
+      "intent": "Shared water and shade"
+    },
+    {
+      "id": "FV-05",
+      "intent": "Homes around the common"
+    },
+    {
+      "id": "FV-06",
+      "intent": "Timber and clay workyards"
+    },
+    {
+      "id": "FV-07",
+      "intent": "Gardens and grain plots"
+    },
+    {
+      "id": "FV-08",
+      "intent": "Trees and onward paths"
+    }
+  ],
+  "counting": "Context groups and reused instances do not increment the 5,000-asset ledger.",
+  "geometry": {
+    "mesh_objects": 3298,
+    "triangles": 185098,
+    "bounds_min": [
+      -19.9185848236084,
+      -23.0,
+      -1.2000000476837158
+    ],
+    "bounds_max": [
+      19.9185848236084,
+      23.0,
+      6.007499694824219
+    ],
+    "dimensions_m": [
+      39.8372,
+      46.0,
+      7.2075
+    ]
+  },
+  "limitations": [
+    "Static diorama; no gameplay or NPC simulation.",
+    "Fictional Bronze Age visual setting, not a reconstruction of a named historical culture."
+  ],
+  "encounter": {
+    "sequence": [
+      "arrive",
+      "meet",
+      "discover"
+    ],
+    "entry": "ranch path across the stream",
+    "first_familiar_good": "ranch produce",
+    "next_discoveries": [
+      {
+        "clue": "cart wheel",
+        "destination": "woodland and timber supply",
+        "status": "planned"
+      },
+      {
+        "clue": "pottery",
+        "destination": "riverbank clay gathering",
+        "status": "planned"
+      },
+      {
+        "clue": "grain",
+        "destination": "neighboring farms",
+        "status": "planned"
+      },
+      {
+        "clue": "onward road",
+        "destination": "next settlement",
+        "status": "planned"
+      }
+    ]
+  }
+}

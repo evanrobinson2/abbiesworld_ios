@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {body,advance} from '../tile-game-assets/bronze-age-world/tile-game/inertia.mjs';
+test('contents lag, oscillate and settle without affecting simulation',()=>{const b=body();advance(b,1/60,{dx:4});assert.ok(b.x<-2);let crossed=false;for(let i=0;i<600;i++){advance(b,1/60);if(b.x>0)crossed=true;}assert.ok(crossed);assert.ok(Math.abs(b.x)<.001);});
+test('violent repeated shakes stay inside six padded walls',()=>{const b=body();for(let i=0;i<1000;i++){advance(b,1/60,{dx:Math.sin(i)*30,dz:Math.cos(i)*30,anchorX:2,anchorZ:2});for(let k=0;k<6;k++){const a=k*Math.PI/3;assert.ok((2+b.x)*Math.cos(a)+(2+b.z)*Math.sin(a)<=9.3+1e-8);}assert.ok(Object.values(b).every(Number.isFinite));}});
+test('reduced motion clears residual velocity and offsets',()=>{const b=body();advance(b,.1,{dx:10});advance(b,.1,{reduced:true});assert.deepEqual(b,body());assert.throws(()=>advance(b,NaN));});

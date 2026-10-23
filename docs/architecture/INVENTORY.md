@@ -24,7 +24,7 @@ Tags as in [README.md](README.md). This page lists where secrets live, never the
 | Project | URL | Source | Notes |
 | --- | --- | --- | --- |
 | `studio-mock` (`prj_pzwVcsM9ail2RkYhQpnRj6Uexqkp`) | studio-mock-iota.vercel.app | main `prototypes/studio-mock` | ChatGPT MCP, dispatch bridge |
-| `abbies-ranch-atelier` (`prj_BVnIsSnrYu2TkFgLpWiJrLW6NfzI`) | abbies-ranch-atelier.vercel.app (ranch.abbies.world pending DNS) | live branch `prototypes/ranch-atelier/dist` | The game Evan plays |
+| `abbies-ranch-atelier` (`prj_BVnIsSnrYu2TkFgLpWiJrLW6NfzI`) | abbies-ranch-atelier.vercel.app (ranch.abbies.world pending DNS) | `main` `prototypes/ranch-atelier/dist` (production branch) | The game Evan plays |
 | `story-forge` (`prj_sAE2FKZKaCl1u41RgV5y2Ly6lvuA`) | **[unknown]** | **[unknown]** repo | Owns the R2 keys, Postgres, KV |
 | `abbies-holodeck-preview`, `ranch-atelier-cloud-preview` | *.vercel.app | snapshots | Previews |
 | `asset-viewer` | | main `prototypes/asset-viewer` | |

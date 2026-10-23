@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "family-home",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/family-home-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "f8f82d2a-5cc8-438b-bdc8-b92aa5d011ab",
+      "grid_url": "https://www.midjourney.com/jobs/f8f82d2a-5cc8-438b-bdc8-b92aa5d011ab?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "0fea0a4e-9537-4bda-a2da-265b790813b1",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:35:43.012Z",
+      "grid_done_at": null,
+      "upscale_clicked_at": "2026-10-22T20:36:13.527Z",
+      "downloaded_at": "2026-10-22T20:37:29.324Z",
+      "pick_reason": "all features: two blue-shuttered windows with flower boxes, stone step, brick chimney, stone foundation"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "8dae67cb-2bbb-411b-9272-aed13d775afa",
+      "grid_url": "https://www.midjourney.com/jobs/8dae67cb-2bbb-411b-9272-aed13d775afa?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "763fc315-ee10-4b20-8561-9da5af4e2b55",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:38:13.928Z",
+      "grid_done_at": null,
+      "upscale_clicked_at": "2026-10-22T20:38:48.230Z",
+      "downloaded_at": "2026-10-22T20:40:10.779Z",
+      "pick_reason": "three cleanly separated views of the same cottage: front with door and shuttered windows, side gable, back"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "156e1844baaa1517afa1cab395e95e3d44724b26b896de623aa89914b85b6dd3",
+      "bytes": 2255541,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/0fea0a4e-9537-4bda-a2da-265b790813b1/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "f32dcb31918ac97881531dc6cead764d95111df0f6766990ef2e905e9d6f40ed",
+      "bytes": 4365389,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/763fc315-ee10-4b20-8561-9da5af4e2b55/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "fc755b3295f019cc81876105dfb4331254cb4a7651e691acd8eb47798f9e18e7",
+      "bytes": 1278886,
+      "pixels": [
+        857,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/family-home [('front', 143, 1000), ('side', 1000, 1848), ('back', 1848, 2794)]"
+    },
+    "view_side.png": {
+      "sha256": "824793f2cdad4d7a003c6549cda443578d368476f7f2837202e99d163c97876f",
+      "bytes": 1393242,
+      "pixels": [
+        848,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/family-home [('front', 143, 1000), ('side', 1000, 1848), ('back', 1848, 2794)]"
+    },
+    "view_back.png": {
+      "sha256": "828368727c8c6acdf09aa77ecd2a94cbcdf73d14eb5b676b5548ed9ee11ef027",
+      "bytes": 1339169,
+      "pixels": [
+        946,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/family-home [('front', 143, 1000), ('side', 1000, 1848), ('back', 1848, 2794)]"
+    }
+  }
+}

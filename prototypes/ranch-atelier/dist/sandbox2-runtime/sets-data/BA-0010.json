@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0010",
+  "name": "Canopy rope anchor",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 8,
+    "triangles": 628,
+    "bounds_min": [
+      -0.5130000114440918,
+      -0.13300000131130219,
+      0.0085609070956707
+    ],
+    "bounds_max": [
+      1.2943328619003296,
+      0.19878248870372772,
+      1.8122084140777588
+    ],
+    "dimensions_m": [
+      1.8073,
+      0.3318,
+      1.8036
+    ],
+    "material_slots": [
+      "Rope",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Rope",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Upper tether endpoint requires placement against a canopy attachment.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0010",
+  "intent": "A stake, tensioned rope, and knot assembly securing a stall canopy.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0010",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

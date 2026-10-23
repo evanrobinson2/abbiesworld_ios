@@ -1,0 +1,49 @@
+{
+  "id": "aw.ranch.asset.ba-0003",
+  "name": "Reed screen stall",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 199,
+    "triangles": 7488,
+    "bounds_min": [
+      -1.7137749195098877,
+      -1.2858996391296387,
+      -0.0006375906523317099
+    ],
+    "bounds_max": [
+      1.7137749195098877,
+      1.2858997583389282,
+      2.9049999713897705
+    ],
+    "dimensions_m": [
+      3.4275,
+      2.5718,
+      2.9056
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Reed",
+      "Timber",
+      "Rope"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "TimberLight",
+    "Reed",
+    "Timber",
+    "Rope"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0003",
+  "intent": "An enclosed rear screen and open customer side for exposed market edges.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0003",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

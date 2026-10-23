@@ -1,0 +1,1235 @@
+{
+  "cards": [
+    {
+      "id": "home",
+      "label": "Courtyard home",
+      "description": "A place to return to",
+      "needs": "food",
+      "produces": "comfort",
+      "assets": [
+        "GF-191",
+        "GF-011",
+        "GF-014"
+      ],
+      "actor": "GF-008",
+      "color": 10201455
+    },
+    {
+      "id": "garden",
+      "label": "Kitchen garden",
+      "description": "Grow food for nearby homes",
+      "needs": null,
+      "produces": "food",
+      "assets": [
+        "GF-004",
+        "GF-031",
+        "GF-036"
+      ],
+      "actor": "GF-008",
+      "color": 9544805
+    },
+    {
+      "id": "woodland",
+      "label": "Coppice wood",
+      "description": "Regrowth and timber gathering",
+      "needs": null,
+      "produces": "wood",
+      "assets": [
+        "WW-001",
+        "WW-004",
+        "WW-002"
+      ],
+      "actor": "WW-006",
+      "color": 7967587
+    },
+    {
+      "id": "river",
+      "label": "Reed landing",
+      "description": "Gather reeds by the water",
+      "needs": null,
+      "produces": "reeds",
+      "assets": [
+        "RW-001",
+        "RW-003",
+        "RW-006"
+      ],
+      "actor": "GF-008",
+      "color": 9350033
+    },
+    {
+      "id": "pasture",
+      "label": "Shepherd\u2019s meadow",
+      "description": "Tend the flock",
+      "needs": null,
+      "produces": "wool",
+      "assets": [
+        "UP-001",
+        "UP-006",
+        "UP-004"
+      ],
+      "actor": "UP-008",
+      "color": 11057272
+    },
+    {
+      "id": "quarry",
+      "label": "Stone works",
+      "description": "Sort useful stone",
+      "needs": null,
+      "produces": "stone",
+      "assets": [
+        "RF-003",
+        "RF-004",
+        "RF-002"
+      ],
+      "actor": "RF-006",
+      "color": 10920330
+    },
+    {
+      "id": "coast",
+      "label": "Boat yard",
+      "description": "Timber becomes small boats",
+      "needs": "wood",
+      "produces": "boats",
+      "assets": [
+        "CE-006",
+        "CE-005",
+        "CE-003"
+      ],
+      "actor": "CE-007",
+      "color": 12892300
+    },
+    {
+      "id": "orchard",
+      "label": "Orchard",
+      "description": "A generous fruit harvest",
+      "needs": null,
+      "produces": "fruit",
+      "assets": [
+        "GF-153",
+        "GF-152",
+        "GF-025"
+      ],
+      "actor": "GF-008",
+      "color": 9610602
+    },
+    {
+      "id": "store",
+      "label": "Storehouse",
+      "description": "Receive goods along connected paths",
+      "needs": null,
+      "produces": null,
+      "assets": [
+        "GF-410",
+        "GF-025",
+        "GF-014"
+      ],
+      "actor": "GF-008",
+      "color": 11511676
+    },
+    {
+      "id": "workshop",
+      "label": "Weaving yard",
+      "description": "Reeds become woven goods",
+      "needs": "reeds",
+      "produces": "baskets",
+      "assets": [
+        "GF-017",
+        "GF-030",
+        "WW-003"
+      ],
+      "actor": "WW-006",
+      "color": 11248759
+    }
+  ],
+  "assets": {
+    "GF-191": {
+      "id": "GF-191",
+      "name": "Enclosed courtyard household",
+      "url": "../garden-farm/outputs/assets/GF-191.glb",
+      "sha256": "9e8d5a67c95bb2bcfada1994ba9d9bdcbf5fdc8c09c16ed50f9124c2659a14b7",
+      "dimensionsMetres": [
+        5.6,
+        4.68123,
+        2.53623
+      ],
+      "radius": 3.6494490787275002,
+      "anchors": [
+        {
+          "id": "courtyard",
+          "position": {
+            "x": 0.0,
+            "y": 0.07999999821186066,
+            "z": -0.034386277198791504
+          }
+        },
+        {
+          "id": "dropoff",
+          "position": {
+            "x": -1.649999976158142,
+            "y": 0.07999999821186066,
+            "z": -0.13438627868890762
+          }
+        },
+        {
+          "id": "entry",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 2.4656137228012085
+          }
+        },
+        {
+          "id": "worker_stand",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.9656137228012085
+          }
+        }
+      ]
+    },
+    "GF-011": {
+      "id": "GF-011",
+      "name": "Stone lined garden draw well",
+      "url": "../garden-farm/outputs/assets/GF-011.glb",
+      "sha256": "11379094477c8d00721e14a8caa8856480aa55fd91858075c4258bb007a0588e",
+      "dimensionsMetres": [
+        1.99289,
+        1.36,
+        1.695
+      ],
+      "radius": 1.20635924915632,
+      "anchors": [
+        {
+          "id": "draw-water",
+          "position": {
+            "x": -0.07644453644752502,
+            "y": 0.0,
+            "z": 1.100000023841858
+          }
+        },
+        {
+          "id": "maintenance",
+          "position": {
+            "x": 1.1235555112361908,
+            "y": 0.0,
+            "z": -0.0
+          }
+        }
+      ]
+    },
+    "GF-014": {
+      "id": "GF-014",
+      "name": "Cradled garden water jar",
+      "url": "../garden-farm/outputs/assets/GF-014.glb",
+      "sha256": "bac438b53e970f675036c9454f0c87644bfda677ad3d84c76ceb39fc28fa9104",
+      "dimensionsMetres": [
+        1.08224,
+        0.70856,
+        1.04776
+      ],
+      "radius": 0.64678062184948,
+      "anchors": [
+        {
+          "id": "fill",
+          "position": {
+            "x": -0.12887749075889587,
+            "y": 0.011763693764805794,
+            "z": 0.800000011920929
+          }
+        }
+      ]
+    },
+    "GF-008": {
+      "id": "GF-008",
+      "name": "Garden tender",
+      "url": "../garden-farm/outputs/assets/GF-008.glb",
+      "sha256": "67c21c62369397b3dd5dac5835de0563d0819c4bab8c342ce5044273f7aa0c1b",
+      "dimensionsMetres": [
+        0.77277,
+        0.40328,
+        1.595
+      ],
+      "radius": 0.4358348974382386,
+      "anchors": [
+        {
+          "id": "left-hand",
+          "position": {
+            "x": -0.2800000011920929,
+            "y": 0.8399999737739563,
+            "z": 0.1633606031537056
+          }
+        },
+        {
+          "id": "right-hand",
+          "position": {
+            "x": 0.2800000011920929,
+            "y": 0.8399999737739563,
+            "z": 0.1633606031537056
+          }
+        }
+      ]
+    },
+    "GF-004": {
+      "id": "GF-004",
+      "name": "Onion crop patch",
+      "url": "../garden-farm/outputs/assets/GF-004.glb",
+      "sha256": "eb9114f7fb2d417778d8abaaa513412d8c21f703ac9133f0c732660fa41d79ee",
+      "dimensionsMetres": [
+        0.65281,
+        0.50119,
+        0.44
+      ],
+      "radius": 0.4115070814092997,
+      "anchors": [
+        {
+          "id": "harvest.001",
+          "position": {
+            "x": -0.013594239950180054,
+            "y": 0.019999999552965164,
+            "z": 0.5149999931454659
+          }
+        }
+      ]
+    },
+    "GF-031": {
+      "id": "GF-031",
+      "name": "Flowering flax patch",
+      "url": "../garden-farm/outputs/assets/GF-031.glb",
+      "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+      "dimensionsMetres": [
+        0.39,
+        0.32657,
+        0.53513
+      ],
+      "radius": 0.25433637416814764,
+      "anchors": [
+        {
+          "id": "harvest",
+          "position": {
+            "x": 0.0,
+            "y": 0.3002887740440201,
+            "z": 0.30000001192092896
+          }
+        },
+        {
+          "id": "root",
+          "position": {
+            "x": 0.0,
+            "y": 0.0002887695445679128,
+            "z": -0.0
+          }
+        }
+      ]
+    },
+    "GF-036": {
+      "id": "GF-036",
+      "name": "Lashed vine trellis",
+      "biome": "garden-farm",
+      "category": "structure",
+      "url": "../garden-farm/outputs/assets/GF-036.glb",
+      "dimensionsMetres": [
+        1.1406,
+        0.34228,
+        1.46184
+      ],
+      "radius": 0.5954250495234475,
+      "sha256": "6528d8a41a716d479b3d270cae98abf79aca4fb94bf58dc3610d4318babd44e9",
+      "anchors": [
+        {
+          "id": "access.002",
+          "role": "access",
+          "position": {
+            "x": 1.4215707778930664e-05,
+            "y": 0.01134207658469677,
+            "z": 0.46886000223457813
+          }
+        },
+        {
+          "id": "vine",
+          "role": "vine",
+          "position": {
+            "x": 1.4215707778930664e-05,
+            "y": 0.511342047713697,
+            "z": -0.13114002160727978
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "WW-001": {
+      "id": "WW-001",
+      "name": "Regrowing coppice stool",
+      "biome": "working-woodland",
+      "category": "plant",
+      "url": "../working-woodland/outputs/assets/WW-001.glb",
+      "dimensionsMetres": [
+        1.15376,
+        1.11897,
+        1.61167
+      ],
+      "radius": 0.8036255344530809,
+      "sha256": "c03fd383c5d74849e96d596ff568fa2cfbc81c862b5aac38ff1c7cbd1832c14f",
+      "anchors": [
+        {
+          "id": "root",
+          "role": "root",
+          "position": {
+            "x": -0.002076059579849243,
+            "y": 0.06000000238418579,
+            "z": 0.029215693473815918
+          }
+        },
+        {
+          "id": "work",
+          "role": "work",
+          "position": {
+            "x": -0.002076059579849243,
+            "y": 0.06000000238418579,
+            "z": 0.729215681552887
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "WW-004": {
+      "id": "WW-004",
+      "name": "Ventilated timber seasoning rack",
+      "biome": "working-woodland",
+      "category": "structure",
+      "url": "../working-woodland/outputs/assets/WW-004.glb",
+      "dimensionsMetres": [
+        2.79,
+        1.29422,
+        2.11702
+      ],
+      "radius": 1.5377829339994642,
+      "sha256": "49d4aff40cf05e25e33d645b3ec11321ae73333354257cfa8f2ee739c41da518",
+      "anchors": [
+        {
+          "id": "load",
+          "role": "load",
+          "position": {
+            "x": 0.0,
+            "y": 0.019999995827674866,
+            "z": 0.8999999761581421
+          }
+        },
+        {
+          "id": "shelf-high",
+          "role": "shelf-high",
+          "position": {
+            "x": 0.0,
+            "y": 1.6200000047683716,
+            "z": -0.0
+          }
+        },
+        {
+          "id": "shelf-low",
+          "role": "shelf-low",
+          "position": {
+            "x": 0.0,
+            "y": 0.42000001668930054,
+            "z": -0.0
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "WW-002": {
+      "id": "WW-002",
+      "name": "Fresh-cut hardwood log",
+      "biome": "working-woodland",
+      "category": "inanimate",
+      "url": "../working-woodland/outputs/assets/WW-002.glb",
+      "dimensionsMetres": [
+        2.446,
+        0.77508,
+        0.71141
+      ],
+      "radius": 1.282932676175956,
+      "sha256": "edd77c2c75ae4e7fe061a2378590a41b9fd3fbea59ce0299028e18e335d53e61",
+      "anchors": [
+        {
+          "id": "grip-left",
+          "role": "grip-left",
+          "position": {
+            "x": -0.800000011920929,
+            "y": 0.3199999928474426,
+            "z": -0.0690193772315979
+          }
+        },
+        {
+          "id": "grip-right",
+          "role": "grip-right",
+          "position": {
+            "x": 0.800000011920929,
+            "y": 0.3199999928474426,
+            "z": -0.0690193772315979
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "WW-006": {
+      "id": "WW-006",
+      "name": "Woodland handworker",
+      "biome": "working-woodland",
+      "category": "animate",
+      "url": "../working-woodland/outputs/assets/WW-006.glb",
+      "dimensionsMetres": [
+        0.76542,
+        0.51765,
+        1.59
+      ],
+      "radius": 0.4620144204729978,
+      "sha256": "1df7e53b18da4b6339cfcb92e2baec505ab8f9512b02d435af470e2885eb369c",
+      "anchors": [
+        {
+          "id": "feet",
+          "role": "feet",
+          "position": {
+            "x": 0.013347119092941284,
+            "y": 0.0,
+            "z": -0.03117293119430542
+          }
+        },
+        {
+          "id": "left-hand",
+          "role": "left-hand",
+          "position": {
+            "x": -0.30665287375450134,
+            "y": 0.7699999809265137,
+            "z": 0.17882706224918365
+          }
+        },
+        {
+          "id": "right-hand",
+          "role": "right-hand",
+          "position": {
+            "x": 0.2733471095561981,
+            "y": 1.0399999618530273,
+            "z": 0.21882706880569458
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "RW-001": {
+      "id": "RW-001",
+      "name": "Bound reed landing",
+      "biome": "riverbanks-wetlands",
+      "category": "structure",
+      "url": "../riverbanks-wetlands/outputs/assets/RW-001.glb",
+      "dimensionsMetres": [
+        1.49712,
+        1.9,
+        1.06122
+      ],
+      "radius": 1.2094800840030397,
+      "sha256": "452337f5d66205b959b01de652c39a3197d2f053ccc89069221e85e709fa1ca1",
+      "anchors": [
+        {
+          "id": "access",
+          "role": "access",
+          "position": {
+            "x": 0.00040331482887268066,
+            "y": 0.0012185510713607073,
+            "z": 1.2000000476837158
+          }
+        },
+        {
+          "id": "deck",
+          "role": "deck",
+          "position": {
+            "x": 0.00040331482887268066,
+            "y": 0.5212185500422493,
+            "z": -0.0
+          }
+        },
+        {
+          "id": "mooring",
+          "role": "mooring",
+          "position": {
+            "x": 0.6504032909870148,
+            "y": 0.9012185452738777,
+            "z": -0.800000011920929
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "RW-003": {
+      "id": "RW-003",
+      "name": "Fishing net drying rack",
+      "biome": "riverbanks-wetlands",
+      "category": "inanimate",
+      "url": "../riverbanks-wetlands/outputs/assets/RW-003.glb",
+      "dimensionsMetres": [
+        1.46,
+        0.36951,
+        1.49131
+      ],
+      "radius": 0.7530168723375326,
+      "sha256": "41a2fcaf1d84d77bbeee5f783ed016a90aa948a5e98bf96b5caa232e23bfdd3a",
+      "anchors": [
+        {
+          "id": "access.001",
+          "role": "access",
+          "position": {
+            "x": 0.0,
+            "y": 0.011314548552036285,
+            "z": 0.46024254709482193
+          }
+        },
+        {
+          "id": "hang",
+          "role": "hang",
+          "position": {
+            "x": 0.0,
+            "y": 1.4113144911825657,
+            "z": -0.13975747674703598
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "RW-006": {
+      "id": "RW-006",
+      "name": "Wetland reed clump",
+      "biome": "riverbanks-wetlands",
+      "category": "plant",
+      "url": "../riverbanks-wetlands/outputs/assets/RW-006.glb",
+      "dimensionsMetres": [
+        0.8801,
+        0.4902,
+        1.18352
+      ],
+      "radius": 0.5037042907301862,
+      "sha256": "21d5012da11e091d9d601731dc46485386a9b0c1676afabfd29e3457065f85d9",
+      "anchors": [
+        {
+          "id": "harvest",
+          "role": "harvest",
+          "position": {
+            "x": 0.0040914565324783325,
+            "y": 0.400832935818471,
+            "z": 0.3075587674975395
+          }
+        },
+        {
+          "id": "root",
+          "role": "root",
+          "position": {
+            "x": 0.0040914565324783325,
+            "y": 0.0008329444099217653,
+            "z": 0.007558755576610565
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "UP-001": {
+      "id": "UP-001",
+      "name": "Stone backed pasture shelter",
+      "biome": "upland-pasture",
+      "category": "structure",
+      "url": "../upland-pasture/outputs/assets/UP-001.glb",
+      "dimensionsMetres": [
+        3.05777,
+        2.13806,
+        1.92092
+      ],
+      "radius": 1.86556009930664,
+      "sha256": "fd20900458d84777af5491efafe1f5336602c136a6b0251455bef1de001508f6",
+      "anchors": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": {
+            "x": 0.0,
+            "y": 0.019999995827674866,
+            "z": 1.3895742893218994
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "UP-006": {
+      "id": "UP-006",
+      "name": "Woolly pasture sheep",
+      "biome": "upland-pasture",
+      "category": "animate",
+      "url": "../upland-pasture/outputs/assets/UP-006.glb",
+      "dimensionsMetres": [
+        1.394,
+        0.66971,
+        1.13
+      ],
+      "radius": 0.773263778425577,
+      "sha256": "63fac6d9653570e0473fb286bdfc6563ede5b99c2155187f617e85047bdb7ffc",
+      "anchors": [
+        {
+          "id": "approach",
+          "role": "approach",
+          "position": {
+            "x": -0.07691222429275513,
+            "y": 0.0,
+            "z": 0.7002080380916595
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "UP-004": {
+      "id": "UP-004",
+      "name": "Slatted hay feeding cradle",
+      "biome": "upland-pasture",
+      "category": "inanimate",
+      "url": "../upland-pasture/outputs/assets/UP-004.glb",
+      "dimensionsMetres": [
+        1.72,
+        0.93,
+        1.16798
+      ],
+      "radius": 0.977663029882996,
+      "sha256": "1b0710ead1499645ba75b2060fb97a956df7c79dacdfa41aa8638c13a597f815",
+      "anchors": [
+        {
+          "id": "feed",
+          "role": "feed",
+          "position": {
+            "x": 0.0,
+            "y": 0.006778879091143608,
+            "z": -0.8000000566244125
+          }
+        },
+        {
+          "id": "load",
+          "role": "load",
+          "position": {
+            "x": 0.0,
+            "y": 0.006778879091143608,
+            "z": 0.8999999314546585
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "UP-008": {
+      "id": "UP-008",
+      "name": "Pasture shepherd",
+      "biome": "upland-pasture",
+      "category": "animate",
+      "url": "../upland-pasture/outputs/assets/UP-008.glb",
+      "dimensionsMetres": [
+        0.78304,
+        0.346,
+        1.66
+      ],
+      "radius": 0.4280384450023152,
+      "sha256": "6970e7ec358fec8f0cc5949f1446330eb26e2b725713e86ac94e3680da2d1d55",
+      "anchors": [
+        {
+          "id": "left-hand",
+          "role": "left-hand",
+          "position": {
+            "x": -0.3494810163974762,
+            "y": 0.8799999952316284,
+            "z": 0.13199999183416367
+          }
+        },
+        {
+          "id": "right-hand",
+          "role": "right-hand",
+          "position": {
+            "x": 0.3305189907550812,
+            "y": 0.8799999952316284,
+            "z": 0.13199999183416367
+          }
+        },
+        {
+          "id": "stand",
+          "role": "stand",
+          "position": {
+            "x": -0.00948101282119751,
+            "y": 0.0,
+            "z": 0.5220000073313713
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "RF-003": {
+      "id": "RF-003",
+      "name": "Copper-bearing fracture outcrop",
+      "biome": "rocky-foothills",
+      "category": "inanimate",
+      "url": "../rocky-foothills/outputs/assets/RF-003.glb",
+      "dimensionsMetres": [
+        1.67331,
+        1.3559,
+        1.3
+      ],
+      "radius": 1.0768508678201454,
+      "sha256": "ae4c8c59ad19ad582a2f743b40af5a73e498b9f7160d46a275d3081f893d9709",
+      "anchors": [
+        {
+          "id": "sample",
+          "role": "sample",
+          "position": {
+            "x": 0.12111499905586243,
+            "y": 0.12999999523162842,
+            "z": 0.8199003636837006
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "RF-004": {
+      "id": "RF-004",
+      "name": "Three-bay mineral sorting bench",
+      "biome": "rocky-foothills",
+      "category": "structure",
+      "url": "../rocky-foothills/outputs/assets/RF-004.glb",
+      "dimensionsMetres": [
+        1.6,
+        0.88,
+        0.905
+      ],
+      "radius": 0.9130169768410663,
+      "sha256": "0a4f5f2c7b041d484358656c7eb0b91a37f9d7c03761ec22bd81f13b4c40142f",
+      "anchors": [
+        {
+          "id": "clay",
+          "role": "clay",
+          "position": {
+            "x": -0.5,
+            "y": 0.8500000238418579,
+            "z": -0.0
+          }
+        },
+        {
+          "id": "ore",
+          "role": "ore",
+          "position": {
+            "x": 0.5,
+            "y": 0.8500000238418579,
+            "z": -0.0
+          }
+        },
+        {
+          "id": "stone",
+          "role": "stone",
+          "position": {
+            "x": 0.0,
+            "y": 0.8500000238418579,
+            "z": -0.0
+          }
+        },
+        {
+          "id": "work.001",
+          "role": "work",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.800000011920929
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "RF-002": {
+      "id": "RF-002",
+      "name": "Bedded building-stone seam",
+      "biome": "rocky-foothills",
+      "category": "inanimate",
+      "url": "../rocky-foothills/outputs/assets/RF-002.glb",
+      "dimensionsMetres": [
+        1.9,
+        1.85,
+        0.935
+      ],
+      "radius": 1.325943060617612,
+      "sha256": "96b2e7db10146eee5e7f37cb02db92416c85569c66b5955955a6f878dce314e4",
+      "anchors": [
+        {
+          "id": "work",
+          "role": "work",
+          "position": {
+            "x": 0.04999998211860657,
+            "y": 0.005000002682209015,
+            "z": 1.0750000476837158
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "RF-006": {
+      "id": "RF-006",
+      "name": "Foothill material inspector",
+      "biome": "rocky-foothills",
+      "category": "animate",
+      "url": "../rocky-foothills/outputs/assets/RF-006.glb",
+      "dimensionsMetres": [
+        0.68115,
+        0.4838,
+        1.59
+      ],
+      "radius": 0.41774027891143084,
+      "sha256": "516f82fc9699a9e835b3a32c962c89732d70cff6e833e984ec13afded2503bf7",
+      "anchors": [
+        {
+          "id": "feet",
+          "role": "feet",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -0.07189901173114777
+          }
+        },
+        {
+          "id": "left-hand",
+          "role": "left-hand",
+          "position": {
+            "x": -0.20999999344348907,
+            "y": 1.0,
+            "z": 0.1681009829044342
+          }
+        },
+        {
+          "id": "right-hand",
+          "role": "right-hand",
+          "position": {
+            "x": 0.20999999344348907,
+            "y": 1.0,
+            "z": 0.1681009829044342
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "CE-006": {
+      "id": "CE-006",
+      "name": "Small open coastal rowing boat",
+      "biome": "coast-estuary",
+      "category": "inanimate",
+      "url": "../coast-estuary/outputs/assets/CE-006.glb",
+      "dimensionsMetres": [
+        4.1,
+        1.36,
+        0.83483
+      ],
+      "radius": 2.159837956884729,
+      "sha256": "7bb925f21b73aad24118578cba7268d8ff85448f1b0da850d9fddd05f695abcd",
+      "anchors": [
+        {
+          "id": "board",
+          "role": "board",
+          "position": {
+            "x": 0.0,
+            "y": -0.05999999865889549,
+            "z": 1.0499999523162842
+          }
+        },
+        {
+          "id": "bow",
+          "role": "bow",
+          "position": {
+            "x": 2.299999952316284,
+            "y": -0.05999999865889549,
+            "z": -0.0
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "CE-005": {
+      "id": "CE-005",
+      "name": "Padded boat repair cradle",
+      "biome": "coast-estuary",
+      "category": "structure",
+      "url": "../coast-estuary/outputs/assets/CE-005.glb",
+      "dimensionsMetres": [
+        2.29,
+        1.45,
+        0.715
+      ],
+      "radius": 1.3552306076826925,
+      "sha256": "fafb0b1f20004096b464d7860b0832c94c244f0d4785c1a34f7619126d69ff7c",
+      "anchors": [
+        {
+          "id": "work.002",
+          "role": "work",
+          "position": {
+            "x": -0.14499998092651367,
+            "y": 0.0,
+            "z": 1.0
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "CE-003": {
+      "id": "CE-003",
+      "name": "Open coastal fish drying frame",
+      "biome": "coast-estuary",
+      "category": "inanimate",
+      "url": "../coast-estuary/outputs/assets/CE-003.glb",
+      "dimensionsMetres": [
+        1.9,
+        0.78792,
+        1.61837
+      ],
+      "radius": 1.0284476076106162,
+      "sha256": "3593b178a0a1602673d13be5f61688036ce96907dcbeeb9dd490b5b68c1de53d",
+      "anchors": [
+        {
+          "id": "work.001",
+          "role": "work",
+          "position": {
+            "x": 0.0,
+            "y": 0.009616333991289139,
+            "z": 0.799999937415123
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "CE-007": {
+      "id": "CE-007",
+      "name": "Coastal net and boat worker",
+      "biome": "coast-estuary",
+      "category": "animate",
+      "url": "../coast-estuary/outputs/assets/CE-007.glb",
+      "dimensionsMetres": [
+        0.75772,
+        0.51194,
+        1.59
+      ],
+      "radius": 0.4572259184473251,
+      "sha256": "1b6271635e22cf53aa244a08e215d1a6644edb3951960731842e2b657c0dab46",
+      "anchors": [
+        {
+          "id": "left-hand",
+          "role": "left-hand",
+          "position": {
+            "x": -0.27308158576488495,
+            "y": 0.8600000143051147,
+            "z": 0.10402993112802505
+          }
+        },
+        {
+          "id": "right-hand",
+          "role": "right-hand",
+          "position": {
+            "x": 0.22691841423511505,
+            "y": 0.8600000143051147,
+            "z": 0.10402993112802505
+          }
+        },
+        {
+          "id": "stand",
+          "role": "stand",
+          "position": {
+            "x": -0.02308158576488495,
+            "y": 0.0,
+            "z": 0.38402993232011795
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    },
+    "GF-153": {
+      "id": "GF-153",
+      "name": "Spreading apple orchard tree",
+      "url": "../garden-farm/outputs/assets/GF-153.glb",
+      "sha256": "4369245ff65ace74e67a266e50a95f448af2df424b49a95b6a41bc903eb8a491",
+      "dimensionsMetres": [
+        1.88042,
+        1.88163,
+        1.83
+      ],
+      "radius": 1.330085601878691,
+      "anchors": [
+        {
+          "id": "harvest.002",
+          "position": {
+            "x": 0.004721909761428833,
+            "y": 0.0,
+            "z": 1.100000023841858
+          }
+        }
+      ]
+    },
+    "GF-152": {
+      "id": "GF-152",
+      "name": "Lance leaved olive tree",
+      "url": "../garden-farm/outputs/assets/GF-152.glb",
+      "sha256": "f3cc8c0dccf524588572d107b629c0c3bbca009b95db9eb51be0a2f9da4d90e9",
+      "dimensionsMetres": [
+        1.51038,
+        1.49993,
+        1.93684
+      ],
+      "radius": 1.0643117199979526,
+      "anchors": [
+        {
+          "id": "harvest",
+          "position": {
+            "x": -0.08266851305961609,
+            "y": 0.007363598793745041,
+            "z": 1.040677398443222
+          }
+        }
+      ]
+    },
+    "GF-025": {
+      "id": "GF-025",
+      "name": "Ventilated harvest carrying crate",
+      "url": "../garden-farm/outputs/assets/GF-025.glb",
+      "sha256": "465f0877c778eb8f29fdb1acf3698557b579ebf269f968d4d0e46767f7fe5f7d",
+      "dimensionsMetres": [
+        1.17544,
+        0.785,
+        0.47725
+      ],
+      "radius": 0.7067326569502784,
+      "anchors": [
+        {
+          "id": "pickup.004",
+          "position": {
+            "x": 0.0,
+            "y": -0.004999995231628418,
+            "z": 0.75
+          }
+        }
+      ]
+    },
+    "GF-410": {
+      "id": "GF-410",
+      "name": "Raised enclosed household grain granary",
+      "url": "../garden-farm/outputs/assets/GF-410.glb",
+      "sha256": "b612c21afb42513130a743049e9967329e4a3115787df0c25fed3b2e05953074",
+      "dimensionsMetres": [
+        2.16,
+        2.44273,
+        2.72054
+      ],
+      "radius": 1.630378012371671,
+      "anchors": [
+        {
+          "id": "entry",
+          "position": {
+            "x": 0.0,
+            "y": 0.7300000190734863,
+            "z": 0.4263661205768585
+          }
+        },
+        {
+          "id": "grain_dropoff",
+          "position": {
+            "x": 0.0,
+            "y": 0.7300000190734863,
+            "z": -0.3236338794231415
+          }
+        },
+        {
+          "id": "worker_stand",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 1.4263661205768585
+          }
+        }
+      ]
+    },
+    "GF-017": {
+      "id": "GF-017",
+      "name": "Reed roof garden rest shelter",
+      "url": "../garden-farm/outputs/assets/GF-017.glb",
+      "sha256": "279bc09863c9b77a12eef41f5799c9cca942a23ebf3f613043018654b7fb6e66",
+      "dimensionsMetres": [
+        2.722,
+        1.95109,
+        2.18
+      ],
+      "radius": 1.6745175564994832,
+      "anchors": [
+        {
+          "id": "entry",
+          "position": {
+            "x": 1.1920928955078125e-07,
+            "y": 0.0,
+            "z": 1.2497386634349823
+          }
+        },
+        {
+          "id": "rest",
+          "position": {
+            "x": 1.1920928955078125e-07,
+            "y": 0.0,
+            "z": -0.10026133805513382
+          }
+        }
+      ]
+    },
+    "GF-030": {
+      "id": "GF-030",
+      "name": "Three basin harvest sorting station",
+      "url": "../garden-farm/outputs/assets/GF-030.glb",
+      "sha256": "3174a555b33fe0a33a460ad61d5e18e4f4b439c5a255a5554b560992fe4b823b",
+      "dimensionsMetres": [
+        1.87177,
+        0.788,
+        0.85387
+      ],
+      "radius": 1.0154391824353637,
+      "anchors": [
+        {
+          "id": "collect",
+          "position": {
+            "x": 1.1641128957271576,
+            "y": -0.01612743060104549,
+            "z": 0.44999998807907104
+          }
+        },
+        {
+          "id": "work.005",
+          "position": {
+            "x": -0.1358870565891266,
+            "y": -0.01612743060104549,
+            "z": 0.8999999761581421
+          }
+        }
+      ]
+    },
+    "WW-003": {
+      "id": "WW-003",
+      "name": "Bound split-fuel bundle",
+      "biome": "working-woodland",
+      "category": "inanimate",
+      "url": "../working-woodland/outputs/assets/WW-003.glb",
+      "dimensionsMetres": [
+        1.2,
+        0.53335,
+        0.43348
+      ],
+      "radius": 0.6565939046511169,
+      "sha256": "95968701fa9c08e334c8179430f084ddc490ffa9d8e4abf6bc394fb6f151aef6",
+      "anchors": [
+        {
+          "id": "grip",
+          "role": "grip",
+          "position": {
+            "x": 0.0,
+            "y": 0.40174203738570213,
+            "z": -0.0007858425378799438
+          }
+        }
+      ],
+      "review": "source review passed; assembly review separate"
+    }
+  },
+  "uniqueBaseIncrement": 0
+}

@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-004",
+  "name": "Onion crop patch",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 1,
+  "category": "plant",
+  "intent": "Grow bulbs in short hand-tended rows.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-004",
+  "biome": "settled-river-valley",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 30,
+    "triangles": 500,
+    "bounds_min": [
+      -0.3128115236759186,
+      -0.23559509217739105,
+      0.0
+    ],
+    "bounds_max": [
+      0.3400000035762787,
+      0.26559507846832275,
+      0.4399999976158142
+    ],
+    "dimensions_m": [
+      0.65281,
+      0.50119,
+      0.44
+    ]
+  },
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "crop",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "water",
+      "weed",
+      "harvest"
+    ],
+    "inputs": [
+      "water",
+      "labor"
+    ],
+    "outputs": [
+      "harvest"
+    ],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "harvest.001",
+        "position_blender_m": [
+          0.0,
+          -0.5,
+          0.019999999552965164
+        ],
+        "role": "harvest"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "planting beds and water access",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": [
+      "GF-002",
+      "GF-006"
+    ]
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "seedling",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "mature",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "harvested",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "withered",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Grow bulbs in short hand-tended rows. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See onion(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/build_garden.py",
+    "entry_point": "onion",
+    "source_sha256": "b061c981f1ad506b83f25c9f8865a4df33d289443c03ad60c1af047efa13c137",
+    "rebuild": "blender --background --python garden-farm/build_garden.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Actual existing rendered PNG inspected. Existing card shows five readable onion bulbs with pointed upright foliage. Approves the existing artifact only, not a rerender. Source timestamp is newer; parent confirms intervening change was stats() handling of unused vertices, not these geometry definitions. Current source hash differs from the earlier build; no repaired-render claim.",
+    "deployed": false,
+    "normalization_verification": "Blender glTF reimport passed; measured vertices and preserved wearable fitting origin",
+    "visual_review_passed": true,
+    "review_note": "Actual existing rendered PNG inspected. Existing card shows five readable onion bulbs with pointed upright foliage. Approves the existing artifact only, not a rerender. Source timestamp is newer; parent confirms intervening change was stats() handling of unused vertices, not these geometry definitions. Current source hash differs from the earlier build; no repaired-render claim."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-004.glb",
+    "sha256": "eb9114f7fb2d417778d8abaaa513412d8c21f703ac9133f0c732660fa41d79ee",
+    "bytes": 45384
+  }
+}

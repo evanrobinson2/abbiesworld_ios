@@ -1,0 +1,60 @@
+{
+  "id": "aw.ranch.asset.ba-0083",
+  "name": "Village pottery seller",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 111,
+    "triangles": 5710,
+    "bounds_min": [
+      -0.3553956151008606,
+      -0.45590001344680786,
+      0.0
+    ],
+    "bounds_max": [
+      0.3553956151008606,
+      0.1589723825454712,
+      1.6393001079559326
+    ],
+    "dimensions_m": [
+      0.7108,
+      0.6149,
+      1.6393
+    ],
+    "material_slots": [
+      "CharacterLinen",
+      "CharacterHair",
+      "CharacterSkinOchre",
+      "CharacterClay",
+      "CharacterEye",
+      "CharacterOchre",
+      "CharacterLeather"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 7
+  },
+  "materials": [
+    "CharacterLinen",
+    "CharacterHair",
+    "CharacterSkinOchre",
+    "CharacterClay",
+    "CharacterEye",
+    "CharacterOchre",
+    "CharacterLeather"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0083",
+  "intent": "Cloth head covering, clay marked workwear, and a vessel carrying pose.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0083",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

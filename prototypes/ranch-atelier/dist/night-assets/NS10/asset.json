@@ -1,0 +1,627 @@
+{
+  "name": "Concrete Street Planter",
+  "rationale": "Full-scale, open-top precast concrete trough with 100 mm thick walls, a substantial bottom slab, four low bearing feet, recessed dark soil, and six sparse shoots. Eight irregular-height coping blocks create a chipped, repaired rim without closing the opening. Four flush dark disks approximate drainage outlets along the front wall. The shoots remain within the 650 mm overall height envelope. Subdued concrete variations and broad construction details remain readable at street-view distances. Beam endpoints are in asset-space meters; their identity transforms preserve those coordinates.",
+  "dimensionsM": {
+    "x": 1.25,
+    "y": 0.7,
+    "z": 0.65,
+    "rotationUnits": "degrees",
+    "coordinateSystem": "X and Y horizontal, Z up",
+    "groundZ": 0
+  },
+  "animation": {
+    "implemented": false,
+    "description": "Static environmental asset with no articulated components.",
+    "partAxes": []
+  },
+  "parts": [
+    {
+      "name": "Concrete bottom slab",
+      "primitive": "box",
+      "colorhex": "#85847C",
+      "location": [
+        0,
+        0,
+        0.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.7,
+        0.08
+      ]
+    },
+    {
+      "name": "Front concrete wall",
+      "primitive": "box",
+      "colorhex": "#96958C",
+      "location": [
+        0,
+        -0.3,
+        0.355
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.1,
+        0.47
+      ]
+    },
+    {
+      "name": "Back concrete wall",
+      "primitive": "box",
+      "colorhex": "#929289",
+      "location": [
+        0,
+        0.3,
+        0.355
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.1,
+        0.47
+      ]
+    },
+    {
+      "name": "Left concrete end wall",
+      "primitive": "box",
+      "colorhex": "#8D8D84",
+      "location": [
+        -0.575,
+        0,
+        0.355
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        0.5,
+        0.47
+      ]
+    },
+    {
+      "name": "Right concrete end wall",
+      "primitive": "box",
+      "colorhex": "#99988F",
+      "location": [
+        0.575,
+        0,
+        0.355
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        0.5,
+        0.47
+      ]
+    },
+    {
+      "name": "Recessed dark soil fill",
+      "primitive": "box",
+      "colorhex": "#332C23",
+      "location": [
+        0,
+        0,
+        0.33
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.054,
+        0.504,
+        0.4
+      ]
+    },
+    {
+      "name": "Front left low concrete foot",
+      "primitive": "box",
+      "colorhex": "#72736B",
+      "location": [
+        -0.44,
+        -0.22,
+        0.032
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.18,
+        0.16,
+        0.064
+      ]
+    },
+    {
+      "name": "Front right low concrete foot",
+      "primitive": "box",
+      "colorhex": "#78796F",
+      "location": [
+        0.44,
+        -0.22,
+        0.032
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.18,
+        0.16,
+        0.064
+      ]
+    },
+    {
+      "name": "Back left low concrete foot",
+      "primitive": "box",
+      "colorhex": "#74766D",
+      "location": [
+        -0.44,
+        0.22,
+        0.032
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.18,
+        0.16,
+        0.064
+      ]
+    },
+    {
+      "name": "Back right low concrete foot",
+      "primitive": "box",
+      "colorhex": "#76776E",
+      "location": [
+        0.44,
+        0.22,
+        0.032
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.18,
+        0.16,
+        0.064
+      ]
+    },
+    {
+      "name": "Front drainage outlet left outer",
+      "primitive": "cylinder",
+      "colorhex": "#272822",
+      "location": [
+        -0.45,
+        -0.3485,
+        0.19
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.023,
+      "depth": 0.003
+    },
+    {
+      "name": "Front drainage outlet left inner",
+      "primitive": "cylinder",
+      "colorhex": "#242620",
+      "location": [
+        -0.15,
+        -0.3485,
+        0.19
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.023,
+      "depth": 0.003
+    },
+    {
+      "name": "Front drainage outlet right inner",
+      "primitive": "cylinder",
+      "colorhex": "#292A23",
+      "location": [
+        0.15,
+        -0.3485,
+        0.19
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.023,
+      "depth": 0.003
+    },
+    {
+      "name": "Front drainage outlet right outer",
+      "primitive": "cylinder",
+      "colorhex": "#252720",
+      "location": [
+        0.45,
+        -0.3485,
+        0.19
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.023,
+      "depth": 0.003
+    },
+    {
+      "name": "Front left chipped coping block",
+      "primitive": "box",
+      "colorhex": "#A3A197",
+      "location": [
+        -0.316,
+        -0.3,
+        0.619
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.618,
+        0.1,
+        0.062
+      ]
+    },
+    {
+      "name": "Front right worn coping block",
+      "primitive": "box",
+      "colorhex": "#9C9B91",
+      "location": [
+        0.319,
+        -0.296,
+        0.614
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.612,
+        0.092,
+        0.052
+      ]
+    },
+    {
+      "name": "Back left worn coping block",
+      "primitive": "box",
+      "colorhex": "#99998F",
+      "location": [
+        -0.319,
+        0.3,
+        0.616
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.612,
+        0.1,
+        0.056
+      ]
+    },
+    {
+      "name": "Back right chipped coping block",
+      "primitive": "box",
+      "colorhex": "#A09F95",
+      "location": [
+        0.316,
+        0.3,
+        0.619
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.618,
+        0.1,
+        0.062
+      ]
+    },
+    {
+      "name": "Left front end coping block",
+      "primitive": "box",
+      "colorhex": "#96978D",
+      "location": [
+        -0.575,
+        -0.128,
+        0.617
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        0.244,
+        0.058
+      ]
+    },
+    {
+      "name": "Left back chipped end coping block",
+      "primitive": "box",
+      "colorhex": "#919389",
+      "location": [
+        -0.571,
+        0.131,
+        0.612
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.092,
+        0.238,
+        0.048
+      ]
+    },
+    {
+      "name": "Right front chipped end coping block",
+      "primitive": "box",
+      "colorhex": "#A09E94",
+      "location": [
+        0.575,
+        -0.131,
+        0.615
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        0.238,
+        0.054
+      ]
+    },
+    {
+      "name": "Right back end coping block",
+      "primitive": "box",
+      "colorhex": "#A5A398",
+      "location": [
+        0.575,
+        0.128,
+        0.619
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        0.244,
+        0.062
+      ]
+    },
+    {
+      "name": "Sparse shoot left front",
+      "primitive": "beam",
+      "colorhex": "#596047",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.38,
+        -0.12,
+        0.515
+      ],
+      "end": [
+        -0.4,
+        -0.105,
+        0.635
+      ],
+      "radius": 0.008
+    },
+    {
+      "name": "Sparse shoot left back",
+      "primitive": "beam",
+      "colorhex": "#64674A",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.29,
+        0.12,
+        0.515
+      ],
+      "end": [
+        -0.275,
+        0.11,
+        0.62
+      ],
+      "radius": 0.007
+    },
+    {
+      "name": "Sparse shoot center front",
+      "primitive": "beam",
+      "colorhex": "#4F5A40",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.08,
+        -0.08,
+        0.515
+      ],
+      "end": [
+        -0.095,
+        -0.09,
+        0.645
+      ],
+      "radius": 0.009
+    },
+    {
+      "name": "Sparse shoot center back",
+      "primitive": "beam",
+      "colorhex": "#6B694C",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.11,
+        0.14,
+        0.515
+      ],
+      "end": [
+        0.13,
+        0.12,
+        0.61
+      ],
+      "radius": 0.008
+    },
+    {
+      "name": "Sparse shoot right front",
+      "primitive": "beam",
+      "colorhex": "#596344",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.29,
+        -0.13,
+        0.515
+      ],
+      "end": [
+        0.31,
+        -0.11,
+        0.637
+      ],
+      "radius": 0.009
+    },
+    {
+      "name": "Sparse shoot right back",
+      "primitive": "beam",
+      "colorhex": "#737052",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.41,
+        0.09,
+        0.515
+      ],
+      "end": [
+        0.395,
+        0.1,
+        0.618
+      ],
+      "radius": 0.007
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 58.09574294090271,
+    "usage": {
+      "prompt_tokens": 226,
+      "completion_tokens": 3635,
+      "total_tokens": 3861,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 954,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

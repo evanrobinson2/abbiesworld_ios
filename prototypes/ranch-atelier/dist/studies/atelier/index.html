@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Atelier Pack Before and After</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one reading column; comparison images run full column width, paint sets 2-up, stacking on phones. */
+:root{
+ --bg:#eef0e8;--panel:#f8f9f4;--fg:#22261d;--muted:#5a6052;--line:#d3d8c8;--accent:#4f6e34;
+ --display:"Fraunces",Georgia,serif;--body:"Source Sans 3",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171a14;--panel:#20241c;--fg:#e8ebe0;--muted:#a3aa96;--line:#363c2f;--accent:#a3c47a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171a14;--panel:#20241c;--fg:#e8ebe0;--muted:#a3aa96;--line:#363c2f;--accent:#a3c47a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:17px/1.55 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+main{max-width:1000px;margin:0 auto;display:grid;gap:44px}
+h1,h2{font-family:var(--display);font-weight:600;margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,44px)}h2{font-size:24px}
+p{margin:0;max-width:66ch}.lede{font-size:19px;color:var(--muted)}
+section{display:grid;gap:14px}
+.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.cmp{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1600/1000;max-width:100%;touch-action:pan-y;user-select:none;cursor:ew-resize;background:var(--panel)}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.cmp .after{clip-path:inset(0 0 0 var(--x,50%))}
+.cmp .bar{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;background:#fff;box-shadow:0 0 6px #0007}
+.cmp .tag{position:absolute;bottom:10px;background:#000b;color:#fff;font-size:13px;padding:3px 9px;border-radius:4px}
+.cmp .l{left:10px}.cmp .r{right:10px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.row{grid-template-columns:1fr}}
+figure{margin:0;display:grid;gap:6px}figure img{border-radius:8px;border:1px solid var(--line);width:100%;display:block}
+figcaption{font-size:14px;color:var(--muted)}
+ul{margin:0;padding-left:1.2em;display:grid;gap:8px;max-width:66ch}
+.spec{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px 18px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:15px}
+.spec dt{color:var(--muted)}.spec dd{margin:0;min-width:0;overflow-wrap:anywhere}
+code{font:14px var(--mono);background:var(--panel);border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+a{color:var(--accent)}
+</style>
+</head><body><main>
+<header style="display:grid;gap:10px">
+ <div class="eyebrow">Laurel Orchard Ranch · seed 214 · 4:23 PM</div>
+ <h1>Atelier pack, before and after</h1>
+ <p class="lede">The thirteen original trees, bushes, rocks and yard props, rebuilt in the cloud from a Blender script and dropped into the ranch. Same board, same camera, same moment. Only the landscape models changed.</p>
+</header>
+
+<section>
+ <h2>Whole ranch</h2>
+ <p>Drag across the picture. Woods now read as solid masses of low, full crowns, and open ground gets single oaks and birches.</p>
+ <div class="cmp" id="c1" style="--x:50%"><img src="img/before-wide.jpg" alt="Ranch with the current trees"><img class="after" src="img/after-wide.jpg" alt="Same ranch with the Atelier pack"><div class="bar"></div><span class="tag l">Before</span><span class="tag r">After</span></div>
+ <input type="range" id="r1" min="0" max="100" value="50" aria-label="Slide to compare the whole ranch">
+</section>
+
+<section>
+ <h2>Close to the barn</h2>
+ <p>Same zoom in both. Look for the barrel, crates and bush beside the shed, the boulders, and the oak and birch edge behind the paddock.</p>
+ <div class="cmp" id="c2" style="--x:50%"><img src="img/before-z.jpg" alt="Close view with the current trees"><img class="after" src="img/after-z.jpg" alt="Same close view with the Atelier pack"><div class="bar"></div><span class="tag l">Before</span><span class="tag r">After</span></div>
+ <input type="range" id="r2" min="0" max="100" value="50" aria-label="Slide to compare the close view">
+</section>
+
+<section>
+ <h2>Same models, other paint</h2>
+ <p>Like Northgard, each model is repainted for a land, not remodelled. Firs keep their green in autumn.</p>
+ <div class="row">
+  <figure><img src="img/autumn.jpg" alt="Ranch with autumn paint"><figcaption>?atelier=autumn</figcaption></figure>
+  <figure><img src="img/frost.jpg" alt="Ranch with frost paint"><figcaption>?atelier=frost</figcaption></figure>
+ </div>
+</section>
+
+<section>
+ <h2>How the shots were kept identical</h2>
+ <dl class="spec">
+  <dt>Board</dt><dd>One saved board state, loaded into both runs (seed 214)</dd>
+  <dt>Clock</dt><dd>4:23 PM, Monday, day 1, spring. The simulation pauses on its first frame.</dd>
+  <dt>Randomness</dt><dd>Seeded, so animals and people start in the same places</dd>
+  <dt>Camera</dt><dd>Default fitted view. The close-up adds four wheel steps at the same point.</dd>
+  <dt>Window</dt><dd>1600 × 1000, headless Chromium</dd>
+  <dt>Check</dt><dd>Two runs of the "before" shot came out pixel for pixel the same</dd>
+ </dl>
+</section>
+
+<section>
+ <h2>Where the models came from</h2>
+ <ul>
+  <li>Every model is built from Blender primitives by one script, <code>scripts/atelier-pack/build_pack.py</code>. It uses a fixed seed and takes no outside models or pictures as input.</li>
+  <li>Each model has its own record with the author, tool and version, the prompt, the date, the script and its hash, the reference studied, and the triangle count.</li>
+  <li>Northgard was studied only for proportions and how it repaints: low crowns, flat rocks about half as tall as wide.</li>
+  <li>The models are small. Trees are 60 to 260 triangles each, and the biggest prop, the log pile, is 568.</li>
+ </ul>
+</section>
+
+<section>
+ <h2>What this is and isn't</h2>
+ <ul>
+  <li>This is a rebuild. Your Oct 22 pack and the <code>?painted</code> look are still only on your PC. The painted look is not in these shots.</li>
+  <li>It's off unless you add <code>?atelier</code> to the sandbox address, so the live site hasn't changed. It's on GitHub in <a href="https://github.com/evanrobinson2/abbiesworld_ios/pull/40">PR #40</a>.</li>
+  <li>It's on in the cloud preview with <code>?atelier</code>.</li>
+ </ul>
+</section>
+</main>
+<script>
+for(const [c,r] of [['c1','r1'],['c2','r2']]){const box=document.getElementById(c),range=document.getElementById(r);
+ const set=v=>{box.style.setProperty('--x',v+'%');range.value=v};
+ range.addEventListener('input',()=>set(range.value));
+ const drag=e=>{const b=box.getBoundingClientRect();set(Math.max(0,Math.min(100,(e.clientX-b.left)/b.width*100)))};
+ box.addEventListener('pointerdown',e=>{box.setPointerCapture(e.pointerId);drag(e)});
+ box.addEventListener('pointermove',e=>{if(box.hasPointerCapture(e.pointerId))drag(e)});}
+</script>
+</body></html>

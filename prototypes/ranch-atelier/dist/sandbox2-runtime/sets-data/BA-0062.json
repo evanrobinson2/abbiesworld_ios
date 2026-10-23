@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0062",
+  "name": "Pack animal tether station",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 15,
+    "triangles": 840,
+    "bounds_min": [
+      -1.2999999523162842,
+      -0.1120000034570694,
+      -0.001074414816685021
+    ],
+    "bounds_max": [
+      1.3060860633850098,
+      0.41342318058013916,
+      1.100000023841858
+    ],
+    "dimensions_m": [
+      2.6061,
+      0.5254,
+      1.1011
+    ],
+    "material_slots": [
+      "Timber",
+      "Rope"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Timber",
+    "Rope"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0062",
+  "intent": "Timber rail, tether loops, and space for removable animals.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0062",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-193.prepared-meal",
+  "name": "GF-193.prepared-meal",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "domestic-contents",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Prepared stew contents state for the existing cooking pot; scene may separately reuse BA-0043 bread tray.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/domestic-contents/gf-193.prepared-meal",
+  "biome": "domestic-contents",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 16,
+    "triangles": 976,
+    "bounds_min": [
+      -0.20499999821186066,
+      -0.20499999821186066,
+      0.0
+    ],
+    "bounds_max": [
+      0.20499999821186066,
+      0.20499999821186066,
+      0.04800000041723251
+    ],
+    "dimensions_m": [
+      0.41,
+      0.41,
+      0.048
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "contents-state",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "display proposed contents state"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "pot_local_offset",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.28999999165534973
+        ],
+        "role": "pot_local_offset"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for domestic-contents",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Prepared stew contents state for the existing cooking pot; scene may separately reuse BA-0043 bread tray. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See meal(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "domestic-contents/batch_contents.py",
+    "entry_point": "meal",
+    "source_sha256": "4615a2bc0a32947b8ede6fd3a5f7347d90e84fa731dd2d941bd5766a7d9db562",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- domestic-contents batch_contents.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "GF-193.prepared-meal"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Inspected rendered contact sheet: readable harvested/curing bulbs, pot contents surface, and worked clay. Static contents state; no new base asset. Container placement requires assembly review.",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Inspected rendered contact sheet: readable harvested/curing bulbs, pot contents surface, and worked clay. Static contents state; no new base asset. Container placement requires assembly review."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-193.prepared-meal.glb",
+    "sha256": "c79cfa74b5ef0c5ef1ac58e8ae99bbb799ea9ccbfec3785b4fe78d4b501e8b41",
+    "bytes": 78048
+  },
+  "baseIncrement": 0,
+  "lineage": {
+    "uniqueBaseIncrement": false,
+    "canonicalBaseId": "GF-193",
+    "relationship": "contents-state"
+  },
+  "authoredSpec": {
+    "id": "GF-193.prepared-meal",
+    "name": "GF-193.prepared-meal",
+    "category": "inanimate",
+    "intent": "Prepared stew contents state for the existing cooking pot; scene may separately reuse BA-0043 bread tray.",
+    "role": "contents-state",
+    "base_increment": 0,
+    "base_asset_id": "GF-193",
+    "canonical_id": "aw.ranch.asset.gf-193",
+    "placement_origin": "Place contents origin at cooking-pot local (0,0,.29); radius .205m fits hollow pot.",
+    "compatible_container_ids": [
+      "GF-193"
+    ],
+    "actions": [
+      "display proposed contents state"
+    ],
+    "variants": [],
+    "anchors": [
+      [
+        "pot_local_offset",
+        [
+          0,
+          0,
+          0.29
+        ]
+      ]
+    ]
+  }
+}

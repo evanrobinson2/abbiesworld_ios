@@ -1,0 +1,3 @@
+// Public read-only view of the explicitly shared Claude board. No mutation credential is sent to browsers.
+const {createStore}=require('../lib/claude-board.cjs');
+module.exports=async(req,res)=>{res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type','application/json');res.setHeader('X-Content-Type-Options','nosniff');if(req.method!=='GET'){res.statusCode=405;return res.end(JSON.stringify({error:'Read only'}));}try{res.end(JSON.stringify(await createStore(require('@vercel/blob')).board()));}catch{res.statusCode=503;res.end(JSON.stringify({error:'Claude board temporarily unavailable'}));}};

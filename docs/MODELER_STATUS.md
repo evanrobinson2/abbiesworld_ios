@@ -3,8 +3,8 @@
 What the modeling pipeline does today, measured against `docs/MODELER_VISION.md`. This is the "what is built"
 document; the vision stays the "what and why". Update this file when a gap closes. Status as of 2026-10-22.
 
-Most of the pipeline lives on branch `claude/live-snapshot-2026-10-22` and the thread branches that merge into it
-(`tools/model-challenge`, `tools/ranch-rebuild`, `tools/model-store`), not on `main`.
+The pipeline lives on `main` (`tools/model-challenge`, `tools/ranch-rebuild`, `tools/model-store`), together with the
+live Ranch Atelier site; the old `claude/live-snapshot-2026-10-22` line was merged into `main` on 2026-10-23.
 
 ## Pipeline stages
 

@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Lofted custom meshes, rigid-weighted to an armature; walk and idle keyed on bones.",
+  "blenderVersion": "5.2.1 LTS"
+}

@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Original 1.85 m ranch foreman. Skinned custom clothing, anatomical limbs, articulated hand attachments, continuous braces, constructed boots and sculpted face/hair. Walk and breathing idle are keyed on the deform skeleton; no weapons.",
+  "blenderVersion": "5.2.1 LTS"
+}

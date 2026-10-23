@@ -1,0 +1,70 @@
+[
+  {
+    "id": "squat",
+    "sourceSha256": "09b978bd96a4baa4b6e7ffe85b5cc18b396735b4fbd8c1e06460f8505fd82f2a",
+    "clips": [
+      "walk",
+      "idle 1",
+      "idle 2",
+      "idle 3",
+      "attack",
+      "defend",
+      "celebrate",
+      "perish",
+      "rest"
+    ],
+    "rig": "Rigid articulated transform pivots; source meshes unchanged",
+    "review": "Animation study; not registered for game integration"
+  },
+  {
+    "id": "jointed",
+    "sourceSha256": "d90829857b17059acc6f01d7b5b4e076acf80e2c8b0d55dcfa7d9bbb150b2a90",
+    "clips": [
+      "walk",
+      "idle 1",
+      "idle 2",
+      "idle 3",
+      "attack",
+      "defend",
+      "celebrate",
+      "perish",
+      "rest"
+    ],
+    "rig": "Rigid articulated transform pivots; source meshes unchanged",
+    "review": "Animation study; not registered for game integration"
+  },
+  {
+    "id": "floating",
+    "sourceSha256": "51f49332a6451337d378b0e438a136858133127bebd9fb508f134d421e956bef",
+    "clips": [
+      "walk",
+      "idle 1",
+      "idle 2",
+      "idle 3",
+      "attack",
+      "defend",
+      "celebrate",
+      "perish",
+      "rest"
+    ],
+    "rig": "Rigid articulated transform pivots; source meshes unchanged",
+    "review": "Animation study; not registered for game integration"
+  },
+  {
+    "id": "tapered",
+    "sourceSha256": "4e4f50e9463c7a44ce7b8b635f89b9aaabb2e76b2f79eed7864d7f095f12672a",
+    "clips": [
+      "walk",
+      "idle 1",
+      "idle 2",
+      "idle 3",
+      "attack",
+      "defend",
+      "celebrate",
+      "perish",
+      "rest"
+    ],
+    "rig": "Rigid articulated transform pivots; source meshes unchanged",
+    "review": "Animation study; not registered for game integration"
+  }
+]

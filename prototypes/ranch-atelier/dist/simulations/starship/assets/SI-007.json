@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.1.0",
+  "id": "SI-007",
+  "name": "Tablet-holding station crewmember",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "space-station-interior",
+  "batch": 1,
+  "category": "animate",
+  "intent": "Tablet-holding station crewmember; static scientific fiction, not certified engineering or medical equipment.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/space-station-interior/si-007",
+  "biome": "space-station-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 18,
+    "triangles": 1020,
+    "bounds_min": [
+      -0.3278127610683441,
+      -0.3370000123977661,
+      0.0
+    ],
+    "bounds_max": [
+      0.3278127610683441,
+      0.14999999105930328,
+      1.6449999809265137
+    ],
+    "dimensions_m": [
+      0.65563,
+      0.487,
+      1.645
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "worker",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "record",
+      "move"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "feet.001",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "role": "feet"
+      },
+      {
+        "id": "tablet",
+        "position_blender_m": [
+          0.0,
+          -0.3100000023841858,
+          1.0800000429153442
+        ],
+        "role": "tablet"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for space-station-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "reading",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "working",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "walking",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "resting",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Tablet-holding station crewmember; static scientific fiction, not certified engineering or medical equipment. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See crew(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "space-station-interior/batch_station_interior.py",
+    "entry_point": "crew",
+    "source_sha256": "e430c7b849abc332c69e8e1d3b2291bbec4af92911a8ace3650541efb28a3967",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- space-station-interior batch_station_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "SI-007"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "SI-007.glb",
+    "sha256": "9b2d169b7e3b94deb0955ac00f32d706e4fefa5169e4755fd699b5f68ef75cfb",
+    "bytes": 78112
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
+  "entries": [
+    {
+      "id": "2026-10-23-card-forge",
+      "date": "2026-10-23",
+      "title": "Ranch cards you can hold",
+      "line": "Open a pack of 15 Ranch cards made from the game's animals and buildings. Tilt them in the light, browse the binder, and print the whole set at studio quality. Settings, Studies, Cards.",
+      "image": "/whats-new/2026-10-23-card-forge.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
+      "threadTitle": "Card generator"
+    },
+    {
+      "id": "2026-10-23-ranch-rebuild",
+      "date": "2026-10-23",
+      "title": "A rebuilt ranch",
+      "line": "Every building, animal, tree, prop and plant on the ranch was redrawn as concept art and rebuilt from it. The pen sheds, the cows and the goats are all new.",
+      "image": "/whats-new/2026-10-23-ranch-rebuild.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJJwV5vW99BgS3tVwgdy9Q5",
+      "threadTitle": "Ranch tile rebuild"
+    },
+    {
+      "id": "2026-10-23-live-voice-settings",
+      "date": "2026-10-23",
+      "title": "Pick the Computer's voice",
+      "line": "Settings → Voice opens Live voice: choose OpenAI or ElevenLabs, the voice, speed, personality, reply length and how long it waits for little ones. Safety stays locked.",
+      "image": "/whats-new/2026-10-23-live-voice-settings.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+      "threadTitle": "Live voice world control"
+    },
+    {
+      "id": "2026-10-22-voice-app-control",
+      "date": "2026-10-22",
+      "title": "The voice runs the whole app",
+      "line": "The Computer now knows the ranch, its animals and the other worlds. Ask for a real barn, more goats, winter, a new tile or the moon base, and it does it.",
+      "image": "/whats-new/2026-10-22-voice-app-control.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+      "threadTitle": "Live voice world control"
+    },
+    {
+      "id": "2026-10-22-sounds",
+      "date": "2026-10-22",
+      "title": "A sound library",
+      "line": "450 sounds for the ranch and beyond, picked and levelled by the sound engineer. Open Sounds from Settings to browse them; they start playing once storage is switched on.",
+      "image": "/whats-new/2026-10-22-sounds.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9qGUVvGpSmdcwZSzez8qgn",
+      "threadTitle": "Sound engineer and sound browser"
+    },
+    {
+      "id": "2026-10-22-live-mode",
+      "date": "2026-10-22",
+      "title": "Talk to the world",
+      "line": "Tap the microphone and just say what you want: the Computer builds it as you talk. It only plays the game, and it keeps things PG.",
+      "image": "/whats-new/2026-10-22-live-mode.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+      "threadTitle": "Live voice world control"
+    },
+    {
+      "id": "2026-10-22-workshop",
+      "date": "2026-10-22",
+      "title": "The workshop",
+      "line": "Concept art and models fly in as they're made. Tap the factory button to see every job, its progress and the machines.",
+      "image": "/whats-new/2026-10-22-workshop.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
+      "threadTitle": "iPhone update and feedback loop"
+    },
+    {
+      "id": "2026-10-22-update-card",
+      "date": "2026-10-22",
+      "title": "Updates and feedback from your phone",
+      "line": "This card shows up when a new version is ready. Tap the speech bubble to send Claude a picture and a note.",
+      "image": "/whats-new/2026-10-22-update-card.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
+      "threadTitle": "iPhone update and feedback loop"
+    }
+  ]
+}

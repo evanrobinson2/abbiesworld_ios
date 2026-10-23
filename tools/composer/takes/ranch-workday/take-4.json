@@ -1,0 +1,20 @@
+{
+ "id": "ranch-workday",
+ "take": 4,
+ "title": "Ranch Workday",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-score.json",
+ "song_id": "Q9OgXczwomVmVnLGKQMo",
+ "request": {
+  "prompt": "upbeat family adventure soundtrack, bright, warm and joyful, catchy instrumental hook, light, bouncy percussion, strong melodic bass line, polished modern production, instrumental, G major, 132 bpm, busy working song, chores getting done together, bouncy groove. Groove: groove sets in. Hook: playful hook. Variation: call and answer between instruments. Turnaround: back to the groove so it loops. No vocals, no lyrics, no singing, no humming, no dark, no aggressive, no heavy drums, no EDM drop, no dubstep, no distorted guitar, no cheesy, no kazoo, no 8-bit",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 120000
+ },
+ "date": "2026-10-23",
+ "sha256": "816bb57ff91a7a0e59d96e5c04b7e72eb03c266010d4414cddfcece50f93f0f5",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-4.master.mp3"
+}

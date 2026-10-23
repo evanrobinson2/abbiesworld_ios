@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 128" role="img" aria-label="Mommy, editable farm character" data-character="mommy" data-hat="none" data-uniform="apron"><title>Mommy</title><style>svg[data-character="mommy"] .ink{stroke:var(--ink,#465046);stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}svg[data-character="mommy"] .skin{fill:var(--skin,#d8a781)}svg[data-character="mommy"] .hair{fill:var(--hair,#5b4535)}svg[data-character="mommy"] .shirt{fill:var(--shirt,#6d927c)}svg[data-character="mommy"] .trousers{fill:var(--trousers,#6b7c87)}svg[data-character="mommy"] .shoes{fill:var(--shoes,#725b48)}svg[data-character="mommy"] .hat{fill:var(--hat,#c6b177)}svg[data-character="mommy"] .accessory{fill:var(--accessory,#d5c6a3)}svg[data-character="mommy"] .detail{fill:none;stroke:var(--ink,#465046);stroke-width:.65;opacity:.65}svg[data-character="mommy"] .shadow{fill:#333f34;opacity:.14;stroke:none}svg[data-character="mommy"] .light{fill:#fff8d8;opacity:.3;stroke:none}svg[data-character="mommy"] g[data-hat]{display:none}svg[data-character="mommy"][data-hat="straw"] .straw,svg[data-character="mommy"][data-hat="cap"] .cap{display:inline}svg[data-character="mommy"] g[data-uniform]{display:none}svg[data-character="mommy"][data-uniform="overalls"] .overalls,svg[data-character="mommy"][data-uniform="apron"] .apron,svg[data-character="mommy"][data-uniform="suspenders"] .suspenders{display:inline}
+ </style>
+ <ellipse fill="#59684b" opacity=".18" cx="58" cy="116" rx="24" ry="6"/>
+ <g transform="translate(0 0) scale(1)">
+ <path class="trousers ink" d="M43 81L41 108 51 110 56 90 61 108 70 107 68 80Z"/>
+ <path class="shoes ink" d="M41 104L51 106 51 115Q42 119 36 115L36 112ZM61 104L70 104 75 111Q77 117 63 117L60 113Z"/>
+ <path class="shadow" d="M63 86L67 106 70 105 68 81 56 82 57 91Z"/>
+ <path class="shirt ink" d="M44 49L54 46 64 49 73 57 69 70 66 66 69 86Q54 91 41 85L44 65 39 70 33 59Z"/>
+ <path class="skin ink" d="M34 62L40 66 36 79Q33 87 28 82L29 76ZM68 66L73 61 79 77Q82 84 77 86L73 82Z"/>
+ <path class="shirt ink" d="M44 50L33 58 32 65 40 69 47 58M64 50L73 56 76 64 68 70 62 59"/>
+ <path class="shadow" d="M61 50L65 65 64 85 69 86 66 66 69 70 73 64 68 54Z"/>
+ <g data-uniform="overalls" class="overalls"><path class="trousers ink" d="M44 51L48 50 49 63 61 63 63 51 67 53 65 68 68 85Q55 90 43 85L46 68Z"/><path class="detail" d="M50 68H60L59 77H51Z"/><circle class="accessory" cx="48" cy="65" r="1.4"/><circle class="accessory" cx="62" cy="65" r="1.4"/></g>
+ <g data-uniform="apron" class="apron"><path class="accessory ink" d="M49 54L59 54 64 68 68 94Q54 99 40 93L46 68Z"/><path class="detail" d="M49 54L47 49M59 54L62 49M45 77Q54 80 63 77M48 80L49 87 60 87 61 80"/></g>
+ <g data-uniform="suspenders" class="suspenders"><path class="accessory ink" d="M44 51L48 50 51 84 47 85ZM62 50L65 52 63 85 59 85Z"/></g>
+ <path class="skin ink" d="M50 42L50 50Q55 57 61 50L60 41Z"/>
+ <circle class="hair ink" cx="67" cy="26" r="7"/>
+ <path class="skin ink" d="M43 29Q43 20 55 20 67 20 68 31L67 41Q63 50 55 50 46 49 43 40L40 37 40 32Z"/>
+ <path class="shadow" d="M62 25Q70 37 61 46L55 50Q65 50 68 39L68 29Z"/>
+ <path class="hair ink" d="M42 34Q37 20 47 17 61 10 68 23L69 34 64 31 62 24Q54 31 45 27L45 36Z"/>
+ <path class="detail" d="M45 23Q53 17 61 20M49 36L51 36M60 35L62 35M55 37L54 41 57 41M53 45Q56 46 59 44"/>
+ <g class="straw" data-hat="straw"><path class="hat ink" d="M32 26Q53 18 77 25L79 29Q57 39 32 31Z"/><path class="hat ink" d="M41 26L44 13Q55 8 64 14L69 26Q54 31 41 26Z"/><path class="accessory ink" d="M42 22Q55 27 67 22L69 26Q55 32 41 26Z"/><path class="light" d="M45 14Q50 11 55 12L51 23 44 21Z"/></g>
+ <g class="cap" data-hat="cap"><path class="hat ink" d="M40 27Q39 14 55 14 69 15 71 29L58 32Z"/><path class="hat ink" d="M52 27Q66 23 77 29L77 32 58 35 49 32Z"/><path class="detail" d="M54 15L57 27"/></g>
+ <path class="detail" d="M45 96L46 103M65 96L67 102M35 60L38 62M70 58L72 61"/>
+ <path class="light" d="M34 58L43 52 45 55 36 63Z"/>
+ </g></svg>

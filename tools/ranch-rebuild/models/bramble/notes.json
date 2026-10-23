@@ -1,0 +1,126 @@
+{
+ "what_i_did": [
+  [
+   "Target",
+   "make_views.py keys the hero (the only target, no turnaround) against its per-row edge backdrop and, below row 1380, drops the olive-grey cast shadow by hue (G/R about 0.95, neither leaf green nor cane brown nor berry black). views/hero_mask.png is scored by hero_check.py. The keyed hero is 0.654 as tall as wide."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py renders front-on (yaw 0) from 10 deg up with the harness lens. A calibration grid always prefers the steepest elevation tried, only because a steeper view adds apparent height to a model that is much flatter than the hero (see off); I kept the AD's 'front-on, a few degrees above'."
+  ],
+  [
+   "Size",
+   "AD round: fitted to the hero's proportions, 2.12 m wide x 1.06 m tall (2:1), depth 1.07 m. The game (ranch-regional.mjs) scales every regional asset to its spec height (1.3 for WW-273), so absolute size doesn't matter; the in-game footprint is about 74 % of the old 2.85:1 model's width."
+  ],
+  [
+   "Mound",
+   "A low lumpy dark core dome (Leaf_BrambleShade, 70 tris) under 66 leaves: 45 % lie on top and catch the light (mostly Leaf_BrambleLight), the rest stand on the flanks facing out, denser at the front. Height profile along X is highest on the left, where the arch's leg rises, and tapers right. Four short 3-sided runners trail leaves onto the ground at both ends. The mound is lower centre-right (0.31 m at x 0.25 before the fit) so the window opens down to it."
+  ],
+  [
+   "Canes",
+   "Three olive-brown Bezier canes (Stem_Cane; one 4-sided, two 3-sided, tapering) rooted at the back left: two loop up and over to come down on the right, a third droops from the left into the mound. Leaves every 7.5 cm alternate sides, those below the cane hang forward so the window under the arch stays open, every other one gets a second leaf standing up off the top of the cane to thicken the band, plus thin 3-sided side shoots with a leaf pair and a three-leaf fan at each tip. In the AD round the arch's peak moved right, and cane leaves under the arch are turned forward and up instead of hanging, so the window under the arch stays open; the upright band leaves are 1.25x larger."
+  ],
+  [
+   "Leaves",
+   "Three-lobed faceted cards: 6 outline points fanned from a raised centre (6 triangles), lobes folded back, double-sided materials. Leaf_Bramble (dark) and Leaf_BrambleLight (upper, sun-facing)."
+  ],
+  [
+   "Berries",
+   "13 blackberry clusters (Berry_Black, slightly glossy black-purple): 7 hang on short stalks from the arch (left leg, crown, right side, cane end) and the inner cane, 4 sit in the mound, 2 lie on the ground at the front. Each is 3-5 jittered triangular-bipyramid drupelets (6 tris each) packed into a lump."
+  ],
+  [
+   "Game readiness",
+   "1,976 triangles (budget 2k) in 5 meshes, one flat material each: Leaf_Bramble, Leaf_BrambleLight, Leaf_BrambleShade, Stem_Cane, Berry_Black. All leaf/cane names carry leaf or stem, so the regional loader shades them as foliage; berries get timber shading. Z up, origin at the footprint centre on the ground, front -Y, no animation. to_game.py bramble ran cleanly and WW-273.glb is byte-identical to bramble.glb."
+  ]
+ ],
+ "good": [
+  "Reads as a bramble: a dark leafy mound with olive canes arching over it from left to right, a gap of sky under the arch, and black berry clusters hanging from the arch and dotted through the mound.",
+  "Matches the hero's 2:1 width-to-height (2.12 x 1.06 m), with an open window under the arch above the mound.",
+  "1,976 triangles against 9,800 for the old model."
+ ],
+ "off": [
+  "Hero IoU is 0.62. The hero's window is still a little larger and further right, and its arch band and leafy left column are thicker than 2k triangles allow. The leaf edges are ragged, so the IoU moves by about +-0.015 between runs.",
+  "The in-game footprint is about 74 % of the old model's width, because the loader normalises height (AD's call).",
+  "From the harness's high 3/4 camera the mound's dark core shows as a shadowed patch between the leaves; the 2k budget leaves about 66 mound leaves where the hero shows hundreds.",
+  "Berries are 6-triangle lumps; under the studio light they read dark grey-purple rather than the hero's glossy blue-black."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build: mound ellipse + 3 Bezier canes + 14 berry clusters, 10-tri leaves. 3.2k tris, arch reads poorly.",
+   "hero_iou": 0.411
+  },
+  {
+   "round": 2,
+   "change": "Canes moved to the back of the mound, 8-tri leaves, fewer shoots; 2.4k tris. Camera to 16 deg.",
+   "hero_iou": 0.464
+  },
+  {
+   "round": 3,
+   "change": "Mound leaves stand up and face out, lower core, taller mound profile, bigger berries.",
+   "hero_iou": 0.494
+  },
+  {
+   "round": 4,
+   "change": "Taller, wider arch spanning nearly the full width.",
+   "hero_iou": 0.452
+  },
+  {
+   "round": 5,
+   "change": "Footprint narrowed front-to-back (1.15 m) so the mound is seen side-on like the hero; 6-tri leaves, 6-tri drupelets; camera to the AD's front-on view at 8-10 deg. 1.9k tris.",
+   "hero_iou": 0.392
+  },
+  {
+   "round": 6,
+   "change": "45 % of mound leaves lie on top (light), second leaf standing off each other cane leaf to thicken the arch band.",
+   "hero_iou": 0.397
+  },
+  {
+   "round": 7,
+   "change": "Core dome in a deep shade green (Leaf_BrambleShade) so it reads as shadow, mound leaves denser at the front.",
+   "hero_iou": 0.406
+  },
+  {
+   "round": 8,
+   "change": "Fuller, taller mound, leaves set higher on it; fewer side shoots and 3-sided secondary canes to fit 2k.",
+   "hero_iou": 0.441
+  },
+  {
+   "round": 9,
+   "change": "Bigger, darker berries and larger cane leaves. Tested the same model at 1.06 m (0.628) and 1.30 m (0.568) tall for reference.",
+   "hero_iou": 0.441
+  },
+  {
+   "round": 10,
+   "change": "Broader, shallower-notched leaves, closer to the hero's rounded three-lobed leaf.",
+   "hero_iou": 0.447
+  },
+  {
+   "round": 11,
+   "change": "Final render at the old 0.745 m box; to_game.py bramble (superseded by the AD round).",
+   "hero_iou": 0.444
+  },
+  {
+   "round": 12,
+   "change": "AD round: P['fit'] to 2.12 x 1.06 m (hero proportions).",
+   "hero_iou": 0.637
+  },
+  {
+   "round": 13,
+   "change": "Mound lowered centre-right, under-arch leaves nearly level, upright band leaves 1.25x.",
+   "hero_iou": 0.621
+  },
+  {
+   "round": 14,
+   "change": "Arch peak shifted right, lower right mound, 62 mound leaves to stay under 2k.",
+   "hero_iou": 0.62
+  },
+  {
+   "round": 15,
+   "change": "Leaves under the arch turned forward and up so the window is open; final 768 px / 48 samples; to_game.py bramble.",
+   "hero_iou": 0.619
+  }
+ ],
+ "moving_parts": "None. The game poses and sways plants itself; export_animations=False.",
+ "creative_additions": "A second leaf standing up off the top of the canes to give the arch a leafy band, three-leaf fans at the cane tips, and a deep-shade core so the mound has a shadowed interior."
+}

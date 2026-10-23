@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-005",
+  "name": "Flowering culinary herbs",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 1,
+  "category": "plant",
+  "intent": "Provide a small perennial herb bed near the gardener work route.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-005",
+  "biome": "settled-river-valley",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 48,
+    "triangles": 480,
+    "bounds_min": [
+      -0.23999999463558197,
+      -0.08331020176410675,
+      0.0
+    ],
+    "bounds_max": [
+      0.28999999165534973,
+      0.18691019713878632,
+      0.4739999771118164
+    ],
+    "dimensions_m": [
+      0.53,
+      0.27022,
+      0.474
+    ]
+  },
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "crop",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "cut",
+      "water"
+    ],
+    "inputs": [
+      "water",
+      "labor"
+    ],
+    "outputs": [
+      "harvest"
+    ],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "cut",
+        "position_blender_m": [
+          0.0,
+          -0.4000000059604645,
+          0.0
+        ],
+        "role": "cut"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "planting beds and water access",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": [
+      "GF-002",
+      "GF-006"
+    ]
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "young",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "leafy",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "flowering",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "cut",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "dormant",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Provide a small perennial herb bed near the gardener work route. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See herbs(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/build_garden.py",
+    "entry_point": "herbs",
+    "source_sha256": "b061c981f1ad506b83f25c9f8865a4df33d289443c03ad60c1af047efa13c137",
+    "rebuild": "blender --background --python garden-farm/build_garden.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "reviewed base silhouette, readable materials, diorama fit; 2026-10-18",
+    "deployed": false,
+    "normalization_verification": "Blender glTF reimport passed; measured vertices and preserved wearable fitting origin"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-005.glb",
+    "sha256": "0abd4d639ec816f08f7f1910977655e5d6c4a368045f650796c49290f6d15ed0",
+    "bytes": 40544
+  }
+}

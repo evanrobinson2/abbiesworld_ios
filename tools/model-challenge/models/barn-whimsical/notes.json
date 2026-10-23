@@ -1,0 +1,30 @@
+{
+ "what_i_did": [
+  ["Silhouette first", "Main barn is a 4.8 m wide, 7 m long body under a tall bell-curved gambrel (Catmull-Rom profile with flared eaves) rising to a 10.1 m ridge, with a crooked cupola and rooster vane on top; the shape is then sheared so the whole barn leans 1.1 m toward the silo."],
+  ["Chunky shingles", "Every roof (main, annex, cupola) is covered by procedural courses of rounded hexagonal tabs, staggered every other row, lifted at the butt so they overlap, with random jitter and two shingle colours. They are single-sided plus a thick butt skirt, so each tab is 10 triangles."],
+  ["Storybook front", "Round-top double doors in a cream arch frame, two small arched windows and a tall arched window with flower boxes, an oval loft window, plank battens, cream barge boards and corner posts, and a stone sill."],
+  ["Annex and silo", "A lower +X wing with its own curvy gable, round window, round-top doors and a coral ramp; behind it a fat, slightly barrel-shaped cream silo with a teal band, red dome, teal finial and two framed windows."],
+  ["Hoist beam and lantern", "A teal hay-hoist beam with a scroll end pokes out over the front gable, and a glowing lantern hangs from it."],
+  ["Base", "A wobbly grass island with stepping stones to the big doors and flowering bushes."]
+ ],
+ "good": [
+  "Reads as the hero at a glance: tall leaning bell gambrel, cream trim, coral shingles, fat silo with a red dome, crooked cupola with a rooster.",
+  "9,656 triangles (under the 10k budget) in 14 named meshes; origin on the ground at the footprint centre, Z up, front -Y, 15.2 m tall to the rooster.",
+  "Mean IoU went from 0.644 to 0.708 over five measured rounds."
+ ],
+ "off": [
+  "The turnaround views are tall, narrow and inconsistent with each other and with the hero (no annex, a wooden-banded red silo, a sloped fantasy roof in the side view). I scored against them as given but followed the hero, so the annex and the cream silo show as blue (render only) in the front and back overlays, and the flat ridge in the side view does not match the sheet's sloping one.",
+  "The hero's shingles are bigger and more hand-cut; mine are tidier and smaller per tab to stay in budget.",
+  "No recessed porch between the main barn and the annex, and the hero's barrels, mailbox-like posts and the flower beds along the stone base are simplified to a few bushes.",
+  "Planks are only battens on the front gable; side walls are plain."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First full build: bell gambrel, shingles, annex, silo, cupola, rooster, doors, flower boxes, ground (16.6k triangles, bevel modifiers on the curved prisms blew the budget).", "mean_iou": 0.644},
+  {"round": 2, "change": "Budget pass: bevels only on corner posts, chunkier shingle tabs and courses (closer to the hero), coarser curve subdivision, fewer bushes, shorter hoist beam: 9.7k triangles.", "mean_iou": 0.652},
+  {"round": 3, "change": "Taller, slimmer gable (half-width 2.6 to 2.4 m, ridge 9.8 to 10.1 m), slimmer silo (r 1.65 to 1.5) and the annex tucked closer.", "mean_iou": 0.677},
+  {"round": 4, "change": "Stronger lean toward the silo (0.75 to 1.1 m at the ridge).", "mean_iou": 0.691},
+  {"round": 5, "change": "Taller cupola body (windows sit higher above the ridge), bushes lifted onto the ground; final render at 768 px / 48 samples.", "mean_iou": 0.708}
+ ],
+ "moving_parts": "One 120-frame scene clip at 24 fps, seamless. The main round-top doors (door_left, door_right) swing outward on their hinge edges to 100 degrees with a small overshoot, hold, then swing shut with a little bounce; the annex doors (annex_door_left/right) do the same 8 frames later. The weathervane (rooster plus arrow, parented to the tilted cupola) turns a full 360 degrees in gusty steps with back-swings, and the lantern under the hoist beam sways +-7 degrees.",
+ "creative_additions": "The whole barn leans as one sheared body while the cupola tilts the other way; a scroll-ended teal hoist beam with a glowing lantern that sways; stepping-stone path to the doors; flower bushes on a wobbly grass island; gusty weathervane motion instead of a constant spin."
+}

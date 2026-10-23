@@ -1,0 +1,53 @@
+{
+  "id": "aw.ranch.asset.ba-0068",
+  "name": "Goods repair mat",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 79,
+    "triangles": 2036,
+    "bounds_min": [
+      -0.6827951669692993,
+      -0.5067988634109497,
+      0.014000000432133675
+    ],
+    "bounds_max": [
+      0.675000011920929,
+      0.5067988634109497,
+      0.2199999988079071
+    ],
+    "dimensions_m": [
+      1.3578,
+      1.0136,
+      0.206
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Bronze",
+      "Rope",
+      "Reed",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 5
+  },
+  "materials": [
+    "TimberLight",
+    "Bronze",
+    "Rope",
+    "Reed",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0068",
+  "intent": "A mat with binding cord, awl, patches, and a small work support.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0068",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

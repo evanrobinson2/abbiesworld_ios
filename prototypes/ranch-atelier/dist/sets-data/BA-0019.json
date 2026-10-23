@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0019",
+  "name": "Merchant document table",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 13,
+    "triangles": 492,
+    "bounds_min": [
+      -0.5074999928474426,
+      -0.3675000071525574,
+      -0.0024890482891350985
+    ],
+    "bounds_max": [
+      0.5074999928474426,
+      0.3675000071525574,
+      0.8950000405311584
+    ],
+    "dimensions_m": [
+      1.015,
+      0.735,
+      0.8975
+    ],
+    "material_slots": [
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0019",
+  "intent": "A small flat work surface with raised edges to retain tablets.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0019",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

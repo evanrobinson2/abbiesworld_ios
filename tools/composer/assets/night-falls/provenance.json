@@ -1,0 +1,67 @@
+{
+ "id": "night-falls",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "777ff672215767bb4d9eb377e587a7305020da6b92fd82f31060a86924b7027c"
+  }
+ ],
+ "title": "Night Falls",
+ "kind": "interlude",
+ "brief": "Day turns to night: D major darkens through G minor into B-flat, ready for Ranch Night.",
+ "uses": [
+  "dusk",
+  "day to night",
+  "before Ranch Night"
+ ],
+ "tags": [
+  "transition",
+  "dusk",
+  "night"
+ ],
+ "score": "tools/composer/cues/interludes.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/interludes.py",
+  "bpm": 60,
+  "meter": "3/4",
+  "key": "D major",
+  "bars": 4,
+  "instruments": [
+   "bass",
+   "cellos",
+   "clarinet",
+   "glock",
+   "piano",
+   "violas",
+   "violins"
+  ],
+  "percussion": [],
+  "hall_seconds": 3.0,
+  "target_lufs": -17.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "main": {
+   "audio": "/music/composer/night-falls.mp3",
+   "sha256": "777ff672215767bb4d9eb377e587a7305020da6b92fd82f31060a86924b7027c",
+   "bytes": 380877,
+   "duration": 17.0,
+   "loudness": -17.0,
+   "peak": -4.2,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}

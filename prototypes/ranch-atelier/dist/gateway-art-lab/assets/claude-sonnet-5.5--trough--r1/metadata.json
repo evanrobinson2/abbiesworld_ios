@@ -1,0 +1,10 @@
+{
+  "animationRanges": {
+    "water_state": [
+      1,
+      60
+    ]
+  },
+  "notes": "Hollow timber basin with galvanized liner, rim caps, straps, bolts, braced legs. Separate water mesh drains from full (frame 1) to fully hidden below the liner floor (frame 60) via linked Z scale and location keys, always within the basin.",
+  "blenderVersion": "5.2.1 LTS"
+}

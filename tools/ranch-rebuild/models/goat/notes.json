@@ -1,0 +1,82 @@
+{
+ "what_i_did": [
+  [
+   "Orientation",
+   "Head to -Y, origin at the footprint centre on the ground, Z up. The sheet's middle view is a true left profile with the head on the left, which is what the harness side camera (from +X) sees, so all three sheet views are scored. to_game.py turns the head to +X; goat-idle.json has the nose at +X."
+  ],
+  [
+   "Views",
+   "views/ is rebuilt by make_views.py. The harness mask lost most of the cream fur against the cream backdrop (head, lit flanks, one horn) and kept a full-width cast-shadow strip that set the front and back bounding boxes. The views are keyed again with a lower backdrop distance plus a chromaticity test, the shadow strip is cut back to the hoof columns, and small holes are filled. Against the raw mj views round 1 scored 0.463, against the cleaned views 0.727."
+  ],
+  [
+   "Drawn off the sheet",
+   "Every shape number in build.py is a sheet side-view pixel (2000 px wide display, ground at y=975, 673 px per metre, withers about 0.75 m), so a fix is a pixel edit read off the overlay. The goat is about 1.0 m nose to tail and 1.23 m to the horn tips. to_game.py rescales it to the old footprint."
+  ],
+  [
+   "Parts and pivots",
+   "26 objects: body > neck > head > (nose, eyes, horns, ears > pink ear insides, beard); body > tail; body > leg upper > lower > hoof for all four legs. Every pivot is at its joint, so the poses are only rotations about X, kept in the POSE table at the top of build.py."
+  ],
+  [
+   "Faceting",
+   "Body, neck and head are lofts of jittered rings. The body has a jittered mid ring between each pair of rings, which gives smaller hand-cut facets. Flat shading only. Shaggy shards run along the belly edge, the chest ruff, the elbows and the throat, with a crest at the withers and a forelock between the horns."
+  ],
+  [
+   "Poses",
+   "idle: standing, head up, as in the hero. feeding: the neck swings forward and down while the face pitch stays at 95 deg, solved by bisection until the muzzle is 3 cm off the ground (neck 127 deg, head -32 deg), with the front legs set a little forward, the ears drooped and the tail down. rest: the front legs fold with the knees forward and the cannons tucked back, the hind legs fold with the hocks under the belly, the body drops until the belly is 5 cm off the ground, and the head stays up."
+  ],
+  [
+   "Materials",
+   "Fur_Cream for the body, neck, head, upper legs, ears and tail. Fur_Tan for the lower legs (knee down) and the beard. Horn_Tan for the horns, Horn_Hoof for the hooves, Skin_Pink for the nose and ear insides, Skin_Eye for the eyes. One material per object, flat colours. All map to the game's skin role."
+  ]
+ ],
+ "good": [
+  "Side and front silhouettes match well (IoU 0.82 each): the long upright neck, the big head carried high, the swept-back horns, the sideways ears, the beard, the upright tail and the slim legs.",
+  "1338 triangles, under half of the 3k budget.",
+  "The poses come from the same build. Feeding reads as cropping grass and rest as a goat lying with its legs folded."
+ ],
+ "off": [
+  "Back view 0.71: the sheet's back view is drawn slightly from the 3/4, so it is asymmetric and shows all four legs apart. A symmetric model can't match it.",
+  "The colour distance numbers are inflated: to get the harness to key them, the cleaned views tint the near-backdrop cream fur towards tan.",
+  "The fur is smoother than the sheet's fine shaggy strands. At tile size only the larger shards would read anyway.",
+  "Feeding needs the neck at 127 deg (53 deg below horizontal) to reach the grass, so the neck root shows a little under the chest from some angles."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build from the side-view pixels. It scored 0.463 against the raw mj views, which have broken masks, so make_views.py rebuilt views/ and the score against those is the one recorded.",
+   "mean_iou": 0.727
+  },
+  {
+   "round": 2,
+   "change": "Bigger head and thicker neck, a wider body, the ears raised to stick straight out, the horns spread wider, thicker legs, shorter belly tufts.",
+   "mean_iou": 0.741
+  },
+  {
+   "round": 3,
+   "change": "Shortened the rump and spread the legs wider. Worse (0.690). Reverted the rump and narrowed the legs and hind thigh.",
+   "mean_iou": 0.741
+  },
+  {
+   "round": 4,
+   "change": "Measured from a 512 px overlay: shorter and higher chest, rump moved back, neck forward, front and hind cannons 30 px forward, a deeper head, a wider beard.",
+   "mean_iou": 0.76
+  },
+  {
+   "round": 5,
+   "change": "Neck slimmer and further forward, hind thigh shallower, belly raised, a forelock tuft, legs closer together.",
+   "mean_iou": 0.773
+  },
+  {
+   "round": 6,
+   "change": "Denser jittered body facets, fewer belly shards that splay more, poses moved into a POSE table, feeding reworked (fixed face pitch) and rest re-folded.",
+   "mean_iou": 0.774
+  },
+  {
+   "round": 7,
+   "change": "Warmer cream and tan, a deeper skull with a tapered muzzle, a thicker beard. Final render at 768 px with 48 samples scored 0.781.",
+   "mean_iou": 0.781
+  }
+ ],
+ "moving_parts": "No animation: the game poses the model itself. Three variants (idle, feeding, rest) come from one build.py by rotating the jointed parts (neck, head, ears, tail, leg upper/lower/hoof) about their pivots.",
+ "creative_additions": "Pink ear insides as separate plates, a forelock and a withers crest, and shaggy shards at the elbows and throat as in the sheet's front view."
+}

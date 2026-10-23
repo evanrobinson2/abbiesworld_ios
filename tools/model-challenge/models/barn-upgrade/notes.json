@@ -1,0 +1,31 @@
+{
+ "what_i_did": [
+  ["Orientation", "The hero wins: the long side with the big X-braced sliding doors faces -Y (front), the hayloft/hoist gable is +X (the hero's right face, matches mj view_back), and the turnaround's X-door gable (mj view_front) became the far -X end with its own pair of sliding doors."],
+  ["Views", "views/view_side.png is mj view_back with the sheet's ground horizon line cleaned off (it ran to the crop edge and inflated the target box); view_front (the -X gable) is scored separately by gable_check.py against its left half mirrored, because the split cut its right side into the fantasy L-barn; the side/L-shaped view and a long-side target are dropped (no orthographic long side exists)."],
+  ["Massing", "8.4 x 6.2 m footprint, 4.45 m eaves, 8.68 m ridge, gambrel profile from the hero (steep lower slope, ~36 deg upper slope, soft bellcast kick at the eave) kept as a parameter list so revisions are number edits."],
+  ["Craft", "Board-and-batten walls with a slightly irregular rhythm, ~690 individually laid shingle tabs in staggered courses with jittered butts and two teal tones, cream barge boards and fascia, beveled corner posts, a two-row stone foundation, muntined windows, louvered cupola with a flared hip roof and rooster weathervane."],
+  ["Game readiness", "8,692 triangles (budget 10k), 15 named meshes, origin at footprint centre on the ground, Z up, metres, flat Principled materials named by what they are, modifiers applied on export, one 120-frame clip (barn_doors_loop) at 24 fps."]
+ ],
+ "good": [
+  "Side (+X gable) silhouette IoU 0.918 at 768 px: gambrel curve, eave flare, cupola and vane all line up.",
+  "Hero read: teal shingle texture, red board-and-batten, cream X doors on a dark rail, hay hoist with chain, stone base, all as in the illustration.",
+  "Doors really slide on their rails and reveal a dark interior; nothing intersects (doors sit proud of window trim and corner posts)."
+ ],
+ "off": [
+  "The hero's walls are lower relative to the roof than the turnaround's; I compromised (eave/ridge 0.51) so the barn reads a touch taller and boxier than the hero.",
+  "The -X gable check is only 0.81: mj view_front draws a much bigger bellcast roof flare than view_back, and I matched the hero/view_back flare instead.",
+  "Only one harness view has a usable target, so mean IoU is that single view; the long side was matched by eye against the hero.",
+  "Cupola base rises less out of the ridge than in the hero; shingles read slightly more patchy than the hero's even courses."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First full build from the view_back measurements: walls, gambrel roof, shingles, doors, cupola, hoist (13.4k tris, too many).", "mean_iou": 0.844},
+  {"round": 2, "change": "Hero gambrel profile (crisper knuckle), removed bevels from small parts to get under budget (7.9k), export as a single clip.", "mean_iou": 0.869},
+  {"round": 3, "change": "Turf patch under the barn, darker red, bigger cupola, shorter vane.", "mean_iou": 0.881},
+  {"round": 4, "change": "Fixed shingle normals (tabs were buried inside the roof), finer 0.32 m courses, lower eaves for the hero's proportions, shorter doors so the rail shows.", "mean_iou": 0.884},
+  {"round": 5, "change": "Doors and rails moved out to clear window trim; cleaned the ground horizon from the side target; narrowed the barn to 6.2 m.", "mean_iou": 0.867},
+  {"round": 6, "change": "Thickened the weathervane pole: at 384 px it vanished from the render mask, so the render's box was shorter than the target's.", "mean_iou": 0.924},
+  {"round": 7, "change": "Tried wider eave flares (0.916, 0.920); reverted. Final 768 px / 48 samples render.", "mean_iou": 0.918}
+ ],
+ "moving_parts": "One 120-frame loop: the front pair of X doors (door_left, door_right) slides apart 1.85 m along the iron rail (open 12-44, hold, close 72-104); the -X gable pair (end_door_left, end_door_right) does the same 6 frames later along Y; the rooster weathervane swings +/-30 deg in the breeze; the hoist hook and chain sway +/-5 deg.",
+ "creative_additions": "Second set of sliding doors on the far gable (from the turnaround), working rail hangers and trolleys on each door leaf, dark interior revealed when open, swinging hoist chain, wind-swung weathervane, hay-hood beam at the peak, stone door thresholds, grass tufts and a low turf patch so it sits in the diorama."
+}

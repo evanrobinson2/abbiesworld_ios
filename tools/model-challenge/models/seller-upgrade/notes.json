@@ -1,0 +1,79 @@
+{
+ "what_i_did": [
+  [
+   "Silhouette first",
+   "Measured the turnaround silhouettes row by row (1 px is about 1.1 mm at 1.65 m) and built the silhouette features first: the A-line linen dress, the bib apron wrapping the front, the A-pose arms with rolled sleeves, the head wrap with its knot and tails, the low bun, sandals, and the oval basket on the right hip with onions in front and carrots and greens behind."
+  ],
+  [
+   "Parametric lofts",
+   "build.py builds every part from elliptic lofts, polyline tubes and icospheres driven by a parameter dict at the top (skirt, torso, head and wrap rings, arm joints, basket rings), so each revision was a parameter edit."
+  ],
+  [
+   "Layered clothing",
+   "Linen dress with soft pleats (alternating ring radii), a rust apron skirt and bib solidified as separate cloth panels, a pocket with a stitched lip, a leather belt with a bronze buckle and hanging ties, apron straps over the shoulders, a crossbody basket strap, and a leather pouch on the left hip (from the back view)."
+  ],
+  [
+   "Basket and produce",
+   "Oval tapered wicker basket with a two-tone brick weave (material per face), a rim, a foot ring, a handle and a dark fill, then onions with pointed tips, carrots and fanned leaf blades."
+  ],
+  [
+   "Rig and idle",
+   "Rigid parts in a hierarchy of empties: seller > hips > chest > shoulders, head_pivot > wrap_tails, plus basket_pivot on the hip. A 120-frame loop at 24 fps, exported as one 'idle' clip (export_anim_scene_split_object=False, so SCENE mode does not split it per node)."
+  ],
+  [
+   "Shadow-free check views",
+   "The sheet's ground shadow is part of the target mask: it spans the whole crop at foot level, so it stretches the target's bounding box and offsets the figure. I kept the official score against mj/ and also scored against shadow-cleaned copies in views/ (shadow pixels below the hem repainted to the background colour, figure untouched) to steer the shape work."
+  ],
+  [
+   "Hero-led final pass",
+   "On the art director's notes I switched the palette and pose from the turnaround to the hero: an ochre apron, a striped cream and tan wrap, curly brown hair, a white blouse, a bigger head with a clearer face, a bigger basket carried on the bent forearm with colourful produce, and the free hand on the belt."
+  ]
+ ],
+ "good": [
+  "It reads like the hero: an ochre apron over a white blouse and cream skirt, a striped head wrap with curls showing, and a woven basket of pale onions, orange carrots and green tops carried on the bent arm.",
+  "Official IoU 0.760 (front 0.797, side 0.685, back 0.797) and shadow-cleaned 0.764.",
+  "It is light: 5,402 triangles against a 12k budget, 13 meshes, flat Principled materials named by what they are, 1.69 m tall, origin at the feet, front facing -Y.",
+  "One seamless 'idle' clip, and the basket stays hooked on the forearm because it is parented under the right shoulder pivot."
+ ],
+ "off": [
+  "The face is still simple low-poly (eyes, brows, nose plane, mouth) and stays small at game distance. The wrap's front edge shades the eyes in the 3/4 view.",
+  "The turnaround's hanging free arm and smaller basket no longer match, because the hero pose won. The side view is the weakest (0.69).",
+  "The ground shadow in the turnaround target masks still distorts the official IoU. views/ holds shadow-cleaned copies, and r/views_clean/ has that score.",
+  "The colour distance against the turnaround is higher now (0.27 to 0.53), because the colours follow the hero rather than the sheet's rust and dark-hair palette.",
+  "Carrots mostly show as crowns and tops above the onions, not as long orange bodies."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First full build: skirt, bodice, apron, belt, arms, head, wrap, bun, sandals, basket with produce, idle animation.",
+   "mean_iou": 0.698
+  },
+  {
+   "round": 2,
+   "change": "Wider skirt hem, arms further out, bigger oval basket elongated front to back, more onions, carrots and greens reaching back. Official 0.682; on the shadow-cleaned views 0.800, which I used from here on.",
+   "mean_iou": 0.682
+  },
+  {
+   "round": 3,
+   "change": "Skirt flares toward the back, basket moved in toward the hip, thicker legs and bigger sandals, a fuller wrap with a fold and longer tails. Shadow-cleaned 0.808.",
+   "mean_iou": 0.7
+  },
+  {
+   "round": 4,
+   "change": "From row-by-row extents: narrower shoulders and sleeves, right elbow tucked in, left arm longer with the hand at 0.66 m, basket moved forward, feet moved back, bigger bun and tails, greens lower. Shadow-cleaned 0.851.",
+   "mean_iou": 0.701
+  },
+  {
+   "round": 5,
+   "change": "Look pass: dress and apron pleats, wrap tilted back with a hair fringe showing at the forehead, softer brick weave, warmer onions and skin, pocket sitting flush, a single 'idle' clip. Final 768 px render: official 0.708, shadow-cleaned 0.842.",
+   "mean_iou": 0.708
+  },
+  {
+   "round": 6,
+   "change": "Art director pass toward the hero. Colours: an ochre apron (#C08A3E), a cream and tan striped head wrap, curly dark-brown hair below the wrap at both sides and the nape, a white blouse with rolled cuffs, a cream skirt and lighter skin (#B9805A). The head is 10% bigger, with larger eyes and brows, a lit nose plane and a mouth. The basket is about 15% bigger, hangs by its handle from the bent right forearm (basket_pivot is now a child of shoulder_R) and holds pale onions, orange carrots and green tops. The free left hand rests on the belt. Final 768 px render: official 0.708 -> 0.760, shadow-cleaned 0.842 -> 0.764 (the bent arm and bigger basket move away from the turnaround's hanging arm, but match the hero).",
+   "mean_iou": 0.76
+  }
+ ],
+ "moving_parts": "One 120-frame 'idle' clip at 24 fps that loops seamlessly. The hips bob 6 mm twice per loop and sway slightly. The chest pitches with the breath, and the bodice and bib scale with two breaths per loop. The head turns about 16 degrees left and right once per loop and nods slightly. The wrap tails flutter. The basket swings a few degrees on a pivot at its handle, which hangs on the right forearm and so also follows the arm's sway. The left arm, with its hand on the belt, shifts slightly on its shoulder pivot. The legs stay planted.",
+ "creative_additions": "A leather pouch with a flap on the left hip and a crossbody strap (from the back view), a bronze belt buckle with hanging belt ties, a stitched pocket lip, a dress hem band, pleated linen, sandal straps with ankle rings, a hair fringe under the wrap, onion tips, and a basket foot ring and handle."
+}

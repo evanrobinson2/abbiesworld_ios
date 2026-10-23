@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "hamper-whimsical",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical plump woven picnic hamper, bulging, rounded sides, a domed lid slightly ajar with a leafy sprout peeking out, a chunky braided rope handle, a big wooden toggle, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "f5baa439-13bd-402b-a6f2-ff14a8e4a6f3",
+      "grid_url": "https://www.midjourney.com/jobs/f5baa439-13bd-402b-a6f2-ff14a8e4a6f3?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "f7ace2e3-b4b7-4937-848c-3d319de91652",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical plump woven picnic hamper, bulging, rounded sides, a domed lid slightly ajar with a leafy sprout peeking out, a chunky braided rope handle, a big wooden toggle, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "7f2cbf2b-b9dd-4d79-8e09-f00a9e636bde",
+      "grid_url": "https://www.midjourney.com/jobs/7f2cbf2b-b9dd-4d79-8e09-f00a9e636bde?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "3d95aff5-00d1-4eeb-9578-2f55d330b6c3",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "5bf7f8f8356af72bd390dcde6f5550c6e58980260f97bfb631489a03e84f2942",
+      "bytes": 3026898,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/f7ace2e3-b4b7-4937-848c-3d319de91652/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "ed5d7d51af000a90b304cd780f9312df2291f7f36db2bdd340dd8a59879c0149",
+      "bytes": 3284715,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/3d95aff5-00d1-4eeb-9578-2f55d330b6c3/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "9e0bbb2995fd9aa92480c1e0562374ac16fa61ca8501b8997c44eef96a983fac",
+      "bytes": 1118205,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "7b2c33ee61609939c7f8c8a4b6141313d6a5d87f9de80dfadc807d4299d78e8c",
+      "bytes": 1126903,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "c9bcbe39e7370c3b10baeda56be722f95a6307dd8aa3deaccf3e4886b9a8e0da",
+      "bytes": 1078526,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 1 has the bulging body, lid ajar with a sprout, braided handle and a big wooden toggle. Turnaround pick 3 shows three consistent views with the toggle on the front and side."
+}

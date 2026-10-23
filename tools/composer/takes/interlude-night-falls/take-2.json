@@ -1,0 +1,19 @@
+{
+ "id": "interlude-night-falls",
+ "take": 2,
+ "title": "Night Falls",
+ "kind": "interlude",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "n0420RSAo7CI4KboUKbi",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, day turning to night, strings descend, piano enters, warm and calm. Dusk: from bright to hushed. Night: settles on a soft chord. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 16000
+ },
+ "date": "2026-10-22",
+ "sha256": "b2676ab033ccaf0a4c5004a34115948d32929ae688cec7a7eea08c4c9ce22bac",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-2.master.mp3"
+}

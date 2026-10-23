@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "maple",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/WW-151.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "eb243825-6201-45ed-bed2-561a2b4d5a03",
+      "grid_url": "https://www.midjourney.com/jobs/eb243825-6201-45ed-bed2-561a2b4d5a03?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "e02f7a38-dcf7-471b-bac9-2750cb0c2e22",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:03:45.160Z",
+      "grid_done_at": "2026-10-22T23:04:03.164Z",
+      "upscale_clicked_at": "2026-10-22T23:04:13.431Z",
+      "downloaded_at": "2026-10-22T23:05:24.979Z",
+      "pick_reason": "clearest lobed maple leaf clumps on a straight trunk, rounded crown, whole tree in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "38aae9df-fe52-43ff-af09-34c8c811965d",
+      "grid_url": "https://www.midjourney.com/jobs/38aae9df-fe52-43ff-af09-34c8c811965d?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "c35336e1-0a2c-4bbf-b352-608a7bf71b98",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:05:33.833Z",
+      "grid_done_at": "2026-10-22T23:05:51.835Z",
+      "upscale_clicked_at": "2026-10-22T23:06:01.998Z",
+      "downloaded_at": "2026-10-22T23:07:22.189Z",
+      "pick_reason": "three cleanly separated views, crowns not touching or cropped"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "4b60b3ef901bbbbda68c6a7f295238336c1f6b232caabab8542838112173f83e",
+      "bytes": 2422204,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/e02f7a38-dcf7-471b-bac9-2750cb0c2e22/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "b2cf6434daf012df30eb02078109454714590abfc50c9fcec61d3f83c8cfb72c",
+      "bytes": 6065544,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/c35336e1-0a2c-4bbf-b352-608a7bf71b98/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "b33274598ca1796f510baa601c677e126697b7545a0a311e4936410fe7451687",
+      "bytes": 1695191,
+      "pixels": [
+        843,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/maple [('front', 160, 1003), ('side', 1003, 1915), ('back', 1915, 2729)]"
+    },
+    "view_side.png": {
+      "sha256": "2534bcb1d0ff99807ac6ad059e1984035b941d0d0b80cfa297dfa4593ae3926e",
+      "bytes": 1876782,
+      "pixels": [
+        912,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/maple [('front', 160, 1003), ('side', 1003, 1915), ('back', 1915, 2729)]"
+    },
+    "view_back.png": {
+      "sha256": "62f781c3ba5bbee19f08942d4423e02e0bebc6249cffc71c8dfb27e0bd17178f",
+      "bytes": 1640111,
+      "pixels": [
+        814,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/maple [('front', 160, 1003), ('side', 1003, 1915), ('back', 1915, 2729)]"
+    }
+  }
+}

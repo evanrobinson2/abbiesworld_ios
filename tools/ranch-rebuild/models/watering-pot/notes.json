@@ -1,0 +1,33 @@
+{
+ "what_i_did": [
+  ["Target", "Hero only (no turnaround). views/hero.png is the MJ hero keyed by hue (make_views.py): the orange pot kept, the cream backdrop and the browner cast shadow dropped, the loop of the handle left open."],
+  ["Hero camera", "hero_check.py renders from +X (yaw 90 deg off the front, so the -Y spout points left as in the hero) and 10 deg up, with the harness lens and distance. A yaw/elevation grid on the round-1 model preferred 85 deg / 0 to 5 deg by a hair (0.863 vs 0.854), but the hero plainly shows the open top and the underside ellipse of the foot, so I kept 90/10 by eye and held it fixed."],
+  ["Body", "One 16-segment lathe: a two-step foot ring (r 0.073 then 0.063 m), a near-spherical belly (r 0.114 m, centre 0.128 m, 4 % squashed), almost no neck, a thick rolled lip (r 0.079 m) around an open top, an inside wall and a shallow floor. Vertices carry a 1 mm seeded wobble and everything is flat-shaded, which gives the hero's soft hand-made faceting without a texture."],
+  ["Spout", "An 8-sided tube swept along a Catmull-Rom centreline measured off the hero: it leaves the lower front of the belly 0.08 m up with a 0.04 m radius, rises steeply, then flattens to the tip at 0.24 m, tapering to 0.011 m, with a small flared rose and a recessed mouth."],
+  ["Handle", "A 0.0125 m round tube (8 sides) from inside the front of the rim, up and over the back to 0.35 m, and down into the back of the belly at 0.13 m."],
+  ["Plan stretch", "The pot is stretched 1.08 in plan (xy_scale), keeping the height: the hero's pot reads wider than tall, and this was the single biggest IoU gain."],
+  ["Game readiness", "1,142 triangles (budget 2k), 3 meshes (pot_body, spout, handle), one material Clay_Glaze (role clay), flat base colour, no textures, no animation. 0.36 m tall to the handle top, 0.47 m long spout tip to handle back, origin at the centre of the base on the ground, spout to -Y."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.886 from the hero's direction: belly, foot ring, rolled lip, the long rising spout and the high loop handle all line up.",
+  "Reads at tile size as a round orange watering pot: the spout and the big loop are the two silhouette features and both are thick enough to survive.",
+  "About half the prop budget."
+ ],
+ "off": [
+  "The hero's spout leaves the belly as a broad flattened fillet; mine is a round tube that thickens into the belly, so the joint is a little narrower at the bottom.",
+  "The hero's handle is a perfectly smooth tube; at 16 steps mine shows its segments at the top of the arch.",
+  "The hero's glaze has specular highlights and painterly mottling; mine is one flat colour with geometric faceting only.",
+  "The spout rises at about 40 to 45 deg near the body and about 25 deg near the tip in the hero, so I followed the hero rather than a straight 30 deg.",
+  "The hero camera was set by eye and only checked against a calibration grid on the round-1 model, so the hero number is a guide."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build from pixel measurements: 20-segment lathe, bezier spout, handle loop. Camera fixed at 90/10.", "mean_iou": 0.854},
+  {"round": 2, "change": "Spout and handle centrelines re-measured off the hero, 16 segments: everything above the foot came out too high relative to the width.", "mean_iou": 0.775},
+  {"round": 3, "change": "Plan stretched 1.08 (xy_scale), handle loop 10 % taller and leaned 2 cm forward, spout centreline 12 mm lower (from a small parameter sweep).", "mean_iou": 0.886},
+  {"round": 4, "change": "Foot ring 6 % narrower, darker glaze sampled from the shaded belly, steadier handle tube.", "mean_iou": 0.888},
+  {"round": 5, "change": "Triangles 1,382 -> 1,142: fewer belly rings, a 5-point lip, 16 handle and 9 spout steps.", "mean_iou": 0.886},
+  {"round": 6, "change": "Final 768 px / 48 sample render and score; to_game.py watering-pot.", "mean_iou": 0.886}
+ ],
+ "moving_parts": "None: a static garden prop, exported with export_animations=False.",
+ "creative_additions": "A recessed mouth in the spout rose and a shallow floor inside the open top, so the top reads as open from the tile's high camera."
+}

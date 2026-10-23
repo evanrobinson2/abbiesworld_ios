@@ -1,0 +1,252 @@
+{
+  "set": "ranch",
+  "about": "Where each card picture came from. Concept art is the Ranch rebuild set (Midjourney, picked on the Ranch rebuild art board https://claude.ai/artifact/VHYJzdWGonHg9Mpsgbh52J); models are the game GLBs already on this site.",
+  "fonts": {
+    "Fredoka": "cards/fonts/OFL-Fredoka.txt",
+    "Nunito": "cards/fonts/OFL-Nunito.txt"
+  },
+  "rubric": "docs/oracle/cards/card-rubric.json v1.1 (Oracle card study)",
+  "cards": [
+    {
+      "id": "buttercup",
+      "number": 1,
+      "name": "Buttercup",
+      "rarity": "seed",
+      "art_style": "specimen",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/cow.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/cow.jpg",
+        "source_sha256": "56bf8368732a20d1bc8470b62b8caaf9c002f0b5dee9b0ade6ffd83762ab72b6",
+        "cutout": "/cards/art/cow-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/organics/cow-idle.glb"
+      }
+    },
+    {
+      "id": "speckles",
+      "number": 2,
+      "name": "Speckles",
+      "rarity": "seed",
+      "art_style": "specimen",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/chicken.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/chicken.jpg",
+        "source_sha256": "c386d57da51ee2de5a38b9b8f757c6864defe865467b1617bf2885864b05ba3b",
+        "cutout": "/cards/art/chicken-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/organics/chicken-idle.glb"
+      }
+    },
+    {
+      "id": "pepper",
+      "number": 3,
+      "name": "Pepper",
+      "rarity": "sprout",
+      "art_style": "portal",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/goat.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/goat.jpg",
+        "source_sha256": "10aed9c11b3a42f93923bf244136b362beed5966fd7652bd17bca2ee1841a68c",
+        "cutout": "/cards/art/goat-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/organics/goat-idle.glb"
+      }
+    },
+    {
+      "id": "marley",
+      "number": 4,
+      "name": "Marley",
+      "rarity": "sprout",
+      "art_style": "portal",
+      "art": {
+        "kind": "3d-model",
+        "file": "/simulation-assets/organics/marley-idle.glb",
+        "view": {
+          "yaw": -32
+        },
+        "method": "three.js r170 offscreen render: ACES tone mapping, studio key/rim/fill, shadow catcher, auto-framed camera, saturate 1.35"
+      }
+    },
+    {
+      "id": "clover",
+      "number": 5,
+      "name": "Clover",
+      "rarity": "bloom",
+      "art_style": "portal",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/horse.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/horse.jpg",
+        "source_sha256": "d539ed4fd07fe15a28b6ec421cbf6fc7709aa792f0d9b4c00b3ca45b160e89aa",
+        "cutout": "/cards/art/horse-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/organics/horse-idle.glb"
+      }
+    },
+    {
+      "id": "daddy",
+      "number": 6,
+      "name": "Daddy",
+      "rarity": "bloom",
+      "art_style": "portal",
+      "art": {
+        "kind": "3d-model",
+        "file": "/simulation-assets/workers/daddy-idle.glb",
+        "view": {
+          "yaw": -18,
+          "fill": 0.9
+        },
+        "method": "three.js r170 offscreen render: ACES tone mapping, studio key/rim/fill, shadow catcher, auto-framed camera, saturate 1.35"
+      }
+    },
+    {
+      "id": "mommy",
+      "number": 7,
+      "name": "Mommy",
+      "rarity": "harvest",
+      "art_style": "shadowbox",
+      "art": {
+        "kind": "3d-model",
+        "file": "/simulation-assets/workers/mommy-idle.glb",
+        "view": {
+          "yaw": -18,
+          "fill": 0.9
+        },
+        "method": "three.js r170 offscreen render: ACES tone mapping, studio key/rim/fill, shadow catcher, auto-framed camera, saturate 1.35"
+      }
+    },
+    {
+      "id": "abbie",
+      "number": 8,
+      "name": "Abbie",
+      "rarity": "sun",
+      "art_style": "popout",
+      "art": {
+        "kind": "3d-model",
+        "file": "/simulation-assets/workers/abbie-idle.glb",
+        "view": {
+          "yaw": -16,
+          "fill": 1.0,
+          "lift": 0.5
+        },
+        "method": "three.js r170 offscreen render: ACES tone mapping, studio key/rim/fill, shadow catcher, auto-framed camera, saturate 1.35"
+      }
+    },
+    {
+      "id": "sunny-coop",
+      "number": 9,
+      "name": "Sunny Coop",
+      "rarity": "seed",
+      "art_style": "specimen",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/chicken-coop.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/chicken-coop.jpg",
+        "source_sha256": "ceeb507fc0132a2f692670b04b0d5b0bd86ceaa2c3f66389fbca10901d69bdda",
+        "cutout": "/cards/art/chicken-coop-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/buildings/chicken-coop-complete.glb"
+      }
+    },
+    {
+      "id": "water-point",
+      "number": 10,
+      "name": "Water Point",
+      "rarity": "seed",
+      "art_style": "specimen",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/water-point.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/water-point.jpg",
+        "source_sha256": "44ace7b0cc1633668778c7cde4a174bff36ff1745901e56fdc9ce6ec497d014d",
+        "cutout": "/cards/art/water-point-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/buildings/water-point-complete.glb"
+      }
+    },
+    {
+      "id": "red-workshop",
+      "number": 11,
+      "name": "The Red Workshop",
+      "rarity": "sprout",
+      "art_style": "portal",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/barn-shelter.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/barn-shelter.jpg",
+        "source_sha256": "3a1d00f41ccd3292b03fa56731626b0587aeebc615ff36b70480188ec466eb94",
+        "cutout": "/cards/art/barn-shelter-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/buildings/shelter-complete.glb"
+      }
+    },
+    {
+      "id": "feed-and-seed",
+      "number": 12,
+      "name": "Feed & Seed",
+      "rarity": "bloom",
+      "art_style": "portal",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/feed-store.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/feed-store.jpg",
+        "source_sha256": "042b0d6037eca4e1a13912f475a0d73f69c947de6d8ff506a7f389a75ac18839",
+        "cutout": "/cards/art/feed-store-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/buildings/feed-store-complete.glb"
+      }
+    },
+    {
+      "id": "family-home",
+      "number": 13,
+      "name": "The Family Home",
+      "rarity": "harvest",
+      "art_style": "shadowbox",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/family-home.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/family-home.jpg",
+        "source_sha256": "ad9f66c7b820ffc499f9564f35fda1c576892b9972485676022d6bb46ffd4902",
+        "cutout": "/cards/art/family-home-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/buildings/family-home-complete.glb"
+      }
+    },
+    {
+      "id": "old-apple-tree",
+      "number": 14,
+      "name": "Old Apple Tree",
+      "rarity": "sprout",
+      "art_style": "portal",
+      "art": {
+        "kind": "concept-art",
+        "source": "/cards/art/apple-tree.jpg",
+        "source_origin": "project files ranch-rebuild/concepts/apple-tree.jpg",
+        "source_sha256": "e04fea8c8ae23a3fc366da3743ec6c418783629f1479abf3d2f0c49e49a23d1e",
+        "cutout": "/cards/art/apple-tree-cut.png",
+        "method": "tools/card-forge/cutout.py: rembg isnet-general-use matte, smooth backdrop fit and edge unmixing, contact shadow from backdrop ratio near the feet",
+        "game_model": "/simulation-assets/organics/tree-standing.glb"
+      }
+    },
+    {
+      "id": "hay-day",
+      "number": 15,
+      "name": "Hay Day",
+      "rarity": "seed",
+      "art_style": "specimen",
+      "art": {
+        "kind": "3d-model",
+        "file": "/simulation-assets/supplies/hay-full.glb",
+        "view": {
+          "yaw": -24,
+          "pitch": 22,
+          "fill": 1.0
+        },
+        "method": "three.js r170 offscreen render: ACES tone mapping, studio key/rim/fill, shadow catcher, auto-framed camera, saturate 1.35"
+      }
+    }
+  ]
+}

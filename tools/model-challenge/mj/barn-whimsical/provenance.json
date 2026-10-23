@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "barn-whimsical",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook barn with a tall curvy gambrel roof that leans slightly, a chubby round silo attached, a crooked cupola with a rooster weathervane, oversized round-top doors, flower boxes, a bit squashed and toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "5c3ad5fe-32af-4009-80a3-2b3ada00867b",
+      "grid_url": "https://www.midjourney.com/jobs/5c3ad5fe-32af-4009-80a3-2b3ada00867b?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "95ffdd4d-b987-4032-92d4-fc33d130d7d8",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook barn with a tall curvy gambrel roof that leans slightly, a chubby round silo attached, a crooked cupola with a rooster weathervane, oversized round-top doors, flower boxes, a bit squashed and toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "d400bfbf-fc6d-42b4-adfd-48bfac8736ee",
+      "grid_url": "https://www.midjourney.com/jobs/d400bfbf-fc6d-42b4-adfd-48bfac8736ee?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "d0f781e1-5513-416d-8c2f-9594c56dce78",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "9cc3887251ddaff995783cb567837a4d8c74bdd02a5aca519b5058fb4f0a871e",
+      "bytes": 3556460,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/95ffdd4d-b987-4032-92d4-fc33d130d7d8/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "90931395ad1cc225d926b377a501c42b495cae798f81da63d8fe15d084cf3197",
+      "bytes": 5350512,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/d0f781e1-5513-416d-8c2f-9594c56dce78/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "99952a1bf5e1d95be721a609e4fc6fa1887a1ad236bbd622f25ee8381c4d7f86",
+      "bytes": 1746984,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "00bb1125eb404d28157ed3737273b680c49bd6ba547c39009669202808ffbf0f",
+      "bytes": 1770763,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "fe9ba19747a32e4dfb9d537d4e0ce3a8f020347acd60c9b7ac5e2e782ed628e2",
+      "bytes": 1656860,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 0 has every brief feature: leaning curvy gambrel roof, chubby silo, rooster weathervane, round-top doors, flower boxes. Turnaround pick 3 is the most consistent red barn across the three views."
+}

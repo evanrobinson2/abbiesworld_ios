@@ -1,0 +1,44 @@
+{
+  "id": "aw.ranch.asset.ba-0036",
+  "name": "Liquid measuring cup",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 2,
+    "triangles": 408,
+    "bounds_min": [
+      -0.08500000089406967,
+      -0.08500000089406967,
+      0.0
+    ],
+    "bounds_max": [
+      0.1728476732969284,
+      0.08500000089406967,
+      0.1326054185628891
+    ],
+    "dimensions_m": [
+      0.2578,
+      0.17,
+      0.1326
+    ],
+    "material_slots": [
+      "ClayLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 1
+  },
+  "materials": [
+    "ClayLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0036",
+  "intent": "A small ceramic cup used to portion a purchased liquid.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0036",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

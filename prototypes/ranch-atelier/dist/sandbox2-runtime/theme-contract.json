@@ -1,0 +1,164 @@
+{
+  "version": 2,
+  "colorSpace": "srgb",
+  "roles": {
+    "foliage": {
+      "defaultColor": "#7d9c65",
+      "identity": false
+    },
+    "bark": {
+      "defaultColor": "#946c49",
+      "identity": false
+    },
+    "roof": {
+      "defaultColor": "#577f7c",
+      "identity": false
+    },
+    "plaster": {
+      "defaultColor": "#d9b487",
+      "identity": false
+    },
+    "timber": {
+      "defaultColor": "#b68a5c",
+      "identity": false
+    },
+    "metal": {
+      "defaultColor": "#8e9998",
+      "identity": false
+    },
+    "fabric": {
+      "defaultColor": "#699b95",
+      "identity": false
+    },
+    "skin": {
+      "defaultColor": "#c88f80",
+      "identity": true
+    },
+    "hair": {
+      "defaultColor": "#654638",
+      "identity": true
+    },
+    "fur": {
+      "defaultColor": "#be815a",
+      "identity": true
+    },
+    "water": {
+      "defaultColor": "#74b7c1",
+      "identity": false
+    },
+    "soil": {
+      "defaultColor": "#785c43",
+      "identity": false
+    }
+  },
+  "presets": [
+    {
+      "id": "original",
+      "label": "Original atelier",
+      "palette": {},
+      "season": "original",
+      "weathering": 0,
+      "bloom": 0
+    },
+    {
+      "id": "spring",
+      "label": "Blossoming spring",
+      "palette": {},
+      "season": "spring",
+      "weathering": 0.12,
+      "bloom": 0.8
+    },
+    {
+      "id": "meadow",
+      "label": "Sunlit summer",
+      "palette": {},
+      "season": "summer",
+      "weathering": 0.15,
+      "bloom": 0.15
+    },
+    {
+      "id": "autumn",
+      "label": "Weathered orchard",
+      "palette": {},
+      "season": "autumn",
+      "weathering": 0.65,
+      "bloom": 0
+    },
+    {
+      "id": "winter",
+      "label": "Quiet winter",
+      "palette": {},
+      "season": "winter",
+      "weathering": 0.35,
+      "bloom": 0
+    }
+  ],
+  "fallback": "Preserve part.color when role is unmapped, palette absent, or identity recoloring disabled.",
+  "seasons": {
+    "spring": {
+      "label": "Spring awakening",
+      "palette": {
+        "foliage": "#9eae72",
+        "bark": "#8b6c52",
+        "roof": "#71928b",
+        "plaster": "#eadcc3",
+        "timber": "#bf9a71",
+        "metal": "#9baba4",
+        "fabric": "#b594a4",
+        "water": "#8dbac0",
+        "soil": "#897159"
+      },
+      "blossomColor": "#f5cbd4"
+    },
+    "summer": {
+      "label": "Summer meadow",
+      "palette": {
+        "foliage": "#779656",
+        "bark": "#896441",
+        "roof": "#568580",
+        "plaster": "#e4cfa6",
+        "timber": "#b38a58",
+        "metal": "#8e9c94",
+        "fabric": "#d1ab65",
+        "water": "#73adb5",
+        "soil": "#92754e"
+      },
+      "blossomColor": "#fff0c8"
+    },
+    "autumn": {
+      "label": "Autumn orchard",
+      "palette": {
+        "foliage": "#b48a4e",
+        "bark": "#755442",
+        "roof": "#735f68",
+        "plaster": "#ead6b6",
+        "timber": "#a98360",
+        "metal": "#8c8980",
+        "fabric": "#b87856",
+        "water": "#799caa",
+        "soil": "#81624d"
+      },
+      "blossomColor": "#e5b686"
+    },
+    "winter": {
+      "label": "Winter hush",
+      "palette": {
+        "foliage": "#879b93",
+        "bark": "#7d756c",
+        "roof": "#7c909f",
+        "plaster": "#e2ded2",
+        "timber": "#aaa08c",
+        "metal": "#929da4",
+        "fabric": "#8a929e",
+        "water": "#9aafb8",
+        "soil": "#979087"
+      },
+      "blossomColor": "#ece5dc"
+    }
+  },
+  "effects": {
+    "weathering": "Procedural surface mottling, faded color and increased roughness on mapped non-identity materials. No damage to geometry.",
+    "bloom": "Procedural five-petal flowers on explicitly named Rounded canopy foliage surfaces. No automatic botanical species inference.",
+    "winter": "Cool muted palette; no snow or leaf-loss geometry."
+  }
+}

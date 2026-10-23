@@ -1,0 +1,51 @@
+{
+  "id": "aw.ranch.asset.ba-0014",
+  "name": "Hanging cloth display rail",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 13,
+    "triangles": 356,
+    "bounds_min": [
+      -1.0,
+      -0.33000001311302185,
+      0.0
+    ],
+    "bounds_max": [
+      1.0,
+      0.33000001311302185,
+      1.8082903623580933
+    ],
+    "dimensions_m": [
+      2.0,
+      0.66,
+      1.8083
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Timber",
+      "Rope",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "TimberLight",
+    "Timber",
+    "Rope",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0014",
+  "intent": "A horizontal rail for cloth lengths with removable hanging ties.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0014",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "cedar-upgrade",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "an ancient western red cedar tree, a massive fluted reddish trunk with flared roots, drooping layered fan-shaped evergreen sprays in tiered clumps, a broad conical crown, a few bare dead branches, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "a7de0ed2-66c8-412f-9187-773cc63757f0",
+      "grid_url": "https://www.midjourney.com/jobs/a7de0ed2-66c8-412f-9187-773cc63757f0?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "24a25190-f187-4a97-a8ce-bf4918ec9fad",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, an ancient western red cedar tree, a massive fluted reddish trunk with flared roots, drooping layered fan-shaped evergreen sprays in tiered clumps, a broad conical crown, a few bare dead branches, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "86873f0e-e5c0-4b49-9137-f750ec1f43ed",
+      "grid_url": "https://www.midjourney.com/jobs/86873f0e-e5c0-4b49-9137-f750ec1f43ed?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "1547a74b-c8f5-4ee9-965f-9074c5c55647",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "ed36f407d183a0a43fade4b5000e58a282cd907021b0325fae32d4e155a81301",
+      "bytes": 2692303,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/24a25190-f187-4a97-a8ce-bf4918ec9fad/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "4ca98884d715b3c7dbd588c55edbf51f2768ae3730f0f9cab2cb53e532896cc8",
+      "bytes": 3209567,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/1547a74b-c8f5-4ee9-965f-9074c5c55647/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "31a7d958a889959752978d84e059950aacedf9e361217d41c91a8e4720415b66",
+      "bytes": 976884,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "5b2c40db43c3c7640ced949eab778d92f7c6d67e9381c592d3479d9969da21ee",
+      "bytes": 1237918,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "019c66d5610ebf7d7515413c75573bdde74182957a57ba2a3d11cb9d36975b31",
+      "bytes": 967071,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 3 has the drooping tiered sprays, flared roots, dead branches and conical crown. Turnaround pick 3 has the three most consistent trees; Midjourney varies branch placement between views, so treat views as consistent in design, not exact geometry."
+}

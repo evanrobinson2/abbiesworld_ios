@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0031",
+  "name": "Portable beam balance",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 16,
+    "triangles": 764,
+    "bounds_min": [
+      -0.4950000047683716,
+      -0.18000000715255737,
+      0.0
+    ],
+    "bounds_max": [
+      0.4950000047683716,
+      0.18000000715255737,
+      1.034999966621399
+    ],
+    "dimensions_m": [
+      0.99,
+      0.36,
+      1.035
+    ],
+    "material_slots": [
+      "Bronze",
+      "Timber",
+      "Rope"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Bronze",
+    "Timber",
+    "Rope"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0031",
+  "intent": "A suspended beam, two pans, cords, and a handhold.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0031",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

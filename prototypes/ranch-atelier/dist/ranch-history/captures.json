@@ -1,0 +1,101 @@
+[
+  {
+    "id": "proof",
+    "title": "The first clearing",
+    "caption": "A single flat hex, a handful of houses and scattered trees. The ranch begins as a small diorama with simple lighting choices.",
+    "image": "images/proof.png",
+    "source": "proof.png",
+    "archiveTime": "2026-10-20 09:27",
+    "latest": false
+  },
+  {
+    "id": "dorf-treatment",
+    "title": "Finding the visual language",
+    "caption": "Cream controls, teal roofs and soft green trees establish the palette. Large preset buttons and sliders still occupy much of the screen.",
+    "image": "images/dorf-treatment.png",
+    "source": "dorf-treatment.png",
+    "archiveTime": "2026-10-20 09:44",
+    "latest": false
+  },
+  {
+    "id": "livestock-and-paths",
+    "title": "A place with a purpose",
+    "caption": "Fenced pens, animals, a garden and branching paths turn the clearing into a recognizable working farm.",
+    "image": "images/livestock-and-paths.png",
+    "source": "livestock-and-paths.png",
+    "archiveTime": "2026-10-20 11:50",
+    "latest": false
+  },
+  {
+    "id": "randomized-topography",
+    "title": "Beyond one hex",
+    "caption": "The footprint expands into connected hexes. This zigzag capture shows the early terrain presentation, still largely flat and uniformly planted.",
+    "image": "images/randomized-topography.png",
+    "source": "randomized-topography.png",
+    "archiveTime": "2026-10-20 12:52",
+    "latest": false
+  },
+  {
+    "id": "winter-verified",
+    "title": "The landscape changes season",
+    "caption": "Snow and bare trees transform the same family of generated spaces. The configuration panel exposes the winter setting.",
+    "image": "images/winter-verified.png",
+    "source": "winter-verified.png",
+    "archiveTime": "2026-10-20 13:37",
+    "latest": false
+  },
+  {
+    "id": "regional-farm-verified",
+    "title": "A broader farm palette",
+    "caption": "More varied planting and farm structures fill a branching board. Icon controls replace the wide text presets.",
+    "image": "images/regional-farm-verified.png",
+    "source": "regional-farm-verified.png",
+    "archiveTime": "2026-10-20 13:38",
+    "latest": false
+  },
+  {
+    "id": "night-lights-verified",
+    "title": "The ranch after dark",
+    "caption": "Warm building lights stand out against a cold, snowy landscape. Night becomes a visibly different atmosphere.",
+    "image": "images/night-lights-verified.png",
+    "source": "night-lights-verified.png",
+    "archiveTime": "2026-10-20 14:23",
+    "latest": false
+  },
+  {
+    "id": "believable-day",
+    "title": "Time becomes part of the interface",
+    "caption": "A named ranch, day counter, speed and season share the toolbar. Autumn color gives the connected tiles a different character.",
+    "image": "images/believable-day.png",
+    "source": "believable-day.png",
+    "archiveTime": "2026-10-20 15:12",
+    "latest": false
+  },
+  {
+    "id": "solar-shadows",
+    "title": "Light gives the scene depth",
+    "caption": "Long shadows connect trees and buildings to the ground. The toolbar has become compact enough to leave more room for the ranch.",
+    "image": "images/solar-shadows.png",
+    "source": "solar-shadows.png",
+    "archiveTime": "2026-10-20 15:55",
+    "latest": false
+  },
+  {
+    "id": "weather-live",
+    "title": "Weather enters the scene",
+    "caption": "Cloud forms and muted light introduce another layer of atmosphere over the dense planting and farm paths.",
+    "image": "images/weather-live.png",
+    "source": "weather-live.png",
+    "archiveTime": "2026-10-20 16:08",
+    "latest": false
+  },
+  {
+    "id": "current",
+    "title": "Laurel Orchard Ranch",
+    "caption": "Your latest production screenshot: one broad ranch tile, connected pens and garden, a playground, mixed vegetation, long shadows and the compact weather controls.",
+    "image": "images/current.png",
+    "source": "codex-clipboard-000d7db8-35c6-49cc-bc17-ff3c3658ae71.png",
+    "archiveTime": "2026-10-20 19:21",
+    "latest": true
+  }
+]

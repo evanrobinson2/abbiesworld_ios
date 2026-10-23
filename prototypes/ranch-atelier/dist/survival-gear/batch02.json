@@ -1,0 +1,890 @@
+{
+  "schemaVersion": 1,
+  "pack": "Zombie survival gear",
+  "batch": 2,
+  "count": 10,
+  "items": [
+    {
+      "id": "ZG011",
+      "name": "Pry bar",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG011.glb",
+      "preview": "/survival-gear/output/ZG011.png",
+      "dimensions": {
+        "x": 0.133,
+        "y": 0.12,
+        "z": 0.6901,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.1330498456954956,
+        0.11999999731779099,
+        0.6900995969772339
+      ],
+      "reimportDimensionsM": [
+        0.1330498456954956,
+        0.11999999731779099,
+        0.6900995969772339
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG011.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 11,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Long pry bar with bent hook and broad flat foot.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3791318
+    },
+    {
+      "id": "ZG012",
+      "name": "Claw hammer",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG012.glb",
+      "preview": "/survival-gear/output/ZG012.png",
+      "dimensions": {
+        "x": 0.2227,
+        "y": 0.055,
+        "z": 0.3675,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2227279245853424,
+        0.054999999701976776,
+        0.3675000071525574
+      ],
+      "reimportDimensionsM": [
+        0.2227279394865036,
+        0.054999999701976776,
+        0.3675000071525574
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG012.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 12,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Wood-handled claw hammer with transverse steel head.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3794339
+    },
+    {
+      "id": "ZG013",
+      "name": "Compact hatchet",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG013.glb",
+      "preview": "/survival-gear/output/ZG013.png",
+      "dimensions": {
+        "x": 0.19,
+        "y": 0.06,
+        "z": 0.44,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.4399999976158142
+      ],
+      "reimportDimensionsM": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.4399999976158142
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG013.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 13,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 2,
+      "brief": "Short wood-handled hatchet with wedge-shaped steel head.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.37965
+    },
+    {
+      "id": "ZG014",
+      "name": "Folding shovel",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG014.glb",
+      "preview": "/survival-gear/output/ZG014.png",
+      "dimensions": {
+        "x": 0.22,
+        "y": 0.044,
+        "z": 0.804,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2199999988079071,
+        0.04400000721216202,
+        0.8040000200271606
+      ],
+      "reimportDimensionsM": [
+        0.2199999988079071,
+        0.04400000721216202,
+        0.8040000200271606
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG014.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 14,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Compact spade with D grip, shaft and broad blade.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.379841
+    },
+    {
+      "id": "ZG015",
+      "name": "Bolt cutters",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG015.glb",
+      "preview": "/survival-gear/output/ZG015.png",
+      "dimensions": {
+        "x": 0.2434,
+        "y": 0.055,
+        "z": 0.518,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.24343033134937286,
+        0.055000003427267075,
+        0.5180008411407471
+      ],
+      "reimportDimensionsM": [
+        0.24343034625053406,
+        0.05500001832842827,
+        0.5180008411407471
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG015.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 15,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Two-handled bolt cutter with pivot and separated jaws.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380029
+    },
+    {
+      "id": "ZG016",
+      "name": "Hand saw",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG016.glb",
+      "preview": "/survival-gear/output/ZG016.png",
+      "dimensions": {
+        "x": 0.6,
+        "y": 0.04,
+        "z": 0.17,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6000000238418579,
+        0.040000006556510925,
+        0.16999998688697815
+      ],
+      "reimportDimensionsM": [
+        0.6000000238418579,
+        0.04000002518296242,
+        0.17000001668930054
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG016.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 16,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 16,
+      "brief": "Hand saw with open circular grip and serrated blade.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380337
+    },
+    {
+      "id": "ZG017",
+      "name": "Wire spool",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG017.glb",
+      "preview": "/survival-gear/output/ZG017.png",
+      "dimensions": {
+        "x": 0.36,
+        "y": 0.36,
+        "z": 0.265,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.26499998569488525
+      ],
+      "reimportDimensionsM": [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.26499998569488525
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG017.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 17,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 15,
+      "brief": "Flanged cable spool with visible wound wire.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3806
+    },
+    {
+      "id": "ZG018",
+      "name": "Repair tool roll",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG018.glb",
+      "preview": "/survival-gear/output/ZG018.png",
+      "dimensions": {
+        "x": 0.48,
+        "y": 0.32,
+        "z": 0.056,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.47999998927116394,
+        0.3199999928474426,
+        0.056000012904405594
+      ],
+      "reimportDimensionsM": [
+        0.47999998927116394,
+        0.3199999928474426,
+        0.05600002035498619
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG018.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 18,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 11,
+      "brief": "Open canvas tool roll holding five repair tools.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380791
+    },
+    {
+      "id": "ZG019",
+      "name": "Crank radio",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG019.glb",
+      "preview": "/survival-gear/output/ZG019.png",
+      "dimensions": {
+        "x": 0.325,
+        "y": 0.113,
+        "z": 0.5306,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.32496365904808044,
+        0.11300000548362732,
+        0.5306016802787781
+      ],
+      "reimportDimensionsM": [
+        0.32496365904808044,
+        0.11300000548362732,
+        0.5306016802787781
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG019.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 19,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Portable crank radio with speaker, dial window and tall antenna.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380981
+    },
+    {
+      "id": "ZG020",
+      "name": "Signal lantern",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG020.glb",
+      "preview": "/survival-gear/output/ZG020.png",
+      "dimensions": {
+        "x": 0.18,
+        "y": 0.18,
+        "z": 0.414,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.414000004529953
+      ],
+      "reimportDimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.414000004529953
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG020.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 20,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Caged signal lantern with diffuser and hanging handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.381275
+    }
+  ],
+  "assets": [
+    {
+      "id": "ZG011",
+      "name": "Pry bar",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG011.glb",
+      "preview": "/survival-gear/output/ZG011.png",
+      "dimensions": {
+        "x": 0.133,
+        "y": 0.12,
+        "z": 0.6901,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.1330498456954956,
+        0.11999999731779099,
+        0.6900995969772339
+      ],
+      "reimportDimensionsM": [
+        0.1330498456954956,
+        0.11999999731779099,
+        0.6900995969772339
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG011.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 11,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Long pry bar with bent hook and broad flat foot.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3791318
+    },
+    {
+      "id": "ZG012",
+      "name": "Claw hammer",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG012.glb",
+      "preview": "/survival-gear/output/ZG012.png",
+      "dimensions": {
+        "x": 0.2227,
+        "y": 0.055,
+        "z": 0.3675,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2227279245853424,
+        0.054999999701976776,
+        0.3675000071525574
+      ],
+      "reimportDimensionsM": [
+        0.2227279394865036,
+        0.054999999701976776,
+        0.3675000071525574
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG012.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 12,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Wood-handled claw hammer with transverse steel head.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3794339
+    },
+    {
+      "id": "ZG013",
+      "name": "Compact hatchet",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG013.glb",
+      "preview": "/survival-gear/output/ZG013.png",
+      "dimensions": {
+        "x": 0.19,
+        "y": 0.06,
+        "z": 0.44,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.4399999976158142
+      ],
+      "reimportDimensionsM": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.4399999976158142
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG013.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 13,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 2,
+      "brief": "Short wood-handled hatchet with wedge-shaped steel head.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.37965
+    },
+    {
+      "id": "ZG014",
+      "name": "Folding shovel",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG014.glb",
+      "preview": "/survival-gear/output/ZG014.png",
+      "dimensions": {
+        "x": 0.22,
+        "y": 0.044,
+        "z": 0.804,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2199999988079071,
+        0.04400000721216202,
+        0.8040000200271606
+      ],
+      "reimportDimensionsM": [
+        0.2199999988079071,
+        0.04400000721216202,
+        0.8040000200271606
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG014.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 14,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Compact spade with D grip, shaft and broad blade.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.379841
+    },
+    {
+      "id": "ZG015",
+      "name": "Bolt cutters",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG015.glb",
+      "preview": "/survival-gear/output/ZG015.png",
+      "dimensions": {
+        "x": 0.2434,
+        "y": 0.055,
+        "z": 0.518,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.24343033134937286,
+        0.055000003427267075,
+        0.5180008411407471
+      ],
+      "reimportDimensionsM": [
+        0.24343034625053406,
+        0.05500001832842827,
+        0.5180008411407471
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG015.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 15,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Two-handled bolt cutter with pivot and separated jaws.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380029
+    },
+    {
+      "id": "ZG016",
+      "name": "Hand saw",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG016.glb",
+      "preview": "/survival-gear/output/ZG016.png",
+      "dimensions": {
+        "x": 0.6,
+        "y": 0.04,
+        "z": 0.17,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6000000238418579,
+        0.040000006556510925,
+        0.16999998688697815
+      ],
+      "reimportDimensionsM": [
+        0.6000000238418579,
+        0.04000002518296242,
+        0.17000001668930054
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG016.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 16,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 16,
+      "brief": "Hand saw with open circular grip and serrated blade.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380337
+    },
+    {
+      "id": "ZG017",
+      "name": "Wire spool",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG017.glb",
+      "preview": "/survival-gear/output/ZG017.png",
+      "dimensions": {
+        "x": 0.36,
+        "y": 0.36,
+        "z": 0.265,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.26499998569488525
+      ],
+      "reimportDimensionsM": [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.26499998569488525
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG017.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 17,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 15,
+      "brief": "Flanged cable spool with visible wound wire.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3806
+    },
+    {
+      "id": "ZG018",
+      "name": "Repair tool roll",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG018.glb",
+      "preview": "/survival-gear/output/ZG018.png",
+      "dimensions": {
+        "x": 0.48,
+        "y": 0.32,
+        "z": 0.056,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.47999998927116394,
+        0.3199999928474426,
+        0.056000012904405594
+      ],
+      "reimportDimensionsM": [
+        0.47999998927116394,
+        0.3199999928474426,
+        0.05600002035498619
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG018.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 18,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 11,
+      "brief": "Open canvas tool roll holding five repair tools.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380791
+    },
+    {
+      "id": "ZG019",
+      "name": "Crank radio",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG019.glb",
+      "preview": "/survival-gear/output/ZG019.png",
+      "dimensions": {
+        "x": 0.325,
+        "y": 0.113,
+        "z": 0.5306,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.32496365904808044,
+        0.11300000548362732,
+        0.5306016802787781
+      ],
+      "reimportDimensionsM": [
+        0.32496365904808044,
+        0.11300000548362732,
+        0.5306016802787781
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG019.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 19,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Portable crank radio with speaker, dial window and tall antenna.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380981
+    },
+    {
+      "id": "ZG020",
+      "name": "Signal lantern",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG020.glb",
+      "preview": "/survival-gear/output/ZG020.png",
+      "dimensions": {
+        "x": 0.18,
+        "y": 0.18,
+        "z": 0.414,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.414000004529953
+      ],
+      "reimportDimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.414000004529953
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG020.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 20,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Caged signal lantern with diffuser and hanging handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.381275
+    }
+  ]
+}

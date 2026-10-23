@@ -1,0 +1,161 @@
+{
+  "implementation": "Ranch fixed 20 Hz clock, retained backlog, render interpolation, dependency-invalidated staggered agenda decisions, occupancy ownership, stable pen peer records, target/geometry caching, saved RNG and scheduling state",
+  "stepSeconds": 0.05,
+  "scope": "Ranch only; other scene-family clock policies unchanged",
+  "checks": [
+    {
+      "seed": 214,
+      "requested": 100,
+      "active": 100,
+      "continuation": {
+        "state": true,
+        "workers": true,
+        "animals": true,
+        "scheduling": true
+      },
+      "resourceBalanceErrors": {
+        "water": 9.272582701669307e-13,
+        "feed": 2.0037305148434825e-12
+      },
+      "observedCollisions": {
+        "before": 0,
+        "after": 0
+      },
+      "decisions": {
+        "computed": 1744,
+        "reused": 5406
+      },
+      "errors": []
+    },
+    {
+      "seed": 214,
+      "requested": 500,
+      "active": 306,
+      "continuation": {
+        "state": true,
+        "workers": true,
+        "animals": true,
+        "scheduling": true
+      },
+      "resourceBalanceErrors": {
+        "water": 8.490985692333197e-13,
+        "feed": 1.0764722446765518e-12
+      },
+      "observedCollisions": {
+        "before": 0,
+        "after": 0
+      },
+      "decisions": {
+        "computed": 1461,
+        "reused": 4413
+      },
+      "errors": []
+    },
+    {
+      "seed": 815,
+      "requested": 100,
+      "active": 100,
+      "continuation": {
+        "state": true,
+        "workers": true,
+        "animals": true,
+        "scheduling": true
+      },
+      "resourceBalanceErrors": {
+        "water": -8.668621376273222e-13,
+        "feed": 2.0534685063466895e-12
+      },
+      "observedCollisions": {
+        "before": 0,
+        "after": 0
+      },
+      "decisions": {
+        "computed": 1241,
+        "reused": 4105
+      },
+      "errors": []
+    },
+    {
+      "seed": 815,
+      "requested": 500,
+      "active": 307,
+      "continuation": {
+        "state": true,
+        "workers": true,
+        "animals": true,
+        "scheduling": true
+      },
+      "resourceBalanceErrors": {
+        "water": -9.592326932761353e-13,
+        "feed": 1.2967404927621828e-12
+      },
+      "observedCollisions": {
+        "before": 0,
+        "after": 0
+      },
+      "decisions": {
+        "computed": 1250,
+        "reused": 4118
+      },
+      "errors": []
+    }
+  ],
+  "behavior": [
+    {
+      "seed": 214,
+      "count": 30,
+      "ownership": {
+        "held": true,
+        "released": true
+      },
+      "safe": true,
+      "night": true,
+      "rain": true,
+      "layout": {
+        "width": 390,
+        "viewport": 390,
+        "top": 0
+      },
+      "pause": true,
+      "wheel": true,
+      "reload": true,
+      "errors": []
+    }
+  ],
+  "unitAndExistingRegressionTests": 40,
+  "normalModeMeasurements": [
+    {
+      "seed": 214,
+      "requested": 100,
+      "fps": 60.0,
+      "clock": {
+        "stepSeconds": 0.05,
+        "ticks": 299,
+        "pendingSeconds": 0.04940000000000146,
+        "backlogged": false,
+        "simulatedSeconds": 14.950000000000001
+      },
+      "errors": []
+    },
+    {
+      "seed": 214,
+      "requested": 500,
+      "fps": 43.2,
+      "clock": {
+        "stepSeconds": 0.05,
+        "ticks": 299,
+        "pendingSeconds": 0.04939999999999964,
+        "backlogged": false,
+        "simulatedSeconds": 14.950000000000001
+      },
+      "errors": []
+    }
+  ],
+  "limitations": [
+    "Short single-seed samples on a shared workstation; no dependable comparative FPS claim.",
+    "Large-scene real-time capacity remains hardware/load dependent; inspect pendingSeconds and backlogged.",
+    "1000 active actors not established; persisted records are not active bodies.",
+    "No GPU simulation, distributed execution or LLM inference added.",
+    "Resource consumption and collision checks still run every simulation step; this is not a general discrete-event economy."
+  ]
+}

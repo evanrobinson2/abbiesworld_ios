@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_version": "0.1.0",
+  "id": "aw.ranch.asset.ba-0088",
+  "catalog_id": "BA-0088",
+  "version": "0.2.0",
+  "name": "Household shopper",
+  "description": "Everyday clothing and a removable shoulder basket.",
+  "world": {
+    "id": "abbies-world",
+    "name": "Abbie's World"
+  },
+  "project_branch": {
+    "id": "abbies-ranch",
+    "name": "Abbie's Ranch"
+  },
+  "region_id": "aw.ranch.region.market-village",
+  "biomes": [
+    "river-valley",
+    "cultivated-lowland"
+  ],
+  "era": "fictional-bronze-age",
+  "taxonomy": {
+    "asset_type": "character-prefab",
+    "society_domain": "households",
+    "family": "Market characters",
+    "chunk": 1,
+    "materials": [
+      "clay",
+      "hair",
+      "leather",
+      "linen",
+      "reed",
+      "skin",
+      "timber"
+    ]
+  },
+  "materials": [
+    "CharacterReed",
+    "CharacterWood",
+    "CharacterHair",
+    "CharacterSkinWarm",
+    "CharacterEye",
+    "CharacterLeather",
+    "CharacterClay",
+    "CharacterSage",
+    "CharacterLinen"
+  ],
+  "functions": [
+    "buy household goods",
+    "carry purchases"
+  ],
+  "dependencies": [],
+  "construction_notes": "Original mesh character, separate face features, garment silhouette, footwear and role-specific carried belongings; facing -Y; static posed body.",
+  "geometry": {
+    "mesh_objects": 195,
+    "triangles": 8700,
+    "bounds_min": [
+      -0.35173171758651733,
+      -0.23699088394641876,
+      0.0
+    ],
+    "bounds_max": [
+      0.46739086508750916,
+      0.17759999632835388,
+      1.6224000453948975
+    ],
+    "dimensions_m": [
+      0.8191,
+      0.4146,
+      1.6224
+    ],
+    "material_slots": [
+      "CharacterReed",
+      "CharacterWood",
+      "CharacterHair",
+      "CharacterSkinWarm",
+      "CharacterEye",
+      "CharacterLeather",
+      "CharacterClay",
+      "CharacterSage",
+      "CharacterLinen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 9
+  },
+  "coordinates": {
+    "authoring_up": "Z",
+    "export_up": "Y",
+    "units": "metres",
+    "origin": "ground or intended mounting surface; consult bounds and attachment notes"
+  },
+  "interaction": {
+    "state": "static",
+    "rigged": false,
+    "animated": false,
+    "simulation": false
+  },
+  "provenance": {
+    "project_url": "https://abbies-ranch-atelier.vercel.app/",
+    "catalog_page": "https://chatgpt.com/space/page_b87df873ead88191bb032d2d427a7270",
+    "source_chat": "thread://01a1519d-5b2d-7c41-9897-cb1af16bcf9e",
+    "git": {
+      "local_branch": "main",
+      "remote_url": null,
+      "commit": null,
+      "verification": "Local checkout has no remote and no HEAD commit. Destination project Git repository and Git branch are not verified."
+    },
+    "source_file": "market-village/characters.py",
+    "source_sha256": "b6f448819dc6c0d60664b60f9a19bf6b568cbf3abeb8042abc23797a8677eb55",
+    "build_script": "market-village/build_market.py",
+    "build_script_sha256": "a74af121a32bd7a36958f85a82c2991a421c405f17541ebb2ff470636eb809e9",
+    "method": "Original procedural Blender geometry authored in this project",
+    "external_model_inputs": [],
+    "created_at": "2026-10-19T01:22:33.023292+00:00",
+    "source_snapshot": "outputs/source/characters.py",
+    "pipeline_sha256": {
+      "project-provenance.json": "b300228f0b9843ade8ebdec6c3d832c0169cfb190939bb021d5f0b71d2dd9002",
+      "architecture_more.py": "323d5f1143d636fd09c554a61cc6b17ec6e4a0a6d81a75de18d715173a600bcf",
+      "metadata.py": "459213609fa544d42af0fa67c58e0514e037dfeeb7516ac8f93e0e2ae4d7b00f",
+      "render_kit.py": "3d066523c029441b8f91f199be4779ea97a93205636ef312e3702117eda2c124",
+      "render_delivery.py": "e8e9e248cc74b967ccea73ec7c742d9ba6f85b87764ba3931e4d4e2024d1ed8a",
+      "goods.py": "658985cdf59e76b7db9703f51f3f848901570df9ba113b87580d5f0aaea024cf",
+      "taxonomy.json": "c21551d59e6cc6604db383b5a1175ef28d305986816eeae95df046d48e7229c0",
+      "finalize_metadata.py": "98ceff5ed8e0316fd5df60cd4bfafa4b8b4d7798665e8593b1ab36fa5616b9e0",
+      "package_cards.py": "8b253790c8847bbaaff558aec6fe8d33e24f0494efe4088f50ad7141ce7a68af",
+      "verify_roundtrip.py": "e413e9b57be259a69990ccc008e67542f72f0ae1f91c4c08034495c86eb91ae7",
+      "validate_metadata.py": "8f8a71546d6a8ef89017c9462e24dad6e24d6f3edb85b6e95f8a810f3e01509d",
+      "lifecycle.py": "8f52c277949b181e7776a81865c2e1e81651eaec20664c9b2e34338c1a49f737",
+      "validate_exports.py": "d445b3b43c6483937e5e9e20dc259bbcef765d5ce4966289b54ce76480b72e73",
+      "architecture.py": "7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3",
+      "characters.py": "b6f448819dc6c0d60664b60f9a19bf6b568cbf3abeb8042abc23797a8677eb55",
+      "build_market.py": "a74af121a32bd7a36958f85a82c2991a421c405f17541ebb2ff470636eb809e9",
+      "region.json": "3643de53f9183bb79c7855c0286a28c6606af967b05d9767711623d64c9b51ed",
+      "assemblies.py": "2f4d8f56a704b6429ec240befc613b2aff766ad23039c8a4511cb304b28900f6",
+      "goods_more.py": "5a95ad8ebc148da4aa0aa123d811a391e8ea57693615d865b05fc6776e0db85d"
+    }
+  },
+  "historical_context": {
+    "status": "fictional interpretation",
+    "region": "invented connected river valley",
+    "authenticity_certified": false
+  },
+  "production": {
+    "stage": "exported",
+    "review_state": "Geometry exported; file validation and visual proof sheets recorded separately.",
+    "game_integrated": false,
+    "deployed": false
+  },
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "files": {
+    "glb": "BA-0088.glb",
+    "glb_sha256": "b9e3e51acdc8b5cf1e30885af1bcf0ec782cb5c6e3c5ae8fb8197715d4d85d52",
+    "glb_bytes": 465828
+  },
+  "declared_materials": [
+    "CharacterSkinWarm",
+    "CharacterSkinDeep",
+    "CharacterSkinOchre",
+    "CharacterHair",
+    "CharacterGreyHair",
+    "CharacterEye",
+    "CharacterLinen",
+    "CharacterOchre",
+    "CharacterClay",
+    "CharacterSage",
+    "CharacterLeather",
+    "CharacterReed",
+    "CharacterWood",
+    "CharacterBronze",
+    "CharacterFish",
+    "CharacterLeaf"
+  ],
+  "rights": {
+    "source": "original procedural geometry",
+    "license_identifier": null,
+    "license_status": "No export license specified; do not infer a public license."
+  },
+  "preview": {
+    "proof_sheet": "../proof/assets-081-090.png",
+    "scale": "normalized for inspection"
+  },
+  "lifecycle": {
+    "schema_version": "1.0.0",
+    "design": {
+      "intent": "Everyday clothing and a removable shoulder basket.",
+      "family_rationale": "Communicate occupation through pose, carried goods and clothing.",
+      "rationale_basis": "Maintenance rationale recorded from the existing brief and family; not a recovered log of original reasoning.",
+      "style": "Handworked stylized geometry, muted natural materials, readable at diorama scale.",
+      "scale_basis": "Authored fictional-world dimensions in geometry.dimensions_m; metres, not historical survey measurements.",
+      "historical_confidence": "Fictional interpretation; verify references before claiming reconstruction."
+    },
+    "variants": {
+      "base_id": "BA-0088",
+      "available": [
+        {
+          "id": "ba-0088:base",
+          "status": "exported",
+          "geometry": "files.glb",
+          "description": "Everyday clothing and a removable shoulder basket."
+        }
+      ],
+      "planned": [
+        {
+          "id": "ba-0088:worn",
+          "status": "planned",
+          "change": "Material wear appropriate to actual material slots; keep functional geometry."
+        },
+        {
+          "id": "ba-0088:alternate",
+          "status": "planned",
+          "change": "Family-specific alternate arrangement or form; retain identity and working dimensions."
+        }
+      ],
+      "seed": null,
+      "seed_status": "No per-model seed contract currently exposed; do not infer one from scene vegetation seed.",
+      "selection": "Use base until an alternate has its own exported file, bounds, hash and review."
+    },
+    "seasonality": {
+      "implementation": "planned; no seasonal meshes or runtime switching exported",
+      "base_season": "unspecified",
+      "climate_profile": null,
+      "rules": "Climate-appropriate clothing and seasonal cargo; preserve identity and body proportions.",
+      "states": [
+        {
+          "id": "spring",
+          "status": "planned"
+        },
+        {
+          "id": "summer",
+          "status": "planned"
+        },
+        {
+          "id": "autumn",
+          "status": "planned"
+        },
+        {
+          "id": "winter",
+          "status": "planned"
+        }
+      ],
+      "weather_is_separate": true,
+      "snow_policy": "Only with an explicit climate/weather rule; winter does not imply snow."
+    },
+    "authoring": {
+      "source_file": "market-village/characters.py",
+      "entry_points": [
+        "build"
+      ],
+      "asset_selector": "BA-0088",
+      "editable_controls": [
+        "pose",
+        "garment cut",
+        "carried stock"
+      ],
+      "control_status": "Editing guidance for source code; not an exposed parameter API.",
+      "source_snapshot": "outputs/source/characters.py",
+      "rebuild_command": "blender --background --python market-village/build_market.py",
+      "command_cwd": "bronze-age-world",
+      "rebuild_scope": "Entire market kit and scene; overwrites outputs. Back up the previous version before running.",
+      "postprocess": [
+        "market-village/finalize_metadata.py",
+        "real-world-scale/build_contract.py"
+      ],
+      "dependencies": [],
+      "dependency_status": "Recorded list may be incomplete; inspect source assembly before changing components."
+    },
+    "remaster": {
+      "preserve": [
+        "stable catalog ID",
+        "metre scale",
+        "authored pivot and mounting relationships",
+        "semantic role",
+        "assembly relative transforms"
+      ],
+      "review": [
+        "compare silhouette and materials against proof sheet",
+        "verify dimensions and grounded or mounted placement",
+        "check all dependent scene compositions",
+        "refresh exported hashes, bounds and physical-scale contract",
+        "review close-up and phone-size render"
+      ],
+      "lod_status": "No dedicated LOD variants recorded",
+      "rig_status": "Static; do not imply animation support",
+      "change_policy": "Keep ID for compatible revisions; record version/change note and previous source hash. Give alternate variants separate variant IDs.",
+      "change_history": [
+        {
+          "revision": "lifecycle-1",
+          "scope": "metadata only",
+          "note": "Recorded variant/seasonality plans and source maintenance contract; geometry unchanged."
+        }
+      ]
+    }
+  }
+}

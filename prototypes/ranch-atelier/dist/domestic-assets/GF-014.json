@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-014",
+  "name": "Cradled garden water jar",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 2,
+  "category": "inanimate",
+  "intent": "Store hand-carried water in a supported hollow jar with a separate cover.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-014",
+  "biome": "settled-river-valley",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 52,
+    "triangles": 1972,
+    "bounds_min": [
+      -0.412244975566864,
+      -0.3542775511741638,
+      6.51925802230835e-09
+    ],
+    "bounds_max": [
+      0.6699999570846558,
+      0.3542775511741638,
+      1.047763705253601
+    ],
+    "dimensions_m": [
+      1.08224,
+      0.70856,
+      1.04776
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed asset affordances; map to canonical scene contract",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "water-storage",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "fill",
+      "dip",
+      "cover"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "fill",
+        "position_blender_m": [
+          0.0,
+          -0.800000011920929,
+          0.011763700284063816
+        ],
+        "role": "fill"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "the work it serves",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "full",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "empty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "covered",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "cracked",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Store hand-carried water in a supported hollow jar with a separate cover. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See build_GF_014(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/batch_structures.py",
+    "entry_point": "build_GF_014",
+    "source_sha256": "740f27d7d04a6fdf5669d2677a244c12f6f27ade6b3c12f60f96893e7ed72c6e",
+    "rebuild": "blender --background --python garden-farm/build_remaining.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable base silhouette/materials at card size",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable base silhouette/materials at card size"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-014.glb",
+    "sha256": "bac438b53e970f675036c9454f0c87644bfda677ad3d84c76ceb39fc28fa9104",
+    "bytes": 100476
+  }
+}

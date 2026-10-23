@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.1.0",
+  "id": "WW-010",
+  "name": "Protected regeneration island",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "working-woodland",
+  "batch": 1,
+  "category": "decoration",
+  "intent": "Identify a retained sapling and deadwood pocket outside active timber handling routes.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/working-woodland/ww-010",
+  "biome": "working-woodland",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 124,
+    "triangles": 3384,
+    "bounds_min": [
+      -0.5252195000648499,
+      -0.2809999883174896,
+      -1.1641532182693481e-08
+    ],
+    "bounds_max": [
+      0.445219486951828,
+      0.5408770442008972,
+      1.1206541061401367
+    ],
+    "dimensions_m": [
+      0.97044,
+      0.82188,
+      1.12065
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "habitat",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "protect",
+      "maintain"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "inspect",
+        "position_blender_m": [
+          0.0,
+          -0.75,
+          0.0006541130132973194
+        ],
+        "role": "inspect"
+      },
+      {
+        "id": "sapling",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.0006541130132973194
+        ],
+        "role": "sapling"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "bed boundary outside access routes",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "marked",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "growing",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "leaf-covered",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "disturbed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "restored",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Identify a retained sapling and deadwood pocket outside active timber handling routes. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See regeneration(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "working-woodland/batch_woodland.py",
+    "entry_point": "regeneration",
+    "source_sha256": "56d872cea517e070d7f26f1a8e68d8dece3082a0992630ac46cfed46e52273b1",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- working-woodland batch_woodland.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable silhouette and material separation in rendered contact-sheet inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable silhouette and material separation in rendered contact-sheet inspection"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "WW-010.glb",
+    "sha256": "909163865c3559347cf4f0bc3776e68081bb9a99280f44c32d8ccda601e929db",
+    "bytes": 170588
+  }
+}

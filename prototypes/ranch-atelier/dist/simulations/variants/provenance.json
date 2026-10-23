@@ -1,0 +1,64 @@
+{
+  "assets": [
+    {
+      "sourceId": "family-home-complete",
+      "sourceUrl": "/simulation-assets/buildings/family-home-complete.json",
+      "sourceSha256": "b1b95f44c47d444d5cbead8a9525aaa191e1cc9f55cf50363db6390cb51ac243",
+      "recipe": "new-england-v1",
+      "version": 1,
+      "status": "integrated"
+    },
+    {
+      "sourceId": "shelter-complete",
+      "sourceUrl": "/simulation-assets/buildings/shelter-complete.json",
+      "sourceSha256": "8561099cdea3a33e5ef5491e29f7349a7cfc1fe6284ccf4a12f21dc20e0356f0",
+      "recipe": "new-england-v1",
+      "version": 1,
+      "status": "integrated"
+    },
+    {
+      "sourceId": "tree-standing",
+      "sourceUrl": "/simulation-assets/organics/tree-standing.json",
+      "sourceSha256": "0e485eb40f87f3b4d119c593da6bc7b28f61d205387176f5c819382951534e83",
+      "recipe": "new-england-v1",
+      "version": 1,
+      "status": "integrated"
+    },
+    {
+      "sourceId": "grass",
+      "sourceUrl": "/simulations/variants/original-composer.txt",
+      "sourceSha256": "e45f440f65fc72d91c6307ca125bfbec7738d6a0dc46a2fd2932eeb0359b2f00",
+      "sourceKind": "production procedural generator",
+      "recipe": "new-england-v1",
+      "version": 1,
+      "status": "integrated"
+    },
+    {
+      "sourceId": "rock",
+      "sourceUrl": "/simulations/variants/original-composer.txt",
+      "sourceSha256": "e45f440f65fc72d91c6307ca125bfbec7738d6a0dc46a2fd2932eeb0359b2f00",
+      "sourceKind": "production procedural generator",
+      "recipe": "new-england-v1",
+      "version": 1,
+      "status": "integrated"
+    },
+    {
+      "sourceId": "enclosure",
+      "sourceUrl": "/simulations/variants/original-composer.txt",
+      "sourceSha256": "e45f440f65fc72d91c6307ca125bfbec7738d6a0dc46a2fd2932eeb0359b2f00",
+      "sourceKind": "production procedural generator",
+      "recipe": "new-england-v1",
+      "version": 1,
+      "status": "integrated"
+    }
+  ],
+  "parameters": {
+    "seed": "8 bounded variations",
+    "stage": [
+      "original",
+      "materials",
+      "full"
+    ]
+  },
+  "recipeSha256": "11e3ce3d213b5b9f71317942a1e805f506081fef4bb3e3a1866f0af46fc46380"
+}
