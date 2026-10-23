@@ -43,3 +43,8 @@ stealth for the School Jump (A Short Hike, Jusant, Untitled Goose Game). Those p
 and `owned: false`; Nintendo games have no app id and are found by slug. Each also has a hand entry in
 `rendering_notes.py` ("How it's drawn") and a full identity record in `docs/oracle/identity/examples/`, so `consult`
 can ground plans in them. To add another, add a row here, a HAND entry, and a record (same shape as these ten).
+
+`motion_notes.py` (2026-10-23) fills each profile's `identity.motion` (schema `oracle.motion.v1`, the identity
+record's `layers.animation`): mocap or keyed, the locomotion system, signature tricks, the lesson, and links to the
+talks and breakdowns. The Oracle game page shows it as "How it moves". Free motion data and licences:
+`docs/oracle/motion/MOCAP_SOURCES.md`.

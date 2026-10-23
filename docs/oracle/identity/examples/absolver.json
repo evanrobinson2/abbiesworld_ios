@@ -183,7 +183,8 @@
         "martial-arts film choreography",
         "low-poly sculpture",
         "French comics"
-      ]
+      ],
+      "motion": "mocap; Martial-arts moves built as chains across four stances; each move ends in the stance the next one starts from"
     },
     "information_grammar": {
       "info_kinds": {
@@ -261,6 +262,29 @@
       "structure": "mixed",
       "tension_curve": "sawtooth",
       "failure_cost": "retry_level"
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "mocap",
+      "mocap": 0.7,
+      "locomotion": [
+        "root_motion",
+        "blend_tree"
+      ],
+      "tricks": [
+        "Martial-arts moves built as chains across four stances; each move ends in the stance the next one starts from",
+        "Custom Unreal animation system so designers could assemble decks of moves without code",
+        "Cloth and masks carry secondary motion on simple faceted bodies"
+      ],
+      "lesson": "Moves that end where the next begins let players chain their own combos; secondary motion on cloth sells it.",
+      "sources": [
+        {
+          "title": "Unreal Engine interview: crafting a unique combat experience in Absolver",
+          "url": "https://www.unrealengine.com/en-US/developer-interviews/crafting-a-unique-combat-experience-in-absolver"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
     }
   },
   "dna": {

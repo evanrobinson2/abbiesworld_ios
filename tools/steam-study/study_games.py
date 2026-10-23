@@ -3,7 +3,7 @@
     python study_games.py          # library_notes.py (installed), owned_notes.py (owned, not installed), free_notes.py,
                                    # reference_notes.py (reference games outside the library)
 
-Rendering (how each game is shaded) comes from rendering_notes.py.
+Rendering (how each game is shaded) comes from rendering_notes.py; animation (how its characters move) from motion_notes.py.
 
 An existing profile keeps its store metadata and install fingerprint; only its identity, DNA and study fields are
 replaced. New profiles get the same shape with the store fields we know. Then run `node sync-repo-data.mjs` in
@@ -17,6 +17,7 @@ from library_notes import LIBRARY
 from owned_notes import OWNED
 from reference_notes import REFERENCE
 from rendering_notes import rendering_for
+from motion_notes import motion_for
 
 GAMES = Path(__file__).resolve().parents[2] / 'docs' / 'oracle' / 'games'
 AXES = ['tempo', 'challenge', 'expression', 'structure', 'social', 'systems', 'chance', 'session']
@@ -54,6 +55,7 @@ def study(row, free):
         'camera': camera if studied else None,
         'art_direction': art if studied else None,
         'rendering': rendering_for(slug, art) if studied else rendering_for(slug, None),
+        'motion': motion_for(slug),
         'palette': None,
         'audio_mood': audio if studied else None,
         'pacing': pace(round(axes['tempo'] * 9), round(axes['session'] * 9)) if studied else None,
