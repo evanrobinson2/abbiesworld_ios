@@ -210,7 +210,7 @@ export function createWorld(canvas, ZONES, host = null) {
   if (liftoff && S.rocket) { liftoff += dt; S.rocket.position.y += Math.pow(liftoff, 2) * 3 * dt * 6; shake = Math.max(shake, .5); }
   if (S.rocket && curId === 'orbit') { S.rocket.position.y = Math.sin(t) * .3; }
   if (S.earth) S.earth.rotation.y += dt * .05;
-  if (S.lander && view && view.step && view.step.k === 'lander' && view.step.lander) { const L = view.step.lander; S.lander.position.set(L.x * .15, Math.max(0, L.alt) * .07, 0); S.lander.rotation.z = -L.tilt * .5; S.flame.visible = !!thrust; S.glow.intensity = L.lights ? 60 : 0; }
+  { const st = view && view.step, L = st && (st.k === 'lander' ? st.lander : st.game && st.game.name === 'landing' ? {...st.game, lights: true} : null); if (S.lander && L) { S.lander.position.set(L.x * .15, Math.max(0, L.alt) * .07, 0); S.lander.rotation.z = -L.tilt * .5; S.flame.visible = !!(st.k === 'lander' ? thrust : L.thrust > .05); S.glow.intensity = L.lights ? 60 : 0; } }
   if (S.heroes) for (const h of Object.values(S.heroes)) { if (h.userData.bob > 0) { h.userData.bob -= dt * 2.5; h.position.y = Math.max(0, Math.sin(h.userData.bob * 6) * .08); } }
   if (S.stroke) drawBoard();
   updateGame(view && view.step && view.step.game, dt);

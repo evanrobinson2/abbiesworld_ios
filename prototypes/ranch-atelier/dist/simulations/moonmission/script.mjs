@@ -118,10 +118,29 @@ export const BEATS = [
   say('abbie', 'Look, Daddy! It’s home!'),
   cut(5),
  ]},
+ {id: 'flight-plan', zone: 'orbit', clock: 1500, steps: [
+  say('houston', 'Pilot, chart our course. Three burns: first stage, second stage, then the retro boosters.'),
+  say('daddy', 'Eyes on the plan. Click once to start the burn, click again when the marker is in the gold.'),
+  {k: 'game', game: 'flight'},
+ ]},
+ {id: 'cow-swap', zone: 'orbit', clock: 4800, steps: [
+  say('houston', 'Cargo check. The moon farm wants veggies, and six cows hitched a ride.'),
+  say('ani', 'I’ll swap them. Tag a cow, then give it the vegetable it wants.'),
+  {k: 'game', game: 'cows'},
+ ]},
  {id: 'lander', zone: 'lunar-descent', clock: 10800, steps: [
-  say('houston', 'Lander is away. Commander, you have the stick.'),
-  {k: 'lander'},
+  say('houston', 'Lander is away. Abbie, you have the stick.'),
+  {k: 'game', game: 'landing'},
   fx('golden-key'),
+ ]},
+ {id: 'touchdown', zone: 'moon-base-pad', clock: 11400, steps: [
+  cut(4, fx('sound', {id: 'cheer'})),
+  say('abbie', 'We’re on the Moon! We’re really on the Moon!'),
+  say('ani', 'Everybody squish together.'),
+  fx('polaroid', {caption: 'Our trip to the Moon'}),
+  {k: 'item', id: 'moon-polaroid', name: 'Polaroid: our trip to the Moon', icon: '📸', from: 'the landing'},
+  say('houston', 'Chapter one complete. Welcome to the Moon, crew.'),
+  {k: 'end', id: 'chapter-1'},
  ]},
  {id: 'arrive', zone: 'moon-base-pad', clock: 11520, steps: [
   cut(4, fx('sound', {id: 'airlock-lights'})),
@@ -169,6 +188,6 @@ export const BEATS = [
   say('houston', 'Buggy is fuelled and the road home is clear. Daddy drives, Abbie calls rocks, Ani works the lights.'),
   {k: 'game', game: 'buggy'},
   think('daddy', 'Home. A long way, and we made it home.'),
-  {k: 'end', id: 'part-1'},
+  {k: 'end', id: 'chapter-2'},
  ]},
 ];
