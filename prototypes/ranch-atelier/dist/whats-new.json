@@ -13,15 +13,26 @@
      "link": "/studies/school/play.html"
     },
     {
-     "id": "2026-10-23-bruiser-postmortem",
-     "date": "2026-10-23",
-     "title": "Why the brute came out boxy",
-     "line": "The Bruiser study's post-mortem: his picture is turned about 23 degrees, every hand-built body was too thin front to back, and the five rules that fix it.",
-     "image": "/whats-new/2026-10-23-bruiser-postmortem.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
-     "threadTitle": "AW-STUDY-0021 - Bruiser Study",
-     "tour": false,
-     "link": "/studies/bruiser/"
+      "id": "2026-10-23-grace-basement-3",
+      "date": "2026-10-23",
+      "title": "Grace's basement, warmed up",
+      "line": "The basement now warms up like an old TV. A little lamp shows you the switches, and the girl has a proper kid's face. She walks carefully down the stairs, and her thoughts appear at the bottom in pixel letters with > choices. Every memory coin gets the golden reward.",
+      "image": "/whats-new/2026-10-23-grace-basement-3.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
+      "id": "2026-10-23-bruiser-postmortem",
+      "date": "2026-10-23",
+      "title": "Why the brute came out boxy",
+      "line": "The Bruiser study's post-mortem: his picture is turned about 23 degrees, every hand-built body was too thin front to back, and the five rules that fix it.",
+      "image": "/whats-new/2026-10-23-bruiser-postmortem.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0021 - Bruiser Study",
+      "tour": false,
+      "link": "/studies/bruiser/"
     },
     {
       "id": "2026-10-23-photo-booth",

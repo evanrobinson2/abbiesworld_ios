@@ -31,12 +31,12 @@ shows information"; `docs/oracle/hud/HUD_STUDY.md`) and the game-feel laws (`GAM
 ## The character thinks out loud
 
 7. **Inner voice is the narrator.** What only the player needs to know at a story moment ("It's dark in here... it
-   feels old.") is the character's own thought, spoken in her voice. It is drawn as a thought bubble *on her*
-   (the spatial layer, because it is about her), with the words as a subtitle for the grown-up beside the child.
-   At most one line, and it fades when she moves on.
-8. **Choices are thoughts with a place in the world.** When there is a real fork, she thinks two small bubbles,
-   each a picture plus two or three words, and each tied to the thing in the world it means (the switch, the
-   stairs up). Tapping the bubble or tapping the thing itself does the same. There is never a dialog box.
+   feels old.") is the character's own thought. Evan, 2026-10-23 09:17Z: it is a caption at the bottom of the screen
+   in the place's era font (the basement uses the 16-bit VT323), plain high-contrast white, no outline, no panel.
+   At most one line, and it fades when she moves on. Her spoken voice is reserved for a recorded child's voice.
+8. **Choices follow beneath, like a terminal.** When there is a real fork, the choices are lines under her thought:
+   "> Try the switches", "> Go back up". Tapping a line, or tapping the thing itself in the world, does the same.
+   There is never a dialog box.
 9. **Hints come from her, not from the game.** After a while without progress she wonders aloud ("Maybe the middle
    one is upside down?"). The game itself never speaks.
 
@@ -70,4 +70,4 @@ shows information"; `docs/oracle/hud/HUD_STUDY.md`) and the game-feel laws (`GAM
 - What does she think the first time, and what if she is stuck?
 - Which sound does each material make?
 - What changes in the room afterwards (the information mode)?
-- Does any part of it still need a word on screen? If so, it is a thought, on her.
+- Does any part of it still need a word on screen? If so, it is her thought, as a caption at the bottom.
