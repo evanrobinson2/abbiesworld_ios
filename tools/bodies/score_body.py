@@ -108,10 +108,14 @@ def main():
         if '--build' in args: body['build'] = args[args.index('--build') + 1]
         r = score(body, cn); print(json.dumps(r, indent=1)); return
     out = []
-    for p in sorted(glob.glob(os.path.join(ROOT, 'tools', 'paper-body', 'out', '*.json'))):
-        r = score(from_paper_body(json.load(open(p))), cn); out.append(r)
-        print(f"{r['name']:16s} {r['heads']:5.2f} heads  {r['score']:3d}%  misses: {', '.join(r['misses']) or '-'}")
-    res = dict(canon=cn['version'], scored='tools/paper-body/out', bodies=out)
+    paths = sorted(glob.glob(os.path.join(ROOT, 'tools', 'paper-body', 'out', '*.json')))
+    paths += sorted(glob.glob(os.path.join(ROOT, 'tools', 'paper-body', 'figures', '*', 'body.json')))  # rebuilt figures
+    for p in paths:
+        d = json.load(open(p)); body = from_paper_body(d) if 'torso' in d else d
+        body.setdefault('name', os.path.basename(os.path.dirname(p)))
+        r = score(body, cn); out.append(r)
+        print(f"{r['name']:26s} {r['heads']:5.2f} heads  {r['score']:3d}%  misses: {', '.join(r['misses']) or '-'}")
+    res = dict(canon=cn['version'], scored='tools/paper-body/out and tools/paper-body/figures/*/body.json', bodies=out)
     for dst in (os.path.join(ROOT, 'docs', 'oracle', 'bodies', 'scores.json'),
                 os.path.join(ROOT, 'prototypes', 'ranch-atelier', 'dist', 'studies', 'bodies-study', 'scores.json')):
         json.dump(res, open(dst, 'w'), indent=1)
