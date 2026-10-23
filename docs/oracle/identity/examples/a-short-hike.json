@@ -184,7 +184,8 @@
         "summer camps and park trails",
         "low-resolution 3D of early consoles",
         "picture-book animals"
-      ]
+      ],
+      "motion": "keyframe; A few simple keyed cycles on a chunky low-poly bird, carried by the low-resolution pixel look"
     },
     "information_grammar": {
       "info_kinds": {
@@ -271,6 +272,28 @@
       "structure": "sandbox",
       "tension_curve": "flat_calm",
       "failure_cost": "none"
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "procedural"
+      ],
+      "tricks": [
+        "A few simple keyed cycles on a chunky low-poly bird, carried by the low-resolution pixel look",
+        "Climbing and gliding are separate simple states with quick, forgiving transitions"
+      ],
+      "lesson": "A tiny animation set is enough when the style is chunky and the transitions are quick.",
+      "sources": [
+        {
+          "title": "Wikipedia: A Short Hike",
+          "url": "https://en.wikipedia.org/wiki/A_Short_Hike"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.4
     }
   },
   "dna": {

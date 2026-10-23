@@ -10,7 +10,27 @@
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9HBxSBbSfYYnh3RNNKKnMi",
       "threadTitle": "AW-STUDY-0047 - Abbie's Science Adventure",
       "tour": true,
-      "link": "/studies/cell/play.html"
+      "link": "/studies/cell/play.html",
+      "id": "2026-10-23-backpack-charms",
+      "date": "2026-10-23",
+      "title": "Backpack charms up close",
+      "line": "Tap a charm on Abbie's backpack and the camera comes in close while it turns to face you; swipe for the next. Decorate the bag with cards: tap a part, then drop a card on it. The first charm is a tardigrade, won in the cell game.",
+      "image": "/whats-new/2026-10-23-backpack-charms.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 - Backpack inventory",
+      "tour": false,
+      "link": "/studies/backpack/"
+    },
+    {
+      "id": "2026-10-23-backpack",
+      "date": "2026-10-23",
+      "title": "Abbie's backpack",
+      "line": "Her pocket is now a backpack. Tap it and it opens all the way, like a clamshell, with her things in both halves. Pick one of ten styles, change five facets, and earn a charm for every quest; the first ones come from Daddy's core memories.",
+      "image": "/whats-new/2026-10-23-backpack.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 - Backpack inventory",
+      "tour": true,
+      "link": "/studies/backpack/"
     },
     {
       "id": "2026-10-23-character-studio-cast",

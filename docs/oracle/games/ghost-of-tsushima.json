@@ -1,0 +1,113 @@
+{
+  "appid": 2215430,
+  "name": "Ghost of Tsushima",
+  "store_url": "https://store.steampowered.com/app/2215430/",
+  "genres": [
+    "Action",
+    "Adventure",
+    "Open world"
+  ],
+  "short_description": "A samurai defends his island from invasion, torn between honour and stealth.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Adventure",
+    "Open world"
+  ],
+  "summary": "A samurai defends his island from invasion, torn between honour and stealth.",
+  "identity": {
+    "core_loop": "Follow the wind to a goal, fight or sneak through a camp, duel, write a haiku, ride on.",
+    "mechanics": null,
+    "ui_and_game_feel": "Weighty and cinematic; swordplay is about stance and timing.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "spatial": 0.1,
+        "meta": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The guiding wind replaces the waypoint: grass, leaves and Jin's hair point the way. Birds and foxes lead to secrets; the HUD fades almost completely.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Cinematic realism pushed toward painted colour: fields of red and gold, wind in everything.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "colour grade"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "mocap",
+      "mocap": 0.85,
+      "locomotion": [
+        "root_motion",
+        "blend_tree",
+        "procedural_ik"
+      ],
+      "tricks": [
+        "Performance capture of the cast carries each character's personality; casting changed characters to fit performers",
+        "Sword stances change the whole idle and attack set, so a stance swap reads instantly",
+        "Wind drives hair, cloth, grass and leaves together, so even a still character looks alive"
+      ],
+      "lesson": "Capture the performer, then let one wind signal move cloth and hair so idle never looks frozen.",
+      "sources": [
+        {
+          "title": "VFX Voice: Creating the way of the warrior for Ghost of Tsushima",
+          "url": "https://vfxvoice.com/creating-the-way-of-the-warrior-for-ghost-of-tsushima/"
+        },
+        {
+          "title": "GDC 2021: how Sucker Punch brought the island of Tsushima to life",
+          "url": "https://gdconf.com/news/see-how-sucker-punch-brought-island-tsushima-life-gdc-2021"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Shakuhachi and taiko, wind and steel.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Navigation by wind is the best diegetic waypoint we know. Let wind, animals and light lead the player in Abbie's World."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.89,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.44,
+      "systems": 0.44,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -186,7 +186,8 @@
         "street art and graffiti",
         "action anime",
         "martial-arts film"
-      ]
+      ],
+      "motion": "mocap; In-house mocap actors perform each fighter's moves; capture is fed straight into the RE Engine"
     },
     "information_grammar": {
       "info_kinds": {
@@ -275,6 +276,36 @@
       "structure": "mixed",
       "tension_curve": "sawtooth",
       "failure_cost": "retry_level"
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "mocap",
+      "mocap": 0.8,
+      "locomotion": [
+        "root_motion"
+      ],
+      "tricks": [
+        "In-house mocap actors perform each fighter's moves; capture is fed straight into the RE Engine",
+        "Capcom built real-time preview of capture inside the engine, so animators see it on the character at once",
+        "Captured motion is then pushed into strong key poses with hit-stop, so every hit reads"
+      ],
+      "lesson": "Capture for weight and timing, then exaggerate the key poses and freeze the contact frame.",
+      "sources": [
+        {
+          "title": "Dashfight: Capcom shows its RE Engine mocap technique in SF6",
+          "url": "https://dashfight.com/news/capcom-unveils-cutting-edge-re-engine-mocap-technique-in-sf-6-showcase-3911"
+        },
+        {
+          "title": "Capcom R&D: Real-time motion capture preview in RE ENGINE (slides)",
+          "url": "https://www.docswell.com/s/CAPCOM_RandD/KLLR24-RE2023"
+        },
+        {
+          "title": "80.lv: Capcom demonstrates motion capture running directly in RE Engine",
+          "url": "https://80.lv/articles/capcom-demonstrates-motion-capture-running-directly-in-re-engine/"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.7
     }
   },
   "dna": {

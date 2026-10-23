@@ -57,6 +57,28 @@
       "confidence": 0.6,
       "lesson": "Mixed styles can live together if light, rim and effects are shared. Useful for Abbie's World characters made by different factories."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "root_motion"
+      ],
+      "tricks": [
+        "Hand-keyed moves for every fighter, tuned frame by frame for timing",
+        "Hit-stop: the struck fighter shakes in place, horizontally on the ground and vertically in the air, fading out; the attacker keeps moving a little",
+        "Damage poses are blended in, and shake scales with camera distance"
+      ],
+      "lesson": "Hit-stop is animation: freeze, shake the victim, keep the attacker alive, fade the shake.",
+      "sources": [
+        {
+          "title": "Nintendo Wire: Sakurai's \"Eight Hit Stop Techniques\" and other episodes",
+          "url": "https://nintendowire.com/news/2022/12/12/this-week-in-sakurai-12-5-12-11-fine-tuning-hit-stop-and-cheating-the-system/"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.7
+    },
     "palette": null,
     "audio_mood": "Huge library of upbeat remixes; loud bright hit sounds.",
     "pacing": "fast, short sessions",

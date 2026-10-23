@@ -59,6 +59,7 @@
       "confidence": 0.55,
       "lesson": "One time-of-day signal driving fog, grade and danger together."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Melancholy sea-shanty mood.",
     "pacing": "brisk, short sessions",

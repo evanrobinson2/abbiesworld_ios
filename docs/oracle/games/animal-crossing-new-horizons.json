@@ -58,6 +58,23 @@
       "confidence": 0.7,
       "lesson": "Curving the world away from the camera keeps a small place feeling big but safe; we can bend the Ranch the same way in a vertex shader."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "procedural_ik"
+      ],
+      "tricks": [
+        "Squat toy-proportioned villagers with bouncy keyed walks and big emotes (reactions) for every mood",
+        "Footsteps and run speed change with the ground; the head turns to look at things nearby"
+      ],
+      "lesson": "Emotes as a vocabulary: a small set of big readable reactions carries all the social information.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Hourly music that changes through the day; soft footsteps on every ground type.",
     "pacing": "slow, short sessions",

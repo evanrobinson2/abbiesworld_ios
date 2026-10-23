@@ -1,0 +1,112 @@
+{
+  "appid": 1817230,
+  "name": "Hi-Fi RUSH",
+  "store_url": "https://store.steampowered.com/app/1817230/",
+  "genres": [
+    "Action",
+    "Rhythm",
+    "Comedy"
+  ],
+  "short_description": "A wannabe rock star fights a robot corporation where the whole world moves to the beat.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Rhythm",
+    "Comedy"
+  ],
+  "summary": "A wannabe rock star fights a robot corporation where the whole world moves to the beat.",
+  "identity": {
+    "core_loop": "Fight to the music: attack on the beat for bigger hits, parry on the beat, traverse a level that pulses with the song.",
+    "mechanics": null,
+    "ui_and_game_feel": "Snappy, joyful, cartoon-loud; everything bounces in time.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "meta": 0.3,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The world is the metronome: lights, machines, enemies and the cat companion pulse on the beat. Hit feedback shows rating words on screen.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Cel-shaded cartoon with thick outlines and comic-book effects.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "toon",
+      "family": "toon",
+      "light": "banded",
+      "outlines": true,
+      "outline": "screen_edges",
+      "surface": "hand_painted",
+      "post": [
+        "edge detection"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.1,
+      "locomotion": [
+        "beat_sync",
+        "blend_tree"
+      ],
+      "tricks": [
+        "Actions pressed slightly early or late are interpolated so the hit still lands on the beat",
+        "Cutscenes are animated to a click track at the song's tempo (about three times the work of a normal scene)",
+        "Idle loops, enemies and the world all bob on the same beat"
+      ],
+      "lesson": "One clock for animation and music: snap the contact frame to the beat and the player always feels on time.",
+      "sources": [
+        {
+          "title": "Gameranx: how Tango Gameworks pulled off Hi-Fi Rush (citing director John Johanas)",
+          "url": "https://gameranx.com/updates/id/436553/article/hi-fi-rush-is-a-huge-technical-achievement-heres-how-tango-gameworks-pulled-it-off/"
+        },
+        {
+          "title": "Unreal Engine interview: Hi-Fi Rush was inspired by Shaun of the Dead and Futurama",
+          "url": "https://www.unrealengine.com/en-US/developer-interviews/hi-fi-rush-was-inspired-by-shaun-of-the-dead-and-futurama"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.65
+    },
+    "palette": null,
+    "audio_mood": "Licensed rock and an original score; every sound effect lands on the beat.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Make the whole world pulse with one clock. Animation that lands on the beat even when the player is slightly off is the trick."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.89,
+      "expression": 0.44,
+      "structure": 0.56,
+      "social": 0.22,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
