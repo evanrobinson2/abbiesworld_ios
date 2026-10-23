@@ -1036,7 +1036,7 @@
    ]
   },
   "puppet": {
-   "recorded": "2026-10-23, gathered afterwards from the study docs",
+   "recorded": "2026-10-23, round 2 (animation pass) recorded as worked",
    "items": [
     {
      "k": "canon",
@@ -1057,6 +1057,35 @@
      "k": "reference",
      "t": "Evan's wooden mannequin photo",
      "note": "joints read off it"
+    },
+    {
+     "k": "oracle",
+     "t": "Shoulder study: locomotion and idle",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shoulder/SHOULDER_STUDY.md",
+     "note": "no foot sliding: play the stride at ground speed; feet that settle; speed blend walk to run; squash on landing"
+    },
+    {
+     "k": "tutorial",
+     "t": "Richard Williams, The Animator's Survival Kit",
+     "href": "https://en.wikipedia.org/wiki/The_Animator%27s_Survival_Kit",
+     "note": "walk keys contact, down, passing, up; arms counter the legs; body lowest just after contact"
+    },
+    {
+     "k": "design",
+     "t": "The twelve basic principles of animation (Thomas and Johnston)",
+     "href": "https://en.wikipedia.org/wiki/Twelve_basic_principles_of_animation",
+     "note": "overlap and follow-through, slow in and out only on holds, arcs"
+    },
+    {
+     "k": "devblog",
+     "t": "David Rosen, Animation Bootcamp: An Indie Approach to Procedural Animation (GDC 2014)",
+     "note": "Overgrowth: a few poses plus procedural foot paths and IK beat a pile of keys"
+    },
+    {
+     "k": "research",
+     "t": "Human gait cycle",
+     "href": "https://en.wikipedia.org/wiki/Gait_(human)",
+     "note": "walk: each foot planted about 60% of the cycle, double support; run: under 40%, with a flight phase; heel strike, heel rise, toe off"
     }
    ]
   },

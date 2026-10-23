@@ -76,13 +76,13 @@ svg.dragging{cursor:grabbing}
 .move:focus-visible{outline:2px solid var(--wood)}
 .toast{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);padding:8px 14px;border-radius:14px;font:13px var(--display);opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1}
-@media (max-width:560px){#svg{top:104px;height:calc(100% - 104px)}.tools{left:12px;right:12px;top:52px;flex-direction:row;justify-content:space-between}.ib{width:38px;height:38px}.tag b{font-size:17px}.clipname{display:none}.speed input{width:54px}}
+@media (max-width:560px){.transport{flex-wrap:wrap}#paceBox{order:9;flex-basis:100%;justify-content:center;padding-bottom:4px}#paceBox input{width:60%}#svg{top:104px;height:calc(100% - 104px)}.tools{left:12px;right:12px;top:52px;flex-direction:row;justify-content:space-between}.ib{width:38px;height:38px}.tag b{font-size:17px}.clipname{display:none}.speed input{width:54px}}
 </style>
 </head>
 <body>
 <div id="stage">
   <svg id="svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The wooden mannequin puppet. Drag a joint to pose it.">
-    <g id="world"><ellipse id="shadow" class="shadow"/><line id="floor" class="floor"/><g id="fig" class="fig"></g></g>
+    <g id="world"><ellipse id="shadow" class="shadow"/><line id="floor" class="floor"/><g id="planks" class="floor"></g><g id="fig" class="fig"></g></g>
     <g id="over"><g id="ghosts" class="ghost"></g><path id="loa" class="loa"/><g id="handles" class="handles"></g></g>
   </svg>
   <div class="tag"><b>Mannequin puppet</b><small>AW-STUDY-0038 · drag a joint</small></div>
@@ -104,7 +104,8 @@ svg.dragging{cursor:grabbing}
     <div class="track" id="track" aria-label="Timeline: tap a diamond to go to that key"><div class="head" id="head"></div></div>
     <button class="ib" id="addKey" title="Set a key here" aria-label="Set key"><svg viewBox="0 0 24 24"><path d="M12 4l6 8-6 8-6-8z"/><path d="M19 3v4M17 5h4"/></svg></button>
     <button class="ib" id="delKey" title="Remove this key" aria-label="Remove key"><svg viewBox="0 0 24 24"><path d="M12 4l6 8-6 8-6-8z"/><path d="M17 5h4"/></svg></button>
-    <label class="speed" title="Playback speed"><input type="range" id="speed" min="0.25" max="2" step="0.05" value="1" aria-label="Speed"><span id="speedv">1×</span></label>
+    <label class="speed" id="paceBox" hidden title="From a walk to a run"><span>walk</span><input type="range" id="pace" min="0" max="1" step="0.01" value="0" aria-label="Pace"><span>run</span></label>
+    <label class="speed" id="speedBox" title="Playback speed"><input type="range" id="speed" min="0.25" max="2" step="0.05" value="1" aria-label="Speed"><span id="speedv">1×</span></label>
   </div>
   <div class="tray" id="tray" role="group" aria-label="Moves"></div>
 </div>
@@ -169,18 +170,68 @@ const GROUND=lowest(fromWorld(STAND));
 const grounded=p=>{p.y=0;p.y=GROUND-lowest(p)+(p.lift||0);delete p.lift;return p};
 const P=(over={},root={})=>grounded(fromWorld({...STAND,...over},root));
 
+
+// ---- Gait engine. The Oracle's Shoulder study: "the single biggest flaw in cheap games is foot sliding; play each
+// clip at the rate its stride matches the ground speed", plus feet that settle and a body that bobs. So walks and runs
+// are not posed keys: each foot follows a real path (heel strike, flat, heel rise over the toe, toe off, swing), the
+// floor slides back under the planted foot at exactly the ground speed, the hips ride as high as the legs allow (an
+// inverted pendulum: lowest in double support, highest over the planted foot), and two-bone IK bends the knees.
+// Arms counter-swing with the opposite leg and lag behind it, forearms lag the upper arms: overlap, not lockstep.
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), lerp=(a,b,u)=>a+(b-a)*u, sm=u=>{u=clamp(u,0,1);return u*u*(3-2*u)};
+const LEG=L.thigh_R+L.shin_R, FLAT=-84, TOEY=GROUND-6;
+const GAITS={
+ // T cycle s, duty = share of the cycle a foot is planted, S = how far the planted foot travels, h = hip height in legs
+ walk:{T:1.12,duty:.62,S:290,h:.99,dip:9,bob:0,lean:3,sway:1.5,arm:15,armBase:4,elbow:8,elbowFwd:16,lift:40,kick:10,strike:-106,toeOff:-30,head:0,chest:1,paws:0},
+ run:{T:.68,duty:.36,S:262,h:.9,dip:0,bob:26,lean:13,sway:2.5,arm:42,armBase:12,elbow:84,elbowFwd:10,lift:140,kick:130,strike:-96,toeOff:-16,head:-8,chest:3,paws:0},
+ sneak:{T:1.8,duty:.72,S:210,h:.82,dip:5,bob:0,lean:18,sway:1,arm:5,armBase:0,elbow:0,elbowFwd:0,lift:70,kick:0,strike:-110,toeOff:-40,head:-6,chest:6,paws:1},
+ sad:{T:1.55,duty:.66,S:180,h:.975,dip:5,bob:0,lean:5,sway:.8,arm:5,armBase:-2,elbow:5,elbowFwd:4,lift:18,kick:0,strike:-92,toeOff:-55,head:44,chest:16,paws:0},
+};
+function gaitOf(clip){const g=GAITS[clip.gait];if(clip.gait!=="walk")return g;const r=GAITS.run,u=clip.pace||0,o={};
+  for(const k in g)o[k]=lerp(g[k],r[k],u);return o}
+const speedOf=g=>g.S/(g.duty*g.T);
+const footVec=(s,w)=>rot([0,L["foot_"+s]],w);
+function footAt(g,ph,s){const Lf=footVec(s,FLAT),x0=g.S/2,ay=TOEY-Lf[1];
+  if(ph<g.duty){const u=ph/g.duty,x=x0-g.S*u,roll=.6;
+    if(u<roll){const w=lerp(g.strike,FLAT,sm(u/.14));return{x,y:ay,w}}
+    // heel rise: the toe stays planted (it slides back with the floor) and the ankle rolls up over it
+    const w=lerp(FLAT,g.toeOff,sm((u-roll)/(1-roll))),toe=[x0-g.S*u+Lf[0],TOEY],v=footVec(s,w);return{x:toe[0]-v[0],y:toe[1]-v[1],w}}
+  const u=(ph-g.duty)/(1-g.duty);const v0=footVec(s,g.toeOff),P0=[x0-g.S+Lf[0]-v0[0],TOEY-v0[1]],P3=[x0,ay];
+  const e=sm(u),bump=Math.sin(Math.PI*Math.pow(u,.7));
+  const x=lerp(P0[0],P3[0],e)-g.kick*Math.sin(Math.PI*u)*Math.pow(1-u,1.6),y=lerp(P0[1],P3[1],u)-g.lift*bump;
+  const w=u<.4?lerp(g.toeOff,-55,sm(u/.4)):lerp(-55,g.strike,sm((u-.4)/.6));return{x,y,w}}
+function legIK(p,s,A,footW){const F=fk(p),H=F["thigh_"+s].base,l1=L["thigh_"+s],l2=L["shin_"+s];
+  let d=sub(A,H),dl=Math.hypot(...d);const mx=l1+l2-.5;if(dl>mx){d=[d[0]*mx/dl,d[1]*mx/dl];dl=mx}
+  const al=Math.acos(clamp((l1*l1+dl*dl-l2*l2)/(2*l1*dl),-1,1))/D,wT=ang(d)-al;   // knee bends forward
+  const K=add(H,rot([0,l1],wT)),wS=wT+wrap(ang(sub(add(H,d),K))-wT);
+  p.a["thigh_"+s]=wT-p.r;p.a["shin_"+s]=wS-wT;p.a["foot_"+s]=wrap(footW-wS)}
+const softMax=(a,b,k)=>(a+b+Math.sqrt((a-b)*(a-b)+k*k))/2;
+const cdist=(a,b)=>{const d=Math.abs(a-b)%1;return Math.min(d,1-d)};
+function gaitPose(clip,φ){const g=gaitOf(clip),c=Math.cos,TAU=2*Math.PI;
+  const lean=g.lean+g.sway*c(2*TAU*(φ-.1));
+  const ψ=φ-.05, swing=c(TAU*ψ), swingF=c(TAU*(ψ-.04));   // arms trail the legs; forearms trail the arms
+  const w={...STAND,spine:180+lean,chest:180+lean+g.chest,head:180+g.head+lean*.25-g.sway*.6*c(2*TAU*(φ-.18))};
+  if(g.paws){for(const s of["R","L"]){const k=s==="R"?1:-1;w["upperarm_"+s]=-58+4*k*swing;w["forearm_"+s]=-166+3*k*swing;w["hand_"+s]=-40+6*c(TAU*(ψ-.1))}}
+  else for(const s of["R","L"]){const k=s==="R"?1:-1,up=g.armBase+k*g.arm*swing,fwd=Math.max(0,-k*swingF);
+    const upF=g.armBase+k*g.arm*swingF;w["upperarm_"+s]=up;w["forearm_"+s]=upF-g.elbow-g.elbowFwd*fwd;w["hand_"+s]=w["forearm_"+s]-5+4*k*c(TAU*(ψ-.12))}
+  const p=fromWorld(w);delete p.lift;p.y=0;
+  const fr=footAt(g,φ%1,"R"),fl=footAt(g,(φ+.5)%1,"L"),F=fk(p);
+  // hips: as high as wanted, never higher than the legs reach (soft, so no kinks)
+  const hipOff=F.thigh_R.base[1]-HC[1];let y=fr.y-g.h*LEG-hipOff;
+  y+=g.dip*(Math.exp(-Math.pow(cdist(φ,.07)/.07,2))+Math.exp(-Math.pow(cdist(φ,.57)/.07,2)));
+  y+=g.bob*c(2*TAU*(φ-g.duty/2));
+  for(const[f,s]of[[fr,"R"],[fl,"L"]]){const hx=F["thigh_"+s].base[0]-HC[0],dx=f.x-hx,R=LEG*.995;
+    if(Math.abs(dx)<R)y=softMax(y,f.y-Math.sqrt(R*R-dx*dx)-hipOff,10)}
+  p.y=y-HC[1];
+  legIK(p,"R",[HC[0]+fr.x,fr.y],fr.w);legIK(p,"L",[HC[0]+fl.x,fl.y],fl.w);
+  return p}
+function bakeGait(clip,n=8){return Array.from({length:n+1},(_,i)=>({t:i/n,p:gaitPose(clip,i/n)}))}
+
 // ---- Stock moves, organised the way the Character Studio sorts its 50: by game genre.
 // keys: [t from 0 to 1, pose]. ease: smooth | linear | step. floor: never sink below the floor while playing.
 const ARMSUP={upperarm_R:-172,forearm_R:-178,hand_R:-178,upperarm_L:-168,forearm_L:-176,hand_L:-176};
 const CROUCH={spine:198,chest:202,head:190,thigh_R:-62,shin_R:42,foot_R:-84,thigh_L:-58,shin_L:38,foot_L:-86};
 const GUARD={spine:186,chest:188,head:182,upperarm_R:34,forearm_R:-150,hand_R:-160,upperarm_L:22,forearm_L:-148,hand_L:-158,
   thigh_R:16,shin_R:24,foot_R:-80,thigh_L:-22,shin_L:6,foot_L:-90};
-function walk(stride,lift,lean,armSw,bend){const c=(s)=>({spine:180+lean,chest:180+lean*1.2,head:180+lean*.4,
-    upperarm_R:-armSw*s,forearm_R:-armSw*s-bend,hand_R:-armSw*s-bend,upperarm_L:armSw*s,forearm_L:armSw*s-bend,hand_L:armSw*s-bend,
-    thigh_R:stride*s,shin_R:stride*s+(s>0?28:4),foot_R:-80+(s>0?20:-10),thigh_L:-stride*s,shin_L:-stride*s+(s<0?28:4),foot_L:-80+(s<0?20:-10)});
-  const pass=(s)=>({spine:180+lean,chest:180+lean*1.2,head:180+lean*.4,upperarm_R:0,forearm_R:-bend,hand_R:-bend,upperarm_L:0,forearm_L:-bend,hand_L:-bend,
-    thigh_R:s>0?-stride*.5:4,shin_R:s>0?stride*1.4:4,foot_R:s>0?-50:-84,thigh_L:s<0?-stride*.5:4,shin_L:s<0?stride*1.4:4,foot_L:s<0?-50:-84});
-  return[[0,P(c(1))],[.25,P(pass(1),{lift})],[.5,P(c(-1))],[.75,P(pass(-1),{lift})],[1,P(c(1))]]}
 const LEAP_A={spine:-140+360,chest:-128+360,head:-140+360,upperarm_R:35,forearm_R:20,hand_R:15,upperarm_L:25,forearm_L:10,hand_L:5,
   thigh_R:-105,shin_R:22,foot_R:-88,thigh_L:-95,shin_L:12,foot_L:-85};
 const LEAP_B={};for(const n of NAMES)LEAP_B[n]=W0[n];LEAP_B.spine+=360;LEAP_B.chest+=360;LEAP_B.head+=360;
@@ -188,8 +239,8 @@ const MOVES=[
  {name:"Idle",genre:"Everyday",dur:3,keys:[[0,P()],[.5,P({chest:177,head:178,upperarm_R:9,upperarm_L:-8},{lift:-3})],[1,P()]]},
  {name:"Wave",genre:"Everyday",dur:1.6,keys:[[0,P({upperarm_L:-150,forearm_L:-200,hand_L:-205,head:184})],[.25,P({upperarm_L:-152,forearm_L:-150,hand_L:-140,head:182})],
    [.5,P({upperarm_L:-150,forearm_L:-200,hand_L:-205,head:184})],[.75,P({upperarm_L:-152,forearm_L:-150,hand_L:-140,head:182})],[1,P({upperarm_L:-150,forearm_L:-200,hand_L:-205,head:184})]]},
- {name:"Walk",genre:"Platformer",dur:1.1,keys:walk(24,-8,2,22,14)},
- {name:"Run",genre:"Platformer",dur:.66,keys:walk(42,-34,14,48,80)},
+ {name:"Walk",genre:"Platformer",gait:"walk",pace:0},
+ {name:"Run",genre:"Platformer",gait:"walk",pace:1},
  {name:"Jump",genre:"Platformer",dur:1.4,floor:true,keys:[[0,P()],[.2,P({...CROUCH,upperarm_R:50,forearm_R:40,hand_R:40,upperarm_L:44,forearm_L:34,hand_L:34})],
    [.36,P({...ARMSUP,thigh_R:-4,shin_R:-2,foot_R:-20,thigh_L:2,shin_L:4,foot_L:-24},{lift:-90})],[.55,P({...ARMSUP,thigh_R:-60,shin_R:60,foot_R:-40,thigh_L:-48,shin_L:70,foot_L:-30},{lift:-230})],
    [.76,P({...CROUCH,upperarm_R:-40,forearm_R:-70,hand_R:-70,upperarm_L:-50,forearm_L:-80,hand_L:-80})],[1,P()]]},
@@ -208,8 +259,8 @@ const MOVES=[
    [.5,P({upperarm_L:-30,forearm_L:30,hand_L:30,upperarm_R:20,forearm_R:-30,thigh_L:-14,shin_L:30,head:176},{x:-14})],[1,P({upperarm_L:-160,forearm_L:-170,hand_L:-172,upperarm_R:20,forearm_R:-30,thigh_R:-10,shin_R:30,head:186},{x:14})]]},
  {name:"Robot",genre:"Rhythm",dur:2.4,ease:"step",keys:[[0,P({upperarm_R:-90,forearm_R:-180,hand_R:-180,upperarm_L:0,forearm_L:-90,hand_L:-90})],[.25,P({upperarm_R:0,forearm_R:-90,hand_R:-90,upperarm_L:-90,forearm_L:-180,hand_L:-180,head:170})],
    [.5,P({upperarm_R:-90,forearm_R:-90,hand_R:-90,upperarm_L:-90,forearm_L:-90,hand_L:-90,head:190})],[.75,P({upperarm_R:-90,forearm_R:0,hand_R:0,upperarm_L:-180,forearm_L:-180,hand_L:-180,head:180})],[1,P({upperarm_R:-90,forearm_R:-180,hand_R:-180,upperarm_L:0,forearm_L:-90,hand_L:-90})]]},
- {name:"Sneak",genre:"Stealth",dur:1.8,keys:(()=>{const s=(k)=>({spine:200,chest:206,head:196,upperarm_R:-70,forearm_R:-168,hand_R:-30,upperarm_L:-64,forearm_L:-160,hand_L:-24,
-     thigh_R:k?-46:-14,shin_R:k?40:30,foot_R:k?-70:-82,thigh_L:k?-14:-46,shin_L:k?30:40,foot_L:k?-82:-70});return[[0,P(s(1))],[.5,P(s(0),{lift:-10})],[1,P(s(1))]]})()},
+ {name:"Sneak",genre:"Stealth",gait:"sneak"},
+ {name:"Sad walk",genre:"Story",gait:"sad"},
  {name:"Sit down",genre:"Life sim",dur:3,keys:[[0,P()],[.35,P({spine:176,chest:178,thigh_R:-90,shin_R:-88,foot_R:-170,thigh_L:-94,shin_L:-92,foot_L:-174,upperarm_R:30,forearm_R:30,hand_R:-60,upperarm_L:-20,forearm_L:-80,hand_L:-80})],
    [.7,P({spine:176,chest:178,thigh_R:-90,shin_R:-88,foot_R:-170,thigh_L:-94,shin_L:-92,foot_L:-174,upperarm_R:30,forearm_R:30,hand_R:-60,upperarm_L:-20,forearm_L:-80,hand_L:-80})],[1,P()]]},
  {name:"Windmill",genre:"Arcade",dur:1.2,ease:"linear",keys:[0,.25,.5,.75,1].map(t=>[t,P({spine:192,chest:196,upperarm_R:-360*t,forearm_R:-360*t,hand_R:-360*t,upperarm_L:-180-360*t,forearm_L:-180-360*t,hand_L:-180-360*t})])},
@@ -217,14 +268,28 @@ const MOVES=[
    [.3,P({...ARMSUP,thigh_R:-10,shin_R:0,thigh_L:-6,shin_L:0},{lift:-150,r:-40})],[.5,P({spine:190,chest:194,head:200,upperarm_R:-90,forearm_R:-60,upperarm_L:-80,forearm_L:-50,thigh_R:-120,shin_R:130,foot_R:-40,thigh_L:-110,shin_L:120,foot_L:-30},{lift:-280,r:-180})],
    [.68,P({...ARMSUP,thigh_R:-20,shin_R:20,thigh_L:-14,shin_L:16},{lift:-130,r:-320})],[.8,P({...CROUCH,upperarm_R:-60,forearm_R:-90,upperarm_L:-66,forearm_L:-96},{r:-360})],[1,P({}, {r:-360})]]},
 ];
-for(const m of MOVES){m.ease=m.ease||"smooth";m.keys=m.keys.map(([t,p])=>({t,p}))}
+for(const m of MOVES){m.ease=m.ease||"smooth";if(m.gait){m.dur=GAITS[m.gait].T;m.keys=bakeGait(m)}else m.keys=m.keys.map(([t,p])=>({t,p}))}
 
 // ---- Playback
-const ease={smooth:u=>u*u*(3-2*u),linear:u=>u,step:u=>0};
-function sample(clip,t){const k=clip.keys;if(!k.length)return clone(state.pose);
-  if(t<=k[0].t)return clone(k[0].p);if(t>=k[k.length-1].t)return clone(k[k.length-1].p);
-  let i=0;while(k[i+1].t<t)i++;const A=k[i].p,B=k[i+1].p,u=ease[clip.ease]((t-k[i].t)/(k[i+1].t-k[i].t));
-  const p={x:A.x+(B.x-A.x)*u,y:A.y+(B.y-A.y)*u,r:A.r+(B.r-A.r)*u,a:{}};for(const n of NAMES)p.a[n]=A.a[n]+(B.a[n]-A.a[n])*u;
+// Keys play through Hermite splines: the motion keeps flowing through a key instead of stopping at every one
+// (smoothstep per key is what made the first pass look like a computer). Two equal keys make a hold. Then overlap:
+// the chest, head, arms and hands sample a little later than the hips, so they drag and follow through.
+const LAG={chest:.02,head:.06,upperarm_R:.03,upperarm_L:.03,forearm_R:.06,forearm_L:.06,hand_R:.1,hand_L:.1};
+const isLoop=c=>{const k=c.keys,a=k[0].p,b=k[k.length-1].p;return k.length>2&&Math.abs(a.x-b.x)+Math.abs(a.y-b.y)+Math.abs(a.r-b.r)<1&&NAMES.every(n=>Math.abs(a.a[n]-b.a[n])<.5)};
+function chan(clip,t,get){const k=clip.keys,n=k.length,loop=clip._loop;
+  if(loop)t=((t%1)+1)%1;else t=clamp(t,k[0].t,k[n-1].t);
+  if(n===1||t<=k[0].t)return get(k[0].p);if(t>=k[n-1].t)return get(k[n-1].p);
+  let i=0;while(k[i+1].t<t)i++;const t0=k[i].t,t1=k[i+1].t,h=t1-t0,u=(t-t0)/h,p0=get(k[i].p),p1=get(k[i+1].p);
+  if(clip.ease==="step")return p0;if(clip.ease==="linear")return lerp(p0,p1,u);
+  const nb=j=>j<0?(loop?{t:k[n-1+j].t-1,v:get(k[n-1+j].p)}:null):j>=n?(loop?{t:k[j-n+1].t+1,v:get(k[j-n+1].p)}:null):{t:k[j].t,v:get(k[j].p)};
+  const A=nb(i-1),B=nb(i+2),hold=1e-3;
+  const m0=!A||Math.abs(p0-A.v)<hold||Math.abs(p1-p0)<hold?0:(p1-A.v)/(t1-A.t);
+  const m1=!B||Math.abs(B.v-p1)<hold||Math.abs(p1-p0)<hold?0:(B.v-p0)/(B.t-t0);
+  const u2=u*u,u3=u2*u;return(2*u3-3*u2+1)*p0+(u3-2*u2+u)*h*m0+(-2*u3+3*u2)*p1+(u3-u2)*h*m1}
+function sample(clip,t){if(clip.gait&&!clip.keyed)return gaitPose(clip,t);const k=clip.keys;if(!k.length)return clone(state.pose);
+  if(clip._loop===undefined)clip._loop=isLoop(clip);
+  const p={x:chan(clip,t,q=>q.x),y:chan(clip,t,q=>q.y),r:chan(clip,t,q=>q.r),a:{}};
+  for(const n of NAMES){const lag=state.playing&&clip.ease!=="step"?(LAG[n]||0)/clip.dur:0;p.a[n]=chan(clip,t-lag,q=>q.a[n])}
   if(clip.floor!==false){const lo=lowest(p);if(lo>GROUND)p.y-=lo-GROUND}
   return p}
 
@@ -255,7 +320,7 @@ for(const id in HANDLES){const h=HANDLES[id];h.at=h.at||h.aim;const e=document.c
   e.innerHTML=`<circle class="hit" r="30"/><circle class="dot" r="${h.root?11:8}"/>`;e.dataset.id=id;handlesG.appendChild(e);hEl[id]=e}
 const handlePos=(id,F)=>HANDLES[id].root?F.hc:F[HANDLES[id].at].tip;
 
-const state={pose:P(),clip:null,t:0,playing:false,speed:1,pin:true,onion:true,loa:false,moveIdx:-1};
+const state={dist:0,pose:P(),clip:null,t:0,playing:false,speed:1,pin:true,onion:true,loa:false,moveIdx:-1};
 function render(){const F=place(FIG,state.pose);
   for(const id in hEl){const q=handlePos(id,F);hEl[id].setAttribute("transform",`translate(${f(q[0])} ${f(q[1])})`)}
   const lo=lowest(state.pose);const air=Math.max(0,GROUND-lo);
@@ -267,6 +332,8 @@ function render(){const F=place(FIG,state.pose);
   ghostA.style.display=ghostB.style.display="none";
   if(state.onion&&state.clip&&!state.playing){const k=state.clip.keys,e=1e-3;const prev=[...k].reverse().find(x=>x.t<state.t-e),next=k.find(x=>x.t>state.t+e);
     if(prev){ghostA.style.display="";place(GA,prev.p)}if(next){ghostB.style.display="";place(GB,next.p)}}
+  const pk=$("planks");if(!pk.childElementCount)for(let i=0;i<24;i++){const l=document.createElementNS(NS,"line");pk.appendChild(l)}
+  [...pk.children].forEach((l,i)=>{const x=VB[0]-200+i*110-(state.dist%110);l.setAttribute("x1",f(x));l.setAttribute("x2",f(x-26));l.setAttribute("y1",f(GROUND+6));l.setAttribute("y2",f(GROUND+30))});
   drawTrack()}
 
 // ---- Stage size: one fixed frame that fits a standing figure, a flip and a windmill
@@ -300,9 +367,10 @@ svg.addEventListener("pointerup",endDrag);svg.addEventListener("pointercancel",e
 // ---- Keys and the timeline strip
 function ensureClip(){if(!state.clip){state.clip={name:"My move",genre:"Mine",dur:2,ease:"smooth",floor:false,keys:[{t:0,p:clone(state.pose)}]};state.t=0;setName()}}
 function keyAt(t){return state.clip?state.clip.keys.find(k=>Math.abs(k.t-t)<0.012):null}
-function autoKey(){ensureClip();const k=keyAt(state.t);if(k)k.p=clone(state.pose);else{state.clip.keys.push({t:state.t,p:clone(state.pose)});state.clip.keys.sort((a,b)=>a.t-b.t)}
+function autoKey(){ensureClip();if(state.clip.gait&&!state.clip.keyed){const k=bakeGait(state.clip,16);state.clip.keys=k;markEdited()}const k=keyAt(state.t);if(k)k.p=clone(state.pose);else{state.clip.keys.push({t:state.t,p:clone(state.pose)});state.clip.keys.sort((a,b)=>a.t-b.t)}
   state.clip.floor=false;markEdited();render()}
-function markEdited(){if(state.clip&&state.clip.stock){state.clip.stock=false;state.clip.name=state.clip.name+" (yours)";setName()}}
+function markEdited(){if(state.clip&&state.clip.gait&&!state.clip.keyed){state.clip.keyed=true;state.clip.dur=gaitOf(state.clip).T;state.clip._loop=true}
+  if(state.clip)state.clip._loop=undefined;if(state.clip&&state.clip.stock){state.clip.stock=false;state.clip.name=state.clip.name+" (yours)";setName()}}
 function drawTrack(){const tr=$("track");tr.querySelectorAll(".key").forEach(k=>k.remove());const w=tr.clientWidth-20;
   if(state.clip)for(const k of state.clip.keys){const d=document.createElement("div");d.className="key"+(Math.abs(k.t-state.t)<0.012?" on":"");d.style.left=(10+k.t*w)+"px";d.dataset.t=k.t;tr.appendChild(d)}
   $("head").style.left=(10+state.t*w)+"px"}
@@ -318,11 +386,14 @@ $("delKey").onclick=()=>{const k=keyAt(state.t);if(!k||state.clip.keys.length<2)
 
 let last=0;
 function frame(now){if(!state.playing)return;const dt=Math.min(.05,(now-(last||now))/1000);last=now;
-  state.t=(state.t+dt*state.speed/state.clip.dur)%1;state.pose=sample(state.clip,state.t);render();requestAnimationFrame(frame)}
+  const gs=state.clip.gait?speedOf(gaitOf(state.clip)):0;state.dist+=gs*dt*state.speed;
+  state.t=(state.t+dt*state.speed/(state.clip.gait?gaitOf(state.clip).T:state.clip.dur))%1;state.pose=sample(state.clip,state.t);render();requestAnimationFrame(frame)}
 const PLAY='<path d="M8 5l11 7-11 7z"/>',PAUSE='<path d="M8 5v14M16 5v14"/>';
 function play(){ensureClip();if(state.clip.keys.length<2){toast("Set two keys, or pick a move below");return}state.playing=true;svg.classList.add("playing");$("playIcon").innerHTML=PAUSE;$("play").setAttribute("aria-label","Pause");last=0;requestAnimationFrame(frame)}
 function pause(){state.playing=false;svg.classList.remove("playing");$("playIcon").innerHTML=PLAY;$("play").setAttribute("aria-label","Play");render()}
 $("play").onclick=()=>state.playing?pause():play();
+function showPace(){const g=state.clip&&state.clip.gait==="walk"&&!state.clip.keyed;$("paceBox").hidden=!g;if(g)$("pace").value=state.clip.pace||0}
+$("pace").oninput=e=>{if(state.clip&&state.clip.gait){state.clip.pace=+e.target.value;state.clip.keys=bakeGait(state.clip);state.clip.name=state.clip.pace<.25?"Walk":state.clip.pace<.7?"Jog":"Run";setName();if(!state.playing)play()}};
 $("speed").oninput=e=>{state.speed=+e.target.value;$("speedv").textContent=state.speed+"×"};
 
 // ---- Tools
@@ -330,7 +401,7 @@ const tog=(id,k)=>{$(id).onclick=()=>{state[k]=!state[k];$(id).setAttribute("ari
 tog("tPin","pin");tog("tOnion","onion");tog("tLoa","loa");
 function mirrorPose(p){const q=clone(p);for(const n of NAMES)if(n.endsWith("_R")){const o=n.replace(/_R$/,"_L");q.a[n]=p.a[o];q.a[o]=p.a[n]}return q}
 $("tMirror").onclick=()=>{if(state.playing)pause();state.pose=mirrorPose(state.pose);autoKey();toast("Left and right swapped")};
-$("tReset").onclick=()=>{if(state.playing)pause();state.clip=null;state.pose=P();state.t=0;state.moveIdx=-1;setName();drawTray();render()};
+$("tReset").onclick=()=>{if(state.playing)pause();state.clip=null;$("paceBox").hidden=true;state.pose=P();state.t=0;state.moveIdx=-1;setName();drawTray();render()};
 function setName(){$("clipname").textContent=state.clip?state.clip.name:"Stand"}
 let tt;function toast(s){const t=$("toast");t.textContent=s;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),1600)}
 
@@ -359,7 +430,7 @@ function thumb(clip){const k=clip.keys[Math.floor(clip.keys.length/2)]||clip.key
 function drawTray(){const tray=$("tray");tray.innerHTML="";const all=[...mine().map(m=>({...m,mine:1})),...MOVES];
   all.forEach((m,i)=>{const b=document.createElement("button");b.className="move glass";b.setAttribute("aria-pressed",state.moveIdx===i);
     b.innerHTML=thumb(m)+`<b>${m.name.replace(/</g,"&lt;")}</b><small>${m.genre}</small>`;
-    b.onclick=()=>{state.moveIdx=i;state.clip={name:m.name,genre:m.genre,dur:m.dur,ease:m.ease||"smooth",floor:m.floor!==false&&!m.mine,stock:!m.mine,keys:m.keys.map(k=>({t:k.t,p:clone(k.p)}))};
+    b.onclick=()=>{state.moveIdx=i;state.clip={name:m.name,genre:m.genre,dur:m.dur,ease:m.ease||"smooth",floor:m.floor!==false&&!m.mine,stock:!m.mine,gait:m.gait,pace:m.pace,keys:m.keys.map(k=>({t:k.t,p:clone(k.p)}))};showPace();
       state.t=0;setName();drawTray();play()};
     tray.appendChild(b)})}
 addEventListener("resize",render);

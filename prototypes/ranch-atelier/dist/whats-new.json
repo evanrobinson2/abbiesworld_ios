@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-puppet-gait",
+      "date": "2026-10-23",
+      "title": "The puppet walks like a person now",
+      "line": "The mannequin's feet stay planted on a floor that slides by, its hips rise and fall with each step, and its arms swing and trail behind. One dial takes it from a walk to a jog to a run.",
+      "image": "/whats-new/2026-10-23-puppet-gait.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYR1MXxaykLkRfrfxAEMjsd5",
+      "threadTitle": "AW-STUDY-0038 - 2D Mannequin Puppet",
+      "tour": false,
+      "link": "/studies/character-studio/puppet.html?move=Walk"
+    },
+    {
       "id": "2026-10-23-study-context",
       "date": "2026-10-23",
       "title": "What each study drew on",
