@@ -414,5 +414,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T17:26:35Z"
+  },
+  {
+    "id": "A6-clay-suit",
+    "prompt": "friendly small grey alien crewmate, big eyes, green accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "1bb2f3c2-f44c-4ea4-a2b4-88825a17963c",
+    "files": [
+      "tools/meshy-heroes/refs/A6-clay-suit/mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_0.png",
+      "tools/meshy-heroes/refs/A6-clay-suit/mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_1.png",
+      "tools/meshy-heroes/refs/A6-clay-suit/mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_2.png",
+      "tools/meshy-heroes/refs/A6-clay-suit/mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:28:31Z"
+  },
+  {
+    "id": "A6-clay-tee",
+    "prompt": "friendly small grey alien crewmate, big eyes, green accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a",
+    "files": [
+      "tools/meshy-heroes/refs/A6-clay-tee/mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_0.png",
+      "tools/meshy-heroes/refs/A6-clay-tee/mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_1.png",
+      "tools/meshy-heroes/refs/A6-clay-tee/mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_2.png",
+      "tools/meshy-heroes/refs/A6-clay-tee/mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:30:21Z"
   }
 ]
