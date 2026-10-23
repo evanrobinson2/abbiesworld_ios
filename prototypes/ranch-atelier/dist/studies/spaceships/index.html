@@ -56,6 +56,8 @@ aside h3{font:600 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.
 aside ul{padding-left:16px;gap:4px}
 aside li{overflow-wrap:anywhere}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+.concepts{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}.cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cgrid img{width:100%;height:auto;border-radius:8px;display:block}
+@media (min-width:700px){.cgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style></head>
 <body>
 <div class="wrap">
@@ -169,11 +171,18 @@ aside li{overflow-wrap:anywhere}
 </ol>
 
 <h2>Concept art</h2>
-<div class="concepts" id="concepts"><p class="pending">Six Midjourney prompts built from this study are queued on your PC: key art, a design sheet with modules, a cutaway, a mechanical detail sheet, a flight shot and a lineup of three makers. They'll appear here as soon as they're downloaded.</p></div>
+<div class="concepts" id="concepts">
+ <section class="card"><h3>Key art: earthrise on a lunar pad</h3><p class="muted">Ivory hull, orange stripes, glowing nacelles, a lit ramp. Picks the look of the family explorer.</p><div class="cgrid"><a href="img/aurora_1_0.jpg"><img src="img/aurora_1_0.jpg" loading="lazy" alt="Key art: earthrise on a lunar pad, option 1"></a><a href="img/aurora_1_1.jpg"><img src="img/aurora_1_1.jpg" loading="lazy" alt="Key art: earthrise on a lunar pad, option 2"></a><a href="img/aurora_1_2.jpg"><img src="img/aurora_1_2.jpg" loading="lazy" alt="Key art: earthrise on a lunar pad, option 3"></a><a href="img/aurora_1_3.jpg"><img src="img/aurora_1_3.jpg" loading="lazy" alt="Key art: earthrise on a lunar pad, option 4"></a></div></section>
+ <section class="card"><h3>Design sheet</h3><p class="muted">The silhouette from the side: swivel nacelles, gear and the rear bay on a drafting sheet.</p><div class="cgrid"><a href="img/aurora_2_0.jpg"><img src="img/aurora_2_0.jpg" loading="lazy" alt="Design sheet, option 1"></a><a href="img/aurora_2_1.jpg"><img src="img/aurora_2_1.jpg" loading="lazy" alt="Design sheet, option 2"></a><a href="img/aurora_2_2.jpg"><img src="img/aurora_2_2.jpg" loading="lazy" alt="Design sheet, option 3"></a><a href="img/aurora_2_3.jpg"><img src="img/aurora_2_3.jpg" loading="lazy" alt="Design sheet, option 4"></a></div></section>
+ <section class="card"><h3>Three makers, same scale</h3><p class="muted">A round explorer, a boxy yellow hauler and a swept white and blue racer: one shape language each.</p><div class="cgrid"><a href="img/aurora_3_0.jpg"><img src="img/aurora_3_0.jpg" loading="lazy" alt="Three makers, same scale, option 1"></a><a href="img/aurora_3_1.jpg"><img src="img/aurora_3_1.jpg" loading="lazy" alt="Three makers, same scale, option 2"></a><a href="img/aurora_3_2.jpg"><img src="img/aurora_3_2.jpg" loading="lazy" alt="Three makers, same scale, option 3"></a><a href="img/aurora_3_3.jpg"><img src="img/aurora_3_3.jpg" loading="lazy" alt="Three makers, same scale, option 4"></a></div></section>
+ <section class="card"><h3>Cutaway interior</h3><p class="muted">Walkable at Abbie's size: bunk, kitchen, round windows, a dog on the floor.</p><div class="cgrid"><a href="img/aurora_4_0.jpg"><img src="img/aurora_4_0.jpg" loading="lazy" alt="Cutaway interior, option 1"></a><a href="img/aurora_4_1.jpg"><img src="img/aurora_4_1.jpg" loading="lazy" alt="Cutaway interior, option 2"></a><a href="img/aurora_4_2.jpg"><img src="img/aurora_4_2.jpg" loading="lazy" alt="Cutaway interior, option 3"></a><a href="img/aurora_4_3.jpg"><img src="img/aurora_4_3.jpg" loading="lazy" alt="Cutaway interior, option 4"></a></div></section>
+ <section class="card"><h3>Cockpit</h3><p class="muted">Big window first. The planet fills the view and the controls sit low and warm.</p><div class="cgrid"><a href="img/aurora_5_0.jpg"><img src="img/aurora_5_0.jpg" loading="lazy" alt="Cockpit, option 1"></a><a href="img/aurora_5_1.jpg"><img src="img/aurora_5_1.jpg" loading="lazy" alt="Cockpit, option 2"></a><a href="img/aurora_5_2.jpg"><img src="img/aurora_5_2.jpg" loading="lazy" alt="Cockpit, option 3"></a><a href="img/aurora_5_3.jpg"><img src="img/aurora_5_3.jpg" loading="lazy" alt="Cockpit, option 4"></a></div></section>
+ <p class="muted">Made with Midjourney v8.2 (Relax mode). The prompts and job ids are in docs/oracle/spaceships/concepts/provenance.json. These are our own concepts: they borrow what the study learned and copy no game ship.</p>
+</div>
 
 <h2>Next: Mk 2 from concept to moving model</h2>
 <ol>
- <li>You pick the concept art.</li>
+ <li>You pick the concept art (any of the four in each row).</li>
  <li>Meshy turns the pick into a model, on the Mac with your go.</li>
  <li>Blender cleanup, the Bruiser way: low poly, split into named parts at the module seams, real materials.</li>
  <li>The mechatronics pass: the gear unfolds in three steps, the VTOL nacelles swivel, the canopy hinges, the ramp drops and the modules snap on. Each part gets a sound.</li>
