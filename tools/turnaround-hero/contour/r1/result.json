@@ -1,0 +1,27 @@
+{
+ "views": {
+  "front": 0.9109,
+  "side": 0.8931,
+  "back": 0.9036
+ },
+ "rounds": [
+  {
+   "vox_cm": 4,
+   "seconds": 0.1,
+   "voxels": 5464
+  },
+  {
+   "vox_cm": 2,
+   "seconds": 0.1,
+   "voxels": 43175
+  },
+  {
+   "vox_cm": 1,
+   "seconds": 2.3,
+   "voxels": 344411
+  }
+ ],
+ "faces": 7825,
+ "slack_px": 2,
+ "planar_deg": 7.0
+}
