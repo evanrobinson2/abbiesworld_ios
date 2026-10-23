@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 740,
+ "total": 750,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -291,6 +291,11 @@
    "what": "A3-paint-suit-paint-base retexture",
    "credits": 10,
    "at": "2026-10-23T21:08:08Z"
+  },
+  {
+   "what": "A3-paint-suit-paint-flair retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:08:32Z"
   }
  ]
 }
