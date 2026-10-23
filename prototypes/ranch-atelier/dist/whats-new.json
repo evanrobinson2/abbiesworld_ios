@@ -13,6 +13,50 @@
       "link": "/studies/backpack/"
     },
     {
+      "id": "2026-10-23-school-no-coin",
+      "date": "2026-10-23",
+      "title": "The school's coin is now a charm",
+      "line": "The gold coin on the school canopy is gone. Reaching the roof wins Abbie her Star charm, and getting onto the canopy is the memory.",
+      "image": "/whats-new/2026-10-23-school-star.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYRypkQBBpSxf7MW2R1c5GRg",
+      "threadTitle": "AW-STUDY-0032 - School Jump Game-Ready",
+      "tour": false,
+      "link": "/studies/school/play.html"
+    },
+    {
+      "id": "2026-10-23-aurora-mk2-concepts",
+      "date": "2026-10-23",
+      "title": "Aurora Mk 2 concept art",
+      "line": "Five rounds of concept art for the new family explorer: key art on the Moon, a design sheet, three makers side by side, a cutaway and the cockpit. Pick the one you like and it goes to Meshy.",
+      "image": "/whats-new/2026-10-23-aurora-mk2-concepts.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJNoFLSpdq2Dfxnhw1Dt7fJ",
+      "threadTitle": "Aurora Mk 2 spaceship",
+      "tour": false,
+      "link": "/studies/spaceships/#concepts"
+    },
+    {
+      "id": "2026-10-23-school-star",
+      "date": "2026-10-23",
+      "title": "A Star charm for the school roof",
+      "line": "Getting onto the school roof now wins Abbie a Star charm for her backpack, with the golden jingle.",
+      "image": "/whats-new/2026-10-23-school-star.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYRypkQBBpSxf7MW2R1c5GRg",
+      "threadTitle": "AW-STUDY-0032 - School Jump Game-Ready",
+      "tour": false,
+      "link": "/studies/school/play.html"
+    },
+    {
+      "id": "2026-10-23-winchester-board",
+      "date": "2026-10-23",
+      "title": "Winchester, MA is one board of seven hexes",
+      "line": "Abbie's Town is now a single board of seven hexes on the real hills and ponds: the high school in the middle, Downtown, Ani's side and Abbie and Daddy's side around it.",
+      "image": "/whats-new/2026-10-23-winchester-board.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0042 - Abbie's Town",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "demo-flow",
       "date": "2026-10-23",
       "title": "The demo: tour, town and missions",
@@ -34,50 +78,50 @@
       "tour": false,
       "link": "/studies/#charms"
     },
-   {
-     "id": "2026-10-23-moon-consoles",
-     "date": "2026-10-23",
-     "title": "Three launch consoles",
-     "line": "Chapter 1 now ends on the Moon. Daddy times the booster burns, Ani swaps the cows for veggies, Abbie lands us, then everyone gets a Polaroid. The moon base games move to Chapter 2.",
-     "image": "/whats-new/2026-10-23-moon-consoles.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
-     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
-     "tour": true,
-     "link": "/studies/moon-mission/world.html"
-   },
-   {
-     "id": "2026-10-23-moon-mining",
-     "date": "2026-10-23",
-     "title": "Mine moon cheese",
-     "line": "On the Moon there's a mining outpost with a kiosk. Break moon rocks: one in three hides a cheese, and three cheeses win a moon cheese charm for the backpack. Win as many as you like (two hang on the keychain).",
-     "image": "/whats-new/2026-10-23-moon-mining.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
-     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
-     "tour": true,
-     "link": "/studies/moon-mission/world.html?beat=outpost"
-   },
-   {
-     "id": "2026-10-23-moon-suit",
-     "date": "2026-10-23",
-     "title": "A properly made space suit",
-     "line": "The crew's suits now have panels, seals at every joint, a chest control plate, life-support pack with tanks, a gold-tint visor and helmet lamps. Before on the left, after on the right.",
-     "image": "/whats-new/2026-10-23-moon-suit.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
-     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
-     "tour": false,
-     "link": "/studies/moon-mission/suit.html"
-   },
-   {
-     "id": "2026-10-23-backpack-fidelity",
-     "date": "2026-10-23",
-     "title": "A better-made backpack",
-     "line": "Abbie's backpack now looks sewn and zipped: real cloth and leather grain, stitching round every panel, zip teeth, padded straps, and shiny gold that catches the light.",
-     "image": "/whats-new/2026-10-23-backpack-fidelity.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
-     "threadTitle": "AW-STUDY-0046 - Backpack inventory",
-     "tour": false,
-     "link": "/studies/backpack/"
-   },
+    {
+      "id": "2026-10-23-moon-consoles",
+      "date": "2026-10-23",
+      "title": "Three launch consoles",
+      "line": "Chapter 1 now ends on the Moon. Daddy times the booster burns, Ani swaps the cows for veggies, Abbie lands us, then everyone gets a Polaroid. The moon base games move to Chapter 2.",
+      "image": "/whats-new/2026-10-23-moon-consoles.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+      "tour": true,
+      "link": "/studies/moon-mission/world.html"
+    },
+    {
+      "id": "2026-10-23-moon-mining",
+      "date": "2026-10-23",
+      "title": "Mine moon cheese",
+      "line": "On the Moon there's a mining outpost with a kiosk. Break moon rocks: one in three hides a cheese, and three cheeses win a moon cheese charm for the backpack. Win as many as you like (two hang on the keychain).",
+      "image": "/whats-new/2026-10-23-moon-mining.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+      "tour": true,
+      "link": "/studies/moon-mission/world.html?beat=outpost"
+    },
+    {
+      "id": "2026-10-23-moon-suit",
+      "date": "2026-10-23",
+      "title": "A properly made space suit",
+      "line": "The crew's suits now have panels, seals at every joint, a chest control plate, life-support pack with tanks, a gold-tint visor and helmet lamps. Before on the left, after on the right.",
+      "image": "/whats-new/2026-10-23-moon-suit.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+      "tour": false,
+      "link": "/studies/moon-mission/suit.html"
+    },
+    {
+      "id": "2026-10-23-backpack-fidelity",
+      "date": "2026-10-23",
+      "title": "A better-made backpack",
+      "line": "Abbie's backpack now looks sewn and zipped: real cloth and leather grain, stitching round every panel, zip teeth, padded straps, and shiny gold that catches the light.",
+      "image": "/whats-new/2026-10-23-backpack-fidelity.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 - Backpack inventory",
+      "tour": false,
+      "link": "/studies/backpack/"
+    },
     {
       "id": "2026-10-23-moon-mission-town",
       "date": "2026-10-23",

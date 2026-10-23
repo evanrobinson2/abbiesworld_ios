@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rig Studio</title>
+<style>
+:root{--bg:#1d1b22;--panel:#2a2733;--ink:#f1ece4;--mute:#a79fb3;--acc:#ff8fb8}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#efe9e0;--panel:#fff;--ink:#2b2530;--mute:#7b7285;--acc:#d6336c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px;gap:12px}
+canvas{width:min(100%,520px);aspect-ratio:7/8;background:#8a8078;border-radius:16px}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:520px}
+button{background:var(--panel);color:var(--ink);border:0;border-radius:999px;padding:10px 16px;font:inherit}
+button.on{background:var(--acc);color:#fff}
+input[type=range]{width:min(100%,520px);accent-color:var(--acc)}
+.note{color:var(--mute);font-size:13px;max-width:520px;text-align:center}
+</style></head><body>
+<canvas id="c" width="700" height="800"></canvas>
+<div class="row" id="clips"></div>
+<input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Scrub">
+<div class="row"><button id="play" class="on">Pause</button><button id="loop" class="on">Loop</button><button id="bones">Bones</button><button id="slow">Slow</button></div>
+<div class="note" id="info"></div>
+<script>
+(async()=>{
+const R = window.RIG_INLINE || await (await fetch("rig.json")).json();
+const SPR = window.SPRITES_INLINE || null, imgs = {};
+await Promise.all(Object.keys(R.sprites).map(n => new Promise(ok => { const i = new Image(); i.onload = ok; i.onerror = ok; i.src = SPR ? SPR[n] : "sprites/" + n + ".png"; imgs[n] = i; })));
+const N = R.nodes, kids = N.map(() => []); N.forEach((n, i) => { if (n.parent >= 0) kids[n.parent].push(i); });
+const ctx = document.getElementById("c").getContext("2d"), S = 100, OX = 350, OY = 640;
+const hermite = (ks, t) => {
+  if (ks.length === 1 || t <= ks[0].t) return ks[0].v; if (t >= ks[ks.length - 1].t) return ks[ks.length - 1].v;
+  for (let j = 0; j < ks.length - 1; j++) { const a = ks[j], b = ks[j + 1]; if (t >= a.t && t <= b.t) {
+    if (!a.o || !b.i) return a.v; const h = b.t - a.t, u = (t - a.t) / h;
+    const h00 = 2*u**3 - 3*u**2 + 1, h10 = u**3 - 2*u**2 + u, h01 = -2*u**3 + 3*u**2, h11 = u**3 - u**2;
+    return a.v.map((_, k) => h00*a.v[k] + h10*a.o[k]*h + h01*b.v[k] + h11*b.i[k]*h); } } };
+let clip = "move_abbie", time = 0, playing = true, loop = true, showBones = false, speed = 1;
+const names = Object.keys(R.clips), box = document.getElementById("clips");
+names.forEach(n => { const b = document.createElement("button"); b.textContent = n.replace("_abbie", "").replace("_", " "); b.onclick = () => { clip = n; time = 0; [...box.children].forEach(x => x.classList.toggle("on", x === b)); }; if (n === clip) b.classList.add("on"); box.appendChild(b); });
+const tog = (id, f) => document.getElementById(id).onclick = e => { f(); };
+tog("play", () => { playing = !playing; const b = document.getElementById("play"); b.textContent = playing ? "Pause" : "Play"; b.classList.toggle("on", playing); });
+tog("loop", () => { loop = !loop; document.getElementById("loop").classList.toggle("on", loop); });
+tog("bones", () => { showBones = !showBones; document.getElementById("bones").classList.toggle("on", showBones); });
+tog("slow", () => { speed = speed === 1 ? 0.25 : 1; document.getElementById("slow").classList.toggle("on", speed < 1); });
+const scrub = document.getElementById("scrub"); scrub.oninput = () => { playing = false; const b = document.getElementById("play"); b.textContent = "Play"; b.classList.remove("on"); time = scrub.value / 1000 * R.clips[clip].length; };
+function draw() {
+  const C = R.clips[clip], L = C.length || 1, t = loop ? time % L : Math.min(time, L);
+  const st = N.map(n => ({ rot: n.rot, pos: n.pos.slice(), sc: n.scale.slice(), act: n.active }));
+  for (const c of C.curves) { const v = hermite(c.keys, t), s = st[c.node];
+    if (c.kind === "euler") s.rot = v[2]; else if (c.kind === "scale") s.sc = [v[0], v[1]]; else if (c.kind === "pos") s.pos = [v[0], v[1]]; else if (c.kind === "float" && c.attr === "m_IsActive") s.act = Math.round(v[0]); }
+  const M = [], act = [];
+  const go = (i, P, a) => { const s = st[i], r = s.rot * Math.PI / 180, c = Math.cos(r), sn = Math.sin(r);
+    const m = [P[0]*c*s.sc[0] + P[1]*sn*s.sc[0], -P[0]*sn*s.sc[1] + P[1]*c*s.sc[1], P[0]*s.pos[0] + P[1]*s.pos[1] + P[2],
+               P[3]*c*s.sc[0] + P[4]*sn*s.sc[0], -P[3]*sn*s.sc[1] + P[4]*c*s.sc[1], P[3]*s.pos[0] + P[4]*s.pos[1] + P[5]];
+    M[i] = [m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1]; act[i] = a && s.act; kids[i].forEach(k => go(k, [m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1], act[i])); };
+  go(0, [1, 0, 0, 0, 1, 0, 0, 0, 1], 1);
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, 700, 800);
+  const items = R.attachments.filter(a => act[a.node] && a.enabled).sort((a, b) => a.order - b.order);
+  for (const a of items) { const sp = R.sprites[a.sprite], m = M[a.node], ppu = sp.ppu, sx = a.flipx ? -1 : 1;
+    const A = [sx/ppu, 0, -sx*sp.pivot[0]*sp.w/ppu, 0, -1/ppu, (1 - sp.pivot[1])*sp.h/ppu];
+    const Mm = [m[0]*A[0] + m[1]*A[3], m[0]*A[1] + m[1]*A[4], m[0]*A[2] + m[1]*A[5] + m[2], m[3]*A[0] + m[4]*A[3], m[3]*A[1] + m[4]*A[4], m[3]*A[2] + m[4]*A[5] + m[5]];
+    ctx.setTransform(S*Mm[0], -S*Mm[3], S*Mm[1], -S*Mm[4], OX + S*Mm[2], OY - S*Mm[5]); ctx.drawImage(imgs[a.sprite], 0, 0); }
+  if (showBones) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = "#ff3d81"; ctx.strokeStyle = "#ff3d81"; ctx.lineWidth = 2;
+    N.forEach((n, i) => { if (!act[i]) return; const x = OX + S*M[i][2], y = OY - S*M[i][5]; ctx.beginPath(); ctx.arc(x, y, 4, 0, 7); ctx.fill();
+      if (n.parent >= 0) { ctx.beginPath(); ctx.moveTo(OX + S*M[n.parent][2], OY - S*M[n.parent][5]); ctx.lineTo(x, y); ctx.stroke(); } }); }
+  document.getElementById("info").textContent = clip + " · " + t.toFixed(2) + "s / " + L.toFixed(2) + "s";
+  scrub.value = Math.round(t / L * 1000);
+}
+let last = performance.now();
+const tick = now => { const dt = (now - last) / 1000; last = now; if (playing) time += dt * speed; draw(); requestAnimationFrame(tick); };
+requestAnimationFrame(tick);
+window.__setClip = (n, t) => { clip = n; time = t; playing = false; };
+})();
+</script></body></html>

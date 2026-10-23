@@ -211,7 +211,7 @@ button{font:inherit;cursor:pointer}
    <li><b>Same pickup.</b> The golden reward animation from <code>inventory.mjs</code>.</li>
    <li><b>Same place.</b> Beside the coin pile at the backpack, and the chest button on the board.</li>
    <li><b>Same rule.</b> You can't lose one, and the empty slot shows what you're missing, not a number you failed.</li></ul>
-   <p><b>Ten, not eleven.</b> The code has eleven charm ids today. The chest has ten slots: the plain gold coin charm (<code>first-memory</code>) is dropped, because the coin itself already is that charm, and the Heart (<code>all-memories</code>) is the coin chest's own reward. Moon cheese is repeatable and takes one slot, with up to two on the keychain. Backpack thread: please confirm before <code>CHARMS</code> changes.</p></div>
+   <p><b>Ten, the whole set.</b> The plain gold coin charm (<code>first-memory</code>) has been removed from <code>CHARMS</code> (Backpack thread), so the ten slots are the whole set. Moon cheese is repeatable and takes one slot, with up to two on the keychain. The jewellery box's "put in the box" toggle should call <code>putInBox(id, yes)</code> / <code>inBox(id)</code> from <code>backpack.mjs</code>; <code>keychain()</code> then leaves boxed charms off the worn backpack.</p></div>
  </div>
  <table><thead><tr><th>#</th><th>Charm</th><th>Earned by</th><th>Where on the board</th></tr></thead><tbody id="ctable"></tbody></table>
 </section>
@@ -302,15 +302,15 @@ const cheese = `<svg viewBox="0 0 64 64"><path d="M6 44 L58 30 L58 46 L6 56 Z" f
 // Charm ids and quests follow simulations/backpack.mjs CHARMS; the chest shows ten (see "Ten, not eleven").
 const CH = [
  {id:'tardigrade', name:'Tardigrade', quest:"Win Abbie's science adventure", at:'lab', how:'Win the cell game in the science lab'},
- {id:'basement', name:'Floppy disk', quest:"Find all ten memories in Grace's basement", at:'cellar', how:"All ten memories in Grace's basement"},
+ {id:'basement', name:'Floppy disk', quest:"Beat the word game in Grace's basement", at:'cellar', how:'Beat the word game in Grace\'s basement (about two minutes)'},
  {id:'brass-key', name:'Brass key', quest:"Find the café's secret key", at:'cafe', how:"Find the café's secret key"},
  {id:'barista', name:'Coffee cup', quest:'Serve your first coffee in the café', at:'cafe', how:'Serve your first coffee'},
- {id:'school-roof', name:'Star', quest:'Find the memory on the school roof', at:'school', how:'The memory on the school roof'},
+ {id:'school-roof', name:'Star', quest:'Climb onto the school roof', at:'school', how:'Climb onto the school roof (the school game)'},
  {id:'bub', name:'Bub', quest:'Play fetch with bub', at:'yard', how:'Play fetch with bub'},
  {id:'moon-key', name:'Moon', quest:'Earn the key to the Moon base', at:'truck', how:'Earn the Moon base key in the Moon Mission'},
  {id:'rocket', name:'Rocket', quest:'Finish the Moon Mission', at:'truck', how:'Finish the Moon Mission'},
  {id:'moon-cheese', name:'Moon cheese', quest:'Mine three moon cheeses at the Moon kiosk', at:'outpost', how:'Mine three cheeses on the Moon (repeatable)', moon:true},
- {id:'all-memories', name:'Heart', quest:"Find every one of Daddy's core memories", at:'everywhere', how:"Every one of Daddy's core memories"}
+ {id:'all-memories', name:'Heart', quest:'Earn every other charm', at:'everywhere', how:'Earn every other charm (comes by itself; moon cheese does not count)'}
 ];
 const byId = Object.fromEntries(CH.map(c => [c.id, c]));
 const picHTML = id => id === 'moon-cheese' ? cheese : `<img src="${IMG(id)}" alt="${byId[id].name}">`;
@@ -437,7 +437,7 @@ function renderChest() {
  $('#chestBtn').innerHTML = chestSVG(state.open, state.earned.size);
  $('#cnt').textContent = `${state.earned.size} of 10`;
  $('#slots').innerHTML = CH.map(c => { const has = state.earned.has(c.id); return `<button class="slot ${has ? '' : 'empty'} ${state.focus === c.id ? 'sel' : ''} ${state.fresh === c.id ? 'new' : ''}" data-id="${c.id}" aria-label="${has ? c.name : 'An empty slot'}">${picHTML(c.id)}</button>`; }).join('');
- $('#slots').querySelectorAll('.slot').forEach(b => b.onclick = () => { const c = byId[b.dataset.id]; if (state.earned.has(c.id)) { say(c.name + ': ' + c.quest); return; } if (c.at === 'everywhere') { say("It comes from every one of Daddy's coins"); return; } lockedCard(c); });
+ $('#slots').querySelectorAll('.slot').forEach(b => b.onclick = () => { const c = byId[b.dataset.id]; if (state.earned.has(c.id)) { say(c.name + ': ' + c.quest); return; } if (c.at === 'everywhere') { say("It comes by itself once you have every other charm"); return; } lockedCard(c); });
  // bag
  $('#bag').innerHTML = ['ranch', 'moon'].map(k => { const placed = state.tiles[k], locked = k === 'moon' && state.rules === 'game' && !state.moonDone, t = TILES[k];
    return `<button class="tok" data-t="${k}" ${placed ? 'disabled' : ''} aria-label="${locked ? 'Moon tile, locked' : (placed ? t.name + ' tile placed' : 'Place the ' + t.name + ' tile')}"><svg viewBox="-40 -34 80 70"><polygon points="${[0,1,2,3,4,5].map(i => `${34 * Math.cos(i * Math.PI / 3)},${24 * Math.sin(i * Math.PI / 3)}`).join(' ')}" fill="${t.top}" stroke="${t.rim}" stroke-width="3"/><polygon points="-34,0 -17,21 17,21 34,0 34,8 17,29 -17,29 -34,8" fill="#85593a"/>${k === 'moon' ? '<circle cx="-8" cy="-3" r="5" fill="#aeb3c4"/><circle cx="10" cy="4" r="3.5" fill="#aeb3c4"/>' : '<rect x="-8" y="-10" width="16" height="12" fill="#b84a3a"/><path d="M-11-10l11-8 11 8z" fill="#8a3226"/>'}</svg>${locked ? '<span class="lock">🔒</span>' : ''}</button>`; }).join('');
@@ -518,7 +518,7 @@ const mC = $('#mC'); boardSVG(mC, {mode:'pennants', earned:new Set(['moon-key','
 $('#chestDemo').innerHTML = `<div style="width:min(300px,90%)">${chestSVG(true, 4)}</div><div class="panel on" style="position:static;width:100%;max-width:340px;display:block"><div class="slots" id="slots2"></div></div>`;
 $('#slots2').innerHTML = CH.map((c, i) => `<div class="slot ${i < 4 ? '' : 'empty'}">${picHTML(c.id)}</div>`).join('');
 // ---------- table ----------
-const PL = {lab:'Science lab, Downtown', cellar:'Café cellar door, Downtown', cafe:'Coffee shop, Downtown', school:'High school, the centre', yard:"Abbie's yard, Abbie and Daddy's side", truck:'Black truck at the café curb', outpost:'Moon outpost (needs the Moon tile)', everywhere:'Every zone (the coins)'};
+const PL = {lab:'Science lab, Downtown', cellar:'Café cellar door, Downtown', cafe:'Coffee shop, Downtown', school:'High school, the centre', yard:"Abbie's yard, Abbie and Daddy's side", truck:'Black truck at the café curb', outpost:'Moon outpost (needs the Moon tile)', everywhere:'Comes by itself, no place'};
 function renderTable() { $('#ctable').innerHTML = CH.map((c, i) => `<tr><td>${i + 1}</td><td>${c.name}${state.earned.has(c.id) ? ' ✓' : ''}</td><td>${c.how}</td><td>${PL[c.at]}</td></tr>`).join(''); }
 // ---------- jewellery box ----------
 const hung = [];
