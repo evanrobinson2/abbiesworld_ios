@@ -1,0 +1,324 @@
+<title>Sanctuary Ingest Handoff</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
+<style>
+/* Layout: a single reading column with a sticky contents rail on wide screens; tables and the record scroll inside their own boxes. */
+:root{
+  --bg:#f6f7f5; --panel:#ffffff; --fg:#1d2a2a; --soft:#566463; --line:#d5dcda;
+  --accent:#0f6b62; --accent-ink:#ffffff; --green:#1f7a3f; --amber:#9a6200; --red:#a52a2a;
+  --green-bg:#e3f3e8; --amber-bg:#fbefd5; --red-bg:#f8e1e1; --code:#eef2f0;
+  --display:'Bricolage Grotesque','IBM Plex Sans',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --aw-ink:var(--fg); --aw-soft:var(--soft); --aw-line:var(--line); --aw-bg:var(--panel); --aw-font:var(--body); --aw-display:var(--display);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101615; --panel:#172120; --fg:#e4ecea; --soft:#9db0ad; --line:#2c3b39; --accent:#5fd0c3; --accent-ink:#06211e;
+  --green:#6fd08c; --amber:#e8b44f; --red:#ee8f8f; --green-bg:#16301f; --amber-bg:#35290f; --red-bg:#3a1b1b; --code:#1d2a29; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101615; --panel:#172120; --fg:#e4ecea; --soft:#9db0ad; --line:#2c3b39; --accent:#5fd0c3; --accent-ink:#06211e;
+  --green:#6fd08c; --amber:#e8b44f; --red:#ee8f8f; --green-bg:#16301f; --amber-bg:#35290f; --red-bg:#3a1b1b; --code:#1d2a29; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-block:32px 64px}
+nav.toc{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));align-self:start;font-size:13px;display:grid;gap:2px}
+nav.toc b{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+nav.toc a{color:var(--soft);text-decoration:none;padding:4px 0;border-left:2px solid var(--line);padding-left:10px}
+nav.toc a:hover{color:var(--accent);border-color:var(--accent)}
+main{min-width:0}
+h1{font:700 clamp(30px,5vw,46px)/1.08 var(--display);margin:0 0 10px;text-wrap:balance;letter-spacing:-.01em}
+h2{font:700 25px/1.2 var(--display);margin:48px 0 12px;text-wrap:balance;scroll-margin-top:16px}
+h3{font:600 16px/1.3 var(--body);margin:24px 0 6px}
+p,li{max-width:68ch}
+.meta{font:400 12px var(--mono);color:var(--soft);letter-spacing:.03em}
+.lede{font-size:18px;color:var(--fg);max-width:60ch}
+a{color:var(--accent)}
+code,.mono{font-family:var(--mono);font-size:.88em;background:var(--code);padding:1px 5px;border-radius:4px}
+pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:14px;overflow-x:auto;font:13px/1.5 var(--mono);margin:12px 0}
+pre code{background:none;padding:0}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:16px 0}
+.box.key{border-color:var(--accent);border-width:2px}
+.box h3{margin-top:0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--soft);background:var(--code)}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-block;font:500 11px var(--mono);letter-spacing:.04em;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.g{background:var(--green-bg);color:var(--green)}.a{background:var(--amber-bg);color:var(--amber)}.r{background:var(--red-bg);color:var(--red)}
+.lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:16px 0}
+.flow{display:flex;flex-wrap:wrap;gap:6px 0;margin:14px 0;align-items:stretch}
+.flow span{background:var(--panel);border:1px solid var(--line);padding:8px 12px;font-size:13px;border-radius:8px;margin-right:22px;position:relative}
+.flow span:not(:last-child)::after{content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);color:var(--accent)}
+.flow span.gate{border-color:var(--accent);border-width:2px;font-weight:600}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+.say{border-left:3px solid var(--amber);padding:2px 0 2px 14px;margin:14px 0}
+.ctx-wrap{margin-top:40px;display:flex;justify-content:flex-end}
+@media (max-width:820px){.wrap{grid-template-columns:minmax(0,1fr)}nav.toc{display:none}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<b>Contents</b>
+<a href="#short">The short version</a><a href="#today">How ingest works today</a><a href="#line">Reconciling the rule</a><a href="#legal">The legal side</a><a href="#routes">Legitimate routes</a><a href="#policy">Sanctuary policy</a><a href="#extract">Extraction methods</a><a href="#record">Preservation record</a><a href="#lowpoly">Into our low-poly style</a><a href="#shortlist">First shortlist</a><a href="#next">What to build next</a><a href="#context">Context engineering</a>
+</nav>
+<main>
+<p class="meta">AW-STUDY-0055 · HANDOFF · DRAFTED 2026-10-23 · for Evan · repo copy: docs/oracle/sanctuary/SANCTUARY_HANDOFF.html</p>
+<h1>Game ingest, and the sanctuary for models from abandoned games</h1>
+<p class="lede">How a game or a model gets into Abbie's World today, what has to change to take in models from old and abandoned games, and which of those models we can lawfully keep. Status: drafted. Nothing in this document has been built yet beyond what section 2 says already exists.</p>
+
+<h2 id="short">The short version</h2>
+<div class="box key">
+<ol>
+<li><strong>Two lanes already exist and must stay separate.</strong> The Game Oracle lane learns a game's identity (style, feel, structure) and keeps no assets. The asset lane takes models with a known licence and runs them to a low-poly GLB in R2. The sanctuary is a third entry into the asset lane, with a stricter gate.</li>
+<li><strong>"Abandoned" does not mean free.</strong> A game nobody sells, supports or remembers is still under copyright in nearly every case, and no commercial video game is old enough to be in the public domain. The sanctuary cannot be built on abandonment. It has to be built on a licence, a public-domain status or a written permission.</li>
+<li><strong>Rights are checked before extraction, not after.</strong> Every asset gets a rights record first. Anything without one stays as Oracle notes in our own words, exactly as today.</li>
+<li><strong>The best first candidates are games whose creators already gave the art away:</strong> Yo Frankie! (CC BY), Warzone 2100 (GPL art), Lugaru HD and 0 A.D. (CC BY-SA). Quake and Overgrowth are the cautionary cases: their code is open, their art is not.</li>
+<li><strong>The real preservation value is the record, not only the mesh.</strong> We keep the untouched original (hashed), the licence as it read on the day, every tool and setting used, and the low-poly result, so any asset can be rebuilt later.</li>
+</ol>
+</div>
+<p>I am not a lawyer and this is not legal advice. The parts that carry real risk (ShareAlike and GPL terms inside a commercial game, takedown handling, anything involving a rights holder's characters) should be read by a copyright lawyer before the sanctuary opens to the public.</p>
+
+<h2 id="today">1. How ingest works today</h2>
+<p>There is no single "game ingest" tool. There are three separate pipelines, plus the shared store they end in. Everything below was read from the repo and team memory on 2026-10-23.</p>
+
+<div class="lanes">
+<div class="box"><h3>Lane A · Game Oracle (ideas, never assets)</h3>
+<p><code>tools/steam-study/</code> reads Evan's Steam library through the Steam client he is already signed in to. <code>steam_study.py profile APPID</code> records public store metadata and an engine fingerprint from <em>file names</em> in the install folder, never file contents. The study notes (<code>library_notes.py</code>, <code>free_notes.py</code>, <code>owned_notes.py</code>, <code>reference_notes.py</code>, <code>rendering_notes.py</code>) are written in our own words and <code>study_games.py</code> turns them into <code>docs/oracle/games/*.json</code>: 402 files today, 389 profiles. Deeper identity records live in <code>docs/oracle/identity/</code> (schema 1.1, 20 records, a style-versus-expression ledger). The Oracle site shows each game at <code>/game?id=…</code> and the <code>consult</code> director turns an idea into rules and factory requests.</p></div>
+<div class="box"><h3>Lane B · Licensed models (Printables, STL to GLB)</h3>
+<p><code>tools/stl-pilot/</code> took 10 CC0 or CC BY models from Printables plus a toy-car variant. Evan's Chrome downloads them one at a time. <code>stl_pipeline.py</code> runs headless Blender: import, repair (weld, normals, holes, dust shells), scale to real metres, decimate to a band (prop 200 to 1,500 triangles, furniture 1 to 4k, building 3 to 12k, vehicle 3 to 12k, creature 5 to 15k), Smart UV, bake normal and AO from the untouched high-poly, role-named materials, export a GLB with 512 px textures. Each run writes <code>notes.json</code> with per-stage timings. Each model carries <code>provenance.json</code>: model URL, author, licence name and URL, date retrieved, origin, sha256 of every source file, a licence screenshot and the source image. The source STLs stay on the PC and are git-ignored.</p></div>
+<div class="box"><h3>Lane C · Generated models (Midjourney, Meshy, Blender)</h3>
+<p>Midjourney concept art and turnarounds, then either our own recipe (<code>build.py</code>, Blender Python, parts-first, per <code>tools/ranch-rebuild/MODELER.md</code> and <code>docs/MODELER_VISION.md</code>) or Meshy for hero characters (<code>tools/meshy-heroes/</code>, GitHub workflow <code>meshy-run.yml</code>, secret <code>MESHY_API_KEY</code>, 2,000 credit cap, reached 2026-10-23). Meshy is the answer key we learn from, not the pipeline we own. Brief, prompts, Midjourney job ids, picks, revisions and scores are kept per asset.</p></div>
+</div>
+
+<h3>Where every lane ends: the store and the game</h3>
+<div class="flow"><span>repo copy: GLB, ref image, provenance</span><span><code>models/manifest.json</code> entry</span><span>model-store GitHub Action</span><span>R2 bucket <code>storyboard-media</code>, keyed by sha256</span><span><code>/api/models</code> + <code>/r2/*</code></span><span><code>model-store.mjs</code> in the game</span></div>
+<ul>
+<li><strong>Manifest and the /models desk.</strong> <code>prototypes/ranch-atelier/dist/models/manifest.json</code> lists each model with id, name, group, subject, style, ask, <code>urls</code> (ref, glb, render), an outline and good/off notes. The Printables set sits in the group "Free sources · Printables" (<code>publish_models.py</code>), so it never mixes with the game's own models.</li>
+<li><strong>R2.</strong> <code>tools/model-store/sync.mjs</code> uploads blobs keyed by content hash and publishes <code>models/catalog.json</code>, <code>catalog-all.json</code> and <code>paths.json</code>. As of 2026-10-22 R2 held 1,171 models and 30 reference images. The Postgres <code>model_assets</code> table was not filled then because the <code>POSTGRES_URL</code> secret was wrong; check whether that has been fixed.</li>
+<li><strong>Into the game.</strong> <code>/model-store.mjs</code> points three.js loaders at R2 for any stored path, with the bundled copy as fallback. Tile models go through <code>tools/ranch-rebuild/to_game.py</code>, which writes the mesh-list JSON and GLB the Ranch tile reads. The game reads <strong>material names as shading roles</strong> (Timber, Plank, Stone, Metal, Glass, Leaf and so on), so ingested models must be renamed to roles.</li>
+<li><strong>Not yet in the game.</strong> The 10 Printables models are on the review desk and in R2 but are "the starting point for re-authoring in our style", not placed in a world. The STL pilot's own notes say the helmet and crate needed re-authoring rather than clean-up.</li>
+</ul>
+
+<h2 id="line">2. Reconciling the sanctuary with the identity rule</h2>
+<p>The identity canon says: <em>we assimilate style, never expression, and never extract a game's meshes, textures or audio into the repo, R2 or prompts.</em> The sanctuary is a deliberate exception, so the exception has to be narrow and written down.</p>
+<div class="box">
+<h3>Proposed wording (to add to GAME_IDENTITY.md, not yet edited)</h3>
+<p>Default stays the same: any game's assets stay out of the repo, R2 and prompts. The one exception is an asset with a <strong>rights record that passes the sanctuary licence gate</strong>. Such an asset moves from the identity ledger's "protected expression" column to a new "cleared" list that names the sanctuary record id. Everything without a passing record stays style-only. Cleared assets never become style references for other games' expression either: the licence covers that asset, not the game's look as a whole.</p>
+</div>
+<p>In practice: the Oracle keeps studying every game it is shown, the sanctuary ingests only the few assets whose rights are clear, and the two never share an input folder.</p>
+
+<h2 id="legal">3. The legal side, straight</h2>
+<div class="say"><strong>"Abandoned" is not a legal category.</strong> Copyright runs from the author's death or the publication date, not from the last patch. A studio that closed, a publisher that was bought, a game pulled from sale: the copyright still belongs to someone, often a company that bought the catalogue.</div>
+<ul>
+<li><strong>No commercial video game is in the public domain yet.</strong> US copyright for corporate works lasts 95 years from publication, so the earliest games run into the 2060s. Public domain in practice means the author dedicated the work (CC0), the work came from a government body that does not hold copyright, or the work was never eligible.</li>
+<li><strong>"Abandonware" sites are tolerated, not licensed.</strong> Free to download is not free to modify, redistribute or put in another game. The same goes for "freeware" releases: they let you play the game, not modify or redistribute it.</li>
+<li><strong>Open-sourcing the engine rarely frees the art.</strong> id Software released Quake's engine under the GPL, and the Quake Wiki still lists the original models, maps and textures as id Software's, "not available under a free license". Wolfire released Overgrowth's code under Apache 2.0 and said the assets would not be released for free. Always read the licence of the <em>assets folder</em>, not the repository.</li>
+<li><strong>Preservation law does not help us host.</strong> In October 2024 the US Copyright Office declined a new exemption that would have let libraries and archives share old games remotely (<a href="https://gamehistory.org/dmca-2024-statement/">Video Game History Foundation statement</a>). Even the institutions whose job this is cannot lean on a preservation exemption for public access, so a small studio should not.</li>
+<li><strong>Fair use is not a hosting policy.</strong> A low-poly redraw of a copyrighted model is a derivative work. A fair-use argument would be made after a complaint, case by case, and a kids' game that sells is a weak place to make it.</li>
+<li><strong>Extraction is its own risk.</strong> Breaking encryption or protection to read a game's files can trip the DMCA anti-circumvention rule (section 1201) and the game's terms of use, even when the asset would otherwise be fine. Only extract from files obtained from the rights holder's own open release, or from a copy where the format is plain.</li>
+<li><strong>Characters and names are separate rights.</strong> A licence on a mesh does not clear a trademark or a famous character. Mario-like and Sonic-like designs stay "inspired by" (as the project rules already say for brands).</li>
+<li><strong>Outside the US the rules differ</strong> (moral rights in the EU, different terms in the UK and Japan). The sanctuary will be viewed worldwide, so the gate should be the strictest common denominator.</li>
+</ul>
+
+<h2 id="routes">4. The legitimate routes</h2>
+<div class="tw"><table>
+<thead><tr><th>Route</th><th>What it covers</th><th>What we do</th><th>Typical tier</th></tr></thead>
+<tbody>
+<tr><td><strong>Creator released the assets under an open licence</strong></td><td>Yo Frankie!, Warzone 2100 art, 0 A.D. art, Lugaru HD data, Blender open movies, many OpenGameArt packs</td><td>Read the licence on the assets, snapshot it, credit as it demands. ShareAlike and GPL carry conditions on derivatives (section 5).</td><td><span class="tag g">CC0 / CC BY</span> <span class="tag a">BY-SA / GPL</span></td></tr>
+<tr><td><strong>Open-sourced engine, assets separate</strong></td><td>Quake family, Doom 3, Overgrowth code</td><td>Engine knowledge only. Original models stay out. Look for a community replacement asset set with its own licence (Freedoom is the pattern for Doom).</td><td><span class="tag r">Red for original art</span></td></tr>
+<tr><td><strong>CC0 and public-domain asset packs</strong></td><td>Kenney and Quaternius packs, Smithsonian Open Access, NASA models. Not abandoned games, but they fill the same shelf.</td><td>Read each pack's licence page (unchanged licences can differ between packs). Record the page URL and date.</td><td><span class="tag g">Green</span></td></tr>
+<tr><td><strong>Explicit permission from the owner or estate</strong></td><td>Defunct indie studios with living founders, estates of solo developers, small publishers who still hold the rights</td><td>Ask. Offer a plain written grant (appendix A). Keep the reply as the rights evidence. Record exactly what was granted (modify, redistribute, commercial, how long).</td><td><span class="tag g">Green if broad</span> <span class="tag a">Amber if limited</span></td></tr>
+<tr><td><strong>Community preservation with clear licences</strong></td><td>Freedoom-style replacement sets, source-port projects that re-release data they own the rights to</td><td>Trust the project's licence file only after reading who made the asset. Many "preservation" projects hold archives for study, not a licence to redistribute.</td><td><span class="tag a">Check each</span></td></tr>
+<tr><td><strong>Internet Archive, Video Game History Foundation, museum collections</strong></td><td>Preserve and sometimes show old games</td><td>Great places to <em>deposit</em> our records and to learn from. Being in an archive is not a licence. Do not treat their holdings as cleared.</td><td><span class="tag r">Not a rights source</span></td></tr>
+<tr><td><strong>Rights holder who actively licenses</strong></td><td>Publishers that sell or release old catalogues (GOG-style rereleases)</td><td>Ask for a commercial licence if a title matters enough. This costs money, so it needs Evan's go.</td><td><span class="tag a">Case by case</span></td></tr>
+</tbody></table></div>
+
+<h2 id="policy">5. Recommended sanctuary policy</h2>
+<h3>Licence gate (nothing is extracted before it passes)</h3>
+<div class="tw"><table>
+<thead><tr><th>Tier</th><th>Accept</th><th>Rule</th></tr></thead>
+<tbody>
+<tr><td><span class="tag g">Green · ingest</span></td><td>CC0, public domain, CC BY, MIT, BSD, zlib, Apache 2.0 for art; a written grant that allows modification, redistribution and commercial use</td><td>Ingest, publish, may be used anywhere in the game. Credit line when the licence asks for it.</td></tr>
+<tr><td><span class="tag a">Amber · sanctuary only</span></td><td>CC BY-SA, GPL art, grants limited in scope or time</td><td>Ingest into the sanctuary gallery and keep the same licence on the result. <strong>Do not put in the shipped game bundle</strong> until a lawyer says what ShareAlike does to a world that contains it. Write the consequence into the record (<code>share_alike: true</code>).</td></tr>
+<tr><td><span class="tag r">Red · refuse</span></td><td>Non-commercial (NC) or no-derivatives (ND) licences, no licence, "abandonware", "freeware", fan rips from a commercial game, anything extracted by breaking protection, other people's characters and trademarks</td><td>Not ingested. The game may still be studied by the Oracle in our own words. Abbie's World takes payments after launch, so NC is incompatible by design.</td></tr>
+</tbody></table></div>
+<p>Two more checks apply to every tier. <strong>PG only:</strong> old games are often violent or mature; the standing project rule (PG, no NSFW) applies, and anything that fails it is skipped even when the licence is perfect. <strong>No private data:</strong> check the file for names, paths, emails and credits that belong to private people before publishing.</p>
+
+<h3>Credit line</h3>
+<pre><code>"{asset title}" from {game}, by {creator}. Licence: {licence name} ({licence url}).
+Rebuilt in low poly for Abbie's World. {licence terms that apply to the remake, e.g. "Shared under CC BY-SA 3.0."}</code></pre>
+<p>The credit lives in the record, on the model's page in the sanctuary, in the game's credits screen, and (for a diegetic touch) on a plaque or card where the model appears in the world. Even licences that ask for no credit (CC0) get a line: it is the cheapest preservation we can do.</p>
+
+<h3>Takedown path</h3>
+<ol>
+<li>A public page with a plain form and one email address (Evan to choose; shown on the page as selectable text). Anyone claiming rights can use it. No account needed.</li>
+<li><strong>Hide first, ask later.</strong> A claim hides the asset from the gallery and the game within 72 hours. Hiding is reversible; a wrong yes is not.</li>
+<li>Review against the record: does the licence snapshot still say what we recorded? If the claimant is right, remove the live copies and the R2 blob, mark the record <code>withdrawn</code> and keep the record itself (minus the file) as the audit trail.</li>
+<li>If the claimant is wrong, reply with the record and keep it hidden until resolved. A lawyer handles anything that mentions a court.</li>
+<li>Register a DMCA designated agent with the US Copyright Office. It is cheap, it is what gives a US host the safe harbour for user uploads, and it matters most once players can add things.</li>
+<li>Re-verify the licence of every Amber asset yearly. Licences can be re-issued or withdrawn.</li>
+</ol>
+
+<h2 id="extract">6. Extracting models from old game formats</h2>
+<p>Only for assets that already passed the gate. The aim is the original data exactly as shipped, then a conversion. Tool names below are the ones the preservation and modding communities use; confirm the current version and its licence before running anything, and run it on a copy of the data in an empty folder.</p>
+<div class="tw"><table>
+<thead><tr><th>Source</th><th>Containers and model formats</th><th>Tools to read them</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Open-source games (Warzone 2100, 0 A.D., Lugaru, SuperTuxKart)</td><td>Plain text or documented formats, often glTF/OBJ/Collada/own text meshes. Warzone uses a text-based <code>.pie</code> mesh.</td><td>Read directly; Blender importers or a few lines of Python; Blender <code>assimp</code>-based importers for the rest</td><td>Easiest tier. The licence travels with the repo, so cite the commit hash.</td></tr>
+<tr><td>id Tech 1 to 3 era (Doom, Quake family) <em>only for freely licensed replacement sets</em></td><td>WAD, PAK, PK3; MDL, MD2, MD3; BSP maps</td><td>Blender add-ons for MDL/MD2/MD3, TrenchBroom, QuArK, Noesis</td><td>Original data stays red. Useful as a skill demo on community assets.</td></tr>
+<tr><td>Unity games with open assets</td><td>Asset bundles and serialized files</td><td>AssetRipper, AssetStudio, UnityPy (scriptable)</td><td>Check if the author published the Unity project instead; the project is the clean source.</td></tr>
+<tr><td>Unreal-based games with open assets</td><td>PAK, UASSET, older UT packages</td><td>UE Viewer (umodel), FModel</td><td>Same rule: look for the author's project export first.</td></tr>
+<tr><td>Source engine games with open assets</td><td>VPK, GCF, MDL/VTX/VVD/PHY, VTF textures</td><td>Crowbar (decompile), VPKEdit, VTFEdit</td><td>Mostly red in practice because the originals are Valve's. Listed for completeness.</td></tr>
+<tr><td>Unknown archives</td><td>Custom packers</td><td>QuickBMS with a community script, Noesis plug-ins, hex-level reverse engineering</td><td>Reverse engineering for interoperability has its own legal edges. Needs counsel before use on anything with a licence question.</td></tr>
+<tr><td>Frame capture (last resort)</td><td>Geometry read from the GPU</td><td>RenderDoc and similar capture tools</td><td>Only for assets that already passed the gate and have no readable format. Never a way to <em>obtain</em> rights.</td></tr>
+</tbody></table></div>
+<h3>Conversion target and what to keep</h3>
+<ul>
+<li><strong>Target:</strong> glTF 2.0 / GLB, Y up, metres, the same conventions as <code>tools/model-challenge/MODELER.md</code> (origin at footprint centre, front facing the agreed axis).</li>
+<li><strong>Conversion run:</strong> headless Blender (the same version the STL pilot uses, 4.1) with a fixed script per source format. The script, its arguments, the Blender version and the importer's name and version go into the record.</li>
+<li><strong>Textures:</strong> convert DDS, TGA, PCX, PVR to PNG with ImageMagick or Pillow. Keep the original files in the vault untouched.</li>
+<li><strong>Animation:</strong> keep the original rig and clips in the vault. Vertex-animation formats (MD2, MD3) are baked per frame into the vault copy; the game copy keeps only what we will use.</li>
+<li><strong>Never</strong> run a conversion on the only copy. Never edit the vault file. Never mix an asset from two games into one folder.</li>
+</ul>
+
+<h2 id="record">7. The preservation and provenance record</h2>
+<p>One JSON file per asset, extending the STL pilot's <code>provenance.json</code> (model URL, author, licence, date, hashes). It lives next to the model in the repo and is copied to R2 with it. Proposed schema name <code>aw.sanctuary.record.v1</code>.</p>
+<pre><code>{
+  "schema": "aw.sanctuary.record.v1",
+  "id": "sanctuary-yo-frankie-frankie",
+  "title": "Frankie (flying squirrel)",
+  "game": { "title": "Yo Frankie!", "developer": "Blender Institute", "year": 2008,
+            "status": "open project, released as a free game with its source assets",
+            "platforms": ["Blender Game Engine"] },
+  "rights": {
+    "basis": "open_licence",                  // open_licence | public_domain | written_permission
+    "licence": "CC-BY-3.0",                   // SPDX id or the grant's own name
+    "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+    "licence_snapshot": { "file": "licence.pdf", "sha256": "…", "captured": "2026-10-23" },
+    "grantor": "Blender Foundation",
+    "evidence_url": "https://apricot.blender.org/download",
+    "commercial_ok": true, "modify_ok": true, "redistribute_ok": true,
+    "share_alike": false, "attribution_required": true,
+    "gate_tier": "green",
+    "verified_by": "name", "verified_on": "2026-10-23", "reverify_by": "2027-10-23"
+  },
+  "acquisition": { "source_url": "…", "retrieved": "2026-10-23",
+                   "archive_sha256": "…", "tool": "browser download, no protection broken" },
+  "original": { "format": "blend", "files": [{ "path": "frankie.blend", "sha256": "…", "bytes": 0 }],
+                "vault_key": "sanctuary/originals/&lt;sha256&gt;/frankie.blend" },
+  "conversion": [
+    { "step": "import", "tool": "Blender", "version": "4.1", "script": "convert/frankie.py", "args": [] },
+    { "step": "lowpoly", "recipe": "build.py", "target_tris": 6000, "band": "creature 5-15k" }
+  ],
+  "output": { "glb": "model.glb", "sha256": "…", "tris": 0, "material_roles": ["Fur_Brown","Cloth_Red"] },
+  "style_notes": { "kept": ["silhouette","palette"], "changed": ["topology","texture"], "reason": "…" },
+  "credit_line": "…",
+  "content_check": { "pg": true, "private_data": false, "trademark_flags": [] },
+  "takedown": { "status": "none", "contact": "see /sanctuary/takedown" },
+  "history": [{ "date": "2026-10-23", "event": "ingested", "by": "…" }]
+}</code></pre>
+<ul>
+<li><strong>Three kinds of copy, all hashed:</strong> the <em>vault</em> original (exactly as released), the <em>working</em> glTF (a direct conversion, no style change), and the <em>game</em> GLB (low-poly, role-named). A later technology change rebuilds the game copy from the working copy, per the modeler vision.</li>
+<li><strong>Where they live:</strong> repo for the small ones and all records; R2 under a <code>sanctuary/</code> prefix for the vault and large blobs (same sha256 keying as the model store, so no second storage path). For a green-tier asset, also deposit the original and record in the Internet Archive as an off-site mirror; the licence allows it and it is the best insurance against our own site going away.</li>
+<li><strong>Change requests make a new version</strong> (the project rule). A restyle, a fix or a withdrawal is a new history event, never a silent overwrite.</li>
+<li><strong>Licence snapshot matters.</strong> Pages change. A PDF or screenshot of the licence page with its hash and capture date is the evidence if a claim comes in.</li>
+</ul>
+
+<h2 id="lowpoly">8. The ingest path into our low-poly style</h2>
+<div class="flow"><span>find candidate</span><span class="gate">licence gate</span><span>acquire + hash + snapshot</span><span>vault original</span><span>convert to glTF</span><span>normalise</span><span>low-poly pass</span><span>review</span><span>publish + credit</span></div>
+<ol>
+<li><strong>Find.</strong> From the shortlist (section 9), an OpenGameArt-style filter on CC0/CC BY, or an Oracle record that notes "open assets". The Oracle can flag these: add <code>rights_hint</code> to a game's identity record. A hint is never the gate.</li>
+<li><strong>Gate.</strong> Fill <code>rights</code> first. A second person (or a second pass by Claude, recorded as such) confirms the licence text against the assets, not the repo front page. Red stops here.</li>
+<li><strong>Acquire.</strong> Download from the creator's own release. Hash the archive. Snapshot the licence. Nothing circumvented.</li>
+<li><strong>Vault.</strong> Put the untouched originals under the sanctuary prefix.</li>
+<li><strong>Convert.</strong> Format-specific script from section 6, into the working glTF. Check it opens in the viewer with orbit and zoom.</li>
+<li><strong>Normalise.</strong> Reuse <code>stl_pipeline.py</code> stages: repair, scale to metres, pivot, orientation, material renaming to game roles. Add an <em>origin-scale</em> check: old games use arbitrary units, so confirm size against a real-world reference.</li>
+<li><strong>Low-poly pass.</strong> Two modes, chosen per asset: (a) <em>faithful</em>, decimate to the band for its type, bake normal and AO from the original, keep proportions; (b) <em>re-author</em>, rebuild from the silhouette with a Blender recipe as in <code>MODELER.md</code>, using the original as the reference image. Mode (b) is what the STL pilot found necessary for thin or messy meshes. Budgets are the ones already in <code>tools/ranch-rebuild/MODELER.md</code> (chicken 1.5k, horse or cow 4k, building 9k).</li>
+<li><strong>Style.</strong> The sanctuary shows the faithful conversion beside the game version, same camera, one link (existing rule: show every model beside its pick). The original look is preserved in the working glTF; the game version wears our look.</li>
+<li><strong>Review.</strong> PG check, scale check, the credit line, the viewer. Score with the existing harness where it applies.</li>
+<li><strong>Publish.</strong> Add the manifest entry in a new group "Sanctuary · {game}", commit the record, let the model-store Action sync to R2, preview through the instant-preview route, then the Ranch batch. Placement in a world follows the usual tour and design-card rules (<code>tour: true or false</code> on the whats-new entry).</li>
+</ol>
+<p>Where Meshy fits: not at all for the sanctuary. Meshy and Midjourney make new things from a picture. The sanctuary preserves an existing thing. If we ever lack the source mesh but hold a clear licence on screenshots or concept art, that is a separate question for the Lane C rules.</p>
+
+<h2 id="shortlist">9. First shortlist</h2>
+<p>Rights status was checked against the sources linked in the Context card, on 2026-10-23. "Verify" means I could not confirm it from a primary page and a person should read the licence before ingesting.</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>Candidate</th><th>Rights basis</th><th>Tier</th><th>Why it fits</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Yo Frankie!</strong> (Blender Institute, 2008)</td><td>CC BY 3.0, credit "(c) copyright Blender Foundation", commercial use allowed. Per the project download page.</td><td><span class="tag g">Green</span></td><td>Cartoon animals and a rigged hero, built in Blender, no format problem. Perfect dry run of the whole path.</td></tr>
+<tr><td>2</td><td><strong>Warzone 2100</strong> (Pumpkin Studios, 1999)</td><td>Art and source released under GPL-2.0-or-later on 6 Dec 2004; remaining data, including movies and music, on 10 Jun 2008.</td><td><span class="tag a">Amber · GPL</span></td><td>The truest sanctuary story: a commercial game set free by its owners, with units, props and buildings in a low-poly era. GPL means the remakes stay GPL; keep them in the gallery until a lawyer clears the game bundle.</td></tr>
+<tr><td>3</td><td><strong>Lugaru HD</strong> (Wolfire)</td><td>Engine GPL; data and assets CC BY-SA 3.0 per the release coverage; commenters suggest 3.0 or 4.0. Verify on the repo.</td><td><span class="tag a">Amber · BY-SA</span></td><td>Animated rabbit and wolf characters, small, stylised, same family as Overgrowth. Do not confuse with Overgrowth, whose art is not open.</td></tr>
+<tr><td>4</td><td><strong>0 A.D.</strong> (Wildfire Games)</td><td>Code GPL-2.0-or-later; art and music CC BY-SA 3.0 (infobox on the project page).</td><td><span class="tag a">Amber · BY-SA</span></td><td>Large library of ancient buildings and units, a fit for the Roman and history threads. It is a living project, not abandoned, so credit and ask.</td></tr>
+<tr><td>5</td><td><strong>Kenney and Quaternius packs</strong></td><td>CC0 per each pack's page. Verify pack by pack.</td><td><span class="tag g">Green</span></td><td>Not abandoned games, but the cheapest way to prove the gate, vault and record on real files before touching the harder cases.</td></tr>
+<tr><td>6</td><td><strong>Smithsonian Open Access and NASA models</strong></td><td>CC0 or US government work. Verify the specific item page; some imagery has third-party limits.</td><td><span class="tag g">Green</span></td><td>Moon Mission content (lander, rovers, suits), kid-friendly, no PG risk.</td></tr>
+<tr><td>7</td><td><strong>Permission outreach: defunct indie studios</strong></td><td>Written grant from living founders or estates (appendix A).</td><td><span class="tag a">Depends on grant</span></td><td>This is the route that matches Evan's vision best: games that really are abandoned. Start with 5 to 10 emails. Evan chooses the games and approves every send.</td></tr>
+<tr><td colspan="5"><strong>Do not ingest</strong>: Quake, Doom 3 and other id Tech original art (engine GPL, media not free); Overgrowth art (code Apache 2.0, assets not released); any "abandonware" rip.</td></tr>
+</tbody></table></div>
+<p><strong>Recommended pilot order:</strong> Kenney or Quaternius (day one proof) then Yo Frankie! (one hero asset through the whole path with a 3D viewer next to the original) then Warzone 2100 (ten units and props, in the gallery only). Outreach emails can run in parallel once Evan picks names.</p>
+
+<h2 id="next">10. What to build next</h2>
+<ol>
+<li>Add the rights ledger entry and the "cleared" rule to <code>docs/oracle/identity/GAME_IDENTITY.md</code> and the schema (one small PR).</li>
+<li>Write <code>aw.sanctuary.record.v1</code> as JSON Schema in <code>docs/oracle/sanctuary/</code> and a validator that the model-store Action runs: no record or a red tier, no upload.</li>
+<li>Add a <code>tools/sanctuary/</code> folder: <code>ingest.py</code> (gate check, acquire, hash, vault), one converter per format, reuse of <code>stl_pipeline.py</code>, and a page builder for the beside-the-original viewer.</li>
+<li>A sanctuary section on the /models desk with the credit line on every model.</li>
+<li>Takedown page, DMCA agent registration, and the sample permission letter checked by a lawyer.</li>
+<li>Pilot with the three items in section 9, then write the speed review (what slowed us down, what to cache).</li>
+</ol>
+<h3>Decisions that are Evan's</h3>
+<ul>
+<li>Is ShareAlike and GPL material allowed in the shipped game, or only in the gallery until a lawyer says? (I recommend gallery only.)</li>
+<li>Who is the takedown contact, and does he want a lawyer look before the sanctuary opens publicly? (I recommend yes.)</li>
+<li>Which defunct games does he want to ask permission for first?</li>
+<li>Should the sanctuary be a separate public site name, or a section of the models desk?</li>
+</ul>
+
+<h3 id="appx">Appendix A · plain permission request (for Evan's approval before any send)</h3>
+<pre><code>Subject: Giving {game} a permanent home in a kids' game
+
+Hello {name}, I'm {sender} at Abbie's World, a children's creative game. We love
+{game} and would like to keep {specific assets} alive. Would you let us convert them to
+low-poly models, show them with your name beside them, and let players use them in the game?
+We'd credit you however you prefer, and you can ask us to remove them at any time.
+If you're willing, a reply that says "yes, I grant Abbie's World permission to modify and
+redistribute {assets} with credit" is all we need, and you can set any limits you like.
+Thank you for the game.</code></pre>
+
+<div class="ctx-wrap" id="context">
+<aside class="ctx-aside" style="max-width:340px;margin:24px 0 24px auto"><style>/* The context engineering card (look/context-card.mjs). Uses the --aw-* tokens from theme/boot.js. */
+.ctx-card{display:grid;gap:10px;font:14px/1.45 var(--aw-font,system-ui,sans-serif);color:var(--aw-ink,#2b211a)}
+.ctx-card h3{margin:0;font:600 17px/1.2 var(--aw-display,inherit)}
+.ctx-lead{margin:0;color:var(--aw-soft,#6b5d52)}
+.ctx-kind{border:1px solid var(--aw-line,#0002);border-radius:14px;background:var(--aw-bg,#fff);padding:0 12px}
+.ctx-kind summary{display:flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none}
+.ctx-kind summary::-webkit-details-marker{display:none}
+.ctx-kind summary::after{content:'';margin-left:auto;width:7px;height:7px;border:solid var(--aw-soft,#6b5d52);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.ctx-kind[open] summary::after{transform:rotate(-135deg)}
+.ctx-kind summary b{font-weight:600}
+.ctx-kind summary i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--aw-accent,#7a4b2a);color:var(--aw-on-accent,#fff)}
+.ctx-kind summary i:empty{display:none}
+.ctx-kind ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+.ctx-kind li{display:grid;gap:1px}
+.ctx-kind a{color:var(--aw-ink,#2b211a);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 30%,transparent);text-underline-offset:2px}
+.ctx-kind a:hover{text-decoration-color:currentColor}
+.ctx-kind small{color:var(--aw-soft,#6b5d52);font-size:12px}
+.ctx-none{margin:0 0 10px;color:var(--aw-soft,#6b5d52);font-style:italic}
+.ctx-foot{margin:0;font-size:12px;color:var(--aw-soft,#6b5d52)}
+.ctx-foot a{color:inherit}
+</style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
+  <p class="ctx-lead">What this study drew on.</p>
+  <details class="ctx-kind" open><summary><b>Oracle consultation</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind"><summary><b>Research</b><i>7</i></summary>
+   <ul><li><a href="https://en.wikipedia.org/wiki/Warzone_2100" target="_blank" rel="noopener">Warzone 2100 (Wikipedia)</a><small>art released under GPL-2.0-or-later in 2004, rest in 2008</small></li><li><a href="https://en.wikipedia.org/wiki/0_A.D._(video_game)" target="_blank" rel="noopener">0 A.D. (Wikipedia)</a><small>code GPL-2.0-or-later, art and music CC BY-SA 3.0</small></li><li><a href="https://apricot.blender.org/download" target="_blank" rel="noopener">Yo Frankie! download page (Blender Foundation)</a><small>CC BY 3.0, credit (c) Blender Foundation</small></li><li><a href="https://www.gamingonlinux.com/2017/01/lugaru-campaign-now-fully-playable-in-overgrowth-lugaru-hd-now-fully-open-source-including-the-data/page=1/" target="_blank" rel="noopener">Lugaru HD open source, including the data (GamingOnLinux)</a><small>GPL engine, CC-BY-SA data; comments dispute 3.0 versus 4.0</small></li><li><a href="https://gameworldobserver.com/2022/04/22/wolfire-turns-overgrowth-into-open-source-game-making-it-free-for-modding-and-changing" target="_blank" rel="noopener">Overgrowth goes open source (Game World Observer)</a><small>Apache 2.0 for code; assets not released, so they stay red</small></li><li><a href="https://quakewiki.org/wiki/Legal_status" target="_blank" rel="noopener">Quake legal status (Quake Wiki)</a><small>engine under GPL, original models, maps and textures still id Software&#39;s</small></li><li><a href="https://gamehistory.org/dmca-2024-statement/" target="_blank" rel="noopener">Statement on the DMCA 2024 ruling (Video Game History Foundation)</a><small>Copyright Office declined a video game preservation exemption in 2024</small></li></ul></details><details class="ctx-kind" open><summary><b>Our canon</b><i>4</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md" target="_blank" rel="noopener">Game identity: the legal line (style versus expression)</a><small>the rule the sanctuary lane has to reconcile with: only rights-cleared assets cross it</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/model-store/README.md" target="_blank" rel="noopener">Model store (R2, catalogue, Action)</a><small>where an ingested model ends up; content-hash keys</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/stl-pilot/RESULTS.md" target="_blank" rel="noopener">STL pilot results and provenance.json</a><small>the working licensed-source to low-poly GLB pipeline the sanctuary extends</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/MODELER_VISION.md" target="_blank" rel="noopener">Modeler vision</a><small>keep intent and history so assets can be rebuilt as technology changes</small></li></ul></details>
+  <p class="ctx-foot">Recorded 2026-10-23, while writing the handoff. <a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
+<p class="ctx-foot"><a href="https://app.abbies.world/studies/#sanctuary">Live study page</a></p></aside>
+
+</div>
+</main>
+</div>
