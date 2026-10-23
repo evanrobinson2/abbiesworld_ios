@@ -42,6 +42,7 @@ export const ZONES = {
  'habitat': {name: 'The habitat', scene: 'interior', mood: 'dark', size: [16, 12], anchor: {off: 'moon'}},
  'star-child-cave': {name: 'The Star Child’s cave', scene: 'moon', mood: 'dark', size: [40, 30], anchor: {off: 'moon'}},
  'crater-road': {name: 'The crater road', scene: 'moon', mood: 'dark', size: [60, 700], anchor: {off: 'moon'}},
+ 'mining-outpost': {name: 'The mining outpost', scene: 'moon', mood: 'dark', size: [60, 60], anchor: {off: 'moon'}},
  'moon-base-pad': {name: 'Moon base pad', scene: 'moon', mood: 'dark', size: [300, 300], anchor: {off: 'moon'}},
 };
 

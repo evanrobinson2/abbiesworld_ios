@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Moon suit, before and after</title>
+<style>html,body{margin:0;height:100%;background:#0d1020;overflow:hidden}canvas{display:block;width:100%;height:100%}</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+<canvas id="c"></canvas>
+<script type="module">
+import * as THREE from 'three';
+import {suit, SUIT_TRIM} from '/simulations/moonmission/suit.mjs';
+import {heroBefore} from '/simulations/moonmission/suit-before.mjs';
+const q = new URLSearchParams(location.search), view = q.get('view') || 'front';
+const cv = document.getElementById('c'), r = new THREE.WebGLRenderer({canvas: cv, antialias: true}); r.setPixelRatio(Math.min(2, devicePixelRatio)); r.shadowMap.enabled = true;
+const sc = new THREE.Scene(); sc.background = new THREE.Color(0x1b2140);
+sc.add(new THREE.HemisphereLight(0xcfe2ff, 0x2a2440, 1.0)); const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(4, 7, 5); sun.castShadow = true; sc.add(sun);
+const rim = new THREE.DirectionalLight(0x9fb8ff, 1.2); rim.position.set(-5, 3, -4); sc.add(rim);
+const fl = new THREE.Mesh(new THREE.CircleGeometry(7, 40), new THREE.MeshStandardMaterial({color: 0x3a3f55})); fl.rotation.x = -Math.PI / 2; fl.receiveShadow = true; sc.add(fl);
+const H = {daddy: {h: 1.8, skin: 0xe0b08c}, abbie: {h: 1.15, skin: 0xe8c0a0}, ani: {h: 1.2, skin: 0xddb08c}};
+const ids = ['abbie', 'ani', 'daddy'], rows = [[heroBefore, -1.15], [(i, o) => suit(i, o), 1.15]];
+ids.forEach((id, i) => {
+ const b = heroBefore({trim: SUIT_TRIM[id], skin: H[id].skin, h: H[id].h}); b.position.set(-3.6 + i * 1.5 - 0.0, 0, 0); b.position.z = 0; sc.add(b);
+ const a = suit(id, {trim: SUIT_TRIM[id], skin: H[id].skin, h: H[id].h, childHead: id === 'daddy' ? 1 : 1.12}); a.position.set(0.9 + i * 1.5, 0, 0); sc.add(a);
+});
+const cam = new THREE.PerspectiveCamera(30, 1, .1, 100);
+function size() { r.setSize(innerWidth, innerHeight, false); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); }
+addEventListener('resize', size); size();
+const P = {front: [0, 1.2, 9.5, 0, .9, 0], close: [2.4, 1.2, 4.5, 2.4, 1.0, 0], back: [0, 1.2, -9.5, 0, .9, 0]}[view] || [0, 1.2, 9.5, 0, .9, 0];
+cam.position.set(P[0], P[1], P[2]); cam.lookAt(P[3], P[4], P[5]);
+if (view === 'close') { cam.position.set(2.4, 1.4, 4.2); cam.lookAt(2.4, 1.1, 0); }
+const spin = !q.has('still'); let t = 0;
+r.setAnimationLoop(() => { t += .008; sc.children.forEach(o => { if (spin && o.userData) {} }); if (spin) sc.children.forEach(o => { if (o.isGroup) o.rotation.y = Math.sin(t) * .5; }); r.render(sc, cam); });
+window.ready = true;
+</script>

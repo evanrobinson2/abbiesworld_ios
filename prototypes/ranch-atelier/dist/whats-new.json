@@ -2,6 +2,28 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
    {
+     "id": "2026-10-23-moon-mining",
+     "date": "2026-10-23",
+     "title": "Mine moon cheese",
+     "line": "On the Moon there's a mining outpost with a kiosk. Break moon rocks: one in three hides a cheese, and three cheeses win a moon cheese charm for the backpack. Win as many as you like (two hang on the keychain).",
+     "image": "/whats-new/2026-10-23-moon-mining.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+     "tour": true,
+     "link": "/studies/moon-mission/world.html?beat=outpost"
+   },
+   {
+     "id": "2026-10-23-moon-suit",
+     "date": "2026-10-23",
+     "title": "A properly made space suit",
+     "line": "The crew's suits now have panels, seals at every joint, a chest control plate, life-support pack with tanks, a gold-tint visor and helmet lamps. Before on the left, after on the right.",
+     "image": "/whats-new/2026-10-23-moon-suit.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+     "tour": false,
+     "link": "/studies/moon-mission/suit.html"
+   },
+   {
      "id": "2026-10-23-backpack-fidelity",
      "date": "2026-10-23",
      "title": "A better-made backpack",

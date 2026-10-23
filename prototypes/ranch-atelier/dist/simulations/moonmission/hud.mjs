@@ -49,6 +49,8 @@ function speak(who, text) { const s = $('say'); s.className = 'say' + (arguments
  if (sound && 'speechSynthesis' in window) { try { const u = new SpeechSynthesisUtterance(text), v = VOICE[who] || {}; u.pitch = v.pitch || 1; u.rate = v.rate || 1; speechSynthesis.speak(u); } catch {} } }
 function card(e) { const el = $('card'), t = `${e.org} · ${e.clock} · ${e.place}`; el.innerHTML = '<span></span><i></i>'; const [sp, ln] = [el.firstChild, el.lastChild]; clearInterval(typing); let n = 0;
  typing = setInterval(() => { n++; sp.textContent = t.slice(0, n); ln.style.transform = `scaleX(${n / t.length})`; if (n >= t.length) clearInterval(typing); }, 30); }
+// three cheeses buy one moon cheese backpack charm (Backpack thread API: earnCharm('moon-cheese'), repeatable, 2 on the keychain)
+function grantCheeseCharm() { import('/simulations/backpack.mjs?v=5').then(b => b.earnCharm && b.earnCharm('moon-cheese')).catch(() => {}); }
 function fx(e) {
  switch (e.fx) {
   case 'card': card(e); break;
@@ -58,6 +60,7 @@ function fx(e) {
   case 'liftoff': break;
   case 'count': { const c = $('count'); c.hidden = e.n < 0; c.textContent = e.n; if (e.n === 0) setTimeout(() => c.hidden = true, 900); break; }
   case 'item': { const el = document.createElement('span'); el.title = e.name; el.textContent = e.icon; $('pocket').append(el); break; }
+  case 'game-done': if (e.game === 'mining') grantCheeseCharm(); break;
   case 'hold': $('clock').classList.add('held'); break;
   case 'job-done': $('clock').classList.remove('held'); break;
   case 'chip': break;
@@ -75,7 +78,7 @@ function act(p) { // the one button: whatever this player's moment is
  else if (st.k === 'jobs') { const j = ownerJobs(p, v)[0]; if (j) pump(m.dispatch({type: 'press', player: p, key: j.key})); }
  else if (st.k === 'say') pump(m.dispatch({type: 'press', player: p, key: 'next'}));
  else if (st.k === 'cutscene') pump(m.dispatch({type: 'skip', player: p}));
- else if (st.k === 'game') { const g = st.game; if (g.name === 'zapper') send({player: p, zap: true}); else if (g.name === 'harmonizer') send({player: p, note: true}); else if (g.name === 'buggy' && p === 'ani') send({lights: !g.lights}); }
+ else if (st.k === 'game') { const g = st.game; if (g.name === 'zapper') send({player: p, zap: true}); else if (g.name === 'harmonizer') send({player: p, note: true}); else if (g.name === 'mining') send({player: p, swing: true}); else if (g.name === 'buggy' && p === 'ani') send({lights: !g.lights}); }
  else if (st.k === 'lander') { if (p === 'abbie') pump(m.dispatch({type: 'lights', on: true})); if (p === 'ani') pump(m.dispatch({type: 'feet', on: true})); }
 }
 function render() {
@@ -97,6 +100,7 @@ function render() {
   else if (st && st.k === 'game') { const g = st.game;
    if (g.name === 'wire') { g.wires.filter(w => w.owner === p.id).forEach(w => add(w.color.toUpperCase(), !w.done, () => send({player: p.id, color: w.color}))); for (let i = 0; i < 6; i++) add(String(i + 1), true, () => send({player: p.id, socket: i})); }
    else if (g.name === 'zapper') { add('\u25c0', true, () => send({player: p.id, move: -1})); add('ZAP', true, () => send({player: p.id, zap: true})); add('\u25b6', true, () => send({player: p.id, move: 1})); }
+   else if (g.name === 'mining') { add('\u25c0', true, () => send({player: p.id, move: -1})); add('MINE', true, () => send({player: p.id, swing: true})); add('\u25b6', true, () => send({player: p.id, move: 1})); }
    else if (g.name === 'harmonizer') add(['LOW', 'MIDDLE', 'HIGH'][g.note[p.id]] + ' NOTE', true, () => send({player: p.id, note: true}));
    else if (g.name === 'buggy') { if (p.id === 'daddy') { add('\u25c0', true, () => send({move: -1})); add('\u25b6', true, () => send({move: 1})); } else if (p.id === 'ani') add(g.lights ? 'LIGHTS ON' : 'LIGHTS', true, () => send({lights: !g.lights})); else add('CALL ROCKS', false, () => {}); } }
   else if (st && st.k === 'lander') { if (p.id === 'abbie') add('LANDING LIGHTS', true, () => act('abbie')); else if (p.id === 'ani') add('FEET DOWN', true, () => act('ani')); else add('THRUST (space)', true, () => {}); }
@@ -106,7 +110,7 @@ function render() {
  for (const i of v.items) { const s = document.createElement('span'); s.title = i.name; s.textContent = i.icon; pc.append(s); } pk.append(pc); panel.append(pk);
 }
 const KEYS = {a: 'daddy', g: 'abbie', l: 'ani'};
-on('keydown', e => { const st = m.view().step; if (st && st.k === 'game' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { const d = e.key === 'ArrowLeft' ? -1 : 1; if (st.game.name === 'buggy') send({move: d}); else if (st.game.name === 'zapper') for (const p of PLAYERS) send({player: p.id, move: d}); } });
+on('keydown', e => { const st = m.view().step; if (st && st.k === 'game' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { const d = e.key === 'ArrowLeft' ? -1 : 1; if (st.game.name === 'buggy') send({move: d}); else if (st.game.name === 'zapper' || st.game.name === 'mining') for (const p of PLAYERS) send({player: p.id, move: d}); } });
 on('keydown', e => { if (e.repeat) return; const k = e.key.toLowerCase();
  if (KEYS[k]) act(KEYS[k]);
  else if (k === 'arrowdown' || k === 'arrowup') { const st = m.view().step; if (st && st.k === 'ask') { const p = st.who || 'daddy', n = st.options.length; cursor[p] = ((cursor[p] || 0) + (k === 'arrowdown' ? 1 : n - 1)) % n; } }
