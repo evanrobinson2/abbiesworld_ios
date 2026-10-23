@@ -1,0 +1,8 @@
+{
+  "name": "game-feel-check",
+  "private": true,
+  "type": "module",
+  "description": "PR checks for CLAUDE.md 'How Abbie's World shows information': lint + world-cover ratchet",
+  "scripts": {"lint": "node lint.mjs"},
+  "dependencies": {"playwright": "1.56.1"}
+}
