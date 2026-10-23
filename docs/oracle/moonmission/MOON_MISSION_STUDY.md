@@ -563,6 +563,14 @@ Hero, AW-STUDY-0030 Family cast, AW-STUDY-0031 Moon Base Kit, and Evan's trek pa
   [Why the shuttle countdown has so many stops and starts](https://www.scientificamerican.com/article/shuttle-countdown-clock/):
   real countdowns pause on purpose. This became the always-ticking launch clock with planned holds, so nobody fails.
 
+## 17. Where Part 1 lives: the Winchester map (Evan, 17:28Z)
+Part 1 now runs as a loop (`prototypes/ranch-atelier/dist/simulations/moonmission/`, playable at `/studies/moon-mission/play.html`) and starts at the coffee shop curb, taken from Abbie's Town's real anchors (`startCoordinate`). Evan's rules: the map is compressing into small micro-zones, so we build only spaces players see; and the final Winchester is seven hexes in a greater hex, carved into three regions of a third each. The carving is owned by `simulations/abbietown/regions.mjs` (Downtown, Ani's side, Abbie and Daddy's side; the church park at the middle). Our zones name those region ids and nothing else.
+- Downtown: Main Street (curb, truck, rocket port) and the church park, where the three regions meet.
+- Abbie and Daddy's side: the kitchen and the tree house. Ani's side: Ani's kitchen.
+- Off the map: Launch (pad, briefing room, crew bus route, capsule), then orbit, lunar descent and the Moon base pad. Each is a small scene, none is scaled space.
+- Homes not yet placed in the town fall back to the common, marked pending.
+- Changing worlds (town to Launch to Moon) has no proper UX yet. A study is dispatched through the coordinator; until it lands, the mission uses a calm cutscene between zones.
+
 ## 16. How it was made, and how to be faster next time
 To be written when Part 1 ships (CLAUDE.md speed-review rule). Speedups applied from the school and basement reviews:
 the reference art is frozen first (section 9), the couch kit goes into `simulations/`, tests run by state, the
