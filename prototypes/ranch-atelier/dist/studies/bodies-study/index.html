@@ -39,16 +39,45 @@ td.s{font-weight:800}.ok{color:#3d7a3a}.bad{color:var(--app-accent)}
 model-viewer{width:100%;height:min(62vh,520px);display:block;--poster-color:transparent;background:#fffcf0}
 figcaption{padding:8px 12px;font-size:13px;color:var(--app-muted)}
 ol.check{margin:0;padding:14px 18px 14px 40px;display:grid;gap:8px}ol.check li b{display:block}
+/* Anatomy (installment 1c): plate pair, a tapped-muscle card, then the data in tabs. */
+.plates{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media(max-width:640px){.plates{grid-template-columns:1fr}}
+.plate svg{display:block;width:100%;height:auto;min-width:0}
+.plate [data-m]{cursor:pointer}.plate [data-m].hit{fill:#e3895f}
+.mcard{padding:14px 16px;display:grid;gap:6px}.mcard dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:4px 12px}
+.mcard dt{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--app-muted);padding-top:2px}.mcard dd{margin:0}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.wrapcells td{white-space:normal;vertical-align:top;min-width:120px}.wrapcells td:first-child{font-weight:700;min-width:140px}
+blockquote.gray{margin:4px 0 0;padding:8px 12px;border-left:3px solid var(--app-border);font-size:13px;color:var(--app-muted)}
 .src{display:grid;gap:6px;font-size:14px}.src span{color:var(--app-muted)}
 </style>
 </head>
 <body>
 <div class="wrap">
  <header>
-  <span class="eyebrow">AW-STUDY-0016 · Installment 1 of 5, with drawing techniques · 2026-10-23</span>
+  <span class="eyebrow">AW-STUDY-0016 · Installment 1 of 5, now at Gray's Anatomy depth · 2026-10-23</span>
   <h1>Bodies and Creatures: the normal human</h1>
   <p class="muted">Real adult proportions, head to toe, front, side and back. Every drawing is generated from one set of numbers (the canon), so the pictures, the checklist and the scorer always agree.</p>
  </header>
+
+ <section id="anatomy">
+  <h2>Anatomy, at Gray's depth</h2>
+  <p class="muted">The skeleton and the superficial muscles of the canon man, in the anatomical position (palms forward). Every muscle is drawn from where Gray's Anatomy (1918) says it attaches, so its direction and its tendon come from the anatomy. Tap a muscle to read it.</p>
+  <div class="bar" id="abar" style="margin-top:12px">
+   <button data-v="front" aria-pressed="true">Front</button><button data-v="side" aria-pressed="false">Side</button><button data-v="back" aria-pressed="false">Back</button>
+  </div>
+  <div class="plates" style="margin-top:10px">
+   <figure class="card plate" style="margin:0"><div id="pl-skel"></div><figcaption>Skeleton: cream is bone, grey-green is cartilage</figcaption></figure>
+   <figure class="card plate" style="margin:0"><div id="pl-mus"></div><figcaption>Muscles: darker red is a deeper layer showing through; cream is tendon</figcaption></figure>
+  </div>
+  <div class="card mcard" id="mcard" style="margin-top:12px"><span class="muted">Tap a muscle on the right-hand plate to read its origin, insertion, action, nerve and the form it makes under the skin.</span></div>
+  <div class="bar tabs" id="atabs" style="margin-top:22px">
+   <button data-t="muscles" aria-pressed="true">Muscles</button><button data-t="joints" aria-pressed="false">Joints</button><button data-t="bones" aria-pressed="false">Bones</button>
+   <button data-t="fat" aria-pressed="false">Fat</button><button data-t="surface" aria-pressed="false">Surface</button><button data-t="measure" aria-pressed="false">Measurements</button><button data-t="check" aria-pressed="false">Checklist</button>
+  </div>
+  <div id="apanel" style="margin-top:10px"></div>
+  <p class="muted" style="margin-top:8px">Data: <code>docs/oracle/bodies/anatomy.json</code> (made by <code>tools/bodies/anatomy_data.py</code>); Gray's passages with their scan pages in <code>sources/gray1918/excerpts.json</code>; plates by <code>tools/bodies/anatomy.py</code>.</p>
+ </section>
 
  <section class="sheet">
   <div class="bar" id="bar">
@@ -161,7 +190,7 @@ ol.check{margin:0;padding:14px 18px 14px 40px;display:grid;gap:8px}ol.check li b
  </section>
 
  <section>
-  <h2>The checklist a modeler scores against</h2>
+  <h2>Proportion checks</h2>
   <ol class="check card">
    <li><b>Head count</b>7¼ heads for toy average (real 7½, heroic 8½). Measure crown to chin, divide the height.</li>
    <li><b>The middle</b>Half the height at the crotch, within a sixth of a head.</li>
@@ -212,6 +241,31 @@ draw();
  const get=(b,k)=>b.checks.find(c=>c.check===k);const cell=c=>c?`<td class="${c.ok?'ok':'bad'}">${c.off_heads!=null?(c.off_heads>0?'+':'')+c.off_heads+' head':c.got}</td>`:'<td></td>';
  for(const b of d.bodies){const other=b.misses.filter(m=>!['heads tall','knee height','fingertip height','shoulder to hip'].includes(m));
   tb.insertAdjacentHTML('beforeend',`<tr><td>${b.name.replace('-',', ')}</td><td class="${get(b,'heads tall').ok?'ok':'bad'}">${b.heads}</td><td class="s">${b.score}%</td>${cell(get(b,'knee height'))}${cell(get(b,'fingertip height'))}${cell(get(b,'shoulder to hip'))}<td class="muted">${other.join(', ')||'none'}</td></tr>`)}})();
+(async()=>{const A=await (await fetch('anatomy.json')).json();const E=await (await fetch('gray-excerpts.json')).json();
+ const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const byId=Object.fromEntries(A.muscles.map(m=>[m.id,m]));
+ const plateId=n=>{n=(n||'').toLowerCase();for(const [pre,id] of A.plate_index)if(n.startsWith(pre))return id;return null};
+ const gray=(pg,url)=>pg?`<a href="${url}" target="_blank" rel="noopener">Gray p. ${pg}</a>`:'';
+ const card=document.getElementById('mcard');let view='front';
+ function show(name){const id=plateId(name),m=byId[id];document.querySelectorAll('.plate [data-m]').forEach(e=>e.classList.toggle('hit',plateId(e.dataset.m)===id&&!!id||e.dataset.m===name));
+  if(!m){card.innerHTML=`<b>${esc(name)}</b><span class="muted">A small or deep muscle; it does not change the surface much.</span>`;return}
+  const ex=E.muscles[m.gray];
+  card.innerHTML=`<b style="font-size:17px">${esc(m.name)}</b><dl><dt>Origin</dt><dd>${esc(m.origin)}</dd><dt>Insertion</dt><dd>${esc(m.insertion)}</dd><dt>Action</dt><dd>${esc(m.action)}</dd><dt>Nerve</dt><dd>${esc(m.nerve)}</dd><dt>Surface</dt><dd><b>${esc(m.surface)}</b></dd></dl>${ex?`<details><summary class="muted">What Gray's says (${gray(m.gray_page,m.gray_url)})</summary><blockquote class="gray">${esc(ex.text)}</blockquote></details>`:''}`}
+ async function plates(){for(const [el,k] of [['pl-skel','skeleton'],['pl-mus','muscles']]){document.getElementById(el).innerHTML=await svgText('anatomy-'+k+'-'+view)}
+  document.querySelectorAll('#pl-mus [data-m]').forEach(e=>e.addEventListener('click',()=>show(e.dataset.m)))}
+ document.getElementById('abar').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;view=b.dataset.v;
+  for(const x of document.querySelectorAll('#abar button'))x.setAttribute('aria-pressed',x===b);plates()});
+ plates();
+ const T={
+  muscles:()=>`<div class="card tablebox"><table class="wrapcells"><thead><tr><th>Muscle</th><th>Origin</th><th>Insertion</th><th>Action</th><th>Nerve</th><th>Under the skin</th><th>Source</th></tr></thead><tbody>${A.muscles.map(m=>`<tr><td>${esc(m.name)}</td><td>${esc(m.origin)}</td><td>${esc(m.insertion)}</td><td>${esc(m.action)}</td><td>${esc(m.nerve)}</td><td>${esc(m.surface)}</td><td>${gray(m.gray_page,m.gray_url)}</td></tr>`).join('')}</tbody></table></div>`,
+  joints:()=>`<div class="card tablebox"><table class="wrapcells"><thead><tr><th>Joint</th><th>Kind (Gray)</th><th>Range of motion</th><th>For the rig</th><th>Source</th></tr></thead><tbody>${A.joints.map(j=>`<tr><td>${esc(j.name)}</td><td>${esc(j.gray_type)}</td><td>${Object.entries(j.rom).map(([k,v])=>`${esc(k.replace(/_(mm|cm)$/,'').replaceAll('_',' '))} <b>${esc(v)}${typeof v==='number'&&!k.endsWith('mm')&&!k.endsWith('cm')?'°':k.endsWith('mm')?' mm':k.endsWith('cm')?' cm':''}</b>`).join('<br>')}</td><td>${esc(j.rig)}</td><td>${gray(j.gray_page,j.gray_url)}</td></tr>`).join('')}</tbody></table></div><p class="muted" style="margin-top:6px">${esc(A.sources.rom)}</p>`,
+  bones:()=>`<div class="grid">${A.bones.map(b=>`<div class="card rule"><b>${esc(b.name)}</b><ul class="tight">${b.landmarks.map(l=>`<li>${l.surface?'<b>':''}${esc(l.name)}${l.surface?'</b>':''}: <span class="muted">${esc(l.form)}</span></li>`).join('')}</ul>${b.notes?`<span class="muted">${esc(b.notes)}</span>`:''}${b.curves?`<span class="muted">${esc(b.curves)}</span>`:''}</div>`).join('')}</div><p class="muted" style="margin-top:6px">Bold landmarks show through the skin: a model's planes must show them.</p>`,
+  fat:()=>`<div class="card tablebox"><table class="wrapcells"><thead><tr><th>Pad</th><th>Where</th><th>Man</th><th>Woman</th><th>What it does to the shape</th><th>mm (m / w)</th></tr></thead><tbody>${A.fat.map(f=>`<tr><td>${esc(f.id.replaceAll('_',' '))}</td><td>${esc(f.where)}</td><td>${esc(f.male)}</td><td>${esc(f.female)}</td><td>${esc(f.change)}</td><td>${f.thickness_mm.map(v=>v??'–').join(' / ')}</td></tr>`).join('')}</tbody></table></div><p class="muted" style="margin-top:6px">${esc(A.build_fat.rule)} Builds scale the pads: ${Object.entries(A.build_fat).filter(([k])=>k!=='rule').map(([k,v])=>k+' ×'+v).join(', ')}.</p>`,
+  surface:()=>`<div class="grid">${Object.entries(A.surface).map(([v,l])=>`<div class="card rule"><b>${v[0].toUpperCase()+v.slice(1)}</b><ul class="tight">${l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>`,
+  measure:()=>{const F=A.measurements.figures,m=F['male-average'],w=F['female-average'];return `<div class="card tablebox"><table><thead><tr><th>Region</th><th>Measure</th><th>Man, heads</th><th>Man, cm</th><th>Woman, heads</th><th>Woman, cm</th></tr></thead><tbody>${m.rows.map((r,i)=>`<tr><td>${esc(r.region)}</td><td>${esc(r.what)}</td><td>${r.heads}</td><td>${r.cm}</td><td>${w.rows[i].heads}</td><td>${w.rows[i].cm}</td></tr>`).join('')}</tbody></table></div><p class="muted" style="margin-top:6px">${esc(A.measurements.unit)}</p>`},
+  check:()=>`<ol class="check card">${A.checklist.map(c=>`<li><b>${esc(c.check)}</b><span class="muted">${esc(c.region)} · ${esc(c.how)} · pass: ${esc(c.tolerance)}</span></li>`).join('')}</ol><p class="muted" style="margin-top:6px">The Bruiser, Turnaround Hero and Roman figure threads score against these 25 checks, not only the outline.</p>`};
+ const panel=document.getElementById('apanel');const tab=t=>{panel.innerHTML=T[t]();for(const x of document.querySelectorAll('#atabs button'))x.setAttribute('aria-pressed',x.dataset.t===t)};
+ document.getElementById('atabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)tab(b.dataset.t)});tab('muscles');})();
 </script>
 </body>
 </html>

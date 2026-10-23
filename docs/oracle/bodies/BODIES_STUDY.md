@@ -15,6 +15,7 @@ rules, and a checklist modelers score against.
 |---|---|---|
 | 1 | The normal human | this file, 2026-10-23 |
 | 1b | Drawing the figure: gesture, construction, clean limbs | `DRAWING.md`, 2026-10-23 |
+| 1c | Anatomy at Gray's depth: skeleton and muscle plates (front, side, back), 51 muscles with origin, insertion, action, nerve and surface form, 17 joints with type and range of motion, 15 bones with surface landmarks, fat pads, measurements by region, a 25-check modeler checklist | `anatomy.json`, `sources/gray1918/excerpts.json`, `tools/bodies/anatomy.py`, `anatomy_data.py`, 2026-10-23 |
 | 2 | Heroic humans (the Marvel Way hero, gesture and action) | next |
 | 3 | Bipedal aliens | |
 | 4 | Weird aliens | |
