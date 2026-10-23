@@ -1,7 +1,7 @@
 """Ranch ground-cover kit (remaster item R1): six grass tufts, a clover patch, a wildflower clump and a mossy path edge,
 one GLB per piece, built to be instanced hundreds of times across the Ranch tile.
 
-Tufts are rings of strap blades with blunt round ends (3 triangles a blade, 40 blades a tuft; see TUFTS), not spikes.
+Tufts are grass buns: a dark low-poly core with 40 steep, tip-arching blades with rounded ends (see TUFTS).
 Normals are authored: every vertex takes a dome normal from a point below the clump blended with up, and every triangle
 is wound so its front agrees with them, so a tuft shades like one soft rounded mound instead of a bed of flat-shaded
 facets, and on the double-sided material the out-and-up side is always the front. Colour is a vertex colour (COLOR_0,
@@ -22,27 +22,26 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEADOW = (0xa6, 0xb0, 0x87)
 FOLIAGE = (0x6e, 0x94, 0x40)
 
-# Tufts. Each tuft is 4 nested "crowns": rings of blades rooted on small circles on the ground (radius `r` x h), each
-# blade a strap from its ring segment out to a blunt round end (3 triangles: two for the strap, one wide-angle cap).
-# Inner rings stand upright and tall; outer rings splay low and short, so the clump has a broad base and reads as one
-# soft dome: 40 blades in 120 triangles. Double-sided; normals are a dome normal (from a point below the clump)
-# blended with up, and every triangle is wound so its front agrees with them.
-# crowns: (blades, root ring radius / h, tilt from vertical deg, length / h). bw = blade half-width / h at the tip.
-# h = height (m), drift = 0 meadow .. 1 foliage for the tip colour, flat = depth squash (y), jit = random wobble.
-def _cr(t, L, r=(0.015, 0.04, 0.07, 0.10), n=(8, 10, 11, 11)):
-    return [(n[k], r[k], t[k], L[k]) for k in range(4)]
-
-
+# Tufts (third pass). Each tuft is a grass bun: a dark squashed low-poly hemisphere core (40 triangles, radius cr x h,
+# height ch x h) that fills the mass, with n blades growing out of its surface. Each blade is 6 triangles: two body
+# segments from a narrow neck to the shoulder, then a rounded 2-triangle tip. Blades rise steeply (tilt from vertical
+# between tilt[0] at the crown and tilt[1] at the rim, i.e. 50 to 85 deg from the ground) and arch outward only
+# near the tip (arch deg on the last segment). Crown blades are tallest; rim blades are shorter (fall) and lean more,
+# so the outline is a dome, taller in the middle. Double-sided; normals are a dome normal (from a point below the
+# clump) blended with up; every triangle is wound to agree with them. Colour runs base #5d6b3a -> mid #7f9150 ->
+# tip #b8c27e with per-blade variation (drift nudges a tuft's tips towards foliage); the core takes the base colour.
+# h = height (m), bw = blade shoulder width / h, neck = root width / shoulder width, lenvar = random shortening,
+# lean = random tilt (deg), flat = depth squash (y). cr = 0 means no core (tuft-f).
 TUFTS = {
-    'tuft-a': dict(seed=3, h=0.30, bw=0.10, drift=0.55, flat=0.85, jit=0.22, crowns=_cr((20, 40, 60, 80), (1, .96, .86, .70))),
-    'tuft-b': dict(seed=5, h=0.16, bw=0.12, drift=0.70, flat=0.85, jit=0.28, crowns=_cr((22, 42, 62, 80), (1, .96, .88, .72))),
-    'tuft-c': dict(seed=8, h=0.16, bw=0.12, drift=0.30, flat=0.85, jit=0.18, crowns=_cr((22, 42, 62, 80), (1, .97, .90, .74))),
-    'tuft-d': dict(seed=11, h=0.34, bw=0.09, drift=0.60, flat=0.85, jit=0.25, crowns=_cr((16, 34, 54, 76), (1, .95, .84, .66))),
-    'tuft-e': dict(seed=13, h=0.20, bw=0.10, drift=0.45, flat=0.85, jit=0.22, crowns=_cr((16, 32, 50, 70), (1, .96, .86, .68))),
-    'tuft-f': dict(seed=17, h=0.33, bw=0.022, drift=0.25, flat=0.75, jit=0.35,           # wispy: thin straps, few rings
-                   crowns=_cr((8, 26, 46, 68), (1, .92, .84, .74), r=(0.02, 0.04, 0.06, 0.08))),
+    'tuft-a': dict(seed=3, h=0.30, n=42, bw=0.13, neck=0.45, cr=0.42, ch=0.37, tilt=(6, 54), arch=32, fall=0.14, lenvar=0.15, lean=7, drift=0.30, flat=0.88),
+    'tuft-b': dict(seed=5, h=0.16, n=42, bw=0.15, neck=0.45, cr=0.44, ch=0.37, tilt=(8, 58), arch=34, fall=0.14, lenvar=0.18, lean=8, drift=0.45, flat=0.88),
+    'tuft-c': dict(seed=8, h=0.16, n=42, bw=0.15, neck=0.45, cr=0.44, ch=0.39, tilt=(8, 56), arch=30, fall=0.12, lenvar=0.12, lean=6, drift=0.10, flat=0.88),
+    'tuft-d': dict(seed=11, h=0.34, n=42, bw=0.12, neck=0.45, cr=0.38, ch=0.35, tilt=(4, 50), arch=30, fall=0.16, lenvar=0.18, lean=7, drift=0.35, flat=0.88),
+    'tuft-e': dict(seed=13, h=0.20, n=42, bw=0.13, neck=0.45, cr=0.36, ch=0.37, tilt=(4, 48), arch=28, fall=0.12, lenvar=0.15, lean=6, drift=0.20, flat=0.88),
+    'tuft-f': dict(seed=17, h=0.33, n=48, bw=0.05, neck=0.6, cr=0.0, ch=0.0, tilt=(6, 50), arch=50, fall=0.30, lenvar=0.35, lean=9, drift=0.0, flat=0.80),
 }
-CLOVER = dict(seed=4, trefoils=22, ell=(0.30, 0.20), mound=0.05, leaflet=(0.058, 0.070), heads=7, head_h=(0.09, 0.15),
+GRASS_BASE, GRASS_MID, GRASS_TIP = (0x5d, 0x6b, 0x3a), (0x7f, 0x91, 0x50), (0xb8, 0xc2, 0x7e)
+CLOVER = dict(seed=4, trefoils=21, ell=(0.30, 0.20), mound=0.05, leaflet=(0.058, 0.070), heads=7, head_h=(0.09, 0.15),
               head_r=(0.026, 0.032))
 WILD = dict(seed=9, stems=16, h=(0.15, 0.26), spread=0.13, flowers=20, lilac=0.3,
             leafy=[(9, 0.012, 22, 0.16), (11, 0.025, 46, 0.15), (11, 0.04, 70, 0.12)])   # crowns: (blades, ring r m, tilt deg, length m)
@@ -134,10 +133,64 @@ def blade(part, root, azim, tilt0, tilt1, length, width, base_col, tip_col, dome
     part.add(V, F, C, T, N)
 
 
+def ramp(t, base, mid, tip):
+    """base -> mid at t = 0.5 -> tip at t = 1."""
+    return mix(base, mid, t / 0.5) if t < 0.5 else mix(mid, tip, (t - 0.5) / 0.5)
+
+
+def paddle(part, root, azim, tilt, arch, length, width, neck, cols, dome_c, twist=0.0, t0=0.0):
+    """A grass blade: neck -> mid (straight, at `tilt` from vertical) -> shoulder (tilted further by arch/2), then a
+    rounded 2-triangle tip (two vertices at 55 % width, tilted by the full arch). 8 vertices, 6 triangles.
+    Wound to agree with the authored dome normals. cols = (base, mid, tip) for this blade."""
+    def ray(t):
+        t = math.radians(min(88.0, t))
+        return np.array([math.cos(azim) * math.sin(t), math.sin(azim) * math.sin(t), math.cos(t)])
+    side = np.array([-math.sin(azim + twist), math.cos(azim + twist), 0.0])
+    w = width / 2; body = length - 0.4 * width
+    p0 = np.array(root, float)
+    p1 = p0 + ray(tilt) * body * 0.55
+    p2 = p1 + ray(tilt + arch * 0.5) * body * 0.45
+    p3 = p2 + ray(tilt + arch) * 0.4 * width
+    V = [p0 - side * w * neck, p0 + side * w * neck, p1 - side * w * 0.85, p1 + side * w * 0.85,
+         p2 - side * w, p2 + side * w, p3 - side * w * 0.55, p3 + side * w * 0.55]
+    T = [0.0, 0.0, 0.55, 0.55, 0.9, 0.9, 1.0, 1.0]
+    F = [(0, 1, 3), (0, 3, 2), (2, 3, 5), (2, 5, 4), (4, 5, 7), (4, 7, 6)]
+    up = np.array([0, 0, 1.0])
+    N = [0.5 * up + 0.5 * (v - dome_c) / max(1e-9, np.linalg.norm(v - dome_c)) for v in V]
+    N = [n / np.linalg.norm(n) for n in N]
+    F = [f if np.dot(np.cross(V[f[1]] - V[f[0]], V[f[2]] - V[f[0]]), N[f[0]] + N[f[1]] + N[f[2]]) >= 0
+         else (f[0], f[2], f[1]) for f in F]
+    C = [ramp(t0 + (1 - t0) * t, *cols) for t in T]
+    part.add(V, F, C, T, N)
+
+
+def bun_core(part, r, ch, col_lo, col_hi, dome_c, segs=8):
+    """A squashed low-poly hemisphere: top vertex, rings at 62 and 30 deg elevation and a ground ring
+    (1 + 3 x segs vertices, 5 x segs triangles = 40). sway 0. Normals are the dome normal blended with up."""
+    V = [np.array([0, 0, ch])]
+    rings = [(math.radians(62), 0.5), (math.radians(30), 0.0), (0.0, 0.5)]
+    for k, (el, off) in enumerate(rings):
+        for i in range(segs):
+            a = (i + off) * 2 * math.pi / segs
+            V.append(np.array([math.cos(a) * math.cos(el) * r, math.sin(a) * math.cos(el) * r, math.sin(el) * ch]))
+    F = [(0, 1 + i, 1 + (i + 1) % segs) for i in range(segs)]
+    for k in range(2):
+        o0, o1 = 1 + k * segs, 1 + (k + 1) * segs
+        for i in range(segs):
+            a, b2 = o0 + i, o0 + (i + 1) % segs; c, d = o1 + i, o1 + (i + 1) % segs
+            F += [(a, c, d), (a, d, b2)]
+    up = np.array([0, 0, 1.0])
+    N = [0.4 * up + 0.6 * (v - dome_c) / max(1e-9, np.linalg.norm(v - dome_c)) for v in V]
+    F = [f if np.dot(np.cross(V[f[1]] - V[f[0]], V[f[2]] - V[f[0]]), N[f[0]] + N[f[1]] + N[f[2]]) >= 0
+         else (f[0], f[2], f[1]) for f in F]
+    C = [mix(col_lo, col_hi, v[2] / ch) for v in V]
+    part.add(V, F, C, [0.0] * len(V), N)
+
+
 def crown(part, n, r0, tilt, L, bw, base_col, tip_col, dome_c, rng, jit, phase, z0=0.0):
     """A ring of n blades rooted on a circle of radius r0: blade i is a strap from ring vertices i and i+1 out to a
-    blunt round end (tL, apex, tR). 4 vertices and 3 triangles per blade. Each triangle is wound to agree with its
-    authored (dome) normal, so on a double-sided material the side facing out and up is the front."""
+    blunt round end (tL, apex, tR). 4 vertices and 3 triangles per blade (used for the wildflowers' leafy base).
+    Each triangle is wound to agree with its authored (dome) normal."""
     up = np.array([0, 0, 1.0])
     def ray(az, t):
         t = math.radians(min(86.0, t))
@@ -151,11 +204,11 @@ def crown(part, n, r0, tilt, L, bw, base_col, tip_col, dome_c, rng, jit, phase, 
         az = phase + (i + 0.5) * sec + rng.uniform(-jit, jit) * sec * 0.4
         tl = tilt * (1 + rng.uniform(-jit, jit) * 0.6) + rng.uniform(-4, 4)
         ll = L * (1 + rng.uniform(-jit, jit) * 0.8)
-        sh = 1 + rng.uniform(-0.09, 0.09)              # each blade its own shade, so blades read apart
+        sh = 1 + rng.uniform(-0.09, 0.09)
         root = (V[i] + V[(i + 1) % n]) / 2
         wb = bw * rng.uniform(0.85, 1.15)
         side = np.array([-math.sin(az), math.cos(az), 0.0])
-        c = root + ray(az, tl) * (ll - 0.55 * wb) * 0.6 + ray(az, tl + 8) * (ll - 0.55 * wb) * 0.4   # bows outward
+        c = root + ray(az, tl) * (ll - 0.55 * wb) * 0.6 + ray(az, tl + 8) * (ll - 0.55 * wb) * 0.4
         top = root + ray(az, tl) * ll * 0.6 + ray(az, tl + 10) * ll * 0.4
         V += [c - side * wb, top, c + side * wb]; T += [0.9, 1.0, 0.9]
         C += [mix(base_col, tip_col * sh, 0.85), tip_col * sh, mix(base_col, tip_col * sh, 0.85)]
@@ -163,7 +216,7 @@ def crown(part, n, r0, tilt, L, bw, base_col, tip_col, dome_c, rng, jit, phase, 
         F += [(r_a, r_b, tR), (r_a, tR, tL), (tL, tR, tT)]
     N = [0.5 * up + 0.5 * (v - dome_c) / max(1e-9, np.linalg.norm(v - dome_c)) for v in V]
     fixed = []
-    for f in F:                   # wind each triangle to agree with its authored normals (front = the lit side)
+    for f in F:
         a, b, c = (V[k] for k in f)
         if np.dot(np.cross(b - a, c - a), N[f[0]] + N[f[1]] + N[f[2]]) < 0:
             f = (f[0], f[2], f[1])
@@ -175,12 +228,30 @@ def crown(part, n, r0, tilt, L, bw, base_col, tip_col, dome_c, rng, jit, phase, 
 def tuft(name, P):
     rng = random.Random(P['seed']); h = P['h']
     grass = Part('Grass_Tuft')
-    tip = mix(srgb(MEADOW), srgb(FOLIAGE), P['drift'] * 0.6) * 1.06
-    base = mix(srgb(FOLIAGE), srgb(MEADOW), 0.3) * 0.78
+    base, mid, tip = srgb(GRASS_BASE), srgb(GRASS_MID), srgb(GRASS_TIP)
+    tip = mix(tip, srgb(FOLIAGE) * 1.1, P['drift'] * 0.5)
     dome = np.array([0, 0, -0.5 * h])
-    for j, (n, r0, tilt, L) in enumerate(P['crowns']):
-        shade = 1.06 - 0.04 * j                       # inner (upright, top) crowns a touch lighter
-        crown(grass, n, r0 * h, tilt, L * h, P['bw'] * h, base, tip * shade, dome, rng, P['jit'], rng.uniform(0, 6.28))
+    cr, ch = P['cr'] * h, P['ch'] * h
+    if cr:
+        bun_core(grass, cr, ch, base * 0.85, mix(base, mid, 0.3), dome)
+    n = P['n']
+    order = list(range(n)); rng.shuffle(order)
+    for i in range(n):
+        u = (order[i] + 0.5) / n                         # 0 = crown .. 1 = rim
+        ang = i * 2.39996 + rng.uniform(-0.3, 0.3)       # golden-angle spiral round the bun
+        el = math.radians(82 - 80 * u ** 0.45)           # where on the core it grows: crown (82 deg) .. its foot (4)
+        if cr:
+            root = np.array([math.cos(ang) * math.cos(el) * cr, math.sin(ang) * math.cos(el) * cr,
+                             math.sin(el) * ch]) * 0.82  # set a little into the core so no seam shows
+        else:
+            rr = h * 0.04 * math.sqrt(u); root = np.array([rr * math.cos(ang), rr * math.sin(ang), 0.0])
+        tilt = P['tilt'][0] + (P['tilt'][1] - P['tilt'][0]) * u + rng.uniform(-P['lean'], P['lean'])
+        L = h * (1 - P['fall'] * u ** 1.2) * (1 - P['lenvar'] * rng.random()) - root[2] * 0.5
+        W = h * P['bw'] * rng.uniform(0.8, 1.2)
+        v = rng.uniform(-0.07, 0.07)
+        cols = (base * (1 + v * 0.5), mid * (1 + v), tip * (1 + v + 0.03 * (1 - u)))
+        paddle(grass, root, ang, tilt, P['arch'] * rng.uniform(0.75, 1.25), L, W, P['neck'], cols, dome,
+               twist=rng.uniform(-0.3, 0.3), t0=0.15 if cr else 0.0)
     if P['flat'] != 1:
         grass.v = [(x, y * P['flat'], z) for x, y, z in grass.v]
     fit_height([grass], h)
@@ -231,14 +302,18 @@ def leaflet(part, centre, azim, tilt, L, base_col, tip_col, dome_c, sway0, sway1
 
 
 def head(part, centre, r, col_lo, col_hi, sway):
-    """A clover / flower ball: a squashed octahedron (6 vertices, 8 triangles) with smooth outward normals."""
+    """A clover puff: a low-poly ball with a top vertex, a ring of 5 just above the middle and a bottom vertex
+    (7 vertices, 10 triangles) with smooth outward normals."""
     c = np.array(centre, float)
-    V = [c + np.array([0, 0, r * 0.80]), c + np.array([r, 0, 0]), c + np.array([0, r, 0]), c + np.array([-r, 0, 0]),
-         c + np.array([0, -r, 0]), c - np.array([0, 0, r * 0.55])]
-    F = [(0, 1, 2), (0, 2, 3), (0, 3, 4), (0, 4, 1), (5, 2, 1), (5, 3, 2), (5, 4, 3), (5, 1, 4)]
+    V = [c + np.array([0, 0, r * 0.85])]
+    for k in range(5):
+        a = k * 2 * math.pi / 5
+        V.append(c + np.array([math.cos(a) * r, math.sin(a) * r, r * 0.12]))
+    V.append(c - np.array([0, 0, r * 0.75]))
+    F = [(0, 1 + k, 1 + (k + 1) % 5) for k in range(5)] + [(6, 1 + (k + 1) % 5, 1 + k) for k in range(5)]
     N = [v - c for v in V]
-    C = [col_hi, col_hi, col_hi, col_hi, col_hi, col_lo]
-    part.add(V, F, C, [sway] * 6, N)
+    C = [col_hi] * 6 + [col_lo]
+    part.add(V, F, C, [sway] * 7, N)
 
 
 def stem(part, a, b, w, col_a, col_b, s0, s1):
@@ -342,7 +417,7 @@ def path_edge(P=PATH):
     rng = random.Random(P['seed'])
     moss, peb, grass = Part('Moss_Path', True), Part('Stone_Pebble', True), Part('Grass_Meadow')
     ex, ey = P['ell']; S = P['segs']; H = P['h']
-    mb, mt = srgb((92, 104, 38)), srgb((142, 152, 60))
+    mb, mt = srgb((92, 98, 40)), srgb((136, 140, 62))   # olive
     dirt = srgb((0xd4, 0xb4, 0x8a)) * 0.82
     def hump(x):     # two soft humps along the strip, the right one higher, as in the sheet
         return 0.68 + 0.32 * math.cos((x / ex) * 2.6 - 0.6)
@@ -357,7 +432,7 @@ def path_edge(P=PATH):
             x, y = ex * rf * math.cos(a) * w, ey * rf * math.sin(a) * w
             if y < 0:
                 y *= 0.85     # front edge a little straighter (the path line)
-            z = H * hf * hump(x) * (rng.uniform(0.86, 1.14) if 0 < rf < 1 else 1.0)   # lumpy moss
+            z = H * hf * hump(x) * (rng.uniform(0.78, 1.22) if 0 < rf < 1 else 1.0)   # lumpy moss
             V.append((x, y, z))
             # dome normal from the ellipse gradient, blended up
             gx, gy = 2 * x / ex ** 2, 2 * y / ey ** 2
@@ -410,7 +485,7 @@ def pebble(part, c, r, rng):
 
 PIECES = dict({k: (lambda k=k: tuft(k, TUFTS[k])) for k in TUFTS},
               **{'clover-patch': clover_patch, 'wildflower-clump': wildflower_clump, 'path-edge': path_edge})
-BUDGET = dict({k: 120 for k in TUFTS}, **{'clover-patch': 300, 'wildflower-clump': 300, 'path-edge': 200})
+BUDGET = dict({k: 300 for k in TUFTS}, **{'clover-patch': 300, 'wildflower-clump': 300, 'path-edge': 200})
 
 
 def export(name):

@@ -48,7 +48,7 @@ MATERIAL_RENAMES = {'goat-house-open': [(r'^Wall_', 'Plank_')]}
 KEEP_WALLS = {'goat-house-open'}
 # Kits (remaster wave 1): every top-level GLB of models/<name>/ is copied as is to ranch-kits/<name>/, where
 # simulations/ranch-kits.mjs loads and places them (both model styles use the same files).
-KITS = {'kitchen-garden': 'ranch-kits/kitchen-garden', 'lamp-kit': 'ranch-kits/lamp-kit'}
+KITS = {'kitchen-garden': 'ranch-kits/kitchen-garden', 'lamp-kit': 'ranch-kits/lamp-kit', 'ground-cover': 'ranch-kits/ground-cover'}
 # the game's material roles, matched on material then object name (same patterns as simulations/material-policy.js)
 ROLE_PATTERNS = [('glass', r'glass'), ('water', r'^(?:water)(?:[. _-]|$)'), ('metal', r'bronze|metal|copper|steel|iron|brass'),
                  ('plaster', r'plaster|stucco|wall'), ('foliage', r'leaf|leaves|foliage|canopy|grass|moss|petal|flower|stem'),

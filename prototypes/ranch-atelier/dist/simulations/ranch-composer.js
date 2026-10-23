@@ -15,6 +15,7 @@ import * as T from 'three';
 import {mergeGeometries} from './vendor/utils/BufferGeometryUtils.js';
 import {ranchMaterial} from './tile-materials.js';
 import {kitchenGarden} from './ranch-kits.mjs';
+import {groundCover} from './ranch-ground-cover.mjs';
 import {styledJSON,styleKey} from './model-style.mjs';
 import {calibratedScale,modelDimensions} from './model-calibration.js';
 import {dressingPlan,landscapeSettings} from './tile-landscape.js?diversity=3';
@@ -111,7 +112,7 @@ async function content(tile,plan,options={}){
   }
  }
  if(plan.gardenSource){const art=await getGardenArt(),context=new T.Group(),angle=(plan.rotation||0)*Math.PI/3;context.rotation.y=angle;context.scale.setScalar(S);await art.drawContext(context,{...plan.gardenSource,routes:plan.paths.map(r=>({...r,points:r.points.map(p=>({x:p.x*Math.cos(angle)-p.z*Math.sin(angle),z:p.x*Math.sin(angle)+p.z*Math.cos(angle)}))}))},(x,z)=>heightAt(plan.center.x+x*Math.cos(angle)+z*Math.sin(angle),plan.center.z-x*Math.sin(angle)+z*Math.cos(angle)));g.add(context);}
- const coast=heightAt.coasts?.find(c=>c.id===plan.id);const dressing=dressingPlan(plan,landscapeSettings(board),heightAt).filter(d=>{if(!coast)return true;const p={x:plan.center.x+d.x,z:plan.center.z+d.z};return !heightAt.isWater(p.x,p.z)&&coast.wetPolygon.every((a,i)=>segmentDistance(p,a,coast.wetPolygon[(i+1)%coast.wetPolygon.length])>(d.kind==='tree'?7:1.5));});plan.dressingCounts={};plan.plantedAssets=[];const richness=board.landscape?.biodiversity??3;
+ const coast=heightAt.coasts?.find(c=>c.id===plan.id);const dressing=dressingPlan(plan,landscapeSettings(board),heightAt).filter(d=>{if(!coast)return true;const p={x:plan.center.x+d.x,z:plan.center.z+d.z};return !heightAt.isWater(p.x,p.z)&&coast.wetPolygon.every((a,i)=>segmentDistance(p,a,coast.wetPolygon[(i+1)%coast.wetPolygon.length])>(d.kind==='tree'?7:1.5));});plan.dressingCounts={};plan.plantedAssets=[];const richness=board.landscape?.biodiversity??3;const grassSpots=[];
  for(const d of dressing){plan.dressingCounts[d.kind]=(plan.dressingCounts[d.kind]||0)+1;const y=ground(d.x,d.z);
   if(heightAt.overland&&d.kind==='tree'&&heightAt(plan.center.x+d.x,plan.center.z+d.z)<14){
    const id=plan.center.x>110?'WW-151':plan.center.z>170?'WW-147':'WW-139',plant=await overlandPlant(id);plant.position.set(d.x*S,y,d.z*S);plant.rotation.y=d.angle;plant.scale.multiplyScalar(d.size*.85);g.add(plant);if(!plan.plantedAssets.includes(id))plan.plantedAssets.push(id);continue;
@@ -132,9 +133,12 @@ async function content(tile,plan,options={}){
   if(ATELIER&&d.kind==='tree'){const n=plan.dressingCounts.tree,pool=d.habitat==='woodland'?['oak-a','fir-a','oak-b','fir-b']:['oak-a','birch','oak-b'],plant=await atelierModel(pool[(n+Math.abs(Math.floor(d.z/9)))%pool.length]);plant.position.set(d.x*S,y,d.z*S);plant.rotation.y=d.angle;plant.scale.multiplyScalar(d.size);g.add(plant);continue;}
   if(options.managed&&d.kind==='prop'&&d.model==='wood-partial'){const edge=await regionalAsset('GF-010');edge.position.set(d.x*S,y,d.z*S);edge.rotation.y=d.angle;g.add(edge);continue;}
   if(d.kind==='tree'||d.kind==='prop'){await asset(g,d.model||'tree-standing',d.x,d.z,5,d.angle);const wrapper=g.children.at(-1);wrapper.position.y+=y;if(d.kind==='tree')wrapper.scale.multiplyScalar(d.size);continue;}
+  // Grass is the ground-cover kit (remaster R1), instanced once per tile after the loop.
+  if(d.kind==='grass'){grassSpots.push(d);continue;}
   const tuft=new T.Group();tuft.userData.inspect={title:{shrub:'Low shrub',rock:'Field stone',grass:'Grass tuft'}[d.kind]||d.kind,kind:'Landscape',description:{shrub:'Low cover in open ground away from paths.',rock:'A small stone cluster in the ranch landscape.',grass:'Ground cover placed outside paths and building clearances.'}[d.kind]};tuft.position.set(d.x*S,y,d.z*S);tuft.rotation.y=d.angle;g.add(tuft);
   const dressing=ATELIER&&d.kind==='rock'?await atelierModel(atelierRock(plan.dressingCounts.rock)):dressingAsset(d.kind,d.size);if(ATELIER&&d.kind==='rock')dressing.scale.multiplyScalar(.45+d.size*.3);if(variants&&!(ATELIER&&d.kind==='rock'))applyVariant(dressing,d.kind,{seed:Math.floor(d.x*13+d.z*7),stage:variantStage});tuft.add(dressing);tuft.userData.variant=dressing.userData.variant;
  }
+ if(grassSpots.length){const cover=await groundCover(grassSpots,plan,ground,{S,seed:(plan.seed??1)+7});cover.userData.inspect={title:'Meadow grass',kind:'Landscape',description:'Ground cover placed outside paths and building clearances.'};g.add(cover);}
  if(type==='ranch'&&!options.managed)for(const [i,id]of ['abbie-idle','ani-idle','daddy-idle'].entries()){const x=plan.hub.x-3+i*3,z=plan.hub.z+2;await asset(g,id,x,z,.6);g.children.at(-1).position.y+=ground(x,z);}
  // Keep a small set of semantic pieces; dense dressing remains sector-batched.
  const result=new T.Group(),sectors=Array.from({length:6},()=>new T.Group()),groundAt=(x,z)=>ground(x/S,z/S);
