@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-models-browser",
+      "date": "2026-10-23",
+      "title": "All the models, and Game mode",
+      "line": "See them all shows every model as a small card: the picture in its frame and the model beside it. Switch between one at a time and all at once. The gear now has App and Game: Game puts the page under the sky with seven styles, from Gallery to Candy party.",
+      "image": "/whats-new/2026-10-23-models-browser.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead"
+    },
+    {
       "id": "2026-10-23-models-tighter",
       "date": "2026-10-23",
       "title": "Models come alive",

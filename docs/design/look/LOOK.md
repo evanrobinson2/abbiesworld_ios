@@ -74,3 +74,12 @@ bottom); less padding everywhere.
 - The inspiration is a print: the image and its prompt share one frame. The model has no frame and stands free on the page.
 - Labels ("Inspiration", "Model") use the title's type, Title Case, no chips or shadows. Names are Title Case.
 - The model appears with a 0.5 s laser print, bottom to top (skipped under reduced motion).
+
+## The browser and two modes (Evan, 2026-10-23 04:00-04:03Z)
+- See them all is the review card in small: the framed print and the free model side by side. One wordless toggle: Row (one
+  card at a time, swipe) or Screen (all as a grid). Remembered per viewer (`aw-browse`).
+- App mode is the flat look (Default, Rome, Efficient) and the default from the Studies and app.abbies.world. Game mode is
+  the toy-table look (sky gradient, hills, thick tiles with a wooden edge, Fredoka and Nunito) with the motifs.json styles.
+  The gear switches between them on every page; `?mode=game|app` picks one for a link. Tokens live in look.css.
+- The look page (https://claude.ai/artifact/WcNpa9yNKCy4k3ySrWSPL1) has the same switcher plus a style editor: change any
+  colour, Save (your styles) or Save as, delete your styles with a confirm.

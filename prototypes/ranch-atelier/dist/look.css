@@ -1,6 +1,7 @@
 /* The Abbie's World look (docs/design/look/LOOK.md): flat colour, Roboto, hairlines and soft shadows. A motif repaints
    the tokens only (html[data-motif]); the pieces never change. Motifs: default, rome, efficient (docs/design/look/motifs.json). */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap');
 :root{
   --font:Roboto,'Helvetica Neue',Arial,sans-serif;
   --bg:#f3eee3;--surface:#fbf8f2;--line:rgba(110,80,40,.18);--ink:#2b2218;--ink-soft:#6b5d4c;
@@ -14,3 +15,20 @@ html[data-motif="rome"]{--bg:#efe6d6;--surface:#fbf8f2;--line:rgba(140,100,40,.2
 html[data-motif="efficient"]{--bg:#ffffff;--surface:#ffffff;--line:#e3e3e3;--ink:#111111;--ink-soft:#666666;--sign:#111111;--keep:#1e8e3e;--note:#b07a00;--reject:#c5221f;--active:#111111;--hill-far:transparent;--hill:transparent;--shadow:none;--radius:10px}
 html,body{background:var(--bg);color:var(--ink);font-family:var(--font)!important}
 body *{font-family:var(--font)!important}
+/* Game mode (Evan, 2026-10-23 04:03Z): the toy-table look. The page stands under the world's sky, things are thick tiles
+   with a wooden edge, type is Fredoka and Nunito. Styles (motifs.json) set the --sky/--tile tokens; Ranch is the default. */
+html[data-mode="game"]{
+  --sky-top:#8cc8dc;--sky-low:#fde4b8;--hill-far:#b6d488;--hill:#93c062;--tile:#fdf6e6;--tile-edge:#d2b083;--signc:#7a5236;--ink:#3a2618;--ink-soft:#6f5643;
+  --bg:var(--sky-low);--surface:var(--tile);--line:color-mix(in srgb,var(--tile-edge) 55%,transparent);--sign:var(--signc);--active:var(--signc);
+  --shadow:0 6px 0 var(--tile-edge),0 22px 30px -14px rgba(70,45,20,.3);--radius:24px;
+  --font:Nunito,'Segoe UI',system-ui,sans-serif;--display:Fredoka,'Trebuchet MS',sans-serif;
+}
+html[data-mode="game"],html[data-mode="game"] body{background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-low) 70%) fixed var(--sky-low)}
+html[data-mode="game"] body *{font-family:var(--font)!important}
+html[data-mode="game"] h1,html[data-mode="game"] h2,html[data-mode="game"] .aw,html[data-mode="game"] .inset,html[data-mode="game"] .mn strong,html[data-mode="game"] .awcall h2{font-family:var(--display)!important;font-weight:600!important}
+html[data-mode="game"] .aw{background:var(--signc)}
+html.silly[data-mode="game"] .mc{animation:awwob 3.2s ease-in-out infinite}
+html.silly[data-mode="game"] .mc:nth-child(2n){animation-delay:-1.6s}
+@keyframes awwob{50%{transform:rotate(-.6deg) translateY(-2px)}}
+@media (prefers-reduced-motion:reduce){html.silly[data-mode="game"] .mc{animation:none}}
+html[data-mode="game"] .nm h1{background:var(--tile);color:var(--ink);padding:4px 14px;border-radius:14px;box-shadow:0 4px 0 var(--tile-edge)}

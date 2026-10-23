@@ -53,19 +53,22 @@ function chips(){
     <button type="button" class="gridbtn" data-view="${view === 'grid' ? 'review' : 'grid'}">${view === 'grid' ? 'Back to reviewing' : 'See them all'}</button></div>`;
 }
 
+// The browser (Evan, 04:00Z): every model as a small version of the review card, a framed print and the model standing
+// free beside it. One wordless toggle: Row shows one card at a time to swipe through, Screen shows them all as a grid.
+let browse = (() => { try { return localStorage.getItem('aw-browse') || 'screen'; } catch (e) { return 'screen'; } })();
 function grid(){
   document.title = 'Models';
   crumb.innerHTML = '<a href="/models">Models</a>';
-  const ms = shown();
-  // Each tile shows the concept art or the 3D model; the switch flips them all, the small button flips one.
-  const showSwitch = `<div class="seg show" role="group" aria-label="Tiles show">${[['art','Concept art'],['model','3D models']].map(([k, l]) =>
-    `<button type="button" data-show="${k}" aria-pressed="${gridShow === k}">${l}</button>`).join('')}</div>`;
-  root.innerHTML = `<header class="awbar"><a class="aw" href="/sandbox" aria-label="Abbie’s World">AW</a><div class="nm"><h1>Models</h1></div></header>` + chips() + showSwitch + (ms.length ? `<div class="tiles">${ms.map(m => { const r = reviews[m.id], as3d = (gridShow === 'model') !== flipped.has(m.id); return `
-    <a class="tile" href="/models/${encodeURIComponent(m.id)}" data-open="${esc(m.id)}">
-      ${as3d ? `<model-viewer src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" loading="lazy" camera-orbit="${+(m.orbit || [-30])[0]}deg ${+(m.orbit || [0, 72])[1]}deg auto" camera-controls touch-action="pan-y" interaction-prompt="none" environment-image="neutral" shadow-intensity="0.8"></model-viewer>`
-        : `<img src="${esc(m.urls.ref)}" alt="" loading="lazy">`}<i class="dot ${r ? r.verdict : ''}" title="${r ? LABEL[r.verdict] : 'To review'}"></i>
-      <button type="button" class="flip" data-flip="${esc(m.id)}" aria-label="Show the ${as3d ? 'concept art' : '3D model'}">${as3d ? 'Art' : '3D'}</button>
-      <span class="tn"><strong>${esc(m.name)}</strong><small>${esc(m.style || m.group || '')}</small></span></a>`; }).join('')}</div>`
+  const ms = shown(), row = browse === 'row';
+  applyLook(null);
+  const toggle = `<div class="tools"><div class="lay" role="group" aria-label="Layout">${[['row', 'One at a time', 'row'], ['screen', 'All at once', 'grid']].map(([k, l, i]) =>
+    `<button type="button" class="peb" data-browse="${k}" aria-label="${l}" aria-pressed="${browse === k}">${ico(i)}</button>`).join('')}</div><button type="button" class="peb" id="gear" aria-label="Look" aria-expanded="false">${ico('gear')}</button></div><div class="gearpop" id="gearpop" hidden role="group" aria-label="Look">${gearPop()}</div>`;
+  root.innerHTML = `<header class="awbar"><a class="aw" href="/sandbox" aria-label="Abbie’s World">AW</a><div class="nm"><h1>Models</h1></div>${toggle}</header>` + chips() +
+    (ms.length ? `<div class="${row ? 'rowcards' : 'cards'}">${ms.map(m => { const r = reviews[m.id]; return `
+    <a class="mc" href="/models/${encodeURIComponent(m.id)}" data-open="${esc(m.id)}">
+      <span class="mn"><strong>${esc(titleCase(m.name))}</strong>${m.style ? `<small>${esc(m.style)}</small>` : ''}<i class="dot ${r ? r.verdict : ''}" title="${r ? LABEL[r.verdict] : 'To review'}"></i></span>
+      <span class="mpair"><span class="mprint"><img src="${esc(m.urls.ref)}" alt="" loading="lazy">${row && (m.ask || m.subject) ? `<em>“${esc(m.ask || m.subject)}”</em>` : ''}</span>
+      <span class="malive"><model-viewer src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" loading="lazy" reveal="auto" camera-orbit="${+(m.orbit || [-30])[0]}deg ${+(m.orbit || [0, 72])[1]}deg auto"${row ? ' camera-controls touch-action="pan-y" auto-rotate rotation-per-second="14deg"' : ''} interaction-prompt="none" environment-image="neutral" shadow-intensity="0.7" exposure="0.8"></model-viewer></span></span></a>`; }).join('')}</div>`
     : `<p class="empty">Nothing here yet.</p>`);
 }
 
@@ -81,6 +84,7 @@ const ICON = {
   gear:'<circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
   camera:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="2.2"/>',
   cart:'<path d="M2.5 4h3l2.4 10.5a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.4-1.1L21 8H7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="19.5" r="1.6" fill="currentColor"/><circle cx="17" cy="19.5" r="1.6" fill="currentColor"/>',
+  row:'<rect x="3" y="6" width="18" height="12" rx="2" fill="currentColor"/>',
   grid:'<rect x="4" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="currentColor"/>',
   left:'<path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',
   right:'<path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',
@@ -92,6 +96,39 @@ const ico = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 const titleCase = s => String(s).replace(/\S+/g, (w, i) => i && /^(a|an|and|at|for|in|of|on|or|the|to|with)$/i.test(w) ? w.toLowerCase() : w[0].toUpperCase() + w.slice(1));
 const FAIR = {fair:'Fair', close:'Close', off:'Off'};
 const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
+// Two modes (Evan, 04:03Z). App mode is the flat look (Default, Rome, Efficient) and the default from the Studies and
+// app.abbies.world; Game mode is the toy-table look under the world's sky (docs/design/look/motifs.json), with its styles.
+// Each switcher can flip to the other. ?mode=game or ?mode=app picks one for a link.
+const GAME = [
+  {id:'ranch', name:'Ranch'},
+  {id:'gallery', name:'Gallery', c:{'--sky-top':'#2f3744','--sky-low':'#9aa0aa','--hill-far':'#5c6372','--hill':'#454c5a','--tile':'#f5f2ec','--tile-edge':'#8f897e','--signc':'#2f3744','--ink':'#22252b','--ink-soft':'#5b6069'}},
+  {id:'legion', name:'Legion', c:{'--sky-top':'#4a1716','--sky-low':'#efcf9c','--hill-far':'#8b8a5a','--hill':'#5f6b34','--tile':'#f5f0e6','--tile-edge':'#a8916a','--signc':'#9e2a22','--ink':'#2b1a14','--ink-soft':'#6b5446'}},
+  {id:'moon', name:'Moonbase', c:{'--sky-top':'#0c1a3c','--sky-low':'#4a7fae','--hill-far':'#8a96a6','--hill':'#b4bcc8','--tile':'#eef4fb','--tile-edge':'#8aa0b8','--signc':'#2b5d8a','--ink':'#14243a','--ink-soft':'#4c5f78'}},
+  {id:'sea', name:'Under the sea', c:{'--sky-top':'#0d6585','--sky-low':'#86e3d8','--hill-far':'#f2d9a6','--hill':'#e6c483','--tile':'#f0fbfa','--tile-edge':'#5fb0b0','--signc':'#127a8a','--ink':'#0f3a40','--ink-soft':'#3f6d72'}},
+  {id:'spooky', name:'Spooky', c:{'--sky-top':'#2a1842','--sky-low':'#e88442','--hill-far':'#4a3048','--hill':'#24182c','--tile':'#fff1dc','--tile-edge':'#8a5a2a','--signc':'#4a2a5a','--ink':'#2a1830','--ink-soft':'#6a4a5a'}},
+  {id:'candy', name:'Candy party', silly:true, c:{'--sky-top':'#ff9fd0','--sky-low':'#fff2a6','--hill-far':'#a6ecd0','--hill':'#5ed0a2','--tile':'#fff7fb','--tile-edge':'#ff8cc0','--signc':'#ff5fa2','--ink':'#4a1a3a','--ink-soft':'#8a4a6e'}}
+];
+const GVARS = ['--sky-top','--sky-low','--hill-far','--hill','--tile','--tile-edge','--signc','--ink','--ink-soft'];
+const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch {} return null; };
+const pageMode = () => { const q = new URLSearchParams(location.search).get('mode'); if (q === 'game' || q === 'app') return q; return store('aw-mode') || 'app'; };
+function applyLook(m){
+  const r = document.documentElement, mode = pageMode();
+  r.dataset.mode = mode;
+  GVARS.forEach(k => r.style.removeProperty(k));
+  r.classList.remove('silly');
+  if (mode === 'game'){
+    const g = GAME.find(x => x.id === store('aw-game-style')) || GAME[0];
+    r.dataset.motif = 'game-' + g.id;
+    if (g.c) Object.entries(g.c).forEach(([k, v]) => r.style.setProperty(k, v));
+    if (g.silly) r.classList.add('silly');
+  } else r.dataset.motif = m ? motifFor(m) : (store('aw-motif') || 'default');
+}
+function gearPop(){
+  const r = document.documentElement, mode = r.dataset.mode || 'app';
+  const items = mode === 'game' ? GAME.map(g => `<button type="button" data-gstyle="${g.id}" aria-pressed="${r.dataset.motif === 'game-' + g.id}">${g.name}</button>`)
+    : MOTIFS.map(([k, l]) => `<button type="button" data-motif="${k}" aria-pressed="${r.dataset.motif === k}">${l}</button>`);
+  return `<div class="modes" role="group" aria-label="Mode">${[['app','App'],['game','Game']].map(([k, l]) => `<button type="button" data-mode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>${items.join('')}`;
+}
 const motifFor = m => { try { const v = localStorage.getItem('aw-motif'); if (v) return v; } catch {} return /paper warrior|roman/i.test(m.group || '') ? 'rome' : 'default'; };
 function topbar(m, seq, i){
   const c = counts();
@@ -108,7 +145,7 @@ function topbar(m, seq, i){
       <button type="button" class="peb" id="cam" aria-label="Take a photo to make into a model">${ico('camera')}</button>
       <button type="button" class="peb" id="cart" aria-label="Request more">${ico('cart')}<span class="badge" id="badge"${orders.length ? '' : ' hidden'}>${orders.length}</span></button>
     </div>
-    <div class="gearpop" id="gearpop" hidden role="group" aria-label="Look">${MOTIFS.map(([k, l]) => `<button type="button" data-motif="${k}" aria-pressed="${document.documentElement.dataset.motif === k}">${l}</button>`).join('')}</div>
+    <div class="gearpop" id="gearpop" hidden role="group" aria-label="Look">${gearPop()}</div>
   </header>`;
 }
 
@@ -117,7 +154,7 @@ function review(){
   if (!cur || !list.some(m => m.id === cur)) cur = (ms[0] || todo()[0] || list[0]).id;
   const m = list.find(x => x.id === cur), r = reviews[m.id], seq = ms.some(x => x.id === m.id) ? ms : list, i = seq.findIndex(x => x.id === m.id);
   document.title = m.name + ' · Models';
-  document.documentElement.dataset.motif = motifFor(m);
+  applyLook(m);
   const [theta, phi] = m.orbit || [-30, 72];
   const fp = m.focal || [];
   const dots = fp.map(f => `<button type="button" class="fp ${esc(f.verdict)}" data-fp="${+f.n}" style="left:${+f.img[0]}%;top:${+f.img[1]}%" aria-label="${+f.n}: ${esc(f.label)}">${+f.n}</button>`).join('');
@@ -363,6 +400,7 @@ document.addEventListener('click', e => {
   const t = e.target.closest('button, a[data-open]'); if (!t) return;
   if (t.hasAttribute('data-said')){ t.classList.toggle('open'); return; }
   if (t.dataset.flip){ e.preventDefault(); flipped.has(t.dataset.flip) ? flipped.delete(t.dataset.flip) : flipped.add(t.dataset.flip); render(); }
+  else if (t.dataset.browse){ browse = t.dataset.browse; try { localStorage.setItem('aw-browse', browse); } catch (er) {} render(); }
   else if (t.dataset.show){ gridShow = t.dataset.show; flipped.clear(); render(); }
   else if (t.dataset.open){ e.preventDefault(); cur = t.dataset.open; view = 'review'; render(true); scrollTo({top:0}); }
   else if (t.dataset.filter){ filter = t.dataset.filter; if (view === 'review' && filter !== 'all' && !shown().some(m => m.id === cur)) cur = shown()[0]?.id || cur; render(true); }
@@ -374,6 +412,8 @@ document.addEventListener('click', e => {
   else if (t.id === 'chat') openChat();
   else if (t.id === 'chatclose') closeChat();
   else if (t.id === 'gear'){ const g = document.getElementById('gearpop'); g.hidden = !g.hidden; t.setAttribute('aria-expanded', String(!g.hidden)); }
+  else if (t.dataset.mode && t.closest('#gearpop')){ store('aw-mode', t.dataset.mode); const u = new URL(location.href); if (u.searchParams.has('mode')){ u.searchParams.delete('mode'); history.replaceState(history.state, '', u); } applyLook(view === 'review' ? list.find(x => x.id === cur) : null); document.getElementById('gearpop').innerHTML = gearPop(); }
+  else if (t.dataset.gstyle){ store('aw-game-style', t.dataset.gstyle); applyLook(null); document.getElementById('gearpop').innerHTML = gearPop(); }
   else if (t.dataset.motif){ try { localStorage.setItem('aw-motif', t.dataset.motif); } catch {} document.documentElement.dataset.motif = t.dataset.motif; document.querySelectorAll('[data-motif]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.motif === t.dataset.motif))); }
   else if (t.id === 'cart') openCart();
   else if (t.id === 'cartclose') document.getElementById('cartpop').hidden = true;
