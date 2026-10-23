@@ -620,6 +620,26 @@
    "save_to": "tools/meshy-heroes/meshy/A3-paint-suit/paint-clay/",
    "text_style_prompt": "same uniform as handmade plasticine, flat bright clay colours with faint thumbprints",
    "for": "Texture Studio (cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A)"
+  },
+  {
+   "id": "charm-floppy-disk-tex",
+   "kind": "retexture",
+   "input_task_id": "01a16a97-0511-7577-8309-9e59be80de0c",
+   "image_style": "tools/meshy-heroes/refs/charm-floppy-disk/pick.png",
+   "text_style_prompt": "glossy blue enamel floppy disk charm, bright yellow paper label, polished silver metal shutter, gold enamel outlines",
+   "credits": 10,
+   "save_to": "tools/meshy-heroes/meshy/charm-floppy-disk/tex/",
+   "for": "Backpack thread 22:00Z: textured rerun on the same geometry"
+  },
+  {
+   "id": "charm-rocket-tex",
+   "kind": "retexture",
+   "input_task_id": "01a16a97-8ee6-76c9-be0d-dfdd45cb24f5",
+   "image_style": "tools/meshy-heroes/refs/charm-rocket/pick.png",
+   "text_style_prompt": "toy rocket charm, glossy red and cream enamel, cream body with red nose cone and red fins, gold outlines",
+   "credits": 10,
+   "save_to": "tools/meshy-heroes/meshy/charm-rocket/tex/",
+   "for": "Backpack thread 22:00Z: textured rerun on the same geometry"
   }
  ],
  "total_credits": 620,
