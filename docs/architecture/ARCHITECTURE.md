@@ -61,7 +61,7 @@ in [INVENTORY.md](INVENTORY.md).
   - `holodeck`: a WebSocket relay.
   - `ai-compose`: calls the Vercel AI Gateway.
 - `dist/vercel.json` rewrites `/r2/*` to the R2 public bucket URL, so GLBs load same-origin **[verified]**.
-- Production builds from `main` (Vercel Git integration, root `prototypes/ranch-atelier/dist`). Ranch work merges into `main`; the old `claude/live-snapshot-2026-10-22` branch is an archive (merged 2026-10-23).
+- Production deploys from a commit on `main` (Vercel `create_deployment` with a `gitSource` of `main`; the project is not Git-linked), root `prototypes/ranch-atelier/dist`. Ranch work merges into `main`; the old `claude/live-snapshot-2026-10-22` branch is an archive (merged 2026-10-23).
 
 ### 2.5 Model store (Cloudflare R2 + Postgres)
 - **R2 exists [verified]**. The Vercel project `story-forge` has `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`,

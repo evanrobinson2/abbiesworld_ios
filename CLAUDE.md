@@ -15,8 +15,9 @@ documents; what is built lives in the status documents. Keep these three apart.
 
 ## Ground rules
 - All work stays in this repo (evanrobinson2/abbiesworld_ios). No other repos and no local-only copies.
-- `main` is the source for everything, including the live Ranch Atelier site: Vercel project `abbies-ranch-atelier`
-  builds production from `main` (`prototypes/ranch-atelier/dist`). Branch from `main` and open PRs against `main`.
+- `main` is the source for everything, including the live Ranch Atelier site. Branch from `main` and open PRs against
+  `main`. Vercel project `abbies-ranch-atelier` is not Git-linked: deploy it with `create_deployment`, a `gitSource` of
+  `main` at the merged sha, and root `prototypes/ranch-atelier/dist`. Production only ever ships a commit on `main`.
   The old `claude/live-snapshot-2026-10-22` branch is an archive, merged into `main` on 2026-10-23; don't use it.
 - Evan uses Ranch Atelier as a home-screen app on his iPhone. Every Ranch deploy he can see adds an entry, with a
   picture and your thread id, to `prototypes/ranch-atelier/dist/whats-new.json`; it becomes the app's
