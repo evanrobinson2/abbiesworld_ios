@@ -1,0 +1,498 @@
+{
+ "study": "AW-STUDY-0013 - The Coffee Shop",
+ "what": "Manifest of every item in Evan's pick (the dance-party room), its floors and its outer walls, plus the back bar he asked for. Locked reference.",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Midjourney job 5ab4584f-1660-420e-8017-7235af03da0c, image 0)",
+ "evan": "2026-10-23T07:05Z: 'list every item in the picture to get a manifest. list the floor and type, including the outer perimeter. design the back bar...' Café by day, party by night: yes. The map hex in nano view is the whimsical bubbly tile (studies/cafe/img/tile-party_0.jpg).",
+ "tiers": "hero = read from across the room, modelled first; support = gives the room its shape; dressing = small things, last",
+ "day_night": "Day: dance floor, neon, disco sparkle asleep; window bright; the bar is busy. Dusk: the party signal wakes the floor, the neon and the music.",
+ "floors": [
+  {
+   "id": "dance_floor",
+   "name": "Light-up checker dance floor",
+   "kind": "floor",
+   "where": "centre",
+   "material": "dance_floor_leds (shader-lit LED dots, pink-peach and violet squares, about 8 x 7 tiles of 0.6 m)",
+   "tier": "hero",
+   "notes": "Pulses on the beat; asleep by day"
+  },
+  {
+   "id": "dance_floor_rim",
+   "name": "Dance floor rim",
+   "kind": "floor trim",
+   "where": "around the dance floor",
+   "material": "wood_trim (warm honey wood, slightly raised)",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "plank_floor",
+   "name": "Wood plank floor",
+   "kind": "floor",
+   "where": "everywhere else at floor level",
+   "material": "wood_floor (warm honey-brown planks)",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "bar_deck",
+   "name": "Raised bar deck with a step",
+   "kind": "floor",
+   "where": "right, under the bar and stools",
+   "material": "wood_floor_dark (darker planks, rounded step edge)",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "booth_stage",
+   "name": "Round booth stage",
+   "kind": "floor",
+   "where": "left, under the cup",
+   "material": "paint_pink + neon_pink rim",
+   "tier": "hero",
+   "notes": ""
+  },
+  {
+   "id": "star_rug",
+   "name": "Round star rug",
+   "kind": "rug",
+   "where": "front left",
+   "material": "fabric_magenta with a yellow star",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "confetti_carpet",
+   "name": "Confetti carpet",
+   "kind": "rug",
+   "where": "between the stage and the back doors",
+   "material": "fabric_pink (scattered confetti pattern)",
+   "tier": "dressing",
+   "notes": ""
+  }
+ ],
+ "perimeter": [
+  {
+   "id": "wall_left",
+   "name": "Left wall",
+   "kind": "wall",
+   "where": "left",
+   "material": "paint_purple upper, wood_panel_pink vertical boards lower",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "wall_back",
+   "name": "Back wall",
+   "kind": "wall",
+   "where": "back",
+   "material": "paint_purple with the sticker collage",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "wall_right",
+   "name": "Right wall",
+   "kind": "wall",
+   "where": "right",
+   "material": "paint_purple upper, wood_panel_pink lower",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "ceiling",
+   "name": "Tray ceiling",
+   "kind": "ceiling",
+   "where": "overhead",
+   "material": "paint_magenta, stepped soffits, cove strips neon_teal and neon_pink",
+   "tier": "support",
+   "notes": "Lifts away for the cutaway camera"
+  },
+  {
+   "id": "ceiling_vent",
+   "name": "Big round vent",
+   "kind": "ceiling fixture",
+   "where": "ceiling, front",
+   "material": "paint_tangerine ring with dark louvres",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "downlights",
+   "name": "Recessed downlights",
+   "kind": "ceiling fixture",
+   "where": "ceiling",
+   "material": "emissive_warm",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "soffit_teal",
+   "name": "Curved teal soffit",
+   "kind": "ceiling",
+   "where": "top right, over the bar",
+   "material": "paint_teal",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "arch_main",
+   "name": "Main arched doorway with marquee bulbs",
+   "kind": "door",
+   "where": "back centre",
+   "material": "paint_tangerine frame, bulb_warm lights, door_dark",
+   "tier": "hero",
+   "notes": "Where customers arrive"
+  },
+  {
+   "id": "arch_niches",
+   "name": "Two small arched niches with portholes",
+   "kind": "wall feature",
+   "where": "either side of the main arch",
+   "material": "paint_tangerine, glass_porthole",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "door_pink",
+   "name": "Pink round door with a heart porthole",
+   "kind": "door",
+   "where": "back right",
+   "material": "paint_pink inside an orange arch",
+   "tier": "support",
+   "notes": "Staff door to the back"
+  },
+  {
+   "id": "window_right",
+   "name": "Window to the outside",
+   "kind": "window",
+   "where": "right wall",
+   "material": "wood_frame, glass_window (palms and sky outside)",
+   "tier": "support",
+   "notes": "Shows time of day: drives day and night"
+  },
+  {
+   "id": "window_left",
+   "name": "Shuttered window",
+   "kind": "window",
+   "where": "far left",
+   "material": "wood_frame",
+   "tier": "dressing",
+   "notes": ""
+  }
+ ],
+ "items": [
+  {
+   "id": "cup_dj_booth",
+   "name": "Giant cup DJ booth",
+   "kind": "furniture",
+   "where": "left, on the stage",
+   "material": "ceramic_pink cup, neon_white window rim, decks_dark",
+   "tier": "hero",
+   "notes": "Handle on the left; window faces the floor"
+  },
+  {
+   "id": "cup_topper",
+   "name": "Sundae sculpture on the cup",
+   "kind": "sculpture",
+   "where": "on top of the cup",
+   "material": "cream_pink, cone_wafer, swirl_toppings",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "abstract_shapes",
+   "name": "Orange and yellow pop shapes behind the cup",
+   "kind": "sculpture",
+   "where": "back left wall",
+   "material": "paint_tangerine, paint_sun",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "dj_decks",
+   "name": "DJ decks",
+   "kind": "prop",
+   "where": "inside the cup window",
+   "material": "decks_dark, neon_cyan strip",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "jukebox",
+   "name": "Little glowing jukebox",
+   "kind": "prop",
+   "where": "at the foot of the stage",
+   "material": "paint_pink, emissive_glitter",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "boombox",
+   "name": "Boom box",
+   "kind": "prop",
+   "where": "stage edge",
+   "material": "paint_pink",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "speakers",
+   "name": "Stacked speakers",
+   "kind": "prop",
+   "where": "both sides of the main arch",
+   "material": "speaker_dark, cone_dark",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "disco_ball_big",
+   "name": "Large disco ball",
+   "kind": "light",
+   "where": "ceiling, right",
+   "material": "mirror_facets",
+   "tier": "hero",
+   "notes": "Throws sparkle spots on the walls"
+  },
+  {
+   "id": "disco_ball_small",
+   "name": "Small disco ball",
+   "kind": "light",
+   "where": "ceiling, centre",
+   "material": "mirror_facets",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "stars_arch",
+   "name": "Three glowing stars over the arch",
+   "kind": "neon",
+   "where": "back wall",
+   "material": "neon_white_warm",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "stars_cyan",
+   "name": "Big cyan neon star cluster",
+   "kind": "neon",
+   "where": "right wall",
+   "material": "neon_cyan",
+   "tier": "hero",
+   "notes": "Echoes the stars on the sign: the score"
+  },
+  {
+   "id": "stars_pink",
+   "name": "Pink glowing stars",
+   "kind": "neon",
+   "where": "right wall, high",
+   "material": "neon_pink",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "star_decals",
+   "name": "Small star decals",
+   "kind": "decal",
+   "where": "walls",
+   "material": "paint_sun",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "sticker_collage",
+   "name": "Sticker and poster collage",
+   "kind": "decal",
+   "where": "back wall",
+   "material": "decal_sheet",
+   "tier": "dressing",
+   "notes": "Our own art, no characters from other games"
+  },
+  {
+   "id": "wall_art",
+   "name": "Framed picture",
+   "kind": "decor",
+   "where": "left wall",
+   "material": "frame_wood, canvas",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "bar_counter",
+   "name": "Curved milkshake bar",
+   "kind": "furniture",
+   "where": "right",
+   "material": "paint_teal front, mint_top, brass_rail",
+   "tier": "hero",
+   "notes": ""
+  },
+  {
+   "id": "bar_stools",
+   "name": "Teal bar stools (5)",
+   "kind": "furniture",
+   "where": "along the bar",
+   "material": "seat_teal, post_plum",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "giant_sundaes",
+   "name": "Giant sundae glasses (2)",
+   "kind": "prop",
+   "where": "on the bar",
+   "material": "glass_pink, cream_pink, cherry_red",
+   "tier": "hero",
+   "notes": "Read from across the room as 'milkshakes here'"
+  },
+  {
+   "id": "bar_bits",
+   "name": "Fruit bowl, cups and straws",
+   "kind": "prop",
+   "where": "on the bar",
+   "material": "mixed",
+   "tier": "dressing",
+   "notes": ""
+  },
+  {
+   "id": "beanbag_orange_big",
+   "name": "Big orange beanbag",
+   "kind": "furniture",
+   "where": "front left",
+   "material": "fabric_tangerine",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "beanbag_lime_big",
+   "name": "Big lime beanbag",
+   "kind": "furniture",
+   "where": "front right",
+   "material": "fabric_lime",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "beanbag_lime",
+   "name": "Lime beanbag",
+   "kind": "furniture",
+   "where": "centre back",
+   "material": "fabric_lime",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "beanbag_orange",
+   "name": "Small orange beanbag",
+   "kind": "furniture",
+   "where": "centre back",
+   "material": "fabric_tangerine",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "beanbags_pink",
+   "name": "Pink beanbag cluster (3)",
+   "kind": "furniture",
+   "where": "back right by the pink door",
+   "material": "fabric_magenta",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "plush_toys",
+   "name": "Plush toys on the floor",
+   "kind": "prop",
+   "where": "by the stage",
+   "material": "fabric_white",
+   "tier": "dressing",
+   "notes": ""
+  }
+ ],
+ "back_bar": [
+  {
+   "id": "back_counter",
+   "name": "Coffee house back counter",
+   "kind": "furniture",
+   "where": "behind the bar (not in the picture)",
+   "material": "wood_counter, mint_top",
+   "tier": "hero",
+   "notes": "Designed in round 2, locked to the pick"
+  },
+  {
+   "id": "smoothie_machine",
+   "name": "Giant smoothie machine",
+   "kind": "appliance",
+   "where": "back counter",
+   "material": "glass_jar, paint_pink, button_big",
+   "tier": "hero",
+   "notes": ""
+  },
+  {
+   "id": "espresso_machine",
+   "name": "Espresso maker",
+   "kind": "appliance",
+   "where": "back counter",
+   "material": "chrome, paint_pink",
+   "tier": "hero",
+   "notes": ""
+  },
+  {
+   "id": "grinder",
+   "name": "Coffee grinder",
+   "kind": "appliance",
+   "where": "back counter",
+   "material": "chrome, glass_beans",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "urn",
+   "name": "Coffee urn",
+   "kind": "appliance",
+   "where": "back counter",
+   "material": "chrome",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "menu_board",
+   "name": "Picture menu board",
+   "kind": "sign",
+   "where": "above the back counter",
+   "material": "board_chalk with pictures, no words",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "cup_shelves",
+   "name": "Shelves of cups and syrup jars",
+   "kind": "shelf",
+   "where": "back wall",
+   "material": "wood_shelf, ceramic_teal, glass_jar",
+   "tier": "support",
+   "notes": "An empty jar means running low"
+  },
+  {
+   "id": "pastry_case",
+   "name": "Pastry case",
+   "kind": "furniture",
+   "where": "back counter",
+   "material": "glass_case",
+   "tier": "support",
+   "notes": ""
+  },
+  {
+   "id": "back_stars",
+   "name": "Neon stars over the back bar",
+   "kind": "neon",
+   "where": "back bar wall",
+   "material": "neon_pink, neon_cyan",
+   "tier": "support",
+   "notes": ""
+  }
+ ],
+ "map_hex": {
+  "reference": "studies/cafe/img/tile-party_0.jpg",
+  "shape": "true hex, Ranch hex size",
+  "nano_view": "the whimsical bubbly cafe: curvy pink body, giant cup on the roof, rooftop checker floor, pool, and faceted mini icons on the turf"
+ }
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Café manifest</title>
+<link rel="stylesheet" href="/app-style.css?v=1">
+<style>
+/* AW-STUDY-0013: every item in Evan's pick, read from room-manifest.json (copy of docs/oracle/cafe/room-manifest.json). */
+body{margin:0;background:var(--app-canvas,#f4edcf);color:var(--app-ink);font:15px/1.45 system-ui,-apple-system,sans-serif;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.id{font-size:12px;letter-spacing:.1em;color:var(--app-muted)}h1{margin:2px 0 0;font-size:26px}h2{margin:0 0 8px;font-size:19px}
+.pair{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+figure{margin:0;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:16px;overflow:hidden}
+figure img{display:block;width:100%;height:100%;object-fit:cover}
+figcaption{padding:7px 12px;font-size:13px;color:var(--app-muted)}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--app-paper,#fffdf4);border-radius:14px;overflow:hidden}
+td{padding:7px 10px;border-bottom:1px solid var(--app-border);vertical-align:top}
+td:first-child{font-weight:600;width:30%}td small{display:block;color:var(--app-muted);font-weight:400}
+.t{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.hero{background:#e6007e}.support{background:#7a3cff}.dressing{background:#8a8a8a}
+@media (max-width:760px){.pair{grid-template-columns:1fr}td{padding:6px}td:nth-child(3){display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header><div class="id">AW-STUDY-0013</div><h1>Café manifest</h1></header>
+ <div class="pair">
+  <figure><img src="img/interior-party_0.jpg" alt="The locked reference: the dance-party room"><figcaption>Locked reference</figcaption></figure>
+  <figure><img src="img/tile-party_0.jpg" alt="The map hex in nano view: the bubbly café"><figcaption>On the map (made a true hex)</figcaption></figure>
+ </div>
+ <div id="out"></div>
+</div>
+<script>
+const G=[['floors','Floors'],['perimeter','Outer walls, ceiling, doors and windows'],['items','Everything in the room'],['back_bar','The back bar (designed next)']];
+const esc=s=>String(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+fetch('room-manifest.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{
+ document.getElementById('out').innerHTML=G.map(([k,t])=>'<section><h2>'+t+' ('+d[k].length+')</h2><table>'+d[k].map(i=>
+  '<tr><td>'+esc(i.name)+'<small>'+esc(i.where)+'</small></td><td><span class="t '+i.tier+'">'+i.tier+'</span></td><td>'+esc(i.material)+(i.notes?'<small>'+esc(i.notes)+'</small>':'')+'</td></tr>').join('')+'</table></section>').join('');
+});
+</script>
+</body>
+</html>
