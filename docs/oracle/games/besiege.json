@@ -1,0 +1,70 @@
+{
+  "appid": 346010,
+  "name": "Besiege",
+  "store_url": "https://store.steampowered.com/app/346010/",
+  "genres": [
+    "Building",
+    "Physics",
+    "Sandbox"
+  ],
+  "short_description": "Build medieval siege machines from blocks and hinges, then send them to wreck castles and armies.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Building",
+    "Physics",
+    "Sandbox"
+  ],
+  "summary": "Build medieval siege machines from blocks and hinges, then send them to wreck castles and armies.",
+  "identity": {
+    "core_loop": "Bolt parts together, bind keys, test, watch it fall apart, rebuild better.",
+    "mechanics": null,
+    "ui_and_game_feel": "Joyful trial and error; physics is honest, failure is funny.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The machine is the readout: it wobbles, snaps and tips over in the world. Very little screen interface beyond the parts bar.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Clean stylised low-poly fields and castles.",
+    "palette": null,
+    "audio_mood": "Light medieval tunes, creaks and crashes.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Let kids build, then test it in the world right away; the physics is the teacher. Evan's own reference."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 1.0,
+      "structure": 0.33,
+      "social": 0.44,
+      "systems": 0.89,
+      "chance": 0.44,
+      "session": 0.56
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

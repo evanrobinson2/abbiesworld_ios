@@ -1,0 +1,70 @@
+{
+  "appid": 1211020,
+  "name": "Wobbly Life",
+  "store_url": "https://store.steampowered.com/app/1211020/",
+  "genres": [
+    "Sandbox",
+    "Open world",
+    "Co-op"
+  ],
+  "short_description": "A wobbly physics open world full of silly jobs, vehicles and secrets, playable with friends.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Sandbox",
+    "Open world",
+    "Co-op"
+  ],
+  "summary": "A wobbly physics open world full of silly jobs, vehicles and secrets, playable with friends.",
+  "identity": {
+    "core_loop": "Do odd jobs, earn money, buy houses and clothes, mess about with friends.",
+    "mechanics": null,
+    "ui_and_game_feel": "Floppy and funny; kids love it.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Job markers float over places; a small money counter.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright toy town with jelly people.",
+    "palette": null,
+    "audio_mood": "Cheerful.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Wobbly physics characters make any task funny for kids; a toy town full of jobs is a great play pattern."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.33,
+      "expression": 0.78,
+      "structure": 0.22,
+      "social": 0.56,
+      "systems": 0.33,
+      "chance": 0.44,
+      "session": 0.11
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

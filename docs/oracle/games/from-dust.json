@@ -1,0 +1,68 @@
+{
+  "appid": 33460,
+  "name": "From Dust",
+  "store_url": "https://store.steampowered.com/app/33460/",
+  "genres": [
+    "God game",
+    "Puzzle"
+  ],
+  "short_description": "Guide a tribe across islands by reshaping the land, water and lava with a godly hand.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "God game",
+    "Puzzle"
+  ],
+  "summary": "Guide a tribe across islands by reshaping the land, water and lava with a godly hand.",
+  "identity": {
+    "core_loop": "Pick up sand, water or lava, reshape, protect villages, reach the totems.",
+    "mechanics": null,
+    "ui_and_game_feel": "Elemental, mesmerising.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The land is the information: rivers and lava flow live.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Natural painterly islands.",
+    "palette": null,
+    "audio_mood": "Tribal chants.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Moving sand and water with a hand is pure toy play; living terrain is magic for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.33,
+      "social": 0.44,
+      "systems": 0.56,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

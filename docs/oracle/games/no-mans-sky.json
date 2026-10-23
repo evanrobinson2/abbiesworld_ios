@@ -1,0 +1,70 @@
+{
+  "appid": 275850,
+  "name": "No Man's Sky",
+  "store_url": "https://store.steampowered.com/app/275850/",
+  "genres": [
+    "Exploration",
+    "Survival",
+    "Space"
+  ],
+  "short_description": "Explore endless procedurally generated planets, build bases and fly between stars.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Exploration",
+    "Survival",
+    "Space"
+  ],
+  "summary": "Explore endless procedurally generated planets, build bases and fly between stars.",
+  "identity": {
+    "core_loop": "Land, scan, gather, build, fly on.",
+    "mechanics": null,
+    "ui_and_game_feel": "Wonder and colour.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.4,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Scanner pings and markers on things; many menus.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Bright sci-fi paperback covers.",
+    "palette": null,
+    "audio_mood": "Ambient electronic.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Procedural worlds can feel magical; the scanner names creatures you find."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.44
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

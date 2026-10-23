@@ -1,0 +1,69 @@
+{
+  "appid": 322330,
+  "name": "Don't Starve Together",
+  "store_url": "https://store.steampowered.com/app/322330/",
+  "genres": [
+    "Survival",
+    "Co-op"
+  ],
+  "short_description": "Survive a strange, gothic wilderness with friends: gather, craft, eat, stay sane.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Co-op"
+  ],
+  "summary": "Survive a strange, gothic wilderness with friends: gather, craft, eat, stay sane.",
+  "identity": {
+    "core_loop": "Gather by day, light a fire by night, craft, prepare for winter.",
+    "mechanics": null,
+    "ui_and_game_feel": "Moody, funny, demanding.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.4,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Darkness kills: the night is the gauge. Sanity changes how the world looks (meta). Three small dial gauges.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Hand-drawn Tim Burton-ish cut paper.",
+    "palette": null,
+    "audio_mood": "Jaunty eerie tunes, chattering voices.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "The world going strange as a feeling (meta) rather than a number; but keep night gentle for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.78,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.44
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

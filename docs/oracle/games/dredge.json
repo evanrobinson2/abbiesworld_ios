@@ -1,0 +1,71 @@
+{
+  "appid": 1562430,
+  "name": "DREDGE",
+  "store_url": "https://store.steampowered.com/app/1562430/",
+  "genres": [
+    "Fishing",
+    "Adventure",
+    "Horror"
+  ],
+  "short_description": "A fishing boat captain sells catches around islands that grow stranger after dark.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Fishing",
+    "Adventure",
+    "Horror"
+  ],
+  "summary": "A fishing boat captain sells catches around islands that grow stranger after dark.",
+  "identity": {
+    "core_loop": "Sail out, fish with timing mini games, pack the hold, sell, upgrade, get home before night.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cosy by day, uneasy at night.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "meta": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Panic shows as an eye and visual distortion (meta); the hold is a packing grid overlay; night fog is the warning.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Stylised painterly coast.",
+    "palette": null,
+    "audio_mood": "Melancholy sea-shanty mood.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A packing-grid inventory is fun on its own; night as the danger signal. Our version stays gentle."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.44,
+      "expression": 0.44,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

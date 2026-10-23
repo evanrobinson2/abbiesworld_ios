@@ -1,0 +1,67 @@
+{
+  "appid": 1082430,
+  "name": "Before Your Eyes",
+  "store_url": "https://store.steampowered.com/app/1082430/",
+  "genres": [
+    "Narrative",
+    "Webcam"
+  ],
+  "short_description": "A story you control by blinking, through your webcam.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Narrative",
+    "Webcam"
+  ],
+  "summary": "A story you control by blinking, through your webcam.",
+  "identity": {
+    "core_loop": "Watch, blink to move on, feel time slipping.",
+    "mechanics": null,
+    "ui_and_game_feel": "Moving and intimate.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.0,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Blinking is the controller; no HUD.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Painted 3D memories.",
+    "palette": null,
+    "audio_mood": "Gentle score.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A body signal (blinking) as the controller; new input is a powerful idea."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.11,
+      "chance": 0.22,
+      "session": 0.0
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

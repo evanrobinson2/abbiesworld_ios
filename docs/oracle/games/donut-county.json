@@ -1,0 +1,69 @@
+{
+  "appid": 702670,
+  "name": "Donut County",
+  "store_url": "https://store.steampowered.com/app/702670/",
+  "genres": [
+    "Puzzle",
+    "Physics",
+    "Story"
+  ],
+  "short_description": "Play a growing hole in the ground that swallows a town, one funny story scene at a time.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Physics",
+    "Story"
+  ],
+  "summary": "Play a growing hole in the ground that swallows a town, one funny story scene at a time.",
+  "identity": {
+    "core_loop": "Move the hole, swallow small things, grow, swallow bigger things.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly, short, delightful.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "none": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "No HUD to speak of: the hole's size is the gauge.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Flat pastel low-poly.",
+    "palette": null,
+    "audio_mood": "Chill tunes.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "One verb, made toy-like, carries a whole game. The world is the progress bar."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.22,
+      "expression": 0.33,
+      "structure": 0.33,
+      "social": 0.33,
+      "systems": 0.22,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

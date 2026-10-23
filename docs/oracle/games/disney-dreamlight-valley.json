@@ -1,0 +1,70 @@
+{
+  "appid": 1401590,
+  "name": "Disney Dreamlight Valley",
+  "store_url": "https://store.steampowered.com/app/1401590/",
+  "genres": [
+    "Life sim",
+    "Cosy",
+    "Adventure"
+  ],
+  "short_description": "Restore a village with Disney and Pixar friends: garden, fish, cook, decorate, befriend.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Life sim",
+    "Cosy",
+    "Adventure"
+  ],
+  "summary": "Restore a village with Disney and Pixar friends: garden, fish, cook, decorate, befriend.",
+  "identity": {
+    "core_loop": "Do chores for friends, garden, cook, earn, unlock biomes, decorate.",
+    "mechanics": null,
+    "ui_and_game_feel": "Comfy, soft, endless small tasks.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.4,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Friendship hearts and quest marks over characters (spatial); a busy quest overlay.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright Disney 3D.",
+    "palette": null,
+    "audio_mood": "Gentle themes.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Characters you know make chores feel like visits. The social layer belongs on the characters, like the hearts."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.44,
+      "systems": 0.33,
+      "chance": 0.22,
+      "session": 0.44
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

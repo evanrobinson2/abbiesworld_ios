@@ -1,0 +1,69 @@
+{
+  "appid": 2273550,
+  "name": "Postmouse",
+  "store_url": "https://store.steampowered.com/app/2273550/",
+  "genres": [
+    "Cosy",
+    "Delivery"
+  ],
+  "short_description": "A little mouse delivers the post around a cosy world.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Cosy",
+    "Delivery"
+  ],
+  "summary": "A little mouse delivers the post around a cosy world.",
+  "identity": {
+    "core_loop": "Collect letters, deliver to friends, explore.",
+    "mechanics": null,
+    "ui_and_game_feel": "Sweet.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Letters and friends in the world; light HUD.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Soft cute 3D.",
+    "palette": null,
+    "audio_mood": "Gentle.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A small animal doing a job for friends is a perfect kid fantasy (like Space Mail)."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.22,
+      "expression": 0.44,
+      "structure": 0.22,
+      "social": 0.44,
+      "systems": 0.44,
+      "chance": 0.22,
+      "session": 0.22
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

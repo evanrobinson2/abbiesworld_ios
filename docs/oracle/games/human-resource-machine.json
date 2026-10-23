@@ -1,0 +1,67 @@
+{
+  "appid": 375820,
+  "name": "Human Resource Machine",
+  "store_url": "https://store.steampowered.com/app/375820/",
+  "genres": [
+    "Puzzle",
+    "Programming"
+  ],
+  "short_description": "Program a little office worker to move boxes; programming puzzles in disguise.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Programming"
+  ],
+  "summary": "Program a little office worker to move boxes; programming puzzles in disguise.",
+  "identity": {
+    "core_loop": "Arrange instructions, run, watch the worker, optimise.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clever and funny.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The program list is overlay; the worker shows it running.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Cartoon office.",
+    "palette": null,
+    "audio_mood": "Quirky.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Seeing a little character run your program teaches coding; good for older kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.56,
+      "systems": 0.89,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

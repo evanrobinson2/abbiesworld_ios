@@ -1,0 +1,68 @@
+{
+  "appid": 322500,
+  "name": "SUPERHOT",
+  "store_url": "https://store.steampowered.com/app/322500/",
+  "genres": [
+    "Action",
+    "Puzzle"
+  ],
+  "short_description": "Time moves only when you move.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Puzzle"
+  ],
+  "summary": "Time moves only when you move.",
+  "identity": {
+    "core_loop": "Move, time moves, dodge bullets, clear the room.",
+    "mechanics": null,
+    "ui_and_game_feel": "Stylish, clever.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.0,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "No HUD; red enemies on white rooms.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Minimal white and red.",
+    "palette": null,
+    "audio_mood": "Silence.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Time that moves only when you move gives kids time to think."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.33,
+      "systems": 0.22,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

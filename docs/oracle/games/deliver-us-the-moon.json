@@ -1,0 +1,69 @@
+{
+  "appid": 428660,
+  "name": "Deliver Us The Moon",
+  "store_url": "https://store.steampowered.com/app/428660/",
+  "genres": [
+    "Adventure",
+    "Sci-fi",
+    "Puzzle"
+  ],
+  "short_description": "An astronaut travels to the Moon to restore Earth's power.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Sci-fi",
+    "Puzzle"
+  ],
+  "summary": "An astronaut travels to the Moon to restore Earth's power.",
+  "identity": {
+    "core_loop": "Explore, solve, fly, read logs.",
+    "mechanics": null,
+    "ui_and_game_feel": "Atmospheric.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Wrist display and holograms (diegetic).",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic sci-fi.",
+    "palette": null,
+    "audio_mood": "Moody.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A moon mission with holograms as diegetic UI; good for the Moonbase dialect."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.44,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.22,
+      "chance": 0.22,
+      "session": 0.22
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "appid": 688420,
+  "name": "Bad North: Jotunn Edition",
+  "store_url": "https://store.steampowered.com/app/688420/",
+  "genres": [
+    "Strategy",
+    "Roguelite",
+    "Tactics"
+  ],
+  "short_description": "Defend tiny island kingdoms from Viking longships with a handful of squads.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Roguelite",
+    "Tactics"
+  ],
+  "summary": "Defend tiny island kingdoms from Viking longships with a handful of squads.",
+  "identity": {
+    "core_loop": "See boats coming, move squads to the shore, hold, retreat, upgrade, sail to the next island.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm, tense, tidy; a whole battle on a toy island.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Boats are visible on the sea before they land; squads are banners on the island; almost no numbers. Islands go red with blood, sparingly.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Minimal pastel islands, tiny soldiers, soft fog.",
+    "palette": null,
+    "audio_mood": "Sparse strings and waves.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "A small floating island diorama with almost no HUD is exactly our tile look; threats arrive where you can see them."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.44,
+      "structure": 0.56,
+      "social": 0.33,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.56
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
