@@ -43,16 +43,18 @@
     "art_direction": "Clean top-down.",
     "rendering": {
       "schema": "oracle.rendering.v1",
-      "style": "mixed",
+      "style": "flat_low_poly",
       "family": "graphic_minimal",
       "light": "flat",
       "outlines": false,
       "outline": "none",
       "surface": "flat_colour",
-      "post": [],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "post": [
+        "bloom"
+      ],
+      "signature": "Top-down modular ship whose added modules visibly grow the hull.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Synth.",

@@ -50,9 +50,10 @@
       "outline": "none",
       "surface": "pixel",
       "post": [],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "signature": "A painted top-down hull with a cutaway room grid laid over it; the floor plan is the interface.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.65,
+      "lesson": "Show the inside of a ship as a floor plan of rooms and people; it explains the ship faster than any HUD."
     },
     "palette": null,
     "audio_mood": "Iconic synth score that swells in battle.",

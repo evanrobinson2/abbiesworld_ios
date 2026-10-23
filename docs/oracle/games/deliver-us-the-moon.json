@@ -49,11 +49,12 @@
       "outline": "none",
       "surface": "pbr",
       "post": [
-        "colour grade"
+        "colour grade",
+        "fog"
       ],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "signature": "Grounded near-future NASA hardware lit by harsh sun and hard shadows.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Moody.",

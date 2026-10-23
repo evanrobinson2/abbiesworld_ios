@@ -48,11 +48,12 @@
       "outline": "none",
       "surface": "pbr",
       "post": [
-        "bloom"
+        "bloom",
+        "colour grade"
       ],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "signature": "The Tempest: a home ship you walk through between missions, with a bridge window as the hero view.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Sci-fi.",

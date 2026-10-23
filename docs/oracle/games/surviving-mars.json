@@ -41,16 +41,18 @@
     "art_direction": "Clean retro-future.",
     "rendering": {
       "schema": "oracle.rendering.v1",
-      "style": "mixed",
+      "style": "flat_low_poly",
       "family": "graphic_minimal",
-      "light": "flat",
+      "light": "soft_wrap",
       "outlines": false,
       "outline": "none",
       "surface": "flat_colour",
-      "post": [],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "post": [
+        "bloom"
+      ],
+      "signature": "Clean retro-future domes and rockets in a 1960s World Fair palette.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.5
     },
     "palette": null,
     "audio_mood": "Retro radio.",

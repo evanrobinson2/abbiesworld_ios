@@ -48,13 +48,14 @@
       "light": "soft_wrap",
       "outlines": false,
       "outline": "none",
-      "surface": "gradient",
+      "surface": "hand_painted",
       "post": [
         "depth of field"
       ],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "signature": "Bulky minimal part shapes with hand-painted fills and no high-frequency grit, so stacks of parts read as toys.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Kids read a ship as the sum of chunky parts; keep each part a clean shape with one painted job."
     },
     "palette": null,
     "audio_mood": "Calm space music.",

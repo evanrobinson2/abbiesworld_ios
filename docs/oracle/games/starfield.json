@@ -42,15 +42,19 @@
     "rendering": {
       "schema": "oracle.rendering.v1",
       "style": "stylised_pbr",
-      "family": "stylised_pbr",
+      "family": "realistic",
       "light": "pbr",
       "outlines": false,
       "outline": "none",
       "surface": "pbr",
-      "post": [],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.15
+      "post": [
+        "colour grade",
+        "bloom"
+      ],
+      "signature": "NASA-punk: worn white composite panels, stencilled warnings, exposed truss and boxy cockpits read as believable hardware.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Ship parts are believable when every panel says what it is for (stencils, hazard stripes, access hatches)."
     },
     "palette": null,
     "audio_mood": "Orchestral.",

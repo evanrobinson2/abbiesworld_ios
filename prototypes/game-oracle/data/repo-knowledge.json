@@ -4583,9 +4583,9 @@
      "outline": "none",
      "surface": "flat_colour",
      "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "signature": "The ship is a flat top-down map of rooms; its look is the floor plan.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.5
     },
     "palette": null,
     "audio_mood": "Sparse; the emergency alarm is the signature.",
@@ -7788,10 +7788,12 @@
      "outlines": false,
      "outline": "none",
      "surface": "pbr",
-     "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.15
+     "post": [
+      "bloom"
+     ],
+     "signature": "Comedic space junk: real-looking hardware made silly by its arrangement.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.4
     },
     "palette": null,
     "audio_mood": "Light.",
@@ -10936,11 +10938,12 @@
      "outline": "none",
      "surface": "pbr",
      "post": [
-      "colour grade"
+      "colour grade",
+      "fog"
      ],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "signature": "Grounded near-future NASA hardware lit by harsh sun and hard shadows.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Moody.",
@@ -13405,9 +13408,9 @@
      "post": [
       "bloom"
      ],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "signature": "Glossy white mech and machines with blue emissive trims under strong bloom.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Ambient.",
@@ -13493,9 +13496,9 @@
      "post": [
       "ambient occlusion"
      ],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "signature": "Block-built ships with sloped blocks and painted panels on a voxel grid.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Ambient.",
@@ -15086,9 +15089,10 @@
      "outline": "none",
      "surface": "pixel",
      "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "signature": "A painted top-down hull with a cutaway room grid laid over it; the floor plan is the interface.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.65,
+     "lesson": "Show the inside of a ship as a floor plan of rooms and people; it explains the ship faster than any HUD."
     },
     "palette": null,
     "audio_mood": "Iconic synth score that swells in battle.",
@@ -17978,10 +17982,13 @@
      "outlines": false,
      "outline": "none",
      "surface": "pbr",
-     "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.15
+     "post": [
+      "bloom",
+      "colour grade"
+     ],
+     "signature": "A ring-ship whose sectors are a city builder; retro-future warm interiors against cold space.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Atmospheric.",
@@ -18315,13 +18322,14 @@
      "light": "soft_wrap",
      "outlines": false,
      "outline": "none",
-     "surface": "gradient",
+     "surface": "hand_painted",
      "post": [
       "depth of field"
      ],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "signature": "Bulky minimal part shapes with hand-painted fills and no high-frequency grit, so stacks of parts read as toys.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.6,
+     "lesson": "Kids read a ship as the sum of chunky parts; keep each part a clean shape with one painted job."
     },
     "palette": null,
     "audio_mood": "Calm space music.",
@@ -20023,11 +20031,12 @@
      "outline": "none",
      "surface": "pbr",
      "post": [
-      "bloom"
+      "bloom",
+      "colour grade"
      ],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "signature": "The Tempest: a home ship you walk through between missions, with a bridge window as the hero view.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Sci-fi.",
@@ -26540,10 +26549,12 @@
      "outlines": false,
      "outline": "none",
      "surface": "pbr",
-     "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.15
+     "post": [
+      "bloom"
+     ],
+     "signature": "Three factions with distinct hull silhouettes and engine-glow colours, read from a zoomable strategic camera.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Epic.",
@@ -27217,11 +27228,13 @@
      "outline": "none",
      "surface": "pbr",
      "post": [
-      "colour grade"
+      "colour grade",
+      "bloom"
      ],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "signature": "Every block is a physical cube on a grid with its own PBR material and damage state.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.55,
+     "lesson": "A grid of blocks makes building legible but looks like a box; hide the grid under shaped armour."
     },
     "palette": null,
     "audio_mood": "Ambient.",
@@ -27385,10 +27398,12 @@
      "outlines": false,
      "outline": "none",
      "surface": "flat_colour",
-     "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "post": [
+      "bloom"
+     ],
+     "signature": "Ships assembled from interchangeable cartoon parts that fall off when shot.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Electronic.",
@@ -28105,16 +28120,18 @@
     "art_direction": "Clean top-down.",
     "rendering": {
      "schema": "oracle.rendering.v1",
-     "style": "mixed",
+     "style": "flat_low_poly",
      "family": "graphic_minimal",
      "light": "flat",
      "outlines": false,
      "outline": "none",
      "surface": "flat_colour",
-     "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "post": [
+      "bloom"
+     ],
+     "signature": "Top-down modular ship whose added modules visibly grow the hull.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.45
     },
     "palette": null,
     "audio_mood": "Synth.",
@@ -28189,15 +28206,19 @@
     "rendering": {
      "schema": "oracle.rendering.v1",
      "style": "stylised_pbr",
-     "family": "stylised_pbr",
+     "family": "realistic",
      "light": "pbr",
      "outlines": false,
      "outline": "none",
      "surface": "pbr",
-     "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.15
+     "post": [
+      "colour grade",
+      "bloom"
+     ],
+     "signature": "NASA-punk: worn white composite panels, stencilled warnings, exposed truss and boxy cockpits read as believable hardware.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.6,
+     "lesson": "Ship parts are believable when every panel says what it is for (stencils, hazard stripes, access hatches)."
     },
     "palette": null,
     "audio_mood": "Orchestral.",
@@ -28954,10 +28975,14 @@
      "outlines": false,
      "outline": "none",
      "surface": "pbr",
-     "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.15
+     "post": [
+      "bloom",
+      "colour grade"
+     ],
+     "signature": "Each species ship set shares one shape language (mammalian, aquatic, molluscoid...) at strategy-map distance.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.55,
+     "lesson": "A ship family is one shape idea repeated at many sizes; it must read as a silhouette from very far away."
     },
     "palette": null,
     "audio_mood": "Epic.",
@@ -30114,16 +30139,18 @@
     "art_direction": "Clean retro-future.",
     "rendering": {
      "schema": "oracle.rendering.v1",
-     "style": "mixed",
+     "style": "flat_low_poly",
      "family": "graphic_minimal",
-     "light": "flat",
+     "light": "soft_wrap",
      "outlines": false,
      "outline": "none",
      "surface": "flat_colour",
-     "post": [],
-     "signature": null,
-     "source": "derived from the art note by rendering_notes.RULES",
-     "confidence": 0.3
+     "post": [
+      "bloom"
+     ],
+     "signature": "Clean retro-future domes and rockets in a 1960s World Fair palette.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.5
     },
     "palette": null,
     "audio_mood": "Retro radio.",
