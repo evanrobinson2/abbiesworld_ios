@@ -1,0 +1,24 @@
+{
+  "slug": "park-bench",
+  "title": "the park bench",
+  "model_url": "https://www.printables.com/model/1560190-the-park-bench",
+  "author": "gabi123",
+  "author_url": "https://www.printables.com/@gabi123_3353521",
+  "licence": "Creative Commons Zero / Public Domain (CC0 1.0)",
+  "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source_file": "the-park-bench.stl",
+  "category": "town prop",
+  "origin": "author's original creation; page marks the preview image as AI-generated",
+  "attribution_required": false,
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "date_retrieved": "2026-10-23",
+  "source_files": [
+    {
+      "file": "source.stl",
+      "sha256": "7e946deefc58a62699297f14643256e058a692795c3ec4899be6bd4dabe9c8c7",
+      "bytes": 74984884
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

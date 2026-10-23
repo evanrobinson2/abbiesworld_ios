@@ -1,0 +1,24 @@
+{
+  "slug": "chicken",
+  "title": "Chicken",
+  "model_url": "https://www.printables.com/model/496190-chicken",
+  "author": "opslasher2000 (re-upload)",
+  "author_url": "https://www.printables.com/@opslasher2000_882122",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "source_file": "_Chicken.stl",
+  "category": "creature",
+  "origin": "re-upload of 'Chicken' by Infalivia (thingiverse.com), CC BY; credit Infalivia as original author",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source.stl",
+      "sha256": "d3f618674ad2c325f6610faa495b4e03f3531924d552349492052dc0f8c3edef",
+      "bytes": 55500884
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}
