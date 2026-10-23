@@ -600,7 +600,7 @@ canvas.addEventListener('pointerup', e => {
  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera);
  if (spotByID.cafe && ray.intersectObject(spotByID.cafe.g, true)[0]) { const ev = new CustomEvent('abbietown:cafe-door', {detail: {id: 'cafe', signedIn}, cancelable: true}); if (window.dispatchEvent(ev) && document.body.classList.contains('play')) location.href = '/studies/cafe/diorama.html?from=town'; }
  const hit = ray.intersectObjects(beakers, true)[0]; if (!hit) return;
- let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) location.href = o.userData.link;
+ let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) { if (o.userData.link === CELL_GAME && window.AbbieTown?.go) window.AbbieTown.go('town:lab-door'); else location.href = o.userData.link; }
 });
 canvas.addEventListener('pointermove', e => { if (e.buttons) return; const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); canvas.style.cursor = ray.intersectObjects(beakers, true).length ? 'pointer' : ''; });
 // the real map: off, then faint, then strong
