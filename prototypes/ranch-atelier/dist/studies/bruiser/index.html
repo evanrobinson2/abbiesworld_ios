@@ -95,6 +95,10 @@ tr.lead td{background:color-mix(in srgb,var(--good) 9%,transparent)}
 .rule dd{margin:0;color:var(--muted);font-size:15px}
 section{display:grid;gap:14px}
 /* scaling version */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.trio .frame model-viewer{background:#82837d}
+@media (max-width:640px){.trio{grid-template-columns:1fr}}
+
 .lede{font-size:18px;max-width:70ch}
 .trail{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
 .shot{margin:0;display:grid;gap:6px;min-width:0}
@@ -135,7 +139,7 @@ section{display:grid;gap:14px}
   <div class="controls">
    <div class="seg" role="group" aria-label="Choose an arm" id="armPick"></div>
    <button id="toggleBoxes" aria-pressed="false">Show the six chunks</button>
-   <button id="toggle3d" aria-pressed="false" hidden>Turn it in 3D</button>
+   <button id="toggle3d" aria-pressed="false" hidden>Show the still from his camera</button>
   </div>
   <div class="metrics-line" id="pickedLine"></div>
  </section>
@@ -153,6 +157,13 @@ section{display:grid;gap:14px}
    <li><b>Check</b><span class="muted">Read it back in words (measure) and against the hero from four sides plus his picture's camera. Undo is one command.</span><code>python3 scale/edit.py measure forearm
 python3 scale/edit.py undo</code></li>
   </ol>
+  <h3>Brute #2, same scripts</h3>
+  <p class="muted">His picture, then Meshy's model, then ours at 3,000 faces. Drag to orbit, pinch or scroll to zoom.</p>
+  <div class="trio">
+   <div class="frame"><img class="ref" src="scale/brute2.jpg" alt="Brute #2 reference picture"><span class="tag">His picture</span></div>
+   <div class="frame"><model-viewer src="scale/brute2_meshy.wasm" alt="Brute #2, Meshy model" camera-controls touch-action="pan-y" interaction-prompt="none" shadow-intensity="0.6" loading="lazy"></model-viewer><span class="tag">Meshy</span></div>
+   <div class="frame"><model-viewer src="scale/brute2_ours.wasm" alt="Brute #2, scaling version, 3,000 faces" camera-controls touch-action="pan-y" interaction-prompt="none" shadow-intensity="0.6" loading="lazy"></model-viewer><span class="tag">Ours · 3,000 faces</span></div>
+  </div>
   <h3>Every step, in screenshots</h3>
   <p class="muted">Top row: Meshy. Bottom row: ours. From the left: front, three-quarter, side, back, then his picture's camera. Click any sheet for full size.</p>
   <div class="trail" id="trail"></div>
@@ -195,7 +206,7 @@ python3 scale/edit.py undo</code></li>
 
 <script>
 const PARTS = ['head','chest','armR','armL','hips','legs'];
-let DATA = null, CHUNKS = null, picked = null, show3d = false;
+let DATA = null, CHUNKS = null, picked = null, show3d = true;   // the right side opens on the live model; the still is the option
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt = (v, d = 3) => v == null ? '<span class="dash">–</span>' : Number(v).toFixed(d);
@@ -250,7 +261,7 @@ function showPicked() {
  const a = DATA.arms.find(x => x.id === picked) || DATA.arms[0];
  const f = $('#modelFrame');
  f.querySelectorAll('img.ref,model-viewer').forEach(e => e.remove());
- $('#modelTag').textContent = `Arm ${a.id} · same camera`;
+ $('#modelTag').textContent = a.glb && show3d ? `Arm ${a.id} · drag to spin` : `Arm ${a.id} · same camera`;
  const has = !!a.render;
  $('#empty').hidden = has;
  f.querySelector('.ghost').hidden = has; f.querySelector('.ghost-line').hidden = has;
@@ -258,7 +269,7 @@ function showPicked() {
  if (a.glb && show3d) {
   loadViewer().then(() => {
    const mv = document.createElement('model-viewer');
-   Object.assign(mv, {src: a.glb, alt: `Arm ${a.id} model`}); mv.setAttribute('camera-controls', ''); mv.setAttribute('shadow-intensity', '0.6');
+   Object.assign(mv, {src: a.glb, alt: `Arm ${a.id} model`}); mv.setAttribute('camera-controls', ''); mv.setAttribute('touch-action', 'pan-y'); mv.setAttribute('interaction-prompt', 'none'); mv.setAttribute('shadow-intensity', '0.6');
    f.prepend(mv);
   });
  } else if (has) {
@@ -294,12 +305,12 @@ function drawChunks() {
 
 document.addEventListener('click', e => {
  const b = e.target.closest('button'); if (!b) return;
- if (b.dataset.arm) { picked = b.dataset.arm; show3d = false; $('#toggle3d').setAttribute('aria-pressed', 'false'); showPicked(); }
+ if (b.dataset.arm) { picked = b.dataset.arm; showPicked(); }
  if (b.id === 'toggleBoxes') { const on = $('#boxes').hidden; $('#boxes').hidden = !on; b.setAttribute('aria-pressed', String(on)); }
- if (b.id === 'toggle3d') { show3d = !show3d; b.setAttribute('aria-pressed', String(show3d)); showPicked(); }
+ if (b.id === 'toggle3d') { show3d = !show3d; b.setAttribute('aria-pressed', String(!show3d)); showPicked(); }
 });
 
 Promise.all([fetch('results.json', {cache: 'no-store'}).then(r => r.json()), fetch('chunks.json').then(r => r.json())])
- .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || (d.arms.some(a => a.id === 'G' && a.status === 'done') ? 'G' : null) || leader() || d.arms[0].id; drawChunks(); render(); drawTrail(); })
+ .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || (d.arms.some(a => a.id === 'G' && a.status === 'done') ? 'G' : null) || leader() || d.arms[0].id; drawChunks(); render(); drawTrail(); loadViewer(); })
  .catch(() => { $('#state span').textContent = 'Results could not load; reload to try again'; });
 </script>

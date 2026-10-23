@@ -1,7 +1,7 @@
 {
  "study": "AW-STUDY-0021",
  "updated": "2026-10-23T06:40Z",
- "status": "Round 4: the scaling version works on brute #2 unchanged",
+ "status": "G is the best model; round 5 learns to build it ourselves",
  "camera": "One front camera matched to the reference; every render is scored from it.",
  "arms": [
   {
@@ -257,7 +257,7 @@
   {
    "id": "G",
    "name": "Scaling version",
-   "how": "Rings learned from the Meshy mesh, one stack per named part, act as a cage that drives Meshy's own vertices; Decimate takes it to about 3,000 faces. Edit it by body words (edit.py), rebuild at any polygon count.",
+   "how": "The best model so far. Meshy's own mesh, driven by rings per named part and taken to about 3,000 faces; edit it in body words, build it at any polygon count. It edits what Meshy built; learning to build it ourselves is round 5.",
    "sees": "full + Meshy hero",
    "order": "parallel",
    "status": "done",
@@ -291,6 +291,7 @@
   "Meshy (M) made the most believable 3D man of all, in 43 seconds, from his picture alone. It also showed that his picture is taken from about 24 degrees round, which every hand-built arm had quietly flattened into a square-on figure.",
   "The outline scores undersell M and G. The hand-built arms were fitted to this one camera, and their side and back are scored against Midjourney's guess at a turnaround. Against the Meshy body itself, the scaling version matches 97% to 99.7% from every side, at 900, 3,000 or 9,000 faces.",
   "Rings alone (one stack of 2 cm cuts per part) catch the body but lose the face, fingers and tank-top edges. Using the rings as a cage on Meshy's own surface keeps all of that, and edits by body words still work ('make his forearms 20% bigger').",
-  "It scales: brute #2 went through the same scripts with nothing changed (Meshy, learn, cage, decimate) and came out at 3,000 faces with a 98.8% match to its Meshy body from every side."
+  "It scales: brute #2 went through the same scripts with nothing changed (Meshy, learn, cage, decimate) and came out at 3,000 faces with a 98.8% match to its Meshy body from every side.",
+  "Evan, 09:24Z: G is the best version by a country mile, but it dresses what Meshy built rather than learning the process. Round 5 keeps G as the bar and learns to build it ourselves: an MPFB + Rigify body plus our recipe parts, named settings fitted against Meshy from every side, then brute #2 from the picture alone."
  ]
 }
