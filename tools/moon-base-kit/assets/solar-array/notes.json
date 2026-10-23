@@ -1,0 +1,77 @@
+{
+ "asset": "solar-array",
+ "name": "Solar array wing",
+ "brief": "MK-001 Solar array wing on a sun-tracking mast. A gunmetal mast on an anchored foot, a slewing head, a torque tube and two wings of four framed cells each, tilted to the low lunar sun. A junction box at the foot carries the green \"power good\" lamp (diegetic: if the base is short of power, these lamps go amber).",
+ "rounds": [
+  {
+   "n": 1,
+   "date": "2026-10-23",
+   "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  }
+ ],
+ "stats": {
+  "id": "MK-001",
+  "name": "Solar array wing",
+  "triangles": 2096,
+  "parts": 39,
+  "part_names": [
+   "FootPlate",
+   "AnchorPeg0",
+   "AnchorPeg1",
+   "AnchorPeg2",
+   "AnchorPeg3",
+   "Mast",
+   "MastCollar",
+   "SlewHead",
+   "TorqueTube",
+   "Cell_L0",
+   "CellFrame_L0",
+   "CellFrameTop_L0",
+   "Cell_L1",
+   "CellFrame_L1",
+   "CellFrameTop_L1",
+   "Cell_L2",
+   "CellFrame_L2",
+   "CellFrameTop_L2",
+   "Cell_L3",
+   "CellFrame_L3",
+   "CellFrameTop_L3",
+   "WingStrut_L",
+   "Cell_R0",
+   "CellFrame_R0",
+   "CellFrameTop_R0",
+   "Cell_R1",
+   "CellFrame_R1",
+   "CellFrameTop_R1",
+   "Cell_R2",
+   "CellFrame_R2",
+   "CellFrameTop_R2",
+   "Cell_R3",
+   "CellFrame_R3",
+   "CellFrameTop_R3",
+   "WingStrut_R",
+   "JunctionBox",
+   "JunctionHazard",
+   "PowerLamp",
+   "PowerCable"
+  ],
+  "materials": [
+   "Lamp_Green",
+   "Metal_Charcoal",
+   "Metal_Gunmetal",
+   "Metal_Hazard",
+   "Metal_HullDark",
+   "Metal_SolarCell",
+   "Metal_Steel",
+   "Rubber_Black"
+  ],
+  "mass_kg": 1852.0,
+  "moon_weight_kg": 306.3,
+  "size_m": [
+   8.92,
+   2.37,
+   3.95
+  ],
+  "maps": "1024 px base, roughness, normal"
+ }
+}

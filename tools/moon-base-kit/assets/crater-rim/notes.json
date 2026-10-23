@@ -1,0 +1,42 @@
+{
+ "asset": "crater-rim",
+ "name": "Crater rim arc piece",
+ "brief": "MK-096 Crater rim arc piece: a quarter arc of a 9 m crater's raised lip, built as a faceted height field (inner wall falls away steeply, outer flank slopes gently) with ejecta boulders on the outside. Four of these close a crater; they also make low-g FPS cover. Colours follow the regolith grammar (simulations/moon/moon-regolith.mjs).",
+ "rounds": [
+  {
+   "n": 1,
+   "date": "2026-10-23",
+   "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  }
+ ],
+ "stats": {
+  "id": "MK-096",
+  "name": "Crater rim arc piece",
+  "triangles": 1096,
+  "parts": 10,
+  "part_names": [
+   "RimSurface",
+   "EjectaRock0",
+   "EjectaRock1",
+   "EjectaRock2",
+   "EjectaRock3",
+   "EjectaRock4",
+   "EjectaRock5",
+   "EjectaRock6",
+   "EjectaRock7",
+   "EjectaRock8"
+  ],
+  "materials": [
+   "Stone_Basalt",
+   "Stone_Regolith"
+  ],
+  "mass_kg": 111268.6,
+  "moon_weight_kg": 18403.8,
+  "size_m": [
+   13.19,
+   13.22,
+   2.99
+  ],
+  "maps": "1024 px base, roughness, normal"
+ }
+}

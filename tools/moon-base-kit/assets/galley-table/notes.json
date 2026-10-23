@@ -1,0 +1,66 @@
+{
+ "asset": "galley-table",
+ "name": "Galley table with bench",
+ "brief": "MK-072 Galley table with bench. A table on a single floor-pinned pedestal, a raised lip so things don't drift off in low gravity, two cushioned benches with foot straps, two magnetic meal trays and a drink pouch.",
+ "rounds": [
+  {
+   "n": 1,
+   "date": "2026-10-23",
+   "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  }
+ ],
+ "stats": {
+  "id": "MK-072",
+  "name": "Galley table with bench",
+  "triangles": 1392,
+  "parts": 27,
+  "part_names": [
+   "Pedestal",
+   "PedestalFoot",
+   "Tabletop",
+   "LipF",
+   "LipSideL",
+   "BenchFront",
+   "CushionFront",
+   "BenchLegFront-0.6",
+   "BenchLegFront0.6",
+   "FootStrapFront",
+   "TrayFront",
+   "TrayFoodFront0",
+   "TrayFoodFront1",
+   "TrayFoodFront2",
+   "LipB",
+   "LipSideR",
+   "BenchBack",
+   "CushionBack",
+   "BenchLegBack-0.6",
+   "BenchLegBack0.6",
+   "FootStrapBack",
+   "TrayBack",
+   "TrayFoodBack0",
+   "TrayFoodBack1",
+   "TrayFoodBack2",
+   "DrinkPouch",
+   "DrinkStraw"
+  ],
+  "materials": [
+   "Cloth_Blue",
+   "Fruit_Red",
+   "Leaf_Lettuce",
+   "Metal_Foil",
+   "Metal_Gunmetal",
+   "Metal_Hazard",
+   "Metal_Steel",
+   "OrangeBand",
+   "Plastic_White"
+  ],
+  "mass_kg": 651.5,
+  "moon_weight_kg": 107.8,
+  "size_m": [
+   1.6,
+   2.0,
+   0.98
+  ],
+  "maps": "1024 px base, roughness, normal"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "asset": "jump-pad",
+ "name": "Jump pad",
+ "brief": "MK-181 Jump pad: a low-gravity launcher. A 1.6 m round pad with a hazard-chevron grate top, a ring of green \"ready\" lamps, chunky springs visible in the gap below the top plate, and four anchor feet in a dust skirt. Step on it and the springs squash, the lamps chase inward, and you sail in a slow arc.",
+ "rounds": [
+  {
+   "n": 1,
+   "date": "2026-10-23",
+   "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  }
+ ],
+ "stats": {
+  "id": "MK-181",
+  "name": "Jump pad",
+  "triangles": 3152,
+  "parts": 42,
+  "part_names": [
+   "DustSkirt",
+   "BaseRing",
+   "Spring00",
+   "Spring01",
+   "Spring02",
+   "Spring10",
+   "Spring11",
+   "Spring12",
+   "Spring20",
+   "Spring21",
+   "Spring22",
+   "Spring30",
+   "Spring31",
+   "Spring32",
+   "Spring40",
+   "Spring41",
+   "Spring42",
+   "Spring50",
+   "Spring51",
+   "Spring52",
+   "TopPlate",
+   "Chevron0",
+   "Chevron1",
+   "Chevron2",
+   "Chevron3",
+   "CentreTarget",
+   "ReadyLamp00",
+   "ReadyLamp01",
+   "ReadyLamp02",
+   "ReadyLamp03",
+   "ReadyLamp04",
+   "ReadyLamp05",
+   "ReadyLamp06",
+   "ReadyLamp07",
+   "ReadyLamp08",
+   "ReadyLamp09",
+   "ReadyLamp10",
+   "ReadyLamp11",
+   "AnchorFoot0",
+   "AnchorFoot1",
+   "AnchorFoot2",
+   "AnchorFoot3"
+  ],
+  "materials": [
+   "Lamp_Green",
+   "Metal_Grate",
+   "Metal_Gunmetal",
+   "Metal_Hazard",
+   "Metal_Steel",
+   "OrangeBand",
+   "Stone_Regolith"
+  ],
+  "mass_kg": 1072.4,
+  "moon_weight_kg": 177.4,
+  "size_m": [
+   2.4,
+   2.4,
+   0.47
+  ],
+  "maps": "512 px base, roughness, normal"
+ }
+}

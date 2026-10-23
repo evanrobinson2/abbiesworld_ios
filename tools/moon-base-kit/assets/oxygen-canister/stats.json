@@ -1,0 +1,33 @@
+{
+ "id": "MK-146",
+ "name": "Oxygen canister",
+ "triangles": 1124,
+ "parts": 9,
+ "part_names": [
+  "Body",
+  "Shoulder",
+  "Foot",
+  "GripBand",
+  "Neck",
+  "ValveHead",
+  "ValveKnob",
+  "CarryLoop",
+  "FullLamp"
+ ],
+ "materials": [
+  "Lamp_Green",
+  "Metal_Gunmetal",
+  "Metal_Hazard",
+  "Metal_OxygenBlue",
+  "Metal_Steel",
+  "Rubber_Black"
+ ],
+ "mass_kg": 13.9,
+ "moon_weight_kg": 2.3,
+ "size_m": [
+  0.2,
+  0.2,
+  0.72
+ ],
+ "maps": "512 px base, roughness, normal"
+}

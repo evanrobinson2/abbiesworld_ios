@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-moon-base-kit",
+      "date": "2026-10-23",
+      "title": "Moon base kit: 20 pieces to walk through",
+      "line": "The first 20 of 200 pieces for the Moon shooter: hatch doors with light rings, oxygen canisters, gauges, bunks, a jump pad and more. Spin each one and see it from Abbie's eye height.",
+      "image": "/whats-new/2026-10-23-moon-base-kit.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYNtqXxwWeYiUhSxEPUykrHL",
+      "threadTitle": "Moon base FPS assets",
+      "tour": false,
+      "link": "/studies/moon-base-kit/"
+    },
+    {
       "id": "2026-10-23-storybook-light",
       "date": "2026-10-23",
       "title": "Storybook light",
