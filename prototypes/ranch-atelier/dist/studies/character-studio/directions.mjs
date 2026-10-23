@@ -169,23 +169,27 @@ export function dress(T, actor, id, frame) {
  const h = actor.rig.height, U = {uFrame: frame, uBoil: {value: .0035 * h}}, k = 8.07 / h;
  const undo = [], meshes = [];
  actor.object.traverse(o => { if (o.isMesh && !o.userData.ink && !o.userData.dress) meshes.push(o); });
+ // a recipe character (characters.mjs) keeps its own colours and face; a look changes only how they're made
+ const own = o => o.material?.userData?.own ? '#' + o.material.color.getHexString() : null;
  const out = {fps: 0, stage: STAGES[id] || STAGES.studio, update() {}, undress() { for (const f of undo.reverse()) f(); }};
  const swap = (o, m) => { const old = o.material; o.material = m; undo.push(() => { o.material = old; }); };
  const add = (parent, child) => { child.userData.dress = true; parent.add(child); undo.push(() => parent.remove(child)); };
  if (id === 'clay' || id === 'village') {
   const pal = PALETTES[id];
   for (const o of meshes) {
-   const role = ROLE(o.name), base = o.material?.map && id === 'village' ? null : pal[role] || pal.body;
+   const role = ROLE(o.name), base = own(o) || (o.material?.map && id === 'village' ? null : pal[role] || pal.body);
    const m = clayMaterial(T, base || '#ffffff', U, id === 'village' ? {rough: .9, bump: .8, scale: 7 * k} : {rough: .7, bump: .5, scale: 9 * k});
    if (o.material?.map && o.isSkinnedMesh) { m.map = o.material.map; m.color.set(id === 'clay' ? '#ffe2d0' : '#f2dcc4'); }
    swap(o, m);
   }
+  if (!actor.body.face) {
   const e = eyes(T, actor, id === 'village' ? {size: .03, gap: .03, up: .5, brow: true, pupil: .42} : {size: .027, gap: .032, up: .45, pupil: .55});
   e.userData.dress = true; undo.push(() => e.parent?.remove(e));
+  }
   out.fps = 12;
  } else if (id === 'comic') {
   for (const o of meshes) {
-   const m = celMaterial(T, PALETTES.comic[ROLE(o.name)] || PALETTES.comic.body);
+   const m = celMaterial(T, own(o) || PALETTES.comic[ROLE(o.name)] || PALETTES.comic.body);
    if (o.material?.map && o.isSkinnedMesh) { m.map = o.material.map; m.color.set('#ffffff'); }
    swap(o, m);
    const hull = inkShell(T, o, .006 * h); undo.push(() => o.remove(hull));

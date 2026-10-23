@@ -16,6 +16,7 @@ site() {
 }
 site "$S/index.html" > "$OUT/index.html"
 site "$S/crowd.html" > "$OUT/crowd.html"
+site "$S/cast.html" > "$OUT/cast.html"
 cp "$S/bodies.mjs" "$OUT/bodies.mjs"
 for f in "$S"/*.mjs "$S"/puppet.html; do [ "$(basename "$f")" = bodies.mjs ] || cp "$f" "$OUT/"; done
 cp "$S"/models/*.glb "$S"/models/*.json "$OUT/models/"

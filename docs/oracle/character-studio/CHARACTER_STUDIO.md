@@ -67,6 +67,39 @@ free with clear licences and cover the same ground.
 6. **Contact sheets**: every move at three or four moments (`tools/character-studio/thumbs.mjs`
    renders the drawer's tiles the same way). Nothing goes to Evan unseen.
 
+## The next characters (round 1)
+
+Evan asked where the claymation and Midjourney "next characters" were. Four turnaround sheets were made in Midjourney
+(Relax mode, Evan's account), one pick each, upscaled:
+
+| Character | Pick | Grid job | Upscale job |
+| --- | --- | --- | --- |
+| Clay adventurer | grid 1 | 4a8e95be | bad2df2e |
+| Plasticine inventor | grid 3 | 6d74c041 | 28c993df |
+| Stick man | grid 2 | a621d6e0 | 3101d933 |
+| 80s action hero | grid 3 | 43251376 | 8f8ff88c |
+
+Full prompts, ids and hashes: `tools/midjourney/outputs/character-studio/*/provenance.json`.
+
+**How they're built.** `characters.mjs` is the recipe: engineered parts, not image-to-3D. Each character is the wooden
+mannequin's 30 named parts (pelvis, abdomen, chest, upper_arm_L...) with its own proportions (a rest-joint table per
+character, same A-pose) and its own shapes and clothes; hats, packs, a sword and a cape hang on the part they belong
+to. `rigMannequin` parents them to the same 20 bones, so all 50 moves and the mocap play on them with no extra work.
+Materials are named by what they are (skin, jacket, suit, boots...), and the art directions keep a recipe character's
+own colours and face, changing only how they're made (clay dents, cel shading and ink).
+
+**The Cast room** (`cast.html`) shows each one beside its picture, with a live viewer that plays the same moves.
+
+**Self-score, round 1** (side by side with the picture, front, side and back):
+- Stick man: closest. Ink lines, paper head, sword and cape all read. The sketchy line quality isn't there yet.
+- Plasticine inventor: silhouette, knit, corduroys, long neck and grin read. The ears and hands are smaller than in the picture.
+- Clay adventurer: colours, hat, googly eyes and boots read. The puffer jacket and hood aren't as puffy and bunched as the picture.
+- 80s action hero: colours and costume layout read. It has none of the drawn muscle and no ink piping yet, and the
+  face is too plain.
+
+Lesson for the next rep: build the silhouette first from the side view (the puffer's hood and the hero's V read from the
+side), then the costume. A round pec reads as the wrong thing at a distance; use one flat chest plate.
+
 ## What's next
 
 - Inertialized transitions between moves (Bollo), so a change of move keeps momentum.
