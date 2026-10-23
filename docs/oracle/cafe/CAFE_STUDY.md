@@ -319,6 +319,10 @@ Evan: "dance party is a memory game.. follow my lead". Simon-says on the light-u
 
 Evan: "there's a computer terminal behind the counter with an old CRT and the original MS-DOS typing tutor game."
 
+- **Where it comes from** (Evan, 07:28Z): "it was my aunt Grace's, it was 1986, I was six years old playing in her
+  basement." That sets the period and the feel: a 1986 home computer in a family basement, kept with care. The quiet
+  nod is her name: the manual's cover reads "Grace's" in pen, and the machine boots to `C:\GRACE>`. Nothing more is
+  made of it than that.
 - **The prop:** a beige 1980s-style PC with a chunky keyboard and a curved green-or-amber CRT, on the back counter
   by the till. It's a world object: the crew use it for orders, and customers glance at it.
 - **The game:** a typing tutor in that old-DOS look (blocky 80-column text, a blinking cursor, a beep on a mistake,
