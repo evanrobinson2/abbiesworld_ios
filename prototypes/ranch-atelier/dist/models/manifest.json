@@ -2961,6 +2961,99 @@
    ]
   },
   {
+   "id": "ranch-fern-charming",
+   "name": "Fern",
+   "style": "charming",
+   "base": "fern",
+   "group": "Ranch tile · charming",
+   "subject": "woodland ground cover",
+   "ask": "a whimsical storybook version of a woodland fern clump with arching feathery fronds, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.688,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-fern-charming/ref.jpg",
+    "glb": "/models/ranch-fern-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.688,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Hero IoU 0.688 (768 px, 48 samples), above the normal fern's 0.644.",
+    "Reads as a toy fern: fat pillowy leaflets, a few bouncy fronds with one curling over, a ruffled dark rosette at the foot, same materials so seasons still recolour it.",
+    "921 triangles, same footprint and origin as the normal model."
+   ],
+   "off": [
+    "The hero's leaflets are smooth sculpted ovals; at 1k triangles mine are 6-sided puffed facets, so up close they look low-poly rather than soft.",
+    "The hero's right frond leans clearly to the right; leaning it more cost 0.04-0.05 IoU (it widens the box), so it rises nearly straight and the lean comes only from the 3 deg global shear.",
+    "The fronds are turned towards the front like the hero's fan, so from the side the clump is thinner than from the front.",
+    "The top-left curl ends with a few leaflets poking upward where the hero's hang tidily; the rosette leaves are a little spikier than the hero's ruffle."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "First build: 8 fronds of separate pillow leaflets, blades in each frond's own plane; leaflets edge-on to the camera and too small."
+    ],
+    [
+     "Round 2.",
+     "Blades turned to face the front (FACE 0.6)."
+    ],
+    [
+     "Round 3.",
+     "Leaflets about twice as long and plumper (length 0.24, width 0.55), FACE 0.75."
+    ],
+    [
+     "Round 4.",
+     "Frond arcs fitted to the hero's crest and tip positions."
+    ],
+    [
+     "Round 5.",
+     "Stronger leaflet taper, wider flat crown rosette, deeper greens."
+    ],
+    [
+     "Round 6.",
+     "Blunt pillow leaflets (rim rotated 30 deg) that hang a little."
+    ],
+    [
+     "Round 7.",
+     "Hill-climb over frond angles and lengths (70 trials)."
+    ],
+    [
+     "Round 8.",
+     "Leaflets angle 40 deg to the tip, FACE 0.6 for a rounder side, shorter crown leaves; final 768 px / 48 samples; to_game.py fern-charming."
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "woodland ground cover"
+    ],
+    [
+     "Triangles",
+     "921"
+    ],
+    [
+     "Size",
+     "0.85 × 0.87 × 0.74 m"
+    ],
+    [
+     "Little extras",
+     "Pillow-puffed leaflets that hang a little like soft toy felt, a ruffled dark rosette at the foot, and a slight rightward lean of the whole clump."
+    ]
+   ]
+  },
+  {
    "id": "ranch-goat",
    "name": "Goat",
    "style": "normal",
