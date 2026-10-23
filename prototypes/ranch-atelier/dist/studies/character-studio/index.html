@@ -59,6 +59,10 @@ body{background:var(--bg);color:var(--ink);font:400 14px/1.35 var(--font);overfl
 .tag{font:500 9px var(--font);color:var(--soft);margin-top:2px}
 #load{position:fixed;left:50%;top:45%;transform:translate(-50%,-50%);font:500 14px var(--font);color:var(--soft);z-index:2}
 @media (max-width:640px){.title small{display:none}.rail{top:calc(env(safe-area-inset-top,0px) + 56px);gap:20px}.tile{width:46px;height:46px}.pose{width:70px;height:98px}.pose .pic{width:58px;height:58px}}
+/* on a dark stage (painted, 80s action) the words over the stage turn light */
+body[data-dark] .title,body[data-dark] .tile span,body[data-dark] .now b{color:#fff}
+body[data-dark] .title small,body[data-dark] .now .src{color:#d9d2e6}
+@media (max-height:760px) and (min-width:641px){.rail{gap:18px}.tile{width:48px;height:48px}}
 @media (prefers-reduced-motion:reduce){.block,.tile{transition:none}}
 </style>
 <script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
@@ -199,6 +203,7 @@ function applyDir() {
  if (!actor) return;
  dressed = dir === 'studio' ? null : dress(T, actor, dir, drawing);
  const st = dressed?.stage || {sky: ['#efe4d2'], floor: '#e3cba8', sun: '#fff1dc', sunI: 2.6, hemi: ['#dfe9ff', '#b9906a', 1.1], shadow: true};
+ document.body.toggleAttribute('data-dark', !!st.dark);
  renderer.setClearColor(st.sky[0]); film.U.fogHigh.value.set(st.sky[0]); film.U.fogLow.value.set(st.sky[1] || st.sky[0]);
  floor.material.color.set(st.floor); sun.color.set(st.sun); sun.intensity = st.sunI;
  hemi.color.set(st.hemi[0]); hemi.groundColor.set(st.hemi[1]); hemi.intensity = st.hemi[2]; sun.castShadow = st.shadow;
