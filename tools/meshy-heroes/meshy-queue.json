@@ -5,99 +5,111 @@
  "jobs": [
   {
    "id": "A1-clay",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A1-clay/pick.png",
    "should_texture": false,
    "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A1-clay/"
+   "save_to": "tools/meshy-heroes/meshy/A1-clay/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A1-paint",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A1-paint/pick.png",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A1-paint/"
+   "save_to": "tools/meshy-heroes/meshy/A1-paint/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A2-clay",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A2-clay/pick.png",
    "should_texture": false,
    "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A2-clay/"
+   "save_to": "tools/meshy-heroes/meshy/A2-clay/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A2-paint",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A2-paint/pick.png",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A2-paint/"
+   "save_to": "tools/meshy-heroes/meshy/A2-paint/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A3-clay",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A3-clay/pick.png",
    "should_texture": false,
    "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A3-clay/"
+   "save_to": "tools/meshy-heroes/meshy/A3-clay/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A3-paint",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A3-paint/pick.png",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A3-paint/"
+   "save_to": "tools/meshy-heroes/meshy/A3-paint/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A4-clay",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A4-clay/pick.png",
    "should_texture": false,
    "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A4-clay/"
+   "save_to": "tools/meshy-heroes/meshy/A4-clay/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A4-paint",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A4-paint/pick.png",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A4-paint/"
+   "save_to": "tools/meshy-heroes/meshy/A4-paint/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A5-clay",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A5-clay/pick.png",
    "should_texture": false,
    "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A5-clay/"
+   "save_to": "tools/meshy-heroes/meshy/A5-clay/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A5-paint",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A5-paint/pick.png",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A5-paint/"
+   "save_to": "tools/meshy-heroes/meshy/A5-paint/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A6-clay",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A6-clay/pick.png",
    "should_texture": false,
    "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A6-clay/"
+   "save_to": "tools/meshy-heroes/meshy/A6-clay/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "A6-paint",
-   "kind": "image-to-3d",
+   "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A6-paint/pick.png",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A6-paint/"
+   "save_to": "tools/meshy-heroes/meshy/A6-paint/",
+   "note": "split pick.png into its front, side and back views with tools/midjourney/split_views.py; if fewer than 3 clean views, use image-to-3d on the front view"
   },
   {
    "id": "brute1-retexture",

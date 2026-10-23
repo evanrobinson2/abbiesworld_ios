@@ -22,13 +22,15 @@
    "group": "astronaut",
    "accent": "pink",
    "mj_prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A1-clay.jpg",
+   "pick": "mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_0.png"
   },
   {
    "id": "A1-paint",
@@ -37,13 +39,15 @@
    "group": "astronaut",
    "accent": "pink",
    "mj_prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A1-paint.jpg",
+   "pick": "mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_0.png"
   },
   {
    "id": "A2-clay",
@@ -52,13 +56,15 @@
    "group": "astronaut",
    "accent": "purple",
    "mj_prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A2-clay.jpg",
+   "pick": "mj_39668ac1-0d0b-4579-8b13-5e49355c0ad7_2.png"
   },
   {
    "id": "A2-paint",
@@ -67,13 +73,15 @@
    "group": "astronaut",
    "accent": "purple",
    "mj_prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A2-paint.jpg",
+   "pick": "mj_f2dbafac-d66f-4f6d-89b7-1d7cfe660a97_0.png"
   },
   {
    "id": "A3-clay",
@@ -82,13 +90,15 @@
    "group": "astronaut",
    "accent": "orange",
    "mj_prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A3-clay.jpg",
+   "pick": "mj_ada34784-746f-4cca-b56e-adf98115e19b_1.png"
   },
   {
    "id": "A3-paint",
@@ -97,13 +107,15 @@
    "group": "astronaut",
    "accent": "orange",
    "mj_prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A3-paint.jpg",
+   "pick": "mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_2.png"
   },
   {
    "id": "A4-clay",
@@ -112,13 +124,15 @@
    "group": "astronaut",
    "accent": "cyan",
    "mj_prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A4-clay.jpg",
+   "pick": "mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_1.png"
   },
   {
    "id": "A4-paint",
@@ -127,13 +141,15 @@
    "group": "astronaut",
    "accent": "cyan",
    "mj_prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A4-paint.jpg",
+   "pick": "mj_1dc6c194-6017-40ce-8030-496292057520_2.png"
   },
   {
    "id": "A5-clay",
@@ -142,13 +158,15 @@
    "group": "astronaut",
    "accent": "yellow",
    "mj_prompt": "stocky adult man astronaut engineer, tool belt, yellow suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A5-clay.jpg",
+   "pick": "mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_1.png"
   },
   {
    "id": "A5-paint",
@@ -157,13 +175,15 @@
    "group": "astronaut",
    "accent": "yellow",
    "mj_prompt": "stocky adult man astronaut engineer, tool belt, yellow suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A5-paint.jpg",
+   "pick": "mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_2.png"
   },
   {
    "id": "A6-clay",
@@ -172,13 +192,15 @@
    "group": "astronaut",
    "accent": "green",
    "mj_prompt": "friendly small grey alien crewmate, big eyes, green suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": false,
     "credits": 20
-   }
+   },
+   "ref": "img/astro/A6-clay.jpg",
+   "pick": "mj_20378079-a75e-4663-881f-aa6953b26112_2.png"
   },
   {
    "id": "A6-paint",
@@ -187,13 +209,15 @@
    "group": "astronaut",
    "accent": "green",
    "mj_prompt": "friendly small grey alien crewmate, big eyes, green suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
-   "mj": "queued",
+   "mj": "picked",
    "meshy": "queued",
    "meshy_settings": {
     "mode": "image-to-3d",
     "texture": true,
     "credits": 30
-   }
+   },
+   "ref": "img/astro/A6-paint.jpg",
+   "pick": "mj_21814c87-7380-45cd-84b9-4c284a6c62f2_2.png"
   }
  ],
  "bodies": [

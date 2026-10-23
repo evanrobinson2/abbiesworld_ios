@@ -109,5 +109,12 @@ roster = dict(
     story=[entry(i, n, g, f"{d}, {CREATURE if n in ('Star Child', 'Gem bug') else DRESSED}", accent=a)
            for i, n, g, d, a in STORY],
 )
+# Keep the progress already recorded (picks, run states) when the roster is rebuilt.
+import os
+if os.path.exists("roster.json"):
+    old = {e["id"]: e for k in ("astronauts", "bodies", "story") for e in json.load(open("roster.json")).get(k, [])}
+    for k in ("astronauts", "bodies", "story"):
+        for e in roster[k]:
+            e.update({f: old[e["id"]][f] for f in ("ref", "pick", "mj", "meshy") if f in old.get(e["id"], {})})
 json.dump(roster, open("roster.json", "w"), indent=1)
 print(len(roster["astronauts"]), len(roster["bodies"]), len(roster["story"]), roster["budget"])

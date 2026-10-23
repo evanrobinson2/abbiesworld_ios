@@ -13,6 +13,8 @@ inline = "--inline" in sys.argv
 out = sys.argv[sys.argv.index("--inline") + 1] if inline else os.path.join(SITE, "index.html")
 
 def img(name):
+    if name.startswith("img/"):
+        name = name[4:]
     if not inline:
         return f"img/{name}"
     return "data:image/jpeg;base64," + base64.b64encode(open(os.path.join(SITE, "img", name), "rb").read()).decode()
@@ -25,7 +27,7 @@ STATE = {"queued": "Waiting", "running": "Running", "done": "Done", "picked": "P
 SEX = {"woman": "Woman", "man": "Man", "either": "Either"}
 
 def card(e, sub):
-    pic = e.get("ref")
+    pic = e.get("ref") and img(e["ref"])
     face = f'<img src="{pic}" alt="">' if pic else f'<div class="blank"><span>{html.escape(e["id"])}</span></div>'
     return f'''<article class="hero" data-group="{e["group"]}">
  {face}
@@ -37,7 +39,7 @@ def card(e, sub):
 def pair(i):
     a, b = [e for e in R["astronauts"] if e["id"].startswith(i + "-")]
     def half(e):
-        pic = e.get("ref")
+        pic = e.get("ref") and img(e["ref"])
         face = f'<img src="{pic}" alt="">' if pic else f'<div class="blank {e["id"][-4:]}"><span>{html.escape(e["look"])}</span></div>'
         return f'''<div class="half">{face}<div class="pills"><span class="pill {e["mj"]}">Picture · {STATE[e["mj"]]}</span><span class="pill {e["meshy"]}">Meshy · {STATE[e["meshy"]]}</span></div>
   <details><summary>{html.escape(e["look"])} prompt</summary><code>{html.escape(e["mj_prompt"])}</code></details></div>'''
@@ -109,7 +111,7 @@ a{{color:inherit}}
   <span class="eyebrow">AW-STUDY-0043 · Roster for your read-ahead</span>
   <h1>Meshy hero characters</h1>
   <p class="lede">First up: the Moon astronauts for the FPS, each in two looks side by side, plasticine claymation and painterly. Behind them, the 40 smooth PG base bodies and the story heroes. None has been run in Meshy yet. Each one gets a Midjourney turnaround first, then one Meshy run, then our Blender cleanup, gear and a rig.</p>
-  <div class="status"><span>Run in Meshy <b>{done} of {total}</b></span><span>Credits spent <b>0</b></span><span>Next: the 6 astronauts in both looks</span></div>
+  <div class="status"><span>Run in Meshy <b>{done} of {total}</b></span><span>Credits spent <b>0</b></span><span>Pictures picked <b>{sum(e["mj"] == "picked" for e in ALL)}</b></span><span>Next: Meshy on your "go"</span></div>
  </header>
 
  <section style="display:grid;gap:12px">
