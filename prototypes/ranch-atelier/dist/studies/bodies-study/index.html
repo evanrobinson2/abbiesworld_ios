@@ -23,7 +23,7 @@ header{display:grid;gap:6px}
 .bar button[aria-pressed=true]{background:var(--app-accent);border-color:var(--app-accent);color:var(--app-paper)}
 .bar .sep{width:1px;height:26px;background:var(--app-border);margin:0 4px}
 .svgbox{overflow-x:auto}.svgbox svg{display:block;width:100%;height:auto;min-width:640px}
-.lineup svg{min-width:860px}#toy svg{min-width:0}
+.lineup svg{min-width:860px}#toy svg,#hand svg{min-width:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .rule{padding:14px 16px;display:grid;gap:4px}.rule b{font-size:15px}
 .rule .n{font-family:var(--app-heading);font-size:26px;color:var(--app-accent);line-height:1}
@@ -114,6 +114,19 @@ ol.check{margin:0;padding:14px 18px 14px 40px;display:grid;gap:8px}ol.check li b
  </section>
 
  <section>
+  <h2>Head and hand</h2>
+  <p class="muted">The two places modelers go wrong first. Placement marks only: the head shows where features go, never a face.</p>
+  <div class="card svgbox" id="head" style="margin-top:12px"></div>
+  <div class="two" style="margin-top:12px">
+   <div class="card svgbox" id="hand"></div>
+   <div>
+    <h3>Head (Loomis)</h3><ul class="tight"><li>The face is three equal parts: hairline to brow, brow to nose, nose to chin (Loomis).</li><li>The eyes sit halfway down the head, not two thirds up; the head is five eyes wide.</li><li>The space between the eyes is one eye; the nose is about as wide as that space.</li><li>The mouth is a third of the way from the nose to the chin; its corners line up under the pupils.</li><li>The ear runs from the brow to the nose, behind the middle of the head in profile; the jaw angle sits under its front edge.</li><li>Men: heavier brow ridge, wider square jaw, bigger nose. Women: smoother brow, narrower jaw, rounder chin, more upright forehead.</li></ul>
+    <h3 style="margin-top:14px">Hand (Bridgman, Richer)</h3><ul class="tight"><li>The palm and the middle finger are about the same length; the whole hand is about the face, chin to hairline.</li><li>Each finger bone is about 0.6 to 0.7 of the one before it (Bridgman: segments grow by definite proportions).</li><li>The knuckles form an arc, highest at the middle finger; the little finger's knuckle sits lowest.</li><li>The index tip reaches the middle of the middle finger's last segment; the little finger's tip reaches the ring finger's last joint.</li><li>The thumb's tip reaches the index finger's base knuckle when the hand is relaxed; the thumb dominates the hand (Bridgman).</li><li>On a woman the hand is narrower and the fingers taper more; the proportions along the fingers are the same.</li></ul>
+   </div>
+  </div>
+ </section>
+
+ <section>
   <h2>Our paper bodies, scored</h2>
   <p class="muted">The scorer measured the ten paper bodies the Roman kit dresses. They all come out at 8 heads, so heads look too small for the toy rule. Two misses repeat on every body: the knees sit about a quarter of a head too low (the shins are short), and the fingertips stop about a third of a head too high (the arms are short).</p>
   <div class="two" style="margin-top:12px">
@@ -165,7 +178,7 @@ document.getElementById('bar').addEventListener('click',e=>{const b=e.target.clo
  if(b.dataset.sex){state.sex=b.dataset.sex;for(const x of document.querySelectorAll('[data-sex]'))x.setAttribute('aria-pressed',x===b);draw();}
  else{const k=b.dataset.lay;state.lays.has(k)?state.lays.delete(k):state.lays.add(k);b.setAttribute('aria-pressed',state.lays.has(k));applyLays(box.querySelector('svg'));}});
 draw();
-(async()=>{for(const id of['lineup','toy']){const el=document.getElementById(id);el.innerHTML=await svgText(id);el.querySelector('svg').classList.remove('show-landmarks')}
+(async()=>{for(const id of['lineup','toy','head','hand']){const el=document.getElementById(id);el.innerHTML=await svgText(id);el.querySelector('svg')?.classList.remove('show-landmarks')}
  const d=await (await fetch('scores.json')).json();const tb=document.querySelector('#scores tbody');
  const get=(b,k)=>b.checks.find(c=>c.check===k);const cell=c=>c?`<td class="${c.ok?'ok':'bad'}">${c.off_heads!=null?(c.off_heads>0?'+':'')+c.off_heads+' head':c.got}</td>`:'<td></td>';
  for(const b of d.bodies){const other=b.misses.filter(m=>!['heads tall','knee height','fingertip height','shoulder to hip'].includes(m));
