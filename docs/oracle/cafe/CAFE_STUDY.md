@@ -38,3 +38,9 @@ chips from Evan's copy when we fix a direction.
   signs. 
 - Abbie pink is in every style; what changes is how grown-up it is.
 - PG; no children's faces (people are absent or tiny and distant).
+
+## Round 1 (2026-10-23)
+
+12 Midjourney grids, 48 options, made on Evan's PC; nothing refused. Job ids are in `provenance.json`. Two "typical 3D
+game" options (outside #2, inside #2) letter "Abbie's Cafe" on the sign despite `--no text`. Midjourney's Draft Mode
+was on in the account for the first try and was switched off; the draft batch was not used.

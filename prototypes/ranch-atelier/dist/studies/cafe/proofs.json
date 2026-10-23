@@ -1,1 +1,14 @@
-{}
+{
+ "exterior-elegant": 4,
+ "exterior-game": 4,
+ "exterior-party": 4,
+ "interior-elegant": 4,
+ "interior-game": 4,
+ "interior-party": 4,
+ "tile-elegant": 4,
+ "tile-game": 4,
+ "tile-party": 4,
+ "town-elegant": 4,
+ "town-game": 4,
+ "town-party": 4
+}
