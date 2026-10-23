@@ -16,7 +16,7 @@
 // opens the backpack in 3D, cleaved into two half shells, with what she carries in both halves and her charms hanging
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
-import {glyph, look as bagLook, earnedCharms, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=3';
+import {glyph, look as bagLook, earnedCharms, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=4';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const read = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } };
@@ -100,7 +100,7 @@ async function openPop() {
   pop.querySelector('.aw-bp-charmcam').hidden = !contents.charms.length;
   try {
     if (!view) {
-      const {backpackView} = await import('./backpack.mjs?v=3');
+      const {backpackView} = await import('./backpack.mjs?v=4');
       view = await backpackView(pop.querySelector('.aw-bp-stage'), {...contents, look: bagLook(), spin: false, onChange: l => setLook(l)});
     } else { view.setLook(bagLook()); view.setContents(contents); }
     if (!pop.classList.contains('dressing')) setTimeout(() => view.open(), 120);

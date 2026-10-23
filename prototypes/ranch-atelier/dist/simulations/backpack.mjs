@@ -163,6 +163,28 @@ export function patternCanvas(base, pattern, accent, cloth) {
 }
 function star2d(g, cx, cy, r, ri) { g.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? ri : r; g.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr); } g.closePath(); g.fill(); }
 function heart2d(g, cx, cy, s) { g.beginPath(); g.moveTo(cx, cy + s * .9); g.bezierCurveTo(cx - s * 1.4, cy - s * .1, cx - s * .6, cy - s * 1.1, cx, cy - s * .35); g.bezierCurveTo(cx + s * .6, cy - s * 1.1, cx + s * 1.4, cy - s * .1, cx, cy + s * .9); g.fill(); }
+// The cloth's relief as a normal map, made from a grain-only height canvas (the colour canvas would raise its own
+// stripes and dots). Canvas twill, pebbled leather, nubbly plush and a basket weave each get their own.
+function normalTexture(cloth) {
+ const key = 'normal|' + cloth; if (texCache.has(key)) return texCache.get(key);
+ const N = 256, h = Object.assign(document.createElement('canvas'), {width: N, height: N}), g = h.getContext('2d');
+ g.fillStyle = '#808080'; g.fillRect(0, 0, N, N);
+ const rnd = (() => { let a = 7; return () => (a = (a * 16807) % 2147483647) / 2147483647; })();
+ if (cloth === 'wicker') { for (let y = 0; y < N; y += 32) for (let x = 0; x < N; x += 32) { const v = ((x + y) / 32) % 2; for (let k = 0; k < 4; k++) { g.fillStyle = k % 2 ? '#a0a0a0' : '#d8d8d8'; v ? g.fillRect(x + 2 + k * 7, y + 2, 5, 28) : g.fillRect(x + 2, y + 2 + k * 7, 28, 5); } } }
+ else if (cloth === 'vinyl') { g.fillStyle = '#868686'; for (let i = 0; i < 80; i++) g.fillRect(rnd() * N, rnd() * N, 3, 3); }
+ else if (cloth === 'leather') { for (let i = 0; i < 1400; i++) { const x = rnd() * N, y = rnd() * N, r = 2 + rnd() * 3; g.fillStyle = `rgba(${rnd() < .5 ? 40 : 200},${rnd() < .5 ? 40 : 200},128,.35)`; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); } }
+ else if (cloth === 'plush') { for (let i = 0; i < 2600; i++) { g.fillStyle = rnd() < .5 ? 'rgba(210,210,210,.5)' : 'rgba(60,60,60,.5)'; g.fillRect(rnd() * N, rnd() * N, 3, 3); } }
+ else { for (let i = 0; i < N; i += 4) { g.fillStyle = (i / 4) % 2 ? '#b0b0b0' : '#707070'; g.fillRect(i, 0, 2, N); g.fillStyle = (i / 4) % 2 ? '#a0a0a0' : '#787878'; g.fillRect(0, i + 2, N, 2); } }
+ const src = g.getImageData(0, 0, N, N).data, out = g.createImageData(N, N), k = cloth === 'vinyl' ? 1.2 : cloth === 'leather' ? 2.4 : 3;
+ const hv = (x, y) => src[(((y + N) % N) * N + ((x + N) % N)) * 4] / 255;
+ for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+  const dx = (hv(x + 1, y) - hv(x - 1, y)) * k, dy = (hv(x, y + 1) - hv(x, y - 1)) * k, l = Math.hypot(dx, dy, 1), o = (y * N + x) * 4;
+  out.data[o] = (-dx / l * .5 + .5) * 255; out.data[o + 1] = (dy / l * .5 + .5) * 255; out.data[o + 2] = (1 / l * .5 + .5) * 255; out.data[o + 3] = 255;
+ }
+ g.putImageData(out, 0, 0);
+ const t = new T.CanvasTexture(h); t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(2.6, 2.6); t.anisotropy = 8;
+ texCache.set(key, t); return t;
+}
 function liningTexture(o) {
  const key = 'lining|' + o.id; if (texCache.has(key)) return texCache.get(key);
  const N = 128, cv = Object.assign(document.createElement('canvas'), {width: N, height: N}), g = cv.getContext('2d');
@@ -184,17 +206,21 @@ function materials(l, st) {
  const map = patternTexture(col, cloth === 'wicker' ? 'plain' : l.pattern, accent, cloth);
  const rough = {fabric: .88, canvas: .92, plush: 1, leather: .6, vinyl: .42, wicker: .85}[cloth] ?? .85;
  const M = (name, o) => Object.assign(new T.MeshStandardMaterial({flatShading: true, ...o}), {name});
+ const P = (name, o) => Object.assign(new T.MeshPhysicalMaterial({flatShading: true, ...o}), {name});
  return {
-  fabric: M(`fabric ${cloth}`, {color: '#ffffff', map, bumpMap: map, bumpScale: cloth === 'vinyl' ? .2 : 1.2, roughness: rough, metalness: 0}),
+  fabric: P(`fabric ${cloth}`, {color: '#ffffff', map, normalMap: normalTexture(cloth), normalScale: new T.Vector2(1, 1).multiplyScalar(cloth === 'vinyl' ? .35 : cloth === 'plush' ? 1.4 : 1), roughness: rough, metalness: 0,
+   sheen: cloth === 'plush' ? 1 : cloth === 'canvas' ? .5 : 0, sheenRoughness: .6, sheenColor: new T.Color(col).lerp(new T.Color('#ffffff'), .5),
+   clearcoat: cloth === 'vinyl' ? .8 : cloth === 'leather' ? .25 : 0, clearcoatRoughness: .25}),
   pocket: M('fabric pocket', {color: shade(col, -.07), roughness: rough, map: l.pattern === 'plain' ? null : map}),
-  trim: M('trim strap', {color: trim.strap, roughness: .7}),
+  trim: P('trim strap', {color: trim.strap, roughness: .68, sheen: .6, sheenRoughness: .5, sheenColor: new T.Color(trim.strap).lerp(new T.Color('#ffffff'), .5), normalMap: normalTexture('canvas'), normalScale: new T.Vector2(.6, .6)}),
   trim2: M('trim strap', {color: trim.rainbow ? '#5fb7ff' : shade(trim.strap, -.08), roughness: .7}),
-  metal: M('metal hardware', {color: trim.metal, roughness: .3, metalness: .75}),
+  metal: M('metal hardware', {color: trim.metal, roughness: .24, metalness: .9, envMapIntensity: 1.3}),
   lining: M('lining', {color: '#ffffff', map: liningTexture(lin), roughness: .95, side: T.DoubleSide, emissive: lin.c, emissiveIntensity: .12}),
+  thread: M('thread', {color: light ? shade(col, -.32) : shade(col, .42), roughness: .9}),
   dark: M('ink dark', {color: '#2a2230', roughness: .5}),
   white: M('paint white', {color: '#fbf7ee', roughness: .6}),
   pink: M('felt pink', {color: '#f6a3bf', roughness: .95}),
-  glass: M('glass porthole', {color: '#9fd8ff', roughness: .08, metalness: .1, transparent: true, opacity: .72, emissive: '#1d4d7a', emissiveIntensity: .25}),
+  glass: P('glass porthole', {color: '#9fd8ff', roughness: .05, metalness: .1, clearcoat: 1, clearcoatRoughness: .05, transparent: true, opacity: .72, emissive: '#1d4d7a', emissiveIntensity: .25}),
   leaf: M('leaf green', {color: '#4f9a45', roughness: .8}),
   gold: M('metal gold', {color: '#ffcc33', roughness: .28, metalness: .8, emissive: '#5a3c00', emissiveIntensity: .25}),
   neon1: M('vinyl neon pink', {color: '#ff4fa3', roughness: .4}), neon2: M('vinyl neon yellow', {color: '#ffe23f', roughness: .4}),
@@ -233,6 +259,8 @@ function pocketShape(id, w) {
 // About 5 cm tall in the world; every part is named.
 function gem(points, t, apex, centre = [0, 0]) {
  // points: the outline (x, y), counter-clockwise. A rim band of thickness 2t, and a fan to an apex on each side.
+ const area = points.reduce((a, [x, y], i) => { const [x2, y2] = points[(i + 1) % points.length]; return a + x * y2 - x2 * y; }, 0);
+ if (area < 0) points = points.slice().reverse(); // the facets assume a counter-clockwise outline
  const pos = [], n = points.length, [cx, cy] = centre;
  const P = (x, y, z) => pos.push(x, y, z);
  for (let i = 0; i < n; i++) {
@@ -322,6 +350,39 @@ function charmMesh(id, m) {
 }
 
 // Build one backpack. Returns the group, both halves, the open control and the charm pendulums.
+// Little real parts that make it read as sewn and zipped, not extruded: a row of stitches along a path, and zip teeth.
+// Both are InstancedMeshes (one draw call each) and named by what they are.
+function stitchRow(pts, mat, name, {step = .05, len = .026, r = .0045, closed = false} = {}) {
+ const n = pts.length, seg = [], total = (() => { let t = 0; for (let i = 0; i < n - (closed ? 0 : 1); i++) { const a = pts[i], b = pts[(i + 1) % n], d = a.distanceTo(b); seg.push(d); t += d; } return t; })();
+ const count = Math.max(2, Math.floor(total / step)), inst = new T.InstancedMesh(new T.BoxGeometry(len, r * 2, r * 2), mat, count), m4 = new T.Matrix4(), q = new T.Quaternion(), pos = new T.Vector3(), tan = new T.Vector3(), one = new T.Vector3(1, 1, 1), x = new T.Vector3(1, 0, 0);
+ let si = 0, acc = 0;
+ for (let k = 0; k < count; k++) {
+  const target = (k + .5) * total / count; while (si < seg.length - 1 && acc + seg[si] < target) { acc += seg[si]; si++; }
+  const a = pts[si], b = pts[(si + 1) % n], f = seg[si] ? (target - acc) / seg[si] : 0;
+  pos.lerpVectors(a, b, f); tan.subVectors(b, a).normalize(); q.setFromUnitVectors(x, tan);
+  inst.setMatrixAt(k, m4.compose(pos, q, one));
+ }
+ inst.name = name; inst.castShadow = false; return inst;
+}
+function zipTeeth(pts, mat, name, z, step = .017) {
+ const n = pts.length, geo = new T.BoxGeometry(.008, .0055, .011);
+ const list = []; let carry = 0;
+ for (let i = 0; i < n; i++) { const a = pts[i], b = pts[(i + 1) % n], d = a.distanceTo(b); let t = carry; while (t < d) { list.push([a.clone().lerp(b, t / d), b.clone().sub(a).normalize()]); t += step; } carry = t - d; }
+ const im = new T.InstancedMesh(geo, mat, list.length), m4 = new T.Matrix4(), q = new T.Quaternion(), one = new T.Vector3(1, 1, 1), x = new T.Vector3(1, 0, 0), side = new T.Vector3();
+ list.forEach(([p, tn], k) => { side.set(-tn.y, tn.x, 0); p.addScaledVector(side, (k % 2 ? 1 : -1) * .0042); p.z = z; im.setMatrixAt(k, m4.compose(p, q.setFromUnitVectors(x, tn), one)); });
+ im.name = name; return im;
+}
+// A flat padded strap: a rounded-rectangle section swept along a curve (the width lies across the bag).
+function ribbon(curve, w, t, segs, mat, name) {
+ const sec = [[-1, -.55], [-.55, -1], [.55, -1], [1, -.55], [1, .55], [.55, 1], [-.55, 1], [-1, .55]], pos = [], idx = [], P = curve.getSpacedPoints(segs), fr = [];
+ const up = new T.Vector3(0, 0, 1);
+ P.forEach((p, i) => { const tn = curve.getTangentAt(i / segs).normalize(), wd = new T.Vector3().crossVectors(up, tn).normalize(), th = new T.Vector3().crossVectors(tn, wd).normalize(); fr.push([p, wd, th]);
+  sec.forEach(([u, v]) => { const q = p.clone().addScaledVector(wd, u * w / 2).addScaledVector(th, v * t / 2); pos.push(q.x, q.y, q.z); }); });
+ for (let i = 0; i < segs; i++) for (let j = 0; j < 8; j++) { const a = i * 8 + j, b = i * 8 + (j + 1) % 8, c = (i + 1) * 8 + j, d = (i + 1) * 8 + (j + 1) % 8; idx.push(a, c, b, b, c, d); }
+ const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setIndex(idx);
+ const uv = []; for (let i = 0; i <= segs; i++) for (let j = 0; j < 8; j++) uv.push(j / 8 * 2, i / segs * 6); g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); g.computeVertexNormals();
+ const o = new T.Mesh(g, mat); o.name = name; o.userData.frames = fr; return o;
+}
 export function buildBackpack(l = look(), {charms = []} = {}) {
  const st = styleOf(l.style), m = materials(l, st), shape = SIL[st.id]();
  const half = DEPTH[st.id] ?? .15, bev = .045, puff = PUFF[st.id] ?? .2;
@@ -356,6 +417,15 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
  const pipe = z => { const pts = outline.map(p => new T.Vector3(p.x, p.y, z)); return new T.TubeGeometry(new T.CatmullRomCurve3(pts, true), 80, .016, 4, true); };
  front.add(Object.assign(new T.Mesh(pipe(.014), m.trim), {name: 'zip piping front'}));
  back.add(Object.assign(new T.Mesh(pipe(-.014), m.trim2), {name: 'zip piping back'}));
+ // Stitching round each shell's face, and zip teeth along the rim on the cut side.
+ const rim = outline.slice(0, -1), c0 = new T.Vector2(0, cy);
+ const inset = d => rim.map((pt, i) => { const a = rim[(i + rim.length - 1) % rim.length], b = rim[(i + 1) % rim.length], tx = b.x - a.x, ty = b.y - a.y, l = Math.hypot(tx, ty) || 1; let nx = -ty / l, ny = tx / l; if (nx * (c0.x - pt.x) + ny * (c0.y - pt.y) < 0) { nx = -nx; ny = -ny; } return new T.Vector2(pt.x + nx * d, pt.y + ny * d); });
+ const on = (pts2, sign, lift) => pts2.map(q => new T.Vector3(q.x, q.y, sign * (surfaceZ(q.x, q.y) + lift)));
+ front.add(stitchRow(on(inset(.07), 1, .0015), m.thread, 'stitching front', {closed: true, step: .052}));
+ back.add(stitchRow(on(inset(.07), -1, .0015), m.thread, 'stitching back', {closed: true, step: .052}));
+ const flat = (pts2, z) => pts2.map(q => new T.Vector3(q.x, q.y, z));
+ front.add(zipTeeth(flat(inset(.03), 0), m.metal, 'zip teeth front', -.007));
+ back.add(zipTeeth(flat(inset(.03), 0), m.metal, 'zip teeth back', .007));
  for (const s of [-1, 1]) { const p = new T.Mesh(new T.BoxGeometry(.03, .06, .012), m.metal); p.name = 'zip pull'; p.position.set(s * .1, H - .045, .03); p.rotation.x = .25; front.add(p); }
 
  // Straps, handle and buckles on the back half.
@@ -363,7 +433,9 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
  const bz = (x, y) => -surfaceZ(x, y);
  for (const s of [-1, 1]) {
   const x = s * W * .22;
-  tube([new T.Vector3(x, H * .84, bz(x, H * .84) + .02), new T.Vector3(x * 1.08, H * .62, bz(x, H * .6) - .16), new T.Vector3(x * 1.15, H * .32, bz(x, H * .3) - .12), new T.Vector3(x * 1.2, H * .12, bz(x, H * .12) + .01)], .034, m.trim, 'shoulder strap', back);
+  const sc = new T.CatmullRomCurve3([new T.Vector3(x, H * .84, bz(x, H * .84) + .02), new T.Vector3(x * 1.08, H * .62, bz(x, H * .6) - .16), new T.Vector3(x * 1.15, H * .32, bz(x, H * .3) - .12), new T.Vector3(x * 1.2, H * .12, bz(x, H * .12) + .01)]);
+  const strap = ribbon(sc, .078, .028, 28, m.trim, 'shoulder strap'); back.add(strap);
+  for (const e of [-1, 1]) back.add(stitchRow(strap.userData.frames.map(([pt, wd, th]) => pt.clone().addScaledVector(wd, e * .028).addScaledVector(th, .0155)), m.thread, 'strap stitching', {step: .042, len: .02, r: .0035}));
   const b = new T.Mesh(new T.BoxGeometry(.07, .05, .02), m.metal); b.name = 'strap buckle'; b.position.set(x * 1.12, H * .26, bz(x, H * .26) - .1); back.add(b);
  }
  if (!['bunny', 'rocket'].includes(st.id)) tube([new T.Vector3(-.12, H - .03, -.04), new T.Vector3(-.08, H + .08, -.04), new T.Vector3(.08, H + .08, -.04), new T.Vector3(.12, H - .03, -.04)], .022, m.trim, 'top handle', back);
@@ -520,7 +592,14 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.shadowMap.enabled = true;
  renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
  const scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, .05, 50);
- scene.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.5));
+ // A small studio to reflect: a soft sky, a warm key softbox and a cool rim strip, so metal, vinyl and glass read as themselves.
+ { const es = new T.Scene(), sky = new T.Mesh(new T.SphereGeometry(10, 24, 16), new T.MeshBasicMaterial({side: T.BackSide, vertexColors: true})), pa = sky.geometry.attributes.position, col = new Float32Array(pa.count * 3), c1 = new T.Color('#e9f2ff'), c2 = new T.Color('#9a8aa6');
+  for (let i = 0; i < pa.count; i++) { const c = c2.clone().lerp(c1, Math.max(0, Math.min(1, pa.getY(i) / 10 * .5 + .5))); col.set([c.r, c.g, c.b], i * 3); }
+  sky.geometry.setAttribute('color', new T.BufferAttribute(col, 3)); es.add(sky);
+  const box = (w, h, x, y, z, k, c) => { const m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({color: new T.Color(c).multiplyScalar(k), side: T.DoubleSide})); m.position.set(x, y, z); m.lookAt(0, 0, 0); es.add(m); };
+  box(5, 4, 4, 5, 5, 5, '#fff2d8'); box(1.2, 6, -6, 2, -3, 4, '#cfe6ff'); box(8, 1.2, 0, 8, 0, 2.5, '#ffffff');
+  const pm = new T.PMREMGenerator(renderer); scene.environment = pm.fromScene(es, .03).texture; scene.environmentIntensity = .6; pm.dispose(); es.traverse(o => { o.geometry?.dispose(); o.material?.dispose(); }); }
+ scene.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.0));
  const sun = new T.DirectionalLight('#fff1d6', 2.4); sun.position.set(1.6, 3, 2.4); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); sun.shadow.camera.left = sun.shadow.camera.bottom = -1.6; sun.shadow.camera.right = sun.shadow.camera.top = 1.6; scene.add(sun);
  const rim = new T.DirectionalLight('#bfe3ff', 1.1); rim.position.set(-2, 1.5, -2); scene.add(rim);
  const floor = new T.Mesh(new T.CircleGeometry(1.2, 24), new T.ShadowMaterial({opacity: .18})); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
@@ -613,7 +692,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  // backpack, or tapping it, puts that choice on.
  let deck = null;
  async function mountDeck() {
-  const {cardDeck} = await import('./backpack-cards.mjs?v=2');
+  const {cardDeck} = await import('./backpack-cards.mjs?v=3');
   if (deck || !alive) return;
   deck = cardDeck(el, {look: () => state.l,
    onDrop: (facet, value, x, y) => { const f = facet === 'style' ? 'style' : facet; const over = x == null || hitPart(x, y) != null; if (!over) return false; apply(f, value); return true; }});
