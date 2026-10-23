@@ -1,58 +1,61 @@
 {
  "asset": "patch-up-station",
  "name": "Patch-up station",
- "brief": "MK-085 Patch-up station: the base's first-aid wall. A white cabinet with a glowing green plus (lit = ready), a pull-out drawer of plasters and suit patches, a fold-down seat at kid height and a big friendly press button. PG: it fixes scrapes and suit tears, nothing scary.",
+ "brief": "MK-085 Patch-up station: the base's first-aid locker. Round 2, matched to the pick: a tall framed white locker with a glowing green plus on its face (lit = ready), a warm window showing the supplies, two pulled-out drawers of plasters and suit patches, and an amber help button. PG: it fixes scrapes and suit tears, nothing scary.",
  "rounds": [
   {
    "n": 1,
    "date": "2026-10-23",
    "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  },
+  {
+   "n": 2,
+   "date": "2026-10-23",
+   "from": "concept.jpg (the Midjourney pick)",
+   "t": "Rebuilt against the Midjourney pick: chunky off-white modules held by dark bumper frames (bkit.module), warm orange windows (bkit.window), darker ground. Round 1 kept in round1/."
   }
  ],
  "stats": {
   "id": "MK-085",
   "name": "Patch-up station",
-  "triangles": 932,
-  "parts": 19,
+  "triangles": 1324,
+  "parts": 18,
   "part_names": [
-   "Cabinet",
+   "LockerBody",
+   "LockerFrame",
    "PlusV",
    "PlusH",
-   "PlusPlate",
+   "SupplyWindowFrame",
+   "SupplyWindowPane",
    "Drawer0",
-   "DrawerPull0",
+   "DrawerFront0",
+   "Patch00",
+   "Patch01",
+   "Patch02",
    "Drawer1",
-   "DrawerPull1",
-   "DrawerOpen",
-   "Patch0",
-   "Patch1",
-   "Patch2",
-   "Patch3",
-   "SeatHinge",
-   "Seat",
-   "SeatLeg",
-   "SeatWall",
+   "DrawerFront1",
+   "Patch10",
+   "Patch11",
+   "Patch12",
    "HelpButton",
-   "HelpButtonRim"
+   "HelpFrame"
   ],
   "materials": [
    "Cloth_Blue",
-   "Cloth_Grey",
    "Lamp_Amber",
    "Lamp_Green",
-   "Metal_Charcoal",
    "Metal_Gunmetal",
    "Metal_Hull",
-   "Metal_Steel",
    "OrangeBand",
-   "Plastic_White"
+   "Plastic_White",
+   "Window_Warm"
   ],
-  "mass_kg": 560.7,
-  "moon_weight_kg": 92.7,
+  "mass_kg": 1642.4,
+  "moon_weight_kg": 271.7,
   "size_m": [
-   2.35,
-   0.79,
-   2.0
+   1.08,
+   1.22,
+   1.83
   ],
   "maps": "1024 px base, roughness, normal"
  }

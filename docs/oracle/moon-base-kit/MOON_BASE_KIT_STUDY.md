@@ -66,9 +66,32 @@ Round 2 rebuilds each recipe against Evan's pick, shown pick | round 1 | round 2
 - `bpy` must be imported before `bmesh` when running Blender as a Python module.
 - The Artifact preview refuses `.glb`; the page serves the GLBs as `.wasm`.
 
+## Round 2: rebuilt against the Midjourney picks (2026-10-23)
+
+The Mac came back and Midjourney ran all 20 prompts (`tools/moon-base-kit/mj/<id>/0-3.jpg`, job ids in
+`mj/jobs.jsonl`, contact sheet `mj/contact_sheet.jpg`). Each pick is saved as `assets/<slug>/concept.jpg` with its
+job id and grid index in `provenance.json`; round 1's recipe and renders are archived in `assets/<slug>/round1/`.
+
+The picks agreed on a look that round 1 had missed: a "cozy module" style. Every machine is a chunky off-white box
+with big chamfers held in a dark gunmetal bumper frame (corner posts, top and base rims), with warm orange windows
+set into it. Round 2 adds two kit pieces for it, `bkit.module()` and `bkit.window()` (with `yaw=` for windows round
+a curved wall), darkens the ground under the renders, and rebuilds 18 of the 20 toward their picks. The study page
+shows each card as pick, model (spin it), Abbie's eye and round 1.
+
+The crater rim and boulder set stay at round 1. Their proofs ran with the shared style line ("warm orange window
+light, hull panels"), and Midjourney put buildings into the rock. They need a rerun with a terrain-only style line.
+
+### Rules learned in round 2
+
+- One shared style line for a whole kit is wrong for terrain. Give terrain its own line with no buildings, windows or
+  panels in it, or Midjourney turns the rocks into houses.
+- Get the concept proofs before the first build, even when it means waiting for the Mac: round 1's look (thin
+  panels, few lights) was rebuilt almost entirely once the picks arrived.
+- A shared building block (`module`, `window`) is what makes 18 rebuilds fast and keeps the kit consistent.
+
 ## Next
 
-1. Midjourney proofs for the 20 when the Mac is back; round 2 against the picks.
+1. Rerun Midjourney for the crater rim and boulders with a terrain-only style line, and rebuild them.
 2. The five handed-over buildings as recipes, matched to the pack painting and MR-002.
 3. Place the kit on the Moon tile for the shooter, and give the diegetic pieces their game hooks (lamp state, gauge
    needles, charge bars, door rings, beacon chase).

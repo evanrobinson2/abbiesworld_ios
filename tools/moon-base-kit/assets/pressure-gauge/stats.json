@@ -1,46 +1,51 @@
 {
  "id": "MK-162",
  "name": "Pressure gauge wall panel",
- "triangles": 1672,
- "parts": 18,
+ "triangles": 2160,
+ "parts": 21,
  "part_names": [
-  "Plate",
-  "PlateTrim",
+  "WallBody",
+  "WallFrame",
+  "GaugeBay",
   "Bezel0",
   "DialFace0",
   "Needle0",
-  "NeedleHub0",
   "DialGlass0",
-  "LabelPlate0",
   "Bezel1",
   "DialFace1",
   "Needle1",
-  "NeedleHub1",
   "DialGlass1",
-  "LabelPlate1",
-  "CheckLamp",
-  "FeedPipe",
+  "ControlStrip",
+  "StripLamp0",
+  "StripLamp1",
+  "StripLamp2",
   "ValveWheel",
-  "WallBack"
+  "FeedPipe",
+  "PipeValve",
+  "PortholeFrame",
+  "PortholePane",
+  "HazardTrim"
  ],
  "materials": [
   "Glass_Window",
   "Lamp_Amber",
+  "Lamp_Green",
+  "Lamp_Red",
+  "Metal_Charcoal",
+  "Metal_Gunmetal",
   "Metal_Hazard",
   "Metal_Hull",
-  "Metal_HullDark",
-  "Metal_OxygenBlue",
   "Metal_Steel",
   "Paint_Dial",
   "Plastic_Dark",
-  "Plastic_White"
+  "Window_Warm"
  ],
- "mass_kg": 880.8,
- "moon_weight_kg": 145.7,
+ "mass_kg": 3431.0,
+ "moon_weight_kg": 567.5,
  "size_m": [
-  1.6,
-  0.24,
-  2.41
+  2.13,
+  0.73,
+  2.35
  ],
- "maps": "512 px base, roughness, normal"
+ "maps": "1024 px base, roughness, normal"
 }

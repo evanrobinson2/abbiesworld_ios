@@ -8,10 +8,18 @@
   "trek.zip outputs/images/abbie at the base.png",
   "Faceted Hero direction https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa"
  ],
- "concept": null,
+ "concept": "concept.jpg (Midjourney job f2878b87-2f60-4c9a-9a3b-7a4fb6985b26, image 0)",
  "midjourney": {
-  "status": "queued: Mac offline 2026-10-23 10:06Z",
-  "prompt": "a curved command console with three blue screens, chunky coloured buttons, and a little step for a child to climb up, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  "status": "ran 2026-10-23 on the Mac",
+  "job_id": "f2878b87-2f60-4c9a-9a3b-7a4fb6985b26",
+  "prompt": "a curved command console with three blue screens, chunky coloured buttons, and a little step for a child to climb up, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+  "grid": [
+   "tools/moon-base-kit/mj/MK-066/0.jpg",
+   "tools/moon-base-kit/mj/MK-066/1.jpg",
+   "tools/moon-base-kit/mj/MK-066/2.jpg",
+   "tools/moon-base-kit/mj/MK-066/3.jpg"
+  ],
+  "pick": 0
  },
  "built_with": "Blender Python (bpy 5.2.3) recipe build.py + bkit.py; Cycles bake of procedural role surfaces"
 }

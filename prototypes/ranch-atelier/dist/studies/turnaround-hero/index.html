@@ -5,7 +5,7 @@
 <meta name="description" content="One exact low-poly heroic figure, modelled with the method the Bruiser Study found: turnaround first, a depth ruler, an anatomy base, then planes.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: his figure beside the empty model slot (same camera) is the page; the turnaround row, plan and gates follow. */
+/* Layout: his figure beside our latest model (live 3D) is the page; the turnaround row, plan and gates follow. */
 :root{
  --bg:#e7e6e1; --paper:#f4f3ef; --ink:#23242a; --muted:#6b6c70; --line:#cfcdc6;
  --accent:#e0592a; --good:#2f8a5b;
@@ -62,19 +62,17 @@ blockquote{margin:0;background:var(--paper);border:1px solid var(--line);border-
   <div class="eyebrow">AW-STUDY-0023</div>
   <h1>Turnaround Hero</h1>
   <p class="muted">One exact figure: your grey, blocky, heroic man. We build him with what the Bruiser Study learned. Turnaround first, a depth ruler, an anatomy base, then big flat planes. Every round is shown beside your picture from the same camera.</p>
-  <span class="chip"><i></i><span>Round 2 of progressive contouring is in</span></span>
+  <span class="chip"><i></i><span>Round 2: right size and pose, still too soft. Next: crisp muscle planes</span></span>
  </header>
 
  <section aria-label="Your figure and the model, same camera">
   <div class="pair">
    <div class="frame"><img src="img/front.jpg" alt="Reference front: grey low-poly heroic man, bald small head, huge shoulders, fists, briefs, faceted shins"><span class="tag">Your figure · front</span></div>
-   <div class="frame slot"><img class="ghost" src="img/front.jpg" alt=""><span class="tag">Model · same camera</span>
-    <div class="empty">Waiting for your go<small>first round lands here, beside him</small></div></div>
+   <div class="frame" style="background:#8d8e8a"><model-viewer src="3d/contour-r5-lowpoly.glb" alt="Our model so far (progressive contouring, round 2), drag to spin" camera-controls camera-orbit="0deg 90deg auto" shadow-intensity="0.6" style="position:absolute;inset:0;width:100%;height:100%;--poster-color:transparent"></model-viewer><span class="tag">Our model so far · drag to spin</span></div>
   </div>
   <div class="pair">
    <div class="frame"><img src="img/back.jpg" alt="Reference back: the same figure from behind"><span class="tag">Your figure · back</span></div>
-   <div class="frame slot"><img class="ghost" src="img/back.jpg" alt=""><span class="tag">Model · same camera</span>
-    <div class="empty">Waiting for your go<small>scored from the back too</small></div></div>
+   <div class="frame" style="background:#8d8e8a"><model-viewer src="3d/contour-r5-lowpoly.glb" alt="Our model so far (progressive contouring, round 2), drag to spin" camera-controls camera-orbit="180deg 90deg auto" shadow-intensity="0.6" style="position:absolute;inset:0;width:100%;height:100%;--poster-color:transparent"></model-viewer><span class="tag">Our model so far · from behind</span></div>
   </div>
  </section>
 

@@ -1,44 +1,57 @@
 {
  "asset": "oxygen-canister",
  "name": "Oxygen canister",
- "brief": "MK-146 Oxygen canister: the pickup Abbie grabs to top up her air. A blue cylinder with a steel valve head, a rubber grip band, a carry loop and a green \"full\" lamp ring that the game dims as it empties (diegetic: the canister itself says how full it is, no HUD bar).",
+ "brief": "MK-146 Oxygen canister: the pickup Abbie grabs to top up her air. Round 2, matched to the pick: a stout blue capsule with an off-white front plate holding a warm window (it glows while there's air inside), a dark base ring, a valve block on top with a green \"full\" ring, and a side strap. Diegetic: the window and ring dim as it empties.",
  "rounds": [
   {
    "n": 1,
    "date": "2026-10-23",
    "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  },
+  {
+   "n": 2,
+   "date": "2026-10-23",
+   "from": "concept.jpg (the Midjourney pick)",
+   "t": "Rebuilt against the Midjourney pick: chunky off-white modules held by dark bumper frames (bkit.module), warm orange windows (bkit.window), darker ground. Round 1 kept in round1/."
   }
  ],
  "stats": {
   "id": "MK-146",
   "name": "Oxygen canister",
-  "triangles": 1124,
-  "parts": 9,
+  "triangles": 1196,
+  "parts": 14,
   "part_names": [
    "Body",
    "Shoulder",
-   "Foot",
-   "GripBand",
+   "BaseRing",
+   "BaseBand",
+   "FrontPlate",
+   "AirWindowFrame",
+   "AirWindowPane",
    "Neck",
-   "ValveHead",
+   "ValveBlock",
+   "ValvePortL",
+   "ValvePortR",
+   "FullRing",
    "ValveKnob",
-   "CarryLoop",
-   "FullLamp"
+   "Strap"
   ],
   "materials": [
+   "Cloth_Blue",
    "Lamp_Green",
    "Metal_Gunmetal",
-   "Metal_Hazard",
+   "Metal_Hull",
    "Metal_OxygenBlue",
    "Metal_Steel",
-   "Rubber_Black"
+   "OrangeBand",
+   "Window_Warm"
   ],
-  "mass_kg": 13.9,
-  "moon_weight_kg": 2.3,
+  "mass_kg": 65.4,
+  "moon_weight_kg": 10.8,
   "size_m": [
-   0.2,
-   0.2,
-   0.72
+   0.35,
+   0.37,
+   0.73
   ],
   "maps": "512 px base, roughness, normal"
  }

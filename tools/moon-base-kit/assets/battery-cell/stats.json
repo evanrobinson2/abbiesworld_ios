@@ -1,37 +1,41 @@
 {
  "id": "MK-147",
  "name": "Battery cell",
- "triangles": 624,
- "parts": 12,
+ "triangles": 1100,
+ "parts": 14,
  "part_names": [
-  "Case",
-  "HazardBand",
-  "TopCap",
-  "ContactN",
+  "CellBody",
+  "CellFrame",
+  "TopPlate",
+  "HazardPlate",
   "HandlePostL",
-  "ContactP",
   "HandlePostR",
   "Handle",
+  "ChargeGrille",
   "ChargeBar0",
   "ChargeBar1",
   "ChargeBar2",
-  "ChargeWindow"
+  "SideWindowFrame",
+  "SideWindowPane",
+  "CornerStripe"
  ],
  "materials": [
   "Lamp_Green",
   "Metal_Charcoal",
   "Metal_Gunmetal",
   "Metal_Hazard",
-  "Metal_Steel",
+  "Metal_Hull",
+  "OrangeBand",
   "Plastic_Dark",
-  "Rubber_Black"
+  "Rubber_Black",
+  "Window_Warm"
  ],
- "mass_kg": 54.0,
- "moon_weight_kg": 8.9,
+ "mass_kg": 93.8,
+ "moon_weight_kg": 15.5,
  "size_m": [
-  0.31,
-  0.19,
-  0.49
+  0.39,
+  0.34,
+  0.47
  ],
  "maps": "512 px base, roughness, normal"
 }

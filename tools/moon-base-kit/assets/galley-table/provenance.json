@@ -8,10 +8,18 @@
   "trek.zip outputs/images/abbie at the base.png",
   "Faceted Hero direction https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa"
  ],
- "concept": null,
+ "concept": "concept.jpg (Midjourney job 82041a7b-4f67-4036-a3e0-f079d8f79302, image 0)",
  "midjourney": {
-  "status": "queued: Mac offline 2026-10-23 10:06Z",
-  "prompt": "a galley table on a single pedestal with a raised lip, two cushioned benches with foot straps, magnetic meal trays, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  "status": "ran 2026-10-23 on the Mac",
+  "job_id": "82041a7b-4f67-4036-a3e0-f079d8f79302",
+  "prompt": "a galley table on a single pedestal with a raised lip, two cushioned benches with foot straps, magnetic meal trays, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+  "grid": [
+   "tools/moon-base-kit/mj/MK-072/0.jpg",
+   "tools/moon-base-kit/mj/MK-072/1.jpg",
+   "tools/moon-base-kit/mj/MK-072/2.jpg",
+   "tools/moon-base-kit/mj/MK-072/3.jpg"
+  ],
+  "pick": 0
  },
  "built_with": "Blender Python (bpy 5.2.3) recipe build.py + bkit.py; Cycles bake of procedural role surfaces"
 }
