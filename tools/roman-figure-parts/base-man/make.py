@@ -21,7 +21,9 @@ ROUND = sys.argv[-1] if sys.argv[-1] in ("r1", "r2") else "r2"
 if ROUND == "r2":
     d = np.load(os.path.join(HERE, "base-man-r2.npz"))
     conv = lambda v: [(float(x * build.S), float((y - build.P["cx_side"]) * build.S), float((build.P["ground"] - z) * build.S)) for x, y, z in v]
-    PARTS = {"Skin": (conv(d["vs"]), d["fs"].tolist()), "Briefs": (conv(d["vb"]), d["fb"].tolist())}
+    hd = np.load(os.path.join(HERE, "base-man-r2-head.npz"))
+    PARTS = {"Skin": (conv(d["vs"]), d["fs"].tolist()), "Briefs": (conv(d["vb"]), d["fb"].tolist()),
+             "Head": (conv(hd["vs"]), hd["fs"].tolist())}
     R = os.path.join(HERE, "r2"); os.makedirs(R, exist_ok=True)
 else:
     PARTS = build.PARTS
@@ -35,7 +37,7 @@ for name, (V, F) in PARTS.items():
     if ROUND == "r2":
         bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.select_all(action="SELECT")
         bpy.ops.mesh.normals_make_consistent(inside=False); bpy.ops.object.mode_set(mode="OBJECT")
-        dec = ob.modifiers.new("Lighter", "DECIMATE"); dec.ratio = 0.18
+        dec = ob.modifiers.new("Lighter", "DECIMATE"); dec.ratio = 0.06 if name == "Head" else 0.18
         bpy.ops.object.modifier_apply(modifier="Lighter")
         for p in me.polygons: p.use_smooth = True
     else:
