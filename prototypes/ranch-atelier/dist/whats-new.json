@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-hand-drawn",
+      "date": "2026-10-23",
+      "title": "Drawn by hand, 12 frames",
+      "line": "The brute fight has a pencil button: poses hold for two frames, the pen line redraws every drawing, and each hit freezes the picture a beat.",
+      "image": "/whats-new/2026-10-23-hand-drawn.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXN3WE59yf51fCQsfkeXJ2x",
+      "threadTitle": "AW-STUDY-0051 - Drawn by Hand, 12 Frames",
+      "tour": false,
+      "link": "/studies/brute-fight/play.html?look=hand"
+    },
+    {
       "id": "2026-10-23-abbietown-houses",
       "date": "2026-10-23",
       "title": "Nine kinds of house",
