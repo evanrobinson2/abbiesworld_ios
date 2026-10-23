@@ -1,0 +1,40 @@
+{
+ "about": "AW-STUDY-0031 round 3 Midjourney queue: terrain rerun with a terrain-only style line, and the five base buildings handed over by Moon Heroes.",
+ "queue": [
+  {
+   "id": "MK-096",
+   "slug": "crater-rim",
+   "prompt": "a curved arc of a small lunar crater rim, a raised lip of broken grey rock and dusty slopes, a few loose stones on the inner slope, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, cozy kids' sci-fi adventure, bare natural lunar terrain only, no buildings, no windows, no lights, no machines, no panels, grey regolith and dark basalt, hard white sun with blue earthlight fill, black sky, three-quarter view, game asset concept sheet --ar 4:3 --style raw"
+  },
+  {
+   "id": "MK-098",
+   "slug": "boulders",
+   "prompt": "a set of five lunar boulders of different sizes, angular faceted dark basalt rocks half sunk in grey dust, small pebbles around them, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, cozy kids' sci-fi adventure, bare natural lunar terrain only, no buildings, no windows, no lights, no machines, no panels, grey regolith and dark basalt, hard white sun with blue earthlight fill, black sky, three-quarter view, game asset concept sheet --ar 4:3 --style raw"
+  },
+  {
+   "id": "MB-DOME",
+   "slug": "dome",
+   "prompt": "a big geodesic habitat dome on a ring foundation, faceted glass and off-white panels, an entrance tunnel with an airlock and warm glowing windows, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, chunky off-white hull modules held in dark gunmetal bumper frames, warm orange glowing windows, hazard-yellow trim, green amber red status lamps, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  },
+  {
+   "id": "MB-TOWER",
+   "slug": "tower",
+   "prompt": "a tall comms tower with a lattice mast, a small framed equipment hut at the base, a dish and antenna array at the top with a red blinker, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, chunky off-white hull modules held in dark gunmetal bumper frames, warm orange glowing windows, hazard-yellow trim, green amber red status lamps, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  },
+  {
+   "id": "MB-HABITAT",
+   "slug": "habitat-hangar",
+   "prompt": "a long two-storey habitat module joined to a vehicle hangar with a big roll-up door, ramps, ladders and a row of warm windows, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, chunky off-white hull modules held in dark gunmetal bumper frames, warm orange glowing windows, hazard-yellow trim, green amber red status lamps, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  },
+  {
+   "id": "MB-AIRLOCK",
+   "slug": "airlock-door",
+   "prompt": "an exterior airlock door set into a thick framed wall module, a round hatch with a green state light ring, a cycle panel and a hazard-striped sill, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, chunky off-white hull modules held in dark gunmetal bumper frames, warm orange glowing windows, hazard-yellow trim, green amber red status lamps, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  },
+  {
+   "id": "MB-CRATE",
+   "slug": "supply-crate",
+   "prompt": "a chunky supply crate with dark bumper corners, latches, a stencilled label panel, a small status lamp and carry handles, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, chunky off-white hull modules held in dark gunmetal bumper frames, warm orange glowing windows, hazard-yellow trim, green amber red status lamps, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  }
+ ]
+}
