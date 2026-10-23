@@ -1,0 +1,39 @@
+{
+  "asset": "alien plants (5 species)",
+  "recipe": "simulations/paint-world/alien-plants.mjs",
+  "brief": "Evan, 2026-10-23: exotic alien plants that grow from the paint. Low-poly, hi-fi, kid-friendly, with growth stages sprout, grow, bloom.",
+  "parts": {
+    "stalk": "stem, seed leaves, collars (named 'stalk')",
+    "head": "the part that opens: bell, fronds, poms, caps, star discs (named 'head')",
+    "glow-parts": "beads, spots, pods lit at night (named 'glow-parts')"
+  },
+  "materials": {
+    "alien-plant-body": "flat shaded, vertex coloured, roughness .78",
+    "alien-plant-glow": "emissive, cloned per plant, intensity follows bloom and night"
+  },
+  "species": {
+    "pink": "Jelly Bloom",
+    "teal": "Spiral Fern",
+    "lime": "Pom Reed",
+    "violet": "Glowcap",
+    "sun": "Star Spire"
+  },
+  "stages": {
+    "sprout": "0 to .33: two seed leaves and a short stalk",
+    "grow": ".33 to .66: stalk lengthens, closed bud",
+    "bloom": ".66 to 1: head opens, glow on"
+  },
+  "decisions": [
+    "One plant per paint colour so colour teaches the species.",
+    "Three meshes per plant, shared geometry, so thirty plants stay near 100 draws.",
+    "Fern uncurls by rewriting one position buffer, never rebuilding geometry."
+  ],
+  "differences_from_modeler_vision": "Built as JavaScript recipes (three.js), not Blender Python and GLB. Intent and parts are recorded here; a Blender build.py and GLB export is the next step so the plants join the model store.",
+  "revisions": [
+    {
+      "round": 1,
+      "date": "2026-10-23",
+      "note": "First five species; viewer in Tab 2 of the study."
+    }
+  ]
+}

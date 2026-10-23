@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-paint-the-world",
+      "date": "2026-10-23",
+      "title": "A card that paints the world",
+      "line": "Play the Paint the World card and coloured paint falls from the sky onto your board. It stays for a day of game time, and strange alien plants grow out of it.",
+      "image": "/whats-new/2026-10-23-paint-the-world.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFsUNxMs2CS8NZsWeXQJCoG",
+      "threadTitle": "AW-STUDY-0049 - Paint the World",
+      "tour": true,
+      "link": "/studies/paint-world/"
+    },
+    {
       "id": "2026-10-23-rigging",
       "date": "2026-10-23",
       "title": "Characters drawn in pieces, and moving",
