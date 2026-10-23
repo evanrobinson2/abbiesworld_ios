@@ -1,0 +1,202 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/bench-charming",
+ "name": "bench-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "household bench",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, chunky rounded toy-like proportions, a playful little tilt",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "89e5c7b6-3724-4394-9183-d141a9a03645",
+    "grid_url": "https://www.midjourney.com/jobs/89e5c7b6-3724-4394-9183-d141a9a03645?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "cc174966-7393-4c5a-aa9e-f4d6f635000d",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:24:21.796Z",
+    "grid_done_at": "2026-10-23T01:24:39.799Z",
+    "upscale_clicked_at": "2026-10-23T01:24:49.299Z",
+    "downloaded_at": "2026-10-23T01:26:01.401Z",
+    "pick_reason": "chunky plank seat on splayed legs with stretcher, whole bench with margin"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "72da5ab8-b791-40a7-8014-90d285f5d5e1",
+    "grid_url": "https://www.midjourney.com/jobs/72da5ab8-b791-40a7-8014-90d285f5d5e1?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "7e349742-5979-4c83-99de-c196c5d2e1a0",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:26:10.365Z",
+    "grid_done_at": "2026-10-23T01:26:28.368Z",
+    "upscale_clicked_at": "2026-10-23T01:26:38.469Z",
+    "downloaded_at": "2026-10-23T01:28:01.053Z",
+    "pick_reason": "long side, end view and three-quarter of one bench in a single row, largest views"
+   }
+  },
+  "files": {
+   "hero.png": "dc37010c08c0d961a5afaf62712259d443b2b92e1a01d2eeb01fd407bc58b35c",
+   "turnaround.png": "614565ddb595a88d38b8cc8d3426a4342b9135665299bbb1af2e5d1ae03e6512",
+   "view_front.png": "c785cb10bed5fca4c99686e4bc96512c959ba08614645edb99ec9bac7518ad21",
+   "view_side.png": "8a263e1a8723543bc4d976b0d419d35d8a903b9c8348852b5709458770734485",
+   "view_back.png": "65f1f713ab088351e9f5f90d859a8d3a9d4da7ef96f116dd86d9a52b57949940"
+  },
+  "folder": "tools/ranch-rebuild/mj/bench-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/bench-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "Charming rebuild from the normal bench: one pillow-edged 0.15 m slab with sag, kicked-up ends and a tilt; four round bulging log legs; wobbly round stretcher, round end rails, fat pegs; caps and diagonal braces dropped (not in the hero). Sheet front view scored 0.126 and dropped.",
+    "mean_iou": null,
+    "hero_iou": 0.776
+   },
+   {
+    "round": 2,
+    "change": "Thicker 0.17 m slab, much smaller end kick (25 to 10 mm), fatter legs (r 0.084-0.092 m), seat top 0.54 m; hero camera recalibrated (kept -38/12).",
+    "mean_iou": null,
+    "hero_iou": 0.82
+   },
+   {
+    "round": 3,
+    "change": "Swept slab thickness, height, splay, lean, leg spacing and depth; slab to 0.14 m (biggest gain), others kept. Colours deepened to the hero's red-brown (Plank_Walnut 150,76,38; Timber_Dark 84,42,22).",
+    "mean_iou": null,
+    "hero_iou": 0.857
+   },
+   {
+    "round": 4,
+    "change": "Tried a higher, thinner stretcher (0.80, reverted) and fatter legs (no gain); per-leg random lean raised to 4 deg for more wonk (neutral at low res). Final 768 px / 48 sample render.",
+    "mean_iou": null,
+    "hero_iou": 0.839
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied the finished normal bench (build.py, make_views.py, hero_check.py, run.sh) and reshaped it: same origin (footprint centre on the ground), long side facing -Y, same three objects (seat, legs, frame), same two materials and roles (Plank_Walnut, Timber_Dark), no states (a garden prop). Footprint 1.61 x 0.61 m (ratio 2.62 against the normal 2.51), seat top 0.54 m."
+   ],
+   [
+    "Views",
+    "The hero wins and is the only target. views/hero.png is the MJ hero keyed by hue: backdrop G/R ~0.89, the soft cast shadow G/R ~0.80, the wood 0.49-0.66, so G/R < 0.74 keeps the bench and drops the shadow; the openings between seat, legs and stretcher stay open. The turnaround sheet drew a taller, lighter bench with square-sawn legs and stretchers plus end rails at mid height, and its cuts are 3/4 views with big cast shadows (the long-side cut scored 0.13, mostly shadow and sky), so all three sheet views are dropped."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py from the normal bench, unchanged: 38 deg off the front towards -X, 12 deg up, 85 mm perspective. A recalibration over the yaw/elevation grid put -38/12 in the top group again, so it was kept."
+   ],
+   [
+    "Seat",
+    "Plank_Walnut: one chubby 1.60 x 0.44 x 0.14 m slab instead of two planks, with pillow edges (55 mm, 3-segment bevel), a 10 mm sag in the middle and the ends kicked up 10 mm, the ends flaring 6 % wider, edge vertices nudged up to 12 mm for a hand-carved wobble, and the whole slab tipped 1.2 deg (right end up) and 1 deg back for a playful tilt."
+   ],
+   [
+    "Legs",
+    "Plank_Walnut: four fat round 10-sided logs (radius 84 mm at the top, 92 mm bulging at the middle, 90 mm at the foot) with rounded-in feet cut flat on the ground, splayed from y = +-0.10 under the seat to +-0.22 at the ground and leaning 6 cm outward along X, each with its own random extra lean of up to 4 deg so the bench looks hand-made and a little wonky. Each leg top is set into the tilted seat's underside."
+   ],
+   [
+    "Frame",
+    "Timber_Dark: a thin round stretcher at 0.19 m that wobbles gently along its length and swells at its fat tenons poking 0.12 m past each end, a round end rail between each leg pair, and a fat bevelled peg through each tenon."
+   ],
+   [
+    "Game",
+    "3 objects, one material each, 1160 triangles (budget 2k). Installed with to_game.py to garden-assets-charming/GF-194.glb."
+   ]
+  ],
+  "creative_additions": "A playful tilt of the seat, each leg leaning at its own angle, the plank ends flaring wider, and fat pegged tenons on a gently wobbling stretcher."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.6061782836914062,
+   0.6132187247276306,
+   0.5646045207977295
+  ],
+  "triangles": 1160,
+  "materials": [
+   "Timber_Dark",
+   "Plank_Walnut"
+  ],
+  "parts": [
+   {
+    "name": "frame",
+    "materials": [
+     "Timber_Dark"
+    ]
+   },
+   {
+    "name": "legs",
+    "materials": [
+     "Plank_Walnut"
+    ]
+   },
+   {
+    "name": "seat",
+    "materials": [
+     "Plank_Walnut"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.839,
+  "per_view": {},
+  "triangle_budget": 2000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.839 at the final 768 px / 48 sample render (0.857 at 384 px / 16 samples).",
+   "Reads as the same bench as the normal one (thick seat, splayed leg pairs, dark stretcher with pegged tenons) but softer and toy-like: round chubby legs, pillowy slab, a little tilt and wonk.",
+   "Same footprint proportions, origin, orientation and materials as the normal bench, so it drops in place."
+  ],
+  "off": [
+   "The hero's seat looks a touch thicker than 0.14 m; thicker slabs scored lower (0.811 at 0.17 m) because the hero camera sits low, so 0.14 m with pillowy edges is the compromise.",
+   "The hero's stretcher sits a little higher up the legs and is very thin and rough; raising it to 0.23 m scored lower (0.80), so it stays at 0.19 m.",
+   "The hero's cast shadow is keyed out by hue; a few shadowed under-leg pixels may be lost at the feet.",
+   "No wood grain, knots or cracks: flat colours only, per the game rules. Turnaround sheet not scored (dropped, see Views)."
+  ]
+ },
+ "exports": {
+  "runtime": "bench-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/garden-assets/GF-194.glb"
+   ]
+  }
+ },
+ "files": {
+  "bench-charming.glb": {
+   "sha256": "60846f6682a6acc5f7b6d1714944e2e47ed834523766e806666608512a29d374",
+   "bytes": 63932
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "cf11534886f44c6d406615ab9ea5bf1646107b1d",
+  "path": "tools/ranch-rebuild/models/bench-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
