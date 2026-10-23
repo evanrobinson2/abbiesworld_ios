@@ -2,6 +2,17 @@
   "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md. models (optional): catalogue ids for a study set (a trailing * matches a prefix); tapping the item opens /models/?set=<id> with only those models, concept left and keep/talk/reject on the right.",
   "items": [
     {
+      "id": "cafe-study-proofs",
+      "at": "2026-10-23T05:20:00Z",
+      "title": "Abbie's café, proofs",
+      "ask": "Pick a style (elegant, dance party or typical 3D game) and your favourite picture in each view.",
+      "thread": "AW-STUDY-0013 - The Coffee Shop",
+      "image": "img/cafe-study.jpg",
+      "link": "https://app.abbies.world/#cafe",
+      "linkLabel": "The café study",
+      "status": "waiting"
+    },
+    {
       "id": "space-mail-study",
       "at": "2026-10-23T05:05:00Z",
       "title": "Space Mail, a playable sketch",
