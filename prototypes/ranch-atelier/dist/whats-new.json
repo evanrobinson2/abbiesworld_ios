@@ -1,6 +1,28 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
+    {
+      "id": "study-charms",
+      "date": "2026-10-23",
+      "title": "Charms map and jewellery box",
+      "line": "A chest of ten charms, locked cards that show a padlock where to earn them, and the mission board for the demo.",
+      "image": "/studies/charms/img/thumb.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY3EUo4PnhSwq8FKFiXqccbg",
+      "threadTitle": "Charms map and jewellery box",
+      "tour": false,
+      "link": "/studies/#charms"
+    },
+   {
+     "id": "2026-10-23-moon-consoles",
+     "date": "2026-10-23",
+     "title": "Three launch consoles",
+     "line": "Chapter 1 now ends on the Moon. Daddy times the booster burns, Ani swaps the cows for veggies, Abbie lands us, then everyone gets a Polaroid. The moon base games move to Chapter 2.",
+     "image": "/whats-new/2026-10-23-moon-consoles.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+     "tour": true,
+     "link": "/studies/moon-mission/world.html"
+   },
    {
      "id": "2026-10-23-moon-mining",
      "date": "2026-10-23",
@@ -110,6 +132,17 @@
       "threadTitle": "Watercolour distance",
       "tour": false,
       "link": "/town"
+    },
+    {
+      "id": "2026-10-23-basement-games",
+      "date": "2026-10-23",
+      "title": "Games in Grace's basement",
+      "line": "A pocket game player on Grace's desk plays falling blocks in one-bit dither, and her DOS computer now has real games on disks: BLOCKS and DUSKBLADE, a sword-and-traps palace in our own style. Type GAMES.",
+      "image": "/whats-new/2026-10-23-basement-games.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
     },
     {
       "id": "2026-10-23-rig-hero",

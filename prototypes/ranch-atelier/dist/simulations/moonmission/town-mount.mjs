@@ -21,7 +21,7 @@ export function start(AT, {quiet = false} = {}) {
  if (running || !AT || !AT.stage) return running;
  const {THREE, controls, camera, farGroup, dioGroup, scene} = AT.stage;
  OFFMAP.forEach((id, i) => AT.registerScene({id, region: null, anchor: [i * 2000, 0], bounds: 80}));
- const m = createMission(); let mount = null;
+ const m = createMission({chapter: +new URLSearchParams(location.search).get('chapter') || 1}); let mount = null;
  const sceneOf = id => TOWN_SCENE[id] || id;
  const host = {
   bare: id => id === 'main-street' || id === 'church-park',

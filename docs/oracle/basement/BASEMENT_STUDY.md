@@ -99,8 +99,38 @@ pieces of one memory, keep the first minute short, and share the kit with the sc
 - Test hooks: `?ending` (Daddy calls soon after it opens), `?stay` (powers down but stays). The end-to-end test
   (`tools/minigame-test/basement-flow.cjs`) now plays through to the power-down.
 
+## Round 5: games on Grace's desk (2026-10-23, Evan 19:41Z)
+Evan: "put a gameboy in graces basement and put tetris on there ... make sure dos works fully on that computer and there's
+more than just 1 game .. give prince of persia (anachronistic, but okay)". The legal line: we never ship someone else's
+game. So the games are ours, in the spirit of the ones he named.
+- **Pocket player** (`simulations/gameboy.mjs`): a low-poly handheld on the desk (rounded shell, bezel, glass, d-pad on a
+  dish, two magenta buttons, start and select, speaker slots, wheel, link port), named by what the parts are. Tap it (or
+  its buttons: the d-pad splits by where you touch) for a close-up; arrows, X, Z, Enter work too, Esc puts it down.
+  Its game, POCKET BLOCKS, is a falling-blocks puzzle with a 7-bag, ghost piece, soft drop, line-clear flash, levels and
+  game over. The screen is the "one-bit dither" card (Inspiring Shaders #12, Return of the Obra Dinn): the frame is
+  painted in greys, then each pixel is forced to ink or paper by a 4x4 Bayer pattern. No new coins (the ten stay ten).
+- **DOS, fully** (`tools/grace-dos`): the hard disk now holds `GAMES.BAT`, `BLOCKS.COM` and `DUSKBLD.COM`; HELP lists
+  them. Two new floppies in a wider disk box: BLOCKS and DUSK. `test/dos-battery.cjs` types what a child would try (VER,
+  DIR, TYPE, HELP, GAMES, DATE, TIME, ECHO, SET, PATH, MD, CD, COPY, DEL, RD, a wrong command, CLS) and runs every floppy,
+  quits it and checks the prompt is back. Not available: MEM (FreeDOS tools are not in the image).
+- **Our own C for DOS**: GCC in 16-bit mode builds the .COM files against `src/c/aw.h`, a small freestanding runtime:
+  INT 9 key table with held and latched bits (v86 gives no key-repeat you can rely on), mode 13h with a back buffer, the
+  BIOS font, PC-speaker tones, and PIT pacing (v86 has no steady retrace). Held keys now reach the PC from a real keyboard
+  (`GracePC.keyDown/keyUp/releaseAll`); phones keep the tap-to-type field.
+- **BLOCKS.COM** is the same game as the pocket one in C, in 256 colours. **DUSKBLD.COM** (DUSKBLADE) is an original
+  swordfighting platformer: four palace rooms of three storeys, running and careful steps (Shift), jumps and running
+  leaps, ledges to climb and drop from, loose floor, spikes, a blade trap, a pressure plate and gate, a potion, a guard
+  and a captain to duel (X lunge, Z parry), falls that hurt at one storey and kill at two, a 12 minute clock, and the
+  golden door. The people are skeleton figures posed by forward kinematics (`fig.h`) from keyframed poses
+  (`duskpose.h`) eased between frames, the way traced film is.
+- **Embed mode** (`play.html?embed=1`): the page never navigates away; it tells its parent `{type:'basement', event:
+  'ready'|'quit'}` and obeys `{type:'pause'|'resume'}`, so the sandbox can offer it as "play while you wait".
+- Tour: no. Tests: `tools/minigame-test/route-cafe-basement.cjs` plays the whole route (town, café, key, door, chores,
+  gold disk, ending, back up, front door).
+
 ## Next
-1. On hold: ROTOR RANGER and CLOCKTOWER, as GRACE-DOS programs.
+1. On hold: ROTOR RANGER as a GRACE-DOS program (CLOCKTOWER is a real game's name: avoid it). A phone pad for DUSKBLADE while seated.
+1b. Duels need a second pass: more guard moves, a boss, music from the PC speaker.
 2. The manual's pages, readable in the scene.
 3. The café door is agreed; add the tour stop once it is live.
 4. Coins and the pocket kept on the player's account rather than the browser.
@@ -115,6 +145,7 @@ Times are local (UTC-4) on 2026-10-23.
 | 1: basement, computer, KEYSTORM, coins | 3:32-3:51 AM | 4:15 AM | 4:21 AM | about 50 min |
 | 2: real DOS, 3 switches, clipboard chores, rigged girl, music | 4:25-4:41 AM (+ glitter 5:15) | 5:12 AM | 5:20 AM | about 55 min |
 | 3: CRT warm-up, child's head, switch lamp, careful stairs, captions | 5:17-5:18 AM | 5:45 AM | 5:51 AM | about 33 min |
+| 5: Game Boy, BLOCKS, DUSKBLADE, DOS battery, embed mode | 7:41 PM | (see round 5) | (see round 5) | |
 
 Where the time went:
 - Real DOS was most of round 2: finding FreeDOS, SeaBIOS and v86 sources through blocked mirrors (gitlab worked), writing a

@@ -457,6 +457,48 @@
           "t": "Memory kit: era pass, inner voice and dialog scripts",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/simulations/memory-kit",
           "note": "Shared by every memory place (basement, school roof, Moon Mission dialog)"
+        },
+        {
+          "k": "reference",
+          "t": "Prince of Persia (Jordan Mechner, 1989)",
+          "href": "https://en.wikipedia.org/wiki/Prince_of_Persia_(1989_video_game)",
+          "note": "Spirit only: single-screen rooms, careful jumps, traced motion. DUSKBLADE is our own code, art and rooms"
+        },
+        {
+          "k": "devblog",
+          "t": "The Making of Prince of Persia (Mechner's journals)",
+          "href": "https://www.jordanmechner.com/en/books/journals",
+          "note": "How filmed movement became animation; our poses are hand-keyed instead"
+        },
+        {
+          "k": "reference",
+          "t": "Tetris, rules of falling blocks",
+          "href": "https://en.wikipedia.org/wiki/Tetris",
+          "note": "Only the idea of falling pieces; POCKET BLOCKS and BLOCKS are our own code, name and art"
+        },
+        {
+          "k": "reference",
+          "t": "Game Boy (Nintendo, 1989), handheld form",
+          "href": "https://en.wikipedia.org/wiki/Game_Boy",
+          "note": "Shape language of a 1980s pocket player; the model is ours and carries our own name"
+        },
+        {
+          "k": "canon",
+          "t": "Inspiring Shaders #12: One-bit dither (Return of the Obra Dinn)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/shaders/index.html",
+          "note": "The Game Boy screen is made in greys, then every pixel is forced to ink or paper by an ordered pattern"
+        },
+        {
+          "k": "reference",
+          "t": "Ordered dithering (Bayer matrix)",
+          "href": "https://en.wikipedia.org/wiki/Ordered_dithering",
+          "note": "The 4x4 pattern behind the pocket screen"
+        },
+        {
+          "k": "reference",
+          "t": "GCC 16-bit mode (-m16) for DOS .COM programs",
+          "href": "https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html",
+          "note": "BLOCKS and DUSKBLD are plain C with a tiny runtime (tools/grace-dos/src/c/aw.h)"
         }
       ],
       "recorded": "2026-10-23, gathered afterwards from the study docs"
@@ -2672,6 +2714,60 @@
           "k": "canon",
           "t": "Cards v3 die-cut face (same renderer as the boost cards)",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cards-v3/CARDS_V3.md"
+        }
+      ]
+    },
+    "charms": {
+      "items": [
+        {
+          "k": "canon",
+          "t": "HUD study and information grammar (2x2 plus none)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INFO_MANIFEST.md",
+          "note": "Chest slots diegetic, glints spatial, one engraved count"
+        },
+        {
+          "k": "canon",
+          "t": "Backpack study: charms, earnCharm, keychain limit",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md",
+          "note": "Reads CHARMS and earnedCharms(); moon cheese hang limit of two"
+        },
+        {
+          "k": "canon",
+          "t": "Abbie's Town and the seven-hex region",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/abbietown/ABBIETOWN_STUDY.md",
+          "note": "Zones, hex directions and the centre wedge"
+        },
+        {
+          "k": "canon",
+          "t": "GAME_FEEL.md (nothing masks the world)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/index.html",
+          "note": "Smoke puff limited to the place, not the screen"
+        },
+        {
+          "k": "canon",
+          "t": "Paint the World study (a splash hides the swap)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/paint-world",
+          "note": "Applied to the zoom transition"
+        },
+        {
+          "k": "oracle",
+          "t": "Not consulted this round",
+          "note": "No Oracle record read; Evan's idea (locked card plus locate) was the brief"
+        },
+        {
+          "k": "devblog",
+          "t": "None recorded",
+          "note": "No outside dev blog read this round"
+        },
+        {
+          "k": "design",
+          "t": "None recorded",
+          "note": "No outside design blog read this round"
+        },
+        {
+          "k": "tutorial",
+          "t": "None recorded",
+          "note": "No outside tutorial read this round"
         }
       ]
     },
