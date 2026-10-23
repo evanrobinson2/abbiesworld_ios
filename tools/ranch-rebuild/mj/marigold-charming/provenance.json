@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "marigold-charming",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-250.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a pot marigold plant clump with bright orange and yellow daisy-like flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "2c39bbc2-93be-40a3-be32-4ee1688c37e0",
+      "grid_url": "https://www.midjourney.com/jobs/2c39bbc2-93be-40a3-be32-4ee1688c37e0?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "a9ab0519-61c0-4382-9063-9d5728afcdd8",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:43:38.764Z",
+      "grid_done_at": "2026-10-23T01:43:56.766Z",
+      "upscale_clicked_at": "2026-10-23T01:44:06.329Z",
+      "downloaded_at": "2026-10-23T01:45:19.319Z",
+      "pick_reason": "open plump orange daisy-like flowers on a leafy clump, whole plant with margin"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "40dd2824fcb54b628a5f2b7e647f4325259856daac4f3cd33bcc2f79b5c8816d",
+      "bytes": 3175791,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/a9ab0519-61c0-4382-9063-9d5728afcdd8/0_0.png"
+    }
+  }
+}
