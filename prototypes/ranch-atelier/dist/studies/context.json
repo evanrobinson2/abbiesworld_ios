@@ -2970,6 +2970,35 @@
         }
       ]
     },
+    "effect-hunt": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: our Paint the World study and the game identity records for Splatoon and Mario Kart (inspired-by only)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/paint-world/PAINT_WORLD_STUDY.md"
+        },
+        {
+          "k": "devblog",
+          "t": "ModNation Racers: Redesigning Kart Racing (PlayStation Blog)",
+          "href": "https://blog.playstation.com/2010/03/19/modnation-racers-redesigning-kart-racing/"
+        },
+        {
+          "k": "devblog",
+          "t": "Breath of the Wild open world analysis: gravity to go forward (Game Developer)",
+          "href": "https://gamedeveloper.com/design/breath-of-the-wild-open-world-analysis-gravity-to-go-forward"
+        },
+        {
+          "k": "design",
+          "t": "How Nintendo Solved Zelda's Open World Problem (GMTK): tall landmarks pull the player on",
+          "href": "https://gmtk.substack.com/p/how-nintendo-solved-zeldas-open-world"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study, GAME_FEEL.md and the demo flow: world layer vs presentation layer, 8% HUD, no words",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/demo/DEMO_FLOW.md"
+        }
+      ]
+    },
     "world-event-cards": {
       "items": [
         {
