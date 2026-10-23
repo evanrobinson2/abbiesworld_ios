@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-figure-fidelity",
+      "date": "2026-10-23",
+      "title": "Young Daddy, bub and the basement girl, rebuilt",
+      "line": "The kids and the dog in Daddy's memory places are now smooth, skinned figures with real cloth, hair and fur, so the storybook light makes their ears glow and their outlines shine. See them before and after.",
+      "image": "/whats-new/2026-10-23-figure-fidelity.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYSz4GuRXSQnywro62U9WRKG",
+      "threadTitle": "AW-STUDY-0034 - Low-Poly Figure Fidelity",
+      "tour": false,
+      "link": "/studies/figures/"
+    },
+    {
       "id": "2026-10-23-grace-basement-5",
       "date": "2026-10-23",
       "title": "Grace's basement has an ending",
