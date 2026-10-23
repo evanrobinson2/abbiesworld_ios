@@ -78,9 +78,42 @@
         "index": 3,
         "file": "turnaround_clay.png"
       }
+    },
+    {
+      "role": "front_color",
+      "job_id": "1a282352-803c-41d6-a46a-6886d32792b2",
+      "prompt": "low-poly faceted 3D game character, flat-shaded planes, matte gunmetal sci-fi armour with glowing purple light strips, big gloves and big boots, stylized cartoon toy-hero little girl about 4.5 heads tall with darker brown skin, shoulder-length brown hair, big brown eyes, cheerful, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background, no helmet --ar 2:3",
+      "attach": null,
+      "images": [
+        {
+          "file": "mj_1a282352-803c-41d6-a46a-6886d32792b2_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/1a282352-803c-41d6-a46a-6886d32792b2/0_0.png",
+          "sha256": "1d1496dc4998feb0f3168c3bcec52ce00d4756c43657267aa03287fcc0a615d6"
+        },
+        {
+          "file": "mj_1a282352-803c-41d6-a46a-6886d32792b2_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/1a282352-803c-41d6-a46a-6886d32792b2/0_1.png",
+          "sha256": "d2dc3cfe4d41fa87f867c6588b4bd170569f449813ac30187b175568592950c9"
+        },
+        {
+          "file": "mj_1a282352-803c-41d6-a46a-6886d32792b2_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/1a282352-803c-41d6-a46a-6886d32792b2/0_2.png",
+          "sha256": "931a2dd460a9133f6bab4eac7c60b69b12d1c3ac6a48dae3e1344b40246ce01f"
+        },
+        {
+          "file": "mj_1a282352-803c-41d6-a46a-6886d32792b2_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/1a282352-803c-41d6-a46a-6886d32792b2/0_3.png",
+          "sha256": "3bf2c7a3ae452a847df1e1900a7d45b2a9b7a63867be9ca52ae2f978bf7aea20"
+        }
+      ],
+      "pick": {
+        "index": 2,
+        "file": "front_color.png"
+      }
     }
-  ],
-  "pending": [
-    "front_color.png: colour front (purple lights, darker skin, brown hair and eyes) not yet made"
   ]
 }
