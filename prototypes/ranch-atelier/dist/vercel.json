@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/welcome",
+      "destination": "/home/index.html"
+    },
+    {
+      "source": "/support/thanks",
+      "destination": "/home/thanks.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/home/terms.html"
+    },
+    {
       "source": "/explore",
       "destination": "/explore/index.html"
     },
@@ -420,6 +432,50 @@
   ],
   "redirects": [
     {
+      "source": "/welcome",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/welcome",
+      "permanent": false
+    },
+    {
+      "source": "/terms",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/terms",
+      "permanent": false
+    },
+    {
+      "source": "/support/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/support/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/api/support",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/api/support",
+      "permanent": false
+    },
+    {
       "source": "/review",
       "destination": "/studies/",
       "permanent": false
@@ -469,6 +525,10 @@
         {
           "type": "host",
           "value": "explore.abbies.world"
+        },
+        {
+          "type": "host",
+          "value": "app.abbies.world"
         }
       ]
     },

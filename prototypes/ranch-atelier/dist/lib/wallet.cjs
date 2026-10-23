@@ -38,15 +38,23 @@ function blobStore(){
  };
 }
 
+// plan(a, spentNow) gives a supporter's cap for this month ({cap}) or null (lib/support.cjs). Supporters pay for their
+// own AI, so while paid up they are charged only on their own ledger, never against the public pool.
 // The public pool is split into SHARDS ledgers, each holding an equal share of the cap, so a launch-day crowd charging at
 // once spreads its conditional writes over many files instead of fighting over one (docs/launch/SURGE.md). A charge
 // that doesn't fit in one shard takes what it can from several; if the pool as a whole can't cover it, every part is
 // given back. spend/v1/public.json, the single pool from before sharding, still counts: its total comes off the cap.
 const SHARDS=16;
-function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS}={}){
+function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS,plan=null}={}){
  const personPath=a=>`${ROOT}people/${a.id}.json`,legacyPath=`${ROOT}public.json`;
  const shardPath=k=>`${ROOT}public/${k}.json`;
- const personCap=a=>a.owner?caps.owner:caps.person;
+ const spent=async a=>spentOf((await store.read(personPath(a))).value);
+ // The account's own cap, and whether it draws on the public pool: the owner and paid-up supporters don't.
+ async function terms(a){
+  if(a.owner)return {cap:caps.owner,pool:false};
+  const p=plan&&await plan(a,()=>spent(a)).catch(e=>{console.error('[wallet] plan',e.message);return null;});
+  return p?{cap:Math.max(caps.person,p.cap),pool:false}:{cap:caps.person,pool:true};
+ }
  const spentOf=v=>Number(v?.usd)||0;
  // Adds usd to one ledger unless that would pass cap. Retries on a concurrent write.
  async function add(path,usd,cap){
@@ -85,24 +93,26 @@ function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS}={}){
  };
  return {
   caps,
+  spent,
   // Dollars this account may still spend: the smaller of its own room and its pool's room.
   async left(a){
    if(!a)return 0;
-   if(a.owner)return Math.max(0,caps.owner-spentOf((await store.read(personPath(a))).value));
-   const [p,room]=await Promise.all([store.read(personPath(a)),pool.room()]);
-   return Math.max(0,Math.min(personCap(a)-spentOf(p.value),room));
+   const t=await terms(a);
+   const [p,room]=await Promise.all([store.read(personPath(a)),t.pool?pool.room():Infinity]);
+   return Math.max(0,Math.min(t.cap-spentOf(p.value),room));
   },
   // Records a charge before (or while) money is spent. false means stop: a cap would be crossed.
   async charge(a,usd){
    if(!a||!(usd>0))return !!a;
-   if(a.owner)return (await add(personPath(a),usd,personCap(a))).ok;
+   const t=await terms(a);
+   if(!t.pool)return (await add(personPath(a),usd,t.cap)).ok;
    const parts=await pool.take(usd);if(!parts)return false;
-   const mine=await add(personPath(a),usd,personCap(a));
+   const mine=await add(personPath(a),usd,t.cap);
    if(!mine.ok){await pool.give(parts);return false;}
    return true;
   }
  };
 }
 let shared;
-const wallet=()=>shared??=createWallet();
-module.exports={createWallet,wallet,capFrom,CAPS,PRICES,SHARDS};
+const wallet=()=>shared??=createWallet({plan:(a,spentNow)=>{const s=require('./support.cjs').support();return s.ready?s.plan(a,spentNow):null;}});
+module.exports={createWallet,wallet,blobStore,capFrom,CAPS,PRICES,SHARDS};
