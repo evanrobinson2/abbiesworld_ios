@@ -98,7 +98,7 @@ for side in ("R","L"):
     ball(f"hip_{side}",f"h{side}",24); spindle(f"thigh_{side}",f"h{side}",f"k{side}",24,18,4,peak=0.3)
     ball(f"knee_{side}",f"k{side}",19); spindle(f"shin_{side}",f"k{side}",f"a{side}",23,16,5,peak=0.25)
     ball(f"ankle_{side}",f"a{side}",12)
-    ellipsoid(f"foot_{side}",f"a{side}",f"t{side}",(P[f"t{side}"]-P[f"a{side}"]).length/S*0.8,28,14,t=0.35,seg=8,rings=5,taper=-0.4)
+    ellipsoid(f"foot_{side}",f"a{side}",f"t{side}",(P[f"t{side}"]-P[f"a{side}"]).length/S*0.8,28,20,t=0.35,seg=8,rings=5,taper=-0.4)
 # camera: orthographic, matching the photo frame (866 x 1290 px)
 cam=bpy.data.cameras.new("cam"); cam.type='ORTHO'; cam.ortho_scale=12.90
 co=bpy.data.objects.new("cam",cam); bpy.context.scene.collection.objects.link(co)
