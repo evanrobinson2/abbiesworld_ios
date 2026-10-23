@@ -1,7 +1,9 @@
 // Sandbox v2 play mode (Evan, 2026-10-23; docs/oracle/hud/HUD_STUDY.md). Three glass toys replace the web-page chrome:
-// the sun dial (time, weather, pause, speed), the hand of cards (the tile preview cards) and the toy box (everything else).
+// the chronograph (time, weather, season, pause, speed and pinned dials; chrono.mjs), the hand of cards (the tile preview cards) and the toy box (everything else).
 // The v1 controls stay in the DOM with their own handlers; each toy calls the original control, so no feature is lost.
 // The mode is chosen in index.html's boot script (html.ui-v2); "Classic layout" in the toy box switches back to v1.
+import {mountChrono} from './chrono.mjs?v=2';
+import {cardFace} from './hand-cards.mjs?v=2';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
 function start(){
@@ -23,6 +25,19 @@ function start(){
   weather:svg('<path d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11.3 1.9A3 3 0 0 0 7 18z"/>'),
   season:svg('<path d="M12 21c-4-3-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-3 8-7 11z"/><path d="M12 21V9"/>'),
   speed:svg('<path d="M5 18a8 8 0 1 1 14 0"/><path d="m12 14 4-5"/>'),
+  pause:svg('<path d="M9 5v14M15 5v14" stroke-width="3"/>'),
+  play:svg('<path d="M8 5v14l11-7z" fill="currentColor"/>'),
+  plus:svg('<path d="M12 6v12M6 12h12" stroke-width="2.4"/>'),
+  todo:svg('<path d="M9 7h11M9 12h11M9 17h11"/><path d="m3.5 7 1.2 1.2L7 5.8M3.5 12l1.2 1.2L7 10.8"/>'),
+  guests:svg('<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c.5-4 3-6 5.5-6s5 2 5.5 6M13.5 19.5c.4-3 2-4.5 3.5-4.5s3.2 1.5 3.5 4.5"/>'),
+  hungry:svg('<path d="M4 13h16l-1.5 6h-13z"/><path d="M8 13c0-3 1.5-5 4-5s4 2 4 5"/>'),
+  feed:svg('<path d="M5 20 7 8h10l2 12z"/><path d="M9 8c0-2 1-4 3-4s3 2 3 4M9 13h6"/>'),
+  water:svg('<path d="M12 3c3.5 4.5 6 7.7 6 11a6 6 0 0 1-12 0c0-3.3 2.5-6.5 6-11z"/>'),
+  people:svg('<circle cx="12" cy="7" r="3.5"/><path d="M5 21c.6-5 3.4-7.5 7-7.5s6.4 2.5 7 7.5"/>'),
+  seasonSpring:svg('<path d="M12 21v-8M12 13c-4 0-6-3-6-7 4 0 6 3 6 7zM12 13c4 0 6-3 6-7-4 0-6 3-6 7z"/>'),
+  seasonSummer:svg('<circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3 7 7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/>'),
+  seasonAutumn:svg('<path d="M5 19C5 10 10 5 19 5c0 9-5 14-14 14z"/><path d="M5 19 13 11"/>'),
+  seasonWinter:svg('<path d="M12 2.5v19M3.8 7.2l16.4 9.6M3.8 16.8l16.4-9.6M9.5 4l2.5 2 2.5-2M9.5 20l2.5-2 2.5 2"/>'),
   more:svg('<circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/>'),
   box:svg('<path d="M4 10h16v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="color-mix(in srgb,var(--v2-accent) 30%,transparent)"/><path d="M3 6.5 12 4l9 2.5v3.5H3z" fill="color-mix(in srgb,var(--v2-accent) 55%,transparent)"/><path d="M10 14h4"/>','0 0 24 24')
  };
@@ -30,32 +45,10 @@ function start(){
  const hold=(el,{tap,long,ms=450})=>{let timer=0,fired=false;el.addEventListener('pointerdown',e=>{if(e.button)return;fired=false;clearTimeout(timer);timer=setTimeout(()=>{fired=true;long();},ms);});
   for(const t of ['pointerup','pointerleave','pointercancel'])el.addEventListener(t,()=>clearTimeout(timer));
   el.addEventListener('click',e=>{e.preventDefault();if(fired){fired=false;return;}tap();});el.addEventListener('contextmenu',e=>{e.preventDefault();clearTimeout(timer);long();});};
- const closeAll=except=>{if(except!=='ring')ring.hidden=true;if(except!=='shelf')shelf.hidden=true;if(except!=='sheet')root.classList.remove('v2-sheet');};
+ const closeAll=except=>{if(except!=='shelf')shelf.hidden=true;if(except!=='sheet')root.classList.remove('v2-sheet');};
 
- // Sun dial.
- const dial=make('button',{id:'v2-dial',className:'v2-toy v2-glass',type:'button'},
-  `<svg class="v2-sky" viewBox="0 0 58 58" aria-hidden="true"><defs><linearGradient id="v2-sky-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc0f0"/><stop offset="1" stop-color="#d9f0ff"/></linearGradient></defs>
-   <rect width="58" height="58" fill="url(#v2-sky-g)"/><path d="M0 40 Q15 33 29 37 T58 35 V58 H0z" fill="#8cbc5a"/><path d="M0 46 Q20 40 58 44 V58 H0z" fill="#6d9c45"/>
-   <circle class="v2-orb" cx="29" cy="20" r="6.5" fill="#ffd34d" stroke="#fff6c8" stroke-width="2"/></svg>
-   <span class="v2-nap"><i></i><i></i></span><span class="v2-weather v2-glass"></span><span class="v2-speed v2-glass"></span>`);
- dial.setAttribute('aria-label','Sun dial: tap to pause, hold for time, weather, season and speed');
- const ring=make('div',{id:'v2-dial-ring',className:'v2-toy v2-glass',hidden:true});
- for(const [icon,label,target]of [['clock','Time of day','#scene-clock-control'],['weather','Weather','#scene-weather-control'],['season','Season','#scene-season-control'],['speed','Speed','#simulation-speed']]){
-  const b=make('button',{className:'v2-btn v2-glass',type:'button',title:label},I[icon]);b.setAttribute('aria-label',label);
-  b.onclick=e=>{e.stopPropagation();press(target);};ring.append(b);}
- hold(dial,{tap:()=>{closeAll();press('#pause');syncDial();},long:()=>{closeAll('ring');ring.hidden=!ring.hidden;}});
-
- const sky={night:['#0d1838','#2b3d6b'],dawn:['#f7a35c','#ffe0b0'],day:['#7cc0f0','#d9f0ff'],dusk:['#d9735a','#ffc58a']};
- function parseHour(){const t=$('#scene-readouts .clock-time')?.textContent||'';const m=/(\d+):(\d+)\s*(AM|PM)/i.exec(t);if(!m)return null;let h=+m[1]%12+(m[3].toUpperCase()==='PM'?12:0);return h+ +m[2]/60;}
- function syncDial(){
-  const h=parseHour();if(h!=null){const day=h>=6&&h<18,f=day?(h-6)/12:((h+6)%24)/12,a=Math.PI*(1-f),orb=dial.querySelector('.v2-orb');
-   orb.setAttribute('cx',(29+22*Math.cos(a)).toFixed(1));orb.setAttribute('cy',(38-26*Math.sin(a)).toFixed(1));orb.setAttribute('fill',day?'#ffd34d':'#f4f1e3');orb.setAttribute('stroke',day?'#fff6c8':'#c9d3ea');
-   const [top,bottom]=sky[h<5||h>=20?'night':h<8?'dawn':h<17?'day':'dusk'];const stops=dial.querySelectorAll('stop');stops[0].setAttribute('stop-color',top);stops[1].setAttribute('stop-color',bottom);
-   dial.title=$('#scene-readouts .clock-time').textContent+' · '+($('#scene-readouts .clock-date')?.textContent||'');}
-  const w=$('#scene-readouts .weather-symbol');const wb=dial.querySelector('.v2-weather');if(w&&wb.dataset.src!==w.innerHTML){wb.dataset.src=w.innerHTML;wb.innerHTML=w.innerHTML;wb.title=$('#scene-readouts .weather-name')?.textContent||'';}
-  dial.classList.toggle('paused',!!$('#pause .play-icon')&&!$('#pause .play-icon').hidden);
-  const pace=($('#simulation-speed .pace-badge')?.textContent||'').trim(),sp=dial.querySelector('.v2-speed');sp.textContent=pace;sp.classList.toggle('on',!!pace&&pace!=='›'&&pace!=='1×');
- }
+ // The chronograph (chrono.mjs): time of day, pause and speed pushers, weather, season and pinned dials.
+ const chrono=mountChrono({press,icons:I});
 
  // Hand of cards: the real generator cards move here, keeping their tap, drag-to-board and live previews.
  const hand=make('div',{id:'v2-hand',className:'v2-toy'});
@@ -63,7 +56,7 @@ function start(){
  more.onclick=()=>toggleSheet();
  function toggleSheet(open=!root.classList.contains('v2-sheet')){closeAll('sheet');if(open&&document.body.classList.contains('scene-dropper-hidden'))press('#scene-dropper-toggle');root.classList.toggle('v2-sheet',open);}
  function adoptCards(){const cards=document.getElementById('current-scene-type');if(!cards)return false;if(cards.parentElement!==hand)hand.prepend(cards);fan();return true;}
- function fan(){const heroes=[...hand.querySelectorAll('.generator-hero')],n=heroes.length;heroes.forEach((h,i)=>{h.style.setProperty('--fan',((i-(n-1)/2)*5).toFixed(1)+'deg');if(!h.dataset.v2){h.dataset.v2='1';let wasPressed=false;h.addEventListener('pointerdown',()=>{wasPressed=h.getAttribute('aria-pressed')==='true';},true);h.addEventListener('click',()=>{if(wasPressed)toggleSheet();});}});}
+ function fan(){const heroes=[...hand.querySelectorAll('.generator-hero')],n=heroes.length;heroes.forEach((h,i)=>{h.style.setProperty('--fan',((i-(n-1)/2)*5).toFixed(1)+'deg');if(!h.dataset.v2){h.dataset.v2='1';cardFace(h);let wasPressed=false;h.addEventListener('pointerdown',()=>{wasPressed=h.getAttribute('aria-pressed')==='true';},true);h.addEventListener('click',()=>{if(wasPressed)toggleSheet();});}});}
 
  // Toy box: tap for the shelf, hold for the grown-up workbench.
  const box=make('button',{id:'v2-box',className:'v2-toy v2-glass',type:'button',title:'Toy box'},I.box+'<span class="v2-dot"></span>');box.setAttribute('aria-label','Toy box: tap for the shelf, hold for settings');
@@ -79,16 +72,22 @@ function start(){
   b.onclick=e=>{e.stopPropagation();shelf.hidden=true;run();};shelf.append(b);}
  hold(box,{tap:()=>{closeAll('shelf');shelf.hidden=!shelf.hidden;},long:()=>{closeAll();press('#app-settings-toggle');}});
 
- document.body.append(dial,ring,hand,box,shelf);hand.append(more);
+ document.body.append(hand,box,shelf);hand.append(more);
 
  // Touching the world puts summoned things away; idle tucks the hand so the world gets the bottom edge back.
  let idle=0;const wake=()=>{hand.classList.remove('tucked');clearTimeout(idle);idle=setTimeout(()=>{if(!root.classList.contains('v2-sheet')&&!hand.matches(':hover'))hand.classList.add('tucked');},6000);};
- addEventListener('pointerdown',e=>{wake();if(e.target.closest?.('#v2-dial,#v2-dial-ring,#v2-box,#v2-shelf,#v2-hand,#scene-tools-drawer,.facet-picker,dialog,[popover]'))return;if(e.target.tagName==='CANVAS')closeAll();},true);
+ addEventListener('pointerdown',e=>{wake();
+  // The tile sheet closes on any tap outside it (not only on the world), so it can never trap the player.
+  if(root.classList.contains('v2-sheet')&&!e.target.closest?.('#scene-tools-drawer,#v2-hand,.facet-picker,dialog,[popover]'))root.classList.remove('v2-sheet');
+  if(e.target.closest?.('#v2-chrono,#v2-chrono-pop,#v2-box,#v2-shelf,#v2-hand,#scene-tools-drawer,.facet-picker,dialog,[popover]'))return;if(e.target.tagName==='CANVAS')closeAll();},true);
+ // The sheet's × belongs to v1's drawer and toggles the v1 dropper, which left the v2 sheet open and re-toggling (Evan, 2026-10-23:
+ // "caught in a loop that wouldn't close"). In v2 it just puts the sheet away.
+ addEventListener('click',e=>{if(e.target.closest?.('#scene-tools-drawer .tile-tools-heading button')){e.preventDefault();e.stopPropagation();root.classList.remove('v2-sheet');}},true);
  addEventListener('pointermove',e=>{if(e.clientY>innerHeight-160)wake();},{passive:true});wake();
  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();});
 
  // Keep in step with the v1 controls as the app builds them.
- const sync=()=>{adoptCards();syncDial();box.classList.toggle('busy',!!$('.aw-fab.working'));};
+ const sync=()=>{adoptCards();chrono.sync();box.classList.toggle('busy',!!$('.aw-fab.working'));};
  let queued=false;new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;sync();});}).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class','aria-pressed']});
  sync();
 }
