@@ -6,6 +6,9 @@ import {eventSet, eventFace, showEventCard} from '../cards/event-card.mjs';
 
 // Which events the game can play today; the rest sit in the deck dimmed, as cards waiting for their effect.
 export const PLAYABLE = new Set(['paint-rain', 'rain-shower', 'thunderstorm', 'snowfall', 'rainbow', 'golden-dawn', 'starry-night', 'morning-fog', 'fireball', 'waterball', 'cats-dogs', 'tie-dye']);
+// Cards that are locked until the player earns them. Fire Wheels is the Hot Wheels charm's reward (fire-wheels.mjs): playing it turns the trail on, playing it again turns it off.
+const fireWheels = () => import('./fire-wheels.mjs').catch(() => null);
+const LOCKED = {'fire-wheels': async () => !!(await fireWheels())?.fireWheelsUnlocked?.()};
 const css = `#v2-events{position:fixed;right:6px;top:50%;transform:translate(120%,-50%);z-index:19;width:min(26vw,118px);max-height:78vh;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:8px 6px;border-radius:18px;background:linear-gradient(160deg,rgba(40,52,110,.55),rgba(14,18,48,.62));box-shadow:0 10px 28px rgba(6,8,30,.5),inset 0 0 0 1.5px rgba(255,214,102,.55);transition:transform .35s cubic-bezier(.2,1.2,.4,1);scrollbar-width:none;overscroll-behavior:contain}#v2-events::-webkit-scrollbar{display:none}#v2-events.open{transform:translate(0,-50%)}#v2-events button{all:unset;display:block;cursor:pointer;border-radius:8px;touch-action:manipulation;transition:transform .15s}#v2-events button:active{transform:scale(.95)}#v2-events button img{width:100%;display:block;filter:drop-shadow(0 4px 6px rgba(0,0,0,.45));pointer-events:none}#v2-events button[data-wait]{opacity:.45;filter:saturate(.5)}#v2-events button:focus-visible{outline:2px solid #ffd666;outline-offset:2px}@media(prefers-reduced-motion:reduce){#v2-events{transition:none}}`;
 
 export function mountEventHand({playable = PLAYABLE, onPlay} = {}) {
@@ -20,13 +23,16 @@ export function mountEventHand({playable = PLAYABLE, onPlay} = {}) {
     for (const c of set.cards) {
       const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'menuitem');
       b.setAttribute('aria-label', `${c.name}. ${c.rules.replace(/[{}]/g, '')}`);
-      if (!playable.has(c.id)) b.dataset.wait = '1';
+      if (!playable.has(c.id) && !LOCKED[c.id]) b.dataset.wait = '1';
+      if (LOCKED[c.id]) { b.dataset.wait = '1'; b.dataset.locked = c.id; }
       const img = new Image(); img.draggable = false; img.alt = ''; eventFace(c.id, 90).then(u => { img.src = u; }); b.append(img);
-      b.onclick = () => { close(); const ok = playable.has(c.id); if (ok) (onPlay ? onPlay(c.id) : dispatchEvent(new CustomEvent('ranch:play-event', {detail: {id: c.id}}))); showEventCard(c.id, {ms: ok ? 5000 : 3500}); };
+      b.onclick = async () => { if (LOCKED[c.id]) { close(); const m = await fireWheels(), ready = !b.dataset.wait; if (ready && m) m.setFireWheels(!m.fireWheelsOn()); showEventCard(c.id, {ms: ready ? 5000 : 3500}); return; }
+      close(); const ok = playable.has(c.id); if (ok) (onPlay ? onPlay(c.id) : dispatchEvent(new CustomEvent('ranch:play-event', {detail: {id: c.id}}))); showEventCard(c.id, {ms: ok ? 5000 : 3500}); };
       deck.append(b);
     }
   };
-  const open = () => { if (!built) build(); deck.classList.add('open'); };
+  const refreshLocks = () => deck.querySelectorAll('[data-locked]').forEach(async b => { if (await LOCKED[b.dataset.locked]()) delete b.dataset.wait; else b.dataset.wait = '1'; });
+  const open = async () => { if (!built) await build(); refreshLocks(); deck.classList.add('open'); };
   const close = () => deck.classList.remove('open');
   addEventListener('pointerdown', e => { if (deck.classList.contains('open') && !e.target.closest?.('#v2-events,#v2-shelf,#v2-box,#town-events-btn')) close(); }, true);
   return {open, close, toggle: () => (deck.classList.contains('open') ? close() : open())};

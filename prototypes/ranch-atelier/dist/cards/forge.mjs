@@ -642,7 +642,7 @@ function sunburst(ctx, cx, cy, R, seed) {
 const EVENT_SCENES = {
   'paint-rain': 'meadow', meteorite: 'moon', rain: 'ev-rain', storm: 'ev-storm', snow: 'ev-snow', rainbow: 'meadow',
   dawn: 'ev-dawn', night: 'ev-night', fog: 'ev-fog', aurora: 'ev-aurora',
-  fireball: 'ev-dawn', waterball: 'meadow', 'cats-dogs': 'ev-rain', 'tie-dye': 'meadow',
+  fireball: 'ev-dawn', waterball: 'meadow', 'cats-dogs': 'ev-rain', 'tie-dye': 'meadow', 'fire-wheels': 'ev-dawn',
 };
 const PAINT_HUES = ['#ff3fa4', '#16d6c0', '#9be22c', '#8a5cff', '#ffb824'];
 function puff(ctx, cx, cy, cw, col, shade) {
@@ -765,6 +765,13 @@ function paintEventScene(ctx, kind, x, y, w, h, seed) {
     const cols = ['#ff3fa4', '#ffb824', '#9be22c', '#16d6c0', '#8a5cff'];
     for (let i = 11; i >= 0; i--) { ctx.fillStyle = cols[i % cols.length]; ctx.beginPath(); ctx.ellipse(cx, y + h * 0.5, w * (0.06 + i * 0.045), h * (0.05 + i * 0.04), i * 0.35, 0, TAU); ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.25; ctx.stroke(); }
     ctx.fillStyle = '#fffbe6'; sparkle(ctx, cx, y + h * 0.5, 3.2);
+  } else if (kind === 'fire-wheels') {
+    const wx = cx + w * 0.12, wy = hz + h * 0.1, wr = h * 0.12;
+    for (let i = 0; i < 5; i++) { const fx = wx - wr * 1.1 - i * wr * 0.75, fy = wy + (i % 2 ? -1 : 1) * wr * 0.15, fr = wr * (1.05 - i * 0.16);
+      disc(ctx, fx, fy, fr * 1.1, INK); disc(ctx, fx, fy, fr, ['#ff5a1f', '#ff8a1f', '#ffb824', '#ffd24a', '#fff0a0'][i]); }
+    disc(ctx, wx, wy, wr * 1.14, INK); disc(ctx, wx, wy, wr, '#2e2e38'); disc(ctx, wx, wy, wr * 0.55, '#c9ccd6'); disc(ctx, wx, wy, wr * 0.18, INK);
+    ctx.strokeStyle = INK; ctx.lineWidth = 0.3; for (let i = 0; i < 5; i++) { const a = i * TAU / 5; ctx.beginPath(); ctx.moveTo(wx, wy); ctx.lineTo(wx + Math.cos(a) * wr * 0.55, wy + Math.sin(a) * wr * 0.55); ctx.stroke(); }
+    ctx.fillStyle = '#ffd24a'; for (let i = 0; i < 7; i++) sparkle(ctx, x + w * (0.1 + r() * 0.8), y + h * (0.3 + r() * 0.4), 0.8 + r());
   }
   ctx.restore();
 }
