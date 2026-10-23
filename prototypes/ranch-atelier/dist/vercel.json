@@ -29,6 +29,14 @@
       "destination": "/models/model.html"
     },
     {
+      "source": "/cards",
+      "destination": "/cards/index.html"
+    },
+    {
+      "source": "/cards/",
+      "destination": "/cards/index.html"
+    },
+    {
       "source": "/live-voice",
       "destination": "/live-voice/index.html"
     },

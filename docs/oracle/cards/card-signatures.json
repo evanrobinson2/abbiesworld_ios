@@ -1,0 +1,301 @@
+{
+  "schema_note": "Each entry uses the 'signature' shape from docs/oracle/identity/game-identity.schema.json. class=style may be learned from; class=expression is never copied.",
+  "date": "2026-10-22",
+  "games": {
+    "magic-the-gathering": [
+      {
+        "id": "variant_treatments",
+        "layer": "art",
+        "description": "The same card exists in standard, borderless, extended-art, showcase and foil treatments; the variant is the collectible.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "collector_line",
+        "layer": "interface",
+        "description": "Collector number, rarity, set code, language and artist in a machine-readable strip at the bottom.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "holo_stamp",
+        "layer": "assets",
+        "description": "A small holographic stamp on rare and up as an authenticity and value cue.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "mtg_frames_symbols_type",
+        "layer": "art",
+        "description": "Magic's frame art, mana and set symbols, card back and typefaces.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "pokemon-tcg": [
+      {
+        "id": "shape_rarity",
+        "layer": "interface",
+        "description": "Rarity told by symbol shape (circle, diamond, star, multi-star), not colour alone.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "icon_costs",
+        "layer": "interface",
+        "description": "Costs are icons a pre-reader can count; damage numbers are large.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "art_behind_text",
+        "layer": "art",
+        "description": "Top-tier cards run the illustration behind the whole card with text floating on it; textured foil you can feel.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "pokemon_creatures_symbols",
+        "layer": "art",
+        "description": "The creatures, energy symbols, ball iconography, frames and card back.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "hearthstone": [
+      {
+        "id": "shape_by_type",
+        "layer": "interface",
+        "description": "The art window's shape tells the card type before reading.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "rarity_before_reveal",
+        "layer": "interaction",
+        "description": "Face-down pack cards glow their rarity colour on hover before the flip.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "animated_variant_ladder",
+        "layer": "art",
+        "description": "Golden and fully animated variants keep the layout and animate the art.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "slam_not_teleport",
+        "layer": "interaction",
+        "description": "Cards lift, enlarge, travel and slam with dust and sound; nothing teleports.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "hearthstone_frame_gems_dragon",
+        "layer": "art",
+        "description": "The stone-and-metal frame art, gem art, legendary dragon, fonts and card back.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "gwent": [
+      {
+        "id": "art_as_face",
+        "layer": "interface",
+        "description": "Nearly the whole face is art with one number; name and ability on inspect.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "premium_animation",
+        "layer": "art",
+        "description": "Animated premium cards keep the same face so they stay readable.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "gwent_art_frames",
+        "layer": "art",
+        "description": "Gwent's art, frames and faction marks.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "legends-of-runeterra": [
+      {
+        "id": "clear_text_box",
+        "layer": "interface",
+        "description": "No watermark behind text; region icon moved to a corner for readability (patch 2.2).",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "one_meaning_per_colour",
+        "layer": "interface",
+        "description": "Frame colour means one thing; colour is never the only cue, for colour-blind players.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "level_up_face",
+        "layer": "interaction",
+        "description": "A champion card levels up mid-game into a new face with a full-screen moment.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "lor_champions_frames",
+        "layer": "art",
+        "description": "Runeterra's champions, regions, frames and icons.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "marvel-snap": [
+      {
+        "id": "two_number_face",
+        "layer": "interface",
+        "description": "Cost and power only on the face; ability text on inspect.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "upgrade_ladder",
+        "layer": "art",
+        "description": "Upgrading walks the same card up a visual ladder: border, frame break, 3D parallax, animated, logo.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "finish_flare_axes",
+        "layer": "art",
+        "description": "Finishes (foil, prism, ink, gold) and flares (particles around the card) are separate collectible axes.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "snap_characters_tiers",
+        "layer": "art",
+        "description": "Marvel characters, card art, logos, and Snap's exact tier names and colour sequence.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "slay-the-spire": [
+      {
+        "id": "window_shape_type",
+        "layer": "interface",
+        "description": "Attack, skill and power cards have differently shaped art windows.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "upgrade_plus",
+        "layer": "interface",
+        "description": "Upgraded cards get a plus and changed numbers in a highlight colour.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "sts_art_cards",
+        "layer": "art",
+        "description": "The art, frames, card names and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "inscryption": [
+      {
+        "id": "card_as_prop",
+        "layer": "interaction",
+        "description": "Cards are diegetic props handled on a table by a first-person camera.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "sigil_icons",
+        "layer": "interface",
+        "description": "Abilities are icons (sigils) rather than sentences.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "inscryption_art_sigils_tone",
+        "layer": "art",
+        "description": "The woodcut art, sigil designs, the table and the horror tone.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "9-kings": [
+      {
+        "id": "card_becomes_world",
+        "layer": "interaction",
+        "description": "A played card turns into a building on the plot grid, then the world plays out.",
+        "class": "style",
+        "confidence": 0.5
+      },
+      {
+        "id": "few_words",
+        "layer": "interface",
+        "description": "Cards are a picture and a role with very few words.",
+        "class": "style",
+        "confidence": 0.4
+      },
+      {
+        "id": "nine_kings_art",
+        "layer": "art",
+        "description": "9 Kings' pixel art, kings and card content.",
+        "class": "expression",
+        "confidence": 0.9
+      }
+    ],
+    "balatro": [
+      {
+        "id": "idle_sway_tilt",
+        "layer": "interaction",
+        "description": "Cards sway idly and tilt in 3D toward the cursor.",
+        "class": "style",
+        "confidence": 0.75
+      },
+      {
+        "id": "rising_pitch_scoring",
+        "layer": "audio",
+        "description": "Scoring cards pop in sequence with rising pitch.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "edition_shaders",
+        "layer": "art",
+        "description": "Editions (foil, holographic, polychrome, negative) are shaders over the same art.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "balatro_art_crt",
+        "layer": "art",
+        "description": "Balatro's art, jokers and its overall CRT look.",
+        "class": "expression",
+        "confidence": 0.9
+      }
+    ],
+    "premium-physical": [
+      {
+        "id": "print_standard",
+        "layer": "assets",
+        "description": "63 x 88 mm trim, 3 mm bleed and safe, 300-600 ppi, CMYK PDF/X-4, black-core 300-330 gsm.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "finishes",
+        "layer": "assets",
+        "description": "Holofoil laminate, cold foil, spot UV, etched foil, embossing, gilded edges, holo stamp.",
+        "class": "style",
+        "confidence": 0.9
+      }
+    ]
+  }
+}
