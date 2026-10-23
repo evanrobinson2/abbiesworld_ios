@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "chicken-coop-charming",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/chicken-coop-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "c8ef6a11-e722-4cd0-8b00-9a2ff2efbdbf",
+      "grid_url": "https://www.midjourney.com/jobs/c8ef6a11-e722-4cd0-8b00-9a2ff2efbdbf?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "74b3a02f-f5e3-49c8-ba64-904cb033e577",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:25:04.973Z",
+      "grid_done_at": "2026-10-23T00:25:22.976Z",
+      "upscale_clicked_at": "2026-10-23T00:25:33.608Z",
+      "downloaded_at": "2026-10-23T00:26:45.520Z",
+      "pick_reason": "stout legs, slatted ramp to pop door, nest box on the side, mesh window, leaning roof"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "5e24d2a1-2a64-42c1-bb97-a9072d9676d7",
+      "grid_url": "https://www.midjourney.com/jobs/5e24d2a1-2a64-42c1-bb97-a9072d9676d7?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "e8e9ddf4-23c9-4e13-bcb3-7892c8789f9a",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:26:54.515Z",
+      "grid_done_at": "2026-10-23T00:27:12.519Z",
+      "upscale_clicked_at": "2026-10-23T00:27:23.072Z",
+      "downloaded_at": "2026-10-23T00:28:46.012Z",
+      "pick_reason": "front with ramp and pop door, side with nest box, back with mesh window; one coop, evenly spaced"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "ebf1a4832039d5d237354a2ca23e42410f7e0dc65ea1c84f32cc0ec9bc5088e8",
+      "bytes": 5033888,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/74b3a02f-f5e3-49c8-ba64-904cb033e577/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "995611c0494c05b57281b50040d77133ff4ced08684ad907589d8eb0c4452d82",
+      "bytes": 5835914,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/e8e9ddf4-23c9-4e13-bcb3-7892c8789f9a/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "52a397a2019a8a10d2b3791f3126642413b0e0635b9a8bd9869c2d3db4fd029e",
+      "bytes": 1619390,
+      "pixels": [
+        835,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken-coop-charming [('front', 147, 982), ('side', 982, 2003), ('back', 2003, 2766)]"
+    },
+    "view_side.png": {
+      "sha256": "6a0483d5de80974362d8ef169f10b25dbc869a38ecad05a7dad3a785666a054e",
+      "bytes": 1932434,
+      "pixels": [
+        1021,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken-coop-charming [('front', 147, 982), ('side', 982, 2003), ('back', 2003, 2766)]"
+    },
+    "view_back.png": {
+      "sha256": "fee6a224d923997ee749e973ee6179852b9e54963ebeb6c581a5f6822ccb08d3",
+      "bytes": 1444733,
+      "pixels": [
+        763,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken-coop-charming [('front', 147, 982), ('side', 982, 2003), ('back', 2003, 2766)]"
+    }
+  }
+}

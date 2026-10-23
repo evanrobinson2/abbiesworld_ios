@@ -9,6 +9,9 @@ The tile loads two kinds of model:
   * plain GLBs (regional plants and trees, garden props), recoloured in game by material name.
 Each modeler exports `models/<name>/<name>.glb` and, where the game has states, `models/<name>/variants/<state>.glb`.
 This writes every file the game reads, keeping the old ids, and updates the triangle counts in the catalogues.
+A `<name>-charming` model (the storybook style, see BRIEF.md) installs like `<name>` into a parallel tree whose top
+folder ends in `-charming` (`simulation-assets-charming/...`, `simulations/regional-assets-charming/...`); the tile's
+"Model style" switch reads that tree first and falls back to the normal file for anything not modelled yet.
 """
 import sys, os, json, shutil, re, subprocess
 import numpy as np
@@ -178,16 +181,29 @@ def shed_ready(parts, mpu):
             q['name'] = f"{p['name']}-{cls}"; q['shed'] = 'drop' if cls == 'body' else 'keep'; out.append(q)
     return out
 
+CHARMING = '-charming'
+
+
+def charming_path(path):
+    """The charming twin of a normal file: the top asset folder gets the suffix (garden-assets/x -> garden-assets-charming/x)."""
+    head, _, rest = path.partition('/')
+    return f'{head}/{charming_path(rest)}' if head == 'simulations' else f'{head}{CHARMING}/{rest}'
+
+
 def install(name):
-    kind, target, *rest = TARGETS[name]
+    base_name = name[:-len(CHARMING)] if name.endswith(CHARMING) else name
+    charming = base_name != name
+    kind, target, *rest = TARGETS[base_name]
     md = os.path.join(HERE, 'models', name); main = os.path.join(md, f'{name}.glb'); out = []
+    place = charming_path if charming else (lambda p: p)
     if kind == 'glb':
-        dst = os.path.join(DIST, target); shutil.copy(main, dst); out.append(target)
+        dst = os.path.join(DIST, place(target)); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(main, dst); out.append(place(target))
         mirror = os.path.join(DIST, 'sandbox2-runtime', target)
         if os.path.exists(mirror):
+            mirror = os.path.join(DIST, 'sandbox2-runtime', place(target)); os.makedirs(os.path.dirname(mirror), exist_ok=True)
             shutil.copy(main, mirror)
         return out, {}
-    states = rest[0]; yaw = np.pi / 2 if target.startswith('organics/') and name != 'tree-standing' else 0.0   # animals face +X in game
+    states = rest[0]; yaw = np.pi / 2 if target.startswith('organics/') and base_name != 'tree-standing' else 0.0   # animals face +X in game
     tris = {}; k = None
     ref = next(st for st in states if st in ('complete', 'standing', 'idle', 'full'))
     for st in [ref] + [st for st in states if st != ref]:   # the reference state first: it sets one factor for all
@@ -196,7 +212,7 @@ def install(name):
             if st in ('complete', 'standing', 'idle', 'full'):
                 src = main
             else:
-                print(f'  {name}: no {st} variant, keeping the old one'); continue
+                print(f'  {name}: no {st} variant, ' + ('the game falls back to the normal one' if charming else 'keeping the old one')); continue
         gid = f'{os.path.basename(target)}-{st}'
         parts, n = mesh_list(src, yaw)
         if k is None:
@@ -207,13 +223,30 @@ def install(name):
         rescale(parts, k)
         if target.startswith('buildings/'):
             parts = shed_ready(parts, calibration(os.path.basename(target)))
-        base = os.path.join(DIST, 'simulation-assets', os.path.dirname(target), gid)
+        rel = place(f'simulation-assets/{os.path.dirname(target)}/{gid}')
+        base = os.path.join(DIST, rel); os.makedirs(os.path.dirname(base), exist_ok=True)
         json.dump(parts, open(base + '.json', 'w'), separators=(',', ':'))
-        shutil.copy(src, base + '.glb'); tris[gid] = n; out.append(gid)
-        mirror = os.path.join(DIST, 'sandbox2-runtime', 'simulation-assets', os.path.dirname(target), gid)
-        if os.path.exists(mirror + '.json'):             # /sandbox2 serves its own copy of the same files
+        shutil.copy(src, base + '.glb'); out.append(gid)
+        if not charming:                                 # the catalogues list the normal set only
+            tris[gid] = n
+        normal_mirror = os.path.join(DIST, 'sandbox2-runtime', 'simulation-assets', os.path.dirname(target), gid)
+        if os.path.exists(normal_mirror + '.json'):      # /sandbox2 serves its own copy of the same files
+            mirror = os.path.join(DIST, 'sandbox2-runtime', rel); os.makedirs(os.path.dirname(mirror), exist_ok=True)
             shutil.copy(base + '.json', mirror + '.json'); shutil.copy(base + '.glb', mirror + '.glb')
     return out, tris
+
+
+def charming_manifest():
+    """List every installed charming file (simulations/model-style.mjs requests only listed ones, so no 404s)."""
+    found = []
+    for top in ['simulation-assets-charming', 'simulations/regional-assets-charming', 'garden-assets-charming']:
+        for root, _, files in os.walk(os.path.join(DIST, top)):
+            found += ['/' + os.path.relpath(os.path.join(root, f), DIST).replace(os.sep, '/') for f in files if f.endswith(('.json', '.glb')) and f != 'manifest.json']
+    path = os.path.join(DIST, 'simulation-assets-charming', 'manifest.json'); os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp = f'{path}.{os.getpid()}'                          # other modelers install in parallel: replace the file whole
+    with open(tmp, 'w') as f:
+        json.dump(sorted(found), f, indent=0)
+    os.replace(tmp, path)
 
 
 def update_catalogs(tris):
@@ -233,8 +266,10 @@ def update_catalogs(tris):
 if __name__ == '__main__':
     names = sys.argv[1:]
     if names == ['all']:
-        names = [n for n in TARGETS if os.path.exists(os.path.join(HERE, 'models', n, f'{n}.glb'))]
+        names = [n for t in TARGETS for n in (t, t + CHARMING) if os.path.exists(os.path.join(HERE, 'models', n, f'{n}.glb'))]
     alltris = {}
     for n in names:
         o, t = install(n); alltris.update(t); print(n, o, flush=True)
     update_catalogs(alltris)
+    if any(n.endswith(CHARMING) for n in names):
+        charming_manifest()
