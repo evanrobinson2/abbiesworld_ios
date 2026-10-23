@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-no-masks",
+      "date": "2026-10-23",
+      "title": "The world stays in view",
+      "line": "Opening a panel no longer dims or blurs the ranch, the teleport map floats over the world on a glass tray, and teleporting is a sparkle on the pad instead of a white-out.",
+      "image": "/whats-new/2026-10-23-no-masks.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
+      "threadTitle": "Design knowledge into practice"
+    },
+    {
       "id": "2026-10-23-sandbox-chronograph",
       "date": "2026-10-23",
       "title": "A glass chronograph for your ranch",
