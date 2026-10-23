@@ -98,7 +98,27 @@ td.n{font-family:var(--mono);text-align:right;white-space:nowrap;font-variant-nu
 tr.g td{font:600 13px var(--body);color:var(--maple);background:color-mix(in srgb,var(--paper) 85%,var(--maple))}
 td .kit{font:500 11px var(--mono);color:var(--lawn)}
 .btn{font:600 14px var(--body);padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--ink);color:var(--bg);cursor:pointer}
+/* Play mode (/town): the town alone, full screen, with a way home and a way to sign in. */
+body.play{margin:0;overflow:hidden;background:#cfe2ea}
+body.play .wrap>header,body.play .wrap>section:not(:first-of-type),body.play .facts,body.play aside,body.play .ctx-card{display:none!important}
+body.play .page,body.play .wrap,body.play .wrap>section{display:block;margin:0;padding:0;max-width:none;width:auto}
+body.play .stage{position:fixed;inset:0;height:100dvh;min-height:0;border-radius:0;box-shadow:none}
+.pl-door{position:fixed;z-index:20;top:calc(12px + env(safe-area-inset-top,0px));left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}
+.pl-door a,.pl-door button{pointer-events:auto;font:600 14px var(--body);padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.9);color:#2a3236;text-decoration:none;cursor:pointer;
+ background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.46));box-shadow:0 8px 20px -10px rgba(40,40,50,.55),inset 0 1px 0 #fff;backdrop-filter:blur(8px)}
+.pl-door button[data-in=true]{color:#2f6a22}
 </style>
+<script>
+// Play mode: /town (or ?play) shows only the town, with a door home and a sign-in chip (nothing is asked of players).
+if (location.pathname === '/town' || /[?&]play\b/.test(location.search)) {
+ document.body.classList.add('play');
+ const d = document.createElement('div'); d.className = 'pl-door';
+ d.innerHTML = '<a href="/sandbox" aria-label="Back to the ranch">Ranch</a><button type="button" id="pl-account">Sign in</button>';
+ document.body.append(d);
+ const b = d.querySelector('button'), here = encodeURIComponent(location.pathname + location.search);
+ fetch('/api/me', {cache: 'no-store'}).then(r => r.json()).then(me => { b.dataset.in = !!me.signedIn; b.textContent = me.signedIn ? 'Signed in' : 'Sign in'; b.onclick = () => { location.href = me.signedIn ? '/welcome' : '/api/auth/login?return=' + here; }; }).catch(() => { b.hidden = true; });
+}
+</script>
 
 <div class="page">
 <div class="wrap">
@@ -967,7 +987,7 @@ function family(g, wall, accent, pink) {
  }
  coin(g, 0, 12, 0);
 }
-let cafe = null; const beakers = []; const CELL_GAME = 'https://app.abbies.world/studies/cell/play.html';
+let cafe = null; const beakers = []; const CELL_GAME = '/studies/cell/play.html' + (document.body.classList.contains('play') ? '?from=' + encodeURIComponent('/town') : '');
 const BUILD = {
  cafe(g) { const s = shopfront('#f1e6d6', '#2f8f86', '#ffffff'); g.add(s.g); cafe = s;
   const sign = cyl(g, 2.4, 2.4, .5, '#2f8f86', 0, 0, 0, 24); sign.rotation.x = Math.PI / 2; sign.position.set(0, 7.4, 7.3); cafe.sign = sign;
@@ -1081,6 +1101,7 @@ document.getElementById('signin').onclick = e => {
  cafe.key.visible = !signedIn; cafe.pop = 1; visit('cafe');
 };
 const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down = null;
+window.__town = {beakers, camera, canvas, visit, THREE}; // test hooks (tools/minigame-test)
 canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
 canvas.addEventListener('pointerup', e => {
  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return; const r = canvas.getBoundingClientRect();
@@ -1094,6 +1115,7 @@ canvas.addEventListener('pointermove', e => { if (e.buttons) return; const r = c
 { const b = document.getElementById('map'), lv = [0, .4, .8]; let at = 0;
  b.onclick = () => { at = (at + 1) % 3; overlay.visible = at > 0; overlay.material.opacity = lv[at]; b.setAttribute('aria-pressed', at > 0); }; }
 document.getElementById('hexes').onclick = e => { regionsGroup.visible = !regionsGroup.visible; e.currentTarget.setAttribute('aria-pressed', regionsGroup.visible); };
+if (document.body.classList.contains('play')) { regionsGroup.visible = true; document.getElementById('hexes').setAttribute('aria-pressed', 'true'); } // /town opens showing the seven hexes
 // the time lapse: a year slider; the train line and the town's birth are marked on it
 { const bar = document.getElementById('timebar'), yr = document.getElementById('yr'), num = document.getElementById('yrnum'), clk = document.getElementById('clock'), play = document.getElementById('play');
  const span = HISTORY.to - HISTORY.from;
