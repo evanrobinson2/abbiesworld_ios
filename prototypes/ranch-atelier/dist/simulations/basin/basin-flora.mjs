@@ -9,7 +9,7 @@ import {noise,ASSUMPTIONS as A} from './basin-land.mjs';
 //   one mass from the rim and as single trees up close.
 // - Wind: one vertex sway with slow gust fronts that roll across the valley; aspen quake more than spruce.
 // - Phone cost: instanced per 80 m chunk, full trees near the camera, a 5-sided stand-in beyond LOD_NEAR; one material
-//   per kind. About half of v1's triangles in the default view.
+//   per kind. About 40% fewer triangles than v1 in the default view.
 const LOD_NEAR=110,CHUNK=32;
 const PALETTE={
  spruce:['#3d6e4b','#4a7a45','#5a8540','#41704f'],
