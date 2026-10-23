@@ -3,9 +3,129 @@
  "total": 450,
  "log": [
   {
-   "what": "PC run 19:32Z: 12 astronaut suit models (360), 12 failed rigs (60, Meshy refunds failed tasks; counted anyway), tardigrade (30); ledger kept on the PC until it is pushed",
-   "credits": 450,
-   "at": "2026-10-23T19:50:00Z"
+   "what": "A1-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:26Z"
+  },
+  {
+   "what": "A1-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:26Z"
+  },
+  {
+   "what": "A3-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:36Z"
+  },
+  {
+   "what": "A2-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:37Z"
+  },
+  {
+   "what": "A1-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:57Z"
+  },
+  {
+   "what": "A2-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:57Z"
+  },
+  {
+   "what": "A1-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:13Z"
+  },
+  {
+   "what": "A4-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:15Z"
+  },
+  {
+   "what": "A2-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:37Z"
+  },
+  {
+   "what": "A4-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:38Z"
+  },
+  {
+   "what": "A2-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:41Z"
+  },
+  {
+   "what": "A5-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:41Z"
+  },
+  {
+   "what": "A4-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:22Z"
+  },
+  {
+   "what": "A5-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:23Z"
+  },
+  {
+   "what": "A4-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:35Z"
+  },
+  {
+   "what": "A6-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:35Z"
+  },
+  {
+   "what": "A5-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:38Z"
+  },
+  {
+   "what": "A6-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:38Z"
+  },
+  {
+   "what": "A6-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:42:33Z"
+  },
+  {
+   "what": "A6-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:42:47Z"
+  },
+  {
+   "what": "A5-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:43:03Z"
+  },
+  {
+   "what": "charm-tardigrade 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:49:28Z"
   }
  ]
 }
