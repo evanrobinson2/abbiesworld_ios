@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "horse-shelter-charming",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/cattle-shelter-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "533354ee-d670-4b87-a103-105981cdbb14",
+      "grid_url": "https://www.midjourney.com/jobs/533354ee-d670-4b87-a103-105981cdbb14?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "767f3a91-9eec-4737-9e46-42b504c4f7c3",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:16:48.256Z",
+      "grid_done_at": "2026-10-23T00:17:06.261Z",
+      "upscale_clicked_at": "2026-10-23T00:17:17.285Z",
+      "downloaded_at": "2026-10-23T00:18:28.817Z",
+      "pick_reason": "stable door with top half open, hay rack on the wall, deep leaning overhang, stone foundation"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "1e2d44e1-e3a8-4e9b-b398-60500320e28b",
+      "grid_url": "https://www.midjourney.com/jobs/1e2d44e1-e3a8-4e9b-b398-60500320e28b?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "ae10eeea-224a-4edf-9963-885566e7fb1e",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:18:37.835Z",
+      "grid_done_at": "2026-10-23T00:18:55.841Z",
+      "upscale_clicked_at": "2026-10-23T00:19:05.889Z",
+      "downloaded_at": "2026-10-23T00:20:29.325Z",
+      "pick_reason": "front with open stable door, side with hay rack, plain back; one stable, evenly spaced"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "c3ef43fb3ed4e124040a5753d109be99591469c6dea37a1b3e08e7acbb704642",
+      "bytes": 3212884,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/767f3a91-9eec-4737-9e46-42b504c4f7c3/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "cebfeff0af49a66f7d74b8b6b4650df2f08f321c9ff2a4867cb196a45b7f406d",
+      "bytes": 2885796,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/ae10eeea-224a-4edf-9963-885566e7fb1e/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "28191bb688819d20d4a6190b094ffb4a89abde226ae550cf5d001bd9402bc60a",
+      "bytes": 882497,
+      "pixels": [
+        842,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-shelter-charming [('front', 113, 955), ('side', 984, 1983), ('back', 1983, 2839)]"
+    },
+    "view_side.png": {
+      "sha256": "fb8eaeadeabc30c459b14d5a71c9805306c9d68ad2b4b22d821bfcb3ddf8ab72",
+      "bytes": 1146812,
+      "pixels": [
+        999,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-shelter-charming [('front', 113, 955), ('side', 984, 1983), ('back', 1983, 2839)]"
+    },
+    "view_back.png": {
+      "sha256": "0f3f89f6cb5b6f02af6a3f262afac878cebf9f0fca21eed4bc257fdb10c11c97",
+      "bytes": 820731,
+      "pixels": [
+        856,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-shelter-charming [('front', 113, 955), ('side', 984, 1983), ('back', 1983, 2839)]"
+    }
+  }
+}
