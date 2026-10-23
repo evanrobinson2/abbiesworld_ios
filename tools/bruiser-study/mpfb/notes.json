@@ -1,0 +1,19 @@
+{
+  "study": "AW-STUDY-0021 Bruiser Study",
+  "date": "2026-10-23",
+  "what": "Anatomy reference: an MPFB (MakeHuman for Blender, extension 'mpfb' from extensions.blender.org, build 20261010) body tuned toward the bruiser, plus a decimated low-poly version.",
+  "why": "Evan asked for an anatomy check and simplification. A real human body built from a parametric model gives correct joint positions and limb lengths to check the bruiser against; Blender's Decimate gives the faceted look.",
+  "recipe": "build_mpfb_bruiser.py (macros and detail targets are listed at the top). Run: Blender -b -P tools/bruiser-study/mpfb/build_mpfb_bruiser.py",
+  "outputs": {
+    "bruiser_mpfb.glb": "13,378 faces, smooth, A-pose, helper geometry removed",
+    "bruiser_mpfb_lowpoly.glb": "about 1,545 faces (Decimate collapse, ratio 0.06), flat shaded",
+    "render_mpfb_*_front.png / _side.png": "orthographic Workbench renders",
+    "compare_turnaround_vs_mpfb.png": "Midjourney turnaround (job 632f773e, image 0) front and side next to the low-poly MPFB front and side, each scaled to the same height"
+  },
+  "findings": [
+    "The joint landmarks (shoulders, elbows, knees, ankles) and the leg length line up well enough to use MPFB as the skeleton and proportion guide.",
+    "Where the bruiser is deliberately stylised beyond real anatomy: a smaller, blockier head; much bigger forearms and hands; a deeper, more top-heavy chest and shoulder mass; a shorter neck. These should be done as deliberate edits on top of the MPFB body, not by pushing MPFB sliders further.",
+    "MPFB stands in A-pose. The bruiser's relaxed arms-down pose needs a rig (MPFB can add Rigify or its default rig) before posing."
+  ],
+  "next": "When the Meshy key is available: run Meshy single-image and multi-view on the bruiser, then compare the Meshy mesh to this body for proportions before building the final low-poly model."
+}
