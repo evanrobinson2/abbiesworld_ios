@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-character-studio",
+      "date": "2026-10-23",
+      "title": "Character Studio: real motion",
+      "line": "The wooden mannequin moves with real motion capture: 50 moves from every kind of game, filmed with depth, haze and a golden-hour crowd. Try four looks (clay, plasticine, stick man, 80s action), pick the doll up, and the 2D puppet sits next door.",
+      "image": "/whats-new/2026-10-23-character-studio.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMMgGWzaue2qNoRR7u64j2y",
+      "threadTitle": "AW-STUDY-0037 - Character Studio",
+      "tour": false,
+      "link": "/studies/character-studio/"
+    },
+    {
      "id": "2026-10-23-abbietown",
      "date": "2026-10-23",
      "title": "Abbie's Town",

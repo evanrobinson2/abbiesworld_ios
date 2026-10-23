@@ -1486,6 +1486,83 @@
      "note": "round one: process makes the land, the town grows on it"
     }
    ]
+  },
+  "character-studio": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Oracle consult: 50 believable human animations from every genre, and a crowd that reads as film",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/character-studio/CHARACTER_STUDIO.md",
+     "note": "Came back empty: the studies-only plan matched 'build' to Tiny Glade and Cartel Tycoon. Gap logged."
+    },
+    {
+     "k": "oracle",
+     "t": "Game identity schema, art layer 'motion' field",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md",
+     "note": "None of the 380 game records fill it in; filling it for the genre references is on the Oracle backlog"
+    },
+    {
+     "k": "oracle",
+     "t": "How it's drawn, and AW-STUDY-0028 Storybook Light",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/storybook/STORYBOOK_STUDY.md",
+     "note": "The film look: contact shadows, height haze, depth of field, bloom and grade, now simulations/film-look.mjs"
+    },
+    {
+     "k": "devblog",
+     "t": "Simon Clavet, Motion Matching and The Road to Next-Gen Animation (GDC 2016)",
+     "href": "https://gdcvault.com/play/1023280/Motion-Matching-and-The-Road",
+     "note": "Applied: real capture played in long unedited stretches instead of keyed poses; 33 of 50 moves"
+    },
+    {
+     "k": "devblog",
+     "t": "David Rosen, An Indie Approach to Procedural Animation (GDC 2014)",
+     "href": "https://www.gdcvault.com/play/1020583/Animation-Bootcamp-An-Indie-Approach",
+     "note": "Applied: few keys plus procedure; the stride-matched gait that varies the crowd"
+    },
+    {
+     "k": "devblog",
+     "t": "David Bollo, Inertialization in Gears of War (GDC 2018)",
+     "href": "https://gdcvault.com/play/1025165/Inertialization-High-Performance-Animation-Transitions",
+     "note": "Why cross-fades float; one-shots ease back to their first frame, inertialized transitions next"
+    },
+    {
+     "k": "devblog",
+     "t": "Daniel Holden, Code vs Data Driven Displacement",
+     "href": "https://theorangeduck.com/page/code-vs-data-driven-displacement",
+     "note": "Applied: bodies travel at the clip's own measured hip speed, so feet plant"
+    },
+    {
+     "k": "design",
+     "t": "Thomas and Johnston, The Illusion of Life: the twelve principles",
+     "href": "https://en.wikipedia.org/wiki/Twelve_basic_principles_of_animation",
+     "note": "The check list for the seventeen hand-keyed moves; loops cut on matching frames to keep arcs"
+    },
+    {
+     "k": "design",
+     "t": "Animating on twos (Spider-Verse)",
+     "href": "https://en.wikipedia.org/wiki/Spider-Man:_Into_the_Spider-Verse",
+     "note": "Clay, village and stick step pose and surface together at 12 a second"
+    },
+    {
+     "k": "tutorial",
+     "t": "CMU Graphics Lab Motion Capture Database",
+     "href": "http://mocap.cs.cmu.edu/",
+     "note": "Source of all 33 clips; free for any use, credited in the studio"
+    },
+    {
+     "k": "tutorial",
+     "t": "Daniel Holden, Learned Motion Matching",
+     "href": "https://theorangeduck.com/page/learned-motion-matching",
+     "note": "How the retargeter finds loops: nearest matching frames one cycle apart"
+    },
+    {
+     "k": "canon",
+     "t": "LOOK.md and the abbies-world-designer skill",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/look/LOOK.md",
+     "note": "Roboto, flat colour, picture blocks instead of pill bars"
+    }
+   ],
+   "recorded": "2026-10-23, by the study as it was made"
   }
  }
 }
