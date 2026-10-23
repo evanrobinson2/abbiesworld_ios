@@ -23,6 +23,8 @@ export function setCardArt(mode) {
 }
 
 export async function cardFace(hero) {
+ // Cards v3 (AW-STUDY-0014) is the default face; /sandbox?cards=v2 brings these v2 faces back on this device.
+ { try { const v3 = await import('../cards/v3/hand.mjs'); if (v3.cardsStyle() && await v3.cardFace(hero)) return; } catch (error) { console.warn('Cards v3 face failed', error); } }
  try {
   const canvas = await drawFace(hero, 240);
   canvas.className = 'v2-face'; canvas.setAttribute('aria-hidden', 'true');

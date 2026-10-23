@@ -146,7 +146,7 @@ const sky=new T.HemisphereLight('#e6efff','#9b784d',2),sun=new T.DirectionalLigh
 const floor=new T.Mesh(new T.PlaneGeometry(500,500),glowFloorMaterial());floor.rotation.x=-Math.PI/2;floor.position.y=-1.3;floor.receiveShadow=true;scene.add(floor);
 const wall=new T.Mesh(new T.PlaneGeometry(500,100),new T.MeshStandardMaterial({color:'#e0e3d9',roughness:1}));wall.position.set(0,48,-18);wall.receiveShadow=true;scene.add(wall);
 // ?world=basin: the Basin, a green Colorado basin pouring onto a lake, with no tiles placed (basin/basin-world.mjs).
-const basin=await createBasinWorld(scene);
+const basin=await createBasinWorld(scene);if(basin){applyDorfRanch(basin.world.root);worldTheme.attach(basin.world.root);attachSeasons(basin.world.root);excludePeopleInk(basin.world.root);}
 const worldBackdrop=createWorldBackdrop({onChange:()=>updateSun()});
 function applyCartoonBackdrop(daylight){if(family!=='ranch')return;const backdrop=worldBackdrop.texture(worldTheme.palette.name);if(!backdrop)return;const imageAspect=backdrop.image.width/backdrop.image.height,aspect=innerWidth/innerHeight;backdrop.repeat.set(Math.min(1,aspect/imageAspect),Math.min(1,imageAspect/aspect));backdrop.offset.set((1-backdrop.repeat.x)/2,(1-backdrop.repeat.y)/2);scene.background=backdrop;scene.backgroundIntensity=.22+.78*daylight;ranchSky.root.visible=false;floor.visible=false;}
 const solarColors={night:new T.Color('#182638'),day:new T.Color('#e0e5d7'),warm:new T.Color('#ffcf92'),white:new T.Color('#fff6e5'),storm:new T.Color('#aeb8c4')};
@@ -183,6 +183,8 @@ function updateSun(){ink.setGrade(0);if(family==='city'){moonEnvironment.root.vi
  scene.fog=look.haze?atmosphereFog:null;atmosphereFog.color.copy(atmosphere);floor.material.color.copy(palette.glow);floor.material.userData.glow?.edgeColor.value.copy(palette.edge);floor.material.userData.glow?.glowCentre.value.set(center.x,center.z);if(floor.material.userData.glow)floor.material.userData.glow.glowRadius.value=extent;floor.receiveShadow=false;ink.setGrade(1);
  applyCartoonBackdrop(light.daylight);if(scene.background?.isTexture)scene.fog=null;
  renderer.domElement.dataset.sun=JSON.stringify({hour:farmClock.hour,altitude:light.altitude,direction:light.direction,intensity:sun.intensity});
+ // The air colour, for things drawn in the world's own light (Cards v3 hand cards take their sky from it).
+ renderer.domElement.dataset.air='#'+atmosphere.getHexString();renderer.domElement.dataset.daylight=light.daylight.toFixed(2);
  basin?.light({floor,wall,fog:atmosphereFog,sceneFog:look.haze,setFog:f=>{scene.fog=f;}});
 }
 function syncCityViewport(){if(family==='city'&&innerWidth>700)camera.setViewOffset(innerWidth,innerHeight,145,0,innerWidth,innerHeight);else if(family==='city'&&document.querySelector('#city-panel.city-open'))camera.setViewOffset(innerWidth,innerHeight,0,innerHeight*.22,innerWidth,innerHeight);else camera.clearViewOffset();}window.addEventListener('resize',syncCityViewport);function treatment(){shadowForced=true;syncCityViewport();worldTheme.attach(active?.group);updateSun();const b=$('#lighting');b.removeAttribute('role');b.removeAttribute('aria-checked');b.title='Time: '+timeMode[0].toUpperCase()+timeMode.slice(1);b.setAttribute('aria-label',b.title);renderer.domElement.dataset.treatment=timeMode;document.body.dataset.time=timeMode;const lightingState=active?.lights?.update(timeMode,active.life.state.seconds,nightProgress(farmClock.hour),active.life.occupancy?.());if(lightingState)renderer.domElement.dataset.nightLights=JSON.stringify(lightingState);}

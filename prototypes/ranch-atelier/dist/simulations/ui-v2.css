@@ -163,13 +163,13 @@ html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace :is(#scene-cl
  #v2-chrono-pop{top:calc(env(safe-area-inset-top) + 124px)}html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace :is(#scene-clock-control-choices,#scene-weather-control-choices,#scene-season-control-choices,#simulation-speed-choices){top:calc(env(safe-area-inset-top) + 82px)!important}}
 /* The hand, round 4 (Evan, 2026-10-23: "make them 2x bigger in the tray"; "When cards are in the lowered position, zero
    cards shall be earmarked. hover should pull up whole hand as is but cards should be further fanned out so each card
-   is fully visible"). Twice the 120 px card, a gentle fan with no overlap, and a lowered hand where every card sits level. */
+   is fully visible"). Only for the v2 faces (Cards v3 sizes its own hand). Twice the 120 px card, a gentle fan with no overlap, and a lowered hand where every card sits level. */
 html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:240px!important;height:336px!important;margin:0 7px!important;border-radius:11px!important;transform-origin:50% 100%!important}
-#v2-hand{height:calc(env(safe-area-inset-bottom) + 372px);transition:transform .16s ease-out}
-#v2-hand.tucked{transform:translate(-50%,236px)}
+#v2-hand:has(.v2-faced){height:calc(env(safe-area-inset-bottom) + 372px);transition:transform .16s ease-out}
+#v2-hand.tucked:has(.v2-faced){transform:translate(-50%,236px)}
 #v2-hand.tucked .generator-hero,#v2-hand.tucked .generator-hero:hover,#v2-hand.tucked .generator-hero[aria-pressed=true]{--lift:0px!important}
-@media(max-height:760px){html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:180px!important;height:252px!important;margin:0 5px!important}#v2-hand{height:calc(env(safe-area-inset-bottom) + 288px)}#v2-hand.tucked{transform:translate(-50%,176px)}}
-@media(max-width:520px){html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:min(68px,calc((100vw - 120px) / 4))!important;height:auto!important;aspect-ratio:63/88;margin:0 2px!important;border-radius:5px!important}#v2-hand{height:calc(env(safe-area-inset-bottom) + 132px)}#v2-hand.tucked{transform:translateY(58px)}}
+@media(max-height:760px){html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:180px!important;height:252px!important;margin:0 5px!important}#v2-hand:has(.v2-faced){height:calc(env(safe-area-inset-bottom) + 288px)}#v2-hand.tucked:has(.v2-faced){transform:translate(-50%,176px)}}
+@media(max-width:520px){html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:min(68px,calc((100vw - 120px) / 4))!important;height:auto!important;aspect-ratio:63/88;margin:0 2px!important;border-radius:5px!important}#v2-hand:has(.v2-faced){height:calc(env(safe-area-inset-bottom) + 132px)}#v2-hand.tucked:has(.v2-faced){transform:translateY(58px)}}
 /* The held card: lifted out of the hand, sharp, tilting toward the finger with a moving sheen. Nothing masks the world. */
 #v2-held{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;perspective:1100px;pointer-events:auto;cursor:pointer}
 #v2-held .v2-held-card{position:relative;border-radius:18px;overflow:hidden;transform:translate(var(--from-x),var(--from-y)) scale(var(--from-s));transition:transform .32s cubic-bezier(.2,1.25,.4,1),box-shadow .32s;box-shadow:0 2px 4px #0003,0 30px 60px -18px #0a1a2a99;will-change:transform}

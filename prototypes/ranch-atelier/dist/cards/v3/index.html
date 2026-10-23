@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cards v3</title>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+<link rel="stylesheet" href="./cards-v3.css">
+<style>
+ /* AW-STUDY-0014 card lab: the hand over a still of the live scene (same camera as the sandbox), tap a card to hold it.
+    ?style=slice|print|diecut picks the direction. */
+ html,body{margin:0;height:100%;background:#e2cbb0 url(./img/scene.jpg) center/cover no-repeat;overflow:hidden;font-family:Roboto,'Helvetica Neue',Arial,sans-serif}
+ #hand{position:fixed;left:50%;bottom:-18px;transform:translateX(-50%);display:flex;align-items:flex-end}
+ #hand button{all:unset;cursor:pointer;width:120px;margin:0 -10px;transform:rotate(var(--r));transform-origin:50% 120%;transition:transform .2s cubic-bezier(.2,1.4,.4,1);
+  filter:drop-shadow(0 1px 0 #d9d2c2) drop-shadow(0 1.5px 0 #ece6d9) drop-shadow(0 10px 12px #2b1d0e40)}
+ #hand button:hover{transform:rotate(var(--r)) translateY(-14px)}
+ #hand canvas{display:block;width:100%;height:auto}
+ #styles{position:fixed;top:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+ #styles a{font:500 13px/1 Roboto,sans-serif;color:#2b2a26;text-decoration:none;padding:9px 13px;border-radius:999px;background:color-mix(in srgb,#fffcf0 45%,transparent);border:1px solid #ffffffc0;-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
+ #styles a[aria-current]{background:#2b2a26;color:#f3eee2}
+ @media(max-width:520px){#hand button{width:84px;margin:0 -8px}#hand{bottom:-26px}}
+</style></head><body>
+<nav id="styles"></nav>
+<div id="hand"></div>
+<script type="module">
+ import {renderFace, STYLES, PLACES} from './face.mjs';
+ import {openCard} from './paper.mjs';
+ import {facetCards} from './facets.mjs';
+ const style = STYLES.includes(new URLSearchParams(location.search).get('style')) ? new URLSearchParams(location.search).get('style') : 'slice';
+ for (const s of STYLES) { const a = document.createElement('a'); a.href = '?style=' + s; a.textContent = {slice: 'Slice', print: "Artist's proof", diecut: 'Die-cut'}[s]; if (s === style) a.setAttribute('aria-current', 'page'); styles.append(a); }
+ const ids = Object.keys(PLACES), dpr = Math.min(3, devicePixelRatio || 1);
+ ids.forEach(async (id, i) => {
+  const b = document.createElement('button'); b.style.setProperty('--r', ((i - 1.5) * 5) + 'deg'); b.setAttribute('aria-label', PLACES[id].name); hand.append(b);
+  const art = `/simulations/assets/tile-cards/${id}.webp?v=2`;
+  const {canvas} = await renderFace({id, art}, {style, dpi: Math.ceil(120 * dpr * 1.25 / (63 / 25.4))}); b.append(canvas);
+  b.onclick = () => { b.style.visibility = 'hidden'; openCard({id, art: `/simulations/assets/tile-cards-hd/${id}.webp?v=1`, style, from: b.getBoundingClientRect(), facets: facetCards, onClose: () => { b.style.visibility = ''; }}); };
+ });
+</script>
+</body></html>
