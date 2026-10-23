@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>AW-STUDY-0030 - Family Cast</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="The Abbie's World family cast: everyone young in Daddy's memory places and as they are now, each with a storybook character sheet and designed voices to pick from.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* A family album at dusk: each person is a pair of pages, then and now, with their voices underneath.
+   Stylized storybook portraits drawn from written sheets, never from photos. Voices are designed, never cloned. */
+:root{
+ --bg:#f5efe7;--paper:#fffaf4;--ink:#2b2333;--muted:#6e6476;--line:#e4d8ca;--accent:#b5562c;--glass:rgba(255,255,255,.62);--glow:rgba(181,86,44,.18);
+ --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;--body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+ --skin:#e8b48e;--skin-shade:#d39a74}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1724;--paper:#251f31;--ink:#f3eadf;--muted:#ab9fb4;--line:#3b3150;--accent:#ffb36b;--glass:rgba(48,38,66,.6);--glow:rgba(255,179,107,.16);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1b1724;--paper:#251f31;--ink:#f3eadf;--muted:#ab9fb4;--line:#3b3150;--accent:#ffb36b;--glass:rgba(48,38,66,.6);--glow:rgba(255,179,107,.16);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);padding-block:20px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;line-height:1}
+h1{font-size:clamp(44px,8vw,78px);font-weight:800;color:var(--accent);letter-spacing:-.01em}
+h2{font-size:30px;font-weight:700}h3{font-size:24px;font-weight:700}
+p{margin:0;max-width:68ch}.muted{color:var(--muted)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+header{display:grid;gap:12px}
+.rules{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 12px/1 var(--mono);padding:7px 10px;border-radius:99px;border:1px solid var(--line);background:var(--paper);color:var(--muted)}
+.family{display:grid;gap:22px}
+.person{display:grid;gap:14px;padding:18px;border-radius:24px;background:var(--paper);border:1px solid var(--line);box-shadow:0 18px 40px -28px var(--glow)}
+.person>h2{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.person>h2 small{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ages{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.who{display:grid;grid-template-columns:132px minmax(0,1fr);gap:14px;align-items:start;padding:14px;border-radius:18px;background:var(--glass);border:1px solid var(--line);position:relative}
+.who .art{width:132px;height:156px;border-radius:16px;overflow:hidden;background:var(--c);position:relative}
+.who .art svg{width:100%;height:100%;display:block}
+.who .txt{display:grid;gap:6px;min-width:0}
+.tag{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--c2)}
+dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 10px;font-size:14px}
+dt{color:var(--muted)}dd{margin:0}
+.evan{color:var(--accent);font-weight:700}
+.evan::after{content:" ✓";font-weight:400}
+.voices{grid-column:1/-1;display:grid;gap:8px}
+.vrow{display:flex;flex-wrap:wrap;gap:8px}
+.v{display:flex;align-items:center;gap:8px;padding:6px 8px 6px 6px;border-radius:99px;border:1px solid var(--line);background:var(--paper);font:500 13px/1 var(--mono);color:var(--ink)}
+.v button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.v button:focus-visible,.v label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.v.playing button{animation:pulse 1s ease-in-out infinite}
+.v label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.v input{accent-color:var(--accent);margin:0}
+.v.picked{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
+@keyframes pulse{50%{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.v.playing button{animation:none}}
+.pending{font-size:14px;color:var(--muted)}
+.line{font-size:14px;color:var(--muted);font-style:italic}
+.send{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:20px;background:var(--glass);backdrop-filter:saturate(1.4);border:1px solid var(--line);box-shadow:0 20px 40px -24px rgba(0,0,0,.35)}
+.send code{font:500 12px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere;min-width:0;flex:1}
+.btn{all:unset;cursor:pointer;font:700 15px/1 var(--body);padding:12px 18px;border-radius:99px;background:var(--accent);color:var(--bg)}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.btn[disabled]{opacity:.5;cursor:default}
+section.notes{display:grid;gap:10px}
+ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
+@media (max-width:460px){.who{grid-template-columns:96px minmax(0,1fr)}.who .art{width:96px;height:116px}}
+</style>
+<div class="wrap">
+ <header>
+  <div class="eyebrow">AW-STUDY-0030</div>
+  <h1>Family Cast</h1>
+  <p class="muted">Everyone who lives in Daddy's memory places, as a kid back then and as they are now. Each one has a storybook character sheet and a few designed voices saying a line of their own. Tap a voice to hear it and pick the one that sounds right. Ticked details are the ones you told me; the rest are placeholders for you to correct.</p>
+  <div class="rules"><span class="chip">Designed voices, never cloned</span><span class="chip">Storybook characters, no photos</span><span class="chip">One voice per character, shared by every game</span></div>
+ </header>
+ <div class="family" id="family"><p class="pending">Opening the album…</p></div>
+ <div class="send" id="send"><code id="picks">No picks yet. Tap a voice, then tick it.</code><button class="btn" id="go" type="button" disabled>Send my picks</button></div>
+ <section class="notes">
+  <h2>How it is made</h2>
+  <ul>
+   <li>The sheets live in <code>tools/voice-cast/cast.json</code>. Every voice is made by ElevenLabs Voice Design from a written description (a voice actor performing the character), with three takes per description.</li>
+   <li>Your pick becomes a saved voice, and every memory place (the school jump, Grace's basement, the Moon base) voices its lines with it.</li>
+   <li>The portraits are drawn from the sheets. Hi-fi character art follows once the Mac's picture tool is cleared for the family.</li>
+  </ul>
+ </section>
+</div>
+<script>
+const FAMILY=[['daddy','Daddy'],['abbie','Abbie'],['ani','Ani'],['mommy','Mommy'],['lexi','Auntie Lexi'],['jeff','Uncle Jeff'],['pearl','Pearl'],['georgia','Georgia'],['bub','Bub, the dog'],['street-grownup','The grown-up on the street'],['janitor','The school janitor']];
+const PICKS_KEY='aw-family-cast-picks';
+let picks={};try{picks=JSON.parse(localStorage.getItem(PICKS_KEY)||'{}')}catch{}
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// Storybook portrait from the written sheet: proportions follow age, hair follows the sheet's words.
+function portrait(ch){
+ const L=ch.looks||{};
+ if(L.breed)return dog(L);
+ const age=+L.age||30,kid=age<13,teen=age>=13&&age<18;
+ const hr=kid?34:teen?30:28, cy=kid?70:64, H=L.hairColor, hair=(L.hair||'').toLowerCase();
+ const shirt=L.color||'#888', sh=kid?42:52;
+ let back='',front='';
+ const fill=H?`fill="${H}"`:'';
+ if(H){
+  if(/long|ponytail|braid|pigtail|shoulder|half up/.test(hair)){
+   const len=/shoulder/.test(hair)?30:/long|half/.test(hair)?52:20;
+   back+=`<path ${fill} d="M${66-hr-4} ${cy}q0 -${hr+8} ${hr+4} -${hr+8}t${hr+4} ${hr+8}v${len}h-${2*hr+8}z"/>`;
+  }
+  if(/pigtail/.test(hair))back+=`<circle ${fill} cx="${66-hr-8}" cy="${cy+4}" r="10"/><circle ${fill} cx="${66+hr+8}" cy="${cy+4}" r="10"/>`;
+  if(/braid/.test(hair))back+=`<rect ${fill} x="${66-hr-6}" y="${cy}" width="9" height="46" rx="4"/><rect ${fill} x="${66+hr-3}" y="${cy}" width="9" height="46" rx="4"/>`;
+  if(/ponytail/.test(hair))back+=`<path ${fill} d="M${66+hr-2} ${cy-hr+6}q24 6 14 46q-8 -20 -18 -30z"/>`;
+  if(/mop|curly/.test(hair))front+=`<path ${fill} d="M${66-hr-3} ${cy+2}q-4 -${hr+10} ${hr+3} -${hr+6}q${hr+10} -4 ${hr+3} ${hr+8}q-10 -12 -20 -8q-6 -8 -16 -2q-8 -6 -18 2q-6 2 -10 10z"/>`+(/curly/.test(hair)?`<circle ${fill} cx="${66-hr+2}" cy="${cy+14}" r="9"/><circle ${fill} cx="${66+hr-2}" cy="${cy+14}" r="9"/>`:'');
+  else if(/buzz|crew/.test(hair))front+=`<path ${fill} d="M${66-hr+1} ${cy-6}q0 -${hr-4} ${hr-1} -${hr-4}t${hr-1} ${hr-4}q-${hr-2} -6 -${2*hr-2} 0z" opacity=".95"/>`;
+  else if(/thinning/.test(hair))front+=`<path ${fill} d="M${66-hr} ${cy}q2 -14 10 -18v12zM${66+hr} ${cy}q-2 -14 -10 -18v12z"/>`;
+  else front+=`<path ${fill} d="M${66-hr-3} ${cy+6}q-2 -${hr+12} ${hr+3} -${hr+10}q${hr+6} 0 ${hr+3} ${hr+10}q-8 -16 -${hr} -14q-${hr-10} 2 -${hr+6} 14z"/>`;
+  if(/bow/.test(hair))front+=`<path fill="#e0405a" d="M${66+hr-18} ${cy-hr+2}l-12 -8v16zM${66+hr-18} ${cy-hr+2}l12 -8v16z"/><circle fill="#c2304a" cx="${66+hr-18}" cy="${cy-hr+2}" r="3.5"/>`;
+ }
+ let beard='';
+ if(L.beard&&/beard/.test(L.beard))beard=`<path fill="${L.beardColor||'#777'}" d="M${66-hr+4} ${cy+2}q2 ${hr+8} ${hr-4} ${hr+10}q${hr-6} -2 ${hr-4} -${hr+10}q-4 12 -10 14q-${hr-14} 6 -${2*hr-28} 0q-6 -2 -10 -14z"/>`;
+ if(L.beard&&/moustache/.test(L.beard))beard=`<path fill="${L.beardColor||'#777'}" d="M52 ${cy+14}q14 -8 28 0q-6 6 -14 2q-8 4 -14 -2z"/>`;
+ const shine=/bald/.test(hair)?`<ellipse cx="${66-10}" cy="${cy-hr+10}" rx="9" ry="5" fill="#fff" opacity=".35"/>`:'';
+ const eye=L.eyes||'#4a3526', ey=cy+2;
+ const glasses='';
+ return `<svg viewBox="0 0 132 156" aria-hidden="true">
+  <circle cx="110" cy="22" r="40" fill="#fff" opacity=".12"/>
+  ${back}
+  <path fill="${shirt}" d="M${66-sh} 156q0 -${kid?44:50} ${sh} -${kid?44:50}t${sh} ${kid?44:50}z"/>
+  <path fill="#000" opacity=".12" d="M${66-sh} 156q0 -${kid?44:50} ${sh} -${kid?44:50}v${kid?44:50}z"/>
+  <rect x="58" y="${cy+hr-6}" width="16" height="16" rx="6" fill="var(--skin-shade)"/>
+  ${/crop/.test(L.outfit||'')?`<rect x="${66-sh+14}" y="${156-18}" width="${2*sh-28}" height="18" fill="var(--skin)"/>`:''}
+  <circle cx="66" cy="${cy}" r="${hr}" fill="var(--skin)"/>
+  <circle cx="${66-hr+2}" cy="${cy+4}" r="6" fill="var(--skin-shade)"/><circle cx="${66+hr-2}" cy="${cy+4}" r="6" fill="var(--skin-shade)"/>
+  ${shine}${beard}
+  <circle cx="${66-11}" cy="${ey}" r="${kid?4.6:3.8}" fill="${eye}"/><circle cx="${66+11}" cy="${ey}" r="${kid?4.6:3.8}" fill="${eye}"/>
+  <circle cx="${66-10}" cy="${ey-1.4}" r="1.3" fill="#fff"/><circle cx="${66+12}" cy="${ey-1.4}" r="1.3" fill="#fff"/>
+  <path d="M${66-7} ${cy+15}q7 6 14 0" stroke="#7a3b2e" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  ${kid?`<circle cx="${66-20}" cy="${cy+11}" r="4.5" fill="#f08a8a" opacity=".45"/><circle cx="${66+20}" cy="${cy+11}" r="4.5" fill="#f08a8a" opacity=".45"/>`:''}
+  ${front}${glasses}
+ </svg>`;
+}
+function dog(L){
+ const c=L.coat||'#1b1a1a';
+ return `<svg viewBox="0 0 132 156" aria-hidden="true">
+  <circle cx="110" cy="22" r="40" fill="#fff" opacity=".12"/>
+  <path fill="${c}" d="M20 156q2 -46 46 -52q44 6 46 52z"/>
+  <path fill="${c}" d="M40 58q0 -30 26 -30t26 30q0 22 -8 36q-8 12 -18 12t-18 -12q-8 -14 -8 -36z"/>
+  <path fill="${c}" d="M40 46q-14 4 -14 26q2 14 10 16q6 -20 8 -36z"/><path fill="${c}" d="M92 46q14 4 14 26q-2 14 -10 16q-6 -20 -8 -36z"/>
+  <path fill="#fff" opacity=".08" d="M50 50q16 -14 32 0q-16 -6 -32 0z"/>
+  <circle cx="56" cy="64" r="3.6" fill="${L.eyes||'#6b4a2a'}"/><circle cx="76" cy="64" r="3.6" fill="${L.eyes||'#6b4a2a'}"/>
+  <circle cx="57" cy="63" r="1.1" fill="#fff"/><circle cx="77" cy="63" r="1.1" fill="#fff"/>
+  <ellipse cx="66" cy="84" rx="8" ry="5.5" fill="#000"/>
+  <path d="M60 95q6 10 12 0" fill="#e86a7a"/>
+  <path d="M42 108q24 10 48 0" stroke="#c0392b" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <circle cx="66" cy="117" r="5" fill="#d8b04a"/>
+ </svg>`;
+}
+const LABEL={age:'Age',breed:'Breed',hair:'Hair',beard:'Beard',outfit:'Wears',collar:'Collar'};
+function sheet(ch){
+ const L=ch.looks||{},ev=(L.evan||[]).join(' ').toLowerCase();
+ const said=v=>{const s=String(v).toLowerCase();return ev&&ev.split(/,| /).filter(w=>w.length>3).some(w=>s.includes(w))};
+ const rows=Object.entries(LABEL).filter(([k])=>L[k]!=null).map(([k,l])=>`<dt>${l}</dt><dd class="${said(L[k])?'evan':''}">${esc(L[k])}</dd>`).join('');
+ const extra=(L.evan||[]).filter(e=>!Object.keys(LABEL).some(k=>L[k]!=null&&String(L[k]).toLowerCase().includes(e.toLowerCase().split(' ').pop())));
+ return `<dl>${rows}${extra.length?`<dt>You said</dt><dd class="evan">${esc(extra.join(', '))}</dd>`:''}</dl>`;
+}
+function voices(ch,cand){
+ if(!ch.descriptions?.length)return `<div class="voices"><p class="pending">${esc(ch.voice||'No voice.')}</p></div>`;
+ const c=cand?.candidates||[];
+ const line=`<p class="line">“${esc(ch.sample)}”</p>`;
+ if(!c.length)return `<div class="voices">${line}<p class="pending">${cand?.errors?.length?'ElevenLabs turned these descriptions down; rewording them.':'Voices are being designed now; they appear here as soon as they land.'}</p></div>`;
+ return `<div class="voices">${line}<div class="vrow">${c.map(v=>`<span class="v ${picks[ch.id]==v.n?'picked':''}" data-id="${ch.id}" data-n="${v.n}">
+   <button type="button" aria-label="Play voice ${v.n} for ${esc(ch.name)}" data-src="${esc(v.url)}">▶</button>
+   <label><input type="radio" name="pick-${ch.id}" id="pick-${ch.id}-${v.n}" value="${v.n}" ${picks[ch.id]==v.n?'checked':''}>Voice ${v.n}</label></span>`).join('')}</div></div>`;
+}
+function render(cast,cand){
+ const by=Object.fromEntries(cast.characters.map(c=>[c.id,c]));
+ document.getElementById('family').innerHTML=FAMILY.map(([key,title])=>{
+  const ids=[`${key}-young`,`${key}-now`,key].filter(i=>by[i]);
+  if(!ids.length)return '';
+  return `<article class="person"><h2>${esc(title)}${ids.length>1?'<small>Then and now</small>':''}</h2><div class="ages">${ids.map(id=>{
+   const ch=by[id],L=ch.looks||{};
+   const tag=ch.group==='young'?'Back then':ch.group==='now'?'Now':'In the games';
+   return `<div class="who" style="--c:${L.color};--c2:${L.color}"><div class="art">${portrait(ch)}</div><div class="txt"><span class="tag">${tag}</span><h3>${esc(ch.name)}</h3>${sheet(ch)}</div>${voices(ch,cand.characters?.[id])}</div>`;
+  }).join('')}</div></article>`;
+ }).join('');
+ showPicks();
+}
+function showPicks(){
+ const s=Object.entries(picks).map(([k,v])=>`${k}=${v}`).join(',');
+ document.getElementById('picks').textContent=s?`Picks: ${s}`:'No picks yet. Tap a voice, then tick it.';
+ document.getElementById('go').disabled=!s;
+}
+let audio=null,playing=null;
+document.addEventListener('click',e=>{
+ const b=e.target.closest('.v button');if(!b)return;
+ const chip=b.closest('.v');
+ if(audio){audio.pause();playing?.classList.remove('playing')}
+ if(playing===chip){playing=null;return}
+ audio=new Audio(b.dataset.src);playing=chip;chip.classList.add('playing');
+ audio.onended=()=>{chip.classList.remove('playing');playing=null};
+ audio.play().catch(()=>{chip.classList.remove('playing');b.textContent='!';});
+});
+document.addEventListener('change',e=>{
+ const r=e.target.closest('.v input');if(!r)return;
+ const chip=r.closest('.v');picks[chip.dataset.id]=+chip.dataset.n;
+ document.querySelectorAll(`.v[data-id="${chip.dataset.id}"]`).forEach(x=>x.classList.toggle('picked',x===chip));
+ try{localStorage.setItem(PICKS_KEY,JSON.stringify(picks))}catch{}
+ showPicks();
+});
+document.getElementById('go').addEventListener('click',async e=>{
+ const b=e.currentTarget,s=Object.entries(picks).map(([k,v])=>`${k}=${v}`).join(',');
+ b.disabled=true;b.textContent='Sending…';
+ const ok=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({note:`Family cast voice picks: ${s}`,page:location.pathname,title:document.title,thread:'cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh',threadTitle:'Family cast'})}).then(r=>r.ok||r.status).catch(()=>false);
+ b.textContent=ok===true?'Sent to Claude':ok===401?'Sign in first':'Try again';b.disabled=ok===true;
+});
+const inline=id=>{const el=document.getElementById(id);return el?JSON.parse(el.textContent):null};
+Promise.all([
+ inline('cast-data')||fetch('cast.json').then(r=>r.json()),
+ inline('candidates-data')||fetch('candidates.json').then(r=>r.ok?r.json():{characters:{}}).catch(()=>({characters:{}}))
+]).then(([cast,cand])=>render(cast,cand)).catch(()=>{document.getElementById('family').innerHTML='<p class="pending">The cast sheet did not load. Reload the page.</p>'});
+</script>
