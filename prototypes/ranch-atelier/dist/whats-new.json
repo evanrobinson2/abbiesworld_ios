@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-faces",
+      "date": "2026-10-23",
+      "title": "Faces that feel",
+      "line": "A toy with 18 feelings, from joy to sleepy, as a 3D face, a painted face and a faceless wooden body. Type a line and it says it with the right face. Plus how 40 of your games do faces.",
+      "image": "/whats-new/2026-10-23-faces.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXPv4h99Qoyh4YdoLaDVtxx",
+      "threadTitle": "AW-STUDY-0039 - Facial Expressions",
+      "tour": false,
+      "link": "/studies/faces/"
+    },
+    {
       "id": "2026-10-23-moon-base-kit-r3",
       "date": "2026-10-23",
       "title": "Moon base: the dome, the tower and real crater rocks",

@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AW-STUDY-0039 - Facial Expressions</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="How the games in your library do faces (blendshapes, bone faces, texture swaps, decals and faceless bodies), turned into one expression set our characters use, driven by the voice and the line.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: opens on the live character (3D and 2D, same feeling); the lessons, your games and the set follow. */
+:root{
+ --bg:#efe9e1; --paper:#f8f4ee; --ink:#26211e; --muted:#6c655e; --line:#d8cfc4;
+ --accent:#d4508a; --accent2:#5a72c8; --good:#2f8a5b; --glass:rgba(255,255,255,.55); --rim:rgba(255,255,255,.8);
+ --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+ --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#1c1a19; --paper:#262321; --ink:#efebe5; --muted:#a59f97; --line:#3b3734; --accent:#ff7fb2; --accent2:#8da2ff; --good:#5cc08b;
+ --glass:rgba(44,40,38,.6); --rim:rgba(255,255,255,.18); color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#1c1a19; --paper:#262321; --ink:#efebe5; --muted:#a59f97; --line:#3b3734; --accent:#ff7fb2; --accent2:#8da2ff; --good:#5cc08b;
+ --glass:rgba(44,40,38,.6); --rim:rgba(255,255,255,.18); color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px}
+.wrap{min-width:0;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1{font-size:clamp(36px,6.5vw,62px);line-height:.95}
+h2{font-size:30px;line-height:1.05}
+h3{font-size:21px;line-height:1.1}
+p{margin:0;max-width:72ch}
+.muted{color:var(--muted)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+header,section{display:grid;gap:12px}
+.pair{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:12px}
+@media (max-width:860px){.pair{grid-template-columns:1fr}}
+.frame{position:relative;margin:0;border-radius:18px;overflow:hidden;min-height:300px}
+.stage{aspect-ratio:4/3;background:radial-gradient(120% 90% at 50% 25%,#fbefe2,#e7c9b0 70%,#d7ad8f)}
+.flat{aspect-ratio:4/3;background:radial-gradient(100% 90% at 50% 35%,#fff6ec,#f3dcc8)}
+.stage canvas,.flat canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.tag{position:absolute;top:10px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+ color:#fbf6f0;background:rgba(36,26,22,.5);padding:6px 8px;border-radius:6px;pointer-events:none;z-index:3}
+.tag.l{left:10px}.tag.r{right:10px}.tag.b{top:auto;bottom:10px;left:10px;text-transform:none;letter-spacing:0;font-size:12px;max-width:calc(100% - 20px)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tog{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:99px;
+ font:600 14px/1 var(--body);border:1px solid var(--rim);background:linear-gradient(160deg,rgba(255,255,255,.4),transparent 60%),var(--glass);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 6px 14px -10px rgba(0,0,0,.5);transition:transform .1s}
+.tog:active{transform:scale(.96)}
+.tog i{width:10px;height:10px;border-radius:50%;background:var(--line);flex:none;transition:background .15s}
+.tog[aria-pressed=true]{border-color:var(--accent)}
+.tog[aria-pressed=true] i{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.tog:focus-visible{outline:2px solid var(--accent)}
+.tog.big{padding:11px 18px;font-size:16px;background:linear-gradient(160deg,rgba(255,255,255,.35),transparent 60%),var(--accent);color:#fff;border-color:transparent}
+.stat{font:500 12.5px/1.35 var(--mono);color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:980px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:8px;align-content:start}
+.card .games{font-size:14px;color:var(--muted)}
+.pill{display:inline-block;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:6px;background:var(--line);color:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--paper)}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font:600 12px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);position:sticky;top:0;background:var(--paper)}
+.scroll{overflow-x:auto;border-radius:16px;border:1px solid var(--line)}
+td canvas{width:64px;height:64px;display:block}
+td.n{font-family:var(--mono);font-size:13px}
+.line{display:grid;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px}
+.line textarea{width:100%;min-height:70px;resize:vertical;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:17px/1.4 var(--body);padding:10px 12px}
+.vis{display:flex;flex-wrap:wrap;gap:3px;font:500 11px/1 var(--mono)}
+.vis span{padding:4px 5px;border-radius:5px;background:var(--line)}
+.vis span.on{background:var(--accent);color:#fff}
+.vis span.x{background:var(--accent2);color:#fff}
+.mono{font-family:var(--mono);font-size:13.5px;overflow-wrap:anywhere}
+ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:80ch}
+svg text{font-family:var(--body)}
+.diagram{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px;overflow-x:auto}
+.diagram svg{min-width:720px;width:100%;height:auto;display:block}
+.layout{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
+@media (max-width:1100px){.layout{grid-template-columns:1fr}.ctx{order:-1}}
+.ctx{position:sticky;top:16px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:10px;font-size:14px;max-height:calc(100vh - 32px);overflow:auto}
+@media (max-width:1100px){.ctx{position:static;max-height:none}}
+.ctx h2{font-size:22px}.ctx h3{font:600 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:6px}
+.ctx ul{padding-left:16px;gap:7px}.ctx a{color:var(--ink)}.ctx .u{display:block;color:var(--muted);font-size:13px}
+footer{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="layout">
+<div class="wrap">
+
+<header>
+ <div class="eyebrow">AW-STUDY-0039 · Character studio</div>
+ <h1>Facial Expressions</h1>
+ <p>How the games in your library do faces, and one expression set our characters can use. Pick a feeling: the 3D toy, its painted 2D twin and the faceless mannequin all play it from the same numbers. Then type a line, and the line drives the face.</p>
+</header>
+
+<section aria-label="Live character">
+ <div class="pair">
+  <figure class="frame stage" id="stage"><canvas id="c3"></canvas><span class="tag l" id="modeTag">Bones + blendshapes</span><span class="tag b" id="read">…</span></figure>
+  <figure class="frame flat"><canvas id="c2"></canvas><span class="tag l">2D puppet · same numbers</span><span class="tag b" id="feel"></span></figure>
+ </div>
+ <div class="row" id="exprs" role="group" aria-label="Feeling"></div>
+ <div class="row" role="group" aria-label="How the face is made">
+  <button class="tog" data-mode="rig" aria-pressed="true"><i></i>Bones + blendshapes</button>
+  <button class="tog" data-mode="painted" aria-pressed="false"><i></i>Painted swap</button>
+  <button class="tog" data-mode="faceless" aria-pressed="false"><i></i>Faceless</button>
+  <button class="tog" id="far" aria-pressed="false"><i></i>Step back</button>
+  <button class="tog" id="push" aria-pressed="true"><i></i>Push it when far</button>
+ </div>
+ <p class="stat">Drag to orbit, pinch to zoom. When the face gets smaller than about 40 pixels it stops reading, so the character pushes its expression and body harder and a little bubble appears over its head. The bubble is only drawn for you; nobody in the world can see it.</p>
+</section>
+
+<section aria-labelledby="say">
+ <h2 id="say">Say a line</h2>
+ <p class="muted">Tags in square brackets set the feeling from that word on, and the voice gets the same tags. Without tags, a question mark makes the face curious and "..." makes it think. The mouth shapes come from the letters.</p>
+ <div class="line">
+  <div class="row" id="samples"></div>
+  <textarea id="text" aria-label="Line to say">[curious] What's down there? [surprised] Whoa! [joy] A gold coin, Daddy!</textarea>
+  <div class="row"><button class="tog big" id="speak">Say it</button><button class="tog" id="voice" aria-pressed="true"><i></i>Speak with this device's voice</button></div>
+  <div class="stat">The voice gets: <span class="mono" id="vtext"></span></div>
+  <div class="vis" id="vis" aria-label="Mouth shapes"></div>
+ </div>
+</section>
+
+<section aria-labelledby="tech">
+ <h2 id="tech">Six ways games make faces</h2>
+ <p class="muted">Each card says which of your games use it. Tap "show me" to switch the toy above.</p>
+ <div class="cards" id="techCards"></div>
+</section>
+
+<section aria-labelledby="lib">
+ <h2 id="lib">Your library, face by face</h2>
+ <p class="muted">40 games from the Game Oracle, sorted by how they make faces, from public knowledge in our own words. The camera distance decides most of it.</p>
+ <div class="row" id="filters" role="group" aria-label="Filter by technique"></div>
+ <div class="scroll"><table><thead><tr><th>Game</th><th>How</th><th>Seen from</th><th>What it does</th><th>Why it works</th><th>Lesson for us</th></tr></thead><tbody id="gameRows"></tbody></table></div>
+</section>
+
+<section aria-labelledby="set">
+ <h2 id="set">Our expression set</h2>
+ <p class="muted">18 feelings, each a face, a body pose, a far-away bubble, a voice direction and a mood that can steer music and light. Data: <span class="mono">simulations/face-kit.mjs</span>.</p>
+ <div class="scroll"><table><thead><tr><th></th><th>Feeling</th><th>In a child's words</th><th>Body</th><th>Bubble</th><th>Voice tag</th><th>Mood</th></tr></thead><tbody id="setRows"></tbody></table></div>
+</section>
+
+<section aria-labelledby="drive">
+ <h2 id="drive">How the voice and the line drive it</h2>
+ <p class="muted">One line, written once, drives the voice and the face. Scripted lines are rendered ahead with timestamps, so the mouth is exact; live lines stream, and the face follows word timings or simply the loudness.</p>
+ <div class="diagram"><svg viewBox="0 0 1000 300" role="img" aria-label="Line to voice and face pipeline">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.5" opacity=".8" style="color:var(--muted)">
+   <path d="M210 150H262" marker-end="url(#ar)"/><path d="M462 110H520" marker-end="url(#ar)"/><path d="M462 190H520" marker-end="url(#ar)"/>
+   <path d="M720 110C750 110 750 150 782 150" marker-end="url(#ar)"/><path d="M720 190C750 190 750 150 782 150" marker-end="url(#ar)"/>
+  </g>
+  <g font-size="15" fill="var(--ink)">
+   <rect x="10" y="95" width="200" height="110" rx="14" fill="var(--paper)" stroke="var(--line)"/>
+   <text x="24" y="124" font-weight="700">The line</text><text x="24" y="148" font-size="13" fill="var(--muted)">[surprised] Whoa!</text><text x="24" y="168" font-size="13" fill="var(--muted)">[joy] A gold coin!</text><text x="24" y="190" font-size="12" fill="var(--muted)">written by the story or the AI</text>
+   <rect x="264" y="60" width="198" height="180" rx="14" fill="var(--paper)" stroke="var(--line)"/>
+   <text x="278" y="88" font-weight="700">parseLine</text><text x="278" y="112" font-size="13" fill="var(--muted)">tags → expressions</text><text x="278" y="132" font-size="13" fill="var(--muted)">? → curious, ... → thinking</text><text x="278" y="152" font-size="13" fill="var(--muted)">! → stronger</text><text x="278" y="176" font-size="13" fill="var(--muted)">voiceText: same tags</text><text x="278" y="196" font-size="13" fill="var(--muted)">as voice direction</text>
+   <rect x="522" y="70" width="198" height="80" rx="14" fill="var(--paper)" stroke="var(--line)"/>
+   <text x="536" y="98" font-weight="700">Voice (ElevenLabs)</text><text x="536" y="120" font-size="13" fill="var(--muted)">cast voice, v3 tags</text><text x="536" y="139" font-size="13" fill="var(--muted)">+ character timestamps</text>
+   <rect x="522" y="160" width="198" height="80" rx="14" fill="var(--paper)" stroke="var(--line)"/>
+   <text x="536" y="188" font-weight="700">Mouth shapes</text><text x="536" y="210" font-size="13" fill="var(--muted)">letters → 10 visemes</text><text x="536" y="229" font-size="13" fill="var(--muted)">or loudness → jaw</text>
+   <rect x="784" y="60" width="206" height="180" rx="14" fill="var(--paper)" stroke="var(--accent)"/>
+   <text x="798" y="88" font-weight="700">FaceDriver</text><text x="798" y="112" font-size="13" fill="var(--muted)">mood (slow)</text><text x="798" y="132" font-size="13" fill="var(--muted)">+ expression (snap, hold, ease)</text><text x="798" y="152" font-size="13" fill="var(--muted)">+ blinks, eye darts, breath</text><text x="798" y="172" font-size="13" fill="var(--muted)">+ speech</text><text x="798" y="200" font-size="13" fill="var(--muted)">→ 3D rig, painted, faceless</text><text x="798" y="220" font-size="13" fill="var(--muted)">→ mood to music + light</text>
+  </g>
+ </svg></div>
+ <ul>
+  <li><b>Scripted lines</b> (the school jump, the basement): render ahead with the cast voice and its timestamps, store the visemes next to the audio, play them in lockstep. Exact, and free at play time.</li>
+  <li><b>Live lines</b> (the characters answering Abbie): stream the same voice; the face follows word timings when the voice sends them, otherwise the loudness opens the jaw. The feeling still comes from the line's tags.</li>
+  <li><b>The game drives it too</b>: like the kerbals, a feeling can come from what happens (a coin found, the dog barking), not just from a script. The mood under it is what the character feels all scene.</li>
+ </ul>
+</section>
+
+<section aria-labelledby="rules">
+ <h2 id="rules">Rules for Abbie's World</h2>
+ <ul>
+  <li><b>Kids' faces are never redrawn.</b> The kit only moves the parts a character already has (lids, brows, mouth). It never paints or generates a likeness, and never uses a photo. Family characters keep the faces on their approved sheets.</li>
+  <li><b>PG always.</b> Grumpy, not furious; worried, not terrified; "yuck", not gross-out. No blood, no horror faces, no mocking.</li>
+  <li><b>No player-face capture.</b> Before Your Eyes reads your blinks by webcam; we keep a kid's camera off.</li>
+  <li><b>Face is world, bubble is presentation.</b> The face and body are part of the character, so other characters can react to them. The far-away bubble is drawn only for the player.</li>
+  <li><b>Camera first, then the face budget.</b> Close camera: eyes and brows matter most. Iso or far: push the body and summon a bubble or a portrait (Hades) instead of shrinking the face.</li>
+  <li><b>Eyes alive or not at all.</b> Blinks, eye darts and a held beat after each line; otherwise go faceless or painted (the Andromeda lesson).</li>
+ </ul>
+</section>
+
+<section aria-labelledby="next">
+ <h2 id="next">Next</h2>
+ <ul>
+  <li>Put the face rig on the rigged wooden mannequin and the Meshy heroes from the character studio (AW-STUDY-0037), and the 18 feelings into the 2D puppet as one-tap stock expressions.</li>
+  <li>Render the family cast's scripted lines with timestamps and store the visemes beside the audio.</li>
+  <li>One art-direction pass per style: claymation (big brows, squashy mouth), stick figure (swap sheet), 1980s action cartoon (hard brows, held poses), comic hero (Marvel Rivals style shading on the same rig).</li>
+ </ul>
+</section>
+
+<footer>AW-STUDY-0039 - Facial Expressions · Game Oracle face study, 2026-10-23 · kit: simulations/face-kit.mjs, face-rig3d.mjs · data: studies/faces/games-faces.json · doc: docs/oracle/faces/FACES_STUDY.md</footer>
+</div>
+<aside class="ctx" aria-labelledby="ctxh"><h2 id="ctxh">Context engineering</h2><p class="muted">What this study consulted before building.</p><div id="ctxBody"></div></aside>
+</div>
+
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
+<script type="module">
+import * as T from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {EXPRESSIONS, FaceDriver, pose, drawFace2D, drawEmote, exaggerate, voiceText, textToVisemes, parseLine} from '/simulations/face-kit.mjs';
+import {makeFaceCharacter} from '/simulations/face-rig3d.mjs';
+import {presentation, playerCamera} from '/simulations/presentation-layer.mjs';
+
+const $ = s => document.querySelector(s);
+const driver = new FaceDriver({mood: 'happy', seed: 7}); driver.setMood('happy', .5);
+
+// ---- 3D stage
+const c3 = $('#c3'), renderer = new T.WebGLRenderer({canvas: c3, antialias: true, alpha: true});
+renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const scene = new T.Scene();
+const camera = playerCamera(new T.PerspectiveCamera(30, 4 / 3, .05, 80));
+scene.fog = new T.Fog('#ead3bf', 14, 40);
+const NEAR = new T.Vector3(.25, 1.18, 1.55), FAR = new T.Vector3(2.6, 5.4, 17.5), target = new T.Vector3(0, 1.0, 0);
+camera.position.copy(NEAR);
+const controls = new OrbitControls(camera, c3); controls.target.copy(target); controls.enableDamping = true; controls.minDistance = .7; controls.maxDistance = 26; controls.maxPolarAngle = 1.5;
+scene.add(new T.HemisphereLight('#fff4e6', '#8a6a55', 1.3));
+const sun = new T.DirectionalLight('#fff0dc', 2.4); sun.position.set(2.5, 4, 3); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+Object.assign(sun.shadow.camera, {left: -2, right: 2, top: 2, bottom: -2}); sun.shadow.radius = 4; scene.add(sun);
+const rim = new T.DirectionalLight('#c9d8ff', 1.2); rim.position.set(-3, 2.5, -3); scene.add(rim);
+const ground = new T.Mesh(new T.CircleGeometry(16, 96), new T.MeshStandardMaterial({color: '#d9b892', roughness: .95})); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+// a few toy-box props so "far" has a world around it
+const blocks = [['#e8669a', -1.2, -.8], ['#5a9fd8', 1.3, -1.1], ['#f2c14e', .9, .9]].map(([c, x, z], i) => {
+ const b = new T.Mesh(new T.BoxGeometry(.32, .32, .32), new T.MeshStandardMaterial({color: c, roughness: .6})); b.position.set(x, .16, z); b.rotation.y = i * .7; b.castShadow = b.receiveShadow = true; scene.add(b); return b; });
+const toy = makeFaceCharacter(T); scene.add(toy.root); toy.root.traverse(o => { if (o.isMesh) o.receiveShadow = true; });
+
+// the spatial bubble: presentation layer only, invisible to any perception
+const ecan = document.createElement('canvas'); ecan.width = ecan.height = 128; const ectx = ecan.getContext('2d');
+const etex = new T.CanvasTexture(ecan); etex.colorSpace = T.SRGBColorSpace;
+const bubble = presentation(new T.Sprite(new T.SpriteMaterial({map: etex, transparent: true, depthTest: false})), {purpose: 'emote'});
+bubble.renderOrder = 10; scene.add(bubble); let lastEmote = 'x', bubbleK = 0;
+
+function resize() {
+ const r = c3.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix();
+ const c2 = $('#c2'), q = c2.getBoundingClientRect(), d = Math.min(2, devicePixelRatio); c2.width = q.width * d; c2.height = q.height * d;
+}
+addEventListener('resize', resize); resize();
+
+// ---- 2D twin
+const c2 = $('#c2'), ctx2 = c2.getContext('2d');
+
+// ---- controls: feelings
+const exprBox = $('#exprs');
+for (const [k, e] of Object.entries(EXPRESSIONS)) {
+ const b = document.createElement('button'); b.className = 'tog'; b.dataset.e = k; b.setAttribute('aria-pressed', 'false'); b.innerHTML = `<i></i>${e.label}`;
+ b.onclick = () => { driver.stop(); speechSynthesis?.cancel?.(); driver.set(k, {hold: 6}); mark(k); }; exprBox.append(b);
+}
+function mark(k) { for (const b of exprBox.children) b.setAttribute('aria-pressed', b.dataset.e === k); }
+const MODE_NAMES = {rig: 'Bones + blendshapes', painted: 'Painted swap', faceless: 'Faceless · body only'};
+function setMode(m) { toy.setMode(m); $('#modeTag').textContent = MODE_NAMES[m]; for (const b of document.querySelectorAll('[data-mode]')) b.setAttribute('aria-pressed', b.dataset.mode === m); }
+for (const b of document.querySelectorAll('[data-mode]')) b.onclick = () => setMode(b.dataset.mode);
+let far = false, push = true, fly = null;
+$('#far').onclick = () => { far = !far; $('#far').setAttribute('aria-pressed', far); fly = {from: camera.position.clone(), to: (far ? FAR : NEAR).clone(), t: 0}; };
+$('#push').onclick = () => { push = !push; $('#push').setAttribute('aria-pressed', push); };
+
+// ---- say a line
+const SAMPLES = ['[curious] What\'s down there? [surprised] Whoa! [joy] A gold coin, Daddy!', '[sad] Bub ran off... [worried] Bub? Where are you? [love] There you are!',
+ '[mischief] Watch this. [proud] I climbed the whole thing myself!', '[sleepy] Is it bedtime already... [shy] Can you read one more story?', '[yuck] Broccoli again? [grumpy] Hmph. [laugh] Okay, just one bite!'];
+for (const s of SAMPLES) { const b = document.createElement('button'); b.className = 'tog'; b.textContent = s.replace(/\[[a-z]+\]\s*/g, '').slice(0, 28) + '…'; b.onclick = () => { $('#text').value = s; say(); }; $('#samples').append(b); }
+let useVoice = true; $('#voice').onclick = () => { useVoice = !useVoice; $('#voice').setAttribute('aria-pressed', useVoice); };
+let visEls = [];
+function showLine() {
+ const line = $('#text').value; $('#vtext').textContent = voiceText(line);
+ const segs = parseLine(line); let text = ''; for (const s of segs) text += s.text + ' ';
+ const {visemes} = textToVisemes(text); $('#vis').innerHTML = ''; visEls = visemes.map(v => { const sp = document.createElement('span'); sp.textContent = v.v; $('#vis').append(sp); return sp; });
+}
+$('#text').addEventListener('input', showLine); showLine();
+function say() {
+ showLine(); speechSynthesis?.cancel?.(); mark(null);
+ const plan = driver.say($('#text').value);
+ if (useVoice && 'speechSynthesis' in window) {
+  const u = new SpeechSynthesisUtterance(plan.text); u.pitch = 1.35; u.rate = 1;
+  u.onboundary = e => driver.sync(e.charIndex); // pull the mouth back onto the voice at each word
+  speechSynthesis.speak(u);
+ }
+}
+$('#speak').onclick = say;
+
+// ---- techniques
+const games = await (await fetch('./games-faces.json')).json();
+const byTech = {}; for (const g of games.games) (byTech[g.technique] ||= []).push(g);
+const TECH = [
+ ['blendshape', 'Blendshapes', 'rig', 'The toy\'s mouth is one mesh with five sculpted targets (jaw, wide, pucker, smile, frown) mixed by weight.'],
+ ['bone', 'Bone face', 'rig', 'The toy\'s eyeballs, lids and brows are jointed parts: they turn, close and tilt.'],
+ ['swap', 'Texture swap', 'painted', 'Painted mode snaps the same numbers onto a small sheet of drawn eyes, brows and mouths, so it pops between frames like a cartoon.'],
+ ['portrait', 'Dialogue portraits', 'painted', 'The 2D twin on the right is this idea: a big face beside the words while the figure in the world stays small.'],
+ ['decal', 'Decals and bubbles', 'rig', 'Blush, tears, sweat and eye sparkle sit on the face; the bubble appears when you step back.'],
+ ['faceless', 'Faceless', 'faceless', 'No face at all: chest, shoulders, lean, head and arms carry every feeling. Try sad, proud and shy.'],
+];
+const name = slug => games.games.find(g => g.slug === slug)?.slug;
+for (const [k, title, mode, demo] of TECH) {
+ const d = document.createElement('div'); d.className = 'card';
+ const list = (byTech[k] || []).map(g => g.slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())).join(', ');
+ d.innerHTML = `<h3>${title}</h3><p>${games.techniques[k]}</p><p class="muted">${demo}</p><p class="games"><b>In your library:</b> ${list}</p>`;
+ const b = document.createElement('button'); b.className = 'tog'; b.textContent = 'Show me'; b.style.justifySelf = 'start';
+ b.onclick = () => { setMode(mode); if (k === 'decal') { driver.set('sad', {hold: 6}); mark('sad'); } if (k === 'faceless') { driver.set('proud', {hold: 6}); mark('proud'); } $('#stage').scrollIntoView({behavior: 'smooth', block: 'center'}); };
+ d.append(b); $('#techCards').append(d); void name;
+}
+
+// ---- library table
+const TNAME = {blendshape: 'Blendshapes', bone: 'Bone face', swap: 'Texture swap', portrait: 'Portraits', decal: 'Decals + bubbles', faceless: 'Faceless'};
+const titles = {}; // display names from the Oracle records when we have them
+const pretty = s => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+function rows(filter) {
+ $('#gameRows').innerHTML = games.games.filter(g => !filter || g.technique === filter || g.also.includes(filter)).map(g =>
+  `<tr><td><b>${titles[g.slug] || pretty(g.slug)}</b></td><td><span class="pill">${TNAME[g.technique]}</span>${g.also.length ? `<div class="stat">+ ${g.also.map(a => TNAME[a]).join(', ')}</div>` : ''}</td><td>${g.distance}</td><td>${g.what}</td><td>${g.why}</td><td>${g.lesson}</td></tr>`).join('');
+}
+for (const k of [null, ...Object.keys(TNAME)]) {
+ const b = document.createElement('button'); b.className = 'tog'; b.setAttribute('aria-pressed', k === null); b.innerHTML = `<i></i>${k ? TNAME[k] : 'All'}`;
+ b.onclick = () => { for (const x of $('#filters').children) x.setAttribute('aria-pressed', x === b); rows(k); }; $('#filters').append(b);
+}
+rows(null);
+
+// ---- expression set table, each with its painted face
+const BODY_WORDS = {rest: 'arms easy', up: 'arms up, bouncing', belly: 'holds belly', droop: 'slumps', cross: 'arms crossed', out: 'arms fly out', clutch: 'hands to chest', push: 'pushes away',
+ chin: 'hand to chin', hips: 'hands on hips, chest out', behind: 'hands behind back', fists: 'fists up, leans in', rub: 'rubs hands', hug: 'hugs self', shrug: 'shrugs'};
+for (const [k, e] of Object.entries(EXPRESSIONS)) {
+ const tr = document.createElement('tr'); const cv = document.createElement('canvas'); cv.width = cv.height = 128;
+ drawFace2D(cv.getContext('2d'), pose(k), {});
+ const td = document.createElement('td'); td.append(cv); tr.append(td);
+ tr.insertAdjacentHTML('beforeend', `<td><b>${e.label}</b></td><td>“${e.kid}”</td><td>${BODY_WORDS[e.arms]}</td><td>${e.emote ? `<canvas data-emote="${e.emote}" width="64" height="64" style="width:32px;height:32px"></canvas>` : '–'}</td><td class="n">${e.voice ? '[' + e.voice + ']' : '–'}</td><td class="n">${e.mood.map(v => v.toFixed(1)).join(', ')}</td>`);
+ tr.style.cursor = 'pointer'; tr.onclick = () => { driver.set(k, {hold: 6}); mark(k); $('#stage').scrollIntoView({behavior: 'smooth', block: 'center'}); };
+ $('#setRows').append(tr);
+}
+for (const cv of document.querySelectorAll('canvas[data-emote]')) drawEmote(cv.getContext('2d'), cv.dataset.emote);
+
+// ---- context engineering card
+const ctxData = await (await fetch('./context.json')).json();
+$('#ctxBody').innerHTML = ctxData.groups.map(g => `<h3>${g.kind}</h3><ul>${g.items.map(i => `<li>${i.url ? `<a href="${i.url}" target="_blank" rel="noopener">${i.title}</a>` : `<b>${i.title}</b>`}<span class="u">${i.used}</span></li>`).join('')}</ul>`).join('');
+
+// ---- loop
+const clock = new T.Clock(), v1 = new T.Vector3(), v2 = new T.Vector3();
+let curVis = -1;
+function frame() {
+ const dt = Math.min(.05, clock.getDelta());
+ if (fly) { fly.t = Math.min(1, fly.t + dt / 1.1); const k = fly.t * fly.t * (3 - 2 * fly.t); camera.position.lerpVectors(fly.from, fly.to, k); if (fly.t >= 1) fly = null; }
+ controls.update();
+ const S = driver.update(dt);
+ // how big is the face on screen? (head height in pixels)
+ toy.head.getWorldPosition(v1); v2.copy(v1).y += toy.headRadius * 2; v1.y -= 0; v1.project(camera); v2.project(camera);
+ const px = Math.abs(v2.y - v1.y) * renderer.domElement.clientHeight / 2 * 2;
+ const small = px < 40, tiny = px < 18;
+ const k = push ? (tiny ? 1.45 : small ? 1.3 : 1) : 1;
+ toy.update(exaggerate(S, k), dt, {bodyGain: push && small ? 1.35 : 1});
+ // bubble: only when the face can't be read
+ const showB = (small || toy.mode === 'faceless') && S.emote; bubbleK += ((showB ? 1 : 0) - bubbleK) * (1 - Math.exp(-dt * 8));
+ if (S.emote !== lastEmote) { drawEmote(ectx, S.emote); etex.needsUpdate = true; lastEmote = S.emote; }
+ toy.headTop(bubble.position); bubble.position.y += .12; const dist = camera.position.distanceTo(bubble.position);
+ bubble.scale.setScalar(dist * .055 * bubbleK + .0001); bubble.material.opacity = bubbleK;
+ $('#read').textContent = `Face ${px.toFixed(0)} px tall · ${tiny ? 'body + bubble' : small ? 'pushed + bubble' : 'face reads'}`;
+ $('#feel').textContent = `${EXPRESSIONS[S.name]?.label}${driver.speaking ? ' · speaking “' + S.viseme + '”' : ''}`;
+ drawFace2D(ctx2, S, {scale: .82});
+ // light the mouth shape being spoken
+ if (driver.speech) { const sp = driver.speech; let i = 0; for (let j = 0; j < sp.visemes.length; j++) if (sp.visemes[j].t <= sp.clock) i = j; if (i !== curVis) { visEls[curVis]?.classList.remove('on'); visEls[i]?.classList.add('on'); curVis = i; } }
+ else if (curVis >= 0) { visEls[curVis]?.classList.remove('on'); curVis = -1; }
+ for (const b of blocks) b.rotation.y += dt * .05;
+ renderer.render(scene, camera);
+ requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+window.__faces = {driver, toy, setMode};
+</script>
+</body>
+</html>
