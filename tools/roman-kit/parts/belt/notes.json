@@ -1,0 +1,47 @@
+{
+  "part": "belt",
+  "name": "Belt",
+  "role": "waist: the centurion belt (cingulum)",
+  "what_i_did": "A leather strap closed into an oval, 10 bronze plaques with a raised leaf rib each, bronze ribs between them, an octagonal sunburst buckle plate at the front, and a buckle frame, prong, strap end and keeper at the side.",
+  "good": [
+    "Outline match 0.85: the oval, the plaque rhythm, the octagonal sunburst plate and the buckle at the back all read.",
+    "Leather and bronze are separate named materials, so the game can shade them differently.",
+    "About 2k triangles."
+  ],
+  "off": [
+    "The concept's laurel relief is a full embossed wreath; at game size it is one raised leaf rib per plaque.",
+    "The concept's band is taller and tapers towards the buckle; mine is an even 7 cm.",
+    "The bronze ribs poke slightly above the strap edge, which the concept doesn't do."
+  ],
+  "creative_additions": "A leather keeper loop that holds the free strap end, and the sunburst rays alternating long and short.",
+  "rounds": [
+    {
+      "n": 1,
+      "t": "First build: plaques hidden inside the strap."
+    },
+    {
+      "n": 2,
+      "t": "Plaques pushed out (1.6 cm) over a wider arc; boss enlarged to 6.4 cm; buckle and keeper added."
+    },
+    {
+      "n": 3,
+      "t": "Final render and score."
+    }
+  ],
+  "score": {
+    "iou": 0.849,
+    "camera": {
+      "yaw": -30,
+      "pitch": 20,
+      "lens": 50,
+      "roll": 0.0
+    },
+    "triangles": 1978,
+    "dimensions_m": [
+      0.362,
+      0.354,
+      0.118
+    ],
+    "method": "silhouette IoU after bounding-box normalising both masks; camera found by grid search on the model, so a guide"
+  }
+}

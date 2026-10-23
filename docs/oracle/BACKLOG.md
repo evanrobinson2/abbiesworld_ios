@@ -18,6 +18,8 @@ Record a short timeline for one representative scene from each game (timestamp, 
 
 ### Telltale
 
+- The cutscene study (AW-STUDY-0009, `cutscenes/CUTSCENE_STUDY.md`, page https://claude.ai/artifact/ATBvQmSr62iKEcnRH1A6MJ) turns these into a taxonomy, six style presets and the `layers.cinematics` profile; record new titles in that shape.
+
 - **The Wolf Among Us** (Telltale, 2013 to 2014). Timed four-option dialogue with silence as a real choice, "will remember that" notices, quick-time action, five-episode structure with recaps and end-of-episode choice statistics, and a neon comic-book look. This is the reference for our `telltale` style.
 - **The Walking Dead, Season One** (Telltale, 2012). A grown-up protecting a child, with choices that build trust. This is very close to the Fritigern and Alaric relationship.
 

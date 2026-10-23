@@ -1,0 +1,121 @@
+{
+  "sex": "male",
+  "build": "skinny",
+  "height_m": 1.78,
+  "multipliers": {
+    "h": 1.0,
+    "sh": 0.88,
+    "ch": 0.84,
+    "wa": 0.82,
+    "hi": 0.88,
+    "li": 0.72,
+    "ne": 0.85,
+    "head": 1.0,
+    "be": 0.0,
+    "bust": 0.0
+  },
+  "torso": {
+    "crotch": {
+      "z": 0.828,
+      "half_width": 0.132,
+      "half_depth": 0.088,
+      "forward": 0.0
+    },
+    "hips": {
+      "z": 0.926,
+      "half_width": 0.151,
+      "half_depth": 0.099,
+      "forward": 0.0
+    },
+    "waist": {
+      "z": 1.068,
+      "half_width": 0.12,
+      "half_depth": 0.08,
+      "forward": 0.0
+    },
+    "belly": {
+      "z": 1.157,
+      "half_width": 0.125,
+      "half_depth": 0.085,
+      "forward": 0.0
+    },
+    "chest": {
+      "z": 1.282,
+      "half_width": 0.144,
+      "half_depth": 0.097,
+      "forward": 0.0
+    },
+    "armpit": {
+      "z": 1.38,
+      "half_width": 0.16,
+      "half_depth": 0.092,
+      "forward": 0.0
+    },
+    "shoulders": {
+      "z": 1.451,
+      "half_width": 0.172,
+      "half_depth": 0.074,
+      "forward": 0.01
+    },
+    "neck_base": {
+      "z": 1.495,
+      "half_width": 0.106,
+      "half_depth": 0.059,
+      "forward": 0.01
+    }
+  },
+  "head": {
+    "center": [
+      0,
+      0.012,
+      1.669
+    ],
+    "half_width": 0.078,
+    "half_depth": 0.095,
+    "top": 1.78
+  },
+  "sockets": {
+    "shoulder_l": [
+      -0.145,
+      0.0,
+      1.424
+    ],
+    "hand_l": [
+      -0.307,
+      0.0,
+      0.773
+    ],
+    "shoulder_r": [
+      0.145,
+      0.0,
+      1.424
+    ],
+    "hand_r": [
+      0.307,
+      0.0,
+      0.773
+    ],
+    "hip_l": [
+      -0.079,
+      0.0,
+      0.854
+    ],
+    "foot_l": [
+      -0.063,
+      -0.085,
+      0.0
+    ],
+    "hip_r": [
+      0.079,
+      0.0,
+      0.854
+    ],
+    "foot_r": [
+      0.063,
+      -0.085,
+      0.0
+    ],
+    "foot_length": 0.25
+  },
+  "triangles": 712
+}

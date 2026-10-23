@@ -1,0 +1,30 @@
+{
+  "part": "helmet",
+  "date": "2026-10-23",
+  "concept": {
+    "source": "Midjourney",
+    "job_id": "615426e3-b07e-4a37-b351-6e4d34a5b0fc",
+    "image_index": 1,
+    "file": "concept.png",
+    "prompt": "A single stylized low-poly white Roman centurion helmet, helmet only, empty wearable armor piece with open underside, prominent sculpted transverse crest, angular cheek guards and neck guard, elegant ivory-white monochromatic material, clean faceted polygonal geometry, strong readable silhouette, charming strategy-game asset, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, head, face, body, bust, pedestal, text, scenery --ar 1:1 --v 8.2",
+    "created": "2026-10-22T15:48:05.194012+00:00",
+    "picked_by": "Evan"
+  },
+  "mask": {
+    "tool": "rembg isnet-general-use",
+    "file": "concept_mask.png"
+  },
+  "construction": {
+    "recipe": "build.py",
+    "tool": "Blender 5.2 (bpy) headless",
+    "output": "helmet.glb"
+  },
+  "scoring": {
+    "tool": "../../score.py",
+    "outputs": [
+      "r/score.json",
+      "r/compare.jpg",
+      "r/hero.png"
+    ]
+  }
+}

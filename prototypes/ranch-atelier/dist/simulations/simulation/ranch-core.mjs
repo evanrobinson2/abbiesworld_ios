@@ -5,6 +5,7 @@ import {createEcologyCore} from './ranch-ecology-core.mjs';
 import {advanceNeeds,cancelJob} from '../ranch-life-state.mjs?grazing=4';
 import {advanceGenerations,routine,farmhandsNeeded} from '../ranch-generations.mjs?v=6';
 import {weatherAt} from '../ranch-rhythm.mjs?v=4';
+import {weatherOutlook} from './weather-state.mjs';
 import {agendaWindow} from './runtime-scheduling.mjs';
 import {storyBudget} from './life-fidelity.mjs';
 import {syncHumanStories,compactFamilies,recordActivity} from '../ranch-story-adapter.mjs';
@@ -29,7 +30,7 @@ export function createRanchCore(context){
  }
  function step(dt,animationDt=dt/6,needsDt=dt){
   if(!Number.isFinite(dt)||dt<0||!Number.isFinite(animationDt)||animationDt<0||!Number.isFinite(needsDt)||needsDt<0)throw new RangeError('Invalid core timestep');
-  runtime.animationTime+=animationDt;state.weather=state.weatherOverride&&state.weatherOverride!=='auto'?state.weatherOverride:weatherAt(state.calendar?.day??1,state.season?.index??1,state.calendar?.hour??12,recipe.seed);state.household??={};advanceNeeds(state,needsDt);
+  runtime.animationTime+=animationDt;state.weather=state.weatherOverride&&state.weatherOverride!=='auto'?state.weatherOverride:weatherAt(state.calendar?.day??1,state.season?.index??1,state.calendar?.hour??12,recipe.seed);{const c=state.calendar??{},manual=state.weatherOverride&&state.weatherOverride!=='auto',key=[manual?state.weather:'auto',c.day??1,Math.floor((c.hour??12)*4),state.season?.index??1].join();if(state.weatherFront?.key!==key)state.weatherFront={key,...(manual?{now:state.weather,next:state.weather,inHours:Infinity,front:null}:weatherOutlook(c.day??1,state.season?.index??1,c.hour??12,recipe.seed))};}state.household??={};advanceNeeds(state,needsDt);
   const signature=JSON.stringify([Math.floor(state.calendar?.year??0),state.calendar?.day,agendaWindow(state.calendar?.hour??12),state.weather,state.pens.some(p=>p.animals.some(a=>a.thirst>.55||a.hunger>.55))]);
   if(runtime.demographyKey!==signature){advanceGenerations(state.generations,state.calendar?.day??1,{year:state.calendar?.year,daysPerYear:state.calendar?.daysPerYear??20,capacity:Math.max(12,homes.length*8)});syncPeople();runtime.demographyKey=signature;}
   if(state.seconds-runtime.storySample>storyBudget(state.lifeStories).cadence){runtime.storySample=state.seconds;syncHumanStories(state.lifeStories,state.generations.people,state.calendar?.year??0);compactFamilies(state.generations,state.lifeStories);}

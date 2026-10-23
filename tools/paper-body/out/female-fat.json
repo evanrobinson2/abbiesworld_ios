@@ -1,0 +1,121 @@
+{
+  "sex": "female",
+  "build": "fat",
+  "height_m": 1.64,
+  "multipliers": {
+    "h": 0.9211999999999999,
+    "sh": 0.9744,
+    "ch": 1.1749999999999998,
+    "wa": 1.2469999999999999,
+    "hi": 1.4080000000000001,
+    "li": 1.2144,
+    "ne": 1.1475,
+    "head": 0.96,
+    "be": 1.0,
+    "bust": 1.0
+  },
+  "torso": {
+    "crotch": {
+      "z": 0.762,
+      "half_width": 0.211,
+      "half_depth": 0.141,
+      "forward": 0.0
+    },
+    "hips": {
+      "z": 0.853,
+      "half_width": 0.242,
+      "half_depth": 0.158,
+      "forward": 0.0
+    },
+    "waist": {
+      "z": 0.984,
+      "half_width": 0.182,
+      "half_depth": 0.165,
+      "forward": -0.035
+    },
+    "belly": {
+      "z": 1.066,
+      "half_width": 0.19,
+      "half_depth": 0.175,
+      "forward": -0.05
+    },
+    "chest": {
+      "z": 1.181,
+      "half_width": 0.202,
+      "half_depth": 0.136,
+      "forward": 0.0
+    },
+    "armpit": {
+      "z": 1.271,
+      "half_width": 0.223,
+      "half_depth": 0.129,
+      "forward": 0.0
+    },
+    "shoulders": {
+      "z": 1.336,
+      "half_width": 0.191,
+      "half_depth": 0.103,
+      "forward": 0.01
+    },
+    "neck_base": {
+      "z": 1.377,
+      "half_width": 0.117,
+      "half_depth": 0.082,
+      "forward": 0.01
+    }
+  },
+  "head": {
+    "center": [
+      0,
+      0.012,
+      1.537
+    ],
+    "half_width": 0.075,
+    "half_depth": 0.091,
+    "top": 1.64
+  },
+  "sockets": {
+    "shoulder_l": [
+      -0.153,
+      0.0,
+      1.312
+    ],
+    "hand_l": [
+      -0.303,
+      0.0,
+      0.709
+    ],
+    "shoulder_r": [
+      0.153,
+      0.0,
+      1.312
+    ],
+    "hand_r": [
+      0.303,
+      0.0,
+      0.709
+    ],
+    "hip_l": [
+      -0.127,
+      0.0,
+      0.787
+    ],
+    "foot_l": [
+      -0.101,
+      -0.085,
+      0.0
+    ],
+    "hip_r": [
+      0.127,
+      0.0,
+      0.787
+    ],
+    "foot_r": [
+      0.101,
+      -0.085,
+      0.0
+    ],
+    "foot_length": 0.25
+  },
+  "triangles": 712
+}
