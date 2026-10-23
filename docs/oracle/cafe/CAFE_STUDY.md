@@ -315,6 +315,21 @@ Evan: "dance party is a memory game.. follow my lead". Simon-says on the light-u
 - **Kind to small memories:** a miss replays the sequence slower, with no losing. Two can play: a parent leads, the
   child follows, then swap.
 
+### The café pets (Evan, 2026-10-23 07:26Z)
+
+Evan: "also the cafe has pets." They live in the shop (which kinds is Abbie's choice; a cat and a pup to start), and
+they're one of the best diegetic channels in the room:
+
+- **They follow the day:** asleep on a beanbag in the morning, weaving between customers' feet in the rush, and
+  dancing (a hop, a spin, a wagging tail on the beat) when the party starts.
+- **They tell you things without words:** a pet sitting by the door means a customer is about to arrive; a pet by
+  the empty jar means that ingredient's out; a pet hiding under the bar means it's too loud; one curled on a
+  customer's lap means that customer is happy.
+- **Customers love them:** petting a pet is something a waiting customer does, so the wait is gentler, and a
+  child can always just play with the pets ("you can do anything or nothing").
+- **Decorating includes them:** beds, bowls, a cat tree and outfits are decoration cards and unlockable skins.
+- The room's style is still not animal-themed (Evan, round 1): the pets are characters in the café, not its decor.
+
 ### The meta: building out and decorating
 
 - **Place anything** from the manifest catalogue (beanbags, stools, stars, disco balls, rugs, plants) on the room's
