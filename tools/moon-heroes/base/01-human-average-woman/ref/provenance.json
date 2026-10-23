@@ -1,0 +1,73 @@
+{
+  "model": "01-human-average-woman",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "4ecb0560-377a-4a24-a284-f74d90f94da1",
+      "prompt": "low-poly faceted 3D game base mesh, untextured white clay render, smooth featureless store mannequin body, seamless and sealed, no anatomical detail, PG, adult woman with average realistic adult proportions, bald, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_4ecb0560-377a-4a24-a284-f74d90f94da1_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/4ecb0560-377a-4a24-a284-f74d90f94da1/0_0.png",
+          "sha256": "eb8767eb221c2d81e565b162359340e5cd3bd752b715e691f60e1426b668d564"
+        },
+        {
+          "file": "mj_4ecb0560-377a-4a24-a284-f74d90f94da1_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/4ecb0560-377a-4a24-a284-f74d90f94da1/0_1.png",
+          "sha256": "8759801251eada752de515825416929d4009b5bfb0649eaddc89a3e6b3781835"
+        },
+        {
+          "file": "mj_4ecb0560-377a-4a24-a284-f74d90f94da1_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/4ecb0560-377a-4a24-a284-f74d90f94da1/0_2.png",
+          "sha256": "04f57c9f01ab0b334bf53e0a7149d25fc628f9ecc4dd2db4467aa2bfa88dfb00"
+        },
+        {
+          "file": "mj_4ecb0560-377a-4a24-a284-f74d90f94da1_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/4ecb0560-377a-4a24-a284-f74d90f94da1/0_3.png",
+          "sha256": "0734a2b03dfa83238cbac4f5a2687e30434f473a1d1d0106936348a363ad9669"
+        }
+      ],
+      "pick": null,
+      "verdict": "rejected: Midjourney dressed her (dress/top/shorts), not a base body"
+    },
+    {
+      "job_id": "5f7152d3-c50a-4b23-8745-6051125f50bc",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, no clothing, no anatomical detail, PG, adult woman with average realistic adult proportions, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_5f7152d3-c50a-4b23-8745-6051125f50bc_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5f7152d3-c50a-4b23-8745-6051125f50bc/0_0.png",
+          "sha256": "a6d1ea5a3111345b5b9b3e1300d66884f0214ece8f912fe94d577d1ece0ce2e5"
+        },
+        {
+          "file": "mj_5f7152d3-c50a-4b23-8745-6051125f50bc_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5f7152d3-c50a-4b23-8745-6051125f50bc/0_1.png",
+          "sha256": "082328f70ec065c3dbac9c512ff8f113586a9937594a1b9acfb4c43d07f04eea"
+        },
+        {
+          "file": "mj_5f7152d3-c50a-4b23-8745-6051125f50bc_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5f7152d3-c50a-4b23-8745-6051125f50bc/0_2.png",
+          "sha256": "31170d49bfc85ed4cd65e83c899edc708e0bb8a15d53d94b135d9a1d201356ad"
+        },
+        {
+          "file": "mj_5f7152d3-c50a-4b23-8745-6051125f50bc_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5f7152d3-c50a-4b23-8745-6051125f50bc/0_3.png",
+          "sha256": "1145e745daaa13a6ad9e1e6ff728c1498d635eb83e2c9bcfa8f01e31b196d796"
+        }
+      ],
+      "pick": 0,
+      "verdict": "picked"
+    }
+  ]
+}

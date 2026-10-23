@@ -114,6 +114,44 @@
         "index": 0,
         "file": "turnaround_clay.png"
       }
+    },
+    {
+      "role": "front_color_alt",
+      "job_id": "ed1f77c5-c0b6-47d3-aab6-a65692fbb409",
+      "prompt": "low-poly faceted 3D game character, clean flat-shaded planes, smooth seamless face with no seams and no outline lines, matte gunmetal sci-fi armour with glowing pink light strips, this girl: stylized cartoon toy-hero little girl about 4.5 heads tall, copper bob haircut, big blue eyes, big gloves and big boots, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background, no helmet --ar 2:3",
+      "attach": "11-abbie-suit/ref/trek_cut.png",
+      "images": [
+        {
+          "file": "mj_ed1f77c5-c0b6-47d3-aab6-a65692fbb409_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/ed1f77c5-c0b6-47d3-aab6-a65692fbb409/0_0.png",
+          "sha256": "b003f558bb96b4d8cd55db52f4bcb059e00d1518ab454f8bccdcb7e295962dcd"
+        },
+        {
+          "file": "mj_ed1f77c5-c0b6-47d3-aab6-a65692fbb409_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/ed1f77c5-c0b6-47d3-aab6-a65692fbb409/0_1.png",
+          "sha256": "7df5a1db86fbf1c2544f74de0c3e075554287a90231ecffbaa74d0c22186e7c6"
+        },
+        {
+          "file": "mj_ed1f77c5-c0b6-47d3-aab6-a65692fbb409_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/ed1f77c5-c0b6-47d3-aab6-a65692fbb409/0_2.png",
+          "sha256": "037d1724c7759d15bd862e105ba2decf4a201b60d4e68a17be0d4f2327fe84a3"
+        },
+        {
+          "file": "mj_ed1f77c5-c0b6-47d3-aab6-a65692fbb409_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/ed1f77c5-c0b6-47d3-aab6-a65692fbb409/0_3.png",
+          "sha256": "6c5b59a45e312315774a06c3c021fc88acafb05e240c5fc4bdf05b95276a0490"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "front_color_alt.png"
+      },
+      "verdict": "Re-roll to remove the faint face seam (coordinator 11:46Z). All four came back with drawn wireframe edges on the face, worse than the seam, so front_color.png stays the Meshy input."
     }
-  ]
+  ],
+  "meshy_input": "front_color.png (the clay front reads as a line drawing; see verdicts)"
 }

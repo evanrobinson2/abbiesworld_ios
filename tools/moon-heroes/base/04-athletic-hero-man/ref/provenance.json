@@ -1,0 +1,41 @@
+{
+  "model": "04-athletic-hero-man",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "b6d3520a-0cc8-4a89-bf3e-36948fa2a776",
+      "prompt": "low-poly faceted 3D game base mesh, untextured white clay render, smooth featureless store mannequin body, seamless and sealed, no anatomical detail, PG, athletic heroic adult man, fit and strong with real adult proportions, bald, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_b6d3520a-0cc8-4a89-bf3e-36948fa2a776_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/b6d3520a-0cc8-4a89-bf3e-36948fa2a776/0_0.png",
+          "sha256": "ef458540dd366c1608eefebc699a8695684ce10c45124a9c7c9405298e72f9a7"
+        },
+        {
+          "file": "mj_b6d3520a-0cc8-4a89-bf3e-36948fa2a776_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/b6d3520a-0cc8-4a89-bf3e-36948fa2a776/0_1.png",
+          "sha256": "76a129779e0951d2b332a76b638acc14c339ec0e3ff4343dc98e47d99a08175a"
+        },
+        {
+          "file": "mj_b6d3520a-0cc8-4a89-bf3e-36948fa2a776_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/b6d3520a-0cc8-4a89-bf3e-36948fa2a776/0_2.png",
+          "sha256": "6f9e5315d4cfdeaf9fba7a7f1249e3829ececa2b255c01b6ca09b0afa348d1f7"
+        },
+        {
+          "file": "mj_b6d3520a-0cc8-4a89-bf3e-36948fa2a776_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/b6d3520a-0cc8-4a89-bf3e-36948fa2a776/0_3.png",
+          "sha256": "4f518a45576d15cc50ab534a8d1847d952ff0bdbdbde77bc262b7576b8ba4997"
+        }
+      ],
+      "pick": 1,
+      "verdict": "picked: smooth sealed mannequin"
+    }
+  ]
+}

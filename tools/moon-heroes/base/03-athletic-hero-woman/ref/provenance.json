@@ -1,0 +1,41 @@
+{
+  "model": "03-athletic-hero-woman",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "81d60a2f-3111-44e6-8f0e-15107459c3cd",
+      "prompt": "low-poly faceted 3D game base mesh, untextured white clay render, smooth featureless store mannequin body, seamless and sealed, no anatomical detail, PG, athletic heroic adult woman, fit and strong with real adult proportions, bald, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_81d60a2f-3111-44e6-8f0e-15107459c3cd_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/81d60a2f-3111-44e6-8f0e-15107459c3cd/0_0.png",
+          "sha256": "5a313abd0970383c061334455d8abca50fba52779bf4cf4a9dcad1a82db08b2d"
+        },
+        {
+          "file": "mj_81d60a2f-3111-44e6-8f0e-15107459c3cd_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/81d60a2f-3111-44e6-8f0e-15107459c3cd/0_1.png",
+          "sha256": "83497cc56236edf8ef93a79671be348b08217352f3a86358629ac9e7b0e68963"
+        },
+        {
+          "file": "mj_81d60a2f-3111-44e6-8f0e-15107459c3cd_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/81d60a2f-3111-44e6-8f0e-15107459c3cd/0_2.png",
+          "sha256": "9eeca536fcfb3d9bb4368f9115690e606fcd991c7a1f682c31dc99148621f9cf"
+        },
+        {
+          "file": "mj_81d60a2f-3111-44e6-8f0e-15107459c3cd_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/81d60a2f-3111-44e6-8f0e-15107459c3cd/0_3.png",
+          "sha256": "868d1ec26c09a39fd789340eb01077515d0f3fe92f6c482ad1dcee22cead74a5"
+        }
+      ],
+      "pick": 2,
+      "verdict": "picked: sealed featureless mannequin, real adult proportions"
+    }
+  ]
+}

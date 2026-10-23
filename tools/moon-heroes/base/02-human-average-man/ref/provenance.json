@@ -1,0 +1,73 @@
+{
+  "model": "02-human-average-man",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "4abb7ee5-8096-4af8-a128-22a087b8b443",
+      "prompt": "low-poly faceted 3D game base mesh, untextured white clay render, smooth featureless store mannequin body, seamless and sealed, no anatomical detail, PG, adult man with average realistic adult proportions, bald, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_4abb7ee5-8096-4af8-a128-22a087b8b443_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/4abb7ee5-8096-4af8-a128-22a087b8b443/0_0.png",
+          "sha256": "92d25fbd177813657d503f6723e7738b5cc150432d7415bbe7ea1da8bcb5aed9"
+        },
+        {
+          "file": "mj_4abb7ee5-8096-4af8-a128-22a087b8b443_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/4abb7ee5-8096-4af8-a128-22a087b8b443/0_1.png",
+          "sha256": "59c2752f787bd71f18c1509a868930aba97952f54d6a631cc1cd056ba15d89a5"
+        },
+        {
+          "file": "mj_4abb7ee5-8096-4af8-a128-22a087b8b443_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/4abb7ee5-8096-4af8-a128-22a087b8b443/0_2.png",
+          "sha256": "03b8ca723134928ed73a0fbe44e35abf27e6e131b03959c3014e9ab83992a8ad"
+        },
+        {
+          "file": "mj_4abb7ee5-8096-4af8-a128-22a087b8b443_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/4abb7ee5-8096-4af8-a128-22a087b8b443/0_3.png",
+          "sha256": "e17a12778e7f7a3edd4dfd9a36d85795e147462a0ca4812a8143a692f33815e6"
+        }
+      ],
+      "pick": null,
+      "verdict": "rejected: Midjourney dressed him (shirt/trousers)"
+    },
+    {
+      "job_id": "56317a56-68fe-4fec-841e-faf6025558a3",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, no clothing, no anatomical detail, PG, adult man with average realistic adult proportions, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_56317a56-68fe-4fec-841e-faf6025558a3_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/56317a56-68fe-4fec-841e-faf6025558a3/0_0.png",
+          "sha256": "eb610206c2a788787b69315ef5df6c1c733816f8d0bff2085a414e82ed68cbd6"
+        },
+        {
+          "file": "mj_56317a56-68fe-4fec-841e-faf6025558a3_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/56317a56-68fe-4fec-841e-faf6025558a3/0_1.png",
+          "sha256": "df43d010bf714c67f51625718c02e2a2d8965d67fa53aabb37bac162a7542e9f"
+        },
+        {
+          "file": "mj_56317a56-68fe-4fec-841e-faf6025558a3_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/56317a56-68fe-4fec-841e-faf6025558a3/0_2.png",
+          "sha256": "a4fb068d5eac5a1811ecfc0dd903a558993b75592f8c42259824995f59569f02"
+        },
+        {
+          "file": "mj_56317a56-68fe-4fec-841e-faf6025558a3_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/56317a56-68fe-4fec-841e-faf6025558a3/0_3.png",
+          "sha256": "e3325d0fcd0f1c11bcac48ad536b0c27b857d349d084e7c37054ab3d0cdeb11f"
+        }
+      ],
+      "pick": 0,
+      "verdict": "picked"
+    }
+  ]
+}

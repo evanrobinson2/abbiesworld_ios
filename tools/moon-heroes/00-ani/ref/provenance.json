@@ -115,5 +115,6 @@
         "file": "front_color.png"
       }
     }
-  ]
+  ],
+  "meshy_input": "front_clay.png (clean); front_color.png as the alternative"
 }
