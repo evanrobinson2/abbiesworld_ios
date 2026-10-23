@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-storybook-light",
+      "date": "2026-10-23",
+      "title": "Storybook light",
+      "line": "Your animated-film picture, rebuilt as live light: soft wrap light, warm rim, glowing ears and cheeks, green haze, round background blur and glow. Slide to compare with plain three.js and switch each part on or off.",
+      "image": "/whats-new/2026-10-23-storybook-light.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVpjNTFq7FTi7Mn7kjELEVf",
+      "threadTitle": "AW-STUDY-0028 - Storybook Light",
+      "tour": false,
+      "link": "/studies/storybook/"
+    },
+    {
      "id": "2026-10-23-family-cast",
      "date": "2026-10-23",
      "title": "The family cast",
