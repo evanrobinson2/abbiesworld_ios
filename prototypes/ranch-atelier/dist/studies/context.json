@@ -427,6 +427,36 @@
           "k": "canon",
           "t": "Games study and speed review",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/basement/BASEMENT_STUDY.md"
+        },
+        {
+          "k": "reference",
+          "t": "v86, the x86 emulator in the browser (BSD-2)",
+          "href": "https://github.com/copy/v86",
+          "note": "Runs real FreeDOS and our KEYSTORM disk; licences in tools/grace-dos/README.md"
+        },
+        {
+          "k": "reference",
+          "t": "FreeDOS (GPL)",
+          "href": "https://www.freedos.org/",
+          "note": "The real DOS on Grace's computer; source tarballs are in the repo"
+        },
+        {
+          "k": "reference",
+          "t": "SeaBIOS (LGPL)",
+          "href": "https://www.seabios.org/",
+          "note": "BIOS for the emulated PC"
+        },
+        {
+          "k": "reference",
+          "t": "Quaternius Universal Base Characters (CC0)",
+          "href": "https://quaternius.com/",
+          "note": "The rigged mannequin reshaped into the girl"
+        },
+        {
+          "k": "canon",
+          "t": "Memory kit: era pass, inner voice and dialog scripts",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/simulations/memory-kit",
+          "note": "Shared by every memory place (basement, school roof, Moon Mission dialog)"
         }
       ],
       "recorded": "2026-10-23, gathered afterwards from the study docs"
