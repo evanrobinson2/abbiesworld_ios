@@ -80,6 +80,8 @@ def fetch(url, dest):
 
 
 def views_for(job, tmp):
+    if job.get("single_view"):
+        return [ROOT / job["image"]]
     if "image" in job:
         sys.path.insert(0, str(ROOT / "tools" / "midjourney"))
         import split_views

@@ -394,7 +394,9 @@
    "should_texture": true,
    "credits": 30,
    "save_to": "tools/meshy-heroes/meshy/charm-tardigrade/",
-   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
+   "single_view": true,
+   "note": "Evan's pick (19:46Z): pink faceted enamel pin tardigrade, gold claws, little backpack. One picture, no turnaround: image-to-3d. Keep the pink faceted look; textured."
   },
   {
    "id": "brute1-retexture",
