@@ -31,7 +31,7 @@ export function paintFace(id = 'pink') {
  return faces.get(id);
 }
 export function mountPaintHand(el, onPlay, colour = 'pink') {
- const css = '.pw-hand{position:fixed;right:12px;bottom:92px;z-index:5;pointer-events:none}.pw-hand img{width:var(--pw-w,64px);display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35));pointer-events:auto;cursor:pointer;transition:transform .25s cubic-bezier(.2,1.4,.4,1)}.pw-hand img:hover,.pw-hand img.cool{transform:translateY(-8px) rotate(-3deg) scale(1.1)}.pw-hand img.used{animation:pw-play .5s ease-out}@keyframes pw-play{50%{transform:translateY(-34px) rotate(8deg) scale(1.2)}}';
+ const css = '.pw-hand{position:fixed;right:8px;bottom:104px;z-index:5;pointer-events:none}.pw-hand img{width:var(--pw-w,58px);display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35));pointer-events:auto;cursor:pointer;transition:transform .25s cubic-bezier(.2,1.4,.4,1)}.pw-hand img:hover,.pw-hand img.cool{transform:translateY(-8px) rotate(-3deg) scale(1.1)}.pw-hand img.used{animation:pw-play .5s ease-out}@keyframes pw-play{50%{transform:translateY(-34px) rotate(8deg) scale(1.2)}}';
  if (!document.getElementById('pw-css')) document.head.append(Object.assign(document.createElement('style'), {id: 'pw-css', textContent: css}));
  el.classList.add('pw-hand'); el.setAttribute('role', 'group'); el.setAttribute('aria-label', 'Card: ' + PAINT_CARD.name);
  const img = new Image(); img.alt = PAINT_CARD.name + '. ' + PAINT_CARD.blurb; img.draggable = false; img.tabIndex = 0;
