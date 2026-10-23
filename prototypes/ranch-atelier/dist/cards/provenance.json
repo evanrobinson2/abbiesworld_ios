@@ -251,41 +251,39 @@
   ],
   "hand": [
     {
-      "id": "tile-moon",
-      "used_by": "simulations/hand-cards.mjs (Sandbox v2 hand card: Moonbase)",
-      "art": {
-        "kind": "concept-art",
-        "image": "/cards/art/moonbase.webp",
-        "source_origin": "project files trek.zip trek/outputs/images/moonbase.png (Abbie and Daddy's Moon Mission pack)",
-        "source_sha256": "f11d522a0c123a207d686b25d990088ac6189c0610b409f2c278310b16a8ccae",
-        "method": "resized 1536x1024 to 1152x768 (nearest, keeps the pixels), webp q88"
-      }
-    },
-    {
       "id": "tile-ranch",
       "used_by": "simulations/hand-cards.mjs (Sandbox v2 hand card)",
       "art": {
-        "kind": "concept-art",
-        "cutout": "/cards/art/family-home-cut.png",
-        "note": "reuses the Ranch set cut-out; see its card entry above"
+        "kind": "game-render",
+        "image": "/simulations/assets/tile-cards/ranch.webp",
+        "method": "tools/hand-card-art: the tile tray's live preview of the generated tile, 1024x1024, camera at 40% distance, cropped inside the hex"
       }
     },
     {
       "id": "tile-garden",
       "used_by": "simulations/hand-cards.mjs (Sandbox v2 hand card)",
       "art": {
-        "kind": "concept-art",
-        "cutout": "/cards/art/apple-tree-cut.png",
-        "note": "reuses the Ranch set cut-out; see its card entry above"
+        "kind": "game-render",
+        "image": "/simulations/assets/tile-cards/garden.webp",
+        "method": "tools/hand-card-art: the tile tray's live preview of the generated tile, 1024x1024, camera at 40% distance, cropped inside the hex"
       }
     },
     {
       "id": "tile-meadow",
       "used_by": "simulations/hand-cards.mjs (Sandbox v2 hand card)",
       "art": {
-        "kind": "concept-art",
-        "cutout": "/cards/art/horse-cut.png",
-        "note": "reuses the Ranch set cut-out; see its card entry above"
+        "kind": "game-render",
+        "image": "/simulations/assets/tile-cards/meadow.webp",
+        "method": "tools/hand-card-art: the tile tray's live preview of the generated tile, 1024x1024, camera at 40% distance, cropped inside the hex"
+      }
+    },
+    {
+      "id": "tile-moon",
+      "used_by": "simulations/hand-cards.mjs (Sandbox v2 hand card)",
+      "art": {
+        "kind": "game-render",
+        "image": "/simulations/assets/tile-cards/moon.webp",
+        "method": "tools/hand-card-art: the tile tray's live preview of the generated tile, 1024x1024, camera at 40% distance, cropped inside the hex"
       }
     }
   ]
