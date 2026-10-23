@@ -1,0 +1,103 @@
+{
+  "study": "AW-STUDY-0023 Turnaround Hero",
+  "tool": "Midjourney web (Standard, Fast), driven in Evan's Chrome",
+  "date": "2026-10-23",
+  "prompt": "front, side, back views of the same figure, a grey 3d ultra low polygon count, blocky, heroic male figure in a traditional A pose on a gray backdrop, each view is exactly the same character, wearing tight fitted briefs",
+  "prompt_note": "Evan's prompt, word for word, no extra parameters",
+  "reference": {
+    "image": "tools/turnaround-hero/ref/hero-front-back.png",
+    "mode": "Attach to prompt"
+  },
+  "jobs": [
+    {
+      "job_id": "2efa3cb8-c278-4ed7-8354-db75fe4e599b",
+      "kind": "grid",
+      "images": [
+        {
+          "file": "mj_2efa3cb8-c278-4ed7-8354-db75fe4e599b_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/2efa3cb8-c278-4ed7-8354-db75fe4e599b/0_0.png",
+          "bytes": 1272224,
+          "sha256": "d0cfca77a66eb8f0787909e0880a295fcffd40b8af34a5248b18430d8655a60f",
+          "size": "1024x1024"
+        },
+        {
+          "file": "mj_2efa3cb8-c278-4ed7-8354-db75fe4e599b_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/2efa3cb8-c278-4ed7-8354-db75fe4e599b/0_1.png",
+          "bytes": 1322014,
+          "sha256": "219c002a543cc1eabb206d2108a5bb74fd65c2c9b013c6b067671ea3f6e93934",
+          "size": "1024x1024"
+        },
+        {
+          "file": "mj_2efa3cb8-c278-4ed7-8354-db75fe4e599b_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/2efa3cb8-c278-4ed7-8354-db75fe4e599b/0_2.png",
+          "bytes": 1251034,
+          "sha256": "d0cb7e6a29d67693cea8afd2d94addbb4e0e901fbcd753f90cf7a4abcf6c53e8",
+          "size": "1024x1024"
+        },
+        {
+          "file": "mj_2efa3cb8-c278-4ed7-8354-db75fe4e599b_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/2efa3cb8-c278-4ed7-8354-db75fe4e599b/0_3.png",
+          "bytes": 1235477,
+          "sha256": "67f21c24a92d2cd94fd958e3f3c6c96058294a01294651972846609a28f427f8",
+          "size": "1024x1024"
+        }
+      ]
+    }
+  ],
+  "notes": "One run only. All four images show front, side (closer to three-quarter) and back views of the same bald, giant-shouldered figure in plain briefs with faceted shins.",
+  "pick": {
+    "job_id": "2efa3cb8-c278-4ed7-8354-db75fe4e599b",
+    "index": 3,
+    "file": "mj_2efa3cb8-c278-4ed7-8354-db75fe4e599b_3.png",
+    "reason": "Closest to the reference: small bald head, giant shoulders, fists, faceted shins, plain briefs, smooth faceted shading, and all three views fully in frame. Image 2 has the same look but its front arm runs off the left edge; images 0 and 1 carry drawn wireframe lines the reference does not have.",
+    "split": {
+      "tool": "tools/turnaround-hero/split_seam.py",
+      "method": "The views touch (side shoulder over the back view's fist), so straight cuts clip them. Cut along minimum-cost curved seams, keep each view's own silhouette, and refill the rest with a smooth 2D backdrop estimate.",
+      "seam_x_ranges": [
+        [
+          380,
+          448
+        ],
+        [
+          607,
+          719
+        ]
+      ],
+      "crops_x": {
+        "front": [
+          0,
+          469
+        ],
+        "side": [
+          384,
+          693
+        ],
+        "back": [
+          623,
+          1024
+        ]
+      }
+    },
+    "views": {
+      "front": {
+        "file": "view_front.png",
+        "bytes": 423760,
+        "sha256": "e1cad30f2cae52adb204e5c9e5dbfc1d7a0cd3f42f6d48607423677fb84b5ea8"
+      },
+      "side": {
+        "file": "view_side.png",
+        "bytes": 236916,
+        "sha256": "2d26384101601f56851b0ee5e51adc3bede10d954f6da5bbf747d04638ef5851"
+      },
+      "back": {
+        "file": "view_back.png",
+        "bytes": 363416,
+        "sha256": "43c40677467b5fd8d3c57a890edb93fc2f12b33746a0b987d8906581aeb1f154"
+      }
+    }
+  }
+}
