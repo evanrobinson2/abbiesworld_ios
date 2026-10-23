@@ -2,7 +2,18 @@
 <style>.gm{max-width:760px;margin:0 auto;padding:16px}.gm .meta{opacity:.7;font-size:.9em}.gm h2{margin:22px 0 6px;font-size:1.05em}.gm .lesson{padding:12px 14px;border-radius:14px;background:#f4ead6}
 .gm .bar{display:grid;grid-template-columns:7.5em 1fr 2.5em;gap:8px;align-items:center;margin:4px 0}.gm .bar i{display:block;height:10px;border-radius:5px;background:#e3dccd;overflow:hidden}.gm .bar b{display:block;height:100%;background:#b4683a}
 .gm .mix{display:flex;height:16px;border-radius:8px;overflow:hidden;margin:6px 0}.gm .mix span{display:block}.gm .keys{display:flex;flex-wrap:wrap;gap:10px;font-size:.9em}.gm .keys em{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px}
-@media (prefers-color-scheme:dark){.gm .lesson{background:#3a3226}.gm .bar i{background:#4a4338}}</style></head><body>
+@media (prefers-color-scheme:dark){.gm .lesson{background:#3a3226}.gm .bar i{background:#4a4338}}
+.gm .dna{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:center}@media (max-width:620px){.gm .dna{grid-template-columns:1fr}}
+.gm .radar{width:100%;max-width:420px;display:block;margin:0 auto;touch-action:manipulation}.gm .radar .ring{fill:none;stroke:var(--rg-line,#d8cfbf)}.gm .radar .spoke{stroke:var(--rg-line,#d8cfbf)}
+.gm .radar .lbl{font:600 13px system-ui,sans-serif;fill:currentColor;cursor:pointer}.gm .radar .lbl.on{fill:#b4683a}.gm .radar .hit{fill:transparent;cursor:pointer}
+.gm .radar .shape{transform-origin:200px 200px;transform:scale(.02);transition:transform .7s cubic-bezier(.2,.9,.3,1.15),opacity .3s}.gm .radar .shape.in{transform:scale(1)}.gm .radar .shape.off{opacity:0;pointer-events:none}
+.gm .radar .shape polygon{stroke-width:2.5;stroke-linejoin:round;transition:fill-opacity .2s}.gm .radar .shape:hover polygon{fill-opacity:.42}.gm .radar .dot{stroke:#fff;stroke-width:1.5}.gm .radar .sweep{stroke:#b4683a;stroke-width:2;stroke-dasharray:3 4;opacity:0;transition:opacity .2s}.gm .radar .sweep.on{opacity:.8}
+.gm .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}.gm .chip{font:inherit;font-size:.9em;border:1.5px solid var(--c);color:inherit;background:transparent;border-radius:999px;padding:5px 12px;line-height:1.2;min-height:0;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.gm .chip i{width:10px;height:10px;border-radius:50%;background:var(--c)}.gm .chip[aria-pressed=false]{opacity:.45}.gm .chip:focus-visible{outline:2px solid #b4683a;outline-offset:2px}
+.gm .readout{min-height:7.5em;border-left:3px solid #b4683a;padding:2px 0 2px 12px}.gm .readout h3{margin:0 0 2px;font-size:1em}.gm .readout .ends{font-size:.85em;opacity:.7;margin:0 0 6px}.gm .readout ul{list-style:none;margin:0;padding:0;display:grid;gap:3px}.gm .readout li{display:flex;gap:8px;align-items:center}.gm .readout li i{width:10px;height:10px;border-radius:50%;flex:none}
+.gm .cmp{position:relative;margin-top:10px}.gm .cmp input{font:inherit;width:100%;padding:7px 10px;border-radius:10px;border:1px solid var(--rg-line,#d8cfbf);background:transparent;color:inherit}.gm .cmp ul{position:absolute;z-index:2;left:0;right:0;margin:4px 0 0;padding:4px;list-style:none;border-radius:10px;background:var(--rg-pop,#fffaf0);box-shadow:0 6px 24px rgba(0,0,0,.18)}.gm .cmp li button{font:inherit;width:100%;text-align:left;background:none;border:0;color:inherit;padding:6px 8px;border-radius:6px;cursor:pointer}.gm .cmp li button:hover,.gm .cmp li button:focus-visible{background:rgba(180,104,58,.15);outline:none}
+.gm .verdict{margin:8px 0 0}
+@media (prefers-reduced-motion:reduce){.gm .radar .shape{transition:none}}</style></head><body>
 <header><a class="brand" href="/steam">Oracle <span>Game study</span></a></header>
 <main class="gm" id="main"><p class="meta">Loading…</p></main>
 <script type="module">
@@ -10,8 +21,43 @@ const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>
 const AXES={tempo:'Tempo',challenge:'Challenge',expression:'Expression',structure:'Structure',social:'Social',systems:'Systems',chance:'Chance',session:'Session'};
 const MODES={diegetic:['In the world','#5b8c51'],spatial:['On things','#3f7fb0'],meta:['Feeling','#a35a9c'],overlay:['Screen gauge','#c9873a'],none:['World just behaves','#8a8a80']};
 const id=new URLSearchParams(location.search).get('id');
+const ENDS={tempo:['calm','frantic'],challenge:['gentle','demanding'],expression:['follow along','make your own'],structure:['free roam','guided path'],social:['solo','together'],systems:['simple','deep'],chance:['skill','luck'],session:['minutes','hours']};
+const KEYS=Object.keys(AXES),C=200,R=130;
+const pt=(k,v)=>{const a=-Math.PI/2+KEYS.indexOf(k)*2*Math.PI/KEYS.length;return [C+Math.cos(a)*R*v,C+Math.sin(a)*R*v];};
+// Interactive DNA radar: one layer per game, Abbie's World always available as its own layer.
+function radar(el,layers){
+ let sel=null;const L=layers;
+ const draw=()=>{
+  const rings=[1/3,2/3,1].map(f=>`<polygon class="ring" points="${KEYS.map(k=>pt(k,f).join(',')).join(' ')}"/>`).join('');
+  const spokes=KEYS.map(k=>`<line class="spoke" x1="${C}" y1="${C}" x2="${pt(k,1)[0]}" y2="${pt(k,1)[1]}"/>`).join('');
+  const shapes=L.map((l,n)=>`<g class="shape" data-n="${n}"><polygon points="${KEYS.map(k=>pt(k,l.axes[k]??0).join(',')).join(' ')}" fill="${l.color}" fill-opacity="${n?0.16:0.28}" stroke="${l.color}" ${l.dash?'stroke-dasharray="6 5"':''}/>${KEYS.map(k=>{const [x,y]=pt(k,l.axes[k]??0);return `<circle class="dot" cx="${x}" cy="${y}" r="4" fill="${l.color}"/>`;}).join('')}</g>`).join('');
+  const labels=KEYS.map(k=>{const [x,y]=pt(k,1.2);const anchor=x<C-8?'end':x>C+8?'start':'middle';return `<text class="lbl" data-k="${k}" x="${x}" y="${y+4}" text-anchor="${anchor}">${AXES[k]}</text>`;}).join('');
+  const hits=KEYS.map(k=>{const [x,y]=pt(k,1.05);return `<circle class="hit" data-k="${k}" cx="${x}" cy="${y}" r="26"/>`;}).join('');
+  el.querySelector('svg').innerHTML=`${rings}${spokes}<line class="sweep" x1="${C}" y1="${C}" x2="${C}" y2="${C}"/>${shapes}${labels}${hits}`;
+  el.querySelector('.chips').innerHTML=L.map((l,n)=>`<button class="chip" style="--c:${l.color}" aria-pressed="${!l.off}" data-n="${n}"><i></i>${esc(l.name)}</button>`).join('');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.querySelectorAll('.shape').forEach(g=>{g.classList.add('in');g.classList.toggle('off',!!L[g.dataset.n].off);})));
+  show(sel||strongest());
+ };
+ const strongest=()=>KEYS.reduce((a,k)=>(L[0].axes[k]??0)>(L[0].axes[a]??0)?k:a,KEYS[0]);
+ const show=k=>{sel=k;
+  el.querySelectorAll('.lbl').forEach(t=>t.classList.toggle('on',t.dataset.k===k));
+  const sw=el.querySelector('.sweep'),[x,y]=pt(k,1);sw.setAttribute('x2',x);sw.setAttribute('y2',y);sw.classList.add('on');
+  el.querySelector('.readout').innerHTML=`<h3>${AXES[k]}</h3><p class="ends">0 is ${ENDS[k][0]} · 9 is ${ENDS[k][1]}</p><ul>${L.filter(l=>!l.off).map(l=>`<li><i style="background:${l.color}"></i><span>${esc(l.name)}</span><b style="margin-left:auto">${Math.round((l.axes[k]??0)*9)}/9</b></li>`).join('')}</ul>`;
+ };
+ el.addEventListener('click',e=>{const k=e.target.closest('[data-k]')?.dataset.k;if(k)return show(k);const c=e.target.closest('.chip');if(c){const l=L[c.dataset.n];l.off=!l.off;c.setAttribute('aria-pressed',!l.off);el.querySelector(`.shape[data-n="${c.dataset.n}"]`).classList.toggle('off',l.off);show(sel);}});
+ el.addEventListener('pointerover',e=>{const k=e.target.closest('[data-k]')?.dataset.k;if(k&&e.pointerType==='mouse')show(k);});
+ el.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key)||e.target.tagName==='INPUT')return;const i=(KEYS.indexOf(sel)+(e.key==='ArrowRight'?1:KEYS.length-1))%KEYS.length;show(KEYS[i]);});
+ return {draw,add(l){const n=L.findIndex(x=>x.compare);if(n>=0)L.splice(n,1);L.push(l);draw();}};
+}
+function verdict(game,aw){
+ const top=KEYS.filter(k=>game[k]!=null).sort((a,b)=>game[b]-game[a]).slice(0,2);
+ const diffs=KEYS.map(k=>[k,(game[k]??0)-(aw[k]??0)]);const near=diffs.filter(([,d])=>Math.abs(d)<=1.5/9).sort((a,b)=>Math.abs(a[1])-Math.abs(b[1])).slice(0,3).map(([k])=>AXES[k]);
+ const far=diffs.sort((a,b)=>Math.abs(b[1])-Math.abs(a[1]))[0];
+ return `Strongest at ${top.map(k=>`${AXES[k].toLowerCase()} (${Math.round(game[k]*9)}/9)`).join(' and ')}. ${near.length?`Close to Abbie's World on ${near.join(', ').toLowerCase()}.`:'Unlike Abbie\'s World on every axis.'} Furthest apart on ${AXES[far[0]].toLowerCase()}: it is more ${far[1]>0?ENDS[far[0]][1]:ENDS[far[0]][0]}.`;
+}
 const sec=(t,v)=>v?`<h2>${t}</h2><p>${esc(v)}</p>`:'';
 async function load(){
+ const awReq=fetch('/api/knowledge?identity=abbies-world').then(r=>r.ok?r.json():null).catch(()=>null);
  if(!id){$('#main').innerHTML='<p>Pick a game from the <a href="/steam">library</a>.</p>';return;}
  const r=await fetch('/api/knowledge?identity='+encodeURIComponent(id));
  if(!r.ok){$('#main').innerHTML='<p>The Oracle has not studied that game yet. <a href="/steam">Back to the library</a></p>';return;}
@@ -21,17 +67,29 @@ async function load(){
  let h=`<h1>${esc(name)}</h1><p class="meta">${esc((p?.study_genres||p?.genres||[]).join(' · '))}${st.status?' · '+esc(st.status):''}${st.owned===false?' · not owned':st.installed===false?' · owned, not installed':''}</p>`;
  if(p?.summary)h+=`<p>${esc(p.summary)}</p>`;
  if(i.lessons_for_abbies_world)h+=`<h2>Lesson for Abbie's World</h2><p class="lesson">${esc(i.lessons_for_abbies_world)}</p>`;
+ const aw=(await awReq)?.record?.dna?.axes;
+ const isAW=record?.id==='abbies-world';
+ const axes=(p?.study?.status!=='needs play session'&&dna)||record?.dna?.axes;
+ let dnaHtml='';if(axes)dnaHtml=`<h2>Game DNA</h2><div class="dna" id="dna" tabindex="0" aria-label="Game DNA radar; use the arrow keys to move between dimensions"><div><div class="chips"></div><svg class="radar" viewBox="-45 -5 490 410" role="img" aria-label="Radar chart of ${esc(name)}'s Game DNA"></svg></div><div><div class="readout" aria-live="polite"></div>${aw&&!isAW?`<p class="verdict">${esc(verdict(axes,aw))}</p>`:''}<div class="cmp"><input id="cmp" type="search" placeholder="Compare with another game" autocomplete="off"><ul id="cmplist" hidden></ul></div></div></div>`;
+ h+=dnaHtml;
  if(p?.review)h+=sec('Review',p.review);
  h+=sec('How it plays',i.core_loop)+sec('How it feels',i.ui_and_game_feel);
  if(g){const mix=g.overall_mix||{},tot=Object.values(mix).reduce((a,b)=>a+b,0)||1;
   h+=`<h2>How it shows information</h2><p>${esc(g.note||'')}</p><div class="mix">${Object.entries(mix).map(([m,v])=>`<span title="${esc(MODES[m]?.[0]||m)}" style="width:${v/tot*100}%;background:${MODES[m]?.[1]||'#999'}"></span>`).join('')}</div>
   <div class="keys">${Object.entries(mix).map(([m,v])=>`<span><em style="background:${MODES[m]?.[1]||'#999'}"></em>${esc(MODES[m]?.[0]||m)} ${Math.round(v/tot*100)}%</span>`).join('')}</div>`;
   const hud=g.screen_budget?.hud_coverage?.value;if(hud!=null)h+=`<p class="meta">Screen interface covers about ${Math.round(hud*100)}% (our target is 8% or less).</p>`;}
- if(dna)h+=`<h2>Game DNA</h2>${Object.entries(AXES).map(([k,l])=>dna[k]==null?'':`<div class="bar"><span>${l}</span><i><b style="width:${dna[k]*100}%"></b></i><span class="meta">${Math.round(dna[k]*9)}/9</span></div>`).join('')}`;
  h+=sec('Camera',i.camera)+sec('Art',i.art_direction)+sec('Sound',i.audio_mood)+sec('Pacing',i.pacing);
  if(record)h+=`<h2>Full identity record</h2><p>${esc(record.core?.fantasy||'')}</p>`;
  h+=`<p class="meta">Estimates from public knowledge, confidence ${esc(p?.dna?.confidence??'')}. <a href="/steam">Library</a> · <a href="/api/knowledge?identity=${esc(id)}">JSON</a></p>`;
  $('#main').innerHTML=h;
+ if(!axes)return;
+ const layers=[{name,axes,color:'#c0602c'}];if(aw&&!isAW)layers.push({name:"Abbie's World",axes:aw,color:'#2f8f8a',dash:true});
+ const chart=radar($('#dna'),layers);chart.draw();
+ let t;$('#cmp').addEventListener('input',e=>{clearTimeout(t);const q=e.target.value.trim();if(q.length<2){$('#cmplist').hidden=true;return;}
+  t=setTimeout(async()=>{const d=await fetch('/api/steam?q='+encodeURIComponent(q)).then(r=>r.json());const rows=d.results.filter(r=>r.profile&&String(r.steamAppId)!==String(p?.appid)).slice(0,6);
+   $('#cmplist').innerHTML=rows.map(r=>`<li><button data-id="${esc(r.steamAppId)}">${esc(r.name)}</button></li>`).join('')||'<li class="meta" style="padding:6px 8px">No studied game by that name</li>';$('#cmplist').hidden=false;},200);});
+ $('#cmplist').addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;$('#cmplist').hidden=true;$('#cmp').value=b.textContent;
+  const o=await fetch('/api/knowledge?identity='+b.dataset.id).then(r=>r.json());if(o?.profile?.dna?.axes)chart.add({name:o.profile.name,axes:o.profile.dna.axes,color:'#6a5acd',compare:true});});
 }
 load();
 </script></body></html>
