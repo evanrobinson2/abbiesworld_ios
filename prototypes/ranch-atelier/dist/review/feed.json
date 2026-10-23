@@ -2,6 +2,28 @@
   "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md. models (optional): catalogue ids for a study set (a trailing * matches a prefix); tapping the item opens /models/?set=<id> with only those models, concept left and keep/talk/reject on the right.",
   "items": [
     {
+      "id": "basin-vantage",
+      "at": "2026-10-23T05:40:00Z",
+      "title": "The Basin, the view from camp",
+      "ask": "Is this the view you want from where you play: the valley and river, the lake, the great range on the horizon?",
+      "thread": "Frontier world tiles",
+      "image": "img/basin-vantage.jpg",
+      "link": "https://abbies.world/sandbox?world=basin",
+      "linkLabel": "Open the Basin",
+      "status": "waiting"
+    },
+    {
+      "id": "bodies-study-1",
+      "at": "2026-10-23T05:30:00Z",
+      "title": "Bodies and Creatures 1: the normal human",
+      "ask": "Real adult proportions, front, side and back, with muscle and bone layers, four body types and our toy rule. Say if the toy rule (7¼ heads, hands and feet a bit bigger) is right before heroic humans.",
+      "thread": "AW-STUDY-0016 - Bodies and Creatures",
+      "image": "img/bodies-study.jpg",
+      "link": "https://app.abbies.world/studies/#bodies-study",
+      "linkLabel": "Open the study",
+      "status": "waiting"
+    },
+    {
       "id": "cafe-study-proofs",
       "at": "2026-10-23T05:20:00Z",
       "title": "Abbie's café, proofs",

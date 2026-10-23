@@ -1,0 +1,196 @@
+{
+  "study": "AW-STUDY-0014 Cards v3: print-ready beautiful artifacts",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney/mj.js download path",
+  "mode": "one grid of 4 per prompt, no upscale",
+  "prompts": {
+    "A": {
+      "prompt": "A collectible card for a cozy kids' board game, the card is a cross-section slice of a tiny toy farm diorama, flat green grass top with a cartoon red barn and teal-roofed silo, a thick band of warm orange earth below like a cut cake, flat colour cel illustration, crisp ink outlines, cream margin, small clean sans-serif title \"Ranch\", no ornaments, no wooden frame, front view, card fills the frame --ar 63:88 --v 7",
+      "job_id": "49de6d36-cfee-471b-a055-fa8702809de2",
+      "page": "https://www.midjourney.com/jobs/49de6d36-cfee-471b-a055-fa8702809de2",
+      "images": [
+        {
+          "file": "A-0.png",
+          "index": 0,
+          "url": "https://cdn.midjourney.com/49de6d36-cfee-471b-a055-fa8702809de2/0_0.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "848aea2db41fbfd4def33f79b602fde7a83d3bb9512d3c8c9367acba91c91eb6"
+        },
+        {
+          "file": "A-1.png",
+          "index": 1,
+          "url": "https://cdn.midjourney.com/49de6d36-cfee-471b-a055-fa8702809de2/0_1.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "5c4aba69ffd379ada5248176e189e8e3ca1a346cd7893a7300ee3a924af3708b"
+        },
+        {
+          "file": "A-2.png",
+          "index": 2,
+          "url": "https://cdn.midjourney.com/49de6d36-cfee-471b-a055-fa8702809de2/0_2.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "3d054282d0f2910009eca2ce420d098a39090370fb2dbdb26d217257c133ace1"
+        },
+        {
+          "file": "A-3.png",
+          "index": 3,
+          "url": "https://cdn.midjourney.com/49de6d36-cfee-471b-a055-fa8702809de2/0_3.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "532c7c05be728db6ae3359da5f7bb9d2d36e756bdd86550c747427ef0bc7de97"
+        }
+      ]
+    },
+    "B": {
+      "prompt": "limited edition art print trading card, three-colour screenprint of a cartoon farm barn and silo on a tiny hexagon island, flat spot colours sage green, terracotta and teal, wide paper white border, tiny edition number 12/40 and initials AW, small clean sans-serif title, Swiss poster restraint, mid-century children's book illustration, front view, card fills the frame --ar 63:88 --v 7",
+      "job_id": "1a4b7e01-3504-4190-9112-b849d1290c5b",
+      "page": "https://www.midjourney.com/jobs/1a4b7e01-3504-4190-9112-b849d1290c5b",
+      "images": [
+        {
+          "file": "B-0.png",
+          "index": 0,
+          "url": "https://cdn.midjourney.com/1a4b7e01-3504-4190-9112-b849d1290c5b/0_0.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "f6f2316fcb9c9b3606f3c3dea27e04191fce0154e6ddbca7428749d42224f605"
+        },
+        {
+          "file": "B-1.png",
+          "index": 1,
+          "url": "https://cdn.midjourney.com/1a4b7e01-3504-4190-9112-b849d1290c5b/0_1.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "bf8124a2f1ce6196d5de47fbc8cf493e6bf0dc386f54811a351e324b9ca7a2f7"
+        },
+        {
+          "file": "B-2.png",
+          "index": 2,
+          "url": "https://cdn.midjourney.com/1a4b7e01-3504-4190-9112-b849d1290c5b/0_2.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "645476c7ddff7ff936c24660778beeaed2ed779f03a790879058f67802ebdb58"
+        },
+        {
+          "file": "B-3.png",
+          "index": 3,
+          "url": "https://cdn.midjourney.com/1a4b7e01-3504-4190-9112-b849d1290c5b/0_3.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "294a731391051011390dc0700c8d2606a5dc25f54efa90ad28233abe6b5ccee9"
+        }
+      ]
+    },
+    "C": {
+      "prompt": "die-cut collectible card shaped like a hexagonal toy diorama tile, a cartoon barn and silo rising above the top edge of the card, flat colour, ink outline, the lower edge shows a soil cross-section of grass and orange earth, the name \"Ranch\" in clean sans-serif on the earth band, plain light grey background, front view --ar 63:88 --v 7",
+      "job_id": "5eb0852c-e385-48c2-b349-9e9bdba61fd6",
+      "page": "https://www.midjourney.com/jobs/5eb0852c-e385-48c2-b349-9e9bdba61fd6",
+      "images": [
+        {
+          "file": "C-0.png",
+          "index": 0,
+          "url": "https://cdn.midjourney.com/5eb0852c-e385-48c2-b349-9e9bdba61fd6/0_0.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "3af3e6f6f0cf52040791229d44851bc1d1d6531df9ca16047f6b8e91184d039e"
+        },
+        {
+          "file": "C-1.png",
+          "index": 1,
+          "url": "https://cdn.midjourney.com/5eb0852c-e385-48c2-b349-9e9bdba61fd6/0_1.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "58bf91b6ba9bdc723e3bd4f52d8983ef420b69cc591104fc1008641b54de36f7"
+        },
+        {
+          "file": "C-2.png",
+          "index": 2,
+          "url": "https://cdn.midjourney.com/5eb0852c-e385-48c2-b349-9e9bdba61fd6/0_2.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "d3174fc4278c3e379ca1543d6d01ec8dd0a039256305aa2ff33abd430224dca4"
+        },
+        {
+          "file": "C-3.png",
+          "index": 3,
+          "url": "https://cdn.midjourney.com/5eb0852c-e385-48c2-b349-9e9bdba61fd6/0_3.png",
+          "size": [
+            928,
+            1296
+          ],
+          "sha256": "919125312e80defac7ba20aecb4c2f579a723176e793573200d2137b6bb04136"
+        }
+      ]
+    },
+    "D": {
+      "prompt": "a single precious collectible card held in a child's hand above a tiny toy farm diorama on a table, thick matte card stock with visible edge, flat colour cartoon barn illustration, soft window daylight raking across the paper, shallow depth of field, photograph --ar 3:4 --v 7",
+      "job_id": "d6d3ec6e-6e85-4bbe-a372-07863a3c5a08",
+      "page": "https://www.midjourney.com/jobs/d6d3ec6e-6e85-4bbe-a372-07863a3c5a08",
+      "images": [
+        {
+          "file": "D-0.png",
+          "index": 0,
+          "url": "https://cdn.midjourney.com/d6d3ec6e-6e85-4bbe-a372-07863a3c5a08/0_0.png",
+          "size": [
+            928,
+            1232
+          ],
+          "sha256": "f0fa13161bd7409e5b889306619e7a629c45b38d85cdee79919cdac957aaebd0"
+        },
+        {
+          "file": "D-1.png",
+          "index": 1,
+          "url": "https://cdn.midjourney.com/d6d3ec6e-6e85-4bbe-a372-07863a3c5a08/0_1.png",
+          "size": [
+            928,
+            1232
+          ],
+          "sha256": "b398dbc52677cdf753a49787fb9cdbe05919d55421e917ba0fd8b18752ecc773"
+        },
+        {
+          "file": "D-2.png",
+          "index": 2,
+          "url": "https://cdn.midjourney.com/d6d3ec6e-6e85-4bbe-a372-07863a3c5a08/0_2.png",
+          "size": [
+            928,
+            1232
+          ],
+          "sha256": "57dd14c38e1776f98ec459c9b323558d662e8b887ee4a416253f76655ffd29d4"
+        },
+        {
+          "file": "D-3.png",
+          "index": 3,
+          "url": "https://cdn.midjourney.com/d6d3ec6e-6e85-4bbe-a372-07863a3c5a08/0_3.png",
+          "size": [
+            928,
+            1232
+          ],
+          "sha256": "44b10214dd4e6963f83787fdf67f82247edacb0168022a3381565844581bf540"
+        }
+      ]
+    }
+  }
+}

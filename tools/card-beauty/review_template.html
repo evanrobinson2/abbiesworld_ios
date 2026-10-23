@@ -1,0 +1,81 @@
+<title>Cards v3 Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: one column of before/after pairs, each with its own notes box. Abbie's World look: flat colour, Roboto, AW. */
+:root{--bg:#ece2d3;--surface:#f6f1e7;--fg:#2b2a26;--muted:#6d655a;--line:#2b2a2626;--accent:#b9533a;--on-accent:#f6f1e7;
+ --font:Roboto,'Helvetica Neue',Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1d1a;--surface:#2a2724;--fg:#f0eadf;--muted:#b3a99a;--line:#f0eadf26;--accent:#e07a5f;--on-accent:#1f1d1a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1f1d1a;--surface:#2a2724;--fg:#f0eadf;--muted:#b3a99a;--line:#f0eadf26;--accent:#e07a5f;--on-accent:#1f1d1a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:400 15px/1.45 var(--font);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 60px}
+main{max-width:1180px;margin:0 auto;display:grid;gap:44px}
+header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+header b{font-weight:900;letter-spacing:.06em;color:var(--accent)}
+h1{font-size:clamp(22px,3.4vw,32px);font-weight:800;margin:0;text-wrap:balance}
+header small{color:var(--muted);letter-spacing:.04em}
+h2{font-size:20px;font-weight:800;margin:0 0 12px}
+section{display:grid;gap:14px}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+figcaption{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+img{display:block;width:100%;height:auto;border-radius:10px}
+img.face{border-radius:0;filter:drop-shadow(0 8px 14px #2b1d0e30)}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:20px;align-items:end}
+.pair.wide{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+.faces{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end}
+.today{padding-right:20px;border-right:1px solid var(--line)}
+.after{display:grid;gap:8px;min-width:0}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tabs,.picks{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button,.picks button{font:500 13px/1 var(--font);color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer}
+.tabs button[aria-pressed="true"],.picks button[aria-checked="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.picks::before{content:"Pick";font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);align-self:center;margin-right:4px}
+button:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.note{display:grid;gap:6px}
+.note label{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.note textarea{font:400 15px/1.45 var(--font);color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical;min-height:64px}
+.note output{font-size:12px;color:var(--muted);min-height:1em}
+.why{text-transform:none;letter-spacing:0;font-size:13px;font-weight:400;color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.slot{display:grid;place-items:center;aspect-ratio:63/88;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px;background:var(--surface)}
+.wide .slot,.two .slot,.shot .slot{aspect-ratio:16/10}
+.grid .slot{grid-column:1/-1;aspect-ratio:auto;padding:28px}
+#offline{font-size:13px;color:var(--muted)}
+@media (max-width:760px){.pair,.pair.wide{grid-template-columns:1fr}.today{padding-right:0;border-right:0;max-width:50%}.faces{gap:10px}.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<main>
+<header><b>AW</b><h1>Cards v3</h1><small>AW-STUDY-0014 · today against three bespoke directions</small></header>
+<p id="offline" hidden>Notes need you signed in to claude.ai; they are not being saved here.</p>
+<!--SECTIONS-->
+</main>
+<script>
+// Tabs swap the "after" shot in a section; picks and notes are kept in the artifact's database (collection "notes").
+document.querySelectorAll('.after').forEach(a => a.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
+ a.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+ a.querySelectorAll('.shot').forEach(s => s.hidden = s.dataset.shot !== b.dataset.shot);
+})));
+const notes = {}; let db = null;
+const paint = () => {
+ document.querySelectorAll('.note').forEach(n => { const t = n.querySelector('textarea'), d = notes[n.dataset.key]; if (d && document.activeElement !== t && t.value !== (d.text || '')) t.value = d.text || ''; });
+ document.querySelectorAll('.picks button').forEach(b => b.setAttribute('aria-checked', String(notes[b.dataset.key]?.pick === b.dataset.pick)));
+};
+async function save(key, patch, out) {
+ notes[key] = {...(notes[key] || {}), ...patch, updatedAt: new Date().toISOString()};
+ if (!db) { if (out) out.textContent = 'Not saved: sign in to keep notes'; return; }
+ try { await db.doc('notes/' + key).set(notes[key]); if (out) out.textContent = 'Saved'; } catch (e) { if (out) out.textContent = 'Not saved: ' + (e.message || e.code || 'try again'); }
+}
+document.querySelectorAll('.note').forEach(n => {
+ const t = n.querySelector('textarea'), out = n.querySelector('output'); let timer = 0;
+ t.addEventListener('input', () => { out.textContent = ''; clearTimeout(timer); timer = setTimeout(() => save(n.dataset.key, {text: t.value}, out), 900); });
+ t.addEventListener('blur', () => { clearTimeout(timer); if ((notes[n.dataset.key]?.text || '') !== t.value) save(n.dataset.key, {text: t.value}, out); });
+});
+document.querySelectorAll('.picks button').forEach(b => b.addEventListener('click', () => {
+ const k = b.dataset.key, pick = notes[k]?.pick === b.dataset.pick ? null : b.dataset.pick;
+ save(k, {pick}, b.closest('section').querySelector('.note output')); paint();
+}));
+(async () => {
+ try { db = await window.claude?.use?.('db'); } catch { db = null; }
+ if (!db) { document.getElementById('offline').hidden = false; return; }
+ db.collection('notes').onSnapshot(s => { s.docs.forEach(d => { notes[d.id] = d.data(); }); paint(); }, () => {});
+})();
+</script>
