@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-moon-mission-games",
+      "date": "2026-10-23",
+      "title": "Moon Mission: low-poly isometric view and the four Moon base games",
+      "line": "The Moon Mission now plays from above in a low-poly isometric view, and after landing there are four more games: wire the airlock door, zap the gem bugs in the habitat, hum back the Star Child's song, and drive the buggy home. Nobody can fail; mistakes only cost a moment. Stand-in figures until the Meshy heroes arrive.",
+      "image": "/whats-new/2026-10-23-moon-mission-games.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMY1cycvjR6PnahcM7wX7rx",
+      "threadTitle": "AW-STUDY-0044 - Why Our Drawing Is Weak",
+      "tour": false,
+      "link": "/studies/drawing/"
+    },
+    {
       "id": "2026-10-23-drawing-weak",
       "date": "2026-10-23",
       "title": "Why our drawing is weak",
