@@ -2894,6 +2894,81 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/spaceships/SPACESHIP_STUDY.md"
         }
       ]
+    },
+    "farm-tile": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Animal Crossing New Horizons record (always one more small thing)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Dorfromantik record (touching tiles matter)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dorfromantik.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Tiny Glade, LEGO Bricktales, Unpacking records",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "design",
+          "t": "Stardew Valley design analysis",
+          "href": "https://www.kokutech.com/blog/gamedev/design-patterns/world-building/stardew-valley",
+          "note": "Routine and farm as the loop; we change it to colour and discovery"
+        },
+        {
+          "k": "design",
+          "t": "Design principles of living in Stardew Valley",
+          "href": "https://deeprootdepths.substack.com/p/examining-the-design-principles-of"
+        },
+        {
+          "k": "devblog",
+          "t": "TechRaptor: ConcernedApe interview, five years of Stardew Valley",
+          "href": "https://techraptor.net/gaming/features/stardew-valley-5th-anniversary-concernedape-interview"
+        },
+        {
+          "k": "canon",
+          "t": "Paint the World (0049), Cards v3 (0014), Tile pull and print (0025), Charms (0053)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/paint-world/PAINT_WORLD_STUDY.md"
+        }
+      ]
+    },
+    "riding-school": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Red Dead Redemption 2 record (the horse that remembers you)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/red-dead-redemption-2.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Animal Crossing New Horizons, Tiny Glade, Unpacking records",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "devblog",
+          "t": "Rockstar's quest for the ultimate video game horse",
+          "href": "https://www.gamedeveloper.com/design/rockstar-s-quest-for-the-ultimate-video-game-horse"
+        },
+        {
+          "k": "design",
+          "t": "RDR2 horse bonding, grooming and reviving",
+          "href": "https://www.shacknews.com/article/108131/horse-bonding-grooming-and-reviving-red-dead-redemption-2"
+        },
+        {
+          "k": "tutorial",
+          "t": "Alexandra Kurland's quick start guide to clicker training",
+          "href": "https://www.theclickercenter.com/guide-pg-3",
+          "note": "Positive reinforcement is our teaching loop"
+        },
+        {
+          "k": "canon",
+          "t": "Practice reps, Cards v3 (0014), Paint the World (0049), Tile pull and print (0025)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cards-v3/CARDS_V3.md"
+        }
+      ]
     }
   }
 }
