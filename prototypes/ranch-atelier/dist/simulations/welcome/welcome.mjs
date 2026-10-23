@@ -102,12 +102,13 @@ async function runTour({fresh}){
  // Each shot is a pose over time t in 0..1, measured on the world as it is now.
  const sizeOf=o=>{const s=new T.Box3().setFromObject(o).getSize(v());return Math.max(.08,s.x,s.y,s.z);};
  const shots={
-  sky:()=>{const b=bounds();return t=>{place(b.c,b.r*2.3,.55+t*.05,.18);tgt.set(b.c.x,b.c.y+b.r*(2.6-t*.1),b.c.z);};},
-  crane:()=>{const b=bounds(),az=.48;return t=>{const k=ease(t);place(b.c,b.r*(2.5-.5*k),az+k*.22,.18+k*.42);tgt.lerpVectors(tmp.set(b.c.x,b.c.y+b.r*2.5,b.c.z),b.c,Math.min(1,k*1.4));};},
+  // While the world is made, the camera waits high above it (the play camera won't look up past the horizon).
+  sky:()=>{const b=bounds();return t=>place(b.c,b.r*(7-t*.3),.48+t*.04,1.32);},
+  crane:()=>{const b=bounds(),az=.52;return t=>{const k=ease(t);place(b.c,b.r*(6.7-4.6*k),az+k*.3,1.32-.72*k);};},
   push:o=>{const p=o.getWorldPosition(v()),d=Math.max(sizeOf(o)*7,bounds().r*.12),az=Math.random()*6.28;return t=>{const k=ease(t);place(p,d*(1.9-.8*k),az+k*.35,.42-.1*k);};},
   follow:o=>{const d=Math.max(sizeOf(o)*6,.9),az=Math.random()*6.28;return t=>{o.getWorldPosition(tmp);place(tmp,d*(1.25-.25*t),az+t*.6,.3);};},
   orbit:o=>{const p=o.getWorldPosition(v()),d=bounds().r*.4,az=Math.random()*6.28;return t=>place(p,d,az+t*.7,.5);},
-  timelapse:()=>{const b=bounds(),az=2.3,from=R.hour?.()??8,to=from<17?18.4:from+3;return t=>{place(b.c,b.r*1.35,az+t*.3,.42);if(R.hour)R.hour(from+(to-from)*ease(t));};},
+  timelapse:()=>{const b=bounds(),az=2.3,from=R.hour?.()??8,to=from<16.5?17.6:from+1.5;return t=>{place(b.c,b.r*1.35,az+t*.3,.42);if(R.hour)R.hour(from+(to-from)*ease(t));};},
   hero:()=>{const b=bounds(),az=.9;return t=>{const k=ease(t);place(b.c,b.r*(1.05+1.3*k),az+k*.5,.32+k*.22);};},
  };
 

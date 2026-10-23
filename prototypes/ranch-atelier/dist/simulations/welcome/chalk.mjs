@@ -18,12 +18,12 @@ function ensure(){
 }
 const wob=(s=1)=>(Math.random()-.5)*s;
 // A hand-drawn path: a little wobble, never a perfect geometric line.
-function stroke(g,d,{delay=0,ms=700,width=3.4}={}){
+function stroke(g,d,{delay=0,ms=700,width=4}={}){
  const p=make('path',{d,class:'aw-chalk-stroke','stroke-width':width},g);
  const len=p.getTotalLength?.()||300;p.style.strokeDasharray=len;p.style.strokeDashoffset=len;
  p.animate([{strokeDashoffset:len},{strokeDashoffset:0}],{duration:ms,delay,easing:'cubic-bezier(.3,.1,.3,1)',fill:'forwards'});return p;
 }
-function words(g,x,y,text,{delay=0,anchor='middle',size=30}={}){
+function words(g,x,y,text,{delay=0,anchor='middle',size=Math.round(Math.min(40,Math.max(30,innerWidth/34)))}={}){
  const t=make('text',{x,y,'text-anchor':anchor,class:'aw-chalk-words','font-size':size},g);t.textContent=text;
  t.animate([{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'none'}],{duration:500,delay,easing:'ease-out',fill:'backwards'});return t;
 }
