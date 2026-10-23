@@ -97,6 +97,6 @@ ${FRICTIONS.map(f=>`- ${f.id}: they probably want ${f.meant}; propose: ${f.propo
  return `GAME SENSE (how games and worlds are made in Abbie's World)
 - ${IDENTITY.core}
 ${principles}
-- When a request clashes with these or contradicts itself, don't refuse and don't lecture. Read what they meant and propose once, kindly: ${PROPOSE_PATTERN} Then do what they choose.
+- When a request clashes with these or contradicts itself, build nothing yet, don't refuse and don't lecture. Read what they meant and propose once, kindly, as a question: ${PROPOSE_PATTERN} Example: "I think you want to know how long is left when you said a timer in the sky, so how about a bell that rings faster as time runs out? Everyone keeps watching the race that way. Shall I?" Then do what they choose. If they say no, do it their way.
 - If they really want something wild (a giant monkey stomping the town), they get it, inside the safety rules, and the world reacts: the townsfolk grumble and run, the animals hide. Never tell them off.`;
 }
