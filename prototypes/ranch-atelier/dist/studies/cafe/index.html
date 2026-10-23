@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Abbie's café</title>
+<link rel="stylesheet" href="/app-style.css?v=1">
+<style>
+/* AW-STUDY-0013 The Coffee Shop: Midjourney proofs, one row per view, one column per style, four options per cell. */
+body{margin:0;background:var(--app-canvas,#f4edcf);color:var(--app-ink);font:15px/1.45 system-ui,-apple-system,sans-serif;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 40px}
+.wrap{max-width:1280px;margin:0 auto}
+h1{margin:0 0 4px;font-size:24px}
+.id{font-size:12px;letter-spacing:.1em;color:var(--app-muted)}
+.grid{display:grid;grid-template-columns:72px repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+.head{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:14px}
+.chips{display:flex;height:14px;border-radius:7px;overflow:hidden;border:1px solid var(--app-border)}
+.chips i{flex:1}
+.view{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:14px;align-self:center;justify-self:center;color:var(--app-muted)}
+.cell{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:14px;padding:4px;min-height:120px}
+.cell img{width:100%;aspect-ratio:var(--ar,1);object-fit:cover;border-radius:10px;display:block;cursor:zoom-in;background:#0001}
+.cell .wait{grid-column:1/-1;display:grid;place-items:center;color:var(--app-muted);font-size:13px}
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}
+dialog::backdrop{background:#000c}
+dialog img{max-width:96vw;max-height:94vh;display:block;border-radius:12px}
+@media (max-width:760px){
+ .grid{grid-template-columns:minmax(0,1fr)}
+ .corner,.colhead{display:none}
+ .view{writing-mode:horizontal-tb;transform:none;justify-self:start;margin-top:12px;font-size:16px;color:var(--app-ink)}
+ .cell::before{content:attr(data-style);grid-column:1/-1;font-size:12px;font-weight:700;color:var(--app-muted);padding:2px 4px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="id">AW-STUDY-0013</div>
+ <h1>Abbie's café</h1>
+ <div class="grid" id="grid"></div>
+</div>
+<dialog id="big"><img alt=""></dialog>
+<script>
+const STYLES=[
+ ['elegant','Elegant',['#E8B4B8','#B5838D','#4A2040','#A39382','#D9C08C','#F4EDE1']],
+ ['party','Dance party',['#E6007E','#7A3CFF','#FF8A2B','#B6E43A','#00B5C8','#FFD23F']],
+ ['game','Typical 3D game',['#F49AC1','#8FD9B6','#7EC8E3','#F9E07F','#F7836B','#FFF6E5']],
+];
+const VIEWS=[['tile','Its own tile','1'],['town','In a town','16/9'],['exterior','Outside','3/2'],['interior','Inside','3/2']];
+const g=document.getElementById('grid'),big=document.getElementById('big');
+g.insertAdjacentHTML('beforeend','<div class="corner"></div>');
+for(const [,label,chips] of STYLES)g.insertAdjacentHTML('beforeend','<div class="head colhead">'+label+'<span class="chips">'+chips.map(c=>'<i style="background:'+c+'"></i>').join('')+'</span></div>');
+fetch('proofs.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(have=>{
+ for(const [v,vl,ar] of VIEWS){
+  g.insertAdjacentHTML('beforeend','<div class="view">'+vl+'</div>');
+  for(const [s,sl] of STYLES){
+   const c=document.createElement('div');c.className='cell';c.dataset.style=sl;c.style.setProperty('--ar',ar);
+   const n=(have[v+'-'+s]||0);
+   if(!n)c.innerHTML='<div class="wait">On the way</div>';
+   for(let i=0;i<n;i++){const im=new Image();im.loading='lazy';im.src='img/'+v+'-'+s+'_'+i+'.jpg';im.alt=vl+', '+sl+', option '+(i+1);
+    im.onclick=()=>{big.querySelector('img').src=im.src;big.showModal()};c.appendChild(im);}
+   g.appendChild(c);
+  }
+ }
+});
+big.onclick=()=>big.close();
+</script>
+</body>
+</html>
