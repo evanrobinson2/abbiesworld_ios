@@ -211,7 +211,7 @@ button{font:inherit;cursor:pointer}
    <li><b>Same pickup.</b> The golden reward animation from <code>inventory.mjs</code>.</li>
    <li><b>Same place.</b> Beside the coin pile at the backpack, and the chest button on the board.</li>
    <li><b>Same rule.</b> You can't lose one, and the empty slot shows what you're missing, not a number you failed.</li></ul>
-   <p><b>Ten, not eleven.</b> The code has eleven charm ids today. The chest has ten slots: the plain gold coin charm (<code>first-memory</code>) is dropped, because the coin itself already is that charm, and the Heart (<code>all-memories</code>) is the coin chest's own reward. Moon cheese is repeatable and takes one slot, with up to two on the keychain. Backpack thread: please confirm before <code>CHARMS</code> changes.</p></div>
+   <p><b>Ten, the whole set.</b> The plain gold coin charm (<code>first-memory</code>) has been removed from <code>CHARMS</code> (Backpack thread), so the ten slots are the whole set. Moon cheese is repeatable and takes one slot, with up to two on the keychain. The jewellery box's "put in the box" toggle should call <code>putInBox(id, yes)</code> / <code>inBox(id)</code> from <code>backpack.mjs</code>; <code>keychain()</code> then leaves boxed charms off the worn backpack.</p></div>
  </div>
  <table><thead><tr><th>#</th><th>Charm</th><th>Earned by</th><th>Where on the board</th></tr></thead><tbody id="ctable"></tbody></table>
 </section>
@@ -302,7 +302,7 @@ const cheese = `<svg viewBox="0 0 64 64"><path d="M6 44 L58 30 L58 46 L6 56 Z" f
 // Charm ids and quests follow simulations/backpack.mjs CHARMS; the chest shows ten (see "Ten, not eleven").
 const CH = [
  {id:'tardigrade', name:'Tardigrade', quest:"Win Abbie's science adventure", at:'lab', how:'Win the cell game in the science lab'},
- {id:'basement', name:'Floppy disk', quest:"Find all ten memories in Grace's basement", at:'cellar', how:"All ten memories in Grace's basement"},
+ {id:'basement', name:'Floppy disk', quest:"Beat the word game in Grace's basement", at:'cellar', how:'Beat the word game in Grace\'s basement (about two minutes)'},
  {id:'brass-key', name:'Brass key', quest:"Find the café's secret key", at:'cafe', how:"Find the café's secret key"},
  {id:'barista', name:'Coffee cup', quest:'Serve your first coffee in the café', at:'cafe', how:'Serve your first coffee'},
  {id:'school-roof', name:'Star', quest:'Find the memory on the school roof', at:'school', how:'The memory on the school roof'},
