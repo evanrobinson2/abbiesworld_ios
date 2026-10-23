@@ -2,7 +2,7 @@
 // (the same ranch everyone starts from, their own copy) and may use the paid AI up to their cap.
 // Nothing is asked of players and nothing is promised. See ACCOUNTS.md.
 (()=>{
- const KEYS=['abbies-simulations-v1','abbies-suburban-v1'],TAG='abbies-save-account',RESTORED='abbies-save-restored';
+ const KEYS=['abbies-simulations-v1','abbies-suburban-v1']  /* coins and charms are kept by account-keep.js */,TAG='abbies-save-account',RESTORED='abbies-save-restored';
  const read=k=>{try{return localStorage.getItem(k);}catch{return null;}};
  const write=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v);return true;}catch{return false;}};
  const stamp=saves=>{let t=0;for(const v of Object.values(saves||{})){try{for(const i of JSON.parse(v)?.instances||[])t=Math.max(t,Number(i.updated)||0);}catch{}}return t;};

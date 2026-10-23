@@ -4,7 +4,8 @@
 //  PUT /api/me {updated, saves}   stores this player's worlds (only the game's own save keys)
 const {account}=require('../lib/account.cjs');
 const {wallet}=require('../lib/wallet.cjs');
-const KEYS=new Set(['abbies-simulations-v1','abbies-suburban-v1']);
+// worlds, plus the gold coins and charms a player has earned (the town and the games keep those)
+const KEYS=new Set(['abbies-simulations-v1','abbies-suburban-v1','aw-memory-coins','aw-backpack']);
 const MAX=4000000;
 const json=(res,code,body)=>{res.statusCode=code;res.setHeader('Content-Type','application/json');res.end(JSON.stringify(body));};
 
@@ -28,7 +29,9 @@ function createHandler({env=process.env,who=account,purse=wallet,blob=()=>requir
    const host=req.headers['x-forwarded-host']||req.headers.host;if(req.headers.origin!==`https://${host}`)return json(res,403,{error:'Save from the game.'});
    const body=typeof req.body==='string'?JSON.parse(req.body):req.body;
    const saves={};for(const [k,v]of Object.entries(body?.saves||{}))if(KEYS.has(k)&&typeof v==='string')saves[k]=v;
-   const doc=JSON.stringify({updated:Number(body?.updated)||Date.now(),saves});
+   // A save from one page only names its own keys; keys it leaves out stay as they were.
+   const had=await blob().get(path,{access:'private',useCache:false}).then(async g=>g&&g.statusCode===200?JSON.parse(Buffer.from(await new Response(g.stream).arrayBuffer()).toString()):null).catch(()=>null);
+   const doc=JSON.stringify({updated:Number(body?.updated)||Date.now(),saves:{...(had?.saves||{}),...saves}});
    if(doc.length>MAX)return json(res,413,{error:'These worlds are too big to keep online; they stay saved on this device.'});
    await blob().put(path,doc,{access:'private',addRandomSuffix:false,allowOverwrite:true,contentType:'application/json'});
    return json(res,200,{ok:true});
