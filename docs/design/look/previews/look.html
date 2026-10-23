@@ -1,0 +1,545 @@
+<title>Abbie's World Look</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+/* Layout: the page is a table standing under the world's own sky. Things sit on it as thick toy tiles; glass is a small lens. Day in light theme, night in dark. */
+:root{
+  --sky-top:#8cc8dc;--sky-low:#fde4b8;--hill-far:#b6d488;--hill:#93c062;
+  --tile:#fdf6e6;--tile-edge:#d2b083;--drop:rgba(70,45,20,.28);
+  --ink:#3a2618;--ink-soft:#6f5643;
+  --meadow:#5f9a3a;--meadow-edge:#3e6c22;--terra:#cf6a4d;--terra-edge:#94432c;
+  --brass:#e7ad35;--brass-edge:#a5731a;--teal:#2f8b87;--teal-edge:#1c5e5b;
+  --timber:#7a5236;--plaster:#f6ead2;--lamp:#ffc56b;--apple:#e0503a;
+  --glass-a:rgba(255,255,255,.62);--glass-b:rgba(255,255,255,.16);--glass-rim:rgba(255,255,255,.9);--glass-shade:rgba(40,60,90,.2);
+  --on-paint:#fffaf0;
+  --display:Fredoka,'Baloo 2','Trebuchet MS',sans-serif;
+  --body:Nunito,'Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --sky-top:#0f1631;--sky-low:#3b3f66;--hill-far:#2c3d55;--hill:#22343a;
+  --tile:#2a2e46;--tile-edge:#14172a;--drop:rgba(0,0,0,.5);
+  --ink:#f8ecd4;--ink-soft:#bdb3cc;
+  --meadow:#6aa846;--meadow-edge:#3a6420;--terra:#d9775a;--terra-edge:#8c3f29;
+  --brass:#f0b843;--brass-edge:#9c6c16;--teal:#3a9d98;--teal-edge:#1a5552;
+  --glass-a:rgba(255,236,200,.16);--glass-b:rgba(255,255,255,.04);--glass-rim:rgba(255,214,150,.5);--glass-shade:rgba(0,0,0,.4);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sky-top:#0f1631;--sky-low:#3b3f66;--hill-far:#2c3d55;--hill:#22343a;
+  --tile:#2a2e46;--tile-edge:#14172a;--drop:rgba(0,0,0,.5);
+  --ink:#f8ecd4;--ink-soft:#bdb3cc;
+  --meadow:#6aa846;--meadow-edge:#3a6420;--terra:#d9775a;--terra-edge:#8c3f29;
+  --brass:#f0b843;--brass-edge:#9c6c16;--teal:#3a9d98;--teal-edge:#1a5552;
+  --glass-a:rgba(255,236,200,.16);--glass-b:rgba(255,255,255,.04);--glass-rim:rgba(255,214,150,.5);--glass-shade:rgba(0,0,0,.4);
+  color-scheme:dark}
+/* The time-of-day dial overrides the theme, the way the world's clock does. */
+:root.sky-dawn{--sky-top:#f3b6a6;--sky-low:#ffe9c6;--hill-far:#c9c98e;--hill:#9fbf6a;--tile:#fff3e4;--tile-edge:#d6a888;--ink:#3a2618;--ink-soft:#6f5643;--drop:rgba(90,45,30,.25);--glass-a:rgba(255,255,255,.6);--glass-b:rgba(255,255,255,.15);--glass-rim:rgba(255,255,255,.9);color-scheme:light}
+:root.sky-day{--sky-top:#8cc8dc;--sky-low:#fde4b8;--hill-far:#b6d488;--hill:#93c062;--tile:#fdf6e6;--tile-edge:#d2b083;--ink:#3a2618;--ink-soft:#6f5643;--drop:rgba(70,45,20,.28);--glass-a:rgba(255,255,255,.62);--glass-b:rgba(255,255,255,.16);--glass-rim:rgba(255,255,255,.9);--glass-shade:rgba(40,60,90,.2);color-scheme:light}
+:root.sky-dusk{--sky-top:#46558c;--sky-low:#f4a06e;--hill-far:#7b7c78;--hill:#4f6b45;--tile:#fbecd8;--tile-edge:#b98466;--ink:#3a2618;--ink-soft:#6f5643;--drop:rgba(40,20,40,.35);--glass-a:rgba(255,230,200,.45);--glass-b:rgba(255,255,255,.1);--glass-rim:rgba(255,220,170,.8);color-scheme:light}
+:root.sky-night{--sky-top:#0f1631;--sky-low:#3b3f66;--hill-far:#2c3d55;--hill:#22343a;--tile:#2a2e46;--tile-edge:#14172a;--drop:rgba(0,0,0,.5);--ink:#f8ecd4;--ink-soft:#bdb3cc;--glass-a:rgba(255,236,200,.16);--glass-b:rgba(255,255,255,.04);--glass-rim:rgba(255,214,150,.5);--glass-shade:rgba(0,0,0,.4);color-scheme:dark}
+
+*{box-sizing:border-box}
+html{background:var(--sky-low)}
+body{margin:0;background:var(--sky-low);color:var(--ink);font:500 16px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-low) 70%);transition:background .8s}
+.sky svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:32vh}
+.sky .far{fill:var(--hill-far);transition:fill .8s}.sky .near{fill:var(--hill);transition:fill .8s}
+.stars{opacity:0;transition:opacity .8s}
+:root.sky-night .stars{opacity:1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not(.sky-dawn):not(.sky-day):not(.sky-dusk) .stars{opacity:1}}
+:root[data-theme="dark"]:not(.sky-dawn):not(.sky-day):not(.sky-dusk) .stars{opacity:1}
+main{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:56px}
+
+h1,h2,h3,.wm{font-family:var(--display);font-weight:700;letter-spacing:-.01em;line-height:1.08;text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,4vw,40px)}
+h3{font-size:22px;font-weight:600}
+p{margin:0;max-width:62ch}
+.lede{font-size:18px;color:var(--ink-soft)}
+.label{font:800 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+section{display:flex;flex-direction:column;gap:22px}
+.head{display:flex;flex-direction:column;gap:10px}
+
+/* Things on the table */
+.tile{background:var(--tile);border-radius:24px;box-shadow:0 7px 0 var(--tile-edge),0 26px 34px -14px var(--drop);padding:22px;transition:background .8s,box-shadow .8s}
+.glass{background:linear-gradient(160deg,var(--glass-a),var(--glass-b));border:1px solid var(--glass-rim);box-shadow:inset 0 1.5px 0 var(--glass-rim),inset 0 -10px 18px rgba(255,255,255,.08),0 12px 26px -8px var(--glass-shade);-webkit-backdrop-filter:saturate(1.7) blur(3px);backdrop-filter:saturate(1.7) blur(3px)}
+.toy{--c:var(--meadow);--e:var(--meadow-edge);appearance:none;border:0;cursor:pointer;font:700 18px/1 var(--display);color:var(--on-paint);background:linear-gradient(180deg,color-mix(in srgb,var(--c) 82%,white),var(--c) 55%);border-radius:18px;min-height:58px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 0 var(--e),0 14px 20px -8px var(--drop),inset 0 2px 0 rgba(255,255,255,.35);transition:transform .08s,box-shadow .08s;text-shadow:0 1px 0 rgba(0,0,0,.18)}
+.toy:active,.toy.pressed{transform:translateY(5px);box-shadow:0 1px 0 var(--e),0 6px 10px -6px var(--drop),inset 0 2px 0 rgba(255,255,255,.35)}
+.toy svg{width:24px;height:24px}
+.toy.terra{--c:var(--terra);--e:var(--terra-edge)}.toy.brass{--c:var(--brass);--e:var(--brass-edge);color:#3a2618;text-shadow:0 1px 0 rgba(255,255,255,.35)}.toy.teal{--c:var(--teal);--e:var(--teal-edge)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:center;padding-top:12px}
+.hero .island{width:min(420px,100%);justify-self:center;filter:drop-shadow(0 30px 24px var(--drop));animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.wm{font-size:clamp(46px,8vw,88px);color:var(--ink);text-shadow:0 4px 0 color-mix(in srgb,var(--tile-edge) 70%,transparent)}
+.wm .ap{color:var(--terra)}
+.hero .copy{display:flex;flex-direction:column;gap:18px}
+.dial{display:inline-flex;gap:6px;padding:6px;border-radius:999px;align-self:flex-start;flex-wrap:wrap}
+.dial button{appearance:none;border:0;background:transparent;color:var(--ink);font:700 14px/1 var(--display);padding:10px 14px;border-radius:999px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;min-height:40px}
+.dial button svg{width:18px;height:18px}
+.dial button[aria-pressed="true"]{background:var(--tile);box-shadow:0 3px 0 var(--tile-edge)}
+
+/* Logos */
+.logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+.logo{display:flex;flex-direction:column;gap:16px;cursor:pointer;position:relative;border:0;text-align:left;color:inherit;font:inherit}
+.logo .stage{border-radius:18px;background:linear-gradient(180deg,var(--sky-top),var(--sky-low));min-height:200px;display:flex;align-items:center;justify-content:center;gap:16px;padding:18px;flex-wrap:wrap;transition:background .8s}
+.logo .lock{display:flex;align-items:center;gap:12px}
+.logo .lock svg{width:92px;height:92px;flex:none;filter:drop-shadow(0 8px 8px var(--drop))}
+.logo .lock .wm{font-size:clamp(30px,4vw,40px)}
+.icons{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.appicon{border-radius:23%;overflow:hidden;box-shadow:0 6px 14px -4px var(--drop);flex:none}
+.appicon svg{display:block;width:100%;height:100%}
+.i60{width:60px;height:60px}.i40{width:40px;height:40px}.i29{width:29px;height:29px}
+.logo .why{color:var(--ink-soft)}
+.logo .pick{position:absolute;top:14px;right:14px;font:700 13px/1 var(--display);padding:8px 12px;border-radius:999px;background:var(--brass);color:#3a2618;box-shadow:0 3px 0 var(--brass-edge)}
+.logo[aria-pressed="true"]{box-shadow:0 7px 0 var(--teal-edge),0 0 0 4px var(--teal),0 26px 34px -14px var(--drop)}
+.namerow{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.globe-o{display:inline-block;width:.64em;height:.64em;vertical-align:-.02em;margin:0 .02em}
+
+/* Review desk */
+.desk{display:flex;flex-direction:column;gap:18px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;padding:8px;border-radius:22px;align-self:flex-start}
+.chip{appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:16px;background:transparent;color:var(--ink);font:600 15px/1 var(--display);min-height:44px}
+.plain{font:700 13px/26px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.frame,.tag,.blocks,.turntable .blocks{transform:none!important}.tag{align-self:stretch;max-width:none}.pair{align-items:start}.turntable .blocks{font-size:26px;line-height:1;align-self:flex-start!important}
+@media (max-width:560px){.navc{width:100%;justify-content:space-between}.nav .chips{margin:0 auto}.sign .board{font-size:24px;white-space:nowrap;padding:12px 18px 14px}}.turntable{align-items:stretch}
+.chip{padding:6px}
+.chip .tok{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:var(--on-paint);font:700 13px/1 var(--body);box-shadow:0 3px 0 var(--e,rgba(0,0,0,.2)),inset 0 2px 0 rgba(255,255,255,.35)}
+.chip[aria-pressed="true"]{background:var(--tile);box-shadow:0 4px 0 var(--tile-edge)}
+.pair{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:30px;align-items:end}
+.sign{justify-self:center;display:flex;flex-direction:column;align-items:center;gap:0}
+.sign .board{background:linear-gradient(180deg,#9a6a45,#7a5236);color:#fff4dc;font:700 30px/1 var(--display);padding:14px 26px 16px;border-radius:14px;box-shadow:0 5px 0 #4f331f,0 16px 20px -10px var(--drop),inset 0 2px 0 rgba(255,255,255,.2);text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.sign .sub{margin-top:12px;font:700 14px/1 var(--body);color:var(--ink-soft)}
+.painting{display:flex;flex-direction:column;gap:16px}
+.frame{padding:12px;border-radius:10px;background:linear-gradient(145deg,#a7774f,#6f4a30);box-shadow:0 6px 0 #4f331f,0 26px 30px -14px var(--drop);transform:rotate(-1.2deg)}
+.frame img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;max-width:100%}
+.tag{align-self:flex-start;max-width:340px;background:var(--plaster);color:#4a3322;padding:14px 16px 14px 34px;border-radius:6px 14px 14px 6px;font:600 16px/1.4 var(--body);position:relative;box-shadow:0 4px 0 #cdb58e,0 12px 16px -10px var(--drop);transform:rotate(.8deg)}
+.tag::before{content:"";position:absolute;left:12px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--tile-edge);box-shadow:inset 0 1px 2px rgba(0,0,0,.3)}
+.turntable{position:relative;display:flex;flex-direction:column;align-items:center}
+model-viewer{width:100%;height:min(460px,70vw);--poster-color:transparent;background:transparent;position:relative;z-index:1}
+.plinth{width:72%;height:44px;margin-top:-58px;border-radius:50%;background:radial-gradient(ellipse at 50% 30%,#a7774f,#6f4a30 70%);box-shadow:0 10px 0 #4f331f,0 28px 30px -10px var(--drop)}
+.chalk{position:absolute;z-index:2;left:50%;bottom:70px;width:150px;height:110px;margin-left:-75px;pointer-events:none;transition:opacity .5s}
+.chalk.gone{opacity:0}
+.chalk svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.chalk .trail{stroke-dasharray:150;stroke-dashoffset:150;animation:trail 2.6s ease-in-out infinite}
+.chalk .hand{animation:swipe 2.6s ease-in-out infinite;transform-origin:75px 80px}
+@keyframes swipe{0%,8%{transform:translate(-38px,0) rotate(-8deg);opacity:0}16%{opacity:1}60%{transform:translate(38px,-4px) rotate(8deg);opacity:1}78%,100%{transform:translate(38px,-4px) rotate(8deg);opacity:0}}
+@keyframes trail{0%,10%{stroke-dashoffset:150;opacity:.9}60%{stroke-dashoffset:0;opacity:.9}85%,100%{stroke-dashoffset:0;opacity:0}}
+/* Voice: a little sky in a glass bubble, centred, like ChatGPT's voice mode. It covers nothing else. */
+.voice{position:fixed;left:50%;top:50%;z-index:20;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:22px}
+.orb{width:min(240px,56vw);aspect-ratio:1;border-radius:50%;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 120%,#a6d26a 0 22%,transparent 23%),linear-gradient(180deg,#7fc2dc,#fde4b8 78%);box-shadow:inset 0 -18px 36px rgba(255,255,255,.35),inset 0 10px 24px rgba(255,255,255,.6),0 0 0 2px rgba(255,255,255,.85),0 30px 50px -14px var(--drop),0 0 60px 6px color-mix(in srgb,var(--lamp) 45%,transparent);transform:scale(var(--amp,1));transition:transform .09s linear}
+.orb::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.9) 0 7%,rgba(255,255,255,0) 22%)}
+.orb .cloud{position:absolute;height:16%;border-radius:999px;background:#fff;opacity:.9;box-shadow:16px -8px 0 2px #fff,34px 0 0 0 #fff;animation:drift 9s linear infinite}
+.orb .c1{width:26%;top:24%;left:-30%}.orb .c2{width:18%;top:44%;left:-50%;animation-duration:13s;animation-delay:-5s;opacity:.75}
+@keyframes drift{to{transform:translateX(420%)}}
+.orb .sun{position:absolute;width:16%;aspect-ratio:1;border-radius:50%;right:18%;top:14%;background:radial-gradient(circle at 40% 35%,#fff1c2,#e7ad35 60%)}
+.voice[hidden]{display:none}
+.motifs{display:flex;gap:10px;flex-wrap:wrap;padding:8px;border-radius:24px;align-self:flex-start}
+.motifs button{appearance:none;border:0;background:transparent;color:var(--ink);font:600 15px/1 var(--display);padding:8px 14px 8px 8px;border-radius:16px;cursor:pointer;min-height:46px;display:inline-flex;gap:10px;align-items:center}
+.motifs button[aria-pressed="true"]{background:var(--tile);box-shadow:0 4px 0 var(--tile-edge)}
+.motifs .dots{display:inline-flex;padding-left:3px}.motifs .dots i{width:16px;height:16px;border-radius:50%;margin-left:-4px;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.motifs small{font:700 11px/1 var(--body);color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase}
+.maker{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.field{flex:1 1 240px;min-width:0;display:flex;align-items:center;gap:8px;padding:6px 6px 6px 16px;border-radius:18px}
+.field input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:600 16px/1.2 var(--display);padding:10px 0;outline:none}
+.field input::placeholder{color:var(--ink-soft)}
+.field .toy{min-height:46px;height:46px;padding:0 16px;font-size:16px;border-radius:14px}
+.motif-silly .tile{animation:wob 3.2s ease-in-out infinite}.motif-silly .tile:nth-child(2n){animation-delay:-1.6s}
+.motif-silly .island{animation:spinbob 5s ease-in-out infinite}
+@keyframes wob{25%{transform:rotate(.5deg)}75%{transform:rotate(-.5deg)}}
+@keyframes spinbob{50%{transform:translateY(-14px) rotate(4deg)}}
+.sign .board{background:linear-gradient(180deg,color-mix(in srgb,var(--signc,#7a5236) 80%,white),var(--signc,#7a5236))}
+.voice .row{display:flex;gap:18px}
+.voice .pebble{width:58px;height:58px}
+/* Right-thumb cluster: face buttons around the mic, pinned to the bottom right while you review. */
+.actions{position:sticky;bottom:max(14px,env(safe-area-inset-bottom,0px));align-self:flex-end;z-index:5;display:flex;gap:12px;align-items:center;padding:9px;border-radius:999px;margin-right:-6px}
+.actions .toy{width:64px;min-height:64px;height:64px;padding:0;border-radius:50%}
+.actions .toy svg{width:28px;height:28px}
+.mic .kb{position:absolute;right:-2px;bottom:-2px;width:24px;height:24px;border-radius:50%;background:var(--tile);box-shadow:0 2px 0 var(--tile-edge);display:grid;place-items:center}
+.mic{position:relative}.mic .kb svg{width:14px;height:14px}
+.say{display:flex;gap:8px;align-items:center;width:min(440px,calc(100vw - 32px));padding:6px 6px 6px 18px;border-radius:22px}
+.say input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:600 17px/1.2 var(--display);padding:12px 0;outline:none}
+.say input::placeholder{color:var(--ink-soft)}
+.say .toy{min-height:48px;height:48px;width:48px;padding:0;border-radius:50%}
+.say .toy svg{width:22px;height:22px}
+.mic{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink);border:1px solid var(--glass-rim)}
+.mic svg{width:28px;height:28px}
+.blocks{font:700 clamp(26px,3.4vw,38px)/1 var(--display);letter-spacing:.08em;color:var(--plaster);text-shadow:0 1px 0 #b98a5c,0 2px 0 #a7774f,0 3px 0 #94683f,0 4px 0 #7a5236,0 5px 0 #6f4a30,0 12px 14px var(--drop);transform:rotate(-1.5deg);align-self:flex-start}
+.turntable .blocks{align-self:center;transform:rotate(1.5deg)}
+.nav{display:flex;justify-content:flex-start;align-items:center;gap:12px;flex-wrap:wrap}.navc{display:flex;align-items:center;gap:12px}.nav .chips{margin-left:auto}
+.pebble{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.pebble svg{width:22px;height:22px}
+.toast{min-height:24px;font:600 15px/1.3 var(--display);color:var(--ink-soft);text-align:center}
+.compare{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:20px;align-items:center}
+.compare img{border-radius:14px;max-width:100%;display:block;opacity:.92;box-shadow:0 10px 20px -10px var(--drop)}
+
+/* Kit */
+.kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.kit .tile{display:flex;flex-direction:column;gap:14px;min-width:0}
+.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.sw{display:flex;flex-direction:column;gap:6px;font:700 12px/1.2 var(--body);color:var(--ink-soft)}
+.sw i{display:block;aspect-ratio:1;border-radius:14px;box-shadow:0 4px 0 rgba(0,0,0,.18),inset 0 2px 0 rgba(255,255,255,.3)}
+.spec .big{font:700 46px/1 var(--display)}
+.spec .mid{font:600 22px/1.2 var(--display)}
+.parts{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.lens{padding:12px 16px;border-radius:18px;font:600 15px/1.2 var(--display);display:flex;gap:10px;align-items:center}
+.rules{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;list-style:none;margin:0;padding:0}
+.rules li{display:flex;flex-direction:column;gap:8px}
+.rules strong{font:600 19px/1.15 var(--display)}
+.rules span{color:var(--ink-soft);font-size:15px}
+.roll{display:flex;flex-wrap:wrap;gap:10px}
+.roll span{padding:9px 14px;border-radius:14px;font:600 15px/1 var(--display)}
+.foot{color:var(--ink-soft);font-size:14px}
+
+@media (max-width:860px){
+  .hero,.pair,.compare{grid-template-columns:minmax(0,1fr)}
+  .logos,.kit{grid-template-columns:minmax(0,1fr)}
+  .rules{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .toy{padding:0 10px;font-size:16px}
+  .toy .w{display:none}
+}
+@media (max-width:480px){.toy .w{display:none}.rules{grid-template-columns:minmax(0,1fr)}.swatches{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a6644"/><stop offset="1" stop-color="#5e3b26"/></linearGradient>
+    <linearGradient id="g-grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a6d26a"/><stop offset="1" stop-color="#6fa443"/></linearGradient>
+    <linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8cc8dc"/><stop offset="1" stop-color="#fde4b8"/></linearGradient>
+    <linearGradient id="g-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2448"/><stop offset="1" stop-color="#4a4a78"/></linearGradient>
+    <radialGradient id="g-glass" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset=".6" stop-color="#cfeaf2" stop-opacity=".18"/><stop offset="1" stop-color="#8cc8dc" stop-opacity=".35"/></radialGradient>
+    <linearGradient id="g-wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a7774f"/><stop offset="1" stop-color="#6f4a30"/></linearGradient>
+    <linearGradient id="g-brass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd36a"/><stop offset="1" stop-color="#d8962a"/></linearGradient>
+
+    <!-- The island: a little floating world you could hold in your hand -->
+    <symbol id="island" viewBox="0 0 120 120">
+      <path d="M14 60 C18 78 38 90 50 103 C55 109 65 109 70 103 C82 90 102 78 106 60 Z" fill="url(#g-soil)"/>
+      <path d="M26 74 C40 80 80 80 94 74 C88 82 76 90 70 96 C64 100 56 100 50 96 C44 90 32 82 26 74 Z" fill="#4e311f" opacity=".45"/>
+      <path d="M44 92 l6 3 M68 90 l-5 4 M36 78 l5 1" stroke="#c99a6c" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+      <ellipse cx="60" cy="60" rx="46" ry="14" fill="#5d8f37"/>
+      <ellipse cx="60" cy="58" rx="46" ry="13" fill="url(#g-grass)"/>
+      <ellipse cx="50" cy="54" rx="22" ry="5" fill="#c4e48a" opacity=".55"/>
+      <path d="M86 61 q6 1 9-2" stroke="#e8c88f" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="39.5" y="44" width="5" height="16" rx="2" fill="#7a5236"/>
+      <circle cx="35.5" cy="42" r="7" fill="#4f8a30"/>
+      <circle cx="42" cy="36" r="10.5" fill="#5f9a3a"/>
+      <circle cx="49" cy="42" r="7.5" fill="#6fa443"/>
+      <circle cx="39" cy="32" r="4" fill="#86bd52" opacity=".8"/>
+      <circle cx="37" cy="40" r="1.9" fill="#e0503a"/><circle cx="46" cy="35" r="1.9" fill="#e0503a"/><circle cx="48" cy="44" r="1.9" fill="#e0503a"/><circle cx="41" cy="45" r="1.6" fill="#e0503a"/>
+      <path d="M60 60 V45 L72 35 L84 45 V60 Z" fill="#cf6a4d"/>
+      <path d="M72 35 L84 45 V60 H78 V47 Z" fill="#a9503a" opacity=".55"/>
+      <path d="M57 46.5 L72 33 L87 46.5 L84.5 48.5 L72 37.6 L59.5 48.5 Z" fill="#2f8b87"/>
+      <path d="M68 60 V53 a4 4 0 0 1 8 0 V60 Z" fill="#f6ead2"/>
+      <circle cx="72" cy="44" r="2.6" fill="#ffc56b"/>
+      <circle cx="96" cy="22" r="8" fill="url(#g-brass)"/>
+      <circle cx="93.5" cy="19.5" r="2.6" fill="#fff1c2" opacity=".8"/>
+    </symbol>
+
+    <!-- The snow globe: a world kept under glass -->
+    <symbol id="globe" viewBox="0 0 120 120">
+      <path d="M26 96 h68 l-6 16 H32 Z" fill="url(#g-wood)"/>
+      <rect x="24" y="92" width="72" height="8" rx="4" fill="#8a5c3c"/>
+      <circle cx="60" cy="52" r="44" fill="url(#g-sky)"/>
+      <g transform="translate(19 26) scale(.68)"><use href="#island"/></g>
+      <circle cx="60" cy="52" r="44" fill="url(#g-glass)"/>
+      <circle cx="60" cy="52" r="44" fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width="2.5"/>
+      <path d="M30 34 A36 36 0 0 1 52 16" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/>
+      <circle cx="28" cy="44" r="2.5" fill="#fff" opacity=".85"/>
+    </symbol>
+
+    <!-- The house-letter A -->
+    <symbol id="housea" viewBox="0 0 120 120">
+      <ellipse cx="60" cy="102" rx="50" ry="12" fill="url(#g-grass)"/>
+      <path d="M28 102 L60 20 L92 102 H74 L68 84 H52 L46 102 Z" fill="#f6ead2" stroke="#7a5236" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M22 50 L60 12 L98 50 L92 56 L60 24 L28 56 Z" fill="#2f8b87" stroke="#1c5e5b" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M54 102 V93 a6 6 0 0 1 12 0 V102 Z" fill="#cf6a4d"/>
+      <circle cx="60" cy="62" r="7" fill="#ffc56b" stroke="#7a5236" stroke-width="3"/>
+      <path d="M60 55 V69 M53 62 H67" stroke="#7a5236" stroke-width="2"/>
+      <circle cx="98" cy="96" r="4" fill="#e0503a"/><circle cx="20" cy="98" r="3" fill="#e7ad35"/>
+    </symbol>
+
+    <!-- The little planet that becomes the o in World -->
+    <symbol id="planet" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="52" fill="#4a92a6"/>
+      <path d="M8 66 C24 54 36 70 52 60 C68 50 84 66 112 56 A52 52 0 0 1 8 66 Z" fill="url(#g-grass)"/>
+      <path d="M14 82 C40 76 80 76 106 82 A52 52 0 0 1 14 82 Z" fill="#5d8f37"/>
+      <path d="M58 60 V48 L68 40 L78 48 V60 Z" fill="#cf6a4d"/>
+      <path d="M55.5 49.5 L68 38.4 L80.5 49.5 L78.5 51 L68 41.8 L57.5 51 Z" fill="#2f8b87"/>
+      <rect x="36" y="50" width="4" height="12" rx="2" fill="#7a5236"/>
+      <circle cx="38" cy="46" r="8" fill="#5f9a3a"/><circle cx="35" cy="45" r="1.6" fill="#e0503a"/><circle cx="41" cy="48" r="1.6" fill="#e0503a"/>
+      <circle cx="60" cy="60" r="52" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="3"/>
+      <path d="M26 30 A44 44 0 0 1 50 14" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".6"/>
+    </symbol>
+
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-dawn" viewBox="0 0 24 24"><path d="M4 18h16M7 18a5 5 0 0 1 10 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M12 4v4M5 9l2 2M19 9l-2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-dusk" viewBox="0 0 24 24"><path d="M4 18h16M7 18a5 5 0 0 1 10 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M12 9V5M9.5 7.5 12 10l2.5-2.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19 15.5A8 8 0 0 1 8.5 5a8 8 0 1 0 10.5 10.5Z" fill="currentColor"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5 10 18 19.5 6.5" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M13 7 4 16a2 2 0 0 0 3 3l9-9" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M11 5l3-3 7 7-3 3Z" fill="currentColor"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-turn" viewBox="0 0 24 24"><path d="M4 12a8 4 0 0 0 16 0M20 12a8 4 0 0 0-16 0" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="3 3"/><path d="m17 15 3-3 1 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="sky" aria-hidden="true">
+  <svg class="stars" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMin slice" style="top:0;height:60vh"><g fill="#fff6dc"><circle cx="80" cy="60" r="1.6"/><circle cx="220" cy="140" r="1.2"/><circle cx="340" cy="40" r="1.8"/><circle cx="520" cy="110" r="1.2"/><circle cx="660" cy="50" r="1.5"/><circle cx="800" cy="150" r="1.1"/><circle cx="930" cy="70" r="1.7"/><circle cx="1080" cy="120" r="1.3"/><circle cx="1150" cy="40" r="1.2"/><circle cx="440" cy="200" r="1"/><circle cx="1000" cy="220" r="1"/></g></svg>
+  <svg viewBox="0 0 1200 300" preserveAspectRatio="none"><path class="far" d="M0 150 C180 90 320 120 480 100 C640 80 760 140 920 110 C1040 90 1120 100 1200 90 V300 H0Z"/><path class="near" d="M0 220 C200 170 380 210 560 190 C760 168 900 220 1200 180 V300 H0Z"/></svg>
+</div>
+
+<main>
+  <header class="hero">
+    <svg class="island" viewBox="0 0 120 120" role="img" aria-label="A little floating world with a red barn, an apple tree and a brass sun"><use href="#island"/></svg>
+    <div class="copy">
+      <span class="label">Design direction · for Evan</span>
+      <h1 class="wm">Abbie<span class="ap">’</span>s World</h1>
+      <p class="lede">Every page is a table standing under the world’s own sky. Things sit on it as thick toy pieces you could pick up, buttons press down like painted wooden blocks, and glass is a small lens. When the world turns to night, so does every page.</p>
+      <div class="dial glass" role="group" aria-label="Time of day">
+        <button id="t-auto" data-sky="" aria-pressed="true">Now</button>
+        <button id="t-dawn" data-sky="dawn" aria-pressed="false"><svg><use href="#i-dawn"/></svg>Dawn</button>
+        <button id="t-day" data-sky="day" aria-pressed="false"><svg><use href="#i-sun"/></svg>Day</button>
+        <button id="t-dusk" data-sky="dusk" aria-pressed="false"><svg><use href="#i-dusk"/></svg>Dusk</button>
+        <button id="t-night" data-sky="night" aria-pressed="false"><svg><use href="#i-moon"/></svg>Night</button>
+      </div>
+    </div>
+  </header>
+
+  <section aria-labelledby="motif-h">
+    <div class="head">
+      <span class="label">Motifs · from serious to silly</span>
+      <h2 id="motif-h">Pick a motif</h2>
+      <p class="lede">The pieces stay the same; the paint and the sky change. “From the model” is the default wherever one model is the star. New ones are made on request: describe one and I’ll paint it.</p>
+    </div>
+    <div class="motifs glass" role="group" aria-label="Motif" id="motifs"></div>
+  </section>
+
+  <section aria-labelledby="logo-h">
+    <div class="head">
+      <span class="label">Logo do-over · pick one</span>
+      <h2 id="logo-h">Four new marks, from the world itself</h2>
+      <p class="lede">Each one is drawn from things already in the Ranch: the teal roof cap, the terracotta barn, the apple tree, the brass bell. The old badge stays as Abbie’s Ranch, the place; these are for Abbie’s World, the whole thing. Tap one to pick it.</p>
+    </div>
+    <div class="logos">
+      <button class="logo tile" id="logo-a" aria-pressed="true" data-name="The little world">
+        <span class="pick">My pick</span>
+        <div class="stage"><div class="lock"><svg><use href="#island"/></svg><span class="wm">Abbie<span class="ap">’</span>s World</span></div></div>
+        <div class="namerow"><h3>A · The little world</h3>
+          <div class="icons" aria-label="Home screen icons">
+            <span class="appicon i60"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="url(#g-sky)"/><use href="#island" x="4" y="6" width="112" height="112"/></svg></span>
+            <span class="appicon i40"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="url(#g-sky)"/><use href="#island" x="4" y="6" width="112" height="112"/></svg></span>
+            <span class="appicon i29"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="url(#g-night)"/><use href="#island" x="4" y="6" width="112" height="112"/></svg></span>
+          </div></div>
+        <p class="why">A whole world small enough to hold, floating like a toy. It says what the game is (you make worlds) and still reads at phone-icon size.</p>
+      </button>
+      <button class="logo tile" id="logo-b" aria-pressed="false" data-name="The snow globe">
+        <div class="stage"><div class="lock"><svg><use href="#globe"/></svg><span class="wm">Abbie<span class="ap">’</span>s World</span></div></div>
+        <div class="namerow"><h3>B · The snow globe</h3>
+          <div class="icons">
+            <span class="appicon i60"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#fdf6e6"/><use href="#globe" x="6" y="4" width="108" height="108"/></svg></span>
+            <span class="appicon i40"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#fdf6e6"/><use href="#globe" x="6" y="4" width="108" height="108"/></svg></span>
+            <span class="appicon i29"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="url(#g-night)"/><use href="#globe" x="6" y="4" width="108" height="108"/></svg></span>
+          </div></div>
+        <p class="why">The holodeck as a keepsake: a world kept under liquid glass on a wooden base. The most magical, a little busier when small.</p>
+      </button>
+      <button class="logo tile" id="logo-c" aria-pressed="false" data-name="The house A">
+        <div class="stage"><div class="lock"><svg><use href="#housea"/></svg><span class="wm">Abbie<span class="ap">’</span>s World</span></div></div>
+        <div class="namerow"><h3>C · The house A</h3>
+          <div class="icons">
+            <span class="appicon i60"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="url(#g-sky)"/><use href="#housea" x="8" y="6" width="104" height="104"/></svg></span>
+            <span class="appicon i40"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="url(#g-sky)"/><use href="#housea" x="8" y="6" width="104" height="104"/></svg></span>
+            <span class="appicon i29"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="url(#g-night)"/><use href="#housea" x="8" y="6" width="104" height="104"/></svg></span>
+          </div></div>
+        <p class="why">Abbie’s A is a little house with a teal roof, a lit window and a red door. Bold and simple, like a wooden toy block.</p>
+      </button>
+      <button class="logo tile" id="logo-d" aria-pressed="false" data-name="The planet o">
+        <div class="stage"><div class="lock"><span class="wm" style="font-size:clamp(34px,5vw,48px)">Abbie<span class="ap">’</span>s W<svg class="globe-o" viewBox="0 0 120 120" role="img" aria-label="o"><use href="#planet"/></svg>rld</span></div></div>
+        <div class="namerow"><h3>D · The planet o</h3>
+          <div class="icons">
+            <span class="appicon i60"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#fdf6e6"/><use href="#planet" x="14" y="14" width="92" height="92"/></svg></span>
+            <span class="appicon i40"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="#fdf6e6"/><use href="#planet" x="14" y="14" width="92" height="92"/></svg></span>
+            <span class="appicon i29"><svg viewBox="0 0 120 120"><rect width="120" height="120" fill="url(#g-night)"/><use href="#planet" x="14" y="14" width="92" height="92"/></svg></span>
+          </div></div>
+        <p class="why">The name carries it: the o in World is a tiny planet with the barn and tree on top. Quietest on a page, the least toy-like.</p>
+      </button>
+    </div>
+  </section>
+
+  <section aria-labelledby="desk-h">
+    <div class="head">
+      <span class="label">The page you sent, redesigned</span>
+      <h2 id="desk-h">Model review, on the table</h2>
+      <p class="lede">The inspiration on the left, the model on its turntable on the right, and two choices under your right thumb: talk or type a note, or keep it.</p>
+    </div>
+    <div class="tile desk">
+      <div class="nav">
+        <div class="navc"><button class="pebble glass" id="prev" aria-label="Previous model"><svg><use href="#i-left"/></svg></button><div class="sign"><div class="board">Apple tree</div></div>
+        <button class="pebble glass" id="next" aria-label="Next model"><svg><use href="#i-right"/></svg></button></div>
+        <div class="chips glass" role="group" aria-label="Which models to show">
+        <button class="chip" id="f-review" aria-pressed="true"><span class="tok" style="background:var(--teal);--e:var(--teal-edge)" id="n-review">85</span></button>
+        <button class="chip" id="f-kept" aria-pressed="false"><span class="tok" style="background:var(--meadow);--e:var(--meadow-edge)" id="n-kept">0</span></button>
+        <button class="chip" id="f-fix" aria-pressed="false"><span class="tok" style="background:var(--brass);--e:var(--brass-edge);color:#3a2618" id="n-fix">0</span></button>
+      </div>
+
+      </div>
+      <div class="pair">
+        <div class="painting">
+          <div class="plain">Inspiration</div>
+          <div class="frame"><img src="apple-tree.jpg" alt="Concept painting of a small orchard apple tree with red apples"></div>
+          <div class="tag">“a small orchard apple tree, a short twisty trunk, a spreading rounded crown with clusters of red apples”</div>
+        </div>
+        <div class="turntable">
+          <div class="blocks" aria-hidden="true">MODEL</div>
+          <model-viewer src="apple-tree.wasm" alt="The apple tree model" camera-controls auto-rotate rotation-per-second="18deg" touch-action="pan-y" shadow-intensity="0" exposure="1.05" camera-orbit="30deg 72deg auto" interaction-prompt="none"></model-viewer>
+          <div class="plinth" aria-hidden="true"></div>
+          <div class="chalk" id="chalk" aria-hidden="true"><svg viewBox="0 0 150 110">
+            <path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="150" opacity=".9"/>
+            <g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/>
+            </g></svg></div>
+        </div>
+      </div>
+      <div class="actions glass" role="group" aria-label="Decide">
+        <button class="mic glass" id="mic" aria-label="Talk or type what to change" title="Talk or type"><svg><use href="#i-mic"/></svg><span class="kb"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M6 10h1M10 10h1M14 10h1M18 10h0M7 14h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>
+        <button class="toy" id="a-keep" aria-label="Keep it" title="Keep it"><svg><use href="#i-check"/></svg></button>
+      </div>
+    </div>
+    <div class="compare">
+      <img src="before.png" alt="Today’s model review page: flat beige panels and pill buttons">
+      <p class="foot">Today’s version, for comparison: flat beige panels, pill tabs and outlined boxes, the look of a web app. The new one keeps everything it does and changes how it feels.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="kit-h">
+    <div class="head">
+      <span class="label">The kit</span>
+      <h2 id="kit-h">What every page and study will be built from</h2>
+    </div>
+    <div class="kit">
+      <div class="tile">
+        <h3>Paint from the Ranch</h3>
+        <div class="swatches">
+          <div class="sw"><i style="background:#5f9a3a"></i>Meadow</div>
+          <div class="sw"><i style="background:#2f8b87"></i>Roof cap</div>
+          <div class="sw"><i style="background:#cf6a4d"></i>Barn paint</div>
+          <div class="sw"><i style="background:#e7ad35"></i>Brass bell</div>
+          <div class="sw"><i style="background:#7a5236"></i>Timber</div>
+          <div class="sw"><i style="background:#f6ead2"></i>Plaster</div>
+          <div class="sw"><i style="background:#ffc56b"></i>Lamp light</div>
+          <div class="sw"><i style="background:#1b2448"></i>Night sky</div>
+        </div>
+        <p class="foot">Measured from the concept paintings you picked for the Ranch rebuild. Other places bring their own paint (the Moonbase gets radio blue and hologram cyan) on the same pieces.</p>
+      </div>
+      <div class="tile spec">
+        <h3>One voice</h3>
+        <div class="big">Fredoka</div>
+        <div class="mid">Names, signs and buttons: round and solid, like a toy.</div>
+        <p>Nunito for reading: long notes, study pages and the grown-up workbench. Two faces, nothing else, no thin weights.</p>
+      </div>
+      <div class="tile parts">
+        <h3>Pieces</h3>
+        <button class="toy teal" id="k-toy"><svg><use href="#i-check"/></svg>A toy block</button>
+        <div class="lens glass"><svg width="20" height="20"><use href="#i-sun"/></svg>A glass lens</div>
+        <div class="sign"><div class="board" style="font-size:20px;padding:10px 18px 12px">A painted sign</div></div>
+        <p class="foot">Tiles have a wooden edge and cast a shadow on the table. Blocks press down 5 px. Glass stays small and shows the sky through it.</p>
+      </div>
+    </div>
+    <ul class="rules">
+      <li><strong>The world is the backdrop</strong><span>Every page sits under the world’s sky, at the world’s time of day.</span></li>
+      <li><strong>Things, not panels</strong><span>Anything you touch is a thick tile with a shadow, never a flat box with an outline.</span></li>
+      <li><strong>Blocks, not links</strong><span>Buttons are painted toy blocks with an icon, and they press down.</span></li>
+      <li><strong>Glass is a lens</strong><span>Small and floating. Never a frosted sheet over the world.</span></li>
+      <li><strong>Show the thing</strong><span>Real art and live 3D on every page, with words kept short.</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="roll-h">
+    <div class="head">
+      <span class="label">After you pick</span>
+      <h2 id="roll-h">Where it goes</h2>
+      <p class="lede">One shared kit file on the site, so every page changes at once, plus the same kit in every study page.</p>
+    </div>
+    <div class="roll">
+      <span class="glass">Home and the site frame</span><span class="glass">Models and model review</span><span class="glass">Card Forge</span><span class="glass">Explore</span><span class="glass">Sounds</span><span class="glass">Suzy</span><span class="glass">Sandbox frame</span><span class="glass">Review desk</span><span class="glass">Day Book</span><span class="glass">Project plan</span><span class="glass">HUD, card and look studies</span><span class="glass">Game Oracle</span><span class="glass">App icon and What’s new card</span>
+    </div>
+  </section>
+</main>
+<div class="voice" id="voice" hidden>
+  <div class="orb" id="orb" role="img" aria-label="Listening"><span class="cloud c1"></span><span class="cloud c2"></span><span class="sun"></span></div>
+  <form class="say glass" id="say"><input id="say-in" type="text" placeholder="Talk, or type it here" aria-label="What to change" autocomplete="off"><button class="toy teal" type="submit" aria-label="Send"><svg><use href="#i-right"/></svg></button></form>
+  <div class="row"><button class="pebble glass" id="v-close" aria-label="Close"><svg><use href="#i-x"/></svg></button></div>
+</div>
+
+<script>
+(function(){
+  const root=document.documentElement;
+  const dial=document.querySelectorAll('.dial button');
+  let derived=true,pal=null;const VARS=['--sky-top','--sky-low','--hill','--hill-far','--signc'];
+  function unDerive(){VARS.forEach(v=>root.style.removeProperty(v))}
+  function hex(c){return '#'+c.map(x=>Math.round(x).toString(16).padStart(2,'0')).join('')}
+  function parse(str){str=str.trim();if(str[0]==='#'){const h=str.slice(1);return [0,2,4].map(i=>parseInt(h.substr(i,2),16))}const m=str.match(/[\d.]+/g);return m?m.slice(0,3).map(Number):[200,200,200]}
+  function mix(a,b,t){return a.map((x,i)=>x*(1-t)+b[i]*t)}
+  function palette(img){const c=document.createElement('canvas');c.width=c.height=48;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0,48,48);const d=g.getImageData(0,0,48,48).data;const bins=Array.from({length:12},()=>({w:0,r:0,g:0,b:0}));let dark={w:0,r:0,g:0,b:0};
+    for(let i=0;i<d.length;i+=4){const r=d[i],gg=d[i+1],b=d[i+2],mx=Math.max(r,gg,b),mn=Math.min(r,gg,b),l=(mx+mn)/510,sat=mx?(mx-mn)/mx:0;if(sat<.28)continue;let h=0;if(mx===r)h=((gg-b)/(mx-mn))%6;else if(mx===gg)h=(b-r)/(mx-mn)+2;else h=(r-gg)/(mx-mn)+4;h=(h*60+360)%360;const w=sat*sat;const bin=bins[Math.floor(h/30)];bin.w+=w;bin.r+=r*w;bin.g+=gg*w;bin.b+=b*w;if(l<.38){dark.w+=w;dark.r+=r*w;dark.g+=gg*w;dark.b+=b*w}}
+    const avg=o=>[o.r/o.w,o.g/o.w,o.b/o.w];const top=bins.filter(b=>b.w>0).sort((a,b)=>b.w-a.w);return {a:avg(top[0]),b:avg(top[1]||top[0]),dark:dark.w?avg(dark):[122,82,54]}}
+  function derive(){if(!pal)return;unDerive();const cs=getComputedStyle(root),base=v=>parse(cs.getPropertyValue(v));
+    root.style.setProperty('--sky-top',hex(mix(base('--sky-top'),pal.b,.38)));root.style.setProperty('--sky-low',hex(mix(base('--sky-low'),pal.a,.22)));
+    root.style.setProperty('--hill-far',hex(mix(base('--hill-far'),pal.b,.45)));root.style.setProperty('--hill',hex(mix(base('--hill'),pal.b,.6)));root.style.setProperty('--signc',hex(pal.dark))}
+  const mimg=document.querySelector('.frame img');
+  function ready(){try{pal=palette(mimg);drawMotifs();if(derived)derive()}catch(e){}}
+  if(mimg.complete)ready();else mimg.addEventListener('load',ready);
+  const MVARS=['--tile','--tile-edge','--ink','--ink-soft','--drop'];
+  const MOTIFS=[
+    {id:'gallery',name:'Gallery',tone:'serious',c:{'--sky-top':'#2f3744','--sky-low':'#9aa0aa','--hill-far':'#5c6372','--hill':'#454c5a','--tile':'#f5f2ec','--tile-edge':'#8f897e','--signc':'#2f3744','--ink':'#22252b','--ink-soft':'#5b6069'}},
+    {id:'ranch',name:'Ranch',tone:'the place'},
+    {id:'model',name:'From the model',tone:'default'},
+    {id:'moon',name:'Moonbase',tone:'calm',c:{'--sky-top':'#0c1a3c','--sky-low':'#4a7fae','--hill-far':'#8a96a6','--hill':'#b4bcc8','--tile':'#eef4fb','--tile-edge':'#8aa0b8','--signc':'#2b5d8a','--ink':'#14243a','--ink-soft':'#4c5f78'}},
+    {id:'sea',name:'Under the sea',tone:'dreamy',c:{'--sky-top':'#0d6585','--sky-low':'#86e3d8','--hill-far':'#f2d9a6','--hill':'#e6c483','--tile':'#f0fbfa','--tile-edge':'#5fb0b0','--signc':'#127a8a','--ink':'#0f3a40','--ink-soft':'#3f6d72'}},
+    {id:'spooky',name:'Spooky',tone:'playful',c:{'--sky-top':'#2a1842','--sky-low':'#e88442','--hill-far':'#4a3048','--hill':'#24182c','--tile':'#fff1dc','--tile-edge':'#8a5a2a','--signc':'#4a2a5a','--ink':'#2a1830','--ink-soft':'#6a4a5a'}},
+    {id:'candy',name:'Candy party',tone:'silly',silly:true,c:{'--sky-top':'#ff9fd0','--sky-low':'#fff2a6','--hill-far':'#a6ecd0','--hill':'#5ed0a2','--tile':'#fff7fb','--tile-edge':'#ff8cc0','--signc':'#ff5fa2','--ink':'#4a1a3a','--ink-soft':'#8a4a6e'}}
+  ];
+  let custom=[];try{custom=JSON.parse(localStorage.getItem('aw-motifs')||'[]')}catch(e){}
+  let current='model';
+  const box=document.getElementById('motifs');
+  function swatch(m){if(m.id==='model')return pal?[pal.a,pal.b,pal.dark].map(hex):['#e0503a','#6fa443','#7a5236'];if(!m.c)return['#5f9a3a','#2f8b87','#cf6a4d'];return[m.c['--sky-top'],m.c['--sky-low'],m.c['--hill']]}
+  function drawMotifs(){box.innerHTML='';MOTIFS.concat(custom).forEach(m=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',String(m.id===current));b.innerHTML='<span class="dots">'+swatch(m).map(c=>'<i style="background:'+c+'"></i>').join('')+'</span><span>'+m.name.replace(/[<>&]/g,'')+'</span><small>'+(m.tone||'yours')+'</small>';b.addEventListener('click',()=>applyMotif(m.id));box.appendChild(b)})}
+  function clearMotif(){VARS.concat(MVARS).forEach(v=>root.style.removeProperty(v));root.classList.remove('motif-silly')}
+  function applyMotif(id){current=id;clearMotif();derived=id==='model';const m=MOTIFS.concat(custom).find(x=>x.id===id);
+    if(derived)derive();else if(m&&m.c){Object.entries(m.c).forEach(([k,v])=>root.style.setProperty(k,v));if(m.silly)root.classList.add('motif-silly')}
+    drawMotifs()}
+  const WORDS={lava:'#e2401c',volcano:'#5a2a1e',fire:'#f2662a',sun:'#ffc23a',sunset:'#f28a5a',autumn:'#c8642a',fall:'#c8642a',forest:'#2f6a3a',jungle:'#1f7a40',leaf:'#5f9a3a',grass:'#7fb24a',ocean:'#1a6a9a',sea:'#1f86a0',water:'#3a9ad0',ice:'#bfe6f2',snow:'#eef6fb',winter:'#9cc4dc',frost:'#cfe6f0',night:'#1b2448',space:'#120f30',star:'#f6e7a0',moon:'#c8ccd8',desert:'#e2b874',sand:'#ecd29a',candy:'#ff8ccf',bubblegum:'#ff9ed2',pink:'#ff8cb8',rainbow:'#ff6a6a',unicorn:'#c9a0ff',purple:'#8a5ad0',blue:'#3a7ad0',red:'#d0402e',green:'#4aa04a',yellow:'#ffd23a',orange:'#f28a2a',gold:'#e3ab35',chocolate:'#6a3a22',cookie:'#c8904a',pumpkin:'#ef7a26',ghost:'#e8ecf2',spooky:'#3a1f4a',dinosaur:'#5a8a3a',dino:'#5a8a3a',pirate:'#2a3a4a',castle:'#8a8f9a',knight:'#6a7a8a',roman:'#a8402e',egypt:'#d8b064',robot:'#7a8a9a',cherry:'#d02a4a',mint:'#9ee6c4',lemon:'#f6e05a',coffee:'#6a4a32',cozy:'#d8925a',farm:'#c9694f',barn:'#b84a32',storm:'#4a5a70',rain:'#6a8aa0',spring:'#a6dc7a',flower:'#ff8ab0',garden:'#6aa84a',mars:'#c2552e',beach:'#f4dca0'};
+  function hexToRgb(h){h=h.replace('#','');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))}
+  function makeMotif(text){const t=text.toLowerCase();let cols=Object.keys(WORDS).filter(w=>t.includes(w)).map(w=>hexToRgb(WORDS[w]));
+    if(!cols.length){let h=0;for(const ch of t)h=(h*31+ch.charCodeAt(0))>>>0;const hue=h%360;const f=(l,sa)=>{const a=sa*Math.min(l,1-l),k=n=>(n+hue/30)%12;return[0,8,4].map(n=>255*(l-a*Math.max(-1,Math.min(k(n)-3,9-k(n),1))))};cols=[f(.35,.55),f(.72,.7),f(.5,.5)]}
+    while(cols.length<3)cols.push(mix(cols[0],[255,255,255],.45*cols.length));
+    const W=[255,255,255],K=[30,20,15];const lum=c=>.3*c[0]+.59*c[1]+.11*c[2];const byL=cols.slice().sort((a,b)=>lum(a)-lum(b));
+    const top=mix(byL[0],K,.15),low=mix(byL[byL.length-1],W,.45),hill=mix(cols[1],K,.1),far=mix(cols[1],W,.3);
+    return{id:'c'+Date.now(),name:text.slice(0,28),tone:'yours',c:{'--sky-top':hex(top),'--sky-low':hex(low),'--hill-far':hex(far),'--hill':hex(hill),'--tile':hex(mix(low,W,.75)),'--tile-edge':hex(mix(byL[0],W,.35)),'--signc':hex(mix(byL[0],K,.2)),'--ink':hex(mix(byL[0],K,.75)),'--ink-soft':hex(mix(byL[0],K,.45))}}}
+  drawMotifs();
+  function setSky(s){root.classList.remove('sky-dawn','sky-day','sky-dusk','sky-night');if(s)root.classList.add('sky-'+s);dial.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.sky===s)));if(derived)derive();else if(current==='ranch')clearMotif();try{localStorage.setItem('aw-sky',s)}catch(e){}}
+  dial.forEach(b=>b.addEventListener('click',()=>setSky(b.dataset.sky)));
+  try{const s=localStorage.getItem('aw-sky');if(s)setSky(s)}catch(e){}
+
+  const logos=document.querySelectorAll('.logo');
+  logos.forEach(l=>l.addEventListener('click',()=>{logos.forEach(o=>o.setAttribute('aria-pressed','false'));l.setAttribute('aria-pressed','true')}));
+
+  document.querySelectorAll('.chips .chip').forEach(c=>c.addEventListener('click',()=>{document.querySelectorAll('.chips .chip').forEach(o=>o.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true')}));
+  const n=id=>document.getElementById(id);
+  function act(target,msg){const r=+n('n-review').textContent;if(r>0){n('n-review').textContent=r-1;n(target).textContent=+n(target).textContent+1}}
+  n('a-keep').addEventListener('click',()=>act('n-kept','Kept. The apple tree goes into the Ranch.'));
+  const voice=n('voice'),orb=n('orb');let raf=0,t0=0;
+  function pulse(t){t0=t0||t;const k=(t-t0)/1000;const a=1+.05*Math.sin(k*2.2)+.06*Math.max(0,Math.sin(k*7.3)*Math.sin(k*1.7));orb.style.setProperty('--amp',a.toFixed(3));raf=requestAnimationFrame(pulse)}
+  n('mic').addEventListener('click',()=>{voice.hidden=false;t0=0;if(!matchMedia('(prefers-reduced-motion: reduce)').matches)raf=requestAnimationFrame(pulse)});
+  n('v-close').addEventListener('click',()=>{voice.hidden=true;cancelAnimationFrame(raf)});
+  n('say-in').addEventListener('input',()=>{cancelAnimationFrame(raf);orb.style.setProperty('--amp','1')});
+  n('say').addEventListener('submit',e=>{e.preventDefault();act('n-fix','');n('say-in').value='';n('v-close').click()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!voice.hidden)n('v-close').click()});
+  const chalk=n('chalk'),mv=document.querySelector('model-viewer');
+  mv.addEventListener('pointerdown',()=>chalk.classList.add('gone'),{once:true});
+})();
+</script>
