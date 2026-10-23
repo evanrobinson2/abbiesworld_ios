@@ -391,12 +391,17 @@
   "redirects": [
     {
       "source": "/review",
-      "destination": "/review/",
+      "destination": "/studies/",
+      "permanent": false
+    },
+    {
+      "source": "/review/",
+      "destination": "/studies/",
       "permanent": false
     },
     {
       "source": "/inbox",
-      "destination": "/review/",
+      "destination": "/studies/",
       "permanent": false
     },
     {
