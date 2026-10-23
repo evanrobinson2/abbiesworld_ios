@@ -1,17 +1,25 @@
 {
  "id": "MK-005",
  "name": "Comms dish on a turntable",
- "triangles": 1300,
- "parts": 16,
+ "triangles": 1936,
+ "parts": 24,
  "part_names": [
   "Plinth",
+  "Housing",
+  "HousingRim",
+  "HousingWindow0Frame",
+  "HousingWindow0Pane",
+  "HousingWindow1Frame",
+  "HousingWindow1Pane",
   "Turntable",
-  "YokeBase",
   "YokeArmL",
+  "YokeCapL",
   "YokeArmR",
+  "YokeCapR",
   "ElevationAxle",
   "DishHub",
   "Dish",
+  "DishRim",
   "FeedStrut0",
   "FeedStrut1",
   "FeedStrut2",
@@ -24,18 +32,17 @@
  "materials": [
   "HeadlightGlass",
   "Lamp_Red",
-  "Metal_Charcoal",
   "Metal_Gunmetal",
   "Metal_Hull",
-  "Metal_HullDark",
-  "Metal_Steel"
+  "Metal_Steel",
+  "Window_Warm"
  ],
- "mass_kg": 4883.3,
- "moon_weight_kg": 807.7,
+ "mass_kg": 6216.4,
+ "moon_weight_kg": 1028.2,
  "size_m": [
-  3.24,
-  2.37,
-  3.52
+  3.28,
+  2.67,
+  3.69
  ],
  "maps": "1024 px base, roughness, normal"
 }

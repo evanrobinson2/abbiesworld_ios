@@ -1,36 +1,32 @@
-"""MK-076 Hydroponics rack, three tiers: lettuce at the bottom (Abbie's height), herbs, then tomato vines on top, each
-under a pink grow lamp, with a water line along the back. Diegetic: plants droop and the lamps flicker when the water
-or power is low; ripe tomatoes mean it's harvest time."""
+"""MK-076 Hydroponics rack. Round 2, matched to the pick: a chunky framed grow cabinet with an open front, three
+tiers (lettuce at Abbie's height, herbs, then tomato vines spilling over), pink grow light strips above each tier, an
+orange status window on the side and a water line. Diegetic: plants droop and the pink light flickers when water or
+power is low; ripe tomatoes mean harvest time."""
 import math, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, "..", ".."))
 import bkit as k
 from bkit import TAU
 k.reset()
-for s in (-1, 1):
-    for f in (-1, 1):
-        k.box(f'Post{s}{f}', (0.05, 0.05, 2.1), (s * 0.95, f * 0.3, 1.05), 'Metal_Steel', bevel=0.005)
 import random
 random.seed(7)
-for t, z in enumerate((0.35, 1.0, 1.65)):
-    k.box(f'Trough{t}', (1.9, 0.55, 0.16), (0, 0, z), 'Plastic_White', bevel=0.02, fill=0.3)
-    k.box(f'Soil{t}', (1.84, 0.49, 0.03), (0, 0, z + 0.08), 'Soil_Grow', bevel=0.0)
-    k.box(f'GrowLamp{t}', (1.8, 0.12, 0.03), (0, 0, z + 0.55), 'Lamp_Grow', bevel=0.0)
-    k.box(f'LampHousing{t}', (1.86, 0.16, 0.05), (0, 0, z + 0.585), 'Metal_Gunmetal', bevel=0.01)
+body = k.module('Cabinet', (1.8, 0.8, 1.9), (0, 0, 1.0), bevel=0.06, t=0.14, fill=0.3)
+k.cut(body, k.cutter_box((1.45, 0.8, 1.55), (0.05, -0.3, 1.0)))
+k.box('BackGlow', (1.45, 0.03, 1.55), (0.05, 0.12, 1.0), 'Lamp_Grow', bevel=0)
+k.window('SideWindow', 0.16, 0.5, (-0.88, -0.38, 1.0), face='-Y', depth=0.05)
+for t, z in enumerate((0.38, 0.88, 1.38)):
+    k.box(f'Tray{t}', (1.42, 0.55, 0.1), (0.05, -0.08, z), 'Plastic_White', bevel=0.02)
+    k.box(f'Soil{t}', (1.36, 0.49, 0.02), (0.05, -0.08, z + 0.05), 'Soil_Grow', bevel=0)
+    k.box(f'GrowLamp{t}', (1.4, 0.06, 0.03), (0.05, -0.3, z + 0.43), 'Lamp_Grow', bevel=0)
     for i in range(6):
-        x = -0.78 + 0.31 * i
+        x = -0.55 + 0.22 * i
         if t == 0:
-            k.ico(f'Lettuce{i}', 0.13, (x, random.uniform(-0.08, 0.08), z + 0.17), 'Leaf_Lettuce', sub=1, scale=(1, 1, 0.65),
-                  rot=(0, 0, random.random()))
+            k.ico(f'Lettuce{i}', 0.12, (x, -0.1, z + 0.14), 'Leaf_Lettuce', sub=1, scale=(1, 1, 0.7), rot=(0, 0, random.random()))
         elif t == 1:
-            for j in range(3):
-                k.cyl(f'Herb{i}{j}', 0.03, 0.22, (x + 0.05 * (j - 1), 0.05 * (j - 1), z + 0.2), 'Leaf_Green', n=5, r2=0.06,
-                      rot=(0.15 * (j - 1), 0.1, 0))
+            k.ico(f'Herb{i}', 0.1, (x, -0.1, z + 0.15), 'Leaf_Green', sub=1, scale=(0.8, 0.8, 1.2), rot=(0, 0, random.random()))
         else:
-            k.cyl(f'Vine{i}', 0.015, 0.4, (x, 0, z + 0.28), 'Leaf_Green', n=5)
-            k.ico(f'VineLeaves{i}', 0.11, (x, 0.02, z + 0.36), 'Leaf_Green', sub=1, scale=(1, 0.8, 1.1))
+            k.ico(f'VineLeaves{i}', 0.12, (x, -0.1, z + 0.18), 'Leaf_Green', sub=1, scale=(1, 0.8, 1.1))
             for j in range(2):
-                k.sphere(f'Tomato{i}{j}', 0.04, (x + 0.06 * (j * 2 - 1), -0.08, z + 0.25 + 0.06 * j), 'Fruit_Red', seg=8, rings=5)
-k.tube('WaterLine', [(-0.95, 0.31, 0.2), (-0.95, 0.31, 1.8), (0.95, 0.31, 1.8)], 0.025, 'Metal_OxygenBlue', n=6)
-k.box('Reservoir', (0.5, 0.4, 0.3), (-0.6, 0.0, 0.08), 'Plastic_Dark', bevel=0.03, fill=0.2)
+                k.sphere(f'Tomato{i}{j}', 0.045, (x + 0.05 * (j * 2 - 1), -0.25, z + 0.05 - 0.12 * j), 'Fruit_Red', seg=8, rings=5)
+k.tube('WaterLine', [(0.9, 0.2, 0.15), (0.9, 0.2, 1.75)], 0.03, 'Metal_OxygenBlue', n=6)
 k.build(HERE, {'id': 'MK-076', 'name': 'Hydroponics rack, three tiers'}, bake_size=1024,
-        view=dict(yaw=24, pitch=10), fps_eye=((0.3, -1.6, 1.1), (0, 0, 0.9)))
+        view=dict(yaw=14, pitch=8), fps_eye=((0.2, -1.8, 1.1), (0, 0, 0.9)))

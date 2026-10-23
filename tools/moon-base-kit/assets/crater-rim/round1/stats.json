@@ -1,0 +1,30 @@
+{
+ "id": "MK-096",
+ "name": "Crater rim arc piece",
+ "triangles": 1096,
+ "parts": 10,
+ "part_names": [
+  "RimSurface",
+  "EjectaRock0",
+  "EjectaRock1",
+  "EjectaRock2",
+  "EjectaRock3",
+  "EjectaRock4",
+  "EjectaRock5",
+  "EjectaRock6",
+  "EjectaRock7",
+  "EjectaRock8"
+ ],
+ "materials": [
+  "Stone_Basalt",
+  "Stone_Regolith"
+ ],
+ "mass_kg": 111268.6,
+ "moon_weight_kg": 18403.8,
+ "size_m": [
+  13.19,
+  13.22,
+  2.99
+ ],
+ "maps": "1024 px base, roughness, normal"
+}

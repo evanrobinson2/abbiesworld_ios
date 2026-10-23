@@ -1,52 +1,54 @@
 {
  "asset": "bunk-pod",
  "name": "Bunk pod with privacy shutter",
- "brief": "MK-070 Bunk pod with privacy shutter: two stacked sleep capsules, Daddy's up top and Abbie's below with a ladder. Each has a mattress with a strap blanket (low-g: you sleep strapped in), a pillow, a reading lamp and a slatted shutter. Diegetic: a closed shutter with the lamp off means someone is asleep.",
+ "brief": "MK-070 Bunk pod: two stacked sleep capsules, Daddy's up top and Abbie's below. Round 2, matched to the pick: each capsule is a chunky framed module with an open side showing a blue mattress, pillow and warm reading lamp, a slatted shutter beside it, an orange window at the head end and an amber ladder. Diegetic: a closed shutter with the lamp off means someone is asleep.",
  "rounds": [
   {
    "n": 1,
    "date": "2026-10-23",
    "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  },
+  {
+   "n": 2,
+   "date": "2026-10-23",
+   "from": "concept.jpg (the Midjourney pick)",
+   "t": "Rebuilt against the Midjourney pick: chunky off-white modules held by dark bumper frames (bkit.module), warm orange windows (bkit.window), darker ground. Round 1 kept in round1/."
   }
  ],
  "stats": {
   "id": "MK-070",
   "name": "Bunk pod with privacy shutter",
-  "triangles": 1992,
-  "parts": 40,
+  "triangles": 2808,
+  "parts": 36,
   "part_names": [
-   "LowerShell",
-   "LowerBack",
-   "LowerRoof",
-   "LowerEndL",
-   "LowerEndR",
+   "LowerPodBody",
+   "LowerPodFrame",
+   "LowerAlcove",
    "LowerMattress",
    "LowerPillow",
-   "LowerStrap-0.1",
-   "LowerStrap0.5",
+   "LowerBlanket",
    "LowerReadingLamp",
-   "LowerShutterRail",
    "LowerShutterSlat0",
    "LowerShutterSlat1",
    "LowerShutterSlat2",
    "LowerShutterSlat3",
    "LowerShutterSlat4",
-   "UpperShell",
-   "UpperBack",
-   "UpperRoof",
-   "UpperEndL",
-   "UpperEndR",
+   "LowerHeadWindowFrame",
+   "LowerHeadWindowPane",
+   "UpperPodBody",
+   "UpperPodFrame",
+   "UpperAlcove",
    "UpperMattress",
    "UpperPillow",
-   "UpperStrap-0.1",
-   "UpperStrap0.5",
+   "UpperBlanket",
    "UpperReadingLamp",
-   "UpperShutterRail",
    "UpperShutterSlat0",
    "UpperShutterSlat1",
    "UpperShutterSlat2",
    "UpperShutterSlat3",
    "UpperShutterSlat4",
+   "UpperHeadWindowFrame",
+   "UpperHeadWindowPane",
    "LadderRailL",
    "LadderRailR",
    "LadderRung0",
@@ -54,7 +56,7 @@
    "LadderRung2",
    "LadderRung3",
    "LadderRung4",
-   "StarSticker"
+   "LadderRung5"
   ],
   "materials": [
    "Cloth_Blue",
@@ -64,16 +66,15 @@
    "Metal_Hazard",
    "Metal_Hull",
    "Metal_HullDark",
-   "Metal_Steel",
-   "OrangeBand",
-   "Plastic_White"
+   "Plastic_White",
+   "Window_Warm"
   ],
-  "mass_kg": 2423.4,
-  "moon_weight_kg": 400.8,
+  "mass_kg": 6114.7,
+  "moon_weight_kg": 1011.4,
   "size_m": [
-   2.28,
-   1.16,
-   2.39
+   2.36,
+   1.25,
+   2.32
   ],
   "maps": "1024 px base, roughness, normal"
  }

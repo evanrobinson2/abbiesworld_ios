@@ -1,29 +1,26 @@
-"""MK-070 Bunk pod with privacy shutter: two stacked sleep capsules, Daddy's up top and Abbie's below with a
-ladder. Each has a mattress with a strap blanket (low-g: you sleep strapped in), a pillow, a reading lamp and a
-slatted shutter. Diegetic: a closed shutter with the lamp off means someone is asleep."""
+"""MK-070 Bunk pod: two stacked sleep capsules, Daddy's up top and Abbie's below. Round 2, matched to the pick: each
+capsule is a chunky framed module with an open side showing a blue mattress, pillow and warm reading lamp, a slatted
+shutter beside it, an orange window at the head end and an amber ladder. Diegetic: a closed shutter with the lamp off
+means someone is asleep."""
 import math, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, "..", ".."))
 import bkit as k
 from bkit import TAU
 k.reset()
-for lv, z in (('Lower', 0.25), ('Upper', 1.35)):
-    k.box(f'{lv}Shell', (2.2, 1.0, 0.08), (0, 0, z), 'Metal_Hull', bevel=0.02, fill=0.5)
-    k.box(f'{lv}Back', (2.2, 0.08, 1.0), (0, 0.5, z + 0.5), 'Metal_Hull', bevel=0.02, fill=0.5)
-    k.box(f'{lv}Roof', (2.2, 1.0, 0.08), (0, 0, z + 1.0), 'Metal_Hull', bevel=0.02, fill=0.5)
-    for s in (-1, 1):
-        k.box(f'{lv}End{"L" if s < 0 else "R"}', (0.08, 1.0, 1.0), (s * 1.1, 0, z + 0.5), 'Metal_HullDark', bevel=0.02, fill=0.5)
-    k.box(f'{lv}Mattress', (2.0, 0.85, 0.16), (0, 0.04, z + 0.12), 'Cloth_Blue' if lv == 'Lower' else 'Cloth_Grey', bevel=0.04)
-    k.box(f'{lv}Pillow', (0.4, 0.6, 0.12), (-0.75, 0.06, z + 0.26), 'Plastic_White', bevel=0.05)
-    for st in (-0.1, 0.5):
-        k.box(f'{lv}Strap{st}', (0.08, 0.9, 0.18), (st, 0.04, z + 0.12), 'Metal_Hazard', bevel=0.01)
-    k.cyl(f'{lv}ReadingLamp', 0.06, 0.05, (-0.95, 0.3, z + 0.9), 'HeadlightGlass', n=10, rot=(math.pi, 0, 0))
-    k.box(f'{lv}ShutterRail', (2.2, 0.06, 0.06), (0, -0.5, z + 0.96), 'Metal_Gunmetal', bevel=0.01)
+for lv, z in (('Lower', 0.55), ('Upper', 1.62)):
+    body = k.module(f'{lv}Pod', (2.2, 1.1, 1.0), (0, 0, z), bevel=0.06, t=0.12, fill=0.4)
+    k.cut(body, k.cutter_box((1.1, 0.8, 0.62), (0.15, -0.5, z + 0.02)))
+    k.box(f'{lv}Alcove', (1.1, 0.04, 0.62), (0.15, 0.12, z + 0.02), 'Metal_HullDark', bevel=0)
+    k.box(f'{lv}Mattress', (1.06, 0.6, 0.14), (0.15, -0.2, z - 0.22), 'Cloth_Blue', bevel=0.05)
+    k.box(f'{lv}Pillow', (0.3, 0.4, 0.12), (-0.25, -0.2, z - 0.1), 'Plastic_White', bevel=0.05)
+    k.box(f'{lv}Blanket', (0.6, 0.62, 0.06), (0.35, -0.2, z - 0.13), 'Cloth_Grey', bevel=0.03)
+    k.cyl(f'{lv}ReadingLamp', 0.06, 0.04, (-0.25, -0.15, z + 0.31), 'HeadlightGlass', n=10)
     for j in range(5):
-        k.box(f'{lv}ShutterSlat{j}', (0.95, 0.03, 0.14), (0.55, -0.5, z + 0.85 - 0.16 * j), 'Plastic_White', bevel=0.005)
-k.box('LadderRailL', (0.05, 0.05, 2.3), (0.85, -0.6, 1.15), 'Metal_Steel', bevel=0.005)
-k.box('LadderRailR', (0.05, 0.05, 2.3), (0.45, -0.6, 1.15), 'Metal_Steel', bevel=0.005)
-for j in range(5):
-    k.cyl(f'LadderRung{j}', 0.02, 0.4, (0.65, -0.6, 0.45 + 0.4 * j), 'Metal_Steel', rot=(0, math.pi / 2, 0), n=6)
-k.box('StarSticker', (0.12, 0.01, 0.12), (-0.3, 0.45, 0.7), 'OrangeBand', bevel=0.0, rot=(0, 0.6, 0))
+        k.box(f'{lv}ShutterSlat{j}', (0.04, 0.03, 0.6), (0.86 + 0.07 * j, -0.56, z + 0.02), 'Metal_Gunmetal', bevel=0.008)
+    k.window(f'{lv}HeadWindow', 0.32, 0.4, (-0.8, -0.56, z + 0.04), depth=0.06)
+k.box('LadderRailL', (0.06, 0.06, 2.3), (1.18, -0.62, 1.15), 'Metal_Hazard', bevel=0.01)
+k.box('LadderRailR', (0.06, 0.06, 2.3), (0.82, -0.62, 1.15), 'Metal_Hazard', bevel=0.01)
+for j in range(6):
+    k.cyl(f'LadderRung{j}', 0.022, 0.36, (1.0, -0.62, 0.3 + 0.36 * j), 'Metal_Hazard', rot=(0, math.pi / 2, 0), n=6)
 k.build(HERE, {'id': 'MK-070', 'name': 'Bunk pod with privacy shutter'}, bake_size=1024,
-        view=dict(yaw=24, pitch=12), fps_eye=((0.2, -2.2, 1.1), (-0.2, 0.2, 0.8)))
+        view=dict(yaw=22, pitch=10), fps_eye=((0.2, -2.3, 1.1), (0, 0, 1.0)))

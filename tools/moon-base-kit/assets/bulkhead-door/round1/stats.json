@@ -1,0 +1,43 @@
+{
+ "id": "MK-035",
+ "name": "Bulkhead door, round pressure hatch",
+ "triangles": 1704,
+ "parts": 18,
+ "part_names": [
+  "WallPanel",
+  "HatchFrame",
+  "StateRing",
+  "Hatch",
+  "Porthole",
+  "PortholeRim",
+  "LockWheel",
+  "WheelSpoke0",
+  "WheelSpoke1",
+  "WheelSpoke2",
+  "WheelSpoke3",
+  "WheelHub",
+  "HingeBlock",
+  "Dog0",
+  "Dog1",
+  "Sill",
+  "CyclePanel",
+  "CycleButton"
+ ],
+ "materials": [
+  "Glass_Window",
+  "Lamp_Green",
+  "Metal_Charcoal",
+  "Metal_Gunmetal",
+  "Metal_Hazard",
+  "Metal_Hull",
+  "Metal_Steel"
+ ],
+ "mass_kg": 1905.9,
+ "moon_weight_kg": 315.2,
+ "size_m": [
+  2.4,
+  0.48,
+  2.6
+ ],
+ "maps": "1024 px base, roughness, normal"
+}

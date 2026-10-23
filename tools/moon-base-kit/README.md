@@ -21,9 +21,11 @@ took over the dome, tower, habitat and hangar, airlock and supply crate (as engi
   `provenance.json`.
 - `run_all.sh [slug ...]` rebuilds everything (about 2 minutes per asset on 4 CPU cores).
 - `build_page.py` rebuilds the study page from the catalogue, the stats, the docstrings and the renders.
-- `mj_queue.json`: the Midjourney proofs for the 20, queued because the Mac was offline on 2026-10-23. Run them with
-  `tools/midjourney/`, save picks as `assets/<slug>/concept.jpg`, record job ids in `provenance.json`, then rebuild
-  each recipe against its pick (round 2) and show pick | round 1 | round 2 from the same camera.
+- `mj_queue.json`: the 20 Midjourney prompts. `mj/<id>/0-3.jpg`, `mj/jobs.jsonl` and `mj/contact_sheet.jpg` are the
+  proofs from Evan's Mac (2026-10-23). Each pick is `assets/<slug>/concept.jpg`, with its job id and index in
+  `provenance.json`; round 1 lives in `assets/<slug>/round1/`. The page shows pick | model | Abbie's eye | round 1.
+- `bkit.module()` (off-white body in a dark bumper frame) and `bkit.window()` (warm lit pane in a frame) are the
+  round-2 building blocks the picks asked for.
 
 Needs Blender's Python module: `pip install bpy` (tested with bpy 5.2.3).
 

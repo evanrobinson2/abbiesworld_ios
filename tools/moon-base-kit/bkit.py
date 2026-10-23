@@ -43,7 +43,7 @@ ROLES = {
     'Cloth_Grey':      ('#6c7480', 0.95, 0.0, 'weave', 400, None, 0, 1),
     'Cloth_Suit':      ('#9aa1ab', 0.85, 0.0, 'weave', 600, None, 0, 1),
     'Stone_Regolith':  ('#a2a5ab', 0.97, 0.0, 'rock', 1500, None, 0, 1),
-    'Stone_Ground':    ('#93969d', 0.97, 0.0, 'rock', 1500, None, 0, 1),
+    'Stone_Ground':    ('#73767d', 0.97, 0.0, 'rock', 1500, None, 0, 1),
     'Stone_Basalt':    ('#6f737a', 0.9, 0.0, 'rock', 2900, None, 0, 1),
     'Soil_Grow':       ('#4a3a2e', 0.95, 0.0, 'rock_fine', 1300, None, 0, 1),
     'Leaf_Green':      ('#5fae4f', 0.7, 0.0, 'none', 600, None, 0, 1),
@@ -52,7 +52,7 @@ ROLES = {
     'Glass_Window':    ('#9fc3e6', 0.05, 0.0, 'none', 2500, None, 0, 0.35),
     'DomeGlass':       ('#a8c8ea', 0.05, 0.0, 'none', 2500, '#ffcf96', 0.15, 0.4),
     'OrangeBand':      ('#ff9a3c', 0.4, 0.0, 'none', 1200, '#ff9a3c', 4.0, 1),
-    'Window_Warm':     ('#ffb468', 0.3, 0.0, 'none', 2500, '#ffb468', 3.0, 1),
+    'Window_Warm':     ('#ff9a4a', 0.3, 0.0, 'none', 2500, '#ff8a30', 2.2, 1),
     'HeadlightGlass':  ('#f4f1e6', 0.1, 0.0, 'none', 2500, '#fff4dc', 6.0, 1),
     'Lamp_Green':      ('#59e08a', 0.2, 0.0, 'none', 2500, '#59e08a', 5.0, 1),
     'Lamp_Amber':      ('#ffb02e', 0.2, 0.0, 'none', 2500, '#ffb02e', 5.0, 1),
@@ -549,6 +549,45 @@ def array_ring(make, count, radius, z=0.0, start=0.0):
     return out
 
 
+_FACE = {'-Y': (0, 0, 0), '+Y': (0, 0, math.pi), '-X': (0, 0, -math.pi / 2), '+X': (0, 0, math.pi / 2)}
+
+
+def module(name, size, loc, mtl='Metal_Hull', frame='Metal_Gunmetal', bevel=0.06, t=None, fill=0.3, rot=(0, 0, 0)):
+    """The Moon base's signature block: an off-white hull box with big chamfers, held by chunky dark bumper frames
+    (four corner posts, a top rim and a bottom rim). Returns the body; parts are named <name>Body, <name>Post0..3,
+    <name>RimTop, <name>RimBase. rot is a Z turn only."""
+    sx, sy, sz = size
+    x, y, z = loc
+    t = t or max(0.06, min(sx, sy, sz) * 0.09)
+    cz, sz_ = math.cos(rot[2]), math.sin(rot[2])
+
+    def at(dx, dy, dz):
+        return (x + dx * cz - dy * sz_, y + dx * sz_ + dy * cz, z + dz)
+    body = box(f'{name}Body', (sx - t * 0.6, sy - t * 0.6, sz), at(0, 0, 0), mtl, bevel=bevel, fill=fill, rot=rot)
+    posts = [box(f'{name}Post{i}', (t * 1.3, t * 1.3, sz + t * 0.2), at(px * (sx / 2 - t * 0.35), py * (sy / 2 - t * 0.35), 0),
+                 frame, bevel=t * 0.3, rot=rot) for i, (px, py) in enumerate(((1, 1), (-1, 1), (1, -1), (-1, -1)))]
+    rims = []
+    for tag, dz in (('Top', sz / 2), ('Base', -sz / 2)):
+        parts = []
+        for dx, dy, w, d in ((0, sy / 2, sx, t), (0, -sy / 2, sx, t), (sx / 2, 0, t, sy), (-sx / 2, 0, t, sy)):
+            parts.append(box(f'{name}Rim{tag}_', (w + t * 0.2, d * 1.1, t * 1.1), at(dx * 0.98, dy * 0.98, dz), frame,
+                             bevel=t * 0.25, rot=rot))
+        rims.append(merge(f'{name}Rim{tag}', parts))
+    merge(f'{name}Frame', posts + rims)
+    return body
+
+
+def window(name, w, h, loc, face='-Y', glow='Window_Warm', frame='Metal_Gunmetal', depth=0.08, round_=True, yaw=None):
+    """A warm glowing window: a dark chamfered frame with the lit pane set into it, facing `face`, or facing outward
+    along the angle `yaw` (radians from +X) for windows round a curved wall."""
+    rot = _FACE[face] if yaw is None else (0, 0, yaw + math.pi / 2)
+    fr = box(f'{name}Frame', (w + 0.08, depth, h + 0.08), loc, frame, bevel=min(w, h) * (0.3 if round_ else 0.1), rot=rot)
+    off = {'-Y': (0, -1), '+Y': (0, 1), '-X': (-1, 0), '+X': (1, 0)}[face] if yaw is None else (math.cos(yaw), math.sin(yaw))
+    pane = box(f'{name}Pane', (w, depth, h), (loc[0] + off[0] * depth * 0.2, loc[1] + off[1] * depth * 0.2, loc[2]), glow,
+               bevel=min(w, h) * (0.28 if round_ else 0.08), rot=rot)
+    return pane
+
+
 def rock(name, r, loc, mtl='Stone_Basalt', squash=0.7, seed=0, sink=0.25, sub=1, jag=0.28):
     """An angular rock: an icosphere whose vertices are pushed in and out at random, squashed, with a flat sunk base."""
     import random
@@ -723,7 +762,7 @@ def _look(cam, target):
 
 
 def render(out_dir, yaw=35, pitch=22, dist=None, size=900, lens=50, fps_eye=None, samples=40, hero_cam=None,
-           lights=(), sun_energy=3.6):
+           lights=(), sun_energy=2.2):
     """hero.png: three-quarter view under a hard white sun and blue Earthlight on a regolith floor.
     fps.png: what Abbie sees standing in front of it (eye at 1.15 m) when fps_eye is given."""
     sc = bpy.context.scene
@@ -752,7 +791,7 @@ def render(out_dir, yaw=35, pitch=22, dist=None, size=900, lens=50, fps_eye=None
     sun.data.angle = math.radians(0.6)
     bpy.ops.object.light_add(type='SUN', rotation=(math.radians(-60), 0, math.radians(150)))
     earth = bpy.context.object
-    earth.data.energy = 0.7
+    earth.data.energy = 0.9
     earth.data.color = (0.45, 0.58, 1.0)
     bpy.ops.object.camera_add()
     cam = bpy.context.object

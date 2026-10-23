@@ -1,19 +1,25 @@
 {
  "asset": "ore-processor",
  "name": "Regolith ore processor",
- "brief": "MK-007 Regolith ore processor. A hopper you can tip dust into, a panelled furnace body on legs, a chute that drops bricks of sintered regolith onto a tray, an exhaust stack and a status lamp. Diegetic: the warm window glows while it cooks, the stack puffs slow low-gravity dust, and bricks pile up on the tray.",
+ "brief": "MK-007 Regolith ore processor. Round 2, matched to the pick: a chunky framed furnace block on four splayed legs, a hopper on top, a glowing furnace mouth at the front with a tray of sintered bricks, an exhaust elbow on the side and a warm side window. Diegetic: the mouth glows while it cooks, the stack puffs slow dust, and bricks pile up on the tray.",
  "rounds": [
   {
    "n": 1,
    "date": "2026-10-23",
    "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  },
+  {
+   "n": 2,
+   "date": "2026-10-23",
+   "from": "concept.jpg (the Midjourney pick)",
+   "t": "Rebuilt against the Midjourney pick: chunky off-white modules held by dark bumper frames (bkit.module), warm orange windows (bkit.window), darker ground. Round 1 kept in round1/."
   }
  ],
  "stats": {
   "id": "MK-007",
   "name": "Regolith ore processor",
-  "triangles": 1744,
-  "parts": 28,
+  "triangles": 1792,
+  "parts": 24,
   "part_names": [
    "Leg0",
    "Foot0",
@@ -23,44 +29,38 @@
    "Foot2",
    "Leg3",
    "Foot3",
-   "Body",
-   "HazardBand",
-   "FurnaceWindow",
-   "WindowFrame",
-   "Hopper",
-   "HopperLip",
-   "HopperGrate",
-   "ExhaustStack",
-   "StackCap",
-   "Chute",
+   "BodyBody",
+   "BodyFrame",
+   "MouthFrame",
+   "FurnaceMouth",
    "BrickTray",
    "RegolithBrick0",
    "RegolithBrick1",
    "RegolithBrick2",
    "RegolithBrick3",
-   "RegolithBrick4",
-   "StatusLampPost",
-   "StatusLamp",
-   "FeedPipe",
-   "ValveWheel"
+   "Hopper",
+   "HopperLip",
+   "Exhaust",
+   "ExhaustCap",
+   "SideWindowFrame",
+   "SideWindowPane",
+   "StatusLamp"
   ],
   "materials": [
    "Lamp_Green",
    "Metal_Charcoal",
-   "Metal_Grate",
    "Metal_Gunmetal",
-   "Metal_Hazard",
    "Metal_Hull",
    "Metal_Steel",
    "Stone_Basalt",
    "Window_Warm"
   ],
-  "mass_kg": 10751.2,
-  "moon_weight_kg": 1778.2,
+  "mass_kg": 6164.2,
+  "moon_weight_kg": 1019.6,
   "size_m": [
-   3.91,
-   3.4,
-   3.67
+   2.37,
+   2.2,
+   2.88
   ],
   "maps": "1024 px base, roughness, normal"
  }
