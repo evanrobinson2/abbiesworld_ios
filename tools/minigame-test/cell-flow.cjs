@@ -15,8 +15,9 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   await until(() => window.__cell); await p.waitForTimeout(1200); await shot('0-lab');
   const bk = await p.evaluate(() => { const r = document.querySelector('.beaker[data-level="3"]').getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; });
   await p.mouse.click(bk[0], bk[1]); await p.waitForTimeout(900); await shot('1-lens');
-  await until(() => document.querySelector('#picker.on')); await shot('2-mouth');
-  await p.evaluate(() => __cell.pick('filter')); await until(() => __cell.players[0]?.c); await p.waitForTimeout(1500); await shot('3-start');
+  await until(() => document.querySelector('#maker.on')); await p.waitForTimeout(600); await shot('2-maker-a');
+  await p.evaluate(() => { const r = n => document.querySelector(`#maker [data-row=${n}]`); r('colour').children[4].dispatchEvent(new PointerEvent('pointerdown', {bubbles: true})); r('eyes').children[2].dispatchEvent(new PointerEvent('pointerdown', {bubbles: true})); r('mouth').children[1].dispatchEvent(new PointerEvent('pointerdown', {bubbles: true})); r('move').children[1].dispatchEvent(new PointerEvent('pointerdown', {bubbles: true})); }); await p.waitForTimeout(700); await shot('2-maker-b');
+  await p.evaluate(() => document.querySelector('#maker .go').dispatchEvent(new PointerEvent('pointerdown', {bubbles: true}))); await until(() => __cell.players[0]?.c); await p.waitForTimeout(1500); await shot('3-start');
   for (let i = 0; i < 12; i++) {
     const t = await p.evaluate(() => { const P = __cell.players[0].c; if (!P || P.dead) return null; let best = null, bd = 1e9; for (const f of __cell.food) if (f.type === 'plant') { const d = Math.hypot(f.x - P.x, f.y - P.y); if (d < bd) { bd = d; best = f; } } if (!best) return null; const r = best.g.getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; });
     if (t) { await p.mouse.move(t[0], t[1]); await p.mouse.down(); await p.waitForTimeout(600); await p.mouse.up(); }
