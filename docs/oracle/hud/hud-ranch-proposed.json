@@ -1,0 +1,246 @@
+{
+ "id": "ranch-proposed",
+ "date": "2026-10-23",
+ "note": "Proposed Abbie's World play-mode HUD (HUD_STUDY.md). iPhone 390 x 844 pt portrait, 844 x 390 landscape.",
+ "viewports": {
+  "portrait": {
+   "size": [
+    390,
+    844
+   ],
+   "safe": [
+    47,
+    0,
+    34,
+    0
+   ]
+  },
+  "landscape": {
+   "size": [
+    844,
+    390
+   ],
+   "safe": [
+    0,
+    47,
+    21,
+    47
+   ]
+  }
+ },
+ "elements": [
+  {
+   "id": "sun_dial",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "readout": true,
+   "touch": true,
+   "touches_per_min": 0.5,
+   "world_echo": "scene light and sky",
+   "words": 0,
+   "bbox": {
+    "portrait": [
+     163,
+     55,
+     64,
+     64
+    ],
+    "landscape": [
+     390,
+     8,
+     64,
+     64
+    ]
+   },
+   "owner": "time"
+  },
+  {
+   "id": "hand_of_cards",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "touch": true,
+   "touches_per_min": 3,
+   "words": 0,
+   "numeral_cap_px": 20,
+   "colour": "#2b1d0e",
+   "bbox": {
+    "portrait": [
+     100,
+     722,
+     190,
+     88
+    ],
+    "landscape": [
+     327,
+     281,
+     190,
+     88
+    ]
+   },
+   "owner": "tools",
+   "note": "cards drawn with numerals on solid tokens",
+   "on_solid_token": true
+  },
+  {
+   "id": "toy_box",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "touch": true,
+   "touches_per_min": 0.2,
+   "words": 0,
+   "bbox": {
+    "portrait": [
+     24,
+     746,
+     64,
+     64
+    ],
+    "landscape": [
+     67,
+     305,
+     64,
+     64
+    ]
+   },
+   "owner": "tools",
+   "note": "tap: shelf of dioramas; long-press: grown-up workbench"
+  },
+  {
+   "id": "cafe_sign",
+   "kind": "diegetic",
+   "tier": "T1_on_thing",
+   "time": "always",
+   "readout": true,
+   "numeral_cap_px": 22,
+   "owner": "meta_game",
+   "note": "score painted on the cafe's sign"
+  },
+  {
+   "id": "need_bubbles",
+   "kind": "spatial",
+   "tier": "T1_on_thing",
+   "time": "threshold",
+   "readout": true,
+   "touch": true,
+   "owner": "thing",
+   "note": "36 to 56 px, padded to 64 px hit areas"
+  },
+  {
+   "id": "gain_pops",
+   "kind": "spatial",
+   "tier": "T1_on_thing",
+   "time": "on_change",
+   "readout": true,
+   "numeral_cap_px": 22,
+   "owner": "thing"
+  },
+  {
+   "id": "want_posts",
+   "kind": "spatial",
+   "tier": "T1_on_thing",
+   "time": "always",
+   "readout": true,
+   "numeral_cap_px": 20,
+   "owner": "thing"
+  },
+  {
+   "id": "valid_slots",
+   "kind": "spatial",
+   "tier": "T1_on_thing",
+   "time": "on_change",
+   "owner": "thing",
+   "note": "only while holding a card"
+  },
+  {
+   "id": "resident_thoughts",
+   "kind": "spatial",
+   "tier": "T3_summoned",
+   "time": "summoned",
+   "readout": true,
+   "touch": true,
+   "owner": "thing",
+   "note": "icons only"
+  },
+  {
+   "id": "path_line",
+   "kind": "spatial",
+   "tier": "T3_summoned",
+   "time": "summoned",
+   "owner": "thing"
+  },
+  {
+   "id": "barn_ring",
+   "kind": "spatial",
+   "tier": "T3_summoned",
+   "time": "summoned",
+   "readout": true,
+   "touch": true,
+   "numeral_cap_px": 20,
+   "owner": "thing",
+   "note": "hold the barn"
+  },
+  {
+   "id": "overland_icons",
+   "kind": "spatial",
+   "tier": "T3_summoned",
+   "time": "summoned",
+   "readout": true,
+   "owner": "thing",
+   "note": "pinch out"
+  },
+  {
+   "id": "night_vignette",
+   "kind": "meta",
+   "tier": "T1_on_thing",
+   "time": "threshold",
+   "readout": true,
+   "owner": "time"
+  },
+  {
+   "id": "cafe_growth",
+   "kind": "none",
+   "tier": "T0_world",
+   "time": "on_change",
+   "readout": true,
+   "owner": "meta_game"
+  },
+  {
+   "id": "workbench",
+   "kind": "overlay",
+   "tier": "T4_workbench",
+   "time": "summoned",
+   "grownup": true,
+   "owner": "tools",
+   "note": "behind the toy box long-press; may look like a tool"
+  }
+ ],
+ "fade": {
+  "focus": {
+   "opacity": 0.25,
+   "in_ms": 150,
+   "out_ms": 250
+  },
+  "change": {
+   "hold_ms": 2500,
+   "fade_ms": 400
+  },
+  "idle_tuck": {
+   "after_ms": 6000,
+   "visible_share": 0.4
+  },
+  "threshold": {
+   "timer": false
+  },
+  "summon_all": "tap empty ground"
+ },
+ "kid_safe": {
+  "red_alarm": false,
+  "buzzer": false,
+  "max_flash_hz": 0,
+  "fail_screen": false
+ },
+ "captures": []
+}

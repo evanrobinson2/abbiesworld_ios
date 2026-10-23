@@ -1,0 +1,1091 @@
+<title>What Makes a Great HUD</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dusk over the toy table. One reading column; the live toy screens break wider. Single committed dark look. */
+:root {
+  --dusk: #1a1f38;
+  --dusk-deep: #12162a;
+  --dusk-lift: #252b4b;
+  --ink: #f3ead8;
+  --muted: #aeb3cc;
+  --sun: #f2be54;
+  --meadow: #8fcf7a;
+  --rule: rgba(243, 234, 216, 0.14);
+  --k-diegetic: #f2be54;
+  --k-spatial: #8fcf7a;
+  --k-meta: #c49af0;
+  --k-overlay: #7fb2e8;
+  --k-none: #aeb3cc;
+  --bad: #f08c74;
+  --display: "Fredoka", "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--dusk);
+  background-image: radial-gradient(ellipse at 50% -20%, rgba(242, 190, 84, 0.13), transparent 55%);
+  color: var(--ink);
+  font: 17px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 72px;
+}
+.wrap { max-width: 1100px; margin: 0 auto; }
+.read { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; line-height: 1.12; margin: 0; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.1rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); }
+h3 { font-size: 1.2rem; }
+p { margin: 0; }
+a { color: var(--sun); }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+.eyebrow { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sun); }
+.muted { color: var(--muted); }
+.mono { font-family: var(--mono); font-size: 0.86em; }
+section { padding-block: 56px 8px; border-top: 1px solid var(--rule); margin-top: 48px; display: grid; gap: 22px; }
+header.hero { padding-block: 44px 8px; display: grid; gap: 18px; }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 64ch; }
+
+button.chip {
+  font: 600 0.95rem/1 var(--display); color: #2a1c08; background: linear-gradient(#f7d68a, #e0a943);
+  border: 0; border-radius: 999px; padding: 11px 18px; cursor: pointer;
+  box-shadow: 0 2px 0 #8a6420, 0 6px 14px rgba(0,0,0,0.35);
+}
+button.chip.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--rule); }
+button.chip[aria-pressed="true"].ghost { background: var(--dusk-lift); box-shadow: inset 0 0 0 2px var(--sun); }
+button.chip:active { transform: translateY(2px); }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Live toy */
+.stage { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 40px; align-items: start; }
+@media (max-width: 760px) { .stage { grid-template-columns: minmax(0, 1fr); justify-items: center; } }
+.phone { width: 100%; max-width: 300px; aspect-ratio: 390 / 844; border-radius: 44px; padding: 10px; background: #0b0d18;
+  box-shadow: 0 0 0 2px #2c3150, 0 30px 60px rgba(0,0,0,0.5); position: relative; }
+.phone canvas { width: 100%; height: 100%; display: block; border-radius: 34px; touch-action: none; }
+.side { display: grid; gap: 18px; min-width: 0; }
+.readout { font: 500 0.92rem/1.5 var(--mono); color: var(--muted); }
+.readout b { color: var(--ink); font-weight: 500; }
+.big { font: 600 2.6rem/1 var(--display); color: var(--sun); font-variant-numeric: tabular-nums; }
+.big.bad { color: var(--bad); }
+#trace { width: 100%; height: 150px; display: block; background: var(--dusk-deep); border-radius: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font: 500 0.82rem/1.3 var(--mono); color: var(--muted); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.tips { display: grid; gap: 6px; font-size: 0.95rem; color: var(--muted); padding-left: 1.1em; margin: 0; }
+
+/* Taxonomy */
+.five { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 760px) { .five { grid-template-columns: minmax(0, 1fr); } }
+#five { width: 100%; aspect-ratio: 3 / 2; max-width: 100%; display: block; border-radius: 18px; background: var(--dusk-deep); }
+.why { display: grid; gap: 10px; }
+.why .kind { font: 600 1.5rem/1 var(--display); }
+.why dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 14px; margin: 0; }
+.why dt { font: 500 0.78rem/1.6 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.why dd { margin: 0; }
+.axes { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 500 0.76rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+td.num { font-variant-numeric: tabular-nums; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+
+/* Game schematics */
+.games { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 18px; }
+.game { background: var(--dusk-lift); border-radius: 18px; padding: 14px; display: grid; gap: 10px; align-content: start; }
+.game svg { width: 100%; height: auto; display: block; border-radius: 10px; background: #2f365c; }
+.game svg rect.z, .game svg circle.z, .game svg path.z { cursor: pointer; }
+.game h3 { font-size: 1.08rem; }
+.game .who { font: 500 0.74rem/1.3 var(--mono); color: var(--muted); }
+.game .note { font-size: 0.9rem; color: var(--muted); min-height: 2.8em; }
+.game .take { font-size: 0.92rem; }
+.game.core { box-shadow: inset 0 0 0 2px rgba(242, 190, 84, 0.55); }
+
+/* Tiers */
+.tiers { display: grid; gap: 8px; }
+.tier { display: grid; grid-template-columns: 70px minmax(0, 1fr) minmax(0, 1.3fr); gap: 14px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+@media (max-width: 640px) { .tier { grid-template-columns: 56px minmax(0, 1fr); } .tier .ex { grid-column: 2; } }
+.tier .t { font: 600 1.4rem/1 var(--display); color: var(--sun); }
+.tier .ex { color: var(--muted); font-size: 0.95rem; }
+
+/* Juice + touch */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 640px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+.pane { background: var(--dusk-deep); border-radius: 18px; padding: 14px; display: grid; gap: 10px; }
+.pane canvas { width: 100%; aspect-ratio: 16 / 9; display: block; border-radius: 12px; }
+.pane .label { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.touch { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 640px) { .touch { grid-template-columns: minmax(0, 1fr); justify-items: center; } }
+#touch { width: 100%; max-width: 260px; aspect-ratio: 390 / 844; display: block; border-radius: 28px; background: #0b0d18; touch-action: none; box-shadow: 0 0 0 2px #2c3150; }
+
+/* Rubric */
+.weights { display: grid; gap: 8px; }
+.w { display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr) 36px; gap: 12px; align-items: center; font-size: 0.95rem; }
+.w .bar { height: 12px; border-radius: 6px; background: var(--dusk-lift); overflow: hidden; }
+.w .bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--sun), #f7d68a); border-radius: 6px; }
+.w .n { font: 500 0.9rem/1 var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+.gates { display: grid; gap: 8px; padding-left: 1.3em; margin: 0; }
+.verdict { font: 500 0.82rem/1 var(--mono); padding: 3px 8px; border-radius: 999px; }
+.verdict.pass { background: rgba(143, 207, 122, 0.18); color: var(--meadow); }
+.verdict.fail { background: rgba(240, 140, 116, 0.18); color: var(--bad); }
+
+.ledger { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 700px) { .ledger { grid-template-columns: minmax(0, 1fr); } }
+.ledger ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: 0.93rem; }
+.ledger h3 { margin-bottom: 8px; }
+footer { margin-top: 56px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--rule); padding-top: 20px; }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <span class="eyebrow">Oracle study · 2026-10-23 · Abbie's World</span>
+  <h1>What makes a great game HUD</h1>
+  <p class="lede">Ten games, five ways to show information, and a measurable rubric, applied to the Ranch. The short answer is that the best HUD is the one a child stops seeing: three toys on the table, and everything else on the thing it is about.</p>
+</header>
+
+<div class="stage">
+  <div class="phone"><canvas id="ranch" aria-label="A playable toy ranch with the proposed HUD: a sun dial, a hand of cards and a toy box"></canvas></div>
+  <div class="side">
+    <div class="read" style="display:grid;gap:10px">
+      <h2>The Ranch HUD, live</h2>
+      <p class="muted">Everything here is drawn for this study. Drag a card onto an empty hex. Tap a thirsty cow's bubble. Tap the sun to pause. Leave it alone for six seconds and watch the hand tuck away.</p>
+    </div>
+    <div class="controls" role="group" aria-label="Which HUD">
+      <button class="chip ghost" id="m-proposed" aria-pressed="true">Proposed HUD</button>
+      <button class="chip ghost" id="m-today" aria-pressed="false">Today's /sandbox</button>
+      <button class="chip ghost" id="m-cover" aria-pressed="false">Cover the world</button>
+    </div>
+    <div style="display:flex;gap:22px;align-items:end;flex-wrap:wrap">
+      <div><div class="big" id="chrome">7.6%</div><div class="readout">of the screen is HUD (budget 8%)</div></div>
+      <div><div class="big" id="words">0</div><div class="readout">words on screen (target 0)</div></div>
+    </div>
+    <div>
+      <canvas id="trace" aria-label="Opacity of each HUD element over the last 12 seconds"></canvas>
+      <div class="legend" style="margin-top:8px">
+        <span><i style="background:var(--k-overlay)"></i>hand of cards</span>
+        <span><i style="background:var(--sun)"></i>sun dial</span>
+        <span><i style="background:var(--k-spatial)"></i>need bubble</span>
+        <span><i style="background:var(--k-meta)"></i>gain pops</span>
+      </div>
+    </div>
+    <ul class="tips">
+      <li>While you hold a card, the sun and the toy box drop to a quarter (focus fade).</li>
+      <li>Gains pop off the tile and fly to the café sign; the sign, not a corner, holds the score.</li>
+      <li>Bubbles appear only when a cow is thirsty and stay until it drinks (threshold, no timer).</li>
+    </ul>
+  </div>
+</div>
+
+<section>
+  <span class="eyebrow">Short version</span>
+  <h2>Eight things every great HUD does</h2>
+  <ol class="read" style="display:grid;gap:10px;padding-left:1.2em;margin:0">
+    <li><b>You stop seeing it.</b> Either the information moves into the world, or the overlay is so small and so fixed that the eye learns it and stops looking.</li>
+    <li><b>It sits where the eyes already are.</b> A thirsty cow shows it on the cow. Corners are for your own body and for time.</li>
+    <li><b>Three things always on, at most.</b> Don't Starve shows three needs and a clock. Everything else is summoned or appears on change.</li>
+    <li><b>Meters have bodies.</b> Don't Starve's sanity bends the screen; SteamWorld Dig's lamp shrinks the light. The number tells you and the world makes you feel it.</li>
+    <li><b>Change is the signal.</b> An element earns attention when it changes, then settles. Static elements are the quietest things on screen.</li>
+    <li><b>Fades follow rules.</b> Show on change, hold, fade; drop away while you hold something; one gesture brings it all back.</li>
+    <li><b>Touch is its own design.</b> No hover, fingers cover things, thumbs live at the bottom, and the notch and home strip are off limits.</li>
+    <li><b>It is drawn in the world's own hand.</b> Ink for Don't Starve, pencil for This War of Mine, the suit's lights for Dead Space. For us, toys.</li>
+  </ol>
+</section>
+
+<section>
+  <span class="eyebrow">Taxonomy</span>
+  <h2>Five ways to say "the cow is thirsty"</h2>
+  <p class="read muted">The standard sort (Fagerholt and Lorentzon, 2009) asks two questions: would a character in the world see it, and does it sit in the world's space? That gives four kinds. We add a fifth, none, where the world says it on its own. Same cow, same thirst, five presentations.</p>
+  <div class="controls" role="group" aria-label="Presentation kind" id="five-modes"></div>
+  <div class="five">
+    <canvas id="five" aria-label="A cow by a water trough, drawn in the selected presentation"></canvas>
+    <div class="why" id="five-why" aria-live="polite"></div>
+  </div>
+  <div class="axes">
+    <table>
+      <thead><tr><th>Kind</th><th>Seen by a character?</th><th>In the world's space?</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:var(--k-diegetic)"></span>Diegetic</td><td>Yes</td><td>Yes</td><td>Tools and props you hold or look at</td></tr>
+        <tr><td><span class="dot" style="background:var(--k-spatial)"></span>Spatial</td><td>No</td><td>Yes</td><td>Anything about one thing: wants, gains, previews</td></tr>
+        <tr><td><span class="dot" style="background:var(--k-meta)"></span>Meta</td><td>Yes, as a feeling</td><td>No, on the lens</td><td>Mood and time: night, weather, low health</td></tr>
+        <tr><td><span class="dot" style="background:var(--k-overlay)"></span>Overlay</td><td>No</td><td>No</td><td>Your own tools and the clock, at most three</td></tr>
+        <tr><td><span class="dot" style="background:var(--k-none)"></span>None</td><td colspan="2">The world carries it</td><td>Rewards and anything with low stakes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">The games</span>
+  <h2>Where each game puts its information</h2>
+  <p class="read muted">Each sketch is a schematic of where the information lives on screen, coloured by kind. They are drawn from descriptions, not traced from the games. Tap a zone to read it. The four you asked for have a gold edge.</p>
+  <div class="legend">
+    <span><i style="background:var(--k-diegetic)"></i>diegetic</span>
+    <span><i style="background:var(--k-spatial)"></i>spatial</span>
+    <span><i style="background:var(--k-meta)"></i>meta</span>
+    <span><i style="background:var(--k-overlay)"></i>overlay</span>
+  </div>
+  <div class="games" id="games"></div>
+</section>
+
+<section>
+  <span class="eyebrow">Hierarchy</span>
+  <h2>Always on, on the thing, or summoned</h2>
+  <p class="read muted">Every piece of information gets one home. It goes always-on only if the child needs it every few seconds and it changes what they do next. Score fails that test, so it lives on the café sign. Time passes it.</p>
+  <div class="tiers">
+    <div class="tier"><span class="t">T0</span><b>The world itself</b><span class="ex">The café grows an awning; grass browns in a dry spell; tired animals lie down; night falls.</span></div>
+    <div class="tier"><span class="t">T1</span><b>On the thing</b><span class="ex">Need bubbles over animals, +N off tiles, a meadow's want-post, glowing valid slots, the café sign's number.</span></div>
+    <div class="tier"><span class="t">T2</span><b>Always on, three toys</b><span class="ex">The sun dial (top), the hand of cards (bottom), the toy box (bottom corner).</span></div>
+    <div class="tier"><span class="t">T3</span><b>Summoned</b><span class="ex">Hold the barn for a ring of animal heads and counts; pinch out for big overland icons; tap a resident for a thought bubble.</span></div>
+    <div class="tier"><span class="t">T4</span><b>Workbench</b><span class="ex">Sliders, presets, generate, arrival effects, inspector and search, behind a long-press on the toy box.</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Juice</span>
+  <h2>The same +3, with and without feel</h2>
+  <p class="read muted">Both counters get the same numbers. The right one links the gain to its source, ticks up one token at a time on a rising scale, and lets losses trail so you see what went. Sound plays after your first tap.</p>
+  <div class="controls">
+    <button class="chip" id="j-gain">Gain 3</button>
+    <button class="chip ghost" id="j-loss">Lose 2</button>
+  </div>
+  <div class="pair">
+    <div class="pane"><span class="label">Flat: the number just changes</span><canvas id="j-flat" aria-label="Counter without juice"></canvas></div>
+    <div class="pane"><span class="label">Juiced: from the world, step by step</span><canvas id="j-juice" aria-label="Counter with juice"></canvas></div>
+  </div>
+  <div class="axes">
+    <table>
+      <thead><tr><th>Moment</th><th>Our target</th></tr></thead>
+      <tbody>
+        <tr><td>Gain</td><td>Source pops to 1.15 in 120 ms, token flies 300 to 450 ms, counter bumps to 1.2 and ticks one pentatonic step per token</td></tr>
+        <tr><td>Loss</td><td>Hold 150 ms, then a lighter ghost shrinks to the new level over 400 ms; a soft low note, never a buzzer</td></tr>
+        <tr><td>Threshold</td><td>Two pulses to 1.08, and the world echo starts (the bubble, the light)</td></tr>
+        <tr><td>Appear / leave</td><td>Pop from 0.6 with 8% overshoot in 220 ms / drop 6 px in 180 ms</td></tr>
+        <tr><td>Reduced motion</td><td>150 ms crossfades, counters tick in place, no pulses, sound stays</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Touch versus mouse</span>
+  <h2>Fingers cover what they touch</h2>
+  <div class="touch">
+    <canvas id="touch" aria-label="A phone screen showing the thumb zone, safe areas and touch targets; move over it to see a held card"></canvas>
+    <div class="side">
+      <div class="controls" role="group" aria-label="Input">
+        <button class="chip ghost" id="t-finger" aria-pressed="true">Finger</button>
+        <button class="chip ghost" id="t-mouse" aria-pressed="false">Mouse</button>
+        <button class="chip ghost" id="t-today" aria-pressed="false">Show today's targets</button>
+      </div>
+      <p class="muted read">Move or drag over the phone. With a finger, the held card rides 60 px above the touch so the child can see where it lands; with a mouse it sits under the cursor and a hover preview is allowed. Green is the thumb zone, hatched strips are where iOS owns the screen (notch, home strip, back-swipe edge).</p>
+      <ul class="tips">
+        <li>64 px targets for children; 44 pt is Apple's absolute floor.</li>
+        <li>Nothing essential behind hover. Hold or drag gives the same preview.</li>
+        <li>Frequent targets in the bottom 40% in portrait. The sun dial is watched more than touched, so it can sit at the top.</li>
+        <li>iOS Safari has no vibration API, so sound and motion carry the feel.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Rubric</span>
+  <h2>Seven gates, then 100 points</h2>
+  <div class="pair">
+    <div style="display:grid;gap:12px">
+      <h3>Gates (any failure rejects)</h3>
+      <ol class="gates">
+        <li>Always-on HUD covers 8% of the screen or less, both orientations.</li>
+        <li>Zero words in play mode; numbers are fine.</li>
+        <li>Touch targets 64 px or more, inside the safe area.</li>
+        <li>Nothing only on hover.</li>
+        <li>Numerals 18 px cap height and 3:1 contrast over day, dusk and night.</li>
+        <li>No game's UI art, icons, fonts or layout copied.</li>
+        <li>Kid-safe: no red alarms, buzzers, fast flashing or fail screens.</li>
+      </ol>
+    </div>
+    <div style="display:grid;gap:12px">
+      <h3>Scored dimensions</h3>
+      <div class="weights" id="weights"></div>
+    </div>
+  </div>
+  <div class="axes">
+    <table>
+      <thead><tr><th>Check (tools/hud-rubric/check_hud.py)</th><th>Proposed HUD</th><th>Today's /sandbox</th></tr></thead>
+      <tbody id="checks"></tbody>
+    </table>
+  </div>
+  <p class="read muted">Ships at 80 or more with every gate passed. The judged checks (one-second glance, silhouettes, "toy, not web", house style) run as pairwise VLM judgments in both orders, and later with a child.</p>
+</section>
+
+<section>
+  <span class="eyebrow">Style yes, expression never</span>
+  <h2>What we learn and what we leave</h2>
+  <div class="ledger" id="ledger"></div>
+</section>
+
+<footer class="read">
+  Source: <span class="mono">docs/oracle/hud/</span> in evanrobinson2/abbiesworld_ios (study, rubric, signatures, manifests) and <span class="mono">tools/hud-rubric/check_hud.py</span>. Game observations are from public guides and prior knowledge, not captures; confidence per finding is in the signatures file. Timings are our targets. Taxonomy after Fagerholt and Lorentzon, <i>Beyond the HUD</i> (2009).
+</footer>
+</div>
+
+<script>
+const SIGS = {
+  "schema_note": "Each entry uses the 'signature' shape from docs/oracle/identity/game-identity.schema.json. class=style may be learned from; class=expression is never copied.",
+  "date": "2026-10-23",
+  "games": {
+    "this-war-of-mine": [
+      {
+        "id": "severity_words",
+        "layer": "interface",
+        "description": "Survivor state written as graded words on the portrait, not bars or numbers.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "object_interaction_icons",
+        "layer": "interaction",
+        "description": "Usable objects show small icons in the world; you tap the icon on the object. No action bar.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "noise_rings",
+        "layer": "interface",
+        "description": "Noise you make and sounds you hear drawn as expanding rings at their source; unseen rooms dark and hatched.",
+        "class": "style",
+        "confidence": 0.75
+      },
+      {
+        "id": "dollhouse_cutaway",
+        "layer": "interface",
+        "description": "Side-on cutaway of the shelter; the camera pans across rooms like a dollhouse.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "diegetic_radio",
+        "layer": "interface",
+        "description": "The shelter radio carries prices and weather news the characters also hear.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "twom_sketch_ui_art",
+        "layer": "art",
+        "description": "The charcoal and pencil UI art, frames, icons, title cards and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "dont-starve": [
+      {
+        "id": "three_needs_plus_clock",
+        "layer": "interface",
+        "description": "Exactly three always-on need badges and a day clock in one corner; positions never move.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "segmented_day_dial",
+        "layer": "interface",
+        "description": "Round day clock split into day, dusk and night segments, with the moon phase at night.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "rate_arrows",
+        "layer": "interface",
+        "description": "Need badges show which way they are moving as well as the level.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "meter_bends_world",
+        "layer": "interface",
+        "description": "Low sanity desaturates and warps the screen and brings shadow creatures and whispers: the meter becomes the world.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "ui_in_world_ink",
+        "layer": "art",
+        "description": "Overlay badges drawn in the same inked line and paper texture as the world.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "ds_badge_art_icons",
+        "layer": "art",
+        "description": "The organ-shaped badges, inventory and crafting art, gothic style, characters and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "sons-of-the-forest": [
+      {
+        "id": "one_corner_cluster",
+        "layer": "interface",
+        "description": "All vitals in one compact round cluster in a bottom corner: health, stamina with vitality outline, three small need rings.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "grey_low_health",
+        "layer": "interface",
+        "description": "Screen turns grey at critically low health; cold and wet greys part of stamina.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "press_vs_hold_prompts",
+        "layer": "interaction",
+        "description": "Filled prompt for a press, hollow for a hold; pictogram prompts on objects.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "inventory_on_mat",
+        "layer": "interaction",
+        "description": "Opening the backpack lays every item physically on a mat; crafting is placing items on a crafting mat.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "blueprint_ghosts",
+        "layer": "interaction",
+        "description": "A chosen blueprint appears as a ghost in the world that fills in as you add materials.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "held_gps_map",
+        "layer": "interface",
+        "description": "The map is a GPS tracker held in the hand.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "sotf_ui_art",
+        "layer": "art",
+        "description": "The mat, book, GPS and icon art, Kelvin, horror tone and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "steamworld-dig": [
+      {
+        "id": "segmented_bars",
+        "layer": "interface",
+        "description": "A short strip of segmented bars (health, light, water) plus money; pickups add whole segments.",
+        "class": "style",
+        "confidence": 0.75
+      },
+      {
+        "id": "lamp_light_radius",
+        "layer": "interface",
+        "description": "As lamp light runs down the lit area around the player shrinks and the mine darkens.",
+        "class": "style",
+        "confidence": 0.55
+      },
+      {
+        "id": "world_is_map",
+        "layer": "interface",
+        "description": "Every tunnel stays dug, so the mine is its own record of where you have been.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "loot_flies_to_counter",
+        "layer": "interaction",
+        "description": "Ore pops with sparkle and sound, flies to the player, fills the bag; selling is a coin cascade with rising sound.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "swd_ui_art",
+        "layer": "art",
+        "description": "Western-steampunk frames, robots, fonts and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "tiny-glade": [
+      {
+        "id": "verb_is_ui",
+        "layer": "interaction",
+        "description": "The held tool is the interface; drag shapes walls and paths; almost no HUD.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "sun_object_time",
+        "layer": "interface",
+        "description": "Time of day is a sun you move.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "tg_art_icons",
+        "layer": "art",
+        "description": "Tool icons, procedural look and art.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "dorfromantik": [
+      {
+        "id": "stack_with_count",
+        "layer": "interface",
+        "description": "Remaining tiles shown as a physical stack with its count painted on it.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "quests_on_groups",
+        "layer": "interface",
+        "description": "Goal numbers float over the tile group that wants them, with a flag when done.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "points_from_tile",
+        "layer": "interaction",
+        "description": "Points float up from the tile that earned them; new tiles fly to the stack.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "dorf_art",
+        "layer": "art",
+        "description": "Tile designs, flags, banners and art.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "lego-bricktales": [
+      {
+        "id": "build_is_a_place",
+        "layer": "interaction",
+        "description": "Building happens in a separate build space with a palette and a physics test; exploring has almost no HUD.",
+        "class": "style",
+        "confidence": 0.65
+      },
+      {
+        "id": "bt_art",
+        "layer": "art",
+        "description": "Bricks, minifigures, palette art and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "9-kings": [
+      {
+        "id": "board_is_hud",
+        "layer": "interface",
+        "description": "Small hand of cards at the bottom, a year counter, and the board shows every consequence.",
+        "class": "style",
+        "confidence": 0.65
+      },
+      {
+        "id": "nk_art",
+        "layer": "art",
+        "description": "Pixel art, card art and kings.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "dead-space": [
+      {
+        "id": "state_on_body",
+        "layer": "interface",
+        "description": "Health is a light bar on the suit's spine; stasis a ring on the back; ammo a hologram on the weapon.",
+        "class": "style",
+        "confidence": 0.95
+      },
+      {
+        "id": "world_menus_no_pause",
+        "layer": "interface",
+        "description": "Inventory, map and messages are holograms projected in the world without pausing.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "floor_locator",
+        "layer": "interface",
+        "description": "A path line projected on the floor replaces a hard-to-use 3D map.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "dsp_art",
+        "layer": "art",
+        "description": "The suit, hologram art, horror tone and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "firewatch": [
+      {
+        "id": "held_paper_map",
+        "layer": "interface",
+        "description": "No HUD; a paper map and compass held in the hands, collecting notes over the story.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "radio_dialogue",
+        "layer": "interaction",
+        "description": "Dialogue through a raised walkie-talkie; choices appear as lines.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "fw_art",
+        "layer": "art",
+        "description": "The map art, radio, story and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "journey": [
+      {
+        "id": "meter_is_costume",
+        "layer": "interface",
+        "description": "Flight energy shown by the scarf's length and glyphs; no HUD.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "jr_art",
+        "layer": "art",
+        "description": "Scarf, glyph and world art.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ]
+  }
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const K = { diegetic: css('--k-diegetic'), spatial: css('--k-spatial'), meta: css('--k-meta'), overlay: css('--k-overlay'), none: css('--k-none') };
+
+/* ---------- sound ---------- */
+let AC = null;
+function audio() { if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { AC = null; } } if (AC && AC.state === 'suspended') AC.resume(); return AC; }
+const PENTA = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21];
+function tone(freq, dur = 0.18, type = 'sine', gain = 0.12, delay = 0) {
+  const a = AC; if (!a) return;
+  const t = a.currentTime + delay, o = a.createOscillator(), g = a.createGain();
+  o.type = type; o.frequency.value = freq * (1 + (Math.random() - 0.5) * 0.06);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+}
+function note(step, delay = 0) { tone(392 * Math.pow(2, PENTA[Math.min(step, PENTA.length - 1)] / 12), 0.22, 'triangle', 0.1, delay); }
+function thunk() { tone(110, 0.25, 'sine', 0.25); tone(70, 0.3, 'sine', 0.18); const a = AC; if (!a) return;
+  const b = a.createBuffer(1, a.sampleRate * 0.08, a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+  const s = a.createBufferSource(), g = a.createGain(), f = a.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 900; g.gain.value = 0.12; s.buffer = b; s.connect(f).connect(g).connect(a.destination); s.start(); }
+function boop() { tone(196, 0.22, 'sine', 0.1); }
+
+/* ---------- canvas helpers ---------- */
+function fit(cv, w, h) { const r = Math.min(devicePixelRatio || 1, 2), b = cv.getBoundingClientRect(); cv.width = Math.max(1, Math.round(b.width * r)); cv.height = Math.max(1, Math.round(b.height * r)); const c = cv.getContext('2d'); c.setTransform(cv.width / w, 0, 0, cv.height / h, 0, 0); return c; }
+function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function hex(c, x, y, r) { c.beginPath(); for (let i = 0; i < 6; i++) { const a = Math.PI / 6 + i * Math.PI / 3; c.lineTo(x + r * Math.cos(a), y + r * 0.62 * Math.sin(a)); } c.closePath(); }
+function outlined(c, txt, x, y, size, fill = '#fff8e6', stroke = '#2a1c08') {
+  c.font = `700 ${size}px Fredoka, "Baloo 2", "Trebuchet MS", sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.lineJoin = 'round'; c.lineWidth = Math.max(3, size * 0.2); c.strokeStyle = stroke; c.strokeText(txt, x, y); c.fillStyle = fill; c.fillText(txt, x, y);
+}
+const ease = { outBack: t => { const s = 1.70158 * 1.2; return 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2); }, outCubic: t => 1 - Math.pow(1 - t, 3) };
+function lerp(a, b, t) { return a + (b - a) * t; }
+function cowDraw(c, x, y, s, opts = {}) {
+  c.save(); c.translate(x, y); c.scale(s, s);
+  c.fillStyle = 'rgba(0,0,0,0.18)'; c.beginPath(); c.ellipse(0, 9, 15, 4, 0, 0, Math.PI * 2); c.fill();
+  if (opts.lying) { c.fillStyle = '#fbf6ee'; c.beginPath(); c.ellipse(0, 3, 15, 7, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#3b2b22'; c.beginPath(); c.ellipse(-4, 1, 4, 3, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#fbf6ee'; c.beginPath(); c.ellipse(13, 2, 6, 5, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#f0b7a4'; c.beginPath(); c.ellipse(17, 4, 3, 2.4, 0, 0, Math.PI * 2); c.fill(); c.restore(); return; }
+  c.fillStyle = '#3b2b22'; for (const lx of [-9, -4, 5, 10]) c.fillRect(lx, 3, 3, 7);
+  c.fillStyle = '#fbf6ee'; c.beginPath(); c.ellipse(0, 0, 14, 8, 0, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#3b2b22'; c.beginPath(); c.ellipse(-4, -2, 4, 3, 0.3, 0, Math.PI * 2); c.fill(); c.beginPath(); c.ellipse(6, 2, 3, 2, 0, 0, Math.PI * 2); c.fill();
+  const hd = opts.headDown ? 6 : 0;
+  c.fillStyle = '#fbf6ee'; c.beginPath(); c.ellipse(14, -4 + hd, 6, 5, 0, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#f0b7a4'; c.beginPath(); c.ellipse(18, -2 + hd, 3, 2.4, 0, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#2a1c08'; c.beginPath(); c.arc(14, -6 + hd, 1, 0, Math.PI * 2); c.fill();
+  c.restore();
+}
+function drop(c, x, y, r, col = '#58a6e8') { c.fillStyle = col; c.beginPath(); c.moveTo(x, y - r * 1.4); c.bezierCurveTo(x + r * 1.1, y - r * 0.2, x + r, y + r, x, y + r); c.bezierCurveTo(x - r, y + r, x - r * 1.1, y - r * 0.2, x, y - r * 1.4); c.fill(); }
+function bubble(c, x, y, r, drawIcon) {
+  c.fillStyle = 'rgba(0,0,0,0.2)'; c.beginPath(); c.arc(x + 1.5, y + 2.5, r, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#fffaf0'; c.strokeStyle = '#2a1c08'; c.lineWidth = 2.5; c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill(); c.stroke();
+  c.beginPath(); c.moveTo(x - 4, y + r - 1); c.lineTo(x, y + r + 7); c.lineTo(x + 4, y + r - 1); c.fill(); c.stroke();
+  c.fillStyle = '#fffaf0'; c.fillRect(x - 3, y + r - 3, 6, 3);
+  drawIcon(x, y);
+}
+
+/* ---------- the live ranch ---------- */
+const W = 390, H = 844, SAFE = { top: 47, bottom: 34, left: 0, right: 0 };
+const cv = document.getElementById('ranch');
+let cx = fit(cv, W, H);
+const TYPES = {
+  meadow: { col: '#7cc46a', edge: '#4f9a45', n: 2 }, orchard: { col: '#5fae5a', edge: '#3a7a39', n: 3 },
+  pond: { col: '#62b3e0', edge: '#3b82b3', n: 2 }, wheat: { col: '#e7c35c', edge: '#b48d2c', n: 3 } };
+const slots = [];
+for (let r = 0; r < 9; r++) for (let q = 0; q < 6; q++) {
+  const x = 62 + q * 54 + (r % 2 ? 27 : 0), y = 230 + r * 42;
+  const dx = (x - 195) / 175, dy = (y - 400) / 210; if (dx * dx + dy * dy > 1) continue;
+  slots.push({ x, y, type: null, b: null });
+}
+const near = (x, y) => slots.reduce((b, s) => { const d = Math.hypot(s.x - x, (s.y - y) * 1.4); return d < b.d ? { s, d } : b; }, { s: null, d: 1e9 });
+const S = {
+  t: 9, dayLen: 36, paused: false, score: 4, mode: 'proposed', cover: false, idle: 0,
+  cafe: null, barn: null, trough: null, hand: [], held: null, pops: [], dust: [], bubbles: 0,
+  cows: [], op: { hand: 1, sun: 1, box: 1, bubble: 0, pops: 0 }, trace: [], step: 0, lastNote: 0, tuck: 0
+};
+function pickSlot(x, y) { const n = near(x, y).s; return n; }
+S.cafe = pickSlot(195, 300); S.cafe.b = 'cafe';
+S.barn = pickSlot(110, 440); S.barn.b = 'barn';
+S.trough = pickSlot(280, 470); S.trough.b = 'trough';
+for (const [x, y, t] of [[140, 340, 'meadow'], [250, 360, 'meadow'], [195, 400, 'wheat'], [300, 300, 'orchard'], [90, 360, 'orchard'], [170, 480, 'meadow'], [230, 520, 'pond']]) { const s = pickSlot(x, y); if (!s.b && !s.type) s.type = t; }
+S.cows = [{ x: 150, y: 430, tx: 150, ty: 430, thirst: 0.55, walk: 0, pop: 0 }, { x: 240, y: 420, tx: 240, ty: 420, thirst: 0.2, walk: 0, pop: 0 }];
+const typeKeys = Object.keys(TYPES);
+function deal(i) { S.hand[i] = { type: typeKeys[(Math.random() * typeKeys.length) | 0], born: S.t }; }
+for (let i = 0; i < 3; i++) deal(i);
+const HAND = { x: 100, y: 722, w: 190, h: 88 }, SUN = { x: 163, y: 55, w: 64, h: 64 }, BOX = { x: 24, y: 746, w: 64, h: 64 };
+function cardPos(i) { const tuck = S.tuck * 52; return { x: 128 + i * 67, y: 768 + tuck, rot: (i - 1) * 0.09 }; }
+function signPos() { return { x: S.cafe.x, y: S.cafe.y - 58 }; }
+
+function drawTile(c, s, type, alpha = 1) {
+  const T = TYPES[type]; c.save(); c.globalAlpha = alpha;
+  c.fillStyle = T.edge; hex(c, s.x, s.y + 5, 30); c.fill(); c.fillStyle = T.col; hex(c, s.x, s.y, 30); c.fill();
+  if (type === 'orchard') for (const [dx, dy] of [[-10, -3], [8, -6], [2, 6]]) { c.fillStyle = '#6b4a26'; c.fillRect(s.x + dx - 1.5, s.y + dy - 2, 3, 8); c.fillStyle = '#3f8a3c'; c.beginPath(); c.arc(s.x + dx, s.y + dy - 6, 7, 0, Math.PI * 2); c.fill(); c.fillStyle = '#e8574a'; c.beginPath(); c.arc(s.x + dx + 3, s.y + dy - 7, 1.6, 0, Math.PI * 2); c.fill(); }
+  if (type === 'meadow') for (const [dx, dy, col] of [[-12, 0, '#fff'], [6, -5, '#ffd84a'], [12, 4, '#fff'], [-2, 6, '#f49ac1']]) { c.fillStyle = col; c.beginPath(); c.arc(s.x + dx, s.y + dy, 2.2, 0, Math.PI * 2); c.fill(); }
+  if (type === 'pond') { c.fillStyle = '#8fd0f0'; c.beginPath(); c.ellipse(s.x, s.y, 16, 8, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#fff'; c.globalAlpha *= 0.6; c.fillRect(s.x - 6, s.y - 2, 8, 1.5); }
+  if (type === 'wheat') { c.strokeStyle = '#a77b1d'; c.lineWidth = 1.5; for (let i = -14; i <= 14; i += 5) { c.beginPath(); c.moveTo(s.x + i, s.y + 5); c.lineTo(s.x + i + 2, s.y - 7); c.stroke(); } }
+  c.restore();
+}
+function drawBuilding(c, s, kind) {
+  const x = s.x, y = s.y; c.fillStyle = '#4f9a45'; hex(c, x, y + 5, 30); c.fill(); c.fillStyle = '#86c972'; hex(c, x, y, 30); c.fill();
+  c.fillStyle = 'rgba(0,0,0,0.18)'; c.beginPath(); c.ellipse(x, y + 8, 24, 7, 0, 0, Math.PI * 2); c.fill();
+  if (kind === 'cafe') {
+    c.fillStyle = '#f3e3c3'; c.fillRect(x - 20, y - 22, 40, 28); c.fillStyle = '#c4553b'; c.beginPath(); c.moveTo(x - 25, y - 20); c.lineTo(x, y - 40); c.lineTo(x + 25, y - 20); c.fill();
+    c.fillStyle = '#6b4a26'; c.fillRect(x - 5, y - 8, 10, 14); c.fillStyle = '#ffd98a'; c.fillRect(x - 16, y - 14, 8, 7); c.fillRect(x + 8, y - 14, 8, 7);
+    if (S.score >= 10) { c.fillStyle = '#e8574a'; for (let i = 0; i < 5; i++) { c.fillStyle = i % 2 ? '#fff' : '#e8574a'; c.fillRect(x - 22 + i * 8.8, y - 21, 8.8, 5); } }
+    if (S.score >= 16) { c.fillStyle = '#ffd84a'; c.beginPath(); c.arc(x + 22, y - 10, 3, 0, Math.PI * 2); c.fill(); }
+    const p = signPos(), bump = S.signBump || 0; c.save(); c.translate(p.x, p.y); c.scale(1 + bump * 0.2, 1 + bump * 0.2);
+    c.fillStyle = '#6b4a26'; c.fillRect(-1.5, 10, 3, 12); rr(c, -22, -13, 44, 26, 6); c.fillStyle = '#8a5f33'; c.fill(); c.strokeStyle = '#2a1c08'; c.lineWidth = 2; c.stroke();
+    c.fillStyle = '#ffd84a'; star(c, -10, 0, 6); outlined(c, String(S.score), 7, 1, 17); c.restore();
+  } else if (kind === 'barn') {
+    c.fillStyle = '#b8463a'; c.fillRect(x - 18, y - 24, 36, 30); c.fillStyle = '#7d2c25'; c.beginPath(); c.moveTo(x - 22, y - 22); c.lineTo(x, y - 38); c.lineTo(x + 22, y - 22); c.fill();
+    c.strokeStyle = '#fff3e0'; c.lineWidth = 2; c.strokeRect(x - 7, y - 12, 14, 18); c.beginPath(); c.moveTo(x - 7, y - 12); c.lineTo(x + 7, y + 6); c.moveTo(x + 7, y - 12); c.lineTo(x - 7, y + 6); c.stroke();
+  } else {
+    c.fillStyle = '#7a5530'; rr(c, x - 20, y - 8, 40, 14, 4); c.fill(); c.fillStyle = '#5fb3e6'; rr(c, x - 17, y - 6, 34, 6, 2); c.fill();
+  }
+}
+function star(c, x, y, r) { c.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr2 = i % 2 ? r * 0.45 : r; c.lineTo(x + rr2 * Math.cos(a), y + rr2 * Math.sin(a)); } c.closePath(); c.fill(); }
+
+function drawWorld(c) {
+  const ph = (S.t % S.dayLen) / S.dayLen, light = Math.max(0, Math.sin(ph * Math.PI));
+  c.fillStyle = '#3d3226'; c.fillRect(0, 0, W, H);
+  c.fillStyle = '#4a3c2d'; for (let i = 0; i < 14; i++) c.fillRect(0, i * 64 + 30, W, 2);
+  c.fillStyle = '#2f5a2f'; c.beginPath(); c.ellipse(195, 410, 186, 236, 0, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#5fa452'; c.beginPath(); c.ellipse(195, 402, 182, 230, 0, 0, Math.PI * 2); c.fill();
+  const holding = !!S.held;
+  for (const s of slots) {
+    if (s.b) continue;
+    if (s.type) drawTile(c, s, s.type);
+    else { c.strokeStyle = holding ? `rgba(255,248,214,${0.45 + 0.25 * Math.sin(S.t * 6)})` : 'rgba(255,255,255,0.12)'; c.lineWidth = holding ? 2.5 : 1.2; hex(c, s.x, s.y, 27); c.stroke(); }
+  }
+  const order = slots.filter(s => s.b).sort((a, b) => a.y - b.y);
+  for (const s of order) drawBuilding(c, s, s.b);
+  if (S.held && S.held.snap) { c.save(); c.globalAlpha = 0.5; drawTile(c, S.held.snap, S.held.type); c.restore(); }
+  for (const cow of S.cows) cowDraw(c, cow.x, cow.y, 1.15, { headDown: cow.drinking > 0 });
+  for (const d of S.dust) { c.fillStyle = `rgba(240,225,190,${d.a})`; c.beginPath(); c.arc(d.x, d.y, d.r, 0, Math.PI * 2); c.fill(); }
+  const dark = (1 - light) * 0.55; if (dark > 0.01) { c.fillStyle = `rgba(20,24,64,${dark})`; c.fillRect(0, 0, W, H); }
+  if (dark > 0.2) { const g = c.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 520); g.addColorStop(0, 'rgba(20,24,64,0)'); g.addColorStop(1, `rgba(12,14,40,${dark})`); c.fillStyle = g; c.fillRect(0, 0, W, H); for (const s of order) if (s.b === 'cafe') { c.fillStyle = `rgba(255,217,138,${dark})`; c.beginPath(); c.arc(s.x, s.y - 10, 30, 0, Math.PI * 2); c.fill(); } }
+  return { dark };
+}
+function drawSpatial(c) {
+  for (const cow of S.cows) if (cow.bub > 0.01) { c.save(); c.globalAlpha = cow.bub; const bob = Math.sin(S.t * 3 + cow.x) * 2; const sc = 0.6 + 0.4 * ease.outBack(Math.min(1, cow.bub)); c.translate(cow.x + 4, cow.y - 40 + bob); c.scale(sc, sc); bubble(c, 0, 0, 17, (x, y) => drop(c, x, y + 1, 6)); c.restore(); }
+  for (const p of S.pops) { if (p.k < 0) continue; const k = p.k; let x, y, a = 1; if (k < 0.35) { const u = k / 0.35; x = p.x; y = p.y - 30 * ease.outCubic(u); } else { const u = (k - 0.35) / 0.65, e = ease.outCubic(u), sp = signPos(); const mx = (p.x + sp.x) / 2 + 60, my = Math.min(p.y, sp.y) - 60; x = (1 - e) * (1 - e) * p.x + 2 * (1 - e) * e * mx + e * e * sp.x; y = (1 - e) * (1 - e) * (p.y - 30) + 2 * (1 - e) * e * my + e * e * sp.y; a = 1 - u * 0.3; } c.globalAlpha = a; outlined(c, '+' + p.n, x, y, 22, '#fff2b8'); c.globalAlpha = 1; }
+}
+function drawSun(c, dark) {
+  const { x, y, w } = SUN, cxs = x + w / 2, cys = y + w / 2, ph = (S.t % S.dayLen) / S.dayLen, day = Math.floor(S.t / S.dayLen) % 7;
+  c.save(); c.globalAlpha = S.op.sun;
+  c.fillStyle = 'rgba(0,0,0,0.3)'; c.beginPath(); c.arc(cxs + 2, cys + 3, 32, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#8a5f33'; c.beginPath(); c.arc(cxs, cys, 32, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#2a1c08'; c.lineWidth = 2.5; c.stroke();
+  c.fillStyle = '#b07b45'; c.beginPath(); c.arc(cxs, cys, 26, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#26305e'; c.beginPath(); c.arc(cxs, cys + 4, 20, Math.PI, 0); c.fill();
+  c.fillStyle = '#8ec6ee'; c.globalAlpha = S.op.sun * (1 - dark * 1.4); c.beginPath(); c.arc(cxs, cys + 4, 20, Math.PI, 0); c.fill(); c.globalAlpha = S.op.sun;
+  const a = Math.PI + ph * Math.PI, sx = cxs + 17 * Math.cos(a), sy = cys + 4 + 17 * Math.sin(a);
+  if (ph < 1) { c.fillStyle = ph > 0.08 && ph < 0.92 ? '#ffd84a' : '#f6efe0'; c.beginPath(); c.arc(sx, sy, 6, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#2a1c08'; c.lineWidth = 1.5; c.stroke(); }
+  if (S.paused) { c.strokeStyle = '#2a1c08'; c.lineWidth = 1.5; c.beginPath(); c.arc(sx - 2, sy, 1.5, 0, Math.PI); c.stroke(); c.beginPath(); c.arc(sx + 2, sy, 1.5, 0, Math.PI); c.stroke(); c.fillStyle = '#5b6fd1'; c.beginPath(); c.moveTo(sx - 6, sy - 3); c.lineTo(sx + 1, sy - 13); c.lineTo(sx + 6, sy - 3); c.fill(); }
+  for (let i = 0; i < 7; i++) { const dx = cxs - 15 + i * 5; c.fillStyle = i === day ? '#ffd84a' : i < day ? '#f3e3c3' : 'rgba(243,227,195,0.35)'; c.beginPath(); c.arc(dx, cys + 14, i === day ? 2.4 : 1.7, 0, Math.PI * 2); c.fill(); }
+  c.restore();
+}
+function drawBox(c) {
+  const { x, y, w, h } = BOX; c.save(); c.globalAlpha = S.op.box;
+  c.fillStyle = 'rgba(0,0,0,0.3)'; rr(c, x + 3, y + 6, w - 4, h - 10, 8); c.fill();
+  c.fillStyle = '#e06a4f'; c.fillRect(x + 26, y + 8, 14, 14); c.fillStyle = '#5fa8e0'; c.beginPath(); c.arc(x + 20, y + 16, 7, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#c99256'; rr(c, x + 4, y + 18, w - 8, h - 22, 7); c.fill(); c.strokeStyle = '#2a1c08'; c.lineWidth = 2.5; c.stroke();
+  c.fillStyle = '#a6763f'; c.fillRect(x + 4, y + 30, w - 8, 4); c.fillStyle = '#ffd84a'; star(c, x + w / 2, y + 46, 7);
+  c.restore();
+}
+function drawCard(c, card, x, y, rot, s = 1, alpha = 1) {
+  const T = TYPES[card.type], cw = 58, ch = 80;
+  c.save(); c.globalAlpha = alpha; c.translate(x, y); c.rotate(rot); c.scale(s, s);
+  c.fillStyle = 'rgba(0,0,0,0.35)'; rr(c, -cw / 2 + 2, -ch / 2 + 5, cw, ch, 7); c.fill();
+  c.fillStyle = '#f6ecd6'; rr(c, -cw / 2, -ch / 2, cw, ch, 7); c.fill(); c.strokeStyle = '#6b4a26'; c.lineWidth = 2; c.stroke();
+  c.save(); rr(c, -cw / 2 + 5, -ch / 2 + 5, cw - 10, ch - 26, 6); c.clip(); c.fillStyle = '#9fd0ee'; c.fillRect(-cw / 2, -ch / 2, cw, ch);
+  drawTile(c, { x: 0, y: -4 }, card.type); c.restore();
+  c.fillStyle = T.edge; rr(c, -cw / 2 + 5, ch / 2 - 18, cw - 10, 12, 4); c.fill();
+  c.fillStyle = '#2a1c08'; c.beginPath(); c.arc(cw / 2 - 9, -ch / 2 + 9, 9, 0, Math.PI * 2); c.fill();
+  outlined(c, String(T.n), cw / 2 - 9, -ch / 2 + 10, 14, '#fff2b8', '#2a1c08');
+  c.restore();
+}
+function drawHand(c) {
+  for (let i = 0; i < 3; i++) { const card = S.hand[i]; if (!card || (S.held && S.held.i === i)) continue; const p = cardPos(i), born = Math.min(1, (S.t - card.born) / 0.35);
+    const yy = lerp(p.y + 140, p.y, ease.outBack(born)); drawCard(c, card, p.x, yy, p.rot, 1, S.op.hand); }
+  if (S.held) { const h = S.held; drawCard(c, h, h.x, h.y - (h.touch ? 60 : 0), h.vx * 0.004, 1.12, 1); }
+}
+function drawToday(c) {
+  c.fillStyle = '#ffffff'; c.fillRect(0, 0, W, 99); c.fillStyle = '#e5e7eb'; c.fillRect(0, 99, W, 1);
+  c.font = '15px -apple-system, "Segoe UI", system-ui, sans-serif'; c.textBaseline = 'middle'; c.textAlign = 'left'; c.fillStyle = '#111827';
+  const yb = 73; c.fillText('←', 12, yb); c.font = '600 15px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillText('Ranch ⌄', 36, yb); c.font = '13px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillStyle = '#6b7280'; c.fillText('Homestead', 104, yb);
+  let bx = 178; for (const lab of ['Pause', 'Regenerate', 'Fit', '≡']) { const w = c.measureText(lab).width + 16; c.strokeStyle = '#d1d5db'; c.lineWidth = 1; rr(c, bx, yb - 15, w, 30, 8); c.stroke(); c.fillStyle = '#111827'; c.fillText(lab, bx + 8, yb); bx += w + 5; }
+  c.fillStyle = 'rgba(0,0,0,0.12)'; c.fillRect(0, 496, W, 4); c.fillStyle = '#ffffff'; rr(c, 0, 500, W, 344, 14); c.fill();
+  c.fillStyle = '#111827'; c.font = '600 17px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillText('Simulation', 16, 526); c.fillText('×', 360, 526);
+  c.font = '600 13px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillText('Preparing ranch…', 16, 556); c.font = '12px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillStyle = '#6b7280'; c.fillText('Saved on this device', 16, 576);
+  c.fillStyle = '#111827'; c.font = '600 13px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillText('Now happening', 16, 604);
+  c.font = '12px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillStyle = '#374151'; ['Resident carries hay to the barn', 'Goat wanders to the playground', 'Chickens fed · stores replenish'].forEach((t, i) => c.fillText('• ' + t, 16, 626 + i * 20));
+  c.fillStyle = '#111827'; c.font = '600 13px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillText('Livestock', 16, 700);
+  ['Horses', 'Cows', 'Goats', 'Chickens'].forEach((t, i) => { const y = 724 + i * 22; c.font = '12px -apple-system, "Segoe UI", system-ui, sans-serif'; c.fillStyle = '#374151'; c.fillText(t, 16, y); c.fillStyle = '#e5e7eb'; c.fillRect(90, y - 2, 240, 4); c.fillStyle = '#2563eb'; c.fillRect(90, y - 2, [100, 80, 90, 100][i], 4); c.beginPath(); c.arc(90 + [100, 80, 90, 100][i], y, 7, 0, Math.PI * 2); c.fill(); c.fillStyle = '#111827'; c.fillText(String([2, 2, 3, 5][i]), 344, y); });
+}
+function render() {
+  const c = cx; c.clearRect(0, 0, W, H);
+  const { dark } = drawWorld(c);
+  if (S.cover) { c.fillStyle = '#1b2140'; c.fillRect(0, 0, W, H); c.strokeStyle = 'rgba(255,255,255,0.05)'; c.lineWidth = 6; for (let i = -H; i < W; i += 22) { c.beginPath(); c.moveTo(i, 0); c.lineTo(i + H, H); c.stroke(); } }
+  if (S.mode === 'today') { drawToday(c); }
+  else { if (!S.cover) drawSpatial(c); drawSun(c, dark); drawBox(c); drawHand(c); }
+}
+
+/* input */
+function toLocal(e) { const b = cv.getBoundingClientRect(); return { x: (e.clientX - b.left) / b.width * W, y: (e.clientY - b.top) / b.height * H }; }
+const inR = (p, r, pad = 0) => p.x >= r.x - pad && p.x <= r.x + r.w + pad && p.y >= r.y - pad && p.y <= r.y + r.h + pad;
+cv.addEventListener('pointerdown', e => {
+  audio(); const p = toLocal(e); S.idle = 0; if (S.mode === 'today') return;
+  for (const cow of S.cows) if (cow.bub > 0.5 && Math.hypot(p.x - cow.x - 4, p.y - cow.y + 40) < 32) { cow.tx = S.trough.x - 26; cow.ty = S.trough.y - 4; cow.going = true; note(4); return; }
+  if (inR(p, SUN, 8)) { S.paused = !S.paused; tone(S.paused ? 330 : 494, 0.15, 'triangle', 0.1); return; }
+  if (inR(p, BOX, 4)) { S.boxWiggle = 1; note(2); return; }
+  for (let i = 0; i < 3; i++) { const cp = cardPos(i); if (S.hand[i] && Math.abs(p.x - cp.x) < 31 && Math.abs(p.y - cp.y) < 46) { S.held = { i, type: S.hand[i].type, x: p.x, y: p.y, vx: 0, touch: e.pointerType !== 'mouse' }; cv.setPointerCapture(e.pointerId); tone(660, 0.08, 'triangle', 0.08); return; } }
+  if (S.cows.some(cow => Math.hypot(p.x - cow.x, p.y - cow.y) < 24)) { tone(150, 0.3, 'sawtooth', 0.04); return; }
+  tone(880, 0.06, 'sine', 0.04);
+});
+cv.addEventListener('pointermove', e => { if (!S.held) return; const p = toLocal(e); const h = S.held; h.vx = (p.x - h.x) * 20; h.x = p.x; h.y = p.y; S.idle = 0;
+  const n = near(h.x, h.y - (h.touch ? 60 : 0)); h.snap = n.d < 40 && !n.s.type && !n.s.b ? n.s : null; });
+function release() {
+  const h = S.held; if (!h) return; S.held = null;
+  if (h.snap) { const s = h.snap; s.type = h.type; thunk(); S.signTarget = 0;
+    for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; S.dust.push({ x: s.x, y: s.y + 4, vx: Math.cos(a) * 40, vy: Math.sin(a) * 18, r: 3 + Math.random() * 2, a: 0.8 }); }
+    S.shake = 3; const n = TYPES[h.type].n; for (let k = 0; k < n; k++) S.pops.push({ x: s.x + (k - (n - 1) / 2) * 14, y: s.y - 10, n: 1, k: -k * 0.18, step: k });
+    deal(h.i);
+  } else { boop(); }
+}
+cv.addEventListener('pointerup', release); cv.addEventListener('pointercancel', release);
+
+/* loop */
+const trace = document.getElementById('trace'); let tx = fit(trace, 600, 150);
+let last = performance.now();
+function step(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  if (!S.paused) S.t += dt; S.idle += dt;
+  for (const cow of S.cows) {
+    if (!S.paused) cow.thirst = Math.min(1, cow.thirst + dt * 0.022);
+    if (cow.going) { const dx = cow.tx - cow.x, dy = cow.ty - cow.y, d = Math.hypot(dx, dy); if (d < 2) { cow.going = false; cow.drinking = 2; } else { cow.x += dx / d * 40 * dt; cow.y += dy / d * 40 * dt; } }
+    else if (cow.drinking > 0) { cow.drinking -= dt; cow.thirst = Math.max(0, cow.thirst - dt * 0.5); if (cow.drinking <= 0) { note(5); cow.tx = 120 + Math.random() * 150; cow.ty = 380 + Math.random() * 120; cow.wander = true; } }
+    else if (!S.paused) { if (!cow.wander || Math.hypot(cow.tx - cow.x, cow.ty - cow.y) < 3) { cow.tx = 120 + Math.random() * 160; cow.ty = 380 + Math.random() * 120; cow.wander = true; } const dx = cow.tx - cow.x, dy = cow.ty - cow.y, d = Math.hypot(dx, dy) || 1; cow.x += dx / d * 9 * dt; cow.y += dy / d * 9 * dt; }
+    const want = cow.thirst > 0.7 && !cow.drinking ? 1 : 0; if (want && cow.bub < 0.02) { tone(523, 0.15, 'triangle', 0.06); }
+    cow.bub = (cow.bub || 0) + (want - (cow.bub || 0)) * Math.min(1, dt * (want ? 6 : 10));
+  }
+  for (const p of S.pops) { p.k += dt / 0.9; if (p.k >= 1 && !p.done) { p.done = true; S.score += p.n; S.signBump = 1; note(S.step++ % 8); } }
+  if (S.pops.length && S.pops.every(p => p.done)) { S.pops = []; S.step = 0; }
+  S.signBump = Math.max(0, (S.signBump || 0) - dt * 4);
+  for (const d of S.dust) { d.x += d.vx * dt; d.y += d.vy * dt; d.vx *= 0.9; d.vy *= 0.9; d.a -= dt * 1.4; } S.dust = S.dust.filter(d => d.a > 0);
+  // fade rules
+  const holding = !!S.held, k = (v, to, rate) => v + (to - v) * Math.min(1, dt * rate);
+  S.op.sun = k(S.op.sun, holding ? 0.25 : 1, holding ? 1000 / 150 * 3 : 1000 / 250 * 3);
+  S.op.box = k(S.op.box, holding ? 0.25 : 1, holding ? 20 : 12);
+  S.op.hand = k(S.op.hand, 1, 12);
+  S.tuck = k(S.tuck, !holding && S.idle > 6 ? 1 : 0, S.idle > 6 ? 5 : 15);
+  S.op.bubble = Math.max(...S.cows.map(c => c.bub || 0));
+  S.op.pops = S.pops.some(p => p.k > 0) ? 1 : 0;
+  S.trace.push([S.t + S.idle * 0, now / 1000, S.held ? 1 : 1 - S.tuck * 0.6, S.op.sun, S.op.bubble, S.op.pops]); while (S.trace.length && now / 1000 - S.trace[0][1] > 12) S.trace.shift();
+  render(); drawTrace();
+  requestAnimationFrame(step);
+}
+function drawTrace() {
+  const c = tx; c.clearRect(0, 0, 600, 150); c.strokeStyle = 'rgba(243,234,216,0.08)'; c.lineWidth = 1;
+  for (const y of [20, 75, 130]) { c.beginPath(); c.moveTo(40, y); c.lineTo(592, y); c.stroke(); }
+  c.fillStyle = css('--muted'); c.font = '500 11px "IBM Plex Mono", monospace'; c.textAlign = 'right'; c.textBaseline = 'middle'; c.fillText('1', 32, 20); c.fillText('0', 32, 130); c.textAlign = 'left'; c.fillText('opacity / visible share, last 12 s', 44, 143);
+  if (S.trace.length < 2) return; const t1 = S.trace[S.trace.length - 1][1];
+  [[2, K.overlay], [3, css('--sun')], [4, K.spatial], [5, K.meta]].forEach(([idx, col]) => { c.strokeStyle = col; c.lineWidth = 2.2; c.beginPath(); S.trace.forEach((r, i) => { const x = 592 - (t1 - r[1]) / 12 * 552, y = 130 - r[idx] * 110 + (idx - 3) * 1.5; i ? c.lineTo(x, y) : c.moveTo(x, y); }); c.stroke(); });
+}
+requestAnimationFrame(step);
+
+/* modes and readouts */
+function union(boxes) { const xs = [...new Set(boxes.flatMap(b => [b.x, b.x + b.w]))].sort((a, b) => a - b), ys = [...new Set(boxes.flatMap(b => [b.y, b.y + b.h]))].sort((a, b) => a - b); let t = 0; for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < ys.length - 1; j++) { const cx2 = (xs[i] + xs[i + 1]) / 2, cy2 = (ys[j] + ys[j + 1]) / 2; if (boxes.some(b => cx2 >= b.x && cx2 <= b.x + b.w && cy2 >= b.y && cy2 <= b.y + b.h)) t += (xs[i + 1] - xs[i]) * (ys[j + 1] - ys[j]); } return t; }
+const SHARE = { proposed: union([SUN, HAND, BOX]) / (W * H), today: union([{ x: 0, y: 47, w: 390, h: 52 }, { x: 0, y: 500, w: 390, h: 310 }]) / (W * H) };
+const WORDS = { proposed: 0, today: 173 };
+function setMode(m) { if (m === 'cover') { S.cover = !S.cover; } else S.mode = m;
+  document.getElementById('m-proposed').setAttribute('aria-pressed', S.mode === 'proposed'); document.getElementById('m-today').setAttribute('aria-pressed', S.mode === 'today'); document.getElementById('m-cover').setAttribute('aria-pressed', S.cover);
+  const ch = document.getElementById('chrome'), wd = document.getElementById('words'); ch.textContent = (SHARE[S.mode] * 100).toFixed(1) + '%'; wd.textContent = WORDS[S.mode]; ch.classList.toggle('bad', SHARE[S.mode] > 0.08); wd.classList.toggle('bad', WORDS[S.mode] > 0); }
+document.getElementById('m-proposed').onclick = () => setMode('proposed'); document.getElementById('m-today').onclick = () => setMode('today'); document.getElementById('m-cover').onclick = () => setMode('cover');
+setMode('proposed');
+
+/* ---------- five ways ---------- */
+const FIVE = {
+  overlay: { label: 'Overlay', col: K.overlay, works: 'Precise and always in the same place; the eye learns where to look.', fails: 'It is about the cow but lives in a corner, so the eye travels. Ten animals make a dashboard.', who: "Don't Starve needs, SteamWorld Dig bars" },
+  spatial: { label: 'Spatial', col: K.spatial, works: 'The bubble sits on the cow, so the child sees who wants what. Tap it and the cow goes to drink.', fails: 'Twenty bubbles at once is noise; it has to scale with zoom and face the camera.', who: 'This War of Mine icons, Dorfromantik quests' },
+  diegetic: { label: 'Diegetic', col: K.diegetic, works: 'The trough itself is low and the cow looks at it. Nothing breaks the toy.', fails: 'Slow to read and easy to miss when zoomed out.', who: 'Dead Space spine, Sons of the Forest mat' },
+  meta: { label: 'Meta', col: K.meta, works: 'You feel the dry spell with your whole view, no reading at all.', fails: 'Loses precision (which cow?) and can frighten small children if pushed.', who: "Don't Starve sanity, SteamWorld Dig's darkness" },
+  none: { label: 'None', col: K.none, works: 'The cow lies down and the grass browns. The world tells the story.', fails: 'Only works when the stakes are low and the state is visible.', who: 'Tiny Glade, Journey' }
+};
+let fiveMode = 'spatial'; const fcv = document.getElementById('five'); let fc = fit(fcv, 360, 240);
+const fm = document.getElementById('five-modes');
+for (const k of Object.keys(FIVE)) { const b = document.createElement('button'); b.className = 'chip ghost'; b.textContent = FIVE[k].label; b.id = 'five-' + k; b.onclick = () => { fiveMode = k; audio(); tone(523, 0.1, 'triangle', 0.06); showFive(); }; fm.appendChild(b); }
+function showFive() { for (const k of Object.keys(FIVE)) document.getElementById('five-' + k).setAttribute('aria-pressed', k === fiveMode); const f = FIVE[fiveMode];
+  document.getElementById('five-why').innerHTML = `<div class="kind" style="color:${f.col}">${f.label}</div><dl><dt>Works</dt><dd>${f.works}</dd><dt>Fails</dt><dd>${f.fails}</dd><dt>Seen in</dt><dd>${f.who}</dd></dl>`; }
+showFive();
+function drawFive(t) {
+  const c = fc, m = fiveMode; c.clearRect(0, 0, 360, 240);
+  const dry = m === 'none'; c.fillStyle = dry ? '#a9a956' : '#6db35c'; c.fillRect(0, 0, 360, 240);
+  c.fillStyle = dry ? '#c2a35a' : '#7cc46a'; for (let i = 0; i < 40; i++) { const x = (i * 97) % 360, y = (i * 53) % 240; c.fillRect(x, y, 3, 6); }
+  if (dry) { c.fillStyle = 'rgba(160,120,60,0.5)'; c.beginPath(); c.ellipse(160, 150, 90, 40, 0, 0, Math.PI * 2); c.fill(); }
+  c.fillStyle = '#7a5530'; rr(c, 220, 140, 80, 24, 6); c.fill();
+  const level = m === 'diegetic' ? 0.18 : 0.7; c.fillStyle = '#5fb3e6'; rr(c, 226, 143 + (1 - level) * 14, 68, 4 + level * 12, 3); c.fill();
+  if (m === 'diegetic') { c.strokeStyle = '#4a321b'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(232, 154); c.lineTo(240, 150); c.lineTo(246, 156); c.moveTo(270, 152); c.lineTo(278, 157); c.stroke(); }
+  const cowx = m === 'diegetic' ? 190 : 150; cowDraw(c, cowx, 150, 2.1, { lying: m === 'none', headDown: m === 'diegetic' });
+  if (m === 'spatial') { const bob = Math.sin(t * 3) * 3; const s = 1 + Math.sin(t * 2) * 0.03; c.save(); c.translate(cowx + 10, 82 + bob); c.scale(s, s); bubble(c, 0, 0, 22, (x, y) => drop(c, x, y + 1, 8)); c.restore(); }
+  if (m === 'overlay') { c.fillStyle = 'rgba(18,22,42,0.85)'; rr(c, 12, 12, 130, 34, 10); c.fill(); drop(c, 30, 30, 7); c.fillStyle = '#3a4266'; rr(c, 46, 23, 84, 12, 6); c.fill(); c.fillStyle = '#58a6e8'; rr(c, 46, 23, 84 * 0.22, 12, 6); c.fill(); }
+  if (m === 'meta') { const g = c.createRadialGradient(180, 120, 70, 180, 120, 230); g.addColorStop(0, 'rgba(255,190,90,0)'); g.addColorStop(1, `rgba(230,140,50,${0.5 + 0.06 * Math.sin(t * 2)})`); c.fillStyle = g; c.fillRect(0, 0, 360, 240);
+    c.strokeStyle = 'rgba(255,240,200,0.25)'; c.lineWidth = 2; for (let i = 0; i < 5; i++) { const x = 40 + i * 70, y = 60 + Math.sin(t * 2 + i) * 6; c.beginPath(); c.moveTo(x, y); c.quadraticCurveTo(x + 8, y - 8, x + 16, y); c.quadraticCurveTo(x + 24, y + 8, x + 32, y); c.stroke(); } }
+}
+
+/* ---------- games ---------- */
+const GAMES = [
+  { id: 'twom', name: 'This War of Mine', who: '11 bit studios, 2014', core: true, take: 'Interaction icons on objects; noise as rings at their source; state as plain words for people, which for kids becomes bodies and bubbles.', z: [
+    ['r', 0, 0, 160, 100, null, ''], ['r', 6, 6, 40, 12, 'overlay', 'Survivor portraits with state in graded words: hungry, very tired, wounded.'], ['r', 124, 6, 30, 12, 'overlay', 'Clock and day count.'],
+    ['c', 52, 62, 6, 'spatial', 'Icons over beds, stoves and rubble you can use; tap the icon on the object.'], ['c', 98, 44, 6, 'spatial', 'Another usable object, marked where it is.'], ['ring', 118, 72, 16, 'spatial', 'At night, noise is an expanding ring around you; sounds you hear appear as rings where they came from.'], ['r', 112, 26, 34, 12, 'diegetic', 'The shelter radio: prices, weather and fighting, heard by the characters too.']] },
+  { id: 'ds', name: "Don't Starve", who: 'Klei, 2013', core: true, take: 'A small fixed set: three needs plus a segmented day dial. Low sanity bends the whole screen, so the meter becomes the world.', z: [
+    ['r', 0, 0, 160, 100, 'meta', 'Low sanity: the world desaturates, wobbles and grows shadow creatures and whispers.'], ['c', 112, 14, 7, 'overlay', 'Hunger badge, with an arrow for which way it moves.'], ['c', 128, 14, 7, 'overlay', 'Sanity badge.'], ['c', 144, 14, 7, 'overlay', 'Health badge.'], ['c', 128, 34, 9, 'overlay', 'Round day clock split into day, dusk and night; moon phase at night.'],
+    ['r', 40, 84, 80, 10, 'overlay', 'Inventory slots plus hand, body and head equipment.'], ['r', 4, 26, 10, 50, 'overlay', 'Crafting tabs down the left edge.'], ['r', 70, 40, 24, 10, 'spatial', 'One-line quips over the character when examining things.']] },
+  { id: 'sotf', name: 'Sons of the Forest', who: 'Endnight, 2023', core: true, take: 'One small corner cluster for the body; the inventory laid out as objects on a mat; blueprints as ghosts that fill in as you build.', z: [
+    ['r', 0, 0, 160, 100, null, ''], ['c', 142, 82, 11, 'overlay', 'One round cluster: health on one side, stamina (with vitality outline) on the other, three small rings for thirst, hunger and rest.'],
+    ['c', 70, 48, 5, 'spatial', 'Interaction icons on objects: filled for press, hollow for hold.'], ['r', 20, 62, 50, 22, 'diegetic', 'Open the backpack and every item lies on a mat on the ground; crafting is placing items on the mat.'], ['r', 96, 30, 34, 26, 'spatial', 'A blueprint ghost in the world that fills in as you add logs.'], ['r', 8, 8, 22, 16, 'diegetic', 'The map is a GPS tracker held in your hand.']] },
+  { id: 'swd', name: 'SteamWorld Dig', who: 'Image & Form, 2013 and 2017', core: true, take: 'A few segmented bars, and the lamp doubles as the world: as the light runs down, the lit circle shrinks. Loot flies from the rock to you.', z: [
+    ['r', 0, 0, 160, 100, null, ''], ['r', 6, 6, 50, 6, 'overlay', 'Health bar in segments.'], ['r', 6, 14, 50, 6, 'overlay', 'Lamp light, counted in time.'], ['r', 6, 22, 50, 6, 'overlay', 'Water for steam tools.'], ['r', 128, 6, 26, 10, 'overlay', 'Money.'],
+    ['c', 80, 58, 26, 'meta', 'The lit circle around the robot shrinks as the lamp runs low (confidence low; verify on capture).'], ['c', 104, 70, 4, 'spatial', 'Ore pops with a sparkle and flies to the robot.']] },
+  { id: 'tg', name: 'Tiny Glade', who: 'Pounce Light, 2024', take: 'The tool you hold is the interface. Time is a sun. Nothing counts, everything grows.', z: [
+    ['r', 0, 0, 160, 100, null, ''], ['r', 56, 86, 48, 8, 'overlay', 'A few small tool icons in one place.'], ['c', 140, 16, 7, 'diegetic', 'A sun you can move to change the time of day.']] },
+  { id: 'dorf', name: 'Dorfromantik', who: 'Toukana, 2022', take: 'Remaining tiles as a stack with a painted count; goals as numbers over the place that wants them; points fly from the tile.', z: [
+    ['r', 0, 0, 160, 100, null, ''], ['r', 132, 70, 20, 22, 'overlay', 'The stack of tiles left, with its count painted on it.'], ['r', 64, 4, 32, 10, 'overlay', 'Score, small.'], ['c', 52, 46, 6, 'spatial', 'A quest number over the forest that wants more trees.'], ['c', 100, 58, 6, 'spatial', 'Points float up from the tile that earned them.']] },
+  { id: 'bt', name: 'LEGO Bricktales', who: 'ClockStone, 2022', take: 'Building is a place you go to; the diorama stays clean. Speech bubbles over characters.', z: [
+    ['r', 0, 0, 160, 100, null, ''], ['r', 70, 30, 22, 12, 'spatial', 'Speech bubbles over characters.'], ['r', 110, 10, 44, 80, 'overlay', 'In build mode only: a brick palette and a test step.']] },
+  { id: 'nk', name: '9 Kings', who: 'Sad Socket, 2025', take: 'Cards at the bottom, one counter for time, every consequence on the board.', z: [
+    ['r', 0, 0, 160, 100, null, ''], ['r', 44, 80, 72, 16, 'overlay', 'A small hand of cards.'], ['r', 6, 6, 28, 10, 'overlay', 'The year counter.'], ['r', 46, 20, 68, 52, 'spatial', 'The kingdom grid: placed cards become buildings, and the year resolves on it.']] },
+  { id: 'dsp', name: 'Dead Space', who: 'EA Redwood Shores, 2008', take: "State on the character's body; a path line on the floor; menus in the world that don't pause it.", z: [
+    ['r', 0, 0, 160, 100, null, ''], ['r', 72, 30, 6, 34, 'diegetic', "Health as a light bar on the suit's spine."], ['c', 84, 36, 5, 'diegetic', 'Stasis as a ring on the back.'], ['r', 100, 40, 18, 8, 'diegetic', 'Ammo as a hologram on the weapon.'], ['r', 20, 20, 40, 30, 'diegetic', 'Inventory and map as holograms in front of the character, without pausing.'], ['r', 70, 86, 70, 4, 'spatial', 'A locator line on the floor shows the way.']] },
+  { id: 'fw', name: 'Firewatch', who: 'Campo Santo, 2016', take: 'No HUD. A paper map and compass in your hands; dialogue through a raised radio.', z: [
+    ['r', 0, 0, 160, 100, null, ''], ['r', 30, 50, 60, 42, 'diegetic', 'A paper map and compass held in your hands, collecting notes over the story.'], ['r', 112, 54, 20, 36, 'diegetic', 'The walkie-talkie: raise it to talk; choices appear as lines.']] }
+];
+const gEl = document.getElementById('games');
+for (const g of GAMES) {
+  const card = document.createElement('article'); card.className = 'game' + (g.core ? ' core' : '');
+  const ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg'); svg.setAttribute('viewBox', '0 0 160 100'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', g.name + ' HUD schematic');
+  const note = document.createElement('p'); note.className = 'note'; note.textContent = 'Tap a zone.';
+  for (const z of g.z) {
+    let el; const kind = z[0] === 'c' || z[0] === 'ring' ? z[4] : z[5], txt = z[0] === 'c' || z[0] === 'ring' ? z[5] : z[6];
+    if (z[0] === 'r') { el = document.createElementNS(ns, 'rect'); el.setAttribute('x', z[1]); el.setAttribute('y', z[2]); el.setAttribute('width', z[3]); el.setAttribute('height', z[4]); el.setAttribute('rx', kind ? 2.5 : 0); }
+    else { el = document.createElementNS(ns, 'circle'); el.setAttribute('cx', z[1]); el.setAttribute('cy', z[2]); el.setAttribute('r', z[3]); }
+    if (!kind) { el.setAttribute('fill', '#2f365c'); svg.appendChild(el); continue; }
+    if (z[0] === 'ring') { el.setAttribute('fill', 'none'); el.setAttribute('stroke', K[kind]); el.setAttribute('stroke-width', '2.5'); el.setAttribute('stroke-dasharray', '4 3'); }
+    else if (z[3] >= 150) { el.setAttribute('fill', K[kind]); el.setAttribute('fill-opacity', '0.18'); }
+    else { el.setAttribute('fill', K[kind]); el.setAttribute('fill-opacity', '0.85'); }
+    el.setAttribute('class', 'z'); el.setAttribute('tabindex', '0');
+    const show = () => { note.innerHTML = `<b style="color:${K[kind]}">${kind}</b> · ${txt}`; svg.querySelectorAll('.z').forEach(s => s.setAttribute('stroke-width', s.getAttribute('fill') === 'none' ? '2.5' : '0')); if (el.getAttribute('fill') !== 'none') { el.setAttribute('stroke', '#fff'); el.setAttribute('stroke-width', '1.5'); } };
+    el.addEventListener('click', show); el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); } });
+    svg.appendChild(el);
+  }
+  card.innerHTML = `<div><h3>${g.name}</h3><div class="who">${g.who}</div></div>`; card.appendChild(svg); card.appendChild(note);
+  const tk = document.createElement('p'); tk.className = 'take'; tk.innerHTML = `<b>Take:</b> ${g.take}`; card.appendChild(tk); gEl.appendChild(card);
+}
+
+/* ---------- juice ---------- */
+const jf = document.getElementById('j-flat'), jj = document.getElementById('j-juice'); let jfc = fit(jf, 320, 180), jjc = fit(jj, 320, 180);
+const J = { flat: 5, val: 5, shown: 5, ghost: 5, bump: 0, tokens: [], src: 0, ghostHold: 0, pending: 0 };
+document.getElementById('j-gain').onclick = () => { audio(); J.flat += 3; J.src = 1; for (let i = 0; i < 3; i++) J.tokens.push({ k: -i * 0.15, step: i }); J.pending += 3; };
+document.getElementById('j-loss').onclick = () => { audio(); J.flat = Math.max(0, J.flat - 2); J.ghost = Math.max(J.ghost, J.shown); J.shown = Math.max(0, J.shown - 2); J.val = J.shown; J.ghostHold = 0.15; J.bump = -0.6; tone(165, 0.3, 'sine', 0.1); };
+function meter(c, val, ghost, bump, title) {
+  c.save(); c.translate(250, 90); const s = 1 + Math.max(0, bump) * 0.2; c.scale(s, s);
+  c.fillStyle = '#8a5f33'; rr(c, -46, -30, 92, 60, 12); c.fill(); c.strokeStyle = '#2a1c08'; c.lineWidth = 3; c.stroke();
+  c.fillStyle = '#ffd84a'; star(c, -22, 0, 11); outlined(c, String(val), 16, 2, 30); c.restore();
+  const bw = 200, x0 = 20, y0 = 158; c.fillStyle = '#2f365c'; rr(c, x0, y0, bw, 10, 5); c.fill();
+  if (ghost > val) { c.fillStyle = '#f7d68a'; rr(c, x0, y0, bw * Math.min(1, ghost / 20), 10, 5); c.fill(); }
+  c.fillStyle = '#f2be54'; rr(c, x0, y0, bw * Math.min(1, val / 20), 10, 5); c.fill();
+}
+function drawJuice(dt, t) {
+  let c = jfc; c.clearRect(0, 0, 320, 180); c.fillStyle = '#5fa452'; c.fillRect(0, 0, 320, 180);
+  drawTile(c, { x: 70, y: 96 }, 'orchard'); meter(c, J.flat, 0, 0);
+  c = jjc; c.clearRect(0, 0, 320, 180); c.fillStyle = '#5fa452'; c.fillRect(0, 0, 320, 180);
+  J.src = Math.max(0, J.src - dt * 5); c.save(); c.translate(70, 96); const ps = 1 + J.src * 0.15; c.scale(ps, ps); drawTile(c, { x: 0, y: 0 }, 'orchard'); c.restore();
+  for (const tk of J.tokens) { tk.k += dt / (RM ? 0.15 : 0.42); if (tk.k > 0 && tk.k < 1 && !RM) { const e = ease.outCubic(tk.k), x = lerp(70, 266, e), y = lerp(80, 90, e) - Math.sin(e * Math.PI) * 60; outlined(c, '+1', x, y, 18, '#fff2b8'); } if (tk.k >= 1 && !tk.done) { tk.done = true; J.shown += 1; J.val = J.shown; J.bump = RM ? 0 : 1; note(tk.step + 2); } }
+  J.tokens = J.tokens.filter(tk => !tk.done);
+  if (J.ghostHold > 0) J.ghostHold -= dt; else J.ghost = Math.max(J.shown, J.ghost - dt * (2 / 0.4));
+  J.bump += (0 - J.bump) * Math.min(1, dt * 8);
+  meter(c, J.shown, J.ghost, J.bump);
+}
+let jl = performance.now(); (function jloop(n) { const dt = Math.min(0.05, (n - jl) / 1000); jl = n; drawJuice(dt, n / 1000); drawFive(n / 1000); requestAnimationFrame(jloop); })(jl);
+
+/* ---------- touch ---------- */
+const tcv = document.getElementById('touch'); let tc = fit(tcv, W, H);
+const TT = { mode: 'finger', today: false, p: null, down: false, demo: true };
+function drawTouch() {
+  const c = tc; c.clearRect(0, 0, W, H); c.fillStyle = '#3d5a3a'; c.fillRect(0, 0, W, H);
+  const g = c.createLinearGradient(0, H * 0.6, 0, H); g.addColorStop(0, 'rgba(143,207,122,0)'); g.addColorStop(1, 'rgba(143,207,122,0.45)'); c.fillStyle = g; c.fillRect(0, H * 0.6, W, H * 0.4);
+  c.save(); c.strokeStyle = 'rgba(255,255,255,0.18)'; c.lineWidth = 3; const hatch = (x, y, w, h) => { c.save(); c.beginPath(); c.rect(x, y, w, h); c.clip(); for (let i = -h; i < w + h; i += 12) { c.beginPath(); c.moveTo(x + i, y); c.lineTo(x + i + h, y + h); c.stroke(); } c.restore(); };
+  hatch(0, 0, W, 47); hatch(0, H - 34, W, 34); hatch(0, 47, 20, H - 81); c.restore();
+  c.fillStyle = '#000'; rr(c, 135, 12, 120, 34, 17); c.fill(); c.fillStyle = 'rgba(255,255,255,0.6)'; rr(c, 130, H - 16, 130, 5, 3); c.fill();
+  c.font = '600 20px Fredoka, sans-serif'; c.fillStyle = 'rgba(243,234,216,0.75)'; c.textAlign = 'left'; c.fillText('thumb zone', 30, H * 0.6 + 34);
+  const boxes = TT.today ? [[0, 47, 390, 52, 'toolbar 36 px'], [16, 724, 358, 4, 'sliders 24 px'], [340, 510, 28, 28, '× 28 px']] : [[SUN.x, SUN.y, SUN.w, SUN.h, 'sun 64'], [BOX.x, BOX.y, BOX.w, BOX.h, 'box 64'], [HAND.x, HAND.y, HAND.w, HAND.h, 'hand']];
+  for (const [x, y, w, h, l] of boxes) { const ok = TT.today ? false : true; c.strokeStyle = ok ? '#8fcf7a' : '#f08c74'; c.lineWidth = 3; c.setLineDash([8, 5]); rr(c, x, y, w, Math.max(h, 4), 8); c.stroke(); c.setLineDash([]); c.fillStyle = ok ? '#8fcf7a' : '#f08c74'; c.font = '600 18px "IBM Plex Mono", monospace'; c.fillText(l, x + 4, y - 8 < 20 ? y + h + 20 : y - 8); }
+  if (TT.p) { const { x, y } = TT.p, lift = TT.mode === 'finger' ? 60 : 0;
+    if (TT.down || TT.demo || TT.mode === 'mouse') drawCard(c, { type: 'meadow' }, x, y - lift, 0, TT.down ? 1.12 : 1, TT.down ? 1 : 0.55);
+    if (TT.mode === 'finger') { c.fillStyle = 'rgba(240,200,170,0.55)'; c.beginPath(); c.ellipse(x + 6, y + 40, 26, 46, -0.2, 0, Math.PI * 2); c.fill(); c.strokeStyle = 'rgba(120,80,60,0.5)'; c.lineWidth = 2; c.stroke(); }
+    else { c.fillStyle = '#fff'; c.strokeStyle = '#000'; c.lineWidth = 2; c.beginPath(); c.moveTo(x, y); c.lineTo(x, y + 26); c.lineTo(x + 7, y + 20); c.lineTo(x + 13, y + 31); c.lineTo(x + 17, y + 29); c.lineTo(x + 11, y + 18); c.lineTo(x + 20, y + 18); c.closePath(); c.fill(); c.stroke(); }
+  }
+}
+const tLocal = e => { const b = tcv.getBoundingClientRect(); return { x: (e.clientX - b.left) / b.width * W, y: (e.clientY - b.top) / b.height * H }; };
+tcv.addEventListener('pointerdown', e => { TT.demo = false; TT.down = true; TT.p = tLocal(e); tcv.setPointerCapture(e.pointerId); drawTouch(); });
+tcv.addEventListener('pointermove', e => { TT.demo = false; TT.p = tLocal(e); drawTouch(); });
+tcv.addEventListener('pointerup', () => { TT.down = false; drawTouch(); });
+tcv.addEventListener('pointerleave', () => { if (!TT.down) { TT.p = null; drawTouch(); } });
+function tmode(m) { if (m === 'today') TT.today = !TT.today; else TT.mode = m; document.getElementById('t-finger').setAttribute('aria-pressed', TT.mode === 'finger'); document.getElementById('t-mouse').setAttribute('aria-pressed', TT.mode === 'mouse'); document.getElementById('t-today').setAttribute('aria-pressed', TT.today); if (!TT.p) TT.p = { x: 200, y: 560 }; drawTouch(); }
+document.getElementById('t-finger').onclick = () => tmode('finger'); document.getElementById('t-mouse').onclick = () => tmode('mouse'); document.getElementById('t-today').onclick = () => tmode('today');
+TT.p = { x: 210, y: 560 }; drawTouch();
+
+/* ---------- rubric ---------- */
+const DIMS = [['Glance', 12], ['Hierarchy', 12], ['State on things', 12], ['Juice', 12], ['Readability', 10], ['Touch and mouse', 10], ['Fade and focus', 10], ['Toy, not web', 10], ['Accessibility', 6], ['House style', 6]];
+document.getElementById('weights').innerHTML = DIMS.map(([l, w]) => `<div class="w"><span>${l}</span><span class="bar"><span style="width:${w / 12 * 100}%"></span></span><span class="n">${w}</span></div>`).join('');
+const CHECKS = [
+  ['G1 chrome budget', 'pass', '7.6% both orientations', 'fail', '42.9%'], ['G2 words', 'pass', '0', 'fail', '173 always on, 57 summoned'],
+  ['G3 targets and edges', 'pass', 'all 64 px, inside safe area', 'fail', '36 px toolbar buttons, 24 px sliders'], ['G4 no hover-only', 'pass', '', 'fail', 'button title tooltips'],
+  ['G5 numerals', 'pass', 'sizes ok', 'pass', 'needs captures'], ['Always-on count', 'pass', '3', 'fail', '5'],
+  ['State on things', 'pass', '9 of 10 readouts', 'fail', '0 of 5'], ['World echo', 'pass', 'sun dial and light', 'fail', '4 meters with none'],
+  ['Fade rules declared', 'pass', 'focus, change, idle, threshold, summon', 'fail', 'none'], ['Web red flags (CSS)', 'pass', 'n/a', 'fail', '31 1px borders, system font, 5 hover-only colours']];
+document.getElementById('checks').innerHTML = CHECKS.map(([n, a, at, b, bt]) => `<tr><td>${n}</td><td><span class="verdict ${a}">${a}</span> <span class="muted">${at}</span></td><td><span class="verdict ${b}">${b}</span> <span class="muted">${bt}</span></td></tr>`).join('');
+
+/* ---------- ledger ---------- */
+const GNAME = { 'this-war-of-mine': 'This War of Mine', 'dont-starve': "Don't Starve", 'sons-of-the-forest': 'Sons of the Forest', 'steamworld-dig': 'SteamWorld Dig', 'tiny-glade': 'Tiny Glade', 'dorfromantik': 'Dorfromantik', 'lego-bricktales': 'LEGO Bricktales', '9-kings': '9 Kings', 'dead-space': 'Dead Space', 'firewatch': 'Firewatch', 'journey': 'Journey' };
+const st = [], ex = []; for (const [g, list] of Object.entries(SIGS.games)) for (const s of list) (s.class === 'style' ? st : ex).push(`<li><b>${GNAME[g] || g}:</b> ${s.description} <span class="muted mono">${Math.round(s.confidence * 100)}%</span></li>`);
+document.getElementById('ledger').innerHTML = `<div><h3 style="color:var(--meadow)">Style we learn</h3><ul>${st.join('')}</ul></div><div><h3 style="color:var(--bad)">Expression we never copy</h3><ul>${ex.join('')}</ul></div>`;
+
+addEventListener('resize', () => { cx = fit(cv, W, H); tx = fit(trace, 600, 150); fc = fit(fcv, 360, 240); jfc = fit(jf, 320, 180); jjc = fit(jj, 320, 180); tc = fit(tcv, W, H); drawTouch(); });
+</script>

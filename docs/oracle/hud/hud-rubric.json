@@ -1,0 +1,121 @@
+{
+  "rubric_version": "1.0",
+  "name": "Abbie's World in-game HUD rubric",
+  "date": "2026-10-23",
+  "doc": "docs/oracle/hud/HUD_STUDY.md",
+  "checker": "tools/hud-rubric/check_hud.py",
+  "source_enum_note": "source values are the identity schema's enum (docs/oracle/identity/game-identity.schema.json): footage_cv = computer vision over our own captures, llm_judge = VLM with saved prompt, pairwise and both orders, playtrace = in-game timing log, human = Evan or a child playtest, estimate = not yet measured.",
+  "ship_threshold": 80,
+  "taxonomy": {
+    "kinds": {
+      "diegetic": {"in_story": true, "in_world_space": true, "examples": ["Dead Space spine light", "Firewatch paper map", "Sons of the Forest backpack mat"]},
+      "spatial": {"in_story": false, "in_world_space": true, "examples": ["This War of Mine noise rings", "Dorfromantik quest numbers", "need bubbles over animals"]},
+      "meta": {"in_story": true, "in_world_space": false, "examples": ["Don't Starve sanity distortion", "Sons of the Forest grey screen", "night vignette"]},
+      "overlay": {"in_story": false, "in_world_space": false, "examples": ["Don't Starve need badges", "SteamWorld Dig bars", "the hand of cards"]},
+      "none": {"in_story": null, "in_world_space": null, "examples": ["Tiny Glade", "Journey scarf", "the cafe growing an awning"]}
+    },
+    "times": ["always", "on_change", "threshold", "summoned"],
+    "owners": ["body", "tools", "thing", "time", "meta_game"],
+    "tiers": {
+      "T0_world": "state the world shows by itself; no UI",
+      "T1_on_thing": "spatial or diegetic, attached to one thing",
+      "T2_always_on": "overlay, at most 3 elements: tools and time",
+      "T3_summoned": "detail on one gesture (hold, pinch, tap)",
+      "T4_workbench": "grown-up controls behind a door (GAME_FEEL Law 12)"
+    }
+  },
+  "targets": {
+    "viewports_pt": {"iphone_portrait": [390, 844], "iphone_landscape": [844, 390], "ipad_landscape": [1180, 820], "pc": [1920, 1080]},
+    "chrome_budget_share": 0.08,
+    "max_always_on": 3,
+    "min_touch_px": 64,
+    "min_touch_px_grownup": 44,
+    "back_swipe_strip_px": 20,
+    "min_numeral_cap_px": 18,
+    "min_numeral_contrast": 3.0,
+    "min_icon_px": 48,
+    "bubble_px": [36, 56],
+    "spatial_share_min": 0.7,
+    "finger_lift_px": 60,
+    "max_flash_hz": 3
+  },
+  "fade": {
+    "focus": {"opacity": 0.25, "in_ms": 150, "out_ms": 250, "when": "the child is holding something"},
+    "change": {"hold_ms": 2500, "fade_ms": 400, "restart_on_change": true},
+    "idle_tuck": {"after_ms": 6000, "visible_share": 0.4, "return_ms": 200, "applies_to": ["hand"]},
+    "threshold": {"timer": false, "stays_until": "need met"},
+    "summon_all": "tap empty ground",
+    "never_hide": ["sun_dial"]
+  },
+  "juice": {
+    "gain": {"source_pop_scale": 1.15, "source_pop_ms": 120, "flight_ms": [300, 450], "counter_bump_scale": 1.2, "pitch": "pentatonic, one step per token"},
+    "loss": {"hold_ms": 150, "trail_ms": 400, "sound": "soft low note, never a buzzer"},
+    "threshold": {"pulses": 2, "scale": 1.08, "world_echo": true},
+    "appear": {"from_scale": 0.6, "overshoot": 0.08, "ms": 220},
+    "leave": {"drop_px": 6, "ms": 180},
+    "summon": {"open_ms": 160, "stagger_ms": 30, "close_ms": 120},
+    "reduced_motion": "150 ms crossfades, counters tick in place, no pulses; sound stays",
+    "source": "estimate",
+    "note": "These are our design targets, not measurements of the studied games."
+  },
+  "gates": [
+    {"id": "G1_chrome_budget", "check": "Union area of always-on overlay elements <= 8% of the viewport, in portrait and landscape.", "method": "manifest bboxes; or footage_cv: mask of non-world pixels over a capture", "source": "footage_cv", "auto": true},
+    {"id": "G2_words", "check": "Zero words visible in play mode. Numbers, the child's own names and the app's own name on the home screen are exempt.", "method": "manifest word counts; OCR over captures", "source": "footage_cv", "auto": true},
+    {"id": "G3_targets_edges", "check": "Every touchable element >= 64 px (grown-up doors >= 44 px) and fully inside the safe area and outside the 20 px left back-swipe strip.", "method": "manifest bboxes against safe_area", "source": "footage_cv", "auto": true},
+    {"id": "G4_no_hover_only", "check": "No information reachable only by hover; every hover preview has a touch twin (hold or drag).", "method": "manifest flags; playtrace with a touch-only input device", "source": "playtrace", "auto": true},
+    {"id": "G5_numeral_legibility", "check": "Every numeral cap height >= 18 px and contrast >= 3:1 against the worst background behind it across day, dusk and night captures.", "method": "manifest + captures: luminance of glyph colour vs 5th and 95th percentile of a ring around the bbox", "source": "footage_cv", "auto": true},
+    {"id": "G6_expression_ledger", "check": "No other game's UI art, icon, badge, font or layout copied; provenance lists every image source; no source-game screenshot used as a reference image.", "method": "provenance review", "source": "human", "auto": false},
+    {"id": "G7_kid_safe", "check": "No red alarm states, no buzzer sounds, no flashing above 3 Hz, no fail or game-over screens, meta effects never frightening.", "method": "manifest flags; llm judge over a 30 s capture", "source": "llm_judge", "auto": "partial"}
+  ],
+  "dimensions": [
+    {"id": "D1_glance", "weight": 12, "label": "Glance", "checks": [
+      {"id": "one_second", "check": "From a 1 s exposure of a capture, a VLM (and later a child) answers: time of day, is a card in hand, which animal wants something. Score = correct / 3, averaged over 5 captures.", "source": "llm_judge"},
+      {"id": "fixed_positions", "check": "Always-on elements keep the same anchor across all captures (centre drift <= 2% of the short edge).", "source": "footage_cv", "auto": true}
+    ]},
+    {"id": "D2_hierarchy", "weight": 12, "label": "Hierarchy", "checks": [
+      {"id": "always_on_count", "check": "At most 3 always-on elements.", "source": "footage_cv", "auto": true},
+      {"id": "one_tier_each", "check": "Every element declares exactly one tier T0 to T4; T2 items justify themselves as needed every few seconds and changing the next action.", "source": "footage_cv", "auto": true},
+      {"id": "summon_one_gesture", "check": "Every T3 item is reachable in one gesture from play.", "source": "playtrace", "auto": true}
+    ]},
+    {"id": "D3_state_on_things", "weight": 12, "label": "State on things", "checks": [
+      {"id": "spatial_share", "check": "At least 70% of state readouts (elements with readout=true) are spatial, diegetic, meta or none.", "source": "footage_cv", "auto": true},
+      {"id": "world_echo", "check": "Every always-on meter has a world or meta echo (e.g. the sun dial and the light).", "source": "footage_cv", "auto": true}
+    ]},
+    {"id": "D4_readability", "weight": 10, "label": "Readability", "checks": [
+      {"id": "outline", "check": "Numerals and icons over the world have an outline >= 8% of glyph height or a solid token behind them.", "source": "footage_cv"},
+      {"id": "silhouette", "check": "A VLM names every icon from a black silhouette at 32 px.", "source": "llm_judge"},
+      {"id": "colour_not_alone", "check": "Every colour-coded element has a shape or icon twin; passes deuteranopia and protanopia simulation.", "source": "footage_cv"},
+      {"id": "size_floors", "check": "Always-on icons >= 48 px; spatial bubbles 36 to 56 px across the zoom range.", "source": "footage_cv", "auto": true}
+    ]},
+    {"id": "D5_touch_mouse", "weight": 10, "label": "Touch and mouse", "checks": [
+      {"id": "thumb_zone", "check": "Elements touched more than once a minute sit in the bottom 40% of the screen in portrait.", "source": "footage_cv", "auto": true},
+      {"id": "occlusion", "check": "Held items and placement previews render >= 60 px above the touch point.", "source": "playtrace"},
+      {"id": "gestures", "check": "One finger pans, two pinch and twist, hold summons; no modifier keys, no double-tap zoom.", "source": "playtrace"},
+      {"id": "orientations", "check": "Both orientations pass G1 and G3 with the same anchors.", "source": "footage_cv", "auto": true}
+    ]},
+    {"id": "D6_fade_focus", "weight": 10, "label": "Fade and focus", "checks": [
+      {"id": "rules_declared", "check": "Manifest declares focus, change, idle and threshold fade rules and a summon-all gesture.", "source": "footage_cv", "auto": true},
+      {"id": "rules_observed", "check": "Playtrace timings within 20% of the declared values.", "source": "playtrace"},
+      {"id": "predictable", "check": "The same element fades the same way in 10 of 10 repeats.", "source": "playtrace"}
+    ]},
+    {"id": "D7_juice", "weight": 12, "label": "Juice", "checks": [
+      {"id": "gain_from_world", "check": "Every gain starts at its world source and flies to its counter.", "source": "playtrace"},
+      {"id": "loss_trail", "check": "Losses show a trailing ghost for >= 300 ms.", "source": "playtrace"},
+      {"id": "threshold_pulse", "check": "Thresholds pulse and start a world echo.", "source": "playtrace"},
+      {"id": "sound_per_change", "check": "Every HUD change has a sound with pitch variation.", "source": "playtrace"},
+      {"id": "reduced_motion", "check": "prefers-reduced-motion path present.", "source": "playtrace"}
+    ]},
+    {"id": "D8_toy_not_web", "weight": 10, "label": "Toy, not web", "checks": [
+      {"id": "object_judge", "check": "Pairwise judge vs a web-panel control: 'which looks like objects from this toy world?' wins both orders.", "source": "llm_judge"},
+      {"id": "web_red_flags", "check": "Play-mode CSS has no 1px solid borders on rectangles, no system-ui font stacks for visible text, no web icon sets, no hover-only colour changes.", "source": "footage_cv", "auto": true},
+      {"id": "banned_words", "check": "Play-mode code has no panel/sidebar/toolbar/drawer/modal/toast/tabs/dropdown/select/input without a recorded reason (GAME_FEEL section 8).", "source": "footage_cv", "auto": true}
+    ]},
+    {"id": "D9_accessibility", "weight": 6, "label": "Accessibility", "checks": [
+      {"id": "sound_twin", "check": "Every sound cue has a visual twin (mute test still readable).", "source": "playtrace"},
+      {"id": "cvd", "check": "Colour-blind simulation keeps every cue distinct.", "source": "footage_cv"}
+    ]},
+    {"id": "D10_house_style", "weight": 6, "label": "House style", "checks": [
+      {"id": "identity_distance", "check": "Pairwise judge: closer to Abbie's World references (Ranch tiles, cards, toy table) than to any single studied game's HUD.", "source": "llm_judge"}
+    ]}
+  ]
+}
