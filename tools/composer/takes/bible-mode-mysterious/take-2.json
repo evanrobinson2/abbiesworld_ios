@@ -1,0 +1,77 @@
+{
+ "id": "bible-mode-mysterious",
+ "take": 2,
+ "title": "Ranch: Mysterious",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-bible.json",
+ "song_id": "ThS6RMdTZbcsL9MxxKGt",
+ "request": {
+  "prompt": "contemporary playful soundtrack with a memorable hook, wonder, warmth, discovery, optimism and a little mischief, melody rises D-E-F#-A then falls B-A-F#-E, answered D-F#-A-B and A-E-F#-D, resolving home to D, harmony D6/9, G6, A add9, back to D6/9, syncopated 3+3+2 rhythm in 4/4, polished modern studio production, instrumental, 122 bpm, mysterious and curious, fragments of the hook, unresolved, harp, celesta, soft pads, low pizzicato, distant glockenspiel, sparse, light pulse, not scary. Hush: sparse, curious. Search: pulse grows, hook fragments. Hint: almost resolves, then floats. No vocals, no lyrics, no singing, no humming, no 8-bit, no chiptune, no retro video-game music, no cheesy, no kazoo, no horror, no aggressive, no distorted guitar, no dubstep",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 60000
+ },
+ "date": "2026-10-23",
+ "sha256": "6fb1ef9e9396417301d770f24912013d99c3c5d9f48983804849a17446232cdd",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "trace": {
+  "identity": "abbies-world-theme",
+  "bible": "docs/music/MUSIC_BIBLE.md",
+  "source_motif": "hook-late",
+  "motif_reference": "tools/composer/motifs/hook-late.mid",
+  "permitted_reuse": "Abbie's World game, trailers and soundtrack (ElevenLabs paid-plan terms, indie game under $500k revenue); not for film, TV or radio",
+  "family": "score",
+  "world": "ranch",
+  "place": "minigame",
+  "situation": "explore",
+  "mode": "mysterious",
+  "key": "D major with Lydian and minor colour",
+  "bpm": 122,
+  "meter": "4/4, 3+3+2",
+  "instrumentation": "harp, celesta, soft pads, low pizzicato, distant glockenspiel",
+  "mood": "curiosity, uncertainty",
+  "intensity": 0.35,
+  "variant_of": "bible-ranch",
+  "loop": true,
+  "briefs_about": "Briefs from docs/music/MUSIC_BIBLE.md (canon, Evan 2026-10-23): one Abbie's World identity (D major, 122-126 bpm, 4/4 with a 3+3+2 rhythm, the four-phrase hook over D6/9-G6-A(add9)-D6/9) arranged per world, plus the Mysterious / Intense / Epic gameplay modes and the sonic-identity stings. Text prompts can carry style, key, tempo and harmony; ElevenLabs cannot be made to play an exact melody, so the exact melody lives in tools/composer/motifs (MIDI + reference audio) and each take is judged against it. Until Evan picks the canonical melody, briefs describe the later hook (source_motif hook-late).",
+  "styles": [
+   "122 bpm",
+   "mysterious and curious",
+   "fragments of the hook, unresolved",
+   "harp",
+   "celesta",
+   "soft pads",
+   "low pizzicato",
+   "distant glockenspiel",
+   "sparse, light pulse",
+   "not scary"
+  ],
+  "sections": [
+   [
+    "Hush",
+    [
+     "sparse, curious"
+    ],
+    20000
+   ],
+   [
+    "Search",
+    [
+     "pulse grows, hook fragments"
+    ],
+    20000
+   ],
+   [
+    "Hint",
+    [
+     "almost resolves, then floats"
+    ],
+    20000
+   ]
+  ],
+  "duration_ms": 60000
+ },
+ "master": "take-2.master.mp3"
+}

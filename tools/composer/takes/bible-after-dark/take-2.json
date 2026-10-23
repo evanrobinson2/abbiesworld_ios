@@ -1,0 +1,99 @@
+{
+ "id": "bible-after-dark",
+ "take": 2,
+ "title": "Halloween After Dark",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-bible.json",
+ "song_id": "Dv6mwYfZKzLbnLprBrgV",
+ "request": {
+  "prompt": "contemporary playful soundtrack with a memorable hook, wonder, warmth, discovery, optimism and a little mischief, melody rises D-E-F#-A then falls B-A-F#-E, answered D-F#-A-B and A-E-F#-D, resolving home to D, harmony D6/9, G6, A add9, back to D6/9, syncopated 3+3+2 rhythm in 4/4, polished modern studio production, instrumental, 84 bpm, dusty boom-bap lo-fi hip-hop, warm Rhodes chords, rounded sub bass, music-box melody, muted guitar, celesta, pizzicato strings, atmospheric analog pads, subtle vinyl crackle, a little wind and a distant owl, minor-key mystery opening into familiar major moments. Intro: atmosphere only. Beat: soft kick and snare enter. Theme: Rhodes plays the familiar melody. Eerie: stripped back, slightly eerie variation. Groove: full groove returns. Outro: loop-friendly. No vocals, no lyrics, no singing, no humming, no 8-bit, no chiptune, no retro video-game music, no cheesy, no kazoo, no horror, no aggressive, no distorted guitar, no dubstep",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 150000
+ },
+ "date": "2026-10-23",
+ "sha256": "d423bae30b0fc4131bf9259a9e21a3db6c5bfb914dd7f9e72b8e04ed6b723ffe",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "trace": {
+  "identity": "abbies-world-theme",
+  "bible": "docs/music/MUSIC_BIBLE.md",
+  "source_motif": "hook-late",
+  "motif_reference": "tools/composer/motifs/hook-late.mid",
+  "permitted_reuse": "Abbie's World game, trailers and soundtrack (ElevenLabs paid-plan terms, indie game under $500k revenue); not for film, TV or radio",
+  "family": "song",
+  "world": "halloween",
+  "place": "night",
+  "situation": "relax",
+  "mode": "base",
+  "key": "D major with minor-key mystery",
+  "bpm": 84,
+  "meter": "4/4",
+  "instrumentation": "warm Rhodes, rounded sub bass, music box, muted guitar, celesta, pizzicato strings, analog pads, soft boom-bap kick and snare, vinyl crackle, wind, distant owl",
+  "mood": "dusty, mysterious, warm",
+  "intensity": 0.4,
+  "loop": true,
+  "briefs_about": "Briefs from docs/music/MUSIC_BIBLE.md (canon, Evan 2026-10-23): one Abbie's World identity (D major, 122-126 bpm, 4/4 with a 3+3+2 rhythm, the four-phrase hook over D6/9-G6-A(add9)-D6/9) arranged per world, plus the Mysterious / Intense / Epic gameplay modes and the sonic-identity stings. Text prompts can carry style, key, tempo and harmony; ElevenLabs cannot be made to play an exact melody, so the exact melody lives in tools/composer/motifs (MIDI + reference audio) and each take is judged against it. Until Evan picks the canonical melody, briefs describe the later hook (source_motif hook-late).",
+  "styles": [
+   "84 bpm",
+   "dusty boom-bap lo-fi hip-hop",
+   "warm Rhodes chords",
+   "rounded sub bass",
+   "music-box melody",
+   "muted guitar",
+   "celesta",
+   "pizzicato strings",
+   "atmospheric analog pads",
+   "subtle vinyl crackle",
+   "a little wind and a distant owl",
+   "minor-key mystery opening into familiar major moments"
+  ],
+  "sections": [
+   [
+    "Intro",
+    [
+     "atmosphere only"
+    ],
+    15000
+   ],
+   [
+    "Beat",
+    [
+     "soft kick and snare enter"
+    ],
+    25000
+   ],
+   [
+    "Theme",
+    [
+     "Rhodes plays the familiar melody"
+    ],
+    35000
+   ],
+   [
+    "Eerie",
+    [
+     "stripped back, slightly eerie variation"
+    ],
+    30000
+   ],
+   [
+    "Groove",
+    [
+     "full groove returns"
+    ],
+    30000
+   ],
+   [
+    "Outro",
+    [
+     "loop-friendly"
+    ],
+    15000
+   ]
+  ],
+  "duration_ms": 150000
+ },
+ "master": "take-2.master.mp3"
+}

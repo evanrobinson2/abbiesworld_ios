@@ -1,0 +1,85 @@
+{
+ "id": "bible-halloween",
+ "take": 2,
+ "title": "Halloween",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-bible.json",
+ "song_id": "YT5FQ0Dmp6A3sztrZsCN",
+ "request": {
+  "prompt": "contemporary playful soundtrack with a memorable hook, wonder, warmth, discovery, optimism and a little mischief, melody rises D-E-F#-A then falls B-A-F#-E, answered D-F#-A-B and A-E-F#-D, resolving home to D, harmony D6/9, G6, A add9, back to D6/9, syncopated 3+3+2 rhythm in 4/4, polished modern studio production, instrumental, D major drifting to D minor, 126 bpm, spooky-cute, harpsichord, celesta, toy piano, pizzicato strings, bassoon, clarinet, woodblocks, a little organ and theremin, mischievous, never frightening. Creep: pizzicato and bassoon tiptoe. Hook: celesta and toy piano play the hook. Mischief: theremin and whistles, playful. Back: tiptoe again so it loops. No vocals, no lyrics, no singing, no humming, no 8-bit, no chiptune, no retro video-game music, no cheesy, no kazoo, no horror, no aggressive, no distorted guitar, no dubstep",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 120000
+ },
+ "date": "2026-10-23",
+ "sha256": "4f0647dc667d73fca7b3d4da7d8c7e586bcc9823cc280c2e35bbae733b2e205e",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "trace": {
+  "identity": "abbies-world-theme",
+  "bible": "docs/music/MUSIC_BIBLE.md",
+  "source_motif": "hook-late",
+  "motif_reference": "tools/composer/motifs/hook-late.mid",
+  "permitted_reuse": "Abbie's World game, trailers and soundtrack (ElevenLabs paid-plan terms, indie game under $500k revenue); not for film, TV or radio",
+  "family": "score",
+  "world": "halloween",
+  "place": "haunted town",
+  "situation": "explore",
+  "mode": "base",
+  "key": "D major with minor turns",
+  "bpm": 126,
+  "meter": "4/4, 3+3+2",
+  "instrumentation": "harpsichord, celesta, toy piano, pizzicato strings, bassoon, clarinet, woodblocks, organ, theremin, quirky whistles",
+  "mood": "spooky-cute, never frightening",
+  "intensity": 0.6,
+  "loop": true,
+  "briefs_about": "Briefs from docs/music/MUSIC_BIBLE.md (canon, Evan 2026-10-23): one Abbie's World identity (D major, 122-126 bpm, 4/4 with a 3+3+2 rhythm, the four-phrase hook over D6/9-G6-A(add9)-D6/9) arranged per world, plus the Mysterious / Intense / Epic gameplay modes and the sonic-identity stings. Text prompts can carry style, key, tempo and harmony; ElevenLabs cannot be made to play an exact melody, so the exact melody lives in tools/composer/motifs (MIDI + reference audio) and each take is judged against it. Until Evan picks the canonical melody, briefs describe the later hook (source_motif hook-late).",
+  "styles": [
+   "D major drifting to D minor",
+   "126 bpm",
+   "spooky-cute",
+   "harpsichord",
+   "celesta",
+   "toy piano",
+   "pizzicato strings",
+   "bassoon",
+   "clarinet",
+   "woodblocks",
+   "a little organ and theremin",
+   "mischievous, never frightening"
+  ],
+  "sections": [
+   [
+    "Creep",
+    [
+     "pizzicato and bassoon tiptoe"
+    ],
+    30000
+   ],
+   [
+    "Hook",
+    [
+     "celesta and toy piano play the hook"
+    ],
+    30000
+   ],
+   [
+    "Mischief",
+    [
+     "theremin and whistles, playful"
+    ],
+    30000
+   ],
+   [
+    "Back",
+    [
+     "tiptoe again so it loops"
+    ],
+    30000
+   ]
+  ],
+  "duration_ms": 120000
+ },
+ "master": "take-2.master.mp3"
+}

@@ -1,0 +1,75 @@
+{
+ "id": "bible-mode-epic",
+ "take": 1,
+ "title": "Ranch: Epic",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-bible.json",
+ "song_id": "wHUAXCZBvGJH3eX5GS8x",
+ "request": {
+  "prompt": "contemporary playful soundtrack with a memorable hook, wonder, warmth, discovery, optimism and a little mischief, melody rises D-E-F#-A then falls B-A-F#-E, answered D-F#-A-B and A-E-F#-D, resolving home to D, harmony D6/9, G6, A add9, back to D6/9, syncopated 3+3+2 rhythm in 4/4, polished modern studio production, instrumental, D major, 124 bpm, epic cinematic, the hook played big by strings and brass, big drums, acoustic guitars, glockenspiel and handbells on top, triumphant breakthrough. Rise: build. Triumph: the hook, huge. Glory: loops back to the build. No vocals, no lyrics, no singing, no humming, no 8-bit, no chiptune, no retro video-game music, no cheesy, no kazoo, no horror, no aggressive, no distorted guitar, no dubstep",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 60000
+ },
+ "date": "2026-10-23",
+ "sha256": "8a4a77edc89e433cb6a66d9002745d0312dc84f58e68b45bd70651084d0138c7",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "trace": {
+  "identity": "abbies-world-theme",
+  "bible": "docs/music/MUSIC_BIBLE.md",
+  "source_motif": "hook-late",
+  "motif_reference": "tools/composer/motifs/hook-late.mid",
+  "permitted_reuse": "Abbie's World game, trailers and soundtrack (ElevenLabs paid-plan terms, indie game under $500k revenue); not for film, TV or radio",
+  "family": "score",
+  "world": "ranch",
+  "place": "minigame",
+  "situation": "celebrate",
+  "mode": "epic",
+  "key": "D major",
+  "bpm": 124,
+  "meter": "4/4, 3+3+2",
+  "instrumentation": "full orchestra with acoustic guitars, big drums, choir-like synth pads (no voices), glockenspiel and handbells",
+  "mood": "breakthrough, triumph",
+  "intensity": 1.0,
+  "variant_of": "bible-ranch",
+  "loop": true,
+  "briefs_about": "Briefs from docs/music/MUSIC_BIBLE.md (canon, Evan 2026-10-23): one Abbie's World identity (D major, 122-126 bpm, 4/4 with a 3+3+2 rhythm, the four-phrase hook over D6/9-G6-A(add9)-D6/9) arranged per world, plus the Mysterious / Intense / Epic gameplay modes and the sonic-identity stings. Text prompts can carry style, key, tempo and harmony; ElevenLabs cannot be made to play an exact melody, so the exact melody lives in tools/composer/motifs (MIDI + reference audio) and each take is judged against it. Until Evan picks the canonical melody, briefs describe the later hook (source_motif hook-late).",
+  "styles": [
+   "D major",
+   "124 bpm",
+   "epic cinematic",
+   "the hook played big by strings and brass",
+   "big drums",
+   "acoustic guitars",
+   "glockenspiel and handbells on top",
+   "triumphant breakthrough"
+  ],
+  "sections": [
+   [
+    "Rise",
+    [
+     "build"
+    ],
+    15000
+   ],
+   [
+    "Triumph",
+    [
+     "the hook, huge"
+    ],
+    30000
+   ],
+   [
+    "Glory",
+    [
+     "loops back to the build"
+    ],
+    15000
+   ]
+  ],
+  "duration_ms": 60000
+ },
+ "master": "take-1.master.mp3"
+}
