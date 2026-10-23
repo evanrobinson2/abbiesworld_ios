@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 770,
+ "total": 780,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -306,6 +306,11 @@
    "what": "brute1-retexture retexture",
    "credits": 10,
    "at": "2026-10-23T21:09:21Z"
+  },
+  {
+   "what": "brute2-retexture retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:09:59Z"
   }
  ]
 }
