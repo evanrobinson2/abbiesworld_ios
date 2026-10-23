@@ -15,10 +15,9 @@ asset only)".
 - **Padlock:** `tools/charms/padlock.py` builds `models/padlock/padlock.glb`: 158 triangles, flat shaded, parts
   `padlock body`, `padlock shackle`, `padlock keyhole`, materials `metal gold`, `metal steel`, `keyhole dark`. The page renders
   the real GLB once to a picture for the board. When a charm is earned the padlock should spring open (animation not built).
-- **Chest:** ten slots shaped like their charms, lid engraved "n of 10". The code has eleven ids; the chest drops
-  `first-memory` (the coin is that charm). Backpack thread to confirm. Moon cheese is repeatable, one slot, two on the keychain.
+- **Chest:** ten slots shaped like their charms, lid engraved "n of 10". `first-memory` was removed from `CHARMS` (backpack PR #418), so ten is the whole set. The floppy is won by beating the basement word game. Moon cheese is repeatable, one slot, two on the keychain.
 - **Jewellery box:** drawer box with a glass dome over each charm (recommended); wall shadow-box is the bedroom alternative.
-  Hang up to two on the bag.
+  Hang up to two on the bag; the box toggle uses `putInBox` / `inBox` from `backpack.mjs?v=6`.
 - **Charm places:** tardigrade at the lab, floppy at the café cellar door, key and coffee cup at the café, star at the
   school, bub in Abbie's yard, moon and rocket at the black truck, moon cheese at the Moon outpost (ghost until a Moon tile is
   placed), heart is the coin chest's reward. Nothing yet on Ani's side.
