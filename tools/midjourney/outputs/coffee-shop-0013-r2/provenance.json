@@ -1,0 +1,244 @@
+{
+  "set": "coffee-shop-0013-r2",
+  "study": "AW-STUDY-0013 - The Coffee Shop",
+  "round": 2,
+  "generated": "2026-10-23",
+  "tool": "Midjourney web (v8.2), grid only, no upscale",
+  "prompts_file": "tools/midjourney/prompts/coffee-shop-0013-r2.json",
+  "notes": [
+    "Draft Mode was off for the whole run; every job is a standard 4-image grid.",
+    "All three backbar prompts were accepted as written, with the leading reference image URL and --sref; Midjourney showed no rejection, so each prompt field is exactly what was sent.",
+    "No prompt was refused for moderation.",
+    "Another session was generating on the same Midjourney account during this run, so each job was matched by its prompt text rather than by being newest."
+  ],
+  "jobs": [
+    {
+      "name": "backbar-front",
+      "group": "backbar",
+      "prompt": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png the back bar wall of a zany cartoon kids dance party cafe called Abbie's Cafe, seen straight on from the counter: a giant bubbly pink smoothie blender machine with swirling fruit, a chunky chrome and pink espresso machine with steam, a coffee bean grinder, a big round coffee urn, shelves of teal cups and syrup jars, a painted picture menu board, glowing neon star decorations, string lights, curved teal milkshake bar in front, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, playful Planet Zoo style game art, nobody in frame --ar 3:2 --sref https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png --v 8.2 --no text, letters",
+      "job_id": "7e172962-f280-410b-bdfd-742a78bef46a",
+      "created": "2026-10-23T07:15:42Z",
+      "files": [
+        {
+          "file": "images/backbar-front_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/7e172962-f280-410b-bdfd-742a78bef46a/0_0.png",
+          "sha256": "9cc8b7f60d5988e81cbbaa12a2c31770e1e867e09f123658c9e89c0e9833dc80",
+          "bytes": 1791356
+        },
+        {
+          "file": "images/backbar-front_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/7e172962-f280-410b-bdfd-742a78bef46a/0_1.png",
+          "sha256": "88f7ab899fb109de97a199212d7aa9c48e2929c039c1dcfc4293ad80823ccead",
+          "bytes": 1845475
+        },
+        {
+          "file": "images/backbar-front_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/7e172962-f280-410b-bdfd-742a78bef46a/0_2.png",
+          "sha256": "ece7755124917cd5b59d99d80302335491313b9b62ee8493b3bd143b020b2fb8",
+          "bytes": 1904947
+        },
+        {
+          "file": "images/backbar-front_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/7e172962-f280-410b-bdfd-742a78bef46a/0_3.png",
+          "sha256": "ac8fa2fc99cec2daa5f8015bec6722f63b17ca9dd892bb82d74acb68002f7287",
+          "bytes": 1733046
+        }
+      ]
+    },
+    {
+      "name": "backbar-wide",
+      "group": "backbar",
+      "prompt": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png three-quarter view across a glowing checker dance floor toward the back bar of a zany cartoon kids dance party cafe: curved teal milkshake bar with stools, behind it a coffee house back counter with a giant pink smoothie machine, an espresso machine, pastry case, mugs on shelves, neon star signs and disco balls above, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, playful Planet Zoo style game art, nobody in frame --ar 3:2 --sref https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png --v 8.2 --no text, letters",
+      "job_id": "8dc9cb26-e673-493d-8116-b8322cb45e26",
+      "created": "2026-10-23T07:17:04Z",
+      "files": [
+        {
+          "file": "images/backbar-wide_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/8dc9cb26-e673-493d-8116-b8322cb45e26/0_0.png",
+          "sha256": "58e97c948665dc254d5f0c28bc51906daddb3b4b858963fa2f5e0e1691358428",
+          "bytes": 1834553
+        },
+        {
+          "file": "images/backbar-wide_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/8dc9cb26-e673-493d-8116-b8322cb45e26/0_1.png",
+          "sha256": "0ceefe8fcfb9dbfdeb02d99df1a2b9dece82a00a090123be2d27f1c8dd48484e",
+          "bytes": 1868382
+        },
+        {
+          "file": "images/backbar-wide_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/8dc9cb26-e673-493d-8116-b8322cb45e26/0_2.png",
+          "sha256": "17af73ecb45599936b0d134a14928fd73b551384c72f900828b5320e59c0848e",
+          "bytes": 1783322
+        },
+        {
+          "file": "images/backbar-wide_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/8dc9cb26-e673-493d-8116-b8322cb45e26/0_3.png",
+          "sha256": "f1bc3c6e7777c4cdcc23db2a35caad0d8eb2f31ede1aad9aafb244263efd4fb2",
+          "bytes": 1920087
+        }
+      ]
+    },
+    {
+      "name": "backbar-machines",
+      "group": "backbar",
+      "prompt": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png close view of the machines on the back counter of a zany cartoon kids dance party cafe: a giant bubbly pink smoothie blender with a fruit swirl jar, a retro chrome espresso machine with pink panels and two cups, a turquoise milk frother, sprinkles jars, a neon star above, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, playful stylised game art, nobody in frame --ar 3:2 --sref https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png --v 8.2 --no text, letters",
+      "job_id": "4bccb868-f4d1-4136-a7a7-849d467a90f2",
+      "created": "2026-10-23T07:17:40Z",
+      "files": [
+        {
+          "file": "images/backbar-machines_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/4bccb868-f4d1-4136-a7a7-849d467a90f2/0_0.png",
+          "sha256": "6d07f62dd1fd45bee4c74a6b4891da4b7329c68b748619cdf7fe3eae53b20f27",
+          "bytes": 1884510
+        },
+        {
+          "file": "images/backbar-machines_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/4bccb868-f4d1-4136-a7a7-849d467a90f2/0_1.png",
+          "sha256": "67ed6c88ede9c1aa950ec5a44008d1b3a41be40e501bb341e05af7aae3df5464",
+          "bytes": 1941167
+        },
+        {
+          "file": "images/backbar-machines_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/4bccb868-f4d1-4136-a7a7-849d467a90f2/0_2.png",
+          "sha256": "9ad1397938a7c30fadb6e1855696761ccb8108d7978bec2f0bb5409fd0eca6e6",
+          "bytes": 1871674
+        },
+        {
+          "file": "images/backbar-machines_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/4bccb868-f4d1-4136-a7a7-849d467a90f2/0_3.png",
+          "sha256": "00582969d1ad56e6f5606f02a0e487ca76e97bb86cd72db8dbd6c52915ca5596",
+          "bytes": 1815309
+        }
+      ]
+    },
+    {
+      "name": "asset-cup-booth-bricks",
+      "group": "assets",
+      "asset": "cup-booth",
+      "style": "bricks",
+      "prompt": "a DJ booth built inside a giant pink coffee cup with a handle, a glowing window and turntables, on a round stage, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "1216e4bc-e40e-444d-8da8-1d0e9146a332",
+      "created": "2026-10-23T07:18:05Z",
+      "files": [
+        {
+          "file": "images/asset-cup-booth-bricks_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/1216e4bc-e40e-444d-8da8-1d0e9146a332/0_0.png",
+          "sha256": "67951e746f8b2810a7c2c4c293d1b22133c337610e80b184a34dd16e9fed07e6",
+          "bytes": 1195946
+        },
+        {
+          "file": "images/asset-cup-booth-bricks_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/1216e4bc-e40e-444d-8da8-1d0e9146a332/0_1.png",
+          "sha256": "158dad73761170c4da48397abf310e82b15cff4313b17f280b47d296070939a7",
+          "bytes": 1146789
+        },
+        {
+          "file": "images/asset-cup-booth-bricks_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/1216e4bc-e40e-444d-8da8-1d0e9146a332/0_2.png",
+          "sha256": "2d48376286aa8f9f684af5cda17691ef77b5bfef5593805b43d902d385248367",
+          "bytes": 1080384
+        },
+        {
+          "file": "images/asset-cup-booth-bricks_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/1216e4bc-e40e-444d-8da8-1d0e9146a332/0_3.png",
+          "sha256": "3e3751236f6b8490afdda6c44d60b24fed7a9a11bd0ad8e4e780c7c906127c1b",
+          "bytes": 1128659
+        }
+      ]
+    },
+    {
+      "name": "asset-espresso-bricks",
+      "group": "assets",
+      "asset": "espresso",
+      "style": "bricks",
+      "prompt": "a chunky retro espresso machine with pink panels, chrome, two portafilters and two small cups, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "c88d45be-9fc3-4043-87e1-48fdac86ba18",
+      "created": "2026-10-23T07:18:33Z",
+      "files": [
+        {
+          "file": "images/asset-espresso-bricks_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/c88d45be-9fc3-4043-87e1-48fdac86ba18/0_0.png",
+          "sha256": "e8768efefaa1548a1393e97c70c840c3d9cbd7fdc3d571b3744f8d897e799c15",
+          "bytes": 1007258
+        },
+        {
+          "file": "images/asset-espresso-bricks_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/c88d45be-9fc3-4043-87e1-48fdac86ba18/0_1.png",
+          "sha256": "cb4eff80318458bc5f9b1edb1cb70c5108fa8c03cd1926c30f190303a14db9d3",
+          "bytes": 986380
+        },
+        {
+          "file": "images/asset-espresso-bricks_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/c88d45be-9fc3-4043-87e1-48fdac86ba18/0_2.png",
+          "sha256": "0a98e8e39662e2d52880bacc912ea1fdeda748a5f0acfdd0b3252a7011a15d58",
+          "bytes": 1055572
+        },
+        {
+          "file": "images/asset-espresso-bricks_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/c88d45be-9fc3-4043-87e1-48fdac86ba18/0_3.png",
+          "sha256": "68421f48c5563e3d9d048ea2eaa0d03c5c3c4677d0cad60ab54adbbe20b0b283",
+          "bytes": 1036429
+        }
+      ]
+    },
+    {
+      "name": "asset-smoothie-bricks",
+      "group": "assets",
+      "asset": "smoothie",
+      "style": "bricks",
+      "prompt": "a giant bubbly smoothie blender machine with a swirling pink fruit jar and big buttons, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "0b7fb12c-b939-40e7-94aa-feaa35f44b97",
+      "created": "2026-10-23T07:18:56Z",
+      "files": [
+        {
+          "file": "images/asset-smoothie-bricks_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/0b7fb12c-b939-40e7-94aa-feaa35f44b97/0_0.png",
+          "sha256": "6ba8f0b0d54703b58fd13b79d85c1bf0d0fb6e55ccc04aa144370f2a9c64ad17",
+          "bytes": 1112458
+        },
+        {
+          "file": "images/asset-smoothie-bricks_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/0b7fb12c-b939-40e7-94aa-feaa35f44b97/0_1.png",
+          "sha256": "6fb2c1cfdfc0ae0d7c4629e2f70a2171aac7ccfc3e1cd37046955971386257ed",
+          "bytes": 1018144
+        },
+        {
+          "file": "images/asset-smoothie-bricks_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/0b7fb12c-b939-40e7-94aa-feaa35f44b97/0_2.png",
+          "sha256": "f0d2bb2c00be3d162cf748c47632547a8a91d14c204416360abde423103ddf18",
+          "bytes": 1191996
+        },
+        {
+          "file": "images/asset-smoothie-bricks_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/0b7fb12c-b939-40e7-94aa-feaa35f44b97/0_3.png",
+          "sha256": "c23c2500d645405e6f394c8fabd68b5c8a245b5ec04d7de3e6acd6fb00404ea4",
+          "bytes": 1079572
+        }
+      ]
+    }
+  ]
+}
