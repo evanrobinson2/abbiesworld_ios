@@ -1,0 +1,38 @@
+{
+ "what_i_did": [
+  ["Start", "Copied ../ration-jar's build.py, make_views.py and hero_check.py and reshaped them. Same four states (full, partial, empty, carried), same origin (footprint centre on the ground), front at -Y, the spoon on the -X side, and the same six materials with the same roles: Ceramic_Cream, Ceramic_Inside, Wood_Lid, Wood_Scoop, Rope_Jute and Feed_Grain. No new materials were needed."],
+  ["Target", "There is no turnaround, so the hero is the only target. The lit cream glaze is almost the backdrop's colour (246,229,198 vs 246,225,191), and a soft cast shadow runs off to the right. make_views.py keys the hero with a colour-distance test plus a blue/red chroma test above the ground line (y 1540 of 2048). Below that line it keeps only what is inside hand-traced polygons around the jar foot and the spoon bowl, then fills holes. It writes views/hero.png and views/hero_mask.png."],
+  ["Hero camera", "hero_check.py renders from the hero's direction with the harness lens and scores against views/hero_mask.png. The yaw/elevation grid is flat (0.92 to 0.935). I kept the normal model's yaw -5 / elevation 14, which agrees with the lid ellipse (about 15 deg)."],
+  ["Jar", "The faceted, carved 11-sided jar became a smooth, plump 16-sided clay jar with an egg belly. It is widest (0.44 m) at z 0.2 to 0.25, has a broad rounded foot, a tucked shoulder and a rolled cream lip at the neck. It is smooth shaded, with soft low-frequency 'hand-pressed' lumps instead of random facet jitter. The jar, lid and rope lean 1.5 deg towards the spoon and 1 deg forward."],
+  ["Lid", "The three-plank flat lid became one fat round lid: 0.146 m radius, 52 mm thick, with a rounded edge and a slightly domed top. It overhangs the lip and sits 3 deg askew. Partial and empty prop it on its edge against the back shoulder, as before."],
+  ["Rope", "The two thin neck loops, the sash and the lumpy knot cluster became one chunky twisted jute rope (11.5 mm) round the neck, tied in a big bow on the front-left: two teardrop loops, a plump knot and two tails hanging over the shoulder."],
+  ["Spoon", "The short scoop became the hero's long wooden spoon. Its deep round bowl rests on the ground at the front-left, opening to the front. A round, tapered handle leans on the jar up to just under the bow and ends in a knob. Partial has a heap of grain in the bowl."],
+  ["States", "full is the hero (also ration-jar-charming.glb). partial has the lid propped and a grain mound in the neck at z 0.445, plus grain in the spoon. empty has the lid propped and the dark inside showing. carried is the same as full."],
+  ["Game readiness", "1,604 triangles for full, empty and carried, and 1,696 for partial (supply budget 2k). That is 4 meshes, or 5 to 6 in partial. Footprint ratios are close to the normal model: width/depth 1.30 vs 1.23, height/width 1.05 vs 1.02. to_game.py ration-jar-charming installed simulation-assets-charming/supplies/ration-{full,partial,empty,carried}.json/.glb and the sandbox2 mirrors at x1.351 (normal: x1.490), keeping the old 0.76-unit footprint."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.936 from the matched camera at the final 768 px / 48 samples render (0.939 at 384 px). The plump egg body, rolled lip, fat lid, rope bow on the left and the long spoon leaning with its bowl on the ground all line up.",
+  "It reads as the same object as the normal jar: cream jar, wooden lid, rope at the neck, wooden scoop on the left. It is softer, rounder and chunkier, with a slight lean and an askew lid.",
+  "Under budget at 1.6k to 1.7k triangles."
+ ],
+ "off": [
+  "The hero's bow is a fluffy, finely twisted rope. Mine is a 5-sided twisted tube with two teardrop loops. It reads as a bow at size, but it is coarser close up.",
+  "Because the spoon bowl sits a little further out than the normal scoop, the charming jar is about 10% wider overall. to_game rescales by the widest span, so in game the charming jar body renders about 9% smaller than the normal one.",
+  "The cream still renders a little lighter and yellower than the hero's beige under the harness light. The woods are flat colours with no grain, and the hero lid's small notch is not modelled.",
+  "The propped lid in partial and empty reaches further back than the jar, as in the normal model, so to_game's per-state recentring shifts those states a few cm forward."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First charming build from the normal model: smooth 16-sided egg jar, rolled lip, fat round lid, one fat rope with a bow, long spoon. Camera -5/14.", "mean_iou": 0.892},
+  {"round": 2, "change": "Radii x1.05, a broader foot, a bigger spoon bowl and bow loops, a deeper cream. The camera grid was flat, so I kept -5/14.", "mean_iou": 0.931},
+  {"round": 3, "change": "Radii x1.07, spoon further left and lower, less lid tilt and lean: worse.", "mean_iou": 0.918},
+  {"round": 4, "change": "Radii back to x1.05, heights x1.04: much worse. The target is height-normalised, so the jar read too narrow.", "mean_iou": 0.88},
+  {"round": 5, "change": "Heights x0.97, round 2's lid tilt and lean restored.", "mean_iou": 0.929},
+  {"round": 6, "change": "Heights x1.0, a wider foot (0.176 m at the ground), a thicker lid (52 mm).", "mean_iou": 0.934},
+  {"round": 7, "change": "Radii x1.07, spoon bowl x1.08, a deeper cream colour.", "mean_iou": 0.938},
+  {"round": 8, "change": "Lid radius 0.155 and a chunkier spoon handle and knob: the lid got too tall in silhouette.", "mean_iou": 0.932},
+  {"round": 9, "change": "Lid radius 0.150.", "mean_iou": 0.932},
+  {"round": 10, "change": "Lid radius 0.146, handle kept chunky, partial grain raised to z 0.445 so it shows from above. Final at 768 px / 48 samples: 0.936.", "mean_iou": 0.939}
+ ],
+ "moving_parts": "None. The game poses supplies itself. Exported with export_animations=False. The fill states are separate GLBs in variants/.",
+ "creative_additions": "A gentle lean of the jar towards its spoon and an askew lid, for the storybook tilt. Soft hand-pressed lumps in the clay. The rope bow's tails drape over the shoulder. The spoon holds a heap of grain in the partial state."
+}
