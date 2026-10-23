@@ -1,0 +1,44 @@
+{
+ "source": "tools/meshy-heroes/meshy/A4-clay-tee/A4-clay-tee_rigged_character_glb.glb",
+ "out": "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/A4-clay-tee.glb",
+ "tris_before": 30985,
+ "tris": 10000,
+ "height_m": 1.8,
+ "bones": [
+  "root",
+  "hips",
+  "spine",
+  "chest",
+  "neck",
+  "head",
+  "clavicle_L",
+  "upperarm_L",
+  "forearm_L",
+  "hand_L",
+  "clavicle_R",
+  "upperarm_R",
+  "forearm_R",
+  "hand_R",
+  "thigh_L",
+  "shin_L",
+  "foot_L",
+  "thigh_R",
+  "shin_R",
+  "foot_R"
+ ],
+ "faces_per_material": {
+  "skin": 3113,
+  "suit": 2892,
+  "boots": 951,
+  "hair": 3044
+ },
+ "skin_colour": [
+  0.827,
+  0.576,
+  0.435
+ ],
+ "max_weights": 4,
+ "texture_px": 1024,
+ "bytes": 983796,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/cleanup.py"
+}
