@@ -1,0 +1,71 @@
+{
+  "appid": 2820820,
+  "name": "Jotunnslayer: Hordes of Hel",
+  "store_url": "https://store.steampowered.com/app/2820820/",
+  "genres": [
+    "Action",
+    "Roguelite",
+    "Survivors-like"
+  ],
+  "short_description": "A Norse survivors-like with 3D hordes and divine blessings.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Roguelite",
+    "Survivors-like"
+  ],
+  "summary": "A Norse survivors-like with 3D hordes and divine blessings.",
+  "identity": {
+    "core_loop": "Move, auto-attack, level up, pick boons, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Power fantasy escalation.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "XP and boons overlay; hordes are the world.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Dark Norse 3D.",
+    "palette": null,
+    "audio_mood": "Metal score.",
+    "pacing": "fast, medium sessions",
+    "lessons_for_abbies_world": "A screen full of enemies is a clear threat signal."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.56,
+      "expression": 0.22,
+      "structure": 0.78,
+      "social": 0.22,
+      "systems": 0.56,
+      "chance": 0.67,
+      "session": 0.67
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -70,6 +70,7 @@ import {refineRanchPaths} from './ranch-path-style.mjs';
 import {SHAPES,shapeTiles,shapeIcon} from './ranch-shapes.mjs?icons=5';
 import {makePerson} from './town-life/people/models.mjs';
 import * as T from 'three';
+import {presentation,playerCamera,selectionCue} from './presentation-layer.mjs';
 import {createArrival,ARRIVALS} from './ranch-arrivals.mjs?timing=4';
 import {ARRIVAL_SETTINGS,arrivalOptions} from './arrival-settings.mjs?page=2';
 import {inventIdentity} from './town-life/people/core.mjs';
@@ -119,7 +120,7 @@ if(isClaudeBoard()){initial.name='Claude';initial.config.seed=initial.config.see
 const presetNames=Object.fromEntries(Object.entries(SHAPES).map(([id,s])=>[id,s.name]));
 let inspected=null,gesture=null,heroRenderer=null,selectionBox=null;
 let motionUI,itemPickup;let active,composer,warm=true,running=true,busy=false,pending=false;
-const moonEnvironment=createMoonEnvironment();const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.05,1200);
+const moonEnvironment=createMoonEnvironment();const scene=new T.Scene(),camera=playerCamera(new T.PerspectiveCamera(34,1,.05,1200));
 const ranchSky=createRanchSky(scene);
 scene.add(moonEnvironment.root);moonEnvironment.root.visible=false;
 const renderer=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;host.append(renderer.domElement);
@@ -219,7 +220,7 @@ function inspectTile(hit){
  const x=plan.center.x+radius*((1-t)*Math.sin(a)+t*Math.sin(b)),z=plan.center.z+radius*((1-t)*Math.cos(a)+t*Math.cos(b));
  points.push(new T.Vector3(x*.1,active.heightAt(x,z)*.1+.04,z*.1));}
  selectionBox=new T.Line(new T.BufferGeometry().setFromPoints(points),new T.LineBasicMaterial({color:getComputedStyle(document.body).getPropertyValue('--app-accent').trim()||'#b64932',depthTest:false,toneMapped:false}));
- selectionBox.renderOrder=100;selectionBox.raycast=()=>{};scene.add(selectionBox);return true;
+ selectionBox.renderOrder=100;selectionBox.raycast=()=>{};scene.add(presentation(selectionBox,{purpose:'selection'}));return true;
 }
 
 function inspectHit(hit){
@@ -232,7 +233,7 @@ function inspectHit(hit){
  let title,kind,description,detail='';
  if(person){const identity=inventIdentity(person);title=identity.name;kind=`Resident · age ${person.age}`;description=`${identity.disposition[0].toUpperCase()+identity.disposition.slice(1)}. Enjoys ${identity.interest}.`;}
  else {const plan=active.assembly.plans.flatMap(p=>p.placements).find(p=>p.id===key);title=info?.title||plan?.role||'Ranch object';kind=info?.kind||'Ranch object';description=info?.description||'Part of the generated ranch.';if(plan){const purpose={home:'A home facing the shared walking routes.',barn:'Shelter and working space beside the ranch yard.',store:'Storage space connected to the working paths.',enclosure:'An enclosed paddock for animals.',field:'A cultivated plot beside the ranch.'};description=purpose[plan.role]||description;detail=`${plan.w.toFixed(1)} × ${plan.d.toFixed(1)} m footprint · connected to the ranch layout`;}}
- inspected={object:root,person,detail,title,placementId:key,sourceHit:hit};$('#inspect-details').hidden=true;$('#inspect-more').setAttribute('aria-expanded','false');$('#inspect-more').textContent='More ⌄';renderHero(root);$('#inspect-kind').textContent=kind;$('#inspect-name').textContent=title.replace(/ · complete$/,'');$('#inspect-description').textContent=description+(family==='ranch'?' Hold this item for half a second to pick it up. Release to drop; Escape restores. The simulation pauses during pickup and landing.':'');$('#inspection').hidden=false;if(!root.userData.temporaryInspection){if(selectionBox){scene.remove(selectionBox);selectionBox.geometry.dispose();selectionBox.material.dispose();}selectionBox=new T.BoxHelper(root,0xb64932);scene.add(selectionBox);}updateInspection();
+ inspected={object:root,person,detail,title,placementId:key,sourceHit:hit};$('#inspect-details').hidden=true;$('#inspect-more').setAttribute('aria-expanded','false');$('#inspect-more').textContent='More ⌄';renderHero(root);$('#inspect-kind').textContent=kind;$('#inspect-name').textContent=title.replace(/ · complete$/,'');$('#inspect-description').textContent=description+(family==='ranch'?' Hold this item for half a second to pick it up. Release to drop; Escape restores. The simulation pauses during pickup and landing.':'');$('#inspection').hidden=false;if(!root.userData.temporaryInspection){if(selectionBox){scene.remove(selectionBox);selectionBox.geometry.dispose();selectionBox.material.dispose();}selectionBox=selectionCue(T,root);scene.add(selectionBox);}updateInspection();
 }
 const pickRay=new T.Raycaster(),pickPointer=new T.Vector2(),pickCanvas=renderer.domElement;
 pickCanvas.addEventListener('pointerdown',e=>{gesture=!cameraOwnsPointer(e)&&!e.altKey?{id:e.pointerId,x:e.clientX,y:e.clientY,moved:false}:null;});

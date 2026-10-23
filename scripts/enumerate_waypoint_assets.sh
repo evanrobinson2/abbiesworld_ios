@@ -7,7 +7,7 @@
 set +e
 
 # Configuration
-BASE_URL="${BASE_URL:-http://abbies.world:8000}"
+BASE_URL="${BASE_URL:-http://game.abbies.world:8000}"
 API_KEY="${ABBIES_WORLD_SERVER_API_KEY:-}"
 
 if [[ -z "$API_KEY" ]]; then

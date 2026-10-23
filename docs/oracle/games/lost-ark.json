@@ -1,0 +1,70 @@
+{
+  "appid": 1599340,
+  "name": "Lost Ark",
+  "store_url": "https://store.steampowered.com/app/1599340/",
+  "genres": [
+    "MMO",
+    "Action RPG"
+  ],
+  "short_description": "Korean MMO action RPG with spectacular combat and raids.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "MMO",
+    "Action RPG"
+  ],
+  "summary": "Korean MMO action RPG with spectacular combat and raids.",
+  "identity": {
+    "core_loop": "Quest, fight, gear up, raid with friends.",
+    "mechanics": null,
+    "ui_and_game_feel": "Spectacular, grindy, busy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.24,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay-heavy; floating text everywhere.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Lavish fantasy.",
+    "palette": null,
+    "audio_mood": "Grand orchestral.",
+    "pacing": "fast, long sessions",
+    "lessons_for_abbies_world": "Spectacle without clarity tires you out."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.89,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 1.0,
+      "systems": 1.0,
+      "chance": 0.78,
+      "session": 0.89
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "mmo"
+  },
+  "review": "Gorgeous combat drowned in pop-ups and currencies. The spectacle is fun for a minute; the systems are a second job."
+}

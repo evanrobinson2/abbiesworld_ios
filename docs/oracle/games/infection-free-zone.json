@@ -1,0 +1,70 @@
+{
+  "appid": 1465460,
+  "name": "Infection Free Zone",
+  "store_url": "https://store.steampowered.com/app/1465460/",
+  "genres": [
+    "Strategy",
+    "City builder",
+    "Survival"
+  ],
+  "short_description": "Build a survivor colony in your real hometown map during a zombie outbreak.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "City builder",
+    "Survival"
+  ],
+  "summary": "Build a survivor colony in your real hometown map during a zombie outbreak.",
+  "identity": {
+    "core_loop": "Pick a real place, fortify, scavenge, expand, survive nights.",
+    "mechanics": null,
+    "ui_and_game_feel": "Novel real-world maps; rough edges.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.1,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay heavy; buildings change as you use them.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Real map data styled.",
+    "palette": null,
+    "audio_mood": "Tense ambient.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "Real places a child knows make a world personal instantly."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.78
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

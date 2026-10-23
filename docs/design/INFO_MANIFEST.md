@@ -2,8 +2,8 @@
 
 Each scene volunteers what it knows, so any UI, a bot or the voice controller can pick how to show it. The scene
 doesn't draw its own HUD; it says what information exists, how it is structured, who it is for, and the ways it could
-be shown across the five modes. Code: `prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs` on the live
-branch (`volunteer`, `readManifest`, `window.RanchInfo`). Principles: `CLAUDE.md`, "How Abbie's World shows information".
+be shown across the five modes. Code: `prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs`
+(`volunteer`, `readManifest`, `window.RanchInfo`). Principles: `CLAUDE.md`, "How Abbie's World shows information".
 
 Evan (2026-10-23): strongly support diegetic transmission of simulation information; prefer overlays for quick hits.
 Each scene could volunteer a list of panels, how the information is structured, suggestions on how it could be
@@ -29,6 +29,7 @@ volunteer('coffee-shop', {
       overlay: 'a cup that fills (quick hit only)'
     },
     glyph: '<svg viewBox="0 0 24 24">…</svg>'   // optional helper vector for overlay or spatial use
+    relevant: () => shop.rush > 3,     // optional: true when the world would suggest pinning it (Sandbox chronograph)
   }, {
     id: 'income', says: 'income statement', kind: 'ledger', who: 'player', for: ['grown-up'],
     read: () => shop.ledger,           // {revenue, costs: {espressoMachine: 5000, …}, net}

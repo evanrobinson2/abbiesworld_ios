@@ -1,0 +1,69 @@
+{
+  "appid": 1868140,
+  "name": "DAVE THE DIVER",
+  "store_url": "https://store.steampowered.com/app/1868140/",
+  "genres": [
+    "Adventure",
+    "Management"
+  ],
+  "short_description": "Dive by day for fish, run a sushi bar by night.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Management"
+  ],
+  "summary": "Dive by day for fish, run a sushi bar by night.",
+  "identity": {
+    "core_loop": "Dive, catch, cook, serve, upgrade, discover story.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chill with a comic edge; generous variety.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Oxygen is a tank on Dave; bar orders over customers' heads.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel art over 3D backgrounds.",
+    "palette": null,
+    "audio_mood": "Laid-back score.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Two light loops (gather, serve) make a daily rhythm a child can follow."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.56
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

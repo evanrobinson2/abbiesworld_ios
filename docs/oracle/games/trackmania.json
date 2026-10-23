@@ -1,0 +1,70 @@
+{
+  "appid": 2225070,
+  "name": "Trackmania",
+  "store_url": "https://store.steampowered.com/app/2225070/",
+  "genres": [
+    "Racing",
+    "Time trial"
+  ],
+  "short_description": "Arcade time-trial racing on wild stunt tracks, with a track editor.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Racing",
+    "Time trial"
+  ],
+  "summary": "Arcade time-trial racing on wild stunt tracks, with a track editor.",
+  "identity": {
+    "core_loop": "Drive, crash, restart instantly, shave milliseconds.",
+    "mechanics": null,
+    "ui_and_game_feel": "Instant restart; pure flow.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.4,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Ghost cars show you your best line (spatial).",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Clean bright stadium.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "fast, medium sessions",
+    "lessons_for_abbies_world": "Instant restart makes failure cheap and play endless."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 1.0,
+      "challenge": 0.78,
+      "expression": 0.78,
+      "structure": 0.22,
+      "social": 0.67,
+      "systems": 0.33,
+      "chance": 0.33,
+      "session": 0.44
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "racing"
+  },
+  "review": "One button resets you to the start in a blink, so failing never hurts. Ghosts of your best run race next to you. Both ideas suit kids perfectly."
+}

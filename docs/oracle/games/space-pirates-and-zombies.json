@@ -1,0 +1,68 @@
+{
+  "appid": 107200,
+  "name": "Space Pirates and Zombies",
+  "store_url": "https://store.steampowered.com/app/107200/",
+  "genres": [
+    "Action",
+    "Space"
+  ],
+  "short_description": "Top-down space combat and fleet building in a galaxy at war.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Space"
+  ],
+  "summary": "Top-down space combat and fleet building in a galaxy at war.",
+  "identity": {
+    "core_loop": "Fly, fight, salvage, upgrade.",
+    "mechanics": null,
+    "ui_and_game_feel": "Arcadey space.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.16,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "2D sprites.",
+    "palette": null,
+    "audio_mood": "Score.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Fleet building is a strong power fantasy."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.44,
+      "structure": 0.56,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.67
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

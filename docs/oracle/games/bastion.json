@@ -1,0 +1,67 @@
+{
+  "appid": 107100,
+  "name": "Bastion",
+  "store_url": "https://store.steampowered.com/app/107100/",
+  "genres": [
+    "Action RPG"
+  ],
+  "short_description": "An isometric action RPG where the ground builds itself under your feet and a narrator reacts to everything.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action RPG"
+  ],
+  "summary": "An isometric action RPG where the ground builds itself under your feet and a narrator reacts to everything.",
+  "identity": {
+    "core_loop": "Explore a level, fight, find a core, rebuild the Bastion, choose upgrades.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tight combat; the narrator turns play into story.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.1,
+        "meta": 0.2,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The narrator is meta-diegetic commentary; the world assembles as you walk; a small HUD for health and tonics.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Hand-painted floating islands.",
+    "palette": null,
+    "audio_mood": "Iconic acoustic-trip-hop score and a gravelly narrator.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A world that rises under the player's feet, and a voice that notices what they do."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.67,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.22,
+      "session": 0.33
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

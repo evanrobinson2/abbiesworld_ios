@@ -1,0 +1,69 @@
+{
+  "appid": 2592160,
+  "name": "Dispatch",
+  "store_url": "https://store.steampowered.com/app/2592160/",
+  "genres": [
+    "Narrative",
+    "Comedy"
+  ],
+  "short_description": "An episodic superhero workplace comedy: you route heroes to emergencies as a dispatcher.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Narrative",
+    "Comedy"
+  ],
+  "summary": "An episodic superhero workplace comedy: you route heroes to emergencies as a dispatcher.",
+  "identity": {
+    "core_loop": "Watch episodes, make choices, assign heroes to calls.",
+    "mechanics": null,
+    "ui_and_game_feel": "Show-like narrative with light management.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.1,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The dispatch board is the in-world interface; dialogue choices are overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Animated-series look.",
+    "palette": null,
+    "audio_mood": "Full voice cast.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "An in-fiction desk can be the whole interface."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.44,
+      "expression": 0.33,
+      "structure": 0.56,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.44
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

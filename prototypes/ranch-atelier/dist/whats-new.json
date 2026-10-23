@@ -2,6 +2,51 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-sign-in",
+      "date": "2026-10-23",
+      "title": "Anyone can sign in and play",
+      "line": "Sign in is in the toy box now. Anyone can sign in with Google and play the ranch as their own copy, and their worlds follow them to any device. It's free, and we ask nothing of them. Talking to the Computer needs a sign-in, and everyone's AI spending has a cap: $1 a person, $100 for all players together, and $1000 for you.",
+      "image": "/whats-new/2026-10-23-sign-in.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+      "threadTitle": "Sign-in to play the ranch"
+    },
+    {
+      "id": "2026-10-23-sandbox-chronograph",
+      "date": "2026-10-23",
+      "title": "A glass chronograph for your ranch",
+      "line": "Time of day, pause, speed, weather and season are back in one glass dial at the top. Pin any dial you like, such as friends on the way or hungry animals, and keep your own to-dos there. The ranch suggests dials, and you can pin them or wave them off. The cards in your hand now have proper card faces.",
+      "image": "/whats-new/2026-10-23-sandbox-chronograph.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
+      "threadTitle": "Sandbox v2 interface"
+    },
+    {
+      "id": "2026-10-23-selection-ring",
+      "date": "2026-10-23",
+      "title": "A soft ring, not a box",
+      "line": "Tap a building and a warm ring now glows on the ground around it, instead of the red debug box. Only you see the ring: the people on the ranch and the voice see just the ranch.",
+      "image": "/whats-new/2026-10-23-selection-ring.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
+      "threadTitle": "Design knowledge into practice"
+    },
+    {
+      "id": "2026-10-23-game-sense",
+      "date": "2026-10-23",
+      "title": "The voice gets game sense",
+      "line": "Ask the voice for something that fights the game, like a timer floating in the sky, and it suggests a better version first (a bell that rings faster) and asks. Say no and it does it your way. A giant monkey stomping the town? You get it, and the townsfolk run and grumble.",
+      "image": "/whats-new/2026-10-23-game-sense.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+      "threadTitle": "Live voice world control"
+    },
+    {
+      "id": "2026-10-23-sandbox-v2",
+      "date": "2026-10-23",
+      "title": "The world, edge to edge",
+      "line": "The sandbox lost its toolbar and side panel. Three glass toys remain: a sun dial at the top (tap to pause, hold for time and weather), your tile cards at the bottom, and a toy box with everything else. No more haze over the world. Classic layout is in the toy box.",
+      "image": "/whats-new/2026-10-23-sandbox-v2.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
+      "threadTitle": "Sandbox v2 interface"
+    },
+    {
       "id": "2026-10-23-card-forge",
       "date": "2026-10-23",
       "title": "Ranch cards you can hold",

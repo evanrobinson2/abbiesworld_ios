@@ -145,6 +145,22 @@
       "destination": "/simulations/index.html"
     },
     {
+      "source": "/sandbox/v1",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/v1/",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/v2",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/v2/",
+      "destination": "/simulations/index.html"
+    },
+    {
       "source": "/sandbox/outbreak",
       "destination": "/board.html"
     },

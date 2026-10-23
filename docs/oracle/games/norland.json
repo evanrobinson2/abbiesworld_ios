@@ -1,0 +1,68 @@
+{
+  "appid": 1857090,
+  "name": "Norland",
+  "store_url": "https://store.steampowered.com/app/1857090/",
+  "genres": [
+    "Strategy",
+    "Colony sim"
+  ],
+  "short_description": "A medieval kingdom sim of feuding lords and their people, RimWorld-style.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Colony sim"
+  ],
+  "summary": "A medieval kingdom sim of feuding lords and their people, RimWorld-style.",
+  "identity": {
+    "core_loop": "Keep people fed and content, deal with nobles, fight raids.",
+    "mechanics": null,
+    "ui_and_game_feel": "Stories emerge from people.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.4,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "People's moods in a log; spatial emotes; overlay panels.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Pixel-detailed.",
+    "palette": null,
+    "audio_mood": "Folk.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Characters with needs create stories without scripts."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.44,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.78,
+      "chance": 0.56,
+      "session": 0.89
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

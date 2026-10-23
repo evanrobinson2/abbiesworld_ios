@@ -1,0 +1,71 @@
+{
+  "appid": 1594320,
+  "name": "Captain of Industry",
+  "store_url": "https://store.steampowered.com/app/1594320/",
+  "genres": [
+    "Simulation",
+    "Factory",
+    "City builder"
+  ],
+  "short_description": "Settle an island and grow from farming to heavy industry, with real logistics and terrain.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Simulation",
+    "Factory",
+    "City builder"
+  ],
+  "summary": "Settle an island and grow from farming to heavy industry, with real logistics and terrain.",
+  "identity": {
+    "core_loop": "Mine, move, process, feed, power, expand.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deep and slow; satisfying conveyors.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.1,
+        "overlay": 0.4,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Trucks and belts carry the information; detailed overlay panels for stats.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Clean industrial realism.",
+    "palette": null,
+    "audio_mood": "Ambient machinery.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Logistics you can watch (trucks, belts) beats numbers on a panel."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 1.0,
+      "social": 0.33,
+      "systems": 1.0,
+      "chance": 0.22,
+      "session": 1.0
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

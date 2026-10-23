@@ -1,0 +1,69 @@
+{
+  "appid": 1952520,
+  "name": "PAW Patrol World",
+  "store_url": "https://store.steampowered.com/app/1952520/",
+  "genres": [
+    "Kids",
+    "Adventure"
+  ],
+  "short_description": "Open-world PAW Patrol: drive pups' vehicles around Adventure Bay doing missions.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Kids",
+    "Adventure"
+  ],
+  "summary": "Open-world PAW Patrol: drive pups' vehicles around Adventure Bay doing missions.",
+  "identity": {
+    "core_loop": "Pick a pup, drive, do a rescue, collect.",
+    "mechanics": null,
+    "ui_and_game_feel": "Easy and forgiving for preschoolers.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "overlay": 0.1,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Waypoints and prompts; simple.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Show look.",
+    "palette": null,
+    "audio_mood": "Show voices.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Kids love vehicles and roles; keep it forgiving."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.22,
+      "expression": 0.33,
+      "structure": 0.22,
+      "social": 0.33,
+      "systems": 0.22,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

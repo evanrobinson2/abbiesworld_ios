@@ -1,0 +1,68 @@
+{
+  "appid": 370060,
+  "name": "Coffee Shop Tycoon",
+  "store_url": "https://store.steampowered.com/app/370060/",
+  "genres": [
+    "Simulation",
+    "Management"
+  ],
+  "short_description": "Run a coffee shop: design the menu and the shop, set prices and grow.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Simulation",
+    "Management"
+  ],
+  "summary": "Run a coffee shop: design the menu and the shop, set prices and grow.",
+  "identity": {
+    "core_loop": "Set menu and prices, serve, read reviews, expand.",
+    "mechanics": null,
+    "ui_and_game_feel": "Small, cosy management.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.3,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Profit and reviews are overlay panels; customers show moods.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Cute low-poly shop.",
+    "palette": null,
+    "audio_mood": "Light café music.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "A coffee shop's numbers belong to the grown-up layer; kids see the queue and smiles."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.44,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.78,
+      "chance": 0.33,
+      "session": 0.78
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

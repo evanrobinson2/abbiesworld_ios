@@ -1,0 +1,70 @@
+{
+  "appid": 1276390,
+  "name": "Bloons TD Battles 2",
+  "store_url": "https://store.steampowered.com/app/1276390/",
+  "genres": [
+    "Tower defense",
+    "PvP"
+  ],
+  "short_description": "Monkeys pop balloons in head-to-head tower defense.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Tower defense",
+    "PvP"
+  ],
+  "summary": "Monkeys pop balloons in head-to-head tower defense.",
+  "identity": {
+    "core_loop": "Place monkeys, upgrade, send balloons at your rival.",
+    "mechanics": null,
+    "ui_and_game_feel": "Bright, simple, competitive.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Balloons and towers are the board.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Cheerful cartoon.",
+    "palette": null,
+    "audio_mood": "Bouncy.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Popping balloons is a perfect kid verb."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.67,
+      "session": 0.44
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "strategy"
+  },
+  "review": "Monkeys popping balloons: instantly understood by any child. Simple lanes, colourful threats."
+}

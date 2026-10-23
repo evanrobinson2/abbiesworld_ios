@@ -4,9 +4,9 @@ import {perceivable, validateItem, volunteer, readManifest} from '../presentatio
 // Perception never sees presentation, hidden or marker entities.
 const seen = perceivable([
   {id: 'cow', type: 'cow'}, {id: 'sel', type: 'box', layer: 'presentation'},
-  {id: 'ring', type: 'ring'}, {id: 'ghost', type: 'tree', visible: false}, {id: 'axes', type: 'tree', developerOnly: true},
+  {id: 'ring', type: 'ring'}, {id: 'pin', type: 'marker'}, {id: 'ghost', type: 'tree', visible: false}, {id: 'axes', type: 'tree', developerOnly: true},
 ]);
-assert.deepEqual(seen.map(e => e.id), ['cow']);
+assert.deepEqual(seen.map(e => e.id), ['cow', 'ring']);
 
 // Characters know it, so it must not lead with an overlay.
 assert.ok(validateItem({id: 'crowd', says: 'busy', who: 'characters', prefer: ['overlay'], ways: {overlay: 'gauge'}}).some(p => /lead with diegetic/.test(p)));

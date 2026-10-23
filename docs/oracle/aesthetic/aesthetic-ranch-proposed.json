@@ -1,0 +1,61 @@
+{
+  "id": "ranch-proposed",
+  "date": "2026-10-23",
+  "place": "ranch",
+  "dialect": "wood, bells, painted signs; warm cream paper light, teal roof caps, terracotta walls",
+  "note": "The proposed Ranch palette, drawn from the Midjourney concept paintings Evan picked for the Ranch rebuild (measured in captures/concept-*.jpg). The concept paintings stand in as captures until the rebuilt tile can be captured at day, dusk and night.",
+  "roles": {
+    "meadow":      {"hex": "#a6b087", "kind": "ground",   "hue_family": "green",      "share": 0.30, "material": "grass"},
+    "path":        {"hex": "#d4b48a", "kind": "ground",   "hue_family": "cream",      "share": 0.08, "material": "dirt"},
+    "foliage":     {"hex": "#6e9440", "kind": "figure",   "hue_family": "green",      "share": 0.14, "material": "leaf"},
+    "roof_cap":    {"hex": "#3b8f8b", "kind": "figure",   "hue_family": "teal",       "share": 0.05, "material": "roof", "motif": "teal_roof_cap"},
+    "wall_paint":  {"hex": "#c9694f", "kind": "figure",   "hue_family": "terracotta", "share": 0.05, "material": "painted_wood"},
+    "timber":      {"hex": "#8a6444", "kind": "figure",   "hue_family": "brown",      "share": 0.06, "material": "wood"},
+    "plaster":     {"hex": "#f1dcb8", "kind": "figure",   "hue_family": "cream",      "share": 0.04, "material": "plaster"},
+    "water":       {"hex": "#4a92a6", "kind": "figure",   "hue_family": "teal",       "share": 0.03, "material": "water"},
+    "brass":       {"hex": "#e3ab35", "kind": "accent",   "hue_family": "cream",      "share": 0.01, "material": "brass", "motif": "bell"},
+    "sky_paper":   {"hex": "#efe5cf", "kind": "backdrop", "hue_family": "cream",      "share": 0.20, "material": "sky"},
+    "light":       {"hex": "#ffd9a0", "kind": "light",    "hue_family": "cream"},
+    "shadow":      {"hex": "#5a6a8c", "kind": "shadow",   "hue_family": "teal"}
+  },
+  "ui": {
+    "glass_tint": "#f3e3c4",
+    "glass_rim": "#ffd9a0",
+    "ink": "#5a3f28",
+    "active": "#3b8f8b",
+    "warm_accent": "#c9694f"
+  },
+  "meanings": [
+    {"id": "ripe",          "hex": "#e3ab35", "against": "foliage",  "layer": "world", "also": ["fruit swells", "bees circle", "soft chime"]},
+    {"id": "thirsty_crop",  "hex": "#968241", "against": "meadow",   "layer": "world", "also": ["leaves droop", "cracked soil texture"]},
+    {"id": "lamp_lit_home", "hex": "#ffc56b", "against": "#3a4058",  "layer": "world", "also": ["chimney smoke", "music warms"]},
+    {"id": "storm_coming",  "hex": "#6b7a90", "against": "sky_paper", "layer": "world", "also": ["wind in trees", "animals head home", "bell rings faster"]},
+    {"id": "wants_something","hex": "#fff4dc", "against": "meadow",  "layer": "spatial", "also": ["bubble shape", "bob animation"]}
+  ],
+  "signals": [
+    {"id": "time", "drives": ["sky", "sun", "fog", "windows", "animals", "npcs", "music", "sound"],
+     "states": {"dawn": {"sky": "#f6d7b8", "sun": "#ffc9a0"}, "day": {"sky": "#efe5cf", "sun": "#ffd9a0"},
+                "dusk": {"sky": "#e9a77f", "sun": "#ff9f6b"}, "night": {"sky": "#2f3a5a", "sun": "#8fa6d6"}}},
+    {"id": "season", "drives": ["foliage", "ground", "sky", "music"],
+     "states": {"summer": {"capture": "captures/ranch-summer.jpg", "crop": [125, 125, 550, 300]},
+                "autumn": {"capture": "captures/ranch-autumn.jpg", "crop": [125, 125, 550, 300]},
+                "frost":  {"capture": "captures/ranch-frost.jpg",  "crop": [125, 125, 550, 300]}}},
+    {"id": "weather", "drives": ["sky", "fog", "foliage", "animals", "sound", "music"]}
+  ],
+  "motifs": [
+    {"id": "teal_roof_cap", "description": "Every Ranch roof is a teal cap with a darker eave: the home, coop, goat shelter, barn and water point.",
+     "appears_in": ["family_home", "chicken_coop", "goat_shelter", "barn_shelter", "water_point"], "measured_in": "captures/concept-*.jpg"},
+    {"id": "bell", "description": "Brass bell: gate, cafe, barn. Shape and sound motif; the only brass in the world, so brass means 'something to know'.",
+     "appears_in": ["gate", "cafe", "barn_shelter"]},
+    {"id": "soil_slab", "description": "The land is a thick slab with a soil edge: the world reads as a toy you hold.",
+     "appears_in": ["ranch_tile", "garden_tile", "meadow_tile"]},
+    {"id": "puff_canopy", "description": "Trees are round puffs on a short trunk; species differ by colour and puff count, not by detail.",
+     "appears_in": ["maple", "apple_tree", "hazel", "birch"]}
+  ],
+  "shape_language": {"homes": "round", "animals": "round", "trees": "round", "fences": "square", "barns": "square", "roofs": "triangle", "storms": "triangle"},
+  "kid_safe": {"alarm_red": false, "max_flash_hz": 0, "fail_desaturate": false},
+  "captures": [
+    {"file": "captures/concept-family-home.jpg"}, {"file": "captures/concept-barn.jpg"}, {"file": "captures/concept-coop.jpg"},
+    {"file": "captures/concept-goat-shelter.jpg"}, {"file": "captures/concept-feed-store.jpg"}, {"file": "captures/concept-water-point.jpg"}
+  ]
+}

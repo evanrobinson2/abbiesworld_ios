@@ -7,7 +7,7 @@
 set -e
 
 # Default values (can be overridden)
-BASE_URL="${1:-http://abbies.world:8000}"
+BASE_URL="${1:-http://game.abbies.world:8000}"
 ASSET_PATH="${2:-/static/assets/styles}"
 
 # Colors for output

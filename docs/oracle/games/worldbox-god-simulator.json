@@ -1,0 +1,69 @@
+{
+  "appid": 1206560,
+  "name": "WorldBox - God Simulator",
+  "store_url": "https://store.steampowered.com/app/1206560/",
+  "genres": [
+    "Sandbox",
+    "God game"
+  ],
+  "short_description": "Paint a world, drop creatures and watch civilisations rise.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Sandbox",
+    "God game"
+  ],
+  "summary": "Paint a world, drop creatures and watch civilisations rise.",
+  "identity": {
+    "core_loop": "Paint land, spawn life, watch, intervene.",
+    "mechanics": null,
+    "ui_and_game_feel": "Kid-joyful god toy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.1,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Mostly world; toolbar overlay.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Pixel art.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Abbie-style creation: make a world and watch it live."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 1.0,
+      "structure": 0.33,
+      "social": 0.44,
+      "systems": 0.78,
+      "chance": 0.44,
+      "session": 0.22
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

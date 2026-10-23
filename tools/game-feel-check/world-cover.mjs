@@ -9,7 +9,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {chromium} from 'playwright';
 
-const [root, page = '/', ...rest] = process.argv.slice(2);
+const [rootArg, page = '/', ...rest] = process.argv.slice(2);
+const root = path.resolve(rootArg); // absolute, so the path guard below compares like with like
 const jsonOut = rest[rest.indexOf('--json') + 1];
 const settle = Number(process.env.SETTLE_MS || 6000);
 const types = {'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.glb':'model/gltf-binary','.wasm':'application/wasm'};
@@ -22,7 +23,7 @@ const resolve = url => {
 const server = http.createServer((req, res) => {
   let file = path.join(root, resolve(req.url));
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
-  if (!file.startsWith(path.resolve(root)) || !fs.existsSync(file)) { res.writeHead(404); return res.end(); }
+  if (!file.startsWith(root) || !fs.existsSync(file)) { res.writeHead(404); return res.end(); }
   res.writeHead(200, {'content-type': types[path.extname(file)] || 'application/octet-stream'});
   fs.createReadStream(file).pipe(res);
 }).listen(0);
@@ -62,5 +63,6 @@ for (const [name, viewport] of [['phone', {width: 390, height: 844}], ['desktop'
 }
 await browser.close(); server.close();
 const out = {page, budgetPct: 8, results};
+if (results.every(r => !r.hasWorld)) { console.error(`world-cover: no world canvas on ${page}; is the site path right?`); process.exitCode = 2; }
 if (jsonOut) fs.writeFileSync(jsonOut, JSON.stringify(out, null, 2));
 console.log(JSON.stringify(out, null, 2));
