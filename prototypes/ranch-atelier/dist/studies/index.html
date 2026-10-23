@@ -151,6 +151,7 @@ for (const b of document.querySelectorAll('.ib')) b.innerHTML = b.innerHTML.repl
 // Every study: id, title, line, page, picture, group, study number, last changed, status, and what it changed (impact,
 // 0-5, with the reason). Newest first on Home comes from `at`.
 const S = [
+ {id:'turnaround-hero', t:'Turnaround Hero', s:'One exact heroic figure, built the way the bruiser taught us', src:'turnaround-hero/index.html', img:'turnaround-hero/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0023', at:'2026-10-23T07:15Z', st:'Ready', impact:3, why:'Applies the bruiser method to a second figure: turnaround, depth ruler, anatomy base, planes.'},
  {id:'bruiser', t:'Bruiser bake-off', s:'Six ways to split one brute, scored from the same camera', src:'bruiser/index.html', img:'bruiser/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0021', at:'2026-10-23T06:40Z', st:'In progress', impact:4, why:'Finds the way of splitting a model across jobs that gets one exact figure right.'},
  {id:'space-mail', t:'Space Mail', s:'Low-gravity letter romp, playable', src:'spacemail/index.html', img:'spacemail/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0012', at:'2026-10-23T05:03Z', st:'Playable', impact:2, why:'A whole mini game designed from our identity; waiting on your go to build it.'},
  {id:'cafe-study', t:'The café', s:'The study: map, town, front, inside', src:'cafe/study.html', img:'cafe/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T05:50Z', st:'Your call', impact:2, why:'Decides what Abbie’s café is at every distance before anything is built.'},
@@ -168,6 +169,9 @@ const S = [
  {id:'ridge', t:'Ridge helmet', s:'Late-Roman helmet for Fritigern', src:'helmet/index.html#ridge', img:'helmet/ridge.jpg', g:'Helmet', at:'2026-10-22T18:40Z', st:'Done', impact:2, why:'The first piece of Fritigern’s 4th-century gear.'},
  {id:'atelier', t:'Atelier pack', s:'Trees, rocks and props, before and after', src:'atelier/index.html', img:'atelier/img/after-z.jpg', g:'Models', at:'2026-10-22T18:40Z', st:'Live', impact:5, why:'Its trees, rocks and props replaced the Ranch’s old models in the game.'},
 ];
+// Paths are written relative to /studies/; make them absolute so /studies (no slash) loads every picture and page.
+const abs = p => /^(\/|https?:)/.test(p) ? p : '/studies/' + p;
+for (const x of S) { x.img = abs(x.img); x.src = abs(x.src); }
 const GROUPS = [...new Set(S.map(x => x.g))];
 const by = Object.fromEntries(S.map(x => [x.id, x]));
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -329,6 +333,6 @@ me.style.cursor = 'pointer';
 const who = () => { const p = getProfile(); document.getElementById('me-name').textContent = p.name || 'You'; document.getElementById('me-style').textContent = 'Profile and settings · ' + currentTheme().name; };
 who(); for (const ev of ['aw-look-change', 'aw-profile-change', 'storage']) addEventListener(ev, who);
 </script>
-<script src="/version-chip.js?v=2" defer></script>
+<script src="/version-chip.js?v=3" defer></script>
 </body>
 </html>

@@ -8,6 +8,10 @@ const SESSION='aw_session',PENDING='aw_signin';
 const SESSION_TTL=60*86400000,PENDING_TTL=10*60000;
 // Hosts that may sign in; each one's /api/auth/callback is registered in Auth0.
 const HOSTS=new Set(['ranch.abbies.world','www.abbies.world','abbies-ranch-atelier.vercel.app']);
+// Every abbies.world address shares one session: the cookie is set on the whole domain, and an address that isn't in
+// HOSTS (abbies.world, app.abbies.world) signs in through www and comes back, so Auth0 needs no new callbacks.
+const SITE='abbies.world',HUB='www.abbies.world';
+const onSite=host=>host===SITE||String(host).endsWith('.'+SITE);
 
 const b64=s=>Buffer.from(s).toString('base64url');
 const unb64=s=>Buffer.from(s,'base64url').toString();
@@ -24,7 +28,7 @@ function cookies(req){
  const out={};for(const part of String(req.headers?.cookie||'').split(';')){const i=part.indexOf('=');if(i>0)out[part.slice(0,i).trim()]=decodeURIComponent(part.slice(i+1).trim());}
  return out;
 }
-const cookie=(name,value,maxAgeMs)=>`${name}=${encodeURIComponent(value)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${Math.max(0,Math.floor(maxAgeMs/1000))}`;
+const cookie=(name,value,maxAgeMs,domain)=>`${name}=${encodeURIComponent(value)}; Path=/;${domain?` Domain=${domain};`:''} HttpOnly; Secure; SameSite=Lax; Max-Age=${Math.max(0,Math.floor(maxAgeMs/1000))}`;
 const accountId=sub=>createHash('sha256').update('abbies-world-player:'+sub).digest('hex').slice(0,24);
 const ownerEmails=env=>new Set(String(env.OWNER_EMAILS||'').toLowerCase().split(/[\s,]+/).filter(Boolean));
 function config(env=process.env){return {domain:env.AUTH0_DOMAIN||AUTH0_DOMAIN,clientId:env.AUTH0_WEB_CLIENT_ID||'',secret:env.AUTH_SESSION_SECRET||''};}
@@ -34,13 +38,25 @@ function account(req,env=process.env,now=Date.now()){
  const s=unseal(cookies(req)[SESSION],config(env).secret,now);
  return s&&/^[a-f0-9]{24}$/.test(s.a)?{id:s.a,owner:s.o===1}:null;
 }
-function hostOf(req){const host=String(req.headers?.['x-forwarded-host']||req.headers?.host||'').toLowerCase();return HOSTS.has(host)?host:null;}
-const safeReturn=path=>typeof path==='string'&&/^\/(?!\/)[\w\-./?=&%#]*$/.test(path)&&path.length<300?path:'/sandbox';
+const rawHost=req=>String(req.headers?.['x-forwarded-host']||req.headers?.host||'').toLowerCase();
+function hostOf(req){const host=rawHost(req);return HOSTS.has(host)?host:null;}
+// A path on this host, or a full https address elsewhere on abbies.world (for a sign-in that went through www).
+const safePath=path=>typeof path==='string'&&/^\/(?!\/)[\w\-./?=&%#]*$/.test(path)&&path.length<300;
+function safeReturn(to){
+ if(safePath(to))return to;
+ try{const u=new URL(to);if(u.protocol==='https:'&&!u.port&&!u.username&&onSite(u.hostname)&&safePath(u.pathname+u.search+u.hash))return u.href;}catch{}
+ return '/sandbox';
+}
 
 // Step 1: send the browser to Auth0's sign-in page with PKCE; nothing is stored server-side.
 function beginSignIn(req,env=process.env,now=Date.now()){
- const {domain,clientId,secret}=config(env),host=hostOf(req);
- if(!clientId||!secret||!host)return null;
+ const {domain,clientId,secret}=config(env),host=hostOf(req),raw=rawHost(req);
+ if(!clientId||!secret)return null;
+ if(!host){
+  if(!onSite(raw))return null;
+  const back=new URL(req.url||'/','https://x.invalid').searchParams.get('return');
+  return {location:`https://${HUB}/api/auth/login?return=${encodeURIComponent(`https://${raw}${safePath(back)?back:'/sandbox'}`)}`,cookie:null};
+ }
  const verifier=randomBytes(32).toString('base64url'),state=randomBytes(16).toString('base64url'),nonce=randomBytes(16).toString('base64url');
  const url=new URL(`https://${domain}/authorize`);
  const returnTo=safeReturn(new URL(req.url||'/','https://x.invalid').searchParams.get('return'));
@@ -83,13 +99,15 @@ async function finishSignIn(req,env=process.env,{fetcher=fetch,now=Date.now()}={
  // The email is read once, only to recognise the owner, and never stored.
  const owner=claims.email_verified===true&&ownerEmails(env).has(String(claims.email||'').toLowerCase());
  const session=seal({a:accountId(claims.sub),o:owner?1:0,x:now+SESSION_TTL},secret);
- return {cookies:[clear,cookie(SESSION,session,SESSION_TTL)],returnTo:pending.r,owner};
+ // On abbies.world the session covers every address (and replaces an older host-only one); elsewhere it stays on this host.
+ const shared=onSite(host)?[cookie(SESSION,'',0),cookie(SESSION,session,SESSION_TTL,SITE)]:[cookie(SESSION,session,SESSION_TTL)];
+ return {cookies:[clear,...shared],returnTo:pending.r,owner};
 }
 
 function signOut(req,env=process.env){
- const {domain,clientId}=config(env),host=hostOf(req)||'ranch.abbies.world';
+ const {domain,clientId}=config(env),host=hostOf(req)||HUB;
  const url=new URL(`https://${domain}/v2/logout`);url.searchParams.set('client_id',clientId);url.searchParams.set('returnTo',`https://${host}/sandbox`);
- return {location:clientId?url.toString():'/sandbox',cookie:cookie(SESSION,'',0)};
+ return {location:clientId?url.toString():'/sandbox',cookie:onSite(rawHost(req))?[cookie(SESSION,'',0),cookie(SESSION,'',0,SITE)]:cookie(SESSION,'',0)};
 }
 
-module.exports={account,beginSignIn,finishSignIn,signOut,seal,unseal,accountId,verifyIdToken,cookies,HOSTS,SESSION,PENDING,_reset(){jwksCache=null;}};
+module.exports={account,beginSignIn,finishSignIn,signOut,seal,unseal,accountId,verifyIdToken,cookies,HOSTS,onSite,SESSION,PENDING,_reset(){jwksCache=null;}};
