@@ -1,0 +1,219 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/borage-charming",
+ "name": "borage-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a borage plant clump with soft hairy leaves and star-shaped bright blue flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a borage plant clump with soft hairy leaves and star-shaped bright blue flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "824db6f8-809f-4163-986c-845830c8f88b",
+    "grid_url": "https://www.midjourney.com/jobs/824db6f8-809f-4163-986c-845830c8f88b?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "0932cae4-b8fb-4e5a-b605-4eac9b8f76ee",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:41:43.658Z",
+    "grid_done_at": "2026-10-23T01:42:01.661Z",
+    "upscale_clicked_at": "2026-10-23T01:42:11.594Z",
+    "downloaded_at": "2026-10-23T01:43:23.167Z",
+    "pick_reason": "oversized star-shaped blue flowers over plump leaves, whole plant with margin"
+   }
+  },
+  "files": {
+   "hero.png": "fd2f1a2f06319baf47f37d1a717c60dea14bf141f367e85a52c3b7992024a34e"
+  },
+  "folder": "tools/ranch-rebuild/mj/borage-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/borage-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "first charming reshape: tiered rosette + dome leaves, 9 big stars on own stems",
+    "mean_iou": 0.613
+   },
+   {
+    "round": 2,
+    "change": "stars x1.3 with broader petals, longer rosette, more stem leaves, rounder footprint",
+    "mean_iou": 0.679
+   },
+   {
+    "round": 3,
+    "change": "steeper rosette with more droop, wider leaf body, stars x1.45",
+    "mean_iou": 0.71
+   },
+   {
+    "round": 4,
+    "change": "fatter petals (notch 0.55), taller body leaves",
+    "mean_iou": 0.725
+   },
+   {
+    "round": 5,
+    "change": "mound rebuilt as two tiers of arching paddle leaves (the stacked-plate look was gone)",
+    "mean_iou": 0.722
+   },
+   {
+    "round": 6,
+    "change": "wider bottom tier, bigger stem leaves, darker greens",
+    "mean_iou": 0.724
+   },
+   {
+    "round": 7,
+    "change": "no right-side skew, right flowers moved out, stars x1.5, depth to 0.30 m; 768 px final 0.733",
+    "mean_iou": 0.728
+   },
+   {
+    "round": 8,
+    "change": "flowers spread +-0.06 m in depth so the side and back read round (IoU cost 0.02, kept); final 768 px / 48 samples",
+    "mean_iou": 0.714
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/borage (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same six objects and materials (Leaf_Green, Leaf_Pale, Stem_Green, Stem_Red, Petal_Blue, Flower_White), one material each, double-sided cards, flat colours, Z up, origin at the base on the ground, front -Y, height 0.41 m. No variants (plant)."
+   ],
+   [
+    "Target",
+    "Hero only (no turnaround for this asset). make_views.py keys the hero: the cast shadow is darkened cream (red above green) while every plant pixel has green above red, so the mask keeps only pixels that differ from the backdrop with G > R. hero_check.py is the normal model's front-on 15 deg camera, unchanged."
+   ],
+   [
+    "Leaf mound",
+    "The normal clump's 10 flat rosette cards plus 50 small dome leaves became a chubby mound of 18 big pillowy paddle leaves in two tiers (10 low, 8 upper), each rising steeply from the crown and arching over so the outer half drapes toward the viewer. New plump_leaf: 12 triangles, midrib puffed up, round shoulders, blunt tip, edges curled down. A small faceted core keeps it solid."
+   ],
+   [
+    "Flowers",
+    "15 small stars on red stalks became 9 OVERSIZED plump stars (about 1.9x the normal flower radius) on bouncy bowed stems, one stem each: broad shoulders and forward-cupped tips (20 triangles), a white eye cone, a short Stem_Red neck. Placed from the hero: top flower leaning left, a cluster spilling out to the right, small side-on and nodding ones, spread +-0.06 m in depth so the side view is round, not a flat card."
+   ],
+   [
+    "Extras",
+    "Seven small leaves up the stems and three round green buds on short spurs, as in the hero."
+   ],
+   [
+    "Game readiness",
+    "765 triangles (budget 1k; the normal is 993). 0.340 x 0.300 x 0.406 m (normal 0.368 x 0.327 x 0.410), width/depth 1.13 vs 1.125. to_game.py borage-charming installed simulations/regional-assets-charming/GF-249.glb and updated the charming manifest."
+   ]
+  ],
+  "creative_additions": "Round green buds on spurs and a nodding star at the front left, for bounce."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.34021326899528503,
+   0.30022016167640686,
+   0.40623196959495544
+  ],
+  "triangles": 765,
+  "materials": [
+   "Flower_White",
+   "Stem_Red",
+   "Leaf_Green",
+   "Leaf_Pale",
+   "Petal_Blue",
+   "Stem_Green"
+  ],
+  "parts": [
+   {
+    "name": "flower_centres",
+    "materials": [
+     "Flower_White"
+    ]
+   },
+   {
+    "name": "flower_stalks",
+    "materials": [
+     "Stem_Red"
+    ]
+   },
+   {
+    "name": "leaves",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "leaves_pale",
+    "materials": [
+     "Leaf_Pale"
+    ]
+   },
+   {
+    "name": "petals",
+    "materials": [
+     "Petal_Blue"
+    ]
+   },
+   {
+    "name": "stems",
+    "materials": [
+     "Stem_Green"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.714,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero IoU 0.714 at 768 px / 48 samples (0.733 before spreading the flowers in depth), against 0.657 for the normal model on its own hero.",
+   "Reads as the same borage (green mound, blue stars with white eyes) but toy-like: a round squat cushion of big soft leaves and a bouquet of chunky stars bouncing out of it.",
+   "Same footprint proportions, height, materials and roles as the normal one, so it swaps in place."
+  ],
+  "off": [
+   "The hero's leaves are smooth and velvety with soft hairs; flat-shaded 12-triangle paddles read as facetted, slightly cabbage-like up close.",
+   "The hero's stems are thick and fuzzy and carry more leaves among the flowers; there is less green between the stars here (orange in the overlay at mid-left).",
+   "The hero's stars have a dark anther tip on the white centre; left out (too small to read in the tile).",
+   "The hero has no visible red stalks; Stem_Red is kept (short muted neck under each star) to keep the normal model's material set."
+  ]
+ },
+ "exports": {
+  "runtime": "borage-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-249.glb"
+   ]
+  }
+ },
+ "files": {
+  "borage-charming.glb": {
+   "sha256": "2e5b4bcfd9add52f32f2b5074225fda5c3a503ef75202544c13970614be71d2a",
+   "bytes": 59444
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "4611a8411a67128df5940fa1754488d357f0ae25",
+  "path": "tools/ranch-rebuild/models/borage-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
