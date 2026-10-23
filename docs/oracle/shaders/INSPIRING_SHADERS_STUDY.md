@@ -46,6 +46,7 @@ Loved, in the review page's `picks` collection:
 - **#10 Ink and paper (Okami).** "This is wonderful for flashbacks and in game storytelling I love it."
 - **#11 Worlds in orbs (Cocoon).** "This is a fun unlock to a new world."
 - **#13 Line art (Sable).** "Love this too."
+- **#14 Dusk dread (Dredge).** "We'll do a ship adventure soon, and I love this mist."
 - **#12 One-bit dither (Obra Dinn):** no pick given; Evan is using it for a Game Boy and old-screen flashback in Grace's basement.
 Plans only. No production build until Evan says go.
 
@@ -86,6 +87,14 @@ default (place dialects: the Ranch is wood and bells; this place is ink and flat
 Build: the `sable` preset (2 flat tones, warm shadow, `ink: .05`) as a `lineart` entry in TOON_LOOKS with `bands: 2,
 soft: 0`, ink shells on characters and props (not terrain), sky colour driven by time of day. Cost: medium (ink shells).
 Tour: only if it ships as a place in the unlock flow.
+
+### Dusk dread: the mist for the ship adventure
+The mist is the signal, not a filter: one `dusk` value (time of day, weather, how far from port) drives fog colour and
+density, lantern warmth, water sound and the crew's mood together. Keep it playful-tense, never scary: the fog thickens
+and goes green-grey, the lantern is the one warm light and a bell or horn answers, and things in the mist are curious
+rather than threatening (a seal, a lighthouse, a friendly foghorn). The `dredge` preset (fog `.075`, `#4f6b5a`, painted
+grain, warm lantern point light) becomes a `dusk` look with height fog, drifting mist sprites and a wind-pushed fog front
+(shared with the weather fronts, `simulations/` weather). Build only when Evan says go on the ship adventure.
 
 ### One-bit dither: Game Boy and old-screen flashback in Grace's basement
 Fits straight onto the existing basement computer (FreeDOS) and the old TV warm-up: a `oneBit` pass at half or quarter
