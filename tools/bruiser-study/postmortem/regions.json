@@ -1,0 +1,944 @@
+{
+ "note": "Where did each build differ from the Meshy body? Region by region, in centimetres.\n\npython3 postmortem.py A B C D1 D2 D3 E F G   -> postmortem/regions.json, postmortem/regions.md\n\nEvery arm's assembled model (runs/<arm>/out/all/model.glb, built square to the camera) and the Meshy body\n(meshy/canonical/meshy_canonical.glb, also square) sit in the same frame. Each Meshy vertex is named by body region\n(the learned rings in scale/spec give its part; scale/edit.py's REGIONS give the band), and for each region we read:\n  - gap: mean distance from Meshy's surface to the nearest point of ours (cm): how far off the shape is\n  - signed: + where ours sticks out past Meshy, - where ours falls short (cm), along Meshy's normal\n  - width / depth: our region's x and y extent minus Meshy's (cm)",
+ "regions": [
+  "chest",
+  "neck",
+  "head",
+  "deltoid L",
+  "upper arm L",
+  "deltoid R",
+  "upper arm R",
+  "belly",
+  "forearm L",
+  "hand L",
+  "hips",
+  "hand R",
+  "forearm R",
+  "thigh L",
+  "shin L",
+  "foot L",
+  "thigh R",
+  "shin R",
+  "foot R"
+ ],
+ "arms": {
+  "A": {
+   "chest": {
+    "gap": 5.6,
+    "p90": 11.0,
+    "signed": -3.2
+   },
+   "neck": {
+    "gap": 4.0,
+    "p90": 10.3,
+    "signed": -1.8
+   },
+   "head": {
+    "gap": 1.8,
+    "p90": 2.9,
+    "signed": -0.2
+   },
+   "deltoid L": {
+    "gap": 5.7,
+    "p90": 10.5,
+    "signed": -3.6
+   },
+   "upper arm L": {
+    "gap": 5.4,
+    "p90": 11.3,
+    "signed": -3.2
+   },
+   "deltoid R": {
+    "gap": 5.8,
+    "p90": 10.7,
+    "signed": -4.0
+   },
+   "upper arm R": {
+    "gap": 6.0,
+    "p90": 13.4,
+    "signed": -3.8
+   },
+   "belly": {
+    "gap": 2.8,
+    "p90": 4.8,
+    "signed": -1.0
+   },
+   "forearm L": {
+    "gap": 5.9,
+    "p90": 11.1,
+    "signed": -3.2
+   },
+   "hand L": {
+    "gap": 6.5,
+    "p90": 10.8,
+    "signed": -2.8
+   },
+   "hips": {
+    "gap": 2.1,
+    "p90": 3.7,
+    "signed": -0.8
+   },
+   "hand R": {
+    "gap": 3.4,
+    "p90": 6.4,
+    "signed": -1.5
+   },
+   "forearm R": {
+    "gap": 6.0,
+    "p90": 11.9,
+    "signed": -3.3
+   },
+   "thigh L": {
+    "gap": 2.5,
+    "p90": 4.1,
+    "signed": -1.0
+   },
+   "shin L": {
+    "gap": 3.0,
+    "p90": 5.6,
+    "signed": -1.3
+   },
+   "foot L": {
+    "gap": 6.3,
+    "p90": 11.9,
+    "signed": -3.1
+   },
+   "thigh R": {
+    "gap": 1.5,
+    "p90": 2.5,
+    "signed": -0.7
+   },
+   "shin R": {
+    "gap": 4.0,
+    "p90": 8.7,
+    "signed": -1.6
+   },
+   "foot R": {
+    "gap": 12.0,
+    "p90": 20.8,
+    "signed": -4.7
+   },
+   "_all": {
+    "gap": 4.46,
+    "extra": 1.49,
+    "chamfer": 4.09
+   }
+  },
+  "B": {
+   "chest": {
+    "gap": 4.8,
+    "p90": 10.4,
+    "signed": -2.9
+   },
+   "neck": {
+    "gap": 4.6,
+    "p90": 10.0,
+    "signed": -1.6
+   },
+   "head": {
+    "gap": 1.9,
+    "p90": 3.2,
+    "signed": -0.5
+   },
+   "deltoid L": {
+    "gap": 5.6,
+    "p90": 11.2,
+    "signed": -3.6
+   },
+   "upper arm L": {
+    "gap": 6.1,
+    "p90": 13.2,
+    "signed": -3.9
+   },
+   "deltoid R": {
+    "gap": 5.9,
+    "p90": 10.9,
+    "signed": -4.1
+   },
+   "upper arm R": {
+    "gap": 6.2,
+    "p90": 14.6,
+    "signed": -3.7
+   },
+   "belly": {
+    "gap": 2.8,
+    "p90": 4.6,
+    "signed": -0.5
+   },
+   "forearm L": {
+    "gap": 6.1,
+    "p90": 13.4,
+    "signed": -3.7
+   },
+   "hand L": {
+    "gap": 5.8,
+    "p90": 9.5,
+    "signed": -2.5
+   },
+   "hips": {
+    "gap": 2.6,
+    "p90": 4.5,
+    "signed": -0.1
+   },
+   "hand R": {
+    "gap": 4.1,
+    "p90": 7.8,
+    "signed": -1.8
+   },
+   "forearm R": {
+    "gap": 5.5,
+    "p90": 12.7,
+    "signed": -3.0
+   },
+   "thigh L": {
+    "gap": 2.5,
+    "p90": 4.2,
+    "signed": -1.1
+   },
+   "shin L": {
+    "gap": 3.0,
+    "p90": 5.6,
+    "signed": -1.1
+   },
+   "foot L": {
+    "gap": 5.9,
+    "p90": 11.5,
+    "signed": -3.2
+   },
+   "thigh R": {
+    "gap": 1.6,
+    "p90": 2.9,
+    "signed": -0.7
+   },
+   "shin R": {
+    "gap": 3.7,
+    "p90": 7.0,
+    "signed": -1.4
+   },
+   "foot R": {
+    "gap": 9.6,
+    "p90": 17.4,
+    "signed": -3.9
+   },
+   "_all": {
+    "gap": 4.35,
+    "extra": 1.44,
+    "chamfer": 3.81
+   }
+  },
+  "C": {
+   "chest": {
+    "gap": 4.8,
+    "p90": 10.2,
+    "signed": -2.8
+   },
+   "neck": {
+    "gap": 4.3,
+    "p90": 10.1,
+    "signed": -1.7
+   },
+   "head": {
+    "gap": 1.6,
+    "p90": 2.7,
+    "signed": -0.1
+   },
+   "deltoid L": {
+    "gap": 5.7,
+    "p90": 11.3,
+    "signed": -2.9
+   },
+   "upper arm L": {
+    "gap": 7.0,
+    "p90": 14.7,
+    "signed": -4.0
+   },
+   "deltoid R": {
+    "gap": 5.8,
+    "p90": 11.0,
+    "signed": -3.8
+   },
+   "upper arm R": {
+    "gap": 6.6,
+    "p90": 15.3,
+    "signed": -4.0
+   },
+   "belly": {
+    "gap": 2.7,
+    "p90": 4.4,
+    "signed": -0.4
+   },
+   "forearm L": {
+    "gap": 6.9,
+    "p90": 13.8,
+    "signed": -4.2
+   },
+   "hand L": {
+    "gap": 6.0,
+    "p90": 10.4,
+    "signed": -2.5
+   },
+   "hips": {
+    "gap": 2.1,
+    "p90": 3.4,
+    "signed": -0.2
+   },
+   "hand R": {
+    "gap": 3.7,
+    "p90": 7.1,
+    "signed": -1.9
+   },
+   "forearm R": {
+    "gap": 6.8,
+    "p90": 14.3,
+    "signed": -4.2
+   },
+   "thigh L": {
+    "gap": 2.6,
+    "p90": 4.4,
+    "signed": -1.0
+   },
+   "shin L": {
+    "gap": 5.1,
+    "p90": 10.7,
+    "signed": -2.9
+   },
+   "foot L": {
+    "gap": 3.7,
+    "p90": 6.0,
+    "signed": -2.2
+   },
+   "thigh R": {
+    "gap": 1.7,
+    "p90": 2.6,
+    "signed": -0.6
+   },
+   "shin R": {
+    "gap": 5.4,
+    "p90": 10.9,
+    "signed": -3.4
+   },
+   "foot R": {
+    "gap": 4.9,
+    "p90": 9.6,
+    "signed": -2.7
+   },
+   "_all": {
+    "gap": 4.27,
+    "extra": 1.54,
+    "chamfer": 3.76
+   }
+  },
+  "D1": {
+   "chest": {
+    "gap": 4.6,
+    "p90": 10.6,
+    "signed": -2.6
+   },
+   "neck": {
+    "gap": 3.0,
+    "p90": 6.7,
+    "signed": -1.2
+   },
+   "head": {
+    "gap": 1.6,
+    "p90": 2.9,
+    "signed": -0.4
+   },
+   "deltoid L": {
+    "gap": 4.0,
+    "p90": 7.4,
+    "signed": -2.7
+   },
+   "upper arm L": {
+    "gap": 3.6,
+    "p90": 7.9,
+    "signed": -1.5
+   },
+   "deltoid R": {
+    "gap": 5.2,
+    "p90": 9.4,
+    "signed": -4.1
+   },
+   "upper arm R": {
+    "gap": 4.9,
+    "p90": 12.2,
+    "signed": -3.4
+   },
+   "belly": {
+    "gap": 3.2,
+    "p90": 5.6,
+    "signed": -1.1
+   },
+   "forearm L": {
+    "gap": 4.7,
+    "p90": 11.4,
+    "signed": -3.0
+   },
+   "hand L": {
+    "gap": 5.7,
+    "p90": 9.7,
+    "signed": -2.4
+   },
+   "hips": {
+    "gap": 3.2,
+    "p90": 5.8,
+    "signed": -1.8
+   },
+   "hand R": {
+    "gap": 3.9,
+    "p90": 7.8,
+    "signed": -1.5
+   },
+   "forearm R": {
+    "gap": 5.0,
+    "p90": 12.8,
+    "signed": -2.9
+   },
+   "thigh L": {
+    "gap": 3.0,
+    "p90": 5.0,
+    "signed": -1.6
+   },
+   "shin L": {
+    "gap": 2.7,
+    "p90": 4.9,
+    "signed": -1.6
+   },
+   "foot L": {
+    "gap": 6.5,
+    "p90": 12.7,
+    "signed": -3.2
+   },
+   "thigh R": {
+    "gap": 2.2,
+    "p90": 4.0,
+    "signed": -1.3
+   },
+   "shin R": {
+    "gap": 3.2,
+    "p90": 5.7,
+    "signed": -1.7
+   },
+   "foot R": {
+    "gap": 7.4,
+    "p90": 13.6,
+    "signed": -3.3
+   },
+   "_all": {
+    "gap": 3.93,
+    "extra": 1.16,
+    "chamfer": 3.67
+   }
+  },
+  "D2": {
+   "chest": {
+    "gap": 2.7,
+    "p90": 4.9,
+    "signed": -0.9
+   },
+   "neck": {
+    "gap": 2.4,
+    "p90": 4.5,
+    "signed": -0.5
+   },
+   "head": {
+    "gap": 1.4,
+    "p90": 2.4,
+    "signed": -0.3
+   },
+   "deltoid L": {
+    "gap": 5.1,
+    "p90": 8.9,
+    "signed": -3.2
+   },
+   "upper arm L": {
+    "gap": 5.8,
+    "p90": 12.7,
+    "signed": -2.7
+   },
+   "deltoid R": {
+    "gap": 4.8,
+    "p90": 8.7,
+    "signed": -3.0
+   },
+   "upper arm R": {
+    "gap": 5.5,
+    "p90": 14.3,
+    "signed": -3.2
+   },
+   "belly": {
+    "gap": 2.7,
+    "p90": 5.4,
+    "signed": 1.3
+   },
+   "forearm L": {
+    "gap": 6.4,
+    "p90": 13.2,
+    "signed": -4.0
+   },
+   "hand L": {
+    "gap": 5.6,
+    "p90": 9.1,
+    "signed": -2.5
+   },
+   "hips": {
+    "gap": 1.8,
+    "p90": 3.2,
+    "signed": 0.3
+   },
+   "hand R": {
+    "gap": 3.7,
+    "p90": 7.3,
+    "signed": -1.5
+   },
+   "forearm R": {
+    "gap": 6.1,
+    "p90": 13.5,
+    "signed": -3.3
+   },
+   "thigh L": {
+    "gap": 2.4,
+    "p90": 4.0,
+    "signed": -0.2
+   },
+   "shin L": {
+    "gap": 5.6,
+    "p90": 12.4,
+    "signed": -2.2
+   },
+   "foot L": {
+    "gap": 5.2,
+    "p90": 10.3,
+    "signed": -2.8
+   },
+   "thigh R": {
+    "gap": 1.6,
+    "p90": 2.6,
+    "signed": -0.1
+   },
+   "shin R": {
+    "gap": 5.8,
+    "p90": 12.8,
+    "signed": -2.5
+   },
+   "foot R": {
+    "gap": 6.2,
+    "p90": 11.6,
+    "signed": -2.9
+   },
+   "_all": {
+    "gap": 3.53,
+    "extra": 1.82,
+    "chamfer": 3.4
+   }
+  },
+  "D3": {
+   "chest": {
+    "gap": 4.6,
+    "p90": 9.1,
+    "signed": -2.4
+   },
+   "neck": {
+    "gap": 4.4,
+    "p90": 9.8,
+    "signed": -1.4
+   },
+   "head": {
+    "gap": 1.6,
+    "p90": 2.6,
+    "signed": -0.5
+   },
+   "deltoid L": {
+    "gap": 4.7,
+    "p90": 8.4,
+    "signed": -2.7
+   },
+   "upper arm L": {
+    "gap": 4.9,
+    "p90": 11.6,
+    "signed": -3.1
+   },
+   "deltoid R": {
+    "gap": 4.7,
+    "p90": 8.1,
+    "signed": -3.0
+   },
+   "upper arm R": {
+    "gap": 4.9,
+    "p90": 12.2,
+    "signed": -2.8
+   },
+   "belly": {
+    "gap": 3.1,
+    "p90": 4.9,
+    "signed": -0.1
+   },
+   "forearm L": {
+    "gap": 4.6,
+    "p90": 9.7,
+    "signed": -3.1
+   },
+   "hand L": {
+    "gap": 5.9,
+    "p90": 9.9,
+    "signed": -2.3
+   },
+   "hips": {
+    "gap": 2.2,
+    "p90": 3.5,
+    "signed": -0.6
+   },
+   "hand R": {
+    "gap": 3.8,
+    "p90": 7.6,
+    "signed": -1.4
+   },
+   "forearm R": {
+    "gap": 4.5,
+    "p90": 10.5,
+    "signed": -2.9
+   },
+   "thigh L": {
+    "gap": 2.5,
+    "p90": 4.2,
+    "signed": -1.0
+   },
+   "shin L": {
+    "gap": 3.5,
+    "p90": 7.0,
+    "signed": -1.4
+   },
+   "foot L": {
+    "gap": 8.4,
+    "p90": 15.6,
+    "signed": -3.8
+   },
+   "thigh R": {
+    "gap": 2.0,
+    "p90": 3.5,
+    "signed": -0.7
+   },
+   "shin R": {
+    "gap": 3.8,
+    "p90": 7.8,
+    "signed": -2.0
+   },
+   "foot R": {
+    "gap": 5.9,
+    "p90": 10.8,
+    "signed": -2.8
+   },
+   "_all": {
+    "gap": 4.09,
+    "extra": 1.33,
+    "chamfer": 3.7
+   }
+  },
+  "E": {
+   "chest": {
+    "gap": 2.6,
+    "p90": 4.9,
+    "signed": -0.8
+   },
+   "neck": {
+    "gap": 2.7,
+    "p90": 4.1,
+    "signed": -0.0
+   },
+   "head": {
+    "gap": 1.8,
+    "p90": 3.3,
+    "signed": -0.5
+   },
+   "deltoid L": {
+    "gap": 2.3,
+    "p90": 3.9,
+    "signed": -1.2
+   },
+   "upper arm L": {
+    "gap": 3.3,
+    "p90": 7.0,
+    "signed": -1.9
+   },
+   "deltoid R": {
+    "gap": 2.5,
+    "p90": 4.1,
+    "signed": -1.5
+   },
+   "upper arm R": {
+    "gap": 3.2,
+    "p90": 6.5,
+    "signed": -2.1
+   },
+   "belly": {
+    "gap": 2.3,
+    "p90": 3.9,
+    "signed": -0.1
+   },
+   "forearm L": {
+    "gap": 3.3,
+    "p90": 5.9,
+    "signed": -1.6
+   },
+   "hand L": {
+    "gap": 4.5,
+    "p90": 7.6,
+    "signed": -1.9
+   },
+   "hips": {
+    "gap": 1.9,
+    "p90": 3.0,
+    "signed": -0.5
+   },
+   "hand R": {
+    "gap": 1.7,
+    "p90": 3.0,
+    "signed": -0.8
+   },
+   "forearm R": {
+    "gap": 3.1,
+    "p90": 5.5,
+    "signed": -1.6
+   },
+   "thigh L": {
+    "gap": 2.6,
+    "p90": 4.3,
+    "signed": -0.7
+   },
+   "shin L": {
+    "gap": 2.2,
+    "p90": 3.6,
+    "signed": -0.6
+   },
+   "foot L": {
+    "gap": 2.4,
+    "p90": 5.1,
+    "signed": -1.3
+   },
+   "thigh R": {
+    "gap": 1.7,
+    "p90": 2.8,
+    "signed": -0.4
+   },
+   "shin R": {
+    "gap": 2.8,
+    "p90": 5.2,
+    "signed": -0.8
+   },
+   "foot R": {
+    "gap": 3.1,
+    "p90": 7.4,
+    "signed": -1.7
+   },
+   "_all": {
+    "gap": 2.6,
+    "extra": 1.2,
+    "chamfer": 2.74
+   }
+  },
+  "G": {
+   "chest": {
+    "gap": 0.6,
+    "p90": 1.3,
+    "signed": -0.0
+   },
+   "neck": {
+    "gap": 0.5,
+    "p90": 1.0,
+    "signed": -0.0
+   },
+   "head": {
+    "gap": 0.6,
+    "p90": 1.1,
+    "signed": -0.0
+   },
+   "deltoid L": {
+    "gap": 0.9,
+    "p90": 1.8,
+    "signed": -0.0
+   },
+   "upper arm L": {
+    "gap": 0.9,
+    "p90": 1.9,
+    "signed": -0.0
+   },
+   "deltoid R": {
+    "gap": 0.9,
+    "p90": 1.8,
+    "signed": -0.0
+   },
+   "upper arm R": {
+    "gap": 1.0,
+    "p90": 2.0,
+    "signed": -0.0
+   },
+   "belly": {
+    "gap": 0.9,
+    "p90": 1.7,
+    "signed": -0.0
+   },
+   "forearm L": {
+    "gap": 1.2,
+    "p90": 2.2,
+    "signed": -0.1
+   },
+   "hand L": {
+    "gap": 0.6,
+    "p90": 1.1,
+    "signed": -0.0
+   },
+   "hips": {
+    "gap": 0.9,
+    "p90": 1.7,
+    "signed": -0.0
+   },
+   "hand R": {
+    "gap": 0.6,
+    "p90": 1.2,
+    "signed": -0.0
+   },
+   "forearm R": {
+    "gap": 1.2,
+    "p90": 2.1,
+    "signed": -0.1
+   },
+   "thigh L": {
+    "gap": 0.9,
+    "p90": 1.8,
+    "signed": -0.0
+   },
+   "shin L": {
+    "gap": 1.1,
+    "p90": 2.1,
+    "signed": -0.1
+   },
+   "foot L": {
+    "gap": 0.7,
+    "p90": 1.3,
+    "signed": -0.0
+   },
+   "thigh R": {
+    "gap": 0.9,
+    "p90": 1.6,
+    "signed": -0.0
+   },
+   "shin R": {
+    "gap": 1.1,
+    "p90": 2.1,
+    "signed": -0.1
+   },
+   "foot R": {
+    "gap": 0.7,
+    "p90": 1.6,
+    "signed": -0.1
+   },
+   "_all": {
+    "gap": 0.76,
+    "extra": 0.05,
+    "chamfer": 0.7
+   }
+  },
+  "R5": {
+   "chest": {
+    "gap": 1.8,
+    "p90": 3.6,
+    "signed": 0.6
+   },
+   "neck": {
+    "gap": 1.6,
+    "p90": 3.0,
+    "signed": -0.5
+   },
+   "head": {
+    "gap": 1.7,
+    "p90": 3.1,
+    "signed": -0.2
+   },
+   "deltoid L": {
+    "gap": 2.5,
+    "p90": 4.1,
+    "signed": -2.0
+   },
+   "upper arm L": {
+    "gap": 3.3,
+    "p90": 9.0,
+    "signed": -1.9
+   },
+   "deltoid R": {
+    "gap": 1.9,
+    "p90": 3.7,
+    "signed": 0.5
+   },
+   "upper arm R": {
+    "gap": 4.1,
+    "p90": 6.4,
+    "signed": -0.3
+   },
+   "belly": {
+    "gap": 2.2,
+    "p90": 4.3,
+    "signed": -0.1
+   },
+   "forearm L": {
+    "gap": 4.3,
+    "p90": 10.0,
+    "signed": -2.0
+   },
+   "hand L": {
+    "gap": 1.7,
+    "p90": 3.3,
+    "signed": -0.8
+   },
+   "hips": {
+    "gap": 2.3,
+    "p90": 4.3,
+    "signed": -0.5
+   },
+   "hand R": {
+    "gap": 3.1,
+    "p90": 6.6,
+    "signed": -0.9
+   },
+   "forearm R": {
+    "gap": 4.7,
+    "p90": 10.3,
+    "signed": -2.3
+   },
+   "thigh L": {
+    "gap": 2.1,
+    "p90": 4.7,
+    "signed": 0.8
+   },
+   "shin L": {
+    "gap": 3.0,
+    "p90": 5.4,
+    "signed": -1.0
+   },
+   "foot L": {
+    "gap": 3.9,
+    "p90": 8.4,
+    "signed": -2.5
+   },
+   "thigh R": {
+    "gap": 2.2,
+    "p90": 4.7,
+    "signed": 1.1
+   },
+   "shin R": {
+    "gap": 4.1,
+    "p90": 7.7,
+    "signed": -2.1
+   },
+   "foot R": {
+    "gap": 3.6,
+    "p90": 10.2,
+    "signed": -2.1
+   },
+   "_all": {
+    "gap": 2.39,
+    "extra": 2.05,
+    "chamfer": 2.71
+   }
+  }
+ }
+}

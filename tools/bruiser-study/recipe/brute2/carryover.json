@@ -1,0 +1,234 @@
+[
+  {
+    "setting": "stylise.head",
+    "brute1": 0.8,
+    "brute2": 0.72,
+    "verdict": "moved a little",
+    "guess": 0.72,
+    "guess_minus_fit": 0.0
+  },
+  {
+    "setting": "stylise.neck_girth",
+    "brute1": 1.575,
+    "brute2": 1.575,
+    "verdict": "carried over",
+    "guess": 1.45,
+    "guess_minus_fit": -0.125
+  },
+  {
+    "setting": "stylise.upper_arm_girth",
+    "brute1": 1.0,
+    "brute2": 1.0,
+    "verdict": "carried over",
+    "guess": 1.2,
+    "guess_minus_fit": 0.2
+  },
+  {
+    "setting": "stylise.forearm_girth",
+    "brute1": 0.837,
+    "brute2": 0.737,
+    "verdict": "moved a little",
+    "guess": 1.1,
+    "guess_minus_fit": 0.363
+  },
+  {
+    "setting": "stylise.forearm_length",
+    "brute1": 0.881,
+    "brute2": 0.926,
+    "verdict": "carried over",
+    "guess": 0.95,
+    "guess_minus_fit": 0.024
+  },
+  {
+    "setting": "stylise.hand",
+    "brute1": 1.262,
+    "brute2": 1.212,
+    "verdict": "carried over",
+    "guess": 1.4,
+    "guess_minus_fit": 0.188
+  },
+  {
+    "setting": "stylise.thigh_girth",
+    "brute1": 1.0,
+    "brute2": 1.0,
+    "verdict": "carried over",
+    "guess": 1.1,
+    "guess_minus_fit": 0.1
+  },
+  {
+    "setting": "stylise.shin_girth",
+    "brute1": 0.76,
+    "brute2": 0.72,
+    "verdict": "carried over",
+    "guess": 0.85,
+    "guess_minus_fit": 0.13
+  },
+  {
+    "setting": "stylise.leg_length",
+    "brute1": 0.775,
+    "brute2": 0.75,
+    "verdict": "carried over",
+    "guess": 0.88,
+    "guess_minus_fit": 0.13
+  },
+  {
+    "setting": "stylise.foot",
+    "brute1": 0.76,
+    "brute2": 1.04,
+    "verdict": "moved a lot",
+    "guess": 0.9,
+    "guess_minus_fit": -0.14
+  },
+  {
+    "setting": "shape.torso/torso-scale-depth-incr",
+    "brute1": 1.8,
+    "brute2": 3.05,
+    "verdict": "moved a lot",
+    "guess": 1.8,
+    "guess_minus_fit": -1.25
+  },
+  {
+    "setting": "shape.torso/torso-muscle-dorsi-incr",
+    "brute1": 0.813,
+    "brute2": 0.813,
+    "verdict": "carried over",
+    "guess": 1.5,
+    "guess_minus_fit": 0.687
+  },
+  {
+    "setting": "shape.torso/torso-muscle-pectoral-incr",
+    "brute1": 1.925,
+    "brute2": 1.675,
+    "verdict": "moved a little",
+    "guess": 1.8,
+    "guess_minus_fit": 0.125
+  },
+  {
+    "setting": "shape.torso/measure-shoulder-dist-incr",
+    "brute1": 1.375,
+    "brute2": 1.125,
+    "verdict": "moved a little",
+    "guess": 1.6,
+    "guess_minus_fit": 0.475
+  },
+  {
+    "setting": "shape.arms/both-upperarm-shoulder-muscle-incr",
+    "brute1": 0.25,
+    "brute2": 0.0,
+    "verdict": "moved a lot",
+    "guess": 1.0,
+    "guess_minus_fit": 1.0
+  },
+  {
+    "setting": "shape.arms/both-upperarm-muscle-incr",
+    "brute1": 0.75,
+    "brute2": 0.75,
+    "verdict": "carried over",
+    "guess": 1.0,
+    "guess_minus_fit": 0.25
+  },
+  {
+    "setting": "shape.arms/both-lowerarm-muscle-incr",
+    "brute1": 3.0,
+    "brute2": 3.0,
+    "verdict": "carried over",
+    "guess": 1.0,
+    "guess_minus_fit": -2.0
+  },
+  {
+    "setting": "pose.arm_drop_from_vertical",
+    "brute1": 18.0,
+    "brute2": 22.0,
+    "verdict": "moved a little",
+    "guess": 22.0,
+    "guess_minus_fit": 0.0
+  },
+  {
+    "setting": "pose.elbow_bend",
+    "brute1": 7.5,
+    "brute2": 22.5,
+    "verdict": "moved a lot",
+    "guess": 8.0,
+    "guess_minus_fit": -14.5
+  },
+  {
+    "setting": "head.width",
+    "brute1": -0.125,
+    "brute2": 1.375,
+    "verdict": "moved a lot",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.depth",
+    "brute1": 0.062,
+    "brute2": -0.5,
+    "verdict": "moved a lot",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.height",
+    "brute1": 0.5,
+    "brute2": 0.5,
+    "verdict": "carried over",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.square",
+    "brute1": 1.312,
+    "brute2": 1.812,
+    "verdict": "moved a lot",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.jaw_width",
+    "brute1": 1.0,
+    "brute2": 1.0,
+    "verdict": "carried over",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.jaw_forward",
+    "brute1": -1.5,
+    "brute2": -1.5,
+    "verdict": "carried over",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.chin_height",
+    "brute1": -1.5,
+    "brute2": -1.5,
+    "verdict": "carried over",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.brow_forward",
+    "brute1": -1.25,
+    "brute2": 1.25,
+    "verdict": "moved a lot",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.forehead_forward",
+    "brute1": -1.5,
+    "brute2": 2.5,
+    "verdict": "moved a lot",
+    "guess": null,
+    "guess_minus_fit": null
+  },
+  {
+    "setting": "head.head_forward",
+    "brute1": -1.25,
+    "brute2": 1.0,
+    "verdict": "moved a lot",
+    "guess": null,
+    "guess_minus_fit": null
+  }
+]

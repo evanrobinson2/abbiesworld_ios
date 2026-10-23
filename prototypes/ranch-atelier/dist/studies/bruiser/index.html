@@ -29,9 +29,11 @@ h3{font-size:20px;font-weight:600}
 p{margin:0;max-width:66ch}
 .muted{color:var(--muted)}
 .eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-header{display:grid;gap:10px}
-.chip{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);padding:7px 10px;border-radius:99px;border:1px solid var(--line);background:var(--paper);width:max-content}
-.chip i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+header{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.wrap>*{min-width:0}
+.chip{max-width:100%;white-space:normal;display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);padding:7px 10px;border-radius:99px;border:1px solid var(--line);background:var(--paper);justify-self:start}
+.chip>span{min-width:0;line-height:1.35}
+.chip i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent)}
 
 /* the pair: reference left, model right, identical frames */
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -113,6 +115,13 @@ section{display:grid;gap:14px}
 
 @media (max-width:640px){.pair{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.pm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px;align-items:start}
+.pm-grid img,.pm-wide img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);display:block}
+.pm-wide{margin:14px 0}
+.pm-cues{margin:0;padding-left:20px;display:grid;gap:4px}
+.pm-cues li::marker{color:var(--accent);font-weight:800}
+.pm-list{display:grid;gap:10px;padding-left:20px}
+@media (max-width:720px){.pm-grid{grid-template-columns:1fr}}
 </style>
 
 <div class="wrap">
@@ -144,6 +153,62 @@ section{display:grid;gap:14px}
   <div class="metrics-line" id="pickedLine"></div>
  </section>
 
+
+ <section aria-labelledby="pm">
+  <span class="eyebrow">Post-mortem</span>
+  <h2 id="pm">How we missed the obvious</h2>
+  <p class="lede">Our score was wrong. Hand-built arm C scored 0.957 against his picture and Meshy scored 0.915, yet measured in 3D, C is 4.3 cm off Meshy's body on average and our own learned build is 2.4 cm off. The score rewarded a wrong model over a right one, because his picture is not a front view.</p>
+  <div class="pm-grid">
+   <figure class="pm-wide" style="margin:0"><img src="postmortem/cues.jpg" alt="His picture with seven numbered cues showing the camera is turned" loading="lazy" width="768" height="768"></figure>
+   <div>
+    <h3>Seven cues, all leaning the same way</h3>
+    <ol class="pm-cues">
+     <li>The head shows its side plane; the nose points right.</li>
+     <li>The tank top's neckline sits off the shoulders' centre.</li>
+     <li>The far shoulder shows its top and outer plane.</li>
+     <li>The far forearm shows its outer side; the near one shows its front.</li>
+     <li>The shorts show a side panel on one side only.</li>
+     <li>One foot points out about 45°.</li>
+     <li>The other foot points at the camera.</li>
+    </ol>
+    <p class="muted">The camera is turned about 23° (two checks agree: 24° and 23°). The brief told every arm "the reference is a front view". Agents did log "head turned 7°" and "foot turned 43°", but each was written down as pose and nobody was allowed to question the brief. So every arm built a square body and stretched its outline until a square camera matched a turned picture. Scoring only that one outline could never catch it, and the side and back we added came from the Midjourney turnaround, which is itself a guess.</p>
+   </div>
+  </div>
+  <h3>Every build is too thin, and the back is missing</h3>
+  <p class="muted">Meshy's body, painted by how far each build is from it. Blue means ours falls short. Front-to-back, the hand builds fall short twice as much as side-to-side: chest depth 35 to 45 cm against Meshy's 51. The back of every hand build is dark blue: no trapezius, no lats, no shoulder blades, no spine curve. Arms are the worst region (3 to 4 cm thin all round); head and thighs, the parts the picture shows squarely, were fine.</p>
+  <div class="pm-wide"><img src="postmortem/heatmap.jpg" alt="Heatmaps of builds B, E, R5 and G against Meshy, front and side" loading="lazy"></div>
+  <div class="table-wrap"><table style="min-width:640px">
+   <thead><tr><th>Arm</th><th>How it was built</th><th>Average gap to Meshy</th><th>What it taught</th></tr></thead>
+   <tbody>
+    <tr><td><b>A–D3</b></td><td>Six chunks, split six ways (crops, parallel, top down, feet up, torso out, face last)</td><td>3.5–4.5 cm</td><td>Order barely mattered. Torso out (D2) was best.</td></tr>
+    <tr><td><b>E</b></td><td>Anatomy first: a skeleton, depth from the turnaround</td><td>2.6 cm</td><td>Where depth comes from is what matters.</td></tr>
+    <tr><td><b>R5</b></td><td>Learned: a body model with 29 named settings fitted to Meshy, plus a head fit</td><td>2.4 cm</td><td>Best of our own builds at chest, neck and head. Forearms and feet still thin, and built 12% too short.</td></tr>
+    <tr><td><b>M</b></td><td>Meshy image-to-3D, 43 s</td><td>the answer key</td><td>Matches his picture's outline at 0.961 once turned 23°.</td></tr>
+    <tr><td><b>G</b></td><td>Meshy's surface on our ring cage, cut to 3,000 faces</td><td>0.8 cm</td><td>Best asset, but it's dressing, not learning.</td></tr>
+   </tbody>
+  </table></div>
+  <h3>What we did to Meshy's mesh to get G</h3>
+  <ol class="pm-list">
+   <li>Turned him square (−24°), stood him on the ground, scaled him to 2.0 m.</li>
+   <li>Welded the vertices Meshy splits at its texture seams and fixed the normals. Without this the cut-down mesh cracked.</li>
+   <li>Sliced the body every 2 cm into rings and tracked them into named parts: torso, deltoids, arms, hands, legs.</li>
+   <li>Tied every vertex to its ring, so a change said in words ("forearms 20% thicker") moves the surface.</li>
+   <li>Cut to 10% of the faces, flat shading, colours by height band (skin, tank top, shorts).</li>
+  </ol>
+  <p class="muted">None of those steps reads his picture. The shape is all Meshy's.</p>
+  <h3>Meshy against his actual picture</h3>
+  <p class="muted">His picture, Meshy turned 24°, and the two outlines over each other. Meshy's hands are smaller and set higher, its feet shorter, its head a little narrower, and the tank top's rolled trim is smoothed away. His picture's camera is also lower and a little wider than ours, which makes his feet and legs bigger.</p>
+  <div class="pm-wide"><img src="postmortem/meshy-vs-picture.jpg" alt="His picture, Meshy's model from the same camera, and both outlines overlaid" loading="lazy" width="1548" height="516"></div>
+  <h3>Getting good, then getting cheap</h3>
+  <ol class="pm-list">
+   <li><b>Measure the camera before modelling.</b> Read the cues, estimate the turn, and check it against the cutout. Never assume "front view".</li>
+   <li><b>Score in 3D and in the picture's own camera.</b> One outline is not a score.</li>
+   <li><b>Take depth from a skeleton and a body model,</b> never from the outline.</li>
+   <li><b>Build the back on purpose,</b> from the anatomy checklist.</li>
+   <li><b>Score anatomy region by region,</b> like the table above.</li>
+  </ol>
+  <p class="muted">Brute #2 test, scored against his Meshy model: brute #1's settings as they are, 0.737; refitted, 0.762; a guess from his picture alone, by an agent that saw no 3D, 0.718. The settings carry real knowledge, but one picture still doesn't give depth. Once a picture-only guess with these rules reaches the refitted score, a new figure costs nothing but our own Blender time, and Meshy becomes an occasional audit.</p>
+ </section>
 
  <section aria-labelledby="sv">
   <span class="eyebrow">Round 4 · Meshy as the target</span>
