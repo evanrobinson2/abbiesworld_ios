@@ -463,9 +463,45 @@
      "k": "canon",
      "t": "Scene information manifest",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INFO_MANIFEST.md"
+    },
+    {
+     "k": "canon",
+     "t": "Café model kit (Blender Python recipes, materials, mass, joints)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/cafe-build/kit.py",
+     "note": "every café model is built from these recipes"
+    },
+    {
+     "k": "canon",
+     "t": "Presentation layer: renderWorldOnly",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs",
+     "note": "the photo booth takes each picture from the world layer only"
+    },
+    {
+     "k": "canon",
+     "t": "Material roles for the game",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md",
+     "note": "material names read as shading roles"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's locked pick: the dance-party room",
+     "href": "/studies/cafe/img/interior-party_0.jpg",
+     "note": "Midjourney 5ab4584f image 0, the target for the whole room"
+    },
+    {
+     "k": "reference",
+     "t": "Round 2 low-poly asset proofs",
+     "href": "/studies/cafe/round2.html",
+     "note": "espresso, smoothie, stool, beanbag and cup booth picks"
+    },
+    {
+     "k": "reference",
+     "t": "Worker characters (Abbie and friends)",
+     "href": "/simulation-assets/workers/manifest.json",
+     "note": "the in-game characters the photo booth poses"
     }
    ],
-   "recorded": "2026-10-23, gathered afterwards from the study docs"
+   "recorded": "2026-10-23; models and photo booth round added 14:15Z. No outside dev blogs or tutorials were read for the model build or the booth."
   },
   "cafe-r2": {
    "same": "cafe-study",
