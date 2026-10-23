@@ -122,6 +122,9 @@ def main():
         save(cast, args.picks)
     else:
         lines(cast, args.game)
+    # The study page reads the sheets next to it.
+    STUDY.mkdir(parents=True, exist_ok=True)
+    (STUDY / 'cast.json').write_text((HERE / 'cast.json').read_text())
 
 
 if __name__ == '__main__':

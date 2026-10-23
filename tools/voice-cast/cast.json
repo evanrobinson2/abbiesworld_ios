@@ -1,5 +1,5 @@
 {
- "about": "The Abbie's World family cast (Evan, 2026-10-23 09:52Z): each person young (in Daddy's memory places) and as they are now. Designed voices only (ElevenLabs Voice Design): never a clone of a real person. Shared by every memory place (school jump, Grace's basement, Moon base). cast.py design -> candidates.json; Evan picks on /studies/family-cast/; cast.py save -> voices; cast.py lines renders a game's lines. Looks are written character sheets for stylized storybook characters, never drawn from photos; 'evan' marks what Evan said, everything else is a placeholder for him to correct.",
+ "about": "The Abbie's World family cast (Evan, 2026-10-23 09:52Z): each person young (in Daddy's memory places) and as they are now. Designed voices only (ElevenLabs Voice Design): never a clone of a real person. Shared by every memory place (school jump, Grace's basement, Moon base). cast.py design -> candidates.json; Evan picks on /studies/family-cast/; cast.py save -> voices; cast.py lines renders a game's lines. Looks are written character sheets for stylized storybook characters, never drawn from photos; 'evan' marks what Evan said, everything else is a placeholder for him to correct. Kid characters are voiced the way animation casts them: an adult voice actor performing a young character (ElevenLabs Voice Design blocks descriptions of children's voices, 2026-10-23).",
  "model": "eleven_ttv_v3",
  "characters": [
   {
@@ -7,8 +7,8 @@
    "name": "Young Daddy",
    "group": "young",
    "descriptions": [
-    "A bright, curious eight-year-old American boy with a slightly raspy, eager voice, full of mischief and wonder, speaking quickly when excited. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A small, energetic young boy voice, high and clear with a playful grin in it, a little breathless from running around outside at dusk. Close, warm microphone."
+    "An adult voice actress in her twenties with a high, bright, slightly raspy youthful timbre, the kind who voices mischievous animated boy heroes; eager, quick and full of wonder. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer with a light, playful, boyish delivery, a grin in every line, a little breathless with excitement. Close, warm microphone."
    ],
    "sample": "Okay bub, stay right there. I'm gonna climb up, get every single ball, and throw them all down to you. Don't tell Mom, okay? This is gonna be the best night ever!",
    "looks": {
@@ -72,8 +72,8 @@
    "name": "Young Mommy",
    "group": "young",
    "descriptions": [
-    "A sweet, confident eight-year-old girl with a clear, bright voice, clever and a little bossy in a fun way, giggly when surprised. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A cheerful young girl voice, light and musical, curious about everything, speaking with lots of expression. Warm, close microphone."
+    "An adult voice actress in her twenties with a clear, bright, youthful timbre, the kind who voices clever, slightly bossy animated girl characters; giggly when surprised. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer, light and musical, very expressive and curious, sweet and quick. Warm, close microphone."
    ],
    "sample": "No way, you climbed all the way up there? That's so high! Okay, my turn. Hold my backpack, and if anyone asks, we were just looking for a lost tennis ball. Deal?",
    "looks": {
@@ -110,8 +110,8 @@
    "name": "Young Auntie Lexi",
    "group": "young",
    "descriptions": [
-    "A spunky, giggly seven-year-old girl with a high, bouncy voice, fearless and funny, always ready for a dare. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A lively little girl voice, quick and sparkly, full of laughter and big ideas, a bit raspy from shouting at the playground. Warm, close microphone."
+    "An adult voice actress in her twenties with a high, bouncy, youthful timbre, the kind who voices fearless, funny animated girl characters always ready for a dare. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer, sparkly and fast, full of laughter, a touch of playground rasp. Warm, close microphone."
    ],
    "sample": "Race you to the fence! Ready, set, go! Ha, I won, I won! Okay, okay, best two out of three. And this time no shortcuts through the sandbox, that's cheating.",
    "looks": {
@@ -155,8 +155,8 @@
    "name": "Young Uncle Jeff",
    "group": "young",
    "descriptions": [
-    "A goofy, good-natured eight-year-old boy with a slightly lower, scratchy kid voice, loves jokes and sound effects. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A friendly young boy voice, easygoing and a bit sleepy, thoughtful, then suddenly excited. Warm, close microphone."
+    "An adult voice actress with a lower, scratchy, boyish youthful timbre, the kind who voices goofy, good-natured animated boy sidekicks who love jokes and sound effects. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer with an easygoing, slightly sleepy boyish delivery that suddenly gets excited. Warm, close microphone."
    ],
    "sample": "Did you hear that? I think it came from the basement. Probably nothing. Probably just a monster. A tiny one. Okay, you go first, I'll be right behind you. Way behind you.",
    "looks": {
@@ -199,8 +199,8 @@
    "name": "Young Pearl",
    "group": "young",
    "descriptions": [
-    "A tiny, sweet five-year-old girl with a soft, high, slightly lispy voice, shy at first and then full of giggles. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A very small girl voice, gentle and wondering, speaking slowly and carefully, delighted by little things. Warm, close microphone."
+    "An adult voice actress with a very soft, high, gentle youthful timbre and a slight lisp, the kind who voices the tiniest shy animated characters, then full of giggles. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer, tiny and wondering, slow and careful, delighted by little things. Warm, close microphone."
    ],
    "sample": "Is that a ladybug? It has seven spots. One, two, three, four, five, six, seven! Can I keep her? I'll call her Miss Dots, and she can sleep in my shoe. Is that okay?",
    "looks": {
@@ -218,8 +218,8 @@
    "name": "Pearl",
    "group": "now",
    "descriptions": [
-    "A thoughtful, bright twelve-year-old girl with a clear, confident voice, curious, a little dramatic and very funny. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A lively pre-teen girl voice, quick and expressive, full of opinions and big feelings, warm underneath. Warm, close microphone."
+    "An adult voice actress in her twenties with a clear, confident, youthful timbre, the kind who voices witty, slightly dramatic animated pre-teen heroines. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer, quick and expressive, full of opinions and big feelings, warm underneath. Warm, close microphone."
    ],
    "sample": "Okay, so technically it wasn't my idea. But it was a really good idea, and I made it way better. Anyway, can we please go back to the café? I want to see the secret door again.",
    "looks": {
@@ -239,8 +239,8 @@
    "name": "Young Georgia",
    "group": "young",
    "descriptions": [
-    "A cheerful, chatty six-year-old girl with a bright, sing-song voice, imaginative and always narrating her own games. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A playful little girl voice, high and sunny, giggly and quick, a born storyteller. Warm, close microphone."
+    "An adult voice actress with a bright, sing-song, youthful timbre, the kind who voices chatty, imaginative animated characters who narrate their own games. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer, high and sunny, giggly and quick, a born storyteller. Warm, close microphone."
    ],
    "sample": "And then the princess jumped on her pony, and the pony could fly, and they flew all the way to the moon! And the moon was made of pancakes. Your turn, what happens next?",
    "looks": {
@@ -258,8 +258,8 @@
    "name": "Georgia",
    "group": "now",
    "descriptions": [
-    "A warm, easygoing American teenage girl about fifteen, relaxed clear voice with dry wit and a kind big-sister energy. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A friendly, confident teen girl voice, expressive and a little sarcastic in a fun way, patient with little kids. Close microphone."
+    "A young adult woman around twenty with a relaxed, clear voice, dry wit and kind big-sister energy, like the cool older sister in an animated family film. Clean studio recording, warm animated family film.",
+    "A friendly, confident young woman's voice, expressive and a little sarcastic in a fun way, patient and kind. Close microphone."
    ],
    "sample": "Okay, little one, here's how it works. You hold the controller like this, press this button to jump, and this one to grab. Don't worry, I was terrible at it too, at first.",
    "looks": {
@@ -279,8 +279,8 @@
    "name": "Abbie",
    "group": "now",
    "descriptions": [
-    "A small American girl about six with a sweet, clear, breathy voice full of wonder, curious about everything, speaking softly as if sharing a secret. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
-    "A little girl voice, gentle and bright, amazed by the world, giggly and brave, with a soft American accent. Warm, close microphone."
+    "An adult voice actress with a sweet, clear, breathy, very youthful timbre, the kind who voices small, wide-eyed animated heroines full of wonder; soft, as if sharing a secret. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer, gentle and bright, amazed by the world, giggly and brave, soft American accent. Warm, close microphone."
    ],
    "sample": "Whoa. Look at all the stars. Do you think there's a ranch up there too? With sheep and a little red barn? I want to go see. Will you come with me? Hold my hand, okay?",
    "looks": {
@@ -288,11 +288,35 @@
     "hair": "light brown with a bow",
     "hairColor": "#a8733f",
     "eyes": "#4f7fb0",
-    "outfit": "yellow raincoat",
-    "color": "#f2c230",
+    "outfit": "pink dress and sneakers",
+    "color": "#e8579a",
     "evan": [
      "small girl",
-     "voice of wonder"
+     "voice of wonder",
+     "pink"
+    ]
+   }
+  },
+  {
+   "id": "ani",
+   "name": "Ani (\"Ah-knee\")",
+   "group": "now",
+   "descriptions": [
+    "An adult voice actress with a bubbly, slightly husky, youthful timbre, the kind who voices brave, funny animated best friends who always say let's go. Clean studio recording, warm animated family film.",
+    "An adult female cartoon voice performer, sunny and quick, giggly, full of big plans, kind and a little bossy. Warm, close microphone."
+   ],
+   "sample": "Abbie, Abbie, come look! I found a secret door behind the bookshelf, and it's purple, my favourite colour! I'll go first, okay? Hold the flashlight. Ready? One, two, three!",
+   "looks": {
+    "age": 6,
+    "hair": "brown, long",
+    "hairColor": "#6a4428",
+    "eyes": "#5b3d24",
+    "outfit": "purple top and leggings",
+    "color": "#8a4fd0",
+    "evan": [
+     "brown eyes",
+     "brown hair",
+     "purple"
     ]
    }
   },
