@@ -41,8 +41,8 @@ float pbN(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(pbH(
 // strokes live in the part's own space (vP), so they stay painted on a body that walks, turns and bends
 const VERT = `#include <common>
 #include <skinning_pars_vertex>
-uniform float uStroke;varying vec3 vN;varying vec3 vW;varying vec3 vP;varying vec2 vUv;
-void main(){vec3 objectNormal=normal;
+attribute vec3 aSmoothN;uniform float uStroke,uSmooth;varying vec3 vN;varying vec3 vW;varying vec3 vP;varying vec2 vUv;
+void main(){vec3 objectNormal=normalize(mix(normal,aSmoothN,uSmooth));
 #include <skinbase_vertex>
 #include <skinnormal_vertex>
 vec3 transformed=position;
@@ -56,14 +56,14 @@ float pbStroke(vec3 p){vec2 q=vec2(dot(p,vec3(.82,.42,.38))*2.2,dot(p,vec3(-.35,
 void main(){
  vec3 n=normalize(vN);if(!gl_FrontFacing)n=-n;vec3 V=normalize(cameraPosition-vW);float dist=length(cameraPosition-vW);
  vec4 tx=uUseMap>.5?texture2D(uMap,vUv):vec4(1.);vec3 base=uColor*tx.rgb;
- float st=pbStroke(vP*1.6);base*=mix(1.,.8+.4*st,clamp(uPaint*uPaintK,0.,1.));
- float ndl=dot(n,uLightDir);float l=mix(max(ndl,0.),ndl*.5+.5,uHalf)+(st-.5)*uBrush*uBrushK*.55;
+ float st=pbStroke(vP*1.6);base*=mix(1.,.9+.2*st,clamp(uPaint*uPaintK,0.,1.));
+ float ndl=dot(n,uLightDir);float l=mix(max(ndl,0.),ndl*.5+.5,uHalf)+(st-.5)*uBrush*uBrushK*.3;
  float b=max(uBands,2.),x=clamp(l,0.,1.)*b,f=fract(x),i=floor(x),s=uSoft*.5+.002;
  float lb=clamp((i+smoothstep(1.-2.*s,1.,f))/max(b-1.,1.),0.,1.);
- vec3 col=mix(base*uShadowTint*.55,base*uSun*1.08,lb);
+ vec3 col=mix(base*mix(vec3(1.),uShadowTint*2.2,.6)*.62,base*uSun*1.08,lb);
  col+=base*mix(uGround,uSky,n.y*.5+.5)*uAmb*(1.-lb*.6)*.5;
  vec3 L=uPointPos-vW;float pd=length(L);float pl=max(dot(n,L/max(pd,1e-3)),0.)*pow(clamp(1.-pd/uPointR,0.,1.),2.);
- col+=base*uPointCol*smoothstep(.04,.3,pl)*1.4;
+ col+=base*uPointCol*smoothstep(.04,.3,pl)*.9;
  float fr=pow(1.-max(dot(n,V),0.),3.);
  col+=uAccent*fr*uRim*uRimK*(.35+.65*(ndl*.5+.5))*(1.-smoothstep(.35,.9,n.y));
  col=mix(col,uFogCol,1.-exp(-pow(dist*uFog,2.)));
@@ -77,7 +77,7 @@ export function paintedBrushMaterial(T, opts = {}, U = paintedBrushUniforms(T)) 
  const role = {paint: 1, brush: 1, rim: 1, ...(opts.role || {})};
  const m = new T.ShaderMaterial({
   uniforms: {...U, uColor: {value: new T.Color(opts.color ?? '#ffffff')}, uAccent: {value: new T.Color(opts.accent ?? PAINTED_BRUSH.accent)},
-   uMap: {value: opts.map || null}, uUseMap: {value: opts.map ? 1 : 0}, uOpacity: {value: opts.opacity ?? 1}, uStroke: {value: opts.stroke ?? 1},
+   uMap: {value: opts.map || null}, uUseMap: {value: opts.map ? 1 : 0}, uOpacity: {value: opts.opacity ?? 1}, uStroke: {value: opts.stroke ?? 1}, uSmooth: {value: opts.smooth ?? .75},
    uPaintK: {value: role.paint}, uBrushK: {value: role.brush}, uRimK: {value: role.rim}},
   vertexShader: VERT, fragmentShader: FRAG, transparent: !!opts.transparent, side: opts.side ?? T.FrontSide,
  });
@@ -95,6 +95,16 @@ export function updatePaintedBrush(U, seconds) {
  return k;
 }
 
+// facets read as noise once light is painted in strokes, so lean the shading normal toward the welded one
+const weld = new WeakSet();
+function weldNormals(T, g) {
+ if (g.attributes.aSmoothN || !g.attributes.normal) return false;
+ const P = g.attributes.position, N = g.attributes.normal, acc = new Map(), key = i => `${P.getX(i).toFixed(4)},${P.getY(i).toFixed(4)},${P.getZ(i).toFixed(4)}`, out = new Float32Array(P.count * 3);
+ for (let i = 0; i < P.count; i++) { const k = key(i), a = acc.get(k) || [0, 0, 0]; a[0] += N.getX(i); a[1] += N.getY(i); a[2] += N.getZ(i); acc.set(k, a); }
+ for (let i = 0; i < P.count; i++) { const a = acc.get(key(i)), l = Math.hypot(...a) || 1; out.set([a[0] / l, a[1] / l, a[2] / l], i * 3); }
+ g.setAttribute('aSmoothN', new T.BufferAttribute(out, 3)); weld.add(g);
+ return true;
+}
 const roleFor = name => { const n = (name || '').toLowerCase(); return Object.keys(ROLES).find(k => n.includes(k)); };
 
 // the ink shell, bent by the same skeleton on a SkinnedMesh, broken along its length like a dry brush
@@ -134,11 +144,12 @@ export function paintBrush(T, root, look = {}) {
  // strokes sized to the figure, whatever units it was modelled in: 1.6 strokes per metre on a 1.8 m figure
  root.updateWorldMatrix(true, true);
  const H = new T.Box3().setFromObject(root).getSize(new T.Vector3()).y || 1, per = 1.8 / H;
- const swapped = [], hulls = [], made = new Map(), ws = new T.Vector3();
+ const swapped = [], hulls = [], added = [], made = new Map(), ws = new T.Vector3();
  const inkU = {uW: {value: L.ink * H / 1.8}, uBreak: {value: L.inkBreak}, uInk: {value: new T.Color(L.inkCol)}};
  root.traverse(o => {
   if (!o.isMesh || o.userData.ink || o.userData.noPaint || [].concat(o.material).every(m => m?.userData?.paintedBrush)) return;
   o.getWorldScale(ws);
+  if (weldNormals(T, o.geometry)) added.push(o.geometry);
   const stroke = per * ws.y, one = src => {
    if (!src || src.userData?.paintedBrush) return src;
    const k = src.uuid + '|' + stroke.toFixed(4);
@@ -160,6 +171,7 @@ export function paintBrush(T, root, look = {}) {
   restore() {
    for (const [o, m] of swapped) o.material = m;
    for (const [o, h] of hulls) { o.remove(h); h.geometry.dispose(); h.material.dispose(); }
+   for (const g of added) { g.deleteAttribute('aSmoothN'); weld.delete(g); }
    for (const m of made.values()) m.dispose();
   },
  };
