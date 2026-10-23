@@ -263,7 +263,8 @@ function visitDio(id) {
  const s = spotByID[id], L = id === 'dio-trio' ? LOOK_TRIO : DIOS.find(d => 'dio-' + d.id === id).look; shown = id; current = ORDER_DIO.indexOf(id); look = L;
  const tgt = new THREE.Vector3(X(s.x), s.z, Z(s.y)), pitch = pitchFor(L.dist, L), az = rad(L.azimuth), h = Math.cos(pitch) * L.dist;
  fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(tgt.x + Math.sin(az) * h, tgt.y + Math.sin(pitch) * L.dist, tgt.z - Math.cos(az) * h), t1: tgt};
- bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1; clearTimeout(visitDio.t); visitDio.t = setTimeout(() => { bubble.style.opacity = 0; }, 7000);
+ clearTimeout(visitDio.t); if (id === 'dio-trio') { bubble.style.opacity = 0; return; } // Evan: no callout card on the whole board
+ bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1; visitDio.t = setTimeout(() => { bubble.style.opacity = 0; }, 7000);
 }
 function setView(on) {
  viewDio = on; dioGroup.visible = on; bubble.classList.toggle('dock', on); bubble.onclick = () => { bubble.style.opacity = 0; }; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
