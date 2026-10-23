@@ -419,6 +419,7 @@ function topOut() {
  const spot = w.at(.5, 0, -.7); spot.y = standY; S.onWall = false; S.hands = [null, null];
  fly(kid, kid.position.clone(), spot, standY + .7, .7, () => {
   kid.rotation.y = Math.atan2(-w.n.x, -w.n.z); S.lvl = c === CLIMB2 ? 'gym' : 'low'; S.stam = 1; hud.style.display = 'flex';
+  if (c !== CLIMB2) import('/simulations/backpack.mjs?v=6').then(b => b.earnCharm('school-roof')).catch(() => {}); // every reward is a backpack charm now: the Star, for getting onto the roof
   tweenCamera(isoView(), 1.8, () => { S.mode = 'roof'; }, PIX);
  });
 }
