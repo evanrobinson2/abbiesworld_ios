@@ -184,6 +184,186 @@
           "bytes": 651097
         }
       ]
+    },
+    {
+      "name": "torso-back",
+      "prompt": "isolated anatomical study of a single adult male back from neck to hips, trapezius, shoulder blades, lats, spine groove and lower back, no arms, no head, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, back view and side profile view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "5be5ae83-d17d-41e7-bda7-94edaa04e994",
+      "created": "2026-10-23T07:15:52Z",
+      "files": [
+        {
+          "file": "images/torso-back_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5be5ae83-d17d-41e7-bda7-94edaa04e994/0_0.png",
+          "sha256": "04c34c307a61827da15e386eb2a8ff7d3e9086465abc4a9450952ea7416ff2e8",
+          "bytes": 746108
+        },
+        {
+          "file": "images/torso-back_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5be5ae83-d17d-41e7-bda7-94edaa04e994/0_1.png",
+          "sha256": "f454909a2a6d41e236c2975ab2387864a40dd347811e1e5711443875578c4ff7",
+          "bytes": 716577
+        },
+        {
+          "file": "images/torso-back_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5be5ae83-d17d-41e7-bda7-94edaa04e994/0_2.png",
+          "sha256": "a8601863be14294f7a4a88f4bfa3a9f7078c829431db298e0e26177d82bda3d9",
+          "bytes": 685124
+        },
+        {
+          "file": "images/torso-back_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5be5ae83-d17d-41e7-bda7-94edaa04e994/0_3.png",
+          "sha256": "c0176054550c0e928ab91ba01db30f81fd281632fb2fcd7e80934efc0278debc",
+          "bytes": 598666
+        }
+      ]
+    },
+    {
+      "name": "shoulder",
+      "prompt": "isolated anatomical study of a single adult male right shoulder joint with the deltoid wrapping the top of the upper arm, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "4da50d3d-5163-4130-bc3c-d998f4c5482b",
+      "created": "2026-10-23T07:16:46Z",
+      "files": [
+        {
+          "file": "images/shoulder_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/4da50d3d-5163-4130-bc3c-d998f4c5482b/0_0.png",
+          "sha256": "585aac5d6254f15db2893b74669cce3a06455f5d212053dc837d4d3267ca3b78",
+          "bytes": 682420
+        },
+        {
+          "file": "images/shoulder_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/4da50d3d-5163-4130-bc3c-d998f4c5482b/0_1.png",
+          "sha256": "a301d7f9916a0b1e9b3da40434ea62ede141eb7484a0fea87b68b89232d8c824",
+          "bytes": 1085024
+        },
+        {
+          "file": "images/shoulder_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/4da50d3d-5163-4130-bc3c-d998f4c5482b/0_2.png",
+          "sha256": "46fb00e4e2833a5f1b9824c2154ec2563a422182222e5e32514c0dbe28f980f3",
+          "bytes": 747613
+        },
+        {
+          "file": "images/shoulder_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/4da50d3d-5163-4130-bc3c-d998f4c5482b/0_3.png",
+          "sha256": "7b6ae41a6220ff0c398637d2dcddd071e4879046920ed0068e63511cc525cda4",
+          "bytes": 772977
+        }
+      ]
+    },
+    {
+      "name": "upper-arm",
+      "prompt": "isolated anatomical study of a single adult male right upper arm from shoulder to elbow, biceps in front and triceps behind, bulges at different heights, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "4285350c-6f0d-4724-ba2b-e61abd1b82a9",
+      "created": "2026-10-23T07:17:31Z",
+      "files": [
+        {
+          "file": "images/upper-arm_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/4285350c-6f0d-4724-ba2b-e61abd1b82a9/0_0.png",
+          "sha256": "8d8b3460845d43e2f65e02de94d8d076f6d1858022641f3e18b8dac4c9c62b4b",
+          "bytes": 601416
+        },
+        {
+          "file": "images/upper-arm_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/4285350c-6f0d-4724-ba2b-e61abd1b82a9/0_1.png",
+          "sha256": "68ba7e90c6ca6ae3544395da586ec8c9188987e95519d0f0c4bd0166293e385c",
+          "bytes": 671379
+        },
+        {
+          "file": "images/upper-arm_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/4285350c-6f0d-4724-ba2b-e61abd1b82a9/0_2.png",
+          "sha256": "4c6ce81703e49422f574a705b3a9113bef6d6989c4e651eea02f9a8649846269",
+          "bytes": 653269
+        },
+        {
+          "file": "images/upper-arm_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/4285350c-6f0d-4724-ba2b-e61abd1b82a9/0_3.png",
+          "sha256": "5286b9a73cb56f262afe8f1ea4da6cfd91bc70ce2a8df5158d6cfb528439ec59",
+          "bytes": 639281
+        }
+      ]
+    },
+    {
+      "name": "elbow",
+      "prompt": "isolated anatomical study of a single adult male right elbow joint, arm hanging straight, olecranon point and the forearm muscles starting below it, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "96d1405f-6dbb-434d-8457-4412df96fc50",
+      "created": "2026-10-23T07:19:32Z",
+      "files": [
+        {
+          "file": "images/elbow_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/96d1405f-6dbb-434d-8457-4412df96fc50/0_0.png",
+          "sha256": "05056fdd21a1d12af84c35429454f656b0ef64601611ad043b99123ceb6b4f37",
+          "bytes": 438835
+        },
+        {
+          "file": "images/elbow_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/96d1405f-6dbb-434d-8457-4412df96fc50/0_1.png",
+          "sha256": "1ed8d028e3d23cc910554934550895ceef3edaa42267ae2e20756ebbf6b159cf",
+          "bytes": 442360
+        },
+        {
+          "file": "images/elbow_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/96d1405f-6dbb-434d-8457-4412df96fc50/0_2.png",
+          "sha256": "5f2696f253d972598864e2d310c48e3d940f9db585a756eae8b218d26a32e502",
+          "bytes": 508355
+        },
+        {
+          "file": "images/elbow_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/96d1405f-6dbb-434d-8457-4412df96fc50/0_3.png",
+          "sha256": "b0b37e441981b4a9aac3de5e281f1741d810a50c9ca3df932091c05803b0781b",
+          "bytes": 362251
+        }
+      ]
+    },
+    {
+      "name": "forearm",
+      "prompt": "isolated anatomical study of a single adult male right forearm from elbow to wrist, muscular near the elbow, tapering to a flat wrist, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "201f984b-030a-47bf-9661-ef19c3a7df8b",
+      "created": "2026-10-23T07:20:21Z",
+      "files": [
+        {
+          "file": "images/forearm_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/201f984b-030a-47bf-9661-ef19c3a7df8b/0_0.png",
+          "sha256": "7e3da5aae402d7170e97b9a39a03d37bb15729009c3a6d89149ffbab64596c5c",
+          "bytes": 507183
+        },
+        {
+          "file": "images/forearm_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/201f984b-030a-47bf-9661-ef19c3a7df8b/0_1.png",
+          "sha256": "425e1b9dc7eb0b022281c428e83169308234fb3863b64216715dd9f5bcd3ff6a",
+          "bytes": 533486
+        },
+        {
+          "file": "images/forearm_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/201f984b-030a-47bf-9661-ef19c3a7df8b/0_2.png",
+          "sha256": "3021ef7873ddedc551ffa38cd61ec6ff2981731250047c5eed7bf267f22b2c9b",
+          "bytes": 425807
+        },
+        {
+          "file": "images/forearm_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/201f984b-030a-47bf-9661-ef19c3a7df8b/0_3.png",
+          "sha256": "675b4bccbc7acebe71b2ba042de46434ccc29dd5369ad2f102adee024b61382c",
+          "bytes": 421285
+        }
+      ]
     }
   ]
 }
