@@ -1,0 +1,32 @@
+{
+  "cars": [
+    {
+      "id": "stl-car-racer",
+      "name": "Racer",
+      "glb": "/models/stl-car-racer/model.glb",
+      "credit": "3dworkbench, CC BY 4.0, https://www.printables.com/model/624877-3dworkbench-toy-car",
+      "yaw": 0
+    },
+    {
+      "id": "stl-car-toddler",
+      "name": "Toddler car",
+      "glb": "/models/stl-car-toddler/model.glb",
+      "credit": "Thump2010, CC0, https://www.printables.com/model/457455-safer-toddlers-toy-car",
+      "yaw": 0
+    },
+    {
+      "id": "stl-car-pickup",
+      "name": "Pickup",
+      "glb": "/models/stl-car-pickup/model.glb",
+      "credit": "Korbinian, CC BY 4.0, https://www.printables.com/model/389381-toy-car",
+      "yaw": 0
+    },
+    {
+      "id": "stl-car-sedan",
+      "name": "Sedan",
+      "glb": "/models/stl-car-sedan/model.glb",
+      "credit": "Jibraan Ahmed, CC BY 4.0, https://www.printables.com/model/834935-low-poly-car",
+      "yaw": 0
+    }
+  ]
+}
