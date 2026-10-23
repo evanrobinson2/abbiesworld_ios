@@ -708,32 +708,96 @@
   "brute-fight": {
    "items": [
     {
+     "k": "oracle",
+     "t": "Oracle consult: a side-on cartoon fighting game like SF6, Smash and Absolver",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/brute-fight/BRUTE_FIGHT_STUDY.md",
+     "note": "No fighting game on file yet; the studies-only plan fell back to Anno and Cartel Tycoon. Gap logged."
+    },
+    {
+     "k": "oracle",
+     "t": "Game identity schema, feel layer (juice: hit-stop, shake, camera kick)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md",
+     "note": "The checklist the fight's feel was set against"
+    },
+    {
+     "k": "devblog",
+     "t": "Sakurai on hit-stop (Famitsu column 490, Source Gaming translation)",
+     "href": "https://sourcegaming.info/2015/11/11/thoughts-on-hitstop-sakurais-famitsu-column-vol-490-1/",
+     "note": "Applied: same freeze for both, scaled by damage and capped, defender shake that fades, flinch shown in the freeze"
+    },
+    {
+     "k": "devblog",
+     "t": "Sakurai's video on fine-tuning hit-stop (Nintendo Wire summary)",
+     "href": "https://nintendowire.com/news/2022/12/12/this-week-in-sakurai-12-5-12-11-fine-tuning-hit-stop-and-cheating-the-system/",
+     "note": "Applied: shake horizontal on the ground and vertical in the air, scaled by camera distance; attacker trembles"
+    },
+    {
+     "k": "design",
+     "t": "Capcom Fighters Network column on hit-stop and block-stop",
+     "href": "https://game.capcom.com/cfn/sfv/column/131545",
+     "note": "Applied: one rule for the whole game, the same on hit and block"
+    },
+    {
+     "k": "design",
+     "t": "Impact Freeze (Sonic Hurricane)",
+     "href": "https://sonichurricane.com/?p=1043",
+     "note": "Applied: about 9/11/13 frames for light/medium/heavy"
+    },
+    {
+     "k": "design",
+     "t": "SF6 dynamic blocking animations (EventHubs)",
+     "href": "https://www.eventhubs.com/news/2022/jun/11/dynamic-blocking-animations-sf6",
+     "note": "Applied: new block_overhead clip for a blocked hammer"
+    },
+    {
+     "k": "design",
+     "t": "Absolver interview: Dancing with Combat (GamingBolt)",
+     "href": "https://gamingbolt.com/absolver-interview-dancing-with-combat",
+     "note": "Attacks start and end in a stance; ours return to guard. Stance chains are next."
+    },
+    {
+     "k": "tutorial",
+     "t": "GDC 2014: Fluid and Powerful Animation within Frame Restrictions (Mariel Cartwright, Skullgirls)",
+     "href": "https://gdcvault.com/play/1020575/Animation-Bootcamp-Fluid-and-Powerful",
+     "note": "Strong key poses and anticipation inside a tight frame budget"
+    },
+    {
+     "k": "tutorial",
+     "t": "Animating Stylized Attacks in Maya (Brad Faucheux, Gnomon)",
+     "href": "https://ccs.thegnomonworkshop.com/blog/animating-stylized-attacks-in-maya/",
+     "note": "Startup, active and recovery as readable phases; contact pose"
+    },
+    {
+     "k": "research",
+     "t": "Slap City hitstop formula (wiki)",
+     "href": "https://slapcity.wiki.gg/wiki/Hitstop",
+     "note": "Another damage-scaled formula, for comparison"
+    },
+    {
      "k": "canon",
-     "t": "Bruiser study scaling pipeline (rings per part, cage, decimate)",
+     "t": "Bruiser study scaling pipeline",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/scale/README.md",
-     "note": "The Meshy cleanup both fighters go through; deform.bind and figure.role are reused for paint roles and skin weights"
+     "note": "The Meshy cleanup both fighters go through"
     },
     {
      "k": "canon",
      "t": "How Abbie's World shows information (CLAUDE.md)",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md",
-     "note": "Bell as the diegetic round signal, tired idle, wordless overlay inside 8%, cues on the presentation layer"
+     "note": "Ring bell, tired idle, wordless overlay inside 8%"
     },
     {
      "k": "canon",
      "t": "Presentation layer",
-     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs",
-     "note": "Hit stars, block rings and dust are presentation()"
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs"
     },
     {
      "k": "canon",
      "t": "Brute fight build tool",
-     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/brute-fight/README.md",
-     "note": "Paint, rig, 19 clips, moves.json"
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/brute-fight/README.md"
     },
     {
      "k": "canon",
-     "t": "Study doc and speed review",
+     "t": "Study doc, research pass and speed review",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/brute-fight/BRUTE_FIGHT_STUDY.md"
     },
     {
@@ -745,15 +809,9 @@
      "k": "reference",
      "t": "Meshy task 01a16806 (brute two)",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/meshy2/provenance.json"
-    },
-    {
-     "k": "reference",
-     "t": "Evan's two brute pictures",
-     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/ref/",
-     "note": "bruiser.png and bruiser-2-queued.png"
     }
    ],
-   "recorded": "2026-10-23 by the study's own thread. No Oracle consultation, blogs or tutorials were used: the move set and reactions were keyed from general fighting-game conventions (2D fighter facing, hit and block reactions, hitstop), so those rows are honestly empty."
+   "recorded": "2026-10-23 by the study's own thread: a real consult and reading pass after shipping; what each source changed is in its note."
   },
   "figures": {
    "items": [
@@ -792,6 +850,60 @@
   },
   "moon-base-kit": {
    "items": [
+    {
+     "k": "oracle",
+     "t": "Astroneer identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json",
+     "note": "Modules, low HUD, state in the world. State lights stay separate named parts."
+    },
+    {
+     "k": "oracle",
+     "t": "Deliver Us The Moon identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/deliver-us-the-moon.json",
+     "note": "Diegetic holograms; story props are the breadcrumbs."
+    },
+    {
+     "k": "oracle",
+     "t": "Subnautica 2 identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/subnautica-2.json",
+     "note": "A base built from its own pieces: dome, corridor and airlock must snap."
+    },
+    {
+     "k": "design",
+     "t": "Skyrim's Modular Approach to Level Design (Joel Burgess, GDC 2013)",
+     "href": "https://www.gamedeveloper.com/design/skyrim-s-modular-approach-to-level-design",
+     "note": "Pivot at ground centre, 2 m snap, one door size; now checked in bkit.build()."
+    },
+    {
+     "k": "design",
+     "t": "Building huge open worlds: modularity, kits and art fatigue (80 Level)",
+     "href": "https://80.lv/articles/building-huge-open-worlds-modularity-kits-art-fatigue",
+     "note": "No patch pieces; lock pivots and footprints early."
+    },
+    {
+     "k": "devblog",
+     "t": "How System Era used UE4 to create Astroneer (Unreal Engine spotlight)",
+     "href": "https://www.unrealengine.com/en-US/spotlights/how-system-era-softworks-leveraged-ue4-to-create-astroneer-s-wonderful-universe",
+     "note": "Low poly for speed; one material with switchable emissive lights."
+    },
+    {
+     "k": "devblog",
+     "t": "Interview: Deliver Us The Moon's Jordy Velasquez (IndieGraze)",
+     "href": "https://www.indiegraze.com/?p=617",
+     "note": "Story placed organically as a breadcrumb trail."
+    },
+    {
+     "k": "tutorial",
+     "t": "Face weighted normals discussion (Polycount)",
+     "href": "https://polycount.com/discussion/comment/1688746",
+     "note": "Not with a baked normal map; we keep chamfer plus bake."
+    },
+    {
+     "k": "tutorial",
+     "t": "Tools and guides for hard-surface scene production (80 Level)",
+     "href": "https://80.lv/articles/tools-and-guides-for-hard-surface-scene-production",
+     "note": "Trim sheets as a later step for shared seams."
+    },
     {
      "k": "canon",
      "t": "Moon remaster wave 1 (MR-002 to MR-004)",
@@ -838,7 +950,7 @@
      "note": "Each pick is assets/<slug>/concept.jpg, with its job id in provenance.json."
     }
    ],
-   "recorded": "2026-10-23, from the thread as it ran; no Oracle, blog or tutorial was consulted for this study"
+   "recorded": "2026-10-23: canon and references from the thread as it ran; Oracle, design, dev blog and tutorial pass after round 3 (see the study doc, Research pass)"
   },
   "overview": {
    "use": [

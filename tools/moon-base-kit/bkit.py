@@ -830,21 +830,62 @@ def render(out_dir, yaw=35, pitch=22, dist=None, size=900, lens=50, fps_eye=None
 
 # ---------------------------------------------------------------- one call per asset
 
+# Kit metrics, after Bethesda's modular kit rules (Joel Burgess, GDC 2013): pivot at the centre of the ground plane,
+# structural pieces on a 2 m snap (half the 4 m footprint), one door opening shared by every kit that connects, and
+# all geometry inside the footprint. build() checks the pivot rule and records the footprint in stats.json.
+KIT_SNAP_M = 2.0
+KIT_FOOTPRINT_M = 4.0
+KIT_DOOR_M = (1.4, 2.2)  # clear opening, width x height: a grown-up in a suit, or Abbie with room to spare
+
+
+def _pivot_tolerance(lo, hi):
+    return max(0.05, 0.08 * max(hi.x - lo.x, hi.y - lo.y))
+
+
+def kit_metrics(lo, hi, pivot=None):
+    size = hi - lo
+    structural = max(size.x, size.y) >= 2.5
+    cells = [math.ceil(round(v / KIT_SNAP_M, 3)) for v in (size.x, size.y)] if structural else None
+    off = math.hypot((lo.x + hi.x) / 2, (lo.y + hi.y) / 2)
+    out = {'structural': structural, 'snap_m': KIT_SNAP_M if structural else None, 'cells': cells,
+           'pivot_offset_m': round(off, 3), 'ground_z_m': round(lo.z, 3),
+           'pivot_ok': bool(pivot) or (off <= _pivot_tolerance(lo, hi) and lo.z >= -0.1)}
+    if pivot:
+        out['pivot'] = pivot  # a deliberate exception, with its reason
+    return out
+
+
+def recentre(lo, hi):
+    """Move every part so the footprint centre sits on the pivot (the origin), as the kit rule says."""
+    d = Vector(((lo.x + hi.x) / 2, (lo.y + hi.y) / 2, 0))
+    for o in _parts:
+        o.location -= d
+    bpy.context.view_layer.update()
+    return bounds()
+
+
 def build(asset_dir, spec, bake_size=1024, view=None, fps_eye=None, render_it=True):
     """spec: dict(id, name, group, brief). Bakes, exports <slug>.glb, renders, writes notes stats."""
     slug = os.path.basename(asset_dir.rstrip('/'))
+    lo, hi = bounds()
+    own = os.path.abspath(asset_dir).startswith(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets'))
+    # only this kit's own pieces are moved; recipes elsewhere that import bkit (tools/aurora-mk2) just get the metrics
+    if own and not spec.get('pivot') and math.hypot((lo.x + hi.x) / 2, (lo.y + hi.y) / 2) > _pivot_tolerance(lo, hi):
+        lo, hi = recentre(lo, hi)
     total = mass_and_extras(slug)
     tris = triangles()
-    lo, hi = bounds()
-    bake(os.path.join(asset_dir, 'maps'), size=bake_size)
-    export(os.path.join(asset_dir, f'{slug}.glb'))
-    if render_it and '--norender' not in sys.argv:
+    stats_only = '--stats-only' in sys.argv  # geometry, mass and metrics only: no bake, export or render
+    if not stats_only:
+        bake(os.path.join(asset_dir, 'maps'), size=bake_size)
+        export(os.path.join(asset_dir, f'{slug}.glb'))
+    if render_it and not stats_only and '--norender' not in sys.argv:
         render(os.path.join(asset_dir, 'r'), fps_eye=fps_eye, **(view or {}))
     stats = {
         'id': spec['id'], 'name': spec['name'], 'triangles': tris, 'parts': len(_parts),
         'part_names': [o.name for o in _parts], 'materials': sorted({m.name for o in _parts for m in o.data.materials}),
         'mass_kg': round(total, 1), 'moon_weight_kg': round(total * 0.1654, 1),
         'size_m': [round(v, 2) for v in (hi - lo)], 'maps': f'{bake_size} px base, roughness, normal',
+        'kit': kit_metrics(lo, hi, spec.get('pivot')),
     }
     with open(os.path.join(asset_dir, 'stats.json'), 'w') as f:
         json.dump(stats, f, indent=1)

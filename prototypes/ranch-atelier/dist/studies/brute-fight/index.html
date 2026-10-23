@@ -70,12 +70,12 @@ details summary{cursor:pointer;font-weight:600}
     <tr><td>Jab (lead fist)</td><td>0.15 s</td><td>1.45 m</td><td>Head snaps back (<code>hit_jab</code>)</td><td>Guard rocks (<code>block_hit</code>)</td></tr>
     <tr><td>Heavy (rear straight)</td><td>0.36 s</td><td>1.6 m</td><td>Spun and shoved back a step (<code>hit_heavy</code>)</td><td>Skids back (<code>block_heavy</code>)</td></tr>
     <tr><td>Uppercut (rear, rising)</td><td>0.38 s</td><td>1.3 m</td><td>Lifted onto his toes, chin up, stagger (<code>hit_uppercut</code>); also hits a jumper</td><td>Skids back (<code>block_heavy</code>)</td></tr>
-    <tr><td>Two-fisted hammer</td><td>0.58 s</td><td>1.4 m</td><td>Knocked flat (<code>fall</code>, then <code>getup</code>)</td><td>Skids back (<code>block_heavy</code>)</td></tr>
+    <tr><td>Two-fisted hammer</td><td>0.58 s</td><td>1.4 m</td><td>Knocked flat (<code>fall</code>, then <code>getup</code>)</td><td>Braced overhead, knees giving (<code>block_overhead</code>)</td></tr>
    </tbody>
   </table>
-  <p class="muted">Also on the same skeleton: <code>idle</code>, <code>walk_fwd</code>, <code>walk_back</code>, <code>jump</code>, <code>block</code>, <code>hurt</code>, <code>hit_axe</code> (crushed to one knee, for a hammer that lands while standing), <code>fall</code>, <code>getup</code> and <code>victory</code> (a double-biceps flex). 19 clips per fighter, and both fighters share every clip.</p>
+  <p class="muted">Also on the same skeleton: <code>idle</code>, <code>walk_fwd</code>, <code>walk_back</code>, <code>jump</code>, <code>block</code>, <code>hurt</code>, <code>hit_axe</code> (crushed to one knee, for a hammer that lands while standing), <code>fall</code>, <code>getup</code> and <code>victory</code> (a double-biceps flex). 20 clips per fighter, and both fighters share every clip.</p>
   <details><summary>Every clip, frame by frame</summary>
-   <div class="pair" style="margin-top:12px"><img class="sheet" src="img/moves-red.jpg" alt="Contact sheet of all 19 clips on brute one" loading="lazy"><img class="sheet" src="img/moves-blue.jpg" alt="Contact sheet of all 19 clips on brute two" loading="lazy"></div>
+   <div class="pair" style="margin-top:12px"><img class="sheet" src="img/moves-red.jpg" alt="Contact sheet of all 20 clips on brute one" loading="lazy"><img class="sheet" src="img/moves-blue.jpg" alt="Contact sheet of all 20 clips on brute two" loading="lazy"></div>
   </details>
  </section>
 
@@ -85,7 +85,8 @@ details summary{cursor:pointer;font-weight:600}
    <li>The ring bell on its post rings in each round and rings it out. Everyone in the ring hears it, so it's in the world.</li>
    <li>A tired brute sways slower and lower in his guard, so the other brute (and you) can read it.</li>
    <li>A hit throws a star burst and a bonk, a block throws a blue ring and a clack, and a landing kicks up dust. The screen gives a small shake. These are presentation-layer cues that the brutes can't perceive.</li>
-   <li>The only overlay is two strength pills at the top, with no words. On a phone the move pad sits in the bottom-right corner, all inside the 8% budget.</li>
+   <li>Every hit freezes both brutes for a moment: longer for bigger blows, the same on a block. The one who was hit shakes side to side (up and down in the air), and the freeze frame already shows his flinch. This comes from Sakurai's notes on hit-stop and Capcom's frame column.</li>
+  <li>The only overlay is two strength pills at the top, with no words. On a phone the move pad sits in the bottom-right corner, all inside the 8% budget.</li>
   </ul>
  </section>
 

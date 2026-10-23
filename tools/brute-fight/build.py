@@ -285,7 +285,9 @@ def fighter(key, cfg, tex, sheet):
 
 def write_moves(path):
     import moves
-    clips = {k: dict(loop=loop, length=round(keys[-1][0], 3)) for k, (loop, keys) in moves.CLIPS.items()}
+    # peak: the clip's first key after rest. A reaction is shown from its peak during hit-stop, so the flinch reads
+    # in the freeze frame and blends on into the hurt motion after it (Sakurai, Famitsu column 490)
+    clips = {k: dict(loop=loop, length=round(keys[-1][0], 3), peak=round(keys[1][0], 3)) for k, (loop, keys) in moves.CLIPS.items()}
     json.dump(dict(fps=moves.FPS, clips=clips, moves=moves.MOVES), open(path, 'w'), indent=1)
 
 

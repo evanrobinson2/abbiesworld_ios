@@ -97,6 +97,18 @@
    8.91,
    5.29
   ],
-  "maps": "1024 px base, roughness, normal"
+  "maps": "1024 px base, roughness, normal",
+  "kit": {
+   "structural": true,
+   "snap_m": 2.0,
+   "cells": [
+    9,
+    5
+   ],
+   "pivot_offset_m": 4.207,
+   "ground_z_m": -0.835,
+   "pivot_ok": true,
+   "pivot": "crater centre, so two halves rotate into a whole crater"
+  }
  }
 }

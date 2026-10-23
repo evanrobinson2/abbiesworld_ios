@@ -15,5 +15,5 @@ for j in range(10):
     rr = 2.2 + 0.6 * math.sin(j * 2.3)
     k.rock(f'Pebble{j}', 0.08 + 0.04 * (j % 3), (0.2 + rr * math.cos(a), 0.1 + rr * 0.75 * math.sin(a), 0), 'Stone_BasaltDark',
            squash=0.6, seed=40 + j)
-k.build(HERE, {'id': 'MK-098', 'name': 'Boulder set'}, bake_size=1024,
+k.build(HERE, {'id': 'MK-098', 'name': 'Boulder set', 'pivot': 'rocks sink into the dust on purpose'}, bake_size=1024,
         view=dict(yaw=12, pitch=14), fps_eye=((0.6, -4.2, 1.1), (0.2, 0, 0.8)))

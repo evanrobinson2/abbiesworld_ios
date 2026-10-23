@@ -54,6 +54,14 @@
    0.34,
    0.47
   ],
-  "maps": "512 px base, roughness, normal"
+  "maps": "512 px base, roughness, normal",
+  "kit": {
+   "structural": false,
+   "snap_m": null,
+   "cells": null,
+   "pivot_offset_m": 0.0,
+   "ground_z_m": -0.005,
+   "pivot_ok": true
+  }
  }
 }
