@@ -8,12 +8,12 @@ import {createWorld} from './world3d.mjs';
 import {createHud} from './hud.mjs';
 
 // mission zone -> the town scene it stands in (null = off-map, registered here)
-const TOWN_SCENE = {'main-street': 'cafe-curb', 'church-park': 'cafe-curb', kitchen: 'abbie-kitchen', 'tree-house': 'treehouse', galley: 'anis-kitchen', 'launch-pad': 'launch-pad'};
+const TOWN_SCENE = {'main-street': 'bakery-curb', 'church-park': 'cafe-curb', kitchen: 'abbie-kitchen', 'tree-house': 'treehouse', galley: 'anis-kitchen', 'launch-pad': 'launch-pad'};
 // the diorama spot each mission zone stands at (tile id, spot id) and how far out from its curb the zone's origin sits
-const SPOT = {'main-street': ['downtown', 'cafe', 0], 'church-park': ['downtown', 'common', 0], kitchen: ['abbie-daddy-side', 'home', 16], 'tree-house': ['abbie-daddy-side', 'gingerbread', 12], galley: ['anis-side', 'ani', 16], 'launch-pad': ['downtown', 'cafeRoof', 0]}; // Evan, 21:27Z: the rocket launches from the café's roof pad
+const SPOT = {'main-street': ['downtown', 'bakery', 0], 'church-park': ['downtown', 'common', 0], kitchen: ['abbie-daddy-side', 'home', 16], 'tree-house': ['abbie-daddy-side', 'gingerbread', 12], galley: ['anis-side', 'ani', 16], 'launch-pad': ['downtown', 'bakery', 22]}; // Evan, 21:44Z: the mission starts and launches near the French bakery
 const OFFMAP = ['briefing-room', 'crew-bus', 'capsule', 'orbit', 'lunar-descent', 'airlock', 'habitat', 'star-child-cave', 'crater-road', 'moon-base-pad', 'mining-outpost'];
 // how big the mission's metres are on the cartoon-scale tile, and how far the near-isometric camera stands back
-const FIT = {'main-street': {s: 2, dist: 72, aim: [-4, -7]}, kitchen: {s: 1.1, dist: 70, aim: [0, -2]}, 'tree-house': {s: 1.1, dist: 60}, galley: {s: 1.1, dist: 66}, 'launch-pad': {s: .9, dist: 46}, 'briefing-room': {s: 1, dist: 36}, 'crew-bus': {s: 1, dist: 28}, capsule: {s: 1, dist: 20},
+const FIT = {'main-street': {s: 2, dist: 72, aim: [-4, -7]}, kitchen: {s: 1.1, dist: 70, aim: [0, -2]}, 'tree-house': {s: 1.1, dist: 60}, galley: {s: 1.1, dist: 66}, 'launch-pad': {s: 1, dist: 70}, 'briefing-room': {s: 1, dist: 36}, 'crew-bus': {s: 1, dist: 28}, capsule: {s: 1, dist: 20},
  orbit: {s: 1, dist: 60}, 'lunar-descent': {s: 1, dist: 70}, airlock: {s: 1, dist: 28}, habitat: {s: 1, dist: 55}, 'star-child-cave': {s: 1, dist: 45}, 'crater-road': {s: 1, dist: 60}, 'moon-base-pad': {s: 1, dist: 60}, 'mining-outpost': {s: 1, dist: 34}};
 const NIGHT = {bg: '#03050d', sun: '#e8eeff', sunI: 2.4, sky: '#8fa4d8', gnd: '#3a3f55', hemiI: 1.1};
 let running = null;
