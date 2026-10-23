@@ -6,7 +6,7 @@
 // guard (fails closed), then the designer. Each paid call is charged to the player's cap first (lib/wallet.cjs).
 // Same wishes made at the same moment share one design, and every approved design lands in the shared cache, so a
 // surge of children asking for "a dragon" costs one design. When a player's magic runs out, cached wishes still work.
-// Stored: the shared cache (words and recipe, no account) and each player's makes under their hashed account id,
+// Stored: the shared cache (words, recipe and the inventor's hashed account id, for rebates) and each player's makes under their hashed account id,
 // so a make can be rebuilt or upgraded later. Nothing else a child types is kept.
 const {createHash,randomBytes}=require('node:crypto');
 const {account}=require('../lib/account.cjs');
@@ -23,7 +23,9 @@ function blobCache(){
  const blob=()=>require('@vercel/blob');
  return {
   async read(path){try{const r=await blob().get(path,{access:'private',useCache:false});return r&&r.statusCode===200?JSON.parse(await new Response(r.stream).text()):null;}catch{return null;}},
-  async write(path,value){try{await blob().put(path,JSON.stringify(value),{access:'private',addRandomSuffix:false,allowOverwrite:true,contentType:'application/json'});}catch(e){console.error('[invent] store',e.message);}}
+  async write(path,value){try{await blob().put(path,JSON.stringify(value),{access:'private',addRandomSuffix:false,allowOverwrite:true,contentType:'application/json'});}catch(e){console.error('[invent] store',e.message);}},
+  // Writes only if nothing is there yet: true for the first caller, false for everyone after (exactly-once rebates).
+  async claim(path,value){try{await blob().put(path,JSON.stringify(value),{access:'private',addRandomSuffix:false,allowOverwrite:false,contentType:'application/json'});return true;}catch(e){if(/already exists|precondition|conflict|409|412/i.test(e?.message||''))return false;throw e;}}
  };
 }
 
@@ -82,14 +84,22 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,p
   const {screen}=await policy();
   if(!screen(wish).ok)return json(res,200,{ok:false,verdict:'unsafe'});
   const key=wishKey(wish);
-  const keep=async(recipe,cachedHit)=>{
+  // Evan's rule (2026-10-23): when another player uses a toy someone invented, the inventor gets back what it cost.
+  // Once per toy, on its first use by anyone else; the rebate record is written only if it isn't there yet.
+  const rebate=async entry=>{
+   const by=entry?.by;if(!by?.id||by.id===me.id||!(entry.cost>0))return;
+   try{if(await store.claim(`${ROOT}rebates/${hash(entry.by.id+':'+(wishKey(entry.recipe?.name)||entry.wish))}.json`,{to:by.id,usd:entry.cost,at:new Date(at).toISOString()}))await purse().refund(by,entry.cost);}
+   catch(e){console.error('[invent] rebate',e.message);}
+  };
+  const keep=async(recipe,cachedHit,entry)=>{
+   if(cachedHit)await rebate(entry);
    const id=`${at.toString(36)}-${randomBytes(3).toString('hex')}`;
    await store.write(`${ROOT}made/${me.id}/${id}.json`,{id,wish,recipe,madeAt:new Date(at).toISOString(),cached:cachedHit,version:INVENT_VERSION});
    return json(res,200,{ok:true,id,recipe,cached:cachedHit});
   };
   try{
    const hit=await cached(key);
-   if(hit)return keep(hit.recipe,true);
+   if(hit)return keep(hit.recipe,true,hit);
 
    const token=req.headers['x-vercel-oidc-token']||env.VERCEL_OIDC_TOKEN||env.AI_GATEWAY_API_KEY;
    if(!token)return json(res,503,{error:'Making is resting right now. Keep playing!'});
@@ -108,11 +118,12 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,p
      if(verdict.verdict!=='ok')return {verdict:verdict.verdict};
      if(!await purse().charge(me,PRICES.inventCall))return {tired:true};
      const recipe=await design(wish,headers,constrain,DESIGNER_PROMPT);
-     const entry={wish,recipe,madeAt:new Date(at).toISOString(),version:INVENT_VERSION};
+     // by: the inventor (hashed account id and owner flag only), so a later use by someone else can rebate them.
+     const entry={wish,recipe,madeAt:new Date(at).toISOString(),version:INVENT_VERSION,by:{id:me.id,owner:!!me.owner},cost:PRICES.guardCall+PRICES.inventCall};
      // Filed under the child's words and under the toy's own name, which is what other players are offered.
      const named=wishKey(recipe.name);remember(key,entry);if(named&&named!==key)remember(named,entry);
      await Promise.all([...new Set([key,named].filter(Boolean))].map(k=>store.write(`${ROOT}cache/${hash(k)}.json`,entry)));
-     return {recipe};
+     return {recipe,entry};
     })().finally(()=>{busy--;inflight.delete(key);});
     inflight.set(key,job);
    }
@@ -121,8 +132,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,p
    if(out.tired)return mine?tired():json(res,503,{error:'Lots of builders right now! Try again in a moment.',busy:true});
    if(out.verdict==='unknown')return json(res,503,{error:'Making is resting right now. Try again soon.'});
    if(out.verdict)return json(res,200,{ok:false,verdict:out.verdict});
-   const recipe=out.recipe;
-   return keep(recipe,!mine);
+   return keep(out.recipe,!mine,out.entry);
   }catch(e){console.error('[invent]',e.message);return json(res,502,{error:'Making hit a problem. Try again.'});}
  };
 }
