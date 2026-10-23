@@ -63,6 +63,14 @@ shows information"; `docs/oracle/hud/HUD_STUDY.md`) and the game-feel laws (`GAM
 15. **Grown-up things live behind a door** (GAME_FEEL law 12). Captions under the voice are the only words in play,
     and they are for the grown-up reading along.
 
+## Climbing: tap what shines
+
+Learned in the school jump (AW-STUDY-0032). Holds a hand can reach shine like a worn spot where small hands have been.
+Tap one and the hand that can reach it goes there; the child never chooses a hand and never has to let go first. When
+both hands could go, the game picks the one that keeps the most holds in reach further on, so a climb can't trap you.
+Tapping your own hand lets it go. Being seen costs ground, not the run: you slide back to the last cover. The rules are
+`simulations/climb-kit.mjs`; any game that climbs imports them.
+
 ## Checklist for a new interaction
 
 - What does she touch, and what does that thing do on its own?
