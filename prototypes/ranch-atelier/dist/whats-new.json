@@ -23,6 +23,17 @@
       "tour": false
     },
     {
+      "id": "2026-10-23-precompiled-shaders",
+      "date": "2026-10-23",
+      "title": "Tiles drop without the hitch",
+      "line": "The Ranch now prepares every tile's shaders while you sit at Grace's computer, playing her basement game. When the amber lights fill, you're back at the ranch and tiles land far smoother.",
+      "image": "/whats-new/2026-10-23-intro-scene.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Engine speed and placement lag",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
       "id": "2026-10-23-bakery",
       "date": "2026-10-23",
       "title": "A French bakery downtown",
