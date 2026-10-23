@@ -2,15 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
-      "id": "2026-10-23-title-tile",
+      "id": "2026-10-23-charm-intro",
       "date": "2026-10-23",
-      "title": "A tile to play while the world loads",
-      "line": "The opening screen is one tile and one dealt card. Drag the card into the play area to use its power while Winchester loads.",
-      "image": "/whats-new/2026-10-23-title-tile.png",
+      "title": "The charms light the way in",
+      "line": "Winchester opens in the dark with your backpack charms circling under a spotlight. When it's ready they fold into the backpack, the lights go out, and the town drops in.",
+      "image": "/whats-new/2026-10-23-charm-intro.png",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
       "threadTitle": "Performance",
       "tour": false,
-      "link": "/"
+      "link": "/town"
     },
     {
       "id": "2026-10-23-winchester-warm",
