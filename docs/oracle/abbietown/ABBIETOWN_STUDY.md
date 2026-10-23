@@ -198,3 +198,5 @@ land at one shared squeeze (`BOARD` in `dioramas.block.js`), so heights meet acr
   `gingerbread`, `bunker`.
 - Fixed on the way: the old lattice dropped one row of triangles along one side of every tile (a serrated edge).
 - Not done yet: Main Street granite setts, a tilt-shift pass for the opening tour, the hand-modelled tree houses.
+- Skate park (for the toy-car coaster, AW-STUDY-0054): a flat concrete pad by the high school on the `downtown` hex. Spot
+  `downtown.skatepark` (tile-local x, z, y, facing, `curb`, `out`, `street`); scene id `skate-park` (region `downtown`).
