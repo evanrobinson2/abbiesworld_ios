@@ -1,9 +1,9 @@
 {
   "figure": "male-toned-3",
-  "round": 1,
+  "round": 2,
   "concept": "male-base-toned_3",
   "height_m": 1.85,
-  "triangles": 2734,
+  "triangles": 2826,
   "sockets": {
     "shoulder_l": [
       -0.226,

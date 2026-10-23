@@ -5,7 +5,10 @@
 // The ledger lives in the project's private Blob store. Every charge is a conditional write
 // (ifMatch on the ETag), so two charges at once can never overwrite each other; a charge that
 // would cross a cap is refused before the call is made.
-const CAPS={person:1,public:100,owner:1000};
+// The person and public caps can be raised for a launch day in the Vercel env (AI_CAP_PERSON_USD, AI_CAP_PUBLIC_USD)
+// without a code change; see docs/launch/SURGE.md.
+const capFrom=(v,fallback)=>v!=null&&String(v).trim()!==''&&Number.isFinite(+v)&&+v>=0?+v:fallback;
+const CAPS={person:capFrom(process.env.AI_CAP_PERSON_USD,1),public:capFrom(process.env.AI_CAP_PUBLIC_USD,100),owner:1000};
 const ROOT='spend/v1/';
 // Conservative estimates in US dollars, above list prices so the caps bite early rather than late.
 const PRICES={
@@ -72,4 +75,4 @@ function createWallet({store=blobStore(),caps=CAPS}={}){
 }
 let shared;
 const wallet=()=>shared??=createWallet();
-module.exports={createWallet,wallet,CAPS,PRICES};
+module.exports={createWallet,wallet,capFrom,CAPS,PRICES};

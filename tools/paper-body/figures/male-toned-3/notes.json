@@ -2,8 +2,30 @@
   "asset": "male-toned-3",
   "request": "Evan, 2026-10-23 04:39Z: \"can you model https://www.midjourney.com/jobs/d9420c89-239a-408b-a2c6-058c6045ff11?index=2 and https://www.midjourney.com/jobs/adc9fe3e-8bd2-41d2-b15d-31834c855353?index=3 .. but reduce the female shoulder bulbs\" (this asset is the adc9fe3e index 3 man)",
   "rounds": [
-    {"round": 1, "date": "2026-10-23", "score_iou": 0.923, "triangles": 2734,
-     "notes": "Built with male-hero round 2's method: torso, arm and leg widths traced row by row from this pick's mask; parts, depth, fold ridges and seams from the recipe. Pick-specific: narrow helmet head with a pointed chin, wide waistband over briefs cut high at the hip, arms hanging nearly straight with an elbow cuff, knee bands, ankle cuffs, slim pointed slipper feet. Fixed an upper-arm row that read the merged shoulder run (a flat plate across the chest). Still differs: the deltoids read as separate rounded blocks rather than flowing from steep traps, and the pec and ab planes are softer than the pick's crisp folds."}
+    {
+      "round": 1,
+      "date": "2026-10-23",
+      "score_iou": 0.923,
+      "triangles": 2734,
+      "notes": "Built with male-hero round 2's method: torso, arm and leg widths traced row by row from this pick's mask; parts, depth, fold ridges and seams from the recipe. Pick-specific: narrow helmet head with a pointed chin, wide waistband over briefs cut high at the hip, arms hanging nearly straight with an elbow cuff, knee bands, ankle cuffs, slim pointed slipper feet. Fixed an upper-arm row that read the merged shoulder run (a flat plate across the chest). Still differs: the deltoids read as separate rounded blocks rather than flowing from steep traps, and the pec and ab planes are softer than the pick's crisp folds.",
+      "archived": "rounds/r1/ (build.py, male-toned-3.glb/json, shot.png, cmp.jpg, score.json)"
+    },
+    {
+      "round": 2,
+      "date": "2026-10-23",
+      "score_iou": 0.915,
+      "triangles": 2826,
+      "request": "Evan, 2026-10-23 05:37Z, on the round-1 papercraft figures: \"It looks like the modeler just got lazy and did not try to model this charcter, but instead created an inspired character? I wanted THIS character, and the modeler got laze and didn't bother with hands. or a real facial outline or nose.. super lazy.\"",
+      "notes": "Parts first, two passes. Head: a six-sided origami wedge, two flat face planes meeting at the nose ridge (lit on the key side, as in the pick), brow and cheek planes, and a slanted underside from the pointed chin to the nape, so the jaw line reads. Neck: folded in to a V (two tendon planes to the sternum notch) in front of the trap planes. Torso: eight-sided rings with real dihedral breaks: a sharp centre line from the sternum to the navel, flat pec plates with a hard lower edge where they fold under, a narrow ab column whose side planes turn back hard, and a shallower waist. Waistband: a separate band standing clear of the belly with a lip folded over its top edge; briefs cut high at the hip with a V front panel. Hands: a palm, four separate three-segment fingers (each its own length and curl, hooking in toward the thigh), a pointed thumb flap and a folded wrist cuff. Limbs twist their planes onto the diagonal like the pick's folds; kneecaps are their own folded plates; feet are folded paper shoes (pentagon sections with a ridge along the top, closing to a point) under an ankle cuff. Deltoids and the arm and leg outlines are round 1's, traced from the pick.",
+      "proportion_check": {
+        "heads_tall": 8.17,
+        "fingertips_z_m": 0.792,
+        "pick_fingertips_z_m": 0.798,
+        "knee": "The kneecap bottom is at 0.46 m. The canon puts it halfway between the front hip point (about 1.0 m) and the floor, 0.50 m, so the knee sits about 0.17 head low. Kept, because the pick's knee band is clearly there.",
+        "arms": "The fingertips now reach the pick's own level (0.79 m against the pick's 0.80 m; round 1 ended at about 0.82 m). Mid-thigh, the canon's mark, is about 0.69 m, so the arms are still about 0.5 head short of the canon: that is the pick's proportion, not a modelling miss."
+      },
+      "score_note": "IoU 0.915 is scored from round 1's camera (yaw 5, pitch -6, lens 106.25), kept in cam.json. A fresh --calibrate --yaw=-15,15 --pitch 0,10 search settled on a worse camera (yaw -5, pitch -6: 0.911), from its coarse grid."
+    }
   ],
-  "same_camera_shot": "r/shot.png (tools/paper-body/figures/shot.py)"
+  "same_camera_shot": "r/shot.png (tools/paper-body/figures/shot.py); r/before-after.jpg = pick | round 1 | round 2"
 }
