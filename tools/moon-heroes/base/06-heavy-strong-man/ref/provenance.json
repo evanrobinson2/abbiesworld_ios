@@ -1,0 +1,42 @@
+{
+  "model": "06-heavy-strong-man",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "220186dc-5c93-48e8-8806-de9b1306ddc8",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, heavy strong adult man, broad powerful build, thick arms and big belly, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_220186dc-5c93-48e8-8806-de9b1306ddc8_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/220186dc-5c93-48e8-8806-de9b1306ddc8/0_0.png",
+          "sha256": "673560540ac7ff1a6c52ba70f649ebaccda246a57bd5177339f3edb0053b095a"
+        },
+        {
+          "file": "mj_220186dc-5c93-48e8-8806-de9b1306ddc8_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/220186dc-5c93-48e8-8806-de9b1306ddc8/0_1.png",
+          "sha256": "7478bc2e6d2beb5016d015cc0687d478666275106794a06b459475573489ce04"
+        },
+        {
+          "file": "mj_220186dc-5c93-48e8-8806-de9b1306ddc8_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/220186dc-5c93-48e8-8806-de9b1306ddc8/0_2.png",
+          "sha256": "145491d79acea6c318acb015727473a999e4c216473b96a5f4c2e42c2051d71b"
+        },
+        {
+          "file": "mj_220186dc-5c93-48e8-8806-de9b1306ddc8_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/220186dc-5c93-48e8-8806-de9b1306ddc8/0_3.png",
+          "sha256": "a2219ff25b145e817ebd6a22c2c982ca9be3e0d95428e10b1c73f0e4371c9e84"
+        }
+      ],
+      "pick": 3,
+      "verdict": "picked: heavy, broad, sealed"
+    }
+  ],
+  "status": "ready"
+}

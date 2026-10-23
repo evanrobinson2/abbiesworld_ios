@@ -1,0 +1,42 @@
+{
+  "model": "14-elf-man",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "d4bdc36b-df42-4f81-82e0-6459ca47f484",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, elf man, tall and slender adult, bald head with long pointed ears, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_d4bdc36b-df42-4f81-82e0-6459ca47f484_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/d4bdc36b-df42-4f81-82e0-6459ca47f484/0_0.png",
+          "sha256": "56d64ab95d2ed5cdccd26aebe92aecd0b7c6a90d59c74af973c6fdb6fbdcf2c0"
+        },
+        {
+          "file": "mj_d4bdc36b-df42-4f81-82e0-6459ca47f484_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/d4bdc36b-df42-4f81-82e0-6459ca47f484/0_1.png",
+          "sha256": "8a958eb3656ac0f627d501f1ffd71b0ea2c3c65e2cee2e99e64261a87fb09df4"
+        },
+        {
+          "file": "mj_d4bdc36b-df42-4f81-82e0-6459ca47f484_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/d4bdc36b-df42-4f81-82e0-6459ca47f484/0_2.png",
+          "sha256": "8b0880d673fe0ee99cd8cf413786760540909e98ffaa0bb93c3e2aaf92ff9729"
+        },
+        {
+          "file": "mj_d4bdc36b-df42-4f81-82e0-6459ca47f484_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/d4bdc36b-df42-4f81-82e0-6459ca47f484/0_3.png",
+          "sha256": "4dcb6eb26f8b8f8b9b31f3fc09a55071214073746ae511d9827126a8ce057919"
+        }
+      ],
+      "pick": 2,
+      "verdict": "picked: slender, pointed ears"
+    }
+  ],
+  "status": "ready"
+}

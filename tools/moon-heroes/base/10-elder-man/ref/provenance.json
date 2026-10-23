@@ -1,0 +1,42 @@
+{
+  "model": "10-elder-man",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "1dd33d69-eb35-4d90-a312-9e5751d7d3be",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, elderly adult man, slightly stooped posture, thin older body, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_1dd33d69-eb35-4d90-a312-9e5751d7d3be_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/1dd33d69-eb35-4d90-a312-9e5751d7d3be/0_0.png",
+          "sha256": "738b2b8caabffc0ae388ad5654901b984b1835c9625a46b1acb1a4a34bbfe7a1"
+        },
+        {
+          "file": "mj_1dd33d69-eb35-4d90-a312-9e5751d7d3be_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/1dd33d69-eb35-4d90-a312-9e5751d7d3be/0_1.png",
+          "sha256": "5d8a3e72b780766dd925cd70e55fed9cb3f001a131277ad281886165621c7c02"
+        },
+        {
+          "file": "mj_1dd33d69-eb35-4d90-a312-9e5751d7d3be_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/1dd33d69-eb35-4d90-a312-9e5751d7d3be/0_2.png",
+          "sha256": "3144e013e3a8925849f5b9e4f4f83f7eceeda4aa7d8c0195befd46f610a8ee87"
+        },
+        {
+          "file": "mj_1dd33d69-eb35-4d90-a312-9e5751d7d3be_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/1dd33d69-eb35-4d90-a312-9e5751d7d3be/0_3.png",
+          "sha256": "803ab781d2bcde2a5dd3e6382c45f1750d50441f04f4678f4097327859a76b93"
+        }
+      ],
+      "pick": null,
+      "verdict": "rejected: no age or stoop"
+    }
+  ],
+  "status": "needs re-roll"
+}

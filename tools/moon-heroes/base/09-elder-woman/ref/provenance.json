@@ -1,0 +1,42 @@
+{
+  "model": "09-elder-woman",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "ec83b7d2-e60e-4326-9f59-631d38f0192b",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, elderly adult woman, slightly stooped posture, softer older body, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_ec83b7d2-e60e-4326-9f59-631d38f0192b_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/ec83b7d2-e60e-4326-9f59-631d38f0192b/0_0.png",
+          "sha256": "6ed98a172c149f2ac9be8d2e1a85e801a0367a41458e0cb8015c138dfeb71dec"
+        },
+        {
+          "file": "mj_ec83b7d2-e60e-4326-9f59-631d38f0192b_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/ec83b7d2-e60e-4326-9f59-631d38f0192b/0_1.png",
+          "sha256": "2ff08fdb3d95f07d79597358bd303dd41ce80234e80add1e3927dddca48183b3"
+        },
+        {
+          "file": "mj_ec83b7d2-e60e-4326-9f59-631d38f0192b_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/ec83b7d2-e60e-4326-9f59-631d38f0192b/0_2.png",
+          "sha256": "adbbd95eff4f0f444f0f28f21a99d438fe67238d62b174d70b40f13a33a70443"
+        },
+        {
+          "file": "mj_ec83b7d2-e60e-4326-9f59-631d38f0192b_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/ec83b7d2-e60e-4326-9f59-631d38f0192b/0_3.png",
+          "sha256": "ca8bc64f5d8a1f509feba57f10cf5854890766defa5893a21b6ea26292110380"
+        }
+      ],
+      "pick": null,
+      "verdict": "rejected: reads as a young slim mannequin, no age"
+    }
+  ],
+  "status": "needs re-roll"
+}

@@ -68,6 +68,39 @@
       ],
       "pick": 0,
       "verdict": "picked"
+    },
+    {
+      "job_id": "5c75cbbe-4c20-4bae-b123-fbc9f784304b",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, ordinary average adult woman with true everyday proportions, natural chest, fuller waist and hips, not a fashion model, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_5c75cbbe-4c20-4bae-b123-fbc9f784304b_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5c75cbbe-4c20-4bae-b123-fbc9f784304b/0_0.png",
+          "sha256": "2e052da57bdaf8e8f11f119a30ef30be046c4dd774310d9b3a3a11f01871583d"
+        },
+        {
+          "file": "mj_5c75cbbe-4c20-4bae-b123-fbc9f784304b_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5c75cbbe-4c20-4bae-b123-fbc9f784304b/0_1.png",
+          "sha256": "6d812578a061511e5ebcc283fbbd5e9b979f697d25bb987e0fb40795397880b7"
+        },
+        {
+          "file": "mj_5c75cbbe-4c20-4bae-b123-fbc9f784304b_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5c75cbbe-4c20-4bae-b123-fbc9f784304b/0_2.png",
+          "sha256": "3ee25926b72e9866f35e81ff677a0e589eec8d44a6c626a14ecbf25d44216a17"
+        },
+        {
+          "file": "mj_5c75cbbe-4c20-4bae-b123-fbc9f784304b_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5c75cbbe-4c20-4bae-b123-fbc9f784304b/0_3.png",
+          "sha256": "3f127431abf874922e816dfa9998039ba296993e290e6d314f2474409f982142"
+        }
+      ],
+      "pick": null,
+      "verdict": "rejected: still a slim fashion mannequin, not average; the 'store mannequin' anchor overrides the proportions"
     }
-  ]
+  ],
+  "status": "needs re-roll (current front_clay.png is the thin fashion mannequin the coordinator flagged)"
 }

@@ -1,0 +1,42 @@
+{
+  "model": "11-short-stocky-woman",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "66840b6d-afc2-44d2-91c1-2dbfaa57151e",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, short stocky adult woman, compact sturdy build with real adult proportions, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_66840b6d-afc2-44d2-91c1-2dbfaa57151e_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/66840b6d-afc2-44d2-91c1-2dbfaa57151e/0_0.png",
+          "sha256": "877aae69407d57134d2f0061a4fb8d9504f07d1c7722759c283da3c715127c44"
+        },
+        {
+          "file": "mj_66840b6d-afc2-44d2-91c1-2dbfaa57151e_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/66840b6d-afc2-44d2-91c1-2dbfaa57151e/0_1.png",
+          "sha256": "ba4b3d8ebb649e546f987c97fae325da4dfab2fd76d5c6c902f18b8054619266"
+        },
+        {
+          "file": "mj_66840b6d-afc2-44d2-91c1-2dbfaa57151e_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/66840b6d-afc2-44d2-91c1-2dbfaa57151e/0_2.png",
+          "sha256": "a6c141875b66a2f69556f395d99e6cec2e5c71de8a7042f833700dec2edfb47c"
+        },
+        {
+          "file": "mj_66840b6d-afc2-44d2-91c1-2dbfaa57151e_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/66840b6d-afc2-44d2-91c1-2dbfaa57151e/0_3.png",
+          "sha256": "89c60c14a00102b61dddb3038f7af0939cd262a919422f791004acaf4542b5e9"
+        }
+      ],
+      "pick": null,
+      "verdict": "rejected: not short or stocky"
+    }
+  ],
+  "status": "needs re-roll"
+}

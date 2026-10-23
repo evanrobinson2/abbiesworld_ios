@@ -1,0 +1,42 @@
+{
+  "model": "15-dwarf-woman",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "20adc9a8-fb01-4471-842b-108bd1b87272",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, dwarf woman, short broad sturdy adult with big hands, real adult proportions, bald head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_20adc9a8-fb01-4471-842b-108bd1b87272_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/20adc9a8-fb01-4471-842b-108bd1b87272/0_0.png",
+          "sha256": "28c38ccaf8bfe6e660227f7c80acd2b571611f97fcf8339e7760643490a2e963"
+        },
+        {
+          "file": "mj_20adc9a8-fb01-4471-842b-108bd1b87272_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/20adc9a8-fb01-4471-842b-108bd1b87272/0_1.png",
+          "sha256": "5a9e8bd56f6c6b5728b9a0112e9e7e988598de9f3f6d22a5153006c81a050c47"
+        },
+        {
+          "file": "mj_20adc9a8-fb01-4471-842b-108bd1b87272_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/20adc9a8-fb01-4471-842b-108bd1b87272/0_2.png",
+          "sha256": "b701e11031b909c8952027bd52c007b68a39d9b7b1696921f59fef53fde6178e"
+        },
+        {
+          "file": "mj_20adc9a8-fb01-4471-842b-108bd1b87272_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/20adc9a8-fb01-4471-842b-108bd1b87272/0_3.png",
+          "sha256": "347a9c28dd0f9f95894ddc84e5e0fd7a667a94b708d0b570a278845a7c96fb68"
+        }
+      ],
+      "pick": null,
+      "verdict": "rejected: slim average figure, not dwarf proportions"
+    }
+  ],
+  "status": "needs re-roll"
+}

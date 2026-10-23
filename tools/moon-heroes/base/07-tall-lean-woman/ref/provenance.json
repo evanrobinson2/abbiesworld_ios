@@ -1,0 +1,42 @@
+{
+  "model": "07-tall-lean-woman",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "8852450d-8657-426d-8c87-e39cf69624bb",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, tall lean adult woman, long limbs, slim with real adult proportions, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_8852450d-8657-426d-8c87-e39cf69624bb_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/8852450d-8657-426d-8c87-e39cf69624bb/0_0.png",
+          "sha256": "3bf78153196d8ab4fb56ef34a06a97d67f5d5084ca9c3bb87b151443d2e1c73f"
+        },
+        {
+          "file": "mj_8852450d-8657-426d-8c87-e39cf69624bb_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/8852450d-8657-426d-8c87-e39cf69624bb/0_1.png",
+          "sha256": "23a15bc7b06ee086bf10711fb036acb38032986a2fcaa336ff91809176641556"
+        },
+        {
+          "file": "mj_8852450d-8657-426d-8c87-e39cf69624bb_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/8852450d-8657-426d-8c87-e39cf69624bb/0_2.png",
+          "sha256": "5471d85aad0132c2bd4afffee069c6eb680bdba74cdda724f43f7784b8254cb1"
+        },
+        {
+          "file": "mj_8852450d-8657-426d-8c87-e39cf69624bb_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/8852450d-8657-426d-8c87-e39cf69624bb/0_3.png",
+          "sha256": "4ae280da3ecca71062e700a754d73803f362c3c4b15603640c88031b77efbab6"
+        }
+      ],
+      "pick": 2,
+      "verdict": "picked: tall lean, real adult proportions"
+    }
+  ],
+  "status": "ready"
+}

@@ -61,5 +61,44 @@
     "d0d3a717-e60a-415b-827b-86e999b9edcc",
     "783f68c1-6336-4553-9712-05df3f053116",
     "84cf2391-dd4e-47cd-8424-f2e26b9def6b"
-  ]
+  ],
+  "round2": {
+    "job_id": "4f215d67-1bb2-4407-a1c4-cfa5f6eaf557",
+    "attach": [
+      "trek_cut.png",
+      "inspiration_pink_quad_9ba65562-65b5-4a09-a02d-4eb3614ef6ae_3.png"
+    ],
+    "prompt": "a four-wheeled moon buggy quad bike that combines these two: the dark gunmetal body and cyan headlights of the first, with the chunky playful character, big rounded fenders, fat tires and cargo rack ideas of the pink one, empty, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+    "images": [
+      {
+        "file": "mj_4f215d67-1bb2-4407-a1c4-cfa5f6eaf557_0.png",
+        "index": 0,
+        "source_url": "https://cdn.midjourney.com/4f215d67-1bb2-4407-a1c4-cfa5f6eaf557/0_0.png",
+        "sha256": "f8a706ae6e290ac29d31cbf6f52fee562745b0688f60717c6814b3a8fbb6e31d"
+      },
+      {
+        "file": "mj_4f215d67-1bb2-4407-a1c4-cfa5f6eaf557_1.png",
+        "index": 1,
+        "source_url": "https://cdn.midjourney.com/4f215d67-1bb2-4407-a1c4-cfa5f6eaf557/0_1.png",
+        "sha256": "5527c08ff747526ff82ea8fe1f86cfb7f4865d4b0fa954cd70ca325475dbf055"
+      },
+      {
+        "file": "mj_4f215d67-1bb2-4407-a1c4-cfa5f6eaf557_2.png",
+        "index": 2,
+        "source_url": "https://cdn.midjourney.com/4f215d67-1bb2-4407-a1c4-cfa5f6eaf557/0_2.png",
+        "sha256": "f7fb38d29a347a1608c7e281bcd05ddd34d3f68bcfc5f8e7b57cf100988a94de"
+      },
+      {
+        "file": "mj_4f215d67-1bb2-4407-a1c4-cfa5f6eaf557_3.png",
+        "index": 3,
+        "source_url": "https://cdn.midjourney.com/4f215d67-1bb2-4407-a1c4-cfa5f6eaf557/0_3.png",
+        "sha256": "cd06ee08ce3b26423b4e7de6d708e8f03d65335d55de76e838b02c3f56029517"
+      }
+    ],
+    "pick": {
+      "index": 2,
+      "file": "ref.png"
+    },
+    "verdict": "Chosen over round 1 (kept as ref_round1.png): chunkier, rounded fenders, fat tyres, rear rack: the pink quad's character in the Moon Mission dark body with cyan lights. The design changed, so part sheets 02-08 (made from round 1) should be redone to match."
+  }
 }

@@ -1,0 +1,42 @@
+{
+  "model": "05-heavy-strong-woman",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "1d24405a-bb94-4059-a926-a1c6b74ebaf3",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, heavy strong adult woman, broad powerful build with real adult proportions, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_1d24405a-bb94-4059-a926-a1c6b74ebaf3_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/1d24405a-bb94-4059-a926-a1c6b74ebaf3/0_0.png",
+          "sha256": "9b7a747c69e4626d4696ccf4ec126dc3eaad9c42949113acd9c097f0144ed96a"
+        },
+        {
+          "file": "mj_1d24405a-bb94-4059-a926-a1c6b74ebaf3_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/1d24405a-bb94-4059-a926-a1c6b74ebaf3/0_1.png",
+          "sha256": "3b9bdaa268b289869014886c94c46744e973700835636612865303120b43a551"
+        },
+        {
+          "file": "mj_1d24405a-bb94-4059-a926-a1c6b74ebaf3_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/1d24405a-bb94-4059-a926-a1c6b74ebaf3/0_2.png",
+          "sha256": "e3ff6719f68e6692af2ddf2b8dbff97016d6f67c38c0871e71c6d0feb9485763"
+        },
+        {
+          "file": "mj_1d24405a-bb94-4059-a926-a1c6b74ebaf3_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/1d24405a-bb94-4059-a926-a1c6b74ebaf3/0_3.png",
+          "sha256": "9427e8a7c095c5424bd5a0e12320cc3b30c2c12385535ee891d45bcb770b6f2d"
+        }
+      ],
+      "pick": null,
+      "verdict": "rejected: slim, not heavy or strong"
+    }
+  ],
+  "status": "needs re-roll"
+}

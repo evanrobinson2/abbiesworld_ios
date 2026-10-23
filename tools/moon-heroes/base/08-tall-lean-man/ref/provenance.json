@@ -1,0 +1,42 @@
+{
+  "model": "08-tall-lean-man",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "0883304d-80ef-489d-8b75-6b62eeedad4f",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, tall lean adult man, long limbs, slim build, bald featureless head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_0883304d-80ef-489d-8b75-6b62eeedad4f_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/0883304d-80ef-489d-8b75-6b62eeedad4f/0_0.png",
+          "sha256": "701d3c01b9ea936cac31e5b66316c9c3610245ad9ec3774a938f45fa54876e0c"
+        },
+        {
+          "file": "mj_0883304d-80ef-489d-8b75-6b62eeedad4f_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/0883304d-80ef-489d-8b75-6b62eeedad4f/0_1.png",
+          "sha256": "96bd3e8603bbdf8c6bb9086580e5ddd99588d04ad6e526e1d1a9e2d7da849322"
+        },
+        {
+          "file": "mj_0883304d-80ef-489d-8b75-6b62eeedad4f_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/0883304d-80ef-489d-8b75-6b62eeedad4f/0_2.png",
+          "sha256": "a0b32cff247746bac8ccb436363cae2f5074f02cfa48a3c6bf01d73adffd5150"
+        },
+        {
+          "file": "mj_0883304d-80ef-489d-8b75-6b62eeedad4f_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/0883304d-80ef-489d-8b75-6b62eeedad4f/0_3.png",
+          "sha256": "fb4bcf4423a8ddc3694311679656ef116958ea42ebaa22431bd87dd53619836a"
+        }
+      ],
+      "pick": 0,
+      "verdict": "picked"
+    }
+  ],
+  "status": "ready"
+}

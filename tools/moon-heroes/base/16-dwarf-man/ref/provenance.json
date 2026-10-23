@@ -1,0 +1,42 @@
+{
+  "model": "16-dwarf-man",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "f0a9ce6c-9de0-4a45-9180-b24763586e5a",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, dwarf man, short broad sturdy adult with big hands and thick arms, bald head, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_f0a9ce6c-9de0-4a45-9180-b24763586e5a_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/f0a9ce6c-9de0-4a45-9180-b24763586e5a/0_0.png",
+          "sha256": "eb0d80bcb2a06170619d0afdd6a68563376e1cb0d4519a74c73a9ae27106d07d"
+        },
+        {
+          "file": "mj_f0a9ce6c-9de0-4a45-9180-b24763586e5a_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/f0a9ce6c-9de0-4a45-9180-b24763586e5a/0_1.png",
+          "sha256": "ed273ee7592101d45b37abc909bb38f761843a1382c61c6f9a2196a44b7183c4"
+        },
+        {
+          "file": "mj_f0a9ce6c-9de0-4a45-9180-b24763586e5a_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/f0a9ce6c-9de0-4a45-9180-b24763586e5a/0_2.png",
+          "sha256": "7738f0956f0006441f32d7471fea14c41b43e5622d5eb2ed7457afdf97bd3f8e"
+        },
+        {
+          "file": "mj_f0a9ce6c-9de0-4a45-9180-b24763586e5a_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/f0a9ce6c-9de0-4a45-9180-b24763586e5a/0_3.png",
+          "sha256": "feefca323de8e28e0b0d1e065f5341e8407d7c8476d216342d13f78ec51fdaba"
+        }
+      ],
+      "pick": 0,
+      "verdict": "picked: broad, big hands; height reads average in a solo shot"
+    }
+  ],
+  "status": "ready"
+}

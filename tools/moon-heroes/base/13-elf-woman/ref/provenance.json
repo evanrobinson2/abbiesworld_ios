@@ -1,0 +1,42 @@
+{
+  "model": "13-elf-woman",
+  "set": "Moon heroes base bodies (docs/oracle/moonheroes/BASE_ROSTER.md)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, no attachment",
+  "rules": "Adults only; smooth featureless sealed PG mannequin, no anatomical detail, nothing sexualised; real adult proportions; bald, A-pose, square to camera, orthographic, white clay, Faceted Hero planes.",
+  "jobs": [
+    {
+      "job_id": "3957a1cf-e1c9-413c-b404-da7cc3eb4a07",
+      "prompt": "low-poly faceted 3D game base mesh of a plain white plastic store display mannequin, smooth sealed featureless surface like an artist's lay figure, smooth flat pelvis, no anatomical detail, like a store display mannequin, no clothing, PG, elf woman, tall and slender adult with real adult proportions, bald head with long pointed ears, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, untextured white clay, plain light grey background --ar 2:3",
+      "images": [
+        {
+          "file": "mj_3957a1cf-e1c9-413c-b404-da7cc3eb4a07_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/3957a1cf-e1c9-413c-b404-da7cc3eb4a07/0_0.png",
+          "sha256": "311c2b8e4990fb45b7ebad9ee48c4b9be6e95af6aca0f6487c62356bf2536964"
+        },
+        {
+          "file": "mj_3957a1cf-e1c9-413c-b404-da7cc3eb4a07_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/3957a1cf-e1c9-413c-b404-da7cc3eb4a07/0_1.png",
+          "sha256": "6056a20a07d749e17c9efbb73f714e1b123deff5fd4a0fdcdb7cb678a02a126e"
+        },
+        {
+          "file": "mj_3957a1cf-e1c9-413c-b404-da7cc3eb4a07_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/3957a1cf-e1c9-413c-b404-da7cc3eb4a07/0_2.png",
+          "sha256": "63f3d56d9661c2f015e4a507fed2276197f72c664a37a3b37f40641272949dea"
+        },
+        {
+          "file": "mj_3957a1cf-e1c9-413c-b404-da7cc3eb4a07_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/3957a1cf-e1c9-413c-b404-da7cc3eb4a07/0_3.png",
+          "sha256": "b345fb62116fb2d19dd82e8521d3c256298069a30799e00d4beeb7c1c3b5132d"
+        }
+      ],
+      "pick": 3,
+      "verdict": "picked: slender, long pointed ears"
+    }
+  ],
+  "status": "ready"
+}
