@@ -143,3 +143,8 @@ Speedups for the next game:
 - **Still missing** (honest list): the mate-call way into the editor, drag-to-place and scale of parts (the creator picks
   from fixed choices), paint patterns, a complexity "wobble" meter (there is no budget yet), the escape-timeline diet,
   and sharing a creature. Part cards at each growth step are still the older picker.
+
+## Parked (Evan, 2026-10-23 5:51 PM)
+"Take this off the game, it's not ready ... that will be high school, it comes after Moon Base." The `/science-lab` route now
+redirects to `/town` and the game is not offered in play. The code, the creator and the study page stay in the repo; it
+returns as the high school game after the Moon Base mission.
