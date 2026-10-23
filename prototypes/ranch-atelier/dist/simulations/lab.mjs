@@ -252,9 +252,11 @@ function ensureStage(room=null){return stageLoading??=import('./holodeck/stage.m
  walkPace:value=>{const state=active?.life.state;if(state&&value!==undefined)state.walkPace=value;return state?.walkPace??1;},
  clock:()=>({hour:farmClock.hour,day:farmClock.day,paused:!running,speed:simulationSpeed,weather:active?.life.state.weather??null,weatherMode}),
  setHour:h=>{farmClock={...farmClock,hour:h%24};updateClock(0);},setPaused:p=>{running=!p;syncPlayback();persist();},setSpeed:v=>{simulationSpeed=normalizeSpeed(v);syncSpeedControl();persist();},setWeather:chooseWeather},{room,relay:new URLSearchParams(location.search).get('relay')});window.holodeck=creator;return creator;});}
+let worldFx=null;
 // World event cards (event-hand.mjs): the god-view effects. Weather and time are set through the same code the buttons use.
 addEventListener('ranch:play-event',e=>{const id=e.detail?.id,hour=h=>{farmClock={...farmClock,hour:h};updateClock(0);};
  if(id==='paint-rain'){if(typeof playPaintCard==='function')playPaintCard();return;}
+ if(['fireball','waterball','cats-dogs','tie-dye'].includes(id)){import('./world-effects.mjs?v=1').then(({createWorldEffects})=>{worldFx||=createWorldEffects({T,scene,orbit,canvas:renderer.domElement,heightAt:(x,z)=>active?.heightAt?.(x,z)??0,clock:()=>farmClock});worldFx.play(id);});return;}
  const fx={'rain-shower':['rain'],thunderstorm:['hail'],snowfall:['snow'],'morning-fog':['cloudy',6],rainbow:['clear',15],'golden-dawn':['clear',6.5],'starry-night':['clear',22]}[id];
  if(!fx)return;chooseWeather(fx[0]);if(fx[1]!==undefined)hour(fx[1]);});
 // Developer mode only: scripted captures (time, weather, pause) for the weather and light checks.

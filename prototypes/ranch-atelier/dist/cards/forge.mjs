@@ -642,6 +642,7 @@ function sunburst(ctx, cx, cy, R, seed) {
 const EVENT_SCENES = {
   'paint-rain': 'meadow', meteorite: 'moon', rain: 'ev-rain', storm: 'ev-storm', snow: 'ev-snow', rainbow: 'meadow',
   dawn: 'ev-dawn', night: 'ev-night', fog: 'ev-fog', aurora: 'ev-aurora',
+  fireball: 'ev-dawn', waterball: 'meadow', 'cats-dogs': 'ev-rain', 'tie-dye': 'meadow',
 };
 const PAINT_HUES = ['#ff3fa4', '#16d6c0', '#9be22c', '#8a5cff', '#ffb824'];
 function puff(ctx, cx, cy, cw, col, shade) {
@@ -738,6 +739,32 @@ function paintEventScene(ctx, kind, x, y, w, h, seed) {
     ctx.beginPath(); ctx.moveTo(sx - 1.6, sy); ctx.lineTo(ex, ey); ctx.lineTo(sx, sy + 1.6); ctx.closePath(); ctx.fillStyle = '#c4f6ff'; ctx.fill();
     ctx.globalAlpha = 0.3; disc(ctx, ex, ey, 6, '#5ee8ff'); ctx.globalAlpha = 1;
     ctx.beginPath(); ctx.ellipse(cx, hz + h * 0.2, w * 0.3, h * 0.06, 0, 0, TAU); ctx.fillStyle = '#4c5168'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.3; ctx.stroke();
+  } else if (kind === 'fireball') {
+    const sx = x + w * 0.86, sy = y + h * 0.12, ex = cx, ey = hz + h * 0.08;
+    ctx.beginPath(); ctx.moveTo(sx - 2.6, sy + 1); ctx.lineTo(ex + 3, ey - 4); ctx.lineTo(sx + 2.4, sy + 3.6); ctx.closePath(); ctx.fillStyle = '#ff8a1f'; ctx.fill();
+    disc(ctx, ex, ey - 5, 7, INK); disc(ctx, ex, ey - 5, 6.3, '#ff5a1f'); disc(ctx, ex + 0.3, ey - 4.6, 4.2, '#ffa91f'); disc(ctx, ex + 0.6, ey - 4.2, 2.1, '#fff0a0');
+    ctx.beginPath(); ctx.ellipse(ex, ey + 2.2, w * 0.3, h * 0.05, 0, 0, TAU); ctx.fillStyle = '#4a3a30'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.3; ctx.stroke();
+    for (let i = 0; i < 9; i++) { ctx.fillStyle = '#ffd24a'; sparkle(ctx, x + w * (0.12 + r() * 0.76), y + h * (0.3 + r() * 0.4), 1 + r() * 1.2); }
+  } else if (kind === 'waterball') {
+    const bx = cx, by = hz - h * 0.02, br = h * 0.17;
+    disc(ctx, bx, by, br * 1.1, INK); disc(ctx, bx, by, br, '#58b8ff'); disc(ctx, bx - br * 0.15, by + br * 0.18, br * 0.72, '#8fd4ff');
+    disc(ctx, bx - br * 0.38, by - br * 0.4, br * 0.2, '#ffffff');
+    ctx.beginPath(); ctx.ellipse(bx, hz + h * 0.2, w * 0.36, h * 0.07, 0, 0, TAU); ctx.fillStyle = '#7cc8f2'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.3; ctx.stroke();
+    for (let i = 0; i < 8; i++) { const a = Math.PI * (1.1 + i * 0.1); drop(ctx, bx + Math.cos(a) * br * 1.5, by + Math.sin(a) * br * 1.5 + 1, 0.9, '#8fd4ff'); }
+  } else if (kind === 'cats-dogs') {
+    puff(ctx, cx, y + h * 0.14, w * 0.7, '#8d9fb0', '#6f8296');
+    const pet = (px, py, cat) => { // a round pet with ears: cats are grey, dogs are brown
+      ctx.fillStyle = cat ? '#9aa0ac' : '#b07a4a'; ctx.strokeStyle = INK; ctx.lineWidth = 0.28;
+      ctx.beginPath(); ctx.ellipse(px, py, 3, 2.3, 0, 0, TAU); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); cat ? (ctx.moveTo(px - 2, py - 1.7), ctx.lineTo(px - 1.6, py - 3.4), ctx.lineTo(px - 0.4, py - 2.1), ctx.moveTo(px + 2, py - 1.7), ctx.lineTo(px + 1.6, py - 3.4), ctx.lineTo(px + 0.4, py - 2.1)) : (ctx.ellipse(px - 2.2, py - 1, 0.8, 1.5, 0.3, 0, TAU), ctx.ellipse(px + 2.2, py - 1, 0.8, 1.5, -0.3, 0, TAU)); ctx.fill(); ctx.stroke();
+      disc(ctx, px - 1, py - 0.2, 0.35, INK); disc(ctx, px + 1, py - 0.2, 0.35, INK); disc(ctx, px, py + 0.7, 0.4, cat ? '#f08aa8' : INK);
+    };
+    [[0.2, 0.34, 1], [0.42, 0.46, 0], [0.64, 0.3, 1], [0.82, 0.5, 0], [0.3, 0.62, 0], [0.7, 0.66, 1]].forEach(([fx, fy, c]) => pet(x + w * fx, y + h * fy, c));
+    streaks(ctx, r, x, y + h * 0.2, w, h * 0.4, 14, '#3f6f9c', 4, 0.35);
+  } else if (kind === 'tie-dye') {
+    const cols = ['#ff3fa4', '#ffb824', '#9be22c', '#16d6c0', '#8a5cff'];
+    for (let i = 11; i >= 0; i--) { ctx.fillStyle = cols[i % cols.length]; ctx.beginPath(); ctx.ellipse(cx, y + h * 0.5, w * (0.06 + i * 0.045), h * (0.05 + i * 0.04), i * 0.35, 0, TAU); ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.25; ctx.stroke(); }
+    ctx.fillStyle = '#fffbe6'; sparkle(ctx, cx, y + h * 0.5, 3.2);
   }
   ctx.restore();
 }
