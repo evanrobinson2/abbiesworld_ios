@@ -381,6 +381,57 @@ The café sign is not on the HUD: it is a sign on the café (T1), and the score 
 
 - Free-build mode (no season running) hides the sun dial's day strip and shows only the hand and the toy box.
 
+## Two layers that never mix (Evan, 2026-10-23)
+
+In a living simulation anything placed in the world becomes part of the fiction: characters, AI directors and the
+voice controller perceive it and react to it ("if we did, the bots would actually react to it and direct the
+simulation to INVOKE HORROR, HAVE SOME PEOPLE WORSHIP IT!"). So:
+
+- **World layer**: only in-fiction things. It is the only thing characters, the simulation, AI directors and the
+  voice `look` tool can perceive.
+- **Presentation layer**: overlay, meta, spatial cues, name tags, selection, debug and tools. It is drawn for the
+  player and is invisible to every perception. No engine or editor artifacts (gizmos, axes, grids, debug boxes, raw
+  ids) in the player's view outside developer mode.
+
+### Leak check of today's code (`claude/live-snapshot-2026-10-22`, read 2026-10-23)
+
+| Where | What leaks | Severity |
+|---|---|---|
+| `simulations/lab.mjs` (inspect) | Selecting a person or object adds a red `THREE.BoxHelper` to the world scene. It is a debug box in the player's view, and it lands in every renderer capture | High: it breaks the no-gizmo rule and is seen by any vision AI |
+| `simulations/holodeck/stage.mjs` `capture()` and `mcp/holodeck-cli.mjs look` | The screenshot is the raw WebGL canvas, so anything in the 3D scene shows (selection box, label sprites, rings and markers the AI built). There is no presentation-only render pass | Medium |
+| `holodeck/stage.mjs` labels | Floating name tags are sprites parented to the entity's world object, so `Box3.setFromObject` (used by `probe`) counts the tag as part of the thing | Low |
+| `simulations/live/policy.mjs` `summarize()` (voice `look`) | `yourThings` reports every entity, including invisible ones (`visible:false`), marker shapes (`ring`, `empty`) and `label` text, as world things. There is no layer field, so the voice controller can't tell a marker from a barn | Medium |
+| `outbreak-simulation.mjs` `decide()` (actor senses) | Actors sense only simulation entities through the spatial index | Clean |
+| `view-context.js` (chat view share) | Shares visible DOM text and a screenshot with developer chat; it skips `[data-context-private]` | Clean (developer tool) |
+
+Fix direction: add `layer: 'world' | 'presentation'` to every entity and scene object. Put presentation objects in their
+own `THREE.Layers` channel, so captures for AI perception render the world layer only and `summarize()` drops them,
+along with invisible entities. Selection becomes a presentation-layer cue (a glow or contact ring) shown only to the
+player, never a `BoxHelper`.
+
+### Evan's notes on today's sandbox (2026-10-23)
+
+Screenshot (browser chrome cropped): `evan/sandbox-2026-10-23.jpg`. This is a newer layout than the audit below: a
+top bar (ranch name, Talk, pause, speed, music, code, sliders, layers), a clock and weather card at top left, and a
+"Tiles" settings panel on the right with tile preview cards, segmented buttons and sections.
+
+| Keep | Lose |
+|---|---|
+| **Liquid glass**: the translucent, glassy material of the controls | **The web-page layout**: top bar, right-side settings panel, segmented Low/Medium/High buttons, section headings |
+| **Rich colours** | **The mask**: the pale haze that fades and covers the world toward its edges and behind the panels. The world must stay fully visible, edge to edge |
+| **Live previews**: the tile picture cards and the live 3D tile preview | |
+
+What this means for the HUD spec:
+
+- The three always-on toys (sun dial, hand of cards, toy box) may be made of liquid glass, as long as they read as
+  objects: glass with thickness, a rim highlight and a contact shadow, not flat frosted rectangles.
+- The hand of cards keeps the live previews: each card's art is a live render of the tile it places (the preview
+  the sandbox already has), not a static icon.
+- No full-screen or edge mask, fog, haze, vignette-to-white or backdrop blur over the world in play mode. Glass may
+  refract what is directly behind it, but it never dims or hides the world around it. (Night and the meta
+  vignette in the core rule are world light, tied to a game signal, not a permanent mask.)
+- Settings such as density, variety, size and buildings go to the workbench (Law 12), where a tool look is allowed.
+
 ### Audit of today's `/sandbox` (live branch, 2026-10-22)
 
 `prototypes/ranch-atelier/dist/simulations/index.html` on `claude/live-snapshot-2026-10-22`:

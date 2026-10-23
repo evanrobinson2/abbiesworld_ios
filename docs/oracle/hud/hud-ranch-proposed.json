@@ -274,5 +274,6 @@
     "sound"
    ]
   }
- ]
+ ],
+ "world_mask": false
 }

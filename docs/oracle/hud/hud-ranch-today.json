@@ -173,5 +173,6 @@
   "fail_screen": false
  },
  "captures": [],
- "signals": []
+ "signals": [],
+ "world_mask": true
 }

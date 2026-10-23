@@ -1,5 +1,5 @@
 {
-  "rubric_version": "1.1",
+  "rubric_version": "1.2",
   "name": "Abbie's World in-game HUD rubric",
   "date": "2026-10-23",
   "doc": "docs/oracle/hud/HUD_STUDY.md",
@@ -323,6 +323,11 @@
           "check": "Always-on icons >= 48 px; spatial bubbles 36 to 56 px across the zoom range.",
           "source": "footage_cv",
           "auto": true
+        },
+        {
+          "id": "live_previews",
+          "check": "Cards and pickers show live renders of what they place, not static icons.",
+          "source": "footage_cv"
         }
       ]
     },
@@ -431,6 +436,17 @@
           "check": "Play-mode code has no panel/sidebar/toolbar/drawer/modal/toast/tabs/dropdown/select/input without a recorded reason (GAME_FEEL section 8).",
           "source": "footage_cv",
           "auto": true
+        },
+        {
+          "id": "world_unmasked",
+          "check": "No mask over the world in play mode: no edge fade, fog to white, haze or backdrop blur dimming the world outside a HUD element's own bounds. Night and signal-driven meta effects are exempt. Manifest flag world_mask=false; footage: world pixels in the outer 15% keep >= 85% of their centre contrast.",
+          "source": "footage_cv",
+          "auto": true
+        },
+        {
+          "id": "glass_as_object",
+          "check": "Liquid-glass HUD elements read as objects (thickness, rim light, contact shadow), not flat frosted rectangles; pairwise judge.",
+          "source": "llm_judge"
         }
       ]
     },
@@ -483,5 +499,18 @@
     ],
     "min_world_channels": 3,
     "source": "Evan, 2026-10-23"
+  },
+  "evan_taste": {
+    "date": "2026-10-23",
+    "keep": [
+      "liquid glass material",
+      "rich colours",
+      "live previews (tile picture cards, live 3D tile preview)"
+    ],
+    "lose": [
+      "web-page layout (top bar, right settings panel, segmented buttons, section headings)",
+      "the mask: haze or fade covering the world at its edges and behind panels"
+    ],
+    "screenshot": "docs/oracle/hud/evan/sandbox-2026-10-23.jpg"
   }
 }

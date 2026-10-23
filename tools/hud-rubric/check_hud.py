@@ -194,6 +194,8 @@ def check(man_path, css=(), code=()):
     res["thumb_zone"] = (not far, ", ".join(far) or "frequent targets in the bottom 40%")
     missing = [k for k in ("focus", "change", "idle_tuck", "threshold", "summon_all") if k not in man.get("fade", {})]
     res["rules_declared"] = (not missing, ("missing " + ", ".join(missing)) if missing else "focus, change, idle, threshold, summon-all")
+    if "world_mask" in man:
+        res["world_unmasked"] = (not man["world_mask"], "no mask over the world" if not man["world_mask"] else "the world is masked (haze, fade or blur)")
     orient = [n for n in ("portrait", "landscape") if n not in man["viewports"]]
     res["orientations"] = (not orient, ("missing " + ", ".join(orient)) if orient else "portrait and landscape declared")
 
