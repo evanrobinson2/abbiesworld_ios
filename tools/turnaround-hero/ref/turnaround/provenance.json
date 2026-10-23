@@ -48,5 +48,56 @@
       ]
     }
   ],
-  "notes": "One run only. All four images show front, side (closer to three-quarter) and back views of the same bald, giant-shouldered figure in plain briefs with faceted shins."
+  "notes": "One run only. All four images show front, side (closer to three-quarter) and back views of the same bald, giant-shouldered figure in plain briefs with faceted shins.",
+  "pick": {
+    "job_id": "2efa3cb8-c278-4ed7-8354-db75fe4e599b",
+    "index": 3,
+    "file": "mj_2efa3cb8-c278-4ed7-8354-db75fe4e599b_3.png",
+    "reason": "Closest to the reference: small bald head, giant shoulders, fists, faceted shins, plain briefs, smooth faceted shading, and all three views fully in frame. Image 2 has the same look but its front arm runs off the left edge; images 0 and 1 carry drawn wireframe lines the reference does not have.",
+    "split": {
+      "tool": "tools/turnaround-hero/split_seam.py",
+      "method": "The views touch (side shoulder over the back view's fist), so straight cuts clip them. Cut along minimum-cost curved seams, keep each view's own silhouette, and refill the rest with a smooth 2D backdrop estimate.",
+      "seam_x_ranges": [
+        [
+          380,
+          448
+        ],
+        [
+          607,
+          719
+        ]
+      ],
+      "crops_x": {
+        "front": [
+          0,
+          469
+        ],
+        "side": [
+          384,
+          693
+        ],
+        "back": [
+          623,
+          1024
+        ]
+      }
+    },
+    "views": {
+      "front": {
+        "file": "view_front.png",
+        "bytes": 423760,
+        "sha256": "e1cad30f2cae52adb204e5c9e5dbfc1d7a0cd3f42f6d48607423677fb84b5ea8"
+      },
+      "side": {
+        "file": "view_side.png",
+        "bytes": 236916,
+        "sha256": "2d26384101601f56851b0ee5e51adc3bede10d954f6da5bbf747d04638ef5851"
+      },
+      "back": {
+        "file": "view_back.png",
+        "bytes": 363416,
+        "sha256": "43c40677467b5fd8d3c57a890edb93fc2f12b33746a0b987d8906581aeb1f154"
+      }
+    }
+  }
 }
