@@ -2049,6 +2049,101 @@
     }
    ],
    "recorded": "2026-10-23, as the study was built"
+  },
+  "worlds": {
+   "recorded": "2026-10-23, while building",
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Zelda: Breath of the Wild",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/zelda-breath-of-the-wild.json",
+     "note": "fast travel only to places you have touched: a map is earned"
+    },
+    {
+     "k": "oracle",
+     "t": "Outer Wilds",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=753640",
+     "note": "travel is physical and is the game; too slow for every trip, right for the rocket's first flight"
+    },
+    {
+     "k": "oracle",
+     "t": "No Man's Sky",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=275850",
+     "note": "the ship is the diegetic menu, the galaxy map only chooses"
+    },
+    {
+     "k": "oracle",
+     "t": "Hades",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1145360",
+     "note": "doors that show what is behind them; one home that always catches you"
+    },
+    {
+     "k": "oracle",
+     "t": "A Short Hike",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1055540",
+     "note": "regions are walked; no menus"
+    },
+    {
+     "k": "oracle",
+     "t": "Animal Crossing: New Horizons",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json",
+     "note": "the airport: one predictable doorway for going away"
+    },
+    {
+     "k": "oracle",
+     "t": "Tiny Glade and Portal",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2198150",
+     "note": "a gentle scene change; see the other side through the door (Portal, 400)"
+    },
+    {
+     "k": "design",
+     "t": "Fast Travel Sucks (Game Developer)",
+     "href": "https://www.gamedeveloper.com/design/fast-travel-sucks",
+     "note": "found by search, title and argument only; not read in full. Supports making travel part of the world"
+    },
+    {
+     "k": "design",
+     "t": "Dragon's Dogma 2 devs on restricted fast travel (GamingBolt)",
+     "href": "https://gamingbolt.com/dragons-dogma-2s-developers-explain-restricted-fast-travel-options",
+     "note": "found by search, not read in full; why a map should be limited"
+    },
+    {
+     "k": "devblog",
+     "t": "Animal Crossing: New Horizons island premise (GoNintendo, dev talk)",
+     "href": "https://gonintendo.com/stories/339412-animal-crossing-new-horizons-devs-talk-about-the-island-premise",
+     "note": "found by search, not read in full"
+    },
+    {
+     "k": "canon",
+     "t": "HUD study: the 2x2 plus none",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+     "note": "diegetic first; nothing masks the world"
+    },
+    {
+     "k": "canon",
+     "t": "Moon Mission study (AW-STUDY-0036)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonmission/MOON_MISSION_STUDY.md",
+     "note": "jobs not turns, Captain's Hat, truck, rocket port"
+    },
+    {
+     "k": "canon",
+     "t": "Abbie's Town (AW-STUDY-0042) and its seven-hex regions",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/abbietown/ABBIETOWN_STUDY.md",
+     "note": "regions.mjs ids and the three-way cut"
+    },
+    {
+     "k": "canon",
+     "t": "Abbie's Backpack (AW-STUDY-0046)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md",
+     "note": "the one shared store"
+    },
+    {
+     "k": "reference",
+     "t": "Family Teleport (/teleport)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/teleport",
+     "note": "arrival feel in the existing toy"
+    }
+   ]
   }
  }
 }
