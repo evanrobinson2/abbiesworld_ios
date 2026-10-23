@@ -1,6 +1,6 @@
 # Abbie's World — Music Bible
 
-> **Canon (Evan, 2026-10-23).** This is the source of truth for Abbie's World music. Briefs, takes and the music
+> **AW-STUDY-0010: Abbie's World Score.** **Canon (Evan, 2026-10-23).** This is the source of truth for Abbie's World music. Briefs, takes and the music
 > director follow it. Machine-readable form: `tools/composer/api/briefs-bible.json`. Reference renders of both
 > melodies: `tools/composer/motifs/`. Open question: which melody is canonical (section 1); see the decision log
 > at the end.
