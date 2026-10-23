@@ -96,7 +96,7 @@ function pane(sky) {
 }
 const P = [pane('#efe4d2'), pane('#efe4d2'), pane('#e9e3f2')];
 const loader = new GLTFLoader();
-let bodyId = 'game', sel = R.moves[0], t0 = performance.now() / 1000;
+let bodyId = 'red', sel = R.moves[0], t0 = performance.now() / 1000;
 async function setBody(id) {
  bodyId = id;
  for (const p of P.slice(0, 2)) {
@@ -112,7 +112,7 @@ const box = new T.Box3().setFromObject(ref.scene); ref.scene.scale.setScalar(1.8
 P[2].scene.add(ref.scene);
 const mixer = new T.AnimationMixer(ref.scene);
 
-$('#bodies').innerHTML = [['game', 'Game figure'], ['daddy', 'Young Daddy'], ['girl', 'Girl'], ['mannequin', 'Wood']]
+$('#bodies').innerHTML = [['red', 'Red brute'], ['blue', 'Blue brute']]
  .map(([id, n]) => `<button data-body="${id}" aria-pressed="false">${n}</button>`).join(' ');
 document.querySelectorAll('[data-body]').forEach(b => b.onclick = () => setBody(b.dataset.body));
 
@@ -169,7 +169,7 @@ function frame() {
   renderer.setViewport(x, 0, pw, h); renderer.setScissor(x, 0, pw, h); renderer.render(p.scene, p.camera);
  });
 }
-await setBody('game');
+await setBody('red');
 choose(R.moves.find(m => m.id === location.hash.slice(1)) || R.moves[0]);
 frame();
 window.review = {choose: id => choose(R.moves.find(m => m.id === id)), setBody};

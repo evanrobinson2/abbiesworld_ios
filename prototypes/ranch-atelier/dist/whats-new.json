@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-character-studio-meshy",
+      "date": "2026-10-23",
+      "title": "Character Studio: only Meshy figures",
+      "line": "The studio now plays every move on the two Meshy brutes and nothing else; the wooden mannequins, game figure and kids are gone from the cast. New Meshy heroes join once they are rigged.",
+      "image": "/whats-new/2026-10-23-character-studio-meshy.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMMgGWzaue2qNoRR7u64j2y",
+      "threadTitle": "AW-STUDY-0037 - Character Studio",
+      "tour": false,
+      "link": "/studies/character-studio/#idle"
+    },
+    {
       "id": "2026-10-23-moon-mission-world",
       "date": "2026-10-23",
       "title": "Moon Mission: the black truck, the rocket port and the pink ship, in the town",
