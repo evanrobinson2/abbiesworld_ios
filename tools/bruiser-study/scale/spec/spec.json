@@ -1,6 +1,8 @@
 {
 "title": "Bruiser, learned from the Meshy hero mesh",
 "source": "../meshy/canonical/meshy_canonical.glb",
+"picture": "ref/bruiser.png",
+"picture_turn": -24.0,
 "note": "Each part is a stack of horizontal rings read from the hero mesh. Edit by name with edit.py; build with figure.py.",
 "height": 2.0,
 "dz": 0.02,

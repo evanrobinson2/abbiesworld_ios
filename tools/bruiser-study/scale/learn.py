@@ -166,6 +166,9 @@ def main():
     ap.add_argument('--dz', type=float, default=0.02)
     ap.add_argument('--sides', type=int, default=32)
     ap.add_argument('--out', default='spec')
+    ap.add_argument('--picture', default='ref/bruiser.png', help='the source picture, relative to the study folder')
+    ap.add_argument('--turn', type=float, default=None, help='degrees the hero turns to match the picture (default: meshy/align.json)')
+    ap.add_argument('--title', default='Bruiser, learned from the Meshy hero mesh')
     a = ap.parse_args()
     tris = load_tris(a.src)
     top = float(tris[..., 2].max())
@@ -194,7 +197,8 @@ def main():
             return float(x.max() if side == 'R' else x.min())
         split = dict(z=min(arms['R']['z1'], arms['L']['z1']), R=inner(arms['R'], 'R'), L=inner(arms['L'], 'L'))
         parts = run(split)
-    spec = dict(title='Bruiser, learned from the Meshy hero mesh', source=os.path.relpath(a.src, HERE),
+    turn = a.turn if a.turn is not None else json.load(open(os.path.join(HERE, '..', 'meshy', 'align.json')))['turn_deg']
+    spec = dict(title=a.title, source=os.path.relpath(a.src, HERE), picture=a.picture, picture_turn=turn,
                 note='Each part is a stack of horizontal rings read from the hero mesh. Edit by name with edit.py; '
                      'build with figure.py.', height=top, dz=a.dz, sides=a.sides, parts=parts)
     out = os.path.join(HERE, a.out); os.makedirs(out, exist_ok=True)
