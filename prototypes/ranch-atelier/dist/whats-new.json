@@ -13,6 +13,28 @@
       "link": "/studies/rig-hero/"
     },
     {
+      "id": "2026-10-23-cafe-diorama",
+      "date": "2026-10-23",
+      "title": "Walk into the café",
+      "line": "Step through the café's front doors and walk Abbie round the real room, day or night. Turn the jukebox on, find what the register is hiding, and try the old door behind the bar.",
+      "image": "/whats-new/2026-10-23-cafe-diorama.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9",
+      "threadTitle": "AW-STUDY-0013 - The Coffee Shop",
+      "tour": false,
+      "link": "/studies/cafe/diorama.html"
+    },
+    {
+      "id": "2026-10-23-hand-drawn",
+      "date": "2026-10-23",
+      "title": "Drawn by hand, 12 frames",
+      "line": "The brute fight has a pencil button: poses hold for two frames, the pen line redraws every drawing, and each hit freezes the picture a beat.",
+      "image": "/whats-new/2026-10-23-hand-drawn.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXN3WE59yf51fCQsfkeXJ2x",
+      "threadTitle": "AW-STUDY-0051 - Drawn by Hand, 12 Frames",
+      "tour": false,
+      "link": "/studies/brute-fight/play.html?look=hand"
+    },
+    {
       "id": "2026-10-23-abbietown-houses",
       "date": "2026-10-23",
       "title": "Nine kinds of house",

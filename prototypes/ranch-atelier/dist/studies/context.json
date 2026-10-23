@@ -2274,6 +2274,89 @@
         }
       ]
     },
+    "hand-drawn": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Game Oracle: Guilty Gear Xrd record and 'How it's drawn' (outline shells, held frames), plus the 19 of 368 games that use outlines",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/docs/oracle/games",
+          "note": "confirmed Xrd as the reference for limited-animation 3D"
+        },
+        {
+          "k": "devblog",
+          "t": "GuiltyGear Xrd's Art Style: The X Factor Between 2D and 3D (GDC 2015, Motomura)",
+          "href": "https://gdcvault.com/play/1022031/GuiltyGearXrd-s-Art-Style-The",
+          "note": "edited normals, painted line width, animation on held frames"
+        },
+        {
+          "k": "devblog",
+          "t": "Guilty Gear Xrd Art Talk at GDC 2015 (Arc System Works)",
+          "href": "https://www.arcsystemworks.com/guilty-gear-xrd-art-talk-at-game-developers-conference-2015/",
+          "note": "the studio's own write-up of the talk"
+        },
+        {
+          "k": "devblog",
+          "t": "Junya C. Motomura: Behind the Scenes of Guilty Gear Xrd (BlenderNation)",
+          "href": "https://www.blendernation.com/2015/07/26/junya-c-motomura-behind-the-scenes-of-guilty-gear-xrd/",
+          "note": "how the poses are posed to read as drawn"
+        },
+        {
+          "k": "devblog",
+          "t": "Motomura Junya: GuiltyGearXrd slides (PDF)",
+          "href": "https://www.ggxrd.com/Motomura_Junya_GuiltyGearXrd.pdf",
+          "note": "frame timing and the camera choices"
+        },
+        {
+          "k": "design",
+          "t": "How Spider-Man got a makeover: Spider-Verse (Hollywood Reporter)",
+          "href": "https://www.hollywoodreporter.com/behind-screen/how-spider-man-got-a-makeover-spider-verse-1165982",
+          "note": "animating on twos and ones as a choice per beat"
+        },
+        {
+          "k": "design",
+          "t": "Spider-Verse look explained (VFX Voice)",
+          "href": "https://vfxvoice.com/?p=5908138",
+          "note": "hand-drawn line work added over 3D, redrawn per frame"
+        },
+        {
+          "k": "tutorial",
+          "t": "three.js AnimationMixer: update(deltaTimeInSeconds)",
+          "href": "https://threejs.org/docs/#api/en/animation/AnimationMixer",
+          "note": "stepping the mixer by whole drawings is how poses are held"
+        },
+        {
+          "k": "canon",
+          "t": "Painted Brush kit (Inspiring Shaders, AW-STUDY-0045)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs",
+          "note": "the shading and ink shell this look is a preset of"
+        },
+        {
+          "k": "canon",
+          "t": "The Perfect Drawing Pipeline: code pencil (AW-STUDY-0045)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/trace-lab/pencil.py",
+          "note": "pressure and wobble ideas, ported as pen swell and boil"
+        },
+        {
+          "k": "canon",
+          "t": "Character Studio directions (stick man, clay on twos)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/character-studio/directions.mjs",
+          "note": "the drawing counter and stepped time were already there"
+        },
+        {
+          "k": "canon",
+          "t": "Brute fight hit-stop (AW-STUDY-0027)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/brute-fight/play.html",
+          "note": "every blow already freezes; the look turns that freeze into a held drawing"
+        },
+        {
+          "k": "canon",
+          "t": "GAME_FEEL.md and the HUD study",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "style on figures only, nothing masks the world, no words on the play screen"
+        }
+      ]
+    },
     "rig-hero": {
       "recorded": "2026-10-23, while building",
       "items": [
