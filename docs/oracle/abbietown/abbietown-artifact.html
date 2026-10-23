@@ -301,7 +301,7 @@ const SPOTS = [
  {id: 'ginn', name: 'Ginn Field', at: 'ginn', line: 'The train park, by the lakes.', coins: 1, where: 'data'},
  {id: 'horn', name: 'Horn Pond', at: 'horn', line: 'The long walk round the pond.', coins: 1, where: 'data'},
  {id: 'lab', name: 'The science lab', at: 'centre', line: 'Green goo bubbles in a beaker by the door. Tap the beaker to shrink down into a cell.', coins: 0, where: 'new', link: '/studies/cell/play.html'},
- {id: 'home', name: "Abbie's house", at: 'fixed', pos: [5520, 3790], line: "Home. Her treehouse is in the backyard, and Daddy's bunker is under it: a round steel door in the grass.", coins: 1, where: 'family'},
+ {id: 'home', name: "Abbie's house", at: 'fixed', pos: [4700, 3560], line: "Home. Her treehouse is in the backyard, and Daddy's bunker is under it: a round steel door in the grass.", coins: 1, where: 'family'},
  {id: 'ani', name: "Ani's house", at: 'fixed', pos: [3380, 2830], line: "Ani's home, with her own treehouse in the backyard.", coins: 1, where: 'family'},
  {id: 'common', name: 'The town common', at: 'common', line: 'The middle of everything: the church, the flag, the pond.', coins: 0, where: 'data'},
 ];
@@ -531,11 +531,13 @@ function summary(land, town) {
 // and its six neighbours) inside one greater hex. Three regions are carved at 120 degrees each. The centre hex is cut
 // into three wedges and each region takes two outer hexes plus one wedge, so each region is exactly 7/3 hexes: one third.
 // Local metres as in town.mjs (x east, y north). Bearings run clockwise from north. First version, Evan 2026-10-23 1:30 PM.
-const HEX = {side: 880, centre: [4300, 2450]}; // flat-top hexes; seven of them cover about 14 km2 of the real town's 16.5
+const HEX = {side: 760, centre: [4376, 2020], downtownRadius: 260}; // flat-top hexes centred on the common and its church park; seven of them cover about 10.5 km2 of the real town's 16.5
+// Evan 1:34 PM: "ani has her side, abbie and I have ours ... then there's a downtown area", the church park at the centre.
+// The old working names (School Hill, Pond Side, Lake Country) stay as sub-areas.
 const REGIONS = [
- {id: 'school-hill', name: 'School Hill', from: 330, to: 90, outer: [0, 60], line: 'Muraco, Leonard Field, the family homes on the hill, and the road north to Launch.'},
- {id: 'pond-side', name: 'Pond Side', from: 210, to: 330, outer: [240, 300], line: 'Horn Pond, its splash pad and the streets above it.'},
- {id: 'lake-country', name: 'Lake Country', from: 90, to: 210, outer: [120, 180], line: 'Ginn Field, the train park, and the lakes the railway runs beside.'},
+ {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", sub: 'School Hill', from: 330, to: 90, outer: [0, 60], line: "Abbie's house and treehouse, Daddy's hideaway, Muraco, Leonard Field, and the road north to Launch."},
+ {id: 'anis-side', name: "Ani's side", sub: 'Pond Side', from: 210, to: 330, outer: [240, 300], line: "Ani's house and treehouse, Horn Pond with its splash pad."},
+ {id: 'downtown', name: 'Downtown', sub: 'Lake Country', from: 90, to: 210, outer: [120, 180], line: 'The church park and common, Main Street and the coffee shop, Ginn Field and the train park, the lakes.'},
 ];
 const deg = (x, y) => (Math.atan2(x - HEX.centre[0], y - HEX.centre[1]) * 180 / Math.PI + 360) % 360;
 const within = (b, from, to) => from <= to ? b >= from && b < to : b >= from || b < to;
@@ -549,7 +551,8 @@ function hexOf(x, y) {
 }
 function regionOf(x, y) {
  const h = hexOf(x, y); if (!h) return null;
- const r = REGIONS.find(r => within(deg(x, y), r.from, r.to)); return {hex: h.id, region: r.id, seam: h.id === 'centre'};
+ // the church park at the middle of the structure, and the streets round it, are Downtown whichever way the wedge points
+ const r = Math.hypot(x - HEX.centre[0], y - HEX.centre[1]) < HEX.downtownRadius ? REGIONS[2] : REGIONS.find(r => within(deg(x, y), r.from, r.to)); return {hex: h.id, region: r.id, seam: h.id === 'centre'};
 }
 // where each place falls (computed from the town, so it stays true when places move)
 function placeRegions(town) { return Object.fromEntries(town.spots.map(s => [s.id, regionOf(s.x, s.y)])); }
@@ -831,7 +834,7 @@ function merge(geos) { // a small merge for non-indexed and indexed BufferGeomet
 // the seven-hex region: outlines draped on the land, in each region's colour (a presentation layer, off until the hex button is pressed)
 const regionsGroup = new THREE.Group(); regionsGroup.visible = false; scene.add(regionsGroup);
 {
- const col = {'school-hill': '#e8643c', 'pond-side': '#2f9ac4', 'lake-country': '#6aa84f', centre: '#ffffff'}, s = HEX.side, hexes = hexCentres();
+ const col = {'abbie-daddy-side': '#e8643c', 'anis-side': '#2f9ac4', downtown: '#6aa84f', centre: '#ffffff'}, s = HEX.side, hexes = hexCentres();
  const pts = c => Array.from({length: 7}, (_, k) => [c.x + Math.cos(k * Math.PI / 3) * s, c.y + Math.sin(k * Math.PI / 3) * s]);
  for (const h of hexes) { const r = h.bearing === null ? 'centre' : REGIONS.find(r => r.outer.includes(h.bearing)).id; regionsGroup.add(new THREE.Mesh(merge([ribbon(pts(h), 46, 4, 20)]), new THREE.MeshBasicMaterial({color: col[r], depthTest: false, transparent: true, opacity: .95}))); }
  for (const r of REGIONS) for (const b of [r.from]) { const a = b * Math.PI / 180, e = [HEX.centre[0] + Math.sin(a) * s * 2.6, HEX.centre[1] + Math.cos(a) * s * 2.6]; regionsGroup.add(new THREE.Mesh(merge([ribbon([HEX.centre, e], 30, 4, 20)]), new THREE.MeshBasicMaterial({color: col[r.id], depthTest: false, transparent: true, opacity: .55}))); }

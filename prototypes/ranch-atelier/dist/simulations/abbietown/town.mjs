@@ -41,7 +41,7 @@ export const SPOTS = [
  {id: 'ginn', name: 'Ginn Field', at: 'ginn', line: 'The train park, by the lakes.', coins: 1, where: 'data'},
  {id: 'horn', name: 'Horn Pond', at: 'horn', line: 'The long walk round the pond.', coins: 1, where: 'data'},
  {id: 'lab', name: 'The science lab', at: 'centre', line: 'Green goo bubbles in a beaker by the door. Tap the beaker to shrink down into a cell.', coins: 0, where: 'new', link: '/studies/cell/play.html'},
- {id: 'home', name: "Abbie's house", at: 'fixed', pos: [5520, 3790], line: "Home. Her treehouse is in the backyard, and Daddy's bunker is under it: a round steel door in the grass.", coins: 1, where: 'family'},
+ {id: 'home', name: "Abbie's house", at: 'fixed', pos: [4700, 3560], line: "Home. Her treehouse is in the backyard, and Daddy's bunker is under it: a round steel door in the grass.", coins: 1, where: 'family'},
  {id: 'ani', name: "Ani's house", at: 'fixed', pos: [3380, 2830], line: "Ani's home, with her own treehouse in the backyard.", coins: 1, where: 'family'},
  {id: 'common', name: 'The town common', at: 'common', line: 'The middle of everything: the church, the flag, the pond.', coins: 0, where: 'data'},
 ];

@@ -46,7 +46,8 @@ test('the seven-hex region carves three regions of one third each, with the plac
   const {regionOf, placeRegions} = await import('../abbietown/regions.mjs');
   const n = {}; let all = 0;
   for (let x = 0; x < 6800; x += 20) for (let y = 0; y < 4800; y += 20) { const r = regionOf(x, y); if (r) { all++; n[r.region] = (n[r.region] || 0) + 1; } }
-  for (const k of ['school-hill', 'pond-side', 'lake-country']) assert.ok(Math.abs(n[k] / all - 1 / 3) < .01, k);
+  for (const k of ['abbie-daddy-side', 'anis-side', 'downtown']) assert.ok(Math.abs(n[k] / all - 1 / 3) < .03, k);
   const w = placeRegions(growTown(land, {charm: 1}));
+  assert.equal(w.cafe.region, 'downtown'); assert.equal(w.common.region, 'downtown'); assert.equal(w.home.region, 'abbie-daddy-side'); assert.equal(w.ani.region, 'anis-side');
   for (const id of ['cafe', 'muraco', 'leonard', 'ginn', 'horn', 'home', 'ani']) assert.ok(w[id], id + ' is inside the greater hex');
 });
