@@ -58,7 +58,8 @@ export function mountChrono({press, icons}) {
  const care = () => $('#care-readout')?.textContent || '', peaks = {};
  const level = (key, value) => { if (value == null) return null; peaks[key] = Math.max(peaks[key] || 0, value); return {value, max: peaks[key] || 1}; };
  const arriving = () => [...document.querySelectorAll('#activity-list > *')].filter(r => /arriving/i.test(r.textContent)).map(r => r.firstChild?.textContent || r.textContent);
- volunteer('ranch', {place: 'ranch', dialect: 'wood, bells, painted signs', items: [
+ // Scene id 'ranch-care' sits beside ranch-info.mjs's 'ranch' manifest (time, weather, season, animals, ledger) without replacing it.
+ volunteer('ranch-care', {place: 'ranch', dialect: 'wood, bells, painted signs', items: [
   {id: 'arrivals', says: 'friends arriving', kind: 'list', who: 'characters', for: ['player', 'director'], read: arriving, relevant: () => arriving().length > 0,
    prefer: ['diegetic', 'overlay'], ways: {diegetic: 'guests walk up the lane and wave', overlay: 'a dial counting who is on the way'}, glyph: icons.guests},
   {id: 'hungry', says: 'hungry animals', kind: 'count', who: 'characters', for: ['player', 'director'], read: () => num(/(\d+) hungry/, care()), relevant: () => num(/(\d+) hungry/, care()) > 0,
@@ -82,7 +83,7 @@ export function mountChrono({press, icons}) {
  window.RanchTodos = todos;
 
  // Pins: what the player chose to wear on the instrument. To-dos are pinned until waved off.
- let pins = store.get(PIN_KEY, null) ?? [{scene: 'ranch', id: 'todos', form: 'list'}];
+ let pins = store.get(PIN_KEY, null) ?? [{scene: 'ranch-care', id: 'todos', form: 'list'}];
  const waved = new Set(store.get(WAVE_KEY, []));
  const savePins = () => { store.set(PIN_KEY, pins); render(); };
  const items = () => readManifest(null, {audience: 'player'}).flatMap(m => m.items.map(i => ({...i, scene: m.sceneId, place: m.place})));
@@ -91,13 +92,13 @@ export function mountChrono({press, icons}) {
 
  // A register draws a value in one of six dial forms, 30 px across.
  function face(item, form) {
-  let v = item.value, n = Array.isArray(v) ? v.length : typeof v === 'object' && v ? v.value : v, max = typeof v === 'object' && v && !Array.isArray(v) ? v.max : null;
+  let v = item.value, n = Array.isArray(v) ? v.length : typeof v === 'object' && v ? v.value ?? v.count : v, max = typeof v === 'object' && v && !Array.isArray(v) ? v.max : null;
   const f = max ? Math.max(0, Math.min(1, n / max)) : null, glyph = item.glyph || '';
   const label = n == null ? '·' : n > 999 ? Math.round(n / 1000) + 'k' : String(Math.round(n));
   if (form === 'gauge' || form === 'timer') { const c = 2 * Math.PI * 12, frac = f ?? 0; return `<svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="none" stroke="#0000001a" stroke-width="3"/><circle cx="15" cy="15" r="12" fill="none" stroke="var(--v2-accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(c * frac).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 15 15)"/></svg><span class="ch-g">${glyph}</span>`; }
   if (form === 'phase') { const frac = f ?? (n ? 1 : 0), x = 15 - 24 * frac + 12; return `<svg viewBox="0 0 30 30"><defs><clipPath id="ph-${item.id}"><circle cx="15" cy="15" r="11"/></clipPath></defs><circle cx="15" cy="15" r="11" fill="#26355f"/><circle clip-path="url(#ph-${item.id})" cx="${x.toFixed(1)}" cy="15" r="11" fill="#f4f1e3"/></svg>`; }
   if (form === 'list') return `<span class="ch-n">${label}</span><span class="ch-g ch-g-small">${glyph}</span>`;
-  if (form === 'state') return `<span class="ch-g">${glyph || esc(String(v ?? '').slice(0, 2))}</span>`;
+  if (form === 'state') return `<span class="ch-g">${glyph || (typeof v === 'string' ? esc(v.slice(0, 2)) : '·')}</span>`;
   return `<span class="ch-n">${label}</span><span class="ch-g ch-g-small">${glyph}</span>`;
  }
  const register = (cls, title, html) => { const b = el('button', 'ch-reg v2-glass ' + cls, html); b.type = 'button'; b.title = title; b.setAttribute('aria-label', title); return b; };

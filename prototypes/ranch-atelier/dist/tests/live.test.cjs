@@ -110,6 +110,23 @@ test('game ideas come from the built-in playbook, never from outside the game',a
  assert.ok(!/oracle|steam/i.test(api),'the game does not call the Oracle or any library');
 });
 
+test('game sense: clashing ideas get a better version to propose, wild ones are not blocked',async()=>{
+ const {gameIdea,INSTRUCTIONS,screen}=await policy();
+ const g=await import('../simulations/live/game-sense.mjs');
+ const ids=t=>g.frictions(t).map(f=>f.id);
+ assert.deepEqual(ids('a race with a giant countdown timer floating in the sky'),['floating-numbers']);
+ assert.deepEqual(ids('show me the grid and arrows'),['engine-bits']);
+ assert.deepEqual(ids('nobody wins but the fastest one wins'),['win-and-no-win']);
+ assert.deepEqual(ids('put a big scoreboard over the screen'),['cover-the-world']);
+ assert.deepEqual(ids('a giant monkey stomping the town'),[],'the player decides; the world reacts');
+ assert.deepEqual(ids('a race to the barn'),[]);
+ assert.equal(gameIdea('a race to the barn').consider,undefined);
+ assert.equal(gameIdea('race with points floating over everyone').consider[0].id,'floating-numbers');
+ assert.ok(INSTRUCTIONS.includes('GAME SENSE')&&INSTRUCTIONS.includes(g.PROPOSE_PATTERN));
+ for(const f of g.FRICTIONS)for(const line of [f.meant,f.propose,f.because])assert.ok(screen(line).ok,line);
+ assert.ok(g.gameSenseText({audience:'creator'}).includes('engine-bits'),'the Creator and MCP get the full lists');
+});
+
 test('sessions are rate limited per address',async()=>{
  const h=createHandler({fetcher:gateway(()=>({json:{token:'t'}})),env:{LIVE_TICKET_SECRET:'x'}});
  let last;for(let i=0;i<13;i++)last=await call(h,{body:{action:'session'},ip:'5.5.5.5'});

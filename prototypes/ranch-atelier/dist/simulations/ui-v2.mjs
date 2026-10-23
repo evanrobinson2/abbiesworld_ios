@@ -2,7 +2,7 @@
 // the chronograph (time, weather, season, pause, speed and pinned dials; chrono.mjs), the hand of cards (the tile preview cards) and the toy box (everything else).
 // The v1 controls stay in the DOM with their own handlers; each toy calls the original control, so no feature is lost.
 // The mode is chosen in index.html's boot script (html.ui-v2); "Classic layout" in the toy box switches back to v1.
-import {mountChrono} from './chrono.mjs?v=1';
+import {mountChrono} from './chrono.mjs?v=2';
 import {cardFace} from './hand-cards.mjs?v=2';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
