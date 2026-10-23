@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 630,
+ "total": 690,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -261,6 +261,21 @@
    "what": "charm-bub 3d (run 8; model made, push failed; recover from Meshy)",
    "credits": 20,
    "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-floppy-disk 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-heart 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-moon 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
   }
  ]
 }
