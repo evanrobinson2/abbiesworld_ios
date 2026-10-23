@@ -1,0 +1,23 @@
+{
+ "A_potrace": {
+  "recall": 0.998,
+  "precision": 1.0,
+  "chamfer_px": 0.01,
+  "weight_corr": 0.94,
+  "svg_bytes": 76324
+ },
+ "C0_centerline_flat": {
+  "recall": 0.984,
+  "precision": 1.0,
+  "chamfer_px": 0.12,
+  "weight_corr": -0.03,
+  "svg_bytes": 94769
+ },
+ "C_centerline_weighted": {
+  "recall": 0.988,
+  "precision": 1.0,
+  "chamfer_px": 0.09,
+  "weight_corr": 0.44,
+  "svg_bytes": 109204
+ }
+}
