@@ -1,0 +1,68 @@
+{
+  "appid": 1363080,
+  "name": "Manor Lords",
+  "store_url": "https://store.steampowered.com/app/1363080/",
+  "genres": [
+    "Strategy",
+    "City builder"
+  ],
+  "short_description": "Grow a medieval village organically, with seasons, families and battles.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "City builder"
+  ],
+  "summary": "Grow a medieval village organically, with seasons, families and battles.",
+  "identity": {
+    "core_loop": "Place a few buildings, people settle, manage seasons, defend.",
+    "mechanics": null,
+    "ui_and_game_feel": "Slow, beautiful, grounded.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Villagers carry the economy visibly; seasons repaint everything; some overlay panels.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Realistic medieval countryside.",
+    "palette": null,
+    "audio_mood": "Folk score.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Watching people walk goods around is the most legible economy."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.89
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

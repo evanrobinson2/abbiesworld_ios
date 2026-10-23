@@ -1,0 +1,69 @@
+{
+  "appid": 1962700,
+  "name": "Subnautica 2",
+  "store_url": "https://store.steampowered.com/app/1962700/",
+  "genres": [
+    "Survival",
+    "Exploration"
+  ],
+  "short_description": "Underwater alien-world survival and exploration sequel.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Exploration"
+  ],
+  "summary": "Underwater alien-world survival and exploration sequel.",
+  "identity": {
+    "core_loop": "Swim, scan, craft, build bases, go deeper.",
+    "mechanics": null,
+    "ui_and_game_feel": "Awe and dread of depth.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.1,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Oxygen on HUD; depth and darkness are diegetic.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Gorgeous alien ocean.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Depth as a natural difficulty dial."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 1.0
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

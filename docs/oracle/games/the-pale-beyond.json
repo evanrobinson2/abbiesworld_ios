@@ -1,0 +1,69 @@
+{
+  "appid": 1266030,
+  "name": "The Pale Beyond",
+  "store_url": "https://store.steampowered.com/app/1266030/",
+  "genres": [
+    "Narrative",
+    "Survival"
+  ],
+  "short_description": "Command a stranded polar expedition, rationing and choosing who lives.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Narrative",
+    "Survival"
+  ],
+  "summary": "Command a stranded polar expedition, rationing and choosing who lives.",
+  "identity": {
+    "core_loop": "Choose, ration, assign, endure.",
+    "mechanics": null,
+    "ui_and_game_feel": "Heavy decisions.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Crew portraits with moods; overlay.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Painted portraits.",
+    "palette": null,
+    "audio_mood": "Score.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Leadership choices feel weighty when people react."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.78
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

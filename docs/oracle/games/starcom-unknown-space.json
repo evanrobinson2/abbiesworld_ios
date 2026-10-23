@@ -1,0 +1,70 @@
+{
+  "appid": 1750770,
+  "name": "Starcom: Unknown Space",
+  "store_url": "https://store.steampowered.com/app/1750770/",
+  "genres": [
+    "Exploration",
+    "Action",
+    "Space"
+  ],
+  "short_description": "Explore a vast region in a modular ship, discover anomalies.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Exploration",
+    "Action",
+    "Space"
+  ],
+  "summary": "Explore a vast region in a modular ship, discover anomalies.",
+  "identity": {
+    "core_loop": "Fly, scan, fight, research, upgrade the ship.",
+    "mechanics": null,
+    "ui_and_game_feel": "Discovery-driven Metroidvania in space.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Anomalies and signals in world; overlay map.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Clean top-down.",
+    "palette": null,
+    "audio_mood": "Synth.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Discovery as the main reward."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.44,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.67
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

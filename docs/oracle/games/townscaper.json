@@ -1,0 +1,68 @@
+{
+  "appid": 1291340,
+  "name": "Townscaper",
+  "store_url": "https://store.steampowered.com/app/1291340/",
+  "genres": [
+    "Builder",
+    "Toy"
+  ],
+  "short_description": "Click to place coloured blocks; a town grows itself around them.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Builder",
+    "Toy"
+  ],
+  "summary": "Click to place coloured blocks; a town grows itself around them.",
+  "identity": {
+    "core_loop": "Click, watch, enjoy.",
+    "mechanics": null,
+    "ui_and_game_feel": "Pure toy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "overlay": 0.1,
+        "none": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "No HUD except a colour palette.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Pastel town.",
+    "palette": null,
+    "audio_mood": "Ambient sea.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "No goals needed when the world answers every touch."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.11,
+      "challenge": 0.33,
+      "expression": 1.0,
+      "structure": 0.0,
+      "social": 0.22,
+      "systems": 0.11,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

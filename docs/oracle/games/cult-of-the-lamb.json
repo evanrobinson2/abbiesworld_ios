@@ -1,0 +1,71 @@
+{
+  "appid": 1313140,
+  "name": "Cult of the Lamb",
+  "store_url": "https://store.steampowered.com/app/1313140/",
+  "genres": [
+    "Action",
+    "Roguelite",
+    "Management"
+  ],
+  "short_description": "A possessed lamb runs dungeon crusades and manages a cult camp of cute followers.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Roguelite",
+    "Management"
+  ],
+  "summary": "A possessed lamb runs dungeon crusades and manages a cult camp of cute followers.",
+  "identity": {
+    "core_loop": "Crusade a dungeon, return with resources, tend followers, hold sermons.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cute and creepy; two loops that feed each other.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.4,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Follower needs float over their heads (spatial); faith is overlay; the camp's look shows its state.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Bold cartoon cut-outs, saturated.",
+    "palette": null,
+    "audio_mood": "Moody synth-choir.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Spatial emotes over little followers carry the social layer well."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.56
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

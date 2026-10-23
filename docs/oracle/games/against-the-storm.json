@@ -1,0 +1,71 @@
+{
+  "appid": 1336490,
+  "name": "Against the Storm",
+  "store_url": "https://store.steampowered.com/app/1336490/",
+  "genres": [
+    "Strategy",
+    "City builder",
+    "Roguelite"
+  ],
+  "short_description": "A roguelite city builder: found a settlement in a cursed forest, satisfy the queen, and move on before the storm.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "City builder",
+    "Roguelite"
+  ],
+  "summary": "A roguelite city builder: found a settlement in a cursed forest, satisfy the queen, and move on before the storm.",
+  "identity": {
+    "core_loop": "Clear glades, build production chains, keep species happy, finish orders before impatience fills.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm building punctuated by rain-season dread; dense but tidy panels.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.3,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.22,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Storm seasons recolour the whole map; villager needs are icons over houses; the hostility and impatience meters are overlays.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Painterly fantasy diorama with rain and foliage.",
+    "palette": null,
+    "audio_mood": "Folk instruments that darken in the storm.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "One weather signal driving light, music and danger at once is exactly the whole-game-adapts rule."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 0.22,
+      "systems": 0.78,
+      "chance": 0.44,
+      "session": 0.89
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

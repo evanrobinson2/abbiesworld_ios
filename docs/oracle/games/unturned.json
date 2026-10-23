@@ -1,0 +1,70 @@
+{
+  "appid": 304930,
+  "name": "Unturned",
+  "store_url": "https://store.steampowered.com/app/304930/",
+  "genres": [
+    "Survival",
+    "Sandbox"
+  ],
+  "short_description": "Blocky zombie survival sandbox with crafting and bases.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Sandbox"
+  ],
+  "summary": "Blocky zombie survival sandbox with crafting and bases.",
+  "identity": {
+    "core_loop": "Scavenge, craft, build, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Simple and moddable.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Survival gauges overlay.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Blocky low-poly.",
+    "palette": null,
+    "audio_mood": "Sparse.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "Simple art can carry a deep sandbox."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.44,
+      "systems": 0.78,
+      "chance": 0.56,
+      "session": 0.78
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "survival"
+  },
+  "review": "A simple-looking survival game with lots of freedom and a big modding community. Proves you don't need fancy art for a sticky sandbox."
+}

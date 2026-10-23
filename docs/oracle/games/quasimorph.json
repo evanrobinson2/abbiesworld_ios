@@ -1,0 +1,68 @@
+{
+  "appid": 2059170,
+  "name": "Quasimorph",
+  "store_url": "https://store.steampowered.com/app/2059170/",
+  "genres": [
+    "Tactics",
+    "Roguelike"
+  ],
+  "short_description": "Turn-based extraction tactics on grim space stations.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Tactics",
+    "Roguelike"
+  ],
+  "summary": "Turn-based extraction tactics on grim space stations.",
+  "identity": {
+    "core_loop": "Deploy, loot, fight, extract or lose it all.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hardcore and dense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay heavy.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Dark pixel art.",
+    "palette": null,
+    "audio_mood": "Industrial.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Extraction tension: risk what you carry."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.89,
+      "expression": 0.33,
+      "structure": 0.89,
+      "social": 0.44,
+      "systems": 0.78,
+      "chance": 0.67,
+      "session": 0.78
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "appid": 2767030,
+  "name": "Marvel Rivals",
+  "store_url": "https://store.steampowered.com/app/2767030/",
+  "genres": [
+    "Hero shooter",
+    "Team"
+  ],
+  "short_description": "Six-versus-six hero shooter with Marvel characters and destructible maps.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Hero shooter",
+    "Team"
+  ],
+  "summary": "Six-versus-six hero shooter with Marvel characters and destructible maps.",
+  "identity": {
+    "core_loop": "Pick a hero, combine team-ups, take or hold the objective.",
+    "mechanics": null,
+    "ui_and_game_feel": "Loud, flashy, very readable heroes.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.4,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Heroes' shapes and colours identify them; team-up icons over allies (spatial).",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Comic-book cel shading.",
+    "palette": null,
+    "audio_mood": "Hero voices and big stings.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Team-ups: two characters together unlock something new. Great for animal pairings."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 1.0,
+      "challenge": 0.67,
+      "expression": 0.44,
+      "structure": 0.78,
+      "social": 1.0,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.33
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "shooter"
+  },
+  "review": "Bright, loud and generous. The idea worth keeping is team-ups: when two particular heroes are near each other they gain a joint power."
+}

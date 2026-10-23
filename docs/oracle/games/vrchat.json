@@ -1,0 +1,71 @@
+{
+  "appid": 438100,
+  "name": "VRChat",
+  "store_url": "https://store.steampowered.com/app/438100/",
+  "genres": [
+    "Social",
+    "VR"
+  ],
+  "short_description": "Social worlds and avatars made by the community.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Social",
+    "VR"
+  ],
+  "summary": "Social worlds and avatars made by the community.",
+  "identity": {
+    "core_loop": "Visit worlds, hang out, perform, create.",
+    "mechanics": null,
+    "ui_and_game_feel": "Pure social.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.5,
+        "overlay": 0.1,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Nametags over avatars (spatial).",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Anything goes.",
+    "palette": null,
+    "audio_mood": "Voice chat.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Shows the power of user-made worlds, and the safety cost of open social spaces."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 1.0,
+      "structure": 0.11,
+      "social": 1.0,
+      "systems": 0.11,
+      "chance": 0.44,
+      "session": 0.11
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "sandbox"
+  },
+  "review": "Endless creativity, but an open social space is no place for small kids. Proof that letting players make worlds keeps a game alive for a decade."
+}

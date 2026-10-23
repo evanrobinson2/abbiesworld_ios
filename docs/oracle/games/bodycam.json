@@ -1,0 +1,65 @@
+{
+  "appid": 2406770,
+  "name": "Bodycam",
+  "store_url": "https://store.steampowered.com/app/2406770/",
+  "genres": [
+    "Shooter"
+  ],
+  "short_description": "A photoreal multiplayer shooter seen through a body camera.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter"
+  ],
+  "summary": "A photoreal multiplayer shooter seen through a body camera.",
+  "identity": {
+    "core_loop": "Spawn, clear rooms, shoot fast, die fast.",
+    "mechanics": null,
+    "ui_and_game_feel": "Raw, disorienting, hyper-real camera sway.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "meta": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Almost no HUD; the camera itself is the meta layer (fisheye, shake).",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Photoreal Unreal 5 interiors.",
+    "palette": null,
+    "audio_mood": "Loud realistic gunfire.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Camera treatment alone can carry a mood (meta layer)."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.89,
+      "expression": 0.11,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.56,
+      "chance": 0.33,
+      "session": 0.33
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "appid": 945360,
+  "name": "Among Us",
+  "store_url": "https://store.steampowered.com/app/945360/",
+  "genres": [
+    "Party",
+    "Social deduction"
+  ],
+  "short_description": "Crewmates do chores on a spaceship while hidden impostors sabotage and kill; meetings vote someone out.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Party",
+    "Social deduction"
+  ],
+  "summary": "Crewmates do chores on a spaceship while hidden impostors sabotage and kill; meetings vote someone out.",
+  "identity": {
+    "core_loop": "Do tasks, watch others, report a body, argue, vote.",
+    "mechanics": null,
+    "ui_and_game_feel": "Simple controls; all the depth is in people talking.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "meta": 0.2,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The task bar is overlay; everything social is spoken; sabotage alarms flash the whole screen.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Bean-shaped cartoon crew, flat colours.",
+    "palette": null,
+    "audio_mood": "Sparse; the emergency alarm is the signature.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A few verbs plus social stakes create endless stories; the world (bodies, vents) carries the clues."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.44,
+      "structure": 0.22,
+      "social": 1.0,
+      "systems": 0.22,
+      "chance": 0.67,
+      "session": 0.33
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

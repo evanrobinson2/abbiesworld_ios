@@ -1,0 +1,65 @@
+{
+  "appid": 38400,
+  "name": "Fallout",
+  "store_url": "https://store.steampowered.com/app/38400/",
+  "genres": [
+    "RPG"
+  ],
+  "short_description": "The 1997 post-nuclear turn-based RPG.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "RPG"
+  ],
+  "summary": "The 1997 post-nuclear turn-based RPG.",
+  "identity": {
+    "core_loop": "Explore, talk, fight in turns, make moral choices.",
+    "mechanics": null,
+    "ui_and_game_feel": "Dark humour and big freedom.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Pip-Boy as in-world interface; turn-based numbers.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Gritty pre-rendered isometric.",
+    "palette": null,
+    "audio_mood": "Ambient dread.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "An in-world device (Pip-Boy) as the menu is a classic diegetic move."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.78,
+      "expression": 0.56,
+      "structure": 0.67,
+      "social": 0.44,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.89
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

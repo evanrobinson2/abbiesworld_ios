@@ -1,0 +1,68 @@
+{
+  "appid": 2475490,
+  "name": "Mouthwashing",
+  "store_url": "https://store.steampowered.com/app/2475490/",
+  "genres": [
+    "Horror",
+    "Narrative"
+  ],
+  "short_description": "A short psychological horror on a stranded spaceship.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Horror",
+    "Narrative"
+  ],
+  "summary": "A short psychological horror on a stranded spaceship.",
+  "identity": {
+    "core_loop": "Walk, look, interact, piece together what happened.",
+    "mechanics": null,
+    "ui_and_game_feel": "Unsettling, linear, intense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "meta": 0.3,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.01,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Pure diegetic and meta (screen distortion).",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Low-poly PS1-style.",
+    "palette": null,
+    "audio_mood": "Oppressive.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Meta distortion can carry emotion (not for kids, but the craft applies)."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.11,
+      "structure": 0.56,
+      "social": 0.11,
+      "systems": 0.44,
+      "chance": 0.11,
+      "session": 0.33
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

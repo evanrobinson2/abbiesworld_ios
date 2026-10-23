@@ -1,0 +1,70 @@
+{
+  "appid": 3419430,
+  "name": "Bongo Cat",
+  "store_url": "https://store.steampowered.com/app/3419430/",
+  "genres": [
+    "Idle",
+    "Desktop toy"
+  ],
+  "short_description": "A cat that drums on your desktop as you type, unlocking hats.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Idle",
+    "Desktop toy"
+  ],
+  "summary": "A cat that drums on your desktop as you type, unlocking hats.",
+  "identity": {
+    "core_loop": "Type or click, the cat taps, collect cosmetics.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tiny companion.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.1,
+        "none": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The cat is the whole interface.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Simple cute cat.",
+    "palette": null,
+    "audio_mood": "Taps.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A tiny living thing reacting to you is enough."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.11,
+      "challenge": 0.11,
+      "expression": 0.33,
+      "structure": 0.0,
+      "social": 0.33,
+      "systems": 0.11,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "idle"
+  },
+  "review": "A cat tapping along to your keystrokes, nothing more, and millions keep it open. A small creature that reacts to you is its own reward."
+}

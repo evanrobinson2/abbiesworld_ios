@@ -1,0 +1,70 @@
+{
+  "appid": 2141910,
+  "name": "Magic: The Gathering Arena",
+  "store_url": "https://store.steampowered.com/app/2141910/",
+  "genres": [
+    "Card",
+    "Strategy"
+  ],
+  "short_description": "Digital Magic: build decks and duel online.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Card",
+    "Strategy"
+  ],
+  "summary": "Digital Magic: build decks and duel online.",
+  "identity": {
+    "core_loop": "Draw, play lands and spells, attack, respond.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deep, polished, rule-heavy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Cards are the information; board is clear.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Painted fantasy card art.",
+    "palette": null,
+    "audio_mood": "Card sounds.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Card readability and foil effects are worth studying for Card Forge."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 1.0,
+      "social": 0.89,
+      "systems": 0.67,
+      "chance": 0.89,
+      "session": 0.56
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "card"
+  },
+  "review": "The most polished digital card table around. Its card frames, foils and readable stats are good study for Card Forge. Too many rules for kids."
+}

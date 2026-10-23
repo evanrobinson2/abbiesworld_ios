@@ -21,3 +21,13 @@ Fill `information_grammar` in the shape of `layers.information_grammar` in
 Screenshots or captures used for study stay on the PC (`%LOCALAPPDATA%\AbbiesWorld\game-study`), not in git.
 
 `docs/oracle/games/_installed.json` is the snapshot of installed games (appid, name, size) from 2026-10-22.
+
+## Cloud study notes (2026-10-23)
+
+`library_notes.py` (Evan's 87 installed games) and `free_notes.py` (25 free-to-play games picked across genres, not
+installed) hold the Oracle's study of each game in our own words: core loop, feel, how it shows information (mix of
+diegetic, spatial, meta, overlay and none, plus HUD share), art, audio, a lesson for Abbie's World, and a Game DNA of
+8 axes (tempo, challenge, expression, structure, social, systems, chance, session). Free games also get a short
+review. `python study_games.py` writes them into the profiles; then `node sync-repo-data.mjs` in
+prototypes/game-oracle. Values are estimates from public knowledge, marked with their confidence; games released
+too recently to know are marked "needs play session".
