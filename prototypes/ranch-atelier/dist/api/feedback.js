@@ -1,4 +1,5 @@
 const { randomBytes } = require('node:crypto');
+const { ownerOnly, OWNER_ONLY } = require('../lib/owner-only.cjs');
 
 // Feedback from the app's speech-bubble button: a note plus a picture of the view. See FEEDBACK.md.
 // Stored in the project's private Blob store; a GitHub Action copies new items into the repo's feedback inbox.
@@ -7,11 +8,12 @@ const json = (res, status, body) => { res.statusCode = status; res.setHeader('Co
 const text = (value, max) => typeof value === 'string' ? value.slice(0, max) : '';
 const ID = /^[a-z0-9]{8,12}-[a-f0-9]{8}$/;
 
-function createHandler({ put, list, get } = require('@vercel/blob')) { return async function handler(req, res) {
+function createHandler({ put, list, get } = require('@vercel/blob'), gate = {}) { return async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   if (!['GET', 'POST'].includes(req.method)) return json(res, 405, { error: 'Method not allowed' });
   try {
+    if (!await ownerOnly(req, { ...gate, robot: req.method === 'GET' })) return json(res, 401, OWNER_ONLY);
     if (req.method === 'POST') {
       if (req.headers.origin && req.headers.origin !== `https://${req.headers.host}`) return json(res, 403, { error: 'Origin rejected' });
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;

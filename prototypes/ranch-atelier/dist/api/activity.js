@@ -1,15 +1,17 @@
 // The app's activity centre feed (app-activity.js): jobs, machines and events from the dispatch bridge,
 // proxied so the feed key stays on the server. POST {dispatch_id, instructions} steers a running job.
 // Contract: FEEDBACK.md, "Activity centre".
+const { ownerOnly, OWNER_ONLY } = require('../lib/owner-only.cjs');
 const FEED = process.env.DISPATCH_FEED_URL || 'https://studio-mock-iota.vercel.app/api/dispatch-feed';
 const json = (res, status, body) => { res.statusCode = status; res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(body)); };
 const offline = error => ({ source: 'offline', error, events: [], jobs: [], machines: [], generated_at: new Date().toISOString() });
 
-function createHandler(fetchImpl = (...args) => fetch(...args)) { return async function handler(req, res) {
+function createHandler(fetchImpl = (...args) => fetch(...args), gate = {}) { return async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   const key = process.env.DISPATCH_FEED_KEY;
   try {
+    if (!await ownerOnly(req, gate)) return json(res, 401, OWNER_ONLY);
     if (req.method === 'POST') {
       if (req.headers.origin && req.headers.origin !== `https://${req.headers.host}`) return json(res, 403, { error: 'Origin rejected' });
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;

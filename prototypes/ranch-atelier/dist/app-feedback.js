@@ -151,9 +151,9 @@
         buildId: loadedBuild, sha: release?.sha || '', thread: about?.thread || null, threadTitle: about?.threadTitle || '', entryId: about?.id || '',
         viewport: `${innerWidth}x${innerHeight}@${devicePixelRatio}`, standalone: standalone()
       };
-      const ok = await fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then(r => r.ok).catch(() => false);
-      if (ok) { close(); toast('Sent to Claude'); }
-      else { send.disabled = false; send.textContent = 'Try again'; }
+      const ok = await fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then(r => r.ok || r.status).catch(() => false);
+      if (ok === true) { close(); toast('Sent to Claude'); }
+      else { send.disabled = false; send.textContent = ok === 401 ? 'Sign in first' : 'Try again'; }
     });
     sheet = el('section', { class: 'afb-sheet', role: 'dialog', 'aria-label': 'Send feedback', 'data-feedback-ui': '' });
     sheet.append(shot, el('div', { class: 'afb-body' },

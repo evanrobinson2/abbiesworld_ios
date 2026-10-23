@@ -1,6 +1,6 @@
 # Copies feedback sent from the app's speech-bubble button into branch feedback-inbox and comments on the
-# open "Feedback inbox" PR, which wakes the Claude thread watching it. No secrets needed: it reads the public
-# /api/feedback list on abbies-ranch-atelier.vercel.app. See prototypes/ranch-atelier/dist/FEEDBACK.md.
+# open "Feedback inbox" PR, which wakes the Claude thread watching it. No secrets needed: it reads /api/feedback
+# on abbies-ranch-atelier.vercel.app, showing a GitHub OIDC token (id-token) in case the site locks Evan's tools. See prototypes/ranch-atelier/dist/FEEDBACK.md.
 name: feedback-inbox
 on:
   workflow_dispatch:
@@ -12,6 +12,7 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write
 jobs:
   sync:
     runs-on: ubuntu-latest

@@ -1,6 +1,7 @@
 const { randomBytes } = require('node:crypto');
 const { account } = require('../lib/account.cjs');
 const { wallet, PRICES } = require('../lib/wallet.cjs');
+const { ownerOnly, OWNER_ONLY } = require('../lib/owner-only.cjs');
 
 // "Request more" from /models: a cart of new modeling orders, each a few words and an optional photo.
 // Evan's rules (2026-10-23):
@@ -79,6 +80,7 @@ function createHandler({ blob = require('@vercel/blob'), fetcher = fetch, env = 
         return json(res, 200, { orders });
       }
 
+      if (!await ownerOnly(req, { env, who, fetcher })) return json(res, 401, OWNER_ONLY);
       if (req.headers.origin && req.headers.origin !== `https://${req.headers.host}`) return json(res, 403, { error: 'Origin rejected' });
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
       if (!body || typeof body !== 'object') return json(res, 400, { error: 'Invalid order' });

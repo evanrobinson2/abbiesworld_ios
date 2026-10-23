@@ -8,15 +8,35 @@ on:
       url: { description: 'Site to test', default: 'https://ranch.abbies.world' }
       pages: { description: 'Pages a visitor opens, comma separated', default: '/,/sandbox' }
       visitors: { description: 'Virtual visitors in total', default: '200' }
-      concurrency: { description: 'Visitors at the same time', default: '50' }
-      max_gb: { description: 'Refuse to run past this many GB', default: '10' }
+      concurrency: { description: 'Visitors at the same time, per machine (keep 5 or less)', default: '5' }
+      max_gb: { description: 'Refuse to run past this many GB (per machine)', default: '10' }
+      machines: { description: 'Machines testing at once, each from its own address (1-20)', default: '1' }
 concurrency:
   group: surge-loadtest
   cancel-in-progress: false
 permissions:
   contents: read
 jobs:
+  # A crowd comes from many addresses; one machine past ~1,500 requests a second is blocked by Vercel's attack
+  # protection (403). Split the visitors over several machines to test the site, not the bot defence.
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      machines: ${{ steps.m.outputs.list }}
+      start: ${{ steps.m.outputs.start }}
+    steps:
+      - id: m
+        env: { N: '${{ inputs.machines }}' }
+        # Every machine starts at the same second, three minutes from now (browser installs take about one).
+        run: |
+          node -e "const n=Math.min(20,Math.max(1,parseInt(process.env.N)||1));console.log('list='+JSON.stringify([...Array(n).keys()]))" >> "$GITHUB_OUTPUT"
+          echo "start=$(( $(date +%s) + 180 ))" >> "$GITHUB_OUTPUT"
   load:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix:
+        machine: ${{ fromJSON(needs.plan.outputs.machines) }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -33,9 +53,14 @@ jobs:
           URL: ${{ inputs.url }}
           PAGES: ${{ inputs.pages }}
           VISITORS: ${{ inputs.visitors }}
+          MACHINES: ${{ inputs.machines }}
+          START: ${{ needs.plan.outputs.start }}
           CONCURRENCY: ${{ inputs.concurrency }}
           MAX_GB: ${{ inputs.max_gb }}
-        run: node loadtest.mjs --url "$URL" --pages "$PAGES" --visitors "$VISITORS" --concurrency "$CONCURRENCY" --max-gb "$MAX_GB" --out surge-report
+        run: |
+          wait=$(( START - $(date +%s) )); if [ "$wait" -gt 0 ]; then sleep "$wait"; fi
+          per=$(( (VISITORS + ${MACHINES:-1} - 1) / ${MACHINES:-1} ))
+          node loadtest.mjs --url "$URL" --pages "$PAGES" --visitors "$per" --concurrency "$CONCURRENCY" --max-gb "$MAX_GB" --out surge-report
       - uses: actions/upload-artifact@v4
         if: always()
-        with: { name: surge-report, path: 'tools/surge/surge-report*.json' }
+        with: { name: 'surge-report-${{ matrix.machine }}', path: 'tools/surge/surge-report*.json' }
