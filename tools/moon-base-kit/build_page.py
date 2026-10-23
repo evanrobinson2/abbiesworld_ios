@@ -9,6 +9,7 @@ import html
 import json
 import os
 import shutil
+import subprocess
 import sys
 
 from PIL import Image
@@ -104,6 +105,9 @@ for key, g in cat['groups'].items():
                   f'<p class="muted">{esc(g["note"])}</p><ol>{lis}</ol></section>')
 
 tri = sum(a['triangles'] for a in assets)
+# The study's context card (sources it drew on), same as the Studies page's Context tab: tools/context-card/README.md
+ctx = subprocess.run(['node', os.path.join(ROOT, 'tools/context-card/snippet.mjs'), 'moon-base-kit'],
+                     capture_output=True, text=True, check=True).stdout
 page = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Moon Base Kit</title>
@@ -150,6 +154,8 @@ dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;tex
 .group ol{{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:14.5px}}
 .group li span{{font:500 11px var(--mono);color:var(--muted);margin-right:8px}}
 .group li.drawn{{color:var(--suit);font-weight:600}}.group li a{{color:var(--green);font:500 11px var(--mono)}}
+.ctx-wrap{{--aw-ink:var(--ink);--aw-soft:var(--muted);--aw-bg:var(--bg);--aw-surface:var(--paper);--aw-line:var(--line);--aw-accent:var(--suit);--aw-on-accent:#111;--aw-font:var(--body);--aw-display:var(--display)}}
+.ctx-wrap .ctx-aside{{margin:0!important;max-width:520px!important}}
 .rules{{display:grid;gap:9px;padding-left:22px;margin:0;max-width:80ch}}.rules li::marker{{color:var(--suit);font-weight:700}}
 
 </style></head><body><main>
@@ -179,6 +185,7 @@ dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;tex
 </ol>
 <h2>Next</h2>
 <p>The dome and the tower are the first two of the five base buildings the Moon Heroes study handed over. The habitat and hangar, the airlock door and the supply crate follow as soon as Midjourney can draw their pictures. Then the kit goes onto the Moon tile for the shooter.</p>
+<div class="ctx-wrap">{ctx}</div>
 </main>
 <script>
 let mv;

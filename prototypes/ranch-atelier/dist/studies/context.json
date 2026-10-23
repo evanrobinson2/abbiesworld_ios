@@ -1144,6 +1144,30 @@
      "t": "Tobler's hiking function",
      "href": "https://en.wikipedia.org/wiki/Tobler%27s_hiking_function",
      "note": "daily walking cost of each founding place"
+    },
+    {
+     "k": "devblog",
+     "t": "Anno Union: Fulfil Needs Your Way (Anno 117 needs)",
+     "href": "https://www.anno-union.com/?p=20803",
+     "note": "needs per household kind; ours are cumulative and measured"
+    },
+    {
+     "k": "devblog",
+     "t": "How Townscaper works: a story four games in the making (Oskar Stålberg)",
+     "href": "https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making",
+     "note": "split a hex into smaller cells and relax them for organic blocks"
+    },
+    {
+     "k": "devblog",
+     "t": "Medieval Fantasy City Generator devlog (watabou)",
+     "href": "https://watabou.itch.io/medieval-fantasy-city-generator/devlog/1206/the-first-post",
+     "note": "wards, walls and streets grown from a few rules"
+    },
+    {
+     "k": "research",
+     "t": "Burgage plots: long thin medieval town lots (Thame Museum)",
+     "href": "https://interactive.thamemuseum.org/?p=1265",
+     "note": "about 10:1 lots along the street"
     }
    ]
   },
@@ -1359,6 +1383,107 @@
      "k": "reference",
      "t": "Evan's reference photo of a leaping wooden mannequin",
      "note": "stock photo, private, not committed"
+    }
+   ]
+  },
+  "abbietown": {
+   "recorded": "2026-10-23, while building",
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Townscaper",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1291340",
+     "note": "a town that grows itself around what you place; expression 1.0, systems 0.11"
+    },
+    {
+     "k": "oracle",
+     "t": "Tiny Glade",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2198150",
+     "note": "you doodle, the game adds the detail: our lanes and houses grow from the land"
+    },
+    {
+     "k": "oracle",
+     "t": "Cities: Skylines",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=255710",
+     "note": "the far end: real zoning and traffic; we keep its road hierarchy, not its spreadsheets"
+    },
+    {
+     "k": "oracle",
+     "t": "Anno 117: Pax Romana identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/examples/anno-117-pax-romana.json",
+     "note": "carried over from the hex city round"
+    },
+    {
+     "k": "devblog",
+     "t": "How Townscaper works: a story four games in the making (Oskar Stålberg)",
+     "href": "https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making",
+     "note": "how a few rules make a town feel hand-made"
+    },
+    {
+     "k": "devblog",
+     "t": "Medieval Fantasy City Generator devlog (watabou)",
+     "href": "https://watabou.itch.io/medieval-fantasy-city-generator/devlog/1206/the-first-post",
+     "note": "a whole town from a handful of generators, readable at a glance"
+    },
+    {
+     "k": "design",
+     "t": "How well does GTA V's map emulate Los Angeles? (GTA BOOM)",
+     "href": "https://www.gtaboom.com/How_Well_Does_GTA_V's_Map_Emulate_Los_Angeles",
+     "note": "a real place compressed: keep the landmarks and the orientation, drop the filler"
+    },
+    {
+     "k": "design",
+     "t": "Tael's guide to good map making (Stardew Valley modding wiki)",
+     "href": "https://stardewmodding.wiki.gg/wiki/Tael%27s_Guide_to_good_map_making",
+     "note": "Pelican Town: every building has a reason, paths lead to places"
+    },
+    {
+     "k": "tutorial",
+     "t": "Red Blob Games: hexagonal grids",
+     "href": "https://www.redblobgames.com/grids/hexagons/",
+     "note": "the hex round's grid, kept for the tile edge"
+    },
+    {
+     "k": "tutorial",
+     "t": "three.js InstancedMesh",
+     "href": "https://threejs.org/docs/#api/en/objects/InstancedMesh",
+     "note": "thousands of houses and trees in a few draw calls"
+    },
+    {
+     "k": "research",
+     "t": "MassGIS data layers (contours, hydrography, roads, trains, structures, parcels, schools, open space)",
+     "href": "https://www.mass.gov/info-details/massgis-data-layers",
+     "note": "the real land at true scale and the town's character"
+    },
+    {
+     "k": "research",
+     "t": "Frozen Hoagies opens in Winchester (NBC Boston)",
+     "href": "https://www.nbcboston.com/news/local/frozen_hoagies_plans_to_open_in_winchester/1837368",
+     "note": "a real Winchester shop; exact spot still to confirm"
+    },
+    {
+     "k": "canon",
+     "t": "HUD and information study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+     "note": "the 2x2, the 8% HUD, no words"
+    },
+    {
+     "k": "canon",
+     "t": "Memory coins and the café key",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/memory-coins.mjs",
+     "note": "Daddy's core memories, one count across places"
+    },
+    {
+     "k": "canon",
+     "t": "Coffee shop study (58 models)",
+     "href": "https://app.abbies.world/models/",
+     "note": "the café interior the town's coffee shop opens into"
+    },
+    {
+     "k": "canon",
+     "t": "Hex city study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hexcity/HEXCITY_STUDY.md",
+     "note": "round one: process makes the land, the town grows on it"
     }
    ]
   },
