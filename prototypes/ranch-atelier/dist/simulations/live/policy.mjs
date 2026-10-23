@@ -2,6 +2,7 @@
 // Shared by the browser (live.mjs) and the server (api/live.js) so the rules cannot drift.
 // The voice is Abbie's World's game controller. It is not a general assistant, a companion or a tutor.
 import {OPS,SHAPES,BEHAVIORS,WEATHER} from '../holodeck/protocol.mjs';
+import {perceivable} from '../presentation-layer.mjs';
 import {gameSenseText,frictions} from './game-sense.mjs';
 
 export const LIVE_VERSION='live/1';
@@ -243,11 +244,11 @@ export function buildOps(a){
 // A compact view of the stage snapshot for the model.
 export function summarize(state){
  if(!state)return {error:'The world is still loading'};
- const world=state.world||[];
+ const world=perceivable(state.world||[]); // the voice sees the world layer only
  return {place:state.name||state.family,clock:state.clock,weather:state.weather,personHeight:state.scaleHint?.personHeight,
   people:world.filter(w=>w.kind==='person').slice(0,24).map(p=>({name:p.name,doing:p.doing,position:p.position})),
   buildings:world.filter(w=>w.kind!=='person').slice(0,30).map(t=>({name:t.name,position:t.position})),
-  yourThings:(state.entities||[]).slice(0,80).map(e=>({id:e.id,parent:e.parent,type:e.type,position:e.position,behavior:e.behavior,label:e.label})),
+  yourThings:perceivable(state.entities||[]).slice(0,80).map(e=>({id:e.id,parent:e.parent,type:e.type,position:e.position,behavior:e.behavior,label:e.label})),
   lastTap:state.lastTap,camera:{target:state.camera?.target}};
 }
 
