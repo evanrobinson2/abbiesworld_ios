@@ -27,6 +27,7 @@ const HERO = {cafe: {sc: .85, r: 12, shop: 1}, bakery: {sc: .85, r: 12, shop: 1}
  muraco: {sc: .5, r: 21}, leonard: {sc: .5, r: 29}, horn: {sc: .6, r: 16, fixed: 1, keepRot: 1}, home: {sc: .8, r: 22}, ani: {sc: .8, r: 22},
  highschool: {sc: .62, r: 20, fixed: 1}, depot: {sc: .75, r: 22, rail: 1}, railyard: {sc: .62, r: 20, rail: 1}, mill: {sc: .8, r: 15}, dock: {sc: .8, r: 7, fixed: 1, keepRot: 1, shore: 1}, lookout: {sc: .8, r: 8, fixed: 1},
  trailhead: {sc: .8, r: 6}, noticeboard: {sc: .8, r: 5}, skatepark: {sc: .8, r: 17, shop: 1}, launch: {sc: .75, r: 20}, abbieTree: {sc: .6, r: 17}, aniTree: {sc: .6, r: 17}, gingerbread: {sc: 1, r: 17, fixed: 1}, bunker: {sc: 1, r: 14, fixed: 1, behind: 'gingerbread'}};
+const realLayer = scene.children.filter(c => !c.isLight && c.type !== 'Object3D'); // the whole real-land map (terrain, water, roads, houses, islands): everything in the scene before the board exists
 const dioGroup = new THREE.Group(); dioGroup.position.set(X(DIO_ORIGIN[0]), 0, Z(DIO_ORIGIN[1])); scene.add(dioGroup); dioGroup.visible = false;
 const SQUARE = /*SQUARE*/null; const dioHouses = {}, dioObs = {}, dioRoads = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
 const dioTile = {}; // id -> {cx, cy (map metres of the tile's middle), group, ...}
@@ -267,7 +268,7 @@ function visitDio(id) {
  bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1; visitDio.t = setTimeout(() => { bubble.style.opacity = 0; }, 7000);
 }
 function setView(on) {
- viewDio = on; dioGroup.visible = on; bubble.classList.toggle('dock', on); bubble.onclick = () => { bubble.style.opacity = 0; }; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
+ viewDio = on; dioGroup.visible = on; for (const o of realLayer) { if (on) { if (o.userData.realVis === undefined) o.userData.realVis = o.visible; o.visible = false; } else if (o.userData.realVis !== undefined) { o.visible = o.userData.realVis; delete o.userData.realVis; } } // Evan: only the seven-hex Winchester board shows; the old map comes back only if the board view is switched off bubble.classList.toggle('dock', on); bubble.onclick = () => { bubble.style.opacity = 0; }; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
  controls.minDistance = on ? 20 : 30; controls.maxDistance = on ? 1400 : 14000;
  if (on) visitDio('dio-trio'); else { look = LOOK_REAL; home(); }
 }
