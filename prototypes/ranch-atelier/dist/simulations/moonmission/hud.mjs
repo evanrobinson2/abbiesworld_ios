@@ -56,7 +56,7 @@ function speak(who, text) { const s = $('say'); s.className = 'say' + (arguments
 function card(e) { const el = $('card'), t = `${e.org} · ${e.clock} · ${e.place}`; el.innerHTML = '<span></span><i></i>'; const [sp, ln] = [el.firstChild, el.lastChild]; clearInterval(typing); let n = 0;
  typing = setInterval(() => { n++; sp.textContent = t.slice(0, n); ln.style.transform = `scaleX(${n / t.length})`; if (n >= t.length) clearInterval(typing); }, 30); }
 // three cheeses buy one moon cheese backpack charm (Backpack thread API: earnCharm('moon-cheese'), repeatable, 2 on the keychain)
-function grantCheeseCharm() { import('/simulations/backpack.mjs?v=5').then(b => b.earnCharm && b.earnCharm('moon-cheese')).catch(() => {}); }
+function grantCheeseCharm() { import('/simulations/backpack.mjs?v=6').then(b => b.earnCharm && b.earnCharm('moon-cheese')).catch(() => {}); }
 function polaroid(caption) { // the Chapter 1 ending photo: the crew on the Moon with the pink ship behind them
  const d = document.createElement('div'); d.className = 'polaroid'; const cv = document.createElement('canvas'); cv.width = 380; cv.height = 300; d.append(cv); const b = document.createElement('b'); b.textContent = caption || ''; d.append(b);
  const c = cv.getContext('2d'); c.fillStyle = '#05070f'; c.fillRect(0, 0, 380, 300); for (let i = 0; i < 50; i++) { c.fillStyle = '#fff'; c.fillRect((i * 97) % 380, (i * 53) % 170, 2, 2); }

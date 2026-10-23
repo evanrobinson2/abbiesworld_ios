@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-backpack-worn",
+      "date": "2026-10-23",
+      "title": "Abbie wears her backpack",
+      "line": "Her charms swing and jingle wherever she is shown, and each one can live on the backpack or in her jewellery box. The floppy disk charm now comes from beating the word game.",
+      "image": "/whats-new/2026-10-23-backpack-worn.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/studies/backpack/"
+    },
+    {
       "id": "2026-10-23-school-no-coin",
       "date": "2026-10-23",
       "title": "The school's coin is now a charm",

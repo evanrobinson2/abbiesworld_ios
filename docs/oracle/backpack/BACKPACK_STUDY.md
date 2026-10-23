@@ -86,3 +86,20 @@ parts, so it reads as made rather than extruded.
 - Charms stay hand-built placeholders until the Meshy versions land (tardigrade first, then the rest, via the Meshy hero
   thread). Meshy references are Midjourney pictures of each charm on a plain background, run per charm on the Mac.
 Next: bake contact shading into the vertex colours, a leather label on the pocket, and swap in the cleaned Meshy charms.
+
+## Round 4 (2026-10-23): she wears it, and every reward is a charm
+- Evan, 20:51Z: "scratch the coin idea, it's all backpack charms." The gold coin charm (`first-memory`) is gone. The
+  floppy disk (`basement`) is now won by beating the word game in Grace's basement (two minutes of play in all); the
+  basement game calls `earnCharm('basement')`. Evan's picture of a blue enamel disk is the floppy's Midjourney pick, and
+  the hand-built floppy now follows it (silver shutter, yellow label, dark metal rim) until its Meshy model lands.
+- Evan, 20:51Z: she can keep each charm in her jewellery box or on her backpack, and her in-game character wears the
+  backpack, with the charms jingling, in every FPS level and minigame that shows her (the overland map can wait).
+  - `putInBox(id, yes)` and `inBox(id)` in `simulations/backpack.mjs`; `keychain()` leaves boxed charms off.
+  - `simulations/backpack-wear.mjs`: `wearBackpack(bone, {height, offset})` mounts her saved backpack with its charms
+    on a chest bone or a figure group (+z is her front), `update(dt)` each frame. The pendulums follow world motion
+    and a charm tinks (three inharmonic partials, WebAudio, diegetic) when its swing turns round hard. It rebuilds on
+    `aw-backpack-change`, so a newly earned or boxed charm shows without the game doing anything.
+  - The study page has a "Worn" stage: a smooth stand-in mannequin running a loop.
+- No charm unlocks from coins any more. The Star is "Climb onto the school roof" (the school game calls
+  `earnCharm('school-roof')`), and the Heart crowns the set: it comes when every other one-off charm is earned.
+- Tour: no (it is the same backpack, now worn; the tour stop stays the first pickup).
