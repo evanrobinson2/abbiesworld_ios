@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 
-const ORIGIN = "http://abbies.world:8000";
+const ORIGIN = "http://game.abbies.world:8000";
 const GAME = "abbies-world-2";
 
 /** Local overrides when registry still has opaque JPEG cutouts. */

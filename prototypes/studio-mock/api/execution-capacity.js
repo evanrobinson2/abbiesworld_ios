@@ -24,7 +24,7 @@ import {
 const ORIGIN = (
   process.env.ABBIES_WORLD_SERVER_URL ||
   process.env.ABBIES_WORLD_ORIGIN ||
-  "http://abbies.world:8000"
+  "http://game.abbies.world:8000"
 ).replace(/\/$/, "");
 
 function cors(extra = {}) {

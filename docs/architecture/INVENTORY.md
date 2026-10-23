@@ -13,7 +13,7 @@ Tags as in [README.md](README.md). This page lists where secrets live, never the
 | Upstash KV/Redis (story-forge, `store_L80PKMZaqeinNCIo`) | StoryBoard | [verified] env present; use [unknown] |
 | Vercel Blob | Ranch app data (`store_yIaLCGshOyX7IToH`), dispatch records (`abbies-dispatch`, `store_eq5nkks60S1HhDgw`), story-forge (`store_HxHi8WuQCBH0XuQB`) | [verified] |
 | Auth0 tenant `dev-33h7qd4ytudlk0ls.us.auth0.com` | iOS app (audience `https://api.abbies.world`), MCP OAuth (audience `…/mcp`), StoryBoard | [verified] |
-| AWS EC2 + SSM (`/abbiesworld/`) | Game server `abbies.world:8000` | [verified from docs] |
+| AWS EC2 + SSM (`/abbiesworld/`) | Game server `game.abbies.world:8000` (abbies.world itself is the Ranch on Vercel since 2026-10-23) | [verified from docs] |
 | OpenAI API | studio-mock image generation, vision sanity checks | [verified env] |
 | Anthropic Claude Code (cloud sessions, scheduled tasks) | Dispatch workers, all Claude threads | [verified]; dispatch task not yet created |
 | Midjourney (Evan's account, in Chrome on his Mac) | Concept art | [verified from docs] |

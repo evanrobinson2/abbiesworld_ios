@@ -5,7 +5,7 @@
  */
 import { sendSparsePush } from "./push.js";
 
-const ORIGIN = "http://abbies.world:8000";
+const ORIGIN = "http://game.abbies.world:8000";
 
 export function alertFor(record, msg) {
   if (!msg || msg.from !== "claude") return null;
