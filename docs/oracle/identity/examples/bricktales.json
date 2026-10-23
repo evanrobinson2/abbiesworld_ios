@@ -172,7 +172,8 @@
       "references": [
         "toy catalogue photography",
         "dioramas"
-      ]
+      ],
+      "motion": "keyframe; Minifigure animation in the stiff, hopping style of the toy: no knees, swinging arms and legs"
     },
     "assets": {
       "kit": "modular",
@@ -233,6 +234,22 @@
         "LEGO",
         "Family Friendly"
       ]
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree"
+      ],
+      "tricks": [
+        "Minifigure animation in the stiff, hopping style of the toy: no knees, swinging arms and legs",
+        "Built models are tested by physics"
+      ],
+      "lesson": "Animate toys like toys: respect the joints the toy really has.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
     }
   },
   "ledger": {

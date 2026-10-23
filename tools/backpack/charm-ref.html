@@ -1,0 +1,15 @@
+<!doctype html><meta charset=utf-8><body style="margin:0;background:#f1e7d6"><canvas id=c width=1024 height=1024 style="width:512px;height:512px"></canvas>
+<script type=module>
+import {charmModel, three} from '/simulations/backpack.mjs?v=4';
+const T = await three(), q = new URLSearchParams(location.search);
+const r = new T.WebGLRenderer({canvas: c, antialias: true, preserveDrawingBuffer: true}); r.setPixelRatio(1); r.setSize(1024, 1024, false);
+r.outputColorSpace = T.SRGBColorSpace; r.toneMapping = T.ACESFilmicToneMapping; r.setClearColor('#f1e7d6');
+const s = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, .01, 10);
+s.add(new T.HemisphereLight('#fff6e6', '#8a7a8a', 1.6)); const d = new T.DirectionalLight('#fff1d6', 2.6); d.position.set(1, 2, 2); s.add(d); const d2 = new T.DirectionalLight('#cfe6ff', 1); d2.position.set(-2, 1, -1); s.add(d2);
+const pm = new T.PMREMGenerator(r), es = new T.Scene(); es.background = new T.Color('#e8e2f0'); const lp = new T.Mesh(new T.PlaneGeometry(4, 3), new T.MeshBasicMaterial({color: new T.Color('#fff2d8').multiplyScalar(5), side: T.DoubleSide})); lp.position.set(3, 4, 4); lp.lookAt(0,0,0); es.add(lp);
+s.environment = pm.fromScene(es, .03).texture; s.environmentIntensity = .7;
+const m = await charmModel(q.get('id')); m.position.set(0, 0, 0); m.rotation.y = -.45; s.add(m);
+const b = new T.Box3().setFromObject(m), ctr = b.getCenter(new T.Vector3()), sz = b.getSize(new T.Vector3()); m.position.sub(ctr);
+const R = Math.max(sz.x, sz.y, sz.z); cam.position.set(R * .55, R * .45, R * 2.6); cam.lookAt(0, 0, 0);
+r.render(s, cam); window.done = true;
+</script>

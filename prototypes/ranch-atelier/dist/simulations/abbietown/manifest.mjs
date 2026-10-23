@@ -148,6 +148,8 @@ export const ROWS = [
  ['Horn Pond', 'Rowboat', 3, 'each', 2, 'new', 3, ''],
  ['Horn Pond', 'Park bench', 1.8, 'each', 12, 'kit: ranch-bench', 3, ''],
  ['Horn Pond', 'Heron', 1, 'each', 1, 'new', 3, ''],
+ ['The science lab', 'Lab building with a little observatory dome', 16, 'each', 1, 'new', 1, 'the way into the cell game (AW-STUDY-0047)'],
+ ['The science lab', 'Beaker of strange green goo by the door', .4, 'each', 1, 'new', 1, 'tap it to play'],
  ['The town common', 'Bandstand', 8, 'each', 1, 'new', 2, ''],
  ['The town common', 'Lamp posts around the green', 4, 'each', 10, 'new', 3, ''],
 ];

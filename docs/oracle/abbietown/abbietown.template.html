@@ -46,8 +46,15 @@ section,header{display:flex;flex-direction:column;gap:16px}
 .hud button:focus-visible{outline:2px solid #2a3236;outline-offset:1px}
 .hud svg{width:21px;height:21px}
 .hud input[type=range]{width:clamp(70px,18vw,180px);accent-color:#c8502c}
+.hud.dio .rv{display:none}
 .hud .sep{width:1px;height:22px;background:rgba(40,50,54,.18);flex:none}
 .hud .tiny{width:14px;height:14px;color:#2a3236;flex:none} .hud .big{width:22px;height:22px;color:#2a3236;flex:none}
+.timebar{bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+.timebar[hidden]{display:none}
+.timebar .track{position:relative;display:flex;flex-direction:column;padding-bottom:12px}
+.timebar input{width:clamp(130px,38vw,340px)!important}
+.timebar .marks span{position:absolute;bottom:-4px;transform:translateX(-50%);font-size:12px;line-height:1}
+.timebar output{font:600 15px var(--mono);min-width:3.2em;text-align:center;color:#2a3236}
 .pin{position:absolute;transform:translate(-50%,-100%);width:34px;height:34px;border-radius:50% 50% 50% 4px;rotate:-45deg;border:0;padding:0;cursor:pointer;
  background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(255,255,255,.72));box-shadow:0 6px 14px -6px rgba(30,30,40,.55),inset 0 1px 0 #fff;display:grid;place-items:center;transition:opacity .3s}
 .pin span{rotate:45deg;font-size:17px;line-height:1}
@@ -55,6 +62,7 @@ section,header{display:flex;flex-direction:column;gap:16px}
 .bubble{position:absolute;transform:translate(-50%,calc(-100% - 44px));pointer-events:none;max-width:250px;padding:9px 12px;border-radius:14px;font:600 13px/1.35 var(--body);color:#22282b;
  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.8));border:1px solid #fff;box-shadow:0 8px 18px -8px rgba(30,30,40,.5);transition:opacity .35s}
 .bubble::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:rgba(255,255,255,.84);transform:translateX(-50%) rotate(45deg);border-right:1px solid #fff;border-bottom:1px solid #fff}
+.bubble.dock{position:fixed;right:14px;left:auto!important;top:92px!important;transform:none;pointer-events:auto;cursor:pointer;max-width:250px}.bubble.dock::after{display:none}.bubble.dock::before{content:'×';position:absolute;right:9px;top:3px;font:400 16px var(--body);color:#8a8a8a}
 .bubble b{display:block;font:500 10px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:#c8502c;margin-bottom:2px}
 @media (max-width:560px){.hud{gap:1px;padding:4px}.hud button{width:33px;height:33px}.hud .sep{display:none}.hud input[type=range]{width:60px}.bubble{max-width:190px;font-size:12px}}
 
@@ -92,7 +100,27 @@ td.n{font-family:var(--mono);text-align:right;white-space:nowrap;font-variant-nu
 tr.g td{font:600 13px var(--body);color:var(--maple);background:color-mix(in srgb,var(--paper) 85%,var(--maple))}
 td .kit{font:500 11px var(--mono);color:var(--lawn)}
 .btn{font:600 14px var(--body);padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--ink);color:var(--bg);cursor:pointer}
+/* Play mode (/town): the town alone, full screen, with a way home and a way to sign in. */
+body.play{margin:0;overflow:hidden;background:#cfe2ea}
+body.play .wrap>header,body.play .wrap>section:not(:first-of-type),body.play .facts,body.play aside,body.play .ctx-card{display:none!important}
+body.play .page,body.play .wrap,body.play .wrap>section{display:block;margin:0;padding:0;max-width:none;width:auto}
+body.play .stage{position:fixed;inset:0;height:100dvh;min-height:0;border-radius:0;box-shadow:none}
+.pl-door{position:fixed;z-index:20;top:calc(12px + env(safe-area-inset-top,0px));left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}
+.pl-door a,.pl-door button{pointer-events:auto;font:600 14px var(--body);padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.9);color:#2a3236;text-decoration:none;cursor:pointer;
+ background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.46));box-shadow:0 8px 20px -10px rgba(40,40,50,.55),inset 0 1px 0 #fff;backdrop-filter:blur(8px)}
+.pl-door button[data-in=true]{color:#2f6a22}
 </style>
+<script>
+// Play mode: /town (or ?play) shows only the town, with a door home and a sign-in chip (nothing is asked of players).
+if (location.pathname === '/town' || /[?&]play\b/.test(location.search)) {
+ document.body.classList.add('play');
+ const d = document.createElement('div'); d.className = 'pl-door';
+ d.innerHTML = '<a href="/sandbox" aria-label="Back to the ranch">Ranch</a><button type="button" id="pl-account">Sign in</button>';
+ document.body.append(d);
+ const b = d.querySelector('button'), here = encodeURIComponent(location.pathname + location.search);
+ fetch('/api/me', {cache: 'no-store'}).then(r => r.json()).then(me => { b.dataset.in = !!me.signedIn; b.textContent = me.signedIn ? 'Signed in' : 'Sign in'; b.onclick = () => { location.href = me.signedIn ? '/welcome' : '/api/auth/login?return=' + here; }; }).catch(() => { b.hidden = true; });
+}
+</script>
 
 <div class="page">
 <div class="wrap">
@@ -108,13 +136,23 @@ td .kit{font:500 11px var(--mono);color:var(--lawn)}
    <canvas id="c" aria-label="Abbie's town in 3D. Drag to look around, pinch or scroll to zoom, tap a pin to visit a place."></canvas>
    <div id="pins"></div>
    <div class="bubble" id="bubble" style="opacity:0"></div>
+   <div class="hud timebar" id="timebar" hidden role="group" aria-label="Years">
+    <button id="play" aria-pressed="false" aria-label="Play the years"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button>
+    <div class="track"><input id="yr" type="range" min="1700" max="2026" step="1" value="2026" aria-label="Year"><div class="marks" id="marks"></div></div>
+    <output id="yrnum" class="num">2026</output>
+   </div>
    <div class="hud" role="toolbar" aria-label="Town controls">
     <button id="home" aria-label="See the whole town"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></button>
     <button id="prev" aria-label="Previous place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
     <button id="next" aria-label="Next place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
     <span class="sep"></span>
+    <button id="dio" aria-pressed="false" aria-label="The three regions as dioramas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M8 3l3.2 1.8v3.6L8 10.2 4.8 8.4V4.8z"/><path d="M16 3l3.2 1.8v3.6L16 10.2l-3.2-1.8V4.8z" opacity=".8"/><path d="M12 11l3.2 1.8v3.6L12 18.2l-3.2-1.8v-3.6z" opacity=".65"/></svg></button>
+    <button id="map" class="rv" aria-pressed="false" aria-label="Lay the real map over the town"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></button>
+    <button id="hexes" class="rv" aria-pressed="false" aria-label="Show the seven-hex region and its three parts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l4 2.3v4.4L12 12 8 9.7V5.3z"/><path d="M8 9.7l4 2.3v4.5L8 19l-4-2.5V12z" opacity=".7"/><path d="M16 9.7l4 2.3v4.5L16 19l-4-2.5V12z" opacity=".7"/></svg></button>
+    <button id="clock" class="rv" aria-pressed="false" aria-label="Watch the town grow through the years"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></button>
+    <span class="sep"></span>
     <svg class="tiny" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 12l8-6 8 6v8H4z"/><rect x="7" y="13" width="3" height="3" fill="#fff"/><rect x="14" y="13" width="3" height="3" fill="#fff"/></svg>
-    <input id="charm" type="range" min="0" max="1" step="0.05" value="1" aria-label="From the real town's density to Abbie's charming town">
+    <input id="charm" class="rv" type="range" min="0" max="1" step="0.05" value="1" aria-label="From the real town's density to Abbie's charming town">
     <svg class="big" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 12l10-9 10 9v10H2z"/><rect x="9.5" y="15" width="5" height="7" fill="#fff"/></svg>
     <span class="sep"></span>
     <button id="signin" aria-pressed="false" aria-label="Abbie signs in: the coffee shop becomes hers"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.4 2.6h1.8c.8-1.4 2.3-2.6 4.4-2.6 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></button>
@@ -205,6 +243,8 @@ td .kit{font:500 11px var(--mono);color:var(--lawn)}
 </div>
 
 <script id="land" type="application/json">/*LAND*/</script>
+<script id="overlay" type="text/plain">/*OVERLAY*/</script>
+<script id="history" type="application/json">/*HISTORY*/</script>
 <script type="importmap">/*IMPORTMAP*/</script>
 <script type="module">
 import * as THREE from 'three';
@@ -214,18 +254,34 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const land = makeLand(JSON.parse(document.getElementById('land').textContent));
 const W = land.W, D = land.D;
 const X = x => x - W / 2, Z = y => -(y - D / 2);
-const ICON = {cafe: '☕', comellas: '\u{1F355}', hoagies: '\u{1F96A}', muraco: '\u{1F3EB}', leonard: '⚽', ginn: '\u{1F682}', horn: '\u{1F986}', common: '⛪', launch: '\u{1F680}', nova: '✨'};
+const ICON = {home: '\u{1F3E1}', ani: '\u{1F3E0}', lab: '\u{1F9EA}', cafe: '☕', comellas: '\u{1F355}', hoagies: '\u{1F96A}', muraco: '\u{1F3EB}', leonard: '⚽', ginn: '\u{1F682}', horn: '\u{1F986}', common: '⛪', launch: '\u{1F680}', nova: '✨'};
+
+// ---------- time: when things were built, from the assessor's year built (no owners or addresses) ----------
+const hist = JSON.parse(document.getElementById('history').textContent);
+const HISTORY = {rail: 1835, town: 1850, from: 1700, to: 2026};
+let overlay = null, townGroup = null, houseGroup = null, town = null, S = null, laneMeshes = [], railMeshes = [], lapse = false, year = 2026;
+function hectareYears(x, y) { // the years recorded in the hectare, or in the nearest hectares that have any
+ const i = Math.floor(x / hist.dc), j = Math.floor(y / hist.dc);
+ for (let r = 0; r <= 4; r++) { const out = []; for (let a = -r; a <= r; a++) for (let b = -r; b <= r; b++) { if (Math.max(Math.abs(a), Math.abs(b)) !== r) continue; const ii = i + a, jj = j + b; if (ii < 0 || jj < 0 || ii >= hist.dnx || jj >= hist.dny) continue; const k = jj * hist.dnx + ii; for (let n = hist.off[k]; n < hist.off[k + 1]; n++) if (hist.y[n] > 1650) out.push(hist.y[n]); } if (out.length) return out; }
+ return [1950];
+}
+function giveYears(t) { // each grown house takes the year of a real building near it, so each part of town ages as it really did
+ const r = rng(7), cache = new Map();
+ for (const h of t.houses) { const k = Math.floor(h.x / hist.dc) + ',' + Math.floor(h.y / hist.dc); let ys = cache.get(k); if (!ys) cache.set(k, ys = hectareYears(h.x, h.y)); h.year = ys[Math.floor(r() * ys.length)]; }
+ for (const l of t.lanes) { const mx = l.p[Math.floor(l.p.length / 2)], near = t.houses.filter(h => Math.hypot(h.x - mx[0], h.y - mx[1]) < 70).map(h => h.year).sort((a, b) => a - b); l.year = near.length ? near[Math.floor(near.length * .25)] : 1950; }
+}
 
 // ---------- scene ----------
 const stage = document.getElementById('stage'), canvas = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({canvas, antialias: true, logarithmicDepthBuffer: true});
 renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
-const clock = new THREE.Clock();
+const WC = watercolourDistance(THREE, renderer, {logDepth: true}); // the pulled-back view's painted distance, per zone (simulations/watercolour-distance.mjs)
+const clock = new THREE.Clock(); const sunDir = new THREE.Vector3(-600, 900, 400);
 const scene = new THREE.Scene(); scene.background = new THREE.Color('#cfe2ea');
 const camera = new THREE.PerspectiveCamera(42, 1, 2, 40000);
 const controls = new OrbitControls(camera, canvas); controls.enableDamping = true; controls.maxPolarAngle = 1.42; controls.minDistance = 30; controls.maxDistance = 14000;
-scene.add(new THREE.HemisphereLight('#e6f1ff', '#7a6a4a', 1.15));
+const hemi = new THREE.HemisphereLight('#e6f1ff', '#7a6a4a', 1.15); scene.add(hemi);
 const sun = new THREE.DirectionalLight('#fff0d6', 2.4); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
 Object.assign(sun.shadow.camera, {left: -500, right: 500, top: 500, bottom: -500, near: 10, far: 3000}); sun.shadow.bias = -.0004; sun.shadow.normalBias = .6;
 scene.add(sun, sun.target);
@@ -250,6 +306,10 @@ new ResizeObserver(resize).observe(stage); resize();
  }
  geo.setAttribute('color', new THREE.BufferAttribute(col, 3)); geo.computeVertexNormals();
  const ground = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({vertexColors: true, roughness: .95})); ground.receiveShadow = true; scene.add(ground);
+ // the real map, laid over the land in a second skin that follows every hill: streets, footprints, water
+ const mg = geo.clone(), uv = new Float32Array(pos.count * 2); for (let k = 0; k < pos.count; k++) { const i = k % nx, j = Math.floor(k / nx); uv[k * 2] = (i + .5) / nx; uv[k * 2 + 1] = 1 - (j + .5) / ny; } mg.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+ const tex = new THREE.TextureLoader().load(document.getElementById('overlay').textContent.trim()); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+ overlay = new THREE.Mesh(mg, new THREE.MeshBasicMaterial({map: tex, transparent: true, opacity: 0, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2})); overlay.position.y = .9; overlay.visible = false; overlay.renderOrder = 5; scene.add(overlay);
  // the tile's edges: soil and rock down to a base, as every Abbie's World tile
  const skirt = new THREE.MeshStandardMaterial({color: '#7a5a3c', roughness: 1}), base = -40;
  const edge = (pts) => { const g = new THREE.BufferGeometry(), v = []; for (let k = 1; k < pts.length; k++) { const [a, b] = [pts[k - 1], pts[k]]; v.push(a[0], a[2], a[1], b[0], b[2], b[1], b[0], base, b[1], a[0], a[2], a[1], b[0], base, b[1], a[0], base, a[1]); } g.setAttribute('position', new THREE.Float32BufferAttribute(v, 3)); g.computeVertexNormals(); scene.add(new THREE.Mesh(g, skirt)); };
@@ -281,12 +341,20 @@ function merge(geos) { // a small merge for non-indexed and indexed BufferGeomet
  for (const g of geos) { pos.set(g.attributes.position.array, o * 3); if (g.index) for (let i = 0; i < g.index.count; i++) idx[q++] = g.index.array[i] + o; else for (let i = 0; i < g.attributes.position.count; i++) idx[q++] = i + o; o += g.attributes.position.count; }
  const out = new THREE.BufferGeometry(); out.setAttribute('position', new THREE.BufferAttribute(pos, 3)); out.setIndex(new THREE.BufferAttribute(idx, 1)); out.computeVertexNormals(); return out;
 }
+// the seven-hex region: outlines draped on the land, in each region's colour (a presentation layer, off until the hex button is pressed)
+const regionsGroup = new THREE.Group(); regionsGroup.visible = false; scene.add(regionsGroup);
+{
+ const col = {'abbie-daddy-side': '#e8643c', 'anis-side': '#2f9ac4', downtown: '#6aa84f', centre: '#ffffff'}, s = HEX.side, hexes = hexCentres();
+ const pts = c => Array.from({length: 7}, (_, k) => [c.x + Math.cos(k * Math.PI / 3) * s, c.y + Math.sin(k * Math.PI / 3) * s]);
+ for (const h of hexes) { const r = h.bearing === null ? 'centre' : REGIONS.find(r => r.outer.includes(h.bearing)).id; regionsGroup.add(new THREE.Mesh(merge([ribbon(pts(h), 46, 4, 20)]), new THREE.MeshBasicMaterial({color: col[r], depthTest: false, transparent: true, opacity: .95}))); }
+ for (const r of REGIONS) for (const b of [r.from]) { const a = b * Math.PI / 180, e = [HEX.centre[0] + Math.sin(a) * s * 2.6, HEX.centre[1] + Math.cos(a) * s * 2.6]; regionsGroup.add(new THREE.Mesh(merge([ribbon([HEX.centre, e], 30, 4, 20)]), new THREE.MeshBasicMaterial({color: col[r.id], depthTest: false, transparent: true, opacity: .55}))); }
+ regionsGroup.traverse(o => { if (o.isMesh) o.renderOrder = 8; });
+}
 {
  const brook = new THREE.MeshStandardMaterial({color: '#4a90b0', roughness: .25});
  scene.add(new THREE.Mesh(merge(land.raw.streams.map(s => ribbon(s.p, 4, .35))), brook));
  const ballast = new THREE.MeshStandardMaterial({color: '#8b7f72', roughness: 1}), steel = new THREE.MeshStandardMaterial({color: '#4a4440', roughness: .5, metalness: .6});
- scene.add(new THREE.Mesh(merge(land.raw.rail.map(r => ribbon(r, 6, .4))), ballast));
- scene.add(new THREE.Mesh(merge(land.raw.rail.map(r => ribbon(r, 1.7, .7))), steel));
+ for (const [w, l, mat] of [[6, .4, ballast], [1.7, .7, steel]]) { const rm = new THREE.Mesh(merge(land.raw.rail.map(r => ribbon(r, w, l))), mat); scene.add(rm); railMeshes.push(rm); }
  const asphalt = new THREE.MeshStandardMaterial({color: '#5d6064', roughness: .9}), line = new THREE.MeshStandardMaterial({color: '#e9d36a', roughness: .8});
  const roads = land.raw.roads.filter(r => r.c <= 4);
  const rg = merge(roads.map(r => ribbon(r.p, roadWidth(r.c), .45))); const rm = new THREE.Mesh(rg, asphalt); rm.receiveShadow = true; scene.add(rm);
@@ -319,7 +387,7 @@ const gableGeo = (() => { const s = new THREE.Shape([new THREE.Vector2(-.5, 0), 
 const hipGeo = new THREE.ConeGeometry(.7072, 1, 4, 1).rotateY(Math.PI / 4).translate(0, .5, 0);
 const crownGeo = new THREE.IcosahedronGeometry(1, 0), pineGeo = new THREE.ConeGeometry(1, 1, 7).translate(0, .5, 0), trunkGeo = new THREE.CylinderGeometry(.18, .26, 1, 5).translate(0, .5, 0);
 const roofMat = new THREE.MeshStandardMaterial({roughness: .8}), plainMat = new THREE.MeshStandardMaterial({roughness: .85}), leafMat = new THREE.MeshStandardMaterial({roughness: .9, flatShading: true});
-let townGroup = null, town = null, S = null;
+const laneMat = new THREE.MeshStandardMaterial({color: '#6a6c6f', roughness: .9});
 const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), v3 = new THREE.Vector3(), sc = new THREE.Vector3(), col = new THREE.Color();
 function inst(geo, mat, list, fill) {
  const mesh = new THREE.InstancedMesh(geo, mat, Math.max(1, list.length)); mesh.count = list.length; mesh.castShadow = true; mesh.receiveShadow = true;
@@ -328,8 +396,25 @@ function inst(geo, mat, list, fill) {
 }
 function buildTown(charm) {
  if (townGroup) { scene.remove(townGroup); townGroup.traverse(o => o.isInstancedMesh && o.dispose()); }
+ if (houseGroup) { scene.remove(houseGroup); houseGroup.traverse(o => o.isInstancedMesh && o.dispose()); houseGroup = null; }
  town = growTown(land, {charm}); S = summary(land, town); townGroup = new THREE.Group(); scene.add(townGroup);
- const H = town.houses, yaw = h => Math.atan2(h.fx, -h.fy);
+ giveYears(town);
+ // lanes, drawn as ribbons with a turning circle; a lane appears with the houses along it
+ laneMeshes = town.lanes.map(l => { const m = new THREE.Mesh(merge([ribbon(l.p, l.w, .42), (() => { const g = new THREE.CircleGeometry(9, 14); g.rotateX(-Math.PI / 2); g.translate(X(l.end[0]), land.heightAt(...l.end) + .44, Z(l.end[1])); return g; })()]), laneMat); m.receiveShadow = true; m.userData.year = l.year; townGroup.add(m); return m; });
+ // trees
+ const T = town.trees, broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine');
+ townGroup.add(inst(trunkGeo, plainMat, broad, t => { v3.set(X(t.x), t.z, Z(t.y)); q.identity(); sc.set(t.s, 4 * t.s, t.s); col.set('#6b4f36'); }));
+ townGroup.add(inst(crownGeo, leafMat, broad, t => { const s = t.kind === 'birch' ? .75 : 1; v3.set(X(t.x), t.z + 6.2 * t.s * s, Z(t.y)); q.setFromEuler(e.set(t.x % 1, t.y % 3, 0)); sc.set(3.8 * t.s * s, 4.4 * t.s * s, 3.8 * t.s * s); col.set(t.c); }));
+ townGroup.add(inst(pineGeo, leafMat, pine, t => { v3.set(X(t.x), t.z + .8, Z(t.y)); q.identity(); sc.set(2.8 * t.s, 13 * t.s, 2.8 * t.s); col.set(t.c); }));
+ drawHouses(); showFacts(); showManifest();
+}
+// the houses that stand in the chosen year (the whole town when the time lapse is off)
+function drawHouses() {
+ if (houseGroup) { scene.remove(houseGroup); houseGroup.traverse(o => o.isInstancedMesh && o.dispose()); }
+ houseGroup = new THREE.Group(); scene.add(houseGroup);
+ const townGroup = houseGroup, H = lapse ? town.houses.filter(h => h.year <= year) : town.houses, yaw = h => Math.atan2(h.fx, -h.fy);
+ for (const l of laneMeshes) l.visible = !lapse || l.userData.year <= year;
+ for (const m of railMeshes) m.visible = !lapse || year >= HISTORY.rail;
  for (const fam of Object.keys(BODY)) {
   const list = H.filter(h => h.fam === fam); if (!list.length) continue;
   townGroup.add(inst(boxGeo, BODY[fam], list, h => { v3.set(X(h.x), h.z - .4, Z(h.y)); q.setFromEuler(e.set(0, yaw(h), 0)); sc.set(h.w, h.h + .4, h.d); col.set(h.wall); }));
@@ -345,15 +430,6 @@ function buildTown(charm) {
  // awnings on the shops, in striped colours
  const sh = H.filter(h => h.fam === 'shop'), awn = ['#2f7d6a', '#b8423a', '#2f5d8a', '#d9a03a', '#6a4a8a'];
  townGroup.add(inst(boxGeo, plainMat, sh, (h, i) => { const a = yaw(h); v3.set(X(h.x) + Math.sin(a) * (h.d / 2 + .9), h.z + 3.1, Z(h.y) + Math.cos(a) * (h.d / 2 + .9)); q.setFromEuler(e.set(-.35, a, 0, 'YXZ')); sc.set(h.w * .9, .2, 2.2); col.set(awn[i % awn.length]); }));
- // lanes, drawn as ribbons with a turning circle
- const lanes = town.lanes.map(l => ribbon(l.p, l.w, .42)), circles = town.lanes.map(l => { const g = new THREE.CircleGeometry(9, 14); g.rotateX(-Math.PI / 2); g.translate(X(l.end[0]), land.heightAt(...l.end) + .44, Z(l.end[1])); return g; });
- if (lanes.length) { const m = new THREE.Mesh(merge([...lanes, ...circles]), new THREE.MeshStandardMaterial({color: '#6a6c6f', roughness: .9})); m.receiveShadow = true; townGroup.add(m); }
- // trees
- const T = town.trees, broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine');
- townGroup.add(inst(trunkGeo, plainMat, broad, t => { v3.set(X(t.x), t.z, Z(t.y)); q.identity(); sc.set(t.s, 4 * t.s, t.s); col.set('#6b4f36'); }));
- townGroup.add(inst(crownGeo, leafMat, broad, t => { const s = t.kind === 'birch' ? .75 : 1; v3.set(X(t.x), t.z + 6.2 * t.s * s, Z(t.y)); q.setFromEuler(e.set(t.x % 1, t.y % 3, 0)); sc.set(3.8 * t.s * s, 4.4 * t.s * s, 3.8 * t.s * s); col.set(t.c); }));
- townGroup.add(inst(pineGeo, leafMat, pine, t => { v3.set(X(t.x), t.z + .8, Z(t.y)); q.identity(); sc.set(2.8 * t.s, 13 * t.s, 2.8 * t.s); col.set(t.c); }));
- showFacts(); showManifest();
 }
 
 // ---------- the places: hero models, bigger than life ----------
@@ -372,13 +448,37 @@ function shopfront(wall, awnA, awnB) {
 }
 const coinMat = M('#f6c84a', {metalness: .25, roughness: .3, emissive: '#b07a10', emissiveIntensity: .55}), coins = [];
 // a patch of ground (a field, a green) laid over the real slope instead of a flat slab
+let G = land; // what the builders read the ground from: the real land, or flat ground when a place is built into a diorama
 function drape(g, s, w, d, c, ox = 0, oz = 0, lift = .35) {
  const geo = new THREE.PlaneGeometry(w, d, Math.ceil(w / 5), Math.ceil(d / 5)); geo.rotateX(-Math.PI / 2); const p = geo.attributes.position;
- for (let i = 0; i < p.count; i++) { const lx = p.getX(i) + ox, lz = p.getZ(i) + oz; p.setXYZ(i, lx, land.heightAt(s.x + lx, s.y - lz) - s.z + lift, lz); }
+ for (let i = 0; i < p.count; i++) { const lx = p.getX(i) + ox, lz = p.getZ(i) + oz; p.setXYZ(i, lx, G.heightAt(s.x + lx, s.y - lz) - s.z + lift, lz); }
  geo.computeVertexNormals(); const m = new THREE.Mesh(geo, M(c)); m.receiveShadow = true; g.add(m); return m;
 }
 function coin(g, x, y, z) { const m = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, .5, 24), coinMat); m.rotation.x = Math.PI / 2; m.position.set(x, y, z); m.castShadow = true; g.add(m); coins.push(m); return m; }
-let cafe = null;
+// a family home: a clapboard house facing the street and a treehouse in the backyard; Abbie's has the cellar door of Daddy's hideaway in the grass
+function family(g, wall, accent, pink) {
+ const house = new THREE.Mesh(boxGeo, BODY.colonial.map(m => { const c = m.clone(); c.color = new THREE.Color(wall); return c; })); house.scale.set(11, 6.4, 9); house.castShadow = house.receiveShadow = true; g.add(house);
+ gable(g, 11.8, 4.4, 10, '#4a4a52', 0, 6.4, 0); box(g, 1.6, 3, 1.6, '#8a4a36', 3.4, 8, -2); box(g, 3, .3, 1.6, '#f7f0dc', 0, .6, 5.4); box(g, 1.4, 2.6, .2, accent, 0, 0, 4.55);
+ const tx = pink ? -9 : 8, tz = -20, bark = pink ? '#8a4a4a' : '#7a5a3a', leaf = pink ? '#f08fb0' : '#3f7a3a';
+ cyl(g, 1.1, 1.7, 10, bark, tx, 0, tz, 9);
+ for (const [lx, ly, lz, r] of [[0, 15, 0, 7.5], [-5, 12, 2, 5], [5, 13, -2, 5.5], [1, 18, 3, 4.5]]) { const c = new THREE.Mesh(new THREE.IcosahedronGeometry(r, 1), M(leaf, {flatShading: true})); c.position.set(tx + lx, ly, tz + lz); c.castShadow = true; g.add(c); }
+ cyl(g, 4.2, 4.2, .4, pink ? '#e8b9c8' : '#a9824f', tx, 6.2, tz, 14);
+ box(g, 3.6, 2.6, 3.6, pink ? '#fbe3ec' : '#8b6a42', tx, 6.6, tz); gable(g, 4.4, 2, 4.2, accent, tx, 9.2, tz);
+ const win = cyl(g, .55, .55, .2, '#6a8ca8', 0, 0, 0, 12); win.rotation.x = Math.PI / 2; win.position.set(tx, 7.9, tz + 1.85);
+ for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2; box(g, .18, 1.1, .18, bark, tx + Math.cos(a) * 3.9, 6.6, tz + Math.sin(a) * 3.9); }
+ const lad = box(g, .25, 7, .8, '#b99a6a', tx + 2, 3.2, tz + 4.2); lad.rotation.x = -.38;
+ box(g, 1.6, .9, .1, accent, tx + .8, 12.6, tz); cyl(g, .08, .08, 3, '#e8e8e8', tx, 9.8, tz, 5);
+ if (pink) { // under the backyard: a mound and a round steel door set into a concrete frame
+  const bx = 11, bz = -18, mound = new THREE.Mesh(new THREE.SphereGeometry(6, 18, 8, 0, Math.PI * 2, 0, Math.PI / 2), M('#6f9a45')); mound.scale.y = .42; mound.position.set(bx, 0, bz); mound.receiveShadow = true; g.add(mound);
+  box(g, 7.4, 3.2, 3.2, '#8d9296', bx, 0, bz + 4.6);
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(2.1, .35, 10, 28), M('#caa23a', {metalness: .4, roughness: .4})); ring.position.set(bx, 1.7, bz + 6.25); g.add(ring);
+  const door = cyl(g, 1.95, 1.95, .5, M('#6f7a82', {metalness: .6, roughness: .35}), 0, 0, 0, 28); door.rotation.x = Math.PI / 2; door.position.set(bx, 1.7, bz + 6.3);
+  for (let i = 0; i < 3; i++) { const sp = box(g, 3.6, .3, .2, '#aab2b8', bx, 1.7, bz + 6.6); sp.rotation.z = i * Math.PI / 3; }
+  for (let i = 0; i < 4; i++) box(g, .9, .35, .12, i % 2 ? '#222' : '#f1c232', bx - 1.6 + i * 1.07, 3.1, bz + 6.3);
+ }
+ coin(g, 0, 12, 0);
+}
+let cafe = null; const beakers = []; const CELL_GAME = '/studies/cell/play.html' + (document.body.classList.contains('play') ? '?from=' + encodeURIComponent('/town') : '');
 const BUILD = {
  cafe(g) { const s = shopfront('#f1e6d6', '#2f8f86', '#ffffff'); g.add(s.g); cafe = s;
   const sign = cyl(g, 2.4, 2.4, .5, '#2f8f86', 0, 0, 0, 24); sign.rotation.x = Math.PI / 2; sign.position.set(0, 7.4, 7.3); cafe.sign = sign;
@@ -401,7 +501,7 @@ const BUILD = {
   box(g, 6, 3, 4, '#e8603a', 18, 0, 26); box(g, 1.2, 4.5, 1.2, '#3a7ad8', 14, 0, 26); box(g, 8, .4, 1.6, '#f4c53a', 24, 1.6, 26).rotation.z = -.4;
   coin(g, 35.4, 15, 8.3); },
  leonard(g, s) { drape(g, s, 100, 64, '#5f9a3c'); drape(g, s, .6, 64, '#ffffff', 0, 0, .45); drape(g, s, 100, .6, '#ffffff', 0, 32, .45); drape(g, s, 100, .6, '#ffffff', 0, -32, .45);
-  const gy = (lx, lz) => land.heightAt(s.x + lx, s.y - lz) - s.z;
+  const gy = (lx, lz) => G.heightAt(s.x + lx, s.y - lz) - s.z;
   for (const k of [-1, 1]) { box(g, .4, 2.4, 7.3, '#ffffff', k * 50, gy(k * 50, 0), 0); box(g, 2, .3, 7.3, '#dddddd', k * 51, gy(k * 50, 0) + 2.4, 0); }
   box(g, 10, 6, .3, '#8a9096', -40, gy(-40, -36), -36); box(g, 8, 2.4, 3, '#a8a49c', 0, gy(0, -36), -36);
   for (let i = 0; i < 6; i++) { const b = new THREE.Mesh(new THREE.SphereGeometry(.6, 10, 8), M('#ffffff')); b.position.set(-20 + i * 8, gy(-20 + i * 8, 10 - i * 3) + .9, 10 - i * 3); g.add(b); }
@@ -413,8 +513,25 @@ const BUILD = {
   coin(g, 0, 12, 0); },
  horn(g, s) { if (s.toward) g.rotation.y = Math.atan2(-(s.toward[0] - s.x), (s.toward[1] - s.y)); // the dock runs out over the water
   box(g, 3, .4, 40, '#9a7a52', 0, 1, -24); for (let i = 0; i < 4; i++) box(g, 2.2, .8, .6, '#7a5a3a', -8 + i * 5, 0, 6);
-  const boat = new THREE.Mesh(new THREE.CapsuleGeometry(1, 3, 4, 8), M('#e8e2d0')); boat.rotation.z = Math.PI / 2; boat.scale.set(1, 1, .6); const lvl = Math.max(...land.raw.water.filter(w => /horn pond/i.test(w.n)).map(w => w.lvl)); boat.position.set(4, lvl - s.z + .6, -40); g.add(boat);
+  const boat = new THREE.Mesh(new THREE.CapsuleGeometry(1, 3, 4, 8), M('#e8e2d0')); boat.rotation.z = Math.PI / 2; boat.scale.set(1, 1, .6); const lvl = Math.max(...G.raw.water.filter(w => /horn pond/i.test(w.n)).map(w => w.lvl)); boat.position.set(4, lvl - s.z + .6, -40); g.add(boat);
+  // the splash pad on the shore: a flat blue rubber pad, a ring of jets and a mushroom shower
+  drape(g, s, 26, 26, '#4fb3d9', -26, 16, .5); const jetM = M('#e8f6fb', {roughness: .3, metalness: .2}), spray = M('#bfe8f7', {transparent: true, opacity: .55, roughness: .1});
+  for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2, jx = -26 + Math.cos(a) * 7, jz = 16 + Math.sin(a) * 7, h = G.heightAt(s.x + jx, s.y - jz) - s.z; cyl(g, .35, .35, 1.1, jetM, jx, h + .5, jz, 8); const j = new THREE.Mesh(new THREE.ConeGeometry(.9, 4.2, 8, 1, true), spray); j.position.set(jx, h + 3.2, jz); g.add(j); }
+  { const h = G.heightAt(s.x - 26, s.y - 16) - s.z; cyl(g, .5, .5, 6, '#f4a62a', -26, h + .5, 16, 10); const cap = new THREE.Mesh(new THREE.SphereGeometry(3.2, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), M('#e95b84')); cap.position.set(-26, h + 6.5, 16); cap.castShadow = true; g.add(cap); const rain = new THREE.Mesh(new THREE.CylinderGeometry(3, 3.4, 4.6, 16, 1, true), spray); rain.position.set(-26, h + 4.4, 16); g.add(rain); }
   coin(g, 0, 10, 0); },
+ home(g) { family(g, '#f6c8da', '#d9578d', true); },
+ ani(g) { family(g, '#e4d6f0', '#7e57b0', false); },
+ lab(g) { const b = shopfront('#e4eef0', '#3aa0a8', '#ffffff'); g.add(b.g);
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(3.4, 18, 10, 0, Math.PI * 2, 0, Math.PI / 2), M('#c9d4da', {metalness: .4, roughness: .3})); dome.position.set(-3, 10.4, -2); dome.castShadow = true; g.add(dome);
+  const flask = cyl(g, 2.2, 2.2, .5, '#3aa0a8', 0, 0, 0, 24); flask.rotation.x = Math.PI / 2; flask.position.set(0, 7.4, 7.3);
+  // the beaker of strange green goo by the door: tap it to play the cell game
+  const beaker = new THREE.Group(); beaker.userData.link = CELL_GAME;
+  const glass = new THREE.Mesh(new THREE.CylinderGeometry(.9, .8, 2.2, 18, 1, true), M('#dff6ff', {transparent: true, opacity: .35, roughness: .05, side: THREE.DoubleSide})); glass.position.y = 1.1;
+  const goo = new THREE.Mesh(new THREE.CylinderGeometry(.82, .74, 1.4, 18), M('#6cff4a', {emissive: '#3bd61c', emissiveIntensity: .9, roughness: .3})); goo.position.y = .75;
+  const lip = new THREE.Mesh(new THREE.TorusGeometry(.92, .08, 6, 18), M('#dff6ff')); lip.rotation.x = Math.PI / 2; lip.position.y = 2.2;
+  beaker.add(glass, goo, lip); beaker.bubbles = [];
+  for (let i = 0; i < 5; i++) { const bub = new THREE.Mesh(new THREE.SphereGeometry(.14 + i * .03, 8, 6), M('#b9ff9e', {emissive: '#6cff4a', emissiveIntensity: .6})); bub.userData.phase = i / 5; beaker.add(bub); beaker.bubbles.push(bub); }
+  beaker.position.set(5.5, 0, 9.8); beaker.scale.setScalar(1.8); g.add(beaker); beakers.push(beaker); },
  common(g, s) { drape(g, s, 60, 60, '#6aa346');
   const ch = new THREE.Group(); box(ch, 14, 10, 24, '#f6f3ec', 0, 0, 0); gable(ch, 25, 6, 15, '#3c4246', 0, 10, 0).rotation.y = Math.PI / 2;
   box(ch, 6, 18, 6, '#f6f3ec', 0, 0, 13); box(ch, 4.6, 5, 4.6, '#f6f3ec', 0, 18, 13); const sp = new THREE.Mesh(new THREE.ConeGeometry(2.6, 14, 8), M('#f6f3ec')); sp.position.set(0, 30, 13); sp.castShadow = true; ch.add(sp);
@@ -427,6 +544,7 @@ function placeSpots() {
  for (const s of town.spots) {
   const g = new THREE.Group(); BUILD[s.id]?.(g, s);
   g.position.set(X(s.x), s.z, Z(s.y));
+  if (s.at === 'fixed') g.rotation.y = s.face;
   if (s.at === 'centre') { const n = nearestOn(town.roads, s.x, s.y); g.rotation.y = Math.atan2(n.x - s.x, -(n.y - s.y)); } // face the street
   spotGroup.add(g); spotByID[s.id] = {...s, g};
  }
@@ -447,13 +565,14 @@ function placeSpots() {
 
 // ---------- pins, bubbles, the camera ----------
 const pinsEl = document.getElementById('pins'), bubble = document.getElementById('bubble');
-const ORDER = ['cafe', 'comellas', 'hoagies', 'common', 'muraco', 'leonard', 'ginn', 'horn', 'launch', 'nova'];
+const ORDER = ['cafe', 'comellas', 'hoagies', 'lab', 'common', 'muraco', 'leonard', 'ginn', 'horn', 'home', 'ani', 'launch', 'nova'];
 const pins = {};
 function makePins() {
- for (const id of ORDER) { const s = spotByID[id]; if (!s) continue; const b = document.createElement('button'); b.className = 'pin'; b.setAttribute('aria-label', s.name); b.innerHTML = `<span>${ICON[id]}</span>`; b.onclick = () => visit(id); pinsEl.appendChild(b); pins[id] = b; }
+ for (const id of [...ORDER, ...ORDER_DIO]) { const s = spotByID[id]; if (!s) continue; const b = document.createElement('button'); b.className = 'pin'; b.setAttribute('aria-label', s.name); b.innerHTML = `<span>${ICON[id]}</span>`; b.onclick = () => visit(id); pinsEl.appendChild(b); pins[id] = b; }
 }
 let fly = null, current = -1, shown = null;
 function visit(id) {
+ if (id.startsWith('dio-')) return visitDio(id);
  const s = spotByID[id]; current = ORDER.indexOf(id); shown = id;
  const tgt = new THREE.Vector3(X(s.x), s.z + (s.far ? 40 : 6), Z(s.y)), dist = s.far ? 1400 : (id === 'leonard' || id === 'muraco' || id === 'common' ? 190 : 110);
  const dir = camera.position.clone().sub(controls.target).setY(0).normalize(); if (!dir.lengthSq()) dir.set(0, 0, 1);
@@ -463,16 +582,45 @@ function visit(id) {
  bubble.innerHTML = `<b>${signed ? "Abbie's" : s.name}</b>${signed ? 'Her coffee shop now. The register key opens the basement, and ten of Daddy’s coins wait down there.' : s.line}`;
  bubble.style.opacity = 1;
 }
-function home() { shown = null; bubble.style.opacity = 0; const c = spotByID.common; const tgt = new THREE.Vector3(X(c.x), 20, Z(c.y)); fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(tgt.x + 900, 3200, tgt.z + 4200), t1: tgt}; }
+function home() { if (viewDio) return visitDio('dio-trio'); shown = null; bubble.style.opacity = 0; const c = spotByID.common; const tgt = new THREE.Vector3(X(c.x), 20, Z(c.y)); fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(tgt.x + 900, 3200, tgt.z + 4200), t1: tgt}; }
 document.getElementById('home').onclick = home;
-document.getElementById('next').onclick = () => visit(ORDER[(current + 1) % ORDER.length]);
-document.getElementById('prev').onclick = () => visit(ORDER[(current - 1 + ORDER.length) % ORDER.length]);
+document.getElementById('next').onclick = () => { const o = viewDio ? ORDER_DIO : ORDER; visit(o[(current + 1) % o.length]); };
+document.getElementById('prev').onclick = () => { const o = viewDio ? ORDER_DIO : ORDER; visit(o[(current - 1 + o.length) % o.length]); };
 let signedIn = false;
 document.getElementById('signin').onclick = e => {
  signedIn = !signedIn; e.currentTarget.setAttribute('aria-pressed', signedIn);
  cafe.body.material.forEach(m => m.color.set(signedIn ? '#f7b8d2' : '#f1e6d6')); cafe.aw.material = stripes(signedIn ? '#d9578d' : '#2f8f86', '#ffffff'); cafe.sign.material = M(signedIn ? '#d9578d' : '#2f8f86');
- cafe.key.visible = !signedIn; cafe.pop = 1; visit('cafe');
+ cafe.key.visible = !signedIn; cafe.pop = 1;
+ for (const c of dioCafes) { c.body.material.forEach(m => m.color.set(signedIn ? '#f7b8d2' : '#f1e6d6')); c.aw.material = stripes(signedIn ? '#d9578d' : '#2f8f86', '#ffffff'); c.sign.material = M(signedIn ? '#d9578d' : '#2f8f86'); c.key.visible = !signedIn; }
+ viewDio ? visitDio('dio-downtown') : visit('cafe');
 };
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down = null;
+window.__town = {beakers, camera, canvas, controls, visit, THREE}; // test hooks (tools/minigame-test)
+canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+canvas.addEventListener('pointerup', e => {
+ if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return; const r = canvas.getBoundingClientRect();
+ ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera);
+ if (spotByID.cafe && ray.intersectObject(spotByID.cafe.g, true)[0]) { const ev = new CustomEvent('abbietown:cafe-door', {detail: {id: 'cafe', signedIn}, cancelable: true}); if (window.dispatchEvent(ev) && document.body.classList.contains('play')) location.href = '/studies/cafe/diorama.html?from=town'; }
+ const hit = ray.intersectObjects(beakers, true)[0]; if (!hit) return;
+ let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) { if (o.userData.link === CELL_GAME && window.AbbieTown?.go) window.AbbieTown.go('town:lab-door'); else location.href = o.userData.link; }
+});
+canvas.addEventListener('pointermove', e => { if (e.buttons) return; const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); canvas.style.cursor = ray.intersectObjects(beakers, true).length ? 'pointer' : ''; });
+// the real map: off, then faint, then strong
+{ const b = document.getElementById('map'), lv = [0, .4, .8]; let at = 0;
+ b.onclick = () => { at = (at + 1) % 3; overlay.visible = at > 0; overlay.material.opacity = lv[at]; b.setAttribute('aria-pressed', at > 0); }; }
+document.getElementById('hexes').onclick = e => { regionsGroup.visible = !regionsGroup.visible; e.currentTarget.setAttribute('aria-pressed', regionsGroup.visible); };
+// the time lapse: a year slider; the train line and the town's birth are marked on it
+{ const bar = document.getElementById('timebar'), yr = document.getElementById('yr'), num = document.getElementById('yrnum'), clk = document.getElementById('clock'), play = document.getElementById('play');
+ const span = HISTORY.to - HISTORY.from;
+ document.getElementById('marks').innerHTML = [[HISTORY.rail, '\u{1F682}'], [HISTORY.town, '\u{1F514}']].map(([y, g]) => `<span style="left:${(y - HISTORY.from) / span * 100}%">${g}</span>`).join('');
+ let raf = 0, last = 0;
+ const set = y => { year = Math.round(y); yr.value = year; num.textContent = year; drawHouses(); };
+ yr.oninput = () => { stop(); set(+yr.value); };
+ function stop() { play.setAttribute('aria-pressed', 'false'); cancelAnimationFrame(raf); raf = 0; }
+ function tick(now) { const dt = (now - last) / 1000; last = now; const y = Math.min(HISTORY.to, year + dt * 24); if (Math.round(y) !== year) set(y); if (y >= HISTORY.to) { stop(); return; } raf = requestAnimationFrame(tick); }
+ play.onclick = () => { if (raf) { stop(); return; } if (year >= HISTORY.to) set(HISTORY.from); play.setAttribute('aria-pressed', 'true'); last = performance.now(); raf = requestAnimationFrame(tick); };
+ clk.onclick = () => { lapse = !lapse; clk.setAttribute('aria-pressed', lapse); bar.hidden = !lapse; if (lapse) { set(HISTORY.from); play.onclick(); } else { stop(); year = 2026; drawHouses(); } };
+}
 let charmTimer = 0;
 document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => buildTown(+e.target.value), 120); };
 
@@ -505,13 +653,19 @@ document.querySelector('#assume tbody').innerHTML = Object.entries({
  'Height': 'true scale: 1 m up is 1 m across', 'Data': 'MassGIS public layers; style, use and year from the assessor, nothing personal'}).map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
 
 // ---------- places list ----------
-document.getElementById('places').innerHTML = [...SPOTS, ...BEYOND].map(s => `<button class="place" data-id="${s.id}"><span class="t"><span>${ICON[s.id]}</span>${s.name}${s.becomes ? ` <span class="muted" style="font-size:13px">becomes ${s.becomes}</span>` : ''}</span><span class="w ${s.where === 'guess' ? 'guess' : ''}">${s.where === 'data' ? 'from the map' : s.where === 'guess' ? 'placed by the common, to confirm' : 'off the map'}</span><p>${s.line}</p>${s.coins ? `<span class="coins">● ${s.coins} coin${s.coins > 1 ? 's' : ''}${s.key ? ' and the register key' : ''}</span>` : ''}</button>`).join('');
+document.getElementById('places').innerHTML = [...SPOTS, ...BEYOND].map(s => `<button class="place" data-id="${s.id}"><span class="t"><span>${ICON[s.id]}</span>${s.name}${s.becomes ? ` <span class="muted" style="font-size:13px">becomes ${s.becomes}</span>` : ''}</span><span class="w ${s.where === 'guess' ? 'guess' : ''}">${s.where === 'data' ? 'from the map' : s.where === 'guess' ? 'placed by the common, to confirm' : s.where === 'new' ? 'new in Abbie\'s town' : s.where === 'family' ? 'in the family\'s neighbourhood, placed loosely' : 'off the map'}</span><p>${s.line}</p>${s.coins ? `<span class="coins">● ${s.coins} coin${s.coins > 1 ? 's' : ''}${s.key ? ' and the register key' : ''}</span>` : ''}</button>`).join('');
 document.querySelectorAll('.place').forEach(b => b.onclick = () => { stage.scrollIntoView({behavior: 'smooth', block: 'center'}); visit(b.dataset.id); });
+
+/*DIORAMAS*/
 
 // ---------- go ----------
 buildTown(1);
-const {train, line} = placeSpots(); makePins();
+const {train, line} = placeSpots(); setupDioramas(); makePins();
+window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
+if (typeof setupStage === 'function') setupStage();
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
+if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
+WC.precompile(scene, camera); if (/[?&]watercolour=off\b/.test(location.search)) WC.enabled = false; // compiled before the first washed frame; ?watercolour=off for comparing
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();
 function onLine(d) { d = ((d % lineLen) + lineLen) % lineLen; for (let i = 1; i < line.length; i++) { const l = Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); if (d <= l) { const t = d / l; return [line[i - 1][0] + (line[i][0] - line[i - 1][0]) * t, line[i - 1][1] + (line[i][1] - line[i - 1][1]) * t]; } d -= l; } return line[line.length - 1]; }
 const tmp = new THREE.Vector3();
@@ -521,14 +675,16 @@ renderer.setAnimationLoop(() => {
  if (fly) { fly.t = Math.min(1, reduce ? 1 : (t - fly.at) / 1.6); const k = fly.t < .5 ? 2 * fly.t * fly.t : 1 - Math.pow(-2 * fly.t + 2, 2) / 2; camera.position.lerpVectors(fly.p0, fly.p1, k); controls.target.lerpVectors(fly.t0, fly.t1, k); if (fly.t >= 1) fly = null; }
  controls.update();
  // the sun's shadow follows what you look at
- const tg = controls.target; sun.target.position.copy(tg); sun.position.set(tg.x - 600, tg.y + 900, tg.z + 400); const span = Math.min(1600, Math.max(200, camera.position.distanceTo(tg) * .7)); Object.assign(sun.shadow.camera, {left: -span, right: span, top: span, bottom: -span}); sun.shadow.camera.updateProjectionMatrix();
+ const tg = controls.target; sun.target.position.copy(tg); sun.position.set(tg.x + sunDir.x, tg.y + sunDir.y, tg.z + sunDir.z); const span = Math.min(1600, Math.max(200, camera.position.distanceTo(tg) * .7)); Object.assign(sun.shadow.camera, {left: -span, right: span, top: span, bottom: -span}); sun.shadow.camera.updateProjectionMatrix();
  for (const c of coins) c.rotation.z = t * 1.6;
+ for (const b of beakers) for (const bub of b.bubbles) { const k = (t * .5 + bub.userData.phase) % 1; bub.position.set(Math.sin(k * 9 + bub.userData.phase * 6) * .35, 1.2 + k * 1.9, Math.cos(k * 7) * .3); bub.scale.setScalar(1 - k * .6); }
  if (cafe) { cafe.key.rotation.y = t; if (cafe.pop) { cafe.pop = Math.max(0, cafe.pop - dt * 1.5); const s = 1 + Math.sin(cafe.pop * Math.PI) * .15; cafe.g.scale.setScalar(s); } }
  if (!reduce) { const d = (t * 16) % (lineLen * 2), dir = d < lineLen ? 1 : -1, at = d < lineLen ? d : lineLen * 2 - d, [px, py] = onLine(at), [qx, qy] = onLine(at + dir * 5); train.position.set(X(px), land.heightAt(px, py) + 1, Z(py)); train.lookAt(X(qx), land.heightAt(px, py) + 1, Z(qy)); }
- renderer.render(scene, camera);
+ dioFrame(dt, t);
+ WC.update(dt); WC.render(scene, camera);
  // pins and the bubble ride on their places (spatial layer)
  const r = stage.getBoundingClientRect(), camD = camera.position.distanceTo(tg);
- for (const id in pins) { const s = spotByID[id]; tmp.set(X(s.x), s.z + (s.far ? 160 : 26), Z(s.y)).project(camera); const on = tmp.z < 1 && Math.abs(tmp.x) < 1.05 && Math.abs(tmp.y) < 1.05; pins[id].style.left = (tmp.x + 1) / 2 * r.width + 'px'; pins[id].style.top = (1 - tmp.y) / 2 * r.height + 'px'; pins[id].classList.toggle('far', !on || (!s.far && camD > 9000)); }
+ for (const id in pins) { const s = spotByID[id]; tmp.set(X(s.x), s.z + (s.far ? 160 : 26), Z(s.y)).project(camera); const on = tmp.z < 1 && Math.abs(tmp.x) < 1.05 && Math.abs(tmp.y) < 1.05; pins[id].style.left = (tmp.x + 1) / 2 * r.width + 'px'; pins[id].style.top = (1 - tmp.y) / 2 * r.height + 'px'; pins[id].classList.toggle('far', !on || (id.startsWith('dio-') !== viewDio) || (!s.far && camD > 9000)); }
  if (shown) { const s = spotByID[shown]; tmp.set(X(s.x), s.z + (s.far ? 160 : 26), Z(s.y)).project(camera); bubble.style.left = (tmp.x + 1) / 2 * r.width + 'px'; bubble.style.top = (1 - tmp.y) / 2 * r.height + 'px'; }
 });
 </script>

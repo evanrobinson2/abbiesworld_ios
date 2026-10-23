@@ -120,7 +120,7 @@ const mocap = await loadMocap(T, new URL('./', location.href)).catch(() => ({}))
 const rnd = (i, k) => (Math.sin(i * 12.9898 + k * 78.233) * 43758.5453 % 1 + 1) % 1;
 const CAST = [];
 for (let i = 0; i < 26; i++) {
- const body = i % 3 === 0 ? 'smooth' : 'mannequin';
+ const body = i % 2 ? 'blue' : 'red'; // the two Meshy brutes
  const kind = i % 11 === 5 ? 'carry' : i % 13 === 7 ? 'jog' : i % 4 === 2 ? 'stroll' : i % 17 === 3 ? 'sad' : 'walk';
  CAST.push({i, body, kind, lane: 4.2 + (i % 7) * 1.85 + rnd(i, 1) * .5, dir: i % 2 ? 1 : -1, phase: rnd(i, 2) * Math.PI * 2});
 }

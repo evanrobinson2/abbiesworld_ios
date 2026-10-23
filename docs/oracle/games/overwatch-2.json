@@ -1,0 +1,113 @@
+{
+  "appid": 2357570,
+  "name": "Overwatch 2",
+  "store_url": "https://store.steampowered.com/app/2357570/",
+  "genres": [
+    "Shooter",
+    "Hero",
+    "Multiplayer"
+  ],
+  "short_description": "Team hero shooter with a cast of very different, very readable characters.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Hero",
+    "Multiplayer"
+  ],
+  "summary": "Team hero shooter with a cast of very different, very readable characters.",
+  "identity": {
+    "core_loop": "Pick a hero, push or hold the objective with your team, use abilities and ultimates, swap heroes when needed.",
+    "mechanics": null,
+    "ui_and_game_feel": "Snappy and readable; each hero feels different from the first frame you hold them.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "meta": 0.2,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.52,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Heroes read by silhouette and voice lines; ultimates are called out loud; overlay for health, ammo and abilities.",
+      "confidence": 0.75,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Stylised PBR with bright saturated colour, clean shapes and strong silhouettes.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "graphic_minimal",
+      "light": "flat",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree"
+      ],
+      "tricks": [
+        "Hand-keyed heroes with strong poses and silhouettes; personality even in first-person arms",
+        "First-person and third-person animations are separate sets, each tuned for its camera",
+        "Big anticipation and snappy recovery so abilities read across a busy fight"
+      ],
+      "lesson": "Key the characters for pose and silhouette first; give the first-person hands their own personality.",
+      "sources": [
+        {
+          "title": "GDC Vault: The Animation Pipeline of Overwatch",
+          "url": "https://gdcvault.com/play/1024267/The-Animation-Pipeline-of-Overwatch"
+        },
+        {
+          "title": "Game Anim: The first person animation of Overwatch (Matthew Boehm, GDC 2017)",
+          "url": "https://www.gameanim.com/2017/04/29/first-person-animation-overwatch"
+        },
+        {
+          "title": "Inven Global: how Overwatch's first-person animation breathed life into heroes",
+          "url": "https://www.invenglobal.com/articles/1187/how-overwatchs-first-person-animation-breathed-life-into-heroes"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.7
+    },
+    "palette": null,
+    "audio_mood": "Voice barks for every key moment; distinct audio signature per hero.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Each character's personality lives in how they move and stand, even in first person. Silhouette and pose first."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.78,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.75
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

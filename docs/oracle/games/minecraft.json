@@ -1,0 +1,103 @@
+{
+  "appid": null,
+  "name": "Minecraft",
+  "store_url": null,
+  "genres": [
+    "Sandbox",
+    "Building",
+    "Survival"
+  ],
+  "short_description": "Break and place blocks to build anything, and survive the night in a world made of cubes.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Sandbox",
+    "Building",
+    "Survival"
+  ],
+  "summary": "Break and place blocks to build anything, and survive the night in a world made of cubes.",
+  "identity": {
+    "core_loop": "Gather, craft, build, explore, survive the night, build bigger.",
+    "mechanics": null,
+    "ui_and_game_feel": "Simple, tactile and endless.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.09,
+          "source": "estimate",
+          "confidence": 0.59,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Hunger and health bars, a hotbar, and the world itself; night and monsters say when to shelter.",
+      "confidence": 0.85,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Blocky voxels with pixel textures.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "pixel_art",
+      "family": "pixel",
+      "light": "painted_in",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pixel",
+      "post": [],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "procedural",
+      "mocap": 0.0,
+      "locomotion": [
+        "procedural"
+      ],
+      "tricks": [
+        "Block limbs swing on a sine wave scaled by walking speed; no animation clips for the player",
+        "The head turns to the look direction; arms swing to hit and place"
+      ],
+      "lesson": "For blocky figures, code-made limb swing tied to speed is enough and never slides.",
+      "sources": [
+        {
+          "title": "Minecraft Forge forum: how the player model sways and swings",
+          "url": "https://forums.minecraftforge.net/topic/40492-question-about-player-sway"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Calm sparse piano; block sounds per material.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "The simplest possible bodies can carry a game for a decade: block limbs swinging on a sine wave."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 1.0,
+      "structure": 0.56,
+      "social": 0.11,
+      "systems": 0.67,
+      "chance": 0.67,
+      "session": 0.67
+    },
+    "confidence": 0.85
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

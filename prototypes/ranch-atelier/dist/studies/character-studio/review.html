@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Motion Review</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="/theme/boot.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* AW-STUDY-0037 Character Studio, the quality pass: every move before and after, beside its reference clip, with its
+   scores. Flat colour, Roboto, blocks that press (LOOK.md). */
+:root{--bg:var(--aw-bg,#f3eee3);--surface:var(--aw-surface,#fbf8f2);--ink:var(--aw-ink,#2b2218);--soft:var(--aw-soft,#6b5d4c);--line:var(--aw-line,#e2d8c6);
+ --accent:var(--aw-accent,#7a5236);--on-accent:var(--aw-on-accent,#fff);--edge:color-mix(in srgb,var(--accent) 35%,var(--line));
+ --font:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;--good:#3f8a4f;--cut:#b4473a;--new:#3a6db4}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.4 var(--font)}
+main{max-width:1240px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 20px) 16px 48px}
+h1{font:700 22px/1.2 var(--font);margin:0 0 4px}
+.lede{color:var(--soft);margin:0 0 14px;max-width:820px}
+.sum{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.chip{font:500 12px var(--font);padding:4px 10px;border-radius:999px;background:var(--surface)}
+.chip.kept{color:var(--good)}.chip.replaced{color:var(--accent)}.chip.cut{color:var(--cut)}.chip.new{color:var(--new)}
+.stage{position:sticky;top:0;z-index:2;background:var(--bg);padding:6px 0 10px}
+.panes{position:relative;height:min(52vh,460px);border-radius:16px;overflow:hidden;background:var(--surface)}
+.panes canvas{display:block;width:100%;height:100%}
+.labels{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr 1fr;pointer-events:none}
+.labels div{padding:10px 12px;border-left:2px solid var(--bg);display:flex;flex-direction:column;gap:2px}
+.labels div:first-child{border-left:0}
+.labels b{font:700 13px var(--font)}.labels small{font:400 12px var(--font);color:var(--soft)}
+.labels .msg{margin:auto;text-align:center;max-width:80%;font:500 13px var(--font);color:var(--soft)}
+.labels a{pointer-events:auto;color:var(--accent)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.row .now{font:700 16px var(--font);margin-right:auto}
+button{font:500 13px var(--font);color:var(--ink);background:var(--surface);border:0;border-radius:10px;padding:8px 12px;cursor:pointer;
+ box-shadow:0 3px 0 var(--edge);transform:translateY(-3px);transition:transform .08s,box-shadow .08s}
+button:active{transform:translateY(0);box-shadow:0 0 0 var(--edge)}
+button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 60%,#000)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+table{width:100%;border-collapse:separate;border-spacing:0 6px;margin-top:6px}
+th{font:500 11px var(--font);color:var(--soft);text-align:left;padding:0 8px;letter-spacing:.3px}
+td{background:var(--surface);padding:8px;vertical-align:middle}
+td:first-child{border-radius:10px 0 0 10px}td:last-child{border-radius:0 10px 10px 0}
+tr{cursor:pointer}tr[aria-selected="true"] td{background:color-mix(in srgb,var(--accent) 14%,var(--surface))}
+td .nm{font:500 14px var(--font)}td .g{font:400 11px var(--font);color:var(--soft)}
+.bar{display:flex;gap:2px;align-items:flex-end;height:22px}
+.bar i{width:7px;border-radius:2px;background:var(--accent)}
+.bar.before i{background:#bfae98}
+.tot{font:700 13px var(--font);margin-left:6px}
+.v{font:500 12px var(--font)}.v.kept{color:var(--good)}.v.replaced{color:var(--accent)}.v.cut{color:var(--cut)}.v.new{color:var(--new)}
+.note{color:var(--soft);font-size:12.5px}
+@media (max-width:760px){.panes{height:46vh}.hide-s{display:none}.labels small{display:none}}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+<main>
+ <h1>Every move, before and after</h1>
+ <p class="lede" id="lede"></p>
+ <div class="sum" id="sum"></div>
+ <section class="stage">
+  <div class="panes"><canvas id="c" aria-label="The move before, after, and its reference clip"></canvas>
+   <div class="labels"><div id="lb"></div><div id="la"></div><div id="lr"></div></div></div>
+  <div class="row"><span class="now" id="now"></span><span id="bodies"></span></div>
+ </section>
+ <table><thead><tr><th>Move</th><th class="hide-s">Before</th><th>After</th><th>Verdict</th><th class="hide-s">Why</th></tr></thead><tbody id="list"></tbody></table>
+</main>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {toonify, TOON_LOOKS} from '/simulations/toon-kit.mjs';
+import {MOVES, GENRES, byId} from './moves.mjs';
+import {loadBody} from './bodies.mjs';
+import {loadMocap} from './mocap.mjs';
+
+const $ = s => document.querySelector(s), BASE = new URL('./', location.href);
+const R = await fetch('review.json').then(r => r.json());
+const mocap = await loadMocap(T, BASE);
+const SRC = {hand: 'Hand-keyed', cmu: 'CMU motion capture', quaternius: 'Quaternius game animation'};
+$('#lede').textContent = R.about;
+const count = v => R.moves.filter(m => m.verdict === v).length;
+$('#sum').innerHTML = [['kept', 'kept'], ['replaced', 'replaced with better motion'], ['new', 'new'], ['cut', 'cut']]
+ .map(([v, w]) => `<span class="chip ${v}">${count(v)} ${w}</span>`).join('') + `<span class="chip">${R.moves.length - count('cut')} on offer</span>`;
+
+// three panes on one canvas: before, after, the reference clip
+const canvas = $('#c'), renderer = new T.WebGLRenderer({canvas, antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.setScissorTest(true);
+function pane(sky) {
+ const scene = new T.Scene(); scene.background = new T.Color(sky);
+ const sun = new T.DirectionalLight('#fff1dc', 2.6); sun.position.set(2.5, 5, 3.5); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+ Object.assign(sun.shadow.camera, {left: -2, right: 2, top: 3, bottom: -1}); sun.shadow.bias = -.0004;
+ const floor = new T.Mesh(new T.CircleGeometry(3, 48), new T.MeshStandardMaterial({color: '#e3cba8', roughness: 1}));
+ floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true;
+ scene.add(new T.HemisphereLight('#dfe9ff', '#b9906a', 1.1), sun, floor);
+ const camera = new T.PerspectiveCamera(30, 1, .05, 60); camera.position.set(1.6, 1.25, 4.3); camera.lookAt(0, .9, 0);
+ return {scene, camera, actor: null};
+}
+const P = [pane('#efe4d2'), pane('#efe4d2'), pane('#e9e3f2')];
+const loader = new GLTFLoader();
+let bodyId = 'red', sel = R.moves[0], t0 = performance.now() / 1000;
+async function setBody(id) {
+ bodyId = id;
+ for (const p of P.slice(0, 2)) {
+  if (p.actor) p.scene.remove(p.actor.object);
+  p.actor = await loadBody(T, loader, id, BASE); p.scene.add(p.actor.object); toonify(T, p.actor.object, TOON_LOOKS.sunday);
+ }
+ document.querySelectorAll('[data-body]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.body === id)));
+}
+// the reference: the Quaternius clip played on its own rig, untouched
+const ref = await loader.loadAsync('/animation-study-assets/AnimationLibrary_Godot_Standard.gltf');
+ref.scene.traverse(o => { if (o.isMesh) { o.castShadow = true; o.frustumCulled = false; } });
+const box = new T.Box3().setFromObject(ref.scene); ref.scene.scale.setScalar(1.8 / (box.max.y - box.min.y));
+P[2].scene.add(ref.scene);
+const mixer = new T.AnimationMixer(ref.scene);
+
+$('#bodies').innerHTML = [['red', 'Red brute'], ['blue', 'Blue brute']]
+ .map(([id, n]) => `<button data-body="${id}" aria-pressed="false">${n}</button>`).join(' ');
+document.querySelectorAll('[data-body]').forEach(b => b.onclick = () => setBody(b.dataset.body));
+
+const bars = (s, cls) => s ? `<span style="display:inline-flex;align-items:flex-end"><span class="bar ${cls}">${s.map(v => `<i style="height:${v * 4 + 2}px" title="${v}"></i>`).join('')}</span><span class="tot">${s.reduce((a, b) => a + b, 0)}</span></span>` : '<span class="note">—</span>';
+const list = $('#list');
+for (const m of R.moves) {
+ const mv = byId[m.id], g = GENRES.find(x => x.id === mv.genre);
+ const tr = document.createElement('tr'); tr.dataset.id = m.id;
+ tr.innerHTML = `<td><div class="nm">${mv.name}</div><div class="g">${g.name}</div></td><td class="hide-s">${bars(m.beforeScores, 'before')}</td>
+  <td>${bars(m.afterScores, 'after')}</td><td><span class="v ${m.verdict}">${m.verdict}</span></td><td class="hide-s note">${m.note}</td>`;
+ tr.onclick = () => choose(m);
+ list.appendChild(tr);
+}
+const clipOf = (src, id) => src === 'hand' ? byId[id] : src === 'cmu' ? (mocap[id]?.by === 'cmu' ? mocap[id] : mocap['cmu_' + id]) : src === 'quaternius' ? mocap[id] : null;
+function choose(m) {
+ sel = m; t0 = performance.now() / 1000;
+ document.querySelectorAll('tr[data-id]').forEach(r => r.setAttribute('aria-selected', String(r.dataset.id === m.id)));
+ const mv = byId[m.id];
+ $('#now').textContent = mv.name;
+ const sc = s => s ? ` · ${s.reduce((a, b) => a + b, 0)} / 30` : '';
+ $('#lb').innerHTML = `<b>Before</b><small>${m.before ? SRC[m.before] + sc(m.beforeScores) : 'not in the studio before'}</small>`;
+ $('#la').innerHTML = m.after ? `<b>After</b><small>${SRC[m.after]}${sc(m.afterScores)}</small>` : `<b>After</b><small>cut</small><span class="msg">${m.note}</span>`;
+ const after = m.after && mocap[m.id];
+ mixer.stopAllAction(); ref.scene.visible = false;
+ if (m.after === 'quaternius' || (!m.after && mocap[m.id]?.by === 'quaternius')) {
+  const name = mocap[m.id].source, clip = ref.animations.find(a => a.name === name);
+  if (clip) { mixer.clipAction(clip).reset().play(); ref.scene.visible = true; }
+  $('#lr').innerHTML = `<b>Reference</b><small>the original clip, ${name.replace(/_/g, ' ')}, on its own rig</small>`;
+ } else if (m.after === 'cmu' || m.before === 'cmu') {
+  const take = (clipOf('cmu', m.id) || {}).source || '';
+  $('#lr').innerHTML = `<b>Reference</b><small>CMU take ${take}</small><span class="msg">The capture itself: <a href="http://mocap.cs.cmu.edu/search.php?subjectnumber=${parseInt(take)}" target="_blank" rel="noopener">subject ${parseInt(take)} at CMU</a></span>`;
+ } else $('#lr').innerHTML = `<b>Reference</b><small>none</small>`;
+ const s = new URL(location.href); s.hash = m.id; try { history.replaceState(null, '', s); } catch {}
+}
+function play(p, src) {
+ if (!p.actor) return;
+ const c = src && clipOf(src, sel.id);
+ p.actor.object.visible = !!c;
+ if (!c) return;
+ const t = (performance.now() / 1000 - t0) % c.len, pose = c.fn(t);
+ if (pose.root) pose.root = [0, pose.root[1], 0]; // on the spot, so the three panes stay side by side
+ p.actor.pose(pose);
+}
+const clock = new T.Clock();
+function frame() {
+ requestAnimationFrame(frame);
+ const r = canvas.getBoundingClientRect(), w = r.width, h = r.height;
+ if (canvas.width !== Math.round(w * renderer.getPixelRatio())) renderer.setSize(w, h, false);
+ const dt = clock.getDelta(); mixer.update(dt);
+ play(P[0], sel.before); play(P[1], sel.after);
+ P.forEach((p, i) => {
+  const x = Math.round(w * i / 3), pw = Math.round(w / 3);
+  p.camera.aspect = pw / h; p.camera.updateProjectionMatrix();
+  renderer.setViewport(x, 0, pw, h); renderer.setScissor(x, 0, pw, h); renderer.render(p.scene, p.camera);
+ });
+}
+await setBody('red');
+choose(R.moves.find(m => m.id === location.hash.slice(1)) || R.moves[0]);
+frame();
+window.review = {choose: id => choose(R.moves.find(m => m.id === id)), setBody};
+</script>
+<!-- the context card, only when opened on its own (inside the studio its own card is already showing) -->
+<script>if (self === top) { const s = document.createElement('script'); s.type = 'module'; s.src = '/look/context-card.mjs'; s.dataset.contextStudy = 'character-studio'; document.body.append(s); }</script>
+</body>
+</html>

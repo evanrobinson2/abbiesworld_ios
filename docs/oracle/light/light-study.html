@@ -1,0 +1,602 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>AW-STUDY-0052 - Light Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a review board in the same format as AW-STUDY-0045. Each look is one card: live scene left, reading and your pick right; stacks on phones. */
+:root{
+  --bg:#edf0f5; --plate:#ffffff; --ink:#1b2433; --soft:#56627a; --line:#d4dbe6;
+  --pink:#c42e6b; --teal:#1f7f84; --gold:#a8720e; --love:#c42e6b; --maybe:#a8720e; --pass:#6b778c;
+  --display:"Fredoka",ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1520; --plate:#172031; --ink:#e7ecf4; --soft:#9eabc1; --line:#2a364b;
+  --pink:#f0679c; --teal:#4cc0c4; --gold:#e4b04a; --love:#f0679c; --maybe:#e4b04a; --pass:#8f9bb0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1520; --plate:#172031; --ink:#e7ecf4; --soft:#9eabc1; --line:#2a364b;
+  --pink:#f0679c; --teal:#4cc0c4; --gold:#e4b04a; --love:#f0679c; --maybe:#e4b04a; --pass:#8f9bb0; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 80px}
+main{max-width:1120px;margin:0 auto;display:grid;gap:48px}
+.col{max-width:700px;width:100%;margin:0 auto;min-width:0}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.08;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.8rem)}
+h1 em{font-style:normal;color:var(--pink)}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
+p,ul{margin:0}
+ul{padding-left:1.1em;display:grid;gap:4px}
+.stack{display:grid;gap:14px}
+.eyebrow{font:600 .76rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.lede{font-size:1.15rem;color:var(--soft)}
+.meta{font:500 .86rem var(--display);color:var(--soft)}
+a{color:var(--teal);text-underline-offset:3px}
+code{font:400 .85em var(--mono)}
+.plate{position:relative;border-radius:20px;overflow:hidden;background:#111827;aspect-ratio:4/3;max-width:100%;
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 18px 40px -24px rgba(20,30,50,.5)}
+.plate.wide{aspect-ratio:16/9}
+.plate canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.split{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.15);pointer-events:none}
+.tag{position:absolute;top:12px;font:600 .7rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.88);color:#1b2433;pointer-events:none}
+.tag.l{left:12px}.tag.r{right:12px}
+.tally{display:flex;flex-wrap:wrap;gap:10px;font:600 .9rem var(--display)}
+.tally span{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--plate)}
+.tally b{font-variant-numeric:tabular-nums}
+.card{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px 28px;align-items:start;background:var(--plate);border:1px solid var(--line);border-radius:24px;padding:18px}
+@media (max-width:820px){.card{grid-template-columns:1fr}}
+.card>*{min-width:0}
+.card .head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.rank{font:700 1rem var(--mono);color:var(--pink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:500 .76rem var(--display);padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--teal) 12%,transparent);color:var(--teal)}
+.tags span.lib{background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold)}
+.card h4{font:600 .78rem var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:0}
+.card .fit{border-left:3px solid var(--pink);padding-left:12px}
+.card .src{font-size:.84rem;color:var(--soft)}
+.card .src a{word-break:break-word}
+.pick{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 .88rem var(--display);border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed=true][data-v=love]{background:var(--love);border-color:var(--love);color:#fff}
+.chip[aria-pressed=true][data-v=maybe]{background:var(--maybe);border-color:var(--maybe);color:#fff}
+.chip[aria-pressed=true][data-v=pass]{background:var(--pass);border-color:var(--pass);color:#fff}
+.chip:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+textarea{width:100%;min-height:62px;resize:vertical;font:400 .95rem var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 11px}
+.saved{font:500 .78rem var(--display);color:var(--soft);min-height:1em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding-top:10px;font:500 .86rem var(--display);color:var(--soft)}
+.ctl input[type=range]{flex:1;min-width:140px;max-width:340px;accent-color:var(--pink)}
+.ctl button{font:600 .85rem var(--display);border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 .76rem var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+td:first-child{font:700 .9rem var(--mono);color:var(--pink)}
+td:nth-child(2){font-family:var(--display);font-weight:600}
+.mx td:nth-child(2){white-space:normal}
+.designcard{background:var(--plate);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:8px;font-size:.98rem}
+.designcard b{font-family:var(--display);font-weight:600}
+.note{font-size:.88rem;color:var(--soft)}
+.fallback{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:20px;color:#fff;font:500 .95rem var(--display);background:#1b2433}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<main>
+<header class="col stack" style="gap:18px">
+  <span class="eyebrow">AW-STUDY-0052 · Light study · 23 Oct 2026</span>
+  <h1>How great games <em>build their light</em>, live on our ranch</h1>
+  <p class="lede">Fourteen lighting looks from modern games, each one rebuilt in three.js on our own ranch, Winchester, café, basement, Moon base and Halloween scenes. Orbit any of them. Pick the ones you love and leave a note on any card; I read the picks back and plan the in-game version from them.</p>
+  <div class="tally" id="tally" aria-live="polite"><span>Loved <b id="tLove">0</b></span><span>Maybe <b id="tMaybe">0</b></span><span>Not for us <b id="tPass">0</b></span><span id="tSave" class="meta" style="border:0;background:none;padding:6px 0"></span></div>
+</header>
+
+<section class="stack" style="gap:14px">
+  <div class="col stack">
+    <span class="eyebrow">Same camera, before and after</span>
+    <h2>One ranch, one day, two ways to light it</h2>
+    <p>Left is a flat sun-and-ambient rig, the plain way to light a three.js scene. Right is the first pick, soft sky bounce, driven by one time-of-day signal. Drag the slider from dawn to night: sun colour, sky, fog, shadow tint, lamp and window glow, and stars all move together, because they are one signal and not a dozen switches.</p>
+  </div>
+  <div class="plate wide" data-demo="hero"><canvas aria-label="The ranch lit two ways: a flat rig on the left, soft sky bounce with a time-of-day slider on the right"></canvas><div class="split"></div><span class="tag l">Flat rig</span><span class="tag r">Soft sky bounce</span><div class="fallback">This view needs WebGL.</div></div>
+  <div class="col"><div class="ctl"><label for="heroT">Time of day</label><input id="heroT" type="range" min="0" max="1" step="0.001" value="0.42"><span id="heroName" class="meta" style="min-width:5em"></span><button id="heroPlay" type="button">Play the day</button></div></div>
+</section>
+
+<section class="col stack">
+  <span class="eyebrow">How to review</span>
+  <p>Each card says what makes the light, how studios build it (from talks, breakdowns and the Oracle's notes on the games we own), what our live version does, and where it would live in Abbie's World. The rank is my recommendation. Every look is only numbers: a sun, a sky, a ground bounce, fog, a few warm lamps, a rim, a shadow softness and a colour grade. That is why they stay fast and why one game signal can drive any of them.</p>
+  <p class="note">Performance bar: the tile-placement standard. One shadow map, three point lights at most (no shadows), one fresnel rim in the material, fog and the grade are free (a CSS filter), no post-processing pass, and nothing is rebuilt when the light changes. Cards only draw while you can see them.</p>
+</section>
+
+<section id="cards" class="stack" style="gap:22px"></section>
+
+<section class="stack" style="gap:16px">
+  <div class="col stack">
+    <span class="eyebrow">How each one builds its light</span>
+    <h2>The recipe, game by game</h2>
+    <p>Read from public talks, interviews and the Oracle's "how it's drawn" fields. Where a studio hasn't said how, the cell shows what the image does, not a claim about their engine.</p>
+  </div>
+  <div class="tablewrap col" style="max-width:1120px"><table class="mx"><thead><tr><th>Game</th><th>Key</th><th>Fill and bounce</th><th>Rim</th><th>Air</th><th>Shadow</th><th>Lamps and windows</th><th>Grade</th></tr></thead><tbody id="matrix"></tbody></table></div>
+</section>
+
+<section class="stack" style="gap:16px">
+  <div class="col stack">
+    <span class="eyebrow">Ranked shortlist</span>
+    <h2>What I'd build first</h2>
+    <p>The first three change how the world feels to a child, not just how it looks: soft light that never goes black, one clock that drives everything, and the long golden hour that tells you the day is ending. The Halloween look is last on the list but the most fun: orange pools of light on a purple dusk, never dark.</p>
+  </div>
+  <div class="tablewrap col" style="max-width:1120px"><table><thead><tr><th>#</th><th>Look</th><th>Why for Abbie's World</th><th>Where</th><th>Cost</th></tr></thead><tbody id="shortRows"></tbody></table></div>
+</section>
+
+<section class="col stack">
+  <span class="eyebrow">Where it connects</span>
+  <ul>
+    <li><b>Look canon.</b> <code>docs/design/look/LOOK.md</code> says every page sits under the world's own sky at its time of day, and glass is a lens that shows that sky. These looks are the sky: the page background, the glass and the world read the same signal.</li>
+    <li><b>Shader threads.</b> Painted Brush, Watercolour and Paint-the-world (AW-STUDY-0045) decide how a surface answers light. This study decides the light that arrives. They multiply: Painted Brush wants a warm key and a teal rim; Watercolour wants high, flat, low-contrast light; Paint-the-world wants the hard, saturated beat rig. Each look here lists its match.</li>
+    <li><b>Nothing masks the world.</b> No vignette, no edge haze, no backdrop blur. Fog is in the world and thins toward the player; the grade is colour only.</li>
+  </ul>
+</section>
+
+<section class="col stack">
+  <span class="eyebrow">Design card</span>
+  <div class="designcard">
+    <p><b>What the player feels or knows:</b> "It's morning, it's getting late, the café is warm, the Moon is cold and hard, and it's Halloween."</p>
+    <p><b>How would the character know?</b> The light is the world: long shadows, warm windows, lamps that come on, a hard white sun with no air on the Moon. Nobody reads a number.</p>
+    <p><b>Mode:</b> none and diegetic. Light is how the world is, never an interface. The grade and the time slider here are grown-up tools; players only ever see the day.</p>
+    <p><b>Who it's for:</b> the player (the child). The pick board is a grown-up tool.</p>
+    <p><b>The whole game adapts:</b> one clock value picks a point on the day, and sky, sun, shadow tint, fog, lamps, window glow, music and animals all read it. Place dialects change the keys, not the grammar: the Ranch is wood and bells, the café is warm window light, the Moon base is hard sun and cold fill with lamp-lit rooms.</p>
+    <p><b>Halloween:</b> playful-tense, never scary. A violet dusk, orange pools of light, low friendly fog. The floor of the exposure is high enough that nothing hides.</p>
+  </div>
+  <p class="note">Style, never expression: every scene is built from our own primitives and models. No game screenshots, textures, shaders or code were used. Sources are public talks and articles, linked on each card.</p>
+</section>
+<aside class="ctx-aside" style="max-width:340px;margin:24px 0 24px auto"><style>/* The context engineering card (look/context-card.mjs). Uses the --aw-* tokens from theme/boot.js. */
+.ctx-card{display:grid;gap:10px;font:14px/1.45 var(--aw-font,system-ui,sans-serif);color:var(--aw-ink,#2b211a)}
+.ctx-card h3{margin:0;font:600 17px/1.2 var(--aw-display,inherit)}
+.ctx-lead{margin:0;color:var(--aw-soft,#6b5d52)}
+.ctx-kind{border:1px solid var(--aw-line,#0002);border-radius:14px;background:var(--aw-bg,#fff);padding:0 12px}
+.ctx-kind summary{display:flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none}
+.ctx-kind summary::-webkit-details-marker{display:none}
+.ctx-kind summary::after{content:'';margin-left:auto;width:7px;height:7px;border:solid var(--aw-soft,#6b5d52);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.ctx-kind[open] summary::after{transform:rotate(-135deg)}
+.ctx-kind summary b{font-weight:600}
+.ctx-kind summary i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--aw-accent,#7a4b2a);color:var(--aw-on-accent,#fff)}
+.ctx-kind summary i:empty{display:none}
+.ctx-kind ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+.ctx-kind li{display:grid;gap:1px}
+.ctx-kind a{color:var(--aw-ink,#2b211a);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 30%,transparent);text-underline-offset:2px}
+.ctx-kind a:hover{text-decoration-color:currentColor}
+.ctx-kind small{color:var(--aw-soft,#6b5d52);font-size:12px}
+.ctx-none{margin:0 0 10px;color:var(--aw-soft,#6b5d52);font-style:italic}
+.ctx-foot{margin:0;font-size:12px;color:var(--aw-soft,#6b5d52)}
+.ctx-foot a{color:inherit}
+</style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
+  <p class="ctx-lead">What this study drew on.</p>
+  <details class="ctx-kind" open><summary><b>Oracle consultation</b><i>5</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/rendering/RENDERING_STUDY.md" target="_blank" rel="noopener">Oracle: how it&#39;s drawn (identity.rendering on 368 games)</a><small>Light families per game; used to pick the looks</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=tiny-glade" target="_blank" rel="noopener">Oracle: Tiny Glade</a><small>Applied: soft sky and ground bounce, no black shadows</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=steam-683320" target="_blank" rel="noopener">Oracle: GRIS</a><small>Applied: flat pastel wash, one palette per chapter</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=steam-753640" target="_blank" rel="noopener">Oracle: Outer Wilds</a><small>Applied: hard sun with no air, campfire against cold night</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=steam-1562430" target="_blank" rel="noopener">Oracle: DREDGE</a><small>Applied, tuned down: lantern pools for the Halloween mood</small></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i>5</i></summary>
+   <ul><li><a href="https://media.gdcvault.com/gdc2016/Presentations/Ng_Jane_MakingTheWorld.pdf" target="_blank" rel="noopener">GDC 2016: Making the world of Firewatch (Jane Ng)</a><small>Applied: sky colours first, layered fog depth, time-of-day tables</small></li><li><a href="https://www.gamedeveloper.com/design/using-vorticles-to-simulate-wind-in-i-ghost-of-tsushima-i-" target="_blank" rel="noopener">Game Developer: vorticles and wind in Ghost of Tsushima</a><small>Read for the golden-hour world that the wind and light share</small></li><li><a href="https://gdcvault.com/play/1034251/3D-Toon-Rendering-in-Hi" target="_blank" rel="noopener">GDC 2024: 3D toon rendering in Hi-Fi Rush</a><small>Applied: hard bands and the world pulsing on the beat</small></li><li><a href="https://unity.com/resources/crafting-dredge-cozy-atmospheric-horror" target="_blank" rel="noopener">Unity: crafting Dredge&#39;s cozy atmospheric horror</a><small>Applied: fog and lantern pools, kept cosy</small></li><li><a href="https://www.gamedeveloper.com/design/the-challenges-of-laying-worlds-upon-worlds-in-puzzle-game-cocoon" target="_blank" rel="noopener">Game Developer: layering worlds in Cocoon</a><small>Applied: one colour and one light per world</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i>6</i></summary>
+   <ul><li><a href="https://www.thumbsticks.com/gdc-2015-the-art-of-firewatch/" target="_blank" rel="noopener">Thumbsticks: GDC 2015, the art of Firewatch</a></li><li><a href="https://www.mobiusdigitalgames.com/news/changing-the-outer-wilds-art-style" target="_blank" rel="noopener">Mobius Digital: changing the Outer Wilds art style</a></li><li><a href="https://www.creativereview.co.uk/watercolour-paintings-come-to-life-in-platform-game-gris/" target="_blank" rel="noopener">Creative Review: Gris, watercolour comes to life</a></li><li><a href="https://80.lv/articles/tiny-glade-s-update-with-movable-clutter-multiple-lights-is-here" target="_blank" rel="noopener">80.lv: Tiny Glade lighting update</a></li><li><a href="https://www.muchopixels.com/post/angus-doolan-interview" target="_blank" rel="noopener">Muchopixels: Angus Doolan on Unpacking</a><small>Applied: warm window light as the room&#39;s clock</small></li><li><a href="https://gamesbeat.com/polyarcs-moss-hides-clever-vr-game-design-under-its-cuteness/" target="_blank" rel="noopener">GamesBeat: Polyarc&#39;s Moss</a></li></ul></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i>3</i></summary>
+   <ul><li><a href="https://www.alanzucconi.com/2019/10/08/journey-sand-shader-1/" target="_blank" rel="noopener">Alan Zucconi: Journey&#39;s sand shader, part 1</a><small>Applied: backlight, warm bounce, rim</small></li><li><a href="https://slidetodoc.com/sand-rendering-in-journey-john-edwards-thatgamecompany-shipping/" target="_blank" rel="noopener">thatgamecompany: sand rendering in Journey (slides)</a></li><li><a href="https://80.lv/articles/the-making-of-hi-fi-rush-s-3d-toon-rendering-style" target="_blank" rel="noopener">80.lv: the making of Hi-Fi Rush&#39;s toon style</a></li></ul></details><details class="ctx-kind" open><summary><b>Our canon</b><i>4</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/look/LOOK.md" target="_blank" rel="noopener">LOOK.md: the Abbie&#39;s World look</a><small>The sky behind every page; no masks, no vignette</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md" target="_blank" rel="noopener">AW-STUDY-0045 Inspiring Shaders</a><small>Painted Brush, Watercolour and Paint-the-world pair with these lights</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/storybook/STORYBOOK_STUDY.md" target="_blank" rel="noopener">AW-STUDY-0028 Storybook Light</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/light/LIGHT_STUDY.md" target="_blank" rel="noopener">This study&#39;s doc</a></li></ul></details>
+  <p class="ctx-foot">Recorded 2026-10-23, as the study was made. <a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
+<p class="ctx-foot"><a href="https://app.abbies.world/studies/#light">Live study page</a></p></aside>
+
+</main>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/controls/OrbitControls.js":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+/* ================= rigs: a look is only numbers ================= */
+const DEF={sunC:'#fff4e0',sunI:2.4,az:40,el:50,hemiSky:'#b5d6f4',hemiGnd:'#b8d07c',hemiI:1.1,fogC:'#dcebf5',fogD:.006,skyTop:'#7fbdf0',skyHor:'#e4f0f6',
+ ptC:'#ffc77a',ptI:0,glow:0,rimC:'#fff1d6',rimI:.25,ray:0,shR:5,shOn:1,sat:1,con:1,bri:1,hue:0,sep:0,stars:0,ground:'#7fae5a',exp:1,tm:'neutral',beat:0,flick:0};
+const L=o=>({...DEF,...o});
+const KEYS=[ // the day, one signal: 0 dawn .. 1 night
+ {t:0,   n:'Dawn',    l:L({sunC:'#ffb48a',sunI:1.7,az:100,el:8, hemiSky:'#9aa7d8',hemiGnd:'#d6a07e',hemiI:.9,fogC:'#f2c1a6',fogD:.013,skyTop:'#7b86c4',skyHor:'#ffc6a0',ptI:10,glow:.7,rimC:'#ffd0a8',rimI:.6,ray:.5,shR:6,sat:1.1,tm:'aces',stars:.1})},
+ {t:.2,  n:'Morning', l:L({sunC:'#fff0d2',sunI:2.3,az:80, el:30,hemiSky:'#b5d6f4',hemiGnd:'#b8d07c',hemiI:1.1,fogC:'#dcebf5',fogD:.006,skyTop:'#8ac4f0',skyHor:'#e8f2f7',rimI:.3,ray:.25,shR:6})},
+ {t:.42, n:'Noon',    l:L({sunC:'#fffaf0',sunI:2.7,az:40, el:62,hemiSky:'#a9d2f5',hemiGnd:'#a8c870',hemiI:1.2,fogC:'#d6e8f5',fogD:.005,skyTop:'#6fb4ee',skyHor:'#dcecf6',rimI:.2,shR:7})},
+ {t:.68, n:'Golden hour',l:L({sunC:'#ffb45e',sunI:3.2,az:-45,el:14,hemiSky:'#8fa8d8',hemiGnd:'#d49a5a',hemiI:.85,fogC:'#f2c08e',fogD:.011,skyTop:'#6f8fd0',skyHor:'#ffd29a',glow:.3,rimC:'#ffc27a',rimI:1,ray:.7,shR:5,sat:1.18,tm:'aces'})},
+ {t:.84, n:'Dusk',    l:L({sunC:'#ff7a4a',sunI:1.5,az:-80,el:3, hemiSky:'#6a5ca8',hemiGnd:'#c8693a',hemiI:.7,fogC:'#d98070',fogD:.016,skyTop:'#3c3374',skyHor:'#ff8a5a',ptI:16,glow:1.2,rimC:'#ff9a6a',rimI:.8,ray:.35,stars:.12,sat:1.15,tm:'aces'})},
+ {t:1,   n:'Night',   l:L({sunC:'#7f98e0',sunI:.6,az:-60,el:40,hemiSky:'#2a3b72',hemiGnd:'#1e2540',hemiI:.65,fogC:'#0e1633',fogD:.009,skyTop:'#050a22',skyHor:'#1b2850',ptI:26,glow:1.6,rimC:'#6a8cff',rimI:.5,stars:1,exp:1.15,tm:'aces'})}];
+const mixC=(a,b,t)=>'#'+new THREE.Color(a).lerp(new THREE.Color(b),t).getHexString();
+function mixL(a,b,t){const o={...a};for(const k in a){const x=a[k],y=b[k];if(typeof x==='number')o[k]=x+(y-x)*t;else if(typeof x==='string'&&x[0]==='#')o[k]=mixC(x,y,t);else o[k]=t<.5?x:y;}return o;}
+function dayAt(t){t=Math.min(1,Math.max(0,t));let i=0;while(i<KEYS.length-2&&t>KEYS[i+1].t)i++;const a=KEYS[i],b=KEYS[i+1],u=(t-a.t)/(b.t-a.t);
+ return {l:mixL(a.l,b.l,u*u*(3-2*u)),n:u<.5?a.n:b.n};}
+
+const LOOKS=[
+ {id:'softbounce',rank:1,name:'Soft sky bounce',game:'Tiny Glade',studio:'Pounce Light, 2024',tags:['soft light','ground bounce','no black'],lib:true,scene:'ranch',
+  l:L({}),
+  what:'Clean shapes under a soft sun and a big pale sky, with the ground bouncing its own colour back up so the shadow side is green-blue and warm, never black. Nothing is outlined, nothing is harsh. It reads as a handmade model village.',
+  how:['Sun plus a sky-and-ground bounce: shadow sides keep colour because the sky tints them and the grass lights them from below.','Wide, soft shadow edges and dark soft contact where things meet the ground.','Reported as real-time bounce light that follows what you build, so changing a wall changes the glow beside it.'],
+  ours:'One sun with a 7-wide soft shadow, a sky/ground hemisphere as the bounce, neutral tone mapping, a faint fresnel rim. No post-processing.',
+  fit:'This is the Ranch default and the base every other look departs from. Painted Brush and Watercolour both sit on top of it. Cheapest look in the set.',where:'Ranch, free building, tiles',cost:'light',
+  src:[['Oracle: Tiny Glade, how it\'s drawn','https://abbies-game-oracle.vercel.app/game?id=tiny-glade'],['80.lv: Tiny Glade lighting update','https://80.lv/articles/tiny-glade-s-update-with-movable-clutter-multiple-lights-is-here']]},
+ {id:'winchesterday',rank:2,name:'A day in Winchester',game:'Time-of-day palettes (Firewatch, Ghost of Tsushima)',studio:'Campo Santo, Sucker Punch',tags:['time of day','one signal','diorama'],scene:'town',tod:true,
+  l:null,
+  what:'The three Winchester dioramas keep one clock. Dawn is peach and low, noon is clear, golden hour is long and orange, dusk goes violet as the street lamps and café windows come on, night is blue with warm windows. Drag the slider under the picture.',
+  how:['Each part of the day is a short table of numbers (sun colour, sky pair, bounce, fog, lamp and window glow, stars). The game blends between neighbours by the clock.','Firewatch pushes a whole day into a handful of gradient skies; the art team paints the sky colours first and lights everything from them.','Warm glass comes on as the sun goes: the window glow is a number in the same table, so it needs no scripting.'],
+  ours:'Six key tables blended with a smooth step, 3 street-lamp point lights, windows and lamp bulbs as one glow value. Same code as the hero.',
+  fit:'This is the spine for the three regions: Downtown, Ani\'s side, and Abbie and Daddy\'s side each get their own key tables (same grammar, different palette), and the clock also moves music, animals and the people going home. It is the answer to "how does the game know it is late" with no HUD.',where:'Winchester dioramas, Ranch',cost:'light',
+  src:[['GDC 2016: Making the world of Firewatch (Jane Ng)','https://media.gdcvault.com/gdc2016/Presentations/Ng_Jane_MakingTheWorld.pdf'],['GDC 2015: the art of Firewatch (notes)','https://www.thumbsticks.com/gdc-2015-the-art-of-firewatch/']]},
+ {id:'goldenhour',rank:3,name:'Golden hour sweep',game:'Ghost of Tsushima',studio:'Sucker Punch, 2020',tags:['golden hour','god rays','rim'],scene:'ranch',
+  l:L(KEYS[3].l),
+  what:'A low, saturated orange sun with long soft shadows, cool blue in the shade, a warm rim on every edge, and shafts of light through the air. The sun is a place to walk toward.',
+  how:['Low sun with a strong warm key and a deliberately cool sky fill, so warm and cool fight on every surface.','Warm glow through atmosphere: fog takes the sun\'s colour near the horizon.','Light shafts are cheap soft planes in the air, not a full volumetric pass.'],
+  ours:'Sun at 14°, orange key, blue sky bounce, tinted fog, a fresnel rim, six crossed light-shaft planes, ACES tone mapping and a +18% saturation grade.',
+  fit:'The look for the last hour before bells: sheep heading home, the barn glowing. Pairs with Painted Brush (warm key, cool rim). Keep the shafts subtle for small screens.',where:'Ranch evening, Winchester golden hour',cost:'light',
+  src:[['GDC: vorticles and wind in Ghost of Tsushima','https://www.gamedeveloper.com/design/using-vorticles-to-simulate-wind-in-i-ghost-of-tsushima-i-']]},
+ {id:'windowlight',rank:4,name:'Window shaft café',game:'Unpacking and Annapurna rooms',studio:'Witch Beam, 2021',tags:['interior','window light','warm'],scene:'cafe',
+  l:L({sunC:'#ffe2a8',sunI:3.4,az:-90,el:34,hemiSky:'#ffe9cf',hemiGnd:'#c98a5a',hemiI:.42,fogC:'#e9cfa8',fogD:.004,skyTop:'#9ed0f2',skyHor:'#f3ead8',ptC:'#ffc277',ptI:16,glow:1,rimC:'#ffd9a8',rimI:.3,ray:.8,shR:3,sat:1.1,con:1.04,tm:'aces'}),
+  what:'One big window throws a warm patch of sun across the floor and you can see the dust in it. The pendants add small pools of amber. The room tells you the time by where the patch lies.',
+  how:['A single hard key through the window, the only sharp shadow in the room; everything else is soft bounce off warm walls.','Pendant lamps are small warm points that stay on all day, so the room is never cold.','Pixel-art games like Unpacking paint the same idea by hand: window light as a warm shape that moves around the day.'],
+  ours:'Sun shining through a real hole in the wall (the wall casts the shadow), three amber point lights, light-shaft planes starting at the window, low fill so the shaft reads.',
+  fit:'The café\'s whole mood. The window patch moves with the clock, so a regular could tell the time by it; the income statement the grown-ups see sits in the same room without a UI. Matches the Coffee Shop studies.',where:'Café, Grace\'s basement stairs, house interiors',cost:'light',
+  src:[['Muchopixels: Angus Doolan on Unpacking','https://www.muchopixels.com/post/angus-doolan-interview']]},
+ {id:'beat',rank:5,name:'On the beat',game:'Hi-Fi Rush',studio:'Tango Gameworks, 2023',tags:['rhythm','saturated','hard shadows'],scene:'ranch',
+  l:L({sunC:'#fff0c0',sunI:3,az:30,el:55,hemiSky:'#9fd8ff',hemiGnd:'#ff9ad8',hemiI:1.1,fogC:'#cfeaff',fogD:.0018,skyTop:'#2d9cff',skyHor:'#ffd36a',rimC:'#27e0ff',rimI:1.8,shR:1,sat:1.5,con:1.15,tm:'none',beat:1}),
+  what:'Poster-bright colour, hard clean shadows, cyan and magenta kicks on every edge, and the whole scene pulses on the beat of the song.',
+  how:['Two hard light bands and saturated colour ramps, with a cartoon outline.','The world lights up on the beat: a pulse drives light intensity, rim and props together.','Colour is chosen first as a palette, then lit.'],
+  ours:'A hard 1-wide shadow, cyan rim, magenta ground bounce, no tone mapping, +50% saturation, and a 2 beats-per-second pulse on fill and rim.',
+  fit:'The café dance floor and the Moon Mission arcade games. It is the loudest look, so it is for moments, not for the whole Ranch. The pulse works for children because it follows music they can feel.',where:'Café dance floor, mini-games',cost:'light',
+  src:[['GDC 2024: 3D toon rendering in Hi-Fi Rush','https://gdcvault.com/play/1034251/3D-Toon-Rendering-in-Hi'],['80.lv: making of Hi-Fi Rush\'s toon style','https://80.lv/articles/the-making-of-hi-fi-rush-s-3d-toon-rendering-style']]},
+ {id:'basementbulb',rank:6,name:'One bare bulb',game:'Single-source rooms (Cocoon, Inside)',studio:'Geometric Interactive, 2023',tags:['interior','one source','CRT glow'],scene:'basement',
+  l:L({sunC:'#7f98e0',sunI:.25,az:-60,el:40,shOn:0,hemiSky:'#4a5a86',hemiGnd:'#3a2c2c',hemiI:.2,fogC:'#241e22',fogD:.012,skyTop:'#050a22',skyHor:'#14193a',ptC:'#ffcf8a',ptI:22,glow:1.3,rimC:'#ffd9a8',rimI:.35,shR:2,sat:1.08,con:1.08,tm:'aces',flick:1}),
+  what:'A basement with one bulb on a cord, a TV glowing blue-green in the corner, and a stairwell of daylight above. Warm and cool pools overlap on old brick. Cozy, a little mysterious, never frightening.',
+  how:['One strong warm source and one small cool one: the contrast of the two colours does the mood.','The bulb flickers very slightly (noise on intensity), so the light feels alive.','Cocoon gives each world one colour and one quality of light so you always know where you are.'],
+  ours:'Warm bulb point light with a gentle flicker, a cool screen point light, no sun shadow, brick walls lit by bounce only.',
+  fit:'Grace\'s Basement uses this exactly: warm bulb for safety, the TV for memory. Coins glow because they are the brightest warm thing in the room. Keep the flicker slow for playful-tense, never scary.',where:'Grace\'s basement, attics, Daddy\'s memory places',cost:'light',
+  src:[['Game Developer: layering worlds in Cocoon','https://www.gamedeveloper.com/design/the-challenges-of-laying-worlds-upon-worlds-in-puzzle-game-cocoon'],['Super Jump: making of Cocoon\'s world','https://www.superjumpmagazine.com/the-making-of-cocoons-synth-filled-world/']]},
+ {id:'layereddusk',rank:7,name:'Layered dusk',game:'Firewatch',studio:'Campo Santo, 2016',tags:['atmospheric depth','gradient sky','fog layers'],scene:'ranch',
+  l:L({sunC:'#ff7a3a',sunI:2.4,az:-70,el:6,hemiSky:'#6a5ca8',hemiGnd:'#c8693a',hemiI:.75,fogC:'#e08060',fogD:.02,skyTop:'#3a2f6b',skyHor:'#ff8a4a',ptC:'#ffc47a',ptI:10,glow:1,rimC:'#ff9a6a',rimI:.7,ray:.3,shR:4,sat:1.2,tm:'aces'}),
+  what:'A sunset sky painted from deep violet to orange, and distant hills fading in layers of warm fog so depth reads in flat colour.',
+  how:['Sky gradient first, then everything is lit by it, so objects pick up the same orange and violet.','Fog thick enough that each ridge is one lighter step than the one in front.','Soft shadows and a limited palette; the beauty is the colour chain, not detail.'],
+  ours:'FogExp2 in sky orange, three hill layers at increasing distance, violet shade, and a gradient sky dome.',
+  fit:'Makes the Ranch feel big without extra geometry: three hill rings and fog. Use for the evening before a mission and for any "pull back to see the board" moment.',where:'Ranch, overland camera, travel',cost:'light',
+  src:[['GDC 2016: Making the world of Firewatch','https://media.gdcvault.com/gdc2016/Presentations/Ng_Jane_MakingTheWorld.pdf'],['Ctrl500: Firewatch from 2D concept to 3D','https://ctrl500.com/art/how-firewatch-translated-2d-concept-art-into-a-3d-open-world/']]},
+ {id:'journey',rank:8,name:'Rim and long shadows',game:'Journey',studio:'thatgamecompany, 2012',tags:['rim light','backlit','sand'],scene:'ranch',
+  l:L({sunC:'#ffd9a0',sunI:2.8,az:170,el:18,hemiSky:'#f4b98a',hemiGnd:'#e0a060',hemiI:.9,fogC:'#f6cfa0',fogD:.008,skyTop:'#e9a56a',skyHor:'#ffe2b0',rimC:'#fff0c8',rimI:2.4,ray:.15,shR:5,sat:1.15,con:1.05,ground:'#e3b97a',tm:'aces'}),
+  what:'The sun sits behind the subject. Every shape gets a bright edge, the ground sparkles, and the shadows run long toward you. It feels like a place you have to cross.',
+  how:['Backlight: the main light behind the object produces the bright edge; the fill is a warm bounce from the ground.','The sand looks lit from within: a warm diffuse colour, a sharp glitter highlight and a soft rim.','A very limited palette: orange, gold, deep blue.'],
+  ours:'Sun low behind the barn, strong fresnel rim, golden ground, warm fill and ACES tone mapping.',
+  fit:'Strong for the Moon base outdoors and the "journey" overlays between worlds. A little too dramatic for the home Ranch; keep it for travel and arrivals.',where:'Travel scenes, Moon surface, ride between worlds',cost:'light',
+  src:[['Alan Zucconi: Journey\'s sand shader','https://www.alanzucconi.com/2019/10/08/journey-sand-shader-1/'],['thatgamecompany sand rendering (slides)','https://slidetodoc.com/sand-rendering-in-journey-john-edwards-thatgamecompany-shipping/']]},
+ {id:'moonairlock',rank:9,name:'Hard sun, no air',game:'Outer Wilds',studio:'Mobius Digital, 2019',tags:['moon','hard shadow','airlock'],scene:'moon',cam:{p:[12,4,14],t:[0,1.4,0]},
+  l:L({ground:'#6d6d76',sunC:'#ffffff',sunI:3.4,az:30,el:25,hemiSky:'#44507a',hemiGnd:'#2a2a34',hemiI:.2,fogC:'#000006',fogD:0,skyTop:'#000004',skyHor:'#04060e',ptC:'#ff9a4a',ptI:20,glow:1.3,rimC:'#bcd4ff',rimI:.9,shR:.5,sat:.96,con:1.1,stars:1,exp:1,tm:'aces'}),
+  what:'No air means no haze: the sun is a white razor, shadows are almost black, the sky is black with stars, and any lit window or lamp is the only warmth. The airlock strip lights say "go" or "wait" in colour.',
+  how:['Hard, nearly black shadows and a tiny blue fill from the planet, because there is no atmosphere to scatter light.','Colour belongs to the lamps: orange hazard, green go, white work light.','Outer Wilds uses its sun as a hard clock that you read from the shadows.'],
+  ours:'A 5-strong white sun with a 0.5 shadow radius, very low cool fill, an orange hazard point light at the airlock, white rim.',
+  fit:'Moon base outdoors. The airlock strips are a diegetic status light: amber while the door cycles, green when it is safe. No HUD needed. Pairs with Moon Mission heroes\' faceted look.',where:'Moon base exterior, airlock, hangar',cost:'light',
+  src:[['Mobius Digital: changing the Outer Wilds art style','https://www.mobiusdigitalgames.com/news/changing-the-outer-wilds-art-style'],['Oracle: Outer Wilds','https://abbies-game-oracle.vercel.app/game?id=steam-753640']]},
+ {id:'moonhabitat',rank:10,name:'Warm window, cold ground',game:'Outer Wilds, Firewatch',studio:'Mobius, Campo Santo',tags:['moon','habitat','warm vs cold'],scene:'moon',cam:{p:[-13,4,14],t:[-1,1.8,0]},
+  l:L({ground:'#6d6d76',sunC:'#e8f0ff',sunI:2.6,az:-40,el:12,hemiSky:'#3a4a82',hemiGnd:'#26262e',hemiI:.3,fogC:'#000006',fogD:0,skyTop:'#00020e',skyHor:'#0a1230',ptC:'#ffb46a',ptI:26,glow:1.7,rimC:'#9ac0ff',rimI:1.2,shR:1,sat:1.02,con:1.05,stars:1,tm:'aces'}),
+  what:'A low cold sun on grey ground, and inside the dome a warm yellow glow in every window. The habitat feels like the only safe thing for a hundred miles, which is exactly the feeling we want kids to have about home.',
+  how:['Warm light inside, cold light outside: the colour split is the shelter.','Window glow is emissive plus a short-range point light on the ground in front of it.','A small cool rim on every edge to separate the pale shapes from the black sky.'],
+  ours:'Low cool key, blue hemisphere fill, window glow at 1.7 plus a warm point light, stars.',
+  fit:'Every Moon Mission arrival shot. When the family is inside, the glow gets a bit warmer: that one dial is how the base shows "everyone is home". Works for the Mission 1 radio scenes too.',where:'Moon base habitat, hangar, mission arrival',cost:'light',
+  src:[['Artstation: Environments of Outer Wilds','https://www.artstation.com/artwork/8l32Pw']]},
+ {id:'campfire',rank:11,name:'Campfire night',game:'Outer Wilds',studio:'Mobius Digital, 2019',tags:['night','point light','fire'],scene:'ranch',
+  l:L({...KEYS[5].l,sunI:.45,hemiI:.55,ptC:'#ff9a3c',ptI:34,glow:1.8,flick:1,rimC:'#ffb070',rimI:.9}),
+  what:'A cold blue night and one orange fire. The fire is the only warm thing, so faces and nearby things glow while the field stays deep blue. It is why the campfire scene in Outer Wilds is the one everyone remembers.',
+  how:['Warm point light with flicker against cold moonlight: complementary colour does the work.','Flame is a few emissive cones, light is a point light with soft falloff.','Stars and a pale moon for scale.'],
+  ours:'Moon directional, indigo bounce, stars, three warm point lights with flicker, a fire at the ring of stones.',
+  fit:'Campfire story time on the Ranch; the bedtime scene in Daddy\'s memories. Costs three point lights; keep fire shadows off.',where:'Ranch night, camping, bedtime memories',cost:'medium',
+  src:[['Interview with Alex Beachum, Outer Wilds','https://medium.com/@cordialkobold/interview-with-alex-beachum-creative-director-of-outer-wilds-a01bb9631e20']]},
+ {id:'gris',rank:12,name:'Flat pastel wash',game:'Gris',studio:'Nomada Studio, 2018',tags:['no shadow','watercolour','flat'],lib:true,scene:'ranch',
+  l:L({sunC:'#fff6ee',sunI:.5,shOn:0,az:30,el:60,hemiSky:'#f6e9f2',hemiGnd:'#efcfdc',hemiI:2.1,fogC:'#f3dfe8',fogD:.013,skyTop:'#f1d3e0',skyHor:'#fdf2e8',rimC:'#ffffff',rimI:.4,ground:'#e3b5c3',sat:.92,con:.9,bri:1.06,tm:'none'}),
+  what:'The world is lit like a painting: almost no cast shadow, colour that changes the whole palette per chapter, and soft pastel gradients in the air.',
+  how:['Colour is the light: each chapter is a palette; shading is gentle form, not shadow.','Watercolour-edged shapes and soft gradient skies.','Light is nearly directionless, so everything stays readable.'],
+  ours:'Shadows off, a bright hemisphere and a pastel ground and fog; contrast and saturation reduced.',
+  fit:'Matches Watercolour (maps, tile boards) and "pull back to the board of boards". It is the opposite of dramatic, so it suits a child\'s rest screens and the tile-card flip. Good as a world for gentle chapters.',where:'Tile boards, maps, rest scenes',cost:'light',
+  src:[['Oracle: GRIS','https://abbies-game-oracle.vercel.app/game?id=steam-683320'],['Creative Review: Gris','https://www.creativereview.co.uk/watercolour-paintings-come-to-life-in-platform-game-gris/']]},
+ {id:'storybookmini',rank:13,name:'Candle-warm miniature',game:'Moss',studio:'Polyarc, 2018',tags:['miniature','storybook','warm key'],scene:'town',
+  l:L({sunC:'#ffd59a',sunI:2.8,az:-35,el:52,hemiSky:'#7fa4d8',hemiGnd:'#a86a4a',hemiI:.95,fogC:'#e8cfa8',fogD:.007,skyTop:'#4a6aa8',skyHor:'#f1d8b0',ptC:'#ffc27a',ptI:12,glow:.9,rimC:'#9ac4ff',rimI:.8,shR:3,sat:1.2,con:1.08,tm:'aces'}),
+  what:'A tiny world lit like a storybook page by candle: warm key from one side, cool blue fill from the other, deep saturated colours, every piece a small treasure.',
+  how:['Warm key plus cool fill: complementary colours give form without black.','Hand-painted textures pre-lit with soft shading, so the dynamic light only adds the warm side.','Small scale: shadows are short and crisp, which makes the world feel like a miniature.'],
+  ours:'A warm key from front-left, a blue fill from the hemisphere and a cool rim, saturated 120%, three lantern points.',
+  fit:'Good for the pulled-back overland diorama view, where the town becomes a toy table. Pairs with the toy-table language in the look canon.',where:'Winchester overland, tile card previews',cost:'light',
+  src:[['GamesBeat: Polyarc\'s Moss','https://gamesbeat.com/polyarcs-moss-hides-clever-vr-game-design-under-its-cuteness/']]},
+ {id:'halloween',rank:14,name:'Playful dusk',game:'Dredge (tuned down)',studio:'Black Salt Games, 2023',tags:['Halloween','pumpkins','playful-tense'],scene:'halloween',
+  l:L({sunC:'#9a7aff',sunI:1.1,az:-50,el:34,hemiSky:'#5b4a9a',hemiGnd:'#3a2a5a',hemiI:.85,fogC:'#4a3a7a',fogD:.016,skyTop:'#1c1450',skyHor:'#7a4a9a',ptC:'#ff8a1e',ptI:26,glow:1.8,flick:1,rimC:'#ffb04a',rimI:.9,ray:0,stars:.9,shR:3,sat:1.2,con:1.05,exp:1.12,tm:'aces'}),
+  what:'A violet dusk, low friendly fog, and the only warm things are the pumpkins and lanterns, pools of orange on purple. It is lit like a cosy fishing boat at night: you feel snug, and a little curious about the dark, not afraid of it.',
+  how:['Dredge draws its tension from fog and lantern pools; the lantern radius is your safe zone.','We keep only the cosy half: the dark is purple, not black, the fog is thin, and every pool of light is a friend.','Exposure has a floor so nothing hides.'],
+  ours:'Purple sun and bounce, thin violet fog, stars, four pumpkins and a lantern as orange point lights with a slow flicker.',
+  fit:'The Halloween game when you say "go". Playful-tense means the player is always near light and the dark is a shortcut, not a threat. No faces, nothing sudden, PG.',where:'Halloween ranch and town',cost:'medium',
+  src:[['Unity: crafting Dredge\'s cozy atmospheric horror','https://unity.com/resources/crafting-dredge-cozy-atmospheric-horror'],['Oracle: DREDGE','https://abbies-game-oracle.vercel.app/game?id=steam-1562430']]}
+];
+LOOKS.sort((a,b)=>a.rank-b.rank);
+const MATRIX=[
+ ['Tiny Glade','Sun, soft','Reported real-time bounce; sky and ground tint','Faint','Pale haze','Wide and soft, dark at contacts','Added by the player','Natural'],
+ ['Firewatch','Sun low, painted sky colours first','Sky gradient and warm bounce','Little','Heavy, layered','Soft, short','Cabin lanterns, orange','Strong warm/cool split'],
+ ['Ghost of Tsushima','Low warm sun','Cool sky fill','Warm','Warm haze, light shafts','Long, soft','Camp fires','Saturated'],
+ ['Unpacking','Window patch (painted)','Warm walls','None','None','Hand-placed','Lamps, screens','Warm, per room'],
+ ['Hi-Fi Rush','Hard two-band sun','Saturated ground bounce','Cyan, magenta','Clear','Hard, graphic','Stage lights, pulse','Poster bright'],
+ ['Cocoon','One source per world','Very low','None','Dust, slight','Crisp','Glowing orbs and worlds','One colour per world'],
+ ['Journey','Sun behind subject','Warm sand bounce','Strong','Dust','Long','None','Orange, gold, blue'],
+ ['Outer Wilds','Hard sun, no air','Tiny planet-shine','Small','None in space','Almost black','Campfire, windows','Warm vs cold'],
+ ['Gris','No cast key','Palette-wide wash','None','Pastel gradient','None','None','One palette per chapter'],
+ ['Moss','Warm candle-like key','Cool blue fill','Cool','Light','Short, crisp','Lanterns','Saturated'],
+ ['Dredge','Dim cold sun','Cool fog bounce','Little','Thick and moving','Soft','Your lantern is the safe zone','Teal and orange']
+];
+
+/* ================= shared builders ================= */
+function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+function newEnv(){return {glow:[],pts:[],ptCount:0,rimU:{uRimCol:{value:new THREE.Color('#fff')},uRim:{value:0}},ground:null,groundMats:[],cam:{p:[13,7,16],t:[0,1.5,-1]},center:new THREE.Vector3(0,1,0),shadow:22,rayO:new THREE.Vector3(0,14,0),rayS:12};}
+function std(env,color,o={}){
+  const m=new THREE.MeshStandardMaterial({color,roughness:.88,metalness:0,flatShading:true,...o});
+  m.onBeforeCompile=sh=>{Object.assign(sh.uniforms,env.rimU);
+    sh.fragmentShader='uniform vec3 uRimCol;uniform float uRim;\n'+sh.fragmentShader.replace('#include <opaque_fragment>','float fr=pow(1.0-clamp(dot(normal,normalize(vViewPosition)),0.0,1.0),3.0);outgoingLight+=uRimCol*fr*uRim*0.5;\n#include <opaque_fragment>');};
+  return m;}
+function glowM(env,color,k=1.6){const m=std(env,'#2a2420',{emissive:new THREE.Color(color),emissiveIntensity:0,roughness:.5});m.userData.k=k;env.glow.push(m);return m;}
+const BG=(w,h,d)=>new THREE.BoxGeometry(w,h,d);
+function mesh(g,m,x=0,y=0,z=0,o={}){const b=new THREE.Mesh(g,m);b.position.set(x,y,z);if(o.ry)b.rotation.y=o.ry;if(o.rx)b.rotation.x=o.rx;if(o.rz)b.rotation.z=o.rz;b.castShadow=o.cast!==false;b.receiveShadow=o.recv!==false;return b;}
+function roof(env,w,h,d,col){const s=new THREE.Shape();s.moveTo(-w/2,0);s.lineTo(w/2,0);s.lineTo(0,h);s.closePath();const g=new THREE.ExtrudeGeometry(s,{depth:d,bevelEnabled:false});g.translate(0,0,-d/2);return mesh(g,std(env,col));}
+function tree(env,g,x,z,s=1,col='#4f8f45'){const t=new THREE.Group();t.add(mesh(new THREE.CylinderGeometry(.18*s,.26*s,1.6*s,6),std(env,'#6b4a34'),0,.8*s,0));
+  for(let i=0;i<3;i++)t.add(mesh(new THREE.ConeGeometry((1.5-i*.33)*s,(1.9-i*.3)*s,7),std(env,col),0,(1.7+i*1.0)*s,0));t.position.set(x,0,z);g.add(t);}
+function lampPost(env,g,x,z,h=3){g.add(mesh(new THREE.CylinderGeometry(.06,.08,h,6),std(env,'#2e3440'),x,h/2,z));
+  g.add(mesh(new THREE.SphereGeometry(.2,10,8),glowM(env,'#ffc77a',2.2),x,h+.1,z,{cast:false}));addPt(env,x,h+.1,z);}
+function addPt(env,x,y,z){env.pts.push(new THREE.Vector3(x,y,z));}
+function groundDisc(env,g,r){const m=std(env,'#7fae5a',{roughness:1});env.groundMats.push(m);const o=mesh(new THREE.CircleGeometry(r,48),m,0,0,0,{cast:false});o.rotation.x=-Math.PI/2;g.add(o);return o;}
+function hills(env,g,seed){const r=rng(seed);[[58,8,'#6f9f55'],[78,12,'#5f8f55'],[100,16,'#547f58']].forEach(([R,H,c],k)=>{const m=std(env,c,{roughness:1});for(let i=0;i<9;i++){const a=(i/9+k*.07)*Math.PI*2+r()*.3;const s=new THREE.Mesh(new THREE.SphereGeometry(1,10,6),m);s.scale.set(16+r()*10,H*(.6+r()*.6),16+r()*10);s.position.set(Math.cos(a)*R,-H*.2,Math.sin(a)*R);g.add(s);}});}
+
+/* ----- ranch ----- */
+function ranch(env,halloween){const g=new THREE.Group(),r=rng(7);
+  groundDisc(env,g,44);hills(env,g,3);
+  // path
+  const pm=std(env,'#b99a6e',{roughness:1});const p=mesh(new THREE.PlaneGeometry(2.2,14),pm,2.5,0.02,-.8,{cast:false});p.rotation.x=-Math.PI/2;p.rotation.z=.12;g.add(p);
+  // barn
+  const bm=std(env,'#b5483a');g.add(mesh(BG(6,4,5),bm,-6,2,-4));const br=roof(env,6.6,2.2,5.4,'#6b4a3a');br.position.set(-6,4,-4);g.add(br);
+  g.add(mesh(BG(2,2.8,.12),std(env,'#3a2a24'),-6,1.4,-1.47,{cast:false}));
+  [-8.2,-3.8].forEach(x=>g.add(mesh(BG(.9,.9,.12),glowM(env,'#ffc77a'),x+(x<-6?.1:-.1)*0,2.4,-1.46,{cast:false})));
+  // house
+  g.add(mesh(BG(5,3,4),std(env,'#eadcbc'),6,1.5,-5));const hr=roof(env,5.6,2,4.4,'#7a3b3b');hr.position.set(6,3,-5);g.add(hr);
+  g.add(mesh(BG(.7,1.4,.7),std(env,'#8a5a4a'),7.4,4,-5.4));g.add(mesh(BG(.9,1.8,.1),std(env,'#5a3a2a'),6,.9,-2.95,{cast:false}));
+  [4.6,7.4].forEach(x=>g.add(mesh(BG(.8,.9,.1),glowM(env,'#ffc77a'),x,1.7,-2.95,{cast:false})));addPt(env,6,1.6,-2.2);
+  // lamp, fire
+  lampPost(env,g,1.5,2,2.8);
+  const fireM=glowM(env,'#ff9a3c',2.4);for(let i=0;i<7;i++){const a=i/7*Math.PI*2;g.add(mesh(new THREE.DodecahedronGeometry(.22),std(env,'#8a8a90'),-2.5+Math.cos(a)*.7,.12,3+Math.sin(a)*.7));}
+  g.add(mesh(new THREE.ConeGeometry(.36,.9,6),fireM,-2.5,.5,3,{cast:false}));g.add(mesh(new THREE.ConeGeometry(.2,.6,6),fireM,-2.3,.4,3.1,{cast:false}));addPt(env,-2.5,.9,3);
+  env.pts.splice(1,0,env.pts.pop());// order: lamp, fire, window
+  // trees, fence, pond, haystacks
+  [[-11,2,1.2],[-13,-6,1.4],[11,-1,1.3],[14,5,1.1],[-2,-9,1.5],[9,-10,1.3],[-9,8,1]].forEach(([x,z,s],i)=>tree(env,g,x,z,s,i%2?'#4f8f45':'#5a9a4a'));
+  for(let i=-7;i<=7;i++){g.add(mesh(BG(.14,1.1,.14),std(env,'#8a6a44'),i*1.3,.55,6.2));}
+  g.add(mesh(BG(19,.1,.08),std(env,'#9a7a54'),0,.9,6.2));g.add(mesh(BG(19,.1,.08),std(env,'#9a7a54'),0,.5,6.2));
+  const pond=mesh(new THREE.CircleGeometry(2.6,24),std(env,'#4a8fc0',{roughness:.2,metalness:.1}),9,.03,3.5,{cast:false});pond.rotation.x=-Math.PI/2;pond.scale.y=.65;g.add(pond);
+  [[-9,0,2.6],[-10.2,0,2.2]].forEach(([x,y,z])=>{g.add(mesh(new THREE.CylinderGeometry(.8,.9,.9,8),std(env,'#d8b25c'),x,.45,z));});
+  // sheep
+  [[-1,0,-1],[0,0,-2.2],[-3,0,-2.5]].forEach(([x,y,z])=>{g.add(mesh(new THREE.IcosahedronGeometry(.45,0),std(env,'#f2efe6'),x,.5,z));g.add(mesh(BG(.22,.22,.28),std(env,'#3a3a3a'),x+.4,.55,z,{cast:false}));});
+  if(halloween){[[2.5,4],[-.2,5],[4,1.2],[5.5,3.8]].forEach(([x,z],i)=>{const k=i<3;const pk=mesh(new THREE.SphereGeometry(.5,10,8),k?glowM(env,'#ff8a1e',1.8):std(env,'#e8791a'),x,.4,z);pk.scale.set(1,.85,1);g.add(pk);
+      g.add(mesh(BG(.08,.16,.08),std(env,'#3a5a2a'),x,.85,z,{cast:false}));if(k)addPt(env,x,.6,z);});}
+  env.cam={p:[13,7,16],t:[0,1.6,-1]};env.center.set(0,1,0);return g;}
+
+/* ----- Winchester diorama ----- */
+function town(env){const g=new THREE.Group(),r=rng(11);
+  const hexm=std(env,'#7fae5a',{roughness:1});env.groundMats.push(hexm);const hx=mesh(new THREE.CylinderGeometry(13,13.4,1,6),hexm,0,-.5,0,{cast:false});hx.rotation.y=Math.PI/6;g.add(hx);
+  const side=mesh(new THREE.CylinderGeometry(13.4,12.2,2.2,6),std(env,'#6a5240'),0,-2.1,0,{cast:false});side.rotation.y=Math.PI/6;g.add(side);
+  const base=mesh(new THREE.CylinderGeometry(15,15,.4,6),std(env,'#4a3a32'),0,-3.4,0,{cast:false});base.rotation.y=Math.PI/6;g.add(base);
+  const plaza=mesh(new THREE.CircleGeometry(4.4,24),std(env,'#c8bba0',{roughness:1}),0,.02,0.5,{cast:false});plaza.rotation.x=-Math.PI/2;g.add(plaza);
+  const road=mesh(new THREE.PlaneGeometry(2,24),std(env,'#7a756e',{roughness:1}),0,.03,0,{cast:false});road.rotation.x=-Math.PI/2;road.rotation.z=Math.PI/2.8;g.add(road);
+  // church
+  g.add(mesh(BG(3.4,3,5),std(env,'#f0e8da'),0,1.5,-4));const cr=roof(env,3.8,1.8,5.4,'#4a4f66');cr.position.set(0,3,-4);g.add(cr);
+  g.add(mesh(BG(1.4,5,1.4),std(env,'#f0e8da'),0,2.5,-6.1));g.add(mesh(new THREE.ConeGeometry(1.1,2.4,4),std(env,'#4a4f66'),0,6.2,-6.1));g.add(mesh(BG(.6,1.2,.1),glowM(env,'#ffc77a'),0,1.5,-1.45,{cast:false}));
+  // cafe
+  g.add(mesh(BG(3.6,2.6,3),std(env,'#c97a54'),5,1.3,2));const cfr=roof(env,4,1.3,3.4,'#7a3b3b');cfr.position.set(5,2.6,2);g.add(cfr);
+  g.add(mesh(BG(3.8,.18,1),std(env,'#2f6f6a'),5,2.1,3.8));[4,6].forEach(x=>g.add(mesh(BG(1,1.1,.1),glowM(env,'#ffc77a'),x,1.2,3.52,{cast:false})));
+  // houses
+  const cols=['#e9d3a8','#d7e0c8','#e3c3c3','#c8d6e8','#f0d8a0'],roofs=['#7a3b3b','#4a5a7a','#8a5a3a','#5a6a4a','#6a3a5a'];
+  [[-8,-1],[-7,4],[-3,7],[8,-3],[9,5],[2,8]].forEach(([x,z],i)=>{const w=2.6+r()*.8,h=2+r()*.6;g.add(mesh(BG(w,h,2.6),std(env,cols[i%5]),x,h/2,z));const rf=roof(env,w+.5,1.3,2.9,roofs[i%5]);rf.position.set(x,h,z);g.add(rf);g.add(mesh(BG(.6,.7,.1),glowM(env,'#ffc77a'),x-.5,h*.55,z+1.35,{cast:false}));});
+  // trees
+  [[-10,-6,1],[-5,-8,1.2],[10,-7,1],[11,1,.9],[-9,8,1.1],[5,-7,.9],[-12,2,1],[6,9,.8]].forEach(([x,z,s],i)=>tree(env,g,x,z,s,i%2?'#4f8f45':'#5a9a4a'));
+  [[-3,3.5],[3.5,-1.5],[-4.8,-3]].forEach(([x,z])=>lampPost(env,g,x,z,2.4));
+  env.cam={p:[15,13,17],t:[0,.6,0]};env.center.set(0,0,0);env.shadow=17;env.rayO.set(0,12,0);return g;}
+
+/* ----- room: cafe and basement ----- */
+function room(env,kind){const g=new THREE.Group(),cafe=kind==='cafe';
+  const fl=std(env,cafe?'#a8734a':'#7a746c',{roughness:cafe?.7:1});const f=mesh(BG(12,.3,10),fl,0,-.15,0,{cast:false});g.add(f);
+  const wall=std(env,cafe?'#e8d3b0':'#8a5d4c',{roughness:1});
+  g.add(mesh(BG(12,5,.3),wall,0,2.5,-5.15));
+  if(cafe){ // left wall with a window hole
+    g.add(mesh(BG(.3,1.2,10),wall,-6.15,.6,0));g.add(mesh(BG(.3,1.6,10),wall,-6.15,4.2,0));
+    g.add(mesh(BG(.3,2.2,3.2),wall,-6.15,2.3,-3.4));g.add(mesh(BG(.3,2.2,3.2),wall,-6.15,2.3,3.4));
+    g.add(mesh(BG(.2,.12,3.8),std(env,'#5a3a2a'),-6.15,1.2,0));g.add(mesh(BG(.12,2.2,.12),std(env,'#5a3a2a'),-6.15,2.3,0,{cast:false}));
+    g.add(mesh(BG(6,1.2,1.2),std(env,'#5a3a2a'),2,.6,-4.2));g.add(mesh(BG(1.2,.6,.8),std(env,'#c0c4cc',{metalness:.6,roughness:.4}),.6,1.5,-4.2));
+    [[-.8,0,1.2],[2.8,0,2.6],[-2.6,0,-1.8]].forEach(([x,y,z],i)=>{g.add(mesh(new THREE.CylinderGeometry(.8,.8,.1,14),std(env,'#c9a06a'),x,1,z));g.add(mesh(new THREE.CylinderGeometry(.08,.14,1,6),std(env,'#2e3440'),x,.5,z));
+      [[1.1,0],[-1.1,0]].forEach(([dx,dz])=>g.add(mesh(BG(.55,.9,.55),std(env,i%2?'#2f6f6a':'#b5483a'),x+dx,.45,z+dz)));
+      g.add(mesh(new THREE.CylinderGeometry(.07,.09,.28,8),std(env,'#f2f0ea'),x+.2,1.19,z+.1));
+      const px=[-.8,2.8,2][i],pz=[1.2,2.6,-3][i];g.add(mesh(new THREE.CylinderGeometry(.03,.03,1.2,4),std(env,'#2e3440'),px,3.9,pz,{cast:false}));
+      g.add(mesh(new THREE.ConeGeometry(.45,.42,12,1,true),std(env,'#b5483a',{side:THREE.DoubleSide}),px,3.2,pz,{cast:false}));g.add(mesh(new THREE.SphereGeometry(.14,8,6),glowM(env,'#ffc77a',2.4),px,3.05,pz,{cast:false}));addPt(env,px,2.95,pz);});
+    g.add(mesh(new THREE.CylinderGeometry(.3,.25,.5,8),std(env,'#a85a3a'),4.8,.25,.5));g.add(mesh(new THREE.IcosahedronGeometry(.45,0),std(env,'#4f8f45'),4.8,.9,.5));
+    g.add(mesh(BG(2.4,1.4,.08),std(env,'#2a3a30'),-1,2.6,-4.95,{cast:false}));
+    env.cam={p:[8.6,4.2,9.6],t:[-.6,1.3,-.6]};env.rayO.set(-6.2,2.3,0);
+  }else{
+    g.add(mesh(BG(.3,5,10),wall,-6.15,2.5,0));
+    for(let i=0;i<7;i++)g.add(mesh(BG(1.1,.5,1.6),std(env,'#7a8590'),3+i*.5,.25+i*.5,-4.2,{rx:0}));
+    g.add(mesh(BG(2.8,.2,1.8),std(env,'#4a3a30'),6.2,3.7,-4.2));
+    g.add(mesh(BG(1,1,1),std(env,'#8a6a44'),-2,.5,-3.5));g.add(mesh(BG(1,1,1),std(env,'#8a6a44'),-3.1,.5,-3.8));g.add(mesh(BG(.9,.9,.9),std(env,'#9a7a54'),-2.5,1.45,-3.6));
+    g.add(mesh(BG(1.6,.9,1.2),std(env,'#4a4f66'),-4.5,.45,-1));g.add(mesh(BG(1.1,.9,.9),std(env,'#2e3440'),-4.5,1.35,-1));g.add(mesh(BG(.8,.65,.05),glowM(env,'#7fe8ff',2.2),-4.5,1.35,-.52,{cast:false}));addPt(env,-3.6,1.4,-.2);
+    g.add(mesh(new THREE.CylinderGeometry(.015,.015,1.3,4),std(env,'#1a1a1a'),0,3.8,-.5,{cast:false}));g.add(mesh(new THREE.SphereGeometry(.16,10,8),glowM(env,'#ffcf8a',2.4),0,3.1,-.5,{cast:false}));addPt(env,0,2.95,-.5);
+    g.add(mesh(BG(1.8,.1,.9),std(env,'#4a3a30'),-1.5,1.8,-4.8));g.add(mesh(BG(.7,.3,.5),std(env,'#c9a06a'),-1.2,2.0,-4.8));
+    [[1,.2,2.5],[2,.2,3.5]].forEach(([x,y,z])=>g.add(mesh(new THREE.CylinderGeometry(.3,.3,.4,10),glowM(env,'#ffd36a',1.8),x,.2+.0,z)));
+    addPt(env,5.2,3.2,-3.8);
+    env.cam={p:[8.6,4.2,9.6],t:[-.4,1.3,-.6]};env.rayO.set(6,4,-4);
+  }
+  env.center.set(0,1.5,0);env.shadow=11;return g;}
+
+/* ----- Moon base ----- */
+function moon(env){const g=new THREE.Group(),r=rng(5);
+  const pg=new THREE.PlaneGeometry(130,130,70,70);pg.rotateX(-Math.PI/2);const pa=pg.attributes.position;
+  for(let i=0;i<pa.count;i++){const x=pa.getX(i),z=pa.getZ(i);let y=Math.sin(x*.21)*Math.cos(z*.17)*.35+Math.sin(x*.5+z*.3)*.1;
+    [[-12,-10,5],[14,-14,7],[-20,16,6],[18,18,4]].forEach(([cx,cz,cr])=>{const d=Math.hypot(x-cx,z-cz);if(d<cr)y-=Math.cos(d/cr*Math.PI/2)*1.1;else if(d<cr*1.25)y+=.35*Math.cos((d-cr)/(cr*.25)*Math.PI/2);});
+    if(Math.hypot(x,z)<10)y*=.15;pa.setY(i,y);}
+  pg.computeVertexNormals();const gm=std(env,'#8d8d94',{roughness:1});env.groundMats.push(gm);g.add(mesh(pg,gm,0,0,0,{cast:false}));
+  // habitat dome + base ring
+  g.add(mesh(new THREE.SphereGeometry(4,22,12,0,Math.PI*2,0,Math.PI/2),std(env,'#e6eaf0',{roughness:.4}),-4,0,-2));
+  g.add(mesh(new THREE.CylinderGeometry(4.2,4.4,.6,22),std(env,'#7a808c'),-4,.3,-2));
+  for(let i=0;i<5;i++){const a=-.8+i*.55;g.add(mesh(BG(.8,1,.12),glowM(env,'#ffc27a',2.6),-4+Math.sin(a)*3.82,1.7+(i%2)*.4,-2+Math.cos(a)*3.82-.02,{cast:false,ry:a}));}
+  addPt(env,-4,1.9,2.2);
+  // airlock + tube
+  g.add(mesh(BG(4,3,3),std(env,'#d9dde3'),3,1.5,0));g.add(mesh(BG(1.6,2.2,.12),std(env,'#2a2f3a'),3,1.1,1.55,{cast:false}));
+  g.add(mesh(BG(2.2,.14,.12),glowM(env,'#ff9a4a',3),3,2.55,1.58,{cast:false}));g.add(mesh(BG(.14,2.2,.1),glowM(env,'#7dffb0',3),1.95,1.1,1.57,{cast:false}));g.add(mesh(BG(.14,2.2,.1),glowM(env,'#7dffb0',3),4.05,1.1,1.57,{cast:false}));
+  g.add(mesh(new THREE.SphereGeometry(.18,8,6),glowM(env,'#ff4a3a',3),3,3.2,0,{cast:false}));addPt(env,3,1.5,2.6);
+  const tube=mesh(new THREE.CylinderGeometry(.6,.6,3.4,10),std(env,'#c8ccd4'),0,.9,0,{rz:Math.PI/2});g.add(tube);
+  // panels, rocks, crates
+  for(let i=0;i<3;i++){g.add(mesh(BG(.1,1.2,.1),std(env,'#5a606c'),8+i*2,.6,-4));g.add(mesh(BG(1.8,.08,1.2),std(env,'#1c2a5a',{metalness:.5,roughness:.3}),8+i*2,1.4,-4,{rz:-.5}));}
+  for(let i=0;i<14;i++){const s=.3+r()*.9;g.add(mesh(new THREE.DodecahedronGeometry(s,0),std(env,'#6e6e76'),(r()-.5)*40,s*.4,(r()-.5)*34+6));}
+  [[6,.5,5],[7.2,.45,5.6]].forEach(([x,y,z])=>g.add(mesh(BG(1,y*2,1),std(env,'#b8a070'),x,y,z)));
+  // planet-shine: a blue world far away
+  const earth=new THREE.Mesh(new THREE.SphereGeometry(14,24,16),new THREE.MeshBasicMaterial({color:'#4a7fd0',fog:false}));earth.position.set(-90,60,-150);g.add(earth);
+  env.cam={p:[8.5,3,9.5],t:[0,1.6,0]};env.center.set(0,1,0);env.shadow=24;env.rayO.set(0,10,0);return g;}
+
+const BUILD={ranch:e=>ranch(e,false),halloween:e=>ranch(e,true),town,cafe:e=>room(e,'cafe'),basement:e=>room(e,'basement'),moon};
+
+/* ================= environment for one view ================= */
+const TM={aces:THREE.ACESFilmicToneMapping,neutral:THREE.NeutralToneMapping,none:THREE.NoToneMapping};
+function rayTex(){const c=document.createElement('canvas');c.width=32;c.height=128;const x=c.getContext('2d');const gr=x.createLinearGradient(0,0,0,128);gr.addColorStop(0,'rgba(255,255,255,0)');gr.addColorStop(.18,'rgba(255,255,255,.9)');gr.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=gr;x.fillRect(0,0,32,128);
+  const gx=x.createLinearGradient(0,0,32,0);gx.addColorStop(0,'rgba(0,0,0,1)');gx.addColorStop(.5,'rgba(0,0,0,0)');gx.addColorStop(1,'rgba(0,0,0,1)');x.globalCompositeOperation='destination-out';x.fillStyle=gx;x.fillRect(0,0,32,128);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;}
+function makeView(host,sceneKey,opts={}){
+  const canvas=host.querySelector('canvas');let R;
+  try{R=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});}catch(e){const f=host.querySelector('.fallback');if(f)f.style.display='grid';return null;}
+  R.setPixelRatio(Math.min(devicePixelRatio||1,1.5));R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFShadowMap;R.outputColorSpace=THREE.SRGBColorSpace;
+  const scene=new THREE.Scene();const env=newEnv();env.R=R;env.scene=scene;env.canvas=canvas;
+  const world=BUILD[sceneKey](env);scene.add(world);
+  const cam=new THREE.PerspectiveCamera(36,1,.5,700);
+  const cp=opts.cam||env.cam;cam.position.set(...cp.p);const ctl=new OrbitControls(cam,canvas);ctl.target.set(...cp.t);ctl.enableDamping=true;ctl.maxPolarAngle=Math.PI*.49;ctl.minDistance=5;ctl.maxDistance=60;ctl.enablePan=false;ctl.update();
+  // lights
+  env.hemi=new THREE.HemisphereLight('#fff','#888',1);scene.add(env.hemi);
+  env.sun=new THREE.DirectionalLight('#fff',2);env.sun.castShadow=true;const sc=env.sun.shadow.camera;sc.left=sc.bottom=-env.shadow;sc.right=sc.top=env.shadow;sc.near=1;sc.far=140;env.sun.shadow.mapSize.set(1024,1024);env.sun.shadow.bias=-.0006;env.sun.shadow.normalBias=.05;scene.add(env.sun,env.sun.target);
+  env.ptL=env.pts.slice(0,3).map(p=>{const l=new THREE.PointLight('#fff',0,16,2);l.position.copy(p);scene.add(l);return l;});
+  scene.fog=new THREE.FogExp2('#fff',.006);
+  // sky
+  const sky=new THREE.Mesh(new THREE.SphereGeometry(300,24,12),new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,fog:false,uniforms:{top:{value:new THREE.Color()},hor:{value:new THREE.Color()},sunC:{value:new THREE.Color()},sunDir:{value:new THREE.Vector3(0,1,0)},glow:{value:1}},
+   vertexShader:'varying vec3 vP;void main(){vP=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+   fragmentShader:'uniform vec3 top,hor,sunC,sunDir;uniform float glow;varying vec3 vP;void main(){float h=clamp(vP.y,0.,1.);vec3 c=mix(hor,top,pow(h,.55));float s=max(dot(normalize(vP),sunDir),0.);c+=sunC*(pow(s,48.)*.55+pow(s,6.)*.16)*glow;gl_FragColor=vec4(c,1.);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}'}));
+  sky.renderOrder=-10;scene.add(sky);env.sky=sky;
+  const sp=new Float32Array(900);const r2=rng(21);for(let i=0;i<300;i++){const a=r2()*Math.PI*2,e=Math.acos(1-r2()*.95);sp[i*3]=Math.sin(e)*Math.cos(a)*250;sp[i*3+1]=Math.cos(e)*250;sp[i*3+2]=Math.sin(e)*Math.sin(a)*250;}
+  const sg=new THREE.BufferGeometry();sg.setAttribute('position',new THREE.BufferAttribute(sp,3));env.stars=new THREE.Points(sg,new THREE.PointsMaterial({color:'#fff',size:1.8,sizeAttenuation:false,transparent:true,opacity:0,fog:false,depthWrite:false}));scene.add(env.stars);
+  // light shafts
+  env.rays=new THREE.Group();const tex=rayTex(),rr=rng(33);for(let i=0;i<6;i++){const m=new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,fog:false,side:THREE.DoubleSide});
+    const w=1.2+rr()*2.2,len=22;const gg=new THREE.PlaneGeometry(w,len);gg.translate(0,-len/2,0);const p1=new THREE.Mesh(gg,m),p2=new THREE.Mesh(gg,m);p2.rotation.y=Math.PI/2;const gp=new THREE.Group();gp.add(p1,p2);gp.userData.o=new THREE.Vector3((rr()-.5)*env.rayS,(rr()-.5)*3,(rr()-.5)*env.rayS*.8);env.rays.add(gp);}
+  scene.add(env.rays);
+  env.cam3=cam;env.ctl=ctl;env.base=null;
+  function resize(){const w=host.clientWidth,h=host.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+  resize();const ro=new ResizeObserver(resize);ro.observe(host);env.dispose=()=>{ro.disconnect();ctl.dispose();scene.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){[].concat(o.material).forEach(m=>{if(m.map)m.map.dispose();m.dispose();});}});R.dispose();R.forceContextLoss();};
+  return env;}
+
+function applyLook(env,l){
+  env.base=l;const R=env.R;
+  const e=l.el*Math.PI/180,a=l.az*Math.PI/180,dir=new THREE.Vector3(Math.cos(e)*Math.sin(a),Math.sin(e),Math.cos(e)*Math.cos(a));env.sdir=dir;
+  env.sun.position.copy(dir).multiplyScalar(60).add(env.center);env.sun.target.position.copy(env.center);env.sun.color.set(l.sunC);env.sun.intensity=l.sunI;env.sun.castShadow=!!l.shOn;env.sun.shadow.radius=l.shR;
+  env.hemi.color.set(l.hemiSky);env.hemi.groundColor.set(l.hemiGnd);
+  env.scene.fog.color.set(l.fogC);env.scene.fog.density=l.fogD;
+  const u=env.sky.material.uniforms;u.top.value.set(l.skyTop);u.hor.value.set(l.skyHor);u.sunC.value.set(l.sunC);u.sunDir.value.copy(dir);u.glow.value=l.sunI>0.1&&dir.y>-.1?1:0;
+  env.stars.material.opacity=l.stars;
+  R.toneMapping=TM[l.tm];R.toneMappingExposure=l.exp;
+  env.ptL.forEach(p=>p.color.set(l.ptC));
+  env.glow.forEach(m=>{m.emissiveIntensity=l.glow*m.userData.k;});
+  env.rimU.uRimCol.value.set(l.rimC);env.rimU.uRim.value=l.rimI;
+  env.groundMats.forEach(m=>{if(!env.groundOverride)m.color.set(l.ground);});
+  // light shafts follow the sun
+  const q=new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,-1,0),dir.clone().negate());
+  env.rays.children.forEach(gp=>{gp.position.copy(env.rayO).add(gp.userData.o);gp.quaternion.copy(q);gp.children.forEach(p=>p.material.opacity=l.ray*.32);});
+  env.rays.visible=l.ray>.01;
+  env.canvas.style.filter=(l.sat!==1||l.con!==1||l.bri!==1||l.hue||l.sep)?`saturate(${l.sat}) contrast(${l.con}) brightness(${l.bri}) hue-rotate(${l.hue}deg) sepia(${l.sep})`:'';
+}
+function tick(env,t){const l=env.base;if(!l)return;
+  const pulse=l.beat?Math.pow(Math.max(0,Math.cos(t*Math.PI*2*2)),6):0;
+  env.hemi.intensity=l.hemiI*(1+.55*pulse);env.rimU.uRim.value=l.rimI*(1+1.4*pulse);env.sun.intensity=l.sunI*(1+.25*pulse);
+  env.ptL.forEach((p,i)=>{const f=l.flick?(1+.16*Math.sin(t*9+i*3)+.1*Math.sin(t*23+i)):1;p.intensity=l.ptI*f;});
+  env.ctl.update();}
+function render(env){env.R.render(env.scene,env.cam3);}
+
+/* ================= views: hero, cards, day cycle ================= */
+const live=new Map();const $=id=>document.getElementById(id);
+let heroT=.42;
+function startHero(host){
+  const env=makeView(host,'ranch');if(!env)return {stop(){}};
+  const R=env.R;const split=.5;
+  let raf=0,t0=performance.now();
+  const flat=L({sunC:'#ffffff',sunI:2.2,az:40,el:55,hemiSky:'#ffffff',hemiGnd:'#ffffff',hemiI:.55,fogC:'#9fc6dc',fogD:.001,skyTop:'#9fc6dc',skyHor:'#9fc6dc',shR:1,tm:'none',rimI:0,ground:'#6fa84e'});
+  function frame(now){raf=requestAnimationFrame(frame);const w=host.clientWidth,h=host.clientHeight;R.setScissorTest(true);
+    const t=(now-t0)/1000;
+    // left: flat rig (same camera)
+    applyLook(env,flat);tick(env,t);R.setScissor(0,0,Math.floor(w*split),h);R.setViewport(0,0,w,h);env.canvas.style.filter='';render(env);
+    const d=dayAt(heroT);applyLook(env,d.l);tick(env,t);R.setScissor(Math.floor(w*split),0,w-Math.floor(w*split),h);render(env);
+    $('heroName').textContent=d.n;
+    // the CSS grade can only be one per canvas, so the right-hand look is graded in-material (rim) and by tone mapping
+    env.canvas.style.filter='';}
+  frame(performance.now());
+  return {stop(){cancelAnimationFrame(raf);R.setScissorTest(false);env.dispose();}};}
+
+function startCard(host){
+  const id=host.dataset.look,Lk=LOOKS.find(x=>x.id===id);
+  const env=makeView(host,Lk.scene,Lk.cam?{cam:Lk.cam}:{});if(!env)return {stop(){}};
+  let raf=0,t0=performance.now(),playing=false,tv=.7;
+  const slider=host.parentElement.querySelector('.todT'),btn=host.parentElement.querySelector('.todPlay'),nm=host.parentElement.querySelector('.todName');
+  const cur=()=>Lk.tod?dayAt(tv):{l:Lk.l,n:''};
+  if(slider)slider.addEventListener('input',()=>{tv=+slider.value;});
+  if(btn)btn.addEventListener('click',()=>{playing=!playing;btn.textContent=playing?'Pause':'Play the day';});
+  function frame(now){raf=requestAnimationFrame(frame);const t=(now-t0)/1000;
+    if(playing&&slider){tv+=.0009;if(tv>1)tv=0;slider.value=tv;}
+    const c=cur();applyLook(env,c.l);if(nm)nm.textContent=c.n;tick(env,t);render(env);}
+  frame(performance.now());
+  return {stop(){cancelAnimationFrame(raf);env.dispose();}};}
+
+/* ================= page build ================= */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('cards').innerHTML=LOOKS.map(s=>`<article class="card" id="${s.id}">
+ <div class="stack">
+  <div class="plate" data-look="${s.id}"><canvas aria-label="${esc(s.name)}: ${esc(s.scene)} scene, drag to orbit"></canvas><span class="tag l">${esc(s.name)}</span><div class="fallback">This view needs WebGL.</div></div>
+  ${s.tod?`<div class="ctl"><label>Time of day</label><input class="todT" type="range" min="0" max="1" step="0.001" value="0.7" aria-label="Time of day"><span class="todName meta" style="min-width:5.5em"></span><button class="todPlay" type="button">Play the day</button></div>`:''}
+  <p class="meta">Our build: ${esc(s.ours)}</p>
+ </div>
+ <div class="stack">
+  <div class="head"><span class="rank">#${s.rank}</span><h2 style="font-size:1.45rem">${esc(s.name)}</h2></div>
+  <p class="meta">${esc(s.game)} · ${esc(s.studio)}</p>
+  <div class="tags">${s.tags.map(t=>`<span>${esc(t)}</span>`).join('')}${s.lib?'<span class="lib">in your library</span>':''}</div>
+  <p>${esc(s.what)}</p>
+  <h4>How it's built</h4><ul>${s.how.map(h=>`<li>${esc(h)}</li>`).join('')}</ul>
+  <p class="fit"><b style="font-family:var(--display)">For Abbie's World:</b> ${esc(s.fit)}</p>
+  <p class="src">Sources: ${s.src.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join(' · ')}</p>
+  <div class="pick" data-id="${s.id}">
+   <div class="chips" role="group" aria-label="Your pick for ${esc(s.name)}">
+    <button class="chip" data-v="love" aria-pressed="false">Love it</button><button class="chip" data-v="maybe" aria-pressed="false">Maybe</button><button class="chip" data-v="pass" aria-pressed="false">Not for us</button>
+   </div>
+   <label class="meta" for="note-${s.id}">Your note</label>
+   <textarea id="note-${s.id}" placeholder="What you like, what to change, where it should go"></textarea>
+   <span class="saved" aria-live="polite"></span>
+  </div>
+ </div>
+</article>`).join('');
+$('shortRows').innerHTML=LOOKS.map(s=>`<tr><td>${s.rank}</td><td>${esc(s.name)}</td><td>${esc(s.fit.split('. ')[0])}.</td><td>${esc(s.where)}</td><td>${esc(s.cost)}</td></tr>`).join('');
+$('matrix').innerHTML=MATRIX.map(r=>`<tr><td style="white-space:nowrap;font-family:var(--display);font-weight:600;color:var(--ink)">${esc(r[0])}</td>${r.slice(1).map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('');
+
+function start(el){const v=el.dataset.demo==='hero'?startHero(el):startCard(el);live.set(el,v);}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!live.has(e.target))start(e.target);else if(!e.isIntersecting&&live.has(e.target)){live.get(e.target).stop();live.delete(e.target);}}),{rootMargin:'120px 0px'});
+document.querySelectorAll('[data-demo],[data-look]').forEach(el=>io.observe(el));
+$('heroT').addEventListener('input',e=>{heroT=+e.target.value;});
+let heroPlay=false;$('heroPlay').addEventListener('click',()=>{heroPlay=!heroPlay;$('heroPlay').textContent=heroPlay?'Pause':'Play the day';});
+setInterval(()=>{if(heroPlay){heroT+=.004;if(heroT>1)heroT=0;$('heroT').value=heroT;}},50);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){live.forEach(v=>v.stop());live.clear();}else document.querySelectorAll('[data-demo],[data-look]').forEach(el=>{io.unobserve(el);io.observe(el);});});
+
+/* ================= picks (saved to the page's store) ================= */
+const picks={};let col=null;
+const LS='aw0052-picks';try{Object.assign(picks,JSON.parse(localStorage.getItem(LS)||'{}'));}catch(e){}
+function renderPicks(){let c={love:0,maybe:0,pass:0};
+ document.querySelectorAll('.pick').forEach(box=>{const p=picks[box.dataset.id]||{};box.querySelectorAll('.chip').forEach(b=>b.setAttribute('aria-pressed',String(p.pick===b.dataset.v)));
+  const ta=box.querySelector('textarea');if(document.activeElement!==ta)ta.value=p.note||'';if(p.pick)c[p.pick]++;});
+ $('tLove').textContent=c.love;$('tMaybe').textContent=c.maybe;$('tPass').textContent=c.pass;}
+async function save(id,patch,box){picks[id]={...(picks[id]||{}),...patch,at:new Date().toISOString()};renderPicks();
+ try{localStorage.setItem(LS,JSON.stringify(picks));}catch(e){}
+ const msg=box.querySelector('.saved');
+ if(col){try{await col.doc(id).set(picks[id]);msg.textContent='Saved';}catch(e){msg.textContent='Not saved: this view can only read picks.';}}
+ else if(onRanch){msg.textContent=(await inbox(id))?'Saved, and sent to me':'Saved on this device; sign in to send it to me.';}
+ else msg.textContent='Saved on this device only.';}
+const onRanch=!window.claude&&location.pathname.startsWith('/studies/');
+async function inbox(id){const s=LOOKS.find(x=>x.id===id),p=picks[id]||{},label={love:'Love it',maybe:'Maybe',pass:'Not for us'}[p.pick]||'No pick';
+ return fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({note:`Light Study (AW-STUDY-0052) pick, ${s?s.name:id} [${id}]: ${label}${p.note?' — '+p.note:''}`,
+  page:location.pathname,title:document.title,thread:'cmsg_01USVJqCbJruSGtaP4zsE2eYXjLkpqwFiWaYuFKjT8TA8G',threadTitle:'Light study',entryId:'light-'+id})}).then(r=>r.ok).catch(()=>false);}
+document.querySelectorAll('.pick').forEach(box=>{const id=box.dataset.id;let tm;
+ box.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>save(id,{pick:(picks[id]?.pick===b.dataset.v)?null:b.dataset.v},box)));
+ box.querySelector('textarea').addEventListener('input',e=>{clearTimeout(tm);tm=setTimeout(()=>save(id,{note:e.target.value.slice(0,2000)},box),700);});});
+renderPicks();
+(async()=>{const db=await window.claude?.use?.('db');if(!db){$('tSave').textContent=onRanch?'Picks save on this device and come to me through your feedback inbox.':'Picks save on this device.';return;}
+ col=db.collection('picks');$('tSave').textContent='Picks save to this page, and I can read them.';
+ col.onSnapshot(s=>{s.docs.forEach(d=>{const v=d.data();if(v&&typeof v==='object')picks[d.id]={pick:['love','maybe','pass'].includes(v.pick)?v.pick:null,note:String(v.note||'').slice(0,2000),at:v.at};});renderPicks();},()=>{});})();
+</script>

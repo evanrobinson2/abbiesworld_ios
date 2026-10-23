@@ -1,0 +1,92 @@
+{
+ "schema": "aw.context-engineering.v1",
+ "study": "AW-STUDY-0041 - 2D Character Rigging",
+ "date": "2026-10-23",
+ "groups": [
+  {
+   "kind": "Oracle consultation",
+   "items": [
+    {
+     "title": "Game Oracle: the four cut-paper games in the library (Cult of the Lamb, Don't Starve, Don't Starve Together, South Park: The Stick of Truth)",
+     "ref": "docs/oracle/games/*.json (rendering.family = cut_paper)",
+     "used": "flat fill plus one ink line, no shading: \"when a look is famous for being flat, any shading at all breaks it\""
+    },
+    {
+     "title": "Body study: anatomy.json measurements and ranges of motion",
+     "ref": "docs/oracle/bodies/anatomy.json",
+     "used": "bone lengths in heads, piece widths, the stress poses the joints must survive"
+    },
+    {
+     "title": "Body study: construction.json limb rules",
+     "ref": "docs/oracle/bodies/construction.json",
+     "used": "bulge peaks offset per edge, straight against curve, inside each piece"
+    },
+    {
+     "title": "Body study: ARTIST_METHOD.md, 12 creative checks and the practice rep",
+     "ref": "docs/oracle/bodies/ARTIST_METHOD.md",
+     "used": "scored every rep; one change per rep"
+    },
+    {
+     "title": "Figure practice: the mannequin's joint and bone names",
+     "ref": "tools/figure-practice/mannequin/rest-joints.json",
+     "used": "the shared rig names, so the 2D Puppet (0038) and the Character Studio (0037) read the same file"
+    }
+   ]
+  },
+  {
+   "kind": "Game dev blogs and talks",
+   "items": [
+    {
+     "title": "Doing 2D game animation the Klei way (GDC 2017, Game Developer)",
+     "url": "https://gamedeveloper.com/art/video-doing-2d-game-animation-the-klei-way",
+     "used": "symbol-based cut-out characters, built for costume swaps and re-use: our skins"
+    },
+    {
+     "title": "The 12 principles of animation in video games (Jonathan Cooper, Game Developer)",
+     "url": "https://gamedeveloper.com/production/the-12-principles-of-animation-in-video-games",
+     "used": "pose to pose, short anticipation, squash at the apex and landing, arcs, follow-through: rep 6"
+    }
+   ]
+  },
+  {
+   "kind": "Rigging docs and tutorials",
+   "items": [
+    {
+     "title": "Spine: IK constraints",
+     "url": "https://en.esotericsoftware.com/spine-ik-constraints",
+     "used": "two-bone IK, bend direction, stretch past full reach; our rig format follows Spine's bone space"
+    },
+    {
+     "title": "Rive: IK constraint",
+     "url": "https://rive.app/docs/editor/constraints/ik-constraint",
+     "used": "the same constraint in the web runtime we'd ship"
+    },
+    {
+     "title": "Toon Boom Harmony: fixing the articulations",
+     "url": "https://docs.toonboom.com/help/harmony-12-2/premium/rigging/fix-articulations.html",
+     "used": "pivot at the centre of each articulation, semicircle overlaps, the auto-patch: reps 2 and 4"
+    },
+    {
+     "title": "Godot: cutout animation",
+     "url": "https://docs.godotengine.org/en/3.0/tutorials/animation/cutout_animation.html",
+     "used": "draw order and pivots for a game-engine cut-out rig"
+    }
+   ]
+  },
+  {
+   "kind": "Game design",
+   "items": [
+    {
+     "title": "HUD and information grammar (2x2 + none)",
+     "ref": "docs/oracle/hud/HUD_STUDY.md",
+     "used": "the bones view is a developer helper, never in the player's world"
+    },
+    {
+     "title": "GAME_FEEL.md",
+     "ref": "/mnt/project-files/game-feel/GAME_FEEL.md",
+     "used": "squash and land read as weight: the jump is game feel, not decoration"
+    }
+   ]
+  }
+ ]
+}

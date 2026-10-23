@@ -57,8 +57,15 @@ export function rigMannequin(T, scene, J) {
  return finishRig(T, holder, bones, {canon: canonDirs(T, J), hipY: J.hc[1], height: J.crown[1], rigid: true});
 }
 
-export function rigSkinned(T, scene, J) {
+// alias: {theirName: ourName} for rigs with other bone names (the Quaternius rig's DEF-upper_armL, figure-kit's
+// upperArm.L). Bones we don't name (an extra spine bone, toes, fingers) just ride along with their parent.
+export function rigSkinned(T, scene, J, alias = {}) {
  scene.updateMatrixWorld(true);
+ const strip = n => n.replace(/\./g, '');
+ if (Object.keys(alias).length) {
+  const A = Object.fromEntries(Object.entries(alias).map(([k, v]) => [strip(k), v]));
+  scene.traverse(o => { if (o.isBone && A[strip(o.name)]) o.name = A[strip(o.name)]; });
+ }
  const bones = {};
  scene.traverse(o => { if (o.isBone && BONES.includes(o.name) && !bones[o.name]) bones[o.name] = o; });
  const box = new T.Box3().setFromObject(scene);
@@ -97,6 +104,12 @@ const D2R = Math.PI / 180;
 // world rotation of each bone = (pose turn chain) * correction * rest; local = parent^-1 * world
 export function applyPose(T, rig, pose = {}) {
  const {bones, rest, corr} = rig, W = {}, Dw = {};
+ // the nearest bone up the chain this rig actually has (a figure without clavicles hangs its arms off the chest)
+ const up = b => { let p = PARENT[b]; while (p && !bones[p]) p = PARENT[p]; return p; };
+ // a bone's real parent in holder space: a posed bone's new turn, or an unnamed bone (an extra spine joint) riding on
+ // its own parent at its rest turn
+ const byObj = new Map(Object.entries(bones).map(([n, o]) => [o, n]));
+ const worldOf = o => { if (!o || o === rig.holder) return new T.Quaternion(); const n = byObj.get(o); if (n && W[n]) return W[n]; return worldOf(o.parent).multiply(o.quaternion); };
  const e = rig._e, turn = pose.turn || [0, 0, 0];
  const base = new T.Quaternion().setFromEuler(e.set(turn[0] * D2R, turn[1] * D2R, turn[2] * D2R, 'YXZ'));
  for (const b of BONES) {
@@ -104,13 +117,13 @@ export function applyPose(T, rig, pose = {}) {
   const r = pose[b], s = side(b) === 'R' ? -1 : 1;
   const d = new T.Quaternion();
   if (r) d.setFromEuler(e.set(r[0] * D2R, s * r[1] * D2R, s * r[2] * D2R, 'XYZ'));
-  const par = PARENT[b];
+  const par = up(b);
   Dw[b] = (par && Dw[par] ? Dw[par].clone() : base.clone()).multiply(d);
   if (b === 'root') Dw[b] = base.clone().multiply(d);
   // motion capture gives each bone's turn in character space directly (mocap.mjs)
   if (pose.q?.[b]) Dw[b] = base.clone().multiply(pose.q[b]);
   W[b] = Dw[b].clone().multiply(corr[b]).multiply(rest[b].wq);
-  const pw = par && W[par] ? W[par] : rest[b].pwq; // the root's own parent never turns
+  const pw = bone.parent === bones[par] && W[par] ? W[par] : par ? worldOf(bone.parent) : rest[b].pwq; // the root's own parent never turns
   bone.quaternion.copy(pw.clone().invert().multiply(W[b]));
  }
  const o = pose.root || [0, 0, 0], hips = bones.hips;

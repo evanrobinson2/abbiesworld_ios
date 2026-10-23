@@ -216,6 +216,9 @@ HAND = {
     'untitled-goose-game': ('mixed', 'graphic_minimal', 'flat', 'none', 'flat_colour', [],
         'Flat unlit colour shapes with no textures and soft colour-tinted shadows, like a picture book printed in a few inks.',
         'Tinted shadows instead of grey ones keep a flat-colour world warm and readable from far away.', 0.75),
+    'spore': ('stylised_pbr', 'stylised_pbr', 'soft_wrap', 'none', 'gradient', ['depth of field', 'bloom', 'fog'],
+        'Cell Stage: soft translucent 3D cells with glowing rims, seen straight down, floating in parallax layers of water whose blur and tint grow with depth, so giant creatures drift past below like shadows.',
+        'A top-down 2D game can still have depth: stack the pool in blurred, tinted layers and move the player up a layer as they grow. Our film-look depth of field and an SVG or shader cell rim do the rest.', 0.7),
 }
 
 # Ordered (keywords, style, family, light, outline, surface, post). First match on the lowercased art note wins.

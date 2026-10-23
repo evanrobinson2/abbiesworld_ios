@@ -58,6 +58,23 @@
       "confidence": 0.65,
       "lesson": "Height haze sells scale for climbing: the further down, the paler and bluer the world."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "mixed",
+      "mocap": 0.3,
+      "locomotion": [
+        "procedural_ik",
+        "blend_tree"
+      ],
+      "tricks": [
+        "Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics",
+        "Breathing and trembling arms show stamina"
+      ],
+      "lesson": "Let the player drive each hand; IK and a little physics make any wall climbable.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Sparse soundscape, wind and stone; music swells as you reach new heights.",
     "pacing": "slow, short sessions",

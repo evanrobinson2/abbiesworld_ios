@@ -94,7 +94,7 @@ td:nth-child(2){font-family:var(--display);font-weight:600;white-space:nowrap}
   <span class="eyebrow">AW-STUDY-0045 · Inspiring shaders · 23 Oct 2026</span>
   <h1>Inspiring shaders, <em>rebuilt live</em> for review</h1>
   <p class="lede">Fourteen looks from modern games, each one recreated in three.js on our own models, ranked for Abbie's World. Pick the ones you love and leave a note on any card; I read the picks back and build from them.</p>
-  <div class="tally" id="tally" aria-live="polite"><span>Loved <b id="tLove">0</b></span><span>Maybe <b id="tMaybe">0</b></span><span>Not for us <b id="tPass">0</b></span><span id="tSave" class="meta" style="border:0;background:none;padding:6px 0">Picks save to this page.</span></div>
+  <div class="tally" id="tally" aria-live="polite"><span>Loved <b id="tLove">0</b></span><span>Maybe <b id="tMaybe">0</b></span><span>Not for us <b id="tPass">0</b></span><span id="tSave" class="meta" style="border:0;background:none;padding:6px 0">Picks save to this page.</span> <a class="meta" href="built.html" style="border:0;background:none;padding:6px 0">Your loved looks, built &rarr;</a></div>
 </header>
 
 <section class="stack" style="gap:14px">
@@ -264,15 +264,15 @@ void main(){
  vec3 n=normalize(vN);if(!gl_FrontFacing)n=-n;vec3 V=normalize(cameraPosition-vW);float dist=length(cameraPosition-vW);
  vec3 base=uColor;if(uUseMap>.5)base*=texture2D(uMap,vUv).rgb;
  float st=stroke(vW*1.6);float paintAmt=clamp(uPaint+uFarPaint*smoothstep(7.,16.,dist),0.,1.);
- base*=mix(1.,.8+.4*st,paintAmt);
+ base*=mix(1.,.9+.2*st,paintAmt);
  float ndl=dot(n,uLightDir);float l=mix(max(ndl,0.),ndl*.5+.5,uHalf);
- l+=(st-.5)*uBrush*.55;
+ l+=(st-.5)*uBrush*.3;
  vec2 sp=gl_FragCoord.xy/uPx;float lb=clamp(l,0.,1.);
  if(uMode>.5){float b=max(uBands,2.);float x=clamp(l,0.,1.)*b+(bayer(sp)-.5)*uDither;float f=fract(x),i=floor(x);float s=uSoft*.5+.002;lb=clamp((i+smoothstep(1.-2.*s,1.,f))/max(b-1.,1.),0.,1.);}
- vec3 col=mix(base*mix(vec3(.16),uShadowTint*.55,uHue),base*uSun*1.08,lb);
+ vec3 col=mix(base*mix(vec3(.16),mix(vec3(1.),uShadowTint*2.2,.6)*.62,uHue),base*uSun*1.08,lb);
  col+=base*mix(uGround,uSky,n.y*.5+.5)*uAmb*(1.-lb*.6)*.5;
  vec3 L=uPointPos-vW;float pd=length(L);float pl=max(dot(n,L/max(pd,1e-3)),0.)*pow(clamp(1.-pd/uPointR,0.,1.),2.);
- col+=base*uPointCol*(uMode>.5?smoothstep(.04,.3,pl):pl)*1.4;
+ col+=base*uPointCol*(uMode>.5?smoothstep(.04,.3,pl):pl)*.9;
  float fr=pow(1.-max(dot(n,V),0.),3.);
  col+=uRimCol*fr*uRim*(.35+.65*(ndl*.5+.5))*(1.-smoothstep(.35,.9,n.y));
  for(int k=0;k<6;k++){vec4 s=uSplats[k];float d=length(vW-s.xyz);float wob=nz(vW.xz*5.+float(k)*3.)*.35+nz(vW.yz*4.)*.2;
@@ -351,6 +351,10 @@ const GLOW=radialTex([[0,'rgba(255,255,255,1)'],[.25,'rgba(255,255,255,.45)'],[1
 function withSphereN(geo,center){const p=geo.attributes.position,n=geo.attributes.normal,a=new Float32Array(p.count*3);
  for(let i=0;i<p.count;i++){let x,y,z;if(center){x=p.getX(i)-center.x;y=p.getY(i)-center.y;z=p.getZ(i)-center.z;const L=Math.hypot(x,y,z)||1;x/=L;y/=L;z/=L;}else{x=n.getX(i);y=n.getY(i);z=n.getZ(i);}a.set([x,y,z],i*3);}
  geo.setAttribute('aSphereN',new THREE.BufferAttribute(a,3));return geo;}
+function weldN(geo){const p=geo.attributes.position,n=geo.attributes.normal,acc=new Map(),k=i=>`${p.getX(i).toFixed(4)},${p.getY(i).toFixed(4)},${p.getZ(i).toFixed(4)}`,a=new Float32Array(p.count*3);
+ for(let i=0;i<p.count;i++){const q=acc.get(k(i))||[0,0,0];q[0]+=n.getX(i);q[1]+=n.getY(i);q[2]+=n.getZ(i);acc.set(k(i),q);}
+ for(let i=0;i<p.count;i++){const q=acc.get(k(i)),l=Math.hypot(...q)||1;a.set([q[0]/l,q[1]/l,q[2]/l],i*3);}
+ geo.setAttribute('aSphereN',new THREE.BufferAttribute(a,3));return geo;}
 function hullGeo(geo){const g=geo.clone();for(const k of Object.keys(g.attributes))if(!['position','skinIndex','skinWeight'].includes(k))g.deleteAttribute(k);const m=mergeVertices(g,1e-3);m.computeVertexNormals();return m;}
 const V=(x,y,z)=>new THREE.Vector3(x,y,z);
 
@@ -400,7 +404,7 @@ async function figure(K,url,height,x,fallbackHex){
   for(const o of swaps){const src=o.material,map=src.map||null;const hex='#'+(src.color?src.color.getHexString():'cccccc');
    let tint=hex;if(/wood_body/i.test(src.name||''))tint='#e8c79a';if(/wood_joint/i.test(src.name||''))tint='#c99a66';
    if(map)map.colorSpace=THREE.SRGBColorSpace;
-   withSphereN(o.geometry,null);o.material=K.mat(tint,map);
+   weldN(o.geometry);o.material=K.mat(tint,map);
    const hg=hullGeo(o.geometry);let hm;if(o.isSkinnedMesh){hm=new THREE.SkinnedMesh(hg,K.hullMat);hm.bind(o.skeleton,o.bindMatrix);}else hm=new THREE.Mesh(hg,K.hullMat);
    hm.position.copy(o.position);hm.quaternion.copy(o.quaternion);hm.scale.copy(o.scale);o.parent.add(hm);K.hulls.push(hm);}
   fitModel(obj,height,x);K.root.add(obj);K.bouncers.push(obj);K.blob(x,0,1.3);

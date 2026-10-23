@@ -1,0 +1,470 @@
+[
+  {
+    "id": "A1-clay",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "b4f4d7b1-a2ad-44ff-b7d7-11725626de6a",
+    "files": [
+      "tools/meshy-heroes/refs/A1-clay/mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_0.png",
+      "tools/meshy-heroes/refs/A1-clay/mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_1.png",
+      "tools/meshy-heroes/refs/A1-clay/mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_2.png",
+      "tools/meshy-heroes/refs/A1-clay/mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:50:11Z"
+  },
+  {
+    "id": "A1-paint",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "89b947b3-3c51-4be5-8636-5f4df8aeffab",
+    "files": [
+      "tools/meshy-heroes/refs/A1-paint/mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_0.png",
+      "tools/meshy-heroes/refs/A1-paint/mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_1.png",
+      "tools/meshy-heroes/refs/A1-paint/mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_2.png",
+      "tools/meshy-heroes/refs/A1-paint/mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:51:00Z"
+  },
+  {
+    "id": "A2-clay",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "39668ac1-0d0b-4579-8b13-5e49355c0ad7",
+    "files": [
+      "tools/meshy-heroes/refs/A2-clay/mj_39668ac1-0d0b-4579-8b13-5e49355c0ad7_0.png",
+      "tools/meshy-heroes/refs/A2-clay/mj_39668ac1-0d0b-4579-8b13-5e49355c0ad7_1.png",
+      "tools/meshy-heroes/refs/A2-clay/mj_39668ac1-0d0b-4579-8b13-5e49355c0ad7_2.png",
+      "tools/meshy-heroes/refs/A2-clay/mj_39668ac1-0d0b-4579-8b13-5e49355c0ad7_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:51:54Z"
+  },
+  {
+    "id": "A2-paint",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "f2dbafac-d66f-4f6d-89b7-1d7cfe660a97",
+    "files": [
+      "tools/meshy-heroes/refs/A2-paint/mj_f2dbafac-d66f-4f6d-89b7-1d7cfe660a97_0.png",
+      "tools/meshy-heroes/refs/A2-paint/mj_f2dbafac-d66f-4f6d-89b7-1d7cfe660a97_1.png",
+      "tools/meshy-heroes/refs/A2-paint/mj_f2dbafac-d66f-4f6d-89b7-1d7cfe660a97_2.png",
+      "tools/meshy-heroes/refs/A2-paint/mj_f2dbafac-d66f-4f6d-89b7-1d7cfe660a97_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:52:24Z"
+  },
+  {
+    "id": "A3-clay",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "ada34784-746f-4cca-b56e-adf98115e19b",
+    "files": [
+      "tools/meshy-heroes/refs/A3-clay/mj_ada34784-746f-4cca-b56e-adf98115e19b_0.png",
+      "tools/meshy-heroes/refs/A3-clay/mj_ada34784-746f-4cca-b56e-adf98115e19b_1.png",
+      "tools/meshy-heroes/refs/A3-clay/mj_ada34784-746f-4cca-b56e-adf98115e19b_2.png",
+      "tools/meshy-heroes/refs/A3-clay/mj_ada34784-746f-4cca-b56e-adf98115e19b_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:52:57Z"
+  },
+  {
+    "id": "A3-paint",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "da3f9b6f-447d-4eb4-b257-381d73dc5183",
+    "files": [
+      "tools/meshy-heroes/refs/A3-paint/mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_0.png",
+      "tools/meshy-heroes/refs/A3-paint/mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_1.png",
+      "tools/meshy-heroes/refs/A3-paint/mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_2.png",
+      "tools/meshy-heroes/refs/A3-paint/mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:53:27Z"
+  },
+  {
+    "id": "A4-clay",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "bd990a91-fea0-4caf-9eb3-105e63ac9d7a",
+    "files": [
+      "tools/meshy-heroes/refs/A4-clay/mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_0.png",
+      "tools/meshy-heroes/refs/A4-clay/mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_1.png",
+      "tools/meshy-heroes/refs/A4-clay/mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_2.png",
+      "tools/meshy-heroes/refs/A4-clay/mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:54:00Z"
+  },
+  {
+    "id": "A4-paint",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "1dc6c194-6017-40ce-8030-496292057520",
+    "files": [
+      "tools/meshy-heroes/refs/A4-paint/mj_1dc6c194-6017-40ce-8030-496292057520_0.png",
+      "tools/meshy-heroes/refs/A4-paint/mj_1dc6c194-6017-40ce-8030-496292057520_1.png",
+      "tools/meshy-heroes/refs/A4-paint/mj_1dc6c194-6017-40ce-8030-496292057520_2.png",
+      "tools/meshy-heroes/refs/A4-paint/mj_1dc6c194-6017-40ce-8030-496292057520_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:54:30Z"
+  },
+  {
+    "id": "A5-clay",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "315447ad-ae4f-4249-b6fd-296ce10d2f79",
+    "files": [
+      "tools/meshy-heroes/refs/A5-clay/mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_0.png",
+      "tools/meshy-heroes/refs/A5-clay/mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_1.png",
+      "tools/meshy-heroes/refs/A5-clay/mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_2.png",
+      "tools/meshy-heroes/refs/A5-clay/mj_315447ad-ae4f-4249-b6fd-296ce10d2f79_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:55:06Z"
+  },
+  {
+    "id": "A5-paint",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "bad0de50-2fa2-40c4-a23b-c0126c7b3a36",
+    "files": [
+      "tools/meshy-heroes/refs/A5-paint/mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_0.png",
+      "tools/meshy-heroes/refs/A5-paint/mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_1.png",
+      "tools/meshy-heroes/refs/A5-paint/mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_2.png",
+      "tools/meshy-heroes/refs/A5-paint/mj_bad0de50-2fa2-40c4-a23b-c0126c7b3a36_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:55:35Z"
+  },
+  {
+    "id": "A6-clay",
+    "prompt": "friendly small grey alien crewmate, big eyes, green suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "20378079-a75e-4663-881f-aa6953b26112",
+    "files": [
+      "tools/meshy-heroes/refs/A6-clay/mj_20378079-a75e-4663-881f-aa6953b26112_0.png",
+      "tools/meshy-heroes/refs/A6-clay/mj_20378079-a75e-4663-881f-aa6953b26112_1.png",
+      "tools/meshy-heroes/refs/A6-clay/mj_20378079-a75e-4663-881f-aa6953b26112_2.png",
+      "tools/meshy-heroes/refs/A6-clay/mj_20378079-a75e-4663-881f-aa6953b26112_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:56:10Z"
+  },
+  {
+    "id": "A6-paint",
+    "prompt": "friendly small grey alien crewmate, big eyes, green suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "21814c87-7380-45cd-84b9-4c284a6c62f2",
+    "files": [
+      "tools/meshy-heroes/refs/A6-paint/mj_21814c87-7380-45cd-84b9-4c284a6c62f2_0.png",
+      "tools/meshy-heroes/refs/A6-paint/mj_21814c87-7380-45cd-84b9-4c284a6c62f2_1.png",
+      "tools/meshy-heroes/refs/A6-paint/mj_21814c87-7380-45cd-84b9-4c284a6c62f2_2.png",
+      "tools/meshy-heroes/refs/A6-paint/mj_21814c87-7380-45cd-84b9-4c284a6c62f2_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:56:37Z"
+  },
+  {
+    "id": "A1-clay-suit",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "f8bd68b3-5764-43db-8da0-91b86303f358",
+    "files": [
+      "tools/meshy-heroes/refs/A1-clay-suit/mj_f8bd68b3-5764-43db-8da0-91b86303f358_0.png",
+      "tools/meshy-heroes/refs/A1-clay-suit/mj_f8bd68b3-5764-43db-8da0-91b86303f358_1.png",
+      "tools/meshy-heroes/refs/A1-clay-suit/mj_f8bd68b3-5764-43db-8da0-91b86303f358_2.png",
+      "tools/meshy-heroes/refs/A1-clay-suit/mj_f8bd68b3-5764-43db-8da0-91b86303f358_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T16:51:20Z"
+  },
+  {
+    "id": "A1-clay-tee",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "a4a65ca1-115e-4909-9b4c-005b45fcb789",
+    "files": [
+      "tools/meshy-heroes/refs/A1-clay-tee/mj_a4a65ca1-115e-4909-9b4c-005b45fcb789_0.png",
+      "tools/meshy-heroes/refs/A1-clay-tee/mj_a4a65ca1-115e-4909-9b4c-005b45fcb789_1.png",
+      "tools/meshy-heroes/refs/A1-clay-tee/mj_a4a65ca1-115e-4909-9b4c-005b45fcb789_2.png",
+      "tools/meshy-heroes/refs/A1-clay-tee/mj_a4a65ca1-115e-4909-9b4c-005b45fcb789_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T16:53:06Z"
+  },
+  {
+    "id": "A1-paint-suit",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "858315e9-3e87-4778-9a44-bf5b29b36e99",
+    "files": [
+      "tools/meshy-heroes/refs/A1-paint-suit/mj_858315e9-3e87-4778-9a44-bf5b29b36e99_0.png",
+      "tools/meshy-heroes/refs/A1-paint-suit/mj_858315e9-3e87-4778-9a44-bf5b29b36e99_1.png",
+      "tools/meshy-heroes/refs/A1-paint-suit/mj_858315e9-3e87-4778-9a44-bf5b29b36e99_2.png",
+      "tools/meshy-heroes/refs/A1-paint-suit/mj_858315e9-3e87-4778-9a44-bf5b29b36e99_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T16:55:09Z"
+  },
+  {
+    "id": "A1-paint-tee",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "7a945f66-ee08-48be-83b9-a09a214d04a0",
+    "files": [
+      "tools/meshy-heroes/refs/A1-paint-tee/mj_7a945f66-ee08-48be-83b9-a09a214d04a0_0.png",
+      "tools/meshy-heroes/refs/A1-paint-tee/mj_7a945f66-ee08-48be-83b9-a09a214d04a0_1.png",
+      "tools/meshy-heroes/refs/A1-paint-tee/mj_7a945f66-ee08-48be-83b9-a09a214d04a0_2.png",
+      "tools/meshy-heroes/refs/A1-paint-tee/mj_7a945f66-ee08-48be-83b9-a09a214d04a0_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T16:56:58Z"
+  },
+  {
+    "id": "A2-clay-suit",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "59244d06-e3f2-47c0-b683-1f0e6fd5ebd2",
+    "files": [
+      "tools/meshy-heroes/refs/A2-clay-suit/mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_0.png",
+      "tools/meshy-heroes/refs/A2-clay-suit/mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_1.png",
+      "tools/meshy-heroes/refs/A2-clay-suit/mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_2.png",
+      "tools/meshy-heroes/refs/A2-clay-suit/mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T16:59:35Z"
+  },
+  {
+    "id": "A2-clay-tee",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "56800351-ba17-4541-978f-1247557fb146",
+    "files": [
+      "tools/meshy-heroes/refs/A2-clay-tee/mj_56800351-ba17-4541-978f-1247557fb146_0.png",
+      "tools/meshy-heroes/refs/A2-clay-tee/mj_56800351-ba17-4541-978f-1247557fb146_1.png",
+      "tools/meshy-heroes/refs/A2-clay-tee/mj_56800351-ba17-4541-978f-1247557fb146_2.png",
+      "tools/meshy-heroes/refs/A2-clay-tee/mj_56800351-ba17-4541-978f-1247557fb146_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:01:22Z"
+  },
+  {
+    "id": "A2-paint-suit",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "9a40fa28-b4df-4b2b-91a5-ea9074e9be53",
+    "files": [
+      "tools/meshy-heroes/refs/A2-paint-suit/mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_0.png",
+      "tools/meshy-heroes/refs/A2-paint-suit/mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_1.png",
+      "tools/meshy-heroes/refs/A2-paint-suit/mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_2.png",
+      "tools/meshy-heroes/refs/A2-paint-suit/mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:03:25Z"
+  },
+  {
+    "id": "A2-paint-tee",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "42f44646-8ab2-4db3-8f2e-afd1a7be73ba",
+    "files": [
+      "tools/meshy-heroes/refs/A2-paint-tee/mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_0.png",
+      "tools/meshy-heroes/refs/A2-paint-tee/mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_1.png",
+      "tools/meshy-heroes/refs/A2-paint-tee/mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_2.png",
+      "tools/meshy-heroes/refs/A2-paint-tee/mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:05:24Z"
+  },
+  {
+    "id": "A3-clay-suit",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "c66517f7-0c8c-4ff6-a901-562195fcd29f",
+    "files": [
+      "tools/meshy-heroes/refs/A3-clay-suit/mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_0.png",
+      "tools/meshy-heroes/refs/A3-clay-suit/mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_1.png",
+      "tools/meshy-heroes/refs/A3-clay-suit/mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_2.png",
+      "tools/meshy-heroes/refs/A3-clay-suit/mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:07:15Z"
+  },
+  {
+    "id": "A3-clay-tee",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "bb1e4a43-99d7-4622-9381-ae3c4e859900",
+    "files": [
+      "tools/meshy-heroes/refs/A3-clay-tee/mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_0.png",
+      "tools/meshy-heroes/refs/A3-clay-tee/mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_1.png",
+      "tools/meshy-heroes/refs/A3-clay-tee/mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_2.png",
+      "tools/meshy-heroes/refs/A3-clay-tee/mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:09:04Z"
+  },
+  {
+    "id": "A3-paint-suit",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "3b23d7cb-8c64-463e-9a71-3b312dabdac8",
+    "files": [
+      "tools/meshy-heroes/refs/A3-paint-suit/mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_0.png",
+      "tools/meshy-heroes/refs/A3-paint-suit/mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_1.png",
+      "tools/meshy-heroes/refs/A3-paint-suit/mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_2.png",
+      "tools/meshy-heroes/refs/A3-paint-suit/mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:10:45Z"
+  },
+  {
+    "id": "A3-paint-tee",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "32d9ff43-e6a1-43f1-9551-2694be291120",
+    "files": [
+      "tools/meshy-heroes/refs/A3-paint-tee/mj_32d9ff43-e6a1-43f1-9551-2694be291120_0.png",
+      "tools/meshy-heroes/refs/A3-paint-tee/mj_32d9ff43-e6a1-43f1-9551-2694be291120_1.png",
+      "tools/meshy-heroes/refs/A3-paint-tee/mj_32d9ff43-e6a1-43f1-9551-2694be291120_2.png",
+      "tools/meshy-heroes/refs/A3-paint-tee/mj_32d9ff43-e6a1-43f1-9551-2694be291120_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:12:35Z"
+  },
+  {
+    "id": "A4-clay-suit",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "eaee0f84-0288-4181-ba94-779652d0cadf",
+    "files": [
+      "tools/meshy-heroes/refs/A4-clay-suit/mj_eaee0f84-0288-4181-ba94-779652d0cadf_0.png",
+      "tools/meshy-heroes/refs/A4-clay-suit/mj_eaee0f84-0288-4181-ba94-779652d0cadf_1.png",
+      "tools/meshy-heroes/refs/A4-clay-suit/mj_eaee0f84-0288-4181-ba94-779652d0cadf_2.png",
+      "tools/meshy-heroes/refs/A4-clay-suit/mj_eaee0f84-0288-4181-ba94-779652d0cadf_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:14:21Z"
+  },
+  {
+    "id": "A4-clay-tee",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "a5fe144c-a9d6-4ad6-a024-cd01663adc35",
+    "files": [
+      "tools/meshy-heroes/refs/A4-clay-tee/mj_a5fe144c-a9d6-4ad6-a024-cd01663adc35_0.png",
+      "tools/meshy-heroes/refs/A4-clay-tee/mj_a5fe144c-a9d6-4ad6-a024-cd01663adc35_1.png",
+      "tools/meshy-heroes/refs/A4-clay-tee/mj_a5fe144c-a9d6-4ad6-a024-cd01663adc35_2.png",
+      "tools/meshy-heroes/refs/A4-clay-tee/mj_a5fe144c-a9d6-4ad6-a024-cd01663adc35_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:16:08Z"
+  },
+  {
+    "id": "A4-paint-suit",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "7e7c4f7f-8c84-479d-8098-22c76b12a3fd",
+    "files": [
+      "tools/meshy-heroes/refs/A4-paint-suit/mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_0.png",
+      "tools/meshy-heroes/refs/A4-paint-suit/mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_1.png",
+      "tools/meshy-heroes/refs/A4-paint-suit/mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_2.png",
+      "tools/meshy-heroes/refs/A4-paint-suit/mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:17:59Z"
+  },
+  {
+    "id": "A4-paint-tee",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "a3a2f06e-201f-4174-8434-d80e93d260bf",
+    "files": [
+      "tools/meshy-heroes/refs/A4-paint-tee/mj_a3a2f06e-201f-4174-8434-d80e93d260bf_0.png",
+      "tools/meshy-heroes/refs/A4-paint-tee/mj_a3a2f06e-201f-4174-8434-d80e93d260bf_1.png",
+      "tools/meshy-heroes/refs/A4-paint-tee/mj_a3a2f06e-201f-4174-8434-d80e93d260bf_2.png",
+      "tools/meshy-heroes/refs/A4-paint-tee/mj_a3a2f06e-201f-4174-8434-d80e93d260bf_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:19:39Z"
+  },
+  {
+    "id": "A5-clay-suit",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "c68acbba-3a2a-489b-aa9b-df4556dc629c",
+    "files": [
+      "tools/meshy-heroes/refs/A5-clay-suit/mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_0.png",
+      "tools/meshy-heroes/refs/A5-clay-suit/mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_1.png",
+      "tools/meshy-heroes/refs/A5-clay-suit/mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_2.png",
+      "tools/meshy-heroes/refs/A5-clay-suit/mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:21:32Z"
+  },
+  {
+    "id": "A5-clay-tee",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "e31fa81e-5815-4f74-bb70-635fa4d87df5",
+    "files": [
+      "tools/meshy-heroes/refs/A5-clay-tee/mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_0.png",
+      "tools/meshy-heroes/refs/A5-clay-tee/mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_1.png",
+      "tools/meshy-heroes/refs/A5-clay-tee/mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_2.png",
+      "tools/meshy-heroes/refs/A5-clay-tee/mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:23:15Z"
+  },
+  {
+    "id": "A5-paint-suit",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "94fb29e4-62d1-40c0-a540-efd5a4231972",
+    "files": [
+      "tools/meshy-heroes/refs/A5-paint-suit/mj_94fb29e4-62d1-40c0-a540-efd5a4231972_0.png",
+      "tools/meshy-heroes/refs/A5-paint-suit/mj_94fb29e4-62d1-40c0-a540-efd5a4231972_1.png",
+      "tools/meshy-heroes/refs/A5-paint-suit/mj_94fb29e4-62d1-40c0-a540-efd5a4231972_2.png",
+      "tools/meshy-heroes/refs/A5-paint-suit/mj_94fb29e4-62d1-40c0-a540-efd5a4231972_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:24:56Z"
+  },
+  {
+    "id": "A5-paint-tee",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "63abc2d9-0412-40ae-9bfb-e1b8fc375cb6",
+    "files": [
+      "tools/meshy-heroes/refs/A5-paint-tee/mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_0.png",
+      "tools/meshy-heroes/refs/A5-paint-tee/mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_1.png",
+      "tools/meshy-heroes/refs/A5-paint-tee/mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_2.png",
+      "tools/meshy-heroes/refs/A5-paint-tee/mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:26:35Z"
+  },
+  {
+    "id": "A6-clay-suit",
+    "prompt": "friendly small grey alien crewmate, big eyes, green accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "1bb2f3c2-f44c-4ea4-a2b4-88825a17963c",
+    "files": [
+      "tools/meshy-heroes/refs/A6-clay-suit/mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_0.png",
+      "tools/meshy-heroes/refs/A6-clay-suit/mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_1.png",
+      "tools/meshy-heroes/refs/A6-clay-suit/mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_2.png",
+      "tools/meshy-heroes/refs/A6-clay-suit/mj_1bb2f3c2-f44c-4ea4-a2b4-88825a17963c_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:28:31Z"
+  },
+  {
+    "id": "A6-clay-tee",
+    "prompt": "friendly small grey alien crewmate, big eyes, green accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a",
+    "files": [
+      "tools/meshy-heroes/refs/A6-clay-tee/mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_0.png",
+      "tools/meshy-heroes/refs/A6-clay-tee/mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_1.png",
+      "tools/meshy-heroes/refs/A6-clay-tee/mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_2.png",
+      "tools/meshy-heroes/refs/A6-clay-tee/mj_f1c5a89a-c29b-4a8a-bd3d-2490002cdf9a_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:30:21Z"
+  },
+  {
+    "id": "A6-paint-suit",
+    "prompt": "friendly small grey alien crewmate, big eyes, green accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "4fb29006-9fb8-4a81-8288-0f042b694a03",
+    "files": [
+      "tools/meshy-heroes/refs/A6-paint-suit/mj_4fb29006-9fb8-4a81-8288-0f042b694a03_0.png",
+      "tools/meshy-heroes/refs/A6-paint-suit/mj_4fb29006-9fb8-4a81-8288-0f042b694a03_1.png",
+      "tools/meshy-heroes/refs/A6-paint-suit/mj_4fb29006-9fb8-4a81-8288-0f042b694a03_2.png",
+      "tools/meshy-heroes/refs/A6-paint-suit/mj_4fb29006-9fb8-4a81-8288-0f042b694a03_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:35:19Z"
+  },
+  {
+    "id": "A6-paint-tee",
+    "prompt": "friendly small grey alien crewmate, big eyes, green accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "6197ce08-e68d-4805-a3c1-cc15ccef4634",
+    "files": [
+      "tools/meshy-heroes/refs/A6-paint-tee/mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_0.png",
+      "tools/meshy-heroes/refs/A6-paint-tee/mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_1.png",
+      "tools/meshy-heroes/refs/A6-paint-tee/mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_2.png",
+      "tools/meshy-heroes/refs/A6-paint-tee/mj_6197ce08-e68d-4805-a3c1-cc15ccef4634_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:35:39Z"
+  }
+]

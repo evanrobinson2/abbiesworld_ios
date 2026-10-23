@@ -183,7 +183,8 @@
      },
      "references": [
       "fantasy board games"
-     ]
+     ],
+     "motion": "sprite; Small pixel units with a few frames each; the battle reads from many units moving together"
     },
     "assets": {
      "kit": "modular",
@@ -363,6 +364,21 @@
       "note": "Small pixel-art cards in hand; confirm on capture."
      },
      "signatures_ref": "docs/oracle/hud/hud-signatures.json#9-kings"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "sprite",
+     "mocap": 0,
+     "locomotion": [
+      "sprite_frames"
+     ],
+     "tricks": [
+      "Small pixel units with a few frames each; the battle reads from many units moving together"
+     ],
+     "lesson": "At small scale, crowd motion reads better than detailed motion on one unit.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.4
     }
    },
    "ledger": {
@@ -902,7 +918,8 @@
       "summer camps and park trails",
       "low-resolution 3D of early consoles",
       "picture-book animals"
-     ]
+     ],
+     "motion": "keyframe; A few simple keyed cycles on a chunky low-poly bird, carried by the low-resolution pixel look"
     },
     "information_grammar": {
      "info_kinds": {
@@ -989,6 +1006,28 @@
      "structure": "sandbox",
      "tension_curve": "flat_calm",
      "failure_cost": "none"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "procedural"
+     ],
+     "tricks": [
+      "A few simple keyed cycles on a chunky low-poly bird, carried by the low-resolution pixel look",
+      "Climbing and gliding are separate simple states with quick, forgiving transitions"
+     ],
+     "lesson": "A tiny animation set is enough when the style is chunky and the transitions are quick.",
+     "sources": [
+      {
+       "title": "Wikipedia: A Short Hike",
+       "url": "https://en.wikipedia.org/wiki/A_Short_Hike"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.4
     }
    },
    "dna": {
@@ -1634,7 +1673,8 @@
       "martial-arts film choreography",
       "low-poly sculpture",
       "French comics"
-     ]
+     ],
+     "motion": "mocap; Martial-arts moves built as chains across four stances; each move ends in the stance the next one starts from"
     },
     "information_grammar": {
      "info_kinds": {
@@ -1712,6 +1752,29 @@
      "structure": "mixed",
      "tension_curve": "sawtooth",
      "failure_cost": "retry_level"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "mocap",
+     "mocap": 0.7,
+     "locomotion": [
+      "root_motion",
+      "blend_tree"
+     ],
+     "tricks": [
+      "Martial-arts moves built as chains across four stances; each move ends in the stance the next one starts from",
+      "Custom Unreal animation system so designers could assemble decks of moves without code",
+      "Cloth and masks carry secondary motion on simple faceted bodies"
+     ],
+     "lesson": "Moves that end where the next begins let players chain their own combos; secondary motion on cloth sells it.",
+     "sources": [
+      {
+       "title": "Unreal Engine interview: crafting a unique combat experience in Absolver",
+       "url": "https://www.unrealengine.com/en-US/developer-interviews/crafting-a-unique-combat-experience-in-absolver"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
     }
    },
    "dna": {
@@ -1961,7 +2024,8 @@
       "toy figures",
       "Japanese picture books",
       "village life"
-     ]
+     ],
+     "motion": "keyframe; Squat toy-proportioned villagers with bouncy keyed walks and big emotes (reactions) for every mood"
     },
     "information_grammar": {
      "info_kinds": {
@@ -2062,6 +2126,23 @@
      "structure": "sandbox",
      "tension_curve": "flat_calm",
      "failure_cost": "none"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "procedural_ik"
+     ],
+     "tricks": [
+      "Squat toy-proportioned villagers with bouncy keyed walks and big emotes (reactions) for every mood",
+      "Footsteps and run speed change with the ground; the head turns to look at things nearby"
+     ],
+     "lesson": "Emotes as a vocabulary: a small set of big readable reactions carries all the social information.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
     }
    },
    "dna": {
@@ -2700,7 +2781,8 @@
      "references": [
       "medieval siege engines",
       "da Vinci sketches"
-     ]
+     ],
+     "motion": "physics; Machines move by rigid-body physics: hinges, wheels and springs, so every machine animates itself"
     },
     "assets": {
      "kit": "modular",
@@ -2786,6 +2868,22 @@
       "Medieval",
       "Destruction"
      ]
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "physics",
+     "mocap": 0,
+     "locomotion": [
+      "physics"
+     ],
+     "tricks": [
+      "Machines move by rigid-body physics: hinges, wheels and springs, so every machine animates itself",
+      "Soldiers are simple keyed loops that ragdoll when hit"
+     ],
+     "lesson": "Physics is the animator for anything kids build; keep people simple and let them tumble.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
     }
    },
    "ledger": {
@@ -3004,7 +3102,8 @@
      "references": [
       "toy catalogue photography",
       "dioramas"
-     ]
+     ],
+     "motion": "keyframe; Minifigure animation in the stiff, hopping style of the toy: no knees, swinging arms and legs"
     },
     "assets": {
      "kit": "modular",
@@ -3065,6 +3164,22 @@
       "LEGO",
       "Family Friendly"
      ]
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Minifigure animation in the stiff, hopping style of the toy: no knees, swinging arms and legs",
+      "Built models are tested by physics"
+     ],
+     "lesson": "Animate toys like toys: respect the joints the toy really has.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
     }
    },
    "ledger": {
@@ -4523,6 +4638,21 @@
       "uses_cards": false
      },
      "signatures_ref": "docs/oracle/hud/hud-signatures.json#dorfromantik"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "procedural",
+     "mocap": 0,
+     "locomotion": [
+      "procedural"
+     ],
+     "tricks": [
+      "Tiny ambient life (trains, boats, windmills, birds) on simple loops and paths; placement pops and settles"
+     ],
+     "lesson": "Ambient loops on paths are enough to make a board feel alive.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
     }
    },
    "ledger": {
@@ -4759,7 +4889,8 @@
       "Moebius-like clean comic shapes",
       "desert canyons",
       "climbing films"
-     ]
+     ],
+     "motion": "mixed; Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics"
     },
     "information_grammar": {
      "info_kinds": {
@@ -4844,6 +4975,23 @@
      "structure": "campaign",
      "tension_curve": "rising_to_end",
      "failure_cost": "none"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "mixed",
+     "mocap": 0.3,
+     "locomotion": [
+      "procedural_ik",
+      "blend_tree"
+     ],
+     "tricks": [
+      "Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics",
+      "Breathing and trembling arms show stamina"
+     ],
+     "lesson": "Let the player drive each hand; IK and a little physics make any wall climbable.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
     }
    },
    "dna": {
@@ -4905,6 +5053,571 @@
     "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
     "tools/steam-study/reference_notes.py (profile row)",
     "tools/steam-study/rendering_notes.py (How it's drawn)"
+   ]
+  },
+  {
+   "id": "spore",
+   "file": "docs/oracle/identity/examples/spore.json",
+   "schema_version": "1.2",
+   "game": {
+    "title": "Spore (Cell Stage)",
+    "developer": "Maxis",
+    "publisher": "Electronic Arts",
+    "release": "2008",
+    "steam_appid": 17390
+   },
+   "core": {
+    "fantasy": "You are a tiny new cell in a drop of water, eating, growing and redesigning yourself until you are big enough to leave the pool.",
+    "pillars": [
+     "You design yourself",
+     "Eat or be eaten, by size",
+     "Grow and the world rises with you"
+    ],
+    "signature_moment": "You fit a new spike from a fallen meteor fragment, swim back out, and the thing that chased you a minute ago is now your lunch.",
+    "anti_goals": [
+     "no harsh failure: death respawns you from an egg",
+     "no reading",
+     "no long tutorial"
+    ],
+    "signatures": [
+     {
+      "id": "size_is_the_rule",
+      "layer": "mechanics",
+      "description": "Who eats whom is decided by size and parts you can see: smaller things are food, bigger things are danger.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "cell_editor",
+      "layer": "mechanics",
+      "description": "A mating call opens a playful editor where you drag parts (mouths, spikes, flagella, eyes, poison) onto your cell, paint it and swim off changed.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "parts_found_in_world",
+      "layer": "pacing",
+      "description": "New parts are found in the world, in meteor fragments and in creatures you eat, then become editor choices.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "water_layers",
+      "layer": "art",
+      "description": "The pool is stacked in parallax layers: blurred giants drift below, sunlit specks float above, and growing lifts you to the next layer.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "diet_by_mouth",
+      "layer": "mechanics",
+      "description": "The mouth you choose sets your diet (plants, meat or both), which changes how you play.",
+      "class": "style",
+      "confidence": 0.7
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "expression": 0.35,
+      "discovery": 0.25,
+      "sensation": 0.2,
+      "challenge": 0.1,
+      "fantasy": 0.1
+     },
+     "emotional_targets": {
+      "wonder": 0.8,
+      "pride": 0.7,
+      "mischief": 0.4,
+      "mild tension": 0.4
+     },
+     "audience": {
+      "age": "everyone, including children",
+      "skill_floor": "low",
+      "context": "about an hour for the Cell Stage"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "swim",
+       "input": "click or WASD"
+      },
+      {
+       "verb": "eat",
+       "input": "touch food"
+      },
+      {
+       "verb": "attack",
+       "input": "ram or part ability"
+      },
+      {
+       "verb": "edit cell",
+       "input": "drag parts in the editor"
+      },
+      {
+       "verb": "paint",
+       "input": "pick colours"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "swim",
+       "eat or flee",
+       "collect DNA",
+       "find a part",
+       "call a mate",
+       "edit the cell",
+       "grow to the next layer"
+      ],
+      "period_s": {
+       "value": 240,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+       "unit": "s"
+      }
+     },
+     "rules": {
+      "failure_model": "soft",
+      "win": "fill the DNA bar to grow legs and leave the water",
+      "resources": [
+       "DNA points",
+       "health"
+      ],
+      "scoring": "DNA points fill an evolution bar"
+     },
+     "randomness": {
+      "amount": 0.2,
+      "kind": "output"
+     },
+     "information": "perfect",
+     "systems": [
+      "size-based predator and prey",
+      "diet set by mouth part",
+      "part abilities (spikes, poison, electric, jets)",
+      "procedural animation of any editor creation",
+      "depth layers that change scale"
+     ],
+     "complexity": {
+      "verb_count": {
+       "value": 5,
+       "source": "store_page",
+       "confidence": 0.5,
+       "method": "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+      },
+      "size_steps": {
+       "value": 10,
+       "source": "store_page",
+       "confidence": 0.7,
+       "method": "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+      },
+      "part_count": {
+       "value": 12,
+       "source": "store_page",
+       "confidence": 0.7,
+       "method": "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+      },
+      "starting_parts": {
+       "value": 6,
+       "source": "store_page",
+       "confidence": 0.6,
+       "method": "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+      }
+     },
+     "size_classes": {
+      "prey": "smaller than you: food, no threat",
+      "peer": "your size: a fair fight; beating one drops 3 meat chunks",
+      "predator": "bigger: kills you in two hits",
+      "epic": "giant: kills you in one hit; only clever play beats it"
+     },
+     "growth": "Five size stages, each split in two (ten steps). Each step needs about five pieces of food; every step turns your old peers into prey. Seeing the seafloor means you are nearly ready to leave the water.",
+     "food": [
+      "small green plant bits and big seaweed (herbivore)",
+      "meat chunks from beaten cells (carnivore)",
+      "eggs later in the stage: anyone can eat them, left alone they hatch predators",
+      "living cells drained with a proboscis"
+     ],
+     "world_objects": [
+      "meteor fragments to ram open for parts",
+      "unbreakable debris and shells",
+      "air bubbles",
+      "currents that speed you up with them and slow you against them",
+      "poison clouds from poison parts"
+     ],
+     "parts": {
+      "flagellum": "speed",
+      "jet": "bursts of speed",
+      "cilia": "turning and control",
+      "spikes": "only protect and hit where they point; long ones catch on terrain",
+      "poison": "leaves a cloud behind that slows and hurts chasers",
+      "electric": "charges up then zaps around you",
+      "proboscis": "drains other cells; omnivore mouth",
+      "jaw": "carnivore mouth and weapon",
+      "filter or beak": "herbivore mouth",
+      "eyes": "without eyes your view is restricted"
+     },
+     "diet": "Diet is a sliding timeline from herbivore to carnivore: you start in the middle, plants push one way, meat and kills the other, and later choices count less. The final diet sets a bonus that carries into the next stage.",
+     "editor_flow": [
+      "press Call Mate (or the key) at any time",
+      "a mate appears and calls; follow the sound",
+      "swim into the mate",
+      "the cell editor opens in a top-down view of your cell",
+      "drag parts on (placement matters: spikes cover only where they sit, a thin body is harder to hit), paint, sell parts back for DNA",
+      "first time: name your creature",
+      "leave: you hatch as the new design and swim on"
+     ]
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "mouse",
+       "keyboard"
+      ],
+      "mapping": "direct",
+      "controls": "WASD or arrow keys, or click to set a destination; + and - zoom; one key pauses (camera and commands still work while paused)."
+     },
+     "camera": {
+      "model": "top_down",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "freeform_autofit",
+      "undo": "unlimited in the editor",
+      "preview_before_commit": true,
+      "auto_repair": true
+     },
+     "juice": {
+      "procedural_settle": 0.7,
+      "squash_stretch": 0.6,
+      "sound_on_action": 0.9,
+      "particles": 0.5,
+      "scale_pop": 0.5,
+      "camera_kick": 0.2,
+      "screen_shake": 0.1,
+      "hit_stop": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+       "depth of field",
+       "bloom",
+       "fog"
+      ],
+      "signature": "Cell Stage: soft translucent 3D cells with glowing rims, seen straight down, floating in parallax layers of water whose blur and tint grow with depth, so giant creatures drift past below like shadows.",
+      "lesson": "A top-down 2D game can still have depth: stack the pool in blurred, tinted layers and move the player up a layer as they grow. Our film-look depth of field and an SVG or shader cell rim do the rest."
+     },
+     "references": [
+      "microscope photography of pond life",
+      "soft toy and plush shapes",
+      "nature documentaries"
+     ],
+     "motion": "procedural; Animators author motion once in a special editor on test creatures, marked up by meaning (this is a hand, this is a mouth)"
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "body": {
+       "mix": {
+        "overlay": 0.6,
+        "diegetic": 0.4
+       },
+       "timing": "on_change",
+       "note": "Your cell picture and health sit in the bottom-right corner. When anything is hit, a small bar appears above it: green for health left, red for the last hit, black for what was lost before.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "threat": {
+       "mix": {
+        "diegetic": 0.7,
+        "spatial": 0.3
+       },
+       "timing": "always_on",
+       "note": "Size is the threat readout: smaller is food, same size is a fair fight, bigger is a predator and giants are epics. The next size class drifts blurred in the layer below before you reach it.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "overlay": 0.7,
+        "diegetic": 0.3
+       },
+       "timing": "always_on",
+       "note": "A progress bar along the bottom fills with DNA toward the next evolution; when it is full the bottom-right button becomes the advance button. Meteor fragments in the world hold new parts.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "tools": {
+       "mix": {
+        "overlay": 0.8,
+        "diegetic": 0.2
+       },
+       "timing": "summoned",
+       "note": "The cell editor is a separate screen opened by a mating call; changes show at once on the cell.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "navigation": {
+       "mix": {
+        "diegetic": 0.6,
+        "none": 0.4
+       },
+       "timing": "absent",
+       "note": "No map: you drift where the food is; the edge of the drop is soft.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+      },
+      "drawn_as": "neutral_overlay",
+      "fade_rule": "Only health and the DNA bar while you swim; the editor is summoned.",
+      "layout": "Health portrait bottom right, progress bar along the bottom, Call Mate button; damage bars appear on whoever is hit, then fade."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "your size (growth)",
+        "channels": [
+         "camera",
+         "npcs",
+         "music",
+         "light"
+        ]
+       }
+      ],
+      "max_channels": 4
+     },
+     "note": "The cell carries most of it: parts show what it can do, size shows who can eat whom, and bigger shapes drift by in blurred layers below. A thin DNA bar and health are the only overlay; the editor is summoned by a mating call."
+    },
+    "narrative": {
+     "narrative_mode": {
+      "emergent": 0.6,
+      "enacted": 0.2,
+      "evoked": 0.2
+     },
+     "tone": {
+      "cozy_tense": -0.3,
+      "whimsical_grounded": -0.6,
+      "earnest_ironic": 0.2,
+      "quiet_loud": -0.4,
+      "handmade_industrial": -0.5
+     },
+     "themes": [
+      "growth",
+      "evolution",
+      "self-expression"
+     ]
+    },
+    "pacing": {
+     "structure": "campaign",
+     "tension_curve": "rising_to_end",
+     "failure_cost": "none"
+    },
+    "audio": {
+     "music": {
+      "genre": "generative ambient (Brian Eno with the audio team)",
+      "adaptive": "generative, always changing",
+      "note": "Procedural music that keeps changing rather than looping one track."
+     },
+     "sfx_character": "mixed",
+     "voice": "gibberish"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "procedural",
+     "mocap": 0,
+     "locomotion": [
+      "procedural_ik",
+      "procedural"
+     ],
+     "tricks": [
+      "Animators author motion once in a special editor on test creatures, marked up by meaning (this is a hand, this is a mouth)",
+      "At runtime the motion is retargeted to any creature the player built, with an IK solver placing feet, hands and mouths",
+      "Paint is procedural too: brush scripts read the body and flare colour at the ends of limbs"
+     ],
+     "lesson": "Animate by meaning, not by bone: author \"reach with the mouth\" once and retarget it to any shape the child makes.",
+     "sources": [
+      {
+       "title": "Chris Hecker et al.: Real-time motion retargeting to highly varied user-created morphologies (SIGGRAPH 2008)",
+       "url": "https://chrishecker.com/Real-time_Motion_Retargeting_to_Highly_Varied_User-Created_Morphologies"
+      },
+      {
+       "title": "CGW: Spore experts share animation techniques at SIGGRAPH 2008",
+       "url": "https://www.cgw.com/Press-Center/Siggraph/2008/Spore-Experts-Share-Animation-Techniques-at-SIGG.aspx"
+      },
+      {
+       "title": "CGW Oct 2008: Evolutionary Chain",
+       "url": "https://www.cgw.com/Publications/CGW/2008/Volume-31-Issue-10-Oct-2008-/Evolutionary-Chain.aspx"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.75
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.33,
+     "expression": 0.89,
+     "structure": 0.67,
+     "social": 0.11,
+     "systems": 0.56,
+     "chance": 0.33,
+     "session": 0.44
+    },
+    "confidence": 0.8
+   },
+   "ledger": {
+    "style": [
+     "top-down eat-or-be-eaten by size",
+     "parts found in the world feed a playful cell editor",
+     "diet chosen by mouth part",
+     "parallax water layers with depth blur",
+     "growing lifts you to a bigger layer",
+     "procedural animation of any creation"
+    ],
+    "expression": [
+     "Spore's creatures, parts and their designs",
+     "its cell and pool art",
+     "its music and sounds",
+     "its editor UI",
+     "the Spore name and logo"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "mechanics",
+      "target": "Abbie's science adventure rules",
+      "setting": "Size decides who eats whom, shown on the creatures themselves; being eaten just pops you back out of an egg.",
+      "from_signature": "size_is_the_rule"
+     },
+     {
+      "layer": "mechanics",
+      "target": "Abbie's science adventure editor",
+      "setting": "Parts found in the goo become choices in a playful cell editor; every change shows at once in how Abbie's cell swims.",
+      "from_signature": "cell_editor"
+     },
+     {
+      "layer": "art",
+      "target": "Abbie's science adventure 2D view",
+      "setting": "A top-down drop of water drawn in SVG and shaders: soft translucent cells with glowing rims, and parallax layers that blur and tint with depth.",
+      "from_signature": "water_layers"
+     },
+     {
+      "layer": "pacing",
+      "target": "Abbie's science adventure progression",
+      "setting": "Growing lifts the camera to the next, bigger layer of the pool, where the old giants are now your size.",
+      "from_signature": "water_layers"
+     }
+    ],
+    "leave": [
+     "Spore's creatures and parts",
+     "its later stages (creature, tribe, civilisation, space)",
+     "its menus and editor art"
+    ]
+   },
+   "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/owned_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)",
+    "Public guides read 2026-10-23 (StrategyWiki Cell Stage, GameRevolution FAQ, Wikipedia, CGW Oct 2008); not yet measured on capture"
+   ],
+   "study_notes": {
+    "date": "2026-10-23",
+    "why": "Evan asked for a video of the Cell Stage for Abbie's science adventure (AW-STUDY-0047).",
+    "sources_read": [
+     "https://strategywiki.org/wiki/Spore/Cell_Stage",
+     "https://www.gamerevolution.com/guides/41924-spore-faqwalkthrough",
+     "https://en.wikipedia.org/wiki/Spore_(2008_video_game)",
+     "https://www.cgw.com/Publications/CGW/2008/Volume-31-Issue-10-Oct-2008-/Evolutionary-Chain.aspx",
+     "https://www.synthtopia.com/content/2008/09/24/brian-enos-music-for-spore/",
+     "https://strategywiki.org/wiki/Spore/Cell_Creator",
+     "https://strategywiki.org/wiki/Spore/Creature_Stage",
+     "https://janeng.com/?p=143",
+     "https://gamedeveloper.com/game-platforms/gingold-talks-i-spore-i-s-magic-crayon-approach",
+     "https://www.gamespot.com/articles/gdc-07-creating-spore/1100-6167215/",
+     "https://www.engadget.com/2007-03-12-spores-power-struggle-freedom-vs-beauty.html",
+     "https://www.awn.com/animationworld/evolution-spore"
+    ],
+    "video": "Cloud sessions cannot reach YouTube, so public video was studied through written guides. A private recording from Evan's own copy on his PC was requested; its notes replace these estimates when it lands. Frames and recordings are study only and are never committed or published.",
+    "findings_for_the_science_adventure": [
+     "Movement is on one flat plane inside a 3D pool: a top-down 2D game with real depth behind it.",
+     "Ten small growth steps of about five foods each keep a reward every minute or so.",
+     "Prey, peer, predator, epic: four size classes are the whole threat grammar, readable at a glance.",
+     "Damage bars live on the creature that was hit, not in a corner.",
+     "The mate call makes editing a moment in the world (follow the sound), not a menu.",
+     "Parts work only where you put them, so the editor is a real decision, not decoration.",
+     "Eggs that hatch into predators if left: a gentle clock without a timer.",
+     "Currents and poison clouds make the water itself part of play."
+    ],
+    "creator_and_loop_study": {
+     "date": "2026-10-23",
+     "doc": "docs/oracle/spore/SPORE_CREATOR_STUDY.md",
+     "loop": [
+      "arrive from meteor",
+      "play and eat",
+      "earn DNA bar (10 steps, ~5 foods each)",
+      "call mate and follow sound",
+      "edit live, paint",
+      "hatch and grow",
+      "see sea floor, timeline of diet, leave water"
+     ],
+     "editor": [
+      "parts panel left, stats top right",
+      "mouth required, eyes and propulsion optional",
+      "per-part caps force choices",
+      "complexity meter turns red",
+      "placement matters",
+      "paint never affects performance",
+      "pre-rigged parts with named clips retarget any body",
+      "soft mastery: few modes, immediate big feedback, hidden judgment of what looks good"
+     ],
+     "for_science_adventure": [
+      "mate call becomes a friend-blob song, editor is a zoom",
+      "four-move editor",
+      "golden reward per step",
+      "wobble meter instead of DNA numbers",
+      "parts work where placed",
+      "blur-layer depth",
+      "escape ceremony from diet timeline",
+      "creatures are tiny shareable data"
+     ]
+    }
+   },
+   "history": [
+    {
+     "date": "2026-10-23",
+     "change": "First record from public knowledge (PR #338)."
+    },
+    {
+     "date": "2026-10-23",
+     "change": "Deepened from public guides: size classes, growth steps, parts, editor flow, HUD layout, music."
+    },
+    {
+     "date": "2026-10-23",
+     "note": "Creator, cell HUD, evolution step and loop study added (docs/oracle/spore)."
+    }
    ]
   },
   {
@@ -5097,7 +5810,8 @@
       "street art and graffiti",
       "action anime",
       "martial-arts film"
-     ]
+     ],
+     "motion": "mocap; In-house mocap actors perform each fighter's moves; capture is fed straight into the RE Engine"
     },
     "information_grammar": {
      "info_kinds": {
@@ -5186,6 +5900,36 @@
      "structure": "mixed",
      "tension_curve": "sawtooth",
      "failure_cost": "retry_level"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "mocap",
+     "mocap": 0.8,
+     "locomotion": [
+      "root_motion"
+     ],
+     "tricks": [
+      "In-house mocap actors perform each fighter's moves; capture is fed straight into the RE Engine",
+      "Capcom built real-time preview of capture inside the engine, so animators see it on the character at once",
+      "Captured motion is then pushed into strong key poses with hit-stop, so every hit reads"
+     ],
+     "lesson": "Capture for weight and timing, then exaggerate the key poses and freeze the contact frame.",
+     "sources": [
+      {
+       "title": "Dashfight: Capcom shows its RE Engine mocap technique in SF6",
+       "url": "https://dashfight.com/news/capcom-unveils-cutting-edge-re-engine-mocap-technique-in-sf-6-showcase-3911"
+      },
+      {
+       "title": "Capcom R&D: Real-time motion capture preview in RE ENGINE (slides)",
+       "url": "https://www.docswell.com/s/CAPCOM_RandD/KLLR24-RE2023"
+      },
+      {
+       "title": "80.lv: Capcom demonstrates motion capture running directly in RE Engine",
+       "url": "https://80.lv/articles/capcom-demonstrates-motion-capture-running-directly-in-re-engine/"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.7
     }
    },
    "dna": {
@@ -5445,7 +6189,8 @@
       "toy boxes of action figures",
       "party games",
       "Saturday-morning cartoons"
-     ]
+     ],
+     "motion": "keyframe; Hand-keyed moves for every fighter, tuned frame by frame for timing"
     },
     "information_grammar": {
      "info_kinds": {
@@ -5533,6 +6278,28 @@
      "structure": "mixed",
      "tension_curve": "sawtooth",
      "failure_cost": "retry_level"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "root_motion"
+     ],
+     "tricks": [
+      "Hand-keyed moves for every fighter, tuned frame by frame for timing",
+      "Hit-stop: the struck fighter shakes in place, horizontally on the ground and vertically in the air, fading out; the attacker keeps moving a little",
+      "Damage poses are blended in, and shake scales with camera distance"
+     ],
+     "lesson": "Hit-stop is animation: freeze, shake the victim, keep the attacker alive, fade the shake.",
+     "sources": [
+      {
+       "title": "Nintendo Wire: Sakurai's \"Eight Hit Stop Techniques\" and other episodes",
+       "url": "https://nintendowire.com/news/2022/12/12/this-week-in-sakurai-12-5-12-11-fine-tuning-hit-stop-and-cheating-the-system/"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.7
     }
    },
    "dna": {
@@ -6414,6 +7181,22 @@
       "uses_cards": false
      },
      "signatures_ref": "docs/oracle/hud/hud-signatures.json#tiny-glade"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "procedural",
+     "mocap": 0,
+     "locomotion": [
+      "procedural"
+     ],
+     "tricks": [
+      "Buildings grow and settle procedurally as you draw; the \"animation\" is the architecture answering the stroke",
+      "Sheep and birds wander with simple procedural motion; nothing is mocap"
+     ],
+     "lesson": "The world answering a stroke is the animation; spend motion on growth and settling, not characters.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
     }
    },
    "ledger": {
@@ -6967,7 +7750,8 @@
       "picture books printed in a few colours",
       "English village gardens",
       "silent comedy"
-     ]
+     ],
+     "motion": "keyframe; Animated in Blender, played in Unity: a small set of goose clips (waddle, run with flapping wings, crouch, honk, grab)"
     },
     "information_grammar": {
      "info_kinds": {
@@ -7055,6 +7839,29 @@
      "structure": "puzzle_levels",
      "tension_curve": "sawtooth",
      "failure_cost": "none"
+    },
+    "animation": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "procedural_ik"
+     ],
+     "tricks": [
+      "Animated in Blender, played in Unity: a small set of goose clips (waddle, run with flapping wings, crouch, honk, grab)",
+      "Villagers react with clear, readable body language (look up, chase, shoo), which is the stealth readout",
+      "Neck and head lead the body, so the goose looks curious before it moves"
+     ],
+     "lesson": "Readable reactions on the people are worth more than a big animation set; lead with the head.",
+     "sources": [
+      {
+       "title": "Game Developer: Road to the IGF, House House's Untitled Goose Game",
+       "url": "https://www.gamedeveloper.com/game-platforms/road-to-the-igf-house-house-s-i-untitled-goose-game-i-"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
     }
    },
    "dna": {
@@ -7219,6 +8026,21 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "sprite",
+     "mocap": 0,
+     "locomotion": [
+      "sprite_frames"
+     ],
+     "tricks": [
+      "Small pixel units with a few frames each; the battle reads from many units moving together"
+     ],
+     "lesson": "At small scale, crowd motion reads better than detailed motion on one unit.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.4
+    },
     "palette": null,
     "audio_mood": "Punchy war drums and short stings per placement.",
     "pacing": "brisk, short sessions",
@@ -7316,6 +8138,7 @@
      "confidence": 0.55,
      "lesson": "A paper ground and soft ink lines make tidy puzzles feel homely rather than clinical."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light piano and plucks; small clicks and rustles for every object.",
     "pacing": "slow, short sessions",
@@ -7403,6 +8226,28 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.7,
      "lesson": "Rendering small and scaling up crisp is a one-line look that makes simple models charming."
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "procedural"
+     ],
+     "tricks": [
+      "A few simple keyed cycles on a chunky low-poly bird, carried by the low-resolution pixel look",
+      "Climbing and gliding are separate simple states with quick, forgiving transitions"
+     ],
+     "lesson": "A tiny animation set is enough when the style is chunky and the transitions are quick.",
+     "sources": [
+      {
+       "title": "Wikipedia: A Short Hike",
+       "url": "https://en.wikipedia.org/wiki/A_Short_Hike"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.4
     },
     "palette": null,
     "audio_mood": "Bright adaptive music that shifts by area; birds and wind.",
@@ -7493,6 +8338,29 @@
      "confidence": 0.6,
      "lesson": "Spend detail on what moves (cloth, masks) and keep the rest faceted and flat; animation then carries the beauty."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "mocap",
+     "mocap": 0.7,
+     "locomotion": [
+      "root_motion",
+      "blend_tree"
+     ],
+     "tricks": [
+      "Martial-arts moves built as chains across four stances; each move ends in the stance the next one starts from",
+      "Custom Unreal animation system so designers could assemble decks of moves without code",
+      "Cloth and masks carry secondary motion on simple faceted bodies"
+     ],
+     "lesson": "Moves that end where the next begins let players chain their own combos; secondary motion on cloth sells it.",
+     "sources": [
+      {
+       "title": "Unreal Engine interview: crafting a unique combat experience in Absolver",
+       "url": "https://www.unrealengine.com/en-US/developer-interviews/crafting-a-unique-combat-experience-in-absolver"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Ambient strings and wind; sharp, dry hit sounds.",
     "pacing": "brisk, short sessions",
@@ -7578,6 +8446,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "fast, short sessions",
@@ -7668,6 +8537,7 @@
      "confidence": 0.55,
      "lesson": "One weather signal drives light, music and danger at once."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Folk instruments that darken in the storm.",
     "pacing": "brisk, long sessions",
@@ -7755,6 +8625,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Period orchestral.",
     "pacing": "brisk, medium sessions",
@@ -7838,6 +8709,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Medieval.",
     "pacing": "slow, long sessions",
@@ -7924,6 +8796,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.4
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Warm narration and animal sounds.",
     "pacing": "slow, short sessions",
@@ -8009,6 +8882,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, short sessions",
@@ -8092,6 +8966,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dread.",
     "pacing": "slow, short sessions",
@@ -8177,6 +9052,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sparse; the emergency alarm is the signature.",
     "pacing": "brisk, short sessions",
@@ -8266,6 +9142,23 @@
      "confidence": 0.7,
      "lesson": "Curving the world away from the camera keeps a small place feeling big but safe; we can bend the Ranch the same way in a vertex shader."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "procedural_ik"
+     ],
+     "tricks": [
+      "Squat toy-proportioned villagers with bouncy keyed walks and big emotes (reactions) for every mood",
+      "Footsteps and run speed change with the ground; the head turns to look at things nearby"
+     ],
+     "lesson": "Emotes as a vocabulary: a small set of big readable reactions carries all the social information.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Hourly music that changes through the day; soft footsteps on every ground type.",
     "pacing": "slow, short sessions",
@@ -8352,6 +9245,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Orchestral calm with market bustle.",
     "pacing": "slow, long sessions",
@@ -8438,6 +9332,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Voiced legends call out pings.",
     "pacing": "fast, medium sessions",
@@ -8525,6 +9420,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sci-fi synth.",
     "pacing": "brisk, short sessions",
@@ -8610,6 +9506,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, short sessions",
@@ -8693,6 +9590,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "slow, short sessions",
@@ -8778,6 +9676,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "slow, short sessions",
@@ -8863,6 +9762,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Realistic gunfire and radio chatter.",
     "pacing": "brisk, long sessions",
@@ -8946,6 +9846,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "slow, short sessions",
@@ -9031,6 +9932,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Radio and realistic weapons.",
     "pacing": "brisk, long sessions",
@@ -9120,6 +10022,7 @@
      "confidence": 0.55,
      "lesson": "Smooth gradients across low-poly faces look soft and friendly to kids."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Soft synth.",
     "pacing": "slow, short sessions",
@@ -9202,6 +10105,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Surf rock.",
     "pacing": "brisk, short sessions",
@@ -9291,6 +10195,7 @@
      "confidence": 0.65,
      "lesson": "Fog is a shader too: its colour sets the mood before anything else."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sparse strings and waves.",
     "pacing": "brisk, medium sessions",
@@ -9373,6 +10278,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, short sessions",
@@ -9458,6 +10364,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Upbeat.",
     "pacing": "fast, short sessions",
@@ -9543,6 +10450,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dungeon mood.",
     "pacing": "brisk, short sessions",
@@ -9628,6 +10536,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Deep rumbles.",
     "pacing": "brisk, medium sessions",
@@ -9711,6 +10620,7 @@
      "confidence": 0.7,
      "lesson": "A fixed camera lets you paint lighting once and keep it."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Iconic acoustic-trip-hop score and a gravelly narrator.",
     "pacing": "brisk, short sessions",
@@ -9797,6 +10707,7 @@
      "confidence": 0.5,
      "lesson": "Big designed shadow shapes read better than accurate soft shadows in a comic look."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Cinematic.",
     "pacing": "slow, short sessions",
@@ -9882,6 +10793,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "fast, medium sessions",
@@ -9967,6 +10879,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Gentle score.",
     "pacing": "slow, short sessions",
@@ -10053,6 +10966,22 @@
      "confidence": 0.55,
      "lesson": "Keep the world quiet so the thing the player builds is the loudest object."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "physics",
+     "mocap": 0,
+     "locomotion": [
+      "physics"
+     ],
+     "tricks": [
+      "Machines move by rigid-body physics: hinges, wheels and springs, so every machine animates itself",
+      "Soldiers are simple keyed loops that ragdoll when hit"
+     ],
+     "lesson": "Physics is the animator for anything kids build; keep people simple and let them tumble.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
     "palette": null,
     "audio_mood": "Light medieval tunes, creaks and crashes.",
     "pacing": "brisk, medium sessions",
@@ -10138,6 +11067,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.55
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -10192,6 +11122,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -10278,6 +11209,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Period songs.",
     "pacing": "brisk, short sessions",
@@ -10364,6 +11296,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Adventure score.",
     "pacing": "brisk, medium sessions",
@@ -10451,6 +11384,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sea.",
     "pacing": "brisk, short sessions",
@@ -10534,6 +11468,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Bouncy.",
     "pacing": "brisk, medium sessions",
@@ -10621,6 +11556,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.5
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Show music and voices.",
     "pacing": "slow, short sessions",
@@ -10703,6 +11639,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Loud realistic gunfire.",
     "pacing": "fast, short sessions",
@@ -10786,6 +11723,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Taps.",
     "pacing": "slow, short sessions",
@@ -10876,6 +11814,7 @@
      "confidence": 0.75,
      "lesson": "Lines can live in two places (texture and screen); use both so near and far stay inked."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, short sessions",
@@ -10964,6 +11903,7 @@
      "confidence": 0.6,
      "lesson": "A toon layer can sit on top of physical materials; it does not have to replace them."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, short sessions",
@@ -11047,6 +11987,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "fast, short sessions",
@@ -11130,6 +12071,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Upbeat.",
     "pacing": "fast, short sessions",
@@ -11219,6 +12161,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient space score.",
     "pacing": "slow, long sessions",
@@ -11301,6 +12244,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Chiptune.",
     "pacing": "slow, short sessions",
@@ -11387,6 +12331,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Comic voice work.",
     "pacing": "slow, medium sessions",
@@ -11472,6 +12417,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -11558,6 +12504,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.5
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Synthwave.",
     "pacing": "brisk, medium sessions",
@@ -11643,6 +12590,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, medium sessions",
@@ -11729,6 +12677,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient machinery.",
     "pacing": "slow, long sessions",
@@ -11814,6 +12763,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "80s.",
     "pacing": "slow, long sessions",
@@ -11899,6 +12849,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -11921,6 +12872,113 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "celeste",
+   "file": "docs/oracle/games/celeste.json",
+   "appid": 504230,
+   "name": "Celeste",
+   "store_url": "https://store.steampowered.com/app/504230/",
+   "genres": [
+    "Platformer",
+    "Precision",
+    "Narrative"
+   ],
+   "short_description": "Climb a mountain as Madeline, one tight jump-and-dash screen at a time, while facing her anxiety.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Platformer",
+    "Precision",
+    "Narrative"
+   ],
+   "summary": "Climb a mountain as Madeline, one tight jump-and-dash screen at a time, while facing her anxiety.",
+   "identity": {
+    "core_loop": "Read a screen, jump, dash, climb, die, respawn instantly, try again, clear it, next screen.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tight and generous; coyote time and input buffering make it feel fair.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.1,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.01,
+       "source": "estimate",
+       "confidence": 0.59,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Madeline's hair colour shows whether her dash is ready; everything else is the level itself. Almost no HUD.",
+     "confidence": 0.85,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Crisp pixel art with soft lighting and particle wind.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "pixel_art",
+     "family": "pixel",
+     "light": "painted_in",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pixel",
+     "post": [],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "sprite",
+     "mocap": 0,
+     "locomotion": [
+      "sprite_frames"
+     ],
+     "tricks": [
+      "Few-frame pixel animation with strong squash and stretch on jump, land and dash",
+      "Madeline's hair trails behind her as a chain of follow-through blobs and changes colour when her dash is spent",
+      "Dust puffs and a brief freeze on dash sell speed in a handful of frames"
+     ],
+     "lesson": "Follow-through on one element (hair, scarf, tail) plus squash on landing makes a tiny sprite feel alive; let it carry state too.",
+     "sources": [
+      {
+       "title": "Wikipedia: Celeste (video game)",
+       "url": "https://en.wikipedia.org/wiki/Celeste_(video_game)"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Piano and synth score that shifts per chapter.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Hair that changes colour when the dash is spent is the best one-signal readout we know; instant respawn makes hard things kind."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.89,
+     "expression": 0.33,
+     "structure": 0.44,
+     "social": 0.33,
+     "systems": 0.22,
+     "chance": 0.44,
+     "session": 0.33
+    },
+    "confidence": 0.85
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -11981,6 +13039,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Calm.",
     "pacing": "slow, short sessions",
@@ -12068,6 +13127,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Shouts.",
     "pacing": "fast, short sessions",
@@ -12153,6 +13213,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Shouts.",
     "pacing": "fast, short sessions",
@@ -12238,6 +13299,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Calm radio-like music.",
     "pacing": "slow, long sessions",
@@ -12325,6 +13387,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Wonderful world music.",
     "pacing": "slow, long sessions",
@@ -12406,6 +13469,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Quirky.",
     "pacing": "slow, medium sessions",
@@ -12489,6 +13553,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light café music.",
     "pacing": "slow, long sessions",
@@ -12577,6 +13642,7 @@
      "confidence": 0.6,
      "lesson": "Mood can come from two colour temperatures in one frame: warm inside, cold outside. No lighting system needed."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Lo-fi jazz beats, rain on glass, the hiss of the espresso machine.",
     "pacing": "slow, short sessions",
@@ -12662,6 +13728,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Combat audio.",
     "pacing": "brisk, medium sessions",
@@ -12749,6 +13816,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "War.",
     "pacing": "brisk, medium sessions",
@@ -12834,6 +13902,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Combat audio.",
     "pacing": "brisk, medium sessions",
@@ -12921,6 +13990,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "War.",
     "pacing": "brisk, medium sessions",
@@ -13006,6 +14076,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Combat audio and unit voices.",
     "pacing": "brisk, medium sessions",
@@ -13089,6 +14160,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Industrial.",
     "pacing": "brisk, short sessions",
@@ -13173,6 +14245,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Positional sound is the game.",
     "pacing": "fast, short sessions",
@@ -13258,6 +14331,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, short sessions",
@@ -13341,6 +14415,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Engines.",
     "pacing": "brisk, medium sessions",
@@ -13425,6 +14500,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Chiptune.",
     "pacing": "slow, short sessions",
@@ -13510,6 +14586,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Unsettling minimal score.",
     "pacing": "slow, medium sessions",
@@ -13602,6 +14679,7 @@
      "confidence": 0.6,
      "lesson": "Flat characters in a 3D space read like a puppet theatre; depth of field holds them together."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Moody synth-choir.",
     "pacing": "brisk, medium sessions",
@@ -13685,6 +14763,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, medium sessions",
@@ -13773,6 +14852,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dread.",
     "pacing": "brisk, short sessions",
@@ -13858,6 +14938,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dread.",
     "pacing": "slow, short sessions",
@@ -13945,6 +15026,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.55
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Laid-back score.",
     "pacing": "brisk, medium sessions",
@@ -14030,6 +15112,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "brisk, short sessions",
@@ -14115,6 +15198,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "brisk, short sessions",
@@ -14200,6 +15284,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "brisk, short sessions",
@@ -14283,6 +15368,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -14368,6 +15454,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "brisk, short sessions",
@@ -14454,6 +15541,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -14538,6 +15626,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Strings and voice.",
     "pacing": "slow, short sessions",
@@ -14623,6 +15712,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Strings and voice.",
     "pacing": "slow, short sessions",
@@ -14709,6 +15799,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Moody.",
     "pacing": "slow, short sessions",
@@ -14794,6 +15885,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "fast, medium sessions",
@@ -14881,6 +15973,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -14963,6 +16056,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, short sessions",
@@ -15048,6 +16142,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light fantasy score.",
     "pacing": "slow, long sessions",
@@ -15131,6 +16226,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, short sessions",
@@ -15214,6 +16310,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Retro.",
     "pacing": "brisk, short sessions",
@@ -15300,6 +16397,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dread.",
     "pacing": "brisk, short sessions",
@@ -15385,6 +16483,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Battle music.",
     "pacing": "brisk, long sessions",
@@ -15472,6 +16571,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Gentle themes.",
     "pacing": "slow, medium sessions",
@@ -15556,6 +16656,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Full voice cast.",
     "pacing": "slow, medium sessions",
@@ -15608,6 +16709,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -15691,6 +16793,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sweet then wrong.",
     "pacing": "slow, short sessions",
@@ -15777,6 +16880,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient drones, punchy combat.",
     "pacing": "brisk, medium sessions",
@@ -15864,6 +16968,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.6
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Jaunty eerie tunes, chattering voices.",
     "pacing": "slow, medium sessions",
@@ -15952,6 +17057,7 @@
      "confidence": 0.75,
      "lesson": "Paper grain plus ink line is a whole style with no shading at all."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Jaunty creepy score.",
     "pacing": "slow, long sessions",
@@ -16036,6 +17142,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.5
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Chill tunes.",
     "pacing": "slow, short sessions",
@@ -16154,6 +17261,21 @@
      "confidence": 0.7,
      "lesson": "Tilt-shift depth of field turns a board into a toy on a table."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "procedural",
+     "mocap": 0,
+     "locomotion": [
+      "procedural"
+     ],
+     "tricks": [
+      "Tiny ambient life (trains, boats, windmills, birds) on simple loops and paths; placement pops and settles"
+     ],
+     "lesson": "Ambient loops on paths are enough to make a board feel alive.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Gentle acoustic loops.",
     "pacing": "slow, medium sessions",
@@ -16248,6 +17370,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Voiced heroes, announcers.",
     "pacing": "fast, medium sessions",
@@ -16331,6 +17454,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light score.",
     "pacing": "brisk, medium sessions",
@@ -16416,6 +17540,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -16499,6 +17624,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.6
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Cartoon.",
     "pacing": "brisk, short sessions",
@@ -16589,6 +17715,7 @@
      "confidence": 0.55,
      "lesson": "One time-of-day signal driving fog, grade and danger together."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Melancholy sea-shanty mood.",
     "pacing": "brisk, short sessions",
@@ -16674,6 +17801,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -16757,6 +17885,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -16840,6 +17969,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Fantasy.",
     "pacing": "brisk, short sessions",
@@ -16925,6 +18055,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dark.",
     "pacing": "brisk, short sessions",
@@ -17008,6 +18139,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, short sessions",
@@ -17091,6 +18223,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Western.",
     "pacing": "fast, short sessions",
@@ -17176,6 +18309,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, long sessions",
@@ -17264,6 +18398,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, long sessions",
@@ -17347,6 +18482,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Retro.",
     "pacing": "slow, medium sessions",
@@ -17432,6 +18568,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -17518,6 +18655,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Orchestral.",
     "pacing": "brisk, long sessions",
@@ -17600,6 +18738,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, long sessions",
@@ -17685,6 +18824,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dark.",
     "pacing": "slow, short sessions",
@@ -17768,6 +18908,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Japanese.",
     "pacing": "slow, medium sessions",
@@ -17854,6 +18995,23 @@
      "confidence": 0.55,
      "lesson": "Soft rim light plus candy colours is the look kids already love."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "physics",
+     "mocap": 0,
+     "locomotion": [
+      "physics",
+      "blend_tree"
+     ],
+     "tricks": [
+      "Keyed run, jump and dive blended with a physics body, so bumps make the beans wobble and tumble",
+      "Getting knocked over is the comedy: the body goes floppy, then gets back up"
+     ],
+     "lesson": "Mix keyed intent with a physics body; falling over should be funny and quick to recover from.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Bouncy game-show music.",
     "pacing": "fast, short sessions",
@@ -17939,6 +19097,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "1940s radio.",
     "pacing": "slow, medium sessions",
@@ -18024,6 +19183,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "1950s radio.",
     "pacing": "slow, medium sessions",
@@ -18104,6 +19264,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.6
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient dread.",
     "pacing": "slow, long sessions",
@@ -18187,6 +19348,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -18270,6 +19432,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Western.",
     "pacing": "fast, short sessions",
@@ -18355,6 +19518,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, short sessions",
@@ -18437,6 +19601,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Arcade.",
     "pacing": "brisk, short sessions",
@@ -18519,6 +19684,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "slow, short sessions",
@@ -18604,6 +19770,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Tribal chants.",
     "pacing": "brisk, short sessions",
@@ -18688,6 +19855,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Mournful strings.",
     "pacing": "slow, medium sessions",
@@ -18772,6 +19940,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -18857,6 +20026,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Iconic synth score that swells in battle.",
     "pacing": "brisk, long sessions",
@@ -18940,6 +20110,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "fast, short sessions",
@@ -19023,6 +20194,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None of its own.",
     "pacing": "brisk, short sessions",
@@ -19045,6 +20217,121 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "ghost-of-tsushima",
+   "file": "docs/oracle/games/ghost-of-tsushima.json",
+   "appid": 2215430,
+   "name": "Ghost of Tsushima",
+   "store_url": "https://store.steampowered.com/app/2215430/",
+   "genres": [
+    "Action",
+    "Adventure",
+    "Open world"
+   ],
+   "short_description": "A samurai defends his island from invasion, torn between honour and stealth.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Adventure",
+    "Open world"
+   ],
+   "summary": "A samurai defends his island from invasion, torn between honour and stealth.",
+   "identity": {
+    "core_loop": "Follow the wind to a goal, fight or sneak through a camp, duel, write a haiku, ride on.",
+    "mechanics": null,
+    "ui_and_game_feel": "Weighty and cinematic; swordplay is about stance and timing.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.8,
+      "spatial": 0.1,
+      "meta": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The guiding wind replaces the waypoint: grass, leaves and Jin's hair point the way. Birds and foxes lead to secrets; the HUD fades almost completely.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Cinematic realism pushed toward painted colour: fields of red and gold, wind in everything.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "painterly",
+     "family": "painterly_3d",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "hand_painted",
+     "post": [
+      "colour grade"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "mocap",
+     "mocap": 0.85,
+     "locomotion": [
+      "root_motion",
+      "blend_tree",
+      "procedural_ik"
+     ],
+     "tricks": [
+      "Performance capture of the cast carries each character's personality; casting changed characters to fit performers",
+      "Sword stances change the whole idle and attack set, so a stance swap reads instantly",
+      "Wind drives hair, cloth, grass and leaves together, so even a still character looks alive"
+     ],
+     "lesson": "Capture the performer, then let one wind signal move cloth and hair so idle never looks frozen.",
+     "sources": [
+      {
+       "title": "VFX Voice: Creating the way of the warrior for Ghost of Tsushima",
+       "url": "https://vfxvoice.com/creating-the-way-of-the-warrior-for-ghost-of-tsushima/"
+      },
+      {
+       "title": "GDC 2021: how Sucker Punch brought the island of Tsushima to life",
+       "url": "https://gdconf.com/news/see-how-sucker-punch-brought-island-tsushima-life-gdc-2021"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Shakuhachi and taiko, wind and steel.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Navigation by wind is the best diegetic waypoint we know. Let wind, animals and light lead the player in Abbie's World."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.89,
+     "expression": 0.56,
+     "structure": 0.56,
+     "social": 0.44,
+     "systems": 0.44,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -19108,6 +20395,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, medium sessions",
@@ -19191,6 +20479,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, short sessions",
@@ -19276,6 +20565,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, medium sessions",
@@ -19363,6 +20653,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "slow, long sessions",
@@ -19448,6 +20739,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -19531,6 +20823,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, short sessions",
@@ -19614,6 +20907,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Moody.",
     "pacing": "slow, short sessions",
@@ -19666,6 +20960,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -19751,6 +21046,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Radio stations.",
     "pacing": "brisk, medium sessions",
@@ -19834,6 +21130,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light folk.",
     "pacing": "slow, short sessions",
@@ -19919,6 +21216,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -20003,6 +21301,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Jungle ambience.",
     "pacing": "slow, short sessions",
@@ -20089,6 +21388,7 @@
      "confidence": 0.7,
      "lesson": "Colour can be the reward: one signal re-saturates the whole world."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Lush piano and choir.",
     "pacing": "slow, short sessions",
@@ -20174,6 +21474,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "brisk, short sessions",
@@ -20261,6 +21562,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dread.",
     "pacing": "brisk, short sessions",
@@ -20348,6 +21650,7 @@
      "confidence": 0.7,
      "lesson": "Paint the light into the asset when the camera never moves around it."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock-mythic score, deep voice work for every character.",
     "pacing": "fast, short sessions",
@@ -20430,6 +21733,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "brisk, short sessions",
@@ -20515,6 +21819,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "War.",
     "pacing": "brisk, short sessions",
@@ -20600,6 +21905,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Bombastic.",
     "pacing": "fast, short sessions",
@@ -20685,6 +21991,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "War.",
     "pacing": "brisk, short sessions",
@@ -20707,6 +22014,120 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "hi-fi-rush",
+   "file": "docs/oracle/games/hi-fi-rush.json",
+   "appid": 1817230,
+   "name": "Hi-Fi RUSH",
+   "store_url": "https://store.steampowered.com/app/1817230/",
+   "genres": [
+    "Action",
+    "Rhythm",
+    "Comedy"
+   ],
+   "short_description": "A wannabe rock star fights a robot corporation where the whole world moves to the beat.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Rhythm",
+    "Comedy"
+   ],
+   "summary": "A wannabe rock star fights a robot corporation where the whole world moves to the beat.",
+   "identity": {
+    "core_loop": "Fight to the music: attack on the beat for bigger hits, parry on the beat, traverse a level that pulses with the song.",
+    "mechanics": null,
+    "ui_and_game_feel": "Snappy, joyful, cartoon-loud; everything bounces in time.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.3,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The world is the metronome: lights, machines, enemies and the cat companion pulse on the beat. Hit feedback shows rating words on screen.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Cel-shaded cartoon with thick outlines and comic-book effects.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "toon",
+     "family": "toon",
+     "light": "banded",
+     "outlines": true,
+     "outline": "screen_edges",
+     "surface": "hand_painted",
+     "post": [
+      "edge detection"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0.1,
+     "locomotion": [
+      "beat_sync",
+      "blend_tree"
+     ],
+     "tricks": [
+      "Actions pressed slightly early or late are interpolated so the hit still lands on the beat",
+      "Cutscenes are animated to a click track at the song's tempo (about three times the work of a normal scene)",
+      "Idle loops, enemies and the world all bob on the same beat"
+     ],
+     "lesson": "One clock for animation and music: snap the contact frame to the beat and the player always feels on time.",
+     "sources": [
+      {
+       "title": "Gameranx: how Tango Gameworks pulled off Hi-Fi Rush (citing director John Johanas)",
+       "url": "https://gameranx.com/updates/id/436553/article/hi-fi-rush-is-a-huge-technical-achievement-heres-how-tango-gameworks-pulled-it-off/"
+      },
+      {
+       "title": "Unreal Engine interview: Hi-Fi Rush was inspired by Shaun of the Dead and Futurama",
+       "url": "https://www.unrealengine.com/en-US/developer-interviews/hi-fi-rush-was-inspired-by-shaun-of-the-dead-and-futurama"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.65
+    },
+    "palette": null,
+    "audio_mood": "Licensed rock and an original score; every sound effect lands on the beat.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Make the whole world pulse with one clock. Animation that lands on the beat even when the player is slightly off is the trick."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.89,
+     "expression": 0.44,
+     "structure": 0.56,
+     "social": 0.22,
+     "systems": 0.67,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -20768,6 +22189,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Radio and engines.",
     "pacing": "brisk, long sessions",
@@ -20854,6 +22276,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Cinematic.",
     "pacing": "brisk, short sessions",
@@ -20938,6 +22361,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -21020,6 +22444,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Quirky.",
     "pacing": "slow, short sessions",
@@ -21105,6 +22530,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -21188,6 +22614,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Synth.",
     "pacing": "fast, short sessions",
@@ -21273,6 +22700,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -21358,6 +22786,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, medium sessions",
@@ -21445,6 +22874,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Tense ambient.",
     "pacing": "brisk, long sessions",
@@ -21528,6 +22958,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -21613,6 +23044,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Orchestral.",
     "pacing": "brisk, medium sessions",
@@ -21665,6 +23097,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -21750,6 +23183,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Atmospheric.",
     "pacing": "slow, medium sessions",
@@ -21832,6 +23266,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Host voice and stings.",
     "pacing": "brisk, medium sessions",
@@ -21915,6 +23350,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.5
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Norse choral.",
     "pacing": "slow, short sessions",
@@ -22003,6 +23439,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Metal score.",
     "pacing": "fast, medium sessions",
@@ -22092,6 +23529,23 @@
      "confidence": 0.65,
      "lesson": "Height haze sells scale for climbing: the further down, the paler and bluer the world."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "mixed",
+     "mocap": 0.3,
+     "locomotion": [
+      "procedural_ik",
+      "blend_tree"
+     ],
+     "tricks": [
+      "Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics",
+      "Breathing and trembling arms show stamina"
+     ],
+     "lesson": "Let the player drive each hand; IK and a little physics make any wall climbable.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Sparse soundscape, wind and stone; music swells as you reach new heights.",
     "pacing": "slow, short sessions",
@@ -22107,6 +23561,114 @@
      "social": 0.33,
      "systems": 0.44,
      "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "just-dance",
+   "file": "docs/oracle/games/just-dance.json",
+   "appid": null,
+   "name": "Just Dance",
+   "store_url": null,
+   "genres": [
+    "Rhythm",
+    "Dance",
+    "Party"
+   ],
+   "short_description": "Follow a dancing coach on screen and copy the moves to pop songs.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Rhythm",
+    "Dance",
+    "Party"
+   ],
+   "summary": "Follow a dancing coach on screen and copy the moves to pop songs.",
+   "identity": {
+    "core_loop": "Watch the coach, copy the move as it comes, get rated, keep dancing.",
+    "mechanics": null,
+    "ui_and_game_feel": "Joyful and silly; nobody is bad at it.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "meta": 0.3,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Pictograms scroll along the bottom for the next move; ratings pop on each move; the coach is the main readout.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Real dancers filmed in full costume on green screen, then stylised in post.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "stylised_pbr",
+     "light": "pbr",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pbr",
+     "post": [
+      "bloom"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "mixed",
+     "mocap": 0,
+     "locomotion": [
+      "sprite_frames"
+     ],
+     "tricks": [
+      "Coaches are real dancers filmed in full costume and make-up on green screen, then stylised in post: video, not rigged animation",
+      "Pictograms scroll along the bottom to show the next move; the player is scored by the controller (or a phone camera with a trained model)"
+     ],
+     "lesson": "When the dance must be perfect, film or capture a real performer; mirror the player and rate every move without failing them.",
+     "sources": [
+      {
+       "title": "Dance Spirit: Real dancers, really dancing, the making of Just Dance 2024",
+       "url": "https://dancespirit.com/just-dance-2024/"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Licensed pop songs.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Copy a performer: the coach is real people filmed, not keyed animation. Mirror the player, rate every move, never fail."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.22,
+     "expression": 0.33,
+     "structure": 0.67,
+     "social": 0.22,
+     "systems": 0.44,
+     "chance": 0.22,
      "session": 0.11
     },
     "confidence": 0.75
@@ -22179,6 +23741,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Calm space music.",
     "pacing": "slow, medium sessions",
@@ -22264,6 +23827,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Metal.",
     "pacing": "fast, short sessions",
@@ -22349,6 +23913,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "fast, short sessions",
@@ -22434,6 +23999,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Metal.",
     "pacing": "fast, short sessions",
@@ -22519,6 +24085,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Medieval.",
     "pacing": "slow, medium sessions",
@@ -22605,6 +24172,7 @@
      "confidence": 0.65,
      "lesson": "One modern effect (reflection) on a simple look feels luxurious."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient, layered.",
     "pacing": "slow, medium sessions",
@@ -22690,6 +24258,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -22773,6 +24342,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Western.",
     "pacing": "brisk, short sessions",
@@ -22889,6 +24459,22 @@
      "confidence": 0.6,
      "lesson": "A real material (plastic) can be the whole style when the world is a toy."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Minifigure animation in the stiff, hopping style of the toy: no knees, swinging arms and legs",
+      "Built models are tested by physics"
+     ],
+     "lesson": "Animate toys like toys: respect the joints the toy really has.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Light whimsical score.",
     "pacing": "slow, short sessions",
@@ -22922,6 +24508,115 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "little-nightmares",
+   "file": "docs/oracle/games/little-nightmares.json",
+   "appid": 424840,
+   "name": "Little Nightmares",
+   "store_url": "https://store.steampowered.com/app/424840/",
+   "genres": [
+    "Puzzle platformer",
+    "Horror",
+    "Adventure"
+   ],
+   "short_description": "A small child in a raincoat sneaks through a giant, grotesque ship.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle platformer",
+    "Horror",
+    "Adventure"
+   ],
+   "summary": "A small child in a raincoat sneaks through a giant, grotesque ship.",
+   "identity": {
+    "core_loop": "Sneak, climb, hide, solve a small physical puzzle, run from a giant, reach the next room.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense and tactile; you feel small against everything.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "No HUD at all: a lighter in the dark, footsteps and the giants' bodies tell you everything.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Dollhouse diorama seen from the side, dark with warm pools of light.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "soft_diorama",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "gradient",
+     "post": [
+      "depth of field"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "root_motion"
+     ],
+     "tricks": [
+      "A small state machine (idle, start, move) with designer-swappable override slots, so wading, ash and water reuse one set at new speeds",
+      "Ability sets combine (holding hands while wading) without new code",
+      "Monsters are built on one exaggerated trait each (a long neck, walking on the ceiling) and scripted with the state machine"
+     ],
+     "lesson": "Override slots let one child walk through many grounds; give each giant one exaggerated way of moving.",
+     "sources": [
+      {
+       "title": "Unreal Engine interview: how Little Nightmares II plumbs the depths of adolescent angst",
+       "url": "https://www.unrealengine.com/en-US/developer-interviews/how-little-nightmares-ii-plumbs-the-depths-of-adolescent-angst"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Low drones, creaks, music box moments.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A dollhouse side view and no HUD at all; size alone tells you you are small. Kid-safe only in its framing, not its horror."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.44,
+     "expression": 0.22,
+     "structure": 0.44,
+     "social": 0.22,
+     "systems": 0.44,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -22982,6 +24677,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Grand orchestral.",
     "pacing": "fast, long sessions",
@@ -23069,6 +24765,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -23152,6 +24849,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Soft tones.",
     "pacing": "slow, short sessions",
@@ -23237,6 +24935,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Card sounds.",
     "pacing": "slow, medium sessions",
@@ -23324,6 +25023,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Silly.",
     "pacing": "fast, short sessions",
@@ -23409,6 +25109,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Silly.",
     "pacing": "fast, short sessions",
@@ -23461,6 +25162,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -23546,6 +25248,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Folk score.",
     "pacing": "slow, long sessions",
@@ -23629,6 +25332,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -23712,6 +25416,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -23734,6 +25439,119 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "mario-kart-8-deluxe",
+   "file": "docs/oracle/games/mario-kart-8-deluxe.json",
+   "appid": null,
+   "name": "Mario Kart 8 Deluxe",
+   "store_url": null,
+   "genres": [
+    "Racing",
+    "Party",
+    "Kart"
+   ],
+   "short_description": "Race cartoon karts on wild tracks, drift for boosts and throw items at friends.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Racing",
+    "Party",
+    "Kart"
+   ],
+   "summary": "Race cartoon karts on wild tracks, drift for boosts and throw items at friends.",
+   "identity": {
+    "core_loop": "Race, drift to charge a boost, grab item boxes, use items, trick off ramps, finish.",
+    "mechanics": null,
+    "ui_and_game_feel": "Bouncy and generous; assists let small children play.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "meta": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.59,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Mini-map, place and items on screen; drift sparks change colour to show the boost charging.",
+     "confidence": 0.85,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Glossy toy-like karts and characters on bright tracks.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "soft_diorama",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "gradient",
+     "post": [
+      "depth of field"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Drivers lean and look into turns; drift sparks change colour as the boost charges",
+      "A trick pose off every ramp edge, rewarded with a boost",
+      "Big full-body reactions when hit or passing someone, timed with voice lines"
+     ],
+     "lesson": "Put the charge on the vehicle (spark colour) and the feeling on the driver (lean, trick pose, reaction).",
+     "sources": [
+      {
+       "title": "Super Mario Wiki: Tricks",
+       "url": "https://www.mariowiki.com/Trick"
+      },
+      {
+       "title": "Iwata Asks: Mario Kart Wii",
+       "url": "https://iwataasks.nintendo.com/interviews/wii/mariokart/0/3"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
+    "palette": null,
+    "audio_mood": "Big band and rock remixes; character voice reactions.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Show the charge on the thing: drift sparks change colour as the boost builds. Characters react with their whole body."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.67,
+     "expression": 0.44,
+     "structure": 0.56,
+     "social": 0.33,
+     "systems": 0.78,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.85
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -23798,6 +25616,7 @@
      "confidence": 0.55,
      "lesson": "Outline width should follow distance and importance, not stay one fixed pixel width."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Hero voices and big stings.",
     "pacing": "fast, short sessions",
@@ -23885,6 +25704,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sci-fi.",
     "pacing": "brisk, medium sessions",
@@ -23972,6 +25792,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "War.",
     "pacing": "brisk, medium sessions",
@@ -24057,6 +25878,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Guitar.",
     "pacing": "brisk, short sessions",
@@ -24079,6 +25901,111 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "minecraft",
+   "file": "docs/oracle/games/minecraft.json",
+   "appid": null,
+   "name": "Minecraft",
+   "store_url": null,
+   "genres": [
+    "Sandbox",
+    "Building",
+    "Survival"
+   ],
+   "short_description": "Break and place blocks to build anything, and survive the night in a world made of cubes.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Sandbox",
+    "Building",
+    "Survival"
+   ],
+   "summary": "Break and place blocks to build anything, and survive the night in a world made of cubes.",
+   "identity": {
+    "core_loop": "Gather, craft, build, explore, survive the night, build bigger.",
+    "mechanics": null,
+    "ui_and_game_feel": "Simple, tactile and endless.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.09,
+       "source": "estimate",
+       "confidence": 0.59,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Hunger and health bars, a hotbar, and the world itself; night and monsters say when to shelter.",
+     "confidence": 0.85,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Blocky voxels with pixel textures.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "pixel_art",
+     "family": "pixel",
+     "light": "painted_in",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pixel",
+     "post": [],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "procedural",
+     "mocap": 0,
+     "locomotion": [
+      "procedural"
+     ],
+     "tricks": [
+      "Block limbs swing on a sine wave scaled by walking speed; no animation clips for the player",
+      "The head turns to the look direction; arms swing to hit and place"
+     ],
+     "lesson": "For blocky figures, code-made limb swing tied to speed is enough and never slides.",
+     "sources": [
+      {
+       "title": "Minecraft Forge forum: how the player model sways and swings",
+       "url": "https://forums.minecraftforge.net/topic/40492-question-about-player-sway"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Calm sparse piano; block sounds per material.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "The simplest possible bodies can carry a game for a decade: block limbs swinging on a sine wave."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 1,
+     "structure": 0.56,
+     "social": 0.11,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.67
+    },
+    "confidence": 0.85
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -24141,6 +26068,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Piano heist score.",
     "pacing": "fast, short sessions",
@@ -24226,6 +26154,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -24313,6 +26242,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Medieval.",
     "pacing": "brisk, medium sessions",
@@ -24396,6 +26326,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Medieval.",
     "pacing": "brisk, medium sessions",
@@ -24479,6 +26410,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Medieval.",
     "pacing": "brisk, short sessions",
@@ -24566,6 +26498,7 @@
      "confidence": 0.6,
      "lesson": "Low resolution is a choice with a feeling (unease, memory), not just a budget."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Oppressive.",
     "pacing": "slow, short sessions",
@@ -24649,6 +26582,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -24732,6 +26666,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Orchestral.",
     "pacing": "slow, short sessions",
@@ -24822,6 +26757,7 @@
      "confidence": 0.55,
      "lesson": "Pick the palette per place and drive sky, fog and grade from it."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient electronic.",
     "pacing": "slow, medium sessions",
@@ -24907,6 +26843,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Horror audio.",
     "pacing": "brisk, medium sessions",
@@ -24992,6 +26929,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -25077,6 +27015,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Moody.",
     "pacing": "brisk, short sessions",
@@ -25162,6 +27101,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Folk.",
     "pacing": "brisk, medium sessions",
@@ -25245,6 +27185,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Folk.",
     "pacing": "slow, long sessions",
@@ -25328,6 +27269,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Nordic score.",
     "pacing": "brisk, medium sessions",
@@ -25411,6 +27353,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, medium sessions",
@@ -25494,6 +27437,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, short sessions",
@@ -25577,6 +27521,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Upbeat.",
     "pacing": "fast, short sessions",
@@ -25660,6 +27605,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Upbeat.",
     "pacing": "fast, short sessions",
@@ -25743,6 +27689,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Upbeat.",
     "pacing": "fast, short sessions",
@@ -25826,6 +27773,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Upbeat.",
     "pacing": "fast, short sessions",
@@ -25912,6 +27860,7 @@
      "confidence": 0.55,
      "lesson": "Warm light sources in a cold place make a world feel like a camp."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Banjo by the fire; instruments you can find in space.",
     "pacing": "slow, short sessions",
@@ -25995,6 +27944,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Upbeat.",
     "pacing": "fast, short sessions",
@@ -26080,6 +28030,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sparse.",
     "pacing": "slow, short sessions",
@@ -26102,6 +28053,121 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "overwatch-2",
+   "file": "docs/oracle/games/overwatch-2.json",
+   "appid": 2357570,
+   "name": "Overwatch 2",
+   "store_url": "https://store.steampowered.com/app/2357570/",
+   "genres": [
+    "Shooter",
+    "Hero",
+    "Multiplayer"
+   ],
+   "short_description": "Team hero shooter with a cast of very different, very readable characters.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Hero",
+    "Multiplayer"
+   ],
+   "summary": "Team hero shooter with a cast of very different, very readable characters.",
+   "identity": {
+    "core_loop": "Pick a hero, push or hold the objective with your team, use abilities and ultimates, swap heroes when needed.",
+    "mechanics": null,
+    "ui_and_game_feel": "Snappy and readable; each hero feels different from the first frame you hold them.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "meta": 0.2,
+      "overlay": 0.7
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Heroes read by silhouette and voice lines; ultimates are called out loud; overlay for health, ammo and abilities.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Stylised PBR with bright saturated colour, clean shapes and strong silhouettes.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "mixed",
+     "family": "graphic_minimal",
+     "light": "flat",
+     "outlines": false,
+     "outline": "none",
+     "surface": "flat_colour",
+     "post": [],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Hand-keyed heroes with strong poses and silhouettes; personality even in first-person arms",
+      "First-person and third-person animations are separate sets, each tuned for its camera",
+      "Big anticipation and snappy recovery so abilities read across a busy fight"
+     ],
+     "lesson": "Key the characters for pose and silhouette first; give the first-person hands their own personality.",
+     "sources": [
+      {
+       "title": "GDC Vault: The Animation Pipeline of Overwatch",
+       "url": "https://gdcvault.com/play/1024267/The-Animation-Pipeline-of-Overwatch"
+      },
+      {
+       "title": "Game Anim: The first person animation of Overwatch (Matthew Boehm, GDC 2017)",
+       "url": "https://www.gameanim.com/2017/04/29/first-person-animation-overwatch"
+      },
+      {
+       "title": "Inven Global: how Overwatch's first-person animation breathed life into heroes",
+       "url": "https://www.invenglobal.com/articles/1187/how-overwatchs-first-person-animation-breathed-life-into-heroes"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.7
+    },
+    "palette": null,
+    "audio_mood": "Voice barks for every key moment; distinct audio signature per hero.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Each character's personality lives in how they move and stand, even in first person. Silhouette and pose first."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.78,
+     "expression": 0.44,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.67,
+     "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -26163,6 +28229,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, long sessions",
@@ -26250,6 +28317,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Gentle.",
     "pacing": "slow, short sessions",
@@ -26333,6 +28401,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Stark.",
     "pacing": "brisk, short sessions",
@@ -26418,6 +28487,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ominous.",
     "pacing": "fast, long sessions",
@@ -26472,6 +28542,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -26556,6 +28627,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Show voices.",
     "pacing": "slow, short sessions",
@@ -26638,6 +28710,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "slow, short sessions",
@@ -26725,6 +28798,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -26808,6 +28882,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Chirpy.",
     "pacing": "brisk, medium sessions",
@@ -26893,6 +28968,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.5
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Bouncy electronic.",
     "pacing": "slow, short sessions",
@@ -26975,6 +29051,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Tense.",
     "pacing": "slow, long sessions",
@@ -27058,6 +29135,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Calm.",
     "pacing": "slow, short sessions",
@@ -27142,6 +29220,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Moody.",
     "pacing": "slow, short sessions",
@@ -27229,6 +29308,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient zoo.",
     "pacing": "slow, long sessions",
@@ -27312,6 +29392,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "fast, medium sessions",
@@ -27395,6 +29476,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Catchy score.",
     "pacing": "brisk, short sessions",
@@ -27476,6 +29558,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Moody.",
     "pacing": "brisk, short sessions",
@@ -27559,6 +29642,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Narrator and one famous song.",
     "pacing": "brisk, short sessions",
@@ -27645,6 +29729,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.4
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Gentle.",
     "pacing": "slow, short sessions",
@@ -27728,6 +29813,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, long sessions",
@@ -27812,6 +29898,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sparse.",
     "pacing": "slow, short sessions",
@@ -27895,6 +29982,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -27978,6 +30066,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Industrial.",
     "pacing": "slow, long sessions",
@@ -28063,6 +30152,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "brisk, short sessions",
@@ -28148,6 +30238,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Chiptune.",
     "pacing": "fast, short sessions",
@@ -28231,6 +30322,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "fast, short sessions",
@@ -28317,6 +30409,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, medium sessions",
@@ -28409,6 +30502,7 @@
      "confidence": 0.55,
      "lesson": "Atmosphere and grade can make realism feel painted."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Western score.",
     "pacing": "slow, medium sessions",
@@ -28492,6 +30586,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -28576,6 +30671,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Quiet guitar.",
     "pacing": "slow, long sessions",
@@ -28659,6 +30755,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -28742,6 +30839,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, long sessions",
@@ -28829,6 +30927,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, medium sessions",
@@ -28912,6 +31011,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "fast, medium sessions",
@@ -28997,6 +31097,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "brisk, short sessions",
@@ -29082,6 +31183,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -29167,6 +31269,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Classical music.",
     "pacing": "brisk, short sessions",
@@ -29250,6 +31353,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "War.",
     "pacing": "brisk, short sessions",
@@ -29333,6 +31437,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "War.",
     "pacing": "brisk, medium sessions",
@@ -29419,6 +31524,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Realistic.",
     "pacing": "brisk, long sessions",
@@ -29503,6 +31609,7 @@
      "confidence": 0.75,
      "lesson": "With strong lines, you can drop shading almost entirely; the line carries the form."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Japanese Breakfast score.",
     "pacing": "slow, short sessions",
@@ -29586,6 +31693,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -29668,6 +31776,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Varied.",
     "pacing": "slow, short sessions",
@@ -29755,6 +31864,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Calm ambient, machine hum.",
     "pacing": "slow, long sessions",
@@ -29807,6 +31917,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -29890,6 +32001,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -29978,6 +32090,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Tense.",
     "pacing": "brisk, short sessions",
@@ -30063,6 +32176,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "brisk, short sessions",
@@ -30148,6 +32262,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "brisk, short sessions",
@@ -30233,6 +32348,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Japanese score.",
     "pacing": "slow, short sessions",
@@ -30318,6 +32434,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -30401,6 +32518,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "brisk, long sessions",
@@ -30486,6 +32604,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "brisk, short sessions",
@@ -30569,6 +32688,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Minimal.",
     "pacing": "slow, short sessions",
@@ -30654,6 +32774,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -30739,6 +32860,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, short sessions",
@@ -30822,6 +32944,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, long sessions",
@@ -30908,6 +33031,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -30992,6 +33116,7 @@
      "confidence": 0.75,
      "lesson": "When a look is famous for being flat, any shading at all breaks it."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Comedy.",
     "pacing": "slow, short sessions",
@@ -31079,6 +33204,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -31163,6 +33289,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dark.",
     "pacing": "slow, short sessions",
@@ -31246,6 +33373,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -31329,6 +33457,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "brisk, medium sessions",
@@ -31412,6 +33541,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Chiptune.",
     "pacing": "slow, short sessions",
@@ -31494,6 +33624,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "slow, short sessions",
@@ -31546,6 +33677,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -31629,6 +33761,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -31647,6 +33780,237 @@
      "session": 0.33
     },
     "confidence": 0.3
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "splatoon-3",
+   "file": "docs/oracle/games/splatoon-3.json",
+   "appid": null,
+   "name": "Splatoon 3",
+   "store_url": null,
+   "genres": [
+    "Shooter",
+    "Team",
+    "Party"
+   ],
+   "short_description": "Ink the map with your team, swim through your own ink as a squid, and cover more ground than the other team.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Team",
+    "Party"
+   ],
+   "summary": "Ink the map with your team, swim through your own ink as a squid, and cover more ground than the other team.",
+   "identity": {
+    "core_loop": "Shoot ink, dive into it as a squid to move and reload, pop out to fight, cover turf before time is up.",
+    "mechanics": null,
+    "ui_and_game_feel": "Bouncy and expressive; swimming in your own colour is pure joy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The map's colour is the score: whoever's ink covers more is winning. Ink you can swim in reads at a glance.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Glossy saturated pop colours and street fashion.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "stylised_pbr",
+     "light": "pbr",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pbr",
+     "post": [
+      "bloom"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Kid to squid in about 20 to 24 frames, squid back to kid in about 42; both can start or reverse at any moment, even mid-air",
+      "Two model swaps hidden by ink splashes, through a simple in-between blob that can squash and stretch",
+      "A small overshoot in scale after popping back out keeps the character soft"
+     ],
+     "lesson": "Hide a model swap behind a splash, keep the change under half a second, and let it reverse mid-way.",
+     "sources": [
+      {
+       "title": "New Frame Plus: How do Inkling transformations work? (transcript)",
+       "url": "https://amara.org/videos/0hbtI1ckjQff/info/how-do-inkling-transformations-work"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.7
+    },
+    "palette": null,
+    "audio_mood": "Squid pop music and splats.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Paint the world as the score, and let the character change form to move through what they painted."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.78,
+     "expression": 0.56,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.56,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "spore",
+   "file": "docs/oracle/games/spore.json",
+   "appid": 17390,
+   "name": "Spore",
+   "store_url": "https://store.steampowered.com/app/17390/",
+   "genres": [
+    "Simulation",
+    "Creature creator",
+    "Sandbox"
+   ],
+   "short_description": "Guide a creature from a single cell in a tide pool to a space-faring civilisation, designing it yourself at every stage.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Simulation",
+    "Creature creator",
+    "Sandbox"
+   ],
+   "summary": "Guide a creature from a single cell in a tide pool to a space-faring civilisation, designing it yourself at every stage.",
+   "identity": {
+    "core_loop": "Cell Stage: swim through a drop of water, eat or be eaten, collect DNA, find new parts, call a mate to open the editor, rebuild your cell, grow, and rise into bigger layers of the pool until you grow legs.",
+    "mechanics": null,
+    "ui_and_game_feel": "Playful and light; every few minutes you redesign yourself and feel the change at once in how you swim and fight.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The cell carries most of it: parts show what it can do, size shows who can eat whom, and bigger shapes drift by in blurred layers below. A thin DNA bar and health are the only overlay; the editor is summoned by a mating call.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Soft translucent cells seen from above in a sunlit drop of water, with parallax layers of blurred, tinted creatures above and below.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "stylised_pbr",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "gradient",
+     "post": [
+      "depth of field",
+      "bloom",
+      "fog"
+     ],
+     "signature": "Cell Stage: soft translucent 3D cells with glowing rims, seen straight down, floating in parallax layers of water whose blur and tint grow with depth, so giant creatures drift past below like shadows.",
+     "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+     "confidence": 0.7,
+     "lesson": "A top-down 2D game can still have depth: stack the pool in blurred, tinted layers and move the player up a layer as they grow. Our film-look depth of field and an SVG or shader cell rim do the rest."
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "procedural",
+     "mocap": 0,
+     "locomotion": [
+      "procedural_ik",
+      "procedural"
+     ],
+     "tricks": [
+      "Animators author motion once in a special editor on test creatures, marked up by meaning (this is a hand, this is a mouth)",
+      "At runtime the motion is retargeted to any creature the player built, with an IK solver placing feet, hands and mouths",
+      "Paint is procedural too: brush scripts read the body and flare colour at the ends of limbs"
+     ],
+     "lesson": "Animate by meaning, not by bone: author \"reach with the mouth\" once and retarget it to any shape the child makes.",
+     "sources": [
+      {
+       "title": "Chris Hecker et al.: Real-time motion retargeting to highly varied user-created morphologies (SIGGRAPH 2008)",
+       "url": "https://chrishecker.com/Real-time_Motion_Retargeting_to_Highly_Varied_User-Created_Morphologies"
+      },
+      {
+       "title": "CGW: Spore experts share animation techniques at SIGGRAPH 2008",
+       "url": "https://www.cgw.com/Press-Center/Siggraph/2008/Spore-Experts-Share-Animation-Techniques-at-SIGG.aspx"
+      },
+      {
+       "title": "CGW Oct 2008: Evolutionary Chain",
+       "url": "https://www.cgw.com/Publications/CGW/2008/Volume-31-Issue-10-Oct-2008-/Evolutionary-Chain.aspx"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.75
+    },
+    "palette": null,
+    "audio_mood": "Gentle procedural ambient music, wet squelches and chomps; the editor plays your creature's own tune.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "The Cell Stage is the model for Abbie's science adventure: one drop of water seen from above, eat-or-be-eaten by size, new parts found in the world and fitted in a playful editor, and the camera rising to a bigger layer as you grow."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.33,
+     "expression": 0.89,
+     "structure": 0.67,
+     "social": 0.11,
+     "systems": 0.56,
+     "chance": 0.33,
+     "session": 0.44
+    },
+    "confidence": 0.8
    },
    "study": {
     "set": "owned",
@@ -31714,6 +34078,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, short sessions",
@@ -31802,6 +34167,7 @@
      "confidence": 0.55,
      "lesson": "Real toy materials (painted wood) give an instant childhood feel."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Silent-film piano.",
     "pacing": "slow, short sessions",
@@ -31887,6 +34253,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Lovely ambient.",
     "pacing": "slow, short sessions",
@@ -31972,6 +34339,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Synth.",
     "pacing": "slow, medium sessions",
@@ -32055,6 +34423,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Orchestral.",
     "pacing": "slow, medium sessions",
@@ -32138,6 +34507,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -32221,6 +34591,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, short sessions",
@@ -32307,6 +34678,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "brisk, long sessions",
@@ -32392,6 +34764,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -32479,6 +34852,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Soft.",
     "pacing": "slow, short sessions",
@@ -32564,6 +34938,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -32647,6 +35022,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Mechanical.",
     "pacing": "slow, medium sessions",
@@ -32730,6 +35106,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -32815,6 +35192,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "slow, long sessions",
@@ -32898,6 +35276,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "fast, medium sessions",
@@ -32985,6 +35364,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, medium sessions",
@@ -33069,6 +35449,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Narrator voice.",
     "pacing": "brisk, short sessions",
@@ -33158,6 +35539,36 @@
      "confidence": 0.65,
      "lesson": "Let the hit effects carry the style: a paint-splash language on top of ordinary materials reads as cartoon impact without gore."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "mocap",
+     "mocap": 0.8,
+     "locomotion": [
+      "root_motion"
+     ],
+     "tricks": [
+      "In-house mocap actors perform each fighter's moves; capture is fed straight into the RE Engine",
+      "Capcom built real-time preview of capture inside the engine, so animators see it on the character at once",
+      "Captured motion is then pushed into strong key poses with hit-stop, so every hit reads"
+     ],
+     "lesson": "Capture for weight and timing, then exaggerate the key poses and freeze the contact frame.",
+     "sources": [
+      {
+       "title": "Dashfight: Capcom shows its RE Engine mocap technique in SF6",
+       "url": "https://dashfight.com/news/capcom-unveils-cutting-edge-re-engine-mocap-technique-in-sf-6-showcase-3911"
+      },
+      {
+       "title": "Capcom R&D: Real-time motion capture preview in RE ENGINE (slides)",
+       "url": "https://www.docswell.com/s/CAPCOM_RandD/KLLR24-RE2023"
+      },
+      {
+       "title": "80.lv: Capcom demonstrates motion capture running directly in RE Engine",
+       "url": "https://80.lv/articles/capcom-demonstrates-motion-capture-running-directly-in-re-engine/"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.7
+    },
     "palette": null,
     "audio_mood": "Hip-hop and street beats, crowd noise, a live commentator option.",
     "pacing": "fast, short sessions",
@@ -33239,6 +35650,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "fast, short sessions",
@@ -33322,6 +35734,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Medieval.",
     "pacing": "brisk, medium sessions",
@@ -33406,6 +35819,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, long sessions",
@@ -33489,6 +35903,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -33572,6 +35987,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Haunting.",
     "pacing": "slow, short sessions",
@@ -33653,6 +36069,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -33741,6 +36158,28 @@
      "confidence": 0.6,
      "lesson": "Mixed styles can live together if light, rim and effects are shared. Useful for Abbie's World characters made by different factories."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "root_motion"
+     ],
+     "tricks": [
+      "Hand-keyed moves for every fighter, tuned frame by frame for timing",
+      "Hit-stop: the struck fighter shakes in place, horizontally on the ground and vertically in the air, fading out; the attacker keeps moving a little",
+      "Damage poses are blended in, and shake scales with camera distance"
+     ],
+     "lesson": "Hit-stop is animation: freeze, shake the victim, keep the attacker alive, fade the shake.",
+     "sources": [
+      {
+       "title": "Nintendo Wire: Sakurai's \"Eight Hit Stop Techniques\" and other episodes",
+       "url": "https://nintendowire.com/news/2022/12/12/this-week-in-sakurai-12-5-12-11-fine-tuning-hit-stop-and-cheating-the-system/"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.7
+    },
     "palette": null,
     "audio_mood": "Huge library of upbeat remixes; loud bright hit sounds.",
     "pacing": "fast, short sessions",
@@ -33824,6 +36263,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Silence.",
     "pacing": "brisk, short sessions",
@@ -33910,6 +36350,7 @@
      "confidence": 0.7,
      "lesson": "When colour means one thing only, players read it instantly."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Silence.",
     "pacing": "brisk, short sessions",
@@ -33993,6 +36434,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "brisk, medium sessions",
@@ -34075,6 +36517,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -34158,6 +36601,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Retro radio.",
     "pacing": "slow, long sessions",
@@ -34242,6 +36686,7 @@
      "confidence": 0.8,
      "lesson": "Own the light ramp: it is the cheapest, most powerful art-direction control in a toon shader."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Brassy spy themes and voice barks.",
     "pacing": "fast, short sessions",
@@ -34330,6 +36775,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Celtic metal.",
     "pacing": "brisk, medium sessions",
@@ -34414,6 +36860,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Chiptune.",
     "pacing": "brisk, short sessions",
@@ -34497,6 +36944,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Chiptune-ish.",
     "pacing": "brisk, long sessions",
@@ -34582,6 +37030,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, short sessions",
@@ -34665,6 +37114,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "slow, long sessions",
@@ -34748,6 +37198,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "fast, short sessions",
@@ -34835,6 +37286,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Market bustle.",
     "pacing": "brisk, medium sessions",
@@ -34922,6 +37374,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Game show.",
     "pacing": "fast, short sessions",
@@ -35007,6 +37460,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "brisk, short sessions",
@@ -35089,6 +37543,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -35141,6 +37596,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -35227,6 +37683,7 @@
      "confidence": 0.6,
      "lesson": "Flatter surfaces let sky colour take over the whole frame."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sparse.",
     "pacing": "slow, short sessions",
@@ -35313,6 +37770,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "slow, long sessions",
@@ -35396,6 +37854,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Moody.",
     "pacing": "slow, short sessions",
@@ -35481,6 +37940,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Folk.",
     "pacing": "brisk, medium sessions",
@@ -35564,6 +38024,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Folk.",
     "pacing": "slow, medium sessions",
@@ -35650,6 +38111,7 @@
      "confidence": 0.65,
      "lesson": "A per-scene colour grade can do the mood work while the shading stays simple."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Synth.",
     "pacing": "slow, short sessions",
@@ -35733,6 +38195,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Grim.",
     "pacing": "brisk, long sessions",
@@ -35815,6 +38278,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, short sessions",
@@ -35903,6 +38367,7 @@
      "confidence": 0.6,
      "lesson": "A grain over everything sets the emotional temperature."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sombre.",
     "pacing": "slow, long sessions",
@@ -35991,6 +38456,7 @@
      "confidence": 0.6,
      "lesson": "Faceted normals plus one strong sun is enough for a whole art direction."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Calm day music, drums at night.",
     "pacing": "brisk, short sessions",
@@ -36077,6 +38543,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "brisk, medium sessions",
@@ -36161,6 +38628,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Train sounds.",
     "pacing": "slow, short sessions",
@@ -36285,6 +38753,22 @@
      "confidence": 0.7,
      "lesson": "Soft bounce light and contact shadows make simple shapes look handmade."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "procedural",
+     "mocap": 0,
+     "locomotion": [
+      "procedural"
+     ],
+     "tricks": [
+      "Buildings grow and settle procedurally as you draw; the \"animation\" is the architecture answering the stroke",
+      "Sheep and birds wander with simple procedural motion; nothing is mocap"
+     ],
+     "lesson": "The world answering a stroke is the animation; spend motion on growth and settling, not characters.",
+     "sources": [],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Gentle ambient.",
     "pacing": "slow, short sessions",
@@ -36384,6 +38868,7 @@
      "confidence": 0.55,
      "lesson": "Saturated colour needs darker, thicker ink to keep forms readable."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Fantasy.",
     "pacing": "fast, short sessions",
@@ -36467,6 +38952,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Fantasy.",
     "pacing": "brisk, short sessions",
@@ -36552,6 +39038,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "slow, medium sessions",
@@ -36635,6 +39122,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Silly.",
     "pacing": "brisk, short sessions",
@@ -36721,6 +39209,7 @@
      "confidence": 0.6,
      "lesson": "Flat colour plus strong ambient occlusion reads as soft clay."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient sea.",
     "pacing": "slow, short sessions",
@@ -36806,6 +39295,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Brass band.",
     "pacing": "brisk, short sessions",
@@ -36889,6 +39379,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "fast, medium sessions",
@@ -36974,6 +39465,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -37059,6 +39551,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Nordic.",
     "pacing": "brisk, short sessions",
@@ -37150,6 +39643,7 @@
      "confidence": 0.6,
      "lesson": "Layered depth and glow make a 3D world read as an illustrated page."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Fairy-tale orchestral.",
     "pacing": "slow, short sessions",
@@ -37237,6 +39731,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Cheerful.",
     "pacing": "brisk, medium sessions",
@@ -37321,6 +39816,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -37405,6 +39901,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
@@ -37487,6 +39984,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Epic.",
     "pacing": "slow, short sessions",
@@ -37570,6 +40068,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -37653,6 +40152,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "brisk, short sessions",
@@ -37738,6 +40238,7 @@
      "confidence": 0.65,
      "lesson": "Readability first: one even light and a thin outline make hundreds of small objects legible at a glance."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Gentle acoustic music; a different foley sound for every object on every surface.",
     "pacing": "slow, short sessions",
@@ -37825,6 +40326,29 @@
      "confidence": 0.75,
      "lesson": "Tinted shadows instead of grey ones keep a flat-colour world warm and readable from far away."
     },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "procedural_ik"
+     ],
+     "tricks": [
+      "Animated in Blender, played in Unity: a small set of goose clips (waddle, run with flapping wings, crouch, honk, grab)",
+      "Villagers react with clear, readable body language (look up, chase, shoo), which is the stealth readout",
+      "Neck and head lead the body, so the goose looks curious before it moves"
+     ],
+     "lesson": "Readable reactions on the people are worth more than a big animation set; lead with the head.",
+     "sources": [
+      {
+       "title": "Game Developer: Road to the IGF, House House's Untitled Goose Game",
+       "url": "https://www.gamedeveloper.com/game-platforms/road-to-the-igf-house-house-s-i-untitled-goose-game-i-"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Piano that follows the action, softer when sneaking and racing when you are spotted.",
     "pacing": "brisk, short sessions",
@@ -37910,6 +40434,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sparse.",
     "pacing": "brisk, long sessions",
@@ -37995,6 +40520,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Gothic.",
     "pacing": "brisk, short sessions",
@@ -38078,6 +40604,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Moody.",
     "pacing": "brisk, short sessions",
@@ -38167,6 +40694,7 @@
      "confidence": 0.7,
      "lesson": "Rough low-fi models can look beautiful when the light and air are modern."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Atmospheric.",
     "pacing": "brisk, long sessions",
@@ -38252,6 +40780,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "War.",
     "pacing": "brisk, short sessions",
@@ -38335,6 +40864,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",
@@ -38419,6 +40949,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Voice chat.",
     "pacing": "slow, short sessions",
@@ -38473,6 +41004,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -38556,6 +41088,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Medieval.",
     "pacing": "fast, short sessions",
@@ -38641,6 +41174,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Engines and guns.",
     "pacing": "brisk, long sessions",
@@ -38726,6 +41260,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "fast, short sessions",
@@ -38812,6 +41347,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Electronic and orchestral.",
     "pacing": "fast, medium sessions",
@@ -38899,6 +41435,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, medium sessions",
@@ -38984,6 +41521,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, medium sessions",
@@ -39069,6 +41607,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, medium sessions",
@@ -39155,6 +41694,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Arena.",
     "pacing": "brisk, medium sessions",
@@ -39238,6 +41778,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Upbeat.",
     "pacing": "brisk, short sessions",
@@ -39260,6 +41801,117 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "wii-sports",
+   "file": "docs/oracle/games/wii-sports.json",
+   "appid": null,
+   "name": "Wii Sports",
+   "store_url": null,
+   "genres": [
+    "Sports",
+    "Party",
+    "Motion control"
+   ],
+   "short_description": "Play tennis, bowling, baseball, golf and boxing by swinging the remote like the real thing.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Sports",
+    "Party",
+    "Motion control"
+   ],
+   "summary": "Play tennis, bowling, baseball, golf and boxing by swinging the remote like the real thing.",
+   "identity": {
+    "core_loop": "Swing the remote like a racket, bat or ball; your Mii does the same; score and play again.",
+    "mechanics": null,
+    "ui_and_game_feel": "Instant and physical; anyone in the room can play.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The sport itself is the readout: ball flight, pins, crowd. A few simple overlays for score.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Clean, simple bright figures and fields; Miis with no arms or legs on fielders.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "mixed",
+     "family": "graphic_minimal",
+     "light": "flat",
+     "outlines": false,
+     "outline": "none",
+     "surface": "flat_colour",
+     "post": [],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Simple Mii bodies; fielders have no visible arms or legs and still read as moving",
+      "The player's real swing drives the timing of the Mii's swing, so the gesture is the animation",
+      "Realism was never the goal: the mind fills in the detail"
+     ],
+     "lesson": "Simple bodies let players see themselves; tie the swing animation to the player's own gesture.",
+     "sources": [
+      {
+       "title": "Iwata Asks: Wii Sports, A Question of Realism",
+       "url": "https://nintendo.com/en-gb/Iwata-Asks/Iwata-Asks-Wii/Iwata-Asks-Wii-Sports/2-A-Question-of-Realism/2-A-Question-of-Realism-217824.html"
+      },
+      {
+       "title": "Iwata Asks: Wii Sports",
+       "url": "https://iwataasks.nintendo.com/interviews/wii/wii_sports/0/1"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Cheerful jingles and crowd reactions.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Simple figures let players see themselves; the gesture is the control and the animation at once."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.22,
+     "expression": 0.11,
+     "structure": 0.89,
+     "social": 0.11,
+     "systems": 0.67,
+     "chance": 0.11,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -39292,6 +41944,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,
@@ -39377,6 +42030,7 @@
      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
      "confidence": 0.45
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Cheerful.",
     "pacing": "brisk, short sessions",
@@ -39461,6 +42115,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "slow, short sessions",
@@ -39544,6 +42199,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Military.",
     "pacing": "brisk, short sessions",
@@ -39628,6 +42284,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Light.",
     "pacing": "slow, short sessions",
@@ -39711,6 +42368,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Dramatic.",
     "pacing": "brisk, medium sessions",
@@ -39798,6 +42456,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "None.",
     "pacing": "fast, short sessions",
@@ -39820,6 +42479,116 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "zelda-breath-of-the-wild",
+   "file": "docs/oracle/games/zelda-breath-of-the-wild.json",
+   "appid": null,
+   "name": "The Legend of Zelda: Breath of the Wild (and Tears of the Kingdom)",
+   "store_url": null,
+   "genres": [
+    "Adventure",
+    "Open world",
+    "Action"
+   ],
+   "short_description": "Explore a huge ruined kingdom freely: climb anything, glide, cook, fight and solve shrines with physics.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Adventure",
+    "Open world",
+    "Action"
+   ],
+   "summary": "Explore a huge ruined kingdom freely: climb anything, glide, cook, fight and solve shrines with physics.",
+   "identity": {
+    "core_loop": "See something on the horizon, go there, climb and glide, find a shrine or a fight, cook and gear up, repeat.",
+    "mechanics": null,
+    "ui_and_game_feel": "Free and physical; the world answers with chemistry and physics.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.3,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.05,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Stamina is a wheel next to Link only while you use it; heat, cold and noise show on the body and the screen edge; the world (towers, smoke, birds) shows where to go.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Painterly, softly shaded world with gentle outlines on characters and big atmospheric haze.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "painterly",
+     "family": "painterly_3d",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "hand_painted",
+     "post": [
+      "colour grade"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "procedural_ik"
+     ],
+     "tricks": [
+      "About eight directional climb loops blended by input direction, with IK holding hands and feet to any wall",
+      "Body tilts with the slope, so climbing flattens into walking on all fours as the wall lies back",
+      "Effort shows on the body: a rhythmic bounce, glancing at the next hold, sweat drops, a panicked scramble when stamina runs out"
+     ],
+     "lesson": "A small keyed set plus IK lets a character climb anything; show effort on the body instead of a meter.",
+     "sources": [
+      {
+       "title": "New Frame Plus: How Link's climbing animation works in Breath of the Wild (transcript)",
+       "url": "https://amara.org/videos/0IXJ0B4bKKKN/en/3103528"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.7
+    },
+    "palette": null,
+    "audio_mood": "Sparse piano, nature sounds, music swelling for fights and towns.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Climb anything, with a stamina wheel that appears only while it matters, and a body that shows effort. The world is the quest log."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.67,
+     "expression": 0.78,
+     "structure": 0.78,
+     "social": 0.33,
+     "systems": 0.44,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -39879,6 +42648,7 @@
      "source": "derived from the art note by rendering_notes.RULES",
      "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "brisk, short sessions",

@@ -16,13 +16,15 @@ site() {
 }
 site "$S/index.html" > "$OUT/index.html"
 site "$S/crowd.html" > "$OUT/crowd.html"
+site "$S/cast.html" > "$OUT/cast.html"
 cp "$S/bodies.mjs" "$OUT/bodies.mjs"
 for f in "$S"/*.mjs "$S"/puppet.html; do [ "$(basename "$f")" = bodies.mjs ] || cp "$f" "$OUT/"; done
 cp "$S"/models/*.glb "$S"/models/*.json "$OUT/models/"
 cp "$S"/mocap/*.json "$OUT/mocap/"
 cp "$S"/img/* "$OUT/img/"
-cp "$SRC/simulations/toon-kit.mjs" "$SRC/simulations/film-look.mjs" "$SRC/simulations/painted-brush.mjs" "$OUT/"
-sed -i "s#'/simulations/painted-brush.mjs'#'./painted-brush.mjs'#" "$OUT/directions.mjs"
+cp "$SRC/simulations/toon-kit.mjs" "$SRC/simulations/film-look.mjs" "$SRC/simulations/painted-brush.mjs" "$SRC/simulations/hand-drawn.mjs" "$OUT/"
+sed -i -e "s#'/simulations/painted-brush.mjs'#'./painted-brush.mjs'#" -e "s#'/simulations/hand-drawn.mjs'#'./hand-drawn.mjs'#" "$OUT/directions.mjs"
+sed -i "s#'/simulations/painted-brush.mjs'#'./painted-brush.mjs'#" "$OUT/hand-drawn.mjs"
 sed -e "s#'/theme/aw.css?v=3'#new URL('aw.css?v=3', document.currentScript.src).href#" "$SRC/theme/boot.js" > "$OUT/theme/boot.js"
 cp "$SRC/theme/aw.css" "$OUT/theme/"
 # the context card, reading only this study's entry from a copy beside the page

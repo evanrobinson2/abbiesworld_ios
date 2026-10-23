@@ -190,7 +190,8 @@
         "toy figures",
         "Japanese picture books",
         "village life"
-      ]
+      ],
+      "motion": "keyframe; Squat toy-proportioned villagers with bouncy keyed walks and big emotes (reactions) for every mood"
     },
     "information_grammar": {
       "info_kinds": {
@@ -291,6 +292,23 @@
       "structure": "sandbox",
       "tension_curve": "flat_calm",
       "failure_cost": "none"
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "procedural_ik"
+      ],
+      "tricks": [
+        "Squat toy-proportioned villagers with bouncy keyed walks and big emotes (reactions) for every mood",
+        "Footsteps and run speed change with the ground; the head turns to look at things nearby"
+      ],
+      "lesson": "Emotes as a vocabulary: a small set of big readable reactions carries all the social information.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
     }
   },
   "dna": {

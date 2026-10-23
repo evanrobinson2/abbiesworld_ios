@@ -872,3 +872,10 @@ OWNED = [
  "Fly with real physics, mine, sell.","Hard and beautiful.","Physics in the world.","Realistic.","Ambient.",
  "Real momentum flying is a hard skill; the rings are gorgeous.","35536662","52030",10,0.4),
 ]
+# Wave 4 (2026-10-23 16:20Z): games Evan bought after the owned snapshot.
+OWNED += [
+("spore",17390,"Spore","Simulation;Creature creator;Sandbox","Guide a creature from a single cell in a tide pool to a space-faring civilisation, designing it yourself at every stage.","top_down",
+ "Cell Stage: swim through a drop of water, eat or be eaten, collect DNA, find new parts, call a mate to open the editor, rebuild your cell, grow, and rise into bigger layers of the pool until you grow legs.","Playful and light; every few minutes you redesign yourself and feel the change at once in how you swim and fight.",
+ "The cell carries most of it: parts show what it can do, size shows who can eat whom, and bigger shapes drift by in blurred layers below. A thin DNA bar and health are the only overlay; the editor is summoned by a mating call.","Soft translucent cells seen from above in a sunlit drop of water, with parallax layers of blurred, tinted creatures above and below.","Gentle procedural ambient music, wet squelches and chomps; the editor plays your creature's own tune.",
+ "The Cell Stage is the model for Abbie's science adventure: one drop of water seen from above, eat-or-be-eaten by size, new parts found in the world and fitted in a playful editor, and the camera rising to a bigger layer as you grow.","53861534","42130",8,0.8),
+]

@@ -67,6 +67,87 @@ free with clear licences and cover the same ground.
 6. **Contact sheets**: every move at three or four moments (`tools/character-studio/thumbs.mjs`
    renders the drawer's tiles the same way). Nothing goes to Evan unseen.
 
+## The next characters (round 1)
+
+Evan asked where the claymation and Midjourney "next characters" were. Four turnaround sheets were made in Midjourney
+(Relax mode, Evan's account), one pick each, upscaled:
+
+| Character | Pick | Grid job | Upscale job |
+| --- | --- | --- | --- |
+| Clay adventurer | grid 1 | 4a8e95be | bad2df2e |
+| Plasticine inventor | grid 3 | 6d74c041 | 28c993df |
+| Stick man | grid 2 | a621d6e0 | 3101d933 |
+| 80s action hero | grid 3 | 43251376 | 8f8ff88c |
+
+Full prompts, ids and hashes: `tools/midjourney/outputs/character-studio/*/provenance.json`.
+
+**How they're built.** `characters.mjs` is the recipe: engineered parts, not image-to-3D. Each character is the wooden
+mannequin's 30 named parts (pelvis, abdomen, chest, upper_arm_L...) with its own proportions (a rest-joint table per
+character, same A-pose) and its own shapes and clothes; hats, packs, a sword and a cape hang on the part they belong
+to. `rigMannequin` parents them to the same 20 bones, so all 50 moves and the mocap play on them with no extra work.
+Materials are named by what they are (skin, jacket, suit, boots...), and the art directions keep a recipe character's
+own colours and face, changing only how they're made (clay dents, cel shading and ink).
+
+**The Cast room** (`cast.html`) shows each one beside its picture, with a live viewer that plays the same moves.
+
+**Self-score, round 1** (side by side with the picture, front, side and back):
+- Stick man: closest. Ink lines, paper head, sword and cape all read. The sketchy line quality isn't there yet.
+- Plasticine inventor: silhouette, knit, corduroys, long neck and grin read. The ears and hands are smaller than in the picture.
+- Clay adventurer: colours, hat, googly eyes and boots read. The puffer jacket and hood aren't as puffy and bunched as the picture.
+- 80s action hero: colours and costume layout read. It has none of the drawn muscle and no ink piping yet, and the
+  face is too plain.
+
+Lesson for the next rep: build the silhouette first from the side view (the puffer's hood and the hero's V read from the
+side), then the costume. A round pec reads as the wrong thing at a distance; use one flat chest plate.
+
+## Quality pass: real figures, real motion, scored (2026-10-23)
+Evan, 16:39Z: "the animations are still not really where they need to be", and "why aren't there any good models?
+... we have nice ones already in game". So the invented recipe characters are retired (hidden in `bodies.mjs`, still
+loadable by id) and every move plays on figures that were already tested in the game:
+- **Game figure**: the Quaternius Universal Animation Library mannequin (CC0, `animation-study-assets/`), now the default.
+- **Young Daddy**: the figure-kit build (`simulations/figures/young-daddy.mjs`).
+- **The girl from Grace's basement** (`simulations/grace-kid.mjs`).
+All three ride the studio's 20 bones through `rigSkinned(T, scene, J, alias)`: an alias map renames their bones, and
+`applyPose` walks to the nearest mapped ancestor when a rig has fewer spine bones than ours.
+
+**Scoring.** Every move was scored 1 to 5 on weight, anticipation, follow-through, arcs, foot contact and balance,
+judged from contact sheets on the game figure and in live playback beside its reference: the original Quaternius clip
+on its own rig, or the CMU take. A move passes at 20 of 30 if it also reads at a glance. The scores live in
+`studies/character-studio/review.json` and the Scores room (`review.html`) shows each one before, after and beside
+its reference, on any of the four bodies.
+
+**Result.** 31 kept, 8 replaced with real game animation (idle, knocked down, slash, cast, crouch walk, roll, crouch
+behind cover, push), 5 new (chat, jog, take a hit, pick up, fix), 11 cut: clap, spin, slide and twist (stiff
+hand-keyed loops), and hang, climb, bow, swim, aim-walk, kart and bike (they need a ledge, ladder, bow, water, gun,
+kart or bike, so they float). Cut moves keep their definition with a `cut` reason in `moves.mjs`, so old links and the
+2D puppet still resolve, but no tile offers them.
+
+**How Quaternius clips are baked.** `tools/character-studio/quaternius/bake.mjs` samples each clip in `clips.json`
+at 30 fps in a headless page and writes the same per-bone world turns retarget.py writes for CMU (`q = D * A2T`).
+In-place loops get a travel speed from the stance foot's backward slide (walk 0.77, jog 2.19, sprint 2.80 hip heights
+a second), so the stage moves the body exactly that fast and the feet stay planted. Lift is written only for clips
+marked `"air": true`, otherwise a roll's raised feet would hoist the body. Replaced CMU takes stay as `cmu_<move>`.
+
+**Sources.** Oracle motion notes for 25 games (Celeste, Little Nightmares, Wii Sports, Splatoon 3, Minecraft, Just
+Dance, Mario Kart 8 Deluxe added for this pass), `docs/oracle/motion/MOCAP_SOURCES.md` for licences (CMU, Mixamo and
+Quaternius ship; LAFAN1 and Bandai Namco are study only and are not used), and the twelve principles of animation.
+
+**Next.** One high-fidelity master set: the Meshy animation library on one rigged Meshy hero (the Meshy hero thread
+owns the run and waits on Evan's go), baked with the same bake step; CMU and Quaternius fill gaps. Props (hammer, axe,
+shovel, bat, bottle, torch, chair, ledge, ladder) bring cut moves back. A webcam take of Evan in the browser
+(MediaPipe) is the fallback for anything still missing; never the kids.
+
+## Meshy figures only (2026-10-23, 18:39Z)
+Evan, after the quality pass: "I still see bullshit player meshes and no meshy heroes". The cast is now only
+Meshy-made figures: the two Bruiser-study Meshy brutes (task ids in `tools/brute-fight/fighters.json`), cleaned up and
+skinned by the Brute Fight study. They already carry the studio's 20 bone names, so every move plays on them with no
+alias map. The wooden and smooth mannequins, the Quaternius game figure, Young Daddy, the girl and the recipe characters
+are `hidden` in `bodies.mjs`: loadable by id (the Scores room's reference pane still plays the original Quaternius clip
+on its own rig) but never offered. The Crowd room's townsfolk are the two brutes too, and the picture blocks are
+rendered on the red brute. Known weakness: the brutes' skin weights are auto-made, so shoulders can tear on big arm
+moves; proper weights, and the new Meshy heroes (AW-STUDY-0043, with the full Meshy animation library), wait on Evan's
+"go" in the Meshy hero thread. When they land they go at the top of `BODIES`.
+
 ## What's next
 
 - Inertialized transitions between moves (Bollo), so a change of move keeps momentum.

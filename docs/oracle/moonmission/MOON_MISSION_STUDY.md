@@ -32,6 +32,8 @@ Moon Base Kit. Voices: AW-STUDY-0030 Family cast.
   just like training day sequences the sound of the truck starts, muffled, eyes open, and it says wake up sleepy heads!
   i know you three have been working hard for today, so I hope you enjoyed a little shut eye, now it's time to get ready
   for our launch sequence."
+- 17:04Z, how it starts: "a super important black truck meets us at the coffee shop and offers us the very important
+  space mission", then "And we accept", then "a huge rocket port lands and the pink ship appears kaboom".
 - Hardware: a PC game cast to the Samsung Frame, a Mac M5, maybe the Polycom for group voice, simple controllers each.
 
 ## 2. The shape of the whole game
@@ -185,6 +187,46 @@ launch day: you walk through the place you'll leave, put your hands on a real-fe
 launch control in your ear, and feel the launch in your body, then the hush of orbit. We take that rhythm: **quiet
 home, tactile cockpit, a voice in your ear, the roar, then silence and the window.** We don't take its story,
 characters, ship or music.
+
+### The opening: the black truck (4 min, everyone)
+`HOUSTON BASECAMP · T-24:00:00 · MAIN STREET, ABBIE'S TOWN` (the clock isn't running yet; it starts at the stamp). This is the first scene, and the only one that starts in
+the town, at the coffee shop.
+1. **The truck.** A quiet morning outside the coffee shop. A long, glossy black truck rolls up Main Street and parks at
+   the curb with a low hum (its engine is the same sound the crew bus will have later, so the ear remembers it). It's
+   very important and knows it: tinted glass, a small pink antenna light, a plain white patch on the door. Bub sits
+   up. People on the street stop and look (spatial cue: the whole street turns toward it).
+2. **The offer.** A person in a crisp suit steps out (a mission officer; a designed voice, never a clone) and walks
+   to the family's table. First person, from whoever has the spotlight (Daddy first). The offer is a short branching
+   chat, a few `> ` lines, each person with their own question:
+   - Daddy: `> "A mission? To where?"` or `> "Is this a joke?"`
+   - Abbie: `> "Is it a really big rocket?"` or `> "Can Ani come?"`
+   - Ani: `> "Can we bring snacks?"` or `> "Will there be stars?"`
+   The officer answers each, then opens a folder: a mission patch, a star map, and a pink rocket drawn by a child.
+   "The Moon base needs a crew. A very important one."
+3. **And we accept.** The family accepts together: this is the first group moment. The question is one line, `> We
+   accept`, and **everyone has to say yes**: by voice ("We accept!", heard on the room mic as a loud group shout) or by
+   each player pressing their own button. Each yes puts a glowing chip (pink, purple, blue) on the line; when all
+   chips are lit the officer stamps the folder. The group can't be outvoted: if someone hesitates, the officer waits
+   kindly ("Take your time, crew."), and the clock does not tick yet. The mission clock starts at this stamp.
+4. **KABOOM.** The truck's rear door drops to show a glowing pad outside it, and then, from above, **a huge rocket
+   port lands**: a launch platform drops onto Main Street and plants itself with a ring of dust and a low boom. A beat
+   later the **pink rocket appears on it, kaboom**: a burst of light, a shock ring, confetti-like sparks, the rocket
+   standing on the pad, steaming, its hatch light blinking. The street gasps and cheers.
+   - It's the same beat as the rocket tile landing on the Ranch (section 7), seen from the ground: the port's
+     drop reuses the tile-drop impact (`simulations/tile-drop-impact.mjs`), and the pink ship's appearance reuses a
+     reveal effect from the Tile pull and print study (`simulations/live-tray-preview.mjs` `reveal`, the five effects
+     in AW-STUDY-0025; we pick the same one Evan picks there, or the biggest by default). Nothing in the world
+     masks the view: no white flash fade, the burst is light and sparks on the rocket itself.
+   - Meta cues: a low boom in the chest, a short camera shake, the coffee cups on the table rattle and settle.
+   - Daddy's thought: "Well. That's a big rocket."
+5. **Cut to the morning.** A calm cutscene: the sun going down on the pink rocket on Main Street, the town settling,
+   then the mission card for the next scene types in: `T-00:45:00 · THE KITCHEN`. The morning vignettes begin.
+- **Where it lives:** the coffee shop is placed at its real Main Street spot by the Abbie's Town thread (AW-STUDY-0033,
+  Founding City on Hexes). The truck's arrival point is the curb in front of the shop's door and its trigger is
+  "the family sits down at the shop's table" (or taps the shop door). Asked of that thread (not yet confirmed): expose the shop's
+  curb position and door as named anchors; this study owns the truck, the officer, the port and the reveal.
+- **Assets** (added to section 10): the black truck, the mission officer, the folder and patch, the launch port
+  (platform and dust ring), the kaboom effect, the street crowd reactions, and the Main Street backdrop from the town.
 
 ### Mission cards (between scenes)
 Evan (13:15Z): "a kind of high resolution mission update overlay that you'd see in movies". Every scene opens with one:
@@ -344,6 +386,7 @@ concept first). Priority **T** = tonight, **L** = later.
 | MM-C07 | Bub, black lab | 4k | idle, follow, howl | Kit (`black-lab` from School Ready) | T |
 | MM-C08 | First-person hands, gloved | 2k | per-player colour, press, flip, grip | Recipe | T |
 | MM-C09 | Houston | none | voice only, a radio light that glows when it talks | Recipe | T |
+| MM-C10 | Mission officer | 8k | crisp dark suit, white patch, folder; designed voice | Meshy + cleanup | T |
 
 ### 10.2 Places
 | ID | Asset | Budget | Parts and notes | Source | P |
@@ -352,6 +395,7 @@ concept first). Priority **T** = tonight, **L** = later.
 | MM-P02 | Abbie's tree house (suit room) | 25k | platform, ladder, suit rack, helmet shelf, bench, window to the rocket | Recipe + MJ | T |
 | MM-P11 | The galley (pantry and prep counter) | 15k | colour shelves, trays, pack sealer | Recipe | T |
 | MM-P12 | Crew briefing room | 12k | whiteboard on the wall, chairs, a model rocket | Recipe | T |
+| MM-P14 | Main Street at the coffee shop | from the town | curb, shopfront and street crowd; supplied by the Abbie's Town thread | Town kit | T |
 | MM-P13 | The road to the pad | 20k | road, fence, signs, the rocket growing on the horizon | Recipe | T |
 | MM-P03 | Launch pad and gantry | 40k | pad, gantry tower, swing arm, elevator cage, floodlights, water tower | Recipe + MJ | T |
 | MM-P04 | White room and hatch | 10k | the room at the end of the arm, hatch frame | Recipe | L |
@@ -368,6 +412,8 @@ concept first). Priority **T** = tonight, **L** = later.
 | MM-V01 | Pink rocket, full size | 20k | nose, capsule, portholes, body, 4 fins, engines, stage ring, hatch | MJ turnaround, then Recipe | T |
 | MM-V02 | Pink rocket, hex-tile size | 3k | same silhouette, chunky | from MM-V01 | T |
 | MM-V03 | Rocket stage 1 (separating) | 6k | split from MM-V01 | from MM-V01 | T |
+| MM-V06 | The black truck | 12k | long glossy truck, tinted glass, pink antenna light, rear door drops to a ramp | MJ + Recipe | T |
+| MM-V07 | Launch port | 8k | platform, rim lights, landing legs, dust-ring decal | Recipe | T |
 | MM-V05 | Crew bus | 12k | exterior; interior with bench seats, windows, dashboard clock, radio | Recipe + MJ | T |
 | MM-V04 | Lunar lander exterior | 15k | cabin, legs (4), feet, thrusters, ladder | Meshy (23 ref) + leg (25 ref) | T |
 
@@ -402,6 +448,7 @@ concept first). Priority **T** = tonight, **L** = later.
 | MM-U04 | Vote chips and Captain's Hat marker | spatial, on the `> ` line | T |
 | MM-U05 | Caption bar, Moon dialect | dark glass, speaker dot | T |
 | MM-U06 | Mission card and the launch clock | monospaced, typed in, live clock; dark ink on Earth, white on the Moon; the clock also on the oven, bus dashboard, pad board and panel | T |
+| MM-U08 | Opening chips and the stamp | three vote chips on `> We accept`, the officer's stamp | T |
 | MM-U07 | Whiteboard stroke library + single-line hand font | rocket, stick figure, seat, hose, bulb, lever, arrow, star, Moon; marker squeak | T |
 
 ### 10.6 Sound and voice
@@ -415,6 +462,7 @@ concept first). Priority **T** = tonight, **L** = later.
 | MM-A06 | Engines: ignition, roar, rumble bed, cut-off, stage clunk | layered, driven by the launch signal | Sound engineer | T |
 | MM-A07 | Music: morning theme, launch swell, orbit hush, landing | Suno, one theme in four moods | Suno | T |
 | MM-A08 | Kitchen and tree house room tone, bub sounds | | Sound engineer | L |
+| MM-A10 | The truck (hum), port landing boom, kaboom, crowd gasp and cheer, stamp | | Sound engineer | T |
 | MM-A09 | Crew bus: engine start (muffled and clear), road, the wake-up line | | Sound engineer + Houston voice | T |
 
 ### 10.7 Effects
@@ -432,6 +480,7 @@ before that.
 | # | Step | Ready by (local) |
 |---|---|---|
 | 1 | This study, identity, preview page | 10 AM |
+| 1b | The opening: Main Street truck, the group "We accept", the port and the kaboom (with the Abbie's Town thread and the tile reveal) | 2 PM |
 | 2 | Script graph (`script.json`) for the morning, the launch and the landing; Houston policy and voice | 11:30 AM |
 | 3 | Couch kit in `simulations/`: players and seats, jobs, votes with the Captain's Hat, Gamepad + Stream Deck (WebHID) + keyboard input, captions with `> ` choices, mission cards, the whiteboard stroke drawer | 12:30 PM |
 | 4 | Capsule interior and the launch (the hero scene), live Houston with push to talk | 2 PM |
@@ -443,7 +492,7 @@ Art comes in parallel (never blocking): Midjourney concepts on the Mac, Meshy fo
 given, recipes for the capsule and the rocket. Placeholders are low-poly recipes so the game is playable before the art
 lands.
 
-**Test by state:** `?scene=kitchen|suit|meals|check|choices|bus|briefing`, `?launch`, `?lander`, `?arrive`, and `window.moonMission` for a scripted
+**Test by state:** `?scene=truck|kaboom|kitchen|suit|meals|check|choices|bus|briefing`, `?launch`, `?lander`, `?arrive`, and `window.moonMission` for a scripted
 playthrough (from the speed reviews).
 
 ## 12. Home setup (the living room)
@@ -513,6 +562,22 @@ Hero, AW-STUDY-0030 Family cast, AW-STUDY-0031 Moon Base Kit, and Evan's trek pa
 - [Built-in hold](https://en.wikipedia.org/wiki/Built-in_hold) and
   [Why the shuttle countdown has so many stops and starts](https://www.scientificamerican.com/article/shuttle-countdown-clock/):
   real countdowns pause on purpose. This became the always-ticking launch clock with planned holds, so nobody fails.
+
+## 17. Where Part 1 lives: the Winchester map (Evan, 17:28Z)
+Part 1 now runs as a loop (`prototypes/ranch-atelier/dist/simulations/moonmission/`, playable at `/studies/moon-mission/play.html`) and starts at the coffee shop curb, taken from Abbie's Town's real anchors (`startCoordinate`). Evan's rules: the map is compressing into small micro-zones, so we build only spaces players see; and the final Winchester is seven hexes in a greater hex, carved into three regions of a third each. The carving is owned by `simulations/abbietown/regions.mjs` (Downtown, Ani's side, Abbie and Daddy's side; the church park at the middle). Our zones name those region ids and nothing else.
+- Downtown: Main Street (curb, truck, rocket port) and the church park, where the three regions meet.
+- Abbie and Daddy's side: the kitchen and the tree house. Ani's side: Ani's kitchen.
+- Off the map: Launch (pad, briefing room, crew bus route, capsule), then orbit, lunar descent and the Moon base pad. Each is a small scene, none is scaled space.
+- Homes not yet placed in the town fall back to the common, marked pending.
+- Changing worlds (town to Launch to Moon) has no proper UX yet. A study is dispatched through the coordinator; until it lands, the mission uses a calm cutscene between zones.
+
+The 3D version (Evan, 18:40Z: "make the moon mission in the game world; Meshy for heroes, low poly hi fi for the rest") is `studies/moon-mission/world.html`, built on `simulations/moonmission/world3d.mjs`. One scene per micro-zone, driven by the same engine effects: the truck pulls up at the cafe curb, the rocket port lands, the pink ship falls right after, then interiors, launch, orbit, the lander and the Moon base. The three heroes are faceted stand-ins; drop `studies/moon-mission/heroes/<daddy|abbie|ani>.glb` and it replaces the stand-in on load. Not yet in the scenes: the real town land (these are micro-zones), the cafe's own hi-fi models, voices for the 3D page.
+
+Goal 3 (Evan, 19:15Z): production quality, low-poly isometric, following the same loop. Built so far: the isometric camera is the default in `world.html` (rooms cut away, `?view=fp` for first person), and games 3 to 6 are pure models in `simulations/moonmission/games.mjs` (wire puzzle at the airlock, bug zapper in the habitat, Star Child harmonizer in the cave, buggy ride on the crater road), each with its own 3D scene, per-player controls and a bot test. Nobody can fail in any of them. Still missing for "done": real Meshy heroes (stand-ins today), the cafe and truck hi-fi model passes, sound and the designed voices on the 3D page, dialog moved onto the shared kit's tree runner, and the slide-to-escape style framing and effects polish.
+
+In the town (Evan, 19:33Z / 3:33 PM: "this needs to be fully integrated into the winchester diorama"): /town now starts
+the mission. A black truck waits in Main Street outside the café on the Downtown diorama; tapping it (or `/town?mission`)
+runs `town-mount.mjs` on the town's stage through the `town:truck` entrance (town side: `docs/oracle/abbietown/mission.block.js`).
 
 ## 16. How it was made, and how to be faster next time
 To be written when Part 1 ships (CLAUDE.md speed-review rule). Speedups applied from the school and basement reviews:

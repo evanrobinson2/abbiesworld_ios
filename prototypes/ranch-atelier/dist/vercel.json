@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/science-lab",
+      "destination": "/studies/cell/play.html"
+    },
+    {
+      "source": "/town",
+      "destination": "/studies/abbietown/index.html"
+    },
+    {
       "source": "/welcome",
       "destination": "/home/index.html"
     },
