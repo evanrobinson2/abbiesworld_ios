@@ -8,6 +8,8 @@ Files in this folder:
 
 - `CARD_STUDY.md` (this file): what the best card games do, what we take, the Abbie's World card spec, and the
   rubric in prose.
+- `CARD_ART.md`: part 2, the ten ways art is presented on a card (portal, overlay, pop-out, shadowbox, panorama,
+  specimen, emblem, portrait, scene, living), why each works, twelve art-direction rules and the layered art package.
 - `card-rubric.json`: the rubric as data. Every check has an id, a threshold, a weight, a measuring method and a
   `source` from the identity schema's enum. Gates must pass; the rest scores out of 100.
 - `card-signatures.json`: per-game card signatures in the identity schema's `signature` shape, each sorted into

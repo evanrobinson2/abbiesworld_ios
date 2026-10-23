@@ -84,8 +84,14 @@ button.chip:active { transform: translateY(2px); box-shadow: 0 0 0 #8a6420, 0 3p
 .card .glow { position: absolute; inset: 0; border-radius: 6%; pointer-events: none; opacity: 0; filter: blur(14px); transition: opacity 260ms; }
 .card.charging .glow { opacity: 1; animation: pulse 420ms ease-in-out infinite alternate; }
 @keyframes pulse { from { transform: scale(1.0); } to { transform: scale(1.1); } }
-.card.sun .living, .card.harvest .living { animation: drift 7s ease-in-out infinite alternate; }
+.card.sun .living, .card.harvest .living, .card.alive .living { animation: drift 7s ease-in-out infinite alternate; }
 @keyframes drift { from { transform: translateX(-12px); } to { transform: translateX(14px); } }
+@property --px { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --py { syntax: '<number>'; inherits: true; initial-value: 0; }
+.card .layer { position: absolute; inset: 0; --k: 0; transform: translate(calc(var(--px) * var(--k) * 0.25%), calc(var(--py) * var(--k) * 0.15%)); }
+.card .layer svg { width: 100%; height: 100%; display: block; }
+.card.box:not(.hovering) { animation: boxsway 5s ease-in-out infinite alternate; }
+@keyframes boxsway { from { --px: -1; --py: -0.3; } to { --px: 1; --py: 0.3; } }
 .card.idle { animation: sway var(--period, 4s) ease-in-out infinite alternate; }
 @keyframes sway { from { rotate: -1.5deg; } to { rotate: 1.5deg; } }
 
@@ -139,9 +145,30 @@ td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-spa
 .ledger { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
 .ledger div { padding: 18px; border-radius: 14px; box-shadow: inset 0 0 0 1px var(--rule); }
 .ledger ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.94rem; }
+
+/* Part 2 */
+.partmark { display: grid; gap: 10px; padding: 26px; border-radius: 18px; background: linear-gradient(135deg, rgba(228,184,94,.14), rgba(0,0,0,.12)); box-shadow: inset 0 0 0 1px rgba(228,184,94,.35); }
+.modes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 18px; }
+.mode { display: grid; grid-template-columns: minmax(0, 130px) 1fr; gap: 16px; align-items: start; padding: 16px; border-radius: 14px; background: rgba(0,0,0,.16); box-shadow: inset 0 0 0 1px var(--rule); min-width: 0; }
+.mode .card { width: 100%; }
+.mode h3 { font-size: 1.12rem; }
+.mode .where { font: 500 .72rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
+.mode p { font-size: .9rem; color: var(--muted); margin-top: 5px; }
+.mode p b { color: var(--ink); }
+.pano { display: flex; justify-content: center; gap: 0; }
+.pano .card { width: min(170px, 28vw); }
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; counter-reset: rule; }
+.rules div { padding: 14px 16px; border-radius: 12px; background: var(--felt-lift); box-shadow: inset 0 0 0 1px var(--rule); font-size: .92rem; color: var(--muted); }
+.rules div b { display: block; color: var(--ink); font-family: var(--display); font-weight: 600; font-size: 1rem; margin-bottom: 3px; }
+.exploded { display: flex; justify-content: center; perspective: 1400px; padding: 120px 0 30px; overflow-x: clip; }
+.exploded .stack { position: relative; width: min(200px, 40vw); aspect-ratio: 63 / 88; transform-style: preserve-3d; transform: rotateX(40deg) rotateZ(-30deg); animation: turn 9s ease-in-out infinite alternate; }
+@keyframes turn { from { transform: rotateX(42deg) rotateZ(-36deg); } to { transform: rotateX(36deg) rotateZ(-24deg); } }
+.exploded .sl { position: absolute; inset: 0; transform-style: preserve-3d; }
+.exploded .sl svg { width: 100%; height: 100%; display: block; }
+@media (prefers-reduced-motion: reduce) { .exploded .stack { animation: none; } }
 @media (prefers-reduced-motion: reduce) {
   .card, .card .inner, .hand .slot { transition-duration: 150ms !important; }
-  .card.idle, .card .foil, .card .living, .card.charging .glow { animation: none !important; }
+  .card.idle, .card.box, .card .foil, .card .living, .card.charging .glow { animation: none !important; }
 }
 </style>
 
@@ -277,6 +304,50 @@ td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-spa
   </section>
 
   <section>
+    <div class="partmark">
+      <span class="eyebrow">Part 2 · Card art</span>
+      <h2>Where the art sits, and why it works</h2>
+      <p class="read">Portal and overlay are two positions on one axis: where the art sits relative to the card's surface. A card is a flat sheet in your hand, and the art can only be behind it, on it, in front of it, inside it with depth, or beyond its edges. That list is complete. Two more axes multiply it: what the art shows (a thing, an idea, a someone, an event) and whether it moves. Every card in the ten games is one of these or a mix.</p>
+    </div>
+    <figure class="svgfig"><div class="scroll" id="depthaxis"></div>
+      <figcaption>The card seen from the side, with your eye on the right. Each mode puts the art at a different depth.</figcaption></figure>
+    <div class="modes" id="modes"></div>
+    <figure>
+      <div class="pano" id="pano"></div>
+      <figcaption><b style="color:var(--ink)">Panorama: the art continues across cards.</b> Three cards share one painting; each still has its own subject. The empty slot next to a card you own is the strongest "complete the set" pull there is. Use it for seasonal mini-sets of three to five cards with an identical horizon and light.</figcaption>
+    </figure>
+    <p class="read muted">Is that it? On the depth axis, yes. On the content axis, specimen, emblem, portrait and scene cover the four things a picture can be about. New looks come from mixing modes (a pop-out that also moves) or from the medium (watercolour, papercraft, woodcut, 3D render), which changes how the art looks but not where it sits. The card held as a prop in the world, as in Inscryption, is about the card object, not its art, and works with any mode.</p>
+  </section>
+
+  <section>
+    <span class="eyebrow">Part 2 · Making it beautiful</span>
+    <h2>Twelve rules for card art</h2>
+    <div class="rules" id="rules"></div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Part 2 · Pipeline</span>
+    <h2>Make the art once, present it any way</h2>
+    <p class="read">Author every card's art as layers: backdrop, middle ground, the subject with transparency, foreground, shadow. The same package becomes the portal card, the Sun-tier overlay with pop-out, and the shadowbox variant. Our subject layer is a Blender render of the asset's own 3D model, so every Ranch model can become a card, with prompts, job ids and camera in its <span class="mono">provenance.json</span>.</p>
+    <figure><div class="exploded"><div class="stack" id="stack"></div></div><figcaption>Exploded, back to front: the backdrop (<span class="mono">bg.png</span>), the subject with transparency (<span class="mono">subject.png</span>), the foreground grass (<span class="mono">fg.png</span>), and the frame with its window cut out, carrying all the information. Slide them apart as the card tilts and you have the shadowbox; merge them and you have the portal.</figcaption></figure>
+    <div class="scroll"><table>
+      <thead><tr><th>Card</th><th>Art mode</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Seed</td><td>Specimen</td><td>Clearest at small sizes and cheapest to keep consistent; reads like a toy catalogue</td></tr>
+        <tr><td>Sprout</td><td>Portal</td><td>The subject at home in its Ranch setting</td></tr>
+        <tr><td>Bloom</td><td>Portal, living light</td><td>A first taste of motion, as a reward</td></tr>
+        <tr><td>Harvest</td><td>Shadowbox</td><td>The card becomes a tiny diorama, which is the house look</td></tr>
+        <tr><td>Sun</td><td>Overlay with pop-out</td><td>Biggest art, a new silhouette, the subject reaches out</td></tr>
+        <tr><td>Actions and rules</td><td>Emblem</td><td>Ideas read best as symbols</td></tr>
+        <tr><td>Weather and events</td><td>Scene</td><td>The picture explains the effect to a pre-reader</td></tr>
+        <tr><td>Named animals</td><td>Portrait</td><td>Faces make friends</td></tr>
+        <tr><td>Seasonal sets</td><td>Panorama</td><td>A picture to complete</td></tr>
+      </tbody>
+    </table></div>
+    <p class="read muted" style="font-size:.92rem">Full write-up: <span class="mono">docs/oracle/cards/CARD_ART.md</span>. The mode checks and art-direction measures are in <span class="mono">card-rubric.json</span> version 1.1.</p>
+  </section>
+
+  <section>
     <span class="eyebrow">The legal line</span>
     <h2>Style we learn, expression we never copy</h2>
     <div class="ledger">
@@ -384,56 +455,84 @@ function token(cx, cy, r, n, tier) {
     <text x="${cx}" y="${cy + r*0.36}" text-anchor="middle" font-family="Fredoka, Baloo 2, sans-serif" font-weight="700" font-size="${r*1.08}" fill="#2b1d0e" stroke="#f8eed6" stroke-width="6" paint-order="stroke">${n}</text>`;
 }
 
-// Build a card face as an SVG string.
+// Extra subjects for part 2: an emblem, a scene, and a panorama strip.
+SUBJECT.emblem = () => `<g transform="translate(315 380)"><g fill="#fff6dc">${Array.from({length: 12}, (_, k) => `<path d="M0,-150 L22,-95 L-22,-95 Z" transform="rotate(${k * 30})"/>`).join('')}</g>
+  <circle r="88" fill="#fff6dc"/><circle r="66" fill="#f0a53a"/><path d="M-30,-6 a10,10 0 0 1 20,0 M10,-6 a10,10 0 0 1 20,0" stroke="#5a3b1c" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M-26,22 q26,24 52,0" stroke="#5a3b1c" stroke-width="7" fill="none" stroke-linecap="round"/></g>`;
+SUBJECT.scene = () => `<g transform="translate(355 150) scale(.42)">${SUBJECT.barn()}</g><g transform="translate(-30 -150) scale(.95)">${SUBJECT.rain()}</g>
+  <g>${[150, 230, 400, 470].map((x, i) => `<g transform="translate(${x} ${560 - i % 2 * 10})"><path d="M0,40 V${-20 - i * 14}" stroke="#4f8a3a" stroke-width="10"/><ellipse cx="-18" cy="${-6 - i * 8}" rx="20" ry="9" fill="#62a34a" transform="rotate(-30 -18 ${-6 - i * 8})"/><ellipse cx="18" cy="${-14 - i * 8}" rx="20" ry="9" fill="#62a34a" transform="rotate(30 18 ${-14 - i * 8})"/></g>`).join('')}</g>
+  <g transform="translate(250 290) scale(.36)">${SUBJECT.sheep()}</g>`;
+function panoStrip(panel) {
+  // One painting 1590 units wide (three windows); each card shows its own third, with its own focal subject.
+  return `<g transform="translate(${-panel * 530} 0)">
+    <path d="M0,560 C200,500 380,520 560,470 C760,420 900,520 1100,490 C1300,460 1480,500 1700,470 V900 H0 Z" fill="#8cc566"/>
+    <path d="M0,610 C260,580 520,640 800,600 C1080,560 1340,630 1700,590 V900 H0 Z" fill="#79b456"/>
+    <path d="M0,640 C300,600 600,700 900,650 C1200,600 1500,680 1700,640" stroke="#7cc4f0" stroke-width="26" fill="none"/>
+    <circle cx="1290" cy="230" r="70" fill="#fff1b8"/>
+    ${[[470, 450], [1020, 430], [1460, 455]].map(([x, y]) => `<g transform="translate(${x} ${y})"><rect x="-8" y="0" width="16" height="50" fill="#7a5130"/><circle cy="-20" r="46" fill="#5f9e46"/><circle cx="-26" cy="0" r="30" fill="#6fae52"/></g>`).join('')}
+    <g transform="translate(-15 60) scale(.8)">${SUBJECT.sheep()}</g>
+    <g transform="translate(570 90) scale(.78)">${SUBJECT.barn()}</g>
+    <g transform="translate(1100 110) scale(.8)">${SUBJECT.sunflower()}</g></g>`;
+}
+
+// Build a card face as an SVG string. Modes: portal (default), overlay (o.full), popout, specimen, emblem, panorama.
+// o.part draws one shadowbox layer: 'bg', 'subject', 'fg' or 'frame' (frame with the window cut out).
 function cardSVG(o) {
   const id = ++uid;
-  const t = o.tier, lod = o.lod || 0, full = t === 'sun' && !o.noFull;
+  const t = o.tier, lod = o.lod || 0, full = (t === 'sun' && !o.noFull) || o.full, mode = o.mode || 'portal', part = o.part;
   const win = WINDOW[o.type];
-  const sub = SUBJECT[o.subject]();
   const sc = o.scale || 1, dx = o.dx || 0, dy = o.dy || 0;
-  const subj = `<g transform="translate(${315 + dx} ${420 + dy}) scale(${sc}) translate(-315 -420)">${sub}</g>`;
+  const subBody = mode === 'panorama' ? panoStrip(o.panel || 0) : SUBJECT[o.subject]();
+  const subj = mode === 'panorama' ? subBody : `<g transform="translate(${315 + dx} ${420 + dy}) scale(${sc}) translate(-315 -420)">${subBody}</g>`;
   const busy = o.busy ? `<g opacity=".9">${Array.from({length: 26}, (_, k) => `<path d="M${-40 + k*30},112 L${k*30 + 120},640" stroke="${k%2 ? '#e86f5b' : '#3b7bd1'}" stroke-width="14"/>`).join('')}</g>` : '';
   const ground = `<ellipse cx="315" cy="700" rx="420" ry="150" fill="${t === 'harvest' ? '#c9a24a' : '#79b456'}"/><ellipse cx="315" cy="690" rx="420" ry="140" fill="${t === 'harvest' ? '#d9b65e' : '#8cc566'}" opacity=".6"/>`;
   const clouds = `<g class="living" fill="#fff" opacity=".85"><ellipse cx="140" cy="230" rx="60" ry="20"/><ellipse cx="180" cy="215" rx="40" ry="22"/><ellipse cx="470" cy="190" rx="54" ry="18"/></g>`;
-  const rays = full ? `<g opacity=".35" class="living">${Array.from({length: 18}, (_, k) => { const a = k / 18 * Math.PI * 2; return `<path d="M315,380 L${315 + 900*Math.cos(a)},${380 + 900*Math.sin(a)} L${315 + 900*Math.cos(a + 0.12)},${380 + 900*Math.sin(a + 0.12)} Z" fill="#fff7d6"/>`; }).join('')}</g>` : '';
+  const rays = full && mode !== 'emblem' ? `<g opacity=".35" class="living">${Array.from({length: 18}, (_, k) => { const a = k / 18 * Math.PI * 2; return `<path d="M315,380 L${315 + 900*Math.cos(a)},${380 + 900*Math.sin(a)} L${315 + 900*Math.cos(a + 0.12)},${380 + 900*Math.sin(a + 0.12)} Z" fill="#fff7d6"/>`; }).join('')}</g>` : '';
+  let backdrop;
+  if (mode === 'specimen') backdrop = `<rect width="630" height="880" fill="url(#paper${id})"/><ellipse cx="${330 + dx}" cy="${420 + dy + 168 * sc}" rx="${190 * sc}" ry="${22 * sc}" fill="rgba(60,40,20,.22)"/>`;
+  else if (mode === 'emblem') backdrop = `<rect width="630" height="880" fill="#5a9fd0"/>${[300, 230, 160].map((r, i) => `<circle cx="315" cy="380" r="${r}" fill="none" stroke="#fff6dc" stroke-width="3" opacity="${0.25 + i * 0.12}"/>`).join('')}`;
+  else if (mode === 'panorama') backdrop = `<rect width="630" height="880" fill="url(#sky${id})"/>`;
+  else backdrop = `<rect width="630" height="880" fill="url(#sky${id})"/>${rays}${clouds}${busy}${ground}`;
+  const fg = `<g>${Array.from({length: 14}, (_, k) => { const x = 40 + k * 44, h = 50 + (k * 37) % 45; return `<path d="M${x},650 q${-10},${-h * 0.6} ${-4},${-h} q${12},${h * 0.5} ${14},${h}" fill="${k % 3 ? '#5f9e46' : '#79b456'}"/>`; }).join('')}<g fill="#f6c02c">${[90, 260, 450, 560].map(x => `<circle cx="${x}" cy="${600 + (x % 30)}" r="11"/>`).join('')}</g></g>`;
   const showText = lod === 0, showName = lod <= 1;
-  const plateFill = full ? 'rgba(255,248,230,.78)' : '#f6ecd6';
+  const plateFill = full ? 'rgba(255,248,230,.8)' : '#f6ecd6';
+  const trim = t === 'seed' || t === 'sprout' ? '#5a3b1c' : '#e4b85e';
   let s = `<svg viewBox="0 0 630 880" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${o.name}, ${TIERS[t].label} ${TYPE_LABEL[o.type]} card"><defs>${skyFor(t, id)}${frameFill(t, id)}<clipPath id="win${id}"><path d="${full ? 'M0,0 H630 V880 H0 Z' : win}"/></clipPath>
+    <radialGradient id="paper${id}" cx=".5" cy=".42" r=".7"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#eadcc0"/></radialGradient>
+    <filter id="ds${id}" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="8" dy="14" stdDeviation="7" flood-color="#2b1d0e" flood-opacity=".4"/></filter>
+    <mask id="hole${id}"><rect width="630" height="880" fill="#fff"/><path d="${win}" fill="#000"/></mask>
     <linearGradient id="gloss${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>`;
-  // Frame body with bevel and grain.
-  s += `<rect width="630" height="880" fill="url(#fr${id})"/><rect width="630" height="880" fill="url(#grain${id})"/>
+  if (part === 'bg') return s + backdrop + '</svg>';
+  if (part === 'subject') return s + subj + '</svg>';
+  if (part === 'fg') return s + fg + '</svg>';
+  // Frame body with bevel and grain (cut open over the window when drawn as the shadowbox's front).
+  let frame = `<rect width="630" height="880" fill="url(#fr${id})"/><rect width="630" height="880" fill="url(#grain${id})"/>
     <rect x="9" y="9" width="612" height="862" rx="26" fill="none" stroke="rgba(255,240,205,.45)" stroke-width="6"/><rect x="18" y="18" width="594" height="844" rx="22" fill="none" stroke="rgba(40,20,5,.45)" stroke-width="5"/>`;
-  if (t === 'sprout') s += `<rect x="30" y="30" width="570" height="820" rx="18" fill="none" stroke="#4f9a44" stroke-width="10"/>${[[30,30],[600,30],[30,850],[600,850]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="16" fill="#e4b85e" stroke="#7a5b24" stroke-width="4"/>`).join('')}`;
-  if (t === 'bloom') s += `<rect x="30" y="30" width="570" height="820" rx="18" fill="none" stroke="#e4b85e" stroke-width="8"/><rect x="40" y="40" width="550" height="800" rx="14" fill="none" stroke="#7a5b24" stroke-width="3"/>`;
-  if (t === 'harvest') s += `<rect x="28" y="28" width="574" height="824" rx="18" fill="none" stroke="#7a3a78" stroke-width="12"/><g fill="#fff3c4" opacity=".5">${Array.from({length: 22}, (_, k) => `<circle cx="${30 + (k * 97) % 570}" cy="${40 + (k * 151) % 800}" r="3"/>`).join('')}</g>`;
-  // Art window.
-  s += `<g clip-path="url(#win${id})"><rect width="630" height="880" fill="url(#sky${id})"/>${rays}${clouds}${busy}${ground}${subj}</g>`;
+  if (t === 'sprout') frame += `<rect x="30" y="30" width="570" height="820" rx="18" fill="none" stroke="#4f9a44" stroke-width="10"/>${[[30,30],[600,30],[30,850],[600,850]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="16" fill="#e4b85e" stroke="#7a5b24" stroke-width="4"/>`).join('')}`;
+  if (t === 'bloom') frame += `<rect x="30" y="30" width="570" height="820" rx="18" fill="none" stroke="#e4b85e" stroke-width="8"/><rect x="40" y="40" width="550" height="800" rx="14" fill="none" stroke="#7a5b24" stroke-width="3"/>`;
+  if (t === 'harvest') frame += `<rect x="28" y="28" width="574" height="824" rx="18" fill="none" stroke="#7a3a78" stroke-width="12"/><g fill="#fff3c4" opacity=".5">${Array.from({length: 22}, (_, k) => `<circle cx="${30 + (k * 97) % 570}" cy="${40 + (k * 151) % 800}" r="3"/>`).join('')}</g>`;
+  if (part === 'frame') s += `<g mask="url(#hole${id})">${frame}</g><path d="${win}" fill="none" stroke="rgba(20,10,0,.35)" stroke-width="34"/>`;
+  else s += frame + `<g clip-path="url(#win${id})">${backdrop}${subj}</g>`;
   if (!full) s += `<path d="${win}" fill="none" stroke="rgba(30,15,5,.75)" stroke-width="10"/><path d="${win}" fill="none" stroke="rgba(255,240,205,.35)" stroke-width="3" transform="translate(0 -4)"/>`;
+  if (o.popout) s += `<g filter="url(#ds${id})">${subj}</g>`;
   if (t === 'sun' || t === 'harvest') s += `<rect width="630" height="880" fill="url(#gloss${id})" opacity=".6"/>`;
-  // Name ribbon.
   if (showName) {
     const fs = o.name.length > 12 ? 44 : 52;
-    s += `<path d="M138,40 H590 a8,8 0 0 1 8,8 V94 a8,8 0 0 1 -8,8 H138 Z" fill="rgba(0,0,0,.3)" transform="translate(0 5)"/><path d="M138,40 H590 a8,8 0 0 1 8,8 V94 a8,8 0 0 1 -8,8 H138 Z" fill="${plateFill}" stroke="${t === 'seed' || t === 'sprout' ? '#5a3b1c' : '#e4b85e'}" stroke-width="5"/>
+    s += `<path d="M138,40 H590 a8,8 0 0 1 8,8 V94 a8,8 0 0 1 -8,8 H138 Z" fill="rgba(0,0,0,.3)" transform="translate(0 5)"/><path d="M138,40 H590 a8,8 0 0 1 8,8 V94 a8,8 0 0 1 -8,8 H138 Z" fill="${plateFill}" stroke="${trim}" stroke-width="5"/>
       <text x="368" y="${71 + fs*0.35}" text-anchor="middle" font-family="Fredoka, Baloo 2, sans-serif" font-weight="600" font-size="${fs}" fill="#2b1d0e">${o.name}</text>`;
   }
-  // Text plate.
-  if (showText && o.plate !== false) s += `<rect x="62" y="664" width="506" height="150" rx="18" fill="rgba(0,0,0,.25)" transform="translate(0 5)"/><rect x="62" y="664" width="506" height="150" rx="18" fill="${plateFill}" stroke="${t === 'seed' || t === 'sprout' ? '#5a3b1c' : '#e4b85e'}" stroke-width="5"/>`;
+  if (showText && o.plate !== false) s += `<rect x="62" y="664" width="506" height="150" rx="18" fill="rgba(0,0,0,.25)" transform="translate(0 5)"/><rect x="62" y="664" width="506" height="150" rx="18" fill="${plateFill}" stroke="${trim}" stroke-width="5"/>`;
   if (showText) {
     s += `<text x="315" y="712" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="20" letter-spacing="4" fill="${o.plate === false ? '#fff' : '#7a5b24'}">${TYPE_LABEL[o.type].toUpperCase()}</text>`;
-    const lines = o.text || [];
-    lines.forEach((ln, i) => { s += `<text x="315" y="${752 + i*34}" text-anchor="middle" font-family="Nunito, sans-serif" font-size="30" fill="${o.plate === false ? '#fff' : '#2b1d0e'}">${ln}</text>`; });
+    (o.text || []).forEach((ln, i) => { s += `<text x="315" y="${752 + i*34}" text-anchor="middle" font-family="Nunito, sans-serif" font-size="30" fill="${o.plate === false ? '#fff' : '#2b1d0e'}">${ln}</text>`; });
   } else if (lod === 1 && o.icons) {
     o.icons.forEach((ic, i) => { const x = 315 + (i - (o.icons.length - 1) / 2) * 90; s += `<circle cx="${x}" cy="745" r="36" fill="${plateFill}" stroke="#5a3b1c" stroke-width="5"/><text x="${x}" y="760" text-anchor="middle" font-size="40">${ic}</text>`; });
   }
-  // Gem on the seam.
   s += gemShape(t, 315, 646, lod === 2 ? 58 : 40, TIERS[t].gem);
-  // Cost and stats.
   s += token(88, 78, lod === 2 ? 76 : 58, o.cost, t);
   if (o.stats) {
     if (lod === 2) s += token(542, 802, 70, o.stats[1], t);
     else { s += token(92, 796, 54, o.stats[0], t); s += token(538, 796, 54, o.stats[1], t); }
   }
-  // Collector line.
   if (showText) s += `<text x="315" y="858" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="17" fill="${full ? '#5a3b1c' : 'rgba(255,240,210,.85)'}" letter-spacing="1.5">RANCH · ${o.num || '001'}/035 · ${TIERS[t].label.toUpperCase()} · ${o.finish || 'STD'}</text>`;
   return s + '</svg>';
 }
@@ -451,11 +550,14 @@ function backSVG() {
 // A card element: face, back, foil, shine, glow; pointer tilt with a moving highlight.
 function makeCard(o, opts = {}) {
   const el = document.createElement('div');
-  el.className = `card ${o.tier}` + (opts.idle ? ' idle' : '');
+  el.className = `card ${o.tier}` + (opts.idle ? ' idle' : '') + (o.living ? ' alive' : '') + (o.shadowbox ? ' box' : '');
   el.tabIndex = opts.focus === false ? -1 : 0;
   el.style.setProperty('--period', (3 + Math.random() * 2).toFixed(2) + 's');
   const foil = o.tier === 'sun' || o.tier === 'harvest' || o.finish === 'SHIMMER';
-  el.innerHTML = `<div class="glow" style="background:${TIERS[o.tier].glow}"></div><div class="inner"><div class="face">${cardSVG(o)}${foil ? '<div class="foil"></div>' : ''}<div class="shine"></div></div><div class="back">${backSVG()}</div></div>`;
+  const faceArt = o.shadowbox
+    ? [['bg', -16], ['subject', -6], ['fg', 10]].map(([part, k]) => `<div class="layer" style="--k:${k}">${cardSVG({ ...o, part })}</div>`).join('') + `<div class="layer">${cardSVG({ ...o, part: 'frame' })}</div>`
+    : cardSVG(o);
+  el.innerHTML = `<div class="glow" style="background:${TIERS[o.tier].glow}"></div><div class="inner"><div class="face">${faceArt}${foil ? '<div class="foil"></div>' : ''}<div class="shine"></div></div><div class="back">${backSVG()}</div></div>`;
   if (opts.tilt !== false) {
     const max = 12;
     el.addEventListener('pointermove', e => {
@@ -463,10 +565,11 @@ function makeCard(o, opts = {}) {
       el.classList.add('hovering');
       el.style.setProperty('--ry', ((x - 0.5) * 2 * max).toFixed(2) + 'deg');
       el.style.setProperty('--rx', ((0.5 - y) * 2 * max).toFixed(2) + 'deg');
+      el.style.setProperty('--px', ((x - 0.5) * 2).toFixed(3)); el.style.setProperty('--py', ((y - 0.5) * 2).toFixed(3));
       el.style.setProperty('--mx', (100 - x * 100).toFixed(1) + '%'); el.style.setProperty('--my', (100 - y * 100).toFixed(1) + '%');
       el.style.setProperty('--lift', opts.lift ? '-10%' : '0px'); el.style.setProperty('--s', opts.lift ? '1.12' : '1.03');
     });
-    el.addEventListener('pointerleave', () => { el.classList.remove('hovering'); ['--rx', '--ry'].forEach(p => el.style.setProperty(p, '0deg')); el.style.setProperty('--lift', '0px'); el.style.setProperty('--s', '1'); });
+    el.addEventListener('pointerleave', () => { el.classList.remove('hovering'); el.style.removeProperty('--px'); el.style.removeProperty('--py'); ['--rx', '--ry'].forEach(p => el.style.setProperty(p, '0deg')); el.style.setProperty('--lift', '0px'); el.style.setProperty('--s', '1'); });
   }
   return el;
 }
@@ -614,5 +717,78 @@ let wsvg = `<svg viewBox="0 0 ${ww} 86" width="${ww}" font-family="IBM Plex Mono
 const pal = ['#e4b85e', '#d9a640', '#c58b2e', '#9fd38a', '#6cc8ff', '#7aa6b8', '#e07be0', '#c58bff', '#ef8a6f', '#b7c2b0'];
 W.forEach(([n, w], i) => { const x = acc / 100 * ww, wd = w / 100 * ww - 3; wsvg += `<rect x="${x}" y="8" width="${wd}" height="38" rx="6" fill="${pal[i]}"/><text x="${x + wd / 2}" y="32" text-anchor="middle" fill="#142820" font-size="14" font-weight="600">${w}</text><text x="${x + wd / 2}" y="68" text-anchor="middle" fill="#f1e8d4" font-size="11">${n}</text>`; acc += w; });
 document.getElementById('weights').innerHTML = wsvg + '</svg>';
+
+// Part 2: depth axis diagram.
+(() => {
+  const W = 760, H = 230;
+  const cols = [['Portal', 'behind'], ['Overlay · Specimen · Emblem', 'on'], ['Pop-out', 'in front'], ['Shadowbox', 'inside'], ['Panorama', 'beyond']];
+  let g = `<svg viewBox="0 0 ${W} ${H}" width="${W}" font-family="IBM Plex Mono, monospace" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Side view of where art sits relative to the card">`;
+  cols.forEach(([name, where], i) => {
+    const x = 20 + i * 150, cx = x + 70;
+    g += `<text x="${cx}" y="${H - 14}" text-anchor="middle" fill="#f1e8d4" font-size="12">${name}</text><text x="${cx}" y="${H - 32}" text-anchor="middle" fill="#e4b85e" font-size="11">${where}</text>`;
+    const card = `<rect x="${cx - 3}" y="40" width="6" height="130" rx="2" fill="#d9a640"/>`;
+    const art = (ax, w = 10, c = '#6cc8ff') => `<rect x="${ax}" y="58" width="${w}" height="94" rx="3" fill="${c}"/>`;
+    if (where === 'behind') g += art(cx - 34) + card.replace('height="130"', 'height="130"') + `<rect x="${cx - 3}" y="62" width="6" height="86" fill="#142820"/>`;
+    if (where === 'on') g += card + art(cx + 3, 6, '#9fd38a');
+    if (where === 'in front') g += card + art(cx + 3, 6) + `<circle cx="${cx + 26}" cy="62" r="14" fill="#ffd862"/><path d="M${cx + 8},70 L${cx + 22},64" stroke="#ffd862" stroke-width="5"/>`;
+    if (where === 'inside') g += `<rect x="${cx - 40}" y="40" width="43" height="130" fill="none" stroke="#d9a640" stroke-width="4"/>` + art(cx - 36, 6, '#6cc8ff') + art(cx - 24, 6, '#9fd38a') + art(cx - 12, 6, '#ffd862') + card;
+    if (where === 'beyond') g += [0, 1, 2].map(k => `<rect x="${cx - 3}" y="${40 + k * 0}" width="6" height="130" rx="2" fill="#d9a640" transform="translate(${(k - 1) * 22} 0)"/>`).join('') + `<path d="M${cx - 30},105 H${cx + 30}" stroke="#6cc8ff" stroke-width="6" stroke-dasharray="4 6"/>`;
+    g += `<path d="M${cx + 52},105 l14,-7 v14 Z" fill="#b7c2b0"/><circle cx="${cx + 62}" cy="105" r="3" fill="#142820"/>`;
+  });
+  document.getElementById('depthaxis').innerHTML = g + '</svg>';
+})();
+
+// Part 2: the modes, each drawn as a live card.
+(() => {
+  const MODES = [
+    { t: 'Portal', w: 'Behind the card', o: { tier: 'sprout', type: 'building', subject: 'barn', name: 'Red Barn', cost: 3, stats: [0, 6], text: ['Animals next to it', 'sleep warm.'] },
+      why: "Alberti's window (1435): a picture is a view through a framed opening, the oldest convention in painting, so no one has to learn it. The frame keeps information and picture apart, so the art can be as busy as it likes.", use: 'Common cards, places, buildings.' },
+    { t: 'Overlay', w: 'On the card', o: { tier: 'bloom', full: true, type: 'crop', subject: 'sunflower', name: 'Tall Sunny', cost: 2, stats: [2, 2], text: ['Turns to face the sun.', 'Bees love it.'], finish: 'SHIMMER' },
+      why: 'The poster and magazine-cover layout: the image owns the space and type sits in its quiet areas. The art is two to three times bigger and the "this is a form" signal is gone. It needs planned quiet zones and plates.', use: 'Top tiers, hero cards.' },
+    { t: 'Pop-out', w: 'In front of the card', o: { tier: 'sun', noFull: true, popout: true, type: 'animal', subject: 'rooster', name: 'Dawn Rooster', cost: 5, stats: [5, 4], dx: -110, text: ['Wakes the whole ranch.', 'Everyone gets a turn.'] },
+      why: 'The frame says "flat picture behind glass"; the subject breaking it contradicts that, and the eye reads the contradiction as life (the trompe-l\'oeil of Borrell del Caso\'s "Escaping Criticism", 1874). It also changes the silhouette, which is what a top rarity needs.', use: 'The Sun tier. Break 5 to 15% with the focal part, never over numbers.' },
+    { t: 'Shadowbox', w: 'Inside the card', o: { tier: 'harvest', shadowbox: true, type: 'building', subject: 'barn', name: 'Red Barn', cost: 3, stats: [0, 6], text: ['Animals next to it', 'sleep warm.'] },
+      why: 'Motion parallax is one of the strongest depth cues the eye has. Layers that slide as you tilt turn the card into a little box with an inside: a diorama, which is exactly the Abbie\'s World look. Tilt it.', use: 'Harvest tier; any card that should feel like a Ranch tile.' },
+    { t: 'Specimen', w: 'On the card · a thing', o: { tier: 'seed', mode: 'specimen', type: 'animal', subject: 'sheep', name: 'Woolly', cost: 1, stats: [1, 3], scale: 1.1, dy: -10, text: ['Grows a wool coat', 'every morning.'] },
+      why: 'The field-guide plate and the toy catalogue. Nothing behind the subject, so its silhouette survives a 72 px thumbnail better than any other mode, and one shared backdrop and light make a set look like a set.', use: 'Common cards: animals, crops, tools.' },
+    { t: 'Emblem', w: 'On the card · an idea', o: { tier: 'sprout', mode: 'emblem', type: 'weather', subject: 'emblem', name: 'Sunny Day', cost: 1, stats: null, text: ['Every crop grows', 'one step.'] },
+      why: 'Some cards are concepts, not things. A painted scene of a concept is muddy; a symbol is instant at any size and in any colour vision, which is why playing cards, tarot and heraldry use them.', use: 'Actions, rules, season effects.' },
+    { t: 'Portrait', w: 'On the card · someone', o: { tier: 'bloom', type: 'animal', subject: 'sheep', name: 'Woolly', cost: 1, stats: [1, 3], scale: 2.2, dx: -286, dy: -65, text: ['Best friend variant.', 'Always says hi.'] },
+      why: 'People, and especially children, look at faces first and read emotion before anything else. A face turns a card into a character you like rather than an object you own.', use: 'Named animals and helpers, best-friend variants.' },
+    { t: 'Scene', w: 'On the card · an event', o: { tier: 'harvest', full: true, type: 'weather', subject: 'scene', name: 'Rainbow Rain', cost: 4, stats: [3, 3], text: ['Every crop grows', 'one step.'] },
+      why: 'A small story with one focal action. The picture explains what the card does, so a child who cannot read the text learns the rule from the art: rain makes the crops grow.', use: 'Weather, events, story cards.' },
+    { t: 'Living', w: 'Any mode · in time', o: { tier: 'bloom', living: true, type: 'crop', subject: 'sunflower', name: 'Tall Sunny', cost: 2, stats: [2, 2], text: ['Turns to face the sun.', 'Bees love it.'] },
+      why: 'Motion is the strongest attention cue there is, so the living card is always the one you look at. That makes it a reward: if everything moves, nothing stands out. The still frame must already be a good card.', use: 'Bloom and up; loops of 4 to 8 seconds.' },
+  ];
+  const host = document.getElementById('modes');
+  MODES.forEach(m => {
+    const box = document.createElement('div'); box.className = 'mode';
+    box.appendChild(makeCard(m.o));
+    box.insertAdjacentHTML('beforeend', `<div style="min-width:0"><span class="where">${m.w}</span><h3>${m.t}</h3><p>${m.why}</p><p><b>Use for:</b> ${m.use}</p></div>`);
+    host.appendChild(box);
+  });
+  const pano = document.getElementById('pano');
+  [['animal', 'Meadow'], ['building', 'Homestead'], ['crop', 'Sunny Rise']].forEach(([type, name], i) => {
+    pano.appendChild(makeCard({ tier: 'sprout', mode: 'panorama', panel: i, type, subject: 'sheep', name, cost: i + 1, stats: [i + 1, 2], text: ['Spring on the Ranch', `${i + 1} of 3`] }));
+  });
+  const RULES = [
+    ['One focal point', 'Highest value contrast (OKLab L difference of 0.3 or more) and most detail sit on the focal point.'],
+    ['Three values', 'Posterised to three tones, the art still reads. Light, mid and dark come before colour.'],
+    ['Silhouette first', 'The subject can be named from a black silhouette at 64 px.'],
+    ['One light per set', 'Key light upper left at about 45°, warm key, cool shadows, a rim light. One set, one sun.'],
+    ['Three planes', 'Foreground, middle, background; the background has less contrast and saturation.'],
+    ['Colour with a job', 'One dominant hue and one accent; peak saturation on the focal point; background chroma at most 70% of the subject.'],
+    ['Shapes say what it is', 'Round for animals and food, square for buildings and tools, no sharp triangles.'],
+    ['Compose to the window', 'The subject echoes the window outline; no tangents with the frame; headroom above the focal point.'],
+    ['Room for information', 'Plan the quiet zones for name, plate and numbers before painting.'],
+    ['A toy\'s camera', 'Three-quarter view, 25 to 35° above for objects, 5 to 15° for heroic animals, 50 to 85 mm lens, same per card type.'],
+    ['Show what it does', 'Shown only the art, a viewer guesses the card\'s effect.'],
+    ['One medium per set', 'House medium: soft toy-diorama render with painterly light. Mixed media look like clip art.'],
+  ];
+  document.getElementById('rules').innerHTML = RULES.map(([a, b]) => `<div><b>${a}</b>${b}</div>`).join('');
+  const base = { tier: 'harvest', type: 'building', subject: 'barn', name: 'Red Barn', cost: 3, stats: [0, 6], text: ['Animals next to it', 'sleep warm.'] };
+  const LAYERS = [['bg', 'bg.png · backdrop'], ['subject', 'subject.png · alpha'], ['fg', 'fg.png · foreground'], ['frame', 'frame + info']];
+  document.getElementById('stack').innerHTML = LAYERS.map(([part, label], i) => `<div class="sl" style="transform: translateZ(${i * 36}px)">${cardSVG({ ...base, part })}</div>`).join('');
+})();
 })();
 </script>
