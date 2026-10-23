@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 945,
+ "total": 990,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -351,6 +351,26 @@
    "what": "A3-clay-tee 3d",
    "credits": 30,
    "at": "2026-10-23T21:12:58Z"
+  },
+  {
+   "what": "A3-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:13:31Z"
+  },
+  {
+   "what": "A3-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:14:43Z"
+  },
+  {
+   "what": "cs-4-80s-action-hero rig",
+   "credits": 5,
+   "at": "2026-10-23T21:14:53Z"
+  },
+  {
+   "what": "A3-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:15:06Z"
   }
  ]
 }
