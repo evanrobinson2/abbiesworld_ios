@@ -1,0 +1,68 @@
+# The family voice cast (AW-STUDY-0030; tools/voice-cast/cast.py). Manual only, so it never spends credits on its own.
+# Runs on a runner because the cloud box can't reach api.elevenlabs.io or R2. Designed voices only, never clones.
+#   design  every character's descriptions -> 3 ElevenLabs Voice Design previews each -> R2 voices/cast/...
+#   save    picks (character=n,...) -> saved ElevenLabs voices, ids in cast.json "voices"
+#   lines   render a game's lines (tools/voice-cast/lines/<game>.json) with the saved voices -> R2 voices/lines/...
+# Audio goes to R2 only, never git; the JSON (candidates, cast.json, lines manifests) is committed back to the branch.
+# Secrets: ELEVENLABS_API_KEY, and R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET as for sound-store.
+name: voice-cast
+on:
+  workflow_dispatch:
+    inputs:
+      mode: { description: 'design, save or lines', default: 'design' }
+      only: { description: 'design: only these characters (comma separated, empty = all)', default: '' }
+      picks: { description: 'save: character=candidate,... e.g. daddy-young=2,street-grownup=4', default: '' }
+      game: { description: 'lines: the game id (tools/voice-cast/lines/<game>.json)', default: '' }
+concurrency:
+  group: voice-cast-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  cast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: ElevenLabs
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ONLY: ${{ inputs.only }}
+          PICKS: ${{ inputs.picks }}
+          GAME: ${{ inputs.game }}
+        run: |
+          case "${{ inputs.mode }}" in
+            design) python3 tools/voice-cast/cast.py design --only "$ONLY" ;;
+            save)   python3 tools/voice-cast/cast.py save --picks "$PICKS" ;;
+            lines)  python3 tools/voice-cast/cast.py lines "$GAME" ;;
+            *) echo "::error::mode must be design, save or lines"; exit 1 ;;
+          esac
+      - name: R2 keys
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: tools/model-store/r2-keys.sh
+      - name: Upload audio to R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
+          AWS_DEFAULT_REGION: auto
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+        run: |
+          [ -d tools/voice-cast/out/voices ] || { echo "No audio this run"; exit 0; }
+          find tools/voice-cast/out/voices -name '*.mp3' | wc -l
+          aws s3 cp tools/voice-cast/out/voices "s3://$R2_BUCKET/voices" --recursive --only-show-errors \
+            --content-type audio/mpeg --cache-control 'public, max-age=31536000, immutable' \
+            --endpoint-url "https://$R2_ACCOUNT_ID.r2.cloudflarestorage.com"
+      - name: Commit JSON (no audio)
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "voice-cast"; git config user.email "actions@users.noreply.github.com"
+          git add -A tools/voice-cast/cast.json prototypes/ranch-atelier/dist/studies/family-cast
+          git diff --cached --quiet && exit 0
+          git commit -m "Family cast: voice-cast ${{ inputs.mode }} run [skip ci]"
+          for i in 1 2 3; do git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done

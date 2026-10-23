@@ -1,0 +1,345 @@
+{
+ "about": "The Abbie's World family cast (Evan, 2026-10-23 09:52Z): each person young (in Daddy's memory places) and as they are now. Designed voices only (ElevenLabs Voice Design): never a clone of a real person. Shared by every memory place (school jump, Grace's basement, Moon base). cast.py design -> candidates.json; Evan picks on /studies/family-cast/; cast.py save -> voices; cast.py lines renders a game's lines. Looks are written character sheets for stylized storybook characters, never drawn from photos; 'evan' marks what Evan said, everything else is a placeholder for him to correct.",
+ "model": "eleven_ttv_v3",
+ "characters": [
+  {
+   "id": "daddy-young",
+   "name": "Young Daddy",
+   "group": "young",
+   "descriptions": [
+    "A bright, curious eight-year-old American boy with a slightly raspy, eager voice, full of mischief and wonder, speaking quickly when excited. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A small, energetic young boy voice, high and clear with a playful grin in it, a little breathless from running around outside at dusk. Close, warm microphone."
+   ],
+   "sample": "Okay bub, stay right there. I'm gonna climb up, get every single ball, and throw them all down to you. Don't tell Mom, okay? This is gonna be the best night ever!",
+   "looks": {
+    "age": 9,
+    "hair": "blond mop, never a hat",
+    "hairColor": "#e3c46a",
+    "eyes": "#5b3d24",
+    "outfit": "striped tee, shorts, sneakers",
+    "color": "#e2543a",
+    "evan": [
+     "blond mop",
+     "no hat, never a hat"
+    ]
+   }
+  },
+  {
+   "id": "bub",
+   "name": "Bub, the dog",
+   "group": "young",
+   "descriptions": [],
+   "sample": "",
+   "voice": "none: barks and panting come from the sound library, not a designed voice",
+   "looks": {
+    "age": "young dog",
+    "breed": "black Labrador",
+    "coat": "#1b1a1a",
+    "eyes": "#6b4a2a",
+    "collar": "red collar, brass tag",
+    "color": "#c0392b",
+    "evan": [
+     "black lab"
+    ]
+   }
+  },
+  {
+   "id": "daddy-now",
+   "name": "Daddy",
+   "group": "now",
+   "descriptions": [
+    "A warm, playful American dad in his forties, gentle baritone with a smile in it, the kind of voice that tells great bedtime stories. Clean studio recording.",
+    "A friendly, relaxed man in his forties with a soft, slightly husky mid-range voice, curious and kind, quick to laugh. Close, intimate microphone."
+   ],
+   "sample": "When I was your age, there was this school down the street, and one night my dog and I went on an adventure. Want to hear what happened? Get comfy, this one's a good one.",
+   "looks": {
+    "age": 44,
+    "hair": "bald",
+    "hairColor": null,
+    "eyes": "#5b3d24",
+    "beard": "salt-and-pepper beard",
+    "beardColor": "#8d8a86",
+    "outfit": "henley and jeans",
+    "color": "#2f6fb3",
+    "evan": [
+     "bald",
+     "salt-and-pepper beard"
+    ]
+   }
+  },
+  {
+   "id": "mommy-young",
+   "name": "Young Mommy",
+   "group": "young",
+   "descriptions": [
+    "A sweet, confident eight-year-old girl with a clear, bright voice, clever and a little bossy in a fun way, giggly when surprised. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A cheerful young girl voice, light and musical, curious about everything, speaking with lots of expression. Warm, close microphone."
+   ],
+   "sample": "No way, you climbed all the way up there? That's so high! Okay, my turn. Hold my backpack, and if anyone asks, we were just looking for a lost tennis ball. Deal?",
+   "looks": {
+    "age": 9,
+    "hair": "long, in a ponytail",
+    "hairColor": "#7a4b2a",
+    "eyes": "#4d6b3a",
+    "outfit": "denim overalls",
+    "color": "#d9578c",
+    "evan": []
+   }
+  },
+  {
+   "id": "mommy-now",
+   "name": "Mommy",
+   "group": "now",
+   "descriptions": [
+    "A warm, kind American mom in her late thirties, soft and clear mid-range voice, calm and reassuring with a playful sparkle. Clean studio recording.",
+    "A bright, friendly woman in her thirties with a gentle, smiling voice, expressive and loving, perfect for reading picture books aloud. Close microphone."
+   ],
+   "sample": "Look at you, you found another one! I'm so proud of you. Now let's see where this little path goes. Hold my hand, and tell me if you see anything sparkly along the way.",
+   "looks": {
+    "age": 40,
+    "hair": "shoulder length",
+    "hairColor": "#7a4b2a",
+    "eyes": "#4d6b3a",
+    "outfit": "soft cardigan",
+    "color": "#b9467a",
+    "evan": []
+   }
+  },
+  {
+   "id": "lexi-young",
+   "name": "Young Auntie Lexi",
+   "group": "young",
+   "descriptions": [
+    "A spunky, giggly seven-year-old girl with a high, bouncy voice, fearless and funny, always ready for a dare. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A lively little girl voice, quick and sparkly, full of laughter and big ideas, a bit raspy from shouting at the playground. Warm, close microphone."
+   ],
+   "sample": "Race you to the fence! Ready, set, go! Ha, I won, I won! Okay, okay, best two out of three. And this time no shortcuts through the sandbox, that's cheating.",
+   "looks": {
+    "age": 7,
+    "hair": "blonde pigtails",
+    "hairColor": "#e6c25a",
+    "eyes": "#3f6fa8",
+    "outfit": "rainbow tee",
+    "color": "#f2a33a",
+    "evan": [
+     "blonde",
+     "female"
+    ]
+   }
+  },
+  {
+   "id": "lexi-now",
+   "name": "Auntie Lexi",
+   "group": "now",
+   "descriptions": [
+    "A fun, upbeat American woman in her thirties with a lively, warm voice, the cool aunt who is always up for an adventure. Clean studio recording.",
+    "A bright, witty woman in her thirties, clear mid-high voice with an easy laugh, playful and encouraging. Close microphone."
+   ],
+   "sample": "Okay kiddo, here's the plan. We sneak past the sleeping dragon, grab the golden cookie, and get back before anyone notices. Are you in? I knew you'd be in. Let's go!",
+   "looks": {
+    "age": 38,
+    "hair": "long blonde",
+    "hairColor": "#ecc861",
+    "eyes": "#3f6fa8",
+    "outfit": "crop top and high-waisted jeans",
+    "color": "#f08a3a",
+    "evan": [
+     "blonde",
+     "female",
+     "crop top"
+    ]
+   }
+  },
+  {
+   "id": "jeff-young",
+   "name": "Young Uncle Jeff",
+   "group": "young",
+   "descriptions": [
+    "A goofy, good-natured eight-year-old boy with a slightly lower, scratchy kid voice, loves jokes and sound effects. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A friendly young boy voice, easygoing and a bit sleepy, thoughtful, then suddenly excited. Warm, close microphone."
+   ],
+   "sample": "Did you hear that? I think it came from the basement. Probably nothing. Probably just a monster. A tiny one. Okay, you go first, I'll be right behind you. Way behind you.",
+   "looks": {
+    "age": 8,
+    "hair": "short buzz",
+    "hairColor": "#5a3e2b",
+    "eyes": "#5b3d24",
+    "outfit": "baseball tee",
+    "color": "#3a9a6a",
+    "evan": [
+     "brown eyes"
+    ]
+   }
+  },
+  {
+   "id": "jeff-now",
+   "name": "Uncle Jeff",
+   "group": "now",
+   "descriptions": [
+    "A laid-back, funny American man in his thirties or forties, relaxed baritone, dry humour and a big warm laugh. Clean studio recording.",
+    "A cheerful, easygoing man with a friendly mid-low voice, great at silly voices, patient and kind. Close microphone."
+   ],
+   "sample": "Alright, champ, watch closely. The secret to a perfect paper airplane is all in the fold. One, two, three, and whoosh! Okay, that one went into the bushes. Again!",
+   "looks": {
+    "age": 40,
+    "hair": "bald",
+    "hairColor": null,
+    "eyes": "#5b3d24",
+    "outfit": "hoodie",
+    "color": "#2e7d5b",
+    "evan": [
+     "bald",
+     "brown eyes",
+     "no beard"
+    ]
+   }
+  },
+  {
+   "id": "pearl-young",
+   "name": "Young Pearl",
+   "group": "young",
+   "descriptions": [
+    "A tiny, sweet five-year-old girl with a soft, high, slightly lispy voice, shy at first and then full of giggles. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A very small girl voice, gentle and wondering, speaking slowly and carefully, delighted by little things. Warm, close microphone."
+   ],
+   "sample": "Is that a ladybug? It has seven spots. One, two, three, four, five, six, seven! Can I keep her? I'll call her Miss Dots, and she can sleep in my shoe. Is that okay?",
+   "looks": {
+    "age": 5,
+    "hair": "curly bob",
+    "hairColor": "#8a5a32",
+    "eyes": "#5b3d24",
+    "outfit": "ladybug dress",
+    "color": "#e04f5f",
+    "evan": []
+   }
+  },
+  {
+   "id": "pearl-now",
+   "name": "Pearl",
+   "group": "now",
+   "descriptions": [
+    "A thoughtful, bright twelve-year-old girl with a clear, confident voice, curious, a little dramatic and very funny. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A lively pre-teen girl voice, quick and expressive, full of opinions and big feelings, warm underneath. Warm, close microphone."
+   ],
+   "sample": "Okay, so technically it wasn't my idea. But it was a really good idea, and I made it way better. Anyway, can we please go back to the café? I want to see the secret door again.",
+   "looks": {
+    "age": 12,
+    "hair": "long, half up",
+    "hairColor": "#7d5230",
+    "eyes": "#5b3d24",
+    "outfit": "graphic tee and a jacket",
+    "color": "#8a5cc8",
+    "evan": [
+     "adolescent"
+    ]
+   }
+  },
+  {
+   "id": "georgia-young",
+   "name": "Young Georgia",
+   "group": "young",
+   "descriptions": [
+    "A cheerful, chatty six-year-old girl with a bright, sing-song voice, imaginative and always narrating her own games. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A playful little girl voice, high and sunny, giggly and quick, a born storyteller. Warm, close microphone."
+   ],
+   "sample": "And then the princess jumped on her pony, and the pony could fly, and they flew all the way to the moon! And the moon was made of pancakes. Your turn, what happens next?",
+   "looks": {
+    "age": 6,
+    "hair": "braids",
+    "hairColor": "#9a6a3a",
+    "eyes": "#3f6fa8",
+    "outfit": "tutu over leggings",
+    "color": "#f07ab0",
+    "evan": []
+   }
+  },
+  {
+   "id": "georgia-now",
+   "name": "Georgia",
+   "group": "now",
+   "descriptions": [
+    "A warm, easygoing American teenage girl about fifteen, relaxed clear voice with dry wit and a kind big-sister energy. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A friendly, confident teen girl voice, expressive and a little sarcastic in a fun way, patient with little kids. Close microphone."
+   ],
+   "sample": "Okay, little one, here's how it works. You hold the controller like this, press this button to jump, and this one to grab. Don't worry, I was terrible at it too, at first.",
+   "looks": {
+    "age": 15,
+    "hair": "long and straight",
+    "hairColor": "#8a5a32",
+    "eyes": "#3f6fa8",
+    "outfit": "oversized sweater",
+    "color": "#4a8fd0",
+    "evan": [
+     "teen"
+    ]
+   }
+  },
+  {
+   "id": "abbie",
+   "name": "Abbie",
+   "group": "now",
+   "descriptions": [
+    "A small American girl about six with a sweet, clear, breathy voice full of wonder, curious about everything, speaking softly as if sharing a secret. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A little girl voice, gentle and bright, amazed by the world, giggly and brave, with a soft American accent. Warm, close microphone."
+   ],
+   "sample": "Whoa. Look at all the stars. Do you think there's a ranch up there too? With sheep and a little red barn? I want to go see. Will you come with me? Hold my hand, okay?",
+   "looks": {
+    "age": 6,
+    "hair": "light brown with a bow",
+    "hairColor": "#a8733f",
+    "eyes": "#4f7fb0",
+    "outfit": "yellow raincoat",
+    "color": "#f2c230",
+    "evan": [
+     "small girl",
+     "voice of wonder"
+    ]
+   }
+  },
+  {
+   "id": "street-grownup",
+   "name": "The grown-up on the street",
+   "group": "game",
+   "descriptions": [
+    "A gruff but harmless American neighbour man in his fifties, booming voice calling out from a car window at dusk, stern but not scary, like a cartoon crossing guard. Clean studio recording.",
+    "A deep-voiced, friendly-but-firm dad in his fifties shouting from across the street, surprised and a little exasperated, warm underneath. Close microphone."
+   ],
+   "sample": "Hey! You up there! What do you think you're doing on that roof? Get down from there right now, before I call your mother! And take that dog home, it's getting dark!",
+   "looks": {
+    "age": 55,
+    "hair": "grey crew cut",
+    "hairColor": "#9a9a9a",
+    "eyes": "#5b3d24",
+    "beard": "moustache",
+    "beardColor": "#8a8a8a",
+    "outfit": "windbreaker, leaning out of a station wagon",
+    "color": "#7a6a5a",
+    "evan": []
+   }
+  },
+  {
+   "id": "janitor",
+   "name": "The school janitor",
+   "group": "game",
+   "descriptions": [
+    "A grumpy old American school janitor in his sixties, gravelly voice echoing across an empty schoolyard at night, more bluster than bite, like a cartoon caretaker. Clean studio recording.",
+    "A tired, crotchety older man with a low, rumbling voice and a slow drawl, jangling his keys, stern but secretly soft-hearted. Close microphone."
+   ],
+   "sample": "Hey! Who's up on my roof? I can see you, you know! You come down this minute, or I'm calling the police, and then your parents! Go on, scram, and take your ball with you!",
+   "looks": {
+    "age": 60,
+    "hair": "grey, thinning",
+    "hairColor": "#a0a0a0",
+    "eyes": "#5b3d24",
+    "outfit": "grey work shirt, key ring, flashlight",
+    "color": "#5f6f7a",
+    "evan": [
+     "catches you in the secret ending"
+    ]
+   }
+  }
+ ],
+ "picks": {},
+ "voices": {},
+ "study": "AW-STUDY-0030"
+}
