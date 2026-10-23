@@ -289,6 +289,26 @@ A rhythm game on the light-up floor, on the Music Bible's beat (D major, about 1
 - **Decor matters to customers:** kids head for the beanbags, grown-ups for the window seats, and dancers want floor
   space. The room she builds changes who comes and what they do (the "none" mode: the world just behaves).
 
+### Decoration cards and unlocks (Evan, 2026-10-23 07:19Z)
+
+Evan: "some kind of card game for the decorations. and unlocks can be custom skins / paint jobs, decorations, and
+reskins."
+
+- **Decorations come as cards.** They use the same hand of cards as the rest of the game (the HUD study's T2 hand,
+  and Card Forge's art at ranch.abbies.world/cards). Each card is one decoration (a beanbag, a star sign, a disco ball,
+  a rug) or a **set** (a party set, a calm-morning set).
+- **Playing a card is placing it.** Lift a card from the hand and drop it into the room; it becomes the thing, on the
+  hex grid. **Combos**: cards of the same set placed near each other light up together (three neon stars in a row,
+  or beanbags round a rug) and draw more customers, like adjacency on the board.
+- **Earning cards:** served customers, dance streaks, art auction sales and a happy end of day each deal a card.
+  One pick of three, as in the season loop.
+- **Unlocks are looks, never power:** custom skins and paint jobs for anything in the room (the cup booth in
+  chrome, the bar in candy stripes), new decorations, and reskins of the whole café (the elegant and typical-3D
+  directions from round 1 become unlockable reskins of the same building). Because every model's materials are named
+  by shading role, a reskin is a palette and material swap, not a new model.
+- **Grown-up side:** the business view (meta-meta) can see which sets draw which customers, but money never buys
+  cards.
+
 ### The meta-meta: Evan runs the business
 
 - The café is a business in the town simulation (AW-STUDY-0006). Customers come from the town's schedules; supplies
