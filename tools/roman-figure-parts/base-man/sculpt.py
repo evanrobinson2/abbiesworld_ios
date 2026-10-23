@@ -63,24 +63,38 @@ for name, n in NRING.items():
         ImageDraw.Draw(im).polygon([((py - ys[0]) / STEP, (px - xs[0]) / STEP) for px, py, _ in poly], fill=1)
         occ[:, :, iz] |= np.asarray(im, bool)
 sil = (distance_transform_edt(~occ) - distance_transform_edt(occ)) * STEP
-sil = gaussian_filter(sil, 1.6)                                                   # melt seams and pixel steps
+sil = gaussian_filter(sil, 2.2)                                                   # melt seams and pixel steps
 
 # ---- anatomy on top of the silhouette, construction-style forms
 skin = sil
 def add(part, k): 
     global skin; skin = smin(skin, part, k)
 for s in (1, -1):
-    add(ell((s * 13.5, 232.5, 93), (12.0, 4.6, 8.6)), 3.0)                       # pectorals
-    add(ell((s * 40.5, 249.5, 85), (8.4, 10.5, 12.0)), 3.0)                      # deltoids
-    add(cone((s * 6, 255, 57), (s * 33, 251, 70), 6.5, 4.5), 4.0)               # trapezius slope
-    add(ell((s * 45.0, 245.5, 114), (7.6, 8.0, 15.0)), 3.0)                      # biceps
-    add(ell((s * 50.0, 247.5, 147), (7.2, 7.6, 12.0)), 3.0)                      # forearm bulk
+    add(ell((s * 39.5, 249.5, 84), (7.4, 9.6, 11.0)), 3.0)                       # deltoids
+    add(cone((s * 6, 255, 57), (s * 36, 250, 74), 6.5, 6.0), 5.0)               # trapezius slope into the deltoid
+    relief_arm = (s * 45.0, 114)
     add(ell((s * 13.0, 258.5, 181), (13.0, 10.5, 13.0)), 3.0)                    # glutes
     add(ell((s * 17.5, 238.5, 222), (13.0, 10.0, 24.0)), 4.0)                    # quadriceps
     add(ell((s * 16.5, 240.5, 259), (8.2, 8.6, 7.0)), 2.0)                       # knee
     add(ell((s * 16.5, 236.5, 258), (4.6, 2.2, 4.6)), 1.2)                       # kneecap
     add(ell((s * 16.8, 255.5, 281), (9.0, 9.0, 19.0)), 3.0)                      # calf
-    add(ell((s * 6.5, 228.0, 136), (5.0, 2.4, 20.0)), 2.0)                       # rectus columns
+# surface relief: muscle masses and grooves pushed out of (or into) the skin wherever it faces front or back,
+# so they sit on the real surface instead of guessed depths
+FRONT = 1 / (1 + np.exp((GY - 247.0) / 2.5)); BACK = 1 - FRONT
+def relief(x0, z0, sx, sz, amp, face, sym=True):
+    global skin
+    for s in ((1, -1) if sym and x0 else (1,)):
+        skin = skin - amp * face * np.exp(-((GX - s * x0) / sx) ** 2 - ((GZ - z0) / sz) ** 2)
+relief(13.0, 91, 10.5, 7.5, 2.0, FRONT)                                           # pectorals
+relief(13.0, 101, 10.0, 1.6, -0.9, FRONT)                                         # their lower edge
+relief(0, 96, 1.4, 11.0, -0.8, FRONT)                                             # sternum groove
+for zz in (122, 134, 146):
+    relief(5.6, zz, 3.8, 4.4, 1.0, FRONT)                                         # abdominal blocks
+relief(0, 134, 1.0, 22.0, -0.6, FRONT)                                            # linea alba
+relief(21.5, 160, 4.5, 10.0, 0.7, FRONT)                                          # obliques
+relief(15.0, 92, 8.5, 11.0, 1.1, BACK)                                            # shoulder blades
+relief(0, 125, 1.6, 50.0, -1.0, BACK)                                             # spine groove
+relief(6.0, 155, 3.8, 17.0, 0.9, BACK)                                            # spinal erectors
 # face
 add(ell((0, 228.6, 25.6), (10.6, 2.4, 2.0)), 1.5)                                  # brow ridge
 add(cone((0, 227.0, 27.0), (0, 223.2, 34.6), 1.1, 1.9), 1.2)                      # nose
@@ -90,8 +104,8 @@ add(ell((0, 227.9, 47.0), (5.2, 2.6, 3.2)), 1.4)                                
 for s in (1, -1):
     add(ell((s * 8.0, 232.0, 33.5), (3.8, 3.4, 3.0)), 1.6)                        # cheekbones
     add(ell((s * 15.2, 248.6, 32.0), (1.5, 3.4, 5.8)), 1.0)                       # ears
-    skin = smax(skin, -ell((s * 5.4, 226.0, 28.6), (2.6, 1.6, 1.7)), 1.4)          # eye sockets
-    add(ell((s * 5.4, 227.0, 28.8), (2.0, 1.3, 1.3)), 0.7)                        # eyes under the lids
+    skin = smax(skin, -ell((s * 5.4, 225.6, 28.4), (2.4, 1.2, 1.5)), 1.6)          # eye sockets, soft
+    add(ell((s * 5.4, 226.6, 28.8), (1.9, 1.1, 1.2)), 0.8)                        # eyes under the lids
 # feet: heel, instep, ball and toes, on a flat sole
 for s in (1, -1):
     foot = ell((s * 16.2, 257.0, 349), (5.6, 6.2, 7.0))

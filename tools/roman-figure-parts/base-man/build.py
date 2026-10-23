@@ -155,7 +155,7 @@ for y in ys:
         l, r = rr
     f, b = run_at(y, 250, 205, 285)
     tw.append((r - l + 1) / 2); tf.append(f); tb.append(b)
-tw, tf, tb = sm(tw), sm(tf), sm(tb)
+tw, tf, tb = sm(tw, 13), sm(tf, 13), sm(tb, 13)
 rings = [ring(0, Y((f + b) / 2), Z(y), w * S, (b - f) / 2 * S * (0.8 if y < 68 else 1.0), (b - f) / 2 * S * (0.8 if y < 68 else 1.0), n=36, p=2.15)
          for y, w, f, b in zip(ys, tw, tf, tb)]
 PARTS["Torso"] = loft(rings)

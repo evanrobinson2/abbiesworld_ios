@@ -1,0 +1,14 @@
+{
+  "asset": "base-man",
+  "study": "AW-STUDY-0020 - Roman Figure Parts",
+  "reference": "concept.png, uploaded by Evan 2026-10-23 06:19Z ('can you try this one?'): a grey male base sculpt, front, side and back",
+  "rounds": [
+    {"round": 1, "method": "build.py: lofted cross-sections per part from the front and side silhouettes",
+     "iou": {"front": 0.903, "side": 0.819, "back": 0.88}, "verdict": "outline matches, reads as stacked tubes with shoulder pads"},
+    {"round": 2, "method": "sculpt.py: round 1 slices filled solid, melted into one skin (distance field, blur), anatomy as smooth-union forms and surface relief; make.py r2",
+     "iou": {"front": 0.894, "side": 0.82, "back": 0.883},
+     "passes": ["forms only (blobby, rejected)", "hybrid skin + forms", "relief for chest, abs, scapulae, spine; slimmer arms; soft eyes"],
+     "page": "https://claude.ai/artifact/SsK9fVZVboDUcMZTuCktFB"}
+  ],
+  "next": ["face", "waist taper and back shape", "briefs leg openings"]
+}
