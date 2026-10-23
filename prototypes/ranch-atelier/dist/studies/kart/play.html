@@ -61,7 +61,7 @@ if (q.has('reset')) { try { localStorage.removeItem('aw-effects'); } catch {} }
 // ---- kart mode on top: the track is stencilled from the board, built in the background, and swapped in when ready
 const dev = document.getElementById('dev'), pips = document.getElementById('pips'), LAPS = +(q.get('laps') || 3);
 pips.innerHTML = '<i></i>'.repeat(LAPS);
-const kart = createKart({scene, world, driver: hunt.driver, board: standin.board, tow: hunt.tow, laps: LAPS, onEvent: (e) => {
+const kart = createKart({scene, world, driver: hunt.driver, board: standin.board, tow: hunt.tow, laps: LAPS, vehicleRoot: hunt.vehicleRoot, camera, renderer, topScene: scene, inCar: () => hunt.mode !== 'god', onEvent: (e) => {
  if (e.t === 'lap') [...pips.children].forEach((p, i) => p.classList.toggle('on', i < e.lap));
  if (e.t === 'rebuilt') { kart.clearScenery(); if (DEV) devRefresh(); }
  if (DEV) console.debug('kart', e);
