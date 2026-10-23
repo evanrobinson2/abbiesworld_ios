@@ -2,6 +2,28 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-photo-booth",
+      "date": "2026-10-23",
+      "title": "The café photo booth",
+      "line": "Step into the photo booth with a friend. The booth shows a pose, the bulbs count down, strike it before the flash. After four flashes your strip drops out of the slot.",
+      "image": "/whats-new/2026-10-23-photo-booth.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9",
+      "threadTitle": "AW-STUDY-0013 - The Coffee Shop",
+      "tour": false,
+      "link": "/studies/cafe/photobooth.html"
+    },
+    {
+      "id": "2026-10-23-cafe-built",
+      "date": "2026-10-23",
+      "title": "The café, built",
+      "line": "Your dance-party café is built, low poly, with every piece weighed like the real thing. The bar is shorter now, a cash register hides a brass key, and an old door behind the bar leads somewhere secret.",
+      "image": "/whats-new/2026-10-23-cafe-built.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9",
+      "threadTitle": "AW-STUDY-0013 - The Coffee Shop",
+      "tour": false,
+      "link": "/models/"
+    },
+    {
       "id": "2026-10-23-pocket",
       "date": "2026-10-23",
       "title": "Abbie's pocket",

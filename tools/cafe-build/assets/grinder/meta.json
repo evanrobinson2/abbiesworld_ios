@@ -1,0 +1,157 @@
+{
+ "id": "grinder",
+ "name": "Coffee grinder",
+ "group": "Back bar",
+ "tier": "support",
+ "intent": "Pink enamel tower, chrome collar and chute, glass bean hopper full of beans, a fork for the portafilter.",
+ "real": "on-demand flat-burr grinder, 64 mm burrs, 1.2 kg bean hopper, about 200 x 260 x 480 mm",
+ "moving": "hopper lifts off; grind-size collar turns; portafilter fork holds a portafilter; dose button presses",
+ "reference": "studies/cafe/img/r2/backbar-machines_0.jpg (back bar proof)",
+ "size_m": [
+  0.2,
+  0.26,
+  0.515
+ ],
+ "triangles": 584,
+ "mass_kg": 8.193,
+ "centre_of_mass": [
+  0.0,
+  -0.001,
+  0.058
+ ],
+ "materials": [
+  "Food_Beans",
+  "Glass_Clear",
+  "Metal_Chrome",
+  "Metal_PinkEnamel",
+  "Metal_Steel",
+  "Metal_TealEnamel",
+  "Plastic_Lime",
+  "Plastic_Pink"
+ ],
+ "joints": [
+  {
+   "part": "dose_button",
+   "kind": "button",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 0.004,
+   "note": "grind one dose"
+  },
+  {
+   "part": "grind_collar",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 6.0,
+   "note": "grind size, fine to coarse"
+  },
+  {
+   "part": "hopper",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  }
+ ],
+ "parts": [
+  {
+   "part": "motor",
+   "material": "Metal_Steel",
+   "mass_kg": 3.5,
+   "made": "given"
+  },
+  {
+   "part": "body",
+   "material": "Metal_PinkEnamel",
+   "mass_kg": 0.9929,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "base",
+   "material": "Metal_TealEnamel",
+   "mass_kg": 0.7961,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "catch_tray",
+   "material": "Metal_Steel",
+   "mass_kg": 0.7584,
+   "made": "solid"
+  },
+  {
+   "part": "grind_collar",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.7393,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "hopper_glass",
+   "material": "Glass_Clear",
+   "mass_kg": 0.4802,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "beans",
+   "material": "Food_Beans",
+   "mass_kg": 0.2989,
+   "made": "solid"
+  },
+  {
+   "part": "burr_lower",
+   "material": "Metal_Steel",
+   "mass_kg": 0.1902,
+   "made": "solid"
+  },
+  {
+   "part": "burr_upper",
+   "material": "Metal_Steel",
+   "mass_kg": 0.1902,
+   "made": "solid"
+  },
+  {
+   "part": "hopper_lid",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.1327,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "chute",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0579,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "fork",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0445,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "fork_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0069,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "dose_button",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0043,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:16Z"
+}

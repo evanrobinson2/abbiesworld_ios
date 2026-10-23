@@ -1,0 +1,460 @@
+{
+ "id": "photo_booth",
+ "name": "Photo booth",
+ "group": "Party",
+ "tier": "hero",
+ "intent": "A teal and pink photo booth in the front-left corner. Sit inside, the booth calls four poses, the flash pops for each,\nand a strip of four pictures of the in-game characters drops out of the slot (no real camera: kids' photos stay private).",
+ "real": "coin-op photo booth: 18 mm ply cabinet on a steel plinth, gloss teal paint with pink trim, velvet curtain on a brass rail, swivel stool on a screw lift, camera behind a smoked window with a soft-box flash, a marquee of warm bulbs, a print slot for the strip",
+ "moving": "the curtain slides, the stool swivels and winds up and down, the flash fires, the strip drops out of the slot",
+ "reference": "Evan 2026-10-23 08:51Z: \"add a photo booth minigame\"; dressed in the dance-party look of studies/cafe/img/interior-party_0.jpg",
+ "size_m": [
+  1.26,
+  1.032,
+  2.46
+ ],
+ "triangles": 1208,
+ "mass_kg": 195.185,
+ "centre_of_mass": [
+  0.0,
+  0.007,
+  0.648
+ ],
+ "materials": [
+  "Cloth_Magenta",
+  "Glass_Crt",
+  "Glass_Mirror",
+  "Glass_NeonCyan",
+  "Glass_NeonPink",
+  "Glass_NeonWarm",
+  "Light_Bulb",
+  "Light_Warm",
+  "Metal_Brass",
+  "Metal_Chrome",
+  "Metal_Dark",
+  "Paper_Canvas",
+  "Paper_Pages",
+  "Plank_Counter",
+  "Plank_TealFront",
+  "Plaster_Pink",
+  "Plaster_Sun"
+ ],
+ "joints": [
+  {
+   "part": "curtain",
+   "kind": "slide",
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "min": 0,
+   "max": 0.5,
+   "note": "drawn shut for the photos"
+  },
+  {
+   "part": "photo_strip",
+   "kind": "slide",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.12,
+   "note": "drops out after the fourth flash"
+  },
+  {
+   "part": "stool",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 6.283,
+   "note": "swivels; winds up for small kids"
+  }
+ ],
+ "parts": [
+  {
+   "part": "back",
+   "material": "Plank_Counter",
+   "mass_kg": 31.815,
+   "made": "solid"
+  },
+  {
+   "part": "side_left",
+   "material": "Plank_TealFront",
+   "mass_kg": 27.27,
+   "made": "solid"
+  },
+  {
+   "part": "side_right",
+   "material": "Plank_TealFront",
+   "mass_kg": 27.27,
+   "made": "solid"
+  },
+  {
+   "part": "column_inner",
+   "material": "Plank_Counter",
+   "mass_kg": 24.943,
+   "made": "solid"
+  },
+  {
+   "part": "plinth",
+   "material": "Metal_Dark",
+   "mass_kg": 22.451,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "roof",
+   "material": "Plank_Counter",
+   "mass_kg": 15.75,
+   "made": "solid"
+  },
+  {
+   "part": "camera_bezel",
+   "material": "Metal_Dark",
+   "mass_kg": 11.304,
+   "made": "solid"
+  },
+  {
+   "part": "column_front",
+   "material": "Plank_TealFront",
+   "mass_kg": 10.2262,
+   "made": "solid"
+  },
+  {
+   "part": "marquee_board",
+   "material": "Plaster_Pink",
+   "mass_kg": 7.9784,
+   "made": "shell 12.0 mm"
+  },
+  {
+   "part": "stool_foot",
+   "material": "Metal_Dark",
+   "mass_kg": 4.0094,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "curtain_rail",
+   "material": "Metal_Brass",
+   "mass_kg": 2.839,
+   "made": "solid"
+  },
+  {
+   "part": "valance",
+   "material": "Plank_TealFront",
+   "mass_kg": 2.5987,
+   "made": "solid"
+  },
+  {
+   "part": "kick",
+   "material": "Plank_TealFront",
+   "mass_kg": 1.4175,
+   "made": "solid"
+  },
+  {
+   "part": "camera_window",
+   "material": "Glass_Crt",
+   "mass_kg": 1.0208,
+   "made": "shell 10.0 mm"
+  },
+  {
+   "part": "stool_post",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.9265,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "flash_softbox",
+   "material": "Light_Warm",
+   "mass_kg": 0.783,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "coin_plate",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.4455,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "mirror_strip",
+   "material": "Glass_Mirror",
+   "mass_kg": 0.441,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "trim_high",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.3175,
+   "made": "solid"
+  },
+  {
+   "part": "trim_low",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.3175,
+   "made": "solid"
+  },
+  {
+   "part": "stool_seat",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.183,
+   "made": "solid"
+  },
+  {
+   "part": "print_slot",
+   "material": "Metal_Dark",
+   "mass_kg": 0.1696,
+   "made": "solid"
+  },
+  {
+   "part": "marquee_star_1",
+   "material": "Glass_NeonWarm",
+   "mass_kg": 0.149,
+   "made": "solid"
+  },
+  {
+   "part": "column_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.1104,
+   "made": "solid"
+  },
+  {
+   "part": "marquee_star_0",
+   "material": "Glass_NeonCyan",
+   "mass_kg": 0.076,
+   "made": "solid"
+  },
+  {
+   "part": "marquee_star_2",
+   "material": "Glass_NeonPink",
+   "mass_kg": 0.076,
+   "made": "solid"
+  },
+  {
+   "part": "curtain_pleat_0",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "curtain_pleat_1",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "curtain_pleat_2",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "curtain_pleat_3",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "curtain_pleat_4",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "curtain_pleat_5",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "curtain_pleat_6",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "strip_paper",
+   "material": "Paper_Pages",
+   "mass_kg": 0.015,
+   "made": "solid"
+  },
+  {
+   "part": "pose_light_0",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_1",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_2",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_3",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_4",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_5",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_6",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_7",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_8",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "pose_light_9",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0077,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "coin_slot",
+   "material": "Metal_Dark",
+   "mass_kg": 0.0075,
+   "made": "solid"
+  },
+  {
+   "part": "marquee_bulb_0",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_1",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_10",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_11",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_12",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_13",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_2",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_3",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_4",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_5",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_6",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_7",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_8",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "marquee_bulb_9",
+   "material": "Light_Bulb",
+   "mass_kg": 0.0054,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "strip_frame_0",
+   "material": "Paper_Canvas",
+   "mass_kg": 0.0008,
+   "made": "shell 20.0 mm"
+  },
+  {
+   "part": "strip_frame_1",
+   "material": "Paper_Canvas",
+   "mass_kg": 0.0008,
+   "made": "shell 20.0 mm"
+  },
+  {
+   "part": "strip_frame_2",
+   "material": "Paper_Canvas",
+   "mass_kg": 0.0008,
+   "made": "shell 20.0 mm"
+  },
+  {
+   "part": "strip_frame_3",
+   "material": "Paper_Canvas",
+   "mass_kg": 0.0008,
+   "made": "shell 20.0 mm"
+  }
+ ],
+ "built": "2026-10-23T09:01Z"
+}

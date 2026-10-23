@@ -1,0 +1,544 @@
+{
+ "id": "cup_shelves",
+ "name": "Cup shelves",
+ "group": "Back bar",
+ "tier": "support",
+ "intent": "Floating shelves over the back counter: stacks of teal, lime and orange cups and jars of straws and sweets.\nLong axis along Y; the wall is at +X (the shelves hang on the right wall).",
+ "real": "three 30 mm oak shelves on powder-coated brackets, 1.6 m long, with cups and glass jars",
+ "moving": "every cup and jar lifts off",
+ "reference": "docs/oracle/cafe/room-manifest.json back_bar.cup_shelves",
+ "size_m": [
+  0.24,
+  1.6,
+  1.18
+ ],
+ "triangles": 2720,
+ "mass_kg": 47.338,
+ "centre_of_mass": [
+  0.01,
+  -0.01,
+  0.028
+ ],
+ "materials": [
+  "Clay_CupLime",
+  "Clay_CupOrange",
+  "Clay_CupTeal",
+  "Clay_PinkGlaze",
+  "Food_Cherry",
+  "Food_Sprinkles",
+  "Glass_Clear",
+  "Metal_Dark",
+  "Plastic_Pink",
+  "Plastic_Yellow",
+  "Timber_Trim"
+ ],
+ "joints": [
+  {
+   "part": "item_0",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_1",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_10",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_11",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_12",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_13",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_14",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_2",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_3",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_4",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_5",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_6",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_7",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_8",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "item_9",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  }
+ ],
+ "parts": [
+  {
+   "part": "shelf_0",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4493,
+   "made": "solid"
+  },
+  {
+   "part": "shelf_1",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4493,
+   "made": "solid"
+  },
+  {
+   "part": "shelf_2",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4493,
+   "made": "solid"
+  },
+  {
+   "part": "bracket_0_l",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5072,
+   "made": "solid"
+  },
+  {
+   "part": "bracket_0_r",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5072,
+   "made": "solid"
+  },
+  {
+   "part": "bracket_1_l",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5072,
+   "made": "solid"
+  },
+  {
+   "part": "bracket_1_r",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5072,
+   "made": "solid"
+  },
+  {
+   "part": "bracket_2_l",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5072,
+   "made": "solid"
+  },
+  {
+   "part": "bracket_2_r",
+   "material": "Metal_Dark",
+   "mass_kg": 1.5072,
+   "made": "solid"
+  },
+  {
+   "part": "jar_fill_11",
+   "material": "Plastic_Yellow",
+   "mass_kg": 1.0361,
+   "made": "solid"
+  },
+  {
+   "part": "jar_fill_14",
+   "material": "Plastic_Yellow",
+   "mass_kg": 1.0361,
+   "made": "solid"
+  },
+  {
+   "part": "jar_fill_7",
+   "material": "Food_Cherry",
+   "mass_kg": 1.0361,
+   "made": "solid"
+  },
+  {
+   "part": "jar_fill_10",
+   "material": "Food_Cherry",
+   "mass_kg": 1.0361,
+   "made": "solid"
+  },
+  {
+   "part": "jar_fill_3",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.8881,
+   "made": "solid"
+  },
+  {
+   "part": "jar_11",
+   "material": "Glass_Clear",
+   "mass_kg": 0.8677,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "jar_14",
+   "material": "Glass_Clear",
+   "mass_kg": 0.8677,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "jar_3",
+   "material": "Glass_Clear",
+   "mass_kg": 0.8677,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "jar_7",
+   "material": "Glass_Clear",
+   "mass_kg": 0.8677,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "jar_10",
+   "material": "Glass_Clear",
+   "mass_kg": 0.8677,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "cup_1_0",
+   "material": "Clay_CupTeal",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_1_1",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_1_2",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_2_0",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_2_1",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_2_2",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 0.2078,
+   "made": "shell 40.0 mm"
+  },
+  {
+   "part": "cup_12_0",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 0.2078,
+   "made": "shell 40.0 mm"
+  },
+  {
+   "part": "cup_12_1",
+   "material": "Clay_CupTeal",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_12_2",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_13_0",
+   "material": "Clay_CupTeal",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_13_1",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_13_2",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_15_0",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_15_1",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 0.2078,
+   "made": "shell 40.0 mm"
+  },
+  {
+   "part": "cup_15_2",
+   "material": "Clay_CupTeal",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_4_0",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 0.2078,
+   "made": "shell 40.0 mm"
+  },
+  {
+   "part": "cup_4_1",
+   "material": "Clay_CupTeal",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_4_2",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_5_0",
+   "material": "Clay_CupTeal",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_5_1",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_5_2",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_6_0",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_6_1",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_6_2",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 0.2078,
+   "made": "shell 40.0 mm"
+  },
+  {
+   "part": "cup_8_0",
+   "material": "Clay_PinkGlaze",
+   "mass_kg": 0.2078,
+   "made": "shell 40.0 mm"
+  },
+  {
+   "part": "cup_8_1",
+   "material": "Clay_CupTeal",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_8_2",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_9_0",
+   "material": "Clay_CupTeal",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_9_1",
+   "material": "Clay_CupLime",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "cup_9_2",
+   "material": "Clay_CupOrange",
+   "mass_kg": 0.2078,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "jar_lid_11",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0687,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "jar_lid_14",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0687,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "jar_lid_3",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0687,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "jar_lid_7",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0687,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "jar_lid_10",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0687,
+   "made": "shell 3.0 mm"
+  }
+ ],
+ "built": "2026-10-23T08:17Z"
+}

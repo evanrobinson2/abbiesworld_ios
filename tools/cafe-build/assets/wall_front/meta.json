@@ -1,0 +1,395 @@
+{
+ "id": "wall_front",
+ "name": "Front wall",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "The street side. Tagged cutaway: iso, so the iso camera can hide it and look in like the picture.",
+ "real": "shop front: stud wall with a glazed double door and two shop windows",
+ "moving": "",
+ "reference": "not in the picture (the camera stands here); built for first person",
+ "size_m": [
+  12.3,
+  0.175,
+  4.5
+ ],
+ "triangles": 944,
+ "mass_kg": 1969.762,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  1.527
+ ],
+ "materials": [
+  "Glass_Window",
+  "Metal_Brass",
+  "Plank_PinkPanel",
+  "Plaster_Purple",
+  "Timber_DoorDark",
+  "Timber_Trim"
+ ],
+ "joints": [
+  {
+   "part": "entrance_door_l",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.6,
+   "note": "opens inwards"
+  },
+  {
+   "part": "entrance_door_r",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": -1.6,
+   "note": "opens inwards"
+  }
+ ],
+ "parts": [
+  {
+   "part": "wall_f_3",
+   "material": "Plaster_Purple",
+   "mass_kg": 445.725,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_f_0",
+   "material": "Plaster_Purple",
+   "mass_kg": 236.475,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_f_head_0",
+   "material": "Plaster_Purple",
+   "mass_kg": 171.9,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_f_1",
+   "material": "Plaster_Purple",
+   "mass_kg": 159.75,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_f_2",
+   "material": "Plaster_Purple",
+   "mass_kg": 131.85,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_f_door_head",
+   "material": "Plaster_Purple",
+   "mass_kg": 117.45,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_f_head_1",
+   "material": "Plaster_Purple",
+   "mass_kg": 95.85,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "wall_f_sill_0",
+   "material": "Plaster_Purple",
+   "mass_kg": 92.25,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "shop_window_0_glass",
+   "material": "Glass_Window",
+   "mass_kg": 88.312,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "entrance_door_l_stile",
+   "material": "Timber_DoorDark",
+   "mass_kg": 62.4,
+   "made": "solid"
+  },
+  {
+   "part": "entrance_door_r_stile",
+   "material": "Timber_DoorDark",
+   "mass_kg": 62.4,
+   "made": "solid"
+  },
+  {
+   "part": "wall_f_sill_1",
+   "material": "Plaster_Purple",
+   "mass_kg": 51.3,
+   "made": "shell 25.0 mm"
+  },
+  {
+   "part": "shop_window_1_glass",
+   "material": "Glass_Window",
+   "mass_kg": 45.152,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "entrance_door_l_glass",
+   "material": "Glass_Window",
+   "mass_kg": 30.6,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "entrance_door_r_glass",
+   "material": "Glass_Window",
+   "mass_kg": 30.6,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "shop_window_0_frame_0",
+   "material": "Timber_Trim",
+   "mass_kg": 14.9028,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_0_frame_1",
+   "material": "Timber_Trim",
+   "mass_kg": 14.9028,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_0_frame_2",
+   "material": "Timber_Trim",
+   "mass_kg": 9.5728,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_0_frame_3",
+   "material": "Timber_Trim",
+   "mass_kg": 9.5728,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_1_frame_2",
+   "material": "Timber_Trim",
+   "mass_kg": 9.5728,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_1_frame_3",
+   "material": "Timber_Trim",
+   "mass_kg": 9.5728,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_1_frame_0",
+   "material": "Timber_Trim",
+   "mass_kg": 7.9738,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_1_frame_1",
+   "material": "Timber_Trim",
+   "mass_kg": 7.9738,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_0_mullion_1",
+   "material": "Timber_Trim",
+   "mass_kg": 4.1434,
+   "made": "solid"
+  },
+  {
+   "part": "shop_window_1_mullion_1",
+   "material": "Timber_Trim",
+   "mass_kg": 4.1434,
+   "made": "solid"
+  },
+  {
+   "part": "front_rail_0",
+   "material": "Timber_Trim",
+   "mass_kg": 2.275,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_3_0",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 2.1024,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_3_1",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 2.1024,
+   "made": "solid"
+  },
+  {
+   "part": "entrance_door_l_push",
+   "material": "Metal_Brass",
+   "mass_kg": 1.9875,
+   "made": "solid"
+  },
+  {
+   "part": "entrance_door_r_push",
+   "material": "Metal_Brass",
+   "mass_kg": 1.9875,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_2_0",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.9584,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_2_1",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.9584,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_2_2",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.9584,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_2_3",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.9584,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_2_4",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.9584,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_1_0",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7938,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_1_1",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7938,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_1_2",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7938,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_1_3",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7938,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_1_4",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7938,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_1_5",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7938,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_1_6",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7938,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_0",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_1",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_10",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_2",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_3",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_4",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_5",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_6",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_7",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_8",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_board_0_9",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 1.7751,
+   "made": "solid"
+  },
+  {
+   "part": "front_rail_1",
+   "material": "Timber_Trim",
+   "mass_kg": 1.4625,
+   "made": "solid"
+  },
+  {
+   "part": "front_rail_2",
+   "material": "Timber_Trim",
+   "mass_kg": 1.1375,
+   "made": "solid"
+  },
+  {
+   "part": "front_rail_3",
+   "material": "Timber_Trim",
+   "mass_kg": 0.4875,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:38Z"
+}

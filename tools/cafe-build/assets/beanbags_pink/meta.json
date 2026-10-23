@@ -1,0 +1,35 @@
+{
+ "id": "beanbags_pink",
+ "name": "Pink beanbag",
+ "group": "Party",
+ "tier": "support",
+ "intent": "",
+ "real": "0.8 m canvas beanbag (the layout places two by the pink door)",
+ "moving": "",
+ "reference": "studies/cafe/img/r2/asset-beanbag-lowpoly_0.jpg (round 2, low poly, Evan picked low poly)",
+ "size_m": [
+  0.815,
+  0.827,
+  0.403
+ ],
+ "triangles": 80,
+ "mass_kg": 3.05,
+ "centre_of_mass": [
+  -0.002,
+  -0.015,
+  0.045
+ ],
+ "materials": [
+  "Cloth_Magenta"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "bag",
+   "material": "Cloth_Magenta",
+   "mass_kg": 3.05,
+   "made": "given"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

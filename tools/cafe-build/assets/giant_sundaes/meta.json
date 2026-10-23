@@ -1,0 +1,97 @@
+{
+ "id": "giant_sundaes",
+ "name": "Giant sundae",
+ "group": "Bar",
+ "tier": "hero",
+ "intent": "One giant sundae (the layout puts three on the bar: these are the bar's signs, read from across the room).",
+ "real": "a display sundae prop on the bar: 600 mm cast pink acrylic goblet, foam ice cream with a hard coat, a resin cherry and two straws",
+ "moving": "lifts off the bar",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  0.34,
+  0.323,
+  0.908
+ ],
+ "triangles": 436,
+ "mass_kg": 6.93,
+ "centre_of_mass": [
+  0.003,
+  0.001,
+  0.301
+ ],
+ "materials": [
+  "Food_Cherry",
+  "Food_Cream",
+  "Food_CreamPink",
+  "Food_Shake",
+  "Food_Wafer",
+  "Glass_Pink",
+  "Plaster_Lime",
+  "Plastic_Cyan",
+  "Plastic_Yellow"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "goblet",
+   "material": "Glass_Pink",
+   "mass_kg": 4.0601,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "shake",
+   "material": "Food_Shake",
+   "mass_kg": 1.3987,
+   "made": "solid"
+  },
+  {
+   "part": "cherry",
+   "material": "Food_Cherry",
+   "mass_kg": 0.3652,
+   "made": "solid"
+  },
+  {
+   "part": "cream_0",
+   "material": "Food_Cream",
+   "mass_kg": 0.3084,
+   "made": "solid"
+  },
+  {
+   "part": "straw_1",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.2391,
+   "made": "solid"
+  },
+  {
+   "part": "straw_0",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.2374,
+   "made": "solid"
+  },
+  {
+   "part": "wafer",
+   "material": "Food_Wafer",
+   "mass_kg": 0.1393,
+   "made": "solid"
+  },
+  {
+   "part": "cream_1",
+   "material": "Food_CreamPink",
+   "mass_kg": 0.1379,
+   "made": "solid"
+  },
+  {
+   "part": "cream_2",
+   "material": "Food_Cream",
+   "mass_kg": 0.0385,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_stem",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0058,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:29Z"
+}

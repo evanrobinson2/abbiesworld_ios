@@ -1,0 +1,55 @@
+{
+ "id": "booth_stage",
+ "name": "Booth stage",
+ "group": "Room shell",
+ "tier": "hero",
+ "intent": "The round pink stage the giant cup stands on, with a neon rim and steps down to the dance floor.",
+ "real": "round timber stage, 300 mm, painted pink, LED neon edge, two steps",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  3.825,
+  3.216,
+  0.3
+ ],
+ "triangles": 488,
+ "mass_kg": 402.465,
+ "centre_of_mass": [
+  0.685,
+  -0.069,
+  0.116
+ ],
+ "materials": [
+  "Glass_NeonPink",
+  "Plaster_Pink",
+  "Plaster_Tangerine"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "stage_drum",
+   "material": "Plaster_Pink",
+   "mass_kg": 233.0533,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "stage_step_0",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 80.5827,
+   "made": "solid"
+  },
+  {
+   "part": "stage_step_1",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 79.2678,
+   "made": "solid"
+  },
+  {
+   "part": "stage_neon",
+   "material": "Glass_NeonPink",
+   "mass_kg": 9.5609,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

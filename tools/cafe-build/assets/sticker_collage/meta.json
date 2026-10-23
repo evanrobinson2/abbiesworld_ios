@@ -1,0 +1,395 @@
+{
+ "id": "sticker_collage",
+ "name": "Sticker collage",
+ "group": "Party",
+ "tier": "dressing",
+ "intent": "",
+ "real": "a wall of vinyl stickers: hearts, stars, circles, lightning, cups",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  3.257,
+  0.087,
+  1.772
+ ],
+ "triangles": 1560,
+ "mass_kg": 1.069,
+ "centre_of_mass": [
+  -0.0,
+  0.004,
+  -0.001
+ ],
+ "materials": [
+  "Plaster_CyanPaint",
+  "Plaster_Lime",
+  "Plaster_Pink",
+  "Plaster_Sun",
+  "Plaster_Tangerine",
+  "Plaster_Violet",
+  "Plaster_White"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "sticker_40_shape",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0444,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_28_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0419,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_36_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.039,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_20_shape",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0387,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_56_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0369,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_50_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.033,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_42_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0328,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_54_shape",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0327,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_38_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0326,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_48_shape",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0324,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_46_shape",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0314,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_52_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0286,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_4_shape",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0267,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_24_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0262,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_44_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.025,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_30_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0249,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_43_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0236,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_18_shape",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0228,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_59_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0227,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_0_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0211,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_15_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0204,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_51_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0182,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_41_shape",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0177,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_7_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0172,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_39_shape",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0171,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_6_shape",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0171,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_47_shape",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0158,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_58_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0157,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_8_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0149,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_9_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0138,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_32_shape",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0134,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_53_shape",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.013,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_12_shape",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0129,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_2_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0128,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_21_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0125,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_14_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.012,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_34_shape",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0119,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_45_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0119,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_22_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0117,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_37_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0115,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_11_shape",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0114,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_35_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.011,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_1_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0102,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_55_shape",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.01,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_25_shape",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0098,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_31_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0095,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_26_shape",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0093,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_17_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0092,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_16_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0091,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_19_shape",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0091,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_13_shape",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0084,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_27_shape",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_10_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0076,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_33_shape",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0067,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_49_shape",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0061,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_23_shape",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0058,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_3_shape",
+   "material": "Plaster_White",
+   "mass_kg": 0.0054,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_57_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0053,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_29_shape",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0046,
+   "made": "solid"
+  },
+  {
+   "part": "sticker_5_shape",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0041,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:38Z"
+}

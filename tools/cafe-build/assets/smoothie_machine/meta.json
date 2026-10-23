@@ -1,0 +1,329 @@
+{
+ "id": "smoothie_machine",
+ "name": "Smoothie machine",
+ "group": "Back bar",
+ "tier": "hero",
+ "intent": "Faceted pink base on an orange foot ring with an orange speed dial and four coloured buttons (the low-poly\npick), a faceted Tritan jar with a pink handle, a violet lid, and a strawberry smoothie inside. The motor,\ncoupling and blade set are real parts because the smoothie game times the drop, blend and pour.",
+ "real": "commercial countertop blender, 1.5 kW motor, 2 L Tritan jar, about 210 x 230 x 470 mm",
+ "moving": "jar lifts off the base; lid and filler cap lift off; speed dial turns; four buttons press; blades spin on the drive coupling",
+ "reference": "studies/cafe/img/r2/asset-smoothie-lowpoly_0.jpg (Midjourney round 2, low poly, Evan picked low poly 2026-10-23 08:02Z)",
+ "size_m": [
+  0.281,
+  0.226,
+  0.524
+ ],
+ "triangles": 892,
+ "mass_kg": 6.344,
+ "centre_of_mass": [
+  0.001,
+  -0.0,
+  0.071
+ ],
+ "materials": [
+  "Food_Cherry",
+  "Food_Fruit",
+  "Food_Smoothie",
+  "Glass_Tritan",
+  "Metal_Steel",
+  "Plastic_Lime",
+  "Plastic_Orange",
+  "Plastic_Pink",
+  "Plastic_Teal",
+  "Plastic_Violet",
+  "Plastic_White",
+  "Rubber_Black"
+ ],
+ "joints": [
+  {
+   "part": "button_ice",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.004,
+   "note": "ice"
+  },
+  {
+   "part": "button_pulse",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.004,
+   "note": "pulse"
+  },
+  {
+   "part": "button_smoothie",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.004,
+   "note": "smoothie"
+  },
+  {
+   "part": "button_stop",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.004,
+   "note": "stop"
+  },
+  {
+   "part": "speed_dial",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": -2.4,
+   "max": 2.4,
+   "note": "off, 1 to 10, pulse"
+  },
+  {
+   "part": "jar",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": "lift straight up off the coupling"
+  },
+  {
+   "part": "blade_assembly",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 6.283,
+   "note": "spins with the motor"
+  },
+  {
+   "part": "lid",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "filler_cap",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": "add ice and fruit while it runs"
+  }
+ ],
+ "parts": [
+  {
+   "part": "smoothie",
+   "material": "Food_Smoothie",
+   "mass_kg": 1.7974,
+   "made": "solid"
+  },
+  {
+   "part": "motor",
+   "material": "Metal_Steel",
+   "mass_kg": 1.6,
+   "made": "given"
+  },
+  {
+   "part": "jar_wall",
+   "material": "Glass_Tritan",
+   "mass_kg": 0.9171,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "foot_ring",
+   "material": "Plastic_Orange",
+   "mass_kg": 0.7861,
+   "made": "solid"
+  },
+  {
+   "part": "base_housing",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.4221,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "lid_shell",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.244,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "jar_collar",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.1608,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "jar_floor",
+   "material": "Glass_Tritan",
+   "mass_kg": 0.0899,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "blade_hub",
+   "material": "Metal_Steel",
+   "mass_kg": 0.0644,
+   "made": "solid"
+  },
+  {
+   "part": "jar_handle",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0644,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "filler_cap",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0357,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "speed_dial",
+   "material": "Plastic_Orange",
+   "mass_kg": 0.0274,
+   "made": "solid"
+  },
+  {
+   "part": "drive_coupling",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0197,
+   "made": "solid"
+  },
+  {
+   "part": "fruit_1",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0187,
+   "made": "solid"
+  },
+  {
+   "part": "fruit_0",
+   "material": "Food_Fruit",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "fruit_2",
+   "material": "Food_Fruit",
+   "mass_kg": 0.017,
+   "made": "solid"
+  },
+  {
+   "part": "blade_0",
+   "material": "Metal_Steel",
+   "mass_kg": 0.0071,
+   "made": "solid"
+  },
+  {
+   "part": "blade_1",
+   "material": "Metal_Steel",
+   "mass_kg": 0.0071,
+   "made": "solid"
+  },
+  {
+   "part": "blade_2",
+   "material": "Metal_Steel",
+   "mass_kg": 0.0071,
+   "made": "solid"
+  },
+  {
+   "part": "blade_3",
+   "material": "Metal_Steel",
+   "mass_kg": 0.0071,
+   "made": "solid"
+  },
+  {
+   "part": "jar_spout",
+   "material": "Glass_Tritan",
+   "mass_kg": 0.0047,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "button_ice",
+   "material": "Plastic_Violet",
+   "mass_kg": 0.0046,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "button_pulse",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0046,
+   "made": "solid"
+  },
+  {
+   "part": "button_smoothie",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0046,
+   "made": "solid"
+  },
+  {
+   "part": "button_stop",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0046,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "foot_0",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0027,
+   "made": "solid"
+  },
+  {
+   "part": "foot_1",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0027,
+   "made": "solid"
+  },
+  {
+   "part": "foot_2",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0027,
+   "made": "solid"
+  },
+  {
+   "part": "foot_3",
+   "material": "Rubber_Black",
+   "mass_kg": 0.0027,
+   "made": "solid"
+  },
+  {
+   "part": "dial_pointer",
+   "material": "Plastic_White",
+   "mass_kg": 0.0002,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:16Z"
+}

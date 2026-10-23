@@ -1,0 +1,109 @@
+{
+ "id": "ceiling_vent",
+ "name": "Ceiling vent",
+ "group": "Room shell",
+ "tier": "dressing",
+ "intent": "",
+ "real": "round ventilation diffuser, 900 mm, painted tangerine, black louvres",
+ "moving": "the fan inside turns",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  0.96,
+  0.96,
+  0.109
+ ],
+ "triangles": 360,
+ "mass_kg": 122.859,
+ "centre_of_mass": [
+  -0.0,
+  -0.0,
+  0.016
+ ],
+ "materials": [
+  "Metal_Dark",
+  "Plaster_Tangerine"
+ ],
+ "joints": [
+  {
+   "part": "vent_fan",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 6.283,
+   "note": "spins"
+  }
+ ],
+ "parts": [
+  {
+   "part": "vent_back",
+   "material": "Metal_Dark",
+   "mass_kg": 76.9041,
+   "made": "solid"
+  },
+  {
+   "part": "louvre_2",
+   "material": "Metal_Dark",
+   "mass_kg": 10.1736,
+   "made": "solid"
+  },
+  {
+   "part": "louvre_1",
+   "material": "Metal_Dark",
+   "mass_kg": 8.478,
+   "made": "solid"
+  },
+  {
+   "part": "louvre_3",
+   "material": "Metal_Dark",
+   "mass_kg": 8.478,
+   "made": "solid"
+  },
+  {
+   "part": "louvre_0",
+   "material": "Metal_Dark",
+   "mass_kg": 6.7824,
+   "made": "solid"
+  },
+  {
+   "part": "louvre_4",
+   "material": "Metal_Dark",
+   "mass_kg": 6.7824,
+   "made": "solid"
+  },
+  {
+   "part": "vent_ring",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 1.9632,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "fan_blade_0",
+   "material": "Metal_Dark",
+   "mass_kg": 0.8243,
+   "made": "solid"
+  },
+  {
+   "part": "fan_blade_1",
+   "material": "Metal_Dark",
+   "mass_kg": 0.8243,
+   "made": "solid"
+  },
+  {
+   "part": "fan_blade_2",
+   "material": "Metal_Dark",
+   "mass_kg": 0.8243,
+   "made": "solid"
+  },
+  {
+   "part": "fan_blade_3",
+   "material": "Metal_Dark",
+   "mass_kg": 0.8243,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

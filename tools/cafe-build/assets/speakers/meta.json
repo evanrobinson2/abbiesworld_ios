@@ -1,0 +1,155 @@
+{
+ "id": "speakers",
+ "name": "Speakers",
+ "group": "Party",
+ "tier": "support",
+ "intent": "One floor speaker (the layout places two, either side of the arch). Faces -Y.",
+ "real": "a pair of 15-inch two-way PA speakers, 450 x 420 x 1300 mm, about 32 kg each",
+ "moving": "woofer cones pump with the bass",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  0.49,
+  0.445,
+  1.3
+ ],
+ "triangles": 680,
+ "mass_kg": 31.621,
+ "centre_of_mass": [
+  -0.0,
+  -0.0,
+  0.384
+ ],
+ "materials": [
+  "Cloth_Speaker",
+  "Metal_Chrome",
+  "Metal_Dark",
+  "Plank_BlackPly",
+  "Plastic_Black",
+  "Rubber_Black"
+ ],
+ "joints": [
+  {
+   "part": "mid",
+   "kind": "slide",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "pumps with the beat"
+  },
+  {
+   "part": "tweeter",
+   "kind": "slide",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "pumps with the beat"
+  },
+  {
+   "part": "woofer",
+   "kind": "slide",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.006,
+   "note": "pumps with the beat"
+  }
+ ],
+ "parts": [
+  {
+   "part": "cabinet",
+   "material": "Plank_BlackPly",
+   "mass_kg": 15.5271,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "driver_magnets",
+   "material": "Metal_Dark",
+   "mass_kg": 12.0,
+   "made": "given"
+  },
+  {
+   "part": "woofer_cone",
+   "material": "Plastic_Black",
+   "mass_kg": 1.4593,
+   "made": "solid"
+  },
+  {
+   "part": "mid_cone",
+   "material": "Plastic_Black",
+   "mass_kg": 0.611,
+   "made": "solid"
+  },
+  {
+   "part": "woofer_surround",
+   "material": "Rubber_Black",
+   "mass_kg": 0.5576,
+   "made": "solid"
+  },
+  {
+   "part": "grille",
+   "material": "Cloth_Speaker",
+   "mass_kg": 0.4199,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "mid_surround",
+   "material": "Rubber_Black",
+   "mass_kg": 0.3608,
+   "made": "solid"
+  },
+  {
+   "part": "tweeter_surround",
+   "material": "Rubber_Black",
+   "mass_kg": 0.164,
+   "made": "solid"
+  },
+  {
+   "part": "tweeter_cone",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1262,
+   "made": "solid"
+  },
+  {
+   "part": "woofer_cap",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.1215,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "handle_l",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1008,
+   "made": "solid"
+  },
+  {
+   "part": "handle_r",
+   "material": "Plastic_Black",
+   "mass_kg": 0.1008,
+   "made": "solid"
+  },
+  {
+   "part": "mid_cap",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0565,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "tweeter_cap",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0156,
+   "made": "shell 1.2 mm"
+  }
+ ],
+ "built": "2026-10-23T08:26Z"
+}

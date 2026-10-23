@@ -1,0 +1,214 @@
+{
+ "id": "menu_board",
+ "name": "Menu board",
+ "group": "Back bar",
+ "tier": "support",
+ "intent": "The menu as pictures, no words (Evan's rule): a coffee cup, a smoothie, a donut, a cookie, a star for the\nparty, with chalk dots for price. Hangs on the wall at +Y facing -Y.",
+ "real": "8 mm slate chalkboard in a 40 mm painted timber frame, 1.4 x 0.9 m, hung on two chains",
+ "moving": "none (it swings a little on its chains if bumped)",
+ "reference": "docs/oracle/cafe/room-manifest.json back_bar.menu_board",
+ "size_m": [
+  1.4,
+  0.04,
+  1.162
+ ],
+ "triangles": 908,
+ "mass_kg": 30.343,
+ "centre_of_mass": [
+  -0.001,
+  0.0,
+  0.387
+ ],
+ "materials": [
+  "Metal_Brass",
+  "Metal_Chalk",
+  "Plaster_Pink",
+  "Plaster_Sun",
+  "Plaster_Tangerine",
+  "Stone_Slate"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "slate",
+   "material": "Stone_Slate",
+   "mass_kg": 24.878,
+   "made": "shell 8.0 mm"
+  },
+  {
+   "part": "frame_bottom",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 1.4942,
+   "made": "solid"
+  },
+  {
+   "part": "frame_top",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 1.4942,
+   "made": "solid"
+  },
+  {
+   "part": "frame_left",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.9594,
+   "made": "solid"
+  },
+  {
+   "part": "frame_right",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.9594,
+   "made": "solid"
+  },
+  {
+   "part": "chain_l",
+   "material": "Metal_Brass",
+   "mass_kg": 0.1216,
+   "made": "solid"
+  },
+  {
+   "part": "chain_r",
+   "material": "Metal_Brass",
+   "mass_kg": 0.1216,
+   "made": "solid"
+  },
+  {
+   "part": "cup",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0555,
+   "made": "solid"
+  },
+  {
+   "part": "glass",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0539,
+   "made": "solid"
+  },
+  {
+   "part": "party_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.045,
+   "made": "solid"
+  },
+  {
+   "part": "donut",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0415,
+   "made": "solid"
+  },
+  {
+   "part": "cookie",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0389,
+   "made": "solid"
+  },
+  {
+   "part": "underline",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0224,
+   "made": "solid"
+  },
+  {
+   "part": "cup_handle",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0183,
+   "made": "solid"
+  },
+  {
+   "part": "donut_hole",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0122,
+   "made": "solid"
+  },
+  {
+   "part": "straw",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0078,
+   "made": "solid"
+  },
+  {
+   "part": "steam_0",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0019,
+   "made": "solid"
+  },
+  {
+   "part": "steam_1",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0019,
+   "made": "solid"
+  },
+  {
+   "part": "steam_2",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0019,
+   "made": "solid"
+  },
+  {
+   "part": "chip_0",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0016,
+   "made": "solid"
+  },
+  {
+   "part": "chip_1",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0016,
+   "made": "solid"
+  },
+  {
+   "part": "chip_2",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0016,
+   "made": "solid"
+  },
+  {
+   "part": "chip_3",
+   "material": "Metal_Chalk",
+   "mass_kg": 0.0016,
+   "made": "solid"
+  },
+  {
+   "part": "dot_-0.11_0",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.001,
+   "made": "solid"
+  },
+  {
+   "part": "dot_-0.11_1",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.001,
+   "made": "solid"
+  },
+  {
+   "part": "dot_-0.11_2",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.001,
+   "made": "solid"
+  },
+  {
+   "part": "dot_-0.43_0",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.001,
+   "made": "solid"
+  },
+  {
+   "part": "dot_-0.43_1",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.001,
+   "made": "solid"
+  },
+  {
+   "part": "dot_0.15_0",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.001,
+   "made": "solid"
+  },
+  {
+   "part": "dot_0.42_0",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.001,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:19Z"
+}

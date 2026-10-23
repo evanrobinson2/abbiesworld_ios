@@ -1,0 +1,769 @@
+{
+ "room": {
+  "width_m": 12,
+  "depth_m": 10,
+  "ceiling_m": 4.2,
+  "coffer_m": 4.5
+ },
+ "assets": 63,
+ "triangles": 47100,
+ "mass_kg": 17126.4,
+ "placed": [
+  {
+   "asset": "plank_floor",
+   "name": "plank_floor",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 1817.05,
+   "triangles": 1320
+  },
+  {
+   "asset": "dance_floor",
+   "name": "dance_floor",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 896.0,
+   "triangles": 2464
+  },
+  {
+   "asset": "dance_floor_rim",
+   "name": "dance_floor_rim",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 51.68,
+   "triangles": 176
+  },
+  {
+   "asset": "bar_deck",
+   "name": "bar_deck",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 816.47,
+   "triangles": 300
+  },
+  {
+   "asset": "booth_stage",
+   "name": "booth_stage",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 402.46,
+   "triangles": 488
+  },
+  {
+   "asset": "star_rug",
+   "name": "star_rug",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 19.42,
+   "triangles": 96
+  },
+  {
+   "asset": "confetti_carpet",
+   "name": "confetti_carpet",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 13.28,
+   "triangles": 700
+  },
+  {
+   "asset": "wall_left",
+   "name": "wall_left",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 1594.27,
+   "triangles": 1056
+  },
+  {
+   "asset": "wall_right",
+   "name": "wall_right",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 1541.77,
+   "triangles": 1056
+  },
+  {
+   "asset": "wall_back",
+   "name": "wall_back",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 1579.42,
+   "triangles": 692
+  },
+  {
+   "asset": "wall_front",
+   "name": "wall_front",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 1969.77,
+   "triangles": 944
+  },
+  {
+   "asset": "window_right",
+   "name": "window_right",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 132.43,
+   "triangles": 572
+  },
+  {
+   "asset": "window_left",
+   "name": "window_left",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 64.66,
+   "triangles": 200
+  },
+  {
+   "asset": "ceiling",
+   "name": "ceiling",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 1832.64,
+   "triangles": 220
+  },
+  {
+   "asset": "soffit_teal",
+   "name": "soffit_teal",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 413.18,
+   "triangles": 24
+  },
+  {
+   "asset": "ceiling_vent",
+   "name": "ceiling_vent",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 122.86,
+   "triangles": 360
+  },
+  {
+   "asset": "downlights",
+   "name": "downlights",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 22.47,
+   "triangles": 1008
+  },
+  {
+   "asset": "arch_main",
+   "name": "arch_main",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 350.34,
+   "triangles": 936
+  },
+  {
+   "asset": "arch_niches",
+   "name": "arch_niches",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 43.28,
+   "triangles": 376
+  },
+  {
+   "asset": "door_pink",
+   "name": "door_pink",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 103.4,
+   "triangles": 272
+  },
+  {
+   "asset": "basement_door",
+   "name": "basement_door",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 52.08,
+   "triangles": 616
+  },
+  {
+   "asset": "stars_arch",
+   "name": "stars_arch",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 11.46,
+   "triangles": 936
+  },
+  {
+   "asset": "stars_cyan",
+   "name": "stars_cyan",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 11.63,
+   "triangles": 312
+  },
+  {
+   "asset": "stars_pink",
+   "name": "stars_pink",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 3.7,
+   "triangles": 468
+  },
+  {
+   "asset": "star_decals",
+   "name": "star_decals",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 0.91,
+   "triangles": 612
+  },
+  {
+   "asset": "sticker_collage",
+   "name": "sticker_collage",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 1.07,
+   "triangles": 1560
+  },
+  {
+   "asset": "abstract_shapes",
+   "name": "abstract_shapes",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 22.61,
+   "triangles": 448
+  },
+  {
+   "asset": "wall_art",
+   "name": "wall_art",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 26.36,
+   "triangles": 348
+  },
+  {
+   "asset": "bar_counter",
+   "name": "bar_counter",
+   "at": [
+    0,
+    0,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 704.75,
+   "triangles": 2712
+  },
+  {
+   "asset": "cup_dj_booth",
+   "name": "cup_dj_booth",
+   "at": [
+    -3.8,
+    0.6,
+    0.3
+   ],
+   "rot_deg": 60,
+   "mass_kg": 1405.36,
+   "triangles": 2240
+  },
+  {
+   "asset": "cup_topper",
+   "name": "cup_topper",
+   "at": [
+    -3.8,
+    0.6,
+    2.52
+   ],
+   "rot_deg": 60,
+   "mass_kg": 102.88,
+   "triangles": 1384
+  },
+  {
+   "asset": "speakers",
+   "name": "speakers_1",
+   "at": [
+    -1.88,
+    4.62,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 31.62,
+   "triangles": 680
+  },
+  {
+   "asset": "speakers",
+   "name": "speakers_2",
+   "at": [
+    1.88,
+    4.62,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 31.62,
+   "triangles": 680
+  },
+  {
+   "asset": "jukebox",
+   "name": "jukebox",
+   "at": [
+    -3.3,
+    -1.6,
+    0
+   ],
+   "rot_deg": 0,
+   "mass_kg": 158.21,
+   "triangles": 724
+  },
+  {
+   "asset": "boombox",
+   "name": "boombox",
+   "at": [
+    -2.65,
+    1.35,
+    0.3
+   ],
+   "rot_deg": 100,
+   "mass_kg": 6.06,
+   "triangles": 452
+  },
+  {
+   "asset": "disco_ball_big",
+   "name": "disco_ball_big",
+   "at": [
+    2.0,
+    1.2,
+    4.5
+   ],
+   "rot_deg": 0,
+   "mass_kg": 23.3,
+   "triangles": 424
+  },
+  {
+   "asset": "disco_ball_small",
+   "name": "disco_ball_small",
+   "at": [
+    -0.5,
+    -0.2,
+    4.5
+   ],
+   "rot_deg": 0,
+   "mass_kg": 13.07,
+   "triangles": 424
+  },
+  {
+   "asset": "beanbag_orange_big",
+   "name": "beanbag_orange_big",
+   "at": [
+    -3.5,
+    -3.95,
+    0
+   ],
+   "rot_deg": 20,
+   "mass_kg": 6.16,
+   "triangles": 80
+  },
+  {
+   "asset": "photo_booth",
+   "name": "photo_booth",
+   "at": [
+    -5.35,
+    -4.27,
+    0
+   ],
+   "rot_deg": 90,
+   "mass_kg": 195.18,
+   "triangles": 1208
+  },
+  {
+   "asset": "beanbag_lime_big",
+   "name": "beanbag_lime_big",
+   "at": [
+    2.3,
+    -3.9,
+    0
+   ],
+   "rot_deg": -25,
+   "mass_kg": 6.0,
+   "triangles": 80
+  },
+  {
+   "asset": "beanbag_lime",
+   "name": "beanbag_lime",
+   "at": [
+    -3.0,
+    3.6,
+    0
+   ],
+   "rot_deg": 160,
+   "mass_kg": 3.05,
+   "triangles": 80
+  },
+  {
+   "asset": "beanbag_orange",
+   "name": "beanbag_orange",
+   "at": [
+    -1.9,
+    3.85,
+    0
+   ],
+   "rot_deg": 200,
+   "mass_kg": 3.05,
+   "triangles": 80
+  },
+  {
+   "asset": "beanbags_pink",
+   "name": "beanbags_pink_1",
+   "at": [
+    1.85,
+    3.3,
+    0
+   ],
+   "rot_deg": 190,
+   "mass_kg": 3.05,
+   "triangles": 80
+  },
+  {
+   "asset": "beanbags_pink",
+   "name": "beanbags_pink_2",
+   "at": [
+    2.9,
+    3.35,
+    0
+   ],
+   "rot_deg": 160,
+   "mass_kg": 3.05,
+   "triangles": 80
+  },
+  {
+   "asset": "plush_toys",
+   "name": "plush_toys",
+   "at": [
+    -5.35,
+    -1.3,
+    0
+   ],
+   "rot_deg": 70,
+   "mass_kg": 0.69,
+   "triangles": 200
+  },
+  {
+   "asset": "bar_stools",
+   "name": "bar_stools_1",
+   "at": [
+    3.72,
+    -1.1,
+    0.3
+   ],
+   "rot_deg": 0,
+   "mass_kg": 17.73,
+   "triangles": 488
+  },
+  {
+   "asset": "bar_stools",
+   "name": "bar_stools_2",
+   "at": [
+    3.72,
+    -0.1,
+    0.3
+   ],
+   "rot_deg": 0,
+   "mass_kg": 17.73,
+   "triangles": 488
+  },
+  {
+   "asset": "bar_stools",
+   "name": "bar_stools_3",
+   "at": [
+    3.72,
+    0.9,
+    0.3
+   ],
+   "rot_deg": 0,
+   "mass_kg": 17.73,
+   "triangles": 488
+  },
+  {
+   "asset": "bar_stools",
+   "name": "bar_stools_4",
+   "at": [
+    3.72,
+    1.9,
+    0.3
+   ],
+   "rot_deg": 0,
+   "mass_kg": 17.73,
+   "triangles": 488
+  },
+  {
+   "asset": "giant_sundaes",
+   "name": "giant_sundaes_1",
+   "at": [
+    4.35,
+    -1.2,
+    1.4000000000000001
+   ],
+   "rot_deg": 0,
+   "mass_kg": 6.93,
+   "triangles": 436
+  },
+  {
+   "asset": "giant_sundaes",
+   "name": "giant_sundaes_2",
+   "at": [
+    4.35,
+    0.35,
+    1.4000000000000001
+   ],
+   "rot_deg": 0,
+   "mass_kg": 6.93,
+   "triangles": 436
+  },
+  {
+   "asset": "giant_sundaes",
+   "name": "giant_sundaes_3",
+   "at": [
+    4.35,
+    1.55,
+    1.4000000000000001
+   ],
+   "rot_deg": 0,
+   "mass_kg": 6.93,
+   "triangles": 436
+  },
+  {
+   "asset": "bar_bits",
+   "name": "bar_bits",
+   "at": [
+    4.45,
+    2.1,
+    1.4000000000000001
+   ],
+   "rot_deg": 0,
+   "mass_kg": 9.77,
+   "triangles": 1368
+  },
+  {
+   "asset": "back_counter",
+   "name": "back_counter",
+   "at": [
+    5.675,
+    0.0,
+    0.3
+   ],
+   "rot_deg": 0,
+   "mass_kg": 235.05,
+   "triangles": 900
+  },
+  {
+   "asset": "cash_register",
+   "name": "cash_register",
+   "at": [
+    5.62,
+    -1.5,
+    1.2
+   ],
+   "rot_deg": -90,
+   "mass_kg": 9.64,
+   "triangles": 1524
+  },
+  {
+   "asset": "espresso_machine",
+   "name": "espresso_machine",
+   "at": [
+    5.65,
+    -0.95,
+    1.2
+   ],
+   "rot_deg": -90,
+   "mass_kg": 24.52,
+   "triangles": 2412
+  },
+  {
+   "asset": "grinder",
+   "name": "grinder",
+   "at": [
+    5.68,
+    -0.5,
+    1.2
+   ],
+   "rot_deg": -90,
+   "mass_kg": 8.19,
+   "triangles": 584
+  },
+  {
+   "asset": "smoothie_machine",
+   "name": "smoothie_machine",
+   "at": [
+    5.65,
+    -0.1,
+    1.2
+   ],
+   "rot_deg": -90,
+   "mass_kg": 6.34,
+   "triangles": 892
+  },
+  {
+   "asset": "urn",
+   "name": "urn",
+   "at": [
+    5.7,
+    0.35,
+    1.2
+   ],
+   "rot_deg": -90,
+   "mass_kg": 21.67,
+   "triangles": 456
+  },
+  {
+   "asset": "pastry_case",
+   "name": "pastry_case",
+   "at": [
+    5.66,
+    1.05,
+    1.2
+   ],
+   "rot_deg": -90,
+   "mass_kg": 21.62,
+   "triangles": 1140
+  },
+  {
+   "asset": "cup_shelves",
+   "name": "cup_shelves",
+   "at": [
+    5.88,
+    3.3,
+    1.3
+   ],
+   "rot_deg": 0,
+   "mass_kg": 47.13,
+   "triangles": 2720
+  },
+  {
+   "asset": "menu_board",
+   "name": "menu_board",
+   "at": [
+    5.99,
+    -2.25,
+    2.1
+   ],
+   "rot_deg": -90,
+   "mass_kg": 30.34,
+   "triangles": 908
+  },
+  {
+   "asset": "back_stars",
+   "name": "back_stars",
+   "at": [
+    5.97,
+    3.0,
+    2.55
+   ],
+   "rot_deg": -90,
+   "mass_kg": 6.68,
+   "triangles": 768
+  }
+ ]
+}

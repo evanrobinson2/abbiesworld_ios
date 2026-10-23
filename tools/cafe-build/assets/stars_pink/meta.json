@@ -1,0 +1,66 @@
+{
+ "id": "stars_pink",
+ "name": "Pink stars",
+ "group": "Party",
+ "tier": "support",
+ "intent": "",
+ "real": "pink LED neon stars high on the right wall",
+ "moving": "pulse",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  0.039,
+  5.618,
+  0.478
+ ],
+ "triangles": 468,
+ "mass_kg": 3.702,
+ "centre_of_mass": [
+  -0.0,
+  -0.0,
+  -0.01
+ ],
+ "materials": [
+  "Glass_Clear",
+  "Glass_NeonPink"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "star_0_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 1.1522,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_1_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 0.8001,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_2_backer",
+   "material": "Glass_Clear",
+   "mass_kg": 0.8001,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "star_0_tube",
+   "material": "Glass_NeonPink",
+   "mass_kg": 0.44,
+   "made": "solid"
+  },
+  {
+   "part": "star_1_tube",
+   "material": "Glass_NeonPink",
+   "mass_kg": 0.2546,
+   "made": "solid"
+  },
+  {
+   "part": "star_2_tube",
+   "material": "Glass_NeonPink",
+   "mass_kg": 0.2546,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:38Z"
+}
