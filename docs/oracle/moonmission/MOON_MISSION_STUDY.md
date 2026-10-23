@@ -471,7 +471,50 @@ playthrough (from the speed reviews).
 - Family cast voices (`tools/voice-cast/cast.json`), Moon Heroes refs (`tools/moon-heroes/`), the accessorize kit
   (`tools/bruiser-study/scale/accessorize.py`), the trek minigames for Act 2.
 
-## 15. How it was made, and how to be faster next time
+## 15. Context engineering
+
+Evan (13:55Z, org-wide): every study lists the context it was built from. This is what fed Moon Mission, and what
+each source changed.
+
+**Oracle consultation** (Game Oracle knowledge search, 2026-10-23 13:56Z, queries "couch co-op launch countdown family
+voice" and "space moon first person cockpit lander"):
+- *Bluey: The Videogame* (studied profile: "gentle, co-op, no fail; for preschoolers and parents together"). This
+  confirmed the no-fail, parent-plus-kids model and the low challenge setting (0.11) for Act 1.
+- *Overcooked! 2* (owned, installed): couch co-op where talking is the game. Kept: shared, shouted jobs. Left out:
+  the time-pressure stress.
+- *Deliver Us The Moon* (owned, studied): KeokeN's earlier Moon game, with an atmospheric, slow tempo (0.22). It
+  confirmed the calm cutscenes between scenes.
+- *Kerbal Space Program* (owned, studied): real launch vocabulary can be funny and educational at once.
+- The Abbie's World identity record: no fail screens, nothing masks the world, the world is the HUD.
+- Not run: the Oracle's model-written `consult` plan (it needs the server key from this session). It should be the
+  first step of the next study.
+
+**Our canon:** `docs/oracle/identity/GAME_IDENTITY.md` and its schema, `docs/oracle/hud/HUD_STUDY.md`,
+`docs/design/INTERACTION_GRAMMAR.md`, `GAME_FEEL.md`, the school and basement speed reviews, AW-STUDY-0029 Faceted
+Hero, AW-STUDY-0030 Family cast, AW-STUDY-0031 Moon Base Kit, and Evan's trek pack.
+
+**Game dev blogs and interviews:**
+- [First Deliver Us Mars dev diary](https://www.thesixthaxis.com/2022/05/06/first-deliver-us-mars-dev-diary-journeys-to-the-red-planet/)
+  and [the interview with game director Koen Deetman](https://gamingtrend.com/interviews/we-interview-koen-deetman-game-director-for-deliver-us-mars/).
+  These gave the reference rhythm for the launch day (style only).
+- [Everybody Shake! The Making of Spaceteam, chapter 2](https://episodiccontentmag.com/2016/01/29/everybodyshake2/):
+  split the panel so one person's instruction is another's job, teach less and let players discover, make teamwork the
+  only way through, and let rising chaos make people shout. This became **jobs, not turns** and "PLUG IN OUR OXYGEN!!!".
+- [The design principles behind Jackbox](https://builtin.com/media-gaming/jackbox-games-design-party-pack): minimal
+  inputs, one task at a time, and pacing like a TV show with a host. This became Houston as host, one key per child,
+  and the mission cards.
+- [Ghost Town Games on Overcooked as "an evening thing"](https://www.nintendolife.com/features/interview-were-not-making-a-party-game-now-its-more-of-an-evening-thing-ghost-town-is-moving-on-from-overcooked):
+  one act per evening.
+
+**Game design talks and tutorials:**
+- [GDC: Designing Asymmetric Gameplay for Keep Talking and Nobody Explodes](https://gdcvault.com/play/1023113/Designing-Asymmetric-Gameplay-For-Keep):
+  the information on the TV, the job pictures on the panel, and talking across the gap. This became the lander's
+  spotters (the girls see the PIP camera, Daddy flies).
+- [Built-in hold](https://en.wikipedia.org/wiki/Built-in_hold) and
+  [Why the shuttle countdown has so many stops and starts](https://www.scientificamerican.com/article/shuttle-countdown-clock/):
+  real countdowns pause on purpose. This became the always-ticking launch clock with planned holds, so nobody fails.
+
+## 16. How it was made, and how to be faster next time
 To be written when Part 1 ships (CLAUDE.md speed-review rule). Speedups applied from the school and basement reviews:
 the reference art is frozen first (section 9), the couch kit goes into `simulations/`, tests run by state, the
 `whats-new.json` re-insert script, concept art in parallel.
