@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "lamp-kit",
+  "item": "R4",
+  "wave": "Ranch remaster wave 1",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "sheet": {
+      "prompt": "game asset sheet of four ranch lamps in daylight: a black iron shepherd's crook post with a hanging glass lantern, a glass lantern mounted on top of a wooden fence post, a small iron porch wall lamp, a strand of round string lights hung between two wooden poles; black iron, warm amber glass, evenly spaced in a neat row, same scale, all pieces fully visible, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text --ar 16:9",
+      "grid_job_id": "a3c97532-0c3f-4da6-ada8-36281eeb6d74",
+      "grid_url": "https://www.midjourney.com/jobs/a3c97532-0c3f-4da6-ada8-36281eeb6d74?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "a65a4fe4-272f-4de7-950f-330e1a6e9d2d",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T03:08:17.880Z",
+      "grid_done_at": "2026-10-23T03:08:37.895Z",
+      "upscale_clicked_at": "2026-10-23T03:08:49.825Z",
+      "downloaded_at": "2026-10-23T03:10:50.405Z",
+      "pick_reason": "exactly the four lamps, each separate and uncut: crook post with hanging lantern, lantern on a fence post, iron wall lamp, string lights between two poles; others swapped the wall lamp for a post lamp or added extra fence pieces"
+    }
+  },
+  "files": {
+    "sheet.png": {
+      "sha256": "cff1b1b80020ecffef65a008a7110223956256dc2b1cad56d78c15f67538b93d",
+      "bytes": 1984828,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/a65a4fe4-272f-4de7-950f-330e1a6e9d2d/0_0.png"
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/sunflower-charming",
+ "name": "sunflower-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "a94c7084-52d2-4ebb-90fb-01795114d436",
+    "grid_url": "https://www.midjourney.com/jobs/a94c7084-52d2-4ebb-90fb-01795114d436?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "7bb7b2bb-c228-4903-87d9-7a0cafda05bb",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:45:32.302Z",
+    "grid_done_at": "2026-10-23T01:45:50.302Z",
+    "upscale_clicked_at": "2026-10-23T01:46:00.188Z",
+    "downloaded_at": "2026-10-23T01:47:11.769Z",
+    "pick_reason": "tall single stem with plump flower head and broad leaves, head well clear of the top edge"
+   }
+  },
+  "files": {
+   "hero.png": "4e42da898516ef80df1cbce2ddbaf6c55e5d9bf204a2db708d7d0e574ec9f796"
+  },
+  "folder": "tools/ranch-rebuild/mj/sunflower-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/sunflower-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build from hero measurements: bigger head with doughnut rim and hollow, three rings of blunt plump petals, four oval leaves, chubbier stalk.",
+    "mean_iou": 0.767
+   },
+   {
+    "round": 2,
+    "change": "Leaves up 4-5 cm and faced a little less upward, wider petals, base clamped to z = 0.",
+    "mean_iou": 0.772
+   },
+   {
+    "round": 3,
+    "change": "Longer upper-left and low-right leaves, upper-right leaf angled down, low-left leaf lower, head left and back petals longer.",
+    "mean_iou": 0.791
+   },
+   {
+    "round": 4,
+    "change": "Upper-left leaf up, low-left leaf lower and more sloped, head a touch left and up.",
+    "mean_iou": 0.793
+   },
+   {
+    "round": 5,
+    "change": "Cupped the front and mid petal rings forward with higher midribs for a plumper toy head (IoU flat, reads rounder); final 768 px / 48 sample render.",
+    "mean_iou": 0.794
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied build.py, make_views.py, hero_check.py and run.sh from models/sunflower and reshaped them to the charming hero; same object layout (soil, stem, leaves, petals_back/mid/front, seed_disc), same material names and roles, same origin, front -Y, top at 1.585 m. Plant group, so no variants."
+   ],
+   [
+    "Views",
+    "No turnaround for this job, so it is scored on the hero alone. make_views.py keys mj/sunflower-charming/hero.png per row against the backdrop and drops the warm cast shadow that runs off to the left (below 80 % of the height only low-blue olive pixels in a band round the stalk are kept), then cuts below the stalk foot."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py kept the normal model's calibrated direction (front-on, 5 deg up, harness lens); the charming hero is drawn just as level."
+   ],
+   [
+    "Stalk",
+    "Chubbier than the normal one (radius 3.6 cm at the base to 2.7 cm under the head, plus a flared foot), nearly straight with a soft bow taken from the hero, standing on a small domed dirt mound (Soil_Dirt) about 20 x 16 cm."
+   ],
+   [
+    "Leaves",
+    "Four big plump ovals (the hero has four, not the normal six): upper left, upper right on a long petiole, big low left and big low right. Rounder outline with a soft heart base, a cushion bulge on each half and a shallow midrib fold; 18 triangles each, double-sided, faces turned to the viewer and up."
+   ],
+   [
+    "Head",
+    "Oversized: about 0.70 m across (44 % of the height, the normal is a third), turned 7 deg to the side and 4 deg down for a bit of lean. Three rings (18 Petal_Amber behind, 18 + 16 Petal_Gold in front) of fat, blunt, rounded petals (10 triangles: a two-step raised midrib), the front rings cupped forward and the bottom petals hanging a little longer, as in the hero. The seed centre is the hero's toy doughnut: a fat Petal_Amber rim (new object disc_rim, existing material) round a sunken Seed_Brown hollow, recoloured burnt orange to match."
+   ],
+   [
+    "Game readiness",
+    "901 triangles (budget 1k), 8 meshes, one flat material each, the same six materials as the normal sunflower. 0.70 x 0.21 x 1.585 m, origin at the base on the ground, base clamped to z = 0. No animation."
+   ]
+  ],
+  "creative_additions": "A fat toy doughnut rim round the seed hollow and cupped front petals so the head reads puffy, and a flared chubby foot on the stalk."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.7032780647277832,
+   0.20882552862167358,
+   1.5850000381469727
+  ],
+  "triangles": 901,
+  "materials": [
+   "Petal_Amber",
+   "Leaf_Green",
+   "Petal_Gold",
+   "Seed_Brown",
+   "Soil_Dirt",
+   "Stem_Green"
+  ],
+  "parts": [
+   {
+    "name": "disc_rim",
+    "materials": [
+     "Petal_Amber"
+    ]
+   },
+   {
+    "name": "leaves",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "petals_back",
+    "materials": [
+     "Petal_Amber"
+    ]
+   },
+   {
+    "name": "petals_front",
+    "materials": [
+     "Petal_Gold"
+    ]
+   },
+   {
+    "name": "petals_mid",
+    "materials": [
+     "Petal_Gold"
+    ]
+   },
+   {
+    "name": "seed_disc",
+    "materials": [
+     "Seed_Brown"
+    ]
+   },
+   {
+    "name": "soil",
+    "materials": [
+     "Soil_Dirt"
+    ]
+   },
+   {
+    "name": "stem",
+    "materials": [
+     "Stem_Green"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.794,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.794 (768 px, 48 samples) from the hero's own direction: head size and placement, the four leaves and the stalk line up.",
+   "Reads as the same sunflower but toy-like: a huge buttery head with a fat orange doughnut centre on a chubby stalk with four big cushion leaves.",
+   "Drops in for the normal one: same parts, materials and roles, same height, within budget at 901 triangles."
+  ],
+  "off": [
+   "The hero's petals are soft, rounded, almost clay-like; mine are 10-triangle faceted cards with a raised midrib, blunter and plumper than the normal ones but still faceted.",
+   "The outer amber petals poke out a little more sharply than the hero's soft outer ring.",
+   "The hero shows no soil; I kept a small dirt mound so the parts and materials match the normal model and the plant sits on the ground.",
+   "Footprint: 0.70 x 0.21 m against the normal 0.58 x 0.23 m. The charming head and leaves are wider, as the hero draws them; it is still a flat, face-forward plant.",
+   "Seed_Brown still matches none of the game's role words (role 'plain'), as in the normal model."
+  ]
+ },
+ "exports": {
+  "runtime": "sunflower-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-567.glb"
+   ]
+  }
+ },
+ "files": {
+  "sunflower-charming.glb": {
+   "sha256": "3fa14c44071366addebbdf5cc85b78d552593b8db49f54f899c27fc29d709db8",
+   "bytes": 76252
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "8069e1e66f8d5541ca78bee8751bab54e59067b0",
+  "path": "tools/ranch-rebuild/models/sunflower-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

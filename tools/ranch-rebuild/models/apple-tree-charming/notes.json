@@ -1,0 +1,31 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/apple-tree (build.py, hero_check.py, run.sh) and reshaped it. Same conventions: Z up, metres, origin at the trunk base on the ground, front -Y, yaw 0, hero_check at 8 deg elevation, no variants (tree group), same material names and roles (Bark_Brown, Leaf_Dark, Leaf_Light, Fruit_Red, Grass_Green). No new materials."],
+  ["Views", "make_views.py uses the saturation key from models/maple-charming (keep saturated bark and leaf pixels, largest piece, clamp rows that suddenly widen at the foot), which keys out the long cast shadow and the cream floor; the thin grass disc under the hero survives as a sliver."],
+  ["Trunk", "A chubbier 9-sided rope-twisted tube (radius 0.24 to 0.15 m against 0.17 to 0.12) along a taller S measured on the hero (right at the foot, left at 1.4 m, back over the base at the 1.8 m fork), a fat root flare, three rounded root toes on the pad, and five chunky round-tipped limbs fanning from a swollen fork."],
+  ["Crown", "The normal's domed surface of tufts and 330 leaf cards replaced by 14 plump smooth-shaded cloud clumps (squashed icospheres, flatter underneath), three of them with a smaller puff riding on top, placed from the hero's clump layout: a lopsided crown with low lobes hanging on both sides and the mass a little right of the foot, so the tree leans. Depth clumps fill the back and front so the footprint stays round."],
+  ["Swirls", "Eight raised cinnamon-roll spiral ridges projected onto the upward-facing clump surfaces, in the contrasting green (dark swirl on a light clump and the reverse): the hero's swirling cloud leaves, readable from the game's elevated camera."],
+  ["Apples", "Fewer, bigger, proud apples (13 on the crown plus 4 hanging under the side lobes, 0.30 to 0.34 m across against 0.26 to 0.32), squat with a dimpled top, a stubby stem each and a little leaf on every third, sitting half out of the clumps."],
+  ["Game readiness", "2,985 triangles (budget 3k), 9 meshes, flat base colours, smooth shading. 4.19 m tall, footprint 3.38 x 3.26 m (normal 3.57 x 3.55, width/depth 1.04 against 1.01). to_game.py apple-tree-charming installs it at simulations/regional-assets-charming/GF-153.glb."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.823, as good as the normal model's 0.824: the lopsided cloud crown, the tall S trunk and the hanging apples line up.",
+  "Reads at a glance as the same apple tree, now a soft toy: chunky trunk, round puffs, big apples.",
+  "Footprint proportions kept (width/depth 1.04), so it drops in for the normal model."
+ ],
+ "off": [
+  "The sheet's three trees are much taller and narrower (height/width 1.67 to 1.94 against the hero's 1.20), with an apple heap on top of the crown and a pink bark, so they are not views of the hero's tree. The hero wins, which caps the sheet views at about 0.48 to 0.54; the sheet's side view drops further because the crown is kept round in depth to match the normal footprint.",
+  "The hero's clumps are many small swirled lobes; within 3k triangles each clump is one or two low-poly puffs, so the silhouettes are polygonal close up and only 8 swirls are modelled.",
+  "The hero shows about 20 apples and visible limbs under the crown; my limbs are mostly hidden by the lowered clumps.",
+  "The grass sprout leaf at the hero's trunk foot is a small two-blade sprout, too small to read in the tile."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First charming build: hero-measured S trunk, 14 lumpy UV-sphere clumps, 14 spiral swirls, 28 apples with leaves. Faceted cabbage-like clumps, pale greens, 5,010 tris.", "mean_iou": 0.535, "hero_iou": 0.823},
+  {"round": 2, "change": "Clumps as smooth icosphere puffs (+3 top puffs), deeper greens, fewer apples, slimmer limbs and roots; 3,058 tris.", "mean_iou": 0.535, "hero_iou": 0.813},
+  {"round": 3, "change": "Right lobes pushed out, hanging apples raised, fatter lower trunk bulging right, bigger swirls; 13 crown apples for the budget (2,972 tris).", "mean_iou": 0.532, "hero_iou": 0.823},
+  {"round": 4, "change": "Swirls projected onto the clump spheres and placed on upward faces, bigger apples set prouder of the clumps.", "mean_iou": 0.54, "hero_iou": 0.826},
+  {"round": 5, "change": "Crown deepened front and back to keep the normal's round footprint (3.38 x 3.26 m), roots clamped to the ground, open stems; final 768 px / 48 sample render and score (2,985 tris).", "mean_iou": 0.522, "hero_iou": 0.823}
+ ],
+ "moving_parts": "None. The game poses and recolours the tree itself (leaf and grass materials follow the seasons).",
+ "creative_additions": "Cinnamon-roll swirls on the clumps, a little leaf on some apple stems, rounded root toes on the grass pad and a two-leaf sprout at the foot."
+}

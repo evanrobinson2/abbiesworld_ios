@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "water-bucket-charming",
+  "group": "supply",
+  "replaces": "simulation-assets/supplies/water-bucket-{full,partial,empty,carried}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a wooden stave bucket with iron hoops and a rope handle, full of clear water, chunky rounded toy-like proportions, bulging and plump, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "dcdade6d-4187-4848-8e40-d605d09e5236",
+      "grid_url": "https://www.midjourney.com/jobs/dcdade6d-4187-4848-8e40-d605d09e5236?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "940bca94-2add-4fb2-a8aa-ae8e3fde50a6",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:34:04.738Z",
+      "grid_done_at": "2026-10-23T01:34:22.742Z",
+      "upscale_clicked_at": "2026-10-23T01:34:32.468Z",
+      "downloaded_at": "2026-10-23T01:35:44.337Z",
+      "pick_reason": "plump stave bucket with iron hoops, rope handle fully in frame, clear water"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "0a50b41a0811e4f3792a8dbdbc18083860e7d1e9cf8e10a9d35c9e0f37a273b1",
+      "bytes": 2672094,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/940bca94-2add-4fb2-a8aa-ae8e3fde50a6/0_0.png"
+    }
+  }
+}

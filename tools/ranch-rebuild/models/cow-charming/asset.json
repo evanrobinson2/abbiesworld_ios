@@ -1,0 +1,599 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/cow-charming",
+ "name": "cow-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "grazes and rests in the pasture",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "931a16bb-7b57-4501-b2f8-17910ed9cd34",
+    "grid_url": "https://www.midjourney.com/jobs/931a16bb-7b57-4501-b2f8-17910ed9cd34?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "c9d5435d-c665-4f62-8c7b-89371f476767",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:37:32.322Z",
+    "grid_done_at": "2026-10-23T00:37:50.325Z",
+    "upscale_clicked_at": "2026-10-23T00:38:00.468Z",
+    "downloaded_at": "2026-10-23T00:39:14.984Z",
+    "pick_reason": "closest to a side view; chibi cow with curved horns, pink muzzle, patches and brass bell"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "1879affd-2efa-44e0-a079-077f63e9ee66",
+    "grid_url": "https://www.midjourney.com/jobs/1879affd-2efa-44e0-a079-077f63e9ee66?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "325c82d3-35f8-4994-9058-b4a017d41292",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:39:24.258Z",
+    "grid_done_at": "2026-10-23T00:39:42.263Z",
+    "upscale_clicked_at": "2026-10-23T00:39:52.500Z",
+    "downloaded_at": "2026-10-23T00:41:15.655Z",
+    "pick_reason": "front, side and back of one chibi cow with bell, evenly spaced"
+   }
+  },
+  "files": {
+   "hero.png": "600bbd1e177d865c00bdb38004e94578d9fcc87dbcbfe3adf5d348260a5bb1ae",
+   "turnaround.png": "685bd6548d2745b473459f08ddd29a765d7ca48b7f1e2c678bf0122c67465563",
+   "view_front.png": "79a848b9f3df24fbb62d45099756d9a6304fbb2fc9f379553834bb7a58601234",
+   "view_side.png": "c2949e128c4dc8899cd657f04c09c1d77a1e6c9579c8acd53aaeec7cf7d80801",
+   "view_back.png": "6473ea842334268f588dc3fec02cdb5a97f22d3f16bea0ed11e8ce2ea1d40b66"
+  },
+  "folder": "tools/ranch-rebuild/mj/cow-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/cow-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build from the normal cow's structure: round skull + huge muzzle, plush barrel, stubby legs, decals, big bell; views re-keyed; camera guessed at yaw -40.",
+    "mean_iou": 0.78,
+    "hero_iou": 0.771,
+    "side_iou": 0.622
+   },
+   {
+    "round": 2,
+    "change": "Head group x1.12 and wider, bigger flatter ears, warmer colours, longer body, feeding solver keeps the head in front of the chest (neck pivot moved deep into the chest).",
+    "mean_iou": 0.798,
+    "hero_iou": 0.758,
+    "side_iou": 0.642
+   },
+   {
+    "round": 3,
+    "change": "Head x1.28, body 8 cm taller (worse on its own: ears too low and wide, head yawed off centre).",
+    "mean_iou": 0.772,
+    "hero_iou": 0.712,
+    "side_iou": 0.665
+   },
+   {
+    "round": 4,
+    "change": "Pear section (narrow shoulders, wide low belly), ears higher and smaller, hero camera calibrated on a grid (yaw -50, 6 up).",
+    "mean_iou": 0.804,
+    "hero_iou": 0.776,
+    "side_iou": 0.663
+   },
+   {
+    "round": 5,
+    "change": "Thicker upright horns, cheeks fixed (the decal rays missed), taller dome and forelock, head roll removed (it shifted the whole silhouette sideways).",
+    "mean_iou": 0.837,
+    "hero_iou": 0.776,
+    "side_iou": 0.669
+   },
+   {
+    "round": 6,
+    "change": "Tried the head 8 cm back and up and x1.34 with bigger ears: worse on every view, reverted.",
+    "mean_iou": 0.817,
+    "hero_iou": 0.737,
+    "side_iou": 0.691
+   },
+   {
+    "round": 7,
+    "change": "Head turned 12 deg toward the viewer's side, camera refined to yaw -52, 8 up.",
+    "mean_iou": 0.84,
+    "hero_iou": 0.786,
+    "side_iou": 0.656
+   },
+   {
+    "round": 8,
+    "change": "Nose lifted 8 deg, thicker legs and hooves.",
+    "mean_iou": 0.849,
+    "hero_iou": 0.786,
+    "side_iou": 0.697
+   },
+   {
+    "round": 9,
+    "change": "Collar re-tilted so it dips under the chin and the bell shows in front of the chest; bell enlarged 25 %; feeding face limited to 78 deg pitch so it looks down at the grass; a 2 deg head roll kept for the storybook tilt.",
+    "mean_iou": 0.839,
+    "hero_iou": 0.792,
+    "side_iou": 0.696
+   },
+   {
+    "round": 10,
+    "change": "Tried bigger ears, wider horns, a longer rump and a sideways tail, then the rump and tail alone: both worse, reverted. Final 768 px / 48 sample render.",
+    "mean_iou": 0.84,
+    "hero_iou": 0.79,
+    "side_iou": 0.698
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/cow (build.py, make_views.py, hero_check.py, poses_check.py, prof.py, run.sh) and reshaped it. Same part hierarchy and names (body > leg_*_upper > lower > hoof, body > neck > head > muzzle/eyes/ears/horns, neck > collar > bell, body > tail > tail_tuft, body > udder, body_patches), same pivots-and-rotations pose system, same material names and roles; one new material, Skin_Blush, for the cheeks. Z up, metres, origin at the footprint centre on the ground, head toward -Y, so to_game.py turns it to +X like the normal cow."
+   ],
+   [
+    "Views",
+    "The harness mask fails on this cream-on-cream art (holes through the head and body, the warm floor shadow kept, the legs merged). make_views.py keys each image again: a 0.035 threshold with a big closing and hole filling above the belly line, a stricter mask below it (plus 'bluer than the backdrop' for the lit cream legs), the floor shadow removed near the ground by its hue, and the sideways shadow fans trimmed to the hoof columns. The hero's cast shadow is as dark as the shaded legs, so below row 1440 only hand-traced boxes around the legs and udder count (as in models/potting-bench). Front and back are scored at full weight (views/). The sheet's side is a three-quarter view (head turned to us, body foreshortened, legs barely visible), so it is in views/side/ and scored separately as a proportion guide only. hero_check.py scores the MJ hero from its own direction: the charming hero shows the cow's left side (+X), so the camera is at yaw -52 deg, 8 deg up (calibrated on a yaw/elevation grid)."
+   ],
+   [
+    "Charming massing",
+    "A chibi plush: the head is one big round skull (0.74 m wide before scaling) with a cream forelock bump, scaled 1.28 around the neck so it is as tall as the body; a huge pink oval muzzle; a round, full barrel (rounder 9-point section, widest low, narrower shoulders) about 1.5 m long and 0.88 m wide; stubby thick legs (0.15 to 0.2 m radius) with chunky taupe hooves splayed a touch outward. About 2.1 m to the horn tips, 2.4 m nose to tail (the game rescales to the old cow's length)."
+   ],
+   [
+    "Face and details",
+    "Big dark oval eyes, rosy Skin_Blush cheeks, dark nostrils and a small smile arc on the muzzle, all projected onto the surfaces (BVH ray casts) as flat decals. Big cupped ears (pink inside), short thick blunt horns curling up from the top corners of the skull, an oversized brass bell (26 cm with rim and clapper) hanging plumb from a leather collar that dips under the chin and rides up behind the head, a short perky tail kicked out to the side with a soft tuft, a pink udder."
+   ],
+   [
+    "Tilt and lean",
+    "The idle pose turns the head 12 deg toward the viewer's side, lifts the nose 8 deg and rolls it 2 deg, like the hero. Feeding lowers the neck from a pivot deep in the chest and pitches the face down to the grass (the solver keeps the big head out in front of the chest and the face looking down, never back under the chest). Rest drops the body 0.36 m onto the grass with the stubby front legs poking forward like a sitting plush toy, hind legs tucked to the sides, head up and tilted."
+   ],
+   [
+    "Colour",
+    "Flat colours sampled from the hero: warm pink-cream Fur_Cream, soft taupe Fur_Brown patches (rounder, softer blobs than the normal cow's rust lobes), Skin_Pink muzzle and udder, Skin_EarPink ear insides, Skin_Blush cheeks, taupe Horn_Gold horns, Horn_Hoof hooves, Fur_TailTuft, Cloth_Leather collar, Metal_Brass bell, Skin_EyeDark eyes, nostrils and smile."
+   ],
+   [
+    "Game readiness",
+    "3,092 triangles in every pose (budget 4k), 30 meshes, one flat material per mesh, no textures, no animation. variants/idle, feeding, rest from the same build.py; cow-charming.glb is idle."
+   ]
+  ],
+  "creative_additions": "Rosy cheeks, a little smile, a cream forelock bump, cupped pink-lined ears, an oversized bell with a clapper ball, a tail that kicks out to the side, and a rest pose with the front legs stuck out forward like a sitting plush toy."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.518737554550171,
+   2.459638833999634,
+   2.3264358043670654
+  ],
+  "triangles": 3092,
+  "materials": [
+   "Fur_Brown",
+   "Horn_Hoof",
+   "Fur_Cream",
+   "Metal_Brass",
+   "Cloth_Leather",
+   "Skin_Blush",
+   "Skin_EarPink",
+   "Skin_EyeDark",
+   "Horn_Gold",
+   "Skin_Pink",
+   "Fur_TailTuft"
+  ],
+  "parts": [
+   {
+    "name": "body",
+    "materials": [
+     "Fur_Cream"
+    ],
+    "children": [
+     {
+      "name": "body_patches",
+      "materials": [
+       "Fur_Brown"
+      ]
+     },
+     {
+      "name": "leg_fl_upper",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       -0.25,
+       0.78,
+       0.42
+      ],
+      "children": [
+       {
+        "name": "leg_fl_lower",
+        "materials": [
+         "Fur_Cream"
+        ],
+        "pivot": [
+         -0.015,
+         -0.48,
+         0
+        ],
+        "children": [
+         {
+          "name": "leg_fl_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           -0.01,
+           -0.18,
+           0.01
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_fr_upper",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       0.25,
+       0.78,
+       0.42
+      ],
+      "children": [
+       {
+        "name": "leg_fr_lower",
+        "materials": [
+         "Fur_Cream"
+        ],
+        "pivot": [
+         0.015,
+         -0.48,
+         0
+        ],
+        "children": [
+         {
+          "name": "leg_fr_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0.01,
+           -0.18,
+           0.01
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_hl_upper",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       -0.26,
+       0.82,
+       -0.5
+      ],
+      "children": [
+       {
+        "name": "leg_hl_lower",
+        "materials": [
+         "Fur_Cream"
+        ],
+        "pivot": [
+         -0.015,
+         -0.5,
+         -0.03
+        ],
+        "children": [
+         {
+          "name": "leg_hl_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           -0.01,
+           -0.2,
+           0.02
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_hr_upper",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       0.26,
+       0.82,
+       -0.5
+      ],
+      "children": [
+       {
+        "name": "leg_hr_lower",
+        "materials": [
+         "Fur_Cream"
+        ],
+        "pivot": [
+         0.015,
+         -0.5,
+         -0.03
+        ],
+        "children": [
+         {
+          "name": "leg_hr_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0.01,
+           -0.2,
+           0.02
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "neck",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       0,
+       0.72,
+       0.05
+      ],
+      "children": [
+       {
+        "name": "collar",
+        "materials": [
+         "Cloth_Leather"
+        ],
+        "pivot": [
+         0,
+         0.4,
+         0.52
+        ],
+        "children": [
+         {
+          "name": "bell",
+          "materials": [
+           "Metal_Brass"
+          ],
+          "pivot": [
+           0,
+           -0.2135,
+           0.2236
+          ]
+         }
+        ]
+       },
+       {
+        "name": "head",
+        "materials": [
+         "Fur_Cream"
+        ],
+        "pivot": [
+         0,
+         0.54,
+         0.57
+        ],
+        "rotation": [
+         -0.0675,
+         0.103,
+         0.0246,
+         0.9921
+        ],
+        "children": [
+         {
+          "name": "cheeks",
+          "materials": [
+           "Skin_Blush"
+          ],
+          "pivot": [
+           0,
+           0.1,
+           0.3
+          ]
+         },
+         {
+          "name": "ear_l",
+          "materials": [
+           "Fur_Cream"
+          ],
+          "pivot": [
+           0.3,
+           0.48,
+           0.04
+          ],
+          "children": [
+           {
+            "name": "ear_l_inner",
+            "materials": [
+             "Skin_EarPink"
+            ]
+           }
+          ]
+         },
+         {
+          "name": "ear_r",
+          "materials": [
+           "Fur_Cream"
+          ],
+          "pivot": [
+           -0.3,
+           0.48,
+           0.04
+          ],
+          "children": [
+           {
+            "name": "ear_r_inner",
+            "materials": [
+             "Skin_EarPink"
+            ]
+           }
+          ]
+         },
+         {
+          "name": "eyes",
+          "materials": [
+           "Skin_EyeDark"
+          ],
+          "pivot": [
+           0,
+           0.2,
+           0.3
+          ]
+         },
+         {
+          "name": "horn_l",
+          "materials": [
+           "Horn_Gold"
+          ],
+          "pivot": [
+           0.22,
+           0.48,
+           0.06
+          ]
+         },
+         {
+          "name": "horn_r",
+          "materials": [
+           "Horn_Gold"
+          ],
+          "pivot": [
+           -0.22,
+           0.48,
+           0.06
+          ]
+         },
+         {
+          "name": "muzzle",
+          "materials": [
+           "Skin_Pink"
+          ],
+          "pivot": [
+           0,
+           -0.025,
+           0.38
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "tail",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       0,
+       0.98,
+       -0.8
+      ],
+      "children": [
+       {
+        "name": "tail_tuft",
+        "materials": [
+         "Fur_TailTuft"
+        ],
+        "pivot": [
+         0.09,
+         -0.24,
+         -0.17
+        ]
+       }
+      ]
+     },
+     {
+      "name": "udder",
+      "materials": [
+       "Skin_Pink"
+      ],
+      "pivot": [
+       0,
+       0.42,
+       -0.24
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "states": [
+  "feeding",
+  "idle",
+  "rest"
+ ],
+ "validation": {
+  "outline_iou": 0.84,
+  "hero_iou": 0.79,
+  "per_view": {
+   "front": 0.837,
+   "back": 0.843
+  },
+  "triangle_budget": 4000,
+  "within_budget": true,
+  "good": [
+   "Front 0.837 and back 0.843 against the re-keyed sheet views: head, ear span, horn spacing and the plump pear body agree well.",
+   "Hero silhouette 0.79 from the hero's own direction; the render reads as the same toy: big head, huge pink muzzle, rosy cheeks, smile, brass bell under the chin, round patches.",
+   "Still clearly a cow and a working game piece: the three poses are rotations of the same parts and the bell hangs plumb in each."
+  ],
+  "off": [
+   "The sheet's side view is three-quarter (0.698, proportion guide only, not in the mean). Its head sits higher and further back over the chest and its legs are shorter than the hero's; the hero won.",
+   "Hero: the MJ ears are bigger and stick out more horizontally, and the rump reaches a little further back; enlarging the ears, widening the horn spacing or lengthening the rump each lowered both the hero and sheet scores, so they stayed as they are.",
+   "Footprint ratio: 2.4 m long by 1.5 m wide over the ears (body 0.88 m wide), against the normal cow's 2.25 by 0.73. The chibi head and ears can't be made that narrow without losing the design; the game scales by the longest side, so the ranch planner sees the same length.",
+   "Faceted low-poly rather than the hero's smooth plush (the game uses flat normals); the hero's subtle hair swirl on the forehead is a plain cream bump.",
+   "The sheet's tan forelock and small brow spots are not modelled (the hero shows a cream forelock and no head spots)."
+  ]
+ },
+ "exports": {
+  "runtime": "cow-charming.glb",
+  "variants": {
+   "feeding": "variants/feeding.glb",
+   "idle": "variants/idle.glb",
+   "rest": "variants/rest.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/cow-idle.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/cow-feeding.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/cow-rest.json"
+   ]
+  }
+ },
+ "files": {
+  "cow-charming.glb": {
+   "sha256": "7fd68134ac4a460064e459e87e99cb6d291551e723882f9c37fa74dcdff8e73f",
+   "bytes": 186792
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "f5d3dd750f82201a9fd1cbba277e0e9ea21acdde",
+  "path": "tools/ranch-rebuild/models/cow-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

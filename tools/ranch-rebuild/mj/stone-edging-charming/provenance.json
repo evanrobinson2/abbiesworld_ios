@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "stone-edging-charming",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-010.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a short straight row of rounded garden edging stones with small white and yellow flowers growing between them, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "20c619de-577d-447e-b711-ef1ddb5cd80c",
+      "grid_url": "https://www.midjourney.com/jobs/20c619de-577d-447e-b711-ef1ddb5cd80c?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "d56e6960-1414-49f7-bb35-6ab89a1ee4be",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:39:50.441Z",
+      "grid_done_at": "2026-10-23T01:40:08.445Z",
+      "upscale_clicked_at": "2026-10-23T01:40:19.072Z",
+      "downloaded_at": "2026-10-23T01:41:31.069Z",
+      "pick_reason": "plump rounded stones with oversized white and yellow flowers between them, whole row in frame"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "a2553fb288b48c9c4c23308ede168b8b5e614c063fb03049adcd8b252b95a992",
+      "bytes": 2697320,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/d56e6960-1414-49f7-bb35-6ab89a1ee4be/0_0.png"
+    }
+  }
+}

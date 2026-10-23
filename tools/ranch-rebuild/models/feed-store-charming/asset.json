@@ -1,0 +1,395 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/feed-store-charming",
+ "name": "feed-store-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "where feed and rations are kept",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "c428bb24-106d-4d48-a038-cf19559e2967",
+    "grid_url": "https://www.midjourney.com/jobs/c428bb24-106d-4d48-a038-cf19559e2967?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "70141f00-20d6-4585-8077-7d9e40bb5e2d",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:08:34.598Z",
+    "grid_done_at": "2026-10-23T00:08:52.604Z",
+    "upscale_clicked_at": "2026-10-23T00:09:02.469Z",
+    "downloaded_at": "2026-10-23T00:10:14.140Z",
+    "pick_reason": "crooked chubby shed with sign above the plank door, sacks and scoop by the door, stone foundation, whole in frame"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "e717262d-bce8-41c1-ac82-527ed4df2d24",
+    "grid_url": "https://www.midjourney.com/jobs/e717262d-bce8-41c1-ac82-527ed4df2d24?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "42fa6433-5bed-4d71-bfa8-6f83f57b7e14",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:10:23.626Z",
+    "grid_done_at": "2026-10-23T00:10:41.632Z",
+    "upscale_clicked_at": "2026-10-23T00:10:52.646Z",
+    "downloaded_at": "2026-10-23T00:12:16.591Z",
+    "pick_reason": "front with sign and door, three-quarter side, plain back; one crooked shed, well separated"
+   }
+  },
+  "files": {
+   "hero.png": "d4f2d639760848762ce192343f6d39a0c49e3d6cdd8d27c2743129d094bc3b37",
+   "turnaround.png": "e4dcd552076f1e384bc4b400e95e40cfb066a616a18563684762e76bb6d05b00",
+   "view_front.png": "0cf3f97877b14886e7a0c9f31d1b6914d67e9c4d5cee0cc757759a588f8b8929",
+   "view_side.png": "d18417d92ab839fd7a8a70c6b2bc9cfd90a21113584bf84e25de5657d95b4a9e",
+   "view_back.png": "69187531e5f062ddef5082b4f618cfd2ed57e2a09d28e5c1f85b437c1150f864"
+  },
+  "folder": "tools/ranch-rebuild/mj/feed-store-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/feed-store-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build from the normal builder: toy warp (bulge, flare, lean, tilted ridge), bell roof of single shakes, vertical planks, windows, curled ridge log, ridge roll, three sacks. Hero (MJ dir) 0.734, harness hero 0.695.",
+    "mean_iou": 0.784
+   },
+   {
+    "round": 2,
+    "change": "Swept proportions and the MJ camera: depth 2.0, eaves 2.1, rise 1.35, eave overhang 0.45; MJ direction set to 9 degrees up. Hero (MJ dir) 0.83, harness hero 0.732; sheet scores fell (its roof is a spire).",
+    "mean_iou": 0.703
+   },
+   {
+    "round": 3,
+    "change": "Long thin shakes (11 per course), bigger sign, greyer burlap. Hero (MJ dir) 0.827.",
+    "mean_iou": 0.703
+   },
+   {
+    "round": 4,
+    "change": "Bigger ridge roll, flared ridge ends, darker teal and scoop, taller sacks. The ends curled too high: hero (MJ dir) 0.794.",
+    "mean_iou": 0.724
+   },
+   {
+    "round": 5,
+    "change": "Ridge ends curl lower, ridge roll raised, ragged shakes (random drop, skew, lift). Hero (MJ dir) 0.816.",
+    "mean_iou": 0.708
+   },
+   {
+    "round": 6,
+    "change": "Sign moved inside the gable so FEED reads, slumpier tied sacks, pinker planks. Final render 768 px, 48 samples: front 0.697, side 0.712, harness hero 0.727, hero (MJ dir) 0.815.",
+    "mean_iou": 0.704
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/feed-store/build.py (and run.sh, hero_iou.py; hero_check.py from family-home-charming) and kept its structure: the same 5 construction states from one STATE switch, origin at the footprint centre, door gable facing -Y, ridge along Y, and the same material names and roles. New material: Glass_Window (window panes); Timber_Ink is now teal paint for the FEED letters."
+   ],
+   [
+    "Toy warp",
+    "Everything is built straight from segmented vertical planks and posts, then warp() bends every vertex: walls bulge out about 5.5% at mid height and flare at the foot, the whole shed leans 3 cm per metre toward +X, and the roof is tipped so the front of the ridge sits higher than the back (the crooked roofline). Props are not warped."
+   ],
+   [
+    "Massing",
+    "2.3 x 2.0 m walls (W/D 1.15 vs 1.24 normal; overall bounds 3.64 x 3.66 m vs 3.15 x 3.11, both about square), lower 2.1 m eaves and a 1.35 m rise for chubbier proportions, 0.45 m eave and 0.28 m gable overhangs. The roof is a bell curve: steeper at the ridge, kicked out at the eaves."
+   ],
+   [
+    "Roof",
+    "Five staggered courses of 11 to 12 long, thick single shakes per slope in two teal tones, each with a ragged butt, a little skew and lift, over a dark-teal underboard; a lumpy teal ridge roll on top; a big pink ridge log that sags slightly and curls up into flared ends with pale end grain, the front one bigger."
+   ],
+   [
+    "Walls and details",
+    "Vertical rose planks (gable planks run up to the bell roof line), bowed chunky corner posts, tie beams with poking-out ends, knee braces, a 4-plank door with two ledges and a Z brace, a lintel log overhanging the jambs, two dark-paned windows with cross muntins and chunky sill and head on each eave wall, and a crooked wooden sign with big teal FEED letters nailed on the gable."
+   ],
+   [
+    "Props",
+    "Three plump tied burlap sacks left of the door, an oversized dark scoop leaning right of the door, a little spilled grain. Round lumpy olive footing stones all round."
+   ],
+   [
+    "Views",
+    "make_views.py writes views/: hero.png is the MJ hero with its ground band keyed out (the harness mask kept it), view_front.png is the sheet front, and the sheet's 'back' (actually the plain eave wall square-on) is used as view_side.png. The sheet's 'side' is a 3/4 view, so it is dropped; there is no back target. The sheet's ogee spire roof and arched door contradict the hero; the hero wins, so the sheet only guides the silhouette."
+   ],
+   [
+    "Scoring",
+    "hero_iou.py: harness hero camera vs views/hero.png. hero_check.py: same lens from the MJ hero's own direction (0.70, -0.70, 0.15), lower than the harness's."
+   ],
+   [
+    "Game",
+    "Triangles per state: planned 352, foundation 1300, frame 2492, roof 4198, complete 7496 (budget 9k). to_game.py feed-store-charming ran cleanly and installed into simulation-assets-charming/buildings/feed-store-*.{json,glb} with the intended roles (timber, roof, stone, cloth, fiber, food, metal, glass)."
+   ]
+  ],
+  "creative_additions": "Curled flared ridge-log ends with pale end grain, lumpy ridge roll, windows on both eave walls (the hero shows one side), chubby round-topped stakes in the planned stage."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   3.641500234603882,
+   3.655766487121582,
+   4.275209426879883
+  ],
+  "triangles": 7496,
+  "materials": [
+   "Plank_RoseDoor",
+   "Timber_Brown",
+   "Timber_Floor",
+   "Stone_Grey",
+   "Stone_Light",
+   "Plank_RoseGable",
+   "Roof_TealLight",
+   "Roof_TealDark",
+   "Roof_Teal",
+   "Rope_Tie",
+   "Cloth_Burlap",
+   "Metal_Scoop",
+   "Timber_Dark",
+   "Timber_Sign",
+   "Timber_Ink",
+   "Grain_Gold",
+   "Plank_Rose",
+   "Glass_Window"
+  ],
+  "parts": [
+   {
+    "name": "door",
+    "materials": [
+     "Plank_RoseDoor"
+    ]
+   },
+   {
+    "name": "door_ledges",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "floor",
+    "materials": [
+     "Timber_Floor"
+    ]
+   },
+   {
+    "name": "footing",
+    "materials": [
+     "Stone_Grey"
+    ]
+   },
+   {
+    "name": "footing_light",
+    "materials": [
+     "Stone_Light"
+    ]
+   },
+   {
+    "name": "frame",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "gables",
+    "materials": [
+     "Plank_RoseGable"
+    ]
+   },
+   {
+    "name": "lintel",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "ridge_log",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "ridge_log_ends",
+    "materials": [
+     "Timber_Floor"
+    ]
+   },
+   {
+    "name": "ridge_roll",
+    "materials": [
+     "Roof_TealLight"
+    ]
+   },
+   {
+    "name": "roof_edges",
+    "materials": [
+     "Roof_TealDark"
+    ]
+   },
+   {
+    "name": "roof_left",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "roof_left_light",
+    "materials": [
+     "Roof_TealLight"
+    ]
+   },
+   {
+    "name": "roof_right",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "roof_right_light",
+    "materials": [
+     "Roof_TealLight"
+    ]
+   },
+   {
+    "name": "sack_ties",
+    "materials": [
+     "Rope_Tie"
+    ]
+   },
+   {
+    "name": "sacks",
+    "materials": [
+     "Cloth_Burlap"
+    ]
+   },
+   {
+    "name": "scoop",
+    "materials": [
+     "Metal_Scoop"
+    ]
+   },
+   {
+    "name": "scoop_handle",
+    "materials": [
+     "Timber_Dark"
+    ]
+   },
+   {
+    "name": "sign",
+    "materials": [
+     "Timber_Sign"
+    ]
+   },
+   {
+    "name": "sign_letters",
+    "materials": [
+     "Timber_Ink"
+    ]
+   },
+   {
+    "name": "spilled_grain",
+    "materials": [
+     "Grain_Gold"
+    ]
+   },
+   {
+    "name": "walls",
+    "materials": [
+     "Plank_Rose"
+    ]
+   },
+   {
+    "name": "window_frames",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "window_glass",
+    "materials": [
+     "Glass_Window"
+    ]
+   },
+   {
+    "name": "window_muntins",
+    "materials": [
+     "Timber_Dark"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "complete",
+  "foundation",
+  "frame",
+  "planned",
+  "roof"
+ ],
+ "validation": {
+  "outline_iou": 0.704,
+  "hero_iou": 0.727,
+  "per_view": {
+   "front": 0.697,
+   "side": 0.712
+  },
+  "triangle_budget": 9000,
+  "within_budget": true,
+  "good": [
+   "Reads as the same feed store gone storybook: bulging rose walls, a crooked bell roof of chunky teal shakes, curled ridge-log ends, FEED sign, door with Z brace, windows, sacks and scoop.",
+   "Drop-in: same states, conventions, material names and roughly square overall footprint as the normal model.",
+   "Hero IoU from the MJ direction 0.815; harness hero 0.727 (normal model 0.730)."
+  ],
+  "off": [
+   "Harness hero IoU is 0.727: the harness camera is higher than the illustration's, so it sees much more roof.",
+   "Sheet IoUs are about 0.70: the sheet draws a much taller, narrower spire roof (front aspect 1.39 vs 1.18) and its 'back' eave view has a very tall roof slab; I followed the hero.",
+   "The hero's sculpted wood grain, sack folds and lumpy hand-made shingle edges are flat-shaded low-poly here; the sacks read a little like jars up close.",
+   "The hero has a second line 'STORE' on the sign; left out (too small to read in the tile)."
+  ]
+ },
+ "exports": {
+  "runtime": "feed-store-charming.glb",
+  "variants": {
+   "complete": "variants/complete.glb",
+   "foundation": "variants/foundation.glb",
+   "frame": "variants/frame.glb",
+   "planned": "variants/planned.glb",
+   "roof": "variants/roof.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/feed-store-planned.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/feed-store-foundation.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/feed-store-frame.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/feed-store-roof.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/feed-store-complete.json"
+   ]
+  }
+ },
+ "files": {
+  "feed-store-charming.glb": {
+   "sha256": "0ccd92c436ba990c1c893c8d05342f9610c2d01152bf8167dc1af168c1366f7c",
+   "bytes": 422580
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "0148c7fe3a77c156865fe8a619e54e310aa925d9",
+  "path": "tools/ranch-rebuild/models/feed-store-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

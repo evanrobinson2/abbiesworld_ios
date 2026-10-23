@@ -1,0 +1,33 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/borage (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same six objects and materials (Leaf_Green, Leaf_Pale, Stem_Green, Stem_Red, Petal_Blue, Flower_White), one material each, double-sided cards, flat colours, Z up, origin at the base on the ground, front -Y, height 0.41 m. No variants (plant)."],
+  ["Target", "Hero only (no turnaround for this asset). make_views.py keys the hero: the cast shadow is darkened cream (red above green) while every plant pixel has green above red, so the mask keeps only pixels that differ from the backdrop with G > R. hero_check.py is the normal model's front-on 15 deg camera, unchanged."],
+  ["Leaf mound", "The normal clump's 10 flat rosette cards plus 50 small dome leaves became a chubby mound of 18 big pillowy paddle leaves in two tiers (10 low, 8 upper), each rising steeply from the crown and arching over so the outer half drapes toward the viewer. New plump_leaf: 12 triangles, midrib puffed up, round shoulders, blunt tip, edges curled down. A small faceted core keeps it solid."],
+  ["Flowers", "15 small stars on red stalks became 9 OVERSIZED plump stars (about 1.9x the normal flower radius) on bouncy bowed stems, one stem each: broad shoulders and forward-cupped tips (20 triangles), a white eye cone, a short Stem_Red neck. Placed from the hero: top flower leaning left, a cluster spilling out to the right, small side-on and nodding ones, spread +-0.06 m in depth so the side view is round, not a flat card."],
+  ["Extras", "Seven small leaves up the stems and three round green buds on short spurs, as in the hero."],
+  ["Game readiness", "765 triangles (budget 1k; the normal is 993). 0.340 x 0.300 x 0.406 m (normal 0.368 x 0.327 x 0.410), width/depth 1.13 vs 1.125. to_game.py borage-charming installed simulations/regional-assets-charming/GF-249.glb and updated the charming manifest."]
+ ],
+ "good": [
+  "Hero IoU 0.714 at 768 px / 48 samples (0.733 before spreading the flowers in depth), against 0.657 for the normal model on its own hero.",
+  "Reads as the same borage (green mound, blue stars with white eyes) but toy-like: a round squat cushion of big soft leaves and a bouquet of chunky stars bouncing out of it.",
+  "Same footprint proportions, height, materials and roles as the normal one, so it swaps in place."
+ ],
+ "off": [
+  "The hero's leaves are smooth and velvety with soft hairs; flat-shaded 12-triangle paddles read as facetted, slightly cabbage-like up close.",
+  "The hero's stems are thick and fuzzy and carry more leaves among the flowers; there is less green between the stars here (orange in the overlay at mid-left).",
+  "The hero's stars have a dark anther tip on the white centre; left out (too small to read in the tile).",
+  "The hero has no visible red stalks; Stem_Red is kept (short muted neck under each star) to keep the normal model's material set."
+ ],
+ "rounds": [
+  {"round": 1, "change": "first charming reshape: tiered rosette + dome leaves, 9 big stars on own stems", "mean_iou": 0.613},
+  {"round": 2, "change": "stars x1.3 with broader petals, longer rosette, more stem leaves, rounder footprint", "mean_iou": 0.679},
+  {"round": 3, "change": "steeper rosette with more droop, wider leaf body, stars x1.45", "mean_iou": 0.710},
+  {"round": 4, "change": "fatter petals (notch 0.55), taller body leaves", "mean_iou": 0.725},
+  {"round": 5, "change": "mound rebuilt as two tiers of arching paddle leaves (the stacked-plate look was gone)", "mean_iou": 0.722},
+  {"round": 6, "change": "wider bottom tier, bigger stem leaves, darker greens", "mean_iou": 0.724},
+  {"round": 7, "change": "no right-side skew, right flowers moved out, stars x1.5, depth to 0.30 m; 768 px final 0.733", "mean_iou": 0.728},
+  {"round": 8, "change": "flowers spread +-0.06 m in depth so the side and back read round (IoU cost 0.02, kept); final 768 px / 48 samples", "mean_iou": 0.714}
+ ],
+ "moving_parts": "None; the game sways plants itself.",
+ "creative_additions": "Round green buds on spurs and a nodding star at the front left, for bounce."
+}

@@ -1,0 +1,234 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/marigold-charming",
+ "name": "marigold-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a pot marigold plant clump with bright orange and yellow daisy-like flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a pot marigold plant clump with bright orange and yellow daisy-like flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "2c39bbc2-93be-40a3-be32-4ee1688c37e0",
+    "grid_url": "https://www.midjourney.com/jobs/2c39bbc2-93be-40a3-be32-4ee1688c37e0?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "a9ab0519-61c0-4382-9063-9d5728afcdd8",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:43:38.764Z",
+    "grid_done_at": "2026-10-23T01:43:56.766Z",
+    "upscale_clicked_at": "2026-10-23T01:44:06.329Z",
+    "downloaded_at": "2026-10-23T01:45:19.319Z",
+    "pick_reason": "open plump orange daisy-like flowers on a leafy clump, whole plant with margin"
+   }
+  },
+  "files": {
+   "hero.png": "40dd2824fcb54b628a5f2b7e647f4325259856daac4f3cd33bcc2f79b5c8816d"
+  },
+  "folder": "tools/ranch-rebuild/mj/marigold-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/marigold-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build from the normal script: 7 flat daisies from the hero, spoon leaves, bowed thick stems, crown lean. 1,135 tris.",
+    "mean_iou": 0.65
+   },
+   {
+    "round": 2,
+    "change": "Blooms 30 % bigger, wider amber ring, 3-sided stems, longer and wider rosette and upright leaves, bigger core.",
+    "mean_iou": 0.721
+   },
+   {
+    "round": 3,
+    "change": "Bloom x positions fanned out x1.12, blooms a bit bigger, flatter rosette.",
+    "mean_iou": 0.737
+   },
+   {
+    "round": 4,
+    "change": "Camera calibrated (flat 12-22 deg; set 18). Longer, flatter rosette and wider fan: the bottom spread too far and the score fell.",
+    "mean_iou": 0.717
+   },
+   {
+    "round": 5,
+    "change": "Rosette back to shorter; upright leaves longer and splayed out (28-62 deg) to fill the mid height.",
+    "mean_iou": 0.744
+   },
+   {
+    "round": 6,
+    "change": "Blooms back down to the measured heights and smaller (x1.15), 13 outer petals, smaller amber ring and heart, deeper amber, more upright leaves.",
+    "mean_iou": 0.735
+   },
+   {
+    "round": 7,
+    "change": "Upright leaves fan mostly left and right (the hero's side leaves at mid height), shorter rosette.",
+    "mean_iou": 0.755
+   },
+   {
+    "round": 8,
+    "change": "Under-cone through the petal notches only: 1,242 to 1,060 tris, same silhouette; smooth shading on petals and leaves.",
+    "mean_iou": 0.754
+   },
+   {
+    "round": 9,
+    "change": "Tried a taller top bloom with a stem gap (0.725) and a seed sweep (0.717-0.728): reverted, seed 3 kept; X_SPREAD and upright-leaf length sweeps confirmed 1.10 and 0.40-0.56.",
+    "mean_iou": 0.754
+   },
+   {
+    "round": 10,
+    "change": "Final 768 px / 48 sample render and hero score; to_game.py marigold-charming.",
+    "mean_iou": 0.749
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied ../marigold/build.py, hero_check.py, make_views.py and run.sh and reshaped them: same six meshes and material names (Flower_Petal_Orange, Flower_Petal_Amber, Flower_Petal_Gold, Stem_Green, Leaf_Green, Leaf_Dark), same origin (base centre on the ground), front -Y, same 0.315 m height, footprint stretched to the normal model's 1.24 width/depth ratio (0.311 x 0.251 m against 0.306 x 0.246 m). No variants (plant group)."
+   ],
+   [
+    "Views",
+    "Hero only (no turnaround was made). make_views.py keys the cream backdrop and the grey-tan cast shadow, which in this hero falls to the lower LEFT (blue channel above 104, below row 1100 of the 2048 px hero), plus the brown contact shadow under the rosette (R > G + 18 below row 1540). Scored by hero_check.py from a matched front camera: yaw 0, 18 deg up (calibration was flat between 12 and 22 deg)."
+   ],
+   [
+    "Blooms",
+    "Seven oversized flat daisies instead of sixteen small pom-poms, placed from the hero: the biggest at the top, two lower ones turned square to the viewer. Each is a ring of 13 plump square-tipped orange petals cupped up at the tips, a raised ring of 10 shorter amber petals turned half a petal (the hero's yellow streaks), a domed deep-orange heart (Flower_Petal_Gold, now a deep orange, as the hero's centres) and an under-cone through the petal notches for thickness. 81 triangles each."
+   ],
+   [
+    "Stems",
+    "Seven thick bowed stems (3 sides, two segments) from an 8 cm crown, one leaf on each."
+   ],
+   [
+    "Foliage",
+    "Puffy spoon leaves (6 triangles, widest near the round tip, raised midrib) replace the narrow diamond cards: a low rosette of 26 broad leaves plus 20 fat upright leaves that fan mostly left and right to mid height, as in the hero, and a smaller dark lumpy core. Leaves and petals are smooth-shaded so they read soft and toy-like."
+   ],
+   [
+    "Charming tilt",
+    "The whole crown leans a little to +X (x += 0.06 z^2, base fixed), the blooms fan out wider (x positions x1.10) and each disc tips toward its side of the clump."
+   ],
+   [
+    "Game readiness",
+    "1,060 triangles (normal: 1,080; plant budget 1k, art director's 1.2k allowance for blooms), 6 meshes, one flat material each, double-sided. to_game.py marigold-charming installed it as simulations/regional-assets-charming/GF-250.glb."
+   ]
+  ],
+  "creative_additions": "The whole crown leans gently to one side and the two lowest blooms turn square to the viewer like faces in a picture book (no faces painted on), with oversized petals and puffy spoon leaves for the storybook-toy look."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.31119051575660706,
+   0.2509600818157196,
+   0.3149999976158142
+  ],
+  "triangles": 1060,
+  "materials": [
+   "Flower_Petal_Amber",
+   "Flower_Petal_Gold",
+   "Flower_Petal_Orange",
+   "Leaf_Dark",
+   "Leaf_Green",
+   "Stem_Green"
+  ],
+  "parts": [
+   {
+    "name": "blooms_amber",
+    "materials": [
+     "Flower_Petal_Amber"
+    ]
+   },
+   {
+    "name": "blooms_gold",
+    "materials": [
+     "Flower_Petal_Gold"
+    ]
+   },
+   {
+    "name": "blooms_orange",
+    "materials": [
+     "Flower_Petal_Orange"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_green",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "stems",
+    "materials": [
+     "Stem_Green"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.749,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": false,
+  "good": [
+   "Hero silhouette IoU 0.749 at 768 px / 48 samples from the matched camera (best 384 px round 0.755).",
+   "Reads as the same marigold clump at a glance, but with fewer, much bigger, friendlier blooms and fat spoon leaves.",
+   "Fewer triangles than the normal model (1,060 vs 1,080) and the same material set, so it drops in for the normal one."
+  ],
+  "off": [
+   "The hero's petals are soft, rounded and layered with curled tips; mine are flat-shaded-looking square-tipped cards with clear notches, so up close the blooms read a little like paper pinwheels.",
+   "The hero's foliage fills up to the lower blooms all round; mine is fuller at the bottom and sides but thinner in the middle behind the lower blooms.",
+   "Raising the top bloom to show the hero's bare stem gap cost 0.03 IoU (it narrows the relative width), so the top bloom sits closer to the middle one than in the hero.",
+   "Flower_Petal_Gold keeps its name and role but is now a deep orange (the hero's bloom centres), not gold.",
+   "60 triangles over the 1k plant budget, within the 1.2k allowance used for the normal marigold."
+  ]
+ },
+ "exports": {
+  "runtime": "marigold-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-250.glb"
+   ]
+  }
+ },
+ "files": {
+  "marigold-charming.glb": {
+   "sha256": "532ac866e22df58149147d7f7659acc1e7e5e12d0a07b5210aa04a7093563010",
+   "bytes": 38620
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "778abaf436a2ebd1251579cd3039a384167ef384",
+  "path": "tools/ranch-rebuild/models/marigold-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

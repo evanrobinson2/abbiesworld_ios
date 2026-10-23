@@ -1,0 +1,36 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/hazel/ (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same plant, same conventions: Z up, metres, origin at the stem base on the ground, front -Y, no animation, no variants (tree/shrub group, plain GLB). Same material names and roles (Stem_Olive, Leaf_Light, Leaf_Dark, Fruit_Hazel, Fruit_Husk) plus two for new parts: Stem_Sage (the soft twisty trunk) and Leaf_Cloud (the plump cloud clumps). Footprint stays near round (1.73 x 1.55 m; the normal one is 1.45 x 1.42) and height 2.6 m."],
+  ["Views", "make_views.py now keys mj/hazel-charming. The hero's backdrop darkens towards the lower left, so below the litter line only the litter's span is kept. The turnaround sheet draws a different composition (a big swirly cloud mass low in the middle with open leafy stems above it), the opposite of the hero (dense round-leaf crown on top, two cloud clumps out to the sides on a branch and an S trunk). The hero wins: the three sheet views are dropped as targets; their IoU is reported for information only."],
+  ["Hero camera", "hero_check.py calibrated again: yaw 30 deg (best, as for the normal hazel), elevation 0 scored best and 8 next; the hero shows its ground litter from slightly above, so 4 deg is used. Features are laid out in the hero's picture plane (P['hero_yaw'] = 30) and turned to world, so the composition reads from that 3/4 view."],
+  ["Stems and trunk", "Six chubby, straight, smooth-shaded stems (3.4 cm to 2 cm radius, 5 sides) rise from the foot into the crown, with a few small coin leaves on short stalks along the bare part. A fat S-curved sage trunk (Catmull-Rom curve, 8.5 cm radius with a flared foot) swings out to the right and carries the right cloud clump; a thinner branch carries the left one."],
+  ["Crown", "A big crown leaning 8 deg towards the left (the storybook tilt): about 60 oversized round coin leaves (15-21 cm radius, 7-sided, cupped, notched where the stalk meets) on a leaning ellipsoid, plus a lower lobe of 20 leaves towards the trunk side, round a dark core blob that fills the gaps and gives depth. Two small leaves at each stem tip break the top outline."],
+  ["Cloud clumps", "Two plump clumps of five flattened, smooth icosphere blobs each (Leaf_Cloud), with raised spiral swirls (tapered 3-sided tubes lying on the blob surface) on the outward faces, as in the hero. The clumps sit slightly off the picture plane in opposite depths so the footprint stays round."],
+  ["Nuts, foot", "Three clusters of three fat caramel hazelnuts (6 cm radius, pointed, smooth) in pale five-point husk cups on a short stalk, hung at the crown surface on the hero side. A low tuft of soft blobs at the foot and eight fallen round leaves on the ground."],
+  ["Game readiness", "2,961 triangles (budget 3k), 7 meshes, one flat material each. to_game.py hazel-charming installs it as the charming twin of GF-158.glb."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.759 (normal hazel 0.769): the leaning column crown, two side cloud clumps, S trunk and foot tuft line up with the hero.",
+  "Still clearly the same hazel: multi-stem, round leaves, hazelnut clusters in husks, same materials; the charm comes from chubby smooth stems, oversized coin leaves, the lean, the swirly cloud clumps and the fat nuts.",
+  "Reads from every side (front, side and back renders) and stays under budget."
+ ],
+ "off": [
+  "The turnaround sheet's composition (cloud mass low and central, open leafy stems on top) is not followed; sheet IoU front 0.569, side 0.629, back 0.599, mean 0.599, for information only.",
+  "The hero's crown leaves are soft and lighter; mine are faceted 7-sided cups and the dark core shows through a little in places.",
+  "The hero's cloud clumps are cauliflower-like with many small lobes; at 3k triangles I used five blobs each, so they are rounder and simpler. Swirls are only on the outward (hero-side) faces.",
+  "The foot is a few soft blobs, not the hero's dense leafy mound; the hero's many little leaf sprigs along the stems are reduced to three per stem.",
+  "The hero IoU moves by about +-0.012 with the random seed alone; seed 11 was kept."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build from the hazel structure: 6 chubby stems, leaning round-leaf crown with dark core, S trunk, two swirly cloud clumps, nut clusters, foot tuft. 3.3k tris (over budget).", "mean_iou": 0.554, "hero_iou": 0.711},
+  {"round": 2, "change": "Leaves turned outward (less up), bigger clumps set off the picture plane for a round footprint, bigger nuts placed on the hero side, cheaper trunk/swirls/nuts to 3.0k; hero camera recalibrated (yaw 30, elev 4).", "mean_iou": 0.582, "hero_iou": 0.731},
+  {"round": 3, "change": "Crown moved left and leaning 8 deg, bigger clumps, wider tuft, trunk foot moved left, more light leaves, smooth-shaded leaves (looked streaky, reverted next round).", "mean_iou": 0.581, "hero_iou": 0.735},
+  {"round": 4, "change": "Flat leaves again and bigger (15-21 cm), lower-right lobe moved out, small sprig leaves on the stems, cheaper nuts.", "mean_iou": 0.601, "hero_iou": 0.742},
+  {"round": 5, "change": "Narrower crown, bigger clumps, wider tuft and litter (clumps overshot).", "mean_iou": 0.600, "hero_iou": 0.741},
+  {"round": 6, "change": "Clumps between rounds 4 and 5, stems and tuft moved left.", "mean_iou": 0.600, "hero_iou": 0.743},
+  {"round": 7, "change": "Seed sweep 1-13 (+-0.012 noise), kept seed 11.", "mean_iou": 0.598, "hero_iou": 0.758},
+  {"round": 8, "change": "Final 768 px / 48 sample render and score; to_game.py hazel-charming.", "mean_iou": 0.599, "hero_iou": 0.759}
+ ],
+ "moving_parts": "None. The game poses and sways plants itself; export_animations=False.",
+ "creative_additions": "Raised spiral swirls on the cloud clumps, a notch in every coin leaf where its stalk meets it, fat pointed nuts hung in threes, and fallen leaves round the foot."
+}

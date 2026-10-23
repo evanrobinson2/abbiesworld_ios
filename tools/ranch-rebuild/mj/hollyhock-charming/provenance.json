@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "hollyhock-charming",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-634.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "63a005d2-798f-4124-a4f4-95745eab8936",
+      "grid_url": "https://www.midjourney.com/jobs/63a005d2-798f-4124-a4f4-95745eab8936?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "e39e5864-fe0e-454e-b660-b1282b24ba21",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:47:26.098Z",
+      "grid_done_at": "2026-10-23T01:47:44.102Z",
+      "upscale_clicked_at": "2026-10-23T01:47:53.711Z",
+      "downloaded_at": "2026-10-23T01:49:05.494Z",
+      "pick_reason": "stacked plump pink cups on a spire with round base leaves, tip clear of the top edge"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "a2febf1db6a270ccef5fa0d2c100dc6dd816ccd7b5c63b39a0b2d7710d268520",
+      "bytes": 1884141,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/e39e5864-fe0e-454e-b660-b1282b24ba21/0_0.png"
+    }
+  }
+}

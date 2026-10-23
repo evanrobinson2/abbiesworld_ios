@@ -75,8 +75,7 @@ code{font-family:var(--mono);font-size:.86em}
    <div class="fact"><b>1.5 ms</b><span>sim budget per frame on iPhone</span></div>
   </div>
  </div>
- <div class="figure"><svg id="plan" viewBox="0 0 560 520" role="img" aria-label="Plan of the three-hex town: the high street bends through the Market, Mill and Hill quarters, with the square and clock tower in the middle and a river along one edge."></svg>
- <p class="cap">Proposed plan (generated sketch). The high street bends through three quarters; the square and clock tower sit where it widens; the river is the edge. Road stubs leave every side for the neighbouring tiles.</p></div>
+ <div class="figure" style="display:grid;gap:10px"><div class="eyebrow">Revised 23 Oct</div><h2>The town is founded by simulation, not drawn</h2><p>Land first (hills, two rivers that meet, the sea), then a founding party choosing the safe place that costs the least walking, then year-by-year growth. Streets, the bridge, mill, market and bell tower appear where the simulation measures the need.</p><p><a href="https://claude.ai/artifact/2dV9NZvL5piemoHvRLwiKg">Watch the founding</a></p></div>
 </header>
 
 <section>
@@ -262,7 +261,7 @@ const insideHex=(x,y,cx,cy,r)=>{const dx=Math.abs(x-cx),dy=Math.abs(y-cy);return
 
 /* 1 · Plan */
 (function(){
- const s=document.getElementById('plan'),R=130,w=Math.sqrt(3)*R;
+ const s=document.getElementById('plan');if(!s)return;const R=130,w=Math.sqrt(3)*R;
  const C=[[160,165,'Market','var(--q1)'],[160+w,165,'Mill','var(--q2)'],[160+w/2,165+1.5*R,'Hill','var(--q3)']];
  // river along the right
  el('path',{d:'M520 0 C 470 120, 540 240, 470 360 S 520 470, 500 520',fill:'none',stroke:'var(--water)','stroke-width':18,'stroke-linecap':'round',opacity:.8},s);

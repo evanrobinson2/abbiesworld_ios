@@ -1,0 +1,526 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/goat-charming",
+ "name": "goat-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "browses and climbs",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "ba9f9a72-4513-4292-a642-024e0e243fd6",
+    "grid_url": "https://www.midjourney.com/jobs/ba9f9a72-4513-4292-a642-024e0e243fd6?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "334d9da2-bc48-439c-892e-ef58aa4c37dc",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:41:33.481Z",
+    "grid_done_at": "2026-10-23T00:41:51.487Z",
+    "upscale_clicked_at": "2026-10-23T00:42:02.504Z",
+    "downloaded_at": "2026-10-23T00:43:14.108Z",
+    "pick_reason": "chibi goat nearest a side view with curved horns, beard and tan legs; variant 1 had a stamp mark in the corner"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "6449b41f-4947-4408-b9df-701570c80b03",
+    "grid_url": "https://www.midjourney.com/jobs/6449b41f-4947-4408-b9df-701570c80b03?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "3964c376-7902-4c0d-8584-01e15ab63c22",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:43:24.052Z",
+    "grid_done_at": "2026-10-23T00:43:42.054Z",
+    "upscale_clicked_at": "2026-10-23T00:43:52.439Z",
+    "downloaded_at": "2026-10-23T00:45:15.014Z",
+    "pick_reason": "front, side and back of one chibi goat, clearly spaced"
+   }
+  },
+  "files": {
+   "hero.png": "49d6a69e5d2f34af8de6d1236dc46d657c3f4319d1f1e8166ce4bb0647d46ee3",
+   "turnaround.png": "99492f1c9807440187d7ed05a4e20c73eabe5f5ffd277ead5d576411a867da94",
+   "view_front.png": "cb9a3718c8ec0bacfee7b2d8107ebe831d683bda4f4f2e8e4bf3199d928cc135",
+   "view_side.png": "fbccab1e1b782122b4a3506fa492e6d51fd7c997cbeb96af84b32cb8b15755a1",
+   "view_back.png": "fff6a00d7d547b26e072ef520973e37c90cd51807d7007e91952654c523b88c3"
+  },
+  "folder": "tools/ranch-rebuild/mj/goat-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/goat-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build from the normal goat's skeleton: round barrel, big round head with a short muzzle on a hidden stub neck, chunky horns, floppy ears, stubby legs, upright pom-pom tail, rosy cheeks, belly puffs, head cocked 9 deg and turned 14 deg. Hero view grid-searched (yaw 35, elev 4).",
+    "mean_iou": 0.739
+   },
+   {
+    "round": 2,
+    "change": "Head 20 % bigger and further forward, horns and ears moved with it, eyes and cheeks placed on the head surface, chunkier legs and hooves.",
+    "mean_iou": 0.756
+   },
+   {
+    "round": 3,
+    "change": "Eyes protrude so they show, ears hung steeper and the head turn cut to 10 deg to bring the width back towards the normal footprint (0.64 to 0.56 m).",
+    "mean_iou": 0.758
+   },
+   {
+    "round": 4,
+    "change": "Body, hind legs and tail moved back (longer barrel, as in the hero; footprint ratio 0.50). Same view 0.753; the view search moved to yaw 40, elev 3, where it scores 0.766.",
+    "mean_iou": 0.766
+   },
+   {
+    "round": 5,
+    "change": "Head another 8 % bigger, horns raised, ears further out and higher (the hero's ears dominate its silhouette).",
+    "mean_iou": 0.775
+   },
+   {
+    "round": 6,
+    "change": "Belly puffs turned into overlapping hanging locks (a shaggy skirt instead of a bead string), broader ears, leg cuffs trimmed to stay under budget. Final render at 768 px, 48 samples: 0.775.",
+    "mean_iou": 0.776
+   }
+  ],
+  "what_was_done": [
+   [
+    "Started from the normal goat",
+    "build.py is models/goat/build.py reshaped: the same 26 named parts plus two cheek plates, the same hierarchy and pivots (body > neck > head > nose/eyes/horns/ears > ear insides/beard; body > tail; body > leg upper > lower > hoof), the same POSE table and the same materials (Fur_Cream, Fur_Tan, Horn_Tan, Horn_Hoof, Skin_Pink, Skin_Eye) plus one new one, Skin_Blush, for the rosy cheeks. Z up, origin at the footprint centre on the ground, head to -Y."
+   ],
+   [
+    "Drawn in metres",
+    "The normal goat's shape numbers were sheet pixels; the charming sheet is dropped, so the numbers in P are plain metres as (y, z) side-view points."
+   ],
+   [
+    "Views",
+    "Only the hero is scored. The turnaround sheet draws a leggy kid with a long upright neck in the front and back views, and its middle view is a three-quarter view with the face turned to the camera, not a side elevation; the hero (a big round head right on a round fluffy body, short stubby legs) wins, so all three sheet views are dropped. make_views.py keys the hero again: the harness mask lost most of the cream fur against the cream backdrop and kept the warm cast shadow, which is as saturated as the tan hooves. The key uses a saturation test against the per-row backdrop, cuts everything below the belly except hand-measured leg boxes, and paints pixels the harness shadow test would drop tan, so harness.target_mask() recovers exactly the cleaned silhouette."
+   ],
+   [
+    "Hero score",
+    "hero_check.py renders the model from the hero's own direction (the goat's left side, 40 deg round towards the front, 3 deg up, from a yaw/elevation grid search) with the harness lens and scores its silhouette against views/hero.png. The standard harness front/side/back renders are in r/ for reference but have no target."
+   ],
+   [
+    "Poses",
+    "idle: standing, head up, cocked and turned as in the hero. feeding: a chibi with a short neck cannot reach the grass standing, so it kneels as real goats do: the front cannons fold back (knees on the ground), the body pitches nose-down about the hind hooves (solved by bisection, 9 deg), then the neck swings down until the muzzle is 3 cm off the ground with the face pitch held at 80 deg (neck 107 deg); ears droop, tail down. rest: front and hind legs fold under, the body drops until the belly is 4 cm off the ground, head up."
+   ],
+   [
+    "Game install",
+    "python tools/ranch-rebuild/to_game.py goat-charming wrote simulation-assets-charming/organics/goat-{idle,feeding,rest}.{json,glb} (and the sandbox2-runtime mirror). The nose is at +X as in the normal goat-idle.json and every material maps to the skin role."
+   ]
+  ],
+  "creative_additions": "Rosy cheek plates (new Skin_Blush material), a forelock puff between the horns, a fluffy crest along the back, fur cuffs at the knees, a beard with two soft locks, and the kneeling graze for feeding."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.6187196969985962,
+   1.1153334379196167,
+   1.232192039489746
+  ],
+  "triangles": 2954,
+  "materials": [
+   "Horn_Hoof",
+   "Fur_Tan",
+   "Fur_Cream",
+   "Skin_Blush",
+   "Skin_Pink",
+   "Skin_Eye",
+   "Horn_Tan"
+  ],
+  "parts": [
+   {
+    "name": "body",
+    "materials": [
+     "Fur_Cream"
+    ],
+    "pivot": [
+     0,
+     0.45,
+     -0.05
+    ],
+    "children": [
+     {
+      "name": "leg_front_L_upper",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       0.115,
+       -0.12,
+       0.215
+      ],
+      "children": [
+       {
+        "name": "leg_front_L_lower",
+        "materials": [
+         "Fur_Tan"
+        ],
+        "pivot": [
+         0,
+         -0.2,
+         0.007
+        ],
+        "children": [
+         {
+          "name": "leg_front_L_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0,
+           -0.07,
+           0.004
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_front_R_upper",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       -0.115,
+       -0.12,
+       0.215
+      ],
+      "children": [
+       {
+        "name": "leg_front_R_lower",
+        "materials": [
+         "Fur_Tan"
+        ],
+        "pivot": [
+         0,
+         -0.2,
+         0.007
+        ],
+        "children": [
+         {
+          "name": "leg_front_R_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0,
+           -0.07,
+           0.004
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_hind_L_upper",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       0.12,
+       -0.12,
+       -0.195
+      ],
+      "children": [
+       {
+        "name": "leg_hind_L_lower",
+        "materials": [
+         "Fur_Tan"
+        ],
+        "pivot": [
+         0,
+         -0.2,
+         -0.007
+        ],
+        "children": [
+         {
+          "name": "leg_hind_L_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0,
+           -0.07,
+           -0.004
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_hind_R_upper",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       -0.12,
+       -0.12,
+       -0.195
+      ],
+      "children": [
+       {
+        "name": "leg_hind_R_lower",
+        "materials": [
+         "Fur_Tan"
+        ],
+        "pivot": [
+         0,
+         -0.2,
+         -0.007
+        ],
+        "children": [
+         {
+          "name": "leg_hind_R_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0,
+           -0.07,
+           -0.004
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "neck",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       0,
+       0.09,
+       0.25
+      ],
+      "children": [
+       {
+        "name": "head",
+        "materials": [
+         "Fur_Cream"
+        ],
+        "pivot": [
+         0,
+         0.16,
+         0.08
+        ],
+        "children": [
+         {
+          "name": "beard",
+          "materials": [
+           "Fur_Cream"
+          ],
+          "pivot": [
+           0.0274,
+           -0.0691,
+           0.2186
+          ]
+         },
+         {
+          "name": "cheek_L",
+          "materials": [
+           "Skin_Blush"
+          ],
+          "pivot": [
+           0.2261,
+           0.0409,
+           0.1937
+          ]
+         },
+         {
+          "name": "cheek_R",
+          "materials": [
+           "Skin_Blush"
+          ],
+          "pivot": [
+           -0.1246,
+           0.0973,
+           0.2555
+          ]
+         },
+         {
+          "name": "ear_L",
+          "materials": [
+           "Fur_Cream"
+          ],
+          "pivot": [
+           0.2408,
+           0.2,
+           -0.012
+          ],
+          "children": [
+           {
+            "name": "ear_inner_L",
+            "materials": [
+             "Skin_Pink"
+            ]
+           }
+          ]
+         },
+         {
+          "name": "ear_R",
+          "materials": [
+           "Fur_Cream"
+          ],
+          "pivot": [
+           -0.158,
+           0.2642,
+           0.0583
+          ],
+          "children": [
+           {
+            "name": "ear_inner_R",
+            "materials": [
+             "Skin_Pink"
+            ]
+           }
+          ]
+         },
+         {
+          "name": "eye_L",
+          "materials": [
+           "Skin_Eye"
+          ],
+          "pivot": [
+           0.245,
+           0.1435,
+           0.165
+          ]
+         },
+         {
+          "name": "eye_R",
+          "materials": [
+           "Skin_Eye"
+          ],
+          "pivot": [
+           -0.1199,
+           0.2022,
+           0.2293
+          ]
+         },
+         {
+          "name": "horn_L",
+          "materials": [
+           "Horn_Tan"
+          ],
+          "pivot": [
+           0.1388,
+           0.3521,
+           -0.0296
+          ]
+         },
+         {
+          "name": "horn_R",
+          "materials": [
+           "Horn_Tan"
+          ],
+          "pivot": [
+           -0.0265,
+           0.3787,
+           -0.0004
+          ]
+         },
+         {
+          "name": "nose",
+          "materials": [
+           "Skin_Pink"
+          ],
+          "pivot": [
+           0.0662,
+           0.077,
+           0.3051
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "tail",
+      "materials": [
+       "Fur_Cream"
+      ],
+      "pivot": [
+       0,
+       0.135,
+       -0.35
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "states": [
+  "feeding",
+  "idle",
+  "rest"
+ ],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.775,
+  "per_view": {},
+  "triangle_budget": 3000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.775 (768 px, 48 samples): the big round head with its cock and turn, the chunky back-curling horns, the floppy ears, the round shaggy barrel, the pom-pom tail and the stubby legs in tan socks.",
+   "2954 triangles in every pose, under the 3k goat budget.",
+   "Reads as the same goat as the normal one (same colours, horns, beard, tan legs, upright tail), only as a plush toy."
+  ],
+  "off": [
+   "Footprint is wider than the normal goat: 0.60 x 1.12 m (width/length 0.54) against 0.45 x 0.98 (0.46). The big head and the floppy ears the hero needs set the width; in the game, scaled to the normal length, the charming goat is about 20 % wider and 12 % lower than the normal one.",
+   "The ears hang more steeply than the hero's (narrowed to hold the footprint), so they read as slimmer flaps from the side and the hero overlay misses some ear area.",
+   "The hero's fine fur strokes are modelled as large hanging locks round the belly and a few puffs on the back and legs; finer fur would not read at tile size.",
+   "The game's flat normals make the plush toy look faceted rather than smooth; the forms are kept round with more segments and little jitter.",
+   "In the feeding pose the head turn (baked into the head) makes the face graze slightly sideways."
+  ]
+ },
+ "exports": {
+  "runtime": "goat-charming.glb",
+  "variants": {
+   "feeding": "variants/feeding.glb",
+   "idle": "variants/idle.glb",
+   "rest": "variants/rest.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/goat-idle.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/goat-feeding.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/goat-rest.json"
+   ]
+  }
+ },
+ "files": {
+  "goat-charming.glb": {
+   "sha256": "e67b63075f9eb21d8aeee636ae3a1c179e96ef490d54b3ed0463dc85d7c4b1c2",
+   "bytes": 234876
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "0f27331ecf006d02a8a0ee6d046f41cdca7f07f6",
+  "path": "tools/ranch-rebuild/models/goat-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

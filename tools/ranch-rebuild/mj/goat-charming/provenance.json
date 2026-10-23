@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "goat-charming",
+  "group": "animal",
+  "replaces": "simulation-assets/organics/goat-{idle,feeding,rest}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "ba9f9a72-4513-4292-a642-024e0e243fd6",
+      "grid_url": "https://www.midjourney.com/jobs/ba9f9a72-4513-4292-a642-024e0e243fd6?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "334d9da2-bc48-439c-892e-ef58aa4c37dc",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:41:33.481Z",
+      "grid_done_at": "2026-10-23T00:41:51.487Z",
+      "upscale_clicked_at": "2026-10-23T00:42:02.504Z",
+      "downloaded_at": "2026-10-23T00:43:14.108Z",
+      "pick_reason": "chibi goat nearest a side view with curved horns, beard and tan legs; variant 1 had a stamp mark in the corner"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "6449b41f-4947-4408-b9df-701570c80b03",
+      "grid_url": "https://www.midjourney.com/jobs/6449b41f-4947-4408-b9df-701570c80b03?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "3964c376-7902-4c0d-8584-01e15ab63c22",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:43:24.052Z",
+      "grid_done_at": "2026-10-23T00:43:42.054Z",
+      "upscale_clicked_at": "2026-10-23T00:43:52.439Z",
+      "downloaded_at": "2026-10-23T00:45:15.014Z",
+      "pick_reason": "front, side and back of one chibi goat, clearly spaced"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "49d6a69e5d2f34af8de6d1236dc46d657c3f4319d1f1e8166ce4bb0647d46ee3",
+      "bytes": 4067826,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/334d9da2-bc48-439c-892e-ef58aa4c37dc/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "99492f1c9807440187d7ed05a4e20c73eabe5f5ffd277ead5d576411a867da94",
+      "bytes": 2940012,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/3964c376-7902-4c0d-8584-01e15ab63c22/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "cb9a3718c8ec0bacfee7b2d8107ebe831d683bda4f4f2e8e4bf3199d928cc135",
+      "bytes": 759668,
+      "pixels": [
+        594,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-charming [('front', 332, 926), ('side', 1033, 1877), ('back', 1991, 2571)]"
+    },
+    "view_side.png": {
+      "sha256": "fbccab1e1b782122b4a3506fa492e6d51fd7c997cbeb96af84b32cb8b15755a1",
+      "bytes": 960725,
+      "pixels": [
+        844,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-charming [('front', 332, 926), ('side', 1033, 1877), ('back', 1991, 2571)]"
+    },
+    "view_back.png": {
+      "sha256": "fff6a00d7d547b26e072ef520973e37c90cd51807d7007e91952654c523b88c3",
+      "bytes": 730875,
+      "pixels": [
+        580,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-charming [('front', 332, 926), ('side', 1033, 1877), ('back', 1991, 2571)]"
+    }
+  }
+}

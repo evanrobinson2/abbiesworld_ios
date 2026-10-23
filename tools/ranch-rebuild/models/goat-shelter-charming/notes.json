@@ -1,0 +1,85 @@
+{
+ "what_i_did": [
+  [
+   "Starting point",
+   "Copied build.py, make_views.py, hero_check.py and run.sh from models/goat-shelter and reshaped them. Same five states (planned, foundation, frame, roof, complete) from one STATE-grouped build.py, same origin (footprint centre on the ground), front gable with the doorway at -Y, same part names, same material names (no new ones; Plank_Teal is gone because the hero's ramp and deck are pink)."
+  ],
+  [
+   "Views",
+   "Only the hero is scored. The turnaround sheet drew a different shelter: a brown plank base under the whole house, a gabled porch canopy over a centred door, the ramp on the long side and no side platform. It is kept in mj/ for the roof pitch and wall taper only. views/hero.png is the mj hero keyed by hue (pink G/R < 0.80 or teal/blue-black B/R > 0.85), because the harness mask keeps the dark brown contact shadow under the stilts and the platform."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py renders from 55 deg off the front towards +X and 4 deg up (calibrated over a yaw/elevation grid on the round-1 model, then held fixed). The hero sees the front gable on the left and the +X long side with the platform on the right."
+  ],
+  [
+   "Massing",
+   "Walls 2.2 x 2.6 m (narrower and deeper than the normal 2.4 x 2.2, as the hero draws it), on 0.28 m round log stilts with the floor 0.74 m up (0.52 m normal). Plates at 2.58 m (1.72 m normal), a 55 deg roof (45 deg normal) with 0.22 m side eaves. Bounding box 4.15 x 4.80 m, X/Y 0.86 (the normal is 0.85), so it drops into the old footprint; to_game scales it x0.544."
+  ],
+  [
+   "Charming pass",
+   "One deform on the house parts: the walls bulge 7 % at mid height and flare 5 % at the foot, the ridge sags 0.12 m mid-length and rises 0.10 m at the front, and the top leans 0.10 m towards -X. Long planks, frame logs, the roof deck and the ridge are cut into rings first so they bend instead of skewing. Ramp, platform and hay rack stay straight but are jittered (crooked cleats, uneven deck planks)."
+  ],
+  [
+   "Details",
+   "Oversized arched doorway with a voussoir plank ring and chunky jambs, short planks following the arch. A round gable window with a cross and a little sill. Two big side windows with proud jambs, a mullion and crooked overhanging sills and heads; a small framed window in the back gable. Chubby teal shingle slabs with rounded drooping butts, thick rose bargeboards, a round ridge log poking 0.4 m out over the front gable. Platform 1.08 x 3.04 m along the +X side at 0.70 m, on log legs, with a front rail from the house corner, a back rail, a little ladder, and a slatted V hay rack heaped with hay."
+  ],
+  [
+   "Game readiness",
+   "Triangles: planned 192, foundation 456, frame 1,524, roof 3,504, complete 7,176 (budget 9k). 19 meshes, one flat Principled material each: Plank_Rose, Plank_RoseDark, Timber_Rose, Timber_Brown, Roof_Teal, Hay_Straw, Plank_Dark, Stone_Grey, Rope_String (planned only). Exported with export_animations=False. to_game.py goat-shelter-charming ran cleanly into simulation-assets-charming/buildings/."
+  ]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.873 from the hero's direction (the normal model scored 0.839 against its own hero).",
+  "Reads as the same object as the normal goat shelter: rose plank shed on stilts, teal shingle gable roof, doorway with ramp at the front gable, raised platform with hay beside it.",
+  "The storybook cues read at tile size: tall narrow body, steep sagging roof with a poking ridge log, bulging walls and logs, big arched door and windows.",
+  "The construction stages still read as a sequence; the frame stage shows the curved log posts and sagging ridge beam."
+ ],
+ "off": [
+  "The hero's walls bow more organically (hand-sculpted); mine bulge on a smooth formula and the planks stay straight between rings.",
+  "The hero's shingle slabs are rounder and overlap more loosely; mine are flat-shaded 6-sided slabs.",
+  "The hero's ramp and stilts reach lower in frame than mine (orange along the bottom of the overlay); a longer ramp widened the bbox and cost more than it gained (round 3).",
+  "The platform moved from in front of the gable (normal) to the +X side (hero), so the footprint layout differs from the normal model even though the X/Y ratio is the same.",
+  "The sheet views are not scored (different design), so there is no sheet IoU.",
+  "The hero camera was calibrated against this model, so the hero number is a guide, not ground truth."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build from the normal build.py: W 2.0, D 2.6, 58 deg roof, stilts 0.40, plates 2.42, ramp 1.35, platform on +X, deform pass (bulge 4.5 %, sag 0.20, rise 0.16, lean 0.10). Hero keyed by hue; camera calibrated to 55/4. Over budget at 9.4k from the bend cuts, trimmed to 7.0k by cutting only walls, frame, deck and ridge.",
+   "hero_iou": 0.853
+  },
+  {
+   "round": 2,
+   "change": "Stilts 0.50, ramp 1.6, deck 0.62, front rise 0.10 (the ridge log curled up like a horn).",
+   "hero_iou": 0.85
+  },
+  {
+   "round": 3,
+   "change": "Stilts 0.58, plates 2.58, ramp 1.85, sag 0.12, ridge log out 0.40, door, windows and gable window raised. The longer ramp widened the bbox and squeezed the house.",
+   "hero_iou": 0.834
+  },
+  {
+   "round": 4,
+   "change": "Ramp back to 1.6, W 2.2 (the hero's front gable reaches further left). Roof now too big all round.",
+   "hero_iou": 0.851
+  },
+  {
+   "round": 5,
+   "change": "Roof 55 deg, side eaves 0.22.",
+   "hero_iou": 0.872
+  },
+  {
+   "round": 6,
+   "change": "Bigger side windows and gable window, bulge 7 % and flare 5 %, floor pink instead of dark, mid-stilt tops and platform bearers moved off coplanar faces (black specks).",
+   "hero_iou": 0.875
+  },
+  {
+   "round": 7,
+   "change": "Final 768 px / 48 sample render and hero score; to_game.py goat-shelter-charming.",
+   "hero_iou": 0.873
+  }
+ ],
+ "moving_parts": "None (the game poses buildings itself). The construction stages are exported as variants/planned, foundation, frame, roof and complete.",
+ "creative_additions": "The ridge log poking out over the front gable, a voussoir ring round the arched door, a mullion in each side window, a little ladder up the front of the platform, spilled hay by the rack, stone pads under the stilts, and the platform outline staked along the +X side in the planned stage."
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "fern-charming",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/WW-046.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a woodland fern clump with arching feathery fronds, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "827ba14b-d648-434e-a1ce-c95cf54c9735",
+      "grid_url": "https://www.midjourney.com/jobs/827ba14b-d648-434e-a1ce-c95cf54c9735?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "48874e5e-d1e4-46b4-94bb-d94429cc88c0",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:53:05.620Z",
+      "grid_done_at": "2026-10-23T01:53:23.624Z",
+      "upscale_clicked_at": "2026-10-23T01:53:35.451Z",
+      "downloaded_at": "2026-10-23T01:54:46.055Z",
+      "pick_reason": "plump arching fronds in a compact clump, whole plant with margin"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "f8220770382b267a45fd1aa7bff5fa98c61dda853ab8414b5d1770a497e3e8f7",
+      "bytes": 2479480,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/48874e5e-d1e4-46b4-94bb-d94429cc88c0/0_0.png"
+    }
+  }
+}

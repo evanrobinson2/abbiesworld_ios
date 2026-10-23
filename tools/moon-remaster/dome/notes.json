@@ -1,0 +1,21 @@
+{
+  "asset": "dome",
+  "name": "The dome",
+  "what_i_did": "A glass hemisphere with 14 meridian ribs and 3 latitude rings and a crown vent, on a panelled drum with 16 seams, a dark plinth and the orange light band; a squared airlock with a dark door framed in orange light and a ramp with rails; service boxes round the back; a floor, planter and lamp column inside so the glass is not empty.",
+  "good": [
+    "The painting's read: grid dome, orange band, airlock and ramp.",
+    "Same footprint as the torus habitat, so the base plan is unchanged.",
+    "At night the glass and the band glow from inside (they count as windows)."
+  ],
+  "off": [
+    "Built from the painting without a turnaround sheet.",
+    "The painting's dome sits on a taller drum with a side annex; the annex is the habitat kit (MB7).",
+    "Interior is a hint only."
+  ],
+  "rounds": [
+    {
+      "n": 1,
+      "t": "First build, then an interior floor, planter and lamp column."
+    }
+  ]
+}

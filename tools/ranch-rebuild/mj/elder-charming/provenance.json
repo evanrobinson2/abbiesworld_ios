@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "elder-charming",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/GF-159.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "da572294-314a-4c8c-846e-92c9c9ee50e6",
+      "grid_url": "https://www.midjourney.com/jobs/da572294-314a-4c8c-846e-92c9c9ee50e6?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "44dee418-7eba-49cd-9011-a00249d228b3",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:10:12.995Z",
+      "grid_done_at": "2026-10-23T01:10:31.001Z",
+      "upscale_clicked_at": "2026-10-23T01:10:42.254Z",
+      "downloaded_at": "2026-10-23T01:11:54.532Z",
+      "pick_reason": "arching branches with creamy umbels and dark leaflets over plump clumps, whole shrub with margin"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "5435b03d-3d25-442c-96ff-b3e26e12a482",
+      "grid_url": "https://www.midjourney.com/jobs/5435b03d-3d25-442c-96ff-b3e26e12a482?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "2ea86bf9-52ca-4245-891f-e5f4e40c838a",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:12:04.481Z",
+      "grid_done_at": "2026-10-23T01:12:22.487Z",
+      "upscale_clicked_at": "2026-10-23T01:12:32.869Z",
+      "downloaded_at": "2026-10-23T01:13:53.527Z",
+      "pick_reason": "three consistent elders at one scale with umbels and swirly base clumps, separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "75c0a041090cd136292138978ba3d5bb5da76f5d6b6e44c0390d26150391825b",
+      "bytes": 2805490,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/44dee418-7eba-49cd-9011-a00249d228b3/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "d75bd5a138b65746ba5acba94cab286dba131c8799e27d51af90a396c42c0e99",
+      "bytes": 4442922,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/2ea86bf9-52ca-4245-891f-e5f4e40c838a/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "bcd89dbc3db867328f03ea0fbc79e1369a24325ee41fa93806ae3d45c6656068",
+      "bytes": 1631046,
+      "pixels": [
+        1036,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/elder-charming [('front', 148, 1184), ('side', 1184, 1756), ('back', 1756, 2736)]"
+    },
+    "view_side.png": {
+      "sha256": "bb8ee35aa22af2784360e015c5810dbbdbca036cd720f1833e71f5980c05acaf",
+      "bytes": 1112469,
+      "pixels": [
+        572,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/elder-charming [('front', 148, 1184), ('side', 1184, 1756), ('back', 1756, 2736)]"
+    },
+    "view_back.png": {
+      "sha256": "0eef255d864ac04015a4bec4b94a74e5aa013c4aeb67c785bb216a70ac6c8736",
+      "bytes": 1449639,
+      "pixels": [
+        980,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/elder-charming [('front', 148, 1184), ('side', 1184, 1756), ('back', 1756, 2736)]"
+    }
+  }
+}

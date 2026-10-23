@@ -1,0 +1,259 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/hay-rack-charming",
+ "name": "hay-rack-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "animals eat from it; fill level changes",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, chunky rounded toy-like proportions, bulging and plump",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, chunky rounded toy-like proportions, bulging and plump, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "9e299277-b403-4aa9-964f-6a7695b7c2d0",
+    "grid_url": "https://www.midjourney.com/jobs/9e299277-b403-4aa9-964f-6a7695b7c2d0?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "50f52475-396c-47a5-aa90-70e44fe66621",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:28:16.589Z",
+    "grid_done_at": "2026-10-23T01:28:34.594Z",
+    "upscale_clicked_at": "2026-10-23T01:28:44.387Z",
+    "downloaded_at": "2026-10-23T01:29:58.300Z",
+    "pick_reason": "plump V-slatted rack on four legs heaped with hay, clearest V slats"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, chunky rounded toy-like proportions, bulging and plump, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "8a7a6b38-1af1-4f32-89c8-e97cea1bcec5",
+    "grid_url": "https://www.midjourney.com/jobs/8a7a6b38-1af1-4f32-89c8-e97cea1bcec5?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "5687b627-68b0-45a6-8ca8-16e6f52bf6d8",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:30:07.724Z",
+    "grid_done_at": "2026-10-23T01:30:25.729Z",
+    "upscale_clicked_at": "2026-10-23T01:30:35.618Z",
+    "downloaded_at": "2026-10-23T01:31:55.779Z",
+    "pick_reason": "front, three-quarter and end view of one slatted rack with hay, evenly spaced"
+   }
+  },
+  "files": {
+   "hero.png": "a9c98af36bacb792cde4d9bb1145c94e4e1ee3c418ef3240e1c28beabe78252b",
+   "turnaround.png": "1290394995937718e2a460ef3972f8e653ee8160b358158d1b42bf4f8c102733",
+   "view_front.png": "44041f6488b6d1dcabe29dfea96ef6c278caa2c5ed7cbf31bc2597c03a32b3ef",
+   "view_side.png": "f98e39d075f9764fb52ec3944e78c4ca9e9f01899679cf88bfcbcfcfe044acf4",
+   "view_back.png": "9b4c665a1588a7d92735ca428d89ef84716859747b70ec60468563e57a0e97a0"
+  },
+  "folder": "tools/ranch-rebuild/mj/hay-rack-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/hay-rack-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build from the normal build.py: box crib with flared walls, rims, posts, caps, splayed legs, 5/3 slats in \\ / pairs, sphere-mapped hay pillow with 26 tufts. Camera calibrated to -48/16.",
+    "mean_iou": 0.542,
+    "hero_iou": 0.78
+   },
+   {
+    "round": 2,
+    "change": "Rims, posts, legs and slats made much fatter (6/4 slats), legs shorter splay, hay lower and wider, tufts flattened outward over the rim.",
+    "mean_iou": null,
+    "hero_iou": 0.838
+   },
+   {
+    "round": 3,
+    "change": "Taller walls and darker timber/hay colours to the hero's tone.",
+    "mean_iou": null,
+    "hero_iou": 0.847
+   },
+   {
+    "round": 4,
+    "change": "Crib lowered (rims 0.85 / 0.34 m), hay to 1.10 m; camera recalibrated to -50/16.",
+    "mean_iou": 0.614,
+    "hero_iou": 0.869
+   },
+   {
+    "round": 5,
+    "change": "Beams turned into cheap rounded logs (bevel only along the length) to get under 2k triangles; 7/5 wider slats; less hay bulge.",
+    "mean_iou": 0.614,
+    "hero_iou": 0.882
+   },
+   {
+    "round": 6,
+    "change": "Varied slat lean instead of a WWW zigzag, fuller hay cushion, 10 tufts, more lean on the crib; hay kept inside the slats, thinner streaks, rounder dome.",
+    "mean_iou": 0.627,
+    "hero_iou": 0.869
+   },
+   {
+    "round": 7,
+    "change": "Hay height tried at 1.17 m (0.865) and settled at 1.12 m; partial raised to 0.84 m so it reads; thinner twine bands on the carried sheaf.",
+    "mean_iou": 0.619,
+    "hero_iou": 0.867
+   },
+   {
+    "round": 8,
+    "change": "Final 768 px / 48 samples: slats narrowed to 6/4 at 0.105 m so they read as separate boards with gaps like the hero (IoU cost 0.003, worth it).",
+    "mean_iou": 0.611,
+    "hero_iou": 0.862
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/hay-rack (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same states (full, partial, empty, carried), same origin (footprint centre on the ground), long side at the front (-Y), same material names and roles (Timber_Pine, Hay_Gold, Hay_Light) and object names (frame, slats, hay, straw_gold, straw_light). Footprint 1.37 x 1.06 m against the normal 1.36 x 1.06 m, so it drops in at the same width/depth ratio."
+   ],
+   [
+    "Views",
+    "The hero wins. It drew a chubby box crib, not the normal rack's V, so the V survives as walls that flare out to the top. views/hero.png is the MJ hero keyed on B/G < 0.60; the mask also kept the warm cast shadow under the crib, so below the lower rim only hand-traced leg polygons are kept (the potting-bench method). The sheet's left cut (a straight-on long side) is scored as views/view_front.png for reference only: the sheet's crib is taller and boxier, with straight walls and straight legs. Its 3/4 middle view and the second long side are dropped."
+   ],
+   [
+    "Hero camera",
+    "The charming hero sees the -X end on the left and the long front on the right, so hero_check.py sits off the front-left corner: 50 deg off the front towards -X, 16 deg up, orthographic (calibrated over a yaw/elevation grid)."
+   ],
+   [
+    "Crib",
+    "Timber_Pine. A fat top rim (0.15 x 0.16 m logs) and a fat lower rim (0.14 m), each four beams crossing at the corners with log ends 8 cm past each other, long beams a hair above the end beams like notched logs. Logs are rounded only along their length (two bevel segments on the four long edges, flat-cut ends) to stay in budget. Corner posts (0.13 m) with knobbly rotated caps, chunky slats (6 per long wall, 4 per end, 0.105 m) leaning in a mix of directions, three floor boards on the lower rim, and four stubby 0.14 m legs splayed out under the corners."
+   ],
+   [
+    "Charming",
+    "Everything is fatter and rounder than the normal rack (rims 2x the normal rail section, legs 1.6x), the top rim sits 3 cm off the lower one so the whole crib leans a little, slats wobble a couple of degrees each, and caps are set askew."
+   ],
+   [
+    "Hay",
+    "Hay_Gold pillow: a squashed sphere mapped into the flared crib (just inside the slats) with a rounded cushion dome over the rim, lumpy, then 10 fat tufts (wide 2-tri cards, mostly lying outward over the rim) and 34 thin flat Hay_Light streaks lying on the dome for the hero's combed straw. A few tufts poke out between the slats."
+   ],
+   [
+    "Variants",
+    "full = the hero pillow (also hay-rack-charming.glb), dome top 1.12 m. partial = a lower pillow ending just under the rim (0.84 m) with fewer tufts. empty = the bare crib with 14 flat strands on the floor boards and 5 caught in the slats. carried = a plump waisted sheaf (0.5 x 0.34 x 0.3 m body, straw bursting from both ends) cinched by two twine bands, resting on the ground at the origin. The bands are a new material, Rope_Twine (fiber role), used only there."
+   ],
+   [
+    "Game",
+    "Flat colours, one material per object, no animation (export_animations=False). Triangles: full 1540, partial 1458, empty 1194, carried 440 (budget 2k)."
+   ]
+  ],
+  "creative_additions": "Knobbly askew corner caps, notched log ends, the crib's gentle lean, and twine bands on the carried sheaf."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.3706763982772827,
+   1.0565917491912842,
+   1.2018609046936035
+  ],
+  "triangles": 1540,
+  "materials": [
+   "Timber_Pine",
+   "Hay_Gold",
+   "Hay_Light"
+  ],
+  "parts": [
+   {
+    "name": "frame",
+    "materials": [
+     "Timber_Pine"
+    ]
+   },
+   {
+    "name": "hay",
+    "materials": [
+     "Hay_Gold"
+    ]
+   },
+   {
+    "name": "slats",
+    "materials": [
+     "Timber_Pine"
+    ]
+   },
+   {
+    "name": "straw_gold",
+    "materials": [
+     "Hay_Gold"
+    ]
+   },
+   {
+    "name": "straw_light",
+    "materials": [
+     "Hay_Light"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "carried",
+  "empty",
+  "full",
+  "partial"
+ ],
+ "validation": {
+  "outline_iou": 0.611,
+  "hero_iou": 0.862,
+  "per_view": {
+   "front": 0.611
+  },
+  "triangle_budget": 2000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.862 at 768 px / 48 samples from the calibrated hero camera (best during the rounds 0.882 at 384 px).",
+   "Reads small as a chunky toy crib with a gold cushion: fat double rims with log ends, corner caps and stubby splayed legs carry the silhouette.",
+   "Same footprint ratio as the normal rack, so the game's rescale keeps it in place; the fill levels read from above."
+  ],
+  "off": [
+   "The hero crib is nearly square in plan (its two visible faces are about equal); this one keeps the normal rack's 1.3:1 footprint for the game, so the hero's left end comes out narrower.",
+   "The hero's slats are mostly upright with a few diagonals; here they lean in a varied mix and the gaps read darker, with less hay showing through them.",
+   "The hero's hay is a dense combed mass; within 2k triangles it is a faceted dome with tufts and flat streaks, spikier up close.",
+   "Sheet front view scores 0.611 (reference only): the sheet drew a taller, straight-walled crib.",
+   "No wood grain or painted log rings: flat colours only, per the game rules."
+  ]
+ },
+ "exports": {
+  "runtime": "hay-rack-charming.glb",
+  "variants": {
+   "carried": "variants/carried.glb",
+   "empty": "variants/empty.glb",
+   "full": "variants/full.glb",
+   "partial": "variants/partial.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/supplies/hay-full.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/supplies/hay-partial.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/supplies/hay-empty.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/supplies/hay-carried.json"
+   ]
+  }
+ },
+ "files": {
+  "hay-rack-charming.glb": {
+   "sha256": "1f413eb14ad1c4ff4cb6a92fcfd12918a459e841dc31086dc60bbc2bbafed9b3",
+   "bytes": 86416
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "31b0f72543d7987e07486f6820d81f77ffa890a2",
+  "path": "tools/ranch-rebuild/models/hay-rack-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

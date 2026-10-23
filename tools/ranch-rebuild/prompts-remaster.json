@@ -1,0 +1,29 @@
+[
+ {
+  "name": "ground-cover",
+  "item": "R1",
+  "prompt": "game asset sheet of ranch ground cover pieces: six soft rounded grass tufts of different sizes with round-tipped blades in muted sage meadow green, a low clover patch with small white flower heads, a wildflower clump with tiny yellow and lilac flowers, a soft mossy path edge strip with a few pebbles, evenly spaced in a neat row, same scale, all pieces fully visible, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text --ar 16:9"
+ },
+ {
+  "name": "kitchen-garden",
+  "item": "R2",
+  "prompt": "game asset sheet for a kitchen garden: a raised timber vegetable bed with mounded dark soil rows, a wooden stake with garden twine, a small tin watering can, and three growth stages of a vegetable crop (tiny sprout, leafy young plant, ripe plant with golden produce), plus a thirsty version with drooping brown leaves, evenly spaced in a neat row, same scale, all pieces fully visible, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text --ar 16:9"
+ },
+ {
+  "name": "goat-house-open",
+  "item": "R3",
+  "turnaround": true,
+  "prompt": "a small cozy goat house with three timber plank walls and one fully open side, terracotta red walls, a teal shingled roof cap, a wooden ramp leading up to a flat climbing deck on the roof, a straw floor inside, a wooden hay rack on the inside wall and a small bell on the gate, sized for two goats, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text, centered, full object visible --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small cozy goat house with three timber plank walls and one fully open side, terracotta red walls, a teal shingled roof cap, a wooden ramp leading up to a flat climbing deck on the roof, a straw floor inside, a wooden hay rack on the inside wall and a small bell on the gate, sized for two goats, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text, centered, full object visible --ar 16:9"
+ },
+ {
+  "name": "lamp-kit",
+  "item": "R4",
+  "prompt": "game asset sheet of four ranch lamps in daylight: a black iron shepherd's crook post with a hanging glass lantern, a glass lantern mounted on top of a wooden fence post, a small iron porch wall lamp, a strand of round string lights hung between two wooden poles; black iron, warm amber glass, evenly spaced in a neat row, same scale, all pieces fully visible, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text --ar 16:9"
+ },
+ {
+  "name": "lamp-kit-lit",
+  "item": "R4",
+  "prompt": "game asset sheet of four ranch lamps lit at dusk, glowing warm amber glass: a black iron shepherd's crook post with a hanging glass lantern, a glass lantern mounted on top of a wooden fence post, a small iron porch wall lamp, a strand of round string lights hung between two wooden poles, soft warm glow, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, plain deep blue dusk background, evenly spaced in a neat row, same scale, no text --ar 16:9"
+ }
+]

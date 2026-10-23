@@ -22435,5 +22435,98 @@
       "runtime": "unexamined"
     },
     "next": "Trace upkeep_kill_unit and city_reduce_size, including size-one destruction and script callbacks. Food-update branches are source-verified; helper outcomes, active rulesets and runtime remain unexamined."
+  },
+  "starvationStudy": {
+    "sources": [
+      {
+        "path": "server/cityturn.c",
+        "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/cityturn.c",
+        "blobSha": "efdf8ff5601c88f18eab4bf265ea5db86408ac78",
+        "sha256": "e6e99bdd7d208d281faba2bc6a193beb346ffc68b0ec5aa0ec8a305a134ff6e1"
+      },
+      {
+        "path": "server/ruleset.c",
+        "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/ruleset.c",
+        "blobSha": "f77a0422901b4ddb58daa01f138a27b5d22a031c",
+        "sha256": "d9c07aa45479df699cc02fa2403ff5c257250d9c58a84788e2f1383db2a79f90"
+      },
+      {
+        "path": "data/classic/cities.ruleset",
+        "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/data/classic/cities.ruleset",
+        "blobSha": "86e0a883b812884da1ecb4f9ed276aa0eaa4b1bd",
+        "sha256": "95026301ad0a937ff7d30b9207c9cba7bd54f08000926380f6de68db47d3f48a"
+      }
+    ],
+    "findings": [
+      {
+        "domain": "simulation",
+        "title": "Upkeep failure can protect a unit from removal",
+        "finding": "Without an eligible AAPC_UNIT_UPKEEP action auto performer, upkeep_kill_unit returns false before any forced wipe. Otherwise it executes upkeep actions, optionally wipes a surviving unit, and returns whether the original unit ID is no longer alive. Thus the caller cannot assume every food-upkeep unit is destroyed.",
+        "basis": "Original pinned source inspection; not decompilation or gameplay observation",
+        "evidence": {
+          "path": "server/cityturn.c",
+          "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/cityturn.c#L687-L714",
+          "blobSha": "efdf8ff5601c88f18eab4bf265ea5db86408ac78",
+          "sha256": "e6e99bdd7d208d281faba2bc6a193beb346ffc68b0ec5aa0ec8a305a134ff6e1",
+          "lines": [
+            687,
+            714
+          ]
+        }
+      },
+      {
+        "domain": "simulation",
+        "title": "Population loss repairs assignments and guards script-driven destruction",
+        "finding": "Zero loss returns true. Loss at least equal to city size emits city_destroyed, checks whether the city still exists before removing it, then returns false. A surviving city loses size, updates borders, caps food to its new capacity, removes specialists before workers, refreshes citizens and worker allocation, and refreshes trade partners. If a reason is supplied, city_size_change is emitted and the return value checks whether scripts left the city alive.",
+        "basis": "Original pinned source inspection; not decompilation or gameplay observation",
+        "evidence": {
+          "path": "server/cityturn.c",
+          "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/cityturn.c#L763-L852",
+          "blobSha": "efdf8ff5601c88f18eab4bf265ea5db86408ac78",
+          "sha256": "e6e99bdd7d208d281faba2bc6a193beb346ffc68b0ec5aa0ec8a305a134ff6e1",
+          "lines": [
+            763,
+            852
+          ]
+        }
+      },
+      {
+        "domain": "systems",
+        "title": "Classic starvation protects evacuation units",
+        "finding": "The pinned classic cities ruleset protects the EvacuateFirst unit-type flag from food-upkeep removal, provides no food action list, and enables food_wipe. The ruleset loader maps this configuration to the food-specific upkeep auto performer and the engine wipe setting. In conjunction with the helper early return, protection is checked before forced wiping. Shield upkeep uses a different policy: three ordered actions and no final wipe. These are classic configuration and source branches, not observed play or a rule for every ruleset.",
+        "basis": "pinned classic configuration and original source inspection; runtime unobserved",
+        "evidence": {
+          "path": "data/classic/cities.ruleset",
+          "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/data/classic/cities.ruleset#L117-L138",
+          "blobSha": "86e0a883b812884da1ecb4f9ed276aa0eaa4b1bd",
+          "sha256": "95026301ad0a937ff7d30b9207c9cba7bd54f08000926380f6de68db47d3f48a",
+          "lines": [
+            117,
+            138
+          ]
+        }
+      }
+    ],
+    "loaderEvidenceLines": [
+      5982,
+      5998,
+      6153,
+      6171
+    ],
+    "coverage": {
+      "helperBranches": "verified in pinned source",
+      "classicPolicy": "verified in pinned configuration",
+      "autoPerformerSelection": "partial",
+      "dependentObjectCleanup": "unexamined",
+      "runtime": "unexamined"
+    },
+    "next": "Trace auto-performer selection and EvacuateFirst unit declarations, then close the static shortage subsystem coverage matrix. Runtime, action execution and remove_city dependent-object cleanup remain unverified.",
+    "protectedUnitReachability": {
+      "method": "Pinned classic unit declarations; static inspection only",
+      "source": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/data/classic/units.ruleset#L2478-L2547",
+      "sha256": "3ac6fed02dc964f31a0676393d81b524fb9f1147dd2d72cdc729e11c993b2ac0",
+      "finding": "The two classic unit declarations carrying EvacuateFirst are Leader and Barbarian Leader. Both also declare NoHome and uk_food=0. Therefore the protected-unit helper branch does not by itself demonstrate a reachable classic famine scenario for these units: city_populate filters for positive actual food upkeep. Effects and alternate rulesets require further tracing.",
+      "status": "staged research; runtime unexamined"
+    }
   }
 }

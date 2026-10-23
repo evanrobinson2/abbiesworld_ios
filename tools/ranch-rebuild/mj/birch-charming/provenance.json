@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "birch-charming",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/WW-139.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "053b5bc8-22c6-4ec0-a819-73d8cc8e0af9",
+      "grid_url": "https://www.midjourney.com/jobs/053b5bc8-22c6-4ec0-a819-73d8cc8e0af9?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "e8ddcd70-37fd-4563-a671-fa4b85fb05b2",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:53:29.469Z",
+      "grid_done_at": "2026-10-23T00:53:47.472Z",
+      "upscale_clicked_at": "2026-10-23T00:53:58.867Z",
+      "downloaded_at": "2026-10-23T00:55:10.662Z",
+      "pick_reason": "twisty white trunk with black markings and drooping clumps, only variant with margin above the crown"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "ed28a209-aa4f-478b-bf1e-7b634a5993e1",
+      "grid_url": "https://www.midjourney.com/jobs/ed28a209-aa4f-478b-bf1e-7b634a5993e1?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "06bee96d-0e19-433a-9dd6-6da065c190cc",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:55:20.183Z",
+      "grid_done_at": "2026-10-23T00:55:38.187Z",
+      "upscale_clicked_at": "2026-10-23T00:55:56.162Z",
+      "downloaded_at": "2026-10-23T00:57:18.971Z",
+      "pick_reason": "three separated views at one scale with margin above the crowns"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "13664357e0d7d257741581a27523e1e25932ac7bf9fef6659628d7a55d0e4715",
+      "bytes": 2648460,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/e8ddcd70-37fd-4563-a671-fa4b85fb05b2/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "1e419a4e139ecda06a906134c95a8c0a4cf1ffc5de7844a5299e3bc11725e5b4",
+      "bytes": 3921357,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/06bee96d-0e19-433a-9dd6-6da065c190cc/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "2cada5709c02607d3330316aab7cff4bb80948f507824024623ed2da11af64ad",
+      "bytes": 1110419,
+      "pixels": [
+        769,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/birch-charming [('front', 244, 1013), ('side', 1073, 1853), ('back', 1874, 2726)]"
+    },
+    "view_side.png": {
+      "sha256": "aa02bbdde452936f8a76bb5a74bc0cff3b8f67b035df85b6094f80e858ce1a80",
+      "bytes": 1162099,
+      "pixels": [
+        780,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/birch-charming [('front', 244, 1013), ('side', 1073, 1853), ('back', 1874, 2726)]"
+    },
+    "view_back.png": {
+      "sha256": "30af93da0af7fce1bd618f9698c3ca3bb53ba2910ee93ffeb3af6c8aefcc6ea3",
+      "bytes": 1224671,
+      "pixels": [
+        852,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/birch-charming [('front', 244, 1013), ('side', 1073, 1853), ('back', 1874, 2726)]"
+    }
+  }
+}

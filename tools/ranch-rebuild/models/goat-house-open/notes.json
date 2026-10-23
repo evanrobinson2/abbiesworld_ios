@@ -1,0 +1,21 @@
+{
+ "what_i_did": [
+  ["Target", "hero.png only (the turnaround draws a different, ramp-less house on stone footings). views/hero.png keys the object by hue (cast shadow out), erases the goat on the deck by a traced outline and fills the roof it hides back in from the roof's outline; views/hero_with_goat.png keeps the goat for reference."],
+  ["Camera", "Measured on the hero's edges (front and side edge slopes give yaw 45, elevation 21.5 deg) and used as is; a grid calibration preferred 14 deg, which only flattens the roof away, so it was not taken."],
+  ["Footprint", "Built in game metres: whole footprint (ramp foot to +X gable overhang, bell to back eave) 3.92 x 3.24 m, which to_game.py rescales by 0.667 to 2.615 x 2.163 file units against the old goat shelter's 2.615 x 2.160."],
+  ["Plan", "Body 2.18 x 2.60 m, plates at 1.85 m, a flat railed deck over the front half (top 1.97 m), a 40 deg teal shingle gable over the back half with its gable on the open -X side, the back half of that side left open (corner post, mid post, knee braces, dark board gable infill)."],
+  ["Goat fit", "Doorway 0.75 x 1.62 m with a 0.95 m lower Dutch-door leaf; interior 1.88 x 2.30 m, 1.59 m clear under the deck; the game goat is 0.93 long, 0.43 wide, 1.18 m to the horn tips (goat_check.py, r/goat_check.png)."],
+  ["Finish", "Chunky parts (posts, plates, rails, deck boards, ramp, door, rafters) carry a 1-segment bevel with hardened normals, organic bits (straw, hay, bell) are shaded smooth, planks and shingles are plain boxes with flat faces. Flat base colours, one material per object."]
+ ],
+ "good": ["Silhouette IoU 0.807 against the hero from the measured camera (0.788 with the goat left in the target).", "Footprint matches the old shelter within 0.003 file units.", "4102 triangles, inside the 3-5k ask and well under the 9k building budget.", "All five construction stages exported to variants/."],
+ "off": ["The hero's ramp is two bare planks; cleats were added for the goats.", "Overall height is 1.82 file units against the old shelter's 2.35 (the hero's proportions on the fixed footprint); the ridge is 2.73 m.", "Wall_Terracotta matches 'wall' in to_game's role patterns, so the walls get the plaster role, not timber; rename to Plank_Terracotta if the game should shade them as timber.", "Hay rack sits on the inner face of the back wall next to the opening; it reads as a dark shape in the hero view because the interior is in shade.", "to_game.py has no goat-house-open target yet, so it was not installed."],
+ "rounds": [
+  {"round": 1, "change": "First build: body 2.0 x 2.84 m, plates 1.75, 50 deg roof, ramp straight down -X; camera guessed at yaw 48 / elev 28.", "mean_iou": 0.734},
+  {"round": 2, "change": "Plates 2.05, 56 deg roof, hay rack moved to the back wall: silhouette got too tall (aspect 1.28 against the hero's 0.99).", "mean_iou": 0.669},
+  {"round": 3, "change": "Camera measured from the hero (yaw 45, elev 21); roof back to 45 deg with a 0.40 m back eave, body 2.6 deep.", "mean_iou": 0.762},
+  {"round": 4, "change": "Body widened to 2.18 m and the ramp run shortened to ~1.45 m and angled back in plan, ramp 0.70 wide, 40 deg roof, rail 0.62 m, plates 1.85.", "mean_iou": 0.802},
+  {"round": 5, "change": "Bigger bell, two-tone and jittered shingles, footprint trimmed to 3.92 x 3.24 m; final 768 px / 48 samples.", "mean_iou": 0.807}
+ ],
+ "moving_parts": "None (the game poses nothing on buildings); the lower door leaf and the bell are separate objects.",
+ "creative_additions": "Cleats on the ramp, straw spilling out of the open side, a latch and strap hinges on the Dutch door."
+}

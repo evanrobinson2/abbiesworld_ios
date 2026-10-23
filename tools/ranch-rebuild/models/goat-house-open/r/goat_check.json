@@ -1,0 +1,19 @@
+{
+ "house_game_m_per_model_m": 1.001,
+ "goat_game_m": {
+  "length": 0.93,
+  "width": 0.43,
+  "height": 1.18
+ },
+ "door_game_m": {
+  "width": 0.75,
+  "height": 1.6200000047683716,
+  "lower_leaf": 0.949999988079071
+ },
+ "interior_game_m": {
+  "x": 1.8799999952316284,
+  "y": 2.299999952316284,
+  "under_deck": 1.590000033378601
+ },
+ "deck_top_game_m": 1.97
+}

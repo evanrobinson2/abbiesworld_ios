@@ -1,0 +1,26 @@
+{
+  "asset": "buggy",
+  "name": "Moon buggy",
+  "what_i_did": "A single-rider charcoal quad: four balloon tyres with staggered tread blocks, curved fenders hugging each tyre, exposed A-arms and coil-over shocks, a split twin-pod nose with headlights, a fuel tank rising to the handlebars and a light pod, a saddle seat and a long kicked-up tail with a red tail light. Wheels are named nodes (Wheel_FL/FR/RL/RR) and turn as it drives.",
+  "good": [
+    "Silhouette of the sheet: big tyres, short wheelbase, split nose, tall bars, long tail.",
+    "Charcoal #3a4a5a and panel grey #4a5a6a straight from the spec sheet.",
+    "Leaves lasting twin tyre tracks in the dust as it drives (MB1)."
+  ],
+  "off": [
+    "Headlights are pale ice-white, not the sheet's cyan: on the Moon cyan is reserved for the meteorite and the Star Child (study rule). Easy to flip if Evan wants the sheet's cyan.",
+    "No cyan accent strips along the seams, for the same reason.",
+    "Engine and frame detail between the wheels is simpler than the sheet's mechanical clutter.",
+    "About 22k triangles, most in the tread blocks; can be halved if the tile needs it."
+  ],
+  "rounds": [
+    {
+      "n": 1,
+      "t": "First build: flat paddle fenders, thin tyres."
+    },
+    {
+      "n": 2,
+      "t": "Fatter balloon tyres (0.42 m wide), 14 chunky tread rows, fenders bent round each tyre, bigger raised nose pods, tail kicked up 12 degrees."
+    }
+  ]
+}

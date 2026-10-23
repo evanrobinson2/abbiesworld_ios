@@ -18,6 +18,8 @@ Record a short timeline for one representative scene from each game (timestamp, 
 
 ### Telltale
 
+- The cutscene study (AW-STUDY-0009, `cutscenes/CUTSCENE_STUDY.md`, page https://claude.ai/artifact/ATBvQmSr62iKEcnRH1A6MJ) turns these into a taxonomy, six style presets and the `layers.cinematics` profile; record new titles in that shape.
+
 - **The Wolf Among Us** (Telltale, 2013 to 2014). Timed four-option dialogue with silence as a real choice, "will remember that" notices, quick-time action, five-episode structure with recaps and end-of-episode choice statistics, and a neon comic-book look. This is the reference for our `telltale` style.
 - **The Walking Dead, Season One** (Telltale, 2012). A grown-up protecting a child, with choices that build trust. This is very close to the Fritigern and Alaric relationship.
 
@@ -37,3 +39,4 @@ Record a short timeline for one representative scene from each game (timestamp, 
 - Each style becomes a preset in `overlays.js` (cards, subtitles, choice timing, HUD parts), so the same scene can be switched between styles.
 - Pacing notes become defaults for the director: shot lengths, hold times and how long to wait before a prompt.
 - Kid-fit notes decide when a style should read aloud, show pictures instead of words, or slow down.
+- The score study (AW-STUDY-0010, `score/SCORE_STUDY.md`, page https://claude.ai/artifact/5Es88srv8cG13XiYU6FFCW) holds the Music Bible (canon) and the listening room; music for new titles follows its identity and `trace` metadata.

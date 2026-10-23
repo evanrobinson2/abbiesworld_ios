@@ -1,0 +1,30 @@
+{
+ "what_i_did": [
+  ["Start", "Copied the finished normal bench (build.py, make_views.py, hero_check.py, run.sh) and reshaped it: same origin (footprint centre on the ground), long side facing -Y, same three objects (seat, legs, frame), same two materials and roles (Plank_Walnut, Timber_Dark), no states (a garden prop). Footprint 1.61 x 0.61 m (ratio 2.62 against the normal 2.51), seat top 0.54 m."],
+  ["Views", "The hero wins and is the only target. views/hero.png is the MJ hero keyed by hue: backdrop G/R ~0.89, the soft cast shadow G/R ~0.80, the wood 0.49-0.66, so G/R < 0.74 keeps the bench and drops the shadow; the openings between seat, legs and stretcher stay open. The turnaround sheet drew a taller, lighter bench with square-sawn legs and stretchers plus end rails at mid height, and its cuts are 3/4 views with big cast shadows (the long-side cut scored 0.13, mostly shadow and sky), so all three sheet views are dropped."],
+  ["Hero camera", "hero_check.py from the normal bench, unchanged: 38 deg off the front towards -X, 12 deg up, 85 mm perspective. A recalibration over the yaw/elevation grid put -38/12 in the top group again, so it was kept."],
+  ["Seat", "Plank_Walnut: one chubby 1.60 x 0.44 x 0.14 m slab instead of two planks, with pillow edges (55 mm, 3-segment bevel), a 10 mm sag in the middle and the ends kicked up 10 mm, the ends flaring 6 % wider, edge vertices nudged up to 12 mm for a hand-carved wobble, and the whole slab tipped 1.2 deg (right end up) and 1 deg back for a playful tilt."],
+  ["Legs", "Plank_Walnut: four fat round 10-sided logs (radius 84 mm at the top, 92 mm bulging at the middle, 90 mm at the foot) with rounded-in feet cut flat on the ground, splayed from y = +-0.10 under the seat to +-0.22 at the ground and leaning 6 cm outward along X, each with its own random extra lean of up to 4 deg so the bench looks hand-made and a little wonky. Each leg top is set into the tilted seat's underside."],
+  ["Frame", "Timber_Dark: a thin round stretcher at 0.19 m that wobbles gently along its length and swells at its fat tenons poking 0.12 m past each end, a round end rail between each leg pair, and a fat bevelled peg through each tenon."],
+  ["Game", "3 objects, one material each, 1160 triangles (budget 2k). Installed with to_game.py to garden-assets-charming/GF-194.glb."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.839 at the final 768 px / 48 sample render (0.857 at 384 px / 16 samples).",
+  "Reads as the same bench as the normal one (thick seat, splayed leg pairs, dark stretcher with pegged tenons) but softer and toy-like: round chubby legs, pillowy slab, a little tilt and wonk.",
+  "Same footprint proportions, origin, orientation and materials as the normal bench, so it drops in place."
+ ],
+ "off": [
+  "The hero's seat looks a touch thicker than 0.14 m; thicker slabs scored lower (0.811 at 0.17 m) because the hero camera sits low, so 0.14 m with pillowy edges is the compromise.",
+  "The hero's stretcher sits a little higher up the legs and is very thin and rough; raising it to 0.23 m scored lower (0.80), so it stays at 0.19 m.",
+  "The hero's cast shadow is keyed out by hue; a few shadowed under-leg pixels may be lost at the feet.",
+  "No wood grain, knots or cracks: flat colours only, per the game rules. Turnaround sheet not scored (dropped, see Views)."
+ ],
+ "rounds": [
+  {"round": 1, "change": "Charming rebuild from the normal bench: one pillow-edged 0.15 m slab with sag, kicked-up ends and a tilt; four round bulging log legs; wobbly round stretcher, round end rails, fat pegs; caps and diagonal braces dropped (not in the hero). Sheet front view scored 0.126 and dropped.", "mean_iou": null, "hero_iou": 0.776},
+  {"round": 2, "change": "Thicker 0.17 m slab, much smaller end kick (25 to 10 mm), fatter legs (r 0.084-0.092 m), seat top 0.54 m; hero camera recalibrated (kept -38/12).", "mean_iou": null, "hero_iou": 0.82},
+  {"round": 3, "change": "Swept slab thickness, height, splay, lean, leg spacing and depth; slab to 0.14 m (biggest gain), others kept. Colours deepened to the hero's red-brown (Plank_Walnut 150,76,38; Timber_Dark 84,42,22).", "mean_iou": null, "hero_iou": 0.857},
+  {"round": 4, "change": "Tried a higher, thinner stretcher (0.80, reverted) and fatter legs (no gain); per-leg random lean raised to 4 deg for more wonk (neutral at low res). Final 768 px / 48 sample render.", "mean_iou": null, "hero_iou": 0.839}
+ ],
+ "moving_parts": "None: a static garden prop; the game poses models itself.",
+ "creative_additions": "A playful tilt of the seat, each leg leaning at its own angle, the plank ends flaring wider, and fat pegged tenons on a gently wobbling stretcher."
+}

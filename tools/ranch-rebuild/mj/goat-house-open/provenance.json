@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "goat-house-open",
+  "item": "R3",
+  "wave": "Ranch remaster wave 1",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a small cozy goat house with three timber plank walls and one fully open side, terracotta red walls, a teal shingled roof cap, a wooden ramp leading up to a flat climbing deck on the roof, a straw floor inside, a wooden hay rack on the inside wall and a small bell on the gate, sized for two goats, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text, centered, full object visible --ar 1:1",
+      "grid_job_id": "bbaad95d-6bd8-4a66-bf55-fc524edb51af",
+      "grid_url": "https://www.midjourney.com/jobs/bbaad95d-6bd8-4a66-bf55-fc524edb51af?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "0de2dd94-71e2-47f2-82ff-4c975e2f242b",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T03:02:29.913Z",
+      "grid_done_at": "2026-10-23T03:02:49.936Z",
+      "upscale_clicked_at": "2026-10-23T03:03:12.214Z",
+      "downloaded_at": "2026-10-23T03:04:55.941Z",
+      "pick_reason": "only variant with a real ramp up to a flat railed climbing deck, plus hay rack, gate bell and an open straw-floored side; a goat stands on the deck (ignore it when modeling); variants 0 and 3 had a ladder or leaning planks, variant 2 had no roof deck"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small cozy goat house with three timber plank walls and one fully open side, terracotta red walls, a teal shingled roof cap, a wooden ramp leading up to a flat climbing deck on the roof, a straw floor inside, a wooden hay rack on the inside wall and a small bell on the gate, sized for two goats, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text, centered, full object visible --ar 16:9",
+      "grid_job_id": "871f7bfb-292c-4998-9041-b45ffb2a85da",
+      "grid_url": "https://www.midjourney.com/jobs/871f7bfb-292c-4998-9041-b45ffb2a85da?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "9d1d4408-24a2-409f-a0f1-816822df9148",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T03:05:20.111Z",
+      "grid_done_at": "2026-10-23T03:05:40.136Z",
+      "upscale_clicked_at": "2026-10-23T03:05:55.787Z",
+      "downloaded_at": "2026-10-23T03:07:23.553Z",
+      "pick_reason": "three clearly spaced views and the only variant with the flat railed roof deck; open straw-floored front, hay rack and gate bell visible"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "a5274548752fbf603a96f85c908c6ff8e4e0442f2ce9cd755ed61a00ee8e79b3",
+      "bytes": 4220806,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/0de2dd94-71e2-47f2-82ff-4c975e2f242b/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "45f94997874669c1a29e9153577db039d67222f4b2e72e9ebd698c7b01d0b219",
+      "bytes": 5856557,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/9d1d4408-24a2-409f-a0f1-816822df9148/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "a5396b9f8c20f7c9068593e7dbf77080c7ae361b6c10c1bbbf185348b4918f81",
+      "bytes": 2155688,
+      "pixels": [
+        1070,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py (object-aware; tools/midjourney/split_views.py cut through the front view): [('front', 85, 1155), ('side', 1155, 1948), ('back', 1948, 2823)]"
+    },
+    "view_side.png": {
+      "sha256": "8b93102c46ce3b6b87ccd909c3ce94fa45697a48bde376b921172612ce5c7193",
+      "bytes": 1511446,
+      "pixels": [
+        793,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py (object-aware; tools/midjourney/split_views.py cut through the front view): [('front', 85, 1155), ('side', 1155, 1948), ('back', 1948, 2823)]"
+    },
+    "view_back.png": {
+      "sha256": "87ee909ad168297b37a075b3ce737c2a330b49a4fab3dad021eec5a99b743838",
+      "bytes": 1621445,
+      "pixels": [
+        875,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py (object-aware; tools/midjourney/split_views.py cut through the front view): [('front', 85, 1155), ('side', 1155, 1948), ('back', 1948, 2823)]"
+    }
+  }
+}

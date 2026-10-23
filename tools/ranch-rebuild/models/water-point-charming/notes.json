@@ -1,0 +1,34 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/water-point (build.py, make_views.py, hero_check.py, run.sh) and reshaped it: same STATE switch and states (planned, foundation, frame, roof, complete), same origin (footprint centre on the ground), Z up, front -Y, ridge along X, same part and material names and roles. New details get new materials: Plank_Door (timber role) and Glass_Window (glass role)."],
+  ["Scoring", "Hero only. views/hero.png is the charming MJ hero with its backdrop flattened outside the harness mask (the harness mask already drops this hero's cast shadow, so no hand keying was needed). hero_check.py renders from the harness hero azimuth at elevation z=0.40, direction (0.62, -0.78, 0.40), measured from the hero's basin top (front face to side face width ratio 1.29, top-face depth about 22 degrees). The turnaround sheet is dropped: it draws a different, rounded tub-shaped well with the posts at the middle of the short sides, the pump in front and no corner buttresses, which the hero contradicts."],
+  ["Basin", "Chunkier and taller than the normal one (rim top 0.96 m on a 1.68 m square, against 0.79 m on 1.5 m): four flared corner buttresses (tapered 4-sided columns on dark foot stones), softly bulging walls of big bevelled blocks between them (the middle of each wall swells 4.5 cm), a dark bottom course, and a thick soft-edged timber rim (20 cm) on top in place of the stone coping, with an inner stone lining showing above the water."],
+  ["Door and window", "An oversized little arched plank door with iron straps and a ring, in a timber surround, and a small glazed window, both on the +X face (the hero's right-hand face); the wall blocks are cut around them."],
+  ["Canopy", "Two chunky 17 cm posts on the back rim, leaning 2.5 degrees towards +X, with tie beams, knee braces, purlins and a ridge beam. The roof is the storybook part: a ridge that smiles (ends 7 cm higher than the middle) and runs crooked (rising 8 cm per metre towards +X), a long front slope and a short steep back slope, four courses of big bevelled teal shingles with uneven butts on the front, chunky barge boards framing both gables and crossing past the ridge, and a thick curved ridge board."],
+  ["Pump and bucket", "The pump moved from the back-right corner to a round stone pedestal on the left (-X) rim, as the hero has it: fatter barrel with collars, head with lugs, a fat spout over the water with a stream and splash, and an oversized looping handle that rises above the head and sweeps down and out towards the front-left with a wooden grip. A bigger stave bucket (0.48 m across) with an iron hoop and water in it sits tilted 6 degrees on the front-left corner."]
+ ],
+ "good": [
+  "Reads as the same water point at tile size: square stone basin with water, teal canopy on two posts, black pump with its handle loop, bucket on the rim.",
+  "Charming cues without faces: smiling crooked ridge, leaning posts, bulging walls, flared buttresses, a fat rim, soft bevels everywhere, oversized pump handle and bucket, a little door.",
+  "7522 triangles complete (budget 9k); 20 objects, one flat material each; every material name carries a game role (checked in the installed mesh list: stone, timber, roof, metal, water, glass).",
+  "Footprint 2.12 x 2.16 m (x/y 0.98) against the normal model's 2.13 x 2.01 (1.06); to_game scaled it by 0.96 to the old footprint."
+ ],
+ "off": [
+  "The hero's left post stands at the far back-left corner while its roof barely covers the pump; I kept both posts on the back rim at x = +-0.52 under a roof centred on the basin, so the roof's left end sits just right of the pump as in the hero rather than over the corner post.",
+  "The hero's back slope is drawn very short and steep; mine is shorter than the front (0.26 m run) but the gable is less dramatic, and I trimmed it to keep the footprint near square.",
+  "The hero's door is smaller and its window sits higher in the corner; the brief asks for oversized door and windows, so both are a bit bigger than drawn.",
+  "Stones are bevelled flat-colour blocks; the hero's painted cracks, moss and water ripples are not modelled.",
+  "The remaining IoU gap is mostly the roof's right gable and barge-board ends (wider than the hero's) and the basin's lower-left corner."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First charming build from the normal model: buttressed bulging basin, timber rim, door and window, pump on a pedestal on the -X rim, smiling crooked roof on leaning back posts. Check direction (0.62,-0.78,0.34) and 0.42 both 0.720.", "hero_iou": 0.72},
+  {"round": 2, "change": "Basin wider (hb 0.84), ridge lower (2.48) and less smile (0.07), bigger shingles (0.31 m), bigger pump, handle and bucket, sage-grey stone.", "hero_iou": 0.722},
+  {"round": 3, "change": "Roof shortened to 1.36 m along the ridge and posts closer (from the hero's screen measurements), pump moved to (-0.64, 0.04), handle swung 25 degrees towards -X. Check elevation set to 0.40 (0.751 there, 0.750 at 0.42).", "hero_iou": 0.751},
+  {"round": 4, "change": "Barge boards moved out to frame the roof edges, ridge board seated on the shingles, thicker handle, wall blocks cut around the door and window, lean 2.5 degrees. Looks closer to the hero but scores lower (wider roof).", "hero_iou": 0.73},
+  {"round": 5, "change": "Taller basin (courses 0.24/0.26/0.26, rim 0.20; rim top 0.96 m) with the ridge raised to 2.70, roof half-length 0.60, bigger door and window.", "hero_iou": 0.751},
+  {"round": 6, "change": "Canopy centred on x = 0 and the front slope shortened (run 0.70, drop 0.70) so the pump and its handle loop sit clear of the roof; fixed the foot stones being built twice (z-fighting black seams), lighter door.", "hero_iou": 0.765},
+  {"round": 7, "change": "Back eave shortened (run 0.26) to bring the footprint ratio to 0.98. Final render 768 px, 48 samples.", "hero_iou": 0.762}
+ ],
+ "moving_parts": "None: the game poses buildings itself, so the GLB and variants are exported with export_animations=False. The pump handle is part of the pump object, as in the normal model.",
+ "creative_additions": "Iron straps and a ring on the door, a sill under the window, lugs on the pump head, water inside the bucket, a pump that leans a few degrees, and corner stakes that lean a little in the planned stage."
+}

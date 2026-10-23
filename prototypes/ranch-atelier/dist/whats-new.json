@@ -11,6 +11,60 @@
       "threadTitle": "Card generator"
     },
     {
+      "id": "2026-10-23-models-tighter",
+      "date": "2026-10-23",
+      "title": "Models come alive",
+      "line": "Your picture and its words sit together in one frame, and the model stands free beside it, printing itself in with a half-second laser. Labels and names are in Title Case, and Reject, Chat and Keep sit right under the pair.",
+      "image": "/whats-new/2026-10-23-models-tighter.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead"
+    },
+    {
+      "id": "2026-10-23-moon-remaster",
+      "date": "2026-10-23",
+      "title": "The Moon from Abbie's story",
+      "line": "The Moon is grey-blue now, with craters you can see, rocks thrown out round their rims, and tracks that stay in the dust. A glass dome with an orange band, a charcoal moon buggy that drives out to the geology field, and something new: a dark meteorite in a fresh crater, glowing cyan like a slow heartbeat.",
+      "image": "/whats-new/2026-10-23-moon-remaster.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1",
+      "threadTitle": "Moon remaster build"
+    },
+    {
+      "id": "2026-10-23-models-new-look",
+      "date": "2026-10-23",
+      "title": "Models get the new look",
+      "line": "Model pages are simpler: AW in the corner, wordless counters, and your picture and the 3D model the same size. Numbered points show what matters on your picture and whether the model gets each one right. Reject, Chat (talk or type) and Keep sit under your right thumb. The gear switches between Default, Rome and Efficient, and the cart asks for more, with a camera. Every order starts as concept art.",
+      "image": "/whats-new/2026-10-23-models-new-look.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead"
+    },
+    {
+      "id": "2026-10-23-weather-fronts",
+      "date": "2026-10-23",
+      "title": "Weather you can watch coming",
+      "line": "Weather now arrives in fronts: the wind picks up, clouds gather and the animals settle before the rain, then the sky breaks up as it clears. Soft clouds float around your ranch and their shadows drift across the fields. Storms grey the sky, dim the sun and light the lamps, and a gentle flash brings thunder. The light is new too: a paper sky by day, a gold sunset, an ink-blue moonlit night with lamps that come on one by one at dusk, and Earthshine with lit windows on the Moon at night.",
+      "image": "/whats-new/2026-10-23-weather-fronts.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
+      "threadTitle": "Weather and clouds"
+    },
+    {
+      "id": "2026-10-23-model-review-row",
+      "date": "2026-10-23",
+      "title": "Model pages are one review row",
+      "line": "Each model page is now your picture, the 3D model, and your notes with Reject, Adjust and Accept on the right. Name and score sit above, details below. Your verdict comes straight to Claude.",
+      "image": "/whats-new/2026-10-23-model-review-row.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa",
+      "threadTitle": "Models review"
+    },
+    {
+      "id": "2026-10-23-sign-in",
+      "date": "2026-10-23",
+      "title": "Anyone can sign in and play",
+      "line": "Sign in is in the toy box now. Anyone can sign in with Google and play the ranch as their own copy, and their worlds follow them to any device. It's free, and we ask nothing of them. Talking to the Computer needs a sign-in, and everyone's AI spending has a cap: $1 a person, $100 for all players together, and $1000 for you.",
+      "image": "/whats-new/2026-10-23-sign-in.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+      "threadTitle": "Sign-in to play the ranch"
+    },
+    {
       "id": "2026-10-23-no-masks",
       "date": "2026-10-23",
       "title": "The world stays in view",

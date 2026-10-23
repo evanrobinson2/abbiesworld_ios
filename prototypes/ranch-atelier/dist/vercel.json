@@ -399,6 +399,28 @@
       "has": [
         {
           "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "/studies/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.abbies.world"
+        }
+      ],
+      "destination": "/studies/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "explore.abbies.world"
         }
       ],

@@ -1,0 +1,90 @@
+{
+ "rubric_version": "1.0",
+ "study": "AW-STUDY-0009 - Cutscenes",
+ "name": "Abbie's World cutscene rubric",
+ "date": "2026-10-23",
+ "doc": "docs/oracle/cutscenes/CUTSCENE_STUDY.md",
+ "checker": "tools/cutscene-rubric/check_cutscene.py",
+ "source_enum_note": "source values are the identity schema's enum (docs/oracle/identity/game-identity.schema.json): footage_cv = computer vision over our own captures, llm_judge = VLM with saved prompt, pairwise and both orders, playtrace = in-game log, human = Evan or a child playtest, estimate = not yet measured.",
+ "ship_threshold": 80,
+ "taxonomy": {
+  "jobs": {
+   "story": "tells something the player could not enact",
+   "reward": "celebrates what the player did and makes the prize feel big",
+   "pacing": "a breath between efforts, a change of rhythm",
+   "tutorial": "shows a new thing working once before the player tries it",
+   "cover": "hides loading, streaming, shader compilation or world generation",
+   "bridge": "moves the player across place, time or mode without a menu"
+  },
+  "categories": ["intro", "beat", "reward", "transition", "loading_cover", "micro", "montage", "recap"],
+  "styles": {
+   "cinematic": "film language: lenses, letterbox, scored music, title cards",
+   "storybook": "a narrator reads to a child: pages, big gentle words, few cuts",
+   "comic": "the scene splits into panels, balloons and lettered sound effects",
+   "telltale": "dialogue drama: speaker lines, choices, 'will remember that', episode cards",
+   "diorama": "a high three-quarter camera that pulls back to show the whole set as a toy",
+   "puppet": "in-engine actors on the game's own camera and look; the HUD tucks away"
+  },
+  "render": ["pre_rendered", "in_engine", "hybrid", "static_panels", "text_narrator"],
+  "interaction": ["none", "camera", "poke", "choice", "qte", "rhythm"],
+  "control_taken": ["full", "camera_only", "none"],
+  "position": ["bookend", "interstitial", "in_flow"],
+  "information_modes": {
+   "diegetic": "it happens in the world and characters react; the simulation records it",
+   "spatial": "the camera visits a thing to show only the player",
+   "meta": "a feeling on the lens: slow motion, warm vignette, heartbeat",
+   "overlay": "title cards, chapter numbers, subtitles, letterbox, recap pages",
+   "none": "no cutscene: the world behaves and the player happens to see it"
+  }
+ },
+ "targets": {
+  "bpm": 124,
+  "bar_seconds": 1.935,
+  "bar_note": "Music Bible: D major, ~124 bpm, 3+3+2 eighths = four quarter-note beats per bar = 60/124*4 s.",
+  "read_aloud_wps_max": 2.6,
+  "read_aloud_note": "A grown-up reading to a child runs about 130 to 160 words a minute; 2.6 words/s is the ceiling, 2.0 the comfortable middle (estimate).",
+  "length_bands_s": {
+   "intro": {"first": [10, 45], "repeat": [0, 6]},
+   "beat": {"first": [4, 45], "repeat": [0, 45]},
+   "reward": {"first": [0.5, 8], "repeat": [0, 3]},
+   "transition": {"first": [0.5, 4], "repeat": [0, 4]},
+   "loading_cover": {"first": [0, 9999], "repeat": [0, 9999]},
+   "micro": {"first": [0.2, 3], "repeat": [0, 3]},
+   "montage": {"first": [4, 20], "repeat": [0, 10]},
+   "recap": {"first": [3, 15], "repeat": [0, 15]}
+  },
+  "cover_settle_bars_max": 1,
+  "cover_long_s": 15,
+  "flash_hz_max": 3,
+  "letterbox_allowed_styles": ["cinematic"],
+  "letterbox_banned_categories": ["micro", "reward", "transition"],
+  "banned_masks": ["fade_white", "blur", "haze", "vignette_full", "dim_scrim"],
+  "world_channels": ["light", "music", "npcs", "animals", "sound", "weather", "sky", "windows", "camera"],
+  "signal_channels_min": 3
+ },
+ "gates": [
+  {"id": "G1_job_declared", "title": "Every cutscene declares a job and a category", "method": "manifest: jobs non-empty and in taxonomy.jobs; category in taxonomy.categories", "source": "human"},
+  {"id": "G2_no_trap", "title": "Pause, seen-once skip, hold to skip, and a tap always answers", "method": "manifest skip.pause, skip.seen_skip, skip.hold_to_skip, skip.tap_answers all true (covers still loading may set seen_skip false)", "source": "playtrace"},
+  {"id": "G3_zero_required_reading", "title": "Every word on screen is read aloud, or there are none", "method": "words_on_screen == 0 or read_aloud true; with --overlays, words/s per card under read_aloud_wps_max", "source": "playtrace"},
+  {"id": "G4_no_mask", "title": "No fade to white, blur or haze; letterbox only where allowed", "method": "masks has none of banned_masks; letterbox only for allowed styles and not banned categories", "source": "footage_cv"},
+  {"id": "G5_length_band", "title": "Length sits in the category band; covers end when ready, within a bar", "method": "first_s and repeat_s inside length_bands_s; loading_cover cover.ends in (on_ready, on_ready_bar) and settle_bars <= cover_settle_bars_max", "source": "playtrace"},
+  {"id": "G6_layers_apart", "title": "World events are recorded; presentation is invisible to perception; no engine artifacts", "method": "recorded true when world_events non-empty; presentation_perceivable false; engine_artifacts false", "source": "playtrace"},
+  {"id": "G7_kid_safe", "title": "No fail state, no horror sting, no fast flashing, no choice timer for children", "method": "fail_state false; horror_sting false; flash_hz <= flash_hz_max; audience child implies choice_timer_s null", "source": "human"}
+ ],
+ "scored": [
+  {"id": "S1_purpose_fit", "points": 12, "title": "Does two jobs or more", "method": "share of cutscenes with 2+ jobs", "source": "human"},
+  {"id": "S2_brevity", "points": 12, "title": "Starts late, ends early", "method": "share of non-cover cutscenes whose first_s is in the lower half of their band", "source": "playtrace"},
+  {"id": "S3_hand_back", "points": 12, "title": "Hands back on the play camera", "method": "share with hand_back == play_camera", "source": "playtrace"},
+  {"id": "S4_interaction", "points": 10, "title": "The child can poke, look or choose", "method": "share with interaction in camera, poke, choice, rhythm", "source": "playtrace"},
+  {"id": "S5_one_signal", "points": 12, "title": "One signal drives many world channels", "method": "share whose signal drives >= signal_channels_min world channels", "source": "playtrace"},
+  {"id": "S6_music_sync", "points": 10, "title": "Lands on the bar and ends on a sting", "method": "share with music.bars set (or cover loop) and music.sting set", "source": "playtrace"},
+  {"id": "S7_cover_honesty", "points": 10, "title": "Covers show the real work and never fake progress", "method": "share of covers with cover.show in world_build, play, travel and fake_percent false (full points when there are no covers)", "source": "playtrace"},
+  {"id": "S8_repeat_shortening", "points": 8, "title": "Shorter the second time", "method": "share of non-cover cutscenes with repeat_s < first_s or control_taken none", "source": "playtrace"},
+  {"id": "S9_place_dialect", "points": 7, "title": "Speaks its place's dialect", "method": "share with dialect set and transition_in/out through the world (not cut or fade)", "source": "human"},
+  {"id": "S10_recap_available", "points": 7, "title": "A 'story so far' exists", "method": "set has a recap cutscene", "source": "human"}
+ ],
+ "manual": [
+  {"id": "M1_kid_playtest", "title": "A child watches it twice and wants a third", "source": "human"},
+  {"id": "M2_style_vs_expression", "title": "No game's footage, shot list, script, characters or music copied", "source": "llm_judge"}
+ ]
+}

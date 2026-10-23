@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "barn-shelter-charming",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/shelter-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "61fc71c5-88aa-4cb8-9f91-707085d4805f",
+      "grid_url": "https://www.midjourney.com/jobs/61fc71c5-88aa-4cb8-9f91-707085d4805f?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "c7990bdf-df8d-42ea-af6e-683d7105d921",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:29:12.402Z",
+      "grid_done_at": "2026-10-23T00:29:30.407Z",
+      "upscale_clicked_at": "2026-10-23T00:29:44.508Z",
+      "downloaded_at": "2026-10-23T00:30:56.098Z",
+      "pick_reason": "open doorway with workbench, hayloft opening in the gable, stone foundation, chubby leaning roof"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "24f36766-b3f8-4741-b8dd-809d5833d7a2",
+      "grid_url": "https://www.midjourney.com/jobs/24f36766-b3f8-4741-b8dd-809d5833d7a2?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "86022e41-df67-4c1b-8935-7c0600f3cec1",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:31:05.484Z",
+      "grid_done_at": "2026-10-23T00:31:23.489Z",
+      "upscale_clicked_at": "2026-10-23T00:31:35.682Z",
+      "downloaded_at": "2026-10-23T00:33:06.874Z",
+      "pick_reason": "front with open doorway and workbench, gable end with hayloft, three-quarter side; one chubby barn"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "58f5c377f55ab4301977e3885c9e1eeeecf010acdb94ad52500ade06bdc2abee",
+      "bytes": 4011005,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/c7990bdf-df8d-42ea-af6e-683d7105d921/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "e36d04bb3cbbf92d4b8d084400696b467d10d7afee59efa0a7ce282c6b384bf0",
+      "bytes": 3799621,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/86022e41-df67-4c1b-8935-7c0600f3cec1/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "ad56fe260abcebea21e84cf4f7e90b2c9236369d650fc1fa170f19f4eabf4792",
+      "bytes": 1389197,
+      "pixels": [
+        989,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/barn-shelter-charming [('front', 107, 1096), ('side', 1096, 1854), ('back', 1854, 2862)]"
+    },
+    "view_side.png": {
+      "sha256": "c8f00d807b4c526b67d8c8966ae65bda8dc8bd8f2e952c50dd75d3e611176076",
+      "bytes": 982570,
+      "pixels": [
+        758,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/barn-shelter-charming [('front', 107, 1096), ('side', 1096, 1854), ('back', 1854, 2862)]"
+    },
+    "view_back.png": {
+      "sha256": "bd7fc6655376cd7494a812f5acb16c0cb3f4c2438fdd49077520f95020ff11ad",
+      "bytes": 1338500,
+      "pixels": [
+        1008,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/barn-shelter-charming [('front', 107, 1096), ('side', 1096, 1854), ('back', 1854, 2862)]"
+    }
+  }
+}

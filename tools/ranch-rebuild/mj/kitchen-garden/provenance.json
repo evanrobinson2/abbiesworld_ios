@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "kitchen-garden",
+  "item": "R2",
+  "wave": "Ranch remaster wave 1",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "sheet": {
+      "prompt": "game asset sheet for a kitchen garden: a raised timber vegetable bed with mounded dark soil rows, a wooden stake with garden twine, a small tin watering can, and three growth stages of a vegetable crop (tiny sprout, leafy young plant, ripe plant with golden produce), plus a thirsty version with drooping brown leaves, evenly spaced in a neat row, same scale, all pieces fully visible, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text --ar 16:9",
+      "grid_job_id": "9b02882f-bd46-4336-899e-29752e7d1641",
+      "grid_url": "https://www.midjourney.com/jobs/9b02882f-bd46-4336-899e-29752e7d1641?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "8b556a35-400a-4d77-9d11-18dc691b3e62",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T02:59:35.328Z",
+      "grid_done_at": "2026-10-23T02:59:55.363Z",
+      "upscale_clicked_at": "2026-10-23T03:00:08.912Z",
+      "downloaded_at": "2026-10-23T03:01:46.351Z",
+      "pick_reason": "every piece separate and uncut: raised bed, free-standing stake with twine, tin can, sprout, young, ripe with golden produce and a drooping thirsty plant; others overlapped the stake with the bed or cropped the top"
+    }
+  },
+  "files": {
+    "sheet.png": {
+      "sha256": "707768257764448f44f836bfdf8d6d2711964ea7cc8d24b2e86d6525deb916d0",
+      "bytes": 1918324,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/8b556a35-400a-4d77-9d11-18dc691b3e62/0_0.png"
+    }
+  }
+}

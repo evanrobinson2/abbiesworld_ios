@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "clover-charming",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/UP-051.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a low patch of pasture clover with round white and pink flower heads, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "9e9686d9-05ab-4265-a374-4c5acf0df4da",
+      "grid_url": "https://www.midjourney.com/jobs/9e9686d9-05ab-4265-a374-4c5acf0df4da?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "aa0c3130-ba42-4c4b-b544-dc57138fab07",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:51:11.638Z",
+      "grid_done_at": "2026-10-23T01:51:29.640Z",
+      "upscale_clicked_at": "2026-10-23T01:51:40.516Z",
+      "downloaded_at": "2026-10-23T01:52:52.004Z",
+      "pick_reason": "low plump patch of readable trefoil leaves with round pink-white heads, whole patch with margin"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "172228cdd77ad137e95e052743a9baa27063b5501f8355de6505785016243ef6",
+      "bytes": 2926407,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/aa0c3130-ba42-4c4b-b544-dc57138fab07/0_0.png"
+    }
+  }
+}

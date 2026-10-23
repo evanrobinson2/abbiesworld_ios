@@ -1,0 +1,42 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/chicken (build.py, make_views.py, hero_check.py, poses_check.py, run.sh) and reshaped it. Same part tree and pivots (body at the hips > neck > head > comb/wattle/beak/face/eyes/pupils, body > tail_under > tail, body > wing_l/wing_r > plates, body > breast_plates, neck > hackles/hackle_tips, leg_l/leg_r as separate roots), same POSE mechanics (part rotations, body drop, peck slide, leg fold) and the same three states idle/feeding/rest. Z up, origin at the footprint centre on the ground, head faces -Y."],
+  ["Views", "make_views.py was rewritten for this sheet: the backdrop is each row's left and right edge colour blended across the row (follows the hero's wall-to-floor gradient and darker upper-left vignette); above the belly line a 0.045 colour-distance key, closed and hole-filled; below it only leg colour (gold-orange, G/R under 0.80; the warm cast shadow is 0.86) under the body's width, cut below the lowest toe row. This keys out the hero's long cast shadow and the sheet's floor shadows."],
+  ["Dropped view", "The sheet's side view is drawn three-quarter, facing right, and shows a fluffy tail-less egg where the hero has a raised golden tail, so it contradicts the hero. It lives in views/side/ and is scored apart as a proportion guide only. Front and back are scored by the harness."],
+  ["Hero camera", "hero_check.py recalibrated on the round-3 model over a 6x4 yaw/elevation grid (best 70/6 and 60/0); set to yaw 68, elevation 8."],
+  ["Massing", "A plush round ball body (0.20 m wide, breast sagging forward and low, rump squashed and its underside curving up into the tail, flattened belly) plus one soft breast puff; an oversized round head (12.8 x 12 x 11.6 cm, almost twice the normal hen's) on a short plush neck; short stubby legs moved 2.6 cm forward under the breast, each in a fluffy cream feather pant, with three fat toes and a little back toe."],
+  ["Details", "A big comb of three fat round lobes (middle one tallest), a small stout rounded beak, a fat two-lobed red wattle, dark oval eyes with a white shine, pink blush cheeks, a collar of 8 chunky rounded hackle petals with big golden tips, a big cream wing pad on each flank with three golden tip lobes trailing back, and a perky fan of 3 cream and 2 golden fat tail lobes."],
+  ["Tilt and lean", "Every pose keeps the storybook tilt: the body leans 6 deg into its step and the head is cocked 9 deg to the side and turned 4 deg (TILT in build.py)."],
+  ["Poses", "idle is the hero stance. feeding tips the body 50 deg and the neck 34 deg, raises the tail and slides the head 4 cm along the neck until the beak tip touches the ground. rest sinks the body 4 cm onto the ground and folds the legs (with their pants) back up inside it."],
+  ["Game readiness", "1,452 triangles in every pose (budget 1.5k), 22 meshes, smooth shaded, one flat material each. Material names keep the normal hen's (Feather_White, Feather_Cream, Feather_Gold, Skin_Red, Horn_Yellow, Skin_Yellow, Skin_EyeDark); Skin_EyeOrange is gone (the toy eyes are solid dark) and Skin_Cheek and Skin_EyeShine are new for the blush and eye shine. All map to the game's skin role, as before. Footprint 0.24 x 0.32 m (W/L 0.74, normal 0.69), 0.41 m tall. to_game.py chicken-charming scaled it x3.368 to the old footprint and wrote chicken-idle/feeding/rest .json and .glb into the -charming tree without errors."]
+ ],
+ "good": [
+  "Hero silhouette 0.784 from the hero direction: the round ball body, big round head, big three-lobed comb, wattle, cocked head, cream wing pad and raised golden tail all read.",
+  "Front 0.840 and back 0.861 against the sheet (mean 0.851), above the normal hen's 0.737, because the charming massing is simpler and rounder.",
+  "The three poses are distinct at tile size: upright and cocked, head down at the ground with the tail up, a round sitting lump.",
+  "Within budget at 1.45k triangles."
+ ],
+ "off": [
+  "The hero's surface is soft clay-smooth; at 1.5k triangles the body and head show broad facets even with smooth shading.",
+  "The hero's hackle collar is a clear ruff of gold-tipped petals over the breast; flaring the petals out far enough to match it widened the front silhouette too much (front 0.82 -> 0.76), so they sit closer and read mostly as golden flecks at the shoulders.",
+  "The wings were brought in (half width 0.12 m) so the footprint stays near the normal hen's proportions (W/L 0.74 against 0.69); a wider wing pad matched the hero a little better (0.795 against 0.781).",
+  "The side view of the sheet was dropped (three-quarter and tail-less); it scores 0.559 as a guide only.",
+  "A taller comb matched the sheet's front better but cost 0.02 on the hero, so the comb follows the hero.",
+  "The feeding pose stretches the neck by sliding the head 4 cm along it, as in the normal hen."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First charming build from the normal hen's structure: ball body, big head, lobed comb, petals, wing pads, lobed tail, stubby legs with pants. 2,834 triangles (over budget).", "mean_iou": 0.789, "hero_iou": 0.721},
+  {"round": 2, "change": "Cut to 1,418 triangles (fewer segments, one breast puff instead of scallops), wings inset and rolled to hug the flanks, body moved forward.", "mean_iou": 0.841, "hero_iou": 0.758},
+  {"round": 3, "change": "Shorter back, bigger lower breast, head and beak forward, wing tips flat to the pad, feeding tilt 50 deg; hero camera calibrated to 68/8.", "mean_iou": 0.839, "hero_iou": 0.773},
+  {"round": 4, "change": "Rump squashed (x0.86) and the tail more upright; underside of the rump lifted, deeper breast sag.", "mean_iou": 0.839, "hero_iou": 0.759},
+  {"round": 5, "change": "Legs and hips moved 2.6 cm forward under the breast, breast puff forward, bigger golden collar tips.", "mean_iou": 0.829, "hero_iou": 0.784},
+  {"round": 6, "change": "Smoother body (14x8) and head (12x8), cream wing pads so the wing reads, thicker wing.", "mean_iou": 0.833, "hero_iou": 0.784},
+  {"round": 7, "change": "Collar flared out like the hero's ruff (front dropped to 0.758), then pulled back halfway.", "mean_iou": 0.800, "hero_iou": 0.798},
+  {"round": 8, "change": "Slimmer body and wings, taller comb (hero 0.769); comb height reverted.", "mean_iou": 0.827, "hero_iou": 0.789},
+  {"round": 9, "change": "Tail lobes longer and swept further back (36-82 deg), wing tips raised so they stop poking below the rump.", "mean_iou": 0.829, "hero_iou": 0.795},
+  {"round": 10, "change": "Wings brought in to keep the footprint near the normal hen's W/L (0.79 -> 0.74).", "mean_iou": 0.847, "hero_iou": 0.781},
+  {"round": 11, "change": "Final 768 px / 48 sample render and score; to_game.py chicken-charming.", "mean_iou": 0.851, "hero_iou": 0.784}
+ ],
+ "moving_parts": "No animation (the game poses models itself). The poses are rotations of named parts from build.py's TILT and POSE tables: body at the hips, neck, head, tail, wings, plus a body drop for rest and the leg fold; exported as variants/idle.glb, feeding.glb and rest.glb.",
+ "creative_additions": "A permanent storybook head cock and forward lean, fluffy feather pants on the legs, a white shine in each eye, pink blush cheeks, and a cream under-layer behind the golden tail lobes."
+}

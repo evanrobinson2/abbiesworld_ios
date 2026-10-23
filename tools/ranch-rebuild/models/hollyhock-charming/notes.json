@@ -1,0 +1,65 @@
+{
+ "what_i_did": [
+  [
+   "Start",
+   "Copied the finished normal hollyhock (build.py, make_views.py, hero_check.py, run.sh) and reshaped it to the charming hero, keeping its structure: 7 meshes with the same names and the same 7 materials (Stem_Green, Petal_Pink, Petal_Rose, Flower_Yellow, Leaf_Bud, Leaf_Green, Leaf_Pale; no new ones), origin at the stalk foot on the ground, front -Y, same 1.45 m height and nearly the same footprint (0.604 x 0.329 m versus the normal 0.592 x 0.384; width/height ratio 0.42 versus 0.41). No variants (plant)."
+  ],
+  [
+   "Target",
+   "Hero only (prompts-charming.json has no turnaround). make_views.py keys the charming hero against its cream backdrop and removes the blue-grey cast shadow, which here runs off to the RIGHT (the normal hero's went left): low-saturation pixels below row 1880, everything right of column 1355 below row 1880, and the brown soil patch below the lowest leaf rim (row 1968). Mask aspect 2.46, the same as the model's."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py unchanged from the normal model: front-on, 6 deg above, harness lens and distance."
+  ],
+  [
+   "Charming reshape",
+   "Blooms: 11 big plump five-petal cups instead of 24 small ones (rim 12.5 to 8 cm), each petal a rounded lobe (notch, two shoulders, tip, 20-vertex rim) with the tips curling forward, a deeper throat (0.62 rim radii), a smaller, softer rose throat so the cup reads pink, 43 triangles each. Buds: nine chunky round buds (two five-sided rings, blunt tops), about 40 % fatter than the normal model's, crowding the top third, pink then green. Stalk: about 50 % thicker, six-sided. Leaves: seven big round leaves with only a shallow notch (the normal's are scalloped hearts), less facet jitter, turned to face the viewer like the hero's toy discs; pale ones in front, dark ones behind. A gentle lean to +X (1.5 cm at the tip)."
+  ]
+ ],
+ "good": [
+  "Hero IoU 0.751 at 768 px / 48 samples: a tall spire of big round pink cups over a low clump of big round leaves.",
+  "989 triangles, under the 1k flower budget.",
+  "Same materials, names, origin and proportions as the normal hollyhock, so it swaps in place."
+ ],
+ "off": [
+  "Lean kept small: sweeps showed the hero spire is nearly straight (lean 0 scored 0.754, 3.5 cm scored 0.71, 6 cm 0.68), so the charming tilt is mostly in the plump, flared blooms and fat buds rather than in a bent stalk.",
+  "The hero's leaves are distinct discs with veins and visible petioles; mine overlap into one round clump at hero size.",
+  "The hero has small leafy bracts among the buds; mine has only the four small stem leaves, mostly hidden behind the blooms.",
+  "The hero's top blooms show their side (trumpet profile) more often; mine face mostly to the front."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "Charming reshape of the normal build: 11 plump flared blooms, chubby buds, thicker stalk, round leaves, 3.5 cm lean.",
+   "mean_iou": 0.67
+  },
+  {
+   "round": 2,
+   "change": "Buds 25 % bigger, leaves 22 % bigger and spread out, smaller and lighter rose throats.",
+   "mean_iou": 0.682
+  },
+  {
+   "round": 3,
+   "change": "Leaves lowered and pulled in to the normal footprint (0.60 m); lowest blooms bigger (12.5 cm) and set further out.",
+   "mean_iou": 0.71
+  },
+  {
+   "round": 4,
+   "change": "Swept lean (0, -2, 1.5, 3.5, 6 cm), spiral phase and bloom front bias: the hero is nearly straight, lean cut to 1.5 cm; phase 3.0 and front bias 1.5 kept.",
+   "mean_iou": 0.744
+  },
+  {
+   "round": 5,
+   "change": "Base leaves turned more to the front (leaf_front 1.4) so they read as round discs; buds 20 % bigger.",
+   "mean_iou": 0.754
+  },
+  {
+   "round": 6,
+   "change": "Buds rebuilt from gem-like bipyramids into rounded two-ring buds; stalk 4 segments to stay under 1k. Final 768 px / 48 sample render.",
+   "mean_iou": 0.751
+  }
+ ],
+ "moving_parts": "None: the game poses and sways plants itself.",
+ "creative_additions": "Forward-curling petal tips, buds shading from pink to green up the tip, and a slight lean."
+}

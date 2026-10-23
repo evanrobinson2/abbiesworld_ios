@@ -1,0 +1,24 @@
+{
+ "what_i_did": [
+  ["Source", "Concept sheet tools/ranch-rebuild/mj/lamp-kit/sheet.png (concept branch), cut into one crop per piece in views/<piece>/ by the harness target mask. Profiles in build.py are read off those crops in pixels and scaled to metres per piece."],
+  ["Crook lantern", "2.22 m. Octagonal lathed iron base (vase, collars, rings), round shaft, a 6-sided swept crook ending in a curl, two links, a 4-sided lantern (flared pyramid roof, bulging glass with corner bars, floor, knob). LightAnchor at the glass centre (0.49, 0, 1.31)."],
+  ["Post lantern", "1.50 m. Jittered square timber post with a sloped top, iron cup and plate, 4-sided egg-shaped glass with corner bars, flared roof and top ring. LightAnchor at (0, 0, 1.18)."],
+  ["Porch lamp", "0.47 m. Hexagonal wall plate (back face on y = 0, wall at +Y), boss, swan-neck arm, 6-sided lantern hanging at y = -0.20. Origin at the plate centre. LightAnchor at (0, -0.20, -0.10)."],
+  ["String lights", "Two rough timber posts 2.42 and 2.38 m, 2.5 m apart, with a slight lean, dark straps, a cable sagging 0.32 m and four bulbs on sockets. LightAnchor_1..4 left to right at the bulb centres."],
+  ["Materials", "Iron_Black #2e251f (iron, cable, straps, sockets), Timber_Warm #643a24, Glass_Warm #ffc56b with the same emissive (strength 1; the game drives it). Glass_Warm is on glass and bulbs only. Smooth shading with split normals at 50 deg (timber 35 deg), flat colours, no textures."]
+ ],
+ "good": ["Post lantern front IoU 0.895.", "Crook lantern front IoU 0.794.", "Porch lamp IoU 0.822 from a calibrated 45 deg camera (the sheet draws it three-quarter).", "All pieces under 1,500 triangles."],
+ "off": [
+  "String lights score 0.016 at the specified 2.5 m spacing: the sheet's posts are about 1.63 m apart for their 2.4 m height, and thin posts in the wrong place give almost no overlap. The same model at the sheet spacing (LAMP_SPAN=1.63) scores 0.592.",
+  "The crook's foot plate cast shadow is counted as object in the target mask (the rows near the ground are wider than the plate), which costs the crook a little.",
+  "No candle or flame inside the glass, no wood grain, knots or iron hammer marks: flat colours only.",
+  "The sheet's post lantern is as tall as the crook (about 2.2 m at the crook's scale). It is built at the specified 1.5 m with the sheet's proportions scaled uniformly, so the lantern is small for its post compared with the crook."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build of all four from eyeballed crop measurements.", "mean_iou": {"crook": 0.591, "post": 0.897, "porch_side": 0.624, "string": 0.014}},
+  {"round": 2, "change": "Crook base and crook path re-measured from the target mask rows; octagon turned so a vertex faces +-X; lantern roof flare. Porch scored from a calibrated three-quarter camera (view_check.py).", "mean_iou": {"crook": 0.769, "post": 0.897, "porch_sheet": 0.817, "string": 0.014}},
+  {"round": 3, "change": "Crook cut to budget (6-sided crook tube, lighter links, fewer base rings). Porch arm spline-smoothed and thickened, knob moved onto the plate. String lights: lean reduced, bulbs closer to the cable, checked at the sheet span.", "mean_iou": {"crook": 0.794, "post": 0.895, "porch_sheet": 0.822, "string": 0.016, "string_sheet_span": 0.592}}
+ ],
+ "moving_parts": "None. The game drives the Glass_Warm emissive and places lights at the LightAnchor nodes.",
+ "creative_additions": "None beyond the sheet."
+}

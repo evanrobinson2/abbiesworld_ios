@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "chicken-charming",
+  "group": "animal",
+  "replaces": "simulation-assets/organics/chicken-{idle,feeding,rest}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "81554f06-bb0c-42eb-a168-4271b4db4882",
+      "grid_url": "https://www.midjourney.com/jobs/81554f06-bb0c-42eb-a168-4271b4db4882?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "6e99e2a4-b152-4fdb-a623-54aa7d7e8978",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:45:33.916Z",
+      "grid_done_at": "2026-10-23T00:45:51.918Z",
+      "upscale_clicked_at": "2026-10-23T00:46:02.066Z",
+      "downloaded_at": "2026-10-23T00:47:15.444Z",
+      "pick_reason": "chibi hen in side view with golden-tipped feathers, red comb and wattle, comb not near the edge"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "9d4da5a3-f61b-4c7e-82a6-07c75b00100a",
+      "grid_url": "https://www.midjourney.com/jobs/9d4da5a3-f61b-4c7e-82a6-07c75b00100a?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "0a55e5c0-c64b-45b2-a539-2c349ea25baa",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:47:25.556Z",
+      "grid_done_at": "2026-10-23T00:47:43.561Z",
+      "upscale_clicked_at": "2026-10-23T00:47:53.777Z",
+      "downloaded_at": "2026-10-23T00:49:13.607Z",
+      "pick_reason": "front, side and back of one chibi hen with margin around each view"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "deef7a99fe413ae2360415ebe884d98927c1262c1e022393c320ea84d7c91b6c",
+      "bytes": 4045040,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/6e99e2a4-b152-4fdb-a623-54aa7d7e8978/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "82f740c0588ff1f44f782d58b8a2a65b60c1dc06c5571fe5407fdbaefb0fe750",
+      "bytes": 2767003,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/0a55e5c0-c64b-45b2-a539-2c349ea25baa/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "37215d8e35ca840b40e90bca0cafb42695a58d1e3b169682218532654b855390",
+      "bytes": 818384,
+      "pixels": [
+        734,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken-charming [('front', 193, 927), ('side', 1018, 1772), ('back', 1910, 2713)]"
+    },
+    "view_side.png": {
+      "sha256": "2ec8416040be29dda6084997f82fce1b4771c9fca64fafebcb4b70f7368b9ac9",
+      "bytes": 851830,
+      "pixels": [
+        754,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken-charming [('front', 193, 927), ('side', 1018, 1772), ('back', 1910, 2713)]"
+    },
+    "view_back.png": {
+      "sha256": "815ba1370cfb811f9eb23fff8bc719b02dd7160b95dc2589e19e4794f54319b9",
+      "bytes": 849970,
+      "pixels": [
+        803,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken-charming [('front', 193, 927), ('side', 1018, 1772), ('back', 1910, 2713)]"
+    }
+  }
+}

@@ -1,0 +1,216 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/coneflower-charming",
+ "name": "coneflower-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "meadow flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a clump of purple coneflowers with drooping pink petals and orange-brown cones, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a clump of purple coneflowers with drooping pink petals and orange-brown cones, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "de9897a7-be79-4aeb-82d1-4d412562b077",
+    "grid_url": "https://www.midjourney.com/jobs/de9897a7-be79-4aeb-82d1-4d412562b077?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "33365ed6-93fe-4b07-bdd4-403073dadcf5",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:49:20.538Z",
+    "grid_done_at": "2026-10-23T01:49:38.539Z",
+    "upscale_clicked_at": "2026-10-23T01:49:49.373Z",
+    "downloaded_at": "2026-10-23T01:50:58.154Z",
+    "pick_reason": "full clump of drooping pink petals with orange cones, whole plant with margin"
+   }
+  },
+  "files": {
+   "hero.png": "7f04781bbb01aefaee6948d5dfdf6ab8eae5d861625ca6a04fb0b69d39283cc9"
+  },
+  "folder": "tools/ranch-rebuild/mj/coneflower-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/coneflower-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "Normal build reshaped: 9 blooms from the charming hero, domed 6-sided cones, wide petals, broad 4-tri leaves, thick stems, lean, smooth shading. Blooms too small, tuft too low.",
+    "mean_iou": 0.666
+   },
+   {
+    "round": 2,
+    "change": "Bloom scale 1.1 -> 1.35, deeper droop, tuft up to 0.52 of the height, longer base leaves.",
+    "mean_iou": 0.765
+   },
+   {
+    "round": 3,
+    "change": "Looked at it: cones read as balls perched on lampshades. Lower, wider domes, shallower droop with a stronger tip bend, more upright base leaves.",
+    "mean_iou": 0.744
+   },
+   {
+    "round": 4,
+    "change": "Bloom scale 1.5, bigger stem leaves, softer tip bend.",
+    "mean_iou": 0.773
+   },
+   {
+    "round": 5,
+    "change": "Bloom scale 1.42, droop 42-55, narrower crown at the ground.",
+    "mean_iou": 0.778
+   },
+   {
+    "round": 6,
+    "change": "7 spoon petals with a rounded nose instead of 8 square strips (gaps show between petals), base leaves 46 -> 40 to stay under 1k.",
+    "mean_iou": 0.799
+   },
+   {
+    "round": 7,
+    "change": "Seed sweep (1, 3, 5, 7, 11, 13 at 256 px): 0.77-0.80, seed 11 kept.",
+    "mean_iou": 0.799
+   },
+   {
+    "round": 8,
+    "change": "Longer stem leaves set higher (30-70 %); final 768 px / 48 samples.",
+    "mean_iou": 0.801
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied build.py, make_views.py, hero_check.py and run.sh from models/coneflower and reshaped the same design: same origin, orientation, height (0.744 m), meshes (cones, petals, stems, leaves_green, leaves_dark) and material names (Flower_Petal_Pink, Flower_Seed_Orange, Stem_Green, Leaf_Green, Leaf_Dark). No new materials, no variants (plant group)."
+   ],
+   [
+    "Target",
+    "Scored on the charming hero alone (no turnaround was made). make_views.py keys the cream backdrop and drops the grey-tan cast shadow on the lower left (B/R > 0.6 with G/R 0.8-0.97 in that zone; leaves are olive with B/R < 0.5, petals pink with G/R ~0.6)."
+   ],
+   [
+    "Camera",
+    "hero_check.py unchanged: front-on from 6 deg up, as for the normal model (the charming hero is drawn from the same direction)."
+   ],
+   [
+    "Blooms",
+    "9 blooms measured from the charming hero (it has fewer, bigger heads than the normal one's 13), bloom scale 1.42. Each has a plumper 6-sided domed seed cone with an extra rounded crown ring (36 tris) and 7 wide spoon petals, each with a rounded nose point past the tip, drooping 42-55 deg then a further 22 deg."
+   ],
+   [
+    "Stems and leaves",
+    "Stems twice as thick as the normal ones. All leaves are broad ovate cards (6 verts, 4 tris, folded on the midrib) instead of narrow lances: 18 big stem leaves at 30-70 % height and a 40-leaf vase tuft up to 0.52 of the height."
+   ],
+   [
+    "Toy finish",
+    "Blooms lean further out from the axis (TILT_OUT 0.9 vs 0.3) and nod more to the camera; the whole clump leans a touch right as it rises (x += 0.04 z^2/H); cones, petals and stems are smooth-shaded; colours a little brighter and more saturated."
+   ],
+   [
+    "Game readiness",
+    "979 triangles (budget 1k), 5 meshes, one flat material each, double-sided cards. Height 0.744 m, about 0.58 x 0.38 m in plan (normal: 0.63 x 0.43; width/depth ratio 1.52 vs 1.45). to_game.py coneflower-charming installed simulations/regional-assets-charming/GF-679.glb."
+   ]
+  ],
+  "creative_additions": "Rounded spoon-tipped petals and domed seed cones give the toy look; blooms splay outward and the clump leans slightly, so it reads bouncy rather than upright."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.576208233833313,
+   0.4268823266029358,
+   0.7439999580383301
+  ],
+  "triangles": 979,
+  "materials": [
+   "Flower_Seed_Orange",
+   "Leaf_Dark",
+   "Leaf_Green",
+   "Flower_Petal_Pink",
+   "Stem_Green"
+  ],
+  "parts": [
+   {
+    "name": "cones",
+    "materials": [
+     "Flower_Seed_Orange"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_green",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "petals",
+    "materials": [
+     "Flower_Petal_Pink"
+    ]
+   },
+   {
+    "name": "stems",
+    "materials": [
+     "Stem_Green"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.801,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.801 at 768 px / 48 samples (normal model: 0.729 on its own hero).",
+   "Reads as the same coneflower clump, but chunkier: big orange domes on drooping pink spoon-petal skirts, broad leaves, soft shading.",
+   "Same materials and mesh names as the normal model, so seasons and shading roles behave the same."
+  ],
+  "off": [
+   "The hero's petals are ~15 thin ragged strips per bloom; at 1k triangles each bloom has 7 wide spoon petals, so skirts read as bells up close.",
+   "The hero's leaf mass reaches out to the sides at mid-height; the model's tuft is narrower there (orange slivers on the overlay).",
+   "The harness 3/4 'hero' camera does not match a front-on hero and no turnaround exists, so the official harness score is empty (as for the normal model); hero_check.py is the score.",
+   "A little cast shadow remains under the front of the clump in views/hero.png (it sits inside the leaf mass, so it barely affects IoU)."
+  ]
+ },
+ "exports": {
+  "runtime": "coneflower-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-679.glb"
+   ]
+  }
+ },
+ "files": {
+  "coneflower-charming.glb": {
+   "sha256": "f1d60d8b75fcc35f74d61b196bffa56d4f36bedf43e76d579dfa2025c31c3e53",
+   "bytes": 43296
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "5e89e22e7fe44e09b7a25fab646d7ea6dc5d361b",
+  "path": "tools/ranch-rebuild/models/coneflower-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

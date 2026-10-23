@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "borage-charming",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-249.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a borage plant clump with soft hairy leaves and star-shaped bright blue flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "824db6f8-809f-4163-986c-845830c8f88b",
+      "grid_url": "https://www.midjourney.com/jobs/824db6f8-809f-4163-986c-845830c8f88b?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "0932cae4-b8fb-4e5a-b605-4eac9b8f76ee",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:41:43.658Z",
+      "grid_done_at": "2026-10-23T01:42:01.661Z",
+      "upscale_clicked_at": "2026-10-23T01:42:11.594Z",
+      "downloaded_at": "2026-10-23T01:43:23.167Z",
+      "pick_reason": "oversized star-shaped blue flowers over plump leaves, whole plant with margin"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "fd2f1a2f06319baf47f37d1a717c60dea14bf141f367e85a52c3b7992024a34e",
+      "bytes": 3544951,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/0932cae4-b8fb-4e5a-b605-4eac9b8f76ee/0_0.png"
+    }
+  }
+}

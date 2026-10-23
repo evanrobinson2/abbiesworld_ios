@@ -47,7 +47,7 @@ export async function startLive({stage,audio,button}){
   };
   ws.onmessage=ev=>{let e;try{e=JSON.parse(ev.data);}catch{return;}for(const x of Array.isArray(e)?e:[e])onEvent(x);};
   ws.onerror=()=>{};
-  ws.onclose=ev=>{if(!ended)stop(ev.code===1000?'Live mode is resting. Tap Talk to play again.':'The connection dropped. Tap Talk to try again.');};
+  ws.onclose=ev=>{if(!ended)stop(ev.code===4402?'The Computer has used up its magic for now. Keep playing!':ev.code===1000?'Live mode is resting. Tap Talk to play again.':'The connection dropped. Tap Talk to try again.');};
  }catch(e){stop(e.message||String(e));}
 
  timer=setInterval(()=>{

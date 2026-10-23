@@ -1,0 +1,39 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/horse (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same 28-part hierarchy with pivots at the joints (body > neck > head > muzzle/blaze/eyes/ears/forelock, neck > mane, body > tail, body > leg_<xx>_upper > _lower > _hoof > _sock), same idle/feeding/rest poses (feeding still solves its own neck angle), same origin (standing footprint centre on the ground), head toward -Y, same material names and roles (Fur_Sorrel, Fur_Cream, Hair_Dark, Horn_Hoof, Horn_Eye). One new part and material: cheeks / Fur_Blush (role skin) for the rosy cheeks."],
+  ["Views", "The hero wins. make_views.py keys mj hero.png itself: the harness mask kept the hero's warm cast shadow and lost the lower half of the cream muzzle (too close to the backdrop), so it uses a looser 0.05 threshold and, below the ground line, drops shadow pixels (g/r > 0.70). view_front and view_back are the harness masks plus the looser mask above the chest (to keep the cream muzzle), then MIRRORED left-right: the sheet hangs the mane on the horse's left (+X) but the hero shows it on the near side, the horse's right (-X). view_side is dropped: it is a three-quarter view (whole face, both eyes), not a side elevation. Scored: front and back with the harness on views/, hero with hero_check.py on views/hero.png."],
+  ["Hero camera", "The hero sees the horse's right side (-X) with the head on the right, turned toward the camera. hero_check.py renders from there with the harness lens; a yaw 10-45 x elevation 0-15 grid on the round-6 model put it at 24 deg yaw off the side, 4 deg up."],
+  ["Charming massing", "A plush chibi pony instead of a draught horse: the head is 1.3x the poll-to-muzzle length and round (0.78 m across the cheeks, half the height from ear tips to muzzle), a short thick neck mostly hidden by mane, a round barrel 0.95 m wide and 1.4 m long sitting low (belly 0.5 m), short straight stubby legs (0.24 m thick, a soft cuff seam above chunky flared dark hooves), plump leaf-shaped ears splayed unevenly, smooth shading and almost no vertex jitter (0.8 % vs 3.5 %) so it reads soft, not faceted."],
+  ["Charming details", "Big glossy black button eyes, rosy blush cheeks, a narrow cream blaze widening into a big round cream muzzle with small dark nostrils, a chunky dark mane of 14 thick wide locks falling long on the near side, a big forelock swoop over the forehead toward the far side, and a fat tail that flows back and swishes 0.36 m to the side (+X) with a flicked tip."],
+  ["Tilt and lean", "Idle: the neck turns 4 deg toward the near side and the head cocks 8 deg. Feeding: the head keeps a 5 deg cock while grazing. Rest: legs fold under the barrel, the head stays up and cocked 9 deg, the tail curls round to the side."],
+  ["Game readiness", "3,158 triangles in every pose (budget 4k). Footprint 1.04 x 2.57 m (width/length 0.40; the normal horse is 0.70 x 2.11, 0.33), 2.34 m to the ear tips. Exported horse-charming.glb and variants/idle, feeding, rest.glb with export_animations=False; to_game.py horse-charming ran clean and wrote simulation-assets-charming/organics/horse-{idle,feeding,rest}.json/.glb, all parts role skin, muzzle at +X."]
+ ],
+ "good": [
+  "Hero check 0.758: body, legs, head and tail line up from the hero's own direction; the face reads as the hero's (button eyes, blush, cream muzzle and blaze, forelock swoop).",
+  "It is clearly the same horse as the normal one (chestnut coat, dark mane and tail, cream blaze and muzzle, dark hooves) and stays a working game piece: same parts, joints, poses and roles.",
+  "Smooth shading with a few more ring sides still fits in 3.2k triangles."
+ ],
+ "off": [
+  "Front 0.707 / back 0.682: the sheet's front and back are wider (aspect 1.95 and 2.23 against 2.40) because its head is turned well to one side and its tail fans far out. Turning the head 12 deg and swinging the tail 0.6 m scored 0.762 but widened the footprint to 1.32 x 2.30 m (width/length 0.57), which would make the game rescale it badly, so I kept a small turn and a 0.36 m swish.",
+  "The footprint is still chubbier than the normal horse (width/length 0.40 vs 0.33): a chibi pony is short and wide. The body is kept 1.4 m long (a 7 % shorter body read more chibi but dropped the hero to 0.73) so the ratio stays close.",
+  "No white socks: the charming hero has none, so leg_<xx>_sock is kept for structure but uses the coat colour (Fur_Sorrel) as a soft cuff seam; Fur_Cream is now only the blaze and muzzle.",
+  "The nostrils are Horn_Eye dark; the hero's are a reddish brown.",
+  "The mane is separate thick locks rather than the hero's single smooth sculpted slab; at tile size it reads as one dark mass.",
+  "No smile line (the sheet draws one, the hero does not)."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First charming build from the normal horse: round head, short neck, round barrel, stubby legs, button eyes, blush cheeks, chunky mane on the near side, smooth shading.", "mean_iou": 0.675, "hero_iou": 0.715},
+  {"round": 2, "change": "Head 1.3x, longer mane drop, tail swished 0.30 m to +X.", "mean_iou": 0.614, "hero_iou": 0.716},
+  {"round": 3, "change": "Barrel 15 % wider, legs further apart, tail swish 0.45 m, 13 wider mane locks.", "mean_iou": 0.708, "hero_iou": 0.714},
+  {"round": 4, "change": "Neck turned 12 deg and head 6 deg toward the near side, swish 0.62 m: better sheet score but a 1.32 m wide footprint; rejected.", "mean_iou": 0.762, "hero_iou": 0.697},
+  {"round": 5, "change": "Back to a 4 deg turn and 0.36 m swish (footprint 1.00 x 2.45 m).", "mean_iou": 0.688, "hero_iou": 0.712},
+  {"round": 6, "change": "Legs wider apart, 14 fuller mane locks; hero camera recalibrated by grid search (24 deg yaw, 4 deg up).", "mean_iou": 0.696, "hero_iou": 0.763},
+  {"round": 7, "change": "Head 1.42x plus a higher tail flowing further back: worse everywhere, head scale reverted.", "mean_iou": 0.651, "hero_iou": 0.759},
+  {"round": 8, "change": "Head back to 1.3x, kept the new tail.", "mean_iou": 0.693, "hero_iou": 0.761},
+  {"round": 9, "change": "Body 7 % shorter (YS 0.93): hero dropped, reverted.", "mean_iou": 0.696, "hero_iou": 0.732},
+  {"round": 10, "change": "Face: shorter rounder muzzle, narrow blaze widening down, bigger button eyes set out on the surface, thicker mane locks; rest-pose tail curled to the side.", "mean_iou": 0.7, "hero_iou": 0.758},
+  {"round": 11, "change": "Final 768 px / 48 sample render and score (front 0.707, back 0.682), hero check 0.758 at 768 px.", "mean_iou": 0.695, "hero_iou": 0.758}
+ ],
+ "moving_parts": "None animated (the game poses animals itself). Rigid parts in a joint hierarchy, as in the normal horse; variants/idle, feeding and rest are rotations of the neck, head, tail and leg segments around their joints plus a drop of the body.",
+ "creative_additions": "Rosy blush cheeks (new Fur_Blush material), glossy button eyes, a plush cuff seam above the hooves, unevenly splayed ears, a cocked head in every pose, and a tail that swishes to one side and curls round when lying down."
+}

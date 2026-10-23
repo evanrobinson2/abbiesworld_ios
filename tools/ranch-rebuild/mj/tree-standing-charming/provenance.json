@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "tree-standing-charming",
+  "group": "tree",
+  "replaces": "simulation-assets/organics/tree-standing.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "821fe092-454d-46cb-9d93-1365663922ab",
+      "grid_url": "https://www.midjourney.com/jobs/821fe092-454d-46cb-9d93-1365663922ab?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "ec42818d-9f19-4d87-8d2f-3632c4fd2fe1",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:49:28.895Z",
+      "grid_done_at": "2026-10-23T00:49:46.898Z",
+      "upscale_clicked_at": "2026-10-23T00:49:57.343Z",
+      "downloaded_at": "2026-10-23T00:51:10.586Z",
+      "pick_reason": "twisty trunk with flared roots, swirling clumps in two greens, whole tree with margin; variant 0 had a corner mark"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "93962e05-1cd4-4361-b826-8f17297206bc",
+      "grid_url": "https://www.midjourney.com/jobs/93962e05-1cd4-4361-b826-8f17297206bc?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "01d4c226-70ba-4d1f-b9c8-086a20337ff7",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:51:20.203Z",
+      "grid_done_at": "2026-10-23T00:51:38.206Z",
+      "upscale_clicked_at": "2026-10-23T00:51:48.380Z",
+      "downloaded_at": "2026-10-23T00:53:11.973Z",
+      "pick_reason": "three views of the same swirly tree at one scale, separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "3df7f3393f61572e0b86695be4c786e09527356abb573885304b3b0e9b093bd5",
+      "bytes": 2578889,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/ec42818d-9f19-4d87-8d2f-3632c4fd2fe1/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "ceddb7333021726873161928849622d155a548df254c5b604f650c5127105d37",
+      "bytes": 3235063,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/01d4c226-70ba-4d1f-b9c8-086a20337ff7/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "ee7eceadf50def454326258957316da0252e9ad9caa9598bb33a1d9f6c398ef5",
+      "bytes": 1186867,
+      "pixels": [
+        1022,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/tree-standing-charming [('front', 124, 1146), ('side', 1146, 1844), ('back', 1844, 2835)]"
+    },
+    "view_side.png": {
+      "sha256": "810f2e3db683017c233ad0e073559c5fb35f3096fe64f704ce4ac354ea044215",
+      "bytes": 826379,
+      "pixels": [
+        698,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/tree-standing-charming [('front', 124, 1146), ('side', 1146, 1844), ('back', 1844, 2835)]"
+    },
+    "view_back.png": {
+      "sha256": "33882aa9a9b4595031420a43b871773b874dce0fdb7407f904f3b924e3b4f16a",
+      "bytes": 1097002,
+      "pixels": [
+        991,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/tree-standing-charming [('front', 124, 1146), ('side', 1146, 1844), ('back', 1844, 2835)]"
+    }
+  }
+}

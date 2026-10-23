@@ -1,0 +1,30 @@
+{
+ "what_i_did": [
+  ["Started from the normal model", "build.py, make_views.py, hero_check.py and run.sh are copied from models/water-trough and reshaped. The structure is the same: one build.py with a STATE switch that writes variants/full.glb, partial.glb and empty.glb (no carried state), the same origin (footprint centre on the ground), the same front (long side at -Y), the same material names and roles (Plank_Trough, Plank_TroughFloor, Timber_Leg, Metal_Iron, Water), and the same footprint ratio (1.88 x 0.73 m overall against the normal 1.80 x 0.70 m, so 2.58:1 against 2.55:1). There is one new object, 'rim', which uses the existing Plank_Trough material."],
+  ["Targets", "The hero is the only target. The turnaround sheet shows a different, boat-shaped trough: curved, tapering ends, a rounded belly, and the iron straps at mid-length rather than at the corners. The hero wins, so all three sheet views are dropped. make_views.py keys the hero the same way as the normal trough's (the backdrop/shadow ratio test plus the warm contact-shadow cut below row 1150). This hero's sunlit rim tops are pale enough to pass the shadow test, so above a line the cast shadow never crosses, anything 0.06 or more from the backdrop counts as trough. The output is views/hero_mask.png."],
+  ["Hero camera", "hero_check.py has the same lens and distance as the normal one, but the camera was re-calibrated for this hero: 46 deg off the front towards -X and 24 deg up, held fixed from round 1 on. Proportion sweeps around the normal model's 1.75 x 0.62 m footprint (L 1.6 to 1.9, W 0.56 to 0.68, rim at 0.42 to 0.50 m) all scored lower, so the normal footprint is kept, with the rim raised to 0.46 m."],
+  ["Charming shape", "Every plank is a plump pillow: a superellipse section (exponent 5) whose outer face bulges 16 mm, with shrunk end rings so the plank ends look rounded and soft. Each wall has two fat planks under a big rim beam (0.15 x 0.10 m) that overhangs the walls on all four sides. The long rim beams run 3 cm past the ends to make chunky corner ends, as in the hero. The long walls belly out 3 cm at mid-length, and the rim follows at 60%. Each plank sits a little crooked, with a random roll of up to 2.2 deg, a sag or hump of up to 12 mm and +-10 mm wobble per segment."],
+  ["Iron and feet", "The iron is oversized. Each corner has an L-shaped bracket folded over the rim corner (0.12 m arms), with a lip down the rim face and two big 40 mm square bolt heads. An 0.11 m strap runs down the long face from under the rim to below the walls, with three more bolt heads. The feet are chunky 0.185 m blocks with a rounded shoulder, each twisted a few degrees and leaning slightly."],
+  ["Fill states", "Water at 0.40 m for full (up inside the rim), 0.28 m for partial, and none for empty, where the darker plank floor shows. The water panel's long edges follow the walls' belly so no gap shows."],
+  ["Game readiness", "1,860 triangles for full and partial, 1,852 for empty (supply budget 2k). There are 6 meshes, each with one flat material. to_game.py water-trough-charming ran cleanly: it scaled x0.953 to keep the old 1.79-unit footprint and wrote simulation-assets-charming/supplies/water-trough-{full,partial,empty}.json/.glb (plus the sandbox2-runtime copies) with roles timber (feet, floor, rim, walls), metal (straps) and water."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.915 from the matched camera at the final 768 px / 48 samples render (the normal trough scored 0.899 on its own hero).",
+  "It is still clearly the same trough at tile size: a long plank box on four feet with iron corners and a blue water panel. It reads as softer and toy-like: fat rounded planks, a big round rim, a plump belly and chunky bolts.",
+  "It drops in for the normal model: same states, materials, roles, origin, orientation and footprint ratio."
+ ],
+ "off": [
+  "The hero's rim is a wide, flat-topped frame with carved, hand-cut edges, and its planks have grain lines and cracks. Mine are faceted, flat-shaded superellipse logs with no grain.",
+  "The hero's water has painted ripples and a near-white cyan centre. Mine is a flat light-blue panel.",
+  "The hero's front-left strap runs straight up into the rim bracket as one piece. Mine are a separate bracket and strap. The bolts are square frustums, not the hero's domed hex heads.",
+  "The turnaround sheet's boat-shaped trough (curved ends, mid-length straps) was not followed. The hero wins."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First charming build from the normal structure: pillowy 12-point plank sections, 2 planks per wall plus a round rim beam, feet, bracket caps and straps, about 2.7k triangles. Cut to 8-point sections and 4 segments (1.85k). Camera re-calibrated to -46/24.", "mean_iou": 0.899},
+  {"round": 2, "change": "Boxier sections (superellipse exponent 5 for the walls, 4.5 for the rim), a wider 0.15 m rim and less bulge, so the planks read as fat boards, not stacked logs as in the hero.", "mean_iou": 0.901},
+  {"round": 3, "change": "Proportion sweeps (L, W, H, z0, rim overhang, foot inset) all scored lower, so they were kept. Added a 3 cm belly to the long walls, the water panel following it, plus softer, less saturated wood and lighter water.", "mean_iou": 0.911},
+  {"round": 4, "change": "Oversized friendly iron (0.12 m bracket arms, 0.11 m straps, 40 mm bolts), chunkier 0.185 m feet, more plank tilt (2.2 deg). Final render at 768 px / 48 samples.", "mean_iou": 0.915}
+ ],
+ "moving_parts": "None. The game poses the trough itself, and the fill level is swapped between the full, partial and empty variants.",
+ "creative_additions": "The plump mid-length belly (from the prompt's 'bulging and plump', which the hero only hints at) and the slight crooked roll on every plank, for the storybook tilt and lean. The trough itself still sits level, so it works as a game piece."
+}

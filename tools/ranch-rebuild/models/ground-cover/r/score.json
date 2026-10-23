@@ -1,0 +1,45 @@
+{
+ "tuft-a": {
+  "iou": 0.53,
+  "triangles": 120
+ },
+ "tuft-b": {
+  "iou": 0.604,
+  "triangles": 120
+ },
+ "tuft-c": {
+  "iou": 0.564,
+  "triangles": 120
+ },
+ "tuft-d": {
+  "iou": 0.485,
+  "triangles": 120
+ },
+ "tuft-e": {
+  "iou": 0.569,
+  "triangles": 120
+ },
+ "tuft-f": {
+  "iou": 0.349,
+  "triangles": 120
+ },
+ "clover-patch": {
+  "iou": 0.672,
+  "triangles": 292
+ },
+ "wildflower-clump": {
+  "iou": 0.396,
+  "triangles": 265
+ },
+ "path-edge": {
+  "iou": 0.768,
+  "triangles": 179
+ },
+ "mean_iou": 0.549,
+ "camera": {
+  "yaw": 0,
+  "elev": 16.0,
+  "dist": 1.9,
+  "lens": "harness 50 mm / 36 mm"
+ }
+}
