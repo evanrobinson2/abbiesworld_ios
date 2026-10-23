@@ -1,0 +1,68 @@
+{
+  "appid": 274290,
+  "name": "Gods Will Be Watching",
+  "store_url": "https://store.steampowered.com/app/274290/",
+  "genres": [
+    "Puzzle",
+    "Story"
+  ],
+  "short_description": "Hard moral survival puzzles.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Story"
+  ],
+  "summary": "Hard moral survival puzzles.",
+  "identity": {
+    "core_loop": "Choose actions each turn, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Bleak.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "meta": 0.1,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Moody.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Not for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.78,
+      "expression": 0.56,
+      "structure": 0.11,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

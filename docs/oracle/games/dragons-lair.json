@@ -1,0 +1,68 @@
+{
+  "appid": 227380,
+  "name": "Dragon's Lair",
+  "store_url": "https://store.steampowered.com/app/227380/",
+  "genres": [
+    "Arcade",
+    "Animation"
+  ],
+  "short_description": "The classic animated quick-time adventure.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Arcade",
+    "Animation"
+  ],
+  "summary": "The classic animated quick-time adventure.",
+  "identity": {
+    "core_loop": "Watch, press at the right moment.",
+    "mechanics": null,
+    "ui_and_game_feel": "Frustrating.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.0,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "None; timing cues in the animation.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Don Bluth animation.",
+    "palette": null,
+    "audio_mood": "Cartoon.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Beautiful animation, but players need agency."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.89,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.33,
+      "systems": 0.11,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

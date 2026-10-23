@@ -1,0 +1,68 @@
+{
+  "appid": 675260,
+  "name": "Batman: The Enemy Within - The Telltale Series",
+  "store_url": "https://store.steampowered.com/app/675260/",
+  "genres": [
+    "Narrative",
+    "Choices"
+  ],
+  "short_description": "A Telltale story where Bruce Wayne's choices shape relationships.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Narrative",
+    "Choices"
+  ],
+  "summary": "A Telltale story where Bruce Wayne's choices shape relationships.",
+  "identity": {
+    "core_loop": "Watch, choose, quick-time, see consequences.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cinematic.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "meta": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Choice prompts and 'will remember that' notes.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Comic-book 3D.",
+    "palette": null,
+    "audio_mood": "Cinematic.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "The 'they will remember that' note is a simple, powerful feedback line."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.44,
+      "structure": 0.11,
+      "social": 0.33,
+      "systems": 0.56,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

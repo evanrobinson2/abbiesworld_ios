@@ -1,0 +1,68 @@
+{
+  "appid": 253430,
+  "name": "CastleMiner Z",
+  "store_url": "https://store.steampowered.com/app/253430/",
+  "genres": [
+    "Survival",
+    "Voxel"
+  ],
+  "short_description": "Voxel survival with zombies and mining.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Voxel"
+  ],
+  "summary": "Voxel survival with zombies and mining.",
+  "identity": {
+    "core_loop": "Mine, build, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Simple.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Voxel.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A simple voxel survival loop."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.44,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

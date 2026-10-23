@@ -1,0 +1,70 @@
+{
+  "appid": 49520,
+  "name": "Borderlands 2",
+  "store_url": "https://store.steampowered.com/app/49520/",
+  "genres": [
+    "Shooter",
+    "Looter",
+    "Co-op"
+  ],
+  "short_description": "Cel-shaded looter shooter with endless guns.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Looter",
+    "Co-op"
+  ],
+  "summary": "Cel-shaded looter shooter with endless guns.",
+  "identity": {
+    "core_loop": "Shoot, loot, level, repeat.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Damage numbers overlay.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Cel-shaded comic.",
+    "palette": null,
+    "audio_mood": "Rock.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Cel-shaded comic style reads well; loot numbers do not."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.56,
+      "systems": 0.78,
+      "chance": 0.78,
+      "session": 0.33
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

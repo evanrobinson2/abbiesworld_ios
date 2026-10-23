@@ -1,0 +1,70 @@
+{
+  "appid": 602960,
+  "name": "Barotrauma",
+  "store_url": "https://store.steampowered.com/app/602960/",
+  "genres": [
+    "Co-op",
+    "Submarine",
+    "Survival"
+  ],
+  "short_description": "Crew a submarine under an alien ocean, where every job matters.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Co-op",
+    "Submarine",
+    "Survival"
+  ],
+  "summary": "Crew a submarine under an alien ocean, where every job matters.",
+  "identity": {
+    "core_loop": "Take a role, keep the sub running, fix leaks, survive monsters.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic and tense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Sub cutaway shows floods and fires in the world.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "2D cutaway.",
+    "palette": null,
+    "audio_mood": "Deep rumbles.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "A cutaway vehicle where each crew member has a job is great co-op design."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.89,
+      "systems": 0.78,
+      "chance": 0.67,
+      "session": 0.44
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

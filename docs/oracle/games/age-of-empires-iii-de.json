@@ -1,0 +1,70 @@
+{
+  "appid": 933110,
+  "name": "Age of Empires III: Definitive Edition",
+  "store_url": "https://store.steampowered.com/app/933110/",
+  "genres": [
+    "Strategy",
+    "RTS",
+    "Historical"
+  ],
+  "short_description": "Build a colonial-era civilisation and fight on historical maps.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "RTS",
+    "Historical"
+  ],
+  "summary": "Build a colonial-era civilisation and fight on historical maps.",
+  "identity": {
+    "core_loop": "Gather, build, age up, raise an army, win.",
+    "mechanics": null,
+    "ui_and_game_feel": "Classic RTS; busy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Villagers working show the economy; heavy overlay.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Detailed historical diorama.",
+    "palette": null,
+    "audio_mood": "Period orchestral.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Villagers visibly gathering is a living economy readout; the rest is expert RTS."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.44
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "appid": 251570,
+  "name": "7 Days to Die",
+  "store_url": "https://store.steampowered.com/app/251570/",
+  "genres": [
+    "Survival",
+    "Crafting",
+    "Zombies"
+  ],
+  "short_description": "Survive in a voxel world where a zombie horde comes every seventh night.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Crafting",
+    "Zombies"
+  ],
+  "summary": "Survive in a voxel world where a zombie horde comes every seventh night.",
+  "identity": {
+    "core_loop": "Scavenge, build a base, survive the blood moon.",
+    "mechanics": null,
+    "ui_and_game_feel": "Gritty.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The red moon is the warning (diegetic); gauges overlay.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Rough realistic voxel.",
+    "palette": null,
+    "audio_mood": "Tense.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A calendar countdown to a big night is strong tension; not for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 0.67,
+      "systems": 0.78,
+      "chance": 0.67,
+      "session": 0.33
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

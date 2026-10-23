@@ -1,0 +1,67 @@
+{
+  "appid": 63800,
+  "name": "Delve Deeper",
+  "store_url": "https://store.steampowered.com/app/63800/",
+  "genres": [
+    "Strategy",
+    "Turn-based"
+  ],
+  "short_description": "Dwarf teams race to dig the deepest tunnels.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Turn-based"
+  ],
+  "summary": "Dwarf teams race to dig the deepest tunnels.",
+  "identity": {
+    "core_loop": "Dig, fight, find treasure.",
+    "mechanics": null,
+    "ui_and_game_feel": "Charming.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Side cutaway.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Dwarves digging as a race is a nice kid verb."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.44,
+      "systems": 0.56,
+      "chance": 0.56,
+      "session": 0.22
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

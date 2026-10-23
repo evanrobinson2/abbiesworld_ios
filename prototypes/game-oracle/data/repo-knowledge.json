@@ -3589,6 +3589,76 @@
    }
   },
   {
+   "id": "ace-of-spades",
+   "file": "docs/oracle/games/ace-of-spades.json",
+   "appid": 224540,
+   "name": "Ace of Spades",
+   "store_url": "https://store.steampowered.com/app/224540/",
+   "genres": [
+    "Shooter",
+    "Voxel"
+   ],
+   "short_description": "A voxel team shooter where everything can be dug and built.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Voxel"
+   ],
+   "summary": "A voxel team shooter where everything can be dug and built.",
+   "identity": {
+    "core_loop": "Dig, build, shoot, take the flag.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Team colours in the world.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Blocky voxel.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Building and digging during a match is a fun idea; shooting is not for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.56,
+     "expression": 0.78,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.44,
+     "chance": 0.33,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "against-the-storm",
    "file": "docs/oracle/games/against-the-storm.json",
    "appid": 1336490,
@@ -3657,6 +3727,78 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "age-of-empires-iii-de",
+   "file": "docs/oracle/games/age-of-empires-iii-de.json",
+   "appid": 933110,
+   "name": "Age of Empires III: Definitive Edition",
+   "store_url": "https://store.steampowered.com/app/933110/",
+   "genres": [
+    "Strategy",
+    "RTS",
+    "Historical"
+   ],
+   "short_description": "Build a colonial-era civilisation and fight on historical maps.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "RTS",
+    "Historical"
+   ],
+   "summary": "Build a colonial-era civilisation and fight on historical maps.",
+   "identity": {
+    "core_loop": "Gather, build, age up, raise an army, win.",
+    "mechanics": null,
+    "ui_and_game_feel": "Classic RTS; busy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.2,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Villagers working show the economy; heavy overlay.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Detailed historical diorama.",
+    "palette": null,
+    "audio_mood": "Period orchestral.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Villagers visibly gathering is a living economy readout; the rest is expert RTS."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.78,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.33,
+     "session": 0.44
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -3800,6 +3942,76 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "amnesia-the-dark-descent",
+   "file": "docs/oracle/games/amnesia-the-dark-descent.json",
+   "appid": 57300,
+   "name": "Amnesia: The Dark Descent",
+   "store_url": "https://store.steampowered.com/app/57300/",
+   "genres": [
+    "Horror",
+    "Adventure"
+   ],
+   "short_description": "A defenceless man explores a castle where darkness drains his sanity.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Horror",
+    "Adventure"
+   ],
+   "summary": "A defenceless man explores a castle where darkness drains his sanity.",
+   "identity": {
+    "core_loop": "Explore, hide, solve, keep the light.",
+    "mechanics": null,
+    "ui_and_game_feel": "Terrifying.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "meta": 0.3,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.02,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Sanity is shown as screen distortion (meta).",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Gothic castle.",
+    "palette": null,
+    "audio_mood": "Dread.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Meta effects can carry feeling; never as scary for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.56,
+     "expression": 0.44,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0.22,
+     "chance": 0.22,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -4019,6 +4231,76 @@
     "family": "shooter"
    },
    "review": "The ping wheel is the best idea here: point at anything and your character names it out loud. That is exactly how a child could tell the world what they want without reading."
+  },
+  {
+   "id": "arc-raiders",
+   "file": "docs/oracle/games/arc-raiders.json",
+   "appid": 1808500,
+   "name": "ARC Raiders",
+   "store_url": "https://store.steampowered.com/app/1808500/",
+   "genres": [
+    "Shooter",
+    "Extraction"
+   ],
+   "short_description": "Raid a ruined surface past killer machines and extract with loot.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Extraction"
+   ],
+   "summary": "Raid a ruined surface past killer machines and extract with loot.",
+   "identity": {
+    "core_loop": "Drop in, scavenge, avoid machines, extract.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense, cinematic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Machine sounds and lights warn (diegetic).",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Retro-future realism.",
+    "palette": null,
+    "audio_mood": "Sci-fi synth.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Machines announcing themselves with light and sound is good diegetic warning."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
   },
   {
    "id": "arma-3",
@@ -4305,6 +4587,150 @@
    }
   },
   {
+   "id": "barony",
+   "file": "docs/oracle/games/barony.json",
+   "appid": 371970,
+   "name": "Barony",
+   "store_url": "https://store.steampowered.com/app/371970/",
+   "genres": [
+    "Roguelike",
+    "Dungeon crawler",
+    "Co-op"
+   ],
+   "short_description": "A first-person co-op roguelike dungeon crawl.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Roguelike",
+    "Dungeon crawler",
+    "Co-op"
+   ],
+   "summary": "A first-person co-op roguelike dungeon crawl.",
+   "identity": {
+    "core_loop": "Descend, fight, loot, die, retry with friends.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hard and funny.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.2,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Classic RPG overlay.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Pixel-voxel.",
+    "palette": null,
+    "audio_mood": "Dungeon mood.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Co-op dungeon runs bond friends; too punishing for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.56,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.78,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "barotrauma",
+   "file": "docs/oracle/games/barotrauma.json",
+   "appid": 602960,
+   "name": "Barotrauma",
+   "store_url": "https://store.steampowered.com/app/602960/",
+   "genres": [
+    "Co-op",
+    "Submarine",
+    "Survival"
+   ],
+   "short_description": "Crew a submarine under an alien ocean, where every job matters.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Co-op",
+    "Submarine",
+    "Survival"
+   ],
+   "summary": "Crew a submarine under an alien ocean, where every job matters.",
+   "identity": {
+    "core_loop": "Take a role, keep the sub running, fix leaks, survive monsters.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic and tense.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.3,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Sub cutaway shows floods and fires in the world.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "2D cutaway.",
+    "palette": null,
+    "audio_mood": "Deep rumbles.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "A cutaway vehicle where each crew member has a job is great co-op design."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.67,
+     "expression": 0.67,
+     "structure": 0.56,
+     "social": 0.89,
+     "systems": 0.78,
+     "chance": 0.67,
+     "session": 0.44
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "bastion",
    "file": "docs/oracle/games/bastion.json",
    "appid": 107100,
@@ -4369,6 +4795,146 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "batman-the-enemy-within",
+   "file": "docs/oracle/games/batman-the-enemy-within.json",
+   "appid": 675260,
+   "name": "Batman: The Enemy Within - The Telltale Series",
+   "store_url": "https://store.steampowered.com/app/675260/",
+   "genres": [
+    "Narrative",
+    "Choices"
+   ],
+   "short_description": "A Telltale story where Bruce Wayne's choices shape relationships.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Narrative",
+    "Choices"
+   ],
+   "summary": "A Telltale story where Bruce Wayne's choices shape relationships.",
+   "identity": {
+    "core_loop": "Watch, choose, quick-time, see consequences.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cinematic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "meta": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Choice prompts and 'will remember that' notes.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Comic-book 3D.",
+    "palette": null,
+    "audio_mood": "Cinematic.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "The 'they will remember that' note is a simple, powerful feedback line."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 0.56,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "battlefield-2042",
+   "file": "docs/oracle/games/battlefield-2042.json",
+   "appid": 1517290,
+   "name": "Battlefield 2042",
+   "store_url": "https://store.steampowered.com/app/1517290/",
+   "genres": [
+    "Shooter",
+    "Large scale"
+   ],
+   "short_description": "128-player warfare on huge maps with storms.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Large scale"
+   ],
+   "summary": "128-player warfare on huge maps with storms.",
+   "identity": {
+    "core_loop": "Spawn, fight, capture, vehicle.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Military.",
+    "pacing": "fast, medium sessions",
+    "lessons_for_abbies_world": "Weather as a battlefield event; nothing for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.78,
+     "chance": 0.67,
+     "session": 0.67
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -4515,6 +5081,76 @@
    }
   },
   {
+   "id": "betrayer",
+   "file": "docs/oracle/games/betrayer.json",
+   "appid": 243120,
+   "name": "Betrayer",
+   "store_url": "https://store.steampowered.com/app/243120/",
+   "genres": [
+    "Adventure",
+    "Horror"
+   ],
+   "short_description": "A black-and-white colonial America full of ghosts.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Adventure",
+    "Horror"
+   ],
+   "summary": "A black-and-white colonial America full of ghosts.",
+   "identity": {
+    "core_loop": "Explore, listen, fight, uncover.",
+    "mechanics": null,
+    "ui_and_game_feel": "Eerie.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Almost no HUD; red is the only colour.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Black and white with red.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Using one colour as information in a monochrome world is striking."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 0.33,
+     "chance": 0.44,
+     "session": 0.22
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "big-bang-to-us",
    "file": "docs/oracle/games/big-bang-to-us.json",
    "appid": 5097440,
@@ -4564,6 +5200,77 @@
     "owned": true,
     "installed": true,
     "status": "needs play session",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "bioshock-infinite",
+   "file": "docs/oracle/games/bioshock-infinite.json",
+   "appid": 8870,
+   "name": "BioShock Infinite",
+   "store_url": "https://store.steampowered.com/app/8870/",
+   "genres": [
+    "Shooter",
+    "Story"
+   ],
+   "short_description": "A floating city in the sky with a companion who helps you.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Story"
+   ],
+   "summary": "A floating city in the sky with a companion who helps you.",
+   "identity": {
+    "core_loop": "Explore, fight, follow the story with Elizabeth.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cinematic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Companion tosses you items (diegetic).",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Bright Americana.",
+    "palette": null,
+    "audio_mood": "Period songs.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A companion who helps without being asked; nothing else for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0.33,
+     "chance": 0.44,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
     "date": "2026-10-23"
    }
   },
@@ -4636,6 +5343,78 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "blackwake",
+   "file": "docs/oracle/games/blackwake.json",
+   "appid": 420290,
+   "name": "Blackwake",
+   "store_url": "https://store.steampowered.com/app/420290/",
+   "genres": [
+    "Naval",
+    "Co-op",
+    "Multiplayer"
+   ],
+   "short_description": "Crew a sailing warship with other players.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Naval",
+    "Co-op",
+    "Multiplayer"
+   ],
+   "summary": "Crew a sailing warship with other players.",
+   "identity": {
+    "core_loop": "Sail, load cannons, repair, board.",
+    "mechanics": null,
+    "ui_and_game_feel": "Team chaos.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Ship damage in the world.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic sea.",
+    "palette": null,
+    "audio_mood": "Sea.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Shared ship jobs again; pirate-crew fun."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -4924,6 +5703,220 @@
    "review": "A cat tapping along to your keystrokes, nothing more, and millions keep it open. A small creature that reacts to you is its own reward."
   },
   {
+   "id": "borderlands-2",
+   "file": "docs/oracle/games/borderlands-2.json",
+   "appid": 49520,
+   "name": "Borderlands 2",
+   "store_url": "https://store.steampowered.com/app/49520/",
+   "genres": [
+    "Shooter",
+    "Looter",
+    "Co-op"
+   ],
+   "short_description": "Cel-shaded looter shooter with endless guns.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Looter",
+    "Co-op"
+   ],
+   "summary": "Cel-shaded looter shooter with endless guns.",
+   "identity": {
+    "core_loop": "Shoot, loot, level, repeat.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Damage numbers overlay.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Cel-shaded comic.",
+    "palette": null,
+    "audio_mood": "Rock.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Cel-shaded comic style reads well; loot numbers do not."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.78,
+     "chance": 0.78,
+     "session": 0.33
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "borderlands-3",
+   "file": "docs/oracle/games/borderlands-3.json",
+   "appid": 397540,
+   "name": "Borderlands 3",
+   "store_url": "https://store.steampowered.com/app/397540/",
+   "genres": [
+    "Shooter",
+    "Looter",
+    "Co-op"
+   ],
+   "short_description": "More of the cel-shaded looter shooter.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Looter",
+    "Co-op"
+   ],
+   "summary": "More of the cel-shaded looter shooter.",
+   "identity": {
+    "core_loop": "Shoot, loot, level.",
+    "mechanics": null,
+    "ui_and_game_feel": "Loud.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Cel-shaded.",
+    "palette": null,
+    "audio_mood": "Rock.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Same as Borderlands 2."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.78,
+     "chance": 0.78,
+     "session": 0.33
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "brain-out",
+   "file": "docs/oracle/games/brain-out.json",
+   "appid": 578310,
+   "name": "BRAIN / OUT",
+   "store_url": "https://store.steampowered.com/app/578310/",
+   "genres": [
+    "Shooter",
+    "2D"
+   ],
+   "short_description": "A 2D pixel tactical shooter.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "2D"
+   ],
+   "summary": "A 2D pixel tactical shooter.",
+   "identity": {
+    "core_loop": "Fight, loot, rank up.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fast.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Little for Abbie's World."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.67,
+     "expression": 0.44,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "brawlhalla",
    "file": "docs/oracle/games/brawlhalla.json",
    "appid": 291550,
@@ -5068,6 +6061,75 @@
    }
   },
   {
+   "id": "breath-of-death-vii",
+   "file": "docs/oracle/games/breath-of-death-vii.json",
+   "appid": 107300,
+   "name": "Breath of Death VII",
+   "store_url": "https://store.steampowered.com/app/107300/",
+   "genres": [
+    "RPG",
+    "Parody"
+   ],
+   "short_description": "A short parody of classic JRPGs.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Parody"
+   ],
+   "summary": "A short parody of classic JRPGs.",
+   "identity": {
+    "core_loop": "Explore, fight turn-based, level.",
+    "mechanics": null,
+    "ui_and_game_feel": "Funny.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "overlay": 0.8
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.3,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Menus.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Retro pixel.",
+    "palette": null,
+    "audio_mood": "Chiptune.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Short parody games show how classic patterns work."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.33,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "breathedge-2",
    "file": "docs/oracle/games/breathedge-2.json",
    "appid": 2412960,
@@ -5136,6 +6198,78 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "breathedge",
+   "file": "docs/oracle/games/breathedge.json",
+   "appid": 738520,
+   "name": "Breathedge",
+   "store_url": "https://store.steampowered.com/app/738520/",
+   "genres": [
+    "Survival",
+    "Space",
+    "Comedy"
+   ],
+   "short_description": "Survive in space after a funeral ship crash, with jokes.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival",
+    "Space",
+    "Comedy"
+   ],
+   "summary": "Survive in space after a funeral ship crash, with jokes.",
+   "identity": {
+    "core_loop": "Gather, craft, survive in a suit.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay gauges.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Sci-fi.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Comedy helps survival feel less stressful."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.22
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -5212,6 +6346,76 @@
    }
   },
   {
+   "id": "call-to-arms",
+   "file": "docs/oracle/games/call-to-arms.json",
+   "appid": 302670,
+   "name": "Call to Arms",
+   "store_url": "https://store.steampowered.com/app/302670/",
+   "genres": [
+    "Strategy",
+    "RTS"
+   ],
+   "short_description": "Modern RTS where you can take direct control of a soldier.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "RTS"
+   ],
+   "summary": "Modern RTS where you can take direct control of a soldier.",
+   "identity": {
+    "core_loop": "Command, take control, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Busy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.16,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Military.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Switching between commander and character is a neat idea."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.67,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.67
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "captain-of-industry",
    "file": "docs/oracle/games/captain-of-industry.json",
    "appid": 1594320,
@@ -5280,6 +6484,359 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "cartel-tycoon",
+   "file": "docs/oracle/games/cartel-tycoon.json",
+   "appid": 1220140,
+   "name": "Cartel Tycoon",
+   "store_url": "https://store.steampowered.com/app/1220140/",
+   "genres": [
+    "Management",
+    "Strategy"
+   ],
+   "short_description": "A management game about supply chains in an 80s cartel.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Management",
+    "Strategy"
+   ],
+   "summary": "A management game about supply chains in an 80s cartel.",
+   "identity": {
+    "core_loop": "Build producers, route trucks, grow, avoid attention.",
+    "mechanics": null,
+    "ui_and_game_feel": "Systemic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Trucks moving show the supply chain.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Bright stylised.",
+    "palette": null,
+    "audio_mood": "80s.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Visible trucks as the supply chain readout; the theme is not for kids (see the PG ranch supply-chain proposal)."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.67,
+     "structure": 0.78,
+     "social": 0.67,
+     "systems": 0.78,
+     "chance": 0.33,
+     "session": 0.78
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "castleminer-z",
+   "file": "docs/oracle/games/castleminer-z.json",
+   "appid": 253430,
+   "name": "CastleMiner Z",
+   "store_url": "https://store.steampowered.com/app/253430/",
+   "genres": [
+    "Survival",
+    "Voxel"
+   ],
+   "short_description": "Voxel survival with zombies and mining.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival",
+    "Voxel"
+   ],
+   "summary": "Voxel survival with zombies and mining.",
+   "identity": {
+    "core_loop": "Mine, build, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Simple.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Voxel.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A simple voxel survival loop."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.67,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "chessmaster",
+   "file": "docs/oracle/games/chessmaster.json",
+   "appid": 37200,
+   "name": "Chessmaster",
+   "store_url": "https://store.steampowered.com/app/37200/",
+   "genres": [
+    "Board game",
+    "Chess"
+   ],
+   "short_description": "Chess with lessons and opponents.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Board game",
+    "Chess"
+   ],
+   "summary": "Chess with lessons and opponents.",
+   "identity": {
+    "core_loop": "Play, learn openings, practise.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The board is everything.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Classic board.",
+    "palette": null,
+    "audio_mood": "Calm.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Lessons built into the opponent; chess teaches thinking."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.11,
+     "challenge": 0.89,
+     "expression": 0.22,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 1,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "chivalry-2",
+   "file": "docs/oracle/games/chivalry-2.json",
+   "appid": 1824220,
+   "name": "Chivalry 2",
+   "store_url": "https://store.steampowered.com/app/1824220/",
+   "genres": [
+    "Action",
+    "Medieval",
+    "Multiplayer"
+   ],
+   "short_description": "Huge medieval melee battles.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Medieval",
+    "Multiplayer"
+   ],
+   "summary": "Huge medieval melee battles.",
+   "identity": {
+    "core_loop": "Swing, block, charge, yell.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic and funny.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay light.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Medieval realism.",
+    "palette": null,
+    "audio_mood": "Shouts.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Shouting as a button is very funny; violence is not for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.56,
+     "expression": 0.67,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "chivalry-medieval-warfare",
+   "file": "docs/oracle/games/chivalry-medieval-warfare.json",
+   "appid": 219640,
+   "name": "Chivalry: Medieval Warfare",
+   "store_url": "https://store.steampowered.com/app/219640/",
+   "genres": [
+    "Action",
+    "Medieval",
+    "Multiplayer"
+   ],
+   "short_description": "The first medieval melee game.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Medieval",
+    "Multiplayer"
+   ],
+   "summary": "The first medieval melee game.",
+   "identity": {
+    "core_loop": "Swing, block, objective.",
+    "mechanics": null,
+    "ui_and_game_feel": "Rough.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay light.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Medieval.",
+    "palette": null,
+    "audio_mood": "Shouts.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Same as Chivalry 2."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -5417,6 +6974,74 @@
      "session": 0.89
     },
     "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "clockwork-empires",
+   "file": "docs/oracle/games/clockwork-empires.json",
+   "appid": 224740,
+   "name": "Clockwork Empires",
+   "store_url": "https://store.steampowered.com/app/224740/",
+   "genres": [
+    "Colony sim"
+   ],
+   "short_description": "A steampunk Lovecraft colony sim.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Colony sim"
+   ],
+   "summary": "A steampunk Lovecraft colony sim.",
+   "identity": {
+    "core_loop": "Manage colonists, build, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Quirky.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.3,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Colonist thoughts as bubbles (spatial).",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Steampunk.",
+    "palette": null,
+    "audio_mood": "Quirky.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Thought bubbles over colonists."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.67,
+     "expression": 0.67,
+     "structure": 0.89,
+     "social": 0.67,
+     "systems": 0.78,
+     "chance": 0.44,
+     "session": 0.67
+    },
+    "confidence": 0.4
    },
    "study": {
     "set": "owned",
@@ -5567,6 +7192,78 @@
    }
   },
   {
+   "id": "company-of-heroes-opposing-fronts",
+   "file": "docs/oracle/games/company-of-heroes-opposing-fronts.json",
+   "appid": 9340,
+   "name": "Company of Heroes: Opposing Fronts",
+   "store_url": "https://store.steampowered.com/app/9340/",
+   "genres": [
+    "Strategy",
+    "RTS",
+    "WWII"
+   ],
+   "short_description": "A WWII squad RTS expansion.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "RTS",
+    "WWII"
+   ],
+   "summary": "A WWII squad RTS expansion.",
+   "identity": {
+    "core_loop": "Capture points, use cover, win.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tactical.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.3,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Cover shown on ground (spatial).",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "War.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Cover shown as ground markers is clear spatial info."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.78,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.44,
+     "session": 0.56
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "company-of-heroes-tales-of-valor",
    "file": "docs/oracle/games/company-of-heroes-tales-of-valor.json",
    "appid": 20540,
@@ -5637,6 +7334,78 @@
    }
   },
   {
+   "id": "company-of-heroes-the-great-war-1918",
+   "file": "docs/oracle/games/company-of-heroes-the-great-war-1918.json",
+   "appid": 314420,
+   "name": "Company of Heroes: The Great War 1918",
+   "store_url": "https://store.steampowered.com/app/314420/",
+   "genres": [
+    "Strategy",
+    "RTS",
+    "WWI"
+   ],
+   "short_description": "A WWI RTS.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "RTS",
+    "WWI"
+   ],
+   "summary": "A WWI RTS.",
+   "identity": {
+    "core_loop": "Capture, hold, push.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tactical.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.21,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.3,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "War.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.78,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.44,
+     "session": 0.56
+    },
+    "confidence": 0.3
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "company-of-heroes",
    "file": "docs/oracle/games/company-of-heroes.json",
    "appid": 228200,
@@ -5702,6 +7471,76 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "control",
+   "file": "docs/oracle/games/control.json",
+   "appid": 870780,
+   "name": "Control Ultimate Edition",
+   "store_url": "https://store.steampowered.com/app/870780/",
+   "genres": [
+    "Action",
+    "Supernatural"
+   ],
+   "short_description": "A shifting government building full of strange powers.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Supernatural"
+   ],
+   "summary": "A shifting government building full of strange powers.",
+   "identity": {
+    "core_loop": "Explore, fight, find objects of power.",
+    "mechanics": null,
+    "ui_and_game_feel": "Stylish.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Signs and labels in the world (diegetic).",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Brutalist.",
+    "palette": null,
+    "audio_mood": "Industrial.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "In-world signage that tells you where you are is a great diegetic device."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.44,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -5780,6 +7619,76 @@
    "review": "A pure skill game where hearing a footstep is the most important read. Not for kids, but the lesson is gold: let sound tell the player where things are."
   },
   {
+   "id": "crimsonland",
+   "file": "docs/oracle/games/crimsonland.json",
+   "appid": 262830,
+   "name": "Crimsonland",
+   "store_url": "https://store.steampowered.com/app/262830/",
+   "genres": [
+    "Action",
+    "Arcade"
+   ],
+   "short_description": "A top-down arcade shooter against swarms.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Arcade"
+   ],
+   "summary": "A top-down arcade shooter against swarms.",
+   "identity": {
+    "core_loop": "Shoot, pick perks, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Frantic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Rock.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.67,
+     "expression": 0.33,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.33,
+     "chance": 0.89,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "crossout",
    "file": "docs/oracle/games/crossout.json",
    "appid": 386180,
@@ -5850,6 +7759,75 @@
     "family": "builder"
    },
    "review": "The garage is the real game: bolt wheels and wings onto a box and see if it drives. Besiege-like joy, wrapped in a grindy shooter."
+  },
+  {
+   "id": "cthulhu-saves-the-world",
+   "file": "docs/oracle/games/cthulhu-saves-the-world.json",
+   "appid": 107310,
+   "name": "Cthulhu Saves the World",
+   "store_url": "https://store.steampowered.com/app/107310/",
+   "genres": [
+    "RPG",
+    "Parody"
+   ],
+   "short_description": "A JRPG parody starring Cthulhu.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Parody"
+   ],
+   "summary": "A JRPG parody starring Cthulhu.",
+   "identity": {
+    "core_loop": "Explore, fight, level.",
+    "mechanics": null,
+    "ui_and_game_feel": "Funny.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "overlay": 0.8
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.3,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Menus.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Retro pixel.",
+    "palette": null,
+    "audio_mood": "Chiptune.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Humour carries a familiar loop."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.33,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
   },
   {
    "id": "cube-escape-collection",
@@ -5997,6 +7975,219 @@
    }
   },
   {
+   "id": "cyberpunk-2077",
+   "file": "docs/oracle/games/cyberpunk-2077.json",
+   "appid": 1091500,
+   "name": "Cyberpunk 2077",
+   "store_url": "https://store.steampowered.com/app/1091500/",
+   "genres": [
+    "RPG",
+    "Open world"
+   ],
+   "short_description": "A dense neon city RPG.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Open world"
+   ],
+   "summary": "A dense neon city RPG.",
+   "identity": {
+    "core_loop": "Quest, fight, hack, drive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Dense.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy plus in-world ads.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Neon.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Dense cities feel alive with crowds and signs; nothing else for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.67,
+     "expression": 0.67,
+     "structure": 0.33,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.78,
+     "session": 0.67
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dark-and-darker",
+   "file": "docs/oracle/games/dark-and-darker.json",
+   "appid": 2016590,
+   "name": "Dark and Darker",
+   "store_url": "https://store.steampowered.com/app/2016590/",
+   "genres": [
+    "Action",
+    "Extraction",
+    "Dungeon"
+   ],
+   "short_description": "A hardcore fantasy extraction dungeon game.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Extraction",
+    "Dungeon"
+   ],
+   "summary": "A hardcore fantasy extraction dungeon game.",
+   "identity": {
+    "core_loop": "Enter, fight, loot, escape.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Minimal HUD; sound matters.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Dark fantasy.",
+    "palette": null,
+    "audio_mood": "Dread.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.78,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "darkwood",
+   "file": "docs/oracle/games/darkwood.json",
+   "appid": 274520,
+   "name": "Darkwood",
+   "store_url": "https://store.steampowered.com/app/274520/",
+   "genres": [
+    "Horror",
+    "Survival"
+   ],
+   "short_description": "Top-down survival horror in a living forest.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Horror",
+    "Survival"
+   ],
+   "summary": "Top-down survival horror in a living forest.",
+   "identity": {
+    "core_loop": "Scavenge by day, barricade at night.",
+    "mechanics": null,
+    "ui_and_game_feel": "Scary.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "meta": 0.3,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Vision cone hides what you can't see (meta).",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Grim.",
+    "palette": null,
+    "audio_mood": "Dread.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Field of view as information; too scary for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.67,
+     "social": 0.56,
+     "systems": 0.44,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "dave-the-diver",
    "file": "docs/oracle/games/dave-the-diver.json",
    "appid": 1868140,
@@ -6063,6 +8254,353 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "day-one-garrys-incident",
+   "file": "docs/oracle/games/day-one-garrys-incident.json",
+   "appid": 242800,
+   "name": "Day One: Garry's Incident",
+   "store_url": "https://store.steampowered.com/app/242800/",
+   "genres": [
+    "Survival"
+   ],
+   "short_description": "A jungle survival game.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival"
+   ],
+   "summary": "A jungle survival game.",
+   "identity": {
+    "core_loop": "Survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Rough.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.21,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.3,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.44,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.22
+    },
+    "confidence": 0.3
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "days-gone",
+   "file": "docs/oracle/games/days-gone.json",
+   "appid": 1259420,
+   "name": "Days Gone",
+   "store_url": "https://store.steampowered.com/app/1259420/",
+   "genres": [
+    "Action",
+    "Open world"
+   ],
+   "short_description": "A biker survives hordes in Oregon.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Open world"
+   ],
+   "summary": "A biker survives hordes in Oregon.",
+   "identity": {
+    "core_loop": "Ride, scavenge, fight hordes.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cinematic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Score.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Huge hordes as moving terrain; not for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dayz",
+   "file": "docs/oracle/games/dayz.json",
+   "appid": 221100,
+   "name": "DayZ",
+   "store_url": "https://store.steampowered.com/app/221100/",
+   "genres": [
+    "Survival",
+    "Multiplayer"
+   ],
+   "short_description": "Hardcore open-world survival.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival",
+    "Multiplayer"
+   ],
+   "summary": "Hardcore open-world survival.",
+   "identity": {
+    "core_loop": "Scavenge, survive, meet players.",
+    "mechanics": null,
+    "ui_and_game_feel": "Harsh.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Minimal HUD; status icons.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Minimal HUD survival; nothing for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.78,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.44,
+     "systems": 0.78,
+     "chance": 0.78,
+     "session": 0.22
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dear-esther-landmark",
+   "file": "docs/oracle/games/dear-esther-landmark.json",
+   "appid": 520720,
+   "name": "Dear Esther: Landmark Edition",
+   "store_url": "https://store.steampowered.com/app/520720/",
+   "genres": [
+    "Walking sim",
+    "Story"
+   ],
+   "short_description": "The remastered Dear Esther.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Walking sim",
+    "Story"
+   ],
+   "summary": "The remastered Dear Esther.",
+   "identity": {
+    "core_loop": "Walk, listen.",
+    "mechanics": null,
+    "ui_and_game_feel": "Melancholy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "No HUD.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Painterly island.",
+    "palette": null,
+    "audio_mood": "Strings and voice.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Same as Dear Esther."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.11,
+     "challenge": 0.33,
+     "expression": 0.11,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dear-esther",
+   "file": "docs/oracle/games/dear-esther.json",
+   "appid": 203810,
+   "name": "Dear Esther",
+   "store_url": "https://store.steampowered.com/app/203810/",
+   "genres": [
+    "Walking sim",
+    "Story"
+   ],
+   "short_description": "Walk an island hearing letters read aloud.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Walking sim",
+    "Story"
+   ],
+   "summary": "Walk an island hearing letters read aloud.",
+   "identity": {
+    "core_loop": "Walk, listen.",
+    "mechanics": null,
+    "ui_and_game_feel": "Melancholy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "No HUD; voice and place.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Painterly island.",
+    "palette": null,
+    "audio_mood": "Strings and voice.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Story told only through place and voice."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.11,
+     "challenge": 0.33,
+     "expression": 0.11,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -6139,6 +8677,145 @@
    }
   },
   {
+   "id": "delta-force",
+   "file": "docs/oracle/games/delta-force.json",
+   "appid": 2507950,
+   "name": "Delta Force",
+   "store_url": "https://store.steampowered.com/app/2507950/",
+   "genres": [
+    "Shooter",
+    "Extraction"
+   ],
+   "short_description": "A modern military shooter.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Extraction"
+   ],
+   "summary": "A modern military shooter.",
+   "identity": {
+    "core_loop": "Fight, extract.",
+    "mechanics": null,
+    "ui_and_game_feel": "Busy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Military.",
+    "pacing": "fast, medium sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.56
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "delve-deeper",
+   "file": "docs/oracle/games/delve-deeper.json",
+   "appid": 63800,
+   "name": "Delve Deeper",
+   "store_url": "https://store.steampowered.com/app/63800/",
+   "genres": [
+    "Strategy",
+    "Turn-based"
+   ],
+   "short_description": "Dwarf teams race to dig the deepest tunnels.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "Turn-based"
+   ],
+   "summary": "Dwarf teams race to dig the deepest tunnels.",
+   "identity": {
+    "core_loop": "Dig, fight, find treasure.",
+    "mechanics": null,
+    "ui_and_game_feel": "Charming.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Side cutaway.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Dwarves digging as a race is a nice kid verb."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.33,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.44,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.22
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "desktop-dungeons-rewind",
    "file": "docs/oracle/games/desktop-dungeons-rewind.json",
    "appid": 1976950,
@@ -6204,6 +8881,217 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "desktop-dungeons",
+   "file": "docs/oracle/games/desktop-dungeons.json",
+   "appid": 226620,
+   "name": "Desktop Dungeons",
+   "store_url": "https://store.steampowered.com/app/226620/",
+   "genres": [
+    "Puzzle",
+    "Roguelike"
+   ],
+   "short_description": "Ten-minute puzzle dungeons.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Roguelike"
+   ],
+   "summary": "Ten-minute puzzle dungeons.",
+   "identity": {
+    "core_loop": "Explore, plan fights, win in minutes.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clever.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Numbers on monsters.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Short puzzle runs; numbers are on the things themselves."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.11,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.22,
+     "session": 0.22
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "destroy-all-humans",
+   "file": "docs/oracle/games/destroy-all-humans.json",
+   "appid": 803330,
+   "name": "Destroy All Humans!",
+   "store_url": "https://store.steampowered.com/app/803330/",
+   "genres": [
+    "Action",
+    "Comedy"
+   ],
+   "short_description": "An alien invades 1950s America.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Comedy"
+   ],
+   "summary": "An alien invades 1950s America.",
+   "identity": {
+    "core_loop": "Abduct, blast, read minds.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.3,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "1950s cartoon.",
+    "palette": null,
+    "audio_mood": "Retro.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Mind-reading as a social layer: thoughts above humans."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.22,
+     "social": 0.44,
+     "systems": 0.44,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "devour",
+   "file": "docs/oracle/games/devour.json",
+   "appid": 1274570,
+   "name": "DEVOUR",
+   "store_url": "https://store.steampowered.com/app/1274570/",
+   "genres": [
+    "Horror",
+    "Co-op"
+   ],
+   "short_description": "Co-op horror stopping a cult leader.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Horror",
+    "Co-op"
+   ],
+   "summary": "Co-op horror stopping a cult leader.",
+   "identity": {
+    "core_loop": "Gather items, flee.",
+    "mechanics": null,
+    "ui_and_game_feel": "Scary.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Little HUD.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Dark.",
+    "palette": null,
+    "audio_mood": "Dread.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Nothing for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.67,
+     "expression": 0.33,
+     "structure": 0.11,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -7083,6 +9971,76 @@
    }
   },
   {
+   "id": "dragons-lair",
+   "file": "docs/oracle/games/dragons-lair.json",
+   "appid": 227380,
+   "name": "Dragon's Lair",
+   "store_url": "https://store.steampowered.com/app/227380/",
+   "genres": [
+    "Arcade",
+    "Animation"
+   ],
+   "short_description": "The classic animated quick-time adventure.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Arcade",
+    "Animation"
+   ],
+   "summary": "The classic animated quick-time adventure.",
+   "identity": {
+    "core_loop": "Watch, press at the right moment.",
+    "mechanics": null,
+    "ui_and_game_feel": "Frustrating.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "None; timing cues in the animation.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Don Bluth animation.",
+    "palette": null,
+    "audio_mood": "Cartoon.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Beautiful animation, but players need agency."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.89,
+     "expression": 0.33,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 0.11,
+     "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "dredge",
    "file": "docs/oracle/games/dredge.json",
    "appid": 1562430,
@@ -7218,6 +10176,356 @@
      "session": 0.33
     },
     "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dungeon-of-the-endless",
+   "file": "docs/oracle/games/dungeon-of-the-endless.json",
+   "appid": 249050,
+   "name": "Dungeon of the ENDLESS",
+   "store_url": "https://store.steampowered.com/app/249050/",
+   "genres": [
+    "Roguelike",
+    "Tower defense"
+   ],
+   "short_description": "Power rooms in a dungeon as you climb out.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Roguelike",
+    "Tower defense"
+   ],
+   "summary": "Power rooms in a dungeon as you climb out.",
+   "identity": {
+    "core_loop": "Open doors, power rooms, defend the crystal.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Lit rooms show what you power (diegetic).",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Pixel 3D.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Light as resource: lit rooms are safe."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.56,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dungeon-siege",
+   "file": "docs/oracle/games/dungeon-siege.json",
+   "appid": 39190,
+   "name": "Dungeon Siege",
+   "store_url": "https://store.steampowered.com/app/39190/",
+   "genres": [
+    "RPG",
+    "Action"
+   ],
+   "short_description": "A classic party action RPG.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Action"
+   ],
+   "summary": "A classic party action RPG.",
+   "identity": {
+    "core_loop": "Walk, fight, loot.",
+    "mechanics": null,
+    "ui_and_game_feel": "Smooth.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Early 3D fantasy.",
+    "palette": null,
+    "audio_mood": "Fantasy.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Seamless world without loading screens."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dungeonborne",
+   "file": "docs/oracle/games/dungeonborne.json",
+   "appid": 2448970,
+   "name": "Dungeonborne",
+   "store_url": "https://store.steampowered.com/app/2448970/",
+   "genres": [
+    "Action",
+    "Extraction"
+   ],
+   "short_description": "A first-person dungeon extraction game.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Extraction"
+   ],
+   "summary": "A first-person dungeon extraction game.",
+   "identity": {
+    "core_loop": "Loot, fight, escape.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.21,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.3,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Dark fantasy.",
+    "palette": null,
+    "audio_mood": "Dark.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.78,
+     "session": 0.33
+    },
+    "confidence": 0.3
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dungeons",
+   "file": "docs/oracle/games/dungeons.json",
+   "appid": 57650,
+   "name": "Dungeons",
+   "store_url": "https://store.steampowered.com/app/57650/",
+   "genres": [
+    "Strategy",
+    "Management"
+   ],
+   "short_description": "Run an evil dungeon to lure heroes.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "Management"
+   ],
+   "summary": "Run an evil dungeon to lure heroes.",
+   "identity": {
+    "core_loop": "Build, lure heroes, harvest.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Cartoon.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Reverse roles is fun; little else."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.67,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dust-and-neon",
+   "file": "docs/oracle/games/dust-and-neon.json",
+   "appid": 1296450,
+   "name": "Dust & Neon",
+   "store_url": "https://store.steampowered.com/app/1296450/",
+   "genres": [
+    "Shooter",
+    "Roguelite"
+   ],
+   "short_description": "A twin-stick western robot shooter.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Roguelite"
+   ],
+   "summary": "A twin-stick western robot shooter.",
+   "identity": {
+    "core_loop": "Shoot, reload manually, loot.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tight.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Western.",
+    "palette": null,
+    "audio_mood": "Western.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.56,
+     "expression": 0.44,
+     "structure": 0.33,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.4
    },
    "study": {
     "set": "owned",
@@ -7371,6 +10679,146 @@
    }
   },
   {
+   "id": "encased",
+   "file": "docs/oracle/games/encased.json",
+   "appid": 921800,
+   "name": "Encased",
+   "store_url": "https://store.steampowered.com/app/921800/",
+   "genres": [
+    "RPG",
+    "Isometric"
+   ],
+   "short_description": "A retro sci-fi RPG inside a dome.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Isometric"
+   ],
+   "summary": "A retro sci-fi RPG inside a dome.",
+   "identity": {
+    "core_loop": "Explore, talk, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Classic CRPG.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.18,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "70s sci-fi.",
+    "palette": null,
+    "audio_mood": "Retro.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.67,
+     "structure": 0.56,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.67
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "endless-dungeon",
+   "file": "docs/oracle/games/endless-dungeon.json",
+   "appid": 1485590,
+   "name": "ENDLESS Dungeon",
+   "store_url": "https://store.steampowered.com/app/1485590/",
+   "genres": [
+    "Roguelite",
+    "Tower defense"
+   ],
+   "short_description": "Escort a crystal bot through a station.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Roguelite",
+    "Tower defense"
+   ],
+   "summary": "Escort a crystal bot through a station.",
+   "identity": {
+    "core_loop": "Explore, build turrets, escort.",
+    "mechanics": null,
+    "ui_and_game_feel": "Busy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Stylised sci-fi.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.56,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "enshrouded",
    "file": "docs/oracle/games/enshrouded.json",
    "appid": 1203620,
@@ -7513,6 +10961,146 @@
    }
   },
   {
+   "id": "exanima",
+   "file": "docs/oracle/games/exanima.json",
+   "appid": 362490,
+   "name": "Exanima",
+   "store_url": "https://store.steampowered.com/app/362490/",
+   "genres": [
+    "RPG",
+    "Physics"
+   ],
+   "short_description": "Physics-based melee dungeon RPG.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Physics"
+   ],
+   "summary": "Physics-based melee dungeon RPG.",
+   "identity": {
+    "core_loop": "Fight with physical swings.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clumsy-real.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Little HUD.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Dark.",
+    "palette": null,
+    "audio_mood": "Dark.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Physical bodies make fights readable."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "expeditions-samurai",
+   "file": "docs/oracle/games/expeditions-samurai.json",
+   "appid": 2212910,
+   "name": "Expeditions: Samurai",
+   "store_url": "https://store.steampowered.com/app/2212910/",
+   "genres": [
+    "RPG",
+    "Tactics"
+   ],
+   "short_description": "A tactical RPG in feudal Japan.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Tactics"
+   ],
+   "summary": "A tactical RPG in feudal Japan.",
+   "identity": {
+    "core_loop": "Travel, talk, fight in turns.",
+    "mechanics": null,
+    "ui_and_game_feel": "Measured.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.16,
+       "source": "estimate",
+       "confidence": 0.21,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.3,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Historical.",
+    "palette": null,
+    "audio_mood": "Japanese.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.67,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.67
+    },
+    "confidence": 0.3
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "fall-guys",
    "file": "docs/oracle/games/fall-guys.json",
    "appid": 1097150,
@@ -7585,6 +11173,148 @@
    "review": "Falling over is the joke, which is why kids love it. The world is the instructions. A strong reference for Ranch party games."
   },
   {
+   "id": "fallout-3",
+   "file": "docs/oracle/games/fallout-3.json",
+   "appid": 22370,
+   "name": "Fallout 3 - Game of the Year Edition",
+   "store_url": "https://store.steampowered.com/app/22370/",
+   "genres": [
+    "RPG",
+    "Open world"
+   ],
+   "short_description": "Post-apocalyptic open-world RPG.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Open world"
+   ],
+   "summary": "Post-apocalyptic open-world RPG.",
+   "identity": {
+    "core_loop": "Explore, quest, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Lonely.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The Pip-Boy wrist computer is diegetic UI.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Ruined Americana.",
+    "palette": null,
+    "audio_mood": "1940s radio.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "A wrist computer as menu; radio songs as world mood."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.56
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "fallout-4",
+   "file": "docs/oracle/games/fallout-4.json",
+   "appid": 377160,
+   "name": "Fallout 4",
+   "store_url": "https://store.steampowered.com/app/377160/",
+   "genres": [
+    "RPG",
+    "Open world",
+    "Building"
+   ],
+   "short_description": "Post-apocalyptic RPG with settlement building.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "RPG",
+    "Open world",
+    "Building"
+   ],
+   "summary": "Post-apocalyptic RPG with settlement building.",
+   "identity": {
+    "core_loop": "Explore, quest, build settlements.",
+    "mechanics": null,
+    "ui_and_game_feel": "Big.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Pip-Boy diegetic menu.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Ruined Americana.",
+    "palette": null,
+    "audio_mood": "1950s radio.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Settlement building inside an adventure."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.67,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.56
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "fallout",
    "file": "docs/oracle/games/fallout.json",
    "appid": 38400,
@@ -7647,6 +11377,216 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "farsky",
+   "file": "docs/oracle/games/farsky.json",
+   "appid": 286340,
+   "name": "FarSky",
+   "store_url": "https://store.steampowered.com/app/286340/",
+   "genres": [
+    "Survival",
+    "Underwater"
+   ],
+   "short_description": "Survive underwater after a sub crash.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival",
+    "Underwater"
+   ],
+   "summary": "Survive underwater after a sub crash.",
+   "identity": {
+    "core_loop": "Gather, build bases, explore.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Ocean.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Underwater bases are a fun world."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.22
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "fistful-of-frags",
+   "file": "docs/oracle/games/fistful-of-frags.json",
+   "appid": 265630,
+   "name": "Fistful of Frags",
+   "store_url": "https://store.steampowered.com/app/265630/",
+   "genres": [
+    "Shooter",
+    "Western"
+   ],
+   "short_description": "A free western multiplayer shooter.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Western"
+   ],
+   "summary": "A free western multiplayer shooter.",
+   "identity": {
+    "core_loop": "Duel, shoot.",
+    "mechanics": null,
+    "ui_and_game_feel": "Rough.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Little HUD.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Western.",
+    "palette": null,
+    "audio_mood": "Western.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.56,
+     "expression": 0.44,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.44,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "force-of-nature",
+   "file": "docs/oracle/games/force-of-nature.json",
+   "appid": 568570,
+   "name": "Force of Nature",
+   "store_url": "https://store.steampowered.com/app/568570/",
+   "genres": [
+    "Survival",
+    "Crafting"
+   ],
+   "short_description": "Survive in a magical land with farming.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival",
+    "Crafting"
+   ],
+   "summary": "Survive in a magical land with farming.",
+   "identity": {
+    "core_loop": "Gather, farm, craft.",
+    "mechanics": null,
+    "ui_and_game_feel": "Simple.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Farming survival for families."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.22
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -7716,6 +11656,75 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "fritzchess-15",
+   "file": "docs/oracle/games/fritzchess-15.json",
+   "appid": 427480,
+   "name": "FritzChess 15",
+   "store_url": "https://store.steampowered.com/app/427480/",
+   "genres": [
+    "Board game",
+    "Chess"
+   ],
+   "short_description": "Chess training software.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Board game",
+    "Chess"
+   ],
+   "summary": "Chess training software.",
+   "identity": {
+    "core_loop": "Play, train.",
+    "mechanics": null,
+    "ui_and_game_feel": "Precise.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Board.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Board.",
+    "palette": null,
+    "audio_mood": "None.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Same as Chessmaster."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.11,
+     "challenge": 0.89,
+     "expression": 0.22,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 1,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -7862,6 +11871,75 @@
    }
   },
   {
+   "id": "frozen-synapse",
+   "file": "docs/oracle/games/frozen-synapse.json",
+   "appid": 98200,
+   "name": "Frozen Synapse",
+   "store_url": "https://store.steampowered.com/app/98200/",
+   "genres": [
+    "Tactics",
+    "Simultaneous turns"
+   ],
+   "short_description": "Plan squad moves, then watch both sides' plans play out.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Tactics",
+    "Simultaneous turns"
+   ],
+   "summary": "Plan squad moves, then watch both sides' plans play out.",
+   "identity": {
+    "core_loop": "Plan, preview, commit, watch.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clever.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.2,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Plans drawn on the map (spatial).",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Neon blueprint.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Planning then watching play out, like 9 Kings."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0.89,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "ftl-faster-than-light",
    "file": "docs/oracle/games/ftl-faster-than-light.json",
    "appid": 212680,
@@ -7929,6 +12007,76 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "galcon-2",
+   "file": "docs/oracle/games/galcon-2.json",
+   "appid": 294160,
+   "name": "Galcon 2",
+   "store_url": "https://store.steampowered.com/app/294160/",
+   "genres": [
+    "Strategy",
+    "Arcade"
+   ],
+   "short_description": "Send fleets between planets in minutes.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "Arcade"
+   ],
+   "summary": "Send fleets between planets in minutes.",
+   "identity": {
+    "core_loop": "Tap planets, send ships, win.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fast.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Numbers on planets.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Minimal.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Numbers on the things; quick sessions."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.44,
+     "expression": 0.33,
+     "structure": 0.11,
+     "social": 0.67,
+     "systems": 0.44,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -8004,6 +12152,76 @@
    }
   },
   {
+   "id": "ghost-recon-breakpoint",
+   "file": "docs/oracle/games/ghost-recon-breakpoint.json",
+   "appid": 2231380,
+   "name": "Ghost Recon Breakpoint",
+   "store_url": "https://store.steampowered.com/app/2231380/",
+   "genres": [
+    "Shooter",
+    "Open world"
+   ],
+   "short_description": "Tactical open-world shooter.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Open world"
+   ],
+   "summary": "Tactical open-world shooter.",
+   "identity": {
+    "core_loop": "Scout, mark, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Busy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Military.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.44
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "goat-simulator",
    "file": "docs/oracle/games/goat-simulator.json",
    "appid": 265930,
@@ -8062,6 +12280,216 @@
      "systems": 0.22,
      "chance": 0.22,
      "session": 0
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "god-mode",
+   "file": "docs/oracle/games/god-mode.json",
+   "appid": 227480,
+   "name": "God Mode",
+   "store_url": "https://store.steampowered.com/app/227480/",
+   "genres": [
+    "Shooter",
+    "Co-op"
+   ],
+   "short_description": "Co-op arena shooter in the underworld.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Co-op"
+   ],
+   "summary": "Co-op arena shooter in the underworld.",
+   "identity": {
+    "core_loop": "Fight waves.",
+    "mechanics": null,
+    "ui_and_game_feel": "Arcade.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.21,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.3,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Mythic.",
+    "palette": null,
+    "audio_mood": "Rock.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.56,
+     "expression": 0.33,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.3
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "gods-will-be-watching",
+   "file": "docs/oracle/games/gods-will-be-watching.json",
+   "appid": 274290,
+   "name": "Gods Will Be Watching",
+   "store_url": "https://store.steampowered.com/app/274290/",
+   "genres": [
+    "Puzzle",
+    "Story"
+   ],
+   "short_description": "Hard moral survival puzzles.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Story"
+   ],
+   "summary": "Hard moral survival puzzles.",
+   "identity": {
+    "core_loop": "Choose actions each turn, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Bleak.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "meta": 0.1,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Moody.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Not for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.78,
+     "expression": 0.56,
+     "structure": 0.11,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.22,
+     "session": 0.11
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "grand-theft-auto-v",
+   "file": "docs/oracle/games/grand-theft-auto-v.json",
+   "appid": 271590,
+   "name": "Grand Theft Auto V Legacy",
+   "store_url": "https://store.steampowered.com/app/271590/",
+   "genres": [
+    "Action",
+    "Open world"
+   ],
+   "short_description": "A satirical crime open world.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Open world"
+   ],
+   "summary": "A satirical crime open world.",
+   "identity": {
+    "core_loop": "Drive, mission, wander.",
+    "mechanics": null,
+    "ui_and_game_feel": "Huge.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay plus radio.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Radio stations.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "A world that reacts to you everywhere; content is not for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.67,
+     "session": 0.56
     },
     "confidence": 0.7
    },
@@ -8273,6 +12701,78 @@
      "session": 0.11
     },
     "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "gtfo",
+   "file": "docs/oracle/games/gtfo.json",
+   "appid": 493520,
+   "name": "GTFO",
+   "store_url": "https://store.steampowered.com/app/493520/",
+   "genres": [
+    "Shooter",
+    "Co-op",
+    "Horror"
+   ],
+   "short_description": "Hardcore co-op horror.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Co-op",
+    "Horror"
+   ],
+   "summary": "Hardcore co-op horror.",
+   "identity": {
+    "core_loop": "Sneak, scan, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Scanner in the world.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Dark.",
+    "palette": null,
+    "audio_mood": "Dread.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Nothing for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.89,
+     "expression": 0.44,
+     "structure": 0.33,
+     "social": 0.67,
+     "systems": 0.78,
+     "chance": 0.78,
+     "session": 0.33
+    },
+    "confidence": 0.4
    },
    "study": {
     "set": "owned",
@@ -12012,6 +16512,79 @@
     "owned": true,
     "installed": true,
     "status": "needs play session",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "seven-days-to-die",
+   "file": "docs/oracle/games/seven-days-to-die.json",
+   "appid": 251570,
+   "name": "7 Days to Die",
+   "store_url": "https://store.steampowered.com/app/251570/",
+   "genres": [
+    "Survival",
+    "Crafting",
+    "Zombies"
+   ],
+   "short_description": "Survive in a voxel world where a zombie horde comes every seventh night.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival",
+    "Crafting",
+    "Zombies"
+   ],
+   "summary": "Survive in a voxel world where a zombie horde comes every seventh night.",
+   "identity": {
+    "core_loop": "Scavenge, build a base, survive the blood moon.",
+    "mechanics": null,
+    "ui_and_game_feel": "Gritty.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The red moon is the warning (diegetic); gauges overlay.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Rough realistic voxel.",
+    "palette": null,
+    "audio_mood": "Tense.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A calendar countdown to a big night is strong tension; not for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.78,
+     "social": 0.67,
+     "systems": 0.78,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
     "date": "2026-10-23"
    }
   },

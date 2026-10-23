@@ -1,0 +1,68 @@
+{
+  "appid": 1485590,
+  "name": "ENDLESS Dungeon",
+  "store_url": "https://store.steampowered.com/app/1485590/",
+  "genres": [
+    "Roguelite",
+    "Tower defense"
+  ],
+  "short_description": "Escort a crystal bot through a station.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Roguelite",
+    "Tower defense"
+  ],
+  "summary": "Escort a crystal bot through a station.",
+  "identity": {
+    "core_loop": "Explore, build turrets, escort.",
+    "mechanics": null,
+    "ui_and_game_feel": "Busy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Stylised sci-fi.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
