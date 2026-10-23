@@ -255,7 +255,7 @@ function addHexScale(group,diameter){
  ruler.position.set(front.center.x*.1+Math.sqrt(3)*radius/4+normal.x*.5,bounds.min.y+.02,front.center.z*.1+radius*.75+normal.y*.5);group.add(ruler);
 }
 
-function closeInspection(){itemPickup?.cancel();delete renderer.domElement.dataset.selectedTile;$('#inspect-hero').hidden=false;$('#inspect-asset').hidden=false;if(selectionBox){scene.remove(selectionBox);selectionBox.geometry.dispose();selectionBox.material.dispose();selectionBox=null;}if(inspected?.object.userData.temporaryInspection)inspected.object.traverse(o=>o.geometry?.dispose());inspected=null;document.querySelector('#inspection').hidden=true;}
+function closeInspection(){if(inspected)dispatchEvent(new CustomEvent('ranch:inspect-close'));itemPickup?.cancel();delete renderer.domElement.dataset.selectedTile;$('#inspect-hero').hidden=false;$('#inspect-asset').hidden=false;if(selectionBox){scene.remove(selectionBox);selectionBox.geometry.dispose();selectionBox.material.dispose();selectionBox=null;}if(inspected?.object.userData.temporaryInspection)inspected.object.traverse(o=>o.geometry?.dispose());inspected=null;document.querySelector('#inspection').hidden=true;}
 function updateInspection(){if(!inspected)return;if(inspected.tileId)return;if(inspected.person&&!inspected.object.parent){closeInspection();return;}const person=inspected.person;
  const activity=itemPickup?.active?(renderer.domElement.dataset.itemPickup==='held'?'Picked up · release to drop':'Landing · Escape restores'):(inspected.object.userData.activity||inspected.object.userData.liveReadout?.()?.split(' · ')[0]||'Part of this place');
  const status=!running?'paused':active.arrival&&!active.arrival.done?'arriving':/blocked|waiting/i.test(activity)?'blocked':/rest|home|shelter/i.test(activity)?'resting':/going|carrying|returning|walking|travell/i.test(activity)?'travelling':person?'working':'place';
@@ -282,7 +282,7 @@ function inspectTile(hit){
  $('#inspect-doing').textContent=`${plan.placements.filter(p=>p.shelter||(p.model&&p.role!=='water-source')).length} buildings · ${Number($('#size').value)} m across`;
  $('#inspect-description').textContent='One tile in this continuous landscape. Tap a person or building to inspect it; tap empty space to clear selection.';
  $('#inspect-live').textContent=`Tile ${tile.id}${plan.warnings?.length?' · '+plan.warnings.length+' site issues':''}`;
- $('#inspect-details').hidden=true;$('#inspect-more').setAttribute('aria-expanded','false');$('#inspect-more').textContent='More ⌄';$('#inspection').hidden=false;
+ $('#inspect-details').hidden=true;$('#inspect-more').setAttribute('aria-expanded','false');$('#inspect-more').textContent='More ⌄';$('#inspection').hidden=false;announceInspect();
  const points=[],radius=Number($('#size').value)/2;
  for(let i=0;i<=72;i++){const edge=Math.min(5,Math.floor(i/12)),t=(i-edge*12)/12,a=edge*Math.PI/3,b=(edge+1)*Math.PI/3;
  const x=plan.center.x+radius*((1-t)*Math.sin(a)+t*Math.sin(b)),z=plan.center.z+radius*((1-t)*Math.cos(a)+t*Math.cos(b));
@@ -301,7 +301,7 @@ function inspectHit(hit){
  let title,kind,description,detail='';
  if(person){const identity=inventIdentity(person);title=identity.name;kind=`Resident · age ${person.age}`;description=`${identity.disposition[0].toUpperCase()+identity.disposition.slice(1)}. Enjoys ${identity.interest}.`;}
  else {const plan=active.assembly.plans.flatMap(p=>p.placements).find(p=>p.id===key);title=info?.title||plan?.role||'Ranch object';kind=info?.kind||'Ranch object';description=info?.description||'Part of the generated ranch.';if(plan){const purpose={home:'A home facing the shared walking routes.',barn:'Shelter and working space beside the ranch yard.',store:'Storage space connected to the working paths.',enclosure:'An enclosed paddock for animals.',field:'A cultivated plot beside the ranch.'};description=purpose[plan.role]||description;detail=`${plan.w.toFixed(1)} × ${plan.d.toFixed(1)} m footprint · connected to the ranch layout`;}}
- inspected={object:root,person,detail,title,placementId:key,sourceHit:hit};$('#inspect-details').hidden=true;$('#inspect-more').setAttribute('aria-expanded','false');$('#inspect-more').textContent='More ⌄';renderHero(root);$('#inspect-kind').textContent=kind;$('#inspect-name').textContent=title.replace(/ · complete$/,'');$('#inspect-description').textContent=description+(family==='ranch'?' Hold this item for half a second to pick it up. Release to drop; Escape restores. The simulation pauses during pickup and landing.':'');$('#inspection').hidden=false;if(!root.userData.temporaryInspection){if(selectionBox){scene.remove(selectionBox);selectionBox.geometry.dispose();selectionBox.material.dispose();}selectionBox=selectionCue(T,root);scene.add(selectionBox);}updateInspection();
+ inspected={object:root,person,detail,title,placementId:key,sourceHit:hit};$('#inspect-details').hidden=true;$('#inspect-more').setAttribute('aria-expanded','false');$('#inspect-more').textContent='More ⌄';renderHero(root);$('#inspect-kind').textContent=kind;$('#inspect-name').textContent=title.replace(/ · complete$/,'');$('#inspect-description').textContent=description+(family==='ranch'?' Hold this item for half a second to pick it up. Release to drop; Escape restores. The simulation pauses during pickup and landing.':'');$('#inspection').hidden=false;if(!root.userData.temporaryInspection){if(selectionBox){scene.remove(selectionBox);selectionBox.geometry.dispose();selectionBox.material.dispose();}selectionBox=selectionCue(T,root);scene.add(selectionBox);}updateInspection();announceInspect();
 }
 const pickRay=new T.Raycaster(),pickPointer=new T.Vector2(),pickCanvas=renderer.domElement;
 pickCanvas.addEventListener('pointerdown',e=>{gesture=!cameraOwnsPointer(e)&&!e.altKey?{id:e.pointerId,x:e.clientX,y:e.clientY,moved:false}:null;});
@@ -317,8 +317,14 @@ pickCanvas.addEventListener('dblclick',e=>{
 window.addEventListener('keydown',e=>{if(e.key==='Escape')cameraFollow.stop();});
 $('#close-inspection').onclick=closeInspection;installWorldAnchor({panel:$('#inspection'),camera,canvas:renderer.domElement,target:()=>inspected?.object});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeInspection()});
 
-function renderHero(object){
- if(!heroRenderer){heroRenderer=new T.WebGLRenderer({antialias:true,alpha:false});heroRenderer.setPixelRatio(Math.min(devicePixelRatio,2));heroRenderer.setSize(80,80);heroRenderer.outputColorSpace=T.SRGBColorSpace;$('#inspect-hero').append(heroRenderer.domElement);}
+// Tells the presentation layer (Sandbox v2's callout) what was tapped: its name, words, a live portrait and where it is on screen.
+function announceInspect(){if(!inspected)return;const object=inspected.object,box=new T.Box3(),top=new T.Vector3();
+ const anchor=()=>{box.setFromObject(object);if(box.isEmpty())return null;top.set((box.min.x+box.max.x)/2,box.max.y,(box.min.z+box.max.z)/2).project(camera);const r=renderer.domElement.getBoundingClientRect();return {x:r.left+(top.x+1)/2*r.width,y:r.top+(1-top.y)/2*r.height};};
+ const hero=inspected.tileId?null:el=>{const px=Math.round(Math.min(480,Math.max(160,el.clientWidth||240))*Math.min(devicePixelRatio||1,2));renderHero(object,px);const c=document.createElement('canvas');c.width=c.height=px;c.getContext('2d').drawImage(heroRenderer.domElement,0,0,px,px);c.style.cssText='width:100%;height:100%;display:block';el.append(c);renderHero(object);};
+ dispatchEvent(new CustomEvent('ranch:inspect',{detail:{name:$('#inspect-name').textContent.replace(/^./,c=>c.toUpperCase()),kind:$('#inspect-kind').textContent,description:$('#inspect-description').textContent.replace(/ Hold this item.*$/,''),tileId:inspected.tileId||null,placementId:inspected.placementId||null,person:!!inspected.person,object,anchor,hero}}));
+}
+function renderHero(object,px=80){
+ if(!heroRenderer){heroRenderer=new T.WebGLRenderer({antialias:true,alpha:false});heroRenderer.setPixelRatio(Math.min(devicePixelRatio,2));heroRenderer.setSize(80,80);heroRenderer.outputColorSpace=T.SRGBColorSpace;$('#inspect-hero').append(heroRenderer.domElement);}const side=px===80?80:px/heroRenderer.getPixelRatio();heroRenderer.setSize(side,side,px===80);
  heroRenderer.toneMapping=T.ACESFilmicToneMapping;heroRenderer.toneMappingExposure=1;
  const person=object.userData.person,world=new T.Scene();world.background=new T.Color(getComputedStyle(document.body).getPropertyValue('--app-paper').trim()||'#fff9ec');
  const copy=person?makePerson(person):object.clone(true),portraitMaterials=[];copy.position.set(0,0,0);copy.rotation.set(0,0,0);

@@ -134,3 +134,4 @@ html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced[
 /* The app's touch rule gives every button a 44 px minimum; the case sizes its own parts (each hit area is padded by the case). */
 html.ui-v2 #v2-chrono :is(button,.ch-reg),html.ui-v2 #v2-hand-more,html.ui-v2 #v2-box{min-height:0!important}
 @media(max-width:520px){#v2-chrono:not(.open) :is(.ch-pushers,.ch-reg:not(.ch-offer)){display:none}#v2-chrono:not(.open).paused .ch-time::after{content:' ·  paused';font-size:11px;font-weight:600;opacity:.7}}
+html.ui-v2 #inspection{display:none!important}
