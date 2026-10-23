@@ -185,7 +185,6 @@ dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;tex
 </ol>
 <h2>Next</h2>
 <p>The dome and the tower are the first two of the five base buildings the Moon Heroes study handed over. The habitat and hangar, the airlock door and the supply crate follow as soon as Midjourney can draw their pictures. Then the kit goes onto the Moon tile for the shooter.</p>
-<h2>What it drew on</h2>
 <div class="ctx-wrap">{ctx}</div>
 </main>
 <script>
