@@ -20,7 +20,7 @@ asset only)".
   Hang up to two on the bag; the box toggle uses `putInBox` / `inBox` from `backpack.mjs?v=6`.
 - **Charm places:** tardigrade at the lab, floppy at the café cellar door, key and coffee cup at the café, star at the
   school, bub in Abbie's yard, moon and rocket at the black truck, moon cheese at the Moon outpost (ghost until a Moon tile is
-  placed), heart is the coin chest's reward. Nothing yet on Ani's side.
+  placed), heart ('Earn every other charm') comes by itself, no place; star is 'Climb onto the school roof'. Nothing yet on Ani's side.
 
 ## Mission board spec (for "Demo flow and opening tour")
 Town noticeboard in the square by the school: cork, painted-wood frame, brass plate "TOWN NOTICES". Four pinned die-cut
