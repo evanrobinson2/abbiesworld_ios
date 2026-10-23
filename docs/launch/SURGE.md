@@ -41,3 +41,13 @@ Run it from GitHub: Actions > **surge-loadtest** > Run workflow (defaults: `http
 First local reading (2026-10-23, `/sandbox` served uncompressed from `dist/`): one visit is about 16 MB in 290 requests.
 `three.module.js` loads four times from four folders (1.3 MB each) and `rapier.mjs` is 4.3 MB, so deduplicating the
 engine is the biggest saving per visitor.
+
+### What the live tests showed (2026-10-23, ranch.abbies.world)
+
+- One machine, 5 visitors at once (~800 requests a second): 0 errors, 99.7% served from Vercel's cache, p95 68 ms, one
+  first visit is 4.6 MB in about 290 requests.
+- One machine, 25 at once (~3,400 requests a second): 56% of requests answered 403. That is Vercel's platform attack
+  protection blocking one address, not the site running out of room. Use `machines` (each its own address, 5 or fewer
+  visitors at once per machine, all starting on the same second) to test a crowd.
+- The same protection is a real-world risk for a classroom: 30 children starting at once behind one school address is
+  a few thousand requests a second. Fewer requests per visit (bundling the ~290 files) lowers that line.
