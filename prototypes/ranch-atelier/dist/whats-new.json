@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
    {
+     "id": "2026-10-23-event-deck",
+     "date": "2026-10-23",
+     "title": "Play world events from the toy box",
+     "line": "Open World events in the toy box: a column of event cards on the far right. Tap one to make it rain, snow, storm, fog, dawn, nightfall or paint fall.",
+     "image": "/whats-new/2026-10-23-event-deck.png",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+     "threadTitle": "World event cards",
+     "tour": false,
+     "link": "/sandbox"
+   },
+   {
      "id": "2026-10-23-moon-at-bakery",
      "date": "2026-10-23",
      "title": "The Moon Mission starts at the bakery",
