@@ -49,7 +49,12 @@ export const TYPES = {
   crop:     { label: 'Crop',     shape: 'scallop', accent: '#a8792a' },
   weather:  { label: 'Weather',  shape: 'circle',  accent: '#3b6f96' },
   helper:   { label: 'Helper',   shape: 'chamfer', accent: '#6e4e7d' },
+  // World events are told apart at a glance: night-blue frame with rays, a burst-edged window, a WORLD EVENT banner.
+  event:    { label: 'World Event', shape: 'burst', accent: '#ffb02e' },
 };
+const EVENT_BODY = '#252d5c', EVENT_TRIM = '#f7e7a6', EVENT_TYPE = '#161c42';
+// Layout for event cards: a banner across the top, then the burst window, then the same ribbon, gem and plate.
+const EV = { banner: { x: 4, y: 3.6, w: 55, h: 6.2 }, art: { x: 4, y: 11.4, w: 55, h: 44.6 }, subject: { x: 4, y: 22, w: 55, h: 33 }, ribbon: { x: 7.2, y: 14.4, w: 48.6, h: 7.2 } };
 export const FINISHES = { standard: 'STD', shimmer: 'SHM', golden_hour: 'GLD', frost: 'FRS' };
 
 // The look is cel-shaded: flat colour, ink lines, no fake wood, metal, paper, bevels or grain (Evan, 2026-10-23).
@@ -65,9 +70,10 @@ const FRAME = {
 const PAPER = '#fff5df'; // ribbon and rules plate
 
 // A quiet pattern in the frame says where the card lives. spec.pattern wins; then the tile, the crop type, the biome.
-export const PATTERNS = ['barn-boards', 'sprout-rows', 'meadow-flowers', 'stars', 'waves', 'cobbles', 'plain'];
+export const PATTERNS = ['rays', 'barn-boards', 'sprout-rows', 'meadow-flowers', 'stars', 'waves', 'cobbles', 'plain'];
 const PATTERN_OF = { ranch: 'barn-boards', dusk: 'barn-boards', orchard: 'sprout-rows', garden: 'sprout-rows', meadow: 'meadow-flowers', moon: 'stars', moonbase: 'stars', sea: 'waves', beach: 'waves', city: 'cobbles', town: 'cobbles' };
 export function patternOf(spec) {
+  if (spec.type === 'event' && !PATTERNS.includes(spec.pattern)) return 'rays';
   if (PATTERNS.includes(spec.pattern)) return spec.pattern;
   const tile = spec.tile || (String(spec.id || '').startsWith('tile-') ? spec.id.slice(5) : null);
   return PATTERN_OF[tile] || (spec.type === 'crop' ? 'sprout-rows' : PATTERN_OF[spec.biome]) || 'barn-boards';
@@ -80,6 +86,14 @@ export const BIOMES = {
   garden: { sky: ['#a8d8e8', '#d8eef0'], sun: '#fff4cc', hills: ['#acd189', '#92c16c', '#7cb059'], ground: ['#a8805a', '#957049'] },
   meadow: { sky: ['#a6dcf0', '#d6f0f2'], sun: '#fff6d0', hills: ['#c6e19c', '#abd37e', '#93c368'], ground: ['#9fd06c', '#89bf5a'], flowers: true },
   dusk: { sky: ['#8d7fb8', '#e6a9b8'], sun: '#ffe1b8', hills: ['#9d9ab8', '#8290a8', '#6c7f94'], ground: ['#728d64', '#5f7854'] },
+  // event skies (sun and clouds are painted by the event scene when a biome turns them off)
+  'ev-rain': { sky: ['#7f95a8', '#a9bcc8'], sun: '#e8eef2', hills: ['#9db58a', '#88a577', '#74936a'], ground: ['#7fa05a', '#6c8d4c'], nosun: true, noclouds: true },
+  'ev-storm': { sky: ['#3d4663', '#5a6481'], sun: '#8d96b4', hills: ['#5f7360', '#51644f', '#44563f'], ground: ['#4e6a3e', '#425b35'], nosun: true, noclouds: true },
+  'ev-snow': { sky: ['#b9cfe3', '#dfeaf3'], sun: '#fffbe8', hills: ['#eef3f7', '#dde7ef', '#cddae4'], ground: ['#f5f8fb', '#e4ecf3'], noclouds: true, snowy: true },
+  'ev-dawn': { sky: ['#f0a29a', '#fbd3a8'], sun: '#fff0b0', hills: ['#b78fa6', '#a07a96', '#8a6788'], ground: ['#7da05f', '#6b8f50'], nosun: true, noclouds: true },
+  'ev-night': { sky: ['#0f1838', '#1d2b5a'], sun: '#f5f1d0', hills: ['#3c4a6c', '#32405f', '#29364f'], ground: ['#2f5446', '#264739'], stars: true, nosun: true },
+  'ev-fog': { sky: ['#c9d3d6', '#e1e7e8'], sun: '#f4f6f4', hills: ['#bcc9c4', '#aebcb7', '#9fb0a9'], ground: ['#9fb78a', '#8aa478'], nosun: true, noclouds: true },
+  'ev-aurora': { sky: ['#0a1432', '#16285a'], sun: '#dff', hills: ['#44587a', '#3a4d6c', '#2f405b'], ground: ['#d8e6ee', '#c1d3de'], stars: true, nosun: true },
   moon: { sky: ['#101a3c', '#1f2d5c'], sun: '#dfe9ff', hills: ['#646b84', '#545a72', '#454a60'], ground: ['#7a8096', '#666b80'], stars: true },
 };
 
@@ -163,7 +177,10 @@ function paintPattern(ctx, kind, x, y, w, h, c, bg, seed) {
   if (!kind || kind === 'plain') return;
   const r = rng(seed + 31);
   ctx.save(); ctx.fillStyle = c; ctx.strokeStyle = c; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-  if (kind === 'barn-boards') {
+  if (kind === 'rays') {
+    const cx = x + w / 2, cy = y + h * 0.3, n = 28, R = Math.hypot(w, h);
+    for (let i = 0; i < n; i += 2) { const a = (i / n) * TAU; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, R, a, a + TAU / n); ctx.closePath(); ctx.fill(); }
+  } else if (kind === 'barn-boards') {
     const bw = 4.4; ctx.lineWidth = 0.3;
     for (let i = 0, px = x; px < x + w; px += bw, i++) {
       ctx.beginPath(); ctx.moveTo(px, y); ctx.lineTo(px, y + h); ctx.stroke();
@@ -485,6 +502,7 @@ function alphaBounds(src, w, h) {
 export async function prepareArt(spec, opts = {}) {
   const art = spec.art || {};
   const mode = spec.artMode || (art.image ? 'image' : 'model');
+  if (mode === 'scene') return prepareScene(spec, opts);
   const dpi = opts.artDpi || 600, view = { ...(opts.view || {}), ...(art.view || {}) }, box = opts.box || L.subject;
   const key = [mode, mode === 'model' ? art.model : art.image, JSON.stringify(view), box.w, box.h, dpi].join('|');
   if (artCache.has(key)) return artCache.get(key);
@@ -509,6 +527,17 @@ export async function prepareArt(spec, opts = {}) {
   return job;
 }
 
+// Scene art (world events): the card forge paints the sky, ground and weather itself in flat cel colour; an optional
+// in-game model (art.model) stands in the scene. Nothing to approve: the picture is ours by construction.
+async function prepareScene(spec, opts) {
+  const art = spec.art || {}, box = opts.box || L.subject, dpi = opts.artDpi || 600;
+  if (!art.model) return { canvas: null, mode: 'scene', srcW: 1, srcH: 1, bounds: null };
+  const w = Math.round(box.w / 25.4 * dpi), h = Math.round(box.h / 25.4 * dpi);
+  let canvas = await renderModel(art.model, w, h, { ...(opts.view || {}), ...(art.view || {}) });
+  if (art.outline !== false) canvas = inkOutline(canvas, w, h, Math.max(2, dpi / 25.4 * 0.3));
+  return { canvas, mode: 'scene', srcW: w, srcH: h, bounds: alphaBounds(canvas, w, h).box, rendered: box };
+}
+
 function cutoutPlacement(art, spec, r, style) {
   const v = spec.art?.view || {}, B = art.bounds;
   const fill = v.fill ?? (style === 'specimen' ? 0.94 : 0.84);
@@ -528,8 +557,8 @@ function paintBackdrop(ctx, x, y, w, h, biomeName, seed, horizonAt = 0.66) {
     for (let i = 0; i < 46; i++) { const px = x + r() * w, py = y + r() * (horizon - y) * 0.9, s = 0.12 + r() * 0.2; if (i % 8 === 0) sparkle(ctx, px, py, s * 4.5); else disc(ctx, px, py, s, '#fff6dc'); }
   }
   const sx = x + w * (0.72 + r() * 0.1), sy = y + h * 0.2, sr = Math.min(w, h) * 0.075;
-  ctx.globalAlpha = 0.35; disc(ctx, sx, sy, sr * 1.9, b.sun); ctx.globalAlpha = 1; disc(ctx, sx, sy, sr, b.sun);
-  if (!b.stars) {
+  if (!b.nosun) { ctx.globalAlpha = 0.35; disc(ctx, sx, sy, sr * 1.9, b.sun); ctx.globalAlpha = 1; disc(ctx, sx, sy, sr, b.sun); }
+  if (!b.stars && !b.noclouds) {
     const shade = mix('#ffffff', b.sky[1], 0.55);
     for (let i = 0; i < 3; i++) {
       const cx = x + r() * w, cy = y + h * (0.1 + r() * 0.2), cw = w * (0.1 + r() * 0.1);
@@ -547,7 +576,7 @@ function paintBackdrop(ctx, x, y, w, h, biomeName, seed, horizonAt = 0.66) {
     for (let k = 0; k <= 48; k++) { const t = k / 48; ctx.lineTo(x + t * w, base - Math.sin(t * Math.PI * freq + ph) * amp - Math.sin(t * 9 + ph) * amp * 0.18); }
     ctx.lineTo(x + w, y + h); ctx.closePath();
     ctx.fillStyle = col; ctx.fill();
-    if (i < 2 && !b.stars) {
+    if (i < 2 && !b.stars && !b.snowy) {
       for (let t = 0; t < 9; t++) {
         const tx = x + r() * w, ty = base - Math.sin(((tx - x) / w) * Math.PI * freq + ph) * amp + h * 0.006, s = h * (0.012 + r() * 0.012) * (i + 1);
         ctx.fillStyle = mix(col, '#2c3a1c', 0.3); ctx.beginPath(); ctx.ellipse(tx, ty - s, s * 0.8, s, 0, 0, TAU); ctx.fill();
@@ -606,10 +635,127 @@ function sunburst(ctx, cx, cy, R, seed) {
   ctx.restore();
 }
 
+
+// ---------------------------------------------------------------- world event scenes
+// Each event paints its own weather on the flat world backdrop: one hard colour per shape, an ink line round the big
+// pieces, no gradients or blur. Colours are the game's own (paint colours from Paint the World, meteorite cyan).
+const EVENT_SCENES = {
+  'paint-rain': 'meadow', meteorite: 'moon', rain: 'ev-rain', storm: 'ev-storm', snow: 'ev-snow', rainbow: 'meadow',
+  dawn: 'ev-dawn', night: 'ev-night', fog: 'ev-fog', aurora: 'ev-aurora',
+};
+const PAINT_HUES = ['#ff3fa4', '#16d6c0', '#9be22c', '#8a5cff', '#ffb824'];
+function puff(ctx, cx, cy, cw, col, shade) {
+  for (const [c, dy] of [[shade, cw * 0.1], [col, 0]]) {
+    ctx.fillStyle = c; ctx.beginPath();
+    for (let k = 0; k < 4; k++) { const px = cx + (k - 1.5) * cw * 0.3, pr = cw * (k === 1 || k === 2 ? 0.26 : 0.18); ctx.moveTo(px + pr, cy + dy - pr * 0.3); ctx.arc(px, cy + dy - pr * 0.3, pr, 0, TAU); }
+    ctx.rect(cx - cw * 0.63, cy + dy - cw * 0.06, cw * 1.26, cw * 0.16); ctx.fill();
+  }
+}
+function drop(ctx, cx, cy, s, col) { // a teardrop with an ink line
+  ctx.beginPath(); ctx.moveTo(cx, cy - s * 1.5); ctx.bezierCurveTo(cx + s * 0.9, cy - s * 0.3, cx + s * 0.9, cy + s * 0.8, cx, cy + s * 0.8);
+  ctx.bezierCurveTo(cx - s * 0.9, cy + s * 0.8, cx - s * 0.9, cy - s * 0.3, cx, cy - s * 1.5); ctx.closePath();
+  ctx.fillStyle = col; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.28; ctx.stroke();
+}
+function streaks(ctx, r, x, y, w, h, n, col, len, lw = 0.4) {
+  ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineCap = 'round';
+  for (let i = 0; i < n; i++) { const px = x + r() * w, py = y + r() * h; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px - len * 0.3, py + len); ctx.stroke(); }
+  ctx.restore();
+}
+function splat(ctx, cx, cy, s, col) {
+  ctx.beginPath();
+  for (let i = 0; i < 12; i++) { const a = (i / 12) * TAU, rr = s * (i % 2 ? 0.62 : 1.05); ctx.lineTo(cx + Math.cos(a) * rr * 1.5, cy + Math.sin(a) * rr * 0.55); }
+  ctx.closePath(); ctx.fillStyle = col; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.3; ctx.lineJoin = 'round'; ctx.stroke();
+}
+function pine(ctx, cx, by, s, snow) {
+  ctx.fillStyle = '#5a3d26'; ctx.fillRect(cx - s * 0.08, by - s * 0.2, s * 0.16, s * 0.2);
+  for (let i = 0; i < 3; i++) {
+    const ty = by - s * 0.2 - i * s * 0.28, hw = s * (0.42 - i * 0.1);
+    ctx.beginPath(); ctx.moveTo(cx - hw, ty); ctx.lineTo(cx, ty - s * 0.42); ctx.lineTo(cx + hw, ty); ctx.closePath();
+    ctx.fillStyle = '#2f6b4a'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.28; ctx.lineJoin = 'round'; ctx.stroke();
+    if (snow) { ctx.beginPath(); ctx.moveTo(cx - hw * 0.5, ty - s * 0.21); ctx.lineTo(cx, ty - s * 0.42); ctx.lineTo(cx + hw * 0.5, ty - s * 0.21); ctx.closePath(); ctx.fillStyle = '#fbfdff'; ctx.fill(); }
+  }
+}
+function paintEventScene(ctx, kind, x, y, w, h, seed) {
+  const biome = EVENT_SCENES[kind] || 'meadow', r = rng(seed + 77), hz = y + h * 0.64, cx = x + w / 2;
+  paintBackdrop(ctx, x, y, w, h, biome, seed, 0.64);
+  ctx.save(); ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+  if (kind === 'rain' || kind === 'storm') {
+    const dark = kind === 'storm', col = dark ? '#4a5270' : '#8d9fb0', shade = dark ? '#363d58' : '#6f8296';
+    [[0.2, 0.1, 0.55], [0.55, 0.06, 0.62], [0.88, 0.13, 0.5]].forEach(([fx, fy, fw]) => puff(ctx, x + w * fx, y + h * fy + h * 0.06, w * fw, col, shade));
+    streaks(ctx, r, x, y + h * 0.16, w, h * 0.5, dark ? 26 : 44, dark ? '#a9c8f0' : '#3f6f9c', 4.2, dark ? 0.36 : 0.45);
+    if (dark) {
+      const bx = cx + w * 0.05, by = y + h * 0.2;
+      ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx - 4.2, by + h * 0.22); ctx.lineTo(bx - 0.6, by + h * 0.22); ctx.lineTo(bx - 5.4, by + h * 0.5); ctx.lineTo(bx + 4.8, by + h * 0.17); ctx.lineTo(bx + 0.8, by + h * 0.17); ctx.lineTo(bx + 4.4, by);
+      ctx.closePath(); ctx.fillStyle = '#ffe45c'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.5; ctx.stroke();
+      ctx.globalAlpha = 0.28; disc(ctx, bx - 0.5, by + h * 0.25, 9, '#fff3a0'); ctx.globalAlpha = 1;
+    } else for (let i = 0; i < 3; i++) { const px = x + w * (0.2 + i * 0.3), py = hz + h * (0.2 + (i % 2) * 0.1); ctx.beginPath(); ctx.ellipse(px, py, 5, 1.1, 0, 0, TAU); ctx.fillStyle = '#9cc8e8'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.25; ctx.stroke(); }
+  } else if (kind === 'snow') {
+    pine(ctx, x + w * 0.16, hz + h * 0.22, 15, true); pine(ctx, x + w * 0.86, hz + h * 0.2, 12, true);
+    for (let i = 0; i < 56; i++) {
+      const px = x + r() * w, py = y + r() * h * 0.95, s = 0.28 + r() * 0.34;
+      if (i % 7 === 0) { ctx.fillStyle = '#ffffff'; sparkle(ctx, px, py, s * 3.2); } else { disc(ctx, px, py, s + 0.12, '#7f9bb8'); disc(ctx, px, py, s, '#ffffff'); }
+    }
+  } else if (kind === 'rainbow') {
+    const bands = ['#ff5c5c', '#ffa03a', '#ffe14d', '#5ccf6a', '#4aa3ff', '#9a6bff'], R = w * 0.5, t = 1.7, bx = cx, by = hz + h * 0.12;
+    ctx.lineCap = 'butt'; ctx.strokeStyle = INK; ctx.lineWidth = t * bands.length + 0.9;
+    ctx.beginPath(); ctx.arc(bx, by, R - (t * bands.length) / 2, Math.PI, 0); ctx.stroke();
+    bands.forEach((c, i) => { ctx.strokeStyle = c; ctx.lineWidth = t + 0.05; ctx.beginPath(); ctx.arc(bx, by, R - t * i - t / 2, Math.PI, 0); ctx.stroke(); });
+    puff(ctx, bx - R + 1, by - 1, w * 0.34, '#fffdf6', '#cfe3ee'); puff(ctx, bx + R - 1, by - 1, w * 0.34, '#fffdf6', '#cfe3ee');
+  } else if (kind === 'dawn') {
+    const sr = h * 0.17; ctx.fillStyle = 'rgba(255,244,200,.45)';
+    for (let i = 0; i < 9; i++) { const a = Math.PI + (i / 8) * Math.PI; ctx.beginPath(); ctx.moveTo(cx, hz); ctx.arc(cx, hz, w, a - 0.07, a + 0.07); ctx.closePath(); ctx.fill(); }
+    ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, hz - y + h * 0.015); ctx.clip(); disc(ctx, cx, hz, sr * 1.18, INK); disc(ctx, cx, hz, sr, '#ffe27a'); disc(ctx, cx, hz, sr * 0.62, '#fff4b8'); ctx.restore();
+    ctx.strokeStyle = INK; ctx.lineWidth = 0.4;
+    [[0.2, 0.2], [0.3, 0.14], [0.76, 0.18]].forEach(([fx, fy]) => { const px = x + w * fx, py = y + h * fy; ctx.beginPath(); ctx.moveTo(px - 1.6, py); ctx.quadraticCurveTo(px - 0.7, py - 1.2, px, py); ctx.quadraticCurveTo(px + 0.7, py - 1.2, px + 1.6, py); ctx.stroke(); });
+  } else if (kind === 'night') {
+    const mx = x + w * 0.74, my = y + h * 0.4, mr = h * 0.11;
+    disc(ctx, mx, my, mr * 1.14, INK); disc(ctx, mx, my, mr, '#f5f1d0'); disc(ctx, mx - mr * 0.3, my - mr * 0.2, mr * 0.2, '#ddd7a8'); disc(ctx, mx + mr * 0.3, my + mr * 0.3, mr * 0.15, '#ddd7a8');
+    for (let i = 0; i < 16; i++) { const px = x + r() * w, py = hz + h * 0.04 + r() * h * 0.3; ctx.globalAlpha = 0.3; disc(ctx, px, py, 1.1, '#ffee77'); ctx.globalAlpha = 1; disc(ctx, px, py, 0.34, '#fff6a8'); }
+  } else if (kind === 'fog') {
+    for (const [fx, by, s] of [[0.2, 0.74, 14], [0.5, 0.68, 18], [0.8, 0.75, 13]]) { const tx = x + w * fx, ty = y + h * by; ctx.fillStyle = '#5a3d26'; ctx.fillRect(tx - s * 0.04, ty - s * 0.3, s * 0.08, s * 0.3); disc(ctx, tx, ty - s * 0.5, s * 0.32, INK); disc(ctx, tx, ty - s * 0.5, s * 0.28, '#4f7a58'); }
+    [[0.5, 0.46, 1.0], [0.3, 0.62, 0.9], [0.72, 0.72, 0.95], [0.4, 0.86, 1.0]].forEach(([fx, fy, k], i) => { ctx.globalAlpha = 0.82; ctx.fillStyle = i % 2 ? '#f1f5f4' : '#e3eaea'; ctx.beginPath(); ctx.ellipse(x + w * fx, y + h * fy, w * 0.62 * k, h * 0.08, 0, 0, TAU); ctx.fill(); });
+    ctx.globalAlpha = 1;
+  } else if (kind === 'aurora') {
+    [['#59e6b0', 0.34, 0.0], ['#8f7bff', 0.46, 1.7], ['#5cc8ff', 0.27, 3.1]].forEach(([c, base, ph]) => {
+      ctx.globalAlpha = 0.92; ctx.fillStyle = c; ctx.beginPath();
+      for (let k = 0; k <= 30; k++) { const t = k / 30; ctx.lineTo(x + t * w, y + h * (base + Math.sin(t * 7 + ph) * 0.045)); }
+      for (let k = 30; k >= 0; k--) { const t = k / 30; ctx.lineTo(x + t * w, y + h * (base + 0.2 + Math.sin(t * 5 + ph * 1.3) * 0.06)); }
+      ctx.closePath(); ctx.fill();
+    });
+    ctx.globalAlpha = 1; pine(ctx, x + w * 0.14, hz + h * 0.24, 14, true); pine(ctx, x + w * 0.88, hz + h * 0.22, 11, true);
+  } else if (kind === 'paint-rain') {
+    puff(ctx, cx, y + h * 0.14, w * 0.7, '#fffdf6', '#cfe3ee');
+    PAINT_HUES.forEach((c, i) => { const px = x + w * (0.2 + i * 0.15), py = y + h * (0.3 + (i % 2) * 0.16); drop(ctx, px, py, 1.7, c); drop(ctx, px + 2, py + h * 0.16, 1.2, c); });
+    PAINT_HUES.forEach((c, i) => {
+      const px = x + w * (0.14 + i * 0.18), py = hz + h * (0.14 + (i % 2) * 0.1);
+      splat(ctx, px, py, 3.2, c);
+      ctx.strokeStyle = '#2f8f4a'; ctx.lineWidth = 0.7; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, py - 3.4); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(px - 1.1, py - 3.5, 1.1, 0.55, -0.5, 0, TAU); ctx.ellipse(px + 1.1, py - 3.5, 1.1, 0.55, 0.5, 0, TAU); ctx.fillStyle = '#59c26a'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.2; ctx.stroke();
+    });
+  } else if (kind === 'meteorite') {
+    const sx = x + w * 0.92, sy = y + h * 0.26, ex = cx + w * 0.02, ey = hz - h * 0.02;
+    ctx.beginPath(); ctx.moveTo(sx - 3.4, sy - 1); ctx.lineTo(ex, ey); ctx.lineTo(sx + 1, sy + 3.2); ctx.closePath(); ctx.fillStyle = '#35c8e8'; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(sx - 1.6, sy); ctx.lineTo(ex, ey); ctx.lineTo(sx, sy + 1.6); ctx.closePath(); ctx.fillStyle = '#c4f6ff'; ctx.fill();
+    ctx.globalAlpha = 0.3; disc(ctx, ex, ey, 6, '#5ee8ff'); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.ellipse(cx, hz + h * 0.2, w * 0.3, h * 0.06, 0, 0, TAU); ctx.fillStyle = '#4c5168'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.3; ctx.stroke();
+  }
+  ctx.restore();
+}
+
 // Paints backdrop + art in box (x,y,w,h); a model or cut-out stands in `sub`. Returns the subject's box in mm.
 // style: specimen (paper backdrop), portal (painted world), shadowbox (world + foreground layer), popout (world + glory).
 function paintArt(ctx, art, spec, x, y, w, h, sub, style) {
   let subject = null;
+  if (art.mode === 'scene') {
+    const seed = hashSeed(spec.id);
+    paintEventScene(ctx, spec.scene || spec.id, x, y, w, h, seed);
+    if (art.canvas) { // an in-game model stands in the scene, on its crater or ground
+      const rw = art.rendered.w, rh = art.rendered.h, rx = sub.x + (sub.w - rw) / 2, ry = sub.y + sub.h - rh;
+      const draw = c => c.drawImage(art.canvas, rx, ry, rw, rh), B = art.bounds, k = rw / art.srcW;
+      draw(ctx); subject = B ? { x: rx + B.x * k, y: ry + B.y * k, w: B.w * k, h: B.h * k, pxPerMm: 1 / k, draw } : { pxPerMm: 1 / k, draw };
+    } else subject = { pxPerMm: 600 / 25.4 };
+    return subject;
+  }
   if (art.mode === 'model' || art.mode === 'cutout') {
     const seed = hashSeed(spec.id);
     if (style === 'specimen') paintPaper(ctx, x, y, w, h, sub);
@@ -662,6 +808,14 @@ function windowPath(ctx, type, x, y, w, h) {
     for (let i = 0; i < n; i++) ctx.arc(x + sr + i * sr * 2, base, sr, Math.PI, 0);
     ctx.lineTo(x + w, y + h - br); ctx.arcTo(x + w, y + h, x + w - br, y + h, br);
     ctx.lineTo(x + br, y + h); ctx.arcTo(x, y + h, x, y + h - br, br);
+  } else if (shape === 'burst') {
+    // zig-zag edge all round, like a comic burst: the window reads as an event, never as a tile card
+    const d = 1.3, nx = 11, ny = 9, pts = [];
+    for (let i = 0; i <= nx; i++) pts.push([x + (w * i) / nx, y + (i % 2 ? d : 0)]);
+    for (let j = 1; j <= ny; j++) pts.push([x + w - (j % 2 ? d : 0), y + (h * j) / ny]);
+    for (let i = nx - 1; i >= 0; i--) pts.push([x + (w * i) / nx, y + h - (i % 2 ? d : 0)]);
+    for (let j = ny - 1; j >= 1; j--) pts.push([x + (j % 2 ? d : 0), y + (h * j) / ny]);
+    pts.forEach(([px, py], i) => (i ? ctx.lineTo(px, py) : ctx.moveTo(px, py)));
   } else if (shape === 'circle') {
     ctx.ellipse(x + w / 2, y + h / 2, w / 2, h / 2, 0, 0, Math.PI * 2);
   } else {
@@ -672,8 +826,7 @@ function windowPath(ctx, type, x, y, w, h) {
   ctx.closePath();
 }
 
-function paintFrameBody(ctx, tier, x, y, w, h, seed, pattern) {
-  const f = FRAME[tier];
+function paintFrameBody(ctx, f, x, y, w, h, seed, pattern) {
   ctx.fillStyle = f.body; ctx.fillRect(x, y, w, h);
   paintPattern(ctx, pattern, x, y, w, h, mix(f.body, f.trim, 0.26), f.body, seed);
 }
@@ -796,15 +949,16 @@ export async function renderCard(spec, opts = {}) {
   const ctx = canvas.getContext('2d');
   const pxmm = dpi / 25.4;
   const tier = rarityOf(spec.rarity), R = RARITIES[tier], type = TYPES[spec.type] ? spec.type : 'animal';
-  const F = FRAME[tier], sun = tier === 'sun', pattern = patternOf(spec);
+  const isEv = type === 'event';
+  const F = isEv ? { body: EVENT_BODY, edge: spec.color || TYPES.event.accent, trim: EVENT_TRIM } : FRAME[tier], sun = tier === 'sun' && !isEv, pattern = patternOf(spec);
   const finish = opts.finish || spec.finish || R.finish;
   const seed = hashSeed(spec.id || spec.name);
   const qc = newQC(spec), boxes = [], toPx = (x, y, bw, bh) => [x, y, bw, bh].map((v, i) => Math.round((i < 2 ? v + b : v) * pxmm));
-  const style = lod === 'board' && sun ? 'portal' : spec.artStyle || ART_STYLES[tier];
+  const style = isEv ? 'portal' : lod === 'board' && sun ? 'portal' : spec.artStyle || ART_STYLES[tier];
   // A hand card with plate:false keeps its name but gives the plate's room to the art (a tile card's art is the point).
-  const tall = lod === 'board' || (lod === 'hand' && opts.plate === false && !sun);
-  const A = tall ? { x: 4, y: 4, w: 55, h: 72 } : sun ? L.sunArt : L.art;
-  const sub = lod === 'board' ? { x: 4, y: 12, w: 55, h: 60 } : tall ? { x: 4, y: 20, w: 55, h: 54 } : sun ? L.sunSubject : L.subject;
+  const tall = !isEv && (lod === 'board' || (lod === 'hand' && opts.plate === false && !sun));
+  const A = isEv ? EV.art : tall ? { x: 4, y: 4, w: 55, h: 72 } : sun ? L.sunArt : L.art;
+  const sub = isEv ? EV.subject : lod === 'board' ? { x: 4, y: 12, w: 55, h: 60 } : tall ? { x: 4, y: 20, w: 55, h: 54 } : sun ? L.sunSubject : L.subject;
 
   let art = null;
   try { art = await prepareArt(spec, { artDpi: Math.max(600, dpi), box: sub, view: style === 'specimen' ? { fill: 0.92 } : {} }); }
@@ -816,7 +970,7 @@ export async function renderCard(spec, opts = {}) {
   ctx.save();
   if (!bleed) { rrect(ctx, 0, 0, CARD.w, CARD.h, CARD.radius); ctx.clip(); }
 
-  paintFrameBody(ctx, tier, -b, -b, CARD.w + b * 2, CARD.h + b * 2, seed, pattern);
+  paintFrameBody(ctx, F, -b, -b, CARD.w + b * 2, CARD.h + b * 2, seed, pattern);
   const winPath = () => windowPath(ctx, type, A.x, A.y, A.w, A.h);
   let subject = null;
   if (style === 'popout' && lod !== 'board') {
@@ -840,9 +994,20 @@ export async function renderCard(spec, opts = {}) {
     ctx.save(); winPath(); ctx.fillStyle = '#222'; ctx.fill(); ctx.clip();
     if (art) subject = paintArt(ctx, art, spec, A.x, A.y, A.w, A.h, sub, style);
     ctx.restore();
-    celRim(ctx, winPath, F.edge, 0.9);
+    celRim(ctx, winPath, F.edge, isEv ? 1.5 : 0.9);
   }
   if (art) checkArt(qc, art, subject, A, sub, style, dpi);
+
+  // World event banner: the one thing no tile card has
+  if (isEv) {
+    const B = EV.banner, bp = () => { ctx.beginPath(); ctx.moveTo(B.x + 2.4, B.y); ctx.lineTo(B.x + B.w - 2.4, B.y); ctx.lineTo(B.x + B.w, B.y + B.h / 2); ctx.lineTo(B.x + B.w - 2.4, B.y + B.h); ctx.lineTo(B.x + 2.4, B.y + B.h); ctx.lineTo(B.x, B.y + B.h / 2); ctx.closePath(); };
+    ctx.save(); bp(); ctx.fillStyle = F.edge; ctx.fill(); ctx.restore(); inkLine(ctx, bp, 0.5);
+    const label = 'WORLD EVENT'; let bs = 3.2; ctx.font = typeFont(bs); ctx.letterSpacing = '0.12em';
+    while (ctx.measureText(label).width > B.w - 13 && bs > 2.2) { bs -= 0.05; ctx.font = typeFont(bs); }
+    ctx.save(); ctx.fillStyle = INK; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, B.x + B.w / 2, B.y + B.h / 2 + 0.2); ctx.restore(); ctx.letterSpacing = '0px';
+    ctx.fillStyle = INK; sparkle(ctx, B.x + 6.4, B.y + B.h / 2, 2.1); sparkle(ctx, B.x + B.w - 6.4, B.y + B.h / 2, 2.1);
+    boxes.push({ role: 'type', bbox: toPx(B.x + 6, B.y + 0.8, B.w - 12, B.h - 1.6), font_pt: +(bs / MM_PER_PT).toFixed(1), family: 'Nunito', text_colour: INK, plate: 'opaque' });
+  }
 
   // Cost: top-left token
   const hasCost = Number.isFinite(spec.cost);
@@ -854,7 +1019,7 @@ export async function renderCard(spec, opts = {}) {
 
   // Name ribbon (board cards carry no words)
   if (lod !== 'board') {
-    const Rb = sun ? L.sunRibbon : L.ribbon, rp = () => ribbonPath(ctx, Rb);
+    const Rb = isEv ? EV.ribbon : sun ? L.sunRibbon : L.ribbon, rp = () => ribbonPath(ctx, Rb);
     ctx.save(); rp(); ctx.fillStyle = PAPER; ctx.fill(); ctx.clip(); // flat paper, accent stripes in the type colour
     ctx.fillStyle = TYPES[type].accent;
     ctx.fillRect(Rb.x, Rb.y - 1, Rb.w, 1.25); ctx.fillRect(Rb.x, Rb.y + Rb.h - 0.4, Rb.w, 1.3);
@@ -874,9 +1039,9 @@ export async function renderCard(spec, opts = {}) {
   const G = tall ? { cx: 31.5, cy: 79.8, r: 3.4 } : L.gem;
   if (lod === 'inspect') {
     const T = L.type, tp = () => rrect(ctx, T.x, T.y, T.w, T.h, 1.2);
-    ctx.save(); tp(); ctx.fillStyle = mix(TYPES[type].accent, '#000000', 0.35); ctx.fill(); ctx.restore();
+    ctx.save(); tp(); ctx.fillStyle = isEv ? EVENT_TYPE : mix(TYPES[type].accent, '#000000', 0.35); ctx.fill(); ctx.restore();
     inkLine(ctx, tp, 0.4);
-    const typeText = [TYPES[type].label, spec.subtype].filter(Boolean).join(' · ').toUpperCase();
+    const typeText = [isEv ? null : TYPES[type].label, spec.subtype].filter(Boolean).join(' · ').toUpperCase();
     let ts = 2.3; ctx.font = typeFont(ts); ctx.letterSpacing = '0.06em';
     while (ctx.measureText(typeText).width > T.w - 3 && ts > 1.8) { ts -= 0.05; ctx.font = typeFont(ts); }
     ctx.save(); ctx.fillStyle = '#fbf0d6'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(typeText, T.x + T.w / 2, T.y + T.h / 2 + 0.15); ctx.restore();
@@ -980,6 +1145,7 @@ function abilityIcons(spec) {
   return [...new Set([...String(spec.rules || '').matchAll(/\{([a-z]+)\}/g)].map(m => m[1]))].slice(0, 3);
 }
 function makerLine(spec, art) {
+  if (art?.mode === 'scene') return art.canvas ? '3D model · Atelier' : 'Scene · Card Forge';
   if (art?.mode === 'model') return spec.art?.modelMaker || '3D model · Atelier';
   return spec.art?.maker || 'Concept art · Atelier';
 }
@@ -1099,7 +1265,7 @@ export function readingGrade(text) {
 export function checkSpec(spec) {
   const out = [];
   if (!spec.id || !/^[a-z0-9-]+$/.test(spec.id)) out.push(['spec', 'fail', 'Card needs an id (lowercase, dashes)']);
-  if (!TYPES[spec.type]) out.push(['spec', 'fail', `Unknown type "${spec.type}" (animal, building, crop, weather, helper)`]);
+  if (!TYPES[spec.type]) out.push(['spec', 'fail', `Unknown type "${spec.type}" (animal, building, crop, weather, helper, event)`]);
   if (!spec.rarity || !(spec.rarity in RARITIES || spec.rarity in RARITY_ALIAS)) out.push(['spec', 'fail', `Unknown rarity "${spec.rarity}"`]);
   if ((spec.name || '').length > 18) out.push(['name-length', 'fail', `Name is ${spec.name.length} characters; 18 is the most for kids`]);
   const words = `${spec.name} ${spec.subtype || ''} ${spec.rules}`;
@@ -1119,7 +1285,7 @@ function checkStats(qc, spec) {
   if (stats.length > 2) qc.add('stats', 'fail', 'At most two stats on the face');
   else if (bad.length) qc.add('stats', 'fail', 'Stats need a known icon and a whole number 0 to 99');
   else qc.add('stats', 'pass', stats.length ? `${stats.length} stat${stats.length > 1 ? 's' : ''} in the bottom corners` : 'No stats');
-  if (!Number.isFinite(spec.cost)) qc.add('cost', 'warn', 'No cost on this card');
+  if (!Number.isFinite(spec.cost) && spec.type !== 'event') qc.add('cost', 'warn', 'No cost on this card');
 }
 function checkSafe(qc, boxes, b, pxmm) {
   const s = Math.round((b + CARD.safe) * pxmm), W = Math.round((CARD.w - CARD.safe + b) * pxmm), H = Math.round((CARD.h - CARD.safe + b) * pxmm);
@@ -1131,13 +1297,14 @@ function shipBlockers(items, spec, art) {
   const why = items.filter(i => i.level === 'fail').map(i => i.msg);
   const a = items.find(i => i.id === 'art');
   if (a && a.level === 'warn') why.push(a.msg);
-  if (art && art.mode !== 'model' && spec.art?.status !== 'final') why.push('the art is not approved yet (art.status is not "final")');
+  if (art && art.mode !== 'model' && art.mode !== 'scene' && spec.art?.status !== 'final') why.push('the art is not approved yet (art.status is not "final")');
   return why;
 }
 function checkArt(qc, art, subject, A, sub, style, dpi = 600) {
   if (!subject) { qc.add('art', 'fail', 'Art did not paint'); return; }
   const ppi = subject.pxPerMm * 25.4, need = Math.min(300, dpi); // sharp at this output: print needs 300, a hand card less
-  if (art.mode === 'model') qc.add('art', 'pass', `Rendered from the game model at ${Math.round(ppi)} ppi`);
+  if (art.mode === 'scene') { qc.add('art', 'pass', art.canvas ? `Event scene painted by the forge, game model at ${Math.round(ppi)} ppi` : 'Event scene painted by the forge'); if (!art.canvas) return; }
+  else if (art.mode === 'model') qc.add('art', 'pass', `Rendered from the game model at ${Math.round(ppi)} ppi`);
   else qc.add('art', ppi >= need ? 'pass' : ppi >= need * 2 / 3 ? 'warn' : 'fail', ppi >= need ? `Art is ${Math.round(ppi)} ppi (${need} needed here)` : `Art is ${Math.round(ppi)} ppi; ${need} needed${ppi >= need * 2 / 3 ? '' : ', needs a bigger image'}`);
   if (subject.w) {
     const off = Math.abs(subject.x + subject.w / 2 - (A.x + A.w / 2)) / A.w, hh = subject.h / A.h;
