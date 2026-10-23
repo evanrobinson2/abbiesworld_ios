@@ -49,5 +49,8 @@ engine is the biggest saving per visitor.
 - One machine, 25 at once (~3,400 requests a second): 56% of requests answered 403. That is Vercel's platform attack
   protection blocking one address, not the site running out of room. Use `machines` (each its own address, 5 or fewer
   visitors at once per machine, all starting on the same second) to test a crowd.
+- Ten machines at once, 5 visitors each (one machine never started; the other nine ran together): about 8,000
+  requests a second across the site, 0 errors on every machine, p95 49 to 54 ms, 99.7% cache hits. Projected Vercel
+  transfer: about $40 for a 100,000-visitor day, $460 to $500 for 500,000; $1,000 buys about 1.6 million first visits.
 - The same protection is a real-world risk for a classroom: 30 children starting at once behind one school address is
   a few thousand requests a second. Fewer requests per visit (bundling the ~290 files) lowers that line.

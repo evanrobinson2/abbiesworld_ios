@@ -1,4 +1,5 @@
 const { randomBytes } = require('node:crypto');
+const { ownerOnly, OWNER_ONLY } = require('../lib/owner-only.cjs');
 
 // Verdicts from the /models review screen: accept, adjust (with notes) or reject, typed or spoken.
 // The latest verdict per model lives at model-reviews/v1/latest/<model>.json; every verdict also goes to the
@@ -12,12 +13,13 @@ const json = (res, status, body) => { res.statusCode = status; res.setHeader('Co
 const text = (value, max) => typeof value === 'string' ? value.slice(0, max) : '';
 const read = async (get, path) => { const r = await get(path, { access: 'private', useCache: false }); return r && r.statusCode === 200 ? JSON.parse(await new Response(r.stream).text()) : null; };
 
-function createHandler({ put, list, get, del } = require('@vercel/blob')) { return async function handler(req, res) {
+function createHandler({ put, list, get, del } = require('@vercel/blob'), gate = {}) { return async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   if (!['GET', 'POST'].includes(req.method)) return json(res, 405, { error: 'Method not allowed' });
   try {
     if (req.method === 'POST') {
+      if (!await ownerOnly(req, gate)) return json(res, 401, OWNER_ONLY);
       if (req.headers.origin && req.headers.origin !== `https://${req.headers.host}`) return json(res, 403, { error: 'Origin rejected' });
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
       const id = text(body && body.id, 90), verdict = text(body && body.verdict, 10), notes = text(body && body.notes, 4000).trim();

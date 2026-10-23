@@ -81,7 +81,7 @@ Other MCP: the Ranch app's `/api/claude-mcp` (Claude sandbox board, token `CLAUD
 | `dispatch-relay.yml` | issue events, every 10 min | Relays Claude's markers, verifies commits and PRs, runs the watchdog, posts steering |
 | `dispatch-e2e.yml` | manual | Live acceptance test of the dispatch loop |
 | `model-store.yml` | model changes on main or live, manual | Syncs models to R2 and Postgres. **Failing: secrets missing** |
-| `feedback-inbox.yml` | every 5 min | Copies app feedback into the `feedback-inbox` branch and PR |
+| `feedback-inbox.yml` | every 5 min | Copies app feedback into the `feedback-inbox` branch and PR; shows a GitHub OIDC token so it still reads `/api/feedback` when `OWNER_TOOLS_LOCKED` is on (`lib/owner-only.cjs`) |
 | `surge-loadtest.yml` | manual | Launch-day load test of the live site: GETs only, no paid AI (docs/launch/SURGE.md) |
 | Midjourney workers on Evan's Mac | poll | Claim jobs from the world-doc queue **[inferred]** |
 

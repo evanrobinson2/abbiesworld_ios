@@ -108,7 +108,7 @@
   async function poll() {
     clearTimeout(timer);
     if (!document.hidden) {
-      const next = await fetch(FEED, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+      const next = await fetch(FEED, { cache: 'no-store' }).then(r => r.ok ? r.json() : r.status === 401 ? { source: 'offline', error: 'Sign in on ranch.abbies.world to see the workshop' } : null).catch(() => null);
       if (next) {
         data = { jobs: next.jobs || [], machines: next.machines || [], events: next.events || [], source: next.source || 'live', error: next.error };
         const since = store.get('aw-seen-at');
@@ -165,9 +165,9 @@
     send.addEventListener('click', async () => {
       if (!box.value.trim()) return box.focus();
       send.disabled = true; send.textContent = 'Sending…';
-      const ok = sample || await fetch('/api/activity', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dispatch_id: job.parcel_id, instructions: box.value }) }).then(r => r.ok).catch(() => false);
-      send.textContent = ok ? 'Sent. It picks this up at its next step.' : 'Could not send. Try again.';
-      if (ok) box.value = ''; send.disabled = false;
+      const ok = sample || await fetch('/api/activity', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dispatch_id: job.parcel_id, instructions: box.value }) }).then(r => r.ok || r.status).catch(() => false);
+      send.textContent = ok === true ? 'Sent. It picks this up at its next step.' : ok === 401 ? 'Sign in on ranch.abbies.world first.' : 'Could not send. Try again.';
+      if (ok === true) box.value = ''; send.disabled = false;
     });
     const i = stageIndex(job);
     return el('div', {},

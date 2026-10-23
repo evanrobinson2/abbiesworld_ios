@@ -27,7 +27,10 @@ if (!fs.existsSync(readme)) {
   if (repo && process.env.GH_TOKEN) try { gh('pr', 'create', '--repo', repo, '--draft', '--base', 'main', '--head', 'feedback-inbox', '--title', 'Feedback inbox (never merge)',
     '--body', 'Each comment here is one note Evan sent from the app, with its picture. The Claude thread "iPhone update and feedback loop" watches this PR and passes each note to the thread that made the change. Do not merge.'); } catch (error) { console.log('Could not open the inbox PR:', String(error.message).slice(0, 300)); }
 }
-const res = await fetch(`${SITE}/api/feedback${last ? `?since=${encodeURIComponent(last)}` : ''}`);
+// When the site locks Evan's tools (OWNER_TOOLS_LOCKED), this run proves itself with a GitHub OIDC token (lib/owner-only.cjs).
+const { ACTIONS_ID_TOKEN_REQUEST_URL: oidcUrl, ACTIONS_ID_TOKEN_REQUEST_TOKEN: oidcToken } = process.env;
+const auth = oidcUrl && oidcToken ? { authorization: `Bearer ${(await (await fetch(`${oidcUrl}&audience=abbies-ranch-atelier`, { headers: { authorization: `Bearer ${oidcToken}` } })).json()).value}` } : {};
+const res = await fetch(`${SITE}/api/feedback${last ? `?since=${encodeURIComponent(last)}` : ''}`, { headers: auth });
 if (res.status === 404) { console.log('The site has no /api/feedback yet (not deployed); nothing to copy.'); process.exit(0); }
 if (!res.ok) throw new Error(`Feedback list failed: ${res.status}`);
 const items = (await res.json()).items.filter(i => ID.test(i.id) && (!last || i.id > last)).sort((a, b) => a.id.localeCompare(b.id));
@@ -37,7 +40,7 @@ for (const item of items) {
   const folder = path.join(dir, item.id);
   fs.mkdirSync(folder, { recursive: true });
   if (item.imageUrl) {
-    const pic = await fetch(SITE + item.imageUrl);
+    const pic = await fetch(SITE + item.imageUrl, { headers: auth });
     if (pic.ok) fs.writeFileSync(path.join(folder, 'shot.jpg'), Buffer.from(await pic.arrayBuffer()));
   }
   const { imageUrl, ...note } = item;
