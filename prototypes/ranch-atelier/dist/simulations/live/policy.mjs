@@ -8,12 +8,66 @@ export const REALTIME_MODEL='openai/gpt-realtime-2';
 export const VOICE='marin';
 export const AUDIO_RATE=24000;
 
-// The realtime session the page asks for. The relay replaces instructions, tools and voice with its own copy.
-export function sessionConfig(brief=''){
- return {instructions:INSTRUCTIONS+brief,voice:VOICE,outputModalities:['audio'],
+// ---- the family's voice settings (/live-voice) -----------------------------------------------
+// Only how the Computer sounds and listens. The rules, tools and guard are never settings.
+export const SETTINGS_KEY='abbies-live-settings-v1';
+export const OPENAI_VOICES=['marin','cedar','alloy','ash','ballad','coral','echo','sage','shimmer','verse'];
+export const ELEVEN_VOICE_PATTERN=/^[A-Za-z0-9]{10,40}$/;
+// ElevenLabs premade voices, shown until the account's own list loads.
+export const ELEVEN_VOICES=[
+ {id:'XrExE9yKIg1WjnnlVkGX',name:'Matilda',about:'warm, friendly'},{id:'pFZP5JQG7iQjIQuC4Bku',name:'Lily',about:'gentle, British'},
+ {id:'cgSgspJ2msm6clMCkdW9',name:'Jessica',about:'bright, playful'},{id:'FGY2WhTYpPnrIDTdsKH5',name:'Laura',about:'upbeat'},
+ {id:'XB0fDUnXU5powFXDhCwa',name:'Charlotte',about:'soft, storybook'},{id:'21m00Tcm4TlvDq8ikWAM',name:'Rachel',about:'calm, clear'},
+ {id:'IKne3meq5aSn9XLyUdCD',name:'Charlie',about:'cheerful, Australian'},{id:'bIHbv24MWmeRgasZH58o',name:'Will',about:'friendly, relaxed'},
+ {id:'N2lVS1w4EtoT3dr4eOWO',name:'Callum',about:'storyteller'},{id:'JBFqnCBsd6RMkjVDRZzb',name:'George',about:'warm, British narrator'},
+ {id:'SAz9YHcvj6GT2YYXdXww',name:'River',about:'calm, neutral'},{id:'nPczCjzI2devNBz1zQrb',name:'Brian',about:'deep, steady'}
+];
+export const SETTING_CHOICES={
+ provider:['openai','elevenlabs'],personality:['calm','warm','playful','silly'],replies:['short','normal','more'],
+ wait:['smart','quick','normal','patient'],hearing:['quiet-room','normal','noisy-room']
+};
+export const DEFAULT_SETTINGS={provider:'openai',openaiVoice:VOICE,elevenVoice:ELEVEN_VOICES[0].id,speed:1,personality:'warm',replies:'short',wait:'smart',hearing:'normal',interrupt:true,greeting:true,captions:true};
+export function normalizeSettings(raw){
+ const s={...DEFAULT_SETTINGS},r=raw&&typeof raw==='object'?raw:{};
+ for(const [k,list] of Object.entries(SETTING_CHOICES))if(list.includes(r[k]))s[k]=r[k];
+ if(OPENAI_VOICES.includes(r.openaiVoice))s.openaiVoice=r.openaiVoice;
+ if(typeof r.elevenVoice==='string'&&ELEVEN_VOICE_PATTERN.test(r.elevenVoice))s.elevenVoice=r.elevenVoice;
+ if(Number.isFinite(r.speed))s.speed=Math.round(Math.min(1.2,Math.max(0.7,r.speed))*20)/20;
+ for(const k of ['interrupt','greeting','captions'])if(typeof r[k]==='boolean')s[k]=r[k];
+ return s;
+}
+const PERSONALITY={calm:'Speak softly and calmly, like a bedtime story. Few exclamations.',warm:'Be warm, kind and encouraging.',playful:'Be bouncy and playful, with little sound effects like "whoosh" and "ta-da".',silly:'Be extra silly and giggly: funny words, gentle jokes about the toys, cartoon sound effects. Still short.'};
+const REPLIES={short:'Keep each turn to one short sentence.',normal:'Keep each turn to one or two short sentences.',more:'You may use up to three short sentences when describing what you made.'};
+// Built on the server (api/live-socket.js) from the choices above, never from text the page sends.
+export function styleText(settings){
+ const s=normalizeSettings(settings);
+ return `\n\nHOW TO SOUND (the family's settings; every rule above still wins)\n- ${PERSONALITY[s.personality]}\n- ${REPLIES[s.replies]}`+
+  (s.provider==='elevenlabs'?'\n- The game turns your words into speech. Write exactly what to say out loud: no stage directions, emojis, lists or markdown.':'');
+}
+const THRESHOLD={'quiet-room':0.35,normal:0.5,'noisy-room':0.7},SILENCE={quick:350,normal:700,patient:1300};
+export function turnDetection(settings){
+ const s=normalizeSettings(settings);
+ return s.wait==='smart'?{type:'semantic-vad'}:{type:'server-vad',threshold:THRESHOLD[s.hearing],silenceDurationMs:SILENCE[s.wait],prefixPaddingMs:300};
+}
+
+// The realtime session the page asks for. The relay rebuilds instructions, tools, voice and the
+// settings-driven parts with its own copy (serverSession), so the page only chooses among safe options.
+export function sessionConfig(brief='',settings){
+ const s=normalizeSettings(settings);
+ return {instructions:INSTRUCTIONS+brief,voice:s.openaiVoice,outputModalities:s.provider==='elevenlabs'?['text']:['audio'],
   inputAudioFormat:{type:'audio/pcm',rate:AUDIO_RATE},outputAudioFormat:{type:'audio/pcm',rate:AUDIO_RATE},
   inputAudioTranscription:{model:'gpt-4o-mini-transcribe',language:'en'},
-  turnDetection:{type:'semantic-vad'},tools:TOOLS};
+  turnDetection:turnDetection(s),tools:TOOLS,liveSettings:s};
+}
+// What the relay sends upstream: rules first, then the style built from the settings, then the scene brief.
+export function serverSession(config){
+ const c=config&&typeof config==='object'?config:{};
+ const given=typeof c.instructions==='string'?c.instructions:'';
+ const brief=given.startsWith(INSTRUCTIONS)?given.slice(INSTRUCTIONS.length,INSTRUCTIONS.length+8000):'';
+ const s=normalizeSettings(c.liveSettings);
+ return {instructions:INSTRUCTIONS+styleText(s)+brief,voice:s.openaiVoice,outputModalities:s.provider==='elevenlabs'?['text']:['audio'],
+  inputAudioFormat:{type:'audio/pcm',rate:AUDIO_RATE},outputAudioFormat:{type:'audio/pcm',rate:AUDIO_RATE},
+  inputAudioTranscription:{model:'gpt-4o-mini-transcribe',language:'en'},turnDetection:turnDetection(s),tools:TOOLS};
 }
 
 export const INSTRUCTIONS=`You are the Computer inside Abbie's World, a 3D toy world on a family's phone. Children (often Abbie, who is young) and their parents talk to you out loud, and you change the world as they speak.
@@ -47,7 +101,7 @@ THE WORLD
 - Give everything you make a short id ("rainbow-bridge") so you can change it later. Reusing an id replaces that thing.
 - Use build for anything made of several parts (a castle, a rocket, an abacus with beads that slide). Parts are positioned in the thing's own space: [0,1,0] is the top of a scale-1 thing and part scale 0.2 is a fifth of its size. Move a bead later with change_world move using the part's full id (thing-id.part-id) and a "to" in the same space.
 - Real models look nicer than shapes. Before building something from shapes, call catalog with a word or two ("barn", "goat", "tree") and spawn a match with change_world spawn {asset: id}. Ranch models arrive at their true ranch size (scale 1). Library models (ids starting "lib-") arrive one person tall, so scale them: a barn about 8, a tree about 6, a basket about 0.4.
-- When a child wants to play or make up a game (tag with the sheep, a treasure hunt, a race to the barn, hide and seek), call game_idea with their idea in a few words. It returns a small plan from the game's Oracle: a title, a goal, a few rules and things to build. Build those things with build or change_world, then explain the game in one or two short sentences and start playing. Don't read the plan out word for word.
+- When a child wants to play or make up a game (tag with the sheep, a treasure hunt, a race to the barn, hide and seek), call game_idea with their idea in a few words. It returns a small plan from the game's own playbook: a title, a goal, a few rules and things to build. Make it fit their idea and this world, build the things, explain the game in one or two short sentences and start playing. Don't read the plan out word for word.
 - When the family asks for something that needs a real new model (a detailed unicorn, a real red barn), build a quick version from shapes now and call order_model so the workshop makes a proper one later.
 - When someone says goodbye, stop, or that they are done, say a short goodbye and call goodbye.
 
@@ -129,7 +183,7 @@ export const TOOLS=[
  {type:'function',name:'control_app',description:'Control the app around the world. Actions:\n'+Object.entries(APP_ACTIONS).map(([k,v])=>'- '+k+': '+v).join('\n'),parameters:{type:'object',required:['action'],properties:{
   action:{type:'string',enum:Object.keys(APP_ACTIONS)},args:{type:'object',description:'Arguments for the action, as listed above'}}}},
  {type:'function',name:'order_model',description:'Ask the workshop to make a proper new 3D model of something for this world. It takes a while; build a quick shape version now.',parameters:{type:'object',required:['description'],properties:{description:{type:'string',minLength:3,maxLength:300,description:'What to make, in plain words, e.g. "a friendly purple unicorn with a rainbow mane"'},for:{type:'string',maxLength:32,description:'The id of the quick version it will replace'}}}},
- {type:'function',name:'game_idea',description:'Ask the game Oracle to turn a child’s game idea into a small plan: title, goal, up to four rules, things to build, and one line to say. Use it when someone wants to play or invent a game.',parameters:{type:'object',required:['idea'],properties:{idea:{type:'string',minLength:3,maxLength:240,description:'The game idea in plain words, e.g. "a race to the barn with the sheep"'}}}},
+ {type:'function',name:'game_idea',description:'Get a small game plan from the game\'s built-in playbook for a child\'s idea: title, goal, up to four rules, things to build, and one line to say. Use it when someone wants to play or invent a game.',parameters:{type:'object',required:['idea'],properties:{idea:{type:'string',minLength:3,maxLength:240,description:'The game idea in plain words, e.g. "a race to the barn with the sheep"'}}}},
  {type:'function',name:'goodbye',description:'End live mode, after saying goodbye.',parameters:{type:'object',properties:{}}}
 ];
 
@@ -200,4 +254,29 @@ export function searchModels(ranch,library,{query='',kind}={},limit=60){
  const words=String(query).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean).map(w=>w.replace(/(es|s)$/,''));
  const hits=all.filter(m=>(!kind||m.kind===kind)&&words.every(w=>m.text.toLowerCase().includes(w)));
  return {count:hits.length,models:hits.slice(0,limit).map(({text,...m})=>m)};
+}
+
+// ---- the game playbook ---------------------------------------------------------------------
+// A small, built-in digest of play patterns for game_idea. It ships with the game and calls nothing
+// outside it: no library, no store, no other games' names.
+export const GAME_PLAYBOOK=[
+ {id:'race',words:['race','fastest','first','run','zoom','win'],title:'The Big Race',goal:'Get to the finish first.',say:'Ready, steady, go!',rules:['Everyone lines up at the start.','Go when the Computer says go.','First to touch the flag wins.'],build:['a start line','a finish flag','a few bouncy hurdles']},
+ {id:'chase',words:['chase','tag','catch','it','zombie','tig'],title:'Chase Me',goal:'Run away from the chaser without getting caught.',say:'Here comes the chaser!',rules:['One silly chaser runs after the others.','Hide behind a building to be safe.','If you get tagged, you become the chaser.'],build:['a safe base','a funny chaser']},
+ {id:'hide-and-seek',words:['hide','seek','find me','peekaboo'],title:'Hide and Seek',goal:'Find everyone who is hiding.',say:'I am counting to ten!',rules:['The seeker closes their eyes and counts.','Everyone hides behind something.','The seeker finds them one by one.'],build:['some bushes and boxes to hide behind']},
+ {id:'treasure-hunt',words:['treasure','hunt','find','hidden','gold','gem','secret','map','clue'],title:'Treasure Hunt',goal:'Follow the clues and find the treasure.',say:'There is treasure hiding on the ranch!',rules:['Each glowing marker points to the next one.','Tap the treasure chest when you find it.','Count the gems you collect.'],build:['three glowing markers','a treasure chest','sparkly gems']},
+ {id:'collect',words:['collect','gather','pick','eggs','apples','coins','stars'],title:'Collect Them All',goal:'Gather every shiny thing before the sun sets.',say:'How many can you find?',rules:['Shiny things are hiding all over the ranch.','Bring them back to the basket.','When the basket is full, you win.'],build:['a big basket','shiny things to collect']},
+ {id:'herd',words:['herd','sheep','goats','cows','horses','animals','pen','round up','farm'],title:'Round Them Up',goal:'Bring all the animals home to their pen.',say:'The animals ran off! Let us bring them home.',rules:['Walk behind an animal to guide it.','Get every animal through the gate.','Close the gate when they are all in.'],build:['a pen with a gate','a few wandering animals']},
+ {id:'obstacle',words:['obstacle','course','jump','climb','parkour','balance'],title:'Obstacle Course',goal:'Get through every obstacle to the end.',say:'Jump, duck and wiggle!',rules:['Go over, under and around each obstacle.','Don\'t touch the wobbly bits.','Ring the bell at the end.'],build:['hurdles to hop','a tunnel','stepping stones','a bell at the end']},
+ {id:'build-off',words:['build','tallest','tower','castle','biggest','make'],title:'Build-Off',goal:'Build the tallest tower you can.',say:'Let us build to the sky!',rules:['Take turns adding one block.','If it wobbles, hold your breath!','The tallest tower gets a crown.'],build:['a pile of colourful blocks','a crown for the winner']},
+ {id:'follow',words:['follow','leader','copy','simon','dance','parade','march'],title:'Follow the Leader',goal:'Copy everything the leader does.',say:'Do what I do!',rules:['The leader walks, hops or spins.','Everyone copies the leader.','Take turns being the leader.'],build:['a leader hat','a parade path']},
+ {id:'target',words:['throw','target','bowling','aim','hit','knock','catch'],title:'Knock Them Down',goal:'Knock down all the pins.',say:'Aim for the middle!',rules:['Roll the ball at the pins.','Each pin you knock down is a point.','Set them up and go again.'],build:['ten wobbly pins','a big ball','a scoreboard sign']},
+ {id:'lava',words:['lava','floor','island','hot','jump','water'],title:'The Floor is Lava',goal:'Cross without touching the bubbly lava.',say:'Quick, onto the rocks!',rules:['Only stand on the rocks.','Hop from rock to rock.','Reach the other side to win.'],build:['a pool of bubbly cartoon lava','stepping-stone rocks']},
+ {id:'hide-object',words:['hot','cold','warmer','where','guess'],title:'Hot and Cold',goal:'Find the hidden toy by listening for clues.',say:'You are getting warmer!',rules:['The Computer hides a toy.','It says warmer or colder as you move.','Find it to hide the next one.'],build:['a little hidden toy']}
+];
+export function gameIdea(idea=''){
+ const text=' '+String(idea).toLowerCase().replace(/[^a-z ]+/g,' ')+' ';
+ let best=GAME_PLAYBOOK[3],score=0;
+ for(const g of GAME_PLAYBOOK){const n=g.words.filter(w=>text.includes(' '+w)).length;if(n>score){score=n;best=g;}}
+ const {words,...plan}=best;
+ return {...plan,idea:String(idea).slice(0,240),note:'Adapt this to their idea and this world, then build it.'};
 }

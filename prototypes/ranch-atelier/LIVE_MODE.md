@@ -138,3 +138,23 @@ for training).
    activity toasts and replace the quick shape versions (Family Teleport demo).
 4. Wake phrase ("Computer, …") so live mode can sit idle cheaply between requests.
 5. Save what was built as a world recipe (the intent: what was asked and the ops), not meshes.
+
+## Voice settings and ElevenLabs (2026-10-23)
+
+`/live-voice` (Settings → Voice) saves the family's choices on the device under
+`abbies-live-settings-v1`: provider (OpenAI or ElevenLabs), voice, speaking speed (ElevenLabs),
+personality, reply length, how long it waits (semantic VAD or server VAD 350/700/1300 ms), room
+noise (VAD threshold), interrupt, greeting and captions. The page sends only these choices
+(`liveSettings`); the relay rebuilds the whole session with `policy.serverSession`, so the
+style text is written on the server from enums and the rules can't be changed.
+
+With ElevenLabs, the realtime session answers in text and `api/live-voice.js` speaks each
+sentence (`eleven_flash_v2_5`, 24 kHz PCM, streamed) with a 25-minute voice ticket from the
+session call. Only the Computer's own words go to ElevenLabs, screened before speaking and
+guarded after, like the OpenAI path. ElevenLabs' terms require only the account holder to be
+18+. Needs `ELEVENLABS_API_KEY` in the Vercel project; without it the page falls back to the
+OpenAI voice. `scripts/live-voice-e2e.cjs` checks the settings page and this path.
+
+`game_idea` no longer calls the Game Oracle (Evan, 2026-10-22: the game must not talk to his
+library). It picks from `GAME_PLAYBOOK` in policy.mjs, a built-in digest of play patterns with
+no outside calls.

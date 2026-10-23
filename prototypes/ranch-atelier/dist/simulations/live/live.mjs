@@ -1,15 +1,18 @@
 // Live mode: hands-free voice that changes the world as the family talks.
 // Microphone -> AI Gateway realtime (speech to speech, with tools) -> holodeck stage ops in this page.
-// The server (api/live.js) mints a 60-second single-use client secret; no key ever reaches the page.
+// The server (api/live.js) mints a 60-second ticket for our relay; no key ever reaches the page.
+// With ElevenLabs picked in /live-voice, the session answers in text and api/live-voice.js speaks it.
 // Safety layers: the game-controller instructions (policy.mjs), a narrow tool set, the local PG screen
 // on every tool text, and the server guard on every line spoken by either side. Tool calls wait for
 // the guard's verdict on what the child just said, so an unsafe request never reaches the screen.
-import {AUDIO_RATE,LIVE_OPS,APP_ACTIONS,APP_WORLDS,sessionConfig,screen,toolTexts,buildOps,summarize,searchModels} from './policy.mjs';
+import {AUDIO_RATE,LIVE_OPS,APP_ACTIONS,APP_WORLDS,SETTINGS_KEY,normalizeSettings,sessionConfig,gameIdea,screen,toolTexts,buildOps,summarize,searchModels} from './policy.mjs';
 
 const RATE=AUDIO_RATE,IDLE_MS=120000,MAX_MS=20*60000,MAX_CHAIN=6;
 const CONSENT_KEY='abbies-live-consent-v1';
 
 export async function startLive({stage,audio,button}){
+ // The family's choices from /live-voice: provider, voice and how it listens. Safety is not a setting.
+ let settings=normalizeSettings((()=>{try{return JSON.parse(localStorage.getItem(SETTINGS_KEY)||'null');}catch{return null;}})());
  const ui=createUI();
  if(!(await consent(ui)))return {active:false,stop(){}};
  const live={active:true,stop};
@@ -18,7 +21,9 @@ export async function startLive({stage,audio,button}){
  let lastSpeech=Date.now(),startedAt=Date.now(),strikes=0,chain=0,goodbye=false;
  let guardChild=Promise.resolve({verdict:'ok'});
  const pending=new Map();// responseId -> {calls, outputs, done}
- let timer=0;
+ let timer=0,currentResponse=null,cutResponse=null;
+ // ElevenLabs voice: the model writes text, each sentence is spoken in order through api/live-voice.js.
+ let voiceTicket=null,sentence='',speakChain=Promise.resolve(),speakAbort=new AbortController(),voiceFailed=false,carry=null;
  // Tool calls run one at a time, in the order the model made them (app actions refuse to overlap).
  let toolQueue=Promise.resolve();
  // On a phone, put the world in view: close side drawers that would cover it.
@@ -29,13 +34,16 @@ export async function startLive({stage,audio,button}){
   const r=await fetch('/api/live',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'session'})});
   const s=await r.json().catch(()=>({}));
   if(!r.ok)throw Error(s.error||'Live mode could not start.');
+  voiceTicket=s.voiceTicket||null;
+  if(settings.provider==='elevenlabs'&&!voiceTicket){settings={...settings,provider:'openai'};ui.toast('ElevenLabs is not connected yet, so the Computer uses its usual voice.');}
+  if(!settings.captions)ui.el.querySelector('.live-lines').style.visibility='hidden';
   stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true,channelCount:1}});
   ws=new WebSocket(s.url,s.protocols);
   ws.onopen=()=>{
-   send({type:'session-update',config:sessionConfig(brief())});
+   send({type:'session-update',config:sessionConfig(brief(),settings)});
    startCapture();ui.state('listening','Say what you want to see!');
    // A short hello so the family knows it is listening.
-   send({type:'response-create',options:{instructions:'Greet the family in one short, cheerful sentence and ask what they want to make in the world.'}});
+   if(settings.greeting)send({type:'response-create',options:{instructions:'Greet the family in one short, cheerful sentence and ask what they want to make in the world.'}});
   };
   ws.onmessage=ev=>{let e;try{e=JSON.parse(ev.data);}catch{return;}for(const x of Array.isArray(e)?e:[e])onEvent(x);};
   ws.onerror=()=>{};
@@ -64,11 +72,7 @@ export async function startLive({stage,audio,button}){
    if(out.ok)ui.toast('Workshop order sent: '+a.description);
    return out.ok?{ok:true,status:'The workshop has the order. It will arrive later, not today.'}:{ok:false,error:out.verdict?'The workshop cannot make that one.':out.error||'The workshop is busy.'};
   },
-  game_idea:async a=>{
-   const r=await fetch('/api/live',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'oracle',idea:a.idea})});
-   const out=await r.json().catch(()=>({}));
-   return out.ok?out.plan:{ok:false,error:out.verdict?'Let us pick a different game.':'The game ideas book is closed right now. Make one up together!'};
-  },
+  game_idea:async a=>gameIdea(a.idea),
   goodbye:async()=>{goodbye=true;return {ok:true};}
  };
  return live;
@@ -124,7 +128,7 @@ export async function startLive({stage,audio,button}){
 
  async function onEvent(e){
   switch(e.type){
-   case 'speech-started':lastSpeech=Date.now();chain=0;stopPlayback();ui.state('listening','Listening…');break;
+   case 'speech-started':lastSpeech=Date.now();chain=0;if(settings.interrupt||!playing.size)stopPlayback();ui.state('listening','Listening…');break;
    case 'speech-stopped':ui.state('thinking','Thinking…');break;
    case 'input-transcription-completed':{
     const text=(e.transcript||'').trim();if(!text)break;ui.heard(text);
@@ -132,10 +136,14 @@ export async function startLive({stage,audio,button}){
     break;}
    case 'audio-delta':play(e.delta);ui.state('speaking');break;
    case 'audio-transcript-delta':ui.said(e.delta,true);{const t=ui.saidText();if(!screen(t,{level:'speech'}).ok)redirect('computer');}break;
+   // ElevenLabs path: text arrives instead of audio; speak each finished sentence, guard the whole line.
+   case 'text-delta':if(cutResponse===currentResponse)break;if(!screen(ui.saidText()+e.delta,{level:'speech'}).ok){redirect('computer');break;}ui.said(e.delta,true);
+    sentence+=e.delta;{const m=sentence.match(/^([\s\S]*?[.!?…](?:["'”’)]*)(?:\s+|$))/);if(m&&m[1].trim().length>1){sentence=sentence.slice(m[1].length);speak(m[1]);}}break;
+   case 'text-done':{if(cutResponse===currentResponse){sentence='';break;}if(sentence.trim())speak(sentence);sentence='';const t=e.text||ui.saidText();guard('computer',t).then(v=>{if(['unsafe','jailbreak','personal'].includes(v.verdict))redirect('computer');});break;}
    case 'audio-transcript-done':{const t=e.transcript||ui.saidText();guard('computer',t).then(v=>{if(['unsafe','jailbreak','personal'].includes(v.verdict))redirect('computer');});break;}
    case 'function-call-arguments-done':{const p=pending.get(e.responseId);if(p)p.calls++;toolQueue=toolQueue.then(()=>runTool(e));break;}
-   case 'response-created':pending.set(e.responseId,{calls:0,outputs:0,done:false});ui.said('',false);break;
-   case 'response-done':{const p=pending.get(e.responseId);if(p){p.done=true;maybeContinue(e.responseId);}if(goodbye)setTimeout(()=>stop('Bye for now! Tap Talk to play again.'),1500+Math.max(0,(playTime-audio.currentTime)*1000));else if(!playing.size)ui.state('listening');break;}
+   case 'response-created':currentResponse=e.responseId;pending.set(e.responseId,{calls:0,outputs:0,done:false});ui.said('',false);break;
+   case 'response-done':{const p=pending.get(e.responseId);if(p){p.done=true;maybeContinue(e.responseId);}if(goodbye)speakChain.then(()=>setTimeout(()=>stop('Bye for now! Tap Talk to play again.'),1500+Math.max(0,(playTime-audio.currentTime)*1000)));else if(!playing.size)ui.state('listening');break;}
    case 'error':console.warn('[live]',e.message,e.code);if(/session|auth|expired|closed/i.test(e.message||''))stop('Live mode stopped: '+e.message);break;
   }
  }
@@ -173,7 +181,9 @@ export async function startLive({stage,audio,button}){
  }
  // Stop what is being said, and steer back. Two slips by the Computer end the session.
  function redirect(kind){
-  stopPlayback();send({type:'response-cancel'});ui.said('',false);
+  // One slip is one strike, however many checks (screen, then guard) catch the same reply.
+  if(kind==='computer'){if(cutResponse&&cutResponse===currentResponse)return;cutResponse=currentResponse;}
+  stopPlayback();send({type:'response-cancel'});ui.clear();
   if(kind==='computer'&&++strikes>=2){stop('Live mode stopped to keep things friendly. Tap Talk to start fresh.');return;}
   send({type:'conversation-item-create',item:{type:'text-message',role:'user',text:kind==='rules'
    ?'[GAME RULE CHECK, from the game, not the child] The last request is not allowed in Abbie\'s World. Do not do it, repeat it or explain it. Say one kind sentence and offer a fun, gentle thing to build instead.'
@@ -196,13 +206,33 @@ export async function startLive({stage,audio,button}){
  }
  function play(base64){
   const bin=atob(base64),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
-  const pcm=new Int16Array(bytes.buffer,0,bytes.length>>1);if(!pcm.length)return;
+  playPCM(new Int16Array(bytes.buffer,0,bytes.length>>1));
+ }
+ // Sentences are fetched in parallel but played strictly in order; barge-in aborts the lot.
+ function speak(text){
+  text=text.trim();if(!text||ended)return;
+  const signal=speakAbort.signal;
+  const audioReady=fetch('/api/live-voice',{method:'POST',signal,headers:{'Content-Type':'application/json'},body:JSON.stringify({ticket:voiceTicket,text,voice:settings.elevenVoice,speed:settings.speed})}).catch(e=>e);
+  speakChain=speakChain.then(async()=>{
+   const r=await audioReady;if(signal.aborted||ended)return;
+   if(!(r instanceof Response)||!r.ok||!r.body){if(!voiceFailed){voiceFailed=true;ui.toast('The ElevenLabs voice did not answer. Words are on screen.');}return;}
+   const reader=r.body.getReader();carry=null;
+   try{for(;;){const {done,value}=await reader.read();if(done||signal.aborted)break;ui.state('speaking');playBytes(value);}}catch{}
+  });
+ }
+ function playBytes(chunk){
+  let bytes=chunk;if(carry!==null){bytes=new Uint8Array(chunk.length+1);bytes[0]=carry;bytes.set(chunk,1);carry=null;}
+  if(bytes.length%2){carry=bytes[bytes.length-1];bytes=bytes.subarray(0,bytes.length-1);}
+  if(bytes.length)playPCM(new Int16Array(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.length)));
+ }
+ function playPCM(pcm){
+  if(!pcm.length)return;
   const buf=audio.createBuffer(1,pcm.length,RATE),ch=buf.getChannelData(0);for(let i=0;i<pcm.length;i++)ch[i]=pcm[i]/32768;
   const src=audio.createBufferSource();src.buffer=buf;src.connect(audio.destination);
   playTime=Math.max(playTime,audio.currentTime+.04);src.start(playTime);playTime+=buf.duration;
   playing.add(src);src.onended=()=>{playing.delete(src);if(!playing.size&&!ended)ui.state('listening');};
  }
- function stopPlayback(){for(const s of playing){try{s.onended=null;s.stop();}catch{}}playing.clear();playTime=audio.currentTime;}
+ function stopPlayback(){speakAbort.abort();speakAbort=new AbortController();speakChain=Promise.resolve();sentence='';for(const s of playing){try{s.onended=null;s.stop();}catch{}}playing.clear();playTime=audio.currentTime;}
 
  // ---- lifecycle ----------------------------------------------------------------------------
  function stop(message){
@@ -229,6 +259,7 @@ export async function startLive({stage,audio,button}){
    heard(t){heard.textContent='“'+t+'”';},
    said(t,append){saidText=append?saidText+t:t;if(saidText)said.textContent=saidText;},
    saidText:()=>saidText,
+   clear(){saidText='';said.textContent='…';},
    alert(t){said.textContent=t;el.dataset.state='alert';},
    toast(t){const n=document.createElement('div');n.className='live-toast';n.textContent=t;document.body.append(n);setTimeout(()=>n.remove(),5000);},
    end(t){el.dataset.state='ended';heard.textContent='';said.textContent=t||'';hideTimer=setTimeout(()=>{el.hidden=true;},5000);}

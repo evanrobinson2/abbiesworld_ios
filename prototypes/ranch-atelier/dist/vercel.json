@@ -21,6 +21,14 @@
       "destination": "/models/model.html"
     },
     {
+      "source": "/live-voice",
+      "destination": "/live-voice/index.html"
+    },
+    {
+      "source": "/live-voice/",
+      "destination": "/live-voice/index.html"
+    },
+    {
       "source": "/sounds",
       "destination": "/sounds/index.html"
     },
