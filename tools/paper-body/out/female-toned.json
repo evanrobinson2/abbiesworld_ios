@@ -1,0 +1,122 @@
+{
+  "sex": "female",
+  "build": "toned",
+  "height_m": 1.707,
+  "multipliers": {
+    "h": 0.9588,
+    "sh": 0.9744,
+    "ch": 1.0152,
+    "wa": 0.7912,
+    "hi": 1.078,
+    "li": 0.9856000000000001,
+    "ne": 0.9774999999999999,
+    "head": 0.96,
+    "be": 0.0,
+    "bust": 1.0,
+    "tone": 0.65
+  },
+  "torso": {
+    "crotch": {
+      "z": 0.794,
+      "half_width": 0.162,
+      "half_depth": 0.108,
+      "forward": 0.0
+    },
+    "hips": {
+      "z": 0.887,
+      "half_width": 0.185,
+      "half_depth": 0.121,
+      "forward": 0.0
+    },
+    "waist": {
+      "z": 1.024,
+      "half_width": 0.116,
+      "half_depth": 0.078,
+      "forward": 0.0
+    },
+    "belly": {
+      "z": 1.109,
+      "half_width": 0.12,
+      "half_depth": 0.082,
+      "forward": 0.0
+    },
+    "chest": {
+      "z": 1.229,
+      "half_width": 0.175,
+      "half_depth": 0.118,
+      "forward": 0.0
+    },
+    "armpit": {
+      "z": 1.323,
+      "half_width": 0.193,
+      "half_depth": 0.112,
+      "forward": 0.0
+    },
+    "shoulders": {
+      "z": 1.391,
+      "half_width": 0.191,
+      "half_depth": 0.089,
+      "forward": 0.01
+    },
+    "neck_base": {
+      "z": 1.434,
+      "half_width": 0.117,
+      "half_depth": 0.071,
+      "forward": 0.01
+    }
+  },
+  "head": {
+    "center": [
+      0,
+      0.012,
+      1.6
+    ],
+    "half_width": 0.075,
+    "half_depth": 0.091,
+    "top": 1.707
+  },
+  "sockets": {
+    "shoulder_l": [
+      -0.157,
+      0.0,
+      1.365
+    ],
+    "hand_l": [
+      -0.313,
+      0.0,
+      0.74
+    ],
+    "shoulder_r": [
+      0.157,
+      0.0,
+      1.365
+    ],
+    "hand_r": [
+      0.313,
+      0.0,
+      0.74
+    ],
+    "hip_l": [
+      -0.097,
+      0.0,
+      0.819
+    ],
+    "foot_l": [
+      -0.078,
+      -0.085,
+      0.0
+    ],
+    "hip_r": [
+      0.097,
+      0.0,
+      0.819
+    ],
+    "foot_r": [
+      0.078,
+      -0.085,
+      0.0
+    ],
+    "foot_length": 0.25
+  },
+  "triangles": 1178
+}
