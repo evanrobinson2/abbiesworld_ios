@@ -108,7 +108,14 @@ The rules behind it:
 `simulations/land-camera.mjs` implements all of the above (about 200 lines, no new dependencies). It takes over only
 when a land world asks for it: the Basin calls it from `basin/basin-world.mjs`, and while it owns the view the board's
 `OrbitControls` stand down. Developers can read `window.landCamera.state` and `canvas.dataset.landCamera`
-(`land`, `diving`, `eye`, `rising`).
+(`land`, `diving`, `eye`, `rising`). Pointer input listens on the canvas after the tile and item handlers, so holding
+a placed tile still moves the tile and everything else moves the camera.
+
+Standing on the ground exposed one more thing: the outline pass (`ranch-contours.js`) inked the soft folds between the
+land's 25 m cells, which pile up into stripes at eye level. In land mode it now measures curvature in 1/distance (flat
+for any plane) and ignores soft folds, so silhouettes (trees on land, ridges on sky) keep their ink and the ground is
+clean. Its tilt-shift blur is off at eye level, where a miniature look makes no sense. The Basin also raises the sun's
+shadow bias to suit its big cells.
 
 Not built yet, on purpose: two-finger tilt on touch, edge scroll, a gamepad selection cue, and the follow hand-off
 (the existing `camera-follow.mjs` translates the board's pivot; on land it should move the ground point instead).

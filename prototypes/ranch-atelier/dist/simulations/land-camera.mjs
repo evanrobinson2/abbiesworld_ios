@@ -206,7 +206,12 @@ export function createLandCamera({camera,orbit,canvas,heightAt,waterY=-Infinity,
   canvas.dataset.landCamera=mode;
  }
 
- const handlers=[['pointerdown',down],['pointermove',move],['pointerup',up],['pointercancel',up],['wheel',wheel,{passive:false}],['keydown',keydown],['keyup',keyup],['blur',blur]];
+ // Pointers listen on the canvas after the tile and item handlers, like the board's controls: a press they take
+ // (holding a tile to move it) never reaches the camera, and the presses they hand back (replays) do.
+ // The wheel listens ahead of the sandbox's own wheel handler, which would otherwise swallow it.
+ const pointerHandlers=[['pointerdown',down],['pointermove',move],['pointerup',up],['pointercancel',up]];
+ const handlers=[['wheel',wheel,{passive:false}],['keydown',keydown],['keyup',keyup],['blur',blur]];
+ for(const [n,f] of pointerHandlers)canvas.addEventListener(n,f);
  for(const [n,f,o] of handlers)window.addEventListener(n,f,{capture:true,...o});
  const menu=e=>{if(e.target===canvas)e.preventDefault();};window.addEventListener('contextmenu',menu,true);
  // The board's controls stand down while the land camera owns the view; nothing they do can clamp it.
@@ -214,5 +219,5 @@ export function createLandCamera({camera,orbit,canvas,heightAt,waterY=-Infinity,
  orbit.enabled=false;orbit.minDistance=0;orbit.maxPolarAngle=Math.PI;
  adopt();
  return {update,adopt,dive,rise,get mode(){return mode;},get state(){return {mode,focus:{x:now.x,z:now.z},distance:Math.exp(now.log),yaw:now.yaw,lift,eye:{...eye},aboveGround:camera.position.y-ground(camera.position.x,camera.position.z)};},
-  dispose(){for(const [n,f,o] of handlers)window.removeEventListener(n,f,{capture:true,...o});window.removeEventListener('contextmenu',menu,true);Object.assign(orbit,saved);camera.fov=baseFov;camera.near=baseNear;camera.updateProjectionMatrix();}};
+  dispose(){for(const [n,f] of pointerHandlers)canvas.removeEventListener(n,f);for(const [n,f,o] of handlers)window.removeEventListener(n,f,{capture:true,...o});window.removeEventListener('contextmenu',menu,true);Object.assign(orbit,saved);camera.fov=baseFov;camera.near=baseNear;camera.updateProjectionMatrix();}};
 }
