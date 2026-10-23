@@ -79,6 +79,22 @@ body.l-off #fl,body.r-off #fr{display:flex}
 .chip{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--aw-ink) 8%,transparent);color:var(--aw-soft)}
 .chip.go{background:var(--aw-accent);color:var(--aw-on-accent)}
 .chip.new{background:var(--aw-accent2);color:#fff}
+/* the outcome toolbar: a glass object under the study, Read or Dismiss */
+.outcome{position:absolute;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;
+  border:1px solid var(--aw-rim);background:linear-gradient(160deg,rgba(255,255,255,.28),transparent 50%),var(--aw-glass);-webkit-backdrop-filter:blur(14px) saturate(1.7);backdrop-filter:blur(14px) saturate(1.7);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 3px rgba(0,0,0,.1),0 12px 28px -12px rgba(0,0,0,.45)}
+.outcome[hidden]{display:none}
+.outcome button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;cursor:pointer;font-weight:600;color:var(--aw-ink);
+  background:color-mix(in srgb,var(--aw-surface) 55%,transparent);border:1px solid var(--aw-line)}
+.outcome button svg{width:20px;height:20px}
+.outcome .ok{background:var(--aw-accent);color:var(--aw-on-accent);border-color:transparent}
+.outcome .go{background:var(--aw-ink);color:var(--aw-bg);border-color:transparent}
+.outcome button:hover{filter:brightness(1.06)}.outcome button:active{transform:scale(.97)}
+.outcome button:focus-visible{outline:2px solid var(--aw-accent);outline-offset:2px}
+.outcome .said{padding:0 8px 0 14px;font-weight:600;font-size:14px}
+.list details.done summary{list-style:none;cursor:pointer}.list details.done summary::-webkit-details-marker{display:none}
+.list details.done summary b::after{content:" \u203a";display:inline-block;transition:transform .15s}.list details.done[open] summary b::after{transform:rotate(90deg)}
+.list details.done a{opacity:.75}
 /* details */
 .facets{overflow-y:auto;padding:0 16px 20px;flex:1;display:grid;align-content:start;gap:16px}
 .facets img.hero{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:1px solid var(--aw-line);background:var(--aw-raised)}
@@ -116,6 +132,7 @@ body.l-off #fl,body.r-off #fr{display:flex}
  <div class="float" id="fr"><button class="ib" id="show-r" aria-label="Show the details" title="Show the details  ]">__DETAILS__</button></div>
  <section id="home" aria-label="Studies home"></section>
  <iframe id="view" title="Study" hidden></iframe>
+ <div class="outcome" id="outcome" role="toolbar" aria-label="Outcome" hidden></div>
 </main>
 <div class="grip" id="gr" role="separator" aria-orientation="vertical" aria-label="Resize the details" tabindex="0"></div>
 <aside class="side" id="right" aria-label="Details">
@@ -196,13 +213,26 @@ addEventListener('keydown', keys);
 layout();
 
 // ---------- the list ----------
+// Outcomes (Evan, 05:52Z): marking a study read or dismissed takes it out of the list and Home; it stays under Done and
+// its page stays where it was. Kept on this device in 'aw-study-outcomes'.
+const outcomes = () => store('aw-study-outcomes') || {};
+const done = x => !!outcomes()[x.id];
+const active = () => S.filter(x => !done(x));
 const list = document.getElementById('list'), links = {};
-list.innerHTML = `<a class="home" href="#home" data-id="home"><i>${ICON.home}</i><span><strong>Home</strong></span></a>` + GROUPS.map(g => `<div class="group"><b>${esc(g)}</b>${
- S.filter(x => x.g === g).map(x => `<a href="#${x.id}" data-id="${x.id}"><img alt="" loading="lazy" src="${x.img}"><span><strong>${esc(x.n ? x.n.replace('AW-STUDY-', '#') + ' ' : '')}${esc(x.t)}</strong><small>${esc(x.s)}</small></span></a>`).join('')}</div>`).join('');
-for (const a of list.querySelectorAll('a')) links[a.dataset.id] = a;
+function drawList(){
+ const A = active(), D = S.filter(done), O = outcomes();
+ const row = x => `<a href="#${x.id}" data-id="${x.id}"><img alt="" loading="lazy" src="${x.img}"><span><strong>${esc(x.n ? x.n.replace('AW-STUDY-', '#') + ' ' : '')}${esc(x.t)}</strong><small>${esc(O[x.id] ? (O[x.id].o === 'read' ? 'Read' : 'Dismissed') + ' \u00b7 ' + x.s : x.s)}</small></span></a>`;
+ list.innerHTML = `<a class="home" href="#home" data-id="home"><i>${ICON.home}</i><span><strong>Home</strong></span></a>`
+  + GROUPS.map(g => A.filter(x => x.g === g)).filter(xs => xs.length).map(xs => `<div class="group"><b>${esc(xs[0].g)}</b>${xs.map(row).join('')}</div>`).join('')
+  + (D.length ? `<details class="group done"${store('aw-studies-done-open') ? ' open' : ''}><summary><b>Done \u00b7 ${D.length}</b></summary>${D.map(row).join('')}</details>` : '');
+ for (const k in links) delete links[k];
+ for (const a of list.querySelectorAll('a')) links[a.dataset.id] = a;
+ list.querySelector('details.done')?.addEventListener('toggle', e => store('aw-studies-done-open', e.target.open));
+}
+drawList();
 
 // A study waits on Evan while its status says so (the review inbox page was retired, Evan 05:38Z).
-const waiting = x => ['Playable', 'Proofs'].includes(x.st) ? {ask: x.st === 'Playable' ? 'Play it and say whether to build it.' : 'Pick a style and your favourite picture in each view.'} : null;
+const waiting = x => !done(x) && ['Playable', 'Proofs'].includes(x.st) ? {ask: x.st === 'Playable' ? 'Play it and say whether to build it.' : 'Pick a style and your favourite picture in each view.'} : null;
 
 // ---------- home: Recent, Trending, Most impactful ----------
 const opens = () => store('aw-studies-opens') || {};
@@ -213,13 +243,17 @@ function card(x, line){
 }
 function home(){
  const o = opens(), score = x => (waiting(x) ? 5 : 0) + (o[x.id]?.n || 0) + Math.max(0, 3 - (Date.now() - Date.parse(x.at)) / 864e5);
- const recent = [...S].sort((a, b) => Date.parse(b.at) - Date.parse(a.at)).slice(0, 8);
- const trending = [...S].sort((a, b) => score(b) - score(a)).slice(0, 8);
- const impact = [...S].sort((a, b) => b.impact - a.impact || Date.parse(b.at) - Date.parse(a.at)).slice(0, 8);
+ const A = active(), D = S.filter(done);
+ const recent = [...A].sort((a, b) => Date.parse(b.at) - Date.parse(a.at)).slice(0, 8);
+ const trending = [...A].sort((a, b) => score(b) - score(a)).slice(0, 8);
+ const impact = [...A].sort((a, b) => b.impact - a.impact || Date.parse(b.at) - Date.parse(a.at)).slice(0, 8);
+ const rowOf = (h, p, xs, line) => xs.length ? `<section class="row"><h2>${h}</h2><p>${p}</p><div class="cards">${xs.map(x => card(x, line)).join('')}</div></section>` : '';
  document.getElementById('home').innerHTML = `<header><h1>Studies</h1><p>How each piece of Abbie's World was worked out: the pictures, the tries and what we learned.</p></header>
-  <section class="row"><h2>Recent</h2><p>Newest changes first.</p><div class="cards">${recent.map(x => card(x, y => y.s)).join('')}</div></section>
-  <section class="row"><h2>Trending</h2><p>What's waiting on you, what you've opened lately and what just changed.</p><div class="cards">${trending.map(x => card(x, y => y.s)).join('')}</div></section>
-  <section class="row"><h2>Most impactful</h2><p>The studies that changed the game the most.</p><div class="cards">${impact.map(x => card(x, y => y.why)).join('')}</div></section>`;
+  ${A.length ? '' : '<section class="row"><h2>All caught up</h2><p>Every study is read or dismissed. They are all still under Done.</p></section>'}
+  ${rowOf('Recent', 'Newest changes first.', recent, y => y.s)}
+  ${rowOf('Trending', 'What\u2019s waiting on you, what you\u2019ve opened lately and what just changed.', trending, y => y.s)}
+  ${rowOf('Most impactful', 'The studies that changed the game the most.', impact, y => y.why)}
+  ${rowOf('Done', 'Read or dismissed. Open one to bring it back.', D, y => (outcomes()[y.id]?.o === 'read' ? 'Read' : 'Dismissed'))}`;
 }
 
 // ---------- details: facets of what's open ----------
@@ -261,8 +295,27 @@ function route(){
   const o = opens(); o[id] = {n: (o[id]?.n || 0) + 1, at: Date.now()}; store('aw-studies-opens', o);
   if (phone.matches){ P.lPhone = false; layout(); }
  }
+ outcomeBar(x);
  links[id]?.scrollIntoView({block: 'nearest'});
 }
+// ---------- the outcome toolbar: Read or Dismiss the open study ----------
+const bar = document.getElementById('outcome');
+function outcomeBar(x){
+ bar.hidden = !x; if (!x) return;
+ const o = outcomes()[x.id], next = active().find(y => y.id !== x.id);
+ bar.innerHTML = o
+  ? `<span class="said">${o.o === 'read' ? 'Read' : 'Dismissed'}, off your list</span><button type="button" data-undo>Undo</button>${next ? `<button type="button" class="go" data-next="${next.id}">Next \u203a</button>` : ''}`
+  : `<button type="button" class="ok" data-out="read" title="Read, take it off my list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Read</span></button><button type="button" class="no" data-out="dismissed" title="Dismiss, take it off my list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Dismiss</span></button>`;
+}
+bar.addEventListener('click', e => {
+ const b = e.target.closest('button'), id = location.hash.slice(1); if (!b || !by[id]) return;
+ const O = outcomes();
+ if (b.dataset.out) O[id] = {o: b.dataset.out, at: new Date().toISOString()};
+ else if (b.dataset.undo !== undefined) delete O[id];
+ else if (b.dataset.next) { location.hash = b.dataset.next; return; }
+ store('aw-study-outcomes', O); drawList(); route();
+});
+addEventListener('storage', e => { if (e.key === 'aw-study-outcomes') { drawList(); route(); } });
 addEventListener('hashchange', route); route();
 
 // ---------- you ----------
