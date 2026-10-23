@@ -22,3 +22,13 @@ Results so far: rings only, 97% IoU from every side at 1,700 faces. The cage get
 3,000 and 99.7% at 9,000. `../runs/G/chest.py` puts the 3,000-face cage model on the study scoreboard as arm G,
 next to Meshy as arm M.
 Next: the same pipeline on brute #2 (`../ref/bruiser-2-queued.png`), which needs one Meshy run on Evan's Mac.
+
+## Gear that fits any body (accessorize.py)
+
+`python3 accessorize.py --spec spec --body out/cage_identity_r0.1_welded/model.glb --accent orange --tag brute1`
+
+One kit of 19 pieces (helmet with visor and cheek guards, shoulder pads, bracers, belt and buckle, boots, backpack,
+and accent light strips) is written against body landmarks read from the learned rings: crown, neck, chin, crotch,
+wrist, shoulder and sole. Each piece is a low-poly loft around the body's own rings, pushed out by a clearance and
+cut to an angle window. The same kit fits brute 1 and brute 2 with no per-body edits (out/brute1_gear,
+out/brute2_gear). The accent colour is the hero's: orange, pink (Abbie), purple (Ani) or cyan.

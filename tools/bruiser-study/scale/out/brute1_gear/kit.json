@@ -1,0 +1,426 @@
+{
+ "spec": "spec",
+ "body": "out/cage_identity_r0.1_welded/model.glb",
+ "accent": "orange",
+ "landmarks": {
+  "crown": 1.99,
+  "crotch": 0.93,
+  "neck": 1.85,
+  "chin": 1.8668,
+  "wrist_R": 0.83,
+  "shoulder_R": 1.73,
+  "sole_R": 0.01,
+  "wrist_L": 0.83,
+  "shoulder_L": 1.73,
+  "sole_L": 0.01
+ },
+ "gear_faces": 648,
+ "pieces": [
+  {
+   "name": "Helmet",
+   "role": "Armor",
+   "span": [
+    "chin",
+    "crown"
+   ],
+   "at": [
+    0.58,
+    1.0
+   ],
+   "clear": 0.03,
+   "window": null,
+   "z": [
+    1.9383,
+    1.99
+   ],
+   "sides": 10,
+   "rings": 2
+  },
+  {
+   "name": "Helmet_CheekGuard",
+   "role": "Armor",
+   "span": [
+    "chin",
+    "crown"
+   ],
+   "at": [
+    0.12,
+    0.6
+   ],
+   "clear": 0.03,
+   "window": [
+    "front",
+    250,
+    "skip"
+   ],
+   "z": [
+    1.8816,
+    1.9407
+   ],
+   "sides": 4,
+   "rings": 3
+  },
+  {
+   "name": "Helmet_Visor",
+   "role": "Glass",
+   "span": [
+    "chin",
+    "crown"
+   ],
+   "at": [
+    0.3,
+    0.62
+   ],
+   "clear": 0.045,
+   "window": [
+    "front",
+    130
+   ],
+   "z": [
+    1.9038,
+    1.9432
+   ],
+   "sides": 5,
+   "rings": 2
+  },
+  {
+   "name": "Helmet_Light",
+   "role": "Light",
+   "span": [
+    "chin",
+    "crown"
+   ],
+   "at": [
+    0.58,
+    0.63
+   ],
+   "clear": 0.034,
+   "window": [
+    "front",
+    200,
+    "skip"
+   ],
+   "z": [
+    1.9383,
+    1.9444
+   ],
+   "sides": 5,
+   "rings": 2
+  },
+  {
+   "name": "Belt",
+   "role": "Armor",
+   "span": [
+    "crotch",
+    "neck"
+   ],
+   "at": [
+    0.12,
+    0.2
+   ],
+   "clear": 0.02,
+   "window": null,
+   "z": [
+    1.0404,
+    1.114
+   ],
+   "sides": 12,
+   "rings": 3
+  },
+  {
+   "name": "Belt_Buckle",
+   "role": "Light",
+   "span": [
+    "crotch",
+    "neck"
+   ],
+   "at": [
+    0.135,
+    0.185
+   ],
+   "clear": 0.03,
+   "window": [
+    "front",
+    40
+   ],
+   "z": [
+    1.0542,
+    1.1002
+   ],
+   "sides": 3,
+   "rings": 2
+  },
+  {
+   "name": "ShoulderPad_R",
+   "role": "Armor",
+   "span": [
+    "wrist",
+    "shoulder"
+   ],
+   "at": [
+    0.68,
+    1.0
+   ],
+   "clear": 0.035,
+   "window": [
+    "outside",
+    220
+   ],
+   "z": [
+    1.442,
+    1.73
+   ],
+   "sides": 7,
+   "rings": 8
+  },
+  {
+   "name": "ShoulderPad_L",
+   "role": "Armor",
+   "span": [
+    "wrist",
+    "shoulder"
+   ],
+   "at": [
+    0.68,
+    1.0
+   ],
+   "clear": 0.035,
+   "window": [
+    "outside",
+    220
+   ],
+   "z": [
+    1.442,
+    1.73
+   ],
+   "sides": 7,
+   "rings": 8
+  },
+  {
+   "name": "ShoulderPad_Light_R",
+   "role": "Light",
+   "span": [
+    "wrist",
+    "shoulder"
+   ],
+   "at": [
+    0.74,
+    0.77
+   ],
+   "clear": 0.04,
+   "window": [
+    "outside",
+    180
+   ],
+   "z": [
+    1.496,
+    1.523
+   ],
+   "sides": 6,
+   "rings": 2
+  },
+  {
+   "name": "ShoulderPad_Light_L",
+   "role": "Light",
+   "span": [
+    "wrist",
+    "shoulder"
+   ],
+   "at": [
+    0.74,
+    0.77
+   ],
+   "clear": 0.04,
+   "window": [
+    "outside",
+    180
+   ],
+   "z": [
+    1.496,
+    1.523
+   ],
+   "sides": 6,
+   "rings": 2
+  },
+  {
+   "name": "Bracer_R",
+   "role": "Armor",
+   "span": [
+    "wrist",
+    "shoulder"
+   ],
+   "at": [
+    0.02,
+    0.32
+   ],
+   "clear": 0.018,
+   "window": null,
+   "z": [
+    0.848,
+    1.118
+   ],
+   "sides": 8,
+   "rings": 8
+  },
+  {
+   "name": "Bracer_L",
+   "role": "Armor",
+   "span": [
+    "wrist",
+    "shoulder"
+   ],
+   "at": [
+    0.02,
+    0.32
+   ],
+   "clear": 0.018,
+   "window": null,
+   "z": [
+    0.848,
+    1.118
+   ],
+   "sides": 8,
+   "rings": 8
+  },
+  {
+   "name": "Bracer_Light_R",
+   "role": "Light",
+   "span": [
+    "wrist",
+    "shoulder"
+   ],
+   "at": [
+    0.27,
+    0.3
+   ],
+   "clear": 0.022,
+   "window": null,
+   "z": [
+    1.073,
+    1.1
+   ],
+   "sides": 8,
+   "rings": 2
+  },
+  {
+   "name": "Bracer_Light_L",
+   "role": "Light",
+   "span": [
+    "wrist",
+    "shoulder"
+   ],
+   "at": [
+    0.27,
+    0.3
+   ],
+   "clear": 0.022,
+   "window": null,
+   "z": [
+    1.073,
+    1.1
+   ],
+   "sides": 8,
+   "rings": 2
+  },
+  {
+   "name": "Boot_R",
+   "role": "Armor",
+   "span": [
+    "sole",
+    "crotch"
+   ],
+   "at": [
+    0.0,
+    0.2
+   ],
+   "clear": 0.016,
+   "window": null,
+   "z": [
+    0.01,
+    0.194
+   ],
+   "sides": 10,
+   "rings": 5
+  },
+  {
+   "name": "Boot_L",
+   "role": "Armor",
+   "span": [
+    "sole",
+    "crotch"
+   ],
+   "at": [
+    0.0,
+    0.2
+   ],
+   "clear": 0.016,
+   "window": null,
+   "z": [
+    0.01,
+    0.194
+   ],
+   "sides": 10,
+   "rings": 5
+  },
+  {
+   "name": "Boot_Light_R",
+   "role": "Light",
+   "span": [
+    "sole",
+    "crotch"
+   ],
+   "at": [
+    0.17,
+    0.195
+   ],
+   "clear": 0.02,
+   "window": null,
+   "z": [
+    0.1664,
+    0.1894
+   ],
+   "sides": 10,
+   "rings": 2
+  },
+  {
+   "name": "Boot_Light_L",
+   "role": "Light",
+   "span": [
+    "sole",
+    "crotch"
+   ],
+   "at": [
+    0.17,
+    0.195
+   ],
+   "clear": 0.02,
+   "window": null,
+   "z": [
+    0.1664,
+    0.1894
+   ],
+   "sides": 10,
+   "rings": 2
+  },
+  {
+   "name": "Backpack",
+   "role": "Armor",
+   "span": [
+    "crotch",
+    "neck"
+   ],
+   "at": [
+    0.5,
+    0.92
+   ],
+   "clear": null,
+   "window": null,
+   "width": 0.302,
+   "depth": 0.091,
+   "z": [
+    1.39,
+    1.776
+   ]
+  }
+ ]
+}
