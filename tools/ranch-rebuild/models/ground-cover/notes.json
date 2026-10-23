@@ -1,35 +1,91 @@
 {
  "what_i_did": [
-  ["Target", "make_views.py cuts the 9 pieces out of mj/ground-cover/sheet.png into views/<piece>.png and keys a mask for each. The cast shadows are a pale green, so a pixel is dropped as shadow when it is light and blue-ish: B/G above 0.70 and mean between 0.55 and 0.80. The upper bound keeps the cream clover heads."],
-  ["Camera", "score.py renders each GLB with the harness lens (50 mm, 1.9 x the bbox diagonal), front-on and 16 deg up, and scores the silhouette IoU with harness.norm_mask. A sweep over 6 to 24 deg moved the tufts by under 0.03. Only the path edge clearly preferred a higher camera, so I kept 16."],
-  ["Tufts", "Each tuft has 4 rings of blades rooted on small circles on the ground (8, 10, 11 and 11 blades). Each blade is a 3-triangle strap with a blunt round end: two strap triangles from its ring segment, plus one wide-angle cap. Inner rings stand at 16 to 22 deg and reach the full height. Outer rings splay to 70 to 80 deg and are shorter, so each tuft is a broad dome with 40 blades in 120 triangles. Each blade bows outward and has its own small shade shift. tuft-f (wispy) uses the same build with blades a quarter as wide and tighter rings."],
-  ["Normals and sides", "The normals are authored. Each vertex uses a dome normal from a point half a tuft below the ground, blended 50/50 with up. Every triangle is wound so its front agrees with that normal. The material is double-sided, and the side facing out and up is always the front, so three.js's back-face normal flip only lands on the undersides and on the inside of the far blades, which should be in shade anyway. I tried single-sided crowns. They scored higher (about 0.60 mean), but from 45 deg they showed only the far half of each tuft, a fan instead of a rosette, so I dropped them (r/kit_45.png shows the final from 45 deg)."],
-  ["Colour", "COLOR_0 is a vertex colour that the material's base colour reads directly. Blades go from a dark base (foliage #6e9440 mixed 30 % toward meadow, at 78 % brightness) to a light tip. The tip is meadow #a6b087 drifted toward foliage by a per-tuft amount: a 0.55, b 0.70, c 0.30, d 0.60, e 0.45, f 0.25. Inner rings are a few percent lighter."],
-  ["Sway", "Every mesh carries a float vertex attribute `_sway`: 0 at the root and 1 at the tip of every blade, stem and leaf, 1.0 on the flower and clover heads (they ride their stem tips), and 0 on the moss and pebbles. Blender's glTF exporter writes it as the custom attribute `_SWAY` (export_attributes=True). three.js GLTFLoader loads it as geometry.attributes._sway. COLOR_0 alpha is left at 1."],
-  ["Clover patch", "22 trefoils. Each has three 3-triangle rounded leaflets on a low elliptical mound, laid in a golden-angle spiral, over a flat 24-triangle core dome so the patch reads as one mat. There are 7 white heads, each an 8-triangle squashed octahedron, on 2-triangle stems. Materials: Clover_Leaf and Flower_White."],
-  ["Wildflower clump", "16 two-segment stems (Grass_Stem) carry 20 five-petal cup flowers, 70 % yellow (Flower_Yellow) and 30 % lilac (Flower_Lilac); 4 of the flowers sit on side twigs. The leafy base is 3 small rings of narrow strap leaves (Grass_Leaf), the same build as the tufts."],
-  ["Path edge", "A lumpy elliptical moss berm (Moss_Path, 12 x 4 rings, two soft humps) with a dirt-tinted rim on the front (-Y, path) side. 4 half-buried pebbles (Stone_Pebble, 15 triangles each) sit along the front edge, and 5 small round-tipped blades (Grass_Meadow) stand on top. The moss and pebbles are single-sided closed shapes, and their sway is 0."]
+  [
+   "Target",
+   "make_views.py cuts the 9 pieces out of mj/ground-cover/sheet.png into views/<piece>.png and keys a mask for each. The cast shadows are a pale green, so a pixel is dropped as shadow when it is light and blue-ish: B/G above 0.70 and mean between 0.55 and 0.80. The upper bound keeps the cream clover heads."
+  ],
+  [
+   "Camera",
+   "score.py renders each GLB with the harness lens (50 mm, 1.9 x the bbox diagonal), front-on and 16 deg up, and scores the silhouette IoU with harness.norm_mask. A sweep over 6 to 24 deg moved the tufts by under 0.03. Only the path edge clearly preferred a higher camera, so I kept 16."
+  ],
+  [
+   "Tufts",
+   "Third pass. Each tuft (a to e) is a grass bun: a squashed low-poly hemisphere core (40 triangles, radius 0.36 to 0.44 x h, height 0.35 to 0.39 x h, olive) with 42 blades growing out of its surface. Blade roots are set slightly into the core and run from the crown down to its foot, weighted towards the lower sides so the side blades cover the core. Each blade has 6 triangles: two body segments from a 45 % neck to the shoulder (0.12 to 0.15 x h wide), then a rounded 2-triangle tip. Blades rise steeply: tilt from vertical goes from 4 to 8 deg at the crown to 48 to 58 deg at the foot, plus up to +-8 deg random lean. Each blade arches outward only on its upper half and tip (28 to 34 deg, +-25 %). Crown blades are tallest and foot blades shorter (fall 0.12 to 0.16, plus random length). That is 292 triangles a tuft. tuft-f has no core: 48 narrow (5 % of h) mostly upright blades from a 4 % root disc, with long 50 deg arching tips (288 triangles)."
+  ],
+  [
+   "Normals and sides",
+   "The normals are authored. Each vertex uses a dome normal from a point half a tuft below the ground, blended 50/50 with up. Every triangle is wound so its front agrees with that normal. The material is double-sided, and the side facing out and up is always the front, so three.js's back-face normal flip only lands on the undersides and on the inside of the far blades, which should be in shade anyway. I tried single-sided crowns. They scored higher (about 0.60 mean), but from 45 deg they showed only the far half of each tuft, a fan instead of a rosette, so I dropped them (r/kit_45.png shows the final from 45 deg)."
+  ],
+  [
+   "Colour",
+   "The tufts use the coordinator's ramp: base #5d6b3a, mid #7f9150, tip #b8c27e, with +-7 % variation per blade and crown blades 3 % lighter. Per-tuft drift nudges the tip towards foliage #6e9440 (a 0.30, b 0.45, c 0.10, d 0.35, e 0.20, f 0). The core runs from 85 % of the base colour at the ground to 30 % of the way towards mid at the top. The clover, wildflowers and path edge keep their own colours."
+  ],
+  [
+   "Sway",
+   "Every mesh carries a float vertex attribute `_sway`: 0 at the root and 1 at the tip of every blade, stem and leaf, 1.0 on the flower and clover heads (they ride their stem tips), and 0 on the moss, the pebbles and the tuft cores. Blender's glTF exporter writes it as the custom attribute `_SWAY` (export_attributes=True). three.js GLTFLoader loads it as geometry.attributes._sway. COLOR_0 alpha is left at 1."
+  ],
+  [
+   "Clover patch",
+   "21 trefoils. Each has three 3-triangle rounded leaflets on a low elliptical mound, laid in a golden-angle spiral, over a flat 24-triangle core dome so the patch reads as one mat. There are 7 white heads, each a 10-triangle low-poly puff (top vertex, a ring of 5, bottom vertex), on 2-triangle stems. Materials: Clover_Leaf and Flower_White."
+  ],
+  [
+   "Wildflower clump",
+   "16 two-segment stems (Grass_Stem) carry 20 five-petal cup flowers, 70 % yellow (Flower_Yellow) and 30 % lilac (Flower_Lilac); 4 of the flowers sit on side twigs. The leafy base is 3 small rings of narrow strap leaves (Grass_Leaf), the same build as the tufts."
+  ],
+  [
+   "Path edge",
+   "A lumpy olive moss berm (heights jittered +-22 %) (Moss_Path, 12 x 4 rings, two soft humps) with a dirt-tinted rim on the front (-Y, path) side. 4 half-buried pebbles (Stone_Pebble, 15 triangles each) sit along the front edge, and 5 small round-tipped blades (Grass_Meadow) stand on top. The moss and pebbles are single-sided closed shapes, and their sway is 0."
+  ]
  ],
  "good": [
-  "Every piece is within budget: each tuft 120/120, clover 292/300, wildflowers 265/300, path edge 179/200.",
-  "No spikes: every blade ends in a blunt round cap, and from above (r/kit_45.png) the tufts read as soft full rosettes with no hole in the middle.",
+  "Every piece is within budget: tufts 288 to 292/300, clover 297/300, wildflowers 265/300, path edge 179/200.",
+  "The tufts now read as grass: steep blades arching only at the tips, a darker olive base going to light tips, and a core that fills the gaps. Every piece is within budget (tufts 288 to 292 of 300).",
   "The vertex colour runs from a dark base to a light tip. Normals are smooth and authored, so there are no flat facets and no blades turned black by a back face.",
   "The `_sway` attribute exports as a real glTF custom attribute, so nothing has to be packed into the colour alpha."
  ],
  "off": [
-  "The tufts are sparser and spikier in outline than the sheet's dense painted domes. The sheet has about 60 overlapping paddles a tuft; 120 triangles buys 40 thin straps with gaps between them. The IoU loss (0.49 to 0.60) is mostly that see-through fill, not the outline.",
-  "The blade ends are blunt (a wide-angle 1-triangle cap), not fully round. The 2-triangle round cap I tried cost a quarter of the blades.",
-  "tuft-f scores lowest (0.35): its painted blades are long, curving and overlapping, while these are straight thin straps.",
-  "The clover heads are faceted white bipyramids, not fluffy balls, and the patch has fewer, larger leaves than the sheet.",
+  "The tufts are grass clumps, not quite the sheet's dense rounded buns. Front blades lean towards the camera, so from 45 deg they foreshorten and the near side looks thinner than the back. A little of the dark core shows at the front foot, and the outline is a fan-topped dome rather than the sheet's smooth bun. The IoU at the sheet camera (0.54 to 0.56) is a little below pass 2's broad paddles (0.54 to 0.68), which filled the silhouette better but read as lettuce.",
+  "tuft-f scores lowest (0.33): it is narrower than the sheet's wide fan of long fine blades.",
+  "The clover heads are 10-triangle puffs, rounder than before but not fluffy, and the patch has fewer, larger leaves than the sheet.",
   "The wildflower clump is airier than the sheet's bush of stems (IoU 0.40).",
-  "The path edge's moss is smoother and lighter than the sheet's textured olive moss, and its pebbles are smaller and fewer."
+  "The path edge's moss is smoother than the sheet's textured olive moss, and its pebbles are smaller and fewer."
  ],
  "rounds": [
-  {"round": 1, "change": "17 curved 7-triangle ribbons a tuft, roots on a disc, double-sided with outward winding. Read as sparse agave rosettes.", "mean_iou": 0.421},
-  {"round": 2, "change": "Hemisphere (cos-uniform) blade fan plus a faceted 8-sided core dome; bigger clover leaves plus a core; wildflower leafy base.", "mean_iou": 0.564},
-  {"round": 3, "change": "29 cheaper 4-triangle paddles a tuft, no core. Denser, but the double-sided normal flip turned half the blades dark.", "mean_iou": 0.539},
-  {"round": 4, "change": "Single-sided scalloped cone crowns (front = inside). Best IoU and dense, but from 45 deg only the far half of each tuft showed.", "mean_iou": 0.600},
-  {"round": 5, "change": "Ring-rooted 3-triangle straps (40 a tuft), double-sided, each triangle wound to agree with its authored dome normal. Dome tilt and length profile tuned; darker moss, rounder clover heads. Final: 768 px, 48 samples.", "mean_iou": 0.549}
+  {
+   "round": 1,
+   "change": "17 curved 7-triangle ribbons a tuft, roots on a disc, double-sided with outward winding. Read as sparse agave rosettes.",
+   "mean_iou": 0.421
+  },
+  {
+   "round": 2,
+   "change": "Hemisphere (cos-uniform) blade fan plus a faceted 8-sided core dome; bigger clover leaves plus a core; wildflower leafy base.",
+   "mean_iou": 0.564
+  },
+  {
+   "round": 3,
+   "change": "29 cheaper 4-triangle paddles a tuft, no core. Denser, but the double-sided normal flip turned half the blades dark.",
+   "mean_iou": 0.539
+  },
+  {
+   "round": 4,
+   "change": "Single-sided scalloped cone crowns (front = inside). Best IoU and dense, but from 45 deg only the far half of each tuft showed.",
+   "mean_iou": 0.6
+  },
+  {
+   "round": 5,
+   "change": "Ring-rooted 3-triangle straps (40 a tuft), double-sided, each triangle wound to agree with its authored dome normal. Dome tilt and length profile tuned; darker moss, rounder clover heads. Final: 768 px, 48 samples.",
+   "mean_iou": 0.549
+  },
+  {
+   "round": 6,
+   "change": "Second pass (coordinator): 300-triangle tufts made of 48 to 50 broad 6-triangle paddles (2 curved segments, rounded 2-triangle tip), densely packed, with low wide outer blades and random lean and size; clover heads as 10-triangle puffs; lumpier olive moss. Final: 768 px, 48 samples.",
+   "mean_iou": 0.596
+  },
+  {
+   "round": 7,
+   "change": "Third pass (coordinator): core plus 42 steep tip-arching blades a tuft (292 triangles), dome outline with crown blades tallest, #5d6b3a -> #7f9150 -> #b8c27e ramp; tuft-f coreless with narrow upright arching blades. Judged from kit.png and kit_45.png. Final: 768 px, 48 samples.",
+   "mean_iou": 0.546
+  }
  ],
  "moving_parts": "None baked in. Wind is the game's: bend each vertex by _sway (0 root .. 1 tip) times the weather signal's wind.",
  "creative_additions": "Each tuft drifts by its own amount between meadow and foliage, so the 6 tufts can mix in the meadow without a visible repeat. The path edge has a dirt-tinted rim on its path side."

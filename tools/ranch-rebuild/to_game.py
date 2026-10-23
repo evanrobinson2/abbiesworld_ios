@@ -24,7 +24,7 @@ FILLS = ['full', 'partial', 'empty', 'carried']
 TARGETS = {
     'family-home': ('mesh', 'buildings/family-home', STAGES), 'feed-store': ('mesh', 'buildings/feed-store', STAGES),
     'water-point': ('mesh', 'buildings/water-point', STAGES), 'horse-shelter': ('mesh', 'buildings/cattle-shelter', STAGES),
-    'goat-shelter': ('mesh', 'buildings/goat-shelter', STAGES), 'chicken-coop': ('mesh', 'buildings/chicken-coop', STAGES),
+    'goat-house-open': ('mesh', 'buildings/goat-shelter', STAGES), 'chicken-coop': ('mesh', 'buildings/chicken-coop', STAGES),
     'barn-shelter': ('mesh', 'buildings/shelter', STAGES),
     'horse': ('mesh', 'organics/horse', POSES), 'cow': ('mesh', 'organics/cow', POSES), 'goat': ('mesh', 'organics/goat', POSES),
     'chicken': ('mesh', 'organics/chicken', POSES), 'tree-standing': ('mesh', 'organics/tree', ['standing', 'stump']),
@@ -41,6 +41,14 @@ TARGETS = {
     'compost-bay': ('glb', 'garden-assets/GF-019.glb'), 'potting-bench': ('glb', 'garden-assets/GF-020.glb'),
     'watering-pot': ('glb', 'garden-assets/GF-074.glb'), 'bench': ('glb', 'garden-assets/GF-194.glb'),
 }
+# The goat house (remaster R3, Evan's pick) replaces the old goat shelter under the same game ids. Its walls are named
+# Wall_* by the modeler, which the role patterns read as plaster; they are timber planks, so rename them on the way in.
+MATERIAL_RENAMES = {'goat-house-open': [(r'^Wall_', 'Plank_')]}
+# Buildings whose walls stay up inside a pen (the goat house already has its open side); the others become open sheds.
+KEEP_WALLS = {'goat-house-open'}
+# Kits (remaster wave 1): every top-level GLB of models/<name>/ is copied as is to ranch-kits/<name>/, where
+# simulations/ranch-kits.mjs loads and places them (both model styles use the same files).
+KITS = {'kitchen-garden': 'ranch-kits/kitchen-garden', 'lamp-kit': 'ranch-kits/lamp-kit'}
 # the game's material roles, matched on material then object name (same patterns as simulations/material-policy.js)
 ROLE_PATTERNS = [('glass', r'glass'), ('water', r'^(?:water)(?:[. _-]|$)'), ('metal', r'bronze|metal|copper|steel|iron|brass'),
                  ('plaster', r'plaster|stucco|wall'), ('foliage', r'leaf|leaves|foliage|canopy|grass|moss|petal|flower|stem'),
@@ -64,7 +72,7 @@ def to_srgb(c):
     return np.where(c <= 0.0031308, c * 12.92, 1.055 * c ** (1 / 2.4) - 0.055)
 
 
-def mesh_list(glb, yaw=0.0):
+def mesh_list(glb, yaw=0.0, renames=()):
     """GLB -> the tile's part list (Y up, metres, origin on the ground at the footprint centre, front +Z)."""
     import bpy
     bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -95,6 +103,8 @@ def mesh_list(glb, yaw=0.0):
             n = np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]); n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
             N = np.repeat(n[:, None], 3, 1)
             mname = mat.name if mat else ''
+            for pat, rep in renames:
+                mname = re.sub(pat, rep, mname)
             srgb = [round(float(x), 4) for x in to_srgb(col)]
             parts.append(dict(name=ob.name, positions=[round(float(x), 4) for x in P.ravel()], normals=[round(float(x), 4) for x in N.ravel()],
                               color=srgb, role=role_of(mname, ob.name), defaultColor=srgb, materialName=mname.lower(),
@@ -154,7 +164,7 @@ def islands(P):
     return [np.array(g) for g in groups.values()]
 
 
-def shed_ready(parts, mpu):
+def shed_ready(parts, mpu, keep_walls=False):
     """Tag a building's parts for simulations/ranch-shelter.mjs, which turns the complete building into an open shed.
 
     Without tags that module keeps only meshes that look like roof, posts or floor by size, and parts merged by
@@ -178,7 +188,7 @@ def shed_ready(parts, mpu):
         for cls, isls in buckets.items():
             idx = np.concatenate(isls)
             q = dict(p); q['positions'] = [round(float(x), 4) for x in P[idx].ravel()]; q['normals'] = [round(float(x), 4) for x in N[idx].ravel()]
-            q['name'] = f"{p['name']}-{cls}"; q['shed'] = 'drop' if cls == 'body' else 'keep'; out.append(q)
+            q['name'] = f"{p['name']}-{cls}"; q['shed'] = 'drop' if cls == 'body' and not keep_walls else 'keep'; out.append(q)
     return out
 
 CHARMING = '-charming'
@@ -190,7 +200,18 @@ def charming_path(path):
     return f'{head}/{charming_path(rest)}' if head == 'simulations' else f'{head}{CHARMING}/{rest}'
 
 
+def install_kit(name):
+    src, dst = os.path.join(HERE, 'models', name), os.path.join(DIST, KITS[name])
+    os.makedirs(dst, exist_ok=True); out = []
+    for f in sorted(os.listdir(src)):
+        if f.endswith('.glb'):
+            shutil.copy(os.path.join(src, f), os.path.join(dst, f)); out.append(f'{KITS[name]}/{f}')
+    return out, {}
+
+
 def install(name):
+    if name in KITS:
+        return install_kit(name)
     base_name = name[:-len(CHARMING)] if name.endswith(CHARMING) else name
     charming = base_name != name
     kind, target, *rest = TARGETS[base_name]
@@ -214,7 +235,7 @@ def install(name):
             else:
                 print(f'  {name}: no {st} variant, ' + ('the game falls back to the normal one' if charming else 'keeping the old one')); continue
         gid = f'{os.path.basename(target)}-{st}'
-        parts, n = mesh_list(src, yaw)
+        parts, n = mesh_list(src, yaw, MATERIAL_RENAMES.get(base_name, ()))
         if k is None:
             old = original_extent(target, ref)
             A = np.concatenate([np.array(p['positions']).reshape(-1, 3) for p in parts]); span = A.max(0) - A.min(0)
@@ -222,7 +243,7 @@ def install(name):
             print(f'  {name}: scaled x{k:.3f} to keep the old footprint ({old and round(old, 2)} units)')
         rescale(parts, k)
         if target.startswith('buildings/'):
-            parts = shed_ready(parts, calibration(os.path.basename(target)))
+            parts = shed_ready(parts, calibration(os.path.basename(target)), base_name in KEEP_WALLS)
         rel = place(f'simulation-assets/{os.path.dirname(target)}/{gid}')
         base = os.path.join(DIST, rel); os.makedirs(os.path.dirname(base), exist_ok=True)
         json.dump(parts, open(base + '.json', 'w'), separators=(',', ':'))
@@ -266,7 +287,7 @@ def update_catalogs(tris):
 if __name__ == '__main__':
     names = sys.argv[1:]
     if names == ['all']:
-        names = [n for t in TARGETS for n in (t, t + CHARMING) if os.path.exists(os.path.join(HERE, 'models', n, f'{n}.glb'))]
+        names = [n for t in TARGETS for n in (t, t + CHARMING) if os.path.exists(os.path.join(HERE, 'models', n, f'{n}.glb'))] + list(KITS)
     alltris = {}
     for n in names:
         o, t = install(n); alltris.update(t); print(n, o, flush=True)
