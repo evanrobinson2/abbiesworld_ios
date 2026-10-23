@@ -1,0 +1,24 @@
+{
+ "job": "charm-heart",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/image-to-3d",
+   "task_id": "01a16a97-055a-75a5-b23f-b920df4f9b7a",
+   "credits": 20,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": false,
+    "enable_pbr": false,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 8000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "pick.png"
+   ]
+  }
+ ],
+ "credits": 20
+}
