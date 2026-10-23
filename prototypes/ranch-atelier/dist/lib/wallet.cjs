@@ -28,7 +28,7 @@ function blobStore(){
   },
   async write(path,value,etag){
    try{await blob.put(path,JSON.stringify(value),{access:'private',addRandomSuffix:false,contentType:'application/json',...(etag?{allowOverwrite:true,ifMatch:etag}:{allowOverwrite:false})});return true;}
-   catch(e){if(e instanceof blob.BlobPreconditionFailedError||/precondition|already exists|412|409/i.test(e?.message||''))return false;throw e;}
+   catch(e){if(e instanceof blob.BlobPreconditionFailedError||/precondition|already exists|conflict|412|409/i.test(e?.message||''))return false;throw e;}
   }
  };
 }
@@ -39,7 +39,9 @@ function createWallet({store=blobStore(),caps=CAPS}={}){
  const spentOf=v=>Number(v?.usd)||0;
  // Adds usd to one ledger unless that would pass cap. Retries on a concurrent write.
  async function add(path,usd,cap){
-  for(let i=0;i<8;i++){
+  for(let i=0;i<12;i++){
+   // Back off a little after a lost race so a crowd of charges spreads out.
+   if(i)await new Promise(r=>setTimeout(r,Math.random()*40*i));
    const {value,etag}=await store.read(path),spent=spentOf(value);
    if(usd>0&&spent+usd>cap+1e-9)return {ok:false,spent};
    const next={usd:Math.max(0,Math.round((spent+usd)*1e6)/1e6),updated:new Date().toISOString(),calls:(value?.calls||0)+(usd>0?1:0)};
