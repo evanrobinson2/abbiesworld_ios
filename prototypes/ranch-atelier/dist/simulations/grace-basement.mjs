@@ -1,6 +1,7 @@
 import * as T from 'three';
 import {createGraceComputer, createGraceKeyboard, createGraceFloppy} from './grace-computer.mjs';
 import {DISKS, drawCoin} from './grace-dos.mjs';
+import {createGameBoy} from './gameboy.mjs';
 
 // Aunt Grace's basement, 1986 (AW-STUDY-0024): the office under the café. A 2.5D side-view set in the manner of the
 // 1980s animated adventure games: a cutaway room seen from the side, stairs down from a door on the left, a bare bulb
@@ -112,6 +113,8 @@ export function createBasement() {
 
  const computer = createGraceComputer(); computer.position.set(5.62, D.top, -.64); computer.rotation.y = -Math.PI / 2; root.add(computer);
  const keyboard = createGraceKeyboard(); keyboard.position.set(5.12, D.top, -.64); keyboard.rotation.y = -Math.PI / 2; root.add(keyboard);
+ // Her pocket game player, lying by the computer: its screen plays a falling-blocks game (gameboy.mjs).
+ const gameboy = createGameBoy(); gameboy.group.position.set(5.93, D.top, -.67); gameboy.group.rotation.y = -Math.PI / 2 + .12; root.add(gameboy.group);
  const manual = createManual(); manual.position.set(5.2, D.top, -.32); manual.rotation.y = -.25; root.add(manual);
  const mug = add('pencil mug', new T.CylinderGeometry(.04, .036, .1, 10), M('mug glaze', {color: '#2f5f6a', roughness: .4}), 6.1, D.top + .05, -.9);
  for (let i = 0; i < 3; i++) { const p = box('pencil', .008, .16, .008, M('pencil yellow', {color: '#d8b030'}), 6.09 + i * .012, D.top + .13, -.9, ); p.rotation.z = (i - 1) * .15; }
@@ -197,7 +200,7 @@ export function createBasement() {
   {id: 'rug', obj: rug}, {id: 'manual', obj: manual}, {id: 'stair-box', obj: named('under-stair box')},
   {id: 'window-sill', obj: named('window sill')}, {id: 'pencil-mug', obj: mug},
  ];
- root.userData = {computer, keyboard, disks, jar, addJarCoin, coinSpots, manual, bulb, bulbM, chain, door, toggle, toggles, switches: sw, switchLamp, glowDot, hall, flame, screen: computer.userData.screen, chair,
+ root.userData = {computer, keyboard, gameboy, disks, jar, addJarCoin, coinSpots, manual, bulb, bulbM, chain, door, toggle, toggles, switches: sw, switchLamp, glowDot, hall, flame, screen: computer.userData.screen, chair,
   lamp1M, plug, setPlug, clipboard: clip, spray, towel, rocker: computer.userData.rocker};
  return root;
 }

@@ -457,6 +457,48 @@
           "t": "Memory kit: era pass, inner voice and dialog scripts",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/simulations/memory-kit",
           "note": "Shared by every memory place (basement, school roof, Moon Mission dialog)"
+        },
+        {
+          "k": "reference",
+          "t": "Prince of Persia (Jordan Mechner, 1989)",
+          "href": "https://en.wikipedia.org/wiki/Prince_of_Persia_(1989_video_game)",
+          "note": "Spirit only: single-screen rooms, careful jumps, traced motion. DUSKBLADE is our own code, art and rooms"
+        },
+        {
+          "k": "devblog",
+          "t": "The Making of Prince of Persia (Mechner's journals)",
+          "href": "https://www.jordanmechner.com/en/books/journals",
+          "note": "How filmed movement became animation; our poses are hand-keyed instead"
+        },
+        {
+          "k": "reference",
+          "t": "Tetris, rules of falling blocks",
+          "href": "https://en.wikipedia.org/wiki/Tetris",
+          "note": "Only the idea of falling pieces; POCKET BLOCKS and BLOCKS are our own code, name and art"
+        },
+        {
+          "k": "reference",
+          "t": "Game Boy (Nintendo, 1989), handheld form",
+          "href": "https://en.wikipedia.org/wiki/Game_Boy",
+          "note": "Shape language of a 1980s pocket player; the model is ours and carries our own name"
+        },
+        {
+          "k": "canon",
+          "t": "Inspiring Shaders #12: One-bit dither (Return of the Obra Dinn)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/shaders/index.html",
+          "note": "The Game Boy screen is made in greys, then every pixel is forced to ink or paper by an ordered pattern"
+        },
+        {
+          "k": "reference",
+          "t": "Ordered dithering (Bayer matrix)",
+          "href": "https://en.wikipedia.org/wiki/Ordered_dithering",
+          "note": "The 4x4 pattern behind the pocket screen"
+        },
+        {
+          "k": "reference",
+          "t": "GCC 16-bit mode (-m16) for DOS .COM programs",
+          "href": "https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html",
+          "note": "BLOCKS and DUSKBLD are plain C with a tiny runtime (tools/grace-dos/src/c/aw.h)"
         }
       ],
       "recorded": "2026-10-23, gathered afterwards from the study docs"

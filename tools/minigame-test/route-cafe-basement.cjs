@@ -31,6 +31,7 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   });
   await step('lights, chores, power, gold disk', async () => {
     await p.click('.aw-choice >> nth=0'); await until(() => basement.cam.mode === 'close');
+    await p.evaluate(() => basement.flipToggle(1)); await p.waitForTimeout(1500);
     await p.evaluate(() => { basement.flipToggle(1); basement.flipToggle(0); basement.flipToggle(2); }); await until(() => basement.cam.mode === 'side');
     await p.evaluate(() => basement.plugIn()); await until(() => basement.chores.plug);
     await p.evaluate(() => basement.startWash()); await until(() => basement.cam.mode === 'close');
