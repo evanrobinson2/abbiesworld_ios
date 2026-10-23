@@ -442,9 +442,18 @@ function engineUpdate(level, pitch, dread, burn = 0) {
  engine.dg.gain.setTargetAtTime(dread * .05, a.currentTime, .3);
  engine.wg.gain.setTargetAtTime(burn * .018, a.currentTime, .15); engine.wv.frequency.setTargetAtTime(2600 + burn * 900, a.currentTime, .2);
 }
-// The little inner voice (and one grown-up). Spoken, never written on screen.
-function say(text, {grownUp = false, narrator = false} = {}) {
- try { const s = speechSynthesis; if (!s) return; s.cancel(); const u = new SpeechSynthesisUtterance(text);
+// The little inner voice (and the grown-ups). Spoken, never written on screen. Recorded hi-fi lines from the family cast
+// (ElevenLabs designed voices, tools/voice-cast) play by their text; the browser's own voice only speaks a line nobody
+// has recorded yet.
+const VOICED = {}; let voiceEl = null;
+fetch('/studies/family-cast/lines-school-jump.json').then(r => r.ok ? r.json() : null).then(m => { for (const l of Object.values(m?.lines || {})) VOICED[l.text] = l.url; }).catch(() => {});
+function say(text, opts = {}) {
+ const url = VOICED[text];
+ if (!url) return speak(text, opts);
+ try { speechSynthesis?.cancel(); voiceEl?.pause(); voiceEl = new Audio(url); voiceEl.volume = .95; voiceEl.play().catch(() => speak(text, opts)); } catch { speak(text, opts); }
+}
+function speak(text, {grownUp = false, narrator = false} = {}) {
+ try { voiceEl?.pause(); const s = speechSynthesis; if (!s) return; s.cancel(); const u = new SpeechSynthesisUtterance(text);
   u.pitch = grownUp ? .6 : narrator ? .85 : 1.7; u.rate = grownUp ? 1.05 : narrator ? .95 : 1.08; u.volume = .9;
   const vs = s.getVoices(), en = vs.filter(v => /^en/i.test(v.lang)); u.voice = en.find(v => /child|junior|samantha|karen|female/i.test(v.name)) || en[0] || null;
   s.speak(u); } catch {}

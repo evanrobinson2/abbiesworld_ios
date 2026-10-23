@@ -1,0 +1,205 @@
+{
+ "about": "Every spoken line in the school jump (studies/school/play.html LINES), with who says it. Rendered by tools/voice-cast/cast.py lines school-jump.",
+ "lines": {
+  "walk": [
+   "daddy-young",
+   "Come on, bub. To the wall."
+  ],
+  "further1": [
+   "daddy-young",
+   "Oh, you want it further, do ya bub?"
+  ],
+  "further2": [
+   "daddy-young",
+   "Further? Okay, bub. Hang on."
+  ],
+  "onRoof": [
+   "daddy-young",
+   "Uh oh."
+  ],
+  "getIt": [
+   "daddy-young",
+   "Stay, bub. I'll get it."
+  ],
+  "latchHint": [
+   "daddy-young",
+   "Tap a hand to let go."
+  ],
+  "hold": [
+   "daddy-young",
+   "Whoa! Hold on!"
+  ],
+  "cross": [
+   "daddy-young",
+   "Nope, hands don't cross."
+  ],
+  "far-0": [
+   "daddy-young",
+   "Too far."
+  ],
+  "far-1": [
+   "daddy-young",
+   "Can't reach that."
+  ],
+  "far-2": [
+   "daddy-young",
+   "Closer one."
+  ],
+  "wrong-0": [
+   "daddy-young",
+   "Oops."
+  ],
+  "wrong-1": [
+   "daddy-young",
+   "Breathe. Find the shiny one."
+  ],
+  "wrong-2": [
+   "daddy-young",
+   "Arms getting wobbly..."
+  ],
+  "wrong-3": [
+   "daddy-young",
+   "You can do it. One more good grab."
+  ],
+  "loose": [
+   "daddy-young",
+   "Whoa, that one wiggles!"
+  ],
+  "tired": [
+   "daddy-young",
+   "Whew. Noodle arms. Let's try again."
+  ],
+  "top": [
+   "daddy-young",
+   "Made it!"
+  ],
+  "firstBall": [
+   "daddy-young",
+   "There's one!"
+  ],
+  "full": [
+   "daddy-young",
+   "My hands are full. Throw some to bub."
+  ],
+  "dog-0": [
+   "daddy-young",
+   "Good dog!"
+  ],
+  "dog-1": [
+   "daddy-young",
+   "Catch, bub!"
+  ],
+  "dog-2": [
+   "daddy-young",
+   "Go get it!"
+  ],
+  "dog-3": [
+   "daddy-young",
+   "Good catch!"
+  ],
+  "busted": [
+   "street-grownup",
+   "Hey! You! Down off that roof!"
+  ],
+  "afterBust": [
+   "daddy-young",
+   "Oops. Watch the cars next time."
+  ],
+  "gym": [
+   "daddy-young",
+   "The gym roof. Higher."
+  ],
+  "notYet": [
+   "daddy-young",
+   "Not yet. There are still balls up here."
+  ],
+  "hang": [
+   "daddy-young",
+   "Wait for it..."
+  ],
+  "home": [
+   "daddy-young",
+   "Now home. Same way down."
+  ],
+  "allBalls": [
+   "daddy-young",
+   "Thirty-one! That's all of them!"
+  ],
+  "missDrop": [
+   "daddy-young",
+   "Not yet... pull back up."
+  ],
+  "drop": [
+   "daddy-young",
+   "Yes!"
+  ],
+  "coin": [
+   "daddy-young",
+   "A gold coin! One of Daddy's memories."
+  ],
+  "done": [
+   "daddy-young",
+   "Best day ever, bub."
+  ],
+  "softer-0": [
+   "daddy-young",
+   "Too hard. Softer."
+  ],
+  "softer-1": [
+   "daddy-young",
+   "Whoa, easy."
+  ],
+  "softer-2": [
+   "daddy-young",
+   "A little softer."
+  ],
+  "harder-0": [
+   "daddy-young",
+   "Too soft. Harder!"
+  ],
+  "harder-1": [
+   "daddy-young",
+   "Bit harder."
+  ],
+  "harder-2": [
+   "daddy-young",
+   "Put some arm into it!"
+  ],
+  "bigJump": [
+   "daddy-young",
+   "That seems like a big jump. Maybe I shouldn't do it."
+  ],
+  "listened": [
+   "daddy-young",
+   "Maybe next time, bub. Let's go home."
+  ],
+  "janitor": [
+   "janitor",
+   "Hey! What are you doing up there? Get down! I'm calling the police!"
+  ],
+  "jump": [
+   "daddy-young",
+   "Uh oh. Gotta go!"
+  ],
+  "ankle": [
+   "daddy-young",
+   "Ow, ow, ow! My ankle!"
+  ],
+  "hurry": [
+   "daddy-young",
+   "Bub's waiting. Better get moving."
+  ],
+  "outroHollywood": [
+   "daddy-now",
+   "I never told anyone about that coin. Don't try this at home, okay?"
+  ],
+  "outroListened": [
+   "daddy-now",
+   "That little voice was right. It was a big jump."
+  ],
+  "outroJanitor": [
+   "daddy-now",
+   "I nearly broke my ankle that night. That's why you never, ever try this at home."
+  ]
+ }
+}
