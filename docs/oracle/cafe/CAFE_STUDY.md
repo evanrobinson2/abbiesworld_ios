@@ -306,6 +306,12 @@ Evan: "dance party is a memory game.. follow my lead". Simon-says on the light-u
   Each round adds one move. The crowd joins in behind her as the streak grows, and the party signal rises.
 - **Take the lead:** after a good streak Abbie leads, makes up a sequence, and the customers follow it (and sometimes
   get it charmingly wrong).
+- **It's a real party** (Evan, 07:26Z: "dance mode needs a disco ball and actual dance music and synchronized
+  dancing"): the disco ball drops from the ceiling and starts turning, throwing sparkle spots over the room. The music
+  switches to an actual dance track (the Music Bible's party arrangement: D major, about 124 bpm, four-on-the-floor
+  with the 3+3+2 hook, made as a dance cue in the composer pipeline). Everyone dances in sync: customers and crew
+  share one beat clock and one choreography (the same move on the same beat, in rows on the floor), so the room
+  moves together like a music video, and Abbie's lead is what they copy.
 - **Kind to small memories:** a miss replays the sequence slower, with no losing. Two can play: a parent leads, the
   child follows, then swap.
 
