@@ -51,7 +51,7 @@
    pop=document.createElement('div');pop.id='account-pop';
    const more=`<a class="more" href="/welcome">About Abbie's World and supporting it</a>`;
    pop.innerHTML=me?.signedIn
-    ?`<p>Your worlds are kept with your account, so they follow you to any device.</p><a href="/api/auth/logout">Sign out</a>${more}`
+    ?`<p>Your worlds are kept with your account, so they follow you to any device.</p><a href="/api/auth/logout">Sign out</a><a class="more" href="/billing">Your billing: what your magic was spent on</a>${more}`
     :`<p>Sign in with Google to keep your worlds and talk to the Computer. A grown-up signs in; it is free.</p><a href="/api/auth/login?return=${here}">Continue</a><small>We ask nothing of you and promise nothing.</small>${more}`;
    document.body.append(pop);
   };

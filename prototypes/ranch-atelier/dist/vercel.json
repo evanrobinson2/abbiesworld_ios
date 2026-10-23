@@ -13,6 +13,10 @@
       "destination": "/home/terms.html"
     },
     {
+      "source": "/billing",
+      "destination": "/home/billing.html"
+    },
+    {
       "source": "/explore",
       "destination": "/explore/index.html"
     },
@@ -431,6 +435,17 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/billing",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/billing",
+      "permanent": false
+    },
     {
       "source": "/studies",
       "destination": "/studies/",

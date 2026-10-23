@@ -34,7 +34,9 @@
   let applied = [];
   function apply(state = read()) {
     const t = state.theme && state.theme.bg ? state.theme : ABBIE, p = state.prefs || {};
-    const skin = (r.dataset.awSkin || '').split(/\s+/), set = tokens(t, p);
+    // A study may keep its own look (<html data-aw-own-look>): it still gets the --aw-* tokens and the access settings,
+    // but its own palette and letters win over the chosen style.
+    const skin = r.hasAttribute('data-aw-own-look') ? [] : (r.dataset.awSkin || '').split(/\s+/), set = tokens(t, p);
     const vars = Object.assign({}, set.base, skin.includes('look') ? set.look : {}, skin.includes('study') ? set.study : {});
     applied.forEach(k => { if (!(k in vars)) r.style.removeProperty(k); });
     for (const k in vars) r.style.setProperty(k, vars[k]);
@@ -54,7 +56,7 @@
     return window.AWLook.state;
   }
   window.AWLook = {KEY, ABBIE, read, tokens, apply, state: null};
-  if (!document.querySelector('link[data-aw-css]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/theme/aw.css?v=2'; l.dataset.awCss = ''; document.head.append(l); }
+  if (!document.querySelector('link[data-aw-css]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/theme/aw.css?v=3'; l.dataset.awCss = ''; document.head.append(l); }
   apply();
   // Mute: every sound that starts playing on this page starts muted.
   document.addEventListener('play', e => { if (window.AWLook.state?.prefs?.mute && e.target && 'muted' in e.target) e.target.muted = true; }, true);
