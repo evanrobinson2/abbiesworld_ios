@@ -1,0 +1,129 @@
+{
+ "study": "AW-STUDY-0013 - The Coffee Shop",
+ "round": 2,
+ "asked": "Evan, 2026-10-23T07:05Z: design the back bar (smoothie machine, espresso maker, coffee house, stars) locked to the reference; mock up 5 assets in 3 distinct styles, from (not) LEGO to charming styled low poly.",
+ "reference": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png",
+ "tool": "Midjourney web (v8.2), grid only, no upscale",
+ "prompts": [
+  {
+   "name": "backbar-front",
+   "group": "backbar",
+   "prompt": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png the back bar wall of a zany cartoon kids dance party cafe called Abbie's Cafe, seen straight on from the counter: a giant bubbly pink smoothie blender machine with swirling fruit, a chunky chrome and pink espresso machine with steam, a coffee bean grinder, a big round coffee urn, shelves of teal cups and syrup jars, a painted picture menu board, glowing neon star decorations, string lights, curved teal milkshake bar in front, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, playful Planet Zoo style game art, nobody in frame --ar 3:2 --sref https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png --v 8.2 --no text, letters"
+  },
+  {
+   "name": "backbar-wide",
+   "group": "backbar",
+   "prompt": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png three-quarter view across a glowing checker dance floor toward the back bar of a zany cartoon kids dance party cafe: curved teal milkshake bar with stools, behind it a coffee house back counter with a giant pink smoothie machine, an espresso machine, pastry case, mugs on shelves, neon star signs and disco balls above, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, playful Planet Zoo style game art, nobody in frame --ar 3:2 --sref https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png --v 8.2 --no text, letters"
+  },
+  {
+   "name": "backbar-machines",
+   "group": "backbar",
+   "prompt": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png close view of the machines on the back counter of a zany cartoon kids dance party cafe: a giant bubbly pink smoothie blender with a fruit swirl jar, a retro chrome espresso machine with pink panels and two cups, a turquoise milk frother, sprinkles jars, a neon star above, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, playful stylised game art, nobody in frame --ar 3:2 --sref https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png --v 8.2 --no text, letters"
+  },
+  {
+   "name": "asset-cup-booth-bricks",
+   "group": "assets",
+   "asset": "cup-booth",
+   "style": "bricks",
+   "prompt": "a DJ booth built inside a giant pink coffee cup with a handle, a glowing window and turntables, on a round stage, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-espresso-bricks",
+   "group": "assets",
+   "asset": "espresso",
+   "style": "bricks",
+   "prompt": "a chunky retro espresso machine with pink panels, chrome, two portafilters and two small cups, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-smoothie-bricks",
+   "group": "assets",
+   "asset": "smoothie",
+   "style": "bricks",
+   "prompt": "a giant bubbly smoothie blender machine with a swirling pink fruit jar and big buttons, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-stool-bricks",
+   "group": "assets",
+   "asset": "stool",
+   "style": "bricks",
+   "prompt": "a round teal bar stool with a magenta post and foot ring, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-beanbag-bricks",
+   "group": "assets",
+   "asset": "beanbag",
+   "style": "bricks",
+   "prompt": "a slouchy orange beanbag chair, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-cup-booth-vinyl",
+   "group": "assets",
+   "asset": "cup-booth",
+   "style": "vinyl",
+   "prompt": "a DJ booth built inside a giant pink coffee cup with a handle, a glowing window and turntables, on a round stage, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-espresso-vinyl",
+   "group": "assets",
+   "asset": "espresso",
+   "style": "vinyl",
+   "prompt": "a chunky retro espresso machine with pink panels, chrome, two portafilters and two small cups, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-smoothie-vinyl",
+   "group": "assets",
+   "asset": "smoothie",
+   "style": "vinyl",
+   "prompt": "a giant bubbly smoothie blender machine with a swirling pink fruit jar and big buttons, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-stool-vinyl",
+   "group": "assets",
+   "asset": "stool",
+   "style": "vinyl",
+   "prompt": "a round teal bar stool with a magenta post and foot ring, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-beanbag-vinyl",
+   "group": "assets",
+   "asset": "beanbag",
+   "style": "vinyl",
+   "prompt": "a slouchy orange beanbag chair, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-cup-booth-lowpoly",
+   "group": "assets",
+   "asset": "cup-booth",
+   "style": "lowpoly",
+   "prompt": "a DJ booth built inside a giant pink coffee cup with a handle, a glowing window and turntables, on a round stage, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-espresso-lowpoly",
+   "group": "assets",
+   "asset": "espresso",
+   "style": "lowpoly",
+   "prompt": "a chunky retro espresso machine with pink panels, chrome, two portafilters and two small cups, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-smoothie-lowpoly",
+   "group": "assets",
+   "asset": "smoothie",
+   "style": "lowpoly",
+   "prompt": "a giant bubbly smoothie blender machine with a swirling pink fruit jar and big buttons, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-stool-lowpoly",
+   "group": "assets",
+   "asset": "stool",
+   "style": "lowpoly",
+   "prompt": "a round teal bar stool with a magenta post and foot ring, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  },
+  {
+   "name": "asset-beanbag-lowpoly",
+   "group": "assets",
+   "asset": "beanbag",
+   "style": "lowpoly",
+   "prompt": "a slouchy orange beanbag chair, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people"
+  }
+ ]
+}

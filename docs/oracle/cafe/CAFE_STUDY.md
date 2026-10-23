@@ -193,3 +193,228 @@ Evan's copy when we fix a direction.
 "typical 3D game" options (outside #2, inside #2) letter "Abbie's Cafe" on the sign despite `--no text`. Midjourney's
 Draft Mode was on in the account for the first try and was switched off; the draft batch was not used. Evan picked
 `interior-party_0` (the cup DJ booth room) on 2026-10-23 at 05:41Z.
+
+## Round 2 (Evan, 2026-10-23 07:05Z and 07:16Z)
+
+- **Café by day, party by night: yes.**
+- **The map hex in nano view is the whimsical bubbly café** (`tile-party_0`), made a true hex.
+- **Manifest:** every item in the locked reference, the floors and the outer walls: `room-manifest.json` in this
+  folder (53 entries, each with where it is, its shading-role materials and a tier: hero, support or dressing). Page:
+  Studies site, `studies/cafe/manifest.html`.
+- **Back bar:** designed next, locked to the reference (Midjourney `--sref` of the pick): a smoothie machine, an
+  espresso maker, the coffee house counter behind the bar, and star decorations.
+- **Style mock-ups before any model:** five pieces (cup DJ booth, espresso maker, smoothie machine, bar stool,
+  beanbag) in three distinct styles: generic toy bricks (not LEGO), a soft vinyl toy, and charming styled low poly.
+  Prompts: `tools/midjourney/prompts/coffee-shop-0013-r2.json`. Page: `studies/cafe/round2.html`.
+
+### The café's roadmap, in Evan's order
+
+1. Ultra-finely modelled coffee maker and espresso maker (hero props, close-up quality). Evan: "ultra fine does not
+   mean high poly": fine means every real part is there and named (portafilter, group head, steam wand, drip tray,
+   knobs, gauge), in clean low-count geometry with bevels and good shading, not dense meshes.
+2. Two maker games (making coffee and making a smoothie or milkshake; the existing six-step recipe in
+   `coffee-recipe.mjs` is the start, done with the hands on the machine).
+3. A mini game for dance-party mode.
+4. Decorating the café.
+5. Stylus painting on the walls (Abbie asked for it).
+6. An art auction game (her wall paintings sold to customers).
+
+## 9. Play: three games, a meta and a meta-meta (Evan, 2026-10-23 07:17Z)
+
+Evan: "do a coffee maker, juice maker, and mini game study .. 3 games, and a meta is decorating and building out the
+shop however she wants and decorating it", "and meta meta - it fits into my simulation and I can run the business."
+
+| Layer | Who plays | What it is |
+|---|---|---|
+| **Games** | Abbie | Three hands-on mini games: the espresso machine (a mechatronics puzzle), the smoothie machine (a timing game), the dance party (a memory game: follow my lead) |
+| **Meta** | Abbie | Building out and decorating the shop however she wants (with wall painting and the art auction) |
+| **Meta-meta** | Evan | The café is a business inside the town simulation, and he runs it from the grown-up workbench |
+
+All three share one rule: **the machine is the controller.** No buttons in a drawer: you touch the real part (the
+grinder, the portafilter, the steam knob, the blender jar), and the world answers with sight and sound.
+
+### The main loop: run the shop for the day (Evan, 07:23Z)
+
+Evan: "of course the main loop is you run the shop for the day." Everything above hangs off one day. **The rule of the day: you can do anything or nothing** (Evan: "you can
+serve customers or someone on staff will for you", "you can do anything or nothing"). Every job in the shop has a crew
+member who does it when Abbie doesn't: the shop runs itself, and she steps in wherever it's fun. Stepping in means
+doing it better or sillier, never that the shop fails without her.
+
+
+1. **Morning: open up.** The café is calm (day mode). **Your crew arrives** (Evan: "your workers come, take the
+   chairs, setup"): they walk in, take the chairs down off the tables, wipe the bar and switch on the machines, so
+   you see the shop wake up. Deliveries arrive from the neighbouring tiles; empty jars fill. **Pick the pastries**
+   for the case, or your crew picks them for you (Evan: "you can pick the pastries or your crew will for you"), so a
+   child who just wants to play is never stuck on a menu. Deal the day's decoration cards and place a few.
+   The crew are people with roles (the people core's hat and prop silhouettes): a barista, a baker and a DJ, who
+   keep working on their own whenever Abbie is busy in a mini game.
+2. **The day: customers come.** They arrive from the town's schedules, with picture bubbles for what they want. An
+   espresso order may need the machine fixed first (Game 1); a smoothie order is Game 2. Happy customers raise the
+   party signal and add stars to the sign.
+3. **Dusk: party mode.** The floor, the neon and the music wake. Dance party (Game 3) for the crowd that stays.
+4. **Close: count the day.** Stars fly to the sign, a card is dealt (pick one of three), and an auction evening
+   sometimes sells her paintings. Evan's business view (meta-meta) has the day's ledger.
+
+The day runs on the game's clock and the sun dial; one signal (time, rush, party) drives light, music, people and
+the room.
+
+### Game 1: the espresso machine, a mechatronics puzzle (Evan, 07:23Z)
+
+Evan: "the espresso game is a mechatronics puzzle". The ultra-fine machine is built from low-poly parts that work
+together ("low poly parts that perfectly build the system"), and the game is getting that system to work: the
+Besiege and Bricktales kind of puzzle Evan likes, sized for a child.
+
+- **The parts are real:** water tank, pump, boiler with heating element, pressure valve, pipes and elbows, a
+  three-way valve, the group head, portafilter, pressure gauge, steam wand and knob, drip tray, grinder and hopper.
+- **Each puzzle is a broken or half-built machine.** Open the side panel and fix it: route the pipes from the tank
+  through the pump and the boiler to the group head, set the valve, swap in the right-sized part, tighten the gasket.
+- **The machine shows you why it fails, in the world:** no water (the tank's empty, the pump whirs dry), cold
+  (the boiler light stays dark, the shot steams weakly), no pressure (the gauge needle sags, the shot gushes pale),
+  a leak (a drip and a hiss at the bad joint). No error text.
+- **When it works, you pull a shot:** grind, tamp, lock the portafilter in with a quarter-turn click, hold the
+  button, and the stream turns golden while the gauge needle sits in the green. A customer is served with it.
+- **Levels grow the machine:** first the water path, then heat, then pressure, then steam for milk, then two group
+  heads for the rush. Later machines (a lever espresso, a moka pot, a cold-brew tower) reuse the same parts.
+- **Fair for a six-year-old:** parts only snap where they fit, a wrong part wobbles and pops out, and the hint is the
+  machine itself (the joint that's leaking glows softly for the player only, on the presentation layer).
+
+The existing six steps in `coffee-recipe.mjs` (cup, coffee, milk, foam, pour, serve) become the final "pull a shot"
+part, done with the parts instead of worded buttons.
+
+### Game 2: the smoothie machine, a timing game (Evan, 07:23Z)
+
+Evan: "smoothie is timing game". The giant bubbly smoothie machine, on the café's beat.
+
+- **Fruit flies by on a little conveyor** (or drops from the jars on the shelf) in time with the music. Tap to drop
+  each piece into the jar on the beat; a perfect drop splashes and sparkles, a late one bonks off the rim.
+- **The order is in the customer's bubble** (a strawberry, a banana, milk), and the order of the drops matters:
+  the layers show in the glass jar.
+- **Blend on the beat:** hold for the right number of beats. Too short leaves chunks; too long and it foams over
+  the top (a funny overflow, never a fail).
+- **Top it in time:** cream swirl, cherry and sprinkles, each on the beat, then slide it down the bar to the
+  customer (the slide is the last timing tap).
+- **Ingredients come from the neighbours** (Garden berries, Ranch milk, Meadow honey, Moonbase space treats); an
+  empty jar means a neighbour hasn't delivered. Speed rises in the rush and with the party signal at dusk.
+
+### Game 3: the dance party, a memory game (Evan, 07:23Z)
+
+Evan: "dance party is a memory game.. follow my lead". Simon-says on the light-up floor, at dusk.
+
+- **The DJ leads:** the DJ in the cup booth (or a dancer) does a short move sequence, and the matching floor tiles
+  light up with a sound each (the Music Bible's notes, so a correct sequence is a melody).
+- **Follow my lead:** Abbie repeats it by tapping the tiles in order (or stepping on them with the shoulder camera).
+  Each round adds one move. The crowd joins in behind her as the streak grows, and the party signal rises.
+- **Take the lead:** after a good streak Abbie leads, makes up a sequence, and the customers follow it (and sometimes
+  get it charmingly wrong).
+- **It's a real party** (Evan, 07:26Z: "dance mode needs a disco ball and actual dance music and synchronized
+  dancing"): the disco ball drops from the ceiling and starts turning, throwing sparkle spots over the room. The music
+  switches to an actual dance track (the Music Bible's party arrangement: D major, about 124 bpm, four-on-the-floor
+  with the 3+3+2 hook, made as a dance cue in the composer pipeline). Everyone dances in sync: customers and crew
+  share one beat clock and one choreography (the same move on the same beat, in rows on the floor), so the room
+  moves together like a music video, and Abbie's lead is what they copy.
+- **Kind to small memories:** a miss replays the sequence slower, with no losing. Two can play: a parent leads, the
+  child follows, then swap.
+
+### The old computer behind the counter (Evan, 2026-10-23 07:27Z)
+
+Evan: "there's a computer terminal behind the counter with an old CRT and the original MS-DOS typing tutor game."
+
+- **Where it comes from** (Evan, 07:28Z): "it was my aunt Grace's, it was 1986, I was six years old playing in her
+  basement." That sets the period and the feel: a 1986 home computer in a family basement, kept with care. The quiet
+  nod is her name: the manual's cover reads "Grace's" in pen, and the machine boots to `C:\GRACE>`. Nothing more is
+  made of it than that.
+- **The prop:** a beige 1980s-style PC with a chunky keyboard and a curved green-or-amber CRT, on the back counter
+  by the till. It's a world object: the crew use it for orders, and customers glance at it.
+- **The game:** a typing tutor in that old-DOS look (blocky 80-column text, a blinking cursor, a beep on a mistake,
+  a drill that speeds up). It's **our own** game, not the original program: the style is borrowed and the expression
+  never is (the Game Identity rule). The drills use café words (latte, sprinkles, cherry, disco) and the names of
+  regulars.
+- **In the day:** typing the orders into the terminal is an optional job, like the others (the crew does it if
+  Abbie doesn't), and a quiet-morning drill is something to do at the counter.
+- **You can actually operate it** (Evan, 07:28Z): tap the screen and the camera leans in to a working DOS-style
+  prompt on the CRT (rendered as a live texture). It has a small made-up command set: `DIR`, `CLS`, `TYPE`, `HELP`,
+  run the typing tutor, open the day's orders, look at the till tape, and a few harmless secrets to find. PG and
+  offline: it's a toy computer with nothing outside the game behind it.
+- **The manual beside it** (Evan, 07:28Z: "a book with the actual manual you can actually read"): a spiral-bound
+  1980s-style manual for our tutor. Open it and turn real pages: getting started, the home row, lessons, a
+  troubleshooting page and a dog-eared corner. We write it ourselves in that period voice, and its text is in the repo
+  (`docs/oracle/cafe/typing-tutor-manual.md` when we build it).
+- Added to the manifest's back bar as `crt_terminal` and `tutor_manual`.
+
+### The café pets (Evan, 2026-10-23 07:26Z)
+
+Evan: "also the cafe has pets." They live in the shop (which kinds is Abbie's choice; a cat and a pup to start), and
+they're one of the best diegetic channels in the room:
+
+- **They follow the day:** asleep on a beanbag in the morning, weaving between customers' feet in the rush, and
+  dancing (a hop, a spin, a wagging tail on the beat) when the party starts.
+- **They tell you things without words:** a pet sitting by the door means a customer is about to arrive; a pet by
+  the empty jar means that ingredient's out; a pet hiding under the bar means it's too loud; one curled on a
+  customer's lap means that customer is happy.
+- **Customers love them:** petting a pet is something a waiting customer does, so the wait is gentler, and a
+  child can always just play with the pets ("you can do anything or nothing").
+- **Play and teach tricks** (Evan, 07:27Z: "you can also play with them, teach them tricks. (it takes time and
+  repetition)"): throw a ball, wiggle a toy, give a treat. A trick is learned by repeating it over days: the first
+  tries are clumsy, it gets reliable with practice, and a learned trick (sit, spin, high five, a dance move) shows up
+  on its own, such as the pup doing its spin at the party. The pet's skill lives in its own state and persists, so
+  the progress is real and slow, the way a pet learns.
+- **Decorating includes them:** beds, bowls, a cat tree and outfits are decoration cards and unlockable skins.
+- The room's style is still not animal-themed (Evan, round 1): the pets are characters in the café, not its decor.
+
+### The meta: building out and decorating
+
+- **Place anything** from the manifest catalogue (beanbags, stools, stars, disco balls, rugs, plants) on the room's
+  1 m human hex grid. Snap, rotate, and drop it in. A valid spot glows (presentation layer).
+- **Recolour** with swatches from the café palette (figure-band only, the Townscaper rule from the aesthetic study),
+  so whatever she picks still looks good.
+- **Paint the walls** with the stylus: the wall becomes a canvas (a painted mural is a world thing, so customers
+  look at it and react).
+- **The art auction:** she paints canvases and hangs them; customers come to look, and in an auction evening they
+  bid stars or coins (playful, no real money). What sells buys new decorations.
+- **Decor matters to customers:** kids head for the beanbags, grown-ups for the window seats, and dancers want floor
+  space. The room she builds changes who comes and what they do (the "none" mode: the world just behaves).
+
+### Decoration cards and unlocks (Evan, 2026-10-23 07:19Z)
+
+Evan: "some kind of card game for the decorations. and unlocks can be custom skins / paint jobs, decorations, and
+reskins."
+
+- **Decorations come as cards.** They use the same hand of cards as the rest of the game (the HUD study's T2 hand,
+  and Card Forge's art at ranch.abbies.world/cards). Each card is one decoration (a beanbag, a star sign, a disco ball,
+  a rug) or a **set** (a party set, a calm-morning set).
+- **Playing a card is placing it.** Lift a card from the hand and drop it into the room; it becomes the thing, on the
+  hex grid. **Combos**: cards of the same set placed near each other light up together (three neon stars in a row,
+  or beanbags round a rug) and draw more customers, like adjacency on the board.
+- **Earning cards:** served customers, dance streaks, art auction sales and a happy end of day each deal a card.
+  One pick of three, as in the season loop.
+- **Unlocks are looks, never power:** custom skins and paint jobs for anything in the room (the cup booth in
+  chrome, the bar in candy stripes), new decorations, and reskins of the whole café (the elegant and typical-3D
+  directions from round 1 become unlockable reskins of the same building). Because every model's materials are named
+  by shading role, a reskin is a palette and material swap, not a new model.
+- **Grown-up side:** the business view (meta-meta) can see which sets draw which customers, but money never buys
+  cards.
+
+### The meta-meta: Evan runs the business
+
+- The café is a business in the town simulation (AW-STUDY-0006). Customers come from the town's schedules; supplies
+  come from neighbouring tiles through the shared resource loop (`simulations/simulation/resource-loop.mjs`).
+- **The grown-up workbench** (T4) shows what Abbie never sees: the income statement, prices, opening hours, staff,
+  the menu, and what equipment costs (the $5K espresso machine example from `INFO_MANIFEST.md`). Evan sets them;
+  the simulation runs; Abbie feels the result as a busier or calmer room.
+- Every number the business has is volunteered in the café's information manifest with audiences `player`,
+  `grown-up` and `director`, so the voice controller and AI directors read it without scraping the screen.
+
+### Build order (after the style pick)
+
+1. Ultra-fine espresso machine and juice machine, as working low-poly part assemblies.
+2. Game 1 (espresso mechatronics puzzle), ending in the existing recipe as the shot.
+3. Game 2 (smoothie timing game).
+4. Game 3 (dance party memory game), using the dance floor and the Music Bible.
+5. Decorating, then wall painting, then the art auction.
+6. The business view in the grown-up workbench, wired to the town simulation.
+
+**Reference models.** Evan suggested finding an STL online. Public 3D-print sites have espresso accessories (group
+head caps, portafilters, tampers) but we have not found a complete, openly licensed espresso machine yet. We build the
+part list from real machine anatomy (an E61-style group head, a 58 mm portafilter, a 2 L boiler body), take sizes from
+open accessory models only where their licence allows, and record each source and licence in the asset's
+`provenance.json`. The geometry is our own Blender recipe either way.

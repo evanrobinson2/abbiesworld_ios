@@ -1,112 +1,113 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-aw-own-look>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Abbie's café at every distance, its colours, moods, lighting and play.">
 <title>The café study</title>
-<link rel="stylesheet" href="/app-style.css?v=1">
-<style>
-/* AW-STUDY-0013 The Coffee Shop: the study, pictures first. Source of truth for the words: docs/oracle/cafe/CAFE_STUDY.md. */
-body{margin:0;background:var(--app-canvas,#f4edcf);color:var(--app-ink);font:15px/1.45 system-ui,-apple-system,sans-serif;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px}
-.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:34px}
-.id{font-size:12px;letter-spacing:.1em;color:var(--app-muted)}
-h1{margin:2px 0 0;font-size:26px}h2{margin:0 0 10px;font-size:19px}
-p{margin:0;color:var(--app-muted);max-width:68ch}
-figure{margin:0;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:16px;overflow:hidden;min-width:0;position:relative}
-figure img{display:block;width:100%;height:auto}
-figcaption{padding:7px 12px;font-size:13px;color:var(--app-muted)}
-figcaption b{color:var(--app-ink)}
-.hero img{max-height:72vh;object-fit:cover}
-.row{display:grid;gap:10px}
-.r4{grid-template-columns:repeat(4,minmax(0,1fr))}.r3{grid-template-columns:repeat(3,minmax(0,1fr))}.r2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.steps figure::after{content:'\2192';position:absolute;right:-14px;top:40%;font-size:20px;color:var(--app-muted);z-index:2}
-.steps figure:last-child::after{display:none}
-.steps{gap:18px}
-.steps img,.r4 img{aspect-ratio:1;object-fit:cover}
-.pin{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:#fff;color:#2a1030;font-weight:800;
-  display:grid;place-items:center;font-size:14px;box-shadow:0 2px 8px #0006;border:2px solid #2a1030}
-.zones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 18px;margin-top:10px;padding:0;list-style:none}
-.zones li{font-size:14px}.zones b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#2a1030;color:#fff;font-size:12px;margin-right:6px}
-table{border-collapse:collapse;width:100%;font-size:14px;background:var(--app-paper,#fffdf4);border-radius:14px;overflow:hidden}
-td,th{padding:8px 10px;border-bottom:1px solid var(--app-border);text-align:left;vertical-align:top}
-th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--app-muted)}
-.chips{display:flex;height:12px;border-radius:6px;overflow:hidden;margin:0 12px 10px}.chips i{flex:1}
-.rec{position:absolute;top:10px;left:10px;background:#e6007e;color:#fff;font-weight:700;font-size:12px;padding:4px 10px;border-radius:999px}
-.morning{filter:saturate(.25) sepia(.25) brightness(1.3) contrast(.85)}
-.ask{display:grid;gap:10px;counter-reset:q}
-.ask div{background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:14px;padding:12px 14px;font-size:15px}
-.ask div::before{counter-increment:q;content:counter(q);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#e6007e;color:#fff;font-weight:800;margin-right:10px;font-size:13px}
-@media (max-width:760px){.r4,.r3{grid-template-columns:repeat(2,minmax(0,1fr))}.steps figure::after{display:none}.zones{grid-template-columns:1fr 1fr}
- table{font-size:13px}td,th{padding:6px}}
-</style>
+<link rel="stylesheet" href="cafe.css?v=3">
+<!-- This study owns its look and does not load /app-style.css (Evan: studies overrule the app styling). Words: docs/oracle/cafe/CAFE_STUDY.md -->
 </head>
 <body>
 <div class="wrap">
- <header><div class="id">AW-STUDY-0013</div><h1>The café</h1></header>
 
- <figure class="hero"><img src="img/interior-party_0.jpg" alt="Evan's pick: the dance-party café room with a giant cup DJ booth"><figcaption><b>Your pick.</b> The dance-party room.</figcaption></figure>
+ <header class="hero">
+  <div class="eyebrow">AW-STUDY-0013</div>
+  <h1>Abbie's café</h1>
+  <p class="lede">A café by day, a dance party by night.</p>
+  <figure class="pic" style="margin-top:22px"><img src="img/interior-party_0.jpg" alt="Evan's pick: the dance-party café room"><figcaption>Your pick, locked</figcaption></figure>
+ </header>
 
  <section><h2>Four distances, one building</h2>
-  <div class="row r4 steps">
-   <figure><img src="img/tile-party_0.jpg" alt=""><figcaption><b>Map</b>: the hex</figcaption></figure>
-   <figure><img src="img/town-party_1.jpg" alt=""><figcaption><b>Town</b>: the corner</figcaption></figure>
-   <figure><img src="img/exterior-party_0.jpg" alt=""><figcaption><b>Front</b>: the door</figcaption></figure>
-   <figure><img src="img/interior-party_0.jpg" alt=""><figcaption><b>Inside</b>: the room</figcaption></figure>
+  <div class="grid g4">
+   <figure class="pic sq"><img src="img/tile-party_0.jpg" alt=""><figcaption>Map</figcaption></figure>
+   <figure class="pic sq"><img src="img/town-party_1.jpg" alt=""><figcaption>Town</figcaption></figure>
+   <figure class="pic sq"><img src="img/exterior-party_0.jpg" alt=""><figcaption>Front</figcaption></figure>
+   <figure class="pic sq"><img src="img/interior-party_0.jpg" alt=""><figcaption>Inside</figcaption></figure>
   </div>
-  <p style="margin-top:10px">One continuous camera move from the map to the door, then the roof and front wall lift away. No cuts or fades.</p>
- </section>
-
- <section><h2>The hex</h2>
-  <div class="row r4">
-   <figure><img src="img/tile-party_0.jpg" alt=""></figure><figure><img src="img/tile-party_1.jpg" alt=""></figure>
-   <figure><img src="img/tile-party_2.jpg" alt=""></figure><figure><img src="img/tile-party_3.jpg" alt=""></figure>
-  </div>
-  <p style="margin-top:10px">Built as a true hex, the same size as the Ranch. Small faceted mini icons on the turf (a milkshake, a cup, a record, a speaker) show what the café has today.</p>
  </section>
 
  <section><h2>The room</h2>
-  <figure><img src="img/interior-party_0.jpg" alt="">
+  <figure class="pic"><img src="img/interior-party_0.jpg" alt="">
    <span class="pin" style="left:22%;top:50%">1</span><span class="pin" style="left:44%;top:72%">2</span><span class="pin" style="left:47%;top:46%">3</span>
    <span class="pin" style="left:88%;top:60%">4</span><span class="pin" style="left:10%;top:76%">5</span><span class="pin" style="left:76%;top:25%">6</span>
   </figure>
-  <ul class="zones"><li><b>1</b>Stage: the music</li><li><b>2</b>Floor: the party</li><li><b>3</b>Doors: arrivals</li><li><b>4</b>Bar: Abbie makes</li><li><b>5</b>Lounge: the wait</li><li><b>6</b>Stars: the score</li></ul>
+  <div class="legend"><div><span>1</span>Stage</div><div><span>2</span>Dance floor</div><div><span>3</span>Arrivals</div><div><span>4</span>Milkshake bar</div><div><span>5</span>Lounge</div><div><span>6</span>Stars, the score</div></div>
+  <p style="margin-top:12px"><a href="manifest.html">Every item, in the manifest</a></p>
  </section>
 
- <section><h2>How it tells you</h2>
-  <table>
-   <tr><th>What</th><th>How</th></tr>
-   <tr><td>Score</td><td>Stars on the painted sign, echoed by the neon stars inside</td></tr>
-   <tr><td>The rush</td><td>A queue out the door, the bell rings faster, the beanbags fill</td></tr>
-   <tr><td>The party</td><td>The floor, neon and disco balls brighten; people dance; the music lifts</td></tr>
-   <tr><td>What they want</td><td>A picture bubble over the customer</td></tr>
-   <tr><td>Running low</td><td>An empty jar on the shelf; the mini icon on the hex dims</td></tr>
-   <tr><td>Money</td><td>Grown-up workbench only</td></tr>
-  </table>
- </section>
-
- <section><h2>Three styles</h2>
-  <div class="row r3">
-   <figure><img src="img/interior-elegant_0.jpg" alt=""><figcaption><b>Elegant</b></figcaption><div class="chips"><i style="background:#E8B4B8"></i><i style="background:#B5838D"></i><i style="background:#4A2040"></i><i style="background:#A39382"></i><i style="background:#D9C08C"></i><i style="background:#F4EDE1"></i></div></figure>
-   <figure><span class="rec">Recommended</span><img src="img/interior-party_0.jpg" alt=""><figcaption><b>Dance party</b>, with a painted wood sign and a door bell from the Ranch</figcaption><div class="chips"><i style="background:#E6007E"></i><i style="background:#7A3CFF"></i><i style="background:#FF8A2B"></i><i style="background:#B6E43A"></i><i style="background:#00B5C8"></i><i style="background:#FFD23F"></i></div></figure>
-   <figure><img src="img/interior-game_0.jpg" alt=""><figcaption><b>Typical 3D game</b></figcaption><div class="chips"><i style="background:#F49AC1"></i><i style="background:#8FD9B6"></i><i style="background:#7EC8E3"></i><i style="background:#F9E07F"></i><i style="background:#F7836B"></i><i style="background:#FFF6E5"></i></div></figure>
+ <section><h2>Colour</h2>
+  <div class="grid" style="gap:18px">
+   <div class="glass card"><span class="tag t-pink">Measured from your pick</span>
+    <div class="sw"><i style="--w:19.7;background:#7d1234"><b>#7d1234</b></i><i style="--w:14.1;background:#481416"><b>#481416</b></i><i style="--w:12.6;background:#a93329"><b>#a93329</b></i><i style="--w:11.8;background:#893172"><b>#893172</b></i><i style="--w:9.2;background:#da535f"><b>#da535f</b></i><i style="--w:7.8;background:#644b1f"><b>#644b1f</b></i><i style="--w:7.5;background:#204653"><b>#204653</b></i><i style="--w:7.2;background:#f3aba7"><b>#f3aba7</b></i><i style="--w:7;background:#c53dbe"><b>#c53dbe</b></i><i style="--w:3.2;background:#718cc7"></i></div>
+    <p style="margin-top:10px">Wine and plum walls, terracotta light, honey wood, teal shadow under the bar, blush highlights, neon magenta.</p></div>
+   <div class="glass card"><span class="tag t-teal">Eiseman: Energetic and Playful</span>
+    <div class="sw"><i style="background:#E6007E"><b>hot pink</b></i><i style="background:#7A3CFF"><b>violet</b></i><i style="background:#FF8A2B"><b>tangerine</b></i><i style="background:#B6E43A"><b>lime</b></i><i style="background:#00B5C8"><b>turquoise</b></i><i style="background:#FFD23F"><b>sun</b></i></div>
+    <p style="margin-top:10px">The accents: neon, beanbags, the bar, the stars. Surfaces stay in the deep measured colours, so the accents glow.</p></div>
+   <div class="grid g2">
+    <div class="glass card"><span class="tag t-sun">Day</span><div class="sw thin"><i style="background:#8a7877"></i><i style="background:#a79391"></i><i style="background:#c6b1b1"></i><i style="background:#e7d0d2"></i><i style="background:#fcf6f7"></i></div><p style="margin-top:8px">Soft rose and cream, neon asleep.</p></div>
+    <div class="glass card"><span class="tag t-violet">Night</span><div class="sw thin"><i style="background:#b7213f"></i><i style="background:#60181b"></i><i style="background:#d130c1"></i><i style="background:#354060"></i><i style="background:#f48991"></i><i style="background:#b6b0ed"></i></div><p style="margin-top:8px">Crimson, magenta, a cold blue floor shadow.</p></div>
+   </div>
   </div>
  </section>
 
- <section><h2>An option: café by day, party by night</h2>
-  <div class="row r2">
-   <figure><img class="morning" src="img/interior-party_0.jpg" alt=""><figcaption><b>Morning</b>: floor asleep, neon off (rough mock-up)</figcaption></figure>
-   <figure><img src="img/interior-party_0.jpg" alt=""><figcaption><b>Dusk</b>: the party is on</figcaption></figure>
+ <section><h2>Mood through the day</h2>
+  <div class="grid g5">
+   <div class="mood"><figure class="pic"><img src="img/mood/morning.jpg" alt=""></figure><span class="tag t-teal">Tranquil</span><h3>Morning</h3><p>The crew opens up. Pets asleep. Quiet music.</p></div>
+   <div class="mood"><figure class="pic"><img src="img/mood/midday.jpg" alt=""></figure><span class="tag t-sun">Friendly</span><h3>Midday</h3><p>Regulars, smoothies, sun on the bar.</p></div>
+   <div class="mood"><figure class="pic"><img src="img/mood/rush.jpg" alt=""></figure><span class="tag t-pink">Playful, tense</span><h3>Rush</h3><p>Queue out the door, the bell rings faster.</p></div>
+   <div class="mood"><figure class="pic"><img src="img/mood/party.jpg" alt=""></figure><span class="tag t-violet">Energetic</span><h3>Party</h3><p>The disco ball drops. Everyone dances in sync.</p></div>
+   <div class="mood"><figure class="pic"><img src="img/mood/closing.jpg" alt=""></figure><span class="tag t-teal">Cosy</span><h3>Closing</h3><p>Stars fly to the sign. The pets curl up.</p></div>
   </div>
+  <p style="margin-top:12px">Rough grades of your pick, to show the direction.</p>
+ </section>
+
+ <section><h2>Lighting</h2>
+  <div class="grid g3">
+   <div class="glass card"><span class="tag t-sun">Sun</span><h3>The window</h3><p>The one real key light. Bright by day, warm at dusk, gone at night. It drives the day.</p></div>
+   <div class="glass card"><span class="tag t-sun">Warm</span><h3>Downlights and bulbs</h3><p>Ceiling pools and the arch's marquee bulbs. Two or three real lights.</p></div>
+   <div class="glass card"><span class="tag t-pink">Faked glow</span><h3>Neon and the floor</h3><p>Bright unlit paint with a soft halo. The floor is one shader that pulses on the beat.</p></div>
+   <div class="glass card"><span class="tag t-violet">Faked glow</span><h3>Disco sparkle</h3><p>A few moving sparkle spots on the walls, no real lights.</p></div>
+   <div class="glass card"><span class="tag t-teal">Fill</span><h3>Pink and teal bounce</h3><p>Sky light tinted by the room: pink from the walls, teal from the bar.</p></div>
+   <div class="glass card"><span class="tag t-pink">One signal</span><h3>Day to party</h3><p>Time and the party level move all of it, with the music, together.</p></div>
+  </div>
+ </section>
+
+ <section><h2>Play</h2>
+  <div class="grid g3">
+   <div class="glass card"><span class="tag t-pink">The day</span><h3>Run the shop</h3><p>The crew opens up, customers come, party at dusk, close and count the stars. Do anything or nothing.</p></div>
+   <div class="glass card"><span class="tag t-teal">Game 1</span><h3>Espresso</h3><p>A mechatronics puzzle: fix the water, heat and pressure, then pull a golden shot.</p></div>
+   <div class="glass card"><span class="tag t-sun">Game 2</span><h3>Smoothie</h3><p>A timing game: drop, blend and top on the beat.</p></div>
+   <div class="glass card"><span class="tag t-violet">Game 3</span><h3>Dance party</h3><p>Follow my lead on the light-up floor, with a disco ball, real dance music and everyone in sync.</p></div>
+   <div class="glass card"><span class="tag t-pink">Meta</span><h3>Decorate</h3><p>Decoration cards, sets that combo, wall painting with the stylus, an art auction.</p></div>
+   <div class="glass card"><span class="tag t-teal">Meta-meta</span><h3>Your business</h3><p>The café runs in your town simulation, and you run it from the grown-up workbench.</p></div>
+   <div class="glass card"><span class="tag t-sun">Pets</span><h3>The café pets</h3><p>They nap, weave, dance and tell you things. Play with them, and teach them tricks over time.</p></div>
+   <div class="glass card"><span class="tag t-violet">1986</span><h3>Grace's computer</h3><p>A CRT you can really use, with our own typing tutor and a manual you can read.</p></div>
+   <div class="glass card"><span class="tag t-pink">Unlocks</span><h3>Looks only</h3><p>Skins, paint jobs, decorations and whole-café reskins.</p></div>
+  </div>
+ </section>
+
+ <section><h2>The back bar</h2>
+  <div class="grid g3">
+   <a class="link" href="round2.html"><figure class="pic"><img src="img/r2/backbar-front_0.jpg" alt=""><figcaption>Straight on</figcaption></figure></a>
+   <a class="link" href="round2.html"><figure class="pic"><img src="img/r2/backbar-wide_0.jpg" alt=""><figcaption>From the floor</figcaption></figure></a>
+   <a class="link" href="round2.html"><figure class="pic"><img src="img/r2/backbar-machines_0.jpg" alt=""><figcaption>The machines</figcaption></figure></a>
+  </div>
+ </section>
+
+ <section><h2>Pick a model style</h2>
+  <div class="grid g3">
+   <a class="link" href="round2.html"><figure class="pic sq"><img src="img/r2/asset-espresso-bricks_1.jpg" alt=""><figcaption>Toy bricks</figcaption></figure></a>
+   <a class="link" href="round2.html"><figure class="pic sq"><img src="img/r2/asset-espresso-vinyl_0.jpg" alt=""><figcaption>Vinyl toy</figcaption></figure></a>
+   <a class="link" href="round2.html"><figure class="pic sq"><img src="img/r2/asset-espresso-lowpoly_0.jpg" alt=""><figcaption>Low poly</figcaption></figure></a>
+  </div>
+  <p style="margin-top:12px"><a href="round2.html">All five pieces in all three styles</a></p>
  </section>
 
  <section><h2>Your call</h2>
-  <div class="ask">
-   <div>Dance party for the whole café, or a mix?</div>
-   <div>Café by day, party by night: yes or no?</div>
-   <div>Which hex picture to build from?</div>
-  </div>
+  <div class="ask"><div class="glass"><span class="n">1</span>Which style for the models: toy bricks, vinyl toy or low poly?</div></div>
  </section>
+
 </div>
 </body>
 </html>
