@@ -8,7 +8,7 @@ import * as T from '/vendor/three.module.js';
 import {cartoonLandmark} from '/simulations/developer-mode.mjs';
 import {planStorybookDressing} from '/simulations/storybook-dressing-plan.mjs';
 import {drawStorybookDressing} from '/simulations/storybook-dressing-render.mjs';
-const S = 2048, renderer = new T.WebGLRenderer({antialias: false, alpha: true, preserveDrawingBuffer: true});
+const S = window.CARTOON_SIZE || 2048, renderer = new T.WebGLRenderer({antialias: false, alpha: true, preserveDrawingBuffer: true});
 renderer.setPixelRatio(1); renderer.setSize(S, S); renderer.setClearColor(0, 0); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
 renderer.outputColorSpace = T.SRGBColorSpace; document.body.append(renderer.domElement);
 const ramp = new T.DataTexture(new Uint8Array([90, 90, 90, 255, 175, 175, 175, 255, 255, 255, 255, 255]), 3, 1);
