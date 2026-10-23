@@ -226,44 +226,50 @@ shop however she wants and decorating it", "and meta meta - it fits into my simu
 
 | Layer | Who plays | What it is |
 |---|---|---|
-| **Games** | Abbie | Three hands-on mini games: the coffee maker, the juice maker, the dance party |
+| **Games** | Abbie | Three hands-on mini games: the espresso machine (a mechatronics puzzle), the smoothie machine (a timing game), the dance party (rhythm) |
 | **Meta** | Abbie | Building out and decorating the shop however she wants (with wall painting and the art auction) |
 | **Meta-meta** | Evan | The café is a business inside the town simulation, and he runs it from the grown-up workbench |
 
 All three share one rule: **the machine is the controller.** No buttons in a drawer: you touch the real part (the
 grinder, the portafilter, the steam knob, the blender jar), and the world answers with sight and sound.
 
-### Game 1: the coffee maker (espresso)
+### Game 1: the espresso machine, a mechatronics puzzle (Evan, 07:23Z)
 
-The ultra-fine espresso machine, built from low-poly parts that work together (Evan: "low poly parts that perfectly
-build the system"): grinder and hopper, dosing cup, tamper, portafilter, group head, brew lever or button, pressure
-gauge, drip tray, steam wand and knob, hot-water tap, cup warmer on top, milk jug.
+Evan: "the espresso game is a mechatronics puzzle". The ultra-fine machine is built from low-poly parts that work
+together ("low poly parts that perfectly build the system"), and the game is getting that system to work: the
+Besiege and Bricktales kind of puzzle Evan likes, sized for a child.
 
-1. **Grind:** hold the grinder; the dose cup fills. Too little and the shot runs fast and pale.
-2. **Tamp:** press down; the coffee puck flattens with a satisfying thunk.
-3. **Lock in:** twist the portafilter into the group head (a quarter turn, with a click).
-4. **Pull the shot:** hold the button. The stream turns from dark to golden; let go when it goes blonde. The gauge
-   needle shows it happening (diegetic timing, no bar on screen).
-5. **Steam the milk:** dip the wand and tilt the jug. Listen: the hiss goes from a screech to a soft paper-tearing
-   sound when it's right (sound is the meter).
-6. **Pour and draw:** pour, then trace a heart or a star in the foam with a finger or the stylus (latte art, the
-   bridge to wall painting).
-7. **Serve:** the customer's picture bubble matches or doesn't; they hop, dance or sip politely.
+- **The parts are real:** water tank, pump, boiler with heating element, pressure valve, pipes and elbows, a
+  three-way valve, the group head, portafilter, pressure gauge, steam wand and knob, drip tray, grinder and hopper.
+- **Each puzzle is a broken or half-built machine.** Open the side panel and fix it: route the pipes from the tank
+  through the pump and the boiler to the group head, set the valve, swap in the right-sized part, tighten the gasket.
+- **The machine shows you why it fails, in the world:** no water (the tank's empty, the pump whirs dry), cold
+  (the boiler light stays dark, the shot steams weakly), no pressure (the gauge needle sags, the shot gushes pale),
+  a leak (a drip and a hiss at the bad joint). No error text.
+- **When it works, you pull a shot:** grind, tamp, lock the portafilter in with a quarter-turn click, hold the
+  button, and the stream turns golden while the gauge needle sits in the green. A customer is served with it.
+- **Levels grow the machine:** first the water path, then heat, then pressure, then steam for milk, then two group
+  heads for the rush. Later machines (a lever espresso, a moka pot, a cold-brew tower) reuse the same parts.
+- **Fair for a six-year-old:** parts only snap where they fit, a wrong part wobbles and pops out, and the hint is the
+  machine itself (the joint that's leaking glows softly for the player only, on the presentation layer).
 
-The existing six steps in `coffee-recipe.mjs` (cup, coffee, milk, foam, pour, serve) are the skeleton; the game
-replaces its worded buttons with the parts.
+The existing six steps in `coffee-recipe.mjs` (cup, coffee, milk, foam, pour, serve) become the final "pull a shot"
+part, done with the parts instead of worded buttons.
 
-### Game 2: the juice maker (smoothies and milkshakes)
+### Game 2: the smoothie machine, a timing game (Evan, 07:23Z)
 
-The giant bubbly smoothie machine. It's a **colour-mixing** game, which a child can read without words.
+Evan: "smoothie is timing game". The giant bubbly smoothie machine, on the café's beat.
 
-1. **Pick:** fruit and milk come from the neighbouring tiles (Garden berries, Ranch milk, Meadow honey, Moonbase
-   space treats), on a shelf of jars. An empty jar means the neighbour hasn't delivered.
-2. **Drop in:** each piece drops into the jar and sits as a coloured layer.
-3. **Blend:** hold the big button. The layers swirl into one colour. The customer's bubble shows the colour they
-   want; get close.
-4. **Top:** cream swirl, cherry, sprinkles, a straw. Tall and silly is good.
-5. **Serve** in the giant sundae glass.
+- **Fruit flies by on a little conveyor** (or drops from the jars on the shelf) in time with the music. Tap to drop
+  each piece into the jar on the beat; a perfect drop splashes and sparkles, a late one bonks off the rim.
+- **The order is in the customer's bubble** (a strawberry, a banana, milk), and the order of the drops matters:
+  the layers show in the glass jar.
+- **Blend on the beat:** hold for the right number of beats. Too short leaves chunks; too long and it foams over
+  the top (a funny overflow, never a fail).
+- **Top it in time:** cream swirl, cherry and sprinkles, each on the beat, then slide it down the bar to the
+  customer (the slide is the last timing tap).
+- **Ingredients come from the neighbours** (Garden berries, Ranch milk, Meadow honey, Moonbase space treats); an
+  empty jar means a neighbour hasn't delivered. Speed rises in the rush and with the party signal at dusk.
 
 ### Game 3: the dance party (party mode, at dusk)
 
@@ -322,8 +328,8 @@ reskins."
 ### Build order (after the style pick)
 
 1. Ultra-fine espresso machine and juice machine, as working low-poly part assemblies.
-2. Game 1 (coffee maker) on the existing recipe skeleton.
-3. Game 2 (juice maker).
+2. Game 1 (espresso mechatronics puzzle), ending in the existing recipe as the shot.
+3. Game 2 (smoothie timing game).
 4. Game 3 (dance party), using the dance floor and the Music Bible.
 5. Decorating, then wall painting, then the art auction.
 6. The business view in the grown-up workbench, wired to the town simulation.
