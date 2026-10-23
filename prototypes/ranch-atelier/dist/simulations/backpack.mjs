@@ -62,8 +62,9 @@ export const CORE_MEMORIES = 11; // Grace's basement 10 + the school roof 1, so 
 export const CHARMS = [
  // The first charm (Evan, 16:49Z): win the cell game, Abbie's science adventure, and get off the slide.
  {id: 'tardigrade', name: 'Tardigrade', icon: '🦠', quest: "Win Abbie's science adventure"},
- {id: 'first-memory', name: 'Gold coin', icon: '🪙', quest: "Find one of Daddy's core memories", when: s => s.coins >= 1},
- {id: 'basement', name: 'Floppy disk', icon: '💾', quest: "Find all ten memories in Grace's basement", when: s => s.places["Grace's basement"] >= 10},
+ // Every reward is a backpack charm (Evan, 20:51Z): no gold coin charm. The floppy disk is won by beating the word game
+ // in Grace's basement, two minutes of play in all; the basement game calls earnCharm('basement').
+ {id: 'basement', name: 'Floppy disk', icon: '💾', quest: "Beat the word game in Grace's basement (two minutes of play)"},
  {id: 'school-roof', name: 'Star', icon: '⭐', quest: 'Find the memory on the school roof', when: s => Object.keys(s.places).some(p => /school/i.test(p) && s.places[p] > 0)},
  {id: 'brass-key', name: 'Brass key', icon: '🗝️', quest: "Find the café's secret key", when: s => s.items.includes('cafe-basement-key')},
  {id: 'moon-key', name: 'Moon', icon: '🌙', quest: 'Earn the key to the Moon base', when: s => s.items.some(i => /moon/i.test(i))},
@@ -110,8 +111,11 @@ export function earnedCharms() {
 export const coinCount = () => progress().coins;
 // How many of a charm she owns (0 or 1, or the count for a repeatable one).
 export function charmCount(id) { const v = saved(), c = CHARMS.find(x => x.id === id); if (!c) return 0; if (c.repeat) return v.counts?.[id] || (v.charms?.[id] ? 1 : 0); return earnedCharms().includes(id) ? 1 : 0; }
-// What hangs on the backpack: each charm she has, a repeatable one up to its hang limit (moon cheese: two).
-export function keychain() { return earnedCharms().flatMap(id => { const c = CHARMS.find(x => x.id === id); return Array(Math.max(1, Math.min(charmCount(id), c.hang || 1))).fill(id); }); }
+// She keeps each charm on her backpack or in her jewellery box (Evan, 20:51Z). A new charm goes on the backpack.
+export const inBox = id => !!saved().boxed?.[id];
+export function putInBox(id, yes = true) { const v = saved(); v.boxed = {...(v.boxed || {})}; if (yes) v.boxed[id] = true; else delete v.boxed[id]; save(v); }
+// What hangs on the backpack: each charm she has and hasn't put away, a repeatable one up to its hang limit (moon cheese: two).
+export function keychain() { const boxed = saved().boxed || {}; return earnedCharms().filter(id => !boxed[id]).flatMap(id => { const c = CHARMS.find(x => x.id === id); return Array(Math.max(1, Math.min(charmCount(id), c.hang || 1))).fill(id); }); }
 // A charm she can win again (repeat: true) counts up instead; earnCharm then returns how many she has.
 export function earnCharm(id) {
  const c = CHARMS.find(x => x.id === id); if (!c) return false;
@@ -293,12 +297,7 @@ function charmMesh(id, m) {
  const gold = M('metal gold charm', '#f7c23c', {metalness: .55, roughness: .3, emissive: '#6a4600', emissiveIntensity: .4});
  const add = (geo, mat, name, x = 0, y = 0, z = 0) => { const o = new T.Mesh(geo, mat); o.name = name; o.position.set(x, y, z); g.add(o); return o; };
  const ext = (shape, d, mat, name, bev = .006) => { const geo = new T.ExtrudeGeometry(shape, {depth: d, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 1, curveSegments: 6}); geo.center(); return add(geo, mat, name); };
- if (id === 'first-memory') { // the gold coin of Daddy's core memories, a faceted star struck on both faces
-  add(new T.CylinderGeometry(.058, .058, .02, 14), gold, 'coin body').rotation.x = Math.PI / 2;
-  add(new T.TorusGeometry(.056, .007, 4, 14), gold, 'coin rim');
-  const st = add(gem(starPts(.034, .015), .004, .008), M('metal gold bright', '#ffd65a', {metalness: .9, roughness: .2, emissive: '#6a4a00', emissiveIntensity: .3}), 'struck star'); st.position.z = 0;
-  st.scale.z = 1.9;
- } else if (id === 'school-roof') { // the faceted gold star
+ if (id === 'school-roof') { // the faceted gold star
   add(gem(starPts(.066, .03), .01, .02), M('metal gold star', '#ffc93a', {metalness: .7, roughness: .3, emissive: '#6a4300', emissiveIntensity: .3}), 'faceted star');
  } else if (id === 'all-memories') { // the faceted red heart
   add(gem(heartPts(.052), .012, .022, [0, .005]), M('enamel heart red', '#e8334f', {roughness: .22, metalness: .1}), 'faceted heart');
@@ -311,12 +310,21 @@ function charmMesh(id, m) {
   add(gem(heartPts(.012, 10), .003, .004), M('enamel key red', '#e8334f', {roughness: .25}), 'bow heart', 0, .036, 0);
   add(new T.BoxGeometry(.013, .072, .012), gold, 'key shaft', 0, -.014, 0);
   add(new T.BoxGeometry(.024, .011, .012), gold, 'key bit', .012, -.042, 0); add(new T.BoxGeometry(.017, .01, .012), gold, 'key bit', .009, -.026, 0);
- } else if (id === 'basement') { // Grace's floppy disk
-  add(new T.BoxGeometry(.1, .1, .014), M('enamel floppy blue', '#3b5bd9', {roughness: .3}), 'floppy body');
-  add(new T.BoxGeometry(.052, .034, .016), M('metal shutter', '#d9dde4', {metalness: .8, roughness: .25}), 'floppy shutter', .006, .031, 0);
-  add(new T.BoxGeometry(.016, .022, .018), M('ink dark', '#26304f'), 'shutter window', .012, .031, 0);
-  add(new T.BoxGeometry(.072, .042, .016), M('paper label', '#fbf7ee', {roughness: .8}), 'floppy label', 0, -.022, 0);
-  add(new T.BoxGeometry(.05, .004, .017), M('ink label line', '#e8334f'), 'label line', 0, -.012, 0);
+ } else if (id === 'basement') { // Grace's floppy disk, after Evan's pick: blue enamel in dark metal, a silver shutter, a yellow label
+  const edge = M('metal floppy edge', '#3a3f52', {metalness: .7, roughness: .3}), blue = M('enamel floppy blue', '#2f55c8', {roughness: .24});
+  const silver = M('metal shutter', '#c9ccd2', {metalness: .85, roughness: .22}), dark = M('ink dark', '#1d2436');
+  const body = new T.Shape(); body.moveTo(-.05, -.05); body.lineTo(.05, -.05); body.lineTo(.05, .04); body.lineTo(.04, .05); body.lineTo(-.05, .05); body.closePath();
+  ext(body, .008, edge, 'floppy rim', .003);
+  const face = new T.Shape(); face.moveTo(-.046, -.046); face.lineTo(.046, -.046); face.lineTo(.046, .038); face.lineTo(.038, .046); face.lineTo(-.046, .046); face.closePath();
+  ext(face, .012, blue, 'floppy body', .002);
+  add(new T.BoxGeometry(.05, .032, .02), silver, 'floppy shutter', -.004, .03, 0);
+  add(new T.BoxGeometry(.016, .026, .023), M('enamel slider white', '#f4f1e8', {roughness: .5}), 'shutter slider', -.01, .03, 0);
+  add(new T.BoxGeometry(.01, .02, .023), dark, 'shutter window', .01, .03, 0);
+  add(new T.BoxGeometry(.068, .03, .02), M('enamel label yellow', '#f2c94c', {roughness: .35}), 'floppy label', .004, -.012, 0);
+  add(new T.BoxGeometry(.026, .006, .023), M('enamel label blue', '#7fd3f5', {roughness: .3}), 'label bar', .018, -.008, 0);
+  for (const x of [-.02, -.01]) add(new T.BoxGeometry(.005, .005, .023), dark, 'label dot', x, -.018, 0);
+  add(new T.BoxGeometry(.058, .012, .019), edge, 'floppy slot', .008, -.038, 0);
+  for (const [x, y] of [[-.042, .042], [-.042, -.042], [.042, -.042], [.038, .034]]) add(new T.BoxGeometry(.006, .006, .019), edge, 'corner screw', x, y, 0);
  } else if (id === 'moon-cheese') { // a wedge of moon cheese: pale gold, faceted, with crater holes on its faces
   const cheese = M('enamel moon cheese', '#f0bf2a', {roughness: .4, emissive: '#4a3200', emissiveIntensity: .12}), hole = M('enamel cheese hole', '#b97a10', {roughness: .6});
   const w = new T.Shape(); w.moveTo(-.05, -.03); w.lineTo(.05, -.03); w.lineTo(-.05, .045); w.closePath();
@@ -565,23 +573,29 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
   front: [[-.17, .76], [.17, .76], [-.17, .24], [.17, .24], [0, .24]].map(([x, y]) => new T.Vector3(x * W / .78, y * H, -.07))
  };
  let openT = 0;
- const tmp = new T.Vector3(), inv = new T.Matrix4();
+ const tmp = new T.Vector3(), wp = new T.Vector3(), wq = new T.Quaternion(), inv = new T.Matrix4();
  return {
   group: root, front, back, H, W, half, sockets, look: l, charms: pend,
   get open() { return openT; },
   setOpen(t) { openT = t; front.rotation.x = t * Math.PI; },
-  update(dt) {
+  // world: the swing follows how the ring moves through the world (a backpack worn by a walking figure), in metres,
+  // turned into the backpack's own frame; otherwise it follows the ring inside the backpack (the viewer's toy).
+  update(dt, {world = false, gain = .02} = {}) {
    root.updateMatrixWorld(true); inv.copy(root.matrixWorld).invert();
+   if (world) root.getWorldQuaternion(wq).invert();
    for (const p of pend) {
     tmp.setFromMatrixPosition(p.anchor.matrixWorld).applyMatrix4(inv);
-    if (p.last) { const v = tmp.clone().sub(p.last).divideScalar(Math.max(dt, 1e-3)); const a = v.clone().sub(p.vel).divideScalar(Math.max(dt, 1e-3)); p.vel.copy(v);
+    if (world) wp.setFromMatrixPosition(p.anchor.matrixWorld);
+    const at = world ? wp : tmp;
+    if (p.last) { const v = at.clone().sub(p.last).divideScalar(Math.max(dt, 1e-3)); const a = v.clone().sub(p.vel).divideScalar(Math.max(dt, 1e-3)); p.vel.copy(v);
+     if (world) a.applyQuaternion(wq).clampLength(0, 60);
      // A damped pendulum driven by how its ring moves (and a breath of idle sway).
      const L = .12, g = 9.8, k = dt;
-     p.vx += (-(g / L) * Math.sin(p.ax) - a.z / L * .02 - 3.2 * p.vx) * k + Math.sin(performance.now() / 900 + p.id.length) * .002;
-     p.vz += (-(g / L) * Math.sin(p.az) + a.x / L * .02 - 3.2 * p.vz) * k;
+     p.vx += (-(g / L) * Math.sin(p.ax) - a.z / L * gain - 3.2 * p.vx) * k + Math.sin(performance.now() / 900 + p.id.length) * .002;
+     p.vz += (-(g / L) * Math.sin(p.az) + a.x / L * gain - 3.2 * p.vz) * k;
      p.ax = Math.max(-1.2, Math.min(1.2, p.ax + p.vx * k)); p.az = Math.max(-1.2, Math.min(1.2, p.az + p.vz * k));
     }
-    p.last = (p.last || new T.Vector3()).copy(tmp);
+    p.last = (p.last || new T.Vector3()).copy(at);
     p.mesh.position.copy(tmp); p.mesh.rotation.set(p.ax, p.id.length * .7, p.az);
    }
   }
