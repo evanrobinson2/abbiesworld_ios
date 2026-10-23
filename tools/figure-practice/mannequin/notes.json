@@ -104,5 +104,29 @@
       "faces": 13650,
       "how": "SMOOTH=1 python build.py: same parts and pose, 3x segments, smooth shaded"
     }
+  ],
+  "poses": [
+    {
+      "pose": 2,
+      "name": "standing, front view",
+      "asked": "running stride (picked 16:40Z by Claude as recommended on the pose card; Evan had not answered)",
+      "why_changed": "No freely licensed running-mannequin photo was found on Wikimedia Commons (searched 17:12Z); Commons search pages are blocked from the cloud container, only upload.wikimedia.org thumbnails load.",
+      "reference": {
+        "source": "Wikimedia Commons",
+        "file": "File:Wooden_Mannequin.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Wooden_Mannequin.jpg",
+        "note": "reference only, never copied; image not committed (licence page could not be read from the container); 500px thumbnail used"
+      },
+      "recipe": "POSE=pose2/pose.json build.py; score with POSE=... MASK=<ref mask> score.py / limbs.py (mask: non-white pixels above the base, pole opened out, mapped into the leap's 866x1290 frame at scale 1.47)",
+      "rounds": [
+        {
+          "round": 1,
+          "iou": 0.798,
+          "faces": 1538,
+          "change": "first build from joints read off the reference",
+          "lesson": "Pose transfers cleanly when joints and true bone lengths are right (first try 0.80 vs the leap's 0.71). The remaining miss is part size: a real mannequin's head and chest are bigger and blockier than the leap-tuned ones."
+        }
+      ]
+    }
   ]
 }
