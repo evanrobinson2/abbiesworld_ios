@@ -40,6 +40,23 @@
     },
     "camera": "side",
     "art_direction": "Charcoal grey.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "hand_painted_2d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "paper",
+      "post": [
+        "colour grade",
+        "vignette"
+      ],
+      "signature": "Charcoal-grey 2.5D with a pencil and paper grain.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "A grain over everything sets the emotional temperature."
+    },
     "palette": null,
     "audio_mood": "Sombre.",
     "pacing": "slow, long sessions",

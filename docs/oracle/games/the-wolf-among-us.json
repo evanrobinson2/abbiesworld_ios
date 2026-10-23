@@ -39,6 +39,22 @@
     },
     "camera": "third_person",
     "art_direction": "Comic noir.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "toon",
+      "family": "comic_ink",
+      "light": "banded",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "hand_painted",
+      "post": [
+        "colour grade"
+      ],
+      "signature": "Inked comic panels: lines and shadow shapes drawn into textures, then a heavy neon colour grade per scene.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.65,
+      "lesson": "A per-scene colour grade can do the mood work while the shading stays simple."
+    },
     "palette": null,
     "audio_mood": "Synth.",
     "pacing": "slow, short sessions",

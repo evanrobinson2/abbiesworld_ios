@@ -38,6 +38,22 @@
     },
     "camera": "first_person",
     "art_direction": "Painted 3D memories.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "storybook",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "bloom",
+        "depth of field"
+      ],
+      "signature": "Painted 3D memories that dissolve when you blink.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
+    },
     "palette": null,
     "audio_mood": "Gentle score.",
     "pacing": "slow, short sessions",

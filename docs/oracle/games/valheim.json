@@ -41,6 +41,23 @@
     },
     "camera": "third_person",
     "art_direction": "Low-poly with modern light.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "retro_low_poly",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pixel",
+      "post": [
+        "volumetric fog",
+        "bloom"
+      ],
+      "signature": "Low-poly, low-resolution textures under modern volumetric light, fog and shadows.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.7,
+      "lesson": "Rough low-fi models can look beautiful when the light and air are modern."
+    },
     "palette": null,
     "audio_mood": "Atmospheric.",
     "pacing": "brisk, long sessions",

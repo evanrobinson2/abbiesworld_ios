@@ -75,6 +75,24 @@
     },
     "camera": "orbit_diorama",
     "art_direction": "Soft diorama.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "soft_diorama",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "ambient occlusion",
+        "bloom",
+        "colour grade"
+      ],
+      "signature": "Soft global light and procedural detail on clean shapes; warm sun, cool bounce and contact shadows do everything.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.7,
+      "lesson": "Soft bounce light and contact shadows make simple shapes look handmade."
+    },
     "palette": null,
     "audio_mood": "Gentle ambient.",
     "pacing": "slow, short sessions",

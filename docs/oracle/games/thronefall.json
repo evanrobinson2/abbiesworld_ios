@@ -41,6 +41,22 @@
     },
     "camera": "orbit_diorama",
     "art_direction": "Flat-shaded pastel low-poly.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "flat_low_poly",
+      "family": "flat_low_poly",
+      "light": "banded",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [
+        "fog"
+      ],
+      "signature": "Flat-shaded pastel low-poly with crisp sun shadows and a day and night swap.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Faceted normals plus one strong sun is enough for a whole art direction."
+    },
     "palette": null,
     "audio_mood": "Calm day music, drums at night.",
     "pacing": "brisk, short sessions",

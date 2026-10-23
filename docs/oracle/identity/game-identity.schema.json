@@ -391,6 +391,28 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "family": {
+                  "description": "Finer look than style (oracle.rendering.v1, tools/steam-study/rendering_notes.py).",
+                  "enum": ["toon", "comic_ink", "painterly_3d", "hand_painted_2d", "watercolour", "storybook", "soft_diorama", "flat_low_poly", "cut_paper", "line_art", "graphic_minimal", "voxel", "pixel", "pixel_3d", "retro_low_poly", "pre_rendered", "stylised_pbr", "realistic"]
+                },
+                "light": {
+                  "description": "How light falls on surfaces.",
+                  "enum": ["banded", "soft_wrap", "painted_in", "flat", "pbr"]
+                },
+                "outline": {
+                  "description": "Where the lines come from.",
+                  "enum": ["none", "inverted_hull", "screen_edges", "inked_in", "line_art"]
+                },
+                "surface": {
+                  "enum": ["flat_colour", "gradient", "hand_painted", "paper", "watercolour", "pixel", "pbr"]
+                },
+                "signature": {
+                  "type": ["string", "null"],
+                  "description": "The one trick that makes the look, in our own words."
+                },
+                "lesson": {
+                  "type": "string"
                 }
               }
             },

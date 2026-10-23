@@ -40,6 +40,22 @@
     },
     "camera": "side",
     "art_direction": "Pixel art over 3D backgrounds.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "pixel_3d",
+      "light": "painted_in",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pixel",
+      "post": [
+        "fog",
+        "bloom"
+      ],
+      "signature": "Pixel-art sprites over 3D underwater backgrounds lit with fog and light shafts.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55
+    },
     "palette": null,
     "audio_mood": "Laid-back score.",
     "pacing": "brisk, medium sessions",

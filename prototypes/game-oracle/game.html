@@ -78,7 +78,10 @@ async function load(){
   h+=`<h2>How it shows information</h2><p>${esc(g.note||'')}</p><div class="mix">${Object.entries(mix).map(([m,v])=>`<span title="${esc(MODES[m]?.[0]||m)}" style="width:${v/tot*100}%;background:${MODES[m]?.[1]||'#999'}"></span>`).join('')}</div>
   <div class="keys">${Object.entries(mix).map(([m,v])=>`<span><em style="background:${MODES[m]?.[1]||'#999'}"></em>${esc(MODES[m]?.[0]||m)} ${Math.round(v/tot*100)}%</span>`).join('')}</div>`;
   const hud=g.screen_budget?.hud_coverage?.value;if(hud!=null)h+=`<p class="meta">Screen interface covers about ${Math.round(hud*100)}% (our target is 8% or less).</p>`;}
- h+=sec('Camera',i.camera)+sec('Art',i.art_direction)+sec('Sound',i.audio_mood)+sec('Pacing',i.pacing);
+ h+=sec('Camera',i.camera)+sec('Art',i.art_direction);
+ const rd=i.rendering;if(rd){const L={banded:'stepped light bands',soft_wrap:'soft wrapped light',painted_in:'light painted into the art',flat:'flat, almost no shading',pbr:'physical light'},O={none:'no outlines',inverted_hull:'outlines from a pushed-out shell',screen_edges:'outlines found on screen',inked_in:'lines drawn into the art',line_art:'lines carry the form'};
+  h+=`<h2>How it's drawn</h2><p>${esc(rd.signature||'')}</p><div class="keys">${[rd.family,L[rd.light]||rd.light,O[rd.outline]||rd.outline,rd.surface,...(rd.post||[])].filter(Boolean).map(t=>`<span>${esc(String(t).replace(/_/g,' '))}</span>`).join('')}</div>${rd.lesson?`<p>${esc(rd.lesson)}</p>`:''}<p class="meta">${rd.source?.startsWith('derived')?'Read from the art note':'Studied by hand'}, confidence ${esc(rd.confidence)}.</p>`;}
+ h+=sec('Sound',i.audio_mood)+sec('Pacing',i.pacing);
  if(record)h+=`<h2>Full identity record</h2><p>${esc(record.core?.fantasy||'')}</p>`;
  h+=`<p class="meta">Estimates from public knowledge, confidence ${esc(p?.dna?.confidence??'')}. <a href="/steam">Library</a> · <a href="/api/knowledge?identity=${esc(id)}">JSON</a></p>`;
  $('#main').innerHTML=h;

@@ -39,6 +39,21 @@
     },
     "camera": "first_person",
     "art_direction": "Black and white with red.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "graphic_minimal",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+        "colour grade"
+      ],
+      "signature": "Black and white with only red left in colour.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55
+    },
     "palette": null,
     "audio_mood": "Ambient.",
     "pacing": "slow, short sessions",
