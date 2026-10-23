@@ -1,0 +1,12 @@
+{
+  "bruiser_meshy": {
+    "model": "meshy/bruiser_meshy.glb",
+    "best_yaw_deg": 23,
+    "iou_vs_picture": 0.9607
+  },
+  "bruiser_recipe_lowpoly": {
+    "model": "recipe/out/bruiser_recipe_lowpoly.glb",
+    "best_yaw_deg": 27,
+    "iou_vs_picture": 0.8273
+  }
+}

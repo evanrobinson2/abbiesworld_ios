@@ -19,6 +19,21 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 STUDY = os.path.dirname(HERE)
 MESHY_GLB = os.path.join(STUDY, "meshy", "bruiser_meshy.glb")
 
+# Head knobs: one signed number per named feature, mapped onto MakeHuman's paired targets
+# (positive drives the first target, negative the second). 0 = the body's own head.
+HEAD_KNOBS = {
+    "width": ("head/head-scale-horiz-incr", "head/head-scale-horiz-decr"),
+    "depth": ("head/head-scale-depth-incr", "head/head-scale-depth-decr"),
+    "height": ("head/head-scale-vert-incr", "head/head-scale-vert-decr"),
+    "square": ("head/head-square", "head/head-round"),
+    "jaw_width": ("chin/chin-width-incr", "chin/chin-width-decr"),
+    "jaw_forward": ("chin/chin-prognathism-incr", "chin/chin-prognathism-decr"),
+    "chin_height": ("chin/chin-height-incr", "chin/chin-height-decr"),
+    "brow_forward": ("eyebrows/eyebrows-trans-forward", "eyebrows/eyebrows-trans-backward"),
+    "forehead_forward": ("forehead/forehead-trans-forward", "forehead/forehead-trans-backward"),
+    "head_forward": ("head/head-trans-forward", "head/head-trans-backward"),
+}
+
 MATERIALS = {"skin": (0.62, 0.60, 0.58), "tank_top": (0.48, 0.49, 0.50), "shorts": (0.38, 0.39, 0.41)}
 
 
@@ -52,6 +67,10 @@ def build_body(card):
         if rel.startswith("_"):
             continue
         TargetService.load_target(body, os.path.join(tdir, rel + ".target.gz"), weight=w, name=os.path.basename(rel))
+    for pos, neg in HEAD_KNOBS.values():
+        for rel in (pos, neg):
+            if os.path.basename(rel) not in body.data.shape_keys.key_blocks:
+                TargetService.load_target(body, os.path.join(tdir, rel + ".target.gz"), weight=0.0, name=os.path.basename(rel))
     for k in body.data.shape_keys.key_blocks:
         k.slider_max = 3.0  # let the card push a target past MakeHuman's own maximum
     meta = HumanService.add_builtin_rig(body, "rigify.human_toes", import_weights=True)
@@ -72,6 +91,12 @@ def apply_card(card, body, rig):
     for rel, w in card["shape"].items():
         if not rel.startswith("_") and os.path.basename(rel) in keys:
             keys[os.path.basename(rel)].value = w
+    for knob, v in card.get("head", {}).items():
+        if knob.startswith("_"):
+            continue
+        pos, neg = HEAD_KNOBS[knob]
+        keys[os.path.basename(pos)].value = max(v, 0.0)
+        keys[os.path.basename(neg)].value = max(-v, 0.0)
     s = card["stylise"]
     pb = rig.pose.bones
     for b in pb:
@@ -299,7 +324,28 @@ def frame(obj, view, res=(256, 256), margin=1.08):
     scene.render.resolution_x, scene.render.resolution_y = res
 
 
-def silhouette(obj, view, res=(256, 256)):
+HEAD_WINDOW = 0.17  # top fraction of body height that holds the head and neck
+
+
+def frame_head(obj, view, res=(256, 256)):
+    """Close-up camera on the head: the top HEAD_WINDOW of the body, scaled by full height
+    so head size relative to the body still counts."""
+    scene = bpy.context.scene
+    cam = scene.camera
+    pts = world_points(obj)
+    lo, hi = pts.min(0), pts.max(0)
+    h = hi[2] - lo[2]
+    top = pts[pts[:, 2] > hi[2] - HEAD_WINDOW * h]
+    c = (top.min(0) + top.max(0)) / 2
+    cam.data.ortho_scale = h * HEAD_WINDOW * 1.25
+    rx, ry, rz = (math.radians(a) for a in VIEWS[view])
+    cam.rotation_euler = (rx, ry, rz)
+    d = Matrix.Rotation(rz, 4, "Z") @ Vector((0, -10 * h, 0))
+    cam.location = Vector((c[0], c[1], hi[2] - HEAD_WINDOW * h / 2)) + d
+    scene.render.resolution_x, scene.render.resolution_y = res
+
+
+def silhouette(obj, view, res=(256, 256), head=False):
     """Binary mask of obj from a view, as a numpy bool array (H, W)."""
     scene = bpy.context.scene
     shown = {o: o.hide_render for o in scene.objects}
@@ -313,7 +359,9 @@ def silhouette(obj, view, res=(256, 256)):
     scene.render.image_settings.file_format = "PNG"
     scene.render.image_settings.color_mode = "RGBA"
     frame(obj, view, res)
-    path = os.path.join(bpy.app.tempdir, f"sil_{obj.name}_{view}.png")
+    if head:
+        frame_head(obj, view, res)
+    path = os.path.join(bpy.app.tempdir, f"sil_{obj.name}_{view}{'_head' if head else ''}.png")
     scene.render.filepath = path
     bpy.ops.render.render(write_still=True)
     for o, h in shown.items():
@@ -337,7 +385,7 @@ def overlay(target, ours):
     return img
 
 
-def shaded(obj, view, path, res=(800, 1000)):
+def shaded(obj, view, path, res=(800, 1000), head=False):
     """Studio render of obj alone from a view (the screenshots in the study)."""
     scene = bpy.context.scene
     shown = {o: o.hide_render for o in scene.objects}
@@ -353,6 +401,8 @@ def shaded(obj, view, path, res=(800, 1000)):
     scene.world.color = (0.42, 0.43, 0.42)
     scene.render.image_settings.color_mode = "RGB"
     frame(obj, view, res, margin=1.12)
+    if head:
+        frame_head(obj, view, res)
     scene.render.filepath = path
     bpy.ops.render.render(write_still=True)
     for o, h in shown.items():

@@ -1,0 +1,136 @@
+{
+  "id": "brute2",
+  "study": "AW-STUDY-0021 Bruiser Study",
+  "says": "A huge, top-heavy brawler: small blocky bald head, heavy brow, neck as wide as his jaw, giant shoulders and forearms, big hands, legs shorter than his torso suggests. Grey tank top and grey shorts, barefoot. Faceted low-poly.",
+  "body": {
+    "_doc": "MPFB (MakeHuman) macros, 0..1. These make a real human body, so anatomy stays correct.",
+    "gender": 1.0,
+    "age": 0.5,
+    "muscle": 1.0,
+    "weight": 1.0,
+    "proportions": 1.0,
+    "height": 0.75
+  },
+  "shape": {
+    "_doc": "MPFB detail targets, 0..1 weight each. Names are the target files under MPFB data/targets.",
+    "torso/measure-shoulder-dist-incr": 1.125,
+    "torso/torso-scale-horiz-incr": 1.0,
+    "torso/torso-scale-depth-incr": 3.05,
+    "torso/torso-muscle-pectoral-incr": 1.675,
+    "torso/torso-muscle-dorsi-incr": 0.813,
+    "torso/measure-waist-circ-incr": 0.3,
+    "arms/l-upperarm-muscle-incr": 0.75,
+    "arms/r-upperarm-muscle-incr": 0.75,
+    "arms/l-lowerarm-muscle-incr": 3.0,
+    "arms/r-lowerarm-muscle-incr": 3.0,
+    "arms/l-upperarm-shoulder-muscle-incr": 0.0,
+    "arms/r-upperarm-shoulder-muscle-incr": 0.0,
+    "neck/measure-neck-circ-incr": 1.0,
+    "neck/neck-scale-horiz-incr": 1.0,
+    "neck/measure-neck-height-decr": 0.6,
+    "genitals/penis-length-decr": 1.0,
+    "genitals/penis-circ-decr": 1.0,
+    "genitals/penis-testicles-decr": 1.0,
+    "pelvis/bulge-decr": 1.0,
+    "chin/chin-prominent-incr": 1.0,
+    "chin/chin-bones-incr": 1.0,
+    "eyebrows/eyebrows-trans-down": 0.6
+  },
+  "stylise": {
+    "_doc": "Cartoon proportions on top of the real body, as Rigify bone scales (1 = real anatomy). girth scales across the bone, length along it. Children inherit (a bigger forearm also means a bigger hand).",
+    "head": 0.72,
+    "neck_girth": 1.575,
+    "upper_arm_girth": 1.0,
+    "forearm_girth": 0.737,
+    "forearm_length": 0.926,
+    "hand": 1.212,
+    "thigh_girth": 1.0,
+    "shin_girth": 0.72,
+    "leg_length": 0.75,
+    "foot": 1.04
+  },
+  "pose": {
+    "_doc": "Degrees. Arms hang this far off vertical; elbows bend forward this much.",
+    "arm_drop_from_vertical": 22.0,
+    "elbow_bend": 22.5
+  },
+  "outfit": {
+    "_doc": "Cloth as a thin shell over the skin, cut at body landmarks so hems are clean. Landmarks come from the Rigify bones: waist = top of the lower spine (DEF-spine.001 head), mid_thigh = where the thigh's two deform bones meet, chest = DEF-spine.003 head, neck_base = top of the shoulders (DEF-shoulder heads; his neck bone starts inside the trapezius). Arms and hands are never cloth.",
+    "thickness": 0.006,
+    "tank_top": {
+      "from": "waist",
+      "to": "neck_base",
+      "neckline_drop": 0.45,
+      "overlap_shorts": 0.04
+    },
+    "shorts": {
+      "from": "mid_thigh",
+      "to": "waist",
+      "overlap_tank": 0.04
+    }
+  },
+  "lowpoly": {
+    "_doc": "Decimate collapse ratio of the ~13k-face body, then flat shading.",
+    "ratio": 0.08
+  },
+  "head": {
+    "_doc": "Signed head knobs (see bruiser_lib.HEAD_KNOBS): + drives the first MakeHuman target, - the second. 0 = the body's own head.",
+    "width": 1.375,
+    "depth": -0.5,
+    "height": 0.5,
+    "square": 1.812,
+    "jaw_width": 1.0,
+    "jaw_forward": -1.5,
+    "chin_height": -1.5,
+    "brow_forward": 1.25,
+    "forehead_forward": 2.5,
+    "head_forward": 1.0
+  },
+  "fit": {
+    "body": {
+      "target": "meshy2/brute2_meshy.glb",
+      "views": [
+        "front",
+        "three_quarter",
+        "side",
+        "back"
+      ],
+      "iou_start": 0.7336,
+      "iou": 0.7616,
+      "per_view_start": {
+        "front": 0.7607,
+        "three_quarter": 0.7091,
+        "side": 0.7042,
+        "back": 0.7605
+      },
+      "per_view": {
+        "front": 0.7915,
+        "three_quarter": 0.6802,
+        "side": 0.7832,
+        "back": 0.7915
+      },
+      "steps": 30
+    },
+    "head": {
+      "target": "meshy2/brute2_meshy.glb",
+      "views": [
+        "front",
+        "three_quarter",
+        "side"
+      ],
+      "iou_start": 0.8523,
+      "iou": 0.8996,
+      "per_view_start": {
+        "front": 0.8883,
+        "three_quarter": 0.8508,
+        "side": 0.8178
+      },
+      "per_view": {
+        "front": 0.9093,
+        "three_quarter": 0.9036,
+        "side": 0.8858
+      },
+      "steps": 52
+    }
+  }
+}

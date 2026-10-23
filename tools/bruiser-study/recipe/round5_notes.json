@@ -1,0 +1,218 @@
+{
+  "study": "AW-STUDY-0021 Bruiser Study",
+  "round": 5,
+  "date": "2026-10-23",
+  "asked": "Evan: learn the process, not dress Meshy's mesh. Coordinator brief: head close-up fit, brute 2 from brute 1's learned settings with a carry-over table, picture-only guess vs fit; score silhouette IoU against Meshy from front, three-quarter, side and back with shots every step.",
+  "method": {
+    "body_fit": "fit_to_meshy.py body mode: 19 named knobs (bone scales, MakeHuman muscle/shape weights incl. paired left/right arm muscles, pose degrees), coordinate descent, mean IoU over front, three-quarter, side and back; a screenshot per kept step in steps_body/.",
+    "head_fit": "fit_to_meshy.py head mode: 10 new signed head knobs (bruiser_lib.HEAD_KNOBS: width, depth, height, square, jaw_width, jaw_forward, chin_height, brow_forward, forehead_forward, head_forward) plus head scale, scored on close-ups of the top 17% of the body from front, three-quarter and side; steps in steps_head/.",
+    "picture_only_guess": "A separate agent that never saw brute 2's 3D or fitted values estimated his settings by eye from his picture, given brute 1's picture and fitted card (brute2/character.eye_guess.json, reasons in eye_guess_notes). Built and scored without any fitting.",
+    "carryover_only": "Brute 1's final settings built unchanged and scored against brute 2's Meshy model (brute2/carryover_only/)."
+  },
+  "results": {
+    "brute1": {
+      "body_fit": {
+        "target": "meshy/bruiser_meshy.glb",
+        "views": [
+          "front",
+          "three_quarter",
+          "side",
+          "back"
+        ],
+        "iou_start": 0.8233,
+        "iou": 0.8448,
+        "per_view_start": {
+          "front": 0.8398,
+          "three_quarter": 0.7977,
+          "side": 0.816,
+          "back": 0.8397
+        },
+        "per_view": {
+          "front": 0.8627,
+          "three_quarter": 0.8347,
+          "side": 0.8191,
+          "back": 0.8628
+        },
+        "steps": 37
+      },
+      "head_fit": {
+        "target": "meshy/bruiser_meshy.glb",
+        "views": [
+          "front",
+          "three_quarter",
+          "side"
+        ],
+        "iou_start": 0.9227,
+        "iou": 0.9466,
+        "per_view_start": {
+          "front": 0.9696,
+          "three_quarter": 0.9436,
+          "side": 0.8551
+        },
+        "per_view": {
+          "front": 0.9699,
+          "three_quarter": 0.9631,
+          "side": 0.9068
+        },
+        "steps": 48
+      },
+      "final_scores": {
+        "body": {
+          "front": 0.8597,
+          "side": 0.8206,
+          "back": 0.8596,
+          "three_quarter": 0.8358,
+          "mean": 0.8439
+        },
+        "head": {
+          "front": 0.9693,
+          "three_quarter": 0.9625,
+          "side": 0.9113,
+          "mean": 0.9477
+        },
+        "body_lowpoly": {
+          "front": 0.8579,
+          "side": 0.8174,
+          "back": 0.8579,
+          "three_quarter": 0.8343,
+          "mean": 0.8419
+        },
+        "faces": {
+          "smooth": 15118,
+          "lowpoly": 2281
+        }
+      }
+    },
+    "brute2": {
+      "body_fit": {
+        "target": "meshy2/brute2_meshy.glb",
+        "views": [
+          "front",
+          "three_quarter",
+          "side",
+          "back"
+        ],
+        "iou_start": 0.7336,
+        "iou": 0.7616,
+        "per_view_start": {
+          "front": 0.7607,
+          "three_quarter": 0.7091,
+          "side": 0.7042,
+          "back": 0.7605
+        },
+        "per_view": {
+          "front": 0.7915,
+          "three_quarter": 0.6802,
+          "side": 0.7832,
+          "back": 0.7915
+        },
+        "steps": 30
+      },
+      "head_fit": {
+        "target": "meshy2/brute2_meshy.glb",
+        "views": [
+          "front",
+          "three_quarter",
+          "side"
+        ],
+        "iou_start": 0.8523,
+        "iou": 0.8996,
+        "per_view_start": {
+          "front": 0.8883,
+          "three_quarter": 0.8508,
+          "side": 0.8178
+        },
+        "per_view": {
+          "front": 0.9093,
+          "three_quarter": 0.9036,
+          "side": 0.8858
+        },
+        "steps": 52
+      },
+      "final_scores": {
+        "body": {
+          "front": 0.7825,
+          "side": 0.8124,
+          "back": 0.7827,
+          "three_quarter": 0.6715,
+          "mean": 0.7623
+        },
+        "head": {
+          "front": 0.9092,
+          "three_quarter": 0.9009,
+          "side": 0.8843,
+          "mean": 0.8981
+        },
+        "body_lowpoly": {
+          "front": 0.7856,
+          "side": 0.812,
+          "back": 0.7855,
+          "three_quarter": 0.6721,
+          "mean": 0.7638
+        },
+        "faces": {
+          "smooth": 15140,
+          "lowpoly": 2277
+        }
+      }
+    },
+    "brute2_controls": {
+      "carryover_only": {
+        "body": 0.7369,
+        "head": 0.8136
+      },
+      "picture_only_guess": {
+        "body": 0.7184,
+        "head": 0.8011
+      },
+      "fitted": {
+        "body": 0.7623,
+        "head": 0.8981
+      }
+    },
+    "carryover": {
+      "moved a little": 5,
+      "carried over": 14,
+      "moved a lot": 10
+    },
+    "meshy_vs_picture": {
+      "brute1": {
+        "bruiser_meshy": {
+          "model": "meshy/bruiser_meshy.glb",
+          "best_yaw_deg": 23,
+          "iou_vs_picture": 0.9607
+        },
+        "bruiser_recipe_lowpoly": {
+          "model": "recipe/out/bruiser_recipe_lowpoly.glb",
+          "best_yaw_deg": 27,
+          "iou_vs_picture": 0.8273
+        }
+      },
+      "brute2": {
+        "brute2_meshy": {
+          "model": "meshy2/brute2_meshy.glb",
+          "best_yaw_deg": 9,
+          "iou_vs_picture": 0.9511
+        }
+      }
+    }
+  },
+  "findings": [
+    "Head: the slab head is now reachable with named knobs: brute 1 head IoU 0.923 -> 0.947 (front 0.97, three-quarter 0.96, side 0.91). The silhouette can't see the brow ridge or eye line, so brow/forehead knobs swing between brutes (brute 1 -1.25, brute 2 +1.25): they are not identified by silhouettes and need a shading or depth cue.",
+    "Brute 1 body: 0.823 -> 0.844 over four views (three-quarter 0.798 -> 0.835 once it was scored).",
+    "Brute 2: brute 1's settings unchanged already score 0.737 body / 0.814 head; fitting raises that to 0.762 / 0.898. 14 of 29 settings carried over within 10%; the body proportions (neck, legs, shins, arm muscles, forearm length) mostly carried, the head and chest depth moved most.",
+    "Picture-only guess scored 0.718 body / 0.801 head, below simply reusing brute 1's settings (0.737 / 0.814). The guess was furthest off on chest depth (front picture shows no depth), forearm muscle and elbow bend.",
+    "Brute 2's ceiling is structural, not tuning: his fists are closed and ours are open hands (MPFB pose), and his deltoids are round caps the shoulder-muscle target can't make; the three-quarter score drops during the body fit because the knobs trade it against front/back.",
+    "Meshy vs the actual picture: 0.961 (brute 1, best at a 23 degree turn) and 0.951 (brute 2, 9 degrees). Brute 1's reference is a three-quarter view, not front; the round-1 fitter never scored against the picture itself (round-1 recipe vs picture: 0.827). Visible misses vs the picture: forearms too thin, hands too long and low, feet too close together."
+  ],
+  "models_for_scoring": {
+    "brute1": "tools/bruiser-study/recipe/brute1/out/model.glb (and model_lowpoly.glb)",
+    "brute2": "tools/bruiser-study/recipe/brute2/out/model.glb (and model_lowpoly.glb)",
+    "convention": "Blender axes: centred in x/y, feet at z=0, facing -Y; glTF on disk is Y-up as usual"
+  },
+  "next": [
+    "Pose the fingers into fists through the Rigify finger controls when the picture shows fists.",
+    "Add deltoid-cap and trapezius knobs (bone scale on the shoulder/upper-arm head) for round shoulders.",
+    "Score against the picture silhouette at its own turn angle (diff_picture.py) as a Meshy-free target."
+  ]
+}

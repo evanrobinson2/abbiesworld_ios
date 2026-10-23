@@ -32,13 +32,8 @@
     "genitals/penis-circ-decr": 1.0,
     "genitals/penis-testicles-decr": 1.0,
     "pelvis/bulge-decr": 1.0,
-    "head/head-square": 1.0,
-    "head/head-scale-vert-incr": 0.5,
-    "chin/chin-width-incr": 1.0,
-    "chin/chin-height-incr": 0.5,
     "chin/chin-prominent-incr": 1.0,
     "chin/chin-bones-incr": 1.0,
-    "eyebrows/eyebrows-trans-forward": 1.0,
     "eyebrows/eyebrows-trans-down": 0.6
   },
   "stylise": {
@@ -86,5 +81,18 @@
     ],
     "silhouette_iou": 0.8295,
     "steps": 80
+  },
+  "head": {
+    "_doc": "Signed head knobs (see bruiser_lib.HEAD_KNOBS): + drives the first MakeHuman target, - the second. 0 = the body's own head.",
+    "width": 0.0,
+    "depth": 0.0,
+    "height": 0.5,
+    "square": 1.0,
+    "jaw_width": 1.0,
+    "jaw_forward": 0.0,
+    "chin_height": 0.5,
+    "brow_forward": 1.0,
+    "forehead_forward": 0.0,
+    "head_forward": 0.0
   }
 }
