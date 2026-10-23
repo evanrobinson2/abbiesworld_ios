@@ -408,6 +408,402 @@
    ]
   },
   {
+   "id": "abbies-world",
+   "file": "docs/oracle/identity/examples/abbies-world.json",
+   "schema_version": "1.1",
+   "game": {
+    "title": "Abbie's World (Ranch Atelier)",
+    "steam_appid": null,
+    "developer": "Evan with Claude",
+    "release": "in development",
+    "engine": {
+     "value": "three.js in the browser (WebGPU next)",
+     "source": "human",
+     "confidence": 0.95
+    },
+    "platforms": [
+     "iPhone home-screen app",
+     "browser"
+    ]
+   },
+   "core": {
+    "fantasy": "You are a child whose words and hands make a living toy world: you say it or place it, and the ranch, its animals and its people answer.",
+    "pillars": [
+     "Building is the verb, and nothing you do is wrong",
+     "The world answers every action, and the whole world adapts",
+     "The interface hides; the world carries the information"
+    ],
+    "signature_moment": "Saying \"a storm is coming\" and watching the sky darken, the bell ring faster, the sheep head for the barn and the lamps come on, with no timer on screen.",
+    "anti_goals": [
+     "no website-like UI or 1990s menus",
+     "no fail screens",
+     "no engine or editor artifacts in view",
+     "nothing masks the world",
+     "nothing above PG"
+    ],
+    "signatures": [
+     {
+      "id": "living_toy_diorama",
+      "layer": "art",
+      "description": "A tilt-shift toy diorama with chunky bevels, warm saturated colour and liquid glass objects with depth.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "world_is_the_hud",
+      "layer": "information_grammar",
+      "description": "Ask how a character would know first: a bell, a sign, sheep heading home. Play HUD at most 8% of the screen and zero words.",
+      "class": "style",
+      "confidence": 0.8
+     },
+     {
+      "id": "whole_game_adapts",
+      "layer": "information_grammar",
+      "description": "One signal (time, weather, mood, a storm coming) drives light, music, people, animals and sound together.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "say_it_build_it",
+      "layer": "mechanics",
+      "description": "Plain words become things in the world, through the voice controller and the model factory.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "expression": 0.4,
+      "discovery": 0.2,
+      "fantasy": 0.15,
+      "sensation": 0.15,
+      "fellowship": 0.1
+     },
+     "motivations": {
+      "creativity": 0.95,
+      "immersion": 0.7,
+      "social": 0.5,
+      "mastery": 0.2,
+      "achievement": 0.2,
+      "action": 0.1
+     },
+     "emotional_targets": {
+      "delight": 0.9,
+      "calm": 0.7,
+      "pride": 0.7,
+      "wonder": 0.8
+     },
+     "audience": {
+      "age": "young children with a parent",
+      "skill_floor": "none: speaking or tapping is enough",
+      "context": "phone and tablet, family time"
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "say",
+       "input": "voice"
+      },
+      {
+       "verb": "place",
+       "input": "drag"
+      },
+      {
+       "verb": "draw",
+       "input": "stroke"
+      },
+      {
+       "verb": "care for",
+       "input": "tap a creature"
+      },
+      {
+       "verb": "visit",
+       "input": "travel between worlds"
+      }
+     ],
+     "rules": {
+      "failure_model": "none",
+      "scoring": "none; thank-you stars and coins in the supply-chain proposal"
+     },
+     "randomness": {
+      "amount": 0.3,
+      "kind": "output"
+     },
+     "information": "perfect",
+     "systems": [
+      "scheduled people and animals",
+      "day clock and weather",
+      "procedural placement",
+      "voice-to-world building"
+     ]
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "touch",
+       "voice"
+      ],
+      "mapping": "direct"
+     },
+     "camera": {
+      "model": "orbit_diorama",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "freeform_autofit",
+      "undo": "unlimited",
+      "preview_before_commit": true,
+      "auto_repair": true
+     },
+     "juice": {
+      "procedural_settle": 0.9,
+      "sound_on_action": 0.9,
+      "scale_pop": 0.5,
+      "particles": 0.4,
+      "squash_stretch": 0.4,
+      "screen_shake": 0,
+      "hit_stop": 0,
+      "camera_kick": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "stylised_pbr",
+      "outlines": false,
+      "post": [
+       "tilt-shift depth of field",
+       "warm grade"
+      ]
+     },
+     "palette": {
+      "value_key": "high",
+      "variation": "time of day, weather and seasons"
+     },
+     "proportion_and_scale": {
+      "stylisation": 0.7,
+      "toyness": 0.95
+     },
+     "references": [
+      "Tiny Glade",
+      "LEGO Bricktales",
+      "Dorfromantik",
+      "toy catalogue photography"
+     ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "time": {
+       "mix": {
+        "diegetic": 0.8,
+        "overlay": 0.2
+       },
+       "timing": "always_on",
+       "note": "The sky and the bell; one sun dial is the only always-on readout.",
+       "confidence": 0.6,
+       "source": "human"
+      },
+      "threat": {
+       "mix": {
+        "diegetic": 0.7,
+        "none": 0.2,
+        "meta": 0.1
+       },
+       "timing": "on_change",
+       "note": "Friendly threats (storm, night, festival) arrive through light, bells, animals and music.",
+       "confidence": 0.6,
+       "source": "human"
+      },
+      "thing_state": {
+       "mix": {
+        "spatial": 0.6,
+        "diegetic": 0.4
+       },
+       "timing": "on_change",
+       "note": "A thirsty cow shows it on the cow: body language and a bubble.",
+       "confidence": 0.7,
+       "source": "human"
+      },
+      "goals": {
+       "mix": {
+        "spatial": 0.5,
+        "diegetic": 0.5
+       },
+       "timing": "summoned",
+       "note": "Neighbour requests on signs and on the asker.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "tools": {
+       "mix": {
+        "overlay": 0.7,
+        "diegetic": 0.3
+       },
+       "timing": "summoned",
+       "note": "Summoned by a gesture; the grown-up workbench holds the rest.",
+       "confidence": 0.6,
+       "source": "human"
+      },
+      "social": {
+       "mix": {
+        "spatial": 0.7,
+        "diegetic": 0.3
+       },
+       "timing": "on_change",
+       "note": "Bubbles and cues on the person, animal or thing they're about.",
+       "confidence": 0.6,
+       "source": "human"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.3,
+      "meta": 0.05,
+      "overlay": 0.1,
+      "none": 0.05
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "unit": "share of screen (maximum)",
+       "source": "human",
+       "confidence": 0.9,
+       "method": "CLAUDE.md rule; checked by tools/hud-rubric/check_hud.py"
+      },
+      "words_on_screen": 0,
+      "always_on_count": 1,
+      "drawn_as": "world_material",
+      "fade_rule": "Show on change, hold, fade; summon with one gesture."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "time of day / storm / festival",
+        "channels": [
+         "light",
+         "music",
+         "npcs",
+         "animals",
+         "sound",
+         "weather"
+        ]
+       }
+      ],
+      "max_channels": 6,
+      "adapts_score": 1
+     },
+     "social_channel": {
+      "carriers": {
+       "speech_bubbles": 0.4,
+       "body_language": 0.4,
+       "barks_audio": 0.2
+      }
+     },
+     "dialects": [
+      {
+       "place": "Ranch",
+       "mix": {
+        "diegetic": 0.6,
+        "spatial": 0.3,
+        "overlay": 0.1
+       },
+       "note": "Wood, bells and painted signs."
+      },
+      {
+       "place": "Moonbase",
+       "mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "meta": 0.1,
+        "overlay": 0.1
+       },
+       "note": "Lights, radio and holograms."
+      }
+     ],
+     "card_art": {
+      "uses_cards": true,
+      "modes": {
+       "specimen": 0.3,
+       "portal": 0.25,
+       "shadowbox": 0.15,
+       "emblem": 0.1,
+       "portrait": 0.1,
+       "scene": 0.05,
+       "panorama": 0.05
+      },
+      "note": "Card Forge rarities: seed specimen, sprout portal, harvest shadowbox, sun overlay with pop-out (docs/oracle/cards/CARD_ART.md)."
+     },
+     "signatures_ref": "CLAUDE.md, How Abbie's World shows information"
+    },
+    "interface": {
+     "hud_coverage": 0.08,
+     "text_words_per_min": 0,
+     "onboarding": "contextual_hints"
+    },
+    "narrative": {
+     "narrative_mode": {
+      "emergent": 0.5,
+      "evoked": 0.3,
+      "enacted": 0.2
+     },
+     "tone": {
+      "cozy_tense": -0.8,
+      "whimsical_grounded": -0.6,
+      "earnest_ironic": -0.7,
+      "quiet_loud": -0.4,
+      "handmade_industrial": -0.8
+     },
+     "themes": [
+      "making",
+      "care",
+      "family",
+      "imagination made real"
+     ]
+    },
+    "pacing": {
+     "structure": "sandbox",
+     "tension_curve": "flat_calm",
+     "failure_cost": "none"
+    }
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.22,
+     "expression": 0.89,
+     "structure": 0.33,
+     "social": 0.44,
+     "systems": 0.67,
+     "chance": 0.33,
+     "session": 0.44
+    },
+    "confidence": 0.5,
+    "note": "Our own target, scored on the same 0-9 axes as docs/oracle/games."
+   },
+   "ledger": {
+    "style": [
+     "toy diorama look",
+     "world-as-HUD information grammar",
+     "the whole game adapts",
+     "no-fail building",
+     "stroke and voice building"
+    ],
+    "expression": [
+     "Abbie's World's own characters, models, art and music are ours; nothing copied from any source game"
+    ]
+   },
+   "sources": [
+    "CLAUDE.md (How Abbie's World shows information)",
+    "VISION.md",
+    "docs/oracle/identity/GAME_IDENTITY.md",
+    "docs/oracle/hud/HUD_STUDY.md",
+    "docs/oracle/cards/CARD_ART.md"
+   ]
+  },
+  {
    "id": "besiege",
    "file": "docs/oracle/identity/examples/besiege.json",
    "schema_version": "1.0",
