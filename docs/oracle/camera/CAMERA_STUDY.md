@@ -3,7 +3,7 @@
 Oracle study, 2026-10-23. Evan: "review oracle tell me what controls are actually used in these games our's done work
 when there's true land". The sandbox camera was built for a floating hex diorama. On the Basin (`/sandbox?world=basin`),
 a continuous valley 6.4 km across, it stops working. This study says why, what the games in the Oracle actually do
-with mouse, touch and gamepad, and what Abbie's World should do. A prototype of the recommendation is in
+with mouse, touch and gamepad, and what Abbie's World should do. Study page: https://claude.ai/artifact/GwoYNggwLKueQQL4mA5bRE (source `camera-study.html`). The prototype is in
 `prototypes/ranch-atelier/dist/simulations/land-camera.mjs`.
 
 **Confidence.** Game controls come from knowledge of the games and their public control references, not from captures
