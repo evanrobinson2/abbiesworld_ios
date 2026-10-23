@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "8. Crew bus, first person",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "First person view from inside a friendly crew bus driving down the road, the dashboard and big windscreen in front of me, a huge rounded pink-and-white rocket on its launch pad filling the windscreen ahead, bright morning daylight, blue sky, soft shadows, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "c136140c-e228-4a8c-8093-c7b028d0eb55",
+  "page": "https://www.midjourney.com/jobs/c136140c-e228-4a8c-8093-c7b028d0eb55?index=1",
+  "pick_index": 1,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/c136140c-e228-4a8c-8093-c7b028d0eb55/0_1.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "7644d0d84fdd1eab76d4818fa200832f61376bb2f9faff94eeba62fe013d46f2"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 1: pink-and-white rocket dead centre in the windscreen, morning light. Skipped 3 (real agency-style logo on the rocket). The rocket is not as huge in frame as asked in any of the four."
+}

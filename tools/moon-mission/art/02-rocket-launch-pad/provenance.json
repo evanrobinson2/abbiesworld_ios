@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "2. Pink rocket on the launch pad",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "Pink rocket on its launch pad, a rounded toy-like pink-and-white rocket with a silver nose cone and round portholes standing beside a white launch gantry tower with an umbilical arm reaching to it, fresh morning daylight, blue sky, soft shadows, light and bright, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7",
+  "job_id": "98baf9af-164f-4b70-a11b-34e9cf181b8d",
+  "page": "https://www.midjourney.com/jobs/98baf9af-164f-4b70-a11b-34e9cf181b8d?index=0",
+  "pick_index": 0,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/98baf9af-164f-4b70-a11b-34e9cf181b8d/0_0.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "deb19370f45e9c4cd58af4f708c3bfea7ea603e1732800b61c8238a570045567"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 0: clearest gantry beside the rocket. The prompt ran three times while Fast hours ran out (jobs d413834f-3509-4956-bcc1-23a7a384df48 and 7a5b1e12-e134-4286-9cd0-617710a65058 are duplicates); this job was used."
+}

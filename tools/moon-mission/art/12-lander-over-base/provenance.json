@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "12. Lunar lander descending over a moon base (dark mode)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "A rounded toy-like white lunar lander with pink trim descending on glowing thrusters over a small moon base of white domes and glowing windows, grey cratered moon surface, black sky, hard white sunlight, long sharp shadows, Earth small in the sky, dark and dramatic, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "951173d7-83f0-4917-9062-4e1ea254dedd",
+  "page": "https://www.midjourney.com/jobs/951173d7-83f0-4917-9062-4e1ea254dedd?index=0",
+  "pick_index": 0,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/951173d7-83f0-4917-9062-4e1ea254dedd/0_0.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "4bd49ae82dd757a9c3f5bf72486571b75d39524b2a2b401e7e107326a4722bfa"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 0: toy-like lander on glowing pink thrusters, domes with warm windows, Earth in a black sky. 3 is a close second."
+}

@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "13c. Chat portraits: the brown-haired girl (happy, surprised, determined)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "Character expression sheet of a fictional cartoon six-year-old girl astronaut with brown hair, brown eyes and light warm tan skin, white space suit with purple trim, three head-and-shoulders busts side by side: happy, surprised, determined, plain light background, stylized cartoon, Pixar-meets-NASA, game character concept art for a kids' game --ar 3:2 --v 7 --relax",
+  "job_id": "26b8f7aa-0ba1-4f52-84cd-f386a9eadcab",
+  "page": "https://www.midjourney.com/jobs/26b8f7aa-0ba1-4f52-84cd-f386a9eadcab?index=0",
+  "pick_index": 0,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/26b8f7aa-0ba1-4f52-84cd-f386a9eadcab/0_0.png",
+    "size": [
+      1344,
+      896
+    ],
+    "sha256": "542f022e63cfcd04ff74e03418bd211c18ca0b733a1170559d9f15aee8b1e77a"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 0: brown hair, brown eyes, light warm tan skin, white suit with purple trim; happy, surprised, then a wary-determined look. Skipped 1 and 3 (wrong eye colour or real agency-style patches)."
+}
