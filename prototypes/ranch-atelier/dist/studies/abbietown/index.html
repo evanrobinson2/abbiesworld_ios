@@ -67,6 +67,7 @@ section,header{display:flex;flex-direction:column;gap:16px}
 .bubble{position:absolute;transform:translate(-50%,calc(-100% - 44px));pointer-events:none;max-width:250px;padding:9px 12px;border-radius:14px;font:600 13px/1.35 var(--body);color:#22282b;
  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.8));border:1px solid #fff;box-shadow:0 8px 18px -8px rgba(30,30,40,.5);transition:opacity .35s}
 .bubble::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:rgba(255,255,255,.84);transform:translateX(-50%) rotate(45deg);border-right:1px solid #fff;border-bottom:1px solid #fff}
+.bubble.dock{position:fixed;right:14px;left:auto!important;top:92px!important;transform:none;pointer-events:auto;cursor:pointer;max-width:250px}.bubble.dock::after{display:none}.bubble.dock::before{content:'×';position:absolute;right:9px;top:3px;font:400 16px var(--body);color:#8a8a8a}
 .bubble b{display:block;font:500 10px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:#c8502c;margin-bottom:2px}
 @media (max-width:560px){.hud{gap:1px;padding:4px}.hud button{width:33px;height:33px}.hud .sep{display:none}.hud input[type=range]{width:60px}.bubble{max-width:190px;font-size:12px}}
 
@@ -801,6 +802,153 @@ const ENTRANCES = {
 const returnTo = (gate, from) => from || ENTRANCES[gate]?.back || backUrl(gate);
 const available = (gate, st = {}) => { const e = ENTRANCES[gate]; if (!e) return false; return !e.needs || (e.needs.item ? (st.items || []).includes(e.needs.item) : !!st[Object.keys(e.needs)[0]]); };
 
+// ---- simulations/watercolour-distance.mjs ----
+// Watercolour distance, the Zelda-inspired look from AW-STUDY-0045 entry 6 (docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md),
+// promoted to a production shader. Near the camera the world stays exactly as drawn. With distance it turns into wet
+// watercolour: the colours lift towards the paper and shift towards the zone's wash colour, edges soften and bleed into
+// each other, the tones settle into flat pooled washes, pigment granulates, and the paper's grain shows through.
+// Style only: nothing from the game itself, just how a painted distance is made.
+//   const W = watercolourDistance(T, renderer, {logDepth: true})   one per renderer (after the renderer's own settings)
+//   W.setZone('downtown')          eases to that zone's numbers; 'off' eases to no wash (and then costs nothing)
+//   W.update(dt)                   per frame: eases the live numbers towards the zone
+//   W.render(scene, camera)        in place of renderer.render(scene, camera)
+//   W.ready                        promise: the scene and the pass are compiled; until it resolves render() draws directly
+//   W.tune({bleed: 4, wash: '#ffaa88'}) edits the live zone (the study page's sliders, the developer console)
+//   W.dispose()
+// Cost: one extra full-screen pass (a colour+depth target, then 10 taps only where the wash is above 0.4%). The shader is
+// compiled once, up front; zones and sliders only move uniforms, so nothing compiles while you play.
+// The pass reads only depth and colour, never materials, so it composes with the look of the things drawn (Sunday Toon,
+// Painted Brush, the paint of Paint the world): they draw into the target, the wash paints the distance over them.
+const WASH_ZONES = {
+ // distances are camera-space metres of the page's world; wash colours are sRGB hex; blur and bleed are pixels at full wash
+ real: {mood: 'the real town from far above, a cool wet horizon', start: 2600, end: 11000, curve: 1.15, max: .78, wash: '#c3d3dc', paper: '#f1ecdf', tint: .55, lift: .32, desat: .3, blur: 3.2, bleed: 2.4, levels: 6, flat: .5, gran: .2, paper_grain: .45, edge: .3},
+ trio: {mood: 'three little worlds on one table, a warm hazy edge', start: 340, end: 980, curve: 1.1, max: .74, wash: '#dcc8b2', paper: '#f6ecdc', tint: .5, lift: .3, desat: .28, blur: 3, bleed: 2, levels: 6, flat: .5, gran: .2, paper_grain: .45, edge: .3},
+ downtown: {mood: 'late afternoon, brick and brass dissolving into rose', start: 150, end: 430, curve: 1.2, max: .78, wash: '#e3ae94', paper: '#f7ead4', tint: .62, lift: .34, desat: .34, blur: 3, bleed: 2.2, levels: 5, flat: .6, gran: .24, paper_grain: .5, edge: .38},
+ 'anis-side': {mood: 'a cool morning by the pond, wide, airy and wet', start: 200, end: 540, curve: 1, max: .84, wash: '#9cc6d6', paper: '#eef5f3', tint: .66, lift: .46, desat: .38, blur: 4.6, bleed: 3.2, levels: 7, flat: .45, gran: .18, paper_grain: .42, edge: .26},
+ 'abbie-daddy-side': {mood: 'a sunset hill, rose and violet pooling in the valleys', start: 180, end: 480, curve: 1.25, max: .8, wash: '#d48aa4', paper: '#f9e4d3', tint: .66, lift: .36, desat: .3, blur: 3.6, bleed: 2.6, levels: 4, flat: .65, gran: .26, paper_grain: .5, edge: .5},
+};
+// the numbers the sliders may move, with their limits (the study page builds its controls from this)
+const WASH_CONTROLS = {
+ start: {min: 40, max: 3000, label: 'Clear until'}, end: {min: 200, max: 12000, label: 'Fully washed by'}, curve: {min: .5, max: 3, label: 'Falloff curve'},
+ max: {min: 0, max: .9, label: 'Most wash'}, tint: {min: 0, max: 1, label: 'Colour shift'}, lift: {min: 0, max: .8, label: 'Towards the paper'}, desat: {min: 0, max: .8, label: 'Pigment fade'},
+ blur: {min: 0, max: 9, label: 'Softness (px)'}, bleed: {min: 0, max: 8, label: 'Edge bleed (px)'}, levels: {min: 2, max: 12, label: 'Wash steps'}, flat: {min: 0, max: 1, label: 'Flat washes'},
+ gran: {min: 0, max: .6, label: 'Granulation'}, paper_grain: {min: 0, max: 1, label: 'Paper grain'}, edge: {min: 0, max: 1, label: 'Wet edge'},
+};
+const WC_NUMERIC = Object.keys(WASH_CONTROLS), WC_COLOURS = ['wash', 'paper'];
+const WC_OFF = {...WASH_ZONES.real, max: 0};
+
+// how much wash a surface at this distance carries (0 to zone.max), the same curve the shader uses
+function washAt(dist, z) {
+ const t = Math.max(0, Math.min(1, (dist - z.start) / Math.max(1, z.end - z.start))), s = t * t * (3 - 2 * t);
+ return Math.pow(s, z.curve) * z.max;
+}
+function zoneParams(id) { return {...(WASH_ZONES[id] || WC_OFF)}; }
+// the numbers between two zones (k 0 gives a, 1 gives b): colours mix in sRGB hex, so a crossing never passes through grey
+function mixZones(a, b, k) {
+ const out = {...b}, h = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+ for (const n of WC_NUMERIC) out[n] = a[n] + (b[n] - a[n]) * k;
+ for (const n of WC_COLOURS) { const x = h(a[n]), y = h(b[n]); out[n] = '#' + x.map((v, i) => Math.round(v + (y[i] - v) * k).toString(16).padStart(2, '0')).join(''); }
+ return out;
+}
+
+const WC_VERT = `varying vec2 vUv;void main(){vUv=position.xy*.5+.5;gl_Position=vec4(position.xy,0.,1.);}`;
+const WC_TAPS = 10;
+const WC_FRAG = `precision highp float;
+uniform sampler2D tColor,tDepth;uniform vec2 uRes;uniform float uNear,uFar,uLog;
+uniform float uStart,uEnd,uCurve,uMax,uTint,uLift,uDesat,uBlur,uBleed,uLevels,uFlat,uGran,uPaperK,uEdge,uDpr;
+uniform vec3 uWashMul,uPaper;varying vec2 vUv;
+float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1,1)),f.x),f.y);}
+float viewZ(float d){if(uLog>.5)return pow(uFar+1.,d)-1.;float zn=d*2.-1.;return 2.*uNear*uFar/(uFar+uNear-zn*(uFar-uNear));}
+float wash(vec2 uv){float z=viewZ(texture2D(tDepth,uv).x);float t=clamp((z-uStart)/max(1.,uEnd-uStart),0.,1.);return pow(t*t*(3.-2.*t),uCurve)*uMax;}
+float lum(vec3 c){return dot(c,vec3(.2126,.7152,.0722));}
+void main(){
+ vec2 px=1./uRes;vec4 src=texture2D(tColor,vUv);float w=wash(vUv);
+ vec3 col=src.rgb;
+ if(w>.004){
+  vec2 fc=gl_FragCoord.xy/uDpr;
+  // wet bleed: the colour runs a little way along the paper's own wobble
+  vec2 warp=(vec2(vn(fc*.045),vn(fc*.045+vec2(17.,5.)))-.5)*2.*uBleed*w*px*uDpr;
+  vec2 uv=vUv+warp;float r=uBlur*w*uDpr;vec3 acc=src.rgb;float tw=1.;
+  for(int i=0;i<${WC_TAPS};i++){
+   float a=float(i)*2.39996+h21(fc)*6.2832,rr=sqrt((float(i)+.5)/${WC_TAPS}.)*r;vec2 o=uv+vec2(cos(a),sin(a))*rr*px;
+   // a near thing never paints itself over what is behind it: taps count only when they are as washed as this pixel
+   float k=smoothstep(w-.22,w,wash(o));acc+=texture2D(tColor,o).rgb*k;tw+=k;}
+  col=acc/tw;
+  float l=lum(col);
+  // settle the tones into flat, pooled washes
+  float lv=max(2.,uLevels),ql=(floor(l*lv+.5)+smoothstep(.35,.65,fract(l*lv+.5)))/lv;ql=mix(l,ql,w*uFlat);
+  col*=clamp(ql/max(l,.002),.6,1.5);l=lum(col);
+  // atmospheric shift: pigment fades, the zone's colour comes up, everything lifts towards the paper
+  float wk=w/max(uMax,.001)*min(1.,uMax*1.25);
+  col=mix(col,vec3(l),wk*uDesat);col=mix(col,col*uWashMul,wk*uTint);col=mix(col,uPaper*(.55+l*.6),wk*uLift);
+  // the pigment pools at the edge of each wash
+  float e=length(vec2(lum(texture2D(tColor,vUv+vec2(px.x,0.)*uDpr*1.5).rgb)-lum(texture2D(tColor,vUv-vec2(px.x,0.)*uDpr*1.5).rgb),lum(texture2D(tColor,vUv+vec2(0.,px.y)*uDpr*1.5).rgb)-lum(texture2D(tColor,vUv-vec2(0.,px.y)*uDpr*1.5).rgb)));
+  col*=1.-clamp(e*3.,0.,1.)*uEdge*wk*.5;
+  // granulation (pigment in the paper's dips) and the paper's own fibres: both live on the paper, not the world
+  float g=vn(fc*.55)*.6+vn(fc*1.7+9.)*.4,f=h21(floor(fc*1.)+.5)*.5+vn(fc*vec2(.9,.25))*.5;
+  col*=1.+(g-.5)*uGran*wk*1.6;col*=1.+(f-.5)*uPaperK*wk*.5;
+ }
+ col+=(h21(gl_FragCoord.xy)-.5)/255.;
+ gl_FragColor=vec4(col,1.);
+ #include <tonemapping_fragment>
+ #include <colorspace_fragment>
+}`;
+
+function watercolourDistance(T, renderer, opts = {}) {
+ const logDepth = opts.logDepth ?? !!renderer.capabilities.logarithmicDepthBuffer, samples = opts.samples ?? 4;
+ const live = zoneParams('off'), target = zoneParams('off'); let zone = 'off';
+ const size = new T.Vector2(), dpr = () => renderer.getPixelRatio();
+ let rt = null;
+ const makeTarget = (w, h) => {
+  rt?.depthTexture?.dispose(); rt?.dispose();
+  const depth = new T.DepthTexture(w, h); depth.type = T.UnsignedIntType;
+  rt = new T.WebGLRenderTarget(w, h, {samples, type: T.HalfFloatType, depthTexture: depth, colorSpace: T.LinearSRGBColorSpace});
+ };
+ const U = {tColor: {value: null}, tDepth: {value: null}, uRes: {value: new T.Vector2(1, 1)}, uNear: {value: .1}, uFar: {value: 1000}, uLog: {value: logDepth ? 1 : 0}, uDpr: {value: 1},
+  uStart: {value: live.start}, uEnd: {value: live.end}, uCurve: {value: live.curve}, uMax: {value: 0}, uTint: {value: live.tint}, uLift: {value: live.lift}, uDesat: {value: live.desat},
+  uBlur: {value: live.blur}, uBleed: {value: live.bleed}, uLevels: {value: live.levels}, uFlat: {value: live.flat}, uGran: {value: live.gran}, uPaperK: {value: live.paper_grain}, uEdge: {value: live.edge},
+  uWashMul: {value: new T.Color()}, uPaper: {value: new T.Color()}};
+ const mat = new T.ShaderMaterial({uniforms: U, vertexShader: WC_VERT, fragmentShader: WC_FRAG, depthTest: false, depthWrite: false});
+ const quadGeo = new T.BufferGeometry(); quadGeo.setAttribute('position', new T.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3));
+ const quad = new T.Mesh(quadGeo, mat); quad.frustumCulled = false; const quadScene = new T.Scene(); quadScene.add(quad); const quadCam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+ const c0 = new T.Color(), c1 = new T.Color();
+ const W = {
+  zones: WASH_ZONES, live, target, enabled: opts.enabled !== false, ready: Promise.resolve(), compiled: false, passes: 0, lastPassMs: 0,
+  get zone() { return zone; },
+  setZone(id, snap = false) { zone = WASH_ZONES[id] ? id : 'off'; Object.assign(target, zoneParams(zone)); if (zone === 'off') target.max = 0; if (snap) { Object.assign(live, target); W.apply(); } return zone; },
+  // edit the live zone; the zone keeps easing to these numbers rather than back to its preset
+  tune(v) { for (const n of WC_NUMERIC) if (v[n] != null) target[n] = Math.max(WASH_CONTROLS[n].min, Math.min(WASH_CONTROLS[n].max, +v[n])); for (const n of WC_COLOURS) if (v[n]) target[n] = v[n]; return target; },
+  update(dt = .016) {
+   const k = 1 - Math.exp(-dt * 3.2), m = mixZones(live, target, k); Object.assign(live, m); live.max += (target.max - live.max) * k; if (Math.abs(live.max - target.max) < 1e-3) live.max = target.max; W.apply();
+  },
+  apply() {
+   U.uStart.value = live.start; U.uEnd.value = live.end; U.uCurve.value = live.curve; U.uMax.value = live.max; U.uTint.value = live.tint; U.uLift.value = live.lift; U.uDesat.value = live.desat;
+   U.uBlur.value = live.blur; U.uBleed.value = live.bleed; U.uLevels.value = live.levels; U.uFlat.value = live.flat; U.uGran.value = live.gran; U.uPaperK.value = live.paper_grain; U.uEdge.value = live.edge;
+   c0.set(live.wash); const l = c0.r * .2126 + c0.g * .7152 + c0.b * .0722; U.uWashMul.value.copy(c0).multiplyScalar(1 / Math.max(l, .02)); c1.set(live.paper); U.uPaper.value.copy(c1);
+  },
+  active() { return W.enabled && live.max > .002; },
+  // compile the scene's materials and the pass up front, so the first washed frame costs the same as any other
+  precompile(scene, camera) {
+   W.apply(); const bw = renderer.getDrawingBufferSize(size).x, bh = size.y; if (!rt || rt.width !== bw || rt.height !== bh) makeTarget(bw, bh);
+   const go = renderer.compileAsync ? p => renderer.compileAsync(p[0], p[1]) : p => Promise.resolve(renderer.compile(p[0], p[1]));
+   W.ready = Promise.all([go([scene, camera]), go([quadScene, quadCam])]).then(() => { U.tColor.value = rt.texture; U.tDepth.value = rt.depthTexture; W.compiled = true; });
+   return W.ready;
+  },
+  render(scene, camera) {
+   if (!W.active() || !W.compiled) { renderer.render(scene, camera); return; }
+   const t0 = performance.now(), bw = renderer.getDrawingBufferSize(size).x, bh = size.y;
+   if (!rt || rt.width !== bw || rt.height !== bh) { makeTarget(bw, bh); U.tColor.value = rt.texture; U.tDepth.value = rt.depthTexture; }
+   U.uRes.value.set(bw, bh); U.uNear.value = camera.near; U.uFar.value = camera.far; U.uDpr.value = dpr();
+   renderer.setRenderTarget(rt); renderer.render(scene, camera); renderer.setRenderTarget(null); renderer.render(quadScene, quadCam);
+   W.passes++; W.lastPassMs = performance.now() - t0;
+  },
+  dispose() { rt?.depthTexture?.dispose(); rt?.dispose(); mat.dispose(); quadGeo.dispose(); },
+ };
+ W.setZone(opts.zone || 'off', true);
+ return W;
+}
+
 
 const land = makeLand(JSON.parse(document.getElementById('land').textContent));
 const W = land.W, D = land.D;
@@ -827,6 +975,7 @@ const stage = document.getElementById('stage'), canvas = document.getElementById
 const renderer = new THREE.WebGLRenderer({canvas, antialias: true, logarithmicDepthBuffer: true});
 renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const WC = watercolourDistance(THREE, renderer, {logDepth: true}); // the pulled-back view's painted distance, per zone (simulations/watercolour-distance.mjs)
 const clock = new THREE.Clock(); const sunDir = new THREE.Vector3(-600, 900, 400);
 const scene = new THREE.Scene(); scene.background = new THREE.Color('#cfe2ea');
 const camera = new THREE.PerspectiveCamera(42, 1, 2, 40000);
@@ -1206,28 +1355,136 @@ document.querySelector('#assume tbody').innerHTML = Object.entries({
 document.getElementById('places').innerHTML = [...SPOTS, ...BEYOND].map(s => `<button class="place" data-id="${s.id}"><span class="t"><span>${ICON[s.id]}</span>${s.name}${s.becomes ? ` <span class="muted" style="font-size:13px">becomes ${s.becomes}</span>` : ''}</span><span class="w ${s.where === 'guess' ? 'guess' : ''}">${s.where === 'data' ? 'from the map' : s.where === 'guess' ? 'placed by the common, to confirm' : s.where === 'new' ? 'new in Abbie\'s town' : s.where === 'family' ? 'in the family\'s neighbourhood, placed loosely' : 'off the map'}</span><p>${s.line}</p>${s.coins ? `<span class="coins">● ${s.coins} coin${s.coins > 1 ? 's' : ''}${s.key ? ' and the register key' : ''}</span>` : ''}</button>`).join('');
 document.querySelectorAll('.place').forEach(b => b.onclick = () => { stage.scrollIntoView({behavior: 'smooth', block: 'center'}); visit(b.dataset.id); });
 
+// ---- the house kit: 9 low-poly house types in 3 wealth tiers, set on the same footprints as the real mix ----
+// tier 0 = modest (cape, bungalow, triple-decker), 1 = family (colonial, split-level, farmhouse), 2 = grand (victorian, tudor, estate).
+// Local frame: front is +z, the ridge runs along x, y = 0 is the ground. Shared geometry and cached materials keep it light.
+const HK = {mats: {}, cyl: new THREE.CylinderGeometry(1, 1, 1, 10).translate(0, .5, 0), cone: new THREE.ConeGeometry(1, 1, 10).translate(0, .5, 0)};
+const hkM = c => HK.mats[c] ||= new THREE.MeshStandardMaterial({color: c, roughness: .85, flatShading: true});
+const HOUSE_TYPES = [['cape', 'bungalow', 'tripledecker'], ['colonial', 'splitlevel', 'farmhouse'], ['victorian', 'tudor', 'estate']];
+function houseTier(h) { const a = h.w * h.d; return a < 105 ? 0 : a < 175 ? 1 : 2; } // real footprint decides the wealth tier
+function houseType(h, hash) { const tier = houseTier(h), ty = HOUSE_TYPES[tier]; return {tier, type: ty[Math.floor(hash * ty.length) % ty.length]}; }
+function buildHouse(type, tier, W, D, H, wall, roofc, hash) {
+ const g = new THREE.Group(), WIN = '#bfe0ea', TRIM = '#f4efe4', DOOR = ['#a33a2e', '#2f5d62', '#3a3f6b', '#7a4a2a'][Math.floor(hash * 4) % 4], DARK = '#4b3a2c';
+ const b = (w, h, d, c, x, y, z, ry = 0) => { const m = new THREE.Mesh(boxGeo, hkM(c)); m.scale.set(w, h, d); m.position.set(x, y, z); m.rotation.y = ry; m.castShadow = true; g.add(m); return m; };
+ const roof = (w, rh, d, c, x, y, z, ry = 0) => { const m = new THREE.Mesh(gableGeo, hkM(c)); m.scale.set(d, rh, w); m.position.set(x, y, z); m.rotation.y = Math.PI / 2 + ry; m.castShadow = true; g.add(m); return m; }; // ridge along x
+ const cylM = (r, h, c, x, y, z) => { const m = new THREE.Mesh(HK.cyl, hkM(c)); m.scale.set(r, h, r); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
+ const cone = (r, h, c, x, y, z) => { const m = new THREE.Mesh(HK.cone, hkM(c)); m.scale.set(r, h, r); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
+ const win = (x, y, z, w = .9, h = 1.1, side = 0) => { if (side) b(.12, h, w, WIN, x, y, z); else { b(w + .3, h + .3, .1, TRIM, x, y - .15, z - .01); b(w, h, .16, WIN, x, y, z); b(.07, h, .2, TRIM, x, y, z + .02); b(w, .07, .2, TRIM, x, y + h / 2 - .05, z + .02); if (tier > 0) { b(.22, h, .12, DOOR, x - w / 2 - .22, y - .15, z); b(.22, h, .12, DOOR, x + w / 2 + .22, y - .15, z); } } };
+ const door = (x, z) => { b(1.1, 1.9, .2, DOOR, x, 0, z); b(.12, .12, .24, '#d8b24a', x + .35, .95, z); };
+ const chimney = (x, z, hh, c = '#8a4a36') => b(.6, hh, .6, c, x, 0, z);
+ const row = (n, y, z, span, w, hgt) => { for (let i = 0; i < n; i++) win(n === 1 ? 0 : -span / 2 + span * i / (n - 1), y, z, w, hgt); };
+ const front = D / 2, rh = Math.min(W, D) * .36;
+ if (type === 'cape') { // 1.5 storeys: steep roof, two dormers, centre door
+  const h1 = H * .62; b(W, h1, D, wall, 0, 0, 0); roof(W * 1.08, rh * 1.0, D * 1.1, roofc, 0, h1, 0);
+  for (const s of [-1, 1]) { b(1.8, 1.5, 1.6, wall, s * W * .24, h1 + .4, front * .35); roof(2.2, 1, 2, roofc, s * W * .24, h1 + 1.9, front * .35); win(s * W * .24, h1 + .7, front * .35 + .82, .8, .9); }
+  door(0, front); row(2, 1.1, front, W * .62, .9, 1.1); chimney(W * .3, -D * .1, h1 + rh * 1.0 + 1.2);
+ } else if (type === 'bungalow') { // low, long porch
+  const h1 = H * .6; b(W, h1, D, wall, 0, 0, 0); roof(W * 1.12, rh * .6, D * 1.18, roofc, 0, h1, 0);
+  b(W * .92, .18, 2.4, roofc, 0, h1 * .7, front + 1.2); for (const s of [-1, 1]) b(.22, h1 * .7, .22, TRIM, s * W * .42, 0, front + 2.2); b(W * .92, .3, 2.4, '#b7ad9c', 0, 0, front + 1.2);
+  door(0, front); row(2, 1, front, W * .66, .9, 1); chimney(-W * .3, 0, h1 + rh * .6 + .8, '#9a8f84');
+ } else if (type === 'tripledecker') { // three flats, stacked porches
+  const h1 = H * 1.45; b(W * .86, h1, D, wall, 0, 0, 0); b(W * .92, .35, D * 1.04, TRIM, 0, h1, 0);
+  for (let f = 0; f < 3; f++) { const y = f * h1 / 3; b(W * .8, .12, 1.7, TRIM, 0, y + .1, front + .85); b(W * .8, .6, .08, DARK, 0, y + .22, front + 1.65); row(2, y + 1.2, front, W * .5, .9, 1.1); }
+  door(0, front); chimney(W * .3, -D * .1, h1 + 1.4, '#8a4a36');
+ } else if (type === 'colonial') { // symmetric five-bay with a little portico
+  b(W, H, D, wall, 0, 0, 0); roof(W * 1.06, rh * 1.1, D * 1.06, roofc, 0, H, 0);
+  row(3, H * .66, front, W * .72, .9, 1.1); row(2, 1.1, front, W * .62, .9, 1.2); door(0, front);
+  b(2.3, .2, 1.6, TRIM, 0, 2.15, front + .8); roof(2.4, .8, 1.6, TRIM, 0, 2.3, front + .8); for (const s of [-1, 1]) b(.16, 2.1, .16, TRIM, s * .95, 0, front + 1.5);
+  chimney(-W * .38, 0, H + rh * 1.2); chimney(W * .38, 0, H + rh * 1.2);
+ } else if (type === 'splitlevel') { // two blocks at different heights, garage door
+  b(W * .62, H * 1.08, D, wall, -W * .19, 0, 0); roof(W * .66, rh * .9, D * 1.05, roofc, -W * .19, H * 1.08, 0);
+  b(W * .42, H * .66, D * .9, wall, W * .3, 0, -D * .03); roof(W * .46, rh * .55, D * .95, roofc, W * .3, H * .66, -D * .03);
+  b(W * .3, H * .5, .12, '#d8d3c6', W * .3, 0, front * .9 + .02); door(-W * .2, front); row(2, H * .65, front, W * .36, .9, 1); win(W * .3, .9, front * .9, 1, .9); chimney(-W * .42, -D * .1, H * 1.08 + rh * .9);
+ } else if (type === 'farmhouse') { // an L with a wraparound porch
+  b(W * .7, H, D * .9, wall, -W * .12, 0, 0); roof(W * .74, rh * 1.0, D * .94, roofc, -W * .12, H, 0);
+  b(W * .38, H * .78, D * .62, wall, W * .3, 0, -D * .18); roof(W * .42, rh * .9, D * .66, roofc, W * .3, H * .78, -D * .18);
+  b(W * .8, .16, 2, roofc, -W * .12, H * .46, front + .9); b(W * .8, .3, 2, '#b7ad9c', -W * .12, 0, front + .9); for (let i = 0; i < 4; i++) b(.2, H * .46, .2, TRIM, -W * .46 + i * W * .22, 0, front + 1.8);
+  door(-W * .12, front * .9); row(2, 1.1, front * .9, W * .5, .9, 1.1); row(2, H * .62, front * .9, W * .5, .9, 1); chimney(W * .2, -D * .25, H + rh);
+ } else if (type === 'victorian') { // corner turret, gable front, gingerbread trim
+  b(W, H * 1.15, D, wall, 0, 0, 0); roof(W * 1.06, rh * 1.2, D * 1.06, roofc, 0, H * 1.15, 0);
+  roof(W * .5, rh * 1.1, 3, roofc, -W * .12, H * 1.15 - .2, front + .6, Math.PI / 2); b(W * .5, H * .4, .3, wall, -W * .12, H * .75, front + .1);
+  const tx = W * .4; cylM(1.7, H * 1.5, wall, tx, 0, front - .6); cone(2.1, H * .9, '#6a4a5e', tx, H * 1.5, front - .6); win(tx, H * .55, front + 1.1, .7, 1); win(tx, H * 1.1, front + 1.1, .7, .9);
+  b(W * .8, .16, 2.2, TRIM, -W * .1, 2.2, front + 1.1); b(W * .8, .3, 2.2, '#b7ad9c', -W * .1, 0, front + 1.1); for (let i = 0; i < 4; i++) b(.18, 2.2, .18, TRIM, -W * .45 + i * W * .22, 0, front + 2.1);
+  door(-W * .1, front); row(2, H * .8, front, W * .4, .9, 1.1); chimney(W * .1, -D * .2, H * 1.15 + rh * 1.1 + .6, '#7a3a2a');
+ } else if (type === 'tudor') { // brick or stucco with half-timbering and a cross gable
+  b(W, H * 1.1, D, wall, 0, 0, 0); roof(W * 1.04, rh * 1.1, D * 1.05, roofc, 0, H * 1.1, 0);
+  roof(W * .42, rh * 1.2, 2.6, roofc, W * .2, H * 1.1 - .3, front + .7, Math.PI / 2); b(W * .42, H * 1.1, .3, wall, W * .2, 0, front + .05);
+  for (let i = 0; i < 6; i++) b(.14, H * 1.1, .12, DARK, -W * .46 + i * W * .18, 0, front + .08); b(W, .14, .12, DARK, 0, H * .55, front + .08); b(W * .42, .14, .12, DARK, W * .2, H * .55, front + .4);
+  door(-W * .22, front); win(-W * .22 + 2, 1.2, front, 1, 1.1); win(W * .2, 1.2, front + .42, .9, 1.1); win(W * .2, H * .8, front + .42, .9, 1);
+  chimney(-W * .3, front * .5, H * 1.1 + rh * 1.1 + 1.4, '#7a3a2a');
+ } else { // estate: centre block, two wings, portico, garage
+  b(W * .5, H * 1.15, D, wall, 0, 0, 0); roof(W * .54, rh * 1.1, D * 1.04, roofc, 0, H * 1.15, 0);
+  b(W * .3, H * .82, D * .85, wall, -W * .4, 0, -D * .04); roof(W * .34, rh * .9, D * .9, roofc, -W * .4, H * .82, -D * .04);
+  b(W * .26, H * .66, D * .7, wall, W * .41, 0, -D * .08); roof(W * .3, rh * .7, D * .75, roofc, W * .41, H * .66, -D * .08); b(W * .2, H * .5, .12, '#d8d3c6', W * .41, 0, front * .7 + .02);
+  row(3, H * .8, front, W * .36, .9, 1.1); row(2, 1.2, front, W * .3, .9, 1.3); door(0, front);
+  b(3.2, .24, 2.2, TRIM, 0, 2.6, front + 1.1); roof(3.3, 1.1, 2.2, TRIM, 0, 2.8, front + 1.1); for (const s of [-1, 1]) cylM(.2, 2.6, TRIM, s * 1.3, 0, front + 2);
+  for (const s of [-1, 1]) chimney(s * W * .24, 0, H * 1.15 + rh * 1.3, '#7a3a2a');
+ }
+ // the yard: tier 1 gets a picket fence, tier 2 a low stone wall and hedge; tier >= 1 a driveway; every house a mailbox
+ const fz = front + 4.2 + tier * .8, fw = W * 1.05;
+ if (tier === 1) { b(fw, .14, .1, TRIM, 0, .55, fz); for (let i = 0; i <= 10; i++) b(.12, .8, .1, TRIM, -fw / 2 + i * fw / 10, 0, fz); }
+ if (tier === 2) { b(fw, .9, .5, '#9a9488', 0, 0, fz); b(fw * .9, 1.1, .9, '#4f7a3a', 0, 0, fz - 1.6); b(2.6, 1.4, .8, '#8a8478', -fw * .5, 0, fz); b(2.6, 1.4, .8, '#8a8478', fw * .5, 0, fz); }
+ if (tier > 0) b(2.6, .06, fz - front + 1, '#8c887f', W * .32, 0, front + (fz - front) / 2);
+ b(.1, .8, .1, DARK, W * .62, 0, fz + .6); b(.4, .3, .6, '#c84a3a', W * .62, .8, fz + .6);
+ return g;
+}
+
+// ---- the Gingerbread House (a walk from the home yard), the sealed bunker door behind it, and Launch ----
+function candyBits(g, b, cyl, cone) {}
+function buildGingerbread(g) { // front is +z; muffin shop in gingerbread, icing and gumdrops
+ const B = (w, h, d, c, x, y, z, ry = 0) => { const m = new THREE.Mesh(boxGeo, hkM(c)); m.scale.set(w, h, d); m.position.set(x, y, z); m.rotation.y = ry; m.castShadow = m.receiveShadow = true; g.add(m); return m; };
+ const Cy = (r, h, c, x, y, z, rx = 0) => { const m = new THREE.Mesh(HK.cyl, hkM(c)); m.scale.set(r, h, r); m.position.set(x, y, z); m.rotation.x = rx; m.castShadow = true; g.add(m); return m; };
+ const Ball = (r, c, x, y, z) => { const m = new THREE.Mesh(new THREE.IcosahedronGeometry(r, 0), hkM(c)); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
+ const W = 9, D = 7, H = 4.2;
+ B(W, H, D, '#b5763a', 0, 0, 0); B(W + .4, .35, D + .4, '#8a5428', 0, 0, 0); // walls and a darker base
+ const roof = new THREE.Mesh(gableGeo, hkM('#f7ede0')); roof.scale.set(D * 1.15, 3.2, W * 1.12); roof.position.set(0, H, 0); roof.rotation.y = Math.PI / 2; roof.castShadow = true; g.add(roof);
+ for (const s of [-1, 1]) { B(W * 1.12, .22, .3, '#ffffff', 0, H + .05, s * (D * .575)); for (let i = 0; i < 9; i++) Ball(.22, '#ffffff', -W * .5 + i * W / 8, H - .2, s * D * .575); } // white icing on the eaves with drips
+ const gum = ['#e5484d', '#f4c542', '#4caf7a', '#4a90e2', '#e87ac7'];
+ for (let i = 0; i < 12; i++) Ball(.3, gum[i % 5], -W * .5 + (i % 6) * W / 5 + .3, H + 1 + (i < 6 ? .5 : 1.2), (i < 6 ? 1 : -1) * (D * .3)); // gumdrops on the roof
+ B(1.3, 2.3, .25, '#6a3a2a', 0, 0, D / 2 + .05); Ball(.12, '#f4c542', .4, 1.1, D / 2 + .25); // door with a round knob
+ for (const s of [-1, 1]) { B(1.3, 1.3, .2, '#ffd1e0', s * 2.8, 1.3, D / 2 + .05); B(1.5, .16, .3, '#ffffff', s * 2.8, 1.2, D / 2 + .08); B(.16, 1.5, .3, '#ffffff', s * 2.8, 1.25, D / 2 + .08); }
+ for (const s of [-1, 1]) { Cy(.12, 3, '#ffffff', s * 1.5, 0, D / 2 + 1.6); for (let k = 0; k < 4; k++) B(.26, .3, .26, '#e5484d', s * 1.5, .3 + k * .7, D / 2 + 1.6); } // candy-cane posts
+ const ch = Cy(.7, 2.2, '#8a5428', W * .3, H + 1.1, -D * .2); Ball(.55, '#f2a7c3', W * .3, H + 3.5, -D * .2); // chimney with a frosting puff
+ // the muffin sign: a post and a swinging board with a muffin on it
+ Cy(.08, 3.4, '#6a4a2e', -5.6, 0, D / 2 + 2.5); B(2.4, 1.5, .18, '#fff3d6', -5.6, 2.2, D / 2 + 2.5); Cy(.5, .5, '#e8b46a', -5.6, 2.5, D / 2 + 2.62, Math.PI / 2); const top = new THREE.Mesh(new THREE.SphereGeometry(.6, 8, 5, 0, Math.PI * 2, 0, Math.PI / 2), hkM('#c47a3a')); top.position.set(-5.6, 2.9, D / 2 + 2.62); g.add(top); Ball(.14, '#e5484d', -5.6, 3.55, D / 2 + 2.62);
+ // lollipop trees either side
+ for (const [x, z, c] of [[-W * .62, D * .1, '#e87ac7'], [W * .62, D * .3, '#4aa3e2'], [W * .66, -D * .3, '#f4c542']]) { Cy(.1, 2.6, '#ffffff', x, 0, z); const l = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, .3, 14), hkM(c)); l.scale.set(1.2, 1, 1.2); l.rotation.x = Math.PI / 2; l.position.set(x, 3.4, z); g.add(l); Ball(.2, '#ffffff', x, 3.4, z + .2); }
+ // a carrot cake and a birthday cake in the window, so you know what is inside
+ Cy(.5, .55, '#f08a3c', 2.8, 0.85, D / 2 + .3); Cy(.52, .12, '#ffffff', 2.8, 1.4, D / 2 + .3); Cy(.5, .55, '#f7a8c4', -2.8, .85, D / 2 + .3); Ball(.07, '#4a90e2', -2.8, 1.65, D / 2 + .3);
+}
+function buildBunker(g) { // a grassy mound, a concrete frame and a round vault-style door, sealed with planks: not built yet
+ const mound = new THREE.Mesh(new THREE.SphereGeometry(1, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), hkM('#6f9a4a')); mound.scale.set(10, 6, 9); mound.castShadow = mound.receiveShadow = true; g.add(mound);
+ const B = (w, h, d, c, x, y, z) => { const m = new THREE.Mesh(boxGeo, hkM(c)); m.scale.set(w, h, d); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
+ B(5.4, 4.6, 1.2, '#9a9a94', 0, 0, 7.2); B(5.4, .4, 2, '#8a8a84', 0, 0, 8.2); // the concrete frame and apron
+ const door = new THREE.Mesh(new THREE.CylinderGeometry(1.9, 1.9, .5, 20), hkM('#56625f')); door.rotation.x = Math.PI / 2; door.position.set(0, 2.5, 7.9); door.castShadow = true; g.add(door);
+ const hub = new THREE.Mesh(new THREE.TorusGeometry(.7, .14, 6, 14), hkM('#d9d2a0')); hub.position.set(0, 2.5, 8.2); g.add(hub);
+ for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; B(.28, .28, .22, '#8a948f', Math.cos(a) * 1.55, 2.5 + Math.sin(a) * 1.55 - .14, 8.1); }
+ B(5, .34, .1, '#f4c542', 0, .55, 7.85); B(.3, 3.6, .1, '#f4c542', -2.3, .5, 7.85); B(.3, 3.6, .1, '#f4c542', 2.3, .5, 7.85); // hazard-yellow trim
+ const p1 = B(4.6, .34, .2, '#8a6a3a', 0, 1.2, 8.35); p1.rotation.z = .5; const p2 = B(4.6, .34, .2, '#8a6a3a', 0, 1.2, 8.4); p2.rotation.z = -.5; // sealing planks
+ B(.1, 2.2, .1, '#6a4a2e', 2.9, 0, 9.4); const lamp = new THREE.Mesh(new THREE.IcosahedronGeometry(.28, 0), new THREE.MeshStandardMaterial({color: '#ffcf70', emissive: '#ffb030', emissiveIntensity: 1.2})); lamp.position.set(2.9, 2.3, 9.4); g.add(lamp);
+}
 // ---------- the three dioramas: Downtown, Ani's side, Abbie and Daddy's side (AW-STUDY-0042, Evan 2026-10-23 2:43 PM) ----------
 // "three distinct dioramas indicative of the actual regions, but diorama and cartoon scale." Each is a hex tile of the
 // real land (heights, lakes, main roads, the real mix of houses) squeezed to a fifth of a mile across, with the real
 // places pushed together and built big. Each has its own look and its own pulled-back camera. The three sit as the three
 // regions of the seven-hex structure, beyond the east edge of the real town.
-const DIO_R = 105, DIO_N = 44, DIO_ORIGIN = [land.W + 3600, land.D / 2]; // tile circumradius, lattice rings, where the trio's middle is (map metres)
+const DIO_R = 105, DIO_N = 66, DIO_ORIGIN = [land.W + 3600, land.D / 2]; // tile circumradius, lattice rings, where the trio's middle is (map metres)
 const DIOS = [
- {id: 'downtown', name: 'Downtown', bearing: 180, centre: [4340, 1640], R: 900, vex: 2.4, pin: '⛪', heroes: ['common', 'cafe', 'comellas', 'hoagies', 'lab', 'ginn'],
+ {id: 'downtown', name: 'Downtown', bearing: 180, centre: [4340, 1640], R: 900, vex: 2.4, pin: '⛪', heroes: ['common', 'cafe', 'comellas', 'hoagies', 'lab'],
   look: {bg: '#f3dcbd', sun: '#ffd49a', sunI: 2.7, sunDir: [-520, 520, 620], sky: '#ffe9cf', gnd: '#8a6a4a', hemiI: 1.05, grass: ['#7fa14f', '#a8b45e'], soil: '#8a5a3a', fov: 32, dist: 250, azimuth: 205, lowPitch: 20, highPitch: 54,
-   mood: 'a late-afternoon square, brass and brick'}},
+   mood: 'a late-afternoon square, brass and brick', wash: 'downtown'}},
  {id: 'anis-side', name: "Ani's side", bearing: 300, centre: [3180, 3020], R: 820, vex: 3.4, pin: '\u{1F986}', heroes: ['horn', 'ani'],
   look: {bg: '#cfe8f1', sun: '#eef4ff', sunI: 2.0, sunDir: [420, 900, -380], sky: '#dff1ff', gnd: '#4d6a5c', hemiI: 1.3, grass: ['#64a07c', '#8bb86a'], soil: '#5d6b4a', fov: 48, dist: 330, azimuth: 150, lowPitch: 30, highPitch: 70,
-   mood: 'a cool bright morning by the pond, wide and airy'}},
- {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 60, centre: [4930, 3440], R: 820, vex: 2.8, pin: '\u{1F3E1}', heroes: ['home', 'muraco', 'leonard'],
+   mood: 'a cool bright morning by the pond, wide and airy', wash: 'anis-side'}},
+ {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 60, centre: [4930, 3440], R: 820, vex: 2.8, pin: '\u{1F3E1}', heroes: ['home', 'muraco', 'leonard'], houses: 9,
   look: {bg: '#f6c4ad', sun: '#ff9d6a', sunI: 2.9, sunDir: [-800, 360, 120], sky: '#ffd5c2', gnd: '#7a4a5a', hemiI: 1.0, grass: ['#c2a447', '#d98a45'], soil: '#7a4a3a', fov: 40, dist: 300, azimuth: 235, lowPitch: 38, highPitch: 78,
-   mood: 'a sunset hill, almost a board seen from above'}},
+   mood: 'a sunset hill, almost a board seen from above', wash: 'abbie-daddy-side'}},
 ];
 // hero places: model scale on the tile, footprint radius for the layout, and whether the place hugs the street
 const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
  muraco: {sc: .5, r: 21}, leonard: {sc: .5, r: 29}, horn: {sc: .6, r: 16, fixed: 1}, home: {sc: .8, r: 22}, ani: {sc: .8, r: 22}};
 const dioGroup = new THREE.Group(); dioGroup.position.set(X(DIO_ORIGIN[0]), 0, Z(DIO_ORIGIN[1])); scene.add(dioGroup); dioGroup.visible = false;
-const dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
+const SQUARE = {"note":"footprints around the common, metres east/north of its centre","buildings":[{"p":[[-59.3,148.8],[-61.7,142.4],[-56.1,140.3],[-54.1,145.8],[-46.6,143.0],[-53.5,124.1],[-60.8,126.7],[-59.2,131.2],[-65.1,133.4],[-67.1,128.1],[-72.7,130.2],[-70.3,136.9],[-73.7,138.1],[-71.4,144.4],[-68.3,143.2],[-65.4,151.1]],"a":380},{"p":[[-130.9,-35.9],[-126.4,-39.2],[-127.7,-41.0],[-124.6,-45.0],[-128.6,-50.5],[-133.0,-47.3],[-135.8,-47.1],[-136.8,-44.4],[-141.1,-41.0],[-138.2,-37.3],[-135.6,-39.4],[-133.6,-36.9],[-132.4,-37.9]],"a":129},{"p":[[-10.7,-151.1],[-12.3,-158.9],[-17.8,-157.8],[-16.2,-150.0]],"a":45},{"p":[[74.6,165.8],[75.3,162.1],[78.5,163.2],[82.6,161.6],[77.5,148.0],[69.6,151.0],[69.6,150.0],[64.4,148.4],[62.9,158.0],[61.0,157.7],[51.5,186.1],[84.0,197.0]],"a":914},{"p":[[-42.5,113.2],[-47.5,99.3],[-65.3,107.3],[-62.0,118.0],[-60.4,119.1]],"a":274},{"p":[[86.9,-64.9],[96.7,-67.9],[95.9,-70.3],[101.4,-72.0],[95.4,-91.4],[75.0,-85.1],[80.9,-65.9],[86.1,-67.5]],"a":458},{"p":[[-95.4,-52.7],[-99.9,-58.6],[-106.8,-53.2],[-102.3,-47.4]],"a":65},{"p":[[-23.2,126.1],[-15.5,123.2],[-14.3,126.2],[26.4,113.5],[47.6,104.8],[40.1,77.8],[38.3,76.7],[27.8,76.1],[30.3,84.3],[28.5,84.8],[25.7,75.3],[15.7,73.9],[-11.1,79.3],[-10.6,80.6],[-25.3,86.0],[-24.6,88.0],[-33.8,91.4],[-29.4,103.3],[-28.0,102.8],[-26.9,105.7],[-19.3,102.9],[-18.5,105.1],[-5.3,100.2],[-6.6,96.7],[19.5,88.5],[21.2,94.0],[-14.9,105.7],[-13.3,111.0],[-15.1,111.6],[-15.6,110.0],[-19.6,111.2],[-19.9,110.2],[-28.2,112.8]],"a":2630},{"p":[[-52.7,-118.8],[-60.1,-131.5],[-68.7,-126.3],[-66.5,-122.8],[-99.6,-103.9],[-90.8,-95.3]],"a":565},{"p":[[81.5,-8.5],[77.1,-22.4],[65.4,-18.7],[64.9,-20.6],[76.4,-24.2],[72.7,-35.8],[51.7,-29.2],[60.4,-1.8]],"a":612},{"p":[[-73.6,-13.7],[-62.1,-18.8],[-65.8,-27.4],[-80.9,-20.8],[-78.3,-14.8],[-74.7,-16.4]],"a":144},{"p":[[-97.5,14.5],[-98.1,10.5],[-96.3,10.3],[-97.3,3.0],[-115.7,5.4],[-115.2,9.5],[-111.1,10.4],[-110.8,12.7],[-107.5,12.3],[-107.0,15.7]],"a":168},{"p":[[-92.1,-53.6],[-83.4,-58.2],[-85.5,-61.2],[-84.1,-62.2],[-88.7,-66.2],[-91.6,-64.2],[-90.9,-63.3],[-92.3,-62.3],[-91.3,-60.9],[-95.8,-59.0]],"a":82},{"p":[[-88.2,-132.2],[-93.3,-142.7],[-96.9,-140.4],[-97.9,-141.9],[-103.0,-138.6],[-102.0,-137.0],[-104.3,-135.6],[-105.3,-137.2],[-109.6,-134.5],[-106.9,-128.4],[-109.4,-126.8],[-105.7,-121.0]],"a":256},{"p":[[-105.9,-16.7],[-98.1,-21.6],[-105.1,-32.6],[-106.2,-31.9],[-109.4,-36.8],[-115.8,-32.8],[-112.6,-27.7],[-113.6,-27.1],[-107.6,-17.7],[-106.8,-18.2]],"a":175},{"p":[[71.5,-43.8],[63.5,-70.3],[43.5,-64.3],[51.1,-35.3],[55.3,-36.4],[54.5,-39.3]],"a":596},{"p":[[-118.7,-8.6],[-125.5,-19.6],[-135.7,-13.3],[-128.9,-2.3]],"a":155},{"p":[[-113.9,-89.6],[-112.0,-91.8],[-121.0,-99.4],[-130.7,-86.0],[-115.0,-70.6],[-112.9,-72.7],[-100.6,-59.1],[-92.0,-67.2],[-99.7,-75.3],[-95.4,-78.6],[-101.6,-84.2],[-105.0,-80.7]],"a":617},{"p":[[-61.8,-70.7],[-51.2,-52.1],[-47.6,-50.5],[-11.5,-65.6],[-17.8,-80.8],[-43.2,-70.5],[-45.3,-74.9],[-38.6,-82.0],[-50.2,-93.0],[-53.3,-89.7],[-51.0,-87.5],[-54.4,-84.0],[-59.9,-88.7],[-64.6,-94.4],[-58.3,-100.7],[-62.8,-106.4],[-67.1,-102.9],[-68.2,-104.3],[-72.4,-101.0],[-73.7,-102.2],[-87.2,-93.1]],"a":1582},{"p":[[-72.7,-42.6],[-76.7,-51.1],[-79.1,-50.0],[-79.7,-51.3],[-96.3,-43.4],[-91.2,-32.5],[-74.5,-40.4],[-75.0,-41.5]],"a":246},{"p":[[3.8,-139.2],[3.0,-142.2],[-9.1,-138.9],[-4.9,-123.4],[4.5,-126.0],[1.1,-138.4]],"a":166},{"p":[[-78.6,7.5],[-85.5,-5.8],[-94.4,-1.2],[-87.6,12.1]],"a":151},{"p":[[87.0,9.8],[82.4,-5.5],[61.0,0.9],[65.6,16.3]],"a":359},{"p":[[132.8,100.9],[133.4,98.3],[143.1,100.3],[141.8,83.9],[98.3,75.7],[95.0,91.1],[98.9,102.2],[108.2,99.7],[109.0,102.6],[100.5,104.9],[107.5,130.5],[145.1,119.7],[143.3,103.0]],"a":1881},{"p":[[-168.3,-3.0],[-184.4,-18.0],[-189.1,-12.9],[-180.2,-4.6],[-181.7,-3.0],[-180.0,-1.5],[-182.6,1.3],[-177.1,6.5]],"a":203},{"p":[[29.1,143.7],[30.2,139.7],[43.2,143.3],[43.7,141.4],[39.2,133.9],[32.4,131.6],[34.2,123.7],[21.9,128.6],[18.6,140.8]],"a":272},{"p":[[-95.6,146.4],[-97.4,135.9],[-110.2,139.3],[-108.7,148.6]],"a":134},{"p":[[-70.6,9.5],[-65.4,7.4],[-64.7,9.1],[-53.6,3.0],[-56.2,-3.3],[-53.7,-4.3],[-56.4,-10.9],[-69.4,-5.6],[-68.0,-2.2],[-69.2,-1.7],[-68.5,-0.2],[-73.7,1.9]],"a":247},{"p":[[-154.2,-23.2],[-144.3,-29.5],[-151.0,-40.0],[-162.8,-32.5],[-158.3,-25.6],[-156.5,-26.7]],"a":164},{"p":[[-146.9,-50.0],[-142.7,-52.9],[-141.7,-51.5],[-136.9,-54.7],[-137.9,-56.1],[-132.4,-59.9],[-137.3,-66.9],[-142.6,-63.3],[-143.8,-65.0],[-148.4,-61.9],[-145.9,-58.3],[-150.5,-55.2]],"a":159},{"p":[[32.7,185.4],[37.9,169.4],[-0.7,157.0],[-1.5,143.7],[-11.7,144.3],[-9.9,172.9],[-2.6,175.6],[-2.5,174.1]],"a":935},{"p":[[-152.1,-60.0],[-156.0,-66.1],[-163.9,-61.0],[-159.9,-54.9]],"a":68},{"p":[[171.1,5.1],[145.8,-12.5],[129.3,5.7],[100.8,48.3],[100.4,52.7],[102.2,57.3],[103.7,59.0],[152.3,69.7],[158.7,51.1],[155.0,49.8]],"a":3317},{"p":[[-97.3,128.1],[-98.4,122.8],[-97.1,122.6],[-100.3,112.5],[-108.9,114.2],[-108.2,117.4],[-114.0,118.5],[-112.3,126.9],[-107.1,125.9],[-106.3,129.9]],"a":197},{"p":[[-69.6,-5.9],[-72.3,-13.0],[-80.0,-10.0],[-77.3,-2.9]],"a":63},{"p":[[58.9,-32.1],[57.4,-36.7],[51.6,-34.8],[53.1,-30.2]],"a":30},{"p":[[62.5,-73.0],[59.8,-83.4],[40.2,-76.4],[42.5,-65.9]],"a":225},{"p":[[90.2,21.1],[87.3,11.5],[67.8,16.5],[66.4,19.2],[74.5,47.9],[77.8,47.6],[89.4,26.7]],"a":536},{"p":[[-56.5,189.8],[-53.1,188.4],[-52.3,190.2],[-48.0,188.4],[-48.8,186.3],[-28.0,178.4],[-30.1,159.1],[-32.9,158.7],[-41.8,163.3],[-44.4,163.2],[-45.9,165.2],[-60.3,170.4],[-61.2,173.1],[-59.2,181.2],[-60.3,181.5],[-59.0,188.7]],"a":654},{"p":[[-157.8,-49.7],[-163.4,-57.5],[-174.7,-49.7],[-169.3,-41.8]],"a":133},{"p":[[-120.6,90.7],[-107.3,84.9],[-106.7,86.5],[-90.7,79.6],[-91.3,78.1],[-69.2,68.6],[-71.8,62.6],[-63.8,59.1],[-67.2,51.1],[-69.2,51.9],[-70.4,49.0],[-75.5,51.2],[-76.6,48.5],[-100.3,58.7],[-99.3,60.8],[-107.0,64.2],[-107.9,62.2],[-108.8,62.6],[-113.2,52.5],[-114.4,53.0],[-117.0,47.0],[-118.6,47.7],[-119.8,44.8],[-135.7,51.6],[-126.1,72.8],[-130.4,74.7],[-124.4,87.4],[-127.3,88.6],[-123.9,94.7],[-120.8,93.8]],"a":1765},{"p":[[-187.6,36.7],[-174.3,48.6],[-147.9,20.9],[-158.6,11.2],[-163.2,14.6],[-165.3,12.7]],"a":681},{"p":[[139.8,-37.9],[122.7,-53.3],[116.8,-49.1],[113.4,-49.1],[110.0,-45.7],[109.4,-42.7],[97.7,-40.6],[95.6,-44.4],[90.7,-43.2],[89.2,-48.9],[112.1,-54.6],[111.5,-61.4],[83.3,-53.1],[98.8,-4.8],[106.2,1.5]],"a":1690}]}; const dioHouses = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
 const dioTile = {}; // id -> {cx, cy (map metres of the tile's middle), group, ...}
 const smooth = t => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
 const inHex = (x, y, R) => { const a = 30 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), u = x * ca + y * sa, v = -x * sa + y * ca, ax = Math.abs(u), ay = Math.abs(v); return ay <= R * Math.sqrt(3) / 2 && ax <= R - ay / Math.sqrt(3); };
@@ -1250,10 +1507,10 @@ function buildDiorama(d, ti) {
  const heroes = d.heroes.map(id => { const s = town.spots.find(p => p.id === id), H = HERO[id]; return {id, s, H, x: (s.x - d.centre[0]) / scl, y: (s.y - d.centre[1]) / scl, r: H.r}; });
  { const main = (() => { // Main Street: the busiest main road nearest the common, for the shops to line up along
    const c = heroes.find(h => h.id === 'common'); if (!c) return null; let best = null; for (const r of roads) if (r.c <= 3) for (const p of r.p) { const dd = Math.hypot(p[0] - c.x, p[1] - c.y); if (!best || dd < best.d) best = {d: dd, road: r}; } return best && best.road; })();
-  if (main) { const pts = main.p, along = (t) => { let run = 0; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); if (t <= run + l || i === pts.length - 1) { const k = Math.min(1, (t - run) / l); return {x: pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * k, y: pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * k, tx: (pts[i][0] - pts[i - 1][0]) / l, ty: (pts[i][1] - pts[i - 1][1]) / l}; } run += l; } };
+  if (main) { const pts = main.p, along = (t) => { let run = 0; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); if (t <= run + l || i === pts.length - 1) { const k = (t - run) / l; return {x: pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * k, y: pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * k, tx: (pts[i][0] - pts[i - 1][0]) / l, ty: (pts[i][1] - pts[i - 1][1]) / l}; } run += l; } };
    let total = 0; for (let i = 1; i < pts.length; i++) total += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
    const c = heroes.find(h => h.id === 'common'); let t0 = total / 2, bd = 1e9; for (let t = 0; t < total; t += 2) { const a = along(t), dd = Math.hypot(a.x - c.x, a.y - c.y); if (dd < bd) { bd = dd; t0 = t; } }
-   [['cafe', 1, -14], ['comellas', 1, 8], ['hoagies', -1, -14], ['lab', -1, 8]].forEach(([id, side, off]) => { const h = heroes.find(q => q.id === id); if (!h) return; const a = along(Math.max(10, Math.min(total - 10, t0 + off + 22))); h.x = a.x - a.ty * side * 12; h.y = a.y + a.tx * side * 12; h.shop = {tx: a.tx, ty: a.ty, side}; h.pinned = true; });
+   [['cafe', 1, -14], ['comellas', 1, 8], ['hoagies', -1, -14], ['lab', -1, 8]].forEach(([id, side, off]) => { const h = heroes.find(q => q.id === id); if (!h) return; const a = along(t0 + off + 22); h.x = a.x - a.ty * side * 12; h.y = a.y + a.tx * side * 12; h.shop = {tx: a.tx, ty: a.ty, side}; h.pinned = true; });
    if (c) { const a = along(t0), side = -1; c.x = a.x - a.ty * side * 40; c.y = a.y + a.tx * side * 40; } } }
  for (let it = 0; it < 120; it++) for (const a of heroes) { if (a.H.fixed || a.pinned) continue;
   for (const b of heroes) if (a !== b) { const dx = a.x - b.x, dy = a.y - b.y, dd = Math.hypot(dx, dy) || .01, need = a.r + b.r + 5; if (dd < need) { const k = (need - dd) / (b.H.fixed || b.pinned ? 1 : 2); a.x += dx / dd * k; a.y += dy / dd * k; } }
@@ -1271,8 +1528,10 @@ function buildDiorama(d, ti) {
  verts.forEach((v, i) => { pos.set([v.px, v.h, -v.py], i * 3); const wet = !isNaN(v.w), t = .5 + .5 * Math.sin(v.px * .21) * Math.cos(v.py * .17); cc.copy(c0).lerp(c1, Math.max(0, Math.min(1, (v.h - 3) / 22 * .6 + t * .4))); if (wet) cc.copy(cw); cols.set([cc.r, cc.g, cc.b], i * 3); });
  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); geo.setAttribute('color', new THREE.BufferAttribute(cols, 3)); geo.setIndex(idx); geo.computeVertexNormals();
  const ground = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({vertexColors: true, roughness: .95, flatShading: true})); ground.receiveShadow = true; out.add(ground);
- // the water: where all three corners are under a real lake
- { const wi = []; for (let i = 0; i < idx.length; i += 3) if ([0, 1, 2].every(k => !isNaN(verts[idx[i + k]].w))) wi.push(idx[i], idx[i + 1], idx[i + 2]); if (wi.length) { const wp = new Float32Array(verts.length * 3); verts.forEach((v, i) => wp.set([v.px, isNaN(v.w) ? v.h : v.w, -v.py], i * 3)); const wg = new THREE.BufferGeometry(); wg.setAttribute('position', new THREE.BufferAttribute(wp, 3)); wg.setIndex(wi); wg.computeVertexNormals(); const wm = new THREE.Mesh(wg, new THREE.MeshStandardMaterial({color: '#3f9ac0', roughness: .15, metalness: .1, transparent: true, opacity: .86})); wm.receiveShadow = true; out.add(wm); } }
+ // the water: any triangle that touches a real lake; depth drives colour, foam and opacity, ripples and glints move with time
+ { const wi = []; for (let i = 0; i < idx.length; i += 3) if ([0, 1, 2].some(k => !isNaN(verts[idx[i + k]].w))) wi.push(idx[i], idx[i + 1], idx[i + 2]);
+  if (wi.length) { const wp = new Float32Array(verts.length * 3), dp = new Float32Array(verts.length); verts.forEach((v, i) => { const wet = !isNaN(v.w); wp.set([v.px, wet ? v.w : v.h + .02, -v.py], i * 3); dp[i] = wet ? Math.max(0, v.w - v.h) : 0; });
+   const wg = new THREE.BufferGeometry(); wg.setAttribute('position', new THREE.BufferAttribute(wp, 3)); wg.setAttribute('depth', new THREE.BufferAttribute(dp, 1)); wg.setIndex(wi); wg.computeVertexNormals(); const wm = new THREE.Mesh(wg, waterMaterial()); wm.receiveShadow = true; wm.renderOrder = 2; out.add(wm); } }
  // the tile's edge: soil down to a plinth, as every Abbie's World tile
  { const used = new Map(); for (let i = 0; i < idx.length; i += 3) for (let k = 0; k < 3; k++) { const a = idx[i + k], b = idx[i + (k + 1) % 3], kk = a < b ? a + '_' + b : b + '_' + a; used.set(kk, (used.get(kk) || 0) + 1); }
   const sv = []; for (const [kk, n] of used) if (n === 1) { const [a, b] = kk.split('_').map(Number), A = verts[a], B = verts[b]; sv.push(A.px, A.h, -A.py, B.px, B.h, -B.py, B.px, -4, -B.py, A.px, A.h, -A.py, B.px, -4, -B.py, A.px, -4, -A.py); }
@@ -1298,11 +1557,30 @@ function buildDiorama(d, ti) {
  G = realG; cafe = realCafe;
  // 7 houses of the real mix, thinned and set along the streets
  const taken = [...pads.map(p => ({x: p.h.x, y: p.h.y, r: p.h.r + 6}))], mine = [];
+ let gb = null; if (d.id === 'abbie-daddy-side') { const home = pads.find(p => p.h.id === 'home'); if (home) { const hx = home.h.x, hz = -home.h.y; let best = null;
+   for (const r of [40, 48, 34]) for (let k = 0; k < 24; k++) { const a = k * Math.PI / 12, px = hx + Math.cos(a) * r, py = -hz + Math.sin(a) * r; if (!inHex(px, py, DIO_R * .72) || !isNaN(waterY(px, py))) continue;
+    if (pads.some(p => p !== home && Math.hypot(p.h.x - px, p.h.y - py) < p.h.r + 14)) continue; const nr = nearRoad(px, py); if (nr && nr.d < 7) continue; const sc0 = (nr ? nr.d : 60) + r * .3; if (!best || sc0 < best.s) best = {px, py, s: sc0}; }
+   if (best) { const sx = best.px, sz = -best.py, face = Math.atan2(hx - sx, hz - sz); gb = {sx, sz, face}; taken.push({x: best.px, y: best.py, r: 17}, {x: sx - Math.sin(face) * 15, y: -(sz - Math.cos(face) * 15), r: 14}); } } }
+ let cds = null; if (d.id === 'anis-side') { const an = pads.find(p => p.h.id === 'ani'); if (an) { let best = null;
+   for (const r of [44, 52, 38]) for (let k = 0; k < 24; k++) { const a = k * Math.PI / 12, px = an.h.x + Math.cos(a) * r, py = an.h.y + Math.sin(a) * r; if (!inHex(px, py, DIO_R * .7) || !isNaN(waterY(px, py))) continue;
+    let bad = false; for (let q = 0; q < 12; q++) { const ex = px + Math.cos(q * .52) * 24, ey = py + Math.sin(q * .52) * 24; if (!isNaN(waterY(ex, ey)) || !inHex(ex, ey, DIO_R * .9)) bad = true; } if (bad) continue;
+    if (pads.some(p => p !== an && Math.hypot(p.h.x - px, p.h.y - py) < p.h.r + 26)) continue; const nr = nearRoad(px, py); if (!nr || nr.d > 70) continue; const hs = Math.abs(hf(px + 20, py) - hf(px - 20, py)) + Math.abs(hf(px, py + 20) - hf(px, py - 20)); const sc0 = nr.d + hs * 3; if (!best || sc0 < best.s) best = {px, py, s: sc0, nr}; }
+   if (best) { cds = {px: best.px, py: best.py, nr: best.nr}; taken.push({x: best.px, y: best.py, r: 30}); } } }
+ if (d.id === 'downtown') { // the town square: the real outline of the buildings around the common (public footprints, shapes only), shrunk to cartoon scale
+  const cp = pads.find(p => p.h.id === 'common'); if (cp) { const K = .21, grp = new THREE.Group(), WALL = ['#b5604a', '#d9c9a4', '#c9c0ae', '#e0c070', '#a9735a', '#cfd6cf'], ROOF = ['#5a4a40', '#6b5648', '#4a4f55'];
+   SQUARE.buildings.forEach((b, i) => { const sh = new THREE.Shape(b.p.map(([x, y]) => new THREE.Vector2(x * K, y * K))), hgt = b.a > 1500 ? 7 : 3.4 + (i * 37 % 10) / 5, hs = (i * 53 % 17) / 17;
+    const gx = cp.h.x + b.p.reduce((s, p) => s + p[0], 0) / b.p.length * K, gy = cp.h.y + b.p.reduce((s, p) => s + p[1], 0) / b.p.length * K; if (!inHex(gx, gy, DIO_R * .9)) return;
+    const geo = new THREE.ExtrudeGeometry(sh, {depth: hgt, bevelEnabled: false}).rotateX(-Math.PI / 2), m = new THREE.Mesh(geo, hkM(WALL[i % WALL.length])), cap = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, {depth: .5, bevelEnabled: false}).rotateX(-Math.PI / 2), hkM(ROOF[i % ROOF.length]));
+    const ey = hf(gx, gy); for (const o of [m, cap]) { o.position.set(cp.h.x, ey - .3, -cp.h.y); o.castShadow = o.receiveShadow = true; } cap.position.y = ey - .3 + hgt; grp.add(m, cap); taken.push({x: gx, y: gy, r: Math.sqrt(b.a) * K * .5 + 3}); });
+   out.add(grp); } }
  for (const h of town.houses.slice().sort((a, b) => Math.hypot(a.x - d.centre[0], a.y - d.centre[1]) - Math.hypot(b.x - d.centre[0], b.y - d.centre[1]))) {
   const px = (h.x - d.centre[0]) / scl, py = (h.y - d.centre[1]) / scl; if (!inHex(px, py, DIO_R * .88)) continue; const wy = waterY(px, py); if (!isNaN(wy)) continue;
   const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 4.6) continue; if (taken.some(t => Math.hypot(t.x - px, t.y - py) < (t.r || 9.5))) continue; if (h.fam === 'shop' && d.id !== 'downtown') continue;
-  taken.push({x: px, y: py, r: 9.5}); mine.push({...h, px, py, hz: hf(px, py)}); if (mine.length > 70) break; }
+  taken.push({x: px, y: py, r: 9.5}); mine.push({...h, px, py, hz: hf(px, py)}); if (mine.length > (d.houses ?? 70)) break; }
  { const yaw = h => Math.atan2(h.fx, -h.fy), HS = .66, grp = new THREE.Group(); out.add(grp);
+  const kit = mine.filter(h => h.fam !== 'shop'); // the real mix, rebuilt as the nine-type kit; shops stay as the instanced blocks
+  kit.forEach((h, i) => { const hs = Math.abs(Math.sin(h.px * 12.9 + h.py * 78.2)) , {tier, type} = houseType(h, hs), g = buildHouse(type, tier, h.w * HS, h.d * HS, Math.max(4.2, h.h * HS), h.wall, h.roofc, hs); g.position.set(h.px, h.hz - .2, -h.py); g.rotation.y = yaw(h); grp.add(g); (dioHouses[d.id] ||= []).push({x: h.px, z: -h.py, y: h.hz, type, tier, yaw: yaw(h)}); });
+  mine.splice(0, mine.length, ...mine.filter(h => h.fam === 'shop'));
   for (const fam of Object.keys(BODY)) { const list = mine.filter(h => h.fam === fam); if (list.length) grp.add(inst(boxGeo, BODY[fam], list, h => { v3.set(h.px, h.hz - .3, -h.py); q.setFromEuler(e.set(0, yaw(h), 0)); sc.set(h.w * HS, (h.h + .3) * HS, h.d * HS); col.set(h.wall); })); }
   const gab = mine.filter(h => h.roof === 'gable' || h.roof === 'steep'), hip = mine.filter(h => h.roof === 'hip'), flat = mine.filter(h => h.roof === 'flat');
   grp.add(inst(gableGeo, roofMat, gab, h => { v3.set(h.px, h.hz + h.h * HS, -h.py); q.setFromEuler(e.set(0, yaw(h), 0)); sc.set(h.w * HS * 1.06, h.d * .5 * h.pitch * 1.1 * HS, h.d * HS * 1.1); col.set(h.roofc); }));
@@ -1311,15 +1589,62 @@ function buildDiorama(d, ti) {
   const chim = mine.filter(h => h.chimney); grp.add(inst(boxGeo, plainMat, chim, h => { const a = yaw(h), o = h.w * HS * .32; v3.set(h.px + Math.cos(a) * o, h.hz + h.h * HS, -h.py - Math.sin(a) * o); q.setFromEuler(e.set(0, a, 0)); sc.set(.9, h.d * HS * .5 * h.pitch + 1.8, .9); col.set('#8a4a36'); })); }
  // 8 trees, thinned, in the zone's colours
  { const T = [], spots = taken.slice(); for (const t of town.trees) { const px = (t.x - d.centre[0]) / scl, py = (t.y - d.centre[1]) / scl; if (!inHex(px, py, DIO_R * .94) || !isNaN(waterY(px, py))) continue; const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 2) continue;
-   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 5 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 150) break; }
+   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 3.2 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 420) break; }
   const grp = new THREE.Group(), broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine'), tint = new THREE.Color(L.grass[1]);
-  grp.add(inst(trunkGeo, plainMat, broad, t => { v3.set(t.px, t.hz, -t.py); q.identity(); sc.set(.7 * t.s, 2.6 * t.s, .7 * t.s); col.set('#6b4f36'); }));
-  grp.add(inst(crownGeo, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
-  grp.add(inst(pineGeo, leafMat, pine, t => { v3.set(t.px, t.hz + .4, -t.py); q.identity(); sc.set(1.9 * t.s, 8 * t.s, 1.9 * t.s); col.set(t.c); })); out.add(grp); }
+  grp.add(inst(TREE_HI.trunk, plainMat, broad, t => { v3.set(t.px, t.hz, -t.py); q.identity(); sc.set(.7 * t.s, 2.6 * t.s, .7 * t.s); col.set('#6b4f36'); }));
+  grp.add(inst(TREE_HI.crown, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
+  grp.add(inst(TREE_HI.pine, leafMat, pine, t => { v3.set(t.px, t.hz + .4, -t.py); q.identity(); sc.set(1.9 * t.s, 8 * t.s, 1.9 * t.s); col.set(t.c); })); out.add(grp); }
+ { const poles = [], heads = []; for (const r of mainR) walk(r, 30, (x, y, tx, ty) => { if (!inHex(x, y, DIO_R * .9) || !isNaN(waterY(x, y))) return; const s = poles.length % 2 ? 1 : -1, px = x - ty * s * 4.2, py = y + tx * s * 4.2; if (taken.some(t => Math.hypot(t.x - px, t.y - py) < (t.r || 6) * .5)) return; poles.push({px, py, hz: hf(px, py)}); });
+  const lg = new THREE.Group(), pm = new THREE.MeshStandardMaterial({color: '#2f3a3a', roughness: .6}), hm = new THREE.MeshStandardMaterial({color: '#ffe3a0', emissive: '#ffcf70', emissiveIntensity: .9});
+  lg.add(inst(HK.cyl, pm, poles, p => { v3.set(p.px, p.hz, -p.py); q.identity(); sc.set(.12, 3.8, .12); col.set('#ffffff'); }), inst(new THREE.IcosahedronGeometry(1, 1), hm, poles, p => { v3.set(p.px, p.hz + 4, -p.py); q.identity(); sc.set(.42, .5, .42); col.set('#ffffff'); }), inst(boxGeo, pm, poles, p => { v3.set(p.px, p.hz + 3.7, -p.py); q.identity(); sc.set(.6, .1, .6); col.set('#ffffff'); })); out.add(lg); }
  // 9 what only this place has
- DRESS[d.id]?.(out, {hf, pads, roads, nearRoad, waterY, mainR, verts, taken});
+ DRESS[d.id]?.(out, {hf, pads, roads, nearRoad, waterY, mainR, verts, taken, gb, cds});
  return {group: out, hf, pads, tile: tileC, roads, verts};
 }
+
+function stripMesh(pts, width, color, yAt) { // a flat road strip along points {x, z}, laid on the ground by yAt(x, z)
+ const pos = [], idx = []; for (let i = 0; i < pts.length; i++) { const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)], tx = b.x - a.x, tz = b.z - a.z, l = Math.hypot(tx, tz) || 1, nx = -tz / l * width / 2, nz = tx / l * width / 2;
+  pos.push(pts[i].x + nx, yAt(pts[i].x + nx, pts[i].z + nz), pts[i].z + nz, pts[i].x - nx, yAt(pts[i].x - nx, pts[i].z - nz), pts[i].z - nz); if (i) { const k = i * 2; idx.push(k - 2, k + 1, k - 1, k - 2, k, k + 1); } }
+ const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals(); const m = new THREE.Mesh(g, hkM(color)); m.receiveShadow = true; return m; }
+
+function buildLaunch() { // Launch: a rocket on its pad on a green island north of the trio, a car road to each of the two home sides
+ const L = new THREE.Group(), LZ = -DIO_R * 2.2; L.position.set(0, 0, LZ); dioGroup.add(L);
+ const isl = new THREE.Mesh(HK.cyl, hkM('#7fa14f')); isl.scale.set(30, 1.2, 30); isl.position.y = -1; isl.receiveShadow = true; const rim = new THREE.Mesh(HK.cyl, hkM('#8a5a3a')); rim.scale.set(30.5, 1.4, 30.5); rim.position.y = -2.2; L.add(rim, isl);
+ const B = (w, h, dd, c, x, y, z) => { const m = new THREE.Mesh(boxGeo, hkM(c)); m.scale.set(w, h, dd); m.position.set(x, y, z); m.castShadow = true; L.add(m); return m; }, Cy = (r0, r1, h, c, x, y, z) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r0, r1, h, 14), hkM(c)); m.position.set(x, y + h / 2, z); m.castShadow = true; L.add(m); return m; };
+ Cy(7, 7.4, .6, '#b8b2a8', 0, 0, 0); Cy(1.6, 1.6, 10, '#f49ac2', 0, .6, 0); const nose = new THREE.Mesh(new THREE.ConeGeometry(1.6, 3.6, 14), hkM('#f49ac2')); nose.position.set(0, 12.4, 0); nose.castShadow = true; L.add(nose);
+ for (let i = 0; i < 3; i++) { const a = i * 2.094, f = B(.3, 3.2, 2.6, '#c84a3a', Math.cos(a) * 2.2, 1.6, Math.sin(a) * 2.2); f.rotation.y = -a; } Cy(.35, .35, 12, '#9aa3a6', 5, 0, 2); B(.4, .4, 3.4, '#9aa3a6', 5, 11.6, .4); // the gantry tower and arm
+ B(14, .6, 5, '#7a7a76', 0, 0, 12); for (let i = -2; i <= 2; i++) B(.5, .1, 2.4, '#f4efe4', i * 2.4, .65, 12); // a small hangar apron with stripes
+ const sign = B(5, 1.6, .25, '#f4efe4', -9, 2.4, 9); Cy(.1, .1, 2.4, '#6a4a2e', -9, 0, 9);
+ const tiles = [{x: Math.sin(rad(60)) * DIO_R, z: -Math.cos(rad(60)) * DIO_R}, {x: Math.sin(rad(300)) * DIO_R, z: -Math.cos(rad(300)) * DIO_R}];
+ for (const t of tiles) { const a = {x: t.x * .88, z: t.z - DIO_R * .78}, pts = []; for (let i = 0; i <= 10; i++) { const u = i / 10; pts.push({x: a.x + (0 - a.x) * u + Math.sin(u * Math.PI) * (t.x > 0 ? 6 : -6), z: a.z + (LZ + 28 - a.z) * u}); } dioGroup.add(stripMesh(pts, 5, '#4f4b49', () => .3)); }
+ return L;
+}
+
+const waterU = {uWT: {value: 0}}; // water time, advanced in dioFrame
+function waterMaterial() { // shallow turquoise to deep blue by depth, a foam line on the shore, drifting ripples and glints
+ const m = new THREE.MeshStandardMaterial({color: '#3f9ac0', roughness: .12, metalness: .12, transparent: true, depthWrite: false});
+ m.onBeforeCompile = sh => { sh.uniforms.uWT = waterU.uWT;
+  sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute float depth; varying float vDepth; varying vec3 vWP;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvDepth = depth; vWP = (modelMatrix * vec4(position, 1.0)).xyz;');
+  sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nuniform float uWT; varying float vDepth; varying vec3 vWP;')
+   .replace('#include <color_fragment>', `#include <color_fragment>
+    float dd = clamp(vDepth / 3.2, 0.0, 1.0);
+    vec3 shallow = vec3(0.56, 0.86, 0.80), mid = vec3(0.25, 0.60, 0.76), deep = vec3(0.10, 0.34, 0.55);
+    vec3 wc = mix(shallow, mid, smoothstep(0.0, 0.45, dd)); wc = mix(wc, deep, smoothstep(0.4, 1.0, dd));
+    float rip = sin(vWP.x * 1.3 + uWT * 1.1) * sin(vWP.z * 1.1 - uWT * .9) + sin((vWP.x + vWP.z) * 2.3 + uWT * 1.7) * .5;
+    float foam = (1.0 - smoothstep(0.05, 0.55 + rip * .12, vDepth)) * (0.7 + 0.3 * sin(vWP.x * 3.0 + vWP.z * 2.0 + uWT * 2.0));
+    diffuseColor.rgb = mix(wc, vec3(0.97, 0.99, 1.0), clamp(foam, 0.0, 1.0));
+    diffuseColor.a = mix(0.42, 0.93, smoothstep(0.0, 0.5, dd)) + foam * .3;`)
+   .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+    normal = normalize(normal + vec3(sin(vWP.x * 2.1 + uWT * 1.3) * .09, 0.0, cos(vWP.z * 1.9 - uWT * 1.1) * .09));`)
+   .replace('#include <opaque_fragment>', `float gl = pow(max(0.0, sin(vWP.x * 5.0 + uWT * 2.2) * sin(vWP.z * 4.6 - uWT * 1.8)), 9.0) * .28; outgoingLight += vec3(gl);
+    #include <opaque_fragment>`); };
+ return m; }
+
+// hi-fi low-poly trees: lumpy multi-blob crowns, tiered pines, tapered trunks (shared by every tile)
+const TREE_HI = (() => { const jit = (g, k) => { const p = g.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), n = 1 + .13 * Math.sin(x * 5.1 + k) * Math.cos(z * 4.3 + y * 3.7 + k); p.setXYZ(i, x * n, y * n, z * n); } g.computeVertexNormals(); return g; };
+ const blob = (x, y, z, r, k) => jit(new THREE.IcosahedronGeometry(r, 1), k).translate(x, y, z), cone = (r, h, y) => new THREE.ConeGeometry(r, h, 10).translate(0, y + h / 2, 0);
+ return {crown: merge([blob(0, 0, 0, 1, 0), blob(.68, -.22, .2, .72, 2), blob(-.62, -.3, -.28, .76, 4), blob(.1, .55, -.42, .62, 6), blob(-.15, .4, .5, .55, 8)]),
+  pine: merge([cone(1, .42, 0), cone(.8, .38, .26), cone(.6, .34, .5), cone(.38, .3, .72)]), trunk: new THREE.CylinderGeometry(.16, .3, 1, 8).translate(0, .5, 0)}; })();
 const dioCafes = [];
 
 // ---- what only each place has ----
@@ -1340,7 +1665,18 @@ const DRESS = {
   for (let k = 0; k < 4; k++) { const car = new THREE.Group(), body = new THREE.Mesh(boxGeo, M(['#b9322c', '#2f5d8a', '#e8e2d0', '#3b6f4a'][k])), cab = new THREE.Mesh(boxGeo, M('#9fb7c6')); body.scale.set(3.6, .9, 1.6); body.position.y = .7; cab.scale.set(1.8, .7, 1.4); cab.position.set(-.2, 1.4, 0); car.add(body, cab); put(car, ...pt(-20 + k * 11, s * 1.9), along); }
   for (let k = 0; k < 7; k++) for (const side of [1, -1]) { const tr = new THREE.Group(), tk = new THREE.Mesh(new THREE.CylinderGeometry(.18, .25, 2.2, 6), M('#6b4f36')), cr = new THREE.Mesh(new THREE.IcosahedronGeometry(1.7, 0), M('#e8b932', {flatShading: true})), pit = new THREE.Mesh(new THREE.CylinderGeometry(.9, .9, .12, 8), M('#4a3f36')); tk.position.y = 1.1; cr.position.y = 3.4; pit.position.y = .06; tr.add(pit, tk, cr); put(tr, ...pt(-33 + k * 11, side * 6.4)); }
  },
- 'anis-side'(out, c) { // the hill by Horn Pond: the highest ground of the tile, with a cairn, a flag and a bench to look out from
+ 'anis-side'(out, c) { // her cul de sac: a ring road round a green, six houses facing in, a short road out to the street; then the hill by Horn Pond
+  if (c.cds) { const {px, py, nr} = c.cds, cy = c.hf(px, py) + .15, g = new THREE.Group(); g.position.set(px, 0, -py); out.add(g);
+   const ring = []; for (let i = 0; i <= 32; i++) { const a = i / 32 * Math.PI * 2; ring.push({x: Math.cos(a) * 11, z: Math.sin(a) * 11}); }
+   g.add(stripMesh(ring, 4.2, '#5e5a58', (x, z) => c.hf(px + x, py - z) + .15)); const island = new THREE.Mesh(HK.cyl, hkM('#6fa34a')); island.scale.set(7.5, .5, 7.5); island.position.set(0, cy - .1, 0); island.receiveShadow = true; g.add(island);
+   const tr = new THREE.Mesh(new THREE.IcosahedronGeometry(2.2, 0), hkM('#d9842f')); tr.position.set(0, cy + 4, 0); tr.castShadow = true; const tk = new THREE.Mesh(HK.cyl, hkM('#6b4f36')); tk.scale.set(.35, 3, .35); tk.position.set(0, cy, 0); g.add(tk, tr);
+   const dx = nr.x - px, dy = nr.y - py, dl = Math.hypot(dx, dy) || 1, stem = [], n = Math.max(2, Math.ceil(dl / 6)); for (let i = 0; i <= n; i++) { const t = i / n, x = dx * t * (1 - 11 / dl) + dx / dl * 11, y = dy * t * (1 - 11 / dl) + dy / dl * 11; stem.push({x, z: -y}); }
+   g.add(stripMesh(stem, 4.2, '#5e5a58', (x, z) => c.hf(px + x, py - z) + .15));
+   const stemAng = Math.atan2(-dy, dx), types = ['colonial', 'cape', 'splitlevel', 'farmhouse', 'colonial', 'cape']; let hi = 0;
+   for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; if (Math.abs(((a - stemAng + Math.PI * 3) % (Math.PI * 2)) - Math.PI) > Math.PI - .5) continue; const hx = Math.cos(a) * 20, hz = Math.sin(a) * 20, tp = types[hi++ % types.length], wide = 8.5 + (hi % 3), hh = new THREE.Group();
+    hh.add(buildHouse(tp, tp === 'cape' ? 0 : 1, wide, 7, 4.4, ['#e5d8b8', '#c9d6c8', '#e8c9b0', '#d6dbe2', '#e0cf9a'][hi % 5], ['#5a4a40', '#4a4f55', '#6b4a3a'][hi % 3], (hi * .37) % 1)); hh.position.set(hx, c.hf(px + hx, py - hz) - .2, hz); hh.rotation.y = Math.atan2(-hx, -hz); g.add(hh); }
+   (dioSpots['anis-side'] ||= {}).culdesac = {x: px, z: -py, y: cy, facing: 0}; }
+  // the hill by Horn Pond: the highest ground of the tile, with a cairn, a flag and a bench to look out from
   let best = null; for (const v of c.verts) if (isNaN(v.w) && Math.hypot(v.px, v.py) < DIO_R * .8 && !c.pads.some(p => Math.hypot(v.px - p.h.x, v.py - p.h.y) < p.h.r + 10) && (!best || v.h > best.h)) best = v;
   if (!best) return; const g = new THREE.Group(); g.position.set(best.px, best.h, -best.py); out.add(g);
   for (let i = 0; i < 6; i++) { const r = new THREE.Mesh(new THREE.DodecahedronGeometry(.9 - i * .08, 0), M(['#9a9a96', '#b3afa6', '#8b8984'][i % 3], {flatShading: true})); r.position.set(Math.cos(i * 1.2) * (i < 4 ? 1.4 : .4), i < 4 ? .5 : 1.4, Math.sin(i * 1.2) * (i < 4 ? 1.4 : .4)); g.add(r); }
@@ -1348,25 +1684,29 @@ const DRESS = {
   const bench = new THREE.Mesh(boxGeo, M('#6a4a2e')); bench.scale.set(2.4, .25, .7); bench.position.set(-3, .3, 1.5); g.add(bench);
   const hill = out.userData; hill.summit = {x: best.px, y: best.py, h: best.h};
  },
- 'abbie-daddy-side'(out, c) { // the road to Launch: a signpost and a small rocket at the north edge of the tile
-  const top = c.verts.reduce((b, v) => (v.py > b.py && Math.abs(v.px) < 30 && v.py < DIO_R * .75 && isNaN(v.w) ? v : b), {py: -1e9}); if (top.py < -1e8) return; const g = new THREE.Group(); g.position.set(top.px, top.h, -top.py); out.add(g); (dioSpots['abbie-daddy-side'] ||= {}).launch = {x: top.px, z: -top.py, y: top.h, facing: 0};
-  const pad = new THREE.Mesh(new THREE.CylinderGeometry(3.4, 3.8, .5, 14), M('#b8b2a8')); pad.position.y = .25; const body = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 6, 14), M('#f49ac2')); body.position.y = 3.5; const nose = new THREE.Mesh(new THREE.ConeGeometry(1.2, 2.6, 14), M('#f49ac2')); nose.position.y = 7.8;
-  for (let i = 0; i < 3; i++) { const f = new THREE.Mesh(boxGeo, M('#c84a3a')); f.scale.set(.2, 2, 1.6); f.position.set(Math.cos(i * 2.1) * 1.5, 1.6, Math.sin(i * 2.1) * 1.5); f.rotation.y = -i * 2.1; g.add(f); } g.add(pad, body, nose);
-  const post = new THREE.Mesh(new THREE.CylinderGeometry(.1, .1, 2.6, 5), M('#6a4a2e')), arrow = new THREE.Mesh(boxGeo, M('#e8643c')); post.position.set(-6, 1.3, 4); arrow.scale.set(2.2, .7, .1); arrow.position.set(-6, 2.6, 4); arrow.rotation.y = -.3; g.add(post, arrow);
+ 'abbie-daddy-side'(out, c) { // the house and back yard, the Gingerbread House a short walk away, and the bunker door behind it (sealed: not built yet)
+  const home = c.pads.find(p => p.h.id === 'home'); if (!home) return; const hx = home.h.x, hz = -home.h.y;
+  const best = c.gb; if (!best) return; const sx = best.sx, sz = best.sz, gy = c.hf(sx, -sz), face = best.face, g = new THREE.Group(); g.position.set(sx, gy, sz); g.rotation.y = face; out.add(g);
+  buildGingerbread(g); (dioSpots['abbie-daddy-side'] ||= {}).gingerbread = {x: sx, z: sz, y: gy, facing: face};
+  const bx = sx - Math.sin(face) * 15, bz = sz - Math.cos(face) * 15, bg = new THREE.Group(); bg.position.set(bx, c.hf(bx, -bz), bz); bg.rotation.y = face; out.add(bg); buildBunker(bg); dioSpots['abbie-daddy-side'].bunker = {x: bx, z: bz, y: bg.position.y, facing: face};
+  // a stepping-stone path of round candies from the house to the shop
+  for (let i = 1; i < 8; i++) { const t = i / 8, px = hx + (sx - hx) * t, pz = hz + (sz - hz) * t, s = new THREE.Mesh(HK.cyl, hkM(['#f2a7c3', '#f7e08a', '#a9e0c4', '#f6b97a'][i % 4])); s.scale.set(.9, .18, .9); s.position.set(px, c.hf(px, -pz) + .05, pz); s.receiveShadow = true; out.add(s); }
+  const mark = (id, x, z, y) => { (dioSpots['abbie-daddy-side'] ||= {})[id] = {x, z, y, facing: 0}; };
+  { const lx = 0, lz = -DIO_R * 2.2, tc = {x: Math.sin(rad(60)) * DIO_R, z: -Math.cos(rad(60)) * DIO_R}; mark('launch', lx - tc.x, lz - tc.z, 0); }
  },
 };
 
 // ---- the view: each region has its own opinion about the pulled-back view (palette, light, lens, tilt, distance) ----
 // The pitch-by-zoom curve is the open-land camera's (simulations/land-camera.mjs, AW-STUDY-0018), tuned for each region.
 const ORDER_DIO = ['dio-trio', 'dio-downtown', 'dio-anis-side', 'dio-abbie-daddy-side'];
-const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42};
-const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70};
+const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42, wash: 'real'};
+const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70, wash: 'trio'};
 let viewDio = false, look = LOOK_REAL, dragging = false; const dioC = new THREE.Color(), dioV = new THREE.Vector3(), rad = a => a * Math.PI / 180;
 const pitchFor = (dist, L) => rad(L.lowPitch + (L.highPitch - L.lowPitch) * Math.pow(Math.max(0, Math.min(1, Math.log(dist / 40) / Math.log(760 / 40))), .8));
 canvas.addEventListener('pointerdown', () => { dragging = true; }); addEventListener('pointerup', () => { dragging = false; });
 function setupDioramas() {
- const DV = DIOS.map(buildDiorama);
- DIOS.forEach((d, i) => { const v = DV[i]; dioTiles[d.id] = {group: v.group, centre: v.group.position.clone().add(dioGroup.position), spots: dioSpots[d.id] || {}}; });
+ const DV = DIOS.map(buildDiorama); buildLaunch();
+ DIOS.forEach((d, i) => { const v = DV[i]; dioTiles[d.id] = {hf: v.hf, group: v.group, centre: v.group.position.clone().add(dioGroup.position), spots: dioSpots[d.id] || {}, houses: dioHouses[d.id] || []}; });
  DIOS.forEach((d, i) => { const t = DV[i].tile; spotByID['dio-' + d.id] = {id: 'dio-' + d.id, name: d.name, line: d.look.mood[0].toUpperCase() + d.look.mood.slice(1) + '.', x: DIO_ORIGIN[0] + t.x, y: DIO_ORIGIN[1] + t.y, z: 10}; ICON['dio-' + d.id] = d.pin; });
  spotByID['dio-trio'] = {id: 'dio-trio', name: 'Three regions', line: "Downtown, Ani's side, and Abbie and Daddy's side, small enough to hold.", x: DIO_ORIGIN[0], y: DIO_ORIGIN[1], z: 6}; ICON['dio-trio'] = '⬡';
 }
@@ -1374,22 +1714,21 @@ function visitDio(id) {
  const s = spotByID[id], L = id === 'dio-trio' ? LOOK_TRIO : DIOS.find(d => 'dio-' + d.id === id).look; shown = id; current = ORDER_DIO.indexOf(id); look = L;
  const tgt = new THREE.Vector3(X(s.x), s.z, Z(s.y)), pitch = pitchFor(L.dist, L), az = rad(L.azimuth), h = Math.cos(pitch) * L.dist;
  fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(tgt.x + Math.sin(az) * h, tgt.y + Math.sin(pitch) * L.dist, tgt.z - Math.cos(az) * h), t1: tgt};
- bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1;
+ if (id !== 'dio-trio') { bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1; clearTimeout(visitDio.t); visitDio.t = setTimeout(() => { bubble.style.opacity = 0; }, 7000); } else bubble.style.opacity = 0;
 }
 function setView(on) {
- viewDio = on; dioGroup.visible = on; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
+ viewDio = on; dioGroup.visible = on; bubble.classList.toggle('dock', on); bubble.onclick = () => { bubble.style.opacity = 0; }; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
  controls.minDistance = on ? 20 : 30; controls.maxDistance = on ? 760 : 14000;
  if (on) visitDio('dio-trio'); else { look = LOOK_REAL; home(); }
 }
 document.getElementById('dio').onclick = () => setView(!viewDio);
 function dioFrame(dt, t) {
+ waterU.uWT.value = t;
  const k = 1 - Math.exp(-dt * 3.5), L = look;
+ if (WC.zone !== (L.wash || 'off')) WC.setZone(L.wash || 'off'); // each zone's opinion about its own distance
  scene.background.lerp(dioC.set(L.bg), k); hemi.color.lerp(dioC.set(L.sky), k); hemi.groundColor.lerp(dioC.set(L.gnd), k); sun.color.lerp(dioC.set(L.sun), k);
  sun.intensity += (L.sunI - sun.intensity) * k; hemi.intensity += (L.hemiI - hemi.intensity) * k; sunDir.lerp(dioV.set(...L.sunDir), k);
  if (Math.abs(camera.fov - L.fov) > .05) { camera.fov += (L.fov - camera.fov) * k; camera.updateProjectionMatrix(); }
- if (viewDio && !fly && !dragging && L.lowPitch) { // the zone's tilt follows the zoom: close and low, far and high
-  const tg = controls.target, dist = camera.position.distanceTo(tg), cur = Math.asin(Math.max(-1, Math.min(1, (camera.position.y - tg.y) / dist))), want = pitchFor(dist, L);
-  if (Math.abs(want - cur) > .003) { const p = cur + (want - cur) * .05, hx = camera.position.x - tg.x, hz = camera.position.z - tg.z, hl = Math.hypot(hx, hz) || 1; camera.position.set(tg.x + hx / hl * Math.cos(p) * dist, tg.y + Math.sin(p) * dist, tg.z + hz / hl * Math.cos(p) * dist); } }
  for (const c of dioCafes) c.key.rotation.y = t;
  for (const f of stageFrames) f(dt, t);
 }
@@ -1421,6 +1760,9 @@ function setupStage() {
   frame: fn => { stageFrames.push(fn); return () => { const i = stageFrames.indexOf(fn); if (i >= 0) stageFrames.splice(i, 1); }; },
   flyTo: (target, o = {}) => { const v = target.isVector3 ? target : new THREE.Vector3(target.x, target.y || 0, target.z); const dist = o.dist || 120, pitch = rad(o.pitch ?? 50), az = rad(o.azimuth ?? 180), h = Math.cos(pitch) * dist; fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(v.x + Math.sin(az) * h, v.y + Math.sin(pitch) * dist, v.z - Math.cos(az) * h), t1: v.clone()}; },
   setLook: l => { look = {...look, ...l}; }, hideChrome: on => { document.querySelector('.hud').style.display = on ? 'none' : ''; bubble.style.opacity = on ? 0 : bubble.style.opacity; }};
+ const ground = (wx, wz) => { for (const d of DIOS) { const t = dioTiles[d.id], px = wx - t.group.position.x - dioGroup.position.x, py = -(wz - t.group.position.z - dioGroup.position.z); if (inHex(px, py, DIO_R)) return t.hf(px, py) + dioGroup.position.y; } return 0; };
+ stage.ground = ground;
+ for (const t of Object.values(dioTiles)) for (const sp of Object.values(t.spots)) { const f = sp.facing || 0, ox = Math.sin(f), oz = Math.cos(f); sp.out = {dirX: ox, dirZ: oz}; sp.street = {dirX: oz, dirZ: -ox}; const cx = sp.x + ox * 8.5, cz = sp.z + oz * 8.5; sp.curb = {x: cx, y: t.hf(cx, -cz), z: cz}; }
  // the named scenes: the café curb, the homes, and Launch sit on their tiles
  const at = (tile, hero, extra = {}) => { const sp = dioTiles[tile]?.spots[hero]; if (!sp) return; registerScene({id: extra.id, region: tile, anchor: [sp.x, sp.z], y: sp.y, facing: sp.facing, bounds: extra.bounds || 30}); };
  at('downtown', 'cafe', {id: 'cafe-curb'}); at('abbie-daddy-side', 'home', {id: 'abbie-kitchen'}); at('abbie-daddy-side', 'home', {id: 'treehouse'}); at('anis-side', 'ani', {id: 'anis-kitchen'}); at('abbie-daddy-side', 'launch', {id: 'launch-pad'}); at('downtown', 'lab', {id: 'lab-door'}); at('abbie-daddy-side', 'muraco', {id: 'school-door'});
@@ -1436,10 +1778,11 @@ function setupStage() {
 // ---------- go ----------
 buildTown(1);
 const {train, line} = placeSpots(); setupDioramas(); makePins();
-window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID}; // for other studies; the anchors are in simulations/abbietown/town.mjs
+window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
+WC.precompile(scene, camera); if (/[?&]watercolour=off\b/.test(location.search)) WC.enabled = false; // compiled before the first washed frame; ?watercolour=off for comparing
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();
 function onLine(d) { d = ((d % lineLen) + lineLen) % lineLen; for (let i = 1; i < line.length; i++) { const l = Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); if (d <= l) { const t = d / l; return [line[i - 1][0] + (line[i][0] - line[i - 1][0]) * t, line[i - 1][1] + (line[i][1] - line[i - 1][1]) * t]; } d -= l; } return line[line.length - 1]; }
 const tmp = new THREE.Vector3();
@@ -1455,7 +1798,7 @@ renderer.setAnimationLoop(() => {
  if (cafe) { cafe.key.rotation.y = t; if (cafe.pop) { cafe.pop = Math.max(0, cafe.pop - dt * 1.5); const s = 1 + Math.sin(cafe.pop * Math.PI) * .15; cafe.g.scale.setScalar(s); } }
  if (!reduce) { const d = (t * 16) % (lineLen * 2), dir = d < lineLen ? 1 : -1, at = d < lineLen ? d : lineLen * 2 - d, [px, py] = onLine(at), [qx, qy] = onLine(at + dir * 5); train.position.set(X(px), land.heightAt(px, py) + 1, Z(py)); train.lookAt(X(qx), land.heightAt(px, py) + 1, Z(qy)); }
  dioFrame(dt, t);
- renderer.render(scene, camera);
+ WC.update(dt); WC.render(scene, camera);
  // pins and the bubble ride on their places (spatial layer)
  const r = stage.getBoundingClientRect(), camD = camera.position.distanceTo(tg);
  for (const id in pins) { const s = spotByID[id]; tmp.set(X(s.x), s.z + (s.far ? 160 : 26), Z(s.y)).project(camera); const on = tmp.z < 1 && Math.abs(tmp.x) < 1.05 && Math.abs(tmp.y) < 1.05; pins[id].style.left = (tmp.x + 1) / 2 * r.width + 'px'; pins[id].style.top = (1 - tmp.y) / 2 * r.height + 'px'; pins[id].classList.toggle('far', !on || (id.startsWith('dio-') !== viewDio) || (!s.far && camD > 9000)); }

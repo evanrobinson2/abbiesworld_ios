@@ -10,8 +10,11 @@
 //   stick     Stick man: ink bones on paper, a round head, every drawing a little different (line boil), 12 a second
 //   painted   Painted brush (simulations/painted-brush.mjs, from the shaders thread): brush-broken light, purple
 //             shadows, a teal rim and a broken ink line, its neon light flickering at 12 a second
+//   handdrawn Drawn by hand, 12 frames (simulations/hand-drawn.mjs, AW-STUDY-0051): two hard bands, a pen line that swells and
+//             boils, paper grain, every pose held for two film frames
 //   comic     1980s cartoon action / hero shooter: hard two-tone cel, thick ink, saturated suit colours, strong rim
 import {paintBrush} from '/simulations/painted-brush.mjs';
+import {handDrawn} from '/simulations/hand-drawn.mjs';
 
 export const DIRECTIONS = [
  {id: 'studio', name: 'As built', short: 'As built'},
@@ -20,6 +23,7 @@ export const DIRECTIONS = [
  {id: 'stick', name: 'Stick man', short: 'Stick'},
  {id: 'comic', name: '80s action cartoon', short: '80s action'},
  {id: 'painted', name: 'Painted brush', short: 'Painted'},
+ {id: 'handdrawn', name: 'Drawn by hand, 12 frames', short: 'By hand'},
 ];
 
 // part -> colour, by direction (mannequin part names; skinned bodies take the 'body' colour)
@@ -38,6 +42,7 @@ const STAGES = {
  village: {sky: ['#d9c7a6', '#efe4cc'], floor: '#b98d5e', rim: '#7a5a3a', sun: '#ffd9a0', sunI: 3, hemi: ['#f3e3c4', '#5a4030', .9], shadow: true},
  stick: {sky: ['#fbfaf6', '#fbfaf6'], floor: '#f4f1e8', rim: '#d8d2c2', sun: '#ffffff', sunI: 1.5, hemi: ['#ffffff', '#ffffff', 1.4], shadow: false},
  painted: {sky: ['#3b3f63', '#7a5a7e'], floor: '#4a4560', rim: '#3fe6d4', sun: '#ffd2a1', sunI: 2.2, hemi: ['#8a9bd0', '#3a2a4a', .9], shadow: true, dark: true},
+ handdrawn: {sky: ['#f3ead6', '#fbf6ea'], floor: '#e8dcc2', rim: '#c9b38a', sun: '#fff1dc', sunI: 2.2, hemi: ['#fff6e8', '#b9a07a', 1.1], shadow: false},
  comic: {sky: ['#ffd23f', '#ff7a3d'], floor: '#2a2440', rim: '#ffd23f', sun: '#ffffff', sunI: 3.2, hemi: ['#9ad8ff', '#3a1f5a', 1], shadow: true, dark: true},
 };
 
@@ -198,6 +203,11 @@ export function dress(T, actor, id, frame) {
   const B = paintBrush(T, actor.object, {accent: '#3fe6d4'});
   undo.push(() => B.restore());
   out.update = () => B.update(performance.now() / 1000);
+ } else if (id === 'handdrawn') {
+  const Hd = handDrawn(T, actor.object, {});
+  undo.push(() => Hd.restore());
+  out.update = (camera, f) => Hd.brush.setFrame(f);
+  out.fps = 12;
  } else if (id === 'stick') {
   for (const o of meshes) { const was = o.visible; o.visible = false; undo.push(() => { o.visible = was; }); }
   const st = stickFigure(T, actor);

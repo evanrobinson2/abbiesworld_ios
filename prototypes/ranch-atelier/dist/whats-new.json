@@ -2,15 +2,59 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
-      "id": "2026-10-23-light-study",
+      "id": "2026-10-23-watercolour-distance",
       "date": "2026-10-23",
-      "title": "Light study: fourteen ways to light the world",
-      "line": "Golden hour, a café window shaft, a bare basement bulb, a hard-sun Moon base and a cosy Halloween dusk, all rebuilt live on our ranch. Pick the ones you love.",
-      "image": "/whats-new/2026-10-23-light-study.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXjLkpqwFiWaYuFKjT8TA8G",
-      "threadTitle": "Light study",
+      "title": "Watercolour distance",
+      "line": "Pull back in Abbie's Town and the far world turns to wet watercolour. Downtown, Ani's side and Abbie and Daddy's side each paint their distance in their own colours.",
+      "image": "/whats-new/2026-10-23-watercolour-distance.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXqxTopZ32Vo7Wzbt9v3Pse",
+      "threadTitle": "Watercolour distance",
       "tour": false,
-      "link": "/studies/light/"
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-23-rig-hero",
+      "date": "2026-10-23",
+      "title": "Your hero, rigged",
+      "line": "The flying hero you pasted is now cut into parts on a named skeleton with hair, belt and scarf as decorations, and it turns. A Unity-style export is included (not yet run in Unity).",
+      "image": "/whats-new/2026-10-23-rig-hero.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMY1cycvjR6PnahcM7wX7rx",
+      "threadTitle": "AW-STUDY-0047 - Rigged Hero Cut-Out",
+      "tour": false,
+      "link": "/studies/rig-hero/"
+    },
+    {
+      "id": "2026-10-23-cafe-diorama",
+      "date": "2026-10-23",
+      "title": "Walk into the café",
+      "line": "Step through the café's front doors and walk Abbie round the real room, day or night. Turn the jukebox on, find what the register is hiding, and try the old door behind the bar.",
+      "image": "/whats-new/2026-10-23-cafe-diorama.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9",
+      "threadTitle": "AW-STUDY-0013 - The Coffee Shop",
+      "tour": false,
+      "link": "/studies/cafe/diorama.html"
+    },
+    {
+      "id": "2026-10-23-hand-drawn",
+      "date": "2026-10-23",
+      "title": "Drawn by hand, 12 frames",
+      "line": "The brute fight has a pencil button: poses hold for two frames, the pen line redraws every drawing, and each hit freezes the picture a beat.",
+      "image": "/whats-new/2026-10-23-hand-drawn.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXN3WE59yf51fCQsfkeXJ2x",
+      "threadTitle": "AW-STUDY-0051 - Drawn by Hand, 12 Frames",
+      "tour": false,
+      "link": "/studies/brute-fight/play.html?look=hand"
+    },
+    {
+      "id": "2026-10-23-abbietown-houses",
+      "date": "2026-10-23",
+      "title": "Nine kinds of house",
+      "line": "The town's houses are now capes, bungalows, triple-deckers, colonials, split-levels, farmhouses, Victorians, Tudors and estates, in three tiers of wealth, with porches, fences, walls and mailboxes.",
+      "image": "/whats-new/2026-10-23-abbietown-houses.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0042 - Abbie's Town",
+      "tour": false,
+      "link": "/town"
     },
     {
       "id": "2026-10-23-grace-basement-6",
