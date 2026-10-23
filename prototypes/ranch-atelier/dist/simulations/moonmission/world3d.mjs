@@ -51,12 +51,12 @@ function truck() {
 }
 function stars(n = 600, r = 400) { const p = new Float32Array(n * 3); for (let i = 0; i < n; i++) { const a = Math.random() * 6.283, b = Math.acos(2 * Math.random() - 1); p.set([r * Math.sin(b) * Math.cos(a), r * Math.cos(b), r * Math.sin(b) * Math.sin(a)], i * 3); }
  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(p, 3)); return new THREE.Points(g, new THREE.PointsMaterial({color: 0xffffff, size: 1.6, sizeAttenuation: false})); }
-function room(w, d, c, floorC) { const g = new THREE.Group(); add(g, at(box(w, .2, d, floorC), 0, -.1, 0), at(box(w, 3, .2, c), 0, 1.5, -d / 2), at(box(.2, 3, d, c), -w / 2, 1.5, 0), at(box(.2, 3, d, c), w / 2, 1.5, 0), at(box(w, .2, d, 0xf2eee4), 0, 3.1, 0), at(box(w, 3, .2, c), 0, 1.5, d / 2 + 4)); return g; }
+function room(w, d, c, floorC) { const g = new THREE.Group(); add(g, at(box(w, .2, d, floorC), 0, -.1, 0), at(box(w, 3, .2, c), 0, 1.5, -d / 2), at(box(.2, 3, d, c), -w / 2, 1.5, 0), Object.assign(at(box(.2, 3, d, c), w / 2, 1.5, 0), {name: 'cut'}), Object.assign(at(box(w, .2, d, 0xf2eee4), 0, 3.1, 0), {name: 'cut'}), Object.assign(at(box(w, 3, .2, c), 0, 1.5, d / 2 + 4), {name: 'cut'})); return g; }
 
 const BUILD = {
  'main-street'(S) {
-  const g = new THREE.Group(); add(g, at(box(120, .2, 90, 0xa7a79f), 0, -.15, 0), at(box(120, .05, 12, 0x3a3d45), 0, -.02, 6)); // pavement, asphalt street
-  add(g, at(box(120, .3, 4, 0xcfcfc6), 0, .0, -4), at(box(120, .12, .3, 0xffffff), 0, .02, 6)); // sidewalk, centre line
+  const g = new THREE.Group(); add(g, at(box(400, .2, 300, 0xa7a79f), 0, -.15, 0), at(box(400, .05, 12, 0x3a3d45), 0, -.02, 6)); // pavement, asphalt street
+  add(g, at(box(400, .3, 4, 0xcfcfc6), 0, .0, -4), at(box(400, .12, .3, 0xffffff), 0, .02, 6)); // sidewalk, centre line
   const cafe = new THREE.Group(); add(cafe, at(box(12, 6, 9, 0xb4553a), 0, 3, 0), at(box(12.4, .5, 9.4, 0xe9e2d0), 0, 6.2, 0), at(box(8, .3, 3, 0x3a8f7f), 0, 3.6, 5.2), at(box(2, 3.2, .2, 0x6a3c24), 3.5, 1.6, 4.55), at(box(3.4, 2.2, .2, 0xffe9b0, {emissive: 0xffc870, emissiveIntensity: .35}), -2.5, 2.2, 4.55)); // coffee shop front toward +z (the street)
   const sign = label('COFFEE', 6, 1.4, '#3a2a1a', '#ffe9b0', 'bold 90px serif'); sign.position.set(0, 4.7, 4.56); cafe.add(sign); cafe.position.set(0, 0, -12); g.add(cafe);
   [[-18, 0xd9a441], [-28, 0x5d8fb0], [18, 0xc27ba0], [28, 0x8aa86a]].forEach(([x, c], i) => { const b = box(10, 5 + (i % 2) * 2, 8, c); b.position.set(x, b.geometry.parameters.height / 2, -12); g.add(b); });
@@ -95,18 +95,20 @@ const BUILD = {
 const KIND = {'main-street': 'main-street', 'church-park': 'main-street', kitchen: 'interior', 'tree-house': 'interior', galley: 'interior', 'launch-pad': 'launch', 'briefing-room': 'briefing', 'crew-bus': 'bus', capsule: 'capsule', orbit: 'orbit', 'lunar-descent': 'lunar-descent', 'moon-base-pad': 'moon-base-pad'};
 // camera: first person at eye height, slow dolly per zone; the player can drag to look around
 const CAMS = {'main-street': {p: [2, 1.8, 20], t: [6, 3.5, -4]}, kitchen: {p: [0, 1.6, 4.5], t: [0, 1.2, 0]}, 'tree-house': {p: [0, 1.5, 4], t: [0, 1.1, -1]}, galley: {p: [0, 1.6, 4.5], t: [0, 1.2, 0]}, 'launch-pad': {p: [-12, 1.7, 26], t: [0, 6, 0]}, 'briefing-room': {p: [0, 1.6, 7], t: [0, 1.9, -5]}, 'crew-bus': {p: [0, 1.4, 6.5], t: [0, 1.1, -1]}, capsule: {p: [0, .1, 2.4], t: [0, .3, -2.4]}, orbit: {p: [0, 2, 12], t: [0, 0, -10]}, 'lunar-descent': {p: [0, 14, 36], t: [0, 12, 0]}, 'moon-base-pad': {p: [-8, 1.7, 22], t: [0, 4, -10]}};
+const ISO = {'main-street': {t: [6, 0, 0], h: 12}, kitchen: {t: [0, 0, 0], h: 5}, 'tree-house': {t: [0, 0, 0], h: 5.5}, galley: {t: [0, 0, 0], h: 6}, 'launch-pad': {t: [-2, 3, 6], h: 14}, 'briefing-room': {t: [0, 0, 0], h: 8}, 'crew-bus': {t: [0, 0, 0], h: 6}, capsule: {t: [0, -.6, 0], h: 4}, orbit: {t: [0, 0, -10], h: 12}, 'lunar-descent': {t: [0, 6, 0], h: 14}, 'moon-base-pad': {t: [-4, 2, 6], h: 12}};
 const INSIDE = {kitchen: 0x3a3631, 'tree-house': 0x4a3d2c, galley: 0x35403a, 'briefing-room': 0x2d3342, 'crew-bus': 0x232a3c, capsule: 0x151a2c};
 const SKY = {light: 0xbfe3ff, dark: 0x03050d};
 
 export function createWorld(canvas, ZONES) {
  const renderer = new THREE.WebGLRenderer({canvas, antialias: true}); renderer.shadowMap.enabled = true; renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
- const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(62, 1, .1, 900); scene.background = new THREE.Color(SKY.light);
+ const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(62, 1, .1, 900), ocam = new THREE.OrthographicCamera(-1, 1, 1, -1, -200, 400); scene.background = new THREE.Color(SKY.light);
  const sun = new THREE.DirectionalLight(0xffffff, 2.4), hemi = new THREE.HemisphereLight(0xdff0ff, 0x8a8470, 1.1); sun.position.set(30, 50, 30); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); Object.assign(sun.shadow.camera, {left: -50, right: 50, top: 50, bottom: -50}); scene.add(sun, hemi);
- let S = {}, cur = null, curId = null, mood = 'light', shake = 0, look = {yaw: 0, pitch: 0}, t = 0, camT = {p: new THREE.Vector3(), t: new THREE.Vector3()}, liftoff = 0, drop = null, truckT = -1, driving = false;
+ let iso = new URLSearchParams(location.search).get('view') !== 'fp', S = {}, cur = null, curId = null, mood = 'light', shake = 0, look = {yaw: 0, pitch: 0}, t = 0, camT = {p: new THREE.Vector3(), t: new THREE.Vector3()}, liftoff = 0, drop = null, truckT = -1, driving = false;
  const heroIds = ['daddy', 'abbie', 'ani'];
  function setMood(m) { mood = m; }
  function setZone(id, m) {
   if (cur) scene.remove(cur); S = {}; const z = {...ZONES[id], id}; cur = BUILD[KIND[id]](S, z); scene.add(cur); curId = id; mood = m || z.mood; look = {yaw: 0, pitch: 0}; liftoff = 0; drop = null;
+  cur.traverse(o => { if (o.name === 'cut') o.visible = !iso; });
   if (S.heroes) for (const hid of heroIds) if (S.heroes[hid]) swapHeroGLB(S.heroes[hid], hid);
   const c = CAMS[id] || CAMS['main-street']; camT.p.set(...c.p); camT.t.set(...c.t); cam.position.copy(camT.p).add(new THREE.Vector3(0, 0, 3));
   if (id === 'main-street' && !S.launched) { truckT = 0; driving = true; }
@@ -125,7 +127,7 @@ export function createWorld(canvas, ZONES) {
   else if (e.fx === 'job-done' && S.lights) { const n = S.lights.findIndex(l => l.material.emissive.getHex() === 0); if (n >= 0) { S.lights[n].material.emissive.setHex(0x6fe3a5); S.lights[n].material.color.setHex(0x6fe3a5); } }
   else if (e.fx === 'speak' && S.heroes && S.heroes[e.who]) S.heroes[e.who].userData.bob = 1;
  }
- function resize() { const w = canvas.clientWidth, h = canvas.clientHeight; if (canvas.width !== w * renderer.getPixelRatio() || canvas.height !== h * renderer.getPixelRatio()) { renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); } }
+ function resize() { const w = canvas.clientWidth, h = canvas.clientHeight; if (canvas.width !== w * renderer.getPixelRatio() || canvas.height !== h * renderer.getPixelRatio()) { renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); } const iz = (ISO[curId] || ISO['main-street']).h, a = w / h; Object.assign(ocam, {left: -iz * a, right: iz * a, top: iz, bottom: -iz}); ocam.updateProjectionMatrix(); }
  function tick(dt, view, thrust) {
   t += dt; resize(); const k = 1 - Math.pow(.02, dt);
   const sky = new THREE.Color(INSIDE[curId] || SKY[mood]); scene.background.lerp(sky, k); sun.intensity += ((mood === 'light' ? 2.4 : .9) - sun.intensity) * k; hemi.intensity += ((mood === 'light' ? 1.1 : .35) - hemi.intensity) * k; sun.color.set(mood === 'light' ? 0xffffff : 0xaec6ff);
@@ -143,10 +145,11 @@ export function createWorld(canvas, ZONES) {
   const tgt = camT.t.clone(); const dir = tgt.clone().sub(camT.p); const base = Math.atan2(dir.x, -dir.z); const yaw = base + look.yaw; const pitch = Math.atan2(dir.y, Math.hypot(dir.x, dir.z)) + look.pitch;
   const far = new THREE.Vector3(Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), -Math.cos(yaw) * Math.cos(pitch)); cam.lookAt(cam.position.clone().add(far));
   if (shake > 0) { cam.position.x += (Math.random() - .5) * shake * .3; cam.position.y += (Math.random() - .5) * shake * .3; shake = Math.max(0, shake - dt * 1.6); }
-  renderer.render(scene, cam);
+  if (iso) { const z = ISO[curId] || ISO['main-street'], t3 = new THREE.Vector3(...z.t); if (view && view.step && view.step.k === 'lander' && S.lander) t3.y = S.lander.position.y; ocam.position.copy(t3).add(new THREE.Vector3(26, 26, 26)).add(new THREE.Vector3(look.yaw * -12, look.pitch * 12, 0)); ocam.lookAt(t3); if (shake > 0) ocam.position.x += (Math.random() - .5) * shake * .3; }
+  renderer.render(scene, iso ? ocam : cam);
  }
  let drag = null; canvas.addEventListener('pointerdown', e => { drag = [e.clientX, e.clientY, look.yaw, look.pitch]; canvas.setPointerCapture(e.pointerId); });
  canvas.addEventListener('pointermove', e => { if (drag) { look.yaw = Math.max(-1.2, Math.min(1.2, drag[2] - (e.clientX - drag[0]) * .004)); look.pitch = Math.max(-.5, Math.min(.5, drag[3] - (e.clientY - drag[1]) * .003)); } });
  canvas.addEventListener('pointerup', () => { drag = null; });
- return {setZone, onFx, tick, scene, cam, get zone() { return curId; }, get state() { return S; }};
+ return {setZone, onFx, tick, get iso() { return iso; }, setIso(v) { iso = v; if (cur) cur.traverse(o => { if (o.name === 'cut') o.visible = !iso; }); }, scene, cam, get zone() { return curId; }, get state() { return S; }};
 }
