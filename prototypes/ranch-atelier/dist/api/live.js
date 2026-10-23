@@ -102,4 +102,4 @@ async function judge(fetcher,headers,who,text){
  finally{clearTimeout(timer);}
 }
 
-module.exports=createHandler();module.exports.createHandler=createHandler;module.exports.GUARD_PROMPT=GUARD_PROMPT;
+module.exports=createHandler();module.exports.createHandler=createHandler;module.exports.GUARD_PROMPT=GUARD_PROMPT;module.exports.judge=judge;
