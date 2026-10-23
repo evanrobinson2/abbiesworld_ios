@@ -1,0 +1,324 @@
+<title>Abbie's World Mirror</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap">
+<style>
+/* Layout: the app fills the page; one small glass dock floats bottom-centre (screens · mark · sent).
+   Marking freezes the frame, you draw on it, and a short sheet takes the note. Single dark look, like the world at dusk. */
+:root {
+  --ink: #f6f1e4;
+  --ink-soft: #c9c2ad;
+  --glass: rgba(28, 38, 33, .58);
+  --glass-edge: rgba(255, 248, 225, .22);
+  --glass-hi: rgba(255, 255, 255, .16);
+  --ground: #1d2a24;
+  --mark: #ffb02e;
+  --ok: #7fd59a;
+  --warn: #ff8a6b;
+  --font: "Nunito", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--ground); color: var(--ink); font-family: var(--font); overflow: hidden; }
+#app { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: var(--ground); }
+
+.glass {
+  background: linear-gradient(180deg, var(--glass-hi), transparent 46%), var(--glass);
+  border: 1px solid var(--glass-edge);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -8px 18px rgba(0,0,0,.18), 0 10px 28px rgba(0,0,0,.35);
+  -webkit-backdrop-filter: saturate(1.5) blur(14px);
+  backdrop-filter: saturate(1.5) blur(14px);
+}
+
+#dock {
+  position: fixed; z-index: 5; left: 50%; transform: translateX(-50%);
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 26px;
+  max-width: calc(100% - 24px);
+}
+#dock.tucked { transform: translate(-50%, calc(100% + 30px)); }
+#dock button, #handle {
+  appearance: none; border: 0; background: transparent; color: var(--ink);
+  width: 40px; height: 40px; border-radius: 20px; display: grid; place-items: center; cursor: pointer; position: relative;
+}
+#dock button svg, #handle svg { width: 20px; height: 20px; }
+#dock button[aria-current="true"] { background: rgba(255,248,225,.2); }
+#dock button:focus-visible, #handle:focus-visible, .sheet button:focus-visible { outline: 2px solid var(--mark); outline-offset: 1px; }
+#dock .sep { width: 1px; height: 22px; background: var(--glass-edge); margin: 0 4px; }
+#mark { color: var(--mark) !important; }
+#screens { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+#count { position: absolute; top: 3px; right: 3px; min-width: 15px; height: 15px; padding: 0 4px; border-radius: 8px; background: var(--mark); color: #2a1a00; font: 800 10px/15px var(--font); }
+#handle { position: fixed; z-index: 4; right: max(10px, env(safe-area-inset-right, 0px)); bottom: calc(10px + env(safe-area-inset-bottom, 0px)); width: 30px; height: 30px; opacity: .7; }
+
+#tip {
+  position: fixed; z-index: 6; left: 50%; transform: translateX(-50%); bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  padding: 6px 12px; border-radius: 14px; font: 600 13px/1.3 var(--font); white-space: nowrap; pointer-events: none;
+  opacity: 0; transition: opacity .2s;
+}
+#tip.on { opacity: 1; }
+
+/* Marking */
+#markup { position: fixed; inset: 0; z-index: 10; touch-action: none; }
+#markup canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#frame { cursor: crosshair; }
+.sheet {
+  position: fixed; z-index: 11; left: 50%; transform: translateX(-50%);
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  width: min(520px, calc(100% - 20px)); border-radius: 22px; padding: 10px; display: grid; gap: 8px;
+}
+.sheet textarea {
+  width: 100%; box-sizing: border-box; min-height: 64px; max-height: 30vh; resize: vertical; border-radius: 14px;
+  border: 1px solid var(--glass-edge); background: rgba(0,0,0,.28); color: var(--ink); padding: 10px 12px;
+  font: 600 16px/1.35 var(--font);
+}
+.sheet textarea::placeholder { color: var(--ink-soft); }
+.row { display: flex; gap: 6px; align-items: center; }
+.row .grow { flex: 1; min-width: 0; color: var(--ink-soft); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sheet button {
+  appearance: none; border: 1px solid var(--glass-edge); background: rgba(255,248,225,.1); color: var(--ink);
+  height: 40px; padding: 0 14px; border-radius: 20px; font: 800 14px var(--font); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+}
+.sheet button svg { width: 18px; height: 18px; }
+.sheet button.go { background: var(--mark); color: #2a1a00; border-color: transparent; }
+.sheet button:disabled { opacity: .5; }
+
+/* Sent marks */
+#sent { position: fixed; z-index: 12; right: max(10px, env(safe-area-inset-right, 0px)); top: calc(10px + env(safe-area-inset-top, 0px));
+  bottom: calc(64px + env(safe-area-inset-bottom, 0px)); width: min(360px, calc(100% - 20px)); border-radius: 22px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+#sent header { display: flex; align-items: center; gap: 8px; font-weight: 800; padding: 2px 4px; }
+#sent header span { flex: 1; }
+#sent ol { list-style: none; margin: 0; padding: 0; overflow-y: auto; display: grid; gap: 8px; align-content: start; }
+#sent li { display: grid; grid-template-columns: 72px 1fr; gap: 10px; padding: 6px; border-radius: 14px; background: rgba(0,0,0,.2); }
+#sent li img { width: 72px; height: 54px; object-fit: cover; border-radius: 9px; background: #0006; }
+#sent li p { margin: 0; font-size: 13px; line-height: 1.3; overflow-wrap: anywhere; min-width: 0; }
+#sent li small { color: var(--ink-soft); font-size: 11px; }
+.chip { display: inline-block; padding: 1px 7px; border-radius: 8px; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; background: rgba(255,176,46,.22); color: var(--mark); }
+.chip.routed { background: rgba(127,213,154,.2); color: var(--ok); }
+.chip.done { background: rgba(255,255,255,.12); color: var(--ink-soft); }
+#sent .empty { color: var(--ink-soft); font-size: 13px; padding: 8px; }
+
+@media (prefers-reduced-motion: no-preference) { #dock { transition: transform .25s ease; } }
+</style>
+
+<iframe id="app" title="Abbie's World" allow="autoplay; fullscreen; xr-spatial-tracking"></iframe>
+
+<button id="handle" class="glass" aria-label="Show the dock" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 14l5-5 5 5"/></svg></button>
+<nav id="dock" class="glass" aria-label="Mirror">
+  <div id="screens"></div>
+  <span class="sep"></span>
+  <button id="mark" aria-label="Mark something to fix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3-1 4.5-2.5 6-4.5L18.5 7a2.1 2.1 0 0 0-3-3L7 12.5C5 14 3.5 15.5 3 19z"/><path d="M14 5.5l4.5 4.5"/></svg></button>
+  <button id="list" aria-label="Sent marks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l2.5-7h11L20 13v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M4 13h4.5l1 2h5l1-2H20"/></svg><span id="count" hidden></span></button>
+  <button id="tuck" aria-label="Hide the dock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 10l5 5 5-5"/></svg></button>
+</nav>
+<div id="tip" class="glass" role="status"></div>
+
+<div id="markup" hidden>
+  <canvas id="shot"></canvas>
+  <canvas id="frame" aria-label="Draw on the picture to mark what should change"></canvas>
+</div>
+<form class="sheet glass" id="note-sheet" hidden>
+  <textarea id="note" placeholder="Draw on it, then say what should change" maxlength="4000" aria-label="What should change"></textarea>
+  <div class="row">
+    <button type="button" id="undo" aria-label="Undo last stroke"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
+    <span class="grow" id="where"></span>
+    <button type="button" id="cancel">Cancel</button>
+    <button type="submit" class="go" id="send">Send fix</button>
+  </div>
+</form>
+
+<aside id="sent" class="glass" hidden aria-label="Sent marks">
+  <header><span>Sent fixes</span><button class="x" id="sent-close" aria-label="Close" style="appearance:none;border:0;background:transparent;color:var(--ink);width:32px;height:32px;cursor:pointer">✕</button></header>
+  <ol id="sent-list"><li class="empty" style="display:block">Marks you send show up here, with where each one went.</li></ol>
+</aside>
+
+<script>
+(() => {
+  const SCREENS = /*SCREENS*/[];
+  const BUILD = /*BUILD*/{};
+  const ICONS = {
+    hex: '<path d="M12 2.8l8 4.6v9.2l-8 4.6-8-4.6V7.4z"/><path d="M12 12l8-4.6M12 12v9.2M12 12L4 7.4"/>',
+    book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5"/>',
+    inbox: '<path d="M4 13l2.5-7h11L20 13v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M4 13h4.5l1 2h5l1-2H20"/>',
+    cube: '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/>',
+    cards: '<rect x="3" y="6" width="11" height="15" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v13"/>',
+    map: '<path d="M9 4L3 6.5v13L9 17l6 2.5 6-2.5v-13L15 6.5z"/><path d="M9 4v13M15 6.5v13"/>',
+    moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  };
+  const $ = (id) => document.getElementById(id);
+  const app = $('app');
+  const svg = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[k] || ICONS.hex}</svg>`;
+  const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+
+  // ---- screens ----
+  let index = null;
+  const fileFor = (route) => app.contentWindow?.__awMirror?.fileFor(route) || null;
+  let current = null;
+  function open(id) {
+    const s = SCREENS.find((x) => x.id === id) || SCREENS[0];
+    current = s.id;
+    store.set('aw-mirror-screen', s.id);
+    paintDock();
+    const f = index ? routeFile(s.route) : null;
+    app.src = f || 'simulations/index.html';
+  }
+  // The shell has no shim, so it reads the same index to turn a route into a file.
+  function routeFile(route) {
+    const p = route.replace(/^\/+/, '');
+    const has = (x) => index.looseSet.has(x);
+    if (has(p)) return p;
+    const d = p.replace(/\/?$/, '/');
+    if (has(d + 'index.html')) return d + 'index.html';
+    if (has(p + '.html')) return p + '.html';
+    for (const [re, dest] of index.rewrites) { const m = ('/' + p).match(new RegExp(re)); if (m) { const f = dest.replace(/^\/+/, '').replace(/\$(\d)/g, (_, i) => m[+i] || ''); if (has(f)) return f; } }
+    return null;
+  }
+  function paintDock() {
+    $('screens').innerHTML = SCREENS.map((s) => `<button data-id="${s.id}" aria-label="${s.label}" title="${s.label}" aria-current="${s.id === current}">${svg(s.icon)}</button>`).join('');
+  }
+  $('screens').addEventListener('click', (e) => { const b = e.target.closest('button[data-id]'); if (b) open(b.dataset.id); });
+  const tuck = (on) => { $('dock').classList.toggle('tucked', on); $('handle').hidden = !on; store.set('aw-mirror-tucked', on ? '1' : ''); };
+  $('tuck').onclick = () => tuck(true);
+  $('handle').onclick = () => tuck(false);
+
+  let tipTimer;
+  function tip(text, ms = 2600) { const t = $('tip'); t.textContent = text; t.classList.add('on'); clearTimeout(tipTimer); tipTimer = setTimeout(() => t.classList.remove('on'), ms); }
+
+  addEventListener('message', (e) => {
+    const m = e.data;
+    if (!m || m.source !== 'aw-mirror' || e.source !== app.contentWindow) return;
+    if (m.type === 'page') {
+      const s = SCREENS.find((x) => index && routeFile(x.route) === m.file);
+      if (s && s.id !== current) { current = s.id; paintDock(); }
+    }
+    if (m.type === 'missing') tip('That part isn’t in the mirror yet: /' + m.path);
+    if (m.type === 'feedback') saveMark({ note: m.payload?.note || '', image: m.payload?.image || null, strokes: [], targets: [], meta: { page: m.payload?.page, title: m.payload?.title, via: 'app feedback button' } });
+  });
+
+  // ---- marking ----
+  const shot = $('shot'), frame = $('frame');
+  let cap = null, strokes = [], drawing = null, targets = [];
+  async function startMark() {
+    const w = app.contentWindow;
+    tip('Freezing this frame…', 15000);
+    try { cap = await w.__awMirror.capture(); } catch { cap = null; }
+    if (!cap) { tip('Couldn’t take a picture of this screen; you can still write a note.'); cap = { image: null, width: innerWidth, height: innerHeight, context: {}, camera: null, title: w?.document?.title || '', path: '' }; }
+    tip('', 1);
+    strokes = []; targets = [];
+    $('markup').hidden = false; $('note-sheet').hidden = false; $('dock').hidden = true; $('handle').hidden = true;
+    size();
+    if (cap.image) { const img = new Image(); img.onload = () => { const g = shot.getContext('2d'); g.drawImage(img, 0, 0, shot.width, shot.height); }; img.src = cap.image; }
+    $('where').textContent = (SCREENS.find((s) => s.id === current)?.label || '') + (cap.camera ? ' · camera ' + cap.camera.map((n) => Math.round(n)).join(', ') : '');
+  }
+  function size() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    for (const c of [shot, frame]) { c.width = innerWidth * dpr; c.height = innerHeight * dpr; }
+    paint();
+  }
+  function paint() {
+    const g = frame.getContext('2d'), k = frame.width / innerWidth;
+    g.clearRect(0, 0, frame.width, frame.height);
+    g.lineCap = g.lineJoin = 'round';
+    for (const s of [...strokes, drawing].filter(Boolean)) {
+      g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 9 * k; line(g, s, k);
+      g.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--mark').trim() || '#ffb02e'; g.lineWidth = 5 * k; line(g, s, k);
+    }
+  }
+  function line(g, s, k) { g.beginPath(); s.forEach(([x, y], i) => (i ? g.lineTo(x * k, y * k) : g.moveTo(x * k, y * k))); if (s.length === 1) g.lineTo(s[0][0] * k + .1, s[0][1] * k); g.stroke(); }
+  frame.addEventListener('pointerdown', (e) => { frame.setPointerCapture(e.pointerId); drawing = [[e.clientX, e.clientY]]; paint(); });
+  frame.addEventListener('pointermove', (e) => { if (drawing) { drawing.push([e.clientX, e.clientY]); paint(); } });
+  const endStroke = () => {
+    if (!drawing) return;
+    const s = drawing; drawing = null; strokes.push(s);
+    const xs = s.map((p) => p[0]), ys = s.map((p) => p[1]);
+    const box = [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)].map(Math.round);
+    let what = null;
+    try { what = app.contentWindow.__awMirror.under((box[0] + box[2]) / 2, (box[1] + box[3]) / 2); } catch {}
+    targets.push({ box, under: what });
+    if (what) $('where').textContent = what.selected || what.label || what.kind || $('where').textContent;
+    paint();
+  };
+  frame.addEventListener('pointerup', endStroke);
+  frame.addEventListener('pointercancel', endStroke);
+  $('undo').onclick = () => { strokes.pop(); targets.pop(); paint(); };
+  function endMark() { $('markup').hidden = true; $('note-sheet').hidden = true; $('dock').hidden = false; $('note').value = ''; cap = null; if (store.get('aw-mirror-tucked')) tuck(true); }
+  $('cancel').onclick = endMark;
+  $('mark').onclick = startMark;
+  $('note-sheet').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!$('note').value.trim() && !strokes.length) { $('note').focus(); return; }
+    $('send').disabled = true; $('send').textContent = 'Sending…';
+    // The picture Evan sees: the frozen frame with his strokes on top.
+    const out = document.createElement('canvas');
+    const scale = Math.min(1, 1600 / Math.max(innerWidth, innerHeight)) * Math.min(devicePixelRatio || 1, 2);
+    out.width = Math.round(innerWidth * scale); out.height = Math.round(innerHeight * scale);
+    const g = out.getContext('2d');
+    g.fillStyle = '#1d2a24'; g.fillRect(0, 0, out.width, out.height);
+    g.drawImage(shot, 0, 0, out.width, out.height); g.drawImage(frame, 0, 0, out.width, out.height);
+    const ok = await saveMark({ note: $('note').value.trim(), image: out.toDataURL('image/jpeg', 0.84), strokes, targets, meta: { title: cap?.title, path: cap?.path, search: cap?.search, camera: cap?.camera, context: cap?.context } });
+    $('send').disabled = false; $('send').textContent = 'Send fix';
+    if (ok) { endMark(); tip('Sent. It’s in your fixes list.'); }
+  });
+
+  // ---- storage: marks live in this page's database; pictures in its asset store ----
+  let db = null, assets = null, user = null;
+  const ready = (async () => {
+    if (!window.claude?.use) return;
+    [db, assets, user] = await Promise.all(['db', 'assets', 'user'].map((n) => window.claude.use(n).catch(() => null)));
+    if (db) listen();
+  })();
+  async function saveMark({ note, image, strokes, targets, meta }) {
+    await ready;
+    if (!db) { tip('Sign in to claude.ai to send fixes from here.', 4000); return false; }
+    const id = new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14) + '-' + Math.random().toString(36).slice(2, 6);
+    let shotId = null;
+    if (image && assets) {
+      try { const blob = await (await fetch(image)).blob(); shotId = (await assets.upload(blob)).id; } catch (err) { console.warn('picture upload failed', err); }
+    }
+    const scr = SCREENS.find((s) => s.id === current);
+    const ctx = meta.context ? JSON.stringify(meta.context) : '';
+    const doc = {
+      at: new Date().toISOString(), status: 'new', note,
+      screen: scr?.id || null, screenLabel: scr?.label || null, route: scr?.route || null,
+      page: meta.path || meta.page || null, search: meta.search || '', title: meta.title || '',
+      camera: meta.camera || null, targets: targets || [], strokes: (strokes || []).map((s) => s.filter((_, i) => i % 2 === 0).map(([x, y]) => [Math.round(x), Math.round(y)])),
+      viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio || 1 },
+      shot: shotId, build: BUILD, via: meta.via || 'mirror mark',
+      context: ctx.length < 60000 ? ctx : ctx.slice(0, 60000),
+      by: user ? await user.id?.().catch(() => null) : null,
+    };
+    try { await db.collection('marks').doc(id).set(doc); return true; }
+    catch (err) { tip('Couldn’t send: ' + (err?.message || err?.code || 'try again'), 5000); return false; }
+  }
+  function listen() {
+    db.collection('marks').orderBy('at', 'desc').limit(40).onSnapshot((snap) => {
+      const docs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      const open = docs.filter((d) => d.status !== 'done').length;
+      $('count').hidden = !open; $('count').textContent = open;
+      $('sent-list').innerHTML = docs.length ? '' : '<li class="empty" style="display:block">Marks you send show up here, with where each one went.</li>';
+      for (const d of docs) {
+        const li = document.createElement('li');
+        const img = document.createElement('img'); img.alt = ''; if (d.shot) img.src = '/_blob/' + d.shot;
+        const p = document.createElement('p');
+        const chip = document.createElement('span'); chip.className = 'chip ' + (d.status || 'new'); chip.textContent = d.status === 'routed' ? 'with ' + (d.threadTitle || 'a thread') : d.status || 'new';
+        const note = document.createElement('span'); note.textContent = ' ' + (d.note || '(drawing only)');
+        const when = document.createElement('small'); when.textContent = '\n' + [d.screenLabel, new Date(d.at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })].filter(Boolean).join(' · ');
+        when.style.display = 'block';
+        p.append(chip, note, when);
+        li.append(img, p);
+        $('sent-list').append(li);
+      }
+    }, () => {});
+  }
+  $('list').onclick = () => { $('sent').hidden = !$('sent').hidden; };
+  $('sent-close').onclick = () => { $('sent').hidden = true; };
+  addEventListener('resize', () => { if (!$('markup').hidden) { const keep = shot.toDataURL(); size(); const i = new Image(); i.onload = () => shot.getContext('2d').drawImage(i, 0, 0, shot.width, shot.height); i.src = keep; } });
+
+  // ---- boot ----
+  fetch('_mirror/index.json').then((r) => r.json()).then((j) => { index = { ...j, looseSet: new Set(j.loose) }; }).catch(() => {}).finally(() => {
+    const fromHash = location.hash.slice(1);
+    open(SCREENS.some((s) => s.id === fromHash) ? fromHash : store.get('aw-mirror-screen') || 'sandbox');
+    if (store.get('aw-mirror-tucked')) tuck(true);
+  });
+  paintDock();
+})();
+</script>
