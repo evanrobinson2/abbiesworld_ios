@@ -1,0 +1,25 @@
+{
+ "job": "A2-clay-suit",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16a43-0301-7311-994a-7901b0a02d04",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "topology": "triangle",
+    "target_polycount": 12000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view_front.png",
+    "view_side.png",
+    "view_back.png"
+   ]
+  }
+ ],
+ "credits": 30
+}
