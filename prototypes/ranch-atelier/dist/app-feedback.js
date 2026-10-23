@@ -29,7 +29,7 @@
   .afb-sheet{bottom:max(14px,env(safe-area-inset-bottom));animation:afb-up .3s cubic-bezier(.2,.9,.3,1.1)}
   @keyframes afb-in{from{opacity:0;transform:translate(-50%,-24px)}}
   @keyframes afb-up{from{opacity:0;transform:translate(-50%,24px)}}
-  .afb-pic{display:block;width:100%;max-height:34vh;object-fit:cover;background:#e9e3cf}
+  .afb-pic{display:block;width:100%;max-height:34vh;object-fit:contain;background:#e9e3cf}
   .afb-body{padding:14px 16px 16px}
   .afb-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--app-accent,#b64932);text-transform:uppercase}
   .afb-title{font-family:var(--app-heading,Georgia,serif);font-size:19px;font-weight:700;margin:3px 0 4px;line-height:1.2}

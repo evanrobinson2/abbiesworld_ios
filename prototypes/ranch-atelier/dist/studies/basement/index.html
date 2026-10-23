@@ -22,13 +22,13 @@ p{margin:0;max-width:68ch}
 .eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--crt)}
 header,section{display:grid;gap:14px}
 .play{position:relative;display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:#000}
-.play img{width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated}
+.play img{width:100%;height:100%;object-fit:contain;display:block;image-rendering:pixelated}
 .play span{position:absolute;left:50%;top:50%;translate:-50% -50%;width:84px;height:84px;border-radius:50%;background:rgba(255,207,122,.92);box-shadow:0 10px 40px rgba(255,190,90,.45)}
 .play span::after{content:"";position:absolute;left:33px;top:24px;border-left:28px solid #2a1d0c;border-top:18px solid transparent;border-bottom:18px solid transparent}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 figure{margin:0;display:grid;gap:6px;min-width:0}
-figure img,model-viewer{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;display:block;background:#f6f6f4}
+figure img,model-viewer{width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:12px;display:block;background:#f6f6f4}
 .grid4 img{aspect-ratio:16/9;background:#000}
 model-viewer{--poster-color:transparent;height:auto}
 figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
