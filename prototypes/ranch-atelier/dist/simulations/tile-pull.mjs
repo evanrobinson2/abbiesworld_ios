@@ -5,6 +5,7 @@
 // Everything here is presentation layer: the card, its blank, the customizer and the print window are drawn for the
 // player and are invisible to every perception. Only the landed tile enters the world (tile-chooser.mjs, lab.mjs).
 import {uiIcon} from './ui-icons.mjs?v=4';
+import {PLACES} from '../cards/v3/face.mjs';
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const make = (tag, cls, html = '') => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
@@ -49,17 +50,19 @@ function fly(el, from, to, frames) {
 // facets: [{value,label}] (the kinds this card can be), axes: placementAxes(type) for the current kind.
 // Evan, 08:45Z: customize "needs to FLIP THE CARD and show the custom mechanics at play on a simulated tile that is
 // constantly 'printing'". The card turns over; its back holds the live tile, swept by a print head over and over.
-export function openCustomizer({hero, name, preview, canvas, facets, facet, axesFor, values, onPrint, onClose}) {
+export function openCustomizer({hero, place, name, preview, canvas, facets, facet, axesFor, values, onPrint, onClose}) {
  let draft = {facet, values: {...values}}, closed = false;
  const frame = cardFrame(), from = hero?.getBoundingClientRect();
  const root = make('section', 'tp-card tp-custom'); root.setAttribute('role', 'dialog'); root.setAttribute('aria-label', name + ': make it yours');
+ // The card's own stock (cards/v3 face.mjs): its body colour behind the live hex, its earth band under the name.
+ const P = PLACES[place] || PLACES.ranch; root.style.setProperty('--body', P.body); root.style.setProperty('--earth', P.earth); root.style.setProperty('--deep', P.deep); root.style.setProperty('--grass', P.grass);
  Object.assign(root.style, {left: frame.left + 'px', top: frame.top + 'px', width: frame.w + 'px', height: frame.h + 'px'});
  const plate = make('div', 'tp-plate'), sweep = make('div', 'tp-head tp-loop', '<i></i>'); if (canvas) plate.append(canvas); plate.append(sweep);
- const title = make('h2', 'tp-name'); title.textContent = name;
+ const title = make('h2', 'tp-name'); title.textContent = name; const band = make('div', 'tp-band'); band.append(title); const no = make('span', 'tp-no'); no.textContent = String(P.no || 1).padStart(2, '0') + ' / 04'; band.append(no, make('b', 'tp-mark', 'AW'));
  const close = make('button', 'tp-close', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'); close.type = 'button'; close.setAttribute('aria-label', 'Put it back');
  const kinds = make('div', 'tp-kinds'), dials = make('div', 'tp-dials');
  const print = make('button', 'tp-print', PRINT_ICON + '<span>Accept</span>'); print.type = 'button';
- root.append(plate, close, title, kinds, dials, print); document.body.append(root);
+ const desk = make('div', 'tp-desk'); desk.append(kinds, dials, print); root.append(plate, close, band, desk); document.body.append(root);
 
  function renderKinds() {
   kinds.replaceChildren(); kinds.hidden = facets.length < 2;
@@ -178,6 +181,13 @@ export function installTilePullStyle() {
  const s = document.createElement('style'); s.id = 'tile-pull-style'; s.textContent = `
 html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced>.tp-blank.tp-blank{display:block!important;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 #v2-hand .generator-hero.tp-pulled .v2-face{visibility:hidden}
+/* Evan, 08:50Z: "first one should not be selected by default. none are." The chooser still remembers the last card it
+   prepared, but no card in the hand looks picked. */
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced[aria-pressed=true]:not(:hover):not(.tp-aim){--lift:0px;box-shadow:none!important;filter:drop-shadow(0 10px 12px #2b1d0e40)!important}
+/* Evan, 08:54Z, "this shouldn't happen": a focus ring drawn round the card's whole box (headroom included), doubled by
+   the pressed glow, framed the Ranch card. A card in the hand shows focus by lifting, never with a frame. */
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #v2-hand .generator-hero.generator-hero:focus{outline:none!important}
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #v2-hand .generator-hero.generator-hero:focus-visible{--lift:-14px}
 #v2-hand .generator-hero.tp-aim{--lift:-24px;z-index:4}
 #v2-hand .generator-hero.tp-aim .tp-blank{filter:drop-shadow(0 0 10px #ffd36b) brightness(1.04)}
 #v2-hand .generator-hero.tp-refill .v2-face{animation:tp-refill .6s cubic-bezier(.2,1.3,.4,1)}
@@ -206,6 +216,14 @@ html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced>
 .tp-print{display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:16px;padding:12px 16px;font:800 16px var(--app-font,system-ui);color:#fff;background:linear-gradient(160deg,#ffffff55,transparent 60%),#2f6fb0;box-shadow:inset 0 1px 0 #ffffffa0,inset 0 -3px 5px #0b1a2a40,0 6px 14px #2f6fb055}
 .tp-print svg{width:22px;height:22px}
 .tp-card button:focus-visible{outline:3px solid #2f6fb0;outline-offset:2px}
+.tp-custom{grid-template-rows:minmax(0,1fr) auto auto;gap:0;padding:0;overflow:hidden;border-radius:16px;background:var(--body);box-shadow:0 0 0 3px #fffdf6,0 2px 3px #0000002a,0 26px 46px -12px #0c20306b}
+.tp-custom .tp-plate{aspect-ratio:auto;height:100%;border-radius:0;background:radial-gradient(90% 70% at 50% 60%,color-mix(in srgb,var(--body) 80%,#fff),var(--body));box-shadow:inset 0 -10px 0 color-mix(in srgb,var(--grass) 80%,transparent)}
+.tp-custom .tp-plate canvas{object-fit:contain}
+.tp-band{display:grid;grid-template-columns:1fr auto;align-items:end;gap:2px 8px;padding:10px 16px 12px;color:#fffaf0;background:linear-gradient(180deg,var(--earth),var(--deep));box-shadow:inset 0 3px 0 color-mix(in srgb,var(--grass) 70%,#000 0%)}
+.tp-band .tp-name{grid-column:1;text-align:left;font-size:26px;color:#fffaf0;text-shadow:0 1px 0 #0003}
+.tp-no{grid-column:1;font:700 11px var(--app-font,system-ui);letter-spacing:.12em;opacity:.85}
+.tp-mark{grid-column:2;grid-row:1/3;align-self:end;font:800 12px var(--app-font,system-ui);letter-spacing:.1em;opacity:.9}
+.tp-desk{display:grid;gap:10px;padding:12px 14px 14px;background:linear-gradient(180deg,#fbf6ea,#efe5d0);box-shadow:inset 0 2px 4px #3a2a1420}
 .tp-printer{grid-template-rows:auto auto;height:auto!important;padding-top:18px}
 .tp-head{position:absolute;left:6%;right:6%;top:var(--y,100%);height:0;z-index:3;transition:top .05s linear}
 .tp-head i{position:absolute;left:0;right:0;top:-5px;height:10px;border-radius:5px;background:linear-gradient(#5f93cc,#2f6fb0);box-shadow:0 3px 8px #2f6fb066}

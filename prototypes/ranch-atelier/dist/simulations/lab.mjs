@@ -40,7 +40,7 @@ import {createMoonBoardTile,joinMoonRuntimes} from './moon/moon-board.mjs';
 import {restoreTerrain} from './board-terrain.mjs';
 import {retainEstablishedLayout,exposedEdges} from './expansion-layout.mjs';
 import {rollTile as dropTile,createImpactEffects,sharedImpactSound,IMPACT_DUST} from './tile-drop-impact.mjs?v=2';
-import {createTileChooser} from './tile-chooser.mjs?v=17';
+import {createTileChooser} from './tile-chooser.mjs?v=19';
 import {extendTiles,frontier,tileCenter} from './tile-expansion.mjs';
 import {SUGAR_SHACK} from './poi/sugar-shack-spec.mjs';
 import {createRanchSky} from './ranch-sky.mjs';

@@ -1,6 +1,6 @@
 import {installTileCarryStyle,landingPulse} from './tile-placement-feedback.mjs?v=15';
 import {sharedImpactSound} from './tile-drop-impact.mjs?v=2';
-import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTilePullStyle} from './tile-pull.mjs?v=2';
+import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTilePullStyle} from './tile-pull.mjs?v=4';
 import {PALETTES,cityPreset,CONFIGURATIONS} from './city/city-settings.mjs';
 import {cityFootprint} from './city/city-footprint.mjs';
 import {SCIENCE_BASE_FACETS} from './moon/science-worlds.mjs';
@@ -59,7 +59,7 @@ export function createTileChooser({preview,allowed,scene,camera,orbit,canvas,get
  // AW-STUDY-0025: the model comes off the card on the first move in any direction, at once; the tile is premade, and if
  // it is still being made the card's picture rides on the finger until the live model takes its place.
  function heroMove(e){const p=heroPress;if(!p||p.id!==e.pointerId)return;p.last=e;const dx=e.clientX-p.x,dy=e.clientY-p.y;if(!p.started&&Math.hypot(dx,dy)>8){p.started=true;e.preventDefault();heroPress=null;if(printing||customizer||!opened){return;}pull(e,p.button);}}
- const heroEnd=e=>{const p=heroPress;heroPress=null;if(p?.started&&e.type==='pointerup'){const i=targetAt(e),g=generator;if(i>=0)selectionReady.then(ok=>{if(ok&&generator===g&&opened)return load(type,i,true);}).catch(error=>{status.textContent=error.message;});}};window.addEventListener('pointermove',heroMove,{capture:true,passive:false});window.addEventListener('pointerup',heroEnd);window.addEventListener('pointercancel',heroEnd);window.addEventListener('blur',heroEnd);
+ const heroEnd=e=>{const p=heroPress;heroPress=null;if(p&&!p.started&&e.type==='pointerup'&&p.button.closest('#v2-hand')){const g=generator;selectionReady.then(ok=>{if(ok&&generator===g&&opened&&!drag)openDesigner(p.button);}).catch(()=>{});return;}if(p?.started&&e.type==='pointerup'){const i=targetAt(e),g=generator;if(i>=0)selectionReady.then(ok=>{if(ok&&generator===g&&opened)return load(type,i,true);}).catch(error=>{status.textContent=error.message;});}};window.addEventListener('pointermove',heroMove,{capture:true,passive:false});window.addEventListener('pointerup',heroEnd);window.addEventListener('pointercancel',heroEnd);window.addEventListener('blur',heroEnd);
 
 const options=panel.querySelector('.tile-options'),status=panel.querySelector('[role=status]'),add=panel.querySelector('.add-tile'),heading=panel.querySelector('.tile-expand-heading span');
  const tooltips=attachTrayTooltips();
@@ -120,9 +120,12 @@ const options=panel.querySelector('.tile-options'),status=panel.querySelector('[
  function restoreCanvas(){if(!livePreview)return;livePreview.reveal?.(1);livePreview.setHeld(false);options.querySelector('[data-type="'+type+'"]')?.prepend(livePreview.canvas);}
  async function customize(d){const hero=d.hero,g=generator,id=type,r=hero.getBoundingClientRect();d.keepBlank=true;d.snapping=true;
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches)await ghost.animate([{left:ghost.style.left,top:ghost.style.top,transform:'translate(-50%,-86%) scale(1)'},{left:r.left+r.width/2+'px',top:r.top+r.height/2+'px',transform:'translate(-50%,-50%) scale(.1)',opacity:.4}],{duration:240,easing:'cubic-bezier(.5,0,.75,0)',fill:'forwards'}).finished.catch(()=>{});
-  if(d.pending)await selectionReady.catch(()=>{});if(drag!==d)return;cancelDrag(false);ghost.getAnimations().forEach(a=>a.cancel());
+  if(d.pending)await selectionReady.catch(()=>{});if(drag!==d)return;cancelDrag(false);ghost.getAnimations().forEach(a=>a.cancel());openDesigner(hero);}
+ // Evan, 08:50Z: tapping a card "is a CARD.. and it shows a beautiful card designer card ... leveraging those beautiful 3d
+ // hexes". A tap and a drop back on the card open the same thing: the card turned over, the tile live on its back.
+ function openDesigner(hero){if(customizer||printing)return;const g=generator,id=type;blankCard(hero,true);
   const config=settingsFor(id),facet=g.tiles.length>1?id:id==='moon'?config.planet:id==='crop'?config.facet:id;
-  customizer=openCustomizer({hero,name:g.label,preview:livePreview,canvas:asset&&livePreview?.readiness.ready?livePreview.canvas:null,facets:facetChoices(g).map(([value,label])=>({value,label})),facet,axesFor:f=>placementAxes(g.tiles.length>1?f:id),values:{...config},
+  customizer=openCustomizer({hero,place:hero.dataset.generator,name:g.label,preview:livePreview,canvas:asset&&livePreview?.readiness.ready?livePreview.canvas:null,facets:facetChoices(g).map(([value,label])=>({value,label})),facet,axesFor:f=>placementAxes(g.tiles.length>1?f:id),values:{...config},
    onClose:()=>{customizer=null;restoreCanvas();refillCard(hero);},onPrint:draft=>{customizer=null;void printCustom(g,hero,draft);}});}
  // Print: the one place a tile is simulated again. A slow window that lays the new tile down and stamps it.
  async function printCustom(g,hero,draft){printing=true;let id=g.tiles.length>1?draft.facet:type;const base={...settingsFor(id),...draft.values};if(id==='moon')base.planet=draft.facet;if(id==='crop')base.facet=draft.facet;
