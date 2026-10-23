@@ -673,21 +673,51 @@
    "items": [
     {
      "k": "canon",
-     "t": "Bruiser study, Meshy G",
-     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/"
+     "t": "Bruiser study scaling pipeline (rings per part, cage, decimate)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/scale/README.md",
+     "note": "The Meshy cleanup both fighters go through; deform.bind and figure.role are reused for paint roles and skin weights"
+    },
+    {
+     "k": "canon",
+     "t": "How Abbie's World shows information (CLAUDE.md)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md",
+     "note": "Bell as the diegetic round signal, tired idle, wordless overlay inside 8%, cues on the presentation layer"
     },
     {
      "k": "canon",
      "t": "Presentation layer",
-     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs"
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs",
+     "note": "Hit stars, block rings and dust are presentation()"
     },
     {
      "k": "canon",
-     "t": "Speed review",
+     "t": "Brute fight build tool",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/brute-fight/README.md",
+     "note": "Paint, rig, 19 clips, moves.json"
+    },
+    {
+     "k": "canon",
+     "t": "Study doc and speed review",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/brute-fight/BRUTE_FIGHT_STUDY.md"
+    },
+    {
+     "k": "reference",
+     "t": "Meshy task 01a167ca (brute one)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/meshy/provenance.json"
+    },
+    {
+     "k": "reference",
+     "t": "Meshy task 01a16806 (brute two)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/meshy2/provenance.json"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's two brute pictures",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/ref/",
+     "note": "bruiser.png and bruiser-2-queued.png"
     }
    ],
-   "recorded": "2026-10-23, gathered afterwards from the study docs"
+   "recorded": "2026-10-23 by the study's own thread. No Oracle consultation, blogs or tutorials were used: the move set and reactions were keyed from general fighting-game conventions (2D fighter facing, hit and block reactions, hitstop), so those rows are honestly empty."
   },
   "figures": {
    "items": [
