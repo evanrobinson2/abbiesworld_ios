@@ -8,18 +8,32 @@
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A1-clay-suit/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A1-clay-suit/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A1-clay-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.2
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A1-clay-tee",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A1-clay-tee/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A1-clay-tee/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A1-clay-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.2
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A1-paint-suit",
@@ -28,7 +42,14 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A1-paint-suit/"
+   "save_to": "tools/meshy-heroes/meshy/A1-paint-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.2
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A1-paint-tee",
@@ -37,25 +58,46 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A1-paint-tee/"
+   "save_to": "tools/meshy-heroes/meshy/A1-paint-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.2
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A2-clay-suit",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A2-clay-suit/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A2-clay-suit/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A2-clay-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.2
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A2-clay-tee",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A2-clay-tee/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A2-clay-tee/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A2-clay-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.2
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A2-paint-suit",
@@ -64,7 +106,14 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A2-paint-suit/"
+   "save_to": "tools/meshy-heroes/meshy/A2-paint-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.2
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A2-paint-tee",
@@ -73,25 +122,46 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A2-paint-tee/"
+   "save_to": "tools/meshy-heroes/meshy/A2-paint-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.2
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A3-clay-suit",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A3-clay-suit/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A3-clay-suit/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A3-clay-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A3-clay-tee",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A3-clay-tee/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A3-clay-tee/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A3-clay-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A3-paint-suit",
@@ -100,7 +170,14 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A3-paint-suit/"
+   "save_to": "tools/meshy-heroes/meshy/A3-paint-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A3-paint-tee",
@@ -109,25 +186,46 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A3-paint-tee/"
+   "save_to": "tools/meshy-heroes/meshy/A3-paint-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A4-clay-suit",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A4-clay-suit/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A4-clay-suit/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A4-clay-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A4-clay-tee",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A4-clay-tee/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A4-clay-tee/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A4-clay-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A4-paint-suit",
@@ -136,7 +234,14 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A4-paint-suit/"
+   "save_to": "tools/meshy-heroes/meshy/A4-paint-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A4-paint-tee",
@@ -145,25 +250,46 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A4-paint-tee/"
+   "save_to": "tools/meshy-heroes/meshy/A4-paint-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A5-clay-suit",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A5-clay-suit/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A5-clay-suit/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A5-clay-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A5-clay-tee",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A5-clay-tee/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A5-clay-tee/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A5-clay-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A5-paint-suit",
@@ -172,7 +298,14 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A5-paint-suit/"
+   "save_to": "tools/meshy-heroes/meshy/A5-paint-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A5-paint-tee",
@@ -181,25 +314,46 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A5-paint-tee/"
+   "save_to": "tools/meshy-heroes/meshy/A5-paint-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.8
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A6-clay-suit",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A6-clay-suit/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A6-clay-suit/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A6-clay-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.0
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A6-clay-tee",
    "kind": "multi-image-to-3d",
    "image": "tools/meshy-heroes/refs/A6-clay-tee/pick.png",
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
-   "should_texture": false,
-   "credits": 20,
-   "save_to": "tools/meshy-heroes/meshy/A6-clay-tee/"
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A6-clay-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.0
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A6-paint-suit",
@@ -208,7 +362,14 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A6-paint-suit/"
+   "save_to": "tools/meshy-heroes/meshy/A6-paint-suit/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.0
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "A6-paint-tee",
@@ -217,7 +378,14 @@
    "note": "split pick.png into front, side and back with tools/midjourney/split_views.py; fewer than 3 clean views -> image-to-3d on the front view",
    "should_texture": true,
    "credits": 30,
-   "save_to": "tools/meshy-heroes/meshy/A6-paint-tee/"
+   "save_to": "tools/meshy-heroes/meshy/A6-paint-tee/",
+   "then": {
+    "rigging": {
+     "credits": 5,
+     "height_meters": 1.0
+    }
+   },
+   "look_note": "clay look: texture is only for Meshy rigging (it needs a textured model); in game the clay shader replaces it"
   },
   {
    "id": "brute1-retexture",
@@ -240,8 +408,77 @@
    "credits": 10,
    "save_to": "tools/character-studio/meshy/brute2/",
    "for": "Character Studio, then Texture Studio weight transfer"
+  },
+  {
+   "id": "cs-1-claymation-adventurer",
+   "kind": "multi-image-to-3d",
+   "images": "tools/midjourney/outputs/character-studio/1-claymation-adventurer/views/ (on main; see MESHY_BRIEF.md for which view is which and heights)",
+   "should_texture": true,
+   "credits": 30,
+   "then": {
+    "rigging": {
+     "credits": 5
+    }
+   },
+   "save_to": "tools/midjourney/outputs/character-studio/1-claymation-adventurer/meshy/",
+   "for": "Character Studio (Evan 16:53Z)"
+  },
+  {
+   "id": "cs-2-plasticine-inventor",
+   "kind": "multi-image-to-3d",
+   "images": "tools/midjourney/outputs/character-studio/2-plasticine-inventor/views/ (on main; see MESHY_BRIEF.md for which view is which and heights)",
+   "should_texture": true,
+   "credits": 30,
+   "then": {
+    "rigging": {
+     "credits": 5
+    }
+   },
+   "save_to": "tools/midjourney/outputs/character-studio/2-plasticine-inventor/meshy/",
+   "for": "Character Studio (Evan 16:53Z)"
+  },
+  {
+   "id": "cs-3-stick-man",
+   "kind": "multi-image-to-3d",
+   "images": "tools/midjourney/outputs/character-studio/3-stick-man/views/ (on main; see MESHY_BRIEF.md for which view is which and heights)",
+   "should_texture": true,
+   "credits": 30,
+   "then": {
+    "rigging": {
+     "credits": 5
+    }
+   },
+   "save_to": "tools/midjourney/outputs/character-studio/3-stick-man/meshy/",
+   "for": "Character Studio (Evan 16:53Z)"
+  },
+  {
+   "id": "cs-4-80s-action-hero",
+   "kind": "multi-image-to-3d",
+   "images": "tools/midjourney/outputs/character-studio/4-80s-action-hero/views/ (on main; see MESHY_BRIEF.md for which view is which and heights)",
+   "should_texture": true,
+   "credits": 30,
+   "then": {
+    "rigging": {
+     "credits": 5
+    }
+   },
+   "save_to": "tools/midjourney/outputs/character-studio/4-80s-action-hero/meshy/",
+   "for": "Character Studio (Evan 16:53Z)"
   }
  ],
  "total_credits": 620,
- "round": "2 (Evan 16:46Z: no helmets in hands; uniform and snug t-shirt + shorts). Round 1 refs stay in refs/A?-clay|paint/ and roster-r1.json"
+ "round": "2 (Evan 16:46Z: no helmets in hands; uniform and snug t-shirt + shorts). Round 1 refs stay in refs/A?-clay|paint/ and roster-r1.json",
+ "animation_library": {
+  "asked": "Evan 16:53Z: 'get ALL meshy anims available ... we only need 1 high fi set of anims covering the gamut'",
+  "steps": [
+   "GET /openapi/v1/animations/library (free) and save it as tools/meshy-heroes/meshy/animation-library.json",
+   "apply every action to ONE reference rig: cs-4-80s-action-hero (the cleanest adult humanoid), 10 action_ids per request, 3 credits per action",
+   "save each clip GLB with skeleton under tools/meshy-heroes/meshy/anims/<category>/<action_id>_<name>.glb and list them in anims/provenance.json",
+   "stop before the running total passes the 2,000 credit cap and report how many clips are left"
+  ],
+  "credits": "3 x library size (unknown until listed)"
+ },
+ "pricing_source": "https://docs.meshy.ai/en/api/pricing (checked 2026-10-23): multi-image textured 30, rigging 5, animation 3 per action, retexture 10",
+ "licence": "Paid plans: private licence, full commercial use, we own the output (https://docs.meshy.ai/en/webapp/pricing)",
+ "total_credits_before_anims": 1000
 }
