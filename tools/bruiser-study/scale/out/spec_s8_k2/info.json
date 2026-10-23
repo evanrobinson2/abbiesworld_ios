@@ -1,0 +1,19 @@
+{
+ "tag": "spec_s8_k2",
+ "spec": "spec",
+ "sides": 8,
+ "step": 2,
+ "faces": 970,
+ "parts": [
+  "hand_R_2",
+  "hand_L_2",
+  "hand_R",
+  "hand_L",
+  "leg_R",
+  "leg_L",
+  "arm_R",
+  "arm_L",
+  "torso"
+ ],
+ "shot": "shots/000_spec_s8_k2.png"
+}

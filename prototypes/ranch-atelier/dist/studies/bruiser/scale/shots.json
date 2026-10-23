@@ -1,0 +1,62 @@
+[
+ {
+  "src": "scale/000_spec_s8_k2.jpg",
+  "n": "000",
+  "cap": "First learn: rings every 4 cm, 8 points each. The outline is there; shoulders balloon."
+ },
+ {
+  "src": "scale/001_spec_s8_k1_t3.jpg",
+  "n": "001",
+  "cap": "Rings every 2 cm, three times the points on the torso. The face starts to show."
+ },
+ {
+  "src": "scale/002_spec_s8_k1_t3_tol0.6cm.jpg",
+  "n": "002",
+  "cap": "Smoothing and simplifying: rings a straight plane can stand in for are dropped. Fewer, bigger planes."
+ },
+ {
+  "src": "scale/003_v3_deltoid_split.jpg",
+  "n": "003",
+  "cap": "Deltoids split off the chest and carried up with the arms. Little posts at the shoulder tops (a bug)."
+ },
+ {
+  "src": "scale/004_v4_no_posts.jpg",
+  "n": "004",
+  "cap": "Posts fixed. 97% outline match from every side, 1,700 faces, but no tank-top edges or fingers."
+ },
+ {
+  "src": "scale/005_demo1_flat_pecs.jpg",
+  "n": "005",
+  "cap": "Words test 1: \"flatter pecs, big planes like the picture\"."
+ },
+ {
+  "src": "scale/006_demo2_big_forearms.jpg",
+  "n": "006",
+  "cap": "Words test 2: \"make his forearms 20% bigger\". It works, but the ring-only body loses the face."
+ },
+ {
+  "src": "scale/007_cage_identity_r0.1.jpg",
+  "n": "007",
+  "cap": "The cage idea: keep Meshy's own surface and let the rings drive it. First try cracked along texture seams."
+ },
+ {
+  "src": "scale/008_cage_identity_r0.1_welded.jpg",
+  "n": "008",
+  "cap": "Seams welded: 3,000 faces, 99% match from every side, face, fingers and tank top kept."
+ },
+ {
+  "src": "scale/009_cage_demo_flatpecs_bigforearms.jpg",
+  "n": "009",
+  "cap": "Both word edits through the cage: flatter pecs and bigger forearms, with all the detail kept."
+ },
+ {
+  "src": "scale/010_cage_lod_r0.03.jpg",
+  "n": "010",
+  "cap": "The polygon dial at 900 faces."
+ },
+ {
+  "src": "scale/011_cage_lod_r0.3.jpg",
+  "n": "011",
+  "cap": "The polygon dial at 9,000 faces."
+ }
+]

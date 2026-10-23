@@ -1,0 +1,20 @@
+{
+ "tag": "spec_s8_k1_t3",
+ "spec": "spec",
+ "sides": 8,
+ "step": 1,
+ "torso_mult": 3,
+ "faces": 2650,
+ "parts": [
+  "hand_R_2",
+  "hand_L_2",
+  "hand_R",
+  "hand_L",
+  "leg_R",
+  "leg_L",
+  "arm_R",
+  "arm_L",
+  "torso"
+ ],
+ "shot": "shots/001_spec_s8_k1_t3.png"
+}

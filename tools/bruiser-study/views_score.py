@@ -25,7 +25,10 @@ TURNS = {'side': -90, 'back': 180, 'front': 0}
 
 def view_masks(arm, chunk_ids=None):
     import bpy
+    import bkit
+    bkit.SQUARE = True   # imported hero meshes skip the turn that matches his picture
     build.build_scene(os.path.join(HERE, 'runs', arm), chunk_ids or build.ORDER)
+    bkit.SQUARE = False
     root = bpy.data.objects.new('turn', None); bpy.context.scene.collection.objects.link(root)
     for o in list(bpy.context.scene.objects):
         if o.type == 'MESH' and o.parent is None:

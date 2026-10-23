@@ -33,7 +33,7 @@ def main(status=None):
             a['seconds'] = round((max(ms) if a.get('order') == 'parallel' else sum(ms)) / 1000)
             a['tokens'] = sum(u['tokens'] for u in jobs)
             a['cost_usd'] = round(a['tokens'] * USD_PER_TOKEN, 2)
-        if os.path.exists(sc_path) and len(jobs) >= 6:
+        if os.path.exists(sc_path) and (len(jobs) >= 6 or a.get('kind') == 'import'):
             sc = json.load(open(sc_path))
             vj = os.path.join(HERE, 'runs', arm, 'out', 'all', 'views.json')
             if os.path.exists(vj):

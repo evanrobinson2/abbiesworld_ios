@@ -1,0 +1,28 @@
+{
+ "tag": "v4_no_posts",
+ "spec": "spec",
+ "sides": 8,
+ "step": 1,
+ "torso_mult": 3,
+ "tol": 0.006,
+ "faces": 1674,
+ "parts": [
+  "hand_R_2",
+  "hand_L_2",
+  "hand_R",
+  "hand_L",
+  "leg_R",
+  "leg_L",
+  "arm_R",
+  "arm_L",
+  "torso"
+ ],
+ "iou_vs_hero": {
+  "front": 0.9688,
+  "three-quarter": 0.9647,
+  "side": 0.9754,
+  "back": 0.9711
+ },
+ "iou_mean": 0.97,
+ "shot": "shots/004_v4_no_posts.png"
+}

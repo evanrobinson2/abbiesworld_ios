@@ -1,0 +1,18 @@
+{
+ "tag": "cage_lod_r0.3",
+ "spec": "spec",
+ "base": "spec",
+ "ratio": 0.3,
+ "planar": 0,
+ "faces": 8991,
+ "bound": 15002,
+ "unbound": 0,
+ "iou_vs_hero": {
+  "front": 0.9971,
+  "three-quarter": 0.9979,
+  "side": 0.9976,
+  "back": 0.9968
+ },
+ "iou_mean": 0.9974,
+ "shot": "shots/011_cage_lod_r0.3.png"
+}

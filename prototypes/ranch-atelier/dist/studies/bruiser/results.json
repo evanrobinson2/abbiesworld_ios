@@ -1,7 +1,7 @@
 {
  "study": "AW-STUDY-0021",
  "updated": "2026-10-23T06:40Z",
- "status": "Round 2 done: anatomy first (E) leads all round",
+ "status": "Round 4: Meshy is the target; the scaling version learns from it",
  "camera": "One front camera matched to the reference; every render is scored from it.",
  "arms": [
   {
@@ -227,6 +227,58 @@
    "render": "arms/E/render.jpg",
    "glb": "arms/E/model.wasm",
    "compare": "arms/E/compare.jpg"
+  },
+  {
+   "id": "M",
+   "name": "Meshy hero",
+   "how": "Meshy image-to-3D from his picture (task 01a167ca, 30 credits, about 40 s, no texturing). Not a recipe: the target the scaling version learns from. It came out square to his body, which showed his picture is taken from 24 degrees round.",
+   "sees": "full",
+   "order": "parallel",
+   "status": "done",
+   "kind": "import",
+   "jobs_done": 0,
+   "side": 0.8447,
+   "back": 0.7733,
+   "iou": 0.9147,
+   "loss": 0.1948,
+   "parts": {
+    "head": 0.917,
+    "chest": 0.967,
+    "armR": 0.902,
+    "armL": 0.915,
+    "hips": 0.94,
+    "legs": 0.846
+   },
+   "render": "arms/M/render.jpg",
+   "glb": "arms/M/model.wasm",
+   "compare": "arms/M/compare.jpg",
+   "seconds": 43
+  },
+  {
+   "id": "G",
+   "name": "Scaling version",
+   "how": "Rings learned from the Meshy mesh, one stack per named part, act as a cage that drives Meshy's own vertices; Decimate takes it to about 3,000 faces. Edit it by body words (edit.py), rebuild at any polygon count.",
+   "sees": "full + Meshy hero",
+   "order": "parallel",
+   "status": "done",
+   "kind": "import",
+   "jobs_done": 0,
+   "side": 0.8454,
+   "back": 0.7734,
+   "iou": 0.9071,
+   "loss": 0.2043,
+   "parts": {
+    "head": 0.912,
+    "chest": 0.966,
+    "armR": 0.893,
+    "armL": 0.912,
+    "hips": 0.934,
+    "legs": 0.826
+   },
+   "render": "arms/G/render.jpg",
+   "glb": "arms/G/model.wasm",
+   "compare": "arms/G/compare.jpg",
+   "seconds": 30
   }
  ],
  "findings": [
@@ -235,6 +287,9 @@
   "Six blind crops (A) were the worst on loss and needed the most fixing at the seams: jobs that can't see the whole man disagree about depth.",
   "Feet up (D1) was worst: starting from the feet set a stance the torso then had to fight.",
   "The Midjourney turnaround showed the real gap: seen from the side, round-1 arms missed 24 to 30% of his profile (calves, back, head).",
-  "Anatomy first (E) wins all round: side profile up from 0.76 to 0.87 by taking depth from the turnaround and joint heights from the MPFB + Rigify body (knee, ankle, elbow, wrist within 2 cm). It gave up a little on the front (0.93 vs 0.96) and reads boxier, so the next round keeps E's skeleton and depth and takes D2's front shapes."
+  "Anatomy first (E) wins all round: side profile up from 0.76 to 0.87 by taking depth from the turnaround and joint heights from the MPFB + Rigify body (knee, ankle, elbow, wrist within 2 cm). It gave up a little on the front (0.93 vs 0.96) and reads boxier, so the next round keeps E's skeleton and depth and takes D2's front shapes.",
+  "Meshy (M) made the most believable 3D man of all, in 43 seconds, from his picture alone. It also showed that his picture is taken from about 24 degrees round, which every hand-built arm had quietly flattened into a square-on figure.",
+  "The outline scores undersell M and G. The hand-built arms were fitted to this one camera, and their side and back are scored against Midjourney's guess at a turnaround. Against the Meshy body itself, the scaling version matches 97% to 99.7% from every side, at 900, 3,000 or 9,000 faces.",
+  "Rings alone (one stack of 2 cm cuts per part) catch the body but lose the face, fingers and tank-top edges. Using the rings as a cage on Meshy's own surface keeps all of that, and edits by body words still work ('make his forearms 20% bigger')."
  ]
 }
