@@ -4,8 +4,11 @@
 //  POST /api/live {action:'guard', who, text}              PG and scope check of one spoken line
 //  POST /api/live {action:'order', description, for?}      files a workshop order for a proper model
 // Nothing a child says is stored: guard text is judged and dropped. Orders keep only the description.
+// Every paid call needs a signed-in player and is charged to their spending cap first (lib/wallet.cjs, ACCOUNTS.md).
 const {randomBytes}=require('node:crypto');
 const {issueTicket}=require('../lib/live-ticket.cjs');
+const {account}=require('../lib/account.cjs');
+const {wallet,PRICES}=require('../lib/wallet.cjs');
 const GATEWAY='https://ai-gateway.vercel.sh';
 const GUARD_MODEL='openai/gpt-6-luna'; // the model ai-compose verified against the Gateway catalog
 const ORDERS='live-orders/v1/';
@@ -24,7 +27,7 @@ Reply with JSON only: {"verdict": "...", "why": "<at most 12 words>"}. verdict i
 - "distress": the CHILD sounds hurt, in danger, scared for real, or says someone is hurting them.
 A COMPUTER line that tells a child to go and find a grown-up is "ok". Pick the most serious verdict that applies. Be strict about unsafe and jailbreak and generous about silly play.`;
 
-function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>require('@vercel/blob').put(...a)}={}){return async(req,res)=>{
+function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>require('@vercel/blob').put(...a),who=account,purse=wallet}={}){return async(req,res)=>{
  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
  const json=(code,body)=>{res.statusCode=code;res.setHeader('Content-Type','application/json');res.end(JSON.stringify(body));};
  const enabled=env.LIVE_MODE_ENABLED!=='false';
@@ -50,19 +53,25 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
  const key=body.action+':'+ip,rate=buckets.get(key)||{at,n:0,window:limit[1]};
  if(rate.n>=limit[0])return json(429,{error:'Please wait a little and try again.'});rate.n++;buckets.set(key,rate);
 
+ const me=who(req,env);
+ if(!me)return json(401,{error:'Sign in to talk to the Computer.',signIn:true});
  try{
+  // Out of money means the Computer rests; the game itself keeps playing with its built-in models.
+  const tired=()=>json(402,{error:'The Computer has used up its magic for now. Keep playing!',budget:true});
   if(body.action==='session'){
+   if(await purse().left(me)<0.05||!await purse().charge(me,PRICES.realtimeOpen))return tired();
    // The page connects to our relay (api/live-socket.js), which holds the credential and enforces
    // the rules and tools server-side. The ticket is good for 60 seconds.
-   const ticket=issueTicket(env,at);if(!ticket)return json(503,{error:'Live mode is not set up yet.'});
+   const ticket=issueTicket(env,at,undefined,'',me);if(!ticket)return json(503,{error:'Live mode is not set up yet.'});
    // ElevenLabs voices the Computer's lines through api/live-voice.js, with its own session-long ticket.
-   const voiceTicket=env.ELEVENLABS_API_KEY?issueTicket(env,at,25*60000,'voice:'):null;
+   const voiceTicket=env.ELEVENLABS_API_KEY?issueTicket(env,at,25*60000,'voice:',me):null;
    return json(200,{url:`wss://${host}/api/live-socket?ticket=${encodeURIComponent(ticket)}`,protocols:['ai-gateway-realtime.v1'],model:REALTIME_MODEL,expiresAt:Math.floor((at+60000)/1000),voiceTicket});
   }
   if(body.action==='guard'){
    const who=body.who==='computer'?'COMPUTER':'CHILD',text=typeof body.text==='string'?body.text.trim().slice(0,600):'';
    if(!text)return json(200,{verdict:'ok'});
    const local=screen(text,{level:who==='COMPUTER'?'speech':'all'});if(!local.ok)return json(200,{verdict:'unsafe',why:'blocked word',local:true});
+   if(!await purse().charge(me,PRICES.guardCall))return tired();
    return json(200,await judge(fetcher,headers,who,text));
   }
   if(body.action==='order'){
@@ -71,6 +80,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
    if(description.length<3)return json(400,{error:'Describe the model.'});
    if(!screen(description).ok)return json(200,{ok:false,verdict:'unsafe'});
    // Orders fail closed: if the guard cannot judge, nothing is filed.
+   if(!await purse().charge(me,PRICES.guardCall))return tired();
    const verdict=await judge(fetcher,headers,'CHILD',`Please make a model of: ${description}`);
    if(verdict.verdict!=='ok')return json(200,{ok:false,verdict:verdict.verdict});
    const id=`${at.toString(36)}-${randomBytes(4).toString('hex')}`;
