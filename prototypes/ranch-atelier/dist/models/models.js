@@ -58,7 +58,7 @@ function chips(){
 let browse = (() => { try { return localStorage.getItem('aw-browse') || 'screen'; } catch (e) { return 'screen'; } })();
 function grid(){
   document.title = 'Models';
-  crumb.innerHTML = '<a href="/models">Models</a>';
+  crumb.innerHTML = set ? `<a href="/review/">Inbox</a> · ${esc(set.title)}` : '<a href="/models">Models</a>';
   const ms = shown(), row = browse === 'row';
   applyLook(null);
   const toggle = `<div class="tools"><div class="lay" role="group" aria-label="Layout">${[['row', 'One at a time', 'row'], ['screen', 'All at once', 'grid']].map(([k, l, i]) =>
@@ -265,8 +265,8 @@ async function sendOrders(){
 
 function render(push){
   if (view === 'grid') grid(); else review();
-  const path = view === 'review' && cur ? `/models/${encodeURIComponent(cur)}` : '/models';
-  if (push && location.pathname !== path) history.pushState({cur, view}, '', path);
+  const path = (view === 'review' && cur ? `/models/${encodeURIComponent(cur)}` : '/models') + (set ? `?set=${encodeURIComponent(set.id)}` : '');
+  if (push && location.pathname + location.search !== path) history.pushState({cur, view}, '', path);
 }
 
 // ---------- verdicts ----------
@@ -296,7 +296,8 @@ async function decide(verdict, notes, via){
   if (via === 'voice') say(next ? `Next, the ${full(next)}.` : filter === 'todo' ? 'That was the last one.' : 'Saved.');
 }
 // Paper warrior models belong to the Roman model study thread, so their verdicts also reach that thread's feedback inbox.
-const OWNER = [[/^paper warrior/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', 'Models review']];
+const OWNER = [[/^(paper warrior|paper figures|roman parts)/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', 'Models review'],
+  [/^moon remaster/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1', 'Models review']];
 async function send(m, verdict, notes, via){
   try {
     const r = await fetch('/api/model-reviews', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({id:m.id, name:`${m.name}${m.style ? ' (' + m.style + ')' : ''}`, verdict, notes, via})});
@@ -453,7 +454,15 @@ function route(){
   else if (reviews[cur]) filter = 'all';
 }
 
+// A study set (/models?set=<review inbox item id>) shows only that study's models, listed by the item's `models`
+// (ids; a trailing * matches a prefix). The set is the unit a later "upgrade" or "re-imagine the whole set" acts on.
+const set = await (async () => {
+  const id = new URLSearchParams(location.search).get('set'); if (!id) return null;
+  try { const f = await (await fetch('/review/feed.json', {cache:'no-cache'})).json(); const it = (f.items || []).find(x => x.id === id); return it && it.models ? it : null; } catch { return null; }
+})();
+const inSet = m => set.models.some(p => p.endsWith('*') ? m.id.startsWith(p.slice(0, -1)) : m.id === p);
 [list] = await Promise.all([catalogue(), loadReviews()]);
+if (set){ list = list.filter(inSet).sort((a, b) => set.models.findIndex(p => p === a.id) - set.models.findIndex(p => p === b.id)); document.documentElement.dataset.set = set.id; }
 if (!list.length) root.innerHTML = '<p class="empty">No models yet.</p>';
 else {
   route(); render(false);

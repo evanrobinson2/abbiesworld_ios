@@ -3,12 +3,16 @@
 // The v1 controls stay in the DOM with their own handlers; each toy calls the original control, so no feature is lost.
 // The mode is chosen in index.html's boot script (html.ui-v2); "Classic layout" in the toy box switches back to v1.
 import {mountChrono} from './chrono.mjs?v=2';
-import {cardFace} from './hand-cards.mjs?v=2';
+import {cardFace} from './hand-cards.mjs?v=9';
+import {openCallout,closeCallout} from '../look/callout.mjs';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
 function start(){
  const root=document.documentElement,$=s=>document.querySelector(s);
  const press=sel=>{const el=typeof sel==='string'?$(sel):sel;el?.click();return !!el;};
+ // Tapping a person, thing or tile opens its card as a callout beside it (look/callout.mjs) instead of the v1 side panel.
+ addEventListener('ranch:inspect',({detail:d})=>openCallout({name:d.name,kind:d.kind,description:d.description,hero:d.hero,focal:[],anchor:d.anchor,onClose:()=>press('#close-inspection')}));
+ addEventListener('ranch:inspect-close',()=>closeCallout({silent:true}));
  const svg=(body,view='0 0 24 24')=>`<svg viewBox="${view}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
  const I={
   talk:svg('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'),
