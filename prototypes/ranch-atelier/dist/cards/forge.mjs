@@ -3,7 +3,7 @@
 // hand card in the game or a 600 ppi print master with 3 mm bleed. Frames, gems, icons and type are drawn at the
 // output resolution; only the art is a bitmap, and model art is rendered from the game's own GLB at print resolution.
 // The face follows the card rubric in docs/oracle/cards (CARD_STUDY.md, card-rubric.json): window shape tells the
-// card type, rarity is a growth stage told by gem shape + colour + frame material, a cost and at most two stats sit
+// card type, rarity is a growth stage told by gem shape + colour + frame colour, a cost and at most two stats sit
 // in fixed corners, and the face carries at most 15 words.
 import * as THREE from 'three';
 import { GLTFLoader } from '/vendor/loaders/GLTFLoader.js';
@@ -52,23 +52,35 @@ export const TYPES = {
 };
 export const FINISHES = { standard: 'STD', shimmer: 'SHM', golden_hour: 'GLD', frost: 'FRS' };
 
-// Frame materials per tier: [light, base, dark] for the body, and five stops for bevels and trim.
-const WOOD = {
-  pine:    { body: ['#e2bf87', '#c99c5f', '#8d6434'], trim: ['#6b4a26', '#c49a62', '#8a6236', '#e8c992', '#5e4020'] },
-  green:   { body: ['#e2bf87', '#c99c5f', '#8d6434'], trim: ['#2f4a22', '#7fa35a', '#4d6e35', '#b6d48f', '#26401b'] },
-  lacquer: { body: ['#b0573b', '#7c2f20', '#3f140c'], trim: ['#5a3a1c', '#d6a15c', '#8a5c2a', '#f6d79a', '#4d3117'] },
-  gilded:  { body: ['#efcf74', '#b8872f', '#5a3a0c'], trim: ['#5e3f0c', '#f0cd6a', '#a7791f', '#fff4c4', '#6b4a12'] },
-  sun:     { body: ['#fbe7a2', '#e7b851', '#9a6514'], trim: ['#6b3f08', '#ffd66b', '#c2861c', '#fffbe0', '#7a4c0c'] },
+// The look is cel-shaded: flat colour, ink lines, no fake wood, metal, paper, bevels or grain (Evan, 2026-10-23).
+// Each tier's frame is one flat colour (body), a rim colour (edge) and a line colour (trim).
+const INK = '#2a1c12';
+const FRAME = {
+  seed:    { body: '#ecd6a8', edge: '#c9a46c', trim: '#8a6236' },
+  sprout:  { body: '#d3e5a8', edge: '#9cc16f', trim: '#4d7a33' },
+  bloom:   { body: '#c2dcef', edge: '#86b2d4', trim: '#2f6390' },
+  harvest: { body: '#f3d277', edge: '#dcaa3e', trim: '#8c3f6e' },
+  sun:     { body: '#ffe68f', edge: '#f4bf42', trim: '#c26a12' },
 };
-const FRAME_OF = { seed: 'pine', sprout: 'green', bloom: 'lacquer', harvest: 'gilded', sun: 'sun' };
-const BRASS = ['#5a3a1c', '#d6a15c', '#8a5c2a', '#f6d79a', '#4d3117'];
+const PAPER = '#fff5df'; // ribbon and rules plate
 
-// Painted backdrops behind models and cut-outs, one per world.
+// A quiet pattern in the frame says where the card lives. spec.pattern wins; then the tile, the crop type, the biome.
+export const PATTERNS = ['barn-boards', 'sprout-rows', 'meadow-flowers', 'stars', 'waves', 'cobbles', 'plain'];
+const PATTERN_OF = { ranch: 'barn-boards', dusk: 'barn-boards', orchard: 'sprout-rows', garden: 'sprout-rows', meadow: 'meadow-flowers', moon: 'stars', moonbase: 'stars', sea: 'waves', beach: 'waves', city: 'cobbles', town: 'cobbles' };
+export function patternOf(spec) {
+  if (PATTERNS.includes(spec.pattern)) return spec.pattern;
+  const tile = spec.tile || (String(spec.id || '').startsWith('tile-') ? spec.id.slice(5) : null);
+  return PATTERN_OF[tile] || (spec.type === 'crop' ? 'sprout-rows' : PATTERN_OF[spec.biome]) || 'barn-boards';
+}
+
+// Flat cel backdrops behind models and cut-outs, one per world: two sky bands, hills, two ground bands.
 export const BIOMES = {
-  ranch: { sky: ['#8fbfdc', '#c9e0e2', '#f7e7c4'], sun: '#fff4d6', hills: ['#c4cf9f', '#a9bd7f', '#93ab66'], ground: ['#8eaa63', '#6f8c4a'] },
-  orchard: { sky: ['#e9b98c', '#f4d6b6', '#fbecd8'], sun: '#ffe9c9', hills: ['#c9c99a', '#adb97c', '#8fa660'], ground: ['#97ad62', '#728d47'] },
-  dusk: { sky: ['#7d6fa8', '#d99ab0', '#f6cfa8'], sun: '#ffe1b8', hills: ['#8f8fb0', '#76829c', '#5d7088'], ground: ['#6a7d5c', '#4c5e43'] },
-  moon: { sky: ['#0d1430', '#1c2a55', '#33467a'], sun: '#cfe0ff', hills: ['#5a6178', '#474d63', '#383d50'], ground: ['#6d7286', '#4a4f62'], stars: true },
+  ranch: { sky: ['#9fd0ea', '#cfe8ef'], sun: '#fff3c9', hills: ['#bcd592', '#a1c575', '#8bb35f'], ground: ['#93c25f', '#7fae4f'] },
+  orchard: { sky: ['#f2c49a', '#f9dfc0'], sun: '#fff0d2', hills: ['#cbd292', '#b0c273', '#97b05b'], ground: ['#9fbe5e', '#89aa4e'] },
+  garden: { sky: ['#a8d8e8', '#d8eef0'], sun: '#fff4cc', hills: ['#acd189', '#92c16c', '#7cb059'], ground: ['#a8805a', '#957049'] },
+  meadow: { sky: ['#a6dcf0', '#d6f0f2'], sun: '#fff6d0', hills: ['#c6e19c', '#abd37e', '#93c368'], ground: ['#9fd06c', '#89bf5a'], flowers: true },
+  dusk: { sky: ['#8d7fb8', '#e6a9b8'], sun: '#ffe1b8', hills: ['#9d9ab8', '#8290a8', '#6c7f94'], ground: ['#728d64', '#5f7854'] },
+  moon: { sky: ['#101a3c', '#1f2d5c'], sun: '#dfe9ff', hills: ['#646b84', '#545a72', '#454a60'], ground: ['#7a8096', '#666b80'], stars: true },
 };
 
 const ICON_DISC = {
@@ -124,34 +136,84 @@ function mix(a, b, t) {
   const c = [16, 8, 0].map(s => Math.round(((pa >> s) & 255) * (1 - t) + ((pb >> s) & 255) * t));
   return '#' + c.map(v => v.toString(16).padStart(2, '0')).join('');
 }
-function metalGradient(ctx, x0, y0, x1, y1, stops) {
-  const g = ctx.createLinearGradient(x0, y0, x1, y1);
-  [0, 0.28, 0.5, 0.72, 1].forEach((p, i) => g.addColorStop(p, stops[i]));
-  return g;
+const TAU = Math.PI * 2;
+function disc(ctx, cx, cy, r, fill) { ctx.beginPath(); ctx.arc(cx, cy, r, 0, TAU); ctx.fillStyle = fill; ctx.fill(); }
+function inkLine(ctx, pathFn, lw = 0.45, col = INK) {
+  ctx.save(); ctx.lineWidth = lw; ctx.lineJoin = 'round'; ctx.strokeStyle = col; pathFn(); ctx.stroke(); ctx.restore();
+}
+// A cel rim: a flat colour band with an ink line on each side (in place of bevels).
+function celRim(ctx, pathFn, col, lw) {
+  ctx.save(); ctx.lineJoin = 'round';
+  ctx.lineWidth = lw + 0.5; ctx.strokeStyle = INK; pathFn(); ctx.stroke();
+  ctx.lineWidth = lw; ctx.strokeStyle = col; pathFn(); ctx.stroke();
+  ctx.restore();
+}
+function sparkle(ctx, cx, cy, s) {
+  ctx.beginPath();
+  for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4, r = i % 2 ? s * 0.22 : s; ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r); }
+  ctx.closePath(); ctx.fill();
+}
+function flower(ctx, cx, cy, s, petal, centre) {
+  for (let k = 0; k < 5; k++) { const a = k * TAU / 5 - Math.PI / 2; disc(ctx, cx + Math.cos(a) * s, cy + Math.sin(a) * s, s * 0.78, petal); }
+  disc(ctx, cx, cy, s * 0.62, centre);
+}
+
+// The frame's quiet pattern, drawn in colour c over the flat body colour bg. Low contrast on purpose.
+function paintPattern(ctx, kind, x, y, w, h, c, bg, seed) {
+  if (!kind || kind === 'plain') return;
+  const r = rng(seed + 31);
+  ctx.save(); ctx.fillStyle = c; ctx.strokeStyle = c; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  if (kind === 'barn-boards') {
+    const bw = 4.4; ctx.lineWidth = 0.3;
+    for (let i = 0, px = x; px < x + w; px += bw, i++) {
+      ctx.beginPath(); ctx.moveTo(px, y); ctx.lineTo(px, y + h); ctx.stroke();
+      const end = y + h * (i % 2 ? 0.3 : 0.7) + (r() - 0.5) * 8; // board ends, staggered, with two nails each side
+      ctx.beginPath(); ctx.moveTo(px, end); ctx.lineTo(px + bw, end); ctx.stroke();
+      for (const ny of [end - 1.2, end + 1.2]) for (const nx of [px + 1, px + bw - 1]) disc(ctx, nx, ny, 0.24, c);
+    }
+  } else if (kind === 'sprout-rows') {
+    const sx = 5.4, sy = 6.2; ctx.lineWidth = 0.26;
+    for (let j = 0, yy = y + 2; yy < y + h + sy; yy += sy, j++) {
+      ctx.globalAlpha = 0.55; ctx.beginPath(); ctx.moveTo(x, yy + 0.5); ctx.lineTo(x + w, yy + 0.5); ctx.stroke(); ctx.globalAlpha = 1;
+      for (let xx = x + (j % 2 ? sx / 2 : 0); xx < x + w + sx; xx += sx) {
+        ctx.beginPath(); ctx.moveTo(xx, yy + 0.4); ctx.lineTo(xx, yy - 0.9); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(xx - 0.62, yy - 1.15, 0.6, 0.3, -0.5, 0, TAU); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(xx + 0.62, yy - 1.15, 0.6, 0.3, 0.5, 0, TAU); ctx.fill();
+      }
+    }
+  } else if (kind === 'meadow-flowers') {
+    const g = 6.6;
+    for (let yy = y; yy < y + h + g; yy += g) for (let xx = x; xx < x + w + g; xx += g) {
+      const fx = xx + r() * g * 0.7, fy = yy + r() * g * 0.7;
+      if (r() < 0.62) flower(ctx, fx, fy, 0.5 + r() * 0.18, c, bg);
+      else { ctx.lineWidth = 0.24; ctx.beginPath(); ctx.moveTo(fx, fy + 0.6); ctx.quadraticCurveTo(fx + 0.2, fy - 0.2, fx + 0.7, fy - 0.6); ctx.stroke(); disc(ctx, fx + 0.75, fy - 0.65, 0.24, c); }
+    }
+  } else if (kind === 'stars') {
+    const g = 5.6;
+    for (let yy = y; yy < y + h + g; yy += g) for (let xx = x; xx < x + w + g; xx += g) {
+      const sx = xx + r() * g * 0.8, sy = yy + r() * g * 0.8;
+      if (r() < 0.35) sparkle(ctx, sx, sy, 0.75 + r() * 0.45); else disc(ctx, sx, sy, 0.16 + r() * 0.16, c);
+    }
+  } else if (kind === 'waves') {
+    const g = 3.6; ctx.lineWidth = 0.28;
+    for (let j = 0, yy = y; yy < y + h + g; yy += g, j++) {
+      ctx.beginPath();
+      for (let xx = x - g + (j % 2) * g / 2; xx < x + w + g; xx += g) { ctx.moveTo(xx, yy); ctx.arc(xx + g / 2, yy, g / 2, Math.PI, 0); }
+      ctx.stroke();
+    }
+  } else if (kind === 'cobbles') {
+    const g = 3.4; ctx.lineWidth = 0.26;
+    for (let j = 0, yy = y; yy < y + h; yy += g, j++) for (let xx = x - (j % 2) * g / 2; xx < x + w; xx += g) {
+      rrect(ctx, xx + 0.25 + r() * 0.2, yy + 0.25 + r() * 0.2, g - 0.6, g - 0.6, 0.9); ctx.stroke();
+    }
+  }
+  ctx.restore();
 }
 export function oklchToHex([l, c, h]) {
   const a = c * Math.cos(h * Math.PI / 180), b = c * Math.sin(h * Math.PI / 180);
   const l_ = (l + 0.3963377774 * a + 0.2158037573 * b) ** 3, m_ = (l - 0.1055613458 * a - 0.0638541728 * b) ** 3, s_ = (l - 0.0894841775 * a - 1.2914855480 * b) ** 3;
   const lin = [4.0767416621 * l_ - 3.3077115913 * m_ + 0.2309699292 * s_, -1.2684380046 * l_ + 2.6097574011 * m_ - 0.3413193965 * s_, -0.0041960863 * l_ - 0.7034186147 * m_ + 1.7076147010 * s_];
   return '#' + lin.map(v => { v = Math.min(1, Math.max(0, v)); v = v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055; return Math.round(v * 255).toString(16).padStart(2, '0'); }).join('');
-}
-
-let grainTile = null;
-function grain() {
-  if (grainTile) return grainTile;
-  const n = 256, c = mkCanvas(n, n), ctx = c.getContext('2d'), img = ctx.createImageData(n, n), r = rng(7);
-  for (let i = 0; i < n * n; i++) { const v = 128 + (r() - 0.5) * 90; img.data.set([v, v, v, 255], i * 4); }
-  ctx.putImageData(img, 0, 0);
-  return (grainTile = c);
-}
-function paintGrain(ctx, x, y, w, h, alpha, mode = 'overlay', mmPerTile = 18) {
-  ctx.save();
-  const p = ctx.createPattern(grain(), 'repeat');
-  const s = mmPerTile / 256;
-  p.setTransform(new DOMMatrix([s, 0, 0, s, 0, 0]));
-  ctx.globalAlpha = alpha; ctx.globalCompositeOperation = mode; ctx.fillStyle = p;
-  ctx.fillRect(x, y, w, h);
-  ctx.restore();
 }
 
 // ---------------------------------------------------------------- icons (drawn in a 24-unit box)
@@ -202,37 +264,31 @@ function drawIconGlyph(ctx, icon, cx, cy, size, fill = '#fffaf0') {
   ctx.restore();
 }
 
-// Enamel disc with a metal rim and a glyph: stat badges, ability icons and inline rules icons.
-function drawIconDisc(ctx, icon, cx, cy, r, rim = BRASS) {
-  const col = ICON_DISC[icon] || '#666';
-  ctx.save();
-  ctx.shadowColor = 'rgba(20,10,0,.45)'; ctx.shadowBlur = r * 0.5; ctx.shadowOffsetY = r * 0.14;
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
-  ctx.fillStyle = metalGradient(ctx, cx - r, cy - r, cx + r, cy + r, rim); ctx.fill();
-  ctx.restore();
-  enamel(ctx, cx, cy, r * 0.82, col);
-  ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = r * 0.18; ctx.shadowOffsetY = r * 0.06;
-  drawIconGlyph(ctx, icon, cx, cy + r * 0.02, r * 1.05);
-  ctx.restore();
+// Flat icon disc with an ink ring and a glyph: stat badges, ability icons and inline rules icons.
+function drawIconDisc(ctx, icon, cx, cy, r, rim = PAPER) {
+  disc(ctx, cx, cy, r, INK);
+  disc(ctx, cx, cy, r * 0.86, rim);
+  celDisc(ctx, cx, cy, r * 0.7, ICON_DISC[icon] || '#666');
+  drawIconGlyph(ctx, icon, cx, cy + r * 0.02, r * 0.95);
 }
-function enamel(ctx, cx, cy, r, col) {
-  const g = ctx.createRadialGradient(cx - r * 0.35, cy - r * 0.45, r * 0.1, cx, cy, r * 1.05);
-  g.addColorStop(0, mix(col, '#ffffff', 0.3)); g.addColorStop(0.55, col); g.addColorStop(1, mix(col, '#000000', 0.35));
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
-  ctx.beginPath(); ctx.ellipse(cx - r * 0.18, cy - r * 0.52, r * 0.6, r * 0.26, -0.2, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgba(255,255,255,.18)'; ctx.fill();
+// A flat colour disc with an ink line and one hard-edged highlight (cel shading, no gradients).
+function celDisc(ctx, cx, cy, r, col) {
+  disc(ctx, cx, cy, r, INK);
+  disc(ctx, cx, cy, r * 0.9, col);
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r * 0.9, 0, TAU); ctx.clip();
+  ctx.beginPath(); ctx.arc(cx + r * 0.25, cy + r * 0.32, r * 0.95, 0, TAU); ctx.rect(cx + 2 * r, cy - 2 * r, -4 * r, 4 * r);
+  ctx.fillStyle = 'rgba(255,255,255,.2)'; ctx.fill('evenodd');
+  ctx.restore();
 }
 
 // Chunky outlined number (GAME_FEEL: one rounded display face with a dark outline).
-function numeral(ctx, s, cx, cy, size, fill = '#fff8e8', stroke = '#22140a') {
+function numeral(ctx, s, cx, cy, size, fill = '#fff8e8', stroke = INK) {
   ctx.save();
   ctx.font = numFont(size); ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
   const m = ctx.measureText(s), base = cy + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2;
   ctx.lineJoin = 'round'; ctx.lineWidth = size * 0.16; ctx.strokeStyle = stroke;
-  ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = size * 0.1; ctx.shadowOffsetY = size * 0.05;
   ctx.strokeText(s, cx, base);
-  ctx.shadowColor = 'transparent'; ctx.fillStyle = fill; ctx.fillText(s, cx, base);
+  ctx.fillStyle = fill; ctx.fillText(s, cx, base);
   ctx.restore();
 }
 
@@ -289,14 +345,75 @@ function glRig() {
   if (gl) return gl;
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
-  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.NoToneMapping; // cel colours stay the model's own colours
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.setClearColor(0x000000, 0);
   return (gl = { renderer, loader: new GLTFLoader() });
 }
 
-// A GLB as a studio hero shot: transparent background, soft contact shadow, framed to `fill` of the frame.
-// view: {yaw, pitch, fill, lift, fov, exposure}
+// Three-step toon ramp: shadow, mid, lit. Nearest filtering keeps the steps hard.
+let toonRamp = null;
+function ramp() {
+  if (toonRamp) return toonRamp;
+  const t = new THREE.DataTexture(new Uint8Array([105, 185, 255]), 3, 1, THREE.RedFormat);
+  t.minFilter = t.magFilter = THREE.NearestFilter; t.generateMipmaps = false; t.needsUpdate = true;
+  return (toonRamp = t);
+}
+function toonOf(m) {
+  // a card is a solid print: see-through toy materials read as ghosts against the painted world
+  const seeThrough = m.transparent || m.opacity < 1;
+  return new THREE.MeshToonMaterial({
+    color: m.color ? m.color.clone() : new THREE.Color(0xffffff), map: m.map || null, gradientMap: ramp(),
+    vertexColors: !!m.vertexColors, side: m.side, alphaTest: seeThrough ? Math.max(m.alphaTest || 0, 0.5) : m.alphaTest || 0,
+    emissive: m.emissive ? m.emissive.clone() : new THREE.Color(0), emissiveMap: m.emissiveMap || null, emissiveIntensity: m.emissiveIntensity ?? 1,
+  });
+}
+// Part lines: each part (mesh material) is drawn in a flat id colour; where two ids meet, an ink line goes on.
+// Toys are built from parts, so this is where a cel artist would ink: ear over head, leg over body, roof over wall.
+function partLines(renderer, scene, cam, model, w, h, t) {
+  const ids = new Map(), keep = [];
+  model.traverse(o => {
+    if (!o.isMesh) return;
+    keep.push([o, o.material]);
+    const flat = [o.material].flat().map(m => {
+      if (!ids.has(m)) { const n = ids.size; ids.set(m, new THREE.MeshBasicMaterial({ color: new THREE.Color().setHSL((n * 0.618034) % 1, 0.85, [0.3, 0.5, 0.7][n % 3]) })); }
+      return ids.get(m);
+    });
+    o.material = Array.isArray(o.material) ? flat : flat[0];
+  });
+  renderer.clear(); renderer.render(scene, cam);
+  for (const [o, m] of keep) o.material = m;
+  for (const m of ids.values()) m.dispose();
+  const c = mkCanvas(w, h), cx = c.getContext('2d', { willReadFrequently: true });
+  cx.drawImage(renderer.domElement, 0, 0);
+  const src = cx.getImageData(0, 0, w, h), d = src.data, e = cx.createImageData(w, h), o = e.data, ink = parseInt(INK.slice(1), 16);
+  const differ = (i, j) => d[i + 3] > 200 && d[j + 3] > 200 && Math.abs(d[i] - d[j]) + Math.abs(d[i + 1] - d[j + 1]) + Math.abs(d[i + 2] - d[j + 2]) > 60;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const i = (y * w + x) * 4;
+    if ((x + 1 < w && differ(i, i + 4)) || (y + 1 < h && differ(i, i + w * 4))) { o[i] = ink >> 16; o[i + 1] = (ink >> 8) & 255; o[i + 2] = ink & 255; o[i + 3] = 255; }
+  }
+  cx.clearRect(0, 0, w, h); cx.putImageData(e, 0, 0);
+  const lines = mkCanvas(w, h), lx = lines.getContext('2d');
+  for (let k = 0; k < 8; k++) { const a = k * TAU / 8; lx.drawImage(c, Math.cos(a) * t, Math.sin(a) * t); }
+  lx.drawImage(c, 0, 0);
+  return lines;
+}
+
+// Silhouette ink line around an image with a transparent backdrop. Soft alpha (a contact shadow) gets no line.
+function inkOutline(src, w, h, t) {
+  const sil = mkCanvas(w, h), s = sil.getContext('2d', { willReadFrequently: true });
+  s.drawImage(src, 0, 0, w, h);
+  const img = s.getImageData(0, 0, w, h), d = img.data, ink = parseInt(INK.slice(1), 16);
+  for (let i = 0; i < d.length; i += 4) { d[i] = ink >> 16; d[i + 1] = (ink >> 8) & 255; d[i + 2] = ink & 255; d[i + 3] = d[i + 3] >= 150 ? 255 : 0; }
+  s.putImageData(img, 0, 0);
+  const out = mkCanvas(w, h), o = out.getContext('2d');
+  for (let k = 0; k < 16; k++) { const a = k * TAU / 16; o.drawImage(sil, Math.cos(a) * t, Math.sin(a) * t); }
+  o.drawImage(src, 0, 0, w, h);
+  return out;
+}
+
+// A GLB as a cel-shaded hero shot: toon materials, ink part lines, a crisp contact shadow, transparent background,
+// framed to `fill` of the frame. view: {yaw, pitch, fill, lift, fov, exposure}
 export async function renderModel(url, w, h, view = {}) {
   const { renderer, loader } = glRig();
   const model = (await loader.loadAsync(url)).scene;
@@ -304,12 +421,7 @@ export async function renderModel(url, w, h, view = {}) {
   model.traverse(o => {
     if (!o.isMesh) return;
     o.castShadow = true; o.receiveShadow = true;
-    for (const m of [o.material].flat()) {
-      if (!m) continue;
-      if ('roughness' in m) m.roughness = Math.max(m.roughness ?? 0.8, 0.55);
-      // a card is a solid print: see-through toy materials read as ghosts against the painted world
-      if (m.transparent || m.opacity < 1) { m.transparent = false; m.opacity = 1; m.alphaTest = Math.max(m.alphaTest || 0, 0.5); m.depthWrite = true; m.needsUpdate = true; }
-    }
+    o.material = Array.isArray(o.material) ? o.material.map(toonOf) : o.material ? toonOf(o.material) : o.material;
   });
   let box = new THREE.Box3().setFromObject(model);
   const c = box.getCenter(new THREE.Vector3());
@@ -319,15 +431,13 @@ export async function renderModel(url, w, h, view = {}) {
   box = new THREE.Box3().setFromObject(pivot);
   const size = box.getSize(new THREE.Vector3()), radius = Math.max(size.x, size.y, size.z);
 
-  scene.add(new THREE.HemisphereLight(0xfff1d6, 0x6b7a4a, 1.25));
-  const key = new THREE.DirectionalLight(0xfff0d8, 2.6);
+  scene.add(new THREE.AmbientLight(0xfff6e6, view.exposure ?? 1.2)); // flat fill: the toon ramp makes the steps
+  const key = new THREE.DirectionalLight(0xfff4e2, 2.1);
   key.position.set(-radius * 1.6, radius * 2.6, radius * 2.2);
-  key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 6; key.shadow.bias = -0.0004;
+  key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -0.0004;
   const sc = key.shadow.camera; sc.left = sc.bottom = -radius * 1.6; sc.right = sc.top = radius * 1.6; sc.near = 0.01; sc.far = radius * 10;
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xcfe2ff, 1.1); rim.position.set(radius * 2, radius * 1.4, -radius * 2.4); scene.add(rim);
-  const fillL = new THREE.DirectionalLight(0xffe2c2, 0.45); fillL.position.set(radius * 2.4, radius * 0.6, radius * 1.2); scene.add(fillL);
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(radius * 12, radius * 12), new THREE.ShadowMaterial({ opacity: 0.32 }));
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(radius * 12, radius * 12), new THREE.ShadowMaterial({ opacity: 0.26 }));
   ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
 
   const cam = new THREE.PerspectiveCamera(view.fov ?? 26, w / h, radius * 0.01, radius * 100);
@@ -348,12 +458,14 @@ export async function renderModel(url, w, h, view = {}) {
   }
   renderer.setPixelRatio(1);
   renderer.setSize(w, h, false);
-  renderer.toneMappingExposure = view.exposure ?? 1.05;
   renderer.render(scene, cam);
   const out = mkCanvas(w, h), octx = out.getContext('2d');
-  octx.filter = 'saturate(1.35) contrast(1.06)'; // the game's pastel toy palette needs a push to sing on a card
+  octx.filter = 'saturate(1.15)'; // the game's pastel toy palette needs a small push to sing on a card
   octx.drawImage(renderer.domElement, 0, 0);
-  scene.traverse(o => { if (o.geometry) o.geometry.dispose(); });
+  octx.filter = 'none';
+  ground.visible = false;
+  if (view.lines !== false) octx.drawImage(partLines(renderer, scene, cam, model, w, h, Math.max(0.8, w * 0.0011)), 0, 0);
+  scene.traverse(o => { if (o.geometry) o.geometry.dispose(); for (const m of [o.material].flat()) m?.dispose?.(); });
   return out;
 }
 
@@ -380,15 +492,17 @@ export async function prepareArt(spec, opts = {}) {
     if (mode === 'model') {
       if (!art.model) throw new Error('no model for this card');
       const w = Math.round(box.w / 25.4 * dpi), h = Math.round(box.h / 25.4 * dpi);
-      const canvas = await renderModel(art.model, w, h, view);
+      let canvas = await renderModel(art.model, w, h, view);
+      if (art.outline !== false) canvas = inkOutline(canvas, w, h, Math.max(2, dpi / 25.4 * 0.3)); // 0.3 mm silhouette line
       return { canvas, mode, srcW: w, srcH: h, bounds: alphaBounds(canvas, w, h).box, rendered: box };
     }
     if (!art.image) throw new Error('no image for this card');
-    const img = await loadImage(art.image);
-    const a = alphaBounds(img, img.naturalWidth, img.naturalHeight);
-    // A transparent cut-out stands on the painted world backdrop, like a model render.
+    const img = await loadImage(art.image), iw = img.naturalWidth, ih = img.naturalHeight;
+    const a = alphaBounds(img, iw, ih);
+    // A transparent cut-out stands on the flat world backdrop, like a model render, with the same ink silhouette.
     const cut = a.corner < 40 && a.box;
-    return { canvas: img, mode: cut ? 'cutout' : 'image', bounds: cut ? a.box : null, srcW: img.naturalWidth, srcH: img.naturalHeight };
+    const canvas = cut && art.outline !== false ? inkOutline(img, iw, ih, Math.max(2, Math.max(a.box.w, a.box.h) * 0.008)) : img;
+    return { canvas, mode: cut ? 'cutout' : 'image', bounds: cut ? a.box : null, srcW: iw, srcH: ih };
   })();
   artCache.set(key, job);
   job.catch(() => artCache.delete(key));
@@ -406,25 +520,25 @@ function cutoutPlacement(art, spec, r, style) {
 function paintBackdrop(ctx, x, y, w, h, biomeName, seed, horizonAt = 0.66) {
   const b = BIOMES[biomeName] || BIOMES.ranch, r = rng(seed);
   const horizon = y + h * horizonAt;
-  const sky = ctx.createLinearGradient(0, y, 0, horizon);
-  sky.addColorStop(0, b.sky[0]); sky.addColorStop(0.6, b.sky[1]); sky.addColorStop(1, b.sky[2]);
-  ctx.fillStyle = sky; ctx.fillRect(x, y, w, h);
+  ctx.save();
+  ctx.fillStyle = b.sky[0]; ctx.fillRect(x, y, w, h);
+  ctx.fillStyle = b.sky[1]; ctx.fillRect(x, y + (horizon - y) * 0.48, w, y + h - (horizon - y) * 0.48); // one hard step of sky
   if (b.stars) {
-    for (let i = 0; i < 70; i++) { ctx.globalAlpha = 0.3 + r() * 0.7; ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x + r() * w, y + r() * h * 0.6, 0.08 + r() * 0.16, 0, Math.PI * 2); ctx.fill(); }
-    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#fff6dc';
+    for (let i = 0; i < 46; i++) { const px = x + r() * w, py = y + r() * (horizon - y) * 0.9, s = 0.12 + r() * 0.2; if (i % 8 === 0) sparkle(ctx, px, py, s * 4.5); else disc(ctx, px, py, s, '#fff6dc'); }
   }
-  const sx = x + w * (0.72 + r() * 0.1), sy = y + h * 0.2;
-  const sun = ctx.createRadialGradient(sx, sy, 0, sx, sy, w * 0.55);
-  sun.addColorStop(0, b.sun); sun.addColorStop(0.25, b.sun + 'aa'); sun.addColorStop(1, b.sun + '00');
-  ctx.fillStyle = sun; ctx.fillRect(x, y, w, h);
+  const sx = x + w * (0.72 + r() * 0.1), sy = y + h * 0.2, sr = Math.min(w, h) * 0.075;
+  ctx.globalAlpha = 0.35; disc(ctx, sx, sy, sr * 1.9, b.sun); ctx.globalAlpha = 1; disc(ctx, sx, sy, sr, b.sun);
   if (!b.stars) {
-    ctx.save(); ctx.filter = `blur(${w * 0.012}px)`;
-    for (let i = 0; i < 4; i++) {
-      const cx = x + r() * w, cy = y + h * (0.1 + r() * 0.22), cw = w * (0.12 + r() * 0.12);
-      ctx.fillStyle = 'rgba(255,250,240,.6)';
-      for (let k = 0; k < 4; k++) { ctx.beginPath(); ctx.ellipse(cx + (k - 1.5) * cw * 0.32, cy + Math.sin(k * 2) * cw * 0.05, cw * 0.32, cw * 0.17, 0, 0, Math.PI * 2); ctx.fill(); }
+    const shade = mix('#ffffff', b.sky[1], 0.55);
+    for (let i = 0; i < 3; i++) {
+      const cx = x + r() * w, cy = y + h * (0.1 + r() * 0.2), cw = w * (0.1 + r() * 0.1);
+      for (const [col, dy] of [[shade, cw * 0.09], ['#fffdf6', 0]]) {
+        ctx.fillStyle = col; ctx.beginPath();
+        for (let k = 0; k < 4; k++) { const px = cx + (k - 1.5) * cw * 0.3, pr = cw * (k === 1 || k === 2 ? 0.26 : 0.18); ctx.moveTo(px + pr, cy + dy - pr * 0.3); ctx.arc(px, cy + dy - pr * 0.3, pr, 0, TAU); }
+        ctx.rect(cx - cw * 0.63, cy + dy - cw * 0.06, cw * 1.26, cw * 0.14); ctx.fill();
+      }
     }
-    ctx.restore();
   }
   b.hills.forEach((col, i) => {
     const base = horizon - h * (0.1 - i * 0.045);
@@ -432,44 +546,32 @@ function paintBackdrop(ctx, x, y, w, h, biomeName, seed, horizonAt = 0.66) {
     const ph = r() * 6, amp = h * (0.05 - i * 0.008), freq = 1.4 + r() * 1.2;
     for (let k = 0; k <= 48; k++) { const t = k / 48; ctx.lineTo(x + t * w, base - Math.sin(t * Math.PI * freq + ph) * amp - Math.sin(t * 9 + ph) * amp * 0.18); }
     ctx.lineTo(x + w, y + h); ctx.closePath();
-    const g = ctx.createLinearGradient(0, base - amp, 0, y + h);
-    g.addColorStop(0, col); g.addColorStop(1, mix(col, '#000000', 0.12));
-    ctx.fillStyle = g; ctx.fill();
+    ctx.fillStyle = col; ctx.fill();
     if (i < 2 && !b.stars) {
       for (let t = 0; t < 9; t++) {
         const tx = x + r() * w, ty = base - Math.sin(((tx - x) / w) * Math.PI * freq + ph) * amp + h * 0.006, s = h * (0.012 + r() * 0.012) * (i + 1);
-        ctx.fillStyle = mix(col, '#2c3a1c', 0.35); ctx.beginPath(); ctx.ellipse(tx, ty - s, s * 0.8, s, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = mix(col, '#2c3a1c', 0.3); ctx.beginPath(); ctx.ellipse(tx, ty - s, s * 0.8, s, 0, 0, TAU); ctx.fill();
       }
     }
   });
-  const g = ctx.createLinearGradient(0, horizon, 0, y + h);
-  g.addColorStop(0, b.ground[0]); g.addColorStop(1, b.ground[1]);
-  ctx.fillStyle = g;
+  ctx.fillStyle = b.ground[0];
   ctx.beginPath(); ctx.moveTo(x, horizon + h * 0.02); ctx.quadraticCurveTo(x + w * 0.5, horizon - h * 0.035, x + w, horizon + h * 0.02); ctx.lineTo(x + w, y + h); ctx.lineTo(x, y + h); ctx.fill();
-  const hz = ctx.createLinearGradient(0, horizon - h * 0.12, 0, horizon + h * 0.05);
-  hz.addColorStop(0, b.sky[2] + '00'); hz.addColorStop(0.7, b.sky[2] + '55'); hz.addColorStop(1, b.sky[2] + '00');
-  ctx.fillStyle = hz; ctx.fillRect(x, horizon - h * 0.12, w, h * 0.17);
-  if (!b.stars) {
-    ctx.strokeStyle = mix(b.ground[1], '#20300f', 0.3); ctx.lineWidth = h * 0.0025; ctx.globalAlpha = 0.35;
-    for (let i = 0; i < 160; i++) { const px = x + r() * w, py = horizon + r() * (y + h - horizon), l = h * (0.006 + (py - horizon) / h * 0.02); ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + (r() - 0.5) * l * 0.6, py - l); ctx.stroke(); }
-    ctx.globalAlpha = 1;
+  const near = horizon + (y + h - horizon) * 0.5;
+  ctx.fillStyle = b.ground[1];
+  ctx.beginPath(); ctx.moveTo(x, near); ctx.quadraticCurveTo(x + w * 0.35, near - h * 0.03, x + w, near + h * 0.01); ctx.lineTo(x + w, y + h); ctx.lineTo(x, y + h); ctx.fill();
+  if (b.flowers) for (let i = 0; i < 26; i++) {
+    const px = x + r() * w, py = horizon + h * 0.02 + r() * (y + h - horizon), s = 0.3 + (py - horizon) / h * 1.2;
+    flower(ctx, px, py, s, ['#fffaf0', '#ffd65a', '#f49ab4', '#b9a4ef'][i % 4], '#e8a020');
   }
+  ctx.restore();
 }
 
-// Specimen backdrop: a field-guide plate. Warm paper, a soft pool of light, a hint of the floor line.
-function paintPaper(ctx, x, y, w, h, sub, seed) {
-  const g = ctx.createRadialGradient(x + w * 0.45, y + h * 0.42, 1, x + w / 2, y + h / 2, Math.max(w, h) * 0.75);
-  g.addColorStop(0, '#fbf3e1'); g.addColorStop(0.65, '#efe0bf'); g.addColorStop(1, '#d9c193');
-  ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+// Specimen backdrop: a field-guide plate in flat cel colour, with a floor shadow under the subject.
+function paintPaper(ctx, x, y, w, h, sub) {
+  ctx.fillStyle = '#f7ecd2'; ctx.fillRect(x, y, w, h);
   const fy = sub.y + sub.h * 0.9;
-  const fl = ctx.createLinearGradient(0, fy - 4, 0, y + h);
-  fl.addColorStop(0, 'rgba(160,120,60,0)'); fl.addColorStop(0.4, 'rgba(160,120,60,.10)'); fl.addColorStop(1, 'rgba(120,85,40,.22)');
-  ctx.fillStyle = fl; ctx.fillRect(x, fy - 4, w, y + h - fy + 4);
-  paintGrain(ctx, x, y, w, h, 0.2, 'multiply', 9);
-  const r = rng(seed + 5);
-  ctx.save(); ctx.globalAlpha = 0.05; ctx.fillStyle = '#7a5520';
-  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.ellipse(x + r() * w, y + r() * h, 3 + r() * 8, 2 + r() * 4, r() * 3, 0, Math.PI * 2); ctx.fill(); }
-  ctx.restore();
+  ctx.fillStyle = '#ecdcb8'; ctx.fillRect(x, fy, w, y + h - fy);
+  ctx.beginPath(); ctx.ellipse(sub.x + sub.w / 2, fy, sub.w * 0.34, 1.6, 0, 0, TAU); ctx.fillStyle = '#dcc79c'; ctx.fill();
 }
 
 // Shadowbox foreground: grass and flowers in front of the subject, darker, so the window reads as a deep box.
@@ -491,23 +593,16 @@ function paintForeground(ctx, x, w, groundY, seed, biome) {
   ctx.restore();
 }
 
-// Sun tier glory: soft rays and motes behind the subject.
+// Sun tier glory: flat rays and a few sparkles behind the subject.
 function sunburst(ctx, cx, cy, R, seed) {
   const r = rng(seed + 9);
-  ctx.save(); ctx.globalCompositeOperation = 'screen';
-  for (let i = 0; i < 18; i++) {
-    const a = (i / 18) * Math.PI * 2 + r() * 0.1, wdt = 0.06 + r() * 0.06;
-    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 0.75);
-    g.addColorStop(0, 'rgba(255,236,170,.5)'); g.addColorStop(1, 'rgba(255,236,170,0)');
-    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, R, a, a + wdt); ctx.closePath(); ctx.fill();
-  }
-  const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 0.35);
-  halo.addColorStop(0, 'rgba(255,240,190,.4)'); halo.addColorStop(1, 'rgba(255,240,190,0)');
-  ctx.fillStyle = halo; ctx.fillRect(cx - R, cy - R, R * 2, R * 2);
-  for (let i = 0; i < 40; i++) {
-    const a = r() * Math.PI * 2, d = R * (0.08 + r() * 0.4), s = 0.12 + r() * 0.35;
-    ctx.fillStyle = `rgba(255,248,215,${0.4 + r() * 0.6})`; ctx.beginPath(); ctx.arc(cx + Math.cos(a) * d, cy + Math.sin(a) * d * 0.9, s, 0, Math.PI * 2); ctx.fill();
-  }
+  ctx.save(); ctx.fillStyle = 'rgba(255,244,200,.32)';
+  ctx.beginPath();
+  for (let i = 0; i < 16; i++) { const a = (i / 16) * TAU; ctx.moveTo(cx, cy); ctx.arc(cx, cy, R, a, a + TAU / 32); ctx.closePath(); }
+  ctx.fill();
+  ctx.globalAlpha = 0.3; disc(ctx, cx, cy, R * 0.22, '#fff4c8');
+  ctx.globalAlpha = 0.9; ctx.fillStyle = '#fffbe6';
+  for (let i = 0; i < 9; i++) { const a = r() * TAU, d = R * (0.12 + r() * 0.3); sparkle(ctx, cx + Math.cos(a) * d, cy + Math.sin(a) * d * 0.9, 0.6 + r() * 0.7); }
   ctx.restore();
 }
 
@@ -517,7 +612,7 @@ function paintArt(ctx, art, spec, x, y, w, h, sub, style) {
   let subject = null;
   if (art.mode === 'model' || art.mode === 'cutout') {
     const seed = hashSeed(spec.id);
-    if (style === 'specimen') paintPaper(ctx, x, y, w, h, sub, seed);
+    if (style === 'specimen') paintPaper(ctx, x, y, w, h, sub);
     else paintBackdrop(ctx, x, y, w, h, spec.biome || 'ranch', seed, Math.min(0.8, (sub.y + sub.h * 0.62 - y) / h));
     if (style === 'popout') sunburst(ctx, sub.x + sub.w / 2, sub.y + sub.h * 0.45, Math.max(w, h), seed);
     let draw;
@@ -531,10 +626,7 @@ function paintArt(ctx, art, spec, x, y, w, h, sub, style) {
       draw = c => c.drawImage(art.canvas, p.dx, p.dy, art.srcW * p.s, art.srcH * p.s);
       subject = { x: p.dx + B.x * p.s, y: p.dy + B.y * p.s, w: B.w * p.s, h: B.h * p.s, pxPerMm: 1 / p.s };
     }
-    if (style !== 'specimen') { // a soft warm rim separates a pastel toy from a bright painted world
-      const k = ctx.getTransform().a;
-      ctx.save(); ctx.shadowColor = 'rgba(46,28,6,.5)'; ctx.shadowBlur = 0.9 * k; draw(ctx); ctx.restore();
-    } else draw(ctx);
+    draw(ctx); // the art carries its own ink silhouette (prepareArt), so it reads on any backdrop
     subject.draw = draw;
     if (style === 'shadowbox') paintForeground(ctx, x, w, sub.y + sub.h, seed, spec.biome);
   } else {
@@ -544,10 +636,6 @@ function paintArt(ctx, art, spec, x, y, w, h, sub, style) {
     ctx.drawImage(art.canvas, Math.min(x, Math.max(dx, x + w - dw)), Math.min(y, Math.max(dy, y + h - dh)), dw, dh);
     subject = { pxPerMm: 1 / s };
   }
-  const v = ctx.createRadialGradient(x + w / 2, y + h * 0.45, Math.min(w, h) * 0.35, x + w / 2, y + h * 0.5, Math.max(w, h) * 0.78);
-  v.addColorStop(0, 'rgba(40,20,0,0)'); v.addColorStop(1, 'rgba(40,20,0,.32)');
-  ctx.fillStyle = v; ctx.fillRect(x, y, w, h);
-  paintGrain(ctx, x, y, w, h, 0.06, 'overlay', 14);
   return subject;
 }
 
@@ -584,64 +672,10 @@ function windowPath(ctx, type, x, y, w, h) {
   ctx.closePath();
 }
 
-function paintFrameBody(ctx, tier, x, y, w, h, seed) {
-  const m = WOOD[FRAME_OF[tier]], r = rng(seed);
-  const g = ctx.createLinearGradient(x, y, x + w * 0.4, y + h);
-  g.addColorStop(0, m.body[0]); g.addColorStop(0.4, m.body[1]); g.addColorStop(1, m.body[2]);
-  ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
-  const metal = tier === 'harvest' || tier === 'sun';
-  // wood grain (pine and lacquer) or hammered leaf (gilded)
-  ctx.save(); ctx.globalAlpha = metal ? 0.1 : tier === 'bloom' ? 0.18 : 0.26; ctx.strokeStyle = m.body[2]; ctx.lineWidth = metal ? 0.12 : 0.2;
-  for (let i = 0; i < (metal ? 30 : 80); i++) {
-    const yy = y + r() * h, amp = 0.4 + r() * 1.4, ph = r() * 6, fr = 4 + r() * 6;
-    ctx.beginPath();
-    for (let t = 0; t <= 36; t++) { const xx = x + t / 36 * w; ctx.lineTo(xx, yy + Math.sin(t / 36 * fr + ph) * amp); }
-    ctx.stroke();
-  }
-  if (!metal) for (let i = 0; i < 3; i++) { // knots
-    const kx = x + r() * w, ky = y + r() * h;
-    for (let k = 1; k < 5; k++) { ctx.beginPath(); ctx.ellipse(kx, ky, k * 0.45, k * 0.22, 0, 0, Math.PI * 2); ctx.stroke(); }
-  }
-  ctx.restore();
-  paintGrain(ctx, x, y, w, h, metal ? 0.12 : 0.22, 'overlay', 22);
-  if (tier === 'bloom' || metal) { // lacquer and leaf catch a broad sheen
-    const s = ctx.createLinearGradient(x, y, x + w, y + h);
-    s.addColorStop(0.15, 'rgba(255,255,255,0)'); s.addColorStop(0.3, 'rgba(255,255,255,.22)'); s.addColorStop(0.42, 'rgba(255,255,255,0)');
-    ctx.fillStyle = s; ctx.fillRect(x, y, w, h);
-  }
-  const lp = ctx.createRadialGradient(x + w * 0.3, y + h * 0.12, 0, x + w * 0.3, y + h * 0.12, h * 0.95);
-  lp.addColorStop(0, 'rgba(255,240,210,.2)'); lp.addColorStop(1, 'rgba(0,0,0,.28)');
-  ctx.fillStyle = lp; ctx.fillRect(x, y, w, h);
-}
-
-function bevel(ctx, pathFn, trim, lw) {
-  ctx.save();
-  ctx.shadowColor = 'rgba(15,6,0,.55)'; ctx.shadowBlur = 1.4; ctx.shadowOffsetY = 0.45;
-  ctx.lineWidth = lw * 2; ctx.lineJoin = 'round'; ctx.strokeStyle = metalGradient(ctx, 0, 0, CARD.w * 0.6, CARD.h, trim);
-  pathFn(); ctx.stroke();
-  ctx.restore();
-  ctx.save(); ctx.lineWidth = 0.12; ctx.strokeStyle = 'rgba(0,0,0,.35)'; pathFn(); ctx.stroke(); ctx.restore();
-}
-function innerShadow(ctx, pathFn, strength = 0.5, size = 1.6) {
-  ctx.save();
-  pathFn(); ctx.clip();
-  ctx.shadowColor = `rgba(20,8,0,${strength})`; ctx.shadowBlur = size; ctx.shadowOffsetY = size * 0.25;
-  ctx.lineWidth = size * 2; ctx.strokeStyle = '#000'; pathFn(); ctx.stroke();
-  ctx.restore();
-}
-function parchment(ctx, pathFn, x, y, w, h, seed, alpha = 1) {
-  ctx.save();
-  pathFn(); ctx.clip();
-  ctx.globalAlpha = alpha;
-  const g = ctx.createLinearGradient(x, y, x, y + h);
-  g.addColorStop(0, '#fbf3df'); g.addColorStop(1, '#efe0bd');
-  ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
-  paintGrain(ctx, x, y, w, h, 0.14 * alpha, 'multiply', 10);
-  const r = rng(seed);
-  ctx.globalAlpha = 0.045 * alpha; ctx.fillStyle = '#8a5a20';
-  for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.ellipse(x + r() * w, y + r() * h, 2 + r() * 6, 1 + r() * 3, r() * 3, 0, Math.PI * 2); ctx.fill(); }
-  ctx.restore();
-  innerShadow(ctx, pathFn, 0.3 * alpha, 1);
+function paintFrameBody(ctx, tier, x, y, w, h, seed, pattern) {
+  const f = FRAME[tier];
+  ctx.fillStyle = f.body; ctx.fillRect(x, y, w, h);
+  paintPattern(ctx, pattern, x, y, w, h, mix(f.body, f.trim, 0.26), f.body, seed);
 }
 
 // Name ribbon: a banner with folded tails, hung across the top of the art.
@@ -655,72 +689,58 @@ function ribbonPath(ctx, R) {
   ctx.closePath();
 }
 
-// Rarity gem: growth-stage shape (seed, sprout, flower, wheat sheaf, sunburst) in its rubric colour, set in brass.
+// Rarity gem: growth-stage shape (seed, sprout, flower, wheat sheaf, sunburst) in its rubric colour, flat with ink.
 function rarityGem(ctx, tier, cx, cy, r) {
-  const col = oklchToHex(RARITIES[tier].oklch), dark = mix(col, '#000000', 0.45), light = mix(col, '#ffffff', 0.45);
+  const col = oklchToHex(RARITIES[tier].oklch), dark = mix(col, '#000000', 0.45);
+  disc(ctx, cx, cy, r, INK);
+  disc(ctx, cx, cy, r * 0.88, PAPER);
+  disc(ctx, cx, cy, r * 0.74, '#2b2118');
   ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = r * 0.5; ctx.shadowOffsetY = r * 0.15;
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fillStyle = metalGradient(ctx, cx - r, cy - r, cx + r, cy + r, BRASS); ctx.fill();
-  ctx.restore();
-  ctx.save();
-  ctx.beginPath(); ctx.arc(cx, cy, r * 0.84, 0, Math.PI * 2); ctx.fillStyle = '#1f150d'; ctx.fill();
-  const g = ctx.createRadialGradient(cx - r * 0.3, cy - r * 0.4, 0, cx, cy, r);
-  g.addColorStop(0, light); g.addColorStop(0.5, col); g.addColorStop(1, dark);
-  ctx.fillStyle = g; ctx.strokeStyle = dark; ctx.lineWidth = r * 0.06;
-  const s = r * 0.72;
+  ctx.fillStyle = col; ctx.strokeStyle = dark; ctx.lineWidth = r * 0.06;
+  const s = r * 0.66;
   ctx.translate(cx, cy);
   ctx.beginPath();
   if (tier === 'seed') { ctx.moveTo(0, -s); ctx.bezierCurveTo(s * 0.9, -s * 0.4, s * 0.75, s * 0.9, 0, s); ctx.bezierCurveTo(-s * 0.75, s * 0.9, -s * 0.9, -s * 0.4, 0, -s); }
   else if (tier === 'sprout') {
     ctx.moveTo(-s * 0.1, s); ctx.lineTo(s * 0.1, s); ctx.lineTo(s * 0.1, -s * 0.05); ctx.lineTo(-s * 0.1, -s * 0.05); ctx.closePath(); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(-s * 0.48, -s * 0.38, s * 0.52, s * 0.28, -0.6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-    ctx.beginPath(); ctx.ellipse(s * 0.48, -s * 0.38, s * 0.52, s * 0.28, 0.6, 0, Math.PI * 2);
+    ctx.beginPath(); ctx.ellipse(-s * 0.48, -s * 0.38, s * 0.52, s * 0.28, -0.6, 0, TAU); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(s * 0.48, -s * 0.38, s * 0.52, s * 0.28, 0.6, 0, TAU);
   } else if (tier === 'bloom') {
-    for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / 5; ctx.moveTo(Math.cos(a) * s * 0.55 + s * 0.4, Math.sin(a) * s * 0.55); ctx.ellipse(Math.cos(a) * s * 0.55, Math.sin(a) * s * 0.55, s * 0.4, s * 0.4, 0, 0, Math.PI * 2); }
-    ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, s * 0.3, 0, Math.PI * 2); ctx.fillStyle = '#ffe08a';
+    for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * TAU / 5; ctx.moveTo(Math.cos(a) * s * 0.55 + s * 0.4, Math.sin(a) * s * 0.55); ctx.ellipse(Math.cos(a) * s * 0.55, Math.sin(a) * s * 0.55, s * 0.4, s * 0.4, 0, 0, TAU); }
+    ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, s * 0.3, 0, TAU); ctx.fillStyle = '#ffe08a';
   } else if (tier === 'harvest') {
-    for (const a of [-0.45, 0, 0.45]) { ctx.save(); ctx.rotate(a); ctx.beginPath(); ctx.ellipse(0, -s * 0.38, s * 0.24, s * 0.62, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.restore(); }
+    for (const a of [-0.45, 0, 0.45]) { ctx.save(); ctx.rotate(a); ctx.beginPath(); ctx.ellipse(0, -s * 0.38, s * 0.24, s * 0.62, 0, 0, TAU); ctx.fill(); ctx.stroke(); ctx.restore(); }
     ctx.beginPath(); ctx.rect(-s * 0.42, s * 0.18, s * 0.84, s * 0.22); ctx.fillStyle = '#e8c25a'; ctx.fill();
-    ctx.beginPath(); ctx.moveTo(-s * 0.25, s * 0.4); ctx.lineTo(-s * 0.4, s); ctx.lineTo(s * 0.4, s); ctx.lineTo(s * 0.25, s * 0.4); ctx.fillStyle = g;
+    ctx.beginPath(); ctx.moveTo(-s * 0.25, s * 0.4); ctx.lineTo(-s * 0.4, s); ctx.lineTo(s * 0.4, s); ctx.lineTo(s * 0.25, s * 0.4); ctx.fillStyle = col;
   } else {
     for (let i = 0; i < 24; i++) { const a = -Math.PI / 2 + i * Math.PI / 12, rr = i % 2 ? s * 0.62 : s * 1.06; ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); }
-    ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, s * 0.5, 0, Math.PI * 2); ctx.fillStyle = '#fff3c4';
+    ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, s * 0.5, 0, TAU); ctx.fillStyle = '#fff3c4';
   }
   ctx.fill(); ctx.stroke();
-  ctx.beginPath(); ctx.ellipse(-r * 0.22, -r * 0.42, r * 0.3, r * 0.13, -0.5, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.fill();
   ctx.restore();
 }
 
-// Round token for cost and stats: rim, dark enamel, big outlined numeral (contrast over 3:1 by construction).
+// Round token for cost and stats: ink ring, flat rim, flat disc, big outlined numeral (contrast over 3:1 by construction).
 function token(ctx, value, cx, cy, r, col, rim) {
-  ctx.save();
-  ctx.shadowColor = 'rgba(15,6,0,.55)'; ctx.shadowBlur = r * 0.45; ctx.shadowOffsetY = r * 0.12;
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fillStyle = metalGradient(ctx, cx - r, cy - r, cx + r, cy + r, rim); ctx.fill();
-  ctx.restore();
-  enamel(ctx, cx, cy, r * 0.84, col);
+  disc(ctx, cx, cy, r, INK);
+  disc(ctx, cx, cy, r * 0.9, rim);
+  celDisc(ctx, cx, cy, r * 0.78, col);
   numeral(ctx, String(value), cx, cy, NUMERAL_MM);
 }
 
-function brassCaps(ctx) {
-  for (const [x, y, sx, sy] of [[0, 0, 1, 1], [CARD.w, 0, -1, 1], [0, CARD.h, 1, -1], [CARD.w, CARD.h, -1, -1]]) {
-    ctx.save(); ctx.translate(x, y); ctx.scale(sx, sy);
-    ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 0.8; ctx.shadowOffsetY = 0.3;
-    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(7.5, 0); ctx.lineTo(7.5, 1.4); ctx.quadraticCurveTo(2.6, 1.4, 1.4, 2.6); ctx.quadraticCurveTo(1.4, 2.6, 1.4, 7.5); ctx.lineTo(0, 7.5); ctx.closePath();
-    ctx.fillStyle = metalGradient(ctx, 0, 0, 7.5, 7.5, BRASS); ctx.fill();
-    ctx.fillStyle = '#3a240e'; for (const [px, py] of [[5.6, 0.7], [0.7, 5.6]]) { ctx.beginPath(); ctx.arc(px, py, 0.32, 0, Math.PI * 2); ctx.fill(); }
-    ctx.restore();
-  }
-}
-function filigree(ctx, trim) {
-  for (const [cx, cy, sx, sy] of [[1.8, 1.8, 1, 1], [CARD.w - 1.8, 1.8, -1, 1], [1.8, CARD.h - 1.8, 1, -1], [CARD.w - 1.8, CARD.h - 1.8, -1, -1]]) {
-    ctx.save(); ctx.translate(cx, cy); ctx.scale(sx * 0.8, sy * 0.8);
-    ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 0.8; ctx.shadowOffsetY = 0.3;
-    ctx.strokeStyle = metalGradient(ctx, 0, 0, 9, 9, trim); ctx.fillStyle = ctx.strokeStyle; ctx.lineWidth = 0.55; ctx.lineCap = 'round';
-    ctx.beginPath(); ctx.moveTo(1.2, 9.5); ctx.bezierCurveTo(1.2, 4, 4, 1.2, 9.5, 1.2); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(2.6, 7); ctx.bezierCurveTo(3.5, 4.6, 4.6, 3.5, 7, 2.6); ctx.stroke();
-    ctx.beginPath(); ctx.arc(2.5, 2.5, 1.25, 0, Math.PI * 2); ctx.fill();
-    ctx.restore();
-  }
+// "PRELIMINARY · idea only": a taped label across the art for anything below the ship bar (Evan, 2026-10-23).
+function preliminaryStamp(ctx, A) {
+  const w = Math.min(52, A.w - 2), h = 11;
+  ctx.save(); ctx.translate(A.x + A.w / 2, A.y + A.h * 0.6); ctx.rotate(-0.12);
+  rrect(ctx, -w / 2, -h / 2, w, h, 1.4); ctx.fillStyle = '#fff1c4'; ctx.fill();
+  ctx.lineWidth = 0.55; ctx.strokeStyle = INK; ctx.stroke();
+  ctx.save(); rrect(ctx, -w / 2, -h / 2, w, h, 1.4); ctx.clip(); ctx.fillStyle = '#c8402a';
+  for (let k = -w / 2 - 4; k < w / 2; k += 3.2) { ctx.beginPath(); ctx.moveTo(k, -h / 2); ctx.lineTo(k + 1.4, -h / 2); ctx.lineTo(k + 1.4 - 1.4, -h / 2 + 1.4); ctx.lineTo(k - 1.4, -h / 2 + 1.4); ctx.fill(); ctx.beginPath(); ctx.moveTo(k, h / 2 - 1.4); ctx.lineTo(k + 1.4, h / 2 - 1.4); ctx.lineTo(k, h / 2); ctx.lineTo(k - 1.4, h / 2); ctx.fill(); }
+  ctx.restore();
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = nameFont(4.6); ctx.fillStyle = '#b3301c'; ctx.letterSpacing = '0.04em'; ctx.fillText('PRELIMINARY', 0, -1); ctx.letterSpacing = '0px';
+  ctx.font = typeFont(2.6); ctx.fillStyle = INK; ctx.fillText('idea only', 0, 2.9);
+  ctx.restore();
 }
 
 // Finish preview over the face (the print file carries the finish as a mask layer instead).
@@ -757,9 +777,15 @@ export function cardPixels({ dpi = 600, bleed = false } = {}) {
 /**
  * Paint one card.
  * opts: {dpi (default 600), bleed (print master: 3 mm bleed, square), lod: 'inspect'|'hand'|'board',
- *        finish: overrides the tier's finish, guides: trim and safe lines}
+ *        finish: overrides the tier's finish, guides: trim and safe lines,
+ *        plate: false drops the hand LOD's rules/ability plate and gives its room to the art,
+ *        preview: true paints a still preview of the print finish on the face,
+ *        allowPreliminary: false throws instead of stamping a card that is below the ship bar}
  * Returns {canvas, qc, manifest, masks}: qc is the quality report for this exact output, manifest is the rubric
  * checker's card.json (boxes in canvas px), masks are the finish layers to draw with renderMask().
+ * The ship bar: no failed check, art sharp enough for this output, and art that is ours to ship (a game model
+ * rendered here, or an image whose spec says art.status "final"). Below it, qc.ship is false, qc.preliminary says
+ * why, and the face carries a "PRELIMINARY · idea only" stamp across the art. Nothing below the bar looks finished.
  */
 export async function renderCard(spec, opts = {}) {
   await loadFonts();
@@ -770,13 +796,15 @@ export async function renderCard(spec, opts = {}) {
   const ctx = canvas.getContext('2d');
   const pxmm = dpi / 25.4;
   const tier = rarityOf(spec.rarity), R = RARITIES[tier], type = TYPES[spec.type] ? spec.type : 'animal';
-  const trim = WOOD[FRAME_OF[tier]].trim, sun = tier === 'sun';
+  const F = FRAME[tier], sun = tier === 'sun', pattern = patternOf(spec);
   const finish = opts.finish || spec.finish || R.finish;
   const seed = hashSeed(spec.id || spec.name);
   const qc = newQC(spec), boxes = [], toPx = (x, y, bw, bh) => [x, y, bw, bh].map((v, i) => Math.round((i < 2 ? v + b : v) * pxmm));
   const style = lod === 'board' && sun ? 'portal' : spec.artStyle || ART_STYLES[tier];
-  const A = lod === 'board' ? { x: 4, y: 4, w: 55, h: 72 } : sun ? L.sunArt : L.art;
-  const sub = lod === 'board' ? { x: 4, y: 12, w: 55, h: 60 } : sun ? L.sunSubject : L.subject;
+  // A hand card with plate:false keeps its name but gives the plate's room to the art (a tile card's art is the point).
+  const tall = lod === 'board' || (lod === 'hand' && opts.plate === false && !sun);
+  const A = tall ? { x: 4, y: 4, w: 55, h: 72 } : sun ? L.sunArt : L.art;
+  const sub = lod === 'board' ? { x: 4, y: 12, w: 55, h: 60 } : tall ? { x: 4, y: 20, w: 55, h: 54 } : sun ? L.sunSubject : L.subject;
 
   let art = null;
   try { art = await prepareArt(spec, { artDpi: Math.max(600, dpi), box: sub, view: style === 'specimen' ? { fill: 0.92 } : {} }); }
@@ -788,60 +816,50 @@ export async function renderCard(spec, opts = {}) {
   ctx.save();
   if (!bleed) { rrect(ctx, 0, 0, CARD.w, CARD.h, CARD.radius); ctx.clip(); }
 
-  paintFrameBody(ctx, tier, -b, -b, CARD.w + b * 2, CARD.h + b * 2, seed);
+  paintFrameBody(ctx, tier, -b, -b, CARD.w + b * 2, CARD.h + b * 2, seed, pattern);
   const winPath = () => windowPath(ctx, type, A.x, A.y, A.w, A.h);
   let subject = null;
   if (style === 'popout' && lod !== 'board') {
     // Sun tier: the world runs to the edge of the card (overlay), a gold window floats in it, and the subject's
     // head steps out over the window's top edge (pop-out), with a small cast shadow on the frame.
     if (art) subject = paintArt(ctx, art, spec, -b, -b, CARD.w + 2 * b, CARD.h + 2 * b, sub, style);
-    ctx.save(); rrect(ctx, 1.1, 1.1, CARD.w - 2.2, CARD.h - 2.2, CARD.radius - 0.9);
-    ctx.lineWidth = 0.9; ctx.strokeStyle = metalGradient(ctx, 0, 0, CARD.w, CARD.h, trim); ctx.stroke(); ctx.restore();
     ctx.save(); ctx.beginPath(); ctx.rect(-b, -b, CARD.w + 2 * b, CARD.h + 2 * b); windowPath(ctx, type, A.x, A.y, A.w, A.h);
-    ctx.fillStyle = 'rgba(60,30,0,.28)'; ctx.fill('evenodd'); ctx.restore(); // the world outside the window sits back
-    bevel(ctx, winPath, trim, 0.6);
+    ctx.fillStyle = 'rgba(42,28,18,.24)'; ctx.fill('evenodd'); ctx.restore(); // the world outside the window sits back
+    inkLine(ctx, () => rrect(ctx, 1.1, 1.1, CARD.w - 2.2, CARD.h - 2.2, CARD.radius - 0.9), 0.7, F.trim);
+    celRim(ctx, winPath, F.edge, 0.8);
     if (subject?.draw) {
       ctx.save();
       ctx.beginPath(); ctx.rect(-b, -b, CARD.w + 2 * b, A.y + 12 + b); ctx.clip();
-      ctx.save(); ctx.filter = 'blur(0.6px) brightness(0)'; ctx.globalAlpha = 0.35; ctx.translate(0.5, 0.7); subject.draw(ctx); ctx.restore();
+      ctx.save(); ctx.filter = 'brightness(0)'; ctx.globalAlpha = 0.25; ctx.translate(0.6, 0.8); subject.draw(ctx); ctx.restore(); // flat cast shadow
       subject.draw(ctx);
       ctx.restore();
     }
   } else {
-    // painted edge (Seed), green trim (Sprout), brass (Bloom), gold (Harvest)
-    ctx.save(); rrect(ctx, 1.1, 1.1, CARD.w - 2.2, CARD.h - 2.2, CARD.radius - 0.9);
-    ctx.lineWidth = tier === 'seed' ? 0.9 : 0.75;
-    ctx.strokeStyle = tier === 'seed' ? TYPES[type].accent : metalGradient(ctx, 0, 0, CARD.w, CARD.h, trim); ctx.stroke(); ctx.restore();
-    if (tier === 'harvest') filigree(ctx, trim);
-    bevel(ctx, winPath, trim, 0.75);
+    // one flat line in the tier's colour inside the cut, then the window: art first, a cel rim over its edge
+    inkLine(ctx, () => rrect(ctx, 1.1, 1.1, CARD.w - 2.2, CARD.h - 2.2, CARD.radius - 0.9), 0.7, F.trim);
     ctx.save(); winPath(); ctx.fillStyle = '#222'; ctx.fill(); ctx.clip();
     if (art) subject = paintArt(ctx, art, spec, A.x, A.y, A.w, A.h, sub, style);
     ctx.restore();
-    innerShadow(ctx, winPath, 0.6, 1.4);
+    celRim(ctx, winPath, F.edge, 0.9);
   }
-  if (art) checkArt(qc, art, subject, A, sub, style);
+  if (art) checkArt(qc, art, subject, A, sub, style, dpi);
 
   // Cost: top-left token
   const hasCost = Number.isFinite(spec.cost);
   if (hasCost) {
     const C = L.cost;
-    token(ctx, spec.cost, C.cx, C.cy, C.r, '#24384a', BRASS);
+    token(ctx, spec.cost, C.cx, C.cy, C.r, '#24384a', F.edge);
     boxes.push({ role: 'numeral', what: 'cost', bbox: toPx(C.cx - C.r, C.cy - C.r, C.r * 2, C.r * 2), font_pt: +(NUMERAL_MM / MM_PER_PT).toFixed(1), family: 'Fredoka', text_colour: '#fff8e8' });
   }
 
   // Name ribbon (board cards carry no words)
   if (lod !== 'board') {
     const Rb = sun ? L.sunRibbon : L.ribbon, rp = () => ribbonPath(ctx, Rb);
-    bevel(ctx, rp, trim, 0.45);
-    parchment(ctx, rp, Rb.x, Rb.y - 1, Rb.w, Rb.h + 2, seed + 1);
-    ctx.save(); rp(); ctx.clip(); // accent stripes in the type colour
-    ctx.fillStyle = TYPES[type].accent; ctx.globalAlpha = 0.85;
+    ctx.save(); rp(); ctx.fillStyle = PAPER; ctx.fill(); ctx.clip(); // flat paper, accent stripes in the type colour
+    ctx.fillStyle = TYPES[type].accent;
     ctx.fillRect(Rb.x, Rb.y - 1, Rb.w, 1.25); ctx.fillRect(Rb.x, Rb.y + Rb.h - 0.4, Rb.w, 1.3);
-    if (R.order >= 2) { // spot-gloss name from Bloom up
-      const g2 = ctx.createLinearGradient(0, Rb.y, 0, Rb.y + Rb.h); g2.addColorStop(0, 'rgba(255,255,255,.45)'); g2.addColorStop(0.45, 'rgba(255,255,255,0)');
-      ctx.globalAlpha = 1; ctx.fillStyle = g2; ctx.fillRect(Rb.x, Rb.y, Rb.w, Rb.h * 0.5);
-    }
     ctx.restore();
+    inkLine(ctx, rp, 0.5);
     const left = Rb.x + (hasCost && !sun ? 7.4 : 3), right = Rb.x + Rb.w - 3, nw = right - left;
     let ns = 4.8; ctx.font = nameFont(ns);
     while (ctx.measureText(spec.name || '').width > nw && ns > 3.6) { ns -= 0.1; ctx.font = nameFont(ns); }
@@ -853,11 +871,11 @@ export async function renderCard(spec, opts = {}) {
   }
 
   // Gem where art meets the plate; type line under it
-  const G = lod === 'board' ? { cx: 31.5, cy: 79.8, r: 3.4 } : L.gem;
+  const G = tall ? { cx: 31.5, cy: 79.8, r: 3.4 } : L.gem;
   if (lod === 'inspect') {
     const T = L.type, tp = () => rrect(ctx, T.x, T.y, T.w, T.h, 1.2);
-    ctx.save(); tp(); const tg = ctx.createLinearGradient(0, T.y, 0, T.y + T.h); tg.addColorStop(0, mix(TYPES[type].accent, '#000000', 0.25)); tg.addColorStop(1, mix(TYPES[type].accent, '#000000', 0.55)); ctx.fillStyle = tg; ctx.fill(); ctx.restore();
-    bevel(ctx, tp, trim, 0.3);
+    ctx.save(); tp(); ctx.fillStyle = mix(TYPES[type].accent, '#000000', 0.35); ctx.fill(); ctx.restore();
+    inkLine(ctx, tp, 0.4);
     const typeText = [TYPES[type].label, spec.subtype].filter(Boolean).join(' · ').toUpperCase();
     let ts = 2.3; ctx.font = typeFont(ts); ctx.letterSpacing = '0.06em';
     while (ctx.measureText(typeText).width > T.w - 3 && ts > 1.8) { ts -= 0.05; ctx.font = typeFont(ts); }
@@ -869,10 +887,10 @@ export async function renderCard(spec, opts = {}) {
   boxes.push({ role: 'gem', bbox: toPx(G.cx - G.r, G.cy - G.r, G.r * 2, G.r * 2) });
 
   // Rules plate (inspect) or ability icons (hand)
-  if (lod !== 'board') {
+  if (!tall) {
     const X = L.text, xp = () => rrect(ctx, X.x, X.y, X.w, X.h, 1.4);
-    bevel(ctx, xp, trim, 0.5);
-    parchment(ctx, xp, X.x, X.y, X.w, X.h, seed + 2);
+    ctx.save(); xp(); ctx.fillStyle = PAPER; ctx.fill(); ctx.restore();
+    inkLine(ctx, xp, 0.5);
     if (lod === 'inspect') fitRules(ctx, qc, spec, X, boxes, toPx, false);
     else {
       const icons = abilityIcons(spec), n = icons.length;
@@ -884,9 +902,9 @@ export async function renderCard(spec, opts = {}) {
   const stats = (spec.stats || []).slice(0, lod === 'board' ? 1 : 2);
   stats.forEach((st, i) => {
     const pos = lod === 'board' ? L.stats[1] : L.stats[i], r = L.statR;
-    token(ctx, st.value, pos.cx, pos.cy, r, ICON_DISC[st.icon] || '#444', trim);
+    token(ctx, st.value, pos.cx, pos.cy, r, ICON_DISC[st.icon] || '#444', F.edge);
     const ix = pos.cx + (pos.cx < CARD.w / 2 ? 4.3 : -4.3), iy = pos.cy - 3.7;
-    drawIconDisc(ctx, st.icon, ix, iy, 2.3, trim);
+    drawIconDisc(ctx, st.icon, ix, iy, 2.3);
     boxes.push({ role: 'numeral', what: st.icon, bbox: toPx(pos.cx - r, pos.cy - r, r * 2, r * 2), font_pt: +(NUMERAL_MM / MM_PER_PT).toFixed(1), family: 'Fredoka', text_colour: '#fff8e8' });
   });
 
@@ -906,20 +924,15 @@ export async function renderCard(spec, opts = {}) {
     boxes.push({ role: 'collector', bbox: toPx(K.x, K.y, K.w, K.h), font_pt: +(fs / MM_PER_PT).toFixed(1), family: 'Nunito', text_colour: '#fbf0d6' });
   }
 
-  if (tier === 'sprout' || tier === 'bloom') brassCaps(ctx);
   ctx.restore(); // silhouette clip
 
   // Finish preview and gloss
   ctx.save();
   const facePath = () => { if (bleed) { ctx.beginPath(); ctx.rect(-b, -b, CARD.w + 2 * b, CARD.h + 2 * b); } else rrect(ctx, 0, 0, CARD.w, CARD.h, CARD.radius); };
-  if (opts.preview !== false) {
+  if (opts.preview === true) { // the inspect view shows finishes live from the masks; the face stays flat
     if (finish === 'shimmer' && !sun) finishPreview(ctx, finish, winPath, A.x, A.y, A.w, A.h, seed);
     else finishPreview(ctx, finish, facePath, -b, -b, CARD.w + 2 * b, CARD.h + 2 * b, seed);
   }
-  facePath(); ctx.clip();
-  const sh = ctx.createLinearGradient(0, 0, CARD.w, CARD.h);
-  sh.addColorStop(0, 'rgba(255,255,255,.08)'); sh.addColorStop(0.35, 'rgba(255,255,255,0)'); sh.addColorStop(1, 'rgba(0,0,0,.05)');
-  ctx.fillStyle = sh; ctx.fillRect(-b, -b, CARD.w + 2 * b, CARD.h + 2 * b);
   ctx.restore();
 
   if (opts.guides && bleed) {
@@ -934,12 +947,20 @@ export async function renderCard(spec, opts = {}) {
   checkStats(qc, spec);
   checkSafe(qc, boxes, b, pxmm);
   qc.add('output', 'pass', `${w}×${h} px at ${dpi} ppi${bleed ? ', 63×88 mm + 3 mm bleed' : ''} · ${lod}`);
+  const why = shipBlockers(qc.items, spec, art);
+  qc.add('ship', why.length ? 'warn' : 'pass', why.length ? 'Preliminary, idea only: ' + why.join('; ') : 'Ready to ship');
+  const report = qc.done();
+  report.ship = !why.length; report.preliminary = why;
+  if (!report.ship) {
+    if (opts.allowPreliminary === false) throw Object.assign(new Error(`${spec.id} is below the ship bar: ${why.join('; ')}`), { qc: report });
+    ctx.save(); ctx.scale(pxmm, pxmm); ctx.translate(b, b); preliminaryStamp(ctx, A); ctx.restore();
+  }
 
   const artBox = style === 'popout' ? { x: 0, y: 0, w: CARD.w, h: CARD.h } : A;
   const srcPerMm = subject?.pxPerMm || 0;
   const masks = maskRegions(tier, finish);
   const manifest = {
-    id: spec.id, ppi: dpi, bleed, rarity: tier, type, lod, finish, full_art: sun,
+    id: spec.id, ppi: dpi, bleed, rarity: tier, type, lod, finish, full_art: sun, ship: report.ship, pattern,
     art: {
       bbox: toPx(artBox.x, artBox.y, artBox.w, artBox.h), source_px: [Math.round(artBox.w * srcPerMm), Math.round(artBox.h * srcPerMm)],
       mode: STYLE_MODES[style] || [style], source: art?.mode,
@@ -951,7 +972,7 @@ export async function renderCard(spec, opts = {}) {
     collector: { set: String(spec.set || 'ranch').toUpperCase(), number: spec.number, total: spec.setSize, maker, variant },
     finish_masks: masks.map(m => `${spec.id}.${m.layer}.png`),
   };
-  return { canvas, qc: qc.done(), manifest, masks };
+  return { canvas, qc: report, manifest, masks };
 }
 
 function abilityIcons(spec) {
@@ -1026,26 +1047,19 @@ export async function renderBack(opts = {}) {
   const c = mkCanvas(w, h), ctx = c.getContext('2d');
   ctx.scale(dpi / 25.4, dpi / 25.4); ctx.translate(b, b);
   if (!bleed) { rrect(ctx, 0, 0, CARD.w, CARD.h, CARD.radius); ctx.clip(); }
-  const g = ctx.createRadialGradient(CARD.w / 2, CARD.h * 0.45, 2, CARD.w / 2, CARD.h / 2, CARD.h * 0.7);
-  g.addColorStop(0, '#2f6b6a'); g.addColorStop(1, '#123536');
-  ctx.fillStyle = g; ctx.fillRect(-b, -b, CARD.w + 2 * b, CARD.h + 2 * b);
+  ctx.fillStyle = '#21504f'; ctx.fillRect(-b, -b, CARD.w + 2 * b, CARD.h + 2 * b);
   // quilted diamond stitching, like a saddle blanket
   ctx.save(); ctx.strokeStyle = 'rgba(255,230,170,.16)'; ctx.lineWidth = 0.25; ctx.setLineDash([0.7, 0.5]);
   for (let k = -CARD.h; k < CARD.w + CARD.h; k += 5) { ctx.beginPath(); ctx.moveTo(k, -b); ctx.lineTo(k - CARD.h - 2 * b, CARD.h + b); ctx.stroke(); ctx.beginPath(); ctx.moveTo(k, -b); ctx.lineTo(k + CARD.h + 2 * b, CARD.h + b); ctx.stroke(); }
   ctx.restore();
-  paintGrain(ctx, -b, -b, CARD.w + 2 * b, CARD.h + 2 * b, 0.18, 'overlay', 20);
-  const gold = WOOD.gilded.trim;
-  ctx.save(); rrect(ctx, 3.2, 3.2, CARD.w - 6.4, CARD.h - 6.4, 2.4); ctx.lineWidth = 0.9; ctx.strokeStyle = metalGradient(ctx, 0, 0, CARD.w, CARD.h, gold); ctx.stroke();
-  rrect(ctx, 4.6, 4.6, CARD.w - 9.2, CARD.h - 9.2, 1.8); ctx.lineWidth = 0.3; ctx.stroke(); ctx.restore();
-  filigree(ctx, gold);
-  const halo = ctx.createRadialGradient(CARD.w / 2, CARD.h * 0.46, 0, CARD.w / 2, CARD.h * 0.46, 30);
-  halo.addColorStop(0, 'rgba(255,230,160,.45)'); halo.addColorStop(1, 'rgba(255,230,160,0)');
-  ctx.fillStyle = halo; ctx.fillRect(0, 0, CARD.w, CARD.h);
+  ctx.save(); rrect(ctx, 3.2, 3.2, CARD.w - 6.4, CARD.h - 6.4, 2.4); ctx.lineWidth = 1.2; ctx.strokeStyle = INK; ctx.stroke();
+  ctx.lineWidth = 0.7; ctx.strokeStyle = '#f0c75a'; ctx.stroke();
+  rrect(ctx, 4.8, 4.8, CARD.w - 9.6, CARD.h - 9.6, 1.8); ctx.lineWidth = 0.3; ctx.stroke(); ctx.restore();
+  ctx.globalAlpha = 0.18; disc(ctx, CARD.w / 2, CARD.h * 0.46, 22, '#fff0c0'); ctx.globalAlpha = 1;
   try {
     const logo = await loadImage(new URL('./art/back-logo.png', import.meta.url).href);
     const lw = 50, lh = lw * logo.naturalHeight / logo.naturalWidth;
-    ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 2; ctx.shadowOffsetY = 0.8;
-    ctx.drawImage(logo, (CARD.w - lw) / 2, CARD.h * 0.46 - lh / 2, lw, lh); ctx.restore();
+    ctx.drawImage(logo, (CARD.w - lw) / 2, CARD.h * 0.46 - lh / 2, lw, lh);
   } catch { /* the back still reads without the logo */ }
   ctx.save(); ctx.font = `600 3.2px ${FONT.display}`; ctx.fillStyle = '#f6dc8a'; ctx.textAlign = 'center'; ctx.letterSpacing = '0.3em';
   ctx.fillText('ABBIE’S WORLD', CARD.w / 2, CARD.h - 9.5); ctx.restore();
@@ -1058,6 +1072,7 @@ const PG_WORDS = /\b(kill|killed|dead|death|blood|gun|stupid|hate|shut up|damn|h
 function newQC(spec) {
   const items = [];
   return {
+    items,
     add(id, level, msg) { const i = items.findIndex(x => x.id === id); const it = { id, level, msg }; if (i >= 0) items[i] = it; else items.push(it); },
     done() {
       const fails = items.filter(i => i.level === 'fail').length, warns = items.filter(i => i.level === 'warn').length;
@@ -1111,11 +1126,19 @@ function checkSafe(qc, boxes, b, pxmm) {
   const out = boxes.filter(x => x.bbox[0] < s || x.bbox[1] < s || x.bbox[0] + x.bbox[2] > W || x.bbox[1] + x.bbox[3] > H);
   qc.add('safe', out.length ? 'fail' : 'pass', out.length ? 'Outside the 3 mm safe zone: ' + out.map(x => x.role).join(', ') : 'Every word, number and gem is 3 mm inside the cut');
 }
-function checkArt(qc, art, subject, A, sub, style) {
+// What keeps a card below the ship bar (see renderCard).
+function shipBlockers(items, spec, art) {
+  const why = items.filter(i => i.level === 'fail').map(i => i.msg);
+  const a = items.find(i => i.id === 'art');
+  if (a && a.level === 'warn') why.push(a.msg);
+  if (art && art.mode !== 'model' && spec.art?.status !== 'final') why.push('the art is not approved yet (art.status is not "final")');
+  return why;
+}
+function checkArt(qc, art, subject, A, sub, style, dpi = 600) {
   if (!subject) { qc.add('art', 'fail', 'Art did not paint'); return; }
-  const ppi = subject.pxPerMm * 25.4;
+  const ppi = subject.pxPerMm * 25.4, need = Math.min(300, dpi); // sharp at this output: print needs 300, a hand card less
   if (art.mode === 'model') qc.add('art', 'pass', `Rendered from the game model at ${Math.round(ppi)} ppi`);
-  else qc.add('art', ppi >= 300 ? 'pass' : ppi >= 200 ? 'warn' : 'fail', ppi >= 300 ? `Art prints at ${Math.round(ppi)} ppi` : `Art is ${Math.round(ppi)} ppi in print${ppi >= 200 ? ' (fine in game)' : '; needs a bigger image'}`);
+  else qc.add('art', ppi >= need ? 'pass' : ppi >= need * 2 / 3 ? 'warn' : 'fail', ppi >= need ? `Art is ${Math.round(ppi)} ppi (${need} needed here)` : `Art is ${Math.round(ppi)} ppi; ${need} needed${ppi >= need * 2 / 3 ? '' : ', needs a bigger image'}`);
   if (subject.w) {
     const off = Math.abs(subject.x + subject.w / 2 - (A.x + A.w / 2)) / A.w, hh = subject.h / A.h;
     qc.add('subject_centre', off <= 0.1 ? 'pass' : 'warn', off <= 0.1 ? 'Subject centred in the window' : `Subject is ${(off * 100).toFixed(0)}% off centre`);
