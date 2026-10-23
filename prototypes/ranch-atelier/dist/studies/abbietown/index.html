@@ -771,6 +771,36 @@ function manifestCSV(rows) {
  return ['group,item,size_m,abbies_town,real_town,per,rate,kit,priority,note', ...rows.map(r => [r.group, r.item, r.size, r.town, r.real, r.per, r.rate, r.kit, r.priority, r.note].map(q).join(','))].join('\n');
 }
 
+// ---- simulations/abbietown/entrances.mjs ----
+// The town's entrance registry: where each door, ride and beaker in Abbie's Town leads, and how a game finds its way back.
+// Keys are the gate ids of simulations/worlds/worlds.mjs (the changing-worlds model). No real addresses anywhere.
+// A game opened from the town is given ?from=<encoded back URL>; it returns the player with location.href = from.
+// Back URL shape: /town?at=<gate id>. The town then flies to that gate's scene (see AbbieTown.scenes).
+const TOWN_PATH = '/town';
+const backUrl = gate => `${TOWN_PATH}?at=${encodeURIComponent(gate)}`;
+
+// kind: 'door' = leaves for a page, 'ride' = leaves for a page, 'stage' = plays inside the town (a module mounts on AbbieTown.stage).
+// scene: the AbbieTown scene id the player stands in when they use it. needs: {item} a backpack item (see worlds.mjs canUse).
+const ENTRANCES = {
+  'town:cafe-door': {name: 'The café', kind: 'door', region: 'downtown', scene: 'cafe-curb', url: '/studies/cafe/diorama.html?from=town', owner: 'AW-STUDY-0013',
+    note: 'Also the door back: the café diorama sends the player to /town?at=town:cafe-door.'},
+  'town:cafe-cellar': {name: 'Cellar bulkhead', kind: 'door', region: 'downtown', scene: 'cafe-curb', via: 'town:cafe-door', url: '/studies/basement/play.html?from=cafe', needs: {item: 'cafe-key'}, owner: 'AW-STUDY-0024',
+    unlock: "localStorage 'aw-basement-unlocked' (simulations/cafe-key.mjs)", back: '/studies/cafe/diorama.html?from=basement',
+    note: 'Reached from inside the café. The basement returns to the café diorama, and the café front door returns to the town.'},
+  'town:lab-door': {name: 'Lab door', kind: 'door', region: 'downtown', scene: 'lab-door', url: `/science-lab?from=${encodeURIComponent(backUrl('town:lab-door'))}`, owner: 'science-lab',
+    grants: ['tardigrade charm', "coin 'science-lab:off-the-slide'"]},
+  'town:truck': {name: 'The black truck', kind: 'stage', region: 'downtown', scene: 'cafe-curb', needs: {crew: true}, module: 'moon-mission', owner: 'AW-STUDY-0036',
+    note: 'The mission mounts on AbbieTown.stage at the café curb; its scenes are registered with AbbieTown.registerScene.'},
+  'town:launch': {name: 'Launch', kind: 'stage', region: 'abbie-daddy-side', scene: 'launch-pad', module: 'moon-mission', owner: 'AW-STUDY-0036',
+    note: 'The rocket port on the road north of the home hex. Walk here from Downtown (AbbieTown.walk).'},
+  'town:school-door': {name: 'Muraco front door', kind: 'door', region: 'abbie-daddy-side', scene: 'school-door', url: `/studies/school/play.html?from=${encodeURIComponent(backUrl('town:school-door'))}`, owner: 'AW-STUDY-0032'},
+  'town:ranch-gate': {name: 'The ranch gate', kind: 'ride', region: 'abbie-daddy-side', scene: 'dio-abbie-daddy-side', url: '/?from=town', owner: 'ranch'},
+};
+
+// Where a page should send the player to come back: its own ?from, else the registry's back URL for its gate.
+const returnTo = (gate, from) => from || ENTRANCES[gate]?.back || backUrl(gate);
+const available = (gate, st = {}) => { const e = ENTRANCES[gate]; if (!e) return false; return !e.needs || (e.needs.item ? (st.items || []).includes(e.needs.item) : !!st[Object.keys(e.needs)[0]]); };
+
 
 const land = makeLand(JSON.parse(document.getElementById('land').textContent));
 const W = land.W, D = land.D;
@@ -1197,6 +1227,7 @@ const DIOS = [
 const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
  muraco: {sc: .5, r: 21}, leonard: {sc: .5, r: 29}, horn: {sc: .6, r: 16, fixed: 1}, home: {sc: .8, r: 22}, ani: {sc: .8, r: 22}};
 const dioGroup = new THREE.Group(); dioGroup.position.set(X(DIO_ORIGIN[0]), 0, Z(DIO_ORIGIN[1])); scene.add(dioGroup); dioGroup.visible = false;
+const dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
 const dioTile = {}; // id -> {cx, cy (map metres of the tile's middle), group, ...}
 const smooth = t => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
 const inHex = (x, y, R) => { const a = 30 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), u = x * ca + y * sa, v = -x * sa + y * ca, ax = Math.abs(u), ay = Math.abs(v); return ay <= R * Math.sqrt(3) / 2 && ax <= R - ay / Math.sqrt(3); };
@@ -1263,7 +1294,7 @@ function buildDiorama(d, ti) {
  for (const p of pads) { const h = p.h, g = new THREE.Group(), s = {...h.s, z: 0, flat: true}; G = {heightAt: () => 0, raw: {water: [{n: 'Horn Pond', lvl: ((land.raw.water.filter(w => /horn pond/i.test(w.n)).map(w => w.lvl)[0] ?? hmin) - hmin) * vk + 3.2 - p.ph}]}};
   BUILD[h.id]?.(g, s); const local = new THREE.Group(); local.add(g); local.scale.setScalar(h.H.sc); local.position.set(h.x, p.ph, -h.y); out.add(local);
   if (h.id !== 'horn') { const nr = nearRoad(h.x, h.y); local.rotation.y = h.shop ? Math.atan2(h.shop.ty * h.shop.side, h.shop.tx * h.shop.side) : nr && nr.d < 60 ? Math.atan2(nr.x - h.x, -(nr.y - h.y)) : (h.s.face || 0); }
-  if (h.id === 'cafe') { dioCafes.push(cafe); } }
+  (dioSpots[d.id] ||= {})[h.id] = {x: h.x, z: -h.y, y: p.ph, facing: local.rotation.y}; if (h.id === 'cafe') { dioCafes.push(cafe); } }
  G = realG; cafe = realCafe;
  // 7 houses of the real mix, thinned and set along the streets
  const taken = [...pads.map(p => ({x: p.h.x, y: p.h.y, r: p.h.r + 6}))], mine = [];
@@ -1318,7 +1349,7 @@ const DRESS = {
   const hill = out.userData; hill.summit = {x: best.px, y: best.py, h: best.h};
  },
  'abbie-daddy-side'(out, c) { // the road to Launch: a signpost and a small rocket at the north edge of the tile
-  const top = c.verts.reduce((b, v) => (v.py > b.py && Math.abs(v.px) < 30 && v.py < DIO_R * .75 && isNaN(v.w) ? v : b), {py: -1e9}); if (top.py < -1e8) return; const g = new THREE.Group(); g.position.set(top.px, top.h, -top.py); out.add(g);
+  const top = c.verts.reduce((b, v) => (v.py > b.py && Math.abs(v.px) < 30 && v.py < DIO_R * .75 && isNaN(v.w) ? v : b), {py: -1e9}); if (top.py < -1e8) return; const g = new THREE.Group(); g.position.set(top.px, top.h, -top.py); out.add(g); (dioSpots['abbie-daddy-side'] ||= {}).launch = {x: top.px, z: -top.py, y: top.h, facing: 0};
   const pad = new THREE.Mesh(new THREE.CylinderGeometry(3.4, 3.8, .5, 14), M('#b8b2a8')); pad.position.y = .25; const body = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 6, 14), M('#f49ac2')); body.position.y = 3.5; const nose = new THREE.Mesh(new THREE.ConeGeometry(1.2, 2.6, 14), M('#f49ac2')); nose.position.y = 7.8;
   for (let i = 0; i < 3; i++) { const f = new THREE.Mesh(boxGeo, M('#c84a3a')); f.scale.set(.2, 2, 1.6); f.position.set(Math.cos(i * 2.1) * 1.5, 1.6, Math.sin(i * 2.1) * 1.5); f.rotation.y = -i * 2.1; g.add(f); } g.add(pad, body, nose);
   const post = new THREE.Mesh(new THREE.CylinderGeometry(.1, .1, 2.6, 5), M('#6a4a2e')), arrow = new THREE.Mesh(boxGeo, M('#e8643c')); post.position.set(-6, 1.3, 4); arrow.scale.set(2.2, .7, .1); arrow.position.set(-6, 2.6, 4); arrow.rotation.y = -.3; g.add(post, arrow);
@@ -1335,6 +1366,7 @@ const pitchFor = (dist, L) => rad(L.lowPitch + (L.highPitch - L.lowPitch) * Math
 canvas.addEventListener('pointerdown', () => { dragging = true; }); addEventListener('pointerup', () => { dragging = false; });
 function setupDioramas() {
  const DV = DIOS.map(buildDiorama);
+ DIOS.forEach((d, i) => { const v = DV[i]; dioTiles[d.id] = {group: v.group, centre: v.group.position.clone().add(dioGroup.position), spots: dioSpots[d.id] || {}}; });
  DIOS.forEach((d, i) => { const t = DV[i].tile; spotByID['dio-' + d.id] = {id: 'dio-' + d.id, name: d.name, line: d.look.mood[0].toUpperCase() + d.look.mood.slice(1) + '.', x: DIO_ORIGIN[0] + t.x, y: DIO_ORIGIN[1] + t.y, z: 10}; ICON['dio-' + d.id] = d.pin; });
  spotByID['dio-trio'] = {id: 'dio-trio', name: 'Three regions', line: "Downtown, Ani's side, and Abbie and Daddy's side, small enough to hold.", x: DIO_ORIGIN[0], y: DIO_ORIGIN[1], z: 6}; ICON['dio-trio'] = '⬡';
 }
@@ -1359,13 +1391,53 @@ function dioFrame(dt, t) {
   const tg = controls.target, dist = camera.position.distanceTo(tg), cur = Math.asin(Math.max(-1, Math.min(1, (camera.position.y - tg.y) / dist))), want = pitchFor(dist, L);
   if (Math.abs(want - cur) > .003) { const p = cur + (want - cur) * .05, hx = camera.position.x - tg.x, hz = camera.position.z - tg.z, hl = Math.hypot(hx, hz) || 1; camera.position.set(tg.x + hx / hl * Math.cos(p) * dist, tg.y + Math.sin(p) * dist, tg.z + hz / hl * Math.cos(p) * dist); } }
  for (const c of dioCafes) c.key.rotation.y = t;
+ for (const f of stageFrames) f(dt, t);
 }
+
+// ---- the stage: what other studies (the Moon Mission, the café) mount on. No developer chrome, it only adds to the world layer.
+const farGroup = new THREE.Group(); farGroup.position.set(X(land.W + 20000), 0, 0); scene.add(farGroup); // off-map scenes (Launch, orbit, Moon) live out here
+function enterScene(id, o = {}) {
+ const sc0 = scenes[id]; if (!sc0) return false; if (!viewDio && sc0.region) setView(true);
+ const base = sc0.look || (sc0.region ? DIOS.find(d => d.id === sc0.region).look : LOOK_REAL);
+ look = {...base, ...(o.look || {}), ...(o.fov ? {fov: o.fov} : {})}; if (o.pitch != null) look.lowPitch = look.highPitch = o.pitch;
+ const dist = o.dist || look.dist || 120, pitch = o.pitch != null ? rad(o.pitch) : (look.lowPitch ? pitchFor(dist, look) : rad(50)), az = rad(o.azimuth ?? look.azimuth ?? 180), h = Math.cos(pitch) * dist;
+ const tgt = new THREE.Vector3(sc0.world.x, sc0.world.y, sc0.world.z);
+ fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(tgt.x + Math.sin(az) * h, tgt.y + Math.sin(pitch) * dist, tgt.z - Math.cos(az) * h), t1: tgt};
+ lockOrbit = !!o.lock; controls.enabled = !o.lock; shown = null; window.dispatchEvent(new CustomEvent('abbietown:scene-enter', {detail: {id}})); return true;
+}
+function exitScene() { lockOrbit = false; controls.enabled = true; window.dispatchEvent(new CustomEvent('abbietown:scene-exit', {detail: {}})); }
+function registerScene(r) { // off-map or custom: {id, region:null, anchor:[x,z], facing, bounds, look}
+ const off = r.region ? dioTiles[r.region].group.position.clone().add(dioGroup.position) : farGroup.position.clone();
+ scenes[r.id] = {...r, world: new THREE.Vector3(off.x + (r.anchor?.[0] || 0), r.y || 0, off.z + (r.anchor?.[1] || 0))}; return scenes[r.id];
+}
+function mountScene(id, o = {}) {
+ const sc0 = scenes[id] || registerScene({id, region: null}), group = new THREE.Group(); group.position.copy(sc0.region ? new THREE.Vector3(0, 0, 0) : farGroup.position);
+ (sc0.region ? dioGroup : scene).add(group); const fn = o.onFrame ? (dt, t) => o.onFrame(dt, t) : null; if (fn) stageFrames.push(fn);
+ return {group, setMood: m => { look = {...look, ...(m === 'dark' ? {bg: '#10151f', sunI: .5, hemiI: .45, sky: '#26324a'} : {})}; if (m === 'light') look = sc0.look || look; },
+  dispose() { group.parent?.remove(group); const i = stageFrames.indexOf(fn); if (i >= 0) stageFrames.splice(i, 1); o.onExit?.(); }};
+}
+function setupStage() {
+ const stage = {THREE, scene, camera, controls, renderer, clock, dioGroup, farGroup, tiles: dioTiles, scenes,
+  frame: fn => { stageFrames.push(fn); return () => { const i = stageFrames.indexOf(fn); if (i >= 0) stageFrames.splice(i, 1); }; },
+  flyTo: (target, o = {}) => { const v = target.isVector3 ? target : new THREE.Vector3(target.x, target.y || 0, target.z); const dist = o.dist || 120, pitch = rad(o.pitch ?? 50), az = rad(o.azimuth ?? 180), h = Math.cos(pitch) * dist; fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(v.x + Math.sin(az) * h, v.y + Math.sin(pitch) * dist, v.z - Math.cos(az) * h), t1: v.clone()}; },
+  setLook: l => { look = {...look, ...l}; }, hideChrome: on => { document.querySelector('.hud').style.display = on ? 'none' : ''; bubble.style.opacity = on ? 0 : bubble.style.opacity; }};
+ // the named scenes: the café curb, the homes, and Launch sit on their tiles
+ const at = (tile, hero, extra = {}) => { const sp = dioTiles[tile]?.spots[hero]; if (!sp) return; registerScene({id: extra.id, region: tile, anchor: [sp.x, sp.z], y: sp.y, facing: sp.facing, bounds: extra.bounds || 30}); };
+ at('downtown', 'cafe', {id: 'cafe-curb'}); at('abbie-daddy-side', 'home', {id: 'abbie-kitchen'}); at('abbie-daddy-side', 'home', {id: 'treehouse'}); at('anis-side', 'ani', {id: 'anis-kitchen'}); at('abbie-daddy-side', 'launch', {id: 'launch-pad'}); at('downtown', 'lab', {id: 'lab-door'}); at('abbie-daddy-side', 'muraco', {id: 'school-door'});
+ for (const d of DIOS) { const t = dioTiles[d.id]; scenes['dio-' + d.id] = {id: 'dio-' + d.id, region: d.id, anchor: [0, 0], world: t.centre.clone(), bounds: DIO_R}; }
+ Object.assign(window.AbbieTown, {entrances: ENTRANCES, backUrl, go: (gate, st) => { const e = ENTRANCES[gate]; if (!e || !available(gate, st)) return false; if (e.kind === 'stage') { window.dispatchEvent(new CustomEvent('abbietown:enter', {detail: {gate, scene: e.scene, module: e.module}})); return enterScene(e.scene); } location.href = e.url; return true; }, stage, scenes, enterScene, exitScene, registerScene, mount: mountScene});
+ { const at = new URLSearchParams(location.search).get('at'), e = at && ENTRANCES[at]; // coming back from a game: land at the gate you left by
+   if (e && scenes[e.scene]) { setView(true); setTimeout(() => enterScene(e.scene, {dist: 70}), 60); } }
+ return stage;
+}
+
 
 
 // ---------- go ----------
 buildTown(1);
 const {train, line} = placeSpots(); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID}; // for other studies; the anchors are in simulations/abbietown/town.mjs
+if (typeof setupStage === 'function') setupStage();
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();
