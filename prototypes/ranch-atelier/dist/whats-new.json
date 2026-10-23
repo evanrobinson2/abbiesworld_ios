@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-models-new-look",
+      "date": "2026-10-23",
+      "title": "Models get the new look",
+      "line": "Model pages are simpler: AW in the corner, wordless counters, and your picture and the 3D model the same size. Numbered points show what matters on your picture and whether the model gets each one right. Reject, Chat (talk or type) and Keep sit under your right thumb. The gear switches between Default, Rome and Efficient, and the cart asks for more, with a camera. Every order starts as concept art.",
+      "image": "/whats-new/2026-10-23-models-new-look.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead"
+    },
+    {
       "id": "2026-10-23-weather-fronts",
       "date": "2026-10-23",
       "title": "Weather you can watch coming",
