@@ -73,7 +73,9 @@ DRAWN = {  # the 20 drawn and built in round 1
  'Oxygen tank farm (three upright tanks)', 'Corridor segment, straight, ribbed', 'Bulkhead door, round pressure hatch',
  'Command console with three screens', 'Bunk pod with privacy shutter', 'Galley table with bench', 'Hydroponics rack (three tiers)',
  'Suit rack with spare suit', 'Patch-up station (first aid)', 'Crater rim arc piece', 'Boulder set (three)', 'Oxygen canister',
- 'Battery cell', 'Status lamp beacon post', 'Pressure gauge wall panel', 'Jump pad'}
+ 'Battery cell', 'Status lamp beacon post', 'Pressure gauge wall panel', 'Jump pad',
+ # round 3: the base buildings handed over by Moon Heroes, drawn as their Midjourney picks arrive
+ 'Base tower and antenna', 'Main dome, upgraded (from MR-002)'}
 
 items, n = [], 0
 for key, (title, names, note) in G.items():
@@ -81,7 +83,7 @@ for key, (title, names, note) in G.items():
         n += 1
         items.append({'id': f'MK-{n:03d}', 'group': key, 'name': name, 'drawn': name in DRAWN})
 assert n == 200, n
-assert sum(i['drawn'] for i in items) == 20
+assert sum(i['drawn'] for i in items) == len(DRAWN)
 json.dump({'study': 'AW-STUDY-0031', 'groups': {k: {'title': t, 'note': nt} for k, (t, _, nt) in G.items()},
            'items': items}, open('catalogue.json', 'w'), indent=1)
 print('ok', n)

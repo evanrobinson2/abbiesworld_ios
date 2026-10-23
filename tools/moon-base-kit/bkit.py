@@ -45,6 +45,7 @@ ROLES = {
     'Stone_Regolith':  ('#a2a5ab', 0.97, 0.0, 'rock', 1500, None, 0, 1),
     'Stone_Ground':    ('#73767d', 0.97, 0.0, 'rock', 1500, None, 0, 1),
     'Stone_Basalt':    ('#6f737a', 0.9, 0.0, 'rock', 2900, None, 0, 1),
+    'Stone_BasaltDark': ('#4a4d55', 0.92, 0.0, 'rock', 2900, None, 0, 1),
     'Soil_Grow':       ('#4a3a2e', 0.95, 0.0, 'rock_fine', 1300, None, 0, 1),
     'Leaf_Green':      ('#5fae4f', 0.7, 0.0, 'none', 600, None, 0, 1),
     'Leaf_Lettuce':    ('#9bd06a', 0.7, 0.0, 'none', 600, None, 0, 1),

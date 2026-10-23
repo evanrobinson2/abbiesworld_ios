@@ -45,7 +45,7 @@ for slug in sorted(os.listdir(os.path.join(HERE, 'assets'))):
     shutil.copy(os.path.join(d, f'{slug}.glb'), os.path.join(OUT, 'm', f'{slug}.wasm'))
     # Round 2 rebuilds against the Midjourney pick; round 1 stays beside it as history.
     r2 = 'Round 2' in doc
-    pick = r2 and os.path.exists(os.path.join(d, 'concept.jpg'))
+    pick = os.path.exists(os.path.join(d, 'concept.jpg'))
     if pick:
         jpg(os.path.join(d, 'concept.jpg'), os.path.join(OUT, 'img', f'{slug}-pick.jpg'), 900)
     r1 = r2 and os.path.exists(os.path.join(d, 'round1', 'hero.jpg'))
@@ -78,7 +78,7 @@ for a in assets:
             f', the model</figcaption></figure>')
     first = (f'<figure><img class="sq" src="img/{a["slug"]}-pick.jpg" alt="Midjourney concept for {n}" loading="lazy">'
              f'<figcaption>The Midjourney pick</figcaption></figure>' if a['pick'] else
-             '<figure class="wait"><div class="sq">Midjourney rerun coming: the first proofs put buildings in the rock.</div>'
+             '<figure class="wait"><div class="sq">Midjourney picture coming.</div>'
              '<figcaption>The Midjourney pick</figcaption></figure>')
     fps = (f'<figure><img class="sq" src="img/{a["slug"]}-fps.jpg" alt="{n} from Abbie\'s eye height" loading="lazy">'
            f'<figcaption>Abbie\'s eye, 1.1 m</figcaption></figure>')
@@ -156,14 +156,14 @@ dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;tex
 <header style="display:grid;gap:10px">
  <span class="eyebrow">AW-STUDY-0031 · Moon Base Kit · round 2</span>
  <h1>The Moon base, built to walk through</h1>
- <p class="lede">200 low-poly pieces proposed for the low-gravity Moon shooter, and the first 20 built: {tri:,} triangles in all. Each one is made of named parts with real materials. Panel seams, brushed metal and rock pits are baked into colour, roughness and normal maps, so they still look solid up close in first person. Every part also knows its own mass, so low gravity can throw it honestly.</p>
+ <p class="lede">200 low-poly pieces proposed for the low-gravity Moon shooter, and the first {len(assets)} built: {tri:,} triangles in all. Each one is made of named parts with real materials. Panel seams, brushed metal and rock pits are baked into colour, roughness and normal maps, so they still look solid up close in first person. Every part also knows its own mass, so low gravity can throw it honestly.</p>
  <p class="muted">The look follows the Moon Heroes "Faceted Hero" direction: flat planes, gunmetal and off-white hull, orange for people and warm windows, green, amber and red lamps for state. Cyan is kept for the Star Child and crystals, and gold for Daddy's memory coins. The heroes, buggy and lander belong to the Moon Heroes study.</p>
 </header>
 <section class="pack">
  <figure><img src="img/pack-moonbase.jpg" alt="Moon Mission pack painting of the moon base"><figcaption>Inspiration: the Moon Mission pack's base</figcaption></figure>
  <figure><img src="img/pack-abbie-base.jpg" alt="Abbie looking at the moon base"><figcaption>Abbie at the base: the scale we build for</figcaption></figure>
 </section>
-<h2>The 20, built</h2>
+<h2>The {len(assets)}, built</h2>
 <p class="muted">Round 2 rebuilds each piece against its Midjourney pick: chunky off-white modules held by dark bumper frames, with warm orange windows. Top left is the pick, top right the model (tap "Spin it" to turn it), bottom left what Abbie sees from her own eye height, and bottom right round 1, drawn before the picks existed.</p>
 <div class="cards">{''.join(cards)}</div>
 <h2>All 200</h2>
@@ -178,7 +178,7 @@ dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;tex
  <li><b>Built for Abbie's size.</b> Everything is checked from 1.1 m eye height. Consoles have a kid step, and the lower bunk and the lettuce tier sit at her height.</li>
 </ol>
 <h2>Next</h2>
-<p>A Midjourney rerun for the crater rim and the boulders, which came back with buildings in the rock. After that: the five base buildings the Moon Heroes study handed over (dome, tower, habitat and hangar, airlock, supply crate), and then placing the kit on the Moon tile for the shooter.</p>
+<p>The dome and the tower are the first two of the five base buildings the Moon Heroes study handed over. The habitat and hangar, the airlock door and the supply crate follow as soon as Midjourney can draw their pictures. Then the kit goes onto the Moon tile for the shooter.</p>
 </main>
 <script>
 let mv;

@@ -1,0 +1,25 @@
+{
+ "asset": "dome",
+ "id": "MK-029",
+ "study": "AW-STUDY-0031",
+ "request": "Evan 2026-10-23 10:03Z \"intensely upgraded\" low poly FPS assets for moon base; 10:04Z \"propose 200 assets and draw 20\"",
+ "style_reference": [
+  "trek.zip outputs/images/moonbase.png",
+  "trek.zip outputs/images/abbie at the base.png",
+  "Faceted Hero direction https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa"
+ ],
+ "concept": "concept.jpg (Midjourney job 7a5b1e12-e134-4286-9cd0-617710a65058, image 0)",
+ "midjourney": {
+  "status": "ran 2026-10-23 on Evan's PC (round 3 queue, mj_queue_r3.json)",
+  "job_id": "7a5b1e12-e134-4286-9cd0-617710a65058",
+  "prompt": "a big geodesic habitat dome on a ring foundation, faceted glass and off-white panels, an entrance tunnel with an airlock and warm glowing windows, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, chunky off-white hull modules held in dark gunmetal bumper frames, warm orange glowing windows, hazard-yellow trim, green amber red status lamps, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+  "grid": [
+   "tools/moon-base-kit/mj/MB-DOME/0.jpg",
+   "tools/moon-base-kit/mj/MB-DOME/1.jpg",
+   "tools/moon-base-kit/mj/MB-DOME/2.jpg",
+   "tools/moon-base-kit/mj/MB-DOME/3.jpg"
+  ],
+  "pick": 0
+ },
+ "built_with": "Blender Python (bpy 5.2.3) recipe build.py + bkit.py; Cycles bake of procedural role surfaces"
+}

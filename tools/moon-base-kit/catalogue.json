@@ -205,13 +205,13 @@
    "id": "MK-028",
    "group": "exterior",
    "name": "Base tower and antenna",
-   "drawn": false
+   "drawn": true
   },
   {
    "id": "MK-029",
    "group": "exterior",
    "name": "Main dome, upgraded (from MR-002)",
-   "drawn": false
+   "drawn": true
   },
   {
    "id": "MK-030",

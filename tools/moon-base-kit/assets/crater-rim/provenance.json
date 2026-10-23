@@ -8,10 +8,18 @@
   "trek.zip outputs/images/abbie at the base.png",
   "Faceted Hero direction https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa"
  ],
- "concept": null,
+ "concept": "concept.jpg (Midjourney job 353ec7a3-a99a-42db-a04d-232bb377ce7a, image 1)",
  "midjourney": {
-  "status": "queued: Mac offline 2026-10-23 10:06Z",
-  "prompt": "a quarter arc of a raised crater rim made of grey regolith, ejecta boulders scattered on the outer slope, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  "status": "ran 2026-10-23 on Evan's PC (round 3 queue, mj_queue_r3.json)",
+  "job_id": "353ec7a3-a99a-42db-a04d-232bb377ce7a",
+  "prompt": "a curved arc of a small lunar crater rim, a raised lip of broken grey rock and dusty slopes, a few loose stones on the inner slope, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, cozy kids' sci-fi adventure, bare natural lunar terrain only, no buildings, no windows, no lights, no machines, no panels, grey regolith and dark basalt, hard white sun with blue earthlight fill, black sky, three-quarter view, game asset concept sheet --ar 4:3 --style raw",
+  "grid": [
+   "tools/moon-base-kit/mj/MK-096/0.jpg",
+   "tools/moon-base-kit/mj/MK-096/1.jpg",
+   "tools/moon-base-kit/mj/MK-096/2.jpg",
+   "tools/moon-base-kit/mj/MK-096/3.jpg"
+  ],
+  "pick": 1
  },
  "built_with": "Blender Python (bpy 5.2.3) recipe build.py + bkit.py; Cycles bake of procedural role surfaces"
 }
