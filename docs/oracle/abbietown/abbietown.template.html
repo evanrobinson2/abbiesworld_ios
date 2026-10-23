@@ -661,6 +661,8 @@ buildTown(1);
 const {train, line} = placeSpots(); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
+// stage modules mount themselves when their entrance is used (the Moon Mission: AW-STUDY-0036)
+window.addEventListener('abbietown:enter', e => { if (e.detail && e.detail.module === 'moon-mission') import('/simulations/moonmission/town-mount.mjs').then(m => m.start(window.AbbieTown, {quiet: /[?&]quiet\b/.test(location.search)})).catch(err => console.warn('moon mission', err)); });
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();

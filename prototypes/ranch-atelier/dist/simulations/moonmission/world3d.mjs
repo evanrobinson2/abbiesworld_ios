@@ -3,7 +3,6 @@
 // Heroes are placeholder faceted figures until the Meshy heroes land: drop a GLB at HERO_URL(id) and it replaces the stand-in.
 // Coordinates in each scene are local metres (three.js: x east, y up, -z north). Main Street is the coffee shop curb.
 import * as THREE from 'three';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 export const HERO_URL = id => `/studies/moon-mission/heroes/${id}.glb`;
 const HEROES = {daddy: {suit: 0xffffff, trim: 0x6f9bff, skin: 0xe0b08c, h: 1.8}, abbie: {suit: 0xffffff, trim: 0xff7eb6, skin: 0xe8c0a0, h: 1.15}, ani: {suit: 0xffffff, trim: 0xb18cff, skin: 0xddb08c, h: 1.2}};
@@ -31,7 +30,7 @@ export function hero(id, suited = true) {
  return g;
 }
 function swapHeroGLB(group, id) { // quiet: a missing file leaves the placeholder
- new GLTFLoader().load(HERO_URL(id), gl => { const m = gl.scene; const box3 = new THREE.Box3().setFromObject(m), h = box3.max.y - box3.min.y; m.scale.setScalar(HEROES[id].h / h); group.clear(); group.add(m); }, undefined, () => {});
+ import('/vendor/loaders/GLTFLoader.js').then(({GLTFLoader}) => new GLTFLoader().load(HERO_URL(id), gl => { const m = gl.scene; const box3 = new THREE.Box3().setFromObject(m), h = box3.max.y - box3.min.y; m.scale.setScalar(HEROES[id].h / h); group.clear(); group.add(m); }, undefined, () => {})).catch(() => {});
 }
 
 export function rocket(scale = 1) {
@@ -56,13 +55,15 @@ function room(w, d, c, floorC) { const g = new THREE.Group(); add(g, at(box(w, .
 const PCOL = {daddy: 0x6f9bff, abbie: 0xff7eb6, ani: 0xb18cff}, heroIds = ['daddy', 'abbie', 'ani'];
 const BUILD = {
  'main-street'(S) {
-  const g = new THREE.Group(); add(g, at(box(400, .2, 300, 0xa7a79f), 0, -.15, 0), at(box(400, .05, 12, 0x3a3d45), 0, -.02, 6)); // pavement, asphalt street
+  const g = new THREE.Group(); if (!S.bare) add(g, at(box(400, .2, 300, 0xa7a79f), 0, -.15, 0), at(box(400, .05, 12, 0x3a3d45), 0, -.02, 6)); // pavement, asphalt street
+  if (!S.bare) {
   add(g, at(box(400, .3, 4, 0xcfcfc6), 0, .0, -4), at(box(400, .12, .3, 0xffffff), 0, .02, 6)); // sidewalk, centre line
   const cafe = new THREE.Group(); add(cafe, at(box(12, 6, 9, 0xb4553a), 0, 3, 0), at(box(12.4, .5, 9.4, 0xe9e2d0), 0, 6.2, 0), at(box(8, .3, 3, 0x3a8f7f), 0, 3.6, 5.2), at(box(2, 3.2, .2, 0x6a3c24), 3.5, 1.6, 4.55), at(box(3.4, 2.2, .2, 0xffe9b0, {emissive: 0xffc870, emissiveIntensity: .35}), -2.5, 2.2, 4.55)); // coffee shop front toward +z (the street)
   const sign = label('COFFEE', 6, 1.4, '#3a2a1a', '#ffe9b0', 'bold 90px serif'); sign.position.set(0, 4.7, 4.56); cafe.add(sign); cafe.position.set(0, 0, -12); g.add(cafe);
   [[-18, 0xd9a441], [-28, 0x5d8fb0], [18, 0xc27ba0], [28, 0x8aa86a]].forEach(([x, c], i) => { const b = box(10, 5 + (i % 2) * 2, 8, c); b.position.set(x, b.geometry.parameters.height / 2, -12); g.add(b); });
   const church = new THREE.Group(); add(church, at(box(10, 8, 16, 0xf6f4ee), 0, 4, 0), at(box(4, 14, 4, 0xf6f4ee), 0, 7, 8), at(new THREE.Mesh(new THREE.ConeGeometry(2.4, 7, 4), mat(0xf6f4ee)), 0, 17.5, 8)); church.position.set(-46, 0, -20); church.rotation.y = .4; g.add(church);
   for (const x of [-36, -10, 14, 36]) { const t = new THREE.Group(); add(t, at(cyl(.3, .4, 3, 0x6b4a2f, 6), 0, 1.5, 0), at(new THREE.Mesh(new THREE.IcosahedronGeometry(2.2, 0), mat(0x5fa05b)), 0, 4.5, 0)); t.position.set(x, 0, -3); g.add(t); }
+  }
   S.truck = truck(); S.truck.position.set(-80, 0, 7.5); g.add(S.truck);
   S.port = new THREE.Group(); add(S.port, at(cyl(15, 15, .3, 0x6c7384, 40), 0, .1, 0), at(cyl(11, 11, .35, 0x2c313d, 40), 0, .15, 0)); for (let i = 0; i < 16; i++) { const a = i / 16 * 6.283; S.port.add(at(box(.5, .08, 1.4, i % 2 ? 0xffc94a : 0x15171c), Math.sin(a) * 13, .3, Math.cos(a) * 13)); } S.port.position.set(22, 0, 4); S.port.scale.set(0, 0, 0); g.add(S.port);
   S.rocket = rocket(1); S.rocket.position.set(22, 160, 4); S.rocket.visible = false; g.add(S.rocket);
@@ -118,17 +119,19 @@ const ISO = {'main-street': {t: [6, 0, 0], h: 12}, kitchen: {t: [0, 0, 0], h: 5}
 const INSIDE = {kitchen: 0x3a3631, 'tree-house': 0x4a3d2c, galley: 0x35403a, 'briefing-room': 0x2d3342, 'crew-bus': 0x232a3c, capsule: 0x151a2c, airlock: 0x151a2c};
 const SKY = {light: 0xbfe3ff, dark: 0x03050d};
 
-export function createWorld(canvas, ZONES) {
- const renderer = new THREE.WebGLRenderer({canvas, antialias: true}); renderer.shadowMap.enabled = true; renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
- const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(62, 1, .1, 900), ocam = new THREE.OrthographicCamera(-1, 1, 1, -1, -200, 400); scene.background = new THREE.Color(SKY.light);
- const sun = new THREE.DirectionalLight(0xffffff, 2.4), hemi = new THREE.HemisphereLight(0xdff0ff, 0x8a8470, 1.1); sun.position.set(30, 50, 30); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); Object.assign(sun.shadow.camera, {left: -50, right: 50, top: 50, bottom: -50}); scene.add(sun, hemi);
- let iso = new URLSearchParams(location.search).get('view') !== 'fp', S = {}, cur = null, curId = null, mood = 'light', shake = 0, look = {yaw: 0, pitch: 0}, t = 0, camT = {p: new THREE.Vector3(), t: new THREE.Vector3()}, liftoff = 0, drop = null, truckT = -1, driving = false;
+// host: when the world runs inside the Abbie's Town stage, the town owns the renderer, camera and light. The host gives
+// {parentFor(id) -> Group, place(group, id), bare(id) -> bool (skip scenery the town already has)} and moves its own camera.
+export function createWorld(canvas, ZONES, host = null) {
+ const own = !host, renderer = own ? new THREE.WebGLRenderer({canvas, antialias: true}) : null; if (own) { renderer.shadowMap.enabled = true; renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); }
+ const scene = own ? new THREE.Scene() : null, cam = new THREE.PerspectiveCamera(62, 1, .1, 900), ocam = new THREE.OrthographicCamera(-1, 1, 1, -1, -200, 400); if (own) scene.background = new THREE.Color(SKY.light);
+ const sun = new THREE.DirectionalLight(0xffffff, 2.4), hemi = new THREE.HemisphereLight(0xdff0ff, 0x8a8470, 1.1); sun.position.set(30, 50, 30); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); Object.assign(sun.shadow.camera, {left: -50, right: 50, top: 50, bottom: -50}); if (own) scene.add(sun, hemi);
+ let iso = own ? new URLSearchParams(location.search).get('view') !== 'fp' : true, S = {}, cur = null, curId = null, mood = 'light', shake = 0, look = {yaw: 0, pitch: 0}, t = 0, camT = {p: new THREE.Vector3(), t: new THREE.Vector3()}, liftoff = 0, drop = null, truckT = -1, driving = false;
  function setMood(m) { mood = m; }
  function setZone(id, m) {
-  if (cur) scene.remove(cur); S = {}; const z = {...ZONES[id], id}; cur = BUILD[KIND[id]](S, z); scene.add(cur); curId = id; mood = m || z.mood; look = {yaw: 0, pitch: 0}; liftoff = 0; drop = null;
+  if (cur) cur.parent && cur.parent.remove(cur); S = {}; const z = {...ZONES[id], id}; S.bare = !own && host.bare(id); cur = BUILD[KIND[id]](S, z); if (own) scene.add(cur); else { host.parentFor(id).add(cur); host.place(cur, id); } curId = id; mood = m || z.mood; look = {yaw: 0, pitch: 0}; liftoff = 0; drop = null;
   cur.traverse(o => { if (o.name === 'cut') o.visible = !iso; });
   if (S.heroes) for (const hid of heroIds) if (S.heroes[hid]) swapHeroGLB(S.heroes[hid], hid);
-  const c = CAMS[id] || CAMS['main-street']; camT.p.set(...c.p); camT.t.set(...c.t); cam.position.copy(camT.p).add(new THREE.Vector3(0, 0, 3));
+  const c = CAMS[id] || CAMS['main-street']; camT.p.set(...c.p); camT.t.set(...c.t); cam.position.copy(camT.p).add(new THREE.Vector3(0, 0, 3)); if (!own) host.entered && host.entered(id, S);
   if (id === 'main-street' && !S.launched) { truckT = 0; driving = true; }
  }
  function board(draw, color) { if (!S.boardCanvas) return; const g = S.boardCanvas.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, 1024, 576); g.strokeStyle = color; g.lineWidth = 8; g.lineCap = 'round'; S.stroke = {draw, color, n: 0, t0: t}; }
@@ -175,8 +178,8 @@ export function createWorld(canvas, ZONES) {
  }
  function resize() { const w = canvas.clientWidth, h = canvas.clientHeight; if (canvas.width !== w * renderer.getPixelRatio() || canvas.height !== h * renderer.getPixelRatio()) { renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); } const iz = (ISO[curId] || ISO['main-street']).h, a = w / h; Object.assign(ocam, {left: -iz * a, right: iz * a, top: iz, bottom: -iz}); ocam.updateProjectionMatrix(); }
  function tick(dt, view, thrust) {
-  t += dt; resize(); const k = 1 - Math.pow(.02, dt);
-  const sky = new THREE.Color(INSIDE[curId] || SKY[mood]); scene.background.lerp(sky, k); sun.intensity += ((mood === 'light' ? 2.4 : .9) - sun.intensity) * k; hemi.intensity += ((mood === 'light' ? 1.1 : .35) - hemi.intensity) * k; sun.color.set(mood === 'light' ? 0xffffff : 0xaec6ff);
+  t += dt; if (own) resize(); const k = 1 - Math.pow(.02, dt);
+  if (own) { const sky = new THREE.Color(INSIDE[curId] || SKY[mood]); scene.background.lerp(sky, k); sun.intensity += ((mood === 'light' ? 2.4 : .9) - sun.intensity) * k; hemi.intensity += ((mood === 'light' ? 1.1 : .35) - hemi.intensity) * k; sun.color.set(mood === 'light' ? 0xffffff : 0xaec6ff); }
   if (driving && S.truck) { truckT += dt; const f = Math.min(1, truckT / 5), e = 1 - Math.pow(1 - f, 3); S.truck.position.x = -80 + (-9 + 80) * e; if (f >= 1) driving = false; }
   if (drop && S.rocket && S.port) { drop.t += dt; const f = Math.min(1, drop.t / .9); S.port.scale.setScalar(Math.max(.01, f)); // the rocket port lands, then the ship falls right after
    if (drop.t > .9) { const g = Math.min(1, (drop.t - .9) / 0.7); S.rocket.position.y = 160 * (1 - g * g); if (g >= 1) { drop = null; shake = 1.4; S.launched = true; } } }
@@ -187,6 +190,7 @@ export function createWorld(canvas, ZONES) {
   if (S.heroes) for (const h of Object.values(S.heroes)) { if (h.userData.bob > 0) { h.userData.bob -= dt * 2.5; h.position.y = Math.max(0, Math.sin(h.userData.bob * 6) * .08); } }
   if (S.stroke) drawBoard();
   updateGame(view && view.step && view.step.game, dt);
+  if (own) {
   const c = CAMS[curId] || CAMS['main-street']; const dolly = Math.sin(t * .25) * .35;
   cam.position.lerp(camT.p.clone().add(new THREE.Vector3(dolly, Math.sin(t * .9) * .03, 0)), k);
   const tgt = camT.t.clone(); const dir = tgt.clone().sub(camT.p); const base = Math.atan2(dir.x, -dir.z); const yaw = base + look.yaw; const pitch = Math.atan2(dir.y, Math.hypot(dir.x, dir.z)) + look.pitch;
@@ -194,9 +198,10 @@ export function createWorld(canvas, ZONES) {
   if (shake > 0) { cam.position.x += (Math.random() - .5) * shake * .3; cam.position.y += (Math.random() - .5) * shake * .3; shake = Math.max(0, shake - dt * 1.6); }
   if (iso) { const z = ISO[curId] || ISO['main-street'], t3 = new THREE.Vector3(...z.t); if (view && view.step && view.step.k === 'lander' && S.lander) t3.y = S.lander.position.y; if (S.buggy) t3.z = S.buggy.position.z, t3.x = 0; ocam.position.copy(t3).add(new THREE.Vector3(26, 26, 26)).add(new THREE.Vector3(look.yaw * -12, look.pitch * 12, 0)); ocam.lookAt(t3); if (shake > 0) ocam.position.x += (Math.random() - .5) * shake * .3; }
   renderer.render(scene, iso ? ocam : cam);
+  }
  }
- let drag = null; canvas.addEventListener('pointerdown', e => { drag = [e.clientX, e.clientY, look.yaw, look.pitch]; canvas.setPointerCapture(e.pointerId); });
- canvas.addEventListener('pointermove', e => { if (drag) { look.yaw = Math.max(-1.2, Math.min(1.2, drag[2] - (e.clientX - drag[0]) * .004)); look.pitch = Math.max(-.5, Math.min(.5, drag[3] - (e.clientY - drag[1]) * .003)); } });
- canvas.addEventListener('pointerup', () => { drag = null; });
+ let drag = null; if (own) canvas.addEventListener('pointerdown', e => { drag = [e.clientX, e.clientY, look.yaw, look.pitch]; canvas.setPointerCapture(e.pointerId); });
+ if (own) canvas.addEventListener('pointermove', e => { if (drag) { look.yaw = Math.max(-1.2, Math.min(1.2, drag[2] - (e.clientX - drag[0]) * .004)); look.pitch = Math.max(-.5, Math.min(.5, drag[3] - (e.clientY - drag[1]) * .003)); } });
+ if (own) canvas.addEventListener('pointerup', () => { drag = null; });
  return {setZone, onFx, tick, get iso() { return iso; }, setIso(v) { iso = v; if (cur) cur.traverse(o => { if (o.name === 'cut') o.visible = !iso; }); }, scene, cam, get zone() { return curId; }, get state() { return S; }};
 }

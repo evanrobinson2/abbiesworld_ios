@@ -120,7 +120,7 @@ body.play .stage{position:fixed;inset:0;height:100dvh;min-height:0;border-radius
 <script>
 // Play mode: /town (or ?play) shows only the town, with a door home and a sign-in chip (nothing is asked of players).
 if (location.pathname === '/town' || /[?&]play\b/.test(location.search)) {
- document.body.classList.add('play'); document.title = "Abbie's Town";
+ document.body.classList.add('play');
  const d = document.createElement('div'); d.className = 'pl-door';
  d.innerHTML = '<a href="/sandbox" aria-label="Back to the ranch">Ranch</a><button type="button" id="pl-account">Sign in</button>';
  document.body.append(d);
@@ -1028,7 +1028,7 @@ function family(g, wall, accent, pink) {
  }
  coin(g, 0, 12, 0);
 }
-let cafe = null; const beakers = []; const CELL_GAME = document.body.classList.contains('play') ? '/science-lab?from=' + encodeURIComponent('/town') : '/studies/cell/play.html';
+let cafe = null; const beakers = []; const CELL_GAME = '/studies/cell/play.html' + (document.body.classList.contains('play') ? '?from=' + encodeURIComponent('/town') : '');
 const BUILD = {
  cafe(g) { const s = shopfront('#f1e6d6', '#2f8f86', '#ffffff'); g.add(s.g); cafe = s;
   const sign = cyl(g, 2.4, 2.4, .5, '#2f8f86', 0, 0, 0, 24); sign.rotation.x = Math.PI / 2; sign.position.set(0, 7.4, 7.3); cafe.sign = sign;
@@ -1438,6 +1438,8 @@ buildTown(1);
 const {train, line} = placeSpots(); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
+// stage modules mount themselves when their entrance is used (the Moon Mission: AW-STUDY-0036)
+window.addEventListener('abbietown:enter', e => { if (e.detail && e.detail.module === 'moon-mission') import('/simulations/moonmission/town-mount.mjs').then(m => m.start(window.AbbieTown, {quiet: /[?&]quiet\b/.test(location.search)})).catch(err => console.warn('moon mission', err)); });
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();
