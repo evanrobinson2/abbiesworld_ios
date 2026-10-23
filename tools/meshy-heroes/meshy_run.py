@@ -102,6 +102,27 @@ def git(msg, paths):
             time.sleep(2 ** (i + 1))
 
 
+def do_rig(job, out, prov, tid, rig, rig_credits):
+    jid = job["id"]
+    if rig_credits:
+        spend(rig["credits"], f"{jid} rig")
+    rb = {"input_task_id": tid, "height_meters": rig.get("height_meters", 1.7)}
+    rid = call("POST", "/v1/rigging", rb)["result"]
+    prov["tasks"].append({"stage": "rig", "task_id": rid, "credits": rig["credits"], "params": rb})
+    prov["credits"] += rig["credits"]
+    (out / "provenance.json").write_text(json.dumps(prov, indent=1))
+    r = poll("/v1/rigging", rid, jid + " rig")
+    rr = r.get("result") or r
+    (out / "rig_result.json").write_text(json.dumps({k: (v if not isinstance(v, str) else v.split("?")[0]) for k, v in rr.items()}, indent=1, default=str))
+    for k, u in rr.items():
+        if isinstance(u, str) and u.startswith("http") and "glb" in k:
+            fetch(u, out / f"{jid}_{k.replace('_url','')}.glb")
+    ba = rr.get("basic_animations") or {}
+    for k, u in ba.items():
+        if isinstance(u, str) and u.startswith("http") and "glb" in k:
+            fetch(u, out / "basic_animations" / f"{k.replace('_url','')}.glb")
+
+
 def run(job):
     jid = job["id"]
     out = ROOT / job["save_to"]
@@ -136,18 +157,11 @@ def run(job):
     (out / "provenance.json").write_text(json.dumps(prov, indent=1))
     rig = (job.get("then") or {}).get("rigging")
     if rig:
-        spend(rig["credits"], f"{jid} rig")
-        rb = {"input_task_id": tid, "height_meters": rig.get("height_meters", 1.7)}
-        rid = call("POST", "/v1/rigging", rb)["result"]
-        prov["tasks"].append({"stage": "rig", "task_id": rid, "credits": rig["credits"], "params": rb})
-        prov["credits"] += rig["credits"]
-        rr = poll("/v1/rigging", rid, jid + " rig")["result"]
-        for k, u in rr.items():
-            if isinstance(u, str) and u.startswith("http") and "glb" in k:
-                fetch(u, out / f"{jid}_{k.replace('_url','')}.glb")
-        for k, u in (rr.get("basic_animations") or {}).items():
-            if isinstance(u, str) and u.startswith("http") and "glb" in k:
-                fetch(u, out / "basic_animations" / f"{k.replace('_url','')}.glb")
+        try:
+            do_rig(job, out, prov, tid, rig, rig_credits=True)
+        except Exception as e:
+            prov["rig_error"] = str(e).replace(KEY, "***")[:500]
+            print("RIG FAIL", jid, prov["rig_error"], flush=True)
     (out / "provenance.json").write_text(json.dumps(prov, indent=1))
     import shutil; shutil.rmtree(tmp, ignore_errors=True)
     git(f"Meshy hero {jid}: textured model + rig, {prov['credits']} credits", [out, CREDITS])
@@ -158,6 +172,23 @@ if __name__ == "__main__":
     KEY = key()
     queue = {j["id"]: j for j in json.loads((HERE / "meshy-queue.json").read_text())["jobs"]}
     ids = sys.argv[1:]
+    if ids and ids[0] == "--rig-only":
+        ids = ids[1:]
+        for i in ids:
+            job = queue[i]; out = ROOT / job["save_to"]
+            prov = json.loads((out / "provenance.json").read_text())
+            tid = prov["tasks"][0]["task_id"]
+            charged = any(t["stage"] == "rig" for t in prov["tasks"])
+            try:
+                do_rig(job, out, prov, tid, job["then"]["rigging"], rig_credits=True)
+                prov.pop("rig_error", None)
+                print("rigged", i, flush=True)
+            except Exception as e:
+                prov["rig_error"] = str(e).replace(KEY, "***")[:500]
+                print("RIG FAIL", i, prov["rig_error"], flush=True)
+            (out / "provenance.json").write_text(json.dumps(prov, indent=1))
+            git(f"Meshy hero {i}: rig attempt", [out, CREDITS])
+        sys.exit()
     from concurrent.futures import ThreadPoolExecutor
     def safe(i):
         try:
