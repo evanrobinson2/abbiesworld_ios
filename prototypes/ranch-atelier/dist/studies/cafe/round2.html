@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Back bar and styles</title>
-<link rel="stylesheet" href="cafe.css?v=3">
+<link rel="stylesheet" href="cafe.css?v=4">
 <style>
 /* AW-STUDY-0013 round 2: back bar designs locked to Evan's pick, and five assets in three styles. Reads r2.json. */
 
@@ -17,7 +17,8 @@
 .grid{display:grid;grid-template-columns:96px repeat(3,minmax(0,1fr));gap:10px}
 .lab{font-weight:700;font-size:14px;align-self:center}
 .cell{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#2a0c20cc;border:1px solid #ffffff26;border-radius:14px;padding:4px;min-height:80px}
-.cell img{width:100%;height:auto;border-radius:10px;display:block;cursor:zoom-in}
+.cell img{width:100%;height:auto;border-radius:10px;display:block;cursor:pointer}
+.cell img.picked{outline:4px solid #39e07a;outline-offset:-4px}
 .wait{grid-column:1/-1;display:grid;place-items:center;color:var(--muted);font-size:13px}
 dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}dialog::backdrop{background:#000c}
 dialog img{max-width:96vw;max-height:94vh;display:block;border-radius:12px}
@@ -27,7 +28,7 @@ dialog img{max-width:96vw;max-height:94vh;display:block;border-radius:12px}
 </head>
 <body>
 <div class="wrap">
- <header><div class="id">AW-STUDY-0013</div><h1>Back bar and styles</h1></header>
+ <header><div class="id">AW-STUDY-0013</div><h1>Back bar and styles</h1><p style="margin-top:8px">Tap a favourite in each row to turn it green (double-tap to see it big), then Lock in.</p></header>
  <section><h2>The back bar</h2>
   <div class="bb"><figure class="ref"><img src="img/interior-party_0.jpg" alt="Locked reference"><figcaption>Locked reference</figcaption></figure><div class="cells" id="bb"></div></div>
  </section>
@@ -38,16 +39,19 @@ dialog img{max-width:96vw;max-height:94vh;display:block;border-radius:12px}
 const BB=[['backbar-front','Straight on'],['backbar-wide','From the floor'],['backbar-machines','The machines']];
 const ST=[['bricks','Toy bricks'],['vinyl','Vinyl toy'],['lowpoly','Low poly']];
 const AS=[['cup-booth','Cup DJ booth'],['espresso','Espresso maker'],['smoothie','Smoothie machine'],['stool','Bar stool'],['beanbag','Beanbag']];
+const GROUP={};for(const [k,l] of BB)GROUP[k]='Back bar: '+l;
 const big=document.getElementById('big');big.onclick=()=>big.close();
 function cell(key,label,n){const c=document.createElement('div');c.className='cell';c.dataset.style=label;
  if(!n)c.innerHTML='<div class="wait">On the way</div>';
- for(let i=0;i<n;i++){const im=new Image();im.loading='lazy';im.src='img/r2/'+key+'_'+i+'.jpg';im.alt=label+' '+(i+1);im.onclick=()=>{big.querySelector('img').src=im.src;big.showModal()};c.appendChild(im);}
+ for(let i=0;i<n;i++){const im=new Image();im.loading='lazy';im.src='img/r2/'+key+'_'+i+'.jpg';im.alt=label+' '+(i+1);im.dataset.pick=(key.startsWith('asset-')?key.replace(/-(bricks|vinyl|lowpoly)$/,''):key)+'='+key.replace(/^asset-/,'')+'_'+i;im.dataset.label=(GROUP[key]&&key.startsWith('asset-')?GROUP[key]+', ':'')+label+' '+(i+1);im.dataset.group=(GROUP[key]||key);im.ondblclick=()=>{big.querySelector('img').src=im.src;big.showModal()};c.appendChild(im);}
  return c;}
 fetch('r2.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(have=>{
  const bb=document.getElementById('bb');for(const [k,l] of BB){const w=document.createElement('div');w.innerHTML='<div class="lab" style="margin-bottom:4px">'+l+'</div>';w.appendChild(cell(k,l,have[k]||0));bb.appendChild(w);}
  const g=document.getElementById('grid');g.insertAdjacentHTML('beforeend','<div class="corner"></div>'+ST.map(s=>'<div class="lab colhead">'+s[1]+'</div>').join(''));
- for(const [a,al] of AS){g.insertAdjacentHTML('beforeend','<div class="lab">'+al+'</div>');for(const [s,sl] of ST)g.appendChild(cell('asset-'+a+'-'+s,sl,have['asset-'+a+'-'+s]||0));}
+ for(const [a,al] of AS){g.insertAdjacentHTML('beforeend','<div class="lab">'+al+'</div>');for(const [s,sl] of ST){GROUP['asset-'+a+'-'+s]=al;}for(const [s,sl] of ST)g.appendChild(cell('asset-'+a+'-'+s,sl,have['asset-'+a+'-'+s]||0));}
+window.cafePicksPaint&&cafePicksPaint();
 });
 </script>
+<script src="picks.js?v=1"></script>
 </body>
 </html>

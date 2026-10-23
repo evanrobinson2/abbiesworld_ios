@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22",
+ "updated": "2026-10-23",
  "models": [
   {
    "id": "paper-man-1",
@@ -8765,6 +8765,85 @@
      "The brim is generated as a wavy disc that curls up at the front to frame the face and flops at the sides and back, on its own pivot so it can flop in the idle. A leather satchel of greens on her back nods to the sheet's backpack basket. Red peppers and carrots poke out between the tomatoes, onions, cabbage and pumpkin in the tub. A hood ribbon knot under the chin and a bow with ribbon tails on the hat band. Ragged scalloped smock hem with ochre patches."
     ]
    ]
+  },
+  {
+   "id": "grace-computer",
+   "name": "Grace's computer",
+   "style": "",
+   "group": "Grace's basement",
+   "subject": "Beige 1980s all-in-one: CRT in a grey bezel, floppy and blank bays below, side vents",
+   "ask": "Model the pictured machine from parts, low poly, with a generic badge instead of the logo",
+   "orbit": [
+    -33,
+    80
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/review/img/grace-computer-ref.jpg",
+    "render": "/studies/basement/img/model.jpg",
+    "glb": "/review/3d/grace-computer.glb"
+   },
+   "good": [
+    "Parts first: shell profile, bezel with a sloped screen funnel, curved tube face, drive plinth, floppy with latch and eject, three blank bays, side vent ribs, feet. Materials are named by role (beige plastic, bezel grey, screen glass). It runs in the basement scene with a live CRT."
+   ],
+   "off": [
+    "Round 1. The front bays sit a little lower than in the photo, and the bezel corners are tighter. The rear housing is a touch short."
+   ],
+   "details": [
+    [
+     "Parts",
+     "57"
+    ],
+    [
+     "Triangles",
+     "1,296"
+    ],
+    [
+     "Size",
+     "0.30 × 0.38 × 0.38 m"
+    ]
+   ],
+   "outline": 0.85,
+   "status": "partial"
+  },
+  {
+   "id": "grace-floppy",
+   "name": "3.5\" floppy",
+   "style": "",
+   "group": "Grace's basement",
+   "subject": "3.5-inch floppy disk",
+   "ask": "A 3.5\" floppy from parts: shell, sliding shutter, hub, label, write-protect tab; label blank or ours",
+   "orbit": [
+    20,
+    60
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/review/img/grace-floppy-render.jpg",
+    "glb": "/review/3d/grace-floppy.glb"
+   },
+   "good": [
+    "Shell with the cut corner, metal shutter wrapping the top edge with the head window, steel hub with spindle and drive slots on the back, write-protect slide, paper label with our own ruled lines. In the basement the disks carry their own labels (KEYSTORM, RECIPES, blank, and the gold coin disk)."
+   ],
+   "off": [
+    "No photo to match, so the picture on the left is our render."
+   ],
+   "details": [
+    [
+     "Parts",
+     "16"
+    ],
+    [
+     "Triangles",
+     "268"
+    ],
+    [
+     "Size",
+     "90 × 94 × 3.3 mm"
+    ]
+   ],
+   "outline": 0.9,
+   "status": "good"
   }
  ]
 }

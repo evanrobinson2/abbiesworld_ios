@@ -241,14 +241,20 @@ function prefersHeaderAuth(request) {
   return String(request.headers.get("x-abbies-auth") || "").toLowerCase() === "bearer";
 }
 
-function wwwAuthenticate() {
-  return `Bearer FAKESECRET_g3h4i5j6k7l8m9n0o1p2="${OAUTH_RESOURCE_METADATA}", scope="${OAUTH_SCOPES}"`;
+/** Metadata on the host the client dialed (studio-mock-iota or mcp.abbies.world). */
+function resourceMetadataUrl(request) {
+  const host = String(request?.headers?.get("x-forwarded-host") || request?.headers?.get("host") || "").split(",")[0].trim();
+  return host ? `https://${host}/.well-known/oauth-protected-resource` : OAUTH_RESOURCE_METADATA;
 }
 
-function unauthorizedResponse(description = "No authorization provided", { challengeOAuth = true } = {}) {
+function wwwAuthenticate(request) {
+  return `Bearer resource_metadata="${resourceMetadataUrl(request)}", scope="${OAUTH_SCOPES}"`;
+}
+
+function unauthorizedResponse(description = "No authorization provided", { challengeOAuth = true, request } = {}) {
   const headers = cors({ "Content-Type": "application/json" });
   // Cursor with X-Abbies-Auth: bearer should not be pushed into OAuth (it hangs).
-  if (challengeOAuth) headers["WWW-Authenticate"] = wwwAuthenticate();
+  if (challengeOAuth) headers["WWW-Authenticate"] = wwwAuthenticate(request);
   return new Response(
     JSON.stringify({
       error: "invalid_token",
@@ -2922,14 +2928,14 @@ export async function GET() {
 export async function POST(request) {
   let body;
   try { body = await request.json(); } catch {
-    return unauthorizedResponse("Parse error / missing body");
+    return unauthorizedResponse("Parse error / missing body", { request });
   }
   // ChatGPT OAuth discovery expects HTTP 401 + WWW-Authenticate when unauthenticated.
   // Cursor uses mcp.json Bearer (+ X-Abbies-Auth: bearer) — do not OAuth-challenge it.
   if (!bearerPresent(request, body)) {
     return unauthorizedResponse(
       "No authorization provided",
-      { challengeOAuth: !prefersHeaderAuth(request) }
+      { challengeOAuth: !prefersHeaderAuth(request), request }
     );
   }
   if (Array.isArray(body)) {

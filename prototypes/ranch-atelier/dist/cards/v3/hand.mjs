@@ -6,7 +6,7 @@
 //   the button     on the held card turns it over to the tile's settings as card facets (facets.mjs).
 // The card's sky is the world's air (lab.mjs writes it on the world canvas as data-air), so the hand changes with the
 // hour and the weather like everything else in the scene: one signal, one palette.
-import {renderFace, PLACES, STYLES} from './face.mjs';
+import {renderFace, PLACES, STYLES} from './face.mjs?v=2';
 
 const KEY = 'aw-cards', DEFAULT = 'diecut';
 export function cardsStyle() {

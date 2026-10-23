@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Grace's Basement</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<style>
+/* AW-STUDY-0024: the basement, played. No HUD and no words on screen: the light switch glows, the computer hums. */
+html,body{margin:0;height:100%;background:#000;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+canvas{display:block;width:100vw;height:100dvh;image-rendering:pixelated}
+#keys{position:fixed;left:-200px;top:0;width:10px;height:10px;opacity:0;font-size:16px}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+</head>
+<body>
+<textarea id="keys" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Grace's keyboard"></textarea>
+<script type="module">
+import * as T from 'three';
+import {createBasement, createKid, createCoin, floorY, ROOM} from '/simulations/grace-basement.mjs';
+import {GraceDos} from '/simulations/grace-dos.mjs';
+import {volunteer, playerCamera} from '/simulations/presentation-layer.mjs';
+
+const q = new URLSearchParams(location.search);
+const renderer = new T.WebGLRenderer({antialias: false, powerPreference: 'high-performance'});
+renderer.setPixelRatio(1); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.BasicShadowMap;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.15;
+document.body.prepend(renderer.domElement);
+
+const scene = new T.Scene(); scene.background = new T.Color('#000');
+const room = createBasement(); scene.add(room);
+const U = room.userData;
+const kid = createKid(); kid.scale.setScalar(1.12); scene.add(kid);
+const camera = playerCamera(new T.PerspectiveCamera(30, 1, .05, 60));
+
+// ---------- Sound: everything synthesised, all diegetic (the switch, the bulb, the steps, the machine). ----------
+let ac = null, hum = null;
+function audio() { if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { ac = null; } } if (ac?.state === 'suspended') ac.resume(); return ac; }
+function blip({f = 440, t = .08, type = 'square', g = .08, slide = 0, noise = false, lp = 0} = {}) {
+ const a = audio(); if (!a) return; const now = a.currentTime, out = a.createGain(); out.gain.setValueAtTime(g, now); out.gain.exponentialRampToValueAtTime(.0001, now + t);
+ let src; if (noise) { const b = a.createBuffer(1, a.sampleRate * t, a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; src = a.createBufferSource(); src.buffer = b; }
+ else { src = a.createOscillator(); src.type = type; src.frequency.setValueAtTime(f, now); if (slide) src.frequency.exponentialRampToValueAtTime(Math.max(20, f + slide), now + t); }
+ let node = src; if (lp) { const fl = a.createBiquadFilter(); fl.type = 'lowpass'; fl.frequency.value = lp; src.connect(fl); node = fl; }
+ node.connect(out).connect(a.destination); src.start(now); src.stop(now + t + .02);
+}
+const SFX = {
+ click: () => { blip({noise: true, t: .03, g: .25, lp: 3000}); blip({f: 1800, t: .02, g: .05}); },
+ stepWood: () => blip({noise: true, t: .09, g: .12, lp: 500}), stepStone: () => blip({noise: true, t: .05, g: .05, lp: 1800}),
+ creak: () => blip({f: 180, t: .35, type: 'sawtooth', g: .02, slide: 90, lp: 900}),
+ thunk: () => { blip({f: 70, t: .25, type: 'sine', g: .3}); blip({noise: true, t: .06, g: .1, lp: 800}); },
+ beep: () => blip({f: 880, t: .18, type: 'square', g: .04}),
+ disk: () => { for (let i = 0; i < 7; i++) setTimeout(() => blip({f: 90 + (i % 3) * 40, t: .07, type: 'square', g: .03, lp: 700}), i * 110); },
+ key: () => blip({noise: true, t: .03, g: .09, lp: 2500}),
+ zap: () => blip({f: 1200, t: .12, type: 'square', g: .035, slide: -900}), miss: () => blip({f: 110, t: .12, type: 'sawtooth', g: .03}),
+ step: () => blip({f: 70, t: .06, type: 'square', g: .03}), dark: () => blip({f: 300, t: .4, type: 'triangle', g: .05, slide: -220}),
+ wave: () => [523, 659, 784].forEach((f, i) => setTimeout(() => blip({f, t: .12, type: 'square', g: .035}), i * 110)),
+ over: () => [392, 330, 262].forEach((f, i) => setTimeout(() => blip({f, t: .22, type: 'square', g: .035}), i * 200)),
+};
+function startHum() { const a = audio(); if (!a || hum) return; const o = a.createOscillator(), g = a.createGain(); o.type = 'sawtooth'; o.frequency.value = 120;
+ const f = a.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 260; g.gain.value = .012; o.connect(f).connect(g).connect(a.destination); o.start(); hum = {o, g}; }
+
+// ---------- The computer: GRACE-DOS on a CRT shader (curve, scanlines, phosphor glow, tube edges). ----------
+const dos = new GraceDos({sound: k => SFX[k]?.(), found: id => giveCoin(id, U.screen)});
+const screenTex = new T.CanvasTexture(dos.canvas); screenTex.colorSpace = T.SRGBColorSpace; screenTex.minFilter = T.LinearFilter;
+const crt = new T.ShaderMaterial({
+ name: 'crt phosphor screen',
+ uniforms: {map: {value: screenTex}, power: {value: 0}, time: {value: 0}, rows: {value: 400}},
+ vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.); }',
+ fragmentShader: `uniform sampler2D map; uniform float power, time, rows; varying vec2 vUv;
+  void main(){
+   vec2 c = vUv - .5; vec2 uv = .5 + c * (1. + .1 * dot(c, c)) * 1.04;
+   vec3 glass = vec3(.16, .18, .17) * (.55 + .45 * (1. - length(c) * 1.4)) + .06 * smoothstep(.2, .0, length(c - vec2(-.22, .25)));
+   vec3 col = vec3(0.);
+   if (uv.x > 0. && uv.x < 1. && uv.y > 0. && uv.y < 1.) {
+    vec3 s = texture2D(map, uv).rgb;
+    vec3 g = (texture2D(map, uv + vec2(.004, 0.)).rgb + texture2D(map, uv - vec2(.004, 0.)).rgb + texture2D(map, uv + vec2(0., .006)).rgb + texture2D(map, uv - vec2(0., .006)).rgb) * .25;
+    float scan = .72 + .28 * pow(sin(uv.y * rows * 3.14159), 2.);
+    col = (s * scan + g * .45) * vec3(.95, 1., 1.02);
+    col *= .96 + .04 * sin(time * 60.);
+   }
+   float edge = smoothstep(.5, .36, max(abs(c.x), abs(c.y)));
+   gl_FragColor = vec4(mix(glass * .5, glass * .1 + col * 1.25 * edge + vec3(.015, .02, .02) * edge, power), 1.);
+  }`,
+});
+U.screen.material = crt;
+const crtLight = new T.PointLight('#b8d0ff', 0, 1.6, 2); crtLight.castShadow = false; scene.add(crtLight);
+
+// ---------- Lights: dark and dingy until the switch. ----------
+scene.add(new T.AmbientLight('#262a3a', .5));
+const hall = new T.SpotLight('#ffcf8a', 7, 7, .55, .6, 1.4); hall.position.set(.45, ROOM.landing + 1.8, ROOM.back + .4); hall.target.position.set(2.2, 0, -.4);
+hall.castShadow = true; hall.shadow.mapSize.set(512, 512); scene.add(hall, hall.target);
+const moon = new T.SpotLight('#5c7cff', 3, 6, .5, .8, 1.2); moon.position.set(4.6, 2.3, ROOM.back + .2); moon.target.position.set(5.2, 0, .6); scene.add(moon, moon.target);
+const B = ROOM.bulb;
+const bulbSpot = new T.SpotLight('#ffd7a0', 0, 6, .95, .55, 1.3); bulbSpot.position.set(B.x, B.y - .03, B.z); bulbSpot.target.position.set(B.x, 0, B.z);
+bulbSpot.castShadow = true; bulbSpot.shadow.mapSize.set(1024, 1024); bulbSpot.shadow.bias = -.0005; bulbSpot.shadow.normalBias = .02; scene.add(bulbSpot, bulbSpot.target);
+const bulbFill = new T.PointLight('#ffcf98', 0, 9, 1.6); bulbFill.position.set(B.x, B.y, B.z); scene.add(bulbFill);
+
+// The light cone: a soft additive cone from the bulb to the floor, with dust turning in it.
+const coneH = B.y - .02, coneG = new T.CylinderGeometry(.03, 1.25, coneH, 24, 1, true); coneG.translate(0, -coneH / 2, 0);
+const coneM = new T.ShaderMaterial({name: 'bulb light shaft', transparent: true, depthWrite: false, blending: T.AdditiveBlending, side: T.DoubleSide,
+ uniforms: {on: {value: 0}}, vertexShader: 'varying float h; varying vec3 n, v; void main(){ h = -position.y; n = normalize(normalMatrix * normal); vec4 mv = modelViewMatrix * vec4(position,1.); v = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }',
+ fragmentShader: `uniform float on; varying float h; varying vec3 n, v; void main(){ float f = pow(abs(dot(n, v)), 1.6); float fall = smoothstep(${coneH.toFixed(2)}, .1, h) * smoothstep(0., .25, h); gl_FragColor = vec4(vec3(1., .82, .55) * .16 * f * fall * on, 1.); }`});
+const cone = new T.Mesh(coneG, coneM); cone.name = 'bulb light shaft'; cone.position.set(B.x, B.y, B.z); scene.add(cone);
+const dustN = 90, dustP = new Float32Array(dustN * 3), dustSeed = [];
+for (let i = 0; i < dustN; i++) { dustSeed.push([Math.random(), Math.random() * Math.PI * 2, Math.random()]); }
+const dustG = new T.BufferGeometry(); dustG.setAttribute('position', new T.BufferAttribute(dustP, 3));
+const dustM = new T.PointsMaterial({name: 'dust motes', color: '#ffe2b0', size: .009, transparent: true, opacity: 0, depthWrite: false, blending: T.AdditiveBlending});
+const dust = new T.Points(dustG, dustM); dust.name = 'dust'; scene.add(dust);
+
+// ---------- Pixel pass: a low-resolution render, posterised and dithered like an 80s adventure, crisp at the screen. ----------
+const rt = new T.WebGLRenderTarget(320, 200, {magFilter: T.NearestFilter, minFilter: T.NearestFilter, type: T.HalfFloatType});
+rt.texture.colorSpace = T.LinearSRGBColorSpace;
+const post = new T.Mesh(new T.PlaneGeometry(2, 2), new T.ShaderMaterial({
+ uniforms: {src: {value: rt.texture}, res: {value: new T.Vector2(320, 200)}, dither: {value: 1}},
+ vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }',
+ fragmentShader: `uniform sampler2D src; uniform vec2 res; uniform float dither; varying vec2 vUv;
+  float bayer(vec2 p){ int x = int(mod(p.x, 4.)), y = int(mod(p.y, 4.)); int i = x + y * 4;
+   float m[16]; m[0]=0.;m[1]=8.;m[2]=2.;m[3]=10.;m[4]=12.;m[5]=4.;m[6]=14.;m[7]=6.;m[8]=3.;m[9]=11.;m[10]=1.;m[11]=9.;m[12]=15.;m[13]=7.;m[14]=13.;m[15]=5.;
+   for (int k = 0; k < 16; k++) if (k == i) return m[k] / 16. - .5; return 0.; }
+  void main(){ vec3 c = texture2D(src, vUv).rgb; c = pow(max(c, 0.), vec3(1. / 2.2));
+   float lv = mix(255., 9., dither); vec3 d = c + bayer(floor(vUv * res)) * dither / lv;
+   c = mix(c, floor(d * lv + .5) / lv, dither); gl_FragColor = vec4(c, 1.); }`,
+ depthTest: false, depthWrite: false}));
+const postScene = new T.Scene(); postScene.add(post); const postCam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+// ---------- The kid: walk the stairs and the floor, flip the switch, sit, stand. ----------
+const K = kid.userData;
+const me = {x: .35, target: .35, face: 1, state: 'standing', seated: 0, walkT: 0, after: null, reach: 0};
+function placeKid(dt) {
+ const dx = me.target - me.x, speed = 1.25;
+ const walking = me.state === 'walking' && Math.abs(dx) > .01;
+ if (walking) { const step = Math.sign(dx) * Math.min(Math.abs(dx), speed * dt); me.x += step; me.face = Math.sign(dx); me.walkT += dt * 7.5;
+  const ph = Math.floor(me.walkT / Math.PI); if (ph !== me.lastPh) { me.lastPh = ph; (me.x < ROOM.stairs[1] ? SFX.stepWood : SFX.stepStone)(); } }
+ else if (me.state === 'walking') { me.state = 'standing'; const f = me.after; me.after = null; f?.(); }
+ const sit = me.seated, y = floorY(me.x);
+ kid.position.set(me.state === 'seated' || sit > 0 ? T.MathUtils.lerp(me.x, ROOM.chair.x, sit) : me.x, T.MathUtils.lerp(y, 0, sit) + (walking ? Math.abs(Math.sin(me.walkT)) * .025 : 0), T.MathUtils.lerp(ROOM.walkZ, ROOM.chair.z, sit));
+ const yaw = me.face > 0 ? 0 : Math.PI; kid.rotation.y += ((sit > .5 ? 0 : yaw) - kid.rotation.y) * Math.min(1, dt * 10);
+ const swing = walking ? Math.sin(me.walkT) * .55 : 0;
+ K.legs.forEach((l, i) => { const s = i ? -swing : swing; l.hip.rotation.z = T.MathUtils.lerp(s, Math.PI / 2, sit); l.knee.rotation.z = T.MathUtils.lerp(Math.max(0, -s) * .6, -Math.PI / 2, sit); });
+ K.body.position.y = T.MathUtils.lerp(.62, .5, sit);
+ K.arms.forEach((a, i) => { a.rotation.z = T.MathUtils.lerp(i ? swing * .8 : -swing * .8, 1.1, sit); });
+ if (me.reach > 0) { K.arms[1].rotation.z = Math.sin(Math.min(1, me.reach) * Math.PI) * 2.2; K.arms[1].rotation.x = -Math.sin(Math.min(1, me.reach) * Math.PI) * .5; me.reach -= dt * 2.2; } else K.arms[1].rotation.x = 0;
+ K.head.rotation.z = T.MathUtils.lerp(0, -.12, sit);
+}
+const walkTo = (x, after) => { me.target = T.MathUtils.clamp(x, .12, 7.0); me.state = 'walking'; me.after = after || null; if (Math.abs(me.target - me.x) < .02) { me.state = 'standing'; after?.(); } };
+
+// ---------- The light switch and the bulb. ----------
+let lights = 0, lightsOn = false, flick = 0;
+function flipSwitch() {
+ me.face = 1; me.reach = 1; setTimeout(() => {
+  SFX.click(); lightsOn = !lightsOn; U.toggle.position.y = lightsOn ? .015 : -.015; flick = lightsOn ? .7 : 0;
+  if (lightsOn) startHum(); else if (hum) { hum.o.stop(); hum = null; }
+ }, 220);
+}
+const nearSwitch = () => me.x < 1.05 && me.state !== 'seated';
+
+// ---------- Sitting at the computer, and the camera's swoop. ----------
+const cam = {mode: 'side', t: 0, from: null, path: null, look: null};
+const screenPos = new T.Vector3(), screenN = new T.Vector3();
+function screenFrame() {
+ U.screen.updateWorldMatrix(true, false); U.screen.getWorldPosition(screenPos);
+ screenN.set(0, 0, 1).transformDirection(U.screen.matrixWorld);
+ const fov = 34, half = U.screen.userData.window.h / 2 / .9, aspect = innerWidth / innerHeight;
+ const halfW = U.screen.userData.window.w / 2 / .94, t = Math.tan(fov * Math.PI / 360);
+ const d = Math.max(half / t, halfW / (t * aspect));
+ return {pos: screenPos.clone().addScaledVector(screenN, d), look: screenPos.clone(), fov};
+}
+function sideFrame() {
+ const aspect = innerWidth / innerHeight, fov = 30, t = Math.tan(fov * Math.PI / 360);
+ const halfH = 2.35, halfW = 4.35;
+ // Wide screens see the whole room; narrow ones (a phone held upright) follow the kid with about 2 m of room.
+ const fitH = halfH / t, fitW = halfW / (t * aspect);
+ const dist = aspect >= 1.2 ? Math.min(Math.max(fitH, fitW), fitH * 1.25) : Math.max(fitH * .5, 1.05 / (t * aspect));
+ const viewHalfW = dist * t * aspect, cx = viewHalfW >= 4.3 ? 4.0 : T.MathUtils.clamp(kid.position.x, ROOM.x0 + viewHalfW - .2, ROOM.x1 - viewHalfW + .2);
+ const cy = Math.max(1.9, dist * t - .25);
+ return {pos: new T.Vector3(cx, cy + .25, ROOM.walkZ + dist), look: new T.Vector3(cx, cy, ROOM.walkZ), fov};
+}
+function sitDown() {
+ if (me.state === 'seated') return;
+ walkTo(ROOM.chair.x - .02, () => {
+  me.state = 'seated'; me.face = 1; SFX.creak();
+  const t0 = performance.now();
+  const ease = () => { me.seated = Math.min(1, (performance.now() - t0) / 600); if (me.seated < 1) requestAnimationFrame(ease); };
+  ease();
+  if (!dos.on) { setTimeout(() => { SFX.thunk(); dos.powerOn(); }, 900); }
+  const s = sideFrame(), f = screenFrame(), head = new T.Vector3(ROOM.chair.x, 1.0, ROOM.chair.z);
+  cam.path = new T.CatmullRomCurve3([s.pos, new T.Vector3(ROOM.chair.x - 1.0, 1.7, 1.5), new T.Vector3(ROOM.chair.x - .55, 1.22, ROOM.chair.z + .32), f.pos], false, 'centripetal');
+  cam.looks = [s.look, head, f.look]; cam.fovs = [s.fov, f.fov]; cam.mode = 'swoop-in'; cam.t = 0;
+ });
+}
+function standUp() {
+ if (me.state !== 'seated' || !['screen', 'desk'].includes(cam.mode)) return;
+ keys.blur();
+ const s = sideFrame(), f = {pos: camera.position.clone(), look: cam.lookAt.clone(), fov: camera.fov}, head = new T.Vector3(ROOM.chair.x, 1.0, ROOM.chair.z);
+ cam.path = new T.CatmullRomCurve3([f.pos, new T.Vector3(ROOM.chair.x - .55, 1.22, ROOM.chair.z + .32), new T.Vector3(ROOM.chair.x - 1.0, 1.7, 1.5), s.pos], false, 'centripetal');
+ cam.looks = [f.look, head, s.look]; cam.fovs = [f.fov, s.fov]; cam.mode = 'swoop-out'; cam.t = 0;
+ SFX.creak(); const t0 = performance.now();
+ const ease = () => { me.seated = 1 - Math.min(1, (performance.now() - t0) / 600); if (me.seated > 0) requestAnimationFrame(ease); else { me.state = 'standing'; me.x = ROOM.chair.x - .02; me.target = me.x; } };
+ setTimeout(ease, 600);
+}
+const smooth = t => t * t * (3 - 2 * t);
+function lookAlong(looks, t) { const a = t < .5 ? looks[0].clone().lerp(looks[1], smooth(t * 2)) : looks[1].clone().lerp(looks[2], smooth((t - .5) * 2)); return a; }
+let atScreen = 0;
+function placeCamera(dt) {
+ if (cam.mode === 'side') { const s = sideFrame(); camera.position.lerp(s.pos, Math.min(1, dt * 3)); cam.lookAt = (cam.lookAt || s.look.clone()).lerp(s.look, Math.min(1, dt * 3)); camera.fov = s.fov; atScreen = Math.max(0, atScreen - dt * 2); }
+ else if (cam.mode === 'screen') { const f = screenFrame(); camera.position.copy(f.pos); cam.lookAt = f.look; camera.fov = f.fov; atScreen = 1; }
+ else if (cam.mode === 'desk') { const f = deskFrame(); camera.position.copy(f.pos); cam.lookAt = f.look; camera.fov = f.fov; atScreen = .65; }
+ else if (cam.mode === 'glide') { cam.t = Math.min(1, cam.t + dt / .7); const e = smooth(cam.t), to = cam.to === 'desk' ? deskFrame() : screenFrame();
+  camera.position.lerpVectors(cam.from.pos, to.pos, e); cam.lookAt = cam.from.look.clone().lerp(to.look, e); camera.fov = T.MathUtils.lerp(cam.from.fov, to.fov, e);
+  atScreen = T.MathUtils.lerp(cam.to === 'desk' ? 1 : .65, cam.to === 'desk' ? .65 : 1, e); if (cam.t >= 1) { cam.mode = cam.to; if (cam.mode === 'screen') keys.focus({preventScroll: true}); } }
+ else { cam.t = Math.min(1, cam.t + dt / 2.6); const e = smooth(cam.t); camera.position.copy(cam.path.getPoint(e)); cam.lookAt = lookAlong(cam.looks, e); camera.fov = T.MathUtils.lerp(cam.fovs[0], cam.fovs[1], e);
+  atScreen = cam.mode === 'swoop-in' ? Math.pow(e, 3) : 1 - e;
+  if (cam.t >= 1) { cam.mode = cam.mode === 'swoop-in' ? 'screen' : 'side'; if (cam.mode === 'screen') keys.focus({preventScroll: true}); } }
+ camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); camera.lookAt(cam.lookAt);
+}
+
+// ---------- Input: tap to walk, tap the switch, tap the desk to sit; keys when seated. ----------
+const keys = document.getElementById('keys');
+const ray = new T.Raycaster(), ndc = new T.Vector2();
+const named = (o, re) => { for (; o; o = o.parent) if (re.test(o.name)) return true; return false; };
+renderer.domElement.addEventListener('pointerdown', e => {
+ audio();
+ ndc.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1); ray.setFromCamera(ndc, camera);
+ const hit = ray.intersectObjects(room.children, true)[0];
+ if (me.state === 'seated') {
+  if (cam.mode === 'screen') { if (hit?.object === U.screen) keys.focus({preventScroll: true}); else glideTo('desk'); return; }
+  if (cam.mode !== 'desk') return;
+  const disk = hit && U.disks.find(d => named(hit.object, new RegExp('^disk ' + d.userData.disk.id + '$')));
+  if (disk) return insertDisk(disk);
+  if (hit && named(hit.object, /^manual$|Grace's manual/)) return giveCoin('manual', U.manual);
+  if (hit && named(hit.object, /Grace's computer|Grace's keyboard/)) return glideTo('screen');
+  if (hit && named(hit.object, /coin jar/)) return;
+  return standUp();
+ }
+ if (!lightsOn && !me.flipped) { me.flipped = true; return walkTo(.85, flipSwitch); }
+ if (hit && named(hit.object, /light switch/)) return walkTo(.85, flipSwitch);
+ const spot = lightsOn && hit && U.coinSpots.find(c => c.id !== 'manual' && named(hit.object, new RegExp('^' + c.obj.name + '$')) && (c.obj === hit.object || isIn(hit.object, c.obj)));
+ if (spot) return walkTo(spot.obj.getWorldPosition(new T.Vector3()).x - .35, () => { me.reach = 1; giveCoin(spot.id, spot.obj); });
+ if (hit && named(hit.object, /Grace's computer|Grace's keyboard|desk|chair|manual|disk|coin jar/)) return sitDown();
+ let x = hit ? hit.point.x : me.x; walkTo(x);
+});
+const isIn = (o, p) => { for (; o; o = o.parent) if (o === p) return true; return false; };
+
+// ---------- Seated: the screen and the desk. ----------
+function deskFrame() { const aspect = innerWidth / innerHeight; return {pos: new T.Vector3(ROOM.chair.x + .02, 1.2, ROOM.chair.z + .02), look: new T.Vector3(5.3, .8, -.64), fov: aspect < 1 ? 70 : 52}; }
+function glideTo(to) { cam.from = {pos: camera.position.clone(), look: cam.lookAt.clone(), fov: camera.fov}; cam.to = to; cam.mode = 'glide'; cam.t = 0; if (to === 'desk') keys.blur(); }
+let inDrive = null;
+function insertDisk(disk) {
+ if (disk === inDrive || flying.some(f => f.disk)) return;
+ if (inDrive) { const old = inDrive; U.computer.parent.attach(old); room.getObjectByName('disk box').attach(old); old.position.copy(old.userData.home.p); old.rotation.copy(old.userData.home.r); old.visible = true; }
+ inDrive = disk; SFX.click();
+ const slot = U.computer.getObjectByName('floppy slot'), end = slot.getWorldPosition(new T.Vector3());
+ const qEnd = new T.Quaternion().setFromRotationMatrix(new T.Matrix4().makeBasis(new T.Vector3(0, 0, 1), new T.Vector3(1, 0, 0), new T.Vector3(0, 1, 0)));
+ room.attach(disk);
+ const p0 = disk.position.clone(), q0 = disk.quaternion.clone(), mid = end.clone().add(new T.Vector3(-.16, .1, 0)), slotIn = end.clone().add(new T.Vector3(.07, 0, 0)), start = end.clone().add(new T.Vector3(-.06, 0, 0));
+ flying.push({disk, t: 0, dur: 1.1, step(e) {
+  if (e < .7) { const k = smooth(e / .7); disk.position.copy(p0).lerp(mid, k).lerp(start, k * k); disk.quaternion.slerpQuaternions(q0, qEnd, k); }
+  else { const k = smooth((e - .7) / .3); disk.position.lerpVectors(start, slotIn, k); disk.quaternion.copy(qEnd); }
+ }, done() { disk.visible = false; SFX.disk(); glideTo('screen'); setTimeout(() => dos.insert(disk.userData.disk), 500); }});
+}
+
+// ---------- Coins: ten hidden, each lands in Grace's jar on the desk. ----------
+const STORE = 'aw-basement-coins';
+let found = []; try { found = JSON.parse(localStorage.getItem(STORE) || '[]'); } catch {}
+for (let i = 0; i < Math.min(found.length, 10); i++) U.addJarCoin();
+const flying = [];
+function chime() { [784, 988, 1175, 1568].forEach((f, i) => setTimeout(() => blip({f, t: .25, type: 'triangle', g: .05}), i * 70)); }
+function giveCoin(id, from) {
+ if (found.includes(id)) return;
+ found.push(id); try { localStorage.setItem(STORE, JSON.stringify(found)); } catch {}
+ const coin = createCoin(.035); scene.add(coin);
+ const a = from.getWorldPosition(new T.Vector3()); if (from === U.screen) a.add(new T.Vector3(-.15, 0, 0)); else a.y += .12;
+ const top = a.clone().add(new T.Vector3(0, .35, 0)), jarTop = U.jar.getWorldPosition(new T.Vector3()).add(new T.Vector3(0, .32, 0)), jarIn = jarTop.clone().add(new T.Vector3(0, -.25, 0));
+ chime();
+ flying.push({t: 0, dur: 2.1, step(e) {
+  coin.rotation.set(Math.PI / 2, 0, 0); coin.rotateOnWorldAxis(new T.Vector3(0, 1, 0), e * 30);
+  if (e < .35) coin.position.copy(a).lerp(top, smooth(e / .35));
+  else if (e < .85) { const k = smooth((e - .35) / .5); coin.position.copy(top).lerp(jarTop, k); coin.position.y += Math.sin(k * Math.PI) * .4; }
+  else coin.position.copy(jarTop).lerp(jarIn, (e - .85) / .15);
+ }, done() { scene.remove(coin); U.addJarCoin(); blip({f: 1400, t: .08, type: 'square', g: .04}); if (found.length === 10) setTimeout(() => [523, 659, 784, 1047, 1319].forEach((f, i) => setTimeout(() => blip({f, t: .3, type: 'square', g: .045}), i * 140)), 400); }});
+}
+function forward(k) { if (cam.mode === 'desk' && k === 'Escape') return standUp(); if (cam.mode !== 'screen') return; const used = dos.key(k); if (!used && k === 'Escape') standUp(); }
+addEventListener('keydown', e => {
+ audio();
+ if (me.state === 'seated') { if (e.target === keys && e.key.length === 1) return; e.preventDefault(); return forward(e.key); }
+ if (e.key === 'ArrowLeft' || e.key === 'a') walkTo(me.x - .6); else if (e.key === 'ArrowRight' || e.key === 'd') walkTo(me.x + .6);
+ else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (nearSwitch()) walkTo(.85, flipSwitch); else if (Math.abs(me.x - ROOM.chair.x) < 1) sitDown(); }
+});
+// Phone keyboards type into the hidden field; each character is sent to the computer as it arrives.
+keys.addEventListener('input', () => { for (const ch of keys.value) forward(ch); keys.value = ''; });
+
+// ---------- What this scene volunteers (docs/design/INFO_MANIFEST.md). ----------
+volunteer('grace-basement', {place: "Grace's basement", dialect: 'Basement, 1986: a bulb, a switch, the hum of the furnace and the computer', items: [
+ {id: 'lights', says: 'the light is on', who: 'characters', for: ['player', 'director'], prefer: ['diegetic'], read: () => lightsOn, ways: {diegetic: 'the bulb glows, its light falls on the desk and it buzzes; the switch clicks'}},
+ {id: 'computer', says: 'the computer is on', who: 'characters', for: ['player', 'director'], prefer: ['diegetic'], read: () => dos.on, ways: {diegetic: 'the screen glows blue-white on the desk and the drive chatters'}},
+ {id: 'seat', says: 'sitting at the computer', who: 'characters', for: ['player'], prefer: ['none'], read: () => me.state === 'seated', ways: {}},
+]});
+
+// ---------- Loop. ----------
+let last = performance.now(), time = 0, pixH = 210;
+await Promise.race([document.fonts.load('20px VT323'), new Promise(r => setTimeout(r, 1500))]);
+function frame(now) {
+ const rdt = Math.min(.25, (now - last) / 1000), dt = Math.min(.05, rdt); last = now; time += dt;
+ placeKid(dt);
+ for (const f of [...flying]) { f.t = Math.min(1, f.t + rdt / f.dur); f.step(f.t); if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done(); } }
+ // Bulb: flickers on, then a faint wobble; the cone and dust follow it.
+ if (flick > 0) flick -= dt;
+ const target = lightsOn ? (flick > 0 ? (Math.sin(time * 60) > .2 ? 1 : .15) : 1) : 0;
+ lights += (target - lights) * Math.min(1, dt * (lightsOn ? 25 : 12));
+ const wob = 1 + Math.sin(time * 9.7) * .015 + Math.sin(time * 23.1) * .01;
+ bulbSpot.intensity = 22 * lights * wob; bulbFill.intensity = 1.6 * lights * wob; U.bulbM.emissiveIntensity = 3 * lights; coneM.uniforms.on.value = lights * wob; dustM.opacity = .7 * lights;
+ U.glowDot.material.color.setScalar(0).lerp(new T.Color('#8dffb0'), 1 - lights * .9);
+ hall.intensity = 7 - lights * 3; U.flame.material.color.setHSL(.62, 1, .45 + Math.sin(time * 3) * .05);
+ if (hum) hum.g.gain.value = .012 * lights;
+ for (let i = 0; i < dustN; i++) { const [r, a, h] = dustSeed[i], hh = (h + time * .02 * (1 + r)) % 1, y = B.y - .2 - hh * (B.y - .3), rad = (B.y - y) / coneH * 1.1 * Math.sqrt(r);
+  dustP[i * 3] = B.x + Math.cos(a + time * .1) * rad; dustP[i * 3 + 1] = y; dustP[i * 3 + 2] = B.z + Math.sin(a + time * .1) * rad; }
+ dustG.attributes.position.needsUpdate = true;
+ // Computer.
+ dos.tick(dt); if (dos.dirty) { screenTex.needsUpdate = true; dos.dirty = false; }
+ crt.uniforms.power.value += ((dos.on ? 1 : 0) - crt.uniforms.power.value) * Math.min(1, dt * 3); crt.uniforms.time.value = time;
+ U.screen.getWorldPosition(screenPos); screenN.set(0, 0, 1).transformDirection(U.screen.matrixWorld);
+ crtLight.position.copy(screenPos).addScaledVector(screenN, .25); crtLight.intensity = .12 * crt.uniforms.power.value * (1 - atScreen * .8);
+ placeCamera(dt);
+ // Resolution climbs from chunky pixels in the room to a crisp tube at the screen.
+ const full = Math.min(innerHeight * Math.min(devicePixelRatio, 2), 1200);
+ const aspect = innerWidth / innerHeight, chunky = aspect < 1 ? Math.min(420, 190 / aspect) : Math.max(200, Math.min(240, innerHeight / 3));
+ pixH = T.MathUtils.lerp(chunky, full, atScreen);
+ const h = Math.round(pixH), w = Math.round(h * innerWidth / innerHeight);
+ if (rt.width !== w || rt.height !== h) { rt.setSize(w, h); post.material.uniforms.res.value.set(w, h); }
+ post.material.uniforms.dither.value = 1 - atScreen;
+ renderer.setRenderTarget(rt); renderer.render(scene, camera); renderer.setRenderTarget(null); renderer.render(postScene, postCam);
+ requestAnimationFrame(frame);
+}
+function resize() { renderer.setSize(innerWidth, innerHeight, false); }
+addEventListener('resize', resize); resize();
+{ const s = sideFrame(); camera.position.copy(s.pos); cam.lookAt = s.look.clone(); }
+if (q.has('lit')) { lightsOn = true; me.flipped = true; lights = 1; U.toggle.position.y = .015; }
+if (q.has('x')) { me.x = me.target = +q.get('x'); }
+if (q.has('sit')) { lightsOn = true; me.flipped = true; lights = 1; me.x = me.target = ROOM.chair.x - .02; sitDown(); }
+requestAnimationFrame(frame);
+window.basement = {me, dos, cam, sitDown, standUp, flipSwitch, walkTo, glideTo, insertDisk, giveCoin, U};
+</script>
+</body>
+</html>
