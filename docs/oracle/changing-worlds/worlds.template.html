@@ -136,7 +136,7 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
 .bpanel small{color:#555}
 [data-bopt="A"] .shelf{display:flex}
 [data-bopt="C"] #bmenu{display:grid!important}
-[data-bopt="B"] #bzoom{display:grid!important}
+[data-bopt="B"] #bzoom,[data-bopt="D"] #bzoom{display:grid!important}
 [data-bopt="A"] #bzoom,[data-bopt="C"] #bzoom{display:none!important}
 </style>
 
@@ -148,7 +148,7 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
  <h1>Changing worlds</h1>
  <p class="lede">A world is a whole board. People need to switch which board is shown, start a new one, name it and keep them all. Pull back and your boards are hexes of a bigger board; tap one and you land in it.</p>
  <div class="rule">
-  <div><b>Recommended: zoom out to the board of boards</b>The same camera and the same hexes as the tiles. A dashed hex beside your boards is the next new board; each board wears its name on a painted sign. The ◎ World menu keeps a Boards list as the grown-up page.</div>
+  <div><b>Recommended: zoom out to the board of boards</b>The same camera and the same hexes as the tiles. A dashed hex beside your boards is the next new board; each board wears its name on a painted sign. The ◎ World menu keeps a Boards list as the grown-up page. A new <em>story</em> world arrives as a glowing orb you earn and step into (option D).</div>
   <div><b>New, copy, name, keep</b>New boards start blank, as a copy (the original never changes) or on another land such as the Basin. Everything saves by itself. A board goes to the attic, never the bin, and you cannot put your last board away.</div>
   <div><b>Tour: yes</b>Once there are two boards: "Pinch out to see all your worlds." The earlier travel work (doors, rides, the family TV) stays below as its own section.</div>
  </div>
@@ -160,7 +160,7 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
  <p>Today the sandbox has one saved board. Boards are already stored under their own ids (<code>card-library.js</code>), and a single "current" pointer says which one is shown, so more than one board needs a library, a pointer move and a way to see them. The land is a separate choice: <code>?world=basin</code> swaps the floor, and a board can stand on either. The prototype shows three ways to switch. Tap a tile on the board to place one, then switch away and back: nothing is lost.</p>
  <div class="ctl">
   <div class="seg" id="bopts" role="group" aria-label="Switching option">
-   <button data-o="A" aria-pressed="false">A. Shelf of boards</button><button data-o="B" aria-pressed="true">B. Zoom out to the board of boards</button><button data-o="C" aria-pressed="false">C. Boards in the World menu</button>
+   <button data-o="A" aria-pressed="false">A. Shelf of boards</button><button data-o="B" aria-pressed="true">B. Zoom out to the board of boards</button><button data-o="C" aria-pressed="false">C. Boards in the World menu</button><button data-o="D" aria-pressed="false">D. Worlds in orbs</button>
   </div>
  </div>
  <div class="ctl">
@@ -169,6 +169,7 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
   <button class="btn" id="bbasin">New board in the Basin</button>
   <button class="btn" id="barch">Put this board in the attic</button>
   <button class="btn" id="brest">Bring one back</button>
+  <button class="btn" id="borb">Find an orb</button>
   <button class="btn" id="breset">Start over</button>
  </div>
  <div class="lab" data-bopt="B" id="blab">
@@ -195,6 +196,9 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
   <div class="card pick"><span class="badge">B · Recommended</span><h3>Pull back to the board of boards</h3>
    <p>Pinch or scroll out past the edge of your board and every board is one hex of a bigger board, each with its painted name. A ghost hex beside them is the next new board. Tap a hex and the camera lands in it.</p>
    <ul><li>No menu: it is the same camera and the same hex grammar as the tiles, and the same idea as Winchester's seven hexes.</li><li>Scales from two boards to thirty; the map never reshuffles, each board keeps its slot.</li><li>The new board is where you can see it will go.</li></ul></div>
+  <div class="card"><span class="badge">D · The unlock</span><h3>Worlds in orbs</h3>
+   <p>Evan's pick from the shaders study (Cocoon): a new world arrives as a glowing orb with the little world inside it. You earn or find it, carry it in the backpack, and it waits on a pedestal beside your boards. Lean in and you step through the glass; the orb becomes a new board.</p>
+   <ul><li>Makes a new world a reward and a moment, not a button.</li><li>Fits B: the orb sits in the next free slot of the board of boards.</li><li>Story worlds (the Moon base after the mission) can arrive this way; a blank board still comes from the dashed hex.</li></ul></div>
   <div class="card"><span class="badge">C · World menu</span><h3>A Boards list</h3>
    <p>The existing ◎ World menu gets a Boards page: thumbnail, name, land, tile count, and a New row. It is how most apps do it.</p>
    <ul><li>Precise and quick to build, and good for a grown-up's rename and clean-up.</li><li>An overlay: it leaves the world and shows rows, not places.</li><li>Keep it as the grown-up page behind B, not the first thing a child meets.</li></ul></div>
@@ -576,7 +580,8 @@ render(); setVB([500, 390], 1);
  const bsvg = $('#bsvg'), blab = $('#blab'), BP = 290, C = 22, TILE_COL = {meadow: '#9fd07a', trees: '#4f8f4a', pond: '#7cc2dd', barn: '#c8502c', field: '#e3cb6a', path: '#d8c4a0'};
  const LAND_COL = {ranch: '#c6dca8', basin: '#a8d6bd', town: '#f2d99c', moon: '#c9ccd8'};
  let LIB, BOPT = 'B', ZOOMED = true, BBUSY = false, cam = {c: [0, 0], k: 2.9};
- const startLib = () => { let l = newBoard(newLibrary(), {name: 'The Basin', land: 'basin'}); return switchTo(l, 'board-1'); };
+ const startLib = () => { let l = newBoard(newLibrary(), {name: 'The Basin', land: 'basin'}); l = earnOrb(l, {land: 'moon', name: 'Moon base', why: 'Moon Mission'}); return switchTo(l, 'board-1'); };
+ const ORB_LANDS = ['moon', 'town', 'basin'], HUB = () => BOPT === 'B' || BOPT === 'D';
  const slotXY = s => [BP * (s.q + s.r / 2), BP * .866 * s.r];
  const hexP = (cx, cy, s) => [0, 1, 2, 3, 4, 5].map(i => `${(cx + s * Math.cos(Math.PI / 3 * i)).toFixed(1)},${(cy + s * Math.sin(Math.PI / 3 * i)).toFixed(1)}`).join(' ');
  const cellXY = (q, r, c) => [c * 1.5 * q, c * Math.sqrt(3) * (r + q / 2)];
@@ -597,18 +602,22 @@ render(); setVB([500, 390], 1);
  const setCam = (c, k) => { cam = {c, k}; const w = 1000 / k, h = 700 / k; bsvg.setAttribute('viewBox', `${(c[0] - w / 2).toFixed(1)} ${(c[1] - h / 2).toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)}`); };
  const ZOUT = {c: [0, 40], k: .86}, ZIN = id => ({c: worldXY(id), k: 2.9});
  const flyTo = (to, ms) => new Promise(res => { const f = {...cam}; if (REDUCED) { setCam(to.c, to.k); return res(); } const t0 = performance.now(); (function s(n) { const t = ease(Math.min(1, (n - t0) / ms)); setCam([f.c[0] + (to.c[0] - f.c[0]) * t, f.c[1] + (to.c[1] - f.c[1]) * t], f.k * Math.pow(to.k / f.k, t)); t < 1 ? requestAnimationFrame(s) : res(); })(t0); });
- const KIND_NAME = {A: 'Shelf', B: 'Zoom out', C: 'World menu'};
+ const KIND_NAME = {A: 'Shelf', B: 'Zoom out', C: 'World menu', D: 'Worlds in orbs'};
  function brender() {
-  const L = layout(LIB), cur = LIB.current, showAll = BOPT === 'B' && !ZOOMED || BBUSY;
+  const L = layout(LIB), cur = LIB.current, showAll = HUB() && !ZOOMED || BBUSY;
   let h = '<rect x="-3000" y="-3000" width="6000" height="6000" fill="#cfe8e0"/>';
-  for (const s of L.boards) { const b = LIB.boards.find(x => x.id === s.id), [x, y] = slotXY(s); if (showAll || b.id === cur) h += `<g ${b.id !== cur && BOPT === 'B' ? `class="bhex" data-pick="${b.id}" style="cursor:pointer"` : ''}>${drawBoard(b, x, y, C, {sign: true, hit: ZOOMED && b.id === cur})}</g>`; }
-  if (BOPT === 'B' && !ZOOMED) { const [x, y] = slotXY(L.openSlot); h += `<g data-pick="+" style="cursor:pointer" transform="translate(${x},${y})"><polygon points="${hexP(0, 0, C * 5.1)}" fill="#fff" fill-opacity=".25" stroke="#fff" stroke-width="5" stroke-dasharray="14 10"/><path d="M-30 0h60M0 -30v60" stroke="#fff" stroke-width="10" stroke-linecap="round"/></g>`; }
+  for (const s of L.boards) { const b = LIB.boards.find(x => x.id === s.id), [x, y] = slotXY(s); if (showAll || b.id === cur) h += `<g ${b.id !== cur && HUB() ? `class="bhex" data-pick="${b.id}" style="cursor:pointer"` : ''}>${drawBoard(b, x, y, C, {sign: !(ZOOMED && b.id === cur), hit: ZOOMED && b.id === cur})}</g>`; }
+  if (BOPT === 'D' && !ZOOMED) { const [x, y] = slotXY(L.openSlot), orb = (LIB.orbs || [])[0];
+   h += `<defs><radialGradient id="orbg" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#fffbe8" stop-opacity=".2"/><stop offset=".65" stop-color="#ffe9a8" stop-opacity=".3"/><stop offset="1" stop-color="#ffc35a" stop-opacity=".95"/></radialGradient><radialGradient id="orbhalo"><stop offset=".55" stop-color="#ffd27a" stop-opacity=".55"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient><clipPath id="orbclip"><circle cx="${x}" cy="${y - 20}" r="74"/></clipPath></defs>`;
+   h += `<path d="M${x - 34} ${y + 50}L${x - 52} ${y + 112}h104L${x + 34} ${y + 50}z" fill="#f3c99a" stroke="#e0a874" stroke-width="3"/><ellipse cx="${x}" cy="${y + 112}" rx="54" ry="10" fill="#e0a874"/>`;
+   h += orb ? `<g id="orb" data-pick="orb" style="cursor:pointer"><circle cx="${x}" cy="${y - 20}" r="120" fill="url(#orbhalo)"/><g clip-path="url(#orbclip)"><circle cx="${x}" cy="${y - 20}" r="74" fill="${LAND_COL[orb.land]}"/>${drawBoard({land: orb.land, cells: {'0,0': 'barn', '1,0': 'trees', '-1,1': 'meadow', '0,1': 'field'}, name: ''}, x, y - 8, 9)}</g><circle cx="${x}" cy="${y - 20}" r="74" fill="url(#orbg)" stroke="#fff6d8" stroke-width="5"/><ellipse cx="${x - 26}" cy="${y - 56}" rx="20" ry="10" fill="#fff" opacity=".7"/></g>` : `<circle cx="${x}" cy="${y - 20}" r="60" fill="#fff" fill-opacity=".12" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-dasharray="8 8"/>`;
+  } else if (BOPT === 'B' && !ZOOMED) { const [x, y] = slotXY(L.openSlot); h += `<g data-pick="+" style="cursor:pointer" transform="translate(${x},${y})"><polygon points="${hexP(0, 0, C * 5.1)}" fill="#fff" fill-opacity=".25" stroke="#fff" stroke-width="5" stroke-dasharray="14 10"/><path d="M-30 0h60M0 -30v60" stroke="#fff" stroke-width="10" stroke-linecap="round"/></g>`; }
   bsvg.innerHTML = h;
-  const b = LIB.boards.find(x => x.id === cur), nm = $('#bname'); nm.hidden = !(ZOOMED || BOPT !== 'B'); if (document.activeElement !== nm) nm.value = b.name;
+  const b = LIB.boards.find(x => x.id === cur), nm = $('#bname'); nm.hidden = !(ZOOMED || !HUB()); if (document.activeElement !== nm) nm.value = b.name;
   $('#bshelf').innerHTML = LIB.boards.map(x => `<button data-id="${x.id}" aria-label="${x.name.replace(/"/g, '')}" aria-current="${x.id === cur}">${thumb(x)}</button>`).join('') + '<button data-id="+" aria-label="New board"><svg viewBox="-60 -60 120 120"><polygon points="' + hexP(0, 0, 50) + '" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="10 8"/><path d="M-20 0h40M0 -20v40" stroke="#fff" stroke-width="8" stroke-linecap="round"/></svg></button>';
   $('#bpanel').innerHTML = LIB.boards.map(x => `<button class="row" data-id="${x.id}" aria-current="${x.id === cur}">${thumb(x)}<span><b>${x.name.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</b><br><small>${LANDS[x.land].name} · ${tileCount(x)} tiles${x.from ? ' · copy' : ''}</small></span></button>`).join('') + '<button class="row" data-id="+"><svg viewBox="-60 -60 120 120"><polygon points="' + hexP(0, 0, 50) + '" fill="none" stroke="#555" stroke-width="5" stroke-dasharray="10 8"/><path d="M-20 0h40M0 -20v40" stroke="#555" stroke-width="8" stroke-linecap="round"/></svg><span><b>New board</b></span></button>' + (LIB.attic.length ? `<small>Attic: ${LIB.attic.map(x => x.name).join(', ')}</small>` : '');
   $('#bzoom').innerHTML = ICON.map; $('#bmenu').innerHTML = '<svg viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="8" fill="none" stroke="#2f6f8c" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#2f6f8c"/></svg>';
-  $('#bwhich').textContent = `Option ${BOPT}: ${KIND_NAME[BOPT]}`; $('#bsays').textContent = ({A: 'Tap a miniature on the shelf to slide the table to that board. The frame at the end starts a new one.', B: ZOOMED ? 'Tap the map button, or scroll out, to see every board. Tap a tile to place one.' : 'Tap a board to land in it. The dashed hex is the next new board.', C: 'Open the ◎ menu and pick a board from the list. This is the grown-up baseline.'})[BOPT];
+  $('#bwhich').textContent = `Option ${BOPT}: ${KIND_NAME[BOPT]}`; $('#bsays').textContent = ({A: 'Tap a miniature on the shelf to slide the table to that board. The frame at the end starts a new one.', B: ZOOMED ? 'Tap the map button, or scroll out, to see every board. Tap a tile to place one.' : 'Tap a board to land in it. The dashed hex is the next new board.', C: 'Open the ◎ menu and pick a board from the list. This is the grown-up baseline.', D: ZOOMED ? 'Pull back to your boards. A new world waits as a glowing orb on its pedestal.' : ((LIB.orbs || []).length ? 'Tap the orb to step into the new world. Orbs in the backpack: ' + LIB.orbs.length + '.' : 'The pedestal is empty. Orbs are earned in play; Find an orb stands in for that here.')})[BOPT];
   $('#bzoom').setAttribute('aria-label', ZOOMED ? 'Zoom out to all boards' : 'Zoom in');
  }
  function blog(items, clear) { const el = $('#blog'); if (clear) el.innerHTML = ''; for (const e of items) el.insertAdjacentHTML('afterbegin', `<li><span class="tag ${e[0]}">${e[0]}</span><span>${e[1]}</span></li>`); }
@@ -618,17 +627,17 @@ render(); setVB([500, 390], 1);
   try {
    if (id === from && ZOOMED) return;
    LIB = switchTo(LIB, id); brender();
-   if (BOPT === 'B' && !ZOOMED) { await flyTo(ZIN(id), 900); ZOOMED = true; }
+   if (HUB() && !ZOOMED) { await flyTo(ZIN(id), 900); ZOOMED = true; }
    else { await flyTo({c: worldXY(id), k: 2.9}, 650); }
   } finally { BBUSY = false; brender(); setCam(worldXY(LIB.current), 2.9); }
   blog(BOPT === 'A' ? [['diegetic', 'The table slides along to ' + nameOf(id) + '. Everything on it is as you left it.'], ['spatial', 'Its painted sign comes into view.'], ['meta', 'A soft wooden clack.'], ['none', 'Boards in the attic stay out of sight.']] : BOPT === 'B' ? [['diegetic', 'You pull back, see your boards as hexes of a bigger board, and the camera lands in ' + nameOf(id) + '.'], ['spatial', 'Each board wears its name on a painted sign.'], ['none', 'The other boards keep going without you.']] : [['overlay', 'The list closes and the table changes to ' + nameOf(id) + '. A menu is precise, but it leaves the world.']], true);
  }
- async function zoomOut() { if (BBUSY || BOPT !== 'B') return; BBUSY = true; ZOOMED = false; brender(); try { await flyTo(ZOUT, 900); } finally { BBUSY = false; brender(); } blog([['spatial', 'Every board is one hex. The dashed one is the next new board.'], ['meta', 'The sound opens out, like stepping back from a table.']], true); }
+ async function zoomOut() { if (BBUSY || !HUB()) return; BBUSY = true; ZOOMED = false; brender(); try { await flyTo(ZOUT, 900); } finally { BBUSY = false; brender(); } blog([['spatial', 'Every board is one hex. The dashed one is the next new board.'], ['meta', 'The sound opens out, like stepping back from a table.']], true); }
  async function made(lib, say) { LIB = lib; ZOOMED = true; brender(); setCam(cam.c, cam.k); BBUSY = false; await flyTo({c: worldXY(LIB.current), k: 2.9}, 650); brender(); blog(say, true); }
  const doNew = (opts, say) => { try { made(newBoard(LIB, opts), say); } catch (e) { blog([['none', e.message]], true); } };
  bsvg.addEventListener('click', e => {
   const pick = e.target.closest('[data-pick]');
-  if (pick && !BBUSY) { const id = pick.dataset.pick; return id === '+' ? doNew({}, [['spatial', 'A blank board appears where the dashed hex was, with its sign saying "A place of your own".'], ['diegetic', 'You land in it. Nothing else has changed.']]) : goTo(id); }
+  if (pick && !BBUSY) { const id = pick.dataset.pick; if (id === 'orb') return stepIntoOrb(); return id === '+' ? doNew({}, [['spatial', 'A blank board appears where the dashed hex was, with its sign saying "A place of your own".'], ['diegetic', 'You land in it. Nothing else has changed.']]) : goTo(id); }
   const cell = e.target.closest('[data-q]'); if (!cell || BBUSY || !ZOOMED) return;
   const b = LIB.boards.find(x => x.id === cell.dataset.b), q = +cell.dataset.q, r = +cell.dataset.r, cur = b.cells[q + ',' + r], i = TILE_KINDS.indexOf(cur), next = i + 1 < TILE_KINDS.length ? TILE_KINDS[i + 1] : null;
   LIB = place(LIB, b.id, q, r, cur === undefined ? TILE_KINDS[0] : next); brender(); setCam(cam.c, cam.k);
@@ -638,9 +647,20 @@ render(); setVB([500, 390], 1);
  $('#bpanel').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $('#bpanel').classList.remove('on'); b.dataset.id === '+' ? doNew({}, [['overlay', 'A new blank board is added to the list and shown.']]) : goTo(b.dataset.id); });
  $('#bmenu').onclick = () => $('#bpanel').classList.toggle('on');
  $('#bzoom').onclick = () => ZOOMED ? zoomOut() : goTo(LIB.current);
- bsvg.addEventListener('wheel', e => { if (BOPT === 'B' && ZOOMED && e.deltaY > 0) { e.preventDefault(); zoomOut(); } else if (BOPT === 'B' && !ZOOMED && e.deltaY < 0) { e.preventDefault(); goTo(LIB.current); } }, {passive: false});
+ bsvg.addEventListener('wheel', e => { if (HUB() && ZOOMED && e.deltaY > 0) { e.preventDefault(); zoomOut(); } else if (HUB() && !ZOOMED && e.deltaY < 0) { e.preventDefault(); goTo(LIB.current); } }, {passive: false});
  $('#bname').addEventListener('change', e => { try { LIB = rename(LIB, LIB.current, e.target.value); blog([['spatial', 'The sign is repainted: ' + nameOf(LIB.current) + '.'], ['none', 'Names are trimmed to 32 letters and are never the same as another board.']], true); } catch (err) { blog([['none', err.message + '. The sign keeps its old name.']], true); } brender(); });
- $('#bopts').addEventListener('click', e => { const b = e.target.closest('button'); if (!b || BBUSY) return; BOPT = b.dataset.o; blab.dataset.bopt = BOPT; $('#bopts').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); $('#bpanel').classList.remove('on'); ZOOMED = true; brender(); setCam(worldXY(LIB.current), 2.9); blog([['overlay', 'Switched to option ' + BOPT + '. The same boards, a different way to change between them.']], true); });
+ $('#bopts').addEventListener('click', e => { const b = e.target.closest('button'); if (!b || BBUSY) return; BOPT = b.dataset.o; blab.dataset.bopt = BOPT; $('#bopts').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); $('#bpanel').classList.remove('on'); ZOOMED = BOPT !== 'D'; brender(); ZOOMED ? setCam(worldXY(LIB.current), 2.9) : setCam(ZOUT.c, ZOUT.k); blog([['overlay', 'Switched to option ' + BOPT + '. The same boards, a different way to change between them.']], true); });
+ async function stepIntoOrb() {
+  const orb = (LIB.orbs || [])[0]; if (!orb || BBUSY) return; BBUSY = true; const [x, y] = slotXY(layout(LIB).openSlot), el = $('#orb');
+  try {
+   if (el && !REDUCED) await new Promise(res => { const s = performance.now(); (function f(n) { const k = Math.min(1, (n - s) / 500); el.setAttribute('transform', `translate(${x} ${y - 20}) scale(${1 + .25 * Math.sin(k * Math.PI)}) translate(${-x} ${-(y - 20)})`); k < 1 ? requestAnimationFrame(f) : res(); })(s); });
+   await flyTo({c: [x, y - 20], k: 9}, 900);
+   LIB = openOrb(LIB, orb.id); ZOOMED = true; BBUSY = false; brender(); setCam([x, y], 9);
+   await flyTo({c: [x, y], k: 2.9}, 700);
+  } finally { BBUSY = false; brender(); setCam(worldXY(LIB.current), 2.9); }
+  blog([['diegetic', 'The orb hums and brightens as you lean in, and you step through the glass into ' + orb.name + '.'], ['meta', 'Warm light fills the view for a moment: the camera goes in, nothing fades.'], ['spatial', 'The new world stands where the pedestal was, its sign already painted.'], ['none', 'The orb is used up. Your other boards are untouched.']], true);
+ }
+ $('#borb').onclick = () => { const land = ORB_LANDS[((LIB.orbs || []).length + (LIB.opened || 0)) % ORB_LANDS.length]; LIB = earnOrb(LIB, {land, why: 'found'}); brender(); setCam(cam.c, cam.k); blog([['meta', 'A soft chime: an orb rolls into the backpack (' + LANDS[land].name + ').'], ['spatial', 'In option D it waits on the pedestal next to your boards.']], true); };
  $('#bnew').onclick = () => doNew({}, [['spatial', 'A blank board takes the next free slot and is shown.'], ['none', 'Your other boards are untouched.']]);
  $('#bcopy').onclick = () => doNew({from: LIB.current}, [['spatial', 'A copy appears, named for the original. The original does not change.'], ['none', 'The copy remembers which board it came from.']]);
  $('#bbasin').onclick = () => doNew({land: 'basin', name: 'Basin board'}, [['diegetic', 'The same table, a new floor: the lush basin and its lake.'], ['none', 'Tiles and land are separate: any board can stand on either.']]);
