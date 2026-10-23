@@ -1,0 +1,20 @@
+{
+ "id": "ranch-morning",
+ "take": 3,
+ "title": "Ranch Morning",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-score.json",
+ "song_id": "arffbcdHKXQ07k4Bn0Ek",
+ "request": {
+  "prompt": "upbeat family adventure soundtrack, bright, warm and joyful, catchy instrumental hook, light, bouncy percussion, strong melodic bass line, polished modern production, instrumental, D major, 130 bpm, sunny morning on a family farm, bright new day feeling, gentle build. Intro: light and open. Hook: the main hook enters. Lift: fuller, happy. Outro: eases back so it loops. No vocals, no lyrics, no singing, no humming, no dark, no aggressive, no heavy drums, no EDM drop, no dubstep, no distorted guitar, no cheesy, no kazoo, no 8-bit",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 120000
+ },
+ "date": "2026-10-23",
+ "sha256": "0ab46232ba35e4ca2dfeca689df212c0176ebc884f2ff7a7b7e4fb40a9dc330a",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-3.master.mp3"
+}
