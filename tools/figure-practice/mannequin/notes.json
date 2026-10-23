@@ -125,6 +125,13 @@
           "faces": 1538,
           "change": "first build from joints read off the reference",
           "lesson": "Pose transfers cleanly when joints and true bone lengths are right (first try 0.80 vs the leap's 0.71). The remaining miss is part size: a real mannequin's head and chest are bigger and blockier than the leap-tuned ones."
+        },
+        {
+          "round": 2,
+          "iou": 0.832,
+          "faces": 1538,
+          "change": "per-pose sizes in pose.json: head (70,56,52), chest (86,78,52), chest taper 0.4 (shield)",
+          "lesson": "Shape beats size: the shield taper gave +0.018, head size +0.010, chest size +0.006. Per-pose size overrides keep the leap untouched."
         }
       ]
     }
