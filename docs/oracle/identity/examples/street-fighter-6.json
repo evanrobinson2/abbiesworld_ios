@@ -1,0 +1,372 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Street Fighter 6",
+    "developer": "Capcom",
+    "publisher": "Capcom",
+    "release": "2023",
+    "steam_appid": 1364780
+  },
+  "core": {
+    "fantasy": "You are a fighter in a one-on-one duel where reading the other player matters as much as fast hands.",
+    "pillars": [
+      "Every hit is readable",
+      "Easy to start, deep to master",
+      "Big, stylish moments"
+    ],
+    "signature_moment": "You read the jump, punish it, and a big special bursts across the screen in a splash of bright paint.",
+    "anti_goals": [
+      "no random outcomes in a duel"
+    ],
+    "signatures": [
+      {
+        "id": "hit_readability",
+        "layer": "interaction",
+        "description": "Wind-up, contact pause, splash and reaction make every hit easy to read and feel.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "paint_splash_fx",
+        "layer": "art",
+        "description": "Big moves burst out as bright paint and ink splashes on top of physical materials.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "modern_controls",
+        "layer": "interaction",
+        "description": "A one-button control mode lets newcomers play the same fight as experts.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "shared_gauge",
+        "layer": "mechanics",
+        "description": "One gauge powers defence, offence and big moves; running it out leaves you dizzy and open.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "challenge": 0.45,
+        "sensation": 0.25,
+        "fellowship": 0.2,
+        "fantasy": 0.1
+      },
+      "emotional_targets": {
+        "tension": 0.8,
+        "triumph": 0.8,
+        "flow": 0.6
+      },
+      "audience": {
+        "age": "teens and adults (rated for fighting violence)",
+        "skill_floor": "modern controls help newcomers",
+        "context": "couch versus, online"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "move",
+          "input": "stick"
+        },
+        {
+          "verb": "block",
+          "input": "hold back"
+        },
+        {
+          "verb": "attack",
+          "input": "buttons"
+        },
+        {
+          "verb": "special move",
+          "input": "motion or one button"
+        },
+        {
+          "verb": "parry",
+          "input": "two buttons"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "face off",
+          "poke",
+          "read",
+          "punish",
+          "spend gauge",
+          "win the round"
+        ],
+        "period_s": {
+          "value": 90,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "retry_level",
+        "win": "best of three rounds",
+        "resources": [
+          "health",
+          "power gauge",
+          "drive gauge"
+        ]
+      },
+      "randomness": {
+        "amount": 0.0,
+        "kind": "none"
+      },
+      "information": "perfect",
+      "systems": [
+        "frame data",
+        "hit-stop and hit reactions",
+        "gauge economy",
+        "combo system"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 5,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "controller",
+          "arcade stick",
+          "keyboard"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "side",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "none",
+        "undo": "no",
+        "preview_before_commit": false,
+        "auto_repair": false
+      },
+      "juice": {
+        "hit_stop": 0.9,
+        "screen_shake": 0.6,
+        "particles": 0.9,
+        "camera_kick": 0.7,
+        "sound_on_action": 1.0,
+        "squash_stretch": 0.3,
+        "scale_pop": 0.3,
+        "procedural_settle": 0.0
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "stylised_pbr",
+        "family": "stylised_pbr",
+        "light": "pbr",
+        "outlines": false,
+        "outline": "none",
+        "surface": "pbr",
+        "post": [
+          "bloom",
+          "colour grade"
+        ],
+        "signature": "Physical materials on exaggerated muscular bodies; the style comes from bright paint and ink splashes that burst out of every big hit.",
+        "lesson": "Let the hit effects carry the style: a paint-splash language on top of ordinary materials reads as cartoon impact without gore."
+      },
+      "references": [
+        "street art and graffiti",
+        "action anime",
+        "martial-arts film"
+      ],
+      "motion": "mocap; In-house mocap actors perform each fighter's moves; capture is fed straight into the RE Engine"
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "body": {
+          "mix": {
+            "overlay": 0.7,
+            "spatial": 0.2,
+            "meta": 0.1
+          },
+          "timing": "always_on",
+          "note": "Health and gauges along the top; the fighter turns grey and dizzy when the gauge is gone.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "threat": {
+          "mix": {
+            "spatial": 0.6,
+            "diegetic": 0.4
+          },
+          "timing": "on_change",
+          "note": "Wind-ups and stances on the other fighter show what is coming.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "time": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Round timer in the middle of the top bar.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.1,
+        "meta": 0.1,
+        "overlay": 0.8
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.22,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "neutral_overlay",
+        "fade_rule": "Bars stay on in a match; callouts and combo counts flash and fade."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "round state",
+            "channels": [
+              "music",
+              "sound",
+              "camera",
+              "ui"
+            ]
+          }
+        ],
+        "max_channels": 3
+      },
+      "note": "Health and power bars along the top, a round timer, combo counters and big text callouts. Bodies show stun and fatigue, and a hit's size shows in the hit-stop and the splash."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.5,
+        "enacted": 0.3,
+        "emergent": 0.2
+      },
+      "tone": {
+        "cozy_tense": 0.7,
+        "whimsical_grounded": 0.0,
+        "earnest_ironic": -0.2,
+        "quiet_loud": 0.9,
+        "handmade_industrial": 0.3
+      },
+      "themes": [
+        "rivalry",
+        "self-improvement",
+        "respect"
+      ]
+    },
+    "pacing": {
+      "structure": "mixed",
+      "tension_curve": "sawtooth",
+      "failure_cost": "retry_level"
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "mocap",
+      "mocap": 0.8,
+      "locomotion": [
+        "root_motion"
+      ],
+      "tricks": [
+        "In-house mocap actors perform each fighter's moves; capture is fed straight into the RE Engine",
+        "Capcom built real-time preview of capture inside the engine, so animators see it on the character at once",
+        "Captured motion is then pushed into strong key poses with hit-stop, so every hit reads"
+      ],
+      "lesson": "Capture for weight and timing, then exaggerate the key poses and freeze the contact frame.",
+      "sources": [
+        {
+          "title": "Dashfight: Capcom shows its RE Engine mocap technique in SF6",
+          "url": "https://dashfight.com/news/capcom-unveils-cutting-edge-re-engine-mocap-technique-in-sf-6-showcase-3911"
+        },
+        {
+          "title": "Capcom R&D: Real-time motion capture preview in RE ENGINE (slides)",
+          "url": "https://www.docswell.com/s/CAPCOM_RandD/KLLR24-RE2023"
+        },
+        {
+          "title": "80.lv: Capcom demonstrates motion capture running directly in RE Engine",
+          "url": "https://80.lv/articles/capcom-demonstrates-motion-capture-running-directly-in-re-engine/"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.7
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 1.0,
+      "challenge": 0.89,
+      "expression": 0.22,
+      "structure": 0.67,
+      "social": 0.22,
+      "systems": 0.78,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "confidence": 0.75
+  },
+  "ledger": {
+    "style": [
+      "side-on duel camera",
+      "hit-stop and readable wind-ups",
+      "one-button control mode",
+      "paint-splash hit effects",
+      "shared gauge"
+    ],
+    "expression": [
+      "its fighters, names, costumes and move names",
+      "its stages",
+      "its music and voice",
+      "its HUD art"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "interaction",
+        "target": "Brute Fight feel",
+        "setting": "Every hit: a clear wind-up, a 3 to 6 frame freeze on contact, a splash and a big reaction.",
+        "from_signature": "hit_readability"
+      },
+      {
+        "layer": "interaction",
+        "target": "Brute Fight controls",
+        "setting": "One button for a special move, so a young child can play the same fight as a grown-up.",
+        "from_signature": "modern_controls"
+      },
+      {
+        "layer": "art",
+        "target": "Brute Fight effects",
+        "setting": "Cartoon impact through bright paint splashes and stars, never blood or injury.",
+        "from_signature": "paint_splash_fx"
+      }
+    ],
+    "leave": [
+      "its fighters and their moves",
+      "realistic injury and violence",
+      "competitive frame-data depth"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

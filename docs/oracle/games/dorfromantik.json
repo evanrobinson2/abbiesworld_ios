@@ -87,6 +87,21 @@
       "confidence": 0.7,
       "lesson": "Tilt-shift depth of field turns a board into a toy on a table."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "procedural",
+      "mocap": 0.0,
+      "locomotion": [
+        "procedural"
+      ],
+      "tricks": [
+        "Tiny ambient life (trains, boats, windmills, birds) on simple loops and paths; placement pops and settles"
+      ],
+      "lesson": "Ambient loops on paths are enough to make a board feel alive.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Gentle acoustic loops.",
     "pacing": "slow, medium sessions",

@@ -1,0 +1,22 @@
+{
+  "schema": "oracle.mocap-sources.v1",
+  "checked": "2026-10-23",
+  "note": "Free motion data we can study from or use. 'ship' says whether clips may go into the game Abbie's World ships. Licences change: check the source before shipping. Never train a model on Mixamo files.",
+  "sources": [
+    {"id": "cmu", "name": "CMU Graphics Lab Motion Capture Database", "url": "http://mocap.cs.cmu.edu/", "size": "about 2,600 takes from 144 subjects (walks, runs, sports, dance, everyday actions)", "formats": ["ASF/AMC", "BVH (cgspeed conversion)", "FBX (4TU conversion)"], "licence": "free for all uses, including commercial; a credit line is requested", "ship": true, "used_by": "Character Studio: all 33 mocap clips (prototypes/ranch-atelier/dist/studies/character-studio/mocap/index.json)", "extra": "https://data.4tu.nl/datasets/0448aab2-3332-449f-a8e2-d208cb58c7df"},
+    {"id": "mixamo", "name": "Adobe Mixamo", "url": "https://www.mixamo.com/", "size": "thousands of keyed and captured clips with auto-rigging", "formats": ["FBX", "DAE"], "licence": "royalty-free in games and films, no credit needed; raw files may not be redistributed (no asset packs, no public repo copies); may not be used to train machine-learning models", "ship": true, "ship_note": "only baked into the game's own models, never as loose files in the public repo", "terms": "https://community.adobe.com/questions-696/mixamo-faq-licensing-royalties-ownership-eula-and-tos-589400"},
+    {"id": "100style", "name": "100STYLE (Mason, Starke and Komura, 2022)", "url": "https://zenodo.org/record/8127870", "size": "over 4 million frames: 100 walking and running styles, each forward, backward, sideways, idle and turning", "formats": ["BVH"], "licence": "CC BY 4.0 per the authors' release; confirm on the dataset page before shipping", "ship": true, "paper": "https://arxiv.org/pdf/2201.04439"},
+    {"id": "quaternius-ual", "name": "Quaternius Universal Animation Library", "url": "https://quaternius.com/packs/universalanimationlibrary.html", "size": "120+ game animations on a universal humanoid rig (most of the standard pack is free)", "formats": ["FBX", "GLB", "Blend"], "licence": "CC0 (public domain)", "ship": true, "extra": "https://opengameart.org/content/universal-animation-library"},
+    {"id": "lafan1", "name": "Ubisoft La Forge Animation Dataset (LAFAN1)", "url": "https://github.com/ubisoft/ubisoft-laforge-animation-dataset", "size": "77 sequences, 5 subjects, about 4.6 hours at 30 fps (walks, runs, obstacles, dance, fall and get up)", "formats": ["BVH"], "licence": "CC BY-NC-ND 4.0: non-commercial, no derivatives", "ship": false, "ship_note": "study only: watch it, measure timing and weight, never ship or edit the clips"},
+    {"id": "bandai-namco", "name": "Bandai Namco Research Motion Dataset", "url": "https://github.com/BandaiNamcoResearchInc/Bandai-Namco-Research-Motiondataset", "size": "about 3,000 moves: dataset 1 has 17 contents (daily life, fighting, dance) in 15 styles such as active, tired and happy; dataset 2 is locomotion and hand actions in 7 styles", "formats": ["BVH"], "licence": "CC BY-NC 4.0: non-commercial", "ship": false, "ship_note": "study only while Abbie's World charges money; great for learning how one action changes with mood"}
+  ],
+  "talks": [
+    {"title": "Simon Clavet: Motion Matching and The Road to Next-Gen Animation (GDC 2016)", "url": "https://gdcvault.com/play/1023280/Motion-Matching-and-The-Road"},
+    {"title": "David Bollo: Inertialization, high-performance animation transitions in Gears of War (GDC 2018)", "url": "https://gdcvault.com/play/1025165/Inertialization-High-Performance-Animation-Transitions"},
+    {"title": "Daniel Holden: Code vs data driven displacement", "url": "https://theorangeduck.com/page/code-vs-data-driven-displacement"},
+    {"title": "Daniel Holden: Learned motion matching", "url": "https://theorangeduck.com/page/learned-motion-matching"},
+    {"title": "The Animation Pipeline of Overwatch (GDC)", "url": "https://gdcvault.com/play/1024267/The-Animation-Pipeline-of-Overwatch"},
+    {"title": "Chris Hecker et al.: Real-time motion retargeting to highly varied user-created morphologies (Spore, SIGGRAPH 2008)", "url": "https://chrishecker.com/Real-time_Motion_Retargeting_to_Highly_Varied_User-Created_Morphologies"},
+    {"title": "Masahiro Sakurai: Eight Hit Stop Techniques (summary)", "url": "https://nintendowire.com/news/2022/12/12/this-week-in-sakurai-12-5-12-11-fine-tuning-hit-stop-and-cheating-the-system/"}
+  ]
+}

@@ -35,3 +35,16 @@ too recently to know are marked "needs play session".
 `owned_notes.py` (added overnight 2026-10-23) studies the games in the owned snapshot that aren't installed, in
 waves ordered by what they can teach Abbie's World. Those profiles carry `study.set: "owned"` and `installed: false`.
 The Oracle shows any profile as a page at `/game?id=<appid or slug>`.
+
+`reference_notes.py` (2026-10-23) studies reference games outside the library that studies kept asking the Oracle
+about: cozy shop games for the café (Coffee Talk, Unpacking, A Little to the Left, Animal Crossing: New Horizons),
+fighting games for Brute Fight (Street Fighter 6, Super Smash Bros. Ultimate, Absolver), and climbing and kid-friendly
+stealth for the School Jump (A Short Hike, Jusant, Untitled Goose Game). Those profiles carry `study.set: "reference"`
+and `owned: false`; Nintendo games have no app id and are found by slug. Each also has a hand entry in
+`rendering_notes.py` ("How it's drawn") and a full identity record in `docs/oracle/identity/examples/`, so `consult`
+can ground plans in them. To add another, add a row here, a HAND entry, and a record (same shape as these ten).
+
+`motion_notes.py` (2026-10-23) fills each profile's `identity.motion` (schema `oracle.motion.v1`, the identity
+record's `layers.animation`): mocap or keyed, the locomotion system, signature tricks, the lesson, and links to the
+talks and breakdowns. The Oracle game page shows it as "How it moves". Free motion data and licences:
+`docs/oracle/motion/MOCAP_SOURCES.md`.

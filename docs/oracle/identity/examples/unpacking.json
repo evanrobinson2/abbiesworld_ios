@@ -1,0 +1,319 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Unpacking",
+    "developer": "Witch Beam",
+    "publisher": "Humble Games",
+    "release": "2021",
+    "steam_appid": 1135690
+  },
+  "core": {
+    "fantasy": "You are someone moving into a new home, and every object you unpack tells a piece of a life without a single word.",
+    "pillars": [
+      "Story through objects only",
+      "Every placement sounds and feels right",
+      "A clear, satisfying finish"
+    ],
+    "signature_moment": "You pull an old childhood plush out of a box in an adult flat and realise where it has to go.",
+    "anti_goals": [
+      "no words",
+      "no timer",
+      "no fail state",
+      "no score"
+    ],
+    "signatures": [
+      {
+        "id": "objects_tell_story",
+        "layer": "narrative",
+        "description": "The life is told only by which objects come out of which box, and where they end up.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "foley_per_surface",
+        "layer": "audio",
+        "description": "Every object has its own sound on every surface it lands on.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "wrong_place_highlight",
+        "layer": "information_grammar",
+        "description": "At the end of a room, only the objects in the wrong place glow softly.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "submission": 0.3,
+        "discovery": 0.3,
+        "narrative": 0.25,
+        "expression": 0.15
+      },
+      "emotional_targets": {
+        "calm": 0.9,
+        "nostalgia": 0.8,
+        "satisfaction": 0.8
+      },
+      "audience": {
+        "age": "everyone",
+        "skill_floor": "none",
+        "context": "couch, short sessions"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "open box",
+          "input": "click"
+        },
+        {
+          "verb": "take out",
+          "input": "click"
+        },
+        {
+          "verb": "place",
+          "input": "drag"
+        },
+        {
+          "verb": "rotate",
+          "input": "click"
+        },
+        {
+          "verb": "pan room",
+          "input": "drag"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "open box",
+          "take one object",
+          "find its place",
+          "place it",
+          "room complete"
+        ],
+        "period_s": {
+          "value": 600,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "none",
+        "scoring": "none; a room completes when everything is in a sensible place"
+      },
+      "randomness": {
+        "amount": 0.0,
+        "kind": "none"
+      },
+      "information": "perfect",
+      "systems": [
+        "valid-placement rules per object",
+        "per-surface foley"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 5,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse",
+          "controller",
+          "touch"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "isometric",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "slots",
+        "undo": "pick it up again",
+        "preview_before_commit": true,
+        "auto_repair": false
+      },
+      "juice": {
+        "sound_on_action": 1.0,
+        "scale_pop": 0.4,
+        "procedural_settle": 0.4,
+        "squash_stretch": 0.3,
+        "particles": 0.1,
+        "screen_shake": 0.0,
+        "hit_stop": 0.0,
+        "camera_kick": 0.0
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "pixel_art",
+        "family": "pixel",
+        "light": "painted_in",
+        "outlines": true,
+        "outline": "inked_in",
+        "surface": "pixel",
+        "post": [],
+        "signature": "Every object is a crisp little sprite with a soft dark outline, placed in a clean isometric room under flat even light.",
+        "lesson": "Readability first: one even light and a thin outline make hundreds of small objects legible at a glance."
+      },
+      "references": [
+        "pixel-art dollhouses",
+        "flat-lay photography",
+        "moving-day memories"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "thing_state": {
+          "mix": {
+            "diegetic": 0.6,
+            "spatial": 0.4
+          },
+          "timing": "on_threshold",
+          "note": "Objects sit where you put them; misplaced ones glow only at the end of the room.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "diegetic": 0.8,
+            "none": 0.2
+          },
+          "timing": "absent",
+          "note": "The room itself is the goal: empty boxes and a lived-in room mean done.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "time": {
+          "mix": {
+            "diegetic": 1.0
+          },
+          "timing": "on_change",
+          "note": "A year card between homes; the objects age with the person.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.6,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "world_material",
+        "fade_rule": "Nothing on screen while you unpack; a photo of the room when it is done."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "the year and the home",
+            "channels": [
+              "music",
+              "sound",
+              "light"
+            ]
+          }
+        ],
+        "max_channels": 3
+      },
+      "note": "No words at all: the story lives in the objects and the rooms. A soft highlight shows a thing that is in the wrong place at the end of a level."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "embedded": 0.8,
+        "evoked": 0.2
+      },
+      "tone": {
+        "cozy_tense": -0.8,
+        "whimsical_grounded": 0.3,
+        "earnest_ironic": -0.6,
+        "quiet_loud": -0.8,
+        "handmade_industrial": -0.6
+      },
+      "themes": [
+        "growing up",
+        "home",
+        "memory"
+      ]
+    },
+    "pacing": {
+      "structure": "puzzle_levels",
+      "tension_curve": "flat_calm",
+      "failure_cost": "none"
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.22,
+      "expression": 0.78,
+      "structure": 0.44,
+      "social": 0.44,
+      "systems": 0.11,
+      "chance": 0.22,
+      "session": 0.0
+    },
+    "confidence": 0.75
+  },
+  "ledger": {
+    "style": [
+      "story told only by objects",
+      "per-surface placement sounds",
+      "end-of-room highlight of misplaced things",
+      "fixed isometric room"
+    ],
+    "expression": [
+      "Unpacking's specific objects, rooms and the life they tell",
+      "its sprites",
+      "its music and sound recordings"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "narrative",
+        "target": "Café and Ranch environment storytelling",
+        "setting": "Let objects on shelves and in drawers tell who lives here; no captions.",
+        "from_signature": "objects_tell_story"
+      },
+      {
+        "layer": "audio",
+        "target": "Sound library tags",
+        "setting": "Tag each placeable model with a material so its drop sound changes with the surface.",
+        "from_signature": "foley_per_surface"
+      },
+      {
+        "layer": "information_grammar",
+        "target": "Tidy-up tasks",
+        "setting": "Show what is out of place only when the player says they are done.",
+        "from_signature": "wrong_place_highlight"
+      }
+    ],
+    "leave": [
+      "the specific life story and its objects",
+      "pixel art as our main look"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

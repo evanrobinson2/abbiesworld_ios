@@ -1,0 +1,111 @@
+{
+  "appid": null,
+  "name": "Mario Kart 8 Deluxe",
+  "store_url": null,
+  "genres": [
+    "Racing",
+    "Party",
+    "Kart"
+  ],
+  "short_description": "Race cartoon karts on wild tracks, drift for boosts and throw items at friends.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Racing",
+    "Party",
+    "Kart"
+  ],
+  "summary": "Race cartoon karts on wild tracks, drift for boosts and throw items at friends.",
+  "identity": {
+    "core_loop": "Race, drift to charge a boost, grab item boxes, use items, trick off ramps, finish.",
+    "mechanics": null,
+    "ui_and_game_feel": "Bouncy and generous; assists let small children play.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "meta": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.59,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Mini-map, place and items on screen; drift sparks change colour to show the boost charging.",
+      "confidence": 0.85,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Glossy toy-like karts and characters on bright tracks.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "soft_diorama",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "depth of field"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree"
+      ],
+      "tricks": [
+        "Drivers lean and look into turns; drift sparks change colour as the boost charges",
+        "A trick pose off every ramp edge, rewarded with a boost",
+        "Big full-body reactions when hit or passing someone, timed with voice lines"
+      ],
+      "lesson": "Put the charge on the vehicle (spark colour) and the feeling on the driver (lean, trick pose, reaction).",
+      "sources": [
+        {
+          "title": "Super Mario Wiki: Tricks",
+          "url": "https://www.mariowiki.com/Trick"
+        },
+        {
+          "title": "Iwata Asks: Mario Kart Wii",
+          "url": "https://iwataasks.nintendo.com/interviews/wii/mariokart/0/3"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
+    "palette": null,
+    "audio_mood": "Big band and rock remixes; character voice reactions.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Show the charge on the thing: drift sparks change colour as the boost builds. Characters react with their whole body."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.67,
+      "expression": 0.44,
+      "structure": 0.56,
+      "social": 0.33,
+      "systems": 0.78,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.85
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

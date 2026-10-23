@@ -117,6 +117,14 @@ CLIPS = {
     'block_hit': (False, [(0, BLOCK), (0.07, P(BLOCK, loc=(0, 0.07, -0.02), chest=(-8, 0, 0), head=(-6, 0, 0))), (0.35, BLOCK)]),
     'block_heavy': (False, [(0, BLOCK), (0.1, P(BLOCK, loc=(0, 0.16, -0.08), chest=(-12, 0, 0), head=(-8, 0, 0), thigh_R=(12, 0, 0), shin_R=(14, 0, 0))),
                             (0.6, BLOCK)]),
+    # SF6-style dynamic block: a blow from above is braced overhead, knees giving (Street Fighter 6, 2022)
+    'block_overhead': (False, [(0, BLOCK),
+                               (0.1, S(P(loc=(0, 0.04, -0.2), chest=(10, 0, 0), head=(16, 0, 0), thigh_L=(-26, 0, 0), shin_L=(40, 0, 0), foot_L=(-14, 0, 0),
+                                         thigh_R=(-18, 0, 0), shin_R=(40, 0, 0), foot_R=(-22, 0, 0)),
+                                       upperarm_L=(-150, -12, 30), forearm_L=(-70, 0, 0), upperarm_R=(-150, 12, -30), forearm_R=(-70, 0, 0))),
+                               (0.3, S(P(loc=(0, 0.03, -0.14), chest=(8, 0, 0), head=(12, 0, 0), thigh_L=(-20, 0, 0), shin_L=(30, 0, 0), thigh_R=(-14, 0, 0), shin_R=(30, 0, 0)),
+                                       upperarm_L=(-144, -12, 30), forearm_L=(-74, 0, 0), upperarm_R=(-144, 12, -30), forearm_R=(-74, 0, 0))),
+                               (0.65, BLOCK)]),
     'hurt': (False, [(0, G), (0.08, P(loc=(0, 0.06, -0.02), chest=(20, 0, 10), head=(16, 0, 0), upperarm_L=(10, 0, 0), upperarm_R=(10, 0, 0))), (0.5, G)]),
     'fall': (False, [(0, G), (0.14, P(loc=(0, 0.1, 0.04), chest=(-30, 0, 0), head=(-30, 0, 0), upperarm_L=(-80, -40, 0), upperarm_R=(-80, 40, 0),
                                       forearm_L=(70, 0, 0), forearm_R=(70, 0, 0))),
@@ -145,7 +153,7 @@ MOVES = {
     'jab': dict(hit=0.15, reach=1.45, damage=6, react='hit_jab', blocked='block_hit', push=0.10),
     'heavy': dict(hit=0.36, reach=1.6, damage=14, react='hit_heavy', blocked='block_heavy', push=0.35),
     'uppercut': dict(hit=0.38, reach=1.3, damage=16, react='hit_uppercut', blocked='block_heavy', push=0.3),
-    'axe': dict(hit=0.58, reach=1.4, damage=22, react='hit_axe', blocked='block_heavy', push=0.25, knockdown=True),
+    'axe': dict(hit=0.58, reach=1.4, damage=22, react='hit_axe', blocked='block_overhead', push=0.25, knockdown=True),
 }
 LOOP = [k for k, (loop, _) in CLIPS.items() if loop]
 

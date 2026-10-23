@@ -91374,6 +91374,83 @@
       "blobSha": "de1f340f37a949d47c03e1a51b52a048bcfae47d",
       "sha256": "6d677ddf63ac7db23f7db5158c2efd2b473127896b886d1226afbecdef1368ad",
       "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/gui/window/attack_predictions.cfg"
+    },
+    {
+      "path": "data/core/units/humans/Loyalist_Bowman.cfg",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/core/units/humans/Loyalist_Bowman.cfg",
+      "blobSha": "9120d222f66867a56257fb0099df643214197ac4",
+      "sha256": "c8c5821f58a0888f8b2a79b0ddaf8aec8963d0ecff05156e3cd81b859ec326b2",
+      "packageExactMatch": true,
+      "game": "wesnoth",
+      "bytes": 3364
+    },
+    {
+      "path": "data/core/macros/animation-utils.cfg",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/core/macros/animation-utils.cfg",
+      "blobSha": "9787e31537ace899bafb709f540d94afa2759051",
+      "sha256": "414e89eb51fa949f0d16354001a5c543bc4765b390a942cb9fca2991145b6deb",
+      "packageExactMatch": true,
+      "game": "wesnoth",
+      "bytes": 36966
+    },
+    {
+      "path": "data/core/macros/sound-utils.cfg",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/core/macros/sound-utils.cfg",
+      "blobSha": "662c0aa19bda73a5a5d3b44d0272682267e195b3",
+      "sha256": "0fbf543e76ab07f1a42a0880d5dba7415e78c25c5a9cf5287e0067f1294e8848",
+      "packageExactMatch": true,
+      "game": "wesnoth",
+      "bytes": 14113
+    },
+    {
+      "path": "src/units/animation.cpp",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/animation.cpp",
+      "blobSha": "f523a7ef1e46d33375410d28f4b763eb043d2e0a",
+      "sha256": "61078bd280472883f2fbe8785c3d38c80ddfc782c92f2b210b2cda9069fec2bd",
+      "packageExactMatch": null,
+      "game": "wesnoth",
+      "bytes": 47134
+    },
+    {
+      "path": "src/units/frame.cpp",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/frame.cpp",
+      "blobSha": "47aa7bfdf101e61a867c735eef5bfeebfa5dbcbb",
+      "sha256": "50665a38fb40e4d5a65eca1b3f59ad9869e1ab6de45de84edb3c132f821ec23f",
+      "packageExactMatch": null,
+      "game": "wesnoth",
+      "bytes": 31715
+    },
+    {
+      "path": "src/units/frame.hpp",
+      "blobSha": "6924869e3ddd1aa09402aabb8d2818c59c8c4b96",
+      "sha256": "4b3fc9028ab7bdb20df0c0142b9f0610aee4e2a4833047d0f2bd5311d1281010",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/frame.hpp",
+      "game": "wesnoth",
+      "bytes": 6457
+    },
+    {
+      "path": "src/units/udisplay.cpp",
+      "blobSha": "9f06b9e8d4671638c2864236c9dabe00d9eb13b0",
+      "sha256": "a1976281fa5bfd39aa78e192fb9e35cf2a50d348a164b6f9a69fde6e58a7dbc0",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/udisplay.cpp",
+      "game": "wesnoth",
+      "bytes": 30519
+    },
+    {
+      "path": "src/units/frame_private.hpp",
+      "blobSha": "04bf1fdb2b60a0e8fb3eec2bc468f8e07a0a728c",
+      "sha256": "fffebe95a70dba98fbbfc296dd4eb0824491dd93f1de4089f0840ac201207ef5",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/frame_private.hpp",
+      "game": "wesnoth",
+      "bytes": 5888
+    },
+    {
+      "path": "src/serialization/string_utils.cpp",
+      "blobSha": "3e41a573774fe00396532c2272ac6f46cd824ce4",
+      "sha256": "6e787bb2fd1f4e6f52444ea8d7d96af42a47412bf4860e3df7776a5a2162c1d5",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/serialization/string_utils.cpp",
+      "game": "wesnoth",
+      "bytes": 25534
     }
   ],
   "predictionUiStudy": {
@@ -91469,5 +91546,196 @@
       ]
     },
     "updatedAt": "2026-10-23T10:46:55.940424+00:00"
+  },
+  "animationStudy": {
+    "at": "2026-10-23T12:48:17.150818+00:00",
+    "game": "wesnoth",
+    "version": "1.18.8",
+    "method": "Pinned original source and packaged WML inspection; no game launch, decompilation, or gameplay observation. PNG headers verified without rendering.",
+    "sources": [
+      {
+        "path": "data/core/units/humans/Loyalist_Bowman.cfg",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/core/units/humans/Loyalist_Bowman.cfg",
+        "blobSha": "9120d222f66867a56257fb0099df643214197ac4",
+        "sha256": "c8c5821f58a0888f8b2a79b0ddaf8aec8963d0ecff05156e3cd81b859ec326b2",
+        "packageExactMatch": true
+      },
+      {
+        "path": "data/core/macros/animation-utils.cfg",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/core/macros/animation-utils.cfg",
+        "blobSha": "9787e31537ace899bafb709f540d94afa2759051",
+        "sha256": "414e89eb51fa949f0d16354001a5c543bc4765b390a942cb9fca2991145b6deb",
+        "packageExactMatch": true
+      },
+      {
+        "path": "data/core/macros/sound-utils.cfg",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/core/macros/sound-utils.cfg",
+        "blobSha": "662c0aa19bda73a5a5d3b44d0272682267e195b3",
+        "sha256": "0fbf543e76ab07f1a42a0880d5dba7415e78c25c5a9cf5287e0067f1294e8848",
+        "packageExactMatch": true
+      },
+      {
+        "path": "src/units/animation.cpp",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/animation.cpp",
+        "blobSha": "f523a7ef1e46d33375410d28f4b763eb043d2e0a",
+        "sha256": "61078bd280472883f2fbe8785c3d38c80ddfc782c92f2b210b2cda9069fec2bd",
+        "packageExactMatch": null
+      },
+      {
+        "path": "src/units/frame.cpp",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/frame.cpp",
+        "blobSha": "47aa7bfdf101e61a867c735eef5bfeebfa5dbcbb",
+        "sha256": "50665a38fb40e4d5a65eca1b3f59ad9869e1ab6de45de84edb3c132f821ec23f",
+        "packageExactMatch": null
+      },
+      {
+        "path": "src/units/frame.hpp",
+        "blobSha": "6924869e3ddd1aa09402aabb8d2818c59c8c4b96",
+        "sha256": "4b3fc9028ab7bdb20df0c0142b9f0610aee4e2a4833047d0f2bd5311d1281010",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/frame.hpp"
+      },
+      {
+        "path": "src/units/udisplay.cpp",
+        "blobSha": "9f06b9e8d4671638c2864236c9dabe00d9eb13b0",
+        "sha256": "a1976281fa5bfd39aa78e192fb9e35cf2a50d348a164b6f9a69fde6e58a7dbc0",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/udisplay.cpp"
+      },
+      {
+        "path": "src/actions/attack.cpp",
+        "blobSha": "c08cfd03fd74c49653b4b9ed6f1ece2ba48089ad",
+        "sha256": "948a388df8d9c34ef47b345227b98e940ccc602627ceb12ea22be515a0b3217e",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/actions/attack.cpp"
+      },
+      {
+        "path": "src/units/frame_private.hpp",
+        "blobSha": "04bf1fdb2b60a0e8fb3eec2bc468f8e07a0a728c",
+        "sha256": "fffebe95a70dba98fbbfc296dd4eb0824491dd93f1de4089f0840ac201207ef5",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/units/frame_private.hpp"
+      },
+      {
+        "path": "src/serialization/string_utils.cpp",
+        "blobSha": "3e41a573774fe00396532c2272ac6f46cd824ce4",
+        "sha256": "6e787bb2fd1f4e6f52444ea8d7d96af42a47412bf4860e3df7776a5a2162c1d5",
+        "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/serialization/string_utils.cpp"
+      }
+    ],
+    "findings": [
+      {
+        "title": "A combat animation composes independently timed tracks",
+        "finding": "Bowman bow attack filters by weapon name, supplies body images for south-facing versus north-facing directions, and defines missile and hit/miss sound tracks separately. Body start_time is -445, missile_start_time -150 with duration 150, and the sound macro receives -230. The source constructor discovers named _frame children as sub-animations, and frame duration can be derived from image/diagonal/halo durations when not explicit. This traces authored composition and loading, not runtime synchronization or perceived timing. The square-bracket parser expands ranges and repetitions, then combines equal-length bracket groups positionally. Thus Bowman [1~4,1] with [75*2,100,130,65] describes five image occurrences with durations 75,75,100,130,65, reusing image 1. These are sequence occurrences, not five unique sprites.",
+        "evidence": [
+          "data/core/units/humans/Loyalist_Bowman.cfg:39-73",
+          "src/units/animation.cpp:302-316",
+          "src/units/frame.cpp:100-112",
+          "src/units/frame_private.hpp:152-191",
+          "src/serialization/string_utils.cpp:101-225"
+        ]
+      },
+      {
+        "title": "Animation outcome filters distinguish hits from kills",
+        "finding": "The SOUND:HIT_AND_MISS macro selects hits=yes versus hits=no. The animation constructor maps yes to both hit and kill, no to miss, and literal hit to hit only. Animation matching rejects an outcome absent from that allowed set. DEFENSE_ANIM_DIRECTIONAL_RANGE uses literal hits=hit for its hit-sound branch. This establishes a selection distinction; it does not prove the complete death-sound or combat dispatch flow.",
+        "evidence": [
+          "data/core/macros/sound-utils.cfg:590-609",
+          "data/core/macros/animation-utils.cfg:182-209",
+          "src/units/animation.cpp:349-360",
+          "src/units/animation.cpp:444-450"
+        ]
+      },
+      {
+        "title": "Combat presentation temporarily changes HP before the combat action commits damage",
+        "finding": "The combat action calls unit_display::unit_attack only when display updates are enabled, then calls defender.take_hit(damage). The display routine can skip animation for visibility or combat-display preferences. When shown, it classifies the presentation as kill when damage reaches current defender HP, hit for positive lesser damage, otherwise miss. It selects attack and defend animations, waits until animation time zero, removes HP incrementally during playback, waits for completion and restores the saved HP. The caller then applies the actual damage. This is a normal-path source trace, not evidence of runtime rollback under exceptions or a claim that presentation never mutates model objects.",
+        "evidence": [
+          "src/actions/attack.cpp:1042-1082",
+          "src/units/udisplay.cpp:607-659",
+          "src/units/udisplay.cpp:745-770"
+        ]
+      }
+    ],
+    "checkedImageReferences": [
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-bow.png",
+        "sha256": "a518cfb080a98a37c9c34dfb76875150db5a4bd4bbce10d6d42bef385dcb4323",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-ne-bow.png",
+        "sha256": "fa47960c63ddbbc4ac0603451e5b589298068eb4ce70414522dc6fd2e276f96e",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-bow-attack-1.png",
+        "sha256": "22a8a8b7442bbb8788bd86e4c0576264acc30c76509a0003e2046a829aadb3cc",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-bow-attack-2.png",
+        "sha256": "f8e76530c6383c8b4e5393c41431b3a962c301647ec6572372fe3e0b688fbc6a",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-bow-attack-3.png",
+        "sha256": "fbefcede9b1229d5af2e37b497f2b178374bf4e83cf25bad724e52f6fa15628e",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-bow-attack-4.png",
+        "sha256": "dc5f8d425c36e2b2abfd76f8204f0597c1bb4e49c5d94228664683e3f40d8f30",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-ne-bow-attack-1.png",
+        "sha256": "c2cbf3381b5fc408c1a74111e7b494b05c55f5474e6a48f97e7d4d1e397f99e4",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-ne-bow-attack-2.png",
+        "sha256": "76ae90fdf1431170d658a77cec4f0d39f8d20d18ccf2868788bb7c090fa42a1c",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-ne-bow-attack-3.png",
+        "sha256": "fe77ceb929c5e01e3b4d1e27d25767f41031b1733aade41d772581605a4abd66",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/units/human-loyalists/bowman-ne-bow-attack-4.png",
+        "sha256": "bd78b6a4b693360c9cc652544db6074a2734f5f8063868f4886fd218486d7b36",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/projectiles/missile-n.png",
+        "sha256": "f4f9699f1ee07741c16c24435829a3e0ac87caad91a50cc35c21cc9303c4ae1c",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "path": "data/core/images/projectiles/missile-ne.png",
+        "sha256": "7ffc2432a1ecf4635ec6ec46713bc67801bce267cbcef6a5da4a790d67fce020",
+        "width": 72,
+        "height": 72
+      }
+    ],
+    "coverage": {
+      "bodyMissileSoundDefinitions": "verified static evidence",
+      "packageSourceAgreement": "verified exact bytes for three WML files",
+      "selectedImageReferences": "12 paths and PNG headers verified; not unique-sprite count",
+      "animationRuntime": "unexamined",
+      "audioPlayback": "unexamined",
+      "shorthandExpansion": "verified static source: range/repetition and positional pairing; Bowman example derived, not game execution",
+      "combatDispatch": "verified static normal path: display gate, outcome classification, temporary HP updates, restoration, caller damage application; runtime and exceptional paths unexamined"
+    },
+    "designInference": "Author reusable animation tracks with explicit event filters and timing, keeping simulation outcomes separate from presentation. Not implemented Ranch behavior.",
+    "next": "Inspect one further pilot subsystem, retaining unresolved runtime, exceptional-path and full asset coverage.",
+    "updatedAt": "2026-10-23T16:33:52.082926+00:00"
   }
 }

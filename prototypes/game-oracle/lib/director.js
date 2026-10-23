@@ -9,14 +9,15 @@ export const DEFAULT_MODEL='anthropic/claude-sonnet-5.5';
 export const STYLE_IDS=styles.styles.map(s=>s.id);
 const FACTORIES=['model','sound','voice','music'];
 export const AUDIENCES=['kid','family','maker'];
+const HOUSE_REFERENCES=['tiny-glade','dorfromantik','besiege','bricktales','9-kings'];
 
 // Retrieval: the few studies that bear on this idea, plus the style it suggests.
 export function retrieve(idea,{style}={}){
  const hits=searchKnowledge({q:idea,limit:30}).results;
  const pick=(kinds,n)=>hits.filter(h=>kinds.includes(h.kind)).slice(0,n);
  let identities=pick(['identity'],3);
- // With nothing specific, the house identity's five reference games are the default.
- if(!identities.length)identities=repo.identities.slice(0,3).map(identityCard);
+ // With nothing specific, the house identity's reference games are the default.
+ if(!identities.length)identities=HOUSE_REFERENCES.map(id=>repo.identities.find(r=>r.id===id)).filter(Boolean).slice(0,3).map(identityCard);
  const studies=pick(['anatomy','lesson'],3),catalog=pick(['catalog'],3);
  const styleHit=style&&STYLE_IDS.includes(style)?style:hits.find(h=>h.kind==='style'&&h.score>0)?.id||'clean';
  return {identities,studies,catalog,style:styles.styles.find(s=>s.id===styleHit)};
@@ -89,13 +90,14 @@ export function normalisePlan(raw,{idea,audience,source,model,ctx}){
 // reference games' takeaways and the suggested style. Marked source "studies" so callers can tell.
 export function studiesPlan(idea,audience,ctx){
  const take=ctx.identities.flatMap(i=>(i.take||[]).map(t=>({title:i.title,t})));
+ const top=ctx.identities[0];
  return normalisePlan({
   reading:`No model was used; this plan is assembled from the Oracle's studies for "${idea.slice(0,120)}".`,
   title:idea.split(/\s+/).slice(0,5).join(' '),pitch:`A small ${ctx.style.name.toLowerCase()} game built around: ${idea.slice(0,200)}`,
-  fantasy:ctx.identities[0]?.fantasy||null,verbs:['build','place','watch'],
-  rules:[...take.filter(x=>/rules|pacing|mechanic/i.test(x.t.layer+x.t.target)).map(x=>({rule:x.t.setting,why:'From '+x.title})),...HOUSE_IDENTITY.slice(4).map(h=>({rule:h,why:'House identity'}))].slice(0,6),
+  fantasy:ctx.identities[0]?.fantasy||null,verbs:top?.verbs?.length?top.verbs:['build','place','watch'],
+  rules:[...take.filter(x=>x.t.layer!=='art').map(x=>({rule:x.t.setting,why:'From '+x.title})),...HOUSE_IDENTITY.slice(4).map(h=>({rule:h,why:'House identity'}))].slice(0,6),
   goal:'Finish the thing you set out to build, or keep playing as long as you like.',fail:null,
-  beats:[{title:'Set the scene',what:'The world shows where the game happens.',player:'Looks around and taps.'},{title:'Play',what:'The core verbs, repeated, with the world answering each one.',player:'Builds and places.'},{title:'Payoff',what:'The world celebrates what was made.',player:'Watches and shares.'}],
+  beats:[{title:'Set the scene',what:'The world shows where the game happens.',player:'Looks around and taps.'},{title:'Play',what:top?.loop?.length?`The core loop, after ${top.title}: ${top.loop.join(', ')}; the world answers each step.`:'The core verbs, repeated, with the world answering each one.',player:top?.verbs?.length?`${top.verbs.join(', ')}.`.replace(/^./,c=>c.toUpperCase()):'Builds and places.'},{title:'Payoff',what:'The world celebrates what was made.',player:'Watches and shares.'}],
   choices:[],presentation:{style:ctx.style.id,why:'Suggested by the idea\'s words.',overlays:ctx.style.overlays,readAloud:ctx.style.readAloud},
   factory:[],references:ctx.identities.map(i=>({title:i.title,take:(i.take||[]).map(t=>t.setting).join(' '),leave:(i.leave||[]).join('; ')})),
   kidFit:ctx.style.kidFit},{idea,audience,source:'studies',model:null,ctx});

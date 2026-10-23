@@ -58,6 +58,7 @@
       "confidence": 0.65,
       "lesson": "Fog is a shader too: its colour sets the mood before anything else."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Sparse strings and waves.",
     "pacing": "brisk, medium sessions",

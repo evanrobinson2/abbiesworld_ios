@@ -5,7 +5,7 @@
 import {mountChrono} from './chrono.mjs?v=3';
 import {cardFace,cardArt,setCardArt} from './hand-cards.mjs?v=13';
 import {openCallout,closeCallout} from '../look/callout.mjs?v=2';
-import {inventory} from './inventory.mjs?v=1';
+import {inventory} from './inventory.mjs?v=5';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
 function start(){
@@ -28,6 +28,7 @@ function start(){
   music:svg('<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>'),
   workshop:svg('<path d="M3 21V10l5 3V10l5 3V6l8 4v11z"/><path d="M7 17h2M12 17h2M17 17h2"/>'),
   feedback:svg('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.7A8 8 0 1 1 21 12z"/>'),
+  town:svg('<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>'),
   explore:svg('<path d="M4 20V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6M8 11h6"/>'),
   account:svg('<circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'),
   settings:svg('<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>'),
@@ -62,7 +63,7 @@ function start(){
 
  // The chronograph (chrono.mjs): time of day, pause and speed pushers, weather, season and pinned dials.
  const chrono=mountChrono({press,icons:I});
- // Abbie's pocket hangs on the chronograph once she carries something (inventory.mjs).
+ // Abbie's backpack hangs on the chronograph once she carries something (inventory.mjs).
  inventory();
 
  // Hand of cards: the real generator cards move here, keeping their tap, drag-to-board and live previews.
@@ -83,7 +84,7 @@ function start(){
   ['cards',cardArt()==='concept'?'Cards: concept':'Cards: in game',()=>{const next=cardArt()==='concept'?'ingame':'concept';setCardArt(next);const b=shelf.querySelector('[data-item=cards]');if(b)b.lastElementChild.textContent=next==='concept'?'Cards: concept':'Cards: in game';}],
   ['music','Music',()=>press('#app-jukebox-toggle')],['workshop','Workshop',()=>press('.aw-fab')],['feedback','Feedback',()=>press('.afb-fab')],
   null,
-  ['tour','Welcome tour',()=>window.AbbiesWelcome?.open()],['explore','Library',()=>press('.ex-door')],['account','Sign in',()=>press('#account-chip')],['settings','Settings',()=>press('#app-settings-toggle')],['developer','Developer',()=>press('#developer-toggle')],
+  ['tour','Welcome tour',()=>window.AbbiesWelcome?.open()],['town',"Abbie's Town",()=>{location.href='/town';}],['explore','Library',()=>press('.ex-door')],['account','Sign in',()=>press('#account-chip')],['settings','Settings',()=>press('#app-settings-toggle')],['developer','Developer',()=>press('#developer-toggle')],
   ['classic','Classic layout',()=>{try{localStorage.setItem('sandbox-ui','v1');}catch{}location.reload();}]];
  for(const item of items){if(!item){shelf.append(make('hr'));continue;}const [icon,label,run,tone]=item;
   const b=make('button',{type:'button'},`<span class="v2-btn v2-glass">${I[icon]}</span><span>${label}</span>`);b.setAttribute('role','menuitem');b.dataset.item=icon;if(tone)b.dataset.tone=tone;

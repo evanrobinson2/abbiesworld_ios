@@ -85,6 +85,22 @@
       "confidence": 0.6,
       "lesson": "A real material (plastic) can be the whole style when the world is a toy."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree"
+      ],
+      "tricks": [
+        "Minifigure animation in the stiff, hopping style of the toy: no knees, swinging arms and legs",
+        "Built models are tested by physics"
+      ],
+      "lesson": "Animate toys like toys: respect the joints the toy really has.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Light whimsical score.",
     "pacing": "slow, short sessions",

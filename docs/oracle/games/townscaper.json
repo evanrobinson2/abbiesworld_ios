@@ -55,6 +55,7 @@
       "confidence": 0.6,
       "lesson": "Flat colour plus strong ambient occlusion reads as soft clay."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Ambient sea.",
     "pacing": "slow, short sessions",

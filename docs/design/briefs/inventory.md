@@ -1,4 +1,9 @@
-# Abbie's pocket (player inventory)
+# Abbie's backpack (player inventory)
+
+Update (Evan, 2026-10-23 15:53Z, AW-STUDY-0046): player inventories are backpacks. The pocket below became the
+backpack: same store, same pickup moment; the register is a little backpack in her colours and tapping it opens the 3D
+half shell. Ten styles, five facets and quest charms: see `docs/design/GAME_CANON.md` and
+`docs/oracle/backpack/BACKPACK_STUDY.md`. Where this brief says pocket, read backpack.
 
 Evan, 2026-10-23: "if abbie picks it up a voice in her head (the small girl's voice) says interesting - this key will
 come in handy, and you need to add player inventory .. use our UX system categorization to add that UX experience

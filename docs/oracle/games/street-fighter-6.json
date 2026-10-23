@@ -1,0 +1,117 @@
+{
+  "appid": 1364780,
+  "name": "Street Fighter 6",
+  "store_url": "https://store.steampowered.com/app/1364780/",
+  "genres": [
+    "Fighting",
+    "Action",
+    "Competitive"
+  ],
+  "short_description": "A side-on one-on-one fighting game with a big cast, a simple control mode for newcomers and a city to explore.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Fighting",
+    "Action",
+    "Competitive"
+  ],
+  "summary": "A side-on one-on-one fighting game with a big cast, a simple control mode for newcomers and a city to explore.",
+  "identity": {
+    "core_loop": "Two fighters face off; read, move, poke, block, punish, spend the gauge on a big move; best of three rounds.",
+    "mechanics": null,
+    "ui_and_game_feel": "Heavy, crunchy and readable; each hit pauses for a beat so you feel it.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "meta": 0.1,
+        "overlay": 0.8
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.22,
+          "source": "estimate",
+          "confidence": 0.52,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Health and power bars along the top, a round timer, combo counters and big text callouts. Bodies show stun and fatigue, and a hit's size shows in the hit-stop and the splash.",
+      "confidence": 0.75,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Muscular stylised characters with physical materials and bright paint-splash effects on every big move.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+        "bloom",
+        "colour grade"
+      ],
+      "signature": "Physical materials on exaggerated muscular bodies; the style comes from bright paint and ink splashes that burst out of every big hit.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.65,
+      "lesson": "Let the hit effects carry the style: a paint-splash language on top of ordinary materials reads as cartoon impact without gore."
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "mocap",
+      "mocap": 0.8,
+      "locomotion": [
+        "root_motion"
+      ],
+      "tricks": [
+        "In-house mocap actors perform each fighter's moves; capture is fed straight into the RE Engine",
+        "Capcom built real-time preview of capture inside the engine, so animators see it on the character at once",
+        "Captured motion is then pushed into strong key poses with hit-stop, so every hit reads"
+      ],
+      "lesson": "Capture for weight and timing, then exaggerate the key poses and freeze the contact frame.",
+      "sources": [
+        {
+          "title": "Dashfight: Capcom shows its RE Engine mocap technique in SF6",
+          "url": "https://dashfight.com/news/capcom-unveils-cutting-edge-re-engine-mocap-technique-in-sf-6-showcase-3911"
+        },
+        {
+          "title": "Capcom R&D: Real-time motion capture preview in RE ENGINE (slides)",
+          "url": "https://www.docswell.com/s/CAPCOM_RandD/KLLR24-RE2023"
+        },
+        {
+          "title": "80.lv: Capcom demonstrates motion capture running directly in RE Engine",
+          "url": "https://80.lv/articles/capcom-demonstrates-motion-capture-running-directly-in-re-engine/"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.7
+    },
+    "palette": null,
+    "audio_mood": "Hip-hop and street beats, crowd noise, a live commentator option.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Make every hit readable: wind-up, contact pause, splash, reaction. A one-button 'easy' control mode lets anyone play the same fight."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 1.0,
+      "challenge": 0.89,
+      "expression": 0.22,
+      "structure": 0.67,
+      "social": 0.22,
+      "systems": 0.78,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "confidence": 0.75
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

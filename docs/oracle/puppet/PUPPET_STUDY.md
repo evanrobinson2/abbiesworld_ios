@@ -58,6 +58,24 @@ What was wrong, and what the Oracle already knew (Shoulder study, locomotion):
 The figure, its floor and its shadow are the world. Joint dots, ghosts, the line of action and the controls are the
 presentation layer, drawn only for the player; the dots hide while a move plays.
 
+## Round 3: the 3D studio's 50 moves (from `moves.mjs`)
+The first card in the tray switches to the Character Studio's library. Each studio pose (XYZ turns from the rest
+A-pose, composed down the chain as in `rig.mjs` applyPose) turns every bone's rest direction from `rest-joints.json`;
+the puppet looks at the result from the figure's right and reads off its own angles, so arms raised out to the side
+still read as raised. Travelling moves slide the floor at the studio's ground speed. Dragging a joint bakes the
+move into keys you can edit. It is a projection: a move that happens mostly side to side (a spin, a sidestep) reads
+flatter here than in 3D.
+
+## Round 4: joint limits (Evan 12:39 PM: "the app is broken")
+His screenshot showed the torso folded back 90 degrees off the hips: a drag on the neck had bent the spine and chest
+with nothing to stop them. Now a drag can bend each joint only the way a body bends: the torso 20 degrees back and 70
+forward, the head and chest a little, knees and elbows one way, ankles and wrists in range. Stock and studio moves are
+not limited (a 3D move can look past a limit from the side, for example an arm turned in at the shoulder). The studio
+can hand the puppet one of its moves: `puppet.html?studio=clap`, or `postMessage({type: "aw-move", id: "clap"})`.
+Checked: all 19 puppet moves and 50 studio moves at three times each, desktop size.
+- Speedup for next time: any puppet with drag IK ships with joint limits from the start, and gets a "drag every handle
+  hard" test, not only a play-every-move test.
+
 ## Next
-- When the Character Studio's `moves.mjs` lands, add a "From the 3D studio" tray that projects its x angles onto this rig.
+- Load and export through AW-STUDY-0041's shared `aw-rig2d` format (`docs/oracle/rigging/RIG2D_FORMAT.md`).
 - Squash and stretch on the bones (the practice SVG already fakes foreshortening as a squash along the bone).

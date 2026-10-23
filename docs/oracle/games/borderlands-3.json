@@ -57,6 +57,7 @@
       "confidence": 0.6,
       "lesson": "A toon layer can sit on top of physical materials; it does not have to replace them."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, short sessions",

@@ -119,6 +119,8 @@ mat('Food_Fruit', '#ff9a3c', 0.4, nmap='ceramic', nstr=0.2, tile=0.1, density=95
 mat('Paper_Cover', '#ffcf3a', 0.8, nmap='paper', nstr=0.4, tile=0.2, density=800, real='laminated card cover')
 mat('Paper_Pages', '#f7f1e0', 0.9, nmap='paper', nstr=0.4, tile=0.2, density=750, real='80 gsm paper block')
 mat('Paper_Canvas', '#fff6ea', 0.9, nmap='weave', nstr=0.4, tile=0.2, density=500, make='shell', wall=0.02, real='stretched canvas on frame')
+mat('Cork_Board', '#b98a56', 0.95, nmap='carpet', nstr=0.7, tile=0.12, density=240, real='10 mm natural cork sheet on a 6 mm board')
+mat('Paper_Photo', '#fbfaf6', 0.35, nmap='paper', nstr=0.15, tile=0.2, density=1100, real='glossy photo paper, 0.25 mm')
 mat('Paper_Sticker', '#ffffff', 0.6, nmap='paper', nstr=0.2, tile=0.3, density=1000, make='shell', wall=0.0005, real='vinyl stickers')
 mat('Metal_Chalk', '#fdfcf5', 0.9, nmap='paper', nstr=0.3, tile=0.2, density=2700, real='chalk paint (drawn pictures)')
 
