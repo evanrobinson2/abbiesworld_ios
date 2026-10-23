@@ -1,5 +1,11 @@
 # /models
 
+/models is a review desk. Each model shows what was asked for (concept image and prompt, `ask`) beside the 3D model,
+then Reject / Adjust (with notes) / Accept, by tap, keyboard (A, D, R, arrows) or voice (the mic; "accept", "reject",
+or what to change; "next", "back"). /models opens the next model without a verdict; /models/<id> opens that one.
+Verdicts go to `/api/model-reviews` (latest per model) and into the feedback inbox for the modelers.
+Ranch rebuild entries are written by `tools/ranch-rebuild/models_page.py`.
+
 The landing page (`/models`) and the model page (`/models/<id>`) are static shells. `models.js` fills them from a catalogue it fetches when the page loads. A model added to the catalogue shows up with no rebuild.
 
 ## Where the catalogue comes from
