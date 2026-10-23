@@ -1,6 +1,6 @@
 // /models is a review desk. Each model shows what was asked for (the concept and its prompt) beside what was built
-// (a 3D model to turn), then one tap or one spoken sentence: accept, adjust with notes, or reject. The details sit
-// under "Learn more". /models opens the next model still to review; /models/<id> opens that one. Moving between
+// (a 3D model to turn) in one row, with comments and the three verdict buttons on the right; one thin bar of facts sits
+// above and one of details below. /models opens the next model still to review; /models/<id> opens that one. Moving between
 // models swaps the page in place, so a hands-free voice session keeps listening from one model to the next.
 // Catalogue sources, first that answers wins: window.MODELS_CATALOG_URL, /api/models, then /models/manifest.json.
 // Verdicts go to /api/model-reviews, which also drops each one in the feedback inbox for the modelers.
@@ -13,7 +13,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&l
 const pct = x => Math.round(100 * x) + '%';
 const LS = 'models-reviews-v1';
 
-let list = [], reviews = {}, cur = null, view = 'review', filter = 'todo', handsFree = false, pending = null, voiceLine = '', voiceKind = '', gridShow = 'art', flipped = new Set(), pane = 'review';
+let list = [], reviews = {}, cur = null, view = 'review', filter = 'todo', handsFree = false, pending = null, voiceLine = '', voiceKind = '', gridShow = 'art', flipped = new Set();
 try { reviews = JSON.parse(localStorage.getItem(LS) || '{}'); } catch {}
 const keep = () => { try { localStorage.setItem(LS, JSON.stringify(reviews)); } catch {} };
 
@@ -72,49 +72,47 @@ function grid(){
 function review(){
   const ms = shown();
   if (!cur || !list.some(m => m.id === cur)) cur = (ms[0] || todo()[0] || list[0]).id;
-  const m = list.find(x => x.id === cur), r = reviews[m.id], seq = ms.some(x => x.id === m.id) ? ms : list, i = seq.findIndex(x => x.id === m.id);
+  const m = list.find(x => x.id === cur), r = reviews[m.id], seq = ms.some(x => x.id === m.id) ? ms : list, i = seq.findIndex(x => x.id === m.id), c = counts();
   document.title = m.name + ' · Models';
   crumb.innerHTML = `<a href="/models">Models</a><span>/</span><span>${esc(m.name)}${m.style ? ' · ' + esc(m.style) : ''}</span>`;
   const [theta, phi] = m.orbit || [-30, 72];
-  root.innerHTML = chips() + `
+  const score = m.outline ?? m.scores?.[0]?.value;
+  // One thin bar of facts on top, one row of the two pictures plus the verdict panel, one thin bar of details below.
+  const facts = [
+    m.ask || m.subject ? `<span><b>Asked</b> ${esc(m.ask || m.subject)}</span>` : '',
+    ...(m.scores || []).map(s => `<span title="${esc(s.help || '')}"><b>${esc(s.label)}</b> ${pct(s.value)}</span>`),
+    ...(m.details || []).filter(([k]) => !/^(source|made with|reference|compute)$/i.test(k)).map(([k, v]) => `<span><b>${esc(k)}</b> ${esc(v)}</span>`),
+    ...(m.off || []).map(x => `<span class="off"><b>Off</b> ${esc(x)}</span>`),
+    `<a href="${esc(m.urls.glb)}" download="${esc(m.id)}.glb">${esc(m.id)}.glb</a>`].filter(Boolean).join('');
+  root.innerHTML = `
   <article class="desk">
-    <div class="dh">
+    <header class="topbar">
       <button type="button" class="arrow" data-step="-1" aria-label="Previous model" ${i <= 0 ? 'disabled' : ''}>‹</button>
-      <div class="dt"><h1>${esc(m.name)}</h1><span class="where">${m.style ? `<span class="style ${esc(m.style)}">${esc(m.style)}</span>` : ''}${i + 1} of ${seq.length}</span></div>
+      <h1>${esc(m.name)}</h1>${m.style ? `<span class="style ${esc(m.style)}">${esc(m.style)}</span>` : ''}
+      <span class="where">${i + 1} of ${seq.length}${score != null ? ` · ${pct(score)} match` : ''}</span>
+      ${r ? `<span class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></span>` : ''}
+      <span class="sp"></span>
+      <select id="filter" aria-label="Which models">${[['todo','To review'],['accept','Accepted'],['adjust','Adjust'],['reject','Rejected'],['all','All']].map(([k, l]) => `<option value="${k}"${filter === k ? ' selected' : ''}>${l} (${c[k] || 0})</option>`).join('')}</select>
+      <button type="button" class="gridbtn" data-view="grid">All</button>
       <button type="button" class="arrow" data-step="1" aria-label="Next model" ${i >= seq.length - 1 ? 'disabled' : ''}>›</button>
-    </div>
-    <div class="seg tabs" role="tablist">${[['review','Review'],['details','Details']].map(([k, l]) => `<button type="button" role="tab" data-pane="${k}" aria-selected="${pane === k}" aria-pressed="${pane === k}">${l}</button>`).join('')}</div>
-    <div class="pane-review"${pane === 'review' ? '' : ' hidden'}>
-    <div class="duo">
-      <figure class="asked"><span class="k">You asked for</span><img src="${esc(m.urls.ref)}" alt="The concept art for the ${esc(m.name.toLowerCase())}">
-        ${m.ask ? `<figcaption class="ask">“${esc(m.ask)}”</figcaption>` : m.subject ? `<figcaption class="ask">${esc(m.subject)}</figcaption>` : ''}</figure>
-      <figure class="got"><span class="k">You got <em>drag to turn, pinch to zoom</em></span>
-        <model-viewer src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
-          auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.9" exposure="1.05" environment-image="neutral"></model-viewer></figure>
-    </div>
-    ${r ? `<p class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></p>` : ''}
-    <section class="say" aria-label="Your verdict">
-      <div class="acts">
-        <button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Talk your feedback"${speech ? '' : ' hidden'}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.1A7 7 0 0 0 19 12h-2Z"/></svg></button>
-        <button type="button" class="act reject" data-verdict="reject">Reject</button>
-        <button type="button" class="act adjust" data-verdict="adjust">Adjust</button>
+    </header>
+    <div class="row">
+      <img class="art" src="${esc(m.urls.ref)}" alt="The concept art for the ${esc(m.name.toLowerCase())}">
+      <model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
+        auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.9" exposure="1.05" environment-image="neutral"></model-viewer>
+      <aside class="say" aria-label="Your verdict">
+        <textarea id="notes" placeholder="Comments: roof steeper, love the colour…">${esc(r?.notes || '')}</textarea>
+        <div class="voice">
+          <button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Talk your feedback"${speech ? '' : ' hidden'}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.1A7 7 0 0 0 19 12h-2Z"/></svg></button>
+          <span class="heard ${voiceKind}" id="heard" aria-live="polite">${esc(voiceLine || (speech ? 'Tap the mic and talk.' : 'Type your comments.'))}</span>
+        </div>
+        ${speech ? `<label class="hf"><input type="checkbox" id="hf" ${handsFree ? 'checked' : ''}> Hands-free</label>` : ''}
         <button type="button" class="act accept" data-verdict="accept">Accept</button>
-      </div>
-      <textarea id="notes" rows="1" placeholder="Notes in your own words: roof steeper, love the colour…">${esc(r?.notes || '')}</textarea>
-      <div class="voice"><span class="heard ${voiceKind}" id="heard" aria-live="polite">${esc(voiceLine || (speech ? 'Tap the mic and talk: “accept”, “reject”, or what to change.' : 'Voice isn’t available in this browser. Type notes, or use your keyboard’s dictation.'))}</span>
-        ${speech ? `<label class="hf"><input type="checkbox" id="hf" ${handsFree ? 'checked' : ''}> Hands-free</label>` : ''}</div>
-    </section>
+        <button type="button" class="act adjust" data-verdict="adjust">Adjust</button>
+        <button type="button" class="act reject" data-verdict="reject">Reject</button>
+      </aside>
     </div>
-    <div class="pane-details"${pane === 'details' ? '' : ' hidden'}>
-      <div class="mgrid">
-        <section><h2>How close it is</h2>
-          <div class="bars">${(m.scores || [{label:'Outline match', value:m.outline}]).map(s => `<div class="bar"><span class="bl" title="${esc(s.help || '')}">${esc(s.label)}</span><span class="track"><i style="width:${Math.max(2, Math.round(s.value * 100))}%"></i></span><span class="bv">${pct(s.value)}</span></div>`).join('')}</div>
-          ${m.urls.render || m.urls.overlay ? `<div class="thumbs">${m.urls.render ? `<img src="${esc(m.urls.render)}" alt="The model from the concept's camera" loading="lazy">` : ''}${m.urls.overlay ? `<img src="${esc(m.urls.overlay)}" alt="Silhouette overlay" loading="lazy">` : ''}</div>` : ''}
-          <dl>${(m.details || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}<dt>File</dt><dd><a href="${esc(m.urls.glb)}" download="${esc(m.id)}.glb">${esc(m.id)}.glb</a></dd></dl></section>
-        <section>${(m.good || []).length ? `<h2>What matches</h2><ul class="ticks good">${m.good.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
-          ${(m.off || []).length ? `<h2>What is off</h2><ul class="ticks off">${m.off.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</section>
-        ${(m.steps || []).length ? `<section><h2>How it was made</h2><ol class="steps">${m.steps.map(([h, t]) => `<li><b>${esc(h)}</b> ${esc(t)}</li>`).join('')}</ol></section>` : ''}
-      </div></div>
+    <footer class="botbar">${facts}</footer>
     <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}"><img src="${esc(x.urls.ref)}" alt="" loading="lazy"><i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
   </article>`;
   const on = root.querySelector('.strip .on'); if (on){ const st = on.parentElement; st.scrollLeft = on.offsetLeft - st.clientWidth / 2 + on.clientWidth / 2; }
@@ -153,10 +151,16 @@ async function decide(verdict, notes, via){
   hear(`${ok ? '✓ Saved' : 'Saved on this device'}: ${said} (${full(m)}).${next ? ` Now: ${full(next)}.` : ''}`, ok ? 'saved' : 'error');
   if (via === 'voice') say(next ? `Next, the ${full(next)}.` : filter === 'todo' ? 'That was the last one.' : 'Saved.');
 }
+// Paper warrior models belong to the Roman model study thread, so their verdicts also reach that thread's feedback inbox.
+const OWNER = [[/^paper warrior/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', 'Models review']];
 async function send(m, verdict, notes, via){
   try {
     const r = await fetch('/api/model-reviews', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({id:m.id, name:`${m.name}${m.style ? ' (' + m.style + ')' : ''}`, verdict, notes, via})});
     if (!r.ok) throw new Error(r.status);
+    const own = OWNER.find(([re]) => re.test(m.group || ''));
+    if (own && verdict !== 'clear') fetch('/api/feedback', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({
+      note:`[${LABEL[verdict]}] ${m.name} (/models/${m.id})${notes ? ': ' + notes : ''}`, page:location.pathname, title:document.title,
+      thread:own[1], threadTitle:own[2], viewport:`${innerWidth}x${innerHeight}@${devicePixelRatio}`})}).catch(() => {});
     return true;
   } catch { toast('Saved on this device. It will reach the modeler when the connection is back.'); return false; }
 }
@@ -251,7 +255,6 @@ function stopListening(){ listening = false; setMic(false); if (rec) try { rec.s
 document.addEventListener('click', e => {
   const t = e.target.closest('button, a[data-open]'); if (!t) return;
   if (t.dataset.flip){ e.preventDefault(); flipped.has(t.dataset.flip) ? flipped.delete(t.dataset.flip) : flipped.add(t.dataset.flip); render(); }
-  else if (t.dataset.pane){ pane = t.dataset.pane; render(); }
   else if (t.dataset.show){ gridShow = t.dataset.show; flipped.clear(); render(); }
   else if (t.dataset.open){ e.preventDefault(); cur = t.dataset.open; view = 'review'; render(true); scrollTo({top:0}); }
   else if (t.dataset.filter){ filter = t.dataset.filter; if (view === 'review' && filter !== 'all' && !shown().some(m => m.id === cur)) cur = shown()[0]?.id || cur; render(true); }
@@ -261,7 +264,9 @@ document.addEventListener('click', e => {
   else if ('clear' in t.dataset){ const m = list.find(x => x.id === cur); delete reviews[cur]; keep(); send(m, 'clear', '', 'tap'); render(); }
   else if (t.id === 'mic') listening ? stopListening() : startListening();
 });
-document.addEventListener('change', e => { if (e.target.id === 'hf'){ handsFree = e.target.checked; if (handsFree && !listening) startListening(); else if (!handsFree && rec) rec.continuous = false; } });
+document.addEventListener('change', e => {
+  if (e.target.id === 'filter'){ filter = e.target.value; if (filter !== 'all' && !shown().some(m => m.id === cur)) cur = shown()[0]?.id || cur; render(true); return; }
+  if (e.target.id === 'hf'){ handsFree = e.target.checked; if (handsFree && !listening) startListening(); else if (!handsFree && rec) rec.continuous = false; } });
 document.addEventListener('keydown', e => {
   if (view !== 'review' || e.target.closest('textarea, input') || e.metaKey || e.ctrlKey || e.altKey) return;
   const k = e.key.toLowerCase();
