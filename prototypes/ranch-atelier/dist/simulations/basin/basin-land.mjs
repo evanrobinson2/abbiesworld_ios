@@ -11,6 +11,8 @@ export const ASSUMPTIONS = {
  relief: 880,           // peak height above the lake, metres (a Colorado basin is ~800-1200 m deep)
  rim: [1500, 3400],     // basin radius where the mountains start and reach full height, metres
  farShore: -9000,       // where the far side of the lake rises (z, metres)
+ range: 2300,           // the great range on the horizon: extra height beyond the basin rim, metres
+ knob: { x: -180, z: 160, r: 330, h: 190 }, // a resistant granite knob on the valley floor: the near hill
  shore: -1250,          // where the valley meets the lake (z, metres; the lake lies toward -z)
  rounds: 36,            // erosion rounds
  incision: .0022,       // stream power coefficient K in E = K A^0.5 S
@@ -48,6 +50,8 @@ export function uplift(seed) {
   const ring = Math.max(smooth(A.rim[0] + wob, A.rim[1] + wob, r) * (.25 + .75 * gap) * (1 - lake), far);
   const crag = .74 + .26 * ridged(x / 1100, z / 1100, 5);
   let h = A.relief * ring * crag * (.8 + .4 * fbm(x / 2600 + 2, z / 2600 + 7, 3));
+  h += A.range * Math.max(smooth(4600, 9000, r) * (1 - lake), far) * (.55 + .45 * ridged(x / 2400 + 3, z / 2400 + 8, 4));  // the great range
+  const k = Math.hypot(x - A.knob.x, z - A.knob.z) / A.knob.r; h += A.knob.h * Math.exp(-k * k * 1.6) * (.8 + .4 * ridged(x / 260, z / 260, 3));
   h += A.floor * Math.max(0, Math.min(1, (z - A.shore) / 2600)) + 12 * (fbm(x / 320, z / 320, 4) - .5);  // the valley floor tilts to the lake
   h -= lake * (1 - far) * (7 + 55 * smooth(shoreLine, shoreLine - 2400, z));                // the lake bed
   return h;
