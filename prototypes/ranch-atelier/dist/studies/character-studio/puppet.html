@@ -252,9 +252,10 @@ function from3D(sp){const t=sp.turn||[0,0,0],base=qeuler(t[0],t[1],t[2],"YXZ"),Q
     let wa=ang([v[2],-v[1]]);const q=PARENT[n],near=q?w[q]:(n==="spine"?180:0);w[n]=near+wrap(wa-near)}
   const o=sp.root||[0,0,0];return grounded(fromWorld(w,{x:o[2]*HIPPX,lift:-(o[1]||0)*HIPPX}))}
 const sub3=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
-let STUDIO=null;   // the 3D studio's moves, loaded on first look
+let STUDIO=null;
+const shown=()=>(STUDIO||[]).filter(m=>!m.cut);   // the studio drops moves that don't pass its quality bar (moves.mjs cut)   // the 3D studio's moves, loaded on first look
 async function loadStudio(){if(STUDIO)return STUDIO;try{const m=await import("./moves.mjs");
-  STUDIO=m.MOVES.map(x=>{const g=m.GENRES.find(g=>g.id===x.genre);const clip={id:x.id,name:x.name,genre:g?g.name:x.genre,dur:x.len||x.fn.len||2,ease:"smooth",fn3:x.fn,
+  STUDIO=m.MOVES.map(x=>{const g=m.GENRES.find(g=>g.id===x.genre);const clip={id:x.id,cut:x.cut,name:x.name,genre:g?g.name:x.genre,dur:x.len||x.fn.len||2,ease:"smooth",fn3:x.fn,
     speed3:x.travel?(x.speed??x.fn.speed??0):0,from3d:1};clip.keys=[{t:0,p:from3D(x.fn(0))},{t:.5,p:from3D(x.fn(clip.dur/2))},{t:1,p:from3D(x.fn(clip.dur))}];return clip})}
   catch(e){STUDIO=[]}return STUDIO}
 
@@ -472,10 +473,10 @@ function card(m,i,list){const b=document.createElement("button");b.className="mo
   return b}
 function drawTray(){const tray=$("tray");tray.innerHTML="";
   const sw=document.createElement("button");sw.className="move glass";sw.style.width="96px";
-  sw.innerHTML=state.tray==="puppet"?`<b style="margin-top:14px">3D studio moves</b><small>50 more</small>`:`<b style="margin-top:14px">Puppet moves</b><small>${MOVES.length}</small>`;
+  sw.innerHTML=state.tray==="puppet"?`<b style="margin-top:14px">3D studio moves</b><small>${STUDIO?shown().length+" more":"from the 3D view"}</small>`:`<b style="margin-top:14px">Puppet moves</b><small>${MOVES.length}</small>`;
   sw.onclick=async()=>{state.tray=state.tray==="puppet"?"studio":"puppet";if(state.tray==="studio")await loadStudio();drawTray();tray.scrollLeft=0};
   tray.appendChild(sw);
-  const all=state.tray==="puppet"?[...mine().map(m=>({...m,mine:1})),...MOVES]:STUDIO||[];
+  const all=state.tray==="puppet"?[...mine().map(m=>({...m,mine:1})),...MOVES]:shown();
   if(state.tray==="studio"&&!all.length){const e=document.createElement("small");e.textContent="The 3D studio's moves didn't load here.";e.style.alignSelf="center";tray.appendChild(e)}
   all.forEach((m,i)=>tray.appendChild(card(m,i,all)))}
 addEventListener("resize",render);
@@ -483,7 +484,7 @@ drawTray();render();
 // open on a move so the page is alive the moment it loads; a joint drag stops it and you take over
 const start=MOVES.findIndex(m=>m.name===(new URLSearchParams(location.search).get("move")||"Wave"));
 // the Character Studio can hand us one of its moves: ?studio=clap, or postMessage({type:"aw-move",id:"clap"})
-async function playStudio(id){await loadStudio();const i=STUDIO.findIndex(m=>m.id===id);if(i<0)return false;
+async function playStudio(id){await loadStudio();const i=shown().findIndex(m=>m.id===id);if(i<0)return false;
   if(state.playing)pause();state.tray="studio";drawTray();const c=$("tray").children[i+1];c.click();c.scrollIntoView({block:"nearest",inline:"center"});return true}
 addEventListener("message",e=>{if(e.origin===location.origin&&e.data&&e.data.type==="aw-move")playStudio(String(e.data.id))});
 const sid=new URLSearchParams(location.search).get("studio");
