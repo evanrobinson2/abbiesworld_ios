@@ -1,0 +1,25 @@
+{
+ "job": "A2-paint-suit",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16a43-52ba-71e4-af73-a3e4da572c74",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "topology": "triangle",
+    "target_polycount": 12000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view_front.png",
+    "view_side.png",
+    "view_back.png"
+   ]
+  }
+ ],
+ "credits": 30
+}
