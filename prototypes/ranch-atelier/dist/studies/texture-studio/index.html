@@ -68,7 +68,7 @@ button{font:inherit;color:inherit;border:0;padding:0;cursor:pointer;-webkit-tap-
 <div id="looks" aria-label="Looks"></div>
 <div id="tools">
  <button class="glass orb" id="tCam" aria-label="Camera: close, walking, far"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
- <button class="glass orb" id="tShade" aria-label="Light: Sunday Toon, Clay, Ink, Film"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+ <button class="glass orb" id="tShade" aria-label="Light: Sunday Toon, Clay, Ink, Film, Painted Brush"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
  <button class="glass orb" id="tPaint" aria-label="Paint" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-8 8H6v-6z"/><path d="M4 21c2 0 3-1 3-3"/></svg></button>
  <button class="glass orb" id="tUV" aria-label="The flat texture and its UVs" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 14l5-5 4 4 3-3 4 4"/></svg></button>
  <button class="glass orb" id="tSave" aria-label="Save the texture"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></button>
@@ -101,7 +101,7 @@ button{font:inherit;color:inherit;border:0;padding:0;cursor:pointer;-webkit-tap-
   <li>The heroes are the Meshy brutes from the Bruiser study, cleaned up, painted and rigged for Brute Fight (20 bones, 19 moves). The Moon gear kit bolts onto the same bones.</li>
   <li>The old paint is split into shading (the sculpt, the creases, the eyebrows) and colour. The shading stays; each look brings its own colours and surface.</li>
   <li>Surfaces are drawn in the flat texture (the UV card shows it): thumbprints, a knitted vest, felt, wood grain, brush strokes. The same pattern becomes the bump, so light catches it.</li>
-  <li>The light comes from our shader kit: Sunday Toon, Clay (the cheap half of the Storybook look), Ink and Film.</li>
+  <li>The light comes from our shader kit: Sunday Toon, Clay (the cheap half of the Storybook look), Ink, Film and Painted Brush (Arcane-inspired).</li>
   <li>The looks are data in <code>looks.json</code>: any rigged character with parts named Skin, TankTop, Shorts, Armor, Light and Glass can wear them, including the wooden mannequin once it is rigged.</li>
  </ul>
  <h2>Next</h2>
@@ -114,6 +114,7 @@ import * as T from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/OrbitControls.js';
 import {TOON_LOOKS, toonify, toonUniforms, setToonLook, inkHulls} from '/simulations/toon-kit.mjs';
+import {paintBrush} from '/simulations/painted-brush.mjs';
 
 const $ = id => document.getElementById(id);
 const Q = new URLSearchParams(location.search);
@@ -128,8 +129,16 @@ const CHARS = [
  {id: 'red-gear', name: 'Brute one in Moon gear', glb: '/studies/brute-fight/red/fighter.glb', gear: '/studies/texture-studio/gear-red.glb', was: RED},
  {id: 'blue-gear', name: 'Brute two in Moon gear', glb: '/studies/brute-fight/blue/fighter.glb', gear: '/studies/texture-studio/gear-blue.glb', was: BLUE},
 ];
+// Meshy's own mesh, UVs and texture on the same skeleton (skinMeshy below). Shown once the retextured brutes land
+// (Character Studio thread); ?meshy=1 previews them with whatever Meshy files are in meshy/.
+const MESHY_CHARS = [
+ {id: 'red-meshy', name: 'Brute one, Meshy texture', glb: '/studies/brute-fight/red/fighter.glb', meshy: {glb: '/studies/texture-studio/meshy/brute1.glb', align: {scale: 1.0509257316589355, turn: -24, loc: [0.00033841290860436857, 0.0004607959126587957, 1.0007734298706055]}}},
+ {id: 'blue-meshy', name: 'Brute two, Meshy texture', glb: '/studies/brute-fight/blue/fighter.glb', meshy: {glb: '/studies/texture-studio/meshy/brute2.glb', align: {scale: 1.0512323379516602, turn: 0, loc: [-0.0029150533955544233, -0.0031610343139618635, 0.9808635711669922]}}},
+];
+if (Q.get('meshy')) CHARS.splice(2, 0, ...MESHY_CHARS);
 const SHADERS = {sunday: {name: 'Sunday Toon', toon: TOON_LOOKS.sunday}, clay: {name: 'Clay light', toon: TOON_LOOKS.clay},
- ink: {name: 'Ink Toon', toon: {...TOON_LOOKS.ink, ink: .013}, ink: true}, film: {name: 'Film', toon: null}};
+ ink: {name: 'Ink Toon', toon: {...TOON_LOOKS.ink, ink: .013}, ink: true}, film: {name: 'Film', toon: null},
+ brush: {name: 'Painted Brush', toon: null, brush: true}};
 const SHADER_IDS = Object.keys(SHADERS);
 const CAMS = ['close', 'walk', 'far'], CAM_NAME = {close: 'Close up', walk: 'Walking', far: 'From a distance'};
 
@@ -191,35 +200,96 @@ controls.enableDamping = true; controls.target.set(0, 1, 0); controls.maxPolarAn
 
 // ---------- the characters ----------
 const loader = new GLTFLoader();
-const SZ = 1024, HZ = 512;
 const chars = {};
-async function loadChar(c) {
- const g = await loader.loadAsync(c.glb), root = g.scene, meshes = [];
- root.traverse(o => { if (o.isSkinnedMesh) { o.castShadow = o.receiveShadow = true; o.frustumCulled = false; meshes.push(o); } });
- const img = meshes[0].material.map.image;
- const src = document.createElement('canvas'); src.width = src.height = SZ; src.getContext('2d').drawImage(img, 0, 0, SZ, SZ);
- // the role of every texel, from the UV triangles of each named part (stroked first, so seams get a little padding)
- const mk = document.createElement('canvas'); mk.width = mk.height = SZ; const mx = mk.getContext('2d');
- const tris = meshes.map(o => { const uv = o.geometry.attributes.uv, ix = o.geometry.index, P = new Path2D();
-  for (let i = 0; i < ix.count; i += 3) { const a = ix.getX(i), b = ix.getX(i + 1), d = ix.getX(i + 2);
-   P.moveTo(uv.getX(a) * SZ, uv.getY(a) * SZ); P.lineTo(uv.getX(b) * SZ, uv.getY(b) * SZ); P.lineTo(uv.getX(d) * SZ, uv.getY(d) * SZ); P.closePath(); }
-  return {role: o.material.name, P}; });
- const ri = r => BODY.indexOf(r) + 1;
- mx.lineWidth = 6; mx.lineJoin = 'round'; for (const t of tris) { mx.strokeStyle = `rgb(${ri(t.role) * 60},0,0)`; mx.stroke(t.P); }
- for (const t of tris) { mx.fillStyle = `rgb(${ri(t.role) * 60},0,0)`; mx.fill(t.P); }
- const md = mx.getImageData(0, 0, SZ, SZ).data, sd = src.getContext('2d').getImageData(0, 0, SZ, SZ).data;
- const role = new Int8Array(SZ * SZ), shade = new Float32Array(SZ * SZ);
- const lum = h => { const c = new T.Color(h); return .3 * c.r + .59 * c.g + .11 * c.b; }, was = BODY.map(r => lum(c.was[r]) * 255);
- for (let i = 0; i < SZ * SZ; i++) {
-  const k = Math.round(md[i * 4] / 60) - 1; role[i] = k;
-  shade[i] = k < 0 ? 1 : Math.min(1.6, Math.max(.12, (.3 * sd[i * 4] + .59 * sd[i * 4 + 1] + .11 * sd[i * 4 + 2]) / was[k]));
+// Meshy's own mesh, UVs and texture on the Brute Fight skeleton: move it into the fighter's space (the Bruiser align),
+// then give every Meshy vertex the skin weights and part of the nearest fighter vertices (inverse-distance, 4 nearest)
+function skinMeshy(fighters, mg, A) {
+ let src = null; mg.scene.updateMatrixWorld(true); mg.scene.traverse(o => { if (o.isMesh && !src) src = o; });
+ const geo = src.geometry.clone(); geo.applyMatrix4(src.matrixWorld);
+ geo.applyMatrix4(new T.Matrix4().compose(new T.Vector3(A.loc[0], A.loc[2], -A.loc[1]),
+  new T.Quaternion().setFromAxisAngle(new T.Vector3(0, 1, 0), A.turn * Math.PI / 180), new T.Vector3(A.scale, A.scale, A.scale)));
+ const FP = [], FJ = [], FW = [], FR = [];
+ for (const o of fighters) { const g = o.geometry, k = BODY.indexOf(o.material.name);
+  for (let i = 0; i < g.attributes.position.count; i++) {
+   FP.push(g.attributes.position.getX(i), g.attributes.position.getY(i), g.attributes.position.getZ(i));
+   for (let j = 0; j < 4; j++) { FJ.push(g.attributes.skinIndex.getComponent(i, j)); FW.push(g.attributes.skinWeight.getComponent(i, j)); }
+   FR.push(k); } }
+ const C = .08, grid = new Map(), key = (x, y, z) => `${Math.floor(x / C)},${Math.floor(y / C)},${Math.floor(z / C)}`;
+ for (let i = 0; i < FR.length; i++) { const kk = key(FP[i * 3], FP[i * 3 + 1], FP[i * 3 + 2]); (grid.get(kk) || grid.set(kk, []).get(kk)).push(i); }
+ // weld by position first (Meshy splits vertices at UV seams; a seam must move as one), weights per welded point
+ const P = geo.attributes.position, n = P.count, SI = new Uint16Array(n * 4), SW = new Float32Array(n * 4), VR = new Int8Array(n);
+ const wid = new Int32Array(n), wmap = new Map(), wpos = [];
+ for (let v = 0; v < n; v++) { const kk = `${P.getX(v).toFixed(4)},${P.getY(v).toFixed(4)},${P.getZ(v).toFixed(4)}`;
+  let w = wmap.get(kk); if (w === undefined) { w = wpos.length / 3; wmap.set(kk, w); wpos.push(P.getX(v), P.getY(v), P.getZ(v)); } wid[v] = w; }
+ const NW = wpos.length / 3, NJ = fighters[0].skeleton.bones.length, W = new Float32Array(NW * NJ), WR = new Int8Array(NW);
+ for (let v = 0; v < NW; v++) {
+  const x = wpos[v * 3], y = wpos[v * 3 + 1], z = wpos[v * 3 + 2], gx = Math.floor(x / C), gy = Math.floor(y / C), gz = Math.floor(z / C);
+  let best = [];
+  for (let r = 1; r < 6 && best.length < 4; r++) { best = [];
+   for (let i = -r; i <= r; i++) for (let j = -r; j <= r; j++) for (let k = -r; k <= r; k++) for (const f of grid.get(`${gx + i},${gy + j},${gz + k}`) || [])
+    best.push([(FP[f * 3] - x) ** 2 + (FP[f * 3 + 1] - y) ** 2 + (FP[f * 3 + 2] - z) ** 2, f]); }
+  best.sort((p, q) => p[0] - q[0]); WR[v] = FR[best[0][1]];
+  const d0 = Math.sqrt(best[0][0]); best = best.slice(0, 4).filter(([d]) => Math.sqrt(d) <= d0 * 1.5 + .01); // only the near side: an arm never borrows the chest
+  for (const [d, f] of best) { const w0 = 1 / (Math.sqrt(d) + 4e-3); for (let j = 0; j < 4; j++) W[v * NJ + FJ[f * 4 + j]] += FW[f * 4 + j] * w0; }
+  let t = 0; for (let j = 0; j < NJ; j++) t += W[v * NJ + j]; for (let j = 0; j < NJ; j++) W[v * NJ + j] /= t || 1;
  }
+ // smooth the weights along the mesh's own edges, a few passes, so joints bend without tearing
+ const ix0 = geo.index ? geo.index.array : Uint32Array.from({length: n}, (_, i) => i), nb = Array.from({length: NW}, () => new Set());
+ for (let t = 0; t < ix0.length; t += 3) { const a = wid[ix0[t]], b = wid[ix0[t + 1]], c = wid[ix0[t + 2]]; nb[a].add(b).add(c); nb[b].add(a).add(c); nb[c].add(a).add(b); }
+ for (let pass = 0; pass < 4; pass++) { const W2 = W.slice();
+  for (let v = 0; v < NW; v++) { const ns = nb[v]; if (!ns.size) continue;
+   for (let j = 0; j < NJ; j++) { let s = 0; for (const u of ns) s += W[u * NJ + j]; W2[v * NJ + j] = W[v * NJ + j] * .5 + s / ns.size * .5; } }
+  W.set(W2); }
+ for (let v = 0; v < n; v++) { const w = wid[v], row = [];
+  for (let j = 0; j < NJ; j++) if (W[w * NJ + j] > 1e-4) row.push([j, W[w * NJ + j]]);
+  const top = row.sort((p, q) => q[1] - p[1]).slice(0, 4), tot = top.reduce((s, t) => s + t[1], 0) || 1;
+  top.forEach(([jn, wt], j) => { SI[v * 4 + j] = jn; SW[v * 4 + j] = wt / tot; }); VR[v] = WR[w]; }
+ geo.setAttribute('skinIndex', new T.Uint16BufferAttribute(SI, 4)); geo.setAttribute('skinWeight', new T.Float32BufferAttribute(SW, 4));
+ // one draw group per part (triangle part = majority of its corners), so each part takes its own material
+ const ix = geo.index ? geo.index.array : Uint32Array.from({length: n}, (_, i) => i), byRole = BODY.map(() => []);
+ for (let t = 0; t < ix.length; t += 3) { const r = [VR[ix[t]], VR[ix[t + 1]], VR[ix[t + 2]]], m = r[1] === r[2] ? r[1] : r[0]; byRole[m].push(ix[t], ix[t + 1], ix[t + 2]); }
+ geo.setIndex(byRole.flat()); geo.clearGroups(); let at = 0; byRole.forEach((l, m) => { geo.addGroup(at, l.length, m); at += l.length; });
+ const f0 = fighters[0], sm = new T.SkinnedMesh(geo, BODY.map(r => new T.MeshStandardMaterial({name: r})));
+ sm.bind(f0.skeleton, f0.bindMatrix); sm.castShadow = sm.receiveShadow = true; sm.frustumCulled = false; sm.userData.roles = BODY;
+ f0.parent.add(sm); for (const o of fighters) o.removeFromParent();
+ const M = src.material; return {sm, map: M.map?.image, maps: {normalMap: M.normalMap, roughnessMap: M.roughnessMap, metalnessMap: M.metalnessMap}};
+}
+async function loadChar(c) {
+ const g = await loader.loadAsync(c.glb), root = g.scene; let meshes = [], maps = null, img;
+ root.traverse(o => { if (o.isSkinnedMesh) { o.castShadow = o.receiveShadow = true; o.frustumCulled = false; meshes.push(o); } });
+ img = meshes[0].material.map.image;
+ if (c.meshy) { const r = skinMeshy(meshes, await loader.loadAsync(c.meshy.glb), c.meshy.align); meshes = [r.sm]; img = r.map; maps = r.maps;
+  if (!img) { img = document.createElement('canvas'); img.width = img.height = 1024; const x = img.getContext('2d'); x.fillStyle = '#b8b0a8'; x.fillRect(0, 0, 1024, 1024); } }
+ const SZ = Math.min(2048, img.width || 1024), HZ = SZ / 2;
+ const src = document.createElement('canvas'); src.width = src.height = SZ; src.getContext('2d').drawImage(img, 0, 0, SZ, SZ);
+ // the part of every texel, from the UV triangles of each named part (stroked first, so seams get a little padding)
+ const mk = document.createElement('canvas'); mk.width = mk.height = SZ; const mx = mk.getContext('2d');
+ const tris = [];
+ for (const o of meshes) { const uv = o.geometry.attributes.uv, ix = o.geometry.index;
+  const groups = o.userData.roles ? o.geometry.groups.map(gr => ({role: BODY[gr.materialIndex], start: gr.start, count: gr.count})) : [{role: o.material.name, start: 0, count: ix.count}];
+  for (const gr of groups) { const P = new Path2D();
+   for (let i = gr.start; i < gr.start + gr.count; i += 3) { const a = ix.getX(i), b = ix.getX(i + 1), d = ix.getX(i + 2);
+    P.moveTo(uv.getX(a) * SZ, uv.getY(a) * SZ); P.lineTo(uv.getX(b) * SZ, uv.getY(b) * SZ); P.lineTo(uv.getX(d) * SZ, uv.getY(d) * SZ); P.closePath(); }
+   tris.push({role: gr.role, P}); } }
+ const ri = r => BODY.indexOf(r) + 1;
+ mx.lineWidth = SZ / 170; mx.lineJoin = 'round'; for (const t of tris) { mx.strokeStyle = `rgb(${ri(t.role) * 60},0,0)`; mx.stroke(t.P); }
+ for (const t of tris) { mx.fillStyle = `rgb(${ri(t.role) * 60},0,0)`; mx.fill(t.P); }
+ const md = mx.getImageData(0, 0, SZ, SZ).data, srcData = src.getContext('2d').getImageData(0, 0, SZ, SZ), sd = srcData.data;
+ const role = new Int8Array(SZ * SZ), shade = new Float32Array(SZ * SZ), L8 = i => .3 * sd[i * 4] + .59 * sd[i * 4 + 1] + .11 * sd[i * 4 + 2];
+ // each part's own average brightness: the shading is a texel's brightness against its part's
+ const sum = [0, 0, 0], cnt = [0, 0, 0];
+ for (let i = 0; i < SZ * SZ; i++) { const k = Math.round(md[i * 4] / 60) - 1; role[i] = k; if (k >= 0) { sum[k] += L8(i); cnt[k]++; } }
+ const was = sum.map((s, k) => Math.max(8, s / (cnt[k] || 1)));
+ for (let i = 0; i < SZ * SZ; i++) { const k = role[i]; shade[i] = k < 0 ? 1 : Math.min(1.6, Math.max(.12, L8(i) / was[k])); }
+ // Meshy's own normal map, at bump size, to keep its sculpt under every look's pattern
+ let srcNormal = null;
+ if (maps?.normalMap?.image) { const nc = document.createElement('canvas'); nc.width = nc.height = HZ; const nx = nc.getContext('2d'); nx.drawImage(maps.normalMap.image, 0, 0, HZ, HZ); srcNormal = nx.getImageData(0, 0, HZ, HZ).data; }
  const color = document.createElement('canvas'); color.width = color.height = SZ;
  const strokes = document.createElement('canvas'); strokes.width = strokes.height = SZ;
  const normal = document.createElement('canvas'); normal.width = normal.height = HZ;
  const colorTex = new T.CanvasTexture(color), normalTex = new T.CanvasTexture(normal);
- colorTex.flipY = normalTex.flipY = false; colorTex.colorSpace = T.SRGBColorSpace; colorTex.anisotropy = 4;
- const ch = {c, root, meshes, tris, role, shade, color, strokes, normal, colorTex, normalTex, over: {}, gear: [], hulls: [], walker: {phase: 0}};
+ colorTex.flipY = normalTex.flipY = false; colorTex.colorSpace = T.SRGBColorSpace; colorTex.anisotropy = 8;
+ const ch = {c, root, meshes, tris, role, shade, srcData, srcNormal, maps, SZ, HZ, color, strokes, normal, colorTex, normalTex, over: {}, gear: [], hulls: [], walker: {phase: 0}};
  if (c.gear) {
   const gg = await loader.loadAsync(c.gear), bones = {}; root.updateMatrixWorld(true);
   root.traverse(o => { if (o.isBone) bones[o.name] = o; });
@@ -264,7 +334,7 @@ const PATTERNS = {
 };
 
 function compose(ch) {
- const L = LOOKS[S.look], cols = BODY.map(r => new T.Color(ch.over[r] || L.roles[r].color)), pats = BODY.map(r => PATTERNS[L.roles[r].pattern || 'flat']);
+ const {SZ, HZ} = ch, L = LOOKS[S.look], cols = BODY.map(r => new T.Color(ch.over[r] || L.roles[r].color)), pats = BODY.map(r => PATTERNS[L.roles[r].pattern || 'flat']);
  // the height field at half size: pattern per part (only rebuilt when the look changes, not per brush dab)
  const fresh = ch.Hlook !== S.look, H = fresh ? new Float32Array(HZ * HZ) : ch.H; ch.H = H; ch.Hlook = S.look;
  if (fresh) for (let y = 0; y < HZ; y++) for (let x = 0; x < HZ; x++) { const i = y * HZ + x, k = ch.role[(y * 2) * SZ + x * 2]; H[i] = k < 0 ? .5 : pats[k]((x + .5) / HZ, (y + .5) / HZ); }
@@ -274,7 +344,10 @@ function compose(ch) {
  const det = L.detail, post = L.posterize, sat = L.saturate, mot = L.mottle;
  for (let y = 0; y < SZ; y++) for (let x = 0; x < SZ; x++) {
   const i = y * SZ + x, k = ch.role[i], j = i * 4; let r, g, b;
-  if (k < 0) { r = g = b = .5; } else {
+  if (k < 0) { r = g = b = .5; } else if (L.original) { // the texture as it came, with the brush on top
+   const sd = ch.srcData.data, a = sk[j + 3] / 255; r = sd[j] / 255; g = sd[j + 1] / 255; b = sd[j + 2] / 255;
+   if (a) { r += (sk[j] / 255 * ch.shade[i] - r) * a; g += (sk[j + 1] / 255 * ch.shade[i] - g) * a; b += (sk[j + 2] / 255 * ch.shade[i] - b) * a; }
+  } else {
    const h = H[(y >> 1) * HZ + (x >> 1)];
    let f = (1 + (ch.shade[i] - 1) * det) * (1 + (h - .5) * 2 * mot);
    if (post) f = Math.round(f * post) / post;
@@ -289,10 +362,12 @@ function compose(ch) {
  if (!fresh) { if (ch === chars[S.char]) drawUV(); return; }
  // bump: pattern plus a little of the old sculpt shading, as a tangent-space normal map
  const nx = ch.normal.getContext('2d'), nd = nx.createImageData(HZ, HZ), n = nd.data, st = 3.2;
- const Hs = i => H[i] + .15 * ch.shade[((i / HZ | 0) * 2) * SZ + (i % HZ) * 2];
+ const Hs = i => H[i] * (L.original ? 0 : 1) + .15 * ch.shade[((i / HZ | 0) * 2) * SZ + (i % HZ) * 2];
  for (let y = 0; y < HZ; y++) for (let x = 0; x < HZ; x++) {
   const i = y * HZ + x, l = Hs(y * HZ + Math.max(0, x - 1)), r = Hs(y * HZ + Math.min(HZ - 1, x + 1)), u = Hs(Math.max(0, y - 1) * HZ + x), d = Hs(Math.min(HZ - 1, y + 1) * HZ + x);
-  let vx = (l - r) * st, vy = (u - d) * st; const vz = 1, m = Math.hypot(vx, vy, vz);
+  let vx = (l - r) * st, vy = (u - d) * st; const vz = 1;
+  if (ch.srcNormal) { vx += (ch.srcNormal[i * 4] / 127.5 - 1) * 1.2; vy += (ch.srcNormal[i * 4 + 1] / 127.5 - 1) * 1.2; }
+  const m = Math.hypot(vx, vy, vz);
   n[i * 4] = (vx / m * .5 + .5) * 255; n[i * 4 + 1] = (vy / m * .5 + .5) * 255; n[i * 4 + 2] = (vz / m * .5 + .5) * 255; n[i * 4 + 3] = 255;
  }
  nx.putImageData(nd, 0, 0); ch.normalTex.needsUpdate = true;
@@ -304,19 +379,21 @@ const U = toonUniforms(T, TOON_LOOKS.sunday);
 function dress(ch) {
  const L = LOOKS[S.look], sh = SHADERS[S.shader];
  for (const h of ch.hulls) h.removeFromParent(); ch.hulls = [];
+ for (const h of ch.brush?.hulls || []) h.removeFromParent(); ch.brush = null;
  const mat = role => {
   const R = L.roles[role] || {}, col = ch.over[role] || R.color;
   if (BODY.includes(role)) return new T.MeshPhysicalMaterial({name: role, map: ch.colorTex, normalMap: ch.normalTex, normalScale: new T.Vector2(L.normal, L.normal),
    roughness: R.rough ?? .7, metalness: R.metal || 0, sheen: R.sheen || 0, sheenColor: new T.Color(R.sheenColor || '#fff'), sheenRoughness: .6,
-   clearcoat: R.clearcoat || 0, clearcoatRoughness: .3, side: T.DoubleSide});
+   clearcoat: R.clearcoat || 0, clearcoatRoughness: .3, side: T.DoubleSide, ...(ch.maps && L.original ? {roughnessMap: ch.maps.roughnessMap, roughness: 1} : {})});
   if (role === 'Light') return new T.MeshStandardMaterial({name: role, color: col, emissive: col, emissiveIntensity: R.glow ?? 1, roughness: .4});
   if (role === 'Glass') return new T.MeshPhysicalMaterial({name: role, color: col, roughness: R.rough ?? .1, metalness: .1, transparent: true, opacity: R.opacity ?? .5, clearcoat: 1});
   return new T.MeshPhysicalMaterial({name: role, color: col, roughness: R.rough ?? .5, metalness: R.metal || 0, clearcoat: R.clearcoat || 0});
  };
- for (const m of ch.meshes) { m.material.dispose?.(); m.material = mat(m.userData.role ||= m.material.name); }
+ for (const m of ch.meshes) m.material = m.userData.roles ? m.userData.roles.map(mat) : mat(m.userData.role ||= m.material.name);
  for (const g of ch.gear) { g.material = mat(g.userData.role); }
  if (sh.toon) toonify(T, ch.root, sh.toon, U);
  if (sh.ink) ch.hulls = inkHulls(T, ch.root, sh.toon);
+ if (sh.brush) ch.brush = paintBrush(T, ch.root, {accent: '#3fe6d4'}); // Arcane-style painted light (Shaders article thread)
 }
 function applyLook() {
  const L = LOOKS[S.look], sh = SHADERS[S.shader];
@@ -324,7 +401,7 @@ function applyLook() {
  scene.fog.color.set(L.fog); ground.material.color.set(L.ground); document.body.style.background = L.sky[1];
  scene.environment?.dispose(); scene.environment = envFor(L); scene.environmentIntensity = sh.toon ? .55 : 1;
  if (sh.toon) setToonLook(T, U, sh.toon);
- renderer.toneMappingExposure = sh.toon ? 1 : 1.1;
+ renderer.toneMappingExposure = sh.toon ? 1 : L.original ? .85 : 1.05;
  const order = [chars[S.char], ...Object.values(chars).filter(c => c !== chars[S.char])];
  for (const ch of order) { compose(ch); dress(ch); }
  drawLooks(); drawParts();
@@ -364,7 +441,7 @@ function hitAt(e) {
  return ray.intersectObjects([...ch.meshes, ...ch.gear], false)[0];
 }
 function dab(u, v) {
- const ch = chars[S.char], x = ch.strokes.getContext('2d'), px = u * SZ, py = v * SZ, r = S.size;
+ const ch = chars[S.char], {SZ} = ch, x = ch.strokes.getContext('2d'), px = u * SZ, py = v * SZ, r = S.size * SZ / 1024;
  const steps = last ? Math.max(1, Math.ceil(Math.hypot(px - last[0], py - last[1]) / (r * .35))) : 1;
  if (last && Math.hypot(px - last[0], py - last[1]) > SZ * .2) last = null; // jumped across a seam: start a new stroke
  for (let s = 1; s <= steps; s++) {
@@ -394,12 +471,12 @@ uvc.addEventListener('pointerdown', e => { uvPaint = true; last = null; uvc.setP
 uvc.addEventListener('pointermove', e => uvPaint && uvDab(e));
 uvc.addEventListener('pointerup', () => { uvPaint = false; last = null; });
 function uvDab(e) { const r = uvc.getBoundingClientRect(), u = (e.clientX - r.left) / r.width, v = (e.clientY - r.top) / r.height;
- const ch = chars[S.char], k = ch.role[(v * SZ | 0) * SZ + (u * SZ | 0)]; if (k < 0) { last = null; return; }
+ const ch = chars[S.char], {SZ} = ch, k = ch.role[(v * SZ | 0) * SZ + (u * SZ | 0)]; if (k < 0) { last = null; return; }
  if (S.tool === 'fill') { if (!uvPaint) return; uvPaint = false; fillPart(BODY[k]); return; } dab(u, v); }
 function drawUV() {
  if (!$('uvcard').classList.contains('on')) return;
  const ch = chars[S.char]; uvx.drawImage(ch.color, 0, 0, 512, 512);
- uvx.strokeStyle = 'rgba(255,255,255,.35)'; uvx.lineWidth = 1.2; uvx.save(); uvx.scale(.5, .5);
+ uvx.strokeStyle = 'rgba(255,255,255,.35)'; uvx.save(); uvx.scale(512 / ch.SZ, 512 / ch.SZ); uvx.lineWidth = 1.2 * ch.SZ / 512;
  for (const t of ch.tris) uvx.stroke(t.P); uvx.restore();
 }
 
@@ -451,7 +528,7 @@ $('tray').addEventListener('click', e => {
 });
 $('tray').addEventListener('input', e => { const r = e.target.dataset.part; if (!r) return; const ch = chars[S.char]; ch.over[r] = e.target.value;
  e.target.parentNode.style.background = e.target.value; if (BODY.includes(r)) compose(ch); dress(ch); });
-$('clearPaint').onclick = () => { const ch = chars[S.char]; ch.strokes.getContext('2d').clearRect(0, 0, SZ, SZ); ch.over = {}; compose(ch); dress(ch); drawParts(); };
+$('clearPaint').onclick = () => { const ch = chars[S.char]; ch.strokes.getContext('2d').clearRect(0, 0, ch.SZ, ch.SZ); ch.over = {}; compose(ch); dress(ch); drawParts(); };
 
 // ---------- portraits: the live character, from the same camera, as each orb's picture ----------
 const portraits = {};
@@ -480,7 +557,7 @@ const clock = new T.Clock();
 renderer.setAnimationLoop(() => {
  const dt = Math.min(clock.getDelta(), .05);
  walkers(dt);
- for (const ch of Object.values(chars)) if (ch.root.visible) ch.mixer.update(dt);
+ for (const ch of Object.values(chars)) if (ch.root.visible) { ch.mixer.update(dt); ch.brush?.update(clock.elapsedTime); }
  if (camTween) { camTween.t = Math.min(1, camTween.t + dt * 1.6); const k = 1 - Math.pow(1 - camTween.t, 3);
   camera.position.lerpVectors(camTween.p0, camTween.p1, k); controls.target.lerpVectors(camTween.t0, camTween.t1, k); if (camTween.t >= 1) camTween = null; }
  if (S.cam === 'walk' && !camTween) controls.target.lerp(chars[S.char].root.position.clone().setY(.9), .04);

@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-texture-studio-brush",
+      "date": "2026-10-23",
+      "title": "Texture Studio: a painted, Arcane-style light",
+      "line": "The Texture Studio's light button now has a fifth light, Painted Brush: brush-broken shadows, purple shade, a teal rim and broken ink. There's also an \"As modelled\" look that shows the original paint, ready for the Meshy-textured brutes.",
+      "image": "/whats-new/2026-10-23-texture-studio-brush.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A",
+      "threadTitle": "AW-STUDY-0040 - Texture Studio",
+      "tour": false,
+      "link": "/studies/texture-studio/?look=action&shader=brush"
+    },
+    {
       "id": "2026-10-23-puppet-studio-moves",
       "date": "2026-10-23",
       "title": "The puppet does all 50 Character Studio moves",

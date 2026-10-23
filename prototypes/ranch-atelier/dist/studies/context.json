@@ -1623,6 +1623,89 @@
     }
    ],
    "recorded": "2026-10-23, by the study as it was made"
+  },
+  "texture-studio": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Marvel Rivals identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/marvel-rivals.json",
+     "note": "Comic ink family: banded light, inverted-hull outlines, hand-painted surface. Its lesson, outline width follows distance, is how the ink shell thins here."
+    },
+    {
+     "k": "oracle",
+     "t": "Rendering study and the Shaders article",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/rendering/RENDERING_STUDY.md",
+     "note": "The toon set every look picks from (Sunday Toon, Ink, Clay as the cheap half of Storybook)."
+    },
+    {
+     "k": "oracle",
+     "t": "Blender techniques for stylised 3D",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/blender-techniques.md",
+     "note": "Two flat swatches per part (lit and shaded) instead of painted light; the pushed-out back-face shell for ink."
+    },
+    {
+     "k": "oracle",
+     "t": "AW-STUDY-0028 Storybook Light",
+     "href": "/studies/storybook/",
+     "note": "Warm terminator band and wrap light for clay skin: the Clay light here."
+    },
+    {
+     "k": "oracle",
+     "t": "AW-STUDY-0027 Brute Fight",
+     "href": "/studies/brute-fight/",
+     "note": "The rigged Meshy brutes, their 20-bone skeleton, walk and paint, reused as is."
+    },
+    {
+     "k": "devblog",
+     "t": "Junya Motomura, Guilty Gear Xrd's Art Style (GDC 2015)",
+     "href": "https://gdcvault.com/play/1022031/GuiltyGearXrd-s-Art-Style-The",
+     "note": "Hard lit/shaded threshold, flat colour per part, outlines from an inverted hull: the Saturday Action recipe."
+    },
+    {
+     "k": "devblog",
+     "t": "Arc System Works, Guilty Gear toon line control",
+     "href": "https://docswell.com/s/ASW_Academy/5LVY67-GG-Toonline-Eng",
+     "note": "Outline shells need smoothed normals or they crack at hard edges; the shell now averages normals first."
+    },
+    {
+     "k": "design",
+     "t": "American Cinematographer, A Textured World (Curse of the Were-Rabbit)",
+     "href": "https://theasc.com/magazine/oct05/curse/page2.html",
+     "note": "Aardman keeps the thumbprints and tool marks on purpose; the Plasticine look prints them into colour and bump."
+    },
+    {
+     "k": "design",
+     "t": "Peter Lord on Aardman's thumbiness",
+     "href": "https://www.shortlist.com/entertainment/aardmans-sir-peter-lord-on-his-journey-from-a-kitchen-table-to-hollywood-rocket-packs-and-how-the-studio-favours-thumbiness-over-ai",
+     "note": "Hand marks are the charm; never smooth them away."
+    },
+    {
+     "k": "tutorial",
+     "t": "three.js MeshToonMaterial and gradient maps (SBCODE)",
+     "href": "https://sbcode.net/threejs/meshtoonmaterial/",
+     "note": "Banded light from a few-texel ramp; we patch three's own physical material instead, so normal maps and sheen keep working."
+    },
+    {
+     "k": "tutorial",
+     "t": "Unity Toon Shader: base, 1st and 2nd shade colours",
+     "href": "https://docs.unity3d.com/Packages/com.unity.toonshader@0.9/manual/GettingStarted.html",
+     "note": "Per-part base and shade colours, which is how each look's part colours and posterised shading are set."
+    },
+    {
+     "k": "canon",
+     "t": "Shared toon kit",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/toon-kit.mjs",
+     "note": "Sunday, Clay and Ink light; ink shells now follow skinned meshes."
+    },
+    {
+     "k": "canon",
+     "t": "Painted Brush shader (Shaders article thread)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs",
+     "note": "The Arcane-inspired fifth light."
+    }
+   ],
+   "recorded": "2026-10-23, consulted while building"
   }
  }
 }
