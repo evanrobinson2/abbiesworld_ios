@@ -1,0 +1,2595 @@
+{
+ "study": "AW-STUDY-0016 - Bodies and Creatures",
+ "installment": "1c",
+ "title": "Anatomy at Gray's depth: bone, joint, muscle, fat and surface",
+ "version": "1.0",
+ "date": "2026-10-23",
+ "reads_with": "human-canon.json (landmarks and widths in heads), construction.json (how to build the forms), sources/gray1918/excerpts.json (the Gray passages)",
+ "how_to_use": "Model bone first: put every surface landmark where the canon puts it. Rig the joints with the types and ranges below. Lay the muscles by their origin and insertion (they decide the direction of every bulge), then the fat pads for the sex and build, then check the surface list for each view. Score with the checklist.",
+ "sources": {
+  "gray1918": "Henry Gray, Anatomy of the Human Body, 20th edition, revised by Warren H. Lewis (Lea & Febiger, 1918). Public domain. Read from the Wikisource transcription; each muscle and joint links to its scan page.",
+  "rom": "Ranges of motion: American Academy of Orthopaedic Surgeons averages as given in Norkin and White, Measurement of Joint Motion. Gray (1918) names each movement but gives few degrees.",
+  "fat": "Fat pad placement from Gray (1918, superficial fascia) and artistic anatomy (Richer, Artistic Anatomy, 1890); thickness from adult skinfold norms (half a skinfold), rounded.",
+  "plates": "Plates drawn by tools/bodies/anatomy.py from these attachments: anatomical position, the canon man, right half drawn and mirrored."
+ },
+ "plates": {
+  "skeleton": [
+   "img/anatomy-skeleton-front.svg",
+   "img/anatomy-skeleton-back.svg",
+   "img/anatomy-skeleton-side.svg"
+  ],
+  "muscles": [
+   "img/anatomy-muscles-front.svg",
+   "img/anatomy-muscles-back.svg",
+   "img/anatomy-muscles-side.svg"
+  ]
+ },
+ "bones": [
+  {
+   "id": "skull",
+   "name": "Skull (cranium and mandible)",
+   "group": "head",
+   "landmarks": [
+    {
+     "name": "frontal eminences",
+     "surface": true,
+     "form": "two soft bosses of the forehead"
+    },
+    {
+     "name": "superciliary arches",
+     "surface": true,
+     "form": "brow ridge, stronger on a man"
+    },
+    {
+     "name": "zygomatic arch",
+     "surface": true,
+     "form": "cheekbone ridge running back to the ear"
+    },
+    {
+     "name": "external occipital protuberance",
+     "surface": true,
+     "form": "bump at the back of the head where the neck meets it"
+    },
+    {
+     "name": "mastoid process",
+     "surface": true,
+     "form": "knob behind the ear lobe; the sternocleidomastoid starts here"
+    },
+    {
+     "name": "angle of the mandible",
+     "surface": true,
+     "form": "corner of the jaw, below the ear lobe"
+    },
+    {
+     "name": "mental protuberance",
+     "surface": true,
+     "form": "the chin"
+    }
+   ]
+  },
+  {
+   "id": "spine",
+   "name": "Vertebral column (7 cervical, 12 thoracic, 5 lumbar, sacrum, coccyx)",
+   "group": "trunk",
+   "landmarks": [
+    {
+     "name": "spinous process of C7 (vertebra prominens)",
+     "surface": true,
+     "form": "the first knob felt at the base of the neck"
+    },
+    {
+     "name": "thoracic spinous processes",
+     "surface": true,
+     "form": "a line of knobs in the back furrow, plainer when bent forward"
+    },
+    {
+     "name": "lumbar spinous processes",
+     "surface": false,
+     "form": "sunk in a groove between the two erector columns"
+    },
+    {
+     "name": "sacrum",
+     "surface": true,
+     "form": "flat triangle between the two dimples of Venus"
+    }
+   ],
+   "curves": "cervical lordosis forward, thoracic kyphosis back, lumbar lordosis forward, sacral curve back"
+  },
+  {
+   "id": "thorax",
+   "name": "Thorax (sternum, 12 pairs of ribs, costal cartilages)",
+   "group": "trunk",
+   "landmarks": [
+    {
+     "name": "jugular (suprasternal) notch",
+     "surface": true,
+     "form": "the pit of the neck",
+     "canon": "pit"
+    },
+    {
+     "name": "sternal angle",
+     "surface": true,
+     "form": "a cross ridge two fingers below the pit, at the 2nd rib"
+    },
+    {
+     "name": "xiphoid process",
+     "surface": true,
+     "form": "tip of the breastbone in the pit of the stomach"
+    },
+    {
+     "name": "costal arch",
+     "surface": true,
+     "form": "the lower rim of the ribcage, an inverted V",
+     "canon": "ribs"
+    },
+    {
+     "name": "lower ribs on the flank",
+     "surface": true,
+     "form": "serratus and oblique digitations interlock over them"
+    }
+   ],
+   "notes": "Egg-shaped, narrow above; ribs slope down and forward; the cartilages of ribs 7 to 10 make the costal arch."
+  },
+  {
+   "id": "clavicle",
+   "name": "Clavicle",
+   "group": "shoulder girdle",
+   "landmarks": [
+    {
+     "name": "sternal end",
+     "surface": true,
+     "form": "knob on each side of the pit"
+    },
+    {
+     "name": "shaft",
+     "surface": true,
+     "form": "a shallow S, convex forward on its inner two thirds"
+    },
+    {
+     "name": "acromial end",
+     "surface": true,
+     "form": "small step at the shoulder point",
+     "canon": "acromion"
+    }
+   ]
+  },
+  {
+   "id": "scapula",
+   "name": "Scapula",
+   "group": "shoulder girdle",
+   "landmarks": [
+    {
+     "name": "acromion",
+     "surface": true,
+     "form": "the shoulder point, the top corner of the shoulder",
+     "canon": "acromion"
+    },
+    {
+     "name": "spine of the scapula",
+     "surface": true,
+     "form": "a ridge across the upper shoulder blade; shows as a groove in a muscular back"
+    },
+    {
+     "name": "medial (vertebral) border",
+     "surface": true,
+     "form": "edge of the shoulder blade beside the spine, about 2 inches out"
+    },
+    {
+     "name": "inferior angle",
+     "surface": true,
+     "form": "the point of the shoulder blade, at the level of the 7th rib"
+    },
+    {
+     "name": "coracoid process",
+     "surface": false,
+     "form": "felt in the hollow below the outer clavicle"
+    }
+   ]
+  },
+  {
+   "id": "humerus",
+   "name": "Humerus",
+   "group": "arm",
+   "landmarks": [
+    {
+     "name": "greater tubercle",
+     "surface": false,
+     "form": "under the deltoid; makes the widest point of the shoulders"
+    },
+    {
+     "name": "deltoid tuberosity",
+     "surface": false,
+     "form": "halfway down the outer arm, where the deltoid ends"
+    },
+    {
+     "name": "medial epicondyle",
+     "surface": true,
+     "form": "the sharp inner knob of the elbow",
+     "canon": "elbow"
+    },
+    {
+     "name": "lateral epicondyle",
+     "surface": true,
+     "form": "the smaller outer knob, in a dimple when the arm is straight"
+    }
+   ]
+  },
+  {
+   "id": "ulna",
+   "name": "Ulna",
+   "group": "forearm",
+   "landmarks": [
+    {
+     "name": "olecranon",
+     "surface": true,
+     "form": "point of the elbow"
+    },
+    {
+     "name": "posterior border",
+     "surface": true,
+     "form": "the ulnar furrow along the back of the forearm, bone right under the skin"
+    },
+    {
+     "name": "head of the ulna",
+     "surface": true,
+     "form": "knob on the little-finger side of the back of the wrist"
+    },
+    {
+     "name": "styloid process of the ulna",
+     "surface": true,
+     "form": "small point below the head"
+    }
+   ]
+  },
+  {
+   "id": "radius",
+   "name": "Radius",
+   "group": "forearm",
+   "landmarks": [
+    {
+     "name": "head of the radius",
+     "surface": true,
+     "form": "turns under the thumb just below the lateral epicondyle"
+    },
+    {
+     "name": "styloid process of the radius",
+     "surface": true,
+     "form": "the thumb-side knob of the wrist, lower than the ulnar one",
+     "canon": "wrist"
+    }
+   ]
+  },
+  {
+   "id": "hand",
+   "name": "Carpus, metacarpus and phalanges",
+   "group": "hand",
+   "landmarks": [
+    {
+     "name": "pisiform",
+     "surface": true,
+     "form": "pea-sized knob at the heel of the hand, little-finger side"
+    },
+    {
+     "name": "metacarpal heads",
+     "surface": true,
+     "form": "the knuckles, an arc highest at the middle finger"
+    },
+    {
+     "name": "phalangeal joints",
+     "surface": true,
+     "form": "finger joints, each a little box with a crease over it"
+    }
+   ],
+   "notes": "Hand detail in human-canon.json \"hand\"."
+  },
+  {
+   "id": "pelvis",
+   "name": "Hip bone (ilium, ischium, pubis) and sacrum",
+   "group": "pelvis",
+   "landmarks": [
+    {
+     "name": "iliac crest",
+     "surface": true,
+     "form": "the hip bone ridge; on a lean man the flank pad rolls over it",
+     "canon": "iliac"
+    },
+    {
+     "name": "anterior superior iliac spine (ASIS)",
+     "surface": true,
+     "form": "front point of the hip bone; the inguinal fold starts here",
+     "canon": "asis"
+    },
+    {
+     "name": "posterior superior iliac spine",
+     "surface": true,
+     "form": "a dimple of Venus each side of the sacrum"
+    },
+    {
+     "name": "pubic symphysis",
+     "surface": false,
+     "form": "the midline under the lower belly"
+    },
+    {
+     "name": "ischial tuberosity",
+     "surface": false,
+     "form": "the sitting bone, under the gluteal fold"
+    }
+   ],
+   "notes": "Wider, shallower and tilted further forward in a woman: the trochanters become the widest point."
+  },
+  {
+   "id": "femur",
+   "name": "Femur",
+   "group": "thigh",
+   "landmarks": [
+    {
+     "name": "greater trochanter",
+     "surface": true,
+     "form": "a flat or hollow spot on the side of the hip, a hand below the iliac crest",
+     "canon": "troch"
+    },
+    {
+     "name": "shaft",
+     "surface": false,
+     "form": "slants in about 10 degrees from hip to knee (more on a woman)"
+    },
+    {
+     "name": "femoral condyles",
+     "surface": true,
+     "form": "the sides of the knee; the inner one lower and bigger",
+     "canon": "knee"
+    },
+    {
+     "name": "adductor tubercle",
+     "surface": true,
+     "form": "small knob above the inner condyle"
+    }
+   ],
+   "angles": {
+    "neck_shaft_deg": 125,
+    "femoral_anteversion_deg": 12,
+    "shaft_to_vertical_deg": 9
+   }
+  },
+  {
+   "id": "patella",
+   "name": "Patella",
+   "group": "knee",
+   "landmarks": [
+    {
+     "name": "patella",
+     "surface": true,
+     "form": "a rounded triangle, point down; sits above the knee joint line when straight",
+     "canon": "knee"
+    }
+   ]
+  },
+  {
+   "id": "tibia",
+   "name": "Tibia",
+   "group": "leg",
+   "landmarks": [
+    {
+     "name": "tibial tuberosity",
+     "surface": true,
+     "form": "a bump a hand below the kneecap; the patellar ligament ends on it"
+    },
+    {
+     "name": "anterior border (shin)",
+     "surface": true,
+     "form": "the shin: a sharp edge, slightly S-shaped, bone right under the skin"
+    },
+    {
+     "name": "medial surface",
+     "surface": true,
+     "form": "flat face of the shin, facing in and forward"
+    },
+    {
+     "name": "medial malleolus",
+     "surface": true,
+     "form": "the inner ankle bone; higher and further forward than the outer",
+     "canon": "ankle"
+    }
+   ]
+  },
+  {
+   "id": "fibula",
+   "name": "Fibula",
+   "group": "leg",
+   "landmarks": [
+    {
+     "name": "head of the fibula",
+     "surface": true,
+     "form": "knob on the outer side just below the knee, where the biceps femoris ends"
+    },
+    {
+     "name": "lateral malleolus",
+     "surface": true,
+     "form": "the outer ankle bone; lower and further back than the inner"
+    }
+   ]
+  },
+  {
+   "id": "foot",
+   "name": "Tarsus, metatarsus and phalanges",
+   "group": "foot",
+   "landmarks": [
+    {
+     "name": "calcaneus",
+     "surface": true,
+     "form": "the heel; sticks out behind the leg line"
+    },
+    {
+     "name": "navicular tuberosity",
+     "surface": true,
+     "form": "knob on the inner arch in front of the ankle"
+    },
+    {
+     "name": "base of the 5th metatarsal",
+     "surface": true,
+     "form": "knob halfway along the outer edge of the foot"
+    },
+    {
+     "name": "head of the 1st metatarsal",
+     "surface": true,
+     "form": "the ball of the big toe"
+    }
+   ],
+   "notes": "Arch on the inner side only; the outer edge rests on the ground."
+  }
+ ],
+ "joints": [
+  {
+   "id": "temporomandibular",
+   "name": "Jaw (temporomandibular)",
+   "gray_type": "ginglymoarthrodial (hinge and glide)",
+   "excerpt": "temporomandibular",
+   "rom": {
+    "mouth_opening_mm": 45,
+    "protrusion_mm": 7,
+    "side_shift_mm": 10
+   },
+   "rig": "hinge plus forward slide: the jaw drops and moves forward when the mouth opens wide",
+   "gray_page": 298,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/298"
+  },
+  {
+   "id": "neck",
+   "name": "Neck (atlanto-occipital, atlanto-axial and cervical spine)",
+   "gray_type": "condyloid, trochoid (pivot) and arthrodial",
+   "excerpt": "atlantoaxial",
+   "rom": {
+    "flexion": 45,
+    "extension": 45,
+    "side_bend": 45,
+    "rotation": 70
+   },
+   "rig": "nod at the skull, turn at the atlas, the rest spread over C2 to C7",
+   "gray_page": 295,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/295"
+  },
+  {
+   "id": "trunk",
+   "name": "Thoracic and lumbar spine",
+   "gray_type": "amphiarthroses (discs) and arthrodial facets",
+   "excerpt": "vertebral_column",
+   "rom": {
+    "flexion": 80,
+    "extension": 25,
+    "side_bend": 35,
+    "rotation": 45
+   },
+   "rig": "bend mostly in the lumbar spine, turn mostly in the thoracic; the ribcage and pelvis stay rigid",
+   "gray_page": 291,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/291"
+  },
+  {
+   "id": "sternoclavicular",
+   "name": "Sternoclavicular",
+   "gray_type": "double arthrodial (saddle with a disc)",
+   "excerpt": "sternoclavicular",
+   "rom": {
+    "elevation": 45,
+    "depression": 5,
+    "protraction": 15,
+    "retraction": 15,
+    "axial_rotation": 40
+   },
+   "rig": "the only bony link of the arm to the trunk: the clavicle rises in a shrug and swings in a reach",
+   "gray_page": 314,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/314"
+  },
+  {
+   "id": "scapulothoracic",
+   "name": "Shoulder blade on the ribcage",
+   "gray_type": "not a true joint: muscles hold the scapula on the ribs",
+   "excerpt": "acromioclavicular",
+   "rom": {
+    "upward_rotation": 60,
+    "elevation_cm": 10,
+    "protraction_cm": 15
+   },
+   "rig": "a third of arm raising is the scapula turning; rotate it, do not only rotate the humerus",
+   "gray_page": 316,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/316"
+  },
+  {
+   "id": "shoulder",
+   "name": "Shoulder (glenohumeral)",
+   "gray_type": "enarthrosis (ball and socket)",
+   "excerpt": "shoulder",
+   "rom": {
+    "flexion": 180,
+    "extension": 60,
+    "abduction": 180,
+    "adduction": 30,
+    "external_rotation": 90,
+    "internal_rotation": 70
+   },
+   "rig": "180 degrees of raising is about 120 here plus 60 from the scapula (2 to 1); the deltoid bunches, the armpit hollow opens",
+   "gray_page": 319,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/319"
+  },
+  {
+   "id": "elbow",
+   "name": "Elbow (humero-ulnar and humero-radial)",
+   "gray_type": "ginglymus (hinge)",
+   "excerpt": "elbow",
+   "rom": {
+    "flexion": 150,
+    "extension": 0,
+    "hyperextension": 10,
+    "carrying_angle_male": 10,
+    "carrying_angle_female": 15
+   },
+   "rig": "one hinge axis; forearm angles out in extension (the carrying angle) and lines up with the arm in flexion",
+   "gray_page": 322,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/322"
+  },
+  {
+   "id": "forearm",
+   "name": "Forearm (proximal and distal radioulnar)",
+   "gray_type": "trochoid (pivot)",
+   "excerpt": "proximal_radioulnar",
+   "rom": {
+    "pronation": 80,
+    "supination": 80
+   },
+   "rig": "the radius crosses over the ulna; twist the forearm along its length, never at the wrist",
+   "gray_page": 325,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/325"
+  },
+  {
+   "id": "wrist",
+   "name": "Wrist (radiocarpal and midcarpal)",
+   "gray_type": "condyloid",
+   "excerpt": "wrist",
+   "rom": {
+    "flexion": 80,
+    "extension": 70,
+    "radial_deviation": 20,
+    "ulnar_deviation": 30
+   },
+   "rig": "two axes, no twist; bends further to the little-finger side",
+   "gray_page": 328,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/328"
+  },
+  {
+   "id": "thumb",
+   "name": "Thumb carpometacarpal",
+   "gray_type": "saddle",
+   "excerpt": "hand_and_wrist",
+   "rom": {
+    "flexion": 15,
+    "extension": 20,
+    "abduction": 70,
+    "opposition": "tip to little-finger tip"
+   },
+   "rig": "the thumb swings across the palm on its own saddle joint at the wrist",
+   "gray_page": 330,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/330"
+  },
+  {
+   "id": "mcp",
+   "name": "Knuckles (metacarpophalangeal)",
+   "gray_type": "condyloid",
+   "excerpt": "metacarpophalangeal",
+   "rom": {
+    "flexion": 90,
+    "extension": 20,
+    "abduction": 20
+   },
+   "rig": "fingers spread only when straight",
+   "gray_page": 333,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/333"
+  },
+  {
+   "id": "finger",
+   "name": "Finger joints (interphalangeal)",
+   "gray_type": "ginglymus (hinge)",
+   "excerpt": "interphalangeal_hand",
+   "rom": {
+    "pip_flexion": 100,
+    "dip_flexion": 90,
+    "dip_extension": 10
+   },
+   "rig": "hinges only; a curling finger makes a spiral toward the base of the thumb",
+   "gray_page": 333,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/333"
+  },
+  {
+   "id": "hip",
+   "name": "Hip",
+   "gray_type": "enarthrosis (ball and socket)",
+   "excerpt": "hip",
+   "rom": {
+    "flexion": 120,
+    "extension": 30,
+    "abduction": 45,
+    "adduction": 30,
+    "internal_rotation": 45,
+    "external_rotation": 45
+   },
+   "rig": "a deep socket: extension is short, so a leg swinging back is helped by the pelvis tilting",
+   "gray_page": 338,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/338"
+  },
+  {
+   "id": "knee",
+   "name": "Knee",
+   "gray_type": "ginglymus (hinge) with some rotation, a condyloid joint in Gray",
+   "excerpt": "knee",
+   "rom": {
+    "flexion": 135,
+    "extension": 0,
+    "hyperextension": 5,
+    "rotation_when_bent": 30
+   },
+   "rig": "locks with a small twist at full extension; the kneecap slides down its groove as it bends",
+   "gray_page": 346,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/346"
+  },
+  {
+   "id": "ankle",
+   "name": "Ankle (talocrural)",
+   "gray_type": "ginglymus (hinge)",
+   "excerpt": "ankle",
+   "rom": {
+    "dorsiflexion": 20,
+    "plantarflexion": 50
+   },
+   "rig": "hinge on a slanted axis through the two malleoli: the foot points slightly out as it flexes",
+   "gray_page": 351,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/351"
+  },
+  {
+   "id": "subtalar",
+   "name": "Subtalar and midtarsal",
+   "gray_type": "arthrodial",
+   "excerpt": "subtalar",
+   "rom": {
+    "inversion": 35,
+    "eversion": 15
+   },
+   "rig": "the foot rolls in and out here, not at the ankle",
+   "gray_page": 353,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/353"
+  },
+  {
+   "id": "toes",
+   "name": "Toes (metatarsophalangeal)",
+   "gray_type": "condyloid",
+   "excerpt": "metatarsophalangeal",
+   "rom": {
+    "big_toe_extension": 70,
+    "big_toe_flexion": 45
+   },
+   "rig": "the toe break: the foot bends here in every step",
+   "gray_page": 359,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/359"
+  }
+ ],
+ "muscles": [
+  {
+   "id": "masseter",
+   "name": "Masseter",
+   "gray": "Masseter",
+   "region": "head",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "zygomatic arch",
+   "insertion": "angle and outer face of the mandible ramus",
+   "action": "closes the jaw",
+   "nerve": "mandibular nerve (V3)",
+   "surface": "squares the back of the jaw; bulges when the teeth clench",
+   "gray_page": 385,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/385"
+  },
+  {
+   "id": "temporalis",
+   "name": "Temporalis",
+   "gray": "Temporalis",
+   "region": "head",
+   "layer": 1,
+   "views": [
+    "side"
+   ],
+   "origin": "temporal fossa",
+   "insertion": "coronoid process of the mandible",
+   "action": "closes the jaw, pulls it back",
+   "nerve": "mandibular nerve (V3)",
+   "surface": "fills the temple; fans out above the ear",
+   "gray_page": 386,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/386"
+  },
+  {
+   "id": "platysma",
+   "name": "Platysma",
+   "gray": "Platysma",
+   "region": "neck",
+   "layer": 1,
+   "views": [
+    "front"
+   ],
+   "origin": "fascia over the upper chest",
+   "insertion": "lower border of the mandible, skin of the lower face",
+   "action": "tenses the neck skin, pulls the mouth corners down",
+   "nerve": "facial nerve (VII)",
+   "surface": "thin sheet; shows only as vertical cords in strain",
+   "gray_page": 388,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/388"
+  },
+  {
+   "id": "sternocleidomastoid",
+   "name": "Sternocleidomastoid",
+   "gray": "Sternocleidomastoideus",
+   "region": "neck",
+   "layer": 1,
+   "views": [
+    "front",
+    "side",
+    "back"
+   ],
+   "origin": "two heads: front of the manubrium (sternum) and inner third of the clavicle",
+   "insertion": "mastoid process and the superior nuchal line",
+   "action": "one side: tilts the head to its side and turns the face away; both: flex the neck",
+   "nerve": "accessory nerve (XI), C2 and C3",
+   "surface": "the strap from behind the ear to the pit of the neck; the two make the V of the neck and a hollow between their heads",
+   "gray_page": 390,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/390"
+  },
+  {
+   "id": "scalenes",
+   "name": "Scalenes",
+   "gray": "Scalenus anterior",
+   "region": "neck",
+   "layer": 2,
+   "views": [
+    "side"
+   ],
+   "origin": "transverse processes of C3 to C6",
+   "insertion": "first and second ribs",
+   "action": "raise the first ribs, bend the neck to the side",
+   "nerve": "cervical nerves C4 to C6",
+   "surface": "fill the triangle behind the sternocleidomastoid",
+   "gray_page": 396,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/396"
+  },
+  {
+   "id": "splenius",
+   "name": "Splenius capitis",
+   "gray": "Splenius capitis",
+   "region": "neck",
+   "layer": 2,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "ligamentum nuchae and spines of C7 to T3",
+   "insertion": "mastoid process and the occipital bone",
+   "action": "extends the head, turns it to its own side",
+   "nerve": "dorsal rami of the middle cervical nerves",
+   "surface": "a band under the trapezius at the back of the neck",
+   "gray_page": 397,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/397"
+  },
+  {
+   "id": "trapezius",
+   "name": "Trapezius",
+   "gray": "Trapezius",
+   "region": "back",
+   "layer": 1,
+   "views": [
+    "back",
+    "side",
+    "front"
+   ],
+   "origin": "external occipital protuberance, ligamentum nuchae and the spines of C7 to T12",
+   "insertion": "outer third of the clavicle, acromion and spine of the scapula",
+   "action": "upper: shrugs and turns the scapula up; middle: pulls it in; lower: pulls it down",
+   "nerve": "accessory nerve (XI), C3 and C4",
+   "surface": "a kite-shaped sheet; the slope from neck to shoulder; a tendinous diamond at C7 shows as a flat spot",
+   "gray_page": 432,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/432"
+  },
+  {
+   "id": "latissimus",
+   "name": "Latissimus dorsi",
+   "gray": "Latissimus dorsi",
+   "region": "back",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "spines of T7 to the sacrum by the thoracolumbar fascia, iliac crest, lower ribs and the inferior angle of the scapula",
+   "insertion": "floor of the intertubercular groove of the humerus",
+   "action": "pulls the arm down, back and inward (climbing, rowing)",
+   "nerve": "thoracodorsal nerve",
+   "surface": "the wing of the back; makes the V taper and the back wall of the armpit",
+   "gray_page": 432,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/432"
+  },
+  {
+   "id": "rhomboids",
+   "name": "Rhomboids (major and minor)",
+   "gray": "Rhomboideus major",
+   "region": "back",
+   "layer": 2,
+   "views": [
+    "back"
+   ],
+   "origin": "spines of C7 to T5",
+   "insertion": "medial border of the scapula",
+   "action": "pull the scapula toward the spine and up",
+   "nerve": "dorsal scapular nerve",
+   "surface": "under the trapezius; a ridge between the shoulder blades when they pinch together",
+   "gray_page": 434,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/434"
+  },
+  {
+   "id": "levator",
+   "name": "Levator scapulae",
+   "gray": "Levator scapulae",
+   "region": "neck",
+   "layer": 2,
+   "views": [
+    "side",
+    "back"
+   ],
+   "origin": "transverse processes of C1 to C4",
+   "insertion": "superior angle of the scapula",
+   "action": "lifts the scapula",
+   "nerve": "dorsal scapular nerve, C3 and C4",
+   "surface": "part of the slope of the neck, behind the sternocleidomastoid",
+   "gray_page": 435,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/435"
+  },
+  {
+   "id": "erector",
+   "name": "Erector spinae",
+   "gray": "Sacrospinalis",
+   "region": "back",
+   "layer": 2,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "sacrum, iliac crest and lumbar spines",
+   "insertion": "ribs and spines and transverse processes all the way up to the skull",
+   "action": "straightens and arches the back, bends it to the side",
+   "nerve": "dorsal rami of the spinal nerves",
+   "surface": "two thick columns either side of the spine in the lower back; the furrow lies between them",
+   "gray_page": 399,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/399"
+  },
+  {
+   "id": "pec_major",
+   "name": "Pectoralis major",
+   "gray": "Pectoralis major",
+   "region": "chest",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "inner half of the clavicle, front of the sternum, cartilages of ribs 1 to 6 and the external oblique aponeurosis",
+   "insertion": "crest of the greater tubercle of the humerus (fibers twist: the lowest insert highest)",
+   "action": "pulls the arm across the chest, rotates it in; clavicular part raises it",
+   "nerve": "medial and lateral pectoral nerves (Gray: anterior thoracic)",
+   "surface": "the chest plate; its lower border is the front wall of the armpit; a clavicular and a sternal part",
+   "gray_page": 436,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/436"
+  },
+  {
+   "id": "pec_minor",
+   "name": "Pectoralis minor",
+   "gray": "Pectoralis minor",
+   "region": "chest",
+   "layer": 3,
+   "views": [],
+   "origin": "ribs 3 to 5",
+   "insertion": "coracoid process of the scapula",
+   "action": "pulls the scapula forward and down",
+   "nerve": "medial pectoral nerve",
+   "surface": "hidden; fills out the upper chest under the pectoralis major",
+   "gray_page": 438,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/438"
+  },
+  {
+   "id": "serratus",
+   "name": "Serratus anterior",
+   "gray": "Serratus anterior",
+   "region": "trunk",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "outer faces of ribs 1 to 8 or 9",
+   "insertion": "medial border of the scapula, front face",
+   "action": "pulls the scapula forward round the ribs (punching), turns it up",
+   "nerve": "long thoracic nerve",
+   "surface": "saw-tooth fingers on the side of the ribcage below the armpit; 4 show, interlocking with the external oblique",
+   "gray_page": 438,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/438"
+  },
+  {
+   "id": "ext_oblique",
+   "name": "External oblique",
+   "gray": "Obliquus externus",
+   "region": "abdomen",
+   "layer": 1,
+   "views": [
+    "front",
+    "side",
+    "back"
+   ],
+   "origin": "outer faces of the lower 8 ribs, interlocking with the serratus and latissimus",
+   "insertion": "front half of the iliac crest and, by its aponeurosis, the linea alba and the inguinal ligament",
+   "action": "bends and turns the trunk, compresses the belly",
+   "nerve": "lower intercostal nerves (T7 to T12), iliohypogastric",
+   "surface": "the flank; its fleshy part ends above the iliac crest in the flank pad; fibers run down and forward like hands in front pockets",
+   "gray_page": 410,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/410"
+  },
+  {
+   "id": "rectus_abdominis",
+   "name": "Rectus abdominis",
+   "gray": "Rectus abdominis",
+   "region": "abdomen",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "crest of the pubis and the symphysis",
+   "insertion": "cartilages of ribs 5 to 7 and the xiphoid",
+   "action": "bends the trunk forward",
+   "nerve": "lower intercostal nerves (T7 to T12)",
+   "surface": "the \"six-pack\": three tendinous intersections above the navel (one at it, one at the xiphoid and one between), none below; the lower belly is one smooth form",
+   "gray_page": 415,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/415"
+  },
+  {
+   "id": "deltoid",
+   "name": "Deltoid",
+   "gray": "Deltoideus",
+   "region": "shoulder",
+   "layer": 1,
+   "views": [
+    "front",
+    "back",
+    "side"
+   ],
+   "origin": "outer third of the clavicle, acromion and spine of the scapula (the same line the trapezius ends on)",
+   "insertion": "deltoid tuberosity, halfway down the outer humerus",
+   "action": "raises the arm: front part forward, middle part sideways, back part backward",
+   "nerve": "axillary nerve",
+   "surface": "caps the shoulder; a thick V wedge into the outer arm; the middle part is multipennate and bulges in bands",
+   "gray_page": 439,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/439"
+  },
+  {
+   "id": "supraspinatus",
+   "name": "Supraspinatus",
+   "gray": "Supraspinatus",
+   "region": "shoulder",
+   "layer": 3,
+   "views": [],
+   "origin": "supraspinous fossa",
+   "insertion": "top facet of the greater tubercle",
+   "action": "starts raising the arm",
+   "nerve": "suprascapular nerve",
+   "surface": "under the trapezius; fills the hollow above the spine of the scapula",
+   "gray_page": 440,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/440"
+  },
+  {
+   "id": "infraspinatus",
+   "name": "Infraspinatus",
+   "gray": "Infraspinatus",
+   "region": "shoulder",
+   "layer": 1,
+   "views": [
+    "back"
+   ],
+   "origin": "infraspinous fossa",
+   "insertion": "middle facet of the greater tubercle",
+   "action": "rotates the arm out",
+   "nerve": "suprascapular nerve",
+   "surface": "a flat triangle on the shoulder blade below the spine",
+   "gray_page": 441,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/441"
+  },
+  {
+   "id": "teres_minor",
+   "name": "Teres minor",
+   "gray": "Teres minor",
+   "region": "shoulder",
+   "layer": 1,
+   "views": [
+    "back"
+   ],
+   "origin": "upper outer border of the scapula",
+   "insertion": "lowest facet of the greater tubercle",
+   "action": "rotates the arm out",
+   "nerve": "axillary nerve",
+   "surface": "a small roll below the infraspinatus",
+   "gray_page": 441,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/441"
+  },
+  {
+   "id": "teres_major",
+   "name": "Teres major",
+   "gray": "Teres major",
+   "region": "shoulder",
+   "layer": 1,
+   "views": [
+    "back"
+   ],
+   "origin": "inferior angle of the scapula",
+   "insertion": "medial lip of the intertubercular groove",
+   "action": "pulls the arm in and back, rotates it in",
+   "nerve": "lower subscapular nerve",
+   "surface": "a thick roll from the shoulder-blade point into the armpit, above the latissimus",
+   "gray_page": 442,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/442"
+  },
+  {
+   "id": "subscapularis",
+   "name": "Subscapularis",
+   "gray": "Subscapularis",
+   "region": "shoulder",
+   "layer": 3,
+   "views": [],
+   "origin": "subscapular fossa (front face of the scapula)",
+   "insertion": "lesser tubercle of the humerus",
+   "action": "rotates the arm in",
+   "nerve": "upper and lower subscapular nerves",
+   "surface": "hidden between the scapula and the ribs",
+   "gray_page": 440,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/440"
+  },
+  {
+   "id": "coracobrachialis",
+   "name": "Coracobrachialis",
+   "gray": "Coracobrachialis",
+   "region": "arm",
+   "layer": 2,
+   "views": [
+    "front"
+   ],
+   "origin": "coracoid process",
+   "insertion": "middle of the inner humerus",
+   "action": "flexes and adducts the arm",
+   "nerve": "musculocutaneous nerve",
+   "surface": "a small roll in the armpit when the arm is raised",
+   "gray_page": 443,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/443"
+  },
+  {
+   "id": "biceps",
+   "name": "Biceps brachii",
+   "gray": "Biceps brachii",
+   "region": "arm",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "long head: above the glenoid; short head: coracoid process",
+   "insertion": "radial tuberosity, and the bicipital aponeurosis into the forearm fascia",
+   "action": "bends the elbow and turns the palm up (supinates)",
+   "nerve": "musculocutaneous nerve",
+   "surface": "a long oval on the front of the arm, ending in a cord at the elbow crease; peaks when the palm turns up",
+   "gray_page": 443,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/443"
+  },
+  {
+   "id": "brachialis",
+   "name": "Brachialis",
+   "gray": "Brachialis",
+   "region": "arm",
+   "layer": 2,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "lower half of the front of the humerus",
+   "insertion": "coronoid process and tuberosity of the ulna",
+   "action": "bends the elbow",
+   "nerve": "musculocutaneous nerve",
+   "surface": "shows either side of the biceps above the elbow; widens the lower arm from the side",
+   "gray_page": 444,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/444"
+  },
+  {
+   "id": "triceps",
+   "name": "Triceps brachii",
+   "gray": "Triceps brachii",
+   "region": "arm",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "long head: below the glenoid; lateral head: back of the humerus above the radial groove; medial head: below it",
+   "insertion": "olecranon of the ulna by a broad flat tendon",
+   "action": "straightens the elbow",
+   "nerve": "radial nerve",
+   "surface": "a horseshoe on the back of the arm: two heads above a flat tendon plate that fills the lower third",
+   "gray_page": 444,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/444"
+  },
+  {
+   "id": "anconeus",
+   "name": "Anconeus",
+   "gray": "Anconaeus",
+   "region": "forearm",
+   "layer": 1,
+   "views": [
+    "back"
+   ],
+   "origin": "lateral epicondyle (back)",
+   "insertion": "side of the olecranon and the upper ulna",
+   "action": "helps straighten the elbow",
+   "nerve": "radial nerve",
+   "surface": "a small triangle beside the point of the elbow",
+   "gray_page": 454,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/454"
+  },
+  {
+   "id": "pronator_teres",
+   "name": "Pronator teres",
+   "gray": "Pronator teres",
+   "region": "forearm",
+   "layer": 1,
+   "views": [
+    "front"
+   ],
+   "origin": "medial epicondyle and the coronoid process",
+   "insertion": "middle of the outer radius",
+   "action": "turns the palm down",
+   "nerve": "median nerve",
+   "surface": "the inner edge of the elbow hollow, running across to the outer forearm",
+   "gray_page": 446,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/446"
+  },
+  {
+   "id": "flexors",
+   "name": "Forearm flexors (flexor carpi radialis, palmaris longus, flexor carpi ulnaris, flexor digitorum superficialis)",
+   "gray": "Flexor carpi radialis",
+   "region": "forearm",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "common flexor origin on the medial epicondyle",
+   "insertion": "front of the wrist and hand: 2nd metacarpal, palmar fascia, pisiform, middle phalanges",
+   "action": "bend the wrist and fingers",
+   "nerve": "median nerve; flexor carpi ulnaris by the ulnar nerve",
+   "surface": "the fleshy inner mass of the forearm, bellies in the upper half, tendons below; the palmaris and flexor carpi radialis tendons stand out at the wrist",
+   "gray_page": 446,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/446"
+  },
+  {
+   "id": "brachioradialis",
+   "name": "Brachioradialis",
+   "gray": "Brachioradialis",
+   "region": "forearm",
+   "layer": 1,
+   "views": [
+    "front",
+    "side",
+    "back"
+   ],
+   "origin": "lateral supracondylar ridge of the humerus, a third of the way up the arm",
+   "insertion": "styloid process of the radius",
+   "action": "bends the elbow, most in mid-turn (thumb up)",
+   "nerve": "radial nerve",
+   "surface": "the outer bulge just below the elbow; with the extensor carpi radialis it makes the \"outer mass\" of the forearm, separate from the extensors",
+   "gray_page": 451,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/451"
+  },
+  {
+   "id": "ecr",
+   "name": "Extensor carpi radialis longus and brevis",
+   "gray": "Extensor carpi radialis longus",
+   "region": "forearm",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "lateral supracondylar ridge and lateral epicondyle",
+   "insertion": "bases of the 2nd and 3rd metacarpals",
+   "action": "extend the wrist and tilt it to the thumb side",
+   "nerve": "radial nerve",
+   "surface": "continue the brachioradialis down the outer forearm",
+   "gray_page": 452,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/452"
+  },
+  {
+   "id": "extensors",
+   "name": "Extensor digitorum and extensor carpi ulnaris",
+   "gray": "Extensor digitorum communis",
+   "region": "forearm",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "common extensor origin on the lateral epicondyle",
+   "insertion": "extensor expansions of the fingers; base of the 5th metacarpal",
+   "action": "straighten the fingers and the wrist",
+   "nerve": "posterior interosseous (radial) nerve",
+   "surface": "the back of the forearm; tendons fan over the back of the hand",
+   "gray_page": 452,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/452"
+  },
+  {
+   "id": "apl",
+   "name": "Abductor pollicis longus and extensor pollicis brevis",
+   "gray": "Abductor pollicis longus",
+   "region": "forearm",
+   "layer": 1,
+   "views": [
+    "back",
+    "front",
+    "side"
+   ],
+   "origin": "back of the radius and ulna, middle third",
+   "insertion": "base of the thumb metacarpal and its first phalanx",
+   "action": "pull the thumb out and back",
+   "nerve": "posterior interosseous nerve",
+   "surface": "a small diagonal ridge crossing the lower radius, toward the thumb",
+   "gray_page": 455,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/455"
+  },
+  {
+   "id": "iliopsoas",
+   "name": "Iliopsoas (psoas major and iliacus)",
+   "gray": "Psoas major",
+   "region": "hip",
+   "layer": 3,
+   "views": [
+    "front"
+   ],
+   "origin": "lumbar vertebrae and the iliac fossa",
+   "insertion": "lesser trochanter",
+   "action": "the strongest hip flexor",
+   "nerve": "femoral nerve and lumbar plexus",
+   "surface": "deep; shows only in the floor of the triangle below the groin",
+   "gray_page": 467,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/467"
+  },
+  {
+   "id": "sartorius",
+   "name": "Sartorius",
+   "gray": "Sartorius",
+   "region": "thigh",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "anterior superior iliac spine",
+   "insertion": "upper inner face of the tibia (pes anserinus)",
+   "action": "flexes, abducts and turns out the hip, bends the knee (sitting cross-legged)",
+   "nerve": "femoral nerve",
+   "surface": "the longest muscle: a strap across the front of the thigh in a long S, dividing the quads from the adductors",
+   "gray_page": 470,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/470"
+  },
+  {
+   "id": "tfl",
+   "name": "Tensor fasciae latae",
+   "gray": "Tensor fasciae latae",
+   "region": "hip",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "outer lip of the iliac crest behind the ASIS",
+   "insertion": "iliotibial band",
+   "action": "flexes and abducts the hip, steadies the knee",
+   "nerve": "superior gluteal nerve",
+   "surface": "a short bulge below and behind the hip point",
+   "gray_page": 476,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/476"
+  },
+  {
+   "id": "glute_med",
+   "name": "Gluteus medius",
+   "gray": "Glutaeus medius",
+   "region": "hip",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "outer ilium below the crest",
+   "insertion": "outer greater trochanter",
+   "action": "abducts the hip, holds the pelvis level on one leg",
+   "nerve": "superior gluteal nerve",
+   "surface": "the fullness on the side of the hip above the trochanter, under the iliac crest",
+   "gray_page": 474,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/474"
+  },
+  {
+   "id": "glute_max",
+   "name": "Gluteus maximus",
+   "gray": "Glutaeus maximus",
+   "region": "hip",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "back of the ilium, sacrum, coccyx and the sacrotuberous ligament",
+   "insertion": "iliotibial band (most) and the gluteal tuberosity of the femur",
+   "action": "extends the hip (climbing, rising, running), turns it out",
+   "nerve": "inferior gluteal nerve",
+   "surface": "the buttock: a thick square slanting down and out; its lower edge is not the gluteal fold (that is fat and skin)",
+   "gray_page": 474,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/474"
+  },
+  {
+   "id": "rectus_femoris",
+   "name": "Rectus femoris",
+   "gray": "Rectus femoris",
+   "region": "thigh",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "anterior inferior iliac spine and above the acetabulum",
+   "insertion": "patella, and on through the patellar ligament to the tibial tuberosity",
+   "action": "extends the knee, flexes the hip",
+   "nerve": "femoral nerve",
+   "surface": "the middle of the front of the thigh, a long spindle",
+   "gray_page": 470,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/470"
+  },
+  {
+   "id": "vastus_lateralis",
+   "name": "Vastus lateralis",
+   "gray": "Vastus lateralis",
+   "region": "thigh",
+   "layer": 1,
+   "views": [
+    "front",
+    "side",
+    "back"
+   ],
+   "origin": "greater trochanter and the lateral lip of the linea aspera",
+   "insertion": "outer patella and quadriceps tendon",
+   "action": "extends the knee",
+   "nerve": "femoral nerve",
+   "surface": "the big outer thigh; highest bulge on the outside",
+   "gray_page": 470,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/470"
+  },
+  {
+   "id": "vastus_medialis",
+   "name": "Vastus medialis",
+   "gray": "Vastus medialis",
+   "region": "thigh",
+   "layer": 1,
+   "views": [
+    "front"
+   ],
+   "origin": "medial lip of the linea aspera",
+   "insertion": "inner patella and quadriceps tendon",
+   "action": "extends the knee, steadies the kneecap",
+   "nerve": "femoral nerve",
+   "surface": "the teardrop above and inside the knee: lower than the outer bulge",
+   "gray_page": 471,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/471"
+  },
+  {
+   "id": "adductors",
+   "name": "Adductors (pectineus, adductor longus, gracilis, adductor magnus)",
+   "gray": "Adductor longus",
+   "region": "thigh",
+   "layer": 1,
+   "views": [
+    "front",
+    "back"
+   ],
+   "origin": "pubis and ischium",
+   "insertion": "linea aspera of the femur; gracilis to the upper inner tibia",
+   "action": "pull the thighs together",
+   "nerve": "obturator nerve; the hamstring part of the adductor magnus by the sciatic",
+   "surface": "the inner thigh mass, widest near the groin, tapering to the knee",
+   "gray_page": 472,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/472"
+  },
+  {
+   "id": "biceps_femoris",
+   "name": "Biceps femoris",
+   "gray": "Biceps femoris",
+   "region": "thigh",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "long head: ischial tuberosity; short head: linea aspera",
+   "insertion": "head of the fibula",
+   "action": "bends the knee, extends the hip, turns the bent knee out",
+   "nerve": "sciatic nerve (tibial and common peroneal parts)",
+   "surface": "the outer hamstring; its tendon is the cord on the outside of the back of the knee",
+   "gray_page": 478,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/478"
+  },
+  {
+   "id": "semis",
+   "name": "Semitendinosus and semimembranosus",
+   "gray": "Semitendinosus",
+   "region": "thigh",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "ischial tuberosity",
+   "insertion": "upper inner tibia (pes anserinus) and the back of the medial tibial condyle",
+   "action": "bend the knee, extend the hip, turn the bent knee in",
+   "nerve": "sciatic nerve (tibial part)",
+   "surface": "the inner hamstrings; their tendons are the cords on the inside of the back of the knee",
+   "gray_page": 479,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/479"
+  },
+  {
+   "id": "tibialis_anterior",
+   "name": "Tibialis anterior",
+   "gray": "Tibialis anterior",
+   "region": "leg",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "upper two thirds of the outer tibia",
+   "insertion": "medial cuneiform and 1st metatarsal base",
+   "action": "lifts the foot (dorsiflexes) and turns its sole in",
+   "nerve": "deep peroneal nerve",
+   "surface": "a long belly just outside the shin edge; its tendon stands out in front of the ankle",
+   "gray_page": 480,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/480"
+  },
+  {
+   "id": "edl",
+   "name": "Extensor digitorum longus and extensor hallucis longus",
+   "gray": "Extensor digitorum longus",
+   "region": "leg",
+   "layer": 1,
+   "views": [
+    "front",
+    "side"
+   ],
+   "origin": "upper fibula and lateral tibial condyle",
+   "insertion": "toes, through tendons over the top of the foot",
+   "action": "lift the toes and the foot",
+   "nerve": "deep peroneal nerve",
+   "surface": "between the tibialis and the peronei; tendons fan over the top of the foot",
+   "gray_page": 481,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/481"
+  },
+  {
+   "id": "peronei",
+   "name": "Peroneus longus and brevis",
+   "gray": "Peronaeus longus",
+   "region": "leg",
+   "layer": 1,
+   "views": [
+    "side",
+    "back",
+    "front"
+   ],
+   "origin": "outer fibula",
+   "insertion": "longus: under the foot to the 1st metatarsal; brevis: base of the 5th metatarsal",
+   "action": "turn the sole out (evert), point the foot",
+   "nerve": "superficial peroneal nerve",
+   "surface": "a narrow band down the outer leg; the tendons curl behind the outer ankle bone",
+   "gray_page": 486,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/486"
+  },
+  {
+   "id": "gastrocnemius",
+   "name": "Gastrocnemius",
+   "gray": "Gastrocnemius",
+   "region": "leg",
+   "layer": 1,
+   "views": [
+    "back",
+    "side",
+    "front"
+   ],
+   "origin": "two heads: back of the medial and lateral femoral condyles",
+   "insertion": "calcaneus through the Achilles tendon",
+   "action": "points the foot, bends the knee",
+   "nerve": "tibial nerve",
+   "surface": "the calf: two heads, the inner one bigger and lower; they end in a W-shaped edge halfway down where the tendon begins",
+   "gray_page": 482,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/482"
+  },
+  {
+   "id": "soleus",
+   "name": "Soleus",
+   "gray": "Soleus",
+   "region": "leg",
+   "layer": 1,
+   "views": [
+    "back",
+    "side",
+    "front"
+   ],
+   "origin": "back of the upper fibula and the soleal line of the tibia",
+   "insertion": "calcaneus through the Achilles tendon",
+   "action": "points the foot (standing, walking)",
+   "nerve": "tibial nerve",
+   "surface": "widens the lower calf either side of the gastrocnemius; shows on both sides from the front",
+   "gray_page": 483,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/483"
+  },
+  {
+   "id": "achilles",
+   "name": "Calcaneal (Achilles) tendon",
+   "gray": "Gastrocnemius",
+   "region": "leg",
+   "layer": 1,
+   "views": [
+    "back",
+    "side"
+   ],
+   "origin": "joined tendons of the gastrocnemius and soleus",
+   "insertion": "back of the calcaneus",
+   "action": "carries the calf pull to the heel",
+   "nerve": "none (a tendon)",
+   "surface": "a cord behind the ankle, narrowing then widening onto the heel, with hollows either side",
+   "gray_page": 482,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/482"
+  },
+  {
+   "id": "tibialis_posterior",
+   "name": "Tibialis posterior and the long toe flexors",
+   "gray": "Tibialis posterior",
+   "region": "leg",
+   "layer": 3,
+   "views": [],
+   "origin": "back of the tibia and fibula and the interosseous membrane",
+   "insertion": "navicular and the bones of the sole; the toes",
+   "action": "point and invert the foot, hold the arch",
+   "nerve": "tibial nerve",
+   "surface": "deep; their tendons curl behind the inner ankle bone",
+   "gray_page": 485,
+   "gray_url": "https://en.wikisource.org/wiki/Page:Anatomy_of_the_Human_Body_(1918).djvu/485"
+  }
+ ],
+ "plate_index": [
+  [
+   "abductor pollicis",
+   "apl"
+  ],
+  [
+   "adductor",
+   "adductors"
+  ],
+  [
+   "gracilis",
+   "adductors"
+  ],
+  [
+   "pectineus",
+   "adductors"
+  ],
+  [
+   "anconeus",
+   "anconeus"
+  ],
+  [
+   "biceps brachii",
+   "biceps"
+  ],
+  [
+   "biceps femoris",
+   "biceps_femoris"
+  ],
+  [
+   "brachialis",
+   "brachialis"
+  ],
+  [
+   "brachioradialis",
+   "brachioradialis"
+  ],
+  [
+   "calcaneal",
+   "achilles"
+  ],
+  [
+   "coracobrachialis",
+   "coracobrachialis"
+  ],
+  [
+   "deltoid",
+   "deltoid"
+  ],
+  [
+   "erector",
+   "erector"
+  ],
+  [
+   "extensor carpi radialis",
+   "ecr"
+  ],
+  [
+   "extensor carpi ulnaris",
+   "extensors"
+  ],
+  [
+   "extensor digitorum longus",
+   "edl"
+  ],
+  [
+   "extensor digitorum brevis",
+   "edl"
+  ],
+  [
+   "extensor digitorum",
+   "extensors"
+  ],
+  [
+   "forearm extensors",
+   "extensors"
+  ],
+  [
+   "external oblique",
+   "ext_oblique"
+  ],
+  [
+   "flexor",
+   "flexors"
+  ],
+  [
+   "palmaris",
+   "flexors"
+  ],
+  [
+   "forearm flexors",
+   "flexors"
+  ],
+  [
+   "gastrocnemius",
+   "gastrocnemius"
+  ],
+  [
+   "gluteus maximus",
+   "glute_max"
+  ],
+  [
+   "gluteus medius",
+   "glute_med"
+  ],
+  [
+   "iliopsoas",
+   "iliopsoas"
+  ],
+  [
+   "iliotibial",
+   "tfl"
+  ],
+  [
+   "tensor",
+   "tfl"
+  ],
+  [
+   "infraspinatus",
+   "infraspinatus"
+  ],
+  [
+   "latissimus",
+   "latissimus"
+  ],
+  [
+   "levator",
+   "levator"
+  ],
+  [
+   "peroneus",
+   "peronei"
+  ],
+  [
+   "pronator",
+   "pronator_teres"
+  ],
+  [
+   "rectus abdominis",
+   "rectus_abdominis"
+  ],
+  [
+   "rectus femoris",
+   "rectus_femoris"
+  ],
+  [
+   "patellar ligament",
+   "rectus_femoris"
+  ],
+  [
+   "rhomboid",
+   "rhomboids"
+  ],
+  [
+   "sartorius",
+   "sartorius"
+  ],
+  [
+   "scalene",
+   "scalenes"
+  ],
+  [
+   "semi",
+   "semis"
+  ],
+  [
+   "serratus anterior",
+   "serratus"
+  ],
+  [
+   "splenius",
+   "splenius"
+  ],
+  [
+   "sternocleidomastoid",
+   "sternocleidomastoid"
+  ],
+  [
+   "supraspinatus",
+   "supraspinatus"
+  ],
+  [
+   "teres major",
+   "teres_major"
+  ],
+  [
+   "teres minor",
+   "teres_minor"
+  ],
+  [
+   "tibialis anterior",
+   "tibialis_anterior"
+  ],
+  [
+   "trapezius",
+   "trapezius"
+  ],
+  [
+   "triceps",
+   "triceps"
+  ],
+  [
+   "vastus lateralis",
+   "vastus_lateralis"
+  ],
+  [
+   "vastus medialis",
+   "vastus_medialis"
+  ],
+  [
+   "soleus",
+   "soleus"
+  ]
+ ],
+ "fat": [
+  {
+   "id": "buccal",
+   "where": "cheek, in front of the masseter",
+   "male": "small",
+   "female": "small",
+   "change": "hollows the cheek when lean; rounds the face when heavy",
+   "thickness_mm": [
+    5,
+    5
+   ]
+  },
+  {
+   "id": "submental",
+   "where": "under the chin",
+   "male": "builds early on heavy men",
+   "female": "some",
+   "change": "softens the jaw line from the side",
+   "thickness_mm": [
+    5,
+    6
+   ]
+  },
+  {
+   "id": "breast",
+   "where": "over the pectoralis major (female)",
+   "male": "none (a flat nipple plate)",
+   "female": "a teardrop resting on the pectoral, lower half fuller, about rib 2 to rib 6",
+   "change": "the female chest form; drawn as clothed or simplified volume in PG art, never detailed",
+   "thickness_mm": [
+    3,
+    null
+   ]
+  },
+  {
+   "id": "triceps",
+   "where": "back of the upper arm",
+   "male": "thin",
+   "female": "thicker: softens the triceps horseshoe",
+   "change": "hides the triceps shape",
+   "thickness_mm": [
+    6,
+    10
+   ]
+  },
+  {
+   "id": "lower_abdomen",
+   "where": "below the navel",
+   "male": "moderate",
+   "female": "moderate",
+   "change": "rounds the lower belly forward; hides the lowest rectus",
+   "thickness_mm": [
+    12,
+    16
+   ]
+  },
+  {
+   "id": "flank",
+   "where": "over the iliac crest, at the side of the waist",
+   "male": "the \"love handle\": the first place a man gains",
+   "female": "less, sits lower",
+   "change": "rolls over the iliac crest and hides the oblique",
+   "thickness_mm": [
+    12,
+    12
+   ]
+  },
+  {
+   "id": "gluteal",
+   "where": "over the gluteus maximus and the hip",
+   "male": "thin",
+   "female": "thick: rounds the buttock and makes the gluteal fold",
+   "change": "makes the gluteal fold and the round of the buttock",
+   "thickness_mm": [
+    12,
+    20
+   ]
+  },
+  {
+   "id": "lateral_thigh",
+   "where": "outer upper thigh below the trochanter",
+   "male": "thin",
+   "female": "thick (\"saddle\"): makes the trochanter the widest point",
+   "change": "fills the hollow over the trochanter",
+   "thickness_mm": [
+    8,
+    18
+   ]
+  },
+  {
+   "id": "medial_knee",
+   "where": "inner side of the knee",
+   "male": "small",
+   "female": "a soft pad",
+   "change": "softens the inner knee into the thigh",
+   "thickness_mm": [
+    6,
+    10
+   ]
+  },
+  {
+   "id": "infrapatellar",
+   "where": "either side of the patellar ligament (Hoffa pad)",
+   "male": "yes",
+   "female": "yes",
+   "change": "two soft puffs beside the ligament when the knee is straight",
+   "thickness_mm": [
+    5,
+    5
+   ]
+  },
+  {
+   "id": "heel",
+   "where": "under the calcaneus",
+   "male": "thick",
+   "female": "thick",
+   "change": "round, firm heel; the heel sticks out behind the leg",
+   "thickness_mm": [
+    18,
+    18
+   ]
+  },
+  {
+   "id": "palm",
+   "where": "heel of the hand, thumb base, finger pads",
+   "male": "yes",
+   "female": "yes",
+   "change": "soft pads; no bones show in the palm",
+   "thickness_mm": [
+    6,
+    6
+   ]
+  }
+ ],
+ "build_fat": {
+  "skinny": 0.5,
+  "average": 1.0,
+  "heroic": 0.6,
+  "heavy": 2.2,
+  "rule": "Fat fills hollows first (between muscles, over the trochanter, at the flank), then rounds the forms. A lean build shows tendons and the gaps between muscles; a heavy build shows the fat pads above, not bigger muscles."
+ },
+ "surface": {
+  "front": [
+   "pit of the neck between the two sternocleidomastoid heads",
+   "clavicles in a shallow S",
+   "pectoral plate with its lower edge into the armpit",
+   "costal arch (inverted V)",
+   "three rectus intersections above the navel, smooth below",
+   "the iliac crest and flank pad",
+   "inguinal fold from the ASIS to the pubis",
+   "sartorius S dividing the thigh",
+   "outer thigh higher than the inner teardrop",
+   "kneecap with the infrapatellar puffs",
+   "shin edge straight, calf curves either side",
+   "inner ankle higher than the outer"
+  ],
+  "side": [
+   "head carried forward of the shoulders, neck leaning forward 15 degrees",
+   "S-curve of the spine: back of the ribcage rounded, lumbar hollow",
+   "chest pushes forward of the belly on a lean figure",
+   "buttock is the furthest point back",
+   "front of the thigh bows forward, the back is flatter",
+   "knee: kneecap in front, hamstring cords behind",
+   "calf bulges back high on the leg",
+   "shin straight, Achilles cord behind the ankle",
+   "the ear sits over the shoulder, the shoulder over the hip, the hip over the ankle (plumb line)"
+  ],
+  "back": [
+   "C7 knob at the base of the neck",
+   "trapezius diamond",
+   "spine of the scapula as a groove, the shoulder blades as flat plates",
+   "erector columns with the furrow between",
+   "latissimus V to the waist",
+   "two dimples of Venus over the posterior iliac spines",
+   "gluteus medius fullness above the buttock",
+   "gluteal fold (fat and skin, not muscle)",
+   "hamstring cords at the back of the knee",
+   "calf heads: the inner lower than the outer",
+   "Achilles with a hollow either side"
+  ]
+ },
+ "measurements": {
+  "unit": "heads (crown to chin); cm at the reference stature: man 175 cm (head 23.3 cm), woman 162 cm (head 21.9 cm)",
+  "figures": {
+   "male-average": {
+    "label": "Man, average",
+    "heads": 7.5,
+    "rows": [
+     {
+      "region": "head",
+      "what": "height, crown to chin",
+      "heads": 1.0,
+      "cm": 23.3
+     },
+     {
+      "region": "head",
+      "what": "width",
+      "heads": 0.68,
+      "cm": 15.9
+     },
+     {
+      "region": "head",
+      "what": "depth",
+      "heads": 0.86,
+      "cm": 20.1
+     },
+     {
+      "region": "neck",
+      "what": "length, chin to pit",
+      "heads": 0.27,
+      "cm": 6.3
+     },
+     {
+      "region": "neck",
+      "what": "width",
+      "heads": 0.55,
+      "cm": 12.8
+     },
+     {
+      "region": "neck",
+      "what": "depth",
+      "heads": 0.55,
+      "cm": 12.8
+     },
+     {
+      "region": "shoulders",
+      "what": "width across the deltoids",
+      "heads": 2.0,
+      "cm": 46.7
+     },
+     {
+      "region": "torso",
+      "what": "chest width at the nipples",
+      "heads": 1.45,
+      "cm": 33.8
+     },
+     {
+      "region": "torso",
+      "what": "chest depth",
+      "heads": 1.05,
+      "cm": 24.5
+     },
+     {
+      "region": "torso",
+      "what": "waist width",
+      "heads": 1.25,
+      "cm": 29.2
+     },
+     {
+      "region": "torso",
+      "what": "waist depth",
+      "heads": 0.86,
+      "cm": 20.1
+     },
+     {
+      "region": "torso",
+      "what": "pit to navel",
+      "heads": 1.73,
+      "cm": 40.4
+     },
+     {
+      "region": "torso",
+      "what": "navel to crotch",
+      "heads": 0.98,
+      "cm": 22.9
+     },
+     {
+      "region": "pelvis",
+      "what": "width at the trochanters",
+      "heads": 1.55,
+      "cm": 36.2
+     },
+     {
+      "region": "pelvis",
+      "what": "buttock depth",
+      "heads": 1.0,
+      "cm": 23.3
+     },
+     {
+      "region": "arm",
+      "what": "upper arm, acromion to elbow",
+      "heads": 1.45,
+      "cm": 33.8
+     },
+     {
+      "region": "arm",
+      "what": "upper arm width",
+      "heads": 0.46,
+      "cm": 10.7
+     },
+     {
+      "region": "arm",
+      "what": "forearm, elbow to wrist",
+      "heads": 1.2,
+      "cm": 28.0
+     },
+     {
+      "region": "arm",
+      "what": "forearm width at the bellies",
+      "heads": 0.4,
+      "cm": 9.3
+     },
+     {
+      "region": "arm",
+      "what": "wrist width",
+      "heads": 0.27,
+      "cm": 6.3
+     },
+     {
+      "region": "hand",
+      "what": "length, wrist to fingertip",
+      "heads": 0.78,
+      "cm": 18.2
+     },
+     {
+      "region": "hand",
+      "what": "width at the knuckles",
+      "heads": 0.4,
+      "cm": 9.3
+     },
+     {
+      "region": "leg",
+      "what": "thigh, trochanter to mid-knee",
+      "heads": 1.788,
+      "cm": 41.7
+     },
+     {
+      "region": "leg",
+      "what": "thigh width (top)",
+      "heads": 0.74,
+      "cm": 17.3
+     },
+     {
+      "region": "leg",
+      "what": "thigh depth",
+      "heads": 0.8,
+      "cm": 18.7
+     },
+     {
+      "region": "leg",
+      "what": "knee width",
+      "heads": 0.44,
+      "cm": 10.3
+     },
+     {
+      "region": "leg",
+      "what": "lower leg, mid-knee to ankle",
+      "heads": 1.813,
+      "cm": 42.3
+     },
+     {
+      "region": "leg",
+      "what": "calf width",
+      "heads": 0.5,
+      "cm": 11.7
+     },
+     {
+      "region": "leg",
+      "what": "calf depth",
+      "heads": 0.62,
+      "cm": 14.5
+     },
+     {
+      "region": "leg",
+      "what": "ankle width",
+      "heads": 0.28,
+      "cm": 6.5
+     },
+     {
+      "region": "foot",
+      "what": "length",
+      "heads": 1.1,
+      "cm": 25.7
+     },
+     {
+      "region": "foot",
+      "what": "width",
+      "heads": 0.42,
+      "cm": 9.8
+     },
+     {
+      "region": "whole",
+      "what": "stature",
+      "heads": 7.5,
+      "cm": 175.0
+     },
+     {
+      "region": "whole",
+      "what": "crotch height (half the stature)",
+      "heads": 3.52,
+      "cm": 82.1
+     }
+    ]
+   },
+   "female-average": {
+    "label": "Woman, average",
+    "heads": 7.4,
+    "rows": [
+     {
+      "region": "head",
+      "what": "height, crown to chin",
+      "heads": 1.0,
+      "cm": 21.9
+     },
+     {
+      "region": "head",
+      "what": "width",
+      "heads": 0.66,
+      "cm": 14.4
+     },
+     {
+      "region": "head",
+      "what": "depth",
+      "heads": 0.84,
+      "cm": 18.4
+     },
+     {
+      "region": "neck",
+      "what": "length, chin to pit",
+      "heads": 0.25,
+      "cm": 5.5
+     },
+     {
+      "region": "neck",
+      "what": "width",
+      "heads": 0.47,
+      "cm": 10.3
+     },
+     {
+      "region": "neck",
+      "what": "depth",
+      "heads": 0.48,
+      "cm": 10.5
+     },
+     {
+      "region": "shoulders",
+      "what": "width across the deltoids",
+      "heads": 1.78,
+      "cm": 39.0
+     },
+     {
+      "region": "torso",
+      "what": "chest width at the nipples",
+      "heads": 1.32,
+      "cm": 28.9
+     },
+     {
+      "region": "torso",
+      "what": "chest depth",
+      "heads": 1.1,
+      "cm": 24.1
+     },
+     {
+      "region": "torso",
+      "what": "waist width",
+      "heads": 1.1,
+      "cm": 24.1
+     },
+     {
+      "region": "torso",
+      "what": "waist depth",
+      "heads": 0.78,
+      "cm": 17.1
+     },
+     {
+      "region": "torso",
+      "what": "pit to navel",
+      "heads": 1.75,
+      "cm": 38.3
+     },
+     {
+      "region": "torso",
+      "what": "navel to crotch",
+      "heads": 0.98,
+      "cm": 21.5
+     },
+     {
+      "region": "pelvis",
+      "what": "width at the trochanters",
+      "heads": 1.68,
+      "cm": 36.8
+     },
+     {
+      "region": "pelvis",
+      "what": "buttock depth",
+      "heads": 1.08,
+      "cm": 23.6
+     },
+     {
+      "region": "arm",
+      "what": "upper arm, acromion to elbow",
+      "heads": 1.42,
+      "cm": 31.1
+     },
+     {
+      "region": "arm",
+      "what": "upper arm width",
+      "heads": 0.38,
+      "cm": 8.3
+     },
+     {
+      "region": "arm",
+      "what": "forearm, elbow to wrist",
+      "heads": 1.2,
+      "cm": 26.3
+     },
+     {
+      "region": "arm",
+      "what": "forearm width at the bellies",
+      "heads": 0.33,
+      "cm": 7.2
+     },
+     {
+      "region": "arm",
+      "what": "wrist width",
+      "heads": 0.23,
+      "cm": 5.0
+     },
+     {
+      "region": "hand",
+      "what": "length, wrist to fingertip",
+      "heads": 0.76,
+      "cm": 16.6
+     },
+     {
+      "region": "hand",
+      "what": "width at the knuckles",
+      "heads": 0.36,
+      "cm": 7.9
+     },
+     {
+      "region": "leg",
+      "what": "thigh, trochanter to mid-knee",
+      "heads": 1.728,
+      "cm": 37.8
+     },
+     {
+      "region": "leg",
+      "what": "thigh width (top)",
+      "heads": 0.82,
+      "cm": 18.0
+     },
+     {
+      "region": "leg",
+      "what": "thigh depth",
+      "heads": 0.84,
+      "cm": 18.4
+     },
+     {
+      "region": "leg",
+      "what": "knee width",
+      "heads": 0.44,
+      "cm": 9.6
+     },
+     {
+      "region": "leg",
+      "what": "lower leg, mid-knee to ankle",
+      "heads": 1.761,
+      "cm": 38.6
+     },
+     {
+      "region": "leg",
+      "what": "calf width",
+      "heads": 0.48,
+      "cm": 10.5
+     },
+     {
+      "region": "leg",
+      "what": "calf depth",
+      "heads": 0.58,
+      "cm": 12.7
+     },
+     {
+      "region": "leg",
+      "what": "ankle width",
+      "heads": 0.26,
+      "cm": 5.7
+     },
+     {
+      "region": "foot",
+      "what": "length",
+      "heads": 1.05,
+      "cm": 23.0
+     },
+     {
+      "region": "foot",
+      "what": "width",
+      "heads": 0.39,
+      "cm": 8.5
+     },
+     {
+      "region": "whole",
+      "what": "stature",
+      "heads": 7.4,
+      "cm": 162.0
+     },
+     {
+      "region": "whole",
+      "what": "crotch height (half the stature)",
+      "heads": 3.42,
+      "cm": 74.9
+     }
+    ]
+   }
+  }
+ },
+ "checklist": [
+  {
+   "id": "proportion.heads",
+   "region": "whole",
+   "check": "Stature in heads matches the figure (7.5 man, 7.4 woman; heroic 8 to 8.5)",
+   "how": "crown to floor / crown to chin",
+   "tolerance": "±0.15 head"
+  },
+  {
+   "id": "proportion.crotch",
+   "region": "whole",
+   "check": "The crotch sits at half the stature",
+   "how": "crotch height / stature",
+   "tolerance": "0.48 to 0.52"
+  },
+  {
+   "id": "proportion.landmarks",
+   "region": "whole",
+   "check": "Pit, nipples, navel, wrist, knee and ankle within tolerance of the canon (score_body.py)",
+   "how": "score_body.py on body.json",
+   "tolerance": "human-canon.json tolerance"
+  },
+  {
+   "id": "skeleton.ribcage",
+   "region": "torso",
+   "check": "Ribcage is an egg, narrow at the top, tilted back about 10 degrees; costal arch visible on a lean figure",
+   "how": "side and front view",
+   "tolerance": "reads at a glance"
+  },
+  {
+   "id": "skeleton.pelvis",
+   "region": "pelvis",
+   "check": "Pelvis tilts forward; the ASIS and iliac crest are where the canon puts them; woman wider than her ribcage",
+   "how": "front and side view",
+   "tolerance": "ASIS ±0.1 head"
+  },
+  {
+   "id": "skeleton.spine",
+   "region": "back",
+   "check": "S-curve from the side: neck forward, thoracic back, lumbar hollow; plumb line ear, shoulder, hip, ankle",
+   "how": "side view",
+   "tolerance": "plumb line within 0.15 head"
+  },
+  {
+   "id": "skeleton.subcutaneous",
+   "region": "all",
+   "check": "Every surface=True bone landmark shows as a plane change or knob: clavicle, acromion, C7, scapula spine, elbow epicondyles, olecranon, wrist styloids, iliac crest, ASIS, trochanter dimple, kneecap, tibial tuberosity, shin, malleoli",
+   "how": "tick each landmark",
+   "tolerance": "at least 12 of 15"
+  },
+  {
+   "id": "joints.rig",
+   "region": "all",
+   "check": "Joints bend on the right axes with the ROM in the joints table; no joint bends past it",
+   "how": "pose test: full range each joint",
+   "tolerance": "within 10 degrees"
+  },
+  {
+   "id": "joints.shoulder_rhythm",
+   "region": "shoulder",
+   "check": "Raising the arm overhead also turns the scapula and lifts the clavicle (2 to 1)",
+   "how": "arm-up pose, back view",
+   "tolerance": "scapula visibly rotates"
+  },
+  {
+   "id": "joints.carrying_angle",
+   "region": "arm",
+   "check": "Straight arm angles out at the elbow, palms forward",
+   "how": "front view, anatomical pose",
+   "tolerance": "5 to 15 degrees"
+  },
+  {
+   "id": "muscle.neck",
+   "region": "neck",
+   "check": "Sternocleidomastoid V into the pit; trapezius slope from neck to shoulder",
+   "how": "front and side view",
+   "tolerance": "both present"
+  },
+  {
+   "id": "muscle.chest",
+   "region": "chest",
+   "check": "Pectoral plate with its lower edge folding into the armpit; deltoid wedge into the arm",
+   "how": "front view",
+   "tolerance": "both present"
+  },
+  {
+   "id": "muscle.abdomen",
+   "region": "abdomen",
+   "check": "Rectus with three intersections above the navel only; external oblique flank over the iliac crest; serratus fingers on the ribs",
+   "how": "front and side view",
+   "tolerance": "right count, right place"
+  },
+  {
+   "id": "muscle.back",
+   "region": "back",
+   "check": "Trapezius kite, latissimus V, erector columns with the furrow, shoulder blades as plates",
+   "how": "back view",
+   "tolerance": "all four"
+  },
+  {
+   "id": "muscle.arm",
+   "region": "arm",
+   "check": "Biceps in front, triceps horseshoe and tendon plate behind; brachialis shows either side of the biceps",
+   "how": "front, side and back view",
+   "tolerance": "all present"
+  },
+  {
+   "id": "muscle.forearm",
+   "region": "forearm",
+   "check": "Bellies in the upper half, tendons below; the outer mass (brachioradialis) starts above the elbow and is separate from the extensors",
+   "how": "side view",
+   "tolerance": "taper plus outer mass"
+  },
+  {
+   "id": "muscle.thigh",
+   "region": "thigh",
+   "check": "Outer thigh bulge higher than the inner teardrop; sartorius S divides quads from adductors; front of the thigh bows forward",
+   "how": "front and side view",
+   "tolerance": "bulges offset"
+  },
+  {
+   "id": "muscle.hip",
+   "region": "hip",
+   "check": "Gluteus medius fullness under the iliac crest; buttock the furthest point back; trochanter hollow on a lean man",
+   "how": "side and back view",
+   "tolerance": "present"
+  },
+  {
+   "id": "muscle.knee",
+   "region": "knee",
+   "check": "Kneecap with the patellar ligament to the tibial tuberosity; hamstring cords behind; the knee box sits between two cylinders",
+   "how": "front, side and back view",
+   "tolerance": "present"
+  },
+  {
+   "id": "muscle.calf",
+   "region": "leg",
+   "check": "Calf: inner head lower than the outer, soleus wider below; shin straight; Achilles cord with hollows either side",
+   "how": "front, side and back view",
+   "tolerance": "all present"
+  },
+  {
+   "id": "fat.sex",
+   "region": "all",
+   "check": "Fat pads follow the sex and build (fat table): a woman's gluteal and lateral-thigh pads make the trochanters her widest point; a man's gather at the flank",
+   "how": "front view widths",
+   "tolerance": "matches the build"
+  },
+  {
+   "id": "fat.lean_shows_tendons",
+   "region": "all",
+   "check": "A lean build shows the gaps between muscles and the tendons (wrist, ankle, back of the knee); a heavy build hides them under pads, not bigger muscles",
+   "how": "compare builds",
+   "tolerance": "build reads correctly"
+  },
+  {
+   "id": "surface.no_sausage",
+   "region": "limbs",
+   "check": "No limb bulges on both edges at the same height (construction.json limb rules)",
+   "how": "trace both edges of each limb",
+   "tolerance": "no matches"
+  },
+  {
+   "id": "surface.planes",
+   "region": "all",
+   "check": "Planes read before detail: 6 to 8 per limb; folds only where bone is near the skin",
+   "how": "flat-shaded render",
+   "tolerance": "reads in flat shading"
+  },
+  {
+   "id": "pg",
+   "region": "all",
+   "check": "PG: underwear or a smooth mannequin form, no genitals, nothing sexualised; breast is a simple clothed volume",
+   "how": "look",
+   "tolerance": "pass or fail"
+  }
+ ]
+}
