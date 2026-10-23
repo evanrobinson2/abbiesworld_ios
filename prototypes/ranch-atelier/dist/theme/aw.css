@@ -1,0 +1,129 @@
+/* One theme system: accessibility switches, the avatar button and the profile and settings sheet (theme/aw.mjs).
+   Everything reads the --aw-* tokens theme/boot.js writes. The sheet is a liquid-glass object; nothing dims or blurs
+   the page behind it (GAME_FEEL.md: nothing masks the world). */
+html.aw-reduce-motion *,html.aw-reduce-motion *::before,html.aw-reduce-motion *::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important;scroll-behavior:auto!important}
+html.aw-big-text body:not(.simulation-workspace){zoom:1.15}
+html.aw-big-text #aw-settings{zoom:1.12}
+html.aw-solid *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.aw-readable body,html.aw-readable body *:not(svg *):not(.aw-avatar){font-family:var(--aw-font)!important}
+:focus-visible{outline-color:var(--aw-accent)}
+
+.aw-avatar{--s:36px;width:var(--s);height:var(--s);flex:none;border-radius:50%;display:inline-grid;place-items:center;font-size:calc(var(--s) * .56);line-height:1;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 3px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.18)}
+.aw-me{all:unset;box-sizing:border-box;cursor:pointer;border-radius:50%;display:inline-grid;place-items:center;padding:2px;transition:transform .12s}
+.aw-me:hover{transform:scale(1.06)}.aw-me:active{transform:scale(.96)}
+.aw-me:focus-visible{outline:3px solid var(--aw-accent);outline-offset:2px}
+.aw-me.float{position:fixed;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:70}
+
+#aw-settings{position:fixed;inset:0;margin:auto;width:min(860px,calc(100vw - 24px));height:min(620px,calc(100dvh - 24px));max-width:none;max-height:none;padding:0;
+  border:1px solid var(--aw-rim);border-radius:28px;color:var(--aw-ink);font:15px/1.45 var(--aw-font);overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.22),transparent 42%),var(--aw-glass);
+  -webkit-backdrop-filter:blur(18px) saturate(1.7);backdrop-filter:blur(18px) saturate(1.7);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -2px 4px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.12),0 30px 70px -20px rgba(0,0,0,.45)}
+#aw-settings::backdrop{background:transparent}
+#aw-settings[open]{animation:aws-in .18s ease-out}
+@keyframes aws-in{from{opacity:0;transform:translateY(10px) scale(.98)}}
+#aw-settings *{box-sizing:border-box}
+.aws-shell{display:grid;grid-template-columns:220px minmax(0,1fr);height:100%;position:relative}
+.aws-nav{display:flex;flex-direction:column;gap:2px;padding:16px 10px;border-right:1px solid var(--aw-line);background:color-mix(in srgb,var(--aw-surface) 35%,transparent)}
+.aws-who{display:flex;align-items:center;gap:10px;padding:4px 8px 14px}
+.aws-who span{display:grid;min-width:0}.aws-who b{font:600 16px/1.2 var(--aw-display);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.aws-who small{color:var(--aw-soft);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aws-nav button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;cursor:pointer;font-weight:500;color:var(--aw-ink)}
+.aws-nav button svg{width:20px;height:20px;flex:none;color:var(--aw-soft)}
+.aws-nav button:hover{background:color-mix(in srgb,var(--aw-ink) 7%,transparent)}
+.aws-nav button[aria-current=page]{background:var(--aw-accent);color:var(--aw-on-accent)}
+.aws-nav button[aria-current=page] svg{color:inherit}
+.aws-nav button:focus-visible{outline:2px solid var(--aw-accent);outline-offset:1px}
+.aws-body{overflow:auto;padding:22px 26px 28px;display:flex;flex-direction:column;gap:12px}
+.aws-body h2{margin:0 0 4px;font:600 26px/1.15 var(--aw-display)}
+.aws-body h3{margin:10px 0 0;font:600 13px/1 var(--aw-font);letter-spacing:.06em;text-transform:uppercase;color:var(--aw-soft)}
+.aws-quiet{margin:0;color:var(--aw-soft);font-size:13px}
+.aws-x{all:unset;position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:24px;line-height:1;cursor:pointer;color:var(--aw-soft)}
+.aws-x:hover{background:color-mix(in srgb,var(--aw-ink) 8%,transparent);color:var(--aw-ink)}
+.aws-btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:600;white-space:nowrap;
+  color:var(--aw-ink);background:color-mix(in srgb,var(--aw-surface) 70%,transparent);border:1px solid var(--aw-line)}
+.aws-btn.primary{background:var(--aw-accent);color:var(--aw-on-accent);border-color:transparent}
+.aws-row{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:12px 14px;border-radius:16px;background:color-mix(in srgb,var(--aw-surface) 60%,transparent);border:1px solid var(--aw-line)}
+.aws-row.col{flex-direction:column;align-items:stretch}
+.aws-row span{display:grid;gap:2px}.aws-row small{color:var(--aw-soft);font-size:13px}
+.aws-row input[type=checkbox]{appearance:none;width:46px;height:28px;flex:none;border-radius:999px;background:color-mix(in srgb,var(--aw-ink) 18%,transparent);position:relative;cursor:pointer;transition:background .15s;margin:0}
+.aws-row input[type=checkbox]::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
+.aws-row input[type=checkbox]:checked{background:var(--aw-accent)}
+.aws-row input[type=checkbox]:checked::after{transform:translateX(18px)}
+.aws-row input[type=range]{width:100%;accent-color:var(--aw-accent)}
+.aws-hero{display:flex;align-items:center;gap:18px}
+.aws-name{display:grid;gap:4px;flex:1;max-width:320px}.aws-name small{color:var(--aw-soft)}
+.aws-name input{font:600 20px var(--aw-display);color:var(--aw-ink);padding:10px 14px;border-radius:14px;border:1px solid var(--aw-line);background:color-mix(in srgb,var(--aw-surface) 75%,transparent)}
+.aws-avatars,.aws-colors{display:flex;flex-wrap:wrap;gap:8px}
+.aws-avatars button{all:unset;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:26px;cursor:pointer;background:color-mix(in srgb,var(--aw-surface) 60%,transparent);border:1px solid var(--aw-line)}
+.aws-colors button{all:unset;width:34px;height:34px;border-radius:50%;cursor:pointer;display:grid;place-items:center;color:var(--aw-on-accent);font-weight:700;font-size:13px;box-shadow:inset 0 -2px 3px rgba(0,0,0,.2)}
+.aws-avatars button[aria-pressed=true],.aws-colors button[aria-pressed=true]{outline:3px solid var(--aw-accent);outline-offset:2px}
+.aws-acct{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:14px;border-radius:16px;background:color-mix(in srgb,var(--aw-surface) 60%,transparent);border:1px solid var(--aw-line)}
+.aws-acct span{display:grid;gap:2px}.aws-acct small{color:var(--aw-soft);font-size:13px}
+.aws-chips{display:flex;gap:6px;flex-wrap:wrap}
+.aws-chips button{all:unset;padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13px;border:1px solid var(--aw-line);background:color-mix(in srgb,var(--aw-surface) 55%,transparent)}
+.aws-chips button[aria-pressed=true]{background:var(--aw-ink);color:var(--aw-bg);border-color:transparent}
+.aws-styles{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+.aws-style{all:unset;box-sizing:border-box;display:grid;gap:8px;cursor:pointer;padding:6px;border-radius:18px;border:2px solid transparent}
+.aws-style:hover{background:color-mix(in srgb,var(--aw-ink) 5%,transparent)}
+.aws-style[aria-pressed=true]{border-color:var(--aw-accent)}
+.aws-style:focus-visible{outline:2px solid var(--aw-accent)}
+.aws-style .mock{display:grid;place-items:center;aspect-ratio:16/10;padding:12px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.aws-style .card{width:100%;height:100%;border:1px solid;display:grid;grid-template-columns:auto 1fr 1fr;grid-template-rows:auto 1fr 1fr;align-items:center;gap:4px 6px;padding:8px 10px}
+.aws-style .card b{font-size:24px;line-height:1;font-weight:600;grid-row:1}
+.aws-style .card i{width:16px;height:16px;border-radius:50%;justify-self:start}
+.aws-style .card s{grid-column:1/-1;height:5px;border-radius:3px;opacity:.6}
+.aws-style .nm{display:grid;gap:1px;padding:0 4px}.aws-style .nm b{font-size:14px}
+.aws-style .nm small{color:var(--aw-soft);font-size:12px;line-height:1.3}
+.aws-keys{display:grid;gap:6px}
+.aws-key{display:flex;align-items:center;gap:12px}.aws-key kbd{font:600 12px var(--aw-font);padding:5px 9px;border-radius:8px;min-width:120px;text-align:center;border:1px solid var(--aw-line);background:color-mix(in srgb,var(--aw-surface) 70%,transparent);box-shadow:0 2px 0 var(--aw-line)}
+.aws-places{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.aws-place{display:grid;gap:2px;padding:14px;border-radius:16px;text-decoration:none;color:var(--aw-ink);border:1px solid var(--aw-line);background:color-mix(in srgb,var(--aw-surface) 60%,transparent)}
+.aws-place:hover{border-color:var(--aw-accent)}.aws-place small{color:var(--aw-soft);font-size:13px}
+@media (max-width:640px){
+  #aw-settings{inset:auto 0 0 0;margin:0;width:100vw;height:min(92dvh,760px);border-radius:28px 28px 0 0}
+  .aws-shell{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}
+  .aws-nav{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--aw-line);padding:12px 52px 10px 12px;gap:4px}
+  .aws-who{display:none}.aws-nav button{flex:none;padding:8px 12px}
+  .aws-body{padding:16px 16px 28px}.aws-styles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .aws-hero{flex-wrap:wrap}
+}
+/* Study pages (html[data-aw-skin~=study]) keep their own layouts; the theme sets their paper, ink and letters. */
+html[data-aw-skin~="study"],html[data-aw-skin~="study"] body{background-color:var(--aw-bg)!important;color:var(--aw-ink)!important}
+html[data-aw-skin~="study"] body{font-family:var(--aw-font)}
+html[data-aw-skin~="study"] :is(h1,h2,h3){font-family:var(--aw-display)!important}
+
+/* App nav (theme/appnav.mjs): a solid side rail that folds to icons; a drawer on phones. */
+html.has-awn{--awn:224px}
+html.has-awn.awn-folded{--awn:68px}
+html.has-awn body{padding-left:var(--awn)}
+#aw-nav{position:fixed;left:0;top:0;bottom:0;width:var(--awn);z-index:40;display:flex;flex-direction:column;gap:4px;padding:14px 10px;
+  background:var(--aw-surface);border-right:1px solid var(--aw-line);font:500 15px/1.2 var(--aw-font);color:var(--aw-ink);overflow:hidden}
+#aw-nav a{color:inherit;text-decoration:none}
+.awn-mark{display:flex;align-items:center;gap:10px;padding:2px 4px 16px}
+.awn-mark b{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--aw-accent);color:var(--aw-on-accent);font:700 16px var(--aw-display)}
+.awn-mark span{font:600 17px var(--aw-display);white-space:nowrap}
+.awn-items{display:grid;gap:2px}
+.awn-item,.awn-fold{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;white-space:nowrap}
+.awn-item svg,.awn-fold svg{width:22px;height:22px;flex:none}
+.awn-item:hover,.awn-fold:hover{background:color-mix(in srgb,var(--aw-ink) 7%,transparent)}
+.awn-item[aria-current=page]{background:var(--aw-accent);color:var(--aw-on-accent)!important}
+.awn-item:focus-visible,.awn-fold:focus-visible{outline:2px solid var(--aw-accent)}
+.awn-foot{margin-top:auto;display:grid;gap:4px}
+.awn-me{display:flex;align-items:center;gap:10px;padding:6px;border-radius:14px;cursor:pointer}
+.awn-me:hover{background:color-mix(in srgb,var(--aw-ink) 7%,transparent)}
+.awn-me span{display:grid;min-width:0}.awn-me b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.awn-me small{font-size:12px;color:var(--aw-soft);white-space:nowrap}
+.awn-fold{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;cursor:pointer;color:var(--aw-soft)}
+html.awn-folded #aw-nav :is(.awn-mark>span,.awn-item>span,.awn-me>span,.awn-fold>span){display:none}
+html.awn-folded .awn-fold svg{transform:scaleX(-1)}
+.awn-open{display:none}
+@media (max-width:760px){
+  html.has-awn,html.has-awn.awn-folded{--awn:0px}
+  #aw-nav{width:260px;transform:translateX(-102%);transition:transform .2s ease;box-shadow:0 0 40px rgba(0,0,0,.3)}
+  html.awn-drawer #aw-nav{transform:none}
+  html.awn-drawer #aw-nav :is(.awn-mark>span,.awn-item>span,.awn-me>span,.awn-fold>span){display:revert}
+  .awn-open{all:unset;display:grid;place-items:center;position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:39;width:40px;height:40px;border-radius:12px;cursor:pointer;
+    background:var(--aw-glass);border:1px solid var(--aw-rim);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--aw-ink)}
+  .awn-open svg{width:22px;height:22px}
+}

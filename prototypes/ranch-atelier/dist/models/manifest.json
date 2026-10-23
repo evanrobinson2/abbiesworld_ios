@@ -54,7 +54,7 @@
   },
   {
    "id": "paper-woman-2",
-   "name": "Heroic woman 2",
+   "name": "Heroic woman 2 · round 2",
    "style": "",
    "group": "Paper figures",
    "subject": "heroic woman 2",
@@ -70,9 +70,9 @@
    },
    "good": [],
    "off": [
-    "Built from per-row mask runs of the pick: torso rings (waist read from the mask), shoulder caps, separate upper arm, elbow strap, forearm bracer, hand, thigh, knee band, shin and pointed turned-out feet. The halter sports top and the boy-short briefs are separate Cloth parts; folded seams (under-band, cup edges, straps and leg-hole edges) let them read from the front. The bust is two folded lobes under the top. Gaps: the pick's crisp diagonal folds on the thighs, the bracer flaps and the halter collar are only roughly there, and the lobes read faintly from the front."
+    "Round 2, rebuilt part by part to be THIS character: a faceted face shield with a nose ridge, pointed chin and the hood rim as the face outline; real hands with four curled fingers and a thumb; the tall V collar, folded cups, pleated elbow straps, bracers with flaps, and folds pressed into the legs along the pick's creases. Shoulder caps stay at 65% of the pick, as you asked. Still rough: the leg folds are softer than the pick's, the feet are blocky, and the collar is rougher than the pick's."
    ],
-   "outline": 0.894,
+   "outline": 0.882,
    "scores": [
     {
      "label": "Outline match",

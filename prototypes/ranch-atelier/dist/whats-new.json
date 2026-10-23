@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-models-one-screen",
+      "date": "2026-10-23",
+      "title": "Models fit on one screen",
+      "line": "Each model now fits on one screen: a hero bar with its name, the picture and the model side by side, and your feedback in its own panel on the right that you can hide. A menu on the left folds away. Profile and settings now open from your avatar, with 20 styles that change the whole app, and Studies has a home page.",
+      "image": "/whats-new/2026-10-23-models-one-screen.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead"
+    },
+    {
       "id": "2026-10-23-cel-hand-cards",
       "date": "2026-10-23",
       "title": "Hand cards show each place's cartoon",

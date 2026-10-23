@@ -4,84 +4,327 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Studies</title>
-<link rel="stylesheet" href="/app-style.css?v=1">
+<script src="/theme/boot.js?v=1"></script>
 <style>
-/* Studies mini-app: study list on the left, the open study on the right. Each study is its own page in an iframe, so its styles stay its own. */
-:root{--rail:268px}
-html,body{margin:0;height:100%;overflow:hidden;background:var(--app-canvas,#f4edcf)}
-body{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);height:100dvh;overflow:hidden}
-nav{background:var(--app-paper);border-right:1px solid var(--app-border);display:flex;flex-direction:column;min-height:0}
-.top{display:flex;align-items:center;gap:10px;padding:16px 16px 10px}
-.top h1{margin:0;font-size:24px}
-.back{margin-left:auto;display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--app-ink);border:1px solid var(--app-border);border-radius:999px;padding:7px 12px;font-weight:600;font-size:13px;background:#fff}
-.back:hover{border-color:var(--app-accent);color:var(--app-accent)}
-.list{overflow-y:auto;padding:4px 10px 24px;flex:1}
+/* Studies, a small app (docs/design/look/LOOK.md, "Studies"). The list on the left and the details on the right can each
+   be hidden ([ and ]) and dragged wider; both remember. Home shows Recent, Trending and Most impactful. Each study is its
+   own page in a frame and reads the same theme tokens (theme/boot.js), so the whole app is one style. */
+:root{--l:280px;--r:300px}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--aw-bg);color:var(--aw-ink);font:15px/1.45 var(--aw-font)}
+body{display:grid;grid-template-columns:var(--l) 0 minmax(0,1fr) 0 var(--r);height:100dvh}
+body.l-off{--l:0px}body.r-off{--r:0px}
+body.drag{user-select:none;cursor:col-resize}body.drag iframe{pointer-events:none}
+.side{min-width:0;min-height:0;display:flex;flex-direction:column;background:var(--aw-surface);overflow:hidden}
+#left{border-right:1px solid var(--aw-line)}#right{border-left:1px solid var(--aw-line)}
+body.l-off #left,body.r-off #right{visibility:hidden;border:0}
+.bar{display:flex;align-items:center;gap:8px;padding:14px 12px 10px 16px;min-height:60px}
+.bar h1{margin:0;font:600 22px/1 var(--aw-display);flex:1;min-width:0}
+.bar h1 a{color:inherit;text-decoration:none}
+.bar h2{margin:0;font:600 13px/1 var(--aw-font);letter-spacing:.07em;text-transform:uppercase;color:var(--aw-soft);flex:1}
+.ib{all:unset;box-sizing:border-box;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;cursor:pointer;color:var(--aw-soft);flex:none}
+.ib:hover{background:color-mix(in srgb,var(--aw-ink) 8%,transparent);color:var(--aw-ink)}
+.ib:focus-visible{outline:2px solid var(--aw-accent)}
+.ib svg{width:20px;height:20px}
+.list{overflow-y:auto;padding:0 10px 16px;flex:1}
 .group{margin-top:14px}
-.group>b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--app-muted);padding:0 8px 6px}
-.list a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:center;padding:7px 8px;border-radius:12px;text-decoration:none;color:var(--app-ink);transition:background-color .12s}
-.list a:hover{background:#0000000a}
-.list a[aria-current=true]{background:var(--app-accent);color:var(--app-on-accent,#fffdf4)}
+.group>b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--aw-soft);padding:0 8px 6px}
+.list a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:center;padding:7px 8px;border-radius:12px;text-decoration:none;color:var(--aw-ink)}
+.list a:hover{background:color-mix(in srgb,var(--aw-ink) 6%,transparent)}
+.list a[aria-current=true]{background:var(--aw-accent);color:var(--aw-on-accent)}
 .list a[aria-current=true] small{color:inherit;opacity:.85}
-.list img{width:44px;height:44px;object-fit:cover;border-radius:9px;background:#fff;border:1px solid var(--app-border)}
+.list a.home{grid-template-columns:44px 1fr;font-weight:600}
+.list a.home i{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--aw-accent) 14%,transparent);color:var(--aw-accent)}
+.list a.home[aria-current=true] i{background:color-mix(in srgb,var(--aw-on-accent) 22%,transparent);color:inherit}
+.list img{width:44px;height:44px;object-fit:cover;border-radius:10px;background:var(--aw-raised);border:1px solid var(--aw-line)}
 .list span{display:grid;min-width:0}
-.list strong{font-size:14px;line-height:1.25}
-.list small{font-size:12px;color:var(--app-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list strong{font-size:14px;line-height:1.25;font-weight:600}
+.list small{font-size:12px;color:var(--aw-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.me{display:flex;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--aw-line)}
+.me span{display:grid;min-width:0;flex:1}.me b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.me small{color:var(--aw-soft);font-size:12px}
+.me .aw-me{padding:0}
+.grip{position:relative;z-index:5;cursor:col-resize;touch-action:none}
+.grip::before{content:"";position:absolute;inset:0 -5px}
+.grip:hover::after,.grip:focus-visible::after,body.drag .grip.on::after{content:"";position:absolute;top:0;bottom:0;left:-1.5px;width:3px;background:var(--aw-accent);border-radius:2px}
+.grip:focus-visible{outline:none}
+body.l-off #gl,body.r-off #gr{pointer-events:none}
 main{position:relative;min-width:0;min-height:0}
-iframe{border:0;width:100%;height:100%;display:block;background:#fff}
-.menu{display:none}
+iframe{border:0;width:100%;height:100%;display:block;background:var(--aw-bg)}
+.float{position:absolute;top:12px;z-index:4;display:none;gap:6px;padding:4px;border-radius:16px;border:1px solid var(--aw-rim);
+  background:linear-gradient(160deg,rgba(255,255,255,.25),transparent 50%),var(--aw-glass);-webkit-backdrop-filter:blur(12px) saturate(1.6);backdrop-filter:blur(12px) saturate(1.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 20px -10px rgba(0,0,0,.4)}
+#fl{left:12px}#fr{right:12px}
+body.l-off #fl,body.r-off #fr{display:flex}
+/* home */
+#home{position:absolute;inset:0;overflow:auto;padding:36px clamp(16px,4vw,48px) 60px}
+#home[hidden]{display:none}
+#home header{max-width:1100px;margin:0 auto 8px}
+#home h1{margin:0;font:600 clamp(30px,5vw,46px)/1.05 var(--aw-display)}
+#home header p{margin:8px 0 0;color:var(--aw-soft);max-width:60ch}
+.row{max-width:1100px;margin:30px auto 0}
+.row h2{margin:0 0 4px;font:600 22px/1.2 var(--aw-display)}
+.row>p{margin:0 0 12px;color:var(--aw-soft);font-size:14px}
+.cards{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,300px);gap:16px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x proximity}
+.card{display:grid;gap:8px;text-decoration:none;color:var(--aw-ink);background:var(--aw-surface);border:1px solid var(--aw-line);border-radius:var(--aw-radius);
+  overflow:hidden;box-shadow:var(--aw-shadow);scroll-snap-align:start;transition:transform .14s}
+.card:hover{transform:translateY(-3px)}
+.card:focus-visible{outline:3px solid var(--aw-accent);outline-offset:2px}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--aw-raised)}
+.card div{padding:2px 14px 14px;display:grid;gap:4px}
+.card b{font:600 17px/1.2 var(--aw-display)}
+.card small{color:var(--aw-soft);font-size:13px}
+.card em{font-style:normal;font-size:13px;line-height:1.35}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--aw-ink) 8%,transparent);color:var(--aw-soft)}
+.chip.go{background:var(--aw-accent);color:var(--aw-on-accent)}
+.chip.new{background:var(--aw-accent2);color:#fff}
+/* the outcome toolbar: a glass object under the study, Read or Dismiss */
+.outcome{position:absolute;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;
+  border:1px solid var(--aw-rim);background:linear-gradient(160deg,rgba(255,255,255,.28),transparent 50%),var(--aw-glass);-webkit-backdrop-filter:blur(14px) saturate(1.7);backdrop-filter:blur(14px) saturate(1.7);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 3px rgba(0,0,0,.1),0 12px 28px -12px rgba(0,0,0,.45)}
+.outcome[hidden]{display:none}
+.outcome button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;cursor:pointer;font-weight:600;color:var(--aw-ink);
+  background:color-mix(in srgb,var(--aw-surface) 55%,transparent);border:1px solid var(--aw-line)}
+.outcome button svg{width:20px;height:20px}
+.outcome .ok{background:var(--aw-accent);color:var(--aw-on-accent);border-color:transparent}
+.outcome .go{background:var(--aw-ink);color:var(--aw-bg);border-color:transparent}
+.outcome button:hover{filter:brightness(1.06)}.outcome button:active{transform:scale(.97)}
+.outcome button:focus-visible{outline:2px solid var(--aw-accent);outline-offset:2px}
+.outcome .said{padding:0 8px 0 14px;font-weight:600;font-size:14px}
+.list details.done summary{list-style:none;cursor:pointer}.list details.done summary::-webkit-details-marker{display:none}
+.list details.done summary b::after{content:" \u203a";display:inline-block;transition:transform .15s}.list details.done[open] summary b::after{transform:rotate(90deg)}
+.list details.done a{opacity:.75}
+/* details */
+.facets{overflow-y:auto;padding:0 16px 20px;flex:1;display:grid;align-content:start;gap:16px}
+.facets img.hero{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:1px solid var(--aw-line);background:var(--aw-raised)}
+.facets h3{margin:0;font:600 19px/1.2 var(--aw-display)}
+.facets dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
+.facets dt{color:var(--aw-soft)}.facets dd{margin:0;min-width:0}
+.facets p{margin:0;font-size:14px;color:var(--aw-soft)}
+.facets h4{margin:0 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--aw-soft)}
+.toc{display:grid;gap:2px}
+.toc button{all:unset;cursor:pointer;padding:6px 8px;border-radius:9px;font-size:14px}
+.toc button:hover{background:color-mix(in srgb,var(--aw-ink) 6%,transparent)}
+.toc button:focus-visible{outline:2px solid var(--aw-accent)}
+.wait{padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--aw-accent) 12%,transparent);font-size:14px}
+.wait b{display:block}
+.open{color:var(--aw-accent);font-weight:600;text-decoration:none;font-size:14px}
 @media (max-width:760px){
- body{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
- nav{border-right:0;border-bottom:1px solid var(--app-border)}
- .list{display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;padding:0 12px 12px}
- .group{margin:0;display:contents}.group>b{display:none}
- .list a{grid-template-columns:32px auto;flex:none;padding:6px 10px 6px 6px;border:1px solid var(--app-border);background:#fff}
- .list img{width:32px;height:32px}.list small{display:none}
- .top{padding:12px 16px 10px}
+ body{grid-template-columns:minmax(0,1fr)}
+ .grip{display:none}
+ .side{position:fixed;top:0;bottom:0;z-index:20;width:min(86vw,340px);box-shadow:0 0 40px rgba(0,0,0,.3)}
+ #left{left:0}#right{right:0}
+ main{grid-column:1;grid-row:1;height:100dvh}
+ body.l-off #fl,body.r-off #fr{display:flex}
 }
 </style>
 </head>
-<body>
-<nav aria-label="Studies">
- <div class="top"><h1>Studies</h1><a class="back" href="https://abbies.world/">&larr; Back to ranch</a></div>
- <div class="list" id="list"></div>
-</nav>
-<main><iframe id="view" title="Study"></iframe></main>
-<script>
-const GROUPS=[
- ['Roman paper warrior',[
-  ['overview','Overview','Where the warrior stands','warrior/index.html','warrior/img/proof_c.jpg'],
-  ['round1','Round 1','Fit the image','warrior/index.html#round1','warrior/img/master.jpg'],
-  ['round2','Round 2','Keep the style','warrior/index.html#round2','warrior/img/abc_torso.jpg'],
-  ['round3','Round 3','Three views','warrior/index.html#round3','warrior/img/r3_spin_sheet.jpg'],
-  ['props','Props and kit','How the parts were fitted','warrior/index.html#offshoots','warrior/img/kit_exploded.jpg'],
-  ['props3d','Five props in 3D','Turn and zoom each prop, next to its image','/models','img/props-cuirass.png'],
-  ['bodies','AW-STUDY-0017 Papercraft Figures','Paper bodies from your picks, in 3D','bodies/index.html','bodies/thumb.jpg'],
- ]],
- ['Helmet',[
-  ['helmet','Paper helmet','Same camera, loss and crops','helmet/index.html','helmet/C.jpg'],
-  ['ridge','Ridge helmet','Late-Roman helmet for Fritigern','helmet/index.html#ridge','helmet/ridge.jpg'],
- ]],
- ['Oracle studies',[
-  ['space-mail','AW-STUDY-0012 Space Mail','Low-gravity letter romp, playable','spacemail/index.html','spacemail/img/thumb.jpg'],
-  ['cafe','AW-STUDY-0013 The café','Proofs by view and style','cafe/index.html','cafe/img/thumb.jpg'],
-  ['bodies-study','AW-STUDY-0016 Bodies','The normal human: proportions, muscles, scorecard','bodies-study/index.html','bodies-study/img/thumb.jpg'],
- ]],
- ['Models',[
-  ['atelier','Atelier pack','Trees, rocks and props, before and after','atelier/index.html','atelier/img/after-z.jpg'],
- ]],
+<body class="r-off">
+<aside class="side" id="left" aria-label="Studies">
+ <div class="bar"><h1><a href="#home">Studies</a></h1><button class="ib" id="hide-l" aria-label="Hide the list" title="Hide the list  [">__SIDEBAR__</button></div>
+ <nav class="list" id="list"></nav>
+ <div class="me" id="me"><span><b id="me-name">You</b><small id="me-style"></small></span></div>
+</aside>
+<div class="grip" id="gl" role="separator" aria-orientation="vertical" aria-label="Resize the list" tabindex="0"></div>
+<main>
+ <div class="float" id="fl"><button class="ib" id="show-l" aria-label="Show the list" title="Show the list  [">__SIDEBAR__</button></div>
+ <div class="float" id="fr"><button class="ib" id="show-r" aria-label="Show the details" title="Show the details  ]">__DETAILS__</button></div>
+ <section id="home" aria-label="Studies home"></section>
+ <iframe id="view" title="Study" hidden></iframe>
+ <div class="outcome" id="outcome" role="toolbar" aria-label="Outcome" hidden></div>
+</main>
+<div class="grip" id="gr" role="separator" aria-orientation="vertical" aria-label="Resize the details" tabindex="0"></div>
+<aside class="side" id="right" aria-label="Details">
+ <div class="bar"><h2>Details</h2><button class="ib" id="hide-r" aria-label="Hide the details" title="Hide the details  ]">__DETAILS__</button></div>
+ <div class="facets" id="facets"></div>
+</aside>
+<script type="module">
+import {mountProfileButton, getProfile, currentTheme} from '/theme/aw.mjs';
+const ICON = {
+ sidebar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg>',
+ details: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M15 4v16"/></svg>',
+ home: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg>'
+};
+for (const b of document.querySelectorAll('.ib')) b.innerHTML = b.innerHTML.replace('__SIDEBAR__', ICON.sidebar).replace('__DETAILS__', ICON.details);
+
+// Every study: id, title, line, page, picture, group, study number, last changed, status, and what it changed (impact,
+// 0-5, with the reason). Newest first on Home comes from `at`.
+const S = [
+ {id:'space-mail', t:'Space Mail', s:'Low-gravity letter romp, playable', src:'spacemail/index.html', img:'spacemail/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0012', at:'2026-10-23T05:03Z', st:'Playable', impact:2, why:'A whole mini game designed from our identity; waiting on your go to build it.'},
+ {id:'cafe', t:'The café', s:'Proofs by view and style', src:'cafe/index.html', img:'cafe/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T05:12Z', st:'Proofs', impact:1, why:'Picks a style for Abbie’s café before anything is built.'},
+ {id:'bodies-study', t:'Bodies', s:'The normal human: proportions, muscles, scorecard', src:'bodies-study/index.html', img:'bodies-study/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0016', at:'2026-10-23T05:40Z', st:'Done', impact:4, why:'The canon of a normal human body every figure is measured against.'},
+ {id:'bodies', t:'Papercraft figures', s:'Paper bodies from your picks, in 3D', src:'bodies/index.html', img:'bodies/thumb.jpg', g:'Roman paper warrior', n:'AW-STUDY-0017', at:'2026-10-23T05:15Z', st:'In progress', impact:3, why:'Body types the Roman kit and every later figure stand on.'},
+ {id:'overview', t:'Paper warrior', s:'Where the warrior stands', src:'warrior/index.html', img:'warrior/img/proof_c.jpg', g:'Roman paper warrior', at:'2026-10-23T04:42Z', st:'Done', impact:5, why:'Set the parts-first rule: each piece is modelled and fitted on its own.'},
+ {id:'round1', t:'Round 1', s:'Fit the image', src:'warrior/index.html#round1', img:'warrior/img/master.jpg', g:'Roman paper warrior', at:'2026-10-22T18:40Z', st:'Done', impact:3, why:'First image-to-model fit with a loss you can watch fall.'},
+ {id:'round2', t:'Round 2', s:'Keep the style', src:'warrior/index.html#round2', img:'warrior/img/abc_torso.jpg', g:'Roman paper warrior', at:'2026-10-22T18:40Z', st:'Done', impact:2, why:'Kept the papercraft look while the fit improved.'},
+ {id:'round3', t:'Round 3', s:'Three views', src:'warrior/index.html#round3', img:'warrior/img/r3_spin_sheet.jpg', g:'Roman paper warrior', at:'2026-10-22T18:40Z', st:'Done', impact:3, why:'Front, side and back from one sheet; the modeler now fits all three.'},
+ {id:'props', t:'Props and kit', s:'How the parts were fitted', src:'warrior/index.html#offshoots', img:'warrior/img/kit_exploded.jpg', g:'Roman paper warrior', at:'2026-10-22T18:40Z', st:'Done', impact:4, why:'Became the six-part Roman kit used by every Roman figure.'},
+ {id:'props3d', t:'Five props in 3D', s:'Turn and zoom each prop, next to its image', src:'/models', img:'img/props-cuirass.png', g:'Roman paper warrior', at:'2026-10-23T03:59Z', st:'Live', impact:3, why:'Started the model viewer you now review every model in.'},
+ {id:'helmet', t:'Paper helmet', s:'Same camera, loss and crops', src:'helmet/index.html', img:'helmet/C.jpg', g:'Helmet', at:'2026-10-22T18:40Z', st:'Done', impact:4, why:'Made "same camera before and after" a rule for every study.'},
+ {id:'ridge', t:'Ridge helmet', s:'Late-Roman helmet for Fritigern', src:'helmet/index.html#ridge', img:'helmet/ridge.jpg', g:'Helmet', at:'2026-10-22T18:40Z', st:'Done', impact:2, why:'The first piece of Fritigern’s 4th-century gear.'},
+ {id:'atelier', t:'Atelier pack', s:'Trees, rocks and props, before and after', src:'atelier/index.html', img:'atelier/img/after-z.jpg', g:'Models', at:'2026-10-22T18:40Z', st:'Live', impact:5, why:'Its trees, rocks and props replaced the Ranch’s old models in the game.'},
 ];
-const list=document.getElementById('list'),view=document.getElementById('view'),links={};
-for(const [name,items] of GROUPS){const g=document.createElement('div');g.className='group';g.innerHTML='<b>'+name+'</b>';
- for(const [id,title,sub,src,thumb] of items){const a=document.createElement('a');a.href='#'+id;a.dataset.src=src;
-  a.innerHTML='<img alt="" loading="lazy" src="'+thumb+'"><span><strong>'+title+'</strong><small>'+sub+'</small></span>';links[id]=a;g.appendChild(a);}
- list.appendChild(g);}
-function open(){const id=links[location.hash.slice(1)]?location.hash.slice(1):'overview',a=links[id];
- for(const k in links)links[k].setAttribute('aria-current',k===id);
- if(view.dataset.src!==a.dataset.src){view.dataset.src=a.dataset.src;view.src=a.dataset.src;}
- const r=a.getBoundingClientRect(),l=list.getBoundingClientRect();
- list.scrollLeft+=r.left<l.left||r.right>l.right?r.left-l.left-12:0;
- list.scrollTop+=r.top<l.top||r.bottom>l.bottom?r.top-l.top-12:0;}
-addEventListener('hashchange',open);open();
+const GROUPS = [...new Set(S.map(x => x.g))];
+const by = Object.fromEntries(S.map(x => [x.id, x]));
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ago = iso => { const m = (Date.now() - Date.parse(iso)) / 6e4; return m < 60 ? Math.max(1, Math.round(m)) + ' min ago' : m < 1440 ? Math.round(m / 60) + ' h ago' : Math.round(m / 1440) + ' days ago'; };
+const store = (k, v) => { try { if (v === undefined) return JSON.parse(localStorage.getItem(k)); localStorage.setItem(k, JSON.stringify(v)); } catch { return null; } };
+
+// ---------- panels: hide, show, drag wider; all remembered ----------
+const body = document.body, P = Object.assign({l: 280, r: 300, lOff: false, rOff: false}, store('aw-studies-panels') || {});
+const phone = matchMedia('(max-width:760px)');
+function layout(){
+ body.style.setProperty('--l', P.l + 'px'); body.style.setProperty('--r', P.r + 'px');
+ body.classList.toggle('l-off', phone.matches ? !P.lPhone : P.lOff);
+ body.classList.toggle('r-off', phone.matches ? !P.rPhone : P.rOff);
+}
+const keep = () => store('aw-studies-panels', {l: P.l, r: P.r, lOff: P.lOff, rOff: P.rOff});
+function toggle(side, on){
+ if (phone.matches){ const k = side + 'Phone'; P[k] = on ?? !P[k]; if (P[k]) P[side === 'l' ? 'rPhone' : 'lPhone'] = false; }
+ else { const k = side + 'Off'; P[k] = on === undefined ? !P[k] : !on; keep(); }
+ layout();
+}
+phone.addEventListener('change', layout);
+document.getElementById('hide-l').onclick = () => toggle('l', false);
+document.getElementById('show-l').onclick = () => toggle('l', true);
+document.getElementById('hide-r').onclick = () => toggle('r', false);
+document.getElementById('show-r').onclick = () => toggle('r', true);
+function grip(el, side){
+ const lim = side === 'l' ? [200, 480] : [240, 560];
+ el.addEventListener('pointerdown', e => {
+  e.preventDefault(); el.setPointerCapture(e.pointerId); body.classList.add('drag'); el.classList.add('on');
+  const move = ev => { P[side] = Math.round(Math.min(lim[1], Math.max(lim[0], side === 'l' ? ev.clientX : innerWidth - ev.clientX))); layout(); };
+  const up = () => { el.removeEventListener('pointermove', move); body.classList.remove('drag'); el.classList.remove('on'); keep(); };
+  el.addEventListener('pointermove', move); el.addEventListener('pointerup', up, {once: true}); el.addEventListener('pointercancel', up, {once: true});
+ });
+ el.addEventListener('dblclick', () => toggle(side, false));
+ el.addEventListener('keydown', e => {
+  const d = {ArrowLeft: -16, ArrowRight: 16}[e.key]; if (!d) return;
+  e.preventDefault(); P[side] = Math.min(lim[1], Math.max(lim[0], P[side] + (side === 'l' ? d : -d))); layout(); keep();
+ });
+}
+grip(document.getElementById('gl'), 'l'); grip(document.getElementById('gr'), 'r');
+function keys(e){
+ if (e.target.closest?.('input,textarea,select,[contenteditable=true]') || e.metaKey || e.ctrlKey || e.altKey) return;
+ if (e.key === '[') { e.preventDefault(); toggle('l'); } else if (e.key === ']') { e.preventDefault(); toggle('r'); }
+}
+addEventListener('keydown', keys);
+layout();
+
+// ---------- the list ----------
+// Outcomes (Evan, 05:52Z): marking a study read or dismissed takes it out of the list and Home; it stays under Done and
+// its page stays where it was. Kept on this device in 'aw-study-outcomes'.
+const outcomes = () => store('aw-study-outcomes') || {};
+const done = x => !!outcomes()[x.id];
+const active = () => S.filter(x => !done(x));
+const list = document.getElementById('list'), links = {};
+function drawList(){
+ const A = active(), D = S.filter(done), O = outcomes();
+ const row = x => `<a href="#${x.id}" data-id="${x.id}"><img alt="" loading="lazy" src="${x.img}"><span><strong>${esc(x.n ? x.n.replace('AW-STUDY-', '#') + ' ' : '')}${esc(x.t)}</strong><small>${esc(O[x.id] ? (O[x.id].o === 'read' ? 'Read' : 'Dismissed') + ' \u00b7 ' + x.s : x.s)}</small></span></a>`;
+ list.innerHTML = `<a class="home" href="#home" data-id="home"><i>${ICON.home}</i><span><strong>Home</strong></span></a>`
+  + GROUPS.map(g => A.filter(x => x.g === g)).filter(xs => xs.length).map(xs => `<div class="group"><b>${esc(xs[0].g)}</b>${xs.map(row).join('')}</div>`).join('')
+  + (D.length ? `<details class="group done"${store('aw-studies-done-open') ? ' open' : ''}><summary><b>Done \u00b7 ${D.length}</b></summary>${D.map(row).join('')}</details>` : '');
+ for (const k in links) delete links[k];
+ for (const a of list.querySelectorAll('a')) links[a.dataset.id] = a;
+ list.querySelector('details.done')?.addEventListener('toggle', e => store('aw-studies-done-open', e.target.open));
+}
+drawList();
+
+// A study waits on Evan while its status says so (the review inbox page was retired, Evan 05:38Z).
+const waiting = x => !done(x) && ['Playable', 'Proofs'].includes(x.st) ? {ask: x.st === 'Playable' ? 'Play it and say whether to build it.' : 'Pick a style and your favourite picture in each view.'} : null;
+
+// ---------- home: Recent, Trending, Most impactful ----------
+const opens = () => store('aw-studies-opens') || {};
+function card(x, line){
+ const w = waiting(x), fresh = Date.now() - Date.parse(x.at) < 864e5;
+ return `<a class="card" href="#${x.id}"><img alt="" loading="lazy" src="${x.img}"><div><span class="chips">${w ? '<span class="chip go">Waiting on you</span>' : ''}${fresh ? '<span class="chip new">New</span>' : ''}<span class="chip">${esc(x.st)}</span></span>
+  <b>${esc(x.t)}</b><small>${esc([x.n, ago(x.at)].filter(Boolean).join(' · '))}</small><em>${esc(line(x))}</em></div></a>`;
+}
+function home(){
+ const o = opens(), score = x => (waiting(x) ? 5 : 0) + (o[x.id]?.n || 0) + Math.max(0, 3 - (Date.now() - Date.parse(x.at)) / 864e5);
+ const A = active(), D = S.filter(done);
+ const recent = [...A].sort((a, b) => Date.parse(b.at) - Date.parse(a.at)).slice(0, 8);
+ const trending = [...A].sort((a, b) => score(b) - score(a)).slice(0, 8);
+ const impact = [...A].sort((a, b) => b.impact - a.impact || Date.parse(b.at) - Date.parse(a.at)).slice(0, 8);
+ const rowOf = (h, p, xs, line) => xs.length ? `<section class="row"><h2>${h}</h2><p>${p}</p><div class="cards">${xs.map(x => card(x, line)).join('')}</div></section>` : '';
+ document.getElementById('home').innerHTML = `<header><h1>Studies</h1><p>How each piece of Abbie's World was worked out: the pictures, the tries and what we learned.</p></header>
+  ${A.length ? '' : '<section class="row"><h2>All caught up</h2><p>Every study is read or dismissed. They are all still under Done.</p></section>'}
+  ${rowOf('Recent', 'Newest changes first.', recent, y => y.s)}
+  ${rowOf('Trending', 'What\u2019s waiting on you, what you\u2019ve opened lately and what just changed.', trending, y => y.s)}
+  ${rowOf('Most impactful', 'The studies that changed the game the most.', impact, y => y.why)}
+  ${rowOf('Done', 'Read or dismissed. Open one to bring it back.', D, y => (outcomes()[y.id]?.o === 'read' ? 'Read' : 'Dismissed'))}`;
+}
+
+// ---------- details: facets of what's open ----------
+const facets = document.getElementById('facets'), view = document.getElementById('view');
+function detailsHome(){
+ const w = S.filter(waiting), newest = [...S].sort((a, b) => Date.parse(b.at) - Date.parse(a.at))[0];
+ facets.innerHTML = `<h3>All studies</h3><dl><dt>Studies</dt><dd>${S.length}</dd><dt>Groups</dt><dd>${GROUPS.length}</dd><dt>Newest</dt><dd>${esc(newest.t)}, ${ago(newest.at)}</dd><dt>Waiting on you</dt><dd>${w.length}</dd></dl>
+  ${w.length ? `<div><h4>Waiting on you</h4><div class="toc">${w.map(x => `<button type="button" data-go="${x.id}">${esc(x.t)}</button>`).join('')}</div></div>` : ''}`;
+}
+function detailsStudy(x){
+ const w = waiting(x), doc = (() => { try { return view.contentDocument; } catch { return null; } })();
+ const heads = doc ? [...doc.querySelectorAll('h2')].filter(h => h.textContent.trim()) : [];
+ const pics = doc ? doc.querySelectorAll('img').length : 0, models = doc ? doc.querySelectorAll('model-viewer,canvas').length : 0;
+ const desc = doc?.querySelector('meta[name=description]')?.content || '';
+ facets.innerHTML = `<img class="hero" alt="" src="${x.img}"><h3>${esc(x.t)}</h3>${desc ? `<p>${esc(desc)}</p>` : ''}
+  ${w ? `<div class="wait"><b>Waiting on you</b>${esc(w.ask)}</div>` : ''}
+  <dl>${x.n ? `<dt>Study</dt><dd>${esc(x.n)}</dd>` : ''}<dt>Group</dt><dd>${esc(x.g)}</dd><dt>Status</dt><dd>${esc(x.st)}</dd><dt>Changed</dt><dd>${ago(x.at)}</dd>
+  ${doc ? `<dt>Pictures</dt><dd>${pics}</dd><dt>3D views</dt><dd>${models}</dd>` : ''}</dl>
+  <div><h4>What it changed</h4><p>${esc(x.why)}</p></div>
+  ${heads.length ? `<div><h4>In this study</h4><div class="toc">${heads.map((h, i) => `<button type="button" data-h="${i}">${esc(h.textContent.trim())}</button>`).join('')}</div></div>` : ''}
+  <a class="open" href="${x.src.startsWith('/') ? x.src : x.src}" target="_blank" rel="noopener">Open on its own ↗</a>`;
+ facets.onclick = e => { const b = e.target.closest('[data-h]'); if (b) heads[Number(b.dataset.h)]?.scrollIntoView({behavior: 'smooth', block: 'start'}); };
+}
+facets.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) location.hash = b.dataset.go; });
+view.addEventListener('load', () => {
+ const x = by[location.hash.slice(1)]; if (x) detailsStudy(x);
+ try { view.contentWindow.addEventListener('keydown', keys); } catch {}
+});
+
+// ---------- routing ----------
+function route(){
+ const id = by[location.hash.slice(1)] ? location.hash.slice(1) : 'home', x = by[id];
+ for (const k in links) links[k].setAttribute('aria-current', String(k === id));
+ document.getElementById('home').hidden = !!x; view.hidden = !x;
+ if (!x){ home(); detailsHome(); document.title = 'Studies'; }
+ else {
+  document.title = x.t + ' · Studies';
+  if (view.dataset.src !== x.src){ view.dataset.src = x.src; view.src = x.src; } else detailsStudy(x);
+  const o = opens(); o[id] = {n: (o[id]?.n || 0) + 1, at: Date.now()}; store('aw-studies-opens', o);
+  if (phone.matches){ P.lPhone = false; layout(); }
+ }
+ outcomeBar(x);
+ links[id]?.scrollIntoView({block: 'nearest'});
+}
+// ---------- the outcome toolbar: Read or Dismiss the open study ----------
+const bar = document.getElementById('outcome');
+function outcomeBar(x){
+ bar.hidden = !x; if (!x) return;
+ const o = outcomes()[x.id], next = active().find(y => y.id !== x.id);
+ bar.innerHTML = o
+  ? `<span class="said">${o.o === 'read' ? 'Read' : 'Dismissed'}, off your list</span><button type="button" data-undo>Undo</button>${next ? `<button type="button" class="go" data-next="${next.id}">Next \u203a</button>` : ''}`
+  : `<button type="button" class="ok" data-out="read" title="Read, take it off my list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Read</span></button><button type="button" class="no" data-out="dismissed" title="Dismiss, take it off my list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Dismiss</span></button>`;
+}
+bar.addEventListener('click', e => {
+ const b = e.target.closest('button'), id = location.hash.slice(1); if (!b || !by[id]) return;
+ const O = outcomes();
+ if (b.dataset.out) O[id] = {o: b.dataset.out, at: new Date().toISOString()};
+ else if (b.dataset.undo !== undefined) delete O[id];
+ else if (b.dataset.next) { location.hash = b.dataset.next; return; }
+ store('aw-study-outcomes', O); drawList(); route();
+});
+addEventListener('storage', e => { if (e.key === 'aw-study-outcomes') { drawList(); route(); } });
+addEventListener('hashchange', route); route();
+
+// ---------- you ----------
+const me = document.getElementById('me');
+me.prepend(mountProfileButton(me, {size: 36}));
+me.addEventListener('click', e => { if (!e.target.closest('.aw-me')) me.querySelector('.aw-me').click(); });
+me.style.cursor = 'pointer';
+const who = () => { const p = getProfile(); document.getElementById('me-name').textContent = p.name || 'You'; document.getElementById('me-style').textContent = 'Profile and settings · ' + currentTheme().name; };
+who(); for (const ev of ['aw-look-change', 'aw-profile-change', 'storage']) addEventListener(ev, who);
 </script>
 <script src="/version-chip.js?v=1" defer></script>
 </body>

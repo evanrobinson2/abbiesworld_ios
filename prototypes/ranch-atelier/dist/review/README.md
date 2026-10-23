@@ -35,3 +35,5 @@ Add `"models": ["id-1", "id-2"]` (catalogue ids from `models/manifest.json`; `"m
 item a study set. Tapping it opens `/models/?set=<item id>`: the models review desk showing only that set, concept on the
 left, 3D in the middle, keep / talk / reject on the right. Verdicts go to `/api/model-reviews` and, for owned groups,
 to the owning thread's feedback inbox (`OWNER` in `models/models.js`). Put each model in `models/manifest.json` first.
+
+**Retired (Evan, 2026-10-23 05:38Z: "kill this").** /review, /review/ and /inbox now redirect to /studies/. The images and models under review/img and review/3d stay, because /models still shows them. Threads no longer post items here.

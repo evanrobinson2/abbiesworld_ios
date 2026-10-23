@@ -94,7 +94,7 @@ import {completeDomesticPaths} from './domestic-scenes.js';
 import {spatialState,spatialReadout} from './microcosm.mjs';
 import {createRanchLife} from './ranch-life.mjs?motion=37';
 import {RANCH_MODELS,spaceRequirements,ranchSiteCost} from './ranch-spaces.mjs?habitat=4';
-const worldTheme=createWorldAppearance({vibrancy:.2});worldTheme.setTheme(themes[7]);
+const worldTheme=createWorldAppearance({vibrancy:.2});worldTheme.setTheme(themes[0]);
 const $=s=>document.querySelector(s),host=$('#world');
 const ambientSound=createRanchSound();window.addEventListener('pagehide',()=>ambientSound.dispose(),{once:true});
 const buildProgress=createBuildProgress();let sceneReadouts=null,placedVisual=null;
@@ -535,7 +535,7 @@ function updateSiteWarning(){
 }
 
 function syncSpeedControl(){const button=$('#simulation-speed');if(!button)return;const label=speedLabel(simulationSpeed);button.querySelector('span').textContent=speedBadge(simulationSpeed);button.title=button.ariaLabel='Simulation speed: '+label;}
-function applyWorldStyle(){const index=Number(document.documentElement.dataset.appStyle)-1;worldTheme.setTheme(themes[index]||themes[7]);worldTheme.attach(active?.group);ranchSky.setTheme(worldTheme.palette);updateSun();renderer.domElement.dataset.worldStyle=worldTheme.palette.name;}
+function applyWorldStyle(){const index=Number(document.documentElement.dataset.appStyle)-1;worldTheme.setTheme(themes[index]||themes[0]);worldTheme.attach(active?.group);ranchSky.setTheme(worldTheme.palette);updateSun();renderer.domElement.dataset.worldStyle=worldTheme.palette.name;}
 window.addEventListener('app-style-change',applyWorldStyle);applyWorldStyle();
 
 function renderStarshipControls(){
