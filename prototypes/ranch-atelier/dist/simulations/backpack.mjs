@@ -301,12 +301,14 @@ function heartShape(s, k) { s.moveTo(0, -k * .9); s.bezierCurveTo(-k * 1.5, k * 
 // The charms that take up canon are Meshy models made from their Midjourney picks (Evan, 17:27Z), cleaned in Blender
 // (simulations/assets/backpack/charms/, centred, largest side 1, Y up). Untextured ones have one material, "charm",
 // which is shaded here as enamel or gold. Until a model has loaded, or if it can't, the hand-built charm stands in.
-const CHARM_GLB = {tardigrade: 'tardigrade', 'all-memories': 'heart', 'moon-key': 'moon', rocket: 'rocket', 'school-roof': 'star', basement: 'floppy-disk'};
+const CHARM_GLB = {tardigrade: 'tardigrade', 'all-memories': 'heart', 'moon-key': 'moon', rocket: 'rocket', 'school-roof': 'star', basement: 'floppy-disk',
+ bub: 'bub', barista: 'coffee-cup', 'brass-key': 'brass-key'};
 const CHARM_SHADE = {heart: ['enamel heart red', '#e8334f', .1, .22], moon: ['metal gold moon', '#f0b93a', .75, .28], rocket: ['enamel rocket red', '#d9393a', .1, .25],
- star: ['metal gold star', '#ffc93a', .7, .3], 'floppy-disk': ['enamel floppy blue', '#2f55c8', .15, .24]};
+ star: ['metal gold star', '#ffc93a', .7, .3], 'floppy-disk': ['enamel floppy blue', '#2f55c8', .15, .24],
+ bub: ['enamel bub black', '#2a2622', .05, .45], 'coffee-cup': ['enamel cup cream', '#f1e6d4', .05, .4], 'brass-key': ['metal brass key', '#e0b04a', .8, .28]};
 const CHARM_SIZE = .11;
-// Turns that make each model hang the way a charm does: the water bear side on, the floppy disk standing up.
-const CHARM_TURN = {tardigrade: [0, -Math.PI / 2, 0], 'floppy-disk': [Math.PI / 2, 0, 0]};
+// Turns that make each model hang the way a charm does: the water bear and bub side on, the disk and the key standing up.
+const CHARM_TURN = {tardigrade: [0, -Math.PI / 2, 0], 'floppy-disk': [Math.PI / 2, 0, 0], 'brass-key': [Math.PI / 2, 0, 0], bub: [0, -Math.PI / 2.6, 0]};
 const glbCharms = new Map(), glbLoads = new Map();
 // A small reader for these GLBs (one node, plain triangles, an optional base-colour image), so every page can load the
 // charms with its own three.js and needs no importmap for GLTFLoader.
