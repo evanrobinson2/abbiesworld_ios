@@ -39,10 +39,23 @@ The Printables hotwheels tag page shows no licences, so its models are reference
 CC-BY (with credit) only; non-commercial and no-derivatives stay reference. Everything shipped is primitives, so there is
 nothing to credit yet. Borrowed concept art goes in `studies/coaster/img/concepts/`. No Midjourney proofs this round.
 
+## Round 2 (Evan, 22:03Z / 6:03 PM)
+
+Evan: "you are absolutely not even close to done." His bar for a finished minigame, all now in:
+- In Winchester: `simulations/coaster-town.mjs` stands the coaster on the skate-park pad (Main Street beside the café);
+  a tap flies down, flashes, and opens the ride with `?skip=tile`; back returns to `/town?at=town:skate-park`.
+- Six original toy cars in a garage (`simulations/coaster-cars.mjs`), including the shopping cart; pick and paint remembered.
+- Music and sound (`simulations/coaster-audio.mjs`): the Music Bible hook played live by a small synth band, speed-driven
+  wind, rumble and click-clack, and the sound store's effects. No paid music generation was used.
+- Cinematic look (`postFX` in `coaster-kit.mjs`): golden-hour sun, bloom, warm grade, vignette, letterbox for cinematic beats.
+- Slow motion: the tennis-ball near miss (time x0.14, heartbeat, muffled music), the jump (x0.3) with an on-ride photo
+  taken from a bleacher camera, plus a frisbee and a paper plane.
+- Tests: `tools/minigame-test/coaster-flow.cjs` (ride beats), `tools/minigame-test/coaster-town.cjs` (model on the pad, tap opens the ride).
+
 ## What to do next
 
 1. Redraw the loop as a clothoid (a circle makes the force jump; Technology Review's piece on smooth coasters).
-2. Mount the ride in the town scene instead of the stand-in board; add the Toy car to the charms map and jewellery box art.
+2. Sit the town model's start tower clear of the quarter-pipes; add the Toy car to the charms map and jewellery box art.
 3. Concept art pass (Midjourney or Evan's borrowed pictures), then hi-fi low-poly track pieces and a better car.
 
 ## How it was made, and how to be faster next time
@@ -57,3 +70,9 @@ Timeline (local, UTC-4): 5:04 PM first words; 5:10 PM canon read, hex thread ask
   (2) the cockpit checklist belongs in the kit (glass and frame hidden from the seat, eye position, mirror distance), tested once;
   (3) ask the Oracle for a rail-ride study ahead of time (cloud threads cannot reach it, so none fed this round); (4) start
   concept art in parallel with the recipe so the model matches a picture; (5) a new ride is now a new recipe, not new code.
+
+Round 2 timeline: 6:03 PM Evan's list; 6:24 PM first round-2 screenshots in the thread; town model and tap tested by 6:40 PM.
+- **What slowed it down:** round 1 stopped at a proof. Evan's bar (in the town, real-looking cars, sound, music, cinematic
+  polish, screenshots) was knowable up front. **Speedup 6:** plan every minigame to that bar from the first round, and post
+  screenshots with every update.
+- **Speedup 7:** the cars, the audio band and the cinematic pass are now kit modules; the next ride starts with all three.
