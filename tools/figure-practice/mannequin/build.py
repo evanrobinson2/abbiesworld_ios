@@ -3,6 +3,9 @@
 import bpy, bmesh, math, json, sys
 from mathutils import Vector
 S=0.01
+import os
+SMOOTH=os.environ.get('SMOOTH')=='1'   # fully rounded twin: same parts and pose, dense and smooth-shaded
+K=3 if SMOOTH else 1
 J2 = dict(hR=(232,650), hL=(292,645), kR=(213,845), aR=(195,1045), tR=(160,1112),
  kL=(205,820), aL=(350,955), tL=(392,1000), hc=(262,640), waist=(322,500), neck=(420,396), crown=(494,324),
  sR=(332,422), eR=(283,372), wR=(268,332), fR=(266,300),
@@ -30,19 +33,20 @@ def place(obj,a,b,center_t=0.5):
     obj.rotation_mode='QUATERNION'; obj.rotation_quaternion=Vector((0,0,1)).rotation_difference(d.normalized())
 def finish(obj,name,m):
     obj.name=name; obj.data.materials.append(m)
-    for p in obj.data.polygons: p.use_smooth=False
+    for p in obj.data.polygons: p.use_smooth=SMOOTH
     return obj
 def ellipsoid(name,a,b,half,rx,ry,t=0.5,m=WOOD,seg=10,rings=7,taper=0.0):
-    bpy.ops.mesh.primitive_uv_sphere_add(segments=seg,ring_count=rings,radius=1)
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=seg*K,ring_count=rings*K,radius=1)
     o=bpy.context.object
     if taper:
         for v in o.data.vertices: f=1+taper*v.co.z; v.co.x*=f; v.co.y*=f
     o.scale=(rx*S,ry*S,half*S); place(o,P[a] if isinstance(a,str) else a,P[b] if isinstance(b,str) else b,t)
     return finish(o,name,m)
 def ball(name,j,r,m=JOINT):
-    bpy.ops.mesh.primitive_uv_sphere_add(segments=8,ring_count=6,radius=r*S,location=P[j] if isinstance(j,str) else j)
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=8*K,ring_count=6*K,radius=r*S,location=P[j] if isinstance(j,str) else j)
     return finish(bpy.context.object,name,m)
 def spindle(name,a,b,r0,r1,bulge,peak=0.35,m=WOOD,sides=8,rings=7,flat=1.0):
+    sides*=K; rings*=K
     # mannequin limb: a lathe profile, fattest at `peak` (Bridgman: bellies high, tendons low)
     A=P[a];B=P[b]; L=(B-A).length
     me=bpy.data.meshes.new(name); bm=bmesh.new(); rows=[]
@@ -55,10 +59,12 @@ def spindle(name,a,b,r0,r1,bulge,peak=0.35,m=WOOD,sides=8,rings=7,flat=1.0):
     bm.faces.new(rows[0][::-1]); bm.faces.new(rows[-1]); bm.to_mesh(me); bm.free()
     o=bpy.data.objects.new(name,me); bpy.context.scene.collection.objects.link(o)
     o.location=A; o.rotation_mode='QUATERNION'; o.rotation_quaternion=Vector((0,0,1)).rotation_difference((B-A).normalized())
-    o.data.materials.append(m); return o
+    o.data.materials.append(m)
+    for p in me.polygons: p.use_smooth=SMOOTH
+    return o
 def limb(name,a,b,r0,r1,m=WOOD,gap=0.0):
     A=P[a];B=P[b]; d=B-A; L=d.length
-    bpy.ops.mesh.primitive_cone_add(vertices=8,radius1=r0*S,radius2=r1*S,depth=L*(1-2*gap))
+    bpy.ops.mesh.primitive_cone_add(vertices=8*K,radius1=r0*S,radius2=r1*S,depth=L*(1-2*gap))
     o=bpy.context.object; place(o,A,B); return finish(o,name,m)
 # torso: head, neck, chest, waist ring, abdomen, pelvis
 ellipsoid("head","neck","crown",58,46,44,t=0.52,taper=0.12)
@@ -80,7 +86,7 @@ for side in ("R","L"):
     ball(f"hip_{side}",f"h{side}",24); spindle(f"thigh_{side}",f"h{side}",f"k{side}",28,19,8,peak=0.3)
     ball(f"knee_{side}",f"k{side}",19); spindle(f"shin_{side}",f"k{side}",f"a{side}",19,11,4,peak=0.25)
     ball(f"ankle_{side}",f"a{side}",12)
-    ellipsoid(f"foot_{side}",f"a{side}",f"t{side}",(P[f"t{side}"]-P[f"a{side}"]).length/S*0.62,24,13,t=0.5,seg=8,rings=5,taper=-0.4)
+    ellipsoid(f"foot_{side}",f"a{side}",f"t{side}",(P[f"t{side}"]-P[f"a{side}"]).length/S*0.8,28,14,t=0.35,seg=8,rings=5,taper=-0.4)
 # camera: orthographic, matching the photo frame (866 x 1290 px)
 cam=bpy.data.cameras.new("cam"); cam.type='ORTHO'; cam.ortho_scale=12.90
 co=bpy.data.objects.new("cam",cam); bpy.context.scene.collection.objects.link(co)
