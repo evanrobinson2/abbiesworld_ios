@@ -1,0 +1,105 @@
+{
+  "appid": 504230,
+  "name": "Celeste",
+  "store_url": "https://store.steampowered.com/app/504230/",
+  "genres": [
+    "Platformer",
+    "Precision",
+    "Narrative"
+  ],
+  "short_description": "Climb a mountain as Madeline, one tight jump-and-dash screen at a time, while facing her anxiety.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Platformer",
+    "Precision",
+    "Narrative"
+  ],
+  "summary": "Climb a mountain as Madeline, one tight jump-and-dash screen at a time, while facing her anxiety.",
+  "identity": {
+    "core_loop": "Read a screen, jump, dash, climb, die, respawn instantly, try again, clear it, next screen.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tight and generous; coyote time and input buffering make it feel fair.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "meta": 0.1,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.01,
+          "source": "estimate",
+          "confidence": 0.59,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Madeline's hair colour shows whether her dash is ready; everything else is the level itself. Almost no HUD.",
+      "confidence": 0.85,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Crisp pixel art with soft lighting and particle wind.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "pixel_art",
+      "family": "pixel",
+      "light": "painted_in",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pixel",
+      "post": [],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "sprite",
+      "mocap": 0.0,
+      "locomotion": [
+        "sprite_frames"
+      ],
+      "tricks": [
+        "Few-frame pixel animation with strong squash and stretch on jump, land and dash",
+        "Madeline's hair trails behind her as a chain of follow-through blobs and changes colour when her dash is spent",
+        "Dust puffs and a brief freeze on dash sell speed in a handful of frames"
+      ],
+      "lesson": "Follow-through on one element (hair, scarf, tail) plus squash on landing makes a tiny sprite feel alive; let it carry state too.",
+      "sources": [
+        {
+          "title": "Wikipedia: Celeste (video game)",
+          "url": "https://en.wikipedia.org/wiki/Celeste_(video_game)"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Piano and synth score that shifts per chapter.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Hair that changes colour when the dash is spent is the best one-signal readout we know; instant respawn makes hard things kind."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.89,
+      "expression": 0.33,
+      "structure": 0.44,
+      "social": 0.33,
+      "systems": 0.22,
+      "chance": 0.44,
+      "session": 0.33
+    },
+    "confidence": 0.85
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

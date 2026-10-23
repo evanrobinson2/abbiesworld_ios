@@ -12834,6 +12834,113 @@
    }
   },
   {
+   "id": "celeste",
+   "file": "docs/oracle/games/celeste.json",
+   "appid": 504230,
+   "name": "Celeste",
+   "store_url": "https://store.steampowered.com/app/504230/",
+   "genres": [
+    "Platformer",
+    "Precision",
+    "Narrative"
+   ],
+   "short_description": "Climb a mountain as Madeline, one tight jump-and-dash screen at a time, while facing her anxiety.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Platformer",
+    "Precision",
+    "Narrative"
+   ],
+   "summary": "Climb a mountain as Madeline, one tight jump-and-dash screen at a time, while facing her anxiety.",
+   "identity": {
+    "core_loop": "Read a screen, jump, dash, climb, die, respawn instantly, try again, clear it, next screen.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tight and generous; coyote time and input buffering make it feel fair.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.1,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.01,
+       "source": "estimate",
+       "confidence": 0.59,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Madeline's hair colour shows whether her dash is ready; everything else is the level itself. Almost no HUD.",
+     "confidence": 0.85,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Crisp pixel art with soft lighting and particle wind.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "pixel_art",
+     "family": "pixel",
+     "light": "painted_in",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pixel",
+     "post": [],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "sprite",
+     "mocap": 0,
+     "locomotion": [
+      "sprite_frames"
+     ],
+     "tricks": [
+      "Few-frame pixel animation with strong squash and stretch on jump, land and dash",
+      "Madeline's hair trails behind her as a chain of follow-through blobs and changes colour when her dash is spent",
+      "Dust puffs and a brief freeze on dash sell speed in a handful of frames"
+     ],
+     "lesson": "Follow-through on one element (hair, scarf, tail) plus squash on landing makes a tiny sprite feel alive; let it carry state too.",
+     "sources": [
+      {
+       "title": "Wikipedia: Celeste (video game)",
+       "url": "https://en.wikipedia.org/wiki/Celeste_(video_game)"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Piano and synth score that shifts per chapter.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Hair that changes colour when the dash is spent is the best one-signal readout we know; instant respawn makes hard things kind."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.89,
+     "expression": 0.33,
+     "structure": 0.44,
+     "social": 0.33,
+     "systems": 0.22,
+     "chance": 0.44,
+     "session": 0.33
+    },
+    "confidence": 0.85
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "chessmaster",
    "file": "docs/oracle/games/chessmaster.json",
    "appid": 37200,
@@ -23423,6 +23530,114 @@
    }
   },
   {
+   "id": "just-dance",
+   "file": "docs/oracle/games/just-dance.json",
+   "appid": null,
+   "name": "Just Dance",
+   "store_url": null,
+   "genres": [
+    "Rhythm",
+    "Dance",
+    "Party"
+   ],
+   "short_description": "Follow a dancing coach on screen and copy the moves to pop songs.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Rhythm",
+    "Dance",
+    "Party"
+   ],
+   "summary": "Follow a dancing coach on screen and copy the moves to pop songs.",
+   "identity": {
+    "core_loop": "Watch the coach, copy the move as it comes, get rated, keep dancing.",
+    "mechanics": null,
+    "ui_and_game_feel": "Joyful and silly; nobody is bad at it.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "meta": 0.3,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Pictograms scroll along the bottom for the next move; ratings pop on each move; the coach is the main readout.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Real dancers filmed in full costume on green screen, then stylised in post.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "stylised_pbr",
+     "light": "pbr",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pbr",
+     "post": [
+      "bloom"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "mixed",
+     "mocap": 0,
+     "locomotion": [
+      "sprite_frames"
+     ],
+     "tricks": [
+      "Coaches are real dancers filmed in full costume and make-up on green screen, then stylised in post: video, not rigged animation",
+      "Pictograms scroll along the bottom to show the next move; the player is scored by the controller (or a phone camera with a trained model)"
+     ],
+     "lesson": "When the dance must be perfect, film or capture a real performer; mirror the player and rate every move without failing them.",
+     "sources": [
+      {
+       "title": "Dance Spirit: Real dancers, really dancing, the making of Just Dance 2024",
+       "url": "https://dancespirit.com/just-dance-2024/"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Licensed pop songs.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Copy a performer: the coach is real people filmed, not keyed animation. Mirror the player, rate every move, never fail."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.22,
+     "expression": 0.33,
+     "structure": 0.67,
+     "social": 0.22,
+     "systems": 0.44,
+     "chance": 0.22,
+     "session": 0.11
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "kerbal-space-program",
    "file": "docs/oracle/games/kerbal-space-program.json",
    "appid": 220200,
@@ -24254,6 +24469,115 @@
    }
   },
   {
+   "id": "little-nightmares",
+   "file": "docs/oracle/games/little-nightmares.json",
+   "appid": 424840,
+   "name": "Little Nightmares",
+   "store_url": "https://store.steampowered.com/app/424840/",
+   "genres": [
+    "Puzzle platformer",
+    "Horror",
+    "Adventure"
+   ],
+   "short_description": "A small child in a raincoat sneaks through a giant, grotesque ship.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle platformer",
+    "Horror",
+    "Adventure"
+   ],
+   "summary": "A small child in a raincoat sneaks through a giant, grotesque ship.",
+   "identity": {
+    "core_loop": "Sneak, climb, hide, solve a small physical puzzle, run from a giant, reach the next room.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense and tactile; you feel small against everything.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.52,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "No HUD at all: a lighter in the dark, footsteps and the giants' bodies tell you everything.",
+     "confidence": 0.75,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Dollhouse diorama seen from the side, dark with warm pools of light.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "soft_diorama",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "gradient",
+     "post": [
+      "depth of field"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree",
+      "root_motion"
+     ],
+     "tricks": [
+      "A small state machine (idle, start, move) with designer-swappable override slots, so wading, ash and water reuse one set at new speeds",
+      "Ability sets combine (holding hands while wading) without new code",
+      "Monsters are built on one exaggerated trait each (a long neck, walking on the ceiling) and scripted with the state machine"
+     ],
+     "lesson": "Override slots let one child walk through many grounds; give each giant one exaggerated way of moving.",
+     "sources": [
+      {
+       "title": "Unreal Engine interview: how Little Nightmares II plumbs the depths of adolescent angst",
+       "url": "https://www.unrealengine.com/en-US/developer-interviews/how-little-nightmares-ii-plumbs-the-depths-of-adolescent-angst"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Low drones, creaks, music box moments.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A dollhouse side view and no HUD at all; size alone tells you you are small. Kid-safe only in its framing, not its horror."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.44,
+     "expression": 0.22,
+     "structure": 0.44,
+     "social": 0.22,
+     "systems": 0.44,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.75
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "lost-ark",
    "file": "docs/oracle/games/lost-ark.json",
    "appid": 1599340,
@@ -25077,6 +25401,119 @@
    }
   },
   {
+   "id": "mario-kart-8-deluxe",
+   "file": "docs/oracle/games/mario-kart-8-deluxe.json",
+   "appid": null,
+   "name": "Mario Kart 8 Deluxe",
+   "store_url": null,
+   "genres": [
+    "Racing",
+    "Party",
+    "Kart"
+   ],
+   "short_description": "Race cartoon karts on wild tracks, drift for boosts and throw items at friends.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Racing",
+    "Party",
+    "Kart"
+   ],
+   "summary": "Race cartoon karts on wild tracks, drift for boosts and throw items at friends.",
+   "identity": {
+    "core_loop": "Race, drift to charge a boost, grab item boxes, use items, trick off ramps, finish.",
+    "mechanics": null,
+    "ui_and_game_feel": "Bouncy and generous; assists let small children play.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "meta": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.59,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Mini-map, place and items on screen; drift sparks change colour to show the boost charging.",
+     "confidence": 0.85,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Glossy toy-like karts and characters on bright tracks.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "soft_diorama",
+     "light": "soft_wrap",
+     "outlines": false,
+     "outline": "none",
+     "surface": "gradient",
+     "post": [
+      "depth of field"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Drivers lean and look into turns; drift sparks change colour as the boost charges",
+      "A trick pose off every ramp edge, rewarded with a boost",
+      "Big full-body reactions when hit or passing someone, timed with voice lines"
+     ],
+     "lesson": "Put the charge on the vehicle (spark colour) and the feeling on the driver (lean, trick pose, reaction).",
+     "sources": [
+      {
+       "title": "Super Mario Wiki: Tricks",
+       "url": "https://www.mariowiki.com/Trick"
+      },
+      {
+       "title": "Iwata Asks: Mario Kart Wii",
+       "url": "https://iwataasks.nintendo.com/interviews/wii/mariokart/0/3"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.5
+    },
+    "palette": null,
+    "audio_mood": "Big band and rock remixes; character voice reactions.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Show the charge on the thing: drift sparks change colour as the boost builds. Characters react with their whole body."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.67,
+     "expression": 0.44,
+     "structure": 0.56,
+     "social": 0.33,
+     "systems": 0.78,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.85
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "marvel-rivals",
    "file": "docs/oracle/games/marvel-rivals.json",
    "appid": 2767030,
@@ -25420,6 +25857,111 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "minecraft",
+   "file": "docs/oracle/games/minecraft.json",
+   "appid": null,
+   "name": "Minecraft",
+   "store_url": null,
+   "genres": [
+    "Sandbox",
+    "Building",
+    "Survival"
+   ],
+   "short_description": "Break and place blocks to build anything, and survive the night in a world made of cubes.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Sandbox",
+    "Building",
+    "Survival"
+   ],
+   "summary": "Break and place blocks to build anything, and survive the night in a world made of cubes.",
+   "identity": {
+    "core_loop": "Gather, craft, build, explore, survive the night, build bigger.",
+    "mechanics": null,
+    "ui_and_game_feel": "Simple, tactile and endless.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.09,
+       "source": "estimate",
+       "confidence": 0.59,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Hunger and health bars, a hotbar, and the world itself; night and monsters say when to shelter.",
+     "confidence": 0.85,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Blocky voxels with pixel textures.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "pixel_art",
+     "family": "pixel",
+     "light": "painted_in",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pixel",
+     "post": [],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "procedural",
+     "mocap": 0,
+     "locomotion": [
+      "procedural"
+     ],
+     "tricks": [
+      "Block limbs swing on a sine wave scaled by walking speed; no animation clips for the player",
+      "The head turns to the look direction; arms swing to hit and place"
+     ],
+     "lesson": "For blocky figures, code-made limb swing tied to speed is enough and never slides.",
+     "sources": [
+      {
+       "title": "Minecraft Forge forum: how the player model sways and swings",
+       "url": "https://forums.minecraftforge.net/topic/40492-question-about-player-sway"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Calm sparse piano; block sounds per material.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "The simplest possible bodies can carry a game for a decade: block limbs swinging on a sine wave."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 1,
+     "structure": 0.56,
+     "social": 0.11,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.67
+    },
+    "confidence": 0.85
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -33198,6 +33740,115 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "splatoon-3",
+   "file": "docs/oracle/games/splatoon-3.json",
+   "appid": null,
+   "name": "Splatoon 3",
+   "store_url": null,
+   "genres": [
+    "Shooter",
+    "Team",
+    "Party"
+   ],
+   "short_description": "Ink the map with your team, swim through your own ink as a squid, and cover more ground than the other team.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Shooter",
+    "Team",
+    "Party"
+   ],
+   "summary": "Ink the map with your team, swim through your own ink as a squid, and cover more ground than the other team.",
+   "identity": {
+    "core_loop": "Shoot ink, dive into it as a squid to move and reload, pop out to fight, cover turf before time is up.",
+    "mechanics": null,
+    "ui_and_game_feel": "Bouncy and expressive; swimming in your own colour is pure joy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The map's colour is the score: whoever's ink covers more is winning. Ink you can swim in reads at a glance.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Glossy saturated pop colours and street fashion.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "stylised_pbr",
+     "family": "stylised_pbr",
+     "light": "pbr",
+     "outlines": false,
+     "outline": "none",
+     "surface": "pbr",
+     "post": [
+      "bloom"
+     ],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Kid to squid in about 20 to 24 frames, squid back to kid in about 42; both can start or reverse at any moment, even mid-air",
+      "Two model swaps hidden by ink splashes, through a simple in-between blob that can squash and stretch",
+      "A small overshoot in scale after popping back out keeps the character soft"
+     ],
+     "lesson": "Hide a model swap behind a splash, keep the change under half a second, and let it reverse mid-way.",
+     "sources": [
+      {
+       "title": "New Frame Plus: How do Inkling transformations work? (transcript)",
+       "url": "https://amara.org/videos/0hbtI1ckjQff/info/how-do-inkling-transformations-work"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.7
+    },
+    "palette": null,
+    "audio_mood": "Squid pop music and splats.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Paint the world as the score, and let the character change form to move through what they painted."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.78,
+     "expression": 0.56,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.56,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
@@ -41106,6 +41757,117 @@
    "study": {
     "set": "owned",
     "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "wii-sports",
+   "file": "docs/oracle/games/wii-sports.json",
+   "appid": null,
+   "name": "Wii Sports",
+   "store_url": null,
+   "genres": [
+    "Sports",
+    "Party",
+    "Motion control"
+   ],
+   "short_description": "Play tennis, bowling, baseball, golf and boxing by swinging the remote like the real thing.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Sports",
+    "Party",
+    "Motion control"
+   ],
+   "summary": "Play tennis, bowling, baseball, golf and boxing by swinging the remote like the real thing.",
+   "identity": {
+    "core_loop": "Swing the remote like a racket, bat or ball; your Mii does the same; score and play again.",
+    "mechanics": null,
+    "ui_and_game_feel": "Instant and physical; anyone in the room can play.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "meta": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The sport itself is the readout: ball flight, pins, crowd. A few simple overlays for score.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Clean, simple bright figures and fields; Miis with no arms or legs on fielders.",
+    "rendering": {
+     "schema": "oracle.rendering.v1",
+     "style": "mixed",
+     "family": "graphic_minimal",
+     "light": "flat",
+     "outlines": false,
+     "outline": "none",
+     "surface": "flat_colour",
+     "post": [],
+     "signature": null,
+     "source": "derived from the art note by rendering_notes.RULES",
+     "confidence": 0.3
+    },
+    "motion": {
+     "schema": "oracle.motion.v1",
+     "method": "keyframe",
+     "mocap": 0,
+     "locomotion": [
+      "blend_tree"
+     ],
+     "tricks": [
+      "Simple Mii bodies; fielders have no visible arms or legs and still read as moving",
+      "The player's real swing drives the timing of the Mii's swing, so the gesture is the animation",
+      "Realism was never the goal: the mind fills in the detail"
+     ],
+     "lesson": "Simple bodies let players see themselves; tie the swing animation to the player's own gesture.",
+     "sources": [
+      {
+       "title": "Iwata Asks: Wii Sports, A Question of Realism",
+       "url": "https://nintendo.com/en-gb/Iwata-Asks/Iwata-Asks-Wii/Iwata-Asks-Wii-Sports/2-A-Question-of-Realism/2-A-Question-of-Realism-217824.html"
+      },
+      {
+       "title": "Iwata Asks: Wii Sports",
+       "url": "https://iwataasks.nintendo.com/interviews/wii/wii_sports/0/1"
+      }
+     ],
+     "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+     "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Cheerful jingles and crowd reactions.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Simple figures let players see themselves; the gesture is the control and the animation at once."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.22,
+     "expression": 0.11,
+     "structure": 0.89,
+     "social": 0.11,
+     "systems": 0.67,
+     "chance": 0.11,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "reference",
+    "owned": false,
     "installed": false,
     "status": "studied",
     "date": "2026-10-23"
