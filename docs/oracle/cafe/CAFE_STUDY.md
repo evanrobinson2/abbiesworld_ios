@@ -218,3 +218,98 @@ Draft Mode was on in the account for the first try and was switched off; the dra
 4. Decorating the café.
 5. Stylus painting on the walls (Abbie asked for it).
 6. An art auction game (her wall paintings sold to customers).
+
+## 9. Play: three games, a meta and a meta-meta (Evan, 2026-10-23 07:17Z)
+
+Evan: "do a coffee maker, juice maker, and mini game study .. 3 games, and a meta is decorating and building out the
+shop however she wants and decorating it", "and meta meta - it fits into my simulation and I can run the business."
+
+| Layer | Who plays | What it is |
+|---|---|---|
+| **Games** | Abbie | Three hands-on mini games: the coffee maker, the juice maker, the dance party |
+| **Meta** | Abbie | Building out and decorating the shop however she wants (with wall painting and the art auction) |
+| **Meta-meta** | Evan | The café is a business inside the town simulation, and he runs it from the grown-up workbench |
+
+All three share one rule: **the machine is the controller.** No buttons in a drawer: you touch the real part (the
+grinder, the portafilter, the steam knob, the blender jar), and the world answers with sight and sound.
+
+### Game 1: the coffee maker (espresso)
+
+The ultra-fine espresso machine, built from low-poly parts that work together (Evan: "low poly parts that perfectly
+build the system"): grinder and hopper, dosing cup, tamper, portafilter, group head, brew lever or button, pressure
+gauge, drip tray, steam wand and knob, hot-water tap, cup warmer on top, milk jug.
+
+1. **Grind:** hold the grinder; the dose cup fills. Too little and the shot runs fast and pale.
+2. **Tamp:** press down; the coffee puck flattens with a satisfying thunk.
+3. **Lock in:** twist the portafilter into the group head (a quarter turn, with a click).
+4. **Pull the shot:** hold the button. The stream turns from dark to golden; let go when it goes blonde. The gauge
+   needle shows it happening (diegetic timing, no bar on screen).
+5. **Steam the milk:** dip the wand and tilt the jug. Listen: the hiss goes from a screech to a soft paper-tearing
+   sound when it's right (sound is the meter).
+6. **Pour and draw:** pour, then trace a heart or a star in the foam with a finger or the stylus (latte art, the
+   bridge to wall painting).
+7. **Serve:** the customer's picture bubble matches or doesn't; they hop, dance or sip politely.
+
+The existing six steps in `coffee-recipe.mjs` (cup, coffee, milk, foam, pour, serve) are the skeleton; the game
+replaces its worded buttons with the parts.
+
+### Game 2: the juice maker (smoothies and milkshakes)
+
+The giant bubbly smoothie machine. It's a **colour-mixing** game, which a child can read without words.
+
+1. **Pick:** fruit and milk come from the neighbouring tiles (Garden berries, Ranch milk, Meadow honey, Moonbase
+   space treats), on a shelf of jars. An empty jar means the neighbour hasn't delivered.
+2. **Drop in:** each piece drops into the jar and sits as a coloured layer.
+3. **Blend:** hold the big button. The layers swirl into one colour. The customer's bubble shows the colour they
+   want; get close.
+4. **Top:** cream swirl, cherry, sprinkles, a straw. Tall and silly is good.
+5. **Serve** in the giant sundae glass.
+
+### Game 3: the dance party (party mode, at dusk)
+
+A rhythm game on the light-up floor, on the Music Bible's beat (D major, about 124 bpm, the 3+3+2 rhythm).
+
+- Floor tiles light up in a pattern that travels with the music; tap them on the beat (or step on them, with the
+  shoulder camera). Customers copy Abbie's moves.
+- The DJ in the cup booth drops a sting when the crowd is happy; streaks grow the party signal, so the neon brightens
+  and more people dance.
+- Two can play: a parent taps the bass tiles, the child taps the bright ones. There's no losing, and a missed step
+  just makes a funny stumble.
+
+### The meta: building out and decorating
+
+- **Place anything** from the manifest catalogue (beanbags, stools, stars, disco balls, rugs, plants) on the room's
+  1 m human hex grid. Snap, rotate, and drop it in. A valid spot glows (presentation layer).
+- **Recolour** with swatches from the café palette (figure-band only, the Townscaper rule from the aesthetic study),
+  so whatever she picks still looks good.
+- **Paint the walls** with the stylus: the wall becomes a canvas (a painted mural is a world thing, so customers
+  look at it and react).
+- **The art auction:** she paints canvases and hangs them; customers come to look, and in an auction evening they
+  bid stars or coins (playful, no real money). What sells buys new decorations.
+- **Decor matters to customers:** kids head for the beanbags, grown-ups for the window seats, and dancers want floor
+  space. The room she builds changes who comes and what they do (the "none" mode: the world just behaves).
+
+### The meta-meta: Evan runs the business
+
+- The café is a business in the town simulation (AW-STUDY-0006). Customers come from the town's schedules; supplies
+  come from neighbouring tiles through the shared resource loop (`simulations/simulation/resource-loop.mjs`).
+- **The grown-up workbench** (T4) shows what Abbie never sees: the income statement, prices, opening hours, staff,
+  the menu, and what equipment costs (the $5K espresso machine example from `INFO_MANIFEST.md`). Evan sets them;
+  the simulation runs; Abbie feels the result as a busier or calmer room.
+- Every number the business has is volunteered in the café's information manifest with audiences `player`,
+  `grown-up` and `director`, so the voice controller and AI directors read it without scraping the screen.
+
+### Build order (after the style pick)
+
+1. Ultra-fine espresso machine and juice machine, as working low-poly part assemblies.
+2. Game 1 (coffee maker) on the existing recipe skeleton.
+3. Game 2 (juice maker).
+4. Game 3 (dance party), using the dance floor and the Music Bible.
+5. Decorating, then wall painting, then the art auction.
+6. The business view in the grown-up workbench, wired to the town simulation.
+
+**Reference models.** Evan suggested finding an STL online. Public 3D-print sites have espresso accessories (group
+head caps, portafilters, tampers) but we have not found a complete, openly licensed espresso machine yet. We build the
+part list from real machine anatomy (an E61-style group head, a 58 mm portafilter, a 2 L boiler body), take sizes from
+open accessory models only where their licence allows, and record each source and licence in the asset's
+`provenance.json`. The geometry is our own Blender recipe either way.
