@@ -29,6 +29,7 @@ volunteer('coffee-shop', {
       overlay: 'a cup that fills (quick hit only)'
     },
     glyph: '<svg viewBox="0 0 24 24">…</svg>'   // optional helper vector for overlay or spatial use
+    relevant: () => shop.rush > 3,     // optional: true when the world would suggest pinning it (Sandbox chronograph)
   }, {
     id: 'income', says: 'income statement', kind: 'ledger', who: 'player', for: ['grown-up'],
     read: () => shop.ledger,           // {revenue, costs: {espressoMachine: 5000, …}, net}
