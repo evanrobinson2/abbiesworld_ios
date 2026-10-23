@@ -3,10 +3,11 @@ import math, bpy
 import body, kit
 
 
-def render(path, px=2000, samples=32):
+def render(path, px=2000, samples=32, builder=None):
     kit.reset()
     for i, (s, b) in enumerate(body.TYPES):
-        body.build(s, b, offset=((i - 3.5) * 0.82 + (0.25 if s == 'female' else -0.25), 0, 0))
+        off = ((i - 3.5) * 0.82 + (0.25 if s == 'female' else -0.25), 0, 0)
+        (builder or (lambda s, b, off: body.build(s, b, offset=off)))(s, b, off)
     sc = bpy.context.scene; sc.render.engine = 'CYCLES'; sc.cycles.samples = samples; sc.cycles.device = 'CPU'
     sc.render.resolution_x = px; sc.render.resolution_y = int(px * 0.42); sc.view_settings.view_transform = 'AgX'
     w = bpy.data.worlds.new('w'); sc.world = w; w.use_nodes = True; w.node_tree.nodes['Background'].inputs[0].default_value = (0.82, 0.83, 0.85, 1); w.node_tree.nodes['Background'].inputs[1].default_value = 0.6
