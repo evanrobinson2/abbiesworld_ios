@@ -1,0 +1,91 @@
+{
+ "what_i_did": [
+  [
+   "Start",
+   "Copied models/fern (build.py, make_views.py, hero_check.py, run.sh) and reshaped it: same conventions (Z up, origin at the footprint centre on the ground, front -Y), same four materials and part names (Leaf_Fern/fronds, Leaf_FernLight/fronds_young, Leaf_FernDark/crown, Stem_Green/rachises), same 0.85 x 0.87 m footprint, no variants (plant group)."
+  ],
+  [
+   "Views",
+   "No turnaround for fern-charming, so the hero is the only target. make_views.py keys mj/fern-charming/hero.png: the cast shadow runs out to the lower left and is olive-grey, so below row 1350 pixels with B/G > 0.5 are dropped and below row 1560 only the rosette's foot (columns 500-1480) is kept."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py unchanged from the normal fern: front-on, 8 deg up, harness lens. The hero IoU is the score."
+  ],
+  [
+   "Fronds",
+   "8 hand-placed fronds instead of 19 in rings, each fitted to the hero's crest and tip positions and then hill-climbed: a big frond rising and curling over to the left, an upright frond on the right, left and right mid arches, two low fronds flopping their tips to the ground, one behind and one towards the camera."
+  ],
+  [
+   "Leaflets",
+   "Each frond carries 7 pairs of separate plump leaflets plus a tip leaflet instead of a saw-tooth ribbon: 6-sided blunt ovals with the centre puffed up into a pillow, angled 40 deg towards the frond tip, hanging slightly (gravity) and drooping at the end. Leaflets are about twice the normal pinna size and shrink to 40 % at the tip. Blades are turned 60 % of the way from face-up towards the front so the fronds fan out at the viewer like the hero."
+  ],
+  [
+   "Crown and lean",
+   "A ruffled rosette of 14 small dark pillow leaflets lying low around a faceted mound; the whole clump shears 3 deg to the right; a fatter rachis (2.4 cm vs 1.2 cm build units)."
+  ],
+  [
+   "Proportions",
+   "Footprint kept at the old WW-046 box (0.85 x 0.87 m); height 0.74 m (the normal is 0.53) to match the charming hero's taller w/h of 1.14. Since the game scales plants to a set height, the footprint ratio is unchanged."
+  ],
+  [
+   "Game readiness",
+   "921 triangles (budget 1k), 4 meshes with one flat double-sided material each, brighter, more saturated greens sampled from the hero. to_game.py fern-charming installed simulations/regional-assets-charming/WW-046.glb and updated the charming manifest."
+  ]
+ ],
+ "good": [
+  "Hero IoU 0.688 (768 px, 48 samples), above the normal fern's 0.644.",
+  "Reads as a toy fern: fat pillowy leaflets, a few bouncy fronds with one curling over, a ruffled dark rosette at the foot, same materials so seasons still recolour it.",
+  "921 triangles, same footprint and origin as the normal model."
+ ],
+ "off": [
+  "The hero's leaflets are smooth sculpted ovals; at 1k triangles mine are 6-sided puffed facets, so up close they look low-poly rather than soft.",
+  "The hero's right frond leans clearly to the right; leaning it more cost 0.04-0.05 IoU (it widens the box), so it rises nearly straight and the lean comes only from the 3 deg global shear.",
+  "The fronds are turned towards the front like the hero's fan, so from the side the clump is thinner than from the front.",
+  "The top-left curl ends with a few leaflets poking upward where the hero's hang tidily; the rosette leaves are a little spikier than the hero's ruffle."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build: 8 fronds of separate pillow leaflets, blades in each frond's own plane; leaflets edge-on to the camera and too small.",
+   "mean_iou": 0.241
+  },
+  {
+   "round": 2,
+   "change": "Blades turned to face the front (FACE 0.6).",
+   "mean_iou": 0.349
+  },
+  {
+   "round": 3,
+   "change": "Leaflets about twice as long and plumper (length 0.24, width 0.55), FACE 0.75.",
+   "mean_iou": 0.572
+  },
+  {
+   "round": 4,
+   "change": "Frond arcs fitted to the hero's crest and tip positions.",
+   "mean_iou": 0.606
+  },
+  {
+   "round": 5,
+   "change": "Stronger leaflet taper, wider flat crown rosette, deeper greens.",
+   "mean_iou": 0.635
+  },
+  {
+   "round": 6,
+   "change": "Blunt pillow leaflets (rim rotated 30 deg) that hang a little.",
+   "mean_iou": 0.636
+  },
+  {
+   "round": 7,
+   "change": "Hill-climb over frond angles and lengths (70 trials).",
+   "mean_iou": 0.682
+  },
+  {
+   "round": 8,
+   "change": "Leaflets angle 40 deg to the tip, FACE 0.6 for a rounder side, shorter crown leaves; final 768 px / 48 samples; to_game.py fern-charming.",
+   "mean_iou": 0.688
+  }
+ ],
+ "moving_parts": "None (plant group; the game poses nothing).",
+ "creative_additions": "Pillow-puffed leaflets that hang a little like soft toy felt, a ruffled dark rosette at the foot, and a slight rightward lean of the whole clump."
+}
