@@ -806,7 +806,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  // backpack, or tapping it, puts that choice on.
  let deck = null;
  async function mountDeck() {
-  const {cardDeck} = await import('./backpack-cards.mjs?v=3');
+  const {cardDeck} = await import('./backpack-cards.mjs?v=4');
   if (deck || !alive) return;
   deck = cardDeck(el, {look: () => state.l,
    onDrop: (facet, value, x, y) => { const f = facet === 'style' ? 'style' : facet; const over = x == null || hitPart(x, y) != null; if (!over) return false; apply(f, value); return true; }});
