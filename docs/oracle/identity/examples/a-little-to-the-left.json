@@ -1,0 +1,305 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "A Little to the Left",
+    "developer": "Max Inferno",
+    "publisher": "Secret Mode",
+    "release": "2022",
+    "steam_appid": 1629520
+  },
+  "core": {
+    "fantasy": "You are a gentle tidier who puts small household things in perfect order, while a cat keeps nudging them out again.",
+    "pillars": [
+      "Order is the pleasure",
+      "More than one right answer",
+      "Mischief, not failure"
+    ],
+    "signature_moment": "The last crooked picture frame clicks straight, the whole scene settles, and then a paw reaches in from the edge.",
+    "anti_goals": [
+      "no timer",
+      "no fail state",
+      "no score"
+    ],
+    "signatures": [
+      {
+        "id": "snap_to_order",
+        "layer": "interaction",
+        "description": "Things click and settle when they line up, and the solved scene gives a soft little flourish.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "many_tidy_answers",
+        "layer": "mechanics",
+        "description": "Several different arrangements count as tidy, so players find their own order.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "cat_interrupts",
+        "layer": "dynamics",
+        "description": "A cat walks in and undoes your work, played as a joke rather than a setback.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "challenge": 0.3,
+        "submission": 0.3,
+        "discovery": 0.25,
+        "expression": 0.15
+      },
+      "emotional_targets": {
+        "satisfaction": 0.9,
+        "calm": 0.8,
+        "amusement": 0.5
+      },
+      "audience": {
+        "age": "everyone",
+        "skill_floor": "none",
+        "context": "short sessions"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "drag",
+          "input": "drag"
+        },
+        {
+          "verb": "rotate",
+          "input": "drag"
+        },
+        {
+          "verb": "sort",
+          "input": "drag"
+        },
+        {
+          "verb": "peel",
+          "input": "drag"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "look at the mess",
+          "try an order",
+          "it clicks",
+          "scene settles"
+        ],
+        "period_s": {
+          "value": 120,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "none",
+        "scoring": "none; a hint and a skip are always there"
+      },
+      "randomness": {
+        "amount": 0.05,
+        "kind": "none"
+      },
+      "information": "perfect",
+      "systems": [
+        "multiple valid end states per puzzle"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse",
+          "touch",
+          "controller"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "fixed",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "freeform_autofit",
+        "undo": "drag back",
+        "preview_before_commit": false,
+        "auto_repair": false
+      },
+      "juice": {
+        "procedural_settle": 0.6,
+        "sound_on_action": 0.8,
+        "scale_pop": 0.3,
+        "squash_stretch": 0.2,
+        "particles": 0.2,
+        "screen_shake": 0.0,
+        "hit_stop": 0.0,
+        "camera_kick": 0.0
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "painterly",
+        "family": "hand_painted_2d",
+        "light": "flat",
+        "outlines": true,
+        "outline": "inked_in",
+        "surface": "paper",
+        "post": [],
+        "signature": "Soft hand-drawn objects with gentle ink edges on warm paper-textured backgrounds, lit flat like an illustration.",
+        "lesson": "A paper ground and soft ink lines make tidy puzzles feel homely rather than clinical."
+      },
+      "references": [
+        "household flat-lays",
+        "picture-book illustration",
+        "knolling"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "thing_state": {
+          "mix": {
+            "diegetic": 0.7,
+            "none": 0.3
+          },
+          "timing": "on_change",
+          "note": "Objects show their own order; the solved state clicks into place.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "overlay": 0.5,
+            "diegetic": 0.5
+          },
+          "timing": "summoned",
+          "note": "A hint sketch is summoned on a sticky note.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.4,
+        "meta": 0.1,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "world_material",
+        "fade_rule": "Only the scene and its objects; hints on a note when asked."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "puzzle solved",
+            "channels": [
+              "sound",
+              "music",
+              "animals"
+            ]
+          }
+        ],
+        "max_channels": 3
+      },
+      "note": "The scene is the whole interface: the finished state shows itself by clicking into place. Hints are summoned, and some puzzles accept more than one tidy answer."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.6,
+        "emergent": 0.4
+      },
+      "tone": {
+        "cozy_tense": -0.8,
+        "whimsical_grounded": -0.3,
+        "earnest_ironic": 0.2,
+        "quiet_loud": -0.8,
+        "handmade_industrial": -0.8
+      },
+      "themes": [
+        "order",
+        "home",
+        "small joys"
+      ]
+    },
+    "pacing": {
+      "structure": "puzzle_levels",
+      "tension_curve": "flat_calm",
+      "failure_cost": "none"
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.67,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.11,
+      "chance": 0.56,
+      "session": 0.22
+    },
+    "confidence": 0.7
+  },
+  "ledger": {
+    "style": [
+      "tidy-up puzzles with several right answers",
+      "snap and settle on order",
+      "pet mischief as comedy",
+      "paper-textured hand-drawn look"
+    ],
+    "expression": [
+      "its specific puzzles and household scenes",
+      "its drawings",
+      "the cat character",
+      "its music"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "mechanics",
+        "target": "Café tidy-up chores",
+        "setting": "A tidy puzzle accepts any arrangement that meets the rule (sorted by colour, size or kind).",
+        "from_signature": "many_tidy_answers"
+      },
+      {
+        "layer": "interaction",
+        "target": "GAME_FEEL placement",
+        "setting": "When a set lines up, everything settles together with one soft chord.",
+        "from_signature": "snap_to_order"
+      },
+      {
+        "layer": "dynamics",
+        "target": "Ranch animals",
+        "setting": "An animal that knocks things over is a joke the player laughs at, never a penalty.",
+        "from_signature": "cat_interrupts"
+      }
+    ],
+    "leave": [
+      "its specific puzzles",
+      "its cat"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

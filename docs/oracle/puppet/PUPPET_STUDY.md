@@ -27,18 +27,55 @@ the Character Studio.
   either side. Mirror swaps left and right. Star keeps the move in this browser; copy puts it on the clipboard as
   Character Studio pose data (per key, `{bone: [x, 0, 0]}` degrees from standing, +x swings back, root in hip heights).
 
-## Stock moves (18), by game genre
-Everyday: Idle, Wave. Platformer: Walk, Run, Jump, Leap (Evan's photo pose, crouch to leap). Story: Bow, Shrug, Sad.
+## Stock moves (19), by game genre
+Everyday: Idle, Wave. Platformer: Walk, Run (one gait, a walk-to-run dial), Jump, Leap (Evan's photo pose, crouch to
+leap). Story: Bow, Shrug, Sad, Sad walk.
 Sports: Cheer, Kick. Fighting: Jab cross. Rhythm: Disco, Robot (stepped keys). Stealth: Sneak. Life sim: Sit down.
-Arcade: Windmill. Acrobatics: Backflip (root roll through 360).
+Arcade: Windmill. Acrobatics: Backflip (root roll through 360). Sneak is a gait too.
 
 Moves are authored as world angles over a standing pose and grounded automatically, so a new move is a few lines.
 While a move plays the figure never sinks through the floor.
+
+## Round 2: the animation pass (Evan 10:07 AM: "the walk and run look like a computer pretending")
+What was wrong, and what the Oracle already knew (Shoulder study, locomotion):
+- **Keyed walk cycles slide.** Four posed keys can't keep a planted foot planted. Now walks are a gait engine: each
+  foot follows a path (heel strike, flat, heel rise over the toe, toe off, swing), the floor's board seams slide back
+  at exactly the stride's ground speed, and two-bone IK bends the knees to reach it. The planted foot never slides.
+- **The hips were placed, not carried.** Now they ride as high as the legs allow (an inverted pendulum: lowest in
+  double support, highest over the planted foot), plus a small "down" just after contact. A run is a spring instead:
+  lowest mid-stance, a flight phase between steps.
+- **Smoothstep between every key stops the body at every key.** Keys now play through Hermite splines, so motion
+  flows through them; two equal keys make a hold, the only place that should ease to a stop.
+- **Everything moved in lockstep.** Overlap: the chest, head, arms, forearms and hands sample 20 to 100 ms later
+  than the hips, so they drag and follow through. In the gait the arms counter-swing the opposite leg and trail it.
+- **Walk to run is one dial** (the Oracle's speed blend): cycle time, stride, duty, lean, bob, arm pump and heel
+  kick all blend, and the name reads Walk, Jog or Run. Sneak and Sad walk come from the same engine with their own
+  numbers. Dragging a joint on a gait bakes it into 16 keys you can then edit.
+- Speedup for next time: start any locomotion from the gait engine and the Oracle's locomotion list, never from
+  posed keys.
 
 ## Layers
 The figure, its floor and its shadow are the world. Joint dots, ghosts, the line of action and the controls are the
 presentation layer, drawn only for the player; the dots hide while a move plays.
 
+## Round 3: the 3D studio's 50 moves (from `moves.mjs`)
+The first card in the tray switches to the Character Studio's library. Each studio pose (XYZ turns from the rest
+A-pose, composed down the chain as in `rig.mjs` applyPose) turns every bone's rest direction from `rest-joints.json`;
+the puppet looks at the result from the figure's right and reads off its own angles, so arms raised out to the side
+still read as raised. Travelling moves slide the floor at the studio's ground speed. Dragging a joint bakes the
+move into keys you can edit. It is a projection: a move that happens mostly side to side (a spin, a sidestep) reads
+flatter here than in 3D.
+
+## Round 4: joint limits (Evan 12:39 PM: "the app is broken")
+His screenshot showed the torso folded back 90 degrees off the hips: a drag on the neck had bent the spine and chest
+with nothing to stop them. Now a drag can bend each joint only the way a body bends: the torso 20 degrees back and 70
+forward, the head and chest a little, knees and elbows one way, ankles and wrists in range. Stock and studio moves are
+not limited (a 3D move can look past a limit from the side, for example an arm turned in at the shoulder). The studio
+can hand the puppet one of its moves: `puppet.html?studio=clap`, or `postMessage({type: "aw-move", id: "clap"})`.
+Checked: all 19 puppet moves and 50 studio moves at three times each, desktop size.
+- Speedup for next time: any puppet with drag IK ships with joint limits from the start, and gets a "drag every handle
+  hard" test, not only a play-every-move test.
+
 ## Next
-- When the Character Studio's `moves.mjs` lands, add a "From the 3D studio" tray that projects its x angles onto this rig.
+- Load and export through AW-STUDY-0041's shared `aw-rig2d` format (`docs/oracle/rigging/RIG2D_FORMAT.md`).
 - Squash and stretch on the bones (the practice SVG already fakes foreshortening as a squash along the bone).

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0049 - Paint the World</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f6f1ff;--plate:#fff;--ink:#241b3a;--soft:#62597c;--line:#ddd3f0;--pink:#e0287f;--teal:#0f9d92;--gold:#b87708;--display:"Fredoka",ui-rounded,system-ui,sans-serif;--body:"Nunito",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150f24;--plate:#21193a;--ink:#f1ecff;--soft:#b2a8d0;--line:#3a2f5c;--pink:#ff6bb0;--teal:#4fe0d2;--gold:#f0b94a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#150f24;--plate:#21193a;--ink:#f1ecff;--soft:#b2a8d0;--line:#3a2f5c;--pink:#ff6bb0;--teal:#4fe0d2;--gold:#f0b94a;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--body);padding:0 max(16px,env(safe-area-inset-right)) 80px max(16px,env(safe-area-inset-left))}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.1;margin:0;text-wrap:balance}
+header{max-width:1100px;margin:0 auto;padding:28px 0 8px}
+header .id{font:700 12px var(--body);letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+h1{font-size:clamp(2rem,6vw,3.4rem)}
+header p{max-width:62ch;color:var(--soft);margin:10px 0 0}
+nav.tabs{max-width:1100px;margin:14px auto 22px;display:flex;gap:8px;position:sticky;top:0;z-index:5;padding:8px 0;background:linear-gradient(var(--bg) 70%,transparent)}
+nav.tabs button{font:600 15px var(--display);border:2px solid var(--line);background:var(--plate);color:var(--ink);padding:9px 18px;border-radius:999px;cursor:pointer}
+nav.tabs button[aria-selected=true]{background:var(--pink);border-color:var(--pink);color:#fff}
+main{max-width:1100px;margin:0 auto}
+section[hidden]{display:none}
+.stage{position:relative;border-radius:22px;overflow:hidden;background:#cfe8ff;border:2px solid var(--line);aspect-ratio:16/10;min-height:300px}
+.stage canvas{width:100%;height:100%;display:block;touch-action:none}
+.hudline{position:absolute;left:12px;bottom:12px;right:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;pointer-events:none}
+.hudline>*{pointer-events:auto}
+.pill{font:600 14px var(--display);background:rgba(255,255,255,.82);color:#241b3a;border-radius:999px;padding:7px 14px;border:0;box-shadow:0 2px 10px #0002}
+button.pill{cursor:pointer}
+button.pill.main{background:var(--pink);color:#fff}
+.cardslot{position:absolute;right:12px;top:12px;width:92px}
+.cardslot img{width:100%;display:block;filter:drop-shadow(0 6px 10px #0005);cursor:pointer;transition:transform .2s}
+.cardslot img:hover{transform:translateY(-5px) rotate(-2deg)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin:26px 0}
+.plate{background:var(--plate);border:2px solid var(--line);border-radius:20px;padding:18px 20px}
+.plate h3{font-size:1.25rem;margin-bottom:6px}
+.plate p,.plate li{color:var(--soft);margin:.35em 0}
+.plate ul{padding-left:1.1em;margin:.3em 0}
+.lead{font-size:1.1rem;max-width:64ch;margin:26px 0 10px}
+h2{font-size:1.7rem;margin:34px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+td,th{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{font-family:var(--display);font-weight:600}
+.sw{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:6px}
+.plants{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.pv{background:var(--plate);border:2px solid var(--line);border-radius:20px;overflow:hidden}
+.pv .view{aspect-ratio:4/3;background:#dff0ff;position:relative}
+.pv canvas{width:100%;height:100%;display:block;touch-action:none}
+.pv .meta{padding:12px 16px 16px}
+.pv h3{font-size:1.15rem}
+.pv .row{display:flex;gap:10px;align-items:center;margin-top:8px;font:600 13px var(--display);color:var(--soft)}
+.pv input[type=range]{flex:1;accent-color:var(--pink)}
+.tag{display:inline-block;font:700 11px var(--body);letter-spacing:.06em;text-transform:uppercase;border-radius:6px;background:var(--line);color:var(--ink);padding:2px 7px;margin-right:4px}
+code{font-size:.9em;background:var(--line);padding:1px 5px;border-radius:5px}
+.tour{border-color:var(--teal)}
+.fig{display:flex;gap:6px;flex-wrap:wrap}
+@media (max-width:640px){.cardslot{width:70px}}
+</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js","three/addons/controls/OrbitControls.js":"../../vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+<header>
+  <div class="id">AW-STUDY-0049</div>
+  <h1>Paint the World</h1>
+  <p>A card you play. Paint falls out of the sky onto the board, stays for one day of in-game time, and strange plants grow out of it. It is Splatoon's idea that the paint is the play, turned into something gentle: you do not fight over the ground, you make a garden of it.</p>
+</header>
+<nav class="tabs" role="tablist">
+  <button role="tab" id="t1" aria-selected="true" aria-controls="p1">Study</button>
+  <button role="tab" id="t2" aria-selected="false" aria-controls="p2">Production assets</button>
+</nav>
+<main>
+<section id="p1" role="tabpanel" aria-labelledby="t1">
+  <div class="stage" id="board" aria-label="A hill tile you can turn. Play the paint card to rain paint on it.">
+    <div class="cardslot" id="cardslot"></div>
+    <div class="hudline">
+      <button class="pill main" id="play">Play the card</button>
+      <span class="pill" id="clocktxt">Day 1 · 09:00</span>
+      <button class="pill" data-t="morning">Morning</button><button class="pill" data-t="day">Noon</button><button class="pill" data-t="evening">Evening</button><button class="pill" data-t="night">Night</button>
+      <button class="pill" id="skip">+6 hours</button>
+      <button class="pill" id="wash">Watercolour distance: on</button>
+    </div>
+  </div>
+  <p class="lead">Play the card, then press <b>+6 hours</b> a few times (or leave it running: a game day is three minutes). Sprouts show up in the first hours, the plants grow through the morning and open by evening. At the end of the day the paint dries and shrinks away. The plants stay a few more days, then sink back into the soil.</p>
+
+  <h2>The idea in one picture</h2>
+  <div class="grid">
+    <div class="plate"><h3>1. Play the card</h3><p>One card in the hand, tapped like the tile cards. It picks two bold colours from five and rains four splats around where you are looking.</p></div>
+    <div class="plate"><h3>2. Paint falls</h3><p>Teardrops stretch as they fall, hit the ground and spread with a little overshoot, flinging droplets. The ground sings a soft plop (the sound is the Ranch's own, no new engine).</p></div>
+    <div class="plate"><h3>3. A day of colour</h3><p>Wet and glossy for the first hours, then chalky, then it shrinks away over the last quarter of the day. At night it glows softly, so a painted board is a lantern board.</p></div>
+    <div class="plate"><h3>4. Plants grow</h3><p>Each colour grows its own species. Sprout, grow, bloom over about twenty game hours. A different colour grows a different plant, so the player learns the colours by growing them.</p></div>
+  </div>
+
+  <h2>What we took from Splatoon, and what we left</h2>
+  <div class="grid">
+    <div class="plate"><h3>Style: yes</h3><ul>
+      <li>The paint is the game: the shader is the verb, not a skin.</li>
+      <li>Two bold colours on a calm, quiet world, so the paint always reads. The Ranch is soft green, which is a good canvas.</li>
+      <li>Glossy wet look, wobbly outline, flung droplets, a splat that overshoots then settles. Kids read it as "fresh paint" instantly.</li>
+    </ul></div>
+    <div class="plate"><h3>Expression: never</h3><ul>
+      <li>No squid or Inkling forms, no weapons, no team turf score, no shooter moves.</li>
+      <li>No Nintendo art, names, sounds or colours copied. The splat shapes come from our own seeded recipe.</li>
+      <li>Nothing here is a fight. A friend can play it too and the board just gets prettier.</li>
+    </ul></div>
+    <div class="plate"><h3>From the Oracle</h3><p>Splatoon 3's record says <i>"paint the world as the score"</i> and <i>"hide a model swap behind a splash"</i>. We use the second one for the plants: a sprout never pops in, it rises through its own paint. The score idea stays out for now, because the Ranch is a place, not a match.</p></div>
+  </div>
+
+  <h2>How it shows information (the HUD grammar)</h2>
+  <div class="grid">
+    <div class="plate"><h3>Diegetic</h3><p>The paint is in the world and the people and animals know it: sheep wander through it, bots can react to a bright field. Colour tells you the plant to expect.</p></div>
+    <div class="plate"><h3>Overlay: one thing only</h3><p>The card in the hand. There is no timer bar. The age of the paint is simply how dry it looks, and how big the plants are.</p></div>
+    <div class="plate"><h3>The whole game adapts</h3><p>The same day clock drives light, night glow, plant size and the paint fading. Watercolour distance (AW-STUDY-0045 #6) composes: far paint softens its edges and turns pastel, like the far hills.</p></div>
+  </div>
+
+  <h2>The rules, plainly</h2>
+  <div class="plate"><table>
+    <tr><th>Thing</th><th>Rule</th></tr>
+    <tr><td>Paint life</td><td>24 in-game hours from landing. Wet glint for 4 hours, dries, shrinks over the last 6.</td></tr>
+    <tr><td>Plant start</td><td>Half an hour to 3.5 hours after landing, so they sprout one by one.</td></tr>
+    <tr><td>Plant stages</td><td>Sprout 0 to 6 h, grow 6 to 12 h, bloom 12 to 20 h after the plant starts. It stays in bloom, swaying and glowing at night.</td></tr>
+    <tr><td>Plant life</td><td>72 hours, then it sinks back into the soil over 4 hours.</td></tr>
+    <tr><td>Clock</td><td>Everything derives from the game day clock (<code>day * 24 + hour</code>). Pause stops it; changing the time of day moves it. There are no timers.</td></tr>
+    <tr><td>Caps</td><td>14 splats, 30 plants, oldest returns first. A card is 4 splats.</td></tr>
+    <tr><td>Where it plays</td><td>The Sandbox tile board today, and any board that gives the module a scene, a height function and the clock (the Winchester dioramas are next).</td></tr>
+    <tr><td>Kids</td><td>PG, no violence. Paint never covers people or animals; it is only on the ground.</td></tr>
+  </table></div>
+
+  <h2>Performance, held to the tile-placement standard</h2>
+  <div class="grid">
+    <div class="plate"><h3>No shader compiles on play</h3><p>One splat shader and one plant material are compiled when the board loads (<code>warm()</code>). Playing a card compiles nothing.</p></div>
+    <div class="plate"><h3>No scene rebuilds</h3><p>The paint lives on a pool of fourteen pre-made draped meshes; a play rewrites one position buffer per splat. Nothing about a tile changes, and no tile material is touched.</p></div>
+    <div class="plate"><h3>Few draws</h3><p>A plant is three meshes (stalk, head, glow). Thirty plants and fourteen splats is about 100 draw calls and under 25,000 triangles at the most.</p></div>
+  </div>
+
+  <h2>Tour and what comes next</h2>
+  <div class="plate tour"><h3>tour: yes</h3><p>It is a card and a verb a new player can do in one tap, with a payoff within minutes. It goes in the player tour as "Play the Paint card and watch what grows." Evan can drop it from the tour by flipping <code>tour</code> to false in <code>whats-new.json</code>.</p>
+  <p>Next: the plants as ingredients (the café's menu), the paint as footprints for the dog, and a second card colour pair in the Moonbase dialect (lights, not paint).</p></div>
+</section>
+
+<section id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <p class="lead">Five low-poly plants, one per paint colour. Each is built from named parts, flat shaded, with three growth stages you can scrub. Drag to orbit, scroll or pinch to zoom.</p>
+  <div class="plants" id="plants"></div>
+  <h2>The card</h2>
+  <div class="grid"><div class="plate"><h3>Paint the World</h3><div class="fig" id="cardfig"></div><p>Cards v3 die-cut style, the same 63 by 88 mm face as the boost cards. The paint can tips over a hex and a sprout rises from the splat. Palette is the card's own colour for each play, so the face wears the colour of the first splat in your hand.</p></div>
+  <div class="plate"><h3>Paint colours</h3><table id="palette"></table></div>
+  <div class="plate"><h3>Recipe and history</h3><p>Each plant is a recipe in <code>simulations/paint-world/alien-plants.mjs</code>. Intent, parts, materials, decisions and the references we did not have are in <code>studies/paint-world/assets/</code> (<code>notes.json</code>, <code>provenance.json</code>). Change requests make a new version; history is kept.</p></div></div>
+</section>
+</main>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {createPaintWorld, daylightAt} from '../../simulations/paint-world/paint-world.mjs';
+import {SPECIES, PLANT_IDS, makePlant, PAINT_COLOURS, stageName} from '../../simulations/paint-world/alien-plants.mjs';
+
+const $ = s => document.querySelector(s);
+const tabs = ['t1', 't2'];
+for (const id of tabs) $('#' + id).onclick = () => { for (const t of tabs) { $('#' + t).setAttribute('aria-selected', t === id); $('#' + $('#' + t).getAttribute('aria-controls')).hidden = t !== id; } if (id === 't2') startPlants(); sizeAll(); };
+
+// ---------- a hill tile in metres, like the sandbox's: heightAt(xMetres, zMetres) -> metres
+const heightAt = (x, z) => 2.4 * Math.sin(x * .05 + 1) * Math.cos(z * .045) + 1.4 * Math.sin((x + z) * .09) + .0015 * (x * x + z * z) * -1;
+function makeBoard(canvas) {
+ const renderer = new THREE.WebGLRenderer({canvas, antialias: true, powerPreference: 'high-performance'}); renderer.setPixelRatio(Math.min(2, devicePixelRatio));
+ renderer.shadowMap.enabled = true; const scene = new THREE.Scene(); scene.background = new THREE.Color('#cfe8ff');
+ const camera = new THREE.PerspectiveCamera(34, 1, .05, 400); camera.position.set(9, 8.4, 11.5);
+ const orbit = new OrbitControls(camera, canvas); orbit.target.set(0, .2, 0); orbit.enableDamping = true; orbit.maxPolarAngle = 1.35; orbit.minDistance = 3; orbit.maxDistance = 22;
+ const hemi = new THREE.HemisphereLight('#e6efff', '#9b784d', 1.4), sun = new THREE.DirectionalLight('#ffdfac', 2.6); sun.position.set(-8, 14, 6); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+ Object.assign(sun.shadow.camera, {left: -9, right: 9, top: 9, bottom: -9, near: 1, far: 40}); scene.add(hemi, sun);
+ // ground: a hexagonal slab with rolling top, in render units (0.1 per metre), radius 5 units = 50 m
+ const R = 5, seg = 64, geo = new THREE.PlaneGeometry(2 * R, 2 * R, seg, seg).rotateX(-Math.PI / 2), P = geo.attributes.position;
+ const hexD = (x, z) => Math.max(Math.abs(z) / (R * .866) * 1, (Math.abs(x) * .866 + Math.abs(z) * .5) / (R * .866));
+ for (let i = 0; i < P.count; i++) { const x = P.getX(i), z = P.getZ(i), d = hexD(x, z); if (d > 1) { const k = 1 / d; P.setX(i, x * k); P.setZ(i, z * k); } P.setY(i, heightAt(P.getX(i) * 10, P.getZ(i) * 10) * .1); }
+ geo.computeVertexNormals();
+ const ground = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({color: '#86b84a', flatShading: true, roughness: 1})); ground.receiveShadow = true; scene.add(ground);
+ const rim = new THREE.Mesh(new THREE.CylinderGeometry(R * 1.02, R * 1.02, .5, 6, 1, true), new THREE.MeshStandardMaterial({color: '#c4680f', flatShading: true, side: THREE.DoubleSide})); rim.position.y = -.35; rim.rotation.y = Math.PI / 6; scene.add(rim);
+ const tree = (x, z) => { const g = new THREE.Group(); g.add(new THREE.Mesh(new THREE.CylinderGeometry(.03, .04, .22, 5), new THREE.MeshStandardMaterial({color: '#7a4a27', flatShading: true})).translateY(.11)); g.add(new THREE.Mesh(new THREE.ConeGeometry(.17, .42, 6), new THREE.MeshStandardMaterial({color: '#3f8a45', flatShading: true})).translateY(.42)); g.position.set(x, heightAt(x * 10, z * 10) * .1, z); g.traverse(o => o.castShadow = true); scene.add(g); };
+ [[-3, -1.5], [-2.6, 2.4], [3.2, -2.2], [2.2, 3], [-.5, -3.4]].forEach(p => tree(...p));
+ const barn = new THREE.Mesh(new THREE.BoxGeometry(.8, .5, .6), new THREE.MeshStandardMaterial({color: '#b9533a', flatShading: true})); barn.position.set(-1.6, heightAt(-16, -22) * .1 + .25, -2.2); barn.castShadow = true; scene.add(barn);
+ // a person for scale (1.7 m)
+ const person = new THREE.Mesh(new THREE.CapsuleGeometry(.045, .09, 3, 6), new THREE.MeshStandardMaterial({color: '#ff8fd0', flatShading: true})); person.position.set(.9, heightAt(9, 2) * .1 + .09, .2); person.castShadow = true; scene.add(person);
+ return {renderer, scene, camera, orbit, sun, hemi};
+}
+const B = makeBoard($('#board').appendChild(Object.assign(document.createElement('canvas'), {})));
+$('#board').prepend(B.renderer.domElement);
+const world = createPaintWorld({scene: B.scene, heightAt, unit: .1, camera: B.camera});
+world.warm(B.renderer, B.camera);
+let clock = {day: 1, hour: 9}, running = true, wash = true;
+const HPS = 24 / 180;
+function fmt() { const h = Math.floor(clock.hour), m = Math.floor((clock.hour % 1) * 60); return 'Day ' + clock.day + ' · ' + String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0'); }
+const advance = hours => { const t = clock.hour + hours; clock = {day: clock.day + Math.floor(t / 24), hour: t % 24}; };
+$('#play').onclick = playCard;
+function playCard() { const pairs = [['pink', 'teal'], ['lime', 'violet'], ['sun', 'pink'], ['teal', 'violet'], ['sun', 'lime']]; world.play({colours: pairs[Math.floor(Math.random() * pairs.length)], at: {x: 0, z: 0}, count: 4, spread: 2.2}, clock); }
+$('#skip').onclick = () => advance(6);
+document.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { const h = {morning: 7, day: 12, evening: 18, night: 22}[b.dataset.t]; if (h < clock.hour) clock = {day: clock.day + 1, hour: h}; else clock = {...clock, hour: h}; });
+$('#wash').onclick = () => { wash = !wash; world.setWash(wash ? .6 : 0); $('#wash').textContent = 'Watercolour distance: ' + (wash ? 'on' : 'off'); };
+// the card face (Cards v3 diecut, same renderer as the boost cards)
+import('../../simulations/paint-world/paint-card.mjs').then(async m => { const img = new Image(); img.src = await m.paintFace('pink'); img.alt = 'Paint the World card'; img.onclick = playCard; $('#cardslot').append(img); const fig = $('#cardfig'); for (const id of ['pink', 'teal', 'lime']) { const i = new Image(); i.src = await m.paintFace(id); i.style.width = '30%'; fig.append(i); } }).catch(e => console.warn('card face', e));
+// palette table
+$('#palette').innerHTML = '<tr><th>Colour</th><th>Plant</th><th>Paint</th></tr>' + PLANT_IDS.map(id => `<tr><td><span class="sw" style="background:${PAINT_COLOURS[id].paint}"></span>${id}</td><td>${SPECIES[id].name}</td><td>${PAINT_COLOURS[id].paint} / ${PAINT_COLOURS[id].deep}</td></tr>`).join('');
+
+let last = performance.now();
+function sizeAll() { const c = B.renderer.domElement, w = c.parentElement.clientWidth, h = c.parentElement.clientHeight; if (w && h) { B.renderer.setSize(w, h, false); B.camera.aspect = w / h; B.camera.updateProjectionMatrix(); } for (const v of viewers) v.size(); }
+addEventListener('resize', sizeAll);
+function frame(now) {
+ const dt = Math.min(.05, (now - last) / 1000); last = now;
+ if (running && !document.hidden) advance(dt * HPS * (window.paintSpeed || 1));
+ const day = daylightAt(clock.hour);
+ B.sun.intensity = 0.4 + 2.2 * day; B.hemi.intensity = .5 + .9 * day; B.sun.color.set(clock.hour < 9 || clock.hour > 17 ? '#ffb27a' : '#fff0d0');
+ B.renderer.setClearColor(new THREE.Color().setHSL(.58, .6, .12 + .7 * day)); B.scene.background = new THREE.Color().setHSL(.58, .55 - .2 * (1 - day), .1 + .72 * day);
+ world.update(dt, clock, {daylight: day});
+ B.orbit.update(); B.renderer.render(B.scene, B.camera);
+ $('#clocktxt').textContent = fmt();
+ for (const v of viewers) if (v.active) v.frame(dt);
+ requestAnimationFrame(frame);
+}
+// ---------- tab 2: one viewer per plant, with a growth slider
+const viewers = []; let plantsStarted = false;
+function startPlants() {
+ if (plantsStarted) return; plantsStarted = true;
+ for (const id of PLANT_IDS) {
+  const host = document.createElement('div'); host.className = 'pv';
+  host.innerHTML = `<div class="view"></div><div class="meta"><h3><span class="sw" style="background:${PAINT_COLOURS[id].paint}"></span>${SPECIES[id].name}</h3><p style="margin:.2em 0;color:var(--soft)">${SPECIES[id].blurb}</p><div class="row"><span>Growth</span><input type="range" min="0" max="100" value="100" aria-label="Growth of ${SPECIES[id].name}"><b class="st">bloom</b></div></div>`;
+  $('#plants').append(host);
+  const view = host.querySelector('.view'), canvas = document.createElement('canvas'); view.append(canvas);
+  const r = new THREE.WebGLRenderer({canvas, antialias: true}); r.setPixelRatio(Math.min(2, devicePixelRatio)); r.shadowMap.enabled = true;
+  const sc = new THREE.Scene(); sc.background = new THREE.Color('#dff0ff'); sc.add(new THREE.HemisphereLight('#ffffff', '#b09870', 1.7)); const sn = new THREE.DirectionalLight('#fff0d0', 2.4); sn.position.set(3, 6, 4); sn.castShadow = true; sc.add(sn);
+  const ground = new THREE.Mesh(new THREE.CylinderGeometry(1.7, 1.8, .12, 8), new THREE.MeshStandardMaterial({color: '#86b84a', flatShading: true})); ground.position.y = -.06; ground.receiveShadow = true; sc.add(ground);
+  const splat = new THREE.Mesh(new THREE.CircleGeometry(1.2, 9), new THREE.MeshBasicMaterial({color: PAINT_COLOURS[id].paint})); splat.rotation.x = -Math.PI / 2; splat.position.y = .01; sc.add(splat);
+  const P = makePlant(id, 7); P.group.scale.setScalar(.8); sc.add(P.group); P.group.traverse(o => { if (o.isMesh) o.castShadow = true; });
+  const cam = new THREE.PerspectiveCamera(36, 4 / 3, .05, 50);
+  P.pose(1, 0, 0); const box = new THREE.Box3().setFromObject(P.group), ctr = box.getCenter(new THREE.Vector3()), diag = box.getSize(new THREE.Vector3()).length();
+  cam.position.set(ctr.x + diag * .78, ctr.y + diag * .45, ctr.z + diag * 1.2);
+  const oc = new OrbitControls(cam, canvas); oc.target.copy(ctr); oc.enableDamping = true; oc.maxDistance = 9; oc.minDistance = 1.6;
+  const slider = host.querySelector('input'), st = host.querySelector('.st');
+  const v = {active: true, size() { const w = view.clientWidth, h = view.clientHeight; if (w && h) { r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); } }, t: 0, frame(dt) { v.t += dt; const s = slider.value / 100; P.pose(s, v.t, 0); st.textContent = stageName(s); oc.update(); r.render(sc, cam); }};
+  new IntersectionObserver(e => { v.active = e[0].isIntersecting; }).observe(view);
+  viewers.push(v); v.size();
+ }
+}
+sizeAll(); requestAnimationFrame(frame);
+window.__paint = {world, get clock() { return clock; }, set clock(c) { clock = c; }, B};
+</script>
+<script type="module" src="/look/context-card.mjs" data-context-study="paint-world"></script>
+</body>
+</html>

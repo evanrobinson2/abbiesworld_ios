@@ -1,0 +1,108 @@
+{
+  "appid": 837470,
+  "name": "Untitled Goose Game",
+  "store_url": "https://store.steampowered.com/app/837470/",
+  "genres": [
+    "Puzzle",
+    "Stealth",
+    "Comedy"
+  ],
+  "short_description": "Be a horrible goose in a sleepy village: sneak, steal and honk your way through a to-do list of mischief.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Stealth",
+    "Comedy"
+  ],
+  "summary": "Be a horrible goose in a sleepy village: sneak, steal and honk your way through a to-do list of mischief.",
+  "identity": {
+    "core_loop": "Read the to-do list, sneak close, grab or honk, run off flapping, hide in a bush, try the next trick.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly and sly; getting caught just means being chased and shooed, never a fail screen.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.59,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The villagers are the stealth meter: they look up, turn, chase and shoo. The to-do list is a notepad you summon and tick off. Nothing on screen while you play.",
+      "confidence": 0.85,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Flat unlit colour shapes with no textures and soft tinted shadows, like a picture book printed in a few inks.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "graphic_minimal",
+      "light": "flat",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [],
+      "signature": "Flat unlit colour shapes with no textures and soft colour-tinted shadows, like a picture book printed in a few inks.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.75,
+      "lesson": "Tinted shadows instead of grey ones keep a flat-colour world warm and readable from far away."
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "procedural_ik"
+      ],
+      "tricks": [
+        "Animated in Blender, played in Unity: a small set of goose clips (waddle, run with flapping wings, crouch, honk, grab)",
+        "Villagers react with clear, readable body language (look up, chase, shoo), which is the stealth readout",
+        "Neck and head lead the body, so the goose looks curious before it moves"
+      ],
+      "lesson": "Readable reactions on the people are worth more than a big animation set; lead with the head.",
+      "sources": [
+        {
+          "title": "Game Developer: Road to the IGF, House House's Untitled Goose Game",
+          "url": "https://www.gamedeveloper.com/game-platforms/road-to-the-igf-house-house-s-i-untitled-goose-game-i-"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
+    "palette": null,
+    "audio_mood": "Piano that follows the action, softer when sneaking and racing when you are spotted.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Kid-friendly stealth: getting caught is funny, not failure; the people are the readout; music reacts to how sneaky you are."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.22,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.85
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

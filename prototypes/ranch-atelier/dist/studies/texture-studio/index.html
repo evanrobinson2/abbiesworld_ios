@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Texture Studio</title>
+<meta name="description" content="AW-STUDY-0040: dress the rigged Meshy heroes in four art directions, paint them part by part, and watch them walk under our shaders.">
+<style>
+/* AW-STUDY-0040 Texture Studio: a grown-up workbench, not play. The character fills the screen; every control is a
+   small liquid-glass object at the edge (characters left, looks along the bottom, tools right). Words only on the
+   summoned cards and the short caption that names what you just picked. */
+:root{--ink:#2b2233;--glass:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.12));--edge:rgba(255,255,255,.6)}
+html,body{margin:0;height:100%;background:#cdb4e8;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;font-family:ui-rounded,system-ui,-apple-system,sans-serif;color:var(--ink)}
+canvas#gl{display:block;width:100vw;height:100dvh}
+.glass{background:var(--glass);border:1px solid var(--edge);box-shadow:0 10px 26px rgba(40,20,50,.28),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -6px 14px rgba(90,50,80,.18)}
+button{font:inherit;color:inherit;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.orb{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;transition:transform .2s cubic-bezier(.3,1.6,.5,1),box-shadow .2s;position:relative}
+.orb[aria-pressed=true]{transform:scale(1.14);box-shadow:0 0 0 3px #fff,0 12px 28px rgba(40,20,50,.4)}
+.orb:active{transform:scale(.92)}
+.orb svg{width:24px;height:24px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3));color:#fff}
+#back{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));width:42px;height:42px}
+#chars{position:fixed;left:max(12px,env(safe-area-inset-left));top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:14px}
+#chars .orb{background-size:300%;background-position:50% 22%;background-color:#e9dff4}
+#chars .orb i{position:absolute;right:-3px;bottom:-3px;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#bfe8ff 50%,#5a8fd0);box-shadow:0 2px 4px rgba(0,0,0,.3);display:none}
+#chars .orb.gear i{display:block}
+#looks{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));translate:-50% 0;display:flex;gap:16px}
+#looks .orb{width:56px;height:56px}
+#tools{position:fixed;right:max(12px,env(safe-area-inset-right));top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:12px}
+#tools .orb{width:46px;height:46px}
+#cap{position:fixed;left:50%;top:max(14px,env(safe-area-inset-top));translate:-50% 0;max-width:min(78vw,520px);padding:9px 16px;border-radius:18px;text-align:center;
+ font-size:14px;line-height:1.3;opacity:0;transition:opacity .4s;pointer-events:none}
+#cap b{display:block;font-size:16px}
+#cap.on{opacity:1}
+.card{position:fixed;border-radius:24px;padding:14px;display:none}
+.card.on{display:block}
+#tray{right:calc(max(12px,env(safe-area-inset-right)) + 60px);bottom:calc(max(14px,env(safe-area-inset-bottom)) + 76px);width:min(300px,70vw)}
+#tray .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:4px 0 10px}
+#tray .row:last-child{margin-bottom:0}
+.puck{width:40px;height:40px;border-radius:50%;position:relative;box-shadow:inset 0 -4px 8px rgba(0,0,0,.25),inset 0 2px 3px rgba(255,255,255,.6),0 3px 8px rgba(0,0,0,.2)}
+.puck input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+.puck small{position:absolute;top:100%;left:50%;translate:-50% 2px;font-size:10px;white-space:nowrap;opacity:.8}
+#parts{row-gap:22px!important}
+.sw{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 -3px 6px rgba(0,0,0,.25),0 2px 5px rgba(0,0,0,.2)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--ink)}
+.tool{width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.tool svg{width:20px;height:20px}
+.tool[aria-pressed=true]{background:#2b2233;color:#fff}
+#uvcard{left:calc(max(12px,env(safe-area-inset-left)) + 74px);bottom:calc(max(14px,env(safe-area-inset-bottom)) + 76px);padding:10px}
+#uv{display:block;width:min(260px,52vw);height:auto;aspect-ratio:1;border-radius:14px;touch-action:none;background:#fff}
+#info{left:50%;top:50%;translate:-50% -50%;width:min(420px,86vw);max-height:76dvh;overflow:auto;font-size:14px;line-height:1.45;padding:18px 20px}
+#info h1{font-size:19px;margin:0 0 2px} #info .id{font-size:12px;opacity:.7;letter-spacing:.04em}
+#info h2{font-size:14px;margin:14px 0 4px}
+#info ul{margin:4px 0;padding-left:18px}
+#ctx{right:calc(max(12px,env(safe-area-inset-right)) + 60px);top:max(64px,env(safe-area-inset-top));width:min(340px,74vw);max-height:calc(100dvh - 170px);overflow:auto;font-size:13px;line-height:1.4;padding:14px 16px}
+#ctx .id{font-size:11px;opacity:.7;letter-spacing:.04em}
+#ctx h3{font-size:13px;margin:12px 0 4px} #ctx ul{margin:0;padding-left:16px} #ctx li{margin:0 0 6px} #ctx a{color:inherit;font-weight:600} #ctx span{display:block;opacity:.78} #ctx code{font-size:11px;opacity:.7}
+#load{position:fixed;left:50%;top:50%;translate:-50% -50%;width:64px;height:64px;border-radius:50%;display:grid;place-items:center}
+#load i{width:28px;height:28px;border-radius:50%;border:4px solid #fff;border-top-color:transparent;animation:spin 1s linear infinite}
+@keyframes spin{to{rotate:360deg}}
+@media (max-width:520px){#looks{gap:10px}#looks .orb{width:48px;height:48px}.orb{width:46px;height:46px}#tools .orb{width:42px;height:42px}}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<a id="back" class="glass orb" href="/studies/" aria-label="Back to the studies"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
+<div id="chars" aria-label="Characters"></div>
+<div id="looks" aria-label="Looks"></div>
+<div id="tools">
+ <button class="glass orb" id="tCam" aria-label="Camera: close, walking, far"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
+ <button class="glass orb" id="tShade" aria-label="Light: Sunday Toon, Clay, Ink, Film, Painted Brush"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+ <button class="glass orb" id="tPaint" aria-label="Paint" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-8 8H6v-6z"/><path d="M4 21c2 0 3-1 3-3"/></svg></button>
+ <button class="glass orb" id="tUV" aria-label="The flat texture and its UVs" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 14l5-5 4 4 3-3 4 4"/></svg></button>
+ <button class="glass orb" id="tSave" aria-label="Save the texture"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></button>
+ <button class="glass orb" id="tCtx" aria-label="Context engineering: what this study read" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg></button>
+ <button class="glass orb" id="tInfo" aria-label="About this study" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 11v6"/><circle cx="12" cy="7.2" r="1.3" fill="currentColor" stroke="none"/></svg></button>
+</div>
+<div id="cap" class="glass"></div>
+<div id="tray" class="glass card" aria-label="Paint">
+ <div class="row" id="parts"></div>
+ <div class="row" id="swatches"></div>
+ <div class="row">
+  <button class="tool glass" data-tool="brush" aria-label="Brush" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14 4l6 6-8 8H6v-6z"/></svg></button>
+  <button class="tool glass" data-tool="fill" aria-label="Fill a whole part" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M5 11l7-7 7 7-7 7z"/><path d="M19 15c1 1.5 2 2.6 2 3.6a2 2 0 0 1-4 0c0-1 1-2.1 2-3.6z" fill="currentColor"/></svg></button>
+  <button class="tool glass" data-tool="erase" aria-label="Rub out paint" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 15l8-8 7 7-5 5H8z"/><path d="M14 19h6"/></svg></button>
+  <button class="tool glass" data-size="10" aria-label="Small brush" aria-pressed="false"><i style="width:6px;height:6px;border-radius:50%;background:currentColor"></i></button>
+  <button class="tool glass" data-size="22" aria-label="Medium brush" aria-pressed="true"><i style="width:11px;height:11px;border-radius:50%;background:currentColor"></i></button>
+  <button class="tool glass" data-size="44" aria-label="Big brush" aria-pressed="false"><i style="width:17px;height:17px;border-radius:50%;background:currentColor"></i></button>
+  <button class="tool glass" id="clearPaint" aria-label="Start the paint over"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>
+ </div>
+</div>
+<div id="uvcard" class="glass card" aria-label="The flat texture"><canvas id="uv" width="512" height="512"></canvas></div>
+<div id="info" class="glass card">
+ <div class="id">AW-STUDY-0040</div>
+ <h1>Texture Studio</h1>
+ <p>Pick a hero on the left and a look along the bottom. The look repaints every named part (skin, cloth, metal, lights, glass), presses its surface into the bump, and picks the light. Paint on the body with the brush, or fill a whole part.</p>
+ <h2>The four looks</h2>
+ <ul id="lookList"></ul>
+ <h2>How it works</h2>
+ <ul>
+  <li>The heroes are the Meshy brutes from the Bruiser study, cleaned up, painted and rigged for Brute Fight (20 bones, 19 moves). The Moon gear kit bolts onto the same bones.</li>
+  <li>The old paint is split into shading (the sculpt, the creases, the eyebrows) and colour. The shading stays; each look brings its own colours and surface.</li>
+  <li>Surfaces are drawn in the flat texture (the UV card shows it): thumbprints, a knitted vest, felt, wood grain, brush strokes. The same pattern becomes the bump, so light catches it.</li>
+  <li>The light comes from our shader kit: Sunday Toon, Clay (the cheap half of the Storybook look), Ink, Film and Painted Brush (Arcane-inspired).</li>
+  <li>The looks are data in <code>looks.json</code>: any rigged character with parts named Skin, TankTop, Shorts, Armor, Light and Glass can wear them, including the wooden mannequin once it is rigged.</li>
+ </ul>
+ <h2>Next</h2>
+ <ul><li>The mannequin and its walks from the Character Studio; a face and hands per look; saved outfits.</li></ul>
+</div>
+<div id="ctx" class="glass card" aria-label="Context engineering"><div class="id">AW-STUDY-0040 · Context engineering</div><div id="ctxBody"></div></div>
+<div id="load" class="glass"><i></i></div>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/OrbitControls.js';
+import {TOON_LOOKS, toonify, toonUniforms, setToonLook, inkHulls} from '/simulations/toon-kit.mjs';
+import {paintBrush} from '/simulations/painted-brush.mjs';
+
+const $ = id => document.getElementById(id);
+const Q = new URLSearchParams(location.search);
+const DATA = await (await fetch('/studies/texture-studio/looks.json')).json();
+const LOOKS = DATA.looks, LOOK_IDS = Object.keys(LOOKS);
+const BODY = ['Skin', 'TankTop', 'Shorts'], GEAR = ['Armor', 'Light', 'Glass'];
+const PART_NAME = {Skin: 'Skin', TankTop: 'Top', Shorts: 'Shorts', Armor: 'Armor', Light: 'Lights', Glass: 'Visor'};
+const RED = {Skin: '#e2a77f', TankTop: '#f3eee2', Shorts: '#c8322f'}, BLUE = {Skin: '#9a6646', TankTop: '#f2c53d', Shorts: '#2f5fc4'};
+const CHARS = [
+ {id: 'red', name: 'Brute one', glb: '/studies/brute-fight/red/fighter.glb', was: RED},
+ {id: 'blue', name: 'Brute two', glb: '/studies/brute-fight/blue/fighter.glb', was: BLUE},
+ {id: 'red-gear', name: 'Brute one in Moon gear', glb: '/studies/brute-fight/red/fighter.glb', gear: '/studies/texture-studio/gear-red.glb', was: RED},
+ {id: 'blue-gear', name: 'Brute two in Moon gear', glb: '/studies/brute-fight/blue/fighter.glb', gear: '/studies/texture-studio/gear-blue.glb', was: BLUE},
+];
+// Meshy's own mesh, UVs and texture on the same skeleton (skinMeshy below). Shown once the retextured brutes land
+// (Character Studio thread); ?meshy=1 previews them with whatever Meshy files are in meshy/.
+const MESHY_CHARS = [
+ {id: 'red-meshy', name: 'Brute one, Meshy texture', glb: '/studies/brute-fight/red/fighter.glb', meshy: {glb: '/studies/texture-studio/meshy/brute1.glb', align: {scale: 1.0509257316589355, turn: -24, loc: [0.00033841290860436857, 0.0004607959126587957, 1.0007734298706055]}}},
+ {id: 'blue-meshy', name: 'Brute two, Meshy texture', glb: '/studies/brute-fight/blue/fighter.glb', meshy: {glb: '/studies/texture-studio/meshy/brute2.glb', align: {scale: 1.0512323379516602, turn: 0, loc: [-0.0029150533955544233, -0.0031610343139618635, 0.9808635711669922]}}},
+];
+if (Q.get('meshy')) CHARS.splice(2, 0, ...MESHY_CHARS);
+const SHADERS = {sunday: {name: 'Sunday Toon', toon: TOON_LOOKS.sunday}, clay: {name: 'Clay light', toon: TOON_LOOKS.clay},
+ ink: {name: 'Ink Toon', toon: {...TOON_LOOKS.ink, ink: .013}, ink: true}, film: {name: 'Film', toon: null},
+ brush: {name: 'Painted Brush', toon: null, brush: true}};
+const SHADER_IDS = Object.keys(SHADERS);
+const CAMS = ['close', 'walk', 'far'], CAM_NAME = {close: 'Close up', walk: 'Walking', far: 'From a distance'};
+
+const S = {char: CHARS.find(c => c.id === Q.get('char')) ? Q.get('char') : 'red', look: LOOKS[Q.get('look')] ? Q.get('look') : 'whimsy',
+ shader: null, cam: CAMS.includes(Q.get('cam')) ? Q.get('cam') : 'close', tool: 'brush', size: 22, color: '#ffffff', paint: false};
+S.shader = SHADERS[Q.get('shader')] ? Q.get('shader') : LOOKS[S.look].shader;
+
+// ---------- renderer, light, place ----------
+const canvas = $('gl');
+const renderer = new T.WebGLRenderer({canvas, antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const scene = new T.Scene();
+const camera = new T.PerspectiveCamera(32, 1, .1, 400);
+const hemi = new T.HemisphereLight('#fff4e6', '#8a6a5a', .9); scene.add(hemi);
+const key = new T.DirectionalLight('#fff0dc', 2.6); key.position.set(5, 9, 6); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -.0004; key.shadow.normalBias = .02; key.shadow.radius = 4;
+Object.assign(key.shadow.camera, {left: -12, right: 12, top: 12, bottom: -12, near: 1, far: 40}); scene.add(key, key.target);
+const rim = new T.DirectionalLight('#cfe0ff', 1.2); rim.position.set(-4, 5, -7); scene.add(rim);
+const sky = new T.Mesh(new T.SphereGeometry(200, 32, 16), new T.ShaderMaterial({side: T.BackSide, depthWrite: false, fog: false,
+ uniforms: {uLo: {value: new T.Color()}, uHi: {value: new T.Color()}},
+ vertexShader: 'varying vec3 vD; void main(){ vD = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.); }',
+ fragmentShader: 'uniform vec3 uLo, uHi; varying vec3 vD; void main(){ float h = clamp(normalize(vD).y * 1.6 + .08, 0., 1.); gl_FragColor = vec4(mix(uLo, uHi, smoothstep(0., 1., h)), 1.);\n#include <colorspace_fragment>\n}'}));
+scene.add(sky);
+scene.fog = new T.Fog('#fff', 30, 110);
+const ground = new T.Mesh(new T.CircleGeometry(120, 64), new T.MeshStandardMaterial({color: '#e0c0a0', roughness: 1}));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+const pathRing = new T.Mesh(new T.RingGeometry(6.4, 7.6, 96), new T.MeshStandardMaterial({color: '#fff', roughness: 1, transparent: true, opacity: .22, depthWrite: false}));
+pathRing.rotation.x = -Math.PI / 2; pathRing.position.y = .005; pathRing.receiveShadow = true; scene.add(pathRing);
+// a few rounded trees and stones far out, so the far shot has depth and scale
+const props = new T.Group(); scene.add(props);
+{
+ const rnd = (s => () => (s = (s * 16807) % 2147483647) / 2147483647)(7);
+ const leaf = new T.MeshStandardMaterial({color: '#7fa65a', roughness: .9}), trunk = new T.MeshStandardMaterial({color: '#7a5236', roughness: 1});
+ const stone = new T.MeshStandardMaterial({color: '#b5a99a', roughness: 1});
+ for (let i = 0; i < 26; i++) {
+  const a = rnd() * Math.PI * 2, r = 16 + rnd() * 34, g = new T.Group(); g.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
+  const h = 2.4 + rnd() * 3, t = new T.Mesh(new T.CylinderGeometry(.14, .22, h * .5, 7), trunk); t.position.y = h * .25;
+  const c = new T.Mesh(new T.IcosahedronGeometry(h * .38, 1), leaf); c.position.y = h * .7; c.scale.y = 1.15;
+  g.add(t, c); g.traverse(o => { if (o.isMesh) o.castShadow = o.receiveShadow = true; }); props.add(g);
+ }
+ for (let i = 0; i < 18; i++) {
+  const a = rnd() * Math.PI * 2, r = 9.5 + rnd() * 10, s = new T.Mesh(new T.IcosahedronGeometry(.25 + rnd() * .45, 1), stone);
+  s.position.set(Math.cos(a) * r, .1, Math.sin(a) * r); s.scale.y = .6; s.castShadow = s.receiveShadow = true; props.add(s);
+ }
+}
+// image-based light for the metal and the gloss: a soft sky, rebuilt per look
+const pmrem = new T.PMREMGenerator(renderer);
+function envFor(L) {
+ const es = new T.Scene(), m = sky.material.clone(); m.uniforms.uLo.value.set(L.sky[0]); m.uniforms.uHi.value.set(L.sky[1]);
+ es.add(new T.Mesh(new T.SphereGeometry(10, 32, 16), m));
+ const sun = new T.Mesh(new T.SphereGeometry(1.6, 16, 8), new T.MeshBasicMaterial({color: new T.Color('#fff6e0').multiplyScalar(6)})); sun.position.set(5, 6, 5); es.add(sun);
+ const rt = pmrem.fromScene(es, .02); m.dispose(); return rt.texture;
+}
+
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.target.set(0, 1, 0); controls.maxPolarAngle = Math.PI * .495; controls.minDistance = 1.6; controls.maxDistance = 60;
+
+// ---------- the characters ----------
+const loader = new GLTFLoader();
+const chars = {};
+// Meshy's own mesh, UVs and texture on the Brute Fight skeleton: move it into the fighter's space (the Bruiser align),
+// then give every Meshy vertex the skin weights and part of the nearest fighter vertices (inverse-distance, 4 nearest)
+function skinMeshy(fighters, mg, A) {
+ let src = null; mg.scene.updateMatrixWorld(true); mg.scene.traverse(o => { if (o.isMesh && !src) src = o; });
+ const geo = src.geometry.clone(); geo.applyMatrix4(src.matrixWorld);
+ geo.applyMatrix4(new T.Matrix4().compose(new T.Vector3(A.loc[0], A.loc[2], -A.loc[1]),
+  new T.Quaternion().setFromAxisAngle(new T.Vector3(0, 1, 0), A.turn * Math.PI / 180), new T.Vector3(A.scale, A.scale, A.scale)));
+ const FP = [], FJ = [], FW = [], FR = [];
+ for (const o of fighters) { const g = o.geometry, k = BODY.indexOf(o.material.name);
+  for (let i = 0; i < g.attributes.position.count; i++) {
+   FP.push(g.attributes.position.getX(i), g.attributes.position.getY(i), g.attributes.position.getZ(i));
+   for (let j = 0; j < 4; j++) { FJ.push(g.attributes.skinIndex.getComponent(i, j)); FW.push(g.attributes.skinWeight.getComponent(i, j)); }
+   FR.push(k); } }
+ const C = .08, grid = new Map(), key = (x, y, z) => `${Math.floor(x / C)},${Math.floor(y / C)},${Math.floor(z / C)}`;
+ for (let i = 0; i < FR.length; i++) { const kk = key(FP[i * 3], FP[i * 3 + 1], FP[i * 3 + 2]); (grid.get(kk) || grid.set(kk, []).get(kk)).push(i); }
+ // weld by position first (Meshy splits vertices at UV seams; a seam must move as one), weights per welded point
+ const P = geo.attributes.position, n = P.count, SI = new Uint16Array(n * 4), SW = new Float32Array(n * 4), VR = new Int8Array(n);
+ const wid = new Int32Array(n), wmap = new Map(), wpos = [];
+ for (let v = 0; v < n; v++) { const kk = `${P.getX(v).toFixed(4)},${P.getY(v).toFixed(4)},${P.getZ(v).toFixed(4)}`;
+  let w = wmap.get(kk); if (w === undefined) { w = wpos.length / 3; wmap.set(kk, w); wpos.push(P.getX(v), P.getY(v), P.getZ(v)); } wid[v] = w; }
+ const NW = wpos.length / 3, NJ = fighters[0].skeleton.bones.length, W = new Float32Array(NW * NJ), WR = new Int8Array(NW);
+ for (let v = 0; v < NW; v++) {
+  const x = wpos[v * 3], y = wpos[v * 3 + 1], z = wpos[v * 3 + 2], gx = Math.floor(x / C), gy = Math.floor(y / C), gz = Math.floor(z / C);
+  let best = [];
+  for (let r = 1; r < 6 && best.length < 4; r++) { best = [];
+   for (let i = -r; i <= r; i++) for (let j = -r; j <= r; j++) for (let k = -r; k <= r; k++) for (const f of grid.get(`${gx + i},${gy + j},${gz + k}`) || [])
+    best.push([(FP[f * 3] - x) ** 2 + (FP[f * 3 + 1] - y) ** 2 + (FP[f * 3 + 2] - z) ** 2, f]); }
+  best.sort((p, q) => p[0] - q[0]); WR[v] = FR[best[0][1]];
+  const d0 = Math.sqrt(best[0][0]); best = best.slice(0, 4).filter(([d]) => Math.sqrt(d) <= d0 * 1.5 + .01); // only the near side: an arm never borrows the chest
+  for (const [d, f] of best) { const w0 = 1 / (Math.sqrt(d) + 4e-3); for (let j = 0; j < 4; j++) W[v * NJ + FJ[f * 4 + j]] += FW[f * 4 + j] * w0; }
+  let t = 0; for (let j = 0; j < NJ; j++) t += W[v * NJ + j]; for (let j = 0; j < NJ; j++) W[v * NJ + j] /= t || 1;
+ }
+ // smooth the weights along the mesh's own edges, a few passes, so joints bend without tearing
+ const ix0 = geo.index ? geo.index.array : Uint32Array.from({length: n}, (_, i) => i), nb = Array.from({length: NW}, () => new Set());
+ for (let t = 0; t < ix0.length; t += 3) { const a = wid[ix0[t]], b = wid[ix0[t + 1]], c = wid[ix0[t + 2]]; nb[a].add(b).add(c); nb[b].add(a).add(c); nb[c].add(a).add(b); }
+ for (let pass = 0; pass < 4; pass++) { const W2 = W.slice();
+  for (let v = 0; v < NW; v++) { const ns = nb[v]; if (!ns.size) continue;
+   for (let j = 0; j < NJ; j++) { let s = 0; for (const u of ns) s += W[u * NJ + j]; W2[v * NJ + j] = W[v * NJ + j] * .5 + s / ns.size * .5; } }
+  W.set(W2); }
+ for (let v = 0; v < n; v++) { const w = wid[v], row = [];
+  for (let j = 0; j < NJ; j++) if (W[w * NJ + j] > 1e-4) row.push([j, W[w * NJ + j]]);
+  const top = row.sort((p, q) => q[1] - p[1]).slice(0, 4), tot = top.reduce((s, t) => s + t[1], 0) || 1;
+  top.forEach(([jn, wt], j) => { SI[v * 4 + j] = jn; SW[v * 4 + j] = wt / tot; }); VR[v] = WR[w]; }
+ geo.setAttribute('skinIndex', new T.Uint16BufferAttribute(SI, 4)); geo.setAttribute('skinWeight', new T.Float32BufferAttribute(SW, 4));
+ // one draw group per part (triangle part = majority of its corners), so each part takes its own material
+ const ix = geo.index ? geo.index.array : Uint32Array.from({length: n}, (_, i) => i), byRole = BODY.map(() => []);
+ for (let t = 0; t < ix.length; t += 3) { const r = [VR[ix[t]], VR[ix[t + 1]], VR[ix[t + 2]]], m = r[1] === r[2] ? r[1] : r[0]; byRole[m].push(ix[t], ix[t + 1], ix[t + 2]); }
+ geo.setIndex(byRole.flat()); geo.clearGroups(); let at = 0; byRole.forEach((l, m) => { geo.addGroup(at, l.length, m); at += l.length; });
+ const f0 = fighters[0], sm = new T.SkinnedMesh(geo, BODY.map(r => new T.MeshStandardMaterial({name: r})));
+ sm.bind(f0.skeleton, f0.bindMatrix); sm.castShadow = sm.receiveShadow = true; sm.frustumCulled = false; sm.userData.roles = BODY;
+ f0.parent.add(sm); for (const o of fighters) o.removeFromParent();
+ const M = src.material; return {sm, map: M.map?.image, maps: {normalMap: M.normalMap, roughnessMap: M.roughnessMap, metalnessMap: M.metalnessMap}};
+}
+async function loadChar(c) {
+ const g = await loader.loadAsync(c.glb), root = g.scene; let meshes = [], maps = null, img;
+ root.traverse(o => { if (o.isSkinnedMesh) { o.castShadow = o.receiveShadow = true; o.frustumCulled = false; meshes.push(o); } });
+ img = meshes[0].material.map.image;
+ if (c.meshy) { const r = skinMeshy(meshes, await loader.loadAsync(c.meshy.glb), c.meshy.align); meshes = [r.sm]; img = r.map; maps = r.maps;
+  if (!img) { img = document.createElement('canvas'); img.width = img.height = 1024; const x = img.getContext('2d'); x.fillStyle = '#b8b0a8'; x.fillRect(0, 0, 1024, 1024); } }
+ const SZ = Math.min(2048, img.width || 1024), HZ = SZ / 2;
+ const src = document.createElement('canvas'); src.width = src.height = SZ; src.getContext('2d').drawImage(img, 0, 0, SZ, SZ);
+ // the part of every texel, from the UV triangles of each named part (stroked first, so seams get a little padding)
+ const mk = document.createElement('canvas'); mk.width = mk.height = SZ; const mx = mk.getContext('2d');
+ const tris = [];
+ for (const o of meshes) { const uv = o.geometry.attributes.uv, ix = o.geometry.index;
+  const groups = o.userData.roles ? o.geometry.groups.map(gr => ({role: BODY[gr.materialIndex], start: gr.start, count: gr.count})) : [{role: o.material.name, start: 0, count: ix.count}];
+  for (const gr of groups) { const P = new Path2D();
+   for (let i = gr.start; i < gr.start + gr.count; i += 3) { const a = ix.getX(i), b = ix.getX(i + 1), d = ix.getX(i + 2);
+    P.moveTo(uv.getX(a) * SZ, uv.getY(a) * SZ); P.lineTo(uv.getX(b) * SZ, uv.getY(b) * SZ); P.lineTo(uv.getX(d) * SZ, uv.getY(d) * SZ); P.closePath(); }
+   tris.push({role: gr.role, P}); } }
+ const ri = r => BODY.indexOf(r) + 1;
+ mx.lineWidth = SZ / 170; mx.lineJoin = 'round'; for (const t of tris) { mx.strokeStyle = `rgb(${ri(t.role) * 60},0,0)`; mx.stroke(t.P); }
+ for (const t of tris) { mx.fillStyle = `rgb(${ri(t.role) * 60},0,0)`; mx.fill(t.P); }
+ const md = mx.getImageData(0, 0, SZ, SZ).data, srcData = src.getContext('2d').getImageData(0, 0, SZ, SZ), sd = srcData.data;
+ const role = new Int8Array(SZ * SZ), shade = new Float32Array(SZ * SZ), L8 = i => .3 * sd[i * 4] + .59 * sd[i * 4 + 1] + .11 * sd[i * 4 + 2];
+ // each part's own average brightness: the shading is a texel's brightness against its part's
+ const sum = [0, 0, 0], cnt = [0, 0, 0];
+ for (let i = 0; i < SZ * SZ; i++) { const k = Math.round(md[i * 4] / 60) - 1; role[i] = k; if (k >= 0) { sum[k] += L8(i); cnt[k]++; } }
+ const was = sum.map((s, k) => Math.max(8, s / (cnt[k] || 1)));
+ for (let i = 0; i < SZ * SZ; i++) { const k = role[i]; shade[i] = k < 0 ? 1 : Math.min(1.25, Math.max(.62, L8(i) / was[k])); }
+ // Meshy's own normal map, at bump size, to keep its sculpt under every look's pattern
+ let srcNormal = null;
+ if (maps?.normalMap?.image) { const nc = document.createElement('canvas'); nc.width = nc.height = HZ; const nx = nc.getContext('2d'); nx.drawImage(maps.normalMap.image, 0, 0, HZ, HZ); srcNormal = nx.getImageData(0, 0, HZ, HZ).data; }
+ const color = document.createElement('canvas'); color.width = color.height = SZ;
+ const strokes = document.createElement('canvas'); strokes.width = strokes.height = SZ;
+ const normal = document.createElement('canvas'); normal.width = normal.height = HZ;
+ const colorTex = new T.CanvasTexture(color), normalTex = new T.CanvasTexture(normal);
+ colorTex.flipY = normalTex.flipY = false; colorTex.colorSpace = T.SRGBColorSpace; colorTex.anisotropy = 8;
+ const ch = {c, root, meshes, tris, role, shade, srcData, srcNormal, maps, SZ, HZ, color, strokes, normal, colorTex, normalTex, over: {}, gear: [], hulls: [], walker: {phase: 0}};
+ if (c.gear) {
+  const gg = await loader.loadAsync(c.gear), bones = {}; root.updateMatrixWorld(true);
+  root.traverse(o => { if (o.isBone) bones[o.name] = o; });
+  const BONE = n => /^Helmet/.test(n) ? 'head' : /^Boot/.test(n) ? 'foot' : /^Bracer/.test(n) ? 'forearm' : /^ShoulderPad/.test(n) ? 'upperarm' : /^Belt/.test(n) ? 'hips' : 'chest';
+  const parts = []; gg.scene.traverse(o => { if (o.isMesh && GEAR.includes(o.material.name)) parts.push(o); });
+  gg.scene.updateMatrixWorld(true);
+  for (const o of parts) { const side = /_L$/.test(o.name) ? '_L' : /_R$/.test(o.name) ? '_R' : '', b = BONE(o.name);
+   const bone = bones[b + (['foot', 'forearm', 'upperarm'].includes(b) ? side : '')] || bones.chest;
+   bone.attach(o); o.castShadow = o.receiveShadow = true; o.userData.role = o.material.name; ch.gear.push(o); }
+ }
+ const mixer = new T.AnimationMixer(root), A = Object.fromEntries(g.animations.map(a => [a.name, mixer.clipAction(a)]));
+ ch.mixer = mixer; ch.A = A; A.idle.play(); ch.anim = 'idle';
+ scene.add(root);
+ return ch;
+}
+function playAnim(ch, name) {
+ if (ch.anim === name || !ch.A[name]) return;
+ const from = ch.A[ch.anim], to = ch.A[name]; to.reset().play(); from.crossFadeTo(to, .35, false); ch.anim = name;
+}
+
+// ---------- surfaces: tiny noise kit, patterns as height fields ----------
+function hash(x, y) { let h = (x * 374761393 + y * 668265263) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967295; }
+function vnoise(x, y) { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+ const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1); return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v; }
+function fbm(x, y, o = 3) { let s = 0, a = .5, f = 1; for (let i = 0; i < o; i++) { s += a * vnoise(x * f, y * f); f *= 2.03; a *= .5; } return s / (1 - Math.pow(.5, o)); }
+function cell(x, y) { // nearest jittered point: distance and its seed
+ const xi = Math.floor(x), yi = Math.floor(y); let best = 9, seed = 0;
+ for (let j = -1; j <= 1; j++) for (let i = -1; i <= 1; i++) { const cx = xi + i, cy = yi + j, px = cx + hash(cx, cy), py = cy + hash(cy * 7 + 3, cx * 5 + 1);
+  const d = Math.hypot(px - x, py - y); if (d < best) { best = d; seed = hash(cx * 13, cy * 17); } }
+ return [best, seed];
+}
+const PATTERNS = {
+ flat: () => .5,
+ smudge: (u, v) => { const [d] = cell(u * 18, v * 18); return .35 + .35 * fbm(u * 10, v * 10, 3) + .3 * Math.min(1, d * 1.3); },
+ fingerprint: (u, v) => { const [d, s] = cell(u * 22, v * 22), base = .45 + .2 * fbm(u * 8, v * 8, 2);
+  return d < .55 ? base + .22 * (1 - d / .55) * (.5 + .5 * Math.sin(d * 52 + s * 9)) : base; },
+ knit: (u, v) => { const x = u * 110, cx = x - Math.floor(x) - .5, y = v * 80 + Math.abs(cx) * 1.1, ry = y - Math.floor(y);
+  return .25 + .6 * Math.pow(Math.sin(ry * Math.PI), .7) * (1 - Math.abs(cx) * 1.1) + .15 * vnoise(u * 300, v * 300); },
+ felt: (u, v) => .3 + .35 * fbm(u * 150, v * 150, 2) + .35 * fbm(u * 18, v * 18, 2),
+ wood: (u, v) => { const n = fbm(u * 5, v * 34, 3); return .5 + .32 * Math.sin((u * 46 + n * 7) * Math.PI) + .18 * fbm(u * 80, v * 400, 1) - .09; },
+ brush: (u, v) => { const n = fbm(u * 3, v * 3, 2); return .3 + .5 * fbm(u * 7 + n * 2, v * 70, 3) + .2 * vnoise(u * 40, v * 40); },
+};
+
+function compose(ch) {
+ const {SZ, HZ} = ch, L = LOOKS[S.look], cols = BODY.map(r => new T.Color(ch.over[r] || L.roles[r].color)), pats = BODY.map(r => PATTERNS[L.roles[r].pattern || 'flat']);
+ // the height field at half size: pattern per part (only rebuilt when the look changes, not per brush dab)
+ const fresh = ch.Hlook !== S.look, H = fresh ? new Float32Array(HZ * HZ) : ch.H; ch.H = H; ch.Hlook = S.look;
+ if (fresh) for (let y = 0; y < HZ; y++) for (let x = 0; x < HZ; x++) { const i = y * HZ + x, k = ch.role[(y * 2) * SZ + x * 2]; H[i] = k < 0 ? .5 : pats[k]((x + .5) / HZ, (y + .5) / HZ); }
+ // colour: part colour x kept shading x pattern mottle, optionally posterised, then the brush paint on top
+ const cx = ch.color.getContext('2d'), out = cx.createImageData(SZ, SZ), o = out.data;
+ const sk = ch.strokes.getContext('2d').getImageData(0, 0, SZ, SZ).data;
+ const det = L.detail, post = L.posterize, sat = L.saturate, mot = L.mottle;
+ for (let y = 0; y < SZ; y++) for (let x = 0; x < SZ; x++) {
+  const i = y * SZ + x, k = ch.role[i], j = i * 4; let r, g, b;
+  if (k < 0) { r = g = b = .5; } else if (L.original) { // the texture as it came, with the brush on top
+   const sd = ch.srcData.data, a = sk[j + 3] / 255; r = sd[j] / 255; g = sd[j + 1] / 255; b = sd[j + 2] / 255;
+   if (a) { r += (sk[j] / 255 * ch.shade[i] - r) * a; g += (sk[j + 1] / 255 * ch.shade[i] - g) * a; b += (sk[j + 2] / 255 * ch.shade[i] - b) * a; }
+  } else {
+   const h = H[(y >> 1) * HZ + (x >> 1)];
+   let f = (1 + (ch.shade[i] - 1) * det) * (1 + (h - .5) * 2 * mot);
+   if (post) f = Math.round(f * post) / post;
+   const c = cols[k]; r = c.r * f; g = c.g * f; b = c.b * f;
+   const a = sk[j + 3] / 255;
+   if (a) { const sr = sk[j] / 255, sg = sk[j + 1] / 255, sb = sk[j + 2] / 255, sf = 1 + (ch.shade[i] - 1) * det; r += (sr * sf - r) * a; g += (sg * sf - g) * a; b += (sb * sf - b) * a; }
+   const l = .3 * r + .59 * g + .11 * b; r = l + (r - l) * sat; g = l + (g - l) * sat; b = l + (b - l) * sat;
+  }
+  o[j] = Math.max(0, Math.min(255, r * 255)); o[j + 1] = Math.max(0, Math.min(255, g * 255)); o[j + 2] = Math.max(0, Math.min(255, b * 255)); o[j + 3] = 255;
+ }
+ cx.putImageData(out, 0, 0); ch.colorTex.needsUpdate = true;
+ if (!fresh) { if (ch === chars[S.char]) drawUV(); return; }
+ // bump: pattern plus a little of the old sculpt shading, as a tangent-space normal map
+ const nx = ch.normal.getContext('2d'), nd = nx.createImageData(HZ, HZ), n = nd.data, st = 3.2;
+ const Hs = i => H[i] * (L.original ? 0 : 1) + .15 * ch.shade[((i / HZ | 0) * 2) * SZ + (i % HZ) * 2];
+ for (let y = 0; y < HZ; y++) for (let x = 0; x < HZ; x++) {
+  const i = y * HZ + x, l = Hs(y * HZ + Math.max(0, x - 1)), r = Hs(y * HZ + Math.min(HZ - 1, x + 1)), u = Hs(Math.max(0, y - 1) * HZ + x), d = Hs(Math.min(HZ - 1, y + 1) * HZ + x);
+  let vx = (l - r) * st, vy = (u - d) * st; const vz = 1;
+  if (ch.srcNormal) { vx += (ch.srcNormal[i * 4] / 127.5 - 1) * 1.2; vy += (ch.srcNormal[i * 4 + 1] / 127.5 - 1) * 1.2; }
+  const m = Math.hypot(vx, vy, vz);
+  n[i * 4] = (vx / m * .5 + .5) * 255; n[i * 4 + 1] = (vy / m * .5 + .5) * 255; n[i * 4 + 2] = (vz / m * .5 + .5) * 255; n[i * 4 + 3] = 255;
+ }
+ nx.putImageData(nd, 0, 0); ch.normalTex.needsUpdate = true;
+ if (ch === chars[S.char]) drawUV();
+}
+
+// ---------- materials and light per look ----------
+const U = toonUniforms(T, TOON_LOOKS.sunday);
+function dress(ch) {
+ const L = LOOKS[S.look], sh = SHADERS[S.shader];
+ for (const h of ch.hulls) h.removeFromParent(); ch.hulls = [];
+ for (const h of ch.brush?.hulls || []) h.removeFromParent(); ch.brush = null;
+ const mat = role => {
+  const R = L.roles[role] || {}, col = ch.over[role] || R.color;
+  if (BODY.includes(role)) return new T.MeshPhysicalMaterial({name: role, map: ch.colorTex, normalMap: ch.normalTex, normalScale: new T.Vector2(L.normal, L.normal),
+   roughness: R.rough ?? .7, metalness: R.metal || 0, sheen: R.sheen || 0, sheenColor: new T.Color(R.sheenColor || '#fff'), sheenRoughness: .6,
+   clearcoat: R.clearcoat || 0, clearcoatRoughness: .3, side: T.DoubleSide, ...(ch.maps && L.original ? {roughnessMap: ch.maps.roughnessMap, roughness: 1} : {})});
+  if (role === 'Light') return new T.MeshStandardMaterial({name: role, color: col, emissive: col, emissiveIntensity: R.glow ?? 1, roughness: .4});
+  if (role === 'Glass') return new T.MeshPhysicalMaterial({name: role, color: col, roughness: R.rough ?? .1, metalness: .1, transparent: true, opacity: R.opacity ?? .5, clearcoat: 1});
+  return new T.MeshPhysicalMaterial({name: role, color: col, roughness: R.rough ?? .5, metalness: R.metal || 0, clearcoat: R.clearcoat || 0});
+ };
+ for (const m of ch.meshes) m.material = m.userData.roles ? m.userData.roles.map(mat) : mat(m.userData.role ||= m.material.name);
+ for (const g of ch.gear) { g.material = mat(g.userData.role); }
+ if (sh.toon) toonify(T, ch.root, sh.toon, U);
+ if (sh.ink) ch.hulls = inkHulls(T, ch.root, sh.toon);
+ if (sh.brush) ch.brush = paintBrush(T, ch.root, {accent: '#3fe6d4'}); // Arcane-style painted light (Shaders article thread)
+}
+function applyLook() {
+ const L = LOOKS[S.look], sh = SHADERS[S.shader];
+ sky.material.uniforms.uLo.value.set(L.sky[0]); sky.material.uniforms.uHi.value.set(L.sky[1]);
+ scene.fog.color.set(L.fog); ground.material.color.set(L.ground); document.body.style.background = L.sky[1];
+ scene.environment?.dispose(); scene.environment = envFor(L); scene.environmentIntensity = sh.toon ? .55 : 1;
+ if (sh.toon) setToonLook(T, U, sh.toon);
+ renderer.toneMappingExposure = sh.toon ? 1 : L.original ? .85 : 1.05;
+ const order = [chars[S.char], ...Object.values(chars).filter(c => c !== chars[S.char])];
+ for (const ch of order) { compose(ch); dress(ch); }
+ drawLooks(); drawParts();
+}
+
+// ---------- camera and walking ----------
+const CAM_AT = {close: [[2.6, 1.45, 4.9], [0, .98, 0], 32], walk: [[5.5, 3, 8.5], [0, .9, 0], 34], far: [[16, 6.5, 24], [0, 1, 0], 22]};
+function setCam(m, snap) {
+ S.cam = m; const [p, t, f] = CAM_AT[m]; camera.fov = f; camera.updateProjectionMatrix();
+ if (snap) { camera.position.set(...p); controls.target.set(...t); } else { camTween = {t: 0, p0: camera.position.clone(), t0: controls.target.clone(), p1: new T.Vector3(...p), t1: new T.Vector3(...t)}; }
+ for (const ch of Object.values(chars)) {
+  const show = m === 'far' || ch === chars[S.char]; ch.root.visible = show;
+  if (!show) continue; ch.root.position.set(0, 0, 0); ch.root.rotation.y = m === 'close' ? -.35 : 0;
+ }
+ pathRing.visible = m !== 'close';
+ key.shadow.camera.left = key.shadow.camera.bottom = m === 'far' ? -12 : -4; key.shadow.camera.right = key.shadow.camera.top = m === 'far' ? 12 : 4; key.shadow.camera.updateProjectionMatrix();
+}
+let camTween = null;
+const SPEED = 1.15, LOOP = {walk: 2.8, far: 7};
+function walkers(dt) {
+ const list = S.cam === 'far' ? CHARS.map(c => chars[c.id]) : [chars[S.char]];
+ list.forEach((ch, n) => {
+  if (S.cam === 'close') { playAnim(ch, 'idle'); return; }
+  playAnim(ch, 'walk_fwd');
+  const R = LOOP[S.cam], w = ch.walker; w.phase += SPEED * dt / R;
+  const a = w.phase + n * Math.PI * 2 / list.length, x = Math.cos(a) * R, z = Math.sin(a) * R;
+  ch.root.position.set(x, 0, z); ch.root.rotation.y = Math.atan2(-Math.sin(a), Math.cos(a)); // facing along the loop
+ });
+}
+
+// ---------- paint ----------
+const ray = new T.Raycaster(), ptr = new T.Vector2();
+let painting = false, dirty = false, last = null;
+function hitAt(e) {
+ const r = canvas.getBoundingClientRect(); ptr.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+ ray.setFromCamera(ptr, camera); const ch = chars[S.char];
+ return ray.intersectObjects([...ch.meshes, ...ch.gear], false)[0];
+}
+function dab(u, v) {
+ const ch = chars[S.char], {SZ} = ch, x = ch.strokes.getContext('2d'), px = u * SZ, py = v * SZ, r = S.size * SZ / 1024;
+ const steps = last ? Math.max(1, Math.ceil(Math.hypot(px - last[0], py - last[1]) / (r * .35))) : 1;
+ if (last && Math.hypot(px - last[0], py - last[1]) > SZ * .2) last = null; // jumped across a seam: start a new stroke
+ for (let s = 1; s <= steps; s++) {
+  const qx = last ? last[0] + (px - last[0]) * s / steps : px, qy = last ? last[1] + (py - last[1]) * s / steps : py;
+  const gr = x.createRadialGradient(qx, qy, 0, qx, qy, r), c = new T.Color(S.color);
+  const rgb = `${c.r * 255 | 0},${c.g * 255 | 0},${c.b * 255 | 0}`;
+  gr.addColorStop(0, `rgba(${rgb},.9)`); gr.addColorStop(.6, `rgba(${rgb},.6)`); gr.addColorStop(1, `rgba(${rgb},0)`);
+  x.globalCompositeOperation = S.tool === 'erase' ? 'destination-out' : 'source-over'; x.fillStyle = S.tool === 'erase' ? `rgba(0,0,0,.8)` : gr;
+  if (S.tool === 'erase') { x.beginPath(); x.arc(qx, qy, r, 0, 7); x.fill(); } else x.fillRect(qx - r, qy - r, r * 2, r * 2);
+ }
+ x.globalCompositeOperation = 'source-over'; last = [px, py]; dirty = true;
+}
+function fillPart(role) { const ch = chars[S.char]; ch.over[role] = S.color; if (BODY.includes(role)) compose(ch); dress(ch); drawParts(); caption(PART_NAME[role], 'Filled with your colour.'); }
+canvas.addEventListener('pointerdown', e => {
+ if (!S.paint) return; const h = hitAt(e); if (!h) return;
+ e.stopImmediatePropagation(); canvas.setPointerCapture(e.pointerId);
+ const role = h.object.userData.role || h.object.material.name;
+ if (S.tool === 'fill' || !BODY.includes(role)) { fillPart(role); return; }
+ painting = true; last = null; dab(h.uv.x, h.uv.y);
+}, true);
+canvas.addEventListener('pointermove', e => { if (!painting) return; const h = hitAt(e); if (h?.uv && BODY.includes(h.object.userData.role)) dab(h.uv.x, h.uv.y); else last = null; });
+addEventListener('pointerup', () => { painting = false; last = null; });
+// paint on the flat texture too
+const uvc = $('uv'), uvx = uvc.getContext('2d');
+let uvPaint = false;
+uvc.addEventListener('pointerdown', e => { uvPaint = true; last = null; uvc.setPointerCapture(e.pointerId); uvDab(e); });
+uvc.addEventListener('pointermove', e => uvPaint && uvDab(e));
+uvc.addEventListener('pointerup', () => { uvPaint = false; last = null; });
+function uvDab(e) { const r = uvc.getBoundingClientRect(), u = (e.clientX - r.left) / r.width, v = (e.clientY - r.top) / r.height;
+ const ch = chars[S.char], {SZ} = ch, k = ch.role[(v * SZ | 0) * SZ + (u * SZ | 0)]; if (k < 0) { last = null; return; }
+ if (S.tool === 'fill') { if (!uvPaint) return; uvPaint = false; fillPart(BODY[k]); return; } dab(u, v); }
+function drawUV() {
+ if (!$('uvcard').classList.contains('on')) return;
+ const ch = chars[S.char]; uvx.drawImage(ch.color, 0, 0, 512, 512);
+ uvx.strokeStyle = 'rgba(255,255,255,.35)'; uvx.save(); uvx.scale(512 / ch.SZ, 512 / ch.SZ); uvx.lineWidth = 1.2 * ch.SZ / 512;
+ for (const t of ch.tris) uvx.stroke(t.P); uvx.restore();
+}
+
+// ---------- the glass objects ----------
+const cap = $('cap'); let capT = 0;
+function caption(b, s) { cap.innerHTML = `<b>${b}</b>${s || ''}`; cap.classList.add('on'); clearTimeout(capT); capT = setTimeout(() => cap.classList.remove('on'), 3200); }
+function drawLooks() {
+ $('looks').innerHTML = LOOK_IDS.map(id => { const R = LOOKS[id].roles;
+  return `<button class="glass orb" data-look="${id}" aria-label="${LOOKS[id].name}" aria-pressed="${id === S.look}" style="background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.85) 0 7%,rgba(255,255,255,0) 22%),conic-gradient(from 200deg,${R.Skin.color} 0 34%,${R.TankTop.color} 0 67%,${R.Shorts.color} 0)"></button>`; }).join('');
+ $('lookList').innerHTML = LOOK_IDS.map(id => `<li><b>${LOOKS[id].name}.</b> ${LOOKS[id].says}</li>`).join('');
+}
+function drawChars() {
+ $('chars').innerHTML = CHARS.map(c => `<button class="glass orb${c.gear ? ' gear' : ''}" data-char="${c.id}" aria-label="${c.name}" aria-pressed="${c.id === S.char}" style="${portraits[c.id] ? `background-image:url(${portraits[c.id]})` : ''}"><i></i></button>`).join('');
+}
+const SWATCH = ['#ffffff', '#2b2233', '#e8352b', '#ff9f1c', '#ffe066', '#4f8f3a', '#2b4fd8', '#8a5a3c'];
+function drawParts() {
+ const ch = chars[S.char], L = LOOKS[S.look], roles = [...BODY, ...(ch.gear.length ? ['Armor', 'Light'] : [])];
+ $('parts').innerHTML = roles.map(r => { const c = ch.over[r] || L.roles[r].color;
+  return `<label class="puck" style="background:${c}" aria-label="${PART_NAME[r]} colour"><input type="color" data-part="${r}" value="${c}"><small>${PART_NAME[r]}</small></label>`; }).join('');
+ const pal = [...new Set([...BODY.map(r => L.roles[r].color), ...SWATCH])];
+ $('swatches').innerHTML = pal.map(c => `<button class="sw" data-sw="${c}" aria-label="Colour ${c}" aria-pressed="${c === S.color}" style="background:${c}"></button>`).join('');
+}
+$('looks').addEventListener('click', e => { const b = e.target.closest('[data-look]'); if (!b) return;
+ S.look = b.dataset.look; S.shader = LOOKS[S.look].shader; for (const ch of Object.values(chars)) ch.over = {};
+ applyLook(); snapPortraits(); caption(LOOKS[S.look].name, LOOKS[S.look].says); });
+$('chars').addEventListener('click', e => { const b = e.target.closest('[data-char]'); if (!b) return;
+ S.char = b.dataset.char; drawChars(); setCam(S.cam); drawParts(); drawUV(); caption(chars[S.char].c.name); });
+$('tCam').onclick = () => { setCam(CAMS[(CAMS.indexOf(S.cam) + 1) % CAMS.length]); caption(CAM_NAME[S.cam], S.cam === 'far' ? 'All four heroes walking, the way a film would show them across a field.' : ''); };
+$('tShade').onclick = () => { S.shader = SHADER_IDS[(SHADER_IDS.indexOf(S.shader) + 1) % SHADER_IDS.length]; applyLook(); caption(SHADERS[S.shader].name); };
+const CARDS = {tray: 'tPaint', uvcard: 'tUV', ctx: 'tCtx', info: 'tInfo'};
+const toggle = (btn, card, on) => {
+ if (on && innerWidth < 760) for (const [c, b] of Object.entries(CARDS)) if (c !== card && $(c).classList.contains('on')) { $(c).classList.remove('on'); $(b).setAttribute('aria-pressed', false); if (c === 'tray') S.paint = false; }
+ btn.setAttribute('aria-pressed', on); $(card).classList.toggle('on', on); };
+$('tPaint').onclick = () => { S.paint = !S.paint; toggle($('tPaint'), 'tray', S.paint); if (S.paint) caption('Paint', 'Brush on the body, or fill a whole part.'); };
+$('tUV').onclick = () => { const on = !$('uvcard').classList.contains('on'); toggle($('tUV'), 'uvcard', on); drawUV(); };
+$('tCtx').onclick = () => toggle($('tCtx'), 'ctx', !$('ctx').classList.contains('on'));
+fetch('/studies/texture-studio/context.json').then(r => r.json()).then(C => {
+ $('ctxBody').innerHTML = C.groups.map(g => `<h3>${g.name}</h3><ul>${g.items.map(i => `<li>${i.href ? `<a href="${i.href}" target="_blank" rel="noopener">${i.t}</a>` : `<b>${i.t}</b> <code>${i.doc || ''}</code>`}<span>${i.took}</span></li>`).join('')}</ul>`).join('');
+ if (innerWidth >= 1100) toggle($('tCtx'), 'ctx', true); // wide screens open on it, per the context-engineering rule
+});
+$('tInfo').onclick = () => toggle($('tInfo'), 'info', !$('info').classList.contains('on'));
+$('info').onclick = () => toggle($('tInfo'), 'info', false);
+$('tSave').onclick = () => { const a = document.createElement('a'); a.download = `${S.char}-${S.look}.png`; a.href = chars[S.char].color.toDataURL('image/png'); a.click(); };
+$('tray').addEventListener('click', e => {
+ const t = e.target.closest('[data-tool]'), s = e.target.closest('[data-size]'), w = e.target.closest('[data-sw]');
+ if (t) { S.tool = t.dataset.tool; for (const b of $('tray').querySelectorAll('[data-tool]')) b.setAttribute('aria-pressed', b === t); }
+ if (s) { S.size = +s.dataset.size; for (const b of $('tray').querySelectorAll('[data-size]')) b.setAttribute('aria-pressed', b === s); }
+ if (w) { S.color = w.dataset.sw; for (const b of $('swatches').children) b.setAttribute('aria-pressed', b === w); }
+});
+$('tray').addEventListener('input', e => { const r = e.target.dataset.part; if (!r) return; const ch = chars[S.char]; ch.over[r] = e.target.value;
+ e.target.parentNode.style.background = e.target.value; if (BODY.includes(r)) compose(ch); dress(ch); });
+$('clearPaint').onclick = () => { const ch = chars[S.char]; ch.strokes.getContext('2d').clearRect(0, 0, ch.SZ, ch.SZ); ch.over = {}; compose(ch); dress(ch); drawParts(); };
+
+// ---------- portraits: the live character, from the same camera, as each orb's picture ----------
+const portraits = {};
+function snapPortraits() {
+ const keep = {cam: S.cam, p: camera.position.clone(), t: controls.target.clone(), fov: camera.fov, vis: Object.values(chars).map(c => [c, c.root.visible, c.root.position.clone(), c.root.rotation.y])};
+ for (const c of CHARS) {
+  const ch = chars[c.id]; for (const o of Object.values(chars)) o.root.visible = o === ch;
+  ch.root.position.set(0, 0, 0); ch.root.rotation.y = -.25; ch.root.updateMatrixWorld(true);
+  camera.fov = 30; camera.position.set(.6, 1.7, 3.9); camera.lookAt(0, 1.25, 0); camera.updateProjectionMatrix();
+  renderer.render(scene, camera); portraits[c.id] = canvas.toDataURL('image/jpeg', .7);
+ }
+ for (const [c, v, p, r] of keep.vis) { c.root.visible = v; c.root.position.copy(p); c.root.rotation.y = r; }
+ camera.position.copy(keep.p); controls.target.copy(keep.t); camera.fov = keep.fov; camera.updateProjectionMatrix(); camera.lookAt(keep.t);
+ drawChars();
+}
+
+// ---------- go ----------
+function resize() { const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+const loaded = await Promise.all(CHARS.map(loadChar));
+CHARS.forEach((c, i) => { chars[c.id] = loaded[i]; });
+setCam(S.cam, true); applyLook(); snapPortraits(); setCam(S.cam, true);
+$('load').remove();
+caption(LOOKS[S.look].name, LOOKS[S.look].says);
+const clock = new T.Clock();
+renderer.setAnimationLoop(() => {
+ const dt = Math.min(clock.getDelta(), .05);
+ walkers(dt);
+ for (const ch of Object.values(chars)) if (ch.root.visible) { ch.mixer.update(dt); ch.brush?.update(clock.elapsedTime); }
+ if (camTween) { camTween.t = Math.min(1, camTween.t + dt * 1.6); const k = 1 - Math.pow(1 - camTween.t, 3);
+  camera.position.lerpVectors(camTween.p0, camTween.p1, k); controls.target.lerpVectors(camTween.t0, camTween.t1, k); if (camTween.t >= 1) camTween = null; }
+ if (S.cam === 'walk' && !camTween) controls.target.lerp(chars[S.char].root.position.clone().setY(.9), .04);
+ if (dirty) { dirty = false; compose(chars[S.char]); }
+ controls.update(); renderer.render(scene, camera);
+});
+window.textureStudio = {S, chars, LOOKS, applyLook, setCam, compose};
+</script>
+</body>
+</html>

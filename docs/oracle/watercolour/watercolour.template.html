@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Watercolour distance</title>
+<style>
+:root{--bg:#f6f1e7;--ink:#2b2622;--mut:#7a6f64;--card:#fffdf8;--line:#e3d9c8;--acc:#c4492a;--code:#2b2622;--codebg:#f0e8d8}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1d1a18;--ink:#f1eadf;--mut:#a89d90;--card:#262220;--line:#3b3531;--acc:#ff8a64;--code:#f1eadf;--codebg:#171412}}
+:root[data-theme=dark]{--bg:#1d1a18;--ink:#f1eadf;--mut:#a89d90;--card:#262220;--line:#3b3531;--acc:#ff8a64;--code:#f1eadf;--codebg:#171412}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:18px 16px 0;max-width:1180px;margin:auto}h1{margin:0;font-size:24px}.sub{color:var(--mut);margin:4px 0 12px}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);max-width:1180px;margin:auto;padding:0 16px}
+.tab{background:none;border:0;border-bottom:3px solid transparent;color:var(--mut);padding:10px 14px;font:inherit;font-weight:600;cursor:pointer}.tab[aria-selected=true]{color:var(--ink);border-color:var(--acc)}
+main{max-width:1180px;margin:auto;padding:16px}.pane[hidden]{display:none}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.stagebox{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#ddd;aspect-ratio:16/10}canvas{display:block;width:100%;height:100%}
+.split{position:absolute;top:0;bottom:0;width:3px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.25);cursor:ew-resize;touch-action:none}.split:after{content:"";position:absolute;top:50%;left:-13px;width:29px;height:29px;margin-top:-14px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.4)}
+.tag{position:absolute;top:10px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.85);color:#2b2622;font-size:12px;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}.card h2{margin:0 0 8px;font-size:15px}
+.zones{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.zones button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:5px 11px;font:inherit;font-size:13px;cursor:pointer}.zones button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.mood{color:var(--mut);font-size:13px;margin:0 0 10px}
+.row{display:grid;grid-template-columns:120px 1fr 44px;gap:8px;align-items:center;font-size:13px;margin:3px 0}.row input[type=range]{width:100%}.row output{color:var(--mut);text-align:right;font-variant-numeric:tabular-nums}
+.cols{display:flex;gap:12px;margin-top:8px}.cols label{font-size:13px;display:flex;gap:6px;align-items:center}
+.read{font-variant-numeric:tabular-nums;color:var(--mut);font-size:12px;margin-top:8px}
+h3{margin:22px 0 6px;font-size:17px}p{margin:6px 0}ul{margin:6px 0;padding-left:20px}
+pre{background:var(--codebg);color:var(--code);padding:12px;border-radius:10px;overflow:auto;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;max-height:420px}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}.shots figure{margin:0}.shots img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}.shots figcaption{font-size:12px;color:var(--mut);margin-top:3px}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;border:1px solid var(--line)}
+.ctx{margin-top:22px}
+</style>
+</head><body>
+<header><h1>Watercolour distance</h1><p class="sub">AW-STUDY-<!--NUM--> &middot; promoted from Inspiring Shaders #6 (Zelda: Breath of the Wild) &middot; 2026-10-23</p></header>
+<div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" data-t="study">Study</button><button class="tab" role="tab" aria-selected="false" data-t="assets">Production assets</button></div>
+<main>
+<section class="pane" id="study">
+<div class="grid">
+ <div>
+  <div class="stagebox" id="box"><canvas id="c"></canvas><span class="tag" style="left:10px">Plain</span><span class="tag" style="right:10px">Watercolour distance</span><div class="split" id="split"></div></div>
+  <p class="read" id="read"></p>
+  <h3>What it is</h3>
+  <p>Close things stay exactly as drawn. Further away the world turns into wet watercolour: colour lifts towards the paper and takes the zone's wash colour, edges soften and bleed into each other, tones settle into flat pooled washes, pigment granulates, and the paper's fibres show through. A far hill is hidden by mood, not by fog, and nothing near is ever covered.</p>
+  <p>Each part of Winchester has its own opinion about its zoomed-out view: Downtown is brick and brass dissolving to rose, Ani's side is cool, wide and wet, Abbie and Daddy's side pools rose and violet in the valleys. Same shader, three sets of numbers.</p>
+  <h3>Design card</h3>
+  <ul><li><b>What the player feels:</b> the far world is a painting, the near world is a place. Pulling back feels like stepping away from a picture.</li>
+  <li><b>How would the character know?</b> They would not: it is the way distance looks to a child's eye, so it is none, the world simply looks different. No label, gauge or hint appears.</li>
+  <li><b>Layers:</b> a presentation-layer look on the finished picture; it never touches the world, so characters, AI and <code>look</code> are unaffected.</li>
+  <li><b>Whole-game adaptation:</b> the wash colour follows the zone's light; time of day and weather can drive <code>tune()</code> later.</li>
+  <li><b>No masking:</b> wash is capped below 85% and only grows with distance; the play HUD is untouched. Style yes, expression never. PG.</li></ul>
+  <h3>Composes with Paint the world</h3>
+  <p>The pass reads only colour and depth, never materials. Splatoon-style world paint is drawn into the scene first, so painted ground simply washes with the rest of the distance; Painted Brush and Sunday Toon do the same.</p>
+ </div>
+ <aside class="card">
+  <h2>Zone</h2><div class="zones" id="zones"></div><p class="mood" id="mood"></p>
+  <div id="sliders"></div>
+  <div class="cols"><label>Wash <input type="color" id="cwash"></label><label>Paper <input type="color" id="cpaper"></label></div>
+  <div class="cols"><label><input type="checkbox" id="on" checked> Watercolour on</label></div>
+ </aside>
+</div>
+</section>
+<section class="pane" id="assets" hidden>
+ <h3 style="margin-top:0">In the game</h3>
+ <p>Live in Abbie's Town: <code>/town</code> (the three dioramas and the pulled-back trio). Each region's look carries a <code>wash</code> zone; the camera's own distance drives the rest. <b>tour: false</b> (a look, not a thing to learn). Add <code>?watercolour=off</code> to the town address to compare; developer console: <code>AbbieTown.watercolour.tune({bleed: 5})</code>.</p>
+ <div class="shots" id="shots"><!--SHOTS--></div>
+ <h3>Per-zone numbers</h3><table id="ztable"></table>
+ <h3>Controls</h3><table id="ctable"></table>
+ <h3>API (simulations/watercolour-distance.mjs)</h3>
+<pre>const W = watercolourDistance(THREE, renderer, {logDepth: true});   // after the renderer's own settings
+W.precompile(scene, camera);          // compiles the scene and the pass up front; render() draws directly until it is done
+W.setZone('downtown');                // 'off' eases to no wash and costs nothing
+// per frame
+W.update(dt); W.render(scene, camera);   // in place of renderer.render
+W.tune({wash: '#ffaa88', bleed: 4});  // live edit, clamped to WASH_CONTROLS
+washAt(distance, zone)                // the same falloff in JS, for tests and for gameplay that needs to know</pre>
+ <h3>Cost and the precompile rule</h3>
+ <ul><li>One colour+depth target (MSAA 4x, half float) and one full-screen pass; 10 taps only where wash is above 0.4%, none in the near field.</li>
+ <li>Uniforms only change at run time, so no shader compiles during play. <code>compileAsync</code> runs at load; nothing is drawn washed until it is ready.</li>
+ <li>Depth is decoded for the page's logarithmic depth buffer (<code>pow(far+1, d) - 1</code>), or the perspective form when <code>logDepth</code> is false.</li>
+ <li>The readout under the study view shows the pass's CPU submit time and the frame time on <i>your</i> device. Measured here: <span id="perf">see readout</span>.</li></ul>
+ <h3>Source</h3><pre id="src">/*SOURCE*/</pre>
+ <h3>Checks</h3><ul><li>Headless: falloff is monotonic and zero before <code>start</code>, zones mix without passing through grey, tune() clamps, shader declares every uniform it is given (<code>simulations/tests/watercolour.test.mjs</code>).</li>
+ <li>Browser: the town runs with the pass compiled (<code>AbbieTown.watercolour.compiled</code>), the near field is pixel-identical when wash is 0.</li></ul>
+ <div class="ctx"><!--CONTEXT--></div>
+</section>
+</main>
+<script type="importmap">/*IMPORTMAP*/</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+/*MODULE*/
+const $ = s => document.querySelector(s);
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => { document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x === b)); document.querySelectorAll('.pane').forEach(p => p.hidden = p.id !== b.dataset.t); if (b.dataset.t === 'study') onResize(); });
+// ---- tables
+$('#ctable').innerHTML = '<tr><th>Control</th><th>Range</th></tr>' + Object.entries(WASH_CONTROLS).map(([k, v]) => `<tr><td>${v.label} <code>${k}</code></td><td>${v.min} to ${v.max}</td></tr>`).join('');
+const ZN = {downtown: 'Downtown', 'anis-side': "Ani's side", 'abbie-daddy-side': "Abbie and Daddy's side", trio: 'Three regions', real: 'Real town'};
+$('#ztable').innerHTML = '<tr><th>Zone</th><th>Wash</th><th>Paper</th><th>Clear until</th><th>Full by</th><th>Most</th><th>Soft</th><th>Bleed</th><th>Mood</th></tr>' + Object.entries(WASH_ZONES).map(([k, z]) => `<tr><td>${ZN[k]}</td><td><span class="swatch" style="background:${z.wash}"></span> ${z.wash}</td><td><span class="swatch" style="background:${z.paper}"></span> ${z.paper}</td><td>${z.start}</td><td>${z.end}</td><td>${z.max}</td><td>${z.blur}</td><td>${z.bleed}</td><td>${z.mood}</td></tr>`).join('');
+// ---- the live view: rows of hills, villages and trees running to the horizon, lit per zone
+const LOOKS = {
+ downtown: {bg: '#f3dcbd', sun: '#ffd49a', sunI: 2.7, sky: '#ffe9cf', gnd: '#8a6a4a', grass: ['#7fa14f', '#a8b45e'], dist: 250, fov: 32},
+ 'anis-side': {bg: '#cfe8f1', sun: '#eef4ff', sunI: 2, sky: '#dff1ff', gnd: '#4d6a5c', grass: ['#64a07c', '#8bb86a'], dist: 330, fov: 48},
+ 'abbie-daddy-side': {bg: '#f6c4ad', sun: '#ff9d6a', sunI: 2.9, sky: '#ffd5c2', gnd: '#7a4a5a', grass: ['#c2a447', '#d98a45'], dist: 300, fov: 40},
+ trio: {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sky: '#f2efe6', gnd: '#7a6a4a', grass: ['#8fa957', '#b9b560'], dist: 560, fov: 36},
+ real: {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sky: '#e6f1ff', gnd: '#7a6a4a', grass: ['#7fa14f', '#a8b45e'], dist: 3600, fov: 42},
+};
+const canvas = $('#c'), box = $('#box');
+const renderer = new THREE.WebGLRenderer({canvas, antialias: true, logarithmicDepthBuffer: true});
+renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(36, 1.6, 2, 40000);
+const hemi = new THREE.HemisphereLight('#fff', '#888', 1), sun = new THREE.DirectionalLight('#fff', 2.4); sun.position.set(-520, 520, 620); scene.add(hemi, sun);
+const rnd = (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+const noise = (x, y) => Math.sin(x * .013) * Math.cos(y * .011) * 18 + Math.sin(x * .031 + y * .02) * 7 + Math.sin(y * .05) * 3;
+const SZ = 14000, seg = 220, geo = new THREE.PlaneGeometry(SZ, SZ, seg, seg); geo.rotateX(-Math.PI / 2);
+const cols = new Float32Array(geo.attributes.position.count * 3); geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
+const ground = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({vertexColors: true, roughness: 1, flatShading: true})); scene.add(ground);
+const hAt = (x, z) => { const far = Math.max(0, Math.hypot(x, z) - 500); return noise(x, z) + far * .035 * (1 + Math.sin(x * .004) * .5) * (.5 + .5 * Math.sin(z * .003 + 1)); };
+const pos = geo.attributes.position; for (let i = 0; i < pos.count; i++) pos.setY(i, hAt(pos.getX(i), pos.getZ(i))); geo.computeVertexNormals();
+function paint(look) { const a = new THREE.Color(look.grass[0]), b = new THREE.Color(look.grass[1]), c = new THREE.Color(); for (let i = 0; i < pos.count; i++) { c.copy(a).lerp(b, Math.min(1, Math.max(0, .5 + Math.sin(pos.getX(i) * .02) * Math.cos(pos.getZ(i) * .017) * .5 + pos.getY(i) / 400))); cols.set([c.r, c.g, c.b], i * 3); } geo.attributes.color.needsUpdate = true; }
+const treeG = new THREE.ConeGeometry(1, 1, 6), houseG = new THREE.BoxGeometry(1, 1, 1), N = 2600;
+const trees = new THREE.InstancedMesh(treeG, new THREE.MeshStandardMaterial({color: '#4f7a45', flatShading: true}), N), houses = new THREE.InstancedMesh(houseG, new THREE.MeshStandardMaterial({color: '#e7d9c2', flatShading: true}), 420);
+const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), v = new THREE.Vector3(), s = new THREE.Vector3(), col = new THREE.Color(), leaf = ['#4f7a45', '#c8602b', '#e0a52f', '#2f5d3a', '#b8472a'];
+for (let i = 0; i < N; i++) { const a = rnd() * 6.283, r = 30 + Math.pow(rnd(), .8) * 6000, x = Math.cos(a) * r, z = Math.sin(a) * r, k = (5 + rnd() * 9) * .5 + r * .003; v.set(x, hAt(x, z) + k * 1.2, z); s.set(k * .7, k * 2.4, k * .7); m4.compose(v, q, s); trees.setMatrixAt(i, m4); trees.setColorAt(i, col.set(leaf[i % 5])); }
+for (let i = 0; i < 420; i++) { const a = rnd() * 6.283, r = 40 + Math.pow(rnd(), .7) * 5000, x = Math.cos(a) * r, z = Math.sin(a) * r, k = (9 + rnd() * 7) * .55 + r * .003; q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rnd() * 3); v.set(x, hAt(x, z) + k * .5, z); s.set(k * 1.5, k, k * 1.1); m4.compose(v, q, s); houses.setMatrixAt(i, m4); houses.setColorAt(i, col.set(['#e7d9c2', '#b9654a', '#d9c06a', '#8fa7b8'][i % 4])); }
+scene.add(trees, houses);
+const controls = new OrbitControls(camera, canvas); controls.enableDamping = true; controls.maxPolarAngle = 1.5; controls.minDistance = 40; controls.maxDistance = 9000;
+const W = watercolourDistance(THREE, renderer, {logDepth: true});
+let zoneId = 'downtown', split = .5; const look = () => LOOKS[zoneId];
+function setZone(id, fly = true) {
+ zoneId = id; const L = look(); scene.background = new THREE.Color(L.bg); hemi.color.set(L.sky); hemi.groundColor.set(L.gnd); sun.color.set(L.sun); sun.intensity = L.sunI; camera.fov = L.fov; camera.updateProjectionMatrix(); paint(L);
+ const d = L.dist, p = .34; if (fly) { camera.position.set(0, Math.sin(p) * d + 30, Math.cos(p) * d); controls.target.set(0, 20, 0); controls.update(); }
+ W.setZone(id); $('#mood').textContent = WASH_ZONES[id].mood; syncUI();
+}
+function syncUI() { const z = W.target; for (const [k, r] of Object.entries(rows)) { r.i.value = z[k]; r.o.textContent = +(+z[k]).toFixed(2); } $('#cwash').value = z.wash; $('#cpaper').value = z.paper; document.querySelectorAll('#zones button').forEach(b => b.setAttribute('aria-pressed', b.dataset.z === zoneId)); }
+const rows = {};
+for (const [k, c] of Object.entries(WASH_CONTROLS)) { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `<span>${c.label}</span><input type="range" min="${c.min}" max="${c.max}" step="${(c.max - c.min) / 200}"><output></output>`; $('#sliders').append(r); rows[k] = {i: r.querySelector('input'), o: r.querySelector('output')}; rows[k].i.oninput = () => { W.tune({[k]: +rows[k].i.value}); rows[k].o.textContent = +(+rows[k].i.value).toFixed(2); }; }
+$('#cwash').oninput = e => W.tune({wash: e.target.value}); $('#cpaper').oninput = e => W.tune({paper: e.target.value});
+for (const id of Object.keys(LOOKS)) { const b = document.createElement('button'); b.textContent = ZN[id]; b.dataset.z = id; b.onclick = () => setZone(id); $('#zones').append(b); }
+$('#on').onchange = e => { W.enabled = e.target.checked; };
+const sp = $('#split'); let drag = false; sp.onpointerdown = e => { drag = true; sp.setPointerCapture(e.pointerId); }; sp.onpointerup = () => drag = false;
+sp.onpointermove = e => { if (!drag) return; const r = box.getBoundingClientRect(); split = Math.max(.02, Math.min(.98, (e.clientX - r.left) / r.width)); };
+function onResize() { const r = box.getBoundingClientRect(); if (r.width < 10) return; renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix(); }
+new ResizeObserver(onResize).observe(box); onResize();
+setZone('downtown'); W.precompile(scene, camera);
+let last = performance.now(), fAvg = 16, shown = 0; const clock = new THREE.Clock();
+renderer.setAnimationLoop(now => {
+ const dt = Math.min(.05, clock.getDelta()); fAvg += ((now - last) - fAvg) * .05; last = now; controls.update(); W.update(dt);
+ const w = renderer.domElement.width, h = renderer.domElement.height;
+ if (W.enabled && W.active() && W.compiled) { // before and after on one picture
+  renderer.setScissorTest(true); renderer.setViewport(0, 0, w / renderer.getPixelRatio(), h / renderer.getPixelRatio());
+  renderer.setScissor(0, 0, Math.round(w * split), h); renderer.render(scene, camera);
+  renderer.setScissor(Math.round(w * split), 0, w, h); W.render(scene, camera); renderer.setScissorTest(false);
+ } else W.render(scene, camera);
+ sp.style.left = `calc(${split * 100}% - 1px)`; sp.style.display = W.enabled ? '' : 'none';
+ if (now - shown > 500) { shown = now; $('#read').textContent = `Frame ${fAvg.toFixed(1)} ms (${(1000 / fAvg).toFixed(0)} fps) on this device · wash pass submit ${W.lastPassMs.toFixed(2)} ms · zone ${zoneId} · ${W.compiled ? 'compiled' : 'compiling'}`; }
+});
+</script>
+</body></html>

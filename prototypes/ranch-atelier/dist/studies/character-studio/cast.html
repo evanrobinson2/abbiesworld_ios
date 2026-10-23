@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Next Characters</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="/theme/boot.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* AW-STUDY-0037 Character Studio, the cast room: each Midjourney "next character" beside the 3D one built from it,
+   same moves as the stage. Flat colour, Roboto, blocks that press (LOOK.md). */
+:root{--surface:var(--aw-surface,#fbf8f2);--ink:var(--aw-ink,#2b2218);--line:var(--aw-line,#e2d8c6);--accent:var(--aw-accent,#7a5236);
+ --on-accent:var(--aw-on-accent,#ffffff);--edge:color-mix(in srgb,var(--accent) 35%,var(--line));--font:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif}
+html,body{margin:0;background:#efe6d6;font:400 14px/1.4 var(--font);color:var(--ink)}
+main{max-width:1240px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 64px) 16px 40px;display:grid;gap:22px}
+.card{background:var(--surface);border-radius:16px;padding:14px;display:grid;grid-template-columns:3fr 2fr;gap:14px;align-items:stretch}
+.card h2{grid-column:1/-1;margin:0;font:700 17px/1.2 var(--font)}
+.card h2 small{font:400 13px var(--font);opacity:.7;margin-left:8px}
+.pic,.view{border-radius:12px;overflow:hidden;background:#e9e1d1;position:relative;min-height:300px}
+.pic img{display:block;width:100%;height:100%;object-fit:contain}
+.view canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+.row{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}
+button{font:500 13px var(--font);color:var(--ink);background:#fff;border:0;border-radius:10px;padding:8px 12px;cursor:pointer;
+ box-shadow:0 3px 0 var(--edge);transform:translateY(-3px);transition:transform .08s,box-shadow .08s}
+button:active{transform:translateY(0);box-shadow:0 0 0 var(--edge)}
+button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 60%,#000)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.sep{width:12px}
+@media (max-width:760px){.card{grid-template-columns:1fr}.pic{min-height:0;aspect-ratio:3/2}.view{min-height:380px}}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+<main id="cards"></main>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {toonify, TOON_LOOKS} from '/simulations/toon-kit.mjs';
+import {byId} from './moves.mjs';
+import {loadBody} from './bodies.mjs';
+import {CHARACTERS} from './characters.mjs';
+import {dress} from './directions.mjs';
+import {loadMocap} from './mocap.mjs';
+
+const BASE = new URL('./', location.href);
+// each character's own look from the studio's art directions, and what the picture asked for
+const LOOK = {adventurer: ['clay', 'Claymation'], inventor: ['village', 'Plasticine'], stickman: ['studio', 'Ink lines'], hero: ['comic', '80s action']};
+const ABOUT = {adventurer: 'Pink puffer, sunflower shorts, a two-tone hat and googly eyes.', inventor: 'Tall and thin: a chunky knit, corduroys and a big grin.',
+ stickman: 'Ink lines, a paper head, a sketched sword and a ragged cape.', hero: 'Red and navy suit with gold boots, gloves and belt; a V-shaped torso.'};
+const MOVES = [['idle', 'Stand'], ['walk', 'Walk'], ['wave', 'Wave'], ['jump', 'Jump'], ['jabcross', 'Punch'], ['disco', 'Dance']];
+const mocap = await loadMocap(T, BASE).catch(() => ({}));
+const loader = new GLTFLoader(), clock = new T.Clock(), views = [], $ = s => document.querySelector(s);
+
+for (const [id, c] of Object.entries(CHARACTERS)) {
+ const card = document.createElement('section'); card.className = 'card';
+ card.innerHTML = `<h2>${c.name}<small>${ABOUT[id]}</small></h2>
+  <div class="pic"><img src="img/ref-${id}.jpg" alt="Midjourney concept: ${c.name}, turnaround" loading="lazy"></div>
+  <div class="view"><canvas aria-label="${c.name} in 3D; drag to turn"></canvas></div>
+  <div class="row">${MOVES.map(([m, n]) => `<button data-move="${m}" aria-pressed="${m === 'idle'}">${n}</button>`).join('')}<span class="sep"></span>
+   ${LOOK[id][0] === 'studio' ? '' : '<button data-look="studio" aria-pressed="false">As built</button>'}<button data-look="${LOOK[id][0]}" aria-pressed="true">${LOOK[id][1]}</button></div>`;
+ $('#cards').append(card);
+ views.push(makeView(id, card));
+}
+
+function makeView(id, card) {
+ const canvas = card.querySelector('canvas'), renderer = new T.WebGLRenderer({canvas, antialias: true});
+ renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+ renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping;
+ const scene = new T.Scene(), camera = new T.PerspectiveCamera(30, 1, .05, 60), h = CHARACTERS[id].height;
+ camera.position.set(h * .55, h * .7, h * 1.75 + .7);
+ const controls = new OrbitControls(camera, canvas); controls.target.set(0, h * .47, 0); controls.enableDamping = true; controls.enablePan = false;
+ controls.minDistance = 1.2; controls.maxDistance = 9; controls.maxPolarAngle = Math.PI * .52;
+ const hemi = new T.HemisphereLight('#dfe9ff', '#b9906a', 1.1), sun = new T.DirectionalLight('#fff1dc', 2.6);
+ sun.position.set(2.5, 5, 3.5); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); sun.shadow.bias = -.0004;
+ Object.assign(sun.shadow.camera, {left: -2, right: 2, top: 3, bottom: -1});
+ const floor = new T.Mesh(new T.CircleGeometry(3, 48), new T.MeshStandardMaterial({color: '#e3cba8', roughness: 1}));
+ floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true;
+ scene.add(hemi, sun, floor);
+ const v = {id, renderer, scene, camera, controls, sun, hemi, floor, canvas, move: 'idle', look: LOOK[id][0], actor: null, dressed: null, t: 0, drawing: {value: 0}};
+ loadBody(T, loader, id, BASE).then(a => { v.actor = a; scene.add(a.object); restyle(v); });
+ card.querySelectorAll('[data-move]').forEach(b => b.onclick = () => {
+  v.move = b.dataset.move; v.t = 0; card.querySelectorAll('[data-move]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+ });
+ card.querySelectorAll('[data-look]').forEach(b => b.onclick = () => {
+  v.look = b.dataset.look; restyle(v); card.querySelectorAll('[data-look]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+ });
+ new ResizeObserver(() => { const r = canvas.parentElement.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix(); }).observe(canvas.parentElement);
+ // render only cards on screen
+ new IntersectionObserver(([e]) => { v.on = e.isIntersecting; }).observe(canvas);
+ return v;
+}
+
+function restyle(v) {
+ v.dressed?.undress(); v.dressed = null;
+ v.dressed = v.look === 'studio' ? null : dress(T, v.actor, v.look, v.drawing);
+ const st = v.dressed?.stage || (v.id === 'stickman' ? {sky: ['#fbfaf6'], floor: '#f4f1e8', sun: '#ffffff', sunI: 1.6, hemi: ['#ffffff', '#ffffff', 1.4], shadow: true} : null) || {sky: ['#efe4d2'], floor: '#e3cba8', sun: '#fff1dc', sunI: 2.6, hemi: ['#dfe9ff', '#b9906a', 1.1], shadow: true};
+ v.renderer.setClearColor(st.sky[1] || st.sky[0]); v.floor.material.color.set(st.floor);
+ v.sun.color.set(st.sun); v.sun.intensity = st.sunI; v.sun.castShadow = st.shadow;
+ v.hemi.color.set(st.hemi[0]); v.hemi.groundColor.set(st.hemi[1]); v.hemi.intensity = st.hemi[2];
+ toonify(T, v.actor.object, TOON_LOOKS.sunday);
+}
+
+function frame() {
+ requestAnimationFrame(frame);
+ const dt = Math.min(clock.getDelta(), .05), now = clock.elapsedTime;
+ for (const v of views) {
+  if (!v.on || !v.actor) continue;
+  v.t += dt;
+  const fps = v.dressed?.fps, t = fps ? Math.floor(v.t * fps) / fps : v.t;
+  v.drawing.value = fps ? Math.floor(now * fps) % 1000 : 0;
+  const m = mocap[v.move] || byId[v.move];
+  // in place: travel moves walk on the spot so the body stays beside its picture
+  const p = m.fn(t % m.len); if (p.root) p.root = [0, p.root[1], 0];
+  v.actor.pose(p);
+  v.dressed?.update(v.camera, v.drawing.value + Math.floor(t * 1000));
+  v.controls.update(); v.renderer.render(v.scene, v.camera);
+ }
+}
+frame();
+window.cast = {views};
+</script>
+</body>
+</html>

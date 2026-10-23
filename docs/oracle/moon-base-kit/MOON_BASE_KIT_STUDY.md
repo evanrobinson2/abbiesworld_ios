@@ -114,9 +114,52 @@ still waiting. Picks: crater rim 1, boulders 2, dome 0, tower 0 (`mj/<id>/`, job
 - Taper rules on a height field must only lift the rim, never the floor. Tapering negative heights pinched the
   bowl's front edge, and so did noise near the fan centre.
 
+## Research pass: what the Oracle and the craft say (2026-10-23)
+
+I ran this pass after round 3, because the context card showed the study had used only our own canon. Each source
+below either changed the kit or confirms a choice, and it says which.
+
+**Oracle** (`/api/knowledge`, identity records in `docs/oracle/games/`)
+- *Astroneer*: bases built from modules, bright pastel low poly, very low HUD (about 4%); the backpack and the oxygen
+  tether show state in the world. System Era's Unreal spotlight adds that one master material drives emissive
+  "lights" that turn on and off and change colour on panels, crates and landing pads. **Kit:** every state light
+  stays its own named part on a `Lamp_*` / `LampOff_*` role, so the game swaps one material to change state. This is
+  already true for all 22 pieces, and it is now a written rule.
+- *Deliver Us The Moon*: a lone astronaut, diegetic holograms and a wrist display; the developers place story
+  "organically and inorganically" as a breadcrumb trail, because there are no other people to tell it.
+  **Kit:** the catalogue's story props (family photo frame, Abbie's drawing board, the map tablet, module signs) are
+  the breadcrumbs, and the next draw batch should include them. They are not filler.
+- *Subnautica 2*: a base you build out of the habitat's own pieces. This confirms that the dome, the corridor and the
+  airlock must snap together (below).
+
+**Dev blogs and design talks**
+- Joel Burgess, *Skyrim's Modular Approach to Level Design* (GDC 2013, on Game Developer), plus the 80 Level article
+  on modularity and art fatigue. The rules: put the pivot at the centre of the ground plane, and decide pivots early,
+  because changing them later means fixing hundreds of placed pieces. Snap at half the footprint. Make sub-kit
+  footprints multiples of each other. Keep all geometry inside the footprint. Use one standard doorway for every kit
+  that connects. Players notice repeated clutter before repeated architecture, so give clutter 01/02/03 variants on
+  identical footprints. Don't make patch pieces; fix the core piece.
+  **Kit:**
+  - `bkit` now has `KIT_SNAP_M = 2` (half of a 4 m footprint) and `KIT_DOOR_M = 1.4 x 2.2`. The airlock, the
+    habitat and hangar, and every future door use that opening.
+  - `build()` checks the pivot and records `kit` metrics in each `stats.json` (structural or not, snap cells, pivot
+    offset, ground height). A piece whose footprint centre is off its pivot is moved onto it automatically. That
+    moved four pieces (command console, ore processor, patch-up station, solar array), which were rebuilt.
+  - Deliberate exceptions must say why in `spec['pivot']`: the crater rim pivots on the crater centre so two halves
+    make a whole, the dome on its dome centre, the corridor on its walkable floor, and the boulders sink on purpose.
+
+**Tutorials and craft**
+- The Polycount thread on face-weighted normals: FWN keeps big flat faces flat on low-poly chamfered models without
+  a normal map, but it hurts small faces at steep angles, and you should not use it with a baked normal map.
+  **Kit:** we chamfer and bake a tangent normal map, so we keep plain normals and no FWN. This confirms the choice.
+- The 80 Level hard-surface tools guide (chamfer to fillet and back, trim sheets, decals). **Kit:** no change yet.
+  A shared trim sheet for panel seams and hazard stripes is a candidate once the kit has more than about 40
+  pieces, because it would replace the per-asset bake of the same seams.
+
 ## Next
 
-1. Draw the habitat and hangar, airlock door and supply crate once Midjourney can run, then build them.
+1. Draw the habitat and hangar, airlock door and supply crate once Midjourney can run, then build them on the kit door
+   (1.4 x 2.2 m) and the 2 m snap. Add the story props (photo frame, drawing board, map tablet, signs) to the next batch.
 2. The five handed-over buildings as recipes, matched to the pack painting and MR-002.
 3. Place the kit on the Moon tile for the shooter, and give the diegetic pieces their game hooks (lamp state, gauge
    needles, charge bars, door rings, beacon chase).

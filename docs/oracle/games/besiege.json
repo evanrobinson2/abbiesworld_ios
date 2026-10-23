@@ -55,6 +55,22 @@
       "confidence": 0.55,
       "lesson": "Keep the world quiet so the thing the player builds is the loudest object."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "physics",
+      "mocap": 0.0,
+      "locomotion": [
+        "physics"
+      ],
+      "tricks": [
+        "Machines move by rigid-body physics: hinges, wheels and springs, so every machine animates itself",
+        "Soldiers are simple keyed loops that ragdoll when hit"
+      ],
+      "lesson": "Physics is the animator for anything kids build; keep people simple and let them tumble.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.6
+    },
     "palette": null,
     "audio_mood": "Light medieval tunes, creaks and crashes.",
     "pacing": "brisk, medium sessions",

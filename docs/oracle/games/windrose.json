@@ -23,6 +23,7 @@
     "camera": null,
     "art_direction": null,
     "rendering": null,
+    "motion": null,
     "palette": null,
     "audio_mood": null,
     "pacing": null,

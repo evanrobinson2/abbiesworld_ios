@@ -453,3 +453,31 @@ To go faster:
 3. Add a new prop to the room LAYOUT before starting the long room render, or render the room last.
 4. Keep the Playwright script that plays a full round and screenshots the strip (four taps, about 25 s). Run it once
    per change instead of single-frame checks.
+
+## 11. Sources consulted, and what changed (2026-10-23 14:15–14:35Z)
+
+Evan's rule is to consult the context sources, not only list them. This pass asked the Oracle and read the dev blogs on cozy
+shop and interior games, then changed the café where they had something to teach. The full list is on the study's
+context card (`studies/context.json`, entry `cafe-study`).
+
+**The Oracle.** It has no identity records yet for Coffee Talk, Unpacking, A Little to the Left or Animal Crossing, so
+their makers' own write-ups were read instead (below). What it does know:
+- Coffee Shop Tycoon: "a coffee shop's numbers belong to the grown-up layer; kids see the queue and smiles." The café
+  already keeps prices as dots on the chalk menu and money off the play screen; this confirms it.
+- Tiny Glade: placements settle over 300–500 ms with a spring and a soft sound, and there are no wrong moves.
+- Overcooked 2: a warm interior against a cool outside, read from overhead. The café's iso view already works this way.
+
+**What the reading taught, and what it changed.**
+| Source | Lesson | Change |
+|---|---|---|
+| Unpacking, GDC 2022 and the Unpacking design article | "No item? No trait!" Every object says who lives there; ask where each one came from. | New `pin_board` behind the machines (two photo-booth strips, a little customer's crayon drawing, a moon postcard, a lost lime mitten) and a `tip_jar` by the till with copper coins (copper, so the gold coins stay Daddy's core memories). The room now says friends come here, little kids come here, someone dreams of space, someone left in a hurry. |
+| MAGES set-dressing guide | Every prop needs a purpose; vary density so busy places lead to quiet ones; light the focal point. | The busy band stays the bar and back counter; the beanbag corner and dance floor stay sparse. The pin board hangs between the window and the cup shelves, at eye height from the stools. |
+| Coffee Talk UX article | Options bounce once and grow under hover; dim the panel that is no longer live. | Photo booth pose buttons now pop in one after another, grow under the finger, and the two not picked dim. |
+| Coffee Talk devlog 1 | Design by subtraction: stop adding when the feeling lands. | The booth stays at three picture choices per shot and four shots; no score, no words. |
+| Tiny Glade (Oracle) | Things settle with a spring and a soft sound. | The printed strip now answers its springy landing with a soft paper tick. |
+| Animal Crossing furniture interview | Personality over realism, every side finished, think in footprint squares. | Already the café kit's rule (every prop is modelled all round); nothing changed. |
+| A Little to the Left daily tidy | A bite-sized daily puzzle brings players back. | Not built. Idea for later: a daily café tidy (straighten the cups, re-pin the board). |
+
+**Still to do.** Ask the Oracle thread to add identity records for Coffee Talk, Unpacking, A Little to the Left and
+Animal Crossing, so the next cozy study gets them from the Oracle directly. When the café becomes walkable, the strips a
+player prints in the booth should appear on the pin board (the world remembers, rather than a gallery screen).

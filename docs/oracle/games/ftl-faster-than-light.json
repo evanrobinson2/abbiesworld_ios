@@ -55,6 +55,7 @@
       "confidence": 0.65,
       "lesson": "Show the inside of a ship as a floor plan of rooms and people; it explains the ship faster than any HUD."
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Iconic synth score that swells in battle.",
     "pacing": "brisk, long sessions",

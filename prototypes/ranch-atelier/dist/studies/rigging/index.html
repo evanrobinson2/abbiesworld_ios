@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AW-STUDY-0041 - 2D Character Rigging</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Drawing characters professionally in SVG pieces, rigging them with pivots and IK, and animating them cut-out style with squash and stretch, in practice reps you can watch improve.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: opens on the live puppets; the practice reps (the curve), the jump before/after, then how it's built. */
+:root{
+ --bg:#e8ece6; --paper:#f6f7f3; --ink:#1f262c; --muted:#5f686e; --line:#cdd4cc;
+ --accent:#3f6fd1; --accent2:#d9692e; --good:#2f8a5b; --glass:rgba(255,255,255,.55); --rim:rgba(255,255,255,.8);
+ --stage1:#cfe0c6; --stage2:#a9c79c;
+ --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+ --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#181c1f; --paper:#22272a; --ink:#e9ede9; --muted:#9aa3a6; --line:#363d40; --accent:#86a8ff; --accent2:#ff9a5c; --good:#5cc08b;
+ --glass:rgba(40,46,50,.6); --rim:rgba(255,255,255,.18); --stage1:#33463a; --stage2:#26372c; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#181c1f; --paper:#22272a; --ink:#e9ede9; --muted:#9aa3a6; --line:#363d40; --accent:#86a8ff; --accent2:#ff9a5c; --good:#5cc08b;
+ --glass:rgba(40,46,50,.6); --rim:rgba(255,255,255,.18); --stage1:#33463a; --stage2:#26372c; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px}
+.layout{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
+@media (max-width:1100px){.layout{grid-template-columns:1fr}.ctx{order:2}}
+.wrap{min-width:0;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1{font-size:clamp(36px,6.5vw,62px);line-height:.95}
+h2{font-size:30px;line-height:1.05}
+h3{font-size:21px;line-height:1.1}
+p{margin:0;max-width:72ch}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-size:.88em}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+header,section{display:grid;gap:12px}
+
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.frame{position:relative;margin:0;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,var(--stage1),var(--stage2));
+ box-shadow:inset 0 1px 0 var(--rim),0 18px 40px -26px rgba(0,0,0,.45);aspect-ratio:1/1}
+.frame svg{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.tag{position:absolute;top:10px;left:10px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+ color:#f4f6f1;background:rgba(20,26,24,.5);padding:6px 8px;border-radius:6px;pointer-events:none}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tog{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;
+ background:linear-gradient(160deg,var(--glass),rgba(255,255,255,.08));border:1px solid var(--rim);
+ box-shadow:inset 0 1px 0 var(--rim),0 6px 16px -10px rgba(0,0,0,.4);font-weight:600;font-size:15px}
+.tog[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:transparent}
+.tog:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hint{font-size:14px;color:var(--muted)}
+
+.curve{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:14px}
+.curve svg{width:100%;height:auto;display:block}
+.reps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:980px){.reps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.reps{grid-template-columns:1fr}}
+.rep{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:12px;display:grid;gap:10px;align-content:start}
+.rep .shots{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.rep img{width:100%;border-radius:10px;background:#eef1ea;display:block}
+.rep .n{font:500 11px/1 var(--mono);letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+.rep p{font-size:14.5px}
+.rep .next{color:var(--muted);font-size:14px}
+.bars{display:grid;gap:5px;font-size:13px}
+.bar{display:grid;grid-template-columns:92px 1fr 46px;gap:8px;align-items:center}
+.bar i{height:8px;border-radius:9px;background:var(--line);position:relative;overflow:hidden}
+.bar i b{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:9px}
+.bar.warn i b{background:var(--accent2)}
+.bar span:last-child{font-family:var(--mono);font-size:12px;text-align:right}
+.strip{width:100%;border-radius:14px;display:block;background:#eef1ea}
+.scroll{overflow-x:auto;border-radius:14px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:4px;font-size:14.5px}
+.step b{font-family:var(--display);font-size:20px}
+.step .st{font:500 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--good)}
+.step .st.wait{color:var(--accent2)}
+pre{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px;overflow:auto;font:12.5px/1.5 var(--mono)}
+.ctx{position:sticky;top:16px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:10px;font-size:14px;max-height:calc(100vh - 32px);overflow:auto}
+@media (max-width:1100px){.ctx{position:static;max-height:none}}
+.ctx h2{font-size:22px}.ctx h3{font:600 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:6px}
+.ctx ul{padding-left:16px;margin:0;display:grid;gap:7px}.ctx a{color:var(--ink)}.ctx .u{display:block;color:var(--muted);font-size:13px}
+footer{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="layout">
+<div class="wrap">
+<header>
+ <div class="eyebrow">AW-STUDY-0041 · Character studio</div>
+ <h1>2D Character Rigging</h1>
+ <p>Can we draw a character professionally in SVG pieces, rig it with pivots and IK, and animate it the way Spine and Rive games do? Six practice reps on the mannequin, each changing one thing, scored against the body study's checks. Play with the result here.</p>
+</header>
+
+<section aria-label="Live puppets">
+ <div class="pair">
+  <figure class="frame"><svg id="front" class="rig2d" viewBox="-200 -520 400 560" role="img" aria-label="Front view puppet"></svg><span class="tag">Front · drag a hand</span></figure>
+  <figure class="frame"><svg id="side" class="rig2d" viewBox="-220 -560 440 600" role="img" aria-label="Side view puppet"></svg><span class="tag">Side · IK legs</span></figure>
+ </div>
+ <div class="row" role="group" aria-label="Moves">
+  <button class="tog" data-front="idle" aria-pressed="true">Breathe</button>
+  <button class="tog" data-front="wave" aria-pressed="false">Wave</button>
+  <button class="tog" data-front="cheer" aria-pressed="false">Cheer</button>
+  <button class="tog" data-side="walk" aria-pressed="true">Walk</button>
+  <button class="tog" data-side="jump" aria-pressed="false">Jump</button>
+  <button class="tog" id="bones" aria-pressed="false">Show the bones</button>
+ </div>
+ <p class="hint">Grab either hand of the front puppet and pull: two-bone IK bends the elbow, and past full reach the arm stretches up to 12% (the cartoon stretch). The bones view is a workbench helper; a player never sees it.</p>
+</section>
+
+<section aria-labelledby="repsH">
+ <h2 id="repsH">Six reps, one change each</h2>
+ <p class="muted">Each rep is drawn at rest and in a stress pose that bends every joint near its limit. Creative checks are the 12 from the body study (by eye, 0 to 2 each; under 16 is a study, not a pick). Joints covered and seams are measured by the scorer in Chromium.</p>
+ <div class="curve"><svg id="curve" viewBox="0 0 640 170" role="img" aria-label="Creative score per rep"></svg></div>
+ <div class="reps" id="reps"></div>
+</section>
+
+<section aria-labelledby="jumpH">
+ <h2 id="jumpH">The jump, before and after</h2>
+ <p class="muted">Same rig, same pieces. Rep 5 moves everything at once and flattens on landing. Rep 6 crouches first, stretches at take-off, tucks, reaches for the ground and squashes without losing area (width times height stays 1), with arms that arrive late and overshoot.</p>
+ <div class="pair">
+  <figure class="frame"><svg id="j5" class="rig2d" viewBox="-300 -720 600 760" role="img" aria-label="Rep 5 jump"></svg><span class="tag">Rep 5 · even, flat</span></figure>
+  <figure class="frame"><svg id="j6" class="rig2d" viewBox="-300 -720 600 760" role="img" aria-label="Rep 6 jump"></svg><span class="tag">Rep 6 · weight</span></figure>
+ </div>
+ <div class="scroll"><img class="strip" src="img/rep5-side-jump-strip.png" alt="Rep 5 jump, nine frames" style="min-width:900px"></div>
+ <div class="scroll"><img class="strip" src="img/rep6-motion-jump-strip.png" alt="Rep 6 jump, nine frames" style="min-width:900px"></div>
+ <div class="scroll"><img class="strip" src="img/rep6-motion-walk-strip.png" alt="Walk cycle, eight frames" style="min-width:800px"></div>
+</section>
+
+<section aria-labelledby="howH">
+ <h2 id="howH">The pipeline</h2>
+ <div class="steps">
+  <div class="step"><span class="st wait" id="mjSt">Waiting for the PC</span><b>1. Turnaround</b>Midjourney model sheet of a fictional adult (front, three-quarter, side, back), Relax mode only.</div>
+  <div class="step"><span class="st">Done on the mannequin</span><b>2. Pieces</b>One SVG piece per bone, drawn in the bone's own space: profiles from the body study, round caps on every pivot.</div>
+  <div class="step"><span class="st">Done</span><b>3. Rig</b>Bones with the mannequin's names, two-bone IK with bend direction and stretch, draw order and outline groups.</div>
+  <div class="step"><span class="st">Done</span><b>4. Animate</b>Pose-to-pose keys with easing; squash and stretch that keeps area; walk, jump, wave, cheer.</div>
+ </div>
+ <p>The rig format is shared with the 2D Mannequin Puppet (AW-STUDY-0038), so both feed the Character Studio. Each turnaround view becomes its own rig with the same bone names; a costume is a skin, a different set of pieces on the same bones.</p>
+ <pre id="fmt"></pre>
+ <p class="muted">Kit: <span class="mono">simulations/rig2d.mjs</span>. Format: <span class="mono">docs/oracle/rigging/RIG2D_FORMAT.md</span>. Builder and scorer: <span class="mono">tools/rig2d/</span>.</p>
+</section>
+<footer>AW-STUDY-0041 · 2026-10-23 · The mannequin only; our kids are never traced from photos.</footer>
+</div>
+<aside class="ctx" aria-labelledby="ctxh"><h2 id="ctxh">Context engineering</h2><p class="muted">What this study consulted before building.</p><div id="ctxBody"></div></aside>
+</div>
+
+<script type="module">
+import {loadRig, mount, solve, jointPos, RIG_CSS} from '/simulations/rig2d.mjs';
+const $ = s => document.querySelector(s);
+document.head.insertAdjacentHTML('beforeend', `<style>${RIG_CSS}</style>`);
+const get = async id => loadRig(await (await fetch(`./rigs/${id}.json`)).json());
+const ground = (svg, w) => svg.insertAdjacentHTML('afterbegin', `<ellipse cx="0" cy="2" rx="${w}" ry="10" fill="rgba(0,0,0,.12)"/>`);
+
+const [F, S, R5, R6] = await Promise.all(['mannequin-front', 'mannequin-side', 'rep5-side', 'rep6-motion'].map(get));
+for (const id of ['front', 'side', 'j5', 'j6']) ground($('#' + id), 70);
+const front = mount(F, $('#front')), side = mount(S, $('#side'));
+const j5 = mount(R5, $('#j5')), j6 = mount(R6, $('#j6'));
+front.play('idle'); side.play('walk'); j5.play('jump'); j6.play('jump');
+
+const press = (sel, on) => document.querySelectorAll(sel).forEach(b => b.setAttribute('aria-pressed', b === on));
+document.querySelectorAll('[data-front]').forEach(b => b.onclick = () => { front.play(b.dataset.front); press('[data-front]', b); });
+document.querySelectorAll('[data-side]').forEach(b => b.onclick = () => { side.play(b.dataset.side); press('[data-side]', b); });
+let bonesOn = false;
+$('#bones').onclick = () => { bonesOn = !bonesOn; $('#bones').setAttribute('aria-pressed', bonesOn); [front, side, j5, j6].forEach(m => m.bones(bonesOn)); };
+
+// Drag a hand: IK target in character space.
+const svgF = $('#front');
+const toRig = e => { const p = svgF.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; const q = p.matrixTransform(svgF.getScreenCTM().inverse()); return {x: q.x, y: q.y}; };
+let drag = null, held = {};
+svgF.addEventListener('pointerdown', e => {
+ const m = toRig(e), W = solve(F, front.pose.bones ? front.pose : {});
+ let best = null, bd = 60;
+ for (const [ik, hand] of [['handR', 'handR'], ['handL', 'handL']]) {
+  const [x, y] = jointPos(F, W, hand, true), d = Math.hypot(x - m.x, y - m.y);
+  if (d < bd) { bd = d; best = ik; }
+ }
+ if (!best) return;
+ drag = best; svgF.setPointerCapture(e.pointerId); press('[data-front]', null);
+ held = {};
+ move(e);
+});
+// The IK target is the wrist; the hand hangs off it.
+function move(e) {
+ if (!drag) return;
+ const m = toRig(e); held[drag] = {x: m.x, y: m.y};
+ front.set({ik: {...held}});
+}
+svgF.addEventListener('pointermove', move);
+svgF.addEventListener('pointerup', () => { drag = null; });
+
+// Reps: the curve and the cards.
+const notes = await (await fetch('./reps.json')).json();
+const reps = notes.reps;
+{
+ const W = 640, H = 170, x = i => 50 + i * (W - 90) / (reps.length - 1), y = v => 140 - v / 24 * 120;
+ let s = `<line x1="40" x2="${W - 20}" y1="${y(16)}" y2="${y(16)}" stroke="var(--accent2)" stroke-dasharray="4 5"/><text x="44" y="${y(16) - 6}" text-anchor="start" font-size="12" fill="var(--accent2)" font-family="var(--mono)">pick line 16</text>`;
+ s += `<polyline fill="none" stroke="var(--accent)" stroke-width="3" points="${reps.map((r, i) => `${x(i)},${y(r.creative_total)}`).join(' ')}"/>`;
+ reps.forEach((r, i) => s += `<circle cx="${x(i)}" cy="${y(r.creative_total)}" r="6" fill="var(--accent)"/><text x="${x(i)}" y="${y(r.creative_total) - 12}" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">${r.creative_total}</text><text x="${x(i)}" y="162" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="var(--mono)">rep ${r.n}</text>`);
+ $('#curve').innerHTML = `<text x="40" y="16" font-size="13" fill="var(--muted)">Creative checks, out of 24</text>` + s;
+}
+const bar = (label, v, max, txt, warn) => `<div class="bar${warn ? ' warn' : ''}"><span>${label}</span><i><b style="width:${Math.max(2, v / max * 100)}%"></b></i><span>${txt}</span></div>`;
+$('#reps').innerHTML = reps.map(r => `<article class="rep">
+ <span class="n">Rep ${r.n} · practising: ${r.practising}</span>
+ <h3>${r.title}</h3>
+ <div class="shots"><img src="${r.images.rest}" alt="Rep ${r.n} at rest" loading="lazy"><img src="${r.images.stress}" alt="Rep ${r.n} in the stress pose" loading="lazy"></div>
+ <div class="bars">
+  ${bar('Creative', r.creative_total, 24, r.creative_total + '/24', r.creative_total < 16)}
+  ${bar('Joints covered', r.joint_cover, 1, Math.round(r.joint_cover * 100) + '%', r.joint_cover < .99)}
+  ${bar('Seams', r.seam_ink, .2, Math.round(r.seam_ink * 100) + '%', r.seam_ink > .03)}
+  ${r.animation_total !== undefined ? bar('Motion', r.animation_total, 12, r.animation_total + '/12', r.animation_total < 8) : ''}
+ </div>
+ <p><b>Lesson.</b> ${r.lesson}</p>
+ <p class="next">Next: ${r.next}</p>
+</article>`).join('');
+
+$('#fmt').textContent = JSON.stringify({
+ format: 'aw-rig2d', version: 1, joints: {sL: [44.8, -338.8], eL: ['…'], '…': '…'},
+ bones: [{name: 'uarmL', parent: 'chest', head: 'sL', tail: 'eL'}, '…'],
+ ik: [{name: 'handL', bones: ['uarmL', 'farmL'], bend: 1, stretch: 1.12}],
+ slots: [{bone: 'uarmL', piece: 'uarmL', group: 'armL'}, '…'],
+ pieces: {uarmL: {default: '<path d="M0 -15C…"/>', overalls: '…'}},
+ animations: {wave: {duration: 1.6, loop: true, bones: {farmL: {rotate: [[0, -55], [.4, -15, 'ease']]}}}}
+}, null, 1).replace(/\n\s+(?=[\]}"'0-9-])/g, ' ');
+
+const ctx = await (await fetch('./context.json')).json();
+$('#ctxBody').innerHTML = ctx.groups.map(g => `<h3>${g.kind}</h3><ul>${g.items.map(i => `<li>${i.url ? `<a href="${i.url}" target="_blank" rel="noopener">${i.title}</a>` : `<b>${i.title}</b>`}<span class="u">${i.used}</span></li>`).join('')}</ul>`).join('');
+</script>
+</body>
+</html>
