@@ -336,5 +336,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T17:16:08Z"
+  },
+  {
+    "id": "A4-paint-suit",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "7e7c4f7f-8c84-479d-8098-22c76b12a3fd",
+    "files": [
+      "tools/meshy-heroes/refs/A4-paint-suit/mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_0.png",
+      "tools/meshy-heroes/refs/A4-paint-suit/mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_1.png",
+      "tools/meshy-heroes/refs/A4-paint-suit/mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_2.png",
+      "tools/meshy-heroes/refs/A4-paint-suit/mj_7e7c4f7f-8c84-479d-8098-22c76b12a3fd_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:17:59Z"
+  },
+  {
+    "id": "A4-paint-tee",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "a3a2f06e-201f-4174-8434-d80e93d260bf",
+    "files": [
+      "tools/meshy-heroes/refs/A4-paint-tee/mj_a3a2f06e-201f-4174-8434-d80e93d260bf_0.png",
+      "tools/meshy-heroes/refs/A4-paint-tee/mj_a3a2f06e-201f-4174-8434-d80e93d260bf_1.png",
+      "tools/meshy-heroes/refs/A4-paint-tee/mj_a3a2f06e-201f-4174-8434-d80e93d260bf_2.png",
+      "tools/meshy-heroes/refs/A4-paint-tee/mj_a3a2f06e-201f-4174-8434-d80e93d260bf_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:19:39Z"
   }
 ]
