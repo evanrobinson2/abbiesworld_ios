@@ -71,7 +71,7 @@ export function cellView(layer, L = LOOKS.abbie, {name = 'abbie', shadowLayer = 
  const filter = el('g', {}, front);
  const jaw = el('g', {}, front);
  const eyes = el('g', {}, front);
- const eye = [0, 1].map(() => { const e = el('g', {}, eyes); return {g: e, white: el('ellipse', {fill: '#fff', stroke: L.ink, 'stroke-width': .05}, e), pupil: el('circle', {fill: L.eye}, e), glint: el('circle', {fill: '#fff'}, e)}; });
+ const eye = Array.from({length: L.eyes || 2}, () => { const e = el('g', {}, eyes); return {g: e, white: el('ellipse', {fill: '#fff', stroke: L.ink, 'stroke-width': .05}, e), pupil: el('circle', {fill: L.eye}, e), glint: el('circle', {fill: '#fff'}, e)}; });
  const off = new Float32Array(N), vel = new Float32Array(N), seed = Math.random() * 100;
  const chain = []; let lastParts = '', blink = 2 + Math.random() * 3, blinkT = 0, bitPos = [];
  const S = {g, hit, remove, draw};
@@ -157,7 +157,8 @@ export function cellView(layer, L = LOOKS.abbie, {name = 'abbie', shadowLayer = 
   const la = c.look ? Math.atan2(c.look[1] - c.y, c.look[0] - c.x) - h : 0;
   const narrow = c.hunting ? .6 : 1;
   eye.forEach((e, i) => {
-   const a = (i ? -.55 : .55), ex = Math.cos(a) * .55, ey = Math.sin(a) * .55, s = .2;
+   // one big eye in front, two apart, or three in a fan (the creator's choice, L.eyes)
+   const n = eye.length, a = n === 1 ? 0 : n === 3 ? (i - 1) * .75 : (i ? -.55 : .55), ex = Math.cos(a) * (n === 1 ? .5 : .55), ey = Math.sin(a) * .55, s = n === 1 ? .3 : n === 3 ? .16 : .2;
    e.white.setAttribute('cx', ex); e.white.setAttribute('cy', ey); e.white.setAttribute('rx', s); e.white.setAttribute('ry', f1(s * (blinkT ? .12 : narrow) * 100) / 100);
    const px = ex + Math.cos(la) * s * .45, py = ey + Math.sin(la) * s * .45 * (blinkT ? 0 : 1);
    e.pupil.setAttribute('cx', f1(px * 100) / 100); e.pupil.setAttribute('cy', f1(py * 100) / 100); e.pupil.setAttribute('r', blinkT ? 0 : s * .55);
