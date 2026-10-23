@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0051 - Drawn by Hand, 12 Frames</title>
+<style>
+:root{--bg:#f4efe4;--plate:#fffdf7;--ink:#1d1830;--soft:#5d5870;--line:#ded5c2;--pink:#c42e6b;--teal:#1f7f84;
+ --display:ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;--body:Georgia,"Times New Roman",serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15121f;--plate:#1e1a2d;--ink:#eee9f7;--soft:#a8a2bc;--line:#322c47;--pink:#f0679c;--teal:#4cc0c4;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15121f;--plate:#1e1a2d;--ink:#eee9f7;--soft:#a8a2bc;--line:#322c47;--pink:#f0679c;--teal:#4cc0c4;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);padding:28px max(16px,env(safe-area-inset-right)) 80px max(16px,env(safe-area-inset-left))}
+main{max-width:1080px;margin:0 auto;display:grid;gap:30px}
+h1,h2,h3{font-family:var(--display);font-weight:650;line-height:1.1;margin:0;text-wrap:balance}
+h1{font-size:clamp(2rem,6vw,3.4rem)}h1 em{font-style:normal;color:var(--pink)}h2{font-size:1.6rem}h3{font-size:1.05rem}
+p{margin:0}.soft{color:var(--soft)}.eyebrow{font:700 .74rem var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+a{color:var(--teal)}code,pre{font:400 .84em var(--mono)}
+pre{background:var(--plate);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto;margin:0}
+.tabs{display:flex;gap:8px}.tabs button{font:650 .95rem var(--display);padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--plate);color:var(--ink);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--bg)}
+section[hidden]{display:none}section{display:grid;gap:22px}
+.plate{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16/9;background:#f3ead6;box-shadow:0 18px 40px -24px rgba(20,10,40,.5)}
+.plate canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.tag{position:absolute;top:12px;font:700 .7rem var(--display);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.88);color:#1d1830;pointer-events:none}
+.tag.l{left:12px}.tag.r{right:12px}.split{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.15);pointer-events:none}
+.ctl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font:600 .88rem var(--display)}
+.ctl .grp{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ctl button{font:650 .85rem var(--display);padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--plate);color:var(--ink);cursor:pointer}
+.ctl button[aria-pressed=true]{background:var(--pink);border-color:var(--pink);color:#fff}
+.ctl input[type=range]{width:110px;accent-color:var(--pink)}
+.two{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:26px;align-items:start}@media(max-width:860px){.two{grid-template-columns:1fr}}
+.card{background:var(--plate);border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;gap:10px}
+.card ul{margin:0;padding-left:1.1em;display:grid;gap:4px}
+.sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.sheet figure{margin:0;border-radius:12px;overflow:hidden;background:#f3ead6;position:relative}
+.sheet img{display:block;width:100%}.sheet figcaption{position:absolute;left:6px;bottom:4px;font:700 .7rem var(--mono);color:#1d1830;background:rgba(255,255,255,.8);border-radius:6px;padding:1px 5px}
+.stat{font:700 .85rem var(--mono);color:var(--soft)}
+#ctx{min-width:0}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/utils/SkeletonUtils.js":"/vendor/utils/SkeletonUtils.js"}}</script>
+</head>
+<body>
+<main>
+<header style="display:grid;gap:12px">
+ <span class="eyebrow">AW-STUDY-0051 · from Inspiring Shaders, pick #8</span>
+ <h1>Drawn by hand, <em>12 frames</em></h1>
+ <p class="soft">Each pose is held for two film frames, the pen line is redrawn a little differently every time, and the paper grain shifts with it. We read your note as: keep the Guilty Gear Xrd look (held frames, designed light bands, a pen that swells and thins) and make it a real switch for any figure, because it costs nothing and reads as hand-made.</p>
+ <div class="tabs" role="tablist"><button role="tab" id="t1" aria-selected="true">Study</button><button role="tab" id="t2" aria-selected="false">Production assets</button></div>
+</header>
+
+<section id="p1">
+ <div class="two"><div style="display:grid;gap:14px;min-width:0">
+  <div class="plate" id="stage"><canvas aria-label="The same fight twice from the same camera: smooth on the left, drawn by hand on the right. Drag to turn."></canvas><div class="split"></div><span class="tag l">Smooth, 60 a second</span><span class="tag r" id="rtag">Drawn by hand, 12 a second</span></div>
+  <div class="ctl">
+   <div class="grp">Drawings <button data-fps="24" aria-pressed="false">24</button><button data-fps="12" aria-pressed="true">12</button><button data-fps="8" aria-pressed="false">8</button></div>
+   <div class="grp">Line boil <input id="boil" type="range" min="0" max="1.5" step=".05" value=".7"></div>
+   <div class="grp">Paper <input id="grain" type="range" min="0" max=".3" step=".01" value=".09"></div>
+   <div class="grp">Camera <button data-cam="smooth" aria-pressed="true">Smooth</button><button data-cam="stepped" aria-pressed="false">Held</button></div>
+   <div class="grp">Hit hold <button id="hold" aria-pressed="true">On</button></div>
+   <div class="grp"><button id="punch">Throw a punch</button></div>
+  </div>
+  <p class="stat" id="stat">&nbsp;</p>
+ </div>
+ <aside id="ctx" class="card"><h3>Context engineering</h3><p class="soft">What this study drew on, from the Oracle, game dev and design writing, and our canon.</p><div id="ctxbody"></div></aside></div>
+
+ <div class="two"><div class="card"><span class="eyebrow">What it is</span><h2>Limited animation, in 3D</h2>
+  <p>Hand-drawn animation usually shoots each drawing twice ("on twos"), so 24 film frames carry 12 drawings. Holding a pose makes a hit feel heavy and a move easy to read, and the slight redraw of the line makes the picture feel alive. Guilty Gear Xrd did this to 3D fighters; Spider-Verse did it on purpose per beat.</p>
+  <ul><li><b>Held poses.</b> The skeleton is sampled on each new drawing and holds between them. Movement, input and physics stay smooth underneath.</li>
+  <li><b>Hit hold.</b> When a blow lands the whole picture freezes a beat. The brute fight already stops time on a hit, so it gets this for free.</li>
+  <li><b>Pen line.</b> The outline shell swells and thins along its length and is redrawn each drawing (line boil).</li>
+  <li><b>Designed light.</b> Two hard bands and a cool shadow, no painted brush, so the shapes look drawn rather than lit.</li>
+  <li><b>Paper.</b> Grain on the figure that changes with each drawing, in the material, not a layer over the world.</li></ul></div>
+  <div class="card"><span class="eyebrow">Design card</span><h3>How would the character know?</h3>
+  <p><b>Feels:</b> "This world is a drawing, and a punch lands with weight."</p>
+  <p><b>Mode:</b> none, plus world. It is how the figures are drawn, not information. No HUD, no words; the only control is a glass pencil button in the brute fight.</p>
+  <p><b>Two layers:</b> the look is material and time on figures, so it is part of the world; characters and bots perceive the same bodies either way.</p>
+  <p><b>Tour:</b> no. It is a look setting, not a capability a new player needs on day one (<code>"tour": false</code>).</p>
+  <p><b>Composes with:</b> Painted Brush (same shader, a preset), Paint the world and Watercolour distance (they dress the land; this dresses the people). Style yes, expression never.</p></div></div>
+</section>
+
+<section id="p2" hidden>
+ <div class="card"><span class="eyebrow">Frame ladder</span><h2>Twelve drawings of one jab</h2><p class="soft">One second of the right-hand fighter, a drawing every twelfth of a second. Look at the outline: it is never the same line twice.</p><div class="sheet" id="sheet"></div></div>
+ <div class="two"><div class="card"><h3>Files</h3><ul>
+  <li><code>simulations/hand-drawn.mjs</code>: the kit (clock, pose stepping, stepped camera, look preset)</li>
+  <li><code>simulations/painted-brush.mjs</code>: shared shader; gained <code>grain</code>, <code>boil</code>, <code>inkVary</code> (all 0 by default)</li>
+  <li><code>simulations/tests/hand-drawn.test.mjs</code></li>
+  <li><code>studies/brute-fight/play.html</code>: in the game, pencil button or <code>?look=hand</code></li>
+  <li><code>studies/character-studio/directions.mjs</code>: the "By hand" direction</li></ul>
+  <h3>Frame time</h3><p>The look is the Painted Brush shader with different uniforms, so there is one program and no recompile on switching. <code>H.warm()</code> compiles it ahead. Pose stepping removes skinning work between drawings (the mixer does not run).</p></div>
+ <div class="card"><h3>Use it</h3><pre>import {handDrawn, stepMixer} from '/simulations/hand-drawn.mjs';
+const H = handDrawn(THREE, figure.root, {accent: '#ffd9a8'});
+H.warm(renderer, scene, camera);        // precompile
+stepMixer(figure.mixer, 12);            // a game with its own loop
+// or own the loop:
+const k = H.tick(now / 1000);           // {t, frame, changed}
+mixer.setTime(k.t);                     // poses step
+H.render(renderer, scene, camera, k);   // 'stepped' camera optional
+H.hold(.08);                            // a hit lands
+H.set({fps: 8, boil: 1, grain: .15});
+H.restore();</pre></div></div>
+ <div class="card"><h3>The preset</h3><pre id="preset"></pre></div>
+</section>
+</main>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {clone} from 'three/addons/utils/SkeletonUtils.js';
+import {toonify, TOON_LOOKS} from '/simulations/toon-kit.mjs';
+import {handDrawn, stepMixer, HAND_DRAWN} from '/simulations/hand-drawn.mjs';
+
+document.getElementById('preset').textContent = JSON.stringify(HAND_DRAWN, null, 1);
+const tabs = [['t1', 'p1'], ['t2', 'p2']];
+for (const [b, p] of tabs) document.getElementById(b).onclick = () => { for (const [b2, p2] of tabs) { document.getElementById(b2).setAttribute('aria-selected', b2 === b); document.getElementById(p2).hidden = p2 !== p; } if (p === 'p2') ladder(); };
+
+const canvas = document.querySelector('#stage canvas');
+const renderer = new T.WebGLRenderer({canvas, antialias: true, preserveDrawingBuffer: false});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; renderer.setScissorTest(true);
+const loader = new GLTFLoader();
+const base = new URL('../brute-fight/', import.meta.url);
+const [gR, gB] = await Promise.all(['red', 'blue'].map(c => loader.loadAsync(new URL(c + '/fighter.glb', base).href)));
+
+function makeSide(rim) {
+ const scene = new T.Scene(); scene.background = new T.Color('#f3ead6');
+ scene.add(new T.HemisphereLight('#fff6e8', '#b9a07a', 1.1));
+ const sun = new T.DirectionalLight('#fff1dc', 2.4); sun.position.set(3, 6, 4); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+ Object.assign(sun.shadow.camera, {left: -4, right: 4, top: 4, bottom: -4}); scene.add(sun);
+ const floor = new T.Mesh(new T.CircleGeometry(5, 48), new T.MeshStandardMaterial({color: '#d9b98a', roughness: 1})); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+ const fighters = [[gR, -1.1], [gB, 1.1]].map(([g, x], i) => {
+  const root = clone(g.scene); root.position.x = x; root.rotation.y = i ? -Math.PI / 2 : Math.PI / 2; scene.add(root);
+  root.traverse(o => { if (o.isMesh) { o.castShadow = true; o.frustumCulled = false; } });
+  const mixer = new T.AnimationMixer(root), acts = {};
+  for (const c of g.animations) { const a = mixer.clipAction(c); a.setLoop(c.name === 'idle' ? T.LoopRepeat : T.LoopOnce); a.clampWhenFinished = true; acts[c.name] = a; }
+  return {root, mixer, acts, cur: null};
+ });
+ return {scene, fighters};
+}
+const L = makeSide(), R = makeSide();
+toonify(T, L.scene, TOON_LOOKS.sunday);
+const hands = R.fighters.map(f => handDrawn(T, f.root, {}));
+let fps = 12; const unstep = R.fighters.map(f => stepMixer(f.mixer, fps));
+const camera = new T.PerspectiveCamera(30, 1, .1, 60); let az = .35, el = .12, dist = 6.2;
+const place = () => { camera.position.set(Math.sin(az) * Math.cos(el) * dist, 1.2 + Math.sin(el) * dist, Math.cos(az) * Math.cos(el) * dist); camera.lookAt(0, 1.1, 0); camera.updateMatrixWorld(true); };
+place();
+let drag = null; canvas.addEventListener('pointerdown', e => { drag = [e.clientX, e.clientY]; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener('pointermove', e => { if (!drag) return; az -= (e.clientX - drag[0]) * .006; el = Math.max(-.1, Math.min(.5, el + (e.clientY - drag[1]) * .004)); drag = [e.clientX, e.clientY]; place(); });
+canvas.addEventListener('pointerup', () => drag = null);
+const resize = () => { const r = canvas.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / 2 / r.height; camera.updateProjectionMatrix(); };
+new ResizeObserver(resize).observe(canvas); resize();
+
+// one move at a time: attacker swings, victim reacts; both sides play the same move from the same moment
+const MOVES = [['jab', 'hit_jab', .22], ['heavy', 'hit_heavy', .4], ['uppercut', 'hit_uppercut', .4]]; let mi = 0, holdOn = true, nextHold = null;
+function playMove(side) {
+ const [a, v] = MOVES[mi % MOVES.length]; const [A, V] = side.fighters;
+ for (const [f, n] of [[A, a], [V, v]]) { f.cur?.fadeOut(.08); const act = f.acts[n]; act.reset().fadeIn(.08).play(); f.cur = act; }
+}
+function backToIdle(side) { for (const f of side.fighters) { f.cur?.fadeOut(.2); f.acts.idle.reset().fadeIn(.2).play(); f.cur = f.acts.idle; } }
+const throwMove = () => { playMove(L); playMove(R); nextHold = performance.now() / 1000 + MOVES[mi % MOVES.length][2]; mi++; setTimeout(() => { backToIdle(L); backToIdle(R); }, 1500); };
+backToIdle(L); backToIdle(R); hands[0].warm(renderer, R.scene, camera);
+document.getElementById('punch').onclick = throwMove; setInterval(throwMove, 2600);
+
+const onBtns = (sel, fn) => document.querySelectorAll(sel).forEach(b => b.onclick = () => { document.querySelectorAll(sel).forEach(x => x.setAttribute('aria-pressed', x === b)); fn(b); });
+onBtns('[data-fps]', b => { fps = +b.dataset.fps; for (const h of hands) h.set({fps}); unstep.forEach(u => u()); unstep.length = 0; R.fighters.forEach(f => unstep.push(stepMixer(f.mixer, fps))); document.getElementById('rtag').textContent = `Drawn by hand, ${fps} a second`; });
+onBtns('[data-cam]', b => { for (const h of hands) h.set({camera: b.dataset.cam}); });
+document.getElementById('boil').oninput = e => hands.forEach(h => h.set({boil: +e.target.value}));
+document.getElementById('grain').oninput = e => hands.forEach(h => h.set({grain: +e.target.value}));
+const holdB = document.getElementById('hold'); holdB.onclick = () => { holdOn = !holdOn; holdB.setAttribute('aria-pressed', holdOn); holdB.textContent = holdOn ? 'On' : 'Off'; };
+
+let last = performance.now(), heldFor = 0, ms = [];
+function loopFn() {
+ const t0 = performance.now(), now = t0 / 1000; let dt = Math.min(.05, (t0 - last) / 1000); last = t0;
+ // hit hold: the right side freezes for a beat when the blow lands; the left plays straight through
+ let dtR = dt; if (nextHold && now >= nextHold) { nextHold = null; if (holdOn) heldFor = .12; }
+ if (heldFor > 0) { heldFor -= dt; dtR = 0; }
+ for (const f of L.fighters) f.mixer.update(dt);
+ for (const f of R.fighters) f.mixer.update(dtR);
+ const k = hands[0].tick(now); hands[1].brush.setFrame(k.frame);
+ const w = renderer.domElement.width, h = renderer.domElement.height;
+ renderer.setViewport(0, 0, w / 2, h); renderer.setScissor(0, 0, w / 2, h); renderer.render(L.scene, camera);
+ renderer.setViewport(w / 2, 0, w / 2, h); renderer.setScissor(w / 2, 0, w / 2, h); hands[0].render(renderer, R.scene, camera, k);
+ ms.push(performance.now() - t0); if (ms.length > 120) ms.shift();
+ document.getElementById('stat').textContent = `shader programs ${renderer.info.programs.length} · frame ${(ms.reduce((a, b) => a + b, 0) / ms.length).toFixed(1)} ms in JS`;
+}
+renderer.setAnimationLoop(loopFn);
+
+// the frame ladder: twelve drawings of the jab, drawn into thumbnails
+let laddered = false;
+function ladder() {
+ if (laddered) return; laddered = true;
+ const sheet = document.getElementById('sheet'), c2 = document.createElement('canvas'); c2.width = 320; c2.height = 220;
+ renderer.setAnimationLoop(null);
+ const cam = new T.PerspectiveCamera(30, 320 / 220, .1, 60); cam.position.set(0, 1.6, 6.5); cam.lookAt(0, 1.05, 0);
+ const old = [renderer.getSize(new T.Vector2()), renderer.getPixelRatio()]; renderer.setScissorTest(false); renderer.setPixelRatio(1); renderer.setSize(320, 220, false);
+ unstep.forEach(u => u()); unstep.length = 0;
+ for (let i = 0; i < 12; i++) {
+  R.fighters.forEach((f, j) => { f.cur?.stop(); const act = f.acts[j ? 'hit_jab' : 'jab']; act.reset().play(); f.mixer.setTime(i / 12); });
+  hands[1].brush.setFrame(i + 40);
+  renderer.render(R.scene, cam);
+  const fig = document.createElement('figure'), img = new Image(); img.src = renderer.domElement.toDataURL('image/jpeg', .85);
+  fig.append(img); const cap = document.createElement('figcaption'); cap.textContent = `drawing ${i + 1}`; fig.append(cap); sheet.append(fig);
+ }
+ renderer.setPixelRatio(old[1]); renderer.setSize(old[0].x, old[0].y, false); renderer.setScissorTest(true);
+ R.fighters.forEach(f => { f.mixer.stopAllAction(); }); backToIdle(L); backToIdle(R); R.fighters.forEach(f => unstep.push(stepMixer(f.mixer, fps)));
+ resize(); document.title += ''; loopAgain();
+}
+function loopAgain() { last = performance.now(); renderer.setAnimationLoop(loopFn); }
+window.__ready = true;
+</script>
+<script>
+// context card: this study's right-hand card, read from /studies/context.json
+fetch('/studies/context.json').then(r => r.json()).then(d => {
+ const e = d.studies['hand-drawn']; const body = document.getElementById('ctxbody'); const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+ body.innerHTML = Object.entries(d.kinds).map(([k, label]) => { const its = e.items.filter(x => x.k === k);
+  return `<h3 style="margin-top:12px;font-size:.9rem">${esc(label)}</h3>` + (its.length ? `<ul class="soft" style="font-size:.88rem;line-height:1.4">${its.map(x => `<li><a href="${esc(x.href)}">${esc(x.t)}</a> <span>${esc(x.note || '')}</span></li>`).join('')}</ul>` : '<p class="soft" style="font-size:.88rem">None recorded</p>'); }).join('');
+}).catch(() => {});
+</script>
+</body>
+</html>
