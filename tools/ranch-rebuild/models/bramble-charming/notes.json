@@ -1,0 +1,77 @@
+{
+ "what_i_did": [
+  [
+   "Start",
+   "Copied build.py, make_views.py, hero_check.py and run.sh from models/bramble and kept their structure: same material names and roles (Leaf_Bramble, Leaf_BrambleLight, Leaf_BrambleShade, Stem_Cane, Berry_Black) plus one new Flower_Lilac for the new buds, same mesh names, same origin (footprint centre on the ground), front -Y, Z up, no animation, same 2.12 x 1.06 m footprint (2:1 width to depth)."
+  ],
+  [
+   "Target",
+   "Hero only (no turnaround for this plant). make_views.py, unchanged except for the path, keys the cream backdrop per row and drops the olive-grey cast shadow below row 1380 by hue; the mask keeps the berries and runner on the ground. Keyed hero aspect 0.657."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py unchanged: front-on (yaw 0), 10 deg up, harness lens, same as the normal bramble, so the two scores compare."
+  ],
+  [
+   "Layout",
+   "Follows the charming hero, which is mirrored from the normal one: a chubby leafy mound sits right of centre, one fat cane rises out of it and curls over to the left where it droops a berry and a lilac bud, an upright sprig and a leafy crown stand on the right, and a ground runner trails berries off to the left."
+  ],
+  [
+   "Charming changes",
+   "Leaves are plump rounded cards (8 tris) with cupped edges and a puffed centre, 1.5-2x the normal leaf size and smooth-shaded; the main cane is a fat 6-sided tube (radius 3.4 cm) ending in a rounded bead, carrying leaves on little stalks; berries are toy-big lumpy faceted balls (about 0.2 m across, 36 tris) instead of drupelet clusters; 14 lilac flower buds in green cups add the hero's colour; the shade core is a fatter dome so the mound reads chubby; big skirt leaves spill onto the ground at the front and the right end."
+  ],
+  [
+   "Size",
+   "Box 2.12 x 1.06 x 1.30 m (normal: 2.12 x 1.06 x 1.06). 1.30 tall matches the charming hero (1.20 scored 0.571, 1.42 scored 0.619). The regional loader scales to spec height, so in game this bramble is about 82 % of the normal one's width; set P['fit'][2] to 1.06 if the two must match exactly."
+  ],
+  [
+   "Game readiness",
+   "1,952 triangles (normal 1,976; budget 2k) in 6 meshes, one flat material each. Leaf/Stem/Flower names keep the foliage shading and seasonal recolour. to_game.py bramble-charming installed simulations/regional-assets-charming/WW-273.glb (byte-identical to bramble-charming.glb) and updated the charming manifest."
+  ]
+ ],
+ "good": [
+  "Reads as the same bramble in storybook-toy form: a chubby leaf mound, one fat green cane arching over with big berries hanging, lilac buds dotted through, and berries rolled out on the ground.",
+  "Same footprint ratio, origin, material roles and triangle budget as the normal model, so it drops into the same slot.",
+  "Hero IoU 0.611 against the normal model's 0.619 on its own hero."
+ ],
+ "off": [
+  "The hero's leaf mass right of the arch root (between the arch and the mound) and the top of its wide right flank are fuller than 2k triangles allow; the IoU moves about +-0.01 with the leaf random seed.",
+  "The front ground leaves and berries project a little below the hero's flat bottom edge because the model keeps the normal's 1.06 m depth and the hero looks shallower.",
+  "The hero's half-open rose-like blossoms are simplified to closed rounded buds, and its many small drupelets to faceted lumps; at the tile's size they read as buds and berries.",
+  "In-game width is about 82 % of the normal bramble's (taller box, see Size)."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "Charming rebuild from the normal build.py: mound right of centre, fat cane curling left, ground runner, plump 8-tri leaves, 7-drupelet berries, lilac buds. 1,874 tris.",
+   "hero_iou": 0.582
+  },
+  {
+   "round": 2,
+   "change": "Bigger berries and buds, darker leaf greens, fewer light leaves, a leafy crown round the right sprig.",
+   "hero_iou": 0.602
+  },
+  {
+   "round": 3,
+   "change": "Berries as lumpy faceted 36-tri balls (round toy berries instead of spiky diamonds); leaf pair above the arch moved left and enlarged.",
+   "hero_iou": 0.613
+  },
+  {
+   "round": 4,
+   "change": "Buds rounded into two-ring bulbs (20 tris). Tested box heights 1.20 (0.571) and 1.42 (0.619); kept 1.30.",
+   "hero_iou": 0.614
+  },
+  {
+   "round": 5,
+   "change": "Higher right flank of the mound; tried moving the crown right/lower (0.595, reverted).",
+   "hero_iou": 0.611
+  },
+  {
+   "round": 6,
+   "change": "Tried a taller arch (0.600, reverted). Final 768 px / 48 samples; to_game.py bramble-charming.",
+   "hero_iou": 0.611
+  }
+ ],
+ "moving_parts": "None. The game poses and sways plants itself; export_animations=False.",
+ "creative_additions": "Lilac flower buds in green cups (from the hero), a rounded bead at the cane tips, leaves on little stalks along the arch, and toy-big faceted berries rolled out on the ground."
+}

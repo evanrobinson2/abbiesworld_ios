@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "cow-charming",
+  "group": "animal",
+  "replaces": "simulation-assets/organics/cow-{idle,feeding,rest}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "931a16bb-7b57-4501-b2f8-17910ed9cd34",
+      "grid_url": "https://www.midjourney.com/jobs/931a16bb-7b57-4501-b2f8-17910ed9cd34?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "c9d5435d-c665-4f62-8c7b-89371f476767",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:37:32.322Z",
+      "grid_done_at": "2026-10-23T00:37:50.325Z",
+      "upscale_clicked_at": "2026-10-23T00:38:00.468Z",
+      "downloaded_at": "2026-10-23T00:39:14.984Z",
+      "pick_reason": "closest to a side view; chibi cow with curved horns, pink muzzle, patches and brass bell"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "1879affd-2efa-44e0-a079-077f63e9ee66",
+      "grid_url": "https://www.midjourney.com/jobs/1879affd-2efa-44e0-a079-077f63e9ee66?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "325c82d3-35f8-4994-9058-b4a017d41292",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:39:24.258Z",
+      "grid_done_at": "2026-10-23T00:39:42.263Z",
+      "upscale_clicked_at": "2026-10-23T00:39:52.500Z",
+      "downloaded_at": "2026-10-23T00:41:15.655Z",
+      "pick_reason": "front, side and back of one chibi cow with bell, evenly spaced"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "600bbd1e177d865c00bdb38004e94578d9fcc87dbcbfe3adf5d348260a5bb1ae",
+      "bytes": 2546725,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/c9d5435d-c665-4f62-8c7b-89371f476767/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "685bd6548d2745b473459f08ddd29a765d7ca48b7f1e2c678bf0122c67465563",
+      "bytes": 3566221,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/325c82d3-35f8-4994-9058-b4a017d41292/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "79a848b9f3df24fbb62d45099756d9a6304fbb2fc9f379553834bb7a58601234",
+      "bytes": 938832,
+      "pixels": [
+        706,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/cow-charming [('front', 150, 856), ('side', 934, 1988), ('back', 2058, 2716)]"
+    },
+    "view_side.png": {
+      "sha256": "c2949e128c4dc8899cd657f04c09c1d77a1e6c9579c8acd53aaeec7cf7d80801",
+      "bytes": 1230424,
+      "pixels": [
+        1054,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/cow-charming [('front', 150, 856), ('side', 934, 1988), ('back', 2058, 2716)]"
+    },
+    "view_back.png": {
+      "sha256": "6473ea842334268f588dc3fec02cdb5a97f22d3f16bea0ed11e8ce2ea1d40b66",
+      "bytes": 904373,
+      "pixels": [
+        658,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/cow-charming [('front', 150, 856), ('side', 934, 1988), ('back', 2058, 2716)]"
+    }
+  }
+}

@@ -1,0 +1,334 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/chicken-coop-charming",
+ "name": "chicken-coop-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "home for the hens",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "c8ef6a11-e722-4cd0-8b00-9a2ff2efbdbf",
+    "grid_url": "https://www.midjourney.com/jobs/c8ef6a11-e722-4cd0-8b00-9a2ff2efbdbf?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "74b3a02f-f5e3-49c8-ba64-904cb033e577",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:25:04.973Z",
+    "grid_done_at": "2026-10-23T00:25:22.976Z",
+    "upscale_clicked_at": "2026-10-23T00:25:33.608Z",
+    "downloaded_at": "2026-10-23T00:26:45.520Z",
+    "pick_reason": "stout legs, slatted ramp to pop door, nest box on the side, mesh window, leaning roof"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "5e24d2a1-2a64-42c1-bb97-a9072d9676d7",
+    "grid_url": "https://www.midjourney.com/jobs/5e24d2a1-2a64-42c1-bb97-a9072d9676d7?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "e8e9ddf4-23c9-4e13-bcb3-7892c8789f9a",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:26:54.515Z",
+    "grid_done_at": "2026-10-23T00:27:12.519Z",
+    "upscale_clicked_at": "2026-10-23T00:27:23.072Z",
+    "downloaded_at": "2026-10-23T00:28:46.012Z",
+    "pick_reason": "front with ramp and pop door, side with nest box, back with mesh window; one coop, evenly spaced"
+   }
+  },
+  "files": {
+   "hero.png": "ebf1a4832039d5d237354a2ca23e42410f7e0dc65ea1c84f32cc0ec9bc5088e8",
+   "turnaround.png": "995611c0494c05b57281b50040d77133ff4ced08684ad907589d8eb0c4452d82",
+   "view_front.png": "52a397a2019a8a10d2b3791f3126642413b0e0635b9a8bd9869c2d3db4fd029e",
+   "view_side.png": "6a0483d5de80974362d8ef169f10b25dbc869a38ecad05a7dad3a785666a054e",
+   "view_back.png": "fee6a224d923997ee749e973ee6179852b9e54963ebeb6c581a5f6822ccb08d3"
+  },
+  "folder": "tools/ranch-rebuild/mj/chicken-coop-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/chicken-coop-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build from the normal coop's structure: 1.6 x 1.2 m, bell-cast roof with sag, tilt and horns, bulge and lean deform, six legs on stone shoes, arched door, bowed ramp, nest hatch, -X gable window and porthole. Targets keyed by make_views.py. Hero camera grid-calibrated to -40 deg / 12 deg up.",
+    "mean_iou": 0.687,
+    "hero_iou": 0.846
+   },
+   {
+    "round": 2,
+    "change": "Parameter sweep from the hero direction: plan depth 1.25 m, walls 0.88 m, legs 0.44 m, gable overhang 0.22 m, eave overhang 0.24 m, less sag (0.08), more bulge (0.05), platform 0.12 m proud, muted timber colours.",
+    "mean_iou": 0.694,
+    "hero_iou": 0.858
+   },
+   {
+    "round": 3,
+    "change": "Bargeboards rebuilt as flat boards lying in the gable plane (they were twisted), thicker with longer horns. Eave corners curl up, muted teal, shingles no longer poke past the gable bargeboard, king post broken so the porthole shows, no z-fighting at board joints.",
+    "mean_iou": 0.68,
+    "hero_iou": 0.851
+   },
+   {
+    "round": 4,
+    "change": "Narrower, more wonky shingle tabs in tighter courses (closer to the hero's tall skewed tabs).",
+    "mean_iou": 0.68,
+    "hero_iou": 0.85
+   },
+   {
+    "round": 5,
+    "change": "Porthole on the +X gable too, so the side the harness hero camera sees isn't blank. Ramp foot lifted off the ground plane.",
+    "mean_iou": 0.681,
+    "hero_iou": 0.851
+   },
+   {
+    "round": 6,
+    "change": "Slimmer legs (0.14 m), smaller stone shoes, taller arched door (0.66 m). Final 768 px / 48 sample render.",
+    "mean_iou": 0.685,
+    "hero_iou": 0.851
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/chicken-coop (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same STATE switch and states (planned, foundation, frame, roof, complete), same origin (footprint centre on the ground), Z up, ridge along X, door wall at -Y, and the same ten material names and roles (Plank_Cream, Plank_CreamShade, Timber_Light, Timber_Shade, Roof_Teal, Metal_Mesh, Metal_Iron, Stone_Grey, Plank_Shadow, Rope_String); no new materials were needed. build.py also takes a P_OVERRIDE env var (JSON) for tuning runs."
+   ],
+   [
+    "Orientation",
+    "The hero wins. It looks at the long door wall from the front-LEFT, so the gable it shows, with the big mesh window and the porthole, is the -X gable. The door and ramp sit left of centre (DOOR_XC -0.16) and the nest hatch is at the +X end of the front wall, as drawn. The normal coop has the window on the +X gable and the nest box at -X, so these details swap ends between the two styles. The door wall, ramp direction and footprint are the same."
+   ],
+   [
+    "Footprint",
+    "The walls are 1.60 x 1.25 m. The hero's plan is a touch squarer than the normal 1.6 x 1.2, and 1.25 scored better from the hero direction. Bigger roof overhangs and the ramp give a 2.34 x 2.75 m bounding box (X/Y 0.851), against the normal model's 2.06 x 2.41 m (0.855), so the piece drops into the old footprint at the same proportions. It is 3.06 m tall (the normal one is 2.6 m) because the roof is taller and the bargeboard horns stick up."
+   ],
+   [
+    "Views (views/, built by make_views.py)",
+    "The harness mask fails on this art: the cream walls are almost the backdrop colour, so they come out as holes, and the soft brown cast shadow under and left of the coop is kept. make_views.py keys every target itself. Above the platform it uses backdrop distance with the holes filled (the timber trim closes the cream walls). Below it, the hero's legs, braces, stone shoes and ramp are traced by hand, because no colour key separates the brown shadow, the warm ground glow and the grey lit ramp slats. view_side = mj view_back, the sheet's gable with the mesh window and the nest box on the image-left, which is -Y seen from +X, so it is used unmirrored. Its colour key keeps only warm, saturated pixels below the platform. It is stretched to the model's gable width/height, and the ramp is painted in edge-on, as in the normal coop. view_front is dropped: it is a gable with an arched door and stair ramp, but the hero has the door on the long wall. view_back is dropped too: the sheet's middle view is a 3/4 view, not the long wall."
+   ],
+   [
+    "Hero check (hero_check.py)",
+    "Renders from the MJ hero's direction with the harness lens and scores against views/hero.png. YAW -40 deg (off the front, toward -X) and ELEV 12 deg up came from a grid over -30..-60 deg and 4..20 deg on the round-1 and round-2 models, and were fixed from round 2 on."
+   ],
+   [
+    "Charming shape",
+    "The roof is bell-cast: a curved profile, steep at the ridge and flattening to the eaves (BELL 0.38), with eave tips that flick up (FLICK 0.09) and corners that curl up (CORNER 0.10). The ridge sags 0.08 m mid-length, and its -X end sits 0.14 m higher than the +X end. Thick bowed bargeboards run past the ridge and cross as horns, longer at -X. One deform pass bulges the walls up to 0.05 m at mid-height and leans everything above the floor 0.07 m toward -X at the ridge, so the posts, door and nest hatch bow with the walls. The cream planks are vertical with jittered depth, and the gable planks are cut to the curved deck. The proportions are chubbier: a thick projecting platform (0.15 m, 0.12 m proud), six stout tapered legs on chunky stone shoes, an oversized arched door (0.44 x 0.66 m) with a thick arched trim, a big round knob and strap hinges, a bowed slatted ramp with jittered slats, a 0.66 m mesh window with a cross mullion, sill and lintel, wishbone gable braces, and big portholes on both gables. The shingles are big and wonky: thick tabs with lifted butts and random skew."
+   ],
+   [
+    "Construction states",
+    "planned: tilted corner stakes, string lines, a diagonal, six leg pegs and two ramp-foot pegs. foundation: stone shoes, tapered legs, knee braces, the chunky platform rim and deck. frame: adds corner and door posts, the band, gable tie beams, king posts broken for the porthole, curved rafters that follow the bell-cast, and the ridge beam. roof: adds the curved deck, shingles, crossed bargeboards and the ridge beam, with the walls still open. complete: identical to chicken-coop-charming.glb."
+   ],
+   [
+    "Game readiness",
+    "4,904 triangles complete (budget 9k). Other states: planned 204, foundation 408, frame 1,032, roof 3,144. 18 meshes in complete, each with one flat Principled material named by role, exported with export_animations=False."
+   ]
+  ],
+  "creative_additions": "A porthole on the second gable, a round door knob, crossed bargeboard horns at both ridge ends (longer at -X), lid cheeks and a latch on the nest hatch, and tilted stakes in the planned stage."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   2.333404064178467,
+   2.7550582885742188,
+   3.059809446334839
+  ],
+  "triangles": 4904,
+  "materials": [
+   "Plank_Cream",
+   "Timber_Light",
+   "Timber_Shade",
+   "Plank_Shadow",
+   "Metal_Iron",
+   "Metal_Mesh",
+   "Plank_CreamShade",
+   "Roof_Teal",
+   "Stone_Grey"
+  ],
+  "parts": [
+   {
+    "name": "door",
+    "materials": [
+     "Plank_Cream"
+    ]
+   },
+   {
+    "name": "floor_deck",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "floor_frame",
+    "materials": [
+     "Timber_Shade"
+    ]
+   },
+   {
+    "name": "interior",
+    "materials": [
+     "Plank_Shadow"
+    ]
+   },
+   {
+    "name": "iron_fittings",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "legs",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "mesh",
+    "materials": [
+     "Metal_Mesh"
+    ]
+   },
+   {
+    "name": "nest_box",
+    "materials": [
+     "Plank_Cream"
+    ]
+   },
+   {
+    "name": "nest_lid",
+    "materials": [
+     "Plank_CreamShade"
+    ]
+   },
+   {
+    "name": "plank_walls",
+    "materials": [
+     "Plank_Cream"
+    ]
+   },
+   {
+    "name": "plank_walls_shade",
+    "materials": [
+     "Plank_CreamShade"
+    ]
+   },
+   {
+    "name": "ramp",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "ramp_rails",
+    "materials": [
+     "Timber_Shade"
+    ]
+   },
+   {
+    "name": "roof_shingles",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "roof_timbers",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "stone_shoes",
+    "materials": [
+     "Stone_Grey"
+    ]
+   },
+   {
+    "name": "timber_frame",
+    "materials": [
+     "Timber_Light"
+    ]
+   },
+   {
+    "name": "trim",
+    "materials": [
+     "Timber_Light"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "complete",
+  "foundation",
+  "frame",
+  "planned",
+  "roof"
+ ],
+ "validation": {
+  "outline_iou": 0.685,
+  "hero_iou": 0.851,
+  "per_view": {
+   "side": 0.685
+  },
+  "triangle_budget": 9000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.851 from the hero's direction. The tall swooping teal roof with its tipped, sagging ridge and crossed horns, the chunky platform on stout legs, the long bowed ramp, the arched door and the nest hatch all read at small size.",
+   "It is clearly the same coop as the normal model: same door wall, ramp, nest box, mesh window, colour blocks (cream planks in tan timber under a teal roof) and footprint proportions, but softer, chubbier and wobblier.",
+   "The construction stages read as a sequence, and the curved rafters in the frame stage already show the storybook roofline."
+  ],
+  "off": [
+   "The hero's gable face looks wider than the model's from the same direction (the hero seems drawn with a wider lens), so the target's back-left corner and left legs stick out past the render. A deeper plan would fix it, but would break the normal coop's footprint ratio.",
+   "From the hero direction the porthole is mostly hidden behind the front bargeboard; in the hero it sits clear of it. The porthole is visible from the side.",
+   "The hero's legs are a little longer and slimmer. Longer legs scored worse (the model gets too tall for its width), so I kept them stout.",
+   "The side view (0.685) compares against a different coop: the sheet's is narrower and taller, with legs inset under the floor and a broader, flatter-flaring roof. It is a guide only.",
+   "The hero's wood grain, worn plank edges and grass tufts are not modelled, and the mesh is a dark plane rather than a lattice."
+  ]
+ },
+ "exports": {
+  "runtime": "chicken-coop-charming.glb",
+  "variants": {
+   "complete": "variants/complete.glb",
+   "foundation": "variants/foundation.glb",
+   "frame": "variants/frame.glb",
+   "planned": "variants/planned.glb",
+   "roof": "variants/roof.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-planned.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-foundation.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-frame.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-roof.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/chicken-coop-complete.json"
+   ]
+  }
+ },
+ "files": {
+  "chicken-coop-charming.glb": {
+   "sha256": "dada4cbd276ea13a25f17351ce98f394d6732ad01306d94dae70f08388465cfe",
+   "bytes": 277744
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "011ab35161b7b6afe809c0362147f6ce2203d836",
+  "path": "tools/ranch-rebuild/models/chicken-coop-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

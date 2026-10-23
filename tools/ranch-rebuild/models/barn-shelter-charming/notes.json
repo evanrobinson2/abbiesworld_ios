@@ -1,0 +1,35 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/barn-shelter (build.py, make_views.py, check.py, run.sh) and reshaped it. Same STATE switch and states (planned, foundation, frame, roof, complete), same origin (footprint centre on the ground), Z up, front -Y, ridge along Y, same material names and roles; one new material only for a new detail: Hay_Straw (the hay in the back loft)."],
+  ["Orientation", "The hero wins over the sheet: its wide doorway is on the long side with a hayloft dormer above it, not in the front gable. So the doorway, recess, workbench, tool rack and door leaf sit on the -X long side (built in the normal model's door frame and rotated), the arched hayloft dormer sits on the -X roof slope above them, the front (-Y) gable gets the hero's two big windows under the kicked ridge log, and the back gable gets the sheet's small window and a hay-filled loft opening. The camera that matches the hero sees the -X side on the left and the front gable on the right."],
+  ["Footprint", "3.8 x 5.1 m walls (normal 3.8 x 4.9), eave at 2.9 m, about 6.5 m to the top of the ridge log; bounding box 5.58 x 6.66 m (0.84 width/depth, normal 0.81). The door leaf is open 50 deg and sticks out on the -X side, which is most of the difference."],
+  ["Charming shape", "One deform pass on everything above the footing: the walls bulge up to 0.11 m between the corner posts (front, back and +X walls; planks are split in three courses so they curve), the roof slopes bell inward 0.45 m mid-slope and flick up at the eaves, the ridge rises 0.34 m towards the front and sags mid-length, and the whole frame leans 0.2 m to +X and 0.08 m to +Y at the top."],
+  ["Craft", "Big chunky shingle tabs (0.5 m courses, lifted butts), a round octagonal ridge log overhanging the front by 0.62 m with a 0.5 m upward kick, an end ring and a strut, chunky 0.36 m corner posts with feet, round log ends on the tie beams, rounded cobble footing (chamfered blocks) with stepping stones at the doorway, wide 0.32 m two-tone planks, oversized windows with deep sills, big heads and cross bars, an arched dormer opening with a trim ring, a ledge on brackets and a pitchfork resting on it, a 3-plank door leaf with ledges, Z brace, strap hinges and latch, and the normal model's recess with tool rack and a chubbier workbench."],
+  ["Views (views/, built by make_views.py)", "Hero: the harness mask kept the cast shadow and ground litter at the left foot and lost the grey footing stones on the right, so the mask is cut below a hand-traced footing line and the footing band is filled back in. Sheet: only the middle view (a clean gable elevation with the hay loft) is scored, against the orthographic back gable. The sheet's left view is a 3/4 with the door in the gable end and its right view has a lean-to roof; both contradict the hero and are dropped. The sheet draws a much taller, narrower barn than the hero, so its gable score is only a guide."],
+  ["Scoring (check.py)", "Hero rendered from 64 deg off the front towards -X, 0 deg up, harness lens (grid-calibrated twice), against views/hero.png; sheet gable = r/back.png against views/view_gable.png."],
+  ["Game readiness", "7,900 triangles complete (budget 9k); planned 164, foundation 624, frame 1,404, roof 4,112. 15 meshes, one flat material each: Plank_Rose, Plank_RoseDark, Plank_Interior, Plank_Shadow, Plank_Floor, Timber_Grey, Timber_Bench, Roof_Teal, Stone_Teal, Metal_Iron, Hay_Straw (Rope_String in planned). No animation."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.888 from the hero's own direction.",
+  "At game size the bell-shaped teal roof with the kicked ridge log, the dormer, the dark open doorway with the bench, the open leaf and the big front windows all read, and it is still clearly the normal barn-shelter.",
+  "Construction stages read as a sequence; the dormer roof arrives with the roof stage on its corner posts, its walls with the complete stage."
+ ],
+ "off": [
+  "The doorway moved from the front gable (normal model, sheet) to the -X long side (hero). If the game needs the door facing -Y this is the one thing to revisit.",
+  "The hero's ridge log rises higher at the front than mine; a bigger kick fought the roof shape, so the top-right corner of the hero mask is a little short.",
+  "The hero's back rake is more concave at the top than my bell deform makes it; the top-left roof corner sits slightly outside the hero.",
+  "Sheet gable IoU 0.705: the sheet barn is much taller and narrower than the hero, and the dormer and the open leaf stick out of my back-view silhouette.",
+  "The plain harness score (sheet views as front/side/back) is 0.645; it compares a 3/4 view and a lean-to barn with the orthographic views, so it isn't meaningful here.",
+  "Shingles are flat tabs, not the hero's soft rounded ones; the tools in the rack are simple blocks."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build from the normal model: door, recess and leaf moved to the -X side, dormer, front windows, back loft with hay, charm deform (bulge, bell roof, flick, rise/sag, lean); hero camera grid-calibrated at 66/2 deg.", "hero_iou": 0.877, "sheet_gable_iou": 0.691},
+  {"round": 2, "change": "Roof deck and ridge cap built in strips so they follow the ridge sag, ridge log seated lower and made of 7 segments, kick reduced to 0.32.", "hero_iou": 0.863, "sheet_gable_iou": 0.675},
+  {"round": 3, "change": "Kick back up to 0.5 and walls taller (eave 2.9); camera recalibrated to 64/0 deg.", "hero_iou": 0.875, "sheet_gable_iou": 0.711},
+  {"round": 4, "change": "Deeper plan (5.1 m), back overhang 0.25, bigger dormer (1.6 m wide, taller walls, wider arch), taller doorway; shorter tie ends, eave 0.5 and leaf open 50 deg to bring the footprint ratio back.", "hero_iou": 0.891, "sheet_gable_iou": 0.711},
+  {"round": 5, "change": "Deeper bell (0.45) and smaller eave flick; tried more front rise (0.5) and a shorter back overhang (0.18), both worse (0.883-0.884), reverted.", "hero_iou": 0.891, "sheet_gable_iou": 0.705},
+  {"round": 6, "change": "Final 768 px / 48 sample render and score.", "hero_iou": 0.888, "sheet_gable_iou": 0.705}
+ ],
+ "moving_parts": "None (the game poses buildings itself); construction stages are exported as variants/planned, foundation, frame, roof, complete.",
+ "creative_additions": "A pitchfork resting on the dormer ledge, a hay mound in the back loft (from the sheet), post feet, an end ring on the ridge log, and chunky stepping stones at the side doorway."
+}

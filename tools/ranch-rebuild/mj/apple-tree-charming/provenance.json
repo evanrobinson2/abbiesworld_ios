@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "apple-tree-charming",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/GF-153.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a small orchard apple tree, a short twisty trunk, a spreading rounded crown with clusters of red apples, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "f58e9af3-4010-4be0-b43a-aaa82e089b0d",
+      "grid_url": "https://www.midjourney.com/jobs/f58e9af3-4010-4be0-b43a-aaa82e089b0d?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "0a4e15b6-980d-4408-acf0-c84661daca1b",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:01:49.973Z",
+      "grid_done_at": "2026-10-23T01:02:07.979Z",
+      "upscale_clicked_at": "2026-10-23T01:02:21.272Z",
+      "downloaded_at": "2026-10-23T01:03:37.154Z",
+      "pick_reason": "short twisty trunk, wide spreading crown with red apple clusters, whole tree with margin"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a small orchard apple tree, a short twisty trunk, a spreading rounded crown with clusters of red apples, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "31b71d82-8b28-405c-8146-bae05494e891",
+      "grid_url": "https://www.midjourney.com/jobs/31b71d82-8b28-405c-8146-bae05494e891?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "552b809c-58d0-4b93-8507-21d07084e6c4",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:03:46.689Z",
+      "grid_done_at": "2026-10-23T01:04:04.693Z",
+      "upscale_clicked_at": "2026-10-23T01:04:16.478Z",
+      "downloaded_at": "2026-10-23T01:05:39.061Z",
+      "pick_reason": "three matching views of one twisty apple tree at the same scale, separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "9a1a6a050aa14665ef51784fef89437d03c8e6525273cd57023f821db56e4b5f",
+      "bytes": 2062285,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/0a4e15b6-980d-4408-acf0-c84661daca1b/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "ee97da36f9832508b3bb4d295059b21181b204cebe1551caf4ac18d367e912a1",
+      "bytes": 2183505,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/552b809c-58d0-4b93-8507-21d07084e6c4/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "7c2c5256dbdd744ecee6012c7120353faf8225bd3beb28147d707213dfe7bb06",
+      "bytes": 794953,
+      "pixels": [
+        903,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/apple-tree-charming [('front', 170, 1073), ('side', 1075, 1852), ('back', 1852, 2804)]"
+    },
+    "view_side.png": {
+      "sha256": "9dff5b7a09ac188a6b81f556453d528d764971d91a3c26b0ba12c6af24def39a",
+      "bytes": 669837,
+      "pixels": [
+        777,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/apple-tree-charming [('front', 170, 1073), ('side', 1075, 1852), ('back', 1852, 2804)]"
+    },
+    "view_back.png": {
+      "sha256": "e94d560d48f16b9d562a131114374f9b0ebef9f03ceea84a58ee5d1a31ea68ba",
+      "bytes": 778192,
+      "pixels": [
+        952,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/apple-tree-charming [('front', 170, 1073), ('side', 1075, 1852), ('back', 1852, 2804)]"
+    }
+  }
+}

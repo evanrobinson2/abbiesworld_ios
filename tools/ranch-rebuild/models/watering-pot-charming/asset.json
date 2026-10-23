@@ -1,0 +1,205 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/watering-pot-charming",
+ "name": "watering-pot-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden watering pot",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a round glazed terracotta watering pot with a long spout and a curved handle, chunky rounded toy-like proportions, a playful little tilt",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a round glazed terracotta watering pot with a long spout and a curved handle, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "a3ee8f75-f6af-485b-9778-f6ea43c0c27b",
+    "grid_url": "https://www.midjourney.com/jobs/a3ee8f75-f6af-485b-9778-f6ea43c0c27b?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "1f353de0-87e9-4451-8118-90eb5f0c3242",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:22:26.293Z",
+    "grid_done_at": "2026-10-23T01:22:44.299Z",
+    "upscale_clicked_at": "2026-10-23T01:22:55.298Z",
+    "downloaded_at": "2026-10-23T01:24:07.567Z",
+    "pick_reason": "glossy glazed terracotta, long spout and curved handle, round body; variant 2 was a blue teapot"
+   }
+  },
+  "files": {
+   "hero.png": "83e13ad3a5462fcf96ef6f74575ee024f8f0040b47ae2457ee68900ac4efc9bc"
+  },
+  "folder": "tools/ranch-rebuild/mj/watering-pot-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/watering-pot-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "Normal build reshaped from hero pixel measurements: flat-based ellipsoid belly, two-band collar, short fat spout with rolled mouth, ear handle, 4 deg lean. Camera at 90/10.",
+    "mean_iou": 0.9
+   },
+   {
+    "round": 2,
+    "change": "Camera fixed at 85/5 after a calibration grid; smooth shading, less wobble, wider base, belly a little lower.",
+    "mean_iou": 0.916
+   },
+   {
+    "round": 3,
+    "change": "Belly centre lowered, spout root fatter and lower, handle pulled in and thickened, tapering fatter at the joins.",
+    "mean_iou": 0.928
+   },
+   {
+    "round": 4,
+    "change": "Tried a pear-shaped belly (0.920, dropped); kept a lower handle arch.",
+    "mean_iou": 0.929
+   },
+   {
+    "round": 5,
+    "change": "Belly rings sampled evenly by angle and crease splitting at 38 deg, so the collar reads as a separate fat ring on a round belly (as in the hero) instead of a conical shoulder.",
+    "mean_iou": 0.921
+   },
+   {
+    "round": 6,
+    "change": "Belly made a sunk sphere meeting the ground on a 0.072 m disc (no foot ring, like the hero). A z-squash sweep gave only noise, kept 1.0.",
+    "mean_iou": 0.92
+   },
+   {
+    "round": 7,
+    "change": "Spout root lowered 6 mm and fattened.",
+    "mean_iou": 0.93
+   },
+   {
+    "round": 8,
+    "change": "Final 768 px / 48 sample render and hero score; to_game.py watering-pot-charming.",
+    "mean_iou": 0.938
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied build.py, make_views.py, hero_check.py and run.sh from models/watering-pot/ and reshaped the same three-part design (pot_body lathe, spout tube, handle tube), the same Clay_Glaze material, origin at the centre of the base on the ground, spout to -Y, no variants (garden prop)."
+   ],
+   [
+    "Target",
+    "Hero only (no turnaround was made for this prop). views/hero.png is the MJ hero keyed by hue (make_views.py): pot hue < 0.068 with saturation > 0.10 kept, so the pale specular highlights stay in; the browner cast shadow to the left (hue 0.075 to 0.09) and the cream backdrop are dropped; small enclosed holes are filled and the handle loop is left open."
+   ],
+   [
+    "Hero camera",
+    "The hero is a near side view from +X, a little above (the open top shows as a thin ellipse, about 8 deg). A yaw/elevation grid on the round-1 model preferred 80/0 (0.929), but that partly compensates for shape errors, so I fixed it at 85 deg yaw, 5 deg up as a compromise with what the image shows and held it there for every round."
+   ],
+   [
+    "Body",
+    "An 18-segment lathe: a big ellipsoid belly (r 0.133 m, centre 0.106 m, vertical radius 0.128 m) sunk into the ground so it meets it on a 0.072 m flat disc with no foot ring, sampled evenly by angle up to a short neck, then a fat collar: a lower band, a groove, and a thick rolled lip (r 0.081 m) round a wide open top with an inside wall and floor."
+   ],
+   [
+    "Spout",
+    "A 10-sided tube, shorter and much fatter than the normal pot's: it leaves the upper belly with a 0.05 m root, rises at about 47 deg and ends 0.28 m up in a big rolled mouth (r 0.025 m)."
+   ],
+   [
+    "Handle",
+    "A chunky ear handle (r 0.0165 m, swelling to 0.02 m at both joins) from the back of the lip, over a tight round loop and down into the back of the belly, instead of the normal pot's tall thin arch over the top."
+   ],
+   [
+    "Charming touches",
+    "Smooth shading with crisp creases (lathe edges sharper than 38 deg are split, so the collar bands and lip stay crisp), a glossier glaze (roughness 0.40), a 4 deg sideways lean (a shear with height, so the base still sits flat), and much lower vertex wobble."
+   ],
+   [
+    "Game readiness",
+    "1,438 triangles (budget 2k), 3 meshes, one material Clay_Glaze (role clay), flat base colour, no textures, exported with export_animations=False. 0.31 m tall, 0.40 m long spout tip to handle back, 0.26 m wide. to_game.py watering-pot-charming installed it as garden-assets-charming/GF-074.glb."
+   ]
+  ],
+  "creative_additions": "A crisp groove between the collar's two bands, a thick rolled mouth on the spout, handle joins that swell like pinched clay, and a small sideways lean."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.2629922032356262,
+   0.39961785078048706,
+   0.31216686964035034
+  ],
+  "triangles": 1438,
+  "materials": [
+   "Clay_Glaze"
+  ],
+  "parts": [
+   {
+    "name": "handle",
+    "materials": [
+     "Clay_Glaze"
+    ]
+   },
+   {
+    "name": "pot_body",
+    "materials": [
+     "Clay_Glaze"
+    ]
+   },
+   {
+    "name": "spout",
+    "materials": [
+     "Clay_Glaze"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.938,
+  "per_view": {},
+  "triangle_budget": 2000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.938 at 768 px / 48 samples from the hero's direction: round belly, collar, spout with its rolled mouth and the ear handle all line up.",
+   "Reads at tile size as the same round orange watering pot, just chubbier: same spout-left, handle-right silhouette, same colour and material role.",
+   "Well inside the 2k prop budget."
+  ],
+  "off": [
+   "Footprint ratio: 0.40 m long by 0.26 m wide (1.52:1) against the normal pot's 0.45 by 0.24 (1.86:1). The hero's spout is short and the belly fat, and the game scales props to a set height, so at equal height the charming pot is the same length as the normal one but about 25 % wider. I followed the hero rather than stretching it.",
+   "The hero's spout blends into the belly with a soft fillet; mine is a fat tube pushed into the belly.",
+   "The hero's glaze has painted highlights; mine is one flat colour (the glossier roughness carries some of that).",
+   "The lean is my addition from the prompt's 'playful little tilt'; the hero itself stands nearly upright, so I kept it to 4 deg and sideways, where it barely touches the hero silhouette.",
+   "Round-to-round IoU differences under about 0.01 are render noise at 384 px (a z-scale sweep jumped around by that much), so the later rounds were judged by eye as much as by number."
+  ]
+ },
+ "exports": {
+  "runtime": "watering-pot-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/garden-assets/GF-074.glb"
+   ]
+  }
+ },
+ "files": {
+  "watering-pot-charming.glb": {
+   "sha256": "0c9520abd06996bcfeac9ff4afc475a78758ecb2c8c99f52154ec514cb31cbdc",
+   "bytes": 33296
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "9129cece60f78fd32bbedab7b37f89c11c27e0d0",
+  "path": "tools/ranch-rebuild/models/watering-pot-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

@@ -1,0 +1,215 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/clover-charming",
+ "name": "clover-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "meadow ground cover",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a low patch of pasture clover with round white and pink flower heads, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a low patch of pasture clover with round white and pink flower heads, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "9e9686d9-05ab-4265-a374-4c5acf0df4da",
+    "grid_url": "https://www.midjourney.com/jobs/9e9686d9-05ab-4265-a374-4c5acf0df4da?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "aa0c3130-ba42-4c4b-b544-dc57138fab07",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:51:11.638Z",
+    "grid_done_at": "2026-10-23T01:51:29.640Z",
+    "upscale_clicked_at": "2026-10-23T01:51:40.516Z",
+    "downloaded_at": "2026-10-23T01:52:52.004Z",
+    "pick_reason": "low plump patch of readable trefoil leaves with round pink-white heads, whole patch with margin"
+   }
+  },
+  "files": {
+   "hero.png": "172228cdd77ad137e95e052743a9baa27063b5501f8355de6505785016243ef6"
+  },
+  "folder": "tools/ranch-rebuild/mj/clover-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/clover-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build: 40 trefoils with round puffed 4-tri leaflets (46-56 mm), 15 big spheroid heads (22-27 mm) on bowed 2-segment stems, nod 0.35, lean 0.06. Camera calibrated to yaw 10 / elev 25.",
+    "mean_iou": 0.725
+   },
+   {
+    "round": 2,
+    "change": "Straight single-segment stems to free triangles for 45 trefoils, leaves layered higher to hide the core, taller heads (1.3x) with more pink, heads spread wider (0.16 x 0.11 m), 14 heads.",
+    "mean_iou": 0.76
+   },
+   {
+    "round": 3,
+    "change": "Lean raised to 0.15 (the hero crowds right), lower, rounder mound (0.11 m), heads 24-29 mm, pinker cream. Taller heads (rise up to 0.16 m) and a wider base were tried and dropped (0.65-0.75).",
+    "mean_iou": 0.789
+   },
+   {
+    "round": 4,
+    "change": "Bigger leaflets (50-60 mm) and a stronger head nod (0.5 rad), kept for charm though nod alone cost 0.002. Final 768 px / 48 samples.",
+    "mean_iou": 0.79
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied the finished normal clover (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same structure: mound of trefoils over a dark core dome, loose trefoils on the rim, heads on stems, a couple of grass blades; the same seven materials and mesh names (Leaf_Green, Leaf_Pale, Leaf_Shade, Leaf_Grass, Stem_Green, Petal_Cream, Petal_Pink), no new ones; origin at the footprint centre on the ground, front -Y, plain GLB (plant: no states)."
+   ],
+   [
+    "Target",
+    "The hero is the only input (no turnaround for plants). make_views.py keys it against the cream backdrop; the cast shadow falls left and under the front leaves and is a darkened cream/olive (red at or above green), while every leaf is green-dominant, so below row 1380 every pixel with G < 1.02 R is dropped, with a keep box for the lowest head. A 12-step closing above that row fills the heads' near-white highlights that the cream key punched out."
+   ],
+   [
+    "Hero camera",
+    "Calibrated over yaw -20..20 / elev 10..30: best at yaw 10-20, elev 25-30. Fixed at yaw 10, elev 25 (the normal used 0/22) and held it."
+   ],
+   [
+    "Leaves",
+    "35 mound + 10 rim trefoils (normal: 44 + 14), each leaflet a 4-triangle fan (normal: 3) with a rounder coin-like outline (half-width 0.78 of length, a rounded 3-point rim), 50-60 mm long (normal 38-48 mm), and its middle puffed up 16 % of its length so it cups and reads plump."
+   ],
+   [
+    "Heads",
+    "14 big round heads (normal 32 small ones), radius 24-29 mm (about twice the normal), each a 5-sided spheroid 1.3x taller than wide: a cream cap and upper band over a pink drooping skirt (the pink-tipped outer florets). 25 triangles each, open underneath (hidden by the stem and leaves; double-sided material)."
+   ],
+   [
+    "Lean and bounce",
+    "Thicker 4 mm stems splay outward (heads sit 55 % further out than the stem base) and each head nods outward up to 0.5 rad, more at the rim. The whole patch leans to +X by 0.15 m per metre of height (about 8.5 deg), the storybook tilt; the hero's heads also crowd right, and the lean raised IoU."
+   ],
+   [
+    "Mound",
+    "A plump round-shouldered dome (profile (1-r^2)^0.5, 0.11 m) on the same 0.36 x 0.28 m ellipse, leaves layered at 80-105 % of the dome so the top is fully covered."
+   ],
+   [
+    "Game readiness",
+    "1,000 triangles (ground plant budget 1k): leaves 540, heads 350, stems 84, core 24, grass 2. Size 0.456 x 0.376 x 0.224 m (normal 0.415 x 0.354 x 0.199): width/depth 1.21 against the normal's 1.17. to_game.py installed it as simulations/regional-assets-charming/UP-051.glb and added it to the charming manifest."
+   ]
+  ],
+  "creative_additions": "Pink drooping skirt under each head for the pink outer florets; heads nod outward like they are bouncing; the whole patch leans a little, as in the hero."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.45623525977134705,
+   0.3760661780834198,
+   0.22434696555137634
+  ],
+  "triangles": 1000,
+  "materials": [
+   "Stem_Green",
+   "Leaf_Grass",
+   "Petal_Cream",
+   "Petal_Pink",
+   "Leaf_Shade",
+   "Leaf_Green",
+   "Leaf_Pale"
+  ],
+  "parts": [
+   {
+    "name": "flower_stems",
+    "materials": [
+     "Stem_Green"
+    ]
+   },
+   {
+    "name": "grass",
+    "materials": [
+     "Leaf_Grass"
+    ]
+   },
+   {
+    "name": "heads_cream",
+    "materials": [
+     "Petal_Cream"
+    ]
+   },
+   {
+    "name": "heads_pink",
+    "materials": [
+     "Petal_Pink"
+    ]
+   },
+   {
+    "name": "mound_core",
+    "materials": [
+     "Leaf_Shade"
+    ]
+   },
+   {
+    "name": "trefoils_green",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "trefoils_pale",
+    "materials": [
+     "Leaf_Pale"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.79,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero IoU 0.790 at the final 768 px / 48 samples render from the matched camera.",
+   "Reads as the same clover patch at tile size, but toy-like: fewer, bigger, rounder leaves, a crown of big plump pink-and-cream heads nodding outward, and a gentle lean.",
+   "Same materials, mesh names, origin and near-identical footprint ratio as the normal model, so it swaps in place."
+  ],
+  "off": [
+   "Under the harness lighting the head caps read almost white; the hero's heads are a warmer pink-cream with visible ribbed florets. The pink shows mainly on the skirt underneath.",
+   "The hero has about 16 heads, some low in the front leaves; this has 14 (budget), mostly in a crown on top.",
+   "The hero's leaves are denser and smaller relative to the heads than 45 trefoils can give within 1k triangles; the front has a few big flat trefoils.",
+   "Footprint ratio 1.21 vs the normal 1.17 (the lean adds width at the top).",
+   "IoU moves about +/-0.03 with the random seed; kept the normal's seed 23 rather than seed-picking."
+  ]
+ },
+ "exports": {
+  "runtime": "clover-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/UP-051.glb"
+   ]
+  }
+ },
+ "files": {
+  "clover-charming.glb": {
+   "sha256": "d7ff879895daf79ce0f6249c2b2604fab049ca37544dcda0d9fca16b18b83e09",
+   "bytes": 82228
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "30f8c262cb89adbf8776d16c3e437c6bc9e90f07",
+  "path": "tools/ranch-rebuild/models/clover-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

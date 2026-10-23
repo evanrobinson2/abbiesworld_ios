@@ -1,0 +1,497 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/chicken-charming",
+ "name": "chicken-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "pecks around the run",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "81554f06-bb0c-42eb-a168-4271b4db4882",
+    "grid_url": "https://www.midjourney.com/jobs/81554f06-bb0c-42eb-a168-4271b4db4882?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "6e99e2a4-b152-4fdb-a623-54aa7d7e8978",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:45:33.916Z",
+    "grid_done_at": "2026-10-23T00:45:51.918Z",
+    "upscale_clicked_at": "2026-10-23T00:46:02.066Z",
+    "downloaded_at": "2026-10-23T00:47:15.444Z",
+    "pick_reason": "chibi hen in side view with golden-tipped feathers, red comb and wattle, comb not near the edge"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "9d4da5a3-f61b-4c7e-82a6-07c75b00100a",
+    "grid_url": "https://www.midjourney.com/jobs/9d4da5a3-f61b-4c7e-82a6-07c75b00100a?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "0a55e5c0-c64b-45b2-a539-2c349ea25baa",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:47:25.556Z",
+    "grid_done_at": "2026-10-23T00:47:43.561Z",
+    "upscale_clicked_at": "2026-10-23T00:47:53.777Z",
+    "downloaded_at": "2026-10-23T00:49:13.607Z",
+    "pick_reason": "front, side and back of one chibi hen with margin around each view"
+   }
+  },
+  "files": {
+   "hero.png": "deef7a99fe413ae2360415ebe884d98927c1262c1e022393c320ea84d7c91b6c",
+   "turnaround.png": "82f740c0588ff1f44f782d58b8a2a65b60c1dc06c5571fe5407fdbaefb0fe750",
+   "view_front.png": "37215d8e35ca840b40e90bca0cafb42695a58d1e3b169682218532654b855390",
+   "view_side.png": "2ec8416040be29dda6084997f82fce1b4771c9fca64fafebcb4b70f7368b9ac9",
+   "view_back.png": "815ba1370cfb811f9eb23fff8bc719b02dd7160b95dc2589e19e4794f54319b9"
+  },
+  "folder": "tools/ranch-rebuild/mj/chicken-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/chicken-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build from the normal hen's structure: ball body, big head, lobed comb, petals, wing pads, lobed tail, stubby legs with pants. 2,834 triangles (over budget).",
+    "mean_iou": 0.789,
+    "hero_iou": 0.721
+   },
+   {
+    "round": 2,
+    "change": "Cut to 1,418 triangles (fewer segments, one breast puff instead of scallops), wings inset and rolled to hug the flanks, body moved forward.",
+    "mean_iou": 0.841,
+    "hero_iou": 0.758
+   },
+   {
+    "round": 3,
+    "change": "Shorter back, bigger lower breast, head and beak forward, wing tips flat to the pad, feeding tilt 50 deg; hero camera calibrated to 68/8.",
+    "mean_iou": 0.839,
+    "hero_iou": 0.773
+   },
+   {
+    "round": 4,
+    "change": "Rump squashed (x0.86) and the tail more upright; underside of the rump lifted, deeper breast sag.",
+    "mean_iou": 0.839,
+    "hero_iou": 0.759
+   },
+   {
+    "round": 5,
+    "change": "Legs and hips moved 2.6 cm forward under the breast, breast puff forward, bigger golden collar tips.",
+    "mean_iou": 0.829,
+    "hero_iou": 0.784
+   },
+   {
+    "round": 6,
+    "change": "Smoother body (14x8) and head (12x8), cream wing pads so the wing reads, thicker wing.",
+    "mean_iou": 0.833,
+    "hero_iou": 0.784
+   },
+   {
+    "round": 7,
+    "change": "Collar flared out like the hero's ruff (front dropped to 0.758), then pulled back halfway.",
+    "mean_iou": 0.8,
+    "hero_iou": 0.798
+   },
+   {
+    "round": 8,
+    "change": "Slimmer body and wings, taller comb (hero 0.769); comb height reverted.",
+    "mean_iou": 0.827,
+    "hero_iou": 0.789
+   },
+   {
+    "round": 9,
+    "change": "Tail lobes longer and swept further back (36-82 deg), wing tips raised so they stop poking below the rump.",
+    "mean_iou": 0.829,
+    "hero_iou": 0.795
+   },
+   {
+    "round": 10,
+    "change": "Wings brought in to keep the footprint near the normal hen's W/L (0.79 -> 0.74).",
+    "mean_iou": 0.847,
+    "hero_iou": 0.781
+   },
+   {
+    "round": 11,
+    "change": "Final 768 px / 48 sample render and score; to_game.py chicken-charming.",
+    "mean_iou": 0.851,
+    "hero_iou": 0.784
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/chicken (build.py, make_views.py, hero_check.py, poses_check.py, run.sh) and reshaped it. Same part tree and pivots (body at the hips > neck > head > comb/wattle/beak/face/eyes/pupils, body > tail_under > tail, body > wing_l/wing_r > plates, body > breast_plates, neck > hackles/hackle_tips, leg_l/leg_r as separate roots), same POSE mechanics (part rotations, body drop, peck slide, leg fold) and the same three states idle/feeding/rest. Z up, origin at the footprint centre on the ground, head faces -Y."
+   ],
+   [
+    "Views",
+    "make_views.py was rewritten for this sheet: the backdrop is each row's left and right edge colour blended across the row (follows the hero's wall-to-floor gradient and darker upper-left vignette); above the belly line a 0.045 colour-distance key, closed and hole-filled; below it only leg colour (gold-orange, G/R under 0.80; the warm cast shadow is 0.86) under the body's width, cut below the lowest toe row. This keys out the hero's long cast shadow and the sheet's floor shadows."
+   ],
+   [
+    "Dropped view",
+    "The sheet's side view is drawn three-quarter, facing right, and shows a fluffy tail-less egg where the hero has a raised golden tail, so it contradicts the hero. It lives in views/side/ and is scored apart as a proportion guide only. Front and back are scored by the harness."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py recalibrated on the round-3 model over a 6x4 yaw/elevation grid (best 70/6 and 60/0); set to yaw 68, elevation 8."
+   ],
+   [
+    "Massing",
+    "A plush round ball body (0.20 m wide, breast sagging forward and low, rump squashed and its underside curving up into the tail, flattened belly) plus one soft breast puff; an oversized round head (12.8 x 12 x 11.6 cm, almost twice the normal hen's) on a short plush neck; short stubby legs moved 2.6 cm forward under the breast, each in a fluffy cream feather pant, with three fat toes and a little back toe."
+   ],
+   [
+    "Details",
+    "A big comb of three fat round lobes (middle one tallest), a small stout rounded beak, a fat two-lobed red wattle, dark oval eyes with a white shine, pink blush cheeks, a collar of 8 chunky rounded hackle petals with big golden tips, a big cream wing pad on each flank with three golden tip lobes trailing back, and a perky fan of 3 cream and 2 golden fat tail lobes."
+   ],
+   [
+    "Tilt and lean",
+    "Every pose keeps the storybook tilt: the body leans 6 deg into its step and the head is cocked 9 deg to the side and turned 4 deg (TILT in build.py)."
+   ],
+   [
+    "Poses",
+    "idle is the hero stance. feeding tips the body 50 deg and the neck 34 deg, raises the tail and slides the head 4 cm along the neck until the beak tip touches the ground. rest sinks the body 4 cm onto the ground and folds the legs (with their pants) back up inside it."
+   ],
+   [
+    "Game readiness",
+    "1,452 triangles in every pose (budget 1.5k), 22 meshes, smooth shaded, one flat material each. Material names keep the normal hen's (Feather_White, Feather_Cream, Feather_Gold, Skin_Red, Horn_Yellow, Skin_Yellow, Skin_EyeDark); Skin_EyeOrange is gone (the toy eyes are solid dark) and Skin_Cheek and Skin_EyeShine are new for the blush and eye shine. All map to the game's skin role, as before. Footprint 0.24 x 0.32 m (W/L 0.74, normal 0.69), 0.41 m tall. to_game.py chicken-charming scaled it x3.368 to the old footprint and wrote chicken-idle/feeding/rest .json and .glb into the -charming tree without errors."
+   ]
+  ],
+  "creative_additions": "A permanent storybook head cock and forward lean, fluffy feather pants on the legs, a white shine in each eye, pink blush cheeks, and a cream under-layer behind the golden tail lobes."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.23863962292671204,
+   0.3216991424560547,
+   0.4113265872001648
+  ],
+  "triangles": 1452,
+  "materials": [
+   "Feather_White",
+   "Feather_Gold",
+   "Horn_Yellow",
+   "Skin_Red",
+   "Skin_EyeDark",
+   "Skin_Cheek",
+   "Skin_EyeShine",
+   "Feather_Cream",
+   "Skin_Yellow"
+  ],
+  "parts": [
+   {
+    "name": "body",
+    "materials": [
+     "Feather_White"
+    ],
+    "pivot": [
+     0,
+     0.072,
+     0.016
+    ],
+    "rotation": [
+     0.0523,
+     0,
+     0,
+     0.9986
+    ],
+    "children": [
+     {
+      "name": "breast_plates",
+      "materials": [
+       "Feather_White"
+      ]
+     },
+     {
+      "name": "neck",
+      "materials": [
+       "Feather_White"
+      ],
+      "pivot": [
+       0,
+       0.143,
+       0.029
+      ],
+      "children": [
+       {
+        "name": "hackle_tips",
+        "materials": [
+         "Feather_Gold"
+        ]
+       },
+       {
+        "name": "hackles",
+        "materials": [
+         "Feather_White"
+        ]
+       },
+       {
+        "name": "head",
+        "materials": [
+         "Feather_White"
+        ],
+        "pivot": [
+         0,
+         0.055,
+         0.011
+        ],
+        "rotation": [
+         0.0027,
+         0.0348,
+         0.0784,
+         0.9963
+        ],
+        "children": [
+         {
+          "name": "beak",
+          "materials": [
+           "Horn_Yellow"
+          ],
+          "pivot": [
+           0,
+           0.026,
+           0.062
+          ]
+         },
+         {
+          "name": "comb",
+          "materials": [
+           "Skin_Red"
+          ],
+          "pivot": [
+           0,
+           0.09,
+           0.008
+          ]
+         },
+         {
+          "name": "eyes",
+          "materials": [
+           "Skin_EyeDark"
+          ],
+          "pivot": [
+           0,
+           0.03,
+           0.012
+          ]
+         },
+         {
+          "name": "face",
+          "materials": [
+           "Skin_Cheek"
+          ],
+          "pivot": [
+           0,
+           0.03,
+           0.012
+          ]
+         },
+         {
+          "name": "pupils",
+          "materials": [
+           "Skin_EyeShine"
+          ],
+          "pivot": [
+           0,
+           0.03,
+           0.012
+          ]
+         },
+         {
+          "name": "wattle",
+          "materials": [
+           "Skin_Red"
+          ],
+          "pivot": [
+           0,
+           0.009,
+           0.06
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "tail_under",
+      "materials": [
+       "Feather_Cream"
+      ],
+      "pivot": [
+       0,
+       0.133,
+       -0.102
+      ],
+      "children": [
+       {
+        "name": "tail",
+        "materials": [
+         "Feather_Gold"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "wing_l",
+      "materials": [
+       "Feather_Cream"
+      ],
+      "pivot": [
+       0.082,
+       0.068,
+       0.0164
+      ],
+      "children": [
+       {
+        "name": "wing_l_plates",
+        "materials": [
+         "Feather_Gold"
+        ],
+        "pivot": [
+         0,
+         0,
+         -0.0504
+        ]
+       }
+      ]
+     },
+     {
+      "name": "wing_r",
+      "materials": [
+       "Feather_Cream"
+      ],
+      "pivot": [
+       -0.082,
+       0.068,
+       0.0164
+      ],
+      "children": [
+       {
+        "name": "wing_r_plates",
+        "materials": [
+         "Feather_Gold"
+        ],
+        "pivot": [
+         0,
+         0,
+         -0.0504
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "leg_l",
+    "materials": [
+     "Skin_Yellow"
+    ],
+    "pivot": [
+     0.036,
+     0.074,
+     0.026
+    ],
+    "children": [
+     {
+      "name": "pants_l",
+      "materials": [
+       "Feather_Cream"
+      ]
+     }
+    ]
+   },
+   {
+    "name": "leg_r",
+    "materials": [
+     "Skin_Yellow"
+    ],
+    "pivot": [
+     -0.036,
+     0.074,
+     0.026
+    ],
+    "children": [
+     {
+      "name": "pants_r",
+      "materials": [
+       "Feather_Cream"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "states": [
+  "feeding",
+  "idle",
+  "rest"
+ ],
+ "validation": {
+  "outline_iou": 0.851,
+  "hero_iou": 0.784,
+  "per_view": {
+   "front": 0.84,
+   "back": 0.861
+  },
+  "triangle_budget": 1500,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette 0.784 from the hero direction: the round ball body, big round head, big three-lobed comb, wattle, cocked head, cream wing pad and raised golden tail all read.",
+   "Front 0.840 and back 0.861 against the sheet (mean 0.851), above the normal hen's 0.737, because the charming massing is simpler and rounder.",
+   "The three poses are distinct at tile size: upright and cocked, head down at the ground with the tail up, a round sitting lump.",
+   "Within budget at 1.45k triangles."
+  ],
+  "off": [
+   "The hero's surface is soft clay-smooth; at 1.5k triangles the body and head show broad facets even with smooth shading.",
+   "The hero's hackle collar is a clear ruff of gold-tipped petals over the breast; flaring the petals out far enough to match it widened the front silhouette too much (front 0.82 -> 0.76), so they sit closer and read mostly as golden flecks at the shoulders.",
+   "The wings were brought in (half width 0.12 m) so the footprint stays near the normal hen's proportions (W/L 0.74 against 0.69); a wider wing pad matched the hero a little better (0.795 against 0.781).",
+   "The side view of the sheet was dropped (three-quarter and tail-less); it scores 0.559 as a guide only.",
+   "A taller comb matched the sheet's front better but cost 0.02 on the hero, so the comb follows the hero.",
+   "The feeding pose stretches the neck by sliding the head 4 cm along it, as in the normal hen."
+  ]
+ },
+ "exports": {
+  "runtime": "chicken-charming.glb",
+  "variants": {
+   "feeding": "variants/feeding.glb",
+   "idle": "variants/idle.glb",
+   "rest": "variants/rest.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/chicken-idle.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/chicken-feeding.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/chicken-rest.json"
+   ]
+  }
+ },
+ "files": {
+  "chicken-charming.glb": {
+   "sha256": "c0615185ef0de12d80425db3a6d2e4f4acf1570d738d4c5ce208e7f851c5b82c",
+   "bytes": 43988
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "6d5c3a917ff66a93a6d36f8f850db22da750c5fd",
+  "path": "tools/ranch-rebuild/models/chicken-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

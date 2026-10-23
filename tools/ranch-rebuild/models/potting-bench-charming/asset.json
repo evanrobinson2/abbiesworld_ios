@@ -1,0 +1,261 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/potting-bench-charming",
+ "name": "potting-bench-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden work bench",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a rustic wooden potting bench with a back shelf, terracotta pots, a trowel and a seed tray, chunky rounded toy-like proportions, a playful little tilt",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a rustic wooden potting bench with a back shelf, terracotta pots, a trowel and a seed tray, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "080ee60f-5b66-42cf-a8ef-0152ff430b97",
+    "grid_url": "https://www.midjourney.com/jobs/080ee60f-5b66-42cf-a8ef-0152ff430b97?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "d0411c07-b658-424b-8085-63dda2e9348f",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:18:19.701Z",
+    "grid_done_at": "2026-10-23T01:18:37.707Z",
+    "upscale_clicked_at": "2026-10-23T01:18:49.041Z",
+    "downloaded_at": "2026-10-23T01:20:01.059Z",
+    "pick_reason": "chunky bench with back shelf of pots, trowel and seed tray, whole bench in frame"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a rustic wooden potting bench with a back shelf, terracotta pots, a trowel and a seed tray, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "c221bd9f-7550-423b-aa8f-c7cc27a714d8",
+    "grid_url": "https://www.midjourney.com/jobs/c221bd9f-7550-423b-aa8f-c7cc27a714d8?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "a83a007e-2cbc-4c48-9185-30719d5fc483",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:20:11.670Z",
+    "grid_done_at": "2026-10-23T01:20:29.675Z",
+    "upscale_clicked_at": "2026-10-23T01:20:42.464Z",
+    "downloaded_at": "2026-10-23T01:22:05.191Z",
+    "pick_reason": "front with shelf and pots, three-quarter side and back of one bench in a single row; others were two rows or inconsistent"
+   }
+  },
+  "files": {
+   "hero.png": "e961320072bc8582fe3fe352f7a96994e00b5f96c584c1c5b3dfd3851b049ac3",
+   "turnaround.png": "64fd544db3f1df6baf5875ba74314927437f98a55e3c26963991e13db4144ddf",
+   "view_front.png": "6fb2c59c9e20bbca7adbde70626e534b787f1517c11948ac4a80f5abca24e9a5",
+   "view_side.png": "a94be377423ffe88a91ec4f5c428858460f91e709904793224056909b56803b0",
+   "view_back.png": "fff897750d06ae962ad7c2a80b44d9877a1d91822d6a9159e08d959463f98ec8"
+  },
+  "folder": "tools/ranch-rebuild/mj/potting-bench-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/potting-bench-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build from the normal bench: 3 fat boards, drawer and knob, H-stretcher, posts at both ends, arched rail, 4 pots, tray with soil cups. Scored with the normal bench's -30/24 camera. Trimmed from 2,558 to 1,923 triangles.",
+    "mean_iou": 0.599
+   },
+   {
+    "round": 2,
+    "change": "Back posts moved off-centre (x -0.56 and +0.30), so the big pot stands outside them as in the hero. Fatter posts, darker wood. Camera recalibrated to -40/26 and fixed.",
+    "mean_iou": 0.657
+   },
+   {
+    "round": 3,
+    "change": "Top deepened to 0.63 m, back lowered (posts 1.29 m, shelf about 1.0 m, arch 1.16 to 1.23 m).",
+    "mean_iou": 0.664
+   },
+   {
+    "round": 4,
+    "change": "The arch rail is now one swept bar, which fixed a dark sliver at the joints of the separate beams. Bigger knob, rounder paddle leaves.",
+    "mean_iou": 0.662
+   },
+   {
+    "round": 5,
+    "change": "Taller, fuller plants in the shelf pot and the big pot.",
+    "mean_iou": 0.665
+   },
+   {
+    "round": 6,
+    "change": "Legs set further in under the top (top +-0.46, foot +-0.56) for a bigger overhang.",
+    "mean_iou": 0.675
+   },
+   {
+    "round": 7,
+    "change": "Legs further in again (0.43 / 0.54). Worse (0.671), so reverted.",
+    "mean_iou": 0.671
+   },
+   {
+    "round": 8,
+    "change": "The knob was pushing the depth out (ratio 2.08), so I flattened it and seated the drawer flush, bringing the ratio back to 2.16 at 0.675. Final render at 768 px / 48 samples.",
+    "mean_iou": 0.672
+   }
+  ],
+  "what_was_done": [
+   [
+    "Base",
+    "Started from models/potting-bench (build.py, make_views.py, hero_check.py, run.sh) and reshaped it to the charming hero. The conventions are the same: Z up, metres, origin at the footprint centre on the ground, front (now the drawer side) at -Y. The objects are the same (top, frame, shelf, pots, soil, succulent, seed_tray, trowel_blade, trowel_handle) plus one new object, drawer (Timber_Oak). The 7 materials keep their names and roles (Timber_Oak, Plank_Oak, Clay_Terracotta, Soil_Dark, Leaf_Green, Metal_Iron, Timber_Handle), with no new ones. It's a prop, so there are no variants. The outer bounds are 1.42 x 0.66 x 1.34 m. That's a width/depth ratio of 2.16, against the normal bench's 1.54 x 0.69 (2.24), so it drops in for it."
+   ],
+   [
+    "Views",
+    "The hero wins and is the only target. The turnaround sheet drew a different bench: rope-lashed log legs, a low second shelf with a pot under the top, a fretwork back board, and the trowel hanging on a post. It has no drawer and no H-stretcher, so all three sheet views are dropped and not scored. The harness mask keeps the hero's soft cast shadow, which is the same warm hue as the lit wood (b/r 0.49 to 0.52 in both), and fills the gaps under the top. So make_views.py keys the hero the same way as the normal bench: everything that differs from the cream backdrop above row 1400, and below that only what falls inside hand-traced polygons around the four legs and the stretchers."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py uses the harness lens and distance from 40 deg off the front towards -X and 26 deg up. I calibrated it on the round-2 model over yaw -52..-28 and elevation 14..34, then held it fixed. The normal bench's hero used -30/24."
+   ],
+   [
+    "Charming massing",
+    "The top is a chubby 1.40 x 0.63 m slab of 3 boards, 0.13 m thick, at 0.80 m, with 40 mm two-segment rounded edges and ragged, slightly twisted ends. Stout legs taper outwards to flared 0.155 m feet. They are set well in under the top for a big storybook overhang and splay to (+-0.56, +-0.24). An H-stretcher (two end stretchers and a long middle one) replaces the normal bench's front stretcher. The front apron carries a drawer with a big round knob."
+   ],
+   [
+    "Back and props",
+    "Two fat 0.15 m back posts have rounded two-segment heads. They sit off-centre as in the hero (x -0.56 and +0.30), and each leans a few degrees a different way: that's the playful tilt. They carry a swept arched back rail whose ends poke past the posts, and a pot shelf tipped 1.5 deg. Three pots with fat rolled rims sit on the shelf, small, medium and larger. The larger one holds a sprout with round paddle leaves. A big leafy pot stands on the top's right back corner, beyond the right post, as in the hero. The seed tray is a soft clay slab with 5 x 3 dark soil cups. The trowel has a broad iron blade and a fat turned handle with a collar."
+   ],
+   [
+    "Game readiness",
+    "1,939 triangles (garden prop budget 2k) in 10 meshes, one flat material each. The wood is honey oak, lighter and more orange than the normal bench, sampled from the hero and darkened for the harness lighting. No animation. to_game.py potting-bench-charming ran cleanly and installed garden-assets-charming/GF-020.glb."
+   ]
+  ],
+  "creative_additions": "The drawer with its big round knob (from the hero, not in the normal bench), the posts leaning in opposite directions, the tipped pot shelf, and the arched back rail whose ends stick out past the posts."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.4208183288574219,
+   0.6590487360954285,
+   1.3415077924728394
+  ],
+  "triangles": 1939,
+  "materials": [
+   "Timber_Oak",
+   "Clay_Terracotta",
+   "Plank_Oak",
+   "Soil_Dark",
+   "Leaf_Green",
+   "Metal_Iron",
+   "Timber_Handle"
+  ],
+  "parts": [
+   {
+    "name": "drawer",
+    "materials": [
+     "Timber_Oak"
+    ]
+   },
+   {
+    "name": "frame",
+    "materials": [
+     "Timber_Oak"
+    ]
+   },
+   {
+    "name": "pots",
+    "materials": [
+     "Clay_Terracotta"
+    ]
+   },
+   {
+    "name": "seed_tray",
+    "materials": [
+     "Clay_Terracotta"
+    ]
+   },
+   {
+    "name": "shelf",
+    "materials": [
+     "Plank_Oak"
+    ]
+   },
+   {
+    "name": "soil",
+    "materials": [
+     "Soil_Dark"
+    ]
+   },
+   {
+    "name": "succulent",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "top",
+    "materials": [
+     "Plank_Oak"
+    ]
+   },
+   {
+    "name": "trowel_blade",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "trowel_handle",
+    "materials": [
+     "Timber_Handle"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.672,
+  "per_view": {},
+  "triangle_budget": 2000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.672 from the matched camera at the final 768 px / 48 samples render. The normal bench scored 0.646 against its own hero.",
+   "It reads as the same object as the normal bench (plank top on splayed legs, a raised back shelf of pots, a seed tray and a trowel) but toy-like. The soft fat edges, chunky feet, leaning posts, arched rail, the drawer knob and the big leafy pot carry the storybook feel at tile size.",
+   "Same object and material names as the normal bench, and the footprint ratio stays within 4 %, so the style switch can swap it in place."
+  ],
+  "off": [
+   "The hero's footprint is deeper than the normal bench's (about 1.6:1 against 2.2:1). I kept the normal ratio (2.16) so it drops in. That costs IoU on the right front leg and the left end, which shows as orange and blue edges in r/hero_compare.jpg.",
+   "The hero's wood has carved grain, knots and a split board end at the front left. Mine is flat-shaded rounded boxes with ragged ends only.",
+   "The hero's leaves are soft, curled and many. Mine are 5 and 7 flat paddle leaves to stay under budget. The arched back rail is unbevelled for the same reason.",
+   "The hero's seed tray has a raised rim around the cups. Mine is one rounded slab with the soil cups on its top, which reads the same at tile size."
+  ]
+ },
+ "exports": {
+  "runtime": "potting-bench-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/garden-assets/GF-020.glb"
+   ]
+  }
+ },
+ "files": {
+  "potting-bench-charming.glb": {
+   "sha256": "3eddc94547430c686ccbd320914a2c3dd6a2406b71fd075a2b138e60fc64a1e0",
+   "bytes": 111744
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "ebba150c275bb9c21ca8d7e2c5468b7f317a9ba8",
+  "path": "tools/ranch-rebuild/models/potting-bench-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

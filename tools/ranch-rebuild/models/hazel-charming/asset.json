@@ -1,0 +1,264 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/hazel-charming",
+ "name": "hazel-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "hedge shrub",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "0cfea24c-5081-49a7-9cda-5543744dfd0f",
+    "grid_url": "https://www.midjourney.com/jobs/0cfea24c-5081-49a7-9cda-5543744dfd0f?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "e79e5ed9-e083-456d-9424-a31158e413f9",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:05:58.124Z",
+    "grid_done_at": "2026-10-23T01:06:16.129Z",
+    "upscale_clicked_at": "2026-10-23T01:06:28.030Z",
+    "downloaded_at": "2026-10-23T01:07:39.680Z",
+    "pick_reason": "upright stems with round leaves and swirly clumps, the only variant with visible hazelnut clusters"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "21abec59-4b6c-4067-a123-e7f6da7c792e",
+    "grid_url": "https://www.midjourney.com/jobs/21abec59-4b6c-4067-a123-e7f6da7c792e?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "2820e562-15ca-4a31-9502-1d3a8cc35357",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:07:50.559Z",
+    "grid_done_at": "2026-10-23T01:08:08.562Z",
+    "upscale_clicked_at": "2026-10-23T01:08:28.341Z",
+    "downloaded_at": "2026-10-23T01:09:50.971Z",
+    "pick_reason": "three consistent shrubs with upright stems, swirly base clumps and nut clusters, evenly separated"
+   }
+  },
+  "files": {
+   "hero.png": "80c49e25b79a5ed937c332ce894e3e36f1daec367d59ea0cd73798914c587777",
+   "turnaround.png": "f6018e9f05959747a401fd85fdd33ac0b2f7f3e35f3fae735c528b1fded3849c",
+   "view_front.png": "40792d6d085e1fe08133b77273460be0997602249082ab55266b5e7e79a4d447",
+   "view_side.png": "7aded5d3b999d2a812fccf091e73e64f9f85b3907dc64f2e87dccc2aecc0fc93",
+   "view_back.png": "dfa5d5736bcc9d883a29ea312541a075b4f8d6f48a492f067320c53c2a333e8a"
+  },
+  "folder": "tools/ranch-rebuild/mj/hazel-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/hazel-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build from the hazel structure: 6 chubby stems, leaning round-leaf crown with dark core, S trunk, two swirly cloud clumps, nut clusters, foot tuft. 3.3k tris (over budget).",
+    "mean_iou": 0.554,
+    "hero_iou": 0.711
+   },
+   {
+    "round": 2,
+    "change": "Leaves turned outward (less up), bigger clumps set off the picture plane for a round footprint, bigger nuts placed on the hero side, cheaper trunk/swirls/nuts to 3.0k; hero camera recalibrated (yaw 30, elev 4).",
+    "mean_iou": 0.582,
+    "hero_iou": 0.731
+   },
+   {
+    "round": 3,
+    "change": "Crown moved left and leaning 8 deg, bigger clumps, wider tuft, trunk foot moved left, more light leaves, smooth-shaded leaves (looked streaky, reverted next round).",
+    "mean_iou": 0.581,
+    "hero_iou": 0.735
+   },
+   {
+    "round": 4,
+    "change": "Flat leaves again and bigger (15-21 cm), lower-right lobe moved out, small sprig leaves on the stems, cheaper nuts.",
+    "mean_iou": 0.601,
+    "hero_iou": 0.742
+   },
+   {
+    "round": 5,
+    "change": "Narrower crown, bigger clumps, wider tuft and litter (clumps overshot).",
+    "mean_iou": 0.6,
+    "hero_iou": 0.741
+   },
+   {
+    "round": 6,
+    "change": "Clumps between rounds 4 and 5, stems and tuft moved left.",
+    "mean_iou": 0.6,
+    "hero_iou": 0.743
+   },
+   {
+    "round": 7,
+    "change": "Seed sweep 1-13 (+-0.012 noise), kept seed 11.",
+    "mean_iou": 0.598,
+    "hero_iou": 0.758
+   },
+   {
+    "round": 8,
+    "change": "Final 768 px / 48 sample render and score; to_game.py hazel-charming.",
+    "mean_iou": 0.599,
+    "hero_iou": 0.759
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/hazel/ (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same plant, same conventions: Z up, metres, origin at the stem base on the ground, front -Y, no animation, no variants (tree/shrub group, plain GLB). Same material names and roles (Stem_Olive, Leaf_Light, Leaf_Dark, Fruit_Hazel, Fruit_Husk) plus two for new parts: Stem_Sage (the soft twisty trunk) and Leaf_Cloud (the plump cloud clumps). Footprint stays near round (1.73 x 1.55 m; the normal one is 1.45 x 1.42) and height 2.6 m."
+   ],
+   [
+    "Views",
+    "make_views.py now keys mj/hazel-charming. The hero's backdrop darkens towards the lower left, so below the litter line only the litter's span is kept. The turnaround sheet draws a different composition (a big swirly cloud mass low in the middle with open leafy stems above it), the opposite of the hero (dense round-leaf crown on top, two cloud clumps out to the sides on a branch and an S trunk). The hero wins: the three sheet views are dropped as targets; their IoU is reported for information only."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py calibrated again: yaw 30 deg (best, as for the normal hazel), elevation 0 scored best and 8 next; the hero shows its ground litter from slightly above, so 4 deg is used. Features are laid out in the hero's picture plane (P['hero_yaw'] = 30) and turned to world, so the composition reads from that 3/4 view."
+   ],
+   [
+    "Stems and trunk",
+    "Six chubby, straight, smooth-shaded stems (3.4 cm to 2 cm radius, 5 sides) rise from the foot into the crown, with a few small coin leaves on short stalks along the bare part. A fat S-curved sage trunk (Catmull-Rom curve, 8.5 cm radius with a flared foot) swings out to the right and carries the right cloud clump; a thinner branch carries the left one."
+   ],
+   [
+    "Crown",
+    "A big crown leaning 8 deg towards the left (the storybook tilt): about 60 oversized round coin leaves (15-21 cm radius, 7-sided, cupped, notched where the stalk meets) on a leaning ellipsoid, plus a lower lobe of 20 leaves towards the trunk side, round a dark core blob that fills the gaps and gives depth. Two small leaves at each stem tip break the top outline."
+   ],
+   [
+    "Cloud clumps",
+    "Two plump clumps of five flattened, smooth icosphere blobs each (Leaf_Cloud), with raised spiral swirls (tapered 3-sided tubes lying on the blob surface) on the outward faces, as in the hero. The clumps sit slightly off the picture plane in opposite depths so the footprint stays round."
+   ],
+   [
+    "Nuts, foot",
+    "Three clusters of three fat caramel hazelnuts (6 cm radius, pointed, smooth) in pale five-point husk cups on a short stalk, hung at the crown surface on the hero side. A low tuft of soft blobs at the foot and eight fallen round leaves on the ground."
+   ],
+   [
+    "Game readiness",
+    "2,961 triangles (budget 3k), 7 meshes, one flat material each. to_game.py hazel-charming installs it as the charming twin of GF-158.glb."
+   ]
+  ],
+  "creative_additions": "Raised spiral swirls on the cloud clumps, a notch in every coin leaf where its stalk meets it, fat pointed nuts hung in threes, and fallen leaves round the foot."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.726171612739563,
+   1.5535571575164795,
+   2.6142141819000244
+  ],
+  "triangles": 2961,
+  "materials": [
+   "Leaf_Cloud",
+   "Fruit_Husk",
+   "Leaf_Dark",
+   "Leaf_Light",
+   "Fruit_Hazel",
+   "Stem_Olive",
+   "Stem_Sage"
+  ],
+  "parts": [
+   {
+    "name": "cloud_clumps",
+    "materials": [
+     "Leaf_Cloud"
+    ]
+   },
+   {
+    "name": "husks",
+    "materials": [
+     "Fruit_Husk"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_light",
+    "materials": [
+     "Leaf_Light"
+    ]
+   },
+   {
+    "name": "nuts",
+    "materials": [
+     "Fruit_Hazel"
+    ]
+   },
+   {
+    "name": "stems",
+    "materials": [
+     "Stem_Olive"
+    ]
+   },
+   {
+    "name": "trunk",
+    "materials": [
+     "Stem_Sage"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": 0.599,
+  "hero_iou": 0.759,
+  "per_view": {
+   "front": 0.569,
+   "side": 0.629,
+   "back": 0.599
+  },
+  "triangle_budget": 3000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.759 (normal hazel 0.769): the leaning column crown, two side cloud clumps, S trunk and foot tuft line up with the hero.",
+   "Still clearly the same hazel: multi-stem, round leaves, hazelnut clusters in husks, same materials; the charm comes from chubby smooth stems, oversized coin leaves, the lean, the swirly cloud clumps and the fat nuts.",
+   "Reads from every side (front, side and back renders) and stays under budget."
+  ],
+  "off": [
+   "The turnaround sheet's composition (cloud mass low and central, open leafy stems on top) is not followed; sheet IoU front 0.569, side 0.629, back 0.599, mean 0.599, for information only.",
+   "The hero's crown leaves are soft and lighter; mine are faceted 7-sided cups and the dark core shows through a little in places.",
+   "The hero's cloud clumps are cauliflower-like with many small lobes; at 3k triangles I used five blobs each, so they are rounder and simpler. Swirls are only on the outward (hero-side) faces.",
+   "The foot is a few soft blobs, not the hero's dense leafy mound; the hero's many little leaf sprigs along the stems are reduced to three per stem.",
+   "The hero IoU moves by about +-0.012 with the random seed alone; seed 11 was kept."
+  ]
+ },
+ "exports": {
+  "runtime": "hazel-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-158.glb"
+   ]
+  }
+ },
+ "files": {
+  "hazel-charming.glb": {
+   "sha256": "774305f9b3ee279ef6c171d9880030fa163741c249e52606d0e65b995c49df36",
+   "bytes": 135444
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "81aec89dd9d1cad3197740b66bae69c29bd67419",
+  "path": "tools/ranch-rebuild/models/hazel-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

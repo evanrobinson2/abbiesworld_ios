@@ -1,0 +1,79 @@
+{
+ "what_i_did": [
+  [
+   "Start",
+   "Copied the normal goldenrod's build.py, make_views.py, hero_check.py and run.sh, and kept its conventions: plant group (no variants), Z up, origin at the ground footprint centre, front -Y, height 0.837 m, the same five materials and mesh names (plumes_gold, plumes_light, stems, leaves_green, leaves_dark)."
+  ],
+  [
+   "Views",
+   "Scored on mj/goldenrod-charming/hero.png alone (no turnaround for this asset). make_views.py keys it against the cream backdrop and drops the warm tan cast shadow on the left: everything left of the plant's foot below the ground line, and below the ground line only green (leaf) pixels are kept, since this shadow is darker than the normal hero's and the hue rule missed it. hero_check.py scores from the same matched camera as the normal model (front-on, 6 deg up)."
+  ],
+  [
+   "Plumes",
+   "Each of 8 stems ends in a fat bottle-brush plume of 9 plump teardrop petals (4-sided, 8 triangles each) on a golden-angle spiral, splayed 60 deg off the stem at the plume foot and closing to 18 deg at the tip, longest a quarter of the way up, with the tip petal pointing straight up. Flower_Gold with the top two petals and about 40 % of the rest in Flower_GoldLight."
+  ],
+  [
+   "Stems",
+   "8 stems (down from 9) placed from the hero: tallest in the centre, two tall side plumes, and lower plumes in front and at the sides. Each stem fans out (s^1.4) and bows sideways at mid-height; the whole clump leans 3 deg left like the hero."
+  ],
+  [
+   "Leaves",
+   "Big soft oval leaves (6 triangles: two side points each side plus a raised midrib, tips drooping) instead of the normal's narrow lance cards: 4 up each stem and a 20-leaf rosette making a broad leafy foot, shifted a little left as in the hero. The normal model's dark core is gone; the rosette covers the foot."
+  ],
+  [
+   "Game readiness",
+   "984 triangles (budget 1k), 5 meshes, one flat material each. 0.479 x 0.341 x 0.837 m (w/d 1.40; the normal is 0.547 x 0.357, w/d 1.53). to_game.py goldenrod-charming installed it as simulations/regional-assets-charming/WW-347.glb, byte-identical to goldenrod-charming.glb."
+  ]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.763 at 768 px from the matched camera: a tall flame-shaped clump, tallest plume in the centre and leaning left, with a broad leafy foot.",
+  "Reads as the same goldenrod as the normal set, but chubbier: fat golden bottle-brush plumes and big oversized leaves, with a lean and bowed stems for the toy feel.",
+  "Under budget at 984 triangles, same height, same material names."
+ ],
+ "off": [
+  "The hero's plumes are many small rounded petals; with 1k triangles the petals are 9 big faceted teardrops per plume, which read a little crystalline up close (fine at tile size).",
+  "The lower half is less solid than the hero's dense leaf mound (fill 0.30-0.37 against 0.41-0.48 per row band), and the very bottom row is narrower: the hero's foot touches the ground across about a third of the height.",
+  "Stems keep the material name Stem_Rust for drop-in compatibility but are coloured olive green, as the hero draws them.",
+  "Width/depth 1.40 against the normal's 1.53 (the charming hero is narrower relative to its height); the game scales plants to a set height, so this only changes the plan slightly.",
+  "The IoU moves by about +-0.02 with the random seed alone; seed 3 kept."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build from the normal model: 8 stems from the hero, 10 small teardrop petals per plume, 3 oval leaves per stem, 22-leaf rosette, lean 3 deg right. Far too sparse.",
+   "mean_iou": 0.507
+  },
+  {
+   "round": 2,
+   "change": "Petals 1.4x longer and plumper (9 per plume), leaves much bigger, rosette taller.",
+   "mean_iou": 0.637
+  },
+  {
+   "round": 3,
+   "change": "Lean flipped to 3 deg left (the hero leans left), left plumes moved out, stem leaves longer and flatter.",
+   "mean_iou": 0.686
+  },
+  {
+   "round": 4,
+   "change": "Row-by-row check: wider stem feet and rosette, foot shifted left, 4 leaves per stem starting lower.",
+   "mean_iou": 0.705
+  },
+  {
+   "round": 5,
+   "change": "Oversized leaves (wider), rosette lower and more splayed, front-back squash 0.72 towards the normal's plan ratio.",
+   "mean_iou": 0.761
+  },
+  {
+   "round": 6,
+   "change": "Rosette from the ground up at 22-55 deg and wider; seed sweep 1-8 (0.72-0.765), seed 3 kept.",
+   "mean_iou": 0.761
+  },
+  {
+   "round": 7,
+   "change": "Longer stem leaves; final 768 px / 48 sample render and hero score; to_game.py goldenrod-charming.",
+   "mean_iou": 0.763
+  }
+ ],
+ "moving_parts": "None (plant group; the game poses models itself).",
+ "creative_additions": "Bowed stems and a slight lean for the storybook bounce; the top petals of every plume in the light gold, as if sunlit."
+}

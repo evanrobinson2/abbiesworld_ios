@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "bench-charming",
+  "group": "prop",
+  "replaces": "garden-assets/GF-194.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "89e5c7b6-3724-4394-9183-d141a9a03645",
+      "grid_url": "https://www.midjourney.com/jobs/89e5c7b6-3724-4394-9183-d141a9a03645?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "cc174966-7393-4c5a-aa9e-f4d6f635000d",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:24:21.796Z",
+      "grid_done_at": "2026-10-23T01:24:39.799Z",
+      "upscale_clicked_at": "2026-10-23T01:24:49.299Z",
+      "downloaded_at": "2026-10-23T01:26:01.401Z",
+      "pick_reason": "chunky plank seat on splayed legs with stretcher, whole bench with margin"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "72da5ab8-b791-40a7-8014-90d285f5d5e1",
+      "grid_url": "https://www.midjourney.com/jobs/72da5ab8-b791-40a7-8014-90d285f5d5e1?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "7e349742-5979-4c83-99de-c196c5d2e1a0",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:26:10.365Z",
+      "grid_done_at": "2026-10-23T01:26:28.368Z",
+      "upscale_clicked_at": "2026-10-23T01:26:38.469Z",
+      "downloaded_at": "2026-10-23T01:28:01.053Z",
+      "pick_reason": "long side, end view and three-quarter of one bench in a single row, largest views"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "dc37010c08c0d961a5afaf62712259d443b2b92e1a01d2eeb01fd407bc58b35c",
+      "bytes": 1643137,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/cc174966-7393-4c5a-aa9e-f4d6f635000d/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "614565ddb595a88d38b8cc8d3426a4342b9135665299bbb1af2e5d1ae03e6512",
+      "bytes": 1829447,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/7e349742-5979-4c83-99de-c196c5d2e1a0/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "c785cb10bed5fca4c99686e4bc96512c959ba08614645edb99ec9bac7518ad21",
+      "bytes": 703978,
+      "pixels": [
+        1004,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/bench-charming [('front', 164, 1168), ('side', 1175, 1736), ('back', 1736, 2739)]"
+    },
+    "view_side.png": {
+      "sha256": "8a263e1a8723543bc4d976b0d419d35d8a903b9c8348852b5709458770734485",
+      "bytes": 380436,
+      "pixels": [
+        561,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/bench-charming [('front', 164, 1168), ('side', 1175, 1736), ('back', 1736, 2739)]"
+    },
+    "view_back.png": {
+      "sha256": "65f1f713ab088351e9f5f90d859a8d3a9d4da7ef96f116dd86d9a52b57949940",
+      "bytes": 671027,
+      "pixels": [
+        1003,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/bench-charming [('front', 164, 1168), ('side', 1175, 1736), ('back', 1736, 2739)]"
+    }
+  }
+}

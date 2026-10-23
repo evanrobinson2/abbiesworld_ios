@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "ground-cover",
+  "item": "R1",
+  "wave": "Ranch remaster wave 1",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "sheet": {
+      "prompt": "game asset sheet of ranch ground cover pieces: six soft rounded grass tufts of different sizes with round-tipped blades in muted sage meadow green, a low clover patch with small white flower heads, a wildflower clump with tiny yellow and lilac flowers, a soft mossy path edge strip with a few pebbles, evenly spaced in a neat row, same scale, all pieces fully visible, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text --ar 16:9",
+      "grid_job_id": "6ebf2dc8-33ac-4a3d-8caf-d2e3395612c8",
+      "grid_url": "https://www.midjourney.com/jobs/6ebf2dc8-33ac-4a3d-8caf-d2e3395612c8?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "f43921f2-18b4-4ca3-9750-1bf478b3f906",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T02:56:13.454Z",
+      "grid_done_at": "2026-10-23T02:56:23.901Z",
+      "upscale_clicked_at": "2026-10-23T02:56:57.058Z",
+      "downloaded_at": "2026-10-23T02:59:00.137Z",
+      "pick_reason": "softest rounded tufts in sage green, clover, wildflower clump and mossy pebble strip all separate and uncut; variant 1 had spikier blades"
+    }
+  },
+  "files": {
+    "sheet.png": {
+      "sha256": "b996402002fc871b532868caaa3d5819c4067c320325074db6ac9229ff466f90",
+      "bytes": 2607534,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/f43921f2-18b4-4ca3-9750-1bf478b3f906/0_0.png"
+    }
+  }
+}

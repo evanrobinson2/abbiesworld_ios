@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "hay-rack-charming",
+  "group": "supply",
+  "replaces": "simulation-assets/supplies/hay-{full,partial,empty,carried}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, chunky rounded toy-like proportions, bulging and plump, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "9e299277-b403-4aa9-964f-6a7695b7c2d0",
+      "grid_url": "https://www.midjourney.com/jobs/9e299277-b403-4aa9-964f-6a7695b7c2d0?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "50f52475-396c-47a5-aa90-70e44fe66621",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:28:16.589Z",
+      "grid_done_at": "2026-10-23T01:28:34.594Z",
+      "upscale_clicked_at": "2026-10-23T01:28:44.387Z",
+      "downloaded_at": "2026-10-23T01:29:58.300Z",
+      "pick_reason": "plump V-slatted rack on four legs heaped with hay, clearest V slats"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, chunky rounded toy-like proportions, bulging and plump, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "8a7a6b38-1af1-4f32-89c8-e97cea1bcec5",
+      "grid_url": "https://www.midjourney.com/jobs/8a7a6b38-1af1-4f32-89c8-e97cea1bcec5?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "5687b627-68b0-45a6-8ca8-16e6f52bf6d8",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:30:07.724Z",
+      "grid_done_at": "2026-10-23T01:30:25.729Z",
+      "upscale_clicked_at": "2026-10-23T01:30:35.618Z",
+      "downloaded_at": "2026-10-23T01:31:55.779Z",
+      "pick_reason": "front, three-quarter and end view of one slatted rack with hay, evenly spaced"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "a9c98af36bacb792cde4d9bb1145c94e4e1ee3c418ef3240e1c28beabe78252b",
+      "bytes": 2799230,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/50f52475-396c-47a5-aa90-70e44fe66621/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "1290394995937718e2a460ef3972f8e653ee8160b358158d1b42bf4f8c102733",
+      "bytes": 3037967,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/5687b627-68b0-45a6-8ca8-16e6f52bf6d8/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "44041f6488b6d1dcabe29dfea96ef6c278caa2c5ed7cbf31bc2597c03a32b3ef",
+      "bytes": 921736,
+      "pixels": [
+        879,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hay-rack-charming [('front', 148, 1027), ('side', 1136, 1880), ('back', 1952, 2773)]"
+    },
+    "view_side.png": {
+      "sha256": "f98e39d075f9764fb52ec3944e78c4ca9e9f01899679cf88bfcbcfcfe044acf4",
+      "bytes": 831239,
+      "pixels": [
+        744,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hay-rack-charming [('front', 148, 1027), ('side', 1136, 1880), ('back', 1952, 2773)]"
+    },
+    "view_back.png": {
+      "sha256": "9b4c665a1588a7d92735ca428d89ef84716859747b70ec60468563e57a0e97a0",
+      "bytes": 851884,
+      "pixels": [
+        821,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hay-rack-charming [('front', 148, 1027), ('side', 1136, 1880), ('back', 1952, 2773)]"
+    }
+  }
+}

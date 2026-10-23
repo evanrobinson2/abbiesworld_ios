@@ -1,0 +1,32 @@
+{
+ "what_i_did": [
+  ["Base", "Started from models/compost-bay (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same conventions: Z up, metres, origin at the footprint centre on the ground, front (-Y) is the long open working side and stays one board lower (2 planks against 3). Same four objects and materials: posts Timber_Post, planks Plank_Brown, compost Soil_Compost, clippings Leaf_Green. No new materials. Footprint 1.80 x 1.22 m at the ground; the flared walls and out-leaning corner boards make the outer bounds 1.83 x 1.34 m (ratio 1.37, the normal bay's 1.81 x 1.31 is 1.38), so it drops in for the normal one."],
+  ["Views", "The hero wins and is the only target. views/hero.png is the MJ hero keyed with the normal bay's hue key, which also removes the hero's olive cast shadow (it is warm, G/R inside the backdrop band). The turnaround sheet drew three 3/4 views of a near-cube crate with four plank rows and single corner posts, and no orthographic view, so all three sheet views are dropped and not scored."],
+  ["Hero camera", "hero_check.py renders orthographic from 55 deg off the front towards -X and 18 deg up (calibrated on the round-4 model; the normal bay used -45/18). The grid's best was -60/18 at 0.897, which only over-rotates to hide that the hero's footprint is squarer than ours; -55/18 was kept."],
+  ["Charming massing", "Chunkier and taller than the normal bay: walls 1.0 m (3 planks of 0.29 m, 0.08 m thick, 4.5 cm gaps) instead of 0.73 m, front wall 0.66 m. Each plank is a soft-chamfered board with two cross loops so it can bow 2.5 cm outwards, with a random end-to-end wobble of up to 2.6 deg; the walls flare out 5 cm towards the top."],
+  ["Corner boards", "The hero's doubled corners: each corner has two fat boards (0.22 x 0.10 m), one closing each wall's end, in an L. They lean out about 4 deg, have pinched soft tops, and end at uneven heights (1.04 to 1.16 m) so the back corners poke above the rim like toy pegs. The normal bay's slim mid posts are gone, as in the hero."],
+  ["Heap", "Soil_Compost: a closed 10 x 7 jittered grid filling the bay to the rim (0.90 m, mound 8 cm, lumps 4.5 cm), sloping down to the low front board, plus 40 big four-sided clods (5 to 9 cm) for the hero's chunky crumbly top."],
+  ["Clippings", "Leaf_Green: 26 fat sprigs of 4 to 6 upright folded blades (18 to 30 cm long, 25 to 65 deg up) in the hero's four clumps: a big one over the back-left, one at the right end, a small one near the front and a strip along the back."],
+  ["Game", "4 objects, one material each, 1848 triangles (budget 2k; posts 352, planks 836, compost 400, clippings 260). No animation, export_animations=False. Installed with to_game.py."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.893 from the hero camera (768 px, 48 samples).",
+  "Still clearly the same compost bay at tile size: slatted brown box, dark top, green tufts, low front working side, same footprint ratio.",
+  "Reads as a toy: fat chamfered boards, bowed planks, leaning uneven corner pegs, chunky sprigs."
+ ],
+ "off": [
+  "The hero's box has a near-square footprint; ours keeps the normal bay's 1.8 x 1.3 ratio so it drops into the game, which costs the most IoU (render too long on the right, too short at the near corner).",
+  "The front wall is one board lower than in the hero (kept from the normal bay for the working side).",
+  "The hero's compost is a dense pile of small round crumbs; 40 pyramid clods on a faceted grid read coarser.",
+  "No wood grain or knots: flat colours only, per the game rules.",
+  "Sheet views not scored: all three are 3/4 views of a different, near-cube four-row crate."
+ ],
+ "rounds": [
+  {"round": 1, "change": "Normal bay reshaped: doubled leaning corner boards replacing all posts, thick bowed and wobbling planks (0.215 m rows, walls 0.79 m), flared walls, domed heap above the rim with 22 clods, 20 upright sprigs. Scored from the normal bay's -45/18 camera.", "mean_iou": null, "hero_iou": 0.735},
+  {"round": 2, "change": "Taller toy proportions (0.27 m rows, walls 0.93 m, corner boards 0.96-1.06 m), 2 bending loops per plank instead of 3 to save triangles, more sprigs. Hero camera recalibrated to -50/24.", "mean_iou": null, "hero_iou": 0.871},
+  {"round": 3, "change": "Fatter corner boards (0.22 x 0.10 m), heap lowered to the rim and flattened with 40 bigger clods on a coarser grid, longer broader blades.", "mean_iou": null, "hero_iou": 0.873},
+  {"round": 4, "change": "Rows 0.29 m (walls 1.0 m), corner boards 1.04-1.16 m and leaning 4 deg, more flare (5 cm) and plank wobble, lumpier heap. Camera rechecked and set to -55/18. Depth at the ground cut to 1.22 m so the outer bounds keep the normal bay's width/depth ratio. Final 768 px / 48 samples.", "mean_iou": null, "hero_iou": 0.893}
+ ],
+ "moving_parts": "None: a static garden prop; the game poses models itself.",
+ "creative_additions": "Corner boards end at uneven heights like toy pegs, and the planks belly out as if the heap were pushing on them."
+}

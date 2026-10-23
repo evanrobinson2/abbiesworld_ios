@@ -1,0 +1,268 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/elder-charming",
+ "name": "elder-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "hedge shrub",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "da572294-314a-4c8c-846e-92c9c9ee50e6",
+    "grid_url": "https://www.midjourney.com/jobs/da572294-314a-4c8c-846e-92c9c9ee50e6?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "44dee418-7eba-49cd-9011-a00249d228b3",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:10:12.995Z",
+    "grid_done_at": "2026-10-23T01:10:31.001Z",
+    "upscale_clicked_at": "2026-10-23T01:10:42.254Z",
+    "downloaded_at": "2026-10-23T01:11:54.532Z",
+    "pick_reason": "arching branches with creamy umbels and dark leaflets over plump clumps, whole shrub with margin"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "5435b03d-3d25-442c-96ff-b3e26e12a482",
+    "grid_url": "https://www.midjourney.com/jobs/5435b03d-3d25-442c-96ff-b3e26e12a482?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "2ea86bf9-52ca-4245-891f-e5f4e40c838a",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:12:04.481Z",
+    "grid_done_at": "2026-10-23T01:12:22.487Z",
+    "upscale_clicked_at": "2026-10-23T01:12:32.869Z",
+    "downloaded_at": "2026-10-23T01:13:53.527Z",
+    "pick_reason": "three consistent elders at one scale with umbels and swirly base clumps, separated"
+   }
+  },
+  "files": {
+   "hero.png": "75c0a041090cd136292138978ba3d5bb5da76f5d6b6e44c0390d26150391825b",
+   "turnaround.png": "d75bd5a138b65746ba5acba94cab286dba131c8799e27d51af90a396c42c0e99",
+   "view_front.png": "bcd89dbc3db867328f03ea0fbc79e1369a24325ee41fa93806ae3d45c6656068",
+   "view_side.png": "bb8ee35aa22af2784360e015c5810dbbdbca036cd720f1833e71f5980c05acaf",
+   "view_back.png": "0eef255d864ac04015a4bec4b94a74e5aa013c4aeb67c785bb216a70ac6c8736"
+  },
+  "folder": "tools/ranch-rebuild/mj/elder-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/elder-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build from the hero layout: 20 separate cloud puffs, a twisty trunk with 4 branches, 3 umbrella canopies with smooth flower blobs and leaf skirts. 3,977 tris.",
+    "mean_iou": 0.432,
+    "hero_iou": 0.754
+   },
+   {
+    "round": 2,
+    "change": "Cloud bush rebuilt as 17 bigger, overlapping puffs on a solid core, muted green. Lower-poly flower blobs, more of them. Thicker caps. 3,450 tris.",
+    "mean_iou": 0.41,
+    "hero_iou": 0.782
+   },
+   {
+    "round": 3,
+    "change": "Thicker trunk and branches. Faceted, lumpier flower heads. Left canopy wider, crown fringe hangs longer on the right, slimmer cloud on the right.",
+    "mean_iou": 0.393,
+    "hero_iou": 0.768
+   },
+   {
+    "round": 4,
+    "change": "Leaf bases pulled in (ring 0.45 to 0.85) so stray leaves no longer widen the silhouette. Main branch moved left into the hero's gap.",
+    "mean_iou": 0.404,
+    "hero_iou": 0.754
+   },
+   {
+    "round": 5,
+    "change": "Crown and left canopy lowered and the crown dome flattened. Trunk elbow moved down and left, right side of the cloud bush trimmed.",
+    "mean_iou": 0.388,
+    "hero_iou": 0.777
+   },
+   {
+    "round": 6,
+    "change": "Cloud bush reshaped: an extra low puff at the front left, the upper right lowered and pulled in.",
+    "mean_iou": 0.403,
+    "hero_iou": 0.764
+   },
+   {
+    "round": 7,
+    "change": "Smaller dark canopy under-body (it read as a black plate), lighter shade green, cloud bush colour muted.",
+    "mean_iou": 0.404,
+    "hero_iou": 0.758
+   },
+   {
+    "round": 8,
+    "change": "Two swirls on the back puffs. Leaves trimmed to hold 3,500 tris. Final 768 px / 48 sample render and score, then to_game.py elder-charming.",
+    "mean_iou": 0.406,
+    "hero_iou": 0.775
+   }
+  ],
+  "what_was_done": [
+   [
+    "Starting point",
+    "Copied build.py, make_views.py, hero_check.py and run.sh from models/elder and reshaped them. Same conventions: Z up, metres, origin at the base on the ground, front -Y, no animation and no variants (tree group), export_animations=False. Same material names and roles (Leaf_Shade, Leaf_Dark, Leaf_Mid, Stem_Brown, Flower_Cream, Flower_Ivory, Flower_Butter). One new material for the new detail: Leaf_Cloud, used for the cloud bush and its swirls. It has a Leaf_ name, so the seasons recolour it like the rest of the foliage."
+   ],
+   [
+    "Targets",
+    "make_views.py now keys mj/elder-charming the same way as the normal elder: colour difference OR local texture, so the cream flower heads survive. The background is estimated per row and interpolated where the object touches the image edge. The hero's soft cast shadow runs off to the left along the ground. Everything below the base row (0.856) is cut, and in the band above it only green pixels are kept (green minus blue above 0.22, which keeps the pale cloud clumps and the olive trunk), so the shadow is dropped. The turnaround sheet drew a different tree: tall and narrow (height 1.3 to 2.3 x width), a long bare twisty trunk, a two-tier crown and only a small clump at the foot. The hero is about as wide as it is tall, with a big leaning canopy over a large cloud bush. The hero wins: the sheet views are keyed as they are (not stretched) and scored for reference only. They cap around 0.4."
+   ],
+   [
+    "Layout",
+    "Every position is read off the hero in its own display pixels and converted to metres (3.15 m over 1350 px). The model is built in a screen frame and turned 30 deg, so the hero camera (30 deg off the front, 8 deg up, as in the normal elder) sees the layout as drawn. The footprint is recentred on the origin. Final size: 3.13 x 2.74 m across and 3.04 m tall. Width/depth is 1.14, against 1.08 for the normal elder."
+   ],
+   [
+    "Cloud bush",
+    "This is the charming signature and the solid base of the shrub. 18 plump, slightly lumpy, smooth-shaded puffs sit on a soft core: low on the left where the trunk comes out, piling up to about 1.7 m on the right and wrapping round the back. Eight puffs carry a raised spiral swirl (a thin 3-sided tube wound inward over the puff's face): six face the front and two face the back, so the back view doesn't read as a plain lump."
+   ],
+   [
+    "Trunk",
+    "A chubby, soft, olive trunk (Stem_Brown, recoloured to the hero's olive ochre), 0.20 m in radius with gentle bulges and a 0.30 m root flare. It leans up and left out of the cloud bush to an elbow, then splits: a branch out to the left canopy, the main stem curving back up and right to the crown (with a side branch to its right half), and a low branch to the small canopy that sits on the cloud bush. 6 sides, smooth shaded."
+   ],
+   [
+    "Canopies",
+    "Three umbrella canopies: the big crowning one, tilted down to the right, one out to the left and one small and low on the cloud bush. Each has a lumpy cap of big faceted flower heads in three cream tones (12, 7 and 5 heads, 0.22 to 0.36 m). The heads stay flat shaded, so the facets sparkle like floret clusters. Under each cap is a skirt of oversized, folded leaflet cards (0.34 m) that fan out and droop, longer on the side where the hero hangs them (the crown's right fringe, the left canopy's outer edge). A smaller dark Leaf_Shade under-body fills the gaps."
+   ],
+   [
+    "Game readiness",
+    "3,500 triangles, the same 3.5k budget as the normal elder, in 9 meshes with one flat material each. The leaf cards are double sided. The origin is at the base centre on the ground, Z up, front -Y. There is no animation and there are no variants. to_game.py elder-charming was run at the end."
+   ]
+  ],
+  "creative_additions": "Spiral swirls on the cloud puffs, front and back. A soft root flare where the trunk leaves the cloud bush. Faceted cream heads in three tones, so the flower caps sparkle."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   3.1338019371032715,
+   2.7437822818756104,
+   3.0361547470092773
+  ],
+  "triangles": 3500,
+  "materials": [
+   "Leaf_Shade",
+   "Leaf_Cloud",
+   "Leaf_Dark",
+   "Leaf_Mid",
+   "Stem_Brown",
+   "Flower_Butter",
+   "Flower_Cream",
+   "Flower_Ivory"
+  ],
+  "parts": [
+   {
+    "name": "canopy_core",
+    "materials": [
+     "Leaf_Shade"
+    ]
+   },
+   {
+    "name": "cloud_bush",
+    "materials": [
+     "Leaf_Cloud"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_mid",
+    "materials": [
+     "Leaf_Mid"
+    ]
+   },
+   {
+    "name": "trunk",
+    "materials": [
+     "Stem_Brown"
+    ]
+   },
+   {
+    "name": "umbels_butter",
+    "materials": [
+     "Flower_Butter"
+    ]
+   },
+   {
+    "name": "umbels_cream",
+    "materials": [
+     "Flower_Cream"
+    ]
+   },
+   {
+    "name": "umbels_ivory",
+    "materials": [
+     "Flower_Ivory"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": 0.406,
+  "hero_iou": 0.775,
+  "per_view": {
+   "front": 0.42,
+   "side": 0.381,
+   "back": 0.417
+  },
+  "triangle_budget": 3000,
+  "within_budget": false,
+  "good": [
+   "Hero IoU 0.775 against the keyed hero, from the hero's direction (the normal elder scored 0.792 against its own hero).",
+   "It reads as the same elder (cream umbels over dark leaflets on arching branches) turned into a storybook toy: a leaning, twisty trunk, a plump swirly cloud bush and oversized leaves and flower heads.",
+   "It is clearly a shrub from every side, and the swirls show from the front and the back."
+  ],
+  "off": [
+   "The hero's flower masses are fine, frothy clusters. Mine are big faceted heads, which read at game size but are smoother and more pillow-like up close.",
+   "The hero's cloud puffs are softer, with deeper carved swirls. Mine are low-poly spheres with a raised spiral ridge, to stay in budget.",
+   "The hero's top canopy hangs a longer fringe of leaves on its right, and the left canopy hangs lower on its outer edge. The overlay still shows misses there and around the trunk elbow.",
+   "The sheet views were dropped as targets because they draw a tall, narrow two-tier tree. Their reference IoU is about 0.41.",
+   "The model is taller relative to its width than the normal elder (height/width 0.97 against 0.77), because the charming hero is. The footprint width/depth is 1.14 against 1.08.",
+   "The cloud bush renders a little brighter and more lime than the hero's sage under the harness sun."
+  ]
+ },
+ "exports": {
+  "runtime": "elder-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-159.glb"
+   ]
+  }
+ },
+ "files": {
+  "elder-charming.glb": {
+   "sha256": "e9b9f12909b31d92f678a18bdd83ccd74f0b00837321e6b6554b2c78671ec480",
+   "bytes": 139816
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "8c9d91c5957fcbd6d2706da3416cd9c29ba5654a",
+  "path": "tools/ranch-rebuild/models/elder-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

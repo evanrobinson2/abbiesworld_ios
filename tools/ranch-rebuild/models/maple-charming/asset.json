@@ -1,0 +1,258 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/maple-charming",
+ "name": "maple-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "shade tree",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "c34a56e2-72d5-4fd9-bc0b-a2b83b50fc3c",
+    "grid_url": "https://www.midjourney.com/jobs/c34a56e2-72d5-4fd9-bc0b-a2b83b50fc3c?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "47a5b993-e5cf-446e-b24c-0304e3702850",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:57:36.585Z",
+    "grid_done_at": "2026-10-23T00:57:54.589Z",
+    "upscale_clicked_at": "2026-10-23T00:58:07.396Z",
+    "downloaded_at": "2026-10-23T00:59:19.015Z",
+    "pick_reason": "clearest lobed maple leaves in a rounded crown on a straight trunk, whole tree"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "42332d0f-5e91-48a0-b50a-7073e1234ed3",
+    "grid_url": "https://www.midjourney.com/jobs/42332d0f-5e91-48a0-b50a-7073e1234ed3?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "9b2f6cef-728e-4915-a925-67f31389bf8e",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:59:29.901Z",
+    "grid_done_at": "2026-10-23T00:59:47.905Z",
+    "upscale_clicked_at": "2026-10-23T01:00:05.244Z",
+    "downloaded_at": "2026-10-23T01:01:31.705Z",
+    "pick_reason": "three consistent views with lobed maple leaves and straight trunks, separated, crowns not cropped"
+   }
+  },
+  "files": {
+   "hero.png": "90e507bf95bcf2c87028db5028512dd1c32b5f74d742f7769dbe377318c79767",
+   "turnaround.png": "c0de0c0c27486e24cedd05e83823f29b29815539d5963eb739c5899692dc4f70",
+   "view_front.png": "c24e3412560a95e171ab97524a98ce1fb8d135a2929f1642b540644bf312ff5c",
+   "view_side.png": "fc586ba2a0e56d8c41cb7f7eaa84154edfce3e7cd6b279e4ce5ba4a7fed97a00",
+   "view_back.png": "10e82c075fd6b591a5e6c30d8793bc99c4ead96bfddb1f0788731f029eca6ecb"
+  },
+  "folder": "tools/ranch-rebuild/mj/maple-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/maple-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: twisted chubby trunk, 6 limbs, 8 clumps of puffs plus cap and skirt stars, big dark core.",
+    "mean_iou": 0.602,
+    "hero_iou": 0.738
+   },
+   {
+    "round": 2,
+    "change": "Bigger puffs and stars, skirt pushed out to the clump rim, smaller core, more olive bark.",
+    "mean_iou": 0.616,
+    "hero_iou": 0.766
+   },
+   {
+    "round": 3,
+    "change": "Clumps rebalanced and lowered to the hero's row widths; more cap stars.",
+    "mean_iou": 0.641,
+    "hero_iou": 0.768
+   },
+   {
+    "round": 4,
+    "change": "Crown narrowed and lowered, limbs lowered with it.",
+    "mean_iou": 0.673,
+    "hero_iou": 0.781
+   },
+   {
+    "round": 5,
+    "change": "Right clump pushed out and up (too wide, reverted next round).",
+    "mean_iou": 0.635,
+    "hero_iou": 0.752
+   },
+   {
+    "round": 6,
+    "change": "Right clump back in; upper-left raised, low right raised.",
+    "mean_iou": 0.661,
+    "hero_iou": 0.779
+   },
+   {
+    "round": 7,
+    "change": "Puffs on Leaf_Mid (the hero's mid green) instead of pale Leaf_Light; more cap stars.",
+    "mean_iou": 0.667,
+    "hero_iou": 0.814
+   },
+   {
+    "round": 8,
+    "change": "Cap stars pressed onto the clump faces (facing out, tips down) instead of lying on top; 6-sided puffs to pay for them.",
+    "mean_iou": 0.668,
+    "hero_iou": 0.82
+   },
+   {
+    "round": 9,
+    "change": "One more skirt star per clump and more caps on the sparse clumps (2,828 triangles).",
+    "mean_iou": 0.66,
+    "hero_iou": 0.823
+   },
+   {
+    "round": 10,
+    "change": "Back and front clumps pushed out so the footprint ratio matches the normal maple (w/d 1.054). Final 768 px / 48 samples.",
+    "mean_iou": 0.653,
+    "hero_iou": 0.826
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/maple (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same conventions as the normal maple: Z up, metres, origin at the trunk base on the ground, front -Y, no variants (tree group), the same four materials (Bark_Brown, Leaf_Light, Leaf_Mid, Leaf_Dark, double-sided) and the same part names (trunk, leaves_light, leaves_mid, leaves_dark, crown_core), plus one new part, leaves_puff (Leaf_Mid), for the new cloud puffs. Footprint 5.24 x 4.97 m (w/d 1.054; the normal one is 4.52 x 4.30, w/d 1.052), 6.08 m tall (normal 6.08)."
+   ],
+   [
+    "Scoring",
+    "The hero wins. make_views.py (from models/maple) keys the backdrop and keeps saturated pixels; I added a clamp that walks down the bare trunk and cuts any row that suddenly widens past it, which removes the green ground disc and cast shadow at the foot. Hero IoU is hero_check.py (front-on, 4 deg up, harness lens) against views/hero.png. The turnaround sheet draws a taller, narrower tree (h/w about 1.7 against the hero's 1.22) with a broader brown trunk; I kept the sheet views for the score but fitted the hero, so the sheet IoU sits around 0.65."
+   ],
+   [
+    "Trunk",
+    "Chubby and soft: radius 0.31 m at the ground with a fat 4-lobed root flare, about 0.14 m up the bare trunk (the normal one is 0.09). The centreline has a gentle S-lean read from the hero (left at 1.2 m, right at 2.3 m, back left at the top), and three soft ridges spiral up it 1.1 turns for the hero's rope-twisted look. Smooth shaded, olive bark (118, 108, 44) sampled from the hero."
+   ],
+   [
+    "Limbs",
+    "Six chunky limbs (r 0.075 to 0.035 m) from a lower fork at 2.0 to 3.0 m: two to the left, one to the low right clump, one up right, one front, one back."
+   ],
+   [
+    "Crown",
+    "Broken into eight plump clumps placed from the hero's silhouette: a big top clump, upper left, a big low left one, front centre, right, back, back left, and the low clump hanging on its own limb on the right below the crown, the hero's signature. Each clump is 2 to 4 smooth low-poly cloud puffs (squashed UV balls), oversized maple stars pressed onto its upper and outer face (Leaf_Light/Leaf_Mid), and a skirt of 6 to 9 drooping star plates round its lower rim (Leaf_Mid/Leaf_Dark). A dark smooth core (crown_core, Leaf_Dark) fills the gaps between clumps."
+   ],
+   [
+    "Game readiness",
+    "2,828 triangles (budget 3k, same as the normal maple's). 6 meshes, one material each, all leaf meshes on Leaf_ materials so seasons recolour them. Flat base colours, no textures, no animation. to_game.py maple-charming installed it as simulations/regional-assets-charming/WW-151.glb."
+   ]
+  ],
+  "creative_additions": "Oversized maple stars pressed onto soft cloud clumps; a rope-twist ridge spiralling up the trunk; the low side clump on its own limb, as in the hero."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   5.238399505615234,
+   4.971047401428223,
+   6.083896636962891
+  ],
+  "triangles": 2828,
+  "materials": [
+   "Leaf_Dark",
+   "Leaf_Light",
+   "Leaf_Mid",
+   "Bark_Brown"
+  ],
+  "parts": [
+   {
+    "name": "crown_core",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_light",
+    "materials": [
+     "Leaf_Light"
+    ]
+   },
+   {
+    "name": "leaves_mid",
+    "materials": [
+     "Leaf_Mid"
+    ]
+   },
+   {
+    "name": "leaves_puff",
+    "materials": [
+     "Leaf_Mid"
+    ]
+   },
+   {
+    "name": "trunk",
+    "materials": [
+     "Bark_Brown"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": 0.653,
+  "hero_iou": 0.826,
+  "per_view": {
+   "front": 0.643,
+   "side": 0.734,
+   "back": 0.582
+  },
+  "triangle_budget": 3000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.826: the clumpy, lopsided crown outline, the low right clump hanging on its own limb, and the long bare leaning trunk all line up with the hero.",
+   "It reads as the same maple, made a toy: chubby soft trunk, plump cloud clumps and big friendly maple stars instead of many small plates.",
+   "Footprint ratio matches the normal maple (w/d 1.054 against 1.052), and height is the same, so it swaps in place."
+  ],
+  "off": [
+   "The hero's swirled cloud puffs (spiral rosettes drawn on each puff) are not modelled; on a 3k budget the puffs are plain soft balls.",
+   "The hero's crown is denser with leaves: many more, crisper maple stars. Mine has about 100 stars, so up close more smooth puff shows between them.",
+   "The rope twist on the trunk is subtle at tile size; the S-lean reads, the twist barely does.",
+   "Sheet views score 0.65 (front 0.643, side 0.734, back 0.582): the sheet draws a taller, narrower tree with a darker brown trunk than the hero. I followed the hero."
+  ]
+ },
+ "exports": {
+  "runtime": "maple-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/WW-151.glb"
+   ]
+  }
+ },
+ "files": {
+  "maple-charming.glb": {
+   "sha256": "3bf7b2cfd47d74184c66bda0477624e0508b78b4eadd9df12bd5a079fffb979e",
+   "bytes": 125240
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "114556a15ec72bf3bed53625618e6a3e62f00116",
+  "path": "tools/ranch-rebuild/models/maple-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

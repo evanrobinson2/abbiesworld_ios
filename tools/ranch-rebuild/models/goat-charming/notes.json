@@ -1,0 +1,75 @@
+{
+ "what_i_did": [
+  [
+   "Started from the normal goat",
+   "build.py is models/goat/build.py reshaped: the same 26 named parts plus two cheek plates, the same hierarchy and pivots (body > neck > head > nose/eyes/horns/ears > ear insides/beard; body > tail; body > leg upper > lower > hoof), the same POSE table and the same materials (Fur_Cream, Fur_Tan, Horn_Tan, Horn_Hoof, Skin_Pink, Skin_Eye) plus one new one, Skin_Blush, for the rosy cheeks. Z up, origin at the footprint centre on the ground, head to -Y."
+  ],
+  [
+   "Drawn in metres",
+   "The normal goat's shape numbers were sheet pixels; the charming sheet is dropped, so the numbers in P are plain metres as (y, z) side-view points."
+  ],
+  [
+   "Views",
+   "Only the hero is scored. The turnaround sheet draws a leggy kid with a long upright neck in the front and back views, and its middle view is a three-quarter view with the face turned to the camera, not a side elevation; the hero (a big round head right on a round fluffy body, short stubby legs) wins, so all three sheet views are dropped. make_views.py keys the hero again: the harness mask lost most of the cream fur against the cream backdrop and kept the warm cast shadow, which is as saturated as the tan hooves. The key uses a saturation test against the per-row backdrop, cuts everything below the belly except hand-measured leg boxes, and paints pixels the harness shadow test would drop tan, so harness.target_mask() recovers exactly the cleaned silhouette."
+  ],
+  [
+   "Hero score",
+   "hero_check.py renders the model from the hero's own direction (the goat's left side, 40 deg round towards the front, 3 deg up, from a yaw/elevation grid search) with the harness lens and scores its silhouette against views/hero.png. The standard harness front/side/back renders are in r/ for reference but have no target."
+  ],
+  [
+   "Poses",
+   "idle: standing, head up, cocked and turned as in the hero. feeding: a chibi with a short neck cannot reach the grass standing, so it kneels as real goats do: the front cannons fold back (knees on the ground), the body pitches nose-down about the hind hooves (solved by bisection, 9 deg), then the neck swings down until the muzzle is 3 cm off the ground with the face pitch held at 80 deg (neck 107 deg); ears droop, tail down. rest: front and hind legs fold under, the body drops until the belly is 4 cm off the ground, head up."
+  ],
+  [
+   "Game install",
+   "python tools/ranch-rebuild/to_game.py goat-charming wrote simulation-assets-charming/organics/goat-{idle,feeding,rest}.{json,glb} (and the sandbox2-runtime mirror). The nose is at +X as in the normal goat-idle.json and every material maps to the skin role."
+  ]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.775 (768 px, 48 samples): the big round head with its cock and turn, the chunky back-curling horns, the floppy ears, the round shaggy barrel, the pom-pom tail and the stubby legs in tan socks.",
+  "2954 triangles in every pose, under the 3k goat budget.",
+  "Reads as the same goat as the normal one (same colours, horns, beard, tan legs, upright tail), only as a plush toy."
+ ],
+ "off": [
+  "Footprint is wider than the normal goat: 0.60 x 1.12 m (width/length 0.54) against 0.45 x 0.98 (0.46). The big head and the floppy ears the hero needs set the width; in the game, scaled to the normal length, the charming goat is about 20 % wider and 12 % lower than the normal one.",
+  "The ears hang more steeply than the hero's (narrowed to hold the footprint), so they read as slimmer flaps from the side and the hero overlay misses some ear area.",
+  "The hero's fine fur strokes are modelled as large hanging locks round the belly and a few puffs on the back and legs; finer fur would not read at tile size.",
+  "The game's flat normals make the plush toy look faceted rather than smooth; the forms are kept round with more segments and little jitter.",
+  "In the feeding pose the head turn (baked into the head) makes the face graze slightly sideways."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First charming build from the normal goat's skeleton: round barrel, big round head with a short muzzle on a hidden stub neck, chunky horns, floppy ears, stubby legs, upright pom-pom tail, rosy cheeks, belly puffs, head cocked 9 deg and turned 14 deg. Hero view grid-searched (yaw 35, elev 4).",
+   "mean_iou": 0.739
+  },
+  {
+   "round": 2,
+   "change": "Head 20 % bigger and further forward, horns and ears moved with it, eyes and cheeks placed on the head surface, chunkier legs and hooves.",
+   "mean_iou": 0.756
+  },
+  {
+   "round": 3,
+   "change": "Eyes protrude so they show, ears hung steeper and the head turn cut to 10 deg to bring the width back towards the normal footprint (0.64 to 0.56 m).",
+   "mean_iou": 0.758
+  },
+  {
+   "round": 4,
+   "change": "Body, hind legs and tail moved back (longer barrel, as in the hero; footprint ratio 0.50). Same view 0.753; the view search moved to yaw 40, elev 3, where it scores 0.766.",
+   "mean_iou": 0.766
+  },
+  {
+   "round": 5,
+   "change": "Head another 8 % bigger, horns raised, ears further out and higher (the hero's ears dominate its silhouette).",
+   "mean_iou": 0.775
+  },
+  {
+   "round": 6,
+   "change": "Belly puffs turned into overlapping hanging locks (a shaggy skirt instead of a bead string), broader ears, leg cuffs trimmed to stay under budget. Final render at 768 px, 48 samples: 0.775.",
+   "mean_iou": 0.776
+  }
+ ],
+ "moving_parts": "No animation (the game poses the model). Every part is pivoted at its joint as in the normal goat, so the poses are joint rotations from the POSE table, plus a solved body pitch for kneeling and a body drop for rest.",
+ "creative_additions": "Rosy cheek plates (new Skin_Blush material), a forelock puff between the horns, a fluffy crest along the back, fur cuffs at the knees, a beard with two soft locks, and the kneeling graze for feeding.",
+ "changes_from_normal": "Head about 2.5 x the normal volume, round, carried on the chest with no visible neck, cocked 9 deg and turned 10 deg towards the viewer; short rounded muzzle; big eyes and blush cheeks; chunky curled horns; long floppy ears instead of the sideways leaf ears; a round barrel body with a shaggy skirt of hanging locks instead of the slim faceted body with shards; legs half as long and much thicker with tan socks and big rounded hooves; a pom-pom tail; feeding kneels; lower jitter for a soft moulded look."
+}

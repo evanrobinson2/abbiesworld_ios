@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "hazel-charming",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/GF-158.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "0cfea24c-5081-49a7-9cda-5543744dfd0f",
+      "grid_url": "https://www.midjourney.com/jobs/0cfea24c-5081-49a7-9cda-5543744dfd0f?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "e79e5ed9-e083-456d-9424-a31158e413f9",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:05:58.124Z",
+      "grid_done_at": "2026-10-23T01:06:16.129Z",
+      "upscale_clicked_at": "2026-10-23T01:06:28.030Z",
+      "downloaded_at": "2026-10-23T01:07:39.680Z",
+      "pick_reason": "upright stems with round leaves and swirly clumps, the only variant with visible hazelnut clusters"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "21abec59-4b6c-4067-a123-e7f6da7c792e",
+      "grid_url": "https://www.midjourney.com/jobs/21abec59-4b6c-4067-a123-e7f6da7c792e?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "2820e562-15ca-4a31-9502-1d3a8cc35357",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:07:50.559Z",
+      "grid_done_at": "2026-10-23T01:08:08.562Z",
+      "upscale_clicked_at": "2026-10-23T01:08:28.341Z",
+      "downloaded_at": "2026-10-23T01:09:50.971Z",
+      "pick_reason": "three consistent shrubs with upright stems, swirly base clumps and nut clusters, evenly separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "80c49e25b79a5ed937c332ce894e3e36f1daec367d59ea0cd73798914c587777",
+      "bytes": 2212740,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/e79e5ed9-e083-456d-9424-a31158e413f9/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "f6018e9f05959747a401fd85fdd33ac0b2f7f3e35f3fae735c528b1fded3849c",
+      "bytes": 3690652,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/2820e562-15ca-4a31-9502-1d3a8cc35357/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "40792d6d085e1fe08133b77273460be0997602249082ab55266b5e7e79a4d447",
+      "bytes": 1247438,
+      "pixels": [
+        892,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hazel-charming [('front', 78, 970), ('side', 1004, 1863), ('back', 1890, 2842)]"
+    },
+    "view_side.png": {
+      "sha256": "7aded5d3b999d2a812fccf091e73e64f9f85b3907dc64f2e87dccc2aecc0fc93",
+      "bytes": 1188907,
+      "pixels": [
+        859,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hazel-charming [('front', 78, 970), ('side', 1004, 1863), ('back', 1890, 2842)]"
+    },
+    "view_back.png": {
+      "sha256": "dfa5d5736bcc9d883a29ea312541a075b4f8d6f48a492f067320c53c2a333e8a",
+      "bytes": 1175160,
+      "pixels": [
+        952,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hazel-charming [('front', 78, 970), ('side', 1004, 1863), ('back', 1890, 2842)]"
+    }
+  }
+}

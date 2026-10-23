@@ -1,0 +1,215 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/compost-bay-charming",
+ "name": "compost-bay-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden compost",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, chunky rounded toy-like proportions, a playful little tilt",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "bb570fc7-463e-40ba-a2b7-d75facef7ef5",
+    "grid_url": "https://www.midjourney.com/jobs/bb570fc7-463e-40ba-a2b7-d75facef7ef5?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "506991c3-a9ed-42e6-985c-bf13946de53f",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:14:12.890Z",
+    "grid_done_at": "2026-10-23T01:14:30.893Z",
+    "upscale_clicked_at": "2026-10-23T01:14:42.892Z",
+    "downloaded_at": "2026-10-23T01:15:54.435Z",
+    "pick_reason": "chunky tilted slatted bay with dark compost and green clippings, whole object; like the first set, all variants are closed boxes rather than three-sided"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "3e46e80f-c496-411e-85f7-1d7a627d72c2",
+    "grid_url": "https://www.midjourney.com/jobs/3e46e80f-c496-411e-85f7-1d7a627d72c2?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "ec4d07f1-f23a-4637-9dde-7e59e4d8d467",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:16:04.478Z",
+    "grid_done_at": "2026-10-23T01:16:22.550Z",
+    "upscale_clicked_at": "2026-10-23T01:16:35.152Z",
+    "downloaded_at": "2026-10-23T01:17:58.021Z",
+    "pick_reason": "largest, best-separated three views of one slatted bay with compost and clippings"
+   }
+  },
+  "files": {
+   "hero.png": "d6848664c99bcae7814c392c1ad062bb85368917b3a1937e1c51434e74768876",
+   "turnaround.png": "648498711a9c0e422647e6ed6656d8d2dfa17f8f19b822139c2fb07ecf049fb4",
+   "view_front.png": "6d616ea713b706243da1725af477047d380d51cf7a84c0cb2ece2ba4dc202212",
+   "view_side.png": "a51feba6d6c071e43cd66ddb78f296b6dac5c128ab265643b44005a2302c1c6b",
+   "view_back.png": "1a7573d61f391166ab5d7dcd5049f4a88a5d33da5eb80ce018eb0615f6b625fc"
+  },
+  "folder": "tools/ranch-rebuild/mj/compost-bay-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/compost-bay-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "Normal bay reshaped: doubled leaning corner boards replacing all posts, thick bowed and wobbling planks (0.215 m rows, walls 0.79 m), flared walls, domed heap above the rim with 22 clods, 20 upright sprigs. Scored from the normal bay's -45/18 camera.",
+    "mean_iou": null,
+    "hero_iou": 0.735
+   },
+   {
+    "round": 2,
+    "change": "Taller toy proportions (0.27 m rows, walls 0.93 m, corner boards 0.96-1.06 m), 2 bending loops per plank instead of 3 to save triangles, more sprigs. Hero camera recalibrated to -50/24.",
+    "mean_iou": null,
+    "hero_iou": 0.871
+   },
+   {
+    "round": 3,
+    "change": "Fatter corner boards (0.22 x 0.10 m), heap lowered to the rim and flattened with 40 bigger clods on a coarser grid, longer broader blades.",
+    "mean_iou": null,
+    "hero_iou": 0.873
+   },
+   {
+    "round": 4,
+    "change": "Rows 0.29 m (walls 1.0 m), corner boards 1.04-1.16 m and leaning 4 deg, more flare (5 cm) and plank wobble, lumpier heap. Camera rechecked and set to -55/18. Depth at the ground cut to 1.22 m so the outer bounds keep the normal bay's width/depth ratio. Final 768 px / 48 samples.",
+    "mean_iou": null,
+    "hero_iou": 0.893
+   }
+  ],
+  "what_was_done": [
+   [
+    "Base",
+    "Started from models/compost-bay (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same conventions: Z up, metres, origin at the footprint centre on the ground, front (-Y) is the long open working side and stays one board lower (2 planks against 3). Same four objects and materials: posts Timber_Post, planks Plank_Brown, compost Soil_Compost, clippings Leaf_Green. No new materials. Footprint 1.80 x 1.22 m at the ground; the flared walls and out-leaning corner boards make the outer bounds 1.83 x 1.34 m (ratio 1.37, the normal bay's 1.81 x 1.31 is 1.38), so it drops in for the normal one."
+   ],
+   [
+    "Views",
+    "The hero wins and is the only target. views/hero.png is the MJ hero keyed with the normal bay's hue key, which also removes the hero's olive cast shadow (it is warm, G/R inside the backdrop band). The turnaround sheet drew three 3/4 views of a near-cube crate with four plank rows and single corner posts, and no orthographic view, so all three sheet views are dropped and not scored."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders orthographic from 55 deg off the front towards -X and 18 deg up (calibrated on the round-4 model; the normal bay used -45/18). The grid's best was -60/18 at 0.897, which only over-rotates to hide that the hero's footprint is squarer than ours; -55/18 was kept."
+   ],
+   [
+    "Charming massing",
+    "Chunkier and taller than the normal bay: walls 1.0 m (3 planks of 0.29 m, 0.08 m thick, 4.5 cm gaps) instead of 0.73 m, front wall 0.66 m. Each plank is a soft-chamfered board with two cross loops so it can bow 2.5 cm outwards, with a random end-to-end wobble of up to 2.6 deg; the walls flare out 5 cm towards the top."
+   ],
+   [
+    "Corner boards",
+    "The hero's doubled corners: each corner has two fat boards (0.22 x 0.10 m), one closing each wall's end, in an L. They lean out about 4 deg, have pinched soft tops, and end at uneven heights (1.04 to 1.16 m) so the back corners poke above the rim like toy pegs. The normal bay's slim mid posts are gone, as in the hero."
+   ],
+   [
+    "Heap",
+    "Soil_Compost: a closed 10 x 7 jittered grid filling the bay to the rim (0.90 m, mound 8 cm, lumps 4.5 cm), sloping down to the low front board, plus 40 big four-sided clods (5 to 9 cm) for the hero's chunky crumbly top."
+   ],
+   [
+    "Clippings",
+    "Leaf_Green: 26 fat sprigs of 4 to 6 upright folded blades (18 to 30 cm long, 25 to 65 deg up) in the hero's four clumps: a big one over the back-left, one at the right end, a small one near the front and a strip along the back."
+   ],
+   [
+    "Game",
+    "4 objects, one material each, 1848 triangles (budget 2k; posts 352, planks 836, compost 400, clippings 260). No animation, export_animations=False. Installed with to_game.py."
+   ]
+  ],
+  "creative_additions": "Corner boards end at uneven heights like toy pegs, and the planks belly out as if the heap were pushing on them."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.8335529565811157,
+   1.343982219696045,
+   1.249491810798645
+  ],
+  "triangles": 1848,
+  "materials": [
+   "Leaf_Green",
+   "Soil_Compost",
+   "Plank_Brown",
+   "Timber_Post"
+  ],
+  "parts": [
+   {
+    "name": "clippings",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "compost",
+    "materials": [
+     "Soil_Compost"
+    ]
+   },
+   {
+    "name": "planks",
+    "materials": [
+     "Plank_Brown"
+    ]
+   },
+   {
+    "name": "posts",
+    "materials": [
+     "Timber_Post"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.893,
+  "per_view": {},
+  "triangle_budget": 2000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.893 from the hero camera (768 px, 48 samples).",
+   "Still clearly the same compost bay at tile size: slatted brown box, dark top, green tufts, low front working side, same footprint ratio.",
+   "Reads as a toy: fat chamfered boards, bowed planks, leaning uneven corner pegs, chunky sprigs."
+  ],
+  "off": [
+   "The hero's box has a near-square footprint; ours keeps the normal bay's 1.8 x 1.3 ratio so it drops into the game, which costs the most IoU (render too long on the right, too short at the near corner).",
+   "The front wall is one board lower than in the hero (kept from the normal bay for the working side).",
+   "The hero's compost is a dense pile of small round crumbs; 40 pyramid clods on a faceted grid read coarser.",
+   "No wood grain or knots: flat colours only, per the game rules.",
+   "Sheet views not scored: all three are 3/4 views of a different, near-cube four-row crate."
+  ]
+ },
+ "exports": {
+  "runtime": "compost-bay-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/garden-assets/GF-019.glb"
+   ]
+  }
+ },
+ "files": {
+  "compost-bay-charming.glb": {
+   "sha256": "129b3efcd09d32afc7e454048325fa270771077696d5ef15142d175886f8a18a",
+   "bytes": 116272
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "542aceea861e4d83c2ad9ca9d172f77e68ac42c1",
+  "path": "tools/ranch-rebuild/models/compost-bay-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

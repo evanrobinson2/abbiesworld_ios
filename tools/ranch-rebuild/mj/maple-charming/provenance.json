@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "maple-charming",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/WW-151.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "c34a56e2-72d5-4fd9-bc0b-a2b83b50fc3c",
+      "grid_url": "https://www.midjourney.com/jobs/c34a56e2-72d5-4fd9-bc0b-a2b83b50fc3c?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "47a5b993-e5cf-446e-b24c-0304e3702850",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:57:36.585Z",
+      "grid_done_at": "2026-10-23T00:57:54.589Z",
+      "upscale_clicked_at": "2026-10-23T00:58:07.396Z",
+      "downloaded_at": "2026-10-23T00:59:19.015Z",
+      "pick_reason": "clearest lobed maple leaves in a rounded crown on a straight trunk, whole tree"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, plump swirling cloud-like leaf clumps, a soft twisty trunk, toy-like rounded shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "42332d0f-5e91-48a0-b50a-7073e1234ed3",
+      "grid_url": "https://www.midjourney.com/jobs/42332d0f-5e91-48a0-b50a-7073e1234ed3?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "9b2f6cef-728e-4915-a925-67f31389bf8e",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:59:29.901Z",
+      "grid_done_at": "2026-10-23T00:59:47.905Z",
+      "upscale_clicked_at": "2026-10-23T01:00:05.244Z",
+      "downloaded_at": "2026-10-23T01:01:31.705Z",
+      "pick_reason": "three consistent views with lobed maple leaves and straight trunks, separated, crowns not cropped"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "90e507bf95bcf2c87028db5028512dd1c32b5f74d742f7769dbe377318c79767",
+      "bytes": 2062824,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/47a5b993-e5cf-446e-b24c-0304e3702850/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "c0de0c0c27486e24cedd05e83823f29b29815539d5963eb739c5899692dc4f70",
+      "bytes": 3486074,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/9b2f6cef-728e-4915-a925-67f31389bf8e/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "c24e3412560a95e171ab97524a98ce1fb8d135a2929f1642b540644bf312ff5c",
+      "bytes": 1125436,
+      "pixels": [
+        887,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/maple-charming [('front', 160, 1047), ('side', 1047, 1952), ('back', 1952, 2776)]"
+    },
+    "view_side.png": {
+      "sha256": "fc586ba2a0e56d8c41cb7f7eaa84154edfce3e7cd6b279e4ce5ba4a7fed97a00",
+      "bytes": 1207879,
+      "pixels": [
+        905,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/maple-charming [('front', 160, 1047), ('side', 1047, 1952), ('back', 1952, 2776)]"
+    },
+    "view_back.png": {
+      "sha256": "10e82c075fd6b591a5e6c30d8793bc99c4ead96bfddb1f0788731f029eca6ecb",
+      "bytes": 1024651,
+      "pixels": [
+        824,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/maple-charming [('front', 160, 1047), ('side', 1047, 1952), ('back', 1952, 2776)]"
+    }
+  }
+}

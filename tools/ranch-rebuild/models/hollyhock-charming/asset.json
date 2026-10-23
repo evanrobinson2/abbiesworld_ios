@@ -1,0 +1,208 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/hollyhock-charming",
+ "name": "hollyhock-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "63a005d2-798f-4124-a4f4-95745eab8936",
+    "grid_url": "https://www.midjourney.com/jobs/63a005d2-798f-4124-a4f4-95745eab8936?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "e39e5864-fe0e-454e-b660-b1282b24ba21",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T01:47:26.098Z",
+    "grid_done_at": "2026-10-23T01:47:44.102Z",
+    "upscale_clicked_at": "2026-10-23T01:47:53.711Z",
+    "downloaded_at": "2026-10-23T01:49:05.494Z",
+    "pick_reason": "stacked plump pink cups on a spire with round base leaves, tip clear of the top edge"
+   }
+  },
+  "files": {
+   "hero.png": "a2febf1db6a270ccef5fa0d2c100dc6dd816ccd7b5c63b39a0b2d7710d268520"
+  },
+  "folder": "tools/ranch-rebuild/mj/hollyhock-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/hollyhock-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "Charming reshape of the normal build: 11 plump flared blooms, chubby buds, thicker stalk, round leaves, 3.5 cm lean.",
+    "mean_iou": 0.67
+   },
+   {
+    "round": 2,
+    "change": "Buds 25 % bigger, leaves 22 % bigger and spread out, smaller and lighter rose throats.",
+    "mean_iou": 0.682
+   },
+   {
+    "round": 3,
+    "change": "Leaves lowered and pulled in to the normal footprint (0.60 m); lowest blooms bigger (12.5 cm) and set further out.",
+    "mean_iou": 0.71
+   },
+   {
+    "round": 4,
+    "change": "Swept lean (0, -2, 1.5, 3.5, 6 cm), spiral phase and bloom front bias: the hero is nearly straight, lean cut to 1.5 cm; phase 3.0 and front bias 1.5 kept.",
+    "mean_iou": 0.744
+   },
+   {
+    "round": 5,
+    "change": "Base leaves turned more to the front (leaf_front 1.4) so they read as round discs; buds 20 % bigger.",
+    "mean_iou": 0.754
+   },
+   {
+    "round": 6,
+    "change": "Buds rebuilt from gem-like bipyramids into rounded two-ring buds; stalk 4 segments to stay under 1k. Final 768 px / 48 sample render.",
+    "mean_iou": 0.751
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied the finished normal hollyhock (build.py, make_views.py, hero_check.py, run.sh) and reshaped it to the charming hero, keeping its structure: 7 meshes with the same names and the same 7 materials (Stem_Green, Petal_Pink, Petal_Rose, Flower_Yellow, Leaf_Bud, Leaf_Green, Leaf_Pale; no new ones), origin at the stalk foot on the ground, front -Y, same 1.45 m height and nearly the same footprint (0.604 x 0.329 m versus the normal 0.592 x 0.384; width/height ratio 0.42 versus 0.41). No variants (plant)."
+   ],
+   [
+    "Target",
+    "Hero only (prompts-charming.json has no turnaround). make_views.py keys the charming hero against its cream backdrop and removes the blue-grey cast shadow, which here runs off to the RIGHT (the normal hero's went left): low-saturation pixels below row 1880, everything right of column 1355 below row 1880, and the brown soil patch below the lowest leaf rim (row 1968). Mask aspect 2.46, the same as the model's."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py unchanged from the normal model: front-on, 6 deg above, harness lens and distance."
+   ],
+   [
+    "Charming reshape",
+    "Blooms: 11 big plump five-petal cups instead of 24 small ones (rim 12.5 to 8 cm), each petal a rounded lobe (notch, two shoulders, tip, 20-vertex rim) with the tips curling forward, a deeper throat (0.62 rim radii), a smaller, softer rose throat so the cup reads pink, 43 triangles each. Buds: nine chunky round buds (two five-sided rings, blunt tops), about 40 % fatter than the normal model's, crowding the top third, pink then green. Stalk: about 50 % thicker, six-sided. Leaves: seven big round leaves with only a shallow notch (the normal's are scalloped hearts), less facet jitter, turned to face the viewer like the hero's toy discs; pale ones in front, dark ones behind. A gentle lean to +X (1.5 cm at the tip)."
+   ]
+  ],
+  "creative_additions": "Forward-curling petal tips, buds shading from pink to green up the tip, and a slight lean."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.6042771339416504,
+   0.3291586637496948,
+   1.4479999542236328
+  ],
+  "triangles": 989,
+  "materials": [
+   "Petal_Pink",
+   "Leaf_Bud",
+   "Flower_Yellow",
+   "Leaf_Green",
+   "Leaf_Pale",
+   "Stem_Green",
+   "Petal_Rose"
+  ],
+  "parts": [
+   {
+    "name": "blooms",
+    "materials": [
+     "Petal_Pink"
+    ]
+   },
+   {
+    "name": "buds",
+    "materials": [
+     "Leaf_Bud"
+    ]
+   },
+   {
+    "name": "centres",
+    "materials": [
+     "Flower_Yellow"
+    ]
+   },
+   {
+    "name": "leaves",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "leaves_pale",
+    "materials": [
+     "Leaf_Pale"
+    ]
+   },
+   {
+    "name": "stalk",
+    "materials": [
+     "Stem_Green"
+    ]
+   },
+   {
+    "name": "throats",
+    "materials": [
+     "Petal_Rose"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.751,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero IoU 0.751 at 768 px / 48 samples: a tall spire of big round pink cups over a low clump of big round leaves.",
+   "989 triangles, under the 1k flower budget.",
+   "Same materials, names, origin and proportions as the normal hollyhock, so it swaps in place."
+  ],
+  "off": [
+   "Lean kept small: sweeps showed the hero spire is nearly straight (lean 0 scored 0.754, 3.5 cm scored 0.71, 6 cm 0.68), so the charming tilt is mostly in the plump, flared blooms and fat buds rather than in a bent stalk.",
+   "The hero's leaves are distinct discs with veins and visible petioles; mine overlap into one round clump at hero size.",
+   "The hero has small leafy bracts among the buds; mine has only the four small stem leaves, mostly hidden behind the blooms.",
+   "The hero's top blooms show their side (trumpet profile) more often; mine face mostly to the front."
+  ]
+ },
+ "exports": {
+  "runtime": "hollyhock-charming.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-634.glb"
+   ]
+  }
+ },
+ "files": {
+  "hollyhock-charming.glb": {
+   "sha256": "ba5f481226a3f459ccc1638cf4c5550e204983cc253c3573ccecef712a15ea6b",
+   "bytes": 80224
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "ef0418be4080130f0d51b98c90e1501c3580d775",
+  "path": "tools/ranch-rebuild/models/hollyhock-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
