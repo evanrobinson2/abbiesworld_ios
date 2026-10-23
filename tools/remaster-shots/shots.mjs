@@ -15,6 +15,7 @@ await tab.waitForTimeout(4000);
 await tab.evaluate(()=>{const c=[...document.querySelectorAll('canvas')].sort((a,b)=>b.width*b.height-a.width*a.height)[0];
  for(const el of document.body.querySelectorAll('*')){if(el===c||el.contains(c)||c.contains(el))continue;el.style.setProperty('visibility','hidden','important');}});
 for(const s of shots){
+ if(s.weather)await tab.evaluate(w=>window.holodeck.apply([{op:'weather',args:{mode:w}}]),s.weather);
  const ops=[];if(s.hour!==undefined){await tab.evaluate(h=>window.holodeck.apply([{op:'time',args:{hour:h,paused:false}}]),s.hour);await tab.waitForTimeout(1500);ops.push({op:'time',args:{hour:s.hour,paused:true}});}
  ops.push({op:'camera',args:s.fit?{fit:true}:{position:s.position,target:s.target,duration:0,...(s.fov?{fov:s.fov}:{})}});
  const r=await tab.evaluate(ops=>window.holodeck.apply(ops),ops);if(!r.ok)console.log(s.id,r.error);

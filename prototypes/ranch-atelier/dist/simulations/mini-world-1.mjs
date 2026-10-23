@@ -60,7 +60,7 @@ import {setEcologyYear} from './ranch-seasons.mjs?v=6';
 import {ACTIVITY_RATE,dayName} from './ranch-rhythm.mjs?v=3';
 import {ranchName} from './ranch-names.mjs';
 import {advanceClock,timeOfDay,TIME_HOURS,nightProgress} from './ranch-clock.mjs?v=2';
-import {createFarmLights} from './ranch-lights.mjs?clock=4';
+import {createFarmLights} from './ranch-lights.mjs?clock=5';
 import {facetPicker} from './facet-picker.mjs';
 import {REGIONAL} from './ranch-regional.mjs?v=3';
 import {attachSeasons,setSeasonAppearance} from './ranch-seasons.mjs?v=6';

@@ -9,8 +9,8 @@ import {WEATHER,easeWeather,frontApproach} from './simulation/weather-state.mjs'
 // masked, and a cloud passing over the ranch shows as its shadow sliding across the fields.
 const CLOUDS=16,PUFFS=7;
 const col=hex=>new T.Color(hex);
-const TONES={dayLit:col('#fffaf1'),warmLit:col('#ffc995'),nightLit:col('#3c4862'),stormLit:col('#77818f'),
- dayShade:col('#8c9cb4'),warmShade:col('#9a7f98'),nightShade:col('#121827'),stormShade:col('#38414e'),flash:col('#e9eeff')};
+const TONES={dayLit:col('#fffaf1'),warmLit:col('#ffc995'),nightLit:col('#5a6a90'),stormLit:col('#77818f'),
+ dayShade:col('#8c9cb4'),warmShade:col('#9a7f98'),nightShade:col('#26304a'),stormShade:col('#38414e'),flash:col('#e9eeff')};
 export function createRanchWeather({scene,assembly,heightAt,seed=1}){
  const root=new T.Group();root.name='Weather';scene.add(root);
  let rngSeed=seed>>>0;const random=()=>((rngSeed=Math.imul(rngSeed,1664525)+1013904223>>>0)/4294967296);

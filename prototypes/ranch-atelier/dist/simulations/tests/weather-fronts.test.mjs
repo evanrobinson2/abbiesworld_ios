@@ -37,3 +37,15 @@ assert.ok(found, 'an arriving rain front');
 assert.ok(frontApproach(found) > .7 && stormNear(found));
 assert.equal(stormNear({front: 'arriving', next: 'rain', inHours: 3}), false);
 console.log('weather fronts ok');
+
+// One light signal: day paper, golden dusk, ink-blue night (remaster study R5).
+const {ranchLight} = await import('../ranch-light.mjs');
+const {solarCycle} = await import('../simulation/solar-cycle.mjs');
+const lum = c => .2126 * c.r + .7152 * c.g + .0722 * c.b;
+const noon = ranchLight(solarCycle(12, .25)), dusk = ranchLight(solarCycle(19.3, .25)), night = ranchLight(solarCycle(23, .25));
+assert.ok(lum(night.glow) < lum(noon.glow) * .25, 'night is much darker than day');
+assert.ok(night.glow.b > night.glow.g && night.glow.b > night.glow.r, 'night is blue');
+assert.ok(dusk.sun.r - dusk.sun.b > noon.sun.r - noon.sun.b, 'the low sun is golden');
+const storm = ranchLight(solarCycle(12, .25), {overcast: 1, storm: .8});
+assert.ok(lum(storm.glow) < lum(noon.glow), 'storms darken the sky');
+console.log('ranch light ok');
