@@ -1,0 +1,305 @@
+{
+ "bones": [
+  "hips",
+  "spine",
+  "chest",
+  "neck",
+  "head",
+  "clavicle_L",
+  "upperarm_L",
+  "forearm_L",
+  "hand_L",
+  "clavicle_R",
+  "upperarm_R",
+  "forearm_R",
+  "hand_R",
+  "thigh_L",
+  "shin_L",
+  "foot_L",
+  "thigh_R",
+  "shin_R",
+  "foot_R"
+ ],
+ "clips": {
+  "idle": {
+   "file": "idle.json",
+   "source": "111_32",
+   "what": "stretch and yawn",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "walk": {
+   "file": "walk.json",
+   "source": "105_29",
+   "what": "normal walk",
+   "loop": true,
+   "seconds": 1.23
+  },
+  "wave": {
+   "file": "wave.json",
+   "source": "111_37",
+   "what": "wave",
+   "loop": false,
+   "seconds": 2.7
+  },
+  "sit": {
+   "file": "sit.json",
+   "source": "113_15",
+   "what": "sit in chair and get up",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "run": {
+   "file": "run.json",
+   "source": "113_07",
+   "what": "run",
+   "loop": true,
+   "seconds": 0.77
+  },
+  "jump": {
+   "file": "jump.json",
+   "source": "118_01",
+   "what": "jump",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "flip": {
+   "file": "flip.json",
+   "source": "49_06",
+   "what": "cartwheel",
+   "loop": false,
+   "seconds": 4.03
+  },
+  "hang": {
+   "file": "hang.json",
+   "source": "01_03",
+   "what": "playground climb, hang, swing",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "climb": {
+   "file": "climb.json",
+   "source": "01_02",
+   "what": "playground climb",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "stance": {
+   "file": "stance.json",
+   "source": "13_17",
+   "what": "boxing",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "jabcross": {
+   "file": "jabcross.json",
+   "source": "14_01",
+   "what": "boxing",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "kick": {
+   "file": "kick.json",
+   "source": "113_13",
+   "what": "punch and kick",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "uppercut": {
+   "file": "uppercut.json",
+   "source": "111_19",
+   "what": "punch kick",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "slash": {
+   "file": "slash.json",
+   "source": "02_07",
+   "what": "swordplay",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "potion": {
+   "file": "potion.json",
+   "source": "13_09",
+   "what": "drink soda",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "sneak": {
+   "file": "sneak.json",
+   "source": "120_08",
+   "what": "sneaky walk",
+   "loop": true,
+   "seconds": 2.23
+  },
+  "tiptoe": {
+   "file": "tiptoe.json",
+   "source": "13_10",
+   "what": "reach for, tiptoe",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "look": {
+   "file": "look.json",
+   "source": "77_05",
+   "what": "look around with flashlight",
+   "loop": false,
+   "seconds": 4.27
+  },
+  "cower": {
+   "file": "cower.json",
+   "source": "142_16",
+   "what": "scared",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "zombie": {
+   "file": "zombie.json",
+   "source": "104_41",
+   "what": "zombie walk",
+   "loop": true,
+   "seconds": 1.63
+  },
+  "soccer": {
+   "file": "soccer.json",
+   "source": "10_01",
+   "what": "soccer, kick ball",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "hoops": {
+   "file": "hoops.json",
+   "source": "06_14",
+   "what": "basketball",
+   "loop": false,
+   "seconds": 4.0
+  },
+  "bat": {
+   "file": "bat.json",
+   "source": "124_07",
+   "what": "baseball swing",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "golf": {
+   "file": "golf.json",
+   "source": "64_01",
+   "what": "golf swing",
+   "loop": false,
+   "seconds": 3.73
+  },
+  "swim": {
+   "file": "swim.json",
+   "source": "79_02",
+   "what": "swimming (pantomime)",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "throw": {
+   "file": "throw.json",
+   "source": "113_24",
+   "what": "throw",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "aimwalk": {
+   "file": "aimwalk.json",
+   "source": "105_18",
+   "what": "careful walk, looking around",
+   "loop": true,
+   "seconds": 1.83
+  },
+  "hammer": {
+   "file": "hammer.json",
+   "source": "62_07",
+   "what": "hammering a nail",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "chop": {
+   "file": "chop.json",
+   "source": "79_01",
+   "what": "chopping wood",
+   "loop": false,
+   "seconds": 4.9
+  },
+  "dig": {
+   "file": "dig.json",
+   "source": "79_04",
+   "what": "digging",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "carry": {
+   "file": "carry.json",
+   "source": "70_03",
+   "what": "carry a suitcase",
+   "loop": true,
+   "seconds": 1.97
+  },
+  "push": {
+   "file": "push.json",
+   "source": "79_30",
+   "what": "pushing a swing",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "disco": {
+   "file": "disco.json",
+   "source": "111_05",
+   "what": "dance",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "robot": {
+   "file": "robot.json",
+   "source": "120_21",
+   "what": "robot",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "twist": {
+   "file": "twist.json",
+   "source": "13_29",
+   "what": "jumping jacks, side twists",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "charleston": {
+   "file": "charleston.json",
+   "source": "60_01",
+   "what": "salsa",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "cheer": {
+   "file": "cheer.json",
+   "source": "13_29",
+   "what": "jumping jacks",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "sad": {
+   "file": "sad.json",
+   "source": "105_13",
+   "what": "sad walk",
+   "loop": true,
+   "seconds": 1.83
+  },
+  "laugh": {
+   "file": "laugh.json",
+   "source": "13_14",
+   "what": "laugh",
+   "loop": false,
+   "seconds": 5.0
+  },
+  "shrug": {
+   "file": "shrug.json",
+   "source": "111_25",
+   "what": "shrug",
+   "loop": false,
+   "seconds": 2.43
+  }
+ }
+}

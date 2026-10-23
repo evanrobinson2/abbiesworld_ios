@@ -30,7 +30,7 @@ function K(keys, {snap = 0} = {}) {
  f.len = len; return f;
 }
 // a walk cycle; o: len (s), stride, knee, arm, elbow, bounce, lean, twist, crouch (thigh bias), plus overrides
-function gait(o) {
+export function gait(o) {
  o = {len: 1.05, stride: 24, knee: 42, arm: 18, elbow: 18, bounce: .025, lean: 2, twist: 6, crouch: 0, toe: 0, sway: 2, ...o};
  const f = t => {
   const p = t / o.len * TAU, s = sin(p), c = cos(p);
@@ -46,7 +46,8 @@ function gait(o) {
    root: [0, -o.bounce * abs(s), 0]});
   return o.more ? o.more(pose, p, t) : pose;
  };
- f.len = o.len; f.speed = o.speed ?? (o.stride / 24) * 1.15 / o.len * 1.05; return f;
+ // ground speed in hip heights a second: two steps a cycle, each about 2 leg lengths x sin(stride)
+ f.len = o.len; f.speed = o.speed ?? 4 * Math.sin((o.stride + o.crouch * .3) * Math.PI / 180) / o.len; return f;
 }
 const loop = (len, fn) => { const f = t => fn(((t % len) + len) % len / len * TAU, t); f.len = len; return f; };
 

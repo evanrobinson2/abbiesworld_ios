@@ -1,205 +1,305 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-aw-skin="look study">
 <head>
 <meta charset="utf-8">
 <title>Character Studio</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap">
+<script src="/theme/boot.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
 <style>
-/* AW-STUDY-0037 Character Studio. Layout: the stage fills the screen; the cast and looks float top right as glass
-   pebbles; the move shelf (genres, then moves) floats at the bottom like a toy drawer. */
+/* AW-STUDY-0037 Character Studio. Layout (docs/design/look/LOOK.md): the stage is the page. A thin top bar (AW mark,
+   name, the three rooms). The cast stands as portrait blocks down the left edge, the art directions as swatch blocks
+   down the right. The moves live in a drawer at the bottom: genre blocks, then pose tiles you can see before you tap.
+   Flat colour, Roboto, toy blocks that press down; glass only as small lenses. */
 :root{
- --sky-top:#f6d9b8; --sky-low:#f3ecdf; --ink:#2b2236; --soft:#6d5f78; --glass:rgba(255,250,244,.62); --rim:rgba(255,255,255,.75);
- --accent:#e2557a; --accent-ink:#fff; --chip:rgba(255,255,255,.55); --shadow:rgba(60,30,50,.18);
- --display:'Fredoka',ui-rounded,system-ui,sans-serif; --body:'Nunito Sans',system-ui,-apple-system,sans-serif;
+ --bg:var(--aw-bg,#f3eee3); --surface:var(--aw-surface,#fbf8f2); --ink:var(--aw-ink,#2b2218); --soft:var(--aw-soft,#6b5d4c);
+ --line:var(--aw-line,#e2d8c6); --accent:var(--aw-accent,#7a5236); --on-accent:var(--aw-on-accent,#ffffff); --edge:color-mix(in srgb,var(--accent) 35%,var(--line));
+ --font:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif; --r:14px;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sky-top:#2a2440;--sky-low:#433052;--ink:#f7eefa;--soft:#c9b8d4;--glass:rgba(40,30,56,.6);--rim:rgba(255,255,255,.22);--chip:rgba(255,255,255,.1);--shadow:rgba(0,0,0,.4);color-scheme:dark}}
-:root[data-theme="dark"]{--sky-top:#2a2440;--sky-low:#433052;--ink:#f7eefa;--soft:#c9b8d4;--glass:rgba(40,30,56,.6);--rim:rgba(255,255,255,.22);--chip:rgba(255,255,255,.1);--shadow:rgba(0,0,0,.4);color-scheme:dark}
 html,body{height:100%;margin:0}
-body{background:linear-gradient(var(--sky-top),var(--sky-low));color:var(--ink);font:15px/1.4 var(--body);overflow:hidden;-webkit-font-smoothing:antialiased}
-#stage{position:fixed;inset:0;display:block;width:100%;height:100%;touch-action:none}
-.glass{background:linear-gradient(160deg,rgba(255,255,255,.4),transparent 55%),var(--glass);border:1px solid var(--rim);
- box-shadow:0 10px 30px var(--shadow),inset 0 1px 0 rgba(255,255,255,.6);backdrop-filter:saturate(1.5);-webkit-backdrop-filter:saturate(1.5);border-radius:22px}
-.top{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));
- display:flex;gap:10px;align-items:flex-start;justify-content:space-between;pointer-events:none;z-index:3}
-.top>*{pointer-events:auto}
-.name{padding:10px 16px}
-.name h1{margin:0;font:600 20px/1.1 var(--display);letter-spacing:.2px}
-.name p{margin:2px 0 0;font-size:12px;color:var(--soft);letter-spacing:.4px}
-.pickers{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
-.row{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;padding:6px}
-button{font:600 13px/1 var(--body);color:var(--ink);background:var(--chip);border:1px solid var(--rim);border-radius:999px;padding:9px 13px;cursor:pointer;white-space:nowrap}
-button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:transparent;box-shadow:0 4px 14px rgba(226,85,122,.35)}
-button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.shelf{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 12px);
- padding:10px 10px 12px;z-index:3;display:flex;flex-direction:column;gap:8px}
-.scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
-.scroll::-webkit-scrollbar{display:none}
-.genre{font-family:var(--display);font-weight:500;font-size:14px}
-.genre small{font:600 11px var(--body);opacity:.7;margin-left:4px}
-.now{display:flex;align-items:baseline;gap:10px;padding:0 6px}
-.now b{font:600 17px var(--display)}
-.now span{font-size:12px;color:var(--soft);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.now .grow{flex:1}
-#twod{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
-#twod iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-#load{position:fixed;left:50%;top:46%;transform:translate(-50%,-50%);font:600 15px var(--display);color:var(--soft);z-index:2}
-@media (max-width:640px){.top{flex-direction:column}.name p,#nowFrom{display:none}.pickers{flex-direction:row;overflow-x:auto;width:100%;scrollbar-width:none}.pickers::-webkit-scrollbar{display:none}.row{flex:none;flex-wrap:nowrap}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.35 var(--font);overflow:hidden;-webkit-font-smoothing:antialiased}
+#stage{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.frame{position:fixed;inset:0;border:0;width:100%;height:100%;background:var(--bg)}
+.bar{position:fixed;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;gap:10px;
+ padding:calc(env(safe-area-inset-top,0px) + 10px) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:700 13px var(--font);letter-spacing:.5px;flex:none}
+.title{font:500 16px var(--font);white-space:nowrap}
+.title small{display:block;font:400 11px var(--font);color:var(--soft);letter-spacing:.3px}
+.grow{flex:1}
+.block{font:500 13px var(--font);color:var(--ink);background:var(--surface);border:0;border-radius:10px;padding:8px 12px;cursor:pointer;
+ box-shadow:0 3px 0 var(--edge);transform:translateY(-3px);transition:transform .08s,box-shadow .08s;white-space:nowrap}
+.block:active{transform:translateY(0);box-shadow:0 0 0 var(--edge)}
+.block[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 60%,#000)}
+.block:focus-visible,.tile:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.rail{position:fixed;top:calc(env(safe-area-inset-top,0px) + 62px);z-index:3;display:flex;flex-direction:column;gap:22px}
+.rail.left{left:max(16px,env(safe-area-inset-left,0px))}
+.rail.right{right:max(16px,env(safe-area-inset-right,0px));align-items:flex-end}
+.tile{position:relative;width:58px;height:58px;border:0;padding:0;border-radius:var(--r);background:var(--surface) center/cover no-repeat;cursor:pointer;
+ box-shadow:0 3px 0 var(--edge);transform:translateY(-3px);transition:transform .08s}
+.tile:active{transform:translateY(0)}
+.tile[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent),0 3px 0 var(--edge)}
+.tile span{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:5px;font:500 10px var(--font);color:var(--ink);white-space:nowrap}
+.drawer{position:fixed;left:0;right:0;bottom:0;z-index:3;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 12px) max(16px,env(safe-area-inset-left,0px));
+ display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.drawer>*{pointer-events:auto}
+.now{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.now b{font:700 18px var(--font)}
+.now .src{font:400 12px var(--font);color:var(--soft)}
+.strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:6px 2px 4px}
+.strip::-webkit-scrollbar{display:none}
+.genre{display:flex;align-items:center;gap:6px}
+.genre i{width:22px;height:22px;border-radius:6px;background-color:var(--bg);background-repeat:no-repeat;flex:none}
+.block[aria-pressed="true"] i{background-color:var(--surface)}
+.pose{width:78px;height:98px;flex:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 4px 6px;
+ background-color:var(--surface);background-repeat:no-repeat;font:500 10.5px/1.15 var(--font);text-align:center;color:var(--ink);white-space:normal}
+.pose[aria-pressed="true"]{background-color:color-mix(in srgb,var(--accent) 16%,var(--surface));color:var(--ink);box-shadow:0 0 0 2px var(--accent),0 3px 0 var(--edge)}
+.tag{font:500 9px var(--font);color:var(--soft);margin-top:2px}
+#load{position:fixed;left:50%;top:45%;transform:translate(-50%,-50%);font:500 14px var(--font);color:var(--soft);z-index:2}
+@media (max-width:640px){.title small{display:none}.rail{top:calc(env(safe-area-inset-top,0px) + 56px);gap:20px}.tile{width:46px;height:46px}.pose{width:68px;height:90px}}
+@media (prefers-reduced-motion:reduce){.block,.tile{transition:none}}
 </style>
 <script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
 </head>
 <body>
-<canvas id="stage" aria-label="The character on stage"></canvas>
-<div id="twod" hidden></div>
+<canvas id="stage" aria-label="The character on stage. Press on it to pick it up."></canvas>
+<iframe class="frame" id="room" hidden title="Character Studio room"></iframe>
 <div id="load">Rigging the mannequin…</div>
-<header class="top">
- <div class="name glass"><h1>Character Studio</h1><p>AW-STUDY-0037 &middot; 50 moves &middot; one skeleton for every body</p></div>
- <div class="pickers">
-  <div class="row glass" id="views" aria-label="View"></div>
-  <div class="row glass" id="bodies" aria-label="Body"></div>
-  <div class="row glass" id="looks" aria-label="Look"></div>
- </div>
+<header class="bar">
+ <div class="mark" aria-hidden="true">AW</div>
+ <div class="title">Character Studio<small>AW-STUDY-0037</small></div>
+ <span class="grow"></span>
+ <button class="block" data-room="stage" aria-pressed="true">3D</button>
+ <button class="block" data-room="puppet.html" aria-pressed="false">2D</button>
+ <button class="block" data-room="crowd.html" aria-pressed="false">Crowd</button>
 </header>
-<section class="shelf glass" aria-label="Moves">
- <div class="now"><b id="nowName">Idle</b><span id="nowFrom"></span><span class="grow"></span>
-  <button id="tour" aria-pressed="false" title="Play every move in turn">Play all</button>
-  <button id="slow" aria-pressed="false" title="Half speed">Slow</button></div>
- <div class="scroll" id="genres"></div>
- <div class="scroll" id="moves"></div>
+<nav class="rail left" id="cast" aria-label="Who"></nav>
+<nav class="rail right" id="dirs" aria-label="Art direction"></nav>
+<section class="drawer" aria-label="Moves">
+ <div class="now"><b id="nowName">Idle</b><span class="src" id="nowSrc"></span><span class="grow"></span>
+  <button class="block" id="real" aria-pressed="true" title="Real motion capture where we have it">Real motion</button>
+  <button class="block" id="tour" aria-pressed="false">Play all</button></div>
+ <div class="strip" id="genres"></div>
+ <div class="strip" id="moves"></div>
 </section>
 <script type="module">
 import * as T from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {toonify, setToonLook, toonUniforms, TOON_LOOKS, inkHulls} from '/simulations/toon-kit.mjs';
+import {toonify, TOON_LOOKS} from '/simulations/toon-kit.mjs';
+import {filmLook} from '/simulations/film-look.mjs';
 import {MOVES, GENRES, byId, P} from './moves.mjs';
 import {BODIES, loadBody} from './bodies.mjs';
+import {DIRECTIONS, dress} from './directions.mjs';
+import {loadMocap} from './mocap.mjs';
 
 const $ = s => document.querySelector(s);
+const BASE = new URL('./', location.href);
 const canvas = $('#stage');
-const renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true});
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const renderer = new T.WebGLRenderer({canvas, antialias: false});
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
 renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
 const scene = new T.Scene();
-const camera = new T.PerspectiveCamera(35, 1, .05, 200);
-camera.position.set(3.2, 1.7, 5.4);
+const camera = new T.PerspectiveCamera(30, 1, .1, 200);
+camera.position.set(3.4, 1.6, 6.2);
 const controls = new OrbitControls(camera, canvas);
-controls.target.set(0, 1, 0); controls.enableDamping = true; controls.maxPolarAngle = 1.52; controls.minDistance = 1.5; controls.maxDistance = 30;
+controls.target.set(0, .95, 0); controls.enableDamping = true; controls.maxPolarAngle = 1.5; controls.minDistance = 1.6; controls.maxDistance = 30;
 
-// light: warm sun from the front left, sky fill, a soft bounce from the floor
+// light: a warm low sun, sky fill and ground bounce; the film look (AW-STUDY-0028) adds contact shadows, air and lens
 const hemi = new T.HemisphereLight('#dfe9ff', '#b9906a', 1.1); scene.add(hemi);
-const sun = new T.DirectionalLight('#fff1dc', 2.6); sun.position.set(4, 8, 5); sun.castShadow = true;
-sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -6, right: 6, top: 6, bottom: -6, near: .5, far: 30}); sun.shadow.bias = -.0004; sun.shadow.normalBias = .02;
+const sun = new T.DirectionalLight('#fff1dc', 2.6); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -5, right: 5, top: 5, bottom: -5, near: .5, far: 30});
+sun.shadow.bias = -.0004; sun.shadow.normalBias = .02; sun.shadow.radius = 3;
 scene.add(sun, sun.target);
-// the floor: a round painted stage, wood-warm, that catches the shadow
-const floor = new T.Mesh(new T.CircleGeometry(7, 96), new T.MeshStandardMaterial({color: '#e9cfae', roughness: .95}));
+const floor = new T.Mesh(new T.CircleGeometry(40, 96), new T.MeshStandardMaterial({color: '#e3cba8', roughness: .95}));
 floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
-const rim = new T.Mesh(new T.RingGeometry(6.9, 7.3, 96), new T.MeshStandardMaterial({color: '#c98f6a', roughness: .9}));
-rim.rotation.x = -Math.PI / 2; rim.position.y = .002; scene.add(rim);
-// the box for "carry a box"
 const box = new T.Mesh(new T.BoxGeometry(.42, .32, .34), new T.MeshStandardMaterial({color: '#c79a62', roughness: .9}));
 box.castShadow = true; box.visible = false; scene.add(box);
+toonify(T, scene, TOON_LOOKS.sunday);
+const film = filmLook(T, renderer, scene, camera, {fogDensity: .02, fogStart: 9, focus: 6, aperture: .7, aoRadius: .3, bloom: .12, sunCol: '#ffd6a0'});
 
-const U = toonUniforms(T, TOON_LOOKS.sunday);
-const LOOKS = [{id: 'plain', name: 'Plain'}, {id: 'sunday', name: 'Sunday Toon'}, {id: 'ink', name: 'Ink Toon'}];
-const VIEWS = [{id: '3d', name: '3D mannequin'}, {id: '2d', name: '2D puppet'}];
-let look = 'sunday', bodyId = 'mannequin', view = '3d';
-let actor = null, move = byId.idle, t0 = performance.now() / 1000, tour = false, speed = 1, inks = [];
-const loader = new GLTFLoader(), cache = {};
+let dir = 'studio', bodyId = 'mannequin', room = 'stage', real = true, tour = false, dressed = null;
+let actor = null, move = byId.idle, t0 = performance.now() / 1000;
+const loader = new GLTFLoader(), cache = {}, drawing = {value: 0};
+let mocap = {};
+const active = () => (real && mocap[move.id]) || move;
 
-function chips(el, list, get, set, label = x => x.name) {
- el.innerHTML = '';
- for (const x of list) {
-  const b = document.createElement('button'); b.textContent = label(x); b.setAttribute('aria-pressed', String(get() === x.id));
-  b.onclick = () => { set(x.id); [...el.children].forEach((c, i) => c.setAttribute('aria-pressed', String(list[i].id === get()))); };
-  el.appendChild(b);
+// pictures for the blocks, rendered once by tools/character-studio/thumbs.mjs: one tile per move, in MOVES order
+const COLS = 10;
+function sprite(el, i, size, dx = 0) {
+ el.style.backgroundImage = 'url(img/moves.jpg)'; el.style.backgroundSize = `${COLS * size}px auto`;
+ el.style.backgroundPosition = `${-(i % COLS) * size + dx}px ${-Math.floor(i / COLS) * size}px`;
+}
+function castBlocks() {
+ const el = $('#cast'); el.innerHTML = '';
+ for (const b of BODIES.filter(b => !b.hidden)) {
+  const t = document.createElement('button'); t.className = 'tile'; t.style.backgroundImage = `url(img/body-${b.id}.jpg)`;
+  t.setAttribute('aria-pressed', String(b.id === bodyId)); t.setAttribute('aria-label', b.name); t.innerHTML = `<span>${b.short || b.name}</span>`;
+  t.onclick = () => { bodyId = b.id; castBlocks(); setBody(); };
+  el.appendChild(t);
+ }
+}
+function dirBlocks() {
+ const el = $('#dirs'); el.innerHTML = '';
+ for (const d of DIRECTIONS) {
+  const t = document.createElement('button'); t.className = 'tile'; t.style.backgroundImage = `url(img/dir-${d.id}.jpg)`;
+  t.setAttribute('aria-pressed', String(d.id === dir)); t.setAttribute('aria-label', d.name); t.innerHTML = `<span>${d.short || d.name}</span>`;
+  t.onclick = () => { dir = d.id; dirBlocks(); applyDir(); };
+  el.appendChild(t);
  }
 }
 let genre = 'cozy';
-function drawMoves() {
- chips($('#moves'), MOVES.filter(m => m.genre === genre), () => move.id, id => pick(id));
+function genreBlocks() {
+ const el = $('#genres'); el.innerHTML = '';
+ for (const g of GENRES) {
+  const b = document.createElement('button'); b.className = 'block genre'; b.setAttribute('aria-pressed', String(g.id === genre));
+  const i = document.createElement('i'); sprite(i, MOVES.findIndex(m => m.genre === g.id), 22);
+  b.append(i, g.name); b.onclick = () => { genre = g.id; genreBlocks(); moveTiles(); };
+  el.appendChild(b);
+ }
 }
-chips($('#genres'), GENRES, () => genre, id => { genre = id; drawMoves(); }, g => `${g.name}`);
-[...$('#genres').children].forEach((b, i) => { b.className = 'genre'; b.innerHTML = `${GENRES[i].name}<small>${MOVES.filter(m => m.genre === GENRES[i].id).length}</small>`; });
-drawMoves();
-chips($('#bodies'), BODIES, () => bodyId, id => { bodyId = id; setBody(); });
-chips($('#looks'), LOOKS, () => look, id => { look = id; applyLook(); });
-chips($('#views'), VIEWS, () => view, id => { view = id; setView(); });
-
+function moveTiles() {
+ const el = $('#moves'); el.innerHTML = '';
+ MOVES.forEach((m, i) => {
+  if (m.genre !== genre) return;
+  const b = document.createElement('button'); b.className = 'block pose'; b.setAttribute('aria-pressed', String(m.id === move.id));
+  sprite(b, i, 78, 0); b.style.backgroundSize = `${COLS * 78}px auto`; b.style.backgroundPosition = `${-(i % COLS) * 78}px ${-Math.floor(i / COLS) * 78 - 6}px`;
+  b.innerHTML = `${m.name}${real && mocap[m.id] ? '<span class="tag">motion capture</span>' : ''}`;
+  b.onclick = () => pick(m.id);
+  el.appendChild(b);
+ });
+}
 function pick(id, keepTour) {
  move = byId[id]; t0 = performance.now() / 1000; dist = 0;
  if (!keepTour) { tour = false; $('#tour').setAttribute('aria-pressed', 'false'); }
- const g = GENRES.find(x => x.id === move.genre);
- $('#nowName').textContent = move.name; $('#nowFrom').textContent = `${g.name}, as in ${g.from}`;
- if (genre !== move.genre) { genre = move.genre; chips($('#genres'), GENRES, () => genre, gid => { genre = gid; drawMoves(); }); [...$('#genres').children].forEach((b, i) => { b.className = 'genre'; b.innerHTML = `${GENRES[i].name}<small>${MOVES.filter(m => m.genre === GENRES[i].id).length}</small>`; }); }
- drawMoves();
+ const g = GENRES.find(x => x.id === move.genre), a = active();
+ $('#nowName').textContent = move.name;
+ $('#nowSrc').textContent = a.source ? `${a.source.replace(/^CMU mocap /, 'CMU motion capture ')}` : `Hand-keyed · ${g.name}, as in ${g.from}`;
+ if (genre !== move.genre) { genre = move.genre; genreBlocks(); }
+ moveTiles();
  try { history.replaceState(null, '', '#' + id); } catch {}
 }
 $('#tour').onclick = () => { tour = !tour; $('#tour').setAttribute('aria-pressed', String(tour)); if (tour) pick(move.id, true); };
-$('#slow').onclick = () => { speed = speed === 1 ? .5 : 1; $('#slow').setAttribute('aria-pressed', String(speed !== 1)); };
+$('#real').onclick = () => { real = !real; $('#real').setAttribute('aria-pressed', String(real)); pick(move.id, tour); };
+for (const b of document.querySelectorAll('[data-room]')) b.onclick = () => setRoom(b.dataset.room);
+function setRoom(r) {
+ room = r; document.querySelectorAll('[data-room]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.room === r)));
+ const f = $('#room'), stage = r === 'stage';
+ f.hidden = stage; ['#cast', '#dirs', '.drawer'].forEach(s => { $(s).hidden = !stage; }); canvas.style.visibility = stage ? 'visible' : 'hidden';
+ if (!stage && !f.src.endsWith(r)) f.src = r;
+}
 
-function applyLook() {
- for (const h of inks) h.parent?.remove(h); inks = [];
+// an art direction restyles the body and the stage together
+function applyDir() {
+ dressed?.undress(); dressed = null;
  if (!actor) return;
- const L = TOON_LOOKS[look];
- if (L) { setToonLook(T, U, L); toonify(T, actor.object, L, U); }
- actor.object.traverse(o => { if (o.isMesh && !o.userData.ink) for (const m of [].concat(o.material)) { m.userData.toonOff = !L; m.needsUpdate = true; } });
- // toon-kit patches once; for "plain" put the ramp back to a smooth one
- if (!L) setToonLook(T, U, {bands: 64, soft: 1, half: 0, tint: '#000000', tintK: 0, rim: 0, rimCol: '#000000'});
- if (look === 'ink') inks = inkHulls(T, actor.object, TOON_LOOKS.ink).filter(h => !h.parent?.isSkinnedMesh);
- inks.forEach(h => { if (h.parent?.isSkinnedMesh) h.parent.remove(h); });
+ dressed = dir === 'studio' ? null : dress(T, actor, dir, drawing);
+ const st = dressed?.stage || {sky: ['#efe4d2'], floor: '#e3cba8', sun: '#fff1dc', sunI: 2.6, hemi: ['#dfe9ff', '#b9906a', 1.1], shadow: true};
+ renderer.setClearColor(st.sky[0]); film.U.fogHigh.value.set(st.sky[0]); film.U.fogLow.value.set(st.sky[1] || st.sky[0]);
+ floor.material.color.set(st.floor); sun.color.set(st.sun); sun.intensity = st.sunI;
+ hemi.color.set(st.hemi[0]); hemi.groundColor.set(st.hemi[1]); hemi.intensity = st.hemi[2]; sun.castShadow = st.shadow;
+ film.on.ao = dir !== 'stick'; film.on.dof = dir !== 'stick';
+ toonify(T, actor.object, TOON_LOOKS.sunday);
 }
 async function setBody() {
- $('#load').hidden = false; $('#load').textContent = 'Rigging ' + BODIES.find(b => b.id === bodyId).name.toLowerCase() + '…';
- const a = cache[bodyId] ||= await loadBody(T, loader, bodyId, new URL('./', location.href));
+ $('#load').hidden = false; $('#load').textContent = 'Rigging…';
+ const a = cache[bodyId] ||= await loadBody(T, loader, bodyId, BASE);
+ dressed?.undress(); dressed = null;
  if (actor) scene.remove(actor.object);
- actor = a; scene.add(actor.object); applyLook(); $('#load').hidden = true;
+ actor = a; scene.add(actor.object); applyDir(); $('#load').hidden = true;
 }
-function setView() {
- const two = view === '2d';
- $('#twod').hidden = !two; canvas.style.visibility = two ? 'hidden' : 'visible';
- if (two && !$('#twod').children.length) $('#twod').innerHTML = '<iframe src="puppet.html" title="The 2D mannequin puppet (AW-STUDY-0038)"></iframe>';
+
+// pick up the doll: press on it and drag; it dangles from your finger, limbs lagging the way you swing it, kicks its
+// feet, and when you let go it drops, lands in a crouch and carries on with its move
+const hold = {state: null, vel: new T.Vector3(), prev: new T.Vector3(), target: new T.Vector3(), grab: 0, landT: 0, sx: 0, sz: 0};
+const ray = new T.Raycaster(), ndc = new T.Vector2(), plane = new T.Plane(), tmp = new T.Vector3(), tmp2 = new T.Vector3();
+function pointerAt(e) { const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); }
+canvas.addEventListener('pointerdown', e => {
+ if (!actor) return;
+ pointerAt(e);
+ const hit = ray.intersectObject(actor.object, true)[0];
+ if (!hit) return;
+ controls.enabled = false; canvas.setPointerCapture(e.pointerId);
+ hold.state = 'held'; hold.grab = Math.max(hit.point.y - actor.object.position.y, actor.hip * 1.2);
+ plane.setFromNormalAndCoplanarPoint(camera.getWorldDirection(new T.Vector3()).negate(), hit.point);
+ hold.target.copy(hit.point); hold.prev.copy(actor.object.position); hold.vel.set(0, 0, 0);
+});
+canvas.addEventListener('pointermove', e => { if (hold.state !== 'held') return; pointerAt(e); ray.ray.intersectPlane(plane, hold.target); });
+const letGo = () => { if (hold.state !== 'held') return; hold.state = 'falling'; controls.enabled = true; };
+canvas.addEventListener('pointerup', letGo); canvas.addEventListener('pointercancel', letGo);
+const R = 2.4;
+function holdStep(o, dt, now) {
+ if (hold.state === 'held') {
+  const want = tmp.copy(hold.target); want.y = Math.max(want.y - hold.grab, .05);
+  o.position.lerp(want, Math.min(1, dt * 14));
+ } else if (hold.state === 'falling') {
+  hold.vel.y -= 9.8 * dt; o.position.addScaledVector(hold.vel, dt);
+  if (o.position.y <= 0) { o.position.y = 0; hold.state = 'landing'; hold.landT = now; }
+ } else if (hold.state === 'landing' && now - hold.landT > .45) {
+  hold.state = null; t0 = now; dist = Math.atan2(o.position.x, o.position.z) * R;
+ }
+ if (hold.state !== 'falling') { hold.vel.copy(o.position).sub(hold.prev).divideScalar(Math.max(dt, 1e-3)); hold.vel.y = Math.max(hold.vel.y, 0); }
+ hold.prev.copy(o.position);
+ const lv = hold.vel.clone().applyQuaternion(o.quaternion.clone().invert());
+ hold.sx = T.MathUtils.clamp(hold.sx * .9 + lv.z * 8, -55, 55); hold.sz = T.MathUtils.clamp(hold.sz * .9 + lv.x * 8, -55, 55);
+}
+const LR = (b, v) => ({[b + '_L']: v, [b + '_R']: v});
+function holdPose(now) {
+ const k = Math.sin(now * 7), sx = hold.sx, sz = hold.sz;
+ if (hold.state === 'landing') return P({...LR('thigh', [-50, 0, 8]), ...LR('shin', [90, 0, 0]), ...LR('foot', [-36, 0, 0]), spine: [24, 0, 0], ...LR('upperarm', [-30, 0, 30]), ...LR('forearm', [-40, 0, 0])});
+ return P({thigh_L: [sx + 14 * k, 0, 4 - sz * .5], thigh_R: [sx - 14 * k, 0, 4 + sz * .5], shin_L: [26 + 16 * Math.max(0, k), 0, 0], shin_R: [26 + 16 * Math.max(0, -k), 0, 0],
+  ...LR('foot', [30, 0, 0]), upperarm_L: [sx * .8 - 10, 0, 40 - sz * .4 + 10 * k], upperarm_R: [sx * .8 - 10, 0, 40 + sz * .4 - 10 * k], ...LR('forearm', [-30, 0, 0]),
+  spine: [-sx * .2, 0, sz * .15], head: [-14, 10 * k, 0], turn: [-sx * .25, 0, sz * .25]});
 }
 
 function resize() {
- const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h;
- camera.fov = w < h ? 50 : 35; camera.updateProjectionMatrix();
+ const w = innerWidth, h = innerHeight, q = Math.min(devicePixelRatio, 2);
+ renderer.setPixelRatio(q); renderer.setSize(w, h, false); film.setSize(w, h, q);
+ camera.aspect = w / h; camera.fov = w < h ? 44 : 30; camera.updateProjectionMatrix();
 }
 addEventListener('resize', resize); resize();
 
-let freeze = null, dist = 0, last = performance.now() / 1000;
-const R = 2.6, tmp = new T.Vector3(), tmp2 = new T.Vector3();
+let freeze = null, dist = 0, last = performance.now() / 1000, plain = false;
 function frame() {
  requestAnimationFrame(frame);
- const now = performance.now() / 1000, dt = Math.min(.05, now - last) * speed; last = now;
- const t = freeze ?? (now - t0) * speed;
- if (tour && t > Math.max(move.len * (move.travel ? 2 : 1), 2.5)) { const i = MOVES.indexOf(move); pick(MOVES[(i + 1) % MOVES.length].id, true); }
+ if (room !== 'stage') return;
+ const now = performance.now() / 1000, dt = Math.min(.05, now - last); last = now;
+ const fps = dressed?.fps || 0, raw = freeze ?? now - t0;
+ const t = fps ? Math.floor(raw * fps) / fps : raw;
+ drawing.value = fps ? Math.floor(now * fps) % 1000 : 0;
+ const a = active();
+ if (tour && t > Math.max(a.len * (a.travel ? 2 : 1), 2.5)) { const i = MOVES.indexOf(move); pick(MOVES[(i + 1) % MOVES.length].id, true); }
  if (actor) {
-  actor.play(move, t);
-  // travelling moves walk a circle round the stage; everything else faces the camera's side of the stage
   const o = actor.object;
-  if (move.travel) {
-   dist += dt * (move.speed ?? move.fn.speed ?? 1) * (actor.hip / .9);
-   const a = dist / R; o.position.set(Math.sin(a) * R, 0, Math.cos(a) * R); o.rotation.y = a + Math.PI / 2;
-  } else { o.position.lerp(tmp.set(0, 0, 0), .08); o.rotation.y += (0 - o.rotation.y) * .08; }
+  if (hold.state) actor.pose(holdPose(now)); else actor.play(a, t);
+  if (hold.state) holdStep(o, dt, now);
+  else if (a.travel) {
+   dist += dt * (a.speed || a.fn.speed || 1) * actor.hip;
+   const ang = dist / R; o.position.set(Math.sin(ang) * R, 0, Math.cos(ang) * R); o.rotation.y = ang + Math.PI / 2;
+  } else o.rotation.y += (0 - o.rotation.y) * .08;
   controls.target.lerp(tmp2.set(o.position.x * .6, actor.hip * 1.05, o.position.z * .6), .06);
-  box.visible = move.prop === 'box';
+  film.U.focus.value = camera.position.distanceTo(o.position);
+  box.visible = move.prop === 'box' && !hold.state;
   if (box.visible) {
    const l = actor.rig.bones.hand_L.getWorldPosition(new T.Vector3()), r = actor.rig.bones.hand_R.getWorldPosition(new T.Vector3());
    box.position.copy(l).add(r).multiplyScalar(.5); box.position.y += .02; box.rotation.y = o.rotation.y;
   }
  }
- sun.position.set(controls.target.x + 4, 8, controls.target.z + 5); sun.target.position.copy(controls.target);
- controls.update(); renderer.render(scene, camera);
+ dressed?.update(camera, drawing.value + Math.floor(t * 1000));
+ sun.position.set(controls.target.x + 4, 6, controls.target.z + 5); sun.target.position.copy(controls.target);
+ film.U.sunDir.value.copy(sun.position).sub(sun.target.position).normalize();
+ controls.update();
+ if (plain) { renderer.setRenderTarget(null); renderer.render(scene, camera); } else film.render();
 }
-// for screenshots and the 2D puppet's tray
-window.studio = {pick, freeze: v => { freeze = v; }, body: async id => { bodyId = id; await setBody(); }, look: id => { look = id; applyLook(); }, moves: MOVES, camera, controls, P,
+// for screenshots, thumbnails and the 2D puppet's tray
+window.studio = {pick, freeze: v => { freeze = v; }, body: async id => { bodyId = id; await setBody(); }, dir: id => { dir = id; applyDir(); },
+ real: v => { real = v; pick(move.id); }, moves: MOVES, camera, controls, P, film, scene, floor, renderer, plain: v => { plain = v; },
+ ready: () => Object.keys(mocap).length > 0, activeLen: () => active().len,
  custom: pose => { move = {id: 'custom', name: 'Custom pose', genre: move.genre, fn: () => P(pose), len: 1}; }};
+castBlocks(); dirBlocks(); genreBlocks();
 const start = location.hash.slice(1);
 pick(byId[start] ? start : 'idle');
+loadMocap(T, BASE).then(m => { mocap = m; pick(move.id); }).catch(e => console.warn('mocap', e));
 setBody().then(() => frame());
 </script>
 </body>

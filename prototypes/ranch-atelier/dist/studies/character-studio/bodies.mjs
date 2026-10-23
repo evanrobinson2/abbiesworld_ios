@@ -6,11 +6,13 @@
 import {rigMannequin, rigSkinned, applyPose} from './rig.mjs';
 import {NEUTRAL} from './moves.mjs';
 
+// hidden: off the cast for now. The brutes come back once the Meshy retexture and proper skin weights land (Evan,
+// 14:12Z: the auto-weighted 3k mesh tears at the shoulder and its paint was projected, not UV-mapped).
 export const BODIES = [
- {id: 'mannequin', name: 'Wooden mannequin', url: 'models/mannequin.glb', kind: 'rigid'},
- {id: 'smooth', name: 'Smooth mannequin', url: 'models/mannequin-smooth.glb', kind: 'rigid'},
- {id: 'red', name: 'Red brute (Meshy)', url: '../brute-fight/red/fighter.glb', kind: 'skinned'},
- {id: 'blue', name: 'Blue brute (Meshy)', url: '../brute-fight/blue/fighter.glb', kind: 'skinned'},
+ {id: 'mannequin', name: 'Wooden mannequin', short: 'Wood', url: 'models/mannequin.glb', kind: 'rigid'},
+ {id: 'smooth', name: 'Smooth mannequin', short: 'Smooth', url: 'models/mannequin-smooth.glb', kind: 'rigid'},
+ {id: 'red', name: 'Red brute (Meshy)', short: 'Red brute', url: '../brute-fight/red/fighter.glb', kind: 'skinned', hidden: true},
+ {id: 'blue', name: 'Blue brute (Meshy)', short: 'Blue brute', url: '../brute-fight/blue/fighter.glb', kind: 'skinned', hidden: true},
 ];
 const HEIGHT = 1.8;
 let jointsP = null;

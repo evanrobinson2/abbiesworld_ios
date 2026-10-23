@@ -3,6 +3,7 @@
 //   rigMannequin(T, gltfScene, joints)  wooden mannequin: 30 rigid parts parented to bones built from rest-joints.json
 //   rigSkinned(T, gltfScene)            any glTF with these bone names (the brutes): learns its rest pose and arm angles
 //   applyPose(T, rig, pose)             pose = {bone: [x, y, z] degrees, root: [x, y, z] hip heights, turn: [x, y, z]}
+//                                       or {q: {bone: Quaternion}} turns in character space (motion capture)
 // How to read a pose (the character faces +Z, x is the figure's left, y up): every bone's numbers are a turn about the
 // character's own axes, measured from the rest A-pose. +x swings a hanging limb back and tips a raised one forward, so
 // a leg or arm raised forward is negative x and a knee bend is positive x; +y turns toward the figure's left; +z tips
@@ -106,6 +107,8 @@ export function applyPose(T, rig, pose = {}) {
   const par = PARENT[b];
   Dw[b] = (par && Dw[par] ? Dw[par].clone() : base.clone()).multiply(d);
   if (b === 'root') Dw[b] = base.clone().multiply(d);
+  // motion capture gives each bone's turn in character space directly (mocap.mjs)
+  if (pose.q?.[b]) Dw[b] = base.clone().multiply(pose.q[b]);
   W[b] = Dw[b].clone().multiply(corr[b]).multiply(rest[b].wq);
   const pw = par && W[par] ? W[par] : rest[b].pwq; // the root's own parent never turns
   bone.quaternion.copy(pw.clone().invert().multiply(W[b]));
