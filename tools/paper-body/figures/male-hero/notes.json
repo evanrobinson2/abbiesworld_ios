@@ -1,0 +1,9 @@
+{
+  "asset": "male-hero",
+  "request": "Evan, 2026-10-23: \"man #1\" (model the first take of the toned male Midjourney grid), as the proof before kids, fat men, old people, dioramas and the Fritigern story",
+  "rounds": [
+    {"round": 1, "date": "2026-10-23", "score_iou": 0.83, "triangles": 1198,
+     "notes": "Built from front-view pixel landmarks of concept.png. Abs and traps first tried as stuck-on blocks; they read as armour, so they became creases. score.py now pads tall concepts to a square before resizing (the 2:3 mask had been squashed, which scored 0.34)."}
+  ],
+  "viewer": "https://claude.ai/artifact/QmMPGjRSGReUbVHykANaDf"
+}
