@@ -11,12 +11,12 @@
 //   inventory().has(id), .remove(id), .list(), .on(fn) -> unsubscribe
 //
 // Kept on this device in localStorage 'aw-inventory'; every change fires window event 'aw-inventory-change'.
-// Presentation layer: the backpack hangs on the chronograph (#v2-chrono) when the page has one, else it floats top left.
+// Presentation layer: the backpack sits on the left bar (#aw-left-bar, the things she can touch), with her notebook under it.
 // It shows only once Abbie carries something or has earned a charm (until then the world just behaves). Tapping it
 // opens the backpack in 3D, cleaved into two half shells, with what she carries in both halves and her charms hanging
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
-import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=8';
+import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=9';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const read = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } };
@@ -27,6 +27,8 @@ const iconHtml = (icon, cls = '') => isUrl(icon) ? `<img class="${cls}" src="${e
 let api = null;
 export function inventory() {
   if (api) return api;
+  // One backpack per page, whichever version of this file a page imported first.
+  if (window.AbbieInventory) return api = window.AbbieInventory;
   api = {
     list: read,
     has: id => read().some(i => i.id === id),
@@ -43,12 +45,12 @@ export function inventory() {
   window.AbbieInventory = api;
   addEventListener('storage', e => { if (e.key === KEY) dispatchEvent(new CustomEvent(EVENT, {detail: read()})); });
   addEventListener(EVENT, () => { drawPocket(); checkCharms(); });
-  addEventListener('aw-backpack-change', () => { drawPocket(); checkCharms(); });
+  addEventListener('aw-backpack-change', () => { drawPocket(); drawNotebookMini(); checkCharms(); });
   addEventListener('aw-memory-coins-change', () => checkCharms());
   addEventListener('storage', e => { if (/^aw-(memory-coins|basement-coins|backpack)$/.test(e.key || '')) { drawPocket(); checkCharms(); } });
   import('./presentation-layer.mjs').then(({volunteer}) => volunteer('abbie', {place: 'anywhere', dialect: 'her own backpack', items: [
     {id: 'pocket', says: 'what Abbie carries in her backpack', kind: 'list', who: 'player', for: ['player', 'director'], read: () => read().map(i => i.name), relevant: () => read().length > 0,
-     prefer: ['meta', 'overlay'], ways: {meta: 'her inner voice when she picks something up', overlay: 'the backpack on the chronograph, opened half shell'}},
+     prefer: ['meta', 'overlay'], ways: {meta: 'her inner voice when she picks something up', overlay: 'the little backpack on the left bar, brought out into main focus'}},
     {id: 'charms', says: 'the charms on her backpack, one for each quest she has finished', kind: 'list', who: 'player', for: ['player', 'director'], read: () => earnedCharms().map(id => CHARMS.find(c => c.id === id).name), relevant: () => earnedCharms().length > 0,
      prefer: ['spatial', 'meta'], ways: {spatial: 'charms hanging on her backpack', meta: 'a jingle and her inner voice when one is earned'}}]})).catch(() => {});
   const ready = () => { style(); drawPocket(); setTimeout(checkCharms, 1200); };
@@ -58,33 +60,61 @@ export function inventory() {
 
 // ---------- the pocket ----------
 let pocket = null, pop = null;
+// The left bar (Evan, 23:39Z): "the left side is stuff the PLAYER in the game can touch". A liquid-glass bar on the left
+// edge holds her backpack, as a real little 3D backpack in her look, and under it her notebook. Tap the backpack and it
+// comes out into main focus; tap the notebook and it opens on her quests. The top is the simulation and HUD.
+function leftBar() {
+  let bar = document.getElementById('aw-left-bar');
+  if (!bar) { bar = Object.assign(document.createElement('nav'), {id: 'aw-left-bar', className: 'aw-left-bar'}); bar.setAttribute('aria-label', 'What Abbie can touch'); document.body.append(bar); }
+  return bar;
+}
 function mountPocket() {
   if (pocket?.isConnected) return pocket;
   pocket = document.createElement('button');
-  pocket.type = 'button'; pocket.className = 'aw-pocket v2-glass ch-reg'; pocket.hidden = true;
+  pocket.type = 'button'; pocket.className = 'aw-pocket aw-left-pack';
   pocket.setAttribute('aria-label', "Abbie's backpack");
+  pocket.innerHTML = '<canvas width="128" height="148"></canvas><span class="aw-pocket-g"></span>';
   pocket.onclick = e => { e.stopPropagation(); pop && !pop.hidden ? closePop() : openPop(); };
-  const chrono = document.getElementById('v2-chrono');
-  const pushers = chrono?.querySelector('.ch-pushers');
-  if (pushers) pushers.before(pocket);
-  else if (chrono) chrono.append(pocket);
-  // The backpack lives on the weather instrument (Evan, 22:05Z: a button floating on its own is out of place). A page
-  // without the chronograph yet keeps it out of view (B still opens it) and docks it the moment the instrument mounts.
-  else { pocket.hidden = true; waitForChrono(); }
+  const nbb = document.createElement('button'); nbb.type = 'button'; nbb.className = 'aw-left-nb'; nbb.setAttribute('aria-label', 'My notebook');
+  nbb.onclick = e => { e.stopPropagation(); closePop(); import('./notebook.mjs?v=1').then(n => n.isNotebookOpen() ? n.closeNotebook() : n.openNotebook()); };
+  leftBar().append(pocket, nbb);
+  drawNotebookMini(); miniPack(pocket.querySelector('canvas'));
   return pocket;
 }
-let chronoWatch = null;
-function waitForChrono() {
-  if (chronoWatch || !window.MutationObserver) return;
-  chronoWatch = new MutationObserver(() => { if (!document.getElementById('v2-chrono')) return; chronoWatch.disconnect(); chronoWatch = null; pocket?.remove(); pocket = null; drawPocket(); });
-  chronoWatch.observe(document.documentElement, {childList: true, subtree: true});
+function drawNotebookMini() {
+  const b = document.querySelector('.aw-left-nb'); if (!b) return;
+  import('./notebook.mjs?v=1').then(({coverCanvas}) => { const c = coverCanvas(bagLook().notebook, 120, 152); b.replaceChildren(c); }).catch(() => {});
+}
+// The little backpack on the bar is the real model, drawn small and idling (a slow turn and a breath), in her look and
+// with her charms. It sleeps while the big one is out, or the page is hidden. Without WebGL it is her glyph.
+let mini = null;
+async function miniPack(canvas) {
+  try {
+    const B = await import('./backpack.mjs?v=9'), T = await B.three();
+    const renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true}); renderer.setPixelRatio(1); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping;
+    const scene = new T.Scene(), cam = new T.PerspectiveCamera(26, canvas.width / canvas.height, .05, 20);
+    scene.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.3)); const key = new T.DirectionalLight('#fff1d6', 2.6); key.position.set(1.4, 2.4, 2.6); scene.add(key);
+    const rim = new T.DirectionalLight('#bfe3ff', 1.2); rim.position.set(-2, 1, -2); scene.add(rim);
+    let bp = null;
+    const build = () => { if (bp) { scene.remove(bp.group); bp.group.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); }
+      bp = B.buildBackpack(bagLook(), {charms: keychain()}); scene.add(bp.group);
+      const d = Math.max(bp.H * 1.25, bp.W * 1.5) / 2 / Math.tan(13 * Math.PI / 180); cam.position.set(0, bp.H * .55, d); cam.lookAt(0, bp.H * .47, 0); };
+    build(); B.loadCharmModels(keychain()).then(got => got && build());
+    addEventListener('aw-backpack-change', build);
+    let prev = performance.now();
+    const frame = now => { requestAnimationFrame(frame); if (document.hidden || (pop && !pop.hidden) || !canvas.isConnected) { prev = now; return; }
+      const dt = Math.min(.05, (now - prev) / 1000); if (dt < 1 / 32) return; prev = now;
+      bp.group.rotation.y = -.5 + Math.sin(now / 2600) * .45; bp.group.position.y = Math.sin(now / 900) * bp.H * .025; bp.update(dt); renderer.render(scene, cam); };
+    requestAnimationFrame(frame); mini = {build};
+    canvas.parentElement?.classList.add('live');
+  } catch { canvas.parentElement?.classList.remove('live'); }
 }
 function drawPocket(bump = false) {
   if (!document.body) return;
-  if (!document.getElementById('v2-chrono') && document.documentElement.classList.contains('ui-v2') && !pocket) { setTimeout(() => drawPocket(bump), 300); return; }
   const list = read(), p = mountPocket();
-  p.hidden = !p.isConnected; // always there on the instrument: one obvious control (the backpack register, or B)
-  p.innerHTML = `<span class="ch-g">${glyph(bagLook())}</span>${list.length > 1 ? `<span class="aw-pocket-n">${list.length}</span>` : ''}`;
+  p.querySelector('.aw-pocket-g').innerHTML = glyph(bagLook());
+  p.querySelector('.aw-pocket-n')?.remove();
+  if (list.length > 1) p.insertAdjacentHTML('beforeend', `<span class="aw-pocket-n">${list.length}</span>`);
   p.title = (list.length ? "Abbie's backpack: " + list.map(i => i.name).join(', ') : "Abbie's backpack") + ' (B)';
   if (bump) { p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump'); }
   if (pop && !pop.hidden && view) view.setContents({items: list, coins: coinCount(), charms: keychain()});
@@ -97,23 +127,24 @@ function drawPocket(bump = false) {
 // ("they are all used to control the style"). Tap the backpack to open it half shell. Nothing behind it is dimmed,
 // blurred or masked: the page is see-through everywhere but the backpack, the slots and the hand.
 let view = null;
-const SLOTS = [['style', 'Style'], ['colour', 'Colour'], ['pattern', 'Pattern'], ['pocket', 'Pocket'], ['trim', 'Straps'], ['lining', 'Lining']];
+const SLOTS = [['style', 'Style'], ['colour', 'Colour'], ['pattern', 'Pattern'], ['pocket', 'Pocket'], ['trim', 'Straps'], ['lining', 'Lining'], ['notebook', 'Notebook']];
 let slotFaces = null;
 function layout() {
   if (!pop) return;
   const W = innerWidth, H = innerHeight, narrow = W < 560;
   const cw = narrow ? Math.max(48, Math.min(64, W * .16)) : Math.min(86, H * .12), ch = cw * 88 / 63, gap = narrow ? 8 : 18;
-  const S = Math.max(200, Math.min(narrow ? W - 2 * (cw + gap + 8) : 440, H * .5));
-  const cx = W / 2, cy = Math.max(3 * ch / 2 + 60, Math.min(H * .44, H - 240 - S / 2));
+  const S = Math.max(200, Math.min(narrow ? W - 2 * (cw + gap + 8) : 440, H * .5)), rowH = ch + (narrow ? 26 : 30);
+  const cx = W / 2, cy = Math.max(2 * rowH + 50, Math.min(H * .46, H - 240 - S / 2));
   Object.assign(pop.querySelector('.aw-bp-stage').style, {left: cx - S / 2 + 'px', top: cy - S / 2 + 'px', width: S + 'px', height: S + 'px'});
   pop.querySelectorAll('.aw-bp-slot').forEach((el, i) => {
-    const side = i < 3 ? -1 : 1, row = i % 3 - 1;
-    Object.assign(el.style, {width: cw + 'px', height: ch + 'px', left: cx + side * (S / 2 + gap + cw / 2) - cw / 2 + 'px', top: cy + row * (ch + (narrow ? 26 : 30)) - ch / 2 - 8 + 'px'});
+    const side = i < 4 ? -1 : 1, row = i < 4 ? i - 1.5 : i - 5;
+    Object.assign(el.style, {width: cw + 'px', height: ch + 'px', left: cx + side * (S / 2 + gap + cw / 2) - cw / 2 + 'px', top: cy + row * rowH - ch / 2 - 8 + 'px'});
   });
 }
 async function drawSlots() {
   if (!pop || !slotFaces) return;
-  const l = bagLook();
+  const l = bagLook(), peek = pop.querySelector('.aw-bp-peek');
+  if (peek && peek.dataset.nb !== l.notebook) { peek.dataset.nb = l.notebook; import('./notebook.mjs?v=1').then(({coverCanvas}) => peek.replaceChildren(coverCanvas(l.notebook, 120, 152))).catch(() => {}); }
   for (const el of pop.querySelectorAll('.aw-bp-slot')) {
     const f = el.dataset.facet, key = f + ':' + (f === 'style' ? l.style : l[f]) + ':' + JSON.stringify(l);
     if (el.dataset.key === key) continue; el.dataset.key = key;
@@ -133,11 +164,15 @@ async function openPop() {
     pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', "Abbie's backpack");
     pop.innerHTML = '<div class="aw-bp-stage"></div>' + SLOTS.map(([f, name]) => `<button type="button" class="aw-bp-slot" data-facet="${f}" aria-label="${name}"><span>${name}</span></button>`).join('') + '<div class="aw-bp-handhost"></div>';
     pop.querySelector('.aw-bp-stage').insertAdjacentHTML('beforeend', '<button type="button" class="aw-bp-brush aw-bp-charmcam" aria-label="Look at my charms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4"/><circle cx="12" cy="8.5" r="1.6"/><path d="M12 10.5l2.2 4.4 4.8.7-3.5 3.3.9 4.6L12 21.3l-4.4 2.2.9-4.6L5 15.6l4.8-.7z" fill="#ffd23f88"/></svg></button>');
+    // Her notebook is in the backpack: it peeks out beside it, and opens on her quests.
+    const peek = Object.assign(document.createElement('button'), {type: 'button', className: 'aw-bp-peek'}); peek.setAttribute('aria-label', 'My notebook');
+    peek.onclick = e => { e.stopPropagation(); closePop(); import('./notebook.mjs?v=1').then(n => n.openNotebook()); };
+    pop.querySelector('.aw-bp-stage').append(peek);
     pop.querySelector('.aw-bp-charmcam').onclick = e => { e.stopPropagation(); if (!view) return; if (view.focused != null) view.unfocus(); else { view.deal(null); view.open(); view.focusCharm(0); } };
     pop.querySelectorAll('.aw-bp-slot').forEach(el => el.onclick = e => { e.stopPropagation(); if (!view) return; view.unfocus(); view.deal(view.dealt === el.dataset.facet ? null : el.dataset.facet); });
     addEventListener('resize', layout);
   }
-  document.body.append(pop); pop.hidden = false; layout();
+  document.body.append(pop); pop.hidden = false; layout(); document.documentElement.classList.add('aw-bp-out');
   // Out of the register and into the middle of the screen.
   const st = pop.querySelector('.aw-bp-stage'), sr = st.getBoundingClientRect();
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -148,7 +183,7 @@ async function openPop() {
   pop.querySelector('.aw-bp-charmcam').hidden = !contents.charms.length;
   try {
     if (!view) {
-      const [{backpackView}, cards] = await Promise.all([import('./backpack.mjs?v=8'), import('./backpack-cards.mjs?v=5')]);
+      const [{backpackView}, cards] = await Promise.all([import('./backpack.mjs?v=9'), import('./backpack-cards.mjs?v=6')]);
       slotFaces = cards;
       view = await backpackView(st, {...contents, look: bagLook(), spin: false, float: true, deckHost: pop.querySelector('.aw-bp-handhost'), overSlot, onDeal: markSlot,
         onChange: l => { setLook(l); drawSlots(); }});
@@ -164,7 +199,7 @@ function closePop() {
   document.querySelectorAll('.aw-bp-ghost').forEach(g => g.remove()); if (!pop || pop.hidden) return;
   view?.close(); view?.deal(null); markSlot(null);
   const st = pop.querySelector('.aw-bp-stage'), to = pocket?.isConnected ? pocket.getBoundingClientRect() : null, sr = st.getBoundingClientRect();
-  const done = () => { if (pop) pop.hidden = true; };
+  const done = () => { if (pop) pop.hidden = true; document.documentElement.classList.remove('aw-bp-out'); };
   if (!to || matchMedia('(prefers-reduced-motion: reduce)').matches) return void setTimeout(done, 120);
   // Back into its register on the weather instrument.
   pop.querySelectorAll('.aw-bp-slot').forEach(el => el.animate([{opacity: 1}, {opacity: 0, transform: 'scale(.6)'}], {duration: 200, fill: 'forwards'}).onfinish = function () { this.cancel(); });
@@ -201,8 +236,7 @@ addEventListener('keydown', e => {
 
 // ---------- picking something up: her inner voice, then into the backpack ----------
 function pickUp(item, thought, done = null) {
-  const p = mountPocket(), chrono = document.getElementById('v2-chrono');
-  p.hidden = false; chrono?.classList.add('open');
+  const p = mountPocket();
   const r = p.getBoundingClientRect();
   const bubble = Object.assign(document.createElement('div'), {className: 'aw-thought'});
   bubble.setAttribute('role', 'status');
@@ -292,6 +326,20 @@ function style() {
   .aw-thought i:nth-of-type(2){width:7px;height:7px;left:16px;top:-21px}
   .aw-fly{position:fixed;z-index:71;display:grid;place-items:center;font-size:22px;pointer-events:none;object-fit:contain}
   html.aw-reduce-motion .aw-pocket.bump{animation:none}
-  @media(max-width:520px){#v2-chrono:not(.open) .aw-pocket:not([hidden]){display:grid!important}}`;
+  .aw-left-bar{position:fixed;z-index:38;left:calc(env(safe-area-inset-left,0px) + 10px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 8px;border-radius:30px;
+    background:linear-gradient(165deg,#ffffffb8 0%,#ffffff3a 38%,#ffffff1c 62%,#ffffff66 100%);border:1px solid #ffffffd8;
+    box-shadow:inset 0 1.5px 0 #fff,inset 0 -10px 18px -10px #ffffffa0,inset 6px 0 14px -10px #ffffff,0 18px 34px -14px #0c203060,0 2px 6px #0c20301f}
+  .aw-left-bar::before{content:"";position:absolute;left:10%;right:10%;top:3px;height:38%;border-radius:26px 26px 50% 50%;background:linear-gradient(#ffffffa8,#ffffff00);pointer-events:none}
+  html.aw-bp-out .aw-left-bar,html.aw-nb-out .aw-left-bar{opacity:0;pointer-events:none;transform:translate(-30px,-50%)}
+  .aw-left-bar{transition:opacity .25s,transform .25s}
+  .aw-left-pack{position:relative;width:64px;height:74px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center;transition:transform .18s}
+  .aw-left-pack canvas{width:64px;height:74px;display:none}.aw-left-pack.live canvas{display:block}.aw-left-pack.live .aw-pocket-g{display:none}
+  .aw-left-pack .aw-pocket-g svg{width:40px;height:40px}
+  .aw-left-pack:hover,.aw-left-nb:hover{transform:translateY(-2px) scale(1.05)}.aw-left-pack:active,.aw-left-nb:active{transform:scale(.94)}
+  .aw-left-nb{width:46px;height:58px;padding:0;border:0;background:none;cursor:pointer;transform:rotate(-5deg);transition:transform .18s;filter:drop-shadow(0 5px 6px #2a103040)}
+  .aw-left-nb canvas{width:100%;height:100%;display:block}
+  .aw-bp-peek{position:absolute;left:-4%;bottom:2%;width:22%;max-width:84px;aspect-ratio:120/152;padding:0;border:0;background:none;cursor:pointer;transform:rotate(-9deg);filter:drop-shadow(0 8px 10px #2a103050);pointer-events:auto;z-index:3;transition:transform .18s}
+  .aw-bp-peek:hover{transform:rotate(-4deg) translateY(-4px)}.aw-bp-peek canvas{width:100%;height:100%;display:block}
+  @media(max-width:520px){.aw-left-bar{gap:6px;padding:8px 6px}.aw-left-pack,.aw-left-pack canvas{width:52px;height:60px}.aw-left-nb{width:38px;height:48px}}`;
   document.head.append(s);
 }

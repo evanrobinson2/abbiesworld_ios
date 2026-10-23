@@ -3117,6 +3117,77 @@
         }
       ],
       "recorded": "2026-10-23, as the study was built"
+    },
+    "sanctuary": {
+      "recorded": "2026-10-23, while writing the handoff",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Game identity: the legal line (style versus expression)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md",
+          "note": "the rule the sanctuary lane has to reconcile with: only rights-cleared assets cross it"
+        },
+        {
+          "k": "canon",
+          "t": "Model store (R2, catalogue, Action)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/model-store/README.md",
+          "note": "where an ingested model ends up; content-hash keys"
+        },
+        {
+          "k": "canon",
+          "t": "STL pilot results and provenance.json",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/stl-pilot/RESULTS.md",
+          "note": "the working licensed-source to low-poly GLB pipeline the sanctuary extends"
+        },
+        {
+          "k": "canon",
+          "t": "Modeler vision",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/MODELER_VISION.md",
+          "note": "keep intent and history so assets can be rebuilt as technology changes"
+        },
+        {
+          "k": "research",
+          "t": "Warzone 2100 (Wikipedia)",
+          "href": "https://en.wikipedia.org/wiki/Warzone_2100",
+          "note": "art released under GPL-2.0-or-later in 2004, rest in 2008"
+        },
+        {
+          "k": "research",
+          "t": "0 A.D. (Wikipedia)",
+          "href": "https://en.wikipedia.org/wiki/0_A.D._(video_game)",
+          "note": "code GPL-2.0-or-later, art and music CC BY-SA 3.0"
+        },
+        {
+          "k": "research",
+          "t": "Yo Frankie! download page (Blender Foundation)",
+          "href": "https://apricot.blender.org/download",
+          "note": "CC BY 3.0, credit (c) Blender Foundation"
+        },
+        {
+          "k": "research",
+          "t": "Lugaru HD open source, including the data (GamingOnLinux)",
+          "href": "https://www.gamingonlinux.com/2017/01/lugaru-campaign-now-fully-playable-in-overgrowth-lugaru-hd-now-fully-open-source-including-the-data/page=1/",
+          "note": "GPL engine, CC-BY-SA data; comments dispute 3.0 versus 4.0"
+        },
+        {
+          "k": "research",
+          "t": "Overgrowth goes open source (Game World Observer)",
+          "href": "https://gameworldobserver.com/2022/04/22/wolfire-turns-overgrowth-into-open-source-game-making-it-free-for-modding-and-changing",
+          "note": "Apache 2.0 for code; assets not released, so they stay red"
+        },
+        {
+          "k": "research",
+          "t": "Quake legal status (Quake Wiki)",
+          "href": "https://quakewiki.org/wiki/Legal_status",
+          "note": "engine under GPL, original models, maps and textures still id Software's"
+        },
+        {
+          "k": "research",
+          "t": "Statement on the DMCA 2024 ruling (Video Game History Foundation)",
+          "href": "https://gamehistory.org/dmca-2024-statement/",
+          "note": "Copyright Office declined a video game preservation exemption in 2024"
+        }
+      ]
     }
   }
 }

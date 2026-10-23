@@ -136,3 +136,26 @@ cards include the facets, and the styles", "they are all used to control the sty
   `backpack-cards.mjs` (`slotFace()`, split colour and pattern hands).
 
 Tour: no.
+
+## Round 7: the left bar and the notebook (Evan, 23:39Z)
+
+"6, backpack, should show as an actual 3d poly backpack on the left side of screen if user clicks it that's when it
+opens, showing your stuff ... when you open back pack, THATS where you see your notebook, and in your notebook is a list
+of quests (hand written in pencil font on ruled yellow line paper in a fluffy care like number 7. let her pick her
+notebook as a facet of her backpack. you can show it under the backpack on the left bar. the left bar (use liquid glass)
+... the left side is stuff the PLAYER in the game can touch."
+
+- The left bar (`#aw-left-bar`, made by `inventory.mjs`) is a liquid-glass object on the left edge, with depth from its
+  highlights and edges and no blur. It holds the real backpack model, drawn small and idling with a slow turn and a
+  breath, in her look and with her charms, and her notebook cover under it. The backpack has left the chronograph.
+- Tapping the backpack brings it into main focus (round 6) and the bar steps aside. Her notebook peeks out beside the
+  open backpack.
+- The notebook (`notebook.mjs`) opens in main focus with its fluffy cover beside the page. The page is yellow ruled
+  paper with a red margin, and the writing is Patrick Hand (OFL) in pencil grey with hand-drawn tick boxes.
+- The notebook lists the townsfolk favours from the quests thread's `quests.mjs` `list()`: each shows its next step and
+  who asked, with finished steps ticked under it. After them come the charm quests.
+- The cover is a new backpack facet, `notebook`, with seven fluffy covers drawn from Evan's picture: Strawberry (heart
+  sunglasses), Unicorn, Puppy, Rainbow bear (crown), Bunny (winking), Kitty and Teddy. It is the seventh card slot
+  round the floating backpack, and it stays the same when the style changes (`keep: true`).
+
+Tour: yes. Players need to know where their quests are.

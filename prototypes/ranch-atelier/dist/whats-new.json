@@ -13,6 +13,38 @@
       "link": "/demo"
     },
     {
+      "id": "2026-10-23-backpack-left-bar-notebook",
+      "date": "2026-10-23",
+      "title": "Backpack and notebook on the left",
+      "line": "Abbie's backpack now sits on a glass bar on the left as a little 3D backpack, with her fluffy notebook under it. Her notebook holds her quests, written in pencil on yellow paper, and she can pick from seven fluffy covers.",
+      "image": "/whats-new/2026-10-23-backpack-left-bar-notebook.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": true,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-23-townsfolk",
+      "date": "2026-10-23",
+      "title": "People in Winchester ask for help",
+      "line": "The baker, the teacher, the postie and friends now stand around town. Tap one and they ask a favour; say yes and it goes in your notebook, and the reward lands in your backpack.",
+      "image": "/whats-new/2026-10-23-townsfolk.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "Abbie's Town",
+      "tour": true
+    },
+    {
+      "id": "2026-10-23-town-hud",
+      "date": "2026-10-23",
+      "title": "The town screen, tidied",
+      "line": "Drafted: one row along the top for the clock and the world effects (icons now, not cards), a glowing hex grid button, and the Paint card back in a hand at the bottom. The old bottom bar is gone. The backpack and notebook bar on the left comes from the backpack thread.",
+      "image": "/whats-new/2026-10-23-town-hud.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-town-sky",
       "date": "2026-10-23",
       "title": "A sky behind Winchester, and the café door",
