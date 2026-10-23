@@ -688,6 +688,78 @@
           "bytes": 263025
         }
       ]
+    },
+    {
+      "name": "ankle",
+      "prompt": "isolated anatomical study of a single adult male right ankle, inner ankle bone higher than the outer, Achilles tendon, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "14486b1e-ccdb-4fce-92a5-1e88bd41bd5d",
+      "created": "2026-10-23T07:28:00Z",
+      "files": [
+        {
+          "file": "images/ankle_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/14486b1e-ccdb-4fce-92a5-1e88bd41bd5d/0_0.png",
+          "sha256": "5c6268d15e6df9872e8c3881025c1fe1e029854082a4db2912c3f776adf7277a",
+          "bytes": 480252
+        },
+        {
+          "file": "images/ankle_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/14486b1e-ccdb-4fce-92a5-1e88bd41bd5d/0_1.png",
+          "sha256": "386b810232be51f24d35db69f35f2e53fbdad084ef4475edd83ae6f009e2ff01",
+          "bytes": 532739
+        },
+        {
+          "file": "images/ankle_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/14486b1e-ccdb-4fce-92a5-1e88bd41bd5d/0_2.png",
+          "sha256": "a4fe3eb308796afe4799deafdbd5c2d13ff49d838f6767dea00536ca8e81fd0f",
+          "bytes": 558731
+        },
+        {
+          "file": "images/ankle_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/14486b1e-ccdb-4fce-92a5-1e88bd41bd5d/0_3.png",
+          "sha256": "e65745aea3f8aaeab7040ecdad5d8ceefcff7394e2c164928026ada6c5d41f91",
+          "bytes": 484505
+        }
+      ]
+    },
+    {
+      "name": "foot",
+      "prompt": "isolated anatomical study of a single adult male right bare foot standing flat, arch on the inside, heel, five toes, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, top view, side view and front view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "6a3f8e06-abca-42b9-9162-fae681a47914",
+      "created": "2026-10-23T07:28:41Z",
+      "files": [
+        {
+          "file": "images/foot_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/6a3f8e06-abca-42b9-9162-fae681a47914/0_0.png",
+          "sha256": "d7d549e1f35c392d4a8a86ed3516aafc236afc1f48d00541d9cd25025224fa6c",
+          "bytes": 456058
+        },
+        {
+          "file": "images/foot_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/6a3f8e06-abca-42b9-9162-fae681a47914/0_1.png",
+          "sha256": "d2bd4512888cd8ad51dac24fab971af900b45564e64c980a69f37134a34a6748",
+          "bytes": 532097
+        },
+        {
+          "file": "images/foot_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/6a3f8e06-abca-42b9-9162-fae681a47914/0_2.png",
+          "sha256": "0850145c6ec6bd948098949abaee7426a01468bfb2576086812f3edda9fbffc5",
+          "bytes": 408055
+        },
+        {
+          "file": "images/foot_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/6a3f8e06-abca-42b9-9162-fae681a47914/0_3.png",
+          "sha256": "76728c46e1995fc70723aca416b6878aa07db333ce37624a7186a3bf7afadd61",
+          "bytes": 477432
+        }
+      ]
     }
   ]
 }
