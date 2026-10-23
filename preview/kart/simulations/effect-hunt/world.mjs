@@ -10,7 +10,10 @@ export function fromBoard(board, {scale = 1, origin = {x: 0, z: 0}, lift = 0, ne
   tileAt: (x, z) => board.tileAt(...toBoard(x, z)),
   toScene: (px, py) => ({x: origin.x + px * scale, z: origin.z - py * scale}),
   home: {x: origin.x, z: origin.z},
-  nearObstacles: near // (x, z) => [{x, z, r}] houses, trees and walls close by, in scene metres; optional
+  nearObstacles: near || (board.obstaclesNear ? (x, z) => { const [bx, by] = toBoard(x, z); return board.obstaclesNear(bx, by, 14).map(o => ({x: origin.x + o.x * scale, z: origin.z - o.y * scale, r: o.r * scale})); } : null),
+  // a drivable road point near (px, py) board metres, as a scene start {x, z, heading}
+  roadStart(px = 0, py = 0) { const s = (board.roadSpawns?.(30) || []).sort((a, b) => Math.hypot(a.x - px, a.y - py) - Math.hypot(b.x - px, b.y - py))[0]; if (!s) return null; const p = world.toScene(s.x, s.y); return {x: p.x, z: p.z, heading: Math.atan2(Math.cos(s.heading), -Math.sin(s.heading))}; }
+  // (x, z) => [{x, z, r}] houses, trees and walls close by, in scene metres; optional
  };
  return world;
 }

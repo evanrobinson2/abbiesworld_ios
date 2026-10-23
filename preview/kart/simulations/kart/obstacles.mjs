@@ -38,7 +38,7 @@ export function makeProp(kind, seed = 0) {
 }
 
 // The obstacle layer. `track.props` become meshes and colliders; `near(x, z)` is what the driver asks every step (scene metres).
-export function createObstacles({scene, world, toScene, fromScene, base = null, onSmash = () => {}}) {
+export function createObstacles({scene, world, toScene, fromScene, base = null, onSmash = () => {}, onBump = () => {}}) {
  const root = new T.Group(); root.name = 'kart props'; scene.add(root);
  const grid = new Map(), K = 24, key = (x, z) => Math.floor(x / K) + ',' + Math.floor(z / K);
  let props = [];
@@ -55,6 +55,7 @@ export function createObstacles({scene, world, toScene, fromScene, base = null, 
    const m = makeProp(p.kind, i), q = toScene(p.x, p.y), y = world.heightAt(q.x, q.z);
    m.position.set(q.x, y, q.z); m.rotation.y = p.rot; m.scale.setScalar(PROP_SCALE); root.add(m);
    const o = {x: q.x, z: q.z, r: p.r * PROP_SCALE, soft: !!p.soft, puddle: !!p.puddle, kind: p.kind, obj: m, home: m.position.clone(), rot: p.rot, dead: false, age: 0, v: new T.Vector3(), spin: 0,
+    bump(power) { if (!this.soft) onBump(this, power); },
     hit(speed, s) { if (this.dead || this.puddle) return; this.dead = true; this.age = 0; this.v.set((s?.vx ?? 0) * .9 + (Math.random() - .5) * 6, 6 + speed * .25, (s?.vz ?? 0) * .9 + (Math.random() - .5) * 6); this.spin = (Math.random() - .5) * 18; onSmash(this, speed); }};
    (grid.get(key(q.x, q.z)) || grid.set(key(q.x, q.z), []).get(key(q.x, q.z))).push(o); props.push(o);
   });

@@ -22,7 +22,7 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
  const root = new T.Group(); root.name = 'kart track'; scene.add(root);
  const origOnBoard = world.onBoard, origNear = world.nearObstacles, baseMax = driver.K.maxSpeed, baseSlope = driver.K.slopeSlow;
  let L = layoutOf(board, extraIds), track = null, building = false, queued = null, attached = false, towKey = '';
- const cache = new Map(), obstacles = createObstacles({scene, world, toScene, fromScene, base: origNear, onSmash: (o, speed) => { state.smashes++; pop(); puff(o.obj.position, '#ffffff', 14, 5); onEvent({t: 'smash', kind: o.kind, speed}); }});
+ const cache = new Map(), obstacles = createObstacles({scene, world, toScene, fromScene, base: origNear, onBump: (o, power) => { if (power < 4) return; state.crashes++; puff({x: o.x, y: world.heightAt(o.x, o.z) + 1, z: o.z}, '#ffe9b0', 10, 4); onEvent({t: 'crash', kind: o.kind, power}); }, onSmash: (o, speed) => { state.smashes++; pop(); puff(o.obj.position, '#ffffff', 14, 5); onEvent({t: 'smash', kind: o.kind, speed}); }});
  const state = {lap: 0, laps, gate: 0, gateCount: 0, lapT: 0, best: null, surface: 'road', rebuilding: false, waiting: true, lastBuild: 0, tiles: [...extraIds], crashes: 0, smashes: 0};
 
  // ---- puffs: dust, debris, the swap when a new track arrives
@@ -133,7 +133,6 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
   if (state.waiting) { if (Math.abs(driver.input.throttle) > .1 || driver.input.boost || driver.input.jet) state.waiting = false; else { s.vx = s.vz = 0; s.speed = 0; } } // parked on the line until you go
   K.slopeSlow += ((surf === 'road' || surf === 'dirt' ? baseSlope * .3 : baseSlope) - K.slopeSlow) * Math.min(1, dt * 4); // a stencilled road is graded: hills drag you less on it
   const want = baseMax * (SURFACE[surf] ?? 1); K.maxSpeed += (want - K.maxSpeed) * Math.min(1, dt * 4);
-  if (s.bonk > .01 && !state._bonk) { state._bonk = true; state.crashes++; EV('crash', {power: s.bonk}); } if (s.bonk <= .01) state._bonk = false;
   if (!s.air) { // ramps and pads
    for (const r of track.ramps) {
     if (r.cool > 0) { r.cool = Math.max(0, r.cool - dt); continue; }
