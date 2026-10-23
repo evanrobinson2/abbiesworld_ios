@@ -1,0 +1,87 @@
+{
+  "slug": "pirate-chest",
+  "stages": {
+    "import": {
+      "seconds": 0.01,
+      "tris": 74246,
+      "files": [
+        "source.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.27,
+      "tris": 73262,
+      "open_edges_before": 913,
+      "open_edges_after": 913,
+      "dust_shells_removed": 0,
+      "welded_verts": 56
+    },
+    "assemble_scale_pivot": {
+      "seconds": 0.0,
+      "tris": 73262,
+      "final_size_m": [
+        0.5,
+        0.387,
+        0.42
+      ]
+    },
+    "decimate": {
+      "seconds": 0.4,
+      "tris": 896,
+      "per_part": {
+        "body": {
+          "fallback": null,
+          "before": 73262,
+          "budget": 900,
+          "ratio": 0.1,
+          "after": 896,
+          "attempts": 1
+        }
+      }
+    },
+    "uv": {
+      "seconds": 0.73,
+      "tris": 896,
+      "islands": "smart_project+pack"
+    },
+    "bake": {
+      "seconds": 0.91,
+      "tris": 896,
+      "texture_px": 512,
+      "extrusion_m": 0.01
+    },
+    "material": {
+      "seconds": 0.0,
+      "tris": 896,
+      "materials": [
+        "mat_painted_wood"
+      ]
+    },
+    "export": {
+      "seconds": 0.35,
+      "tris": 896,
+      "glb": "pirate-chest.glb",
+      "bytes": 144892
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 900,
+  "scale_to_metres": {
+    "factor": 0.00698974021835259,
+    "source_size_mm": [
+      71.53,
+      55.34,
+      60.07
+    ],
+    "final_size_m": [
+      0.5,
+      0.387,
+      0.42
+    ]
+  },
+  "high_poly_tris": 73262,
+  "final_tris": 896,
+  "script_total_s": 3.06,
+  "process_wall_s": 3.99,
+  "bake_source": "repaired high-poly (73262 tris) built from the source STL(s) in this folder; not stored separately"
+}

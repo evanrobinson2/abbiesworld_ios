@@ -1,0 +1,24 @@
+{
+  "slug": "pirate-chest",
+  "title": "Pirate's Treasure Chest - Solid",
+  "model_url": "https://www.printables.com/model/634848-pirates-treasure-chest-solid",
+  "author": "YourBuddyDinec",
+  "author_url": "https://www.printables.com/@YourBuddyDinec",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "source_file": "Xmas Print Drive 23 - Pirate Chest Solid.stl",
+  "category": "fantasy prop",
+  "origin": "author's original creation",
+  "attribution_required": true,
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "date_retrieved": "2026-10-23",
+  "source_files": [
+    {
+      "file": "source.stl",
+      "sha256": "d769aa5404eb0ac46d1fe0e4ae7cf76615a8d1a3848ed221546ffd168a38d0ef",
+      "bytes": 3712384
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

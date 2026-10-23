@@ -121,6 +121,10 @@ function plainNote(note){
     .replace(/\bsheet views?\b/gi, 'side views').replace(/\bthe side views wants\b/gi, 'the side views want').replace(/\btile size\b/gi, 'game size').replace(/\s{2,}/g, ' ').trim()).join(' ');
   return said.length > 14 ? said[0].toUpperCase() + said.slice(1) : '';
 }
+// Models that come from outside (Printables and the like) always show where they came from, who made them and the licence.
+const sourceLine = m => { const s = m.source; if (!s || !s.url) return '';
+  const by = s.authorUrl ? `<a href="${esc(s.authorUrl)}" target="_blank" rel="noopener">${esc(s.author)}</a>` : esc(s.author);
+  return `<p class="srcline"><b>Source</b> ${esc(s.site)} · by ${by} · ${esc(s.licence)} · <a href="${esc(s.url)}" target="_blank" rel="noopener">View the original</a>${s.credit ? `<span>${esc(s.credit)}</span>` : ''}</p>`; };
 const plainList = xs => (xs || []).map(plainNote).filter(Boolean);
 const FAIR = {fair:'Fair', close:'Close', off:'Off'};
 const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
@@ -204,6 +208,7 @@ function review(){
   <aside class="fb" aria-label="Your feedback">
     <h2 class="fbh">Your feedback</h2>
     ${was}
+    ${sourceLine(m)}
     <div class="thumb decide" role="group" aria-label="Decide">
       <button type="button" class="tb reject" data-verdict="reject" aria-label="Reject">${ico('reject')}</button>
       <button type="button" class="tb chat" id="chat" aria-label="Talk or type a note">${ico('mic')}</button>

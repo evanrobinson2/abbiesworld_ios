@@ -1,0 +1,97 @@
+{
+  "slug": "tractor",
+  "stages": {
+    "import": {
+      "seconds": 0.02,
+      "tris": 20830,
+      "files": [
+        "source_body.stl",
+        "source_wheels.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.04,
+      "tris": 20714,
+      "open_edges_before": 0,
+      "open_edges_after": 0,
+      "dust_shells_removed": 0,
+      "welded_verts": 58
+    },
+    "assemble_scale_pivot": {
+      "seconds": 0.02,
+      "tris": 20714,
+      "final_size_m": [
+        2.949,
+        3.6,
+        2.429
+      ]
+    },
+    "decimate": {
+      "seconds": 0.15,
+      "tris": 5997,
+      "per_part": {
+        "body": {
+          "fallback": null,
+          "before": 1650,
+          "budget": 477,
+          "ratio": 0.3268,
+          "after": 476,
+          "attempts": 2
+        },
+        "wheels": {
+          "fallback": null,
+          "before": 19064,
+          "budget": 5522,
+          "ratio": 0.4369,
+          "after": 5521,
+          "attempts": 2
+        }
+      }
+    },
+    "uv": {
+      "seconds": 0.97,
+      "tris": 5996,
+      "islands": "smart_project+pack"
+    },
+    "bake": {
+      "seconds": 0.34,
+      "tris": 5996,
+      "texture_px": 512,
+      "extrusion_m": 0.072
+    },
+    "material": {
+      "seconds": 0.0,
+      "tris": 5996,
+      "materials": [
+        "mat_tractor_paint",
+        "mat_rubber_tyre"
+      ]
+    },
+    "export": {
+      "seconds": 0.38,
+      "tris": 5996,
+      "glb": "tractor.glb",
+      "bytes": 385852
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 6000,
+  "scale_to_metres": {
+    "factor": 0.053280602918931955,
+    "source_size_mm": [
+      55.35,
+      67.57,
+      45.6
+    ],
+    "final_size_m": [
+      2.949,
+      3.6,
+      2.429
+    ]
+  },
+  "high_poly_tris": 20714,
+  "final_tris": 5996,
+  "script_total_s": 2.3,
+  "process_wall_s": 3.2,
+  "bake_source": "repaired high-poly (20714 tris) built from the source STL(s) in this folder; not stored separately"
+}
