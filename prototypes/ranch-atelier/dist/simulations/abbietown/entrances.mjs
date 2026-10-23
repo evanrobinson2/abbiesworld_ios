@@ -15,7 +15,7 @@ export const ENTRANCES = {
     note: 'Reached from inside the café. The basement returns to the café diorama, and the café front door returns to the town.'},
   'town:lab-door': {name: 'Lab door', kind: 'door', region: 'downtown', scene: 'lab-door', url: `/science-lab?from=${encodeURIComponent(backUrl('town:lab-door'))}`, owner: 'science-lab',
     grants: ['tardigrade charm', "coin 'science-lab:off-the-slide'"]},
-  'town:truck': {name: 'The black truck', kind: 'stage', region: 'downtown', scene: 'cafe-curb', needs: {crew: true}, module: 'moon-mission', owner: 'AW-STUDY-0036',
+  'town:truck': {name: 'The black truck', kind: 'stage', region: 'downtown', scene: 'bakery-curb', needs: {crew: true}, module: 'moon-mission', owner: 'AW-STUDY-0036',
     note: 'The mission mounts on AbbieTown.stage at the café curb; its scenes are registered with AbbieTown.registerScene.'},
   'town:launch': {name: 'Launch', kind: 'stage', region: 'abbie-daddy-side', scene: 'launch-pad', module: 'moon-mission', owner: 'AW-STUDY-0036',
     note: 'The rocket port on the road north of the home hex. Walk here from Downtown (AbbieTown.walk).'},

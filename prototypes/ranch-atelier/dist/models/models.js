@@ -4,7 +4,8 @@
 // models swaps the page in place, so a hands-free voice session keeps listening from one model to the next.
 // Catalogue sources, first that answers wins: window.MODELS_CATALOG_URL, /api/models, then /models/manifest.json.
 // Verdicts go to /api/model-reviews, which also drops each one in the feedback inbox for the modelers.
-import '/vendor/model-viewer.min.js';
+// The 3D library is 935 KB and only upgrades <model-viewer> elements, so it loads beside the page, never in front of it.
+import('/vendor/model-viewer.min.js').catch(() => {});
 
 const SOURCES = [window.MODELS_CATALOG_URL, '/api/models', '/models/manifest.json'].filter(Boolean);
 const LABEL = {accept:'Kept', adjust:'Note sent', reject:'Rejected'};
@@ -12,6 +13,10 @@ const root = document.getElementById('root'), crumb = document.getElementById('c
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 const pct = x => Math.round(100 * x) + '%';
 const LS = 'models-reviews-v1';
+// Small copies of the reference pictures (tools/models-thumbs/make.py): 's' for the strip, 'm' for the grid. A picture
+// without one (a stored model not yet thumbnailed) falls back to the full image, once.
+const thumb = (u, k) => /^\/models\/.+\.(jpe?g|png)$/i.test(u || '') ? u.replace(/\.(jpe?g|png)$/i, `.${k}.webp`) : u;
+const thumbImg = (u, k, extra = '') => `<img src="${esc(thumb(u, k))}" alt="" loading="lazy" decoding="async"${thumb(u, k) !== u ? ` onerror="this.onerror=null;this.src='${esc(u)}'"` : ''}${extra}>`;
 
 let list = [], reviews = {}, cur = null, view = 'review', filter = 'todo', handsFree = false, pending = null, voiceLine = '', voiceKind = '', gridShow = 'art', flipped = new Set();
 try { reviews = JSON.parse(localStorage.getItem(LS) || '{}'); } catch {}
@@ -27,13 +32,23 @@ async function fetchList(url){
 }
 // The first source that answers wins; models in the bundled manifest that the stored catalogue doesn't list yet
 // (a preview, or a deploy before the model-store sync has run) are added in the manifest's order.
-async function catalogue(){
-  let base = [];
-  for (const url of SOURCES){ base = await fetchList(url); if (base.length) break; }
-  const bundled = SOURCES.at(-1) === '/models/manifest.json' ? await fetchList('/models/manifest.json') : [];
-  const have = new Set(base.map(m => m.id)), extra = bundled.filter(m => !have.has(m.id));
+// Speed (Evan, 2026-10-23: "too slow to load"): the bundled manifest is a static file, so the page paints from it at once.
+// The stored catalogue (/api/models, which waits on R2 and can take seconds) is asked in parallel and merged in when it
+// answers; its entries win for the models it lists, and the page only redraws if it brings something new.
+const MANIFEST = '/models/manifest.json';
+const merge = (stored, bundled) => {
+  const have = new Set(stored.map(m => m.id)), extra = bundled.filter(m => !have.has(m.id));
   const order = new Map(bundled.map((m, i) => [m.id, i]));
-  return [...base, ...extra].sort((a, b) => (order.get(a.id) ?? 1e9) - (order.get(b.id) ?? 1e9));
+  return [...stored, ...extra].sort((a, b) => (order.get(a.id) ?? 1e9) - (order.get(b.id) ?? 1e9));
+};
+const storedSources = () => SOURCES.filter(u => u !== MANIFEST);
+async function storedCatalogue(){
+  for (const url of storedSources()){ const l = await fetchList(url); if (l.length) return l; }
+  return [];
+}
+async function catalogue(){
+  const bundled = await fetchList(MANIFEST);
+  return {bundled, first: bundled.length ? bundled : await storedCatalogue()};
 }
 async function loadReviews(){
   try {
@@ -67,7 +82,7 @@ function grid(){
     (ms.length ? `<div class="${row ? 'rowcards' : 'cards'}">${ms.map(m => { const r = reviews[m.id]; return `
     <a class="mc" href="/models/${encodeURIComponent(m.id)}" data-open="${esc(m.id)}">
       <span class="mn"><strong>${esc(titleCase(m.name))}</strong>${m.style ? `<small>${esc(m.style)}</small>` : ''}<i class="dot ${r ? r.verdict : ''}" title="${r ? LABEL[r.verdict] : 'To review'}"></i></span>
-      <span class="mpair"><span class="mprint"><img src="${esc(m.urls.ref)}" alt="" loading="lazy">${row && (m.ask || m.subject) ? `<em>“${esc(m.ask || m.subject)}”</em>` : ''}</span>
+      <span class="mpair"><span class="mprint">${thumbImg(m.urls.ref, 'm')}${row && (m.ask || m.subject) ? `<em>“${esc(m.ask || m.subject)}”</em>` : ''}</span>
       <span class="malive"><model-viewer src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" loading="lazy" reveal="auto" camera-orbit="${+(m.orbit || [-30])[0]}deg ${+(m.orbit || [0, 72])[1]}deg auto"${row ? ' camera-controls touch-action="pan-y" auto-rotate rotation-per-second="14deg"' : ''} interaction-prompt="none" environment-image="neutral" shadow-intensity="0.7" exposure="0.8"></model-viewer></span></span></a>`; }).join('')}</div>`
     : `<p class="empty">Nothing here yet.</p>`);
 }
@@ -184,7 +199,7 @@ function review(){
         auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.8" exposure="0.8" environment-image="neutral">${spots}</model-viewer>
         <div class="chalk" aria-hidden="true"><svg viewBox="0 0 150 110"><path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/></g></svg></div></div></figure>
     </div>
-    <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}"><img src="${esc(x.urls.ref)}" alt="" loading="lazy"><i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
+    <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}">${thumbImg(x.urls.ref, 's')}<i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
   </article>
   <aside class="fb" aria-label="Your feedback">
     <h2 class="fbh">Your feedback</h2>
@@ -483,11 +498,24 @@ const set = await (async () => {
   try { const f = await (await fetch('/review/feed.json', {cache:'no-cache'})).json(); const it = (f.items || []).find(x => x.id === id); return it && it.models ? it : null; } catch { return null; }
 })();
 const inSet = m => set.models.some(p => p.endsWith('*') ? m.id.startsWith(p.slice(0, -1)) : m.id === p);
-[list] = await Promise.all([catalogue(), loadReviews()]);
+const storedLater = storedSources().length ? storedCatalogue() : Promise.resolve([]);
+// Reviews come from /api/model-reviews, which can be slow; the page waits for it only briefly (your own are in
+// localStorage already) and redraws when it answers, if anyone else's verdicts changed what's shown.
+const reviewsLater = loadReviews(), before = JSON.stringify(reviews);
+const [cat] = await Promise.all([catalogue(), Promise.race([reviewsLater, new Promise(r => setTimeout(r, 400))])]);
+list = cat.first;
 if (set){ list = list.filter(inSet).sort((a, b) => set.models.findIndex(p => p === a.id) - set.models.findIndex(p => p === b.id)); document.documentElement.dataset.set = set.id; }
 if (!list.length) root.innerHTML = '<p class="empty">No models yet.</p>';
 else {
   route(); render(false);
   const q = new URLSearchParams(location.search), shared = [q.get('title'), q.get('text'), q.get('url')].filter(Boolean).join(' ');
   if (shared) openCart(shared);
+  reviewsLater.then(() => { if (JSON.stringify(reviews) !== before && list.some(m => m.id === cur)) render(false); });
+  // The stored catalogue arrives; redraw only if it knows models the bundled one doesn't, or describes them differently.
+  storedLater.then(stored => {
+    if (!stored.length || set) return;
+    const next = merge(stored, cat.bundled), mine = new Map(list.map(m => [m.id, JSON.stringify(m)]));
+    if (next.length === list.length && next.every(m => mine.get(m.id) === JSON.stringify(m))) return;
+    const was = cur; list = next; if (!list.some(m => m.id === was)) return; render(false);
+  }).catch(() => {});
 }

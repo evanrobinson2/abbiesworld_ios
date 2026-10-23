@@ -1,6 +1,70 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
+   {
+     "id": "2026-10-23-event-deck",
+     "date": "2026-10-23",
+     "title": "Play world events from the toy box",
+     "line": "Open World events in the toy box: a column of event cards on the far right. Tap one to make it rain, snow, storm, fog, dawn, nightfall or paint fall.",
+     "image": "/whats-new/2026-10-23-event-deck.png",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+     "threadTitle": "World event cards",
+     "tour": false,
+     "link": "/sandbox"
+   },
+   {
+     "id": "2026-10-23-moon-at-bakery",
+     "date": "2026-10-23",
+     "title": "The Moon Mission starts at the bakery",
+     "line": "The Moon Mission now starts and launches from the French bakery on Main Street.",
+     "image": "/whats-new/2026-10-23-moon-at-bakery.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+     "tour": false,
+     "link": "/town?mission"
+   },
+    {
+      "id": "2026-10-23-world-event-cards",
+      "date": "2026-10-23",
+      "title": "World events are cards now",
+      "line": "Paint rain, storms, snow, rainbows, dawn, nightfall, fog, northern lights and the meteorite each get a collectible card, in a night-blue frame with a burst window and a WORLD EVENT banner so they never look like tile cards.",
+      "image": "/whats-new/2026-10-23-world-event-cards.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUvnKWy3d2mCt6WXGsJmKKb",
+      "threadTitle": "World event cards",
+      "tour": false
+    },
+    {
+      "id": "2026-10-23-precompiled-shaders",
+      "date": "2026-10-23",
+      "title": "Tiles drop without the hitch",
+      "line": "The Ranch now prepares every tile's shaders while you sit at Grace's computer, playing her basement game. When the amber lights fill, you're back at the ranch and tiles land far smoother.",
+      "image": "/whats-new/2026-10-23-intro-scene.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Engine speed and placement lag",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-bakery",
+      "date": "2026-10-23",
+      "title": "A French bakery downtown",
+      "line": "A little French bakery with a croissant sign now stands on Main Street in Winchester, and it is where the Moon Mission starts.",
+      "image": "/whats-new/2026-10-23-bakery.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0042 - Abbie's Town",
+      "tour": true
+    },
+    {
+      "id": "2026-10-23-moon-in-winchester",
+      "date": "2026-10-23",
+      "title": "The Moon Mission in Winchester",
+      "line": "The Moon Mission now plays inside the Winchester map: the rocket launches from the café roof, space and the Moon are night scenes, and when you land the map comes back.",
+      "image": "/whats-new/2026-10-23-moon-in-winchester.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+      "tour": true,
+      "link": "/town?mission"
+    },
     {
       "id": "2026-10-23-backpack-meshy-charms",
       "date": "2026-10-23",
