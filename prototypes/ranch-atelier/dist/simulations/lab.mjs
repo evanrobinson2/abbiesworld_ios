@@ -142,7 +142,7 @@ const sky=new T.HemisphereLight('#e6efff','#9b784d',2),sun=new T.DirectionalLigh
 const floor=new T.Mesh(new T.PlaneGeometry(500,500),glowFloorMaterial());floor.rotation.x=-Math.PI/2;floor.position.y=-1.3;floor.receiveShadow=true;scene.add(floor);
 const wall=new T.Mesh(new T.PlaneGeometry(500,100),new T.MeshStandardMaterial({color:'#e0e3d9',roughness:1}));wall.position.set(0,48,-18);wall.receiveShadow=true;scene.add(wall);
 // ?world=basin: the Basin, a green Colorado basin pouring onto a lake, with no tiles placed (basin/basin-world.mjs).
-const basin=await createBasinWorld(scene);
+const basin=await createBasinWorld(scene);if(basin){applyDorfRanch(basin.world.root);worldTheme.attach(basin.world.root);attachSeasons(basin.world.root);excludePeopleInk(basin.world.root);}
 const worldBackdrop=createWorldBackdrop({onChange:()=>updateSun()});
 function applyCartoonBackdrop(daylight){if(family!=='ranch')return;const backdrop=worldBackdrop.texture(worldTheme.palette.name);if(!backdrop)return;const imageAspect=backdrop.image.width/backdrop.image.height,aspect=innerWidth/innerHeight;backdrop.repeat.set(Math.min(1,aspect/imageAspect),Math.min(1,imageAspect/aspect));backdrop.offset.set((1-backdrop.repeat.x)/2,(1-backdrop.repeat.y)/2);scene.background=backdrop;scene.backgroundIntensity=.22+.78*daylight;ranchSky.root.visible=false;floor.visible=false;}
 const solarColors={night:new T.Color('#182638'),day:new T.Color('#e0e5d7'),warm:new T.Color('#ffcf92'),white:new T.Color('#fff6e5'),storm:new T.Color('#aeb8c4')};
