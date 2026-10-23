@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-weather-fronts",
+      "date": "2026-10-23",
+      "title": "Weather you can watch coming",
+      "line": "Weather now arrives in fronts: the wind picks up, clouds gather and the animals settle before the rain, then the sky breaks up as it clears. Soft clouds float around your ranch and their shadows drift across the fields. Storms grey the sky, dim the sun and light the lamps, and a gentle flash brings thunder.",
+      "image": "/whats-new/2026-10-23-weather-fronts.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
+      "threadTitle": "Weather and clouds"
+    },
+    {
       "id": "2026-10-23-sandbox-chronograph",
       "date": "2026-10-23",
       "title": "A glass chronograph for your ranch",
