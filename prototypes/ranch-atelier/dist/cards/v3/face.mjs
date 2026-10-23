@@ -41,7 +41,7 @@ export function loadImage(src) {
 const boundsCache = new WeakMap();
 function bounds(img) {
  if (boundsCache.has(img)) return boundsCache.get(img);
- const w = img.naturalWidth, h = img.naturalHeight, c = new OffscreenCanvas(w, h), x = c.getContext('2d');
+ const w = img.naturalWidth, h = img.naturalHeight, c = new OffscreenCanvas(w, h), x = c.getContext('2d', {willReadFrequently: true});
  x.drawImage(img, 0, 0); const d = x.getImageData(0, 0, w, h).data;
  let x0 = w, y0 = h, x1 = 0, y1 = 0;
  for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) if (d[(y * w + i) * 4 + 3] > 24) { if (i < x0) x0 = i; if (i > x1) x1 = i; if (y < y0) y0 = y; if (y > y1) y1 = y; }
