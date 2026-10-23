@@ -664,6 +664,7 @@ const {train, line} = placeSpots(); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
 import('/simulations/coaster-town.mjs').then(m => m.place(window.AbbieTown)).catch(() => {}); // the toy-car coaster on the skate park pad (AW-STUDY-0054); a no-op until that module ships
+import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt})).catch(() => {}); // the world event cards (fireball, waterball, cats and dogs, tie-dye)
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
 WC.precompile(scene, camera); if (/[?&]watercolour=off\b/.test(location.search)) WC.enabled = false; // compiled before the first washed frame; ?watercolour=off for comparing
