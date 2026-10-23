@@ -1,0 +1,121 @@
+{
+  "sex": "female",
+  "build": "average",
+  "height_m": 1.673,
+  "multipliers": {
+    "h": 0.94,
+    "sh": 0.87,
+    "ch": 0.94,
+    "wa": 0.86,
+    "hi": 1.1,
+    "li": 0.88,
+    "ne": 0.85,
+    "head": 0.96,
+    "be": 0.0,
+    "bust": 1.0
+  },
+  "torso": {
+    "crotch": {
+      "z": 0.778,
+      "half_width": 0.165,
+      "half_depth": 0.11,
+      "forward": 0.0
+    },
+    "hips": {
+      "z": 0.87,
+      "half_width": 0.189,
+      "half_depth": 0.123,
+      "forward": 0.0
+    },
+    "waist": {
+      "z": 1.004,
+      "half_width": 0.126,
+      "half_depth": 0.084,
+      "forward": 0.0
+    },
+    "belly": {
+      "z": 1.088,
+      "half_width": 0.131,
+      "half_depth": 0.089,
+      "forward": 0.0
+    },
+    "chest": {
+      "z": 1.205,
+      "half_width": 0.162,
+      "half_depth": 0.109,
+      "forward": 0.0
+    },
+    "armpit": {
+      "z": 1.297,
+      "half_width": 0.179,
+      "half_depth": 0.103,
+      "forward": 0.0
+    },
+    "shoulders": {
+      "z": 1.364,
+      "half_width": 0.171,
+      "half_depth": 0.083,
+      "forward": 0.01
+    },
+    "neck_base": {
+      "z": 1.405,
+      "half_width": 0.104,
+      "half_depth": 0.066,
+      "forward": 0.01
+    }
+  },
+  "head": {
+    "center": [
+      0,
+      0.012,
+      1.569
+    ],
+    "half_width": 0.075,
+    "half_depth": 0.091,
+    "top": 1.673
+  },
+  "sockets": {
+    "shoulder_l": [
+      -0.14,
+      0.0,
+      1.339
+    ],
+    "hand_l": [
+      -0.294,
+      0.0,
+      0.724
+    ],
+    "shoulder_r": [
+      0.14,
+      0.0,
+      1.339
+    ],
+    "hand_r": [
+      0.294,
+      0.0,
+      0.724
+    ],
+    "hip_l": [
+      -0.099,
+      0.0,
+      0.803
+    ],
+    "foot_l": [
+      -0.079,
+      -0.085,
+      0.0
+    ],
+    "hip_r": [
+      0.099,
+      0.0,
+      0.803
+    ],
+    "foot_r": [
+      0.079,
+      -0.085,
+      0.0
+    ],
+    "foot_length": 0.25
+  },
+  "triangles": 712
+}
