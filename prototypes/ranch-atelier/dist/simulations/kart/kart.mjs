@@ -127,6 +127,7 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
  // ---- fire wheels (the Toy car charm's card) and the Polaroid phone (the floppy-disk charm): both optional, both loaded on demand
  let fire = null, fireOn = false, wheels = [], wheelsOf = null;
  import('../fire-wheels.mjs').then(m => { fire = m.fireTrail(T, topScene || scene); fireOn = m.fireWheelsOn(); m.onFireWheels(v => { fireOn = v; }); }).catch(() => {});
+ import('./toy-cars.mjs').then(m => m.registerToyCars()).catch(() => {});
  let polaroid = null;
  if (renderer && camera) import('./polaroid.mjs').then(m => { polaroid = m.createPolaroid({renderer, scene: topScene || scene, camera, visible: inCar, sound: () => pop()}); }).catch(() => {});
  // ---- per frame
@@ -158,7 +159,7 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
   }
   if (!s.air && s.surface !== 'void' && Math.abs(s.speed) > 6) { /* tyre dust on grass */ if (surf === 'grass' && Math.random() < dt * 30) puff({x: s.x - Math.sin(s.heading) * 3, y: s.y, z: s.z - Math.cos(s.heading) * 3}, '#a8c48f', 1, 3); }
   obstacles.update(dt); puffs(dt);
-  if (fire) { const cur = vehicleRoot?.children[0]; if (cur !== wheelsOf) { wheelsOf = cur; wheels = []; cur?.traverse(o => { if (o.userData?.spin) wheels.push(o); }); } fire.update(dt, wheels, Math.abs(s.speed), fireOn && !s.air); }
+  if (fire) { const cur = vehicleRoot?.children[0]; if (cur !== wheelsOf) { wheelsOf = cur; wheels = []; cur?.traverse(o => { if (o.userData?.spin || o.name === 'wheel') wheels.push(o); }); } fire.update(dt, wheels, Math.abs(s.speed), fireOn && !s.air); }
   polaroid?.update();
   return state;
  }

@@ -24,11 +24,21 @@ Hunt's driver (AW-STUDY-0057), which still owns vehicles, effects, beacons and t
 - Two one-line hooks in the hunt's `drive.mjs` (soft burst, `bump`). Halos and beacons are the hunt's, already car-only; the developer
   cheat is the hunt's `aw-dev-beacons`, surfaced in the `?dev` panel.
 
+## Round 2: car mode in the town (Evan, 23:39Z: "car mode needs to actually get built and shipped in the live game")
+- `town-mount.mjs` now creates the kart layer, so the notebook's car buttons on `/demo` drive the racetrack on the real Winchester board.
+  The loop is threaded between the town's own houses and trees (relaxed against `board.obstaclesNear`, road 11 m wide); what is
+  left in the lane bonks you, as in the hunt. Starts parked on the line until you press go.
+- Fire wheels (Toy car charm card) trail from the car's wheels; real CC0/CC BY toy cars (Racer, Toddler car, Pickup, Sedan) replace
+  the placeholder in toy car mode, Abbie riding on the roof.
+- Polaroid mini phone (`polaroid.mjs`): unlocked by the floppy-disk charm (`basement`), round glass button on the left, only in car mode;
+  tap takes a picture of the screen, a white-framed card slides out and develops, kept in this browser (newest 8) and announced with
+  `aw:polaroid`. Developer cheat: `localStorage aw-dev-phone=1` or `?phone` in the page address.
+- Tour: **yes** for car mode (one tap in the notebook, a payoff at once). Not yet checked in the live town by a person.
+
 ## Not built / open
-Drift mini-turbo, countdown start, rivals, bridges over water, mounting in `/town` (needs the town to clear its houses along the track:
-call `kart.clearScenery(dioGroup)`), the quad and toy car as separate vehicles (hunt's buggy and coaster stand-ins are used), a
-charm for finishing laps, Midjourney concept art (vehicles are the hunt's stand-ins), owner-only gating of the dev panel.
-Tour: **no** for this study page, **yes** once it runs in the town.
+Drift mini-turbo, countdown start, rivals, bridges over water, the town's houses on the road line are not cleared (the road threads
+between them instead), a picker for which toy car (`pickToyCar(i)`, no button yet), a charm for finishing laps, Midjourney concept
+art, owner-only gating of the dev panel, showing the Polaroids inside the backpack (the backpack thread listens for `aw:polaroid`).
 
 ## How it was made, and how to be faster next time
 Evan's message 21:47Z (17:47 local); a first track with its own driver at about 22:10Z; rebased onto the Effect Hunt's code after its

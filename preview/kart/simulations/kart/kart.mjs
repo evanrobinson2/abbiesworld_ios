@@ -16,12 +16,12 @@ import {bonk, boing, pop, chime, pipPip} from '../effect-hunt/sound.mjs';
 const SURFACE = {road: 1, dirt: .94, verge: .88, grass: .72, void: .6};
 const canvasTex = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; t.wrapS = t.wrapT = T.RepeatWrapping; t.anisotropy = 4; return t; };
 
-export function createKart({scene, world, driver, board, tow = null, extraIds = [], laps = 3, onEvent = () => {}, lift = .22}) {
+export function createKart({scene, world, driver, board, tow = null, extraIds = [], laps = 3, onEvent = () => {}, lift = .22, width = TRACK.width, vehicleRoot = null, camera = null, renderer = null, topScene = null, inCar = () => true}) {
  const toScene = (x, y) => world.toScene(x, y);
  const fromScene = (x, z) => [(x - world.origin.x) / world.scale, -(z - world.origin.z) / world.scale];
  const root = new T.Group(); root.name = 'kart track'; scene.add(root);
  const origOnBoard = world.onBoard, origNear = world.nearObstacles, baseMax = driver.K.maxSpeed, baseSlope = driver.K.slopeSlow;
- let L = layoutOf(board, extraIds), track = null, building = false, queued = null, attached = false, towKey = '';
+ let L = layoutOf(board, extraIds, {width}), track = null, building = false, queued = null, attached = false, towKey = '';
  const cache = new Map(), obstacles = createObstacles({scene, world, toScene, fromScene, base: origNear, onBump: (o, power) => { if (power < 4) return; state.crashes++; puff({x: o.x, y: world.heightAt(o.x, o.z) + 1, z: o.z}, '#ffe9b0', 10, 4); onEvent({t: 'crash', kind: o.kind, power}); }, onSmash: (o, speed) => { state.smashes++; pop(); puff(o.obj.position, '#ffffff', 14, 5); onEvent({t: 'smash', kind: o.kind, speed}); }});
  const state = {lap: 0, laps, gate: 0, gateCount: 0, lapT: 0, best: null, surface: 'road', rebuilding: false, waiting: true, lastBuild: 0, tiles: [...extraIds], crashes: 0, smashes: 0};
 
@@ -104,7 +104,7 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
  async function setTiles(ids) {
   if (building) { queued = ids; return; }
   building = true; state.rebuilding = true; const t0 = performance.now(); onEvent({t: 'rebuild-start'});
-  const layout = layoutOf(board, ids), t = await buildFor(layout); building = false; state.rebuilding = false;
+  const layout = layoutOf(board, ids, {width}), t = await buildFor(layout); building = false; state.rebuilding = false;
   const s = driver.s, [bx, by] = fromScene(s.x, s.z); mount(t);
   const near = t.nearMain(bx, by, 4); // if you were not near the new road, set you on it
   if (!near || near.d > t.width * .7) { const sm = t.main.samples[near ? near.i : 0], q = toScene(sm.x, sm.y); driver.place(q.x, q.z, Math.atan2(sm.tx, -sm.ty)); }
@@ -113,7 +113,7 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
   if (queued) { const q = queued; queued = null; setTiles(q); }
  }
  // quietly make the tracks for each possible next tile while nothing else is going on, so placing one is instant
- function prebuild(slotIds = (board.slots || []).map(s => s.id)) { const idle = typeof requestIdleCallback === 'function' ? requestIdleCallback : f => setTimeout(f, 600); let i = 0; const next = () => { if (i >= slotIds.length) return; const layout = layoutOf(board, [...state.tiles, slotIds[i++]]); if (cache.has(layout.key)) return next(); buildFor(layout).then(() => idle(next)); }; idle(next); }
+ function prebuild(slotIds = (board.slots || []).map(s => s.id)) { const idle = typeof requestIdleCallback === 'function' ? requestIdleCallback : f => setTimeout(f, 600); let i = 0; const next = () => { if (i >= slotIds.length) return; const layout = layoutOf(board, [...state.tiles, slotIds[i++]], {width}); if (cache.has(layout.key)) return next(); buildFor(layout).then(() => idle(next)); }; idle(next); }
 
  // ---- stencilling: scenery the town drew on the road's line is cleared (hidden, and it stops colliding). Hides instances of any
  // InstancedMesh under `group`; originals are remembered so a rebuilt track can bring them back.
@@ -124,6 +124,12 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
   for (const g of groups) g.traverse(o => { if (!o.isInstancedMesh) return; o.userData.kartOrig ??= Array.from({length: o.count}, (_, i) => { o.getMatrixAt(i, m4); return m4.clone(); });
    o.userData.kartOrig.forEach((m, i) => { v3.setFromMatrixPosition(m); o.setMatrixAt(i, cleared(v3.x, v3.z) ? zero : m); }); o.instanceMatrix.needsUpdate = true; });
  }
+ // ---- fire wheels (the Toy car charm's card) and the Polaroid phone (the floppy-disk charm): both optional, both loaded on demand
+ let fire = null, fireOn = false, wheels = [], wheelsOf = null;
+ import('../fire-wheels.mjs').then(m => { fire = m.fireTrail(T, topScene || scene); fireOn = m.fireWheelsOn(); m.onFireWheels(v => { fireOn = v; }); }).catch(() => {});
+ import('./toy-cars.mjs').then(m => m.registerToyCars()).catch(() => {});
+ let polaroid = null;
+ if (renderer && camera) import('./polaroid.mjs').then(m => { polaroid = m.createPolaroid({renderer, scene: topScene || scene, camera, visible: inCar, sound: () => pop()}); }).catch(() => {});
  // ---- per frame
  const EV = (t, extra) => onEvent({t, ...extra});
  function frame(dt) {
@@ -153,8 +159,10 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
   }
   if (!s.air && s.surface !== 'void' && Math.abs(s.speed) > 6) { /* tyre dust on grass */ if (surf === 'grass' && Math.random() < dt * 30) puff({x: s.x - Math.sin(s.heading) * 3, y: s.y, z: s.z - Math.cos(s.heading) * 3}, '#a8c48f', 1, 3); }
   obstacles.update(dt); puffs(dt);
+  if (fire) { const cur = vehicleRoot?.children[0]; if (cur !== wheelsOf) { wheelsOf = cur; wheels = []; cur?.traverse(o => { if (o.userData?.spin || o.name === 'wheel') wheels.push(o); }); } fire.update(dt, wheels, Math.abs(s.speed), fireOn && !s.air); }
+  polaroid?.update();
   return state;
  }
  return {root, state, attach, frame, clearScenery, cleared, setTiles, prebuild, mount, obstacles, puff, get track() { return track; }, get layout() { return L; }, ready: async ({atStart = true} = {}) => { mount(await buildFor(L)); attach(); if (atStart) { state.waiting = true; const q = toScene(track.start.x, track.start.y); driver.place(q.x, q.z, Math.atan2(track.start.tx, -track.start.ty)); } return track; }, toScene, fromScene,
-  dispose() { world.onBoard = origOnBoard; world.nearObstacles = origNear; driver.K.maxSpeed = baseMax; driver.K.slopeSlow = baseSlope; root.removeFromParent(); obstacles.dispose(); }};
+  dispose() { polaroid?.dispose(); fire?.object.removeFromParent(); world.onBoard = origOnBoard; world.nearObstacles = origNear; driver.K.maxSpeed = baseMax; driver.K.slopeSlow = baseSlope; root.removeFromParent(); obstacles.dispose(); }};
 }
