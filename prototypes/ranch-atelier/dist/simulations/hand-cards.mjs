@@ -19,7 +19,7 @@ export async function cardFace(hero) {
  try {
   const {renderCard, CARD, L} = await loadForge();
   // The tile's cartoon, as comic mode draws it in the game (tools/hand-card-art), so the card matches the place it makes.
-  const thumb = new URL((SPECS[id] ? './assets/tile-cards/' : './assets/tile-thumbs/') + id + '.webp', import.meta.url).href;
+  const thumb = new URL((SPECS[id] ? './assets/tile-cards/' : './assets/tile-thumbs/') + id + '.webp?v=2', import.meta.url).href;
   const cssWidth = 120, dpr = Math.min(3, Math.max(1, devicePixelRatio || 1)), dpi = cssWidth * dpr / (CARD.w / 25.4);
   // cost 0 reserves the token on the ribbon's left; the icon is painted over it below.
   const {canvas} = await renderCard({id: 'tile-' + id, name: base.name, type: base.type, rarity: base.rarity, cost: 0, biome: base.biome, art: {image: thumb}}, {dpi, lod: 'hand', plate: false});
