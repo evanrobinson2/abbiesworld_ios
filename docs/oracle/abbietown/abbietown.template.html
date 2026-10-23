@@ -600,7 +600,8 @@ canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
 canvas.addEventListener('pointerup', e => {
  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return; const r = canvas.getBoundingClientRect();
  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera);
- if (spotByID.cafe && ray.intersectObject(spotByID.cafe.g, true)[0]) { const ev = new CustomEvent('abbietown:cafe-door', {detail: {id: 'cafe', signedIn}, cancelable: true}); if (window.dispatchEvent(ev) && document.body.classList.contains('play')) location.href = '/studies/cafe/diorama.html?from=town'; }
+ const cafeG = viewDio ? dioTiles.downtown?.spots.cafe?.g : spotByID.cafe?.g; // on the board, the café on Main Street is the door (Evan, 2026-10-23: is Abbie's coffee shop in Winchester?)
+ if (cafeG && ray.intersectObject(cafeG, true)[0]) { const ev = new CustomEvent('abbietown:cafe-door', {detail: {id: 'cafe', signedIn}, cancelable: true}); if (window.dispatchEvent(ev) && document.body.classList.contains('play')) location.href = '/studies/cafe/diorama.html?from=town'; }
  const hit = ray.intersectObjects(beakers, true)[0]; if (!hit) return;
  let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) { if (o.userData.link === CELL_GAME && window.AbbieTown?.go) window.AbbieTown.go('town:lab-door'); else location.href = o.userData.link; }
 });
