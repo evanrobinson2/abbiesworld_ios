@@ -1,0 +1,321 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/barn-shelter-charming",
+ "name": "barn-shelter-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "general barn / work shelter",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "61fc71c5-88aa-4cb8-9f91-707085d4805f",
+    "grid_url": "https://www.midjourney.com/jobs/61fc71c5-88aa-4cb8-9f91-707085d4805f?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "c7990bdf-df8d-42ea-af6e-683d7105d921",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:29:12.402Z",
+    "grid_done_at": "2026-10-23T00:29:30.407Z",
+    "upscale_clicked_at": "2026-10-23T00:29:44.508Z",
+    "downloaded_at": "2026-10-23T00:30:56.098Z",
+    "pick_reason": "open doorway with workbench, hayloft opening in the gable, stone foundation, chubby leaning roof"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "24f36766-b3f8-4741-b8dd-809d5833d7a2",
+    "grid_url": "https://www.midjourney.com/jobs/24f36766-b3f8-4741-b8dd-809d5833d7a2?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "86022e41-df67-4c1b-8935-7c0600f3cec1",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:31:05.484Z",
+    "grid_done_at": "2026-10-23T00:31:23.489Z",
+    "upscale_clicked_at": "2026-10-23T00:31:35.682Z",
+    "downloaded_at": "2026-10-23T00:33:06.874Z",
+    "pick_reason": "front with open doorway and workbench, gable end with hayloft, three-quarter side; one chubby barn"
+   }
+  },
+  "files": {
+   "hero.png": "58f5c377f55ab4301977e3885c9e1eeeecf010acdb94ad52500ade06bdc2abee",
+   "turnaround.png": "e36d04bb3cbbf92d4b8d084400696b467d10d7afee59efa0a7ce282c6b384bf0",
+   "view_front.png": "ad56fe260abcebea21e84cf4f7e90b2c9236369d650fc1fa170f19f4eabf4792",
+   "view_side.png": "c8f00d807b4c526b67d8c8966ae65bda8dc8bd8f2e952c50dd75d3e611176076",
+   "view_back.png": "bd7fc6655376cd7494a812f5acb16c0cb3f4c2438fdd49077520f95020ff11ad"
+  },
+  "folder": "tools/ranch-rebuild/mj/barn-shelter-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/barn-shelter-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build from the normal model: door, recess and leaf moved to the -X side, dormer, front windows, back loft with hay, charm deform (bulge, bell roof, flick, rise/sag, lean); hero camera grid-calibrated at 66/2 deg.",
+    "hero_iou": 0.877,
+    "sheet_gable_iou": 0.691
+   },
+   {
+    "round": 2,
+    "change": "Roof deck and ridge cap built in strips so they follow the ridge sag, ridge log seated lower and made of 7 segments, kick reduced to 0.32.",
+    "hero_iou": 0.863,
+    "sheet_gable_iou": 0.675
+   },
+   {
+    "round": 3,
+    "change": "Kick back up to 0.5 and walls taller (eave 2.9); camera recalibrated to 64/0 deg.",
+    "hero_iou": 0.875,
+    "sheet_gable_iou": 0.711
+   },
+   {
+    "round": 4,
+    "change": "Deeper plan (5.1 m), back overhang 0.25, bigger dormer (1.6 m wide, taller walls, wider arch), taller doorway; shorter tie ends, eave 0.5 and leaf open 50 deg to bring the footprint ratio back.",
+    "hero_iou": 0.891,
+    "sheet_gable_iou": 0.711
+   },
+   {
+    "round": 5,
+    "change": "Deeper bell (0.45) and smaller eave flick; tried more front rise (0.5) and a shorter back overhang (0.18), both worse (0.883-0.884), reverted.",
+    "hero_iou": 0.891,
+    "sheet_gable_iou": 0.705
+   },
+   {
+    "round": 6,
+    "change": "Final 768 px / 48 sample render and score.",
+    "hero_iou": 0.888,
+    "sheet_gable_iou": 0.705
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/barn-shelter (build.py, make_views.py, check.py, run.sh) and reshaped it. Same STATE switch and states (planned, foundation, frame, roof, complete), same origin (footprint centre on the ground), Z up, front -Y, ridge along Y, same material names and roles; one new material only for a new detail: Hay_Straw (the hay in the back loft)."
+   ],
+   [
+    "Orientation",
+    "The hero wins over the sheet: its wide doorway is on the long side with a hayloft dormer above it, not in the front gable. So the doorway, recess, workbench, tool rack and door leaf sit on the -X long side (built in the normal model's door frame and rotated), the arched hayloft dormer sits on the -X roof slope above them, the front (-Y) gable gets the hero's two big windows under the kicked ridge log, and the back gable gets the sheet's small window and a hay-filled loft opening. The camera that matches the hero sees the -X side on the left and the front gable on the right."
+   ],
+   [
+    "Footprint",
+    "3.8 x 5.1 m walls (normal 3.8 x 4.9), eave at 2.9 m, about 6.5 m to the top of the ridge log; bounding box 5.58 x 6.66 m (0.84 width/depth, normal 0.81). The door leaf is open 50 deg and sticks out on the -X side, which is most of the difference."
+   ],
+   [
+    "Charming shape",
+    "One deform pass on everything above the footing: the walls bulge up to 0.11 m between the corner posts (front, back and +X walls; planks are split in three courses so they curve), the roof slopes bell inward 0.45 m mid-slope and flick up at the eaves, the ridge rises 0.34 m towards the front and sags mid-length, and the whole frame leans 0.2 m to +X and 0.08 m to +Y at the top."
+   ],
+   [
+    "Craft",
+    "Big chunky shingle tabs (0.5 m courses, lifted butts), a round octagonal ridge log overhanging the front by 0.62 m with a 0.5 m upward kick, an end ring and a strut, chunky 0.36 m corner posts with feet, round log ends on the tie beams, rounded cobble footing (chamfered blocks) with stepping stones at the doorway, wide 0.32 m two-tone planks, oversized windows with deep sills, big heads and cross bars, an arched dormer opening with a trim ring, a ledge on brackets and a pitchfork resting on it, a 3-plank door leaf with ledges, Z brace, strap hinges and latch, and the normal model's recess with tool rack and a chubbier workbench."
+   ],
+   [
+    "Views (views/, built by make_views.py)",
+    "Hero: the harness mask kept the cast shadow and ground litter at the left foot and lost the grey footing stones on the right, so the mask is cut below a hand-traced footing line and the footing band is filled back in. Sheet: only the middle view (a clean gable elevation with the hay loft) is scored, against the orthographic back gable. The sheet's left view is a 3/4 with the door in the gable end and its right view has a lean-to roof; both contradict the hero and are dropped. The sheet draws a much taller, narrower barn than the hero, so its gable score is only a guide."
+   ],
+   [
+    "Scoring (check.py)",
+    "Hero rendered from 64 deg off the front towards -X, 0 deg up, harness lens (grid-calibrated twice), against views/hero.png; sheet gable = r/back.png against views/view_gable.png."
+   ],
+   [
+    "Game readiness",
+    "7,900 triangles complete (budget 9k); planned 164, foundation 624, frame 1,404, roof 4,112. 15 meshes, one flat material each: Plank_Rose, Plank_RoseDark, Plank_Interior, Plank_Shadow, Plank_Floor, Timber_Grey, Timber_Bench, Roof_Teal, Stone_Teal, Metal_Iron, Hay_Straw (Rope_String in planned). No animation."
+   ]
+  ],
+  "creative_additions": "A pitchfork resting on the dormer ledge, a hay mound in the back loft (from the sheet), post feet, an end ring on the ridge log, and chunky stepping stones at the side doorway."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   5.579200267791748,
+   6.6648712158203125,
+   6.522930145263672
+  ],
+  "triangles": 7900,
+  "materials": [
+   "Timber_Bench",
+   "Plank_Rose",
+   "Timber_Grey",
+   "Plank_Floor",
+   "Hay_Straw",
+   "Plank_Interior",
+   "Plank_Shadow",
+   "Metal_Iron",
+   "Plank_RoseDark",
+   "Roof_Teal",
+   "Stone_Teal"
+  ],
+  "parts": [
+   {
+    "name": "bench",
+    "materials": [
+     "Timber_Bench"
+    ]
+   },
+   {
+    "name": "door_leaf",
+    "materials": [
+     "Plank_Rose"
+    ]
+   },
+   {
+    "name": "door_ledges",
+    "materials": [
+     "Timber_Grey"
+    ]
+   },
+   {
+    "name": "floor",
+    "materials": [
+     "Plank_Floor"
+    ]
+   },
+   {
+    "name": "hay",
+    "materials": [
+     "Hay_Straw"
+    ]
+   },
+   {
+    "name": "interior",
+    "materials": [
+     "Plank_Interior"
+    ]
+   },
+   {
+    "name": "interior_shadow",
+    "materials": [
+     "Plank_Shadow"
+    ]
+   },
+   {
+    "name": "iron",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "loft_trim",
+    "materials": [
+     "Timber_Grey"
+    ]
+   },
+   {
+    "name": "plank_walls",
+    "materials": [
+     "Plank_Rose"
+    ]
+   },
+   {
+    "name": "plank_walls_dark",
+    "materials": [
+     "Plank_RoseDark"
+    ]
+   },
+   {
+    "name": "roof_shingles",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "roof_timbers",
+    "materials": [
+     "Timber_Grey"
+    ]
+   },
+   {
+    "name": "stone_footing",
+    "materials": [
+     "Stone_Teal"
+    ]
+   },
+   {
+    "name": "timber_frame",
+    "materials": [
+     "Timber_Grey"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "complete",
+  "foundation",
+  "frame",
+  "planned",
+  "roof"
+ ],
+ "validation": {
+  "outline_iou": 0.645,
+  "hero_iou": null,
+  "per_view": {
+   "front": 0.742,
+   "side": 0.514,
+   "back": 0.678
+  },
+  "triangle_budget": 9000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.888 from the hero's own direction.",
+   "At game size the bell-shaped teal roof with the kicked ridge log, the dormer, the dark open doorway with the bench, the open leaf and the big front windows all read, and it is still clearly the normal barn-shelter.",
+   "Construction stages read as a sequence; the dormer roof arrives with the roof stage on its corner posts, its walls with the complete stage."
+  ],
+  "off": [
+   "The doorway moved from the front gable (normal model, sheet) to the -X long side (hero). If the game needs the door facing -Y this is the one thing to revisit.",
+   "The hero's ridge log rises higher at the front than mine; a bigger kick fought the roof shape, so the top-right corner of the hero mask is a little short.",
+   "The hero's back rake is more concave at the top than my bell deform makes it; the top-left roof corner sits slightly outside the hero.",
+   "Sheet gable IoU 0.705: the sheet barn is much taller and narrower than the hero, and the dormer and the open leaf stick out of my back-view silhouette.",
+   "The plain harness score (sheet views as front/side/back) is 0.645; it compares a 3/4 view and a lean-to barn with the orthographic views, so it isn't meaningful here.",
+   "Shingles are flat tabs, not the hero's soft rounded ones; the tools in the rack are simple blocks."
+  ]
+ },
+ "exports": {
+  "runtime": "barn-shelter-charming.glb",
+  "variants": {
+   "complete": "variants/complete.glb",
+   "foundation": "variants/foundation.glb",
+   "frame": "variants/frame.glb",
+   "planned": "variants/planned.glb",
+   "roof": "variants/roof.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-planned.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-foundation.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-frame.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-roof.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/shelter-complete.json"
+   ]
+  }
+ },
+ "files": {
+  "barn-shelter-charming.glb": {
+   "sha256": "1263d01a5ceefd6ba5bf734dd5459e3ee6304e7f7b4e43f63a25f75c7496ba4c",
+   "bytes": 435656
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "32db79150c4a813a731b63a88184023c1e07e1e3",
+  "path": "tools/ranch-rebuild/models/barn-shelter-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
