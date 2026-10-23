@@ -1,0 +1,1111 @@
+{
+ "study": "AW-STUDY-0009 - Cutscenes",
+ "date": "2026-10-23",
+ "schema": "docs/oracle/identity/game-identity.schema.json (layers.cinematics, 1.2)",
+ "note": "Profiles are hand estimates from knowledge of the games and developer talks, not captures (source: estimate). Replace with measurements from the PC's library assimilation. style = we may learn from it; expression = we never copy it.",
+ "games": [
+  {
+   "game": "tiny-glade",
+   "name": "Tiny Glade",
+   "why": "Evan loves it; no cutscenes, the building is the show.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.0,
+     "source": "estimate",
+     "confidence": 0.6
+    },
+    "control_taken": "none",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "diorama": 1
+    },
+    "category_mix": {
+     "micro": 1
+    },
+    "interaction_mix": {
+     "camera": 1
+    },
+    "skip": {
+     "pause": false,
+     "seen_skip": false,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "world_build",
+     "typical_s": {
+      "value": 2,
+      "source": "estimate",
+      "confidence": 0.4
+     }
+    },
+    "hand_back": "seamless",
+    "words_required": "none"
+   },
+   "signatures": [
+    {
+     "id": "tg-build-as-show",
+     "layer": "cinematics",
+     "description": "Structures assemble in front of you with sound and bounce; the reward and the wait are the same moment.",
+     "class": "style",
+     "confidence": 0.6
+    },
+    {
+     "id": "tg-specific-forms",
+     "layer": "cinematics",
+     "description": "Its exact wall, roof and garden procedural forms and sound design.",
+     "class": "expression",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "game": "dorfromantik",
+   "name": "Dorfromantik",
+   "why": "Evan loves it; the camera pull-back is its only cinematic.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.0,
+     "source": "estimate",
+     "confidence": 0.6
+    },
+    "control_taken": "none",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "diorama": 1
+    },
+    "category_mix": {
+     "micro": 1
+    },
+    "interaction_mix": {
+     "camera": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": false,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "none"
+    },
+    "hand_back": "seamless",
+    "words_required": "none"
+   },
+   "signatures": [
+    {
+     "id": "dorf-tile-bounce",
+     "layer": "cinematics",
+     "description": "A tile lands with a small bounce and a satisfied sound; quests complete with a tiny flourish on the tile.",
+     "class": "style",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "game": "lego-bricktales",
+   "name": "LEGO Bricktales",
+   "why": "Evan loves it; diorama scenes with storybook framing.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.08,
+     "source": "estimate",
+     "confidence": 0.5
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "diorama": 0.5,
+     "puppet": 0.3,
+     "storybook": 0.2
+    },
+    "category_mix": {
+     "intro": 0.2,
+     "beat": 0.5,
+     "reward": 0.3
+    },
+    "interaction_mix": {
+     "none": 0.7,
+     "camera": 0.3
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "transition",
+     "typical_s": {
+      "value": 3,
+      "source": "estimate",
+      "confidence": 0.3
+     }
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "bt-diorama-stage",
+     "layer": "cinematics",
+     "description": "Each area is a diorama on a plinth; scenes play at toy height inside it.",
+     "class": "style",
+     "confidence": 0.6
+    },
+    {
+     "id": "bt-characters",
+     "layer": "cinematics",
+     "description": "Its characters, script and the LEGO brand.",
+     "class": "expression",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "game": "among-us",
+   "name": "Among Us",
+   "why": "Evan's library; the best micro cutscenes there are.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.05,
+     "source": "estimate",
+     "confidence": 0.7
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "puppet": 1
+    },
+    "category_mix": {
+     "micro": 0.6,
+     "reward": 0.2,
+     "transition": 0.2
+    },
+    "interaction_mix": {
+     "none": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": false,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "role_reveal",
+     "typical_s": {
+      "value": 5,
+      "source": "estimate",
+      "confidence": 0.5
+     }
+    },
+    "hand_back": "cut",
+    "words_required": "minimal",
+    "scenes": [
+     {
+      "id": "ejection",
+      "t": [
+       [
+        "0",
+        "crewmate floats across stars"
+       ],
+       [
+        "3",
+        "one line: was or was not the impostor"
+       ],
+       [
+        "5",
+        "back to the table"
+       ]
+      ]
+     }
+    ]
+   },
+   "signatures": [
+    {
+     "id": "au-ritual-micro",
+     "layer": "cinematics",
+     "description": "One idea, about 5 s, identical every time, funny, never tiresome: the ritual micro scene.",
+     "class": "style",
+     "confidence": 0.7
+    },
+    {
+     "id": "au-ejection-image",
+     "layer": "cinematics",
+     "description": "The specific floating-ejection image and its line.",
+     "class": "expression",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "game": "fall-guys",
+   "name": "Fall Guys",
+   "why": "Evan's library; round preview as load cover, tutorial and bridge.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.06,
+     "source": "estimate",
+     "confidence": 0.6
+    },
+    "control_taken": "camera_only",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "diorama": 0.6,
+     "puppet": 0.4
+    },
+    "category_mix": {
+     "loading_cover": 0.6,
+     "reward": 0.4
+    },
+    "interaction_mix": {
+     "none": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": false,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "play_preview",
+     "typical_s": {
+      "value": 8,
+      "source": "estimate",
+      "confidence": 0.4
+     }
+    },
+    "hand_back": "seamless",
+    "words_required": "minimal"
+   },
+   "signatures": [
+    {
+     "id": "fg-flyover-teaches",
+     "layer": "cinematics",
+     "description": "The flyover of the round teaches the course while it loads.",
+     "class": "style",
+     "confidence": 0.7
+    }
+   ]
+  },
+  {
+   "game": "valheim",
+   "name": "Valheim",
+   "why": "Evan's library; travel as load cover.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.01,
+     "source": "estimate",
+     "confidence": 0.5
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "cinematic": 1
+    },
+    "category_mix": {
+     "intro": 1
+    },
+    "interaction_mix": {
+     "none": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "travel",
+     "typical_s": {
+      "value": 20,
+      "source": "estimate",
+      "confidence": 0.3
+     }
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "vh-carried-in",
+     "layer": "cinematics",
+     "description": "A creature carries you to the start point while the world loads.",
+     "class": "style",
+     "confidence": 0.6
+    },
+    {
+     "id": "vh-valkyrie",
+     "layer": "cinematics",
+     "description": "The Valkyrie and Norse framing.",
+     "class": "expression",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "game": "apex-legends",
+   "name": "Apex Legends",
+   "why": "Evan's library; drop ship and line-up hide matchmaking and loading.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.04,
+     "source": "estimate",
+     "confidence": 0.5
+    },
+    "control_taken": "camera_only",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "cinematic": 0.5,
+     "puppet": 0.5
+    },
+    "category_mix": {
+     "loading_cover": 0.7,
+     "reward": 0.3
+    },
+    "interaction_mix": {
+     "choice": 0.6,
+     "none": 0.4
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": false,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "play",
+     "typical_s": {
+      "value": 30,
+      "source": "estimate",
+      "confidence": 0.3
+     }
+    },
+    "hand_back": "seamless",
+    "words_required": "minimal"
+   },
+   "signatures": [
+    {
+     "id": "apex-choose-during-cover",
+     "layer": "cinematics",
+     "description": "The player chooses where to land during the cover, so waiting becomes deciding.",
+     "class": "style",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "game": "bastion",
+   "name": "Bastion",
+   "why": "Evan's library; the narrator replaces cutscenes.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.01,
+     "source": "estimate",
+     "confidence": 0.7
+    },
+    "control_taken": "none",
+    "render_mix": {
+     "text_narrator": 0.9,
+     "static_panels": 0.1
+    },
+    "style_mix": {
+     "storybook": 1
+    },
+    "category_mix": {
+     "micro": 0.7,
+     "intro": 0.3
+    },
+    "interaction_mix": {
+     "none": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "none"
+    },
+    "hand_back": "seamless",
+    "words_required": "none"
+   },
+   "signatures": [
+    {
+     "id": "bastion-reactive-narrator",
+     "layer": "cinematics",
+     "description": "A narrator reacts to what you do as you do it, without taking control.",
+     "class": "style",
+     "confidence": 0.8
+    },
+    {
+     "id": "bastion-voice",
+     "layer": "cinematics",
+     "description": "The specific narrator's voice, script and world.",
+     "class": "expression",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "game": "dave-the-diver",
+   "name": "Dave the Diver",
+   "why": "Evan's library; comic cut-ins for reward and humour.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.08,
+     "source": "estimate",
+     "confidence": 0.5
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 0.8,
+     "static_panels": 0.2
+    },
+    "style_mix": {
+     "comic": 0.5,
+     "puppet": 0.5
+    },
+    "category_mix": {
+     "beat": 0.4,
+     "reward": 0.4,
+     "micro": 0.2
+    },
+    "interaction_mix": {
+     "none": 0.8,
+     "qte": 0.2
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "transition"
+    },
+    "hand_back": "cut",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "dtd-cut-in",
+     "layer": "cinematics",
+     "description": "Manga-style cut-in panels punctuate rewards and jokes in a second or two.",
+     "class": "style",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "game": "cult-of-the-lamb",
+   "name": "Cult of the Lamb",
+   "why": "Evan's library; ritual micro scenes, cute-spooky tone.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.05,
+     "source": "estimate",
+     "confidence": 0.5
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "puppet": 0.7,
+     "storybook": 0.3
+    },
+    "category_mix": {
+     "beat": 0.4,
+     "reward": 0.4,
+     "micro": 0.2
+    },
+    "interaction_mix": {
+     "none": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "transition"
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "cotl-ritual",
+     "layer": "cinematics",
+     "description": "Rituals as short, repeatable celebration scenes with the whole village reacting.",
+     "class": "style",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "game": "overcooked-2",
+   "name": "Overcooked 2",
+   "why": "Evan's library; comic-panel story and the level preview pan.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.03,
+     "source": "estimate",
+     "confidence": 0.5
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "static_panels": 0.5,
+     "in_engine": 0.5
+    },
+    "style_mix": {
+     "comic": 0.5,
+     "diorama": 0.5
+    },
+    "category_mix": {
+     "intro": 0.3,
+     "transition": 0.4,
+     "reward": 0.3
+    },
+    "interaction_mix": {
+     "none": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "level_preview",
+     "typical_s": {
+      "value": 4,
+      "source": "estimate",
+      "confidence": 0.4
+     }
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "oc-kitchen-preview",
+     "layer": "cinematics",
+     "description": "A short pan over the kitchen before play teaches its layout.",
+     "class": "style",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "game": "plants-vs-zombies-game-of-the-year",
+   "name": "Plants vs Zombies",
+   "why": "Evan's library; a funny host as tutorial, stings as warnings.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.02,
+     "source": "estimate",
+     "confidence": 0.5
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 0.7,
+     "static_panels": 0.3
+    },
+    "style_mix": {
+     "puppet": 0.7,
+     "comic": 0.3
+    },
+    "category_mix": {
+     "intro": 0.3,
+     "micro": 0.7
+    },
+    "interaction_mix": {
+     "none": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "none"
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "pvz-wave-sting",
+     "layer": "cinematics",
+     "description": "A short sting and big lettering announce a big wave: a micro warning scene.",
+     "class": "style",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "game": "dispatch",
+   "name": "Dispatch",
+   "why": "Evan's library; AdHoc Studio (Telltale veterans), animated-series look with choices.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.6,
+     "source": "estimate",
+     "confidence": 0.4
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "telltale": 0.7,
+     "cinematic": 0.3
+    },
+    "category_mix": {
+     "beat": 0.7,
+     "recap": 0.1,
+     "intro": 0.2
+    },
+    "interaction_mix": {
+     "choice": 0.6,
+     "none": 0.3,
+     "qte": 0.1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "episode_card"
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "dispatch-episode",
+     "layer": "cinematics",
+     "description": "Episodes with recaps and choice beats, framed like a TV series.",
+     "class": "style",
+     "confidence": 0.5
+    },
+    {
+     "id": "dispatch-cast",
+     "layer": "cinematics",
+     "description": "Its characters, script, animation and superhero setting.",
+     "class": "expression",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "game": "the-wolf-among-us",
+   "name": "The Wolf Among Us",
+   "why": "Backlog reference for the telltale style.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.7,
+     "source": "estimate",
+     "confidence": 0.6
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "telltale": 0.8,
+     "comic": 0.2
+    },
+    "category_mix": {
+     "beat": 0.7,
+     "recap": 0.1,
+     "intro": 0.2
+    },
+    "interaction_mix": {
+     "choice": 0.7,
+     "qte": 0.2,
+     "none": 0.1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "episode_card"
+    },
+    "hand_back": "seamless",
+    "words_required": "most"
+   },
+   "signatures": [
+    {
+     "id": "twau-remember",
+     "layer": "cinematics",
+     "description": "'X will remember that' acknowledges a choice in one line without showing the consequence.",
+     "class": "style",
+     "confidence": 0.8
+    },
+    {
+     "id": "twau-silence",
+     "layer": "cinematics",
+     "description": "Silence as a real dialogue option when the timer runs out.",
+     "class": "style",
+     "confidence": 0.8
+    },
+    {
+     "id": "twau-fables",
+     "layer": "cinematics",
+     "description": "Its Fables characters, neon palette and script.",
+     "class": "expression",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "game": "what-remains-of-edith-finch",
+   "name": "What Remains of Edith Finch",
+   "why": "Backlog reference for storybook text in the world.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.3,
+     "source": "estimate",
+     "confidence": 0.6
+    },
+    "control_taken": "camera_only",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "storybook": 0.8,
+     "cinematic": 0.2
+    },
+    "category_mix": {
+     "beat": 0.8,
+     "intro": 0.2
+    },
+    "interaction_mix": {
+     "poke": 0.6,
+     "camera": 0.4
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": false,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "travel"
+    },
+    "hand_back": "seamless",
+    "words_required": "most"
+   },
+   "signatures": [
+    {
+     "id": "ef-text-in-world",
+     "layer": "cinematics",
+     "description": "Narration appears as text placed in the world, following the player's view.",
+     "class": "style",
+     "confidence": 0.8
+    }
+   ]
+  },
+  {
+   "game": "florence",
+   "name": "Florence",
+   "why": "Backlog reference for wordless poke-to-feel.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.5,
+     "source": "estimate",
+     "confidence": 0.7
+    },
+    "control_taken": "camera_only",
+    "render_mix": {
+     "static_panels": 0.7,
+     "in_engine": 0.3
+    },
+    "style_mix": {
+     "comic": 0.6,
+     "storybook": 0.4
+    },
+    "category_mix": {
+     "beat": 0.8,
+     "montage": 0.2
+    },
+    "interaction_mix": {
+     "poke": 1
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": false,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "none"
+    },
+    "hand_back": "seamless",
+    "words_required": "none"
+   },
+   "signatures": [
+    {
+     "id": "fl-poke-feel",
+     "layer": "cinematics",
+     "description": "Interaction stands in for feeling: conversation pieces get easier as the couple grows close.",
+     "class": "style",
+     "confidence": 0.8
+    }
+   ]
+  },
+  {
+   "game": "kentucky-route-zero",
+   "name": "Kentucky Route Zero",
+   "why": "Backlog reference for the diorama camera.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.4,
+     "source": "estimate",
+     "confidence": 0.5
+    },
+    "control_taken": "camera_only",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "diorama": 0.7,
+     "cinematic": 0.3
+    },
+    "category_mix": {
+     "beat": 0.6,
+     "transition": 0.4
+    },
+    "interaction_mix": {
+     "choice": 0.7,
+     "camera": 0.3
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": false,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "travel"
+    },
+    "hand_back": "seamless",
+    "words_required": "most"
+   },
+   "signatures": [
+    {
+     "id": "krz-pullback",
+     "layer": "cinematics",
+     "description": "The camera pulls back to reveal the whole set as a stage.",
+     "class": "style",
+     "confidence": 0.8
+    }
+   ]
+  },
+  {
+   "game": "mixtape",
+   "name": "Mixtape",
+   "why": "Backlog reference for montage cut to music.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.4,
+     "source": "estimate",
+     "confidence": 0.3
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "cinematic": 0.6,
+     "puppet": 0.4
+    },
+    "category_mix": {
+     "montage": 0.7,
+     "beat": 0.3
+    },
+    "interaction_mix": {
+     "rhythm": 0.5,
+     "none": 0.5
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "none"
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "mx-cut-to-song",
+     "layer": "cinematics",
+     "description": "The edit follows the song: cuts land on the beat.",
+     "class": "style",
+     "confidence": 0.6
+    },
+    {
+     "id": "mx-licensed",
+     "layer": "cinematics",
+     "description": "Its licensed songs and story.",
+     "class": "expression",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "game": "god-of-war-2018",
+   "name": "God of War (2018)",
+   "why": "Outside the library; the one-shot camera and crawl spaces.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.15,
+     "source": "estimate",
+     "confidence": 0.6
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "cinematic": 1
+    },
+    "category_mix": {
+     "beat": 0.6,
+     "loading_cover": 0.3,
+     "intro": 0.1
+    },
+    "interaction_mix": {
+     "none": 0.6,
+     "qte": 0.4
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "crawl_space",
+     "typical_s": {
+      "value": 6,
+      "source": "estimate",
+      "confidence": 0.4
+     }
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "gow-one-shot",
+     "layer": "cinematics",
+     "description": "No camera cuts in the whole game; cutscenes begin and end on the play camera.",
+     "class": "style",
+     "confidence": 0.8
+    }
+   ]
+  },
+  {
+   "game": "mass-effect",
+   "name": "Mass Effect",
+   "why": "Outside the library; the elevator as load cover.",
+   "cinematics": {
+    "share_of_playtime": {
+     "value": 0.2,
+     "source": "estimate",
+     "confidence": 0.6
+    },
+    "control_taken": "full",
+    "render_mix": {
+     "in_engine": 1
+    },
+    "style_mix": {
+     "cinematic": 1
+    },
+    "category_mix": {
+     "beat": 0.6,
+     "loading_cover": 0.4
+    },
+    "interaction_mix": {
+     "choice": 0.6,
+     "none": 0.4
+    },
+    "skip": {
+     "pause": true,
+     "seen_skip": true,
+     "hold_to_skip": false,
+     "fast_forward": false,
+     "shorten_repeats": false
+    },
+    "load_cover": {
+     "strategy": "travel_with_banter",
+     "typical_s": {
+      "value": 30,
+      "source": "estimate",
+      "confidence": 0.3
+     }
+    },
+    "hand_back": "seamless",
+    "words_required": "some"
+   },
+   "signatures": [
+    {
+     "id": "me-elevator",
+     "layer": "cinematics",
+     "description": "Squadmates talk during the elevator ride that hides the load; later games replaced it with a loading screen and players missed it.",
+     "class": "style",
+     "confidence": 0.7
+    }
+   ]
+  }
+ ]
+}

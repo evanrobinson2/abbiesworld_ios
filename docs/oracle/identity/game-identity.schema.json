@@ -15,7 +15,8 @@
     "schema_version": {
       "enum": [
         "1.0",
-        "1.1"
+        "1.1",
+        "1.2"
       ]
     },
     "game": {
@@ -838,6 +839,240 @@
             }
           }
         },
+        "cinematics": {
+          "type": "object",
+          "description": "How the game takes the camera away from the player, and why. Added in 1.2 from the cutscene study (docs/oracle/cutscenes/CUTSCENE_STUDY.md, AW-STUDY-0009). Mixes are weights summing to about 1.",
+          "properties": {
+            "share_of_playtime": {
+              "$ref": "#/$defs/maybeMeasured",
+              "description": "Fraction of a typical session spent in cutscenes (0 to 1)."
+            },
+            "control_taken": {
+              "enum": [
+                "full",
+                "camera_only",
+                "none",
+                "mixed"
+              ],
+              "description": "What a typical cutscene takes: camera and input, the camera only, or nothing."
+            },
+            "render_mix": {
+              "type": "object",
+              "description": "How cutscenes are made.",
+              "properties": {
+                "pre_rendered": {
+                  "$ref": "#/$defs/unit"
+                },
+                "in_engine": {
+                  "$ref": "#/$defs/unit"
+                },
+                "hybrid": {
+                  "$ref": "#/$defs/unit"
+                },
+                "static_panels": {
+                  "$ref": "#/$defs/unit"
+                },
+                "text_narrator": {
+                  "$ref": "#/$defs/unit"
+                }
+              },
+              "additionalProperties": false
+            },
+            "style_mix": {
+              "type": "object",
+              "description": "Art style of the framing. See the study, section 4.",
+              "properties": {
+                "cinematic": {
+                  "$ref": "#/$defs/unit"
+                },
+                "storybook": {
+                  "$ref": "#/$defs/unit"
+                },
+                "comic": {
+                  "$ref": "#/$defs/unit"
+                },
+                "telltale": {
+                  "$ref": "#/$defs/unit"
+                },
+                "diorama": {
+                  "$ref": "#/$defs/unit"
+                },
+                "puppet": {
+                  "$ref": "#/$defs/unit"
+                }
+              },
+              "additionalProperties": false
+            },
+            "category_mix": {
+              "type": "object",
+              "description": "Which kinds of cutscene the game uses. See the study, section 3.",
+              "properties": {
+                "intro": {
+                  "$ref": "#/$defs/unit"
+                },
+                "beat": {
+                  "$ref": "#/$defs/unit"
+                },
+                "reward": {
+                  "$ref": "#/$defs/unit"
+                },
+                "transition": {
+                  "$ref": "#/$defs/unit"
+                },
+                "loading_cover": {
+                  "$ref": "#/$defs/unit"
+                },
+                "micro": {
+                  "$ref": "#/$defs/unit"
+                },
+                "montage": {
+                  "$ref": "#/$defs/unit"
+                },
+                "recap": {
+                  "$ref": "#/$defs/unit"
+                }
+              },
+              "additionalProperties": false
+            },
+            "job_mix": {
+              "type": "object",
+              "description": "Why the game's cutscenes exist.",
+              "properties": {
+                "story": {
+                  "$ref": "#/$defs/unit"
+                },
+                "reward": {
+                  "$ref": "#/$defs/unit"
+                },
+                "pacing": {
+                  "$ref": "#/$defs/unit"
+                },
+                "tutorial": {
+                  "$ref": "#/$defs/unit"
+                },
+                "cover": {
+                  "$ref": "#/$defs/unit"
+                },
+                "bridge": {
+                  "$ref": "#/$defs/unit"
+                }
+              },
+              "additionalProperties": false
+            },
+            "interaction_mix": {
+              "type": "object",
+              "description": "What the player can do during a cutscene.",
+              "properties": {
+                "none": {
+                  "$ref": "#/$defs/unit"
+                },
+                "camera": {
+                  "$ref": "#/$defs/unit"
+                },
+                "poke": {
+                  "$ref": "#/$defs/unit"
+                },
+                "choice": {
+                  "$ref": "#/$defs/unit"
+                },
+                "qte": {
+                  "$ref": "#/$defs/unit"
+                },
+                "rhythm": {
+                  "$ref": "#/$defs/unit"
+                }
+              },
+              "additionalProperties": false
+            },
+            "skip": {
+              "type": "object",
+              "properties": {
+                "pause": {
+                  "type": "boolean"
+                },
+                "seen_skip": {
+                  "type": "boolean"
+                },
+                "hold_to_skip": {
+                  "type": "boolean"
+                },
+                "fast_forward": {
+                  "type": "boolean"
+                },
+                "shorten_repeats": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "load_cover": {
+              "type": "object",
+              "properties": {
+                "strategy": {
+                  "type": "string",
+                  "description": "none, transition, travel, travel_with_banter, crawl_space, play, play_preview, level_preview, world_build, role_reveal, episode_card, loading_screen."
+                },
+                "typical_s": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "honest": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "hand_back": {
+              "enum": [
+                "seamless",
+                "cut",
+                "fade",
+                "mixed"
+              ],
+              "description": "How control returns: on the play camera (seamless), with a camera cut, or through a fade."
+            },
+            "words_required": {
+              "enum": [
+                "none",
+                "minimal",
+                "some",
+                "most"
+              ],
+              "description": "How much reading a cutscene needs."
+            },
+            "music_sync": {
+              "type": "string",
+              "description": "How cuts and stings relate to the score."
+            },
+            "scenes": {
+              "type": "array",
+              "description": "A few representative cutscenes as short timelines (BACKLOG.md asks for one per game).",
+              "items": {
+                "type": "object",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "length_s": {
+                    "$ref": "#/$defs/maybeMeasured"
+                  },
+                  "t": {
+                    "type": "array",
+                    "items": {
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
         "information_grammar": {
           "type": "object",
           "description": "How the game tells the player things: which channel carries each kind of information, how much screen it costs, whether one game state drives the whole world, how entities signal each other, how places change the grammar, and how cards present art. Added in 1.1 from the HUD study (PR #108, #113) and card studies (PR #101, #103).",
@@ -1269,7 +1504,8 @@
             "audio",
             "narrative",
             "pacing",
-            "information_grammar"
+            "information_grammar",
+            "cinematics"
           ]
         },
         "description": {

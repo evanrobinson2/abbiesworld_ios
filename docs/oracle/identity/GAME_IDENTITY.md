@@ -267,6 +267,25 @@ Measured from a 30-minute audio capture and the action log.
 - `first_ten_minutes`: a timestamped list of what the player sees and does. Comparable across games and the single
   best predictor of whether a kid stays.
 
+### 10b. Cinematics (schema 1.2)
+
+Added 2026-10-23 with the cutscene study (`../cutscenes/CUTSCENE_STUDY.md`, AW-STUDY-0009). Pacing says how a session
+is structured; cinematics says **when and why the game takes the camera away**, and how it gives it back.
+
+- `share_of_playtime` and `control_taken` (full, camera only, none): how much agency the game spends.
+- `render_mix` (pre-rendered, in-engine, hybrid, static panels, text and narrator) and `style_mix` (cinematic,
+  storybook, comic, telltale, diorama, puppet), as weights.
+- `category_mix` over the eight categories (intro, beat, reward, transition, loading cover, micro, montage, recap),
+  `job_mix` over the six jobs (story, reward, pacing, tutorial, cover, bridge) and `interaction_mix` (none, camera,
+  poke, choice, QTE, rhythm).
+- `skip` (pause, seen-once skip, hold to skip, fast-forward, shorter repeats), `load_cover` (strategy, typical
+  seconds, honest or not), `hand_back` (seamless on the play camera, cut or fade) and `words_required`.
+- `scenes`: a few representative cutscenes as short timelines, the format `../BACKLOG.md` asks for.
+
+Signatures may now use the layer `cinematics`. Twenty profiles, all estimates, are in
+`../cutscenes/cutscene-signatures.json`; Evan's taste weighs heaviest on `hand_back`, `words_required` and
+`load_cover.strategy` (world building in front of you, as in Tiny Glade).
+
 ### 11. Market context (from Steam, for the indexer)
 
 Not identity, but it keeps the record honest: Steam app id, developer, publisher, release dates, engine, price,
