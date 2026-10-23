@@ -28,6 +28,7 @@ Tags as in [README.md](README.md). This page lists where secrets live, never the
 | `story-forge` (`prj_sAE2FKZKaCl1u41RgV5y2Ly6lvuA`) | **[unknown]** | **[unknown]** repo | Owns the R2 keys, Postgres, KV |
 | `abbies-holodeck-preview`, `ranch-atelier-cloud-preview` | *.vercel.app | snapshots | Previews |
 | `asset-viewer` | | main `prototypes/asset-viewer` | |
+| `abbies-champions` | abbies-champions.vercel.app | main `prototypes/champions` | 9 Kings tribute game (static three.js, `/r2` rewrite to the model store) |
 | 35+ others | | | One-off prototypes and games (peggle, sprout-lab, marble-voyage-art, …) |
 
 ## Secrets: where they live
