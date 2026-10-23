@@ -350,6 +350,120 @@
           "bytes": 1826357
         }
       ]
+    },
+    {
+      "name": "interior-elegant",
+      "view": "interior",
+      "style": "elegant",
+      "prompt": "interior of an elegant contemporary small cafe, Abbie's Cafe, blush rose plaster walls, dusty mauve velvet banquette, aubergine accents, champagne gold espresso machine and pendant lights, ivory marble counter with a pastry case, warm taupe oak floor, arched window with soft daylight, a painted sign with three gold stars above the counter, refined interior design photography, nobody in frame --ar 3:2 --v 8.2 --no text, letters",
+      "job_id": "16b7f7c7-11d5-4056-9b3e-e94401da05bc",
+      "created": "2026-10-23T05:08:12Z",
+      "files": [
+        {
+          "file": "images/interior-elegant_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/16b7f7c7-11d5-4056-9b3e-e94401da05bc/0_0.png",
+          "sha256": "5d8feed28361a206fb65264d3b06c06532be4b9510058c2cd64602bc2aa32b1f",
+          "bytes": 1800108
+        },
+        {
+          "file": "images/interior-elegant_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/16b7f7c7-11d5-4056-9b3e-e94401da05bc/0_1.png",
+          "sha256": "7cdbbef52ae8e354b5a701d877bf05f076c170a0e023334b422228e4bcecf3b1",
+          "bytes": 1863766
+        },
+        {
+          "file": "images/interior-elegant_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/16b7f7c7-11d5-4056-9b3e-e94401da05bc/0_2.png",
+          "sha256": "dbb3e1f4761c24e8a77d9884948a980bbcf6a0483c46661c388c3fbcdefd30f7",
+          "bytes": 1809461
+        },
+        {
+          "file": "images/interior-elegant_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/16b7f7c7-11d5-4056-9b3e-e94401da05bc/0_3.png",
+          "sha256": "84bc1cb219c760d7899e5480e3b393f38394348a0f792324fe1ef5b5869c032b",
+          "bytes": 1833076
+        }
+      ]
+    },
+    {
+      "name": "interior-party",
+      "view": "interior",
+      "style": "party",
+      "prompt": "interior of Abbie's Cafe, a zany cartoon dance party hangout, a light-up checker dance floor, a DJ booth made from a giant coffee cup, hot magenta pink and electric violet walls, tangerine and lime beanbags, turquoise milkshake bar with stools, disco ball, glowing star sign with three stars, playful Planet Zoo style game art, bold and fun, not fairy, not princess, no animals, nobody in frame --ar 3:2 --v 8.2 --no text, letters",
+      "job_id": "5ab4584f-1660-420e-8017-7235af03da0c",
+      "created": "2026-10-23T05:08:45Z",
+      "files": [
+        {
+          "file": "images/interior-party_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_0.png",
+          "sha256": "bfab2c4e439b073b8db27a91340ad34bae6159f1eec8f6a20e3fc262fb5f55e7",
+          "bytes": 1820002
+        },
+        {
+          "file": "images/interior-party_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_1.png",
+          "sha256": "d2bcea1f4c95656346cf3c483ddd29cf53bc1b910aca94b38690c6f95ff5027c",
+          "bytes": 1736322
+        },
+        {
+          "file": "images/interior-party_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_2.png",
+          "sha256": "4f1c92427912432644ae7ebf56bdfe6740a90552285649757fd481af2876fd5f",
+          "bytes": 1632085
+        },
+        {
+          "file": "images/interior-party_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5ab4584f-1660-420e-8017-7235af03da0c/0_3.png",
+          "sha256": "ccac7649c78c53084fe65a03961794928a2c79546772c39e685bd97c66ce586c",
+          "bytes": 1483358
+        }
+      ]
+    },
+    {
+      "name": "interior-game",
+      "view": "interior",
+      "style": "game",
+      "prompt": "interior of Abbie's Cafe in a cosy modern 3D game, stylised cartoon coffee shop, bubblegum pink walls, mint green counter, coral stools, cream tiles, butter yellow lamps, sky blue cups on shelves, a pastry case, a wooden sign with three stars, plants, warm light, clean hand-painted textures, Unity style 3D render, nobody in frame --ar 3:2 --v 8.2 --no text, letters",
+      "job_id": "502d09d1-ca65-40c5-9e41-88e046c8f245",
+      "created": "2026-10-23T05:09:18Z",
+      "files": [
+        {
+          "file": "images/interior-game_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/502d09d1-ca65-40c5-9e41-88e046c8f245/0_0.png",
+          "sha256": "15b4da6dfdaa517dd65707633a7cbf40a8e19609eb240cf6b817db0532c2fca2",
+          "bytes": 1448084
+        },
+        {
+          "file": "images/interior-game_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/502d09d1-ca65-40c5-9e41-88e046c8f245/0_1.png",
+          "sha256": "229d51e30df763a495dec317bab8bcd0fcad09fb08c90c93af5b375a7ad95f0a",
+          "bytes": 1676117
+        },
+        {
+          "file": "images/interior-game_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/502d09d1-ca65-40c5-9e41-88e046c8f245/0_2.png",
+          "sha256": "5becba9119b02f131aa56311bdf5179671395a89cd2f438e84b80d952d657cb9",
+          "bytes": 1655958
+        },
+        {
+          "file": "images/interior-game_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/502d09d1-ca65-40c5-9e41-88e046c8f245/0_3.png",
+          "sha256": "990da9db00f3b782f22ee82192d7b59e81c617449729acb02e35f05a9e534dad",
+          "bytes": 1499922
+        }
+      ]
     }
   ]
 }
