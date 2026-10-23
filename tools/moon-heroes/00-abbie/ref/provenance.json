@@ -1,0 +1,119 @@
+{
+  "model": "00-abbie",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "brief": "Evan via coordinator 2026-10-23 10:01Z: Meshy-ready versions of the two main heroes. Toy-hero ~4.5 heads, same Faceted Hero suit with lights in her own colour. Faces stay stylized cartoon characters, never from a photo or a real child's likeness.",
+  "identity": "Abbie: copper bob, blue eyes, as in the Moon Mission art; her colour is pink.",
+  "jobs": [
+    {
+      "role": "front_clay",
+      "job_id": "0e11b34f-1548-4d28-b189-b37399d25566",
+      "prompt": "low-poly faceted 3D game character, untextured white clay render, shape only, flat-shaded planes, sci-fi armour suit with light strips, this girl: stylized cartoon toy-hero little girl about 4.5 heads tall, bob haircut, big eyes, big gloves and big boots, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background, no helmet --ar 2:3",
+      "attach": "11-abbie-suit/ref/trek_cut.png (cut from trek/outputs/images/abbie.png, the Moon Mission Abbie)",
+      "images": [
+        {
+          "file": "mj_0e11b34f-1548-4d28-b189-b37399d25566_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/0e11b34f-1548-4d28-b189-b37399d25566/0_0.png",
+          "sha256": "ff1c15b3c71f1269d8230edcf7c9f2fa632e8e2d9b3b461ee9da8840f3d15c3f"
+        },
+        {
+          "file": "mj_0e11b34f-1548-4d28-b189-b37399d25566_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/0e11b34f-1548-4d28-b189-b37399d25566/0_1.png",
+          "sha256": "51fd2884c2aa2897c057741e77e2b375f634b631ecfc2ffd97d6d8016968ba75"
+        },
+        {
+          "file": "mj_0e11b34f-1548-4d28-b189-b37399d25566_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/0e11b34f-1548-4d28-b189-b37399d25566/0_2.png",
+          "sha256": "1d705dc0301d2e7d4f0ad07c8a366a4c5019e8a158027d906128918ef722ec44"
+        },
+        {
+          "file": "mj_0e11b34f-1548-4d28-b189-b37399d25566_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/0e11b34f-1548-4d28-b189-b37399d25566/0_3.png",
+          "sha256": "5f46b0c70e5d94b3e0d64e7fdf79f50bb8d16fbc5a521bfe65ed049e04af5eee"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "front_clay.png"
+      }
+    },
+    {
+      "role": "front_color",
+      "job_id": "4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46",
+      "prompt": "low-poly faceted 3D game character, flat-shaded planes, matte gunmetal sci-fi armour with glowing pink light strips, this girl: stylized cartoon toy-hero little girl about 4.5 heads tall, copper bob haircut, big blue eyes, big gloves and big boots, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background, no helmet --ar 2:3",
+      "attach": "11-abbie-suit/ref/trek_cut.png (cut from trek/outputs/images/abbie.png, the Moon Mission Abbie)",
+      "images": [
+        {
+          "file": "mj_4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46/0_0.png",
+          "sha256": "6efd236bb90b598f049ad32baf025f0a48e7f494e458690e68053f641b9c9460"
+        },
+        {
+          "file": "mj_4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46/0_1.png",
+          "sha256": "cfc2463dd9cb914b14af4fcdfa1e3228b02860ea62feddb8407c1153d971585c"
+        },
+        {
+          "file": "mj_4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46/0_2.png",
+          "sha256": "f1100f4568f2d7ca3468c5b4f93442a22ba7140b91de15c53667717421ad6dae"
+        },
+        {
+          "file": "mj_4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/4d6e1c6d-eeb6-4bbc-8fda-b13a9fce8f46/0_3.png",
+          "sha256": "16d6fc891ac6d448a73d6bdd76926e6514a99b1a98f5454231a3e185f047197c"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "front_color.png"
+      }
+    },
+    {
+      "role": "turnaround_clay",
+      "job_id": "71d8372e-d8ec-44ab-9aa7-2d2909cf8928",
+      "prompt": "low-poly faceted 3D game character turnaround sheet, front view, side view, back view, evenly spaced, same scale, untextured white clay render, shape only, flat-shaded planes, sci-fi armour suit with light strips, this girl: stylized cartoon toy-hero little girl about 4.5 heads tall, bob haircut, big eyes, big gloves and big boots, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, no helmet --ar 16:9",
+      "attach": "11-abbie-suit/ref/trek_cut.png (cut from trek/outputs/images/abbie.png, the Moon Mission Abbie)",
+      "images": [
+        {
+          "file": "mj_71d8372e-d8ec-44ab-9aa7-2d2909cf8928_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/71d8372e-d8ec-44ab-9aa7-2d2909cf8928/0_0.png",
+          "sha256": "b87794c3b76f220eae03503902fa22f7d1822d99f3156e005e26f84544a70860"
+        },
+        {
+          "file": "mj_71d8372e-d8ec-44ab-9aa7-2d2909cf8928_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/71d8372e-d8ec-44ab-9aa7-2d2909cf8928/0_1.png",
+          "sha256": "12ba8b495877036d391140a075167d1a0305c767ee4285274a1f1e3d6acba4d4"
+        },
+        {
+          "file": "mj_71d8372e-d8ec-44ab-9aa7-2d2909cf8928_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/71d8372e-d8ec-44ab-9aa7-2d2909cf8928/0_2.png",
+          "sha256": "d47dd7968132505dfedfe5fd80b851e88fea6315d67c5707df57305afa77bd56"
+        },
+        {
+          "file": "mj_71d8372e-d8ec-44ab-9aa7-2d2909cf8928_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/71d8372e-d8ec-44ab-9aa7-2d2909cf8928/0_3.png",
+          "sha256": "c83b54d00f02e7d2b9e3381c5c4a8c5290c4b2b48baa9570af1586e18b4ea034"
+        }
+      ],
+      "pick": {
+        "index": 0,
+        "file": "turnaround_clay.png"
+      }
+    }
+  ]
+}

@@ -37,5 +37,29 @@
     "index": 0,
     "file": "ref.png",
     "camera": "orthographic three-quarter, about 35 degrees turn, slightly above"
-  }
+  },
+  "inspiration": [
+    {
+      "file": "inspiration_pink_quad_9ba65562-65b5-4a09-a02d-4eb3614ef6ae_3.png",
+      "job_id": "9ba65562-65b5-4a09-a02d-4eb3614ef6ae",
+      "index": 3,
+      "date": "2026-09-30",
+      "note": "Evan's pink moon quad beside purple crystals; inspiration only, not the model. Found by searching his Midjourney archive for 'quad'."
+    },
+    {
+      "file": "inspiration_pink_quad_bead0294-0560-42ba-b9cf-5f261bb77002_3.png",
+      "job_id": "bead0294-0560-42ba-b9cf-5f261bb77002",
+      "index": 3,
+      "date": "2026-09-30",
+      "note": "Chunky pink quad, front three-quarter; inspiration only."
+    }
+  ],
+  "inspiration_other_jobs_seen": [
+    "51d0f155-5d86-433d-8930-90d12516f408",
+    "9ea100b7-71a5-416e-b1e8-4f7a98c0a5a5",
+    "7d2cf920-bb7c-4858-8180-a13067d4cfee",
+    "d0d3a717-e60a-415b-827b-86e999b9edcc",
+    "783f68c1-6336-4553-9712-05df3f053116",
+    "84cf2391-dd4e-47cd-8424-f2e26b9def6b"
+  ]
 }

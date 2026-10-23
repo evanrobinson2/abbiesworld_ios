@@ -1,0 +1,86 @@
+{
+  "model": "00-ani",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "brief": "Evan via coordinator 2026-10-23 10:01Z: Meshy-ready versions of the two main heroes. Toy-hero ~4.5 heads, same Faceted Hero suit with lights in her own colour. Faces stay stylized cartoon characters, never from a photo or a real child's likeness.",
+  "identity": "Ani (Anita, 'Ah-knee'): brown eyes, brown hair, darker skin; her colour is purple. White clay renders are shape only; her skin is never lightened in colour versions.",
+  "jobs": [
+    {
+      "role": "front_clay",
+      "job_id": "d0045d9b-9e41-4dd6-b144-d8d6af2ec59b",
+      "prompt": "low-poly faceted 3D game character, untextured white clay render, shape only, flat-shaded planes, sci-fi armour suit with light strips, big gloves and big boots, stylized cartoon toy-hero little girl about 4.5 heads tall, shoulder-length hair, big round eyes, cheerful, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background, no helmet --ar 2:3",
+      "attach": null,
+      "images": [
+        {
+          "file": "mj_d0045d9b-9e41-4dd6-b144-d8d6af2ec59b_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/d0045d9b-9e41-4dd6-b144-d8d6af2ec59b/0_0.png",
+          "sha256": "52b10b43a9bcff938792eca8e05c5889743acb9c6da1bf270a0ab27bb8bdd833"
+        },
+        {
+          "file": "mj_d0045d9b-9e41-4dd6-b144-d8d6af2ec59b_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/d0045d9b-9e41-4dd6-b144-d8d6af2ec59b/0_1.png",
+          "sha256": "5fa77711bfa47661b6ac4a0c6689b7792cd3f260c9832650048b0235b1c9f1dd"
+        },
+        {
+          "file": "mj_d0045d9b-9e41-4dd6-b144-d8d6af2ec59b_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/d0045d9b-9e41-4dd6-b144-d8d6af2ec59b/0_2.png",
+          "sha256": "c4ed15eb5ee66acdbe1165248edf448e2f759d20f4c1513ede8d44530a51f9ec"
+        },
+        {
+          "file": "mj_d0045d9b-9e41-4dd6-b144-d8d6af2ec59b_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/d0045d9b-9e41-4dd6-b144-d8d6af2ec59b/0_3.png",
+          "sha256": "8fec64ab5e078d44e07a9e1233eeef7b5bf3f8ff9ee3f547384f384b070fff60"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "front_clay.png"
+      }
+    },
+    {
+      "role": "turnaround_clay",
+      "job_id": "0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9",
+      "prompt": "low-poly faceted 3D game character turnaround sheet, front view, side view, back view, evenly spaced, same scale, untextured white clay render, shape only, flat-shaded planes, sci-fi armour suit with light strips, big gloves and big boots, stylized cartoon toy-hero little girl about 4.5 heads tall, shoulder-length hair, big round eyes, cheerful, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, no helmet --ar 16:9",
+      "attach": null,
+      "images": [
+        {
+          "file": "mj_0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9/0_0.png",
+          "sha256": "10df89681d6d377df44a49798abddfb2dbf65f00f9993157d7cac9ea69df583f"
+        },
+        {
+          "file": "mj_0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9/0_1.png",
+          "sha256": "630459945edb8c38eb1e1f22487d72f092291e7d4b7f189f4b27f934dee271d3"
+        },
+        {
+          "file": "mj_0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9/0_2.png",
+          "sha256": "963e2b03a54190be4cc8e7d1101d506a4f83bf8580977a9a5b7320c44c13c4fe"
+        },
+        {
+          "file": "mj_0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/0cb8d76d-4d8e-47d2-a3a0-7a371a3807c9/0_3.png",
+          "sha256": "00a4581f5e15812c15e50cd26ad6f7beabb846066aa3071aa06a04ecfa0451d6"
+        }
+      ],
+      "pick": {
+        "index": 3,
+        "file": "turnaround_clay.png"
+      }
+    }
+  ],
+  "pending": [
+    "front_color.png: colour front (purple lights, darker skin, brown hair and eyes) not yet made"
+  ]
+}
