@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-abbietown-dioramas",
+      "date": "2026-10-23",
+      "title": "Winchester as three dioramas",
+      "line": "Downtown, Ani's side, and Abbie and Daddy's side are now three little worlds you can hold: the real hills and ponds squeezed small, the places pushed together and built big, each with its own light and its own pulled-back view. /town opens on them.",
+      "image": "/whats-new/2026-10-23-abbietown-dioramas.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0042 - Abbie's Town",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-character-studio-meshy",
       "date": "2026-10-23",
       "title": "Character Studio: only Meshy figures",
