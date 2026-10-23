@@ -22,6 +22,11 @@ const CSS = `
 #mm-hud .panel{display:flex;flex-wrap:wrap;gap:10px;padding:12px 20px calc(14px + env(safe-area-inset-bottom,0px));align-items:stretch}
 #mm-hud .pl{flex:1 1 220px;min-width:0;border:1px solid var(--line);border-radius:16px;padding:8px;background:var(--bar);display:grid;gap:6px}
 #mm-hud .pl h2{margin:0;font:700 14px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#mm-hud .pl.console{flex:0 0 auto;padding:6px;max-width:100%}
+#mm-hud .polaroid{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-3deg);background:#fbfaf5;padding:14px 14px 46px;box-shadow:0 18px 60px #000a;border-radius:4px;z-index:20;pointer-events:auto;animation:mmpol 1.2s ease-out;cursor:pointer}
+#mm-hud .polaroid canvas{display:block;width:min(70vw,380px);height:auto}
+#mm-hud .polaroid b{position:absolute;left:0;right:0;bottom:12px;text-align:center;font:700 22px/1 'Caveat','Comic Sans MS',cursive;color:#2b2f45}
+@keyframes mmpol{from{transform:translate(-50%,-160%) rotate(8deg);opacity:0}to{transform:translate(-50%,-50%) rotate(-3deg);opacity:1}}
 #mm-hud .keys{display:flex;flex-wrap:wrap;gap:6px}
 #mm-hud button.key{min-width:4.5em;padding:8px;border-radius:12px;border:2px solid var(--c);background:var(--key);color:var(--ink);font:700 clamp(12px,1.7vw,18px)/1.1 system-ui;cursor:pointer}
 #mm-hud button.key[disabled]{opacity:.3;cursor:default}
@@ -32,6 +37,7 @@ const CSS = `
 import {PLAYERS} from './mission.mjs';
 import {ZONES} from './zones.mjs';
 import {botMoves} from './games.mjs';
+import {mountConsole, CONSOLE_OWNER} from './consoles.mjs';
 
 export function createHud({mission: m, world, container = document.body, quiet = false}) {
  if (!document.getElementById('mm-hud-css')) { const st = document.createElement('style'); st.id = 'mm-hud-css'; st.textContent = CSS; document.head.append(st); }
@@ -51,6 +57,15 @@ function card(e) { const el = $('card'), t = `${e.org} · ${e.clock} · ${e.plac
  typing = setInterval(() => { n++; sp.textContent = t.slice(0, n); ln.style.transform = `scaleX(${n / t.length})`; if (n >= t.length) clearInterval(typing); }, 30); }
 // three cheeses buy one moon cheese backpack charm (Backpack thread API: earnCharm('moon-cheese'), repeatable, 2 on the keychain)
 function grantCheeseCharm() { import('/simulations/backpack.mjs?v=5').then(b => b.earnCharm && b.earnCharm('moon-cheese')).catch(() => {}); }
+function polaroid(caption) { // the Chapter 1 ending photo: the crew on the Moon with the pink ship behind them
+ const d = document.createElement('div'); d.className = 'polaroid'; const cv = document.createElement('canvas'); cv.width = 380; cv.height = 300; d.append(cv); const b = document.createElement('b'); b.textContent = caption || ''; d.append(b);
+ const c = cv.getContext('2d'); c.fillStyle = '#05070f'; c.fillRect(0, 0, 380, 300); for (let i = 0; i < 50; i++) { c.fillStyle = '#fff'; c.fillRect((i * 97) % 380, (i * 53) % 170, 2, 2); }
+ c.fillStyle = '#2a6fd6'; c.beginPath(); c.arc(300, 60, 30, 0, 7); c.fill(); c.fillStyle = '#3ea64a'; c.fillRect(288, 50, 18, 12);
+ c.fillStyle = '#9a9eab'; c.fillRect(0, 210, 380, 90); c.fillStyle = '#868a97'; for (let i = 0; i < 8; i++) c.fillRect(20 + i * 47, 230 + (i * 17) % 50, 24, 6);
+ c.fillStyle = '#f6f7fb'; c.fillRect(58, 90, 36, 120); c.fillStyle = '#ff7eb6'; c.beginPath(); c.moveTo(58, 90); c.lineTo(76, 54); c.lineTo(94, 90); c.fill(); c.fillRect(54, 190, 44, 14);
+ [[150, '#6f9bff', 1], [210, '#ff7eb6', .62], [262, '#b18cff', .66]].forEach(([x, col, k]) => { const h = 100 * k, y = 262 - h; c.fillStyle = '#f6f7fb'; c.fillRect(x - 14 * k - 3, y + 24 * k, 28 * k + 6, h - 24 * k); c.fillStyle = col; c.fillRect(x - 14 * k - 3, y + 50 * k, 28 * k + 6, 7 * k); c.fillStyle = '#f6f7fb'; c.beginPath(); c.arc(x, y + 14 * k, 18 * k, 0, 7); c.fill(); c.fillStyle = '#1d2a44'; c.beginPath(); c.arc(x, y + 14 * k, 12 * k, 0, 7); c.fill(); c.fillStyle = '#fff'; c.fillRect(x - 6 * k, y + 8 * k, 4 * k, 4 * k); });
+ d.onclick = () => d.remove(); rootEl.append(d); setTimeout(() => d.remove(), 14000);
+}
 function fx(e) {
  switch (e.fx) {
   case 'card': card(e); break;
@@ -60,11 +75,12 @@ function fx(e) {
   case 'liftoff': break;
   case 'count': { const c = $('count'); c.hidden = e.n < 0; c.textContent = e.n; if (e.n === 0) setTimeout(() => c.hidden = true, 900); break; }
   case 'item': { const el = document.createElement('span'); el.title = e.name; el.textContent = e.icon; $('pocket').append(el); break; }
+  case 'polaroid': polaroid(e.caption); break;
   case 'game-done': if (e.game === 'mining') grantCheeseCharm(); break;
   case 'hold': $('clock').classList.add('held'); break;
   case 'job-done': $('clock').classList.remove('held'); break;
   case 'chip': break;
-  case 'end': speak('houston', 'Part 1 complete: welcome to the Moon base.'); break;
+  case 'end': speak('houston', e.id === 'chapter-1' ? 'Chapter 1 complete: we made it to the Moon.' : 'Chapter 2 complete: welcome home.'); break;
  }
 }
 function pump(es) { for (const e of es) { world.onFx(e); fx(e); } render(); }
@@ -78,9 +94,10 @@ function act(p) { // the one button: whatever this player's moment is
  else if (st.k === 'jobs') { const j = ownerJobs(p, v)[0]; if (j) pump(m.dispatch({type: 'press', player: p, key: j.key})); }
  else if (st.k === 'say') pump(m.dispatch({type: 'press', player: p, key: 'next'}));
  else if (st.k === 'cutscene') pump(m.dispatch({type: 'skip', player: p}));
- else if (st.k === 'game') { const g = st.game; if (g.name === 'zapper') send({player: p, zap: true}); else if (g.name === 'harmonizer') send({player: p, note: true}); else if (g.name === 'mining') send({player: p, swing: true}); else if (g.name === 'buggy' && p === 'ani') send({lights: !g.lights}); }
+ else if (st.k === 'game') { const g = st.game; if (g.name === 'flight') { if (p === 'daddy') send({player: p, press: true}); } else if (g.name === 'zapper') send({player: p, zap: true}); else if (g.name === 'harmonizer') send({player: p, note: true}); else if (g.name === 'mining') send({player: p, swing: true}); else if (g.name === 'buggy' && p === 'ani') send({lights: !g.lights}); }
  else if (st.k === 'lander') { if (p === 'abbie') pump(m.dispatch({type: 'lights', on: true})); if (p === 'ani') pump(m.dispatch({type: 'feet', on: true})); }
 }
+let cons = null;
 function render() {
  const v = m.view(), st = v.step; $('clock').textContent = v.clock;
  const opts = $('opts'); opts.innerHTML = '';
@@ -89,6 +106,8 @@ function render() {
   b.onclick = () => act(st.who || 'daddy'); opts.append(b); });
  if (st && st.k === 'accept') { const b = document.createElement('div'); b.className = 'opt sel'; b.innerHTML = '<span>&gt;</span> We accept'; for (const pid of st.yes) { const c = document.createElement('span'); c.className = 'chip'; c.style.background = color(pid); b.append(c); } opts.append(b); }
  const panel = $('panel'); panel.innerHTML = '';
+ const want = st && st.k === 'game' && CONSOLE_OWNER[st.game.name] ? st.game.name : null;
+ if (cons && cons.name !== want) { cons.api.destroy(); cons = null; } if (want && !cons) cons = {name: want, api: mountConsole(want, e => send({player: CONSOLE_OWNER[want], ...e}))};
  for (const p of PLAYERS) { const d = document.createElement('div'); d.className = 'pl'; d.style.borderColor = p.color;
   d.innerHTML = `<h2 style="color:${p.color}"><span>${p.name}</span><span>${v.hat === p.id ? 'HAT' : ''}</span></h2>`;
   const keys = document.createElement('div'); keys.className = 'keys'; const mine = ownerJobs(p.id, v);
@@ -105,24 +124,27 @@ function render() {
    else if (g.name === 'buggy') { if (p.id === 'daddy') { add('\u25c0', true, () => send({move: -1})); add('\u25b6', true, () => send({move: 1})); } else if (p.id === 'ani') add(g.lights ? 'LIGHTS ON' : 'LIGHTS', true, () => send({lights: !g.lights})); else add('CALL ROCKS', false, () => {}); } }
   else if (st && st.k === 'lander') { if (p.id === 'abbie') add('LANDING LIGHTS', true, () => act('abbie')); else if (p.id === 'ani') add('FEET DOWN', true, () => act('ani')); else add('THRUST (space)', true, () => {}); }
   else add(st && st.k === 'say' ? 'NEXT' : st && st.k === 'cutscene' ? 'SKIP' : '…', st && ['say', 'cutscene'].includes(st.k), () => act(p.id));
-  d.append(keys); panel.append(d); }
+  d.append(keys); if (cons && CONSOLE_OWNER[cons.name] === p.id) panel.append(cons.api.el); else panel.append(d); }
  const pk = document.createElement('div'); pk.className = 'pl'; pk.innerHTML = '<h2><span>Pocket</span></h2>'; const pc = document.createElement('div'); pc.className = 'pocket'; pc.id = 'pocket';
  for (const i of v.items) { const s = document.createElement('span'); s.title = i.name; s.textContent = i.icon; pc.append(s); } pk.append(pc); panel.append(pk);
 }
+const landingOn = () => { const st = m.view().step; return st && st.k === 'game' && st.game.name === 'landing'; };
 const KEYS = {a: 'daddy', g: 'abbie', l: 'ani'};
-on('keydown', e => { const st = m.view().step; if (st && st.k === 'game' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { const d = e.key === 'ArrowLeft' ? -1 : 1; if (st.game.name === 'buggy') send({move: d}); else if (st.game.name === 'zapper' || st.game.name === 'mining') for (const p of PLAYERS) send({player: p.id, move: d}); } });
+on('keydown', e => { const st = m.view().step; if (st && st.k === 'game' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { const d = e.key === 'ArrowLeft' ? -1 : 1; if (st.game.name === 'landing') send({player: 'abbie', tilt: d}); else if (st.game.name === 'buggy') send({move: d}); else if (st.game.name === 'zapper' || st.game.name === 'mining') for (const p of PLAYERS) send({player: p.id, move: d}); } });
 on('keydown', e => { if (e.repeat) return; const k = e.key.toLowerCase();
  if (KEYS[k]) act(KEYS[k]);
  else if (k === 'arrowdown' || k === 'arrowup') { const st = m.view().step; if (st && st.k === 'ask') { const p = st.who || 'daddy', n = st.options.length; cursor[p] = ((cursor[p] || 0) + (k === 'arrowdown' ? 1 : n - 1)) % n; } }
+ else if (k === ' ' && landingOn()) { send({player: 'abbie', thrust: 1}); e.preventDefault(); }
  else if (k === ' ') { thrust = 1; m.dispatch({type: 'fly', thrust, tilt}); e.preventDefault(); }
  else if (k === 'r') listen(); });
-on('keyup', e => { if (e.key === ' ') { thrust = 0; m.dispatch({type: 'fly', thrust, tilt}); } });
+on('keyup', e => { if (e.key === ' ' && landingOn()) send({player: 'abbie', thrust: 0}); else if (e.key === ' ') { thrust = 0; m.dispatch({type: 'fly', thrust, tilt}); } });
 let rec = null; function listen() { const SR = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SR || rec) return; rec = new SR(); rec.lang = 'en-US'; rec.onresult = ev => { pump(m.dispatch({type: 'heard', text: ev.results[0][0].transcript})); }; rec.onend = () => { rec = null; }; try { rec.start(); } catch { rec = null; } }
 // gamepads: pad i is player i; A acts, the stick or d-pad moves the choice, right trigger is thrust for Daddy
 const was = [];
 function pads() { const gp = navigator.getGamepads ? [...navigator.getGamepads()].filter(Boolean) : []; gp.forEach((p, i) => { const id = PLAYERS[i] && PLAYERS[i].id; if (!id) return; const a = !!p.buttons[0]?.pressed; if (a && !was[i]) act(id); was[i] = a; if (id === 'daddy') { const t = p.buttons[7]?.value || 0; if (t !== thrust) { thrust = t; } tilt = p.axes[0] || 0; m.dispatch({type: 'fly', thrust, tilt}); } }); }
 
- function frame(dt) { pads(); pump(m.dispatch({type: 'tick', dt})); world.tick(dt, m.view(), thrust); }
+ let ct = 0;
+ function frame(dt) { pads(); pump(m.dispatch({type: 'tick', dt})); const v = m.view(); ct += dt; if (cons && v.step && v.step.game) cons.api.draw(v.step.game, ct); world.tick(dt, v, thrust); }
 // test by state: ?beat=launch plays a bot family up to that beat (no speech)
 function bot(until) { sound = false; for (let s = 0; s < 400000 && m.view().beat !== until && !m.view().done; s++) { m.dispatch({type: 'tick', dt: .1}); const v = m.view(), st = v.step; if (!st) continue;
  if (st.k === 'ask') for (const p of PLAYERS) m.dispatch({type: 'choose', player: p.id, index: 0}); else if (st.k === 'accept') for (const p of PLAYERS) m.dispatch({type: 'press', player: p.id, key: 'yes'});

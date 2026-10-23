@@ -22,9 +22,10 @@ export function fmtClock(t) {
 }
 export const readTime = text => Math.max(1.6, text.length * .045);
 
-export function createMission({players = PLAYERS, start = null} = {}) {
+export function createMission({players = PLAYERS, start = null, chapter = 1} = {}) {
  const ids = players.map(p => p.id), has = id => ids.includes(id);
- const S = {beat: 0, stack: [], clock: BEATS[0].clock, running: false, held: false, flags: {}, items: [], hat: ids[0], effects: [], done: false, log: [], t: 0, cur: null, start};
+ const first = chapter === 2 ? Math.max(0, BEATS.findIndex(b => b.id === 'arrive')) : 0;
+ const S = {beat: first, stack: [], clock: BEATS[first].clock, running: false, held: false, flags: {}, items: [], hat: ids[0], effects: [], done: false, log: [], t: 0, cur: null, start};
  const emit = e => { S.effects.push(e); S.log.push(e); };
  const owner = o => { if (o === 'any') return 'any'; if (o.includes('?')) { const [a, b] = o.split('?'); return has(a) ? a : b; } return has(o) ? o : ids[0]; };
 
