@@ -291,6 +291,42 @@
           "bytes": 1225447
         }
       ]
+    },
+    {
+      "name": "female-base-toned",
+      "prompt": "A full-body standing base female figure made of matte ivory-white folded papercraft, well toned athletic build, wearing a simple modest sports bra top and fitted boy-short briefs, each folded as a clearly visible separate paper part with distinct edges, neutral A-pose, front view, smooth featureless head, faceted paper limbs with clear joints at shoulders, elbows, hips and knees, crisp creases and faceted folds, character base model reference for a strategy game, centered and entirely visible, orthographic, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "e510febc-d18c-4bdc-9a0d-5fdb63dfd8ca",
+      "created": "2026-10-23T03:11:14Z",
+      "files": [
+        {
+          "file": "images/female-base-toned_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/e510febc-d18c-4bdc-9a0d-5fdb63dfd8ca/0_0.png",
+          "sha256": "fd1a8fc8f040f575787f64137f1f1abf8dba4bd35f70c1f505a666f026dce21d",
+          "bytes": 1103856
+        },
+        {
+          "file": "images/female-base-toned_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/e510febc-d18c-4bdc-9a0d-5fdb63dfd8ca/0_1.png",
+          "sha256": "6e9db3ab0480937d0f3172d7b3d5bc6d4f5ffff481eaa9e6f151c995c44b8a0b",
+          "bytes": 1087362
+        },
+        {
+          "file": "images/female-base-toned_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/e510febc-d18c-4bdc-9a0d-5fdb63dfd8ca/0_2.png",
+          "sha256": "3339a073406d6a5de37921a1f00dbad93593e2185fb818bed5ce2f127c23ed92",
+          "bytes": 1106140
+        },
+        {
+          "file": "images/female-base-toned_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/e510febc-d18c-4bdc-9a0d-5fdb63dfd8ca/0_3.png",
+          "sha256": "539a9a43b9dbbfda85862ebcb5917e094104d573c52a057f148111eb95469dfb",
+          "bytes": 1067556
+        }
+      ]
     }
   ]
 }
