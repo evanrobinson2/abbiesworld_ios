@@ -38,6 +38,23 @@
     },
     "camera": "first_person",
     "art_direction": "Painterly.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "fog",
+        "colour grade"
+      ],
+      "signature": "Flat painted surfaces and big colour shifts with weather and time of day.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Flatter surfaces let sky colour take over the whole frame."
+    },
     "palette": null,
     "audio_mood": "Sparse.",
     "pacing": "slow, short sessions",

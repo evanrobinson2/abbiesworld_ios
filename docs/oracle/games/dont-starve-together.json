@@ -40,6 +40,22 @@
     },
     "camera": "isometric",
     "art_direction": "Hand-drawn Tim Burton-ish cut paper.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "cut_paper",
+      "light": "flat",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "paper",
+      "post": [
+        "vignette",
+        "colour grade"
+      ],
+      "signature": "Same paper-puppet recipe as Don't Starve.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6
+    },
     "palette": null,
     "audio_mood": "Jaunty eerie tunes, chattering voices.",
     "pacing": "slow, medium sessions",

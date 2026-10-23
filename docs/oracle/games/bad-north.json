@@ -41,6 +41,23 @@
     },
     "camera": "orbit_diorama",
     "art_direction": "Minimal pastel islands, tiny soldiers, soft fog.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "flat_low_poly",
+      "family": "graphic_minimal",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [
+        "fog",
+        "depth of field"
+      ],
+      "signature": "Minimal pastel islands floating in a soft fog; the fog colour is the mood.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.65,
+      "lesson": "Fog is a shader too: its colour sets the mood before anything else."
+    },
     "palette": null,
     "audio_mood": "Sparse strings and waves.",
     "pacing": "brisk, medium sessions",

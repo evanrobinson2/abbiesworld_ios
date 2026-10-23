@@ -38,7 +38,7 @@ header{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
 /* the pair: reference left, model right, identical frames */
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .frame{position:relative;aspect-ratio:1;max-width:100%;border-radius:14px;overflow:hidden;background:#82837d}
-.frame img.ref{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.frame img.ref{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .tag{position:absolute;left:10px;top:10px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
  color:#f4f3ef;background:rgba(20,20,22,.55);padding:6px 8px;border-radius:6px}
 .ghost{position:absolute;inset:0;background:rgba(244,243,239,.16);

@@ -1,0 +1,32 @@
+{
+ "learned_from": "../bruiser-study/meshy/canonical/meshy_canonical.glb",
+ "note": "opening radius in cm per kind:height band (20 bands of stature)",
+ "table": {
+  "limb:0": "op:6",
+  "limb:1": "op:4",
+  "limb:2": "se:2.0",
+  "limb:3": "se:2.0",
+  "limb:4": "se:2.0",
+  "limb:5": "se:2.0",
+  "limb:6": "se:2.0",
+  "limb:7": "se:2.0",
+  "limb:8": "se:2.0",
+  "limb:9": "se:2.0",
+  "torso:9": "se:2.0",
+  "limb:10": "se:2.0",
+  "torso:10": "se:2.0",
+  "limb:11": "se:2.0",
+  "torso:11": "se:2.0",
+  "limb:12": "se:2.0",
+  "torso:12": "se:2.0",
+  "torso:13": "se:2.0",
+  "torso:14": "se:2.0",
+  "torso:15": "se:2.0",
+  "torso:16": "se:2.0",
+  "torso:17": "se:2.0",
+  "torso:18": "se:2.0",
+  "torso:19": "op:6",
+  "limb:19": "op:6",
+  "limb:13": "se:2.0"
+ }
+}

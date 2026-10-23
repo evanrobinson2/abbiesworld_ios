@@ -1,0 +1,233 @@
+# Oracle rendering notes: how each studied game is shaded, not just what it looks like (2026-10-23).
+# Written in the cloud from public knowledge of each game, in our own words: no screenshots, art, shaders or code.
+# Fills the `art.rendering` slot of docs/oracle/identity/game-identity.schema.json for every Steam profile.
+#
+# Two kinds of entry:
+#   HAND: games studied by hand for the "Shaders - What they don't teach you in 3D School" article.
+#   derived: every other game, read from its one-line art note by RULES below, at low confidence.
+#
+# Fields (schema `oracle.rendering.v1`):
+#   style    the identity schema's coarse enum: stylised_pbr, toon, painterly, flat_low_poly, pixel_art, voxel,
+#            realistic, mixed
+#   family   the finer look: toon, comic_ink, painterly_3d, hand_painted_2d, watercolour, storybook, soft_diorama,
+#            flat_low_poly, cut_paper, line_art, graphic_minimal, voxel, pixel, pixel_3d, retro_low_poly,
+#            pre_rendered, stylised_pbr, realistic
+#   light    banded (stepped ramp), soft_wrap (wrapped, warm terminator), painted_in (light lives in the texture),
+#            flat (unlit or near), pbr (physical)
+#   outline  none, inverted_hull, screen_edges, inked_in (drawn into textures or sprites), line_art (lines carry the form)
+#   surface  flat_colour, gradient, hand_painted, paper, watercolour, pixel, pbr
+#   post     list of screen effects that sell the look
+#   signature  the one trick that makes the look, in one sentence
+#   lesson     what Abbie's World takes from it (hand entries only)
+
+SOURCE_HAND = 'oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)'
+SOURCE_DERIVED = 'derived from the art note by rendering_notes.RULES'
+
+# slug: (style, family, light, outline, surface, post, signature, lesson, confidence)
+HAND = {
+    'team-fortress-2': ('toon', 'toon', 'banded', 'none', 'hand_painted', [],
+        'Half-Lambert lighting looked up through a hand-made warm ramp, plus a strong rim, so forms read like a 1960s illustration.',
+        'Own the light ramp: it is the cheapest, most powerful art-direction control in a toon shader.', 0.8),
+    'borderlands-2': ('toon', 'comic_ink', 'banded', 'screen_edges', 'hand_painted', ['edge detection'],
+        'Hand-inked hatching painted into the textures plus a screen-space edge pass on silhouettes.',
+        'Lines can live in two places (texture and screen); use both so near and far stay inked.', 0.75),
+    'borderlands-3': ('toon', 'comic_ink', 'banded', 'screen_edges', 'hand_painted', ['edge detection'],
+        'Same inked recipe as Borderlands 2 with more physically based materials underneath.',
+        'A toon layer can sit on top of physical materials; it does not have to replace them.', 0.6),
+    'tiny-tinas-wonderlands': ('toon', 'comic_ink', 'banded', 'screen_edges', 'hand_painted', ['edge detection', 'bloom'],
+        'The Borderlands ink recipe pushed toward saturated fantasy colour.',
+        'Saturated colour needs darker, thicker ink to keep forms readable.', 0.55),
+    'marvel-rivals': ('toon', 'comic_ink', 'banded', 'inverted_hull', 'hand_painted', ['bloom'],
+        'Comic-book shading with crisp light bands and outlines that thin with distance.',
+        'Outline width should follow distance and importance, not stay one fixed pixel width.', 0.55),
+    'sable': ('toon', 'line_art', 'flat', 'line_art', 'flat_colour', [],
+        'Thick ink lines and flat colour fields with almost no shading, like a Moebius comic page.',
+        'With strong lines, you can drop shading almost entirely; the line carries the form.', 0.75),
+    'the-wolf-among-us': ('toon', 'comic_ink', 'banded', 'inked_in', 'hand_painted', ['colour grade'],
+        'Inked comic panels: lines and shadow shapes drawn into textures, then a heavy neon colour grade per scene.',
+        'A per-scene colour grade can do the mood work while the shading stays simple.', 0.65),
+    'batman-the-enemy-within': ('toon', 'comic_ink', 'banded', 'inked_in', 'hand_painted', ['colour grade'],
+        'Comic-book ink on characters with heavy black shadow shapes.',
+        'Big designed shadow shapes read better than accurate soft shadows in a comic look.', 0.5),
+    'hades': ('painterly', 'hand_painted_2d', 'painted_in', 'inked_in', 'hand_painted', ['bloom'],
+        'Painted characters with thick dark outlines and lighting painted in, on lit painted ground.',
+        'Paint the light into the asset when the camera never moves around it.', 0.7),
+    'bastion': ('painterly', 'hand_painted_2d', 'painted_in', 'none', 'hand_painted', [],
+        'Hand-painted isometric tiles with the light painted in; the ground assembles as you walk.',
+        'A fixed camera lets you paint lighting once and keep it.', 0.7),
+    'cult-of-the-lamb': ('toon', 'cut_paper', 'flat', 'inked_in', 'flat_colour', ['depth of field', 'bloom'],
+        'Flat cut-out characters with bold ink in a 3D world, softened by depth of field.',
+        'Flat characters in a 3D space read like a puppet theatre; depth of field holds them together.', 0.6),
+    'dont-starve': ('painterly', 'cut_paper', 'flat', 'inked_in', 'paper', ['vignette', 'colour grade'],
+        'Ink-drawn paper puppets as billboards in a 3D world, with a paper grain and a scratchy colour grade.',
+        'Paper grain plus ink line is a whole style with no shading at all.', 0.75),
+    'dont-starve-together': ('painterly', 'cut_paper', 'flat', 'inked_in', 'paper', ['vignette', 'colour grade'],
+        'Same paper-puppet recipe as Don\'t Starve.', None, 0.6),
+    'south-park-stick-of-truth': ('toon', 'cut_paper', 'flat', 'inked_in', 'flat_colour', [],
+        'Construction-paper cut-outs with no shading, faithful to the show.',
+        'When a look is famous for being flat, any shading at all breaks it.', 0.75),
+    'gris': ('painterly', 'watercolour', 'painted_in', 'none', 'watercolour', ['colour grade'],
+        'Watercolour washes and paper bleed; colour itself is unlocked as the story progresses.',
+        'Colour can be the reward: one signal re-saturates the whole world.', 0.7),
+    'dorfromantik': ('flat_low_poly', 'watercolour', 'soft_wrap', 'none', 'gradient', ['depth of field', 'bloom'],
+        'Soft low-poly tiles with gently graded colour and a tilt-shift blur that makes the board feel like a toy.',
+        'Tilt-shift depth of field turns a board into a toy on a table.', 0.7),
+    'tiny-glade': ('painterly', 'soft_diorama', 'soft_wrap', 'none', 'gradient', ['ambient occlusion', 'bloom', 'colour grade'],
+        'Soft global light and procedural detail on clean shapes; warm sun, cool bounce and contact shadows do everything.',
+        'Soft bounce light and contact shadows make simple shapes look handmade.', 0.7),
+    'townscaper': ('flat_low_poly', 'soft_diorama', 'soft_wrap', 'none', 'flat_colour', ['ambient occlusion'],
+        'Pastel flat colours with deep soft ambient occlusion in every corner.',
+        'Flat colour plus strong ambient occlusion reads as soft clay.', 0.6),
+    'bad-north': ('flat_low_poly', 'graphic_minimal', 'soft_wrap', 'none', 'flat_colour', ['fog', 'depth of field'],
+        'Minimal pastel islands floating in a soft fog; the fog colour is the mood.',
+        'Fog is a shader too: its colour sets the mood before anything else.', 0.65),
+    'thronefall': ('flat_low_poly', 'flat_low_poly', 'banded', 'none', 'flat_colour', ['fog'],
+        'Flat-shaded pastel low-poly with crisp sun shadows and a day and night swap.',
+        'Faceted normals plus one strong sun is enough for a whole art direction.', 0.6),
+    'lego-bricktales': ('stylised_pbr', 'soft_diorama', 'pbr', 'none', 'pbr', ['depth of field', 'bloom'],
+        'Glossy plastic bricks with real reflections, framed by tilt-shift blur.',
+        'A real material (plastic) can be the whole style when the world is a toy.', 0.6),
+    'besiege': ('stylised_pbr', 'flat_low_poly', 'soft_wrap', 'none', 'gradient', [],
+        'Clean low-poly fields and castles with simple soft light so contraptions stay readable.',
+        'Keep the world quiet so the thing the player builds is the loudest object.', 0.55),
+    '9-kings': ('painterly', 'pixel_3d', 'painted_in', 'none', 'pixel', [],
+        'Chunky pixel-painterly kingdoms on a small floating board.', None, 0.45),
+    'outer-wilds': ('stylised_pbr', 'stylised_pbr', 'pbr', 'none', 'hand_painted', ['bloom', 'fog'],
+        'Warm handmade surfaces under physical light; the campfire and sun are the colour anchors.',
+        'Warm light sources in a cold place make a world feel like a camp.', 0.55),
+    'trine': ('painterly', 'storybook', 'soft_wrap', 'none', 'hand_painted', ['bloom', 'fog', 'depth of field'],
+        'Storybook fantasy: glowing light shafts, heavy bloom and layered depth like painted theatre flats.',
+        'Layered depth and glow make a 3D world read as an illustrated page.', 0.6),
+    'stacking': ('stylised_pbr', 'storybook', 'soft_wrap', 'none', 'hand_painted', ['vignette', 'colour grade'],
+        'A handmade toy world of painted wood with soft light, like a silent-film storybook.',
+        'Real toy materials (painted wood) give an instant childhood feel.', 0.55),
+    'valheim': ('mixed', 'retro_low_poly', 'pbr', 'none', 'pixel', ['volumetric fog', 'bloom'],
+        'Low-poly, low-resolution textures under modern volumetric light, fog and shadows.',
+        'Rough low-fi models can look beautiful when the light and air are modern.', 0.7),
+    'mouthwashing': ('mixed', 'retro_low_poly', 'flat', 'none', 'pixel', ['dither', 'low resolution'],
+        'PS1-style: low resolution, wobbling vertices, warped textures and dithering.',
+        'Low resolution is a choice with a feeling (unease, memory), not just a budget.', 0.6),
+    'superhot': ('mixed', 'graphic_minimal', 'flat', 'none', 'flat_colour', ['ambient occlusion'],
+        'Everything white except red enemies; colour is pure information.',
+        'When colour means one thing only, players read it instantly.', 0.7),
+    'dredge': ('painterly', 'painterly_3d', 'soft_wrap', 'none', 'hand_painted', ['fog', 'colour grade'],
+        'Stylised painterly coast whose fog and grade turn cold and wrong at night.',
+        'One time-of-day signal driving fog, grade and danger together.', 0.55),
+    'red-dead-redemption-2': ('realistic', 'painterly_3d', 'pbr', 'none', 'pbr', ['volumetric fog', 'colour grade'],
+        'Physical rendering graded like a landscape painting, with heavy atmosphere.',
+        'Atmosphere and grade can make realism feel painted.', 0.55),
+    'the-long-dark': ('painterly', 'painterly_3d', 'soft_wrap', 'none', 'hand_painted', ['fog', 'colour grade'],
+        'Flat painted surfaces and big colour shifts with weather and time of day.',
+        'Flatter surfaces let sky colour take over the whole frame.', 0.6),
+    'dear-esther': ('painterly', 'painterly_3d', 'pbr', 'none', 'hand_painted', ['fog', 'colour grade'],
+        'Painterly island light carried by fog and grade.', None, 0.45),
+    'kingdom-two-crowns': ('pixel_art', 'pixel', 'painted_in', 'none', 'pixel', ['reflection', 'colour grade'],
+        'Pixel art with a live water reflection and a colour grade that tracks time of day.',
+        'One modern effect (reflection) on a simple look feels luxurious.', 0.65),
+    'dave-the-diver': ('mixed', 'pixel_3d', 'painted_in', 'none', 'pixel', ['fog', 'bloom'],
+        'Pixel-art sprites over 3D underwater backgrounds lit with fog and light shafts.', None, 0.55),
+    'donut-county': ('flat_low_poly', 'flat_low_poly', 'flat', 'none', 'flat_colour', [],
+        'Flat pastel low-poly with no texture at all.', None, 0.5),
+    'astroneer': ('flat_low_poly', 'flat_low_poly', 'soft_wrap', 'none', 'gradient', ['bloom', 'fog'],
+        'Pastel low-poly planets with smooth gradients and soft atmosphere.',
+        'Smooth gradients across low-poly faces look soft and friendly to kids.', 0.55),
+    'overland': ('flat_low_poly', 'soft_diorama', 'soft_wrap', 'none', 'flat_colour', ['fog'],
+        'Pastel low-poly dioramas lit by a moody sky.', None, 0.45),
+    'pikuniku': ('toon', 'graphic_minimal', 'flat', 'none', 'flat_colour', [],
+        'Bold flat shapes and primary colours with no shading.', None, 0.5),
+    'sixty-four': ('flat_low_poly', 'graphic_minimal', 'flat', 'none', 'flat_colour', [],
+        'Clean monochrome isometric, one accent colour.', None, 0.45),
+    'this-war-of-mine': ('painterly', 'hand_painted_2d', 'soft_wrap', 'none', 'paper', ['colour grade', 'vignette'],
+        'Charcoal-grey 2.5D with a pencil and paper grain.',
+        'A grain over everything sets the emotional temperature.', 0.6),
+    'betrayer': ('mixed', 'graphic_minimal', 'pbr', 'none', 'pbr', ['colour grade'],
+        'Black and white with only red left in colour.', None, 0.55),
+    'fallout': ('realistic', 'pre_rendered', 'painted_in', 'none', 'pixel', [],
+        'Pre-rendered isometric sprites and tiles from a 3D renderer.', None, 0.6),
+    'brigador-killers': ('realistic', 'pre_rendered', 'painted_in', 'none', 'pixel', ['bloom'],
+        'Pre-rendered isometric neon city.', None, 0.5),
+    'no-mans-sky': ('stylised_pbr', 'stylised_pbr', 'pbr', 'none', 'gradient', ['fog', 'bloom', 'colour grade'],
+        'Paperback sci-fi cover colours driven by per-planet sky and fog palettes.',
+        'Pick the palette per place and drive sky, fog and grade from it.', 0.55),
+    'alpha-zoo': ('flat_low_poly', 'flat_low_poly', 'soft_wrap', 'none', 'flat_colour', [],
+        'Bright simple low-poly with friendly round shapes.', None, 0.4),
+    'wobbly-life': ('toon', 'toon', 'soft_wrap', 'none', 'flat_colour', [],
+        'Bright toy-town colours with soft light and jelly people.', None, 0.45),
+    'fall-guys': ('toon', 'toon', 'soft_wrap', 'none', 'gradient', ['bloom'],
+        'Candy colours with soft wrap light, glossy highlights and big rim light.',
+        'Soft rim light plus candy colours is the look kids already love.', 0.55),
+    'before-your-eyes': ('painterly', 'storybook', 'soft_wrap', 'none', 'hand_painted', ['bloom', 'depth of field'],
+        'Painted 3D memories that dissolve when you blink.', None, 0.45),
+    'iron-harvest': ('painterly', 'painterly_3d', 'pbr', 'none', 'hand_painted', ['colour grade'],
+        'Painterly diesel-punk taken from a painter\'s alternate-history paintings.', None, 0.45),
+    'shadow-tactics-blades-of-the-shogun': ('painterly', 'painterly_3d', 'soft_wrap', 'none', 'hand_painted', ['colour grade'],
+        'Painterly Japan with clean readable surfaces and a graded sky per level.', None, 0.45),
+    'dispatch': ('toon', 'toon', 'banded', 'inverted_hull', 'hand_painted', [],
+        'Animated-series look with crisp light bands and clean outlines.', None, 0.45),
+    'disney-dreamlight-valley': ('stylised_pbr', 'toon', 'soft_wrap', 'none', 'hand_painted', ['bloom'],
+        'Animated-film soft shading with gentle rim and bloom.', None, 0.45),
+    'bluey-the-videogame': ('toon', 'toon', 'flat', 'none', 'flat_colour', [],
+        'Soft flat colours and round shapes matched to the show.', None, 0.5),
+    'postmouse': ('stylised_pbr', 'soft_diorama', 'soft_wrap', 'none', 'gradient', ['ambient occlusion'],
+        'Soft cute 3D with clay-like light.', None, 0.4),
+    'against-the-storm': ('painterly', 'painterly_3d', 'soft_wrap', 'none', 'hand_painted', ['fog', 'colour grade'],
+        'Painterly diorama whose storm season recolours the whole map.',
+        'One weather signal drives light, music and danger at once.', 0.55),
+    'risk-of-rain-2': ('stylised_pbr', 'flat_low_poly', 'soft_wrap', 'none', 'gradient', ['fog'],
+        'Stylised low-detail surfaces with strong fog colour per stage.', None, 0.45),
+    'frozen-synapse': ('mixed', 'graphic_minimal', 'flat', 'screen_edges', 'flat_colour', ['bloom'],
+        'Glowing blueprint lines on dark.', None, 0.45),
+    'monaco': ('mixed', 'graphic_minimal', 'flat', 'none', 'flat_colour', [],
+        'Graphic top-down blueprint where sight cones reveal colour.', None, 0.45),
+    'jotun': ('painterly', 'hand_painted_2d', 'painted_in', 'inked_in', 'hand_painted', [],
+        'Hand-drawn animation in a painted world.', None, 0.5),
+    'dragons-lair': ('painterly', 'hand_painted_2d', 'painted_in', 'inked_in', 'hand_painted', [],
+        'Full traditional cel animation.', None, 0.6),
+    'from-dust': ('painterly', 'painterly_3d', 'pbr', 'none', 'gradient', ['fog'],
+        'Painterly simulated islands; terrain colour follows the simulation.', None, 0.45),
+}
+
+# Ordered (keywords, style, family, light, outline, surface, post). First match on the lowercased art note wins.
+RULES = [
+    (('cel-shad', 'cel shad'), 'toon', 'toon', 'banded', 'screen_edges', 'hand_painted', ['edge detection']),
+    (('comic',), 'toon', 'comic_ink', 'banded', 'inked_in', 'hand_painted', []),
+    (('anime',), 'toon', 'toon', 'banded', 'inverted_hull', 'flat_colour', []),
+    (('cut paper', 'cut-paper', 'cut-out', 'paper puppet'), 'painterly', 'cut_paper', 'flat', 'inked_in', 'paper', []),
+    (('watercolour', 'watercolor'), 'painterly', 'watercolour', 'painted_in', 'none', 'watercolour', []),
+    (('storybook',), 'painterly', 'storybook', 'soft_wrap', 'none', 'hand_painted', ['bloom']),
+    (('line art', 'moebius'), 'toon', 'line_art', 'flat', 'line_art', 'flat_colour', []),
+    (('hand-drawn', 'hand drawn', 'ink-drawn', 'animation', 'animated'), 'painterly', 'hand_painted_2d', 'painted_in', 'inked_in', 'hand_painted', []),
+    (('pre-rendered',), 'realistic', 'pre_rendered', 'painted_in', 'none', 'pixel', []),
+    (('pixel 3d', 'pixel-voxel', 'pixel art over 3d'), 'mixed', 'pixel_3d', 'painted_in', 'none', 'pixel', []),
+    (('pixel', 'sprites', '2d'), 'pixel_art', 'pixel', 'painted_in', 'none', 'pixel', []),
+    (('voxel', 'blocky'), 'voxel', 'voxel', 'soft_wrap', 'none', 'flat_colour', ['ambient occlusion']),
+    (('ps1',), 'mixed', 'retro_low_poly', 'flat', 'none', 'pixel', ['dither', 'low resolution']),
+    (('diorama', 'toy'), 'stylised_pbr', 'soft_diorama', 'soft_wrap', 'none', 'gradient', ['depth of field']),
+    (('low-poly', 'low poly', 'flat-shaded'), 'flat_low_poly', 'flat_low_poly', 'soft_wrap', 'none', 'flat_colour', []),
+    (('hand-painted', 'painted', 'painterly', 'board-game illustration'), 'painterly', 'painterly_3d', 'soft_wrap', 'none', 'hand_painted', ['colour grade']),
+    (('cartoon', 'chibi', 'cute', 'chunky', 'friendly', 'candy', 'jelly', 'wobbly', 'emoji', 'show look'), 'toon', 'toon', 'soft_wrap', 'none', 'flat_colour', []),
+    (('minimal', 'flat', 'clean', 'simple', 'schematic', 'monochrome', 'black and white', 'blueprint', 'board'), 'mixed', 'graphic_minimal', 'flat', 'none', 'flat_colour', []),
+    (('stylised', 'stylized', 'bright', 'glossy', 'pastel'), 'stylised_pbr', 'stylised_pbr', 'pbr', 'none', 'pbr', ['bloom']),
+    (('realis', 'real ', 'photoreal', 'grounded', 'gritty', 'grim', 'dark'), 'realistic', 'realistic', 'pbr', 'none', 'pbr', ['colour grade']),
+]
+FALLBACK = ('stylised_pbr', 'stylised_pbr', 'pbr', 'none', 'pbr', [])
+
+
+def rendering_for(slug, art):
+    """The rendering block for one game, or None when the game has no art note and no hand study."""
+    if slug in HAND:
+        style, family, light, outline, surface, post, signature, lesson, conf = HAND[slug]
+        block = {'schema': 'oracle.rendering.v1', 'style': style, 'family': family, 'light': light,
+                 'outlines': outline != 'none', 'outline': outline, 'surface': surface, 'post': post,
+                 'signature': signature, 'source': SOURCE_HAND, 'confidence': conf}
+        if lesson:
+            block['lesson'] = lesson
+        return block
+    if not art:
+        return None
+    text = art.lower()
+    match = next((r[1:] for r in RULES if any(k in text for k in r[0])), None)
+    style, family, light, outline, surface, post = match or FALLBACK
+    return {'schema': 'oracle.rendering.v1', 'style': style, 'family': family, 'light': light,
+            'outlines': outline != 'none', 'outline': outline, 'surface': surface, 'post': post,
+            'signature': None, 'source': SOURCE_DERIVED, 'confidence': 0.3 if match else 0.15}

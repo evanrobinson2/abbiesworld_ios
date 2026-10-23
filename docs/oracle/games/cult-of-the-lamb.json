@@ -42,6 +42,23 @@
     },
     "camera": "isometric",
     "art_direction": "Bold cartoon cut-outs, saturated.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "toon",
+      "family": "cut_paper",
+      "light": "flat",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "flat_colour",
+      "post": [
+        "depth of field",
+        "bloom"
+      ],
+      "signature": "Flat cut-out characters with bold ink in a 3D world, softened by depth of field.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Flat characters in a 3D space read like a puppet theatre; depth of field holds them together."
+    },
     "palette": null,
     "audio_mood": "Moody synth-choir.",
     "pacing": "brisk, medium sessions",

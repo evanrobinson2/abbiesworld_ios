@@ -39,6 +39,22 @@
     },
     "camera": "orbit_diorama",
     "art_direction": "Pastel town.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "flat_low_poly",
+      "family": "soft_diorama",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [
+        "ambient occlusion"
+      ],
+      "signature": "Pastel flat colours with deep soft ambient occlusion in every corner.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Flat colour plus strong ambient occlusion reads as soft clay."
+    },
     "palette": null,
     "audio_mood": "Ambient sea.",
     "pacing": "slow, short sessions",

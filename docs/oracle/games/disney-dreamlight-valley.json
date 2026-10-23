@@ -41,6 +41,21 @@
     },
     "camera": "third_person",
     "art_direction": "Bright Disney 3D.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "toon",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "bloom"
+      ],
+      "signature": "Animated-film soft shading with gentle rim and bloom.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
+    },
     "palette": null,
     "audio_mood": "Gentle themes.",
     "pacing": "slow, medium sessions",

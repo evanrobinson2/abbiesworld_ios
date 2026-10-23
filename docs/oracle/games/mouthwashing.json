@@ -39,6 +39,23 @@
     },
     "camera": "first_person",
     "art_direction": "Low-poly PS1-style.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "retro_low_poly",
+      "light": "flat",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pixel",
+      "post": [
+        "dither",
+        "low resolution"
+      ],
+      "signature": "PS1-style: low resolution, wobbling vertices, warped textures and dithering.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Low resolution is a choice with a feeling (unease, memory), not just a budget."
+    },
     "palette": null,
     "audio_mood": "Oppressive.",
     "pacing": "slow, short sessions",

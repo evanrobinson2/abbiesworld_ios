@@ -39,6 +39,21 @@
     },
     "camera": "orbit_diorama",
     "art_direction": "Natural painterly islands.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "fog"
+      ],
+      "signature": "Painterly simulated islands; terrain colour follows the simulation.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
+    },
     "palette": null,
     "audio_mood": "Tribal chants.",
     "pacing": "brisk, short sessions",

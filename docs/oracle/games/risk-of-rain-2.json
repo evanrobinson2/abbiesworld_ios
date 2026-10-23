@@ -41,6 +41,21 @@
     },
     "camera": "third_person",
     "art_direction": "Stylised.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "flat_low_poly",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "fog"
+      ],
+      "signature": "Stylised low-detail surfaces with strong fog colour per stage.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
+    },
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, medium sessions",
