@@ -177,16 +177,13 @@ function review(){
     ${r ? `<p class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></p>` : ''}
     <div class="pair2">
       <figure class="print"><div class="sq2 pic"><span class="inset">Inspiration</span><img src="${esc(m.urls.ref)}" alt="The inspiration for the ${esc(m.name.toLowerCase())}">${dots}</div>${m.ask || m.subject ? `<button type="button" class="said" data-said aria-label="Show the whole prompt">“${esc(m.ask || m.subject)}”</button>` : ''}</figure>
-      <figure><div class="sq2 alive"><span class="inset">Model</span><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
+      <figure class="livefig"><div class="sq2 alive"><span class="inset">Model</span><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
         auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.8" exposure="0.8" environment-image="neutral">${spots}</model-viewer>
-        <div class="chalk" aria-hidden="true"><svg viewBox="0 0 150 110"><path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/></g></svg></div></div></figure>
-    </div>
-    <div class="decide"><span></span>
-    <div class="thumb" role="group" aria-label="Decide">
+        <div class="chalk" aria-hidden="true"><svg viewBox="0 0 150 110"><path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/></g></svg></div></div><div class="thumb decide" role="group" aria-label="Decide">
       <button type="button" class="tb reject" data-verdict="reject" aria-label="Reject">${ico('reject')}</button>
       <button type="button" class="tb chat" id="chat" aria-label="Talk or type a note">${ico('mic')}</button>
       <button type="button" class="tb accept" data-verdict="accept" aria-label="Keep it">${ico('accept')}</button>
-    </div>
+    </div></figure>
     </div>
     ${fp.length ? `<ol class="focal">${fp.map(f => `<li data-fp="${+f.n}"><span class="fp ${esc(f.verdict)}">${+f.n}</span><b>${esc(f.label)}</b><em class="${esc(f.verdict)}">${FAIR[f.verdict] || ''}</em><span>${esc(f.note)}</span></li>`).join('')}</ol>` : ''}
     <div class="notes2">${plainList(m.good).length ? `<div><h2>What matches</h2><ul>${plainList(m.good).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}${plainList(m.off).length ? `<div><h2>What is off</h2><ul>${plainList(m.off).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}</div>
