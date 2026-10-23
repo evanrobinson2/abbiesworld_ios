@@ -14,7 +14,12 @@ canvas{display:block;width:100vw;height:100dvh}
 .glass{position:fixed;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,.12));border:1px solid rgba(255,255,255,.55);
  box-shadow:0 10px 30px rgba(20,60,90,.3),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -6px 14px rgba(40,120,160,.2);-webkit-backdrop-filter:none;backdrop-filter:none}
 #back,#again,#go,#prize{display:grid;place-items:center;color:#fff;text-decoration:none;cursor:pointer}
-#back{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));width:44px;height:44px;opacity:.85;z-index:3}
+#back{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));width:44px;height:44px;opacity:.85;z-index:3;transition:top .3s ease}
+/* the town's overhead strip (the chronograph: time, weather, season, pause) rides along: shown in the garage, tucked away
+   during the ride and the cinematic beats, and summoned with a tap at any time; the back button steps down beside it */
+#v2-chrono,#v2-box{transition:opacity .3s ease,transform .3s ease}
+body.tucked #v2-chrono,body.tucked #v2-box{opacity:0;transform:translateY(-14px);pointer-events:none}
+body:not(.tucked) #back{top:calc(max(12px,env(safe-area-inset-top)) + 84px)}
 #go{left:50%;top:62%;translate:-50% -50%;width:88px;height:88px;transition:transform .25s ease,opacity .35s ease;animation:breathe 2.4s ease-in-out infinite}
 #go.gone{opacity:0;transform:scale(.6);pointer-events:none}
 @keyframes breathe{50%{box-shadow:0 10px 40px rgba(255,170,60,.6),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -6px 14px rgba(40,120,160,.2)}}
@@ -32,6 +37,10 @@ canvas{display:block;width:100vw;height:100dvh}
 #photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;background:#ccc}
 #photo span{position:absolute;left:0;right:0;bottom:8px;text-align:center;font:800 15px/1 ui-rounded,system-ui;color:#e85d04;letter-spacing:.06em}
 @keyframes drop{from{transform:translateY(-60vh) rotate(18deg)}}
+#fire{right:max(14px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));width:58px;height:58px;display:none;place-items:center;cursor:pointer;z-index:3;transition:transform .2s ease,box-shadow .3s ease}
+#fire svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(80,20,0,.5))}
+#fire.on{box-shadow:0 0 0 2px #ffb020,0 0 26px rgba(255,120,20,.85),inset 0 1px 0 rgba(255,255,255,.7)}
+#fire.new{animation:pop .7s cubic-bezier(.2,1.6,.4,1),breathe 1.6s ease-in-out .7s 4}
 #again{left:50%;bottom:max(22px,env(safe-area-inset-bottom));translate:-50% 0;width:64px;height:64px;display:none;z-index:3}
 @media (max-width:560px){#photo{left:50%;top:40%}#prize{left:50%;top:76%;width:84px;height:84px;font-size:42px}}
 </style>
@@ -44,6 +53,7 @@ canvas{display:block;width:100vw;height:100dvh}
 <div id="go" class="glass" role="button" aria-label="Play"><svg width="36" height="36" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></div>
 <div id="photo" aria-label="Your ride photo"><img id="photoImg" alt="You, in the air over the gap"><span id="photoStars">★</span></div>
 <div id="prize" class="glass" aria-label="Charm"></div>
+<div id="fire" class="glass" role="switch" aria-label="Fire wheels" aria-checked="false"><svg viewBox="0 0 24 24"><path d="M12 2c1 3.5 5 5.5 5 10.5A5 5 0 0 1 7 12.5c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5.5 1-9z" fill="#ff7a14"/><path d="M12 11c.5 1.8 2.5 2.8 2.5 5a2.5 2.5 0 0 1-5 0c0-1.3.7-2 1.3-2.6.2 1 .7 1.4 1.2 1.4 0-1.5-.5-2.5 0-3.8z" fill="#ffe08a"/></svg></div>
 <div id="again" class="glass" role="button" aria-label="Ride again"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg></div>
 <script type="module">
 import * as T from 'three';
@@ -53,7 +63,7 @@ import {coasterAudio} from '/simulations/coaster-audio.mjs';
 import {buildWorld, buildGates, HEX_C} from './coaster-world.mjs';
 import {TOON_LOOKS, toonify} from '/simulations/toon-kit.mjs';
 const opt = async p => { try { return await import(p); } catch { return {}; } };
-const [BP] = await Promise.all([opt('/simulations/backpack.mjs')]);
+const [BP, CH, FW] = await Promise.all([opt('/simulations/backpack.mjs'), opt('/simulations/chrono-host.mjs?v=1'), opt('/simulations/fire-wheels.mjs')]);
 const Q = new URLSearchParams(location.search), TEST = Q.has('test'), SKIP = Q.get('skip') === 'tile';
 const $ = id => document.getElementById(id);
 const from = Q.get('from'); if (from) $('back').href = from;
@@ -67,12 +77,15 @@ document.body.prepend(renderer.domElement);
 const scene = new T.Scene();
 const camera = new T.PerspectiveCamera(30, 1, .05, 1400); scene.add(camera);
 const SUN_DIR = new T.Vector3(.62, .38, .42).normalize(); // a low late-afternoon sun: long shadows, warm rims
-const skyMesh = new T.Mesh(new T.SphereGeometry(1000, 32, 16), new T.ShaderMaterial({side: T.BackSide, depthWrite: false, fog: false, uniforms: {uSun: {value: SUN_DIR}},
+const skyMesh = new T.Mesh(new T.SphereGeometry(1000, 32, 16), new T.ShaderMaterial({side: T.BackSide, depthWrite: false, fog: false, uniforms: {uSun: {value: SUN_DIR}, uDay: {value: 1}, uCloud: {value: 0}},
   vertexShader: 'varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.); }',
-  fragmentShader: `uniform vec3 uSun; varying vec3 vP; void main(){ float h = clamp(vP.y * 1.5 + .1, 0., 1.);
+  fragmentShader: `uniform vec3 uSun; uniform float uDay, uCloud; varying vec3 vP; void main(){ float h = clamp(vP.y * 1.5 + .1, 0., 1.);
     vec3 lo = vec3(1., .78, .55), mid = vec3(.62, .8, .96), hi = vec3(.24, .46, .88);
     vec3 c = mix(lo, mid, smoothstep(0., .32, h)); c = mix(c, hi, smoothstep(.32, 1., h));
-    float d = max(dot(vP, uSun), 0.); c += vec3(1., .72, .4) * (pow(d, 600.) * 6. + pow(d, 12.) * .35);
+    vec3 n = mix(vec3(.16, .12, .26), vec3(.02, .04, .12), smoothstep(0., .6, h)); c = mix(n, c, uDay);
+    c = mix(c, vec3(.62, .66, .72) * (.25 + .75 * uDay), uCloud * .8);
+    float d = max(dot(vP, uSun), 0.); c += vec3(1., .72, .4) * (pow(d, 600.) * 6. + pow(d, 12.) * .35) * uDay * (1. - uCloud * .9);
+    float st = step(.9985, fract(sin(dot(floor(vP * 300.), vec3(12.9, 78.2, 37.7))) * 43758.5)); c += st * (1. - uDay) * (1. - uCloud) * smoothstep(.1, .4, h);
     gl_FragColor = vec4(c, 1.);
     #include <colorspace_fragment>
   }`})); scene.add(skyMesh);
@@ -82,6 +95,26 @@ const sun = new T.DirectionalLight('#ffd9a8', 3.1);
 const [HX, HZ] = HEX_C; sun.position.set(HX + SUN_DIR.x * 160, SUN_DIR.y * 160, HZ + SUN_DIR.z * 160); sun.target.position.set(HX, 0, HZ); scene.add(sun, sun.target);
 sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -95, right: 95, top: 95, bottom: -95, near: 10, far: 420}); sun.shadow.bias = -.0006; sun.shadow.normalBias = .03;
 const fill = new T.DirectionalLight('#9fc4ff', .5); fill.position.set(HX - 80, 60, HZ - 90); scene.add(fill); // a cool bounce from the far side
+// the world clock (shared with the town) drives the light: the hour moves the sun, clouds and rain dim and grey it, night
+// brings out stars and leaves the track's lamps doing the work. Golden hour is the look the ride was lit for.
+const SKY = {day: 1, cloud: 0, rain: 0, paused: false, hour: 17}, skyNow = {day: 1, cloud: 0, rain: 0};
+const sunCol = new T.Color(), C_GOLD = new T.Color('#ffd9a8'), C_NOON = new T.Color('#fff4e6'), C_MOON = new T.Color('#8fa8d8'), fogDay = new T.Color('#ffd9b0'), fogNight = new T.Color('#1a2038'), fogGrey = new T.Color('#9aa3ad');
+addEventListener('aw-world-clock', e => { const d = e.detail; SKY.hour = d.hour; SKY.day = Math.min(1, d.daylight * 1.6 + (d.hour > 5.5 && d.hour < 18.5 ? .15 : 0)); SKY.cloud = d.weather === 'Clear' ? 0 : 1; SKY.rain = d.weather === 'Rain' ? 1 : 0; SKY.paused = d.paused; });
+const rainN = 700, rainPos = new Float32Array(rainN * 6), rainSeed = [...Array(rainN)].map(() => [(Math.random() - .5) * 40, Math.random() * 30, (Math.random() - .5) * 40]);
+const rainGeo = new T.BufferGeometry(); rainGeo.setAttribute('position', new T.BufferAttribute(rainPos, 3));
+const rain = new T.LineSegments(rainGeo, new T.LineBasicMaterial({color: '#cfe2f2', transparent: true, opacity: 0, fog: false, name: 'rain'})); rain.name = 'rain'; rain.frustumCulled = false; scene.add(rain);
+function stepSky(dt) {
+  const k = 1 - Math.exp(-dt * 1.5); for (const n of ['day', 'cloud', 'rain']) skyNow[n] += (SKY[n] - skyNow[n]) * k;
+  const {day, cloud} = skyNow, h = SKY.hour, a = (h - 6) / 12 * Math.PI; // the sun rises in the east (+x) and sets in the west
+  const dir = day > .05 ? new T.Vector3(Math.cos(a) * .85, Math.max(.12, Math.sin(Math.max(0, Math.min(Math.PI, a))) * .9), .42).normalize() : new T.Vector3(-.4, .7, .5).normalize();
+  SUN_DIR.lerp(dir, k).normalize(); skyMesh.material.uniforms.uDay.value = day; skyMesh.material.uniforms.uCloud.value = cloud;
+  sun.position.set(HX + SUN_DIR.x * 160, SUN_DIR.y * 160, HZ + SUN_DIR.z * 160);
+  sunCol.copy(C_GOLD).lerp(C_NOON, Math.max(0, SUN_DIR.y - .35) * 1.6); sunCol.lerp(C_MOON, 1 - day); sun.color.copy(sunCol);
+  sun.intensity = (.25 + 2.85 * day) * (1 - cloud * .6); hemi.intensity = (.3 + .55 * day) * (1 - cloud * .2); fill.intensity = .2 + .3 * day;
+  scene.fog.color.copy(fogNight).lerp(fogDay, day).lerp(fogGrey, cloud * .6); renderer.toneMappingExposure = 1.08 + (1 - day) * .25;
+  rain.material.opacity = skyNow.rain * .5; rain.visible = skyNow.rain > .02;
+  if (rain.visible) { const c = camera.getWorldPosition(new T.Vector3()); for (let i = 0; i < rainN; i++) { const r = rainSeed[i]; r[1] -= dt * 22; if (r[1] < -6) r[1] += 30; rainPos.set([c.x + r[0], c.y + r[1], c.z + r[2], c.x + r[0] + .05, c.y + r[1] + .7, c.z + r[2]], i * 6); } rainGeo.attributes.position.needsUpdate = true; }
+}
 
 // ---------- the world, the track ----------
 const trk = buildTrack(T, TRACK_30S);
@@ -162,6 +195,13 @@ const speedLines = new T.LineSegments(slGeo, new T.LineBasicMaterial({color: '#f
 // ---------- the look ----------
 toonify(T, scene, TOON_LOOKS.sunday);
 const FX = postFX(T, renderer);
+// the town's overhead strip, on the same world clock as the town (so time and weather carry over both ways)
+try { CH.mountWorldChrono?.({hour: 17}); } catch {}
+// fire wheels: the Toy car charm unlocks the card; it's on the garage floor here, and in the event deck everywhere else
+const trail = FW.fireTrail ? FW.fireTrail(T, scene) : null;
+function fireUI(fresh) { const b = $('fire'), un = FW.fireWheelsUnlocked?.(), on = FW.fireWheelsOn?.(); b.style.display = un && ['zoom', 'end'].includes(S.mode) ? 'grid' : 'none'; b.classList.toggle('on', !!on); b.setAttribute('aria-checked', on ? 'true' : 'false'); if (fresh) b.classList.add('new'); }
+$('fire').addEventListener('click', () => { AU.wake(); const on = !FW.fireWheelsOn(); FW.setFireWheels(on); AU.play(on ? 'firework-launch' : 'click-2', {gain: .5}); fireUI(); });
+FW.onFireWheels?.(() => fireUI());
 function resize() { const w = innerWidth, h = innerHeight, dpr = Math.min(devicePixelRatio || 1, 2); renderer.setPixelRatio(dpr); renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); FX.size(w, h, dpr); }
 addEventListener('resize', resize); resize();
 
@@ -207,7 +247,12 @@ addEventListener('pointermove', e => { const p = pts.get(e.pointerId); if (S.mod
   const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY; dragMoved += Math.abs(dx) + Math.abs(dy);
   if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a.x - b.x, a.y - b.y); cam.dist = Math.max(10, Math.min(700, cam.dist * lastD / d)); lastD = d; return; }
   if (tween || S.blend || !['tile', 'zoom', 'end'].includes(S.mode)) return; cam.az -= dx * .3; cam.pitch = Math.max(6, Math.min(66, cam.pitch + dy * .2)); });
-const up = e => { pts.delete(e.pointerId); if (dragMoved < 8 && S.mode === 'zoom' && !tween && !S.blend) tap(e.clientX, e.clientY); };
+const up = e => { pts.delete(e.pointerId); if (e.target !== renderer.domElement) return; if (dragMoved < 8 && S.mode === 'zoom' && !tween && !S.blend) tap(e.clientX, e.clientY); else if (dragMoved < 8 && S.mode === 'ride') summon(); };
+// the overhead strip: tucked away while the camera is busy, a tap brings it back for a few seconds
+let stripTimer = 0; const stripShown = () => !document.body.classList.contains('tucked');
+function summon() { document.body.classList.remove('tucked'); clearTimeout(stripTimer); stripTimer = setTimeout(() => { if (S.mode === 'ride' && !document.getElementById('v2-chrono-pop')?.checkVisibility?.()) document.body.classList.add('tucked'); }, 5000); }
+function tuck(on) { clearTimeout(stripTimer); document.body.classList.toggle('tucked', on); }
+addEventListener('pointerdown', e => { if (e.target.closest?.('#v2-chrono,#v2-chrono-pop,#v2-box') && S.mode === 'ride') summon(); }, true);
 addEventListener('pointerup', up); addEventListener('pointercancel', up);
 renderer.domElement.addEventListener('wheel', e => { if (S.mode === 'zoom' || S.mode === 'tile') cam.dist = Math.max(10, Math.min(700, cam.dist * (1 + e.deltaY * .001))); }, {passive: true});
 const keys = {}; addEventListener('keydown', e => { keys[e.key] = 1; if ((e.key === ' ' || e.key === 'Enter') && S.mode === 'zoom') getIn(); if (S.mode === 'zoom' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) choose(cars[(cars.indexOf(car) + (e.key === 'ArrowRight' ? 1 : cars.length - 1)) % cars.length]); });
@@ -251,7 +296,7 @@ function finish() {
   Object.assign(cam, {tx: car.position.x, ty: car.position.y + 1, tz: car.position.z, dist: 9, az: 150, pitch: 14, fov: 40, shift: .25}); startBlend(1.6);
   setTimeout(() => { AU.play(win ? 'tada' : 'win-sting', {gain: .9}); S.barsT = 0;
     if (S.photo) { $('photoImg').src = S.photo; $('photoStars').textContent = '★ ' + S.stars + ' / ' + N_STARS; $('photo').style.display = 'block'; }
-    if (win && BP.earnCharm) { const fresh = BP.earnCharm('toy-car'); const c = (BP.CHARMS || []).find(x => x.id === 'toy-car'); $('prize').textContent = c ? c.icon : '🏎️'; $('prize').style.display = 'grid'; if (!fresh) $('prize').style.opacity = .85; AU.play('keys', {when: .3}); }
+    if (win && BP.earnCharm) { const fresh = BP.earnCharm('toy-car'); fireUI(!!fresh); const c = (BP.CHARMS || []).find(x => x.id === 'toy-car'); $('prize').textContent = c ? c.icon : '🏎️'; $('prize').style.display = 'grid'; if (!fresh) $('prize').style.opacity = .85; AU.play('keys', {when: .3}); }
     $('again').style.display = 'grid'; }, 2000);
 }
 $('again').addEventListener('click', () => reset());
@@ -323,6 +368,7 @@ function ride(dt) {
   if (!S.near.has('cork') && pose.s >= trk.marks.corkscrew.s0) { S.near.add('cork'); AU.play('whoosh-1', {gain: .5}); }
   $('pb').style.width = Math.min(100, S.time / trk.seconds * 100) + '%';
   visuals(dt, (S.lat - prevLat) / dt, true);
+  if (trail) trail.update(dt, car.userData.wheels, pose.speed * S.ts, FW.fireWheelsOn() && !pose.gap);
   if (S.time >= trk.seconds - 1e-3) finish();
 }
 let charmSwing = 0;
@@ -356,7 +402,9 @@ function frame() {
   cars.forEach(c => { if (c !== car && !hops.some(h => h.c === c)) { c.rotation.y += dt * .5; } });
   for (let i = hops.length - 1; i >= 0; i--) { const h = hops[i]; h.t += dt; const e = ease(h.t / h.dur); h.c.position.lerpVectors(h.p0, h.p1, e); h.c.position.y += Math.sin(e * Math.PI) * 4; h.c.quaternion.slerpQuaternions(h.q0, h.q1, e); if (h.t >= h.dur) { hops.splice(i, 1); if (h.c !== car) h.c.userData.slotRot = h.c.rotation.y; else AU.play('jump-land-2', {gain: .5}); } }
   hint.visible = hint.visible && S.mode === 'zoom'; if (hint.visible) { hint.position.copy(car.position).setY(car.position.y + .55); hint.quaternion.copy(camera.quaternion); hint.scale.setScalar((1 + .12 * Math.sin(t * 5)) * Math.max(1, cam.dist / 40)); }
-  if (S.mode === 'ride') ride(dt);
+  stepSky(dt); if (trail && S.mode !== 'ride') trail.update(dt, null);
+  if (S.mode !== S.lastMode) { S.lastMode = S.mode; tuck(['ride', 'flow', 'intro'].includes(S.mode)); fireUI(); }
+  if (S.mode === 'ride') ride(SKY.paused ? 0 : dt); // the strip's pause button holds the ride too
   if (conf) { conf.t += dt; const p = conf.m.geometry.attributes.position; for (let i = 0; i < conf.v.length; i++) { p.array[i * 3] += conf.v[i][0] * dt + Math.sin(t * 3 + i) * .01; p.array[i * 3 + 1] += conf.v[i][1] * dt; p.array[i * 3 + 2] += conf.v[i][2] * dt; } p.needsUpdate = true; if (conf.t > 9) { scene.remove(conf.m); conf = null; } }
   if (S.mode === 'end' && !S.blend) cam.az += dt * 8;
   if (S.mode === 'end') { cam.tx = car.position.x; cam.ty = car.position.y + .8; cam.tz = car.position.z; }
@@ -382,7 +430,7 @@ function snapPhoto() {
 }
 
 // ---------- hooks for the headless test ----------
-window.coaster = {S, trk, cam, T, scene, camera, get car() { return car; }, cars, stars, start: () => $('go').click(), getIn, finish, reset, repaint, choose, skipTo(t) { S.time = t; }, FX, NEAR, JUMP};
+window.coaster = {S, trk, cam, T, scene, camera, get car() { return car; }, cars, stars, start: () => $('go').click(), getIn, finish, reset, repaint, choose, skipTo(t) { S.time = t; }, FX, NEAR, JUMP, BP, FW, SKY, summon};
 if (SKIP) intro();
 requestAnimationFrame(frame);
 </script>

@@ -320,6 +320,28 @@
         "status": "final"
       },
       "scene": "tie-dye"
+    },
+    {
+      "id": "fire-wheels",
+      "number": 15,
+      "name": "Fire Wheels",
+      "type": "event",
+      "subtype": "Car \u00b7 until you stop it",
+      "rarity": "sun",
+      "artMode": "scene",
+      "color": "#ff8a1f",
+      "stats": [
+        {
+          "icon": "star",
+          "value": 1
+        }
+      ],
+      "rules": "Your toy car leaves a trail of cartoon fire. Tap again to put it out.",
+      "flavour": "Unlocked by the Hot Wheels charm.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "fire-wheels"
     }
   ]
 }

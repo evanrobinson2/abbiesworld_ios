@@ -2,6 +2,49 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-charm-intro",
+      "date": "2026-10-23",
+      "title": "The charms light the way in",
+      "line": "Winchester opens in the dark with your backpack charms circling under a spotlight. When it's ready they fold into the backpack, the lights go out, and the town drops in.",
+      "image": "/whats-new/2026-10-23-charm-intro.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Performance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-23-winchester-warm",
+      "date": "2026-10-23",
+      "title": "Winchester warms up quietly",
+      "line": "The town compiles its own shaders in the background so placing and walking don't hitch.",
+      "image": "/whats-new/2026-10-23-intro-scene.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Performance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-23-models-load",
+      "date": "2026-10-23",
+      "title": "Models open faster",
+      "line": "The model browser shows a quiet loading ring while a 3D model arrives, loads the next ones ahead, and the laser print effect is gone.",
+      "image": "/whats-new/2026-10-23-models-load.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYSpDBruCTumUhsPACMFHGkt",
+      "threadTitle": "Free high-end asset sources",
+      "tour": false
+    },
+    {
+      "id": "2026-10-23-backpack-floating",
+      "date": "2026-10-23",
+      "title": "The backpack floats out to dress up",
+      "line": "Tap the backpack on the weather instrument and it floats to the middle of the screen, with a card slot for its style, colour, pattern, pocket, straps and lining. Drop a card in a slot and it changes straight away.",
+      "image": "/whats-new/2026-10-23-backpack-floating.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-tile-reveal",
       "date": "2026-10-23",
       "title": "Tiles build themselves",

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Backpack: floating mini (drafted)</title>
+<style>
+/* Preview of AW-STUDY-0046's floating backpack, over a still of Winchester. The real chronograph lives in the game;
+   this page carries a stand-in with only the backpack register, so the tap feels the same. */
+html,body{margin:0;height:100%;overflow:hidden;background:#e7e2da url(town.jpg) center/cover no-repeat;font-family:system-ui,sans-serif}
+#v2-chrono{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));display:flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;border-radius:30px;
+ background:linear-gradient(160deg,#ffffffd8,#fffaf0b0);border:1px solid #fff;box-shadow:inset 0 1px 0 #fff,0 12px 26px -8px #0c203055}
+#v2-chrono .dial{width:44px;height:44px;border-radius:50%;background:conic-gradient(#ffb347,#4aa3df,#2e3760,#ffb347);box-shadow:inset 0 0 0 6px #fff}
+#v2-chrono b{font:700 20px/1 system-ui;color:#2b1d0e}
+.ch-reg{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(160deg,#fff,#f3ede3);box-shadow:inset 0 -3px 6px #0001,0 3px 8px #0002}
+.ch-pushers{width:4px}
+#hint{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);font:600 13px system-ui;color:#3a2a4a;background:#ffffffd8;padding:7px 12px;border-radius:999px;box-shadow:0 4px 12px #0002}
+</style>
+</head>
+<body>
+<div id="v2-chrono" class="v2-glass"><span class="dial"></span><b>2:24 PM</b><span class="ch-pushers"></span></div>
+<div id="hint">Drafted preview: tap the backpack on the weather instrument (or press B)</div>
+<script type="module">
+import {inventory} from './simulations/inventory.mjs?v=10';
+const inv = inventory();
+inv.add({id: 'preview-key', name: 'Brass key', icon: '🔑'});
+addEventListener('click', e => { if (e.target.closest?.('.aw-pocket')) document.getElementById('hint')?.remove(); }, true);
+</script>
+</body>
+</html>
