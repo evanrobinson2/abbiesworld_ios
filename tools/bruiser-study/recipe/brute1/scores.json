@@ -1,0 +1,26 @@
+{
+  "body": {
+    "front": 0.8597,
+    "side": 0.8206,
+    "back": 0.8596,
+    "three_quarter": 0.8358,
+    "mean": 0.8439
+  },
+  "head": {
+    "front": 0.9693,
+    "three_quarter": 0.9625,
+    "side": 0.9113,
+    "mean": 0.9477
+  },
+  "body_lowpoly": {
+    "front": 0.8579,
+    "side": 0.8174,
+    "back": 0.8579,
+    "three_quarter": 0.8343,
+    "mean": 0.8419
+  },
+  "faces": {
+    "smooth": 15118,
+    "lowpoly": 2281
+  }
+}
