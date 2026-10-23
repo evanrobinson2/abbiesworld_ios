@@ -9,7 +9,11 @@ and hips are against the height. Input is either a paper-body measurement file (
 landmarks file:
   {"sex": "male", "build": "average", "stature": 1.78, "head": 0.222,
    "heights": {"chin": 1.56, "nipple": 1.28, ...}, "widths": {"shoulders": 0.42, "hips": 0.34, ...}}
-Heights and widths in the same unit as stature (any unit)."""
+Heights and widths in the same unit as stature (any unit).
+Optional detail, scored when present:
+  "face": {"brow": 0.44, "eye": 0.5, "nose": 0.72, "mouth": 0.81, "width": 0.68, "jaw": 0.52}   (fractions of head height, down from the crown)
+  "hand": {"length": 0.19, "palm": 0.1, "knuckles": 0.085, "fingers": {"index": 0.078, "middle": 0.088, "ring": 0.082, "little": 0.064, "thumb": 0.055}}
+          (same unit as stature; fingers measured from their base knuckle)"""
 import os, sys, json, glob, math
 
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -59,9 +63,42 @@ def score(body, cn=None):
     if 'shoulders' in w and 'hips' in w:
         r = w['shoulders'] / w['hips']; lo, hi = cn['ratios']['shoulder_to_hip'][body['sex']]
         checks.append(dict(check='shoulder to hip', want=f'{lo}-{hi}', got=round(r, 2), ok=lo <= r <= hi))
+    checks += detail_checks(body, cn)
     n = sum(c['ok'] for c in checks)
     return dict(name=body.get('name', ''), sex=body['sex'], build=body['build'], heads=round(heads, 2), score=round(100 * n / len(checks)),
                 passed=n, of=len(checks), misses=[c['check'] for c in checks if not c['ok']], checks=checks)
+
+
+def detail_checks(body, cn):
+    """Head and hand checks against the canon's "head" and "hand" sections."""
+    out = []; sex = body['sex']
+    face = body.get('face')
+    if face:
+        h = cn['head']
+        for k in ('brow', 'eye', 'nose', 'mouth'):
+            if k in face:
+                d = face[k] - h['heights'][k]; out.append(dict(check=f'face {k} line', want=h['heights'][k], got=round(face[k], 3), off_heads=round(d, 3), ok=abs(d) <= 0.04))
+        for k, ck in (('width', 'head'), ('jaw', 'jaw')):
+            if k in face:
+                want = h['widths'][sex][ck]; rel = face[k] / want - 1
+                out.append(dict(check=f'face {k}', want=want, got=round(face[k], 3), off_pct=round(100 * rel), ok=abs(rel) <= 0.15))
+    hand = body.get('hand')
+    if hand:
+        hd = cn['hand']; L = hand['length']
+        r = L / body['head']; lo, hi = hd['to_head']
+        out.append(dict(check='hand to head', want=f'{lo}-{hi}', got=round(r, 2), ok=lo <= r <= hi * 1.1))
+        if 'palm' in hand:
+            d = hand['palm'] / L - hd['palm_length']; out.append(dict(check='palm length', want=hd['palm_length'], got=round(hand['palm'] / L, 3), ok=abs(d) <= 0.05))
+        if 'knuckles' in hand:
+            want = hd['width'][sex]['knuckles']; rel = hand['knuckles'] / L / want - 1
+            out.append(dict(check='hand width', want=want, got=round(hand['knuckles'] / L, 3), off_pct=round(100 * rel), ok=abs(rel) <= 0.15))
+        f = hand.get('fingers', {})
+        if 'middle' in f:
+            for k in ('index', 'ring', 'little', 'thumb'):
+                if k in f:
+                    want = hd['fingers'][k]; got = f[k] / f['middle']
+                    out.append(dict(check=f'{k} finger', want=want, got=round(got, 2), ok=abs(got - want) <= 0.08))
+    return out
 
 
 def main():
