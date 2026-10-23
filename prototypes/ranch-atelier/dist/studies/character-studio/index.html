@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Character Studio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap">
+<style>
+/* AW-STUDY-0037 Character Studio. Layout: the stage fills the screen; the cast and looks float top right as glass
+   pebbles; the move shelf (genres, then moves) floats at the bottom like a toy drawer. */
+:root{
+ --sky-top:#f6d9b8; --sky-low:#f3ecdf; --ink:#2b2236; --soft:#6d5f78; --glass:rgba(255,250,244,.62); --rim:rgba(255,255,255,.75);
+ --accent:#e2557a; --accent-ink:#fff; --chip:rgba(255,255,255,.55); --shadow:rgba(60,30,50,.18);
+ --display:'Fredoka',ui-rounded,system-ui,sans-serif; --body:'Nunito Sans',system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sky-top:#2a2440;--sky-low:#433052;--ink:#f7eefa;--soft:#c9b8d4;--glass:rgba(40,30,56,.6);--rim:rgba(255,255,255,.22);--chip:rgba(255,255,255,.1);--shadow:rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--sky-top:#2a2440;--sky-low:#433052;--ink:#f7eefa;--soft:#c9b8d4;--glass:rgba(40,30,56,.6);--rim:rgba(255,255,255,.22);--chip:rgba(255,255,255,.1);--shadow:rgba(0,0,0,.4);color-scheme:dark}
+html,body{height:100%;margin:0}
+body{background:linear-gradient(var(--sky-top),var(--sky-low));color:var(--ink);font:15px/1.4 var(--body);overflow:hidden;-webkit-font-smoothing:antialiased}
+#stage{position:fixed;inset:0;display:block;width:100%;height:100%;touch-action:none}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.4),transparent 55%),var(--glass);border:1px solid var(--rim);
+ box-shadow:0 10px 30px var(--shadow),inset 0 1px 0 rgba(255,255,255,.6);backdrop-filter:saturate(1.5);-webkit-backdrop-filter:saturate(1.5);border-radius:22px}
+.top{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));
+ display:flex;gap:10px;align-items:flex-start;justify-content:space-between;pointer-events:none;z-index:3}
+.top>*{pointer-events:auto}
+.name{padding:10px 16px}
+.name h1{margin:0;font:600 20px/1.1 var(--display);letter-spacing:.2px}
+.name p{margin:2px 0 0;font-size:12px;color:var(--soft);letter-spacing:.4px}
+.pickers{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.row{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;padding:6px}
+button{font:600 13px/1 var(--body);color:var(--ink);background:var(--chip);border:1px solid var(--rim);border-radius:999px;padding:9px 13px;cursor:pointer;white-space:nowrap}
+button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:transparent;box-shadow:0 4px 14px rgba(226,85,122,.35)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.shelf{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 12px);
+ padding:10px 10px 12px;z-index:3;display:flex;flex-direction:column;gap:8px}
+.scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.scroll::-webkit-scrollbar{display:none}
+.genre{font-family:var(--display);font-weight:500;font-size:14px}
+.genre small{font:600 11px var(--body);opacity:.7;margin-left:4px}
+.now{display:flex;align-items:baseline;gap:10px;padding:0 6px}
+.now b{font:600 17px var(--display)}
+.now span{font-size:12px;color:var(--soft);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.now .grow{flex:1}
+#twod{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+#twod iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#load{position:fixed;left:50%;top:46%;transform:translate(-50%,-50%);font:600 15px var(--display);color:var(--soft);z-index:2}
+@media (max-width:640px){.top{flex-direction:column}.name p,#nowFrom{display:none}.pickers{flex-direction:row;overflow-x:auto;width:100%;scrollbar-width:none}.pickers::-webkit-scrollbar{display:none}.row{flex:none;flex-wrap:nowrap}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+<canvas id="stage" aria-label="The character on stage"></canvas>
+<div id="twod" hidden></div>
+<div id="load">Rigging the mannequin…</div>
+<header class="top">
+ <div class="name glass"><h1>Character Studio</h1><p>AW-STUDY-0037 &middot; 50 moves &middot; one skeleton for every body</p></div>
+ <div class="pickers">
+  <div class="row glass" id="views" aria-label="View"></div>
+  <div class="row glass" id="bodies" aria-label="Body"></div>
+  <div class="row glass" id="looks" aria-label="Look"></div>
+ </div>
+</header>
+<section class="shelf glass" aria-label="Moves">
+ <div class="now"><b id="nowName">Idle</b><span id="nowFrom"></span><span class="grow"></span>
+  <button id="tour" aria-pressed="false" title="Play every move in turn">Play all</button>
+  <button id="slow" aria-pressed="false" title="Half speed">Slow</button></div>
+ <div class="scroll" id="genres"></div>
+ <div class="scroll" id="moves"></div>
+</section>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {toonify, setToonLook, toonUniforms, TOON_LOOKS, inkHulls} from '/simulations/toon-kit.mjs';
+import {MOVES, GENRES, byId, P} from './moves.mjs';
+import {BODIES, loadBody} from './bodies.mjs';
+
+const $ = s => document.querySelector(s);
+const canvas = $('#stage');
+const renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const scene = new T.Scene();
+const camera = new T.PerspectiveCamera(35, 1, .05, 200);
+camera.position.set(3.2, 1.7, 5.4);
+const controls = new OrbitControls(camera, canvas);
+controls.target.set(0, 1, 0); controls.enableDamping = true; controls.maxPolarAngle = 1.52; controls.minDistance = 1.5; controls.maxDistance = 30;
+
+// light: warm sun from the front left, sky fill, a soft bounce from the floor
+const hemi = new T.HemisphereLight('#dfe9ff', '#b9906a', 1.1); scene.add(hemi);
+const sun = new T.DirectionalLight('#fff1dc', 2.6); sun.position.set(4, 8, 5); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -6, right: 6, top: 6, bottom: -6, near: .5, far: 30}); sun.shadow.bias = -.0004; sun.shadow.normalBias = .02;
+scene.add(sun, sun.target);
+// the floor: a round painted stage, wood-warm, that catches the shadow
+const floor = new T.Mesh(new T.CircleGeometry(7, 96), new T.MeshStandardMaterial({color: '#e9cfae', roughness: .95}));
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+const rim = new T.Mesh(new T.RingGeometry(6.9, 7.3, 96), new T.MeshStandardMaterial({color: '#c98f6a', roughness: .9}));
+rim.rotation.x = -Math.PI / 2; rim.position.y = .002; scene.add(rim);
+// the box for "carry a box"
+const box = new T.Mesh(new T.BoxGeometry(.42, .32, .34), new T.MeshStandardMaterial({color: '#c79a62', roughness: .9}));
+box.castShadow = true; box.visible = false; scene.add(box);
+
+const U = toonUniforms(T, TOON_LOOKS.sunday);
+const LOOKS = [{id: 'plain', name: 'Plain'}, {id: 'sunday', name: 'Sunday Toon'}, {id: 'ink', name: 'Ink Toon'}];
+const VIEWS = [{id: '3d', name: '3D mannequin'}, {id: '2d', name: '2D puppet'}];
+let look = 'sunday', bodyId = 'mannequin', view = '3d';
+let actor = null, move = byId.idle, t0 = performance.now() / 1000, tour = false, speed = 1, inks = [];
+const loader = new GLTFLoader(), cache = {};
+
+function chips(el, list, get, set, label = x => x.name) {
+ el.innerHTML = '';
+ for (const x of list) {
+  const b = document.createElement('button'); b.textContent = label(x); b.setAttribute('aria-pressed', String(get() === x.id));
+  b.onclick = () => { set(x.id); [...el.children].forEach((c, i) => c.setAttribute('aria-pressed', String(list[i].id === get()))); };
+  el.appendChild(b);
+ }
+}
+let genre = 'cozy';
+function drawMoves() {
+ chips($('#moves'), MOVES.filter(m => m.genre === genre), () => move.id, id => pick(id));
+}
+chips($('#genres'), GENRES, () => genre, id => { genre = id; drawMoves(); }, g => `${g.name}`);
+[...$('#genres').children].forEach((b, i) => { b.className = 'genre'; b.innerHTML = `${GENRES[i].name}<small>${MOVES.filter(m => m.genre === GENRES[i].id).length}</small>`; });
+drawMoves();
+chips($('#bodies'), BODIES, () => bodyId, id => { bodyId = id; setBody(); });
+chips($('#looks'), LOOKS, () => look, id => { look = id; applyLook(); });
+chips($('#views'), VIEWS, () => view, id => { view = id; setView(); });
+
+function pick(id, keepTour) {
+ move = byId[id]; t0 = performance.now() / 1000; dist = 0;
+ if (!keepTour) { tour = false; $('#tour').setAttribute('aria-pressed', 'false'); }
+ const g = GENRES.find(x => x.id === move.genre);
+ $('#nowName').textContent = move.name; $('#nowFrom').textContent = `${g.name}, as in ${g.from}`;
+ if (genre !== move.genre) { genre = move.genre; chips($('#genres'), GENRES, () => genre, gid => { genre = gid; drawMoves(); }); [...$('#genres').children].forEach((b, i) => { b.className = 'genre'; b.innerHTML = `${GENRES[i].name}<small>${MOVES.filter(m => m.genre === GENRES[i].id).length}</small>`; }); }
+ drawMoves();
+ try { history.replaceState(null, '', '#' + id); } catch {}
+}
+$('#tour').onclick = () => { tour = !tour; $('#tour').setAttribute('aria-pressed', String(tour)); if (tour) pick(move.id, true); };
+$('#slow').onclick = () => { speed = speed === 1 ? .5 : 1; $('#slow').setAttribute('aria-pressed', String(speed !== 1)); };
+
+function applyLook() {
+ for (const h of inks) h.parent?.remove(h); inks = [];
+ if (!actor) return;
+ const L = TOON_LOOKS[look];
+ if (L) { setToonLook(T, U, L); toonify(T, actor.object, L, U); }
+ actor.object.traverse(o => { if (o.isMesh && !o.userData.ink) for (const m of [].concat(o.material)) { m.userData.toonOff = !L; m.needsUpdate = true; } });
+ // toon-kit patches once; for "plain" put the ramp back to a smooth one
+ if (!L) setToonLook(T, U, {bands: 64, soft: 1, half: 0, tint: '#000000', tintK: 0, rim: 0, rimCol: '#000000'});
+ if (look === 'ink') inks = inkHulls(T, actor.object, TOON_LOOKS.ink).filter(h => !h.parent?.isSkinnedMesh);
+ inks.forEach(h => { if (h.parent?.isSkinnedMesh) h.parent.remove(h); });
+}
+async function setBody() {
+ $('#load').hidden = false; $('#load').textContent = 'Rigging ' + BODIES.find(b => b.id === bodyId).name.toLowerCase() + '…';
+ const a = cache[bodyId] ||= await loadBody(T, loader, bodyId, new URL('./', location.href));
+ if (actor) scene.remove(actor.object);
+ actor = a; scene.add(actor.object); applyLook(); $('#load').hidden = true;
+}
+function setView() {
+ const two = view === '2d';
+ $('#twod').hidden = !two; canvas.style.visibility = two ? 'hidden' : 'visible';
+ if (two && !$('#twod').children.length) $('#twod').innerHTML = '<iframe src="puppet.html" title="The 2D mannequin puppet (AW-STUDY-0038)"></iframe>';
+}
+
+function resize() {
+ const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h;
+ camera.fov = w < h ? 50 : 35; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+let freeze = null, dist = 0, last = performance.now() / 1000;
+const R = 2.6, tmp = new T.Vector3(), tmp2 = new T.Vector3();
+function frame() {
+ requestAnimationFrame(frame);
+ const now = performance.now() / 1000, dt = Math.min(.05, now - last) * speed; last = now;
+ const t = freeze ?? (now - t0) * speed;
+ if (tour && t > Math.max(move.len * (move.travel ? 2 : 1), 2.5)) { const i = MOVES.indexOf(move); pick(MOVES[(i + 1) % MOVES.length].id, true); }
+ if (actor) {
+  actor.play(move, t);
+  // travelling moves walk a circle round the stage; everything else faces the camera's side of the stage
+  const o = actor.object;
+  if (move.travel) {
+   dist += dt * (move.speed ?? move.fn.speed ?? 1) * (actor.hip / .9);
+   const a = dist / R; o.position.set(Math.sin(a) * R, 0, Math.cos(a) * R); o.rotation.y = a + Math.PI / 2;
+  } else { o.position.lerp(tmp.set(0, 0, 0), .08); o.rotation.y += (0 - o.rotation.y) * .08; }
+  controls.target.lerp(tmp2.set(o.position.x * .6, actor.hip * 1.05, o.position.z * .6), .06);
+  box.visible = move.prop === 'box';
+  if (box.visible) {
+   const l = actor.rig.bones.hand_L.getWorldPosition(new T.Vector3()), r = actor.rig.bones.hand_R.getWorldPosition(new T.Vector3());
+   box.position.copy(l).add(r).multiplyScalar(.5); box.position.y += .02; box.rotation.y = o.rotation.y;
+  }
+ }
+ sun.position.set(controls.target.x + 4, 8, controls.target.z + 5); sun.target.position.copy(controls.target);
+ controls.update(); renderer.render(scene, camera);
+}
+// for screenshots and the 2D puppet's tray
+window.studio = {pick, freeze: v => { freeze = v; }, body: async id => { bodyId = id; await setBody(); }, look: id => { look = id; applyLook(); }, moves: MOVES, camera, controls, P,
+ custom: pose => { move = {id: 'custom', name: 'Custom pose', genre: move.genre, fn: () => P(pose), len: 1}; }};
+const start = location.hash.slice(1);
+pick(byId[start] ? start : 'idle');
+setBody().then(() => frame());
+</script>
+</body>
+</html>
