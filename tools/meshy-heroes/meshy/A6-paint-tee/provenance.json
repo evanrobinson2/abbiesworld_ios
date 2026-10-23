@@ -1,0 +1,35 @@
+{
+ "job": "A6-paint-tee",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16aa5-9931-74fd-933b-b59e0d94b78a",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view_front.png",
+    "view_side.png",
+    "view_back.png"
+   ]
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16aa7-8543-7333-9f74-5ebae1123152",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16aa5-9931-74fd-933b-b59e0d94b78a",
+    "height_meters": 1.0
+   }
+  }
+ ],
+ "credits": 35
+}

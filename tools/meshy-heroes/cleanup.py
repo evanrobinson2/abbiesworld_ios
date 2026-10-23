@@ -133,7 +133,10 @@ def split_materials(mesh, bare_limbs, head_z):
 
 
 def clean(hid):
-    src = HERE / "meshy" / hid / f"{hid}_rigged_character_glb.glb"
+    job = next((j for j in json.loads((HERE / "meshy-queue.json").read_text())["jobs"] if j["id"] == hid), {})
+    folder = ROOT / job["save_to"] if job.get("save_to") else HERE / "meshy" / hid
+    src = folder / f"{hid}_rigged_character_glb.glb"
+    out_dir = ROOT / job["deliver_to"] if job.get("deliver_to") else OUT
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.gltf(filepath=str(src))
     arm = next(o for o in bpy.data.objects if o.type == "ARMATURE")
@@ -169,8 +172,8 @@ def clean(hid):
             img.scale(1024, 1024)
     tris = sum(len(p.vertices) - 2 for p in mesh.data.polygons)
     mesh.name = hid; arm.name = f"{hid}_rig"
-    OUT.mkdir(parents=True, exist_ok=True)
-    dest = OUT / f"{hid}.glb"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    dest = out_dir / f"{hid}.glb"
     bpy.ops.export_scene.gltf(filepath=str(dest), export_format="GLB", export_animations=False,
                               export_image_format="JPEG", export_jpeg_quality=88, use_selection=False)
     z = [(mesh.matrix_world @ v.co).z for v in mesh.data.vertices]
@@ -178,7 +181,7 @@ def clean(hid):
            "tris": tris, "height_m": round(max(z) - min(z), 3), "bones": [b.name for b in arm.data.bones],
            "faces_per_material": counts, "skin_colour": skin, "max_weights": 4, "texture_px": 1024,
            "bytes": dest.stat().st_size, "tool": f"Blender {bpy.app.version_string} (bpy), tools/meshy-heroes/cleanup.py"}
-    (HERE / "meshy" / hid / "cleanup.json").write_text(json.dumps(rec, indent=1))
+    (folder / "cleanup.json").write_text(json.dumps(rec, indent=1))
     print(hid, tris0, "->", tris, "tris", counts, rec["bytes"] // 1024, "KB", flush=True)
     return rec
 

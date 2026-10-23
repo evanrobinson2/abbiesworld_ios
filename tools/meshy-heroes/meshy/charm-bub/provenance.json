@@ -1,0 +1,24 @@
+{
+ "job": "charm-bub",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/image-to-3d",
+   "task_id": "01a16a88-a724-7520-811b-115361c79586",
+   "credits": 0,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": false,
+    "enable_pbr": false,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 8000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "pick.png"
+   ]
+  }
+ ],
+ "credits": 0
+}
