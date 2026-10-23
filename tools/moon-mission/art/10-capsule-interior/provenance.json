@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "10. Capsule interior, four seats, first person",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "First person view inside a small space capsule, four seats in a row, a control panel with chunky colourful switches and big buttons each labelled with a simple picture, a paper checklist clipped to the panel, small round window showing black space, white interior with glowing pink and purple trim, hard light, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "01eff85b-8cfe-434d-910d-499c939d7975",
+  "page": "https://www.midjourney.com/jobs/01eff85b-8cfe-434d-910d-499c939d7975?index=3",
+  "pick_index": 3,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/01eff85b-8cfe-434d-910d-499c939d7975/0_3.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "ac121a8362249b8804fafc6b5330b47dbf6c2497530f97b2c4ae1069abb9d335"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 3: four seats in a row, chunky colourful switches, paper sheets on the panel, starry porthole, glowing pink trim. Seat-mounted panels rather than one front panel."
+}

@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "1. Pink rocket turnaround sheet",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "Turnaround sheet of a rounded toy-like pink-and-white rocket, silver nose cone, round portholes, four fins, a stage ring, engine bells, front, side, back and three-quarter views in a row, plain white background, bright daylight, soft shadows, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 3:2 --v 7",
+  "job_id": "9855dfad-8c3b-4c08-962c-9bc2367f36b5",
+  "page": "https://www.midjourney.com/jobs/9855dfad-8c3b-4c08-962c-9bc2367f36b5?index=0",
+  "pick_index": 0,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/9855dfad-8c3b-4c08-962c-9bc2367f36b5/0_0.png",
+    "size": [
+      1344,
+      896
+    ],
+    "sha256": "bde3b7ef680b4e0e76da47a19f19351858efc02064aa13c34456a9792c446b6a"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 0: silver nose cone, eight views. Others drift to a pink nose."
+}
