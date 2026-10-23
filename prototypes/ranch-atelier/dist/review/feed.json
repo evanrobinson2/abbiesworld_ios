@@ -2,6 +2,18 @@
   "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md.",
   "items": [
     {
+      "id": "ranch-remaster-wave-1",
+      "at": "2026-10-23T04:35:00Z",
+      "title": "Ranch remaster, wave 1",
+      "ask": "The new goat house, garden beds and lamps are in the Ranch. Keep them, or say what's off.",
+      "thread": "Model challenge",
+      "before": "img/ranch-remaster-before.jpg",
+      "after": "img/ranch-remaster-after.jpg",
+      "link": "https://ranch.abbies.world/",
+      "linkLabel": "The Ranch",
+      "status": "waiting"
+    },
+    {
       "id": "paper-man-1",
       "at": "2026-10-23T04:30:00Z",
       "title": "Paper man #1",
