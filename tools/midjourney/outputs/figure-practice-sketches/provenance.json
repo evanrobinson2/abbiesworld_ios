@@ -1,0 +1,156 @@
+{
+  "name": "figure-practice-sketches",
+  "date": "2026-10-23",
+  "source": "Midjourney web app (midjourney.com/imagine), Evan's account, typed via Claude in Chrome",
+  "mj_version": "8.2 (Standard), Draft mode on",
+  "resolution": "384x576 per image (Draft)",
+  "note": "Draft mode returned 24 images per job; only indexes 0-3 were downloaded. No upscales.",
+  "pose_text": "a wooden artist's mannequin leaping mid-air, body leaning back, one arm flung straight up and out to the right, the other arm bent and raised overhead, left leg straight and pointing down, right leg kicked back bent at the knee, full body",
+  "style_tail": "simple stick figure sketch, blue graphite pencil, Procreate sketch, white paper, minimal clean lines, no shading --ar 2:3 --style raw",
+  "jobs": [
+    {
+      "job": 1,
+      "key": "stick",
+      "job_id": "9d357665-aff6-4e6a-8dea-247e17be2dc0",
+      "prompt": "a wooden artist's mannequin leaping mid-air, body leaning back, one arm flung straight up and out to the right, the other arm bent and raised overhead, left leg straight and pointing down, right leg kicked back bent at the knee, full body, line of action and joint circles stick figure, simple stick figure sketch, blue graphite pencil, Procreate sketch, white paper, minimal clean lines, no shading --ar 2:3 --style raw",
+      "files": [
+        {
+          "file": "job1_0.png",
+          "index": 0,
+          "url": "https://cdn.midjourney.com/9d357665-aff6-4e6a-8dea-247e17be2dc0/0_0.png",
+          "bytes": 76321,
+          "sha256": "394dc736f5889f9626ee96bd7e4fa627d37a5ae552cee3f5a87b9f351e058e4b"
+        },
+        {
+          "file": "job1_1.png",
+          "index": 1,
+          "url": "https://cdn.midjourney.com/9d357665-aff6-4e6a-8dea-247e17be2dc0/0_1.png",
+          "bytes": 107583,
+          "sha256": "b1707b53b319dce4aed9fb6a500992946533348004b0b3a7fdc945aa43f521f4"
+        },
+        {
+          "file": "job1_2.png",
+          "index": 2,
+          "url": "https://cdn.midjourney.com/9d357665-aff6-4e6a-8dea-247e17be2dc0/0_2.png",
+          "bytes": 109749,
+          "sha256": "52fd7e60de75b70989fb3b86ec8925afba37dddb96d8133360faae8dd18ec4e2"
+        },
+        {
+          "file": "job1_3.png",
+          "index": 3,
+          "url": "https://cdn.midjourney.com/9d357665-aff6-4e6a-8dea-247e17be2dc0/0_3.png",
+          "bytes": 75727,
+          "sha256": "db0641327c5480bcb51283ec122f1d1e965a1d0451ae95170e64156c6f82459c"
+        }
+      ]
+    },
+    {
+      "job": 2,
+      "key": "gesture",
+      "job_id": "97098990-4122-453e-891b-41d59737c2e3",
+      "prompt": "a wooden artist's mannequin leaping mid-air, body leaning back, one arm flung straight up and out to the right, the other arm bent and raised overhead, left leg straight and pointing down, right leg kicked back bent at the knee, full body, loose flowing gesture lines, simple stick figure sketch, blue graphite pencil, Procreate sketch, white paper, minimal clean lines, no shading --ar 2:3 --style raw",
+      "files": [
+        {
+          "file": "job2_0.png",
+          "index": 0,
+          "url": "https://cdn.midjourney.com/97098990-4122-453e-891b-41d59737c2e3/0_0.png",
+          "bytes": 123764,
+          "sha256": "d0c795407f5cd0e11c4fa32c1145f82bce2c3fb3220319ac66ebd739918f7642"
+        },
+        {
+          "file": "job2_1.png",
+          "index": 1,
+          "url": "https://cdn.midjourney.com/97098990-4122-453e-891b-41d59737c2e3/0_1.png",
+          "bytes": 108297,
+          "sha256": "de09a96d43d1923369a39c4d04ba0261e2b9c6362ea85f7d12955f84b1718c21"
+        },
+        {
+          "file": "job2_2.png",
+          "index": 2,
+          "url": "https://cdn.midjourney.com/97098990-4122-453e-891b-41d59737c2e3/0_2.png",
+          "bytes": 87935,
+          "sha256": "d52df81d7ad9aac3aa9420769c7ee73adf1597ac66a8491dbb20cbe604f0b439"
+        },
+        {
+          "file": "job2_3.png",
+          "index": 3,
+          "url": "https://cdn.midjourney.com/97098990-4122-453e-891b-41d59737c2e3/0_3.png",
+          "bytes": 74786,
+          "sha256": "2072a0b64cf195af5f8a77bbb688a4e40a02672278675021fd8fa48659a4592f"
+        }
+      ]
+    },
+    {
+      "job": 3,
+      "key": "mannequin",
+      "job_id": "24105685-333e-4697-b28e-210efeab9e34",
+      "prompt": "a wooden artist's mannequin leaping mid-air, body leaning back, one arm flung straight up and out to the right, the other arm bent and raised overhead, left leg straight and pointing down, right leg kicked back bent at the knee, full body, ball-and-socket bean mannequin construction with ovals, simple stick figure sketch, blue graphite pencil, Procreate sketch, white paper, minimal clean lines, no shading --ar 2:3 --style raw",
+      "files": [
+        {
+          "file": "job3_0.png",
+          "index": 0,
+          "url": "https://cdn.midjourney.com/24105685-333e-4697-b28e-210efeab9e34/0_0.png",
+          "bytes": 82205,
+          "sha256": "c2f12790c17306f70ae3749b6f22564c683b8c1ceecfc3e602740ec393517e9e"
+        },
+        {
+          "file": "job3_1.png",
+          "index": 1,
+          "url": "https://cdn.midjourney.com/24105685-333e-4697-b28e-210efeab9e34/0_1.png",
+          "bytes": 72351,
+          "sha256": "3ec00f1917a995da7e36027fe43f99d545ae7fa3e08d8532743fc0eda9603f16"
+        },
+        {
+          "file": "job3_2.png",
+          "index": 2,
+          "url": "https://cdn.midjourney.com/24105685-333e-4697-b28e-210efeab9e34/0_2.png",
+          "bytes": 85153,
+          "sha256": "75a87de7c667db48d901f5a2e89e506dfc47184f8ff499f6c9a60962c9c2c8d7"
+        },
+        {
+          "file": "job3_3.png",
+          "index": 3,
+          "url": "https://cdn.midjourney.com/24105685-333e-4697-b28e-210efeab9e34/0_3.png",
+          "bytes": 83028,
+          "sha256": "60ac23ddeb434229ef78b73eea050b247d2619a32bbe3bca778083cb27721ccb"
+        }
+      ]
+    },
+    {
+      "job": 4,
+      "key": "blocking",
+      "job_id": "80f023df-5c3f-439c-a405-fb5eaf1a8b24",
+      "prompt": "a wooden artist's mannequin leaping mid-air, body leaning back, one arm flung straight up and out to the right, the other arm bent and raised overhead, left leg straight and pointing down, right leg kicked back bent at the knee, full body, box and cylinder form blocking construction, simple stick figure sketch, blue graphite pencil, Procreate sketch, white paper, minimal clean lines, no shading --ar 2:3 --style raw",
+      "files": [
+        {
+          "file": "job4_0.png",
+          "index": 0,
+          "url": "https://cdn.midjourney.com/80f023df-5c3f-439c-a405-fb5eaf1a8b24/0_0.png",
+          "bytes": 117040,
+          "sha256": "709574f36a14db33ec3a07ede176c3f284052b2b4b60f1a7267a5416dc3fe019"
+        },
+        {
+          "file": "job4_1.png",
+          "index": 1,
+          "url": "https://cdn.midjourney.com/80f023df-5c3f-439c-a405-fb5eaf1a8b24/0_1.png",
+          "bytes": 91254,
+          "sha256": "85cb3b93a8d70486f0e73d5ef00e7f72b767115d1ce3cc54e84983c07f102763"
+        },
+        {
+          "file": "job4_2.png",
+          "index": 2,
+          "url": "https://cdn.midjourney.com/80f023df-5c3f-439c-a405-fb5eaf1a8b24/0_2.png",
+          "bytes": 84066,
+          "sha256": "5dbe4192c85b902467d129e7d6a5ccabf32cb8c277ce9b0b3b118c0e99ec5c11"
+        },
+        {
+          "file": "job4_3.png",
+          "index": 3,
+          "url": "https://cdn.midjourney.com/80f023df-5c3f-439c-a405-fb5eaf1a8b24/0_3.png",
+          "bytes": 82693,
+          "sha256": "37d9cc6e6627146615d3fc465b611b03033967030c19799da837b3445bcb12f9"
+        }
+      ]
+    }
+  ]
+}
