@@ -13,27 +13,13 @@ html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #scene-tools-
 html.ui-v2.v2-sheet:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #scene-tools-drawer{display:block!important;position:fixed!important;inset:auto auto calc(env(safe-area-inset-bottom) + 142px) 50%!important;transform:translateX(-50%)!important;width:min(380px,calc(100vw - 24px))!important;max-height:min(52dvh,540px)!important;border-radius:24px!important;z-index:40!important}
 html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #scene-tools-drawer .tile-tools-heading strong{font-size:0!important}
 
-/* The pickers the old readouts opened, re-anchored under the sun dial. */
-html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace :is(#scene-clock-control-choices,#scene-weather-control-choices,#scene-season-control-choices,#simulation-speed-choices){left:50%!important;top:calc(env(safe-area-inset-top) + 142px)!important;translate:-50% 0;max-height:calc(100dvh - 240px);overflow:auto}
+/* The pickers the old readouts opened, re-anchored under the chronograph. */
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace :is(#scene-clock-control-choices,#scene-weather-control-choices,#scene-season-control-choices,#simulation-speed-choices){left:calc(env(safe-area-inset-left) + 12px)!important;top:calc(env(safe-area-inset-top) + 92px)!important;max-height:calc(100dvh - 260px);overflow:auto}
 
 /* Shared glass object: thickness, rim highlight, contact shadow. Small refraction only behind the object itself. */
 .v2-glass{background:linear-gradient(160deg,#ffffff70,transparent 46%),var(--v2-glass);-webkit-backdrop-filter:blur(7px) saturate(1.9) brightness(1.06);backdrop-filter:blur(7px) saturate(1.9) brightness(1.06);border:1px solid var(--v2-rim);box-shadow:var(--v2-shadow);color:var(--v2-ink)}
 .v2-toy{position:fixed;z-index:38;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation;font-family:var(--app-font,system-ui)}
 .v2-toy button{font:inherit;color:inherit}
-
-/* Sun dial: time is the sun's place in a little sky; weather sits on its rim; tap to pause, hold for time, weather, season, speed. */
-#v2-dial{left:50%;top:calc(env(safe-area-inset-top) + 10px);transform:translateX(-50%);width:64px;height:64px;padding:0;border-radius:50%;cursor:pointer;overflow:visible;transition:transform .15s ease}
-#v2-dial:active{transform:translateX(-50%) scale(.94)}
-#v2-dial svg.v2-sky{position:absolute;inset:3px;width:58px;height:58px;border-radius:50%;overflow:hidden}
-#v2-dial .v2-weather{position:absolute;right:-6px;bottom:-4px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;padding:3px;box-sizing:border-box}
-#v2-dial .v2-weather svg{width:18px;height:18px}
-#v2-dial .v2-nap{position:absolute;inset:0;display:none;place-items:center;border-radius:50%;background:#14203566}
-#v2-dial .v2-nap i{display:block;width:6px;height:20px;margin:0 3px;border-radius:3px;background:#fff;box-shadow:0 1px 3px #0006}
-#v2-dial.paused .v2-nap{display:flex;justify-content:center;align-items:center}
-#v2-dial .v2-speed{position:absolute;left:-6px;bottom:-4px;min-width:22px;height:22px;padding:0 5px;border-radius:11px;font:800 11px/22px var(--app-font,system-ui);text-align:center;box-sizing:border-box;display:none}
-#v2-dial .v2-speed.on{display:block}
-#v2-dial-ring{left:50%;top:calc(env(safe-area-inset-top) + 82px);transform:translateX(-50%);display:flex;gap:8px;padding:6px;border-radius:30px}
-#v2-dial-ring[hidden]{display:none}
 
 /* Round glass buttons used by the dial ring and the toy box shelf. */
 .v2-btn{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;padding:0;cursor:pointer;position:relative}
@@ -74,13 +60,77 @@ html.v2-sheet #v2-hand-more{box-shadow:var(--v2-shadow),0 0 0 2px color-mix(in s
 
 @keyframes v2-rise{from{opacity:0;transform:translateY(8px) scale(.96)}}
 #v2-sheet-close-scrim{display:none}
-@media(prefers-reduced-motion:reduce){#v2-dial,#v2-hand,#v2-shelf,#v2-dial-ring,html.ui-v2 #v2-hand .generator-hero{transition:none!important;animation:none!important}}
+@media(prefers-reduced-motion:reduce){#v2-hand,#v2-shelf,html.ui-v2 #v2-hand .generator-hero{transition:none!important;animation:none!important}}
 @media(prefers-reduced-transparency:reduce){.v2-glass,html.ui-v2 #v2-hand .generator-hero{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:var(--app-paper,#fffcf0)!important}}
 @media(max-height:460px){#v2-hand{height:calc(env(safe-area-inset-bottom) + 104px)}html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero{width:74px!important;height:96px!important}#v2-shelf{grid-template-columns:repeat(4,64px)}#v2-shelf button{width:64px}}
-@media(max-width:520px){#v2-hand{left:88px;right:4px;transform:none;padding:0 0 calc(env(safe-area-inset-bottom) + 14px);height:calc(env(safe-area-inset-bottom) + 112px)}#v2-hand.tucked{transform:translateY(44px)}html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero{width:66px!important;height:88px!important;margin:0 -6px!important;padding:4px 4px 5px!important;border-radius:13px!important}html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero-name{font-size:10px!important}#v2-hand-more{margin:0 0 24px 8px;width:36px;height:36px}}
+@media(max-width:520px){#v2-hand{left:96px;right:4px;transform:none;padding:0 0 calc(env(safe-area-inset-bottom) + 14px);height:calc(env(safe-area-inset-bottom) + 112px)}#v2-hand.tucked{transform:translateY(44px)}html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero{width:66px!important;height:88px!important;margin:0 -6px!important;padding:4px 4px 5px!important;border-radius:13px!important}html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero-name{font-size:10px!important}#v2-hand-more{margin:0 0 24px 8px;width:36px;height:36px}}
 
 /* The summoned sheet: lighter glass (no frost wall over the world) and chunky toy chips instead of segmented web controls. */
 html.ui-v2.v2-sheet:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #scene-tools-drawer{background:linear-gradient(160deg,#ffffff80,transparent 46%),color-mix(in srgb,var(--app-paper,#fffcf0) 78%,transparent)!important;-webkit-backdrop-filter:blur(5px) saturate(1.8)!important;backdrop-filter:blur(5px) saturate(1.8)!important;box-shadow:var(--v2-shadow)!important}
 html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #scene-tools-drawer .td-steps-row{background:none!important;gap:8px!important;padding:0!important}
 html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #scene-tools-drawer .td-steps-row button{min-height:40px!important;border-radius:20px!important;background:linear-gradient(160deg,#ffffffb0,#ffffff40)!important;box-shadow:inset 0 1px 0 #fff,0 2px 5px #2a201418!important;border:1px solid #ffffffc0!important}
 html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace #scene-tools-drawer .td-steps-row button[aria-checked=true]{background:linear-gradient(160deg,#ffffff60,transparent),var(--v2-accent)!important;color:#fff!important;box-shadow:inset 0 1px 0 #ffffff90,0 3px 8px color-mix(in srgb,var(--v2-accent) 40%,transparent)!important}
+
+/* Hand cards with a Card Forge face (hand-cards.mjs): the face is the card, so the glass tile styling steps aside. */
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:120px!important;height:168px!important;padding:0!important;margin:0 -12px!important;border:0!important;border-radius:6px!important;background:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 1px 2px #0000002e,0 10px 22px -6px #0c20305c!important;overflow:hidden}
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced>:not(.v2-face){display:none!important}
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced .v2-face{display:block;width:100%;height:100%;pointer-events:none}
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced[aria-pressed=true]{box-shadow:0 0 0 2.5px color-mix(in srgb,var(--v2-accent) 85%,#fff),0 14px 26px -6px #0c20306b!important}
+#v2-hand{height:calc(env(safe-area-inset-bottom) + 196px)}
+#v2-hand.tucked{transform:translate(-50%,104px)}
+@media(max-width:520px){html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:80px!important;height:112px!important;margin:0 -10px!important;border-radius:4px!important}#v2-hand{height:calc(env(safe-area-inset-bottom) + 134px)}#v2-hand.tucked{transform:translateY(66px)}}
+
+/* The chronograph (chrono.mjs): one liquid-glass case, top left, where the clock card was. */
+#v2-chrono{left:calc(env(safe-area-inset-left) + 12px);top:calc(env(safe-area-inset-top) + 10px);display:flex;align-items:center;gap:8px;padding:5px 6px 5px 5px;border-radius:40px}
+#v2-chrono button{border:0;background:none;padding:0;cursor:pointer;color:inherit;font:inherit}
+#v2-chrono .ch-dial{position:relative;width:64px;height:64px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px #ffffffa0,0 2px 6px #0c20302e}
+#v2-chrono .ch-dial svg{width:64px;height:64px;display:block}
+#v2-chrono .ch-nap{position:absolute;inset:13px;border-radius:50%;display:none;align-items:center;justify-content:center;background:#14203570}
+#v2-chrono .ch-nap i{display:block;width:5px;height:16px;margin:0 2.5px;border-radius:3px;background:#fff}
+#v2-chrono.paused .ch-nap{display:flex}
+#v2-chrono .ch-read{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05;padding:0 2px;min-width:74px}
+#v2-chrono .ch-time{font:800 19px/1.05 var(--app-font,system-ui);letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+#v2-chrono .ch-date{font:600 11.5px/1.3 var(--app-font,system-ui);opacity:.75;white-space:nowrap}
+#v2-chrono .ch-registers{display:flex;gap:5px;align-items:center}
+.ch-reg{position:relative;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:none;overflow:visible}
+.ch-reg>svg{position:absolute;inset:2px;width:30px;height:30px}
+.ch-reg .ch-g{display:grid;place-items:center;width:18px;height:18px;position:relative}
+.ch-reg .ch-g svg{width:18px;height:18px}
+.ch-reg .ch-n{font:800 13px/1 var(--app-font,system-ui);font-variant-numeric:tabular-nums;position:relative;z-index:1}
+.ch-reg .ch-g-small{position:absolute;right:-3px;bottom:-3px;width:15px;height:15px;border-radius:50%;background:var(--app-paper,#fffcf0);box-shadow:0 0 0 1px #ffffffc0,0 1px 2px #0003}
+.ch-reg .ch-g-small svg{width:11px;height:11px}
+.ch-reg.ch-offer{background:none!important;border:1.5px dashed color-mix(in srgb,var(--v2-accent) 70%,transparent)!important;box-shadow:none!important;opacity:.85}
+.ch-reg .ch-wave{position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;background:var(--app-paper,#fffcf0);font:700 12px/16px system-ui;text-align:center;box-shadow:0 1px 3px #0004}
+.ch-reg.ch-add{width:26px;height:26px;opacity:.75}
+.ch-reg.ch-add svg{width:14px;height:14px;position:static}
+#v2-chrono .ch-pushers{display:flex;flex-direction:column;gap:4px;margin-left:2px}
+#v2-chrono .ch-push{display:flex;align-items:center;justify-content:center;gap:2px;min-width:40px;height:28px;padding:0 8px!important;border-radius:14px!important;background:linear-gradient(160deg,#ffffffb0,#ffffff40)!important;box-shadow:inset 0 1px 0 #fff,0 1px 3px #2a201428!important}
+#v2-chrono .ch-push svg{width:15px;height:15px}
+#v2-chrono .ch-push b{font:800 11.5px/1 var(--app-font,system-ui)}
+#v2-chrono.paused .ch-pause{background:linear-gradient(160deg,#ffffff60,transparent),var(--v2-accent)!important;color:#fff}
+#v2-chrono-pop{top:calc(env(safe-area-inset-top) + 88px);left:12px;width:min(320px,calc(100vw - 24px));max-height:calc(100dvh - 280px);overflow:auto;padding:12px;border-radius:20px;box-sizing:border-box;font:500 13px/1.35 var(--app-font,system-ui)}
+#v2-chrono-pop[hidden]{display:none}
+#v2-chrono-pop .ch-title{display:block;font:800 15px var(--app-font,system-ui);margin:0 0 8px}
+#v2-chrono-pop .ch-note{margin:0 0 8px}
+#v2-chrono-pop .ch-way{opacity:.7;font-size:12px}
+#v2-chrono-pop .ch-row{display:grid;grid-template-columns:34px 1fr;gap:4px 10px;align-items:center;padding:6px 0;border-top:1px solid #0000000f}
+#v2-chrono-pop .ch-says{font-weight:700}
+#v2-chrono-pop .ch-says small{display:block;font-weight:500;opacity:.65}
+#v2-chrono-pop .ch-chips{grid-column:2;display:flex;flex-wrap:wrap;gap:5px}
+#v2-chrono-pop .ch-chip{border:1px solid #ffffffc0;border-radius:14px;padding:4px 10px;background:linear-gradient(160deg,#ffffffb0,#ffffff40);box-shadow:inset 0 1px 0 #fff,0 1px 3px #2a201420;font:700 12px var(--app-font,system-ui);color:inherit;cursor:pointer}
+#v2-chrono-pop .ch-chip[aria-pressed=true]{background:var(--v2-accent);color:#fff}
+#v2-chrono-pop .ch-unpin{margin-top:10px;opacity:.75}
+#v2-chrono-pop .ch-todos{list-style:none;margin:0 0 8px;padding:0}
+#v2-chrono-pop .ch-todos li{display:flex;align-items:center;gap:8px;padding:5px 0;border-top:1px solid #0000000f}
+#v2-chrono-pop .ch-todos li>span{flex:1}
+#v2-chrono-pop .ch-todos li small{display:block;opacity:.6;font-size:11px}
+#v2-chrono-pop .ch-todos li.done>span{text-decoration:line-through;opacity:.55}
+#v2-chrono-pop .ch-tick{width:22px;height:22px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--v2-accent) 70%,transparent);background:#ffffff80;color:var(--v2-accent);font:800 13px/1 system-ui;cursor:pointer}
+#v2-chrono-pop .ch-x{border:0;background:none;font:600 16px system-ui;opacity:.5;cursor:pointer;color:inherit}
+#v2-chrono-pop .ch-new{display:flex;gap:6px}
+#v2-chrono-pop .ch-new input{flex:1;min-width:0;border:1px solid #ffffffc0;border-radius:14px;padding:6px 10px;background:#ffffffa0;font:500 13px var(--app-font,system-ui)}
+#v2-chrono-pop .ch-empty{opacity:.65}
+@media(max-width:520px){#v2-chrono{gap:5px;padding:4px 5px 4px 4px}#v2-chrono .ch-dial,#v2-chrono .ch-dial svg{width:54px;height:54px}#v2-chrono .ch-nap{inset:11px}#v2-chrono .ch-read{min-width:0}#v2-chrono .ch-time{font-size:15px}#v2-chrono .ch-date{display:none}.ch-reg{width:28px;height:28px}.ch-reg>svg{inset:1px;width:26px;height:26px}.ch-reg .ch-g,.ch-reg .ch-g svg{width:15px;height:15px}.ch-reg.ch-add{width:22px;height:22px}#v2-chrono .ch-push{min-width:32px;height:24px;padding:0 6px!important}#v2-chrono-pop{top:calc(env(safe-area-inset-top) + 74px)}html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace :is(#scene-clock-control-choices,#scene-weather-control-choices,#scene-season-control-choices,#simulation-speed-choices){top:calc(env(safe-area-inset-top) + 74px)!important}}
+/* The app's touch rule gives every button a 44 px minimum; the case sizes its own parts (each hit area is padded by the case). */
+html.ui-v2 #v2-chrono :is(button,.ch-reg),html.ui-v2 #v2-hand-more,html.ui-v2 #v2-box{min-height:0!important}
+@media(max-width:520px){#v2-chrono:not(.open) :is(.ch-pushers,.ch-reg:not(.ch-offer)){display:none}#v2-chrono:not(.open).paused .ch-time::after{content:' ·  paused';font-size:11px;font-weight:600;opacity:.7}}
