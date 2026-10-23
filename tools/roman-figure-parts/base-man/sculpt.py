@@ -47,7 +47,7 @@ def U(sdf, part, k): return part if sdf is None else smin(sdf, part, k)
 import build
 from PIL import Image, ImageDraw
 from scipy.ndimage import distance_transform_edt, gaussian_filter
-NRING = {"Head": 32, "Neck": 24, "Torso": 36, "ArmR": 20, "ArmL": 20, "LegR": 28, "LegL": 28}
+NRING = {"Head": 32, "Neck": 24, "Torso": 36, "LegR": 28, "LegL": 28}      # arms are built as limbs below
 occ = np.zeros(GX.shape, bool)
 for name, n in NRING.items():
     V = np.asarray(build.PARTS[name][0]); k = (len(V) - 2) // n
@@ -70,14 +70,36 @@ skin = sil
 def add(part, k): 
     global skin; skin = smin(skin, part, k)
 for s in (1, -1):
-    add(ell((s * 39.5, 249.5, 84), (7.4, 9.6, 11.0)), 3.0)                       # deltoids
     add(cone((s * 6, 255, 57), (s * 36, 250, 74), 6.5, 6.0), 5.0)               # trapezius slope into the deltoid
-    relief_arm = (s * 45.0, 114)
     add(ell((s * 13.0, 258.5, 181), (13.0, 10.5, 13.0)), 3.0)                    # glutes
     add(ell((s * 17.5, 238.5, 222), (13.0, 10.0, 24.0)), 4.0)                    # quadriceps
     add(ell((s * 16.5, 240.5, 259), (8.2, 8.6, 7.0)), 2.0)                       # knee
     add(ell((s * 16.5, 236.5, 258), (4.6, 2.2, 4.6)), 1.2)                       # kneecap
     add(ell((s * 16.8, 255.5, 281), (9.0, 9.0, 19.0)), 3.0)                      # calf
+# ---- arms: one limb each along its bones (shoulder, elbow, wrist). Cross-sections have separate outer, inner,
+# front and back radii so the bulges sit at different heights on each edge (construction rule: deltoid high on
+# the outside, biceps mid-arm in front, triceps high behind; forearm swells just below the elbow, flat at the wrist).
+UPPER = dict(z=[70, 80, 88, 100, 112, 124, 136, 140],
+             o=[7.0, 10.5, 11.0, 9.5, 9.0, 9.4, 9.4, 9.4], i=[6.0, 8.0, 8.5, 8.5, 9.0, 9.4, 9.0, 9.0],
+             f=[8.0, 10.0, 9.8, 9.4, 9.6, 9.4, 8.4, 8.0], b=[8.0, 10.2, 10.4, 10.2, 9.4, 8.4, 8.0, 8.0])
+FORE = dict(z=[140, 146, 152, 158, 164, 170, 174],
+            o=[9.4, 9.5, 8.5, 7.0, 5.5, 4.6, 4.5], i=[9.0, 8.2, 7.4, 6.2, 5.0, 4.5, 4.5],
+            f=[8.0, 8.4, 8.0, 7.0, 6.2, 6.0, 5.8], b=[8.0, 8.6, 8.2, 7.2, 6.4, 6.0, 5.8])
+def limb(a, b, prof, s):
+    a, b = np.asarray(a, float), np.asarray(b, float); d = b - a; L2 = d @ d
+    t = np.clip(((GX - a[0]) * d[0] + (GY - a[1]) * d[1] + (GZ - a[2]) * d[2]) / L2, 0, 1)
+    ax_, ay, az = a[0] + t * d[0], a[1] + t * d[1], a[2] + t * d[2]
+    rx, ry, rz = GX - ax_, GY - ay, GZ - az
+    pick = lambda key: np.interp(az, prof["z"], prof[key])
+    ru = np.where(rx * s > 0, pick("o"), pick("i")); rv = np.where(ry < 0, pick("f"), pick("b"))
+    q = np.sqrt((rx / ru) ** 2 + (ry / rv) ** 2 + (rz / np.minimum(ru, rv)) ** 2)
+    return (q - 1) * np.minimum(ru, rv)
+for s in (1, -1):
+    sh, el, wr = (s * 39.5, 250.0, 76), (s * 49.5, 249.5, 140), (s * 55.0, 247.0, 174)
+    arm = smin(limb(sh, el, UPPER, s), limb(el, wr, FORE, s), 2.0)
+    arm = smin(arm, ell((s * 42.0, 250.0, 90), (7.0, 9.0, 12.0)), 4.0)              # deltoid cap
+    skin = smin(skin, arm, 4.0)
+
 # surface relief: muscle masses and grooves pushed out of (or into) the skin wherever it faces front or back,
 # so they sit on the real surface instead of guessed depths
 FRONT = 1 / (1 + np.exp((GY - 247.0) / 2.5)); BACK = 1 - FRONT
@@ -127,7 +149,7 @@ for s in (1, -1):
 skin = smax(skin, GZ - 357.0, 0.6)
 
 # ---- hands: palm turned 40 degrees, four fingers and a thumb, joined to the wrist
-TURN = math.radians(40)
+TURN = math.radians(58)
 for s in (1, -1):
     c = (s * 54.0, 246.0, 184.0)
     hand = ell(c, (3.4, 7.6, 9.0), rot=s * TURN)

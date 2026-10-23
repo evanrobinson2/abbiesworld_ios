@@ -147,7 +147,7 @@ ys = list(range(60, 189, 2)); tw, tc, tf, tb = [], [], [], []
 for y in ys:
     rr = run_at(y, 103, 40, 170)
     if y < 112:                                            # arms merge with the torso up here
-        off = np.interp(y, [60, 66, 72, 80, 90, 106, 112], [0, 5, 13, 16, 17, 19, 24])
+        off = np.interp(y, [60, 66, 72, 80, 90, 104, 112], [0, 5, 13, 16, 17, 21, 24])
         l, r = rr[0] + off, rr[1] - off
         if y < 76:                                         # trapezius: slope from the neck to the acromion
             h = np.interp(y, [58, 62, 66, 70, 76], [12, 16, 22, 28, 32]); l, r = 103.5 - h, 103.5 + h
@@ -171,7 +171,7 @@ for y in ys:
         l, r = runs(y, 40, 72)[0]
         aw.append((r - l + 1) / 2); ac.append((l + r) / 2)
 aw, ac = sm(aw), sm(ac)
-dr = lambda y: np.interp(y, [66, 112, 140, 160, 176], [1.0, 1.0, 1.08, 1.15, 1.35])   # depth / width
+dr = lambda y: np.interp(y, [66, 112, 140, 160, 176], [1.0, 1.0, 1.0, 1.04, 1.12])   # depth / width
 yc = lambda y: np.interp(y, [66, 176], [250.0, 246.0])
 rings = [ring(X(c), Y(yc(y)), Z(y), w * S, w * dr(y) * S, w * dr(y) * S, n=20, p=2.0)
          for y, w, c in zip(ys, aw, ac)]
