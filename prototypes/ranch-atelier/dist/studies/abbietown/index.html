@@ -120,7 +120,7 @@ body.play .stage{position:fixed;inset:0;height:100dvh;min-height:0;border-radius
 <script>
 // Play mode: /town (or ?play) shows only the town, with a door home and a sign-in chip (nothing is asked of players).
 if (location.pathname === '/town' || /[?&]play\b/.test(location.search)) {
- document.body.classList.add('play'); document.title = "Abbie's Town";
+ document.body.classList.add('play');
  const d = document.createElement('div'); d.className = 'pl-door';
  d.innerHTML = '<a href="/sandbox" aria-label="Back to the ranch">Ranch</a><button type="button" id="pl-account">Sign in</button>';
  document.body.append(d);
@@ -1028,7 +1028,7 @@ function family(g, wall, accent, pink) {
  }
  coin(g, 0, 12, 0);
 }
-let cafe = null; const beakers = []; const CELL_GAME = document.body.classList.contains('play') ? '/science-lab?from=' + encodeURIComponent('/town') : '/studies/cell/play.html';
+let cafe = null; const beakers = []; const CELL_GAME = '/studies/cell/play.html' + (document.body.classList.contains('play') ? '?from=' + encodeURIComponent('/town') : '');
 const BUILD = {
  cafe(g) { const s = shopfront('#f1e6d6', '#2f8f86', '#ffffff'); g.add(s.g); cafe = s;
   const sign = cyl(g, 2.4, 2.4, .5, '#2f8f86', 0, 0, 0, 24); sign.rotation.x = Math.PI / 2; sign.position.set(0, 7.4, 7.3); cafe.sign = sign;
@@ -1152,7 +1152,7 @@ canvas.addEventListener('pointerup', e => {
  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera);
  if (spotByID.cafe && ray.intersectObject(spotByID.cafe.g, true)[0]) { const ev = new CustomEvent('abbietown:cafe-door', {detail: {id: 'cafe', signedIn}, cancelable: true}); if (window.dispatchEvent(ev) && document.body.classList.contains('play')) location.href = '/studies/cafe/diorama.html?from=town'; }
  const hit = ray.intersectObjects(beakers, true)[0]; if (!hit) return;
- let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) location.href = o.userData.link;
+ let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) { if (o.userData.link === CELL_GAME && window.AbbieTown?.go) window.AbbieTown.go('town:lab-door'); else location.href = o.userData.link; }
 });
 canvas.addEventListener('pointermove', e => { if (e.buttons) return; const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); canvas.style.cursor = ray.intersectObjects(beakers, true).length ? 'pointer' : ''; });
 // the real map: off, then faint, then strong
