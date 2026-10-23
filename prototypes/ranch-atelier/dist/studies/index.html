@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Studies</title>
 <script src="/theme/boot.js?v=1"></script>
+<link rel="stylesheet" href="/look/context-card.css?v=1">
 <style>
 /* Studies, a small app (docs/design/look/LOOK.md, "Studies"). The list on the left and the details on the right can each
    be hidden ([ and ]) and dragged wider; both remember. Home shows Recent, Trending and Most impactful. Each study is its
@@ -112,7 +113,8 @@ body.l-off #fl,body.r-off #fr{display:flex}
 .tabs i:empty{display:none}
 [role=tabpanel][hidden]{display:none!important}
 /* the notes app: write, keep, send to the study's thread, ask for a review */
-.notes{overflow-y:auto;padding:0 16px 20px;flex:1;display:grid;align-content:start;gap:12px}
+.notes,.ctxp{overflow-y:auto;padding:0 16px 20px;flex:1;display:grid;align-content:start;gap:12px}
+.ctxp h3{margin:0;font:600 17px/1.2 var(--aw-display)}.ctxp .to{font-size:13px;color:var(--aw-soft)}
 .notes h3{margin:0;font:600 17px/1.2 var(--aw-display)}
 .notes .to{font-size:12px;color:var(--aw-soft)}
 .notes textarea{box-sizing:border-box;width:100%;min-height:96px;resize:vertical;padding:10px 12px;border-radius:14px;border:1px solid var(--aw-line);background:var(--aw-bg);color:var(--aw-ink);font:15px/1.4 var(--aw-font)}
@@ -176,11 +178,13 @@ body.l-off #fl,body.r-off #fr{display:flex}
 </main>
 <div class="grip" id="gr" role="separator" aria-orientation="vertical" aria-label="Resize the details" tabindex="0"></div>
 <aside class="side" id="right" aria-label="Details">
- <div class="bar"><div class="tabs" role="tablist" aria-label="Right panel"><button type="button" role="tab" id="tab-notes" aria-selected="true">Notes<i id="notes-n"></i></button><button type="button" role="tab" id="tab-facets" aria-selected="false">Details</button></div><button class="ib" id="hide-r" aria-label="Hide the panel" title="Hide the panel  ]">__DETAILS__</button></div>
+ <div class="bar"><div class="tabs" role="tablist" aria-label="Right panel"><button type="button" role="tab" id="tab-notes" aria-selected="true">Notes<i id="notes-n"></i></button><button type="button" role="tab" id="tab-ctx" aria-selected="false">Context<i id="ctx-n"></i></button><button type="button" role="tab" id="tab-facets" aria-selected="false">Details</button></div><button class="ib" id="hide-r" aria-label="Hide the panel" title="Hide the panel  ]">__DETAILS__</button></div>
  <div class="notes" id="notes" role="tabpanel" aria-labelledby="tab-notes"></div>
+ <div class="ctxp" id="ctx" role="tabpanel" aria-labelledby="tab-ctx" hidden></div>
  <div class="facets" id="facets" role="tabpanel" aria-labelledby="tab-facets" hidden></div>
 </aside>
 <script type="module">
+import {loadContext, contextHTML, resolveContext} from '/look/context-card.mjs?v=2';
 import {mountProfileButton, getProfile, currentTheme} from '/theme/aw.mjs';
 const ICON = {
  sidebar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg>',
@@ -400,9 +404,17 @@ notesEl.addEventListener('click', e => {
  if (b) act(b.dataset.n, x);
  if (d) { const N = allNotes(); N[x.id] = (N[x.id] || []).filter(m => String(m.at) !== d.dataset.del); saveNotes(N); drawNotes(x); }
 });
-const tabs = {notes: [document.getElementById('tab-notes'), notesEl], facets: [document.getElementById('tab-facets'), document.getElementById('facets')]};
+const ctxEl = document.getElementById('ctx');
+// Context engineering: what each study drew on (Evan 2026-10-23), from /studies/context.json.
+async function drawCtx(x){
+ const data = await loadContext(), n = document.getElementById('ctx-n');
+ if (!x){ const k = data ? Object.keys(data.studies).length : 0; ctxEl.innerHTML = `<h3>Context engineering</h3><p class="to">Open a study to see what it drew on: Oracle consultation, game dev and design blogs, tutorials and our own canon. ${k} studies have sources recorded.</p>`; n.textContent = ''; return; }
+ ctxEl.innerHTML = data ? contextHTML(data, x.id) : '<p class="to">The sources file did not load.</p>';
+ n.textContent = data ? (resolveContext(data, x.id).count || '') : '';
+}
+const tabs = {notes: [document.getElementById('tab-notes'), notesEl], ctx: [document.getElementById('tab-ctx'), ctxEl], facets: [document.getElementById('tab-facets'), document.getElementById('facets')]};
 function showTab(k){ for (const [n, [t, el]] of Object.entries(tabs)) { t.setAttribute('aria-selected', String(n === k)); el.hidden = n !== k; } store('aw-studies-tab', k); }
-tabs.notes[0].onclick = () => showTab('notes'); tabs.facets[0].onclick = () => showTab('facets');
+tabs.notes[0].onclick = () => showTab('notes'); tabs.ctx[0].onclick = () => showTab('ctx'); tabs.facets[0].onclick = () => showTab('facets');
 
 // ---------- details: facets of what's open ----------
 const facets = document.getElementById('facets'), view = document.getElementById('view');
@@ -444,7 +456,7 @@ function route(){
   const o = opens(); o[id] = {n: (o[id]?.n || 0) + 1, at: Date.now()}; store('aw-studies-opens', o);
   if (phone.matches){ P.lPhone = false; layout(); }
  }
- outcomeBar(x); drawNotes(x);
+ outcomeBar(x); drawNotes(x); drawCtx(x);
  links[id]?.scrollIntoView({block: 'nearest'});
 }
 // ---------- the outcome toolbar: Read or Dismiss the open study ----------

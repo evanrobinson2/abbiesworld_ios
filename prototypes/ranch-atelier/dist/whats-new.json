@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-study-context",
+      "date": "2026-10-23",
+      "title": "What each study drew on",
+      "line": "Every study now has a Context card on the right: the Oracle games it consulted, the dev and design blogs, the tutorials and our own canon. Where nothing was written down it says so.",
+      "image": "/whats-new/2026-10-23-study-context.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/studies/#bodies-study"
+    },
+    {
       "id": "2026-10-23-faces",
       "date": "2026-10-23",
       "title": "Faces that feel",

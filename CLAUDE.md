@@ -25,6 +25,10 @@ documents; what is built lives in the status documents. Keep these three apart.
   (branch `feedback-inbox`). See `prototypes/ranch-atelier/dist/FEEDBACK.md`.
 - The tour rule (Evan, 2026-10-23 06:43Z): every new feature or capability gets a decision on whether it goes into the
   player tour. Write it as `"tour": true` or `"tour": false` on its `whats-new.json` entry and say it in the PR.
+- Context engineering card (Evan, 2026-10-23, org-wide): every study lists what it drew on (Oracle consultation, game
+  dev blogs, game design blogs, tutorials, our canon) in `prototypes/ranch-atelier/dist/studies/context.json`, shown
+  as the Context card on its right side and pasted into its artifact. Record sources as you work, in the PR that ships
+  the study. See `tools/context-card/README.md`.
 - Integrate the modeler vision incrementally. Don't overwrite existing conventions, file formats or loaders; extend them.
 
 ## How Abbie's World shows information
