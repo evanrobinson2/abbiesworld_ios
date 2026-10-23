@@ -5,7 +5,7 @@
 (() => {
   'use strict';
   if (window.AppFeedback || typeof document === 'undefined') return;
-  if (!document.querySelector('script[src^="/version-chip.js"]')) document.head.append(Object.assign(document.createElement('script'), { src: '/version-chip.js?v=2', defer: true }));
+  if (!document.querySelector('script[src^="/version-chip.js"]')) document.head.append(Object.assign(document.createElement('script'), { src: '/version-chip.js?v=3', defer: true }));
   const store = {
     get(key) { try { return localStorage.getItem(key); } catch { return null; } },
     set(key, value) { try { localStorage.setItem(key, value); } catch {} }
