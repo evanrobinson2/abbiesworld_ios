@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "watering-pot-charming",
+  "group": "prop",
+  "replaces": "garden-assets/GF-074.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a round glazed terracotta watering pot with a long spout and a curved handle, chunky rounded toy-like proportions, a playful little tilt, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "a3ee8f75-f6af-485b-9778-f6ea43c0c27b",
+      "grid_url": "https://www.midjourney.com/jobs/a3ee8f75-f6af-485b-9778-f6ea43c0c27b?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "1f353de0-87e9-4451-8118-90eb5f0c3242",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:22:26.293Z",
+      "grid_done_at": "2026-10-23T01:22:44.299Z",
+      "upscale_clicked_at": "2026-10-23T01:22:55.298Z",
+      "downloaded_at": "2026-10-23T01:24:07.567Z",
+      "pick_reason": "glossy glazed terracotta, long spout and curved handle, round body; variant 2 was a blue teapot"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "83e13ad3a5462fcf96ef6f74575ee024f8f0040b47ae2457ee68900ac4efc9bc",
+      "bytes": 3602604,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/1f353de0-87e9-4451-8118-90eb5f0c3242/0_0.png"
+    }
+  }
+}
