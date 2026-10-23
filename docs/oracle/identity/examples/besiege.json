@@ -1,0 +1,371 @@
+{
+  "schema_version": "1.0",
+  "game": {
+    "title": "Besiege",
+    "steam_appid": 346010,
+    "developer": "Spiderling Studios",
+    "publisher": "Spiderling Studios",
+    "release": "2020",
+    "early_access": "2015",
+    "engine": {
+      "value": "Unity",
+      "source": "estimate",
+      "confidence": 0.6,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    },
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ]
+  },
+  "core": {
+    "fantasy": "You are a medieval engineer whose ridiculous machine just might work.",
+    "pillars": [
+      "Physics is the referee",
+      "Failure is funny, not punishing",
+      "Any solution that works is valid"
+    ],
+    "signature_moment": "Pressing play and watching your catapult fling itself into the castle.",
+    "anti_goals": [
+      "no scripted solutions",
+      "no story pressure"
+    ],
+    "signatures": [
+      {
+        "id": "build_then_simulate",
+        "layer": "mechanics",
+        "description": "Build in a frozen world, then switch to a full physics simulation with one key.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "comedic_failure",
+        "layer": "dynamics",
+        "description": "Machines explode, flip and tear apart; failing is half the entertainment.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "block_vocabulary",
+        "layer": "assets",
+        "description": "A small kit of mechanical blocks (wheels, hinges, springs, cannons) combined into anything.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ],
+    "recognisability": {
+      "value": 0.8,
+      "source": "estimate",
+      "confidence": 0.4,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    }
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "challenge": 0.3,
+        "expression": 0.35,
+        "discovery": 0.2,
+        "sensation": 0.15
+      },
+      "motivations": {
+        "creativity": 0.9,
+        "mastery": 0.7,
+        "action": 0.3,
+        "achievement": 0.5,
+        "immersion": 0.2,
+        "social": 0.3
+      },
+      "emotional_targets": {
+        "ingenuity": 0.9,
+        "laughter": 0.7,
+        "triumph": 0.6
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "attach block",
+          "input": "click a face"
+        },
+        {
+          "verb": "bind key",
+          "input": "keyboard"
+        },
+        {
+          "verb": "simulate",
+          "input": "toggle"
+        },
+        {
+          "verb": "drive/operate",
+          "input": "bound keys"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "build",
+          "simulate",
+          "watch it fail",
+          "fix"
+        ],
+        "period_s": {
+          "value": 120,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "s"
+        }
+      },
+      "meta_loop": {
+        "steps": [
+          "clear level objective",
+          "unlock next island level"
+        ]
+      },
+      "rules": {
+        "failure_model": "retry_level",
+        "win": "level objective (destroy, transport, survive)",
+        "resources": [
+          "block budget on some levels"
+        ]
+      },
+      "randomness": {
+        "amount": 0.05,
+        "kind": "none"
+      },
+      "information": "perfect",
+      "systems": [
+        "rigid-body physics with joints and breakage",
+        "fire and explosions",
+        "simple AI soldiers"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "prior knowledge of public footage and store page; to be measured"
+        },
+        "entity_types": {
+          "value": 60,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "prior knowledge of public footage and store page; to be measured"
+        }
+      }
+    },
+    "dynamics": {
+      "emergent_behaviours": [
+        "absurd overengineered machines",
+        "community-shared creations",
+        "physics exploits"
+      ],
+      "skill_strategy_chance": {
+        "skill": 0.35,
+        "strategy": 0.45,
+        "chance": 0.05,
+        "expression": 0.15
+      },
+      "expression_space": 0.95
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse",
+          "keyboard"
+        ],
+        "mapping": "cursor"
+      },
+      "camera": {
+        "model": "free_fly",
+        "constrained": false
+      },
+      "forgiveness": {
+        "snapping": "grid",
+        "undo": "yes",
+        "preview_before_commit": true,
+        "auto_repair": false
+      },
+      "juice": {
+        "particles": 0.7,
+        "screen_shake": 0.3,
+        "procedural_settle": 0.0,
+        "sound_on_action": 0.7,
+        "scale_pop": 0.2,
+        "squash_stretch": 0.0,
+        "hit_stop": 0.0,
+        "camera_kick": 0.2
+      },
+      "time_to_first_delight_s": {
+        "value": 120,
+        "source": "estimate",
+        "confidence": 0.3,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "s"
+      },
+      "friction_points": [
+        "key binding per block",
+        "free camera for beginners"
+      ]
+    },
+    "art": {
+      "rendering": {
+        "style": "flat_low_poly",
+        "outlines": false,
+        "post": [
+          "mild bloom"
+        ]
+      },
+      "palette": {
+        "dominant_hex": [
+          "#8A9A5B",
+          "#A47A4B",
+          "#C9B98F",
+          "#5E6E7E",
+          "#B8442E"
+        ],
+        "value_key": "mid",
+        "mean_saturation": 0.35
+      },
+      "shape_language": {
+        "round": 0.3,
+        "square": 0.6,
+        "triangle": 0.1,
+        "silhouette_readability": 0.85
+      },
+      "proportion_and_scale": {
+        "stylisation": 0.6,
+        "toyness": 0.6
+      },
+      "references": [
+        "medieval siege engines",
+        "da Vinci sketches"
+      ]
+    },
+    "assets": {
+      "kit": "modular",
+      "geometry": {
+        "poly_class": "low",
+        "edges": "chamfered",
+        "surface": "clean"
+      },
+      "materials": {
+        "texture_strategy": "flat_colour",
+        "roughness_character": "matte wood and metal"
+      },
+      "asset_vocabulary": [
+        "wooden block",
+        "wheel",
+        "hinge",
+        "spring",
+        "cannon",
+        "flamethrower",
+        "castle wall",
+        "soldier",
+        "sheep",
+        "windmill"
+      ]
+    },
+    "interface": {
+      "hud_coverage": {
+        "value": 0.18,
+        "source": "estimate",
+        "confidence": 0.3,
+        "method": "prior knowledge of public footage and store page; to be measured"
+      },
+      "onboarding": "scripted_levels",
+      "typography": "medieval-flavoured serif",
+      "feedback_language": [
+        "objective complete banner"
+      ]
+    },
+    "audio": {
+      "music": {
+        "style": "light orchestral/medieval",
+        "density": 0.3
+      },
+      "sfx_character": "realistic_foley",
+      "action_coupling": 0.7,
+      "voice": "barks"
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.3,
+        "enacted": 0.1,
+        "embedded": 0.0,
+        "emergent": 0.6
+      },
+      "tone": {
+        "cozy_tense": 0.0,
+        "whimsical_grounded": -0.5,
+        "earnest_ironic": 0.4,
+        "quiet_loud": 0.3,
+        "handmade_industrial": 0.0
+      },
+      "themes": [
+        "ingenuity",
+        "siege",
+        "trial and error"
+      ],
+      "humour": "slapstick physics"
+    },
+    "pacing": {
+      "structure": "puzzle_levels",
+      "tension_curve": "sawtooth",
+      "failure_cost": "retry_level",
+      "unlocks": [
+        "levels",
+        "islands"
+      ]
+    },
+    "market": {
+      "steam_tags": [
+        "Building",
+        "Physics",
+        "Sandbox",
+        "Medieval",
+        "Destruction"
+      ]
+    }
+  },
+  "ledger": {
+    "style": [
+      "build-then-simulate loop",
+      "physics as referee",
+      "modular mechanical block kit as a mechanic",
+      "failure as comedy"
+    ],
+    "expression": [
+      "Besiege's block models and textures",
+      "its levels and castles",
+      "its sounds and music",
+      "its UI art"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "mechanics",
+        "target": "Oracle rules",
+        "setting": "Contraption mini-game: build from a small toy-part kit, press go, the physics decides.",
+        "from_signature": "build_then_simulate"
+      },
+      {
+        "layer": "dynamics",
+        "target": "GAME_FEEL",
+        "setting": "Failure plays a funny wobble-and-collapse with a cheerful sound, never a fail screen.",
+        "from_signature": "comedic_failure"
+      }
+    ],
+    "leave": [
+      "free-fly camera",
+      "key binding per part",
+      "siege violence"
+    ]
+  },
+  "sources": [
+    "Steam store page",
+    "public gameplay footage"
+  ]
+}

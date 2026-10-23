@@ -1,0 +1,71 @@
+{
+  "appid": 1172470,
+  "name": "Apex Legends",
+  "store_url": "https://store.steampowered.com/app/1172470/",
+  "genres": [
+    "Battle royale",
+    "Hero shooter"
+  ],
+  "short_description": "Squads of three with hero abilities drop onto a shrinking map.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Battle royale",
+    "Hero shooter"
+  ],
+  "summary": "Squads of three with hero abilities drop onto a shrinking map.",
+  "identity": {
+    "core_loop": "Drop, loot, fight, rotate with the ring, be the last squad.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fluid movement and a famous ping system.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.3,
+        "meta": 0.1,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The ping system lets players point at the world instead of typing: spatial markers on things.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Bright sci-fi realism.",
+    "palette": null,
+    "audio_mood": "Voiced legends call out pings.",
+    "pacing": "fast, medium sessions",
+    "lessons_for_abbies_world": "Ping: point at a thing and a character says what it is. Words-free communication for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 1.0,
+      "challenge": 0.78,
+      "expression": 0.33,
+      "structure": 0.78,
+      "social": 0.89,
+      "systems": 0.67,
+      "chance": 0.67,
+      "session": 0.67
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "shooter"
+  },
+  "review": "The ping wheel is the best idea here: point at anything and your character names it out loud. That is exactly how a child could tell the world what they want without reading."
+}

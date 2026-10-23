@@ -1,0 +1,268 @@
+{
+  "id": "lure",
+  "name": "Lure of the Temptress",
+  "fileCount": 14,
+  "extractedBytes": 7215043,
+  "extensions": {
+    ".ega": 4,
+    ".vga": 4,
+    ".txt": 2,
+    ".pdf": 2,
+    ".exe": 1,
+    "(none)": 1
+  },
+  "packages": [
+    {
+      "name": "088-1-lure-1.1.zip",
+      "sha256": "f3178245a1483da1168c3a11e70b65d33c389f1f5df63d4f3a356886c1890108",
+      "exitCode": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "package-1/lure/disk1.ega",
+      "bytes": 599904
+    },
+    {
+      "path": "package-1/lure/Disk1.vga",
+      "bytes": 618944
+    },
+    {
+      "path": "package-1/lure/disk2.ega",
+      "bytes": 551680
+    },
+    {
+      "path": "package-1/lure/Disk2.vga",
+      "bytes": 659616
+    },
+    {
+      "path": "package-1/lure/disk3.ega",
+      "bytes": 447264
+    },
+    {
+      "path": "package-1/lure/Disk3.vga",
+      "bytes": 699072
+    },
+    {
+      "path": "package-1/lure/disk4.ega",
+      "bytes": 534912
+    },
+    {
+      "path": "package-1/lure/Disk4.vga",
+      "bytes": 618208
+    },
+    {
+      "path": "package-1/lure/LICENSE.txt",
+      "bytes": 1285
+    },
+    {
+      "path": "package-1/lure/Lure.exe",
+      "bytes": 136956
+    },
+    {
+      "path": "package-1/lure/Manual.pdf",
+      "bytes": 2207929
+    },
+    {
+      "path": "package-1/lure/notes.txt",
+      "bytes": 222
+    },
+    {
+      "path": "package-1/lure/PROTECT.PDF",
+      "bytes": 138359
+    },
+    {
+      "path": "package-1/lure/README",
+      "bytes": 692
+    }
+  ],
+  "analysis": {
+    "id": "lure",
+    "imageFileCount": 0,
+    "commonImageDimensions": {},
+    "imageExamples": [],
+    "imageReadErrors": [],
+    "binaryCount": 1,
+    "binaries": [
+      {
+        "path": "package-1/lure/Lure.exe",
+        "bytes": 136956,
+        "sha256": "fdbc000347ca7ccf45f8db664d20fb821894a6902ee54cae17eed84fa9c9c87b",
+        "format": "DOS MZ",
+        "headerBytes": 512,
+        "entryFileOffset": 512,
+        "entryDisassembly": [
+          {
+            "address": "0x0",
+            "mnemonic": "mov",
+            "operands": "ax, 0xaa5"
+          },
+          {
+            "address": "0x3",
+            "mnemonic": "mov",
+            "operands": "ds, ax"
+          },
+          {
+            "address": "0x5",
+            "mnemonic": "call",
+            "operands": "0x4b6"
+          },
+          {
+            "address": "0x8",
+            "mnemonic": "mov",
+            "operands": "ax, 0x23fc"
+          },
+          {
+            "address": "0xb",
+            "mnemonic": "call",
+            "operands": "0x3e34"
+          },
+          {
+            "address": "0xe",
+            "mnemonic": "and",
+            "operands": "byte ptr [0x11d0], 0xfe"
+          },
+          {
+            "address": "0x13",
+            "mnemonic": "call",
+            "operands": "0x1f5f"
+          },
+          {
+            "address": "0x16",
+            "mnemonic": "jmp",
+            "operands": "0x71"
+          },
+          {
+            "address": "0x18",
+            "mnemonic": "mov",
+            "operands": "byte ptr [0x38b0], 1"
+          },
+          {
+            "address": "0x1d",
+            "mnemonic": "call",
+            "operands": "0x1f5f"
+          },
+          {
+            "address": "0x20",
+            "mnemonic": "call",
+            "operands": "word ptr [0x766]"
+          },
+          {
+            "address": "0x24",
+            "mnemonic": "call",
+            "operands": "0x483f"
+          },
+          {
+            "address": "0x27",
+            "mnemonic": "call",
+            "operands": "0x10e8"
+          },
+          {
+            "address": "0x2a",
+            "mnemonic": "cmp",
+            "operands": "word ptr [0xbaad], 1"
+          },
+          {
+            "address": "0x2f",
+            "mnemonic": "jb",
+            "operands": "0x3b"
+          },
+          {
+            "address": "0x31",
+            "mnemonic": "jne",
+            "operands": "0x38"
+          },
+          {
+            "address": "0x33",
+            "mnemonic": "call",
+            "operands": "0xffffa5ac"
+          },
+          {
+            "address": "0x36",
+            "mnemonic": "jmp",
+            "operands": "0x3b"
+          },
+          {
+            "address": "0x38",
+            "mnemonic": "call",
+            "operands": "0xffffa6bb"
+          },
+          {
+            "address": "0x3b",
+            "mnemonic": "mov",
+            "operands": "word ptr [0xbaad], 0"
+          },
+          {
+            "address": "0x41",
+            "mnemonic": "mov",
+            "operands": "byte ptr [0x9837], 0"
+          },
+          {
+            "address": "0x46",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x9838], 0"
+          },
+          {
+            "address": "0x4c",
+            "mnemonic": "mov",
+            "operands": "ax, word ptr [0x9832]"
+          },
+          {
+            "address": "0x4f",
+            "mnemonic": "call",
+            "operands": "0xcea"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      }
+    ],
+    "modelFileCandidates": [],
+    "note": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers."
+  },
+  "extractionErrors": [],
+  "source": {
+    "id": "lure",
+    "repository": "scummvm/scummvm",
+    "requestedRef": "master",
+    "treeSha": "5e44c1d40fb49bd5db39e1a439c2e5d9081b9049",
+    "truncated": false,
+    "basis": "Modern ScummVM reimplementation; not original Lure executable source"
+  },
+  "inspectedSourceFiles": [
+    {
+      "game": "lure",
+      "path": "engines/lure/hotspots.cpp",
+      "bytes": 136839,
+      "blobSha": "989d9a5af0d8608d19ffe0c5ff7c684314b9a8df",
+      "url": "https://github.com/scummvm/scummvm/blob/5e44c1d40fb49bd5db39e1a439c2e5d9081b9049/engines/lure/hotspots.cpp"
+    },
+    {
+      "game": "lure",
+      "path": "engines/lure/room.cpp",
+      "bytes": 23732,
+      "blobSha": "d51af5d059990f11f8cdd23dff86ec4ba9a34926",
+      "url": "https://github.com/scummvm/scummvm/blob/5e44c1d40fb49bd5db39e1a439c2e5d9081b9049/engines/lure/room.cpp"
+    },
+    {
+      "game": "lure",
+      "path": "engines/lure/res.cpp",
+      "bytes": 24510,
+      "blobSha": "03d12318fd683f45c51e3c5640951823f3aa6c79",
+      "url": "https://github.com/scummvm/scummvm/blob/5e44c1d40fb49bd5db39e1a439c2e5d9081b9049/engines/lure/res.cpp"
+    },
+    {
+      "game": "lure",
+      "path": "engines/lure/surface.cpp",
+      "bytes": 45845,
+      "blobSha": "8b664cbd5c98986cc41173207aef307936bc0016",
+      "url": "https://github.com/scummvm/scummvm/blob/5e44c1d40fb49bd5db39e1a439c2e5d9081b9049/engines/lure/surface.cpp"
+    },
+    {
+      "game": "lure",
+      "path": "engines/lure/scripts.cpp",
+      "bytes": 43126,
+      "blobSha": "c50e556966ebe8be94d49a78d6f9494da3c2febe",
+      "url": "https://github.com/scummvm/scummvm/blob/5e44c1d40fb49bd5db39e1a439c2e5d9081b9049/engines/lure/scripts.cpp"
+    }
+  ]
+}

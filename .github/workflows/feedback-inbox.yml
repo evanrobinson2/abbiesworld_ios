@@ -1,6 +1,6 @@
 # Copies feedback sent from the app's speech-bubble button into branch feedback-inbox and comments on the
 # open "Feedback inbox" PR, which wakes the Claude thread watching it. No secrets needed: it reads the public
-# /api/feedback list on abbies-ranch-atelier.vercel.app. See prototypes/ranch-atelier/dist/FEEDBACK.md (live branch).
+# /api/feedback list on abbies-ranch-atelier.vercel.app. See prototypes/ranch-atelier/dist/FEEDBACK.md.
 name: feedback-inbox
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with: { ref: claude/live-snapshot-2026-10-22, path: live }
+        with: { ref: main, path: live }
       - uses: actions/checkout@v4
         with: { ref: main, path: inbox, fetch-depth: 0 }
       - name: Open the inbox branch (created from main on the first run)

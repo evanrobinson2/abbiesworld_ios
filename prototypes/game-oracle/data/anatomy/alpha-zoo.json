@@ -1,0 +1,5277 @@
+{
+  "schemaVersion": 1,
+  "id": "alpha-zoo",
+  "packages": [
+    {
+      "name": "app.asar",
+      "bytes": 127540542,
+      "sha256": "e6ab377d198b25a1382d214e7a8090d7819b8fa515e1ca385cefd077d64e76cc"
+    }
+  ],
+  "files": [
+    {
+      "path": "Bangers-Regular.ttf",
+      "bytes": 95664,
+      "sha256": "6c5874194064636ba5247288704aa31f3b48345df405598a0f4cee4b066a7009"
+    },
+    {
+      "path": "BebasNeue-Regular.ttf",
+      "bytes": 60576,
+      "sha256": "f2d8f000fd44a71714be0321ae12d3d6bc8bb0ea290b0c1312516f4448cec117"
+    },
+    {
+      "path": "BebasNeue-Regular.woff2",
+      "bytes": 46391,
+      "sha256": "01687318422204e2232446180b0ee4748cb107518dbf30e1b87f6afa0f6d07bb"
+    },
+    {
+      "path": "entitlements.mac.plist",
+      "bytes": 334,
+      "sha256": "328a49a503c384762279929c60e951d861a87acaeaff65e84ad03b0e1950d0d6"
+    },
+    {
+      "path": "index.html",
+      "bytes": 3043,
+      "sha256": "4ff5f2414c16bdfa5c37535bdd26aeef21d99b4e25f62a455537ca9acde3512a"
+    },
+    {
+      "path": "package.json",
+      "bytes": 267,
+      "sha256": "1095aec296b67673e44ffcb0f4eaacdbba3ba94bcd41e8e53ee4b834fcee5baa"
+    },
+    {
+      "path": "Source/animal_pop.js",
+      "bytes": 6842,
+      "sha256": "601bab29655bd9e9b5b3129f28aa5c173ffeb612f120742cd1b1348af92bad18"
+    },
+    {
+      "path": "Source/animals.js",
+      "bytes": 42263,
+      "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1"
+    },
+    {
+      "path": "Source/balloon.js",
+      "bytes": 3067,
+      "sha256": "8138df0bf44ba53ccc5f0a7b8770638d1c5433056e0e9f5916736948851ce4e6"
+    },
+    {
+      "path": "Source/cafe_exterior.js",
+      "bytes": 1281,
+      "sha256": "6d51f60de86692db48b57422bc793b68dc51e2e62be4580ebf6a5bdd5a94cf94"
+    },
+    {
+      "path": "Source/character.js",
+      "bytes": 21250,
+      "sha256": "2529f1c608893273aa48c224d09887b52e10f5f21a9f931b82daa63c051186e3"
+    },
+    {
+      "path": "Source/ferris_wheel.js",
+      "bytes": 13417,
+      "sha256": "b5e060ebb01081f3d7e092c6e0160faf079a0afae7f0ac1dd1a39abd03e5bc99"
+    },
+    {
+      "path": "Source/game.js",
+      "bytes": 15334,
+      "sha256": "6cf7d9cd30f28aa43b9330e560cb9a79856018b94f71b1529e6de76e7a9f98c9"
+    },
+    {
+      "path": "Source/gift_shop_exterior.js",
+      "bytes": 1440,
+      "sha256": "e868a1c08bb19816c9b320bda594e2c643c79b7d50cab4242ee6a88fd8e523a0"
+    },
+    {
+      "path": "Source/land.js",
+      "bytes": 125705,
+      "sha256": "b36ecb5b7798b5652748f938bcd42336ed0d2b901cef6406eb94fb5cfd90a883"
+    },
+    {
+      "path": "Source/main.js",
+      "bytes": 2881,
+      "sha256": "77e1c60d854f0fc05444ee1a381be1d828d5e0a48b4ce051581680f275607696"
+    },
+    {
+      "path": "Source/marimba.js",
+      "bytes": 1332,
+      "sha256": "5005b8dc2591934ccc8bc28855e86a360bcedfca8a26c81ee9ba621a43fe9216"
+    },
+    {
+      "path": "Source/notarize.js",
+      "bytes": 1509,
+      "sha256": "6ad639d3ffac36db659efaa75874cc5108eb043fb031439eaf9b7f5dfd4b9c4a"
+    },
+    {
+      "path": "Source/preload.js",
+      "bytes": 537,
+      "sha256": "aa3fca1df82362138eb9e338dfc933dbeef0c4ed9124b1ed17fca0691cc060a7"
+    },
+    {
+      "path": "Source/screen_cafe.js",
+      "bytes": 11942,
+      "sha256": "e99f44a2e0be03610c64b6e178c7d6e070c559c0c1cf1a07cdbcb7e278dae30b"
+    },
+    {
+      "path": "Source/screen_gift_shop.js",
+      "bytes": 30768,
+      "sha256": "fbf1cf93bde880d945fd83f8e86381bd81cdca45e9db99dc0e04a965241c069f"
+    },
+    {
+      "path": "Source/screen_zoo.js",
+      "bytes": 85467,
+      "sha256": "f5c1244171fa156a4883c98e48ec6d7e7c4426491d5be0377115a762c8a5bb5e"
+    },
+    {
+      "path": "Source/sound.js",
+      "bytes": 8983,
+      "sha256": "4e5394b0cc696db3850b15323b205bc0362d62dd58f4aaf675ee074c0b38c5d1"
+    },
+    {
+      "path": "Source/train.js",
+      "bytes": 19013,
+      "sha256": "994d689502d89f1c02cef4037548a1cb9ce68e7e9cbce2aeb5bae59de011a46d"
+    },
+    {
+      "path": "Source/train_station.js",
+      "bytes": 1420,
+      "sha256": "9c572a80a32e29bfc23b3b4db9856398a5a934e678156619176aa4da7e76d037"
+    },
+    {
+      "path": "Source/user_interface.js",
+      "bytes": 22147,
+      "sha256": "3aafcf647891f4c1d804941acd8654a624ad8facbd6c7f5b10291bf840812bee"
+    },
+    {
+      "path": "Source/utilities.js",
+      "bytes": 10642,
+      "sha256": "6dd05bc225461c782c52cde9c76319feeb6940f1468c06b395a2e4fb6bd9d2e1"
+    },
+    {
+      "path": "Source/Libraries/howler.min.js",
+      "bytes": 36137,
+      "sha256": "0febfd99e2733b690ecac2dc36c82885f581a6b5c73b65895898ff8548415f5b"
+    },
+    {
+      "path": "Source/Libraries/pixi-filters.js",
+      "bytes": 85737,
+      "sha256": "f884d74e96796146277e6f38af5ed22d60026c88ea55185bf87f1f7664288bf9"
+    },
+    {
+      "path": "Source/Libraries/pixi.min.js",
+      "bytes": 402883,
+      "sha256": "7a9f126f15b33a4bb45e39f7b71aba85015c8c26d21854069f35f295db96dd35"
+    },
+    {
+      "path": "Source/Libraries/tween.umd.min.js",
+      "bytes": 10633,
+      "sha256": "73fac114a301f582fa12c65fbc494505ad091b8fd1ef49b94fa0dd3158ac83f4"
+    },
+    {
+      "path": "Source/Libraries/webfont.js",
+      "bytes": 13188,
+      "sha256": "81016ac6be850b72df5d4faa0c3cec8e2c1b0ba0045712144a6766adfad40bee"
+    },
+    {
+      "path": "Sound/Chris Haugen - Campfire Song.mp3",
+      "bytes": 3945462,
+      "sha256": "aacc6dec80f9aa3a129dbe6a43bf485daaf88e3613998d0e3fcdc65cd314b947"
+    },
+    {
+      "path": "Sound/breeze.mp3",
+      "bytes": 183576,
+      "sha256": "703280047c0de7e5d5d4ec9132c0ba2d10e9a67cd3969e66e484b13e83624583"
+    },
+    {
+      "path": "Sound/build.wav",
+      "bytes": 768044,
+      "sha256": "6f39f0c286a3f4b6a8778a66f568e2f6c80ae6e6fa5435355f68b196f167fd69"
+    },
+    {
+      "path": "Sound/chomp_1.mp3",
+      "bytes": 12943,
+      "sha256": "26fe299a5eb52a84892193dc8eadd06602a5bc74ebc1e8fda72a120f5eb3a89b"
+    },
+    {
+      "path": "Sound/chomp_2.mp3",
+      "bytes": 16597,
+      "sha256": "4484049c3e7a282386ce3f9a438b570bfcdeb8842067c02b6a34b443dd8cef50"
+    },
+    {
+      "path": "Sound/clunk.wav",
+      "bytes": 136040,
+      "sha256": "b03ba6e8779c06e26fc79eef9c13b008be12cfb21af7c1c156ed30a2153d9354"
+    },
+    {
+      "path": "Sound/coin.wav",
+      "bytes": 77612,
+      "sha256": "d1603c838c7c311940d105ad66a19157fb7c6bc3587e02451df9d73072b853b4"
+    },
+    {
+      "path": "Sound/jump.wav",
+      "bytes": 32440,
+      "sha256": "8324146d9750a29b81bd2fdb87691172567432e5aa74d29646c926ea0f44a2c2"
+    },
+    {
+      "path": "Sound/poop_1.mp3",
+      "bytes": 12729,
+      "sha256": "6494ead8759a92049f6ea12d5db29bde25ebd57f6cae50bc574538ff264da55d"
+    },
+    {
+      "path": "Sound/poop_2.mp3",
+      "bytes": 12387,
+      "sha256": "3110da629de6c66da37b7df060ef5a5217ffa7d5f69be854d76c97687edfc61a"
+    },
+    {
+      "path": "Sound/poop_3.mp3",
+      "bytes": 12153,
+      "sha256": "ac7cc5f454d2fcfe691847a8763872534cf4844da7828311e590aeb38a69af7a"
+    },
+    {
+      "path": "Sound/pop.wav",
+      "bytes": 42888,
+      "sha256": "de0a690f4d3fc9b296e6dde2b2330fb2a5a463369fa7766b60a84185d0f90938"
+    },
+    {
+      "path": "Sound/pop_2.wav",
+      "bytes": 11732,
+      "sha256": "622e845a739961ae6c21125c7c288cba15bbc2e42a27b11cf99599118fc5ff7d"
+    },
+    {
+      "path": "Sound/puff.wav",
+      "bytes": 17196,
+      "sha256": "32d6dde0b9449665f02425e48554199ee31c2c9298a6d55471913ccf41e4d4a9"
+    },
+    {
+      "path": "Sound/slurp.wav",
+      "bytes": 467740,
+      "sha256": "dd33c453856f3729c47ebc172574d8c73add29a7a36d2a03b7998ac186beea40"
+    },
+    {
+      "path": "Sound/success.wav",
+      "bytes": 128566,
+      "sha256": "b55157e1e46a9c2b3f26dcd8461dcb48574f1488a29712ad10e5dff777bf4c74"
+    },
+    {
+      "path": "Sound/swipe.wav",
+      "bytes": 162236,
+      "sha256": "d1c198fa63e875b740df303ce3286f0c0d5f8245f0618c905be36b52dba1392e"
+    },
+    {
+      "path": "Sound/throw.wav",
+      "bytes": 15376,
+      "sha256": "b841352bf73491bfbce51a133813a785071271424f44ee7aba66e32feb9796a7"
+    },
+    {
+      "path": "Sound/train_rolling.mp3",
+      "bytes": 2058178,
+      "sha256": "a5f5e0e442718d1fbb86a41b1e0f1b7e20933d1e6e6c5a29758a353a0a5d61c3"
+    },
+    {
+      "path": "Sound/train_whistle.mp3",
+      "bytes": 25317,
+      "sha256": "891495168593788850116744c92e25bbe92d778ce933edcdcbc776e93b357eea"
+    },
+    {
+      "path": "Sound/tree_shake.wav",
+      "bytes": 86060,
+      "sha256": "bb5745c2e3c061f3c79f01bbe850ea4c7df04dc6c3818b6efec0b46c9e21e271"
+    },
+    {
+      "path": "Sound/Spoken/a.mp3",
+      "bytes": 26121,
+      "sha256": "57ec66da386898b83e605c3d0aa00fa3feef273ad9784eee48e89d0cbf0969b5"
+    },
+    {
+      "path": "Sound/Spoken/alligator.mp3",
+      "bytes": 50154,
+      "sha256": "6a5cef66f17a2a9ee27dc1e1a0119ee45fedb0a457010bb59cfbbe4b268764a6"
+    },
+    {
+      "path": "Sound/Spoken/alpaca.mp3",
+      "bytes": 47019,
+      "sha256": "61ec7bc5a20ed71b09ea49416797476118d316d9384648fe379adc9890c2fa78"
+    },
+    {
+      "path": "Sound/Spoken/anteater.mp3",
+      "bytes": 43884,
+      "sha256": "f6efd128bdd6fdb6ae96fca7c2d37f9f166e3d96fb71ce52d91213184c83551b"
+    },
+    {
+      "path": "Sound/Spoken/b.mp3",
+      "bytes": 22986,
+      "sha256": "12ab176adaa2206bf67153c8bf3d438bd8252664ef621fad2bc630c019c4fbcd"
+    },
+    {
+      "path": "Sound/Spoken/baboon.mp3",
+      "bytes": 41795,
+      "sha256": "d06bca0b29c7b2683d68b21190bdfba0ec89f54004482dc23e822c5a3bb1326f"
+    },
+    {
+      "path": "Sound/Spoken/beaver.mp3",
+      "bytes": 34480,
+      "sha256": "52a3602ca96031de37341a0695ee3b29bdbec8288c9754b8abca519c05c1639f"
+    },
+    {
+      "path": "Sound/Spoken/bighorn_sheep.mp3",
+      "bytes": 52244,
+      "sha256": "69b53128b1958d37dd75827ff0aba7f424b7ddc01ef857ba6de146ef58a398af"
+    },
+    {
+      "path": "Sound/Spoken/black_bear.mp3",
+      "bytes": 39705,
+      "sha256": "093d3867350a85223ee2391253f73da1ab793b0097a3db9d3483fe7d01bbf4b5"
+    },
+    {
+      "path": "Sound/Spoken/brown_bear.mp3",
+      "bytes": 39705,
+      "sha256": "fd2e42e367a2ed8e1711838e22b07fbe1061cf1794921258bc3be420f417f667"
+    },
+    {
+      "path": "Sound/Spoken/c.mp3",
+      "bytes": 31346,
+      "sha256": "a2a30d931070ae9a008094b7daffa53fe8928beb3a512706431fbf4f120dc227"
+    },
+    {
+      "path": "Sound/Spoken/cafe.mp3",
+      "bytes": 40750,
+      "sha256": "051cf590d2d71349ba53ca91226356f42aaf9bcb6f08f5df38be122ebbf8b1dd"
+    },
+    {
+      "path": "Sound/Spoken/camel.mp3",
+      "bytes": 33435,
+      "sha256": "272e526cb99272fa66974bba30ca991b7439a00d319661161fc69cc9eef14e11"
+    },
+    {
+      "path": "Sound/Spoken/capybara.mp3",
+      "bytes": 54333,
+      "sha256": "4ee910d37802110461203c8df3fe7ac57f53a662991bac48f602e6e700bb71aa"
+    },
+    {
+      "path": "Sound/Spoken/cat.mp3",
+      "bytes": 32391,
+      "sha256": "e4a3d2e7f82a3f09067f12a5ba840c81465f59a019e1e5f00fdccb4e6f3b01da"
+    },
+    {
+      "path": "Sound/Spoken/cheetah.mp3",
+      "bytes": 31346,
+      "sha256": "ddff66d5d973570ff678368521ba55a5bdade9f24afad9220c4e8619b252a342"
+    },
+    {
+      "path": "Sound/Spoken/chicken.mp3",
+      "bytes": 32391,
+      "sha256": "c9974efb6a482396fa5eb9dc0a6614981f1d250c85e578db683173f951d277c5"
+    },
+    {
+      "path": "Sound/Spoken/chimpanzee.mp3",
+      "bytes": 56423,
+      "sha256": "2cef27b856e2c94cb4241c47a17ee3773b06759d9f5ab614d14aaf9a4a99bb6a"
+    },
+    {
+      "path": "Sound/Spoken/cow.mp3",
+      "bytes": 30301,
+      "sha256": "f54f7d0519041f23db06526d60ccc26970004a6b7e732c9d5d2c3e40e41b5864"
+    },
+    {
+      "path": "Sound/Spoken/d.mp3",
+      "bytes": 26121,
+      "sha256": "15afb74ca14689b8af30e0fe3fa97a4a5f9a3fa459ebf91d1934251ba7318676"
+    },
+    {
+      "path": "Sound/Spoken/deer.mp3",
+      "bytes": 31346,
+      "sha256": "cc980d10d3d32364373c589734d234f598e86757bc9aed2d285149e0d37e0c7a"
+    },
+    {
+      "path": "Sound/Spoken/dog.mp3",
+      "bytes": 30301,
+      "sha256": "e3bdc6f07db21fa2c28fc164eacd2330611c89f2f8fa674e62a578dc0c1f3527"
+    },
+    {
+      "path": "Sound/Spoken/duck.mp3",
+      "bytes": 29256,
+      "sha256": "48b2df3220523421ea96385583b6f9d09fde1195a3073bf03076734b9f726858"
+    },
+    {
+      "path": "Sound/Spoken/e.mp3",
+      "bytes": 28211,
+      "sha256": "8e4d06651d367b8caceafcc24a8703143ec4c57a0c6397e66b5bbfe2fde7153f"
+    },
+    {
+      "path": "Sound/Spoken/elephant.mp3",
+      "bytes": 42840,
+      "sha256": "7bc9627a8898327c3b0f9a6932140284bd4c1326925aa2c7569aac65b06539ae"
+    },
+    {
+      "path": "Sound/Spoken/elk.mp3",
+      "bytes": 28211,
+      "sha256": "170eb3575199f2020117e6d384dc2efe7c934f831e4dd0b14bbf2643eb67237f"
+    },
+    {
+      "path": "Sound/Spoken/f.mp3",
+      "bytes": 27166,
+      "sha256": "0826928014c09a452021692bbd0439f4e406a554cc83b3d8b45a099bc4075f4a"
+    },
+    {
+      "path": "Sound/Spoken/ferris_wheel.mp3",
+      "bytes": 43884,
+      "sha256": "cd05f9f2cc50d96699a6829af7595d132f896f51ada117e1b8fa539ebc1701bf"
+    },
+    {
+      "path": "Sound/Spoken/flamingo.mp3",
+      "bytes": 48064,
+      "sha256": "3bd8052aa3155eb2f7574662b32dd768876ad3e497a478757408cbdb6d02184d"
+    },
+    {
+      "path": "Sound/Spoken/fox.mp3",
+      "bytes": 35525,
+      "sha256": "a2c1e218520a1207accffee465b27f744d21639675b5f7e889473f28bb5ecaf6"
+    },
+    {
+      "path": "Sound/Spoken/frog.mp3",
+      "bytes": 36570,
+      "sha256": "76f2eb76f336740136aa7a9e7a042a5b9c799b9509474811f9db07a43d3dd173"
+    },
+    {
+      "path": "Sound/Spoken/g.mp3",
+      "bytes": 26121,
+      "sha256": "bd88e42642a9964a2ded97f61eeb284177461427d5f49eedf59924e93438fde6"
+    },
+    {
+      "path": "Sound/Spoken/gazelle.mp3",
+      "bytes": 37615,
+      "sha256": "2d7950c58918f96186c49e36a479d1d0dc3caa5a147c29a51d8d1fbd0b40ce64"
+    },
+    {
+      "path": "Sound/Spoken/gift_shop.mp3",
+      "bytes": 48064,
+      "sha256": "f1e60b0a6fb8f7923f8aa7a628ffbc5fbcd52fa493adc23dfc7e1d9cbb976279"
+    },
+    {
+      "path": "Sound/Spoken/giraffe.mp3",
+      "bytes": 38660,
+      "sha256": "81147a83e9a24794344fe1216a8f96cb050ad9e5e0a83d5abb2c7658c3e64c14"
+    },
+    {
+      "path": "Sound/Spoken/goat.mp3",
+      "bytes": 29256,
+      "sha256": "5abd846732d10adbba8546b553c7a21b86f89c873379228b67edbb93da6e61a1"
+    },
+    {
+      "path": "Sound/Spoken/goose.mp3",
+      "bytes": 35525,
+      "sha256": "f3b0b80e904fba8ae618d094d516391dbc0afa52bae4172635e89e8a7995c773"
+    },
+    {
+      "path": "Sound/Spoken/gorilla.mp3",
+      "bytes": 39705,
+      "sha256": "79c97904b124bfaaae96d8c2912c9b83b884b8143086317354414eb53cb19bc4"
+    },
+    {
+      "path": "Sound/Spoken/h.mp3",
+      "bytes": 35525,
+      "sha256": "95ad7a7437b0b1fe91eb781793a789aee69dd0d5cf05bab69a7526849ee7c49f"
+    },
+    {
+      "path": "Sound/Spoken/hippo.mp3",
+      "bytes": 30301,
+      "sha256": "abf63389975153b4197fc7f3b97ab9737ed4db1d3b953ee28d497d8d0fb36b40"
+    },
+    {
+      "path": "Sound/Spoken/horse.mp3",
+      "bytes": 33435,
+      "sha256": "8e0c2171261dd6babc71277d1f68c79ff6835e463221cef071636b930979f67d"
+    },
+    {
+      "path": "Sound/Spoken/i.mp3",
+      "bytes": 28211,
+      "sha256": "a80049270170c42f4c4995febb3e65ed1a9df2f1b87e6cbda71d59fe45e0b275"
+    },
+    {
+      "path": "Sound/Spoken/j.mp3",
+      "bytes": 32391,
+      "sha256": "62856b7cb83ea6387b7d810c22f1dfc8ce37e19e4a72e24850a3cd5401ba7cc4"
+    },
+    {
+      "path": "Sound/Spoken/k.mp3",
+      "bytes": 31346,
+      "sha256": "923f4b9f0396b33fba3bfe4bfdec76bd4cc11e2151f109fbe6bdfcc2d27965a8"
+    },
+    {
+      "path": "Sound/Spoken/kangaroo.mp3",
+      "bytes": 50154,
+      "sha256": "f341218f70e7ede81c44eeb6fdc7c424a34f3260d7f0bd21be2b40012f214951"
+    },
+    {
+      "path": "Sound/Spoken/koala.mp3",
+      "bytes": 43884,
+      "sha256": "b3102e0670fe26df8164ff91a4113ae892454d4da9dda13b14f2d8c5559c27c6"
+    },
+    {
+      "path": "Sound/Spoken/l.mp3",
+      "bytes": 30301,
+      "sha256": "048d6a0bb56a974316a70d7f52baee4ab14fda47330782e4a490143267681997"
+    },
+    {
+      "path": "Sound/Spoken/lemur.mp3",
+      "bytes": 36570,
+      "sha256": "6d28eb662a4cb40c257cacab4d83a795313c85588e66b1e321962421b1e63ef1"
+    },
+    {
+      "path": "Sound/Spoken/lion.mp3",
+      "bytes": 35525,
+      "sha256": "0ca3091955c25b02b7aadd4cb2ffa88ca93d94dec8a2644c34a910af8c7d61c2"
+    },
+    {
+      "path": "Sound/Spoken/llama.mp3",
+      "bytes": 31346,
+      "sha256": "b33af62c2cb67412b3f0aaddb589a73da5f7f0c3e841880878ea2610476b6e41"
+    },
+    {
+      "path": "Sound/Spoken/lynx.mp3",
+      "bytes": 34480,
+      "sha256": "c2b5b389f4298354ba71ebf9b80154d2f987a9174a54968501a2f15cdcc8351c"
+    },
+    {
+      "path": "Sound/Spoken/m.mp3",
+      "bytes": 29256,
+      "sha256": "e1072eba266732449c70356a2a1b4f20b0bb4fa565a327f3b586a3fdede03eb2"
+    },
+    {
+      "path": "Sound/Spoken/marimba.mp3",
+      "bytes": 37615,
+      "sha256": "92740e817391404264454bb9dfa0c4e1b369b7172ceb1e3b2b50edf990265eee"
+    },
+    {
+      "path": "Sound/Spoken/meerkat.mp3",
+      "bytes": 47019,
+      "sha256": "5aee37e08887ae7eae69388ea572189ab00780380043fae416d07a724c4c3d4f"
+    },
+    {
+      "path": "Sound/Spoken/moose.mp3",
+      "bytes": 34480,
+      "sha256": "8cda640f5d3a96f463c6869899a47065c8483f3562ff58cfdb7f00aff42288fd"
+    },
+    {
+      "path": "Sound/Spoken/mouse.mp3",
+      "bytes": 39705,
+      "sha256": "540900ea2ce83213eb3d4b6346049a84d70783ac4352644e0c759a58e91a4443"
+    },
+    {
+      "path": "Sound/Spoken/n.mp3",
+      "bytes": 30301,
+      "sha256": "6f47c145c997e9987660173b2a897ae8b7638b9bafff4bde0ffb7c689fa758c7"
+    },
+    {
+      "path": "Sound/Spoken/o.mp3",
+      "bytes": 31346,
+      "sha256": "191c138c9a521329133d75064316cfbdfd0877810af0afce80ca5d35a3266b9b"
+    },
+    {
+      "path": "Sound/Spoken/orangutan.mp3",
+      "bytes": 52244,
+      "sha256": "55b940c926df22989f5e3f778bc256c78a2277d4123e3647bacb5d490e22fac3"
+    },
+    {
+      "path": "Sound/Spoken/ostrich.mp3",
+      "bytes": 48064,
+      "sha256": "8fb0f1621b5318f89573aa410f8a155c26cdfaa9d53b4f4b9b91e00989941045"
+    },
+    {
+      "path": "Sound/Spoken/otter.mp3",
+      "bytes": 32391,
+      "sha256": "aa68387a1d8485c8b1b4bd5a75bec8e248421d46dbd1e6aa929b5e92dedf1263"
+    },
+    {
+      "path": "Sound/Spoken/owl.mp3",
+      "bytes": 34480,
+      "sha256": "350137c4cb93cebf1bda434812f6a61794289cb5cbc1ca6af1397a370974337a"
+    },
+    {
+      "path": "Sound/Spoken/p.mp3",
+      "bytes": 30301,
+      "sha256": "ac5522b653c50cc33272401da179ee9d722fd6f6714b7ad1e246b1f3ce578be2"
+    },
+    {
+      "path": "Sound/Spoken/panda_bear.mp3",
+      "bytes": 42840,
+      "sha256": "13fc857fa4e566da1da3c202d935ca875bdc204de6621d3a384ce2034f44e476"
+    },
+    {
+      "path": "Sound/Spoken/panther.mp3",
+      "bytes": 36570,
+      "sha256": "f140f59d149ef99be65f28bf3e7bc4e8119f86716c1123addcf94656b174e745"
+    },
+    {
+      "path": "Sound/Spoken/parrot.mp3",
+      "bytes": 35525,
+      "sha256": "426e037e4b7226be42bdcab9d37fa7846fb99c291fcd56cb868d8e744f90b75b"
+    },
+    {
+      "path": "Sound/Spoken/peacock.mp3",
+      "bytes": 43884,
+      "sha256": "f8d801092fc2e23d26fb5a8046a2afbef8dcfcc01f547e0f5ce048d3d19dc095"
+    },
+    {
+      "path": "Sound/Spoken/penguin.mp3",
+      "bytes": 38660,
+      "sha256": "4e1844412b443c7b9eef34f6fd460fe2a4f4b8ee36b35dd9f6ca7cf5411f2d9d"
+    },
+    {
+      "path": "Sound/Spoken/pig.mp3",
+      "bytes": 26121,
+      "sha256": "11a3055fe03440a6193c868da8388f2ca6f675a38beec3af7aeca17cae5d0dda"
+    },
+    {
+      "path": "Sound/Spoken/polar_bear.mp3",
+      "bytes": 41795,
+      "sha256": "5b76e06fdcfcb5c18b8cdf765259a35d71e22db7e342310daf66ada4dee070c8"
+    },
+    {
+      "path": "Sound/Spoken/q.mp3",
+      "bytes": 31346,
+      "sha256": "0851667f5125e4c5e56f507c48f813b7b844b10cc459317706addf7d830a69ce"
+    },
+    {
+      "path": "Sound/Spoken/r.mp3",
+      "bytes": 29256,
+      "sha256": "429b420030c388b04203a4463de7be3c413033339fff6c69ed55d134e8ef349c"
+    },
+    {
+      "path": "Sound/Spoken/rabbit.mp3",
+      "bytes": 38660,
+      "sha256": "a1324b9f1ca67da90c5d3fa0780e4ab71c7f7d2e1b31ac7aaa792a00ced27a48"
+    },
+    {
+      "path": "Sound/Spoken/raccoon.mp3",
+      "bytes": 39705,
+      "sha256": "8e54daffd97395187464b0cc745890bc510cc0ebabbe0b2bd032b13afa6e4cce"
+    },
+    {
+      "path": "Sound/Spoken/red_panda.mp3",
+      "bytes": 49109,
+      "sha256": "be55918aef0b486f22fba592ee58239188397e8adea59b23df94b47a56c21da5"
+    },
+    {
+      "path": "Sound/Spoken/rhino.mp3",
+      "bytes": 37615,
+      "sha256": "4c23d5d291900d242f1c717e154552a201a840ed9b6e7449dd19c019d7d62fe9"
+    },
+    {
+      "path": "Sound/Spoken/s.mp3",
+      "bytes": 33435,
+      "sha256": "67eafe44a30196ffe6f06199fa4c8e976089c3de80751f5f0d83c3b5e0ec7a03"
+    },
+    {
+      "path": "Sound/Spoken/seal.mp3",
+      "bytes": 37615,
+      "sha256": "c86fda84259e65ab8624fc39ef44ad3c151a2f922cd97e646ca6e16dfc6b08a7"
+    },
+    {
+      "path": "Sound/Spoken/sheep.mp3",
+      "bytes": 30301,
+      "sha256": "1a766c003443b9edd6c7c1a8b30369186fc7b5d37ef4a5bc6b358eac690e2794"
+    },
+    {
+      "path": "Sound/Spoken/sloth.mp3",
+      "bytes": 35525,
+      "sha256": "4b044d20f5c7a9a5cdbd283310e219f5df415836df4fca2f3426d5c47f036f7f"
+    },
+    {
+      "path": "Sound/Spoken/snake.mp3",
+      "bytes": 34480,
+      "sha256": "31dbf77f52221900c945df9f862aa74a0e0920da4ed49ebf53c6199b79060229"
+    },
+    {
+      "path": "Sound/Spoken/swan.mp3",
+      "bytes": 38660,
+      "sha256": "4f681b249942fa64951d25f749ddcf66278088b30daa9e864309a4ad7ad2f6c5"
+    },
+    {
+      "path": "Sound/Spoken/t.mp3",
+      "bytes": 29256,
+      "sha256": "d7edfeb0436b198d54bdb375ff9bf9d5d3544c20ef85476a3c925517c81c3642"
+    },
+    {
+      "path": "Sound/Spoken/tiger.mp3",
+      "bytes": 33435,
+      "sha256": "c1072eca9e78658b5d57e72aa72a81205fefd5f1581af0ef8770054d9548291d"
+    },
+    {
+      "path": "Sound/Spoken/train.mp3",
+      "bytes": 29256,
+      "sha256": "1a7a94a0ed6d5b12188ebce05f8d144b8d2357773e75463451e24d2fd8686997"
+    },
+    {
+      "path": "Sound/Spoken/turtle.mp3",
+      "bytes": 31346,
+      "sha256": "6efb4b559dfbc79de604b316a903627633e3b2c71b50811e58e91fe56dc9b157"
+    },
+    {
+      "path": "Sound/Spoken/u.mp3",
+      "bytes": 39705,
+      "sha256": "7e2974dae63ded9d872c32248f9501d9e5f7c615c0c96894c57ed2896d8e8375"
+    },
+    {
+      "path": "Sound/Spoken/v.mp3",
+      "bytes": 36570,
+      "sha256": "5b55fac78e9935e52414d591d1d979475cdad485351438b73b170d44cd40a0e7"
+    },
+    {
+      "path": "Sound/Spoken/w.mp3",
+      "bytes": 34480,
+      "sha256": "14bdc0654a740d05f66203d5b5197f9634cecec14878d2fc4c8c727fedef37a1"
+    },
+    {
+      "path": "Sound/Spoken/warthog.mp3",
+      "bytes": 40750,
+      "sha256": "1164e3cc728fe93e6adf6c775e60bfc4075847d1a33b17d41c402d0fa1e84b4d"
+    },
+    {
+      "path": "Sound/Spoken/wolf.mp3",
+      "bytes": 32391,
+      "sha256": "0ed7915a157c71d912157c06160f0f955ea30ca3016747f7741bb15f26951d16"
+    },
+    {
+      "path": "Sound/Spoken/x.mp3",
+      "bytes": 33435,
+      "sha256": "1e1995500d314b6b30389044194f1039ffb98bbe3a21562b1fd045ae4c0c234f"
+    },
+    {
+      "path": "Sound/Spoken/y.mp3",
+      "bytes": 35525,
+      "sha256": "9aa51c6ffa16d9a5ea82a12b0c4d2627b1367e6e2985e184eb1c486060925be6"
+    },
+    {
+      "path": "Sound/Spoken/yak.mp3",
+      "bytes": 37615,
+      "sha256": "1839b8b8693e49e1e38ff908802eca896d0804463e95e2f60cb056d28af0443d"
+    },
+    {
+      "path": "Sound/Spoken/z.mp3",
+      "bytes": 35525,
+      "sha256": "364617b0fe55ca75f3c7266ade373b039cedc1d9caf0ba4a87c50fd809469668"
+    },
+    {
+      "path": "Sound/Spoken/zebra.mp3",
+      "bytes": 36570,
+      "sha256": "2f300a919f9b21e8796af32b17717e6f09a1aa29b3c962a2dbdfebad4a70dfef"
+    },
+    {
+      "path": "Sound/Marimba/a4.wav",
+      "bytes": 462888,
+      "sha256": "b3c1626ae45d283e1696b7a9e1e021bdbb36db8674b739378d6c77116160cbd5"
+    },
+    {
+      "path": "Sound/Marimba/a5.wav",
+      "bytes": 480488,
+      "sha256": "a0fcc80766b092ca7df23e638ad54681b33592f1f8a86a66d39e2d3afceaa258"
+    },
+    {
+      "path": "Sound/Marimba/b4.wav",
+      "bytes": 430952,
+      "sha256": "b755e79a2a47fbb0b73a9d8f47607b6db4f9c4f0c25a845d2e0fd44807692f96"
+    },
+    {
+      "path": "Sound/Marimba/b5.wav",
+      "bytes": 458976,
+      "sha256": "2f261dfe802729f0aafe3f337a2a056fe6056567dd08cdb80643fc0f7029e652"
+    },
+    {
+      "path": "Sound/Marimba/c4.wav",
+      "bytes": 464840,
+      "sha256": "9eaac9a63d3813802c2b209ef24c94c06f66201f8893b0dd89298758e3035e1d"
+    },
+    {
+      "path": "Sound/Marimba/c5.wav",
+      "bytes": 448552,
+      "sha256": "95015146abc080760fd85df50689b35d7d0093f4c98e550b5238aaf2f1029e5a"
+    },
+    {
+      "path": "Sound/Marimba/d4.wav",
+      "bytes": 466152,
+      "sha256": "09fd37143a00a81a2f0b0656f5ceb0f7617a623a1baca151d0957b6f4b474fdd"
+    },
+    {
+      "path": "Sound/Marimba/d5.wav",
+      "bytes": 451816,
+      "sha256": "7a06428667f827267a3dd837a07311868a20d958e68f3c30c0d4e3651fd7f00d"
+    },
+    {
+      "path": "Sound/Marimba/e4.wav",
+      "bytes": 459632,
+      "sha256": "e93fde6121687e9536939f5669384c7b8f45622b816134c217965405e6e45a65"
+    },
+    {
+      "path": "Sound/Marimba/e5.wav",
+      "bytes": 443344,
+      "sha256": "d4e11c724c04a187c96c79cf9ace3604aa714d073502356f1f22c85ee91716ba"
+    },
+    {
+      "path": "Sound/Marimba/f4.wav",
+      "bytes": 449200,
+      "sha256": "73baf965383f1386cca8049311d6b0a42d1cd9449f41d6bf0ae9fd73306e2a0b"
+    },
+    {
+      "path": "Sound/Marimba/f5.wav",
+      "bytes": 451152,
+      "sha256": "cc791cc8b7e720f5f49a22b59beb5fb0b6983467535665aedc2943814e88b149"
+    },
+    {
+      "path": "Sound/Marimba/g4.wav",
+      "bytes": 467448,
+      "sha256": "c1e881d4358e35e6b4d3577bc930d60678044abbae5e49ed2817f885d0b96ee2"
+    },
+    {
+      "path": "Sound/Marimba/g5.wav",
+      "bytes": 440728,
+      "sha256": "cbe41293af774bc99bbf694be718a6f061f4a8fa0cd6fc390584f47d0f9dde41"
+    },
+    {
+      "path": "Sound/Animals/alligator.mp3",
+      "bytes": 102240,
+      "sha256": "f54828b882d9979d59b4bd130b60d92856bfc5f8666dd951057958841d1355eb"
+    },
+    {
+      "path": "Sound/Animals/alpaca.mp3",
+      "bytes": 114230,
+      "sha256": "9edea5d4106ed0aa1cdbe2dea3947adb6bf47681699a929283820a884883e2bc"
+    },
+    {
+      "path": "Sound/Animals/baboon.mp3",
+      "bytes": 27117,
+      "sha256": "476798f1f418f4f98da1affd757f89e1cb76ffe62504e63bf6501bc6323c21f6"
+    },
+    {
+      "path": "Sound/Animals/bear.mp3",
+      "bytes": 28900,
+      "sha256": "532bd64bdb3a97f9aaedb0d9a7373e3c8411af74dee9a2d2ded2ca0cedf9ebcb"
+    },
+    {
+      "path": "Sound/Animals/camel.mp3",
+      "bytes": 74112,
+      "sha256": "a69a05a835176863110c0f36527a87557d1b2eaeaeff6184e9cf3ffb24433639"
+    },
+    {
+      "path": "Sound/Animals/capybara.mp3",
+      "bytes": 68555,
+      "sha256": "e090832a745658b79da38650e6b57185e8505b32dfcf65117e71b27fd9f9963c"
+    },
+    {
+      "path": "Sound/Animals/cat.mp3",
+      "bytes": 16450,
+      "sha256": "96034571e706be2215a7194b4aeb5025043e1120581496aa4d738552f986c4d5"
+    },
+    {
+      "path": "Sound/Animals/cheetah.mp3",
+      "bytes": 31177,
+      "sha256": "4828fd2f5aaf8a29122189b684b30e418b089a9ac60ae6d47acf5ff7fea890a5"
+    },
+    {
+      "path": "Sound/Animals/chicken.mp3",
+      "bytes": 12336,
+      "sha256": "03d7f25ef47f42d5fc9712ed9d7fcfec21bcb109f6abf0f778e4252642afb372"
+    },
+    {
+      "path": "Sound/Animals/chimpanzee.mp3",
+      "bytes": 57156,
+      "sha256": "646d09edbca49a762ce559d8c5176e7b6ce62cd89b92e62d2935d9dca6d7b230"
+    },
+    {
+      "path": "Sound/Animals/cow.mp3",
+      "bytes": 57509,
+      "sha256": "006de51e090160b88d9bb34e38f26f7b0087646dfee1cf7fd39730117718bdb1"
+    },
+    {
+      "path": "Sound/Animals/deer.mp3",
+      "bytes": 29520,
+      "sha256": "029a1f212b9656bb825a1f638e42ae1bd993c327991d5bdc7408f91bb8d33a16"
+    },
+    {
+      "path": "Sound/Animals/dog.mp3",
+      "bytes": 22176,
+      "sha256": "6552bc2a33cc159fdc37c6f178bcce8076a808c4091e080f5b6240575f1ecde1"
+    },
+    {
+      "path": "Sound/Animals/duck.mp3",
+      "bytes": 80416,
+      "sha256": "78029d81a7ca4b7d21ef349f2310fda9d729af741486c4e1406e103eb0a7a462"
+    },
+    {
+      "path": "Sound/Animals/elephant.mp3",
+      "bytes": 39130,
+      "sha256": "9c1ffbacc259ea68db0efe9e53f6a50a2296e08cfd252744651c85a791edaba7"
+    },
+    {
+      "path": "Sound/Animals/flamingo.mp3",
+      "bytes": 141938,
+      "sha256": "11d1bc03743bd2889b09a48d9824384dfcd4bf02d2ef1cb72867bdfc76050ed6"
+    },
+    {
+      "path": "Sound/Animals/fox.mp3",
+      "bytes": 120768,
+      "sha256": "2f7059d75130f8ddde2d13bf0056758c9fe287d55c2776936f8fcbd4a90f41d9"
+    },
+    {
+      "path": "Sound/Animals/frog.mp3",
+      "bytes": 149952,
+      "sha256": "b90d602549f23d3a175ad59d18e7e278af3d22ab06703855944b9c2acb22a085"
+    },
+    {
+      "path": "Sound/Animals/giraffe.mp3",
+      "bytes": 16533,
+      "sha256": "4ce923fc6c9b5bc605ed62883347f4d46a25d844e0e54414364f767a44fdff7a"
+    },
+    {
+      "path": "Sound/Animals/goat.mp3",
+      "bytes": 14967,
+      "sha256": "8e481e6eb6d3f7772906e74b7af6c05dc6198609ced32f583cd08ff5661a1dd0"
+    },
+    {
+      "path": "Sound/Animals/goose.mp3",
+      "bytes": 94748,
+      "sha256": "c418cdf275549880c876ed2d17408cd2c99516cb766dc884a294b4fa4bf9b623"
+    },
+    {
+      "path": "Sound/Animals/gorilla.mp3",
+      "bytes": 41619,
+      "sha256": "d9478e8e7cf38b63900e24641042f7dcc1e7b9f48379e54799e01edd4e03a866"
+    },
+    {
+      "path": "Sound/Animals/hippo.mp3",
+      "bytes": 40278,
+      "sha256": "d741c260f2700396e597cd1e8398b6eb933a29689d6592af3ac971d0175a2a54"
+    },
+    {
+      "path": "Sound/Animals/horse.mp3",
+      "bytes": 32601,
+      "sha256": "d16084a5ba5a3342c55e023fdfbdd5b9e91a3935bf73ee8a80b4678a828e7e2c"
+    },
+    {
+      "path": "Sound/Animals/kangaroo.mp3",
+      "bytes": 56256,
+      "sha256": "e38698932fc248303d46cdf3f19cd5c5d33d70df72423878c82d998eeecfb1c7"
+    },
+    {
+      "path": "Sound/Animals/lemur.mp3",
+      "bytes": 28912,
+      "sha256": "0b7a94fd07f448139198a50ba51481dde6f36fee13cc3f3f8889dceb252eb9a5"
+    },
+    {
+      "path": "Sound/Animals/lion.mp3",
+      "bytes": 31296,
+      "sha256": "cc721b69cd42a9cc23c31fbfcf6172b6e913825eb44692883e81a8c24190f14f"
+    },
+    {
+      "path": "Sound/Animals/meerkat.mp3",
+      "bytes": 74442,
+      "sha256": "77f3761d24e3a8d798ff5661395c32aebdc174f25f554472bb4e58a20b902467"
+    },
+    {
+      "path": "Sound/Animals/moose.mp3",
+      "bytes": 73777,
+      "sha256": "099acf8ba625a5e64b2a1962de366dd72976366081a5ed82dbb3eb2ea3678514"
+    },
+    {
+      "path": "Sound/Animals/mouse.mp3",
+      "bytes": 18415,
+      "sha256": "bfe4ccb45b6ac56cb4d9d09da946f19e839ff5a1983c9cbbdf59ea43fdc02021"
+    },
+    {
+      "path": "Sound/Animals/orangutan.mp3",
+      "bytes": 94161,
+      "sha256": "30e8d520dc6856101588bb7d7543aaafa86dd3c1a1ccd6117d04eeb1e304acc9"
+    },
+    {
+      "path": "Sound/Animals/ostrich.mp3",
+      "bytes": 22776,
+      "sha256": "2fea2f7a3de5a0e6ad521dcf7e8ccaa976f0afe24132790cd9387c11969724d0"
+    },
+    {
+      "path": "Sound/Animals/otter.mp3",
+      "bytes": 30270,
+      "sha256": "6378a8894d24d131c229216528c2bd98e72479abab95412e66db059ade19501e"
+    },
+    {
+      "path": "Sound/Animals/owl.mp3",
+      "bytes": 122592,
+      "sha256": "6929b3d465dfcbaad8c33cdb89531c27bebff5275886a6953f5c989528633f67"
+    },
+    {
+      "path": "Sound/Animals/panther.mp3",
+      "bytes": 60240,
+      "sha256": "9a0ceae19390e0f1dc27bdf6223f27d96f5eb3b830d98e8bc8b1cd4c17de0fe6"
+    },
+    {
+      "path": "Sound/Animals/parrot.mp3",
+      "bytes": 205955,
+      "sha256": "56f97144f79dd447948b0bb5ca19e960833ace81961095986d92d56a5322da38"
+    },
+    {
+      "path": "Sound/Animals/peacock.mp3",
+      "bytes": 17760,
+      "sha256": "5858b82413911ab188528bd74bbefdfa71b09e8a776e30b8a48918155f75dbef"
+    },
+    {
+      "path": "Sound/Animals/penguin.mp3",
+      "bytes": 53708,
+      "sha256": "37f23e9f0966f2977aa5aaeeb67b9a11a49dcb9ed64a034f40797ca119e0033f"
+    },
+    {
+      "path": "Sound/Animals/pig.mp3",
+      "bytes": 7042,
+      "sha256": "c175b4ed68aefa945bcafa10bd7ec97ad59154f73c1df40cfef6ee846ba99f0a"
+    },
+    {
+      "path": "Sound/Animals/rabbit.mp3",
+      "bytes": 18933,
+      "sha256": "41dcd22f563b82948cd586461add2dc24f6fb43a1b7607dec04bf9f6ffdd8616"
+    },
+    {
+      "path": "Sound/Animals/rhino.mp3",
+      "bytes": 47362,
+      "sha256": "00b93f2fb7cbff0f5a927bf1f3d7bb502d43c101dde336587a3fc61fff74fb4b"
+    },
+    {
+      "path": "Sound/Animals/seal.mp3",
+      "bytes": 30654,
+      "sha256": "d2767097e6c93f706cecbd7cf0fedec54e11894d9763068f1288aa69539127b8"
+    },
+    {
+      "path": "Sound/Animals/sheep.mp3",
+      "bytes": 39565,
+      "sha256": "0d7bfc0869d5cc51b27c8589cd86a990dca35702960de9306b7fb5ccfbea8310"
+    },
+    {
+      "path": "Sound/Animals/snake.mp3",
+      "bytes": 39682,
+      "sha256": "46f3c740999d15a2f4e2b801eb61a70680dda95e238da132e8339eb5671b2161"
+    },
+    {
+      "path": "Sound/Animals/swan.mp3",
+      "bytes": 37777,
+      "sha256": "eb134e030e0e97d510cf57e3d2bd9a7f2147975804afedea1888553050dcc3a6"
+    },
+    {
+      "path": "Sound/Animals/tiger.mp3",
+      "bytes": 65602,
+      "sha256": "e22219f2d7b6adf6d7e72046b7c1af147393fd3e90566389a0671a0b4edf962f"
+    },
+    {
+      "path": "Sound/Animals/wolf.mp3",
+      "bytes": 126000,
+      "sha256": "eb05505df8b5bd4985993db4252065693872105e4519639f30de7e4e1a6408de"
+    },
+    {
+      "path": "Sound/Animals/yak.mp3",
+      "bytes": 6991,
+      "sha256": "7df157dedb4a91b03776e5cfd4582c5a013591c7b361e3afd19e1d3fd72ea06a"
+    },
+    {
+      "path": "Sound/Animals/zebra.mp3",
+      "bytes": 20229,
+      "sha256": "1a536f725ebc725f2066fcedb106392bcc8b1dcece8425feadd041027c9995ff"
+    },
+    {
+      "path": "Icons/alphazoo.icns",
+      "bytes": 101318,
+      "sha256": "dab6aaf9a12140fa887d89e5239947de6b0de38bc6290a612b4280b77eba6916"
+    },
+    {
+      "path": "Icons/alphazoo.ico",
+      "bytes": 40315,
+      "sha256": "d6f0484e288efcb659dff7fdff8a28fa23192ab306a2d8007cf0fcb047930299"
+    },
+    {
+      "path": "Art/alpha_zoo_title.png",
+      "bytes": 283397,
+      "sha256": "87e5ac140e7d6df597bca0ea9816eca56fb8a4cb3a2e86497da10e760791bf9a"
+    },
+    {
+      "path": "Art/arrow_down.png",
+      "bytes": 770,
+      "sha256": "f55cbd7ae835e5a06a78ac830b865e808b461f95900df48db322a91fb940aca5"
+    },
+    {
+      "path": "Art/arrow_left.png",
+      "bytes": 746,
+      "sha256": "f4e5bb04e7d46a17315e4ad760cc758ac41868b278447a5dc7abb90306652cd6"
+    },
+    {
+      "path": "Art/arrow_right.png",
+      "bytes": 737,
+      "sha256": "d7acaec4f44735dc465f0ee6523e2792d9785c52dc03b70812b044340361463d"
+    },
+    {
+      "path": "Art/arrow_up.png",
+      "bytes": 737,
+      "sha256": "729e9c6d1ce39e874f1ca223ab8af801c0ceae97155623647b65dcaad4f63d35"
+    },
+    {
+      "path": "Art/balloon.png",
+      "bytes": 12010,
+      "sha256": "3f2398ba0415d9b2735ade3903215af8f5b1766dab939d951b75007449161ac9"
+    },
+    {
+      "path": "Art/balloon_icon.png",
+      "bytes": 16032,
+      "sha256": "e5a168a3793217806be1425941455786acb925ce6a1faac305965d51e19c2754"
+    },
+    {
+      "path": "Art/brown_bear_glyph.png",
+      "bytes": 23870,
+      "sha256": "96fd8593479bd71fe49b83bf147e280a3e5497660170f6a6565c2d5ef86c7528"
+    },
+    {
+      "path": "Art/close_button.png",
+      "bytes": 2353,
+      "sha256": "c95c7ea5775bcd7cfcf75fd757b49188ae5c00fd89d6cd10998b04adec9ebaff"
+    },
+    {
+      "path": "Art/color_icon.png",
+      "bytes": 25520,
+      "sha256": "029729de7580308379c429a4ff27c953720abda56bddecff64730b0b1fb5e592"
+    },
+    {
+      "path": "Art/main_menu_background.png",
+      "bytes": 818601,
+      "sha256": "2fa89cb5c42211717661e248d7aacaf8bb1a0347eaa5891596ea1d9ac9dc7f35"
+    },
+    {
+      "path": "Art/map_border.png",
+      "bytes": 1226512,
+      "sha256": "3fa4e1997d433dd0d080e6e7273c85906487254ef2e53b50b1ad80bcdf2b69b7"
+    },
+    {
+      "path": "Art/map_icon.png",
+      "bytes": 33957,
+      "sha256": "ac2ae47d67b86317fea9c3b3d3abba125976c9810e1514c40ddd4cbf88d399d4"
+    },
+    {
+      "path": "Art/oldpop.json",
+      "bytes": 1539,
+      "sha256": "d959daed2b5ac88a80159418c22373b02cf16bd92ebbfd8bb86074d24f92a4f3"
+    },
+    {
+      "path": "Art/oldpop.png",
+      "bytes": 5387,
+      "sha256": "cec7309cb2343dfe2eecd192e63eba7cc6b9c7cc48840f306af1c64dc5866a60"
+    },
+    {
+      "path": "Art/poop.png",
+      "bytes": 13808,
+      "sha256": "bebcf5e57faee06fb30080181a65fa659d6eabbe9f38339be75cc4a200a7a4f0"
+    },
+    {
+      "path": "Art/pop.json",
+      "bytes": 1749,
+      "sha256": "f8b13c143ad0a819b051fd9c33bd2855a9cc21779aac2ef8549df986e1cecb19"
+    },
+    {
+      "path": "Art/pop.png",
+      "bytes": 20762,
+      "sha256": "dd284080369c41f9a754442d844bf859d3fc1c68a7787b26295b4e05ee29d7a1"
+    },
+    {
+      "path": "Art/puff.json",
+      "bytes": 2402,
+      "sha256": "d8fc3d1b5ba517ae5a04c45cd6442989d86c1d0d0adaaf98f806d05e75851a68"
+    },
+    {
+      "path": "Art/puff.png",
+      "bytes": 25672,
+      "sha256": "fb9ac58c47cb34fab3bb50cc0ef41ee9be877ba15279962835fe88b047bad87a"
+    },
+    {
+      "path": "Art/red_circle.png",
+      "bytes": 5916,
+      "sha256": "7aa37c21aec8884de4f1b23df969e0aeda2c7735f86a867c365e9f1955e0ae41"
+    },
+    {
+      "path": "Art/rope_texture.png",
+      "bytes": 4406,
+      "sha256": "ac1470c4e860fecfc420e91ed29a698460f335fe4953adef552a30549ebf631b"
+    },
+    {
+      "path": "Art/sky.png",
+      "bytes": 604480,
+      "sha256": "653ec930bfeabc2eeae8353a7a4f5df1edc6965f194d4b2f8e237b7261eee2cb"
+    },
+    {
+      "path": "Art/sky_1.png",
+      "bytes": 547695,
+      "sha256": "dc4e878ee84cb99f2e704e326181a6ec53fc883e611126deddf4d1129a5a6233"
+    },
+    {
+      "path": "Art/slider.png",
+      "bytes": 1668,
+      "sha256": "81ec2f65d247132a9059ceaa1b77acb6e3c27e8adc459a551b8f5db388953353"
+    },
+    {
+      "path": "Art/slider_bar.png",
+      "bytes": 1673,
+      "sha256": "f25d9951368d0092578cfd3e6f4b46c3a12ac463373f2960b9fdb91c6dd019ba"
+    },
+    {
+      "path": "Art/smoke.json",
+      "bytes": 3358,
+      "sha256": "717f6332f58b3a68c2fc4f2ed65f56cd90bcd85ea1f2ecb900a24c4ada17181c"
+    },
+    {
+      "path": "Art/smoke.png",
+      "bytes": 5546,
+      "sha256": "0f9007c5fe59d553fb94026b825be8f9aaa0a496bd0e92cfbdfa7d8127852dcc"
+    },
+    {
+      "path": "Art/steam.json",
+      "bytes": 4543,
+      "sha256": "87be4f03a9241aa862ba9b73ed270d198cdc088f1ef56f466580fa792ed99540"
+    },
+    {
+      "path": "Art/steam.png",
+      "bytes": 41060,
+      "sha256": "ec82a6f7611d9c00c8341a540c7ed6bcc2f1fa596298bb5155d8587cd86a2b13"
+    },
+    {
+      "path": "Art/throw_icon.png",
+      "bytes": 16108,
+      "sha256": "d96e8fb17cf964732aba5cfff6eb7d32f91de09e8d38b61db4d7c842350e084b"
+    },
+    {
+      "path": "Art/title_instructions.png",
+      "bytes": 194167,
+      "sha256": "cec8ef75f0911d2187cf80aaa24c676fb200e8c1f7e0b3c8159be6ec782462a9"
+    },
+    {
+      "path": "Art/water_droplet.png",
+      "bytes": 4640,
+      "sha256": "ef9b7d4cf0666dbd97dd7019874ae2f2ffacfe24136d9f75c94538fa7baac522"
+    },
+    {
+      "path": "Art/wood.png",
+      "bytes": 237837,
+      "sha256": "a4ad2d34f6b262ae810a0108698a35062aaab5c515590e8c49eddacb0bcbd3ca"
+    },
+    {
+      "path": "Art/zoo_gradient.png",
+      "bytes": 408454,
+      "sha256": "3af15559997f2c0dcb451afc7ae95987cc878a6f9e29f5ed8a6a3012a667d858"
+    },
+    {
+      "path": "Art/Trains/connector.png",
+      "bytes": 1272,
+      "sha256": "4b5b2ce5ec0f466681d83fa0e3c90ce127d159aa242675651332b49a954ad804"
+    },
+    {
+      "path": "Art/Trains/icon.png",
+      "bytes": 22560,
+      "sha256": "e825f16ef1a5bdb0033d7b764184a6faac5d3fb9f82f5c163ad247700aa34fbe"
+    },
+    {
+      "path": "Art/Trains/train_backing.png",
+      "bytes": 899,
+      "sha256": "85deb5e9daa1bcd398f25ccc88ce148a5979736b691843f1e50fe6015cfe9f4d"
+    },
+    {
+      "path": "Art/Trains/train_car.png",
+      "bytes": 3354,
+      "sha256": "4892c9d9415fb06f9f134e806f656783df4926fdb11f449710ced8e2cb03ad29"
+    },
+    {
+      "path": "Art/Trains/train_car_bar.png",
+      "bytes": 1276,
+      "sha256": "91205d1c7fd6377faeaa8d9f0f167d76fcc41a2ce4eeb14b194dad129cadbee0"
+    },
+    {
+      "path": "Art/Trains/train_car_vertical.png",
+      "bytes": 2114,
+      "sha256": "f9f78bbbf0dde0fab2ab98d89ca40f2edfe8e0dfeefda6915080a37477883b6e"
+    },
+    {
+      "path": "Art/Trains/train_engine.png",
+      "bytes": 4146,
+      "sha256": "81f88f590fab47cb2212aa62d5d998c22c48a984580b36c5a8ede3efa0bc698c"
+    },
+    {
+      "path": "Art/Trains/train_engine_bar.png",
+      "bytes": 1194,
+      "sha256": "a5ed11c0801bfe92e9190dee29724ee51b7ae1c404855e791b1165597318fd8e"
+    },
+    {
+      "path": "Art/Trains/train_engine_down.png",
+      "bytes": 7156,
+      "sha256": "b543ccc5fb34c5a60a91f83b401849b64cc5ef68de888e4ca63d5de3735c819b"
+    },
+    {
+      "path": "Art/Trains/train_engine_up.png",
+      "bytes": 5170,
+      "sha256": "b1e4a842fd0a5383ee050c857283ee33e7e48689226c4f1d4052afd27641b173"
+    },
+    {
+      "path": "Art/Trains/train_shadow.png",
+      "bytes": 3769,
+      "sha256": "dfd4cbc1972f86a56f23c42b7069a8f93cd455d4370a71fab7b835702e2bcd7d"
+    },
+    {
+      "path": "Art/Trains/train_shadow_vertical.png",
+      "bytes": 1516,
+      "sha256": "30485653bf96d3bf9625d4aed63075bed18c9b619c072f7bce08a739a33aaeb8"
+    },
+    {
+      "path": "Art/Trains/train_station.png",
+      "bytes": 23052,
+      "sha256": "3ecbcc39d8d803a5eb8035b857d0fe720af375db739a7783265274fa86366d7c"
+    },
+    {
+      "path": "Art/Trains/train_station_grey.png",
+      "bytes": 20735,
+      "sha256": "72a0f1a47fdab82c55eb8a12d089ec4f8814c70a26c3e242cdf59d66d7c60c00"
+    },
+    {
+      "path": "Art/Trains/train_wheel.png",
+      "bytes": 7272,
+      "sha256": "b78b0bfdfefcf26c1fcdd98ec2055c35b222c2a92b65b119f82a8e2842b37a9c"
+    },
+    {
+      "path": "Art/Trains/train_wheels_vertical.png",
+      "bytes": 1194,
+      "sha256": "089e4490d837e76fc29e5eccddf64f4a812086e061f9899f716c86b658df35bb"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_100_1.png",
+      "bytes": 3165,
+      "sha256": "c136ab03540fd51213bb0b40bbe9e963c9331d0757bf78e82a55e7d3b5ece1e3"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_100_2.png",
+      "bytes": 3123,
+      "sha256": "aee6807c789020fc0ac0d171253fd44b98e7749953369f133398ace3572c15a8"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_100_3.png",
+      "bytes": 3437,
+      "sha256": "fca869d148d30c0d10d450f45289449bc02e392dd08d8c3dd4da6287ec3df256"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_150_1.png",
+      "bytes": 3709,
+      "sha256": "196ac98a2bc6bc1b3033a6336c08f72bbf3ecca390873f634d12e99e5cc2df91"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_150_2.png",
+      "bytes": 4056,
+      "sha256": "5ded8e008fc784d3da72f273c191be9e954c23972ef3fa71697196a67b306b54"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_150_3.png",
+      "bytes": 3628,
+      "sha256": "23691a869606281e972b3ab9ce98077e43fe5a59136bdfed493f58bebbe05251"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_50_1.png",
+      "bytes": 2737,
+      "sha256": "caccb8040e6f93fba1076a579e88be64f18f630862f5ecaf23b2d5d19430f5fd"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_50_2.png",
+      "bytes": 2720,
+      "sha256": "c83e7b11c5c5ea525d8da7a1c291eb11250ff8a1d0eea5517edb3bb69a69687f"
+    },
+    {
+      "path": "Art/Terrain/bank_lines_50_3.png",
+      "bytes": 3004,
+      "sha256": "fdece9a8287f19f0e5d057dcf6d53553728261b8f6afbf9bcbf958f28eee8689"
+    },
+    {
+      "path": "Art/Terrain/edging_100_1.png",
+      "bytes": 5448,
+      "sha256": "0298e51b7e5bb35246469194fc9b74d799a736f412ad0518ffdcfb29e04a6d1a"
+    },
+    {
+      "path": "Art/Terrain/edging_100_2.png",
+      "bytes": 5166,
+      "sha256": "d3869206d6f7178e7be3b46532e52d28bbafc184c2936aecefaa3442d621d0a4"
+    },
+    {
+      "path": "Art/Terrain/edging_100_3.png",
+      "bytes": 5463,
+      "sha256": "e7ade90650d7f7d434899911232ff3747c1190b33ab3972818f890c6e89da145"
+    },
+    {
+      "path": "Art/Terrain/edging_150_1.png",
+      "bytes": 6493,
+      "sha256": "a94e068065da10a736b89af690394d67c765200b79804850954f01d6e46203b9"
+    },
+    {
+      "path": "Art/Terrain/edging_150_2.png",
+      "bytes": 6325,
+      "sha256": "64d32c3e62f90980e0a83d930711ff1ca34310897622aa24b5edb7624eb8e84d"
+    },
+    {
+      "path": "Art/Terrain/edging_150_3.png",
+      "bytes": 6412,
+      "sha256": "ba9aaed1f510954b297202f0e22eb007aae440159219295091d5da8f2c2246e4"
+    },
+    {
+      "path": "Art/Terrain/edging_200_1.png",
+      "bytes": 7537,
+      "sha256": "f6cb4a6d9949414ba6fe2da83cb503c162af328d3d05490b1b3fa73880d81891"
+    },
+    {
+      "path": "Art/Terrain/edging_200_2.png",
+      "bytes": 7518,
+      "sha256": "a6d171f59ddc72f01a2ae8a58ccfbc24ce41db27d17967f7a317f843c3f3fb1a"
+    },
+    {
+      "path": "Art/Terrain/edging_200_3.png",
+      "bytes": 7587,
+      "sha256": "75817b3d3b80bc54cc542fde15632195e89d6f5464639742aaa541459810cb12"
+    },
+    {
+      "path": "Art/Terrain/edging_250_1.png",
+      "bytes": 8553,
+      "sha256": "7019aae4bdac97753128d808f4f57c0a63b9202ba21bc28ce3133d7641c79c76"
+    },
+    {
+      "path": "Art/Terrain/edging_250_2.png",
+      "bytes": 8613,
+      "sha256": "6f3ebbf06f65b5d6df0e7dba395dfc3545b46ca30e021354f104825ef1767de1"
+    },
+    {
+      "path": "Art/Terrain/edging_250_3.png",
+      "bytes": 8529,
+      "sha256": "8a7a25ab049bc571f2ddc646c593fd4946a18e9a2b9070e25fb421be59d170f2"
+    },
+    {
+      "path": "Art/Terrain/edging_300_1.png",
+      "bytes": 9549,
+      "sha256": "1cb722593f0c6cd474f7f7f248fcfd33af0c28564e6b59e6ac2bba5d69ca33cf"
+    },
+    {
+      "path": "Art/Terrain/edging_300_2.png",
+      "bytes": 9723,
+      "sha256": "582be9d337695d154c2a28135ec970dbe8c5468d25e184105e020a59a85877f1"
+    },
+    {
+      "path": "Art/Terrain/edging_300_3.png",
+      "bytes": 9604,
+      "sha256": "3ed3e26036cee93c2cd78ded901ae7e91e8fb78651b51ee7c892641fa3cb5867"
+    },
+    {
+      "path": "Art/Terrain/edging_50_1.png",
+      "bytes": 4193,
+      "sha256": "b19489d1616f8e339a6bb52224021b22fd9328594d5b79810b7cbe14ca565916"
+    },
+    {
+      "path": "Art/Terrain/edging_50_2.png",
+      "bytes": 4063,
+      "sha256": "b5a35aff5c2e2d03634270f0270187b41ac7b9d4b6ec2d9c978be96a4bce39dd"
+    },
+    {
+      "path": "Art/Terrain/edging_50_3.png",
+      "bytes": 4212,
+      "sha256": "c40219a9354abf5429f4d53777b6da48367ace57343c59b776aa25a96ef6bd30"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_100_1.png",
+      "bytes": 5353,
+      "sha256": "0ee4eccb27de32546605a9b45d07dfcdd3ba8c2dd0c63ec1f5e7864edfa970ad"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_150_1.png",
+      "bytes": 6561,
+      "sha256": "703c2b61fe5e114ea5688330234f661bc87d2b0485f77e4afb55997ea1707620"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_200_1.png",
+      "bytes": 7733,
+      "sha256": "61478e3aca392aea0edc3fd819215ba9621551104efada0a1291ccc5644e81c3"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_250_1.png",
+      "bytes": 8879,
+      "sha256": "f7f2b82d95e0c8c8962c3a6f9cce347ce1b2dc251eaed0c160cf4b078c4f3b64"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_300_1.png",
+      "bytes": 9878,
+      "sha256": "65d10b45c1f7373ff2abbce77dcfd46d67975d8e51fbef21ad425f5e73e86db1"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_50_1.png",
+      "bytes": 4223,
+      "sha256": "f3dff74e561522c7b85d7400b2601a312f4486bdc4757ad4107582efaf7672a3"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_shadow_100_1.png",
+      "bytes": 6095,
+      "sha256": "f90e334c311ef7416e80850b8ae1ce4bc6c2b83f8c90b362cf7bebe88ca446d2"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_shadow_150_1.png",
+      "bytes": 7719,
+      "sha256": "b42ea9215a9cb255a468e3e3856f2db8ba4daba63522cb0dd258551cf1e64169"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_shadow_200_1.png",
+      "bytes": 9242,
+      "sha256": "63d6fe02e2e3c4778692eabdb164ce38546ffcc6a9379ced612bf636b9e7faff"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_shadow_250_1.png",
+      "bytes": 10702,
+      "sha256": "9b95d1cd35129232a34e942772acf6854986ed34335cc3f029d61ce28b09ce1a"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_shadow_300_1.png",
+      "bytes": 12056,
+      "sha256": "d6a15154033c167a4e90f2953341489615bf59e140064395aef238e3757ebc00"
+    },
+    {
+      "path": "Art/Terrain/edging_reverse_shadow_50_1.png",
+      "bytes": 4513,
+      "sha256": "13cfa29806ff044fe05c385ea3c0e361dc27dc6dec49c9bc4c4e54634fe73307"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_100_1.png",
+      "bytes": 5922,
+      "sha256": "e5bcfbd0fc12265f7673bd25d6c1e25367811b2ca446d126f100dbe1658c63fb"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_100_2.png",
+      "bytes": 5620,
+      "sha256": "c428b3bb486309da4a341af2ebe69513a0386ce51c22cca6900e47f7a015d1c2"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_100_3.png",
+      "bytes": 5941,
+      "sha256": "f01fc8c53a5bcf101efb5622c7ba385233913960eb9975af319d54e273ec7dc1"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_150_1.png",
+      "bytes": 7246,
+      "sha256": "3499192776811ebaa53b5ea6aab9edffdb0ff4cad21453898e64584d7310b549"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_150_2.png",
+      "bytes": 6952,
+      "sha256": "8c2ca5813f8dd414f81bc5278b9f0c80828e6215d0fb4b2ba9b6322c6afad8c2"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_150_3.png",
+      "bytes": 7147,
+      "sha256": "f8e73cce82422eb503c27061d702f6d665927ab7ce0410f01869142725788a58"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_200_1.png",
+      "bytes": 8558,
+      "sha256": "146e097158aafda2d8cf498475708864a305ad1abef196230971ed5431c509bb"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_200_2.png",
+      "bytes": 8413,
+      "sha256": "76b329aa353720d7d474533d763446aaa1f27bfd2b282c8a0bda98c578b86cea"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_200_3.png",
+      "bytes": 8477,
+      "sha256": "ca0c73296107a6a9e6a5fea94ffdd8f81b4a2bd2978ed7fbf450d1c3ca13a943"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_250_1.png",
+      "bytes": 9825,
+      "sha256": "7ad28bd9d4ee3856f1235374c92e7fbdbaca06513a4aeaf0f4bbeb3dbe078537"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_250_2.png",
+      "bytes": 9690,
+      "sha256": "ed1ae4513219253164b5b3286ad16e3d9b8e1c79a917fe7e018a8a592f5b5c09"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_250_3.png",
+      "bytes": 9710,
+      "sha256": "9eff73ef7a77ab1313a8d036bd23b37c4b7eeab14f7016b9d156affef5d67f6e"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_300_1.png",
+      "bytes": 10844,
+      "sha256": "96f4faf66b7b20709eb8aa65c3872cb360b15b5acb21b73786f4602263438541"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_300_2.png",
+      "bytes": 11019,
+      "sha256": "b69b4beae4fb14426cdc61a49bc2bb2ba4c35a3d744846ec1a73bd28beb13bcd"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_300_3.png",
+      "bytes": 10870,
+      "sha256": "93550ac912589e2b4492c5c9c142111f57ced45cd63fe4d1aeb9575456e25fc0"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_50_1.png",
+      "bytes": 4447,
+      "sha256": "2600667be97986a5d2a64fa76d7ece65296c2e39d0a67b46ea43d2ba76252561"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_50_2.png",
+      "bytes": 4310,
+      "sha256": "b825ef10c38382d16ad20c374bb5f73eb2f7839b611f2b36a5f88d160c5fbb99"
+    },
+    {
+      "path": "Art/Terrain/edging_shadow_50_3.png",
+      "bytes": 4439,
+      "sha256": "381b3ee3958b0e6dd9f142b9666aa94f39c1783a81cbb5d5671c99eb867e05fd"
+    },
+    {
+      "path": "Art/Terrain/fence_post.png",
+      "bytes": 8540,
+      "sha256": "5b5ec8827cbcc295c59da350b7d616720d27366b2f94f2ddb38e3c34cf1f1af1"
+    },
+    {
+      "path": "Art/Terrain/fence_shadow.png",
+      "bytes": 2858,
+      "sha256": "ba754497be8588188901798d901dfec62a031ef97c5a28ba718da2db4241cff6"
+    },
+    {
+      "path": "Art/Terrain/light_grass.png",
+      "bytes": 653,
+      "sha256": "ca9b875edf904cb9e5b7dd2007b0f7c3149b5659b60ceb3bb8e71e13c5d2fea2"
+    },
+    {
+      "path": "Art/Terrain/light_round.png",
+      "bytes": 405,
+      "sha256": "02fadf586359e70f0cfd3d64a8c66c402c5801c4a52789745712e4538e7ff6ff"
+    },
+    {
+      "path": "Art/Terrain/path_c_v1.png",
+      "bytes": 3044,
+      "sha256": "04f813dd0a0ebb1892499fc050622162643a56cfcf7213fb0b2f901e8d3a0b71"
+    },
+    {
+      "path": "Art/Terrain/path_e_v1.png",
+      "bytes": 9827,
+      "sha256": "3d337f5b1e9b2e8bb4c3155d823d0c7843a19c6ce127ce2927c0434c1ac6b2fb"
+    },
+    {
+      "path": "Art/Terrain/path_n_v1.png",
+      "bytes": 6256,
+      "sha256": "d4346649d07b0d40c84ea430c2cb2a998141b11a924b7b2e919e0fa116cfcdfc"
+    },
+    {
+      "path": "Art/Terrain/path_ne_v1.png",
+      "bytes": 8003,
+      "sha256": "eab5de1e8c0337e2f6716d18e8de61a4e565f93850ac8fcc271bd3988a5769e2"
+    },
+    {
+      "path": "Art/Terrain/path_nw_v1.png",
+      "bytes": 9367,
+      "sha256": "7ab857c1cf414d11c2b0499a2be2f2d115fed1a4e32335f8b6707c4023a751f3"
+    },
+    {
+      "path": "Art/Terrain/path_s_v1.png",
+      "bytes": 6938,
+      "sha256": "1c4611246c31371699b904ea880f90533716d8384bbcc4f197e8e387097cb549"
+    },
+    {
+      "path": "Art/Terrain/path_se_v1.png",
+      "bytes": 8266,
+      "sha256": "5f9faf42485fb0e57cc3e3ea9a4eb85970f239dc60c0a96cdb88f85827f00fad"
+    },
+    {
+      "path": "Art/Terrain/path_sw_v1.png",
+      "bytes": 8771,
+      "sha256": "48c6dd032919d34aed7a0cb74ef7b30e9a9592ba572f306eb65379940e2245d6"
+    },
+    {
+      "path": "Art/Terrain/path_w_v1.png",
+      "bytes": 11213,
+      "sha256": "fb87116b52e9d37666535c0f6a66a6c93e96c882dd535a6cf67aa834ec4b2d2d"
+    },
+    {
+      "path": "Art/Stuffed_Animals/stuffed_bear.png",
+      "bytes": 19911,
+      "sha256": "7a62fae8d5fedf388142be87c663865ade56cce3b2871269bc701df611569826"
+    },
+    {
+      "path": "Art/Stuffed_Animals/stuffed_chimp.png",
+      "bytes": 19787,
+      "sha256": "66c065abd688435ed897ccdd2cd4af5efa94c7e8b2a92cab0e3d9945e4b272ca"
+    },
+    {
+      "path": "Art/Stuffed_Animals/stuffed_frog.png",
+      "bytes": 18749,
+      "sha256": "64b1c4064d3b49ebfcf6d4fcd573355066bf7162b6bac0c2fbe7dc0eb310cda6"
+    },
+    {
+      "path": "Art/Stuffed_Animals/stuffed_giraffe.png",
+      "bytes": 23327,
+      "sha256": "c3f0cc8b63fa0e2c8774714ae5d9362954aedb914d476e573854b08dd7e520fe"
+    },
+    {
+      "path": "Art/Stuffed_Animals/stuffed_koala.png",
+      "bytes": 24953,
+      "sha256": "9b5bc83db07b8358fc7ad65ff1074ddb8b2b0bcc1365935ca84ddc8bad18fea2"
+    },
+    {
+      "path": "Art/Stuffed_Animals/stuffed_wolf.png",
+      "bytes": 18495,
+      "sha256": "3bebba33d9bc914526bd8a6214ff224e571b96cb48966a10110ff5092a9ba0de"
+    },
+    {
+      "path": "Art/PathElements/bridge.png",
+      "bytes": 85904,
+      "sha256": "2ef4de2640a7fbdf038535d4ede683f0bc545f16529ac0c244e7813bd5b4eef9"
+    },
+    {
+      "path": "Art/PathElements/path_arc_north_to_east_v4.png",
+      "bytes": 36853,
+      "sha256": "eb42ddf30b8aa94dcb307ef630d3ac37ef47318844475ba9506123ad75ce80ae"
+    },
+    {
+      "path": "Art/PathElements/path_arc_north_to_west_v4.png",
+      "bytes": 35591,
+      "sha256": "089b5609389eb5da703846a46d317a30321e31715e9670c34278e60d4fc07135"
+    },
+    {
+      "path": "Art/PathElements/path_arc_south_to_east_v4.png",
+      "bytes": 29245,
+      "sha256": "795c7e7181977f447f284efd86ad63b780ab8c6e405f7d7d52ece971535774f2"
+    },
+    {
+      "path": "Art/PathElements/path_arc_south_to_west_v4.png",
+      "bytes": 36028,
+      "sha256": "334fce15e567e4ff14bfddb362d611ca1a087bcab032f6193fe49d3317ac038c"
+    },
+    {
+      "path": "Art/PathElements/path_cross_v4.png",
+      "bytes": 41424,
+      "sha256": "fb920d4cc02faafece8b6ea9302277e5275ecd4247bb34297be8dd8b060884f5"
+    },
+    {
+      "path": "Art/PathElements/path_curve_east_v4.png",
+      "bytes": 38564,
+      "sha256": "63ce99de5ed2d4fc5c76ee18b621551f0dfed4bb73f2192cd2ce52eec2760412"
+    },
+    {
+      "path": "Art/PathElements/path_curve_west_v4.png",
+      "bytes": 39440,
+      "sha256": "0bba0c9fba18d24836414ef893678b20481abe428ccd5ecb470a5d0a4a3594bc"
+    },
+    {
+      "path": "Art/PathElements/path_flat_t_down_v4.png",
+      "bytes": 36719,
+      "sha256": "e77ea2e6ba89a4b3f3ac86e1f1d155d028b99d3a37d8c934ffff789ff5f34d2b"
+    },
+    {
+      "path": "Art/PathElements/path_flat_t_up_v4.png",
+      "bytes": 36612,
+      "sha256": "cc832f9aae95d465c5f21f2ae7c6f36df814e7e528bd658609dc537f689a6a80"
+    },
+    {
+      "path": "Art/PathElements/path_span_horizontal_v4.png",
+      "bytes": 34875,
+      "sha256": "fa18696736311c37e209171ce47023d3790d9dedbb05350da8d290f608ae07ef"
+    },
+    {
+      "path": "Art/PathElements/path_span_vertical_v4.png",
+      "bytes": 35074,
+      "sha256": "df1533dc6051d34bcf0be78f2022dde3449792b1629e0fda2ba6f0c2512ca811"
+    },
+    {
+      "path": "Art/PathElements/path_straight_horizontal_shadow.png",
+      "bytes": 4599,
+      "sha256": "177308f477bcda44f45e9b331b8daefe8c237c05f5aad52e770ad7b12d1f561d"
+    },
+    {
+      "path": "Art/PathElements/path_straight_horizontal_v4.png",
+      "bytes": 39655,
+      "sha256": "827f79aabd7eb3e25fe2d0c04f3e9687e9078fa619413db400498016d8a863cd"
+    },
+    {
+      "path": "Art/PathElements/path_straight_vertical_v4.png",
+      "bytes": 43298,
+      "sha256": "71299ee8aeaa88260077d4f180998dc68256465c7c86a46c21e086276375b40c"
+    },
+    {
+      "path": "Art/PathElements/path_terminus_east_v4.png",
+      "bytes": 27424,
+      "sha256": "33e2c46259c5a7f8403776cb2fe15a3c0ad5b9cd560fc554fddb4e93a77ce19b"
+    },
+    {
+      "path": "Art/PathElements/path_terminus_north_v4.png",
+      "bytes": 30650,
+      "sha256": "01bdbb1137c69f6354b20cb35b81aa97aedda1721ac5d31ceecc8d0c6b3a3e00"
+    },
+    {
+      "path": "Art/PathElements/path_terminus_south_v4.png",
+      "bytes": 30209,
+      "sha256": "e3fa7f5afc034d88ef0dff8bec514eaf0cc90bf87f990294bc97377ebf53f558"
+    },
+    {
+      "path": "Art/PathElements/path_terminus_west_v4.png",
+      "bytes": 28197,
+      "sha256": "a06d104b8653ff3a1a345a5a5f00292039e043cfcc5e1f8c93c8254eded8ebfd"
+    },
+    {
+      "path": "Art/PathElements/rail_arc_1.png",
+      "bytes": 50788,
+      "sha256": "7fb0d1f17f9f7ea67edf5cdf9489ba29b74d7f0cb7b73c9687ded8ed66b8dde7"
+    },
+    {
+      "path": "Art/PathElements/rail_arc_2.png",
+      "bytes": 51966,
+      "sha256": "11860b0da9302b1662f7cb1efc84651107a0c2f26e8ff198e3681a66b175919f"
+    },
+    {
+      "path": "Art/PathElements/rail_horizontal_span.png",
+      "bytes": 5267,
+      "sha256": "96cf4414e905104d074940641fa1efa26d412099f6452f79c95ef2de99ceb24c"
+    },
+    {
+      "path": "Art/PathElements/rail_horizontal_straight.png",
+      "bytes": 5731,
+      "sha256": "a50509c0970704b6a7bb5d241e4e25b45d63658f0ca58fbbebf05da2627323c8"
+    },
+    {
+      "path": "Art/PathElements/rail_vertical_span.png",
+      "bytes": 29587,
+      "sha256": "34bb0fe25af9b6ac46c38b6e02c8c12acf2aacb352f472a01c8c04024649cce8"
+    },
+    {
+      "path": "Art/PathElements/rail_vertical_straight.png",
+      "bytes": 7540,
+      "sha256": "8e32b0d91163aa727b77f5ffff54ebae2d48be6967c2ddcb86c324afd5dd8eb6"
+    },
+    {
+      "path": "Art/Marimba/marimba.png",
+      "bytes": 10097,
+      "sha256": "2c597441dfd507f2cea6d806a4da44f219ddb8d6f6c292f56b770e04dfb7fdcc"
+    },
+    {
+      "path": "Art/Marimba/marimba_background.png",
+      "bytes": 154852,
+      "sha256": "33c2375501fee3bf1ff510316cf9919fb37651309811ee27d31b84bb4c9481ce"
+    },
+    {
+      "path": "Art/Marimba/marimba_grey.png",
+      "bytes": 14564,
+      "sha256": "ed132f84af4d27b05ec85ba22324909d8a919dd3966d841c17237b19d079febf"
+    },
+    {
+      "path": "Art/Marimba/marimba_icon.png",
+      "bytes": 4755,
+      "sha256": "c212351cb009539ee894967bcb045849edabcaaecae65a26e33af12420e62df1"
+    },
+    {
+      "path": "Art/Marimba/marimba_mallet.png",
+      "bytes": 25510,
+      "sha256": "2b51c78982b33ac413794db390c393145b44f5cca7810de4c12b0e9b122a9e4a"
+    },
+    {
+      "path": "Art/Gift_Shop/exterior.png",
+      "bytes": 87365,
+      "sha256": "dd210fd52ce8d990a4ee25dbf08a77d716d07844ad35ddf2bcf7ccc95feb0c94"
+    },
+    {
+      "path": "Art/Gift_Shop/exterior_grey.png",
+      "bytes": 71419,
+      "sha256": "3d7d8088b8a8e22a857a5d9fd14da9c571ab5219f1644eb0b00877eb6e32a66b"
+    },
+    {
+      "path": "Art/Gift_Shop/gift_shop_background.png",
+      "bytes": 201160,
+      "sha256": "569ae7278ec41770a7b12322322654b4407e5980ab0de119f69f3bebd0344ba9"
+    },
+    {
+      "path": "Art/Gift_Shop/gift_shop_table.png",
+      "bytes": 5625,
+      "sha256": "8e0df73630172f8d72abc0b7055d889e734fd34dca62738c3463ba3ab6fa8236"
+    },
+    {
+      "path": "Art/Gift_Shop/icon.png",
+      "bytes": 28701,
+      "sha256": "6d7a007d7de43246c85552368aacea617991c7144d419cb31daae96e36a834d1"
+    },
+    {
+      "path": "Art/Gift_Shop/price_tag.png",
+      "bytes": 3397,
+      "sha256": "1f21bf94edebab993bd2f116bf4e713903c2309f5883ceee206d2e21ec8dcc71"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/ball_cap.png",
+      "bytes": 16444,
+      "sha256": "bfdae2bb8e0e9ffe240fe1a0a7d89625657390568c86e5f6fc3d7e175d45ed62"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/balloon_hanger.png",
+      "bytes": 8283,
+      "sha256": "bf86b8c534a62d3187adbf678cb4c89d62334b6002b795a8a7aa22c39409c519"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/beanie.png",
+      "bytes": 15184,
+      "sha256": "fdf19d214447583f599d544b14fcfdc629ab176e37456c514a37dd48a66cffcc"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/glasses.png",
+      "bytes": 12646,
+      "sha256": "b91510b78f87b3a85e9fc6f10a2418ca78be4ec416d23767449ffd5040d31b2a"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/hanger.png",
+      "bytes": 7794,
+      "sha256": "c10d29daa6fbc50a68366721da35e5cf33fbe3bafc102105f81cdf0146f411a7"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/mini_hanger.png",
+      "bytes": 7868,
+      "sha256": "25ff5c604edfb2105d9f03796558e14c266418b21a537c8147ca3bd7e6f71124"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/no_glasses.png",
+      "bytes": 11872,
+      "sha256": "ce14f3c8065191868548f1954074782cf01a7a978f3ee248fd58cc0c265d6abf"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/no_hat.png",
+      "bytes": 11890,
+      "sha256": "d5b5399b612d70ca21ece899848acf3882454703bdb0c7f1738bb3ea5b90d39f"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/safari_hat.png",
+      "bytes": 18582,
+      "sha256": "b3f559c14c5e3279f0b0fe708e3839c684f2aa0547b239009c01d78de006bde6"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/scooter.png",
+      "bytes": 12520,
+      "sha256": "cb6131ebf5799aa9d741c5a61a6b08425fb5329b561604ca72817c658b20fd52"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/shirt.png",
+      "bytes": 17031,
+      "sha256": "70b59591396693d1045c92e313fbd56981395ab4c67a0f8ea738a8103516a923"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/smurf_hat.png",
+      "bytes": 18582,
+      "sha256": "b3f559c14c5e3279f0b0fe708e3839c684f2aa0547b239009c01d78de006bde6"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/sun_glasses.png",
+      "bytes": 13043,
+      "sha256": "17fa44b640d5dad765de2ec50989f080de2471dfec6107ad8b4d80191c3c1a5a"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/top_hat.png",
+      "bytes": 15277,
+      "sha256": "6bfebcd51f64374bf71126ff5fbaf59540e79d775a5ba7ebe02eda1323675b84"
+    },
+    {
+      "path": "Art/Gift_Shop/Merchandise/witch_hat.png",
+      "bytes": 16528,
+      "sha256": "f6903a072739223289027fd5aa4cb53ed24e84d00176849aa9b2d4c38ef4b57a"
+    },
+    {
+      "path": "Art/Food/bamboo.json",
+      "bytes": 973,
+      "sha256": "aec22995eb93995bdfc7a47cdfe943e8bd015717e593c0ed5dc80d4054a83811"
+    },
+    {
+      "path": "Art/Food/bamboo.png",
+      "bytes": 20584,
+      "sha256": "046dff90de2eb329c87a8f40383077e3e45609ee9a2dda8eb3c86db9b2abce35"
+    },
+    {
+      "path": "Art/Food/fish.json",
+      "bytes": 957,
+      "sha256": "4dc1b0966a1e7144a44e345e9029e620f56b1f873b5fc170dbc70f65336b6a6c"
+    },
+    {
+      "path": "Art/Food/fish.png",
+      "bytes": 16058,
+      "sha256": "9ee5be376b735af0e5cb6f398e80d4ddb0939a18d5613f6e3182b8685eec6b77"
+    },
+    {
+      "path": "Art/Food/food.png",
+      "bytes": 21417,
+      "sha256": "5f447ebc2955daddc242f2b946adef92ae9728ba5f188ecd8a633db6aeeee0da"
+    },
+    {
+      "path": "Art/Food/fruit.json",
+      "bytes": 965,
+      "sha256": "437f743aee08b3794b5982cfd50086201bf3de43fcfd969256c633a74a7da54c"
+    },
+    {
+      "path": "Art/Food/fruit.png",
+      "bytes": 21636,
+      "sha256": "6a508ba3c90b2c604c24249daf3e1e008dc55f30d318ce86a86e7a6760e090d4"
+    },
+    {
+      "path": "Art/Food/greens.json",
+      "bytes": 973,
+      "sha256": "62ddf10e29076ca584b2d7ab24c6f7faf3aa3e918a1441c14086d0293d0b38dd"
+    },
+    {
+      "path": "Art/Food/greens.png",
+      "bytes": 24646,
+      "sha256": "1f5f0cba7d61c4088eafdc82339617e9d0be10a9f97e4b343b0db440aacc8d22"
+    },
+    {
+      "path": "Art/Food/micro.json",
+      "bytes": 965,
+      "sha256": "5b1ef3b5fb681865d2792339acdb7ab48ad08570a5e8727e0b4d07d5a8988ed2"
+    },
+    {
+      "path": "Art/Food/micro.png",
+      "bytes": 8154,
+      "sha256": "20916f823ff1a91481865ad739897cef6eadfde7a4cbcf2a9177f595aae2212d"
+    },
+    {
+      "path": "Art/Food/steak.json",
+      "bytes": 965,
+      "sha256": "232c0716f287584f51a0d69a0bb2b73dd83f7465bb9668bc9cce05a4841555e5"
+    },
+    {
+      "path": "Art/Food/steak.png",
+      "bytes": 17920,
+      "sha256": "099dc5f63c9364f0362db07438dfefbb818e50ddf3c680848a62e883ef8c167f"
+    },
+    {
+      "path": "Art/Ferris_Wheel/base.png",
+      "bytes": 67607,
+      "sha256": "d8b5bb4b79ea77f11865023b677cac9c561b062f388e8e017ced71cbe8e4f9eb"
+    },
+    {
+      "path": "Art/Ferris_Wheel/cart.png",
+      "bytes": 4906,
+      "sha256": "1f95295393db384a91a293f987491f4f0e2ad8ed9e254cf0416b1712b11fffc7"
+    },
+    {
+      "path": "Art/Ferris_Wheel/cart_icon.png",
+      "bytes": 10988,
+      "sha256": "8c65398cd3f65c6fd897b9f03ef9e94bb0d562e5aa66e0e9c2960bff0fc8884f"
+    },
+    {
+      "path": "Art/Ferris_Wheel/icon.png",
+      "bytes": 69489,
+      "sha256": "52b4234018355e6af97363f35837c5df53f7a675441c4c9ded76713c88edbc5d"
+    },
+    {
+      "path": "Art/Ferris_Wheel/wheel.png",
+      "bytes": 154880,
+      "sha256": "1473d51cd81e4fb6b6080939bd8152174b1488973cec8498a9d7cc8ac0dcc516"
+    },
+    {
+      "path": "Art/Ferris_Wheel/Riders/rider_0.png",
+      "bytes": 3381,
+      "sha256": "54b14cee2a2895bd850fa8eaa5cc618b4ce3a64f522f1b5dc500310b1db5ace0"
+    },
+    {
+      "path": "Art/Ferris_Wheel/Riders/rider_1.png",
+      "bytes": 3178,
+      "sha256": "d0127ad7412b5a6e2076f6f65171ce97b6d7ec1cbc6e577e3a418bda006702bb"
+    },
+    {
+      "path": "Art/Ferris_Wheel/Riders/rider_2.png",
+      "bytes": 3681,
+      "sha256": "4205a5a2012acffce4aa63787be5db29d7dfcfc54797a63790cd97e3d5b94253"
+    },
+    {
+      "path": "Art/Ferris_Wheel/Riders/rider_3.png",
+      "bytes": 3563,
+      "sha256": "9fd3042f0cb35f6847e31c75a90a8f5b0ecf12efccbbbc01133aa364bb1b6572"
+    },
+    {
+      "path": "Art/Ferris_Wheel/Riders/rider_4.png",
+      "bytes": 3502,
+      "sha256": "f97e8e0b56858d16bac294fc78d3987849b6b76bdd8252920e21340d1ee123f1"
+    },
+    {
+      "path": "Art/Ferris_Wheel/Riders/rider_5.png",
+      "bytes": 3485,
+      "sha256": "1624dc389a6dad0bd8f25c2b6e3c6f3883a8d6e2676e7fe059974b3804b1839f"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_1.png",
+      "bytes": 14610,
+      "sha256": "7f5ec2dfb7e0df6d37ddefe3fd35f19e47126744cebcc7018b46f97d78a57d5c"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_2.png",
+      "bytes": 9444,
+      "sha256": "4782f2c70e9eee5d076c56e6a3ddbc56aa25b4cf6fb26605c9dc053f03a7ed3e"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_3.png",
+      "bytes": 7239,
+      "sha256": "e08eb0e80929665bfd4f9536c1a9552e74077389687ddc4ca56ad0718dfbb0c7"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_forest_1.png",
+      "bytes": 14749,
+      "sha256": "b4b892aabb0d2f3c6465a415a21e1637118f1cc223e7327164d58090403cf29c"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_forest_2.png",
+      "bytes": 9579,
+      "sha256": "4ed4598cedec9435b6ed4dcb5a999a6653ab97d4bd4b9ff1a4269a346e3e847c"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_forest_3.png",
+      "bytes": 7390,
+      "sha256": "c1a584ffca4e281f1b6373ee9a61beb0deaffd77062e491d0749db5ff7300c63"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_grass_1.png",
+      "bytes": 14813,
+      "sha256": "fced9729c7567b6c17218f02107027171ca9213871a23ca9bcbe4fae555aab68"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_grass_2.png",
+      "bytes": 9610,
+      "sha256": "4b79bd12f38c72d14216b802e4da1cfb08bcf99b36f014255e821f8dc51ec57c"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_grass_3.png",
+      "bytes": 7319,
+      "sha256": "f47532dbd0fe7c9b607d19a1e459523d8a6b0c034180c54a3d8b1b4464420c88"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_water_1.png",
+      "bytes": 14693,
+      "sha256": "ca0ea9c05acc5d488d7ee7b080ed956ffe6ecc4a74fcc5e18f8a1941a38ca373"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_water_2.png",
+      "bytes": 10012,
+      "sha256": "16745c317d226e4f99f0e8a07bb2c4f8554abe198895033dbe1d342f41d9ead6"
+    },
+    {
+      "path": "Art/Decorations/brown_rock_water_3.png",
+      "bytes": 7759,
+      "sha256": "34576fd340355a3566ffc2da749a122ae2c84ef31b92192f13e4e9d16ac409ba"
+    },
+    {
+      "path": "Art/Decorations/bush.png",
+      "bytes": 3416,
+      "sha256": "11549b2319674da958218c75c69dde19db63d6d76e365f5d7b376d110b8a1d35"
+    },
+    {
+      "path": "Art/Decorations/grass.png",
+      "bytes": 2483,
+      "sha256": "6e73532f4091d01f4941490a30e8e18c980a9287a472a9726a46252e282c9aac"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_1.png",
+      "bytes": 16323,
+      "sha256": "a639e541d909dd7d4b05c5ac2f48f7a3bbde4f6a92aa89bb3fef7d744158fdea"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_2.png",
+      "bytes": 11357,
+      "sha256": "e7ee45b266845258669e5e0da6ad65cd81cf3975494f8235bc71baf657692271"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_3.png",
+      "bytes": 10507,
+      "sha256": "5b19ea463ed159a0bfe97dc1141ff1dd525a4485105af153d1449fb76138d4bf"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_forest_1.png",
+      "bytes": 17106,
+      "sha256": "ec675b23389dba039b6067a6254f472620172900185d6b6e12a1b2588300fddd"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_forest_2.png",
+      "bytes": 11719,
+      "sha256": "8dd3819163c8eba593f9df9587646c37f40fcb96e7c92c80a6698594674ca547"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_forest_3.png",
+      "bytes": 10692,
+      "sha256": "649008c2f45172022ba00a33fb05b8dc171f04b1c573bd53dd347ba8dac4fe2e"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_grass_1.png",
+      "bytes": 16812,
+      "sha256": "8ef81a2d913dfc2e8574c572c092e8bd1825a56427a57646a2ba10c4300b99a3"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_grass_2.png",
+      "bytes": 11547,
+      "sha256": "3afe7070176083110e138b39b049218ee3fce08bfd6b792d752ea551787dc623"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_grass_3.png",
+      "bytes": 10809,
+      "sha256": "32380158650b8efbba2d39a54b29247cf65595a7e4e6fe2341ce29d5e3851424"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_water_1.png",
+      "bytes": 17360,
+      "sha256": "ef3b8d7ee5a16dc552aa88be157ec848dcb904753fda71275459cfd0f6c09409"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_water_2.png",
+      "bytes": 12031,
+      "sha256": "31db0a494c35c8db2cf70b0f9a6ba5414393872ac1c50fdda2eedf4c3202eb1a"
+    },
+    {
+      "path": "Art/Decorations/grey_rock_water_3.png",
+      "bytes": 11792,
+      "sha256": "3a29075c0293a453fdd49ebc2efa6ab34215c2044c5a5ad4055a189a2820c092"
+    },
+    {
+      "path": "Art/Decorations/rock.png",
+      "bytes": 15135,
+      "sha256": "fbf2f938db061c35941f4b0587c4342bc4dd704d00d9df3b1debec3f9850cf72"
+    },
+    {
+      "path": "Art/Decorations/rock_old.png",
+      "bytes": 3055,
+      "sha256": "0ee7724f6a981edfe4ac59f4fac1b7b7959400b6a4a95ab4cd2917ceebd262ac"
+    },
+    {
+      "path": "Art/Decorations/tree_shadow.png",
+      "bytes": 3598,
+      "sha256": "eff3892f5ff81e27ad9845fa12dcdb416d1ac18ffaee0d420c90cc66e1e2492b"
+    },
+    {
+      "path": "Art/Decorations/trees.json",
+      "bytes": 977,
+      "sha256": "d9008f25b3a10f304a109df2610b39ddf37b458c671c7812f607138e4d4d79b9"
+    },
+    {
+      "path": "Art/Decorations/trees.png",
+      "bytes": 117408,
+      "sha256": "a48bfca69467005376da1014be5448029f9a590edde0338eb3007a221ce65e34"
+    },
+    {
+      "path": "Art/Characters/black_bear.json",
+      "bytes": 3699,
+      "sha256": "bd4ee8abb8d7aa0d2db3c86a33246880d7dbba168ddd31a2482ff558efe5ec0a"
+    },
+    {
+      "path": "Art/Characters/black_bear.png",
+      "bytes": 25466,
+      "sha256": "3917a5984eeb490fb20118c4caeb8db497e1fd968ce8710648de8811c21e405e"
+    },
+    {
+      "path": "Art/Characters/brown_bear.json",
+      "bytes": 3699,
+      "sha256": "24a650b19c4f61437136958c5c7f54df2632876807489e086aa51f56ae926814"
+    },
+    {
+      "path": "Art/Characters/brown_bear.png",
+      "bytes": 19858,
+      "sha256": "c2ed926d67d5652afee311b29315f1bfff0364c9d64700f901d8b8b859c9234a"
+    },
+    {
+      "path": "Art/Characters/brown_bear_ball_cap.json",
+      "bytes": 3708,
+      "sha256": "3ab98f77daed0f17f7a3c4cdd0e68b2c8ddb33a016d0b3d06641909bb869f39a"
+    },
+    {
+      "path": "Art/Characters/brown_bear_ball_cap.png",
+      "bytes": 11122,
+      "sha256": "18220b4cc2eb60101f5b574f9d6708fd0bd52b979e2e408ff8dbea47db9214c0"
+    },
+    {
+      "path": "Art/Characters/brown_bear_beanie.json",
+      "bytes": 3706,
+      "sha256": "920c8ea27436a84d042095a08bb9d130489debf225528ad4e9ca6fec0fde2ec5"
+    },
+    {
+      "path": "Art/Characters/brown_bear_beanie.png",
+      "bytes": 13490,
+      "sha256": "3432ab438efe08d324f387eddbf2db9c47be1324309cf653d586c56b2174b9a6"
+    },
+    {
+      "path": "Art/Characters/brown_bear_ghost.json",
+      "bytes": 3705,
+      "sha256": "b2c240916d5fca7c31f338d35180c912f80aab46f4b61b5eb43039a22eb9d648"
+    },
+    {
+      "path": "Art/Characters/brown_bear_ghost.png",
+      "bytes": 9364,
+      "sha256": "4e7e2eff41f97bd935bdb910d07ebdad2e4714576620e86780ad1ec347b73e3f"
+    },
+    {
+      "path": "Art/Characters/brown_bear_glasses.json",
+      "bytes": 3707,
+      "sha256": "b484a7146cd516e197a0c1ba7f9466cbc34e7888a7b736434a39d46989fa99a1"
+    },
+    {
+      "path": "Art/Characters/brown_bear_glasses.png",
+      "bytes": 6193,
+      "sha256": "b8b9270b3100836aaa8a91b9752260882c133edb6d50496431aaa110ee472c7d"
+    },
+    {
+      "path": "Art/Characters/brown_bear_safari_hat.json",
+      "bytes": 3710,
+      "sha256": "77eb349f61f90570a01afbbad33cd2f8ff2d2c6ba2f8cae5807c0dbfbc001b64"
+    },
+    {
+      "path": "Art/Characters/brown_bear_safari_hat.png",
+      "bytes": 16421,
+      "sha256": "3a5f2b9e2505f5242b59e6624c99cf076c4d688ede246ab500ea32727d3ceca9"
+    },
+    {
+      "path": "Art/Characters/brown_bear_scooter.json",
+      "bytes": 3707,
+      "sha256": "fc16d6730a898b0b2f7fad200059d9b44eddcc63af51b0810a14331ebc0de9de"
+    },
+    {
+      "path": "Art/Characters/brown_bear_scooter.png",
+      "bytes": 10831,
+      "sha256": "c2d55054704a3843efba74f01c7ef5340fecb22235064bf157741add952e5020"
+    },
+    {
+      "path": "Art/Characters/brown_bear_shirt.json",
+      "bytes": 3705,
+      "sha256": "0d31626255e8ec8eccc685a239c8933719f17d582f0f14131f6bc82211098af3"
+    },
+    {
+      "path": "Art/Characters/brown_bear_shirt.png",
+      "bytes": 8085,
+      "sha256": "d7710010dec9bd03f7aef7f740e705c053a5faa5b1f6c3eda54b5b7b8acde637"
+    },
+    {
+      "path": "Art/Characters/brown_bear_sun_glasses.json",
+      "bytes": 3711,
+      "sha256": "b29111f1f877fa5ca2e4d96a7cde99bdbdf4f62f73c2527677990610ad2c3e36"
+    },
+    {
+      "path": "Art/Characters/brown_bear_sun_glasses.png",
+      "bytes": 5728,
+      "sha256": "e3bf0300cef0962a8703ef3ff5bd9de0e2cb7c284ea2d4423f2e9684d9c455f2"
+    },
+    {
+      "path": "Art/Characters/brown_bear_top_hat.json",
+      "bytes": 3707,
+      "sha256": "c2995ead1c4eb725d84123cff9069d62692a18f935d68af16c18fb33694c647e"
+    },
+    {
+      "path": "Art/Characters/brown_bear_top_hat.png",
+      "bytes": 8992,
+      "sha256": "3346a3f1bc424ffbf032d6f8067aadb4c01f132ff22eea218add1fb05aeebc3d"
+    },
+    {
+      "path": "Art/Characters/brown_bear_witch_hat.json",
+      "bytes": 3709,
+      "sha256": "7bcdc3fe0984d972a22e291713fc8d7ad8603ac742a2432b5ae002b2fbf86b4f"
+    },
+    {
+      "path": "Art/Characters/brown_bear_witch_hat.png",
+      "bytes": 12301,
+      "sha256": "ce9eb6c8f3b0dfa0e7bc13d037e1a41a578a00cef990bc0f813a332987f341e3"
+    },
+    {
+      "path": "Art/Characters/light_cat.json",
+      "bytes": 3698,
+      "sha256": "51a5028ae314113411055e4830f018a2706989f54f4aef6112453aa3bca58292"
+    },
+    {
+      "path": "Art/Characters/light_cat.png",
+      "bytes": 20243,
+      "sha256": "a9ee811205271c28560fa06da223d7ac22f5b83d93e9c8420f81e79a77730fb1"
+    },
+    {
+      "path": "Art/Characters/orange_cat.json",
+      "bytes": 3699,
+      "sha256": "4d1844a21c19827e383930b86e4e89f134b83a4c734d94bb548c3bb24fc7ba51"
+    },
+    {
+      "path": "Art/Characters/orange_cat.png",
+      "bytes": 19870,
+      "sha256": "261b0d4c8d4ef30cf35269b91676a980e64c24eb58c24a5af84d9b4bb4e9d6b2"
+    },
+    {
+      "path": "Art/Characters/polar_bear.json",
+      "bytes": 3699,
+      "sha256": "69b3fa1b60f95b650595f639ebaa580b168bea4fba74fa52b9479a46f5b1dfc7"
+    },
+    {
+      "path": "Art/Characters/polar_bear.png",
+      "bytes": 22855,
+      "sha256": "2094af34c69425f91d8edc2e86ef285d492ee7f06ef2fa0c9f2d26a01b128bd2"
+    },
+    {
+      "path": "Art/Characters/rabbit_blueshirt.json",
+      "bytes": 3705,
+      "sha256": "99f295c8bc6fca468f1a5daee47a6053b06e39a3da75684ed37b20d040a7d421"
+    },
+    {
+      "path": "Art/Characters/rabbit_blueshirt.png",
+      "bytes": 25418,
+      "sha256": "0eccad3944cb89f36bab21ef3e80ba174c7dc6ce034c351a8eb3ec79b9df3d1e"
+    },
+    {
+      "path": "Art/Characters/rabbit_greenshirt.json",
+      "bytes": 3706,
+      "sha256": "e626c04c91ccc06d43cfa0655fb818e010709ee3c08fb2b549d995d68edbfad5"
+    },
+    {
+      "path": "Art/Characters/rabbit_greenshirt.png",
+      "bytes": 24049,
+      "sha256": "8d759919ee41b02865c5632f16affbcb70140a080ce2994fa1a4903023e704db"
+    },
+    {
+      "path": "Art/Characters/rabbit_redshirt.json",
+      "bytes": 3704,
+      "sha256": "232485211ad5be1be24af1cbf86c99f81e46690bb6e99e9cbd2f292edbff9117"
+    },
+    {
+      "path": "Art/Characters/rabbit_redshirt.png",
+      "bytes": 27914,
+      "sha256": "4a0e751da407e99c46de6f5dc86aee66f9621d39d2bb0f37aa11c8dd75e25ceb"
+    },
+    {
+      "path": "Art/Characters/yellow_cat.json",
+      "bytes": 3699,
+      "sha256": "366745e1fab4a18142842280dc3d2ab10ae03f47034e2b164dd968c60e5d71ab"
+    },
+    {
+      "path": "Art/Characters/yellow_cat.png",
+      "bytes": 20359,
+      "sha256": "fbe0ddf1b8499a719588549bc10906e05a6a1d444e23937abe98a65a5aa3aecc"
+    },
+    {
+      "path": "Art/Cafe/cafe_background.png",
+      "bytes": 220346,
+      "sha256": "825bac05b4ed3efef2970b95ea478375f700ab67fad24bc110a622029f28f2d3"
+    },
+    {
+      "path": "Art/Cafe/exterior.png",
+      "bytes": 92338,
+      "sha256": "edc581a378f3b3d422b2c4268f3caf36c8823a1c065d198a45af6cf01b5e43e4"
+    },
+    {
+      "path": "Art/Cafe/exterior_grey.png",
+      "bytes": 74887,
+      "sha256": "de29b3f63a06ca91ead4f3d13e0fe96ff722a84b9ebd51ffaa96b9b3bd7d02db"
+    },
+    {
+      "path": "Art/Cafe/icon.png",
+      "bytes": 31580,
+      "sha256": "d002a49e9e9e0cb055e94c00e17d06e89ec815cd80a74721c4f7de0bb207b8a8"
+    },
+    {
+      "path": "Art/Cafe/menu_background.png",
+      "bytes": 582550,
+      "sha256": "07a027b60ddb52562c4164f37f66138c58676cddf8166f247e682f639e6675ec"
+    },
+    {
+      "path": "Art/Cafe/table.png",
+      "bytes": 11360,
+      "sha256": "9b20d357fe662f121c4483e5487fc295d4e7ffa726d650d287b7fac2546cefc7"
+    },
+    {
+      "path": "Art/Cafe/Food/apple.json",
+      "bytes": 963,
+      "sha256": "9862de2326fef6646c33b25269cb1dc126a41c5c1dd228943b818d959b4fe6d4"
+    },
+    {
+      "path": "Art/Cafe/Food/apple.png",
+      "bytes": 9378,
+      "sha256": "cc917c5ef2e1cb04b619b4a9a7b546de1e986d078a23d9bbf867c01a0beaf6ca"
+    },
+    {
+      "path": "Art/Cafe/Food/banana.json",
+      "bytes": 971,
+      "sha256": "2d6ff640c799b1a0b6695da45ae0de00ad21e4dc3bdbc0136d9b3c87228284d5"
+    },
+    {
+      "path": "Art/Cafe/Food/banana.png",
+      "bytes": 8424,
+      "sha256": "4162e28dc9ddc3dd609ad26787a94939d63d828ec8ad2b762cebb2fae8d41a02"
+    },
+    {
+      "path": "Art/Cafe/Food/burger.json",
+      "bytes": 971,
+      "sha256": "0aba568c9f9adc28ed202f8fbe6cfe629d2cd0a9295c9600583ff0f19fbf1cfa"
+    },
+    {
+      "path": "Art/Cafe/Food/burger.png",
+      "bytes": 12047,
+      "sha256": "ad028f010587492cac26956aabd41511d4bec54b4e33dcfc9cc4e652712c3ab0"
+    },
+    {
+      "path": "Art/Cafe/Food/candy.json",
+      "bytes": 963,
+      "sha256": "7db573f532fa3ced57f94c7397ea805fd27f777520fe17c981993dc931d42d6d"
+    },
+    {
+      "path": "Art/Cafe/Food/candy.png",
+      "bytes": 16471,
+      "sha256": "680e7046a194967dd03ac26eb6942923d7047c9f5c2901eede9b55c1913896f6"
+    },
+    {
+      "path": "Art/Cafe/Food/carrots.json",
+      "bytes": 979,
+      "sha256": "4acbdbca89ce01044038f27106fb86c81a40a32ce05f719b9c36a6abd24d1761"
+    },
+    {
+      "path": "Art/Cafe/Food/carrots.png",
+      "bytes": 14321,
+      "sha256": "42caccc2d588c9303e33b70557fb4ba586c3ac38162a8f7b347d8d6722484c72"
+    },
+    {
+      "path": "Art/Cafe/Food/celery.json",
+      "bytes": 971,
+      "sha256": "2c0bfaa97433eaa9ed02930946c54d3c818ab302f388b37f395b1aeaece987c8"
+    },
+    {
+      "path": "Art/Cafe/Food/celery.png",
+      "bytes": 10332,
+      "sha256": "70f2c47e6cd2db91052a39401d957e9cde4b1d40280da82eaa23776ef2cae056"
+    },
+    {
+      "path": "Art/Cafe/Food/cookie.json",
+      "bytes": 971,
+      "sha256": "5defef344b89747629ac33c77de2b6016dd9be997debf0eaf4d90cc8886726a5"
+    },
+    {
+      "path": "Art/Cafe/Food/cookie.png",
+      "bytes": 8355,
+      "sha256": "6f92515da75f340fafb281e3899b35842e31d8b83fe48f56349831825b451f09"
+    },
+    {
+      "path": "Art/Cafe/Food/cucumbers.json",
+      "bytes": 995,
+      "sha256": "189ccb7875ce351218bb9ee7b5dc4c8e3b288e5f6a687bb655d9423f179431c3"
+    },
+    {
+      "path": "Art/Cafe/Food/cucumbers.png",
+      "bytes": 9160,
+      "sha256": "bb6d7099d01a464d850abddde184e80dfa3fbc4c830c8d3aed51dd1bae0d055e"
+    },
+    {
+      "path": "Art/Cafe/Food/donut.json",
+      "bytes": 963,
+      "sha256": "9c60980ddc17b7078a151ac9c4774827cd91cd9097e70fdcbc15506753afdf61"
+    },
+    {
+      "path": "Art/Cafe/Food/donut.png",
+      "bytes": 13945,
+      "sha256": "a6d128c544a7535880f52e16c51321289b481ebc93d32890583242d8d7343b15"
+    },
+    {
+      "path": "Art/Cafe/Food/hot_dog.json",
+      "bytes": 979,
+      "sha256": "ec23408023d7ab4878c67a9866779f251fd6bf8a043e5d99944be111b7a75470"
+    },
+    {
+      "path": "Art/Cafe/Food/hot_dog.png",
+      "bytes": 8348,
+      "sha256": "51fcbdc9183b873c3124349a67b17da2cbc0e980dea4afd923575d3dbb811974"
+    },
+    {
+      "path": "Art/Cafe/Food/ice_cream.json",
+      "bytes": 995,
+      "sha256": "6e7af868607d70889e146ffb8a36085570ef813b37745e97a034ffc569a021b1"
+    },
+    {
+      "path": "Art/Cafe/Food/ice_cream.png",
+      "bytes": 11183,
+      "sha256": "94bbae00c2e75b9d091e88aa8fa5d41873213e6e623f7f923b548044976834c6"
+    },
+    {
+      "path": "Art/Cafe/Food/juice.json",
+      "bytes": 963,
+      "sha256": "9c9b8979ac2129ebea30229baaeee4a7db1094c7b19ad62f72ab08664dc4485f"
+    },
+    {
+      "path": "Art/Cafe/Food/juice.png",
+      "bytes": 10684,
+      "sha256": "3b7a4b29fe2f5ab793fe1533280d58235dc98af9bfbbe78e1fede0fdf01f7218"
+    },
+    {
+      "path": "Art/Cafe/Food/kiwi.json",
+      "bytes": 955,
+      "sha256": "a398ac19ed370b82eb7ec2d319a68a8dbb421673d841f3d6d7c642f05f5b5289"
+    },
+    {
+      "path": "Art/Cafe/Food/kiwi.png",
+      "bytes": 7876,
+      "sha256": "b8da7acb150299b9dd4393aa1cba5aca77ac87e1c57a78967620606dd197ac52"
+    },
+    {
+      "path": "Art/Cafe/Food/milk.json",
+      "bytes": 955,
+      "sha256": "6cb04c902e319fbe75bcf931cfa7b6699a3e0b958f42d6813e7a62e92a617e15"
+    },
+    {
+      "path": "Art/Cafe/Food/milk.png",
+      "bytes": 10083,
+      "sha256": "edcc6d5bdb9d0e49fd0eac174579d860176607501f94d2678d19f27cf94f4bec"
+    },
+    {
+      "path": "Art/Cafe/Food/orange.json",
+      "bytes": 971,
+      "sha256": "3f6648bfe6b0749fa6ae3f54b723d3ac5ac4e4720b4d4ada1aca780af0350d7f"
+    },
+    {
+      "path": "Art/Cafe/Food/orange.png",
+      "bytes": 12313,
+      "sha256": "da8911325c3499e28cb84423cd4a7ef9cdb83d002155c03d3d141f782076f81d"
+    },
+    {
+      "path": "Art/Cafe/Food/peach.json",
+      "bytes": 963,
+      "sha256": "a00584961f01928adebd3aa0e4468713e38839a32708ba2a06cdad42408386f9"
+    },
+    {
+      "path": "Art/Cafe/Food/peach.png",
+      "bytes": 9944,
+      "sha256": "98691e03e00a6d0fd92c68cd2be0c6df34c1a015e80b4229fcaad5999d0b48ac"
+    },
+    {
+      "path": "Art/Cafe/Food/pear.json",
+      "bytes": 955,
+      "sha256": "b62a31916f5dbc6a84a1ede528389f58f868d8ea66eaff24a31317acd93391ad"
+    },
+    {
+      "path": "Art/Cafe/Food/pear.png",
+      "bytes": 8720,
+      "sha256": "62dda780eb09ddf999403da7659efac029df3efa42b706764ea3e63ec68c3cae"
+    },
+    {
+      "path": "Art/Cafe/Food/pizza.json",
+      "bytes": 963,
+      "sha256": "a87acef1018ca17858dbe6666fa796186b86f6beabce438dc870b1ee1bec270d"
+    },
+    {
+      "path": "Art/Cafe/Food/pizza.png",
+      "bytes": 9437,
+      "sha256": "54e1db7e363bb8b0d33f20b308455bd09116ec3d8cd76f26dd78c1827dd2248a"
+    },
+    {
+      "path": "Art/Cafe/Food/plum.json",
+      "bytes": 955,
+      "sha256": "6fe5a61e5412049670aa63eadba4a03ca35c74f57fe7d03417acf024c9206232"
+    },
+    {
+      "path": "Art/Cafe/Food/plum.png",
+      "bytes": 7993,
+      "sha256": "d08e243d636f61ab9dffc9a354e497ff046501b2ec7b5e4982b781d48491f0e3"
+    },
+    {
+      "path": "Art/Cafe/Food/salad.json",
+      "bytes": 963,
+      "sha256": "de55f5400b0bc8ec67cfbd1073c5fd68c45711469cee40dcf6396e85a59b312f"
+    },
+    {
+      "path": "Art/Cafe/Food/salad.png",
+      "bytes": 15715,
+      "sha256": "15666cdf11c540973464b3721d21aafa09bbb3adba281f0cfbd6b7cf8517276c"
+    },
+    {
+      "path": "Art/Cafe/Food/soda.json",
+      "bytes": 955,
+      "sha256": "4182813e34bb1011e7c4fb026e622340c630f6e031fa50b2989154e217e74976"
+    },
+    {
+      "path": "Art/Cafe/Food/soda.png",
+      "bytes": 10778,
+      "sha256": "aba302c965bb4d765ec0940c1638a49180db2d95b529233e616843b77da1c4aa"
+    },
+    {
+      "path": "Art/Cafe/Food/tomatoes.json",
+      "bytes": 987,
+      "sha256": "c6a011d90bb2e0b9f914e8b7dd5a8ac946f5e58c9c3572a1883114eb709a2cff"
+    },
+    {
+      "path": "Art/Cafe/Food/tomatoes.png",
+      "bytes": 10766,
+      "sha256": "0dd06ccf68396471aaf9ac19b70863b120561687b13b308572dad17d4c48ce23"
+    },
+    {
+      "path": "Art/Cafe/Food/water.json",
+      "bytes": 963,
+      "sha256": "7889c07a585e3ab4ab3903ad039aa6f1405522b4327781643d4db993bdb62ca0"
+    },
+    {
+      "path": "Art/Cafe/Food/water.png",
+      "bytes": 10475,
+      "sha256": "873e9d1ac6fd80d32010bad0e8d91c5a1dc949d634d3c5232a86dafbdc4a631e"
+    },
+    {
+      "path": "Art/Animals/alligator.json",
+      "bytes": 7567,
+      "sha256": "7d6d00831051faf3f27793f8ec5b64408b6d6c49c678d0f3312fea959d443d27"
+    },
+    {
+      "path": "Art/Animals/alligator.png",
+      "bytes": 1127249,
+      "sha256": "28e52b2100349eac4ead493648b42bcaa5f6bb33e30a294dfe257ea62eb9d5a7"
+    },
+    {
+      "path": "Art/Animals/alpaca.json",
+      "bytes": 5299,
+      "sha256": "8ea553bed669f1cde7a3559f0cc59af8f9c2ab52784719c7006a64613ac29bad"
+    },
+    {
+      "path": "Art/Animals/alpaca.png",
+      "bytes": 1121813,
+      "sha256": "c800e4b3a07441262aa3dad56243a8f157b9cdffd5c7fe93bc856e7daf4602fa"
+    },
+    {
+      "path": "Art/Animals/anteater.json",
+      "bytes": 5207,
+      "sha256": "ce2f903d7dc928c7e7f00a8234650bc221b848da25a8d98c9ff09ffe7ab6c101"
+    },
+    {
+      "path": "Art/Animals/anteater.png",
+      "bytes": 666703,
+      "sha256": "1e0eefbfe34032121f8bc6c5c076cebf31703999a0422d8c12f8e41435448c00"
+    },
+    {
+      "path": "Art/Animals/baboon.json",
+      "bytes": 9431,
+      "sha256": "156578c1bc12858641572543ef401bb7ad94b3860ede8101435e4a08b7b0a2bc"
+    },
+    {
+      "path": "Art/Animals/baboon.png",
+      "bytes": 1601901,
+      "sha256": "ed355664c773eb8407c76c7fccfe65a8f3bd0e5ab39c439aa2eb7e4145274ade"
+    },
+    {
+      "path": "Art/Animals/beaver.json",
+      "bytes": 4944,
+      "sha256": "c08c829be826a4883b5801e5eb033762755293fc3abaa2e7d69508392848a571"
+    },
+    {
+      "path": "Art/Animals/beaver.png",
+      "bytes": 641083,
+      "sha256": "04aeb2dccc5d1130bdeb2ad58e1f5612948d7855947a986394850a87c785d4a9"
+    },
+    {
+      "path": "Art/Animals/bighorn_sheep.json",
+      "bytes": 15884,
+      "sha256": "23a2cff5f4ca84ca88a46e34517c348b9aa31180c4598aa8d53c4e481c6318c4"
+    },
+    {
+      "path": "Art/Animals/bighorn_sheep.png",
+      "bytes": 4359925,
+      "sha256": "43ac549b1e9706e20613856f224d20d14e213b56e50fbd994cd22ab47719f0e4"
+    },
+    {
+      "path": "Art/Animals/black_bear.json",
+      "bytes": 5834,
+      "sha256": "1f5925e2ee885348f3bec5482a4c6432d88cac283edaa25c330e327d8f5a6bb6"
+    },
+    {
+      "path": "Art/Animals/black_bear.png",
+      "bytes": 765985,
+      "sha256": "6cb1cb6cb6f9820e16061167d63a71b83521fe04a6c101743742d557144edd5f"
+    },
+    {
+      "path": "Art/Animals/brown_bear.json",
+      "bytes": 5834,
+      "sha256": "133c79953e8beeb0ea31c6ffad2a4b935d8547e5f0bf8d5cd119879d91440c51"
+    },
+    {
+      "path": "Art/Animals/brown_bear.png",
+      "bytes": 832228,
+      "sha256": "ace9f376ea3da1f1802fc4cc4b7094555ec1b1f1c23919078e5b796390371987"
+    },
+    {
+      "path": "Art/Animals/camel.json",
+      "bytes": 9386,
+      "sha256": "76d64e5525a6dc6588e84fd9a658127b8be13af07603771430bb10fce6456787"
+    },
+    {
+      "path": "Art/Animals/camel.png",
+      "bytes": 1988502,
+      "sha256": "81214c2afef1c428d3edbdee1c962792d1f6bd91eda05795882f5359a895b2b2"
+    },
+    {
+      "path": "Art/Animals/capybara.json",
+      "bytes": 5402,
+      "sha256": "8c7efc977f045d6dd854a038b3d6383c871a28175a2bc82121980c794bfd24b3"
+    },
+    {
+      "path": "Art/Animals/capybara.png",
+      "bytes": 666376,
+      "sha256": "2a29a9e84c1898c3bb0281c6c1d7c45d4e237c0f6be270b71ac6994c96901211"
+    },
+    {
+      "path": "Art/Animals/cat.json",
+      "bytes": 4554,
+      "sha256": "94bb62853929b312f04205717c17cf5ec7d4472d226f91376b14e9947522cc2f"
+    },
+    {
+      "path": "Art/Animals/cat.png",
+      "bytes": 372006,
+      "sha256": "9e692c65c00694f69e9a0cdec08e2acfb5e01156c6170a35fc88f3f8a1b84ab0"
+    },
+    {
+      "path": "Art/Animals/cheetah.json",
+      "bytes": 4520,
+      "sha256": "f0e66cfa499abb98f43e10df5f7b3061b4af1738852ea3999928e60b6591264a"
+    },
+    {
+      "path": "Art/Animals/cheetah.png",
+      "bytes": 1031777,
+      "sha256": "c809d94622324e9694ad1c459a4f51ca529d59fdaba58a8167492e499fa47353"
+    },
+    {
+      "path": "Art/Animals/chicken_1.json",
+      "bytes": 3268,
+      "sha256": "821280d64de78935fcbf0c9a643c6b76df035d528d8e5b267f649e9a97e53b93"
+    },
+    {
+      "path": "Art/Animals/chicken_1.png",
+      "bytes": 287356,
+      "sha256": "fd5a3eb07a96da9545a1eea71922db31a79fbfcd021e1ede0a574e5f2054ccdb"
+    },
+    {
+      "path": "Art/Animals/chicken_2.json",
+      "bytes": 3268,
+      "sha256": "c6046989e29451ab917565f553ae39ab3adac1967f8e5efc0f71019cc14f8300"
+    },
+    {
+      "path": "Art/Animals/chicken_2.png",
+      "bytes": 272125,
+      "sha256": "c13f6bde2f3b7ffe45e023dbe850e9963cb1ee31c525f267403ba749d1205ee7"
+    },
+    {
+      "path": "Art/Animals/chimpanzee.json",
+      "bytes": 13468,
+      "sha256": "953771a37c99387a54029bf6edfa0358caeb1e4703ad07661927742214fbeea7"
+    },
+    {
+      "path": "Art/Animals/chimpanzee.png",
+      "bytes": 2054069,
+      "sha256": "510102b6f504c464ded6be4d761e818f31001eeabf003d4851692b8197ece105"
+    },
+    {
+      "path": "Art/Animals/cow.json",
+      "bytes": 5195,
+      "sha256": "8f8c4261e204da2da00b5c1a780d845f422872f24fb1987ad67ba92c2126d8b7"
+    },
+    {
+      "path": "Art/Animals/cow.png",
+      "bytes": 878871,
+      "sha256": "c990eded83976a74af1f4dbe94efd52eb3712b59be75c2c4c529d7a1c7fbb1ed"
+    },
+    {
+      "path": "Art/Animals/deer.json",
+      "bytes": 6630,
+      "sha256": "fe7a25423c286836b21652359f48e7e40945b70e20682079a9381cbfa9d94507"
+    },
+    {
+      "path": "Art/Animals/deer.png",
+      "bytes": 1264965,
+      "sha256": "9dc2e5592e984494856b01487d098553edd7cabbb1ce3df06fbf522a84d71bdc"
+    },
+    {
+      "path": "Art/Animals/dog.json",
+      "bytes": 5407,
+      "sha256": "4d9b628049839c77b4b90ef815dfaf0ee94a375cb638cea731c1c053eb925063"
+    },
+    {
+      "path": "Art/Animals/dog.png",
+      "bytes": 590738,
+      "sha256": "b8046689e8be3f1e3e9d1258563de913218d5fe61c2dcfcf732d79147ea97c7a"
+    },
+    {
+      "path": "Art/Animals/duck.json",
+      "bytes": 4793,
+      "sha256": "fdec232b996c2c861054ce1e7bb3c05d3f9cdfeab557b1aec8c1fec99eba4ef4"
+    },
+    {
+      "path": "Art/Animals/duck.png",
+      "bytes": 520783,
+      "sha256": "e1461b93b49bd7c25c6d8bcf601a8b97e9f887f977597e775de06f026f90547b"
+    },
+    {
+      "path": "Art/Animals/elephant.json",
+      "bytes": 7537,
+      "sha256": "cceff736e0ece1a5e3082105f345fd85d6922224ff659c5069f364ac6b769b08"
+    },
+    {
+      "path": "Art/Animals/elephant.png",
+      "bytes": 1844162,
+      "sha256": "d34fd1394c253deb581a858ce3b8a8348463e651e0711435fc7879b3f1d5b0a2"
+    },
+    {
+      "path": "Art/Animals/elk.json",
+      "bytes": 4975,
+      "sha256": "ce2f9f7dc2d98036e20ec15f37362ad056f94717a7d61f50594faf2ce4ef347a"
+    },
+    {
+      "path": "Art/Animals/elk.png",
+      "bytes": 1436537,
+      "sha256": "6056dca98946e783beff98faca1d55dca960db633f90279fca1035477a9027ca"
+    },
+    {
+      "path": "Art/Animals/flamingo.json",
+      "bytes": 7320,
+      "sha256": "da4a39310b6cd65bc0a40cb453038c732fac8244d9aa7212d4f3dc3cc4693c96"
+    },
+    {
+      "path": "Art/Animals/flamingo.png",
+      "bytes": 929075,
+      "sha256": "19550d40c846d28418dc08ca1c83a24786c2d616c2938705046e4081c77d1a3b"
+    },
+    {
+      "path": "Art/Animals/fox.json",
+      "bytes": 7585,
+      "sha256": "d07401089c199689be76af82c3f6943ec798f62f8577393192d38ac0922ecae3"
+    },
+    {
+      "path": "Art/Animals/fox.png",
+      "bytes": 1444045,
+      "sha256": "f6e690c7242260e0153110dde1f33c201e601522a91cd8f56cf98c507d3949a0"
+    },
+    {
+      "path": "Art/Animals/frog_1.json",
+      "bytes": 5398,
+      "sha256": "3e338a968e41f02459bae6b9333eac3107c1e35fa657e56d38a08f9cebc82d89"
+    },
+    {
+      "path": "Art/Animals/frog_1.png",
+      "bytes": 655672,
+      "sha256": "498e92a78fa5e1ab62a8677ff0b5988505e6512ff42c139b315d7b94b72f806c"
+    },
+    {
+      "path": "Art/Animals/frog_2.json",
+      "bytes": 5398,
+      "sha256": "e48f58716d289ec51865141909e21f5471a60236e5564d8248516af44204bfbf"
+    },
+    {
+      "path": "Art/Animals/frog_2.png",
+      "bytes": 670996,
+      "sha256": "d10517950c6d146ccae795b755cf50abe2df71a9563b83fca79fe8d0ea813f32"
+    },
+    {
+      "path": "Art/Animals/frog_3.json",
+      "bytes": 5398,
+      "sha256": "0b9f79f1ce155712ca6eb4735f71e151a5dba34887ae7943ad9d1b2db4356f89"
+    },
+    {
+      "path": "Art/Animals/frog_3.png",
+      "bytes": 678013,
+      "sha256": "5927dcf525702253c1676fce89042a8e8a6223316a200c47db73255ad99d4fb2"
+    },
+    {
+      "path": "Art/Animals/frog_4.json",
+      "bytes": 5398,
+      "sha256": "592e1bf9af51df20d04803b9fcf3f672c60d857197a8bad3851ebb4051031721"
+    },
+    {
+      "path": "Art/Animals/frog_4.png",
+      "bytes": 677259,
+      "sha256": "840a67228d05351d764716cc2acd91500614f706e2081d5912da084f8e5ad867"
+    },
+    {
+      "path": "Art/Animals/frog_5.json",
+      "bytes": 5398,
+      "sha256": "ae8f9b96f8abf1f0887f74f8533ab21660e661465e6699113224e47962c836ec"
+    },
+    {
+      "path": "Art/Animals/frog_5.png",
+      "bytes": 654944,
+      "sha256": "724097ab235d023d0f83fd977069c7e9fd934633bee95e4123cb09607a08407a"
+    },
+    {
+      "path": "Art/Animals/gazelle.json",
+      "bytes": 8071,
+      "sha256": "afe4385bb76c12cbf55415a3c4df567e24de21ef7c0cc0e51a629f46785596d5"
+    },
+    {
+      "path": "Art/Animals/gazelle.png",
+      "bytes": 2020372,
+      "sha256": "bf7149469f30cf05c45bfc266121f72dbf4335fd81b744cd2b3cf0e305a28f57"
+    },
+    {
+      "path": "Art/Animals/giraffe.json",
+      "bytes": 6779,
+      "sha256": "91ac358f26263381d2f2008956748a01c596c7acbbb822a3120aaf31d1bf2b52"
+    },
+    {
+      "path": "Art/Animals/giraffe.png",
+      "bytes": 1833192,
+      "sha256": "078587239ff5a95511561b6be5ec92b542ab409621fa607af369e59dbca20b25"
+    },
+    {
+      "path": "Art/Animals/goat.json",
+      "bytes": 7849,
+      "sha256": "5fe273ff828232d9e320616bc25d3493976a7703b7eb02c8ca04ff0fe035a1a1"
+    },
+    {
+      "path": "Art/Animals/goat.png",
+      "bytes": 1183564,
+      "sha256": "a78592ab6c6405fd2dbec9d976e89cb2a73f22c50b6dccc87018ae312b7673d7"
+    },
+    {
+      "path": "Art/Animals/goose.json",
+      "bytes": 4022,
+      "sha256": "b81ce38d714d836f4deca56ed8aa00b0c49f387ff8200e05e572e24ca1e17e16"
+    },
+    {
+      "path": "Art/Animals/goose.png",
+      "bytes": 496966,
+      "sha256": "6e2cb0cda5f376bc793ba7a4cc158a444d7f971748773b85d7da6e0ab1280853"
+    },
+    {
+      "path": "Art/Animals/gorilla.json",
+      "bytes": 5770,
+      "sha256": "a9da342f1a7446f0a184e01079e8f43aba427e66e8646b150280cd820c96a5b2"
+    },
+    {
+      "path": "Art/Animals/gorilla.png",
+      "bytes": 992907,
+      "sha256": "832b6de7be1d478efcf84a6b03413d681b98076982469713f8f13c933d9aeca0"
+    },
+    {
+      "path": "Art/Animals/hippo.json",
+      "bytes": 5474,
+      "sha256": "fab37baa992cdab0cd19c70a96b319025a95972c37090e96995378cd1c7208da"
+    },
+    {
+      "path": "Art/Animals/hippo.png",
+      "bytes": 1093575,
+      "sha256": "b192b5ba359a2aa68e5630c17154417c3252342b60320675f79c3bf3930b8bd5"
+    },
+    {
+      "path": "Art/Animals/horse.json",
+      "bytes": 3629,
+      "sha256": "f4254b3aca0d75456d2a8a429f7f989979b57708a0564403a002f74af70fe174"
+    },
+    {
+      "path": "Art/Animals/horse.png",
+      "bytes": 575653,
+      "sha256": "c455c2d4c9352a3555db5ba7ea680c458bf719e37d102db7fece17fea80626ba"
+    },
+    {
+      "path": "Art/Animals/kangaroo.json",
+      "bytes": 8150,
+      "sha256": "e7713031240730bd066a45efcc0b5271ebe371d6d8a09d630cd624cefa735bae"
+    },
+    {
+      "path": "Art/Animals/kangaroo.png",
+      "bytes": 1673386,
+      "sha256": "d26bb15a09b5c226c3228c07dc0e640c9bc87ec75cdc8d1c4c3061502cb5bfb0"
+    },
+    {
+      "path": "Art/Animals/koala.json",
+      "bytes": 4866,
+      "sha256": "13bf2f39e69ecb7125c38d6272fb9962e911a49347600ccf533b5822cb25ef44"
+    },
+    {
+      "path": "Art/Animals/koala.png",
+      "bytes": 691393,
+      "sha256": "ce3b52c9725d352adde29dd088c703e41129cb6e4a61ac5b709058242b619a39"
+    },
+    {
+      "path": "Art/Animals/lemur.json",
+      "bytes": 4465,
+      "sha256": "d2e50a045b0456efe64c66b72a3dbe211202767262cd1bfc681292990fbf0a98"
+    },
+    {
+      "path": "Art/Animals/lemur.png",
+      "bytes": 836676,
+      "sha256": "49305de6a9fea463ff0a168831fdff4cbb304b1d2b8c6e9ad90cc585434fc92e"
+    },
+    {
+      "path": "Art/Animals/lion.json",
+      "bytes": 8057,
+      "sha256": "4802a1cdf0e88df2b0e1c33a1a51ca2e2d913806c606e7cd0d7c49dcf169cecf"
+    },
+    {
+      "path": "Art/Animals/lion.png",
+      "bytes": 1403899,
+      "sha256": "fc13a1c155e6bbddd61facd8796b3d3492ebff7fa7216ee776a5d065a3ee1a0f"
+    },
+    {
+      "path": "Art/Animals/llama.json",
+      "bytes": 7737,
+      "sha256": "1f5dd247526157b808d29dc23e83727a109855ddbf3a3dfe99d53c1c88f4cd07"
+    },
+    {
+      "path": "Art/Animals/llama.png",
+      "bytes": 1903368,
+      "sha256": "d54c3cfe1354e73c42775603924c86376ac9cb4f9e6144a576212000afaabbce"
+    },
+    {
+      "path": "Art/Animals/lynx.json",
+      "bytes": 4605,
+      "sha256": "a2b9c163ee02b07d879eb12a7d93f0b4b2395a900bf0f7b1c532770392ba5f5c"
+    },
+    {
+      "path": "Art/Animals/lynx.png",
+      "bytes": 683885,
+      "sha256": "a81143273db0c4d49658d6fdb33fbe3be8bb1f1317a22407ddf1480e1e765e72"
+    },
+    {
+      "path": "Art/Animals/meerkat.json",
+      "bytes": 8230,
+      "sha256": "7851285ac851b3f46f6af11548939d407430165a0b70a2e9c438be5a40dbaf76"
+    },
+    {
+      "path": "Art/Animals/meerkat.png",
+      "bytes": 809774,
+      "sha256": "82155e624af9a54c9077cf81de9124d3c6606483f942a8e0426de1b9412eabe8"
+    },
+    {
+      "path": "Art/Animals/moose.json",
+      "bytes": 5664,
+      "sha256": "5129bfe057e62b4d203c73a46ae688d40b78eb7eab7c7f4ad999c910ddf8da0b"
+    },
+    {
+      "path": "Art/Animals/moose.png",
+      "bytes": 1847554,
+      "sha256": "58e302344a9e64a584025877d4a72cfee45ec81c226b8fdae725dea72635ad99"
+    },
+    {
+      "path": "Art/Animals/mouse.json",
+      "bytes": 2599,
+      "sha256": "5189157f6236dc4da385ffcfb50e4cff370390fb047e76b1e3e58cefb084c19f"
+    },
+    {
+      "path": "Art/Animals/mouse.png",
+      "bytes": 262897,
+      "sha256": "d7cf6f0a7146b192e6afc9e3403f9f8f4b5c124b4e21586f08dceec881f1734a"
+    },
+    {
+      "path": "Art/Animals/orangutan.json",
+      "bytes": 13592,
+      "sha256": "67a324b202394244fa4b0603aea8a70bc37e1b37847b98d0684eab9e746fa22f"
+    },
+    {
+      "path": "Art/Animals/orangutan.png",
+      "bytes": 2534238,
+      "sha256": "c7ff499920a254e350140513255e5945698db9d0b39550b9096b093e40ea7ce8"
+    },
+    {
+      "path": "Art/Animals/ostrich.json",
+      "bytes": 4936,
+      "sha256": "6fdbca998d7a3fbb0385a55ec2705188e24782a4e0f3578ac19f5d77e67a7f1d"
+    },
+    {
+      "path": "Art/Animals/ostrich.png",
+      "bytes": 948160,
+      "sha256": "8ad1c22fc67883887489efcd6d0d35261d034281d1b84cc5d226304f8600a30a"
+    },
+    {
+      "path": "Art/Animals/otter.json",
+      "bytes": 20527,
+      "sha256": "cc22024a4a338f9186d501175a1dbedff48cab4e654ced1746e2471a845461ef"
+    },
+    {
+      "path": "Art/Animals/otter.png",
+      "bytes": 3759872,
+      "sha256": "45b69d693ae03cf66cb4c5c7f9e56943ecfbb31e81fea566ea4237c0ddded14d"
+    },
+    {
+      "path": "Art/Animals/owl.json",
+      "bytes": 9974,
+      "sha256": "86584140aa6f6ca9b10171fdc82abb93a3c05b6560030d57ea95954e6ad8b71b"
+    },
+    {
+      "path": "Art/Animals/owl.png",
+      "bytes": 2395704,
+      "sha256": "b6f2fd8a86711e469526aa5c86b3632ba27b30634c5d4628762b47ab13826485"
+    },
+    {
+      "path": "Art/Animals/panda_bear.json",
+      "bytes": 8508,
+      "sha256": "1327b9ed1f767787dff27b54dc3a923a60b04cf7621023d09fbc3735349a39cb"
+    },
+    {
+      "path": "Art/Animals/panda_bear.png",
+      "bytes": 1311951,
+      "sha256": "0288ddf38ee3bdb573bb2ce4ff78d89d87d98cd096255b24425a66cedbe467a5"
+    },
+    {
+      "path": "Art/Animals/panther.json",
+      "bytes": 8081,
+      "sha256": "c0783f31af52031ebb09543a081f5dcec21d2b6d9c159e13d1722a6a266989b6"
+    },
+    {
+      "path": "Art/Animals/panther.png",
+      "bytes": 1188211,
+      "sha256": "1be1dc1801d409beaf08f8340c100104e330cb118bfa266681fdaedf7ce3ca14"
+    },
+    {
+      "path": "Art/Animals/parrot_1.json",
+      "bytes": 4886,
+      "sha256": "5352398b86e134a001c782bcd6b3888a50c11a53862039b7350d8968cd5276be"
+    },
+    {
+      "path": "Art/Animals/parrot_1.png",
+      "bytes": 719453,
+      "sha256": "e5e92d1014e476f8a07544116e2eb7747be396660349461800a43b45c7adcd34"
+    },
+    {
+      "path": "Art/Animals/parrot_2.json",
+      "bytes": 4886,
+      "sha256": "c345d4128e20139384fd09c33f44a2efaf074317f9707c6abd5109304f340cf1"
+    },
+    {
+      "path": "Art/Animals/parrot_2.png",
+      "bytes": 725514,
+      "sha256": "6d7e331100fe7ffcbb5d5dfa52f785a2500656ed1ba6d3eb607da65afe78ec09"
+    },
+    {
+      "path": "Art/Animals/parrot_3.json",
+      "bytes": 4886,
+      "sha256": "7f1ca64ab789b1c27ffd71e9fd47220d2fab9cd2896386f326881945803fc85a"
+    },
+    {
+      "path": "Art/Animals/parrot_3.png",
+      "bytes": 740415,
+      "sha256": "5245c3f9fc18ae415d4029e29c21eb3da6de9555983c51518d93956b8d4829bc"
+    },
+    {
+      "path": "Art/Animals/parrot_4.json",
+      "bytes": 4886,
+      "sha256": "dbeae3f6f8548abefbe3e027833a4a7dae16fbd7fe7d36453d676427f0a0cc87"
+    },
+    {
+      "path": "Art/Animals/parrot_4.png",
+      "bytes": 740199,
+      "sha256": "e8cc54ce3ae9dd8fe8d5ac7bd3312d2b3f9ed647720f228ac1b320b8170d575f"
+    },
+    {
+      "path": "Art/Animals/parrot_5.json",
+      "bytes": 4886,
+      "sha256": "fccf73fcda11fc35f3cb3187fec54f54fd55bfdb0992a229785cfcef7055cf9f"
+    },
+    {
+      "path": "Art/Animals/parrot_5.png",
+      "bytes": 743616,
+      "sha256": "81f86d0fc26027114e4a0e15e36e5c584d22a6221498df011ad87139d60eae93"
+    },
+    {
+      "path": "Art/Animals/peacock.json",
+      "bytes": 11429,
+      "sha256": "92184e208ef81466e7bc0f5534e629aa3b6ff88b4410fbb99799417cc32f4ba4"
+    },
+    {
+      "path": "Art/Animals/peacock.png",
+      "bytes": 3961922,
+      "sha256": "a02c5f7d5077c7039dd6ec5ad7f05767e51cf9c8eb456c5c5c9b915226590725"
+    },
+    {
+      "path": "Art/Animals/penguin.json",
+      "bytes": 5783,
+      "sha256": "1d28471b1fd39a6cc26eddb9040c058bc00f6b7a549d8acc9268f914fa4b6a79"
+    },
+    {
+      "path": "Art/Animals/penguin.png",
+      "bytes": 578834,
+      "sha256": "7bfd478e2e1a870cd0369fa24334cb3bb0c95f1e593d026e463240bd803fd46f"
+    },
+    {
+      "path": "Art/Animals/pig.json",
+      "bytes": 9760,
+      "sha256": "5af67d25e1701d3edfd47ec14ccf0d7e7ae360294e57cade1865c77d2b1b3112"
+    },
+    {
+      "path": "Art/Animals/pig.png",
+      "bytes": 1988769,
+      "sha256": "4009c112b5d1db7ff0f52ac1e46956c1e902bc14be43c5aef4c12242bdbb53ad"
+    },
+    {
+      "path": "Art/Animals/polar_bear.json",
+      "bytes": 7445,
+      "sha256": "369adfcac8b65e7364a7e7ebf248e0f97214cf5e8ee6b9b4b11f8de55bf99c67"
+    },
+    {
+      "path": "Art/Animals/polar_bear.png",
+      "bytes": 1128603,
+      "sha256": "838bfe565c28254c47ecd186eec51d02714284f0d716fd9b83d9618536678629"
+    },
+    {
+      "path": "Art/Animals/rabbit.json",
+      "bytes": 3659,
+      "sha256": "3a75b81b658f9b0c0dbc799ec6227a96e7aa7290cbaf87c441a20aabed18e74e"
+    },
+    {
+      "path": "Art/Animals/rabbit.png",
+      "bytes": 539242,
+      "sha256": "668a8a1008284ec1640271d5ecf1fc84cc7935307ff9cfcf66480390b6d626dc"
+    },
+    {
+      "path": "Art/Animals/raccoon.json",
+      "bytes": 12849,
+      "sha256": "2aa592eb2ed1415bc640e3d1eccf1292f39a46ad14064e88f311c654cd636b19"
+    },
+    {
+      "path": "Art/Animals/raccoon.png",
+      "bytes": 2712988,
+      "sha256": "059c3332e3dd10f723595c428d3af9b236a09f04c9d1be1163a26d966dbb8407"
+    },
+    {
+      "path": "Art/Animals/red_panda.json",
+      "bytes": 9323,
+      "sha256": "a32029c1fa9df0e135feb0e4fbe5a37377e42a23fe16ef61127ccef7232f5704"
+    },
+    {
+      "path": "Art/Animals/red_panda.png",
+      "bytes": 1658115,
+      "sha256": "e1a8f7f790d73bc529f0f8589883ab34ebc8363c98fdde5b90efdb1f8d584165"
+    },
+    {
+      "path": "Art/Animals/rhino.json",
+      "bytes": 6682,
+      "sha256": "80f6a9ecbaa98b6054ce60df7e6637a4e072752bf02739804a21fc288a6b784a"
+    },
+    {
+      "path": "Art/Animals/rhino.png",
+      "bytes": 1058192,
+      "sha256": "3a28e22e361c633307ded9d68c679860c34d896f74b6ec40279277e0d8783f33"
+    },
+    {
+      "path": "Art/Animals/seal.json",
+      "bytes": 4789,
+      "sha256": "2137a65f50d8c470e41b8605808581c43a2a48032b5b8f75471e5bb592ca4118"
+    },
+    {
+      "path": "Art/Animals/seal.png",
+      "bytes": 472845,
+      "sha256": "eff2b6604940722eabe7bf9c3208a00b223c2d7d5665d04861ca8225f842dffe"
+    },
+    {
+      "path": "Art/Animals/sheep.json",
+      "bytes": 10196,
+      "sha256": "e8f1440f703208454044351991ac8fea86141611eab979cb0e8871263a2ca270"
+    },
+    {
+      "path": "Art/Animals/sheep.png",
+      "bytes": 1722316,
+      "sha256": "3d21d2592559ead3da217f4f19430efa80a3b0863e338f0f992f53fdd2e51296"
+    },
+    {
+      "path": "Art/Animals/sloth.json",
+      "bytes": 6696,
+      "sha256": "51aba28fa6ac667644310b6c0d5d395c0a9084a4b85d0960a4b7384c3e9f9c44"
+    },
+    {
+      "path": "Art/Animals/sloth.png",
+      "bytes": 420779,
+      "sha256": "0966fbcac2f52ffe89ea676a56595c96ce37c442c5c5e8bbe72b92263fb8d67b"
+    },
+    {
+      "path": "Art/Animals/snake_1.json",
+      "bytes": 6213,
+      "sha256": "da906bd34e22eb8dcb8329aa22891a30731290bfcca1951ba86300c628e17386"
+    },
+    {
+      "path": "Art/Animals/snake_1.png",
+      "bytes": 556984,
+      "sha256": "b8bf27ee83ed0c66f4fd92b983b470f469b346eb6ad86b3233a87bc14f47b061"
+    },
+    {
+      "path": "Art/Animals/snake_2.json",
+      "bytes": 6213,
+      "sha256": "0e5b3f8e26594684aa3aafcaf2675ef42ff37184605d5457f70a5da8c662f0d5"
+    },
+    {
+      "path": "Art/Animals/snake_2.png",
+      "bytes": 569114,
+      "sha256": "95cef3af9da8aac66cfd6041b93a1ecd1541171b1393b05062983d4402edbb57"
+    },
+    {
+      "path": "Art/Animals/snake_3.json",
+      "bytes": 6213,
+      "sha256": "5119f097d9e644f2b94ad9b708125094ae03b92a71650e9417797c6d575d5539"
+    },
+    {
+      "path": "Art/Animals/snake_3.png",
+      "bytes": 503585,
+      "sha256": "080e3089d79d2c479926ff2edb5f87d5ebd9e9345a6b34f4291981be3ace9467"
+    },
+    {
+      "path": "Art/Animals/swan.json",
+      "bytes": 8290,
+      "sha256": "6ee1e32be58cf7b2fa02ede5d3ea319f69ff8978f088d1ef9707386fe41e3a57"
+    },
+    {
+      "path": "Art/Animals/swan.png",
+      "bytes": 529949,
+      "sha256": "64e97e818e072caae014e4e4ab1cc601df0ec7982abd5f9abfd17c86246d7d8c"
+    },
+    {
+      "path": "Art/Animals/tiger.json",
+      "bytes": 5254,
+      "sha256": "4850a03181f8d48b6b40120b3509bf5af370415153b3a4c953dd6649ba878ee0"
+    },
+    {
+      "path": "Art/Animals/tiger.png",
+      "bytes": 1247468,
+      "sha256": "513d37f3c8c836b0f018fbd26e316a6749435afb93ef30a720ef001c3fbcc213"
+    },
+    {
+      "path": "Art/Animals/turtle.json",
+      "bytes": 7171,
+      "sha256": "e160c8e825642f5fbddb4ce5103636acb23d26c3e820c4c845927c4591103426"
+    },
+    {
+      "path": "Art/Animals/turtle.png",
+      "bytes": 1127322,
+      "sha256": "16ddb79b35e216bc30f0a64be79a976ac2389ecdbd95dbb7419877e9c574741f"
+    },
+    {
+      "path": "Art/Animals/warthog.json",
+      "bytes": 8714,
+      "sha256": "cd3f9ba1f9d7b526daa09929c2fe280f82a62601b7de848ca4b370b0daf16042"
+    },
+    {
+      "path": "Art/Animals/warthog.png",
+      "bytes": 1635933,
+      "sha256": "4172ec08c7ac6d3ec4acb46c51aab6c5ace6aaaea0619f875693a9dfe68fc259"
+    },
+    {
+      "path": "Art/Animals/wolf.json",
+      "bytes": 5812,
+      "sha256": "457bac54025f31bac5f501eeefa8881329fb21100359c88f79d02006b7a84780"
+    },
+    {
+      "path": "Art/Animals/wolf.png",
+      "bytes": 1085619,
+      "sha256": "e2e096b81f254c622a6d57e5289b8ce40a72aa9e51dafd9b76b2f7cfa209c2be"
+    },
+    {
+      "path": "Art/Animals/yak.json",
+      "bytes": 8394,
+      "sha256": "27dae44adcdac73d5198f219ae73c2d2acbed11395026cd68e284e846843ab72"
+    },
+    {
+      "path": "Art/Animals/yak.png",
+      "bytes": 1945337,
+      "sha256": "e9e61c7ae964f70daf19614e9b9660b00f21f9905dfc26222d1f12043427720d"
+    },
+    {
+      "path": "Art/Animals/zebra.json",
+      "bytes": 6054,
+      "sha256": "661243fc6bdefe86453ef31fc3cf72522106afd56e5198a41022691ec1ae332a"
+    },
+    {
+      "path": "Art/Animals/zebra.png",
+      "bytes": 1008015,
+      "sha256": "33c7ba68f715a26fd883ad03a3141fa0f62890b3fa9b47cd354e0031e041111a"
+    }
+  ],
+  "analysis": {
+    "imageFileCount": 345,
+    "note": "689 application files extracted; dependency and unpacked native files excluded. PNG dimensions inspected; spritesheet frames are not unique-species counts.",
+    "imageDimensions": [
+      {
+        "path": "Art/alpha_zoo_title.png",
+        "width": 646,
+        "height": 507
+      },
+      {
+        "path": "Art/arrow_down.png",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "path": "Art/arrow_left.png",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "path": "Art/arrow_right.png",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "path": "Art/arrow_up.png",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "path": "Art/balloon.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/balloon_icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/brown_bear_glyph.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/close_button.png",
+        "width": 96,
+        "height": 96
+      },
+      {
+        "path": "Art/color_icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/main_menu_background.png",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "path": "Art/map_border.png",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "path": "Art/map_icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/oldpop.png",
+        "width": 256,
+        "height": 384
+      },
+      {
+        "path": "Art/poop.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/pop.png",
+        "width": 512,
+        "height": 256
+      },
+      {
+        "path": "Art/puff.png",
+        "width": 128,
+        "height": 320
+      },
+      {
+        "path": "Art/red_circle.png",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "path": "Art/rope_texture.png",
+        "width": 200,
+        "height": 1
+      },
+      {
+        "path": "Art/sky.png",
+        "width": 1920,
+        "height": 500
+      },
+      {
+        "path": "Art/sky_1.png",
+        "width": 1920,
+        "height": 500
+      },
+      {
+        "path": "Art/slider.png",
+        "width": 150,
+        "height": 5
+      },
+      {
+        "path": "Art/slider_bar.png",
+        "width": 8,
+        "height": 26
+      },
+      {
+        "path": "Art/smoke.png",
+        "width": 512,
+        "height": 128
+      },
+      {
+        "path": "Art/steam.png",
+        "width": 512,
+        "height": 192
+      },
+      {
+        "path": "Art/throw_icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/title_instructions.png",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "path": "Art/water_droplet.png",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "path": "Art/wood.png",
+        "width": 1024,
+        "height": 180
+      },
+      {
+        "path": "Art/zoo_gradient.png",
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "path": "Art/Trains/connector.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/Trains/train_backing.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_car.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_car_bar.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_car_vertical.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_engine.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_engine_bar.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_engine_down.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_engine_up.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_shadow.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_shadow_vertical.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_station.png",
+        "width": 512,
+        "height": 400
+      },
+      {
+        "path": "Art/Trains/train_station_grey.png",
+        "width": 512,
+        "height": 400
+      },
+      {
+        "path": "Art/Trains/train_wheel.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Trains/train_wheels_vertical.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Terrain/bank_lines_100_1.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/bank_lines_100_2.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/bank_lines_100_3.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/bank_lines_150_1.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/bank_lines_150_2.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/bank_lines_150_3.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/bank_lines_50_1.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/bank_lines_50_2.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/bank_lines_50_3.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_100_1.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_100_2.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_100_3.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_150_1.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_150_2.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_150_3.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_200_1.png",
+        "width": 200,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_200_2.png",
+        "width": 200,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_200_3.png",
+        "width": 200,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_250_1.png",
+        "width": 250,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_250_2.png",
+        "width": 250,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_250_3.png",
+        "width": 250,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_300_1.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_300_2.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_300_3.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_50_1.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_50_2.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_50_3.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_100_1.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_150_1.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_200_1.png",
+        "width": 200,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_250_1.png",
+        "width": 250,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_300_1.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_50_1.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_shadow_100_1.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_shadow_150_1.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_shadow_200_1.png",
+        "width": 200,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_shadow_250_1.png",
+        "width": 250,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_shadow_300_1.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_reverse_shadow_50_1.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_100_1.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_100_2.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_100_3.png",
+        "width": 100,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_150_1.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_150_2.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_150_3.png",
+        "width": 150,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_200_1.png",
+        "width": 200,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_200_2.png",
+        "width": 200,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_200_3.png",
+        "width": 200,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_250_1.png",
+        "width": 250,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_250_2.png",
+        "width": 250,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_250_3.png",
+        "width": 250,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_300_1.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_300_2.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_300_3.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_50_1.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_50_2.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/edging_shadow_50_3.png",
+        "width": 50,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/fence_post.png",
+        "width": 60,
+        "height": 90
+      },
+      {
+        "path": "Art/Terrain/fence_shadow.png",
+        "width": 300,
+        "height": 50
+      },
+      {
+        "path": "Art/Terrain/light_grass.png",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "path": "Art/Terrain/light_round.png",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "path": "Art/Terrain/path_c_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Terrain/path_e_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Terrain/path_n_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Terrain/path_ne_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Terrain/path_nw_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Terrain/path_s_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Terrain/path_se_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Terrain/path_sw_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Terrain/path_w_v1.png",
+        "width": 100,
+        "height": 100
+      },
+      {
+        "path": "Art/Stuffed_Animals/stuffed_bear.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Stuffed_Animals/stuffed_chimp.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Stuffed_Animals/stuffed_frog.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Stuffed_Animals/stuffed_giraffe.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Stuffed_Animals/stuffed_koala.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Stuffed_Animals/stuffed_wolf.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/PathElements/bridge.png",
+        "width": 300,
+        "height": 500
+      },
+      {
+        "path": "Art/PathElements/path_arc_north_to_east_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_arc_north_to_west_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_arc_south_to_east_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_arc_south_to_west_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_cross_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_curve_east_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_curve_west_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_flat_t_down_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_flat_t_up_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_span_horizontal_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_span_vertical_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_straight_horizontal_shadow.png",
+        "width": 500,
+        "height": 200
+      },
+      {
+        "path": "Art/PathElements/path_straight_horizontal_v4.png",
+        "width": 500,
+        "height": 300
+      },
+      {
+        "path": "Art/PathElements/path_straight_vertical_v4.png",
+        "width": 300,
+        "height": 500
+      },
+      {
+        "path": "Art/PathElements/path_terminus_east_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_terminus_north_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_terminus_south_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/path_terminus_west_v4.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/rail_arc_1.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/rail_arc_2.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/rail_horizontal_span.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/rail_horizontal_straight.png",
+        "width": 500,
+        "height": 300
+      },
+      {
+        "path": "Art/PathElements/rail_vertical_span.png",
+        "width": 400,
+        "height": 400
+      },
+      {
+        "path": "Art/PathElements/rail_vertical_straight.png",
+        "width": 300,
+        "height": 500
+      },
+      {
+        "path": "Art/Marimba/marimba.png",
+        "width": 600,
+        "height": 400
+      },
+      {
+        "path": "Art/Marimba/marimba_background.png",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "path": "Art/Marimba/marimba_grey.png",
+        "width": 600,
+        "height": 400
+      },
+      {
+        "path": "Art/Marimba/marimba_icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/Marimba/marimba_mallet.png",
+        "width": 307,
+        "height": 307
+      },
+      {
+        "path": "Art/Gift_Shop/exterior.png",
+        "width": 800,
+        "height": 800
+      },
+      {
+        "path": "Art/Gift_Shop/exterior_grey.png",
+        "width": 800,
+        "height": 800
+      },
+      {
+        "path": "Art/Gift_Shop/gift_shop_background.png",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "path": "Art/Gift_Shop/gift_shop_table.png",
+        "width": 512,
+        "height": 192
+      },
+      {
+        "path": "Art/Gift_Shop/icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/Gift_Shop/price_tag.png",
+        "width": 80,
+        "height": 40
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/ball_cap.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/balloon_hanger.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/beanie.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/glasses.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/hanger.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/mini_hanger.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/no_glasses.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/no_hat.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/safari_hat.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/scooter.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/shirt.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/smurf_hat.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/sun_glasses.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/top_hat.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Gift_Shop/Merchandise/witch_hat.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Food/bamboo.png",
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "path": "Art/Food/fish.png",
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "path": "Art/Food/food.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/Food/fruit.png",
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "path": "Art/Food/greens.png",
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "path": "Art/Food/micro.png",
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "path": "Art/Food/steak.png",
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "path": "Art/Ferris_Wheel/base.png",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "path": "Art/Ferris_Wheel/cart.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Ferris_Wheel/cart_icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/Ferris_Wheel/icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/Ferris_Wheel/wheel.png",
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "path": "Art/Ferris_Wheel/Riders/rider_0.png",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "path": "Art/Ferris_Wheel/Riders/rider_1.png",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "path": "Art/Ferris_Wheel/Riders/rider_2.png",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "path": "Art/Ferris_Wheel/Riders/rider_3.png",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "path": "Art/Ferris_Wheel/Riders/rider_4.png",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "path": "Art/Ferris_Wheel/Riders/rider_5.png",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "path": "Art/Decorations/brown_rock_1.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_2.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_3.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_forest_1.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_forest_2.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_forest_3.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_grass_1.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_grass_2.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_grass_3.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_water_1.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_water_2.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/brown_rock_water_3.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/bush.png",
+        "width": 68,
+        "height": 51
+      },
+      {
+        "path": "Art/Decorations/grass.png",
+        "width": 58,
+        "height": 31
+      },
+      {
+        "path": "Art/Decorations/grey_rock_1.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_2.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_3.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_forest_1.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_forest_2.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_forest_3.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_grass_1.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_grass_2.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_grass_3.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_water_1.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_water_2.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/grey_rock_water_3.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/rock.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Decorations/rock_old.png",
+        "width": 58,
+        "height": 31
+      },
+      {
+        "path": "Art/Decorations/tree_shadow.png",
+        "width": 120,
+        "height": 55
+      },
+      {
+        "path": "Art/Decorations/trees.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/Characters/black_bear.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_ball_cap.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_beanie.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_ghost.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_glasses.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_safari_hat.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_scooter.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_shirt.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_sun_glasses.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_top_hat.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/brown_bear_witch_hat.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/light_cat.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/orange_cat.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/polar_bear.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/rabbit_blueshirt.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/rabbit_greenshirt.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/rabbit_redshirt.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Characters/yellow_cat.png",
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/cafe_background.png",
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "path": "Art/Cafe/exterior.png",
+        "width": 800,
+        "height": 800
+      },
+      {
+        "path": "Art/Cafe/exterior_grey.png",
+        "width": 800,
+        "height": 800
+      },
+      {
+        "path": "Art/Cafe/icon.png",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "path": "Art/Cafe/menu_background.png",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "path": "Art/Cafe/table.png",
+        "width": 200,
+        "height": 128
+      },
+      {
+        "path": "Art/Cafe/Food/apple.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/banana.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/burger.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/candy.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/carrots.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/celery.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/cookie.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/cucumbers.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/donut.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/hot_dog.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/ice_cream.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/juice.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/kiwi.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/milk.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/orange.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/peach.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/pear.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/pizza.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/plum.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/salad.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/soda.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/tomatoes.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Cafe/Food/water.png",
+        "width": 256,
+        "height": 256
+      },
+      {
+        "path": "Art/Animals/alligator.png",
+        "width": 1017,
+        "height": 1338
+      },
+      {
+        "path": "Art/Animals/alpaca.png",
+        "width": 1934,
+        "height": 652
+      },
+      {
+        "path": "Art/Animals/anteater.png",
+        "width": 1021,
+        "height": 819
+      },
+      {
+        "path": "Art/Animals/baboon.png",
+        "width": 999,
+        "height": 2036
+      },
+      {
+        "path": "Art/Animals/beaver.png",
+        "width": 463,
+        "height": 1536
+      },
+      {
+        "path": "Art/Animals/bighorn_sheep.png",
+        "width": 1931,
+        "height": 2199
+      },
+      {
+        "path": "Art/Animals/black_bear.png",
+        "width": 1018,
+        "height": 1076
+      },
+      {
+        "path": "Art/Animals/brown_bear.png",
+        "width": 1018,
+        "height": 1076
+      },
+      {
+        "path": "Art/Animals/camel.png",
+        "width": 2027,
+        "height": 1377
+      },
+      {
+        "path": "Art/Animals/capybara.png",
+        "width": 491,
+        "height": 1251
+      },
+      {
+        "path": "Art/Animals/cat.png",
+        "width": 377,
+        "height": 944
+      },
+      {
+        "path": "Art/Animals/cheetah.png",
+        "width": 512,
+        "height": 1834
+      },
+      {
+        "path": "Art/Animals/chicken_1.png",
+        "width": 975,
+        "height": 244
+      },
+      {
+        "path": "Art/Animals/chicken_2.png",
+        "width": 975,
+        "height": 244
+      },
+      {
+        "path": "Art/Animals/chimpanzee.png",
+        "width": 2007,
+        "height": 1140
+      },
+      {
+        "path": "Art/Animals/cow.png",
+        "width": 912,
+        "height": 1082
+      },
+      {
+        "path": "Art/Animals/deer.png",
+        "width": 2040,
+        "height": 624
+      },
+      {
+        "path": "Art/Animals/dog.png",
+        "width": 949,
+        "height": 680
+      },
+      {
+        "path": "Art/Animals/duck.png",
+        "width": 933,
+        "height": 604
+      },
+      {
+        "path": "Art/Animals/elephant.png",
+        "width": 1914,
+        "height": 1129
+      },
+      {
+        "path": "Art/Animals/elk.png",
+        "width": 1802,
+        "height": 1124
+      },
+      {
+        "path": "Art/Animals/flamingo.png",
+        "width": 1375,
+        "height": 1019
+      },
+      {
+        "path": "Art/Animals/fox.png",
+        "width": 1022,
+        "height": 1655
+      },
+      {
+        "path": "Art/Animals/frog_1.png",
+        "width": 937,
+        "height": 762
+      },
+      {
+        "path": "Art/Animals/frog_2.png",
+        "width": 937,
+        "height": 762
+      },
+      {
+        "path": "Art/Animals/frog_3.png",
+        "width": 937,
+        "height": 762
+      },
+      {
+        "path": "Art/Animals/frog_4.png",
+        "width": 937,
+        "height": 762
+      },
+      {
+        "path": "Art/Animals/frog_5.png",
+        "width": 937,
+        "height": 762
+      },
+      {
+        "path": "Art/Animals/gazelle.png",
+        "width": 2043,
+        "height": 1222
+      },
+      {
+        "path": "Art/Animals/giraffe.png",
+        "width": 2012,
+        "height": 1244
+      },
+      {
+        "path": "Art/Animals/goat.png",
+        "width": 836,
+        "height": 1943
+      },
+      {
+        "path": "Art/Animals/goose.png",
+        "width": 382,
+        "height": 1540
+      },
+      {
+        "path": "Art/Animals/gorilla.png",
+        "width": 986,
+        "height": 1006
+      },
+      {
+        "path": "Art/Animals/hippo.png",
+        "width": 941,
+        "height": 1415
+      },
+      {
+        "path": "Art/Animals/horse.png",
+        "width": 885,
+        "height": 736
+      },
+      {
+        "path": "Art/Animals/kangaroo.png",
+        "width": 1921,
+        "height": 937
+      },
+      {
+        "path": "Art/Animals/koala.png",
+        "width": 954,
+        "height": 533
+      },
+      {
+        "path": "Art/Animals/lemur.png",
+        "width": 512,
+        "height": 1688
+      },
+      {
+        "path": "Art/Animals/lion.png",
+        "width": 1022,
+        "height": 1345
+      },
+      {
+        "path": "Art/Animals/llama.png",
+        "width": 1982,
+        "height": 1169
+      },
+      {
+        "path": "Art/Animals/lynx.png",
+        "width": 1173,
+        "height": 506
+      },
+      {
+        "path": "Art/Animals/meerkat.png",
+        "width": 986,
+        "height": 655
+      },
+      {
+        "path": "Art/Animals/moose.png",
+        "width": 1997,
+        "height": 1361
+      },
+      {
+        "path": "Art/Animals/mouse.png",
+        "width": 208,
+        "height": 1296
+      },
+      {
+        "path": "Art/Animals/orangutan.png",
+        "width": 1865,
+        "height": 1160
+      },
+      {
+        "path": "Art/Animals/ostrich.png",
+        "width": 2007,
+        "height": 553
+      },
+      {
+        "path": "Art/Animals/otter.png",
+        "width": 1930,
+        "height": 1809
+      },
+      {
+        "path": "Art/Animals/owl.png",
+        "width": 2025,
+        "height": 1093
+      },
+      {
+        "path": "Art/Animals/panda_bear.png",
+        "width": 956,
+        "height": 1683
+      },
+      {
+        "path": "Art/Animals/panther.png",
+        "width": 920,
+        "height": 1491
+      },
+      {
+        "path": "Art/Animals/parrot_1.png",
+        "width": 390,
+        "height": 1774
+      },
+      {
+        "path": "Art/Animals/parrot_2.png",
+        "width": 390,
+        "height": 1774
+      },
+      {
+        "path": "Art/Animals/parrot_3.png",
+        "width": 390,
+        "height": 1774
+      },
+      {
+        "path": "Art/Animals/parrot_4.png",
+        "width": 390,
+        "height": 1774
+      },
+      {
+        "path": "Art/Animals/parrot_5.png",
+        "width": 390,
+        "height": 1774
+      },
+      {
+        "path": "Art/Animals/peacock.png",
+        "width": 1974,
+        "height": 1228
+      },
+      {
+        "path": "Art/Animals/penguin.png",
+        "width": 493,
+        "height": 1278
+      },
+      {
+        "path": "Art/Animals/pig.png",
+        "width": 1871,
+        "height": 1123
+      },
+      {
+        "path": "Art/Animals/polar_bear.png",
+        "width": 1019,
+        "height": 1385
+      },
+      {
+        "path": "Art/Animals/rabbit.png",
+        "width": 998,
+        "height": 504
+      },
+      {
+        "path": "Art/Animals/raccoon.png",
+        "width": 2005,
+        "height": 1125
+      },
+      {
+        "path": "Art/Animals/red_panda.png",
+        "width": 995,
+        "height": 1594
+      },
+      {
+        "path": "Art/Animals/rhino.png",
+        "width": 2046,
+        "height": 658
+      },
+      {
+        "path": "Art/Animals/seal.png",
+        "width": 981,
+        "height": 507
+      },
+      {
+        "path": "Art/Animals/sheep.png",
+        "width": 924,
+        "height": 1801
+      },
+      {
+        "path": "Art/Animals/sloth.png",
+        "width": 194,
+        "height": 1738
+      },
+      {
+        "path": "Art/Animals/snake_1.png",
+        "width": 497,
+        "height": 1387
+      },
+      {
+        "path": "Art/Animals/snake_2.png",
+        "width": 497,
+        "height": 1387
+      },
+      {
+        "path": "Art/Animals/snake_3.png",
+        "width": 497,
+        "height": 1387
+      },
+      {
+        "path": "Art/Animals/swan.png",
+        "width": 1006,
+        "height": 627
+      },
+      {
+        "path": "Art/Animals/tiger.png",
+        "width": 963,
+        "height": 1506
+      },
+      {
+        "path": "Art/Animals/turtle.png",
+        "width": 1020,
+        "height": 1070
+      },
+      {
+        "path": "Art/Animals/warthog.png",
+        "width": 1017,
+        "height": 1537
+      },
+      {
+        "path": "Art/Animals/wolf.png",
+        "width": 1021,
+        "height": 931
+      },
+      {
+        "path": "Art/Animals/yak.png",
+        "width": 1999,
+        "height": 1049
+      },
+      {
+        "path": "Art/Animals/zebra.png",
+        "width": 1017,
+        "height": 1196
+      }
+    ]
+  },
+  "extraction": {
+    "format": "Electron ASAR",
+    "archiveEntries": 2149,
+    "applicationFiles": 689,
+    "dataOffset": 556944,
+    "boundsChecked": true,
+    "declaredIntegrityHashesChecked": true
+  },
+  "sources": [
+    {
+      "path": "Source/screen_zoo.js",
+      "sha256": "f5c1244171fa156a4883c98e48ec6d7e7c4426491d5be0377115a762c8a5bb5e",
+      "lines": [
+        969,
+        1036
+      ]
+    },
+    {
+      "path": "Source/animals.js",
+      "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1",
+      "lines": [
+        818,
+        890
+      ]
+    },
+    {
+      "path": "Source/screen_gift_shop.js",
+      "sha256": "fbf1cf93bde880d945fd83f8e86381bd81cdca45e9db99dc0e04a965241c069f",
+      "lines": [
+        337,
+        815
+      ]
+    },
+    {
+      "path": "Source/land.js",
+      "sha256": "b36ecb5b7798b5652748f938bcd42336ed0d2b901cef6406eb94fb5cfd90a883",
+      "lines": [
+        268,
+        303
+      ]
+    },
+    {
+      "path": "Source/land.js",
+      "sha256": "b36ecb5b7798b5652748f938bcd42336ed0d2b901cef6406eb94fb5cfd90a883",
+      "lines": [
+        305,
+        480
+      ]
+    },
+    {
+      "path": "Source/animals.js",
+      "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1",
+      "lines": [
+        1341,
+        1400
+      ]
+    },
+    {
+      "path": "Source/animals.js",
+      "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1",
+      "lines": [
+        1329,
+        1340
+      ]
+    },
+    {
+      "path": "Source/screen_zoo.js",
+      "sha256": "f5c1244171fa156a4883c98e48ec6d7e7c4426491d5be0377115a762c8a5bb5e",
+      "lines": [
+        1816,
+        1920
+      ]
+    },
+    {
+      "path": "Source/animals.js",
+      "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1",
+      "lines": [
+        610,
+        715
+      ]
+    }
+  ],
+  "coverage": {
+    "runtime": "unobserved",
+    "source": "packaged JavaScript inspected",
+    "abbiesWorldImplementation": "design inference only"
+  },
+  "redistribution": "Only inventory metadata and original analysis published. Extracted game code, artwork and audio retained privately."
+}

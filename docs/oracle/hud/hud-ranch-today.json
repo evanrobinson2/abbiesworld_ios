@@ -1,0 +1,178 @@
+{
+ "id": "ranch-sandbox-today",
+ "date": "2026-10-23",
+ "note": "Live /sandbox (prototypes/ranch-atelier/dist/simulations/index.html on claude/live-snapshot-2026-10-22). Boxes approximate at 390 x 844; inspector panel opens by default (aria-expanded=true).",
+ "viewports": {
+  "portrait": {
+   "size": [
+    390,
+    844
+   ],
+   "safe": [
+    47,
+    0,
+    34,
+    0
+   ]
+  }
+ },
+ "elements": [
+  {
+   "id": "header_toolbar",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "touch": true,
+   "touches_per_min": 0.5,
+   "words": 5,
+   "targets_px": [
+    36,
+    36,
+    36,
+    36,
+    36
+   ],
+   "bbox": {
+    "portrait": [
+     0,
+     47,
+     390,
+     52
+    ]
+   },
+   "note": "back, Ranch/Homestead library, Pause, Regenerate, Fit, settings"
+  },
+  {
+   "id": "inspector_panel",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "readout": true,
+   "touch": true,
+   "touches_per_min": 1,
+   "words": 120,
+   "targets_px": [
+    28
+   ],
+   "bbox": {
+    "portrait": [
+     0,
+     500,
+     390,
+     310
+    ]
+   },
+   "note": "status, Now happening, preset, lighting, arrival select, sliders, help"
+  },
+  {
+   "id": "live_status",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "readout": true,
+   "words": 6,
+   "bbox": {
+    "portrait": [
+     16,
+     560,
+     358,
+     40
+    ]
+   }
+  },
+  {
+   "id": "activity_list",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "readout": true,
+   "words": 30,
+   "bbox": {
+    "portrait": [
+     16,
+     610,
+     358,
+     90
+    ]
+   }
+  },
+  {
+   "id": "livestock_sliders",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "readout": true,
+   "touch": true,
+   "words": 4,
+   "targets_px": [
+    24
+   ],
+   "bbox": {
+    "portrait": [
+     16,
+     700,
+     358,
+     100
+    ]
+   }
+  },
+  {
+   "id": "inspection_card",
+   "kind": "overlay",
+   "tier": "T3_summoned",
+   "time": "summoned",
+   "readout": true,
+   "touch": true,
+   "words": 25,
+   "bbox": {
+    "portrait": [
+     16,
+     560,
+     358,
+     220
+    ]
+   }
+  },
+  {
+   "id": "library_dialog",
+   "kind": "overlay",
+   "tier": "T3_summoned",
+   "time": "summoned",
+   "touch": true,
+   "words": 20,
+   "bbox": {
+    "portrait": [
+     0,
+     47,
+     390,
+     763
+    ]
+   }
+  },
+  {
+   "id": "button_titles",
+   "kind": "overlay",
+   "tier": "T3_summoned",
+   "time": "summoned",
+   "hover_only": true,
+   "words": 12,
+   "note": "title tooltips such as 'Randomize terrain and ranch layout'"
+  },
+  {
+   "id": "error_box",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "on_change",
+   "words": 8
+  }
+ ],
+ "kid_safe": {
+  "red_alarm": false,
+  "buzzer": false,
+  "max_flash_hz": 0,
+  "fail_screen": false
+ },
+ "captures": [],
+ "signals": [],
+ "world_mask": true
+}

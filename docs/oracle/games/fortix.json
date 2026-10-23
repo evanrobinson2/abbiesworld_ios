@@ -1,0 +1,67 @@
+{
+  "appid": 45400,
+  "name": "Fortix",
+  "store_url": "https://store.steampowered.com/app/45400/",
+  "genres": [
+    "Arcade",
+    "Strategy"
+  ],
+  "short_description": "Qix-style arcade: claim territory around castles.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Arcade",
+    "Strategy"
+  ],
+  "summary": "Qix-style arcade: claim territory around castles.",
+  "identity": {
+    "core_loop": "Draw lines to claim land, avoid enemies, take castles.",
+    "mechanics": null,
+    "ui_and_game_feel": "Arcade quick.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay score.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Simple bright.",
+    "palette": null,
+    "audio_mood": "Arcade.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Claiming area is a primal verb kids get instantly."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.56,
+      "expression": 0.22,
+      "structure": 0.33,
+      "social": 0.56,
+      "systems": 0.22,
+      "chance": 0.78,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

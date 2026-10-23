@@ -1,0 +1,70 @@
+{
+  "appid": 2118810,
+  "name": "Breachway",
+  "store_url": "https://store.steampowered.com/app/2118810/",
+  "genres": [
+    "Card",
+    "Roguelike",
+    "Space"
+  ],
+  "short_description": "A deckbuilding space roguelike: ship-to-ship card battles across a star map.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Card",
+    "Roguelike",
+    "Space"
+  ],
+  "summary": "A deckbuilding space roguelike: ship-to-ship card battles across a star map.",
+  "identity": {
+    "core_loop": "Pick a route, fight with cards targeting ship systems, upgrade, push on.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tactical and crunchy; slow turns.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.1,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Ship systems shown on the ship; hand and energy are overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Painterly sci-fi ships.",
+    "palette": null,
+    "audio_mood": "Ambient space score.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Cards that point at visible parts of a ship make abstract rules physical."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.78,
+      "expression": 0.44,
+      "structure": 0.78,
+      "social": 0.44,
+      "systems": 0.56,
+      "chance": 0.78,
+      "session": 0.89
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

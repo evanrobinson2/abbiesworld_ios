@@ -16,7 +16,7 @@ on:
       repick: { description: 'Pick every slot again (otherwise only new slots)', type: boolean, default: false }
       only: { description: 'Only these slots (comma separated)', default: '' }
   push:
-    branches: [claude/live-snapshot-2026-10-22, 'claude/project-thread-mzo2r5']
+    branches: [main, 'claude/project-thread-mzo2r5']
     paths:
       - 'tools/sound-engineer/*.mjs'
       - 'tools/sound-engineer/picks.json'

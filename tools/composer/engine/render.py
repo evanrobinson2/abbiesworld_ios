@@ -135,7 +135,7 @@ def write(cue, out_dir, site_prefix, asset_dir, score_path, brief, uses, tags, g
                                'repo': 'https://github.com/sgossner/VSCO-2-CE', 'commit': sample_rev()}},
         'license': 'Original composition for Abbie\'s World. Performed with VS Chamber Orchestra CE samples (CC0).',
         'notes': [], 'date': now, 'provenance_url': f'https://github.com/evanrobinson2/abbiesworld_ios/blob/'
-                                                     f'claude/live-snapshot-2026-10-22/{asset_dir}/provenance.json',
+                                                     f'main/{asset_dir}/provenance.json',
         'bpm': cue.bpm, 'key': f'{cue.key.name} {cue.key.mode}', 'beatsPerBar': cue.bpb,
         'cueKind': cue.kind, 'variant': variant, **({'motif': cue.meta['motif']} if 'motif' in cue.meta else {}),
     }

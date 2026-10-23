@@ -1,0 +1,424 @@
+{
+  "id": "nethack",
+  "name": "NetHack",
+  "fileCount": 12,
+  "extractedBytes": 11790824,
+  "extensions": {
+    "(none)": 4,
+    ".template": 3,
+    ".txt": 2,
+    ".exe": 2,
+    ".pdf": 1
+  },
+  "packages": [
+    {
+      "name": "059-1-nethack-367-win-x86.zip",
+      "sha256": "eed14e4a8f2cdc5bed6d220602b1649bcf9f89c3916330b298ef947d2539cb69",
+      "exitCode": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "package-1/.nethackrc.template",
+      "bytes": 8185
+    },
+    {
+      "path": "package-1/Guidebook.pdf",
+      "bytes": 399778
+    },
+    {
+      "path": "package-1/Guidebook.txt",
+      "bytes": 261874
+    },
+    {
+      "path": "package-1/license",
+      "bytes": 4970
+    },
+    {
+      "path": "package-1/NetHack.exe",
+      "bytes": 4408832
+    },
+    {
+      "path": "package-1/NetHack.txt",
+      "bytes": 12691
+    },
+    {
+      "path": "package-1/NetHackW.exe",
+      "bytes": 5366784
+    },
+    {
+      "path": "package-1/nhdat367",
+      "bytes": 1288402
+    },
+    {
+      "path": "package-1/opthelp",
+      "bytes": 18136
+    },
+    {
+      "path": "package-1/record",
+      "bytes": 0
+    },
+    {
+      "path": "package-1/symbols.template",
+      "bytes": 17392
+    },
+    {
+      "path": "package-1/sysconf.template",
+      "bytes": 3780
+    }
+  ],
+  "analysis": {
+    "id": "nethack",
+    "imageFileCount": 0,
+    "commonImageDimensions": {},
+    "imageExamples": [],
+    "imageReadErrors": [],
+    "binaryCount": 2,
+    "binaries": [
+      {
+        "path": "package-1/NetHack.exe",
+        "bytes": 4408832,
+        "sha256": "e96627f13f9312858c3f69cc0f9b37d110e4fea2ee4f32cca220b841b5c26f1f",
+        "format": "PE",
+        "machine": "0x14c",
+        "sections": [
+          ".text",
+          ".rdata",
+          ".data",
+          ".rsrc",
+          ".reloc"
+        ],
+        "importedLibraries": [
+          "KERNEL32.dll",
+          "ADVAPI32.dll",
+          "GDI32.dll",
+          "ole32.dll",
+          "SHELL32.dll",
+          "USER32.dll",
+          "WINMM.dll",
+          "bcrypt.dll"
+        ],
+        "entryDisassembly": [
+          {
+            "address": "0x667240",
+            "mnemonic": "push",
+            "operands": "ebp"
+          },
+          {
+            "address": "0x667241",
+            "mnemonic": "mov",
+            "operands": "ebp, esp"
+          },
+          {
+            "address": "0x667243",
+            "mnemonic": "call",
+            "operands": "0x666f50"
+          },
+          {
+            "address": "0x667248",
+            "mnemonic": "pop",
+            "operands": "ebp"
+          },
+          {
+            "address": "0x667249",
+            "mnemonic": "ret",
+            "operands": ""
+          },
+          {
+            "address": "0x66724a",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66724b",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66724c",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66724d",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66724e",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66724f",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x667250",
+            "mnemonic": "mov",
+            "operands": "eax, dword ptr [0x810d08]"
+          },
+          {
+            "address": "0x667255",
+            "mnemonic": "ret",
+            "operands": ""
+          },
+          {
+            "address": "0x667256",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x667257",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x667258",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x667259",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66725a",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66725b",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66725c",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66725d",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66725e",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x66725f",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x667260",
+            "mnemonic": "mov",
+            "operands": "eax, dword ptr [0x810d0c]"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      },
+      {
+        "path": "package-1/NetHackW.exe",
+        "bytes": 5366784,
+        "sha256": "db84b3ffe04e46eebfda949e236b5e1b7b962d6883c8109ab2bed94d9c9ec904",
+        "format": "PE",
+        "machine": "0x14c",
+        "sections": [
+          ".text",
+          ".rdata",
+          ".data",
+          ".rsrc",
+          ".reloc"
+        ],
+        "importedLibraries": [
+          "KERNEL32.dll",
+          "ADVAPI32.dll",
+          "GDI32.dll",
+          "ole32.dll",
+          "SHELL32.dll",
+          "USER32.dll",
+          "WINMM.dll",
+          "COMDLG32.dll",
+          "COMCTL32.dll",
+          "bcrypt.dll"
+        ],
+        "entryDisassembly": [
+          {
+            "address": "0x6773a0",
+            "mnemonic": "push",
+            "operands": "ebp"
+          },
+          {
+            "address": "0x6773a1",
+            "mnemonic": "mov",
+            "operands": "ebp, esp"
+          },
+          {
+            "address": "0x6773a3",
+            "mnemonic": "call",
+            "operands": "0x6770e0"
+          },
+          {
+            "address": "0x6773a8",
+            "mnemonic": "pop",
+            "operands": "ebp"
+          },
+          {
+            "address": "0x6773a9",
+            "mnemonic": "ret",
+            "operands": ""
+          },
+          {
+            "address": "0x6773aa",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773ab",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773ac",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773ad",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773ae",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773af",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773b0",
+            "mnemonic": "mov",
+            "operands": "eax, dword ptr [0x824094]"
+          },
+          {
+            "address": "0x6773b5",
+            "mnemonic": "ret",
+            "operands": ""
+          },
+          {
+            "address": "0x6773b6",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773b7",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773b8",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773b9",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773ba",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773bb",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773bc",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773bd",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773be",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773bf",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x6773c0",
+            "mnemonic": "mov",
+            "operands": "eax, dword ptr [0x824098]"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      }
+    ],
+    "modelFileCandidates": [],
+    "note": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers."
+  },
+  "extractionErrors": [],
+  "source": {
+    "id": "nethack",
+    "repository": "NetHack/NetHack",
+    "requestedRef": "NetHack-3.6.7_Released",
+    "treeSha": "ed600d9f0f3c37677418f0150f59363ca641f3dc",
+    "truncated": false,
+    "basis": "release source"
+  },
+  "inspectedSourceFiles": [
+    {
+      "game": "nethack",
+      "path": "src/mklev.c",
+      "bytes": 58173,
+      "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/mkroom.c",
+      "bytes": 27263,
+      "blobSha": "d0995c7f1d85d29ac3f59afe8cfec44e017826e0",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mkroom.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/monmove.c",
+      "bytes": 63109,
+      "blobSha": "cd6ca98bbd6279eb4b85be6d51d4bb5d7a932092",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/monmove.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/display.c",
+      "bytes": 83508,
+      "blobSha": "722c2581823e122a35abf7b7abe874fcdd2dd1c8",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/display.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/hack.c",
+      "bytes": 112042,
+      "blobSha": "79fe7408c858a5c2754a173be2b7ed78e2eb5b65",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/hack.c"
+    }
+  ]
+}

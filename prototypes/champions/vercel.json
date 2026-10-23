@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . && { echo 'Nothing changed in prototypes/champions; skipping.'; exit 0; } || exit 1",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/r2/:path*", "destination": "https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev/:path*" }
+  ],
+  "headers": [
+    { "source": "/js/:path*", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/style.css", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/vendor/:path*", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
+  ]
+}

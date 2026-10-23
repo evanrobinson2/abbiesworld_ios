@@ -1,0 +1,403 @@
+{
+  "schema_version": "1.1",
+  "game": {
+    "title": "9 Kings",
+    "steam_appid": null,
+    "developer": "Sad Socket",
+    "publisher": "Hooded Horse",
+    "release": "2025 (early access)",
+    "early_access": "2025",
+    "engine": {
+      "value": "unknown",
+      "source": "estimate",
+      "confidence": 0.1,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    }
+  },
+  "core": {
+    "fantasy": "You are a king who grows a kingdom from cards and survives the other kings' yearly attacks.",
+    "pillars": [
+      "One decision per year that matters",
+      "Synergy between neighbouring plots",
+      "Short runs, high replay"
+    ],
+    "signature_moment": "Placing the card that completes a combo, then watching your army crush a rival king's wave.",
+    "anti_goals": [
+      "no direct unit control",
+      "no long campaigns"
+    ],
+    "signatures": [
+      {
+        "id": "year_rhythm",
+        "layer": "pacing",
+        "description": "Each year: pick and place a card, then an automatic battle plays out.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "adjacency_synergy",
+        "layer": "mechanics",
+        "description": "Buildings and units buff their neighbours on a small plot grid.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "rival_kings",
+        "layer": "narrative",
+        "description": "Each opposing king has a distinct deck and personality.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ],
+    "recognisability": {
+      "value": 0.6,
+      "source": "estimate",
+      "confidence": 0.3,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    }
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "challenge": 0.45,
+        "discovery": 0.25,
+        "fantasy": 0.15,
+        "sensation": 0.15
+      },
+      "motivations": {
+        "mastery": 0.8,
+        "achievement": 0.6,
+        "creativity": 0.4,
+        "action": 0.4,
+        "immersion": 0.3,
+        "social": 0.1
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "play card",
+          "input": "drag"
+        },
+        {
+          "verb": "place on plot",
+          "input": "click"
+        },
+        {
+          "verb": "upgrade by stacking",
+          "input": "drag onto existing"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "draw cards",
+          "play one",
+          "battle auto-resolves",
+          "next year"
+        ],
+        "period_s": {
+          "value": 45,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "s"
+        }
+      },
+      "meta_loop": {
+        "steps": [
+          "unlock kings and perks",
+          "start a new run"
+        ]
+      },
+      "rules": {
+        "failure_model": "run_ending",
+        "win": "survive the years",
+        "loss": "your castle falls"
+      },
+      "randomness": {
+        "amount": 0.5,
+        "kind": "input"
+      },
+      "information": "partial",
+      "systems": [
+        "deckbuilding",
+        "adjacency buffs",
+        "auto-battler combat"
+      ]
+    },
+    "dynamics": {
+      "emergent_behaviours": [
+        "build-defining combos",
+        "runaway snowball kingdoms"
+      ],
+      "decision_density_per_min": {
+        "value": 2,
+        "source": "estimate",
+        "confidence": 0.3,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "/min"
+      },
+      "skill_strategy_chance": {
+        "skill": 0.0,
+        "strategy": 0.65,
+        "chance": 0.35
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse"
+        ],
+        "mapping": "card_select"
+      },
+      "camera": {
+        "model": "top_down",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "slots",
+        "undo": "none",
+        "preview_before_commit": true
+      },
+      "juice": {
+        "particles": 0.6,
+        "screen_shake": 0.4,
+        "scale_pop": 0.5,
+        "sound_on_action": 0.8,
+        "hit_stop": 0.2
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "pixel_art"
+      },
+      "proportion_and_scale": {
+        "stylisation": 0.8,
+        "toyness": 0.6
+      },
+      "references": [
+        "fantasy board games"
+      ]
+    },
+    "assets": {
+      "kit": "modular",
+      "materials": {
+        "texture_strategy": "pixel"
+      }
+    },
+    "interface": {
+      "ui_mode_mix": {
+        "diegetic": 0.2,
+        "non_diegetic": 0.7,
+        "spatial": 0.1,
+        "meta": 0.0
+      },
+      "onboarding": "contextual_hints"
+    },
+    "audio": {
+      "sfx_character": "mixed"
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.6,
+        "enacted": 0.0,
+        "embedded": 0.1,
+        "emergent": 0.3
+      },
+      "tone": {
+        "cozy_tense": 0.4,
+        "whimsical_grounded": -0.2,
+        "earnest_ironic": 0.1
+      },
+      "themes": [
+        "rule",
+        "rivalry",
+        "growth"
+      ]
+    },
+    "pacing": {
+      "structure": "roguelite_runs",
+      "tension_curve": "rising_to_end",
+      "failure_cost": "lose_run",
+      "unlocks": [
+        "kings",
+        "perks"
+      ]
+    },
+    "market": {
+      "steam_tags": [
+        "Roguelite",
+        "Card Game",
+        "Kingdom Builder",
+        "Strategy"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "time": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Year counter.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "threat": {
+          "mix": {
+            "overlay": 0.5,
+            "spatial": 0.3,
+            "diegetic": 0.2
+          },
+          "timing": "on_change",
+          "note": "The next attacker is shown before the battle; armies march onto the board.",
+          "confidence": 0.4,
+          "source": "estimate"
+        },
+        "thing_state": {
+          "mix": {
+            "spatial": 0.6,
+            "overlay": 0.4
+          },
+          "timing": "on_change",
+          "note": "Plot levels and buffs on the grid.",
+          "confidence": 0.4,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Survive the years; rival kings listed.",
+          "confidence": 0.4,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Hand of cards at the bottom edge.",
+          "confidence": 0.6,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.1,
+        "spatial": 0.3,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.25,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "always_on_count": {
+          "value": 3,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "drawn_as": "neutral_overlay"
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "battle",
+            "channels": [
+              "music",
+              "sound",
+              "camera",
+              "ui"
+            ],
+            "note": "The board becomes a battlefield; little world adaptation outside it."
+          }
+        ],
+        "max_channels": {
+          "value": 2,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "adapts_score": {
+          "value": 0.4,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        }
+      },
+      "social_channel": {
+        "carriers": {
+          "portrait_text": 0.6,
+          "none": 0.4
+        },
+        "note": "Rival kings presented by portrait and card set."
+      },
+      "dialects": [
+        {
+          "place": "battle",
+          "mix": {
+            "spatial": 0.5,
+            "overlay": 0.3,
+            "diegetic": 0.2
+          },
+          "note": "Consequences shown on the board."
+        }
+      ],
+      "card_art": {
+        "uses_cards": true,
+        "modes": {
+          "specimen": 0.4,
+          "emblem": 0.3,
+          "portrait": 0.3
+        },
+        "note": "Small pixel-art cards in hand; confirm on capture."
+      },
+      "signatures_ref": "docs/oracle/hud/hud-signatures.json#9-kings"
+    }
+  },
+  "ledger": {
+    "style": [
+      "one-decision-then-spectacle yearly rhythm",
+      "adjacency synergy on a small grid",
+      "auto-resolved battles"
+    ],
+    "expression": [
+      "9 Kings' card art and card text",
+      "its specific kings and factions",
+      "its sprites, music and sound"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "pacing",
+        "target": "Oracle rules",
+        "setting": "Seasonal rhythm for the Ranch: one meaningful choice per season, then a short show of its result.",
+        "from_signature": "year_rhythm"
+      },
+      {
+        "layer": "mechanics",
+        "target": "Oracle rules",
+        "setting": "Neighbour bonuses between ranch buildings, shown with a visible glow link.",
+        "from_signature": "adjacency_synergy"
+      }
+    ],
+    "leave": [
+      "war theme",
+      "run-ending loss for young players"
+    ]
+  },
+  "sources": [
+    "Steam store page",
+    "public gameplay footage"
+  ],
+  "history": [
+    {
+      "note": "steam_appid, engine and art style must be confirmed by the indexer; values here are low-confidence."
+    }
+  ]
+}

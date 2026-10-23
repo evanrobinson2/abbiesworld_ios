@@ -1,0 +1,69 @@
+{
+  "appid": 252490,
+  "name": "Rust",
+  "store_url": "https://store.steampowered.com/app/252490/",
+  "genres": [
+    "Survival",
+    "Multiplayer"
+  ],
+  "short_description": "Brutal multiplayer survival: gather, build, raid.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Multiplayer"
+  ],
+  "summary": "Brutal multiplayer survival: gather, build, raid.",
+  "identity": {
+    "core_loop": "Wake naked, gather, build, defend, raid.",
+    "mechanics": null,
+    "ui_and_game_feel": "Harsh, social, emergent.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "spatial": 0.1,
+        "meta": 0.1,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Minimal HUD; the world shows threats.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Gritty realistic.",
+    "palette": null,
+    "audio_mood": "Realistic.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "Shows how players create stories, but far from kid-safe."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.89,
+      "expression": 0.67,
+      "structure": 0.78,
+      "social": 1.0,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.78
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

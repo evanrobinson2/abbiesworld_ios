@@ -1,0 +1,69 @@
+{
+  "appid": 1807640,
+  "name": "Alpha Zoo",
+  "store_url": "https://store.steampowered.com/app/1807640/",
+  "genres": [
+    "Kids",
+    "Educational",
+    "Exploration"
+  ],
+  "short_description": "A gentle alphabet zoo: wander and meet an animal for every letter.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Kids",
+    "Educational",
+    "Exploration"
+  ],
+  "summary": "A gentle alphabet zoo: wander and meet an animal for every letter.",
+  "identity": {
+    "core_loop": "Walk, find a letter, meet its animal, hear its name.",
+    "mechanics": null,
+    "ui_and_game_feel": "Soft, slow, no fail state; made for small children.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "none": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Animals and letters are in the world itself; almost no interface.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright simple low-poly with friendly shapes.",
+    "palette": null,
+    "audio_mood": "Warm narration and animal sounds.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Kids learn best when the world itself is the lesson; no menus between the child and the animal."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.11,
+      "challenge": 0.22,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.22,
+      "systems": 0.11,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

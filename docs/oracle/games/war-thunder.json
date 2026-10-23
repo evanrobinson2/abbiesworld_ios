@@ -1,0 +1,70 @@
+{
+  "appid": 236390,
+  "name": "War Thunder",
+  "store_url": "https://store.steampowered.com/app/236390/",
+  "genres": [
+    "Vehicle combat",
+    "Simulation"
+  ],
+  "short_description": "Historical tanks, planes and ships in large battles.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Vehicle combat",
+    "Simulation"
+  ],
+  "summary": "Historical tanks, planes and ships in large battles.",
+  "identity": {
+    "core_loop": "Pick a vehicle, fight, research the next one.",
+    "mechanics": null,
+    "ui_and_game_feel": "Weighty, realistic vehicles.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Damage cutaways on the vehicle; overlay markers.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic vehicles.",
+    "palette": null,
+    "audio_mood": "Engines and guns.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "Showing damage on a vehicle cutaway is clear and kid-legible."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.89,
+      "expression": 0.33,
+      "structure": 0.89,
+      "social": 0.67,
+      "systems": 0.89,
+      "chance": 0.78,
+      "session": 1.0
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "sim"
+  },
+  "review": "The hit cam that shows a shell travelling through a tank cutaway is wonderful teaching. The research grind is not."
+}

@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/explore",
+      "destination": "/explore/index.html"
+    },
+    {
+      "source": "/explore/",
+      "destination": "/explore/index.html"
+    },
+    {
       "source": "/r2/:path*",
       "destination": "https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev/:path*"
     },
@@ -19,6 +27,14 @@
     {
       "source": "/models/:id/",
       "destination": "/models/model.html"
+    },
+    {
+      "source": "/cards",
+      "destination": "/cards/index.html"
+    },
+    {
+      "source": "/cards/",
+      "destination": "/cards/index.html"
     },
     {
       "source": "/live-voice",
@@ -126,6 +142,22 @@
     },
     {
       "source": "/sandbox",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/v1",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/v1/",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/v2",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/v2/",
       "destination": "/simulations/index.html"
     },
     {
@@ -345,6 +377,15 @@
         }
       ],
       "source": "/manifest.webmanifest"
+    },
+    {
+      "source": "/explore/(.*)\\.(js|css)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -355,8 +396,25 @@
     },
     {
       "source": "/",
-      "destination": "/sandbox",
+      "has": [
+        {
+          "type": "host",
+          "value": "explore.abbies.world"
+        }
+      ],
+      "destination": "/explore",
       "permanent": false
+    },
+    {
+      "source": "/",
+      "destination": "/sandbox",
+      "permanent": false,
+      "missing": [
+        {
+          "type": "host",
+          "value": "explore.abbies.world"
+        }
+      ]
     },
     {
       "source": "/town-life",

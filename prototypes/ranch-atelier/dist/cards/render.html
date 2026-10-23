@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Card Forge · Render</title>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+<style>body{margin:0;padding:12px;background:#1d1712;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}canvas{display:block}</style>
+</head>
+<body>
+<!-- Headless render target for tools/card-forge/forge.mjs. ?ids=a,b&dpi=300&bleed=1&guides=1&scale=0.5 -->
+<script type="module">
+import { loadSet, renderCard } from './forge.mjs';
+const q = new URLSearchParams(location.search);
+const dpi = +(q.get('dpi') || 300), bleed = q.get('bleed') === '1', guides = q.get('guides') === '1', scale = +(q.get('scale') || 1);
+const { cards } = await loadSet(q.get('set') || undefined);
+const ids = q.get('ids') ? q.get('ids').split(',') : cards.map(c => c.id);
+window.results = [];
+for (const id of ids) {
+  const spec = cards.find(c => c.id === id);
+  if (!spec) { window.results.push({ id, error: 'not in set' }); continue; }
+  const { canvas, qc } = await renderCard(spec, { dpi, bleed, guides });
+  canvas.style.width = canvas.width * scale + 'px';
+  canvas.dataset.id = id;
+  document.body.append(canvas);
+  window.results.push({ id, qc, w: canvas.width, h: canvas.height });
+}
+window.done = true;
+</script>
+</body>
+</html>

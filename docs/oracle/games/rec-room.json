@@ -1,0 +1,73 @@
+{
+  "appid": 471710,
+  "name": "Rec Room",
+  "store_url": "https://store.steampowered.com/app/471710/",
+  "genres": [
+    "Social",
+    "Sandbox",
+    "Creation"
+  ],
+  "short_description": "A social game world where players make and share rooms and games.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Social",
+    "Sandbox",
+    "Creation"
+  ],
+  "summary": "A social game world where players make and share rooms and games.",
+  "identity": {
+    "core_loop": "Join a room, play a mini game, make your own.",
+    "mechanics": null,
+    "ui_and_game_feel": "Playful, social, crafty.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "overlay": 0.1,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Hand-held tools and in-world makerpen.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Chunky friendly shapes.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Building tools held in your hand, not menus."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 1.0,
+      "structure": 0.22,
+      "social": 1.0,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.56
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "sandbox"
+  },
+  "review": "Kids build games for each other with a pen they hold in the world. The 'make your own room' idea is close to the Holodeck."
+}

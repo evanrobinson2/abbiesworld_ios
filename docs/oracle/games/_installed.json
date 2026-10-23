@@ -1,0 +1,437 @@
+[
+ {
+  "appid": 2784470,
+  "name": "9 Kings",
+  "size_gb": 0.2
+ },
+ {
+  "appid": 1336490,
+  "name": "Against the Storm",
+  "size_gb": 6.5
+ },
+ {
+  "appid": 1807640,
+  "name": "Alpha Zoo",
+  "size_gb": 0.4
+ },
+ {
+  "appid": 945360,
+  "name": "Among Us",
+  "size_gb": 1.1
+ },
+ {
+  "appid": 3274580,
+  "name": "Anno 117: Pax Romana",
+  "size_gb": 131.2
+ },
+ {
+  "appid": 107410,
+  "name": "Arma 3",
+  "size_gb": 125.5
+ },
+ {
+  "appid": 1874880,
+  "name": "Arma Reforger",
+  "size_gb": 25.3
+ },
+ {
+  "appid": 107100,
+  "name": "Bastion",
+  "size_gb": 1.2
+ },
+ {
+  "appid": 5097440,
+  "name": "BIG BANG TO US",
+  "size_gb": 0.6
+ },
+ {
+  "appid": 1143810,
+  "name": "Black Skylands",
+  "size_gb": 2.0
+ },
+ {
+  "appid": 2078350,
+  "name": "Bluey: The Videogame",
+  "size_gb": 0.8
+ },
+ {
+  "appid": 2406770,
+  "name": "Bodycam",
+  "size_gb": 55.8
+ },
+ {
+  "appid": 2118810,
+  "name": "Breachway",
+  "size_gb": 3.6
+ },
+ {
+  "appid": 2412960,
+  "name": "Breathedge 2",
+  "size_gb": 9.9
+ },
+ {
+  "appid": 903930,
+  "name": "Brigador Killers",
+  "size_gb": 2.9
+ },
+ {
+  "appid": 1594320,
+  "name": "Captain of Industry",
+  "size_gb": 3.5
+ },
+ {
+  "appid": 370060,
+  "name": "Coffee Shop Tycoon",
+  "size_gb": 3.8
+ },
+ {
+  "appid": 228200,
+  "name": "Company of Heroes ",
+  "size_gb": 8.8
+ },
+ {
+  "appid": 4560,
+  "name": "Company of Heroes - Legacy Edition",
+  "size_gb": 9.0
+ },
+ {
+  "appid": 20540,
+  "name": "Company of Heroes: Tales of Valor",
+  "size_gb": 0.1
+ },
+ {
+  "appid": 1313140,
+  "name": "Cult of the Lamb",
+  "size_gb": 3.4
+ },
+ {
+  "appid": 1868140,
+  "name": "DAVE THE DIVER",
+  "size_gb": 5.5
+ },
+ {
+  "appid": 1976950,
+  "name": "Desktop Dungeons: Rewind",
+  "size_gb": 0.6
+ },
+ {
+  "appid": 1272320,
+  "name": "Diplomacy is Not an Option",
+  "size_gb": 10.3
+ },
+ {
+  "appid": 2592160,
+  "name": "Dispatch",
+  "size_gb": 14.2
+ },
+ {
+  "appid": 3590290,
+  "name": "DIVE or DIE - Children of Rain",
+  "size_gb": 6.0
+ },
+ {
+  "appid": 1637320,
+  "name": "Dome Keeper",
+  "size_gb": 1.2
+ },
+ {
+  "appid": 219740,
+  "name": "Don't Starve",
+  "size_gb": 1.5
+ },
+ {
+  "appid": 1455840,
+  "name": "Dorfromantik",
+  "size_gb": 0.7
+ },
+ {
+  "appid": 570,
+  "name": "Dota 2",
+  "size_gb": 71.9
+ },
+ {
+  "appid": 1046930,
+  "name": "Dota Underlords",
+  "size_gb": 3.0
+ },
+ {
+  "appid": 383120,
+  "name": "Empyrion - Galactic Survival",
+  "size_gb": 16.5
+ },
+ {
+  "appid": 1203620,
+  "name": "Enshrouded",
+  "size_gb": 48.3
+ },
+ {
+  "appid": 255500,
+  "name": "Entropy",
+  "size_gb": 4.7
+ },
+ {
+  "appid": 38400,
+  "name": "Fallout",
+  "size_gb": 0.5
+ },
+ {
+  "appid": 45400,
+  "name": "Fortix",
+  "size_gb": 0.1
+ },
+ {
+  "appid": 212680,
+  "name": "FTL: Faster Than Light",
+  "size_gb": 0.3
+ },
+ {
+  "appid": 1434950,
+  "name": "HighFleet",
+  "size_gb": 1.4
+ },
+ {
+  "appid": 1465460,
+  "name": "Infection Free Zone",
+  "size_gb": 5.8
+ },
+ {
+  "appid": 4595350,
+  "name": "Isolation Edge",
+  "size_gb": 29.6
+ },
+ {
+  "appid": 2820820,
+  "name": "Jotunnslayer: Hordes of Hel",
+  "size_gb": 25.8
+ },
+ {
+  "appid": 701160,
+  "name": "Kingdom Two Crowns",
+  "size_gb": 2.3
+ },
+ {
+  "appid": 1898290,
+  "name": "LEGO® Bricktales",
+  "size_gb": 1.0
+ },
+ {
+  "appid": 1363080,
+  "name": "Manor Lords",
+  "size_gb": 14.3
+ },
+ {
+  "appid": 113020,
+  "name": "Monaco",
+  "size_gb": 1.7
+ },
+ {
+  "appid": 2475490,
+  "name": "Mouthwashing",
+  "size_gb": 2.6
+ },
+ {
+  "appid": 292000,
+  "name": "No More Room in Hell 2",
+  "size_gb": 23.4
+ },
+ {
+  "appid": 3028310,
+  "name": "Nordhold",
+  "size_gb": 2.9
+ },
+ {
+  "appid": 1857090,
+  "name": "Norland",
+  "size_gb": 1.0
+ },
+ {
+  "appid": 466560,
+  "name": "Northgard: Definitive Edition",
+  "size_gb": 4.6
+ },
+ {
+  "appid": 728880,
+  "name": "Overcooked! 2",
+  "size_gb": 7.9
+ },
+ {
+  "appid": 3808690,
+  "name": "Pathogenic",
+  "size_gb": 1.6
+ },
+ {
+  "appid": 1952520,
+  "name": "PAW Patrol World",
+  "size_gb": 3.6
+ },
+ {
+  "appid": 1296610,
+  "name": "Peglin",
+  "size_gb": 0.3
+ },
+ {
+  "appid": 703080,
+  "name": "Planet Zoo",
+  "size_gb": 20.5
+ },
+ {
+  "appid": 3590,
+  "name": "Plants vs. Zombies: Game of the Year",
+  "size_gb": 0.0
+ },
+ {
+  "appid": 233450,
+  "name": "Prison Architect",
+  "size_gb": 0.5
+ },
+ {
+  "appid": 2059170,
+  "name": "Quasimorph",
+  "size_gb": 1.5
+ },
+ {
+  "appid": 252490,
+  "name": "Rust",
+  "size_gb": 52.1
+ },
+ {
+  "appid": 757310,
+  "name": "Sable",
+  "size_gb": 2.1
+ },
+ {
+  "appid": 3373500,
+  "name": "Scavland",
+  "size_gb": 0.9
+ },
+ {
+  "appid": 418240,
+  "name": "Shadow Tactics: Blades of the Shogun",
+  "size_gb": 7.3
+ },
+ {
+  "appid": 2659900,
+  "name": "Sixty Four",
+  "size_gb": 0.4
+ },
+ {
+  "appid": 1162750,
+  "name": "Songs of Syx",
+  "size_gb": 0.5
+ },
+ {
+  "appid": 107200,
+  "name": "Space Pirates and Zombies",
+  "size_gb": 0.2
+ },
+ {
+  "appid": 1750770,
+  "name": "Starcom: Unknown Space",
+  "size_gb": 2.6
+ },
+ {
+  "appid": 495420,
+  "name": "State of Decay 2",
+  "size_gb": 20.3
+ },
+ {
+  "appid": 2381620,
+  "name": "Steam Engine Simulator",
+  "size_gb": 0.1
+ },
+ {
+  "appid": 312670,
+  "name": "Strange Brigade",
+  "size_gb": 37.0
+ },
+ {
+  "appid": 1962700,
+  "name": "Subnautica 2",
+  "size_gb": 15.3
+ },
+ {
+  "appid": 1714040,
+  "name": "Super Auto Pets",
+  "size_gb": 0.5
+ },
+ {
+  "appid": 1913120,
+  "name": "Tears of Metal",
+  "size_gb": 3.6
+ },
+ {
+  "appid": 105600,
+  "name": "Terraria",
+  "size_gb": 0.7
+ },
+ {
+  "appid": 1601570,
+  "name": "The Alters",
+  "size_gb": 63.5
+ },
+ {
+  "appid": 1783560,
+  "name": "The Last Caretaker",
+  "size_gb": 16.3
+ },
+ {
+  "appid": 1266030,
+  "name": "The Pale Beyond",
+  "size_gb": 2.5
+ },
+ {
+  "appid": 282070,
+  "name": "This War of Mine",
+  "size_gb": 2.6
+ },
+ {
+  "appid": 377300,
+  "name": "Thunder Tier One",
+  "size_gb": 16.2
+ },
+ {
+  "appid": 2198150,
+  "name": "Tiny Glade",
+  "size_gb": 3.0
+ },
+ {
+  "appid": 508440,
+  "name": "Totally Accurate Battle Simulator",
+  "size_gb": 4.5
+ },
+ {
+  "appid": 1291340,
+  "name": "Townscaper",
+  "size_gb": 0.3
+ },
+ {
+  "appid": 892970,
+  "name": "Valheim",
+  "size_gb": 4.2
+ },
+ {
+  "appid": 3624140,
+  "name": "Wanderburg",
+  "size_gb": 0.7
+ },
+ {
+  "appid": 1611600,
+  "name": "WARNO",
+  "size_gb": 84.6
+ },
+ {
+  "appid": 973230,
+  "name": "We Who Are About To Die",
+  "size_gb": 6.7
+ },
+ {
+  "appid": 3041230,
+  "name": "Windrose",
+  "size_gb": 20.9
+ },
+ {
+  "appid": 1206560,
+  "name": "WorldBox - God Simulator",
+  "size_gb": 0.7
+ }
+]

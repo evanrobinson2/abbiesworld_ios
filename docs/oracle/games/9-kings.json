@@ -1,0 +1,122 @@
+{
+  "appid": 2784470,
+  "name": "9 Kings",
+  "store_url": "https://store.steampowered.com/app/2784470/",
+  "developers": [
+    "Sad Socket"
+  ],
+  "release": "May 23, 2025",
+  "short_description": "A fast-paced roguelike kingdom builder. Grow your empire and fight massive battles against powerful rival kings. Break the game with thousands of insane builds to become the King of Kings.",
+  "genres": [
+    "RPG",
+    "Strategy",
+    "Early Access"
+  ],
+  "categories": [
+    "Single-player",
+    "Multi-player",
+    "PvP",
+    "Online PvP",
+    "Cross-Platform Multiplayer",
+    "Steam Achievements",
+    "Full controller support",
+    "Steam Trading Cards",
+    "Camera Comfort",
+    "Custom Volume Controls",
+    "Adjustable Difficulty",
+    "Mouse Only Option",
+    "DualShock Controller Support",
+    "DualShock Controller Support",
+    "DualSense Controller Support",
+    "DualSense Controller Support",
+    "Save Anytime",
+    "Steam Input API Support",
+    "Touch Only Option",
+    "Steam Cloud",
+    "Family Sharing"
+  ],
+  "store_text_words": 359,
+  "header_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2784470/640a138fbc6918daa276a4653360eca9e4488b65/header.jpg?t=1792663338",
+  "install": {
+    "engine": "Unity",
+    "engine_hints": [
+      "Unity"
+    ],
+    "files": 40,
+    "top_extensions": {
+      ".dll": 8,
+      ".resource": 7,
+      ".bundle": 7,
+      ".dat": 4,
+      ".json": 3,
+      ".exe": 2,
+      ".bin": 2,
+      ".info": 1,
+      ".config": 1,
+      ".unity3d": 1,
+      ".txt": 1,
+      "(none)": 1
+    }
+  },
+  "identity": {
+    "core_loop": "Pick a card, place it on a small grid, watch the battle, survive the year, grow.",
+    "mechanics": null,
+    "ui_and_game_feel": "Snappy card drops onto plots; battles play out by themselves; quick, readable cause and effect.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Plot buffs and threats sit on tiles; the hand of cards is the one overlay; the enemy's banner tells you who comes next.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Chunky pixel-painterly kingdoms on a floating board.",
+    "palette": null,
+    "audio_mood": "Punchy war drums and short stings per placement.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A tiny board plus big consequences: every placement should visibly change the next fight."
+  },
+  "sources": [
+    "steam store api",
+    "install file names (no contents)",
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Roguelite",
+    "Card"
+  ],
+  "summary": "A roguelite kingdom builder where each year you place cards on a 3x3 plot and an enemy king attacks.",
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 0.22,
+      "systems": 0.56,
+      "chance": 0.67,
+      "session": 0.33
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "appid": 113020,
+  "name": "Monaco",
+  "store_url": "https://store.steampowered.com/app/113020/",
+  "genres": [
+    "Stealth",
+    "Co-op"
+  ],
+  "short_description": "Top-down heist co-op where everyone has a role.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Stealth",
+    "Co-op"
+  ],
+  "summary": "Top-down heist co-op where everyone has a role.",
+  "identity": {
+    "core_loop": "Plan, sneak, grab loot, panic, escape.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic co-op comedy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.5,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Vision cones and sound rings are spatial.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Graphic top-down.",
+    "palette": null,
+    "audio_mood": "Piano heist score.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Vision you can see turns stealth into play."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.56,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.67,
+      "systems": 0.56,
+      "chance": 0.22,
+      "session": 0.33
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

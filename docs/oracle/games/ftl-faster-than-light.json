@@ -1,0 +1,70 @@
+{
+  "appid": 212680,
+  "name": "FTL: Faster Than Light",
+  "store_url": "https://store.steampowered.com/app/212680/",
+  "genres": [
+    "Roguelike",
+    "Strategy",
+    "Space"
+  ],
+  "short_description": "Run a starship and crew through randomised sectors, pausing to manage battles.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Roguelike",
+    "Strategy",
+    "Space"
+  ],
+  "summary": "Run a starship and crew through randomised sectors, pausing to manage battles.",
+  "identity": {
+    "core_loop": "Jump, meet an event, fight, repair, upgrade, flee the fleet.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense pausable crises; every run a story.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The ship cutaway shows everything: fires, breaches, crew; power bars overlay.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Clean pixel art.",
+    "palette": null,
+    "audio_mood": "Iconic synth score that swells in battle.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "A cutaway of a home in crisis is the most legible simulation view."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.78,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.44,
+      "systems": 0.78,
+      "chance": 0.78,
+      "session": 0.78
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

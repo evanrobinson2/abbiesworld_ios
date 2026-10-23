@@ -1,0 +1,616 @@
+{
+  "schema_version": "1.1",
+  "game": {
+    "title": "Tiny Glade",
+    "steam_appid": 2198150,
+    "developer": "Pounce Light",
+    "publisher": "Pounce Light",
+    "release": "2024",
+    "engine": {
+      "value": "custom Rust engine",
+      "source": "estimate",
+      "confidence": 0.6,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    },
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Steam Deck"
+    ]
+  },
+  "core": {
+    "fantasy": "You are a gentle architect whose every stroke becomes a cottage or castle that looks hand-made.",
+    "pillars": [
+      "Nothing you do is wrong",
+      "The world answers every stroke with detail",
+      "Pure play, no goals"
+    ],
+    "signature_moment": "Dragging a line across a meadow and watching a stone wall rise, sprout a gate and grow ivy.",
+    "anti_goals": [
+      "no fail state",
+      "no resources or currency",
+      "no timer",
+      "no quests",
+      "almost no text"
+    ],
+    "signatures": [
+      {
+        "id": "stroke_to_wall",
+        "layer": "interaction",
+        "description": "Freeform drag becomes procedural walls, windows, roofs and paths that adapt to each other.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "settle_growth",
+        "layer": "interaction",
+        "description": "Placed pieces grow and settle with soft procedural animation rather than popping.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "storybook_light",
+        "layer": "art",
+        "description": "Warm, high-key, soft-shadowed lighting with strong ambient occlusion; diorama on a floating patch.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "no_wrong_moves",
+        "layer": "core",
+        "description": "Every edit is valid; the generator resolves conflicts so the player never sees an error.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ],
+    "recognisability": {
+      "value": 0.85,
+      "source": "estimate",
+      "confidence": 0.4,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    }
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "sensation": 0.25,
+        "expression": 0.4,
+        "discovery": 0.15,
+        "submission": 0.2
+      },
+      "motivations": {
+        "creativity": 0.95,
+        "immersion": 0.6,
+        "mastery": 0.1,
+        "action": 0.0,
+        "social": 0.1,
+        "achievement": 0.05
+      },
+      "emotional_targets": {
+        "calm": 0.9,
+        "delight": 0.8,
+        "pride": 0.6
+      },
+      "audience": {
+        "age": "all ages",
+        "skill_floor": "very low",
+        "context": "desk, short or long sessions"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "draw wall",
+          "input": "click-drag"
+        },
+        {
+          "verb": "place building",
+          "input": "drag"
+        },
+        {
+          "verb": "draw path",
+          "input": "drag"
+        },
+        {
+          "verb": "sculpt terrain",
+          "input": "drag"
+        },
+        {
+          "verb": "adjust roof/height",
+          "input": "drag handles"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "stroke",
+          "watch it grow",
+          "tweak",
+          "admire"
+        ],
+        "period_s": {
+          "value": 10,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "none",
+        "scoring": "none",
+        "resources": []
+      },
+      "randomness": {
+        "amount": 0.15,
+        "kind": "output"
+      },
+      "information": "perfect",
+      "systems": [
+        "procedural architecture from strokes",
+        "adaptive wall/roof/path joins",
+        "vegetation and ivy growth",
+        "ambient life (sheep, birds)"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 5,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "prior knowledge of public footage and store page; to be measured"
+        },
+        "rules_in_first_10_min": {
+          "value": 0,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "prior knowledge of public footage and store page; to be measured"
+        }
+      }
+    },
+    "dynamics": {
+      "emergent_behaviours": [
+        "players build sprawling castles and share screenshots",
+        "photo-mode framing as play"
+      ],
+      "decision_density_per_min": {
+        "value": 6,
+        "source": "estimate",
+        "confidence": 0.3,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "/min"
+      },
+      "skill_strategy_chance": {
+        "skill": 0.2,
+        "strategy": 0.0,
+        "chance": 0.05,
+        "expression": 0.75
+      },
+      "expression_space": {
+        "value": 0.9,
+        "source": "estimate",
+        "confidence": 0.5,
+        "method": "prior knowledge of public footage and store page; to be measured"
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse",
+          "gamepad"
+        ],
+        "mapping": "stroke"
+      },
+      "response": {
+        "input_latency_ms": {
+          "value": 50,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "ms"
+        },
+        "action_anim_ms": {
+          "value": 400,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "ms"
+        },
+        "easing": "soft spring settle"
+      },
+      "camera": {
+        "model": "orbit_diorama",
+        "pitch_deg": {
+          "value": 40,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "deg"
+        },
+        "constrained": true,
+        "motion": "damped orbit and zoom"
+      },
+      "forgiveness": {
+        "snapping": "freeform_autofit",
+        "undo": "unlimited",
+        "preview_before_commit": true,
+        "auto_repair": true
+      },
+      "juice": {
+        "squash_stretch": 0.3,
+        "particles": 0.3,
+        "screen_shake": 0.0,
+        "hit_stop": 0.0,
+        "scale_pop": 0.4,
+        "sound_on_action": 0.8,
+        "camera_kick": 0.0,
+        "procedural_settle": 0.95
+      },
+      "time_to_first_delight_s": {
+        "value": 20,
+        "source": "estimate",
+        "confidence": 0.4,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "s"
+      },
+      "friction_points": [
+        "finding a specific tool in the bottom bar"
+      ]
+    },
+    "art": {
+      "rendering": {
+        "style": "painterly",
+        "outlines": false,
+        "post": [
+          "soft bloom",
+          "depth of field in photo mode",
+          "warm grade"
+        ]
+      },
+      "palette": {
+        "dominant_hex": [
+          "#9DBF6A",
+          "#D9C8A0",
+          "#B5543C",
+          "#6E8FB5",
+          "#EDE3CC"
+        ],
+        "value_key": "high",
+        "mean_saturation": 0.45,
+        "warmth": 0.7,
+        "variation": "time of day and seasons"
+      },
+      "lighting": {
+        "time_of_day": "player-set, golden hour favoured",
+        "gi_ao": "real-time GI with strong soft AO",
+        "atmosphere": "light haze",
+        "shadow_softness": 0.8
+      },
+      "shape_language": {
+        "round": 0.6,
+        "square": 0.35,
+        "triangle": 0.05,
+        "silhouette_readability": 0.8
+      },
+      "proportion_and_scale": {
+        "stylisation": 0.6,
+        "toyness": 0.85
+      },
+      "motion": "procedural: grass sway, growing ivy, wandering sheep, birds",
+      "references": [
+        "storybook illustration",
+        "European village vernacular",
+        "miniature dioramas"
+      ]
+    },
+    "assets": {
+      "kit": "procedural",
+      "geometry": {
+        "poly_class": "mid",
+        "edges": "rounded",
+        "surface": "hand_wobble"
+      },
+      "materials": {
+        "texture_strategy": "hand_painted",
+        "roles": [
+          "stone",
+          "plaster",
+          "roof tile",
+          "timber",
+          "grass",
+          "path",
+          "water"
+        ],
+        "roughness_character": "matte"
+      },
+      "procedural": [
+        "walls and towers from strokes",
+        "roofs from footprints",
+        "windows and doors placed along walls",
+        "ivy and flowers",
+        "fences"
+      ],
+      "asset_vocabulary": [
+        "cottage",
+        "tower",
+        "stone wall",
+        "gate",
+        "path",
+        "pond",
+        "well",
+        "sheep",
+        "lantern",
+        "fence",
+        "ivy"
+      ],
+      "pipeline_mapping": {
+        "stone wall": "recipe: stroke-following wall with jittered stones",
+        "roof tile": "material role roof",
+        "settle growth": "GAME_FEEL placement settle"
+      }
+    },
+    "interface": {
+      "ui_mode_mix": {
+        "diegetic": 0.4,
+        "non_diegetic": 0.4,
+        "spatial": 0.2,
+        "meta": 0.0
+      },
+      "hud_coverage": {
+        "value": 0.08,
+        "source": "estimate",
+        "confidence": 0.4,
+        "method": "prior knowledge of public footage and store page; to be measured"
+      },
+      "text_words_per_min": {
+        "value": 2,
+        "source": "estimate",
+        "confidence": 0.4,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "words/min"
+      },
+      "menu_depth": {
+        "value": 1,
+        "source": "estimate",
+        "confidence": 0.4,
+        "method": "prior knowledge of public footage and store page; to be measured"
+      },
+      "typography": "soft rounded",
+      "iconography": "small painted icons in a bottom tray",
+      "onboarding": "contextual_hints",
+      "feedback_language": [
+        "the world itself",
+        "soft sounds"
+      ]
+    },
+    "audio": {
+      "music": {
+        "style": "gentle acoustic folk",
+        "instrumentation": [
+          "guitar",
+          "strings",
+          "piano"
+        ],
+        "adaptive": "sparse, ambient",
+        "density": 0.4,
+        "mode_character": "major, calm"
+      },
+      "sfx_character": "toy",
+      "action_coupling": 0.9,
+      "ambience": [
+        "birds",
+        "wind",
+        "water",
+        "sheep"
+      ],
+      "voice": "none"
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.4,
+        "enacted": 0.0,
+        "embedded": 0.1,
+        "emergent": 0.5
+      },
+      "tone": {
+        "cozy_tense": -0.95,
+        "whimsical_grounded": -0.4,
+        "earnest_ironic": -0.8,
+        "quiet_loud": -0.9,
+        "handmade_industrial": -0.9
+      },
+      "themes": [
+        "home",
+        "craft",
+        "pastoral calm"
+      ],
+      "characters": "none; sheep and villagers as ambient life",
+      "humour": "gentle"
+    },
+    "pacing": {
+      "structure": "sandbox",
+      "session_minutes": {
+        "value": 45,
+        "source": "estimate",
+        "confidence": 0.3,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "min"
+      },
+      "tension_curve": "flat_calm",
+      "failure_cost": "none",
+      "unlocks": [],
+      "first_ten_minutes": [
+        {
+          "t": "0:00",
+          "event": "empty glade, short prompt"
+        },
+        {
+          "t": "0:20",
+          "event": "first wall drawn and grows"
+        },
+        {
+          "t": "3:00",
+          "event": "first cottage and roof"
+        },
+        {
+          "t": "8:00",
+          "event": "player decorating freely"
+        }
+      ]
+    },
+    "market": {
+      "steam_tags": [
+        "Building",
+        "Relaxing",
+        "Cozy",
+        "Sandbox",
+        "Cute"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "time": {
+          "mix": {
+            "diegetic": 0.8,
+            "overlay": 0.2
+          },
+          "timing": "summoned",
+          "note": "Time of day is the sky; a slider when you ask.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "thing_state": {
+          "mix": {
+            "diegetic": 0.9,
+            "spatial": 0.1
+          },
+          "timing": "on_change",
+          "note": "Buildings grow and settle; handles appear on hover.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "none": 1.0
+          },
+          "timing": "absent",
+          "note": "No goals.",
+          "confidence": 0.8,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "A small bottom tray of tools.",
+          "confidence": 0.6,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.1,
+        "overlay": 0.15,
+        "none": 0.25
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "always_on_count": {
+          "value": 1,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "drawn_as": "world_material"
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "time of day / season",
+            "channels": [
+              "light",
+              "sound",
+              "animals",
+              "weather"
+            ],
+            "note": "Sky, lamps, birdsong and sheep shift together."
+          }
+        ],
+        "max_channels": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "adapts_score": {
+          "value": 0.8,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        }
+      },
+      "social_channel": {
+        "carriers": {
+          "body_language": 0.6,
+          "none": 0.4
+        },
+        "note": "Villagers and sheep only as ambient life."
+      },
+      "dialects": [],
+      "card_art": {
+        "uses_cards": false
+      },
+      "signatures_ref": "docs/oracle/hud/hud-signatures.json#tiny-glade"
+    }
+  },
+  "ledger": {
+    "style": [
+      "stroke-to-structure procedural building as a mechanic",
+      "no-fail sandbox structure",
+      "warm high-key soft lighting",
+      "settle-and-grow placement feel",
+      "diorama-on-a-patch framing"
+    ],
+    "expression": [
+      "Tiny Glade's specific wall, roof and window models and textures",
+      "its music and sound files",
+      "its UI art and icons",
+      "the overall look as a whole (we must not ship a lookalike)"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "interaction",
+        "target": "GAME_FEEL placement",
+        "setting": "Every placement settles over 300-500 ms with a spring and a soft sound; no popping.",
+        "from_signature": "settle_growth"
+      },
+      {
+        "layer": "mechanics",
+        "target": "Ranch build tools",
+        "setting": "Fences and paths drawn as strokes, generated by our own recipe.",
+        "from_signature": "stroke_to_wall"
+      },
+      {
+        "layer": "core",
+        "target": "Oracle rules",
+        "setting": "Builder modes have no wrong moves: resolve conflicts instead of rejecting.",
+        "from_signature": "no_wrong_moves"
+      }
+    ],
+    "leave": [
+      "medieval castle vocabulary",
+      "free-floating terrain patch as the only frame"
+    ]
+  },
+  "sources": [
+    "Steam store page",
+    "Pounce Light developer posts",
+    "public gameplay footage"
+  ]
+}

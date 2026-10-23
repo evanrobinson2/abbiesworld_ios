@@ -37,6 +37,7 @@ async function generate(root, output) {
   for(const href of ['/terrain-editor','/procedural.html'])alias(terrain,href);
   const home=byPath.get('/');for(const href of ['/index.html','/authored-ranch.html'])alias(home,href);
   add('/sandbox/outbreak','Outbreak','Play','Zombies pursue people across connected tiles; equip survivors and run the encounter.');
+  add('/cards','Card Forge','Tools','Collection-grade game cards from the Ranch models and concept art, ready for print.');
   add('/scene-generator/prefabs','Prefabs','Assets','Search the catalog of reusable scenes and pieces.');
   const {SCENE_TYPES} = await import(pathToFileURL(path.join(root,'scene-registry.js')).href);
   for(const scene of Object.values(SCENE_TYPES)) {

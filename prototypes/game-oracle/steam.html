@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Steam Library</title><link rel="stylesheet" href="/style.css">
+<style>.lib{max-width:960px;margin:0 auto;padding:16px}.lib input,.lib select{font:inherit;padding:8px 10px;border-radius:10px}.lib .row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.lib table{width:100%;border-collapse:collapse}.lib td,.lib th{padding:6px 4px;border-bottom:1px solid #e3dccd;text-align:left;vertical-align:top}.lib .meta{opacity:.7;font-size:.9em}</style></head><body>
+<header><a class="brand" href="/">Oracle <span>Steam library</span></a></header>
+<main class="lib"><h1>Steam library</h1><p id="stats" class="meta">Loading…</p>
+<div class="row"><input id="q" type="search" placeholder="Search by name or style"><select id="installed"><option value="">Installed or not</option><option value="true">Installed</option><option value="false">Not installed</option></select></div>
+<table><thead><tr><th>Game</th><th>Installed</th><th>Style</th><th>Studied</th></tr></thead><tbody id="rows"></tbody></table>
+<p><a href="/ask">Ask the Oracle</a> · <a href="/">Game art library</a> · <a href="/api/steam">JSON</a></p></main>
+<script type="module">
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let t;async function load(){const p=new URLSearchParams();if($('#q').value)p.set('q',$('#q').value);if($('#installed').value)p.set('installed',$('#installed').value);
+ const d=await fetch('/api/steam?'+p).then(r=>r.json());
+ $('#stats').textContent=`${d.counts.installed} installed · ${d.counts.owned} in the owned snapshot (${d.snapshot.ownership}) · ${d.counts.identities} identity records · ${d.counts.profiles} study profiles · showing ${d.total}`;
+ $('#rows').innerHTML=d.results.map(r=>`<tr><td><a href="https://store.steampowered.com/app/${esc(r.steamAppId)}/" target="_blank" rel="noopener">${esc(r.name)}</a>${r.ownership==='owned-snapshot'?'':' <span class="meta">ownership unverified</span>'}</td><td>${r.installed?(r.sizeGb!=null?r.sizeGb+' GB':'yes'):'<span class="meta">no</span>'}</td><td class="meta">${esc(r.styles?Object.values(r.styles).flat().slice(0,4).join(' · '):'')}</td><td>${r.identity?`<a href="/api/knowledge?identity=${esc(r.steamAppId)}">identity</a>`:r.profile?`<a href="/api/knowledge?identity=${esc(r.steamAppId)}">profile</a>`:''}</td></tr>`).join('');}
+$('#q').oninput=()=>{clearTimeout(t);t=setTimeout(load,200);};$('#installed').onchange=load;load();
+</script></body></html>

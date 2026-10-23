@@ -1,0 +1,695 @@
+{
+ "schema_note": "Each entry uses the 'signature' shape from docs/oracle/identity/game-identity.schema.json (layers aesthetics, art, information_grammar, interface). class=style may be learned from; class=expression is never copied. 'palettes' holds each game's palette in the identity schema's layers.art.palette shape plus shape_language. Hex values are hand-estimated from memory of the games (source estimate, with a confidence) because this environment could not fetch captures; Firewatch's notes come from a GDC 2015 talk write-up (store_page source). Replace them with footage_cv measurements from check_aesthetic.py --measure when the PC captures land.",
+ "date": "2026-10-23",
+ "palettes": {
+  "tiny-glade": {
+   "title": "Tiny Glade (Pounce Light, 2024)",
+   "dominant_hex": [
+    "#9DBF6A",
+    "#D9C8A0",
+    "#B5543C",
+    "#6E8FB5",
+    "#EDE3CC"
+   ],
+   "value_key": "high",
+   "warmth": 0.7,
+   "mean_saturation": 0.45,
+   "shape_language": {
+    "round": 0.6,
+    "square": 0.35,
+    "triangle": 0.05
+   },
+   "source": "estimate",
+   "confidence": 0.6
+  },
+  "bricktales": {
+   "title": "LEGO Bricktales (ClockStone, 2022)",
+   "dominant_hex": [
+    "#C91A09",
+    "#F2CD37",
+    "#0055BF",
+    "#237841",
+    "#E4CD9E",
+    "#6C6E68"
+   ],
+   "value_key": "high",
+   "warmth": 0.55,
+   "mean_saturation": 0.65,
+   "shape_language": {
+    "round": 0.2,
+    "square": 0.75,
+    "triangle": 0.05
+   },
+   "source": "estimate",
+   "confidence": 0.7
+  },
+  "dorfromantik": {
+   "title": "Dorfromantik (Toukana, 2022)",
+   "dominant_hex": [
+    "#A9C46C",
+    "#E7D17A",
+    "#5B8C5A",
+    "#7FB6C9",
+    "#D96D4B"
+   ],
+   "value_key": "high",
+   "warmth": 0.65,
+   "mean_saturation": 0.55,
+   "shape_language": {
+    "round": 0.5,
+    "square": 0.3,
+    "triangle": 0.2
+   },
+   "source": "estimate",
+   "confidence": 0.6
+  },
+  "9-kings": {
+   "title": "9 Kings (Sad Socket, 2025 EA)",
+   "dominant_hex": [
+    "#2E2B3A",
+    "#6FA04B",
+    "#D9B25A",
+    "#B94A48",
+    "#5C7DB8"
+   ],
+   "value_key": "mid",
+   "warmth": 0.5,
+   "mean_saturation": 0.6,
+   "shape_language": {
+    "round": 0.3,
+    "square": 0.6,
+    "triangle": 0.1
+   },
+   "source": "estimate",
+   "confidence": 0.4
+  },
+  "besiege": {
+   "title": "Besiege (Spiderling, 2015/2020)",
+   "dominant_hex": [
+    "#8A9A5B",
+    "#A47A4B",
+    "#C9B98F",
+    "#5E6E7E",
+    "#B8442E"
+   ],
+   "value_key": "mid",
+   "warmth": 0.55,
+   "mean_saturation": 0.35,
+   "shape_language": {
+    "round": 0.3,
+    "square": 0.6,
+    "triangle": 0.1
+   },
+   "source": "estimate",
+   "confidence": 0.55
+  },
+  "dont-starve": {
+   "title": "Don't Starve (Klei, 2013)",
+   "dominant_hex": [
+    "#2B2118",
+    "#6B5B3E",
+    "#8C7A4F",
+    "#A33B2B",
+    "#3E5A4A",
+    "#E8D7A9"
+   ],
+   "value_key": "low",
+   "warmth": 0.55,
+   "mean_saturation": 0.3,
+   "shape_language": {
+    "round": 0.25,
+    "square": 0.15,
+    "triangle": 0.6
+   },
+   "source": "estimate",
+   "confidence": 0.65
+  },
+  "this-war-of-mine": {
+   "title": "This War of Mine (11 bit, 2014)",
+   "dominant_hex": [
+    "#2A2928",
+    "#4A4A48",
+    "#8C8A84",
+    "#B7AFA0",
+    "#9C3B2E"
+   ],
+   "value_key": "low",
+   "warmth": 0.3,
+   "mean_saturation": 0.1,
+   "shape_language": {
+    "round": 0.1,
+    "square": 0.7,
+    "triangle": 0.2
+   },
+   "source": "estimate",
+   "confidence": 0.6
+  },
+  "steamworld-dig": {
+   "title": "SteamWorld Dig (Image & Form, 2013)",
+   "dominant_hex": [
+    "#D9A35B",
+    "#8B5A2B",
+    "#3F2A1E",
+    "#4E6C8A",
+    "#6BC2C8",
+    "#F2D16B"
+   ],
+   "value_key": "mid",
+   "warmth": 0.6,
+   "mean_saturation": 0.5,
+   "shape_language": {
+    "round": 0.5,
+    "square": 0.35,
+    "triangle": 0.15
+   },
+   "source": "estimate",
+   "confidence": 0.5
+  },
+  "firewatch": {
+   "title": "Firewatch (Campo Santo, 2016)",
+   "dominant_hex": [
+    "#F2A65A",
+    "#E5623C",
+    "#7A3B4E",
+    "#2E3B55",
+    "#F6D6A0"
+   ],
+   "value_key": "mid",
+   "warmth": 0.7,
+   "mean_saturation": 0.6,
+   "shape_language": {
+    "round": 0.3,
+    "square": 0.3,
+    "triangle": 0.4
+   },
+   "source": "store_page",
+   "confidence": 0.8
+  },
+  "journey": {
+   "title": "Journey (thatgamecompany, 2012)",
+   "dominant_hex": [
+    "#E8B25C",
+    "#D9775A",
+    "#6B4A7A",
+    "#2A3A6A",
+    "#F4F0E8",
+    "#B3262E"
+   ],
+   "value_key": "mid",
+   "warmth": 0.65,
+   "mean_saturation": 0.5,
+   "shape_language": {
+    "round": 0.5,
+    "square": 0.1,
+    "triangle": 0.4
+   },
+   "source": "estimate",
+   "confidence": 0.7
+  },
+  "townscaper": {
+   "title": "Townscaper (Oskar Stalberg, 2021)",
+   "dominant_hex": [
+    "#E9746A",
+    "#F2C14E",
+    "#7FB7BE",
+    "#F5EFE0",
+    "#3C6E91"
+   ],
+   "value_key": "high",
+   "warmth": 0.6,
+   "mean_saturation": 0.55,
+   "shape_language": {
+    "round": 0.5,
+    "square": 0.4,
+    "triangle": 0.1
+   },
+   "source": "estimate",
+   "confidence": 0.6
+  },
+  "monument-valley": {
+   "title": "Monument Valley (ustwo, 2014)",
+   "dominant_hex": [
+    "#F2B5A0",
+    "#8FC1C9",
+    "#E8D9B5",
+    "#5A6E9A",
+    "#D6584B"
+   ],
+   "value_key": "high",
+   "warmth": 0.55,
+   "mean_saturation": 0.4,
+   "shape_language": {
+    "round": 0.2,
+    "square": 0.7,
+    "triangle": 0.1
+   },
+   "source": "estimate",
+   "confidence": 0.65
+  },
+  "a-short-hike": {
+   "title": "A Short Hike (adamgryu, 2019)",
+   "dominant_hex": [
+    "#F5C35A",
+    "#5FA37A",
+    "#3B6E8F",
+    "#E37B5A",
+    "#F2E6CF"
+   ],
+   "value_key": "mid",
+   "warmth": 0.6,
+   "mean_saturation": 0.5,
+   "shape_language": {
+    "round": 0.6,
+    "square": 0.2,
+    "triangle": 0.2
+   },
+   "source": "estimate",
+   "confidence": 0.6
+  },
+  "obra-dinn": {
+   "title": "Return of the Obra Dinn (Lucas Pope, 2018)",
+   "dominant_hex": [
+    "#333319",
+    "#E5FFFF"
+   ],
+   "value_key": "mid",
+   "warmth": 0.3,
+   "mean_saturation": 0.05,
+   "shape_language": {
+    "round": 0.2,
+    "square": 0.6,
+    "triangle": 0.2
+   },
+   "source": "estimate",
+   "confidence": 0.95
+  }
+ },
+ "games": {
+  "tiny-glade": [
+   {
+    "id": "golden_hour_gi",
+    "layer": "art",
+    "description": "Warm low sun with soft real-time GI and deep soft AO; shadows fill with sky colour, so nothing goes grey.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "material_trio",
+    "layer": "aesthetics",
+    "description": "Few materials (stone, plaster, terracotta, grass, water) reused everywhere; coherence comes from the small set, not from rules.",
+    "class": "style",
+    "confidence": 0.75
+   },
+   {
+    "id": "growing_motif",
+    "layer": "art",
+    "description": "Ivy, flowers and moss creep onto whatever you build: the world answers the builder with colour.",
+    "class": "style",
+    "confidence": 0.7
+   },
+   {
+    "id": "no_ui_palette",
+    "layer": "interface",
+    "description": "Almost no UI colour; the world is the only saturated thing on screen.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "cottage_look",
+    "layer": "art",
+    "description": "The particular cottage, castle and rooftile designs.",
+    "class": "expression",
+    "confidence": 0.9
+   }
+  ],
+  "bricktales": [
+   {
+    "id": "manufactured_palette",
+    "layer": "aesthetics",
+    "description": "Every colour is a real brick colour, so any build is in-gamut by construction: coherence enforced by the parts list.",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "stud_motif",
+    "layer": "art",
+    "description": "The stud repeats at every scale (ground, trees, water, characters): one motif binds the world.",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "diorama_plinth",
+    "layer": "art",
+    "description": "Each scene is a diorama on a base, held like a toy.",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "biome_dialect",
+    "layer": "aesthetics",
+    "description": "Each world (jungle, desert, city) swaps the brick palette but keeps the grammar.",
+    "class": "style",
+    "confidence": 0.75
+   },
+   {
+    "id": "lego_brand",
+    "layer": "art",
+    "description": "LEGO brick shapes, minifigures and branding.",
+    "class": "expression",
+    "confidence": 0.95
+   }
+  ],
+  "dorfromantik": [
+   {
+    "id": "hue_is_rule",
+    "layer": "information_grammar",
+    "description": "Each tile type owns a hue family: wheat gold, forest green, water blue, red-roofed villages. You read the scoring rules from colour plus shape at a glance.",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "idealised_painted",
+    "layer": "aesthetics",
+    "description": "An 'ideal and harmonic interpretation' of rural landscape, painted rather than realistic (developers, Game Developer).",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "toy_board",
+    "layer": "aesthetics",
+    "description": "Painted, haptic, board-game feel.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "void_fade",
+    "layer": "art",
+    "description": "The board fades to a pale void at its edge. Against our house rule (nothing masks the world).",
+    "class": "style",
+    "confidence": 0.7
+   },
+   {
+    "id": "tile_art",
+    "layer": "art",
+    "description": "The particular tile artwork and village models.",
+    "class": "expression",
+    "confidence": 0.9
+   }
+  ],
+  "9-kings": [
+   {
+    "id": "faction_hue",
+    "layer": "information_grammar",
+    "description": "Each king has a colour; whose plot and whose army it is reads from hue across the board.",
+    "class": "style",
+    "confidence": 0.6
+   },
+   {
+    "id": "dark_frame",
+    "layer": "aesthetics",
+    "description": "A dark surround makes the small bright kingdom tiles pop: the backdrop is the quietest value.",
+    "class": "style",
+    "confidence": 0.55
+   },
+   {
+    "id": "pixel_crisp",
+    "layer": "art",
+    "description": "Crisp pixel-art units at small scale; silhouettes before detail.",
+    "class": "style",
+    "confidence": 0.55
+   },
+   {
+    "id": "king_designs",
+    "layer": "art",
+    "description": "The kings, card art and unit sprites.",
+    "class": "expression",
+    "confidence": 0.9
+   }
+  ],
+  "besiege": [
+   {
+    "id": "material_grammar",
+    "layer": "aesthetics",
+    "description": "Wood, iron, canvas and brass parts: the medieval-engineer motif makes any contraption look like it belongs.",
+    "class": "style",
+    "confidence": 0.75
+   },
+   {
+    "id": "quiet_levels",
+    "layer": "aesthetics",
+    "description": "Muted, low-detail levels so the player's machine is the most readable thing on screen.",
+    "class": "style",
+    "confidence": 0.7
+   },
+   {
+    "id": "part_reads_function",
+    "layer": "information_grammar",
+    "description": "Part material says function (metal for joints and blades, wood for structure, cloth for sails).",
+    "class": "style",
+    "confidence": 0.6
+   },
+   {
+    "id": "block_set",
+    "layer": "art",
+    "description": "The particular block shapes and level art.",
+    "class": "expression",
+    "confidence": 0.9
+   }
+  ],
+  "dont-starve": [
+   {
+    "id": "ink_paper",
+    "layer": "aesthetics",
+    "description": "Ink outlines on paper-cutout figures; 'sketchy newspaper cartoon' (developers, Game Developer).",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "light_is_life",
+    "layer": "information_grammar",
+    "description": "Night drains the world to black and only firelight keeps warm colour: light radius is survival.",
+    "class": "style",
+    "confidence": 0.9
+   },
+   {
+    "id": "sanity_grade",
+    "layer": "information_grammar",
+    "description": "Low sanity desaturates and distorts the screen (meta) and wakes shadow creatures (diegetic).",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "season_recolour",
+    "layer": "aesthetics",
+    "description": "Each season recolours the whole world: autumn amber, winter blue-white, spring green, summer dust.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "spiky_shape",
+    "layer": "art",
+    "description": "Triangle-heavy, spindly silhouettes signal threat; a horror shape language we keep out of a kids' game.",
+    "class": "style",
+    "confidence": 0.75
+   },
+   {
+    "id": "klei_characters",
+    "layer": "art",
+    "description": "Wilson, the character designs and Burton/Gorey-like look.",
+    "class": "expression",
+    "confidence": 0.95
+   }
+  ],
+  "this-war-of-mine": [
+   {
+    "id": "near_monochrome",
+    "layer": "aesthetics",
+    "description": "Charcoal and sepia, 'old sepia photography' (80.lv interview). Colour is almost absent, so any warm hue (a stove, a candle) carries enormous weight.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "hatched_unknown",
+    "layer": "information_grammar",
+    "description": "Unexplored rooms are dark and hatched; what you know is lit.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "colour_scarcity",
+    "layer": "aesthetics",
+    "description": "Scarcity of colour as tone: the lesson is that accents are precious, not that we want grey.",
+    "class": "style",
+    "confidence": 0.75
+   },
+   {
+    "id": "war_photo",
+    "layer": "art",
+    "description": "The charcoal character portraits and war imagery.",
+    "class": "expression",
+    "confidence": 0.95
+   }
+  ],
+  "steamworld-dig": [
+   {
+    "id": "depth_strata",
+    "layer": "information_grammar",
+    "description": "Underground layers change hue with depth (warm dirt, then cooler rock): you know how deep you are from colour.",
+    "class": "style",
+    "confidence": 0.7
+   },
+   {
+    "id": "ore_value_hue",
+    "layer": "information_grammar",
+    "description": "Ore colour and sparkle say value; gems are the most saturated thing underground.",
+    "class": "style",
+    "confidence": 0.75
+   },
+   {
+    "id": "lamp_radius",
+    "layer": "information_grammar",
+    "description": "The lamp's light radius is the palette: lit warm, unlit near-black.",
+    "class": "style",
+    "confidence": 0.65
+   },
+   {
+    "id": "steambot_designs",
+    "layer": "art",
+    "description": "Rusty and the steambot western designs.",
+    "class": "expression",
+    "confidence": 0.9
+   }
+  ],
+  "firewatch": [
+   {
+    "id": "layered_bands",
+    "layer": "aesthetics",
+    "description": "Bold colours in distinct depth layers separated by fog; flat shapes with strong silhouettes (GDC 2015, Jane Ng).",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "colour_script",
+    "layer": "information_grammar",
+    "description": "A colour script tied to story beats; the sky drives the palette and changes as you move ('no birthday-party colours when you want spooky').",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "moss_poster",
+    "layer": "art",
+    "description": "Olly Moss's poster look and the particular landscapes.",
+    "class": "expression",
+    "confidence": 0.95
+   }
+  ],
+  "journey": [
+   {
+    "id": "palette_arc",
+    "layer": "information_grammar",
+    "description": "The palette walks the story: gold sand, pink sunset, blue underground, white snow, gold again. Colour is the plot.",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "one_red",
+    "layer": "information_grammar",
+    "description": "Red cloth is the only red: the scarf and banners mean 'flight and companionship'. A reserved hue.",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "robed_traveller",
+    "layer": "art",
+    "description": "The traveller design and glyphs.",
+    "class": "expression",
+    "confidence": 0.95
+   }
+  ],
+  "townscaper": [
+   {
+    "id": "safe_swatches",
+    "layer": "aesthetics",
+    "description": "The player picks house colours from a swatch row tuned to similar value and chroma, so every choice harmonises. The exact pattern a child's picker needs.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "grammar_not_assets",
+    "layer": "aesthetics",
+    "description": "Rules grow arches, stairs and roofs from the grid; the motif emerges from the grammar.",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "stalberg_town",
+    "layer": "art",
+    "description": "The particular house models.",
+    "class": "expression",
+    "confidence": 0.9
+   }
+  ],
+  "monument-valley": [
+   {
+    "id": "chapter_palettes",
+    "layer": "aesthetics",
+    "description": "Each chapter is its own pastel palette over the same isometric grammar: a place dialect.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "flat_light",
+    "layer": "aesthetics",
+    "description": "Faces lit by flat value steps (top light, left mid, right dark), so form reads with no texture.",
+    "class": "style",
+    "confidence": 0.85
+   },
+   {
+    "id": "ida_cone",
+    "layer": "art",
+    "description": "Ida's white cone hat and the specific architecture.",
+    "class": "expression",
+    "confidence": 0.95
+   }
+  ],
+  "a-short-hike": [
+   {
+    "id": "golden_feather",
+    "layer": "information_grammar",
+    "description": "Golden feathers are the most saturated gold in the world and always mean 'climb further'. Reserved accent.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "chunky_pixels",
+    "layer": "aesthetics",
+    "description": "3D rendered at low resolution with a warm grade: detail density held down so the whole island reads as one thing.",
+    "class": "style",
+    "confidence": 0.8
+   },
+   {
+    "id": "claire",
+    "layer": "art",
+    "description": "Claire and the island's character designs.",
+    "class": "expression",
+    "confidence": 0.95
+   }
+  ],
+  "obra-dinn": [
+   {
+    "id": "one_bit",
+    "layer": "aesthetics",
+    "description": "Two colours and dithering: the most extreme proof that coherence comes from a constraint everything obeys.",
+    "class": "style",
+    "confidence": 0.95
+   },
+   {
+    "id": "pope_dither",
+    "layer": "art",
+    "description": "The specific dithering shader look.",
+    "class": "expression",
+    "confidence": 0.8
+   }
+  ]
+ }
+}

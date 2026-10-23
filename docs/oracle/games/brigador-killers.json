@@ -1,0 +1,69 @@
+{
+  "appid": 903930,
+  "name": "Brigador Killers",
+  "store_url": "https://store.steampowered.com/app/903930/",
+  "genres": [
+    "Action",
+    "Mech"
+  ],
+  "short_description": "An isometric mech action game in a ruined neon city where everything is destructible.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Mech"
+  ],
+  "summary": "An isometric mech action game in a ruined neon city where everything is destructible.",
+  "identity": {
+    "core_loop": "Pick a mech and pilot, smash through a district, hit objectives.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tanky, tactile, destructive.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Mostly world and minimap; damage shows on buildings.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Pre-rendered isometric neon city.",
+    "palette": null,
+    "audio_mood": "Synthwave.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Destruction as information: the path you carved is the story."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.78,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.22,
+      "session": 0.44
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

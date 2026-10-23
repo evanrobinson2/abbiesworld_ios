@@ -31,15 +31,15 @@ class ServerConfig {
         }
         
         // 3. Default fallback
-        return "http://abbies.world:8000"
+        return "http://game.abbies.world:8000"
     }
     
     /// Server hostname (extracted from baseURL)
     var hostname: String {
         guard let url = URL(string: baseURL) else {
-            return "abbies.world"
+            return "game.abbies.world"
         }
-        return url.host ?? "abbies.world"
+        return url.host ?? "game.abbies.world"
     }
     
     /// Server port (extracted from baseURL)

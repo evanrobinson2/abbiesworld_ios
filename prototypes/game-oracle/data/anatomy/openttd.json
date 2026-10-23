@@ -1,0 +1,1034 @@
+{
+  "id": "openttd",
+  "name": "OpenTTD",
+  "fileCount": 145,
+  "extractedBytes": 49815711,
+  "extensions": {
+    ".lng": 66,
+    ".nut": 29,
+    ".md": 18,
+    ".example": 8,
+    ".obm": 4,
+    ".ttf": 4,
+    ".txt": 4,
+    ".obs": 3,
+    ".obg": 3,
+    ".grf": 2,
+    ".exe": 1,
+    ".bmp": 1,
+    ".dat": 1,
+    ".tar": 1
+  },
+  "packages": [
+    {
+      "name": "004-1-openttd-15.3-windows-win64.zip",
+      "sha256": "61c0a6a43d81008c7ff4330fb56351bbf66a980cdad041f1d0e08b51f2eeb34c",
+      "exitCode": 0
+    },
+    {
+      "name": "004-2-opengfx2_classic-20260709-main-g7a17fb3704-all.zip",
+      "sha256": "2b30fbcab8d6c115a1b89e3a3372a5123acf533eca8885a06ee69a70e1c05aab",
+      "exitCode": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "package-1/openttd-15.3-windows-win64/changelog.md",
+      "bytes": 654421
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/CONTRIBUTING.md",
+      "bytes": 15790
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/COPYING.md",
+      "bytes": 17949
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/CREDITS.md",
+      "bytes": 3463
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/known-bugs.md",
+      "bytes": 20299
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/openttd.exe",
+      "bytes": 17912840
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/README.md",
+      "bytes": 9747
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_0.7.nut",
+      "bytes": 7869
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.0.nut",
+      "bytes": 2678
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.1.nut",
+      "bytes": 3206
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.10.nut",
+      "bytes": 673
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.11.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.2.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.3.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.4.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.5.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.6.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.7.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.8.nut",
+      "bytes": 1007
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_1.9.nut",
+      "bytes": 672
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_12.nut",
+      "bytes": 948
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_13.nut",
+      "bytes": 669
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/ai/compat_14.nut",
+      "bytes": 2323
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/no_music.obm",
+      "bytes": 4190
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/no_sound.obs",
+      "bytes": 3785
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/OpenTTD-Mono.ttf",
+      "bytes": 72056
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/OpenTTD-Sans.ttf",
+      "bytes": 77404
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/OpenTTD-Serif.ttf",
+      "bytes": 93120
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/OpenTTD-Small.ttf",
+      "bytes": 68308
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/openttd.32.bmp",
+      "bytes": 2104
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/openttd.grf",
+      "bytes": 650822
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/opntitle.dat",
+      "bytes": 156304
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_dos.obg",
+      "bytes": 5916
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_dos.obm",
+      "bytes": 5429
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_dos.obs",
+      "bytes": 5266
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_dos_de.obg",
+      "bytes": 6534
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_extra.grf",
+      "bytes": 445288
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_tto.obm",
+      "bytes": 6199
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_win.obg",
+      "bytes": 6086
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_win.obm",
+      "bytes": 8256
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/baseset/orig_win.obs",
+      "bytes": 5820
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/admin_network.md",
+      "bytes": 10469
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/debugging_desyncs.md",
+      "bytes": 3074
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/desync.md",
+      "bytes": 12004
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/directory_structure.md",
+      "bytes": 6360
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/eints.md",
+      "bytes": 6077
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/fonts.md",
+      "bytes": 2735
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/game_coordinator.md",
+      "bytes": 4194
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/linkgraph.md",
+      "bytes": 1633
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/logging_and_performance_metrics.md",
+      "bytes": 7444
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/multiplayer.md",
+      "bytes": 9705
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/obg_format.txt",
+      "bytes": 3940
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/obm_format.txt",
+      "bytes": 4319
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/obs_format.txt",
+      "bytes": 2865
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/savegame_format.md",
+      "bytes": 8561
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/docs/symbol_server.md",
+      "bytes": 1369
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.10.nut",
+      "bytes": 917
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.11.nut",
+      "bytes": 672
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.2.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.3.nut",
+      "bytes": 1086
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.4.nut",
+      "bytes": 838
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.5.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.6.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.7.nut",
+      "bytes": 671
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.8.nut",
+      "bytes": 828
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_1.9.nut",
+      "bytes": 672
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_12.nut",
+      "bytes": 948
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_13.nut",
+      "bytes": 669
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/game/compat_14.nut",
+      "bytes": 5981
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/afrikaans.lng",
+      "bytes": 158055
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/arabic_egypt.lng",
+      "bytes": 202183
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/basque.lng",
+      "bytes": 165039
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/belarusian.lng",
+      "bytes": 303124
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/brazilian_portuguese.lng",
+      "bytes": 191526
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/bulgarian.lng",
+      "bytes": 305960
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/catalan.lng",
+      "bytes": 194002
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/chuvash.lng",
+      "bytes": 159920
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/croatian.lng",
+      "bytes": 170235
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/czech.lng",
+      "bytes": 179286
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/danish.lng",
+      "bytes": 165425
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/dutch.lng",
+      "bytes": 174404
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/english.lng",
+      "bytes": 156588
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/english_AU.lng",
+      "bytes": 156388
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/english_US.lng",
+      "bytes": 157014
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/esperanto.lng",
+      "bytes": 171848
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/estonian.lng",
+      "bytes": 159716
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/faroese.lng",
+      "bytes": 165141
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/finnish.lng",
+      "bytes": 175929
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/french.lng",
+      "bytes": 194337
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/frisian.lng",
+      "bytes": 159009
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/gaelic.lng",
+      "bytes": 200017
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/galician.lng",
+      "bytes": 186480
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/german.lng",
+      "bytes": 186136
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/greek.lng",
+      "bytes": 342757
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/hebrew.lng",
+      "bytes": 212225
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/hindi.lng",
+      "bytes": 172354
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/hungarian.lng",
+      "bytes": 194074
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/icelandic.lng",
+      "bytes": 163965
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/ido.lng",
+      "bytes": 156411
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/indonesian.lng",
+      "bytes": 165158
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/irish.lng",
+      "bytes": 189529
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/italian.lng",
+      "bytes": 190262
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/japanese.lng",
+      "bytes": 198440
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/korean.lng",
+      "bytes": 205163
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/latin.lng",
+      "bytes": 169923
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/latvian.lng",
+      "bytes": 186147
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/lithuanian.lng",
+      "bytes": 195940
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/luxembourgish.lng",
+      "bytes": 168365
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/macedonian.lng",
+      "bytes": 172446
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/malay.lng",
+      "bytes": 166777
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/maltese.lng",
+      "bytes": 158126
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/maori.lng",
+      "bytes": 187695
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/marathi.lng",
+      "bytes": 171022
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/norwegian_bokmal.lng",
+      "bytes": 166263
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/norwegian_nynorsk.lng",
+      "bytes": 157235
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/persian.lng",
+      "bytes": 216100
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/polish.lng",
+      "bytes": 190516
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/portuguese.lng",
+      "bytes": 194518
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/romanian.lng",
+      "bytes": 188252
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/russian.lng",
+      "bytes": 304747
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/serbian.lng",
+      "bytes": 171991
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/simplified_chinese.lng",
+      "bytes": 145905
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/slovak.lng",
+      "bytes": 174155
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/slovenian.lng",
+      "bytes": 159411
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/spanish.lng",
+      "bytes": 192340
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/spanish_MX.lng",
+      "bytes": 178733
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/swedish.lng",
+      "bytes": 170888
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/tamil.lng",
+      "bytes": 368252
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/thai.lng",
+      "bytes": 316130
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/traditional_chinese.lng",
+      "bytes": 148961
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/turkish.lng",
+      "bytes": 176206
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/ukrainian.lng",
+      "bytes": 298223
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/urdu.lng",
+      "bytes": 186742
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/vietnamese.lng",
+      "bytes": 202058
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/lang/welsh.lng",
+      "bytes": 167169
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/autoexec.scr.example",
+      "bytes": 84
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/game_start.scr.example",
+      "bytes": 15
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/on_client.scr.example",
+      "bytes": 66
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/on_dedicated.scr.example",
+      "bytes": 144
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/on_server.scr.example",
+      "bytes": 89
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/on_server_connect.scr.example",
+      "bytes": 31
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/pre_dedicated.scr.example",
+      "bytes": 117
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/pre_server.scr.example",
+      "bytes": 62
+    },
+    {
+      "path": "package-1/openttd-15.3-windows-win64/scripts/readme.txt",
+      "bytes": 945
+    },
+    {
+      "path": "package-2/OpenGFX2_Classic-20260709-main-g7a17fb3704.tar",
+      "bytes": 16752640
+    }
+  ],
+  "analysis": {
+    "id": "openttd",
+    "imageFileCount": 1,
+    "commonImageDimensions": {
+      "32×32": 1
+    },
+    "imageExamples": [
+      {
+        "path": "package-1/openttd-15.3-windows-win64/baseset/openttd.32.bmp",
+        "width": 32,
+        "height": 32,
+        "mode": "P",
+        "format": "BMP"
+      }
+    ],
+    "imageReadErrors": [],
+    "binaryCount": 1,
+    "binaries": [
+      {
+        "path": "package-1/openttd-15.3-windows-win64/openttd.exe",
+        "bytes": 17912840,
+        "sha256": "360f615cb74cafcedf0486398a396577e8f1470e0f8158f66b7e29557fdb711d",
+        "format": "PE",
+        "machine": "0x8664",
+        "sections": [
+          ".text",
+          ".rdata",
+          ".data",
+          ".pdata",
+          ".fptable",
+          ".rsrc",
+          ".reloc"
+        ],
+        "importedLibraries": [
+          "OPENGL32.dll",
+          "WS2_32.dll",
+          "WINMM.dll",
+          "IMM32.dll",
+          "USP10.dll",
+          "WINHTTP.dll",
+          "bcrypt.dll",
+          "KERNEL32.dll",
+          "USER32.dll",
+          "GDI32.dll",
+          "SHELL32.dll",
+          "ole32.dll",
+          "ADVAPI32.dll",
+          "OLEAUT32.dll"
+        ],
+        "entryDisassembly": [
+          {
+            "address": "0x140bb9ec8",
+            "mnemonic": "sub",
+            "operands": "rsp, 0x28"
+          },
+          {
+            "address": "0x140bb9ecc",
+            "mnemonic": "call",
+            "operands": "0x140bba820"
+          },
+          {
+            "address": "0x140bb9ed1",
+            "mnemonic": "add",
+            "operands": "rsp, 0x28"
+          },
+          {
+            "address": "0x140bb9ed5",
+            "mnemonic": "jmp",
+            "operands": "0x140bb9cec"
+          },
+          {
+            "address": "0x140bb9eda",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x140bb9edb",
+            "mnemonic": "int3",
+            "operands": ""
+          },
+          {
+            "address": "0x140bb9edc",
+            "mnemonic": "push",
+            "operands": "rbx"
+          },
+          {
+            "address": "0x140bb9ede",
+            "mnemonic": "sub",
+            "operands": "rsp, 0x20"
+          },
+          {
+            "address": "0x140bb9ee2",
+            "mnemonic": "mov",
+            "operands": "rbx, rcx"
+          },
+          {
+            "address": "0x140bb9ee5",
+            "mnemonic": "xor",
+            "operands": "ecx, ecx"
+          },
+          {
+            "address": "0x140bb9ee7",
+            "mnemonic": "call",
+            "operands": "qword ptr [rip + 0x11c43b]"
+          },
+          {
+            "address": "0x140bb9eed",
+            "mnemonic": "mov",
+            "operands": "rcx, rbx"
+          },
+          {
+            "address": "0x140bb9ef0",
+            "mnemonic": "call",
+            "operands": "qword ptr [rip + 0x11c35a]"
+          },
+          {
+            "address": "0x140bb9ef6",
+            "mnemonic": "call",
+            "operands": "qword ptr [rip + 0x11c43c]"
+          },
+          {
+            "address": "0x140bb9efc",
+            "mnemonic": "mov",
+            "operands": "rcx, rax"
+          },
+          {
+            "address": "0x140bb9eff",
+            "mnemonic": "mov",
+            "operands": "edx, 0xc0000409"
+          },
+          {
+            "address": "0x140bb9f04",
+            "mnemonic": "add",
+            "operands": "rsp, 0x20"
+          },
+          {
+            "address": "0x140bb9f08",
+            "mnemonic": "pop",
+            "operands": "rbx"
+          },
+          {
+            "address": "0x140bb9f09",
+            "mnemonic": "jmp",
+            "operands": "qword ptr [rip + 0x11c438]"
+          },
+          {
+            "address": "0x140bb9f10",
+            "mnemonic": "mov",
+            "operands": "qword ptr [rsp + 8], rcx"
+          },
+          {
+            "address": "0x140bb9f15",
+            "mnemonic": "sub",
+            "operands": "rsp, 0x38"
+          },
+          {
+            "address": "0x140bb9f19",
+            "mnemonic": "mov",
+            "operands": "ecx, 0x17"
+          },
+          {
+            "address": "0x140bb9f1e",
+            "mnemonic": "call",
+            "operands": "qword ptr [rip + 0x11c324]"
+          },
+          {
+            "address": "0x140bb9f24",
+            "mnemonic": "test",
+            "operands": "eax, eax"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      }
+    ],
+    "modelFileCandidates": [],
+    "note": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers."
+  },
+  "extractionErrors": [],
+  "source": {
+    "id": "openttd",
+    "repository": "OpenTTD/OpenTTD",
+    "requestedRef": "15.3",
+    "treeSha": "14ec60f248547d4d062a1160f0fc26d742319888",
+    "truncated": false,
+    "basis": "release source"
+  },
+  "inspectedSourceFiles": [
+    {
+      "game": "openttd",
+      "path": "src/economy.cpp",
+      "bytes": 76685,
+      "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp"
+    },
+    {
+      "game": "openttd",
+      "path": "src/industry_cmd.cpp",
+      "bytes": 118782,
+      "blobSha": "bdf2bfc546f4b85acc5b88266cfb3a5a6a52bdea",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/industry_cmd.cpp"
+    },
+    {
+      "game": "openttd",
+      "path": "src/genworld.cpp",
+      "bytes": 17740,
+      "blobSha": "ce1e212d2ee73d47715ea4cf8cba8bc3e6c012bf",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/genworld.cpp"
+    },
+    {
+      "game": "openttd",
+      "path": "src/viewport.cpp",
+      "bytes": 133856,
+      "blobSha": "6427a1465ebafbb62dd85e3cd2c6d297dd71197b",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/viewport.cpp"
+    },
+    {
+      "game": "openttd",
+      "path": "src/linkgraph/linkgraph.cpp",
+      "bytes": 9486,
+      "blobSha": "66f7cd881adfb280db5121e69c4d97e9ab48ea35",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/linkgraph/linkgraph.cpp"
+    },
+    {
+      "game": "openttd",
+      "path": "src/cargopacket.cpp",
+      "bytes": 29803,
+      "blobSha": "2fbd3f2f2905473925768f25d3e9c65bf7cd9500",
+      "sha256": "691111048447600124c50f92361208e684d878ecdfc091f5988633b45c8abb7a",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/cargopacket.cpp"
+    },
+    {
+      "game": "openttd",
+      "path": "src/cargopacket.h",
+      "bytes": 19928,
+      "blobSha": "39174cdb95c643b72572ffe5d911670dcb5561a7",
+      "sha256": "e1f8fa520b92037100581213cf462870cf8dcda94047238d894120ae1f349005",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/cargopacket.h"
+    }
+  ],
+  "deliveryStudy": {
+    "method": "Static original release-source control-flow inspection",
+    "sourceSha256": "d8fcb150f911e1d26d7eca87f4fef2ccda1dcb4c53652ba4e3440213cd5a1374",
+    "source": {
+      "game": "openttd",
+      "path": "src/economy.cpp",
+      "bytes": 76685,
+      "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp"
+    },
+    "stages": [
+      {
+        "name": "industry acceptance",
+        "lines": [
+          1039,
+          1079
+        ]
+      },
+      {
+        "name": "accepted quantity, accounting and payment",
+        "lines": [
+          1094,
+          1134
+        ]
+      },
+      {
+        "name": "callback or default production and visual triggers",
+        "lines": [
+          1142,
+          1170
+        ]
+      }
+    ],
+    "coverage": {
+      "acceptanceAndPayment": "verified in pinned source",
+      "defaultConversion": "verified in pinned source",
+      "callbacks": "dispatch inspected; individual implementations unexamined",
+      "runtime": "unexamined"
+    },
+    "gaps": [
+      "Trace caller scheduling and cargo left on vehicles after refusal.",
+      "Inspect one industry specification and its conversion multipliers.",
+      "Observe delivery, payment and recovery UI separately."
+    ]
+  },
+  "unloadingRecovery": {
+    "method": "Static branch inspection in pinned release source",
+    "source": {
+      "game": "openttd",
+      "path": "src/economy.cpp",
+      "bytes": 76685,
+      "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp"
+    },
+    "lines": [
+      1668,
+      1696
+    ],
+    "trigger": "Station acceptance absent with delivery-marked cargo during unloading",
+    "branches": {
+      "explicitTransferOrUnload": "reassign delivery to transfer",
+      "otherOrders": "reassign delivery to keep, return excess reservations, retain loading retry"
+    },
+    "coverage": {
+      "branch": "verified in source",
+      "industryRefusalPacketHandling": "unexamined",
+      "runtimeRecovery": "unexamined"
+    }
+  },
+  "paymentAccounting": {
+    "method": "Static original source inspection",
+    "source": {
+      "game": "openttd",
+      "path": "src/economy.cpp",
+      "bytes": 76685,
+      "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp"
+    },
+    "lines": [
+      1182,
+      1249
+    ],
+    "coverage": {
+      "transferAndFinalAccounting": "verified in pinned source",
+      "animationDispatch": "verified in source; visuals unobserved",
+      "runtimeBalances": "unexamined"
+    },
+    "gaps": [
+      "Trace cargo-packet feeder-share mutation and splitting.",
+      "Verify multi-leg balances in runtime separately.",
+      "Resolve industry refusal packet handling."
+    ]
+  },
+  "packetAccounting": {
+    "method": "Static source inspection",
+    "source": {
+      "game": "openttd",
+      "path": "src/cargopacket.cpp",
+      "bytes": 29803,
+      "blobSha": "2fbd3f2f2905473925768f25d3e9c65bf7cd9500",
+      "sha256": "691111048447600124c50f92361208e684d878ecdfc091f5988633b45c8abb7a",
+      "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/cargopacket.cpp"
+    },
+    "lines": [
+      73,
+      125
+    ],
+    "coverage": {
+      "splitMergeReduce": "verified in source",
+      "shareRounding": "unexamined",
+      "callSiteBounds": "unexamined",
+      "runtime": "unexamined"
+    }
+  },
+  "packetConstraints": {
+    "method": "Static original source inspection",
+    "sources": [
+      {
+        "game": "openttd",
+        "path": "src/cargopacket.h",
+        "bytes": 19928,
+        "blobSha": "39174cdb95c643b72572ffe5d911670dcb5561a7",
+        "sha256": "e1f8fa520b92037100581213cf462870cf8dcda94047238d894120ae1f349005",
+        "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/cargopacket.h"
+      },
+      {
+        "game": "openttd",
+        "path": "src/cargopacket.cpp",
+        "bytes": 29803,
+        "blobSha": "2fbd3f2f2905473925768f25d3e9c65bf7cd9500",
+        "sha256": "691111048447600124c50f92361208e684d878ecdfc091f5988633b45c8abb7a",
+        "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/cargopacket.cpp"
+      }
+    ],
+    "evidenceRanges": [
+      {
+        "path": "src/cargopacket.h",
+        "lines": [
+          73,
+          74
+        ]
+      },
+      {
+        "path": "src/cargopacket.h",
+        "lines": [
+          179,
+          182
+        ]
+      },
+      {
+        "path": "src/cargopacket.h",
+        "lines": [
+          504,
+          509
+        ]
+      },
+      {
+        "path": "src/cargopacket.h",
+        "lines": [
+          618,
+          623
+        ]
+      },
+      {
+        "path": "src/cargopacket.cpp",
+        "lines": [
+          223,
+          232
+        ]
+      }
+    ],
+    "coverage": {
+      "compatibilityAndCountGuard": "verified in pinned source",
+      "partialShareFormula": "verified in source",
+      "allCallers": "unexamined",
+      "arithmeticExtremes": "unexamined",
+      "runtime": "unexamined"
+    }
+  }
+}

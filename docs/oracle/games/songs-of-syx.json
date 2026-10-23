@@ -1,0 +1,68 @@
+{
+  "appid": 1162750,
+  "name": "Songs of Syx",
+  "store_url": "https://store.steampowered.com/app/1162750/",
+  "genres": [
+    "Strategy",
+    "City builder"
+  ],
+  "short_description": "Massive city builder with tens of thousands of citizens and armies.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "City builder"
+  ],
+  "summary": "Massive city builder with tens of thousands of citizens and armies.",
+  "identity": {
+    "core_loop": "Build city, manage races, wage war, grow huge.",
+    "mechanics": null,
+    "ui_and_game_feel": "Enormous scale.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.1,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.22,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay heavy; crowds visible.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Pixel art.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Scale of crowd is spectacle."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.89,
+      "social": 0.33,
+      "systems": 1.0,
+      "chance": 0.44,
+      "session": 1.0
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

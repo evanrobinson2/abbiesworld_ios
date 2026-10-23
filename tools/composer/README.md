@@ -8,6 +8,20 @@
 > jukebox and Family Teleport hooks from commit 6abff0d. The director works with any audio files, so a future
 > API-generated score can reuse it.
 
+## The Music Bible (canon)
+
+`docs/music/MUSIC_BIBLE.md` (Evan, 2026-10-23) is the source of truth: one Abbie's World identity in D major,
+122–126 bpm, 4/4 with a 3+3+2 rhythm, arranged per world. `api/briefs-bible.json` turns it into briefs (main theme,
+ranch, both treehouses, HQ/moon, Halloween, Halloween After Dark, lo-fi, Card Factory, the Mysterious / Intense / Epic
+modes and the sonic-identity stings). `motifs/motifs.py` renders both candidate melodies note for note (MIDI plus a
+reference MP3) because a text prompt cannot pin an exact melody; takes are judged against those.
+
+Every take made from a briefs file with an `identity` block records a `trace` in its JSON sidecar (Bible section 9):
+identity, source motif, family, world, place, situation, mode, key, bpm, meter, instrumentation, mood, intensity,
+variant_of, loop, the prompt's styles and sections, and the intended duration.
+
+    gh workflow run music-takes.yml --ref main -f briefs=briefs-bible.json -f takes=2
+
 ## API music (ElevenLabs)
 
 The replacement for the sample renderer. `api/briefs.json` holds one composition plan per cue (beds, stings,

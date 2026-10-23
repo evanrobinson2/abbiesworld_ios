@@ -1,0 +1,114 @@
+{
+  "appid": 2198150,
+  "name": "Tiny Glade",
+  "store_url": "https://store.steampowered.com/app/2198150/",
+  "developers": [
+    "Pounce Light"
+  ],
+  "release": "Sep 23, 2024",
+  "short_description": "Tiny Glade is a small diorama builder where you doodle whimsical castles, cozy cottages &amp; romantic ruins. Explore gridless building chemistry as the game adorns your glades with procedural detail. No management, combat or goals: just kick back and turn forgotten meadows into lovable dioramas.",
+  "genres": [
+    "Casual",
+    "Indie",
+    "Simulation"
+  ],
+  "categories": [
+    "Single-player",
+    "Steam Workshop",
+    "Camera Comfort",
+    "Custom Volume Controls",
+    "Mouse Only Option",
+    "Playable without Timed Input",
+    "DualShock Controller Support",
+    "Save Anytime",
+    "Steam Input API Support",
+    "Stereo Sound",
+    "Partial Controller Support",
+    "Steam Cloud",
+    "Family Sharing"
+  ],
+  "store_text_words": 137,
+  "header_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2198150/b3a0326cc6d63ca88973fdee61d09052433abf94/header_alt_assets_0.jpg?t=1790175461",
+  "install": {
+    "engine": "Bevy/Rust",
+    "engine_hints": [
+      "Bevy/Rust"
+    ],
+    "files": 2077,
+    "top_extensions": {
+      ".bin": 753,
+      ".json": 630,
+      ".precomp": 303,
+      ".ron": 107,
+      ".ttf": 85,
+      ".bank": 37,
+      ".snapshot": 34,
+      ".jpg": 33,
+      ".list": 22,
+      ".cube": 21,
+      ".yml": 15,
+      ".txt": 13
+    }
+  },
+  "identity": {
+    "core_loop": "Draw walls and paths, watch them grow detail, enjoy.",
+    "mechanics": null,
+    "ui_and_game_feel": "Effortless, magical building.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.1,
+        "overlay": 0.1,
+        "none": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Tools tray only; the world shows everything.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Soft diorama.",
+    "palette": null,
+    "audio_mood": "Gentle ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Few verbs, generous world: the world finishes your idea."
+  },
+  "sources": [
+    "steam store api",
+    "install file names (no contents)",
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Builder",
+    "Cozy"
+  ],
+  "summary": "Doodle castles and cottages; the game adds the detail.",
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.11,
+      "challenge": 0.44,
+      "expression": 1.0,
+      "structure": 0.0,
+      "social": 0.33,
+      "systems": 0.11,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

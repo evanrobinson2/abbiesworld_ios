@@ -1,0 +1,68 @@
+{
+  "appid": 1296610,
+  "name": "Peglin",
+  "store_url": "https://store.steampowered.com/app/1296610/",
+  "genres": [
+    "Roguelike",
+    "Puzzle"
+  ],
+  "short_description": "Pachinko meets deckbuilding: fire orbs into pegs to hit enemies.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Roguelike",
+    "Puzzle"
+  ],
+  "summary": "Pachinko meets deckbuilding: fire orbs into pegs to hit enemies.",
+  "identity": {
+    "core_loop": "Aim, bounce, damage, pick relics and orbs, climb.",
+    "mechanics": null,
+    "ui_and_game_feel": "Satisfying bounce physics and chance.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.4,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Damage numbers pop (spatial); orb bag overlay.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Cute pixel art.",
+    "palette": null,
+    "audio_mood": "Chirpy.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Physics chance is fun when the aim feels yours."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.33,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.89,
+      "chance": 0.78,
+      "session": 0.56
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

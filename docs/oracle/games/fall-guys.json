@@ -1,0 +1,70 @@
+{
+  "appid": 1097150,
+  "name": "Fall Guys",
+  "store_url": "https://store.steampowered.com/app/1097150/",
+  "genres": [
+    "Party",
+    "Platformer"
+  ],
+  "short_description": "Jellybean characters stumble through obstacle-course game shows.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Party",
+    "Platformer"
+  ],
+  "summary": "Jellybean characters stumble through obstacle-course game shows.",
+  "identity": {
+    "core_loop": "Run, jump, grab, survive rounds, crown.",
+    "mechanics": null,
+    "ui_and_game_feel": "Wobbly and silly; failing is funny.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Big readable obstacles; elimination is overlay.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Candy-coloured cartoon.",
+    "palette": null,
+    "audio_mood": "Bouncy game-show music.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Make failure funny and physical, and kids keep playing."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.67,
+      "expression": 0.22,
+      "structure": 0.56,
+      "social": 0.78,
+      "systems": 0.67,
+      "chance": 0.22,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "party"
+  },
+  "review": "Falling over is the joke, which is why kids love it. The world is the instructions. A strong reference for Ranch party games."
+}
