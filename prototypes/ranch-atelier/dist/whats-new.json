@@ -2,6 +2,39 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-pocket",
+      "date": "2026-10-23",
+      "title": "Abbie's pocket",
+      "line": "Things Abbie picks up go in her pocket on the top bubble, and she says what she thinks in her own small voice. The first thing to find is the café's brass key.",
+      "image": "/whats-new/2026-10-23-pocket.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-info-card-right",
+      "date": "2026-10-23",
+      "title": "Tap cards on the right",
+      "line": "Tap a building and its card waits on the far right without covering it. If it would, the view slides over. One short line, with the whole picture.",
+      "image": "/whats-new/2026-10-23-info-card-right.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-school-jump",
+      "date": "2026-10-23",
+      "title": "The school jump",
+      "line": "Climb the old school's wall at dusk, hand over hand, then sneak across the roof past the headlights. Toss all 31 tennis balls down to your dog, hang-drop to the canopy and find a gold memory coin.",
+      "image": "/whats-new/2026-10-23-school-jump.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+      "threadTitle": "The school jump",
+      "tour": false,
+      "link": "/studies/school/play.html"
+    },
+    {
       "id": "2026-10-23-grace-basement-2",
       "date": "2026-10-23",
       "title": "Grace's basement, for real",

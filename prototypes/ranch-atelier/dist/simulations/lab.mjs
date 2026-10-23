@@ -356,7 +356,7 @@ function renderHero(object,px=80){
  // Portrait lighting is independent of the world's outline/alpha shader passes.
  copy.traverse(o=>{if(!o.isMesh)return;const clean=m=>{const fresh=new T.MeshStandardMaterial({color:m.color||'#c3bc9b',map:m.map||null,roughness:.85,side:m.side,vertexColors:m.vertexColors});portraitMaterials.push(fresh);return fresh;};o.material=Array.isArray(o.material)?o.material.map(clean):clean(o.material);});world.add(copy);
  const hemi=new T.HemisphereLight('#fff7ed','#8d9e8b',2),light=new T.DirectionalLight('#fff1d9',2.4);light.position.set(-3,5,7);world.add(hemi,light);world.updateMatrixWorld(true);
- const bounds=new T.Box3().setFromObject(copy),center=bounds.getCenter(new T.Vector3()),size=bounds.getSize(new T.Vector3()),view=person?size.y*.48:Math.max(size.x,size.y,size.z)*1.3;
+ const bounds=new T.Box3().setFromObject(copy),center=bounds.getCenter(new T.Vector3()),size=bounds.getSize(new T.Vector3()),view=person?size.y*.48:bounds.getBoundingSphere(new T.Sphere()).radius*2.08;// the whole thing fits the square from any angle (Evan: "fit the layout of the tile")
  if(person)center.y=bounds.max.y-view*.46;
  const portraitCamera=new T.OrthographicCamera(-view/2,view/2,view/2,-view/2,.001,10000);portraitCamera.position.copy(center).add(new T.Vector3(person?.16:.7,person?.04:.45,1).normalize().multiplyScalar(Math.max(5,size.length()*3)));portraitCamera.lookAt(center);heroRenderer.render(world,portraitCamera);portraitMaterials.forEach(m=>m.dispose());
  $('#inspect-hero').setAttribute('aria-label',person?'Portrait of '+(['suburban','cemetery'].includes(family)?object.userData.inspect?.title||'Scenario character':inventIdentity(person).name):'Selected object preview');

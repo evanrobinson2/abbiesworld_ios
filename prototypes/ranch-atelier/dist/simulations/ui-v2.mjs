@@ -4,14 +4,20 @@
 // The mode is chosen in index.html's boot script (html.ui-v2); "Classic layout" in the toy box switches back to v1.
 import {mountChrono} from './chrono.mjs?v=3';
 import {cardFace,cardArt,setCardArt} from './hand-cards.mjs?v=13';
-import {openCallout,closeCallout} from '../look/callout.mjs';
+import {openCallout,closeCallout} from '../look/callout.mjs?v=2';
+import {inventory} from './inventory.mjs?v=1';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
 function start(){
  const root=document.documentElement,$=s=>document.querySelector(s);
  const press=sel=>{const el=typeof sel==='string'?$(sel):sel;el?.click();return !!el;};
  // Tapping a person, thing or tile opens its card as a callout beside it (look/callout.mjs) instead of the v1 side panel.
- addEventListener('ranch:inspect',({detail:d})=>openCallout({name:d.name,kind:d.kind,description:d.description,hero:d.hero,focal:[],anchor:d.anchor,onClose:()=>press('#close-inspection')}));
+ // The card docks on the far right; if it would cover what was tapped, the view slides left so the thing stays in sight.
+ addEventListener('ranch:inspect',({detail:d})=>openCallout({name:d.name,kind:d.kind,description:d.description,hero:d.hero,focal:[],anchor:d.anchor,clear:slideView,onClose:()=>press('#close-inspection')}));
+ function slideView(dx){const rc=window.RanchCamera;if(!rc?.camera||!rc.orbit)return;const {T,camera,orbit}=rc,h=rc.canvas?.clientHeight||innerHeight;
+  const dist=camera.position.distanceTo(orbit.target),perPx=camera.isPerspectiveCamera?2*dist*Math.tan(camera.fov*Math.PI/360)/h:(camera.top-camera.bottom)/camera.zoom/h;
+  const right=new T.Vector3().setFromMatrixColumn(camera.matrix,0).multiplyScalar(dx*perPx),from=orbit.target.clone(),cam=camera.position.clone(),t0=performance.now();
+  rc.stopFollow?.();const step=now=>{const k=Math.min(1,(now-t0)/380),e=1-Math.pow(1-k,3);orbit.target.copy(from).addScaledVector(right,e);camera.position.copy(cam).addScaledVector(right,e);orbit.update();if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
  addEventListener('ranch:inspect-close',()=>closeCallout({silent:true}));
  const svg=(body,view='0 0 24 24')=>`<svg viewBox="${view}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
  const I={cards:svg('<rect x="4" y="3" width="11" height="16" rx="2"/><path d="M15 6l4 1.5-4 13.5-6-1.6"/><path d="M7 13l2-3 2 2 2-3"/>'),
@@ -56,6 +62,8 @@ function start(){
 
  // The chronograph (chrono.mjs): time of day, pause and speed pushers, weather, season and pinned dials.
  const chrono=mountChrono({press,icons:I});
+ // Abbie's pocket hangs on the chronograph once she carries something (inventory.mjs).
+ inventory();
 
  // Hand of cards: the real generator cards move here, keeping their tap, drag-to-board and live previews.
  const hand=make('div',{id:'v2-hand',className:'v2-toy'});
@@ -66,7 +74,9 @@ function start(){
  function fan(){const heroes=[...hand.querySelectorAll('.generator-hero')],n=heroes.length;heroes.forEach((h,i)=>{h.style.setProperty('--fan',((i-(n-1)/2)*1.5).toFixed(1)+'deg');if(!h.dataset.v2){h.dataset.v2='1';cardFace(h);}});}
 
  // Toy box: tap for the shelf, hold for the grown-up workbench.
- const box=make('button',{id:'v2-box',className:'v2-toy v2-glass',type:'button',title:'Toy box'},I.box+'<span class="v2-dot"></span>');box.setAttribute('aria-label','Toy box: tap for the shelf, hold for settings');
+ // It wears a small square </> mark in the corner beside the version, like a website's maker mark, so it reads as the
+ // developer's signature rather than something to play with (Evan, 2026-10-23); it still opens the shelf.
+ const box=make('button',{id:'v2-box',className:'v2-toy',type:'button',title:'Toy box'},'<b aria-hidden="true">&lt;/&gt;</b><span class="v2-dot"></span>');box.setAttribute('aria-label','Toy box: tap for the shelf, hold for settings');
  const shelf=make('div',{id:'v2-shelf',className:'v2-toy v2-glass',hidden:true});shelf.setAttribute('role','menu');
  const items=[
   ['talk','Talk',()=>press('#live-toggle'),'talk'],['make','Make',()=>press('#make-toggle'),'talk'],['scenes','Scenes',()=>press('#compact-scene-title')||press('#library-open')],['tiles','Tile options',()=>toggleSheet(true)],

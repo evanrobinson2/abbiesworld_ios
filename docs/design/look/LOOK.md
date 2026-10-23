@@ -105,3 +105,9 @@ bottom); less padding everywhere.
 - Studies may overrule the app styling (Evan, 07:25Z): a study page that wants its own look puts `data-aw-own-look` on
   its `<html>`. It keeps the access settings and the `--aw-*` tokens, but its own palette and letters win over the
   chosen style. A study page without boot.js keeps its own look too.
+- The tap card (callout) in play (Evan, 08:56Z): it docks on the far right edge, above the hand of cards, and never
+  covers what was tapped; if it would, the view slides left. The words are one sentence at most, after a short bold
+  lead-in (the kind of thing). The picture shows the whole thing.
+- The toy box wears a small square `</>` maker's mark in the corner beside the version label, so it reads as the
+  developer's signature, not a toy (Evan, 08:55Z). It still opens the shelf.
+- Abbie's pocket (the player inventory) is a register on the chronograph; see `docs/design/briefs/inventory.md`.
