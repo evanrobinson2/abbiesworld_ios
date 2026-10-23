@@ -11,7 +11,7 @@ The manifest (card.json) is what a generator writes next to each render:
      "art":   {"bbox": [x, y, w, h], "source_px": [w, h], "layer": "art-only.png (needed for translucent plates)",
                "mode": ["portal"], "layers": ["bg.png", "subject.png"], "subject_bbox": [x, y, w, h],
                "window_bbox": [x, y, w, h] (framed window; popout measures from it when given)},
-     "boxes": [{"role": "name|text|numeral|gem|collector", "bbox": [x, y, w, h],
+     "boxes": [{"role": "name|text|type|numeral|gem|collector", "bbox": [x, y, w, h],
                 "font_pt": 10, "family": "Fredoka", "text_colour": "#2b1d0e",
                 "plate": "opaque|translucent"}],
      "collector": {"set": "RANCH", "number": 1, "total": 35, "maker": "...", "variant": "std"},
@@ -263,10 +263,10 @@ def check_card(img_path, man_path):
     face[trim[1]:trim[1] + th, trim[0]:trim[0] + tw] = True
     framemask = face.copy()
     framemask[A[1]:A[1] + A[3], A[0]:A[0] + A[2]] = False
-    # Only plates are subtracted: tokens, gems and the collector line sit on the frame, so a card with one stat
-    # token instead of two must not score more frame than one with two.
+    # Only information plates are subtracted (name, rules text, type banner, collector line). Tokens and gems sit
+    # on the frame and count as frame, so a card with one stat token scores the same as one with two.
     for x in boxes:
-        if x["role"] not in ("name", "text"):
+        if x["role"] not in ("name", "text", "type", "collector"):
             continue
         X, Y, w, h = x["bbox"]
         framemask[Y:Y + h, X:X + w] = False
