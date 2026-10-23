@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-pencil-pipeline",
+      "date": "2026-10-23",
+      "title": "A code pencil, tried end to end",
+      "line": "We drew the leaping figure again with an emulated pencil: pressure, tapered ends, hand wobble and paper grain. The Midjourney hero steps wait on your signed-in Chrome.",
+      "image": "/whats-new/2026-10-23-pencil-pipeline.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMY1cycvjR6PnahcM7wX7rx",
+      "threadTitle": "AW-STUDY-0045 - The Perfect Drawing Pipeline",
+      "tour": false,
+      "link": "/studies/pencil/"
+    },
+    {
       "id": "2026-10-23-moon-mission-games",
       "date": "2026-10-23",
       "title": "Moon Mission: low-poly isometric view and the four Moon base games",
