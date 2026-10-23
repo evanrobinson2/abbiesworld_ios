@@ -522,15 +522,21 @@ function headHome() {
 }
 
 // ---------- Keys: the real keyboard goes to the computer while she sits at the screen. ----------
-function forward(k) {
+// `hold` keys go down and come up with the real keyboard, so a game that polls the keys sees them held; taps (the phone's
+// keyboard, which has no key-up) press and release together.
+function forward(k, hold = false) {
  if (cam.mode === 'close' && k === 'Escape') return me.state === 'seated' ? (cam.close = null, washing = null, glide('desk', 'desk')) : leaveClose();
  if (cam.mode === 'desk' && k === 'Escape') return standUp();
  if (cam.mode !== 'screen') return;
- const used = pc.key(k); if (!used && k === 'Escape') standUp();
+ const used = hold ? pc.keyDown(k) : pc.key(k); if (!used && k === 'Escape') standUp();
 }
+// A phone's keyboard types into the hidden field (taps); a real keyboard goes straight to the PC, held keys and all.
+const touchOnly = matchMedia('(pointer: coarse)').matches;
+addEventListener('keyup', e => { if (me.state === 'seated') { if (!(touchOnly && e.target === keys && e.key.length === 1)) e.preventDefault(); pc.keyUp(e.key); } });
+addEventListener('blur', () => pc.releaseAll());
 addEventListener('keydown', e => {
  audio(); 
- if (me.state === 'seated' || cam.mode === 'close') { if (e.target === keys && e.key.length === 1) return; e.preventDefault(); return forward(e.key); }
+ if (me.state === 'seated' || cam.mode === 'close') { if (touchOnly && e.target === keys && e.key.length === 1) return; e.preventDefault(); return forward(e.key, true); }
  if (e.key === 'ArrowLeft' || e.key === 'a') walkTo(me.x - .6); else if (e.key === 'ArrowRight' || e.key === 'd') walkTo(me.x + .6);
 });
 // Phone keyboards type into the hidden field; each character goes to the computer as it arrives.
