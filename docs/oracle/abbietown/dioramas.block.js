@@ -7,13 +7,13 @@ const DIO_R = 105, DIO_N = 44, DIO_ORIGIN = [land.W + 3600, land.D / 2]; // tile
 const DIOS = [
  {id: 'downtown', name: 'Downtown', bearing: 180, centre: [4340, 1640], R: 900, vex: 2.4, pin: '⛪', heroes: ['common', 'cafe', 'comellas', 'hoagies', 'lab', 'ginn'],
   look: {bg: '#f3dcbd', sun: '#ffd49a', sunI: 2.7, sunDir: [-520, 520, 620], sky: '#ffe9cf', gnd: '#8a6a4a', hemiI: 1.05, grass: ['#7fa14f', '#a8b45e'], soil: '#8a5a3a', fov: 32, dist: 250, azimuth: 205, lowPitch: 20, highPitch: 54,
-   mood: 'a late-afternoon square, brass and brick'}},
+   mood: 'a late-afternoon square, brass and brick', wash: 'downtown'}},
  {id: 'anis-side', name: "Ani's side", bearing: 300, centre: [3180, 3020], R: 820, vex: 3.4, pin: '\u{1F986}', heroes: ['horn', 'ani'],
   look: {bg: '#cfe8f1', sun: '#eef4ff', sunI: 2.0, sunDir: [420, 900, -380], sky: '#dff1ff', gnd: '#4d6a5c', hemiI: 1.3, grass: ['#64a07c', '#8bb86a'], soil: '#5d6b4a', fov: 48, dist: 330, azimuth: 150, lowPitch: 30, highPitch: 70,
-   mood: 'a cool bright morning by the pond, wide and airy'}},
+   mood: 'a cool bright morning by the pond, wide and airy', wash: 'anis-side'}},
  {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 60, centre: [4930, 3440], R: 820, vex: 2.8, pin: '\u{1F3E1}', heroes: ['home', 'muraco', 'leonard'],
   look: {bg: '#f6c4ad', sun: '#ff9d6a', sunI: 2.9, sunDir: [-800, 360, 120], sky: '#ffd5c2', gnd: '#7a4a5a', hemiI: 1.0, grass: ['#c2a447', '#d98a45'], soil: '#7a4a3a', fov: 40, dist: 300, azimuth: 235, lowPitch: 38, highPitch: 78,
-   mood: 'a sunset hill, almost a board seen from above'}},
+   mood: 'a sunset hill, almost a board seen from above', wash: 'abbie-daddy-side'}},
 ];
 // hero places: model scale on the tile, footprint radius for the layout, and whether the place hugs the street
 const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
@@ -151,8 +151,8 @@ const DRESS = {
 // ---- the view: each region has its own opinion about the pulled-back view (palette, light, lens, tilt, distance) ----
 // The pitch-by-zoom curve is the open-land camera's (simulations/land-camera.mjs, AW-STUDY-0018), tuned for each region.
 const ORDER_DIO = ['dio-trio', 'dio-downtown', 'dio-anis-side', 'dio-abbie-daddy-side'];
-const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42};
-const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70};
+const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42, wash: 'real'};
+const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70, wash: 'trio'};
 let viewDio = false, look = LOOK_REAL, dragging = false; const dioC = new THREE.Color(), dioV = new THREE.Vector3(), rad = a => a * Math.PI / 180;
 const pitchFor = (dist, L) => rad(L.lowPitch + (L.highPitch - L.lowPitch) * Math.pow(Math.max(0, Math.min(1, Math.log(dist / 40) / Math.log(760 / 40))), .8));
 canvas.addEventListener('pointerdown', () => { dragging = true; }); addEventListener('pointerup', () => { dragging = false; });
@@ -176,6 +176,7 @@ function setView(on) {
 document.getElementById('dio').onclick = () => setView(!viewDio);
 function dioFrame(dt, t) {
  const k = 1 - Math.exp(-dt * 3.5), L = look;
+ if (WC.zone !== (L.wash || 'off')) WC.setZone(L.wash || 'off'); // each zone's opinion about its own distance
  scene.background.lerp(dioC.set(L.bg), k); hemi.color.lerp(dioC.set(L.sky), k); hemi.groundColor.lerp(dioC.set(L.gnd), k); sun.color.lerp(dioC.set(L.sun), k);
  sun.intensity += (L.sunI - sun.intensity) * k; hemi.intensity += (L.hemiI - hemi.intensity) * k; sunDir.lerp(dioV.set(...L.sunDir), k);
  if (Math.abs(camera.fov - L.fov) > .05) { camera.fov += (L.fov - camera.fov) * k; camera.updateProjectionMatrix(); }

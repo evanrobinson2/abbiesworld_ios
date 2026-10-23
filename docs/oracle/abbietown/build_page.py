@@ -14,6 +14,11 @@ for name in ['town.mjs', 'regions.mjs', 'manifest.mjs', 'entrances.mjs']:
     code = re.sub(r'^import .*?;\n', '', code, flags=re.M)
     code = re.sub(r'^export ', '', code, flags=re.M)
     parts.append(f'// ---- simulations/abbietown/{name} ----\n' + code)
+# the watercolour distance pass (AW-STUDY-0050) lives in the shared kit, one folder up
+code = (sim.parent / 'watercolour-distance.mjs').read_text()
+code = re.sub(r'^import .*?;\n', '', code, flags=re.M)
+code = re.sub(r'^export ', '', code, flags=re.M)
+parts.append('// ---- simulations/watercolour-distance.mjs ----\n' + code)
 modules = '\n'.join(parts)
 land = json.dumps(json.loads((sim / 'land.json').read_text()), separators=(',', ':')).replace('</', '<\\/')
 history = json.dumps(json.loads((sim / 'history.json').read_text()), separators=(',', ':'))
