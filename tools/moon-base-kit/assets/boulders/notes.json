@@ -1,43 +1,54 @@
 {
  "asset": "boulders",
  "name": "Boulder set (three)",
- "brief": "MK-098 Boulder set: three basalt boulders (a big cover rock, a medium one and a sitting rock), angular and pitted, each sunk into a low drift of dust where it landed. Each has its own mass, so the small one can be shoved in low gravity and the big one stops a gem bug.",
+ "brief": "MK-098 Boulder set. Round 2, matched to the pick: a cluster of six dark basalt boulders, one tall standing stone with smaller rocks leaning round it, sunk into a low drift of pale dust with pebbles scattered where they landed. Each rock has its own mass, so the small ones can be shoved in low gravity and the big one stops a gem bug.",
  "rounds": [
   {
    "n": 1,
    "date": "2026-10-23",
    "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  },
+  {
+   "n": 2,
+   "date": "2026-10-23",
+   "from": "concept.jpg (Midjourney round 3 queue, mj_queue_r3.json)",
+   "t": "Rebuilt against a rerun Midjourney pick made with a terrain-only style line (the first proofs put buildings in the rock): darker basalt (Stone_BasaltDark), more facets, a rocky crown and a pale dust floor. Round 1 kept in round1/."
   }
  ],
  "stats": {
   "id": "MK-098",
-  "name": "Boulder set (three)",
-  "triangles": 276,
-  "parts": 12,
+  "name": "Boulder set",
+  "triangles": 1000,
+  "parts": 17,
   "part_names": [
-   "BoulderL",
-   "DustDriftL",
-   "BoulderM",
-   "DustDriftM",
-   "BoulderS",
-   "DustDriftS",
+   "DustDrift",
+   "Boulder0",
+   "Boulder1",
+   "Boulder2",
+   "Boulder3",
+   "Boulder4",
+   "Boulder5",
    "Pebble0",
    "Pebble1",
    "Pebble2",
    "Pebble3",
    "Pebble4",
-   "Pebble5"
+   "Pebble5",
+   "Pebble6",
+   "Pebble7",
+   "Pebble8",
+   "Pebble9"
   ],
   "materials": [
-   "Stone_Basalt",
+   "Stone_BasaltDark",
    "Stone_Regolith"
   ],
-  "mass_kg": 11995.2,
-  "moon_weight_kg": 1984.0,
+  "mass_kg": 23569.1,
+  "moon_weight_kg": 3898.3,
   "size_m": [
-   4.96,
-   3.41,
-   1.54
+   5.02,
+   3.66,
+   2.84
   ],
   "maps": "1024 px base, roughness, normal"
  }

@@ -89,9 +89,34 @@ light, hull panels"), and Midjourney put buildings into the rock. They need a re
   panels, few lights) was rebuilt almost entirely once the picks arrived.
 - A shared building block (`module`, `window`) is what makes 18 rebuilds fast and keeps the kit consistent.
 
+## Round 3: terrain rerun, the dome and the tower (2026-10-23)
+
+`mj_queue_r3.json` ran on Evan's Windows PC (the Mac had gone to sleep): the crater rim and boulders with a
+terrain-only style line ("bare natural lunar terrain only, no buildings, no windows, no lights, no machines, no
+panels"), and the five handed-over buildings with a style line that names the round-2 look. Midjourney's Fast hours
+ran out after four of the seven (they refill on Oct 28), so the habitat and hangar, airlock door and supply crate are
+still waiting. Picks: crater rim 1, boulders 2, dome 0, tower 0 (`mj/<id>/`, job ids in `mj/jobs_r3.jsonl`).
+
+- Crater rim (MK-096) is now a half crater 12 m across: a pale bowl floor rising to a crown of dark basalt crags in
+  two rows. Boulders (MK-098) are a six-rock cluster in a dust drift, with more facets (icosphere level 2).
+  `Stone_BasaltDark` is a new role for both.
+- The dome (MK-029) upgrades MR-002 as a geodesic shell: a frequency-2 icosphere cut to a hemisphere, its triangles
+  sorted into hull, dark glass and warm living-room panes, each set thickened into its own part, plus a wireframe
+  strut frame over every edge. It sits on a ring foundation of framed segments and has a round entrance tunnel.
+- The tower (MK-028) is two framed storeys, a porch with a glowing door, a roof dish and a lattice mast with a work
+  platform and a red beacon.
+
+### Rules learned in round 3
+
+- A rerun with its own style line fixed the terrain in one go. Keep a style line per family (machines, buildings,
+  terrain) in the queue, not one for the whole kit.
+- Check the Midjourney Fast hours before queueing a batch, and put the most needed prompts first.
+- Taper rules on a height field must only lift the rim, never the floor. Tapering negative heights pinched the
+  bowl's front edge, and so did noise near the fan centre.
+
 ## Next
 
-1. Rerun Midjourney for the crater rim and boulders with a terrain-only style line, and rebuild them.
+1. Draw the habitat and hangar, airlock door and supply crate once Midjourney can run, then build them.
 2. The five handed-over buildings as recipes, matched to the pack painting and MR-002.
 3. Place the kit on the Moon tile for the shooter, and give the diegetic pieces their game hooks (lamp state, gauge
    needles, charge bars, door rings, beacon chase).

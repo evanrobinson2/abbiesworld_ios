@@ -30,7 +30,9 @@ for slug in sorted(os.listdir(os.path.join(HERE, 'assets'))):
     notes = json.load(open(np_)) if os.path.exists(np_) else {'asset': slug, 'name': st['name'], 'brief': doc, 'rounds': []}
     notes['brief'] = doc
     if not any(r['n'] == 1 for r in notes['rounds']):
-        notes['rounds'].append({'n': 1, 'date': '2026-10-23', 't': 'First build from the pack style and the Faceted Hero rules, no Midjourney pick yet.'})
+        first = ('First build from its Midjourney pick (concept.jpg).' if 'matched to the midjourney pick' in doc.lower()
+                 else 'First build from the pack style and the Faceted Hero rules, no Midjourney pick yet.')
+        notes['rounds'].append({'n': 1, 'date': '2026-10-23', 't': first})
     if 'Round 2' in doc and not any(r['n'] == 2 for r in notes['rounds']):
         notes['rounds'].append({'n': 2, 'date': '2026-10-23', 'from': 'concept.jpg (the Midjourney pick)',
                                 't': 'Rebuilt against the Midjourney pick: chunky off-white modules held by dark bumper frames '
