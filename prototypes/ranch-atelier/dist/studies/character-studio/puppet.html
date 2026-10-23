@@ -20,6 +20,7 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#12161e;--sheet:#1a2030;--graphite:#8fb0e6;--ink:#e6ebf3;--muted:#9aa6ba;--wood:#e0a066;--line:#2c3446;--fill:#1d2436;--glass:rgba(40,48,68,.62);--rim:rgba(255,255,255,.16);--accent:#8fb0e6;color-scheme:dark}}
 :root[data-theme="dark"]{--paper:#12161e;--sheet:#1a2030;--graphite:#8fb0e6;--ink:#e6ebf3;--muted:#9aa6ba;--wood:#e0a066;--line:#2c3446;--fill:#1d2436;--glass:rgba(40,48,68,.62);--rim:rgba(255,255,255,.16);--accent:#8fb0e6;color-scheme:dark}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0;height:100%}
 body{background:var(--paper);color:var(--ink);font:15px/1.4 var(--display);overflow:hidden;
   display:grid;grid-template-rows:minmax(0,1fr) auto;height:100dvh;
@@ -226,6 +227,37 @@ function gaitPose(clip,φ){const g=gaitOf(clip),c=Math.cos,TAU=2*Math.PI;
   return p}
 function bakeGait(clip,n=8){return Array.from({length:n+1},(_,i)=>({t:i/n,p:gaitPose(clip,i/n)}))}
 
+// ---- From the 3D studio (AW-STUDY-0037, moves.mjs): its 50 moves, seen from the side.
+// A studio pose is {bone: [x, y, z] degrees from the rest A-pose}, composed down the chain as XYZ turns in character
+// space (rig.mjs applyPose; right-side y and z mirrored). Turn each bone's rest direction from rest-joints.json by its
+// chain, look at it from the figure's right (forward = screen right, up = up), and read off this rig's angle.
+const RJ={hc:[0,4.12,0],waist:[0,5.58,-.04],neck:[0,7.04,0],crown:[0,8.07,.05],hR:[-.3,4.12,0],kR:[-.3,2.14,.02],aR:[-.3,.12,0],tR:[-.3,.04,.7],
+  sR:[-.6,6.84,-.02],eR:[-1.087,5.6347,-.02],wR:[-1.5627,4.4571,-.02],fR:[-1.795,3.8823,-.02],hL:[.3,4.12,0],kL:[.3,2.14,.02],aL:[.3,.12,0],tL:[.3,.04,.7],
+  sL:[.6,6.84,-.02],eL:[1.087,5.6347,-.02],wL:[1.5627,4.4571,-.02],fL:[1.795,3.8823,-.02]};
+const S_PARENT={hips:"root",spine:"hips",chest:"spine",neck:"chest",head:"neck",clavicle_L:"chest",upperarm_L:"clavicle_L",forearm_L:"upperarm_L",hand_L:"forearm_L",
+  clavicle_R:"chest",upperarm_R:"clavicle_R",forearm_R:"upperarm_R",hand_R:"forearm_R",thigh_L:"hips",shin_L:"thigh_L",foot_L:"shin_L",thigh_R:"hips",shin_R:"thigh_R",foot_R:"shin_R"};
+const S_ORDER=["root","hips","spine","chest","neck","head","clavicle_L","upperarm_L","forearm_L","hand_L","clavicle_R","upperarm_R","forearm_R","hand_R","thigh_L","shin_L","foot_L","thigh_R","shin_R","foot_R"];
+const REST3={spine:["hc","waist"],chest:["waist","neck"],head:["neck","crown"]};
+for(const s of["L","R"])Object.assign(REST3,{["upperarm_"+s]:["s"+s,"e"+s],["forearm_"+s]:["e"+s,"w"+s],["hand_"+s]:["w"+s,"f"+s],
+  ["thigh_"+s]:["h"+s,"k"+s],["shin_"+s]:["k"+s,"a"+s],["foot_"+s]:["a"+s,"t"+s]});
+const qmul=(a,b)=>[a[3]*b[0]+a[0]*b[3]+a[1]*b[2]-a[2]*b[1],a[3]*b[1]-a[0]*b[2]+a[1]*b[3]+a[2]*b[0],a[3]*b[2]+a[0]*b[1]-a[1]*b[0]+a[2]*b[3],a[3]*b[3]-a[0]*b[0]-a[1]*b[1]-a[2]*b[2]];
+const qax=(i,t)=>{const q=[0,0,0,Math.cos(t/2)];q[i]=Math.sin(t/2);return q};
+const qeuler=(x,y,z,order)=>{const Q={X:qax(0,x*D),Y:qax(1,y*D),Z:qax(2,z*D)};return order.split("").reduce((q,k)=>qmul(q,Q[k]),[0,0,0,1])};
+const qrot=(q,v)=>{const p=qmul(qmul(q,[v[0],v[1],v[2],0]),[-q[0],-q[1],-q[2],q[3]]);return[p[0],p[1],p[2]]};
+const HIPPX=GROUND-HC[1];
+function from3D(sp){const t=sp.turn||[0,0,0],base=qeuler(t[0],t[1],t[2],"YXZ"),Q={},w={};
+  for(const b of S_ORDER){const r=sp[b],m=b.endsWith("_R")?-1:1,d=r?qeuler(r[0],m*r[1],m*r[2],"XYZ"):[0,0,0,1];Q[b]=qmul(b==="root"?base:(Q[S_PARENT[b]]||base),d)}
+  let prev=0;
+  for(const n of NAMES){const[a,c]=REST3[n],v=qrot(Q[n==="head"?"head":n],sub3(RJ[c],RJ[a]));
+    let wa=ang([v[2],-v[1]]);const q=PARENT[n],near=q?w[q]:(n==="spine"?180:0);w[n]=near+wrap(wa-near)}
+  const o=sp.root||[0,0,0];return grounded(fromWorld(w,{x:o[2]*HIPPX,lift:-(o[1]||0)*HIPPX}))}
+const sub3=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+let STUDIO=null;   // the 3D studio's moves, loaded on first look
+async function loadStudio(){if(STUDIO)return STUDIO;try{const m=await import("./moves.mjs");
+  STUDIO=m.MOVES.map(x=>{const g=m.GENRES.find(g=>g.id===x.genre);const clip={name:x.name,genre:g?g.name:x.genre,dur:x.len||x.fn.len||2,ease:"smooth",fn3:x.fn,
+    speed3:x.travel?(x.speed??x.fn.speed??0):0,from3d:1};clip.keys=[{t:0,p:from3D(x.fn(0))},{t:.5,p:from3D(x.fn(clip.dur/2))},{t:1,p:from3D(x.fn(clip.dur))}];return clip})}
+  catch(e){STUDIO=[]}return STUDIO}
+
 // ---- Stock moves, organised the way the Character Studio sorts its 50: by game genre.
 // keys: [t from 0 to 1, pose]. ease: smooth | linear | step. floor: never sink below the floor while playing.
 const ARMSUP={upperarm_R:-172,forearm_R:-178,hand_R:-178,upperarm_L:-168,forearm_L:-176,hand_L:-176};
@@ -286,7 +318,7 @@ function chan(clip,t,get){const k=clip.keys,n=k.length,loop=clip._loop;
   const m0=!A||Math.abs(p0-A.v)<hold||Math.abs(p1-p0)<hold?0:(p1-A.v)/(t1-A.t);
   const m1=!B||Math.abs(B.v-p1)<hold||Math.abs(p1-p0)<hold?0:(B.v-p0)/(B.t-t0);
   const u2=u*u,u3=u2*u;return(2*u3-3*u2+1)*p0+(u3-2*u2+u)*h*m0+(-2*u3+3*u2)*p1+(u3-u2)*h*m1}
-function sample(clip,t){if(clip.gait&&!clip.keyed)return gaitPose(clip,t);const k=clip.keys;if(!k.length)return clone(state.pose);
+function sample(clip,t){if(clip.gait&&!clip.keyed)return gaitPose(clip,t);if(clip.fn3&&!clip.keyed)return from3D(clip.fn3(t*clip.dur));const k=clip.keys;if(!k.length)return clone(state.pose);
   if(clip._loop===undefined)clip._loop=isLoop(clip);
   const p={x:chan(clip,t,q=>q.x),y:chan(clip,t,q=>q.y),r:chan(clip,t,q=>q.r),a:{}};
   for(const n of NAMES){const lag=state.playing&&clip.ease!=="step"?(LAG[n]||0)/clip.dur:0;p.a[n]=chan(clip,t-lag,q=>q.a[n])}
@@ -367,7 +399,8 @@ svg.addEventListener("pointerup",endDrag);svg.addEventListener("pointercancel",e
 // ---- Keys and the timeline strip
 function ensureClip(){if(!state.clip){state.clip={name:"My move",genre:"Mine",dur:2,ease:"smooth",floor:false,keys:[{t:0,p:clone(state.pose)}]};state.t=0;setName()}}
 function keyAt(t){return state.clip?state.clip.keys.find(k=>Math.abs(k.t-t)<0.012):null}
-function autoKey(){ensureClip();if(state.clip.gait&&!state.clip.keyed){const k=bakeGait(state.clip,16);state.clip.keys=k;markEdited()}const k=keyAt(state.t);if(k)k.p=clone(state.pose);else{state.clip.keys.push({t:state.t,p:clone(state.pose)});state.clip.keys.sort((a,b)=>a.t-b.t)}
+function autoKey(){ensureClip();if(state.clip.gait&&!state.clip.keyed){const k=bakeGait(state.clip,16);state.clip.keys=k;markEdited()}
+  if(state.clip.fn3&&!state.clip.keyed){const n=Math.max(12,Math.round(state.clip.dur*10));state.clip.keys=Array.from({length:n+1},(_,i)=>({t:i/n,p:sample(state.clip,i/n)}));state.clip.keyed=true;state.clip._loop=undefined;markEdited()}const k=keyAt(state.t);if(k)k.p=clone(state.pose);else{state.clip.keys.push({t:state.t,p:clone(state.pose)});state.clip.keys.sort((a,b)=>a.t-b.t)}
   state.clip.floor=false;markEdited();render()}
 function markEdited(){if(state.clip&&state.clip.gait&&!state.clip.keyed){state.clip.keyed=true;state.clip.dur=gaitOf(state.clip).T;state.clip._loop=true}
   if(state.clip)state.clip._loop=undefined;if(state.clip&&state.clip.stock){state.clip.stock=false;state.clip.name=state.clip.name+" (yours)";setName()}}
@@ -386,7 +419,7 @@ $("delKey").onclick=()=>{const k=keyAt(state.t);if(!k||state.clip.keys.length<2)
 
 let last=0;
 function frame(now){if(!state.playing)return;const dt=Math.min(.05,(now-(last||now))/1000);last=now;
-  const gs=state.clip.gait?speedOf(gaitOf(state.clip)):0;state.dist+=gs*dt*state.speed;
+  const gs=state.clip.gait?speedOf(gaitOf(state.clip)):(state.clip.speed3||0)*HIPPX;state.dist+=gs*dt*state.speed;
   state.t=(state.t+dt*state.speed/(state.clip.gait?gaitOf(state.clip).T:state.clip.dur))%1;state.pose=sample(state.clip,state.t);render();requestAnimationFrame(frame)}
 const PLAY='<path d="M8 5l11 7-11 7z"/>',PAUSE='<path d="M8 5v14M16 5v14"/>';
 function play(){ensureClip();if(state.clip.keys.length<2){toast("Set two keys, or pick a move below");return}state.playing=true;svg.classList.add("playing");$("playIcon").innerHTML=PAUSE;$("play").setAttribute("aria-label","Pause");last=0;requestAnimationFrame(frame)}
@@ -427,17 +460,25 @@ function thumb(clip){const k=clip.keys[Math.floor(clip.keys.length/2)]||clip.key
   for(const n of NAMES)if(n!=="head")s+=`<line x1="${f(F[n].base[0])}" y1="${f(F[n].base[1])}" x2="${f(F[n].tip[0])}" y2="${f(F[n].tip[1])}" style="stroke-width:${f((x1-x0)/14)}"/>`;
   const hd=F.head;const c=[(hd.base[0]+hd.tip[0])/2,(hd.base[1]+hd.tip[1])/2];s+=`<circle cx="${f(c[0])}" cy="${f(c[1])}" r="${f(L.head*.5)}"/>`;
   return s+"</svg>"}
-function drawTray(){const tray=$("tray");tray.innerHTML="";const all=[...mine().map(m=>({...m,mine:1})),...MOVES];
-  all.forEach((m,i)=>{const b=document.createElement("button");b.className="move glass";b.setAttribute("aria-pressed",state.moveIdx===i);
-    b.innerHTML=thumb(m)+`<b>${m.name.replace(/</g,"&lt;")}</b><small>${m.genre}</small>`;
-    b.onclick=()=>{state.moveIdx=i;state.clip={name:m.name,genre:m.genre,dur:m.dur,ease:m.ease||"smooth",floor:m.floor!==false&&!m.mine,stock:!m.mine,gait:m.gait,pace:m.pace,keys:m.keys.map(k=>({t:k.t,p:clone(k.p)}))};showPace();
-      state.t=0;setName();drawTray();play()};
-    tray.appendChild(b)})}
+state.tray="puppet";
+function card(m,i,list){const b=document.createElement("button");b.className="move glass";b.setAttribute("aria-pressed",state.moveIdx===state.tray+i);
+  b.innerHTML=thumb(m)+`<b>${m.name.replace(/</g,"&lt;")}</b><small>${m.genre}</small>`;
+  b.onclick=()=>{state.moveIdx=state.tray+i;state.clip={name:m.name,genre:m.genre,dur:m.dur,ease:m.ease||"smooth",floor:m.floor!==false&&!m.mine,stock:!m.mine,gait:m.gait,pace:m.pace,
+    fn3:m.fn3,speed3:m.speed3,keys:m.keys.map(k=>({t:k.t,p:clone(k.p)}))};showPace();state.t=0;setName();drawTray();play()};
+  return b}
+function drawTray(){const tray=$("tray");tray.innerHTML="";
+  const sw=document.createElement("button");sw.className="move glass";sw.style.width="96px";
+  sw.innerHTML=state.tray==="puppet"?`<b style="margin-top:14px">3D studio moves</b><small>50 more</small>`:`<b style="margin-top:14px">Puppet moves</b><small>${MOVES.length}</small>`;
+  sw.onclick=async()=>{state.tray=state.tray==="puppet"?"studio":"puppet";if(state.tray==="studio")await loadStudio();drawTray();tray.scrollLeft=0};
+  tray.appendChild(sw);
+  const all=state.tray==="puppet"?[...mine().map(m=>({...m,mine:1})),...MOVES]:STUDIO||[];
+  if(state.tray==="studio"&&!all.length){const e=document.createElement("small");e.textContent="The 3D studio's moves didn't load here.";e.style.alignSelf="center";tray.appendChild(e)}
+  all.forEach((m,i)=>tray.appendChild(card(m,i,all)))}
 addEventListener("resize",render);
 drawTray();render();
 // open on a move so the page is alive the moment it loads; a joint drag stops it and you take over
 const start=MOVES.findIndex(m=>m.name===(new URLSearchParams(location.search).get("move")||"Wave"));
-if(start>=0){const b=$("tray").children[mine().length+start];b.click();$("tray").children[mine().length+start].scrollIntoView({block:"nearest",inline:"center"})}
+if(start>=0){const i=mine().length+start+1;$("tray").children[i].click();$("tray").children[i].scrollIntoView({block:"nearest",inline:"center"})}
 </script>
 </body>
 </html>
