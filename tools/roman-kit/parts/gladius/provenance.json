@@ -1,0 +1,30 @@
+{
+  "part": "gladius",
+  "date": "2026-10-23",
+  "concept": {
+    "source": "Midjourney",
+    "job_id": "75c42e65-c7a9-46c3-aa78-d8c1520b43b5",
+    "image_index": 0,
+    "file": "concept.png",
+    "prompt": "A single stylish Roman gladius sword only, entire sword visible from pommel to tip, short broad straight double-edged blade with a sharply tapered triangular point and bold central ridge, compact sculpted crossguard, elegantly faceted grip with subtle geometric grooves, distinctive angular rounded pommel, restrained embossed laurel motif on the guard, heroic proportions and strong readable silhouette, premium strategy-game equipment asset, stylized low-poly with deliberate clean broad planar facets, elegant ivory-white monochromatic material throughout, three-quarter orthographic product view, diagonally composed and centered with generous margins, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, figure, hand, mannequin, anatomy, body, pedestal, text, scenery, scabbard, shield, multiple swords --ar 1:1 --stylize 200 --v 8.2",
+    "created": "2026-10-22T15:58:02.979521+00:00",
+    "picked_by": "Evan"
+  },
+  "mask": {
+    "tool": "rembg isnet-general-use",
+    "file": "concept_mask.png"
+  },
+  "construction": {
+    "recipe": "build.py",
+    "tool": "Blender 5.2 (bpy) headless",
+    "output": "gladius.glb"
+  },
+  "scoring": {
+    "tool": "../../score.py",
+    "outputs": [
+      "r/score.json",
+      "r/compare.jpg",
+      "r/hero.png"
+    ]
+  }
+}

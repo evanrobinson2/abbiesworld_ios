@@ -1,6 +1,8 @@
+const {account}=require('../lib/account.cjs');
+const {wallet,PRICES}=require('../lib/wallet.cjs');
 const buckets=new Map();
 const MODEL='openai/gpt-6-luna'; // Verified against the live Gateway catalog, 2026-10-21.
-function createHandler({fetcher=fetch,env=process.env,now=Date.now}={}){return async(req,res)=>{
+function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,purse=wallet}={}){return async(req,res)=>{
  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
  const fail=(code,message)=>{res.statusCode=code;res.setHeader('Content-Type','application/json');res.end(JSON.stringify({error:message}));};
  if(req.method==='GET'){res.setHeader('Content-Type','application/json');return res.end(JSON.stringify({enabled:env.AI_COMPOSITION_ENABLED==='true',model:MODEL,version:1}));}
@@ -15,6 +17,9 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now}={}){return a
  const at=now(),ip=req.headers['x-vercel-forwarded-for']||req.headers['x-forwarded-for']||'unknown';
  for(const [key,value]of buckets)if(at-value.at>60000)buckets.delete(key);
  const rate=buckets.get(ip)||{at,n:0};if(rate.n>=6)return fail(429,'Please wait a minute before another composition.');rate.n++;buckets.set(ip,rate);
+ // Each plan is charged to the signed-in player's spending cap (lib/wallet.cjs) before it is asked for.
+ const me=who(req,env);if(!me)return fail(401,'Sign in to plan tiles with AI. Your tile is saved.');
+ if(!await purse().charge(me,PRICES.composeCall))return fail(402,'AI planning has used up its magic for now. Your tile is saved.');
  const {PLANNER_PROMPT,validateComposition,describeComposition}=await import('../simulations/ai-composition-contract.mjs');
  res.statusCode=200;res.setHeader('Content-Type','text/event-stream; charset=utf-8');res.setHeader('X-Accel-Buffering','no');res.flushHeaders?.();
  let seq=0,closed=false;const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),45000);

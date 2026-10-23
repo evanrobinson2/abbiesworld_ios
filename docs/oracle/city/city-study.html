@@ -1,0 +1,384 @@
+<title>The City Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a town plan you read top to bottom; each section is one figure plus the words that explain it. */
+:root{
+ --paper:#efe5cf; --sheet:#f8f2e4; --ink:#2d2a26; --mute:#6f6658; --rule:#d8ccb2;
+ --teal:#3b8f8b; --terra:#c9694f; --brass:#c9921f; --shade:#5a6a8c; --leaf:#6e8a4a; --water:#7fa9b8;
+ --q1:#c9694f; --q2:#5a6a8c; --q3:#6e8a4a;
+ --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+ --body:"Source Serif 4",Georgia,serif;
+ --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --paper:#1d1b22; --sheet:#26232b; --ink:#efe6d4; --mute:#a99f8d; --rule:#3d3843;
+ --teal:#5fb3ae; --terra:#e08a6f; --brass:#e3ab35; --shade:#8fa0c4; --leaf:#93b26c; --water:#5d8797;
+ --q1:#e08a6f; --q2:#8fa0c4; --q3:#93b26c; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --paper:#1d1b22; --sheet:#26232b; --ink:#efe6d4; --mute:#a99f8d; --rule:#3d3843;
+ --teal:#5fb3ae; --terra:#e08a6f; --brass:#e3ab35; --shade:#8fa0c4; --leaf:#93b26c; --water:#5d8797;
+ --q1:#e08a6f; --q2:#8fa0c4; --q3:#93b26c; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:17px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+main{max-width:1060px;margin:0 auto;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(40px,7vw,76px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3.6vw,36px);font-weight:700}
+h3{font-size:19px;font-weight:700}
+p{margin:0;max-width:66ch}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+section{display:grid;gap:18px;min-width:0}
+.lede{font-size:20px;max-width:60ch}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:32px;align-items:center}
+@media (max-width:820px){.hero{grid-template-columns:1fr}}
+.hero-words{display:grid;gap:16px}
+.figure{background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:16px;overflow-x:auto}
+.figure svg{display:block;width:100%;height:auto}
+.cap{font-size:14px;color:var(--mute)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}
+.two>*{min-width:0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.fact{border-top:3px solid var(--teal);padding-top:8px}
+.fact b{display:block;font:800 30px/1.1 var(--display);font-variant-numeric:tabular-nums}
+.fact span{font-size:14px;color:var(--mute)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:600 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto}
+ul.tight{margin:0;padding-left:20px;display:grid;gap:6px;max-width:66ch}
+.rec{border:2px solid var(--teal);border-radius:14px;padding:20px;display:grid;gap:10px;background:var(--sheet)}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.mode>div{background:var(--sheet);padding:14px;display:grid;gap:6px;align-content:start}
+.mode h3{font-size:17px}
+.mode .tag{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.mode ul{margin:0;padding-left:18px;font-size:15px}
+.mode .none{grid-column:1/-1}
+@media (max-width:560px){.mode{grid-template-columns:1fr}}
+svg text{font-family:var(--mono);fill:var(--ink)}
+footer{font-size:14px;color:var(--mute)}
+code{font-family:var(--mono);font-size:.86em}
+</style>
+
+<main>
+<header class="hero">
+ <div class="hero-words">
+  <div class="eyebrow">Oracle study · proposal · 23 Oct 2026</div>
+  <h1>The City</h1>
+  <p class="lede">A market town of a thousand real people on three hexes. It reads as a city because of its structure and its shared day, and every person in it has a home, a job and a plan.</p>
+  <div class="facts">
+   <div class="fact"><b>1,000</b><span>people, 420 households</span></div>
+   <div class="fact"><b>3 hexes</b><span>about 5 ha, 200 people/ha</span></div>
+   <div class="fact"><b>150</b><span>buildings, 6 landmarks</span></div>
+   <div class="fact"><b>1.5 ms</b><span>sim budget per frame on iPhone</span></div>
+  </div>
+ </div>
+ <div class="figure" style="display:grid;gap:10px"><div class="eyebrow">Revised 23 Oct</div><h2>The town is founded by simulation, not drawn</h2><p>Land first (hills, two rivers that meet, the sea), then a founding party choosing the safe place that costs the least walking, then year-by-year growth. Streets, the bridge, mill, market and bell tower appear where the simulation measures the need.</p><p><a href="https://claude.ai/artifact/2dV9NZvL5piemoHvRLwiKg">Watch the founding</a></p></div>
+</header>
+
+<section>
+ <div class="eyebrow">What exists today</div>
+ <h2>A diorama of 19 people, and the parts for a real town</h2>
+ <p>The tray already has a city: <b>Futurama</b>, honestly labelled "traffic is decorative, not a city economy". It brings a three-hex footprint, district roads, palette recolouring and a parcel courier loop. Town life brings a household economy and job silhouettes (a hat and a prop per role). The shared resource loop, the fixed clock, the render pool, the holodeck and the chronograph are all ready to carry a city. The City builds on them, takes Futurama's tray slot when it is better, and keeps Futurama as a retro-future style variant.</p>
+</section>
+
+<section>
+ <div class="eyebrow">1 · First principles</div>
+ <h2>A thousand people, honestly</h2>
+ <div class="two">
+  <div class="figure"><svg id="waffle" viewBox="0 0 520 300" role="img" aria-label="One thousand squares, one per person, coloured by age and work."></svg>
+  <p class="cap">One square per person. 470 work (70 of them on neighbouring tiles), 150 children at school, 50 little ones, 180 elders, 150 adults caring, studying or between jobs.</p></div>
+  <div style="display:grid;gap:14px;align-content:start">
+   <p>One hex would need 600 people per hectare, which means tower blocks and a different game. Three Ranch-sized hexes give about 5 hectares, so 1,000 people sit at about 200 per hectare, the density of a historic walled town. The population is real, so the town never has to fake it with a counter.</p>
+   <p>Places of this size, for mood (populations approximate): <b>Tobermory</b> (about 1,000, a painted harbour front), <b>Hallstatt</b> (about 750, houses stacked between lake and mountain), <b>Bibury</b> (about 600, one stream and a row of cottages), <b>Ogimachi</b> in Shirakawa-go (about 600), the <b>Cinque Terre</b> villages. Everyone knows everyone by sight: about seven overlapping circles of 150 friends.</p>
+  </div>
+ </div>
+</section>
+
+<section>
+ <h2>Five things a mind uses to read a city</h2>
+ <p>Kevin Lynch found that people hold a city in their head as paths, edges, districts, nodes and landmarks. At tile scale each one becomes one deliberate move. Christopher Alexander's patterns (small squares, a promenade, a four-storey limit, lit windows) become the generator's rules.</p>
+ <div class="tbl"><table>
+  <tr><th>Lynch</th><th>The City</th><th>Why it reads at board-game hover</th></tr>
+  <tr><td><b>Path</b></td><td>One high street bending through all three hexes, lanes off it</td><td>A single strong line the eye follows</td></tr>
+  <tr><td><b>Edge</b></td><td>A river on one side; a wall stub or hedge on the others</td><td>The town ends crisply, like a Dorfromantik tile</td></tr>
+  <tr><td><b>District</b></td><td>Market, Mill and Hill quarters, one per hex</td><td>Each has its own roof colours and its own sound</td></tr>
+  <tr><td><b>Node</b></td><td>The square, where the high street widens</td><td>Fullest at noon</td></tr>
+  <tr><td><b>Landmark</b></td><td>The clock tower</td><td>Seen from every angle, and it tells the time</td></tr>
+ </table></div>
+</section>
+
+<section>
+ <h2>A city is a day everyone shares</h2>
+ <div class="two">
+  <div class="figure"><svg id="dial" viewBox="0 0 420 420" role="img" aria-label="A 24-hour dial of the town's day, from the bakery at 5 to the night watch."></svg>
+  <p class="cap">The town's day. Every event is something you see or hear in the world.</p></div>
+  <div class="tbl"><table id="daytable"><tr><th>Time</th><th>The town</th><th>How you know</th></tr></table></div>
+ </div>
+</section>
+
+<section>
+ <h2>What we take from the builders Evan likes</h2>
+ <p>Style yes, expression never.</p>
+ <div class="tbl"><table>
+  <tr><th>Game</th><th>We take</th><th>We leave</th></tr>
+  <tr><td><b>Townscaper</b></td><td>Stacking rules that make arches, stairs and roof gardens by themselves; colour as the player's choice; no failure</td><td>Its grid, look and sea</td></tr>
+  <tr><td><b>Tiny Glade</b></td><td>No visible grid; the town details itself as it grows</td><td>Its castles and painterly look</td></tr>
+  <tr><td><b>Dorfromantik</b></td><td>A tile is a stamp of meaning with edges that must make sense; quests sit on the tile</td><td>Its art and scoring</td></tr>
+  <tr><td><b>LEGO Bricktales</b></td><td>The town as a diorama you can hold; puzzles in a real place</td><td>LEGO itself</td></tr>
+  <tr><td><b>9 Kings</b></td><td>A kingdom built from cards; buildings grow stronger beside the right neighbours</td><td>Battles and art</td></tr>
+ </table></div>
+</section>
+
+<section>
+ <div class="eyebrow">2 · Simulation</div>
+ <h2>Schedule is the truth, motion is a view</h2>
+ <p>Each person is one row in typed arrays, about 64 bytes: home, workplace or school, role, age, one of twelve day plans, a few minutes of jitter, a trait and three friends. Where anyone is at time <i>t</i> is a lookup in their plan plus a cached street route, so knowing where all 1,000 people are costs almost nothing, and someone who walks off-screen comes back exactly where they should be. Saves hold the seed, the clock and what changed.</p>
+ <div class="two">
+  <div class="figure"><svg id="tiers" viewBox="0 0 520 360" role="img" aria-label="Four tiers of people by distance from the camera: heroes, agents within 35 metres, the instanced crowd on visible streets, and the ledger of everyone."></svg>
+  <p class="cap">Tiers by distance. A walker promotes to a full agent at the same spot on the same route, and demotes by handing their place back to the plan.</p></div>
+  <div class="tbl"><table>
+   <tr><th>Tier</th><th>Who</th><th>Max</th><th>Cost</th></tr>
+   <tr><td><b>T0 Heroes</b></td><td>Named townsfolk a child gets to know; full logic always; Suzy can see them</td><td class="n">12</td><td class="n">tiny</td></tr>
+   <tr><td><b>T1 Agents</b></td><td>Within ~35 m at close zoom, or tapped; navigation, emotes, chats</td><td class="n">40</td><td class="n">0.6 ms</td></tr>
+   <tr><td><b>T2 Crowd</b></td><td>On visible streets; instanced, walk cycle in the shader</td><td class="n">300</td><td class="n">0.3 ms, 4–8 draws</td></tr>
+   <tr><td><b>T3 Ledger</b></td><td>Everyone, counted per building and street once a second</td><td class="n">1,000</td><td class="n">0.1 ms/s</td></tr>
+  </table></div>
+ </div>
+</section>
+
+<section>
+ <h2>The budget comes first</h2>
+ <div class="two">
+  <div class="figure"><svg id="jobs" viewBox="0 0 520 330" role="img" aria-label="Bar chart of 400 in-town jobs by sector."></svg>
+  <p class="cap">400 jobs in town, plus 70 commuting out. Goods move on the shared resource loop: bread, milk and parcels first. No crime: the fire crew rescues cats.</p></div>
+  <div class="tbl"><table>
+   <tr><th>City's share</th><th>iPhone, 30 fps</th><th>Desktop, 60 fps</th></tr>
+   <tr><td>Simulation CPU</td><td class="n">1.5 ms</td><td class="n">1.0 ms</td></tr>
+   <tr><td>Draw calls</td><td class="n">150</td><td class="n">250</td></tr>
+   <tr><td>Triangles, close</td><td class="n">350k</td><td class="n">800k</td></tr>
+   <tr><td>Triangles, board hover</td><td class="n">120k</td><td class="n">250k</td></tr>
+   <tr><td>Texture memory</td><td class="n">48 MB</td><td class="n">96 MB</td></tr>
+   <tr><td>First download</td><td class="n">6 MB</td><td class="n">6 MB</td></tr>
+   <tr><td>People data</td><td class="n">64 KB</td><td class="n">64 KB</td></tr>
+  </table>
+  <p class="cap" style="margin-top:10px">Buildings: ~28 kit modules, one instanced mesh per module and material; still pieces merged per quarter by the render pool; one shell per quarter at board hover; card art off the board. Lit windows are an instance colour; at most four real lights. Futurama's per-trip route search is fine for 19 people, so the City caches routes instead.</p></div>
+ </div>
+</section>
+
+<section>
+ <div class="eyebrow">3 · Information</div>
+ <h2>Bells, clocks, windows and banners</h2>
+ <p>The Ranch speaks in wood, bells and painted signs. The City is its big sister and adds a public clock, shop windows, chalkboards, lamps and bunting. The question every time: how would a townsperson know this?</p>
+ <div class="mode">
+  <div><span class="tag">In the world · characters know</span><h3>Diegetic</h3><ul><li>The clock tower face and the hour bells</li><li>Windows light as people come home; chimney smoke</li><li>"Help wanted" card in a shop window; tap to hire a neighbour</li><li>Bunting on market day; empty stalls when food is short</li><li>The milk cart on the road from the Ranch</li></ul></div>
+  <div><span class="tag">In the world · only you know</span><h3>Spatial</h3><ul><li>Emote bubbles over people near the camera</li><li>Tap someone: they wave, "Hi, I'm Rosa, I bake the bread!"</li><li>The selection ring under who you picked</li></ul></div>
+  <div><span class="tag">On screen · feelings</span><h3>Meta</h3><ul><li>Music lifts before a festival</li><li>Sparkle at the edges on festival night: playful, never scary</li><li>Rain shifts the music key</li></ul></div>
+  <div><span class="tag">On screen · precise</span><h3>Overlay</h3><ul><li>The chronograph dial, at a glance</li><li>Census and ledger in the grown-up workbench only</li><li>Never: floating labels, district names, a population counter in play</li></ul></div>
+  <div class="none"><span class="tag">None · the world just behaves</span><ul><li>How full the streets are; a queue at the bakery; umbrellas when it rains; the town falling asleep window by window</li></ul></div>
+ </div>
+ <div class="tbl"><table>
+  <tr><th>Manifest item</th><th>Says</th><th>For</th><th>Prefer</th></tr>
+  <tr><td><code>time-of-day</code></td><td>what time it is</td><td>player, director</td><td>none, diegetic, overlay</td></tr>
+  <tr><td><code>next-bell</code></td><td>what the next bell is for</td><td>player, director</td><td>diegetic</td></tr>
+  <tr><td><code>market-day</code></td><td>whether it's market day</td><td>player, director</td><td>diegetic</td></tr>
+  <tr><td><code>school</code></td><td>whether school is in</td><td>player, director</td><td>diegetic</td></tr>
+  <tr><td><code>bustle</code></td><td>how busy the town is</td><td>player, director</td><td>none, diegetic</td></tr>
+  <tr><td><code>homes-lit</code></td><td>who is home</td><td>player, director</td><td>diegetic</td></tr>
+  <tr><td><code>help-wanted</code></td><td>jobs that need someone</td><td>player, director</td><td>diegetic, spatial</td></tr>
+  <tr><td><code>festival</code></td><td>the next festival</td><td>player, director</td><td>diegetic, meta</td></tr>
+  <tr><td><code>deliveries</code></td><td>carts from other tiles</td><td>player, director</td><td>diegetic</td></tr>
+  <tr><td><code>mood</code></td><td>how the town feels</td><td>player, director</td><td>spatial, meta</td></tr>
+  <tr><td><code>census</code></td><td>people by age and job</td><td>grown-up, director</td><td>overlay</td></tr>
+  <tr><td><code>ledger</code></td><td>coins in and out</td><td>grown-up</td><td>overlay</td></tr>
+ </table></div>
+ <p><b>Chronograph complications</b> are what a townsperson glances at the tower for: the next bell, market day, school in or out, the festival countdown and the carts. The world suggests one when it matters, such as the festival dial the day before. The census and ledger never become complications.</p>
+</section>
+
+<section>
+ <div class="eyebrow">4 · Assets</div>
+ <h2>Six heroes, one kit, a grammar, and the Ranch's models</h2>
+ <div class="two">
+  <div class="figure"><svg id="assets" viewBox="0 0 520 300" role="img" aria-label="Asset tiers: 6 hero landmarks, about 28 kit modules, grammar rules, and impostors."></svg>
+  <p class="cap">Tiers from the image-to-scene granularity rubric. Kit modules sit on a 3 m storey and a 4.5 m bay.</p></div>
+  <div style="display:grid;gap:12px;align-content:start">
+   <p><b>Heroes</b>: town hall with clock tower, market hall, the café (the Morning Café's home), bakery, school, fountain and well.</p>
+   <p><b>Kit</b>: townhouse ground floors (door, three shopfronts, arch), upper floors (two windows, balcony, bay), roofs (gable, hip, dormer), chimney, corner, stair, awnings, sign bracket, lamp post, bollard, stall, cart, bunting, laundry line, gate, wall, bridge.</p>
+   <p><b>Grammar</b>: streets and kerbs from the street graph, Townscaper-style stacking, window lights, bunting, tree rows, house colours from the figure band. No new models.</p>
+   <p><b>People</b>: one body in four shapes and three ages, twelve role silhouettes.</p>
+  </div>
+ </div>
+ <h3>27 of the 36 rebuilt Ranch models come across</h3>
+ <p id="reuse" class="cap" style="font-size:15px;max-width:none"></p>
+ <h3>Six Midjourney sheets</h3>
+ <ul class="tight">
+  <li>The establishing shot: the town on a table at board-game hover, golden hour</li>
+  <li>The square at noon and at dusk, from the same camera</li>
+  <li>The townhouse kit, orthographic facades and roofs</li>
+  <li>The six landmarks, turnaround sheet</li>
+  <li>Twelve townsfolk by role, silhouettes first</li>
+  <li>The dialect sheet: shop signs, chalkboards, bunting, lamps, bells</li>
+ </ul>
+</section>
+
+<section>
+ <div class="eyebrow">5 · The board</div>
+ <h2>It needs its neighbours</h2>
+ <div class="two">
+  <div class="figure"><svg id="board" viewBox="0 0 520 420" role="img" aria-label="The three-hex City surrounded by Ranch, Garden, Meadow and Moonbase tiles, with what flows each way."></svg>
+  <p class="cap">Each edge is a road stub. A neighbour turns it into a route with a real cart on it.</p></div>
+  <div style="display:grid;gap:12px;align-content:start">
+   <p><b>A three-hex card.</b> In the hand it's a bloom-tier card like the Moonbase: <i>The City</i>, "A town of a thousand neighbours", with coin, heart and hammer icons (all in the Card Forge already). Dragging it shows the three-hex ghost from the existing footprint code, which already tries all six rotations.</p>
+   <p><b>Adjacency you can see.</b> Each neighbouring food tile fills a row of market stalls. A city with no neighbours still works, but its square looks emptier. Nobody fails.</p>
+   <p><b>One signal.</b> The City listens to the same time, season, weather and mood as the Ranch, so the whole board goes to dusk together.</p>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="eyebrow">6 · Plan</div>
+ <h2>Phases</h2>
+ <div class="figure"><svg id="phases" viewBox="0 0 1000 230" role="img" aria-label="Six phases from crowd proof to heroes and stories, each with its gate."></svg></div>
+ <div class="rec">
+  <div class="eyebrow">Recommendation</div>
+  <h3>Approve the market town: three hexes, 1,000 real people, schedule as truth. Start the crowd proof now.</h3>
+  <p>The crowd proof is the riskiest part and it is initiative 1: 1,000 scheduled people on the existing three-hex footprint, gated at 30 fps on Evan's iPhone and 1.5 ms of simulation. The concept sheets run alongside it. When the town generator lands, the City takes Futurama's slot in the tray, and Futurama becomes a retro-future style variant.</p>
+  <p class="cap">Considered and set aside: a one-hex city (needs towers); a symbolic city of a few dozen walkers and a counter (the number would be a lie); full agents for all 1,000 (about ten times the phone's CPU budget).</p>
+ </div>
+</section>
+
+<footer>Study source: <code>docs/oracle/city/CITY_STUDY.md</code> and <code>city-proposed.json</code> in evanrobinson2/abbiesworld_ios. Builds on the HUD, aesthetic and card studies and the scene information manifest.</footer>
+</main>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+let seed=7;const rnd=()=>((seed=(seed*16807)%2147483647)/2147483647);
+const hexPts=(cx,cy,r)=>Array.from({length:6},(_,i)=>{const a=Math.PI/180*(60*i-30);return [cx+r*Math.cos(a),cy+r*Math.sin(a)];});
+const insideHex=(x,y,cx,cy,r)=>{const dx=Math.abs(x-cx),dy=Math.abs(y-cy);return dy<=r*Math.sqrt(3)/2*1.155&&dx<=r*Math.sqrt(3)/2&&dy+dx/Math.sqrt(3)<=r;};
+
+/* 1 · Plan */
+(function(){
+ const s=document.getElementById('plan');if(!s)return;const R=130,w=Math.sqrt(3)*R;
+ const C=[[160,165,'Market','var(--q1)'],[160+w,165,'Mill','var(--q2)'],[160+w/2,165+1.5*R,'Hill','var(--q3)']];
+ // river along the right
+ el('path',{d:'M520 0 C 470 120, 540 240, 470 360 S 520 470, 500 520',fill:'none',stroke:'var(--water)','stroke-width':18,'stroke-linecap':'round',opacity:.8},s);
+ for(const [x,y,,c] of C)el('polygon',{points:hexPts(x,y,R).map(p=>p.join(',')).join(' '),fill:c,'fill-opacity':.1,stroke:c,'stroke-width':2},s);
+ // high street: a bend through all three
+ const street='M 52 140 C 140 120, 200 200, 250 215 S 380 160, 420 140 M 250 215 C 265 280, 250 330, 285 420';
+ el('path',{d:street,fill:'none',stroke:'var(--rule)','stroke-width':16,'stroke-linecap':'round'},s);
+ el('path',{d:street,fill:'none',stroke:'var(--sheet)','stroke-width':10,'stroke-linecap':'round'},s);
+ // lanes
+ const lanes=['M 110 132 L 95 60','M 175 175 L 150 270','M 340 180 L 330 80','M 380 155 L 420 250','M 262 300 L 190 330','M 270 360 L 350 350'];
+ for(const d of lanes){el('path',{d,fill:'none',stroke:'var(--rule)','stroke-width':7,'stroke-linecap':'round'},s);el('path',{d,fill:'none',stroke:'var(--sheet)','stroke-width':3.5,'stroke-linecap':'round'},s);}
+ // houses along every path
+ const g=el('g',{},s);const tmp=el('path',{d:street},null);
+ const paths=[street,...lanes].map(d=>{const p=el('path',{d,fill:'none',stroke:'none'},s);return p;});
+ const placed=[];
+ for(const p of paths){const L=p.getTotalLength();for(let t=6;t<L-6;t+=11){const a=p.getPointAtLength(t),b=p.getPointAtLength(Math.min(L,t+1));const ang=Math.atan2(b.y-a.y,b.x-a.x);for(const side of [-1,1]){if(rnd()<.12)continue;const off=(p===paths[0]?16:11)+rnd()*2;const x=a.x-Math.sin(ang)*off*side,y=a.y+Math.cos(ang)*off*side;if(Math.hypot(x-250,y-215)<34)continue;const q=C.findIndex(([cx,cy])=>insideHex(x,y,cx,cy,R-6));if(q<0)continue;if(placed.some(([px,py])=>Math.hypot(px-x,py-y)<9.5))continue;placed.push([x,y]);const hw=4+rnd()*2;el('rect',{x:x-hw,y:y-4,width:hw*2,height:8,rx:1.2,fill:C[q][3],'fill-opacity':.55+rnd()*.4,transform:`rotate(${ang*180/Math.PI} ${x} ${y})`},g);}}}
+ // trees
+ for(let i=0;i<40;i++){const q=C[i%3];const x=q[0]+(rnd()-.5)*R*1.5,y=q[1]+(rnd()-.5)*R*1.5;if(!insideHex(x,y,q[0],q[1],R-8)||placed.some(([px,py])=>Math.hypot(px-x,py-y)<10)||Math.hypot(x-250,y-215)<34)continue;el('circle',{cx:x,cy:y,r:3.5,fill:'var(--leaf)',opacity:.7},s);}
+ // square + tower
+ el('circle',{cx:250,cy:215,r:26,fill:'var(--sheet)',stroke:'var(--rule)','stroke-width':2},s);
+ el('rect',{x:243,y:206,width:14,height:14,fill:'var(--teal)',rx:2},s);
+ el('circle',{cx:250,cy:213,r:3.2,fill:'var(--brass)'},s);
+ // road stubs
+ const stubs=[[52,140,18,140,'to Ranch'],[420,140,440,110,'to Moonbase'],[285,420,290,470,'to Garden'],[95,60,90,22,'to Meadow']];
+ for(const [x1,y1,x2,y2,t] of stubs){el('line',{x1,y1,x2,y2,stroke:'var(--mute)','stroke-width':3,'stroke-dasharray':'4 4'},s);el('text',{x:x2+(x2<60?4:6),y:y2+(y2>460?16:-6),'font-size':11,fill:'var(--mute)'},s,t);}
+ for(const [x,y,n,c] of C)el('text',{x,y:y+(n==='Hill'?R-30:-R+34),'text-anchor':'middle','font-size':13,'font-weight':600,fill:c},s,n+' quarter');
+ el('text',{x:250,y:258,'text-anchor':'middle','font-size':11},s,'square · clock tower');
+ el('text',{x:505,y:300,'font-size':11,fill:'var(--mute)','text-anchor':'end',transform:'rotate(-80 505 300)'},s,'river (the edge)');
+})();
+
+/* Waffle */
+(function(){
+ const s=document.getElementById('waffle');
+ const groups=[['Work in town',400,'var(--teal)'],['Work on other tiles',70,'var(--brass)'],['At school',150,'var(--terra)'],['Little ones',50,'#e3a58f'],['Caring, studying, between jobs',150,'var(--shade)'],['Elders',180,'var(--leaf)']];
+ let i=0;const cols=50,sz=7.2,gap=1.6;
+ for(const [,n,c] of groups)for(let k=0;k<n;k++,i++){const x=(i%cols)*(sz+gap),y=Math.floor(i/cols)*(sz+gap);el('rect',{x,y,width:sz,height:sz,rx:1.4,fill:c},s);}
+ let lx=0,ly=190;groups.forEach(([t,n,c],j)=>{const x=(j%2)*260,y=ly+Math.floor(j/2)*34;el('rect',{x,y,width:12,height:12,rx:2,fill:c},s);el('text',{x:x+18,y:y+11,'font-size':12.5},s,`${t} · ${n}`);});
+})();
+
+/* Day dial */
+const DAY=[[5,'Bakery lights its oven','one warm window, chimney smoke'],[6,'First bell; milk cart from the Ranch','a bell; a cart on the road'],[7.5,'Everyone heads out','streets fill, doors open'],[8.5,'School bell','children run in'],[10,'Shops open; market day stalls','awnings, bunting'],[12,'Noon bell; lunch in the square','the square at its fullest'],[15,"School's out",'children in the park'],[17.5,'Shops close; commuters home','carts on the edge roads'],[19,'Dusk: the lamplighter walks','lamps come on one by one'],[21,'Windows go dark','the town falls asleep'],[23.5,'Night watch','one lantern on the wall']];
+(function(){
+ const s=document.getElementById('dial'),cx=210,cy=210,R=150;
+ const ang=h=>(h/24)*Math.PI*2-Math.PI/2;
+ const arc=(h1,h2,r,col,w)=>{const a1=ang(h1),a2=ang(h2),large=(h2-h1)>12?1:0;el('path',{d:`M${cx+r*Math.cos(a1)} ${cy+r*Math.sin(a1)} A${r} ${r} 0 ${large} 1 ${cx+r*Math.cos(a2)} ${cy+r*Math.sin(a2)}`,fill:'none',stroke:col,'stroke-width':w},s);};
+ arc(0,6,R,'var(--shade)',22);arc(6,19,R,'var(--brass)',22);arc(19,24,R,'var(--shade)',22);
+ el('circle',{cx,cy,r:R-11,fill:'var(--sheet)'},s);
+ for(let h=0;h<24;h+=3){const a=ang(h);el('text',{x:cx+(R+24)*Math.cos(a),y:cy+(R+24)*Math.sin(a)+4,'text-anchor':'middle','font-size':11,fill:'var(--mute)'},s,String(h).padStart(2,'0'));}
+ DAY.forEach(([h,t],i)=>{const a=ang(h);el('line',{x1:cx+(R-11)*Math.cos(a),y1:cy+(R-11)*Math.sin(a),x2:cx+(R-34)*Math.cos(a),y2:cy+(R-34)*Math.sin(a),stroke:'var(--ink)','stroke-width':1.5},s);el('circle',{cx:cx+(R-42)*Math.cos(a),cy:cy+(R-42)*Math.sin(a),r:9,fill:[6,8.5,12].includes(h)?'var(--brass)':'var(--teal)'},s);el('text',{x:cx+(R-42)*Math.cos(a),y:cy+(R-42)*Math.sin(a)+3.5,'text-anchor':'middle','font-size':9.5,fill:'#fff','font-weight':600},s,i+1);});
+ el('text',{x:cx,y:cy-6,'text-anchor':'middle','font-size':15,'font-weight':600},s,'one town day');
+ el('text',{x:cx,y:cy+14,'text-anchor':'middle','font-size':11,fill:'var(--mute)'},s,'gold dots ring a bell');
+ const tb=document.getElementById('daytable');
+ DAY.forEach(([h,t,k],i)=>{const tr=document.createElement('tr');const hh=Math.floor(h),mm=Math.round((h-hh)*60);tr.innerHTML=`<td class="n">${i+1} · ${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}</td><td>${t}</td><td>${k}</td>`;tb.appendChild(tr);});
+})();
+
+/* Tiers */
+(function(){
+ const s=document.getElementById('tiers'),cx=260,cy=345;
+ const band=(r1,r2,col,op)=>{const a1=-Math.PI*0.86,a2=-Math.PI*0.14;const p=(r,a)=>`${cx+r*Math.cos(a)} ${cy+r*Math.sin(a)}`;el('path',{d:`M${p(r1,a1)} A${r1} ${r1} 0 0 1 ${p(r1,a2)} L${p(r2,a2)} A${r2} ${r2} 0 0 0 ${p(r2,a1)} Z`,fill:col,'fill-opacity':op},s);};
+ band(0,95,'var(--terra)',.35);band(95,215,'var(--teal)',.25);band(215,330,'var(--shade)',.18);
+ seed=11;
+ for(let i=0;i<10;i++){const a=-Math.PI*(0.2+rnd()*0.6),r=30+rnd()*55;el('circle',{cx:cx+r*Math.cos(a),cy:cy+r*Math.sin(a),r:5,fill:'var(--terra)'},s);}
+ for(let i=0;i<70;i++){const a=-Math.PI*(0.18+rnd()*0.64),r=105+rnd()*100;el('circle',{cx:cx+r*Math.cos(a),cy:cy+r*Math.sin(a),r:2.6,fill:'var(--teal)'},s);}
+ for(let i=0;i<160;i++){const a=-Math.PI*(0.15+rnd()*0.7),r=222+rnd()*100;el('circle',{cx:cx+r*Math.cos(a),cy:cy+r*Math.sin(a),r:1.1,fill:'var(--shade)'},s);}
+ [[-3,-3],[14,4],[-18,6]].forEach(([dx,dy])=>el('circle',{cx:cx+dx+30,cy:cy-60+dy,r:7,fill:'none',stroke:'var(--brass)','stroke-width':2.4},s));
+ el('rect',{x:cx-14,y:cy-8,width:28,height:16,rx:3,fill:'var(--ink)'},s);el('circle',{cx,cy,r:4,fill:'var(--sheet)'},s);
+ el('text',{x:cx+48,y:cy-24,'font-size':11.5},s,'T1 agents ≤40 · ~35 m');
+ el('text',{x:cx+70,y:cy-62,'font-size':11.5,fill:'var(--brass)'},s,'T0 heroes ≤12');
+ el('text',{x:cx,y:cy-150,'text-anchor':'middle','font-size':11.5},s,'T2 crowd ≤300 · instanced');
+ el('text',{x:cx,y:cy-268,'text-anchor':'middle','font-size':11.5},s,'board hover: specks, lit windows, smoke');
+ el('text',{x:cx,y:22,'text-anchor':'middle','font-size':11.5,fill:'var(--mute)'},s,'T3 ledger: all 1,000, counted once a second');
+ el('text',{x:cx,y:cy+0,'text-anchor':'middle','font-size':10,dy:-14,fill:'var(--mute)'},s,'camera');
+})();
+
+/* Jobs bar chart */
+(function(){
+ const s=document.getElementById('jobs');
+ const J=[['Shops and market',70],['Builders, workshops',60],['Café, bakery, inn',55],['Offices, other',48],['Crafts, studios',40],['Public works',30],['Carriers',25],['Clinic, care',25],['School',20],['Town hall, post, library',15],['Fire crew',12],['Commute to other tiles',70]];
+ const x0=190,max=80,W=290,bh=19,gap=6;
+ [0,20,40,60,80].forEach(v=>{const x=x0+v/max*W;el('line',{x1:x,y1:4,x2:x,y2:J.length*(bh+gap),stroke:'var(--rule)'},s);el('text',{x,y:J.length*(bh+gap)+16,'text-anchor':'middle','font-size':10.5,fill:'var(--mute)'},s,v);});
+ J.forEach(([t,n],i)=>{const y=6+i*(bh+gap);el('text',{x:x0-8,y:y+14,'text-anchor':'end','font-size':11.5},s,t);el('rect',{x:x0,y,width:n/max*W,height:bh,rx:3,fill:i===J.length-1?'var(--brass)':'var(--teal)'},s);el('text',{x:x0+n/max*W+6,y:y+14,'font-size':11.5,'font-weight':600},s,n);});
+})();
+
+/* Asset tiers */
+(function(){
+ const s=document.getElementById('assets');
+ const T=[['Hero','6 landmarks, part-modeled','var(--terra)',150],['Kit','~28 modules, instanced','var(--teal)',260],['Grammar','rules: streets, stacking, lights, bunting','var(--shade)',370],['Impostor','quarter shells, crowd specks, card art','var(--mute)',480]];
+ T.forEach(([n,d,c,w],i)=>{const y=14+i*70,x=(520-w)/2;el('rect',{x,y,width:w,height:56,rx:8,fill:c,'fill-opacity':.2,stroke:c,'stroke-width':1.5},s);el('text',{x:260,y:y+24,'text-anchor':'middle','font-size':14,'font-weight':600},s,n);el('text',{x:260,y:y+43,'text-anchor':'middle','font-size':11,fill:'var(--mute)'},s,d);});
+ const R=['apple tree','birch','maple','hazel','elder','standing tree','sunflower','hollyhock','marigold','coneflower','goldenrod','clover','fern','borage','bench','water point → town pump','water trough → horse trough','stone edging → kerbs','horse','chicken','feed store','hay rack','family home','family home (charming)','potting bench','watering pot','compost bay'];
+ document.getElementById('reuse').textContent=R.join(' · ');
+})();
+
+/* Board */
+(function(){
+ const s=document.getElementById('board'),r=52,w=Math.sqrt(3)*r;
+ const hex=(x,y,fill,label,sub,op=.22)=>{el('polygon',{points:hexPts(x,y,r-2).map(p=>p.join(',')).join(' '),fill,'fill-opacity':op,stroke:fill,'stroke-width':2},s);el('text',{x,y:y-2,'text-anchor':'middle','font-size':12,'font-weight':600},s,label);if(sub)el('text',{x,y:y+14,'text-anchor':'middle','font-size':9.5,fill:'var(--mute)'},s,sub);};
+ const cx=210,cy=170;
+ const city=[[cx,cy],[cx+w,cy],[cx+w/2,cy+1.5*r]];
+ const N=[[cx-w,cy,'var(--terra)','Ranch','milk, eggs →'],[cx+w*1.5,cy+1.5*r,'var(--leaf)','Garden','wheat, apples →'],[cx+w/2,cy-1.5*r,'var(--brass)','Meadow','Saturday picnics'],[cx+w*2,cy,'var(--shade)','Moonbase','rocket launches']];
+ const mid=[cx+w/2,cy+r/2];
+ for(const [x,y,c] of N)el('line',{x1:x,y1:y,x2:mid[0],y2:mid[1],stroke:c,'stroke-width':3,'stroke-dasharray':'6 5',opacity:.8},s);
+ for(const [x,y] of city)hex(x,y,'var(--teal)','','',.18);
+ el('text',{x:mid[0],y:mid[1]+4,'text-anchor':'middle','font-size':15,'font-weight':700},s,'The City');
+ for(const [x,y,c,n,sub] of N)hex(x,y,c,n,sub,.25);
+ const rows=[['Ranch','ranch hands, a market'],['Garden','gardeners, compost'],['Meadow','picnickers, a footpath'],['Moonbase','homes for its staff']];
+ el('text',{x:16,y:338,'font-size':11.5,'font-weight':600},s,'The City gives back');
+ rows.forEach(([n,t],i)=>el('text',{x:16+(i%2)*250,y:362+Math.floor(i/2)*22,'font-size':11.5},s,`${n}: ${t}`));
+})();
+
+/* Phases */
+(function(){
+ const s=document.getElementById('phases');
+ const P=[['P1','Crowd proof','1,000 people, 30 fps on iPhone, sim < 1.5 ms','var(--terra)'],['P2','Concept and kit','Six sheets; kit next to its concept','var(--brass)'],['P3','Town generator','Matches the establishing shot, same camera','var(--teal)'],['P4','Information','game-feel and HUD checks pass','var(--teal)'],['P5','Card and neighbours','A Ranch sends a cart at dawn','var(--shade)'],['P6','Heroes and stories','A child can name five townsfolk','var(--shade)']];
+ const W=1000/P.length;
+ el('line',{x1:20,y1:60,x2:980,y2:60,stroke:'var(--rule)','stroke-width':4},s);
+ P.forEach(([id,n,g,c],i)=>{const x=W*i+W/2;el('circle',{cx:x,cy:60,r:20,fill:c},s);el('text',{x,y:65,'text-anchor':'middle','font-size':13,'font-weight':700,fill:'#fff'},s,id);el('text',{x,y:108,'text-anchor':'middle','font-size':13.5,'font-weight':600},s,n);
+  const words=g.split(' ');let line='',ly=132;for(const wd of words){if((line+' '+wd).length>22){el('text',{x,y:ly,'text-anchor':'middle','font-size':11.5,fill:'var(--mute)'},s,line.trim());line=wd;ly+=17;}else line+=' '+wd;}el('text',{x,y:ly,'text-anchor':'middle','font-size':11.5,fill:'var(--mute)'},s,line.trim());});
+ el('text',{x:W/2,y:22,'text-anchor':'middle','font-size':11,fill:'var(--terra)','font-weight':600},s,'START NOW');
+})();
+</script>

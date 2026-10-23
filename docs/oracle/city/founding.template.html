@@ -1,0 +1,125 @@
+<title>City Founding</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: the map is the page. Region and town side by side, the year scrubber under them, the run's log beside. */
+:root{
+ --paper:#efe5cf; --sheet:#f8f2e4; --ink:#2d2a26; --mute:#6f6658; --rule:#d8ccb2;
+ --teal:#3b8f8b; --terra:#c9694f; --brass:#c9921f; --shade:#5a6a8c;
+ --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+ --body:"Source Serif 4",Georgia,serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1d1b22;--sheet:#26232b;--ink:#efe6d4;--mute:#a99f8d;--rule:#3d3843;--teal:#5fb3ae;--terra:#e08a6f;--brass:#e3ab35;--shade:#8fa0c4;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#1d1b22;--sheet:#26232b;--ink:#efe6d4;--mute:#a99f8d;--rule:#3d3843;--teal:#5fb3ae;--terra:#e08a6f;--brass:#e3ab35;--shade:#8fa0c4;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:16px/1.55 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+main{max-width:1180px;margin:0 auto;display:grid;gap:22px}
+h1{font:800 clamp(34px,6vw,60px)/1.05 var(--display);margin:0;letter-spacing:-.02em}
+h2{font:700 22px/1.2 var(--display);margin:0}
+p{margin:0;max-width:70ch}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.stage{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.stage{grid-template-columns:1fr}}
+.maps{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-width:0}
+@media (max-width:560px){.maps{grid-template-columns:1fr}}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+canvas{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule);background:var(--sheet);image-rendering:auto}
+figcaption{font:12px/1.4 var(--mono);color:var(--mute)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;grid-column:1/-1}
+.controls input[type=range]{flex:1 1 220px;accent-color:var(--terra)}
+button,input[type=number]{font:600 14px var(--mono);color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:7px 12px}
+button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+input[type=number]{width:90px}
+.year{font:800 26px/1 var(--display);font-variant-numeric:tabular-nums;min-width:120px}
+.pop{font:600 14px var(--mono);color:var(--mute)}
+.log{display:grid;gap:4px;max-height:640px;overflow:auto;padding-right:4px;min-width:0}
+.ev{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;border:1px solid transparent;opacity:.45}
+.ev.past{opacity:1}.ev.now{border-color:var(--terra);background:var(--sheet)}
+.ev b{font:600 13px var(--mono);color:var(--terra);font-variant-numeric:tabular-nums}
+.ev span{font-size:15px}
+.ev[data-kind=flood] b{color:var(--shade)}.ev[data-kind=work] b{color:var(--teal)}
+.key{display:flex;flex-wrap:wrap;gap:14px;font:12px var(--mono);color:var(--mute)}
+.key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.note{font-size:14px;color:var(--mute)}
+#spark{width:100%;height:60px}
+</style>
+<main>
+ <header style="display:grid;gap:10px">
+  <div class="eyebrow">The City · founding simulation</div>
+  <h1>How the town was founded</h1>
+  <p>Nothing here is written by hand. The land is computed first: hills, two rivers that meet, the sea, drainage, erosion, flood marks and sheltered water. A boat party of thirty picks the safe place that costs the least walking. Then the town grows year by year from food, births, deaths and newcomers; feet wear paths where people walk; and a well, bridge, quay, mill, market, bell tower and school go up when the simulation measures the need. Every line of the story is a fact from this run.</p>
+ </header>
+ <div class="stage">
+  <div style="display:grid;gap:12px;min-width:0">
+   <div class="maps">
+    <figure><canvas id="region" width="640" height="640" aria-label="The 3.2 km region: land, rivers, sea, fields, paths and the town"></canvas><figcaption>The region, 3.2 km across</figcaption></figure>
+    <figure><canvas id="town" width="640" height="640" aria-label="The town up close with houses, works and the three-hex tile outline"></canvas><figcaption>The town, 900 m across. Dashed: the three-hex City tile for scale</figcaption></figure>
+   </div>
+   <div class="controls">
+    <button id="play" type="button">Play</button>
+    <input id="scrub" type="range" min="0" max="0" value="0" aria-label="Year">
+    <div><div class="year" id="year">Year 0</div><div class="pop" id="pop">30 people</div></div>
+   </div>
+   <svg id="spark" viewBox="0 0 600 60" preserveAspectRatio="none" aria-label="Population over time"></svg>
+   <div class="key"><span><i style="background:#3f6e9a"></i>sea and rivers</span><span><i style="background:#4f6e3c"></i>forest</span><span><i style="background:#9fb57a"></i>meadow</span><span><i style="background:#d8b65a"></i>fields</span><span><i style="background:#f3ead8;border:1px solid #9b8b70"></i>worn paths</span><span><i style="background:#b9533a"></i>houses</span><span><i style="background:#e3ab35"></i>works</span></div>
+   <div class="controls"><label for="seed" class="pop">World seed</label><input id="seed" type="number" value="2" min="1"><button id="run" type="button">Simulate this world</button><span id="status" class="note"></span></div>
+  </div>
+  <section style="display:grid;gap:10px;min-width:0">
+   <h2>The story of this run</h2>
+   <div class="log" id="log"></div>
+  </section>
+ </div>
+ <p class="note">Source: <code>prototypes/ranch-atelier/dist/simulations/city/founding.mjs</code> (the same module runs in this page, headless in node, and later in the game). Assumptions such as harvests, walking speed and birth rates are listed at the top of the module and in <code>docs/oracle/city/FOUNDING.md</code>.</p>
+</main>
+<script type="module">
+/*FOUNDING*/
+const $=id=>document.getElementById(id),N=ASSUMPTIONS.N;
+let R=null,year=0,timer=null;
+const base=new Uint8ClampedArray(N*N*4);
+function shadeLand(L,cover){
+ const h=L.h;
+ for(let i=0;i<N*N;i++){const x=i%N,y=(i/N)|0;const hx=(h[Math.min(N-1,x+1)+y*N]-h[Math.max(0,x-1)+y*N]),hy=(h[x+Math.min(N-1,y+1)*N]-h[x+Math.max(0,y-1)*N]);let lit=Math.max(.55,Math.min(1.2,1-(hx*.9-hy*.6)/14));
+  let c;const e=h[i];
+  if(e<0){const d=Math.min(1,-e/8);c=[95-40*d,150-50*d,185-35*d];lit=1;}
+  else if(L.river[i]){c=L.brackish[i]?[110,150,165]:[63,110,154];lit=1;}
+  else{const k=cover[i];c=k===1?[79,110,60]:k===2?[159,181,122]:k===3?[150,140,125]:k===4?[214,200,160]:[140,160,100];const up=Math.min(1,e/60);c=c.map((v,j)=>v*(1-up*.25)+[200,190,170][j]*up*.25);}
+  base.set([c[0]*lit,c[1]*lit,c[2]*lit,255],i*4);}
+}
+function at(i){return [i%N,(i/N)|0];}
+function snapAt(y){let s=null;for(const q of R.snapshots)if(q.year<=y)s=q;return s;}
+function draw(){
+ const L=R.land,img=new ImageData(N,N);img.data.set(base);
+ for(let i=0;i<N*N;i++)if(R.fieldYear[i]>=0&&R.fieldYear[i]<=year){const o=i*4,t=(i*2654435761>>>0)%5;img.data[o]=208+t*6;img.data[o+1]=176+t*5;img.data[o+2]=86;}
+ const s=snapAt(year);
+ if(s)for(let i=0;i<N*N;i++){const v=s.traffic[i];if(v>32&&L.h[i]>=0&&!L.river[i]){const o=i*4,a=Math.min(1,(v-32)/90);img.data[o]+= (243-img.data[o])*a;img.data[o+1]+=(234-img.data[o+1])*a;img.data[o+2]+=(216-img.data[o+2])*a;}}
+ const off=new OffscreenCanvas(N,N);off.getContext('2d').putImageData(img,0,0);
+ const houses=R.houses.filter(h=>h.built<=year&&(h.gone==null||h.gone>year));
+ const works=s?s.works:{};
+ // Region
+ const rc=$('region').getContext('2d'),k=640/N;rc.imageSmoothingEnabled=false;rc.drawImage(off,0,0,640,640);
+ rc.fillStyle='#b9533a';for(const h of houses){const [x,y]=at(h.cell);rc.fillRect(x*k+1,y*k+1,k-1,k-1);}
+ drawWorks(rc,works,k,0,0,2);
+ // Town
+ const [cx,cy]=at(R.center),span=45,x0=Math.max(0,Math.min(N-span,cx-span/2|0)),y0=Math.max(0,Math.min(N-span,cy-span/2|0)),z=640/span;
+ const tc=$('town').getContext('2d');tc.imageSmoothingEnabled=false;tc.drawImage(off,x0,y0,span,span,0,0,640,640);
+ const per={};for(const h of houses){const n=per[h.cell]=(per[h.cell]||0)+1;const [x,y]=at(h.cell),j=n-1,sx=(x-x0)*z+2+(j%2)*z/2,sy=(y-y0)*z+2+((j/2)|0)*z/2;tc.fillStyle='#a8452f';tc.fillRect(sx-2,sy-2,z/2-1,z/2-1);tc.fillStyle='rgba(40,20,15,.45)';tc.fillRect(sx-2,sy+z/2-5,z/2-1,2);}
+ drawWorks(tc,works,z,x0,y0,6);
+ if(year===R.years){tc.save();tc.setLineDash([6,5]);tc.strokeStyle='#2d2a26';tc.lineWidth=2;const r=80/ASSUMPTIONS.cell*z,w=Math.sqrt(3)*r,[hx,hy]=at(R.center),ox=(hx-x0+.5)*z-w/2,oy=(hy-y0+.5)*z-r*.75;for(const [px,py] of [[ox,oy],[ox+w,oy],[ox+w/2,oy+1.5*r]]){tc.beginPath();for(let a=0;a<6;a++){const t=Math.PI/180*(60*a-30);tc.lineTo(px+r*Math.cos(t),py+r*Math.sin(t));}tc.closePath();tc.stroke();}tc.restore();}
+ $('year').textContent='Year '+year;$('pop').textContent=(R.history[year-1]??30)+' people · '+houses.length+' houses';
+ for(const el of document.querySelectorAll('.ev')){const y=+el.dataset.year;el.classList.toggle('past',y<=year);el.classList.toggle('now',y<=year&&y>year-6);}
+ const now=[...document.querySelectorAll('.ev.past')].pop();if(now&&timer)now.scrollIntoView({block:'nearest'});
+ const sp=$('spark');sp.querySelector('.cursor')?.setAttribute('x1',year/R.years*600);sp.querySelector('.cursor')?.setAttribute('x2',year/R.years*600);
+}
+function drawWorks(c,w,k,x0,y0,size){
+ const mark=(cell,label)=>{if(cell==null)return;const [x,y]=at(cell),px=(x-x0+.5)*k,py=(y-y0+.5)*k;c.fillStyle='#e3ab35';c.strokeStyle='#2d2a26';c.lineWidth=1.5;c.beginPath();c.arc(px,py,size*1.6,0,7);c.fill();c.stroke();if(size>3){c.font='600 13px JetBrains Mono, monospace';c.fillStyle='#2d2a26';c.strokeStyle='rgba(248,242,228,.9)';c.lineWidth=4;c.strokeText(label,px+size*2.4,py+4);c.fillText(label,px+size*2.4,py+4);}};
+ mark(w.wells?.[0],'well');mark(w.bridge,'bridge');mark(w.quay,'quay');mark(w.mill,'mill');mark(w.market,'market');mark(w.bell,'bell tower');if(w.school!=null&&w.school!==w.market)mark(w.school,'school');
+}
+function spark(){const sp=$('spark'),h=R.history,max=Math.max(...h);sp.innerHTML='';const pts=h.map((v,i)=>`${(i+1)/R.years*600},${58-v/max*54}`).join(' ');const NS='http://www.w3.org/2000/svg';const p=document.createElementNS(NS,'polyline');p.setAttribute('points','0,58 '+pts);p.setAttribute('fill','none');p.setAttribute('stroke','var(--terra)');p.setAttribute('stroke-width','2');p.setAttribute('vector-effect','non-scaling-stroke');sp.append(p);const l=document.createElementNS(NS,'line');l.setAttribute('class','cursor');l.setAttribute('y1','0');l.setAttribute('y2','60');l.setAttribute('stroke','var(--ink)');l.setAttribute('vector-effect','non-scaling-stroke');sp.append(l);}
+function story(){const box=$('log');box.innerHTML='';for(const e of R.log){const d=document.createElement('div');d.className='ev';d.dataset.year=e.year;d.dataset.kind=e.kind;d.innerHTML='<b>Year '+e.year+'</b><span></span>';d.querySelector('span').textContent=e.text;d.onclick=()=>{stop();year=e.year;$('scrub').value=year;draw();};box.append(d);}}
+function stop(){clearInterval(timer);timer=null;$('play').textContent='Play';}
+$('play').onclick=()=>{if(timer)return stop();if(year>=R.years)year=0;$('play').textContent='Pause';timer=setInterval(()=>{year=Math.min(R.years,year+1);$('scrub').value=year;draw();if(year>=R.years)stop();},70);};
+$('scrub').oninput=e=>{stop();year=+e.target.value;draw();};
+function run(seed){stop();$('status').textContent='Simulating…';setTimeout(()=>{try{const L=findLand(seed);R=found(L);shadeLand(L,R.baseCover);$('scrub').max=R.years;year=R.years;$('scrub').value=year;story();spark();draw();$('status').textContent=`World ${L.seed}: found on try ${L.tries}; ${R.years} years to ${R.people} people.`;}catch(err){$('status').textContent=err.message;}},30);}
+$('run').onclick=()=>run(+$('seed').value||1);
+run(2);
+</script>

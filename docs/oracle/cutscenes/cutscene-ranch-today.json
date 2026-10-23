@@ -1,0 +1,340 @@
+{
+ "id": "abbies-world-today",
+ "date": "2026-10-23",
+ "study": "AW-STUDY-0009",
+ "bpm": 124,
+ "note": "What is live on main today. Read from the code; lengths from the code, not captures.",
+ "cutscenes": [
+  {
+   "skip": {
+    "pause": true,
+    "seen_skip": true,
+    "hold_to_skip": true,
+    "tap_answers": true
+   },
+   "words_on_screen": 5,
+   "read_aloud": false,
+   "masks": [],
+   "letterbox": false,
+   "recorded": true,
+   "presentation_perceivable": false,
+   "engine_artifacts": false,
+   "fail_state": false,
+   "horror_sting": false,
+   "flash_hz": 0,
+   "choice_timer_s": null,
+   "audience": "child",
+   "render": "in_engine",
+   "dialect": "ranch",
+   "hand_back": "play_camera",
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "world_events": [],
+   "id": "build-progress",
+   "category": "loading_cover",
+   "jobs": [
+    "cover"
+   ],
+   "style": "puppet",
+   "control_taken": "full",
+   "position": "bookend",
+   "first_s": null,
+   "repeat_s": null,
+   "interaction": "none",
+   "cover": {
+    "ends": "on_ready",
+    "settle_bars": 0,
+    "show": "status_text",
+    "fake_percent": false
+   },
+   "signal": {
+    "id": "generation",
+    "drives": []
+   },
+   "music": {},
+   "note": "simulations/build-progress.mjs: 'Preparing tiles 3 of 7' text plus a bar; honest (no invented percentages) but words on screen and nothing to watch."
+  },
+  {
+   "skip": {
+    "pause": true,
+    "seen_skip": true,
+    "hold_to_skip": true,
+    "tap_answers": true
+   },
+   "words_on_screen": 0,
+   "read_aloud": true,
+   "masks": [],
+   "letterbox": false,
+   "recorded": true,
+   "presentation_perceivable": false,
+   "engine_artifacts": false,
+   "fail_state": false,
+   "horror_sting": false,
+   "flash_hz": 0,
+   "choice_timer_s": null,
+   "audience": "child",
+   "render": "in_engine",
+   "dialect": "ranch",
+   "hand_back": "play_camera",
+   "transition_in": "camera_move",
+   "transition_out": "camera_move",
+   "world_events": [
+    "tile parts pop in"
+   ],
+   "id": "staged-build",
+   "category": "micro",
+   "jobs": [
+    "reward"
+   ],
+   "style": "puppet",
+   "control_taken": "none",
+   "position": "in_flow",
+   "first_s": 1.6,
+   "repeat_s": 1.6,
+   "interaction": "none",
+   "signal": {
+    "id": "generation",
+    "drives": [
+     "camera"
+    ]
+   },
+   "music": {},
+   "note": "build-progress.mjs stagedBuild(); 1.6 s, not on the bar."
+  },
+  {
+   "skip": {
+    "pause": true,
+    "seen_skip": true,
+    "hold_to_skip": true,
+    "tap_answers": true
+   },
+   "words_on_screen": 0,
+   "read_aloud": true,
+   "masks": [],
+   "letterbox": false,
+   "recorded": true,
+   "presentation_perceivable": false,
+   "engine_artifacts": false,
+   "fail_state": false,
+   "horror_sting": false,
+   "flash_hz": 0,
+   "choice_timer_s": null,
+   "audience": "child",
+   "render": "in_engine",
+   "dialect": "ranch",
+   "hand_back": "play_camera",
+   "transition_in": "world_build",
+   "transition_out": "camera_move",
+   "world_events": [],
+   "id": "tile-arrival",
+   "category": "micro",
+   "jobs": [
+    "reward",
+    "bridge"
+   ],
+   "style": "puppet",
+   "control_taken": "camera_only",
+   "position": "in_flow",
+   "first_s": 1,
+   "repeat_s": 1,
+   "interaction": "none",
+   "signal": {
+    "id": "time",
+    "drives": [
+     "camera"
+    ]
+   },
+   "music": {},
+   "note": "simulations/ranch-arrivals.mjs: six arrival styles (hologram, laser, space, quantum, storybook page, organic time-lapse), default 1 s, presentation only and restored before life resumes. Too short to need a skip; not on the bar; no sting."
+  },
+  {
+   "skip": {
+    "pause": true,
+    "seen_skip": false,
+    "hold_to_skip": false,
+    "tap_answers": true
+   },
+   "words_on_screen": 70,
+   "read_aloud": false,
+   "masks": [],
+   "letterbox": false,
+   "recorded": false,
+   "presentation_perceivable": false,
+   "engine_artifacts": false,
+   "fail_state": false,
+   "horror_sting": false,
+   "flash_hz": 0,
+   "choice_timer_s": null,
+   "audience": "child",
+   "render": "in_engine",
+   "dialect": "frontier",
+   "hand_back": "none",
+   "transition_in": "camera_move",
+   "transition_out": "camera_move",
+   "world_events": [
+    "Fritigern gives Alaric the helmet"
+   ],
+   "id": "fritigern-storybook",
+   "category": "beat",
+   "jobs": [
+    "story"
+   ],
+   "style": "storybook",
+   "control_taken": "full",
+   "position": "bookend",
+   "first_s": 42,
+   "repeat_s": 42,
+   "interaction": "none",
+   "signal": {
+    "id": "time",
+    "drives": [
+     "light",
+     "npcs",
+     "camera"
+    ]
+   },
+   "music": {},
+   "note": "fritigern/: play, pause and scrub; no narrator voice yet; a viewer, not wired to a world."
+  },
+  {
+   "skip": {
+    "pause": true,
+    "seen_skip": false,
+    "hold_to_skip": false,
+    "tap_answers": true
+   },
+   "words_on_screen": 40,
+   "read_aloud": false,
+   "masks": [],
+   "letterbox": false,
+   "recorded": false,
+   "presentation_perceivable": false,
+   "engine_artifacts": false,
+   "fail_state": false,
+   "horror_sting": false,
+   "flash_hz": 0,
+   "choice_timer_s": 4,
+   "audience": "child",
+   "render": "in_engine",
+   "dialect": "frontier",
+   "hand_back": "none",
+   "transition_in": "camera_move",
+   "transition_out": "camera_move",
+   "world_events": [],
+   "id": "fritigern-telltale",
+   "category": "beat",
+   "jobs": [
+    "story"
+   ],
+   "style": "telltale",
+   "control_taken": "full",
+   "position": "bookend",
+   "first_s": 42,
+   "repeat_s": 42,
+   "interaction": "choice",
+   "signal": {
+    "id": "time",
+    "drives": [
+     "light",
+     "npcs",
+     "camera"
+    ]
+   },
+   "music": {},
+   "note": "Timed choice with a shrinking bar; text not read aloud."
+  },
+  {
+   "skip": {
+    "pause": true,
+    "seen_skip": false,
+    "hold_to_skip": false,
+    "tap_answers": true
+   },
+   "words_on_screen": 14,
+   "read_aloud": false,
+   "masks": [],
+   "letterbox": true,
+   "recorded": false,
+   "presentation_perceivable": false,
+   "engine_artifacts": false,
+   "fail_state": false,
+   "horror_sting": false,
+   "flash_hz": 0,
+   "choice_timer_s": null,
+   "audience": "child",
+   "render": "in_engine",
+   "dialect": "frontier",
+   "hand_back": "none",
+   "transition_in": "camera_move",
+   "transition_out": "camera_move",
+   "world_events": [],
+   "id": "fritigern-cinema",
+   "category": "beat",
+   "jobs": [
+    "story"
+   ],
+   "style": "cinematic",
+   "control_taken": "full",
+   "position": "bookend",
+   "first_s": 42,
+   "repeat_s": 42,
+   "interaction": "none",
+   "signal": {
+    "id": "time",
+    "drives": [
+     "light",
+     "npcs",
+     "camera"
+    ]
+   },
+   "music": {}
+  },
+  {
+   "skip": {
+    "pause": true,
+    "seen_skip": true,
+    "hold_to_skip": true,
+    "tap_answers": true
+   },
+   "words_on_screen": 0,
+   "read_aloud": true,
+   "masks": [
+    "blur"
+   ],
+   "letterbox": false,
+   "recorded": true,
+   "presentation_perceivable": false,
+   "engine_artifacts": false,
+   "fail_state": false,
+   "horror_sting": false,
+   "flash_hz": 0,
+   "choice_timer_s": null,
+   "audience": "child",
+   "render": "in_engine",
+   "dialect": "ranch",
+   "hand_back": "play_camera",
+   "transition_in": "cut",
+   "transition_out": "cut",
+   "world_events": [],
+   "id": "teleport-map",
+   "category": "transition",
+   "jobs": [
+    "bridge"
+   ],
+   "style": "puppet",
+   "control_taken": "full",
+   "position": "interstitial",
+   "first_s": 3,
+   "repeat_s": 3,
+   "interaction": "poke",
+   "signal": {
+    "id": "place",
+    "drives": [
+     "camera"
+    ]
+   },
+   "music": {},
+   "note": "teleport/teleport.css: centred panel with backdrop blur over the world."
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+  "part": "helmet",
+  "name": "Helmet",
+  "role": "head: the centurion helmet with its transverse crest",
+  "what_i_did": "Imperial Gallic helmet built as named parts: bowl, brow band and rib, visor, neck guard, hinged cheek guards wrapped round the face, ear guards, bowl studs, and a crest of 8 blocks on a holder and post. Faceted with a light Voronoi displace so it reads like the concept's cut-paper planes.",
+  "good": [
+    "The crest, bowl, brow band, studs and visor all line up with the concept; the crest arch is the strongest match.",
+    "Every piece is its own named mesh, so the crest or cheek guards can be swapped or recoloured on their own.",
+    "3,550 triangles, cheap enough for every soldier on screen."
+  ],
+  "off": [
+    "Outline match 0.76. The cheek guards are flatter slabs than the concept's folded, angled plates, and the neck guard flares out further to the back.",
+    "The concept is a three-quarter view; the score camera is the best-matching side view found by search, so the number is a guide.",
+    "The concept's ear guards are small curls; here they are simple tabs."
+  ],
+  "creative_additions": "Bronze-free: the whole helmet stays ivory, as the concept is monochrome; the stud rows are kept as separate pieces so a later bronze trim is one material swap.",
+  "rounds": [
+    {
+      "n": 1,
+      "t": "First build: bowl, brow band, visor, neck guard, cheek guards, crest of 8 blocks."
+    },
+    {
+      "n": 2,
+      "t": "Cheek guards wrapped round the face and flared; ear guards and studs added; crest raised on a holder and post."
+    },
+    {
+      "n": 3,
+      "t": "Facet pass (0.007) for the paper-cut look; camera search; final 768 px / 48 sample render."
+    }
+  ],
+  "score": {
+    "iou": 0.76,
+    "camera": {
+      "yaw": 68.0,
+      "pitch": -2.0,
+      "lens": 62.5,
+      "roll": 0.0
+    },
+    "triangles": 3550,
+    "dimensions_m": [
+      0.368,
+      0.44,
+      0.473
+    ],
+    "method": "silhouette IoU after bounding-box normalising both masks; camera found by grid search on the model, so a guide"
+  }
+}

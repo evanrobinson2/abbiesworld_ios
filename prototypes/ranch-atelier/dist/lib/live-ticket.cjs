@@ -4,9 +4,11 @@ const {createHmac,timingSafeEqual,randomBytes}=require('node:crypto');
 const TTL=60000;
 const sign=(body,secret)=>createHmac('sha256',secret).update(body).digest('base64url');
 // ttl: 60 s for the relay; live-voice tickets (api/live-voice.js) last a whole session.
-function issueTicket(env=process.env,now=Date.now(),ttl=TTL,scope=''){
+// account ({id, owner} from lib/account.cjs) rides inside the signed body so the relay can charge it.
+function issueTicket(env=process.env,now=Date.now(),ttl=TTL,scope='',account=null){
  if(!env.LIVE_TICKET_SECRET)return null;
- const body=`${now+ttl}.${randomBytes(6).toString('base64url')}`;
+ const tag=account&&/^[a-f0-9]{24}$/.test(account.id)?`.${account.id}${account.owner?'o':'p'}`:'';
+ const body=`${now+ttl}.${randomBytes(6).toString('base64url')}${tag}`;
  return `${body}.${sign(scope+body,env.LIVE_TICKET_SECRET)}`;
 }
 function checkTicket(ticket,env=process.env,now=Date.now(),scope=''){
@@ -16,4 +18,9 @@ function checkTicket(ticket,env=process.env,now=Date.now(),scope=''){
  if(mac.length!==want.length||!timingSafeEqual(mac,want))return false;
  return Number(body.split('.')[0])>now;
 }
-module.exports={issueTicket,checkTicket};
+// The player a ticket was issued to; only meaningful after checkTicket said yes.
+function ticketAccount(ticket){
+ const m=/^\d+\.[A-Za-z0-9_-]+\.([a-f0-9]{24})([op])\.[A-Za-z0-9_-]+$/.exec(String(ticket||''));
+ return m?{id:m[1],owner:m[2]==='o'}:null;
+}
+module.exports={issueTicket,checkTicket,ticketAccount};

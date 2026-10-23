@@ -29,6 +29,15 @@ live Ranch Atelier site; the old `claude/live-snapshot-2026-10-22` line was merg
 | 7 | Change-order workflow | Informal. Revision rounds are recorded in `notes.json` and git; no request, modify, validate, new-version flow with version numbers. |
 | 8 | Regeneration independent of tools and formats | Partly. Recipes and prompts can regenerate an asset today; intent is not yet captured in a tool-neutral form. |
 
+## Rules from Evan
+
+- **Model the parts when a character needs granular detail** (Evan, 2026-10-23): "this is the clearest possible evidence
+  that if granular detail is required in a character, we need to model their parts". The paper warrior, fitted as one
+  figure, lost its helmet crest, belt plaques and sandal straps; the same kit built part by part
+  (`tools/roman-kit`: helmet, cuirass, shoulder guards, belt, gladius, sandals) keeps every one of them as its own named
+  mesh, scored against its own concept. So when a character's detail matters, give each piece of kit its own concept,
+  its own `build.py` and its own score, then assemble the character from the parts.
+
 ## Next steps, in order
 1. **Asset manifest v1**: one `asset.json` per asset folder (stable ID, purpose and placement, part hierarchy, coordinate
    system and units, inputs and jobs, tools and versions, recipe, validation results, budgets, exports, lineage), written

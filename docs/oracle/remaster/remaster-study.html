@@ -1,0 +1,260 @@
+<title>Ranch and Moon Remaster</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the AW-STUDY family look (dusk over the toy table). One reading column; audit items are wide rows of words beside before shots. Single committed dark look so captures are judged on one neutral. */
+:root {
+  --dusk: #1a1f38;
+  --dusk-deep: #12162a;
+  --dusk-lift: #252b4b;
+  --ink: #f3ead8;
+  --muted: #aeb3cc;
+  --sun: #f2be54;
+  --teal: #3b8f8b;
+  --cyan: #00ffd1;
+  --bad: #f08c74;
+  --rule: rgba(243, 234, 216, 0.14);
+  --display: "Fredoka", "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--dusk);
+  background-image: radial-gradient(ellipse at 50% -20%, rgba(242, 190, 84, 0.12), transparent 55%);
+  color: var(--ink);
+  font: 17px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 72px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; }
+.read { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; line-height: 1.12; margin: 0; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
+h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); }
+h3 { font-size: 1.18rem; }
+p { margin: 0; }
+a { color: var(--sun); }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+.eyebrow { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sun); }
+.muted { color: var(--muted); }
+.mono { font-family: var(--mono); font-size: 0.8em; }
+section { padding-block: 48px 8px; border-top: 1px solid var(--rule); margin-top: 40px; display: grid; gap: 22px; }
+header.hero { padding-block: 44px 8px; display: grid; gap: 18px; }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 64ch; }
+.quote { font: italic 1.1rem/1.5 var(--body); border-left: 3px solid var(--sun); padding-left: 16px; max-width: 64ch; }
+
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 760px) { .trio { grid-template-columns: minmax(0, 1fr); } }
+figure { margin: 0; display: grid; gap: 6px; min-width: 0; }
+figure img { width: 100%; border-radius: 14px; display: block; box-shadow: 0 0 0 1px var(--rule); background: var(--dusk-deep); }
+figcaption { font: 500 0.72rem/1.3 var(--mono); letter-spacing: 0.06em; color: var(--muted); }
+
+.finding { background: var(--dusk-lift); border-radius: 18px; padding: 22px 24px; display: grid; gap: 10px; max-width: 80ch; }
+.finding h3 { color: var(--sun); }
+
+.item { border-top: 1px solid var(--rule); padding-block: 22px; display: grid; gap: 14px; }
+.item > header, .mh header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.code { font: 500 0.8rem/1 var(--mono); color: var(--sun); letter-spacing: 0.06em; }
+.hurt { display: inline-flex; gap: 4px; margin-left: auto; }
+.hurt i { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--rule); }
+.hurt i.on { background: var(--bad); box-shadow: none; }
+.item .body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 22px; align-items: start; }
+@media (max-width: 860px) { .item .body { grid-template-columns: minmax(0, 1fr); } }
+.txt { display: grid; gap: 12px; min-width: 0; }
+.wrong b { color: var(--bad); }
+.prop b { color: var(--teal); filter: brightness(1.5); }
+dl { margin: 0; display: grid; gap: 6px; }
+dl div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 10px; }
+dt { font: 500 0.72rem/1.9 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+dd { margin: 0; font-size: 0.95rem; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; min-width: 0; }
+
+.keep { color: var(--muted); max-width: 72ch; }
+
+.pack { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .pack { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.mhs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 760px) { .mhs { grid-template-columns: minmax(0, 1fr); } }
+.mh { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; align-items: start; }
+.mh img { width: 100%; border-radius: 10px; box-shadow: 0 0 0 1px var(--rule); }
+.mh p { color: var(--muted); font-size: 0.95rem; margin-top: 6px; }
+.mh:not(:has(img)) { grid-template-columns: minmax(0, 1fr); }
+
+.swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+.sw { display: grid; gap: 4px; font: 500 0.7rem/1.2 var(--mono); color: var(--muted); width: 104px; }
+.sw span { height: 44px; border-radius: 10px; box-shadow: 0 0 0 1px var(--rule); }
+
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 0.93rem; }
+th { text-align: left; font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+td { padding: 12px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+
+ol.order { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; max-width: 72ch; }
+ol.order b { color: var(--sun); }
+ul.done { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; max-width: 72ch; }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <p class="eyebrow">AW-STUDY-0007 · Proposal · 2026-10-23</p>
+  <h1>Ranch and Moon remaster</h1>
+  <p class="quote">"Redo the crop bed grass, goat thing looks weird out of place. Lamps need upgrades. Dispatch a moon remastering. No holds barred given all our improvements."</p>
+  <p class="lede">Every asset and effect in the Ranch tile, ranked by how much it hurts the look, and a plan to rebuild the Moonbase from the Moon Mission pack. Each item names its tier, its concept-art need and its owner thread. Before shots come from fixed cameras that the after shots will reuse.</p>
+  <div class="trio">
+    <figure><img src="captures/evan/crop-bed.jpg" alt="Crop bed of green cubes"><figcaption>Evan · crop bed</figcaption></figure>
+    <figure><img src="captures/evan/grass.jpg" alt="Grass as green spikes"><figcaption>Evan · grass</figcaption></figure>
+    <figure><img src="captures/evan/goat.jpg" alt="Goat shelter roof on posts"><figcaption>Evan · goat shelter</figcaption></figure>
+  </div>
+</header>
+
+<section>
+  <div class="finding">
+    <p class="eyebrow">The headline finding</p>
+    <h3>Everything Evan flagged is the second wave the rebuild never reached.</h3>
+    <p>The Ranch rebuild replaced the 35 file-based models. Its brief set aside a second wave of things built in code: the sugar shack, the playground, fences and gates, lamp posts, garden beds and the residents. The crop bed, the grass, the lamps and the fences are that wave: boxes, cones and cylinders standing beside rebuilt models, so they look like placeholders, because they are.</p>
+    <p>The goat shelter is a different break. It is a good rebuilt model (pink walls, teal roof, from Evan's own pick), but the open-shed pass strips its walls, leaving a floating roof on salmon posts with grey slabs underneath. Pink appears nowhere else in the Ranch.</p>
+  </div>
+  <div class="read"><p class="muted">No holds barred means applying everything at once: the aesthetic study's palette and one-signal light, the HUD study's "show it in the world", the card study's "the tile must look like its card", the four granularity tiers (hero, kit, grammar, impostor), smooth shading, the parts-first rule, the Midjourney-to-model pipeline with the Review Desk, the footprint rule and the game-feel check.</p></div>
+  <figure><img src="captures/ranch/r00-wide.jpg" alt="The whole Ranch tile at noon"><figcaption>Before · the Ranch tile at noon, seed 41, the camera every after shot will reuse</figcaption></figure>
+</section>
+
+<section>
+  <p class="eyebrow">Ranch audit</p>
+  <h2>Fourteen things, worst first</h2>
+  <p class="read muted">Hurt is screen share times how wrong it reads, out of five. Owners: the Model challenge thread for models and code-built props; the Weather and clouds thread for sky, sun, night and lamp light.</p>
+  <article class="item" id="r1">
+<header><span class="code">R1</span><h3>Grass and ground cover</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> Hundreds of hard green cones and pyramids on flat, over-saturated green. It is the biggest share of the tile, and the flat-shaded spikes read as a bed of nails. The meadow is louder than the buildings.</p><p class="prop"><b>Remaster.</b> Six soft clump shapes with round-tipped blades and smooth normals, instanced, colour drifting from meadow to foliage, swaying with the weather&#x27;s wind, thinned near paths and buildings. Clover and flower patches come from grammar. The ground drops one step in chroma so the toys stand out.</p>
+<dl><div><dt>Tier</dt><dd>Kit + grammar</dd></div><div><dt>Concept art</dt><dd>One ground-cover sheet: tufts, clover, wildflower clumps, path edges</dd></div><div><dt>Owner</dt><dd>Model challenge (wind: Weather and clouds)</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/evan/grass.jpg" alt="Evan&#x27;s phone" loading="lazy"><figcaption>Evan&#x27;s phone</figcaption></figure><figure><img src="captures/ranch/r09-meadow-trees.jpg" alt="Before · r09-meadow-trees" loading="lazy"><figcaption>Before · r09-meadow-trees</figcaption></figure></div></div></article>
+<article class="item" id="r2">
+<header><span class="code">R2</span><h3>Crop bed</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> A 5×5 grid of flat green cubes on a brown slab, right beside the home. The most toy-like spot on the tile is a placeholder.</p><p class="prop"><b>Remaster.</b> A raised timber bed in the language of the planter already beside it: mounded soil rows, stakes and twine, a watering can. Crops come from a kit in three stages (sprout, leafy, ripe). Ripe crops glow gold; thirsty ones go brown and droop, so the bed tells you what it needs.</p>
+<dl><div><dt>Tier</dt><dd>Kit (bed hero piece + crop kit)</dd></div><div><dt>Concept art</dt><dd>Kitchen-garden sheet: the bed, 4 crops in 3 growth stages</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/evan/crop-bed.jpg" alt="Evan&#x27;s phone" loading="lazy"><figcaption>Evan&#x27;s phone</figcaption></figure><figure><img src="captures/ranch/r01-crop-bed.jpg" alt="Before · r01-crop-bed" loading="lazy"><figcaption>Before · r01-crop-bed</figcaption></figure></div></div></article>
+<article class="item" id="r3">
+<header><span class="code">R3</span><h3>Open shelters: goat, cow, horse</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> The open-shed pass strips the walls, so a teal roof floats on salmon or orange posts and the goat ramp and deck turn into grey slabs. Pink appears nowhere else in the Ranch, and the roofs are oversized for the animals.</p><p class="prop"><b>Remaster.</b> Build the goat house as its concept (walls, ramp, climbing deck) with one open side instead of none. Walls go terracotta or timber, the teal roof cap stays. Scale to the animals. Shelters get straw floors, a hay rack and the brass bell on the gate.</p>
+<dl><div><dt>Tier</dt><dd>Hero (goat house) + kit (shelter frame)</dd></div><div><dt>Concept art</dt><dd>Goat house exists (Evan&#x27;s pick); needs a recolour and a three-wall variant</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/evan/goat.jpg" alt="Evan&#x27;s phone" loading="lazy"><figcaption>Evan&#x27;s phone</figcaption></figure><figure><img src="captures/ranch/r16-goat-shelter-top.jpg" alt="Before · r16-goat-shelter-top" loading="lazy"><figcaption>Before · r16-goat-shelter-top</figcaption></figure><figure><img src="captures/ranch/r05-cow-shelter.jpg" alt="Before · r05-cow-shelter" loading="lazy"><figcaption>Before · r05-cow-shelter</figcaption></figure></div></div></article>
+<article class="item" id="r4">
+<header><span class="code">R4</span><h3>Lamps</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> One black tack (six-sided pole, cone cap, cube bulb) repeated everywhere. At night each lamp throws the same flat disc of light. It reads as an engine marker, not a lamp.</p><p class="prop"><b>Remaster.</b> A Ranch lamp kit: shepherd&#x27;s-crook post with a hanging lantern, a lantern on a fence post, a porch lamp on the home, string lights over the playground. Warm glass and iron. A resident walks the round at dusk and lights them, so you see evening arrive. Glow pools follow the ground and fade softly; at most four real lights, the rest glow.</p>
+<dl><div><dt>Tier</dt><dd>Kit (4 pieces)</dd></div><div><dt>Concept art</dt><dd>Lamp sheet: 4 lamps, by day and lit</dd></div><div><dt>Owner</dt><dd>Model challenge (model) · Weather and clouds (light, timing, pools)</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/ranch/r17-lamp-close.jpg" alt="Before · r17-lamp-close" loading="lazy"><figcaption>Before · r17-lamp-close</figcaption></figure><figure><img src="captures/ranch/r18-lamp-close-night.jpg" alt="Before · r18-lamp-close-night" loading="lazy"><figcaption>Before · r18-lamp-close-night</figcaption></figure></div></div></article>
+<article class="item" id="r5">
+<header><span class="code">R5</span><h3>Sky, backdrop and night</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> By day the tile floats in a flat grey void. Golden hour has no gold: the sky stays grey while the ground dims. At night the tile sinks into black and goes murky green. Shadows are neutral grey.</p><p class="prop"><b>Remaster.</b> Paper sky with a horizon glow by day, apricot dusk, ink-blue night with a moonlight rim and warm windows. Shadows fill with sky blue. Contact shadows under every prop. One signal moves sky, sun, fog, windows and lamps together.</p>
+<dl><div><dt>Tier</dt><dd>Grammar (lighting)</dd></div><div><dt>Concept art</dt><dd>None: the aesthetic study&#x27;s states are the target</dd></div><div><dt>Owner</dt><dd>Weather and clouds</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/ranch/r00-wide.jpg" alt="Before · r00-wide" loading="lazy"><figcaption>Before · r00-wide</figcaption></figure><figure><img src="captures/ranch/r12-wide-golden.jpg" alt="Before · r12-wide-golden" loading="lazy"><figcaption>Before · r12-wide-golden</figcaption></figure><figure><img src="captures/ranch/r13-wide-night.jpg" alt="Before · r13-wide-night" loading="lazy"><figcaption>Before · r13-wide-night</figcaption></figure></div></div></article>
+<article class="item" id="r6">
+<header><span class="code">R6</span><h3>Fences and gates</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> Chunky beige post-and-rail, identical everywhere and as tall as a cow. It dominates every close-up.</p><p class="prop"><b>Remaster.</b> Post-and-rail at true scale in weathered timber, with a lean or a gap here and there, a gate with a latch and the bell, and stone corner posts at yard entrances.</p>
+<dl><div><dt>Tier</dt><dd>Kit</dd></div><div><dt>Concept art</dt><dd>Fence and gate sheet</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/ranch/r06-horse-shelter.jpg" alt="Before · r06-horse-shelter" loading="lazy"><figcaption>Before · r06-horse-shelter</figcaption></figure></div></div></article>
+<article class="item" id="r7">
+<header><span class="code">R7</span><h3>Faceted fruit and foliage</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> Apples are red icosahedra and leaves are flat-shaded cards, so trees glint like cut glass.</p><p class="prop"><b>Remaster.</b> Smooth normals on every canopy and fruit. Fruit as soft spheres with a highlight, canopies as puff clusters.</p>
+<dl><div><dt>Tier</dt><dd>Kit (re-export)</dd></div><div><dt>Concept art</dt><dd>None</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/ranch/r03-family-home.jpg" alt="Before · r03-family-home" loading="lazy"><figcaption>Before · r03-family-home</figcaption></figure></div></div></article>
+<article class="item" id="r8">
+<header><span class="code">R8</span><h3>Paths</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> Soft orange decals with blurred edges, with no edging, ruts or wear.</p><p class="prop"><b>Remaster.</b> Packed dirt with a grass edge, wheel ruts to the feed store, stepping stones to the home, puddles after rain.</p>
+<dl><div><dt>Tier</dt><dd>Grammar</dd></div><div><dt>Concept art</dt><dd>None</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/ranch/r04-feed-store-water.jpg" alt="Before · r04-feed-store-water" loading="lazy"><figcaption>Before · r04-feed-store-water</figcaption></figure></div></div></article>
+<article class="item" id="r9">
+<header><span class="code">R9</span><h3>Tile slab edge</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> A flat orange-brown wall.</p><p class="prop"><b>Remaster.</b> Topsoil band, strata, a few stones and roots, and a grass lip that overhangs, so the tile reads as a toy you hold.</p>
+<dl><div><dt>Tier</dt><dd>Grammar</dd></div><div><dt>Concept art</dt><dd>Optional slab sheet</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/ranch/r11-tile-edge.jpg" alt="Before · r11-tile-edge" loading="lazy"><figcaption>Before · r11-tile-edge</figcaption></figure></div></div></article>
+<article class="item" id="r10">
+<header><span class="code">R10</span><h3>Water</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> Troughs hold a flat cyan box.</p><p class="prop"><b>Remaster.</b> Water with a depth tint and a ripple when an animal drinks; the level drops as the trough empties (already simulated).</p>
+<dl><div><dt>Tier</dt><dd>Grammar (material)</dd></div><div><dt>Concept art</dt><dd>None</dd></div><div><dt>Owner</dt><dd>Weather and clouds (shading) · Model challenge (trough)</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/ranch/r07-chicken-coop.jpg" alt="Before · r07-chicken-coop" loading="lazy"><figcaption>Before · r07-chicken-coop</figcaption></figure></div></div></article>
+<article class="item" id="r11">
+<header><span class="code">R11</span><h3>Yard ground patches</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> Lime polygons and brown slabs mark each shelter floor like debug areas.</p><p class="prop"><b>Remaster.</b> Trampled earth and straw that fade into the grass, with no hard polygon edges.</p>
+<dl><div><dt>Tier</dt><dd>Grammar</dd></div><div><dt>Concept art</dt><dd>None</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+</div></article>
+<article class="item" id="r12">
+<header><span class="code">R12</span><h3>Sugar shack</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> A plain box with a teal lid; nothing says maple.</p><p class="prop"><b>Remaster.</b> Steam vent on the ridge, woodpile, buckets on the maples; steam rises while sugaring.</p>
+<dl><div><dt>Tier</dt><dd>Hero</dd></div><div><dt>Concept art</dt><dd>Sugar-shack sheet</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+<div class="figs"><figure><img src="captures/ranch/r08-playground-shack.jpg" alt="Before · r08-playground-shack" loading="lazy"><figcaption>Before · r08-playground-shack</figcaption></figure></div></div></article>
+<article class="item" id="r13">
+<header><span class="code">R13</span><h3>Playground</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> Thin orange sticks on a sand square.</p><p class="prop"><b>Remaster.</b> Swing, slide, seesaw and sandbox in chunky toy proportions.</p>
+<dl><div><dt>Tier</dt><dd>Kit</dd></div><div><dt>Concept art</dt><dd>Playground sheet</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+</div></article>
+<article class="item" id="r14">
+<header><span class="code">R14</span><h3>Animals</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span></header>
+<div class="body"><div class="txt"><p class="wrong"><b>Today.</b> Good silhouettes; the horses are boxy and flat orange.</p><p class="prop"><b>Remaster.</b> Smooth-shaded re-export, idle, feed and rest poses, a mane and tail that move.</p>
+<dl><div><dt>Tier</dt><dd>Hero (re-pass)</dd></div><div><dt>Concept art</dt><dd>None: rebuild art exists</dd></div><div><dt>Owner</dt><dd>Model challenge</dd></div></dl></div>
+</div></article>
+  <p class="keep"><b>Keep as they are:</b> the family home, feed store, water point, chicken coop, cows, goats, chickens, the raised planter, potting bench and compost bay. They are rebuilt models and they set the bar for the rest.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Moon</p>
+  <h2>The Moonbase today, and the world in the pack</h2>
+  <p class="read muted">The Moon tile is a believable NASA-style colony: white inflatable rings and lobes, a ferry port, robots and white astronauts on beige regolith. The Moon Mission pack is a different and better world, and the Moonbase card already shows its painting. Today the card promises a place the tile does not have.</p>
+  <div class="pack">
+    <figure><img src="captures/pack/moonbase.jpg" alt="Pack moonbase painting"><figcaption>Pack · moonbase (the card art)</figcaption></figure>
+    <figure><img src="captures/pack/broll-01.jpg" alt="Moonbase wide"><figcaption>Pack · base at dawn</figcaption></figure>
+    <figure><img src="captures/pack/broll-20.jpg" alt="Moonbase night"><figcaption>Pack · base at night</figcaption></figure>
+    <figure><img src="captures/pack/broll-16.jpg" alt="Buggy at the crater"><figcaption>Pack · buggy at the crater</figcaption></figure>
+    <figure><img src="captures/pack/buggy.jpg" alt="Moon buggy four views"><figcaption>Pack · buggy, 4 views</figcaption></figure>
+    <figure><img src="captures/pack/meteorite.jpg" alt="Meteorite four views"><figcaption>Pack · meteorite, 4 views</figcaption></figure>
+    <figure><img src="captures/pack/star-child.jpg" alt="Star Child sheet"><figcaption>Pack · Star Child sheet</figcaption></figure>
+    <figure><img src="captures/pack/abbie-star-child.jpg" alt="Abbie holding the Star Child"><figcaption>Pack · Abbie and the Star Child</figcaption></figure>
+  </div>
+  <h3>What hurts today</h3>
+  <div class="mhs"><article class="mh"><img src="captures/moon/m00-wide.jpg" alt="Identity" loading=lazy><div><header><span class="code">M1</span><h3>Identity</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></header><p>The tile matches neither its card nor its story: no dome, no tower, no Abbie, Daddy, buggy, meteorite or Star Child.</p></div></article><article class="mh"><img src="captures/moon/m07-horizon-earth.jpg" alt="Regolith" loading=lazy><div><header><span class="code">M2</span><h3>Regolith</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></header><p>Beige sand-plaster, flat with crease lines. No craters, though crater fields are the pack&#x27;s defining landscape.</p></div></article><article class="mh"><img src="captures/moon/m06-geology-rocks.jpg" alt="Rocks" loading=lazy><div><header><span class="code">M3</span><h3>Rocks</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></header><p>A uniform confetti of dark faceted dodecahedra across the whole tile.</p></div></article><article class="mh"><img src="captures/moon/m08-wide-night.jpg" alt="Light" loading=lazy><div><header><span class="code">M4</span><h3>Light</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></header><p>The Moon&#x27;s dialect is lights, radio and holograms, yet nothing glows: no windows, beacons or crystals. Measured at 10 pm, the tile is exactly as bright as at noon.</p></div></article><article class="mh"><img src="captures/moon/m09-people.jpg" alt="Gold bars" loading=lazy><div><header><span class="code">M5</span><h3>Gold bars</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></header><p>Utility-trench markers read as floating gold bricks in dashed lines, like a developer overlay.</p></div></article><article class="mh"><img src="captures/moon/m04-family-quarters.jpg" alt="People" loading=lazy><div><header><span class="code">M6</span><h3>People</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></header><p>Generic white astronauts.</p></div></article><article class="mh"><img src="captures/moon/m02-vtol-port.jpg" alt="Landing pad" loading=lazy><div><header><span class="code">M7</span><h3>Landing pad</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></header><p>A big grey concrete U with stairs, the heaviest shape on the tile.</p></div></article><article class="mh"><div><header><span class="code">M8</span><h3>Slab edge</h3><span class="hurt" aria-label="hurt %d of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></header><p>Black void sides.</p></div></article></div>
+  <h3>Palette from the pack</h3>
+  <div class="swatches">
+    <div class="sw"><span style="background:#c4c9d4"></span>regolith light<br>#c4c9d4</div>
+    <div class="sw"><span style="background:#8d93a3"></span>regolith mid<br>#8d93a3</div>
+    <div class="sw"><span style="background:#4a5468"></span>crater shadow<br>#4a5468</div>
+    <div class="sw"><span style="background:#0b1020"></span>night sky<br>#0b1020</div>
+    <div class="sw"><span style="background:#3a4a5a"></span>machines<br>#3a4a5a</div>
+    <div class="sw"><span style="background:#ff9a3c"></span>windows, suits<br>#ff9a3c</div>
+    <div class="sw"><span style="background:#00ffd1"></span>alien only<br>#00ffd1</div>
+  </div>
+  <p class="read muted">Cyan is reserved for the meteorite and the Star Child. On the Moon it means "something alien to know", the way brass means "something to know" on the Ranch. Orange is home: windows and suits.</p>
+  <h3>The plan</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th></th><th>Item</th><th>Tier</th><th>Concept art</th><th>From the pack</th></tr></thead>
+    <tbody><tr><td class="code">MB1</td><td><b>Crater-field terrain</b><br><span class="muted">Craters with rims and ejecta rays in grey-blue value bands. Rocks scatter from crater ejecta (dense at rims, sparse elsewhere) and are smooth boulders. Buggy tracks and footprints stay.</span></td><td>Grammar</td><td>None</td><td class="mono">moonbase.png · cinematic 01, 16</td></tr><tr><td class="code">MB2</td><td><b>The dome</b><br><span class="muted">Glass-ribbed main dome with the orange band, an airlock and ramp, warm glow inside at night.</span></td><td>Hero (ribs, glass, band, airlock)</td><td>Turnaround sheet in the house style</td><td class="mono">moonbase.png · cinematic 01, 20</td></tr><tr><td class="code">MB3</td><td><b>Moon buggy</b><br><span class="muted">Charcoal quad on balloon tyres with tread blocks and cyan headlights. Abbie drives it out to the crater.</span></td><td>Hero (tyres, chassis, seat, lights)</td><td>None needed: the 4-view sheet exists</td><td class="mono">moon_buggy_reference.png · spec sheet</td></tr><tr><td class="code">MB4</td><td><b>Meteorite and crater</b><br><span class="muted">Craggy dark sphere with cyan crystals, 60% buried in a fresh crater. It pulses every 2 seconds and lights the crater walls, then opens like origami.</span></td><td>Hero (buried, glowing, opening, open)</td><td>None needed: 4 views exist</td><td class="mono">mysterious_meteorite_reference.png · spec sheet</td></tr><tr><td class="code">MB5</td><td><b>Star Child</b><br><span class="muted">A 30–40 cm crystal child whose core changes colour with feeling: cyan, violet when thoughtful, gold when joyful, deep blue when sad.</span></td><td>Hero (head, eyes, core, petals, limbs)</td><td>Sheet exists; add a turnaround</td><td class="mono">alien-a.png · character sheet</td></tr><tr><td class="code">MB6</td><td><b>Abbie and Daddy</b><br><span class="muted">Abbie&#x27;s grey suit with orange accents; Daddy&#x27;s grey power armour.</span></td><td>Hero</td><td>Daddy&#x27;s turnaround exists; Abbie needs one</td><td class="mono">abbie.png · daddy_explorer.png</td></tr><tr><td class="code">MB7</td><td><b>Habitat kit</b><br><span class="muted">Quonset hab, hangar with orange windows, connector tubes, lattice radio tower with a blinking beacon, solar array, dish. The existing ME kit restyled to the palette.</span></td><td>Kit (about 10 pieces)</td><td>One kit sheet</td><td class="mono">moonbase.png · cinematic 01, 15</td></tr><tr><td class="code">MB8</td><td><b>Light cycle</b><br><span class="muted">Daddy&#x27;s midnight-blue low bike with hubless glowing wheels.</span></td><td>Hero</td><td>Needs a turnaround</td><td class="mono">daddy_light_cycle_rescue.png · spec sheet</td></tr><tr><td class="code">MB9</td><td><b>Moon light</b><br><span class="muted">One signal: Earthshine at night, warm windows at dusk, the tower beacon, the meteorite&#x27;s pulse on the crater, a sunrise sweep across the plain.</span></td><td>Grammar</td><td>None</td><td class="mono">cinematic 02, 20</td></tr><tr><td class="code">MB10</td><td><b>Horizon and backdrop</b><br><span class="muted">Distant crater rims as an impostor ring, Earth and stars; basalt strata on the slab.</span></td><td>Impostor + grammar</td><td>None</td><td class="mono">cinematic 02</td></tr><tr><td class="code">MB11</td><td><b>Cleanup</b><br><span class="muted">Trench markers become a buried cable with a faint line in the dust. The landing pad becomes a ring of beacon lights.</span></td><td>Grammar</td><td>None</td><td class="mono"></td></tr></tbody>
+  </table></div>
+  <p class="read muted">Owner: a new Moon remaster build thread, started once this plan is merged. It uses the Model challenge pipeline and the Review Desk; light and sky go to Weather and clouds. The buggy and meteorite can start modelling at once, because their reference sheets already exist. Ideas only: the pack's four minigames as in-world base activities, and its music for the composer.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Priority</p>
+  <h2>Order of work</h2>
+  <ol class="order">
+    <li><b>Ranch wave 1</b>, what Evan sees first: grass, crop bed, shelters, lamps.</li>
+    <li><b>Light on both tiles</b> in one pass: Ranch sky and night with the Moon's Earthshine, windows and beacons. One signal, one palette; night darker than day.</li>
+    <li><b>Moon wave 1</b>: crater terrain, buggy, meteorite, then the dome.</li>
+    <li><b>Ranch wave 2</b>: fences, smooth foliage, paths, slab edge, water, yards.</li>
+    <li><b>Moon wave 2</b>: Star Child, Abbie and Daddy, habitat kit, horizon, cleanup.</li>
+    <li><b>Wave 3</b>: sugar shack, playground, animals, light cycle.</li>
+  </ol>
+</section>
+
+<section>
+  <p class="eyebrow">Done means</p>
+  <ul class="done">
+    <li>After shots from the same script and cameras, side by side with these.</li>
+    <li>Every model through the Review Desk; concept art to Evan as soon as it lands.</li>
+    <li>The aesthetic checker at 80 or more at noon, dusk and night (today: 36), with night measurably darker than day.</li>
+    <li>The game-feel check passes, and new models keep their old footprints.</li>
+  </ul>
+  <p class="muted mono">Source: docs/oracle/remaster/ on main · captures: tools/remaster-shots/</p>
+</section>
+</div>
