@@ -38,7 +38,7 @@ body.pixel canvas{image-rendering:pixelated}
 </head>
 <body>
 <a id="back" class="glass" href="./" aria-label="Back to the study"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
-<div id="hud" class="glass" aria-label="Score"><span><i class="ib"></i><b id="nb">0</b></span><span><i class="ic"></i><b id="nc">0</b></span><span><i class="is"></i><b id="ns">0</b></span></div>
+<div id="hud" class="glass" aria-label="Score"><span><i class="ib"></i><b id="nb">0</b></span><span><i class="is"></i><b id="ns">0</b></span></div>
 <div id="hang" class="glass" aria-hidden="true"><div id="zone"></div><i id="dot"></i></div>
 <div id="ring" class="glass" aria-hidden="true"><svg viewBox="-34 -34 68 68"><path id="ringTrack" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="4" stroke-linecap="round"/><path id="ringZone" fill="none" stroke="#ffc85a" stroke-width="8" stroke-linecap="round" style="filter:drop-shadow(0 0 5px #ffcf5a)"/><circle id="ringDot" r="5" fill="#f2f6ff" stroke="#8fb4ff" stroke-width="1.5"/></svg></div>
 <div id="go" class="glass" role="button" aria-label="Play"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></div>
@@ -53,7 +53,7 @@ import {TOON_LOOKS, toonify, inkHulls} from '/simulations/toon-kit.mjs';
 
 // Shared pieces from the basement and the presentation layer; the page still runs on its own if they are missing.
 const opt = async (path) => { try { return await import(path); } catch { return {}; } };
-const [PL, GB, MC, CR] = await Promise.all([opt('/simulations/presentation-layer.mjs'), opt('/simulations/grace-basement.mjs'), opt('/simulations/memory-coins.mjs'), opt('/simulations/coin-reward.mjs')]);
+const [PL] = await Promise.all([opt('/simulations/presentation-layer.mjs')]);
 const presentation = PL.presentation || ((o) => o);
 const playerCamera = PL.playerCamera || ((c) => c);
 const Q = new URLSearchParams(location.search), TEST = Q.has('test'), PIXEL = Q.has('pixel');
@@ -211,10 +211,6 @@ for (const [lvl, n] of [['low', 20], ['gym', 5], ['canopy', 5]]) {
 // the dog's ball: in your hand for the walk; the third throw makes it ball 31, up on the roof
 const dogBall = new T.Mesh(new T.SphereGeometry(.09, 12, 8), M.ball); dogBall.name = 'tennis ball'; dogBall.castShadow = true; scene.add(dogBall);
 const TOTAL = 31;
-const memoryCoin = GB.createCoin ? GB.createCoin(.16) : new T.Mesh(new T.CylinderGeometry(.16, .16, .03, 16), new T.MeshStandardMaterial({color: '#ffcc33', metalness: .8, roughness: .3, name: 'coin gold'}));
-if (!GB.createCoin) memoryCoin.rotation.x = Math.PI / 2;
-memoryCoin.name = 'gold memory coin'; memoryCoin.position.set(6.9, CANOPY + .35, -.3); scene.add(memoryCoin);
-if (MC.has?.('school-jump:canopy')) memoryCoin.visible = false;
 
 // Where to go next on each level: a soft marker on the spot, for the player only.
 const SPOTS = {gymWall: {lvl: 'low', at: v3(2.5, H, 2.75)}, hang: {lvl: 'gym', at: v3(6.2, GYM, 4.0)}, smallWall: {lvl: 'canopy', at: v3(5.6, CANOPY, 1.2)}, home: {lvl: 'low', at: v3(-6.5, H, 1.6)}, throw: {lvl: 'yard', at: v3(-10.4, 0, 1.2)}};
@@ -338,7 +334,7 @@ const PIX = PIXEL ? .45 : 1; // ?pixel brings back the basement's chunky 8-bit l
 let time = 0, pixK = PIX;
 const hud = document.getElementById('hud');
 function addScore(n, at) {
- S.score += n; document.getElementById('ns').textContent = S.score; document.getElementById('nb').textContent = S.thrown; document.getElementById('nc').textContent = S.coins;
+ S.score += n; document.getElementById('ns').textContent = S.score; document.getElementById('nb').textContent = S.thrown;
  if (!at) return;
  const p = at.clone().project(camera); const el = document.createElement('div'); el.className = 'pop'; el.textContent = '+' + n;
  el.style.left = (p.x * .5 + .5) * innerWidth + 'px'; el.style.top = (-p.y * .5 + .5) * innerHeight + 'px'; document.body.append(el);
@@ -776,12 +772,8 @@ function frame(now) {
    b.state = 'pickup'; S.carry++; SFX.pick(); if (!S.said.ball) { S.said.ball = 1; say(LINES.firstBall); }
    fly(b.m, b.m.position.clone(), kid.position.clone().add(v3(0, 1, 0)), kid.position.y + 1.4, .25, () => { b.m.visible = false; if (b.state === 'pickup') b.state = 'carried'; });
   }
-  if (S.lvl === 'canopy' && memoryCoin.visible && kid.position.distanceTo(v3(6.9, CANOPY, -.3)) < .7) {
-   memoryCoin.visible = false; S.coinDone = true; S.coins++; MC.give?.('school-jump:canopy', 'The school roof'); S.dogHop = 1; SFX.bark(); addScore(1000, null);
-   if (CR.coinReward) { S.reward = CR.coinReward(T, {scene, camera, from: memoryCoin.position.clone(), coin: memoryCoin, audio: audio(), presentation}); setTimeout(() => say(LINES.coin), 1200); }
-   else { SFX.coin(); say(LINES.coin); }
-  }
-  if (S.lvl === 'canopy' && !memoryCoin.visible && !S.coinDone) S.coinDone = true;
+  // no coin any more (every reward is a backpack charm): the memory is getting onto the canopy, and the Star charm was won on the roof
+  if (S.lvl === 'canopy' && S.mode === 'roof' && !S.coinDone) { S.coinDone = true; S.dogHop = 1; SFX.bark(); addScore(1000, null); }
   if (S.lvl === 'canopy' && S.coinDone) { S.dawdle = (S.dawdle || 0) + dt; if (S.dawdle > 9 && !S.said.hurry) { S.said.hurry = 1; say(LINES.hurry); } if (S.dawdle > 20) janitorEnding(); }
  }
  for (const b of balls) if (b.state === 'roof') b.m.position.y = b.home.y + Math.abs(Math.sin(time * 2 + b.bob)) * .04;
@@ -834,8 +826,6 @@ function frame(now) {
  ring.visible = k > .02 && !S.onWall; ring.position.copy(kid.position).add(v3(0, .03, 0));
  ring.geometry.dispose(); ring.geometry = new T.RingGeometry(.5, .72, 40, 1, Math.PI / 2, Math.max(.01, k * Math.PI * 2)); ringMat.color.setHSL(.12 - .12 * k, .95, .6);
  for (const f of [...flying]) { f.t = Math.min(1, f.t + dt / f.dur); const e = f.t; f.obj.position.lerpVectors(f.from, f.to, e); f.obj.position.y = (1 - e) * (1 - e) * f.from.y + 2 * (1 - e) * e * f.peak + e * e * f.to.y; if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done?.(); } }
- if (memoryCoin.visible) memoryCoin.rotation.z += dt * 2;
- if (S.reward && !S.reward.update(rdt)) S.reward = null;
  // the light: dusk deepens over four minutes; windows, the wall lamp and streetlamps come up as it does
  const night = Math.min(1, time / 240); sky.uniforms.night.value = night * .85;
  sun.intensity = 3.7 - 2.5 * night; sun.color.setRGB(1, .54 - .15 * night, .3 - .1 * night); scene.environmentIntensity = .42 - .27 * night;
