@@ -82,7 +82,10 @@ def poll(path, tid, what):
 
 def fetch(url, dest):
     dest.parent.mkdir(parents=True, exist_ok=True)
-    urllib.request.urlretrieve(url, dest)
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (meshy_run.py)"})
+    with urllib.request.urlopen(req, timeout=300) as r, open(dest, "wb") as f:
+        while chunk := r.read(1 << 20):
+            f.write(chunk)
 
 
 def views_for(job, tmp):
@@ -238,9 +241,12 @@ if __name__ == "__main__":
         rows = rows if isinstance(rows, list) else rows.get("result", rows)
         keep = []
         for t in rows:
-            keep.append({k: t.get(k) for k in ("id", "status", "created_at", "finished_at")})
-            if t.get("thumbnail_url"):
-                fetch(t["thumbnail_url"], d / f"{t['id']}.png")
+            keep.append({k: t.get(k) for k in ("id", "status", "created_at", "finished_at", "art_style", "should_texture")})
+            try:
+                if t.get("thumbnail_url"):
+                    fetch(t["thumbnail_url"], d / f"{t['id']}.png")
+            except Exception as e:
+                keep[-1]["thumb_error"] = str(e)
         (d / "tasks.json").write_text(json.dumps(keep, indent=1))
         git("Meshy: recent image-to-3d tasks for recovery", [d]); sys.exit()
     if ids and ids[0] == "--rig-only":
