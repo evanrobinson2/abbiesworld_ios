@@ -1261,6 +1261,93 @@
     }
    ],
    "recorded": "2026-10-23, as the study was made"
+  },
+  "suit-hud": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Oracle identity record: ASTRONEER",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json",
+     "note": "Oxygen you can see on the body, 4% HUD: Abbie's vial and the glove's cuff"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle identity record: Subnautica 2",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/subnautica-2.json",
+     "note": "Oxygen as the one always-on meter in a first-person survival game"
+    },
+    {
+     "k": "oracle",
+     "t": "HUD study: Dead Space, Firewatch, the 2x2",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+     "note": "Meta carries feeling; the suit's own lights; the third proposal"
+    },
+    {
+     "k": "devblog",
+     "t": "Metroid Prime 4: Beyond's lead UI artist shares his work",
+     "href": "https://shinesparkers.net/metroid-prime-4-beyonds-lead-ui-artist-shares-his-work/",
+     "note": "Visor glass as the frame of the HUD: Evan's proposal (style only)"
+    },
+    {
+     "k": "devblog",
+     "t": "Metroid Prime 4 artist details the updates to Samus's visor view",
+     "href": "https://gonintendo.com/contents/37866-metroid-prime-4-beyond-artist-details-the-updates-to-samus-visor-view"
+    },
+    {
+     "k": "devblog",
+     "t": "Metroid Prime Remastered: menus and UX (ArtStation)",
+     "href": "https://waffledoodle.artstation.com/projects/04A83Y"
+    },
+    {
+     "k": "design",
+     "t": "Video: designing Dead Space's immersive user interface",
+     "href": "https://gamedeveloper.com/design/video-designing-i-dead-space-i-s-immersive-user-interface",
+     "note": "Read the suit, not the screen: the glove proposal"
+    },
+    {
+     "k": "design",
+     "t": "Dead Space 2: diegetic interface design",
+     "href": "https://www.hudsandguis.com/2012/08/22/dead-space-2-diegetic-interface-design"
+    },
+    {
+     "k": "design",
+     "t": "Unity: how to immerse your players through effective UI and game design",
+     "href": "https://unity.com/blog/games/how-to-immerse-your-players-through-effective-ui-and-game-design"
+    },
+    {
+     "k": "tutorial",
+     "t": "TWHL: view bobbing, part 1",
+     "href": "https://twhl.info/wiki/view/2894",
+     "note": "Step bob scaled by speed for the hands"
+    },
+    {
+     "k": "tutorial",
+     "t": "TWHL: view bobbing, part 2",
+     "href": "https://twhl.info/wiki/page/Tutorial:_View_bobbing:_Part_2"
+    },
+    {
+     "k": "tutorial",
+     "t": "Godot forums: how to create weapon sway",
+     "href": "https://godotforums.org/d/19829-how-to-create-weapon-sway",
+     "note": "Hands lag a little behind a turn"
+    },
+    {
+     "k": "canon",
+     "t": "CLAUDE.md: How Abbie's World shows information",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md"
+    },
+    {
+     "k": "canon",
+     "t": "Moon Mission (AW-STUDY-0036): white suits with pink trim, Moon dark mode",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonmission/MOON_MISSION_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Moon Base Kit (AW-STUDY-0031): diegetic gauges and lamps instead of a HUD",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moon-base-kit/MOON_BASE_KIT_STUDY.md"
+    }
+   ],
+   "recorded": "2026-10-23"
   }
  }
 }

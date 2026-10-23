@@ -1,0 +1,129 @@
+{
+ "id": "suit-glove",
+ "date": "2026-10-23",
+ "note": "AW-STUDY-0044 first-person suit HUD, proposal glove. iPhone 390 x 844 pt portrait, 844 x 390 landscape.",
+ "viewports": {
+  "portrait": {
+   "size": [
+    390,
+    844
+   ],
+   "safe": [
+    47,
+    0,
+    34,
+    0
+   ]
+  },
+  "landscape": {
+   "size": [
+    844,
+    390
+   ],
+   "safe": [
+    0,
+    47,
+    21,
+    47
+   ]
+  }
+ },
+ "elements": [
+  {
+   "id": "helmet_glass",
+   "kind": "meta",
+   "tier": "T1_on_thing",
+   "time": "always",
+   "words": 0,
+   "owner": "suit",
+   "note": "the place's suit: bubble rim, visor brow, hat brim, goggles, hood or headset; clear glass, no darkening; measured 2-7% of the screen"
+  },
+  {
+   "id": "hands_and_tool",
+   "kind": "diegetic",
+   "tier": "T1_on_thing",
+   "time": "always",
+   "words": 0,
+   "owner": "suit",
+   "note": "the place's tool in Abbie's glove; its lamp shows charge; tap or E uses it"
+  },
+  {
+   "id": "aim_dot",
+   "kind": "overlay",
+   "tier": "T2_always_on",
+   "time": "always",
+   "words": 0,
+   "bbox": {
+    "portrait": [
+     187,
+     414,
+     16,
+     16
+    ],
+    "landscape": [
+     414,
+     187,
+     16,
+     16
+    ]
+   },
+   "owner": "tools",
+   "world_echo": "the tool's swing lands where it points",
+   "note": "a plain dot"
+  },
+  {
+   "id": "wrist_cuff",
+   "kind": "diegetic",
+   "tier": "T1_on_thing",
+   "time": "always",
+   "readout": true,
+   "words": 0,
+   "owner": "suit",
+   "note": "six air lights and a needle pointing home, on her left wrist"
+  },
+  {
+   "id": "air_top_up",
+   "kind": "diegetic",
+   "tier": "T0_world",
+   "time": "threshold",
+   "readout": true,
+   "owner": "suit",
+   "note": "before air runs out the base tops you up: two-note chime and a fizz; nobody fails"
+  }
+ ],
+ "fade": {
+  "focus": {
+   "opacity": 0.25,
+   "in_ms": 150,
+   "out_ms": 250
+  },
+  "change": {
+   "hold_ms": 2500,
+   "fade_ms": 400
+  },
+  "idle_tuck": {
+   "after_ms": 6000,
+   "visible_share": 0.4
+  },
+  "threshold": {
+   "timer": false
+  },
+  "summon_all": "any change of air or tool charge brings the readouts back; the glass never fades"
+ },
+ "kid_safe": {
+  "red_alarm": false,
+  "buzzer": false,
+  "max_flash_hz": 0,
+  "fail_screen": false
+ },
+ "signals": [
+  {
+   "id": "air",
+   "drives": [
+    "meta",
+    "sound"
+   ],
+   "note": "not yet in the world: Houston on the radio and the habitat beacon are the next channels"
+  }
+ ]
+}

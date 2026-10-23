@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-living-suit",
+      "date": "2026-10-23",
+      "title": "Put the suit on",
+      "line": "Zoom all the way down into first person and you now wear the place's suit and hold its tool: an astronaut bubble with your oxygen on the Moon, a sun hat and watering can on the Ranch. Tap to use the tool; press V to try Evan's visor, Abbie's bubble or the glove.",
+      "image": "/whats-new/2026-10-23-living-suit.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9N39SaoD7qVBCG8SF71ogz",
+      "threadTitle": "Biome suit HUD in first person",
+      "tour": true,
+      "link": "/studies/suit-hud/"
+    },
+    {
       "id": "2026-10-23-whats-new-history",
       "date": "2026-10-23",
       "title": "Every new thing, in one place",

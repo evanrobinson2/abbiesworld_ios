@@ -86,6 +86,7 @@ import {setLabHexDiameter} from './tile-metrics.js';
 import {OrbitControls} from './vendor/OrbitControls.js';
 import {cameraOwnsPointer,sandboxWheel} from './vendor/sandbox-camera.mjs';
 import {installFirstPerson} from './first-person.mjs?v=1';
+import {installSuitHud,biomeOf} from './suit-hud.mjs?v=1';
 import {installGamepad} from './gamepad.mjs?v=1';
 import {createRanchComposer} from './ranch-composer.js?paths=15';
 import {planAssembly} from './tile-adapter.js?paths=2';
@@ -140,7 +141,9 @@ const orbit=new OrbitControls(camera,renderer.domElement);orbit.mouseButtons={LE
 const cameraFollow=createCameraFollow(camera,orbit);orbit.addEventListener('start',()=>cameraFollow.stop());
 renderer.domElement.addEventListener('wheel',e=>{if(e.shiftKey&&!e.ctrlKey)cameraFollow.stop();},{capture:true});
 // At the bottom of the zoom the camera steps down into first person (first-person.mjs); zooming out steps back up.
-const firstPerson=installFirstPerson({T,camera,orbit,canvas:renderer.domElement,getActive:()=>busy?null:active,onEnter:()=>{cameraFollow.stop();closeInspection();}});window.RanchFirstPerson=firstPerson;
+// In first person you put on the place's suit and hold its tool (suit-hud.mjs, AW-STUDY-0044): the Moon gives the oxygen bubble.
+const suit=installSuitHud({T,camera,getBiome:()=>{const c=current();return biomeOf(c?.family,c?.config?.planet);}});window.RanchSuit=suit;
+const firstPerson=installFirstPerson({T,camera,orbit,canvas:renderer.domElement,getActive:()=>busy?null:active,onEnter:()=>{cameraFollow.stop();closeInspection();suit.enter();},onExit:()=>suit.exit()});window.RanchFirstPerson=firstPerson;
 renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();e.stopImmediatePropagation();if(firstPerson.wheel(e))return;sandboxWheel(T,camera,orbit,e)},{capture:true,passive:false});
 const sky=new T.HemisphereLight('#e6efff','#9b784d',2),sun=new T.DirectionalLight('#ffdfac',3.5),fill=new T.DirectionalLight('#a8c8ed',.6);sun.position.set(-12,18,9);fill.position.set(12,8,-12);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-19,right:19,top:19,bottom:-19,near:.1,far:70});sun.shadow.normalBias=.015;sun.shadow.bias=-.0001;scene.add(sky,sun,sun.target,fill);
 const floor=new T.Mesh(new T.PlaneGeometry(500,500),glowFloorMaterial());floor.rotation.x=-Math.PI/2;floor.position.y=-1.3;floor.receiveShadow=true;scene.add(floor);

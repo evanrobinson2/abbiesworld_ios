@@ -1,0 +1,6 @@
+/* The living suit (suit-hud.mjs): two canvases over the world, never catching a touch. */
+.suit-hud{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:40;display:none}
+html.suit-on .suit-hud{display:block}
+.suit-hud.in-host{position:absolute;width:100%;height:100%;z-index:2}
+/* In first person the sandbox's own controls step aside, so it is obvious you are now inside the world. */
+html.first-person body>*:not(#world):not(.suit-hud):not(dialog[open]):not(script):not(style):not(link){opacity:0!important;pointer-events:none!important;transition:opacity .25s}

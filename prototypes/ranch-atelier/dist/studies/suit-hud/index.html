@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Living Suit</title>
+<meta name="description" content="AW-STUDY-0044: in first person you put on the place's suit and hold its tool. Three FPS HUD proposals: Evan's visor, Abbie's bubble, and the glove.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* AW-STUDY-0044 The Living Suit. Its own look: Moon night, Abbie's pink trim. */
+:root{--bg:#0c0f16;--paper:#151a24;--raised:#1d2431;--ink:#eceff5;--muted:#9aa3b4;--line:#283142;--pink:#ff6fb5;--cyan:#7fe9ff;--amber:#ffb547;
+--display:"Barlow Condensed",system-ui,sans-serif;--body:"Source Sans 3",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eff1f5;--paper:#fff;--raised:#f4f6fa;--ink:#1b1f28;--muted:#5a6272;--line:#d5dae3;--pink:#d63f8c;--cyan:#0f7f99;--amber:#b06b00;color-scheme:light}}
+:root[data-theme="light"]{--bg:#eff1f5;--paper:#fff;--raised:#f4f6fa;--ink:#1b1f28;--muted:#5a6272;--line:#d5dae3;--pink:#d63f8c;--cyan:#0f7f99;--amber:#b06b00;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);padding:24px max(16px,env(safe-area-inset-right)) 64px max(16px,env(safe-area-inset-left))}
+main{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+main>*{min-width:0}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--pink)}
+h1{font:700 clamp(40px,7vw,68px)/1 var(--display);margin:0}
+h2{font:700 32px/1.1 var(--display);margin:26px 0 0}
+h3{font:700 23px/1.1 var(--display);margin:0}
+p{margin:0;max-width:76ch}.lede{font-size:19px}.muted{color:var(--muted)}
+img{display:block;width:100%;height:auto;border-radius:12px;object-fit:contain;background:#05070b}
+figure{margin:0;display:grid;gap:6px}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.ba{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px}
+.stage{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;touch-action:none;user-select:none;-webkit-user-select:none}
+.stage canvas.world{position:absolute;inset:0;width:100%;height:100%;display:block}
+@media (max-width:700px){.stage{aspect-ratio:3/4}}
+.stage:fullscreen{border-radius:0;aspect-ratio:auto}
+.pickers{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}
+.pick{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pick b{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.pick button,.full{font:600 14px var(--body);color:var(--ink);background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;min-height:36px}
+.pick button[aria-pressed="true"]{background:var(--pink);border-color:var(--pink);color:#fff}
+.hint{font:500 12px/1.5 var(--mono);color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px;align-content:start}
+.card .who{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--pink)}
+.card ul{margin:0;padding-left:18px}.card li{margin:2px 0}
+.dc{font:500 12.5px/1.55 var(--mono);background:var(--raised);border-radius:10px;padding:10px 12px;color:var(--ink);white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:15px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.steps{counter-reset:s;display:grid;gap:10px;padding:0;margin:0;list-style:none}
+.steps li{counter-increment:s;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px 10px 48px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:10px;font:700 22px/1 var(--display);color:var(--pink)}
+.steps li.done::before{content:"✓";color:var(--cyan)}
+.score{font:700 28px/1 var(--display);color:var(--cyan)}
+a{color:var(--cyan)}
+</style>
+</head><body><main>
+<div class="eyebrow">AW-STUDY-0044 · first person</div>
+<h1>The Living Suit</h1>
+<p class="lede">When you zoom all the way down into the world, you now put on that place's suit and hold its tool. On the Moon you're inside an astronaut bubble with your oxygen in it. On the Ranch you wear a sun hat and carry a watering can. Three ways to draw it are below, ready to play: the one Evan would like, the one Abbie would like, and a third.</p>
+
+<section class="ba">
+ <figure><img src="img/before-moon.jpg" alt="First person on the Moon today: the plain camera at eye height, nothing in your hands"><figcaption>Before: first person on the Moon looked like the orbit camera got low</figcaption></figure>
+ <figure><img src="img/after-moon-bubble.jpg" alt="The same view inside Abbie's pink bubble helmet, a vial of air bubbles, a star sticker and a scoop in her white glove"><figcaption>After: Abbie's bubble, same spot, same camera</figcaption></figure>
+</section>
+
+<h2>Play it</h2>
+<div class="stage" id="stage"><canvas class="world" id="world"></canvas></div>
+<div class="pickers">
+ <div class="pick" id="places"><b>Place</b></div>
+ <div class="pick" id="huds"><b>HUD</b></div>
+ <button class="full" id="full">Full screen</button>
+</div>
+<p class="hint">Drag to look. W A S D or arrows to walk; on a phone, drag up to walk. Tap or press E to use the tool. V changes the HUD. Walk on the Moon long enough and your air runs low: the base tops you up with a chime. Nobody ever runs out.</p>
+
+<h2>What "use meta" means here</h2>
+<p>We took both readings, because they fit together. <strong>Metadata:</strong> every place says what you wear and carry (the table below), so a new world gets its suit by naming one, not by new code. <strong>The meta layer:</strong> in our HUD canon, meta is what you feel in your own body. Helmet glass, your breath fogging it when you hurry, the fizz of fresh air: the suit lives there, and as little as possible goes in the overlay. A Metroid Prime style visor is one of the three proposals.</p>
+
+<h2>Three proposals</h2>
+<div class="cards">
+ <article class="card">
+  <span class="who">The one Evan would like</span><h3>A. The Prime visor</h3>
+  <img src="img/moon-prime.jpg" alt="Moon, Evan's visor: cool glass rim, a cyan air arc on the top left, a heading tape with a pink home diamond, a scoop in the right hand">
+  <p>Glass you look through, with readouts living on the inside of the frame like holograms. A ten-cell air arc hugs the top left, a thin heading tape runs along the brow with a pink diamond for home, and four brackets around the dot open while you walk. Everything tucks to a whisper after a few seconds of no change and comes back when something moves. Rich, cool, AAA. The glass changes with the place: bubble on the Moon, dust visor on Mars, hat brim on the Ranch.</p>
+  <div class="dc">Feel: "I'm wearing a real suit and it's watching out for me"
+Character knows: the visor's own lights
+Mode: meta (the glass) + a small overlay (arc, tape)
+For: player
+Adapts: air low = amber cells, breath fog, a chime</div>
+  <p class="muted">Style reference only: Metroid Prime's visor, Dead Space's suit lights.</p>
+ </article>
+ <article class="card">
+  <span class="who">The one Abbie would like</span><h3>B. Bubble buddy</h3>
+  <img src="img/moon-bubble.jpg" alt="Moon, Abbie's bubble: pink rim, a glass vial of rising bubbles, a heart on the top edge, a pink star sticker">
+  <p>A pink fishbowl. Her air is a glass vial of bubbles on the left: you can see it going down, and it fizzes full again when the base tops her up. A little heart on the top edge leans toward home. A pink star sticker is stuck on her helmet, because it's hers. The aim dot is a twinkling star. No numbers, no words.</p>
+  <div class="dc">Feel: "My bubble is full of air and I know the way home"
+Character knows: she can see the bubbles in her tank
+Mode: meta (the bubble), diegetic (the vial), one heart
+For: player (Abbie, 7)
+Adapts: fewer bubbles, breath fog, fizz on refill</div>
+  <p class="muted">Style reference only: Astroneer's oxygen you can see, Animal Crossing's stickers.</p>
+ </article>
+ <article class="card">
+  <span class="who">The third, for good measure</span><h3>C. The glove</h3>
+  <img src="img/moon-glove.jpg" alt="Moon, the glove: nothing on screen but a dot; the left wrist cuff shows six air lights and a home needle">
+  <p>Nothing on screen but a dot. Raise your left hand and the cuff shows six air lights and a needle that points home. The tool's own lamp shows its charge. The purest version of our rule "how would the character know?": she looks at her wrist.</p>
+  <div class="dc">Feel: "I'm really there"
+Character knows: she reads her own wrist
+Mode: diegetic (cuff and tool lamps)
+For: player
+Adapts: lights go amber, the cuff blinks, a chime</div>
+  <p class="muted">Style reference only: Dead Space's spine, Astroneer's backpack, Firewatch's hands.</p>
+ </article>
+</div>
+
+<h2>What each place makes you wear</h2>
+<p>Read from the place, so a new world picks a suit by name (<code>BIOMES</code> in <code>simulations/suit-hud.mjs</code>). Abbie is the player: the Moon Mission gives her a white suit with pink trim.</p>
+<div class="tw"><table>
+<thead><tr><th>Place</th><th>Suit (the glass)</th><th>In her hand</th><th>Air</th><th>Dialect</th></tr></thead>
+<tbody>
+<tr><td>Moon</td><td>Astronaut bubble</td><td>Regolith scoop</td><td>Yes</td><td>lights, radio, holograms</td></tr>
+<tr><td>Mars</td><td>Dust visor (amber brow, drifting dust)</td><td>Rock hammer</td><td>Yes</td><td>dust, amber lamps, radio</td></tr>
+<tr><td>Aurora starship</td><td>Headset (a mic boom, a blinking light)</td><td>Wrench</td><td>No</td><td>panels, chimes, the ship talking</td></tr>
+<tr><td>Ranch</td><td>Straw sun hat brim</td><td>Watering can</td><td>No</td><td>wood, bells, painted signs</td></tr>
+<tr><td>Halloween street</td><td>Knit hood</td><td>Flashlight</td><td>No</td><td>porch lights, candy, leaves</td></tr>
+<tr><td>Cemetery</td><td>Knit hood</td><td>Lantern</td><td>No</td><td>lanterns, bells, mist</td></tr>
+<tr><td>City</td><td>Brass goggles</td><td>Parcel scanner</td><td>No</td><td>neon, brass, parcel chimes</td></tr>
+</tbody></table></div>
+<figure><img src="img/places.jpg" alt="Nine first-person views: the three proposals on the Moon, then the Ranch hat with a watering can, Mars with a hammer, the starship with a wrench, Halloween with a flashlight and the City in brass goggles with a scanner"><figcaption>Top row: the three proposals on the Moon. Then Ranch (bubble, visor), Mars (visor), Starship (glove), Halloween (bubble), City (visor). On places with no air, the vial and the arc show the tool's charge.</figcaption></figure>
+
+<h2>How it keeps our rules</h2>
+<div class="cards">
+ <div class="card"><h3>Obviously first person</h3><p>The sandbox's buttons and panels step aside the moment you step down, the glass slides down over your eyes, a soft seal sound plays, and your hands rise into view. Zoom out or press Escape and it all comes back.</p></div>
+ <div class="card"><h3>Two layers that never mix</h3><p>The glass and the hands draw on their own canvases above the world. Characters, directors, the Oracle's shots and the voice controller's look never see them, and the suit never writes to the simulation.</p></div>
+ <div class="card"><h3>Never masks the world</h3><p>No haze, no fade, no dark edges. The bubble rim is clear glass with a light edge; breath fog only blooms at the bottom and fades. Measured cover on a 1280 by 800 screen: 2 to 3% for the Moon glass in all three proposals, 6% for the Ranch hat and Mars visor, 7% for the City goggles (the most), all under our 8% budget, with zero words.</p></div>
+ <div class="card"><h3>Kind, PG, nobody fails</h3><p>Air runs low as you walk, and before it ever runs out the base tops you up with a two-note chime and a fizz of bubbles. No red alarms, no buzzer.</p></div>
+</div>
+
+<h2>Next: the formal design and art direction pass</h2>
+<ol class="steps">
+ <li class="done">Brief and design card for each proposal (above).</li>
+ <li class="done">Three playable greyboxes, in the real sandbox and here.</li>
+ <li>Art direction board per proposal: Midjourney mood frames of the glass, the gloves and each tool, Abbie's pink-trim white suit as the anchor.</li>
+ <li>Evan picks a direction; Abbie plays all three and picks hers (the third can merge into either).</li>
+ <li>Art pass: modelled gloves and tools from recipes, glass shader with real refraction on the rim, sound twins for every signal.</li>
+ <li>Score with the HUD rubric and a phone playtest, then ship it as the default.</li>
+</ol>
+</main>
+
+<script type="importmap">{"imports":{"three":"/simulations/vendor/three.module.js"}}</script>
+<script type="module">
+import * as T from 'three';
+import {installSuitHud, BIOMES, VARIANTS} from '/simulations/suit-hud.mjs?v=1';
+
+const stage = document.getElementById('stage'), canvas = document.getElementById('world');
+const renderer = new T.WebGLRenderer({canvas, antialias: true});
+renderer.outputColorSpace = T.SRGBColorSpace;
+const camera = new T.PerspectiveCamera(70, 1, .05, 600);
+const PLACES = {moon: 'Moon', mars: 'Mars', starship: 'Starship', ranch: 'Ranch', suburban: 'Halloween', city: 'City'};
+const HUDS = {prime: "Evan's visor", bubble: "Abbie's bubble", glove: 'The glove'};
+const q = new URLSearchParams(location.search);
+let place = PLACES[q.get('place')] ? q.get('place') : 'moon', scene = null;
+
+// A small world per place, low poly, just enough to walk around in.
+function rng(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+function world(id) {
+ const s = new T.Scene(), r = rng(7), mat = (c, o = {}) => new T.MeshStandardMaterial({color: c, roughness: .9, flatShading: true, ...o});
+ const look = {
+  moon: {sky: '#02030a', ground: '#9a9ca6', sun: '#ffffff', amb: .25, hill: .9},
+  mars: {sky: '#d9a273', ground: '#b5603a', sun: '#ffe2c0', amb: .7, hill: 1.4},
+  starship: {sky: '#060a16', ground: '#3b4560', sun: '#bcd4ff', amb: .6, hill: 0},
+  ranch: {sky: '#9fd3f2', ground: '#7fae5a', sun: '#fff1d6', amb: .9, hill: .5},
+  suburban: {sky: '#1a1430', ground: '#3f4a2c', sun: '#ffb46b', amb: .35, hill: .2},
+  city: {sky: '#ffd9b0', ground: '#8f8c86', sun: '#fff0dc', amb: .8, hill: 0},
+ }[id];
+ s.background = new T.Color(look.sky);
+ s.add(new T.HemisphereLight(look.sky, '#222', look.amb + .3));
+ const sun = new T.DirectionalLight(look.sun, id === 'moon' ? 3 : 2); sun.position.set(-40, 60, 20); s.add(sun);
+ const g = new T.PlaneGeometry(400, 400, 80, 80); g.rotateX(-Math.PI / 2);
+ const pos = g.attributes.position;
+ for (let i = 0; i < pos.count; i++) { const x = pos.getX(i), z = pos.getZ(i); let y = Math.sin(x * .05) * Math.cos(z * .045) * 2 * look.hill + Math.sin(x * .13 + z * .07) * .6 * look.hill;
+  if (id === 'moon') for (const [cx, cz, cr] of [[30, -40, 14], [-50, -20, 10], [10, 60, 18]]) { const d = Math.hypot(x - cx, z - cz) / cr; if (d < 1.4) y += d < 1 ? -(1 - d * d) * 3 : (1.4 - d) * 2; }
+  if (Math.hypot(x, z) < 12) y *= Math.hypot(x, z) / 12; pos.setY(i, y); }
+ g.computeVertexNormals(); const ground = new T.Mesh(g, mat(look.ground)); s.add(ground);
+ const ray = new T.Raycaster(); s.userData.height = (x, z) => { ray.set(new T.Vector3(x, 50, z), new T.Vector3(0, -1, 0)); return ray.intersectObject(ground)[0]?.point.y ?? 0; };
+ const put = (m, x, z, y = 0) => { m.position.set(x, s.userData.height(x, z) + y, z); s.add(m); return m; };
+ if (id === 'moon' || id === 'mars') {
+  const stars = new T.BufferGeometry(), v = []; for (let i = 0; i < 900; i++) { const a = r() * Math.PI * 2, b = r() * .45 + .05; v.push(Math.cos(a) * 300 * Math.cos(b), 300 * Math.sin(b), Math.sin(a) * 300 * Math.cos(b)); }
+  stars.setAttribute('position', new T.Float32BufferAttribute(v, 3)); if (id === 'moon') s.add(new T.Points(stars, new T.PointsMaterial({color: '#fff', size: .9})));
+  if (id === 'moon') { const earth = new T.Mesh(new T.SphereGeometry(14, 24, 16), new T.MeshBasicMaterial({color: '#3f7fe0'})); earth.position.set(120, 90, -220); s.add(earth); }
+  for (let i = 0; i < 3; i++) { const dome = new T.Mesh(new T.SphereGeometry(4 + i, 12, 6, 0, Math.PI * 2, 0, Math.PI / 2), mat('#eef1f5')); put(dome, -14 + i * 11, -22 - i * 3, -.2);
+   const ring = new T.Mesh(new T.TorusGeometry(4 + i, .25, 4, 16), mat('#ff6fb5', {emissive: '#ff6fb5', emissiveIntensity: .4})); ring.rotation.x = Math.PI / 2; put(ring, -14 + i * 11, -22 - i * 3, .1); }
+  for (let i = 0; i < 60; i++) { const rock = new T.Mesh(new T.DodecahedronGeometry(.3 + r() * 1.4, 0), mat(id === 'moon' ? '#7c7e88' : '#8e4528')); put(rock, (r() - .5) * 160, (r() - .5) * 160, .2); rock.rotation.set(r() * 3, r() * 3, 0); }
+ }
+ if (id === 'ranch') {
+  const barn = new T.Group(); barn.add(new T.Mesh(new T.BoxGeometry(10, 6, 7), mat('#b0412f'))); const roof = new T.Mesh(new T.CylinderGeometry(5.6, 5.6, 7.2, 3), mat('#5b3a2a')); roof.rotation.set(Math.PI / 2, 0, Math.PI / 2); roof.position.y = 4.3; barn.add(roof); barn.children[0].position.y = 3; put(barn, 0, -22);
+  for (let i = 0; i < 40; i++) { const t = new T.Group(); t.add(new T.Mesh(new T.CylinderGeometry(.2, .3, 2, 5), mat('#6b4a2e'))); const top = new T.Mesh(new T.ConeGeometry(1.6 + r(), 4, 6), mat('#3f7d3a')); top.position.y = 3; t.add(top); t.children[0].position.y = 1; const a = r() * Math.PI * 2, d = 26 + r() * 70; put(t, Math.cos(a) * d, Math.sin(a) * d); }
+  for (let i = -6; i <= 6; i++) { const post = new T.Mesh(new T.BoxGeometry(.2, 1.2, .2), mat('#8a6a48')); put(post, i * 2.5, -9, .6); }
+ }
+ if (id === 'suburban' || id === 'city') {
+  for (let i = 0; i < 10; i++) { const h = id === 'city' ? 8 + r() * 14 : 4 + r() * 2, house = new T.Mesh(new T.BoxGeometry(8, h, 8), mat(id === 'city' ? ['#d9c7a8', '#9cc0c8', '#e3a07a'][i % 3] : ['#6d5a7a', '#4f6a5a', '#7a5a4a'][i % 3]));
+   const side = i % 2 ? 1 : -1; put(house, side * 14, -10 - Math.floor(i / 2) * 14, h / 2);
+   if (id === 'suburban') { const lamp = new T.PointLight('#ffb46b', 8, 14); put(lamp, side * 9, -10 - Math.floor(i / 2) * 14, 2.5); const pumpkin = new T.Mesh(new T.SphereGeometry(.45, 8, 6), mat('#ff8a1e', {emissive: '#ff6a00', emissiveIntensity: .6})); put(pumpkin, side * 9.5, -10 - Math.floor(i / 2) * 14, .4); } }
+ }
+ if (id === 'starship') {
+  for (let i = 0; i < 14; i++) { const arch = new T.Mesh(new T.TorusGeometry(5, .35, 4, 12, Math.PI), mat('#5d6c8f', {metalness: .4})); put(arch, 0, -i * 6, 0); const strip = new T.Mesh(new T.BoxGeometry(.15, .15, 4), new T.MeshBasicMaterial({color: '#8fd8ff'})); put(strip, -4.6, -i * 6 - 3, .1); const strip2 = strip.clone(); put(strip2, 4.6, -i * 6 - 3, .1); }
+ }
+ return s;
+}
+function go(id) { place = id; scene = world(id); camera.position.set(0, scene.userData.height(0, 6) + 1.6, 6); yaw = 0; pitch = -.03; for (const b of document.querySelectorAll('#places button')) b.setAttribute('aria-pressed', b.dataset.id === id); }
+
+const suit = installSuitHud({T, camera, host: stage, getBiome: () => place, variant: VARIANTS.includes(q.get('hud')) ? q.get('hud') : undefined});
+window.Suit = suit;
+for (const [id, name] of Object.entries(PLACES)) { const b = Object.assign(document.createElement('button'), {textContent: name}); b.dataset.id = id; b.onclick = () => go(id); document.getElementById('places').append(b); }
+for (const [id, name] of Object.entries(HUDS)) { const b = Object.assign(document.createElement('button'), {textContent: name}); b.dataset.id = id; b.onclick = () => { suit.setVariant(id); mark(); }; document.getElementById('huds').append(b); }
+const mark = () => { for (const b of document.querySelectorAll('#huds button')) b.setAttribute('aria-pressed', b.dataset.id === suit.variant); };
+document.getElementById('full').onclick = () => stage.requestFullscreen?.();
+
+// The walk: drag to look (mouse), drag up to walk and sideways to turn (touch), WASD or arrows.
+let yaw = 0, pitch = 0, drag = null; const keys = new Set();
+stage.addEventListener('pointerdown', e => { stage.setPointerCapture(e.pointerId); drag = {x: e.clientX, y: e.clientY, touch: e.pointerType === 'touch', walk: 0, turn: 0}; });
+stage.addEventListener('pointermove', e => { if (!drag) return; if (drag.touch) { drag.walk = Math.max(-1, Math.min(1, (drag.y - e.clientY) / 70)); drag.turn = Math.max(-2, Math.min(2, (e.clientX - drag.x) / 60)); } else { yaw -= (e.clientX - drag.x) * .004; pitch = Math.max(-1.1, Math.min(1.1, pitch - (e.clientY - drag.y) * .004)); drag.x = e.clientX; drag.y = e.clientY; } });
+const end = () => drag = null; stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
+addEventListener('keydown', e => { const k = e.key.toLowerCase(); if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(k)) { keys.add(k); if (k.startsWith('arrow')) e.preventDefault(); } if (k === 'v') setTimeout(mark); });
+addEventListener('keyup', e => keys.delete(e.key.toLowerCase())); addEventListener('blur', () => keys.clear());
+let last = performance.now();
+function frame() {
+ const now = performance.now(), dt = Math.min(.05, (now - last) / 1000); last = now;
+ let f = 0, s = 0; if (keys.has('w') || keys.has('arrowup')) f++; if (keys.has('s') || keys.has('arrowdown')) f--; if (keys.has('d')) s++; if (keys.has('a')) s--;
+ if (keys.has('arrowleft')) yaw += 1.8 * dt; if (keys.has('arrowright')) yaw -= 1.8 * dt;
+ if (drag?.touch) { f += drag.walk; yaw -= drag.turn * dt; }
+ const fx = -Math.sin(yaw), fz = -Math.cos(yaw), len = Math.max(1, Math.hypot(f, s)), sp = place === 'moon' ? 3.2 : 4;
+ camera.position.x += (fx * f - fz * s) / len * sp * dt; camera.position.z += (fz * f + fx * s) / len * sp * dt;
+ camera.position.y = scene.userData.height(camera.position.x, camera.position.z) + 1.6;
+ camera.rotation.set(pitch, yaw, 0, 'YXZ');
+ const w = stage.clientWidth, h = stage.clientHeight; if (canvas.width !== Math.round(w * Math.min(2, devicePixelRatio)) || canvas.height !== Math.round(h * Math.min(2, devicePixelRatio))) { renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+ renderer.render(scene, camera); requestAnimationFrame(frame);
+}
+go(place); suit.enter(); mark(); requestAnimationFrame(frame);
+</script>
+<script type="module" src="/look/context-card.mjs" data-context-study="suit-hud"></script>
+</body></html>
