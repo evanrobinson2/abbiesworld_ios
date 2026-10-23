@@ -138,5 +138,6 @@ document.getElementById('toggle').onclick = () => { showDone = !showDone; render
 fetch('feed.json', { cache: 'no-cache' }).then(r => r.json()).then(f => { items = f.items || []; render(); })
   .catch(() => { document.getElementById('list').innerHTML = '<p class="empty-all">Inbox did not load. Pull to refresh.</p>'; });
 </script>
+<script src="/version-chip.js?v=1" defer></script>
 </body>
 </html>
