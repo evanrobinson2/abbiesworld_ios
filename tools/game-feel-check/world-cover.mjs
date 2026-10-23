@@ -29,11 +29,16 @@ const server = http.createServer((req, res) => {
 const port = server.address().port;
 
 const browser = await chromium.launch({args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader']});
+// Measure steady play: one-off cards (the "new version ready" card) count as seen, and the world must finish loading.
+const seenIds = (() => { try { return JSON.parse(fs.readFileSync(path.join(root, 'whats-new.json'))).entries.map(e => e.id); } catch { return []; } })();
 const results = [];
 for (const [name, viewport] of [['phone', {width: 390, height: 844}], ['desktop', {width: 1440, height: 900}]]) {
   const tab = await browser.newPage({viewport, deviceScaleFactor: 1});
+  await tab.addInitScript(ids => { try { localStorage.setItem('afb-seen', JSON.stringify(ids)); } catch {} }, seenIds);
   await tab.goto(`http://127.0.0.1:${port}${page}`, {waitUntil: 'load', timeout: 60000}).catch(() => {});
   await tab.waitForTimeout(settle);
+  await tab.waitForFunction(() => !/Preparing|Loading/i.test(document.body.innerText || ''), null, {timeout: 60000}).catch(() => {});
+  await tab.waitForTimeout(1500);
   const r = await tab.evaluate(() => {
     const canvases = [...document.querySelectorAll('canvas')].filter(c => { const b = c.getBoundingClientRect(); return b.width * b.height > innerWidth * innerHeight * 0.5; });
     const world = canvases[0];
