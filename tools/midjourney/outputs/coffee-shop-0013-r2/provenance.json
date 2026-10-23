@@ -9,7 +9,8 @@
     "Draft Mode was off for the whole run; every job is a standard 4-image grid.",
     "All three backbar prompts were accepted as written, with the leading reference image URL and --sref; Midjourney showed no rejection, so each prompt field is exactly what was sent.",
     "No prompt was refused for moderation.",
-    "Another session was generating on the same Midjourney account during this run, so each job was matched by its prompt text rather than by being newest."
+    "Another session was generating on the same Midjourney account during this run, so each job was matched by its prompt text rather than by being newest (one early download picked up that session's job and was discarded before anything was committed).",
+    "created is the time the finished grid was seen in the web app, a few seconds after submission."
   ],
   "jobs": [
     {
@@ -471,6 +472,240 @@
           "source_url": "https://cdn.midjourney.com/54bf5afa-7f4c-468c-86ec-2c3d35ee68f7/0_3.png",
           "sha256": "53b35070fc32cc1a565cdb582ce35d32c678b8dca496294e2e9b65347273559c",
           "bytes": 857645
+        }
+      ]
+    },
+    {
+      "name": "asset-beanbag-vinyl",
+      "group": "assets",
+      "asset": "beanbag",
+      "style": "vinyl",
+      "prompt": "a slouchy orange beanbag chair, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "5f61fd52-2f43-4880-a864-5b285f5370a8",
+      "created": "2026-10-23T07:22:36Z",
+      "files": [
+        {
+          "file": "images/asset-beanbag-vinyl_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5f61fd52-2f43-4880-a864-5b285f5370a8/0_0.png",
+          "sha256": "85d4e05fa52aedea36963971afafab0c47af551eb3ea8632ba5c0940b6a5b2c8",
+          "bytes": 1019502
+        },
+        {
+          "file": "images/asset-beanbag-vinyl_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5f61fd52-2f43-4880-a864-5b285f5370a8/0_1.png",
+          "sha256": "d6e9bdb9946962795c088a8ac3157b4419a9d61f4c9ddb689e0bc685bd7dfdfc",
+          "bytes": 1171326
+        },
+        {
+          "file": "images/asset-beanbag-vinyl_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5f61fd52-2f43-4880-a864-5b285f5370a8/0_2.png",
+          "sha256": "95592a4b30ea5de6a2ffbf13462aa4793951b3b0b1fe6123b6abaa45a5c6af6d",
+          "bytes": 1043499
+        },
+        {
+          "file": "images/asset-beanbag-vinyl_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5f61fd52-2f43-4880-a864-5b285f5370a8/0_3.png",
+          "sha256": "dd1440447f4f21cc54b6eb112df48e5f15548f7f85d6fb1b474778fe74e7a0d4",
+          "bytes": 981895
+        }
+      ]
+    },
+    {
+      "name": "asset-cup-booth-lowpoly",
+      "group": "assets",
+      "asset": "cup-booth",
+      "style": "lowpoly",
+      "prompt": "a DJ booth built inside a giant pink coffee cup with a handle, a glowing window and turntables, on a round stage, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "61b27992-da88-4126-ad61-a6c787de954d",
+      "created": "2026-10-23T07:22:55Z",
+      "files": [
+        {
+          "file": "images/asset-cup-booth-lowpoly_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/61b27992-da88-4126-ad61-a6c787de954d/0_0.png",
+          "sha256": "4dcea49c91f588094fbe92458819ed71e5a5e982bcc1e125903158bb2fae8e91",
+          "bytes": 765930
+        },
+        {
+          "file": "images/asset-cup-booth-lowpoly_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/61b27992-da88-4126-ad61-a6c787de954d/0_1.png",
+          "sha256": "705ca7104f6ac8522acc8e906b16efeb491e4301cdb298f6cdd697ce059d937b",
+          "bytes": 915127
+        },
+        {
+          "file": "images/asset-cup-booth-lowpoly_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/61b27992-da88-4126-ad61-a6c787de954d/0_2.png",
+          "sha256": "3bfee63a1d72724e093e9b2c71ccbcb454e9aa8901c5fceb59c8d01b2a667c5c",
+          "bytes": 766684
+        },
+        {
+          "file": "images/asset-cup-booth-lowpoly_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/61b27992-da88-4126-ad61-a6c787de954d/0_3.png",
+          "sha256": "5acbfe24ca8055f6001280bde3aeccd765a379de29c2b1de595482e5270636c5",
+          "bytes": 906260
+        }
+      ]
+    },
+    {
+      "name": "asset-espresso-lowpoly",
+      "group": "assets",
+      "asset": "espresso",
+      "style": "lowpoly",
+      "prompt": "a chunky retro espresso machine with pink panels, chrome, two portafilters and two small cups, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "dae72a75-28d8-4498-9b21-74efe77dfec2",
+      "created": "2026-10-23T07:23:14Z",
+      "files": [
+        {
+          "file": "images/asset-espresso-lowpoly_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/dae72a75-28d8-4498-9b21-74efe77dfec2/0_0.png",
+          "sha256": "414d4498d6118785b700f7c9ee25b7a1ef222f77eea696aadb3af0ac0d2f196e",
+          "bytes": 854070
+        },
+        {
+          "file": "images/asset-espresso-lowpoly_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/dae72a75-28d8-4498-9b21-74efe77dfec2/0_1.png",
+          "sha256": "20a3d5774ef9b256d311d4b1593f7d182a13c32efcc0dd4e6b625a74ed478c67",
+          "bytes": 1105514
+        },
+        {
+          "file": "images/asset-espresso-lowpoly_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/dae72a75-28d8-4498-9b21-74efe77dfec2/0_2.png",
+          "sha256": "8c1732831ae3253bb3072c4fbd37d92f471573de904ee008ee8d6edabb5a4614",
+          "bytes": 914254
+        },
+        {
+          "file": "images/asset-espresso-lowpoly_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/dae72a75-28d8-4498-9b21-74efe77dfec2/0_3.png",
+          "sha256": "9c08ac26e5f71ce49b8f8ec21698ecae57b495acf9289ac50e9052e1a524b678",
+          "bytes": 1086390
+        }
+      ]
+    },
+    {
+      "name": "asset-smoothie-lowpoly",
+      "group": "assets",
+      "asset": "smoothie",
+      "style": "lowpoly",
+      "prompt": "a giant bubbly smoothie blender machine with a swirling pink fruit jar and big buttons, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "1f1e8e70-9125-40f1-ab6e-f974b36c528b",
+      "created": "2026-10-23T07:23:52Z",
+      "files": [
+        {
+          "file": "images/asset-smoothie-lowpoly_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/1f1e8e70-9125-40f1-ab6e-f974b36c528b/0_0.png",
+          "sha256": "23b2e21e7645181a59d25e67c2821cbd8a31c1a7547a017ea999770c0ef34da0",
+          "bytes": 1018761
+        },
+        {
+          "file": "images/asset-smoothie-lowpoly_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/1f1e8e70-9125-40f1-ab6e-f974b36c528b/0_1.png",
+          "sha256": "42d280a4c678dc64e81c48ed674d7aa62a7f3e79907cfb47ea0522b579c7ad84",
+          "bytes": 979103
+        },
+        {
+          "file": "images/asset-smoothie-lowpoly_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/1f1e8e70-9125-40f1-ab6e-f974b36c528b/0_2.png",
+          "sha256": "f7690eae0188ebff49caa00bfab8fabc7538718975680955613edfc9f5f1728a",
+          "bytes": 1296900
+        },
+        {
+          "file": "images/asset-smoothie-lowpoly_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/1f1e8e70-9125-40f1-ab6e-f974b36c528b/0_3.png",
+          "sha256": "25acf9bf2b9c1219e00b092c3a19837ad3b1fd8e30fbe2992d56e01556e30d11",
+          "bytes": 870173
+        }
+      ]
+    },
+    {
+      "name": "asset-stool-lowpoly",
+      "group": "assets",
+      "asset": "stool",
+      "style": "lowpoly",
+      "prompt": "a round teal bar stool with a magenta post and foot ring, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "3d168115-2a39-4d06-9041-e893f3990c44",
+      "created": "2026-10-23T07:24:09Z",
+      "files": [
+        {
+          "file": "images/asset-stool-lowpoly_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/3d168115-2a39-4d06-9041-e893f3990c44/0_0.png",
+          "sha256": "d10f52a42b5d0f4ac62d75454d9471dbdd50ceae81edb9ad40444bc3d3430fb7",
+          "bytes": 748920
+        },
+        {
+          "file": "images/asset-stool-lowpoly_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/3d168115-2a39-4d06-9041-e893f3990c44/0_1.png",
+          "sha256": "7e025e83ca18a90df70a83c77d975cfe70dca544c296a0854e25f0a2cc5c2048",
+          "bytes": 791671
+        },
+        {
+          "file": "images/asset-stool-lowpoly_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/3d168115-2a39-4d06-9041-e893f3990c44/0_2.png",
+          "sha256": "6219c00a0cfd95e917978a791c0c8b58d2cda9d81f0a6c77391c672b560ae0d9",
+          "bytes": 482895
+        },
+        {
+          "file": "images/asset-stool-lowpoly_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/3d168115-2a39-4d06-9041-e893f3990c44/0_3.png",
+          "sha256": "c757d94c165fc1524a983ec3eb408d5fd294b59e2c54309b8c06cfd8d7100fcd",
+          "bytes": 688953
+        }
+      ]
+    },
+    {
+      "name": "asset-beanbag-lowpoly",
+      "group": "assets",
+      "asset": "beanbag",
+      "style": "lowpoly",
+      "prompt": "a slouchy orange beanbag chair, as a charming stylised low poly game asset, flat-shaded facets, clean simple shapes, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "5241b3e9-8ec9-43be-b2a5-fc1a2bf5fc97",
+      "created": "2026-10-23T07:24:27Z",
+      "files": [
+        {
+          "file": "images/asset-beanbag-lowpoly_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5241b3e9-8ec9-43be-b2a5-fc1a2bf5fc97/0_0.png",
+          "sha256": "4b63ad2d8331cdc8cb971af12efc9b4c6c413d88ce8cc09f47048bab72bbc1a3",
+          "bytes": 527287
+        },
+        {
+          "file": "images/asset-beanbag-lowpoly_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5241b3e9-8ec9-43be-b2a5-fc1a2bf5fc97/0_1.png",
+          "sha256": "10962f535a154d0bc64bcdd225b724c6f489317544b65c34aa04bc0b4f77809e",
+          "bytes": 934420
+        },
+        {
+          "file": "images/asset-beanbag-lowpoly_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5241b3e9-8ec9-43be-b2a5-fc1a2bf5fc97/0_2.png",
+          "sha256": "4aed973bb22e89b04865f3423ca7a46c82146076b3ffd70bbf4587b0f963e6e5",
+          "bytes": 1027838
+        },
+        {
+          "file": "images/asset-beanbag-lowpoly_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5241b3e9-8ec9-43be-b2a5-fc1a2bf5fc97/0_3.png",
+          "sha256": "0031762d9b2630124b094584186157732c16a655bc854a4b6af810a339c199cf",
+          "bytes": 983565
         }
       ]
     }
