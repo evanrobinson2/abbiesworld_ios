@@ -4,26 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Back bar and styles</title>
-<link rel="stylesheet" href="/app-style.css?v=1">
+<link rel="stylesheet" href="cafe.css?v=2">
 <style>
 /* AW-STUDY-0013 round 2: back bar designs locked to Evan's pick, and five assets in three styles. Reads r2.json. */
-body{margin:0;background:var(--app-canvas,#f4edcf);color:var(--app-ink);font:15px/1.45 system-ui,-apple-system,sans-serif;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px}
+
 .wrap{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
-.id{font-size:12px;letter-spacing:.1em;color:var(--app-muted)}h1{margin:2px 0 0;font-size:26px}h2{margin:0 0 10px;font-size:19px}
+.id{font-size:12px;letter-spacing:.1em;color:var(--muted)}h1{margin:2px 0 0;font-size:26px}h2{margin:0 0 10px;font-size:19px}
 .bb{display:grid;grid-template-columns:1fr 3fr;gap:10px;align-items:start}
-.ref{margin:0;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:14px;overflow:hidden}
-.ref img{display:block;width:100%}.ref figcaption{padding:6px 10px;font-size:13px;color:var(--app-muted)}
+.ref{margin:0;background:#2a0c20cc;border:1px solid #ffffff26;border-radius:14px;overflow:hidden}
+.ref img{display:block;width:100%}.ref figcaption{padding:6px 10px;font-size:13px;color:var(--muted)}
 .cells{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .grid{display:grid;grid-template-columns:96px repeat(3,minmax(0,1fr));gap:10px}
 .lab{font-weight:700;font-size:14px;align-self:center}
-.cell{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:14px;padding:4px;min-height:80px}
+.cell{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#2a0c20cc;border:1px solid #ffffff26;border-radius:14px;padding:4px;min-height:80px}
 .cell img{width:100%;height:auto;border-radius:10px;display:block;cursor:zoom-in}
-.wait{grid-column:1/-1;display:grid;place-items:center;color:var(--app-muted);font-size:13px}
+.wait{grid-column:1/-1;display:grid;place-items:center;color:var(--muted);font-size:13px}
 dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}dialog::backdrop{background:#000c}
 dialog img{max-width:96vw;max-height:94vh;display:block;border-radius:12px}
 @media (max-width:760px){.bb{grid-template-columns:1fr}.cells{grid-template-columns:1fr}.grid{grid-template-columns:minmax(0,1fr)}.colhead,.corner{display:none}
- .lab{margin-top:10px;font-size:16px}.cell::before{content:attr(data-style);grid-column:1/-1;font-size:12px;font-weight:700;color:var(--app-muted);padding:2px 4px}}
+ .lab{margin-top:10px;font-size:16px}.cell::before{content:attr(data-style);grid-column:1/-1;font-size:12px;font-weight:700;color:var(--muted);padding:2px 4px}}
 </style>
 </head>
 <body>

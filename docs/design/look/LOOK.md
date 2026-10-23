@@ -100,3 +100,8 @@ bottom); less padding everywhere.
   hide (`[` and `]`) and drag wider, and remember.
 - Models: one screen. A hero bar with the name, the picture and the model side by side sized to the window, the strip
   under them, and "Your feedback" in a right-side panel that hides. The review inbox page was retired (05:38Z).
+
+## Studies own their look (Evan, 2026-10-23)
+"Allow studies to overrule the app styling. This one is obvious." A study page may skip `/app-style.css` and dress
+itself in the look of the thing it studies (the café study uses `studies/cafe/cafe.css`: plum, neon pink and teal
+glass). The Studies shell around it stays the app's.
