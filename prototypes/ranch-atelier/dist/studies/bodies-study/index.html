@@ -23,7 +23,8 @@ header{display:grid;gap:6px}
 .bar button[aria-pressed=true]{background:var(--app-accent);border-color:var(--app-accent);color:var(--app-paper)}
 .bar .sep{width:1px;height:26px;background:var(--app-border);margin:0 4px}
 .svgbox{overflow-x:auto}.svgbox svg{display:block;width:100%;height:auto;min-width:640px}
-.lineup svg{min-width:860px}#toy svg,#hand svg{min-width:0}
+.lineup svg{min-width:860px}#toy svg,#hand svg,#gesture svg,#sections svg,#foreshorten svg{min-width:0}
+#build svg{min-width:820px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .rule{padding:14px 16px;display:grid;gap:4px}.rule b{font-size:15px}
 .rule .n{font-family:var(--app-heading);font-size:26px;color:var(--app-accent);line-height:1}
@@ -44,7 +45,7 @@ ol.check{margin:0;padding:14px 18px 14px 40px;display:grid;gap:8px}ol.check li b
 <body>
 <div class="wrap">
  <header>
-  <span class="eyebrow">AW-STUDY-0016 · Installment 1 of 5 · 2026-10-23</span>
+  <span class="eyebrow">AW-STUDY-0016 · Installment 1 of 5, with drawing techniques · 2026-10-23</span>
   <h1>Bodies and Creatures: the normal human</h1>
   <p class="muted">Real adult proportions, head to toe, front, side and back. Every drawing is generated from one set of numbers (the canon), so the pictures, the checklist and the scorer always agree.</p>
  </header>
@@ -126,6 +127,27 @@ ol.check{margin:0;padding:14px 18px 14px 40px;display:grid;gap:8px}ol.check li b
   </div>
  </section>
 
+ <section id="drawing">
+  <h2>Drawing the figure</h2>
+  <p class="muted">How the books build a body: gesture first, then simple forms on the canon's landmarks, then the contour, then detail. Modelers build the same way: primitives first, then the surface over them.</p>
+  <div class="card svgbox" id="build" style="margin-top:12px"></div>
+  <div class="two" style="margin-top:12px">
+   <div class="card svgbox" id="gesture"></div>
+   <div>
+    <h3>Gesture first</h3><ul class="tight"><li>One line of action runs from the head to the weight-bearing foot: a C or an S (Loomis).</li><li>Shoulders and hips tilt opposite ways; the standing ankle sits under the pit of the neck.</li><li>Ribcage and pelvis are rigid boxes; the waist between them bends and twists (Bridgman).</li><li>Exaggerate the gesture, never the joints (Marvel Way).</li></ul>
+    <h3 style="margin-top:14px">Proportion systems</h3><ul class="tight" id="systems"></ul>
+   </div>
+  </div>
+  <h3 style="margin-top:22px">Clean arms and legs</h3>
+  <div class="card svgbox" id="limbs" style="margin-top:8px"></div>
+  <div class="grid" style="margin-top:12px" id="limbrules"></div>
+  <div class="card svgbox" id="sections" style="margin-top:12px"></div>
+  <div class="card svgbox" id="foreshorten" style="margin-top:12px;max-width:640px"></div>
+  <details class="card" style="margin-top:12px;padding:12px 16px"><summary><b>The 17 construction steps</b> <span class="muted">which form goes between which landmarks, and how many planes</span></summary><ol class="tight" id="steps" style="padding-left:22px"></ol></details>
+  <div class="card rule" style="margin-top:12px"><b>Midjourney, for arms and legs</b><span class="muted">Add: <span id="mj-add"></span></span><span class="muted"><code>--no</code> <span id="mj-no"></span></span></div>
+  <p class="muted" style="margin-top:10px">Evan's easy-drawing superhero guides go contour first (head, neck, shoulders, arms in overlapping curves, torso, legs, then the costume). We keep their order of parts and their overlaps, but block the forms first, so the same drawing works as a 3D model. Data: <code>docs/oracle/bodies/construction.json</code>, write-up <code>DRAWING.md</code>.</p>
+ </section>
+
  <section>
   <h2>Our paper bodies, scored</h2>
   <p class="muted">The scorer measured the ten paper bodies the Roman kit dresses. They all come out at 8 heads, so heads look too small for the toy rule. Two misses repeat on every body: the knees sit about a quarter of a head too low (the shins are short), and the fingertips stop about a third of a head too high (the arms are short).</p>
@@ -135,6 +157,7 @@ ol.check{margin:0;padding:14px 18px 14px 40px;display:grid;gap:8px}ol.check li b
   </div>
   <div class="card tablebox" style="margin-top:12px"><table id="scores"><thead><tr><th>Body</th><th>Heads</th><th>Score</th><th>Knee</th><th>Fingertips</th><th>Shoulder : hip</th><th>Other misses</th></tr></thead><tbody></tbody></table></div>
   <p class="muted" style="margin-top:8px">Heroic bodies score low on purpose: they are bulked-up average bodies, not heroic proportions (no longer legs, no smaller head).</p>
+  <p class="muted" style="margin-top:4px">Rebuilt figures join the table as they land. Heroic woman 2 (rebuilt part by part): every height landmark within tolerance, knees and arms fixed; the misses are the pick's own styling (7.3 heads, a narrower frame).</p>
  </section>
 
  <section>
@@ -178,6 +201,12 @@ document.getElementById('bar').addEventListener('click',e=>{const b=e.target.clo
  if(b.dataset.sex){state.sex=b.dataset.sex;for(const x of document.querySelectorAll('[data-sex]'))x.setAttribute('aria-pressed',x===b);draw();}
  else{const k=b.dataset.lay;state.lays.has(k)?state.lays.delete(k):state.lays.add(k);b.setAttribute('aria-pressed',state.lays.has(k));applyLays(box.querySelector('svg'));}});
 draw();
+(async()=>{const c=await (await fetch('construction.json')).json();
+ document.getElementById('steps').innerHTML=c.steps.map(s=>`<li><b>${s.name}</b>: ${s.form}${s.from?` (${s.from} to ${s.to})`:s.at?` (at the ${s.at})`:''}${s.section?.planes?`, ${s.section.planes} planes`:''}. <span class="muted">${s.rule}</span></li>`).join('');
+ document.getElementById('limbrules').innerHTML=c.limb_rules.map(r=>`<div class="card rule"><span class="muted">${r}</span></div>`).join('');
+ document.getElementById('systems').innerHTML=c.proportion_systems.map(p=>`<li><b>${p.heads} heads</b>, ${p.name}: ${p.use}</li>`).join('');
+ document.getElementById('mj-add').textContent=c.midjourney.add;document.getElementById('mj-no').textContent=c.midjourney.no;})();
+(async()=>{for(const id of['build','gesture','limbs','sections','foreshorten']){const el=document.getElementById(id);el.innerHTML=await svgText(id)}})();
 (async()=>{for(const id of['lineup','toy','head','hand']){const el=document.getElementById(id);el.innerHTML=await svgText(id);el.querySelector('svg')?.classList.remove('show-landmarks')}
  const d=await (await fetch('scores.json')).json();const tb=document.querySelector('#scores tbody');
  const get=(b,k)=>b.checks.find(c=>c.check===k);const cell=c=>c?`<td class="${c.ok?'ok':'bad'}">${c.off_heads!=null?(c.off_heads>0?'+':'')+c.off_heads+' head':c.got}</td>`:'<td></td>';
