@@ -57,16 +57,16 @@ def setup(res=512, samples=16):
     cam.location = (0, -DIST, CAM_Z); cam.rotation_euler = (math.radians(90), 0, 0)
     sc.camera = cam
 
-    # Key from the front right and above (the floor shadow falls to the left), soft fill, grey studio world.
-    key = bpy.data.lights.new('Key', 'SUN'); key.energy = 1.5; key.angle = math.radians(25)
+    # Lights fitted to the reference with tune_light.py (lowest ssim + edge + tone on an assembled arm).
+    key = bpy.data.lights.new('Key', 'SUN'); key.energy = 2.5; key.angle = math.radians(25)
     ko = bpy.data.objects.new('Key', key); sc.collection.objects.link(ko)
-    ko.rotation_euler = (math.radians(28), 0, math.radians(40))
-    fill = bpy.data.lights.new('Fill', 'SUN'); fill.energy = 0.5; fill.angle = math.radians(40)
+    ko.rotation_euler = (math.radians(30), 0, math.radians(25))
+    fill = bpy.data.lights.new('Fill', 'SUN'); fill.energy = 0.3; fill.angle = math.radians(40)
     fo = bpy.data.objects.new('Fill', fill); sc.collection.objects.link(fo)
-    fo.rotation_euler = (math.radians(70), 0, math.radians(-40))
+    fo.rotation_euler = (math.radians(70), 0, math.radians(-30))
     world = bpy.data.worlds.new('Studio'); sc.world = world; world.use_nodes = True
     bg = world.node_tree.nodes['Background']
-    bg.inputs['Color'].default_value = (*[srgb_to_lin(c) for c in (134, 136, 128)], 1); bg.inputs['Strength'].default_value = 0.55
+    bg.inputs['Color'].default_value = (*[srgb_to_lin(c) for c in (134, 136, 128)], 1); bg.inputs['Strength'].default_value = 0.3
 
     me = bpy.data.meshes.new('Floor'); s = 8
     me.from_pydata([(-s, -s, 0), (s, -s, 0), (s, s, 0), (-s, s, 0)], [], [(0, 1, 2, 3)])

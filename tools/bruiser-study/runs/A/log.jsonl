@@ -1,0 +1,33 @@
+{"t": 1792737786.7, "who": "A:armL", "chunks": ["armL"], "focus": "armL", "iou": 0.5510359136202916, "loss": 0.6035136888601984}
+{"t": 1792737831.0, "who": "A:armR", "chunks": ["armR"], "focus": "armR", "iou": 0.5419562780269058, "loss": 0.5593999544928582}
+{"t": 1792737838.1, "who": "A:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.5770174172936205, "loss": 0.6164587822231075}
+{"t": 1792737840.1, "who": "A:armL", "chunks": ["armL"], "focus": "armL", "iou": 0.5556642941874259, "loss": 0.5800170705713983}
+{"t": 1792737840.3, "who": "A:hips", "chunks": ["hips"], "focus": "hips", "iou": 0.8031763590391909, "loss": 0.4176661444679225}
+{"t": 1792737857.1, "who": "A:legs", "chunks": ["legs"], "focus": "legs", "iou": 0.7532569046378322, "loss": 0.41872144008884155}
+{"t": 1792737858.3, "who": "A:head", "chunks": ["head"], "focus": "head", "iou": 0.979081929110982, "loss": 0.23682526254731132}
+{"t": 1792737866.9, "who": "A:armL", "chunks": ["armL"], "focus": "armL", "iou": 0.5605837264150944, "loss": 0.5759098597644742}
+{"t": 1792737891.2, "who": "A:legs", "chunks": ["legs"], "focus": "legs", "iou": 0.7808437856328392, "loss": 0.3955921086684731}
+{"t": 1792737894.9, "who": "A:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.5847328562785555, "loss": 0.6008097178552898}
+{"t": 1792737904.7, "who": "A:armR", "chunks": ["armR"], "focus": "armR", "iou": 0.5641982182628063, "loss": 0.5519841379324711}
+{"t": 1792737907.6, "who": "A:armL", "chunks": ["armL"], "focus": "armL", "iou": 0.5636874815034034, "loss": 0.5715860780970498}
+{"t": 1792737908.2, "who": "A:hips", "chunks": ["hips"], "focus": "hips", "iou": 0.837642375753754, "loss": 0.37597185459641524}
+{"t": 1792737947.8, "who": "A:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.5881900565347522, "loss": 0.6024538548165903}
+{"t": 1792737948.9, "who": "A:armR", "chunks": ["armR"], "focus": "armR", "iou": 0.5768799731032164, "loss": 0.5348253213376246}
+{"t": 1792737958.3, "who": "A:hips", "chunks": ["hips"], "focus": "hips", "iou": 0.8406545741324921, "loss": 0.37381514472901023}
+{"t": 1792737959.0, "who": "A:legs", "chunks": ["legs"], "focus": "legs", "iou": 0.7771402164285439, "loss": 0.3846059727382109}
+{"t": 1792737960.4, "who": "A:head", "chunks": ["head"], "focus": "head", "iou": 0.9798089509009386, "loss": 0.23417998703266657}
+{"t": 1792737973.7, "who": "A:armR", "chunks": ["armR"], "focus": "armR", "iou": 0.5722606479796142, "loss": 0.5352556173320123}
+{"t": 1792737987.4, "who": "A:legs", "chunks": ["legs"], "focus": "legs", "iou": 0.7728913558203625, "loss": 0.3769229534348578}
+{"t": 1792737988.1, "who": "A:hips", "chunks": ["hips"], "focus": "hips", "iou": 0.8402079108503475, "loss": 0.3770375228642637}
+{"t": 1792737995.4, "who": "A:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.5861073016664589, "loss": 0.6068541498999575}
+{"t": 1792737997.2, "who": "A:armR", "chunks": ["armR"], "focus": "armR", "iou": 0.5754318188180622, "loss": 0.5199812450993965}
+{"t": 1792738009.1, "who": "A:legs", "chunks": ["legs"], "focus": "legs", "iou": 0.8056576757865408, "loss": 0.3508046652398892}
+{"t": 1792738013.0, "who": "A:hips", "chunks": ["hips"], "focus": "hips", "iou": 0.8402337754339013, "loss": 0.3760509231484235}
+{"t": 1792738022.4, "who": "A:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.5936254980079682, "loss": 0.592642183736506}
+{"t": 1792738029.6, "who": "A:head", "chunks": ["head"], "focus": "head", "iou": 0.9794612044973839, "loss": 0.2347407852337567}
+{"t": 1792738030.5, "who": "A:legs", "chunks": ["legs"], "focus": "legs", "iou": 0.8067696099195194, "loss": 0.35126468111577314}
+{"t": 1792738045.2, "who": "A:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.6065310045127862, "loss": 0.5805018137974889}
+{"t": 1792738068.2, "who": "A:head", "chunks": ["head"], "focus": "head", "iou": 0.9794612044973839, "loss": 0.23586400235913563}
+{"t": 1792738145.0, "who": "assemble", "chunks": ["head", "chest", "armR", "armL", "hips", "legs"], "focus": "", "iou": 0.9474296047532937, "loss": 0.17504872945016126}
+{"t": 1792738493.7, "who": "assemble", "chunks": ["head", "chest", "armR", "armL", "hips", "legs"], "focus": "", "iou": 0.9474296047532937, "loss": 0.20631005765843488}
+{"t": 1792738869.9, "who": "assemble", "chunks": ["head", "chest", "armR", "armL", "hips", "legs"], "focus": "", "iou": 0.9474296047532937, "loss": 0.20613910692694054}

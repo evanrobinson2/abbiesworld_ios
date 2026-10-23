@@ -8,6 +8,10 @@ thin straps, a scoop neckline and a hem band; shorts with leg openings; hands wi
 fingers slightly curled; bare feet with toes. Faceted planes like the reference (flat shading, not smooth, not
 blobby, not "rubber hose"). Clay grey everywhere, as in the picture.
 
+He is a HUMAN man with normal human anatomy, just heavily muscled: think of the body under the clothes first (skull,
+ribcage, pelvis, limbs with real joints), then the clothes over it. Plain shorts have a smooth, flat front: never add
+any crotch bulge, wedge or knob, and nothing between the legs but the shorts' plain inner seam. This is a kids' game.
+
 All paths below are relative to `tools/bruiser-study/` in the repo (cd there first).
 
 ## Your assignment

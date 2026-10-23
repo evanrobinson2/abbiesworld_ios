@@ -1,2 +1,5 @@
 .tmp/
 runs/*/out/*+*/
+*.blend1
+runs/*/out/
+__pycache__/

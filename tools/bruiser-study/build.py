@@ -64,7 +64,7 @@ def render(res, samples):
     a_fig = np.asarray(Image.open(maskp).convert('RGBA'))[..., 3] > 127
     os.remove(shaded); os.remove(maskp)
     bg = stage.backdrop(res)
-    out = rgba[..., :3] + bg * (1 - rgba[..., 3:4])          # premultiplied figure and floor shadow over the backdrop
+    out = rgba[..., :3] * rgba[..., 3:4] + bg * (1 - rgba[..., 3:4])   # PNG alpha is straight: figure and floor shadow over the backdrop
     return np.clip(out, 0, 1), a_fig
 
 
@@ -91,6 +91,7 @@ def main():
     ap.add_argument('--glb', action='store_true')
     ap.add_argument('--tag', default='')
     ap.add_argument('--who', default='')
+    ap.add_argument('--views', action='store_true', help='also score side and back against the turnaround (views.png)')
     a = ap.parse_args()
     arm_dir = os.path.join(HERE, 'runs', a.arm)
     chunk_ids = [c for c in (a.chunks.split(',') if a.chunks else ORDER) if c and os.path.exists(os.path.join(arm_dir, c + '.py'))]
@@ -139,7 +140,13 @@ def main():
     json.dump(score, open(os.path.join(out_dir, 'score.json'), 'w'), indent=1)
     with open(os.path.join(arm_dir, 'log.jsonl'), 'a') as f:
         f.write(json.dumps(dict(t=round(time.time(), 1), who=a.who, chunks=chunk_ids, focus=a.focus, iou=score['iou'], loss=score['loss'])) + '\n')
+    if a.views:
+        import views_score
+        score['views'] = views_score.score_arm(a.arm, chunk_ids, out_dir)
+        json.dump(score, open(os.path.join(out_dir, 'score.json'), 'w'), indent=1)
     print(json.dumps({k: v for k, v in score.items() if k != 'terms'}, indent=1))
+    if a.views:
+        print('side/back sheet (turnaround | overlay: red = turnaround only, cyan = yours only):', os.path.join(out_dir, 'views.png'))
     print('compare sheet:', os.path.join(out_dir, 'compare.png'))
 
 
