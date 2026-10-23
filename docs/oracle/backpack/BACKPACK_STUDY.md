@@ -100,4 +100,6 @@ Next: bake contact shading into the vertex colours, a leather label on the pocke
     and a charm tinks (three inharmonic partials, WebAudio, diegetic) when its swing turns round hard. It rebuilds on
     `aw-backpack-change`, so a newly earned or boxed charm shows without the game doing anything.
   - The study page has a "Worn" stage: a smooth stand-in mannequin running a loop.
+- No charm unlocks from coins any more. The Star is "Climb onto the school roof" (the school game calls
+  `earnCharm('school-roof')`), and the Heart crowns the set: it comes when every other one-off charm is earned.
 - Tour: no (it is the same backpack, now worn; the tour stop stays the first pickup).

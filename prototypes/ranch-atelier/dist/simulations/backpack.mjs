@@ -65,10 +65,12 @@ export const CHARMS = [
  // Every reward is a backpack charm (Evan, 20:51Z): no gold coin charm. The floppy disk is won by beating the word game
  // in Grace's basement, two minutes of play in all; the basement game calls earnCharm('basement').
  {id: 'basement', name: 'Floppy disk', icon: '💾', quest: "Beat the word game in Grace's basement (two minutes of play)"},
- {id: 'school-roof', name: 'Star', icon: '⭐', quest: 'Find the memory on the school roof', when: s => Object.keys(s.places).some(p => /school/i.test(p) && s.places[p] > 0)},
+ // Coins are scrapped (Evan, 20:51Z), so no charm unlocks from them any more: the school game calls earnCharm('school-roof')
+ // when she climbs onto the roof, and the heart crowns the set.
+ {id: 'school-roof', name: 'Star', icon: '⭐', quest: 'Climb onto the school roof'},
  {id: 'brass-key', name: 'Brass key', icon: '🗝️', quest: "Find the café's secret key", when: s => s.items.includes('cafe-basement-key')},
  {id: 'moon-key', name: 'Moon', icon: '🌙', quest: 'Earn the key to the Moon base', when: s => s.items.some(i => /moon/i.test(i))},
- {id: 'all-memories', name: 'Heart', icon: '💛', quest: "Find every one of Daddy's core memories", when: s => s.coins >= CORE_MEMORIES},
+ {id: 'all-memories', name: 'Heart', icon: '💛', quest: 'Earn every other charm', crown: true},
  {id: 'bub', name: 'Bub', icon: '🐕', quest: 'Play fetch with bub'},
  {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café'},
  {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'},
@@ -106,7 +108,10 @@ function progress() {
 }
 export function earnedCharms() {
  const s = progress(), given = saved().charms || {};
- return CHARMS.filter(c => given[c.id] || (c.when && c.when(s))).map(c => c.id);
+ const has = new Set(CHARMS.filter(c => !c.crown && (given[c.id] || (c.when && c.when(s)))).map(c => c.id));
+ // The heart comes with every other one-off charm (moon cheese, which she can win again and again, doesn't count).
+ const all = CHARMS.every(c => c.crown || c.repeat || has.has(c.id));
+ return CHARMS.filter(c => has.has(c.id) || (c.crown && (given[c.id] || all))).map(c => c.id);
 }
 export const coinCount = () => progress().coins;
 // How many of a charm she owns (0 or 1, or the count for a repeatable one).
