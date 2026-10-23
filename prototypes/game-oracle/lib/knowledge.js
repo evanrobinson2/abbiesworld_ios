@@ -36,7 +36,7 @@ export function profileCard(p){
 function anatomyCard(g){return {id:g.id,kind:g.kind==='design-lesson'?'lesson':'anatomy',title:g.title,genre:g.genre,lesson:g.lesson||null,findings:(g.claims||[]).slice(0,6).map(c=>({domain:c.domain,title:c.title,finding:c.finding})),studyUrl:`https://abbies-game-oracle.vercel.app/game-anatomy?game=${g.id}`};}
 
 export function getIdentity(id){
- const r=repo.identities.find(x=>x.id===id||String(x.game?.steam_appid)===String(id));if(r)return {record:r,profile:repo.profiles.find(p=>p.appid===r.game?.steam_appid)||null};
+ const r=repo.identities.find(x=>x.id===id||String(x.game?.steam_appid)===String(id));if(r)return {record:r,profile:(r.game?.steam_appid!=null&&repo.profiles.find(p=>p.appid===r.game.steam_appid))||null};
  const p=repo.profiles.find(x=>x.id===id||String(x.appid)===String(id));return p?{record:null,profile:p}:null;
 }
 
