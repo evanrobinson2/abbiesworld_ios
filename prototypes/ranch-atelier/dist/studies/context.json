@@ -914,6 +914,121 @@
      "note": "joints read off it"
     }
    ]
+  },
+  "moon-mission": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Oracle knowledge search: Bluey: The Videogame",
+     "href": "https://abbies-game-oracle.vercel.app/api/knowledge?q=couch%20co-op%20launch%20countdown%20family%20voice&limit=8",
+     "note": "Gentle no-fail co-op for parents and kids: Act 1 stays low-challenge"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle knowledge search: Overcooked! 2",
+     "href": "https://abbies-game-oracle.vercel.app/api/knowledge?q=couch%20co-op%20launch%20countdown%20family%20voice&limit=8",
+     "note": "Talking is the game; keep the shouted jobs, drop the time stress"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle knowledge search: Deliver Us The Moon",
+     "href": "https://abbies-game-oracle.vercel.app/api/knowledge?q=space%20moon%20first%20person%20cockpit%20lander&limit=6",
+     "note": "Slow atmospheric tempo: a calm cutscene between scenes"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle knowledge search: Kerbal Space Program",
+     "href": "https://abbies-game-oracle.vercel.app/api/knowledge?q=space%20moon%20first%20person%20cockpit%20lander&limit=6",
+     "note": "Real launch words can be funny and teach"
+    },
+    {
+     "k": "devblog",
+     "t": "Everybody Shake! The Making of Spaceteam, chapter 2",
+     "href": "https://episodiccontentmag.com/2016/01/29/everybodyshake2/",
+     "note": "One person's instruction is another's job: \"PLUG IN OUR OXYGEN!!!\""
+    },
+    {
+     "k": "devblog",
+     "t": "First Deliver Us Mars dev diary",
+     "href": "https://www.thesixthaxis.com/2022/05/06/first-deliver-us-mars-dev-diary-journeys-to-the-red-planet/",
+     "note": "Launch-day rhythm (style only)"
+    },
+    {
+     "k": "devblog",
+     "t": "Interview with Koen Deetman, game director of Deliver Us Mars",
+     "href": "https://gamingtrend.com/interviews/we-interview-koen-deetman-game-director-for-deliver-us-mars/"
+    },
+    {
+     "k": "devblog",
+     "t": "Ghost Town Games: Overcooked is \"an evening thing\"",
+     "href": "https://www.nintendolife.com/features/interview-were-not-making-a-party-game-now-its-more-of-an-evening-thing-ghost-town-is-moving-on-from-overcooked",
+     "note": "One act per evening"
+    },
+    {
+     "k": "design",
+     "t": "These design principles made Jackbox a party game phenomenon",
+     "href": "https://builtin.com/media-gaming/jackbox-games-design-party-pack",
+     "note": "One task at a time, paced like a TV show: Houston is the host"
+    },
+    {
+     "k": "tutorial",
+     "t": "GDC: Designing Asymmetric Gameplay for Keep Talking and Nobody Explodes",
+     "href": "https://gdcvault.com/play/1023113/Designing-Asymmetric-Gameplay-For-Keep",
+     "note": "The girls spot on the PIP camera while Daddy flies"
+    },
+    {
+     "k": "research",
+     "t": "Built-in hold",
+     "href": "https://en.wikipedia.org/wiki/Built-in_hold",
+     "note": "The launch clock always ticks, with planned holds so nobody fails"
+    },
+    {
+     "k": "research",
+     "t": "Why the shuttle countdown has so many stops and starts",
+     "href": "https://www.scientificamerican.com/article/shuttle-countdown-clock/"
+    },
+    {
+     "k": "canon",
+     "t": "Moon Mission study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonmission/MOON_MISSION_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Game identity schema",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md"
+    },
+    {
+     "k": "canon",
+     "t": "HUD and information study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Interaction grammar",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+    },
+    {
+     "k": "canon",
+     "t": "School and basement speed reviews",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Moon Heroes: Faceted Hero art direction (AW-STUDY-0029)",
+     "href": "https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's trek pack: Abbie and Daddy's Moon Mission (story and minigames)",
+     "note": "Private project file"
+    },
+    {
+     "k": "reference",
+     "t": "Moon Mission concept art (Midjourney, 13 items)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/moon-mission/art/README.md"
+    }
+   ],
+   "recorded": "2026-10-23, as the study was made"
   }
  }
 }
