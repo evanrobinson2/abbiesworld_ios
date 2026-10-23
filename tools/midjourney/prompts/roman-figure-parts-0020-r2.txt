@@ -1,0 +1,13 @@
+# AW-STUDY-0020 - Roman Figure Parts, round 2 (2026-10-23 06:16Z).
+# Evan on round 1: "the arms and legs didn't get drawn right so that would get messy and they are too wrinkly".
+# Round 2 asks for anatomically correct limbs in large, clean, smooth folded planes: no crumpled paper, no wrinkles.
+# Plan beside it: the limbs' proportions come from the AW-STUDY-0016 human canon (docs/oracle/bodies/human-canon.json);
+# these proofs only set the look of the planes.
+
+arms-hero | A single isolated pair of anatomically correct adult male arms of a Roman legionary, from the shoulder to the fingertips, made of smooth matte ivory-white papercraft with large clean flat planes and a few crisp straight creases, no crumpled paper, no wrinkles, correct shoulder, biceps, elbow, forearm and wrist, two complete relaxed hands with five separate fingers and a thumb each, shown side by side like model kit pieces, front view, centered and entirely visible, soft studio light, plain light gray background --no text, scenery, pedestal, torso, head, crumpled, wrinkled, armor --ar 3:2 --v 8.2
+
+legs-hero | A single isolated pair of anatomically correct adult male standing legs of a Roman legionary, from the top of the thighs to the feet, made of smooth matte ivory-white papercraft with large clean flat planes and a few crisp straight creases, no crumpled paper, no wrinkles, correct thigh, kneecap, calf, shin and ankle, caged caligae sandals with clean flat straps and visible toes, cut off cleanly at the top of the thighs, front view, centered and entirely visible, soft studio light, plain light gray background --no text, scenery, pedestal, torso, head, skirt, crumpled, wrinkled --ar 2:3 --v 8.2
+
+arms-sheet | Character reference sheet of one anatomically correct adult male arm and hand made of smooth matte ivory-white papercraft with large clean flat planes, no crumpled paper, no wrinkles, front view and side view side by side at the same scale, orthographic, hand relaxed with five separate fingers and a thumb, soft even studio light, plain light gray background --no text, labels, scenery, torso, crumpled, wrinkled, armor --ar 3:2 --v 8.2
+
+legs-sheet | Character reference sheet of an anatomically correct adult male standing leg made of smooth matte ivory-white papercraft with large clean flat planes, no crumpled paper, no wrinkles, caged caligae sandal with clean straps, front view and side view side by side at the same scale, orthographic, soft even studio light, plain light gray background --no text, labels, scenery, torso, skirt, crumpled, wrinkled --ar 3:2 --v 8.2
