@@ -366,6 +366,76 @@
      "catches you in the secret ending"
     ]
    }
+  },
+  {
+   "id": "city-steward",
+   "name": "The town steward (hex city)",
+   "group": "town",
+   "descriptions": [
+    "A warm, slightly proud town steward in his fifties, rich and clear voice, a kindly storybook mayor explaining the town to a child, unhurried with a twinkle. Clean studio recording, animated family film.",
+    "A friendly, bookish older woman who runs the town hall, bright clear voice, gently enthusiastic about numbers and neighbours. Close warm microphone."
+   ],
+   "sample": "Good morning! Two thousand people live in our town now. The fountains are running, the bakery is busy, and the ships are coming in. What shall we build next?",
+   "looks": {
+    "color": "#7a3b8f",
+    "evan": []
+   }
+  },
+  {
+   "id": "city-baker",
+   "name": "A baker (hex city)",
+   "group": "town",
+   "descriptions": [
+    "A cheerful, round-voiced baker in her forties, warm laugh in her voice, up before dawn and happy about it. Animated family film, close microphone.",
+    "A jolly, booming baker man with flour on his apron, big-hearted and quick to laugh. Clean studio recording."
+   ],
+   "sample": "The ovens are hot and the bread is rising! Come and get it while it's warm, everyone!",
+   "looks": {
+    "color": "#d98b55",
+    "evan": []
+   }
+  },
+  {
+   "id": "city-fisher",
+   "name": "A fisher (hex city)",
+   "group": "town",
+   "descriptions": [
+    "A salty, good-humoured fisherwoman with a slightly husky voice, telling tall tales about the sea, playful and kind. Animated family film.",
+    "A cheerful old fisherman with a weathered, sing-song voice, always talking about boats and weather. Close microphone."
+   ],
+   "sample": "Boats in the water, nets in the boats! The bay is calm today. Fish for supper, I promise you.",
+   "looks": {
+    "color": "#2b6f8f",
+    "evan": []
+   }
+  },
+  {
+   "id": "city-mason",
+   "name": "A builder (hex city)",
+   "group": "town",
+   "descriptions": [
+    "A practical, steady builder in his thirties with a friendly, matter-of-fact voice, proud of good work. Clean studio recording, animated family film.",
+    "A capable, upbeat woman builder with a crisp voice, explaining how things are made. Close microphone."
+   ],
+   "sample": "Red clay tiles, fired in the kiln. These roofs won't leak and they won't burn. Now, who wants a second floor?",
+   "looks": {
+    "color": "#b4532f",
+    "evan": []
+   }
+  },
+  {
+   "id": "city-water",
+   "name": "A water carrier (hex city)",
+   "group": "town",
+   "descriptions": [
+    "A quick, chatty young adult water carrier with a bright, bouncy voice, knows every well and fountain in town. Animated family film, close microphone.",
+    "An energetic young man with a light, friendly voice, always in a hurry, buckets swinging. Clean studio recording."
+   ],
+   "sample": "Running water right here on our street! No more long walks with the buckets. Splash!",
+   "looks": {
+    "color": "#5fb3d6",
+    "evan": []
+   }
   }
  ],
  "picks": {

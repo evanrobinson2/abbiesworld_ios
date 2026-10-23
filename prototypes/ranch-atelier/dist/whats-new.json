@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-hexcity",
+      "date": "2026-10-23",
+      "title": "A founding city on hexes",
+      "line": "A new place found by simulation: a limestone headland with a spring and a calm bay. The big tile splits into 217 hex blocks and a town grows on them. Play the years, zone a block, and ask the steward how the town is doing.",
+      "image": "/whats-new/2026-10-23-hexcity.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0033 - Founding City on Hexes",
+      "tour": false,
+      "link": "/studies/hexcity/"
+    },
+    {
       "id": "2026-10-23-moon-base-kit",
       "date": "2026-10-23",
       "title": "Moon base kit: 20 pieces to walk through",
