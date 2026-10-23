@@ -13,4 +13,5 @@ def L(a,b): return ((J2[b][0]-J2[a][0])**2+(J2[b][1]-J2[a][1])**2)**0.5
 CHAINS=[[a,b,round(L(a,b),1),0] for a,b in (("sR","eR"),("eR","wR"),("wR","fR"),("sL","eL"),("eL","wL"),("wL","fL"),
         ("hR","kR"),("kR","aR"),("hL","kL"),("kL","aL"))]
 CHAINS+= [["aR","tR",78,-1],["aL","tL",78,-1]]   # feet point at the camera: true length 78, the rest is depth
-json.dump(dict(J2=J2, DEPTH=dict(hR=0,hL=0,hc=0,waist=0,neck=0,crown=0,sR=0,sL=0), CHAINS=CHAINS, upright=True, cut_y=round(640*K+OY)), open(os.path.join(os.path.dirname(__file__),'pose.json'),'w'), indent=1)
+SIZES=dict(head=(70,56,52), chest=(86,78,52), chest_taper=0.4)   # rep 2: a real mannequin's head and chest are bigger, and the chest is a shield (wide at the shoulders)
+json.dump(dict(sizes=SIZES, J2=J2, DEPTH=dict(hR=0,hL=0,hc=0,waist=0,neck=0,crown=0,sR=0,sL=0), CHAINS=CHAINS, upright=True, cut_y=round(640*K+OY)), open(os.path.join(os.path.dirname(__file__),'pose.json'),'w'), indent=1)

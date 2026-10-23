@@ -16,9 +16,10 @@ CHAINS=[("sR","eR",128,+1),("eR","wR",124,+1),("wR","fR",58,+1),
         ("sL","eL",133,0),("eL","wL",135,0),("wL","fL",70,0),
         ("hR","kR",198,0),("kR","aR",202,0),("aR","tR",78,-1),
         ("hL","kL",198,0),("kL","aL",200,0),("aL","tL",66,+1)]
+SZ={}
 POSE=os.environ.get('POSE')   # another pose's joints/chains (json from poseN/pose.py); default is the leap
 if POSE:
-    _p=json.load(open(POSE)); J2={k:tuple(v) for k,v in _p['J2'].items()}; DEPTH=dict(_p['DEPTH']); CHAINS=_p['CHAINS']
+    _p=json.load(open(POSE)); J2={k:tuple(v) for k,v in _p['J2'].items()}; DEPTH=dict(_p['DEPTH']); CHAINS=_p['CHAINS']; SZ=_p.get('sizes',{})   # per-pose part sizes; the leap's stay the defaults below
 for a,b,L,sg in CHAINS:
     dx=J2[b][0]-J2[a][0]; dy=J2[b][1]-J2[a][1]; l=math.hypot(dx,dy)
     DEPTH[b]=DEPTH[a]+sg*math.sqrt(max(L*L-l*l,0))
@@ -82,12 +83,12 @@ def limb(name,a,b,r0,r1,m=WOOD,gap=0.0):
     bpy.ops.mesh.primitive_cone_add(vertices=8*K,radius1=r0*S,radius2=r1*S,depth=L*(1-2*gap))
     o=bpy.context.object; place(o,A,B); return finish(o,name,m)
 # torso: head, neck, chest, waist ring, abdomen, pelvis
-ellipsoid("head","neck","crown",58,46,44,t=0.52,taper=0.12)
+ellipsoid("head","neck","crown",*SZ.get("head",(58,46,44)),t=0.52,taper=0.12)
 limb("neck","neck","crown",11,10)  # trimmed visually by the head
 bpy.context.object.scale.z=0.35; bpy.context.object.location=P["neck"]+(P["crown"]-P["neck"])*0.08
-ellipsoid("chest","waist","neck",76,66,48,t=0.53,taper=-0.15)
+ellipsoid("chest","waist","neck",*SZ.get("chest",(76,66,48)),t=0.53,taper=SZ.get("chest_taper",-0.15))
 ball("waist_joint","waist",24)
-ellipsoid("abdomen","hc","waist",66,60,44,t=0.55,taper=0.12)
+ellipsoid("abdomen","hc","waist",*SZ.get("abdomen",(66,60,44)),t=0.55,taper=0.12)
 pel=(P["hR"]+P["hL"])/2
 ellipsoid("pelvis",pel+Vector((0,0,-0.05)),pel+(Vector((0,0,0.6)) if os.environ.get("REST")=="1" or (POSE and _p.get("upright")) else Vector((0.18,0,0.6))),38,56,40,t=0.15)
 THICK=dict(R=dict(sh=20,ua=(17,14,4),el=14,fa=(17,13,3),wr=10,hand=(15,8)),
