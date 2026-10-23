@@ -1,0 +1,380 @@
+{
+ "rep1-rect": {
+  "view": "front",
+  "joints": [
+   {
+    "joint": "uarmR:farmR",
+    "gap": 0.14365079365079364,
+    "seam": 0.13203684749232344
+   },
+   {
+    "joint": "uarmL:farmL",
+    "gap": 0.03333333333333333,
+    "seam": 0.11093871217998448
+   },
+   {
+    "joint": "farmL:handL",
+    "gap": 0,
+    "seam": 0.16873706004140787
+   },
+   {
+    "joint": "farmR:handR",
+    "gap": 0,
+    "seam": 0.31958762886597936
+   },
+   {
+    "joint": "thighR:shinR",
+    "gap": 0.10818713450292397,
+    "seam": 0.12091690544412607
+   },
+   {
+    "joint": "thighL:shinL",
+    "gap": 0,
+    "seam": 0.1903735632183908
+   },
+   {
+    "joint": "shinR:footR",
+    "gap": 0,
+    "seam": 0.27503429355281206
+   },
+   {
+    "joint": "shinL:footL",
+    "gap": 0,
+    "seam": 0.20352564102564102
+   },
+   {
+    "joint": "chest:head",
+    "gap": 0,
+    "seam": 0.12841854934601665
+   },
+   {
+    "joint": "abdomen:chest",
+    "gap": 0,
+    "seam": 0.12756318550309967
+   }
+  ],
+  "prop": {
+   "upper_arm": 1.4499637244758643,
+   "forearm": 1.1981039043260078,
+   "thigh": 1.7887346688542785,
+   "shin": 1.7924106675858382
+  },
+  "joint_cover": 0.971,
+  "seam_ink": 0.178
+ },
+ "rep2-capsule": {
+  "view": "front",
+  "joints": [
+   {
+    "joint": "uarmR:farmR",
+    "gap": 0,
+    "seam": 0.0535077288941736
+   },
+   {
+    "joint": "uarmL:farmL",
+    "gap": 0,
+    "seam": 0.06580427446569179
+   },
+   {
+    "joint": "farmL:handL",
+    "gap": 0,
+    "seam": 0.08431703204047218
+   },
+   {
+    "joint": "farmR:handR",
+    "gap": 0,
+    "seam": 0.08262350936967632
+   },
+   {
+    "joint": "thighR:shinR",
+    "gap": 0,
+    "seam": 0.04812206572769953
+   },
+   {
+    "joint": "thighL:shinL",
+    "gap": 0,
+    "seam": 0.054377169301966836
+   },
+   {
+    "joint": "shinR:footR",
+    "gap": 0,
+    "seam": 0.09030347890451518
+   },
+   {
+    "joint": "shinL:footL",
+    "gap": 0,
+    "seam": 0.08823529411764706
+   },
+   {
+    "joint": "chest:head",
+    "gap": 0,
+    "seam": 0.004235907461713913
+   },
+   {
+    "joint": "abdomen:chest",
+    "gap": 0,
+    "seam": 0
+   }
+  ],
+  "prop": {
+   "upper_arm": 1.4499637244758643,
+   "forearm": 1.1981039043260078,
+   "thigh": 1.7887346688542785,
+   "shin": 1.7924106675858382
+  },
+  "joint_cover": 1,
+  "seam_ink": 0.057
+ },
+ "rep3-forms": {
+  "view": "front",
+  "joints": [
+   {
+    "joint": "uarmR:farmR",
+    "gap": 0,
+    "seam": 0.057625145518044235
+   },
+   {
+    "joint": "uarmL:farmL",
+    "gap": 0,
+    "seam": 0.07737775389575496
+   },
+   {
+    "joint": "farmL:handL",
+    "gap": 0,
+    "seam": 0.10756972111553785
+   },
+   {
+    "joint": "farmR:handR",
+    "gap": 0,
+    "seam": 0.1126984126984127
+   },
+   {
+    "joint": "thighR:shinR",
+    "gap": 0,
+    "seam": 0.05656795747911921
+   },
+   {
+    "joint": "thighL:shinL",
+    "gap": 0,
+    "seam": 0.06296296296296296
+   },
+   {
+    "joint": "shinR:footR",
+    "gap": 0,
+    "seam": 0.12280701754385964
+   },
+   {
+    "joint": "shinL:footL",
+    "gap": 0,
+    "seam": 0.1199442119944212
+   },
+   {
+    "joint": "chest:head",
+    "gap": 0,
+    "seam": 0.25211701308698997
+   },
+   {
+    "joint": "abdomen:chest",
+    "gap": 0,
+    "seam": 0
+   }
+  ],
+  "prop": {
+   "upper_arm": 1.4499637244758643,
+   "forearm": 1.1981039043260078,
+   "thigh": 1.7887346688542785,
+   "shin": 1.7924106675858382
+  },
+  "joint_cover": 1,
+  "seam_ink": 0.097
+ },
+ "rep4-patch": {
+  "view": "front",
+  "joints": [
+   {
+    "joint": "uarmR:farmR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "uarmL:farmL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "farmL:handL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "farmR:handR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "thighR:shinR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "thighL:shinL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "shinR:footR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "shinL:footL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "chest:head",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "abdomen:chest",
+    "gap": 0,
+    "seam": 0
+   }
+  ],
+  "prop": {
+   "upper_arm": 1.4499637244758643,
+   "forearm": 1.1981039043260078,
+   "thigh": 1.7887346688542785,
+   "shin": 1.7924106675858382
+  },
+  "joint_cover": 1,
+  "seam_ink": 0
+ },
+ "rep5-side": {
+  "view": "side",
+  "joints": [
+   {
+    "joint": "uarmR:farmR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "uarmL:farmL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "farmL:handL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "farmR:handR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "thighR:shinR",
+    "gap": 0,
+    "seam": 0.11892052194543298
+   },
+   {
+    "joint": "thighL:shinL",
+    "gap": 0,
+    "seam": 0.0011115227862171174
+   },
+   {
+    "joint": "shinR:footR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "shinL:footL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "chest:head",
+    "gap": 0,
+    "seam": 0.08431836091410559
+   },
+   {
+    "joint": "abdomen:chest",
+    "gap": 0,
+    "seam": 0.021876409562471808
+   }
+  ],
+  "prop": {
+   "upper_arm": 1.4534441853748634,
+   "forearm": 1.1964714811068586,
+   "thigh": 1.7920579554136147,
+   "shin": 1.7774862671331495
+  },
+  "joint_cover": 1,
+  "seam_ink": 0.023
+ },
+ "rep6-motion": {
+  "view": "side",
+  "joints": [
+   {
+    "joint": "uarmR:farmR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "uarmL:farmL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "farmL:handL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "farmR:handR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "thighR:shinR",
+    "gap": 0,
+    "seam": 0.11892052194543298
+   },
+   {
+    "joint": "thighL:shinL",
+    "gap": 0,
+    "seam": 0.0011115227862171174
+   },
+   {
+    "joint": "shinR:footR",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "shinL:footL",
+    "gap": 0,
+    "seam": 0
+   },
+   {
+    "joint": "chest:head",
+    "gap": 0,
+    "seam": 0.08431836091410559
+   },
+   {
+    "joint": "abdomen:chest",
+    "gap": 0,
+    "seam": 0.021876409562471808
+   }
+  ],
+  "prop": {
+   "upper_arm": 1.4534441853748634,
+   "forearm": 1.1964714811068586,
+   "thigh": 1.7920579554136147,
+   "shin": 1.7774862671331495
+  },
+  "joint_cover": 1,
+  "seam_ink": 0.023
+ }
+}

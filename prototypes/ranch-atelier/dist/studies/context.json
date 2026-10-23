@@ -834,6 +834,10 @@
      "note": "joints read off it"
     }
    ]
+  },
+  "rigging": {
+   "file": "rigging/context.json",
+   "recorded": "2026-10-23, by the study as it was made"
   }
  }
 }

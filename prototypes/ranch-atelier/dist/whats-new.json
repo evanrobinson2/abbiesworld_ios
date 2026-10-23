@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-rigging",
+      "date": "2026-10-23",
+      "title": "Characters drawn in pieces, and moving",
+      "line": "The mannequin drawn the way Spine and Rive games do it: SVG pieces on bones, joints that never gap, arms you can pull, and a jump with a real wind-up and squash. Six practice tries side by side, each one better.",
+      "image": "/whats-new/2026-10-23-rigging.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY71Gi6xSzAGcdMibSmMEgC9",
+      "threadTitle": "AW-STUDY-0041 - 2D Character Rigging",
+      "tour": false,
+      "link": "/studies/rigging/"
+    },
+    {
       "id": "2026-10-23-study-context",
       "date": "2026-10-23",
       "title": "What each study drew on",
