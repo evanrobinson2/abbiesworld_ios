@@ -50,5 +50,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T15:52:24Z"
+  },
+  {
+    "id": "A3-clay",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "ada34784-746f-4cca-b56e-adf98115e19b",
+    "files": [
+      "tools/meshy-heroes/refs/A3-clay/mj_ada34784-746f-4cca-b56e-adf98115e19b_0.png",
+      "tools/meshy-heroes/refs/A3-clay/mj_ada34784-746f-4cca-b56e-adf98115e19b_1.png",
+      "tools/meshy-heroes/refs/A3-clay/mj_ada34784-746f-4cca-b56e-adf98115e19b_2.png",
+      "tools/meshy-heroes/refs/A3-clay/mj_ada34784-746f-4cca-b56e-adf98115e19b_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:52:57Z"
+  },
+  {
+    "id": "A3-paint",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "da3f9b6f-447d-4eb4-b257-381d73dc5183",
+    "files": [
+      "tools/meshy-heroes/refs/A3-paint/mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_0.png",
+      "tools/meshy-heroes/refs/A3-paint/mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_1.png",
+      "tools/meshy-heroes/refs/A3-paint/mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_2.png",
+      "tools/meshy-heroes/refs/A3-paint/mj_da3f9b6f-447d-4eb4-b257-381d73dc5183_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:53:27Z"
   }
 ]
