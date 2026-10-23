@@ -51,7 +51,7 @@ function judge(file, text, added) {
     const body = b[2]; if (!(FULLSCREEN.test(body) && MASK.test(body) && /position\s*:\s*fixed/.test(body))) continue;
     const startLine = css.slice(0, b.index + b[0].length - b[0].trimStart().length).split('\n').length, endLine = startLine + b[0].split('\n').length - 1;
     if (added && ![...added].some(n => n >= startLine && n <= endLine)) continue;
-    if (/game-feel:\s*ok/.test(b[0]) || /developer|dev-/.test(b[1])) continue;
+    if (/game-feel:\s*ok/.test(text.slice(Math.max(0, b.index - 200), b.index + b[0].length)) || /developer|dev-/.test(b[1])) continue;
     findings.push({file, line: startLine, rule: 'world-mask', level: 'error', code: b[1].trim().slice(0, 60),
       say: 'A full-screen layer blurs, hazes or fades the world. Nothing masks the world; keep glass on small objects.'});
   }

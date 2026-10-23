@@ -1,0 +1,30 @@
+{
+  "part": "cuirass",
+  "date": "2026-10-23",
+  "concept": {
+    "source": "Midjourney",
+    "job_id": "699aa058-fefe-4cb2-a644-9a16c372d524",
+    "image_index": 0,
+    "file": "concept.png",
+    "prompt": "A single segmented Roman torso cuirass only, hollow empty chest and back shell with overlapping horizontal armor bands, open neck and arm holes, no attached shoulder armor or skirt, stylized low-poly strategy-game equipment asset, elegant ivory-white monochromatic material, clean angular faceted polygonal geometry, strong readable silhouette, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, figure, mannequin, anatomy, skin, head, face, body, pedestal, text, scenery, helmet --ar 1:1 --v 8.2",
+    "created": "2026-10-22T15:54:39.677389+00:00",
+    "picked_by": "Evan"
+  },
+  "mask": {
+    "tool": "rembg isnet-general-use",
+    "file": "concept_mask.png"
+  },
+  "construction": {
+    "recipe": "build.py",
+    "tool": "Blender 5.2 (bpy) headless",
+    "output": "cuirass.glb"
+  },
+  "scoring": {
+    "tool": "../../score.py",
+    "outputs": [
+      "r/score.json",
+      "r/compare.jpg",
+      "r/hero.png"
+    ]
+  }
+}

@@ -39,8 +39,8 @@ for (const [name, viewport] of [['phone', {width: 390, height: 844}], ['desktop'
   await tab.goto(`http://127.0.0.1:${port}${page}`, {waitUntil: 'load', timeout: 60000}).catch(() => {});
   await tab.waitForTimeout(settle);
   await tab.waitForFunction(() => !/Preparing|Loading/i.test(document.body.innerText || ''), null, {timeout: 60000}).catch(() => {});
-  await tab.waitForTimeout(1500);
-  const r = await tab.evaluate(() => {
+  // The HUD can still be arriving after loading ends, so measure until two readings agree (at most ~10s more).
+  const measure = () => tab.evaluate(() => {
     const canvases = [...document.querySelectorAll('canvas')].filter(c => { const b = c.getBoundingClientRect(); return b.width * b.height > innerWidth * innerHeight * 0.5; });
     const world = canvases[0];
     const step = 10; let total = 0, chrome = 0, veiled = 0;
@@ -57,6 +57,14 @@ for (const [name, viewport] of [['phone', {width: 390, height: 844}], ['desktop'
     const words = (document.body.innerText || '').split(/\s+/).filter(w => /[a-z]{2,}/i.test(w)).length;
     return {hasWorld: !!world, chromePct: +(100 * chrome / total).toFixed(1), maskPct: +(100 * veiled / total).toFixed(1), coveredPct: +(100 * (chrome + veiled) / total).toFixed(1), visibleWords: words};
   });
+  let r = null;
+  for (let k = 0; k < 7; k++) {
+    await tab.waitForTimeout(1500);
+    const next = await measure();
+    const same = r && next.coveredPct === r.coveredPct && next.hasWorld === r.hasWorld;
+    r = next;
+    if (same) break;
+  }
   await tab.screenshot({path: `${process.env.SHOT_PREFIX || 'world-cover'}-${name}.png`});
   results.push({viewport: name, ...r});
   await tab.close();

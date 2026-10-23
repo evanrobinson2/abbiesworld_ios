@@ -1,0 +1,420 @@
+{
+ "study": "city",
+ "date": "2026-10-23",
+ "status": "proposal",
+ "footprint": {
+  "hexes": 3,
+  "hexDiameterM": 160,
+  "areaHa": 5.0,
+  "peoplePerHa": 200,
+  "layout": "triangle (city-footprint.mjs)"
+ },
+ "quarters": [
+  {
+   "id": "market",
+   "holds": "square, clock tower town hall, market hall, café, bakery"
+  },
+  {
+   "id": "mill",
+   "holds": "workshops, depot, mill, roads to Ranch and Garden"
+  },
+  {
+   "id": "hill",
+   "holds": "homes, school, park, allotments, footpath to the Meadow"
+  }
+ ],
+ "population": {
+  "people": 1000,
+  "households": 420,
+  "children": 200,
+  "schoolAge": 150,
+  "adults": 620,
+  "working": 470,
+  "elders": 180
+ },
+ "jobs": {
+  "inTown": {
+   "shops-market": 70,
+   "food-cafe-bakery-inn": 55,
+   "builders-workshops": 60,
+   "offices-other": 48,
+   "crafts-studios": 40,
+   "public-works": 30,
+   "carriers": 25,
+   "clinic-care": 25,
+   "school": 20,
+   "town-hall-post-library": 15,
+   "fire-crew": 12
+  },
+  "commuteOut": 70
+ },
+ "buildings": {
+  "townhouses": 120,
+  "landmarks": 6,
+  "workshopsCivic": 24
+ },
+ "scheduleTemplates": [
+  "early-baker",
+  "shopkeeper",
+  "office",
+  "carrier",
+  "builder",
+  "carer",
+  "commuter",
+  "school-child",
+  "little-one",
+  "elder",
+  "student",
+  "night-watch"
+ ],
+ "tiers": [
+  {
+   "id": "T0",
+   "name": "heroes",
+   "max": 12
+  },
+  {
+   "id": "T1",
+   "name": "agents",
+   "max": 40,
+   "radiusM": 35
+  },
+  {
+   "id": "T2",
+   "name": "crowd",
+   "max": 300,
+   "drawCalls": "4-8"
+  },
+  {
+   "id": "T3",
+   "name": "ledger",
+   "max": 1000,
+   "hz": 1
+  }
+ ],
+ "budget": {
+  "iphone": {
+   "fps": 30,
+   "simMs": 1.5,
+   "drawCalls": 150,
+   "trisClose": 350000,
+   "trisHover": 120000,
+   "textureMB": 48,
+   "downloadMB": 6
+  },
+  "desktop": {
+   "fps": 60,
+   "simMs": 1.0,
+   "drawCalls": 250,
+   "trisClose": 800000,
+   "trisHover": 250000,
+   "textureMB": 96,
+   "downloadMB": 6
+  },
+  "peopleDataKB": 64,
+  "realLights": 4
+ },
+ "manifest": {
+  "scene": "city",
+  "place": "town",
+  "dialect": "bells, clocks, windows and banners",
+  "items": [
+   {
+    "id": "time-of-day",
+    "says": "what time it is",
+    "kind": "state",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "none",
+     "diegetic",
+     "overlay"
+    ],
+    "ways": {
+     "diegetic": "the clock tower face, the sun and shadows, the hour bells",
+     "overlay": "the chronograph dial (glance only)"
+    }
+   },
+   {
+    "id": "next-bell",
+    "says": "what the next bell is for",
+    "kind": "event",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "diegetic"
+    ],
+    "ways": {
+     "diegetic": "one bell for school, three for market, a peal for a festival"
+    }
+   },
+   {
+    "id": "market-day",
+    "says": "whether it's market day",
+    "kind": "state",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "diegetic"
+    ],
+    "ways": {
+     "diegetic": "bunting along the high street; stalls in the square"
+    }
+   },
+   {
+    "id": "school",
+    "says": "whether school is in",
+    "kind": "state",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "diegetic"
+    ],
+    "ways": {
+     "diegetic": "the school bell; children in the playground or the park"
+    }
+   },
+   {
+    "id": "bustle",
+    "says": "how busy the town is",
+    "kind": "level",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "none",
+     "diegetic"
+    ],
+    "ways": {
+     "diegetic": "how full the streets and the square are"
+    }
+   },
+   {
+    "id": "homes-lit",
+    "says": "who is home",
+    "kind": "count",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "diegetic"
+    ],
+    "ways": {
+     "diegetic": "windows light up as people arrive; chimney smoke"
+    }
+   },
+   {
+    "id": "help-wanted",
+    "says": "jobs that need someone",
+    "kind": "list",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "diegetic",
+     "spatial"
+    ],
+    "ways": {
+     "diegetic": "a Help wanted card in the shop window",
+     "spatial": "the shopkeeper waves you over"
+    }
+   },
+   {
+    "id": "festival",
+    "says": "the next festival",
+    "kind": "timer",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "diegetic",
+     "meta"
+    ],
+    "ways": {
+     "diegetic": "lanterns strung up the day before; townsfolk talk about it",
+     "meta": "the music lifts"
+    }
+   },
+   {
+    "id": "deliveries",
+    "says": "carts coming from other tiles",
+    "kind": "list",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "diegetic"
+    ],
+    "ways": {
+     "diegetic": "the milk cart on the road from the Ranch"
+    }
+   },
+   {
+    "id": "mood",
+    "says": "how the town feels",
+    "kind": "level",
+    "who": "characters",
+    "for": [
+     "player",
+     "director"
+    ],
+    "prefer": [
+     "spatial",
+     "meta"
+    ],
+    "ways": {
+     "spatial": "emote bubbles over people near the camera",
+     "meta": "music key and tempo"
+    }
+   },
+   {
+    "id": "census",
+    "says": "how many people, by age and job",
+    "kind": "ledger",
+    "who": "player",
+    "for": [
+     "grown-up",
+     "director"
+    ],
+    "prefer": [
+     "overlay"
+    ],
+    "ways": {
+     "overlay": "census page in the grown-up workbench"
+    }
+   },
+   {
+    "id": "ledger",
+    "says": "the town's coins in and out",
+    "kind": "ledger",
+    "who": "player",
+    "for": [
+     "grown-up"
+    ],
+    "prefer": [
+     "overlay"
+    ],
+    "ways": {
+     "overlay": "ledger page in the grown-up workbench"
+    }
+   }
+  ]
+ },
+ "complications": [
+  "next-bell",
+  "market-day",
+  "school",
+  "festival",
+  "deliveries"
+ ],
+ "card": {
+  "name": "The City",
+  "type": "building",
+  "rarity": "bloom",
+  "rules": "A town of a thousand neighbours.",
+  "abilities": [
+   "coin",
+   "heart",
+   "hammer"
+  ],
+  "art": "concept sheet 1 (to make)"
+ },
+ "assets": {
+  "hero": [
+   "town hall with clock tower",
+   "market hall",
+   "café",
+   "bakery",
+   "school",
+   "fountain and well"
+  ],
+  "kitModules": 28,
+  "storeyM": 3,
+  "bayM": 4.5,
+  "ranchReuse": [
+   "apple-tree",
+   "birch",
+   "maple",
+   "hazel",
+   "elder",
+   "tree-standing",
+   "sunflower",
+   "hollyhock",
+   "marigold",
+   "coneflower",
+   "goldenrod",
+   "clover",
+   "fern",
+   "borage",
+   "bench",
+   "water-point",
+   "water-trough",
+   "stone-edging",
+   "horse",
+   "chicken",
+   "feed-store",
+   "hay-rack",
+   "family-home",
+   "family-home-charming",
+   "potting-bench",
+   "watering-pot",
+   "compost-bay"
+  ],
+  "midjourney": [
+   "establishing shot at board hover",
+   "square at noon and dusk, same camera",
+   "townhouse kit orthographic",
+   "six landmarks turnaround",
+   "twelve townsfolk by role",
+   "dialect sheet: signs, chalkboards, bunting, lamps, bells"
+  ]
+ },
+ "neighbours": {
+  "ranch": {
+   "gives": "milk, eggs, wool at dawn",
+   "gets": "ranch hands, a market"
+  },
+  "garden": {
+   "gives": "wheat, apples, vegetables",
+   "gets": "gardeners, compost"
+  },
+  "meadow": {
+   "gives": "honey, Saturday picnics",
+   "gets": "picnickers, a footpath"
+  },
+  "moon": {
+   "gives": "rocket launches, technicians",
+   "gets": "homes for its staff"
+  }
+ },
+ "phases": [
+  "P1 crowd proof",
+  "P2 concept and kit",
+  "P3 town generator",
+  "P4 information",
+  "P5 card and neighbours",
+  "P6 heroes and stories"
+ ]
+}
