@@ -26,7 +26,7 @@ export function initLiquidGlass({doc=document,win=window}={}){
  const refract=!!win.navigator.userAgentData&&win.matchMedia('(pointer:fine)').matches&&!win.matchMedia('(prefers-reduced-transparency:reduce)').matches;
  doc.documentElement.classList.toggle('lg-refract',refract);
  let svg=null,count=0;const lenses=new WeakMap();
- const canvas=doc.createElement('canvas'),ctx=refract?canvas.getContext('2d'):null;
+ const canvas=doc.createElement('canvas'),ctx=refract?canvas.getContext('2d',{willReadFrequently:true}):null;
  function lens(el){
   if(!ctx)return;const w=el.offsetWidth,h=el.offsetHeight;if(w<24||h<24)return;
   let entry=lenses.get(el);
