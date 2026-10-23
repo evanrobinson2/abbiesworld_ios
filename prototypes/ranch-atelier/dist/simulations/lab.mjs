@@ -70,7 +70,7 @@ import {ranchName} from './ranch-names.mjs';
 import {advanceClock,timeOfDay,TIME_HOURS,nightProgress} from './ranch-clock.mjs?v=2';
 import {createPaintWorld} from './paint-world/paint-world.mjs';
 import {mountPaintHand} from './paint-world/paint-card.mjs';
-import {createBallTray,rollGrant} from './paint-world/paint-balls.mjs';
+import {createBallTray,rollGrant,groundThrow} from './paint-world/paint-balls.mjs';
 import {createFarmLights} from './ranch-lights.mjs?clock=6';
 import {facetPicker} from './facet-picker.mjs';
 import {REGIONAL} from './ranch-regional.mjs?v=3';
@@ -168,11 +168,8 @@ function playPaintCard(){
 // A ball let go at (x,y) px with velocity (vx,vy) px/s: it starts on the ground under the finger and carries the flick.
 function throwPaintBall(ball,x,y,vx,vy){
  if(!paintWorld||family!=='ranch'||!active)return false;
- const r=renderer.domElement.getBoundingClientRect(),ray=new T.Raycaster();ray.setFromCamera(new T.Vector2((x-r.left)/r.width*2-1,-((y-r.top)/r.height*2-1)),camera);
- const gy=orbit.target.y,t=(gy-ray.ray.origin.y)/ray.ray.direction.y;if(!(t>0))return false;
- const P=ray.ray.at(t,new T.Vector3()),f=new T.Vector3();camera.getWorldDirection(f);f.y=0;f.normalize();const rt=new T.Vector3().crossVectors(f,new T.Vector3(0,1,0)).normalize();
- const perPx=2*camera.position.distanceTo(orbit.target)*Math.tan(camera.fov*Math.PI/360)/r.height,k=perPx*.5;
- paintWorld.launch({x:P.x,z:P.z,vx:(rt.x*vx-f.x*vy)*k,vz:(rt.z*vx-f.z*vy)*k,colour:ball.colour,R:(.75+Math.random()*.4)*ball.R,lift:.45,vy:1.1},farmClock);
+ const g=groundThrow(T,camera,renderer.domElement,orbit.target,x,y,vx,vy);if(!g)return false;
+ paintWorld.launch({...g,colour:ball.colour,R:(.75+Math.random()*.4)*ball.R,lift:.45,vy:1.1},farmClock);
  setTimeout(()=>paintWorld.save('ranch-'+paintSeed),4000);return true;
 }
 function paintFrame(dt){if(!paintWorld)return;const on=family==='ranch'&&!!active;paintWorld.root.visible=on;paintHand.el.style.display=on?'':'none';paintTray.el.style.display=on?'':'none';if(on)paintWorld.update(dt,farmClock);}orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;
