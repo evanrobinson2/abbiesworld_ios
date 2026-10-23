@@ -57,6 +57,7 @@ From MassGIS public layers (downloaded from the state's S3 bucket; OpenStreetMap
 | Leonard Field | MassGIS open space ("Leonard Field and Beach") | the field laid over the real slope, goals, backstop, bleachers, by the water |
 | Ginn Field | MassGIS open space | the train park: a little engine and coaches |
 | Horn Pond | MassGIS hydrography | a dock out over the pond, a rowboat, benches |
+| The science lab | new in Abbie's town (2026-10-23, for AW-STUDY-0047) | a lab with a little dome; the beaker of strange green goo by its door opens the cell game (`/studies/cell/play.html`) |
 | The town common | MassGIS open space | white church with steeple, flagpole, bandstand |
 | Launch | off the map, up the road north | the pink rocket on its own island past the edge |
 | New Nova | off the map, south past the lakes (where Boston would be) | a bright glass city on its own island |

@@ -26,6 +26,7 @@ btns = '<div class="chips"><button class="btn" id="csv">Download the manifest (C
 assert btns in art
 # the preview cannot hand out files: point to the live page for the CSV and JSON
 art = art.replace(btns, '<p class="muted">The CSV and JSON downloads are on the live study page, /studies/abbietown/.</p><span hidden><button id="csv"></button><button id="json"></button></span>')
+art = art.replace("const CELL_GAME = '/studies/cell/play.html';", "const CELL_GAME = 'https://app.abbies.world/studies/cell/play.html';")
 (here / 'abbietown-artifact.html').write_text(art)
 live = page('/vendor/three.module.js', '/vendor/OrbitControls.js')
 head_end = live.index('</style>') + len('</style>')
