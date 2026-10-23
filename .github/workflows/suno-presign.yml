@@ -1,8 +1,10 @@
 # Lets Evan's PC upload his Suno songs straight to R2 without R2 keys and without git (the songs are private on Suno,
-# whose CDN refuses them outside his browser). Given an RSA public key from the PC, it makes a presigned PUT URL for
-# music/suno/<id>.mp3 for every song in tools/composer/suno/songs.json (valid 2 hours), encrypts the list to that
-# key (AES-256 + RSA-OAEP), and attaches the ciphertext to the `suno-library` release as suno-put.<run>.enc/.key.
-# Only the PC holding the private key can read the URLs. Afterwards run suno-store to check and catalogue them.
+# whose CDN refuses them outside his browser). It fills tools/composer/suno/upload.ps1 with a presigned PUT URL for
+# music/suno/<id>.mp3 for every song in songs.json (valid 6 hours), encrypts the script with a fresh AES-256 key
+# (IV first, then CBC ciphertext) and that key with RSA-OAEP to the given public key, and attaches both to the
+# `suno-library` release as suno-put.<run>.enc/.key. Whoever holds the private key (a Claude session) recovers the AES
+# key and hands Evan a one-line PowerShell command that downloads, decrypts and runs the script. Afterwards run
+# suno-store to check and catalogue the songs.
 name: suno-presign
 on:
   workflow_dispatch:
@@ -33,17 +35,19 @@ jobs:
           set -euo pipefail
           pip install -q boto3
           umask 077; mkdir -p /tmp/p
-          python3 - > /tmp/p/urls.json <<'PY'
-          import boto3, json, os
-          s3 = boto3.client('s3', endpoint_url=f"https://{os.environ['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com", region_name='auto')
+          python3 - > /tmp/p/up.ps1 <<'PY'
+          import boto3, json, os; from botocore.config import Config
+          s3 = boto3.client('s3', endpoint_url=f"https://{os.environ['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com", region_name='auto', config=Config(signature_version='s3v4'))
           songs = json.load(open('tools/composer/suno/songs.json'))['songs']
-          print(json.dumps([{'id': s['id'], 'title': s['title'], 'put': s3.generate_presigned_url('put_object', ExpiresIn=7200,
-              Params={'Bucket': os.environ['R2_BUCKET'], 'Key': f"music/suno/{s['id']}.mp3", 'ContentType': 'audio/mpeg'})} for s in songs]))
+          urls = {s['id']: s3.generate_presigned_url('put_object', ExpiresIn=21600,
+                  Params={'Bucket': os.environ['R2_BUCKET'], 'Key': f"music/suno/{s['id']}.mp3", 'ContentType': 'audio/mpeg'}) for s in songs}
+          print(open('tools/composer/suno/upload.ps1').read().replace('#URLS#', '\n'.join(f"'{k}'='{v}'" for k, v in urls.items())))
           PY
           echo "$PUBKEY" | base64 -d > /tmp/p/pub.pem
-          openssl rand -out /tmp/p/k 32
+          openssl rand -out /tmp/p/k 32; openssl rand -out /tmp/p/iv 16
           n=${{ github.run_id }}
-          openssl enc -aes-256-cbc -pbkdf2 -salt -in /tmp/p/urls.json -out "suno-put.$n.enc" -pass file:/tmp/p/k
+          openssl enc -aes-256-cbc -K "$(od -An -tx1 -v /tmp/p/k | tr -d " \n")" -iv "$(od -An -tx1 -v /tmp/p/iv | tr -d " \n")" -in /tmp/p/up.ps1 -out /tmp/p/ct
+          cat /tmp/p/iv /tmp/p/ct > "suno-put.$n.enc"
           openssl pkeyutl -encrypt -pubin -inkey /tmp/p/pub.pem -pkeyopt rsa_padding_mode:oaep -in /tmp/p/k -out "suno-put.$n.key"
           rm -rf /tmp/p
           ls -l suno-put.*
