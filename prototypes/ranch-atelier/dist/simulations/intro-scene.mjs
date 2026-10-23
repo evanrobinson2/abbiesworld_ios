@@ -66,7 +66,7 @@ export function createIntroScene({destination=TOWN}={}){
  function useIt(){if(closed||scene.classList.contains('close'))return;scene.classList.add('close');frame.contentWindow?.postMessage({type:'resume'},'*');setTimeout(()=>frame.focus(),1200);}
  stage.addEventListener('click',useIt);stage.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();useIt();}});
  function close(){if(closed)return;closed=true;frame.contentWindow?.postMessage({type:'pause'},'*');scene.classList.add('leaving');setTimeout(()=>{scene.remove();style.remove();},800);}
- enter.onclick=()=>{frame.contentWindow?.postMessage({type:'pause'},'*');location.assign(destination);};exit.onclick=close;
+ enter.onclick=()=>{frame.contentWindow?.postMessage({type:'pause'},'*');if(destination)location.assign(destination);else close();};exit.onclick=close;
  addEventListener('keydown',e=>{if(e.key==='Escape'&&!closed&&!ready.hidden)close();});
  addEventListener('message',e=>{if(e.source===frame.contentWindow&&e.data?.event==='quit')close();});
  return {

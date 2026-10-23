@@ -42,7 +42,7 @@ import {retainEstablishedLayout,exposedEdges} from './expansion-layout.mjs';
 import {rollTile as dropTile,createImpactEffects,sharedImpactSound,IMPACT_DUST} from './tile-drop-impact.mjs?v=2';
 import {createTileChooser} from './tile-chooser.mjs?v=23';
 import {createWarmUpCard} from './warm-up-card.mjs';
-import {createIntroScene} from './intro-scene.mjs';
+import {createIntroScene} from './intro-scene.mjs?v=2';
 import {createLightBudget} from './light-budget.mjs';
 import {extendTiles,frontier,tileCenter} from './tile-expansion.mjs';
 import {SUGAR_SHACK} from './poi/sugar-shack-spec.mjs';

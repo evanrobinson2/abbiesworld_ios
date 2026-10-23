@@ -1,17 +1,28 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
-   {
-     "id": "2026-10-23-town-events",
-     "date": "2026-10-23",
-     "title": "World event cards in Abbie's Town",
-     "line": "Tap the little lightning button in the town to open the event cards: fireball, waterball, cats and dogs, tie-dye.",
-     "image": "/whats-new/2026-10-23-town-events.png",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
-     "threadTitle": "World event cards",
-     "tour": false,
-     "link": "/town"
-   },
+    {
+      "id": "2026-10-23-winchester-warm",
+      "date": "2026-10-23",
+      "title": "Winchester gets ready before you walk in",
+      "line": "The first visit each session starts at Grace's computer while Winchester's shaders compile, so the town doesn't hitch later.",
+      "image": "/whats-new/2026-10-23-intro-scene.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Performance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-23-town-events",
+      "date": "2026-10-23",
+      "title": "World event cards in Abbie's Town",
+      "line": "Tap the little lightning button in the town to open the event cards: fireball, waterball, cats and dogs, tie-dye.",
+      "image": "/whats-new/2026-10-23-town-events.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+      "threadTitle": "World event cards",
+      "tour": false,
+      "link": "/town"
+    },
     {
       "id": "2026-10-23-town-chronograph",
       "date": "2026-10-23",
