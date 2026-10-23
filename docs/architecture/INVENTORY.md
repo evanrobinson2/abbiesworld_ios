@@ -31,6 +31,14 @@ Tags as in [README.md](README.md). This page lists where secrets live, never the
 | `abbies-champions` | abbies-champions.vercel.app | main `prototypes/champions` | 9 Kings tribute game (static three.js, `/r2` rewrite to the model store) |
 | 35+ others | | | One-off prototypes and games (peggle, sprout-lab, marble-voyage-art, …) |
 
+**Git builds switched off (2026-10-23).** Every push to this repo used to build about 15 Git-linked prototype
+projects, which pushed the team over Vercel's 450 deploys/hour cap and blocked Ranch fixes. These 15 now have the
+ignored build step set to `exit 0` (always skip) and branch previews disabled; none was deleted and none serves a
+live domain: asset-viewer, media-drop, peggle, abbie-assets-lab, marble-voyage-art, finger-lemmings, sprout-lab,
+lab-page, abbies-world-plink, abbies-creature-workshop, creature-creator, starship-rooms, workspace,
+voyage-opening-review, experiment-01-animation. To revive one, clear its Ignored Build Step and re-enable preview
+deployments in its Vercel settings. A new Git-linked project adds a build per push, so link only what will ship.
+
 ## Secrets: where they live
 
 | Name | Location | Purpose |
