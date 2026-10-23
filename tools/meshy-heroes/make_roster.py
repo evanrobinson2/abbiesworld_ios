@@ -58,8 +58,8 @@ BASE = [
 ]
 
 STORY = [
- ("S1", "Abbie", "hero", "Abbie, cartoon girl hero about 4.5 heads tall, copper bob haircut, blue eyes, pink suit lights", "pink"),
- ("S2", "Ani", "hero", "Ani, cartoon girl hero about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights", "purple"),
+ ("S1", "Abbie", "hero", "Abbie, cartoon girl hero about 4.5 heads tall, copper bob haircut, blue eyes, pink accents", "pink"),
+ ("S2", "Ani", "hero", "Ani, cartoon girl hero about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents", "purple"),
  ("S3", "Daddy", "hero", "Daddy, adult explorer about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, no helmet", "orange"),
  ("S4", "Star Child", "hero", "Star Child, small glowing glass crystal alien with cat-like ear points, friendly face, cyan glow", "cyan"),
  ("S5", "Gem bug", "creature", "gem bug, friendly crystal beetle creature, six legs, cyan gem shell, PG", "cyan"),
@@ -76,16 +76,21 @@ LOOKS = {
  "paint": ("Painterly", "painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong "
            "teal and orange rim light, bold colour, mature animated-series look", dict(texture=True, credits=30)),
 }
-SUIT = ("in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back "
-        "views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light "
-        "grey background --ar 3:2")
+# Evan 16:46Z: "you can't put those to meshy with helmets in their hands ... do them with uniform, and then in snug
+# t-shirt and shorts that can fit comfortable under a space suit." Round 2: empty hands, no helmet anywhere, two outfits.
+VIEWS = ("hands empty and open, no helmet anywhere in the picture, front side and back views of the same character, "
+         "A-pose with arms a little away from the body, full body, orthographic, plain light grey background --ar 3:2")
+OUTFITS = {
+ "suit": "in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head",
+ "tee": "in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head",
+}
 CREW = [
- ("A1", "Abbie", "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights", "pink"),
- ("A2", "Ani", "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights", "purple"),
- ("A3", "Daddy", "adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights", "orange"),
- ("A4", "Commander", "adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights", "cyan"),
- ("A5", "Engineer", "stocky adult man astronaut engineer, tool belt, yellow suit lights", "yellow"),
- ("A6", "Alien crewmate", "friendly small grey alien crewmate, big eyes, green suit lights", "green"),
+ ("A1", "Abbie", "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents", "pink"),
+ ("A2", "Ani", "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents", "purple"),
+ ("A3", "Daddy", "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents", "orange"),
+ ("A4", "Commander", "adult woman astronaut commander, true adult proportions, short dark hair, cyan accents", "cyan"),
+ ("A5", "Engineer", "stocky adult man astronaut engineer, tool belt, yellow accents", "yellow"),
+ ("A6", "Alien crewmate", "friendly small grey alien crewmate, big eyes, green accents", "green"),
 ]
 
 def entry(id_, name, group, prompt, **kw):
@@ -100,11 +105,11 @@ roster = dict(
           "tools/bruiser-study/scale cleanup (weld, learn.py rings, deform.py cage, decimate 6-12k faces, role materials) -> "
           "accessorize.py gear fit -> rig with weights for Character Studio -> one side-by-side page",
     order=["astronauts first, both looks side by side (Evan 14:22Z)","1-4 as the test (80 credits)", "if clean and the gear fits: 5-40", "story heroes S1-S5"],
-    budget=dict(cap=2000, astronauts=50 * len(CREW), first_pass=50 * len(CREW) + 20 * (len(BASE) + len(STORY))),
-    astronauts=[dict(id=f"{i}-{k}", name=n, look=LOOKS[k][0], group="astronaut", accent=a,
-                     mj_prompt=f"{d}, {SUIT.replace(' --ar', ', ' + LOOKS[k][1] + ' --ar')}", mj="queued", meshy="queued",
-                     meshy_settings=dict(mode="image-to-3d", **LOOKS[k][2]))
-                for i, n, d, a in CREW for k in LOOKS],
+    budget=dict(cap=2000, astronauts=100 * len(CREW), first_pass=100 * len(CREW) + 20 * (len(BASE) + len(STORY))),
+    astronauts=[dict(id=f"{i}-{k}-{o}", name=n, look=LOOKS[k][0], outfit=o, group="astronaut", accent=a,
+                     mj_prompt=f"{d}, {OUTFITS[o]}, {VIEWS.replace(' --ar', ', ' + LOOKS[k][1] + ' --ar')}",
+                     mj="queued", meshy="queued", meshy_settings=dict(mode="multi-image-to-3d", **LOOKS[k][2]))
+                for i, n, d, a in CREW for k in LOOKS for o in OUTFITS],
     bodies=[entry(f"B{n:02d}", t, "base", f"{shape}, {BODY}", sex=s) for n, t, s, shape in BASE],
     story=[entry(i, n, g, f"{d}, {CREATURE if n in ('Star Child', 'Gem bug') else DRESSED}", accent=a)
            for i, n, g, d, a in STORY],

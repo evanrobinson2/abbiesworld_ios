@@ -37,14 +37,16 @@ def card(e, sub):
 </article>'''
 
 def pair(i):
-    a, b = [e for e in R["astronauts"] if e["id"].startswith(i + "-")]
+    es = [e for e in R["astronauts"] if e["id"].startswith(i + "-")]
+    a = es[0]
     def half(e):
         pic = e.get("ref") and img(e["ref"])
-        face = f'<img src="{pic}" alt="">' if pic else f'<div class="blank {e["id"][-4:]}"><span>{html.escape(e["look"])}</span></div>'
+        label = f'{e["look"]} · {"uniform" if e.get("outfit") == "suit" else "t-shirt and shorts"}'
+        face = f'<img src="{pic}" alt="">' if pic else f'<div class="blank {e["id"].split("-")[1]}"><span>{html.escape(label)}</span></div>'
         return f'''<div class="half">{face}<div class="pills"><span class="pill {e["mj"]}">Picture · {STATE[e["mj"]]}</span><span class="pill {e["meshy"]}">Meshy · {STATE[e["meshy"]]}</span></div>
-  <details><summary>{html.escape(e["look"])} prompt</summary><code>{html.escape(e["mj_prompt"])}</code></details></div>'''
-    return f'''<article class="hero astro"><div class="meta"><b>{html.escape(a["name"])}</b><span class="sub">{i} · {a["accent"]} suit lights</span></div>
- <div class="halves">{half(a)}{half(b)}</div></article>'''
+  <details><summary>{html.escape(label)}</summary><code>{html.escape(e["mj_prompt"])}</code></details></div>'''
+    return f'''<article class="hero astro"><div class="meta"><b>{html.escape(a["name"])}</b><span class="sub">{i} · {a["accent"]} accents</span></div>
+ <div class="halves">{"".join(half(e) for e in es)}</div></article>'''
 
 astros = "\n".join(pair(i) for i in dict.fromkeys(e["id"].split("-")[0] for e in R["astronauts"]))
 bodies = "\n".join(card(e, f'{e["id"]} · {SEX[e["sex"]]}') for e in R["bodies"])
@@ -87,8 +89,8 @@ figcaption{{font:500 12px/1.4 var(--mono);color:var(--muted)}}
 @media (max-width:420px){{.grid2{{grid-template-columns:minmax(0,1fr)}}}}
 .halves{{display:grid;grid-template-columns:1fr 1fr;gap:8px}}.half{{display:grid;gap:6px;align-content:start;min-width:0}}
 .blank.clay{{background:radial-gradient(ellipse 40% 8% at 50% 92%,color-mix(in srgb,var(--ink) 14%,transparent),transparent),linear-gradient(color-mix(in srgb,var(--suit) 22%,var(--clay)),var(--bg))}}
-.blank.aint{{background:radial-gradient(ellipse 40% 8% at 50% 92%,color-mix(in srgb,var(--ink) 14%,transparent),transparent),linear-gradient(135deg,color-mix(in srgb,var(--cyan) 26%,var(--clay)),color-mix(in srgb,var(--suit) 18%,var(--bg)))}}
-.blank.clay span,.blank.aint span{{font-size:22px;color:color-mix(in srgb,var(--ink) 40%,transparent)}}
+.blank.paint{{background:radial-gradient(ellipse 40% 8% at 50% 92%,color-mix(in srgb,var(--ink) 14%,transparent),transparent),linear-gradient(135deg,color-mix(in srgb,var(--cyan) 26%,var(--clay)),color-mix(in srgb,var(--suit) 18%,var(--bg)))}}
+.blank.clay span,.blank.paint span{{font-size:17px;text-align:center;padding:8px;color:color-mix(in srgb,var(--ink) 40%,transparent)}}
 .meta{{display:grid;gap:2px}}.meta b{{font:700 19px/1.1 var(--display)}}.sub{{font:500 11px/1.3 var(--mono);color:var(--muted)}}
 .pills{{display:flex;flex-wrap:wrap;gap:6px}}
 .pill{{font:500 10.5px/1 var(--mono);padding:5px 7px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}}
@@ -116,7 +118,7 @@ a{{color:inherit}}
 
  <section style="display:grid;gap:12px">
   <h2>Moon astronauts, two looks</h2>
-  <p class="muted">Left: plasticine, like a handmade stop-motion clay figure with thumbprints, run untextured and shaded as clay in the game. Right: painterly, hand-painted brush strokes and hard graphic shapes, run with Meshy's paint on. The look is ours; no studio's characters are copied.</p>
+  <p class="muted">Each crew member four ways: plasticine (handmade stop-motion clay, run untextured and shaded as clay in the game) and painterly (hand-painted brush strokes, run with Meshy's paint on), each in the full uniform and in the snug t-shirt and shorts worn under it. Hands empty, no helmets, so Meshy gets a clean body. The look is ours; no studio's characters are copied.</p>
   <div class="grid2">{astros}</div>
  </section>
 
@@ -160,7 +162,7 @@ a{{color:inherit}}
   <div><span>Astronauts, both looks</span><b>{b["astronauts"]:,}</b></div>
   <div><span>Left for redos</span><b>{b["cap"] - b["first_pass"]:,}</b></div>
   <div class="bar"><i style="width:0%"></i></div>
-  <span class="sub">0 spent. The astronauts go first (300); the rest wait on how they look.</span>
+  <span class="sub">0 spent. The astronauts go first (600); the rest wait on how they look.</span>
  </div>
  {ctx()}
 </aside>
