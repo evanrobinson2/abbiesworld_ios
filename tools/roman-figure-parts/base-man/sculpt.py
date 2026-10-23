@@ -102,10 +102,22 @@ add(ell((0, 225.2, 35.6), (3.0, 1.9, 1.5)), 0.9)                                
 add(ell((0, 226.6, 41.6), (4.6, 1.6, 1.4)), 0.8)                                  # lips
 add(ell((0, 227.9, 47.0), (5.2, 2.6, 3.2)), 1.4)                                  # chin
 for s in (1, -1):
-    add(ell((s * 8.0, 232.0, 33.5), (3.8, 3.4, 3.0)), 1.6)                        # cheekbones
     add(ell((s * 15.2, 248.6, 32.0), (1.5, 3.4, 5.8)), 1.0)                       # ears
-    skin = smax(skin, -ell((s * 5.4, 225.6, 28.4), (2.4, 1.2, 1.5)), 1.6)          # eye sockets, soft
-    add(ell((s * 5.4, 226.6, 28.8), (1.9, 1.1, 1.2)), 0.8)                        # eyes under the lids
+add(cone((0, 249.5, 45), (0, 252.5, 66), 11.4, 13.2), 3.0)                         # neck, full width
+for s in (1, -1):
+    add(cone((s * 4, 256, 52), (s * 30, 251, 70), 6.0, 5.0), 5.0)                 # trapezius from the skull base
+# face as relief on the head's front: brow, eye sockets, eyeballs, cheekbones, mouth, chin
+FACE = FRONT * (GZ < 52)
+relief(0, 25.3, 9.5, 1.5, 0.7, FACE)                                              # brow ridge
+relief(5.4, 28.8, 2.6, 1.8, -1.3, FACE)                                           # eye sockets
+relief(5.4, 29.0, 1.4, 1.0, 0.7, FACE)                                            # eyeballs
+relief(9.0, 33.0, 2.6, 2.4, 0.6, FACE)                                            # cheekbones
+relief(4.0, 39.0, 1.2, 3.0, -0.4, FACE)                                           # smile lines
+relief(0, 42.4, 3.2, 0.5, -0.5, FACE)                                             # mouth line
+relief(0, 46.5, 4.0, 2.4, 0.5, FACE)                                              # chin
+relief(9.5, 46.0, 2.5, 3.0, 0.4, FACE)                                            # jaw corners
+relief(20.0, 112, 7.0, 18.0, 1.0, BACK)                                           # lats
+relief(8.0, 70, 7.0, 8.0, 1.0, BACK)                                              # upper trapezius
 # feet: heel, instep, ball and toes, on a flat sole
 for s in (1, -1):
     foot = ell((s * 16.2, 257.0, 349), (5.6, 6.2, 7.0))
