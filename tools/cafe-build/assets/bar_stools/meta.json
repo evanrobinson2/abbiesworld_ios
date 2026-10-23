@@ -1,0 +1,100 @@
+{
+ "id": "bar_stools",
+ "name": "Bar stool",
+ "group": "Bar",
+ "tier": "support",
+ "intent": "One stool (the layout places six along the bar).",
+ "real": "swivel bar stool: 380 mm vinyl seat on foam, plum powder-coated post with a gas lift, chrome foot ring, 450 mm steel base; seat 750 mm; about 11 kg",
+ "moving": "the seat swivels and rises on its gas lift",
+ "reference": "studies/cafe/img/r2/asset-stool-lowpoly_0.jpg (round 2, low poly)",
+ "size_m": [
+  0.45,
+  0.45,
+  0.755
+ ],
+ "triangles": 488,
+ "mass_kg": 17.735,
+ "centre_of_mass": [
+  0.0,
+  -0.0,
+  0.074
+ ],
+ "materials": [
+  "Cloth_SeatTeal",
+  "Metal_Chrome",
+  "Metal_Dark",
+  "Metal_OrangeEnamel",
+  "Metal_PlumEnamel"
+ ],
+ "joints": [
+  {
+   "part": "seat",
+   "kind": "knob",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 6.283,
+   "note": "swivels"
+  }
+ ],
+ "parts": [
+  {
+   "part": "base",
+   "material": "Metal_OrangeEnamel",
+   "mass_kg": 7.6807,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "base_plate",
+   "material": "Metal_Dark",
+   "mass_kg": 3.768,
+   "made": "solid"
+  },
+  {
+   "part": "seat_pan",
+   "material": "Metal_Dark",
+   "mass_kg": 2.4121,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "post",
+   "material": "Metal_PlumEnamel",
+   "mass_kg": 2.1948,
+   "made": "shell 2.0 mm"
+  },
+  {
+   "part": "foot_ring",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.8399,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "cushion",
+   "material": "Cloth_SeatTeal",
+   "mass_kg": 0.6182,
+   "made": "solid"
+  },
+  {
+   "part": "ring_spoke_0",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0737,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "ring_spoke_1",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0737,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "ring_spoke_2",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0737,
+   "made": "shell 1.2 mm"
+  }
+ ],
+ "built": "2026-10-23T08:51Z"
+}

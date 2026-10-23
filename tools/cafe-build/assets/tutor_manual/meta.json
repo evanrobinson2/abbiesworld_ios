@@ -1,0 +1,226 @@
+{
+ "id": "tutor_manual",
+ "name": "Typing tutor manual",
+ "group": "Back bar",
+ "tier": "support",
+ "intent": "Our own typing tutor's manual (style yes, expression never), yellow cover with a pink star, a wire spiral.",
+ "real": "A5 spiral-bound manual, 120 pages of 80 gsm paper in laminated card covers, 22 wire loops",
+ "moving": "the cover hinges open; pages turn (the game swaps page pictures)",
+ "reference": "docs/oracle/cafe/CAFE_STUDY.md section 9 (a readable manual beside the computer)",
+ "size_m": [
+  0.159,
+  0.21,
+  0.018
+ ],
+ "triangles": 1528,
+ "mass_kg": 0.336,
+ "centre_of_mass": [
+  0.0,
+  -0.0,
+  0.005
+ ],
+ "materials": [
+  "Metal_Chrome",
+  "Paper_Cover",
+  "Paper_Pages",
+  "Plaster_Pink",
+  "Plastic_BeigeKey"
+ ],
+ "joints": [
+  {
+   "part": "front_cover",
+   "kind": "hinge",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 3.1,
+   "note": "opens like a book"
+  }
+ ],
+ "parts": [
+  {
+   "part": "pages",
+   "material": "Paper_Pages",
+   "mass_kg": 0.2618,
+   "made": "solid"
+  },
+  {
+   "part": "back_cover",
+   "material": "Paper_Cover",
+   "mass_kg": 0.0302,
+   "made": "solid"
+  },
+  {
+   "part": "front_cover_card",
+   "material": "Paper_Cover",
+   "mass_kg": 0.0302,
+   "made": "solid"
+  },
+  {
+   "part": "cover_star",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0007,
+   "made": "solid"
+  },
+  {
+   "part": "spiral_0",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_1",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_10",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_11",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_12",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_13",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_14",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_15",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_16",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_17",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_18",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_19",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_2",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_20",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_21",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_3",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_4",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_5",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_6",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_7",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_8",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "spiral_9",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0006,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "cover_key_0",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0002,
+   "made": "solid"
+  },
+  {
+   "part": "cover_key_1",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0002,
+   "made": "solid"
+  },
+  {
+   "part": "cover_key_2",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0002,
+   "made": "solid"
+  },
+  {
+   "part": "cover_key_3",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0002,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:18Z"
+}

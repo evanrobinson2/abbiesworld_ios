@@ -1,0 +1,196 @@
+{
+ "id": "window_right",
+ "name": "Big window",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "The window over the bar, with a sill, two casements (they open) and a view of palms outside.",
+ "real": "timber casement window, 2.8 x 1.4 m, double glazed, with the palms and sky outside",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  5.01,
+  9.0,
+  5.012
+ ],
+ "triangles": 572,
+ "mass_kg": 132.428,
+ "centre_of_mass": [
+  -0.0,
+  0.0,
+  0.416
+ ],
+ "materials": [
+  "Glass_Window",
+  "Plank_Dark",
+  "Plaster_CyanPaint",
+  "Plaster_Lime",
+  "Timber_Trim"
+ ],
+ "joints": [
+  {
+   "part": "casement_l",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": -1.2,
+   "note": "opens out"
+  },
+  {
+   "part": "casement_r",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.2,
+   "note": "opens out"
+  }
+ ],
+ "parts": [
+  {
+   "part": "casement_l_glass",
+   "material": "Glass_Window",
+   "mass_kg": 32.76,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "casement_r_glass",
+   "material": "Glass_Window",
+   "mass_kg": 32.76,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "window_r_sill",
+   "material": "Timber_Trim",
+   "mass_kg": 19.0758,
+   "made": "solid"
+  },
+  {
+   "part": "window_r_frame_0",
+   "material": "Timber_Trim",
+   "mass_kg": 14.9028,
+   "made": "solid"
+  },
+  {
+   "part": "window_r_frame_1",
+   "material": "Timber_Trim",
+   "mass_kg": 14.9028,
+   "made": "solid"
+  },
+  {
+   "part": "window_r_frame_2",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4408,
+   "made": "solid"
+  },
+  {
+   "part": "window_r_frame_3",
+   "material": "Timber_Trim",
+   "mass_kg": 7.4408,
+   "made": "solid"
+  },
+  {
+   "part": "window_r_mullion_1",
+   "material": "Timber_Trim",
+   "mass_kg": 3.145,
+   "made": "solid"
+  },
+  {
+   "part": "palm_0_leaf_0",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_0_leaf_1",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_0_leaf_2",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_0_leaf_3",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_0_leaf_4",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_0_leaf_5",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_0_trunk",
+   "material": "Plank_Dark",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_1_leaf_0",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_1_leaf_1",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_1_leaf_2",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_1_leaf_3",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_1_leaf_4",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_1_leaf_5",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "palm_1_trunk",
+   "material": "Plank_Dark",
+   "mass_kg": 0.0,
+   "made": "given"
+  },
+  {
+   "part": "sky",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.0,
+   "made": "given"
+  }
+ ],
+ "built": "2026-10-23T08:38Z"
+}

@@ -1,0 +1,53 @@
+{
+ "id": "dance_floor_rim",
+ "name": "Dance floor rim",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "The honey timber edge that frames the dance floor.",
+ "real": "beech trim, 80 x 60 mm, rounded top edge",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  4.96,
+  4.36,
+  0.06
+ ],
+ "triangles": 176,
+ "mass_kg": 51.683,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  0.03
+ ],
+ "materials": [
+  "Timber_Trim"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "rim_back",
+   "material": "Timber_Trim",
+   "mass_kg": 13.9951,
+   "made": "solid"
+  },
+  {
+   "part": "rim_front",
+   "material": "Timber_Trim",
+   "mass_kg": 13.9951,
+   "made": "solid"
+  },
+  {
+   "part": "rim_left",
+   "material": "Timber_Trim",
+   "mass_kg": 11.8462,
+   "made": "solid"
+  },
+  {
+   "part": "rim_right",
+   "material": "Timber_Trim",
+   "mass_kg": 11.8462,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

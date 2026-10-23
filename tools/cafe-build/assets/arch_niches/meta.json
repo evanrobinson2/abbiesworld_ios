@@ -1,0 +1,54 @@
+{
+ "id": "arch_niches",
+ "name": "Portholes",
+ "group": "Room shell",
+ "tier": "support",
+ "intent": "",
+ "real": "two round glazed portholes in tangerine surrounds, back-lit",
+ "moving": "none",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  4.72,
+  0.14,
+  0.82
+ ],
+ "triangles": 376,
+ "mass_kg": 43.275,
+ "centre_of_mass": [
+  0.0,
+  -0.0,
+  -0.0
+ ],
+ "materials": [
+  "Glass_Porthole",
+  "Plaster_Tangerine"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "porthole_l_ring",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 14.2811,
+   "made": "solid"
+  },
+  {
+   "part": "porthole_r_ring",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 14.2811,
+   "made": "solid"
+  },
+  {
+   "part": "porthole_l_glass",
+   "material": "Glass_Porthole",
+   "mass_kg": 7.3565,
+   "made": "shell 5.0 mm"
+  },
+  {
+   "part": "porthole_r_glass",
+   "material": "Glass_Porthole",
+   "mass_kg": 7.3565,
+   "made": "shell 5.0 mm"
+  }
+ ],
+ "built": "2026-10-23T08:35Z"
+}

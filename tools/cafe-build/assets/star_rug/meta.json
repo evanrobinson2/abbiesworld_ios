@@ -1,0 +1,42 @@
+{
+ "id": "star_rug",
+ "name": "Star rug",
+ "group": "Room shell",
+ "tier": "dressing",
+ "intent": "",
+ "real": "tufted wool rug, 12 mm pile, magenta with a sun-yellow star inlay",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick, Midjourney 5ab4584f image 0)",
+ "size_m": [
+  2.5,
+  2.0,
+  0.016
+ ],
+ "triangles": 96,
+ "mass_kg": 19.422,
+ "centre_of_mass": [
+  0.0,
+  0.0,
+  0.006
+ ],
+ "materials": [
+  "Cloth_Rug",
+  "Cloth_RugSun"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "rug_body",
+   "material": "Cloth_Rug",
+   "mass_kg": 18.3688,
+   "made": "solid"
+  },
+  {
+   "part": "rug_star",
+   "material": "Cloth_RugSun",
+   "mass_kg": 1.0533,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:37Z"
+}

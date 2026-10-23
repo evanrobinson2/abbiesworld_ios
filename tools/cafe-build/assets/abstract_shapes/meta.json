@@ -1,0 +1,86 @@
+{
+ "id": "abstract_shapes",
+ "name": "Wall shapes",
+ "group": "Party",
+ "tier": "dressing",
+ "intent": "",
+ "real": "tangerine and sun MDF cut-outs on the back-left wall: rings, a squiggle, a triangle, dots",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  2.579,
+  0.182,
+  1.24
+ ],
+ "triangles": 448,
+ "mass_kg": 22.61,
+ "centre_of_mass": [
+  -0.119,
+  -0.0,
+  -0.028
+ ],
+ "materials": [
+  "Plaster_Lime",
+  "Plaster_Pink",
+  "Plaster_Sun",
+  "Plaster_Tangerine"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "ring_big",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 13.8868,
+   "made": "solid"
+  },
+  {
+   "part": "squiggle",
+   "material": "Plaster_Lime",
+   "mass_kg": 3.0833,
+   "made": "solid"
+  },
+  {
+   "part": "ring_small",
+   "material": "Plaster_Sun",
+   "mass_kg": 2.688,
+   "made": "solid"
+  },
+  {
+   "part": "triangle",
+   "material": "Plaster_Pink",
+   "mass_kg": 2.457,
+   "made": "solid"
+  },
+  {
+   "part": "dot_0",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.099,
+   "made": "solid"
+  },
+  {
+   "part": "dot_1",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.099,
+   "made": "solid"
+  },
+  {
+   "part": "dot_2",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.099,
+   "made": "solid"
+  },
+  {
+   "part": "dot_3",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.099,
+   "made": "solid"
+  },
+  {
+   "part": "dot_4",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.099,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:35Z"
+}

@@ -1,0 +1,189 @@
+{
+ "id": "basement_door",
+ "name": "Basement door",
+ "group": "Room shell",
+ "tier": "hero",
+ "intent": "The secret door behind the bar, in the back wall on the bar deck. It does not glow or call out: it looks like an old\ndoor the caf\u00e9 grew around. Locked (lock tag names the key); opening it goes to /studies/basement/play.html?from=cafe and\nsets localStorage aw-basement-unlocked = 1 (the basement thread reads both).",
+ "real": "old ledged-and-braced tongue-and-groove door in dark stained pine, black iron strap hinges, a brass mortice lock with an escutcheon, in a painted timber casing; it is older than the rest of the caf\u00e9",
+ "moving": "locked until the brass key from the cash register is used; then it hinges open onto the basement stairs",
+ "reference": "Evan 2026-10-23 08:52Z: the computer \"goes in the basement\", \"basement is a secret unlock\", \"there's a key in the cash register\"",
+ "size_m": [
+  0.99,
+  0.194,
+  2.12
+ ],
+ "triangles": 616,
+ "mass_kg": 52.084,
+ "centre_of_mass": [
+  -0.0,
+  0.0,
+  0.833
+ ],
+ "materials": [
+  "Metal_Brass",
+  "Metal_Dark",
+  "Timber_DoorDark",
+  "Timber_Trim"
+ ],
+ "joints": [
+  {
+   "part": "basement_door_leaf",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 1.7,
+   "note": "locked until the brass key is used"
+  },
+  {
+   "part": "basement_knob",
+   "kind": "knob",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": 0,
+   "max": 1.0,
+   "note": ""
+  }
+ ],
+ "parts": [
+  {
+   "part": "board_0",
+   "material": "Timber_DoorDark",
+   "mass_kg": 5.3844,
+   "made": "solid"
+  },
+  {
+   "part": "board_1",
+   "material": "Timber_DoorDark",
+   "mass_kg": 5.3844,
+   "made": "solid"
+  },
+  {
+   "part": "board_2",
+   "material": "Timber_DoorDark",
+   "mass_kg": 5.3844,
+   "made": "solid"
+  },
+  {
+   "part": "board_3",
+   "material": "Timber_DoorDark",
+   "mass_kg": 5.3844,
+   "made": "solid"
+  },
+  {
+   "part": "board_4",
+   "material": "Timber_DoorDark",
+   "mass_kg": 5.3844,
+   "made": "solid"
+  },
+  {
+   "part": "board_5",
+   "material": "Timber_DoorDark",
+   "mass_kg": 5.3844,
+   "made": "solid"
+  },
+  {
+   "part": "casing_l",
+   "material": "Timber_Trim",
+   "mass_kg": 4.7189,
+   "made": "solid"
+  },
+  {
+   "part": "casing_r",
+   "material": "Timber_Trim",
+   "mass_kg": 4.7189,
+   "made": "solid"
+  },
+  {
+   "part": "casing_head",
+   "material": "Timber_Trim",
+   "mass_kg": 2.2011,
+   "made": "solid"
+  },
+  {
+   "part": "ledge_102",
+   "material": "Timber_DoorDark",
+   "mass_kg": 1.5405,
+   "made": "solid"
+  },
+  {
+   "part": "ledge_174",
+   "material": "Timber_DoorDark",
+   "mass_kg": 1.5405,
+   "made": "solid"
+  },
+  {
+   "part": "ledge_25",
+   "material": "Timber_DoorDark",
+   "mass_kg": 1.5405,
+   "made": "solid"
+  },
+  {
+   "part": "strap_102",
+   "material": "Metal_Dark",
+   "mass_kg": 0.7707,
+   "made": "solid"
+  },
+  {
+   "part": "strap_174",
+   "material": "Metal_Dark",
+   "mass_kg": 0.7707,
+   "made": "solid"
+  },
+  {
+   "part": "strap_25",
+   "material": "Metal_Dark",
+   "mass_kg": 0.7707,
+   "made": "solid"
+  },
+  {
+   "part": "basement_knob",
+   "material": "Metal_Brass",
+   "mass_kg": 0.4732,
+   "made": "solid"
+  },
+  {
+   "part": "escutcheon",
+   "material": "Metal_Brass",
+   "mass_kg": 0.2851,
+   "made": "solid"
+  },
+  {
+   "part": "pintle_102",
+   "material": "Metal_Dark",
+   "mass_kg": 0.1468,
+   "made": "solid"
+  },
+  {
+   "part": "pintle_174",
+   "material": "Metal_Dark",
+   "mass_kg": 0.1468,
+   "made": "solid"
+  },
+  {
+   "part": "pintle_25",
+   "material": "Metal_Dark",
+   "mass_kg": 0.1468,
+   "made": "solid"
+  },
+  {
+   "part": "keyhole",
+   "material": "Metal_Dark",
+   "mass_kg": 0.0063,
+   "made": "solid"
+  },
+  {
+   "part": "stair_dark",
+   "material": "Metal_Dark",
+   "mass_kg": 0.0,
+   "made": "given"
+  }
+ ],
+ "built": "2026-10-23T08:59Z"
+}

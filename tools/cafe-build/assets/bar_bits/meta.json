@@ -1,0 +1,440 @@
+{
+ "id": "bar_bits",
+ "name": "Bar bits",
+ "group": "Bar",
+ "tier": "dressing",
+ "intent": "Built as one group laid out along a 1.6 m stretch of bar top (Y along). The service bell is how a customer\ncalls the staff: a sound in the world, not a UI tick.",
+ "real": "the small things on a milkshake bar: a service bell, napkin dispenser, straw jar, three syrup bottles, a cherry jar, shake tins and a tip jar",
+ "moving": "the bell rings (its button presses); everything lifts",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  0.13,
+  1.65,
+  0.33
+ ],
+ "triangles": 1368,
+ "mass_kg": 9.775,
+ "centre_of_mass": [
+  0.0,
+  -0.0,
+  0.078
+ ],
+ "materials": [
+  "Food_Cherry",
+  "Food_Fruit",
+  "Food_Smoothie",
+  "Glass_Clear",
+  "Metal_Brass",
+  "Metal_Chrome",
+  "Metal_Steel",
+  "Paper_Pages",
+  "Plank_Dark",
+  "Plaster_Sun",
+  "Plastic_Black",
+  "Plastic_Cyan",
+  "Plastic_Lime",
+  "Plastic_Pink",
+  "Plastic_Yellow"
+ ],
+ "joints": [
+  {
+   "part": "cherry_jar",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "napkin_dispenser",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "service_bell",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "bell_button",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.005,
+   "note": "ding"
+  },
+  {
+   "part": "shake_tin_0",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "shake_tin_1",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "straw_jar",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "syrup_bottle_0",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "syrup_bottle_1",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "syrup_bottle_2",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "tip_jar",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  }
+ ],
+ "parts": [
+  {
+   "part": "bell_dome",
+   "material": "Metal_Brass",
+   "mass_kg": 1.3954,
+   "made": "solid"
+  },
+  {
+   "part": "shake_tin_0_body",
+   "material": "Metal_Steel",
+   "mass_kg": 1.099,
+   "made": "solid"
+  },
+  {
+   "part": "shake_tin_1_body",
+   "material": "Metal_Steel",
+   "mass_kg": 1.099,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_jar_glass",
+   "material": "Glass_Clear",
+   "mass_kg": 0.7178,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "syrup_bottle_0_syrup",
+   "material": "Food_Smoothie",
+   "mass_kg": 0.6288,
+   "made": "solid"
+  },
+  {
+   "part": "syrup_bottle_1_syrup",
+   "material": "Food_Fruit",
+   "mass_kg": 0.6288,
+   "made": "solid"
+  },
+  {
+   "part": "syrup_bottle_2_syrup",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.6288,
+   "made": "solid"
+  },
+  {
+   "part": "napkin_box",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.6012,
+   "made": "shell 0.8 mm"
+  },
+  {
+   "part": "syrup_bottle_0_glass",
+   "material": "Glass_Clear",
+   "mass_kg": 0.5597,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "syrup_bottle_1_glass",
+   "material": "Glass_Clear",
+   "mass_kg": 0.5597,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "syrup_bottle_2_glass",
+   "material": "Glass_Clear",
+   "mass_kg": 0.5597,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "straw_jar_glass",
+   "material": "Glass_Clear",
+   "mass_kg": 0.5374,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "tip_jar_glass",
+   "material": "Glass_Clear",
+   "mass_kg": 0.4746,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "bell_base",
+   "material": "Plank_Dark",
+   "mass_kg": 0.0617,
+   "made": "solid"
+  },
+  {
+   "part": "napkins",
+   "material": "Paper_Pages",
+   "mass_kg": 0.018,
+   "made": "solid"
+  },
+  {
+   "part": "syrup_bottle_0_pump",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0124,
+   "made": "solid"
+  },
+  {
+   "part": "syrup_bottle_1_pump",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0124,
+   "made": "solid"
+  },
+  {
+   "part": "syrup_bottle_2_pump",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0124,
+   "made": "solid"
+  },
+  {
+   "part": "straw_0",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0077,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "straw_1",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "straw_2",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "straw_3",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0077,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "straw_4",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "straw_5",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "straw_6",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0077,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "straw_7",
+   "material": "Plastic_Cyan",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "straw_8",
+   "material": "Plastic_Yellow",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_0",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0073,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_1",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0073,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_2",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0073,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_3",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0073,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_4",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0073,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_5",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0073,
+   "made": "solid"
+  },
+  {
+   "part": "cherry_6",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0073,
+   "made": "solid"
+  },
+  {
+   "part": "coin_0",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0069,
+   "made": "solid"
+  },
+  {
+   "part": "coin_1",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0069,
+   "made": "solid"
+  },
+  {
+   "part": "coin_2",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0069,
+   "made": "solid"
+  },
+  {
+   "part": "coin_3",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0069,
+   "made": "solid"
+  },
+  {
+   "part": "coin_4",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0069,
+   "made": "solid"
+  },
+  {
+   "part": "bell_button",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0059,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "tip_jar_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0025,
+   "made": "solid"
+  },
+  {
+   "part": "syrup_bottle_0_nozzle",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0013,
+   "made": "solid"
+  },
+  {
+   "part": "syrup_bottle_1_nozzle",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0013,
+   "made": "solid"
+  },
+  {
+   "part": "syrup_bottle_2_nozzle",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0013,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:29Z"
+}

@@ -1,0 +1,343 @@
+{
+ "id": "back_counter",
+ "name": "Back counter",
+ "group": "Back bar",
+ "tier": "hero",
+ "intent": "The staff counter along the right wall that holds every machine. Long axis along Y; the staff side (doors) faces -X.",
+ "real": "back-bar cabinet run: 18 mm lacquered plywood carcass on a kick plinth, 20 mm solid-surface top, stainless sink, 4.8 m x 0.65 m x 0.90 m",
+ "moving": "six pink doors hinge open; the sink tap lever turns",
+ "reference": "docs/oracle/cafe/room-manifest.json back_bar.back_counter",
+ "size_m": [
+  0.675,
+  3.62,
+  1.211
+ ],
+ "triangles": 900,
+ "mass_kg": 235.047,
+ "centre_of_mass": [
+  0.0,
+  0.002,
+  0.172
+ ],
+ "materials": [
+  "Metal_Brass",
+  "Metal_Chrome",
+  "Metal_Dark",
+  "Metal_Steel",
+  "Plank_Counter",
+  "Plank_PinkPanel",
+  "Plank_TealFront",
+  "Stone_MintTop"
+ ],
+ "joints": [
+  {
+   "part": "door_0",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.75,
+   "note": "cupboard"
+  },
+  {
+   "part": "door_1",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.75,
+   "note": "cupboard"
+  },
+  {
+   "part": "door_2",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.75,
+   "note": "cupboard"
+  },
+  {
+   "part": "door_3",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.75,
+   "note": "cupboard"
+  },
+  {
+   "part": "door_4",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.75,
+   "note": "cupboard"
+  },
+  {
+   "part": "door_5",
+   "kind": "hinge",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 1.75,
+   "note": "cupboard"
+  },
+  {
+   "part": "tap_lever",
+   "kind": "hinge",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": -0.8,
+   "max": 0.8,
+   "note": "hot and cold"
+  }
+ ],
+ "parts": [
+  {
+   "part": "worktop",
+   "material": "Stone_MintTop",
+   "mass_kg": 93.5045,
+   "made": "solid"
+  },
+  {
+   "part": "carcass",
+   "material": "Plank_Counter",
+   "mass_kg": 68.307,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "kick_plinth",
+   "material": "Metal_Dark",
+   "mass_kg": 28.048,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "upstand",
+   "material": "Stone_MintTop",
+   "mass_kg": 14.48,
+   "made": "solid"
+  },
+  {
+   "part": "door_0_panel",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 4.5474,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "door_1_panel",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 4.5474,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "door_2_panel",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 4.5474,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "door_3_panel",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 4.5474,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "door_4_panel",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 4.5474,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "door_5_panel",
+   "material": "Plank_PinkPanel",
+   "mass_kg": 4.5474,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "sink_bowl",
+   "material": "Metal_Steel",
+   "mass_kg": 2.2468,
+   "made": "shell 0.9 mm"
+  },
+  {
+   "part": "tap_neck",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.3283,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "door_0_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0954,
+   "made": "solid"
+  },
+  {
+   "part": "door_1_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0954,
+   "made": "solid"
+  },
+  {
+   "part": "door_2_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0954,
+   "made": "solid"
+  },
+  {
+   "part": "door_3_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0954,
+   "made": "solid"
+  },
+  {
+   "part": "door_4_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0954,
+   "made": "solid"
+  },
+  {
+   "part": "door_5_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0954,
+   "made": "solid"
+  },
+  {
+   "part": "tap_lever_arm",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0364,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "door_0_groove",
+   "material": "Plank_TealFront",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "door_1_groove",
+   "material": "Plank_TealFront",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "door_2_groove",
+   "material": "Plank_TealFront",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "door_3_groove",
+   "material": "Plank_TealFront",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "door_4_groove",
+   "material": "Plank_TealFront",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "door_5_groove",
+   "material": "Plank_TealFront",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "door_0_pull_a",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_0_pull_b",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_1_pull_a",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_1_pull_b",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_2_pull_a",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_2_pull_b",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_3_pull_a",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_3_pull_b",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_4_pull_a",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_4_pull_b",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_5_pull_a",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  },
+  {
+   "part": "door_5_pull_b",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0116,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:59Z"
+}

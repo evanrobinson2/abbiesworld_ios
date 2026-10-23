@@ -1,0 +1,354 @@
+{
+ "id": "pastry_case",
+ "name": "Pastry case",
+ "group": "Back bar",
+ "tier": "support",
+ "intent": "A pink-based glass case with croissants, iced donuts, muffins and cookies on two shelves.",
+ "real": "countertop glass display case, two glass shelves, rear sliding doors, about 700 x 420 x 380 mm",
+ "moving": "two rear doors slide; every pastry lifts out",
+ "reference": "docs/oracle/cafe/room-manifest.json back_bar.pastry_case",
+ "size_m": [
+  0.7,
+  0.45,
+  0.38
+ ],
+ "triangles": 1140,
+ "mass_kg": 21.62,
+ "centre_of_mass": [
+  -0.0,
+  -0.0,
+  0.073
+ ],
+ "materials": [
+  "Food_Cherry",
+  "Food_Icing",
+  "Food_Pastry",
+  "Food_Sprinkles",
+  "Glass_Clear",
+  "Plastic_Lime",
+  "Plastic_Pink"
+ ],
+ "joints": [
+  {
+   "part": "pastry_0",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "pastry_1",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "pastry_2",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "pastry_3",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "pastry_4",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "pastry_5",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "pastry_6",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "pastry_7",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "rear_door_l",
+   "kind": "slide",
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "min": 0,
+   "max": 0.3,
+   "note": "staff side"
+  },
+  {
+   "part": "rear_door_r",
+   "kind": "slide",
+   "axis": [
+    -1,
+    0,
+    0
+   ],
+   "min": 0,
+   "max": 0.3,
+   "note": "staff side"
+  }
+ ],
+ "parts": [
+  {
+   "part": "shelf_0",
+   "material": "Glass_Clear",
+   "mass_kg": 3.564,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "shelf_1",
+   "material": "Glass_Clear",
+   "mass_kg": 3.564,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "glass_front",
+   "material": "Glass_Clear",
+   "mass_kg": 3.162,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "base",
+   "material": "Plastic_Pink",
+   "mass_kg": 2.1177,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "top_frame",
+   "material": "Plastic_Pink",
+   "mass_kg": 1.9425,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "glass_side_l",
+   "material": "Glass_Clear",
+   "mass_kg": 1.767,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "glass_side_r",
+   "material": "Glass_Clear",
+   "mass_kg": 1.767,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "rear_door_l",
+   "material": "Glass_Clear",
+   "mass_kg": 1.485,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "rear_door_r",
+   "material": "Glass_Clear",
+   "mass_kg": 1.485,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "muffin_case_3",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.1223,
+   "made": "solid"
+  },
+  {
+   "part": "muffin_case_5",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.1223,
+   "made": "solid"
+  },
+  {
+   "part": "icing_2",
+   "material": "Food_Icing",
+   "mass_kg": 0.1126,
+   "made": "solid"
+  },
+  {
+   "part": "icing_8",
+   "material": "Food_Icing",
+   "mass_kg": 0.1126,
+   "made": "solid"
+  },
+  {
+   "part": "donut_2",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0475,
+   "made": "solid"
+  },
+  {
+   "part": "donut_8",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0475,
+   "made": "solid"
+  },
+  {
+   "part": "muffin_top_3",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0376,
+   "made": "solid"
+  },
+  {
+   "part": "muffin_top_5",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0376,
+   "made": "solid"
+  },
+  {
+   "part": "croissant_1_1",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0122,
+   "made": "solid"
+  },
+  {
+   "part": "croissant_7_1",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0122,
+   "made": "solid"
+  },
+  {
+   "part": "cookie_4_0",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0098,
+   "made": "solid"
+  },
+  {
+   "part": "cookie_4_1",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0098,
+   "made": "solid"
+  },
+  {
+   "part": "cookie_4_2",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0098,
+   "made": "solid"
+  },
+  {
+   "part": "cookie_6_0",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0098,
+   "made": "solid"
+  },
+  {
+   "part": "cookie_6_1",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0098,
+   "made": "solid"
+  },
+  {
+   "part": "cookie_6_2",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0098,
+   "made": "solid"
+  },
+  {
+   "part": "croissant_1_0",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0074,
+   "made": "solid"
+  },
+  {
+   "part": "croissant_1_2",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0074,
+   "made": "solid"
+  },
+  {
+   "part": "croissant_7_0",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0074,
+   "made": "solid"
+  },
+  {
+   "part": "croissant_7_2",
+   "material": "Food_Pastry",
+   "mass_kg": 0.0074,
+   "made": "solid"
+  },
+  {
+   "part": "cookie_icing_4",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0052,
+   "made": "solid"
+  },
+  {
+   "part": "cookie_icing_6",
+   "material": "Food_Sprinkles",
+   "mass_kg": 0.0052,
+   "made": "solid"
+  },
+  {
+   "part": "muffin_berry_3",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0014,
+   "made": "solid"
+  },
+  {
+   "part": "muffin_berry_5",
+   "material": "Food_Cherry",
+   "mass_kg": 0.0014,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:16Z"
+}

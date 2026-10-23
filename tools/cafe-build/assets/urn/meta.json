@@ -1,0 +1,136 @@
+{
+ "id": "urn",
+ "name": "Hot water urn",
+ "group": "Back bar",
+ "tier": "support",
+ "intent": "Chrome urn on three pink feet, a sight glass, a lever tap, side handles and a lid knob.",
+ "real": "10 L stainless hot water urn with sight gauge and lever tap, about 300 x 340 x 520 mm",
+ "moving": "lid lifts; tap lever pulls down",
+ "reference": "studies/cafe/img/r2/backbar-machines_0.jpg (back bar proof)",
+ "size_m": [
+  0.39,
+  0.373,
+  0.55
+ ],
+ "triangles": 456,
+ "mass_kg": 21.667,
+ "centre_of_mass": [
+  0.001,
+  -0.002,
+  0.187
+ ],
+ "materials": [
+  "Glass_Clear",
+  "Metal_Chrome",
+  "Plastic_Black",
+  "Plastic_Pink",
+  "Water"
+ ],
+ "joints": [
+  {
+   "part": "lid",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": ""
+  },
+  {
+   "part": "tap_lever",
+   "kind": "hinge",
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "min": 0,
+   "max": 0.6,
+   "note": "pull down to pour"
+  }
+ ],
+ "parts": [
+  {
+   "part": "water",
+   "material": "Water",
+   "mass_kg": 15.4534,
+   "made": "solid"
+  },
+  {
+   "part": "body",
+   "material": "Metal_Chrome",
+   "mass_kg": 4.6958,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "lid_dome",
+   "material": "Metal_Chrome",
+   "mass_kg": 1.1387,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "sight_glass",
+   "material": "Glass_Clear",
+   "mass_kg": 0.1684,
+   "made": "shell 4.0 mm"
+  },
+  {
+   "part": "tap_body",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0738,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "foot_0",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0241,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "foot_1",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0241,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "foot_2",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0241,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "lid_knob",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0209,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "sight_water",
+   "material": "Water",
+   "mass_kg": 0.0187,
+   "made": "solid"
+  },
+  {
+   "part": "handle_l",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0084,
+   "made": "solid"
+  },
+  {
+   "part": "handle_r",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0084,
+   "made": "solid"
+  },
+  {
+   "part": "lever_arm",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0081,
+   "made": "shell 3.0 mm"
+  }
+ ],
+ "built": "2026-10-23T08:16Z"
+}

@@ -1,0 +1,35 @@
+{
+ "id": "beanbag_orange",
+ "name": "Orange beanbag",
+ "group": "Party",
+ "tier": "support",
+ "intent": "",
+ "real": "0.8 m canvas beanbag",
+ "moving": "",
+ "reference": "studies/cafe/img/r2/asset-beanbag-lowpoly_0.jpg (round 2, low poly, Evan picked low poly)",
+ "size_m": [
+  0.825,
+  0.798,
+  0.392
+ ],
+ "triangles": 80,
+ "mass_kg": 3.05,
+ "centre_of_mass": [
+  0.002,
+  -0.025,
+  0.048
+ ],
+ "materials": [
+  "Cloth_Tangerine"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "bag",
+   "material": "Cloth_Tangerine",
+   "mass_kg": 3.05,
+   "made": "given"
+  }
+ ],
+ "built": "2026-10-23T08:36Z"
+}

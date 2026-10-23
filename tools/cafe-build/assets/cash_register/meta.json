@@ -1,0 +1,668 @@
+{
+ "id": "cash_register",
+ "name": "Cash register",
+ "group": "Back bar",
+ "tier": "hero",
+ "intent": "The till at the end of the back counter. Its drawer hides the brass basement key: Abbie finds it, her inner voice says\n\"Interesting... this key will come in handy.\", it goes in her inventory, and it opens basement_door (a secret unlock).",
+ "real": "1950s-style mechanical cash register: pressed-steel case in pink enamel over a cast base, brass trim, three rows of plunger keys, pop-up price flags behind glass, side crank, spring cash drawer with a wooden coin tray",
+ "moving": "keys press, the crank turns, the drawer springs open; the brass key in the coin tray can be picked up",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick); Evan 2026-10-23 08:52Z \"there's a key in the cash register\"",
+ "size_m": [
+  0.413,
+  0.446,
+  0.418
+ ],
+ "triangles": 1524,
+ "mass_kg": 9.637,
+ "centre_of_mass": [
+  0.004,
+  0.034,
+  0.069
+ ],
+ "materials": [
+  "Glass_Window",
+  "Metal_Brass",
+  "Metal_Chrome",
+  "Metal_Dark",
+  "Metal_PinkEnamel",
+  "Metal_PlumEnamel",
+  "Plank_Honey",
+  "Plaster_Sun",
+  "Plastic_BeigeKey",
+  "Plastic_Black",
+  "Plastic_Lime",
+  "Plastic_Orange",
+  "Plastic_Pink",
+  "Plastic_Teal",
+  "Rubber_Black"
+ ],
+ "joints": [
+  {
+   "part": "crank",
+   "kind": "knob",
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "min": 0,
+   "max": 6.283,
+   "note": "turn to ring up"
+  },
+  {
+   "part": "drawer",
+   "kind": "slide",
+   "axis": [
+    0,
+    -1,
+    0
+   ],
+   "min": 0,
+   "max": 0.3,
+   "note": "springs open when NO SALE is pressed"
+  },
+  {
+   "part": "key_0_0",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_0_1",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_0_2",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_0_3",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_0_4",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_1_0",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_1_1",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_1_2",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_1_3",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_1_4",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_2_0",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_2_1",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_2_2",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_2_3",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "key_2_4",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.012,
+   "note": ""
+  },
+  {
+   "part": "no_sale_bar",
+   "kind": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "min": 0,
+   "max": 0.01,
+   "note": "opens the drawer"
+  },
+  {
+   "part": "price_flag_0",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.03,
+   "note": "pops up when its key is pressed"
+  },
+  {
+   "part": "price_flag_1",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.03,
+   "note": "pops up when its key is pressed"
+  },
+  {
+   "part": "price_flag_2",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.03,
+   "note": "pops up when its key is pressed"
+  },
+  {
+   "part": "price_flag_3",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0,
+   "max": 0.03,
+   "note": "pops up when its key is pressed"
+  }
+ ],
+ "parts": [
+  {
+   "part": "base",
+   "material": "Metal_PlumEnamel",
+   "mass_kg": 2.6006,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "body",
+   "material": "Metal_PinkEnamel",
+   "mass_kg": 2.0885,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "drawer_box",
+   "material": "Metal_Dark",
+   "mass_kg": 1.4342,
+   "made": "shell 1.0 mm"
+  },
+  {
+   "part": "flag_tower",
+   "material": "Metal_PinkEnamel",
+   "mass_kg": 0.9188,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "drawer_front",
+   "material": "Metal_PinkEnamel",
+   "mass_kg": 0.5589,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "crest",
+   "material": "Metal_Brass",
+   "mass_kg": 0.3647,
+   "made": "solid"
+  },
+  {
+   "part": "crank_hub",
+   "material": "Metal_Brass",
+   "mass_kg": 0.3123,
+   "made": "solid"
+  },
+  {
+   "part": "coin_tray",
+   "material": "Plank_Honey",
+   "mass_kg": 0.2596,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "flag_window",
+   "material": "Glass_Window",
+   "mass_kg": 0.234,
+   "made": "shell 6.0 mm"
+  },
+  {
+   "part": "crank_arm",
+   "material": "Metal_Brass",
+   "mass_kg": 0.1224,
+   "made": "solid"
+  },
+  {
+   "part": "no_sale_cap",
+   "material": "Plastic_Orange",
+   "mass_kg": 0.1211,
+   "made": "solid"
+  },
+  {
+   "part": "drawer_pull",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0931,
+   "made": "solid"
+  },
+  {
+   "part": "key_bow",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0332,
+   "made": "solid"
+  },
+  {
+   "part": "key_shaft",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0189,
+   "made": "solid"
+  },
+  {
+   "part": "coin_divider_0",
+   "material": "Plank_Honey",
+   "mass_kg": 0.0176,
+   "made": "solid"
+  },
+  {
+   "part": "coin_divider_1",
+   "material": "Plank_Honey",
+   "mass_kg": 0.0176,
+   "made": "solid"
+  },
+  {
+   "part": "coin_divider_2",
+   "material": "Plank_Honey",
+   "mass_kg": 0.0176,
+   "made": "solid"
+  },
+  {
+   "part": "coin_divider_3",
+   "material": "Plank_Honey",
+   "mass_kg": 0.0176,
+   "made": "solid"
+  },
+  {
+   "part": "key_0_0_cap",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_0_1_cap",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_0_2_cap",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_0_3_cap",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_0_4_cap",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_1_0_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_1_1_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_1_2_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_1_3_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_1_4_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_2_0_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_2_1_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_2_2_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_2_3_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "key_2_4_cap",
+   "material": "Plastic_BeigeKey",
+   "mass_kg": 0.0166,
+   "made": "solid"
+  },
+  {
+   "part": "crank_handle",
+   "material": "Plastic_Black",
+   "mass_kg": 0.0125,
+   "made": "solid"
+  },
+  {
+   "part": "price_flag_0",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0084,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "price_flag_1",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0084,
+   "made": "solid"
+  },
+  {
+   "part": "price_flag_2",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0084,
+   "made": "solid"
+  },
+  {
+   "part": "price_flag_3",
+   "material": "Plastic_Orange",
+   "mass_kg": 0.0084,
+   "made": "solid"
+  },
+  {
+   "part": "foot_-1_-1",
+   "material": "Rubber_Black",
+   "mass_kg": 0.007,
+   "made": "solid"
+  },
+  {
+   "part": "foot_-1_1",
+   "material": "Rubber_Black",
+   "mass_kg": 0.007,
+   "made": "solid"
+  },
+  {
+   "part": "foot_1_-1",
+   "material": "Rubber_Black",
+   "mass_kg": 0.007,
+   "made": "solid"
+  },
+  {
+   "part": "foot_1_1",
+   "material": "Rubber_Black",
+   "mass_kg": 0.007,
+   "made": "solid"
+  },
+  {
+   "part": "key_bit",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0057,
+   "made": "solid"
+  },
+  {
+   "part": "key_0_0_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_0_1_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_0_2_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_0_3_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_0_4_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_1_0_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_1_1_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_1_2_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_1_3_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_1_4_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_2_0_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_2_1_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_2_2_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_2_3_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "key_2_4_stem",
+   "material": "Metal_Chrome",
+   "mass_kg": 0.0049,
+   "made": "shell 1.2 mm"
+  },
+  {
+   "part": "crest_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0018,
+   "made": "solid"
+  },
+  {
+   "part": "key_bit_2",
+   "material": "Metal_Brass",
+   "mass_kg": 0.0016,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T09:00Z"
+}

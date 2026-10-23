@@ -1,0 +1,131 @@
+{
+ "id": "star_decals",
+ "name": "Painted stars",
+ "group": "Party",
+ "tier": "dressing",
+ "intent": "",
+ "real": "sun-yellow painted stars on the walls",
+ "moving": "",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  11.434,
+  9.281,
+  2.268
+ ],
+ "triangles": 612,
+ "mass_kg": 0.912,
+ "centre_of_mass": [
+  0.0,
+  -0.0,
+  -0.002
+ ],
+ "materials": [
+  "Plaster_Sun"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "decal_6_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0821,
+   "made": "solid"
+  },
+  {
+   "part": "decal_5_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0807,
+   "made": "solid"
+  },
+  {
+   "part": "decal_13_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0683,
+   "made": "solid"
+  },
+  {
+   "part": "decal_0_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0659,
+   "made": "solid"
+  },
+  {
+   "part": "decal_14_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0596,
+   "made": "solid"
+  },
+  {
+   "part": "decal_12_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.056,
+   "made": "solid"
+  },
+  {
+   "part": "decal_11_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0547,
+   "made": "solid"
+  },
+  {
+   "part": "decal_16_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0542,
+   "made": "solid"
+  },
+  {
+   "part": "decal_9_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0519,
+   "made": "solid"
+  },
+  {
+   "part": "decal_1_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0516,
+   "made": "solid"
+  },
+  {
+   "part": "decal_7_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0478,
+   "made": "solid"
+  },
+  {
+   "part": "decal_15_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0477,
+   "made": "solid"
+  },
+  {
+   "part": "decal_8_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0424,
+   "made": "solid"
+  },
+  {
+   "part": "decal_4_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0395,
+   "made": "solid"
+  },
+  {
+   "part": "decal_3_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0379,
+   "made": "solid"
+  },
+  {
+   "part": "decal_10_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0363,
+   "made": "solid"
+  },
+  {
+   "part": "decal_2_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0352,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:37Z"
+}

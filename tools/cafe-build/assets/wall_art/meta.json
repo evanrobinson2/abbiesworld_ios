@@ -1,0 +1,199 @@
+{
+ "id": "wall_art",
+ "name": "Wall art",
+ "group": "Party",
+ "tier": "dressing",
+ "intent": "Abstract paintings on the left wall. The art auction game swaps and sells these.",
+ "real": "three painted canvases in oak frames, 600 to 900 mm",
+ "moving": "each lifts off its hook (the art auction game sells them)",
+ "reference": "studies/cafe/img/interior-party_0.jpg (Evan's locked pick)",
+ "size_m": [
+  0.05,
+  3.15,
+  0.9
+ ],
+ "triangles": 348,
+ "mass_kg": 26.358,
+ "centre_of_mass": [
+  -0.0,
+  0.0,
+  0.269
+ ],
+ "materials": [
+  "Paper_Canvas",
+  "Plaster_CyanPaint",
+  "Plaster_Lime",
+  "Plaster_Pink",
+  "Plaster_Sun",
+  "Plaster_Tangerine",
+  "Plaster_Violet",
+  "Timber_Trim"
+ ],
+ "joints": [
+  {
+   "part": "painting_0",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": "auction lot"
+  },
+  {
+   "part": "painting_1",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": "auction lot"
+  },
+  {
+   "part": "painting_2",
+   "kind": "lift",
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "min": 0.0,
+   "max": 0.0,
+   "note": "auction lot"
+  }
+ ],
+ "parts": [
+  {
+   "part": "painting_0_canvas",
+   "material": "Paper_Canvas",
+   "mass_kg": 5.376,
+   "made": "shell 20.0 mm"
+  },
+  {
+   "part": "painting_1_canvas",
+   "material": "Paper_Canvas",
+   "mass_kg": 5.376,
+   "made": "shell 20.0 mm"
+  },
+  {
+   "part": "painting_2_canvas",
+   "material": "Paper_Canvas",
+   "mass_kg": 2.916,
+   "made": "shell 20.0 mm"
+  },
+  {
+   "part": "painting_0_frame_2",
+   "material": "Timber_Trim",
+   "mass_kg": 1.17,
+   "made": "solid"
+  },
+  {
+   "part": "painting_0_frame_3",
+   "material": "Timber_Trim",
+   "mass_kg": 1.17,
+   "made": "solid"
+  },
+  {
+   "part": "painting_1_frame_0",
+   "material": "Timber_Trim",
+   "mass_kg": 1.17,
+   "made": "solid"
+  },
+  {
+   "part": "painting_1_frame_1",
+   "material": "Timber_Trim",
+   "mass_kg": 1.17,
+   "made": "solid"
+  },
+  {
+   "part": "painting_0_frame_0",
+   "material": "Timber_Trim",
+   "mass_kg": 0.91,
+   "made": "solid"
+  },
+  {
+   "part": "painting_0_frame_1",
+   "material": "Timber_Trim",
+   "mass_kg": 0.91,
+   "made": "solid"
+  },
+  {
+   "part": "painting_1_frame_2",
+   "material": "Timber_Trim",
+   "mass_kg": 0.91,
+   "made": "solid"
+  },
+  {
+   "part": "painting_1_frame_3",
+   "material": "Timber_Trim",
+   "mass_kg": 0.91,
+   "made": "solid"
+  },
+  {
+   "part": "painting_2_frame_0",
+   "material": "Timber_Trim",
+   "mass_kg": 0.78,
+   "made": "solid"
+  },
+  {
+   "part": "painting_2_frame_1",
+   "material": "Timber_Trim",
+   "mass_kg": 0.78,
+   "made": "solid"
+  },
+  {
+   "part": "painting_2_frame_2",
+   "material": "Timber_Trim",
+   "mass_kg": 0.78,
+   "made": "solid"
+  },
+  {
+   "part": "painting_2_frame_3",
+   "material": "Timber_Trim",
+   "mass_kg": 0.78,
+   "made": "solid"
+  },
+  {
+   "part": "painting_1_band",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.2822,
+   "made": "solid"
+  },
+  {
+   "part": "painting_0_band",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.2722,
+   "made": "solid"
+  },
+  {
+   "part": "painting_0_sun",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.1992,
+   "made": "solid"
+  },
+  {
+   "part": "painting_1_sun",
+   "material": "Plaster_CyanPaint",
+   "mass_kg": 0.1992,
+   "made": "solid"
+  },
+  {
+   "part": "painting_2_band",
+   "material": "Plaster_Violet",
+   "mass_kg": 0.1512,
+   "made": "solid"
+  },
+  {
+   "part": "painting_2_sun",
+   "material": "Plaster_Lime",
+   "mass_kg": 0.1464,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T08:38Z"
+}
