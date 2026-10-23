@@ -1,0 +1,44 @@
+[
+ {
+  "id": "r01-crop-bed",
+  "title": "Crop bed",
+  "before": "captures/ranch/r01-crop-bed.jpg",
+  "after": "captures/after/r01-crop-bed.jpg"
+ },
+ {
+  "id": "r02-goat-yard",
+  "title": "Goat house",
+  "before": "captures/ranch/r02-goat-yard.jpg",
+  "after": "captures/after/r02-goat-yard.jpg"
+ },
+ {
+  "id": "r16-goat-shelter-top",
+  "title": "Goat house from above",
+  "before": "captures/ranch/r16-goat-shelter-top.jpg",
+  "after": "captures/after/r16-goat-shelter-top.jpg"
+ },
+ {
+  "id": "r17-lamp-close",
+  "title": "Lamps by day",
+  "before": "captures/ranch/r17-lamp-close.jpg",
+  "after": "captures/after/r17-lamp-close.jpg"
+ },
+ {
+  "id": "r18-lamp-close-night",
+  "title": "Lamps at night",
+  "before": "captures/ranch/r18-lamp-close-night.jpg",
+  "after": "captures/after/r18-lamp-close-night.jpg"
+ },
+ {
+  "id": "r00-wide",
+  "title": "The whole tile",
+  "before": "captures/ranch/r00-wide.jpg",
+  "after": "captures/after/r00-wide.jpg"
+ },
+ {
+  "id": "grass",
+  "title": "Grass",
+  "before": "captures/ranch/r09-meadow-trees.jpg",
+  "after": null
+ }
+]
