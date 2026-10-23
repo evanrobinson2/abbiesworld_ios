@@ -254,7 +254,7 @@ function from3D(sp){const t=sp.turn||[0,0,0],base=qeuler(t[0],t[1],t[2],"YXZ"),Q
 const sub3=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
 let STUDIO=null;   // the 3D studio's moves, loaded on first look
 async function loadStudio(){if(STUDIO)return STUDIO;try{const m=await import("./moves.mjs");
-  STUDIO=m.MOVES.map(x=>{const g=m.GENRES.find(g=>g.id===x.genre);const clip={name:x.name,genre:g?g.name:x.genre,dur:x.len||x.fn.len||2,ease:"smooth",fn3:x.fn,
+  STUDIO=m.MOVES.map(x=>{const g=m.GENRES.find(g=>g.id===x.genre);const clip={id:x.id,name:x.name,genre:g?g.name:x.genre,dur:x.len||x.fn.len||2,ease:"smooth",fn3:x.fn,
     speed3:x.travel?(x.speed??x.fn.speed??0):0,from3d:1};clip.keys=[{t:0,p:from3D(x.fn(0))},{t:.5,p:from3D(x.fn(clip.dur/2))},{t:1,p:from3D(x.fn(clip.dur))}];return clip})}
   catch(e){STUDIO=[]}return STUDIO}
 
@@ -375,10 +375,14 @@ $("floor").setAttribute("x1",VB[0]-2000);$("floor").setAttribute("x2",VB[0]+VB[2
 
 // ---- Puppeteering: drag a joint
 function toSvg(e){const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const m=svg.getScreenCTM().inverse();const r=pt.matrixTransform(m);return[r.x,r.y]}
-function aim(p,bone,target){const F=fk(p);const q=PARENT[bone];const pw=q?F[q].w:p.r;p.a[bone]=wrap(ang(sub(target,F[bone].base))-pw)}
-function keepWorld(p,bone,w){const F=fk(p);p.a[bone]=wrap(w-F[PARENT[bone]].w)}
+// Joint limits, in each bone's angle to its parent: a drag can bend the body only the way a body bends (the torso
+// no further back than 20 degrees, knees and elbows one way). Stock moves aren't limited; only what a drag touches.
+const LIM={spine:[160,250],chest:[-15,40],head:[-30,50],forearm:[-155,5],hand:[-90,90],thigh:[-130,50],shin:[-5,155],foot:[-140,-10]};
+function limit(p,b){const r=LIM[b.replace(/_[LR]$/,"")];if(!r)return;const c=(r[0]+r[1])/2,h=(r[1]-r[0])/2;p.a[b]=c+clamp(wrap(p.a[b]-c),-h,h)}
+function aim(p,bone,target){const F=fk(p);const q=PARENT[bone];const pw=q?F[q].w:p.r;p.a[bone]=wrap(ang(sub(target,F[bone].base))-pw);limit(p,bone)}
+function keepWorld(p,bone,w){const F=fk(p);p.a[bone]=wrap(w-F[PARENT[bone]].w);limit(p,bone)}
 function ccd(p,chain,end,target){for(let it=0;it<14;it++){for(let i=chain.length-1;i>=0;i--){const F=fk(p),b=chain[i];const base=F[b].base;
-  p.a[b]+=wrap(ang(sub(target,base))-ang(sub(F[end].tip,base)))}}}
+  p.a[b]+=wrap(ang(sub(target,base))-ang(sub(F[end].tip,base)));limit(p,b)}}}
 let drag=null;
 // the nearest joint dot wins, so a hand resting on the hip never steals the hips
 function nearest(e){let best=null,bd=34;for(const id in hEl){const r=hEl[id].querySelector(".dot").getBoundingClientRect();
@@ -478,7 +482,13 @@ addEventListener("resize",render);
 drawTray();render();
 // open on a move so the page is alive the moment it loads; a joint drag stops it and you take over
 const start=MOVES.findIndex(m=>m.name===(new URLSearchParams(location.search).get("move")||"Wave"));
-if(start>=0){const i=mine().length+start+1;$("tray").children[i].click();$("tray").children[i].scrollIntoView({block:"nearest",inline:"center"})}
+// the Character Studio can hand us one of its moves: ?studio=clap, or postMessage({type:"aw-move",id:"clap"})
+async function playStudio(id){await loadStudio();const i=STUDIO.findIndex(m=>m.id===id);if(i<0)return false;
+  if(state.playing)pause();state.tray="studio";drawTray();const c=$("tray").children[i+1];c.click();c.scrollIntoView({block:"nearest",inline:"center"});return true}
+addEventListener("message",e=>{if(e.origin===location.origin&&e.data&&e.data.type==="aw-move")playStudio(String(e.data.id))});
+const sid=new URLSearchParams(location.search).get("studio");
+if(sid)playStudio(sid);
+else if(start>=0){const i=mine().length+start+1;$("tray").children[i].click();$("tray").children[i].scrollIntoView({block:"nearest",inline:"center"})}
 </script>
 </body>
 </html>
