@@ -1,7 +1,7 @@
 {
  "study": "AW-STUDY-0021",
  "updated": "2026-10-23T06:40Z",
- "status": "Round 5 next: learn the build process with Meshy as the answer key",
+ "status": "G is the best model; round 5 learns to build it ourselves",
  "camera": "One front camera matched to the reference; every render is scored from it.",
  "arms": [
   {
@@ -256,8 +256,8 @@
   },
   {
    "id": "G",
-   "name": "Meshy, reshaped",
-   "how": "Meshy's own mesh, driven by rings per named part and decimated to about 3,000 faces. It can be edited in body words, but it is Meshy's work dressed, not a model we built: it doesn't learn the process.",
+   "name": "Scaling version",
+   "how": "The best model so far. Meshy's own mesh, driven by rings per named part and taken to about 3,000 faces; edit it in body words, build it at any polygon count. It edits what Meshy built; learning to build it ourselves is round 5.",
    "sees": "full + Meshy hero",
    "order": "parallel",
    "status": "done",
@@ -292,6 +292,6 @@
   "The outline scores undersell M and G. The hand-built arms were fitted to this one camera, and their side and back are scored against Midjourney's guess at a turnaround. Against the Meshy body itself, the scaling version matches 97% to 99.7% from every side, at 900, 3,000 or 9,000 faces.",
   "Rings alone (one stack of 2 cm cuts per part) catch the body but lose the face, fingers and tank-top edges. Using the rings as a cage on Meshy's own surface keeps all of that, and edits by body words still work ('make his forearms 20% bigger').",
   "It scales: brute #2 went through the same scripts with nothing changed (Meshy, learn, cage, decimate) and came out at 3,000 faces with a 98.8% match to its Meshy body from every side.",
-  "Evan, 09:24Z: G 'didn't learn anything, that's dressing something they built'. Right: the next round uses Meshy only as the answer key. We build from an MPFB + Rigify body and our own recipe parts, learn named settings by fitting against Meshy from every side, and test whether brute #1's settings carry over to brute #2."
+  "Evan, 09:24Z: G is the best version by a country mile, but it dresses what Meshy built rather than learning the process. Round 5 keeps G as the bar and learns to build it ourselves: an MPFB + Rigify body plus our recipe parts, named settings fitted against Meshy from every side, then brute #2 from the picture alone."
  ]
 }
