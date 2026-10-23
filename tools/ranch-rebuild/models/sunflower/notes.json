@@ -1,0 +1,31 @@
+{
+ "what_i_did": [
+  ["Views", "No turnaround for this job, so it is scored on the hero alone. make_views.py keys the hero against both edges of the backdrop and drops the soft grey ground shadow (near the ground only saturated pixels in a band round the stalk are kept), giving views/hero.png."],
+  ["Hero camera", "hero_check.py renders front-on, 5 deg up, with the harness lens (YAW 0, ELEV 5), as the hero is drawn nearly level. A calibration grid over yaw -20..20 and elevation 0..12 put yaw 0 / elev 0-5 at the top, so the direction was held there."],
+  ["Stalk", "One 6-sided faceted tube (Stem_Green) along a slightly wavy centreline taken from the hero, radius 3.4 cm at the base tapering to 2.4 cm under the head, standing on a 9-sided irregular, slightly domed dirt patch (Soil_Dirt) about 30 x 22 cm."],
+  ["Leaves", "Six heart-shaped leaf cards (Leaf_Green, 18 triangles each, double-sided) with lobes reaching back past the petiole, folded along a centre crease and drooping towards the tip, on short 3-sided petioles. Placed from the hero: upper right just under the head, a big front-facing upper-left leaf with a smaller one behind it, a right leaf mid-stalk, a left leaf below it and a front leaf low down, all turned to face the viewer and a little up."],
+  ["Head", "A face-forward head tilted 8 deg down, about 0.53 m across (a third of the height): a 12-sided Seed_Brown disc with a raised rim, a shallow trough and a low dome; three rings of pointed, ridged petals (8 triangles each: a raised midrib and a faceted tip), 22 Petal_Amber behind and 20 + 20 Petal_Gold in front with alternating offsets, so the edge reads as layered petals; a green receptacle cone closes the back where the stalk enters."],
+  ["Game readiness", "905 triangles (budget 1k), 7 meshes, one flat material each: Stem_Green, Leaf_Green, Petal_Gold, Petal_Amber, Seed_Brown, Soil_Dirt. The plant is scaled so its top sits at 1.585 m like GF-567.glb (to_game copies the GLB with no rescale); 0.58 x 0.23 x 1.585 m, origin at the base on the ground. No animation, no variants (plant group)."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.79 with a matched front-on camera: the head size and height, the stalk and the alternating leaf placement line up with the hero almost leaf for leaf.",
+  "Reads as a sunflower at a glance: a big gold disc of layered petals with a dark centre on a tall green stalk with broad hearts of leaves.",
+  "Within budget at 905 triangles, most of it on the petals (496) and leaves and petioles."
+ ],
+ "off": [
+  "The hero's petals are softer and more crumpled, with many more facets; mine are 8-triangle ridged cards, crisper and a touch more regular.",
+  "The hero's seed disc shows a darker hollow centre; with one flat Seed_Brown material mine reads the rim and dip by shading only.",
+  "Footprint: width 0.58 m matches the old 0.60 m, but depth is 0.23 m against the old 0.59 m. The hero draws a flat, face-forward plant with leaves to the left and right, so I kept it flat rather than spreading leaves front to back.",
+  "Seed_Brown matches none of the game's role words (to_game role 'plain'), as the art director named it; Flower_Seed would make it foliage-recoloured if wanted."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build from hero measurements (6 leaves, 2 petal rings, disc, wavy stalk, dirt patch); fixed a petiole midpoint bug that spiked the bounds.", "mean_iou": 0.682},
+  {"round": 2, "change": "Leaves re-placed from the overlay: upper-right up and flatter, upper-left lower and further out, right leaf back up, left leaf lower; thicker stalk; flatter wider soil.", "mean_iou": 0.737},
+  {"round": 3, "change": "Less droop on the side leaves, wider upper-left leaf, head shifted left; stalk and soil shifted left to match the hero's offset.", "mean_iou": 0.76},
+  {"round": 4, "change": "Third petal ring, broader petals, darker leaf green and deeper gold, flatter disc dip, coarser stalk to stay in budget.", "mean_iou": 0.762},
+  {"round": 5, "change": "Head petals slightly shorter (a longer head lost 0.04), right leaf more horizontal, front leaf right; seed sweep showed +-0.003 noise.", "mean_iou": 0.797},
+  {"round": 6, "change": "Uniform scale to the old GLB's 1.585 m height, base clamped to z = 0; final 768 px / 48 sample render and hero check.", "mean_iou": 0.791}
+ ],
+ "moving_parts": "None. The game poses and sways plants itself.",
+ "creative_additions": "A third, offset ring of gold petals so the head edge reads layered as in the hero, and a green receptacle closing the back of the head for the game's other angles."
+}
