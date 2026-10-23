@@ -33,12 +33,16 @@ This is the constrained "invent something from scratch" path for the launch demo
 - When a player's cap or the $100 public pool is spent, new designs stop (402) and the card offers toys other
   players already made, which still work for free. Ideas are offered by the toy's own screened name, never by the
   words another child typed.
+- **Rebates** (Evan, 2026-10-23): when another player uses a toy someone invented (same words, its name, or joining
+  the same design in flight), the inventor gets back what it cost them ($0.021), once per toy. The rebate goes to the
+  inventor's own ledger only (`wallet().refund`); the public pool keeps counting the real money spent.
+  Exactly-once comes from a rebate record written only if absent (`invent/v1/rebates/`).
 - `INVENT_ENABLED=false` switches Make off without a deploy of code.
 
 ## Storage (private Blob store)
 
-- `invent/v1/cache/<hash>.json`: `{wish, recipe, madeAt, version}`, filed under the wish and under the toy's name.
-  No account.
+- `invent/v1/cache/<hash>.json`: `{wish, recipe, madeAt, version, by, cost}`, filed under the wish and under the
+  toy's name. `by` is the inventor's hashed account id and owner flag, kept only for the rebate.
 - `invent/v1/made/<account>/<id>.json`: each player's makes, under the hashed account id, so a make keeps its intent
   and can be rebuilt or upgraded to a proper model later (the workshop's `order_model` path).
 

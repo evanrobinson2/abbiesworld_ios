@@ -4,8 +4,8 @@ const {createHandler}=require('../api/invent.js');
 const contract=()=>import('../simulations/invent/contract.mjs');
 const PLAYER={id:'b'.repeat(24),owner:false};
 
-function memoryStore(){const m=new Map();return {m,async read(p){return m.has(p)?JSON.parse(m.get(p)):null;},async write(p,v){m.set(p,JSON.stringify(v));}};}
-function purse(budget=1){const spent=[];return {spent,factory:()=>({left:async()=>budget-spent.reduce((a,b)=>a+b,0),charge:async(a,usd)=>{if(spent.reduce((x,y)=>x+y,0)+usd>budget+1e-9)return false;spent.push(usd);return true;}})};}
+function memoryStore(){const m=new Map();return {m,async read(p){return m.has(p)?JSON.parse(m.get(p)):null;},async write(p,v){m.set(p,JSON.stringify(v));},async claim(p,v){if(m.has(p))return false;m.set(p,JSON.stringify(v));return true;}};}
+function purse(budget=1){const spent=[],refunds=[];return {spent,refunds,factory:()=>({refund:async(a,usd)=>{refunds.push([a.id,usd]);return true;},left:async()=>budget-spent.reduce((a,b)=>a+b,0),charge:async(a,usd)=>{if(spent.reduce((x,y)=>x+y,0)+usd>budget+1e-9)return false;spent.push(usd);return true;}})};}
 const RECIPE={name:'Rainbow Dragon',say:"Here's your rainbow dragon!",size:1.4,behavior:'bob',parts:[{id:'body',shape:'capsule',at:[0,.2,0],scale:[.5,.4,.8],color:'#7a5cff'},{id:'head',shape:'sphere',at:[0,.55,.5],scale:.3,color:'#ff7ab8'},{id:'wing',shape:'cone',at:[.4,.5,0],scale:[.4,.1,.5],rotation:[0,0,90],color:'#ffd36b'}]};
 function designer({delay=0,recipe=RECIPE,verdict='ok'}={}){const calls=[];const fetcher=async(url,init)=>{const body=JSON.parse(init.body);calls.push(body);if(delay)await new Promise(r=>setTimeout(r,delay));
  const content=/safety and scope guard/.test(body.messages[0].content)?JSON.stringify({verdict,why:'t'}):JSON.stringify(recipe);
@@ -82,4 +82,22 @@ test('the preview-only acceptance hook is off in production',async()=>{
  const h=createHandler({who:()=>null,purse:p.factory,store,fetcher:designer(),env:{}});
  const r=await new Promise(resolve=>{const out={};h({method:'GET',url:'/api/invent?try=a%20pony',headers:{host:'ranch.test'}},{statusCode:200,setHeader(){},end(s){out.status=this.statusCode;out.body=JSON.parse(s);resolve(out);}});});
  assert.equal(r.body.recipe,undefined);assert.equal(r.body.signedIn,false);
+});
+
+test('an inventor gets their credit back once, when another player uses their toy',async()=>{
+ const store=memoryStore(),p=purse();
+ const inventor=make({store,p});await call(inventor.h,{body:{wish:'a rainbow dragon'}});
+ // Using your own toy again is no rebate.
+ await call(inventor.h,{body:{wish:'a rainbow dragon'}});assert.equal(p.refunds.length,0);
+ let n=0;const others=createHandler({who:()=>({id:String(n++).padStart(24,'d'),owner:false}),purse:p.factory,store,fetcher:designer(),env:{}});
+ await call(others,{body:{wish:'Rainbow Dragon'}});await call(others,{body:{wish:'a rainbow dragon'}});
+ assert.deepEqual(p.refunds,[[PLAYER.id,0.021]]);
+});
+
+test('wallet refunds go back to the player, not the public pool',async()=>{
+ const {createWallet}=require('../lib/wallet.cjs');
+ const m=new Map();let v=0;const store={async read(k){return m.has(k)?{value:m.get(k).value,etag:m.get(k).etag}:{value:null,etag:null};},async write(k,value,etag){const cur=m.get(k);if((cur?.etag||null)!==(etag||null))return false;m.set(k,{value,etag:String(++v)});return true;}};
+ const w=createWallet({store});const a={id:'f'.repeat(24),owner:false};
+ assert.equal(await w.charge(a,0.5),true);const before=await w.left(a);
+ await w.refund(a,0.25);assert.ok(Math.abs(await w.left(a)-(before+0.25))<1e-6);
 });

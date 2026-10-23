@@ -110,6 +110,12 @@ function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS,plan=null}={}){
    const mine=await add(personPath(a),usd,t.cap);
    if(!mine.ok){await pool.give(parts);return false;}
    return true;
+  },
+  // Gives a player back credit they spent (a Make rebate, api/invent.js). Only their own ledger: the money really
+  // was spent, so the public pool, which caps Evan's real bill, keeps counting it.
+  async refund(a,usd){
+   if(!a||!(usd>0))return false;
+   await add(personPath(a),-usd,Infinity);return true;
   }
  };
 }
