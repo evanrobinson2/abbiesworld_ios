@@ -25,7 +25,11 @@ export function youngDaddyMaterials(T) {
  };
 }
 
-export function makeYoungDaddy(T, {mats = youngDaddyMaterials(T)} = {}) {
+// AW-STUDY-0034: makeYoungDaddy now builds the hero figure from figure-kit (same contract: update(dt, pose), arms[i].hand,
+// head, hit). The lowpoly-kit build below stays as makeYoungDaddyLoft for comparison.
+export {makeYoungDaddy} from './figures/young-daddy.mjs';
+
+export function makeYoungDaddyLoft(T, {mats = youngDaddyMaterials(T)} = {}) {
  const M = mats, v3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z);
  const group = new T.Group(); group.name = 'kid';
  const mesh = (geo, mat, name, parent = group, x = 0, y = 0, z = 0) => { const m = new T.Mesh(geo, mat); m.name = name; m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; };

@@ -68,7 +68,7 @@ export function makeYoungDaddy(T, {look = YOUNG_DADDY_LOOK, joints = YOUNG_DADDY
    bones.chest.rotation.y += -.45 * Math.sin(th * Math.PI);
   }
   group.updateMatrixWorld(true);
-  const hands = [...P.hands];
+  const hands = [...(P.hands || [null, null])], feet = P.feet || [null, null];
   if (P.shield > 0 && !hands[1]) { // the right arm comes up over the eyes against the headlights
    const eyes = v.set(-.03, joints.headC[1] + .03, .2), now = arms[1].wrist.getWorldPosition(w); group.worldToLocal(now);
    hands[1] = now.lerp(eyes, P.shield).clone();
@@ -76,7 +76,7 @@ export function makeYoungDaddy(T, {look = YOUNG_DADDY_LOOK, joints = YOUNG_DADDY
   side.forEach((S, i) => {
    const k = i ? -1 : 1;
    if (hands[i]) { const tg = group.localToWorld(v.copy(hands[i])); pole.set(k * .55, joints.shoulder[1] - .35, -.35); group.localToWorld(pole); ik2(T, bones[`upperArm.${S}`], bones[`foreArm.${S}`], bones[`hand.${S}`], tg, pole); }
-   if (P.feet[i]) { const tg = group.localToWorld(v.copy(P.feet[i])); pole.set(k * .1, joints.knee[1], .6); group.localToWorld(pole); ik2(T, bones[`thigh.${S}`], bones[`shin.${S}`], bones[`foot.${S}`], tg, pole); }
+   if (feet[i]) { const tg = group.localToWorld(v.copy(feet[i])); pole.set(k * .1, joints.knee[1], .6); group.localToWorld(pole); ik2(T, bones[`thigh.${S}`], bones[`shin.${S}`], bones[`foot.${S}`], tg, pole); }
   });
  }
  update(0);

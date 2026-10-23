@@ -21,7 +21,11 @@ export function blackLabMaterials(T) {
  };
 }
 
-export function makeBlackLab(T, {mats = blackLabMaterials(T)} = {}) {
+// AW-STUDY-0034: makeBlackLab now builds the hero figure from figure-kit (same contract: update(dt, pose), arms[i].hand,
+// head, hit). The lowpoly-kit build below stays as makeBlackLabLoft for comparison.
+export {makeBlackLab} from './figures/black-lab.mjs';
+
+export function makeBlackLabLoft(T, {mats = blackLabMaterials(T)} = {}) {
  const M = mats, v3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z);
  const group = new T.Group(); group.name = 'dog';
  const mesh = (geo, mat, name, parent, x = 0, y = 0, z = 0) => { const m = new T.Mesh(geo, mat); m.name = name; m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; };
