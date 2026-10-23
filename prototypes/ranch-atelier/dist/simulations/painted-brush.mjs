@@ -17,6 +17,8 @@ export const PAINTED_BRUSH = {
  rim: 1.1, accent: '#3fe6d4', paint: 1, brush: 1, fog: 0, fogCol: '#343a5e', lightDir: [.55, .75, .35],
  point: '#ff6fd0', pointPos: [0, -50, 0], pointR: 4.2, flicker: 12,
  ink: .012, inkBreak: 1, inkCol: '#1d1530',
+ // used by hand-drawn.mjs, off here: paper grain, line boil (the outline redrawn each drawing), pen pressure along the line
+ grain: 0, boil: 0, inkVary: 0,
 };
 // per part: how much grain and brush, and how strong the rim. Unknown names get the defaults (1, 1, 1).
 export const ROLES = {
@@ -32,7 +34,7 @@ export function paintedBrushUniforms(T, look = {}) {
   uBands: {value: L.bands}, uSoft: {value: L.soft}, uHalf: {value: L.half}, uRim: {value: L.rim}, uPaint: {value: L.paint}, uBrush: {value: L.brush},
   uFog: {value: L.fog}, uFogCol: {value: new T.Color(L.fogCol)},
   uPointPos: {value: new T.Vector3(...L.pointPos)}, uPointBase: {value: new T.Color(L.point)}, uPointCol: {value: new T.Color(L.point)}, uPointR: {value: L.pointR},
-  uFlicker: {value: L.flicker},
+  uFlicker: {value: L.flicker}, uGrain: {value: L.grain}, uFrame: {value: 0},
  };
 }
 
@@ -49,7 +51,7 @@ vec3 transformed=position;
 #include <skinning_vertex>
 vUv=uv;vP=position*uStroke;vN=normalize(mat3(modelMatrix)*objectNormal);vec4 w=modelMatrix*vec4(transformed,1.);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`;
 const FRAG = `uniform vec3 uColor,uAccent,uLightDir,uSun,uSky,uGround,uShadowTint,uFogCol,uPointPos,uPointCol;
-uniform float uBands,uSoft,uHalf,uRim,uPaint,uBrush,uAmb,uFog,uPointR,uUseMap,uOpacity,uPaintK,uBrushK,uRimK;
+uniform float uBands,uSoft,uHalf,uRim,uPaint,uBrush,uAmb,uFog,uPointR,uUseMap,uOpacity,uPaintK,uBrushK,uRimK,uGrain,uFrame;
 uniform sampler2D uMap;varying vec3 vN;varying vec3 vW;varying vec3 vP;varying vec2 vUv;
 ${NOISE}
 float pbStroke(vec3 p){vec2 q=vec2(dot(p,vec3(.82,.42,.38))*2.2,dot(p,vec3(-.35,.88,.3))*11.);return pbN(q)*.65+pbN(q*2.1+vec2(7.,3.))*.35;}
@@ -67,6 +69,7 @@ void main(){
  float fr=pow(1.-max(dot(n,V),0.),3.);
  col+=uAccent*fr*uRim*uRimK*(.35+.65*(ndl*.5+.5))*(1.-smoothstep(.35,.9,n.y));
  col=mix(col,uFogCol,1.-exp(-pow(dist*uFog,2.)));
+ col*=1.+(pbH(floor(gl_FragCoord.xy*.5)+uFrame*vec2(17.3,9.1))-.5)*uGrain;
  gl_FragColor=vec4(col,tx.a*uOpacity);
  #include <colorspace_fragment>
 }`;
@@ -119,7 +122,8 @@ function inkHull(T, o, inkU) {
  const mat = new T.ShaderMaterial({uniforms: inkU, side: T.BackSide,
   vertexShader: `#include <common>
 #include <skinning_pars_vertex>
-uniform float uW,uBreak,uStroke;
+uniform float uW,uBreak,uStroke,uBoil,uVary,uFrame;
+float bh(vec3 p){return fract(sin(dot(p,vec3(12.9898,78.233,37.719)))*43758.5453);}
 void main(){vec3 objectNormal=normal;
 #include <skinbase_vertex>
 #include <skinnormal_vertex>
@@ -127,7 +131,10 @@ vec3 transformed=position;
 #include <skinning_vertex>
 vec4 w=modelMatrix*vec4(transformed,1.);vec3 n=normalize(mat3(modelMatrix)*objectNormal);float d=length(cameraPosition-w.xyz);
 vec3 p=position*uStroke;float br=mix(1.,smoothstep(.15,.85,.5+.5*sin(p.x*9.+sin(p.y*7.)*2.3+p.z*6.)),uBreak);
-w.xyz+=n*uW*clamp(1.6-d*.06,.35,1.4)*br;gl_Position=projectionMatrix*viewMatrix*w;}`,
+float press=1.+uVary*sin(p.y*5.+p.x*3.1+p.z*2.3);
+float jit=1.+uBoil*(bh(floor(p*5.)+uFrame*vec3(1.7,2.3,3.1))-.5)*2.;
+vec3 sh=vec3(bh(vec3(uFrame,1.,2.)),bh(vec3(uFrame,3.,4.)),bh(vec3(uFrame,5.,6.)))-.5;
+w.xyz+=n*uW*clamp(1.6-d*.06,.35,1.4)*br*press*jit+sh*uW*uBoil*.6;gl_Position=projectionMatrix*viewMatrix*w;}`,
   fragmentShader: `uniform vec3 uInk;void main(){gl_FragColor=vec4(uInk,1.);
 #include <colorspace_fragment>
 }`});
@@ -145,7 +152,8 @@ export function paintBrush(T, root, look = {}) {
  root.updateWorldMatrix(true, true);
  const H = new T.Box3().setFromObject(root).getSize(new T.Vector3()).y || 1, per = 1.8 / H;
  const swapped = [], hulls = [], added = [], made = new Map(), ws = new T.Vector3();
- const inkU = {uW: {value: L.ink * H / 1.8}, uBreak: {value: L.inkBreak}, uInk: {value: new T.Color(L.inkCol)}};
+ const inkU = {uW: {value: L.ink * H / 1.8}, uBreak: {value: L.inkBreak}, uInk: {value: new T.Color(L.inkCol)},
+  uBoil: {value: L.boil}, uVary: {value: L.inkVary}, uFrame: U.uFrame};
  root.traverse(o => {
   if (!o.isMesh || o.userData.ink || o.userData.noPaint || [].concat(o.material).every(m => m?.userData?.paintedBrush)) return;
   o.getWorldScale(ws);
@@ -168,6 +176,7 @@ export function paintBrush(T, root, look = {}) {
  return {
   U, ink: inkU, hulls: hulls.map(x => x[1]),
   update: seconds => updatePaintedBrush(U, seconds),
+  setFrame: n => { U.uFrame.value = n % 1000; },
   restore() {
    for (const [o, m] of swapped) o.material = m;
    for (const [o, h] of hulls) { o.remove(h); h.geometry.dispose(); h.material.dispose(); }
