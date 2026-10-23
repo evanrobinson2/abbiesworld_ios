@@ -70,6 +70,13 @@
       "faces": 1538,
       "change": "forearms thicker (L 17,11 -> 20,15; R 15,10 -> 17,13)",
       "lesson": "the leg lesson holds one limb up: a mannequin forearm is nearly as thick as its upper arm. limbs.py (per-limb miss) picks the change."
+    },
+    {
+      "round": 7,
+      "iou": 0.857,
+      "faces": 1538,
+      "change": "straight leg hip (232,650)->(240,652), knee (213,845)->(220,845) in photo px",
+      "lesson": "I read joints off the limb's outer edge; a joint sits on the limb's centre line. A size change that scores flat (head) means the miss is placement."
     }
   ],
   "method": "build.py (bpy 5.2, headless) builds 30 named parts, renders silhouette + shaded from the photo's orthographic camera and exports GLB; parts.py renders each part alone; score.py gives IoU against the private mask.",
@@ -77,7 +84,7 @@
     {
       "name": "smooth",
       "file": "mannequin-smooth.glb",
-      "iou": 0.836,
+      "iou": 0.853,
       "faces": 13650,
       "how": "SMOOTH=1 python build.py: same parts and pose, 3x segments, smooth shaded"
     }
