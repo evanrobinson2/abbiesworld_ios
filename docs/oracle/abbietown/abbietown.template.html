@@ -688,3 +688,4 @@ renderer.setAnimationLoop(() => {
  if (shown) { const s = spotByID[shown]; tmp.set(X(s.x), s.z + (s.far ? 160 : 26), Z(s.y)).project(camera); bubble.style.left = (tmp.x + 1) / 2 * r.width + 'px'; bubble.style.top = (1 - tmp.y) / 2 * r.height + 'px'; }
 });
 </script>
+<script type="module">import {inventory} from '/simulations/inventory.mjs?v=8'; inventory();</script>

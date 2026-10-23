@@ -1,16 +1,26 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
-   {
-     "id": "2026-10-23-moon-heroes-pack",
-     "date": "2026-10-23",
-     "title": "Real astronauts on the Moon",
-     "line": "The Moon Mission crew are now the Meshy astronauts, and Abbie wears her backpack with her jingling charms on the Moon.",
-     "image": "/whats-new/2026-10-23-moon-heroes-pack.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
-     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
-     "tour": false
-   },
+    {
+      "id": "2026-10-23-treehouses",
+      "date": "2026-10-23",
+      "title": "Abbie and Ani have tree houses",
+      "line": "Abbie's pink blossom tree house and Ani's violet moon tree house now stand in their backyards on the Winchester board, built from the iPad game art. The backpack is in the town too.",
+      "image": "/whats-new/2026-10-23-treehouses.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0042 - Abbie's Town",
+      "tour": true
+    },
+    {
+      "id": "2026-10-23-moon-heroes-pack",
+      "date": "2026-10-23",
+      "title": "Real astronauts on the Moon",
+      "line": "The Moon Mission crew are now the Meshy astronauts, and Abbie wears her backpack with her jingling charms on the Moon.",
+      "image": "/whats-new/2026-10-23-moon-heroes-pack.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+      "tour": false
+    },
     {
       "id": "2026-10-23-backpack-worn",
       "date": "2026-10-23",
