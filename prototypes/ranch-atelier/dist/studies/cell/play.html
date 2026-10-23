@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Abbie's Science Adventure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap">
+<style>
+/* AW-STUDY-0047: Abbie's science adventure. The green goo outside the science lab in Abbie's Town is alive; a drop
+   under the lab's lens becomes a pond, and Abbie is a tiny pink cell in it. Style from Spore's Cell Stage (Oracle
+   record docs/oracle/identity/examples/spore.json), never its expression. The water is a shader
+   (simulations/lens-pond.mjs), the cells are rigged SVG (simulations/microbe-kit.mjs), and every cell body is a
+   liquid-glass lens that bends the water behind it. Play HUD: one small glass pill, zero words. */
+html,body{margin:0;height:100%;background:#0b2a24;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;font-family:Fredoka,ui-rounded,system-ui,sans-serif}
+#pond{position:fixed;left:0;top:0;width:100vw;height:100dvh;display:block}
+#world{position:fixed;left:0;top:0;width:100vw;height:100dvh;display:block;overflow:visible}
+.glass{position:fixed;z-index:4;border-radius:22px;border:1px solid rgba(255,255,255,.7);
+ background:linear-gradient(160deg,rgba(255,255,255,.34),rgba(255,255,255,.06) 45%),rgba(222,255,240,.12);
+ -webkit-backdrop-filter:blur(10px) saturate(1.7);backdrop-filter:blur(10px) saturate(1.7);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 1px rgba(0,40,30,.25),0 8px 26px rgba(0,20,16,.35)}
+#hud{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));height:34px;padding:0 12px;display:flex;align-items:center;gap:7px;pointer-events:none;opacity:0;transition:opacity .4s}
+#hud.on{opacity:1}
+#hud .bead{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.25);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7);position:relative;overflow:hidden}
+#hud .bead.done{background:radial-gradient(circle at 35% 30%,#fff,#ff8fd0 45%,#c93c95)}
+#hud .bead i{position:absolute;left:0;bottom:0;width:100%;background:#ff8fd0;transition:height .3s}
+#hud .coin{width:15px;height:15px;margin-left:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7c0,#ffcc33 45%,#c98a08);box-shadow:0 0 0 1.5px #7a4f00}
+#hud b{color:#fff;font-weight:600;font-size:16px;text-shadow:0 1px 2px rgba(0,0,0,.4);min-width:10px}
+#back{right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));width:40px;height:40px;border-radius:50%;padding:0;cursor:pointer;display:grid;place-items:center}
+#back svg{width:20px;height:20px}
+/* the part picker: two or three glass lenses, each magnifying a part on Abbie's cell. Summoned, never in play. */
+#picker{position:fixed;left:50%;top:70%;transform:translate(-50%,-50%) scale(.6);display:flex;gap:18px;z-index:6;opacity:0;pointer-events:none;transition:opacity .3s,transform .45s cubic-bezier(.2,1.4,.4,1)}
+#picker.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+#picker button{width:min(34vw,150px);aspect-ratio:1;border-radius:50%;padding:10px;cursor:pointer;position:relative}
+#picker button:active{transform:scale(.94)}
+#picker svg{width:100%;height:100%;overflow:visible}
+.pi-hair{animation:hair .6s ease-in-out infinite alternate;animation-delay:calc(var(--j)*-.07s);transform-origin:0 0;transform-box:fill-box}
+@keyframes hair{to{transform:rotate(28deg)}}
+.pi-jawa{animation:jawa .5s ease-in-out infinite alternate;transform-origin:.8px .12px}
+.pi-jawb{animation:jawb .5s ease-in-out infinite alternate;transform-origin:.8px -.12px}
+@keyframes jawa{to{transform:rotate(28deg)}}@keyframes jawb{to{transform:rotate(-28deg)}}
+.pi-tail{animation:tail .5s ease-in-out infinite alternate}
+@keyframes tail{to{d:path("M-.95 0C-1.3 .25 -1.5 -.25 -1.9 0")}}
+.pi-puff{animation:puff 1s steps(12) infinite}
+@keyframes puff{from{r:.08;opacity:.9}to{r:.42;opacity:0}}
+/* the lab: the beaker of goo on the bench, the lens over the slide */
+#lab{position:fixed;left:0;top:0;width:100vw;height:100dvh;z-index:7;transition:opacity .6s;background:#2a2238}
+#lab.gone{opacity:0;pointer-events:none}
+#lab svg{width:100%;height:100%;display:block}
+#beaker{cursor:pointer}
+#lensRing{position:fixed;left:0;top:0;width:100vw;height:100dvh;z-index:5;pointer-events:none;overflow:visible}
+.coinfly{position:fixed;z-index:8;width:64px;height:64px;margin:-32px 0 0 -32px;pointer-events:none}
+</style>
+</head>
+<body>
+<canvas id="pond"></canvas>
+<svg id="world" aria-label="A drop of green goo under the lens">
+ <defs></defs>
+ <g id="cam"><g id="shadows"></g><g id="food"></g><g id="clouds"></g><g id="cells"></g><g id="fx"></g></g>
+ <g id="pres"></g>
+</svg>
+<svg id="lensRing" aria-hidden="true"></svg>
+<div id="hud" class="glass" aria-hidden="true"><span class="bead"><i></i></span><span class="bead"><i></i></span><span class="bead"><i></i></span><span class="bead"><i></i></span><span class="bead"><i></i></span><span class="coin"></span><b id="coins">0</b></div>
+<button id="back" class="glass" aria-label="Back to the lab"><svg viewBox="0 0 20 20"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<div id="picker" aria-label="Choose a part"></div>
+<div id="lab">
+ <svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid meet" aria-label="The science lab bench">
+  <defs>
+   <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d3358"/><stop offset="1" stop-color="#2a2238"/></linearGradient>
+   <linearGradient id="goo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6ff6a"/><stop offset="1" stop-color="#2f9a3c"/></linearGradient>
+   <radialGradient id="lamp" cx=".7" cy=".1" r=".8"><stop offset="0" stop-color="#ffe9b0" stop-opacity=".55"/><stop offset="1" stop-color="#ffe9b0" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect x="-800" y="-400" width="2000" height="1500" fill="url(#wall)"/><rect x="-800" y="-400" width="2000" height="1500" fill="url(#lamp)"/>
+  <g opacity=".35" stroke="#5e5182" stroke-width="2"><path d="M-800 120H1200M-800 240H1200"/><path d="M-220 -400V240M-80 -400V240M60 -400V240M200 -400V240M340 -400V240M480 -400V240M620 -400V240"/></g>
+  <rect x="20" y="70" width="90" height="120" rx="6" fill="#4b3f6c" stroke="#6d5f99"/><circle cx="65" cy="118" r="26" fill="#ffd27a" opacity=".85"/><path d="M45 160h40" stroke="#ff8fd0" stroke-width="5" stroke-linecap="round"/>
+  <rect x="-800" y="470" width="2000" height="800" fill="#6b4a33"/><rect x="-800" y="462" width="2000" height="16" fill="#8c6446"/>
+  <g transform="translate(270 300)"><path d="M10 160h70M45 160V60M45 60l30-40M68 8l18 24" stroke="#c9c2dd" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="80" cy="18" r="14" fill="#9ee8ff" stroke="#fff" stroke-width="3"/><rect x="20" y="120" width="60" height="8" rx="3" fill="#e6e1f2"/></g>
+  <g id="beaker" transform="translate(120 330)">
+   <ellipse cx="50" cy="140" rx="62" ry="10" fill="#000" opacity=".25"/>
+   <path d="M18 10h64M24 10v108q0 22 26 22q26 0 26-22V10" fill="rgba(220,240,255,.18)" stroke="#e8f4ff" stroke-width="4" stroke-linejoin="round"/>
+   <path id="gooTop" d="M27 62q12-8 23 0t23 0v56q0 19-23 19q-23 0-23-19Z" fill="url(#goo)"/>
+   <g fill="#e6ffb0"><circle class="bub" cx="40" cy="100" r="4"/><circle class="bub" cx="58" cy="115" r="3"/><circle class="bub" cx="50" cy="90" r="2.5"/></g>
+   <path d="M30 22v84" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+   <circle id="drop" cx="50" cy="62" r="0" fill="#9cf06a" stroke="#e6ffb0" stroke-width="2"/>
+  </g>
+ </svg>
+</div>
+<script type="module">
+import {lensPond} from '/simulations/lens-pond.mjs';
+import {cellView, LOOKS, partIcon, NS} from '/simulations/microbe-kit.mjs';
+import {innerVoice} from '/simulations/memory-kit/inner-voice.mjs';
+import {volunteer} from '/simulations/presentation-layer.mjs';
+import {give as giveMemoryCoin, count as memoryCoins, has as hasMemoryCoin} from '/simulations/memory-coins.mjs';
+
+const Q = new URLSearchParams(location.search), DEV = Q.has('dev');
+const $ = s => document.querySelector(s);
+const svg = $('#world'), cam = $('#cam'), cellsL = $('#cells'), foodL = $('#food'), fxL = $('#fx'), cloudsL = $('#clouds'), shadowsL = $('#shadows'), pres = $('#pres');
+const pond = lensPond($('#pond'), {scale: matchMedia('(pointer:coarse)').matches ? .55 : .75});
+if (!pond.ok) document.body.style.background = 'radial-gradient(circle at 30% 20%,#2f7d5c,#0b2a24)';
+const voice = innerVoice({font: 'Fredoka', size: 24, onTouch: () => sound.unlock()});
+const rnd = (a, b) => a + Math.random() * (b - a), clamp = (v, a, b) => Math.max(a, Math.min(b, v)), TAU = Math.PI * 2;
+const angDiff = (a, b) => { let d = (b - a) % TAU; if (d > Math.PI) d -= TAU; if (d < -Math.PI) d += TAU; return d; };
+let W = innerWidth, H = innerHeight;
+addEventListener('resize', () => { W = innerWidth; H = innerHeight; pond.resize(); });
+
+// ---- sound: all synthesised, on the same 2x2 as the picture -------------------------------------------------------
+// diegetic: plops, crunches, pops and the pond's hum. meta: Abbie's heartbeat when she's hurt. The music follows
+// the same mood signal as the light.
+const sound = (() => {
+ let ac = null, master, hum, humF, nextBeat = 0, step = 0;
+ const S = {
+  unlock() {
+   if (ac) { ac.resume?.(); return; }
+   try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { return; }
+   master = ac.createGain(); master.gain.value = .5; master.connect(ac.destination);
+   const len = ac.sampleRate * 2, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0); let last = 0;
+   for (let i = 0; i < len; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; }
+   hum = ac.createBufferSource(); hum.buffer = buf; hum.loop = true; humF = ac.createBiquadFilter(); humF.type = 'lowpass'; humF.frequency.value = 380;
+   const hg = ac.createGain(); hg.gain.value = .35; hum.connect(humF).connect(hg).connect(master); hum.start();
+  },
+  tone(f, dur = .15, {type = 'sine', vol = .2, to = null, at = 0} = {}) {
+   if (!ac) return; const t = ac.currentTime + at, o = ac.createOscillator(), g = ac.createGain();
+   o.type = type; o.frequency.setValueAtTime(f, t); if (to) o.frequency.exponentialRampToValueAtTime(to, t + dur);
+   g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+   o.connect(g).connect(master); o.start(t); o.stop(t + dur + .02);
+  },
+  noise(dur = .12, {vol = .25, f = 1200} = {}) {
+   if (!ac) return; const t = ac.currentTime, b = ac.createBuffer(1, ac.sampleRate * dur, ac.sampleRate), d = b.getChannelData(0);
+   for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+   const s = ac.createBufferSource(), fl = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = b; fl.type = 'bandpass'; fl.frequency.value = f; g.gain.value = vol;
+   s.connect(fl).connect(g).connect(master); s.start(t);
+  },
+  plop() { S.tone(rnd(520, 700), .14, {to: 180, vol: .22}); },
+  crunch() { S.noise(.1, {vol: .3, f: 1800}); S.tone(160, .08, {type: 'square', vol: .05}); },
+  pop() { S.tone(900, .1, {to: 1500, vol: .15}); S.noise(.15, {vol: .2, f: 3000}); },
+  hurt() { S.tone(140, .2, {type: 'triangle', to: 70, vol: .3}); },
+  grow() { [523, 659, 784, 1046].forEach((f, i) => S.tone(f, .35, {type: 'triangle', vol: .16, at: i * .09})); },
+  coin() { [988, 1319, 1976].forEach((f, i) => S.tone(f, .18, {type: 'square', vol: .07, at: i * .08})); },
+  // the music: soft pentatonic plinks; danger speeds them up, drops them low and minor
+  music(mood, hp) {
+   if (!ac) return; const t = ac.currentTime; humF.frequency.value = 380 - 180 * mood;
+   if (t < nextBeat) return; const bpm = 76 + 50 * mood; nextBeat = t + 60 / bpm / 2; step++;
+   const calm = [0, 2, 4, 7, 9, 12, 14], tense = [0, 3, 5, 7, 10, 12, 15], sc = mood > .45 ? tense : calm;
+   if (Math.random() < .55 + .3 * mood) S.tone(330 * 2 ** ((sc[Math.floor(Math.random() * sc.length)] - (mood > .45 ? 12 : 0)) / 12), .5, {type: 'sine', vol: .06});
+   if (step % 4 === 0) S.tone(mood > .45 ? 98 : 131, .5, {type: 'triangle', vol: .07});
+   if (hp < .35 && step % 2 === 0) { S.tone(60, .12, {vol: .35}); S.tone(55, .12, {vol: .25, at: .14}); } // heartbeat (meta)
+  },
+ };
+ return S;
+})();
+
+// ---- the world ---------------------------------------------------------------------------------------------------
+const LEVELS = [{r: 14, need: 5}, {r: 20, need: 7}, {r: 28, need: 9}, {r: 38, need: 11}, {r: 52, need: 0}];
+const PARTS = ['filter', 'jaw', 'spike', 'flagellum', 'cilia', 'poison'];
+const KINDS = {
+ drifter: {parts: ['filter', 'cilia'], speed: 55, eats: 'plant', min: 1},
+ nipper: {parts: ['jaw', 'flagellum'], speed: 78, eats: 'meat', min: 1},
+ burr: {parts: ['spikes'], speed: 22, eats: 'plant', min: 2},
+ puffer: {parts: ['filter', 'poison', 'cilia'], speed: 50, eats: 'plant', min: 3},
+};
+const cells = [], food = [], clouds = [], fx = [];
+let player = null, camX = 0, camY = 0, zoom = 1.4, mood = 0, time = 0, paused = true, slow = 1, boss = null, coin = null, shake = 0;
+let respawnAt = 0, shellCooldown = 8, found = new Set();
+
+function makeCell(kind, x, y, r, look = kind, parts = KINDS[kind]?.parts || []) {
+ const c = {kind, x, y, r, vx: 0, vy: 0, heading: rnd(0, TAU), speed: 0, parts: new Set(parts), hp: r * .25, maxHp: r * .25, jaw: 0, hurt: 0,
+  bits: [], wander: rnd(0, TAU), cd: 0, look: null, hunting: false, born: time};
+ c.view = cellView(cellsL, LOOKS[look], {name: look, shadowLayer: shadowsL});
+ cells.push(c); return c;
+}
+function removeCell(c) { const i = cells.indexOf(c); if (i >= 0) cells.splice(i, 1); c.view.remove(); c.dead = true; }
+
+// food: green algae (plants) and orange bits left when a cell pops (meat); a glinting shell holds a new part
+function makeFood(type, x, y, s, part = null) {
+ const g = document.createElementNS(NS, 'g'); foodL.append(g);
+ if (type === 'plant') g.innerHTML = `<g>${[0, 1, 2, 3, 4].map(i => `<ellipse cx="${Math.cos(i * 1.26) * .55}" cy="${Math.sin(i * 1.26) * .55}" rx=".55" ry=".38" transform="rotate(${i * 72} ${Math.cos(i * 1.26) * .55} ${Math.sin(i * 1.26) * .55})" fill="${i % 2 ? '#7be86a' : '#4fc95a'}" stroke="#1d5a22" stroke-width=".08"/>`).join('')}<circle r=".3" fill="#d9ff9c"/></g>`;
+ else if (type === 'meat') g.innerHTML = `<circle r=".8" fill="#ff9a4a" stroke="#6a2a08" stroke-width=".1"/><circle cx="-.25" cy="-.25" r=".22" fill="#ffd9b0"/>`;
+ else g.innerHTML = `<g class="shell"><path d="M0 -1.2L1.1 -.4L.7 1L-.7 1L-1.1 -.4Z" fill="#dff8ff" fill-opacity=".55" stroke="#fff" stroke-width=".12"/><path d="M0 -1.2V1M-1.1 -.4L.7 1M1.1 -.4L-.7 1" stroke="#9ee8ff" stroke-width=".06"/><circle r=".35" fill="#fff6a8"/></g>`;
+ const f = {type, x, y, s, g, spin: rnd(0, TAU), vx: 0, vy: 0, part};
+ food.push(f); return f;
+}
+function removeFood(f) { const i = food.indexOf(f); if (i >= 0) food.splice(i, 1); f.g.remove(); }
+
+function burst(x, y, r, color = '#ffffff') {
+ const g = document.createElementNS(NS, 'circle'); g.setAttribute('fill', 'none'); g.setAttribute('stroke', color); fxL.append(g);
+ fx.push({g, x, y, r, t: 0, life: .45});
+}
+function puff(owner) {
+ const g = document.createElementNS(NS, 'g'); cloudsL.append(g);
+ g.innerHTML = [0, 1, 2, 3, 4].map(i => `<circle cx="${Math.cos(i * 1.3) * .5}" cy="${Math.sin(i * 1.3) * .5}" r=".6" fill="#c6ff5a" fill-opacity=".35"/>`).join('');
+ clouds.push({owner, g, x: owner.x - Math.cos(owner.heading) * owner.r * 1.2, y: owner.y - Math.sin(owner.heading) * owner.r * 1.2, r: owner.r * 1.5, t: 0, life: 2.6});
+ sound.noise(.4, {vol: .12, f: 500});
+}
+
+// ---- player ------------------------------------------------------------------------------------------------------
+let level = 0, eaten = 0, myParts = null;
+function spawnPlayer(mouth) {
+ const L = LEVELS[level]; if (!myParts) myParts = new Set([mouth || 'filter']);
+ player = makeCell('abbie', camX, camY, L.r * .2, 'abbie'); player.parts = myParts;
+ player.isPlayer = true; player.grow = L.r; player.hp = player.maxHp = L.r * .3 + 2;
+ player.bits = Array.from({length: eaten}, () => bitColour());
+}
+const bitColour = () => player?.parts.has('jaw') && !player.parts.has('filter') ? '#ffb070' : '#a6ff7a';
+function eats(c, type) { return type === 'plant' ? c.parts.has('filter') : type === 'meat' ? c.parts.has('jaw') : type === 'shell'; }
+
+function levelUp() {
+ if (level >= LEVELS.length - 1) return;
+ level++; eaten = 0; player.bits = []; player.grow = LEVELS[level].r; player.maxHp = LEVELS[level].r * .3 + 2; player.hp = player.maxHp;
+ sound.grow(); burst(player.x, player.y, player.r * 2.2, '#fff6a8');
+ renderHud();
+ if (level === LEVELS.length - 1) { setTimeout(riseBoss, 1400); voice.say("I'm so BIG now... wait. Something huge is coming up from the deep!"); return; }
+ openPicker();
+}
+function openPicker() {
+ const options = [...found].filter(p => !player.parts.has(p));
+ for (const p of PARTS.sort(() => Math.random() - .5)) if (options.length < 2 && !player.parts.has(p) && !options.includes(p)) options.push(p);
+ if (!options.length) return;
+ paused = true; slow = .1;
+ const box = $('#picker'); box.innerHTML = '';
+ for (const p of options.slice(0, 3)) {
+  const b = document.createElement('button'); b.className = 'glass'; b.innerHTML = partIcon(p); b.setAttribute('aria-label', p); b.dataset.part = p;
+  b.addEventListener('pointerdown', e => { e.stopPropagation(); player.parts.add(p); found.delete(p); box.classList.remove('on'); paused = false; slow = 1; sound.grow(); burst(player.x, player.y, player.r * 1.6, '#8ff7e8');
+   voice.once('part-' + p, {filter: 'A leaf mouth! Now I can munch the green stuff.', jaw: 'Chompers! Now I can eat the orange bits.', spike: 'A pointy spike. Bump things to poke them!', flagellum: 'A wiggly tail! Zoom zoom.', cilia: 'Tiny hairs all round. I can turn so fast!', poison: 'A stinky sac... dash and I leave a green cloud!'}[p]); });
+  box.append(b);
+ }
+ box.classList.add('on');
+ voice.once('picker', 'I grew! Which new part should I try?');
+}
+
+function riseBoss() {
+ const a = rnd(0, TAU);
+ boss = makeCell('gulp', player.x + Math.cos(a) * player.r * 9, player.y + Math.sin(a) * player.r * 9, player.r * 1.7, 'gulp', ['jaw', 'flagellum', 'cilia']);
+ boss.hp = boss.maxHp = 26; boss.rising = 3; boss.ghost = true; mood = 1;
+}
+
+// ---- input: hold to swim toward your finger; a quick tap dashes -----------------------------------------------------
+const input = {down: false, x: 0, y: 0, t0: 0, sx: 0, sy: 0, keys: new Set(), dash: false};
+addEventListener('pointerdown', e => { sound.unlock(); if (paused) return; input.down = true; input.x = input.sx = e.clientX; input.y = input.sy = e.clientY; input.t0 = performance.now(); });
+addEventListener('pointermove', e => { input.x = e.clientX; input.y = e.clientY; });
+addEventListener('pointerup', e => { if (input.down && performance.now() - input.t0 < 220 && Math.hypot(e.clientX - input.sx, e.clientY - input.sy) < 14) input.dash = true; input.down = false; });
+addEventListener('keydown', e => { sound.unlock(); input.keys.add(e.key.toLowerCase()); if (e.key === ' ') input.dash = true; });
+addEventListener('keyup', e => input.keys.delete(e.key.toLowerCase()));
+$('#back').addEventListener('pointerdown', e => { e.stopPropagation(); location.href = Q.get('from') || '/studies/abbietown/'; });
+const toWorld = (sx, sy) => [camX + (sx - W / 2) / zoom, camY + (sy - H / 2) / zoom];
+
+// ---- the simulation ----------------------------------------------------------------------------------------------
+function populate() {
+ const pr = player?.r || 14, R = Math.max(W, H) / zoom * .75, far = R * 2.4;
+ for (const f of [...food]) if (Math.hypot(f.x - camX, f.y - camY) > far) removeFood(f);
+ for (const c of [...cells]) if (!c.isPlayer && c !== boss && Math.hypot(c.x - camX, c.y - camY) > far) removeCell(c);
+ const at = () => { const a = rnd(0, TAU), d = rnd(R * .9, R * 1.6); return [camX + Math.cos(a) * d, camY + Math.sin(a) * d]; };
+ while (food.filter(f => f.type === 'plant').length < 34) makeFood('plant', ...at(), pr * rnd(.32, .5));
+ while (food.filter(f => f.type === 'meat').length < 8) makeFood('meat', ...at(), pr * rnd(.3, .42));
+ const want = 6 + level;
+ while (cells.filter(c => !c.isPlayer && c !== boss).length < want) {
+  const kinds = Object.keys(KINDS).filter(k => KINDS[k].min <= level + 1), k = kinds[Math.floor(Math.random() * kinds.length)];
+  const big = Math.random() < .3 ? rnd(1.15, 1.7) : rnd(.45, 1.05);
+  makeCell(k, ...at(), pr * big);
+ }
+ shellCooldown -= 1;
+ if (shellCooldown < 0 && !food.some(f => f.type === 'shell') && level < LEVELS.length - 1) {
+  const p = PARTS.filter(p => !player.parts.has(p) && !found.has(p)); shellCooldown = 25;
+  if (p.length) makeFood('shell', ...at(), pr * .45, p[Math.floor(Math.random() * p.length)]);
+ }
+}
+
+function steer(c, tx, ty, power, dt) {
+ const want = Math.atan2(ty - c.y, tx - c.x), turn = c.parts.has('cilia') ? 7 : 4;
+ c.heading += clamp(angDiff(c.heading, want), -turn * dt, turn * dt);
+ const sp = (KINDS[c.kind]?.speed || 70) * (c.parts.has('flagellum') ? 1.35 : 1) * (.7 + c.r / 40) * power;
+ c.vx += Math.cos(c.heading) * sp * dt * 4; c.vy += Math.sin(c.heading) * sp * dt * 4;
+}
+
+function think(c, dt) {
+ // what each cell sees: food it can eat, cells it can eat, cells that can eat it. Size is the rule.
+ let flee = null, prey = null, eat = null, dF = 1e9, dP = 1e9, dE = 1e9; const sight = c.r * 9;
+ for (const o of cells) {
+  if (o === c || o.dead || o.ghost) continue; const d = Math.hypot(o.x - c.x, o.y - c.y) - o.r - c.r;
+  if (d > sight) continue;
+  if (o.r > c.r * 1.25 && (o.parts.has('jaw') || o.parts.has('spike')) && d < dF) { flee = o; dF = d; }
+  if (c.parts.has('jaw') && o.r < c.r * 1.05 && o.kind !== c.kind && d < dP) { prey = o; dP = d; }
+ }
+ for (const f of food) { if (!eats(c, f.type) || f.type === 'shell') continue; const d = Math.hypot(f.x - c.x, f.y - c.y); if (d < sight && d < dE) { eat = f; dE = d; } }
+ c.hunting = false;
+ if (c === boss) { prey = player; c.hunting = true; }
+ if (c.kind === 'burr') { c.wander += rnd(-1, 1) * dt; steer(c, c.x + Math.cos(c.wander) * 50, c.y + Math.sin(c.wander) * 50, .5, dt); c.look = player ? [player.x, player.y] : null; return; }
+ if (flee && dF < c.r * 4 && c !== boss) {
+  steer(c, c.x * 2 - flee.x, c.y * 2 - flee.y, 1.1, dt); c.look = [flee.x, flee.y];
+  if (c.parts.has('poison') && c.cd <= 0) { puff(c); c.cd = 3; }
+  return;
+ }
+ if (prey && (c === boss || dP < c.r * 6)) { steer(c, prey.x, prey.y, c === boss ? .85 : 1, dt); c.look = [prey.x, prey.y]; c.hunting = true; c.jaw = clamp(1 - dP / (c.r * 3), 0, 1); return; }
+ if (eat) { steer(c, eat.x, eat.y, .7, dt); c.look = [eat.x, eat.y]; return; }
+ c.wander += rnd(-1.5, 1.5) * dt; steer(c, c.x + Math.cos(c.wander) * 80, c.y + Math.sin(c.wander) * 80, .45, dt); c.look = null;
+}
+
+function damage(c, amount, from) {
+ if (c.dead || c.ghost || (c.isPlayer && respawnAt)) return;
+ c.hp -= amount; c.hurt = .18;
+ const a = Math.atan2(from.y - c.y, from.x - c.x); c.view.hit(a, .3);
+ const k = 120 * Math.min(2, from.r / c.r); c.vx -= Math.cos(a) * k; c.vy -= Math.sin(a) * k;
+ if (c.isPlayer) { sound.hurt(); shake = .25; voice.once('hurt', 'Ow! That one bites. I should eat smaller things.'); }
+ else if (from.isPlayer) sound.crunch();
+ if (c.hp <= 0) popCell(c);
+}
+
+function popCell(c) {
+ burst(c.x, c.y, c.r * 1.6, LOOKS[c.kind === 'abbie' ? 'abbie' : c.kind]?.body || '#fff'); sound.pop();
+ const n = c.isPlayer ? 0 : 2 + Math.round(c.r / 12);
+ for (let i = 0; i < n; i++) { const f = makeFood('meat', c.x + rnd(-c.r, c.r) * .6, c.y + rnd(-c.r, c.r) * .6, (player?.r || 14) * rnd(.22, .32)); f.vx = rnd(-60, 60); f.vy = rnd(-60, 60); }
+ if (c === boss) { boss = null; mood = 0; coin = makeFood('coin', c.x, c.y, player.r * .55); coin.g.innerHTML = coinSvg(); voice.say('It popped! And there... something gold is glowing in the goo.'); }
+ if (c.isPlayer) {
+  respawnAt = time + 1.6; eaten = Math.floor(eaten / 2); c.view.remove(); const i = cells.indexOf(c); if (i >= 0) cells.splice(i, 1); c.dead = true;
+  voice.say('Pop! ...That\'s okay. A new me is budding from the goo.');
+ } else removeCell(c);
+}
+const coinSvg = () => `<g class="coin"><circle r="1" fill="#ffcc33" stroke="#7a4f00" stroke-width=".14"/><circle r=".7" fill="none" stroke="#fff3a0" stroke-width=".1"/><path d="M-.2 -.45h.4v.9h-.4z" fill="#fff3a0"/></g>`;
+
+function update(dt) {
+ time += dt;
+ // player control
+ if (player && !player.dead && !paused) {
+  let tx = null, ty = null; const k = input.keys;
+  const kx = (k.has('d') || k.has('arrowright')) - (k.has('a') || k.has('arrowleft')), ky = (k.has('s') || k.has('arrowdown')) - (k.has('w') || k.has('arrowup'));
+  if (kx || ky) { tx = player.x + kx * 100; ty = player.y + ky * 100; }
+  else if (input.down) [tx, ty] = toWorld(input.x, input.y);
+  if (tx !== null && Math.hypot(tx - player.x, ty - player.y) > player.r * .4) steer(player, tx, ty, 1.15, dt);
+  player.cd -= dt;
+  if (input.dash && player.cd <= 0) {
+   if (tx === null) [tx, ty] = toWorld(input.sx || W / 2, input.sy || H / 2);
+   const a = input.down || kx || ky ? player.heading : Math.atan2(ty - player.y, tx - player.x); player.heading = a;
+   const sp = 260 + player.r * 6; player.vx += Math.cos(a) * sp; player.vy += Math.sin(a) * sp; player.cd = 1.3; player.view.hit(a + Math.PI, .25);
+   sound.tone(300, .18, {to: 700, vol: .12, type: 'triangle'});
+   if (player.parts.has('poison')) puff(player);
+  }
+  input.dash = false;
+  // nearest interesting thing for her eyes
+  let best = null, bd = 1e9; for (const o of cells) if (o !== player) { const d = Math.hypot(o.x - player.x, o.y - player.y); if (d < bd) { bd = d; best = o; } }
+  player.look = best && bd < player.r * 6 ? [best.x, best.y] : input.down ? toWorld(input.x, input.y) : null;
+  player.jaw = player.parts.has('jaw') && best && best.r < player.r * 1.05 ? clamp(1 - (bd - best.r - player.r) / (player.r * 2), 0, 1) : 0;
+ }
+ if (!player && !paused) spawnPlayer('filter');
+ if (respawnAt && time > respawnAt) { respawnAt = 0; player = null; spawnPlayer(); burst(player.x, player.y, 30, '#ff8fd0'); }
+ for (const c of cells) {
+  if (!c.isPlayer && !paused) think(c, dt);
+  c.cd -= dt; c.hurt = Math.max(0, c.hurt - dt);
+  if (c.grow && Math.abs(c.r - c.grow) > .05) c.r += (c.grow - c.r) * Math.min(1, dt * 3);
+  if (c.rising) { c.rising -= dt; if (c.rising <= 0) { c.rising = 0; c.ghost = false; voice.say('Whoa... it\'s a GIANT! Poke it, bite it, then zoom away!'); } }
+  const drag = Math.pow(.12, dt); c.vx *= drag; c.vy *= drag; c.x += c.vx * dt; c.y += c.vy * dt;
+  c.speed = Math.hypot(c.vx, c.vy);
+  if (!c.isPlayer) c.hp = Math.min(c.maxHp, c.hp + dt * .05 * c.maxHp);
+ }
+ if (player && !player.dead) player.hp = Math.min(player.maxHp, player.hp + dt * .06 * player.maxHp);
+ // contacts: soft push apart, then weapons. Jaws and spikes work from the front; spines all round; much smaller
+ // cells are swallowed whole by a jaw.
+ for (let i = 0; i < cells.length; i++) for (let j = i + 1; j < cells.length; j++) {
+  const a = cells[i], b = cells[j]; if (a.dead || b.dead || a.ghost || b.ghost) continue;
+  const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, ov = a.r + b.r - d; if (ov <= 0) continue;
+  const nx = dx / d, ny = dy / d, ma = a.r * a.r, mb = b.r * b.r, t = ov / (ma + mb);
+  a.x -= nx * ov * mb / (ma + mb); a.y -= ny * ov * mb / (ma + mb); b.x += nx * ov * ma / (ma + mb); b.y += ny * ov * ma / (ma + mb);
+  a.view.hit(Math.atan2(ny, nx), .06); b.view.hit(Math.atan2(-ny, -nx), .06);
+  for (const [p, q, ang] of [[a, b, Math.atan2(ny, nx)], [b, a, Math.atan2(-ny, -nx)]]) {
+   if (p.dead || q.dead || p.cd > 0) continue;
+   const facing = Math.abs(angDiff(p.heading, ang)) < .9;
+   if (p.parts.has('jaw') && facing && q.r < p.r * .5 && !(q.isPlayer && respawnAt)) { // swallowed whole
+    if (p.isPlayer) feed('meat', 2); burst(q.x, q.y, q.r, '#ffb070'); p.jaw = 1; sound.crunch();
+    if (q.isPlayer) popCell(q); else removeCell(q); continue;
+   }
+   let dmg = 0;
+   if (p.parts.has('jaw') && facing) dmg += 1;
+   if (p.parts.has('spike') && facing) dmg += 1.4 * clamp(p.speed / 120, .4, 1.6);
+   if (q.parts.has('spikes')) damage(p, .5 * q.r * .06, q);
+   if (dmg && !p.dead) { damage(q, dmg * p.r * .09 * (p.isPlayer && level === 0 ? 1.3 : 1), p); p.cd = .4; p.jaw = 1; }
+  }
+ }
+ // eating food
+ for (const f of [...food]) {
+  f.x += f.vx * dt; f.y += f.vy * dt; f.vx *= Math.pow(.2, dt); f.vy *= Math.pow(.2, dt); f.spin += dt * .4;
+  for (const c of cells) {
+   if (c.dead || c.ghost) continue; const d = Math.hypot(f.x - c.x, f.y - c.y); if (d > c.r + f.s * .6) continue;
+   if (f.type === 'coin') { if (c.isPlayer) collectCoin(f); continue; }
+   if (f.type === 'shell') { if (c.isPlayer) { found.add(f.part); burst(f.x, f.y, f.s * 2, '#9ee8ff'); sound.coin(); removeFood(f); voice.once('shell', 'A shiny shell with a new part inside! I can use it next time I grow.'); } continue; }
+   if (eats(c, f.type)) { removeFood(f); if (c.isPlayer) feed(f.type, 1); else if (c.r < (player?.r || 14) * 1.8) c.r *= 1.01; break; }
+   const a = Math.atan2(f.y - c.y, f.x - c.x); f.vx += Math.cos(a) * 40; f.vy += Math.sin(a) * 40; // not my food: it bumps away
+  }
+ }
+ // clouds: poison hurts everyone but the one who puffed it; drawn at 12 frames a second like a hand-drawn effect
+ for (const cl of [...clouds]) {
+  cl.t += dt; if (cl.t > cl.life) { cl.g.remove(); clouds.splice(clouds.indexOf(cl), 1); continue; }
+  for (const c of cells) if (c !== cl.owner && !c.dead && Math.hypot(c.x - cl.x, c.y - cl.y) < cl.r + c.r * .5 && Math.random() < dt * 3) damage(c, .6 * cl.r * .05, cl);
+ }
+ // mood: one signal from danger near Abbie drives the light, the music and the pond's hum
+ let m = 0;
+ if (player && !player.dead) for (const c of cells) if (c !== player && (c.hunting || c === boss) && c.r > player.r * .9) m = Math.max(m, clamp(1 - (Math.hypot(c.x - player.x, c.y - player.y) - c.r - player.r) / (player.r * 8), 0, 1));
+ if (boss) m = Math.max(m, .7);
+ mood += (m - mood) * Math.min(1, dt * 2);
+ sound.music(mood, player ? player.hp / player.maxHp : 1);
+}
+
+function feed(type, n) {
+ for (let i = 0; i < n; i++) { eaten++; player.bits.push(type === 'meat' ? '#ffb070' : '#a6ff7a'); }
+ sound.plop(); voice.once('first-bite', type === 'meat' ? 'Crunchy! I can feel it glowing inside me.' : 'Mmm, green goo snack! It glows inside me.');
+ const need = LEVELS[level].need; renderHud();
+ if (need && eaten >= need) levelUp();
+}
+
+function collectCoin(f) {
+ removeFood(f); coin = null; sound.coin();
+ const first = giveMemoryCoin('science-lab:the-giant', 'The science lab');
+ const fly = document.createElement('div'); fly.className = 'coinfly'; fly.innerHTML = `<svg viewBox="-1.3 -1.3 2.6 2.6">${coinSvg()}</svg>`;
+ const sx = (f.x - camX) * zoom + W / 2, sy = (f.y - camY) * zoom + H / 2, hb = $('#hud .coin').getBoundingClientRect();
+ fly.style.left = sx + 'px'; fly.style.top = sy + 'px'; document.body.append(fly);
+ fly.animate([{transform: 'scale(1) rotateY(0)'}, {transform: 'scale(2.4) rotateY(720deg)', offset: .55}, {transform: `translate(${hb.left + 8 - sx}px,${hb.top + 8 - sy}px) scale(.3) rotateY(1080deg)`}], {duration: 2200, easing: 'ease-in-out'}).finished.then(() => { fly.remove(); renderHud(); });
+ for (let i = 0; i < 6; i++) setTimeout(() => burst(f.x, f.y, player.r * (1.5 + i * .5), '#ffd84a'), i * 90);
+ setTimeout(() => voice.say(first ? "A gold coin... one of Daddy's core memories! He showed me pond water under a microscope once." : 'Another gold glimmer. Daddy would love this.',
+  {choices: [{label: 'Keep swimming', go: () => {}}, {label: 'Back to the lab', go: () => { location.href = Q.get('from') || '/studies/abbietown/'; }}]}), 1600);
+}
+
+// ---- drawing -----------------------------------------------------------------------------------------------------
+function renderHud() {
+ const beads = [...document.querySelectorAll('#hud .bead')];
+ beads.forEach((b, i) => { b.classList.toggle('done', i < level); b.querySelector('i').style.height = i === level && LEVELS[level].need ? Math.round(eaten / LEVELS[level].need * 100) + '%' : '0'; });
+ $('#coins').textContent = memoryCoins();
+}
+
+function draw(dt) {
+ const target = player && !player.dead ? player : {x: camX, y: camY, r: LEVELS[level].r};
+ camX += (target.x - camX) * Math.min(1, dt * 3); camY += (target.y - camY) * Math.min(1, dt * 3);
+ const zt = Math.min(W, H) / (Math.max(target.r, LEVELS[level].r * .6) * 8.5) * (W > 700 ? .8 : 1);
+ zoom += (zt - zoom) * Math.min(1, dt * 1.5);
+ shake = Math.max(0, shake - dt); const sx = shake ? rnd(-4, 4) * shake * 4 : 0, sy = shake ? rnd(-4, 4) * shake * 4 : 0;
+ cam.setAttribute('transform', `translate(${(W / 2 + sx).toFixed(1)} ${(H / 2 + sy).toFixed(1)}) scale(${zoom.toFixed(4)}) translate(${(-camX).toFixed(1)} ${(-camY).toFixed(1)})`);
+ for (const c of cells) {
+  if (c.rising) { c.ghost = true; }
+  c.view.draw(c, time, dt);
+  c.view.g.style.opacity = c.rising ? (.25 + .5 * (1 - c.rising / 3)).toFixed(2) : '';
+ }
+ for (const f of food) f.g.setAttribute('transform', `translate(${f.x.toFixed(1)} ${f.y.toFixed(1)}) rotate(${(f.spin * 57.3).toFixed(0)}) scale(${(f.s * (f.type === 'coin' ? 1 + .08 * Math.sin(time * 5) : f.type === 'shell' ? 1 + .1 * Math.sin(time * 6) : 1)).toFixed(2)})`);
+ const step = Math.floor(time * 12) / 12; // hand-drawn effects hold each frame for a twelfth of a second
+ for (const cl of clouds) { const k = cl.t / cl.life, s = cl.r * (.5 + .7 * Math.min(1, cl.t * 3)) * (1 + .06 * Math.sin(step * 40)); cl.g.setAttribute('transform', `translate(${cl.x.toFixed(1)} ${cl.y.toFixed(1)}) scale(${s.toFixed(1)}) rotate(${(step * 30 % 360).toFixed(0)})`); cl.g.style.opacity = (1 - k).toFixed(2); }
+ for (const e of [...fx]) { e.t += dt; const k = e.t / e.life; if (k >= 1) { e.g.remove(); fx.splice(fx.indexOf(e), 1); continue; } e.g.setAttribute('cx', e.x); e.g.setAttribute('cy', e.y); e.g.setAttribute('r', (e.r * (.4 + k)).toFixed(1)); e.g.setAttribute('stroke-width', (e.r * .12 * (1 - k)).toFixed(2)); e.g.setAttribute('stroke-opacity', (1 - k).toFixed(2)); }
+ // each cell is a lens in the water: biggest on screen first
+ const lenses = cells.filter(c => !c.dead).map(c => [(c.x - camX) * zoom + W / 2 + sx, (c.y - camY) * zoom + H / 2 + sy, c.r * zoom * 1.02, c.isPlayer ? 1 : .4])
+  .filter(l => l[0] > -l[2] && l[0] < W + l[2] && l[1] > -l[2] && l[1] < H + l[2]).sort((a, b) => b[2] - a[2]);
+ pond.frame({cam: [camX, camY], zoom, time, mood, lenses});
+ if (DEV) devLayer();
+}
+
+// developer mode only: contact circles, kinds and the mood number (presentation layer, never in the player's view)
+let devText = null;
+function devLayer() {
+ pres.innerHTML = ''; if (!devText) { devText = document.createElement('div'); devText.style.cssText = 'position:fixed;left:12px;bottom:12px;color:#fff;font:12px ui-monospace;z-index:9'; document.body.append(devText); }
+ for (const c of cells) { const e = document.createElementNS(NS, 'circle'); e.setAttribute('cx', (c.x - camX) * zoom + W / 2); e.setAttribute('cy', (c.y - camY) * zoom + H / 2); e.setAttribute('r', c.r * zoom); e.setAttribute('fill', 'none'); e.setAttribute('stroke', c.hunting ? '#f44' : '#0ff'); pres.append(e); }
+ devText.textContent = `dev · level ${level} eaten ${eaten} mood ${mood.toFixed(2)} cells ${cells.length} food ${food.length} fps ${fps.toFixed(0)}`;
+}
+
+let last = performance.now(), fps = 60, popT = 0;
+function loop(now) {
+ const dt = Math.min(.05, (now - last) / 1000); last = now; fps += (1 / Math.max(dt, 1e-3) - fps) * .05;
+ update(dt * slow); draw(dt * slow);
+ popT -= dt; if (popT < 0 && !paused) { populate(); popT = .5; }
+ voice.tick(now);
+ requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+// the scene volunteers what it knows, so a bot or the grown-up view can choose how to show it
+volunteer('cell-pond', {place: 'science lab: a drop of green goo', dialect: 'microscope: glass, glow and bubbles', items: [
+ {id: 'growth', says: 'how close Abbie is to growing', kind: 'level', who: 'characters', for: ['player'], read: () => ({level, eaten, need: LEVELS[level].need}), prefer: ['diegetic', 'overlay'], ways: {diegetic: 'glowing bits of food float inside her cell', overlay: 'five glass beads in the pill'}},
+ {id: 'health', says: 'how hurt Abbie is', kind: 'level', who: 'characters', for: ['player'], read: () => player ? player.hp / player.maxHp : 1, prefer: ['diegetic', 'meta'], ways: {diegetic: 'her membrane dents, pales and wobbles', meta: 'a heartbeat and a small shake'}},
+ {id: 'danger', says: 'something big is hunting', kind: 'state', who: 'characters', for: ['player', 'director'], read: () => mood, prefer: ['diegetic', 'meta'], ways: {diegetic: 'the light cools, the hunter narrows its eyes and opens its jaw', meta: 'the music speeds up and drops minor'}},
+ {id: 'coins', says: "Daddy's core memories", kind: 'count', who: 'player', for: ['player'], read: () => memoryCoins(), prefer: ['overlay'], ways: {overlay: 'the gold coin in the pill'}},
+]});
+
+// ---- the lab: tap the goo, a drop goes under the lens, and the lens opens onto the pond -----------------------------
+function startGame(mouth) {
+ paused = false; spawnPlayer(mouth); renderHud(); $('#hud').classList.add('on'); populate();
+ for (let i = 0; i < 10; i++) makeFood('plant', rnd(-120, 120), rnd(-160, 160), 14 * rnd(.32, .5));
+ for (let i = 0; i < 6; i++) makeFood('meat', rnd(-150, 150), rnd(-200, 200), 14 * rnd(.3, .42));
+ setTimeout(() => voice.say(mouth === 'jaw' ? "I'm a tiny pink cell with chompers! Hold to swim, tap to dash. Eat smaller things..." : "I'm a tiny pink cell! Hold to swim, tap to dash. Munch the green stuff..."), 500);
+}
+function chooseMouth() {
+ const box = $('#picker'); box.innerHTML = '';
+ for (const p of ['filter', 'jaw']) {
+  const b = document.createElement('button'); b.className = 'glass'; b.innerHTML = partIcon(p); b.setAttribute('aria-label', p === 'filter' ? 'leaf mouth' : 'chompers'); b.dataset.part = p;
+  b.addEventListener('pointerdown', e => { e.stopPropagation(); sound.unlock(); box.classList.remove('on'); sound.grow(); startGame(p); });
+  box.append(b);
+ }
+ box.classList.add('on');
+ voice.say('Leaves or chompers? What should my first mouth be?');
+}
+function openLens() {
+ // the liquid-glass lens grows from the slide to the whole screen: a thick bright rim that bends what it shows
+ const ring = $('#lensRing'), cx = W / 2, cy = H / 2, R = Math.hypot(W, H) / 2 + 40;
+ ring.innerHTML = `<defs><linearGradient id="lr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#bff" stop-opacity=".3"/><stop offset="1" stop-color="#8ff7e8"/></linearGradient></defs><circle id="lc" cx="${cx}" cy="${cy}" r="10" fill="none" stroke="url(#lr)" stroke-width="10"/>`;
+ const lab = $('#lab'), lc = $('#lc'), t0 = performance.now();
+ const grow = now => {
+  const k = Math.min(1, (now - t0) / 1300), e = 1 - (1 - k) ** 3, r = 10 + e * R;
+  lc.setAttribute('r', r); lc.setAttribute('stroke-width', 10 + 20 * e);
+  lab.style.clipPath = `path(evenodd, "M0 0H${W}V${H}H0Z M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0Z")`;
+  if (k < 1) requestAnimationFrame(grow); else { lab.classList.add('gone'); ring.innerHTML = ''; chooseMouth(); }
+ };
+ requestAnimationFrame(grow);
+}
+$('#beaker').addEventListener('pointerdown', e => {
+ e.stopPropagation(); sound.unlock(); voice.hush(); sound.plop();
+ const drop = $('#drop'); drop.animate([{r: 0, cy: 62}, {r: 9, cy: 40}, {r: 7, cy: -40}], {duration: 700, easing: 'ease-in', fill: 'forwards'});
+ drop.setAttribute('r', 7);
+ setTimeout(openLens, 650);
+}, {once: true});
+for (const b of document.querySelectorAll('.bub')) b.animate([{transform: 'translateY(0)', opacity: 1}, {transform: 'translateY(-50px)', opacity: 0}], {duration: 1400 + Math.random() * 900, iterations: Infinity, delay: Math.random() * 900});
+if (Q.has('play')) { $('#lab').classList.add('gone'); startGame(Q.get('play') === 'jaw' ? 'jaw' : 'filter'); }
+else voice.say('A beaker of strange green goo... is something moving in there?', {hold: 6000});
+renderHud();
+window.__cell = {get level() { return level; }, get time() { return time; }, get respawnAt() { return respawnAt; }, get eaten() { return eaten; }, get player() { return player; }, get boss() { return boss; }, get coin() { return coin; }, cells, food, levelUp, riseBoss, pick: p => document.querySelector(`#picker [data-part="${p}"]`)?.dispatchEvent(new PointerEvent('pointerdown', {bubbles: true}))};
+</script>
+</body>
+</html>

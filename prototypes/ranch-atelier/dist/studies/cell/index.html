@@ -1,0 +1,99 @@
+<!doctype html>
+<meta charset="utf-8">
+<html lang="en">
+<title>AW-STUDY-0047 - Abbie's Science Adventure</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="The green goo outside the science lab in Abbie's Town is alive. A top-down single-cell battler in the style of Spore's Cell Stage: shader water, rigged SVG cells, and a liquid-glass lens on every body.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* The study keeps the game's own look: goo green water, Abbie's pink, glass. */
+:root{--bg:#0d2b25;--paper:#123a31;--ink:#eafff4;--muted:#a8cfc0;--line:#285c4e;--accent:#ff8fd0;--goo:#9cf06a;
+ --display:Fredoka,ui-rounded,system-ui,sans-serif;--body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+:root[data-theme="light"]{--bg:#effaf4;--paper:#fff;--ink:#14302a;--muted:#4f6e64;--line:#cfe5da;--accent:#c93c95;--goo:#2f9a3c;color-scheme:light}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#effaf4;--paper:#fff;--ink:#14302a;--muted:#4f6e64;--line:#cfe5da;--accent:#c93c95;--goo:#2f9a3c;color-scheme:light}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);padding:20px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,7vw,68px);line-height:.95;color:var(--accent)} h2{font-size:28px;line-height:1.1}
+p{margin:0;max-width:68ch} .muted{color:var(--muted)} a{color:var(--accent)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--goo)}
+header,section{display:grid;gap:14px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ba figure img{aspect-ratio:9/16;object-fit:cover}
+.play{position:relative;display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:#000}
+.play img{width:100%;height:100%;object-fit:cover;display:block}
+.play span{position:absolute;left:50%;top:50%;translate:-50% -50%;width:84px;height:84px;border-radius:50%;background:rgba(255,143,208,.92);box-shadow:0 10px 40px rgba(255,143,208,.45)}
+.play span::after{content:"";position:absolute;left:33px;top:24px;border-left:28px solid #43123c;border-top:18px solid transparent;border-bottom:18px solid transparent}
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+figure img{width:100%;border-radius:12px;display:block;background:#000}
+.four img{aspect-ratio:9/16;object-fit:cover}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
+table{border-collapse:collapse;width:100%;max-width:900px;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px/1.3 var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+@media (max-width:700px){.four{grid-template-columns:1fr 1fr}}
+</style>
+<div class="wrap">
+ <header>
+  <div class="eyebrow">AW-STUDY-0047</div>
+  <h1>Abbie's Science Adventure</h1>
+  <p><a href="play.html">Play it</a> · <a href="https://claude.ai/artifact/9auhAYbLMHmcY3JXWsYpdG">advance preview</a></p>
+  <p class="muted">Evan, 2026-10-23 12:18 PM: "make abbie's science adventure, it is found inside the science lab in town .. there's a small beaker outside with a strange green goo. then when you go to that mini game, it's a spore style single cell top down battler, here the lens and shaders will SHINE and the SVG 2D will shine also ... focus on the 2D view." Then: "the early stage". So it is the Cell Stage only, in Spore's style and none of its expression.</p>
+ </header>
+ <section>
+  <div class="ba">
+   <figure><img src="img/lab.jpg" alt="The lab bench: a test-tube beaker of bright green goo and a microscope"><figcaption>Before: the beaker of strange green goo on the lab bench.</figcaption></figure>
+   <figure><img src="img/boss-phone.jpg" alt="Under the lens: Abbie's pink cell with a tail and jaws beside a giant blue cell in green water"><figcaption>After: under the lens, Abbie is a tiny pink cell.</figcaption></figure>
+  </div>
+ </section>
+ <a class="play" href="play.html" aria-label="Play Abbie's science adventure"><img src="img/boss.jpg" alt="The pond on a wide screen: Abbie's pink cell, an orange nipper and the giant blue cell rising"><span></span></a>
+ <section>
+  <h2>How it plays</h2>
+  <div class="four">
+   <figure><img src="img/lens.jpg" alt="A glass lens ring opening over the lab onto green water"><figcaption>1. Tap the goo. A drop goes under the lens, and the lens opens onto the pond.</figcaption></figure>
+   <figure><img src="img/swim.jpg" alt="The small pink cell among green algae"><figcaption>2. Pick a first mouth: leaves or chompers. Hold to swim, tap to dash.</figcaption></figure>
+   <figure><img src="img/picker.jpg" alt="Two glass lens bubbles, each with a pink cell wearing a part"><figcaption>3. Eat enough and you grow. Pick a new part in a glass lens.</figcaption></figure>
+   <figure><img src="img/memory.jpg" alt="The pink cell after the giant popped, with a caption about Daddy's microscope"><figcaption>4. Grow four times, the giant rises, and it leaves a gold coin.</figcaption></figure>
+  </div>
+  <ol>
+   <li><b>Size is the rule.</b> Smaller cells are food, bigger ones are danger. A jaw swallows anything less than half your size whole; peers take a fight. You read it off the creatures, not a meter.</li>
+   <li><b>Diet by mouth.</b> The leaf mouth eats green algae, chompers eat the orange bits a popped cell leaves. Food that isn't yours bumps away.</li>
+   <li><b>Parts change how you swim.</b> A tail (faster), cilia (nimble turns), a spike (ram), chompers (bite), a poison sac (a dash leaves a green cloud). Glinting glass shells in the goo hold parts; the ones you find come first in the picker.</li>
+   <li><b>Growing lifts you a layer.</b> Five growth steps. Each time, the camera rises and the old giants are now your size. At the fifth, a giant rises from the deep.</li>
+   <li><b>Soft failure.</b> If you pop, a new you buds from the goo a moment later with half its snacks. Kids never lose their parts.</li>
+   <li><b>The gold coin.</b> The giant leaves one of Daddy's core memories: he once showed Abbie pond water under a microscope. It counts in the same coin total as the basement and the school.</li>
+  </ol>
+ </section>
+ <section>
+  <h2>The lens, the shaders and the SVG</h2>
+  <ul>
+   <li><b>Every cell is a lens.</b> The water is a WebGL shader (<code>simulations/lens-pond.mjs</code>). Each cell body is a liquid-glass drop: the shader samples the water again through it, magnified, bent at the rim with the same profile as our panel lens (<code>lensMap()</code> in <code>liquid-glass.mjs</code>), a little apart per colour, with a bright sunward rim and a teal shade rim. It runs on phones, not only where CSS can refract.</li>
+   <li><b>The water</b> takes the top two picks from Inspiring Shaders: Tiny Glade's soft moving sunlight, and Painted Brush's brush-broken shade, purple shadows, teal rim and 12-frames-a-second effects (glow specks and poison clouds hold each frame like hand-drawn effects). Giant shapes drift in the deep and motes in the middle distance, each on its own parallax layer.</li>
+   <li><b>The cells are rigged SVG</b> (<code>simulations/microbe-kit.mjs</code>): a soft membrane of 24 points on springs that dents where it's hit, squashes as it swims and breathes; a tail chain that lags and whips (the puppet study's follow-through); cilia beating in a travelling wave; jaws that open as prey comes near; eyes that look at what matters and blink. Light is fixed to the world, so the membrane is drawn unrotated and only the parts turn.</li>
+   <li><b>One mood signal</b> (danger near Abbie) cools the light, dims the sun, speeds the music and drops it minor, and lowers the pond's hum.</li>
+  </ul>
+ </section>
+ <section>
+  <h2>How it shows information</h2>
+  <table>
+   <tr><th>What</th><th>How a cell would know</th><th>Mode</th></tr>
+   <tr><td>Growth</td><td>What you've eaten floats inside you as glowing bits; you get bigger</td><td>Diegetic, plus five glass beads in the pill</td></tr>
+   <tr><td>Health</td><td>The membrane dents, pales and wobbles; a heartbeat when it's low</td><td>Diegetic and meta</td></tr>
+   <tr><td>Danger</td><td>Size, a hunter's narrowed eyes and open jaw, the light cooling</td><td>Diegetic</td></tr>
+   <tr><td>Parts</td><td>On the body, animating</td><td>Diegetic; the picker is summoned</td></tr>
+   <tr><td>Daddy's coins</td><td>Only you know</td><td>Overlay: the coin in the pill</td></tr>
+  </table>
+  <p class="muted">The play HUD is one glass pill (about 2% of a phone screen) and a back button, with zero words. Abbie's inner voice speaks in captions at story beats only. Developer mode (<code>?dev</code>) shows contact circles and the mood number.</p>
+ </section>
+ <section>
+  <h2>Tour</h2>
+  <p>Tour: yes. It is a whole new place to visit from the town's science lab, short, and shows off the lens.</p>
+ </section>
+ <section>
+  <h2>How it was made, and how to be faster next time</h2>
+  <p class="muted">See <a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cell/CELL_STUDY.md">the study doc</a> for the timeline and speedups.</p>
+ </section>
+</div>
+<script type="module" src="/look/context-card.mjs" data-context-study="cell"></script>

@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-science-adventure",
+      "date": "2026-10-23",
+      "title": "Abbie's science adventure",
+      "line": "The green goo outside the science lab is alive. Tap the beaker, look through the lens, and Abbie is a tiny pink cell in a pond: eat, grow, pick new parts and face the giant. There's a gold coin at the end.",
+      "image": "/whats-new/2026-10-23-science-adventure.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9HBxSBbSfYYnh3RNNKKnMi",
+      "threadTitle": "AW-STUDY-0047 - Abbie's Science Adventure",
+      "tour": true,
+      "link": "/studies/cell/play.html"
+    },
+    {
       "id": "2026-10-23-character-studio-cast",
       "date": "2026-10-23",
       "title": "Character Studio: four new characters",
