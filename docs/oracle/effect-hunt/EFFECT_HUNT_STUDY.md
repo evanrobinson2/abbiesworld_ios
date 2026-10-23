@@ -35,7 +35,7 @@ Paint is the existing one; nine are new (we built five of those). Every effect i
 Hide spots live in `effects.mjs` as a hex id plus metres east and north of the hex middle, so the hex city thread can move any of them.
 
 ## Rules
-- Mission selected in the notebook: a laser beacon over every effect not yet found (about 420 m tall, coloured per effect, a ring on the
+- Beacons are earned in the car (Evan, 21:47Z): they show only while you drive; overhead and the notebook hide them unless the developer cheat is on (`localStorage aw-dev-beacons=1` or `?cheat=beacons`). Laser beacons are reserved for charm missions. A laser beacon over every effect not yet found (about 420 m tall, coloured per effect, a ring on the
   ground to drive into, a spinning gem). Found effects fade out with a ring burst.
 - Drive into a ring (7 m, below 14 m up) to collect. The tray button lights; tap it (or keys 1 to 0) to cast ahead of the cart. In god mode
   tap a button to arm it, then tap the ground to throw it there.

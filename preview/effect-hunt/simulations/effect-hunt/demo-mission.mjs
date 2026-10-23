@@ -1,7 +1,7 @@
 // The Effect Hunt as a line in the demo's paper notebook (simulations/demo/missions.mjs). This file runs in the DEMO page and
 // imports no three.js: the real work happens in town-mount.mjs, imported inside the town's own frame so it shares the town's
 // three. Selecting the line shows a laser beacon over every hidden effect; the kart button drives the jet cart.
-import {EFFECTS, found} from './effects.mjs';
+import {EFFECTS, found, beaconCheat} from './effects.mjs';
 
 const frameOf = stage => stage.canvas.ownerDocument.defaultView;
 const loadIn = (win, file) => new win.Function('u', 'return import(u)')(new URL('/simulations/effect-hunt/' + file, win.location.href).href);
@@ -11,8 +11,9 @@ export const HUNT_MISSION = {
  id: 'effect-hunt', charmIcon: '🛒', title: 'The Effect Hunt', line: 'Ten effects are hidden around town. Follow the beams in a jet cart.', icon: '🛒', charm: 'effects', tint: '#7fe4ff', at: 'common', beacon: false,
  done: () => found().size >= EFFECTS.length,
  progress: () => [found().size, EFFECTS.length],
- // the notebook line was tapped: beams into the sky over each effect you have not found yet
- async onSelect(stage) { if (beacons || running) return; const w = frameOf(stage), m = await loadIn(w, 'town-mount.mjs'); if (!beacons && !running) beacons = m.showBeacons({stage: w.AbbieTown.stage}); },
+ // the notebook line was tapped (developer cheat only): beams into the sky over each effect not found yet
+ async onSelect(stage) { if (!beaconCheat() || beacons || running) return; // beams are earned in the car; the notebook only shows them for the developer cheat
+  const w = frameOf(stage), m = await loadIn(w, 'town-mount.mjs'); if (!beacons && !running) beacons = m.showBeacons({stage: w.AbbieTown.stage}); },
  onDeselect() { beacons?.dispose(); beacons = null; },
  // the kart button: close the notebook, drop into the cart; the overhead button starts the same hunt from the sky
  drive(mission, stage) { return start(stage, 'cart'); },

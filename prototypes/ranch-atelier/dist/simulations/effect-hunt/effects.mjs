@@ -40,3 +40,7 @@ const R3 = Math.sqrt(3), DIO_R = 105;
 const BEARING = {'depot-river': 180, 'reservoir-hills': 120, neighbourhood: 240, 'anis-side': 300, 'abbie-daddy-side': 0, 'gingerbread-hill': 60};
 export const hexCentre = id => id === 'downtown' ? {x: 0, y: 0} : {x: Math.sin(BEARING[id] * Math.PI / 180) * DIO_R * R3, y: Math.cos(BEARING[id] * Math.PI / 180) * DIO_R * R3};
 export const spotOf = (e, board) => { const c = (board?.centreOf || hexCentre)(e.tile); return {x: c.x + e.dx, y: c.y + e.dy}; }; // board metres, east and north
+
+// Beacons are earned in the car (Evan, 21:47Z): overhead and the notebook do not show them unless the developer cheat is on
+// (localStorage aw-dev-beacons = 1, or ?cheat=beacons).
+export const beaconCheat = () => { try { return localStorage.getItem('aw-dev-beacons') === '1' || /[?&]cheat=beacons/.test(location.search + (window.parent !== window ? window.parent.location.search : '')); } catch { return false; } };

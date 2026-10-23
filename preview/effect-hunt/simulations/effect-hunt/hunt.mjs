@@ -6,7 +6,7 @@
 //   hunt.setMode('cart'|'buggy'|'coaster'|'god')
 // `world` is world.mjs' fromBoard() (or the stand-in). `paint` is optional: createPaintWorld(...) from Paint the World.
 import * as T from 'three';
-import {EFFECTS, byId, collect, found, canCast, startCooldown, spotOf, isFound, COOLDOWN_MS, cooldownLeft} from './effects.mjs';
+import {beaconCheat, EFFECTS, byId, collect, found, canCast, startCooldown, spotOf, isFound, COOLDOWN_MS, cooldownLeft} from './effects.mjs';
 import {createBeacons} from './beacons.mjs';
 import {createFx} from './fx.mjs';
 import {VEHICLES} from './vehicles.mjs';
@@ -46,7 +46,7 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
  const input = bindInput(driver, renderer.domElement, {onCast: i => cast(i), wins});
 
  function setMode(id) {
-  cur = id; const m = MODES.find(x => x.id === id); if (m.vehicle) setVehicle(m.vehicle); vehicleRoot.visible = true; autopilot = null; hud?.setMode(id);
+  cur = id; const m = MODES.find(x => x.id === id); if (m.vehicle) setVehicle(m.vehicle); vehicleRoot.visible = true; autopilot = null; hud?.setMode(id); beam.set(beacons && (id !== 'god' || beaconCheat()));
   if (id === 'god') { godCentre.set(driver.s.x, 0, driver.s.z); }
  }
  function castAt(e, at) {
@@ -130,7 +130,7 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
  }
  setMode(mode);
  return {
-  driver, tow, fx, beam, places, frame, setMode, cast, get mode() { return cur; }, setBeacons: v => beam.set(v), vehicleRoot,
+  driver, tow, fx, beam, places, frame, setMode, cast, get mode() { return cur; }, setBeacons: v => { beacons = v; beam.set(v && (cur !== 'god' || beaconCheat())); }, vehicleRoot,
   foundCount: () => found().size, dispose() { hud?.dispose(); input.dispose(); vehicleRoot.removeFromParent(); fx.root.removeFromParent(); beam.root.removeFromParent(); camera.fov = fov; camera.updateProjectionMatrix(); }
  };
 }
