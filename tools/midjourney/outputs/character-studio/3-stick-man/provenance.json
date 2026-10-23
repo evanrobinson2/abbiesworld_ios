@@ -1,0 +1,58 @@
+{
+  "study": "AW-STUDY-0037 Character Studio: next characters",
+  "date": "2026-10-23",
+  "submitted_utc": "2026-10-23T14:13Z",
+  "tool": "Midjourney web in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney/mj.js download path",
+  "mode": "Relax (--relax appended at submit)",
+  "version": "Midjourney v8.2 (account default, Standard)",
+  "prompt": "character turnaround sheet of a storybook stick man hero, ink line limbs, round head with a simple face, a twig sword and a leaf cape, hand-drawn on paper, front side back three-quarter views, A-pose, plain paper background --ar 3:2",
+  "submitted_prompt": "character turnaround sheet of a storybook stick man hero, ink line limbs, round head with a simple face, a twig sword and a leaf cape, hand-drawn on paper, front side back three-quarter views, A-pose, plain paper background --ar 3:2 --relax",
+  "job_id": "a621d6e0-c511-4ffd-afb9-ee071b5809c5",
+  "page": "https://www.midjourney.com/jobs/a621d6e0-c511-4ffd-afb9-ee071b5809c5",
+  "images": [
+    {
+      "file": "grid-0.png",
+      "index": 0,
+      "url": "https://cdn.midjourney.com/a621d6e0-c511-4ffd-afb9-ee071b5809c5/0_0.png",
+      "size": [
+        1344,
+        896
+      ],
+      "sha256": "3aa50baa8042d025aec016e7857c0a9498efd8afed12aaaa0250b52609736323"
+    },
+    {
+      "file": "grid-1.png",
+      "index": 1,
+      "url": "https://cdn.midjourney.com/a621d6e0-c511-4ffd-afb9-ee071b5809c5/0_1.png",
+      "size": [
+        1344,
+        896
+      ],
+      "sha256": "ae6864797dba0af6918fcab34261911a772b19d7b3ec2427b286c6f4e9ac27ed"
+    },
+    {
+      "file": "grid-2.png",
+      "index": 2,
+      "url": "https://cdn.midjourney.com/a621d6e0-c511-4ffd-afb9-ee071b5809c5/0_2.png",
+      "size": [
+        1344,
+        896
+      ],
+      "sha256": "1cbb8dfc264fb4c3a69394b7a5b0b0835045cbbb14037d410cbc2648980eadf8"
+    },
+    {
+      "file": "grid-3.png",
+      "index": 3,
+      "url": "https://cdn.midjourney.com/a621d6e0-c511-4ffd-afb9-ee071b5809c5/0_3.png",
+      "size": [
+        1344,
+        896
+      ],
+      "sha256": "f340d5f75c00b02417fadcaa2d2d3c9740a150ab4c189f57a13d9ab83da8ac8d"
+    }
+  ],
+  "pick": {
+    "index": 2,
+    "upscale": null
+  }
+}

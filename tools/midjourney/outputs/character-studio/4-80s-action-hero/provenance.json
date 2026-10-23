@@ -1,0 +1,58 @@
+{
+  "study": "AW-STUDY-0037 Character Studio: next characters",
+  "date": "2026-10-23",
+  "submitted_utc": "2026-10-23T14:13Z",
+  "tool": "Midjourney web in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney/mj.js download path",
+  "mode": "Relax (--relax appended at submit)",
+  "version": "Midjourney v8.2 (account default, Standard)",
+  "prompt": "character turnaround sheet of a 1980s saturday morning cartoon action hero, bold black ink outlines, cel shading, saturated red blue and yellow suit, square jaw, hero shooter proportions, front side back three-quarter views, A-pose, plain flat background --ar 3:2",
+  "submitted_prompt": "character turnaround sheet of a 1980s saturday morning cartoon action hero, bold black ink outlines, cel shading, saturated red blue and yellow suit, square jaw, hero shooter proportions, front side back three-quarter views, A-pose, plain flat background --ar 3:2 --relax",
+  "job_id": "43251376-7e97-43e9-9b65-7bd831d191b3",
+  "page": "https://www.midjourney.com/jobs/43251376-7e97-43e9-9b65-7bd831d191b3",
+  "images": [
+    {
+      "file": "grid-0.png",
+      "index": 0,
+      "url": "https://cdn.midjourney.com/43251376-7e97-43e9-9b65-7bd831d191b3/0_0.png",
+      "size": [
+        1344,
+        896
+      ],
+      "sha256": "53e98fd6001730458851e7906c6a9b01b69584c36637822e06af5c7fa0d800f4"
+    },
+    {
+      "file": "grid-1.png",
+      "index": 1,
+      "url": "https://cdn.midjourney.com/43251376-7e97-43e9-9b65-7bd831d191b3/0_1.png",
+      "size": [
+        1344,
+        896
+      ],
+      "sha256": "3a8a28c28823a52849ddb22017552c98da0374ab428d912a1fc69b8e474d4f05"
+    },
+    {
+      "file": "grid-2.png",
+      "index": 2,
+      "url": "https://cdn.midjourney.com/43251376-7e97-43e9-9b65-7bd831d191b3/0_2.png",
+      "size": [
+        1344,
+        896
+      ],
+      "sha256": "37e088933b8096fbc3ae2e8efd98026e5562fc2b1cffbc941a7d6c716c890411"
+    },
+    {
+      "file": "grid-3.png",
+      "index": 3,
+      "url": "https://cdn.midjourney.com/43251376-7e97-43e9-9b65-7bd831d191b3/0_3.png",
+      "size": [
+        1344,
+        896
+      ],
+      "sha256": "4712af08169f45416ea69af7e47160570e76305af3cc1df4f193bd90b2ac0014"
+    }
+  ],
+  "pick": {
+    "index": 3,
+    "upscale": null
+  }
+}
