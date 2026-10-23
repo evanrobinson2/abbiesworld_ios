@@ -7,7 +7,7 @@ import os
 SMOOTH=os.environ.get('SMOOTH')=='1'   # fully rounded twin: same parts and pose, dense and smooth-shaded
 K=3 if SMOOTH else 1
 J2 = dict(hR=(240,652), hL=(292,645), kR=(220,845), aR=(195,1045), tR=(160,1112),
- kL=(205,820), aL=(350,955), tL=(392,1000), hc=(262,640), waist=(322,500), neck=(420,396), crown=(494,324),
+ kL=(205,820), aL=(350,955), tL=(392,1000), hc=(262,640), waist=(322,500), neck=(420,396), crown=(500,338),
  sR=(332,422), eR=(283,372), wR=(268,332), fR=(266,300),
  sL=(445,436), eL=(575,408), wL=(705,370), fL=(770,334))
 DEPTH = dict(hR=8,hL=-8,hc=0,waist=-5,neck=0,crown=0, sR=10, sL=-6)   # px; + away from camera
