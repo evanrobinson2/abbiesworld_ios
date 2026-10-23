@@ -8,6 +8,7 @@ on:
     inputs:
       jobs: { description: 'Job ids from meshy-queue.json, space separated; "check" only tests the key (free balance call)', required: true }
       rig_only: { description: 'Only remesh + rig heroes whose model already exists', type: boolean, default: false }
+      environment: { description: 'GitHub environment holding the key, if it was saved in one (for example Production)', required: false, default: '' }
 permissions:
   contents: write
 concurrency: { group: meshy-run, cancel-in-progress: false }
@@ -15,7 +16,12 @@ jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    environment: ${{ inputs.environment }}
     steps:
+      - name: Secret names visible to this job (names only, never values)
+        env:
+          ALL: ${{ toJSON(secrets) }}
+        run: python3 -c "import json,os; print(sorted(k for k in json.loads(os.environ['ALL']) if k != 'github_token'))"
       - uses: actions/checkout@v4
       - name: Run Meshy jobs
         env:
