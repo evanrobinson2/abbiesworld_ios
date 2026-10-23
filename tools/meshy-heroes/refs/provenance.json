@@ -232,5 +232,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T17:01:22Z"
+  },
+  {
+    "id": "A2-paint-suit",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "9a40fa28-b4df-4b2b-91a5-ea9074e9be53",
+    "files": [
+      "tools/meshy-heroes/refs/A2-paint-suit/mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_0.png",
+      "tools/meshy-heroes/refs/A2-paint-suit/mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_1.png",
+      "tools/meshy-heroes/refs/A2-paint-suit/mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_2.png",
+      "tools/meshy-heroes/refs/A2-paint-suit/mj_9a40fa28-b4df-4b2b-91a5-ea9074e9be53_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:03:25Z"
+  },
+  {
+    "id": "A2-paint-tee",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "42f44646-8ab2-4db3-8f2e-afd1a7be73ba",
+    "files": [
+      "tools/meshy-heroes/refs/A2-paint-tee/mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_0.png",
+      "tools/meshy-heroes/refs/A2-paint-tee/mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_1.png",
+      "tools/meshy-heroes/refs/A2-paint-tee/mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_2.png",
+      "tools/meshy-heroes/refs/A2-paint-tee/mj_42f44646-8ab2-4db3-8f2e-afd1a7be73ba_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:05:24Z"
   }
 ]
