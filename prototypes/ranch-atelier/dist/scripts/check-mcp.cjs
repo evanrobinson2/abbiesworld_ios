@@ -7,7 +7,8 @@ const pages = fs.readdirSync(root).filter(n => n.endsWith('.html'));
 const errors = [];
 for (const page of pages) {
   const html = fs.readFileSync(path.join(root, page), 'utf8');
-  const scripts = [...html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi)];
+  // The theme boot script runs in <head> before paint and registers no providers, so it may precede the bridge.
+  const scripts = [...html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi)].filter(m => m[1].split('?')[0] !== '/theme/boot.js');
   const bridge = scripts.filter(m => m[1].split('?')[0] === '/view-context.js' || m[1].split('?')[0] === 'view-context.js');
   if (bridge.length !== 1) errors.push(`${page}: expected exactly one view-context.js, found ${bridge.length}`);
   if (bridge[0] && scripts[0] !== bridge[0]) errors.push(`${page}: load the bridge before app scripts so providers can register`);
