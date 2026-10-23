@@ -1,4 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "bash -c 'if [ -f package.json ] && { [ -d app ] || [ -d pages ] || [ -d src/app ] || [ -d src/pages ]; }; then exit 1; fi; echo \"No Next.js app at the repo root; skipping creature-creator.\"; exit 0'"
+  "ignoreCommand": "bash -c 'if [ -z \"$(git rev-parse --show-prefix)\" ]; then [ -f package.json ] && [ -d app -o -d pages -o -d src/app -o -d src/pages ] && exit 1; echo \"No app at the repo root; skipping.\"; exit 0; fi; git diff --quiet HEAD^ HEAD -- . && { echo \"Nothing changed in this project; skipping.\"; exit 0; }; exit 1'"
 }
