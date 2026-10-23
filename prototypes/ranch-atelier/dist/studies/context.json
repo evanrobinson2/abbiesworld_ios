@@ -649,16 +649,51 @@
    "items": [
     {
      "k": "canon",
-     "t": "Moon remaster wave 1 (MR-002 to MR-004, the regolith grammar)",
-     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/remaster/"
+     "t": "Moon remaster wave 1 (MR-002 to MR-004)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/remaster/REMASTER_STUDY.md",
+     "note": "The dome is an upgrade of MR-002."
+    },
+    {
+     "k": "canon",
+     "t": "Regolith grammar",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/moon/moon-regolith.mjs",
+     "note": "Ground and rock colours."
+    },
+    {
+     "k": "canon",
+     "t": "Faceted Hero art direction (Moon Heroes)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/ART_DIRECTION.html",
+     "note": "Flat planes, gunmetal and off-white hull, orange for people; cyan and gold reserved."
+    },
+    {
+     "k": "canon",
+     "t": "HUD study: diegetic first",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+     "note": "Lamp posts, gauges and door rings carry air, power and safety instead of a HUD bar."
+    },
+    {
+     "k": "canon",
+     "t": "Modeler conventions: material names are game roles",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md"
     },
     {
      "k": "canon",
      "t": "Moon base kit study",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moon-base-kit/MOON_BASE_KIT_STUDY.md"
+    },
+    {
+     "k": "reference",
+     "t": "Moon Mission pack paintings (moonbase, Abbie at the base)",
+     "note": "Style and scale reference, from the Moon Mission pack trek.zip."
+    },
+    {
+     "k": "reference",
+     "t": "Midjourney proofs and picks for every built piece",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/moon-base-kit/mj/",
+     "note": "Each pick is assets/<slug>/concept.jpg, with its job id in provenance.json."
     }
    ],
-   "recorded": "2026-10-23, gathered afterwards from the study docs"
+   "recorded": "2026-10-23, from the thread as it ran; no Oracle, blog or tutorial was consulted for this study"
   },
   "overview": {
    "use": [
