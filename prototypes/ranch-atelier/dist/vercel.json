@@ -21,6 +21,14 @@
       "destination": "/models/model.html"
     },
     {
+      "source": "/cards",
+      "destination": "/cards/index.html"
+    },
+    {
+      "source": "/cards/",
+      "destination": "/cards/index.html"
+    },
+    {
       "source": "/sounds",
       "destination": "/sounds/index.html"
     },

@@ -1,0 +1,710 @@
+{
+  "rubric_version": "1.1",
+  "name": "Abbie's World collectible card rubric",
+  "date": "2026-10-22",
+  "doc": "docs/oracle/cards/CARD_STUDY.md",
+  "checker": "tools/card-rubric/check_card.py",
+  "source_enum_note": "source values are the identity schema's enum (docs/oracle/identity/game-identity.schema.json): footage_cv = computer vision over our own renders, llm_judge = VLM with saved prompt, pairwise and both orders, human = Evan, estimate = not yet measured.",
+  "ship_threshold": 80,
+  "geometry": {
+    "trim_mm": [
+      63,
+      88
+    ],
+    "bleed_mm": 3,
+    "safe_mm": 3,
+    "corner_radius_mm": 3,
+    "master_ppi": 600,
+    "min_ppi": 300,
+    "canvas_px_600": [
+      1630,
+      2221
+    ],
+    "trim_px_600": [
+      1488,
+      2079
+    ],
+    "canvas_px_300": [
+      814,
+      1109
+    ],
+    "rounding": "round(mm / 25.4 * ppi) per dimension; canvas = trim + 2 x bleed",
+    "grid": {
+      "columns": 8,
+      "rows": 11,
+      "inside": "safe area"
+    },
+    "lods": {
+      "L0_inspect": {
+        "shows": [
+          "all"
+        ],
+        "min_card_height_pt": 400
+      },
+      "L1_hand": {
+        "shows": [
+          "art",
+          "name",
+          "cost",
+          "stats",
+          "rarity_gem",
+          "type_shape",
+          "ability_icons"
+        ],
+        "card_height_pt": [
+          120,
+          200
+        ]
+      },
+      "L2_board": {
+        "shows": [
+          "art",
+          "cost",
+          "one_stat",
+          "rarity_gem"
+        ],
+        "card_height_pt": [
+          48,
+          96
+        ]
+      }
+    }
+  },
+  "print": {
+    "colour": "PDF/X-4, CMYK, FOGRA39 or GRACoL 2013 coated",
+    "max_total_ink_pct": 300,
+    "rich_black_cmyk": [
+      60,
+      40,
+      40,
+      100
+    ],
+    "small_text_black": "100 K only below 12 pt",
+    "min_line_pt": 0.25,
+    "stock": "300 to 330 gsm black- or blue-core card, about 0.30 mm",
+    "finish_layers": [
+      "holofoil_mask",
+      "cold_foil_mask",
+      "spot_uv_mask",
+      "emboss_mask"
+    ],
+    "finish_map": {
+      "shimmer": "holofoil laminate",
+      "golden_hour": "cold foil",
+      "frost": "etched foil + spot UV"
+    }
+  },
+  "rarity": {
+    "tiers": [
+      {
+        "id": "seed",
+        "label": "Seed",
+        "kid_name": "common",
+        "gem_shape": "round seed",
+        "gem_colour_oklch": [
+          0.4,
+          0.07,
+          60
+        ],
+        "frame": "plain pine",
+        "reveal_hold_ms": 0
+      },
+      {
+        "id": "sprout",
+        "label": "Sprout",
+        "kid_name": "uncommon",
+        "gem_shape": "two-leaf sprout",
+        "gem_colour_oklch": [
+          0.62,
+          0.14,
+          140
+        ],
+        "frame": "pine, green trim, brass caps",
+        "reveal_hold_ms": 200
+      },
+      {
+        "id": "bloom",
+        "label": "Bloom",
+        "kid_name": "rare",
+        "gem_shape": "five-petal flower",
+        "gem_colour_oklch": [
+          0.7,
+          0.12,
+          235
+        ],
+        "frame": "lacquered wood, brass trim, spot-gloss name",
+        "reveal_hold_ms": 450
+      },
+      {
+        "id": "harvest",
+        "label": "Harvest",
+        "kid_name": "epic",
+        "gem_shape": "wheat sheaf",
+        "gem_colour_oklch": [
+          0.52,
+          0.16,
+          330
+        ],
+        "frame": "gilded, living-art loop",
+        "reveal_hold_ms": 800
+      },
+      {
+        "id": "sun",
+        "label": "Sun",
+        "kid_name": "legendary",
+        "gem_shape": "sunburst",
+        "gem_colour_oklch": [
+          0.85,
+          0.15,
+          85
+        ],
+        "frame": "borderless or frame-break, full foil, parallax",
+        "reveal_hold_ms": 1200
+      }
+    ],
+    "finishes": [
+      "standard",
+      "shimmer",
+      "golden_hour",
+      "frost"
+    ]
+  },
+  "card_types": {
+    "animal": "arch top (barn door)",
+    "building": "gabled roof top",
+    "crop": "scalloped top (seed packet)",
+    "weather": "circle window",
+    "helper": "chamfered square (crate)"
+  },
+  "gates": [
+    {
+      "id": "G1_geometry",
+      "check": "Canvas is 1630x2221 (600 ppi) or 814x1109 (300 ppi) with bleed, or the trim size for digital-only.",
+      "method": "image size",
+      "source": "footage_cv",
+      "auto": true
+    },
+    {
+      "id": "G2_safe_area",
+      "check": "Every text, number and gem box lies inside the 3 mm safe rectangle and outside the 3 mm corner arcs.",
+      "method": "manifest boxes vs geometry",
+      "source": "footage_cv",
+      "auto": true
+    },
+    {
+      "id": "G3_min_text",
+      "check": "At L0 print: body text >= 8 pt, name >= 10 pt, numerals >= 18 pt (font size from manifest; 1 pt = ppi/72 px).",
+      "method": "manifest font sizes",
+      "source": "footage_cv",
+      "auto": true
+    },
+    {
+      "id": "G4_contrast",
+      "check": "Each text box: WCAG contrast >= 4.5 between text colour and the median plate colour; numerals >= 3.0 (outline counts as the text edge).",
+      "method": "pixels in manifest boxes",
+      "source": "footage_cv",
+      "auto": true
+    },
+    {
+      "id": "G5_art_resolution",
+      "check": "Art source pixel size >= art window size at 300 ppi; no upscaling ratio above 2x from the source.",
+      "method": "manifest art.source_px vs window",
+      "source": "footage_cv",
+      "auto": true
+    },
+    {
+      "id": "G6_expression_ledger",
+      "check": "No other game's art, frame, icon, font or text; provenance.json lists every image source and prompt; no source-game image used as a reference.",
+      "method": "provenance review",
+      "source": "human",
+      "auto": false
+    },
+    {
+      "id": "G7_kid_safe",
+      "check": "PG content; rules text Flesch-Kincaid grade <= 3; at most 15 words on the face.",
+      "method": "text stats + llm judge",
+      "source": "llm_judge",
+      "auto": "partial"
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "D1_thumbnail",
+      "weight": 15,
+      "label": "Thumbnail readability",
+      "checks": [
+        {
+          "id": "thumb_vlm",
+          "check": "Downsample to 72 px tall (L2) and 160 px (L1). A VLM names cost, stat, rarity tier and card type. Score = correct / 4 at 72 px, averaged with the 160 px score.",
+          "source": "llm_judge"
+        },
+        {
+          "id": "numeral_height",
+          "check": "Numeral cap height >= 6% of card height (so >= 4 px at 72 px).",
+          "source": "footage_cv",
+          "auto": true
+        }
+      ]
+    },
+    {
+      "id": "D2_hierarchy",
+      "weight": 12,
+      "label": "Hierarchy",
+      "checks": [
+        {
+          "id": "saliency_in_art",
+          "check": "Spectral-residual saliency mass inside the art window is at least its area share of the canvas (lift >= 1.0).",
+          "source": "footage_cv",
+          "auto": true
+        },
+        {
+          "id": "reading_order",
+          "check": "VLM lists what it sees first, second, third; full marks for art > name/cost > stats > text.",
+          "source": "llm_judge"
+        },
+        {
+          "id": "art_share",
+          "check": "Art window is 50 to 65% of the face (standard) or 100% (Sun tier / full art).",
+          "source": "footage_cv",
+          "auto": true
+        }
+      ]
+    },
+    {
+      "id": "D3_art_crop",
+      "weight": 12,
+      "label": "Art crop, mode and direction",
+      "checks": [
+        {
+          "id": "subject_centre",
+          "check": "Subject bbox centre within 10% of the art window's vertical axis.",
+          "source": "footage_cv"
+        },
+        {
+          "id": "subject_height",
+          "check": "Subject is 35 to 65% of art window height, focal point in upper half.",
+          "source": "footage_cv"
+        },
+        {
+          "id": "silhouette",
+          "check": "VLM names the subject from a black silhouette at 64 px.",
+          "source": "llm_judge"
+        },
+        {
+          "id": "calm_text_zones",
+          "check": "Where text sits on a translucent plate over art, edge density of the art layer under it <= 0.6x the art window average. Opaque plates pass.",
+          "source": "footage_cv",
+          "auto": true
+        },
+        {
+          "id": "art_mode_rules",
+          "check": "The card's declared art.mode passes that mode's checks in art_modes.",
+          "source": "footage_cv",
+          "auto": "partial"
+        },
+        {
+          "id": "art_direction",
+          "check": "Passes at least 9 of the 12 art_direction checks.",
+          "source": "llm_judge"
+        }
+      ]
+    },
+    {
+      "id": "D4_rarity",
+      "weight": 10,
+      "label": "Rarity signalling",
+      "checks": [
+        {
+          "id": "gem_distance",
+          "check": "OKLab deltaE between neighbouring tier gem colours >= 15 (x100 scale), also after deuteranopia and protanopia simulation.",
+          "source": "footage_cv",
+          "auto": true
+        },
+        {
+          "id": "gem_shape",
+          "check": "Five gem silhouettes pairwise IoU <= 0.7.",
+          "source": "footage_cv"
+        },
+        {
+          "id": "finish_present",
+          "check": "Bloom and above carry at least one finish layer (gloss, foil or animation).",
+          "source": "footage_cv"
+        },
+        {
+          "id": "lineup",
+          "check": "A VLM orders a shuffled five-tier lineup correctly.",
+          "source": "llm_judge"
+        }
+      ]
+    },
+    {
+      "id": "D5_frame_material",
+      "weight": 10,
+      "label": "Frame and material",
+      "checks": [
+        {
+          "id": "object_not_ui",
+          "check": "Pairwise judge vs a flat-UI control card: 'which looks like a crafted physical object?' wins both orders.",
+          "source": "llm_judge"
+        },
+        {
+          "id": "frame_share",
+          "check": "Frame (non-art, non-plate) area is 15 to 30% of the face.",
+          "source": "footage_cv",
+          "auto": true
+        },
+        {
+          "id": "material_value_range",
+          "check": "Frame pixels span at least 3 distinct value bands (bevel highlight, body, shadow); luminance std >= 0.08.",
+          "source": "footage_cv",
+          "auto": true
+        }
+      ]
+    },
+    {
+      "id": "D6_typography",
+      "weight": 8,
+      "label": "Typography",
+      "checks": [
+        {
+          "id": "families",
+          "check": "At most two font families; open licence.",
+          "source": "footage_cv",
+          "auto": true
+        },
+        {
+          "id": "numeral_outline",
+          "check": "Numerals have an outline >= 8% of glyph height or sit on a solid token.",
+          "source": "footage_cv"
+        },
+        {
+          "id": "no_text_on_raw_art",
+          "check": "Every name and text box declares a plate: opaque or translucent (blurred paper).",
+          "source": "footage_cv",
+          "auto": true
+        }
+      ]
+    },
+    {
+      "id": "D7_collectibility",
+      "weight": 8,
+      "label": "Collectibility metadata",
+      "checks": [
+        {
+          "id": "collector_line",
+          "check": "Set mark, number/total, maker line and variant code present and inside the safe area.",
+          "source": "footage_cv",
+          "auto": true
+        },
+        {
+          "id": "stable_id",
+          "check": "Card id stable across variants; variants differ only in finish/frame.",
+          "source": "footage_cv",
+          "auto": true
+        }
+      ]
+    },
+    {
+      "id": "D8_juice",
+      "weight": 12,
+      "label": "Juice (in game)",
+      "checks": [
+        {
+          "id": "draw",
+          "check": "Draw 280-380 ms, ease-out-back 4-8% overshoot, land squash.",
+          "source": "playtrace"
+        },
+        {
+          "id": "hover",
+          "check": "Lift ~10% card height, scale 1.10-1.15, tilt <= 12 deg spring, moving specular.",
+          "source": "playtrace"
+        },
+        {
+          "id": "reveal",
+          "check": "Rarity glow before flip, hold per tier, flip 380-480 ms.",
+          "source": "playtrace"
+        },
+        {
+          "id": "play",
+          "check": "Card becomes its 3D model on the tile in <= 600 ms total with the world's settle animation.",
+          "source": "playtrace"
+        },
+        {
+          "id": "sound",
+          "check": "Every motion has a sound; reveal sting for Sun tier.",
+          "source": "playtrace"
+        },
+        {
+          "id": "reduced_motion",
+          "check": "prefers-reduced-motion path: crossfades, no tilt or shake.",
+          "source": "playtrace"
+        },
+        {
+          "id": "perf",
+          "check": "60 fps with 10 cards in hand on an iPhone 12-class device.",
+          "source": "playtrace"
+        }
+      ]
+    },
+    {
+      "id": "D9_print",
+      "weight": 8,
+      "label": "Print readiness",
+      "checks": [
+        {
+          "id": "gamut",
+          "check": "Share of pixels out of the coated CMYK gamut <= 2% after soft-proof.",
+          "source": "footage_cv"
+        },
+        {
+          "id": "total_ink",
+          "check": "Max total ink <= 300%.",
+          "source": "footage_cv"
+        },
+        {
+          "id": "small_text_k",
+          "check": "Text under 12 pt is 100% K or a solid spot colour.",
+          "source": "footage_cv"
+        },
+        {
+          "id": "finish_masks",
+          "check": "Every finish has a matching mask layer at canvas size.",
+          "source": "footage_cv",
+          "auto": true
+        }
+      ]
+    },
+    {
+      "id": "D10_house_style",
+      "weight": 5,
+      "label": "House style",
+      "checks": [
+        {
+          "id": "identity_distance",
+          "check": "Pairwise judge: closer to Abbie's World references (Ranch tiles, concept board) than to any single source game's cards.",
+          "source": "llm_judge"
+        }
+      ]
+    }
+  ],
+  "juice_timings_source": {
+    "source": "estimate",
+    "confidence": 0.4,
+    "method": "prior knowledge of public footage; measure on capture before treating as fact"
+  },
+  "art_doc": "docs/oracle/cards/CARD_ART.md",
+  "art_modes": {
+    "axes": {
+      "depth": [
+        "behind",
+        "on",
+        "in_front",
+        "inside",
+        "beyond"
+      ],
+      "content": [
+        "thing",
+        "idea",
+        "someone",
+        "event",
+        "place"
+      ],
+      "time": [
+        "still",
+        "living"
+      ]
+    },
+    "modes": [
+      {
+        "id": "portal",
+        "depth": "behind",
+        "checks": [
+          "frame encloses window",
+          "art share 40-65%",
+          "text never on art"
+        ],
+        "use": "sprout, bloom, places"
+      },
+      {
+        "id": "overlay",
+        "depth": "on",
+        "checks": [
+          "every text box on a plate (opaque or translucent)",
+          "quiet zones under plates: art-layer edge density <= 0.6x window average",
+          "art share >= 95%"
+        ],
+        "use": "sun"
+      },
+      {
+        "id": "popout",
+        "depth": "in_front",
+        "checks": [
+          "subject crosses the window edge by 5-15% of trim height",
+          "crossing part is the focal part",
+          "subject bbox does not intersect cost or stat tokens",
+          "cast shadow on frame present"
+        ],
+        "use": "sun"
+      },
+      {
+        "id": "shadowbox",
+        "depth": "inside",
+        "checks": [
+          ">= 3 art layers",
+          "parallax factors about 0.3/0.6/1.0/1.4 (bg/mid/subject/fg)",
+          "bg extends >= 15% past window",
+          "inner shadow at the window edge"
+        ],
+        "use": "harvest"
+      },
+      {
+        "id": "panorama",
+        "depth": "beyond",
+        "checks": [
+          "3-5 cards share one painting",
+          "horizon y and light direction identical across seams (horizon within 0.5% of height)",
+          "each card has its own focal subject"
+        ],
+        "use": "seasonal mini-sets"
+      },
+      {
+        "id": "specimen",
+        "depth": "on",
+        "content": "thing",
+        "checks": [
+          "subject 60-75% of window height",
+          "plain or gently graded backdrop (edge density < 0.02)",
+          "contact shadow present",
+          "same key light across the set"
+        ],
+        "use": "seed"
+      },
+      {
+        "id": "emblem",
+        "depth": "on",
+        "content": "idea",
+        "checks": [
+          "centred and mirror-symmetric (left/right IoU >= 0.85)",
+          "<= 3 colours",
+          "fills 50-70% of window"
+        ],
+        "use": "actions, rules"
+      },
+      {
+        "id": "portrait",
+        "content": "someone",
+        "checks": [
+          "eyes on the upper-third line (+-5%)",
+          "face 40-60% of window",
+          "simple background"
+        ],
+        "use": "named animals, best-friend variants"
+      },
+      {
+        "id": "scene",
+        "content": "event",
+        "checks": [
+          "one focal action",
+          "<= 3 actors",
+          "art share >= 55% (tall portal or overlay)"
+        ],
+        "use": "weather, events"
+      },
+      {
+        "id": "living",
+        "time": "living",
+        "checks": [
+          "loop 4-8 s",
+          "motion limited to background or a small part of the subject",
+          "still frame passes every other check"
+        ],
+        "use": "bloom and up"
+      }
+    ],
+    "manifest_fields": {
+      "art.mode": "one or more mode ids, e.g. ['overlay','popout','living']",
+      "art.layers": "list of layer files: bg, mid, subject, fg, shadow, depth",
+      "art.subject_bbox": "[x,y,w,h] canvas px",
+      "art.focal_point": "[x,y] canvas px"
+    },
+    "house_mapping": {
+      "seed": "specimen",
+      "sprout": "portal",
+      "bloom": [
+        "portal",
+        "living"
+      ],
+      "harvest": "shadowbox",
+      "sun": [
+        "overlay",
+        "popout"
+      ],
+      "action": "emblem",
+      "event": "scene",
+      "named_animal": "portrait",
+      "seasonal_set": "panorama"
+    }
+  },
+  "art_direction": [
+    {
+      "id": "focal_contrast",
+      "check": "OKLab L difference between the focal area and its surround >= 0.3; focal area has the highest local contrast.",
+      "source": "footage_cv"
+    },
+    {
+      "id": "three_values",
+      "check": "Posterised to 3 tones, a VLM still names the subject.",
+      "source": "llm_judge"
+    },
+    {
+      "id": "silhouette",
+      "check": "Subject nameable from a black silhouette at 64 px.",
+      "source": "llm_judge"
+    },
+    {
+      "id": "one_light",
+      "check": "Key light upper-left about 45 deg, warm key, cool shadow, rim light; identical across the set (judge compares a set lineup).",
+      "source": "llm_judge"
+    },
+    {
+      "id": "three_planes",
+      "check": "Foreground, middle and background present; background contrast and saturation lower than the subject's.",
+      "source": "footage_cv"
+    },
+    {
+      "id": "colour_job",
+      "check": "Most saturated pixels cluster on the focal area; background mean chroma <= 0.7x subject's; colours within the set palette (deltaE <= 10 to a palette swatch for 90% of pixels).",
+      "source": "footage_cv"
+    },
+    {
+      "id": "shape_language",
+      "check": "Round for animals and food, square for buildings and tools; no sharp triangles except mild mischief.",
+      "source": "llm_judge"
+    },
+    {
+      "id": "compose_to_window",
+      "check": "No tangents: subject edges are not within 2% of the window edge without crossing it; headroom above the focal point.",
+      "source": "footage_cv"
+    },
+    {
+      "id": "quiet_zones",
+      "check": "Planned zones under name, plate and numbers are calm (see calm_text_zones).",
+      "source": "footage_cv"
+    },
+    {
+      "id": "toy_camera",
+      "check": "3D renders: three-quarter view, 25-35 deg elevation for objects, 5-15 deg for heroic animals, 50-85 mm lens; same camera per card type across a set. Recorded in provenance.json.",
+      "source": "human"
+    },
+    {
+      "id": "shows_the_ability",
+      "check": "A VLM shown only the art guesses the card's effect in a few words; judged against the rules text.",
+      "source": "llm_judge"
+    },
+    {
+      "id": "one_medium",
+      "check": "One medium per set (house: soft toy-diorama render with painterly light).",
+      "source": "llm_judge"
+    }
+  ]
+}

@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-card-forge",
+      "date": "2026-10-23",
+      "title": "Ranch cards you can hold",
+      "line": "Open a pack of 15 Ranch cards made from the game's animals and buildings. Tilt them in the light, browse the binder, and print the whole set at studio quality. Settings, Studies, Cards.",
+      "image": "/whats-new/2026-10-23-card-forge.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
+      "threadTitle": "Card generator"
+    },
+    {
       "id": "2026-10-22-voice-app-control",
       "date": "2026-10-22",
       "title": "The voice runs the whole app",

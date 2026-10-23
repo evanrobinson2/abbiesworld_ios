@@ -1,0 +1,413 @@
+{
+  "set": {
+    "id": "ranch",
+    "name": "Ranch · First Harvest",
+    "biome": "ranch",
+    "about": "The starter set for Abbie's Ranch. Art is the Ranch rebuild concept art, cut out and stood in a painted Ranch, or the in-game 3D model rendered for the card. Flavour lines show in the inspect view, not on the face (the face carries at most 15 words)."
+  },
+  "cards": [
+    {
+      "id": "buttercup",
+      "number": 1,
+      "name": "Buttercup",
+      "type": "animal",
+      "subtype": "Dairy Cow",
+      "rarity": "seed",
+      "cost": 2,
+      "stats": [
+        {
+          "icon": "milk",
+          "value": 2
+        }
+      ],
+      "rules": "Makes {milk}{milk} each morning.\nNear water: +{heart}",
+      "flavour": "She rings her bell twice for breakfast and once for everything else.",
+      "art": {
+        "image": "/cards/art/cow-cut.png",
+        "source": "/cards/art/cow.jpg",
+        "model": "/simulation-assets/organics/cow-idle.glb",
+        "view": {
+          "yaw": -28
+        }
+      }
+    },
+    {
+      "id": "speckles",
+      "number": 2,
+      "name": "Speckles",
+      "type": "animal",
+      "subtype": "Laying Hen",
+      "rarity": "seed",
+      "cost": 1,
+      "stats": [
+        {
+          "icon": "egg",
+          "value": 1
+        }
+      ],
+      "rules": "Lays {egg} each morning.\nNext to a coop: lays {egg}{egg}",
+      "flavour": "Speckles counts her eggs every morning. She always gets to three.",
+      "art": {
+        "image": "/cards/art/chicken-cut.png",
+        "source": "/cards/art/chicken.jpg",
+        "model": "/simulation-assets/organics/chicken-idle.glb",
+        "view": {
+          "yaw": -28
+        }
+      }
+    },
+    {
+      "id": "pepper",
+      "number": 3,
+      "name": "Pepper",
+      "type": "animal",
+      "subtype": "Climbing Goat",
+      "rarity": "sprout",
+      "cost": 2,
+      "stats": [
+        {
+          "icon": "milk",
+          "value": 1
+        },
+        {
+          "icon": "heart",
+          "value": 1
+        }
+      ],
+      "rules": "Makes {milk} each day.\nLoves rocks and trees: +{heart}",
+      "flavour": "If it holds still, Pepper has stood on top of it.",
+      "art": {
+        "image": "/cards/art/goat-cut.png",
+        "source": "/cards/art/goat.jpg",
+        "model": "/simulation-assets/organics/goat-idle.glb",
+        "view": {
+          "yaw": -28
+        }
+      }
+    },
+    {
+      "id": "marley",
+      "number": 4,
+      "name": "Marley",
+      "type": "animal",
+      "subtype": "Ranch Dog",
+      "rarity": "sprout",
+      "cost": 2,
+      "stats": [
+        {
+          "icon": "paw",
+          "value": 2
+        },
+        {
+          "icon": "heart",
+          "value": 2
+        }
+      ],
+      "rules": "Brings lost animals home.\nAnimals on his tile get +{heart}",
+      "flavour": "Marley has never met a stranger, only friends he hasn't licked yet.",
+      "artMode": "model",
+      "art": {
+        "model": "/simulation-assets/organics/marley-idle.glb",
+        "view": {
+          "yaw": -32
+        }
+      }
+    },
+    {
+      "id": "clover",
+      "number": 5,
+      "name": "Clover",
+      "type": "animal",
+      "subtype": "Gentle Horse",
+      "rarity": "bloom",
+      "cost": 4,
+      "stats": [
+        {
+          "icon": "bolt",
+          "value": 3
+        },
+        {
+          "icon": "heart",
+          "value": 1
+        }
+      ],
+      "rules": "Carries three things at once.\nHelpers near her work fast {bolt}",
+      "flavour": "Clover knows every path on the ranch, and a few that aren't there yet.",
+      "art": {
+        "image": "/cards/art/horse-cut.png",
+        "source": "/cards/art/horse.jpg",
+        "model": "/simulation-assets/organics/horse-idle.glb",
+        "view": {
+          "yaw": -28
+        }
+      }
+    },
+    {
+      "id": "daddy",
+      "number": 6,
+      "name": "Daddy",
+      "type": "helper",
+      "subtype": "Builder",
+      "rarity": "bloom",
+      "cost": 3,
+      "stats": [
+        {
+          "icon": "hammer",
+          "value": 3
+        }
+      ],
+      "rules": "Builds any tile in one day {hammer}\nFixes one thing each night.",
+      "flavour": "Measures twice, cuts once, and hums the whole time.",
+      "artMode": "model",
+      "art": {
+        "model": "/simulation-assets/workers/daddy-idle.glb",
+        "view": {
+          "yaw": -18,
+          "fill": 0.9
+        }
+      }
+    },
+    {
+      "id": "mommy",
+      "number": 7,
+      "name": "Mommy",
+      "type": "helper",
+      "subtype": "Gardener",
+      "rarity": "harvest",
+      "cost": 3,
+      "stats": [
+        {
+          "icon": "apple",
+          "value": 2
+        },
+        {
+          "icon": "sun",
+          "value": 2
+        }
+      ],
+      "rules": "Trees near her give +{apple}\nAt sunset, all helpers get +{heart}",
+      "flavour": "Things grow wherever she has been, especially people.",
+      "artMode": "model",
+      "art": {
+        "model": "/simulation-assets/workers/mommy-idle.glb",
+        "view": {
+          "yaw": -18,
+          "fill": 0.9
+        }
+      }
+    },
+    {
+      "id": "abbie",
+      "number": 8,
+      "name": "Abbie",
+      "type": "helper",
+      "subtype": "Ranch Captain",
+      "rarity": "sun",
+      "cost": 5,
+      "stats": [
+        {
+          "icon": "star",
+          "value": 3
+        },
+        {
+          "icon": "heart",
+          "value": 3
+        }
+      ],
+      "rules": "Animals next to Abbie are happy {heart}\nOnce a season: wish up a new tile!",
+      "flavour": "“It's my ranch,” said Abbie, “and everyone is invited.”",
+      "artMode": "model",
+      "art": {
+        "model": "/simulation-assets/workers/abbie-idle.glb",
+        "view": {
+          "yaw": -16,
+          "fill": 1.0,
+          "lift": 0.5,
+          "exposure": 0.82
+        }
+      },
+      "biome": "orchard"
+    },
+    {
+      "id": "sunny-coop",
+      "number": 9,
+      "name": "Sunny Coop",
+      "type": "building",
+      "subtype": "Chicken Coop",
+      "rarity": "seed",
+      "cost": 2,
+      "stats": [
+        {
+          "icon": "egg",
+          "value": 2
+        }
+      ],
+      "rules": "Hens next to the coop lay one more {egg}",
+      "flavour": "Warm straw, a little ramp, and a door that squeaks hello.",
+      "art": {
+        "image": "/cards/art/chicken-coop-cut.png",
+        "source": "/cards/art/chicken-coop.jpg",
+        "model": "/simulation-assets/buildings/chicken-coop-complete.glb",
+        "view": {
+          "yaw": -32
+        }
+      }
+    },
+    {
+      "id": "water-point",
+      "number": 10,
+      "name": "Water Point",
+      "type": "building",
+      "subtype": "Pump & Trough",
+      "rarity": "seed",
+      "cost": 1,
+      "stats": [
+        {
+          "icon": "water",
+          "value": 3
+        }
+      ],
+      "rules": "Animals near water are happy {heart}\nFills every bucket.",
+      "flavour": "Pump the handle three times and listen for the gurgle.",
+      "art": {
+        "image": "/cards/art/water-point-cut.png",
+        "source": "/cards/art/water-point.jpg",
+        "model": "/simulation-assets/buildings/water-point-complete.glb",
+        "view": {
+          "yaw": -32
+        }
+      }
+    },
+    {
+      "id": "red-workshop",
+      "number": 11,
+      "name": "The Red Workshop",
+      "type": "building",
+      "subtype": "Barn",
+      "rarity": "sprout",
+      "cost": 3,
+      "stats": [
+        {
+          "icon": "hammer",
+          "value": 1
+        },
+        {
+          "icon": "wood",
+          "value": 2
+        }
+      ],
+      "rules": "Turns {wood}{wood} into a new building.\nHelpers here work fast {bolt}",
+      "flavour": "Every tool hangs on its own nail. Mostly.",
+      "art": {
+        "image": "/cards/art/barn-shelter-cut.png",
+        "source": "/cards/art/barn-shelter.jpg",
+        "model": "/simulation-assets/buildings/shelter-complete.glb",
+        "view": {
+          "yaw": -32
+        }
+      }
+    },
+    {
+      "id": "feed-and-seed",
+      "number": 12,
+      "name": "Feed & Seed",
+      "type": "building",
+      "subtype": "Feed Store",
+      "rarity": "bloom",
+      "cost": 4,
+      "stats": [
+        {
+          "icon": "wheat",
+          "value": 2
+        }
+      ],
+      "rules": "Trade {wheat}{wheat} for a new animal.\nEvery animal stays fed {heart}",
+      "flavour": "The bell over the door rings a different note for every customer.",
+      "art": {
+        "image": "/cards/art/feed-store-cut.png",
+        "source": "/cards/art/feed-store.jpg",
+        "model": "/simulation-assets/buildings/feed-store-complete.glb",
+        "view": {
+          "yaw": -32
+        }
+      }
+    },
+    {
+      "id": "family-home",
+      "number": 13,
+      "name": "The Family Home",
+      "type": "building",
+      "subtype": "Farmhouse",
+      "rarity": "harvest",
+      "cost": 5,
+      "stats": [
+        {
+          "icon": "heart",
+          "value": 3
+        },
+        {
+          "icon": "sun",
+          "value": 1
+        }
+      ],
+      "rules": "Helpers sleep here and wake up happy {heart}",
+      "flavour": "Flower boxes, a crooked chimney, and room for one more.",
+      "art": {
+        "image": "/cards/art/family-home-cut.png",
+        "source": "/cards/art/family-home.jpg",
+        "model": "/simulation-assets/buildings/family-home-complete.glb",
+        "view": {
+          "yaw": -32
+        }
+      }
+    },
+    {
+      "id": "old-apple-tree",
+      "number": 14,
+      "name": "Old Apple Tree",
+      "type": "crop",
+      "subtype": "Orchard",
+      "rarity": "sprout",
+      "cost": 2,
+      "stats": [
+        {
+          "icon": "apple",
+          "value": 3
+        }
+      ],
+      "rules": "Each fall: drops {apple}{apple}{apple}\nAnimals nap in its shade {heart}",
+      "flavour": "Older than the barn, and it still remembers every swing.",
+      "art": {
+        "image": "/cards/art/apple-tree-cut.png",
+        "source": "/cards/art/apple-tree.jpg",
+        "model": "/simulation-assets/organics/tree-standing.glb"
+      }
+    },
+    {
+      "id": "hay-day",
+      "number": 15,
+      "name": "Hay Day",
+      "type": "crop",
+      "subtype": "Harvest",
+      "rarity": "seed",
+      "cost": 1,
+      "stats": [
+        {
+          "icon": "wheat",
+          "value": 2
+        }
+      ],
+      "rules": "Feed every animal on one tile.\nTomorrow they make double!",
+      "flavour": "Itchy, golden, and the best smell on the ranch.",
+      "artMode": "model",
+      "art": {
+        "model": "/simulation-assets/supplies/hay-full.glb",
+        "view": {
+          "yaw": -24,
+          "pitch": 22,
+          "fill": 1.0
+        }
+      }
+    }
+  ]
+}
