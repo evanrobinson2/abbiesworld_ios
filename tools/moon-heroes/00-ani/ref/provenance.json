@@ -5,7 +5,7 @@
   "date": "2026-10-23",
   "tool": "Midjourney web v8.2",
   "brief": "Evan via coordinator 2026-10-23 10:01Z: Meshy-ready versions of the two main heroes. Toy-hero ~4.5 heads, same Faceted Hero suit with lights in her own colour. Faces stay stylized cartoon characters, never from a photo or a real child's likeness.",
-  "identity": "Ani (Anita, 'Ah-knee'): brown eyes, brown hair, darker skin; her colour is purple. White clay renders are shape only; her skin is never lightened in colour versions.",
+  "identity": "Ani (Anita, 'Ah-knee'): brown eyes, brown hair, light warm tan skin (Family cast sheet #ddb08c / shade #c8956f, a touch warmer than Abbie); her colour is purple.",
   "jobs": [
     {
       "role": "front_clay",
@@ -80,7 +80,7 @@
       }
     },
     {
-      "role": "front_color",
+      "role": "front_color_superseded",
       "job_id": "1a282352-803c-41d6-a46a-6886d32792b2",
       "prompt": "low-poly faceted 3D game character, flat-shaded planes, matte gunmetal sci-fi armour with glowing purple light strips, big gloves and big boots, stylized cartoon toy-hero little girl about 4.5 heads tall with darker brown skin, shoulder-length brown hair, big brown eyes, cheerful, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background, no helmet --ar 2:3",
       "attach": null,
@@ -113,8 +113,136 @@
       "pick": {
         "index": 2,
         "file": "front_color.png"
-      }
+      },
+      "verdict": "Evan (via coordinator 12:18Z): drawn too dark. Kept as front_color_superseded.png."
+    },
+    {
+      "role": "front_color_try",
+      "job_id": "5312dbc0-0d93-4d72-b0a0-8e1e5f8c495e",
+      "prompt": "low-poly faceted 3D game character, flat-shaded planes, matte gunmetal sci-fi armour with glowing purple light strips, big gloves and big boots, stylized cartoon toy-hero little girl about 4.5 heads tall with light tan light olive skin, shoulder-length brown hair, big brown eyes, cheerful, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background, no helmet --ar 2:3",
+      "images": [
+        {
+          "file": "mj_5312dbc0-0d93-4d72-b0a0-8e1e5f8c495e_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5312dbc0-0d93-4d72-b0a0-8e1e5f8c495e/0_0.png",
+          "sha256": "39fa8b25a87c40e4660a8c961941493b419053c1962eac469ea60cdbe54a31cb"
+        },
+        {
+          "file": "mj_5312dbc0-0d93-4d72-b0a0-8e1e5f8c495e_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5312dbc0-0d93-4d72-b0a0-8e1e5f8c495e/0_2.png",
+          "sha256": "5f180d89d0684ee9ef604948ae95c4043f94f436809b927bb7564bf25eb4467c"
+        }
+      ],
+      "pick": null,
+      "verdict": "lighter but still darker than the cast sheet tone; two of four images not served (403)"
+    },
+    {
+      "role": "turnaround_color_try",
+      "job_id": "25eeb435-7473-47e9-9f39-42ca968288d3",
+      "prompt": "low-poly faceted 3D game character turnaround sheet, front view, side view, back view, evenly spaced, same scale, flat-shaded planes, matte gunmetal sci-fi armour with glowing purple light strips, big gloves and big boots, stylized cartoon toy-hero little girl about 4.5 heads tall with light tan light olive skin, shoulder-length brown hair, big brown eyes, cheerful, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, no helmet --ar 16:9",
+      "images": [
+        {
+          "file": "mj_25eeb435-7473-47e9-9f39-42ca968288d3_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/25eeb435-7473-47e9-9f39-42ca968288d3/0_0.png",
+          "sha256": "0f0aec8016da99d06437f7b5572c0f4eae5f04b3f45a77e8c35275f79ed2dce9"
+        },
+        {
+          "file": "mj_25eeb435-7473-47e9-9f39-42ca968288d3_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/25eeb435-7473-47e9-9f39-42ca968288d3/0_1.png",
+          "sha256": "9a8fcf9580a25de79964dfb0af2b192e10c94bf0095d39660de67073e7f65a2a"
+        },
+        {
+          "file": "mj_25eeb435-7473-47e9-9f39-42ca968288d3_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/25eeb435-7473-47e9-9f39-42ca968288d3/0_2.png",
+          "sha256": "9c218d30816edf6ef90fb3c9f02e2a2ba60795d07aeadc4d110a51b11346d959"
+        },
+        {
+          "file": "mj_25eeb435-7473-47e9-9f39-42ca968288d3_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/25eeb435-7473-47e9-9f39-42ca968288d3/0_3.png",
+          "sha256": "947b027dabc62fb4151c03be8fc945c073f30a1dc4e1393ff3a754a813f6bd72"
+        }
+      ],
+      "pick": null,
+      "verdict": "superseded by the warm-tan wording"
+    },
+    {
+      "role": "front_color",
+      "job_id": "5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a",
+      "prompt": "low-poly faceted 3D game character, flat-shaded planes, matte gunmetal sci-fi armour with glowing purple light strips, big gloves and big boots, stylized cartoon toy-hero little girl about 4.5 heads tall with light warm tan skin, fair warm complexion, shoulder-length brown hair, big brown eyes, cheerful, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, bright soft studio light, plain light grey background, no helmet --ar 2:3",
+      "images": [
+        {
+          "file": "mj_5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a/0_0.png",
+          "sha256": "4f28065c8a794fec9607b5c6eff23401ca6e97c7b9824393421a9f4ba913e077"
+        },
+        {
+          "file": "mj_5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a/0_1.png",
+          "sha256": "228e5a20df1a8a31c5459a440f826a2b66582652e51645237ecafb5b8e14a82e"
+        },
+        {
+          "file": "mj_5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a/0_2.png",
+          "sha256": "c0f2f5971e0e908f54f20528fc54935eb137ccfe45fb80e63fda79ef4d3c7d6e"
+        },
+        {
+          "file": "mj_5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5f5bb2eb-86cc-4082-977f-1cd22d6d3d8a/0_3.png",
+          "sha256": "644b0591d5f77b6d11ecb3bb948caf9f9e5c7d72b54e247315f7d9892ef8b189"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "front_color.png"
+      },
+      "verdict": "Light warm tan per the Family cast sheet (#ddb08c lit, #c8956f shade). Measured lit-cheek median of the pick: #d19271 (old front: #aa6152)."
+    },
+    {
+      "role": "turnaround_color",
+      "job_id": "19dbb420-3c61-489e-acfc-ba3a39062de4",
+      "prompt": "low-poly faceted 3D game character turnaround sheet, front view, side view, back view, evenly spaced, same scale, flat-shaded planes, matte gunmetal sci-fi armour with glowing purple light strips, big gloves and big boots, stylized cartoon toy-hero little girl about 4.5 heads tall with light warm tan skin, fair warm complexion, shoulder-length brown hair, big brown eyes, cheerful, A-pose with arms a little away from the body, full body, orthographic, bright soft studio light, plain light grey background, no helmet --ar 16:9",
+      "images": [
+        {
+          "file": "mj_19dbb420-3c61-489e-acfc-ba3a39062de4_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/19dbb420-3c61-489e-acfc-ba3a39062de4/0_0.png",
+          "sha256": "85206eae4eb76f388840557868f3d5e68d8fcf501ab6a4ecaa52d04b33a7a57a"
+        },
+        {
+          "file": "mj_19dbb420-3c61-489e-acfc-ba3a39062de4_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/19dbb420-3c61-489e-acfc-ba3a39062de4/0_1.png",
+          "sha256": "d13594ddbfb31521acb0dc32b6631362efffb8eb05a966c357f41c08f21f8980"
+        },
+        {
+          "file": "mj_19dbb420-3c61-489e-acfc-ba3a39062de4_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/19dbb420-3c61-489e-acfc-ba3a39062de4/0_2.png",
+          "sha256": "eec7fbe6e9e03f0617139e40e3f2926a565698f3bc1ffa1c6a3614984125055c"
+        },
+        {
+          "file": "mj_19dbb420-3c61-489e-acfc-ba3a39062de4_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/19dbb420-3c61-489e-acfc-ba3a39062de4/0_3.png",
+          "sha256": "449a0059df7d4e321c8e7f4a675cde0ed6f3a47d32e6c3cd31aa1f0bae7000b7"
+        }
+      ],
+      "pick": {
+        "index": 3,
+        "file": "turnaround_color.png"
+      },
+      "verdict": "Same light warm tan front/side/three-quarter/back. There was no earlier colour turnaround (the old one is turnaround_clay.png), so nothing to supersede."
     }
   ],
-  "meshy_input": "front_clay.png (clean); front_color.png as the alternative"
+  "meshy_input": "front_clay.png (clean); front_color.png as the alternative",
+  "privacy": "Kids' photos are private: never uploaded to Midjourney or Meshy, never committed; used only to judge tone in words."
 }
