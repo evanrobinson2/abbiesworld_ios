@@ -1,0 +1,64 @@
+{
+ "asset": "status-lamp-post",
+ "name": "Status lamp beacon post",
+ "brief": "MK-161 Status lamp beacon post: the base's traffic light for the outside. Three caged glass lamps stacked on a post (green all's well, amber come back soon, red come inside now), a little solar cap and a bell under the lamps. The game lights one lamp and rings the bell, so the whole base mood is read from the world, not a HUD.",
+ "rounds": [
+  {
+   "n": 1,
+   "date": "2026-10-23",
+   "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  }
+ ],
+ "stats": {
+  "id": "MK-161",
+  "name": "Status lamp beacon post",
+  "triangles": 1408,
+  "parts": 26,
+  "part_names": [
+   "BasePlate",
+   "Post",
+   "PostCollar",
+   "HazardWrap",
+   "LampG",
+   "LampRingG",
+   "CageG0",
+   "CageG1",
+   "CageG2",
+   "CageG3",
+   "LampA",
+   "LampRingA",
+   "CageA0",
+   "CageA1",
+   "CageA2",
+   "CageA3",
+   "LampR",
+   "LampRingR",
+   "CageR0",
+   "CageR1",
+   "CageR2",
+   "CageR3",
+   "TopCap",
+   "SolarCap",
+   "Bell",
+   "BellArm"
+  ],
+  "materials": [
+   "LampOff_Amber",
+   "LampOff_Red",
+   "Lamp_Green",
+   "Metal_Gunmetal",
+   "Metal_Hazard",
+   "Metal_HullDark",
+   "Metal_SolarCell",
+   "Metal_Steel"
+  ],
+  "mass_kg": 225.9,
+  "moon_weight_kg": 37.4,
+  "size_m": [
+   0.6,
+   0.6,
+   2.98
+  ],
+  "maps": "512 px base, roughness, normal"
+ }
+}

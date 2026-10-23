@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Moon Base Kit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* AW-STUDY-0031 Moon Base Kit. A study page with its own look: lunar night ground, the Faceted Hero palette. */
+:root{--bg:#0d1017;--paper:#161b25;--raised:#1e2532;--ink:#e8ebf1;--muted:#9ba4b4;--line:#2a3242;--suit:#ff9a3c;--green:#59e08a;
+--display:"Barlow Condensed",system-ui,sans-serif;--body:"Source Sans 3",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef0f3;--paper:#fff;--raised:#f4f6f9;--ink:#1d2129;--muted:#5a6170;--line:#d3d8e0;--suit:#d9701f;--green:#1f9a52;color-scheme:light}}
+:root[data-theme="light"]{--bg:#eef0f3;--paper:#fff;--raised:#f4f6f9;--ink:#1d2129;--muted:#5a6170;--line:#d3d8e0;--suit:#d9701f;--green:#1f9a52;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);padding:28px max(16px,env(safe-area-inset-right)) 64px max(16px,env(safe-area-inset-left))}
+main{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+main>*{min-width:0}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--suit)}
+h1{font:700 clamp(38px,7vw,64px)/1 var(--display);margin:0}
+h2{font:700 32px/1.1 var(--display);margin:22px 0 0}
+h3{font:700 22px/1.1 var(--display);margin:0}
+p{margin:0;max-width:74ch}.lede{font-size:19px}.muted{color:var(--muted)}
+img{display:block;width:100%;height:auto;border-radius:10px}
+.pack{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.pack figure{margin:0;display:grid;gap:6px}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px;align-content:start}
+.card header{display:flex;gap:10px;align-items:baseline}
+.id{font:500 12px/1 var(--mono);color:var(--suit)}
+.views{display:grid;grid-template-columns:1.25fr 1fr;gap:8px;align-items:start}
+.views figure{margin:0;position:relative;display:grid;gap:4px}
+.spin{aspect-ratio:1}
+.spin img,.spin model-viewer{width:100%;height:100%;object-fit:cover;border-radius:10px;background:#0b0e14}
+.spin button{position:absolute;right:8px;bottom:8px;border:0;border-radius:999px;padding:7px 13px;font:600 13px var(--body);color:#111;background:rgba(255,255,255,.82);cursor:pointer}
+.spin.on button{display:none}
+dl{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0}
+dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font:500 11px/1 var(--mono);padding:5px 7px;border-radius:7px;background:var(--raised);border:1px solid var(--line);color:var(--muted)}
+.groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px}
+.group{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:8px;align-content:start}
+.group small{font:500 12px var(--mono);color:var(--muted)}
+.group ol{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:14.5px}
+.group li span{font:500 11px var(--mono);color:var(--muted);margin-right:8px}
+.group li.drawn{color:var(--suit);font-weight:600}.group li a{color:var(--green);font:500 11px var(--mono)}
+.rules{display:grid;gap:9px;padding-left:22px;margin:0;max-width:80ch}.rules li::marker{color:var(--suit);font-weight:700}
+@media (max-width:560px){.views{grid-template-columns:1fr}}
+</style></head><body><main>
+<header style="display:grid;gap:10px">
+ <span class="eyebrow">AW-STUDY-0031 · Moon Base Kit · round 1</span>
+ <h1>The Moon base, built to walk through</h1>
+ <p class="lede">200 low-poly pieces proposed for the low-gravity Moon shooter, and the first 20 built: 41,192 triangles in all. Each one is made of named parts with real materials. Panel seams, brushed metal and rock pits are baked into colour, roughness and normal maps, so they still look solid up close in first person. Every part also knows its own mass, so low gravity can throw it honestly.</p>
+ <p class="muted">The look follows the Moon Heroes "Faceted Hero" direction: flat planes, gunmetal and off-white hull, orange for people and warm windows, green, amber and red lamps for state. Cyan is kept for the Star Child and crystals, and gold for Daddy's memory coins. The heroes, buggy and lander belong to the Moon Heroes study.</p>
+</header>
+<section class="pack">
+ <figure><img src="img/pack-moonbase.jpg" alt="Moon Mission pack painting of the moon base"><figcaption>Inspiration: the Moon Mission pack's base</figcaption></figure>
+ <figure><img src="img/pack-abbie-base.jpg" alt="Abbie looking at the moon base"><figcaption>Abbie at the base: the scale we build for</figcaption></figure>
+</section>
+<h2>The 20, built</h2>
+<p class="muted">Left: the three-quarter view. Tap "Spin it" to turn the real model. Right: what Abbie sees from her own eye height, which is the view that matters in first person. These were drawn in Blender tonight because the Mac was offline; Midjourney proofs for all 20 are queued for morning, and round 2 rebuilds each piece against its pick from the same camera.</p>
+<div class="cards"><article class="card" id="solar-array">
+ <header><span class="id">MK-001</span><h3>Solar array wing</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/solar-array.wasm" data-alt="Solar array wing"><img src="img/solar-array.jpg" alt="Solar array wing, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/solar-array-fps.jpg" alt="Solar array wing from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A gunmetal mast on an anchored foot, a slewing head, a torque tube and two wings of four framed cells each, tilted to the low lunar sun. A junction box at the foot carries the green &quot;power good&quot; lamp (diegetic: if the base is short of power, these lamps go amber).</p>
+ <dl><div><dt>Triangles</dt><dd>2,096</dd></div><div><dt>Parts</dt><dd>39</dd></div>
+ <div><dt>Mass</dt><dd>1,852.0 kg</dd></div><div><dt>Moon weight</dt><dd>306.3 kg</dd></div>
+ <div><dt>Size m</dt><dd>8.92 × 2.37 × 3.95</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal HullDark</span><span class="chip">Metal SolarCell</span><span class="chip">Metal Steel</span><span class="chip">Rubber Black</span></div>
+</article><article class="card" id="landing-pad">
+ <header><span class="id">MK-003</span><h3>Landing pad with beacon ring</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/landing-pad.wasm" data-alt="Landing pad with beacon ring"><img src="img/landing-pad.jpg" alt="Landing pad with beacon ring, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/landing-pad-fps.jpg" alt="Landing pad with beacon ring from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A sintered-regolith slab 12 m across with a steel kerb, a painted hazard ring, a touchdown circle of amber inset lights and a ring of 12 beacon posts that chase toward the pad when a lander is inbound (the diegetic approach signal; this closes the remaster study&#x27;s open beacon-ring item).</p>
+ <dl><div><dt>Triangles</dt><dd>7,656</dd></div><div><dt>Parts</dt><dd>96</dd></div>
+ <div><dt>Mass</dt><dd>139,897.8 kg</dd></div><div><dt>Moon weight</dt><dd>23,139.1 kg</dd></div>
+ <div><dt>Size m</dt><dd>14.11 × 15.06 × 1.2</dd></div></dl>
+ <div class="chips"><span class="chip">LampOff Amber</span><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal HullDark</span><span class="chip">Plastic White</span><span class="chip">Stone Basalt</span></div>
+</article><article class="card" id="comms-dish">
+ <header><span class="id">MK-005</span><h3>Comms dish on a turntable</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/comms-dish.wasm" data-alt="Comms dish on a turntable"><img src="img/comms-dish.jpg" alt="Comms dish on a turntable, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/comms-dish-fps.jpg" alt="Comms dish on a turntable from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A 3.2 m dish on a yoke, a feed horn on three struts, a counterweight and a red blinker. It turns to follow Earth; when it is talking to home its feed lamp glows and the turntable hums.</p>
+ <dl><div><dt>Triangles</dt><dd>1,300</dd></div><div><dt>Parts</dt><dd>16</dd></div>
+ <div><dt>Mass</dt><dd>4,883.3 kg</dd></div><div><dt>Moon weight</dt><dd>807.7 kg</dd></div>
+ <div><dt>Size m</dt><dd>3.24 × 2.37 × 3.52</dd></div></dl>
+ <div class="chips"><span class="chip">HeadlightGlass</span><span class="chip">Lamp Red</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal Steel</span></div>
+</article><article class="card" id="ore-processor">
+ <header><span class="id">MK-007</span><h3>Regolith ore processor</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/ore-processor.wasm" data-alt="Regolith ore processor"><img src="img/ore-processor.jpg" alt="Regolith ore processor, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/ore-processor-fps.jpg" alt="Regolith ore processor from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A hopper you can tip dust into, a panelled furnace body on legs, a chute that drops bricks of sintered regolith onto a tray, an exhaust stack and a status lamp. Diegetic: the warm window glows while it cooks, the stack puffs slow low-gravity dust, and bricks pile up on the tray.</p>
+ <dl><div><dt>Triangles</dt><dd>1,744</dd></div><div><dt>Parts</dt><dd>28</dd></div>
+ <div><dt>Mass</dt><dd>10,751.2 kg</dd></div><div><dt>Moon weight</dt><dd>1,778.2 kg</dd></div>
+ <div><dt>Size m</dt><dd>3.91 × 3.4 × 3.67</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Grate</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">Stone Basalt</span><span class="chip">Window Warm</span></div>
+</article><article class="card" id="tank-farm">
+ <header><span class="id">MK-011</span><h3>Oxygen tank farm</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/tank-farm.wasm" data-alt="Oxygen tank farm"><img src="img/tank-farm.jpg" alt="Oxygen tank farm, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/tank-farm-fps.jpg" alt="Oxygen tank farm from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>Three upright tanks on a steel skid, joined by a manifold with valve wheels and two big pressure dials. Diegetic: the dials&#x27; needles and the frost line on the tanks say how much air the base has.</p>
+ <dl><div><dt>Triangles</dt><dd>3,584</dd></div><div><dt>Parts</dt><dd>38</dd></div>
+ <div><dt>Mass</dt><dd>11,593.0 kg</dd></div><div><dt>Moon weight</dt><dd>1,917.5 kg</dd></div>
+ <div><dt>Size m</dt><dd>5 × 3.13 × 3.26</dd></div></dl>
+ <div class="chips"><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Paint Dial</span><span class="chip">Plastic Dark</span></div>
+</article><article class="card" id="corridor">
+ <header><span class="id">MK-031</span><h3>Corridor segment, straight, ribbed</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/corridor.wasm" data-alt="Corridor segment, straight, ribbed"><img src="img/corridor.jpg" alt="Corridor segment, straight, ribbed, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/corridor-fps.jpg" alt="Corridor segment, straight, ribbed from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>The kit&#x27;s base piece: 4 m long on the 2 m grid, 2.4 m wide, 2.6 m tall, with a chamfered octagonal section. Grated floor over a cable trough, hull wall panels, gunmetal ribs every metre with handholds for low-g, a pipe run on the left wall, a cable tray on the right, a warm light strip in the ceiling and painted wayfinding stripes on the floor (diegetic: follow the orange stripe home).</p>
+ <dl><div><dt>Triangles</dt><dd>2,588</dd></div><div><dt>Parts</dt><dd>62</dd></div>
+ <div><dt>Mass</dt><dd>13,533.8 kg</dd></div><div><dt>Moon weight</dt><dd>2,238.5 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.48 × 4.16 × 2.67</dd></div></dl>
+ <div class="chips"><span class="chip">HeadlightGlass</span><span class="chip">Metal Grate</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Rubber Black</span></div>
+</article><article class="card" id="bulkhead-door">
+ <header><span class="id">MK-035</span><h3>Bulkhead door, round pressure hatch</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/bulkhead-door.wasm" data-alt="Bulkhead door, round pressure hatch"><img src="img/bulkhead-door.jpg" alt="Bulkhead door, round pressure hatch, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/bulkhead-door-fps.jpg" alt="Bulkhead door, round pressure hatch from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A thick hatch with a porthole, a locking wheel, a hinge block and a door-state light ring round the frame: green means the next module holds air, amber means it is cycling, red means stop (diegetic: Abbie reads the ring, not a HUD).</p>
+ <dl><div><dt>Triangles</dt><dd>1,704</dd></div><div><dt>Parts</dt><dd>18</dd></div>
+ <div><dt>Mass</dt><dd>1,905.9 kg</dd></div><div><dt>Moon weight</dt><dd>315.2 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.4 × 0.48 × 2.6</dd></div></dl>
+ <div class="chips"><span class="chip">Glass Window</span><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span></div>
+</article><article class="card" id="command-console">
+ <header><span class="id">MK-066</span><h3>Command console with three screens</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/command-console.wasm" data-alt="Command console with three screens"><img src="img/command-console.jpg" alt="Command console with three screens, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/command-console-fps.jpg" alt="Command console with three screens from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A curved desk of three angled bays, each with an Earthlight screen on a tilting arm, a key deck with chunky buttons, and a fold-out step so Abbie can reach (adults stand, she climbs up).</p>
+ <dl><div><dt>Triangles</dt><dd>1,412</dd></div><div><dt>Parts</dt><dd>34</dd></div>
+ <div><dt>Mass</dt><dd>1,432.2 kg</dd></div><div><dt>Moon weight</dt><dd>236.9 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.67 × 1.43 × 1.73</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Lamp Red</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Plastic Dark</span><span class="chip">Plastic White</span><span class="chip">Rubber Black</span><span class="chip">Screen Earthlight</span></div>
+</article><article class="card" id="bunk-pod">
+ <header><span class="id">MK-070</span><h3>Bunk pod with privacy shutter</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/bunk-pod.wasm" data-alt="Bunk pod with privacy shutter"><img src="img/bunk-pod.jpg" alt="Bunk pod with privacy shutter, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/bunk-pod-fps.jpg" alt="Bunk pod with privacy shutter from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>Each has a mattress with a strap blanket (low-g: you sleep strapped in), a pillow, a reading lamp and a slatted shutter. Diegetic: a closed shutter with the lamp off means someone is asleep.</p>
+ <dl><div><dt>Triangles</dt><dd>1,992</dd></div><div><dt>Parts</dt><dd>40</dd></div>
+ <div><dt>Mass</dt><dd>2,423.4 kg</dd></div><div><dt>Moon weight</dt><dd>400.8 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.28 × 1.16 × 2.39</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Cloth Grey</span><span class="chip">HeadlightGlass</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Plastic White</span></div>
+</article><article class="card" id="galley-table">
+ <header><span class="id">MK-072</span><h3>Galley table with bench</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/galley-table.wasm" data-alt="Galley table with bench"><img src="img/galley-table.jpg" alt="Galley table with bench, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/galley-table-fps.jpg" alt="Galley table with bench from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A table on a single floor-pinned pedestal, a raised lip so things don&#x27;t drift off in low gravity, two cushioned benches with foot straps, two magnetic meal trays and a drink pouch.</p>
+ <dl><div><dt>Triangles</dt><dd>1,392</dd></div><div><dt>Parts</dt><dd>27</dd></div>
+ <div><dt>Mass</dt><dd>651.5 kg</dd></div><div><dt>Moon weight</dt><dd>107.8 kg</dd></div>
+ <div><dt>Size m</dt><dd>1.6 × 2 × 0.98</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Fruit Red</span><span class="chip">Leaf Lettuce</span><span class="chip">Metal Foil</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Plastic White</span></div>
+</article><article class="card" id="hydroponics-rack">
+ <header><span class="id">MK-076</span><h3>Hydroponics rack, three tiers</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/hydroponics-rack.wasm" data-alt="Hydroponics rack, three tiers"><img src="img/hydroponics-rack.jpg" alt="Hydroponics rack, three tiers, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/hydroponics-rack-fps.jpg" alt="Hydroponics rack, three tiers from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>Diegetic: plants droop and the lamps flicker when the water or power is low; ripe tomatoes mean it&#x27;s harvest time.</p>
+ <dl><div><dt>Triangles</dt><dd>2,972</dd></div><div><dt>Parts</dt><dd>66</dd></div>
+ <div><dt>Mass</dt><dd>678.1 kg</dd></div><div><dt>Moon weight</dt><dd>112.2 kg</dd></div>
+ <div><dt>Size m</dt><dd>1.95 × 0.66 × 2.33</dd></div></dl>
+ <div class="chips"><span class="chip">Fruit Red</span><span class="chip">Lamp Grow</span><span class="chip">Leaf Green</span><span class="chip">Leaf Lettuce</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Plastic Dark</span><span class="chip">Plastic White</span><span class="chip">Soil Grow</span></div>
+</article><article class="card" id="suit-rack">
+ <header><span class="id">MK-083</span><h3>Suit rack with spare suits</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/suit-rack.wasm" data-alt="Suit rack with spare suits"><img src="img/suit-rack.jpg" alt="Suit rack with spare suits, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/suit-rack-fps.jpg" alt="Suit rack with spare suits from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>The suits share the heroes&#x27; look: gunmetal plates over grey cloth with the orange chest lamp. Diegetic: a missing suit means someone is outside.</p>
+ <dl><div><dt>Triangles</dt><dd>2,468</dd></div><div><dt>Parts</dt><dd>39</dd></div>
+ <div><dt>Mass</dt><dd>1,231.1 kg</dd></div><div><dt>Moon weight</dt><dd>203.6 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.2 × 0.51 × 2.46</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Suit</span><span class="chip">Glass Window</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span></div>
+</article><article class="card" id="patch-up-station">
+ <header><span class="id">MK-085</span><h3>Patch-up station</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/patch-up-station.wasm" data-alt="Patch-up station"><img src="img/patch-up-station.jpg" alt="Patch-up station, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/patch-up-station-fps.jpg" alt="Patch-up station from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A white cabinet with a glowing green plus (lit = ready), a pull-out drawer of plasters and suit patches, a fold-down seat at kid height and a big friendly press button. PG: it fixes scrapes and suit tears, nothing scary.</p>
+ <dl><div><dt>Triangles</dt><dd>932</dd></div><div><dt>Parts</dt><dd>19</dd></div>
+ <div><dt>Mass</dt><dd>560.7 kg</dd></div><div><dt>Moon weight</dt><dd>92.7 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.35 × 0.79 × 2</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Cloth Grey</span><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Plastic White</span></div>
+</article><article class="card" id="crater-rim">
+ <header><span class="id">MK-096</span><h3>Crater rim arc piece</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/crater-rim.wasm" data-alt="Crater rim arc piece"><img src="img/crater-rim.jpg" alt="Crater rim arc piece, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/crater-rim-fps.jpg" alt="Crater rim arc piece from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>Four of these close a crater; they also make low-g FPS cover. Colours follow the regolith grammar (simulations/moon/moon-regolith.mjs).</p>
+ <dl><div><dt>Triangles</dt><dd>1,096</dd></div><div><dt>Parts</dt><dd>10</dd></div>
+ <div><dt>Mass</dt><dd>111,268.6 kg</dd></div><div><dt>Moon weight</dt><dd>18,403.8 kg</dd></div>
+ <div><dt>Size m</dt><dd>13.19 × 13.22 × 2.99</dd></div></dl>
+ <div class="chips"><span class="chip">Stone Basalt</span><span class="chip">Stone Regolith</span></div>
+</article><article class="card" id="boulders">
+ <header><span class="id">MK-098</span><h3>Boulder set (three)</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/boulders.wasm" data-alt="Boulder set (three)"><img src="img/boulders.jpg" alt="Boulder set (three), three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/boulders-fps.jpg" alt="Boulder set (three) from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>Each has its own mass, so the small one can be shoved in low gravity and the big one stops a gem bug.</p>
+ <dl><div><dt>Triangles</dt><dd>276</dd></div><div><dt>Parts</dt><dd>12</dd></div>
+ <div><dt>Mass</dt><dd>11,995.2 kg</dd></div><div><dt>Moon weight</dt><dd>1,984.0 kg</dd></div>
+ <div><dt>Size m</dt><dd>4.96 × 3.41 × 1.54</dd></div></dl>
+ <div class="chips"><span class="chip">Stone Basalt</span><span class="chip">Stone Regolith</span></div>
+</article><article class="card" id="oxygen-canister">
+ <header><span class="id">MK-146</span><h3>Oxygen canister</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/oxygen-canister.wasm" data-alt="Oxygen canister"><img src="img/oxygen-canister.jpg" alt="Oxygen canister, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/oxygen-canister-fps.jpg" alt="Oxygen canister from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A blue cylinder with a steel valve head, a rubber grip band, a carry loop and a green &quot;full&quot; lamp ring that the game dims as it empties (diegetic: the canister itself says how full it is, no HUD bar).</p>
+ <dl><div><dt>Triangles</dt><dd>1,124</dd></div><div><dt>Parts</dt><dd>9</dd></div>
+ <div><dt>Mass</dt><dd>13.9 kg</dd></div><div><dt>Moon weight</dt><dd>2.3 kg</dd></div>
+ <div><dt>Size m</dt><dd>0.2 × 0.2 × 0.72</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Rubber Black</span></div>
+</article><article class="card" id="battery-cell">
+ <header><span class="id">MK-147</span><h3>Battery cell</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/battery-cell.wasm" data-alt="Battery cell"><img src="img/battery-cell.jpg" alt="Battery cell, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/battery-cell-fps.jpg" alt="Battery cell from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A chunky charcoal block with a carry handle, steel contacts, a hazard band and three green charge bars on its side (diegetic: the bars say how full it is).</p>
+ <dl><div><dt>Triangles</dt><dd>624</dd></div><div><dt>Parts</dt><dd>12</dd></div>
+ <div><dt>Mass</dt><dd>54.0 kg</dd></div><div><dt>Moon weight</dt><dd>8.9 kg</dd></div>
+ <div><dt>Size m</dt><dd>0.31 × 0.19 × 0.49</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Steel</span><span class="chip">Plastic Dark</span><span class="chip">Rubber Black</span></div>
+</article><article class="card" id="status-lamp-post">
+ <header><span class="id">MK-161</span><h3>Status lamp beacon post</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/status-lamp-post.wasm" data-alt="Status lamp beacon post"><img src="img/status-lamp-post.jpg" alt="Status lamp beacon post, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/status-lamp-post-fps.jpg" alt="Status lamp beacon post from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>Three caged glass lamps stacked on a post (green all&#x27;s well, amber come back soon, red come inside now), a little solar cap and a bell under the lamps. The game lights one lamp and rings the bell, so the whole base mood is read from the world, not a HUD.</p>
+ <dl><div><dt>Triangles</dt><dd>1,408</dd></div><div><dt>Parts</dt><dd>26</dd></div>
+ <div><dt>Mass</dt><dd>225.9 kg</dd></div><div><dt>Moon weight</dt><dd>37.4 kg</dd></div>
+ <div><dt>Size m</dt><dd>0.6 × 0.6 × 2.98</dd></div></dl>
+ <div class="chips"><span class="chip">LampOff Amber</span><span class="chip">LampOff Red</span><span class="chip">Lamp Green</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal HullDark</span><span class="chip">Metal SolarCell</span><span class="chip">Metal Steel</span></div>
+</article><article class="card" id="pressure-gauge">
+ <header><span class="id">MK-162</span><h3>Pressure gauge wall panel</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/pressure-gauge.wasm" data-alt="Pressure gauge wall panel"><img src="img/pressure-gauge.jpg" alt="Pressure gauge wall panel, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/pressure-gauge-fps.jpg" alt="Pressure gauge wall panel from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>The diegetic replacement for an air meter: Abbie walks up and reads the wall.</p>
+ <dl><div><dt>Triangles</dt><dd>1,672</dd></div><div><dt>Parts</dt><dd>18</dd></div>
+ <div><dt>Mass</dt><dd>880.8 kg</dd></div><div><dt>Moon weight</dt><dd>145.7 kg</dd></div>
+ <div><dt>Size m</dt><dd>1.6 × 0.24 × 2.41</dd></div></dl>
+ <div class="chips"><span class="chip">Glass Window</span><span class="chip">Lamp Amber</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Paint Dial</span><span class="chip">Plastic Dark</span><span class="chip">Plastic White</span></div>
+</article><article class="card" id="jump-pad">
+ <header><span class="id">MK-181</span><h3>Jump pad</h3></header>
+ <div class="views">
+  <figure class="spin" data-src="m/jump-pad.wasm" data-alt="Jump pad"><img src="img/jump-pad.jpg" alt="Jump pad, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
+  <figure><img src="img/jump-pad-fps.jpg" alt="Jump pad from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
+ </div>
+ <p>A 1.6 m round pad with a hazard-chevron grate top, a ring of green &quot;ready&quot; lamps, chunky springs visible in the gap below the top plate, and four anchor feet in a dust skirt. Step on it and the springs squash, the lamps chase inward, and you sail in a slow arc.</p>
+ <dl><div><dt>Triangles</dt><dd>3,152</dd></div><div><dt>Parts</dt><dd>42</dd></div>
+ <div><dt>Mass</dt><dd>1,072.4 kg</dd></div><div><dt>Moon weight</dt><dd>177.4 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.4 × 2.4 × 0.47</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Grate</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Stone Regolith</span></div>
+</article></div>
+<h2>All 200</h2>
+<p class="muted">Orange ones are built. The groups are what a whole base needs, from the outside in.</p>
+<div class="groups"><section class="group"><h3>Exterior structures and infrastructure <small>30</small></h3><p class="muted">Dome, tower, habitat/hangar, airlock and supply crate were handed over by the Moon Heroes thread (2026-10-23): engineered recipes here, Meshy stays for heroes.</p><ol><li class="drawn"><span>MK-001</span>Solar array wing on a sun-tracking mast <a href="#solar-array">built</a></li><li class=""><span>MK-002</span>Solar farm junction box</li><li class="drawn"><span>MK-003</span>Landing pad with beacon ring <a href="#landing-pad">built</a></li><li class=""><span>MK-004</span>Landing pad floodlight mast</li><li class="drawn"><span>MK-005</span>Comms dish on a turntable <a href="#comms-dish">built</a></li><li class=""><span>MK-006</span>Relay mast (small, portable)</li><li class="drawn"><span>MK-007</span>Regolith ore processor <a href="#ore-processor">built</a></li><li class=""><span>MK-008</span>Regolith conveyor segment</li><li class=""><span>MK-009</span>Ice mining drill rig</li><li class=""><span>MK-010</span>Water ice tank (horizontal)</li><li class="drawn"><span>MK-011</span>Oxygen tank farm (three upright tanks) <a href="#tank-farm">built</a></li><li class=""><span>MK-012</span>Fuel bowser for landers</li><li class=""><span>MK-013</span>Pressurised connector tube, straight</li><li class=""><span>MK-014</span>Connector tube, elbow</li><li class=""><span>MK-015</span>Connector tube, T junction</li><li class=""><span>MK-016</span>Blast wall segment (sandbag regolith bags)</li><li class=""><span>MK-017</span>Berm wall of bagged regolith</li><li class=""><span>MK-018</span>Radiator fin array</li><li class=""><span>MK-019</span>Power pylon with cable sag</li><li class=""><span>MK-020</span>Exterior airlock door</li><li class=""><span>MK-021</span>Weather and dust sensor post</li><li class=""><span>MK-022</span>Seismometer station</li><li class=""><span>MK-023</span>Telescope dome (small observatory)</li><li class=""><span>MK-024</span>Greenhouse tunnel (exterior)</li><li class=""><span>MK-025</span>Vehicle charging bay</li><li class=""><span>MK-026</span>Rover garage shed</li><li class=""><span>MK-027</span>Cargo container (shipping box, Moon spec)</li><li class=""><span>MK-028</span>Base tower and antenna</li><li class=""><span>MK-029</span>Main dome, upgraded (from MR-002)</li><li class=""><span>MK-030</span>Habitat module and hangar</li></ol></section><section class="group"><h3>Interior architecture kit (modular, 2 m grid) <small>35</small></h3><p class="muted">Every piece snaps to a 2 m grid with doorway sockets.</p><ol><li class="drawn"><span>MK-031</span>Corridor segment, straight, ribbed <a href="#corridor">built</a></li><li class=""><span>MK-032</span>Corridor corner</li><li class=""><span>MK-033</span>Corridor T junction</li><li class=""><span>MK-034</span>Corridor end cap with porthole</li><li class="drawn"><span>MK-035</span>Bulkhead door, round pressure hatch <a href="#bulkhead-door">built</a></li><li class=""><span>MK-036</span>Sliding inner door with window slit</li><li class=""><span>MK-037</span>Floor grating tile</li><li class=""><span>MK-038</span>Floor plate tile (solid)</li><li class=""><span>MK-039</span>Ceiling light strip panel</li><li class=""><span>MK-040</span>Wall panel, plain</li><li class=""><span>MK-041</span>Wall panel with pipe run</li><li class=""><span>MK-042</span>Wall panel with porthole window</li><li class=""><span>MK-043</span>Wall panel with cable trays</li><li class=""><span>MK-044</span>Dome interior rib</li><li class=""><span>MK-045</span>Ladder and floor hatch</li><li class=""><span>MK-046</span>Short stair (four steps, low-g risers)</li><li class=""><span>MK-047</span>Catwalk with railings</li><li class=""><span>MK-048</span>Mezzanine support column</li><li class=""><span>MK-049</span>Ramp with grip strips</li><li class=""><span>MK-050</span>Ceiling vent fan</li><li class=""><span>MK-051</span>Pressure seal ring (between modules)</li><li class=""><span>MK-052</span>Inner airlock chamber shell</li><li class=""><span>MK-053</span>Decon shower arch (dust blower)</li><li class=""><span>MK-054</span>Suit-up alcove</li><li class=""><span>MK-055</span>Window bay (big view of Earth)</li><li class=""><span>MK-056</span>Cupola observation bubble</li><li class=""><span>MK-057</span>Utility crawlspace panel</li><li class=""><span>MK-058</span>Wall-mounted handholds (low-g)</li><li class=""><span>MK-059</span>Floor magnet boots strip</li><li class=""><span>MK-060</span>Elevator lift platform</li><li class=""><span>MK-061</span>Hab sleeping module shell</li><li class=""><span>MK-062</span>Lab module shell</li><li class=""><span>MK-063</span>Workshop module shell</li><li class=""><span>MK-064</span>Galley module shell</li><li class=""><span>MK-065</span>Storage bay shell</li></ol></section><section class="group"><h3>Interior furniture and fixtures <small>30</small></h3><p class="muted">Sized for Abbie (4.5 heads) and Daddy (7.5 heads); seats at kid and adult height.</p><ol><li class="drawn"><span>MK-066</span>Command console with three screens <a href="#command-console">built</a></li><li class=""><span>MK-067</span>Comms desk with radio and headset</li><li class=""><span>MK-068</span>Navigation map table</li><li class=""><span>MK-069</span>Pilot chair (swivel, harness)</li><li class="drawn"><span>MK-070</span>Bunk pod with privacy shutter <a href="#bunk-pod">built</a></li><li class=""><span>MK-071</span>Footlocker</li><li class="drawn"><span>MK-072</span>Galley table with bench <a href="#galley-table">built</a></li><li class=""><span>MK-073</span>Food rehydrator</li><li class=""><span>MK-074</span>Galley cupboard</li><li class=""><span>MK-075</span>Water dispenser</li><li class="drawn"><span>MK-076</span>Hydroponics rack (three tiers) <a href="#hydroponics-rack">built</a></li><li class=""><span>MK-077</span>Seed tray and grow lamp</li><li class=""><span>MK-078</span>Lab bench with microscope</li><li class=""><span>MK-079</span>Sample freezer</li><li class=""><span>MK-080</span>Rock sample shelf</li><li class=""><span>MK-081</span>Workbench with vise</li><li class=""><span>MK-082</span>Tool pegboard</li><li class="drawn"><span>MK-083</span>Suit rack with spare suit <a href="#suit-rack">built</a></li><li class=""><span>MK-084</span>Helmet shelf</li><li class="drawn"><span>MK-085</span>Patch-up station (first aid) <a href="#patch-up-station">built</a></li><li class=""><span>MK-086</span>Exercise bike (bungee harness)</li><li class=""><span>MK-087</span>Treadmill (low-g harness)</li><li class=""><span>MK-088</span>Wash basin unit</li><li class=""><span>MK-089</span>Laundry drum</li><li class=""><span>MK-090</span>Storage cubbies with labels</li><li class=""><span>MK-091</span>Bookshelf with storybooks</li><li class=""><span>MK-092</span>Abbie&#x27;s drawing board</li><li class=""><span>MK-093</span>Board-game table</li><li class=""><span>MK-094</span>Kitchen trash compactor</li><li class=""><span>MK-095</span>Recycling sorter</li></ol></section><section class="group"><h3>Terrain kit <small>20</small></h3><p class="muted">Matches the regolith grammar in simulations/moon/moon-regolith.mjs.</p><ol><li class="drawn"><span>MK-096</span>Crater rim arc piece <a href="#crater-rim">built</a></li><li class=""><span>MK-097</span>Small crater bowl</li><li class="drawn"><span>MK-098</span>Boulder set (three) <a href="#boulders">built</a></li><li class=""><span>MK-099</span>Rock ridge / cliff chunk</li><li class=""><span>MK-100</span>Rubble scatter</li><li class=""><span>MK-101</span>Pebble decal patch</li><li class=""><span>MK-102</span>Regolith dune drift</li><li class=""><span>MK-103</span>Lava tube entrance</li><li class=""><span>MK-104</span>Lava tube tunnel segment</li><li class=""><span>MK-105</span>Skylight pit rim</li><li class=""><span>MK-106</span>Rille (channel) segment</li><li class=""><span>MK-107</span>Shadowed ice patch</li><li class=""><span>MK-108</span>Ejecta ray decal</li><li class=""><span>MK-109</span>Fresh impact crater with glassy centre</li><li class=""><span>MK-110</span>Mountain backdrop card (horizon)</li><li class=""><span>MK-111</span>Rock arch</li><li class=""><span>MK-112</span>Balanced rock</li><li class=""><span>MK-113</span>Overhang ledge (cover)</li><li class=""><span>MK-114</span>Slope ramp piece</li><li class=""><span>MK-115</span>Crevasse bridge rocks</li></ol></section><section class="group"><h3>Props: tools, cargo and science <small>30</small></h3><p class="muted">Every prop carries mass and a grab point for low-g throwing.</p><ol><li class=""><span>MK-116</span>Hand drill with core bit</li><li class=""><span>MK-117</span>Sample bag</li><li class=""><span>MK-118</span>Sample tongs</li><li class=""><span>MK-119</span>Geology hammer</li><li class=""><span>MK-120</span>Rake (sample sieve)</li><li class=""><span>MK-121</span>Core sample tube rack</li><li class=""><span>MK-122</span>Toolbox</li><li class=""><span>MK-123</span>Wrench</li><li class=""><span>MK-124</span>Cable reel</li><li class=""><span>MK-125</span>Spare tyre for the buggy</li><li class=""><span>MK-126</span>Antenna repair kit</li><li class=""><span>MK-127</span>Fuse panel box</li><li class=""><span>MK-128</span>Battery charger dock</li><li class=""><span>MK-129</span>Supply crate (low-g physics)</li><li class=""><span>MK-130</span>Barrel (water)</li><li class=""><span>MK-131</span>Gas cylinder trolley</li><li class=""><span>MK-132</span>Cargo net bundle</li><li class=""><span>MK-133</span>Pallet</li><li class=""><span>MK-134</span>Hand cart</li><li class=""><span>MK-135</span>Rope coil with clip</li><li class=""><span>MK-136</span>Tablet with map</li><li class=""><span>MK-137</span>Walkie radio</li><li class=""><span>MK-138</span>Binoculars</li><li class=""><span>MK-139</span>Camera on a tripod</li><li class=""><span>MK-140</span>Thermos</li><li class=""><span>MK-141</span>Lunchbox</li><li class=""><span>MK-142</span>Teddy bear in a mini suit</li><li class=""><span>MK-143</span>Paper rocket model</li><li class=""><span>MK-144</span>Snow globe of Earth</li><li class=""><span>MK-145</span>Family photo frame</li></ol></section><section class="group"><h3>Pickups and collectibles <small>15</small></h3><p class="muted">Gold only for memory coins; cyan crystal pickup is the Bruiser thread&#x27;s.</p><ol><li class="drawn"><span>MK-146</span>Oxygen canister <a href="#oxygen-canister">built</a></li><li class="drawn"><span>MK-147</span>Battery cell <a href="#battery-cell">built</a></li><li class=""><span>MK-148</span>Repair patch</li><li class=""><span>MK-149</span>Snack pack</li><li class=""><span>MK-150</span>Water pouch</li><li class=""><span>MK-151</span>Signal flare</li><li class=""><span>MK-152</span>Map chip</li><li class=""><span>MK-153</span>Keycard</li><li class=""><span>MK-154</span>Spare fuse</li><li class=""><span>MK-155</span>Jetpack fuel cell</li><li class=""><span>MK-156</span>Star sticker</li><li class=""><span>MK-157</span>Postcard from Earth</li><li class=""><span>MK-158</span>Daddy&#x27;s memory coin plinth</li><li class=""><span>MK-159</span>Rock with a fossil-like pattern</li><li class=""><span>MK-160</span>Lost mitten</li></ol></section><section class="group"><h3>Diegetic signals (no HUD) <small>20</small></h3><p class="muted">Ask &quot;how would Abbie know?&quot; first: a dial, a lamp, a bell before any overlay.</p><ol><li class="drawn"><span>MK-161</span>Status lamp beacon post <a href="#status-lamp-post">built</a></li><li class="drawn"><span>MK-162</span>Pressure gauge wall panel <a href="#pressure-gauge">built</a></li><li class=""><span>MK-163</span>Oxygen meter on the suit wrist</li><li class=""><span>MK-164</span>Door state light ring</li><li class=""><span>MK-165</span>Painted wayfinding stripes</li><li class=""><span>MK-166</span>Hanging module sign (stencil letters)</li><li class=""><span>MK-167</span>Warning siren with spinner</li><li class=""><span>MK-168</span>Clock with Earth time</li><li class=""><span>MK-169</span>Power level column (glowing tubes)</li><li class=""><span>MK-170</span>Air flow streamers (ribbons on vents)</li><li class=""><span>MK-171</span>Breadcrumb glow pegs</li><li class=""><span>MK-172</span>Radio speaker grille</li><li class=""><span>MK-173</span>Message board with magnets</li><li class=""><span>MK-174</span>Dust storm windsock (static-dust ribbons)</li><li class=""><span>MK-175</span>Sun-angle shadow dial</li><li class=""><span>MK-176</span>Temperature frost line</li><li class=""><span>MK-177</span>Elevator floor dial</li><li class=""><span>MK-178</span>Lander approach light strip</li><li class=""><span>MK-179</span>Base sound bell</li><li class=""><span>MK-180</span>Earth-up flag (crew mood)</li></ol></section><section class="group"><h3>Low-gravity toys and interactables <small>10</small></h3><p class="muted">Every one exaggerates low gravity: arcs, slow falls, dust that hangs.</p><ol><li class="drawn"><span>MK-181</span>Jump pad <a href="#jump-pad">built</a></li><li class=""><span>MK-182</span>Bounce ball</li><li class=""><span>MK-183</span>Floating balloon</li><li class=""><span>MK-184</span>Slow-fall umbrella</li><li class=""><span>MK-185</span>Grab bar swing</li><li class=""><span>MK-186</span>Zip line</li><li class=""><span>MK-187</span>Tether post</li><li class=""><span>MK-188</span>Pressure switch plate</li><li class=""><span>MK-189</span>Rotating valve wheel</li><li class=""><span>MK-190</span>Lever panel</li></ol></section><section class="group"><h3>Support machines (not heroes) <small>10</small></h3><p class="muted">Machines read as machines: charcoal with role lights, never cyan.</p><ol><li class=""><span>MK-191</span>Helper drone (camera)</li><li class=""><span>MK-192</span>Cargo hauler robot</li><li class=""><span>MK-193</span>Rover tow trailer</li><li class=""><span>MK-194</span>Robotic arm on a rail</li><li class=""><span>MK-195</span>Cleaning bot</li><li class=""><span>MK-196</span>Delivery capsule (lands from orbit)</li><li class=""><span>MK-197</span>Mini excavator</li><li class=""><span>MK-198</span>Crane boom</li><li class=""><span>MK-199</span>Forklift (low-g)</li><li class=""><span>MK-200</span>Mail rocket</li></ol></section></div>
+<h2>How each piece is made</h2>
+<ol class="rules">
+ <li><b>Parts that build the system.</b> Every piece is assembled from named parts (Hatch, LockWheel, StateRing), so you can ask for a change in words, and the game can animate a single part.</li>
+ <li><b>Low poly, hero up close.</b> Most pieces are 300 to 3,000 triangles with crisp chamfers. The detail lives in baked maps: base colour, roughness and normal, at 512 or 1024 px.</li>
+ <li><b>Material is meaning.</b> Material names are game roles (Metal_Hull, Glass_Window, OrangeBand, Lamp_Green), and each role has a real density. So every part carries its mass in the model file.</li>
+ <li><b>The world tells you.</b> Gauges, lamp posts, door light rings, charge bars and frost lines carry air, power and safety. The shooter can run without a HUD bar.</li>
+ <li><b>Built for Abbie's size.</b> Everything is checked from 1.1 m eye height. Consoles have a kid step, and the lower bunk and the lettuce tier sit at her height.</li>
+</ol>
+<h2>Next</h2>
+<p>Midjourney proofs for the 20 come next, then round 2 against your picks. After that: the five base buildings the Moon Heroes study handed over (dome, tower, habitat and hangar, airlock, supply crate), and then placing the kit on the Moon tile for the shooter.</p>
+</main>
+<script>
+let mv;
+function loadMV(){return mv ||= new Promise((ok,no)=>{const s=document.createElement('script');s.type='module';s.src='https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+document.addEventListener('click',async e=>{
+ const f=e.target.closest('.spin');if(!f||f.classList.contains('on'))return;
+ f.classList.add('on');await loadMV();
+ const m=document.createElement('model-viewer');m.src=f.dataset.src;m.alt=f.dataset.alt;
+ for(const [k,v] of Object.entries({'camera-controls':'','touch-action':'pan-y','auto-rotate':'','interaction-prompt':'none','shadow-intensity':'0.8','exposure':'1.05','environment-image':'neutral','camera-orbit':'35deg 70deg auto'}))m.setAttribute(k,v);
+ f.querySelector('img').replaceWith(m);
+});
+</script>
+</body></html>

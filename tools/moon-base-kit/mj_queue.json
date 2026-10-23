@@ -1,0 +1,125 @@
+{
+ "note": "Midjourney proofs for the 20 drawn assets, to run on the Mac when it is back (tools/midjourney/README.md). Save picks to assets/<slug>/concept.jpg and record job ids in assets/<slug>/provenance.json; then round 2 rebuilds each recipe against its pick, same camera.",
+ "queue": [
+  {
+   "id": "MK-001",
+   "name": "Solar array wing on a sun-tracking mast",
+   "prompt": "a sun-tracking solar array: gunmetal mast, two wings of four dark-blue solar cells, junction box with a green lamp, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-003",
+   "name": "Landing pad with beacon ring",
+   "prompt": "a round lunar landing pad of dark sintered stone, painted hazard ring, amber touchdown lights, a ring of twelve beacon posts, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-005",
+   "name": "Comms dish on a turntable",
+   "prompt": "a 3 metre communications dish on a rotating turntable and yoke, feed horn on three struts, red blinker, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-007",
+   "name": "Regolith ore processor",
+   "prompt": "a regolith ore processor: hopper on top, panelled furnace body on legs with a glowing window, chute dropping bricks, exhaust stack, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-011",
+   "name": "Oxygen tank farm (three upright tanks)",
+   "prompt": "three upright white oxygen tanks with blue bands on a steel skid, manifold pipes, valve wheels, two big round pressure dials, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-031",
+   "name": "Corridor segment, straight, ribbed",
+   "prompt": "a modular moon base corridor section, chamfered octagonal profile, ribs every metre, grated floor, pipe runs, warm ceiling light strip, orange floor stripe, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-035",
+   "name": "Bulkhead door, round pressure hatch",
+   "prompt": "a round pressure hatch door in a wall panel, locking wheel, porthole, hinge block, green light ring around the frame, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-066",
+   "name": "Command console with three screens",
+   "prompt": "a curved command console with three blue screens, chunky coloured buttons, and a little step for a child to climb up, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-070",
+   "name": "Bunk pod with privacy shutter",
+   "prompt": "two stacked sleep capsules with blue mattresses, straps, pillows, reading lamps, slatted privacy shutters and a ladder, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-072",
+   "name": "Galley table with bench",
+   "prompt": "a galley table on a single pedestal with a raised lip, two cushioned benches with foot straps, magnetic meal trays, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-076",
+   "name": "Hydroponics rack (three tiers)",
+   "prompt": "a three-tier hydroponics rack with lettuce, herbs and tomato vines under pink grow lamps, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-083",
+   "name": "Suit rack with spare suit",
+   "prompt": "a suit rack holding an empty adult space suit and an empty child space suit, helmets on the shelf, boots on a bench, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-085",
+   "name": "Patch-up station (first aid)",
+   "prompt": "a friendly first-aid wall cabinet with a glowing green plus, drawers of plasters and suit patches, a big amber help button, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-096",
+   "name": "Crater rim arc piece",
+   "prompt": "a quarter arc of a raised crater rim made of grey regolith, ejecta boulders scattered on the outer slope, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-098",
+   "name": "Boulder set (three)",
+   "prompt": "a set of three faceted dark basalt boulders half sunk in grey dust, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-146",
+   "name": "Oxygen canister",
+   "prompt": "a blue oxygen canister pickup with a steel valve, rubber grip, carry loop and glowing green ring, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-147",
+   "name": "Battery cell",
+   "prompt": "a chunky charcoal battery cell pickup with a carry handle, hazard band and three green charge bars, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-161",
+   "name": "Status lamp beacon post",
+   "prompt": "a status lamp post with three caged lamps, green amber red, a small bell, and a solar cap, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-162",
+   "name": "Pressure gauge wall panel",
+   "prompt": "a wall panel with two big round pressure gauges behind glass, green white red arcs, a pipe with a valve wheel, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  },
+  {
+   "id": "MK-181",
+   "name": "Jump pad",
+   "prompt": "a round low-gravity jump pad with springs, hazard chevrons on a grated top and a ring of green lights, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+   "status": "queued (Mac offline 2026-10-23 10:06Z)"
+  }
+ ]
+}

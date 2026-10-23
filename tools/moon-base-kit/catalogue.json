@@ -1,0 +1,1243 @@
+{
+ "study": "AW-STUDY-0031",
+ "groups": {
+  "exterior": {
+   "title": "Exterior structures and infrastructure",
+   "note": "Dome, tower, habitat/hangar, airlock and supply crate were handed over by the Moon Heroes thread (2026-10-23): engineered recipes here, Meshy stays for heroes."
+  },
+  "interior": {
+   "title": "Interior architecture kit (modular, 2 m grid)",
+   "note": "Every piece snaps to a 2 m grid with doorway sockets."
+  },
+  "furniture": {
+   "title": "Interior furniture and fixtures",
+   "note": "Sized for Abbie (4.5 heads) and Daddy (7.5 heads); seats at kid and adult height."
+  },
+  "terrain": {
+   "title": "Terrain kit",
+   "note": "Matches the regolith grammar in simulations/moon/moon-regolith.mjs."
+  },
+  "props": {
+   "title": "Props: tools, cargo and science",
+   "note": "Every prop carries mass and a grab point for low-g throwing."
+  },
+  "pickups": {
+   "title": "Pickups and collectibles",
+   "note": "Gold only for memory coins; cyan crystal pickup is the Bruiser thread's."
+  },
+  "signals": {
+   "title": "Diegetic signals (no HUD)",
+   "note": "Ask \"how would Abbie know?\" first: a dial, a lamp, a bell before any overlay."
+  },
+  "play": {
+   "title": "Low-gravity toys and interactables",
+   "note": "Every one exaggerates low gravity: arcs, slow falls, dust that hangs."
+  },
+  "support": {
+   "title": "Support machines (not heroes)",
+   "note": "Machines read as machines: charcoal with role lights, never cyan."
+  }
+ },
+ "items": [
+  {
+   "id": "MK-001",
+   "group": "exterior",
+   "name": "Solar array wing on a sun-tracking mast",
+   "drawn": true
+  },
+  {
+   "id": "MK-002",
+   "group": "exterior",
+   "name": "Solar farm junction box",
+   "drawn": false
+  },
+  {
+   "id": "MK-003",
+   "group": "exterior",
+   "name": "Landing pad with beacon ring",
+   "drawn": true
+  },
+  {
+   "id": "MK-004",
+   "group": "exterior",
+   "name": "Landing pad floodlight mast",
+   "drawn": false
+  },
+  {
+   "id": "MK-005",
+   "group": "exterior",
+   "name": "Comms dish on a turntable",
+   "drawn": true
+  },
+  {
+   "id": "MK-006",
+   "group": "exterior",
+   "name": "Relay mast (small, portable)",
+   "drawn": false
+  },
+  {
+   "id": "MK-007",
+   "group": "exterior",
+   "name": "Regolith ore processor",
+   "drawn": true
+  },
+  {
+   "id": "MK-008",
+   "group": "exterior",
+   "name": "Regolith conveyor segment",
+   "drawn": false
+  },
+  {
+   "id": "MK-009",
+   "group": "exterior",
+   "name": "Ice mining drill rig",
+   "drawn": false
+  },
+  {
+   "id": "MK-010",
+   "group": "exterior",
+   "name": "Water ice tank (horizontal)",
+   "drawn": false
+  },
+  {
+   "id": "MK-011",
+   "group": "exterior",
+   "name": "Oxygen tank farm (three upright tanks)",
+   "drawn": true
+  },
+  {
+   "id": "MK-012",
+   "group": "exterior",
+   "name": "Fuel bowser for landers",
+   "drawn": false
+  },
+  {
+   "id": "MK-013",
+   "group": "exterior",
+   "name": "Pressurised connector tube, straight",
+   "drawn": false
+  },
+  {
+   "id": "MK-014",
+   "group": "exterior",
+   "name": "Connector tube, elbow",
+   "drawn": false
+  },
+  {
+   "id": "MK-015",
+   "group": "exterior",
+   "name": "Connector tube, T junction",
+   "drawn": false
+  },
+  {
+   "id": "MK-016",
+   "group": "exterior",
+   "name": "Blast wall segment (sandbag regolith bags)",
+   "drawn": false
+  },
+  {
+   "id": "MK-017",
+   "group": "exterior",
+   "name": "Berm wall of bagged regolith",
+   "drawn": false
+  },
+  {
+   "id": "MK-018",
+   "group": "exterior",
+   "name": "Radiator fin array",
+   "drawn": false
+  },
+  {
+   "id": "MK-019",
+   "group": "exterior",
+   "name": "Power pylon with cable sag",
+   "drawn": false
+  },
+  {
+   "id": "MK-020",
+   "group": "exterior",
+   "name": "Exterior airlock door",
+   "drawn": false
+  },
+  {
+   "id": "MK-021",
+   "group": "exterior",
+   "name": "Weather and dust sensor post",
+   "drawn": false
+  },
+  {
+   "id": "MK-022",
+   "group": "exterior",
+   "name": "Seismometer station",
+   "drawn": false
+  },
+  {
+   "id": "MK-023",
+   "group": "exterior",
+   "name": "Telescope dome (small observatory)",
+   "drawn": false
+  },
+  {
+   "id": "MK-024",
+   "group": "exterior",
+   "name": "Greenhouse tunnel (exterior)",
+   "drawn": false
+  },
+  {
+   "id": "MK-025",
+   "group": "exterior",
+   "name": "Vehicle charging bay",
+   "drawn": false
+  },
+  {
+   "id": "MK-026",
+   "group": "exterior",
+   "name": "Rover garage shed",
+   "drawn": false
+  },
+  {
+   "id": "MK-027",
+   "group": "exterior",
+   "name": "Cargo container (shipping box, Moon spec)",
+   "drawn": false
+  },
+  {
+   "id": "MK-028",
+   "group": "exterior",
+   "name": "Base tower and antenna",
+   "drawn": false
+  },
+  {
+   "id": "MK-029",
+   "group": "exterior",
+   "name": "Main dome, upgraded (from MR-002)",
+   "drawn": false
+  },
+  {
+   "id": "MK-030",
+   "group": "exterior",
+   "name": "Habitat module and hangar",
+   "drawn": false
+  },
+  {
+   "id": "MK-031",
+   "group": "interior",
+   "name": "Corridor segment, straight, ribbed",
+   "drawn": true
+  },
+  {
+   "id": "MK-032",
+   "group": "interior",
+   "name": "Corridor corner",
+   "drawn": false
+  },
+  {
+   "id": "MK-033",
+   "group": "interior",
+   "name": "Corridor T junction",
+   "drawn": false
+  },
+  {
+   "id": "MK-034",
+   "group": "interior",
+   "name": "Corridor end cap with porthole",
+   "drawn": false
+  },
+  {
+   "id": "MK-035",
+   "group": "interior",
+   "name": "Bulkhead door, round pressure hatch",
+   "drawn": true
+  },
+  {
+   "id": "MK-036",
+   "group": "interior",
+   "name": "Sliding inner door with window slit",
+   "drawn": false
+  },
+  {
+   "id": "MK-037",
+   "group": "interior",
+   "name": "Floor grating tile",
+   "drawn": false
+  },
+  {
+   "id": "MK-038",
+   "group": "interior",
+   "name": "Floor plate tile (solid)",
+   "drawn": false
+  },
+  {
+   "id": "MK-039",
+   "group": "interior",
+   "name": "Ceiling light strip panel",
+   "drawn": false
+  },
+  {
+   "id": "MK-040",
+   "group": "interior",
+   "name": "Wall panel, plain",
+   "drawn": false
+  },
+  {
+   "id": "MK-041",
+   "group": "interior",
+   "name": "Wall panel with pipe run",
+   "drawn": false
+  },
+  {
+   "id": "MK-042",
+   "group": "interior",
+   "name": "Wall panel with porthole window",
+   "drawn": false
+  },
+  {
+   "id": "MK-043",
+   "group": "interior",
+   "name": "Wall panel with cable trays",
+   "drawn": false
+  },
+  {
+   "id": "MK-044",
+   "group": "interior",
+   "name": "Dome interior rib",
+   "drawn": false
+  },
+  {
+   "id": "MK-045",
+   "group": "interior",
+   "name": "Ladder and floor hatch",
+   "drawn": false
+  },
+  {
+   "id": "MK-046",
+   "group": "interior",
+   "name": "Short stair (four steps, low-g risers)",
+   "drawn": false
+  },
+  {
+   "id": "MK-047",
+   "group": "interior",
+   "name": "Catwalk with railings",
+   "drawn": false
+  },
+  {
+   "id": "MK-048",
+   "group": "interior",
+   "name": "Mezzanine support column",
+   "drawn": false
+  },
+  {
+   "id": "MK-049",
+   "group": "interior",
+   "name": "Ramp with grip strips",
+   "drawn": false
+  },
+  {
+   "id": "MK-050",
+   "group": "interior",
+   "name": "Ceiling vent fan",
+   "drawn": false
+  },
+  {
+   "id": "MK-051",
+   "group": "interior",
+   "name": "Pressure seal ring (between modules)",
+   "drawn": false
+  },
+  {
+   "id": "MK-052",
+   "group": "interior",
+   "name": "Inner airlock chamber shell",
+   "drawn": false
+  },
+  {
+   "id": "MK-053",
+   "group": "interior",
+   "name": "Decon shower arch (dust blower)",
+   "drawn": false
+  },
+  {
+   "id": "MK-054",
+   "group": "interior",
+   "name": "Suit-up alcove",
+   "drawn": false
+  },
+  {
+   "id": "MK-055",
+   "group": "interior",
+   "name": "Window bay (big view of Earth)",
+   "drawn": false
+  },
+  {
+   "id": "MK-056",
+   "group": "interior",
+   "name": "Cupola observation bubble",
+   "drawn": false
+  },
+  {
+   "id": "MK-057",
+   "group": "interior",
+   "name": "Utility crawlspace panel",
+   "drawn": false
+  },
+  {
+   "id": "MK-058",
+   "group": "interior",
+   "name": "Wall-mounted handholds (low-g)",
+   "drawn": false
+  },
+  {
+   "id": "MK-059",
+   "group": "interior",
+   "name": "Floor magnet boots strip",
+   "drawn": false
+  },
+  {
+   "id": "MK-060",
+   "group": "interior",
+   "name": "Elevator lift platform",
+   "drawn": false
+  },
+  {
+   "id": "MK-061",
+   "group": "interior",
+   "name": "Hab sleeping module shell",
+   "drawn": false
+  },
+  {
+   "id": "MK-062",
+   "group": "interior",
+   "name": "Lab module shell",
+   "drawn": false
+  },
+  {
+   "id": "MK-063",
+   "group": "interior",
+   "name": "Workshop module shell",
+   "drawn": false
+  },
+  {
+   "id": "MK-064",
+   "group": "interior",
+   "name": "Galley module shell",
+   "drawn": false
+  },
+  {
+   "id": "MK-065",
+   "group": "interior",
+   "name": "Storage bay shell",
+   "drawn": false
+  },
+  {
+   "id": "MK-066",
+   "group": "furniture",
+   "name": "Command console with three screens",
+   "drawn": true
+  },
+  {
+   "id": "MK-067",
+   "group": "furniture",
+   "name": "Comms desk with radio and headset",
+   "drawn": false
+  },
+  {
+   "id": "MK-068",
+   "group": "furniture",
+   "name": "Navigation map table",
+   "drawn": false
+  },
+  {
+   "id": "MK-069",
+   "group": "furniture",
+   "name": "Pilot chair (swivel, harness)",
+   "drawn": false
+  },
+  {
+   "id": "MK-070",
+   "group": "furniture",
+   "name": "Bunk pod with privacy shutter",
+   "drawn": true
+  },
+  {
+   "id": "MK-071",
+   "group": "furniture",
+   "name": "Footlocker",
+   "drawn": false
+  },
+  {
+   "id": "MK-072",
+   "group": "furniture",
+   "name": "Galley table with bench",
+   "drawn": true
+  },
+  {
+   "id": "MK-073",
+   "group": "furniture",
+   "name": "Food rehydrator",
+   "drawn": false
+  },
+  {
+   "id": "MK-074",
+   "group": "furniture",
+   "name": "Galley cupboard",
+   "drawn": false
+  },
+  {
+   "id": "MK-075",
+   "group": "furniture",
+   "name": "Water dispenser",
+   "drawn": false
+  },
+  {
+   "id": "MK-076",
+   "group": "furniture",
+   "name": "Hydroponics rack (three tiers)",
+   "drawn": true
+  },
+  {
+   "id": "MK-077",
+   "group": "furniture",
+   "name": "Seed tray and grow lamp",
+   "drawn": false
+  },
+  {
+   "id": "MK-078",
+   "group": "furniture",
+   "name": "Lab bench with microscope",
+   "drawn": false
+  },
+  {
+   "id": "MK-079",
+   "group": "furniture",
+   "name": "Sample freezer",
+   "drawn": false
+  },
+  {
+   "id": "MK-080",
+   "group": "furniture",
+   "name": "Rock sample shelf",
+   "drawn": false
+  },
+  {
+   "id": "MK-081",
+   "group": "furniture",
+   "name": "Workbench with vise",
+   "drawn": false
+  },
+  {
+   "id": "MK-082",
+   "group": "furniture",
+   "name": "Tool pegboard",
+   "drawn": false
+  },
+  {
+   "id": "MK-083",
+   "group": "furniture",
+   "name": "Suit rack with spare suit",
+   "drawn": true
+  },
+  {
+   "id": "MK-084",
+   "group": "furniture",
+   "name": "Helmet shelf",
+   "drawn": false
+  },
+  {
+   "id": "MK-085",
+   "group": "furniture",
+   "name": "Patch-up station (first aid)",
+   "drawn": true
+  },
+  {
+   "id": "MK-086",
+   "group": "furniture",
+   "name": "Exercise bike (bungee harness)",
+   "drawn": false
+  },
+  {
+   "id": "MK-087",
+   "group": "furniture",
+   "name": "Treadmill (low-g harness)",
+   "drawn": false
+  },
+  {
+   "id": "MK-088",
+   "group": "furniture",
+   "name": "Wash basin unit",
+   "drawn": false
+  },
+  {
+   "id": "MK-089",
+   "group": "furniture",
+   "name": "Laundry drum",
+   "drawn": false
+  },
+  {
+   "id": "MK-090",
+   "group": "furniture",
+   "name": "Storage cubbies with labels",
+   "drawn": false
+  },
+  {
+   "id": "MK-091",
+   "group": "furniture",
+   "name": "Bookshelf with storybooks",
+   "drawn": false
+  },
+  {
+   "id": "MK-092",
+   "group": "furniture",
+   "name": "Abbie's drawing board",
+   "drawn": false
+  },
+  {
+   "id": "MK-093",
+   "group": "furniture",
+   "name": "Board-game table",
+   "drawn": false
+  },
+  {
+   "id": "MK-094",
+   "group": "furniture",
+   "name": "Kitchen trash compactor",
+   "drawn": false
+  },
+  {
+   "id": "MK-095",
+   "group": "furniture",
+   "name": "Recycling sorter",
+   "drawn": false
+  },
+  {
+   "id": "MK-096",
+   "group": "terrain",
+   "name": "Crater rim arc piece",
+   "drawn": true
+  },
+  {
+   "id": "MK-097",
+   "group": "terrain",
+   "name": "Small crater bowl",
+   "drawn": false
+  },
+  {
+   "id": "MK-098",
+   "group": "terrain",
+   "name": "Boulder set (three)",
+   "drawn": true
+  },
+  {
+   "id": "MK-099",
+   "group": "terrain",
+   "name": "Rock ridge / cliff chunk",
+   "drawn": false
+  },
+  {
+   "id": "MK-100",
+   "group": "terrain",
+   "name": "Rubble scatter",
+   "drawn": false
+  },
+  {
+   "id": "MK-101",
+   "group": "terrain",
+   "name": "Pebble decal patch",
+   "drawn": false
+  },
+  {
+   "id": "MK-102",
+   "group": "terrain",
+   "name": "Regolith dune drift",
+   "drawn": false
+  },
+  {
+   "id": "MK-103",
+   "group": "terrain",
+   "name": "Lava tube entrance",
+   "drawn": false
+  },
+  {
+   "id": "MK-104",
+   "group": "terrain",
+   "name": "Lava tube tunnel segment",
+   "drawn": false
+  },
+  {
+   "id": "MK-105",
+   "group": "terrain",
+   "name": "Skylight pit rim",
+   "drawn": false
+  },
+  {
+   "id": "MK-106",
+   "group": "terrain",
+   "name": "Rille (channel) segment",
+   "drawn": false
+  },
+  {
+   "id": "MK-107",
+   "group": "terrain",
+   "name": "Shadowed ice patch",
+   "drawn": false
+  },
+  {
+   "id": "MK-108",
+   "group": "terrain",
+   "name": "Ejecta ray decal",
+   "drawn": false
+  },
+  {
+   "id": "MK-109",
+   "group": "terrain",
+   "name": "Fresh impact crater with glassy centre",
+   "drawn": false
+  },
+  {
+   "id": "MK-110",
+   "group": "terrain",
+   "name": "Mountain backdrop card (horizon)",
+   "drawn": false
+  },
+  {
+   "id": "MK-111",
+   "group": "terrain",
+   "name": "Rock arch",
+   "drawn": false
+  },
+  {
+   "id": "MK-112",
+   "group": "terrain",
+   "name": "Balanced rock",
+   "drawn": false
+  },
+  {
+   "id": "MK-113",
+   "group": "terrain",
+   "name": "Overhang ledge (cover)",
+   "drawn": false
+  },
+  {
+   "id": "MK-114",
+   "group": "terrain",
+   "name": "Slope ramp piece",
+   "drawn": false
+  },
+  {
+   "id": "MK-115",
+   "group": "terrain",
+   "name": "Crevasse bridge rocks",
+   "drawn": false
+  },
+  {
+   "id": "MK-116",
+   "group": "props",
+   "name": "Hand drill with core bit",
+   "drawn": false
+  },
+  {
+   "id": "MK-117",
+   "group": "props",
+   "name": "Sample bag",
+   "drawn": false
+  },
+  {
+   "id": "MK-118",
+   "group": "props",
+   "name": "Sample tongs",
+   "drawn": false
+  },
+  {
+   "id": "MK-119",
+   "group": "props",
+   "name": "Geology hammer",
+   "drawn": false
+  },
+  {
+   "id": "MK-120",
+   "group": "props",
+   "name": "Rake (sample sieve)",
+   "drawn": false
+  },
+  {
+   "id": "MK-121",
+   "group": "props",
+   "name": "Core sample tube rack",
+   "drawn": false
+  },
+  {
+   "id": "MK-122",
+   "group": "props",
+   "name": "Toolbox",
+   "drawn": false
+  },
+  {
+   "id": "MK-123",
+   "group": "props",
+   "name": "Wrench",
+   "drawn": false
+  },
+  {
+   "id": "MK-124",
+   "group": "props",
+   "name": "Cable reel",
+   "drawn": false
+  },
+  {
+   "id": "MK-125",
+   "group": "props",
+   "name": "Spare tyre for the buggy",
+   "drawn": false
+  },
+  {
+   "id": "MK-126",
+   "group": "props",
+   "name": "Antenna repair kit",
+   "drawn": false
+  },
+  {
+   "id": "MK-127",
+   "group": "props",
+   "name": "Fuse panel box",
+   "drawn": false
+  },
+  {
+   "id": "MK-128",
+   "group": "props",
+   "name": "Battery charger dock",
+   "drawn": false
+  },
+  {
+   "id": "MK-129",
+   "group": "props",
+   "name": "Supply crate (low-g physics)",
+   "drawn": false
+  },
+  {
+   "id": "MK-130",
+   "group": "props",
+   "name": "Barrel (water)",
+   "drawn": false
+  },
+  {
+   "id": "MK-131",
+   "group": "props",
+   "name": "Gas cylinder trolley",
+   "drawn": false
+  },
+  {
+   "id": "MK-132",
+   "group": "props",
+   "name": "Cargo net bundle",
+   "drawn": false
+  },
+  {
+   "id": "MK-133",
+   "group": "props",
+   "name": "Pallet",
+   "drawn": false
+  },
+  {
+   "id": "MK-134",
+   "group": "props",
+   "name": "Hand cart",
+   "drawn": false
+  },
+  {
+   "id": "MK-135",
+   "group": "props",
+   "name": "Rope coil with clip",
+   "drawn": false
+  },
+  {
+   "id": "MK-136",
+   "group": "props",
+   "name": "Tablet with map",
+   "drawn": false
+  },
+  {
+   "id": "MK-137",
+   "group": "props",
+   "name": "Walkie radio",
+   "drawn": false
+  },
+  {
+   "id": "MK-138",
+   "group": "props",
+   "name": "Binoculars",
+   "drawn": false
+  },
+  {
+   "id": "MK-139",
+   "group": "props",
+   "name": "Camera on a tripod",
+   "drawn": false
+  },
+  {
+   "id": "MK-140",
+   "group": "props",
+   "name": "Thermos",
+   "drawn": false
+  },
+  {
+   "id": "MK-141",
+   "group": "props",
+   "name": "Lunchbox",
+   "drawn": false
+  },
+  {
+   "id": "MK-142",
+   "group": "props",
+   "name": "Teddy bear in a mini suit",
+   "drawn": false
+  },
+  {
+   "id": "MK-143",
+   "group": "props",
+   "name": "Paper rocket model",
+   "drawn": false
+  },
+  {
+   "id": "MK-144",
+   "group": "props",
+   "name": "Snow globe of Earth",
+   "drawn": false
+  },
+  {
+   "id": "MK-145",
+   "group": "props",
+   "name": "Family photo frame",
+   "drawn": false
+  },
+  {
+   "id": "MK-146",
+   "group": "pickups",
+   "name": "Oxygen canister",
+   "drawn": true
+  },
+  {
+   "id": "MK-147",
+   "group": "pickups",
+   "name": "Battery cell",
+   "drawn": true
+  },
+  {
+   "id": "MK-148",
+   "group": "pickups",
+   "name": "Repair patch",
+   "drawn": false
+  },
+  {
+   "id": "MK-149",
+   "group": "pickups",
+   "name": "Snack pack",
+   "drawn": false
+  },
+  {
+   "id": "MK-150",
+   "group": "pickups",
+   "name": "Water pouch",
+   "drawn": false
+  },
+  {
+   "id": "MK-151",
+   "group": "pickups",
+   "name": "Signal flare",
+   "drawn": false
+  },
+  {
+   "id": "MK-152",
+   "group": "pickups",
+   "name": "Map chip",
+   "drawn": false
+  },
+  {
+   "id": "MK-153",
+   "group": "pickups",
+   "name": "Keycard",
+   "drawn": false
+  },
+  {
+   "id": "MK-154",
+   "group": "pickups",
+   "name": "Spare fuse",
+   "drawn": false
+  },
+  {
+   "id": "MK-155",
+   "group": "pickups",
+   "name": "Jetpack fuel cell",
+   "drawn": false
+  },
+  {
+   "id": "MK-156",
+   "group": "pickups",
+   "name": "Star sticker",
+   "drawn": false
+  },
+  {
+   "id": "MK-157",
+   "group": "pickups",
+   "name": "Postcard from Earth",
+   "drawn": false
+  },
+  {
+   "id": "MK-158",
+   "group": "pickups",
+   "name": "Daddy's memory coin plinth",
+   "drawn": false
+  },
+  {
+   "id": "MK-159",
+   "group": "pickups",
+   "name": "Rock with a fossil-like pattern",
+   "drawn": false
+  },
+  {
+   "id": "MK-160",
+   "group": "pickups",
+   "name": "Lost mitten",
+   "drawn": false
+  },
+  {
+   "id": "MK-161",
+   "group": "signals",
+   "name": "Status lamp beacon post",
+   "drawn": true
+  },
+  {
+   "id": "MK-162",
+   "group": "signals",
+   "name": "Pressure gauge wall panel",
+   "drawn": true
+  },
+  {
+   "id": "MK-163",
+   "group": "signals",
+   "name": "Oxygen meter on the suit wrist",
+   "drawn": false
+  },
+  {
+   "id": "MK-164",
+   "group": "signals",
+   "name": "Door state light ring",
+   "drawn": false
+  },
+  {
+   "id": "MK-165",
+   "group": "signals",
+   "name": "Painted wayfinding stripes",
+   "drawn": false
+  },
+  {
+   "id": "MK-166",
+   "group": "signals",
+   "name": "Hanging module sign (stencil letters)",
+   "drawn": false
+  },
+  {
+   "id": "MK-167",
+   "group": "signals",
+   "name": "Warning siren with spinner",
+   "drawn": false
+  },
+  {
+   "id": "MK-168",
+   "group": "signals",
+   "name": "Clock with Earth time",
+   "drawn": false
+  },
+  {
+   "id": "MK-169",
+   "group": "signals",
+   "name": "Power level column (glowing tubes)",
+   "drawn": false
+  },
+  {
+   "id": "MK-170",
+   "group": "signals",
+   "name": "Air flow streamers (ribbons on vents)",
+   "drawn": false
+  },
+  {
+   "id": "MK-171",
+   "group": "signals",
+   "name": "Breadcrumb glow pegs",
+   "drawn": false
+  },
+  {
+   "id": "MK-172",
+   "group": "signals",
+   "name": "Radio speaker grille",
+   "drawn": false
+  },
+  {
+   "id": "MK-173",
+   "group": "signals",
+   "name": "Message board with magnets",
+   "drawn": false
+  },
+  {
+   "id": "MK-174",
+   "group": "signals",
+   "name": "Dust storm windsock (static-dust ribbons)",
+   "drawn": false
+  },
+  {
+   "id": "MK-175",
+   "group": "signals",
+   "name": "Sun-angle shadow dial",
+   "drawn": false
+  },
+  {
+   "id": "MK-176",
+   "group": "signals",
+   "name": "Temperature frost line",
+   "drawn": false
+  },
+  {
+   "id": "MK-177",
+   "group": "signals",
+   "name": "Elevator floor dial",
+   "drawn": false
+  },
+  {
+   "id": "MK-178",
+   "group": "signals",
+   "name": "Lander approach light strip",
+   "drawn": false
+  },
+  {
+   "id": "MK-179",
+   "group": "signals",
+   "name": "Base sound bell",
+   "drawn": false
+  },
+  {
+   "id": "MK-180",
+   "group": "signals",
+   "name": "Earth-up flag (crew mood)",
+   "drawn": false
+  },
+  {
+   "id": "MK-181",
+   "group": "play",
+   "name": "Jump pad",
+   "drawn": true
+  },
+  {
+   "id": "MK-182",
+   "group": "play",
+   "name": "Bounce ball",
+   "drawn": false
+  },
+  {
+   "id": "MK-183",
+   "group": "play",
+   "name": "Floating balloon",
+   "drawn": false
+  },
+  {
+   "id": "MK-184",
+   "group": "play",
+   "name": "Slow-fall umbrella",
+   "drawn": false
+  },
+  {
+   "id": "MK-185",
+   "group": "play",
+   "name": "Grab bar swing",
+   "drawn": false
+  },
+  {
+   "id": "MK-186",
+   "group": "play",
+   "name": "Zip line",
+   "drawn": false
+  },
+  {
+   "id": "MK-187",
+   "group": "play",
+   "name": "Tether post",
+   "drawn": false
+  },
+  {
+   "id": "MK-188",
+   "group": "play",
+   "name": "Pressure switch plate",
+   "drawn": false
+  },
+  {
+   "id": "MK-189",
+   "group": "play",
+   "name": "Rotating valve wheel",
+   "drawn": false
+  },
+  {
+   "id": "MK-190",
+   "group": "play",
+   "name": "Lever panel",
+   "drawn": false
+  },
+  {
+   "id": "MK-191",
+   "group": "support",
+   "name": "Helper drone (camera)",
+   "drawn": false
+  },
+  {
+   "id": "MK-192",
+   "group": "support",
+   "name": "Cargo hauler robot",
+   "drawn": false
+  },
+  {
+   "id": "MK-193",
+   "group": "support",
+   "name": "Rover tow trailer",
+   "drawn": false
+  },
+  {
+   "id": "MK-194",
+   "group": "support",
+   "name": "Robotic arm on a rail",
+   "drawn": false
+  },
+  {
+   "id": "MK-195",
+   "group": "support",
+   "name": "Cleaning bot",
+   "drawn": false
+  },
+  {
+   "id": "MK-196",
+   "group": "support",
+   "name": "Delivery capsule (lands from orbit)",
+   "drawn": false
+  },
+  {
+   "id": "MK-197",
+   "group": "support",
+   "name": "Mini excavator",
+   "drawn": false
+  },
+  {
+   "id": "MK-198",
+   "group": "support",
+   "name": "Crane boom",
+   "drawn": false
+  },
+  {
+   "id": "MK-199",
+   "group": "support",
+   "name": "Forklift (low-g)",
+   "drawn": false
+  },
+  {
+   "id": "MK-200",
+   "group": "support",
+   "name": "Mail rocket",
+   "drawn": false
+  }
+ ]
+}

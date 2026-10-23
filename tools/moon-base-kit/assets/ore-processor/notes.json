@@ -1,0 +1,67 @@
+{
+ "asset": "ore-processor",
+ "name": "Regolith ore processor",
+ "brief": "MK-007 Regolith ore processor. A hopper you can tip dust into, a panelled furnace body on legs, a chute that drops bricks of sintered regolith onto a tray, an exhaust stack and a status lamp. Diegetic: the warm window glows while it cooks, the stack puffs slow low-gravity dust, and bricks pile up on the tray.",
+ "rounds": [
+  {
+   "n": 1,
+   "date": "2026-10-23",
+   "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  }
+ ],
+ "stats": {
+  "id": "MK-007",
+  "name": "Regolith ore processor",
+  "triangles": 1744,
+  "parts": 28,
+  "part_names": [
+   "Leg0",
+   "Foot0",
+   "Leg1",
+   "Foot1",
+   "Leg2",
+   "Foot2",
+   "Leg3",
+   "Foot3",
+   "Body",
+   "HazardBand",
+   "FurnaceWindow",
+   "WindowFrame",
+   "Hopper",
+   "HopperLip",
+   "HopperGrate",
+   "ExhaustStack",
+   "StackCap",
+   "Chute",
+   "BrickTray",
+   "RegolithBrick0",
+   "RegolithBrick1",
+   "RegolithBrick2",
+   "RegolithBrick3",
+   "RegolithBrick4",
+   "StatusLampPost",
+   "StatusLamp",
+   "FeedPipe",
+   "ValveWheel"
+  ],
+  "materials": [
+   "Lamp_Green",
+   "Metal_Charcoal",
+   "Metal_Grate",
+   "Metal_Gunmetal",
+   "Metal_Hazard",
+   "Metal_Hull",
+   "Metal_Steel",
+   "Stone_Basalt",
+   "Window_Warm"
+  ],
+  "mass_kg": 10751.2,
+  "moon_weight_kg": 1778.2,
+  "size_m": [
+   3.91,
+   3.4,
+   3.67
+  ],
+  "maps": "1024 px base, roughness, normal"
+ }
+}

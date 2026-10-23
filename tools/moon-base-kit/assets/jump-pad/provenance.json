@@ -1,0 +1,17 @@
+{
+ "asset": "jump-pad",
+ "id": "MK-181",
+ "study": "AW-STUDY-0031",
+ "request": "Evan 2026-10-23 10:03Z \"intensely upgraded\" low poly FPS assets for moon base; 10:04Z \"propose 200 assets and draw 20\"",
+ "style_reference": [
+  "trek.zip outputs/images/moonbase.png",
+  "trek.zip outputs/images/abbie at the base.png",
+  "Faceted Hero direction https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa"
+ ],
+ "concept": null,
+ "midjourney": {
+  "status": "queued: Mac offline 2026-10-23 10:06Z",
+  "prompt": "a round low-gravity jump pad with springs, hazard chevrons on a grated top and a ring of green lights, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+ },
+ "built_with": "Blender Python (bpy 5.2.3) recipe build.py + bkit.py; Cycles bake of procedural role surfaces"
+}

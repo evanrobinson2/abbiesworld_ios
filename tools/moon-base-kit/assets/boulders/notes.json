@@ -1,0 +1,44 @@
+{
+ "asset": "boulders",
+ "name": "Boulder set (three)",
+ "brief": "MK-098 Boulder set: three basalt boulders (a big cover rock, a medium one and a sitting rock), angular and pitted, each sunk into a low drift of dust where it landed. Each has its own mass, so the small one can be shoved in low gravity and the big one stops a gem bug.",
+ "rounds": [
+  {
+   "n": 1,
+   "date": "2026-10-23",
+   "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  }
+ ],
+ "stats": {
+  "id": "MK-098",
+  "name": "Boulder set (three)",
+  "triangles": 276,
+  "parts": 12,
+  "part_names": [
+   "BoulderL",
+   "DustDriftL",
+   "BoulderM",
+   "DustDriftM",
+   "BoulderS",
+   "DustDriftS",
+   "Pebble0",
+   "Pebble1",
+   "Pebble2",
+   "Pebble3",
+   "Pebble4",
+   "Pebble5"
+  ],
+  "materials": [
+   "Stone_Basalt",
+   "Stone_Regolith"
+  ],
+  "mass_kg": 11995.2,
+  "moon_weight_kg": 1984.0,
+  "size_m": [
+   4.96,
+   3.41,
+   1.54
+  ],
+  "maps": "1024 px base, roughness, normal"
+ }
+}
