@@ -52,6 +52,11 @@ dt{color:var(--muted)}dd{margin:0}
 @keyframes pulse{50%{transform:scale(1.08)}}
 @media (prefers-reduced-motion:reduce){.v.playing button{animation:none}}
 .pending{font-size:14px;color:var(--muted)}
+.plays{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding-top:8px;border-top:1px dashed var(--line)}
+.pa{display:flex;align-items:center;gap:6px;font:500 12px/1 var(--mono);color:var(--muted)}
+.pa select{font:500 13px/1.2 var(--body);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:6px 10px;max-width:220px}
+.pa select:focus-visible,.reset:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.reset{all:unset;cursor:pointer;font:500 12px/1 var(--mono);color:var(--accent)}
 .line{font-size:14px;color:var(--muted);font-style:italic}
 .send{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:20px;background:var(--glass);backdrop-filter:saturate(1.4);border:1px solid var(--line);box-shadow:0 20px 40px -24px rgba(0,0,0,.35)}
 .send code{font:500 12px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere;min-width:0;flex:1}
@@ -66,11 +71,11 @@ ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
  <header>
   <div class="eyebrow">AW-STUDY-0030</div>
   <h1>Family Cast</h1>
-  <p class="muted">Everyone who lives in Daddy's memory places, as a kid back then and as they are now. Each one has a storybook character sheet and a few designed voices saying a line of their own. Tap a voice to hear it and pick the one that sounds right. Ticked details are the ones you told me; the rest are placeholders for you to correct.</p>
+  <p class="muted">Everyone who lives in Daddy's memory places, as a kid back then and as they are now. Each one has a storybook character sheet and a few designed voices saying a line of their own. I picked a voice for everyone; tap any to hear it, and change a character's voice, how it speaks or its sound pack right on its card. Ticked details are the ones you told me; the rest are placeholders for you to correct.</p>
   <div class="rules"><span class="chip">Designed voices, never cloned</span><span class="chip">Storybook characters, no photos</span><span class="chip">One voice per character, shared by every game</span></div>
  </header>
  <div class="family" id="family"><p class="pending">Opening the album…</p></div>
- <div class="send" id="send"><code id="picks">No picks yet. Tap a voice, then tick it.</code><button class="btn" id="go" type="button" disabled>Send my picks</button></div>
+ <div class="send" id="send" hidden><code id="picks">No picks yet. Tap a voice, then tick it.</code><button class="btn" id="go" type="button" disabled>Send my picks</button></div>
  <section class="notes">
   <h2>How it is made</h2>
   <ul>
@@ -165,7 +170,18 @@ function voices(ch,cand){
    <button type="button" aria-label="Play voice ${v.n} for ${esc(ch.name)}" data-src="${esc(v.url)}">▶</button>
    <label><input type="radio" name="pick-${ch.id}" id="pick-${ch.id}-${v.n}" value="${v.n}" ${picks[ch.id]==v.n?'checked':''}>Voice ${v.n}</label></span>`).join('')}</div></div>`;
 }
+// How this character plays in the game: voice, model and sound pack, changeable per unit (simulations/unit-voice.mjs).
+let UV=null;
+function playsAs(ch){
+ if(!UV)return '';
+ const p=UV.resolve(ch.id),opt=(list,cur)=>list.map(([v,l])=>`<option value="${esc(v)}" ${v===cur?'selected':''}>${esc(l)}</option>`).join('');
+ const sel=(field,label,list,cur)=>`<label class="pa"><span>${label}</span><select class="uv" id="uv-${ch.id}-${field}" data-unit="${ch.id}" data-field="${field}">${opt(list,cur)}</select></label>`;
+ const talk=p.speaks?sel('voiceId','Voice',UV.voices().map(v=>[v.id,v.name]),p.voiceId)+sel('model','Speaks',UV.models.map(m=>[m.id,m.name]),p.model):'';
+ return `<div class="plays">${talk}${sel('soundPack','Sounds',Object.entries(UV.packs).map(([k,v])=>[k,v.name]),p.soundPack)}${p.overridden.length?`<button type="button" class="reset" data-unit="${ch.id}">Back to default</button>`:''}</div>`;
+}
+let last=null;
 function render(cast,cand){
+ last=[cast,cand];
  const by=Object.fromEntries(cast.characters.map(c=>[c.id,c]));
  document.getElementById('family').innerHTML=FAMILY.map(([key,title])=>{
   const ids=[`${key}-young`,`${key}-now`,key].filter(i=>by[i]);
@@ -173,18 +189,22 @@ function render(cast,cand){
   return `<article class="person"><h2>${esc(title)}${ids.length>1?'<small>Then and now</small>':''}</h2><div class="ages">${ids.map(id=>{
    const ch=by[id],L=ch.looks||{};
    const tag=ch.group==='young'?'Back then':ch.group==='now'?'Now':'In the games';
-   return `<div class="who" style="--c:${L.color};--c2:${L.color}${L.skin?`;--skin:${L.skin};--skin-shade:${L.skinShade||L.skin}`:''}"><div class="art">${portrait(ch)}</div><div class="txt"><span class="tag">${tag}</span><h3>${esc(ch.name)}</h3>${sheet(ch)}</div>${voices(ch,cand.characters?.[id])}</div>`;
+   return `<div class="who" style="--c:${L.color};--c2:${L.color}${L.skin?`;--skin:${L.skin};--skin-shade:${L.skinShade||L.skin}`:''}"><div class="art">${portrait(ch)}</div><div class="txt"><span class="tag">${tag}</span><h3>${esc(ch.name)}</h3>${sheet(ch)}</div>${voices(ch,cand.characters?.[id])}${playsAs(ch)}</div>`;
   }).join('')}</div></article>`;
  }).join('');
  showPicks();
 }
 function showPicks(){
- const s=Object.entries(picks).map(([k,v])=>`${k}=${v}`).join(',');
+ // The bar only appears once a tick differs from the voice already saved for that character.
+ const saved=last?.[0]?.picks||{},changed=Object.entries(picks).filter(([k,v])=>saved[k]!=v);
+ document.getElementById('send').hidden=!changed.length;
+ const s=changed.map(([k,v])=>`${k}=${v}`).join(',');
  document.getElementById('picks').textContent=s?`Picks: ${s}`:'No picks yet. Tap a voice, then tick it.';
  document.getElementById('go').disabled=!s;
 }
 let audio=null,playing=null;
 document.addEventListener('click',e=>{
+ const rs=e.target.closest('button.reset');if(rs&&UV){UV.reset(rs.dataset.unit);render(...last);return}
  const b=e.target.closest('.v button');if(!b)return;
  const chip=b.closest('.v');
  if(audio){audio.pause();playing?.classList.remove('playing')}
@@ -194,6 +214,8 @@ document.addEventListener('click',e=>{
  audio.play().catch(()=>{chip.classList.remove('playing');b.textContent='!';});
 });
 document.addEventListener('change',e=>{
+ const u=e.target.closest('select.uv');
+ if(u&&UV){UV.set(u.dataset.unit,{[u.dataset.field]:u.value});render(...last);return}
  const r=e.target.closest('.v input');if(!r)return;
  const chip=r.closest('.v');picks[chip.dataset.id]=+chip.dataset.n;
  document.querySelectorAll(`.v[data-id="${chip.dataset.id}"]`).forEach(x=>x.classList.toggle('picked',x===chip));
@@ -201,7 +223,7 @@ document.addEventListener('change',e=>{
  showPicks();
 });
 document.getElementById('go').addEventListener('click',async e=>{
- const b=e.currentTarget,s=Object.entries(picks).map(([k,v])=>`${k}=${v}`).join(',');
+ const saved=last?.[0]?.picks||{},b=e.currentTarget,s=Object.entries(picks).filter(([k,v])=>saved[k]!=v).map(([k,v])=>`${k}=${v}`).join(',');
  b.disabled=true;b.textContent='Sending…';
  const ok=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({note:`Family cast voice picks: ${s}`,page:location.pathname,title:document.title,thread:'cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh',threadTitle:'Family cast'})}).then(r=>r.ok||r.status).catch(()=>false);
  b.textContent=ok===true?'Sent to Claude':ok===401?'Sign in first':'Try again';b.disabled=ok===true;
@@ -210,5 +232,9 @@ const inline=id=>{const el=document.getElementById(id);return el?JSON.parse(el.t
 Promise.all([
  inline('cast-data')||fetch('cast.json').then(r=>r.json()),
  inline('candidates-data')||fetch('candidates.json').then(r=>r.ok?r.json():{characters:{}}).catch(()=>({characters:{}}))
-]).then(([cast,cand])=>render(cast,cand)).catch(()=>{document.getElementById('family').innerHTML='<p class="pending">The cast sheet did not load. Reload the page.</p>'});
+]).then(async([cast,cand])=>{
+ for(const [k,v] of Object.entries(cast.picks||{}))if(picks[k]==null)picks[k]=v;
+ try{const m=await import('/simulations/unit-voice.mjs');UV=m.createUnitVoices({cast})}catch{}
+ render(cast,cand);
+}).catch(()=>{document.getElementById('family').innerHTML='<p class="pending">The cast sheet did not load. Reload the page.</p>'});
 </script>
