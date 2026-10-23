@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-backpack-meshy-charms",
+      "date": "2026-10-23",
+      "title": "Real charms on the backpack",
+      "line": "The tardigrade, heart, moon, rocket, star and floppy disk charms are now sculpted models made from their Midjourney pictures, and there is a toy car charm for the coaster.",
+      "image": "/whats-new/2026-10-23-backpack-meshy-charms.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/studies/backpack/"
+    },
+    {
       "id": "2026-10-23-treehouses",
       "date": "2026-10-23",
       "title": "Abbie and Ani have tree houses",

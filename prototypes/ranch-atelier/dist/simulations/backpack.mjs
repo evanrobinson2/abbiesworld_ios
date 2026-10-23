@@ -74,6 +74,7 @@ export const CHARMS = [
  {id: 'bub', name: 'Bub', icon: '🐕', quest: 'Play fetch with bub'},
  {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café'},
  {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'},
+ {id: 'toy-car', name: 'Toy car', icon: '🏎️', quest: 'Collect 10 of the 16 stars in the toy-car coaster'},
  // Repeatable (Moon Mission): every three cheeses mined at the Moon kiosk wins another; up to two hang on the keychain.
  {id: 'moon-cheese', name: 'Moon cheese', icon: '🧀', quest: 'Mine three moon cheeses at the Moon kiosk', repeat: true, hang: 2}
 ];
@@ -296,10 +297,71 @@ const starPts = (r, ri, k = 5) => Array.from({length: k * 2}, (_, i) => { const 
 const heartPts = (k, n = 18) => { const s = new T.Shape(); heartShape(s, k); return s.getSpacedPoints(n).slice(0, -1).map(p => [p.x, p.y]); };
 function heartShape(s, k) { s.moveTo(0, -k * .9); s.bezierCurveTo(-k * 1.5, k * .1, -k * .7, k * 1.2, 0, k * .45); s.bezierCurveTo(k * .7, k * 1.2, k * 1.5, k * .1, 0, -k * .9); }
 
+// ---------- Meshy charms ----------
+// The charms that take up canon are Meshy models made from their Midjourney picks (Evan, 17:27Z), cleaned in Blender
+// (simulations/assets/backpack/charms/, centred, largest side 1, Y up). Untextured ones have one material, "charm",
+// which is shaded here as enamel or gold. Until a model has loaded, or if it can't, the hand-built charm stands in.
+const CHARM_GLB = {tardigrade: 'tardigrade', 'all-memories': 'heart', 'moon-key': 'moon', rocket: 'rocket', 'school-roof': 'star', basement: 'floppy-disk'};
+const CHARM_SHADE = {heart: ['enamel heart red', '#e8334f', .1, .22], moon: ['metal gold moon', '#f0b93a', .75, .28], rocket: ['enamel rocket red', '#d9393a', .1, .25],
+ star: ['metal gold star', '#ffc93a', .7, .3], 'floppy-disk': ['enamel floppy blue', '#2f55c8', .15, .24]};
+const CHARM_SIZE = .11;
+// Turns that make each model hang the way a charm does: the water bear side on, the floppy disk standing up.
+const CHARM_TURN = {tardigrade: [0, -Math.PI / 2, 0], 'floppy-disk': [Math.PI / 2, 0, 0]};
+const glbCharms = new Map(), glbLoads = new Map();
+// A small reader for these GLBs (one node, plain triangles, an optional base-colour image), so every page can load the
+// charms with its own three.js and needs no importmap for GLTFLoader.
+async function readGLB(url) {
+ const buf = await (await fetch(url)).arrayBuffer(), dv = new DataView(buf);
+ if (dv.getUint32(0, true) !== 0x46546c67) throw new Error('not a glb');
+ const jl = dv.getUint32(12, true), j = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, 20, jl))), bin = 20 + jl + 8;
+ const N = {5120: Int8Array, 5121: Uint8Array, 5122: Int16Array, 5123: Uint16Array, 5125: Uint32Array, 5126: Float32Array}, W = {SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4};
+ const acc = i => { const a = j.accessors[i], v = j.bufferViews[a.bufferView], C = N[a.componentType], n = W[a.type];
+  if (v.byteStride && v.byteStride !== n * C.BYTES_PER_ELEMENT) throw new Error('interleaved');
+  return new T.BufferAttribute(new C(buf.slice(bin + (v.byteOffset || 0) + (a.byteOffset || 0), bin + (v.byteOffset || 0) + (a.byteOffset || 0) + a.count * n * C.BYTES_PER_ELEMENT)), n, !!a.normalized); };
+ const g = new T.Group();
+ for (const node of j.nodes) {
+  if (node.mesh == null) continue;
+  for (const pr of j.meshes[node.mesh].primitives) {
+   const geo = new T.BufferGeometry();
+   for (const [k, name] of [['POSITION', 'position'], ['NORMAL', 'normal'], ['TEXCOORD_0', 'uv']]) if (pr.attributes[k] != null) geo.setAttribute(name, acc(pr.attributes[k]));
+   if (pr.indices != null) geo.setIndex(acc(pr.indices));
+   if (!geo.attributes.normal) geo.computeVertexNormals();
+   let mat = null; const pm = pr.material != null && j.materials?.[pr.material]?.pbrMetallicRoughness, ti = pm?.baseColorTexture?.index;
+   if (ti != null) { const im = j.images[j.textures[ti].source], v = j.bufferViews[im.bufferView];
+    const bmp = await createImageBitmap(new Blob([new Uint8Array(buf, bin + (v.byteOffset || 0), v.byteLength)], {type: im.mimeType || 'image/png'}), {imageOrientation: 'none'});
+    const tex = new T.Texture(bmp); tex.flipY = false; tex.colorSpace = T.SRGBColorSpace; tex.needsUpdate = true;
+    mat = new T.MeshStandardMaterial({map: tex, roughness: .3, metalness: .15}); mat.name = 'enamel charm'; }
+   const m = new T.Mesh(geo, mat); const M4 = new T.Matrix4();
+   if (node.matrix) M4.fromArray(node.matrix); else M4.compose(new T.Vector3(...(node.translation || [0, 0, 0])), new T.Quaternion(...(node.rotation || [0, 0, 0, 1])), new T.Vector3(...(node.scale || [1, 1, 1])));
+   m.applyMatrix4(M4); g.add(m);
+  }
+ }
+ return g;
+}
+export async function loadCharmModels(ids = CHARMS.map(c => c.id)) {
+ await three();
+ // Every view waits on the same load, so a second view that asks while the first is loading is rebuilt too.
+ const want = [...new Set(ids.map(id => CHARM_GLB[id]).filter(Boolean))];
+ for (const f of want) if (!glbLoads.has(f)) glbLoads.set(f, readGLB(new URL(`./assets/backpack/charms/${f}.glb`, import.meta.url).href).then(g => glbCharms.set(f, g)).catch(() => {}));
+ await Promise.all(want.map(f => glbLoads.get(f)));
+ return want.some(f => glbCharms.get(f));
+}
+function meshyCharm(id) {
+ const f = CHARM_GLB[id], src = f && glbCharms.get(f); if (!src) return null;
+ const g = new T.Group(), sh = CHARM_SHADE[f];
+ const mat = sh && Object.assign(new T.MeshStandardMaterial({color: sh[1], metalness: sh[2], roughness: sh[3], emissive: sh[2] > .5 ? '#5a3c00' : '#000', emissiveIntensity: sh[2] > .5 ? .3 : 0}), {name: sh[0]});
+ src.updateMatrixWorld(true);
+ src.traverse(o => { if (!o.isMesh) return;
+  // Geometry is copied, so a view that rebuilds (and disposes its meshes) never frees the cached model.
+  const m = new T.Mesh(o.geometry.clone().applyMatrix4(o.matrixWorld), mat || o.material || new T.MeshStandardMaterial({color: '#f7c23c'})); m.name = `charm ${f}`; m.castShadow = true; g.add(m); });
+ g.scale.setScalar(CHARM_SIZE); if (CHARM_TURN[f]) g.rotation.set(...CHARM_TURN[f]); return g;
+}
+
 function charmMesh(id, m) {
  const g = new T.Group(); g.name = `charm ${id}`;
  const M = (name, c, o = {}) => Object.assign(new T.MeshStandardMaterial({color: c, flatShading: true, roughness: .38, ...o}), {name});
  const gold = M('metal gold charm', '#f7c23c', {metalness: .55, roughness: .3, emissive: '#6a4600', emissiveIntensity: .4});
+ const meshy = meshyCharm(id); if (meshy) g.add(meshy); else {
  const add = (geo, mat, name, x = 0, y = 0, z = 0) => { const o = new T.Mesh(geo, mat); o.name = name; o.position.set(x, y, z); g.add(o); return o; };
  const ext = (shape, d, mat, name, bev = .006) => { const geo = new T.ExtrudeGeometry(shape, {depth: d, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 1, curveSegments: 6}); geo.center(); return add(geo, mat, name); };
  if (id === 'school-roof') { // the faceted gold star
@@ -363,6 +425,13 @@ function charmMesh(id, m) {
   add(new T.CylinderGeometry(.037, .037, .012, 10), M('lid white', '#fbf7ee', {roughness: .4}), 'cup lid', 0, .04, 0);
   add(new T.CylinderGeometry(.03, .036, .008, 10), M('lid white', '#fbf7ee', {roughness: .4}), 'lid rim', 0, .049, 0);
   add(new T.IcosahedronGeometry(.008, 0), M('enamel leaf', '#4f9a45'), 'sleeve mark', 0, -.005, .034).scale.z = .3;
+ } else if (id === 'toy-car') { // a little red toy car with fat black wheels
+  const red = M('enamel car red', '#e23a3a', {roughness: .25}), glass = M('enamel car window', '#9fd6f0', {roughness: .2}), tyre = M('rubber tyre', '#1d1b20', {roughness: .7});
+  add(new T.BoxGeometry(.09, .026, .044), red, 'car body', 0, -.006, 0);
+  add(new T.BoxGeometry(.046, .024, .04), red, 'car cabin', -.006, .018, 0);
+  for (const z of [-1, 1]) add(new T.BoxGeometry(.036, .016, .002), glass, 'car window', -.006, .019, z * .0205);
+  for (const x of [-.03, .03]) for (const z of [-1, 1]) add(new T.CylinderGeometry(.013, .013, .01, 10), tyre, 'car wheel', x, -.02, z * .024).rotation.x = Math.PI / 2;
+  for (const z of [-1, 1]) add(new T.BoxGeometry(.004, .006, .008), gold, 'car headlight', .046, -.002, z * .013);
  } else if (id === 'rocket') { // the red rocket with a porthole
   const red = M('enamel rocket red', '#d9393a', {roughness: .25}), cream = M('enamel rocket cream', '#f4ece0', {roughness: .3});
   add(new T.CylinderGeometry(.024, .026, .07, 8), cream, 'rocket body');
@@ -371,6 +440,7 @@ function charmMesh(id, m) {
   add(new T.CircleGeometry(.011, 10), M('glass porthole', '#5fb7ff', {roughness: .1, emissive: '#1d4d7a', emissiveIntensity: .3}), 'porthole glass', 0, .012, .0255);
   for (const a of [0, 2.1, 4.2]) { const f = add(new T.BoxGeometry(.022, .03, .006), a ? red : M('enamel fin blue', '#2e4fb8'), 'rocket fin', Math.cos(a) * .026, -.03, Math.sin(a) * .026); f.rotation.y = -a; f.rotation.z = .25 * Math.sign(Math.cos(a) || 1); }
   add(new T.CylinderGeometry(.016, .02, .012, 8), gold, 'rocket nozzle', 0, -.041, 0);
+ }
  }
  // The gold jump ring, a short chain and the bail: it hangs from the pivot at the group's origin.
  const top = new T.Box3().setFromObject(g).max.y, chain = new T.Group(); chain.name = 'charm chain';
@@ -415,7 +485,7 @@ function ribbon(curve, w, t, segs, mat, name) {
  const o = new T.Mesh(g, mat); o.name = name; o.userData.frames = fr; return o;
 }
 // One charm on its own, without its chain (for reference renders and side-by-side with its Meshy model).
-export async function charmModel(id) { await three(); const c = charmMesh(id, materials(look(), styleOf('classic'))); return c.children[1]; }
+export async function charmModel(id) { await three(); await loadCharmModels([id]); const c = charmMesh(id, materials(look(), styleOf('classic'))); return c.children[1]; }
 
 export function buildBackpack(l = look(), {charms = []} = {}) {
  const st = styleOf(l.style), m = materials(l, st), shape = SIL[st.id]();
@@ -670,6 +740,8 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  }
  const ro = new ResizeObserver(fit); ro.observe(el);
  rebuild();
+ // The Meshy charms arrive after the first frame; the backpack is rebuilt with them (and keeps its pose).
+ loadCharmModels(state.charms).then(got => { if (got) rebuild(); });
 
  // Which facet a part of the backpack belongs to: tap the part and its cards come up (Evan, 16:34Z).
  const facetOf = o => {
