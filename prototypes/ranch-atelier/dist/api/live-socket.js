@@ -39,10 +39,9 @@ async function relay(client,token){
   if(isBinary)return;let e;try{e=JSON.parse(data);}catch{return;}
   if(!e||!ALLOWED.has(e.type))return;
   if(e.type==='session-update'){
-   // The rules and tools always come from the server. The page may add the scene brief it appends.
-   const given=typeof e.config?.instructions==='string'?e.config.instructions:'';
-   const brief=given.startsWith(policy.INSTRUCTIONS)?given.slice(policy.INSTRUCTIONS.length,policy.INSTRUCTIONS.length+8000):'';
-   e={type:'session-update',config:{...e.config,instructions:policy.INSTRUCTIONS+brief,tools:policy.TOOLS,voice:policy.VOICE}};
+   // The whole session config is rebuilt on the server: rules, tools, and only the safe choices from the
+   // family's voice settings. The page may add the scene brief it appends.
+   e={type:'session-update',config:policy.serverSession(e.config)};
   }
   if(e.type==='conversation-item-create'){
    const item=e.item||{};
