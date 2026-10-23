@@ -1,0 +1,16 @@
+/* The Abbie's World look (docs/design/look/LOOK.md): flat colour, Roboto, hairlines and soft shadows. A motif repaints
+   the tokens only (html[data-motif]); the pieces never change. Motifs: default, rome, efficient (docs/design/look/motifs.json). */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+:root{
+  --font:Roboto,'Helvetica Neue',Arial,sans-serif;
+  --bg:#f3eee3;--surface:#fbf8f2;--line:rgba(110,80,40,.18);--ink:#2b2218;--ink-soft:#6b5d4c;
+  --sign:#7a5236;--keep:#4f8a34;--note:#c89a2c;--reject:#b8452f;--active:#2f8b87;
+  --hill-far:#cfd6b0;--hill:#a9b97c;--shadow:0 1px 2px rgba(60,40,20,.08),0 12px 30px -18px rgba(60,40,20,.35);
+  --radius:20px;
+  /* the older shared tokens, so pages built on app-style.css follow the motif */
+  --app-font:var(--font);--app-heading:var(--font);--app-paper:var(--surface);--app-ink:var(--ink);--app-muted:var(--ink-soft);--app-accent:var(--sign);--app-border:var(--line);--app-canvas:var(--bg);
+}
+html[data-motif="rome"]{--bg:#efe6d6;--surface:#fbf8f2;--line:rgba(140,100,40,.24);--ink:#2b1a14;--ink-soft:#6b5446;--sign:#9e2a22;--keep:#6b7a33;--note:#d6a53c;--reject:#9e2a22;--active:#9e2a22;--hill-far:#b9b48f;--hill:#7d8452}
+html[data-motif="efficient"]{--bg:#ffffff;--surface:#ffffff;--line:#e3e3e3;--ink:#111111;--ink-soft:#666666;--sign:#111111;--keep:#1e8e3e;--note:#b07a00;--reject:#c5221f;--active:#111111;--hill-far:transparent;--hill:transparent;--shadow:none;--radius:10px}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--font)!important}
+body *{font-family:var(--font)!important}

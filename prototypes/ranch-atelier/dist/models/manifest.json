@@ -6743,6 +6743,68 @@
      "Date",
      "22 Oct 2026"
     ]
+   ],
+   "focal": [
+    {
+     "n": 1,
+     "label": "Neck opening",
+     "img": [
+      47,
+      24
+     ],
+     "at": [
+      0,
+      0.46,
+      0.05
+     ],
+     "verdict": "fair",
+     "note": "The scooped neck opening lines up with yours."
+    },
+    {
+     "n": 2,
+     "label": "Chest plates",
+     "img": [
+      44,
+      40
+     ],
+     "at": [
+      0,
+      0.18,
+      0.5
+     ],
+     "verdict": "off",
+     "note": "Mine split down the middle; yours is closed at the front."
+    },
+    {
+     "n": 3,
+     "label": "Shoulder guards",
+     "img": [
+      72,
+      27
+     ],
+     "at": [
+      0.36,
+      0.36,
+      0.1
+     ],
+     "verdict": "off",
+     "note": "Too flat and too square; yours curve over the shoulder."
+    },
+    {
+     "n": 4,
+     "label": "Girth hoops",
+     "img": [
+      52,
+      66
+     ],
+     "at": [
+      0,
+      -0.22,
+      0.5
+     ],
+     "verdict": "close",
+     "note": "They read as lorica bands, but yours are deeper and more stepped."
+    }
    ]
   },
   {

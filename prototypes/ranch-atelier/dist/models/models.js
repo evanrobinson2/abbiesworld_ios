@@ -7,8 +7,8 @@
 import '/vendor/model-viewer.min.js';
 
 const SOURCES = [window.MODELS_CATALOG_URL, '/api/models', '/models/manifest.json'].filter(Boolean);
-const LABEL = {accept:'Accepted', adjust:'Adjust', reject:'Rejected'};
-const root = document.getElementById('root'), crumb = document.getElementById('crumb');
+const LABEL = {accept:'Kept', adjust:'Note sent', reject:'Rejected'};
+const root = document.getElementById('root'), crumb = document.getElementById('crumb') || document.createElement('div');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 const pct = x => Math.round(100 * x) + '%';
 const LS = 'models-reviews-v1';
@@ -60,7 +60,7 @@ function grid(){
   // Each tile shows the concept art or the 3D model; the switch flips them all, the small button flips one.
   const showSwitch = `<div class="seg show" role="group" aria-label="Tiles show">${[['art','Concept art'],['model','3D models']].map(([k, l]) =>
     `<button type="button" data-show="${k}" aria-pressed="${gridShow === k}">${l}</button>`).join('')}</div>`;
-  root.innerHTML = chips() + showSwitch + (ms.length ? `<div class="tiles">${ms.map(m => { const r = reviews[m.id], as3d = (gridShow === 'model') !== flipped.has(m.id); return `
+  root.innerHTML = `<header class="awbar"><a class="aw" href="/sandbox" aria-label="Abbie’s World">AW</a><div class="nm"><h1>Models</h1></div></header>` + chips() + showSwitch + (ms.length ? `<div class="tiles">${ms.map(m => { const r = reviews[m.id], as3d = (gridShow === 'model') !== flipped.has(m.id); return `
     <a class="tile" href="/models/${encodeURIComponent(m.id)}" data-open="${esc(m.id)}">
       ${as3d ? `<model-viewer src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" loading="lazy" camera-orbit="${+(m.orbit || [-30])[0]}deg ${+(m.orbit || [0, 72])[1]}deg auto" camera-controls touch-action="pan-y" interaction-prompt="none" environment-image="neutral" shadow-intensity="0.8"></model-viewer>`
         : `<img src="${esc(m.urls.ref)}" alt="" loading="lazy">`}<i class="dot ${r ? r.verdict : ''}" title="${r ? LABEL[r.verdict] : 'To review'}"></i>
@@ -69,54 +69,148 @@ function grid(){
     : `<p class="empty">Nothing here yet.</p>`);
 }
 
+// The look (docs/design/look/LOOK.md): one top bar (AW, the model's name, wordless counters, gear, camera, cart), the
+// inspiration and the model as two equal squares with numbered focal points on both, notes below, and Reject / Chat /
+// Keep under the right thumb. Chat is one modality: talk or type in the same place, and it goes to the modeler.
+const ICON = {
+  todo:'<path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="3" fill="currentColor"/>',
+  accept:'<path d="M4.5 12.5 10 18 19.5 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',
+  adjust:'<path d="M13 7 4 16a2 2 0 0 0 3 3l9-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M11 5l3-3 7 7-3 3Z" fill="currentColor"/>',
+  reject:'<path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
+  mic:'<rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  gear:'<circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  camera:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="2.2"/>',
+  cart:'<path d="M2.5 4h3l2.4 10.5a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.4-1.1L21 8H7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="19.5" r="1.6" fill="currentColor"/><circle cx="17" cy="19.5" r="1.6" fill="currentColor"/>',
+  grid:'<rect x="4" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="currentColor"/>',
+  left:'<path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',
+  right:'<path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',
+  send:'<path d="M4 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>',
+  plus:'<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
+};
+const ico = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
+const FAIR = {fair:'Fair', close:'Close', off:'Off'};
+const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
+const motifFor = m => { try { const v = localStorage.getItem('aw-motif'); if (v) return v; } catch {} return /paper warrior|roman/i.test(m.group || '') ? 'rome' : 'default'; };
+function topbar(m, seq, i){
+  const c = counts();
+  const counter = (k, label) => `<button type="button" class="ctr ${k}" data-filter="${k}" aria-pressed="${filter === k}" aria-label="${label}: ${c[k] || 0}"><i>${ico(k === 'todo' ? 'todo' : k)}</i><b>${c[k] || 0}</b></button>`;
+  return `<header class="awbar">
+    <a class="aw" href="/sandbox" aria-label="Abbie’s World">AW</a>
+    <div class="nm"><button type="button" class="peb" data-step="-1" aria-label="Previous model" ${i <= 0 ? 'disabled' : ''}>${ico('left')}</button>
+      <h1>${esc(m.name)}</h1>
+      <button type="button" class="peb" data-step="1" aria-label="Next model" ${i >= seq.length - 1 ? 'disabled' : ''}>${ico('right')}</button></div>
+    <div class="tools">
+      <div class="ctrs" role="group" aria-label="Which models">${counter('todo','To look at')}${counter('accept','Kept')}${counter('adjust','Notes sent')}${counter('reject','Rejected')}</div>
+      <button type="button" class="peb" data-view="grid" aria-label="See them all">${ico('grid')}</button>
+      <button type="button" class="peb" id="gear" aria-label="Look" aria-expanded="false">${ico('gear')}</button>
+      <button type="button" class="peb" id="cam" aria-label="Take a photo to make into a model">${ico('camera')}</button>
+      <button type="button" class="peb" id="cart" aria-label="Request more">${ico('cart')}<span class="badge" id="badge"${orders.length ? '' : ' hidden'}>${orders.length}</span></button>
+    </div>
+    <div class="gearpop" id="gearpop" hidden role="group" aria-label="Look">${MOTIFS.map(([k, l]) => `<button type="button" data-motif="${k}" aria-pressed="${document.documentElement.dataset.motif === k}">${l}</button>`).join('')}</div>
+  </header>`;
+}
+
 function review(){
   const ms = shown();
   if (!cur || !list.some(m => m.id === cur)) cur = (ms[0] || todo()[0] || list[0]).id;
-  const m = list.find(x => x.id === cur), r = reviews[m.id], seq = ms.some(x => x.id === m.id) ? ms : list, i = seq.findIndex(x => x.id === m.id), c = counts();
+  const m = list.find(x => x.id === cur), r = reviews[m.id], seq = ms.some(x => x.id === m.id) ? ms : list, i = seq.findIndex(x => x.id === m.id);
   document.title = m.name + ' · Models';
-  crumb.innerHTML = `<a href="/models">Models</a><span>/</span><span>${esc(m.name)}${m.style ? ' · ' + esc(m.style) : ''}</span>`;
+  document.documentElement.dataset.motif = motifFor(m);
   const [theta, phi] = m.orbit || [-30, 72];
-  const score = m.outline ?? m.scores?.[0]?.value;
-  // One thin bar of facts on top, one row of the two pictures plus the verdict panel, one thin bar of details below.
-  const facts = [
-    m.ask || m.subject ? `<span><b>Asked</b> ${esc(m.ask || m.subject)}</span>` : '',
-    ...(m.scores || []).map(s => `<span title="${esc(s.help || '')}"><b>${esc(s.label)}</b> ${pct(s.value)}</span>`),
-    ...(m.details || []).filter(([k]) => !/^(source|made with|reference|compute)$/i.test(k)).map(([k, v]) => `<span><b>${esc(k)}</b> ${esc(v)}</span>`),
-    ...(m.off || []).map(x => `<span class="off"><b>Off</b> ${esc(x)}</span>`),
-    `<a href="${esc(m.urls.glb)}" download="${esc(m.id)}.glb">${esc(m.id)}.glb</a>`].filter(Boolean).join('');
-  root.innerHTML = `
-  <article class="desk">
-    <header class="topbar">
-      <button type="button" class="arrow" data-step="-1" aria-label="Previous model" ${i <= 0 ? 'disabled' : ''}>‹</button>
-      <h1>${esc(m.name)}</h1>${m.style ? `<span class="style ${esc(m.style)}">${esc(m.style)}</span>` : ''}
-      <span class="where">${i + 1} of ${seq.length}${score != null ? ` · ${pct(score)} match` : ''}</span>
-      ${r ? `<span class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></span>` : ''}
-      <span class="sp"></span>
-      <select id="filter" aria-label="Which models">${[['todo','To review'],['accept','Accepted'],['adjust','Adjust'],['reject','Rejected'],['all','All']].map(([k, l]) => `<option value="${k}"${filter === k ? ' selected' : ''}>${l} (${c[k] || 0})</option>`).join('')}</select>
-      <button type="button" class="gridbtn" data-view="grid">All</button>
-      <button type="button" class="arrow" data-step="1" aria-label="Next model" ${i >= seq.length - 1 ? 'disabled' : ''}>›</button>
-    </header>
-    <div class="row">
-      <img class="art" src="${esc(m.urls.ref)}" alt="The concept art for the ${esc(m.name.toLowerCase())}">
-      <model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
-        auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.9" exposure="1.05" environment-image="neutral"></model-viewer>
-      <aside class="say" aria-label="Your verdict">
-        <textarea id="notes" placeholder="Comments: roof steeper, love the colour…">${esc(r?.notes || '')}</textarea>
-        <div class="voice">
-          <button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Talk your feedback"${speech ? '' : ' hidden'}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.1A7 7 0 0 0 19 12h-2Z"/></svg></button>
-          <span class="heard ${voiceKind}" id="heard" aria-live="polite">${esc(voiceLine || (speech ? 'Tap the mic and talk.' : 'Type your comments.'))}</span>
-        </div>
-        ${speech ? `<label class="hf"><input type="checkbox" id="hf" ${handsFree ? 'checked' : ''}> Hands-free</label>` : ''}
-        <button type="button" class="act accept" data-verdict="accept">Accept</button>
-        <button type="button" class="act adjust" data-verdict="adjust">Adjust</button>
-        <button type="button" class="act reject" data-verdict="reject">Reject</button>
-      </aside>
+  const fp = m.focal || [];
+  const dots = fp.map(f => `<button type="button" class="fp ${esc(f.verdict)}" data-fp="${+f.n}" style="left:${+f.img[0]}%;top:${+f.img[1]}%" aria-label="${+f.n}: ${esc(f.label)}">${+f.n}</button>`).join('');
+  const spots = fp.map(f => `<button type="button" slot="hotspot-${+f.n}" class="fp ${esc(f.verdict)}" data-fp="${+f.n}" data-position="0 0 0" aria-label="${+f.n}: ${esc(f.label)}, ${FAIR[f.verdict] || ''}">${+f.n}</button>`).join('');
+  root.innerHTML = `${topbar(m, seq, i)}
+  <article class="desk2">
+    ${r ? `<p class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></p>` : ''}
+    <div class="pair2">
+      <figure><figcaption>Inspiration</figcaption><div class="sq2"><img src="${esc(m.urls.ref)}" alt="The inspiration for the ${esc(m.name.toLowerCase())}">${dots}</div></figure>
+      <figure><figcaption>Model</figcaption><div class="sq2"><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
+        auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.8" exposure="0.8" environment-image="neutral">${spots}</model-viewer>
+        <div class="chalk" aria-hidden="true"><svg viewBox="0 0 150 110"><path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/></g></svg></div></div></figure>
     </div>
-    <footer class="botbar">${facts}</footer>
+    ${fp.length ? `<ol class="focal">${fp.map(f => `<li data-fp="${+f.n}"><span class="fp ${esc(f.verdict)}">${+f.n}</span><b>${esc(f.label)}</b><em class="${esc(f.verdict)}">${FAIR[f.verdict] || ''}</em><span>${esc(f.note)}</span></li>`).join('')}</ol>` : ''}
+    ${m.ask || m.subject ? `<p class="ask">“${esc(m.ask || m.subject)}”</p>` : ''}
+    <div class="notes2">${(m.good || []).length ? `<div><h2>What matches</h2><ul>${m.good.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}${(m.off || []).length ? `<div><h2>What is off</h2><ul>${m.off.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}</div>
     <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}"><img src="${esc(x.urls.ref)}" alt="" loading="lazy"><i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
-  </article>`;
+  </article>
+  <div class="thumb" role="group" aria-label="Decide">
+    <button type="button" class="tb reject" data-verdict="reject" aria-label="Reject">${ico('reject')}</button>
+    <button type="button" class="tb chat" id="chat" aria-label="Talk or type a note">${ico('mic')}</button>
+    <button type="button" class="tb accept" data-verdict="accept" aria-label="Keep it">${ico('accept')}</button>
+  </div>`;
   const on = root.querySelector('.strip .on'); if (on){ const st = on.parentElement; st.scrollLeft = on.offsetLeft - st.clientWidth / 2 + on.clientWidth / 2; }
-  if (listening) setMic(true);
+  placeSpots(root.querySelector('model-viewer'), fp);
+  root.querySelector('model-viewer').addEventListener('pointerdown', () => root.querySelector('.chalk')?.classList.add('gone'), {once:true});
+}
+// Focal points on the model sit at fractions of its bounding box ("at": x, y, z from -0.5 to 0.5, +z facing the camera).
+function placeSpots(mv, fp){
+  if (!mv || !fp.length) return;
+  mv.addEventListener('load', () => {
+    const c = mv.getBoundingBoxCenter(), d = mv.getDimensions();
+    fp.forEach(f => mv.updateHotspot({name:`hotspot-${+f.n}`, position:`${c.x + f.at[0] * d.x}m ${c.y + f.at[1] * d.y}m ${c.z + f.at[2] * d.z}m`}));
+    mv.classList.add('placed');
+  }, {once:true});
+}
+function focus(n){
+  root.querySelectorAll('[data-fp]').forEach(e => e.classList.toggle('lit', e.dataset.fp === String(n)));
+}
+
+// ---------- chat: one place to talk or type ----------
+function openChat(){
+  let o = document.getElementById('chatpop');
+  if (!o){ o = document.createElement('div'); o.id = 'chatpop'; o.className = 'chatpop'; document.body.append(o); }
+  o.innerHTML = `<div class="orb" id="orb" aria-hidden="true"></div>
+    <p class="heard ${voiceKind}" id="heard" aria-live="polite">${esc(speech ? 'Listening… or type below.' : 'Type what to change.')}</p>
+    <form class="line" id="chatform"><input id="chatin" type="text" autocomplete="off" placeholder="Talk, or type it here" aria-label="Your note"><button type="submit" class="tb send" aria-label="Send">${ico('send')}</button></form>
+    <button type="button" class="peb close" id="chatclose" aria-label="Close">${ico('reject')}</button>`;
+  o.hidden = false;
+  if (speech) startListening();
+}
+function closeChat(){ const o = document.getElementById('chatpop'); if (o) o.hidden = true; stopListening(); }
+
+// ---------- request more: a cart of new orders; every order starts as concept art ----------
+let orders = [];
+const ORDERS_THREAD = 'cmsg_01USVJqCbJruSGtaP4zsE2eYJJwV5vW99BgS3tVwgdy9Q5';
+function openCart(prefill){
+  let o = document.getElementById('cartpop');
+  if (!o){ o = document.createElement('div'); o.id = 'cartpop'; o.className = 'cartpop'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-label', 'Request more'); document.body.append(o); }
+  const m = list.find(x => x.id === cur);
+  o.innerHTML = `<div class="row2"><h2>Request more</h2><button type="button" class="peb" id="cartclose" aria-label="Close">${ico('reject')}</button></div>
+    <div id="orderlist">${orders.map((x, k) => `<div class="order"><img src="${x.photo || esc(m?.urls.ref || '')}" alt=""><div><strong>${esc(x.text || 'Make this')}</strong><small>Concept art · you pick · model</small></div><button type="button" class="peb" data-unorder="${k}" aria-label="Remove">${ico('reject')}</button></div>`).join('')}</div>
+    <form class="line" id="orderform"><button type="button" class="peb" id="cam2" aria-label="Add a photo">${ico('camera')}</button><input id="orderin" type="text" autocomplete="off" placeholder="More like this: a centurion’s version, battered…" aria-label="What more should be made"><button type="submit" class="tb send" aria-label="Add to orders">${ico('plus')}</button></form>
+    <p class="pg">Every order starts as concept art for you to pick. Photos stay private: a child’s face is never redrawn or modelled, and nothing unclothed is ever made.</p>
+    <div class="row2"><span class="sent" id="sent"></span><button type="button" class="tb accept wide" id="sendorders"${orders.length ? '' : ' disabled'}>Send</button></div>`;
+  o.hidden = false;
+  if (prefill) o.querySelector('#orderin').value = prefill;
+}
+function drawBadge(){ const b = document.getElementById('badge'); if (b){ b.hidden = !orders.length; b.textContent = orders.length; } }
+function photo(file){
+  return new Promise(res => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => { const k = Math.min(1, 1280 / Math.max(img.width, img.height)), c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', 0.82)); };
+    img.onerror = () => res(null); img.src = url;
+  });
+}
+// Orders go to /api/model-orders, which always starts them at the concept stage and runs the PG check on photos.
+// Until that endpoint is live, words-only orders fall back to the feedback inbox; photos never go there (it is copied to the repo).
+async function sendOrders(){
+  const m = list.find(x => x.id === cur), keepers = [], said = [];
+  for (const x of orders){
+    let r = await fetch('/api/model-orders', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({from_model_id:m?.id, text:x.text || 'Make this from my photo', photo:x.photo || undefined})}).catch(() => null);
+    if (r && r.status === 404 && !x.photo) r = await fetch('/api/feedback', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({
+      note:`[Order] ${x.text}${m ? ` (more like ${m.name}, /models/${m.id})` : ''}. Start with concept art for Evan to pick; never go straight to a model.`,
+      page:location.pathname, title:document.title, thread:ORDERS_THREAD, threadTitle:'Model orders', viewport:`${innerWidth}x${innerHeight}@${devicePixelRatio}`})}).catch(() => null);
+    if (r && r.ok) continue;
+    keepers.push(x);
+    let why = 'Not sent. Try again.';
+    try { const j = await r.json(); if (j && j.error) why = j.error; } catch {}
+    if (r && r.status === 404) why = 'Photos can be sent once ordering is switched on.';
+    said.push(why);
+  }
+  const sent = orders.length - keepers.length; orders = keepers;
+  openCart(); drawBadge();
+  document.getElementById('sent').textContent = [sent ? `${sent} sent. Concept art comes first.` : '', ...new Set(said)].filter(Boolean).join(' ');
 }
 
 function render(push){
@@ -137,7 +231,7 @@ function nextAfter(id){
 async function decide(verdict, notes, via){
   const m = list.find(x => x.id === cur); if (!m) return;
   notes = (notes ?? document.getElementById('notes')?.value ?? '').trim();
-  if (verdict === 'adjust' && !notes){ const t = document.getElementById('notes'); t.focus(); t.placeholder = 'Say or type what to change, then Adjust'; hear('What should change?'); return; }
+  if (verdict === 'adjust' && !notes){ openChat(); return; }
   const prev = reviews[m.id];
   reviews[m.id] = {id:m.id, verdict, notes, via, at:new Date().toISOString(), name:m.name}; keep();
   const nxt = filter === 'todo' ? nextAfter(m.id) : null;
@@ -210,15 +304,15 @@ function parse(said){
   return {notes:said.trim()};
 }
 
-function act(said){
+function act(said, via = 'voice'){
   const p = parse(said), notes = document.getElementById('notes');
   if (p.move){ hear(p.move > 0 ? 'Next model.' : 'Previous model.'); go(p.move); return; }
   if (notes && p.notes) notes.value = p.notes;
-  if (!p.verdict){ hear(`You said “${said}”. Now say accept, adjust or reject, or tap one.`, 'heard-it'); say('Got it. Accept, adjust, or reject?'); return; }
+  if (!p.verdict) p.verdict = 'adjust';
   if (p.verdict === 'adjust' && !p.notes){ hear('Adjust what? Say what should change.', 'heard-it'); say('What should change?'); return; }
   hear(`You said “${said}” → ${LABEL[p.verdict]}${p.notes ? ': ' + p.notes : ''}`, 'heard-it');
   clearTimeout(pending);
-  say(`Got it. ${LABEL[p.verdict]}${p.notes ? ': ' + p.notes : ''}.`, () => { pending = setTimeout(() => decide(p.verdict, p.notes, 'voice'), 250); });
+  say(`Got it. ${LABEL[p.verdict]}${p.notes ? ': ' + p.notes : ''}.`, () => { pending = setTimeout(() => { closeChat(); decide(p.verdict, p.notes, via); }, 250); });
 }
 
 function startListening(){
@@ -263,16 +357,35 @@ document.addEventListener('click', e => {
   else if (t.dataset.verdict){ clearTimeout(pending); decide(t.dataset.verdict, undefined, 'tap'); }
   else if ('clear' in t.dataset){ const m = list.find(x => x.id === cur); delete reviews[cur]; keep(); send(m, 'clear', '', 'tap'); render(); }
   else if (t.id === 'mic') listening ? stopListening() : startListening();
+  else if (t.id === 'chat') openChat();
+  else if (t.id === 'chatclose') closeChat();
+  else if (t.id === 'gear'){ const g = document.getElementById('gearpop'); g.hidden = !g.hidden; t.setAttribute('aria-expanded', String(!g.hidden)); }
+  else if (t.dataset.motif){ try { localStorage.setItem('aw-motif', t.dataset.motif); } catch {} document.documentElement.dataset.motif = t.dataset.motif; document.querySelectorAll('[data-motif]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.motif === t.dataset.motif))); }
+  else if (t.id === 'cart') openCart();
+  else if (t.id === 'cartclose') document.getElementById('cartpop').hidden = true;
+  else if (t.id === 'cam'){ openCart(); camIn.click(); }
+  else if (t.id === 'cam2') camIn.click();
+  else if (t.dataset.unorder){ orders.splice(+t.dataset.unorder, 1); openCart(); drawBadge(); }
+  else if (t.id === 'sendorders') sendOrders();
+  else if (t.dataset.fp) focus(t.dataset.fp);
 });
+const camIn = Object.assign(document.createElement('input'), {type:'file', accept:'image/*', hidden:true}); camIn.setAttribute('capture', 'environment'); document.body.append(camIn);
+camIn.addEventListener('change', async () => { const f = camIn.files?.[0]; camIn.value = ''; if (!f) return; const ph = await photo(f); if (!ph) return; const txt = document.getElementById('orderin')?.value.trim() || ''; orders.push({text:txt, photo:ph}); openCart(); drawBadge(); });
+document.addEventListener('submit', e => {
+  if (e.target.id === 'chatform'){ e.preventDefault(); const v = document.getElementById('chatin').value.trim(); if (!v) return; stopListening(); act(v, 'typed'); }
+  if (e.target.id === 'orderform'){ e.preventDefault(); const v = document.getElementById('orderin').value.trim(); if (!v) return; orders.push({text:v}); openCart(); drawBadge(); }
+});
+document.addEventListener('focusin', e => { if (e.target.id === 'chatin' && listening) stopListening(); });
 document.addEventListener('change', e => {
   if (e.target.id === 'filter'){ filter = e.target.value; if (filter !== 'all' && !shown().some(m => m.id === cur)) cur = shown()[0]?.id || cur; render(true); return; }
   if (e.target.id === 'hf'){ handsFree = e.target.checked; if (handsFree && !listening) startListening(); else if (!handsFree && rec) rec.continuous = false; } });
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){ closeChat(); const c = document.getElementById('cartpop'); if (c) c.hidden = true; return; }
   if (view !== 'review' || e.target.closest('textarea, input') || e.metaKey || e.ctrlKey || e.altKey) return;
   const k = e.key.toLowerCase();
   if (k === 'arrowright') go(1); else if (k === 'arrowleft') go(-1);
   else if (k === 'a') decide('accept', undefined, 'tap'); else if (k === 'r') decide('reject', undefined, 'tap');
-  else if (k === 'd') decide('adjust', undefined, 'tap'); else if (k === 'm' && speech) listening ? stopListening() : startListening();
+  else if (k === 'd' || k === 'm') openChat();
 });
 addEventListener('popstate', () => { route(); render(false); });
 
@@ -288,4 +401,8 @@ function route(){
 
 [list] = await Promise.all([catalogue(), loadReviews()]);
 if (!list.length) root.innerHTML = '<p class="empty">No models yet.</p>';
-else { route(); render(false); }
+else {
+  route(); render(false);
+  const q = new URLSearchParams(location.search), shared = [q.get('title'), q.get('text'), q.get('url')].filter(Boolean).join(' ');
+  if (shared) openCart(shared);
+}
