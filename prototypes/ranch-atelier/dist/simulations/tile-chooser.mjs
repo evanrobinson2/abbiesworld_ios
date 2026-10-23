@@ -4,7 +4,7 @@ import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTil
 import {PALETTES,cityPreset,CONFIGURATIONS} from './city/city-settings.mjs';
 import {cityFootprint} from './city/city-footprint.mjs';
 import {SCIENCE_BASE_FACETS} from './moon/science-worlds.mjs';
-import {createLiveTrayPreview} from './live-tray-preview.mjs?v=2';
+import {createLiveTrayPreview} from './live-tray-preview.mjs?v=3';
 import {attachTrayTooltips} from './tray-tooltips.mjs';
 import {placementSettings,placementAxes} from './placement-settings.mjs';
 import {uiIcon} from './ui-icons.mjs?v=4';
@@ -15,7 +15,7 @@ import {dragScroll} from './drag-scroll.mjs';
 import {designDrawer} from './tile-drawer.mjs';
 import {TILE_CHOICES,SCENE_GENERATORS,multiHexIcon,tileCenter,frontier} from './tile-expansion.mjs';
 const descriptions={ai:'Blank construction site · describe what to build after placing it.',city:'Futurama · DIORAMA. Configurable retro-future scenery; traffic is decorative, not a city economy.',moon:'Moonbase · colonists, science missions, water, power and food production.',ranch:'Ranch · household, animals and daily farm life.',paddock:'Paddock · livestock enclosures and shelter.','sugar-shack':'Maple sugar shack · sightseeing and a leisure bonus for neighboring tiles.',crop:'Garden · cultivated growing beds and working paths.',meadow:'Meadow · open habitat and vegetation.'};
-export function createTileChooser({preview,allowed,scene,camera,orbit,canvas,getBoard}){
+export function createTileChooser({preview,allowed,scene,camera,orbit,canvas,getBoard,renderer=null}){
  installTileCarryStyle();installTilePullStyle();
  const launch=document.createElement('button');launch.id='tile-chooser-toggle';launch.ariaLabel=launch.title='Choose scene type';launch.setAttribute('aria-expanded','false');launch.innerHTML=uiIcon('tiles');
  const panel=document.createElement('section');panel.id='tile-chooser';panel.hidden=true;panel.ariaLabel='Expand this world';panel.innerHTML='<div class="tile-expand-heading"><span>Choose an empty hex</span><button aria-label="Close scene tray">×</button></div><div class="tile-options" hidden></div><p class="tile-preview-status" role="status">Click an outlined hex in the world.</p><button class="add-tile" hidden>Place here</button>';
@@ -86,12 +86,17 @@ const options=panel.querySelector('.tile-options'),status=panel.querySelector('[
   entry.promise=preview(id,bestSlot(),{...settingsFor(id)},{trayOnly:true,stale:()=>!live()}).then(a=>{if(!live()){a.dispose();return null;}entry.asset=a;return a;}).catch(()=>{if(premade.get(g.id)===entry)premade.delete(g.id);return null;});
   premade.set(g.id,entry);return entry;}
  let premadeBoard='',premaking=false;
- function premakeTick(){if(premaking||document.hidden||!allowed()||drag||loading||printing)return;const key=boardKey();if(key!==premadeBoard){premadeBoard=key;for(const id of [...premade.keys()])dropPremade(id);}
-  const g=SCENE_GENERATORS.find(g=>!premade.has(g.id)&&!(opened&&asset&&generator===g));if(!g)return;premaking=true;premake(g).promise.finally(()=>{premaking=false;});}
+ // Only the scene on the hero card is printed ahead, and only once the board has been quiet for a moment.
+ // Printing every generator in the background rebuilt four tiles (models, shaders, uploads) right after
+ // each placement, on the same thread the player is watching: that was the lag after placing a tile.
+ const PREMAKE_QUIET=4000;let boardChanged=0;
+ function premakeTick(){if(premaking||document.hidden||!allowed()||drag||loading||printing)return;const key=boardKey();if(key!==premadeBoard){premadeBoard=key;boardChanged=performance.now();for(const id of [...premade.keys()])dropPremade(id);return;}
+  if(performance.now()-boardChanged<PREMAKE_QUIET)return;
+  const g=generator&&!premade.has(generator.id)&&!(opened&&asset)?generator:null;if(!g)return;premaking=true;const start=()=>premake(g).promise.finally(()=>{premaking=false;});if(window.requestIdleCallback)requestIdleCallback(start,{timeout:2000});else start();}
  const premakeTimer=setInterval(premakeTick,1200);
  function adoptPremade(id){const e=premade.get(generator.id);if(!e||e.type!==id||e.key!==premadeKey(id))return null;e.adopted=true;premade.delete(generator.id);return e.promise;}
  function preferredSlot(){camera.updateMatrixWorld();let best=0,score=Infinity;slots.forEach((s,i)=>{const p=new T.Vector3().fromBufferAttribute(s.surface.geometry.attributes.position,0).project(camera),cost=Math.abs(p.x)+Math.abs(p.y)*1.3+(p.z>1?100:0);if(cost<score){best=i;score=cost;}});return best;}
- async function showPreview(next,id){livePreview??=createLiveTrayPreview();const card=options.querySelector('[data-type="'+id+'"]');return livePreview.set(next,card);}
+ async function showPreview(next,id){livePreview??=createLiveTrayPreview({renderer});const card=options.querySelector('[data-type="'+id+'"]');return livePreview.set(next,card);}
  let footprintOutline=null,footprintKey='';function clearFootprint(){if(footprintOutline){scene.remove(footprintOutline);footprintOutline.geometry.dispose();footprintOutline.material.dispose();footprintOutline=null;}}
  function highlight(i){canvas.dataset.tileTarget=String(i);slots.forEach((s,j)=>{s.line.material.color.set(j===i?'#e6ad38':'#b4b88b');s.surface.material.color.set(j===i?'#ffd36b':'#e9e2c8');s.surface.material.opacity=j===i?.52:.14;s.surface.material.depthTest=j!==i;s.surface.renderOrder=j===i?18:0;});const key=type+':'+i+':'+settings()?.layout;if(key===footprintKey)return;footprintKey=key;clearFootprint();if(type!=='city'||i<0)return;const {tiles,diameter,heightAt}=getBoard(),f=cityFootprint(tiles,diameter,slots[i].cell,settings().layout);if(!f)return;const points=[];for(const cell of f.cells){const c=tileCenter(cell.q,cell.r,diameter);for(let k=0;k<6;k++)for(const j of [k,k+1]){const a=j*Math.PI/3,x=c.x+Math.sin(a)*diameter/2,z=c.z+Math.cos(a)*diameter/2;points.push(x*.1,heightAt(x,z)*.1+.08,z*.1);}}footprintOutline=new T.LineSegments(new T.BufferGeometry().setAttribute('position',new T.Float32BufferAttribute(points,3)),new T.LineBasicMaterial({color:'#b84931',depthTest:false}));footprintOutline.raycast=()=>{};footprintOutline.renderOrder=20;scene.add(footprintOutline);}
 
