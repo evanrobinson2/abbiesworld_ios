@@ -16,14 +16,14 @@ Files:
   `docs/oracle/identity/game-identity.schema.json`. Values are design targets marked `estimate`, to be measured on the sketch.
 - `spacemail-signatures.json`: the evidence. Fifteen games as Oracle DNA vectors (`oracle.dna.v1`), library records where
   Evan owns or studied the game, estimates otherwise, each with the lessons we take (style) and never take (expression),
-  plus the distance from each to Space Mail and Abbie's World's home DNA.
+  plus the distance from each to Space Mail and to Abbie's World's identity record.
 - The page and the sketch live on the Studies site: `prototypes/ranch-atelier/dist/studies/spacemail/`
   (`index.html` the study, `play.html` the sketch, `img/` its captures). https://app.abbies.world/studies/#space-mail
 
 ## The short version
 
-1. **A romp, not a builder.** Space Mail keeps Abbie's World's home identity (low challenge, no fail, short sessions,
-   few verbs, the world answers every action) and turns tempo up. Nearest studied games by DNA: Astro Bot, PAW Patrol
+1. **A romp inside the builder.** Space Mail matches Abbie's World's identity record on challenge, structure, social and
+   chance, keeps its rules (no fail, few verbs, the world answers every action, the interface hides), and turns tempo up. Nearest studied games by DNA: Astro Bot, PAW Patrol
    World (owned), Crazy Taxi, A Short Hike, Pokémon Snap, Mario Galaxy.
 2. **The loop is a ten-second delivery.** A mailbox flag goes up and the colonist hops with a glowing envelope over
    their head; you bound over and grab it; when the satchel is full enough you hop into the ferry hatch; the ferry hands
@@ -51,13 +51,16 @@ Files:
 ## Identity
 
 The Oracle's DNA axes (tempo, challenge, expression, structure, social, systems, chance, session) give a vector per game.
-Home = the mean of Evan's taste list in the library (Tiny Glade, Dorfromantik, 9 Kings, Bricktales; Besiege has no
-record yet). Space Mail's target and the RMS distance (0 same, 1 opposite):
+Abbie's World's own identity record (`docs/oracle/identity/examples/abbies-world.json`) is on the same axes. Space Mail
+matches it exactly on challenge, structure, social and chance, and trades expression and systems for tempo. For
+comparison, the mean of Evan's taste list in the library (Tiny Glade, Dorfromantik, 9 Kings, Bricktales) is also given.
+RMS distance: 0 same, 1 opposite.
 
 | | tempo | challenge | expression | structure | social | systems | chance | session | distance to Space Mail |
 |---|---|---|---|---|---|---|---|---|---|
 | Space Mail (target) | .67 | .22 | .44 | .33 | .44 | .33 | .33 | .22 | 0 |
-| Abbie's World home | .28 | .50 | .73 | .36 | .30 | .39 | .53 | .30 | .22 |
+| Abbie's World (identity record) | .33 | .22 | .89 | .33 | .44 | .67 | .33 | .44 | .25 |
+| Evan's taste list (mean) | .28 | .50 | .73 | .36 | .30 | .39 | .53 | .30 | .22 |
 | Astro Bot (est.) | .70 | .35 | .30 | .55 | .30 | .45 | .15 | .25 | .14 |
 | PAW Patrol World (owned) | .33 | .22 | .33 | .22 | .33 | .22 | .33 | .11 | .15 |
 
