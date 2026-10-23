@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-sandbox-v2",
+      "date": "2026-10-23",
+      "title": "The world, edge to edge",
+      "line": "The sandbox lost its toolbar and side panel. Three glass toys remain: a sun dial at the top (tap to pause, hold for time and weather), your tile cards at the bottom, and a toy box with everything else. No more haze over the world. Classic layout is in the toy box.",
+      "image": "/whats-new/2026-10-23-sandbox-v2.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
+      "threadTitle": "Sandbox v2 interface"
+    },
+    {
       "id": "2026-10-23-card-forge",
       "date": "2026-10-23",
       "title": "Ranch cards you can hold",
