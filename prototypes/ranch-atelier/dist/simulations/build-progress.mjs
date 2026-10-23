@@ -6,7 +6,7 @@ export function createBuildProgress(){
 // three.js deletes a shader program as soon as the last material using it is disposed. Tiles and tray prints
 // are rebuilt often, so the same programs were deleted and compiled again on every placement. Holding one
 // extra reference keeps each compiled program for the session; there are only a few hundred variants.
-function keepPrograms(renderer){for(const program of renderer.info?.programs||[])if(!program.keptForSession){program.keptForSession=true;program.usedTimes++;}}
+export function keepPrograms(renderer){for(const program of renderer.info?.programs||[])if(!program.keptForSession){program.keptForSession=true;program.usedTimes++;}}
 export async function warmScene(renderer,scene,camera,lightingScene){
  // Models and their texture requests have already resolved at this boundary.
  // Shared outlines swap materials, so every program is ready before animation. compileAsync lets the driver
