@@ -21368,14 +21368,14 @@
     "id": "freeciv",
     "imageFileCount": 2753,
     "commonImageDimensions": {
-      "19×19": 582,
-      "14×14": 582,
-      "44×30": 575,
-      "29×20": 575,
-      "64×48": 249,
-      "16×16": 55,
-      "1017×586": 6,
-      "128×128": 5
+      "19Ã—19": 582,
+      "14Ã—14": 582,
+      "44Ã—30": 575,
+      "29Ã—20": 575,
+      "64Ã—48": 249,
+      "16Ã—16": 55,
+      "1017Ã—586": 6,
+      "128Ã—128": 5
     },
     "imageExamples": [
       {
@@ -22528,5 +22528,49 @@
       "finding": "The two classic unit declarations carrying EvacuateFirst are Leader and Barbarian Leader. Both also declare NoHome and uk_food=0. Therefore the protected-unit helper branch does not by itself demonstrate a reachable classic famine scenario for these units: city_populate filters for positive actual food upkeep. Effects and alternate rulesets require further tracing.",
       "status": "staged research; runtime unexamined"
     }
+  },
+  "forcedActionStudy": {
+    "at": "2026-10-23T05:40:38.284224+00:00",
+    "method": "Pinned original source inspection; not decompilation or gameplay observation",
+    "source": {
+      "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/actiontools.c#L947-L1095",
+      "sha256": "7716f74ced65b76aa8b1f9d9e4eb09395952cebf8a3e8836bbb2ccb671c2bdc7",
+      "gitBlobSha": "7da2995f545cb921ad3da95e695d3d921d5db337"
+    },
+    "findings": [
+      {
+        "title": "Forced-action selection and execution have distinct outcomes",
+        "finding": "Selection returns the first performer in cause-iteration order whose requirements are active with RPT_CERTAIN, using actor owner, tile, unit, unit type, output and action context. Execution selects again, acquires targets, then iterates alternatives for unit actors. Each target-kind branch checks action eligibility before invoking unit_perform_action. A successful action immediately returns its action descriptor; this is not a survival guarantee. After an unsuccessful attempt, actor death returns null, preventing further attempts. Exhausting alternatives also returns null. Consequently null alone does not distinguish no performer, no successful action, or actor death.",
+        "lines": [
+          947,
+          1095
+        ]
+      }
+    ],
+    "coverage": {
+      "selectionAndDispatch": "verified in pinned source",
+      "requirementEvaluator": "partial; called but internals not traced",
+      "perActionEffects": "unexamined",
+      "runtime": "unexamined"
+    },
+    "next": "Trace unit_perform_action and removal effects only as needed to close shortage subsystem boundaries; then move to the next pilot game."
+  },
+  "removalStudy": {
+    "at": "2026-10-23T06:39:48.471543+00:00",
+    "method": "Pinned original source inspection; runtime unobserved",
+    "source": {
+      "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/unittools.c#L1936-L2184",
+      "sha256": "a270b4aa68426c6356126d0b24333c1bbfb796dceaa734d8fe20b74849a460ed",
+      "gitBlobSha": "4537b8ae92d16cf4eb031ef5d1eefc8b4206196e"
+    },
+    "finding": "wipe_unit delegates to wipe_unit_full, which unloads the doomed unit and its cargo, classifies cargo by unload ability and terrain survival, then removes the carrier. It processes helpless cargo before imperiled cargo, prioritizing EvacuateFirst or GameLoss within each group. Non-helpless cargo can seek another transport; only EvacuateFirst receives the teleport fallback. Unrescued cargo is subsequently removed with transport-loss reason. Starvation increments units_lost, whereas disbanded/used units increment units_used. This describes shared removal branches; it does not prove a food-upkeep carrier can encounter every branch in the classic ruleset.",
+    "coverage": {
+      "cargoRecoveryDispatch": "verified in pinned source",
+      "scoreReasonBranches": "verified in pinned source",
+      "serverRemoveInternals": "unexamined",
+      "transportAndTeleportHelperInternals": "unexamined",
+      "runtimeReachability": "unexamined"
+    },
+    "next": "Combine with staged auto-performer finding into one bounded shortage/removal study; leave per-action execution and transport helper internals explicitly partial, then deepen a different pilot game."
   }
 }

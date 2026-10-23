@@ -63,7 +63,7 @@ function start(){
  more.onclick=()=>toggleSheet();
  function toggleSheet(open=!root.classList.contains('v2-sheet')){closeAll('sheet');if(open&&document.body.classList.contains('scene-dropper-hidden'))press('#scene-dropper-toggle');root.classList.toggle('v2-sheet',open);}
  function adoptCards(){const cards=document.getElementById('current-scene-type');if(!cards)return false;if(cards.parentElement!==hand)hand.prepend(cards);fan();return true;}
- function fan(){const heroes=[...hand.querySelectorAll('.generator-hero')],n=heroes.length;heroes.forEach((h,i)=>{h.style.setProperty('--fan',((i-(n-1)/2)*1.5).toFixed(1)+'deg');if(!h.dataset.v2){h.dataset.v2='1';cardFace(h);let wasPressed=false;h.addEventListener('pointerdown',()=>{wasPressed=h.getAttribute('aria-pressed')==='true';},true);h.addEventListener('click',()=>{if(wasPressed)toggleSheet();});}});}
+ function fan(){const heroes=[...hand.querySelectorAll('.generator-hero')],n=heroes.length;heroes.forEach((h,i)=>{h.style.setProperty('--fan',((i-(n-1)/2)*1.5).toFixed(1)+'deg');if(!h.dataset.v2){h.dataset.v2='1';cardFace(h);}});}
 
  // Toy box: tap for the shelf, hold for the grown-up workbench.
  const box=make('button',{id:'v2-box',className:'v2-toy v2-glass',type:'button',title:'Toy box'},I.box+'<span class="v2-dot"></span>');box.setAttribute('aria-label','Toy box: tap for the shelf, hold for settings');

@@ -6,7 +6,7 @@
 // The tour is a list of stops (tour-stops.mjs) so every new feature can opt in. Everything here is presentation layer:
 // the guide, captions and chalk are drawn for the player and invisible to every perception; only the world build is fiction.
 // ?welcome=guide shows the guide again, ?welcome=tour|simple|none runs that choice (for previews and checks).
-import {tourStops,tourHints,findIn} from './tour-stops.mjs?v=1';
+import {tourStops,tourHints,findIn} from './tour-stops.mjs?v=2';
 import {chalkNote} from './chalk.mjs?v=1';
 
 const KEY='aw-welcome',root=document.documentElement;

@@ -2,6 +2,39 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-grace-basement-2",
+      "date": "2026-10-23",
+      "title": "Grace's basement, for real",
+      "line": "The basement starts dark: find the right switches (there are three). Then do Grace's list on her clipboard: plug the computer in, wash and dry the screen, switch it on and put in a disk. It runs real DOS now, and every gold coin is one of Daddy's memories.",
+      "image": "/whats-new/2026-10-23-grace-basement-2.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
+      "id": "2026-10-23-tile-pull",
+      "date": "2026-10-23",
+      "title": "Pull a tile off its card",
+      "line": "Every card's tile is ready before you touch it. Drag a card onto the board and it rolls like a die into place. Tap a card to turn it over and make the tile yours; Accept prints it.",
+      "image": "/whats-new/2026-10-23-tile-pull.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": true,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-anatomy",
+      "date": "2026-10-23",
+      "title": "The body, Gray's Anatomy deep",
+      "line": "The Bodies study now has a real skeleton and the muscles front, side and back, drawn from where Gray's Anatomy says each one attaches. Tap a muscle to read it. Joints, fat, measurements and the modelers' checklist are there too.",
+      "image": "/whats-new/2026-10-23-anatomy.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1oLKTSHLevi7mbEMgD3h3v",
+      "threadTitle": "Bodies and Creatures",
+      "tour": false,
+      "link": "/studies/#bodies-study"
+    },
+    {
       "id": "2026-10-23-grace-basement",
       "date": "2026-10-23",
       "title": "Grace's basement",
