@@ -103,10 +103,14 @@ const M = {
  skin: new T.MeshStandardMaterial({color: '#f0c29b', roughness: .8, name: 'skin'}),
  jacket: new T.MeshStandardMaterial({color: '#f2ede4', roughness: .8, name: 'white t-shirt'}),
  shorts: new T.MeshStandardMaterial({color: '#c8322e', roughness: .8, name: 'red shorts'}),
- cap: new T.MeshStandardMaterial({color: '#d83a3a', roughness: .8, name: 'ball cap'}),
+ hair: new T.MeshStandardMaterial({color: '#e9c86b', roughness: .9, flatShading: true, name: 'blond mop hair'}),
  jeans: new T.MeshStandardMaterial({color: '#2e3550', roughness: .9, name: 'jeans'}),
- fur: new T.MeshStandardMaterial({color: '#d8a055', roughness: 1, flatShading: true, name: 'shaggy dog fur'}),
- furDark: new T.MeshStandardMaterial({color: '#6e4524', roughness: 1, name: 'dog ears'}),
+ fur: new T.MeshStandardMaterial({color: '#1d1b20', roughness: .55, name: 'black lab coat'}),
+ furDark: new T.MeshStandardMaterial({color: '#0e0d10', roughness: .6, name: 'dog ears'}),
+ yard: new T.MeshStandardMaterial({color: '#8c8690', roughness: 1, name: 'schoolyard concrete'}),
+ field: new T.MeshStandardMaterial({color: '#6f8f3e', roughness: 1, name: 'playing field grass'}),
+ chalk: new T.MeshBasicMaterial({color: '#f4efe6', transparent: true, opacity: .85, name: 'chalk target'}),
+ coverall: new T.MeshStandardMaterial({color: '#5b6b78', roughness: .9, name: 'janitor coveralls'}),
  collar: new T.MeshStandardMaterial({color: '#d83a3a', roughness: .6, name: 'dog collar'}),
  house: ['#c9b79c', '#9fb2c4', '#d9c6a0', '#b7a3b8'].map((c, i) => new T.MeshStandardMaterial({color: c, roughness: .9, name: `house siding ${i}`})),
  shingle: new T.MeshStandardMaterial({color: '#4e3f45', roughness: 1, flatShading: true, name: 'roof shingles'}),
@@ -152,7 +156,13 @@ for (const [x, z] of [[-5.5, -1.2], [-1.8, 2.2], [0, -2.5], [3.5, 1.5], [4, -6]]
 // Ground: the yard in front of the climbing wall, sidewalk and street along the west, houses across it, field east.
 const ROAD_X = -19, LANES = [-18.1, -19.9];
 const ground = (w, d, mat, x, z, y = 0) => { const m = new T.Mesh(new T.PlaneGeometry(w, d), mat); m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); m.receiveShadow = true; scene.add(m); return m; };
-ground(160, 160, M.grass, 0, 0, -.02); ground(16, 9, M.asphalt, 4, -12, .005); ground(2.2, 160, M.sidewalk, -16.4, 0, .008); ground(5.6, 160, M.road, ROAD_X, 0, .01);
+ground(160, 160, M.grass, 0, 0, -.02);
+// From Evan's aerial: a big concrete schoolyard wraps the north and east sides, the playing field lies beyond it to the
+// north-east, the parking lot runs along the west side by the street, and trees line the south.
+ground(40, 20, M.yard, 2, -17, .005); ground(16, 34, M.yard, 16, -4, .006);
+ground(36, 44, M.field, 42, -12, .003);
+for (const [x, z] of [[42, -28], [42, 4]]) { for (const dx of [-1.6, 1.6]) cyl(.06, 1.6, M.coping, x + dx, .8, z, 'goal post'); box(3.3, .08, .08, M.coping, x, 1.6, z, 'goal crossbar'); }
+ground(6.4, 8, M.asphalt, -12.6, 5.2, .006); for (let z = 1.8; z < 9.4; z += 1.6) ground(3, .08, M.paint, -13.9, z, .012); // parking stalls ground(2.2, 160, M.sidewalk, -16.4, 0, .008); ground(5.6, 160, M.road, ROAD_X, 0, .01);
 for (let z = -70; z < 70; z += 4) ground(.14, 1.8, M.paint, ROAD_X, z, .02);
 ground(6.5, 3, M.asphalt, -10.2, 1.0, .006); // the path to the north-west door
 function tree(x, z, s = 1, conifer = false) {
@@ -160,7 +170,7 @@ function tree(x, z, s = 1, conifer = false) {
  const g = conifer ? new T.ConeGeometry(1.1 * s, 3 * s, 7) : new T.IcosahedronGeometry(1.4 * s, 0);
  const c = new T.Mesh(g, conifer ? M.leaf2 : M.leaf); c.position.set(x, (conifer ? 2.8 : 2.6) * s, z); c.castShadow = true; c.name = conifer ? 'spruce' : 'maple'; scene.add(c);
 }
-[[-13.5, -8, 1.1], [-12.5, 9.5, 1.3], [-4, 12, 1], [11.5, -9, 1.2, true], [14, 11, 1.1], [-14.5, 14, .9, true], [9, 12.5, 1], [16, -2, 1.4], [-25, -14, 1.2], [-26, 9, 1.1, true]].forEach(a => tree(...a));
+[[-13.5, -8, 1.1], [-12.5, 11, 1.3], [-4, 12, 1], [26, -9, 1.2, true], [14, 13, 1.1], [-14.5, 14, .9, true], [9, 12.5, 1], [26, 6, 1.4], [-25, -14, 1.2], [-26, 9, 1.1, true], [2, 14, 1.2], [-8, 15, 1], [20, 13, 1.1, true]].forEach(a => tree(...a));
 for (let i = 0; i < 8; i++) { // houses across the street
  const z = -32 + i * 9, m = M.house[i % 4];
  box(6, 3.2, 6, m, -29, 1.6, z, 'house');
@@ -250,7 +260,8 @@ function makeKid() {
  add(new T.CylinderGeometry(.18, .17, .2, 10), M.shorts, 0, .44, 0, 'red shorts');
  const body = add(new T.CapsuleGeometry(.17, .28, 3, 8), M.jacket, 0, .66, 0, 'jacket');
  add(new T.SphereGeometry(.16, 10, 8), M.skin, 0, 1.05, 0, 'head');
- add(new T.CylinderGeometry(.165, .17, .08, 10), M.cap, 0, 1.15, 0, 'cap'); add(new T.BoxGeometry(.18, .025, .16), M.cap, 0, 1.12, .14, 'cap brim');
+ // a blond mop, never a hat (Evan, 09:58Z)
+ add(new T.SphereGeometry(.185, 9, 6, 0, Math.PI * 2, 0, Math.PI * .55), M.hair, 0, 1.06, -.01, 'blond mop'); add(new T.BoxGeometry(.3, .07, .08), M.hair, 0, 1.13, .13, 'mop fringe').rotation.x = .5;
  const arm = add(new T.CapsuleGeometry(.05, .3, 2, 6), M.jacket, .2, .7, 0, 'throwing arm');
  const carry = []; for (let i = 0; i < 3; i++) { const b = new T.Mesh(new T.SphereGeometry(.07, 8, 6), M.ball); b.position.set((i - 1) * .12, .7 + (i === 1 ? .09 : 0), .2); b.visible = false; b.name = 'carried ball'; g.add(b); carry.push(b); }
  g.userData = {legs, carry, arm, body}; return g;
@@ -264,7 +275,7 @@ function makeDog() {
  add(new T.TorusGeometry(.13, .03, 6, 12), M.collar, .33, .55, 0).rotation.y = Math.PI / 2;
  add(new T.BoxGeometry(.06, .16, .1), M.furDark, .4, .72, .14); add(new T.BoxGeometry(.06, .16, .1), M.furDark, .4, .72, -.14);
  const legs = []; for (const [x, z] of [[.22, .1], [.22, -.1], [-.22, .1], [-.22, -.1]]) legs.push(add(new T.CylinderGeometry(.05, .05, .3, 6), M.fur, x, .15, z));
- const tail = add(new T.CylinderGeometry(.03, .02, .3, 6), M.fur, -.42, .58, 0); tail.rotation.z = -.8;
+ const tail = add(new T.CylinderGeometry(.045, .02, .38, 6), M.fur, -.44, .55, 0); tail.rotation.z = -1.05; // a lab's otter tail
  const mouth = new T.Object3D(); mouth.position.set(.66, .55, 0); g.add(mouth);
  const hit = new T.Mesh(new T.SphereGeometry(1.2, 8, 6), new T.MeshBasicMaterial({visible: false})); hit.position.y = .5; g.add(hit);
  g.userData = {head, tail, hit, legs, mouth}; g.scale.setScalar(1.3); return g;
@@ -393,9 +404,9 @@ function engineUpdate(level, pitch, dread, burn = 0) {
  engine.wg.gain.setTargetAtTime(burn * .018, a.currentTime, .15); engine.wv.frequency.setTargetAtTime(2600 + burn * 900, a.currentTime, .2);
 }
 // The little inner voice (and one grown-up). Spoken, never written on screen.
-function say(text, {grownUp = false} = {}) {
+function say(text, {grownUp = false, narrator = false} = {}) {
  try { const s = speechSynthesis; if (!s) return; s.cancel(); const u = new SpeechSynthesisUtterance(text);
-  u.pitch = grownUp ? .6 : 1.7; u.rate = grownUp ? 1.05 : 1.08; u.volume = .9;
+  u.pitch = grownUp ? .6 : narrator ? .85 : 1.7; u.rate = grownUp ? 1.05 : narrator ? .95 : 1.08; u.volume = .9;
   const vs = s.getVoices(), en = vs.filter(v => /^en/i.test(v.lang)); u.voice = en.find(v => /child|junior|samantha|karen|female/i.test(v.name)) || en[0] || null;
   s.speak(u); } catch {}
 }
@@ -406,6 +417,13 @@ const LINES = {
  loose: 'Whoa, that one wiggles!', tired: 'Whew. Noodle arms. Let\'s try again.', top: 'Made it!', firstBall: 'There\'s one!', full: 'My hands are full. Throw some to bub.', dog: ['Good dog!', 'Catch, bub!', 'Go get it!', 'Good catch!'],
  busted: 'Hey! You! Down off that roof!', afterBust: 'Oops. Watch the cars next time.', gym: 'The gym roof. Higher.', notYet: 'Not yet. There are still balls up here.',
  hang: 'Wait for it...', home: 'Now home. Same way down.', allBalls: 'Thirty-one! That\'s all of them!', missDrop: 'Not yet... pull back up.', drop: 'Yes!', coin: 'A gold coin! One of Daddy\'s memories.', done: 'Best day ever, bub.',
+ softer: ['Too hard. Softer.', 'Whoa, easy.', 'A little softer.'], harder: ['Too soft. Harder!', 'Bit harder.', 'Put some arm into it!'],
+ bigJump: 'That seems like a big jump. Maybe I shouldn\'t do it.', listened: 'Maybe next time, bub. Let\'s go home.',
+ janitor: 'Hey! What are you doing up there? Get down! I\'m calling the police!', jump: 'Uh oh. Gotta go!', ankle: 'Ow, ow, ow! My ankle!',
+ hurry: 'Bub\'s waiting. Better get moving.',
+ // grown-up Daddy, years later, closing the memory: the little voice was right too
+ outroHollywood: 'I never told anyone about that coin. Don\'t try this at home, okay?', outroListened: 'That little voice was right. It was a big jump.',
+ outroJanitor: 'I nearly broke my ankle that night. That\'s why you never, ever try this at home.',
 };
 let lineN = 0; const pickLine = arr => arr[lineN++ % arr.length];
 
@@ -499,7 +517,23 @@ function startClimb(c) {
  tweenCamera(climbView(c), 1.6, () => { S.mode = 'climb'; }, CLIMB_PIX);
 }
 
-// ---------- The walk: you and bub at the wall. Three throws; the third goes on the roof. ----------
+// ---------- The walk: you and bub at the wall. A power and timing toss: hit the two chalk targets, then the third
+// throw sails onto the roof no matter what (Evan, 09:54Z). ----------
+const TARGETS = [{at: v3(-7.03, 1.6, 1.5), zone: [.34, .54]}, {at: v3(-7.03, 4.2, .4), zone: [.66, .84]}];
+for (const t of TARGETS) {
+ t.ring = new T.Mesh(new T.RingGeometry(.3, .36, 24), M.chalk); t.ring.position.copy(t.at); t.ring.rotation.y = -Math.PI / 2; t.ring.name = 'chalk target'; scene.add(t.ring);
+ t.dot = new T.Mesh(new T.CircleGeometry(.12, 16), M.chalk.clone()); t.dot.position.copy(t.at); t.dot.rotation.y = -Math.PI / 2; t.dot.material.opacity = .35; t.dot.name = 'chalk bullseye'; scene.add(t.dot);
+}
+const charge = () => .5 - .5 * Math.cos(S.chargeT * 2.6);
+function startToss() {
+ S.mode = 'toss'; kid.rotation.y = Math.PI / 2; showPower();
+}
+function showPower() {
+ const t = TARGETS[S.hits || 0]; hangEl.style.display = 'block'; dotEl.style.left = '0%';
+ if (t) { zoneEl.style.left = t.zone[0] * 100 + '%'; zoneEl.style.width = (t.zone[1] - t.zone[0]) * 100 + '%'; } else { zoneEl.style.left = '0%'; zoneEl.style.width = '100%'; }
+}
+function tossDown() { if (S.mode !== 'toss' || S.dogTask || S.throwing) return; S.charging = true; S.chargeT = 0; SFX.tick(); }
+function tossUp() { if (!S.charging) return; S.charging = false; hangEl.style.display = 'none'; wallThrow(charge()); }
 const ray = new T.Raycaster(), ndc = new T.Vector2();
 function pick(ev) { const r = renderer.domElement.getBoundingClientRect(); ndc.set((ev.clientX - r.left) / r.width * 2 - 1, -(ev.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); }
 const THROW_SPOT = v3(-10.4, 0, 1.2);
@@ -510,18 +544,24 @@ function onWalkTap(ev) {
  if (wallHit || (p && p.x > -8.2)) { S.target = THROW_SPOT.clone(); S.onArrive = 'throw'; return; }
  if (p) { S.target = p; S.onArrive = null; }
 }
-function wallThrow() {
- S.throws++; kid.rotation.y = Math.PI / 2; S.armSwing = 1; SFX.throwIt(); leash.visible = false; S.leashOff = true;
- const from = kid.position.clone().add(v3(.2, 1.1, 0));
- if (S.throws < 3) {
-  const hitAt = v3(-7.05, S.throws === 1 ? 1.6 : 4.2, S.throws === 1 ? 1.5 : .4), land = S.throws === 1 ? v3(-10.6, .09, 2.6) : v3(-12.8, .09, -.6);
-  fly(dogBall, from, hitAt, Math.max(from.y, hitAt.y) + .5, S.throws === 1 ? .45 : .6, () => {
-   SFX.thwack(); fly(dogBall, hitAt.clone(), land, hitAt.y + .6, .7, () => { SFX.bounce(); S.dogTask = {phase: 'fetch', at: land.clone()}; });
+function wallThrow(power = .5) {
+ S.throws++; kid.rotation.y = Math.PI / 2; S.armSwing = 1; SFX.throwIt(); leash.visible = false; S.leashOff = true; S.throwing = true;
+ const from = kid.position.clone().add(v3(.2, 1.1, 0)), t = TARGETS[S.hits || 0];
+ if (t) {
+  const mid = (t.zone[0] + t.zone[1]) / 2, hit = power >= t.zone[0] && power <= t.zone[1];
+  const hitAt = t.at.clone().add(v3(0, (power - mid) * 7, (power - mid) * 1.5)); hitAt.y = Math.max(.3, Math.min(H - .4, hitAt.y));
+  const land = v3(-10.6 - power * 3, .09, 2.6 - power * 3);
+  fly(dogBall, from, hitAt, Math.max(from.y, hitAt.y) + .5, .35 + power * .35, () => {
+   SFX.thwack();
+   if (hit) { S.hits = (S.hits || 0) + 1; t.dot.material.opacity = 1; SFX.pick(); addScore(150, t.at.clone()); }
+   else say(power < t.zone[0] ? pickLine(LINES.softer) : pickLine(LINES.harder));
+   S.lastHit = hit;
+   fly(dogBall, hitAt.clone(), land, hitAt.y + .6, .7, () => { SFX.bounce(); S.throwing = false; S.dogTask = {phase: 'fetch', at: land.clone()}; });
   });
  } else {
   const over = v3(-6.6, H + .7, 1.3), land = v3(-5.6, H + .09, 1.6);
   fly(dogBall, from, over, H + 2.5, .9, () => fly(dogBall, over, land, H + .9, .4, () => {
-   SFX.bounce(); dogBall.visible = false; addBall('low', land.x, land.z);
+   SFX.bounce(); dogBall.visible = false; S.ballOnRoof = true; addBall('low', land.x, land.z); S.throwing = false; S.mode = 'walk';
    SFX.bark(); S.dogHop = 1; say(LINES.onRoof);
    setTimeout(() => { say(LINES.getIt); S.target = v3(-8.2, 0, 1.0); S.onArrive = 'toWall'; }, 1500);
   }));
@@ -529,7 +569,8 @@ function wallThrow() {
 }
 function dogBrought() {
  SFX.bark(); S.dogHop = 1; dogBall.visible = true;
- setTimeout(() => say(S.throws === 1 ? LINES.further1 : LINES.further2), 450);
+ if (S.lastHit) setTimeout(() => say(S.hits === 1 ? LINES.further1 : LINES.further2), 450);
+ if (S.mode === 'toss') showPower();
 }
 
 // ---------- Roof: walk, pick up, throw to bub, hide from headlights. ----------
@@ -543,18 +584,18 @@ function onRoofTap(ev) {
 }
 const roofBallsLeft = () => balls.filter(b => b.lvl !== 'canopy' && b.state !== 'dog').length;
 function spotOpen(k) {
- if (k === 'home') return S.coinDone;
+ if (k === 'home') return !roofBallsLeft() && S.lvl === 'low';
  if (k === 'hang') return !roofBallsLeft() && !S.coinDone;
  if (k === 'gymWall') return !S.coinDone;
  return true;
 }
 function arrive(k) {
- if (k === 'throw') return wallThrow();
+ if (k === 'throw') return startToss();
  if (k === 'toWall') return startClimb(CLIMB1);
  if (k === 'gymWall') return startClimb(CLIMB2);
  if (k === 'smallWall') return startClimb(CLIMB3);
  if (k === 'home') return startDescent();
- if (k === 'hang') return roofBallsLeft() ? say(LINES.notYet) : startHang();
+ if (k === 'hang') { if (roofBallsLeft()) return say(LINES.notYet); if (!S.warned) { S.warned = true; kid.rotation.y = Math.PI; SFX.breath(.5); return say(LINES.bigJump); } return startHang(); }
 }
 function throwBall() {
  const b = balls.find(x => x.state === 'carried'); if (!b) return;
@@ -609,12 +650,44 @@ function landHome() {
  S.mode = 'ending'; SFX.bounce(); S.hands = [null, null]; S.onWall = false;
  kid.position.copy(NW.at(.3, 0, 1.1)); kid.position.y = 0; kid.rotation.y = -Math.PI / 2; kid.visible = true; S.lvl = 'yard';
  S.dogTask = {phase: 'come'};
- tweenCamera({pos: v3(-15, 3.4, -4), look: v3(-7.8, 1.8, 1.4), fov: 50}, 2.4, () => finish('hollywood'), ROOF_PIX);
+ tweenCamera({pos: v3(-15, 3.4, -4), look: v3(-7.8, 1.8, 1.4), fov: 50}, 2.4, () => finish(S.coinDone ? 'hollywood' : 'listened'), ROOF_PIX);
 }
 const againEl = document.getElementById('again');
 function finish(kind) {
- if (S.ended) return; S.ended = kind; SFX.win(); say(LINES.done); S.dogParty = 99; addScore(1000, kid.position.clone().add(v3(0, 2, 0)));
- setTimeout(() => { againEl.style.display = 'grid'; }, 3500);
+ if (S.ended) return; S.ended = kind; SFX.win(); S.dogParty = 99;
+ say(kind === 'listened' ? LINES.listened : kind === 'janitor' ? LINES.ankle : LINES.done);
+ addScore(kind === 'hollywood' ? 1000 : kind === 'janitor' ? 700 : 600, kid.position.clone().add(v3(0, 2, 0)));
+ // the memory closes in grown-up Daddy's voice: whatever you chose, the little voice was right too
+ const outro = {hollywood: LINES.outroHollywood, listened: LINES.outroListened, janitor: LINES.outroJanitor}[kind];
+ setTimeout(() => say(outro, {narrator: true}), 2600);
+ setTimeout(() => { againEl.style.display = 'grid'; }, 6500);
+}
+// ---------- The secret ending: dawdle on the canopy and the janitor comes out under it. You jump. Your ankle says so.
+function makeJanitor() {
+ const g = new T.Group(); g.name = 'janitor';
+ const add = (geo, mat, x, y, z) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
+ for (const x of [-.12, .12]) add(new T.CylinderGeometry(.08, .07, .8, 6), M.coverall, x, .4, 0);
+ add(new T.CapsuleGeometry(.24, .5, 3, 8), M.coverall, 0, 1.15, 0); add(new T.SphereGeometry(.19, 10, 8), M.skin, 0, 1.75, 0);
+ add(new T.CylinderGeometry(.04, .05, .25, 6), M.steel, .3, 1.15, .2).rotation.x = -1.2;
+ const torch = new T.SpotLight('#fff1c8', 0, 14, .35, .5, 1.2); torch.position.set(.3, 1.2, .3); g.add(torch); g.add(torch.target); torch.target.position.set(-1.5, 4.6, 0);
+ g.userData = {torch}; g.visible = false; scene.add(g); return g;
+}
+const janitor = makeJanitor();
+function janitorEnding() {
+ if (S.ended || S.mode !== 'roof') return;
+ S.mode = 'ending'; S.ended = 'pending'; S.target = null; SFX.rattle();
+ janitor.visible = true; janitor.position.set(9.2, 0, 1.2); janitor.rotation.y = -Math.PI / 2; janitor.userData.torch.intensity = 60;
+ tweenCamera({pos: v3(14, 4.2, 6), look: v3(7.4, 3, 1.2), fov: 44}, 1.2);
+ S.shake = .6; SFX.sting(); say(LINES.janitor, {grownUp: true});
+ setTimeout(() => {
+  say(LINES.jump); kid.rotation.y = Math.PI / 2;
+  const from = kid.position.clone(), to = v3(9.6, 0, -1.6);
+  fly(kid, from, to, from.y + .6, .8, () => {
+   SFX.slip(); SFX.bounce(); S.shake = 1.2; S.lvl = 'yard'; S.ended = false; S.limp = 1;
+   janitor.userData.torch.target.position.set(9.6, 0, -1.6);
+   tweenCamera({pos: v3(15, 3.2, -6), look: v3(9.4, .8, -1.6), fov: 48}, 1.6, () => finish('janitor'));
+  });
+ }, 3200);
 }
 againEl.onclick = () => location.reload();
 
@@ -630,8 +703,10 @@ renderer.domElement.addEventListener('pointerdown', ev => {
   }
  } else if (S.mode === 'roof') onRoofTap(ev);
  else if (S.mode === 'walk') onWalkTap(ev);
+ else if (S.mode === 'toss') tossDown();
  else if (S.mode === 'hang') dropTry();
 });
+addEventListener('pointerup', tossUp); addEventListener('pointercancel', tossUp);
 const keys = {};
 addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; if (e.key === ' ' && S.mode === 'hang') dropTry(); if (e.key === ' ' && S.mode === 'roof' && S.carry) throwBall(); });
 addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
@@ -734,12 +809,12 @@ function updateDog(dt) {
  if (task?.phase === 'fetch') { if (dogTo(task.at, 6, dt) < .3) { task.phase = 'back'; } }
  else if (task?.phase === 'back') { dogBall.position.copy(D.mouth.getWorldPosition(v3())); if (dogTo(kid.position.clone().add(v3(-.7, 0, .3)), 5, dt) < .35) { S.dogTask = null; dogBall.position.copy(kid.position).add(v3(.2, .9, 0)); dogBrought(); } }
  else if (task?.phase === 'come') dogTo(kid.position.clone().add(v3(-.9, 0, .6)), 4, dt);
- else if (S.mode === 'walk') { const L = dogTo(kid.position.clone().add(v3(-.8, 0, -.7)), 3.6, dt); if (L < .3) D.legs.forEach(l => l.rotation.z *= .8); }
+ else if (S.mode === 'walk' || S.mode === 'toss') { const L = dogTo(kid.position.clone().add(v3(-.8, 0, -.7)), 3.6, dt); if (L < .3) D.legs.forEach(l => l.rotation.z *= .8); }
  else if (!S.ended) { // waiting in the yard below, following you along the wall
   const z = Math.max(-8, Math.min(8, kid.visible ? kid.position.z : 1));
   dogTo(v3(-10.5, 0, z), 3, dt);
  }
- if (S.mode === 'walk' && !S.dogTask && !S.throwing && dogBall.visible && S.throws < 3) dogBall.position.copy(kid.position).add(v3(.25, .85, .1).applyAxisAngle(up, kid.rotation.y));
+ if ((S.mode === 'walk' || S.mode === 'toss') && !S.dogTask && !S.throwing && dogBall.visible && !S.ballOnRoof) dogBall.position.copy(kid.position).add(v3(.25, .85, .1).applyAxisAngle(up, kid.rotation.y));
  S.dogHop = Math.max(0, (S.dogHop || 0) - dt * 1.6); dog.position.y = Math.sin(S.dogHop * Math.PI) * .7;
  D.tail.rotation.x = Math.sin(time * (S.carry || S.dogTask ? 22 : 8)) * .6;
  if (S.dogParty > 0) { S.dogParty -= dt; dog.rotation.y += dt * 6; dog.position.y = Math.abs(Math.sin(time * 6)) * .4; }
@@ -760,7 +835,7 @@ function frame(now) {
  } else if (['climb', 'slide', 'descend'].includes(S.mode)) {
   const v = climbView(); camera.position.lerp(v.pos, Math.min(1, rdt * 5)); S.look.lerp(v.look, Math.min(1, rdt * 5));
   if (Math.abs(camera.fov - v.fov) > .1) { camera.fov += (v.fov - camera.fov) * Math.min(1, rdt * 4); camera.updateProjectionMatrix(); }
- } else if (['roof', 'busted', 'walk'].includes(S.mode)) {
+ } else if (['roof', 'busted', 'walk', 'toss'].includes(S.mode)) {
   const v = isoView(); camera.position.lerp(v.pos, Math.min(1, rdt * 3)); S.look.lerp(v.look, Math.min(1, rdt * 3));
  }
  const shake = (S.shake || 0) + k * .35 + (S.bustT || 0);
@@ -795,11 +870,13 @@ function frame(now) {
    else { SFX.coin(); say(LINES.coin); }
   }
   if (S.lvl === 'canopy' && !memoryCoin.visible && !S.coinDone) S.coinDone = true;
+  if (S.lvl === 'canopy' && S.coinDone) { S.dawdle = (S.dawdle || 0) + dt; if (S.dawdle > 9 && !S.said.hurry) { S.said.hurry = 1; say(LINES.hurry); } if (S.dawdle > 20) janitorEnding(); }
  }
  for (const b of balls) if (b.state === 'roof') b.m.position.y = b.home.y + Math.abs(Math.sin(time * 2 + b.bob)) * .04;
  kid.userData.carry.forEach((b, i) => { b.visible = i < S.carry; });
  S.armSwing = Math.max(0, (S.armSwing || 0) - rdt * 3); kid.userData.arm.rotation.x = -S.armSwing * 2.4;
- if (S.mode === 'hang') { S.hangT += dt; const s = swing(); dotEl.style.left = s * 100 + '%'; kid.rotation.z = (s - .5) * .5; } else kid.rotation.z = 0;
+ if (S.mode === 'toss' && S.charging) { S.chargeT += rdt; dotEl.style.left = charge() * 100 + '%'; S.armSwing = .2 + charge() * .6; }
+ if (S.mode === 'hang') { S.hangT += dt; const s = swing(); dotEl.style.left = s * 100 + '%'; kid.rotation.z = (s - .5) * .5; } else kid.rotation.z = S.limp ? Math.sin(time * 5) * .12 : 0;
  updateDog(dt);
  // cars on a steady rhythm: one every CAR_PERIOD seconds, alternating lanes, always top right to bottom left
  let loud = 0, anySeen = false, dread = 0;
@@ -851,7 +928,7 @@ function frame(now) {
  requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
-window.schoolJump = {S, tapHold, allHolds, CLIMB1, CLIMB2, CLIMB3, kid, dog, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb, startDescent, wallThrow};
+window.schoolJump = {tossDown, tossUp, janitorEnding, TARGETS, finish, S, tapHold, allHolds, CLIMB1, CLIMB2, CLIMB3, kid, dog, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb, startDescent, wallThrow};
 </script>
 </body>
 </html>
