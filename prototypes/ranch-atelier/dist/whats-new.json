@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-mannequin-puppet",
+      "date": "2026-10-23",
+      "title": "The wooden mannequin, as a puppet",
+      "line": "Drag any joint of the blue-graphite mannequin and it follows; pull the hips down and it crouches with its feet planted. Set keys on the strip, or tap one of 18 moves from waving to a backflip.",
+      "image": "/whats-new/2026-10-23-mannequin-puppet.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYR1MXxaykLkRfrfxAEMjsd5",
+      "threadTitle": "AW-STUDY-0038 - 2D Mannequin Puppet",
+      "tour": false,
+      "link": "/studies/character-studio/puppet.html"
+    },
+    {
       "id": "2026-10-23-hexcity",
       "date": "2026-10-23",
       "title": "A founding city on hexes",
