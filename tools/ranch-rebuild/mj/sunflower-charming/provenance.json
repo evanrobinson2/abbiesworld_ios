@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "sunflower-charming",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-567.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "a94c7084-52d2-4ebb-90fb-01795114d436",
+      "grid_url": "https://www.midjourney.com/jobs/a94c7084-52d2-4ebb-90fb-01795114d436?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "7bb7b2bb-c228-4903-87d9-7a0cafda05bb",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:45:32.302Z",
+      "grid_done_at": "2026-10-23T01:45:50.302Z",
+      "upscale_clicked_at": "2026-10-23T01:46:00.188Z",
+      "downloaded_at": "2026-10-23T01:47:11.769Z",
+      "pick_reason": "tall single stem with plump flower head and broad leaves, head well clear of the top edge"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "4e42da898516ef80df1cbce2ddbaf6c55e5d9bf204a2db708d7d0e574ec9f796",
+      "bytes": 1580490,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/7bb7b2bb-c228-4903-87d9-7a0cafda05bb/0_0.png"
+    }
+  }
+}
