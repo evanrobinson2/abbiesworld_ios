@@ -1,0 +1,10 @@
+{
+ "source": "tools/meshy-heroes/meshy/charm-tardigrade/charm-tardigrade.glb",
+ "out": "prototypes/ranch-atelier/dist/simulations/assets/backpack/charms/tardigrade.glb",
+ "tris_before": 1708254,
+ "tris": 7999,
+ "largest_side": 1.0,
+ "textured": true,
+ "bytes": 705116,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/charm_cleanup.py"
+}
