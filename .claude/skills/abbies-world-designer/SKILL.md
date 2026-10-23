@@ -67,6 +67,10 @@ node tools/game-feel-check/lint.mjs origin/<base-branch>
 - For a HUD, also score it: `python3 tools/hud-rubric/check_hud.py <manifest>`. For a card: `tools/card-rubric`.
 - Look at the phone screenshot yourself and answer, in the PR: is anything covering the world? Could a character
   explain every on-screen thing? Before and after shots use the exact same camera.
+- Context engineering (Evan, 2026-10-23, org-wide): a study ships with its sources in
+  `prototypes/ranch-atelier/dist/studies/context.json`: the Oracle records you consulted, the game dev blogs, game
+  design blogs and tutorials you read, and the canon you followed. It shows as the Context card on the study's right
+  side; paste `node tools/context-card/snippet.mjs <id>` into the study's artifact too. See `tools/context-card/README.md`.
 
 ## By discipline
 
