@@ -4,32 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Grace's Basement</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Patrick+Hand&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 <style>
 /* AW-STUDY-0024: the basement, played. Built on docs/design/INTERACTION_GRAMMAR.md: touch the thing you mean, small
    things come to you in a close-up, the girl thinks out loud in bubbles on her (spatial layer), lists are paper. */
 html,body{margin:0;height:100%;background:#000;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
 canvas{display:block;width:100vw;height:100dvh;image-rendering:pixelated}
 #keys{position:fixed;left:-200px;top:0;width:10px;height:10px;opacity:0;font-size:16px}
-/* Thought bubbles ride above the girl's head: a glass bead of thought with depth, never a panel. */
-.thought{position:fixed;left:0;top:0;transform:translate(-50%,-100%);max-width:min(78vw,360px);padding:12px 18px 13px;border-radius:26px;
- font:22px/1.15 "Patrick Hand","Comic Sans MS",cursive;color:#2a2116;text-align:center;pointer-events:none;
- background:radial-gradient(120% 140% at 30% 18%,rgba(255,255,255,.96),rgba(250,244,228,.9) 55%,rgba(226,214,190,.88));
- box-shadow:inset 0 2px 1px rgba(255,255,255,.9),inset 0 -4px 10px rgba(120,96,60,.25),0 6px 18px rgba(0,0,0,.45);
- opacity:0;transition:opacity .25s;will-change:transform,opacity}
+/* Her inner voice is a caption at the bottom, in the 16-bit font, plain white, no outline (Evan 09:17Z). Choices
+   follow beneath it like a terminal: "> Try the switches". */
+.thought{position:fixed;left:50%;bottom:calc(max(18px,env(safe-area-inset-bottom)) + var(--chh,0px));transform:translateX(-50%);
+ width:min(92vw,720px);font:28px/1.1 VT323,ui-monospace,monospace;color:#fff;text-align:left;pointer-events:none;
+ opacity:0;transition:opacity .25s;white-space:pre-wrap;letter-spacing:.02em}
 .thought.on{opacity:1}
-.thought::before,.thought::after{content:"";position:absolute;border-radius:50%;background:rgba(246,238,220,.92);box-shadow:0 3px 8px rgba(0,0,0,.35)}
-.thought::before{width:16px;height:16px;left:calc(50% - 22px);bottom:-20px}
-.thought::after{width:9px;height:9px;left:calc(50% - 34px);bottom:-33px}
-.choices{position:fixed;left:0;top:0;display:flex;gap:12px;transform:translate(-50%,0);pointer-events:none;opacity:0;transition:opacity .3s}
+.choices{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(92vw,720px);
+ display:flex;flex-direction:column;align-items:flex-start;pointer-events:none;opacity:0;transition:opacity .25s}
 .choices.on{opacity:1}
 .choices.on .choice{pointer-events:auto}
-.choice{display:flex;align-items:center;gap:8px;padding:9px 16px 9px 11px;border:0;border-radius:24px;cursor:pointer;white-space:nowrap;
- font:20px/1 "Patrick Hand","Comic Sans MS",cursive;color:#2a2116;min-height:48px;pointer-events:none;
- background:radial-gradient(120% 140% at 30% 18%,rgba(255,255,255,.95),rgba(244,236,214,.9) 60%,rgba(222,206,176,.9));
- box-shadow:inset 0 2px 1px #fff,inset 0 -4px 9px rgba(120,96,60,.3),0 5px 14px rgba(0,0,0,.5);transition:transform .2s cubic-bezier(.2,1.8,.4,1)}
-.choice:active{transform:scale(.92)}
-.choice svg{width:26px;height:26px;flex:none}
+.choice{border:0;background:none;padding:4px 0;margin:0;cursor:pointer;color:#fff;font:28px/1.1 VT323,ui-monospace,monospace;text-align:left;
+ min-height:40px;pointer-events:none;letter-spacing:.02em}
+.choice::before{content:"> "}
+.choice:hover,.choice:focus-visible,.choice:active{background:#fff;color:#000;outline:none}
 </style>
 <script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
 </head>
@@ -42,7 +37,8 @@ import * as T from 'three';
 import {createBasement, createKid, createCoin, floorY, ROOM, CHORES} from '/simulations/grace-basement.mjs';
 import {GracePC} from '/simulations/grace-pc.mjs';
 import {loadGraceKid} from '/simulations/grace-kid.mjs';
-import {volunteer, playerCamera} from '/simulations/presentation-layer.mjs';
+import {volunteer, playerCamera, presentation} from '/simulations/presentation-layer.mjs';
+import {coinReward} from '/simulations/coin-reward.mjs';
 
 const q = new URLSearchParams(location.search);
 const fromCafe = q.get('from') === 'cafe';
@@ -112,6 +108,7 @@ function startMusic() {
 }
 
 // ---------- Her voice: she thinks out loud. The device speaks it in a bright, curious child's voice. ----------
+const VOICE = q.has('voice');
 const thoughtEl = document.getElementById('thought'), choicesEl = document.getElementById('choices');
 let voice = null; const spoken = new Set();
 function pickVoice() { const vs = window.speechSynthesis?.getVoices?.() || []; const en = vs.filter(v => /en[-_]US/i.test(v.lang));
@@ -121,20 +118,18 @@ let thought = null; // {text, until, choices}
 function say(text, {choices = null, hold = 0, speak = true} = {}) {
  thought = {text, until: performance.now() + (hold || Math.max(3200, text.length * 85)), choices};
  thoughtEl.textContent = text; thoughtEl.classList.add('on');
- choicesEl.replaceChildren(...(choices || []).map(c => { const b = document.createElement('button'); b.className = 'choice'; b.innerHTML = ICON[c.icon] + `<span>${c.label}</span>`;
+ choicesEl.replaceChildren(...(choices || []).map(c => { const b = document.createElement('button'); b.className = 'choice'; b.textContent = c.label;
   b.addEventListener('pointerdown', e => { e.stopPropagation(); audio(); unlockVoice(); startMusic(); hush(); c.go(); }); return b; }));
  choicesEl.classList.toggle('on', !!choices);
- if (speak) talk(text);
+ document.documentElement.style.setProperty('--chh', choices ? choicesEl.offsetHeight + 8 + 'px' : '0px');
+ if (speak && VOICE) talk(text); // her spoken voice is reserved for a recorded kid voice; ?voice tries the device's
+
 }
 let voiceReady = false, pendingTalk = null;
 function talk(text) { if (!voiceReady) { pendingTalk = text; return; } try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text.replace(/\.\.\./g, '…').replace(/"/g, '')); if (voice) u.voice = voice; u.lang = 'en-US'; u.pitch = 1.6; u.rate = 1.03; speechSynthesis.speak(u); } catch {} }
 function unlockVoice() { if (voiceReady) return; voiceReady = true; if (pendingTalk && thought) { const t = pendingTalk; pendingTalk = null; talk(t); } }
 function hush() { thought = null; thoughtEl.classList.remove('on'); choicesEl.classList.remove('on'); }
 const once = (id, text, o) => { if (spoken.has(id)) return; spoken.add(id); say(text, o); };
-const ICON = {
- switch: '<svg viewBox="0 0 26 26"><rect x="6" y="3" width="14" height="20" rx="3" fill="#e9e1cc" stroke="#7a6a50" stroke-width="1.6"/><rect x="10.5" y="6" width="5" height="9" rx="1.5" fill="#fff" stroke="#7a6a50" stroke-width="1.4"/><circle cx="13" cy="19" r="1.6" fill="#7ee8a0"/></svg>',
- up: '<svg viewBox="0 0 26 26"><path d="M3 22h6v-5h5v-5h5V7h4" fill="none" stroke="#7a5a3a" stroke-width="2.6" stroke-linejoin="round"/><path d="M17 3l5 4-5 4" fill="none" stroke="#c0392b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-};
 
 // ---------- The computer: a real PC in an emulator, on a CRT shader with real grime you wash and dry. ----------
 const pc = new GracePC({sound: k => SFX[k]?.(), found: id => giveCoin(id, U.screen)});
@@ -175,8 +170,8 @@ const crtLight = new T.PointLight('#b8d0ff', 0, 1.6, 2); crtLight.castShadow = f
 scene.add(new T.AmbientLight('#20243a', .16));
 const hall = new T.SpotLight('#ffcf8a', 5, 7, .55, .6, 1.4); hall.position.set(.45, ROOM.landing + 1.8, ROOM.back + .4); hall.target.position.set(1.6, 0, -.4);
 hall.castShadow = true; hall.shadow.mapSize.set(512, 512); scene.add(hall, hall.target);
-// The landing light spills through the open door onto the switch plate, enough to see the three toggles.
-const spill = new T.PointLight('#ffcf8a', .5, 1.4, 2); spill.position.set(ROOM.switch.x - .15, ROOM.switch.y + .25, ROOM.back + .45); scene.add(spill);
+// The little lamp over the switches: enough light to see the three toggles, never enough to see the room.
+const spill = new T.PointLight('#ffcf8a', .55, 1.5, 2); spill.position.copy(U.switchLamp.getWorldPosition(new T.Vector3())).add(new T.Vector3(0, -.06, .1)); scene.add(spill);
 const moon = new T.SpotLight('#5c7cff', 1.6, 6, .5, .8, 1.2); moon.position.set(4.6, 2.3, ROOM.back + .2); moon.target.position.set(5.2, 0, .6); scene.add(moon, moon.target);
 const B = ROOM.bulb, L1 = ROOM.lamp1;
 const bulbSpot = new T.SpotLight('#ffd7a0', 0, 6, .95, .55, 1.3); bulbSpot.position.set(B.x, B.y - .03, B.z); bulbSpot.target.position.set(B.x, 0, B.z);
@@ -212,7 +207,7 @@ const glitter = (() => {
  const m = new T.ShaderMaterial({name: 'glitter flecks', transparent: true, depthWrite: false, blending: T.AdditiveBlending, uniforms: {time: {value: 0}, light: {value: .25}, px: {value: 1}},
   vertexShader: `attribute float seed; attribute vec3 color; uniform float time, light, px; varying vec3 c; varying float a;
    void main(){ vec4 mv = modelViewMatrix * vec4(position, 1.); float w = pow(max(0., sin(time * (1.3 + fract(seed) * 2.) + seed * 7.1 + mv.x * 40.)), 12.);
-    a = (.25 + 2.2 * w) * light; c = color; gl_PointSize = max(1., (1.2 + 2.5 * w) * px * 2. / -mv.z); gl_Position = projectionMatrix * mv; }`,
+    a = (.25 + 2.2 * w) * light; c = color; gl_PointSize = clamp((.8 + 2. * w) * px * .9 / -mv.z, 1., 3. + 3. * w); gl_Position = projectionMatrix * mv; }`,
   fragmentShader: 'varying vec3 c; varying float a; void main(){ vec2 d = abs(gl_PointCoord - .5); float s = max(1. - (d.x + d.y) * 2.2, 0.) + max(0., 1. - d.x * 9.) * max(0., 1. - d.y * 2.) + max(0., 1. - d.y * 9.) * max(0., 1. - d.x * 2.); gl_FragColor = vec4(c * a * s, 1.); }'});
  const pts = new T.Points(g, m); pts.name = 'glitter'; pts.raycast = () => {}; scene.add(pts);
  return {m, top: box.max.y};
@@ -222,15 +217,27 @@ const glitter = (() => {
 const rt = new T.WebGLRenderTarget(320, 200, {magFilter: T.NearestFilter, minFilter: T.NearestFilter, type: T.HalfFloatType});
 rt.texture.colorSpace = T.LinearSRGBColorSpace;
 const post = new T.Mesh(new T.PlaneGeometry(2, 2), new T.ShaderMaterial({
- uniforms: {src: {value: rt.texture}, res: {value: new T.Vector2(320, 200)}, dither: {value: 1}},
+ uniforms: {src: {value: rt.texture}, res: {value: new T.Vector2(320, 200)}, dither: {value: 1}, boot: {value: 0}, t: {value: 0}},
  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }',
- fragmentShader: `uniform sampler2D src; uniform vec2 res; uniform float dither; varying vec2 vUv;
+ fragmentShader: `uniform sampler2D src; uniform vec2 res; uniform float dither, boot, t; varying vec2 vUv;
   float bayer(vec2 p){ int x = int(mod(p.x, 4.)), y = int(mod(p.y, 4.)); int i = x + y * 4;
    float m[16]; m[0]=0.;m[1]=8.;m[2]=2.;m[3]=10.;m[4]=12.;m[5]=4.;m[6]=14.;m[7]=6.;m[8]=3.;m[9]=11.;m[10]=1.;m[11]=9.;m[12]=15.;m[13]=7.;m[14]=13.;m[15]=5.;
    for (int k = 0; k < 16; k++) if (k == i) return m[k] / 16. - .5; return 0.; }
   void main(){ vec3 c = texture2D(src, vUv).rgb; c = pow(max(c, 0.), vec3(1. / 2.2));
    float lv = mix(255., 9., dither); vec3 d = c + bayer(floor(vUv * res)) * dither / lv;
-   c = mix(c, floor(d * lv + .5) / lv, dither); gl_FragColor = vec4(c, 1.); }`,
+   c = mix(c, floor(d * lv + .5) / lv, dither);
+   // An 80s set warming up: black with a faint grey glow, a bright line opening into a grey-black picture, then colour.
+   if (boot < 3.4) {
+    vec2 p = vUv - .5; float glow = .07 * smoothstep(1.4, 0., boot) * smoothstep(0., .8, boot) * (1. - length(p) * 1.6);
+    float open = smoothstep(1.3, 2.2, boot), band = smoothstep(open * .5 + .004, open * .5, abs(p.y));
+    float line = smoothstep(.006, 0., abs(p.y)) * smoothstep(1.1, 1.35, boot) * (1. - open) * 1.6;
+    float scan = .82 + .18 * sin(vUv.y * res.y * 3.14159) + .03 * sin(t * 50. + vUv.y * 30.);
+    float lum = dot(c, vec3(.3, .59, .11));
+    vec3 grey = vec3(lum * .55 + .03) * scan;
+    vec3 warm = mix(grey, c, smoothstep(2.4, 3.4, boot));
+    c = vec3(max(glow, 0.)) * vec3(.85, .9, .9) + warm * band + vec3(line);
+   }
+   gl_FragColor = vec4(c, 1.); }`,
  depthTest: false, depthWrite: false}));
 const postScene = new T.Scene(); postScene.add(post); const postCam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
@@ -239,12 +246,13 @@ const me = {x: .35, target: .35, face: 1, state: 'standing', seated: 0, walkT: 0
 let anim = '';
 const act = (name, fade) => { if (!rigged || anim === name) return; anim = name; kid.userData.play(name, fade); };
 function placeKid(dt) {
- const dx = me.target - me.x, speed = 1.15;
+ const onStairs = me.x > ROOM.stairs[0] - .05 && me.x < ROOM.stairs[1] + .05, dx = me.target - me.x, speed = onStairs ? .42 : .72; // slow and careful: the stairs are steep
+ if (rigged && kid.userData.actions.walk) kid.userData.actions.walk.timeScale = speed / .9;
  const walking = me.state === 'walking' && Math.abs(dx) > .01;
- if (walking) { const step = Math.sign(dx) * Math.min(Math.abs(dx), speed * dt); me.x += step; me.face = Math.sign(dx); me.walkT += dt * 7.5;
+ if (walking) { const step = Math.sign(dx) * Math.min(Math.abs(dx), speed * dt); me.x += step; me.face = Math.sign(dx); me.walkT += dt * 7.5 * speed / 1.15;
   const ph = Math.floor(me.walkT / Math.PI); if (ph !== me.lastPh) { me.lastPh = ph; (me.x < ROOM.stairs[1] ? SFX.stepWood : Math.abs(me.x - 5.1) < 1.2 ? SFX.stepRug : SFX.stepStone)(); } }
  else if (me.state === 'walking') { me.state = 'standing'; const f = me.after; me.after = null; f?.(); }
- const sit = me.seated, y = floorY(me.x);
+ const sit = me.seated, fy = floorY(me.x); me.y = me.y === undefined ? fy : me.y + (fy - me.y) * Math.min(1, dt * 9); const y = me.y;
  kid.position.set(T.MathUtils.lerp(me.x, ROOM.chair.x + (rigged ? .02 : 0), sit), T.MathUtils.lerp(y, rigged ? SEAT_Y : 0, sit) + (walking && !rigged ? Math.abs(Math.sin(me.walkT)) * .025 : 0), T.MathUtils.lerp(ROOM.walkZ, ROOM.chair.z, sit) - me.gone * .9);
  const yaw = rigged ? (me.face > 0 ? Math.PI / 2 : -Math.PI / 2) : (me.face > 0 ? 0 : Math.PI), seatYaw = rigged ? Math.PI / 2 : 0;
  const want = me.gone > .01 ? (rigged ? Math.PI : -Math.PI / 2) : sit > .3 ? seatYaw : yaw;
@@ -464,7 +472,7 @@ function goBack() { hush(); walkTo(.32, () => { me.goneT = performance.now(); SF
 
 // ---------- Disks and coins. ----------
 let inDrive = null;
-const flying = [];
+const flying = [], rewards = [];
 function insertDisk(disk) {
  if (disk === inDrive || flying.some(f => f.disk)) return;
  if (inDrive) { const old = inDrive; room.getObjectByName('disk box').attach(old); old.position.copy(old.userData.home.p); old.rotation.copy(old.userData.home.r); old.visible = true; }
@@ -492,17 +500,20 @@ for (let i = 0; i < Math.min(found.length, 10); i++) U.addJarCoin();
 function giveCoin(id, from) {
  if (found.includes(id)) return;
  found.push(id); try { localStorage.setItem(STORE, JSON.stringify(found)); } catch {}
- const coin = createCoin(.035); scene.add(coin);
+ const coin = createCoin(.035);
  const a = from.getWorldPosition(new T.Vector3()); if (from === U.screen) a.add(new T.Vector3(-.15, 0, 0)); else a.y += .12;
  const top = a.clone().add(new T.Vector3(0, .35, 0)), jarTop = U.jar.getWorldPosition(new T.Vector3()).add(new T.Vector3(0, .32, 0)), jarIn = jarTop.clone().add(new T.Vector3(0, -.25, 0));
  // Canon (Evan, 2026-10-23): the gold coins are Daddy's core memories, one for each of his memory places.
- SFX.chime(); say(MEMORY[id] || (found.length === 1 ? "A gold coin... it's one of Daddy's memories!" : "Another one of Daddy's memories!"), {hold: 4200});
- flying.push({t: 0, dur: 2.1, step(e) {
+ // The shared gold coin reward (also the school roof's): it lifts toward you in warm light with a fanfare, then the
+ // coin drops into Grace's jar.
+ rewards.push({r: coinReward(T, {scene, camera, from: a, audio: audio(), presentation}), then: () => { scene.add(coin); flying.push(jarFlight); }});
+ say(MEMORY[id] || (found.length === 1 ? "A gold coin... it's one of Daddy's memories!" : "Another one of Daddy's memories!"), {hold: 4200});
+ const jarFlight = {t: 0, dur: 1.6, step(e) {
   coin.rotation.set(Math.PI / 2, 0, 0); coin.rotateOnWorldAxis(new T.Vector3(0, 1, 0), e * 30);
   if (e < .35) coin.position.copy(a).lerp(top, smooth(e / .35));
   else if (e < .85) { const k = smooth((e - .35) / .5); coin.position.copy(top).lerp(jarTop, k); coin.position.y += Math.sin(k * Math.PI) * .4; }
   else coin.position.copy(jarTop).lerp(jarIn, (e - .85) / .15);
- }, done() { scene.remove(coin); U.addJarCoin(); blip({f: 1400, t: .08, type: 'square', g: .04}); if (found.length === 10) { [523, 659, 784, 1047, 1319].forEach((f, i) => blip({f, t: .3, type: 'square', g: .045, at: .4 + i * .14})); say("All ten! Daddy's whole basement, remembered."); } }});
+ }, done() { scene.remove(coin); U.addJarCoin(); blip({f: 1400, t: .08, type: 'square', g: .04}); if (found.length === 10) { [523, 659, 784, 1047, 1319].forEach((f, i) => blip({f, t: .3, type: 'square', g: .045, at: .4 + i * .14})); say("All ten! Daddy's whole basement, remembered."); } }};
 }
 
 // ---------- Keys: the real keyboard goes to the computer while she sits at the screen. ----------
@@ -530,8 +541,8 @@ volunteer('grace-basement', {place: "Grace's basement", dialect: 'Basement, 1986
 ]});
 
 // ---------- Loop. ----------
-let last = performance.now(), time = 0, pixH = 210;
-await Promise.race([Promise.all([document.fonts.load('20px VT323'), document.fonts.load('20px "Patrick Hand"')]), new Promise(r => setTimeout(r, 1500))]);
+let last = performance.now(), time = 0, pixH = 210, hummed = false, opened = false; const skipBoot = q.has('lit') || q.has('done') || q.has('sit') || q.has('noboot');
+await Promise.race([Promise.all([document.fonts.load('20px VT323')]), new Promise(r => setTimeout(r, 1500))]);
 const headPos = new T.Vector3();
 function frame(now) {
  const rdt = Math.min(.25, (now - last) / 1000), dt = Math.min(.05, rdt); last = now; time += dt;
@@ -540,6 +551,7 @@ function frame(now) {
   if (s > 1.15 && !me.shut) { me.shut = true; SFX.door(); if (fromCafe) setTimeout(() => { location.href = '/#cafe-study'; }, 600); }
   if (!fromCafe && s > 3 && !me.back) { me.back = true; SFX.door(); say("...but what's down there? I have to know."); } if (!fromCafe && s > 4.2) { me.goneT = 0; me.gone = 0; me.shut = me.back = false; } }
  placeKid(dt);
+ for (const w of [...rewards]) if (!w.r.update(rdt)) { rewards.splice(rewards.indexOf(w), 1); w.then(); }
  for (const f of [...flying]) { f.t = Math.min(1, f.t + rdt / f.dur); f.step(f.t); if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done(); } }
  if (plugFlying) { plugK = Math.min(1, plugK + rdt * 1.6); U.setPlug(smooth(plugK)); if (plugK >= 1) { plugFlying = false; SFX.plug(); chores.plug = true; tick(); say('Plugged in!'); } }
  // Lamps: the first is plain; the second flickers on, or glows a useless brown when the pattern is wrong.
@@ -556,7 +568,7 @@ function frame(now) {
  for (let i = 0; i < dustN; i++) { const [r, a, h] = dustSeed[i], hh = (h + time * .02 * (1 + r)) % 1, y = B.y - .2 - hh * (B.y - .3), rad = (B.y - y) / coneH * 1.1 * Math.sqrt(r);
   dustP[i * 3] = B.x + Math.cos(a + time * .1) * rad; dustP[i * 3 + 1] = y; dustP[i * 3 + 2] = B.z + Math.sin(a + time * .1) * rad; }
  dustG.attributes.position.needsUpdate = true;
- glitter.m.uniforms.time.value = time; glitter.m.uniforms.light.value = .3 + .7 * Math.max(light2, light1 * .5) + (pc.on ? .2 : 0); glitter.m.uniforms.px.value = pixH / 200;
+ glitter.m.uniforms.time.value = time; glitter.m.uniforms.light.value = .3 + .7 * Math.max(light2, light1 * .5) + (pc.on ? .2 : 0); glitter.m.uniforms.px.value = Math.min(2.5, pixH / 200);
  // Music: faint on the stairs, fuller near the computer, a little hushed once it's on and talking for itself.
  if (music) { const near = 1 - T.MathUtils.clamp(Math.abs(kid.position.x - 5.5) / 5, 0, 1), target = (.004 + .05 * near * near) * (light1 ? 1 : .5) * (pc.on ? .55 : 1); music.gain.gain.value += (target - music.gain.gain.value) * Math.min(1, dt * 2); }
  if (lightsOn() && kid.position.x > 4 && !spoken.has('desk') && cam.mode === 'side') { spoken.add('desk'); say("Grace's computer! It's so old... there's a list on the clipboard."); }
@@ -568,22 +580,16 @@ function frame(now) {
  placeCamera(dt);
  // Seated at the desk the camera is her eyes, so she steps out of her own view.
  kid.visible = !(me.state === 'seated' && ['desk', 'screen', 'close'].includes(cam.mode));
- // Her thought rides above her head (spatial layer); in a close-up it waits at the top of the view.
- if (thought) {
-  if (now > thought.until && !thought.choices) hush();
-  else { kid.getWorldPosition(headPos); headPos.y += rigged ? 1.32 : 1.25; headPos.project(camera);
-   const onScreen = cam.mode === 'side' && headPos.z < 1, sx = (headPos.x + 1) / 2 * innerWidth, sy = (1 - headPos.y) / 2 * innerHeight;
-   const px = onScreen ? T.MathUtils.clamp(sx, 160, innerWidth - 160) : innerWidth / 2, py = onScreen ? T.MathUtils.clamp(sy, 110, innerHeight - 140) : Math.max(100, innerHeight * .16);
-   thoughtEl.style.transform = `translate(${px}px,${py}px) translate(-50%,-100%)`; const cw = choicesEl.offsetWidth / 2 + 10, cx = T.MathUtils.clamp(px, cw, innerWidth - cw);
-   choicesEl.style.transform = `translate(${cx}px,${py + 44}px) translate(-50%,0)`; }
- }
+ if (thought && now > thought.until && !thought.choices) hush();
+ if (!skip && !opened && time > 3.6) { opened = true; opening(); }
  // Resolution climbs from chunky pixels in the room to a crisp tube at the screen.
  const fullH = Math.min(innerHeight * Math.min(devicePixelRatio, 2), 1200);
  const aspect = innerWidth / innerHeight, chunky = aspect < 1 ? Math.min(420, 190 / aspect) : Math.max(200, Math.min(240, innerHeight / 3));
  pixH = T.MathUtils.lerp(chunky, fullH, atScreen);
  const h = Math.round(pixH), w = Math.round(h * innerWidth / innerHeight);
  if (rt.width !== w || rt.height !== h) { rt.setSize(w, h); post.material.uniforms.res.value.set(w, h); }
- post.material.uniforms.dither.value = 1 - atScreen;
+ post.material.uniforms.dither.value = 1 - atScreen; post.material.uniforms.boot.value = skipBoot ? 9 : time; post.material.uniforms.t.value = time;
+ if (!skipBoot && time > .2 && time < 1.4 && !hummed) { hummed = true; blip({f: 15700, t: 1.4, type: 'sine', g: .006}); blip({noise: true, t: .25, g: .05, lp: 600, at: 1.1}); }
  renderer.setRenderTarget(rt); renderer.render(scene, camera); renderer.setRenderTarget(null); renderer.render(postScene, postCam);
  requestAnimationFrame(frame);
 }
@@ -596,11 +602,12 @@ if (skip) { sw[0] = sw[2] = true; setLights(true); light1 = light2 = 1; spoken.a
 if (q.has('x')) { me.x = me.target = +q.get('x'); }
 if (q.has('done') || q.has('sit')) { chores.plug = true; U.setPlug(1); chores.wash = chores.dry = 1; gx.clearRect(0, 0, GW, GH); grimeTex.needsUpdate = true; chores.power = true; U.rocker.rotation.z = -.18; pc.powerOn(); U.clipboard.userData.setTicks(ticks()); }
 if (q.has('sit')) { me.x = me.target = ROOM.chair.x - .02; setTimeout(sitDown, 300); }
-if (!skip) setTimeout(() => say("It's dark in here... it feels old.", {choices: [
- {icon: 'switch', label: 'Try the switches', go: toSwitches},
- {icon: 'up', label: 'Go back up', go: goBack}]}), 900);
+// The opening thought comes once the old set has warmed up (counted in game time, so a slow phone still gets its full 3 s).
+const opening = () => say("It's dark in here... it feels old.", {choices: [
+ {label: 'Try the switches', go: toSwitches},
+ {label: 'Go back up', go: goBack}]});
 requestAnimationFrame(frame);
-window.basement = {me, pc, cam, chores, sw, flipToggle, sitDown, standUp, walkTo, glide, insertDisk, giveCoin, plugIn, powerSwitch, startWash, scrub: uv => scrub(uv), closeUp, leaveClose, U, say, get kid() { return kid; }, get rigged() { return rigged; }};
+window.basement = {me, pc, cam, chores, sw, flipToggle, sitDown, standUp, walkTo, glide, insertDisk, giveCoin, plugIn, powerSwitch, startWash, scrub: uv => scrub(uv), closeUp, leaveClose, U, say, get kid() { return kid; }, get rigged() { return rigged; }, get time() { return time; }};
 </script>
 </body>
 </html>
