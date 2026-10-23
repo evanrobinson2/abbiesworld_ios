@@ -315,13 +315,13 @@ const LINES = {
  wrong: ['Oops.', 'Breathe. Find the shiny one.', 'Arms getting wobbly...', 'You can do it. One more good grab.'],
  loose: 'Whoa, that one wiggles!', tired: 'Whew. Noodle arms. Let\'s try again.', top: 'Made it!', firstBall: 'There\'s one!', full: 'My hands are full. Throw some to bub.', dog: ['Good dog!', 'Catch, bub!', 'Go get it!', 'Good catch!'],
  busted: 'Hey! You! Down off that roof!', afterBust: 'Oops. Watch the cars next time.', gym: 'The gym roof. Higher.', notYet: 'Not yet. There are still balls up here.',
- hang: 'Wait for it...', home: 'Now home. Same way down.', allBalls: 'Thirty-one! That\'s all of them!', missDrop: 'Not yet... pull back up.', drop: 'Yes!', coin: 'A gold coin! One of Daddy\'s memories.', done: 'Best day ever, bub.',
+ hang: 'Wait for it...', home: 'Now home. Same way down.', allBalls: 'Thirty-one! That\'s all of them!', missDrop: 'Not yet... pull back up.', drop: 'Yes!', coin: 'Made it onto the canopy! I\'m keeping this one forever.', done: 'Best day ever, bub.',
  softer: ['Too hard. Softer.', 'Whoa, easy.', 'A little softer.'], harder: ['Too soft. Harder!', 'Bit harder.', 'Put some arm into it!'],
  bigJump: 'That seems like a big jump. Maybe I shouldn\'t do it.', listened: 'Maybe next time, bub. Let\'s go home.',
  janitor: 'Hey! What are you doing up there? Get down! I\'m calling the police!', jump: 'Uh oh. Gotta go!', ankle: 'Ow, ow, ow! My ankle!',
  hurry: 'Bub\'s waiting. Better get moving.',
  // grown-up Daddy, years later, closing the memory: the little voice was right too
- outroHollywood: 'I never told anyone about that coin. Don\'t try this at home, okay?', outroListened: 'That little voice was right. It was a big jump.',
+ outroHollywood: 'I never told anyone about that star on the roof. Don\'t try this at home, okay?', outroListened: 'That little voice was right. It was a big jump.',
  outroJanitor: 'I nearly broke my ankle that night. That\'s why you never, ever try this at home.',
 };
 let lineN = 0; const pickLine = arr => arr[lineN++ % arr.length];
@@ -773,7 +773,7 @@ function frame(now) {
    fly(b.m, b.m.position.clone(), kid.position.clone().add(v3(0, 1, 0)), kid.position.y + 1.4, .25, () => { b.m.visible = false; if (b.state === 'pickup') b.state = 'carried'; });
   }
   // no coin any more (every reward is a backpack charm): the memory is getting onto the canopy, and the Star charm was won on the roof
-  if (S.lvl === 'canopy' && S.mode === 'roof' && !S.coinDone) { S.coinDone = true; S.dogHop = 1; SFX.bark(); addScore(1000, null); }
+  if (S.lvl === 'canopy' && S.mode === 'roof' && !S.coinDone) { S.coinDone = true; S.dogHop = 1; SFX.bark(); addScore(1000, null); say(LINES.coin); }
   if (S.lvl === 'canopy' && S.coinDone) { S.dawdle = (S.dawdle || 0) + dt; if (S.dawdle > 9 && !S.said.hurry) { S.said.hurry = 1; say(LINES.hurry); } if (S.dawdle > 20) janitorEnding(); }
  }
  for (const b of balls) if (b.state === 'roof') b.m.position.y = b.home.y + Math.abs(Math.sin(time * 2 + b.bob)) * .04;
