@@ -1,0 +1,83 @@
+{
+  "appid": 1135690,
+  "name": "Unpacking",
+  "store_url": "https://store.steampowered.com/app/1135690/",
+  "genres": [
+    "Puzzle",
+    "Cozy",
+    "Narrative"
+  ],
+  "short_description": "Unpack boxes into a new home, one move at a time, and learn a life from the things you carry.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Cozy",
+    "Narrative"
+  ],
+  "summary": "Unpack boxes into a new home, one move at a time, and learn a life from the things you carry.",
+  "identity": {
+    "core_loop": "Open a box, pull out one object, find where it belongs, place it; when the box is empty the room tells you who lives here.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tactile and calm; every object clicks and thuds with its own sound.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.52,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "No words at all: the story lives in the objects and the rooms. A soft highlight shows a thing that is in the wrong place at the end of a level.",
+      "confidence": 0.75,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Clean pixel-art rooms at one fixed isometric angle, every object a readable little sprite.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "pixel_art",
+      "family": "pixel",
+      "light": "painted_in",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "pixel",
+      "post": [],
+      "signature": "Every object is a crisp little sprite with a soft dark outline, placed in a clean isometric room under flat even light.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.65,
+      "lesson": "Readability first: one even light and a thin outline make hundreds of small objects legible at a glance."
+    },
+    "palette": null,
+    "audio_mood": "Gentle acoustic music; a different foley sound for every object on every surface.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Tell a story with objects only, and give every placement its own sound. Zero words, zero fail, a clear finish when the room is done."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.22,
+      "expression": 0.78,
+      "structure": 0.44,
+      "social": 0.44,
+      "systems": 0.11,
+      "chance": 0.22,
+      "session": 0.0
+    },
+    "confidence": 0.75
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

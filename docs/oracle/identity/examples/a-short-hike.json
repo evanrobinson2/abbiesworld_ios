@@ -1,0 +1,335 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "A Short Hike",
+    "developer": "adamgryu",
+    "publisher": "adamgryu",
+    "release": "2019",
+    "steam_appid": 1055540
+  },
+  "core": {
+    "fantasy": "You are a young bird on a weekend at a park, hiking, climbing and gliding up a little mountain to get a phone signal.",
+    "pillars": [
+      "Climb anywhere, glide down",
+      "Small island, fully readable",
+      "Kind people, no pressure"
+    ],
+    "signature_moment": "Your last golden feather runs out just as you grab the cliff top, and the whole island spreads out below you.",
+    "anti_goals": [
+      "no combat",
+      "no fail screen",
+      "no long tutorial"
+    ],
+    "signatures": [
+      {
+        "id": "feather_stamina",
+        "layer": "mechanics",
+        "description": "Golden feathers you find are your climbing stamina, shown as a small row that empties as you climb.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "readable_island",
+        "layer": "pacing",
+        "description": "A small island you can see whole from the peak; every path is visible before you take it.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "low_res_crisp",
+        "layer": "art",
+        "description": "Low-poly 3D rendered at low resolution and scaled up with crisp pixels.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "glide_as_reward",
+        "layer": "interaction",
+        "description": "Gliding down is the payoff of every climb, and falling is never punished.",
+        "class": "style",
+        "confidence": 0.7
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "discovery": 0.4,
+        "sensation": 0.2,
+        "submission": 0.2,
+        "narrative": 0.2
+      },
+      "emotional_targets": {
+        "freedom": 0.9,
+        "calm": 0.8,
+        "pride": 0.6
+      },
+      "audience": {
+        "age": "everyone, including children",
+        "skill_floor": "low",
+        "context": "one or two evenings"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "walk",
+          "input": "stick"
+        },
+        {
+          "verb": "jump",
+          "input": "button"
+        },
+        {
+          "verb": "climb",
+          "input": "walk into a wall"
+        },
+        {
+          "verb": "glide",
+          "input": "hold jump"
+        },
+        {
+          "verb": "talk",
+          "input": "button"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "look up",
+          "climb until the feathers run out",
+          "land on a ledge",
+          "glide down",
+          "find another feather",
+          "climb higher"
+        ],
+        "period_s": {
+          "value": 120,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "none",
+        "win": "reach the peak",
+        "resources": [
+          "golden feathers",
+          "coins"
+        ]
+      },
+      "randomness": {
+        "amount": 0.05,
+        "kind": "none"
+      },
+      "information": "perfect",
+      "systems": [
+        "stamina climbing",
+        "gliding",
+        "side activities"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 5,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "controller",
+          "keyboard"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "third_person",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "none",
+        "undo": "no",
+        "preview_before_commit": false,
+        "auto_repair": true
+      },
+      "juice": {
+        "particles": 0.4,
+        "sound_on_action": 0.8,
+        "squash_stretch": 0.3,
+        "scale_pop": 0.2,
+        "camera_kick": 0.1,
+        "screen_shake": 0.0,
+        "hit_stop": 0.0,
+        "procedural_settle": 0.0
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "mixed",
+        "family": "pixel_3d",
+        "light": "soft_wrap",
+        "outlines": false,
+        "outline": "none",
+        "surface": "flat_colour",
+        "post": [
+          "low resolution"
+        ],
+        "signature": "Simple low-poly 3D rendered at a low resolution and scaled up with crisp pixels, so soft colours and shapes read like pixel art.",
+        "lesson": "Rendering small and scaling up crisp is a one-line look that makes simple models charming."
+      },
+      "references": [
+        "summer camps and park trails",
+        "low-resolution 3D of early consoles",
+        "picture-book animals"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "body": {
+          "mix": {
+            "overlay": 0.6,
+            "diegetic": 0.4
+          },
+          "timing": "on_change",
+          "note": "A small row of feathers shows while you climb; the bird slows when tired.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "navigation": {
+          "mix": {
+            "diegetic": 0.7,
+            "overlay": 0.3
+          },
+          "timing": "summoned",
+          "note": "Signs, paths and hikers point the way; a paper map is summoned.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "diegetic": 1.0
+          },
+          "timing": "on_change",
+          "note": "People tell you what they need; the peak is always in view.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "world_material",
+        "fade_rule": "Feathers show while climbing, then hide."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "height and area",
+            "channels": [
+              "music",
+              "weather",
+              "sound"
+            ]
+          }
+        ],
+        "max_channels": 3
+      },
+      "note": "Golden feathers in a small row show how much climb you have; the park's signs, hikers and paths point the way. A paper map is summoned."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.4,
+        "enacted": 0.3,
+        "emergent": 0.3
+      },
+      "tone": {
+        "cozy_tense": -0.8,
+        "whimsical_grounded": -0.5,
+        "earnest_ironic": -0.3,
+        "quiet_loud": -0.6,
+        "handmade_industrial": -0.8
+      },
+      "themes": [
+        "freedom",
+        "family",
+        "small adventures"
+      ]
+    },
+    "pacing": {
+      "structure": "sandbox",
+      "tension_curve": "flat_calm",
+      "failure_cost": "none"
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.22,
+      "social": 0.33,
+      "systems": 0.22,
+      "chance": 0.44,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "ledger": {
+    "style": [
+      "collectable climbing stamina",
+      "readable small island",
+      "low-resolution crisp-pixel rendering",
+      "glide as the reward"
+    ],
+    "expression": [
+      "its bird characters and dialogue",
+      "its island layout",
+      "its music"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "mechanics",
+        "target": "School Jump latch climb",
+        "setting": "Climbing uses a small stamina that grows with things you find; running out just slides you down, safely.",
+        "from_signature": "feather_stamina"
+      },
+      {
+        "layer": "interaction",
+        "target": "School Jump feel",
+        "setting": "Every climb ends with a gentle glide or jump down as the reward.",
+        "from_signature": "glide_as_reward"
+      },
+      {
+        "layer": "pacing",
+        "target": "School Jump level",
+        "setting": "Let the goal be visible from the start, with every route readable before you try it.",
+        "from_signature": "readable_island"
+      }
+    ],
+    "leave": [
+      "its characters",
+      "its island",
+      "pixelated rendering as our main look"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

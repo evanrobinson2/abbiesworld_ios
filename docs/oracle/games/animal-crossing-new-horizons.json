@@ -1,0 +1,87 @@
+{
+  "appid": null,
+  "name": "Animal Crossing: New Horizons",
+  "store_url": null,
+  "genres": [
+    "Life sim",
+    "Cozy",
+    "Social"
+  ],
+  "short_description": "Move to an island, gather, build, decorate and befriend animal neighbours in real time, across the real seasons.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Life sim",
+    "Cozy",
+    "Social"
+  ],
+  "summary": "Move to an island, gather, build, decorate and befriend animal neighbours in real time, across the real seasons.",
+  "identity": {
+    "core_loop": "Wake up, see what changed on the island, gather and catch, sell, buy, decorate, talk to neighbours, come back tomorrow.",
+    "mechanics": null,
+    "ui_and_game_feel": "Gentle and generous; a day is short and there is always one more small thing.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The island carries the information: the real clock sets the light, the season, the shop hours and the creatures. Neighbours tell you news. A phone with apps is summoned; the screen is almost empty while you walk.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Soft rounded toy-like characters and island, with the world curving away from the camera.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "toon",
+      "family": "toon",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "bloom",
+        "depth of field"
+      ],
+      "signature": "Soft wrapped light on round chunky toy shapes, with the whole island bent away from the camera like a rolling log so the horizon stays close and cosy.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.7,
+      "lesson": "Curving the world away from the camera keeps a small place feeling big but safe; we can bend the Ranch the same way in a vertex shader."
+    },
+    "palette": null,
+    "audio_mood": "Hourly music that changes through the day; soft footsteps on every ground type.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "The real clock and real seasons as the heartbeat; neighbours who notice what you did. Come back tomorrow is a stronger pull than any goal."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.22,
+      "expression": 0.78,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.33,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

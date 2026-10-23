@@ -1,0 +1,332 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Untitled Goose Game",
+    "developer": "House House",
+    "publisher": "Panic",
+    "release": "2019",
+    "steam_appid": 837470
+  },
+  "core": {
+    "fantasy": "You are a silly goose in a sleepy village, sneaking up on people to pull pranks from a to-do list.",
+    "pillars": [
+      "Getting caught is funny",
+      "People are the stealth meter",
+      "Sneak, grab, honk, run"
+    ],
+    "signature_moment": "You tiptoe up behind the gardener, snatch his hat, honk, and flap away while he chases you round the garden.",
+    "anti_goals": [
+      "no fail screen",
+      "no violence",
+      "no words on screen in play"
+    ],
+    "signatures": [
+      {
+        "id": "people_are_the_meter",
+        "layer": "information_grammar",
+        "description": "Villagers look up, turn, chase and shoo: their bodies are the whole stealth readout.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "caught_is_comedy",
+        "layer": "mechanics",
+        "description": "Being seen means being chased and shooed, then you try again; never a game over.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "reactive_piano",
+        "layer": "audio",
+        "description": "Piano music follows the action, quiet while sneaking and racing when you are spotted.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "flat_ink_look",
+        "layer": "art",
+        "description": "Flat unlit colour shapes with soft tinted shadows, like a picture book printed in a few inks.",
+        "class": "style",
+        "confidence": 0.7
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "fantasy": 0.3,
+        "challenge": 0.25,
+        "discovery": 0.25,
+        "expression": 0.2
+      },
+      "emotional_targets": {
+        "mischief": 0.9,
+        "laughter": 0.9,
+        "tension": 0.3
+      },
+      "audience": {
+        "age": "everyone, including young children",
+        "skill_floor": "low",
+        "context": "couch, family, two players"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "sneak",
+          "input": "hold crouch"
+        },
+        {
+          "verb": "grab",
+          "input": "button"
+        },
+        {
+          "verb": "drag",
+          "input": "hold"
+        },
+        {
+          "verb": "honk",
+          "input": "button"
+        },
+        {
+          "verb": "flap",
+          "input": "button"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "read the to-do list",
+          "sneak close",
+          "grab or honk",
+          "run off",
+          "hide",
+          "tick it off"
+        ],
+        "period_s": {
+          "value": 120,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "none",
+        "win": "finish the to-do list for each area",
+        "resources": []
+      },
+      "randomness": {
+        "amount": 0.1,
+        "kind": "none"
+      },
+      "information": "perfect",
+      "systems": [
+        "villager sight and reactions",
+        "physics props",
+        "adaptive music"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 5,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "controller",
+          "keyboard"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "third_person",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "none",
+        "undo": "no",
+        "preview_before_commit": false,
+        "auto_repair": true
+      },
+      "juice": {
+        "sound_on_action": 1.0,
+        "squash_stretch": 0.4,
+        "particles": 0.2,
+        "scale_pop": 0.2,
+        "camera_kick": 0.1,
+        "screen_shake": 0.0,
+        "hit_stop": 0.0,
+        "procedural_settle": 0.2
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "mixed",
+        "family": "graphic_minimal",
+        "light": "flat",
+        "outlines": false,
+        "outline": "none",
+        "surface": "flat_colour",
+        "post": [],
+        "signature": "Flat unlit colour shapes with no textures and soft colour-tinted shadows, like a picture book printed in a few inks.",
+        "lesson": "Tinted shadows instead of grey ones keep a flat-colour world warm and readable from far away."
+      },
+      "references": [
+        "picture books printed in a few colours",
+        "English village gardens",
+        "silent comedy"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "threat": {
+          "mix": {
+            "diegetic": 0.8,
+            "spatial": 0.2
+          },
+          "timing": "on_change",
+          "note": "People look up, turn and run at you; a small exclamation when they spot you.",
+          "confidence": 0.8,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "overlay": 0.6,
+            "diegetic": 0.4
+          },
+          "timing": "summoned",
+          "note": "A handwritten notepad you summon and tick off.",
+          "confidence": 0.8,
+          "source": "estimate"
+        },
+        "social": {
+          "mix": {
+            "diegetic": 0.9,
+            "spatial": 0.1
+          },
+          "timing": "on_change",
+          "note": "Gestures and grumbles, no words.",
+          "confidence": 0.7,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "world_material",
+        "fade_rule": "Nothing on screen while you play; the notepad when you ask for it."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "spotted or sneaking",
+            "channels": [
+              "music",
+              "npcs",
+              "sound"
+            ]
+          }
+        ],
+        "max_channels": 3
+      },
+      "note": "The villagers are the stealth meter: they look up, turn, chase and shoo. The to-do list is a notepad you summon and tick off. Nothing on screen while you play."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "emergent": 0.6,
+        "enacted": 0.3,
+        "evoked": 0.1
+      },
+      "tone": {
+        "cozy_tense": -0.4,
+        "whimsical_grounded": -0.8,
+        "earnest_ironic": 0.5,
+        "quiet_loud": -0.3,
+        "handmade_industrial": -0.7
+      },
+      "themes": [
+        "mischief",
+        "village life"
+      ]
+    },
+    "pacing": {
+      "structure": "puzzle_levels",
+      "tension_curve": "sawtooth",
+      "failure_cost": "none"
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.22,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.85
+  },
+  "ledger": {
+    "style": [
+      "people as the stealth meter",
+      "caught means chased, not failed",
+      "music that follows sneaking",
+      "to-do list as the goal",
+      "flat colour with tinted shadows"
+    ],
+    "expression": [
+      "the goose and villagers",
+      "its village layout and pranks",
+      "its piano arrangements",
+      "its notepad art"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "information_grammar",
+        "target": "School Jump stealth",
+        "setting": "The grown-ups are the stealth meter: they look up, turn and walk over; nothing on screen.",
+        "from_signature": "people_are_the_meter"
+      },
+      {
+        "layer": "mechanics",
+        "target": "School Jump rules",
+        "setting": "Being spotted means a friendly chase back to the start of the bit, never a fail screen.",
+        "from_signature": "caught_is_comedy"
+      },
+      {
+        "layer": "audio",
+        "target": "Music director",
+        "setting": "Music drops to soft notes while sneaking and speeds up when someone notices you.",
+        "from_signature": "reactive_piano"
+      }
+    ],
+    "leave": [
+      "the goose and its village",
+      "its specific pranks"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}
