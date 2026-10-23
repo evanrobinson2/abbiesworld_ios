@@ -1,0 +1,358 @@
+{
+ "id": "pin_board",
+ "name": "Pin board",
+ "group": "Back bar",
+ "tier": "support",
+ "intent": "The caf\u00e9's life story, told by what is pinned up (no words): two photo-booth strips say friends come here and love\nthe booth, a crayon drawing says little kids do too, a moon postcard says somebody dreams of space, and a lost lime mitten\nsays someone left in a hurry. Hangs on the wall behind the machines, front at -Y like the menu board.",
+ "real": "cork pin board in a honey-oak frame, about 900 x 600 mm, with photo strips, a crayon drawing, a postcard and a lost mitten held by push pins",
+ "moving": "the pinned things lift off their pins; the mitten swings",
+ "reference": "Context pass 2026-10-23: Unpacking (Witch Beam, GDC 2022) \"No item? No trait!\"; MAGES set-dressing guide (focal points, varied density)",
+ "size_m": [
+  0.9,
+  0.072,
+  0.6
+ ],
+ "triangles": 888,
+ "mass_kg": 3.589,
+ "centre_of_mass": [
+  -0.0,
+  0.0,
+  0.198
+ ],
+ "materials": [
+  "Cloth_Lime",
+  "Cloth_Plush",
+  "Cork_Board",
+  "Paper_Pages",
+  "Paper_Photo",
+  "Plank_BlackPly",
+  "Plank_Honey",
+  "Plaster_Cream",
+  "Plaster_Pink",
+  "Plaster_Purple",
+  "Plaster_Sun",
+  "Plaster_Tangerine",
+  "Plaster_Teal",
+  "Plastic_Lime",
+  "Plastic_Orange",
+  "Plastic_Pink",
+  "Plastic_Teal"
+ ],
+ "joints": [
+  {
+   "part": "crayon_drawing",
+   "kind": "lift",
+   "axis": [
+    0,
+    -1,
+    0
+   ],
+   "min": 0,
+   "max": 0.2,
+   "note": "comes off its pin"
+  },
+  {
+   "part": "lost_mitten",
+   "kind": "hinge",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "min": -0.4,
+   "max": 0.4,
+   "note": "swings on its pin"
+  },
+  {
+   "part": "moon_postcard",
+   "kind": "lift",
+   "axis": [
+    0,
+    -1,
+    0
+   ],
+   "min": 0,
+   "max": 0.2,
+   "note": "comes off its pin"
+  },
+  {
+   "part": "photo_strip_0",
+   "kind": "lift",
+   "axis": [
+    0,
+    -1,
+    0
+   ],
+   "min": 0,
+   "max": 0.2,
+   "note": "comes off its pin"
+  },
+  {
+   "part": "photo_strip_1",
+   "kind": "lift",
+   "axis": [
+    0,
+    -1,
+    0
+   ],
+   "min": 0,
+   "max": 0.2,
+   "note": "comes off its pin"
+  }
+ ],
+ "parts": [
+  {
+   "part": "cork",
+   "material": "Cork_Board",
+   "mass_kg": 1.7952,
+   "made": "solid"
+  },
+  {
+   "part": "frame_bottom",
+   "material": "Plank_Honey",
+   "mass_kg": 0.4513,
+   "made": "solid"
+  },
+  {
+   "part": "frame_top",
+   "material": "Plank_Honey",
+   "mass_kg": 0.4513,
+   "made": "solid"
+  },
+  {
+   "part": "frame_left",
+   "material": "Plank_Honey",
+   "mass_kg": 0.3006,
+   "made": "solid"
+  },
+  {
+   "part": "frame_right",
+   "material": "Plank_Honey",
+   "mass_kg": 0.3006,
+   "made": "solid"
+  },
+  {
+   "part": "drawing_paper",
+   "material": "Paper_Pages",
+   "mass_kg": 0.0882,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_paper",
+   "material": "Paper_Photo",
+   "mass_kg": 0.04,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_paper",
+   "material": "Paper_Photo",
+   "mass_kg": 0.04,
+   "made": "solid"
+  },
+  {
+   "part": "postcard",
+   "material": "Plank_BlackPly",
+   "mass_kg": 0.0204,
+   "made": "shell 18.0 mm"
+  },
+  {
+   "part": "drawn_cup",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0154,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_frame_1",
+   "material": "Plaster_Teal",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_frame_3",
+   "material": "Plaster_Purple",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_frame_0",
+   "material": "Plaster_Teal",
+   "mass_kg": 0.0077,
+   "made": "solid"
+  },
+  {
+   "part": "postcard_moon",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0072,
+   "made": "solid"
+  },
+  {
+   "part": "mitten_cuff",
+   "material": "Cloth_Plush",
+   "mass_kg": 0.0066,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_frame_0",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0045,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_frame_2",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0045,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_frame_1",
+   "material": "Plaster_Tangerine",
+   "mass_kg": 0.0045,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_frame_2",
+   "material": "Plaster_Pink",
+   "mass_kg": 0.0045,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_frame_3",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0045,
+   "made": "solid"
+  },
+  {
+   "part": "drawn_star",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0037,
+   "made": "solid"
+  },
+  {
+   "part": "mitten_hand",
+   "material": "Cloth_Lime",
+   "mass_kg": 0.0023,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_friend_0",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0015,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_friend_1",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0015,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_friend_2",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0015,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_friend_3",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0015,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_friend_0",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0015,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_friend_1",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0015,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_friend_2",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0015,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_1_friend_3",
+   "material": "Plaster_Cream",
+   "mass_kg": 0.0015,
+   "made": "solid"
+  },
+  {
+   "part": "crayon_drawing_pin",
+   "material": "Plastic_Teal",
+   "mass_kg": 0.0014,
+   "made": "solid"
+  },
+  {
+   "part": "lost_mitten_pin",
+   "material": "Plastic_Orange",
+   "mass_kg": 0.0014,
+   "made": "solid"
+  },
+  {
+   "part": "moon_postcard_pin",
+   "material": "Plastic_Lime",
+   "mass_kg": 0.0014,
+   "made": "solid"
+  },
+  {
+   "part": "photo_strip_0_pin",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0014,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "photo_strip_1_pin",
+   "material": "Plastic_Pink",
+   "mass_kg": 0.0014,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "drawn_steam_0",
+   "material": "Plaster_Teal",
+   "mass_kg": 0.0003,
+   "made": "solid"
+  },
+  {
+   "part": "drawn_steam_1",
+   "material": "Plaster_Teal",
+   "mass_kg": 0.0003,
+   "made": "solid"
+  },
+  {
+   "part": "drawn_steam_2",
+   "material": "Plaster_Teal",
+   "mass_kg": 0.0003,
+   "made": "solid"
+  },
+  {
+   "part": "mitten_thumb",
+   "material": "Cloth_Lime",
+   "mass_kg": 0.0003,
+   "made": "solid"
+  },
+  {
+   "part": "postcard_star_0",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0001,
+   "made": "solid"
+  },
+  {
+   "part": "postcard_star_1",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0001,
+   "made": "solid"
+  },
+  {
+   "part": "postcard_star_2",
+   "material": "Plaster_Sun",
+   "mass_kg": 0.0001,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T14:18Z"
+}

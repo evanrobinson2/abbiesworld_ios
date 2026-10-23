@@ -515,6 +515,66 @@
    "items": [
     {
      "k": "oracle",
+     "t": "Coffee Shop Tycoon",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=370060",
+     "note": "asked 14:15Z: a coffee shop's numbers belong to the grown-up layer; kids see the queue and smiles"
+    },
+    {
+     "k": "oracle",
+     "t": "Tiny Glade",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2198150",
+     "note": "asked 14:15Z: things settle with a spring and a soft sound, no wrong moves; used for the photo strip landing"
+    },
+    {
+     "k": "oracle",
+     "t": "Overcooked 2",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=728880",
+     "note": "asked 14:15Z: warm interior against a cool outside, read from overhead"
+    },
+    {
+     "k": "devblog",
+     "t": "Unpacking: a narrative through 1,000 household items (GDC 2022)",
+     "href": "https://www.gamedeveloper.com/gdc2022/gdc-2022-unpacking-a-narrative-through-1-000-household-items",
+     "note": "\"No item? No trait!\" Gave the café its pin board and tip jar"
+    },
+    {
+     "k": "devblog",
+     "t": "Telling a story through someone's belongings (Unpacking)",
+     "href": "https://www.gamedeveloper.com/design/telling-story-someones-belongings-unpacking",
+     "note": "ask where every object came from; start with what is there, then add what tells the story"
+    },
+    {
+     "k": "devblog",
+     "t": "Coffee Talk devlog 1: design by subtraction",
+     "href": "https://www.gamedeveloper.com/design/coffee-talk-devlog-1-how-the-game-came-to-be-the-seed-the-anxiety-and-the-belief-of-design-by-subtraction",
+     "note": "stop adding once the feeling lands; kept the booth to three pose choices"
+    },
+    {
+     "k": "design",
+     "t": "Brewing meaningful UX in Coffee Talk",
+     "href": "https://www.gamedeveloper.com/design/brewing-meaningful-ux-in-the-interactive-visual-novel-i-coffee-talk-i-",
+     "note": "choices bounce once and grow on hover; dim what is no longer live. Applied to the booth's pose buttons"
+    },
+    {
+     "k": "devblog",
+     "t": "Animal Crossing: New Horizons, how the furniture was made",
+     "href": "https://nintendoeverything.com/animal-crossing-new-horizons-dev-on-how-the-furniture-was-made/",
+     "note": "personality over realism, every side finished, a footprint in grid squares; the café props already follow it"
+    },
+    {
+     "k": "design",
+     "t": "A Little to the Left: the daily tidy",
+     "href": "https://www.gonintendo.com/contents/12096-a-little-to-the-left-devs-hope-the-game-s-daily-tidy-feature-becomes-part-of-players",
+     "note": "a bite-sized daily puzzle; idea for a daily café tidy, not built"
+    },
+    {
+     "k": "tutorial",
+     "t": "Set dressing and theme creation (MAGES)",
+     "href": "https://mages.edu.sg/blog/guide-to-set-dressing-theme-creation-in-concept-art/",
+     "note": "every prop has a purpose, vary density, light the focal point; the bar is busy, the beanbag corner stays quiet"
+    },
+    {
+     "k": "oracle",
      "t": "Besiege",
      "href": "https://abbies-game-oracle.vercel.app/game?id=346010"
     },
@@ -580,7 +640,7 @@
      "note": "the in-game characters the photo booth poses"
     }
    ],
-   "recorded": "2026-10-23; models and photo booth round added 14:15Z. No outside dev blogs or tutorials were read for the model build or the booth."
+   "recorded": "2026-10-23; models and photo booth added 14:15Z; real consultation pass 14:30Z: the Oracle was asked about cozy shop games (it has no records yet for Coffee Talk, Unpacking, A Little to the Left or Animal Crossing, so their dev blogs were read directly), and the café changed from what they taught."
   },
   "cafe-r2": {
    "same": "cafe-study",

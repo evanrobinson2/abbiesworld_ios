@@ -5,9 +5,9 @@
   "ceiling_m": 4.2,
   "coffer_m": 4.5
  },
- "assets": 63,
- "triangles": 47100,
- "mass_kg": 17126.4,
+ "assets": 65,
+ "triangles": 48402,
+ "mass_kg": 17130.2,
  "placed": [
   {
    "asset": "plank_floor",
@@ -646,6 +646,18 @@
    "triangles": 1368
   },
   {
+   "asset": "tip_jar",
+   "name": "tip_jar.001",
+   "at": [
+    4.15,
+    -0.62,
+    1.4000000000000001
+   ],
+   "rot_deg": 0,
+   "mass_kg": 0.17,
+   "triangles": 414
+  },
+  {
    "asset": "back_counter",
    "name": "back_counter",
    "at": [
@@ -752,6 +764,18 @@
    "rot_deg": -90,
    "mass_kg": 30.34,
    "triangles": 908
+  },
+  {
+   "asset": "pin_board",
+   "name": "pin_board",
+   "at": [
+    5.98,
+    2.0,
+    1.6
+   ],
+   "rot_deg": -90,
+   "mass_kg": 3.59,
+   "triangles": 888
   },
   {
    "asset": "back_stars",
