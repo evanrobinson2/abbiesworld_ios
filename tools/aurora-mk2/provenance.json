@@ -1,0 +1,15 @@
+{
+ "asset": "aurora-mk2",
+ "concept": {
+  "status": "pending",
+  "source": "Midjourney on Evan's PC (Mac went offline 13:16Z)",
+  "prompts": "see docs/oracle/aurora/AURORA_STUDY.md and tools/aurora-mk2/mj_prompts.json",
+  "picks": []
+ },
+ "reference": {
+  "mk1": "prototypes/ranch-atelier/dist/simulations/moon/assets/RE-072.glb",
+  "mk1_reference_image": "rocketship-exterior/references/aurora-shell-user.png (Evan-supplied, in the PC's bronze-age-world project, not in this repo)"
+ },
+ "construction": "tools/aurora-mk2/build.py on tools/moon-base-kit/bkit.py, Blender bpy 5.2.3",
+ "meshy": "not used (ruled out for the Aurora/Moon ship work, DEVELOPMENT-PRACTICES.md)"
+}

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aurora Mk 2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* AW-STUDY-0035 Aurora Mk 2. Its own look: lunar night, the Aurora's ivory, terracotta and brass. */
+:root{--bg:#0d1017;--paper:#161b25;--raised:#1e2532;--ink:#ece7dc;--muted:#a19c92;--line:#2c3240;--brass:#d6a75c;--rust:#d07a55;--amber:#ffb02e;
+--display:"Barlow Condensed",system-ui,sans-serif;--body:"Source Sans 3",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f1eee8;--paper:#fff;--raised:#f6f3ee;--ink:#22201c;--muted:#6a645a;--line:#ddd6ca;--brass:#9a6b22;--rust:#a8482a;--amber:#b86f00;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f1eee8;--paper:#fff;--raised:#f6f3ee;--ink:#22201c;--muted:#6a645a;--line:#ddd6ca;--brass:#9a6b22;--rust:#a8482a;--amber:#b86f00;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);padding:28px max(16px,env(safe-area-inset-right)) 64px max(16px,env(safe-area-inset-left))}
+main{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+main>*{min-width:0}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
+h1{font:700 clamp(38px,7vw,64px)/1 var(--display);margin:0}
+h2{font:700 32px/1.1 var(--display);margin:22px 0 0}
+p{margin:0;max-width:74ch}.lede{font-size:19px}.muted{color:var(--muted)}
+img{display:block;width:100%;height:auto;border-radius:10px}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:14px}
+.pair figure{margin:0;display:grid;gap:6px;position:relative}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+figcaption b{color:var(--ink);font-family:var(--display);font-size:20px;letter-spacing:.02em;margin-right:8px}
+.spin{aspect-ratio:1;position:relative}
+.spin img,.spin model-viewer{width:100%;height:100%;object-fit:cover;border-radius:10px;background:#0b0e14}
+.spin button{position:absolute;right:10px;bottom:10px;border:0;border-radius:999px;padding:8px 15px;font:600 14px var(--body);color:#111;background:rgba(255,255,255,.85);cursor:pointer}
+.spin.on button{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:8px;align-content:start}
+.card h3{font:700 22px/1.1 var(--display);margin:0}
+.tag{font:500 11px/1 var(--mono);color:var(--brass);letter-spacing:.08em;text-transform:uppercase}
+dl{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0}
+dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}dd{margin:0;font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
+.proofs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:10px}
+.waiting{border:1px dashed var(--line);border-radius:14px;padding:18px;color:var(--muted)}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:80ch}
+</style></head>
+<body><main>
+<span class="eyebrow">AW-STUDY-0035 · Spaceship study</span>
+<h1>Aurora Mk 2</h1>
+<p class="lede">The USS Aurora already flies in the game: the cream, egg-shaped ferry that lands at the Moon port. Mk 2 is its upgrade. It keeps the shell, the rib hoops, the shoulder engines and the palette, and grows into a ship a crew can live on.</p>
+
+<div class="pair">
+ <figure><div class="spin" data-src="m/aurora-mk1.wasm" data-alt="Aurora Mk 1"><img src="img/mk1-hero.jpg" alt="Aurora Mk 1 on the Moon, three-quarter view"><button type="button">Spin it</button></div>
+  <figcaption><b>Mk 1</b>In the game today (RE-072). 6.4 m long.</figcaption></figure>
+ <figure><div class="spin" data-src="m/aurora-mk2.wasm" data-alt="Aurora Mk 2"><img src="img/mk2-hero.jpg" alt="Aurora Mk 2 on the Moon, three-quarter view"><button type="button">Spin it</button></div>
+  <figcaption><b>Mk 2</b>Round 1, from 116 named parts. 9.8 m long.</figcaption></figure>
+</div>
+<p class="muted">Same camera, same sun, same Earthlight. Tap "Spin it" to turn and zoom the real model.</p>
+
+<h2>From Abbie's eye height</h2>
+<div class="pair">
+ <figure><img src="img/mk1-fps.jpg" alt="Mk 1 seen from 1.1 m" loading="lazy"><figcaption><b>Mk 1</b>A closed shell; you can't tell if anyone is home.</figcaption></figure>
+ <figure><img src="img/mk2-fps.jpg" alt="Mk 2 seen from 1.1 m" loading="lazy"><figcaption><b>Mk 2</b>The door is lit and the stair is down: come aboard.</figcaption></figure>
+</div>
+
+<h2>Midjourney proofs</h2>
+<div class="proofs" id="proofs"><p class="waiting">The four proofs (hero, turnaround, on the pad at Earthrise, and a cutaway) are being made on your PC. Round 2 of the model will be rebuilt against the one you pick.</p></div>
+
+<h2>What changed from Mk 1</h2>
+<div class="grid">
+ <div class="card"><span class="tag">Hull</span><h3>Three sections, not one egg</h3><p>Cockpit, cabin and cargo, marked by five rib hoops instead of three. Same ivory shell, dark window waist and terracotta pinstripe.</p></div>
+ <div class="card"><span class="tag">Cockpit</span><h3>A canopy you can see the pilots through</h3><p>Mk 1's small ribbed window becomes a wraparound green-glass canopy under brass arches, with a headlamp below.</p></div>
+ <div class="card"><span class="tag">Engines</span><h3>Pods that glow when it's ready</h3><p>The spherical shoulder pods keep their brass rims, and gain amber intake rings, turbine vanes and downward nozzles.</p></div>
+ <div class="card"><span class="tag">Boarding</span><h3>A lit door and a stair</h3><p>Mk 1's airlock box becomes a brass doorway with warm light and a five-step stair with rails, sized for Abbie.</p></div>
+ <div class="card"><span class="tag">Crew</span><h3>Ten portholes</h3><p>Five warm portholes a side along the waist: the cabin RE-076 and the 20-crew Aurora starship scene now have windows to look out of.</p></div>
+ <div class="card"><span class="tag">Stern and top</span><h3>Twin nozzles, a mast and a beacon</h3><p>Two main nozzles and a cargo door at the back; a dorsal spine, hatch, sensor dish and red beacon on top.</p></div>
+</div>
+
+<h2>How the ship tells you things</h2>
+<p>No HUD. Everything is diegetic: the characters can see it too.</p>
+<ul>
+ <li><b>Ready to fly:</b> the pod intakes and nozzles glow amber. When they're dark, the ship is asleep.</li>
+ <li><b>Come aboard:</b> the doorway is lit and the stair is down. Stair up and door dark means it's leaving.</li>
+ <li><b>Which side is which:</b> a red running light on the port pod and a green one on starboard, the way real ships say it.</li>
+ <li><b>Someone's home:</b> warm portholes. <b>Talking to Earth:</b> the mast beacon blinks.</li>
+</ul>
+
+<h2>What the Oracle's space games taught</h2>
+<p>The Oracle has 27 space games from your library. These are the lessons this ship uses.</p>
+<div class="grid">
+ <div class="card"><span class="tag">Kerbal Space Program</span><h3>Ships are made of parts</h3><p>Every piece has a name and a job, so the game can animate one part and kids can ask for changes in words.</p></div>
+ <div class="card"><span class="tag">Outer Wilds</span><h3>A ship you want to come home to</h3><p>Handmade, cosy and a little wobbly. Warm light inside, a campfire feeling. That is why the door and portholes glow.</p></div>
+ <div class="card"><span class="tag">ASTRONEER</span><h3>Bright, soft low poly</h3><p>Pastel planets and chunky shapes read at any size. Mk 2 stays low poly and puts its detail in baked maps.</p></div>
+ <div class="card"><span class="tag">No Man's Sky</span><h3>One palette per place</h3><p>The sky, fog and grade come from the place. The Aurora's ivory, terracotta and brass stay fixed, so it pops on any world.</p></div>
+ <div class="card"><span class="tag">FTL · Among Us</span><h3>The inside is the game</h3><p>Rooms you can see into make the crew's story. Next: a cutaway Mk 2 cabin from the RE-076 fit-out.</p></div>
+ <div class="card"><span class="tag">Starfield · Space Engineers</span><h3>Ship building, kid-sized</h3><p>Modules snap on. Mk 2's sections and pods are the first modules of a build-your-own Aurora.</p></div>
+</div>
+
+<h2>The model</h2>
+<dl id="stats">
+ <div><dt>Parts</dt><dd>116</dd></div>
+ <div><dt>Triangles</dt><dd>12,806</dd></div>
+ <div><dt>Size</dt><dd>8.7 × 9.8 × 5.5 m</dd></div>
+ <div><dt>Mass</dt><dd id="mass">64 t</dd></div>
+ <div><dt>Maps</dt><dd>2048 px</dd></div>
+</dl>
+<p class="muted">Built in Blender from a recipe on the Moon base kit: role materials (Metal_Ivory, Metal_Brass, Glass_Canopy, Lamp_Amber…), baked colour, roughness and normal maps, and mass per part in the model file. The feet sit inside the 12 m Moon landing pad's touchdown circle.</p>
+
+<h2>Next</h2>
+<p>Pick a Midjourney proof, then round 2 of the model against it. After that: the cutaway cabin, the ready and boarding states animated in the Moon port, and Mk 2 replacing Mk 1 on the VIP visit.</p>
+</main>
+<script>
+let mv;
+function loadMV(){return mv ||= new Promise((ok,no)=>{const s=document.createElement('script');s.type='module';s.src='https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+document.addEventListener('click',async e=>{
+ const f=e.target.closest('.spin');if(!f||f.classList.contains('on'))return;
+ f.classList.add('on');await loadMV();
+ const m=document.createElement('model-viewer');m.src=f.dataset.src;m.alt=f.dataset.alt;
+ for(const [k,v] of Object.entries({'camera-controls':'','touch-action':'pan-y','auto-rotate':'','interaction-prompt':'none','shadow-intensity':'0.8','exposure':'1.05','environment-image':'neutral','camera-orbit':'35deg 70deg auto'}))m.setAttribute(k,v);
+ f.querySelector('img').replaceWith(m);
+});
+</script>
+</body></html>

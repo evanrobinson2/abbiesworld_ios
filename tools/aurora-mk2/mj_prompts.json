@@ -1,0 +1,10 @@
+{
+ "study": "AW-STUDY-0035",
+ "status": "queued 2026-10-23 13:10Z (Mac, went offline), re-queued on Evan's PC 13:25Z",
+ "prompts": {
+  "A": "Aurora Mk 2, a friendly retro-future lunar ferry spaceship, upgraded from a compact rounded egg-shaped shuttle: smooth segmented warm ivory hull panels with light rib hoops and a muted terracotta pinstripe, a dark teal window band, brass and dark steel machinery, a large ribbed wraparound cockpit canopy of deep green-black glass, two spherical shoulder engine pods with brass rims and glowing amber intakes, four sturdy splayed landing legs with round pad feet, a lit amber doorway with a boarding stair, small dorsal sensor mast, low-poly hero game asset with crisp chamfered facets, three-quarter view, soft studio light on a plain grey backdrop --ar 16:9",
+  "B": "turnaround sheet of the Aurora Mk 2 spaceship, front view, side view, back view, top view, same design in each, rounded ivory segmented hull with terracotta pinstripe and light rib hoops, ribbed bubble cockpit, two spherical shoulder engine pods, four landing legs, twin rear nozzles, low-poly faceted game asset, flat even lighting, plain light grey background, orthographic --ar 16:9",
+  "C": "the Aurora Mk 2 rounded ivory and terracotta spaceship landed on a lunar landing pad at earthrise, boarding stair down with warm amber light, a small child astronaut in a pink spacesuit walking toward it for scale, long shadows, stylized low-poly cozy storybook game art --ar 16:9",
+  "D": "cutaway cross-section of the Aurora Mk 2 rounded spaceship, cozy interior visible: two pilot seats at the bubble cockpit, a small galley, bunk beds, cargo bay with crates, engine room with brass machinery, warm amber lighting, ivory hull, kid-friendly stylized low-poly game art, side view on plain backdrop --ar 16:9"
+ }
+}
