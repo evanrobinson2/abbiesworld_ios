@@ -9,7 +9,8 @@ name: suno-presign
 on:
   workflow_dispatch:
     inputs:
-      pubkey: { description: 'RSA public key, PEM, base64 encoded on one line', required: true }
+      pubkey: { description: 'RSA public key, PEM, base64 encoded on one line', required: false, default: '' }
+      clean: { description: 'Only delete every suno-put.* asset from the release', type: boolean, default: false }
 permissions:
   contents: write
 jobs:
@@ -17,14 +18,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Clean
+        if: ${{ inputs.clean }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for a in $(gh release view suno-library -R "$GITHUB_REPOSITORY" --json assets -q '.assets[].name' | grep '^suno-put\.'); do
+            gh release delete-asset suno-library "$a" -y -R "$GITHUB_REPOSITORY" && echo "deleted $a"
+          done
       - uses: actions/checkout@v4
+        if: ${{ !inputs.clean }}
       - name: R2 keys
+        if: ${{ !inputs.clean }}
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: tools/model-store/r2-keys.sh
       - name: Presign and encrypt
+        if: ${{ !inputs.clean }}
         env:
           AWS_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
@@ -52,6 +64,7 @@ jobs:
           rm -rf /tmp/p
           ls -l suno-put.*
       - name: Attach to the suno-library release
+        if: ${{ !inputs.clean }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
