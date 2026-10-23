@@ -1568,6 +1568,12 @@
      "note": "The film look: contact shadows, height haze, depth of field, bloom and grade, now simulations/film-look.mjs"
     },
     {
+     "k": "canon",
+     "t": "Painted Brush shader (AW-STUDY-0045 shaders thread)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs",
+     "note": "The sixth direction, Painted: brush-broken light, purple shadows, teal rim, broken ink"
+    },
+    {
      "k": "devblog",
      "t": "Simon Clavet, Motion Matching and The Road to Next-Gen Animation (GDC 2016)",
      "href": "https://gdcvault.com/play/1023280/Motion-Matching-and-The-Road",

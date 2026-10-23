@@ -8,13 +8,18 @@
 //   village   Plasticine village (the Aardman look): muted knitwear and corduroy colours, deeper thumbprints, big
 //             eyes under a heavy brow, warm lamp light, 12 a second
 //   stick     Stick man: ink bones on paper, a round head, every drawing a little different (line boil), 12 a second
+//   painted   Painted brush (simulations/painted-brush.mjs, from the shaders thread): brush-broken light, purple
+//             shadows, a teal rim and a broken ink line, its neon light flickering at 12 a second
 //   comic     1980s cartoon action / hero shooter: hard two-tone cel, thick ink, saturated suit colours, strong rim
+import {paintBrush} from '/simulations/painted-brush.mjs';
+
 export const DIRECTIONS = [
  {id: 'studio', name: 'As built', short: 'As built'},
  {id: 'clay', name: 'Claymation', short: 'Clay'},
  {id: 'village', name: 'Plasticine village', short: 'Village'},
  {id: 'stick', name: 'Stick man', short: 'Stick'},
  {id: 'comic', name: '80s action cartoon', short: '80s action'},
+ {id: 'painted', name: 'Painted brush', short: 'Painted'},
 ];
 
 // part -> colour, by direction (mannequin part names; skinned bodies take the 'body' colour)
@@ -32,7 +37,8 @@ const STAGES = {
  clay: {sky: ['#bfe8ff', '#fff3d6'], floor: '#9fd67a', rim: '#ff9a5c', sun: '#fff6e8', sunI: 2.4, hemi: ['#e8f4ff', '#c8a070', 1.3], shadow: true},
  village: {sky: ['#d9c7a6', '#efe4cc'], floor: '#b98d5e', rim: '#7a5a3a', sun: '#ffd9a0', sunI: 3, hemi: ['#f3e3c4', '#5a4030', .9], shadow: true},
  stick: {sky: ['#fbfaf6', '#fbfaf6'], floor: '#f4f1e8', rim: '#d8d2c2', sun: '#ffffff', sunI: 1.5, hemi: ['#ffffff', '#ffffff', 1.4], shadow: false},
- comic: {sky: ['#ffd23f', '#ff7a3d'], floor: '#2a2440', rim: '#ffd23f', sun: '#ffffff', sunI: 3.2, hemi: ['#9ad8ff', '#3a1f5a', 1], shadow: true},
+ painted: {sky: ['#3b3f63', '#7a5a7e'], floor: '#4a4560', rim: '#3fe6d4', sun: '#ffd2a1', sunI: 2.2, hemi: ['#8a9bd0', '#3a2a4a', .9], shadow: true, dark: true},
+ comic: {sky: ['#ffd23f', '#ff7a3d'], floor: '#2a2440', rim: '#ffd23f', sun: '#ffffff', sunI: 3.2, hemi: ['#9ad8ff', '#3a1f5a', 1], shadow: true, dark: true},
 };
 
 // clay surface: thumbprint dents (3D value noise on the body's own surface) and boil (the surface shifts each drawing)
@@ -184,6 +190,10 @@ export function dress(T, actor, id, frame) {
    swap(o, m);
    const hull = inkShell(T, o, .006 * h); undo.push(() => o.remove(hull));
   }
+ } else if (id === 'painted') {
+  const B = paintBrush(T, actor.object, {accent: '#3fe6d4'});
+  undo.push(() => B.restore());
+  out.update = () => B.update(performance.now() / 1000);
  } else if (id === 'stick') {
   for (const o of meshes) { const was = o.visible; o.visible = false; undo.push(() => { o.visible = was; }); }
   const st = stickFigure(T, actor);
