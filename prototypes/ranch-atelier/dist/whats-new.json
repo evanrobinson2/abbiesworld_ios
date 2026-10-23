@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-grace-basement-4",
+      "date": "2026-10-23",
+      "title": "Feet on the stairs",
+      "line": "In Grace's basement the girl now steps down each stair, with her feet on the treads instead of through them. And if you go back up, \"I have to know\" brings you back to the start to choose again.",
+      "image": "/whats-new/2026-10-23-grace-basement-4.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
       "id": "2026-10-23-moon-base-kit",
       "date": "2026-10-23",
       "title": "Moon base kit: 20 pieces to walk through",
@@ -24,26 +35,26 @@
       "link": "/studies/storybook/"
     },
     {
-     "id": "2026-10-23-family-cast",
-     "date": "2026-10-23",
-     "title": "The family cast",
-     "line": "Everyone in Daddy's memory places, then and now, each with a storybook sheet and designed voices. Tap a voice, tick the one that sounds right, and send your picks.",
-     "image": "/whats-new/2026-10-23-family-cast.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh",
-     "threadTitle": "Family cast",
-     "tour": false,
-     "link": "/studies/family-cast/"
+      "id": "2026-10-23-family-cast",
+      "date": "2026-10-23",
+      "title": "The family cast",
+      "line": "Everyone in Daddy's memory places, then and now, each with a storybook sheet and designed voices. Tap a voice, tick the one that sounds right, and send your picks.",
+      "image": "/whats-new/2026-10-23-family-cast.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh",
+      "threadTitle": "Family cast",
+      "tour": false,
+      "link": "/studies/family-cast/"
     },
     {
-     "id": "2026-10-23-school-jump-3",
-     "date": "2026-10-23",
-     "title": "The school jump: chalk targets and a secret",
-     "line": "Hold and let go to throw: hit the two chalk targets and bub wants it further, then the third one sails onto the roof. The big jump is your choice now, and there is a secret ending if you dawdle.",
-     "image": "/whats-new/2026-10-23-school-jump-3.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
-     "threadTitle": "The school jump",
-     "tour": false,
-     "link": "/studies/school/play.html"
+      "id": "2026-10-23-school-jump-3",
+      "date": "2026-10-23",
+      "title": "The school jump: chalk targets and a secret",
+      "line": "Hold and let go to throw: hit the two chalk targets and bub wants it further, then the third one sails onto the roof. The big jump is your choice now, and there is a secret ending if you dawdle.",
+      "image": "/whats-new/2026-10-23-school-jump-3.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+      "threadTitle": "The school jump",
+      "tour": false,
+      "link": "/studies/school/play.html"
     },
     {
       "id": "2026-10-23-brute-fight",
@@ -57,15 +68,15 @@
       "link": "/studies/brute-fight/play.html"
     },
     {
-     "id": "2026-10-23-school-jump-2",
-     "date": "2026-10-23",
-     "title": "The school jump, at golden dusk",
-     "line": "Walk your dog, throw the ball until it lands on the roof, then climb the long wall side-on, one hand at a time. Slow station wagons sweep the roof with their lights. Hide behind the two big walls, because getting caught burns.",
-     "image": "/whats-new/2026-10-23-school-jump-2.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
-     "threadTitle": "The school jump",
-     "tour": false,
-     "link": "/studies/school/play.html"
+      "id": "2026-10-23-school-jump-2",
+      "date": "2026-10-23",
+      "title": "The school jump, at golden dusk",
+      "line": "Walk your dog, throw the ball until it lands on the roof, then climb the long wall side-on, one hand at a time. Slow station wagons sweep the roof with their lights. Hide behind the two big walls, because getting caught burns.",
+      "image": "/whats-new/2026-10-23-school-jump-2.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+      "threadTitle": "The school jump",
+      "tour": false,
+      "link": "/studies/school/play.html"
     },
     {
       "id": "2026-10-23-grace-basement-3",

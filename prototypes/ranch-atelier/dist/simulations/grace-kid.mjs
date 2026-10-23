@@ -114,6 +114,11 @@ export async function loadGraceKid(url = URL_GLTF) {
  };
  const update = dt => mixer.update(dt);
  play('idle', 0);
- group.userData = {rig, head, play, update, mixer, actions, height: KID_HEIGHT};
+ // The points that touch the ground (ankles and balls of the feet) with their resting heights, so the scene can keep
+ // every foot on top of whatever step is under it.
+ group.updateMatrixWorld(true);
+ const feet = ['DEF-footL', 'DEF-footR', 'DEF-toeL', 'DEF-toeR'].map(n => rig.getObjectByName(n)).filter(Boolean)
+  .map(bone => ({bone, rest: bone.getWorldPosition(new T.Vector3()).y}));
+ group.userData = {rig, head, play, update, mixer, actions, height: KID_HEIGHT, feet};
  return group;
 }
