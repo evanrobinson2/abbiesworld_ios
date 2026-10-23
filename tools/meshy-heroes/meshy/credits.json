@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 780,
+ "total": 840,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -311,6 +311,16 @@
    "what": "brute2-retexture retexture",
    "credits": 10,
    "at": "2026-10-23T21:09:59Z"
+  },
+  {
+   "what": "cs-1-claymation-adventurer 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:12Z"
+  },
+  {
+   "what": "cs-2-plasticine-inventor 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:12Z"
   }
  ]
 }
