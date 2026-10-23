@@ -2,6 +2,7 @@
 // from the charms in the backpack (simulations/backpack.mjs), so each mission game only has to earn its charm, as it
 // already does. `needs: 'moon'` hides nothing: the card is shown, sealed, until a moon tile is on the board.
 import {earnedCharms, charmCount, CHARMS} from '../backpack.mjs';
+import {HUNT_MISSION} from '../effect-hunt/demo-mission.mjs';
 
 export const MISSIONS = [
  {id: 'basement', title: 'The coffee shop basement', line: 'The register key opens a door under the stairs.', icon: '🗝️', charm: 'basement', page: '/studies/basement/play.html', at: 'cafe', tint: '#ffb86b'},
@@ -15,9 +16,11 @@ export const MISSIONS = [
 //     page: '/path' (the mission game, opened over the board), drive: (mission, stage) => {...} (optional: play it by driving there),
 //     needs: 'moon' (optional), tint, beacon: true (a laser beam into the sky while selected)})
 export const registerMission = x => { const i = MISSIONS.findIndex(y => y.id === x.id); if (i >= 0) MISSIONS[i] = {...MISSIONS[i], ...x}; else MISSIONS.splice(MISSIONS.findIndex(y => y.finale), 0, {tint: '#ffd95a', icon: '⭐', ...x}); };
-export const isDone = m => charmCount(m.charm) > 0;
+export const isDone = m => m.done ? m.done() : charmCount(m.charm) > 0;
 export const state = () => { try { return JSON.parse(localStorage.getItem('aw-demo') || '{}') || {}; } catch { return {}; } };
 export const save = patch => { try { localStorage.setItem('aw-demo', JSON.stringify({...state(), ...patch})); } catch {} };
 // In the demo every tile is on the shelf. In real play (?play) the Moon tile is earned by finishing the Moon Mission.
 export const moonUnlocked = demo => demo || charmCount('rocket') > 0 || !!state().moonUnlocked;
 export const chest = () => { const have = new Set(earnedCharms()); return CHARMS.filter(c => !c.repeat).map(c => ({...c, have: have.has(c.id)})); };
+
+registerMission(HUNT_MISSION); // the Effect hunt and jet cart (AW-STUDY-0057)

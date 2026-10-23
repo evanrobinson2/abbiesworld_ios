@@ -2,6 +2,16 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-effect-hunt",
+      "date": "2026-10-23",
+      "title": "The Effect Hunt: a jet shopping cart",
+      "line": "Ten effects are hidden around Winchester. Pick the hunt in the notebook, follow the laser beams, and drive Abbie, Ani and Daddy in a jetpack cart. Once found, an effect is yours forever on a 15 second cooldown.",
+      "image": "/whats-new/2026-10-23-effect-hunt.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXthQ386nCt8mENBLAQqLKy",
+      "threadTitle": "AW-STUDY-0057 - Effect hunt and jet cart",
+      "tour": true
+    },
+    {
       "id": "2026-10-23-treehouses",
       "date": "2026-10-23",
       "title": "Abbie and Ani have tree houses",

@@ -20,7 +20,7 @@ export const MODES = [
  {id: 'coaster', icon: '🏎️', name: 'Toy car', vehicle: 'coaster'}, {id: 'god', icon: '🛰️', name: 'Overhead', vehicle: null}
 ];
 
-export function createHunt({scene, camera, renderer, world, paint = null, clock = {day: 1, hour: 18.5}, ui = true, mode = 'cart', beacons = true, onFound, onAll}) {
+export function createHunt({scene, camera, renderer, world, paint = null, clock = {day: 1, hour: 18.5}, ui = true, mode = 'cart', beacons = true, onFound, onAll, offset = {x: 0, y: 0, z: 0}, wins = [window], uiRoot = document.body, onExit, fov = 58, camHold = 0, vehicleScale = 1.9, chase = {dist: 20, height: 8.5}}) {
  const effectsAt = e => { const s = spotOf(e, world.board), p = world.toScene(s.x, s.y); return {x: p.x, y: world.heightAt(p.x, p.z), z: p.z}; };
  const places = new Map(EFFECTS.map(e => { const p = effectsAt(e); return [e.id, p]; }));
  const beam = createBeacons({scene, effects: EFFECTS, place: e => { const p = places.get(e.id); return {x: p.x, y: p.y, z: p.z}; }});
@@ -30,7 +30,7 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
  const driver = createDriver({world, start});
  const tow = createTow({scene, world, driver, home: world.home});
  const vehicleRoot = new T.Group(); vehicleRoot.name = 'vehicle'; scene.add(vehicleRoot);
- const VS = 1.9; // a toy-sized vehicle in a toy-sized town: bigger than life so it reads from the sky
+ const VS = vehicleScale; // a toy-sized vehicle in a toy-sized town: bigger than life so it reads from the sky
  let vehicle = null, vehicleId = null, cur = mode, armed = -1, autopilot = null, yawOff = 0, idle = 0, camPos = new T.Vector3(), camLook = new T.Vector3(), godCentre = new T.Vector3(start.x, 0, start.z), godHeight = 190;
  let wheelSpin = 0, bobT = 0, onTray;
 
@@ -38,11 +38,12 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
   if (vehicleId === id) return; vehicleId = id; vehicleRoot.clear(); const def = VEHICLES[id]; vehicle = def.build(); vehicleRoot.add(vehicle.group); driver.s.jetpack = !!def.jetpack;
   vehicle.group.traverse(o => { if (o.isMesh) { o.castShadow = true; o.raycast = () => {}; } });
  }
- const hud = ui ? mountUi({
+ const off = new T.Vector3(offset.x, offset.y, offset.z);
+ const hud = ui ? mountUi({root: uiRoot, onExit,
   onCast: i => cast(i), onMode: id => setMode(id), onJet: v => { input.set('jet', v); }, onBoost: v => { input.set('boost', v); },
   modes: MODES
  }) : null;
- const input = bindInput(driver, renderer.domElement, {onCast: i => cast(i)});
+ const input = bindInput(driver, renderer.domElement, {onCast: i => cast(i), wins});
 
  function setMode(id) {
   cur = id; const m = MODES.find(x => x.id === id); if (m.vehicle) setVehicle(m.vehicle); vehicleRoot.visible = true; autopilot = null; hud?.setMode(id);
@@ -65,7 +66,7 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
  const ray = new T.Raycaster(), v2 = new T.Vector2();
  function groundAt(cx, cy) {
   const r = renderer.domElement.getBoundingClientRect(); v2.set((cx - r.left) / r.width * 2 - 1, -((cy - r.top) / r.height) * 2 + 1); ray.setFromCamera(v2, camera);
-  const o = ray.ray.origin, d = ray.ray.direction; let t = 0; for (let k = 0; k < 90; k++) { const x = o.x + d.x * t, z = o.z + d.z * t, y = o.y + d.y * t; if (y <= world.heightAt(x, z)) return {x, z}; t += Math.max(2, (y - world.heightAt(x, z)) * .5 / Math.max(.15, -d.y)); }
+  const o = ray.ray.origin.clone().sub(off), d = ray.ray.direction; let t = 0; for (let k = 0; k < 90; k++) { const x = o.x + d.x * t, z = o.z + d.z * t, y = o.y + d.y * t; if (y <= world.heightAt(x, z)) return {x, z}; t += Math.max(2, (y - world.heightAt(x, z)) * .5 / Math.max(.15, -d.y)); }
   return null;
  }
  let downAt = null;
@@ -78,7 +79,7 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
  });
  renderer.domElement.addEventListener('wheel', e => { if (cur === 'god') { godHeight = Math.min(420, Math.max(70, godHeight * (1 + Math.sign(e.deltaY) * .1))); e.preventDefault(); } }, {passive: false});
  // drag in drive mode swings the camera round the cart; it eases back behind you after a moment of hands off
- renderer.domElement.addEventListener('pointermove', e => { if (cur !== 'god' && e.buttons === 1 && e.clientX >= innerWidth * .55) { yawOff -= e.movementX * .008; idle = 0; } });
+ renderer.domElement.addEventListener('pointermove', e => { if (cur !== 'god' && e.buttons === 1 && e.clientX >= (renderer.domElement.clientWidth || innerWidth) * .55) { yawOff -= e.movementX * .008; idle = 0; } });
 
  let lastOff = 0;
  function frame(dt) {
@@ -114,22 +115,22 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
  }
  const sunAim = new T.Vector3();
  function camera_(dt) {
-  const s = driver.s;
+  const s = driver.s; if (camHold > 0) { camHold -= dt; return; } // the host's own fly-in is finishing
   if (cur === 'god') {
    if (!downAt) { godCentre.x += (autopilot ? (s.x - godCentre.x) : 0) * Math.min(1, dt * 1.2); godCentre.z += (autopilot ? (s.z - godCentre.z) : 0) * Math.min(1, dt * 1.2); }
    const y = world.heightAt(godCentre.x, godCentre.z); camPos.set(godCentre.x, y + godHeight, godCentre.z + godHeight * .28); camLook.set(godCentre.x, y, godCentre.z);
-   camera.position.lerp(camPos, 1 - Math.exp(-dt * 5)); camera.lookAt(camLook); return;
+   camPos.add(off); camLook.add(off); camera.position.lerp(camPos, 1 - Math.exp(-dt * 5)); camera.lookAt(camLook); return;
   }
   idle += dt; if (idle > 1.5 || Math.abs(driver.input.throttle) > .1) yawOff *= Math.exp(-dt * (idle > 1.5 ? 2 : .6));
-  const a = s.heading + yawOff + Math.PI, dist = 20 + Math.min(7, Math.abs(s.speed) * .14), h = 8.5 + (s.y - world.heightAt(s.x, s.z)) * .3;
+  const a = s.heading + yawOff + Math.PI, dist = chase.dist + Math.min(chase.dist * .35, Math.abs(s.speed) * .14 * chase.dist / 20), h = chase.height + (s.y - world.heightAt(s.x, s.z)) * .3;
   camPos.set(s.x + Math.sin(a) * dist, s.y + h, s.z + Math.cos(a) * dist);
   const gy = world.heightAt(camPos.x, camPos.z) + 2; if (camPos.y < gy) camPos.y = gy; // never under the ground
-  camera.position.lerp(camPos, 1 - Math.exp(-dt * 4)); camLook.set(s.x + Math.sin(s.heading) * 8, s.y + 3, s.z + Math.cos(s.heading) * 8); camera.lookAt(camLook);
-  camera.fov += ((58 + Math.min(14, Math.abs(s.speed) * .35) + (driver.s.boostT > 0 ? 8 : 0)) - camera.fov) * Math.min(1, dt * 4); camera.updateProjectionMatrix();
+  camPos.add(off); camera.position.lerp(camPos, 1 - Math.exp(-dt * 4)); camLook.set(s.x + Math.sin(s.heading) * 8, s.y + 3, s.z + Math.cos(s.heading) * 8).add(off); camera.lookAt(camLook);
+  camera.fov += ((fov + Math.min(14, Math.abs(s.speed) * .35) + (driver.s.boostT > 0 ? 8 : 0)) - camera.fov) * Math.min(1, dt * 4); camera.updateProjectionMatrix();
  }
  setMode(mode);
  return {
   driver, tow, fx, beam, places, frame, setMode, cast, get mode() { return cur; }, setBeacons: v => beam.set(v), vehicleRoot,
-  foundCount: () => found().size, dispose() { hud?.dispose(); input.dispose(); }
+  foundCount: () => found().size, dispose() { hud?.dispose(); input.dispose(); vehicleRoot.removeFromParent(); fx.root.removeFromParent(); beam.root.removeFromParent(); camera.fov = fov; camera.updateProjectionMatrix(); }
  };
 }

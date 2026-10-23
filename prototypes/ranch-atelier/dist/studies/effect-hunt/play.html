@@ -14,7 +14,7 @@ canvas{display:block;width:100vw;height:100vh;height:100dvh}
 <div id="boot">🛒</div>
 <script>
 // Works from /studies/effect-hunt/play.html (modules two levels up) and from an instant preview (modules beside the page).
-const SIM = location.pathname.includes('/r2/previews/') || location.pathname.endsWith('/preview.html') ? './simulations/' : '../../simulations/';
+const SIM = location.pathname.includes('/studies/') ? '../../simulations/' : './simulations/';
 const map = document.createElement('script'); map.type = 'importmap';
 map.textContent = JSON.stringify({imports: {three: new URL(SIM + 'vendor/three.module.js', location.href).href}});
 document.head.append(map);

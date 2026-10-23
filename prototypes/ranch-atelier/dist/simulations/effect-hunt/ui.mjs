@@ -19,7 +19,7 @@ const CSS = `
 .hunt-pads button,.hunt-top button{pointer-events:auto;width:clamp(52px,14vw,72px);aspect-ratio:1;border-radius:50%;border:0;font-size:clamp(22px,6vw,32px);color:#fff;cursor:pointer;touch-action:none;
  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.6),rgba(255,255,255,.1) 55%,rgba(20,10,40,.4));box-shadow:0 8px 18px rgba(20,10,40,.4),inset 0 1px 3px rgba(255,255,255,.75);backdrop-filter:blur(8px) saturate(1.5)}
 .hunt-pads button:active,.hunt-pads button.on{transform:scale(.92);box-shadow:0 0 22px #ffd95a,inset 0 1px 3px rgba(255,255,255,.75)}
-.hunt-top{position:fixed;top:max(10px,env(safe-area-inset-top));left:0;right:0;display:flex;justify-content:space-between;padding:0 12px;z-index:20;pointer-events:none}
+.hunt-top{position:fixed;top:max(10px,env(safe-area-inset-top));left:0;right:0;display:flex;justify-content:space-between;padding:0 12px 0 var(--hunt-left,12px);z-index:20;pointer-events:none}
 .hunt-top .group{display:flex;gap:8px}
 .hunt-top button{width:clamp(38px,9vw,46px);font-size:clamp(18px,4.5vw,22px)}
 .hunt-top button.on{box-shadow:0 0 16px #ff7eb6,inset 0 1px 3px rgba(255,255,255,.75)}
@@ -28,7 +28,7 @@ const CSS = `
 @media(prefers-reduced-motion:reduce){.hunt-ui .eff.pulse{animation:none}}
 `;
 
-export function mountUi({root = document.body, onCast, onMode, onJet, onBoost, modes = []}) {
+export function mountUi({root = document.body, onExit, onCast, onMode, onJet, onBoost, modes = []}) {
  const st = document.createElement('style'); st.textContent = CSS; document.head.append(st);
  const tray = document.createElement('div'); tray.className = 'hunt-ui'; tray.dataset.ui = '';
  const btn = EFFECTS.map((e, i) => { const b = document.createElement('button'); b.className = 'eff locked'; b.style.setProperty('--c', e.colour); b.setAttribute('aria-label', e.name); b.dataset.ui = ''; b.innerHTML = `<span>${e.icon}</span>`; b.addEventListener('click', () => onCast(i)); tray.append(b); return b; });
@@ -39,6 +39,7 @@ export function mountUi({root = document.body, onCast, onMode, onJet, onBoost, m
  const grp = document.createElement('div'); grp.className = 'group'; top.append(grp);
  const modeBtn = modes.map(m => { const b = document.createElement('button'); b.textContent = m.icon; b.setAttribute('aria-label', m.name); b.dataset.ui = ''; b.addEventListener('click', () => onMode(m.id)); grp.append(b); return [m.id, b]; });
  const fuel = document.createElement('div'); fuel.className = 'hunt-fuel'; fuel.dataset.ui = ''; fuel.innerHTML = '<i></i>';
+ if (onExit) { const x = document.createElement('div'); x.className = 'group'; const b = document.createElement('button'); b.textContent = '📓'; b.setAttribute('aria-label', 'Back to the notebook'); b.dataset.ui = ''; b.addEventListener('click', onExit); x.append(b); top.append(x); }
  root.append(tray, pads, top, fuel);
  return {
   setMode(id) { modeBtn.forEach(([k, b]) => b.classList.toggle('on', k === id)); pads.style.display = id === 'god' ? 'none' : ''; fuel.style.display = id === 'god' ? 'none' : ''; },

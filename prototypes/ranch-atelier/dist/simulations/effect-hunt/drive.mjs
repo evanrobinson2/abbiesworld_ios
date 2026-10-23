@@ -90,7 +90,7 @@ export function createDriver({world, tune = {}, start = {x: 0, z: 0, heading: 0}
 
 // Keyboard + touch input. Touch: drag anywhere on the left half steers and throttles like a stick; the round buttons on
 // the right are jet and boost. No words anywhere.
-export function bindInput(driver, el, {onCast} = {}) {
+export function bindInput(driver, el, {onCast, wins = [window]} = {}) {
  const i = driver.input, keys = new Set();
  const upd = () => {
   i.throttle = (keys.has('KeyW') || keys.has('ArrowUp') ? 1 : 0) - (keys.has('KeyS') || keys.has('ArrowDown') ? 1 : 0);
@@ -101,10 +101,10 @@ export function bindInput(driver, el, {onCast} = {}) {
  const stick = {active: false, id: null, x0: 0, y0: 0, x: 0, y: 0, jet: false, boost: false};
  const kd = e => { if (e.repeat) return; keys.add(e.code); if (/^(Digit[0-9])$/.test(e.code) && onCast) onCast(e.code === 'Digit0' ? 9 : +e.code.slice(5) - 1); if (/Arrow|Space/.test(e.code)) e.preventDefault(); upd(); };
  const ku = e => { keys.delete(e.code); upd(); };
- addEventListener('keydown', kd); addEventListener('keyup', ku);
- const pd = e => { if (e.target.closest?.('[data-ui]')) return; if (e.clientX < innerWidth * .55 && !stick.active) { stick.active = true; stick.id = e.pointerId; stick.x0 = e.clientX; stick.y0 = e.clientY; el.setPointerCapture?.(e.pointerId); } };
+ for (const w of wins) { w.addEventListener('keydown', kd); w.addEventListener('keyup', ku); }
+ const pd = e => { if (e.target.closest?.('[data-ui]')) return; if (e.clientX < (el.clientWidth || innerWidth) * .55 && !stick.active) { stick.active = true; stick.id = e.pointerId; stick.x0 = e.clientX; stick.y0 = e.clientY; el.setPointerCapture?.(e.pointerId); } };
  const pm = e => { if (!stick.active || e.pointerId !== stick.id) return; stick.x = Math.max(-1, Math.min(1, (e.clientX - stick.x0) / 70)); stick.y = Math.max(-1, Math.min(1, (stick.y0 - e.clientY) / 70)); upd(); };
  const pu = e => { if (e.pointerId !== stick.id) return; stick.active = false; stick.x = stick.y = 0; stick.id = null; upd(); };
  el.addEventListener('pointerdown', pd); el.addEventListener('pointermove', pm); el.addEventListener('pointerup', pu); el.addEventListener('pointercancel', pu);
- return {stick, set(name, v) { stick[name] = v; upd(); }, dispose() { removeEventListener('keydown', kd); removeEventListener('keyup', ku); el.removeEventListener('pointerdown', pd); el.removeEventListener('pointermove', pm); el.removeEventListener('pointerup', pu); }};
+ return {stick, set(name, v) { stick[name] = v; upd(); }, dispose() { for (const w of wins) { w.removeEventListener('keydown', kd); w.removeEventListener('keyup', ku); } el.removeEventListener('pointerdown', pd); el.removeEventListener('pointermove', pm); el.removeEventListener('pointerup', pu); }};
 }
