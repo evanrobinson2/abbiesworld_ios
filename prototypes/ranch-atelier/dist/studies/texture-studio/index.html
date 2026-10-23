@@ -280,7 +280,7 @@ async function loadChar(c) {
  const sum = [0, 0, 0], cnt = [0, 0, 0];
  for (let i = 0; i < SZ * SZ; i++) { const k = Math.round(md[i * 4] / 60) - 1; role[i] = k; if (k >= 0) { sum[k] += L8(i); cnt[k]++; } }
  const was = sum.map((s, k) => Math.max(8, s / (cnt[k] || 1)));
- for (let i = 0; i < SZ * SZ; i++) { const k = role[i]; shade[i] = k < 0 ? 1 : Math.min(1.6, Math.max(.12, L8(i) / was[k])); }
+ for (let i = 0; i < SZ * SZ; i++) { const k = role[i]; shade[i] = k < 0 ? 1 : Math.min(1.25, Math.max(.62, L8(i) / was[k])); }
  // Meshy's own normal map, at bump size, to keep its sculpt under every look's pattern
  let srcNormal = null;
  if (maps?.normalMap?.image) { const nc = document.createElement('canvas'); nc.width = nc.height = HZ; const nx = nc.getContext('2d'); nx.drawImage(maps.normalMap.image, 0, 0, HZ, HZ); srcNormal = nx.getImageData(0, 0, HZ, HZ).data; }

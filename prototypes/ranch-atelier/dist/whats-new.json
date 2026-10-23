@@ -13,6 +13,17 @@
       "link": "/studies/shaders/built.html"
     },
     {
+      "id": "2026-10-23-texture-studio-smudge",
+      "date": "2026-10-23",
+      "title": "Texture Studio: cleaner brute paint",
+      "line": "The dark smudges on the brute's skin and clothes are gone from every look; the Saturday Action ink look is the clean one to start with.",
+      "image": "/whats-new/2026-10-23-texture-studio-smudge.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A",
+      "threadTitle": "AW-STUDY-0040 - Texture Studio",
+      "tour": false,
+      "link": "/studies/texture-studio/?look=action&shader=ink"
+    },
+    {
       "id": "2026-10-23-paint-the-world",
       "date": "2026-10-23",
       "title": "A card that paints the world",
