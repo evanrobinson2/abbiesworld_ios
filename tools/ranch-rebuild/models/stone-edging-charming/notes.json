@@ -1,0 +1,82 @@
+{
+ "what_i_did": [
+  [
+   "Start",
+   "Copied the normal stone-edging build.py, make_views.py, hero_check.py and run.sh and reshaped the design; same structure (one GLB, no variants: a plant), same origin (row centre on the ground), row along X, front -Y, the same 1.25 m length as GF-010, and the same six material names and roles (Stone_Grey, Stone_Pale, Petal_White, Petal_Yellow, Flower_Yellow, Leaf_Green). No new materials."
+  ],
+  [
+   "Target",
+   "Hero only (no turnaround was generated for this plant). make_views.py keys against the flat cream backdrop with a lower threshold (0.055) because the charming stones are cream-beige and sit close to the backdrop, fills enclosed holes up to 40k px, and drops the cast shadow right of the near (+X) stone (x > 1935, y > 1380 in the 2048 px hero). The thin soft contact shadow under the stones stays in the mask."
+  ],
+  [
+   "Hero camera",
+   "The charming hero looks from the front-RIGHT (near end on the right), the mirror of the normal hero: hero_check.py uses yaw +22 deg, elevation 6 deg, distance 1.0 x bbox diagonal. Calibration over yaw 10-36, elev 2-14, dist 0.7-1.3 was flat (within 0.02), so it was held fixed."
+  ],
+  [
+   "Stones",
+   "Eight chubby pebbles (7 segments x 4 staggered rings plus a top point, smooth-shaded so they read soft and pillowy), cream-beige instead of grey, nearly as tall as deep, each leaning up to 6 deg and sunk 8 mm so a lean never lifts an edge. Per-stone scale grows toward the near +X end (1.16 x for the last stone) as in the hero, and the stones overlap and squash together inside a 1.17 m span."
+  ],
+  [
+   "Foliage",
+   "Six soft smooth-shaded leafy humps heaped behind and over the stones (the hero's dense green mound), 24 plump oval leaves (4 triangles each, widest past the middle) poking out of them, four front-foot leaves in the gaps and three grass leaves fanning out along the ground at each end to reach the full 1.25 m."
+  ],
+  [
+   "Flowers",
+   "Ten oversized daisies (7-petal white stars with a domed yellow eye, heads up to 0.058 m radius versus 0.044 in the normal) on leaning stems, tallest at the two ends with a dip in the middle like the hero, two low daisies against the front stones, and five yellow buds (closed cupped Petal_Yellow stars) replacing the normal model's open marigolds, as the hero has yellow buds rather than marigolds. Heads turn front-right and up."
+  ],
+  [
+   "Game readiness",
+   "998 triangles (plant budget 1k) in 6 meshes, one flat material each. 1.24 x 0.29 x 0.39 m (normal: 1.25 x 0.27 x 0.18 m), so the footprint ratio is close to the normal one; it is taller because the hero's flowers stand well above the stones. to_game.py stone-edging-charming installed simulations/regional-assets-charming/GF-010.glb and listed it in the charming manifest."
+  ]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.763 at the final 768 px / 48 samples (0.766 at 384 px): the row of plump stones under a leafy mound with daisies bouncing up at both ends matches the hero's outline.",
+  "Reads as the same object as the normal edging (eight stones in a row with white and yellow flowers) but softer and toy-like: rounder, leaning, cream stones, a pillowy green heap and big daisy heads.",
+  "Same length, orientation, origin and material names as the normal model, so it drops in at GF-010 unchanged."
+ ],
+ "off": [
+  "The hero's foliage is hundreds of small leaves and dozens of daisies; at 1k triangles it is six soft humps, 34 leaves, 12 daisies and 5 buds, so the mound's top edge is smoother and less frilly than the hero's.",
+  "Stones are 7-segment low-poly pebbles with smooth shading; the hero's stones carry a fine sandy texture and gentle dents that are not modelled (and would vanish at tile size).",
+  "The row is 0.39 m tall versus the normal 0.18 m, because the hero's flowers stand high above the stones; the game copies plant GLBs unscaled, so the charming edging stands taller than the normal one.",
+  "Daisy petals are white, so on a white render background (harness views) only the yellow eyes show; on the cream hero background and the green tile they read."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "Normal build reshaped: chubby cream leaning pebbles, smooth shading, 12 big daisies, buds, 30 loose mound leaves; camera recalibrated to the front-right hero (yaw +22). The leaf mound barely read.",
+   "mean_iou": 0.574
+  },
+  {
+   "round": 2,
+   "change": "Added six faceted leafy humps behind the stones (stems cut to 2 triangles, 7-petal daisies to stay under 1k).",
+   "mean_iou": 0.661
+  },
+  {
+   "round": 3,
+   "change": "Rounder 3-ring humps, bigger daisy heads, fewer loose leaves; then even hump and flower heights (middle filled up, ends bounce).",
+   "mean_iou": 0.689
+  },
+  {
+   "round": 4,
+   "change": "Per-stone scale growing toward the near end; stones in a 1.17 m span with low grass tufts fanning out to 1.25 m at the ends.",
+   "mean_iou": 0.706
+  },
+  {
+   "round": 5,
+   "change": "Stones 7 segments, freed triangles spent on 24 leaves poking above the humps.",
+   "mean_iou": 0.723
+  },
+  {
+   "round": 6,
+   "change": "Wider, lower stones; humps smooth-shaded and pushed back so the stones' fronts show; brighter leaf green; trimmed the tallest end daisy and the right hump that overhung the last stone.",
+   "mean_iou": 0.766
+  },
+  {
+   "round": 7,
+   "change": "Flower heads tilted up for the tile's high camera. Final render 768 px / 48 samples.",
+   "mean_iou": 0.763
+  }
+ ],
+ "moving_parts": "None: a static plant prop (the game poses and sways plants itself).",
+ "creative_additions": "Stones lean a little and grow plumper toward the near end, the leafy heap is soft and pillowy, and the daisies bounce up at both ends of the row with a dip in the middle, as in the storybook hero."
+}
