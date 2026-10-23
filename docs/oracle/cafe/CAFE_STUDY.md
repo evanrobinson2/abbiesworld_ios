@@ -327,6 +327,11 @@ they're one of the best diegetic channels in the room:
   customer's lap means that customer is happy.
 - **Customers love them:** petting a pet is something a waiting customer does, so the wait is gentler, and a
   child can always just play with the pets ("you can do anything or nothing").
+- **Play and teach tricks** (Evan, 07:27Z: "you can also play with them, teach them tricks. (it takes time and
+  repetition)"): throw a ball, wiggle a toy, give a treat. A trick is learned by repeating it over days: the first
+  tries are clumsy, it gets reliable with practice, and a learned trick (sit, spin, high five, a dance move) shows up
+  on its own, such as the pup doing its spin at the party. The pet's skill lives in its own state and persists, so
+  the progress is real and slow, the way a pet learns.
 - **Decorating includes them:** beds, bowls, a cat tree and outfits are decoration cards and unlockable skins.
 - The room's style is still not animal-themed (Evan, round 1): the pets are characters in the café, not its decor.
 
