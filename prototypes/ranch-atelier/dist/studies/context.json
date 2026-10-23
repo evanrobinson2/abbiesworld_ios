@@ -756,9 +756,47 @@
      "k": "canon",
      "t": "Storybook study",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/storybook/STORYBOOK_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "How Abbie's World shows information (no vignette or edge haze, two layers)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md"
+    },
+    {
+     "k": "canon",
+     "t": "Abbie's World designer skill",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/.claude/skills/abbies-world-designer/SKILL.md"
+    },
+    {
+     "k": "devblog",
+     "t": "Bokeh depth of field in a single pass (Dennis Gustafsson, Tuxedo Labs)",
+     "href": "https://blog.tuxedolabs.com/2018/05/04/bokeh-depth-of-field-in-single-pass.html",
+     "note": "The lens blur is this gather; applied from memory"
+    },
+    {
+     "k": "research",
+     "t": "Real-Time Approximations to Subsurface Scattering (GPU Gems, ch. 16)",
+     "href": "https://developer.nvidia.com/gpugems/gpugems/part-iii-materials/chapter-16-real-time-approximations-subsurface-scattering",
+     "note": "Wrap lighting and the skin glow; applied from memory"
+    },
+    {
+     "k": "research",
+     "t": "The Alchemy Screen-Space Ambient Obscurance Algorithm (McGuire et al., 2011)",
+     "href": "https://casual-effects.com/research/McGuire2011AlchemyAO/index.html",
+     "note": "Basis of the soft shadows pass; applied from memory"
+    },
+    {
+     "k": "reference",
+     "t": "three.js ShaderMaterial and shader chunks (r170)",
+     "href": "https://threejs.org/docs/#api/en/materials/ShaderMaterial"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's reference picture",
+     "note": "Private; kept out of the repo"
     }
    ],
-   "recorded": "2026-10-23, gathered afterwards from the study docs"
+   "recorded": "2026-10-23, by the study's thread; no Oracle consultation and no game design blog or tutorial used"
   },
   "family-cast": {
    "items": [],
