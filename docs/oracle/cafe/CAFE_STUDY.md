@@ -418,3 +418,38 @@ head caps, portafilters, tampers) but we have not found a complete, openly licen
 part list from real machine anatomy (an E61-style group head, a 58 mm portafilter, a 2 L boiler body), take sizes from
 open accessory models only where their licence allows, and record each source and licence in the asset's
 `provenance.json`. The geometry is our own Blender recipe either way.
+
+## 10. The photo booth (Evan, 2026-10-23 08:51Z)
+"Add a photo booth minigame." The booth stands in the front-left corner (`photo_booth` in `tools/cafe-build/assets_party.py`).
+You play it at `/studies/cafe/photobooth.html`, looking through the booth's own camera. The booth shows a pose card on
+its bezel, and its ring of ten bulbs counts down. You strike the pose (three picture buttons, no words), the softbox
+flashes, and after four flashes a strip of four pictures drops out of the slot. It uses in-game characters only (Abbie
+and a friend from `simulation-assets/workers`), never the real camera. Strips are kept in `aw-cafe-booth-strips`.
+Tour: false until the café is walkable.
+
+### How it was made, and how to be faster next time
+Timeline, in local time (UTC-4): ask at 4:51 AM. Booth model built by about 5:00. Game playable locally at 5:10. Pose
+rig right at 5:14. Merged at 5:37 and live at 5:51. It took about 20 minutes to playable and an hour to live. It shared
+that hour with four other asks: the shorter bar, the cash register key, the basement door and the readout viewer fix.
+
+What slowed us down:
+1. The workers are rigid parts with no rig. Posing them needed shoulder and neck pivots built at runtime. It took five
+   screenshot rounds to get them right:
+   - GLTFLoader turns spaces in names into underscores, so the name matching failed.
+   - The kids faced away from the camera.
+   - Arms swung across the face.
+   - Forearms joined the wrong sleeve.
+   - The hat line was swallowed by a comment.
+2. The flash was tuned by eye: the first strip was white.
+3. Capturing the canvas directly broke the game-feel `raw-capture` rule. The fix was `renderWorldOnly()`.
+4. Assembling the room render takes about 12 minutes. Starting it blocked nothing, but restarting it after adding the booth
+   cost a re-render.
+
+To go faster:
+1. Put a `poseRig(root)` into the shared kit (`simulations/`). It would cover the shoulder, neck and prop sockets for
+   the rigid workers, with names normalised, the face toward the camera and arms swinging outward. The next game that
+   poses a character then starts from there. The pivot code in `photobooth.html` is the first draft.
+2. Take every snapshot through `renderWorldOnly()` from the start, and keep a `?pose=` still mode for screenshots.
+3. Add a new prop to the room LAYOUT before starting the long room render, or render the room last.
+4. Keep the Playwright script that plays a full round and screenshots the strip (four taps, about 25 s). Run it once
+   per change instead of single-frame checks.
