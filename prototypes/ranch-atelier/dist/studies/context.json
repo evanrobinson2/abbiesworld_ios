@@ -1805,6 +1805,76 @@
     }
    ],
    "recorded": "2026-10-23, consulted while building"
+  },
+  "backpack": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Astroneer identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json",
+     "note": "\"Diegetic backpack inventory ... one of the best low-HUD references\": the backpack shows what she carries as things, not slots."
+    },
+    {
+     "k": "oracle",
+     "t": "Dredge identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dredge.json",
+     "note": "A packing inventory is fun on its own; ours stays a gentle toy with no grid."
+    },
+    {
+     "k": "oracle",
+     "t": "Animal Crossing: New Horizons identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json",
+     "note": "Customise one thing in a few named ways, each change seen at once: the five facet orbs."
+    },
+    {
+     "k": "devblog",
+     "t": "PC Gamer, The best Rainbow Six Siege skins (weapon charms)",
+     "href": "https://www.pcgamer.com/uk/rainbow-six-siege-best-skins",
+     "note": "Charms as earned vanity: small, swinging, readable from across the room. Ours come only from quests, never from a shop."
+    },
+    {
+     "k": "design",
+     "t": "Indieklem, The Diegetic Dilemma",
+     "href": "https://indieklem.substack.com/p/19-the-diegetic-dilemma-benefits",
+     "note": "Immersive interfaces cost clarity; the backpack keeps an overlay register for a quick look and the world-worn charms for the diegetic side."
+    },
+    {
+     "k": "design",
+     "t": "UX Collective, How video game UX/UI can bridge the gap between players and the game",
+     "href": "https://uxdesign.cc/how-video-game-ux-ui-can-bridge-the-gap-between-players-and-the-game-3727d3b69aa9",
+     "note": "The four quadrants (diegetic, spatial, meta, non-diegetic) as the design card uses them."
+    },
+    {
+     "k": "tutorial",
+     "t": "Wayline, Diegetic interfaces in game design",
+     "href": "https://www.wayline.io/blog/diegetic-interfaces-game-design",
+     "note": "Keep a diegetic UI readable at a glance: one big shape, few states."
+    },
+    {
+     "k": "reference",
+     "t": "Resident Evil 4, the attaché case",
+     "href": "https://residentevil.fandom.com/wiki/Attache_Case",
+     "note": "An inventory you open like a real case, with charms hanging off it (the RE4 remake keychains): the half-shell idea, and proof charms read as rewards."
+    },
+    {
+     "k": "canon",
+     "t": "Abbie's pocket brief (now the backpack)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/briefs/inventory.md",
+     "note": "Inner voice on pickup, the register on the chronograph, the abbie manifest."
+    },
+    {
+     "k": "canon",
+     "t": "Game canon",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/GAME_CANON.md",
+     "note": "Gold coins are Daddy's core memories; inventories are backpacks; charms come from quests."
+    },
+    {
+     "k": "canon",
+     "t": "HUD study and GAME_FEEL",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+     "note": "Nothing masks the world: the open backpack floats over the scene with no dimming or blur."
+    }
+   ]
   }
  }
 }

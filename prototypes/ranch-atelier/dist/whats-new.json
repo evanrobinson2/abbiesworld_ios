@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-backpack",
+      "date": "2026-10-23",
+      "title": "Abbie's backpack",
+      "line": "Her pocket is now a backpack. Tap it and it opens all the way, like a clamshell, with her things in both halves. Pick one of ten styles, change five facets, and earn a charm for every quest; the first ones come from Daddy's core memories.",
+      "image": "/whats-new/2026-10-23-backpack.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 - Backpack inventory",
+      "tour": true,
+      "link": "/studies/backpack/"
+    },
+    {
       "id": "2026-10-23-character-studio-cast",
       "date": "2026-10-23",
       "title": "Character Studio: four new characters",
