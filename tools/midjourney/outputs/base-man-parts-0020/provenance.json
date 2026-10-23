@@ -364,6 +364,186 @@
           "bytes": 421285
         }
       ]
+    },
+    {
+      "name": "wrist",
+      "prompt": "isolated anatomical study of a single adult male right wrist joining forearm to hand, flat and twice as wide as it is deep, wrist bones visible, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view and side view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "01692633-57b3-4e74-a953-b875f62933d0",
+      "created": "2026-10-23T07:21:17Z",
+      "files": [
+        {
+          "file": "images/wrist_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/01692633-57b3-4e74-a953-b875f62933d0/0_0.png",
+          "sha256": "c2e4e078504c41ea21d1de2354fc8a5d3496c0c3f50f89513df4b1b48ed6c928",
+          "bytes": 363592
+        },
+        {
+          "file": "images/wrist_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/01692633-57b3-4e74-a953-b875f62933d0/0_1.png",
+          "sha256": "3e9048c021542151f13fab6a970e3ccd0ac1546ed32670b4dc8231504217ca5a",
+          "bytes": 367430
+        },
+        {
+          "file": "images/wrist_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/01692633-57b3-4e74-a953-b875f62933d0/0_2.png",
+          "sha256": "609d9741a55a91f66bd485d5957549c8a7f410b499e4a19e7712863f8d2139e0",
+          "bytes": 324660
+        },
+        {
+          "file": "images/wrist_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/01692633-57b3-4e74-a953-b875f62933d0/0_3.png",
+          "sha256": "4ab784f91c01f317df61cc000ce46e3fe0b2678b36c3f208eb3963b6c47be46b",
+          "bytes": 408184
+        }
+      ]
+    },
+    {
+      "name": "hand-back",
+      "prompt": "isolated anatomical study of a single adult male relaxed right hand, back of the hand, knuckles, tendons, four fingers and thumb slightly curled, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, back view and side view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "e46ebffd-f16f-4487-85ed-5f4a1f5cfe1e",
+      "created": "2026-10-23T07:22:01Z",
+      "files": [
+        {
+          "file": "images/hand-back_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/e46ebffd-f16f-4487-85ed-5f4a1f5cfe1e/0_0.png",
+          "sha256": "723bede6816bac51189ae0bdb7fe8e24227a16490ef86034428ebbb4808dc572",
+          "bytes": 403370
+        },
+        {
+          "file": "images/hand-back_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/e46ebffd-f16f-4487-85ed-5f4a1f5cfe1e/0_1.png",
+          "sha256": "d7bd9291e3200d7ef3526804c65800d203c26cc29460a36746d4d4d384d5ed87",
+          "bytes": 544952
+        },
+        {
+          "file": "images/hand-back_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/e46ebffd-f16f-4487-85ed-5f4a1f5cfe1e/0_2.png",
+          "sha256": "d86d2e55523b1a45b7bafd436b5533ef1c9e31714ad706e5359f2f1c9d6660ae",
+          "bytes": 513106
+        },
+        {
+          "file": "images/hand-back_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/e46ebffd-f16f-4487-85ed-5f4a1f5cfe1e/0_3.png",
+          "sha256": "8c7d090081c7b47baac6a13ece76af79433f6e96315a672b2a3b3b81f3a69209",
+          "bytes": 557958
+        }
+      ]
+    },
+    {
+      "name": "hand-palm",
+      "prompt": "isolated anatomical study of a single adult male relaxed right hand, palm side, thenar pad, finger pads and creases, four fingers and thumb slightly curled, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, palm view and side view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "c25837ef-7c79-4976-b8a9-13e57bbb69aa",
+      "created": "2026-10-23T07:22:39Z",
+      "files": [
+        {
+          "file": "images/hand-palm_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/c25837ef-7c79-4976-b8a9-13e57bbb69aa/0_0.png",
+          "sha256": "fd2edf749e7ed820fcbe96cc4544e621e34e0198e2259a7dfa6586f7445594b8",
+          "bytes": 441289
+        },
+        {
+          "file": "images/hand-palm_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/c25837ef-7c79-4976-b8a9-13e57bbb69aa/0_1.png",
+          "sha256": "cd574de8ba98c3a4f938628b34753ade64d5dc7f71e33262b702348c0846297a",
+          "bytes": 397034
+        },
+        {
+          "file": "images/hand-palm_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/c25837ef-7c79-4976-b8a9-13e57bbb69aa/0_2.png",
+          "sha256": "4913edf5ed7bdd83621bd97bf8f1f15ff5040b1d6f858b0a626f4a70a15cc6b5",
+          "bytes": 480683
+        },
+        {
+          "file": "images/hand-palm_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/c25837ef-7c79-4976-b8a9-13e57bbb69aa/0_3.png",
+          "sha256": "bbcf3bd4e48a10bef86c22ed9ae764433bd58f7b5778d45fa94eb6bf6f4e17a6",
+          "bytes": 438777
+        }
+      ]
+    },
+    {
+      "name": "finger",
+      "prompt": "isolated anatomical study of a single adult male single index finger with three segments, knuckles and fingernail, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, side view and top view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "5bc1cbd7-c53d-4718-9738-ef7b1dfe12e4",
+      "created": "2026-10-23T07:23:21Z",
+      "files": [
+        {
+          "file": "images/finger_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5bc1cbd7-c53d-4718-9738-ef7b1dfe12e4/0_0.png",
+          "sha256": "8d83b14c4eb07e382a48f1ffd6455f1589715bec23782d7353b8d79f0a2bd847",
+          "bytes": 492032
+        },
+        {
+          "file": "images/finger_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5bc1cbd7-c53d-4718-9738-ef7b1dfe12e4/0_1.png",
+          "sha256": "1c61b52d2827ed5139d564aea4c1c2d600168be494a05a03887a667572c36382",
+          "bytes": 337778
+        },
+        {
+          "file": "images/finger_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5bc1cbd7-c53d-4718-9738-ef7b1dfe12e4/0_2.png",
+          "sha256": "28795d87cc493bff1ed431603909c4a24ad69e799787c006db38ed05f00e7731",
+          "bytes": 323416
+        },
+        {
+          "file": "images/finger_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5bc1cbd7-c53d-4718-9738-ef7b1dfe12e4/0_3.png",
+          "sha256": "2ead5e0b4b043981ce4e1259af4d02dcf7728bfe85dd2e8f8709fc5f0d98357b",
+          "bytes": 332897
+        }
+      ]
+    },
+    {
+      "name": "thumb",
+      "prompt": "isolated anatomical study of a single adult male right thumb with its base muscle, two segments and thumbnail, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, side view and front view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "a929fe53-14fb-4f1a-a48b-e76aa2861e28",
+      "created": "2026-10-23T07:23:58Z",
+      "files": [
+        {
+          "file": "images/thumb_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/a929fe53-14fb-4f1a-a48b-e76aa2861e28/0_0.png",
+          "sha256": "36c923435f3f0b6bf0af44ae25e44bce786b900d17e542cd91b612c4345a008a",
+          "bytes": 483386
+        },
+        {
+          "file": "images/thumb_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/a929fe53-14fb-4f1a-a48b-e76aa2861e28/0_1.png",
+          "sha256": "f6c08f2149396d117c7ae9427d07ed3a6d284241021d49a975a80814d6c8f131",
+          "bytes": 454892
+        },
+        {
+          "file": "images/thumb_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/a929fe53-14fb-4f1a-a48b-e76aa2861e28/0_2.png",
+          "sha256": "a93218740721a3a9cee4e0e02bb874c727d748bee3119b42d662420daf5fa5dd",
+          "bytes": 577632
+        },
+        {
+          "file": "images/thumb_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/a929fe53-14fb-4f1a-a48b-e76aa2861e28/0_3.png",
+          "sha256": "1b44273ac336483857c236d2626a712b3dae07afe6288f358b85ab95c2660090",
+          "bytes": 629889
+        }
+      ]
     }
   ]
 }
