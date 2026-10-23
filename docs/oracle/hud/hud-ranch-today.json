@@ -172,5 +172,6 @@
   "max_flash_hz": 0,
   "fail_screen": false
  },
- "captures": []
+ "captures": [],
+ "signals": []
 }

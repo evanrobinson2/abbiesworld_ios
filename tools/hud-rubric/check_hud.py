@@ -15,6 +15,7 @@ The manifest (hud.json) describes one play-mode screen:
                    "colour": "#2b1d0e", "numeral_bbox": [x, y, w, h], "on_solid_token": false, "world_echo": "light", "touches_per_min": 2,
                    "bbox": {"portrait": [x, y, w, h], "landscape": [x, y, w, h]}}],
      "fade": {"focus": {...}, "change": {...}, "idle_tuck": {...}, "threshold": {...}, "summon_all": "..."},
+     "signals": [{"id": "storm", "drives": ["light", "music", "npcs", "animals", "sound"]}],
      "kid_safe": {"red_alarm": false, "buzzer": false, "max_flash_hz": 0, "fail_screen": false},
      "captures": ["day.png", "dusk.png", "night.png"]}
 
@@ -179,6 +180,10 @@ def check(man_path, css=(), code=()):
     res["spatial_share"] = (share >= T["spatial_share_min"], f"{len(on_things)}/{len(reads)} readouts on things ({share:.0%}, min {T['spatial_share_min']:.0%})")
     no_echo = [e["id"] for e in overlay_always if e.get("readout") and not e.get("world_echo")]
     res["world_echo"] = (not no_echo, ", ".join(no_echo) or "every always-on meter has a world echo")
+    world = set(RUBRIC["core_rule"]["channels"])
+    sigs = man.get("signals", [])
+    thin = [f"{g['id']} ({len(set(g.get('drives', [])) & world)})" for g in sigs if len(set(g.get("drives", [])) & world) < RUBRIC["core_rule"]["min_world_channels"]]
+    res["one_signal_many_channels"] = (bool(sigs) and not thin, ("no signals declared" if not sigs else ", ".join(thin) + " drive too few world channels") if (thin or not sigs) else f"{len(sigs)} signals each drive 3+ world channels")
     vp = man["viewports"].get("portrait")
     far = []
     if vp:
