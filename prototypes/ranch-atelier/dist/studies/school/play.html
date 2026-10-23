@@ -103,6 +103,11 @@ const M = {
  skin: new T.MeshStandardMaterial({color: '#f0c29b', roughness: .8, name: 'skin'}),
  jacket: new T.MeshStandardMaterial({color: '#f2ede4', roughness: .8, name: 'white t-shirt'}),
  shorts: new T.MeshStandardMaterial({color: '#c8322e', roughness: .8, name: 'red shorts'}),
+ sock: new T.MeshStandardMaterial({color: '#f4f1ea', roughness: 1, name: 'tube sock'}),
+ sneaker: new T.MeshStandardMaterial({color: '#f6f6f2', roughness: .7, name: 'white sneaker'}),
+ sole: new T.MeshStandardMaterial({color: '#c9c2b6', roughness: .9, name: 'sneaker sole'}),
+ eye: new T.MeshStandardMaterial({color: '#20160f', roughness: .3, name: 'eye'}),
+ nose: new T.MeshStandardMaterial({color: '#0a0a0a', roughness: .3, name: 'dog nose'}),
  hair: new T.MeshStandardMaterial({color: '#e9c86b', roughness: .9, flatShading: true, name: 'blond mop hair'}),
  jeans: new T.MeshStandardMaterial({color: '#2e3550', roughness: .9, name: 'jeans'}),
  fur: new T.MeshStandardMaterial({color: '#1d1b20', roughness: .55, name: 'black lab coat'}),
@@ -253,30 +258,60 @@ const allHolds = [...CLIMB1.holds, ...CLIMB2.holds, ...CLIMB3.holds];
 
 // ---------- The kid (you), the dog, the leash, tennis balls. ----------
 function makeKid() {
+ // Young Daddy, hero low poly (Evan, 09:58Z): a blond mop and never a hat, white tee, red shorts, white sneakers.
+ // Legs and arms hang from pivots at the hip and shoulder so they swing like limbs, not like batons.
  const g = new T.Group(); g.name = 'kid';
- const add = (geo, mat, x, y, z, name) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; m.name = name; g.add(m); return m; };
- const legs = [add(new T.CylinderGeometry(.055, .05, .42, 6), M.skin, -.09, .21, 0, 'left leg'), add(new T.CylinderGeometry(.055, .05, .42, 6), M.skin, .09, .21, 0, 'right leg')];
- for (const x of [-.09, .09]) add(new T.BoxGeometry(.1, .07, .16), M.jeans, x, .03, .03, 'sneaker');
- add(new T.CylinderGeometry(.18, .17, .2, 10), M.shorts, 0, .44, 0, 'red shorts');
- const body = add(new T.CapsuleGeometry(.17, .28, 3, 8), M.jacket, 0, .66, 0, 'jacket');
- add(new T.SphereGeometry(.16, 10, 8), M.skin, 0, 1.05, 0, 'head');
- // a blond mop, never a hat (Evan, 09:58Z)
- add(new T.SphereGeometry(.185, 9, 6, 0, Math.PI * 2, 0, Math.PI * .55), M.hair, 0, 1.06, -.01, 'blond mop'); add(new T.BoxGeometry(.3, .07, .08), M.hair, 0, 1.13, .13, 'mop fringe').rotation.x = .5;
- const arm = add(new T.CapsuleGeometry(.05, .3, 2, 6), M.jacket, .2, .7, 0, 'throwing arm');
+ const add = (geo, mat, x, y, z, name, parent = g) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; m.name = name; parent.add(m); return m; };
+ const pivot = (x, y, z, name) => { const o = new T.Group(); o.position.set(x, y, z); o.name = name; g.add(o); return o; };
+ const legs = [-.085, .085].map((x, i) => {
+  const hip = pivot(x, .43, 0, i ? 'right hip' : 'left hip');
+  add(new T.CylinderGeometry(.058, .048, .36, 7), M.skin, 0, -.2, 0, 'leg', hip);
+  add(new T.CylinderGeometry(.06, .06, .05, 7), M.sock, 0, -.37, 0, 'sock', hip);
+  add(new T.BoxGeometry(.11, .075, .19), M.sneaker, 0, -.41, .03, 'white sneaker', hip);
+  add(new T.BoxGeometry(.115, .025, .2), M.sole, 0, -.445, .03, 'sneaker sole', hip);
+  return hip;
+ });
+ add(new T.CylinderGeometry(.175, .165, .2, 10), M.shorts, 0, .47, 0, 'red shorts');
+ const body = add(new T.CapsuleGeometry(.165, .26, 3, 10), M.jacket, 0, .69, 0, 'white t-shirt');
+ add(new T.CylinderGeometry(.05, .055, .07, 8), M.skin, 0, .93, 0, 'neck');
+ const head = add(new T.SphereGeometry(.155, 14, 10), M.skin, 0, 1.06, 0, 'head'); head.scale.set(1, 1.05, .98);
+ for (const x of [-.055, .055]) add(new T.SphereGeometry(.018, 6, 4), M.eye, x, 1.08, .14, 'eye');
+ add(new T.SphereGeometry(.022, 6, 4), M.skin, 0, 1.04, .155, 'nose');
+ for (const x of [-.155, .155]) add(new T.SphereGeometry(.035, 6, 4), M.skin, x, 1.06, 0, 'ear');
+ // the mop: overlapping tufts, heavier at the back, a fringe over the brow
+ const tufts = [[0, 1.17, -.02, .17], [-.09, 1.14, .04, .1], [.09, 1.15, .03, .1], [-.11, 1.1, -.08, .1], [.11, 1.1, -.08, .1], [0, 1.1, -.12, .13], [-.05, 1.13, .11, .08], [.06, 1.12, .12, .08], [-.13, 1.04, -.03, .07], [.13, 1.04, -.03, .07]];
+ tufts.forEach(([x, y, z, r], i) => { const t = add(new T.IcosahedronGeometry(r, 0), M.hair, x, y, z, 'blond mop'); t.scale.y = .7; t.rotation.set(i * .7, i * 1.3, 0); });
+ const shoulder = (x, name) => pivot(x, .84, 0, name);
+ const arm = shoulder(.2, 'throwing arm');
+ add(new T.CylinderGeometry(.065, .06, .1, 8), M.jacket, 0, -.03, 0, 'sleeve', arm);
+ add(new T.CylinderGeometry(.045, .04, .3, 7), M.skin, 0, -.2, 0, 'arm', arm); add(new T.SphereGeometry(.05, 7, 5), M.skin, 0, -.37, 0, 'hand', arm);
+ const off = shoulder(-.2, 'other arm');
+ add(new T.CylinderGeometry(.065, .06, .1, 8), M.jacket, 0, -.03, 0, 'sleeve', off);
+ add(new T.CylinderGeometry(.045, .04, .3, 7), M.skin, 0, -.2, 0, 'arm', off); add(new T.SphereGeometry(.05, 7, 5), M.skin, 0, -.37, 0, 'hand', off);
  const carry = []; for (let i = 0; i < 3; i++) { const b = new T.Mesh(new T.SphereGeometry(.07, 8, 6), M.ball); b.position.set((i - 1) * .12, .7 + (i === 1 ? .09 : 0), .2); b.visible = false; b.name = 'carried ball'; g.add(b); carry.push(b); }
- g.userData = {legs, carry, arm, body}; return g;
+ g.userData = {legs, carry, arm, off, body}; return g;
 }
 const kid = makeKid(); kid.scale.setScalar(1.3); scene.add(kid);
 function makeDog() {
+ // bub, a black lab (Evan, 09:58Z): deep chest, broad head, soft drop ears, an otter tail, a red collar.
  const g = new T.Group(); g.name = 'dog';
- const add = (geo, mat, x, y, z) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
- add(new T.CapsuleGeometry(.2, .45, 3, 8), M.fur, 0, .42, 0).rotation.z = Math.PI / 2;
- const head = add(new T.SphereGeometry(.18, 10, 8), M.fur, .42, .62, 0); add(new T.BoxGeometry(.16, .1, .12), M.fur, .58, .58, 0);
- add(new T.TorusGeometry(.13, .03, 6, 12), M.collar, .33, .55, 0).rotation.y = Math.PI / 2;
- add(new T.BoxGeometry(.06, .16, .1), M.furDark, .4, .72, .14); add(new T.BoxGeometry(.06, .16, .1), M.furDark, .4, .72, -.14);
- const legs = []; for (const [x, z] of [[.22, .1], [.22, -.1], [-.22, .1], [-.22, -.1]]) legs.push(add(new T.CylinderGeometry(.05, .05, .3, 6), M.fur, x, .15, z));
- const tail = add(new T.CylinderGeometry(.045, .02, .38, 6), M.fur, -.44, .55, 0); tail.rotation.z = -1.05; // a lab's otter tail
- const mouth = new T.Object3D(); mouth.position.set(.66, .55, 0); g.add(mouth);
+ const add = (geo, mat, x, y, z, parent = g) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; parent.add(m); return m; };
+ const torso = add(new T.CapsuleGeometry(.19, .42, 4, 10), M.fur, 0, .44, 0); torso.rotation.z = Math.PI / 2; torso.scale.set(1.05, 1, .92);
+ add(new T.SphereGeometry(.2, 10, 8), M.fur, .2, .45, 0).scale.set(1, 1.1, .95); // chest
+ const neck = add(new T.CylinderGeometry(.1, .14, .2, 8), M.fur, .36, .58, 0); neck.rotation.z = -.7;
+ const head = add(new T.BoxGeometry(.24, .2, .22), M.fur, .48, .68, 0);
+ add(new T.BoxGeometry(.17, .11, .14), M.fur, .64, .63, 0); // muzzle
+ add(new T.SphereGeometry(.03, 6, 4), M.nose, .73, .66, 0);
+ for (const z of [-.06, .06]) add(new T.SphereGeometry(.018, 6, 4), M.eye, .6, .72, z);
+ add(new T.TorusGeometry(.12, .025, 6, 14), M.collar, .38, .56, 0).rotation.y = Math.PI / 2;
+ for (const z of [-.12, .12]) { const e = add(new T.BoxGeometry(.05, .17, .1), M.furDark, .45, .64, z); e.rotation.x = z > 0 ? .35 : -.35; }
+ const legs = [[.2, .1], [.2, -.1], [-.24, .1], [-.24, -.1]].map(([x, z]) => {
+  const hip = new T.Group(); hip.position.set(x, .36, z); g.add(hip);
+  add(new T.CylinderGeometry(.055, .045, .3, 7), M.fur, 0, -.17, 0, hip); add(new T.BoxGeometry(.08, .04, .09), M.fur, .02, -.33, 0, hip);
+  return hip;
+ });
+ const tail = add(new T.CylinderGeometry(.045, .018, .4, 7), M.fur, -.46, .52, 0); tail.rotation.z = -1.05; // a lab's otter tail
+ const mouth = new T.Object3D(); mouth.position.set(.7, .58, 0); g.add(mouth);
  const hit = new T.Mesh(new T.SphereGeometry(1.2, 8, 6), new T.MeshBasicMaterial({visible: false})); hit.position.y = .5; g.add(hit);
  g.userData = {head, tail, hit, legs, mouth}; g.scale.setScalar(1.3); return g;
 }
@@ -329,6 +364,10 @@ function makeCar(i) {
  const paint = new T.MeshStandardMaterial({color: carColors[i % carColors.length], roughness: .35, metalness: .45, name: 'car paint'});
  const chrome = new T.MeshStandardMaterial({color: '#e8e8ee', roughness: .15, metalness: 1, name: 'chrome bumper'});
  const b = new T.Mesh(new T.BoxGeometry(4.8, .8, 2), paint); b.position.y = .62; b.castShadow = true; g.add(b);
+ // the woodgrain side panels of an '80s family wagon, framed in chrome trim
+ const wood = new T.MeshStandardMaterial({color: '#8a5a33', roughness: .6, name: 'woodgrain side panel'});
+ for (const z of [-1.005, 1.005]) { const pnl = new T.Mesh(new T.BoxGeometry(3.9, .42, .02), wood); pnl.position.set(-.3, .64, z); g.add(pnl); const trim = new T.Mesh(new T.BoxGeometry(3.95, .03, .03), chrome); trim.position.set(-.3, .87, z); g.add(trim); }
+ const grille = new T.Mesh(new T.BoxGeometry(.04, .22, 1.0), new T.MeshStandardMaterial({color: '#3a3a40', roughness: .4, metalness: .6, name: 'grille'})); grille.position.set(2.42, .66, 0); g.add(grille);
  const c = new T.Mesh(new T.BoxGeometry(2.9, .66, 1.8), new T.MeshStandardMaterial({color: '#2a2f3c', roughness: .15, metalness: .3, name: 'car glass'})); c.position.set(-.35, 1.33, 0); c.castShadow = true; g.add(c);
  const roof = new T.Mesh(new T.BoxGeometry(3.4, .08, 1.85), paint); roof.position.set(-.6, 1.7, 0); g.add(roof);
  c.scale.x = 1.17; c.position.x = -.6; // a station wagon: the long glasshouse
@@ -676,15 +715,17 @@ const janitor = makeJanitor();
 function janitorEnding() {
  if (S.ended || S.mode !== 'roof') return;
  S.mode = 'ending'; S.ended = 'pending'; S.target = null; SFX.rattle();
- janitor.visible = true; janitor.position.set(9.2, 0, 1.2); janitor.rotation.y = -Math.PI / 2; janitor.userData.torch.intensity = 60;
- tweenCamera({pos: v3(14, 4.2, 6), look: v3(7.4, 3, 1.2), fov: 44}, 1.2);
+ janitor.visible = true; janitor.position.set(9.2, 0, 1.2); janitor.rotation.y = -Math.PI / 2; janitor.updateMatrixWorld(); janitor.userData.torch.intensity = 60;
+ const aimTorch = at => { janitor.updateMatrixWorld(); janitor.userData.torch.target.position.copy(janitor.worldToLocal(at.clone())); };
+ aimTorch(kid.position.clone().add(v3(0, .8, 0)));
+ tweenCamera({pos: v3(13.5, 1.8, -2.5), look: v3(8, 3.4, .6), fov: 50}, 1.2);
  S.shake = .6; SFX.sting(); say(LINES.janitor, {grownUp: true});
  setTimeout(() => {
   say(LINES.jump); kid.rotation.y = Math.PI / 2;
   const from = kid.position.clone(), to = v3(9.6, 0, -1.6);
   fly(kid, from, to, from.y + .6, .8, () => {
    SFX.slip(); SFX.bounce(); S.shake = 1.2; S.lvl = 'yard'; S.ended = false; S.limp = 1;
-   janitor.userData.torch.target.position.set(9.6, 0, -1.6);
+   janitor.rotation.y = 0; aimTorch(v3(9.6, .6, -1.6));
    tweenCamera({pos: v3(15, 3.2, -6), look: v3(9.4, .8, -1.6), fov: 48}, 1.6, () => finish('janitor'));
   });
  }, 3200);
@@ -756,7 +797,7 @@ function placeHands(dt) {
  const show = !!S.onWall;
  const w = S.climb.wall;
  S.pulse = Math.max(0, (S.pulse || 0) - dt * .8);
- kid.userData.arm.visible = !show;
+ kid.userData.arm.visible = kid.userData.off.visible = !show;
  if (show) {
   const hs = latched(), sc = kid.scale.y;
   const u = hs.length ? hs.reduce((s, h) => s + h.u, 0) / hs.length : .1;
@@ -795,8 +836,8 @@ function walkKid(dt) {
   mv.normalize().multiplyScalar(3.4 * dt); const p = kid.position;
   if (walkable(S.lvl, p.x + mv.x, p.z + mv.z)) p.add(mv); else if (walkable(S.lvl, p.x + mv.x, p.z)) p.x += mv.x; else if (walkable(S.lvl, p.x, p.z + mv.z)) p.z += mv.z; else { S.target = null; S.onArrive = null; }
   kid.rotation.y = Math.atan2(mv.x, mv.z); S.stepT = (S.stepT || 0) + dt; if (S.stepT > .28) { S.stepT = 0; SFX.step(); }
-  kid.userData.legs[0].rotation.x = Math.sin(time * 14) * .5; kid.userData.legs[1].rotation.x = -Math.sin(time * 14) * .5;
- } else kid.userData.legs.forEach(l => l.rotation.x *= .8);
+  kid.userData.legs[0].rotation.x = Math.sin(time * 14) * .5; kid.userData.legs[1].rotation.x = -Math.sin(time * 14) * .5; kid.userData.off.rotation.x = Math.sin(time * 14) * .45;
+ } else { kid.userData.legs.forEach(l => l.rotation.x *= .8); kid.userData.off.rotation.x *= .8; }
  kid.position.y = levelY(S.lvl);
 }
 function dogTo(target, speed, dt) {
@@ -928,7 +969,7 @@ function frame(now) {
  requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
-window.schoolJump = {tossDown, tossUp, janitorEnding, TARGETS, finish, S, tapHold, allHolds, CLIMB1, CLIMB2, CLIMB3, kid, dog, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb, startDescent, wallThrow};
+window.schoolJump = {camera, tweenCamera, tossDown, tossUp, janitorEnding, TARGETS, finish, S, tapHold, allHolds, CLIMB1, CLIMB2, CLIMB3, kid, dog, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb, startDescent, wallThrow};
 </script>
 </body>
 </html>
