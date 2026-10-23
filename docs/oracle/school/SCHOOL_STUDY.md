@@ -68,7 +68,24 @@ What changed:
 - Next for assets: turnarounds of the kid and bub, wall pieces, rooftop props and the station wagon from the picks,
   built as hero low-poly recipes per `tools/ranch-rebuild/MODELER.md`.
 
+## Round three (Evan, 2026-10-23 09:54-09:58Z)
+- "ball toss / catch, (power / timing game) you have to make 2 shots to spots on the wall.. then you throw it on the roof
+  no matter what": hold to wind up, let go in the gold zone of the power glass (the hang-drop's bar, reused). Two chalk
+  targets on the wall; a hit fills the bullseye (+150) and bub wants it further; a miss gets "softer"/"harder". The
+  third throw goes on the roof whatever the power.
+- "the last area is only available if the user does NOT listen to the voice saying 'that seems like a big jump, maybe I
+  shouldn't do it'... the final area is on another lower level only accessible by conscious drop": reaching the gym
+  edge plays the warning; you must tap the spot again to hang. Going home without the drop is the listened ending.
+- "a secret ending where the janitor of the school catches you and threatens to call the cops and you jump off and
+  nearly break your ankle": dawdle on the canopy after the coin (20 s, a "bub's waiting" hint at 9 s) and the janitor
+  comes out with a flashlight; you jump, land hard and limp. PG: no injury shown.
+- Every ending closes with grown-up Daddy's voice; the drop endings say plainly "don't try this at home" (guardrail).
+- Looks: young Daddy has a blond mop, never a hat; bub is a black lab.
+- The field from his aerial: a big concrete schoolyard wraps north and east, the playing field (goals) beyond to the
+  north-east, the parking lot with stalls along the west by the street, trees along the south.
+
 ## Still to do
+- Hi-fi voices from the Family cast thread (young Daddy, the street grown-up, the janitor, grown-up Daddy).
 - Asset pass from the concept picks (kid, bub, station wagon, wall kit, roof props).
 - The alternate ending (waiting on Evan).
 - Grace's basement can call `coinReward()` for its ten coins (owned by that thread).

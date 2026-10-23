@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+     "id": "2026-10-23-school-jump-3",
+     "date": "2026-10-23",
+     "title": "The school jump: chalk targets and a secret",
+     "line": "Hold and let go to throw: hit the two chalk targets and bub wants it further, then the third one sails onto the roof. The big jump is your choice now, and there is a secret ending if you dawdle.",
+     "image": "/whats-new/2026-10-23-school-jump-3.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+     "threadTitle": "The school jump",
+     "tour": false,
+     "link": "/studies/school/play.html"
+    },
+    {
       "id": "2026-10-23-brute-fight",
       "date": "2026-10-23",
       "title": "Brute Fight",
