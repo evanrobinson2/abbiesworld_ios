@@ -210,33 +210,54 @@ export function makeCar(T, {body = '#ffcf3a', stripe = '#1fb6c9'} = {}) {
   return car;
 }
 
-// ---- tilt-shift: render to a target, blur above and below a sharp band, lift the colour a little ----
-export function tiltShift(T, renderer) {
-  const rt = new T.WebGLRenderTarget(4, 4, {samples: 4, type: T.HalfFloatType});
-  const mat = new T.ShaderMaterial({
-    uniforms: {tDiffuse: {value: rt.texture}, uAmt: {value: 1}, uBand: {value: .5}, uWidth: {value: .16}, uPx: {value: new T.Vector2(1, 1)}, uSat: {value: 1.18}},
-    vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }',
-    fragmentShader: `uniform sampler2D tDiffuse; uniform float uAmt, uBand, uWidth, uSat; uniform vec2 uPx; varying vec2 vUv;
+// ---- the cinematic pass: tilt-shift, bloom, a warm grade, vignette, letterbox bars and a shutter flash, in one chain ----
+//   const fx = postFX(T, renderer); fx.size(w, h, dpr); fx.set({shift, bloom, bars, vignette, flash}); fx.render(scene, camera)
+// shift: 0 sharp .. 1 full miniature. bars: 0 none .. 1 cinema bars (11% each, only for cinematic moments). flash: 0..1 white.
+const VS = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }';
+export function postFX(T, renderer) {
+  const opt = {type: T.HalfFloatType}, main = new T.WebGLRenderTarget(4, 4, {...opt, samples: 4}), bA = new T.WebGLRenderTarget(4, 4, opt), bB = new T.WebGLRenderTarget(4, 4, opt);
+  const quad = new T.Mesh(new T.PlaneGeometry(2, 2)); quad.frustumCulled = false; const sc = new T.Scene(); sc.add(quad); const cam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const bright = new T.ShaderMaterial({uniforms: {t: {value: null}, px: {value: new T.Vector2()}, thr: {value: .82}}, vertexShader: VS, depthTest: false, depthWrite: false,
+    fragmentShader: `uniform sampler2D t; uniform vec2 px; uniform float thr; varying vec2 vUv;
+      void main(){ vec3 c = (texture2D(t, vUv + px * vec2(-.5, -.5)).rgb + texture2D(t, vUv + px * vec2(.5, -.5)).rgb + texture2D(t, vUv + px * vec2(-.5, .5)).rgb + texture2D(t, vUv + px * vec2(.5, .5)).rgb) * .25;
+        float l = max(c.r, max(c.g, c.b)); gl_FragColor = vec4(c * smoothstep(thr, thr + .5, l), 1.); }`});
+  const blur = new T.ShaderMaterial({uniforms: {t: {value: null}, dir: {value: new T.Vector2()}}, vertexShader: VS, depthTest: false, depthWrite: false,
+    fragmentShader: `uniform sampler2D t; uniform vec2 dir; varying vec2 vUv;
+      void main(){ vec3 c = texture2D(t, vUv).rgb * .227; c += (texture2D(t, vUv + dir * 1.385).rgb + texture2D(t, vUv - dir * 1.385).rgb) * .316; c += (texture2D(t, vUv + dir * 3.23).rgb + texture2D(t, vUv - dir * 3.23).rgb) * .07; gl_FragColor = vec4(c, 1.); }`});
+  const comp = new T.ShaderMaterial({
+    uniforms: {tMain: {value: main.texture}, tBloom: {value: bA.texture}, px: {value: new T.Vector2()}, uShift: {value: 1}, uBand: {value: .5}, uWidth: {value: .16}, uBloom: {value: .7},
+      uBars: {value: 0}, uVig: {value: .35}, uFlash: {value: 0}, uSat: {value: 1.12}, uWarm: {value: .06}, uAspect: {value: 1}},
+    vertexShader: VS, depthTest: false, depthWrite: false,
+    fragmentShader: `uniform sampler2D tMain, tBloom; uniform vec2 px; uniform float uShift, uBand, uWidth, uBloom, uBars, uVig, uFlash, uSat, uWarm, uAspect; varying vec2 vUv;
       void main(){
-        float d = smoothstep(uWidth, uWidth + .32, abs(vUv.y - uBand)) * uAmt;
-        float r = d * 9.;
-        vec4 c = texture2D(tDiffuse, vUv); vec4 sum = c; float w = 1.;
-        for (int i = 0; i < 12; i++) { float a = float(i) * 2.399963, rr = sqrt((float(i) + .5) / 12.) * r; vec2 o = vec2(cos(a), sin(a)) * rr * uPx; sum += texture2D(tDiffuse, vUv + o); w += 1.; }
-        c = sum / w; float l = dot(c.rgb, vec3(.299, .587, .114)); c.rgb = mix(vec3(l), c.rgb, mix(1., uSat, d * .5 + .5));
-        gl_FragColor = vec4(c.rgb, 1.);
+        float d = smoothstep(uWidth, uWidth + .32, abs(vUv.y - uBand)) * uShift, r = d * 9.;
+        vec3 c = texture2D(tMain, vUv).rgb;
+        if (r > .05) { vec3 s = c; for (int i = 0; i < 12; i++) { float a = float(i) * 2.399963, rr = sqrt((float(i) + .5) / 12.) * r; s += texture2D(tMain, vUv + vec2(cos(a), sin(a)) * rr * px).rgb; } c = s / 13.; }
+        c += texture2D(tBloom, vUv).rgb * uBloom;
+        float l = dot(c, vec3(.299, .587, .114)); c = mix(vec3(l), c, uSat + d * .12);
+        c *= vec3(1. + uWarm, 1. + uWarm * .35, 1. - uWarm * .6);
+        vec2 q = (vUv - .5) * vec2(uAspect, 1.); c *= 1. - uVig * smoothstep(.35, 1.05, length(q));
+        c = mix(c, vec3(1.), uFlash);
+        gl_FragColor = vec4(c, 1.);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
-      }`, depthTest: false, depthWrite: false,
-  });
-  const quad = new T.Mesh(new T.PlaneGeometry(2, 2), mat); quad.frustumCulled = false;
-  const cam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1), sc = new T.Scene(); sc.add(quad);
+        float bar = uBars * .11; if (vUv.y < bar || vUv.y > 1. - bar) gl_FragColor = vec4(0., 0., 0., 1.);
+      }`});
+  const pass = (mat, target) => { quad.material = mat; renderer.setRenderTarget(target); renderer.render(sc, cam); };
+  let W = 2, H = 2;
   return {
-    amount: 1, rt,
-    size(w, h, dpr) { rt.setSize(Math.max(2, w * dpr), Math.max(2, h * dpr)); mat.uniforms.uPx.value.set(1 / (w * dpr), 1 / (h * dpr)); },
+    s: {shift: 1, bloom: .7, bars: 0, vignette: .35, flash: 0, warm: .06, sat: 1.12},
+    set(o) { Object.assign(this.s, o); return this; },
+    size(w, h, dpr) { W = Math.max(2, w * dpr); H = Math.max(2, h * dpr); main.setSize(W, H); bA.setSize(W / 2, H / 2); bB.setSize(W / 2, H / 2); comp.uniforms.px.value.set(1 / W, 1 / H); comp.uniforms.uAspect.value = w / h; bright.uniforms.px.value.set(1 / W, 1 / H); },
     render(scene, camera) {
-      mat.uniforms.uAmt.value = this.amount;
-      if (this.amount < .01) { renderer.setRenderTarget(null); renderer.render(scene, camera); return; }
-      renderer.setRenderTarget(rt); renderer.render(scene, camera); renderer.setRenderTarget(null); renderer.render(sc, cam);
+      const s = this.s, u = comp.uniforms;
+      renderer.setRenderTarget(main); renderer.render(scene, camera);
+      bright.uniforms.t.value = main.texture; pass(bright, bA);
+      for (const k of [1, 2]) { blur.uniforms.t.value = bA.texture; blur.uniforms.dir.value.set(k / (W / 2), 0); pass(blur, bB); blur.uniforms.t.value = bB.texture; blur.uniforms.dir.value.set(0, k / (H / 2)); pass(blur, bA); }
+      u.uShift.value = s.shift; u.uBloom.value = s.bloom; u.uBars.value = s.bars; u.uVig.value = s.vignette; u.uFlash.value = s.flash; u.uWarm.value = s.warm; u.uSat.value = s.sat;
+      pass(comp, null);
     },
   };
 }
+// kept for round-1 callers: the tilt-shift alone is the cinematic pass with no bloom, bars or grade
+export function tiltShift(T, renderer) { const fx = postFX(T, renderer).set({bloom: 0, vignette: 0, warm: 0, sat: 1.18}); return {get amount() { return fx.s.shift; }, set amount(v) { fx.s.shift = v; }, size: (w, h, d) => fx.size(w, h, d), render: (a, b) => fx.render(a, b)}; }

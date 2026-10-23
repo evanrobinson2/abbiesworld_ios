@@ -5,26 +5,35 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>The Toy-Car Coaster</title>
 <style>
-/* AW-STUDY-0054: the toy-car coaster. Tile view, flow down onto the skate park, tilt-shift zoom, tap the car, ride 30 seconds
-   in first person. No words on screen: a play orb, a star chip and a thin progress ring while you ride, a prize orb at the end. */
+/* AW-STUDY-0054: the toy-car coaster at the skate park on Main Street. Round 2: a garage of six cars, our own theme
+   music and the sound store's effects, golden-hour light with bloom, letterbox bars for the cinematic moments, slow motion
+   when a tennis ball nearly takes your head off and while you fly the gap, and an on-ride photo at the end.
+   No words on screen: a play orb, a star chip and a thin progress line while you ride, a photo and a prize at the end. */
 html,body{margin:0;height:100%;background:#9fd6f0;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 canvas{display:block;width:100vw;height:100dvh}
 .glass{position:fixed;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,.12));border:1px solid rgba(255,255,255,.55);
- box-shadow:0 10px 30px rgba(20,60,90,.3),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -6px 14px rgba(40,120,160,.2)}
+ box-shadow:0 10px 30px rgba(20,60,90,.3),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -6px 14px rgba(40,120,160,.2);-webkit-backdrop-filter:none;backdrop-filter:none}
 #back,#again,#go,#prize{display:grid;place-items:center;color:#fff;text-decoration:none;cursor:pointer}
-#back{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));width:44px;height:44px;opacity:.85}
+#back{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));width:44px;height:44px;opacity:.85;z-index:3}
 #go{left:50%;top:62%;translate:-50% -50%;width:88px;height:88px;transition:transform .25s ease,opacity .35s ease;animation:breathe 2.4s ease-in-out infinite}
 #go.gone{opacity:0;transform:scale(.6);pointer-events:none}
 @keyframes breathe{50%{box-shadow:0 10px 40px rgba(255,170,60,.6),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -6px 14px rgba(40,120,160,.2)}}
-#hud{right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));height:36px;padding:0 12px 0 10px;display:none;align-items:center;gap:8px;
+#hud{right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));height:36px;padding:0 12px 0 10px;display:none;align-items:center;gap:8px;z-index:3;
  color:#fff;font:800 16px/1 ui-rounded,"SF Pro Rounded",system-ui,sans-serif;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px rgba(20,40,70,.6)}
 #hud i{width:16px;height:16px;background:#ffe08a;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);filter:drop-shadow(0 0 4px #ffb020)}
-#prog{left:50%;top:max(12px,env(safe-area-inset-top));translate:-50% 0;width:120px;height:6px;display:none;overflow:hidden}
+#hud.bump{animation:bump .35s ease-out}
+@keyframes bump{40%{transform:scale(1.25)}}
+#prog{left:50%;top:max(14px,env(safe-area-inset-top));translate:-50% 0;width:120px;height:6px;display:none;overflow:hidden;z-index:3}
 #prog b{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd76a,#ff7a14)}
-#prize{left:50%;top:42%;translate:-50% -50%;width:128px;height:128px;font-size:62px;display:none;animation:pop .7s cubic-bezier(.2,1.6,.4,1)}
+#prize{left:calc(50% + 120px);top:44%;translate:-50% -50%;width:112px;height:112px;font-size:56px;display:none;animation:pop .7s cubic-bezier(.2,1.6,.4,1)}
 @keyframes pop{from{transform:scale(.2);opacity:0}}
-#again{left:50%;bottom:max(22px,env(safe-area-inset-bottom));translate:-50% 0;width:64px;height:64px;display:none}
-#flash{position:fixed;inset:0;pointer-events:none;background:#fff;opacity:0}
+#photo{position:fixed;left:calc(50% - 70px);top:44%;translate:-50% -50%;width:min(56vw,300px);padding:10px 10px 34px;background:#fffdf7;border-radius:6px;display:none;rotate:-4deg;
+ box-shadow:0 18px 50px rgba(20,30,50,.45);animation:drop .8s cubic-bezier(.2,1.4,.4,1)}
+#photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;background:#ccc}
+#photo span{position:absolute;left:0;right:0;bottom:8px;text-align:center;font:800 15px/1 ui-rounded,system-ui;color:#e85d04;letter-spacing:.06em}
+@keyframes drop{from{transform:translateY(-60vh) rotate(18deg)}}
+#again{left:50%;bottom:max(22px,env(safe-area-inset-bottom));translate:-50% 0;width:64px;height:64px;display:none;z-index:3}
+@media (max-width:560px){#photo{left:50%;top:40%}#prize{left:50%;top:76%;width:84px;height:84px;font-size:42px}}
 </style>
 <script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
 </head>
@@ -33,247 +42,348 @@ canvas{display:block;width:100vw;height:100dvh}
 <div id="hud" class="glass" aria-label="Stars"><i></i><b id="ns">0</b></div>
 <div id="prog" class="glass" aria-hidden="true"><b id="pb"></b></div>
 <div id="go" class="glass" role="button" aria-label="Play"><svg width="36" height="36" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></div>
+<div id="photo" aria-label="Your ride photo"><img id="photoImg" alt="You, in the air over the gap"><span id="photoStars">★</span></div>
 <div id="prize" class="glass" aria-label="Charm"></div>
 <div id="again" class="glass" role="button" aria-label="Ride again"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg></div>
-<div id="flash"></div>
 <script type="module">
 import * as T from 'three';
-import {buildTrack, TRACK_30S, trackMeshes, makeCar, poseAt, tiltShift, TRACK_W} from '/simulations/coaster-kit.mjs';
+import {buildTrack, TRACK_30S, trackMeshes, poseAt, postFX} from '/simulations/coaster-kit.mjs';
+import {CARS, buildCar} from '/simulations/coaster-cars.mjs';
+import {coasterAudio} from '/simulations/coaster-audio.mjs';
 import {buildWorld, buildGates, HEX_C} from './coaster-world.mjs';
 import {TOON_LOOKS, toonify} from '/simulations/toon-kit.mjs';
 const opt = async p => { try { return await import(p); } catch { return {}; } };
-const [BP, PL] = await Promise.all([opt('/simulations/backpack.mjs'), opt('/simulations/presentation-layer.mjs')]);
-const Q = new URLSearchParams(location.search), TEST = Q.has('test');
+const [BP] = await Promise.all([opt('/simulations/backpack.mjs')]);
+const Q = new URLSearchParams(location.search), TEST = Q.has('test'), SKIP = Q.get('skip') === 'tile';
 const $ = id => document.getElementById(id);
 const from = Q.get('from'); if (from) $('back').href = from;
+const AU = coasterAudio({muted: TEST});
 
-// ---------- renderer, sky, light ----------
+// ---------- renderer, sky, golden-hour light ----------
 const renderer = new T.WebGLRenderer({antialias: false, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
-renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
 document.body.prepend(renderer.domElement);
 const scene = new T.Scene();
-const camera = new T.PerspectiveCamera(30, 1, .05, 1400);
-scene.add(camera);
-const skyGeo = new T.SphereGeometry(1000, 24, 12);
-const skyMesh = new T.Mesh(skyGeo, new T.ShaderMaterial({side: T.BackSide, depthWrite: false, fog: false,
+const camera = new T.PerspectiveCamera(30, 1, .05, 1400); scene.add(camera);
+const SUN_DIR = new T.Vector3(.62, .38, .42).normalize(); // a low late-afternoon sun: long shadows, warm rims
+const skyMesh = new T.Mesh(new T.SphereGeometry(1000, 32, 16), new T.ShaderMaterial({side: T.BackSide, depthWrite: false, fog: false, uniforms: {uSun: {value: SUN_DIR}},
   vertexShader: 'varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.); }',
-  fragmentShader: `varying vec3 vP; void main(){ float h = clamp(vP.y * 1.6 + .12, 0., 1.); vec3 lo = vec3(1., .86, .7), mid = vec3(.55, .82, .98), hi = vec3(.2, .5, .92);
-    vec3 c = mix(lo, mid, smoothstep(0., .35, h)); c = mix(c, hi, smoothstep(.35, 1., h));
-    float sun = pow(max(dot(vP, normalize(vec3(.5, .55, .35))), 0.), 220.); c += vec3(1., .85, .5) * sun * 1.4; gl_FragColor = vec4(c, 1.);
+  fragmentShader: `uniform vec3 uSun; varying vec3 vP; void main(){ float h = clamp(vP.y * 1.5 + .1, 0., 1.);
+    vec3 lo = vec3(1., .78, .55), mid = vec3(.62, .8, .96), hi = vec3(.24, .46, .88);
+    vec3 c = mix(lo, mid, smoothstep(0., .32, h)); c = mix(c, hi, smoothstep(.32, 1., h));
+    float d = max(dot(vP, uSun), 0.); c += vec3(1., .72, .4) * (pow(d, 600.) * 6. + pow(d, 12.) * .35);
+    gl_FragColor = vec4(c, 1.);
     #include <colorspace_fragment>
-  }`})); scene.add(skyMesh); // the sky travels with the camera, so it never runs past the far plane
-scene.fog = new T.Fog('#ffe2bd', 900, 2600);
-const hemi = new T.HemisphereLight('#bfe4ff', '#e9c9a0', 1.1); scene.add(hemi);
-const sun = new T.DirectionalLight('#fff0d0', 2.6);
-const [HX, HZ] = HEX_C; sun.position.set(HX + 70, 110, HZ + 50); sun.target.position.set(HX, 0, HZ); scene.add(sun, sun.target);
-sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -95, right: 95, top: 95, bottom: -95, near: 20, far: 300}); sun.shadow.bias = -.0006;
+  }`})); scene.add(skyMesh);
+scene.fog = new T.Fog('#ffd9b0', 700, 2400);
+const hemi = new T.HemisphereLight('#a9d4ff', '#e8b98a', .85); scene.add(hemi);
+const sun = new T.DirectionalLight('#ffd9a8', 3.1);
+const [HX, HZ] = HEX_C; sun.position.set(HX + SUN_DIR.x * 160, SUN_DIR.y * 160, HZ + SUN_DIR.z * 160); sun.target.position.set(HX, 0, HZ); scene.add(sun, sun.target);
+sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -95, right: 95, top: 95, bottom: -95, near: 10, far: 420}); sun.shadow.bias = -.0006; sun.shadow.normalBias = .03;
+const fill = new T.DirectionalLight('#9fc4ff', .5); fill.position.set(HX - 80, 60, HZ - 90); scene.add(fill); // a cool bounce from the far side
 
-// ---------- the world, the track, the car ----------
+// ---------- the world, the track ----------
 const trk = buildTrack(T, TRACK_30S);
 const world = buildWorld(T); scene.add(world);
 const gates = buildGates(T, trk); scene.add(gates.group);
 const trackG = trackMeshes(T, trk); scene.add(trackG);
-const car = makeCar(T); scene.add(car);
-const wheels = car.userData.wheels;
-const proxy = new T.Mesh(new T.SphereGeometry(2.4, 8, 6), new T.MeshBasicMaterial({visible: false})); proxy.name = 'tap proxy'; proxy.position.y = .6; car.add(proxy); // a friendly big target for a thumb
 
-// the car in first person: dash, steering wheel, mirror with Abbie's charms
-const cock = new T.Group(); cock.name = 'cockpit'; car.add(cock);
-const dashM = new T.MeshStandardMaterial({color: '#1fb6c9', roughness: .5, flatShading: true, name: 'plastic dash teal'}), wheelM = new T.MeshStandardMaterial({color: '#ff5d8f', roughness: .4, flatShading: true, name: 'plastic steering wheel'});
-const sw = new T.Mesh(new T.TorusGeometry(.13, .026, 5, 12), wheelM); sw.name = 'steering wheel'; sw.position.set(0, .47, -.3); sw.rotation.x = -.9; sw.scale.setScalar(.7); cock.add(sw);
-const mirror = new T.Group(); mirror.name = 'mirror'; mirror.position.set(0, .93, -.5); cock.add(mirror);
-const mir = new T.Mesh(new T.BoxGeometry(.13, .045, .02), new T.MeshStandardMaterial({color: '#3a4250', metalness: .3, roughness: .3, name: 'dark mirror glass'})); mirror.add(mir);
-const charms = []; // the keychain: whatever she has earned, hung under the mirror on strings
-{
-  const ids = (BP.keychain ? BP.keychain() : []).slice(0, 5), list = BP.CHARMS || [];
+// ---------- the garage: six original toy cars on a painted display stage at the foot of the start tower ----------
+const garage = new T.Group(); garage.name = 'garage stage'; scene.add(garage);
+{ const m = (c, o = {}) => new T.MeshStandardMaterial({color: c, roughness: .5, flatShading: true, ...o});
+  const stage = new T.Mesh(new T.BoxGeometry(17, .5, 4.4), m('#2f3a4f')); stage.position.set(10.5, .25, 6); stage.receiveShadow = stage.castShadow = true; stage.name = 'garage stage'; garage.add(stage);
+  const lip = new T.Mesh(new T.BoxGeometry(17.2, .14, .3), m('#ffcf3a', {emissive: '#ffb020', emissiveIntensity: .4})); lip.position.set(10.5, .5, 8.2); garage.add(lip);
+  for (let i = 0; i < 6; i++) { const pad = new T.Mesh(new T.CylinderGeometry(1.05, 1.1, .12, 20), m(['#ff5d8f', '#ffcf3a', '#3ad1e0', '#9be84c', '#c58bff', '#ff7a14'][i])); pad.position.set(3.2 + i * 2.9, .56, 6); pad.name = 'turntable'; garage.add(pad); }
+  const back = new T.Mesh(new T.BoxGeometry(17, 2.6, .25), m('#26324a')); back.position.set(10.5, 1.55, 3.9); back.castShadow = true; garage.add(back);
+  for (let i = 0; i < 14; i++) { const b = new T.Mesh(new T.SphereGeometry(.09, 6, 4), new T.MeshStandardMaterial({color: '#fff', emissive: ['#ff5d8f', '#ffcf3a', '#3ad1e0', '#9be84c', '#c58bff'][i % 5], emissiveIntensity: 1.6})); b.position.set(2.6 + i * 1.22, 2.95, 4.05); garage.add(b); } }
+const cars = CARS.map((def, i) => { const c = buildCar(T, def); c.position.set(3.2 + i * 2.9, .62, 6); c.rotation.y = Math.PI + .5; c.userData.slot = c.position.clone(); c.userData.slotRot = c.rotation.y; scene.add(c); return c; });
+const tapProxy = c => { const p = new T.Mesh(new T.SphereGeometry(1.25, 8, 6), new T.MeshBasicMaterial({visible: false})); p.name = 'tap proxy'; p.position.y = .55; c.add(p); };
+cars.forEach(tapProxy);
+let car = cars[0];
+const saved = (() => { try { return JSON.parse(localStorage.getItem('aw-coaster') || '{}'); } catch { return {}; } })();
+if (saved.car) car = cars.find(c => c.userData.def.id === saved.car) || car;
+if (saved.paint) car.userData.paint(saved.paint);
+
+// the mirror charms: whatever Abbie has earned hangs in front of her, inside whichever car she picks
+const charmRig = new T.Group(); charmRig.name = 'mirror charms';
+const charms = [];
+{ const ids = (BP.keychain ? BP.keychain() : []).slice(0, 5), list = BP.CHARMS || [];
+  const mir = new T.Mesh(new T.CylinderGeometry(.018, .018, .006, 16), new T.MeshStandardMaterial({color: '#e8f4ff', emissive: '#8fc3ea', emissiveIntensity: .35, roughness: .15, name: 'mirror glass'})); mir.rotation.x = Math.PI / 2; mir.scale.x = 1.8; mir.name = 'mirror'; charmRig.add(mir);
   ids.forEach((id, k) => { const c = list.find(x => x.id === id); if (!c) return;
     const cv = document.createElement('canvas'); cv.width = cv.height = 64; const g = cv.getContext('2d'); g.font = '44px serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(c.icon, 32, 34);
-    const tex = new T.CanvasTexture(cv); tex.colorSpace = T.SRGBColorSpace;
-    const sp = new T.Sprite(new T.SpriteMaterial({map: tex, transparent: true})); sp.scale.setScalar(.11); sp.name = 'charm ' + id;
-    const g2 = new T.Group(); g2.position.set(-.08 + k * .04, -.02, 0); sp.position.y = -.1; g2.add(sp, new T.Line(new T.BufferGeometry().setFromPoints([v(0, 0, 0), v(0, -.08, 0)]), new T.LineBasicMaterial({color: '#fff6e5'}))); mirror.add(g2); charms.push({g: g2, ph: k * 1.3}); });
-  function v(x, y, z) { return new T.Vector3(x, y, z); }
-}
-cock.visible = false;
-const inCar = on => { cock.visible = on; car.traverse(m => { if (m.name === 'windshield' || m.name === 'windshield frame') m.visible = !on; }); }; // from the driver's seat the glass and its frame would sit on your nose
+    const tex = new T.CanvasTexture(cv); tex.colorSpace = T.SRGBColorSpace; const sp = new T.Sprite(new T.SpriteMaterial({map: tex, transparent: true})); sp.scale.setScalar(.075); sp.position.y = -.08;
+    const g2 = new T.Group(); g2.position.set(-.04 + k * .022, -.02, 0); g2.add(sp); charmRig.add(g2); charms.push({g: g2, ph: k * 1.3}); }); }
+charmRig.visible = false;
+const driver = new T.Group(); driver.name = 'Abbie (toy figure)';
+{ const m = (n, c, o = {}) => new T.MeshStandardMaterial({name: n, color: c, roughness: .45, ...o});
+  const body = new T.Mesh(new T.CapsuleGeometry(.13, .16, 3, 10), m('jacket pink', '#ff6fa8')); body.position.y = -.2; driver.add(body);
+  const head = new T.Mesh(new T.SphereGeometry(.12, 14, 10), m('skin', '#f2c6a0')); head.position.y = .02; driver.add(head);
+  const helmet = new T.Mesh(new T.SphereGeometry(.15, 16, 10, 0, Math.PI * 2, 0, Math.PI * .55), m('helmet pink gloss', '#ff3d8b', {roughness: .2})); helmet.position.y = .04; driver.add(helmet);
+  const visor = new T.Mesh(new T.SphereGeometry(.152, 16, 6, -Math.PI * .35 - Math.PI / 2, Math.PI * .7, Math.PI * .32, Math.PI * .2), m('visor glass', '#3ad1e0', {metalness: .5, roughness: .1})); visor.position.y = .04; driver.add(visor);
+  const pack = new T.Mesh(new T.BoxGeometry(.2, .2, .1), m('backpack canvas', '#c58bff')); pack.position.set(0, -.18, .15); driver.add(pack);
+  for (let i = 0; i < 3; i++) { const ch = new T.Mesh(new T.SphereGeometry(.025, 6, 4), m('charm', ['#ffd23a', '#3ad1e0', '#ff5d8f'][i], {metalness: .6, roughness: .2})); ch.position.set(-.05 + i * .05, -.28, .21); driver.add(ch); }
+  for (const sx of [-1, 1]) { const arm = new T.Mesh(new T.CapsuleGeometry(.04, .14, 2, 6), m('jacket pink', '#ff6fa8')); arm.position.set(sx * .15, -.14, -.1); arm.rotation.x = 1.1; driver.add(arm); }
+  driver.traverse(o => { if (o.isMesh) o.castShadow = true; }); }
 
-// speed lines (the body feeling of going fast): meta, drawn on the camera, never in the world
-const SL = 90, slPos = new Float32Array(SL * 6), slSeed = [...Array(SL)].map(() => ({a: Math.random() * 6.283, r: .5 + Math.random() * 1.6, z: -Math.random() * 6}));
-const slGeo = new T.BufferGeometry(); slGeo.setAttribute('position', new T.BufferAttribute(slPos, 3));
-const speedLines = new T.LineSegments(slGeo, new T.LineBasicMaterial({color: '#ffffff', transparent: true, opacity: .0, depthTest: false, fog: false})); speedLines.frustumCulled = false; speedLines.renderOrder = 10; speedLines.userData.presentation = true; camera.add(speedLines);
+// ---------- near misses: a tennis ball (slow motion), a frisbee, a paper plane ----------
+const ballMat = new T.MeshStandardMaterial({color: '#d8f03a', roughness: .9, name: 'tennis ball felt'});
+const ball = new T.Group(); ball.name = 'tennis ball'; { const b = new T.Mesh(new T.IcosahedronGeometry(.26, 2), ballMat); const seam = new T.Mesh(new T.TorusGeometry(.26, .016, 4, 28), new T.MeshStandardMaterial({color: '#ffffff', roughness: .6})); seam.rotation.x = 1.1; ball.add(b, seam); }
+ball.visible = false; scene.add(ball);
+const frisbee = new T.Mesh(new T.CylinderGeometry(.32, .36, .06, 18), new T.MeshStandardMaterial({color: '#ff5d8f', roughness: .4, name: 'frisbee plastic'})); frisbee.name = 'frisbee'; frisbee.visible = false; scene.add(frisbee);
+const plane = new T.Mesh((() => { const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute([0, 0, -.35, -.25, 0, .2, 0, .04, .15, 0, 0, -.35, 0, .04, .15, .25, 0, .2, 0, 0, -.35, 0, -.1, .15, 0, .04, .15], 3)); g.computeVertexNormals(); return g; })(), new T.MeshStandardMaterial({color: '#fffdf2', side: T.DoubleSide, roughness: .8, name: 'paper plane'}));
+plane.name = 'paper plane'; plane.visible = false; scene.add(plane);
+const tAt = s => trk.tAt(s);
+const J = trk.marks.jump, NEAR = [
+  {obj: ball, t: 9.2, side: 1, h: .02, miss: .36, from: [7, 1.4, 1.1], dur: .9, slow: .14, spin: 18, snd: 'whoosh-3'},
+  {obj: frisbee, t: 15.1, side: -1, h: .5, miss: .9, from: [8, 4, 1.4], dur: .6, slow: 1, spin: 22, snd: 'whoosh-1'},
+  {obj: plane, t: 24.2, side: 1, h: .6, miss: 1.1, from: [10, 3, 2], dur: 1, slow: 1, spin: 0, snd: 'whoosh-2'},
+];
+const JUMP = {t0: tAt(J.s0), t1: tAt(J.s1)}; JUMP.mid = (JUMP.t0 + JUMP.t1) / 2;
 
 // stars along the track
 const N_STARS = 16, WIN = 10, stars = [];
-{
-  const sh = new T.Shape(), pts = []; for (let i = 0; i < 10; i++) { const r = i % 2 ? .22 : .5, a = i / 10 * Math.PI * 2 + Math.PI / 2; pts.push(new T.Vector2(Math.cos(a) * r, Math.sin(a) * r)); } sh.setFromPoints(pts);
+{ const sh = new T.Shape(), pts = []; for (let i = 0; i < 10; i++) { const r = i % 2 ? .22 : .5, a = i / 10 * Math.PI * 2 + Math.PI / 2; pts.push(new T.Vector2(Math.cos(a) * r, Math.sin(a) * r)); } sh.setFromPoints(pts);
   const sg = new T.ExtrudeGeometry(sh, {depth: .12, bevelEnabled: true, bevelSize: .03, bevelThickness: .03, bevelSegments: 1}); sg.translate(0, 0, -.06);
-  const sm = new T.MeshStandardMaterial({color: '#ffd23a', emissive: '#ffa800', emissiveIntensity: .9, roughness: .3, flatShading: true, name: 'star gold glow'}), rm = new T.MeshStandardMaterial({color: '#fff', emissive: '#fff4c0', emissiveIntensity: .8, transparent: true, opacity: .55, name: 'star ring glow'});
+  const sm = new T.MeshStandardMaterial({color: '#ffd23a', emissive: '#ffa800', emissiveIntensity: 1.1, roughness: .3, metalness: .2, flatShading: true, name: 'star gold glow'}), rm = new T.MeshStandardMaterial({color: '#fff', emissive: '#fff4c0', emissiveIntensity: 1, transparent: true, opacity: .55, name: 'star ring glow'});
   const rg = new T.TorusGeometry(.78, .035, 4, 20);
-  const gaps = trk.gaps;
   for (let k = 0; k < N_STARS; k++) {
-    let s = 14 + k * (trk.length - 36) / (N_STARS - 1); const i = Math.min(trk.n - 2, Math.round(s / (trk.length / (trk.n - 1))));
+    const s = 14 + k * (trk.length - 36) / (N_STARS - 1), i = Math.min(trk.n - 2, Math.round(s / (trk.length / (trk.n - 1))));
     const lane = [0, -1, 1, 0, 1, -1, -1, 0, 1, 0, -1, 1, 0, 1, -1, 0][k] * .36, S = trk.S[i];
     const g = new T.Group(); g.name = 'star ' + k; const up = new T.Vector3(0, 1, 0).applyQuaternion(S.q), rt = new T.Vector3(1, 0, 0).applyQuaternion(S.q);
-    g.position.copy(S.p).addScaledVector(rt, lane).addScaledVector(up, .78); g.quaternion.copy(S.q);
-    g.add(new T.Mesh(sg, sm), new T.Mesh(rg, rm)); g.children.forEach(m => { m.castShadow = false; }); scene.add(g);
-    stars.push({g, s: S.s, lane, got: false, ph: k});
-  }
-}
+    g.position.copy(S.p).addScaledVector(rt, lane).addScaledVector(up, .95); g.quaternion.copy(S.q); g.add(new T.Mesh(sg, sm), new T.Mesh(rg, rm)); scene.add(g);
+    stars.push({g, s: S.s, lane, got: false, ph: k}); } }
 
-// ---------- the look: Sunday Toon, then the tilt-shift pass ----------
-const TOON = toonify(T, scene, TOON_LOOKS.sunday);
-const TS = tiltShift(T, renderer);
-function resize() { const w = innerWidth, h = innerHeight, dpr = Math.min(devicePixelRatio || 1, 2); renderer.setPixelRatio(dpr); renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); TS.size(w, h, dpr); }
+// speed lines (meta: the body's feeling of speed), drawn on the camera and never in the world
+const SL = 90, slPos = new Float32Array(SL * 6), slSeed = [...Array(SL)].map(() => ({a: Math.random() * 6.283, r: .5 + Math.random() * 1.6, z: -Math.random() * 6}));
+const slGeo = new T.BufferGeometry(); slGeo.setAttribute('position', new T.BufferAttribute(slPos, 3));
+const speedLines = new T.LineSegments(slGeo, new T.LineBasicMaterial({color: '#ffffff', transparent: true, opacity: 0, depthTest: false, fog: false})); speedLines.frustumCulled = false; speedLines.renderOrder = 10; speedLines.userData.presentation = true; camera.add(speedLines);
+
+// ---------- the look ----------
+toonify(T, scene, TOON_LOOKS.sunday);
+const FX = postFX(T, renderer);
+function resize() { const w = innerWidth, h = innerHeight, dpr = Math.min(devicePixelRatio || 1, 2); renderer.setPixelRatio(dpr); renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); FX.size(w, h, dpr); }
 addEventListener('resize', resize); resize();
 
-// ---------- sound: wind and rumble follow your speed; pings for stars; a bell for the lights ----------
-let ac = null, wind = null, rumble = null;
-function audio() { if (TEST) return null; if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { ac = null; } } if (ac?.state === 'suspended') ac.resume(); return ac; }
-function beep(f, d = .12, type = 'sine', g = .12, f2 = 0) { const a = audio(); if (!a) return; const o = a.createOscillator(), e = a.createGain(); o.type = type; o.frequency.value = f; if (f2) o.frequency.exponentialRampToValueAtTime(f2, a.currentTime + d); e.gain.setValueAtTime(g, a.currentTime); e.gain.exponentialRampToValueAtTime(.001, a.currentTime + d); o.connect(e).connect(a.destination); o.start(); o.stop(a.currentTime + d + .02); }
-function startWind() { const a = audio(); if (!a || wind) return; const b = a.createBuffer(1, a.sampleRate * 2, a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-  const src = a.createBufferSource(); src.buffer = b; src.loop = true; const bp = a.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 600; bp.Q.value = .6; const g = a.createGain(); g.gain.value = 0; src.connect(bp).connect(g).connect(a.destination); src.start(); wind = {g, bp};
-  const o = a.createOscillator(), og = a.createGain(); o.type = 'sawtooth'; o.frequency.value = 50; og.gain.value = 0; const lp = a.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 220; o.connect(lp).connect(og).connect(a.destination); o.start(); rumble = {o, g: og}; }
-function mix(speed, air) { if (!wind) return; const a = ac.currentTime; wind.g.gain.setTargetAtTime(Math.min(.35, speed / 70), a, .1); wind.bp.frequency.setTargetAtTime(400 + speed * 40, a, .1); rumble.g.gain.setTargetAtTime(air ? 0 : Math.min(.12, speed / 160), a, .08); rumble.o.frequency.setTargetAtTime(40 + speed * 4, a, .1); }
-function stopWind() { if (wind) { wind.g.gain.setTargetAtTime(0, ac.currentTime, .2); rumble.g.gain.setTargetAtTime(0, ac.currentTime, .2); } }
-
-// ---------- camera: an orbit for the tile and the zoom, the cockpit for the ride, a blend between ----------
-const cam = {tx: HX, ty: 0, tz: HZ, dist: 520, az: 35, pitch: 42, fov: 30, shift: .45};
+// ---------- camera: orbit for the board and the garage, the seat for the ride, a blend between ----------
+const cam = {tx: HX, ty: 0, tz: HZ, dist: 520, az: 35, pitch: 42, fov: 30, shift: .3};
 const CAM_TILE = {tx: HX + 80, ty: 0, tz: HZ - 10, dist: 560, az: 35, pitch: 40, fov: 30, shift: .3}, CAM_PARK = {tx: HX, ty: 0, tz: HZ, dist: 170, az: 20, pitch: 34, fov: 30, shift: .75},
-  CAM_ZOOM = {tx: -10, ty: 9, tz: -34, dist: 80, az: 28, pitch: 24, fov: 26, shift: 1};
-Object.assign(cam, CAM_TILE);
+  CAM_ZOOM = {tx: -2, ty: 6, tz: -18, dist: 62, az: 30, pitch: 24, fov: 28, shift: 1}, CAM_LOW = {tx: 4, ty: 2, tz: 4, dist: 14, az: 70, pitch: 6, fov: 34, shift: .2};
+Object.assign(cam, SKIP ? CAM_LOW : CAM_TILE);
 const ease = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
 let tween = null;
 function tweenTo(to, dur, cb) { tween = {from: {...cam}, to, t: 0, dur, cb}; }
 function stepTween(dt) { if (!tween) return; tween.t += dt; const e = ease(tween.t / tween.dur); for (const k in tween.to) cam[k] = tween.from[k] + (tween.to[k] - tween.from[k]) * e; if (tween.t >= tween.dur) { const cb = tween.cb; tween = null; cb && cb(); } }
 const orbitPose = () => { const az = cam.az * Math.PI / 180, p = cam.pitch * Math.PI / 180, pos = new T.Vector3(cam.tx + Math.sin(az) * Math.cos(p) * cam.dist, cam.ty + Math.sin(p) * cam.dist, cam.tz + Math.cos(az) * Math.cos(p) * cam.dist);
   const m = new T.Matrix4().lookAt(pos, new T.Vector3(cam.tx, cam.ty, cam.tz), new T.Vector3(0, 1, 0)); return {pos, quat: new T.Quaternion().setFromRotationMatrix(m), fov: cam.fov, shift: cam.shift}; };
-const eyeLocal = new T.Vector3(0, .82, .12);
 
 // ---------- state ----------
-const S = {mode: 'tile', time: 0, lat: 0, latT: 0, stars: 0, count: 0, pose: {}, blend: null, car: '#ffcf3a', camQ: new T.Quaternion(), shake: 0, fovK: 0, won: false, left: 0};
-const pose = S.pose; poseAt(T, trk, 0, pose);
-function placeCar() { car.position.copy(pose.p); car.quaternion.copy(pose.q); if (S.lat) { const rt = new T.Vector3(1, 0, 0).applyQuaternion(pose.q); car.position.addScaledVector(rt, S.lat); } }
-placeCar();
-const camNow = {pos: new T.Vector3(), quat: new T.Quaternion(), fov: 30, shift: .5};
-function cockpitPose() { const pos = eyeLocal.clone().applyQuaternion(car.quaternion).add(car.position); S.camQ.slerp(car.quaternion, 1 - Math.exp(-S.dtl * 16)); const q = S.camQ.clone();
+const S = {mode: SKIP ? 'intro' : 'tile', time: 0, lat: 0, latT: 0, stars: 0, count: 0, camQ: new T.Quaternion(), shake: 0, fovK: 0, won: false, ts: 1, bars: SKIP ? 1 : 0, barsT: SKIP ? 1 : 0, flash: 0, photo: null, near: new Set(), dtl: 0};
+const pose = {}; poseAt(T, trk, 0, pose);
+const startPos = () => { const s = trk.S[0]; return {p: s.p.clone(), q: s.q.clone()}; };
+function placeCar() { car.position.copy(pose.p); car.quaternion.copy(pose.q); if (S.lat) car.position.addScaledVector(new T.Vector3(1, 0, 0).applyQuaternion(pose.q), S.lat); }
+function parkAtStart(c) { const s = startPos(); c.position.copy(s.p); c.quaternion.copy(s.q); }
+parkAtStart(car);
+const camNow = {pos: new T.Vector3(), quat: new T.Quaternion(), fov: 30, shift: .3};
+function cockpitPose() { const pos = car.userData.eye.clone().applyQuaternion(car.quaternion).add(car.position); S.camQ.slerp(car.quaternion, 1 - Math.exp(-S.dtl * 16)); const q = S.camQ.clone();
   if (S.shake) { const s = S.shake * .004; q.multiply(new T.Quaternion().setFromEuler(new T.Euler((Math.random() - .5) * s, (Math.random() - .5) * s, (Math.random() - .5) * s * 2))); }
-  return {pos, quat: q, fov: 70 + S.fovK, shift: 0}; }
+  return {pos, quat: q, fov: 72 + S.fovK, shift: 0}; }
 function targetPose() { return S.mode === 'ride' ? cockpitPose() : orbitPose(); }
-function startBlend(dur) { S.blend = {t: 0, dur, from: {pos: camNow.pos.clone(), quat: camNow.quat.clone(), fov: camNow.fov, shift: camNow.shift}}; }
+function startBlend(dur, done) { S.blend = {t: 0, dur, done, from: {pos: camNow.pos.clone(), quat: camNow.quat.clone(), fov: camNow.fov, shift: camNow.shift}}; }
 function applyCamera(dt) {
   S.dtl = dt; let p = targetPose();
   if (S.blend) { S.blend.t += dt; const e = ease(S.blend.t / S.blend.dur), f = S.blend.from; p = {pos: f.pos.clone().lerp(p.pos, e), quat: f.quat.clone().slerp(p.quat, e), fov: f.fov + (p.fov - f.fov) * e, shift: f.shift + (p.shift - f.shift) * e}; if (S.blend.t >= S.blend.dur) { const cb = S.blend.done; S.blend = null; cb && cb(); } }
   skyMesh.position.copy(p.pos); camera.position.copy(p.pos); camera.quaternion.copy(p.quat); if (Math.abs(camera.fov - p.fov) > .01) { camera.fov = p.fov; camera.updateProjectionMatrix(); }
-  camNow.pos.copy(p.pos); camNow.quat.copy(p.quat); camNow.fov = p.fov; camNow.shift = p.shift; TS.amount = p.shift;
+  camNow.pos.copy(p.pos); camNow.quat.copy(p.quat); camNow.fov = p.fov; camNow.shift = p.shift;
 }
 
 // ---------- input ----------
 const ray = new T.Raycaster(), ptr = new T.Vector2(), pts = new Map(); let dragMoved = 0, lastD = 0;
-const hint = new T.Mesh(new T.TorusGeometry(2.2, .08, 6, 28), new T.MeshBasicMaterial({color: '#fff3a8', transparent: true, opacity: .9, depthTest: false, fog: false})); hint.name = 'tap-me ring'; hint.userData.presentation = true; hint.renderOrder = 9; hint.visible = false; scene.add(hint);
+const ringMat = new T.MeshBasicMaterial({color: '#fff3a8', transparent: true, opacity: .9, depthTest: false, fog: false});
+const hint = new T.Mesh(new T.TorusGeometry(1.4, .05, 6, 32), ringMat); hint.name = 'tap-me ring'; hint.userData.presentation = true; hint.renderOrder = 9; hint.visible = false; scene.add(hint);
 function pick(x, y, targets) { ptr.set(x / innerWidth * 2 - 1, -(y / innerHeight) * 2 + 1); ray.setFromCamera(ptr, camera); return ray.intersectObjects(targets, true)[0]; }
-const down = e => { audio(); pts.set(e.pointerId, {x: e.clientX, y: e.clientY}); dragMoved = 0; if (pts.size === 2) { const [a, b] = [...pts.values()]; lastD = Math.hypot(a.x - b.x, a.y - b.y); } };
-const move = e => { const p = pts.get(e.pointerId); if (S.mode === 'ride') { S.latT = Math.max(-1, Math.min(1, (e.clientX / innerWidth - .5) * 2.6)) * .42; return; } if (!p) return;
+renderer.domElement.addEventListener('pointerdown', e => { AU.wake(); pts.set(e.pointerId, {x: e.clientX, y: e.clientY}); dragMoved = 0; if (pts.size === 2) { const [a, b] = [...pts.values()]; lastD = Math.hypot(a.x - b.x, a.y - b.y); } });
+addEventListener('pointermove', e => { const p = pts.get(e.pointerId); if (S.mode === 'ride') { S.latT = Math.max(-1, Math.min(1, (e.clientX / innerWidth - .5) * 2.6)) * .42; return; } if (!p) return;
   const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY; dragMoved += Math.abs(dx) + Math.abs(dy);
-  if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a.x - b.x, a.y - b.y); cam.dist = Math.max(25, Math.min(700, cam.dist * lastD / d)); lastD = d; return; }
-  if (tween || S.blend || (S.mode !== 'tile' && S.mode !== 'zoom' && S.mode !== 'end')) return; cam.az -= dx * .3; cam.pitch = Math.max(10, Math.min(66, cam.pitch + dy * .2)); };
+  if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a.x - b.x, a.y - b.y); cam.dist = Math.max(10, Math.min(700, cam.dist * lastD / d)); lastD = d; return; }
+  if (tween || S.blend || !['tile', 'zoom', 'end'].includes(S.mode)) return; cam.az -= dx * .3; cam.pitch = Math.max(6, Math.min(66, cam.pitch + dy * .2)); });
 const up = e => { pts.delete(e.pointerId); if (dragMoved < 8 && S.mode === 'zoom' && !tween && !S.blend) tap(e.clientX, e.clientY); };
-renderer.domElement.addEventListener('pointerdown', down); addEventListener('pointermove', move); addEventListener('pointerup', up); addEventListener('pointercancel', up);
-renderer.domElement.addEventListener('wheel', e => { if (S.mode === 'zoom' || S.mode === 'tile') cam.dist = Math.max(25, Math.min(700, cam.dist * (1 + e.deltaY * .001))); }, {passive: true});
-const keys = {}; addEventListener('keydown', e => { keys[e.key] = 1; if ((e.key === ' ' || e.key === 'Enter') && S.mode === 'zoom') getIn(); }); addEventListener('keyup', e => { keys[e.key] = 0; });
+addEventListener('pointerup', up); addEventListener('pointercancel', up);
+renderer.domElement.addEventListener('wheel', e => { if (S.mode === 'zoom' || S.mode === 'tile') cam.dist = Math.max(10, Math.min(700, cam.dist * (1 + e.deltaY * .001))); }, {passive: true});
+const keys = {}; addEventListener('keydown', e => { keys[e.key] = 1; if ((e.key === ' ' || e.key === 'Enter') && S.mode === 'zoom') getIn(); if (S.mode === 'zoom' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) choose(cars[(cars.indexOf(car) + (e.key === 'ArrowRight' ? 1 : cars.length - 1)) % cars.length]); });
+addEventListener('keyup', e => { keys[e.key] = 0; });
 function tap(x, y) {
-  const h = pick(x, y, [car, ...(world.userData.buckets || [])]); if (!h) return;
-  let o = h.object; while (o && !o.userData.paint && o !== car) o = o.parent;
-  if (o && o.userData.paint) { repaint(o.userData.paint); return; }
-  getIn();
+  const h = pick(x, y, [...cars, ...(world.userData.buckets || [])]); if (!h) return;
+  let b = h.object; while (b && !(typeof b.userData.paint === 'string' && b.name.startsWith('paint bucket'))) b = b.parent;
+  if (b) { repaint(b.userData.paint); return; }
+  const c = cars.find(c => { let p = h.object; while (p) { if (p === c) return true; p = p.parent; } return false; });
+  if (!c) return; if (c === car) getIn(); else choose(c);
 }
-function repaint(c) { S.car = c; car.traverse(m => { if (m.isMesh && m.material.name === 'paint body yellow') m.material.color.set(c); }); beep(660, .15, 'triangle', .1, 990); pulse(); }
-let pulseT = 0; const pulse = () => { pulseT = 1; };
+function repaint(c) { car.userData.paint(c); AU.play('pop-2', {rate: .8}); remember({paint: c}); }
+function remember(o) { try { localStorage.setItem('aw-coaster', JSON.stringify({...saved, car: car.userData.def.id, ...o})); Object.assign(saved, o, {car: car.userData.def.id}); } catch {} }
+// choosing: the old car hops home to its turntable, the new one hops up to the start line
+const hops = [];
+function hop(c, toP, toQ, dur = .9) { hops.push({c, p0: c.position.clone(), q0: c.quaternion.clone(), p1: toP, q1: toQ, t: 0, dur}); }
+function choose(c) {
+  if (c === car || S.mode !== 'zoom') return; const old = car; car = c;
+  hop(old, old.userData.slot.clone(), new T.Quaternion().setFromEuler(new T.Euler(0, old.userData.slotRot, 0)), .8);
+  const s = startPos(); hop(c, s.p, s.q, 1.1); AU.play('slide-up', {gain: .6}); AU.play('magic-whoosh', {gain: .5, when: .5}); remember({});
+}
 
 // ---------- the flow ----------
-$('go').addEventListener('click', () => { audio(); $('go').classList.add('gone'); S.mode = 'flow'; beep(440, .2, 'triangle', .1, 880);
-  tweenTo(CAM_PARK, 3.2, () => { S.mode = 'zoom'; tweenTo(CAM_ZOOM, 2.4, () => { hint.visible = true; S.ready = true; }); }); });
-function getIn() {
-  if (S.mode !== 'zoom') return; S.mode = 'dive'; hint.visible = false; tween = null; beep(520, .1, 'square', .08, 780);
-  startBlend(1.5); S.mode = 'ride'; S.diving = true; S.time = 0; S.count = 3.6; S.camQ.copy(camNow.quat); inCar(true);
-  S.blend.done = () => { S.diving = false; };
+$('go').addEventListener('click', () => { AU.wake(); AU.state('garage'); AU.bed('carnival', .18); $('go').classList.add('gone'); S.mode = 'flow'; AU.play('whoosh-2', {gain: .6}); S.barsT = 1;
+  tweenTo(CAM_PARK, 3.2, () => { tweenTo(CAM_ZOOM, 2.4, () => { S.mode = 'zoom'; S.barsT = 0; hint.visible = true; S.ready = true; }); }); });
+function intro() { // from the town: an establishing shot low in the skate park, rising to the miniature view, bars on
+  S.mode = 'intro'; S.barsT = 1; $('go').classList.add('gone');
+  tweenTo({...CAM_LOW, az: 120}, .01, () => tweenTo(CAM_ZOOM, 3.6, () => { S.mode = 'zoom'; S.barsT = 0; hint.visible = true; S.ready = true; }));
 }
-function startRide() { S.started = true; startWind(); beep(880, .5, 'sine', .14); gates.lamps.forEach(l => { l.material.emissive.set('#5dff6a'); l.material.color.set('#5dff6a'); }); }
+function getIn() {
+  if (S.mode !== 'zoom') return; hint.visible = false; tween = null; AU.play('click-2'); AU.state('ride');
+  S.barsT = 1; S.camQ.copy(camNow.quat); S.mode = 'ride'; S.time = 0; S.count = 3.8; car.userData.inCar(true); car.add(charmRig); charmRig.visible = true;
+  { const d = car.userData.def; charmRig.position.set(0, d.eye[0] + .16, d.eye[1] - .5); car.add(driver); driver.position.set(0, d.eye[0] - .02, d.eye[1] + .02); driver.visible = false; }
+  poseAt(T, trk, 0, pose); placeCar(); startBlend(1.6, () => { S.barsT = 0; });
+}
+function startRide() { S.started = true; AU.play('ratchet', {gain: .8}); AU.play('whoosh-1', {gain: .7, when: .3}); gates.lamps.forEach(l => { l.material.emissive.set('#5dff6a'); l.material.color.set('#5dff6a'); }); }
 function finish() {
-  S.mode = 'end'; S.started = false; stopWind(); const win = S.stars >= WIN; S.won = win; $('prog').style.display = 'none';
-  for (let k = 0; k < 4; k++) setTimeout(() => beep(660 + k * 220, .25, 'triangle', .12), k * 120);
-  confetti(); Object.assign(cam, {tx: car.position.x, ty: car.position.y + 1, tz: car.position.z, dist: 16, az: 160, pitch: 18, fov: 45, shift: 0}); startBlend(1.6);
-  setTimeout(() => { if (win && BP.earnCharm) { const fresh = BP.earnCharm('toy-car'); const c = (BP.CHARMS || []).find(x => x.id === 'toy-car'); $('prize').textContent = c ? c.icon : '🏎️'; $('prize').style.display = 'grid'; beep(988, .4, 'sine', .12); if (!fresh) $('prize').style.opacity = .85; } $('again').style.display = 'grid'; }, 1800);
+  S.mode = 'end'; S.started = false; AU.quietRide(); AU.state('finish'); AU.bed('stadium', .45); AU.play('firework-launch', {gain: .5}); [0, .5, 1.1].forEach((w, i) => AU.play(i % 2 ? 'firework-burst-2' : 'firework-burst-1', {when: .9 + w, gain: .6}));
+  const win = S.stars >= WIN; S.won = win; $('prog').style.display = 'none'; S.barsT = 1; S.ts = 1; AU.slow(1);
+  car.userData.inCar(false); charmRig.visible = false; driver.visible = true; confetti();
+  Object.assign(cam, {tx: car.position.x, ty: car.position.y + 1, tz: car.position.z, dist: 9, az: 150, pitch: 14, fov: 40, shift: .25}); startBlend(1.6);
+  setTimeout(() => { AU.play(win ? 'tada' : 'win-sting', {gain: .9}); S.barsT = 0;
+    if (S.photo) { $('photoImg').src = S.photo; $('photoStars').textContent = '★ ' + S.stars + ' / ' + N_STARS; $('photo').style.display = 'block'; }
+    if (win && BP.earnCharm) { const fresh = BP.earnCharm('toy-car'); const c = (BP.CHARMS || []).find(x => x.id === 'toy-car'); $('prize').textContent = c ? c.icon : '🏎️'; $('prize').style.display = 'grid'; if (!fresh) $('prize').style.opacity = .85; AU.play('keys', {when: .3}); }
+    $('again').style.display = 'grid'; }, 2000);
 }
 $('again').addEventListener('click', () => reset());
 function reset() {
-  S.mode = 'zoom'; S.time = 0; S.lat = S.latT = 0; S.stars = 0; S.started = false; $('ns').textContent = '0'; $('hud').style.display = 'none'; $('prize').style.display = 'none'; $('again').style.display = 'none'; inCar(false);
-  stars.forEach(s => { s.got = false; s.g.visible = true; }); poseAt(T, trk, 0, pose); placeCar(); gates.lamps.forEach(l => { l.material.emissive.set('#000'); l.material.color.set('#222'); });
+  S.mode = 'zoom'; S.time = 0; S.lat = S.latT = 0; S.stars = 0; S.started = false; S.near.clear(); S.photo = null; S.ts = 1; AU.slow(1); AU.state('garage'); AU.bed('stadium', 0);
+  ['hud', 'prize', 'again', 'photo'].forEach(id => { $(id).style.display = 'none'; }); $('ns').textContent = '0'; car.userData.inCar(false); charmRig.visible = false; car.remove(driver);
+const driver = new T.Group(); driver.name = 'Abbie (toy figure)';
+{ const m = (n, c, o = {}) => new T.MeshStandardMaterial({name: n, color: c, roughness: .45, ...o});
+  const body = new T.Mesh(new T.CapsuleGeometry(.13, .16, 3, 10), m('jacket pink', '#ff6fa8')); body.position.y = -.2; driver.add(body);
+  const head = new T.Mesh(new T.SphereGeometry(.12, 14, 10), m('skin', '#f2c6a0')); head.position.y = .02; driver.add(head);
+  const helmet = new T.Mesh(new T.SphereGeometry(.15, 16, 10, 0, Math.PI * 2, 0, Math.PI * .55), m('helmet pink gloss', '#ff3d8b', {roughness: .2})); helmet.position.y = .04; driver.add(helmet);
+  const visor = new T.Mesh(new T.SphereGeometry(.152, 16, 6, -Math.PI * .35 - Math.PI / 2, Math.PI * .7, Math.PI * .32, Math.PI * .2), m('visor glass', '#3ad1e0', {metalness: .5, roughness: .1})); visor.position.y = .04; driver.add(visor);
+  const pack = new T.Mesh(new T.BoxGeometry(.2, .2, .1), m('backpack canvas', '#c58bff')); pack.position.set(0, -.18, .15); driver.add(pack);
+  for (let i = 0; i < 3; i++) { const ch = new T.Mesh(new T.SphereGeometry(.025, 6, 4), m('charm', ['#ffd23a', '#3ad1e0', '#ff5d8f'][i], {metalness: .6, roughness: .2})); ch.position.set(-.05 + i * .05, -.28, .21); driver.add(ch); }
+  for (const sx of [-1, 1]) { const arm = new T.Mesh(new T.CapsuleGeometry(.04, .14, 2, 6), m('jacket pink', '#ff6fa8')); arm.position.set(sx * .15, -.14, -.1); arm.rotation.x = 1.1; driver.add(arm); }
+  driver.traverse(o => { if (o.isMesh) o.castShadow = true; }); }
+  stars.forEach(s => { s.got = false; s.g.visible = true; }); poseAt(T, trk, 0, pose); parkAtStart(car); gates.lamps.forEach(l => { l.material.emissive.set('#000'); l.material.color.set('#222'); });
   startBlend(1.2); Object.assign(cam, CAM_ZOOM); hint.visible = true; speedLines.material.opacity = 0;
 }
-// confetti: one Points cloud, falls and spins
 let conf = null;
-function confetti() { const n = 360, g = new T.BufferGeometry(), p = new Float32Array(n * 3), c = new Float32Array(n * 3), col = new T.Color(), pal = world.userData.paint, v = [];
+function confetti() { const n = 420, g = new T.BufferGeometry(), p = new Float32Array(n * 3), c = new Float32Array(n * 3), col = new T.Color(), pal = world.userData.paint, v = [];
   for (let i = 0; i < n; i++) { p.set([car.position.x + (Math.random() - .5) * 8, car.position.y + 4 + Math.random() * 6, car.position.z + (Math.random() - .5) * 8], i * 3); col.set(pal[i % 5]); c.set([col.r, col.g, col.b], i * 3); v.push([(Math.random() - .5) * 2, -1 - Math.random() * 2, (Math.random() - .5) * 2]); }
   g.setAttribute('position', new T.BufferAttribute(p, 3)); g.setAttribute('color', new T.BufferAttribute(c, 3)); if (conf) scene.remove(conf.m);
-  conf = {m: new T.Points(g, new T.PointsMaterial({size: .35, vertexColors: true})), v, t: 0}; conf.m.frustumCulled = false; scene.add(conf.m); }
+  conf = {m: new T.Points(g, new T.PointsMaterial({size: .3, vertexColors: true})), v, t: 0}; conf.m.frustumCulled = false; scene.add(conf.m); }
 
-// ---------- the frame ----------
-const clock = new T.Clock(); let lastFrame = 0;
-const Y = new T.Vector3(0, 1, 0), tmp = new T.Vector3();
-function frame() {
-  const dt = Math.min(.05, clock.getDelta()), t = clock.elapsedTime; stepTween(dt);
-  // ambient life: pinwheel, balloons, track pads, the tap ring
-  world.userData.pinwheel.rotation.z += dt * 2.2; world.userData.balloons.forEach((b, i) => { b.position.y += Math.sin(t * 1.4 + i) * .004; b.rotation.y += dt * .2; });
-  trackG.userData.padTex.offset.y -= dt * 1.4; world.userData.parkRing.material.emissiveIntensity = .55 + .45 * Math.sin(t * 3); world.userData.parkRing.visible = S.mode === 'tile';
-  stars.forEach(s => { if (!s.got) { s.g.rotation.z += 0; s.g.children[0].rotation.y = t * 2 + s.ph; } });
-  if (S.mode === 'tile' && !tween) cam.az += dt * 1.6;
-  hint.visible = hint.visible && S.mode === 'zoom'; if (hint.visible) { hint.position.copy(car.position).setY(car.position.y + .5); hint.quaternion.copy(camera.quaternion); const k = 1 + .12 * Math.sin(t * 5) + pulseT * .5; hint.scale.setScalar(k * (cam.dist / 60)); }
-  if (pulseT > 0) pulseT = Math.max(0, pulseT - dt * 2);
-  if (S.mode === 'ride') ride(dt);
-  if (conf) { conf.t += dt; const p = conf.m.geometry.attributes.position; for (let i = 0; i < conf.v.length; i++) { p.array[i * 3] += conf.v[i][0] * dt + Math.sin(t * 3 + i) * .01; p.array[i * 3 + 1] += conf.v[i][1] * dt; p.array[i * 3 + 2] += conf.v[i][2] * dt; } p.needsUpdate = true; if (conf.t > 9) { scene.remove(conf.m); conf = null; } }
-  if (S.mode === 'end' && !S.blend) cam.az += dt * 8;
-  if (S.mode === 'end') { cam.tx = car.position.x; cam.ty = car.position.y + 1; cam.tz = car.position.z; }
-  applyCamera(dt);
-  TS.render(scene, camera);
-  requestAnimationFrame(frame);
+// ---------- the ride ----------
+const eyeAt = (t, out = {}) => { poseAt(T, trk, t, out); return out; };
+function nearMisses() {
+  for (const n of NEAR) {
+    const ph = (S.time - (n.t - n.dur / 2)) / n.dur;
+    if (ph < 0 || ph > 1.2) { if (n.obj.visible && ph > 1.2) n.obj.visible = false; continue; }
+    if (!n.path) { // a curve from far ahead and off to one side that passes `miss` metres beside the rider's head at time t
+      const e = eyeAt(n.t), f = new T.Vector3(0, 0, -1).applyQuaternion(e.q), u = new T.Vector3(0, 1, 0).applyQuaternion(e.q), r = new T.Vector3(1, 0, 0).applyQuaternion(e.q);
+      const eye = car.userData.eye, P = e.p.clone().addScaledVector(u, eye.y + n.h).addScaledVector(f, -eye.z).addScaledVector(r, n.side * n.miss);
+      const A = P.clone().addScaledVector(f, n.from[0]).addScaledVector(r, n.side * n.from[1]).addScaledVector(u, n.from[2]), B = P.clone().addScaledVector(f, -6).addScaledVector(r, -n.side * 1.2).addScaledVector(u, -1);
+      n.path = {A, B, C: P.clone().multiplyScalar(2).sub(A.clone().add(B).multiplyScalar(.5))}; }
+    if (!S.near.has(n)) { S.near.add(n); n.obj.visible = true; AU.play(n.snd, {gain: .9, pan: -n.side * .6}); if (n.slow < 1) { S.slowFrom = n.t - .22; S.slowUntil = n.t + .12; S.slowTo = n.slow; } }
+    if (S.slowFrom && S.time >= S.slowFrom) { S.slowFrom = 0; S.barsT = 1; AU.slow(S.slowTo); AU.play('cymbal', {gain: .35, rate: .5}); }
+    const k = Math.min(1, ph), {A, B, C} = n.path, a = (1 - k) * (1 - k), b = 2 * k * (1 - k), c = k * k;
+    n.obj.position.set(A.x * a + C.x * b + B.x * c, A.y * a + C.y * b + B.y * c, A.z * a + C.z * b + B.z * c);
+    n.obj.rotation.x += S.dtg * n.spin; n.obj.rotation.y += S.dtg * n.spin * .6;
+    if (n.obj === plane) n.obj.lookAt(B);
+    if (ph > 1.15) n.obj.visible = false;
+  }
 }
 function ride(dt) {
-  if (S.count > 0) { // 3 - 2 - 1 on the gate's lamps while the camera dives in
+  if (S.count > 0) { // 3 - 2 - 1 on the gate's lamps while the camera settles into the seat
     const before = Math.ceil(S.count); S.count -= dt; const n = Math.ceil(S.count);
     gates.lamps.forEach((l, i) => { const on = i < 4 - n && n > 0 && n <= 3; l.material.emissive.set(on ? '#ff4a3a' : '#000'); l.material.color.set(on ? '#ff4a3a' : '#222'); });
-    if (n !== before && n > 0 && n <= 3) beep(440, .15, 'square', .08);
-    if (S.count <= 0) startRide(); else { applyRideVisuals(dt, 0, false); return; }
+    if (n !== before && n > 0 && n <= 3) AU.play('countdown', {rate: 1});
+    if (S.count <= 0) startRide(); else { visuals(dt, 0, false); return; }
   }
   if (!S.started) return;
+  // slow motion: the ride clock runs at S.ts; the tennis ball and the jump slow it right down
+  let want = 1; if (S.slowUntil && !S.slowFrom) { if (S.time < S.slowUntil) want = S.slowTo; else { S.slowUntil = 0; AU.slow(1); AU.play('whoosh-2', {gain: .5}); S.barsT = 0; } }
+  if (S.time > JUMP.t0 + .1 && S.time < JUMP.t1 - .05) { want = Math.min(want, .3); if (!S.jumpSlow) { S.jumpSlow = true; S.barsT = 1; AU.slow(.3); AU.play('whoosh-3', {gain: .6, rate: .7}); } }
+  else if (S.jumpSlow) { S.jumpSlow = false; S.barsT = 0; AU.slow(1); AU.play('jump-land-2', {gain: 1}); S.shakeKick = 1; }
+  S.ts += (want - S.ts) * (1 - Math.exp(-dt * (want < S.ts ? 14 : 5)));
+  const dtg = dt * S.ts; S.dtg = dtg;
   const k = (keys.ArrowRight || keys.d) - (keys.ArrowLeft || keys.a); if (k) S.latT = Math.max(-.42, Math.min(.42, S.latT + k * dt * .9));
-  const prevS = pose.s; S.time += dt; S.left = trk.seconds - S.time; poseAt(T, trk, S.time, pose);
+  const prevS = pose.s; S.time += dtg; poseAt(T, trk, S.time, pose);
   const prevLat = S.lat; S.lat += (S.latT - S.lat) * (1 - Math.exp(-dt * 7)); placeCar();
-  for (const st of stars) if (!st.got && st.s >= prevS && st.s <= pose.s + .01) { if (Math.abs(S.lat - st.lane) < .34) { st.got = true; st.g.visible = false; S.stars++; $('ns').textContent = S.stars; beep(1046, .18, 'sine', .14, 1568); charmSwing = 1; pulse(); } }
+  for (const st of stars) if (!st.got && st.s >= prevS && st.s <= pose.s + .01 && Math.abs(S.lat - st.lane) < .34) { st.got = true; st.g.visible = false; S.stars++; $('ns').textContent = S.stars; AU.play('pop-2', {rate: 1 + S.stars * .03}); AU.play('keys', {gain: .4}); charmSwing = 1; $('hud').classList.remove('bump'); void $('hud').offsetWidth; $('hud').classList.add('bump'); }
+  nearMisses();
+  // the on-ride photo: at the top of the jump, a camera flash in the bleachers
+  if (!S.photo && S.time >= JUMP.mid) { S.wantPhoto = true; S.flash = 1; AU.play('click-2', {gain: 1}); }
+  for (const tag of ['boost1', 'boost2', 'boost3']) { const m = trk.marks[tag]; if (m && !S.near.has(tag) && pose.s >= m.s0) { S.near.add(tag); AU.play('magic-whoosh', {gain: .7}); } }
+  if (!S.near.has('loop') && pose.s >= trk.marks.loop.s0) { S.near.add('loop'); AU.play('slide-up', {gain: .35}); }
+  if (!S.near.has('cork') && pose.s >= trk.marks.corkscrew.s0) { S.near.add('cork'); AU.play('whoosh-1', {gain: .5}); }
   $('pb').style.width = Math.min(100, S.time / trk.seconds * 100) + '%';
-  applyRideVisuals(dt, (S.lat - prevLat) / dt, true);
-  if (pose.boost && !S.boosting) { S.boosting = true; beep(300, .5, 'sawtooth', .1, 900); } if (!pose.boost) S.boosting = false;
+  visuals(dt, (S.lat - prevLat) / dt, true);
   if (S.time >= trk.seconds - 1e-3) finish();
 }
 let charmSwing = 0;
-function applyRideVisuals(dt, latVel, running) {
-  const sp = running ? pose.speed : 0;
-  wheels.forEach(w => { w.rotation.x -= sp * dt / .2; });
-  S.fovK += (((pose.boost ? 16 : 0) + sp * .45) - S.fovK) * (1 - Math.exp(-dt * 4)); S.shake = running ? Math.min(1, sp / 22) * (pose.gap ? .2 : 1) * 1.6 : 0;
-  // speed lines: streaks in camera space flowing past
-  const a = speedLines.material; a.opacity += ((running ? Math.min(.55, Math.max(0, (sp - 8) / 18) + (pose.boost ? .3 : 0)) : 0) - a.opacity) * (1 - Math.exp(-dt * 5));
+function visuals(dt, latVel, running) {
+  const sp = running ? pose.speed * S.ts : 0;
+  car.userData.wheels.forEach(w => { w.rotation.x -= sp * dt / car.userData.def.wheelR; });
+  if (car.userData.flame) car.userData.flame.scale.set(1, 1, .7 + Math.random() * .6 + (pose.boost ? .8 : 0));
+  if (car.userData.flag) car.userData.flag.rotation.x = Math.sin(performance.now() / 60) * .3;
+  S.fovK += (((pose.boost ? 16 : 0) + pose.speed * .45 * (running ? 1 : 0) - (S.ts < .5 ? 10 : 0)) - S.fovK) * (1 - Math.exp(-dt * 4));
+  S.shakeKick = Math.max(0, (S.shakeKick || 0) - dt * 3);
+  S.shake = running ? Math.min(1, sp / 22) * (pose.gap ? .15 : 1) * 1.5 + S.shakeKick * 6 : 0;
+  const a = speedLines.material; a.opacity += ((running && S.ts > .6 ? Math.min(.55, Math.max(0, (sp - 8) / 18) + (pose.boost ? .3 : 0)) : 0) - a.opacity) * (1 - Math.exp(-dt * 5));
   const len = .6 + sp * .05;
-  for (let i = 0; i < SL; i++) { const s = slSeed[i]; s.z += dt * (sp * 1.4 + 8); if (s.z > -.6) { s.z = -7 - Math.random() * 3; s.a = Math.random() * 6.283; s.r = .45 + Math.random() * 1.6; } const x = Math.cos(s.a) * s.r, y = Math.sin(s.a) * s.r * .7; slPos.set([x, y, s.z, x, y, s.z - len], i * 6); }
+  for (let i = 0; i < SL; i++) { const s = slSeed[i]; s.z += dt * (sp * 1.4 + 8 * S.ts); if (s.z > -.6) { s.z = -7 - Math.random() * 3; s.a = Math.random() * 6.283; s.r = .45 + Math.random() * 1.6; } const x = Math.cos(s.a) * s.r, y = Math.sin(s.a) * s.r * .7; slPos.set([x, y, s.z, x, y, s.z - len], i * 6); }
   slGeo.attributes.position.needsUpdate = true;
-  // charms swing with the turns and jingle on the pick-ups
   charmSwing = Math.max(0, charmSwing - dt * .8); const t = performance.now() / 1000;
-  charms.forEach(c => { c.g.rotation.z = Math.sin(t * 7 + c.ph) * (.05 + charmSwing * .5) + Math.max(-.6, Math.min(.6, -latVel * .35)); c.g.rotation.x = Math.sin(t * 5.3 + c.ph) * .06 * (1 + sp / 10); });
-  mix(sp, pose.gap);
-  if (running) $('hud').style.display = 'flex', $('prog').style.display = 'block';
+  charms.forEach(c => { c.g.rotation.z = Math.sin(t * 7 * S.ts + c.ph) * (.05 + charmSwing * .5) + Math.max(-.6, Math.min(.6, -latVel * .35)); c.g.rotation.x = Math.sin(t * 5.3 + c.ph) * .06 * (1 + sp / 10); });
+  AU.speed(sp, pose.gap);
+  if (running) { $('hud').style.display = 'flex'; $('prog').style.display = 'block'; }
 }
 
-// ---------- hooks for the headless test and for the town to call ----------
-window.coaster = {S, trk, cam, T, scene, camera, car, stars, start: () => $('go').click(), getIn, finish, reset, repaint, skipTo(t) { S.time = t; }, TS};
-if (Q.get('skip') === 'tile') { $('go').classList.add('gone'); S.mode = 'zoom'; Object.assign(cam, CAM_ZOOM); hint.visible = true; S.ready = true; } // the town already flew the player down: start at the track
+// ---------- the frame ----------
+const clock = new T.Clock();
+function frame() {
+  const dt = Math.min(.05, clock.getDelta()), t = clock.elapsedTime; stepTween(dt);
+  world.userData.pinwheel.rotation.z += dt * 2.2 * S.ts; world.userData.balloons.forEach((b, i) => { b.position.y += Math.sin(t * 1.4 + i) * .004; b.rotation.y += dt * .2; });
+  trackG.userData.padTex.offset.y -= dt * 1.4; world.userData.parkRing.material.emissiveIntensity = .55 + .45 * Math.sin(t * 3); world.userData.parkRing.visible = S.mode === 'tile';
+  stars.forEach(s => { if (!s.got) s.g.children[0].rotation.y = t * 2 + s.ph; });
+  if (S.mode === 'tile' && !tween) cam.az += dt * 1.6;
+  // the garage: parked cars turn slowly on their turntables; hops arc through the air
+  cars.forEach(c => { if (c !== car && !hops.some(h => h.c === c)) { c.rotation.y += dt * .5; } });
+  for (let i = hops.length - 1; i >= 0; i--) { const h = hops[i]; h.t += dt; const e = ease(h.t / h.dur); h.c.position.lerpVectors(h.p0, h.p1, e); h.c.position.y += Math.sin(e * Math.PI) * 4; h.c.quaternion.slerpQuaternions(h.q0, h.q1, e); if (h.t >= h.dur) { hops.splice(i, 1); if (h.c !== car) h.c.userData.slotRot = h.c.rotation.y; else AU.play('jump-land-2', {gain: .5}); } }
+  hint.visible = hint.visible && S.mode === 'zoom'; if (hint.visible) { hint.position.copy(car.position).setY(car.position.y + .55); hint.quaternion.copy(camera.quaternion); hint.scale.setScalar((1 + .12 * Math.sin(t * 5)) * Math.max(1, cam.dist / 40)); }
+  if (S.mode === 'ride') ride(dt);
+  if (conf) { conf.t += dt; const p = conf.m.geometry.attributes.position; for (let i = 0; i < conf.v.length; i++) { p.array[i * 3] += conf.v[i][0] * dt + Math.sin(t * 3 + i) * .01; p.array[i * 3 + 1] += conf.v[i][1] * dt; p.array[i * 3 + 2] += conf.v[i][2] * dt; } p.needsUpdate = true; if (conf.t > 9) { scene.remove(conf.m); conf = null; } }
+  if (S.mode === 'end' && !S.blend) cam.az += dt * 8;
+  if (S.mode === 'end') { cam.tx = car.position.x; cam.ty = car.position.y + .8; cam.tz = car.position.z; }
+  applyCamera(dt);
+  // cinematic: bars ease in and out, the shutter flash fades, bloom swells in the slow-motion moments
+  S.bars += (S.barsT - S.bars) * (1 - Math.exp(-dt * 5)); S.flash = Math.max(0, S.flash - dt * 2.5);
+  FX.set({shift: camNow.shift, bars: S.bars, flash: S.flash * .85, bloom: .55 + (1 - S.ts) * .5 + (S.mode === 'end' ? .25 : 0), vignette: .3 + (1 - S.ts) * .35, warm: .07, sat: 1.12});
+  FX.render(scene, camera);
+  if (S.wantPhoto) { S.wantPhoto = false; try { S.photo = snapPhoto(); } catch { S.photo = null; } FX.set({shift: camNow.shift, bars: S.bars, flash: S.flash * .85}); FX.render(scene, camera); }
+  requestAnimationFrame(frame);
+}
+
+// the ride photographer: a camera off to the side of the jump, framing the car in the air (the rider seen from outside)
+function snapPhoto() {
+  const pc = new T.PerspectiveCamera(34, camera.aspect, .1, 1400), r = new T.Vector3(1, 0, 0).applyQuaternion(car.quaternion), f = new T.Vector3(0, 0, -1).applyQuaternion(car.quaternion);
+  pc.position.copy(car.position).addScaledVector(r, 5.5).addScaledVector(f, 2.5).add(new T.Vector3(0, -1.2, 0)); pc.lookAt(car.position.clone().add(new T.Vector3(0, .5, 0)));
+  const vis = [driver.visible, charmRig.visible, speedLines.visible]; driver.visible = true; charmRig.visible = false; speedLines.visible = false; car.userData.inCar(false); skyMesh.position.copy(pc.position);
+  const w = renderer.domElement.width, h = renderer.domElement.height; FX.set({shift: 0, bars: 0, flash: 0, vignette: .45}); FX.render(scene, pc);
+  const c = document.createElement('canvas'), src = renderer.domElement; c.width = 480; c.height = 360; const sw = Math.min(w, h * 4 / 3), sh = sw * 3 / 4;
+  c.getContext('2d').drawImage(src, (w - sw) / 2, (h - sh) / 2, sw, sh, 0, 0, 480, 360);
+  [driver.visible, charmRig.visible, speedLines.visible] = vis; car.userData.inCar(true); skyMesh.position.copy(camera.position);
+  return c.toDataURL('image/jpeg', .85);
+}
+
+// ---------- hooks for the headless test ----------
+window.coaster = {S, trk, cam, T, scene, camera, get car() { return car; }, cars, stars, start: () => $('go').click(), getIn, finish, reset, repaint, choose, skipTo(t) { S.time = t; }, FX, NEAR, JUMP};
+if (SKIP) intro();
 requestAnimationFrame(frame);
 </script>
 </body>
