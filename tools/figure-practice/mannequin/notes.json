@@ -132,6 +132,13 @@
           "faces": 1538,
           "change": "per-pose sizes in pose.json: head (70,56,52), chest (86,78,52), chest taper 0.4 (shield)",
           "lesson": "Shape beats size: the shield taper gave +0.018, head size +0.010, chest size +0.006. Per-pose size overrides keep the leap untouched."
+        },
+        {
+          "round": 3,
+          "iou": 0.845,
+          "faces": 1538,
+          "change": "both legs 4 px left (sweep: R/L shifts -4/-4 best; -8/-4 0.835, -4/+4 0.831). Also fixed the target mask: the reference stand pole between the legs was counted as mannequin (+0.002, not the model)",
+          "lesson": "Check the target before the model: a stray pole in the mask shows up as a thin orange stripe between parts. Then legs sit on their centre lines (same as leap rep 7). Gains are shrinking (+0.013): next pose."
         }
       ]
     }

@@ -9,6 +9,7 @@ RAW = dict(crown=(252,40), neck=(252,150), waist=(250,258), hc=(250,350),
 J2 = {k:(round(x*K+OX,1), round(y*K+OY,1)) for k,(x,y) in RAW.items()}
 # head centre sits at t=0.52 between neck and crown: push crown so the 58 px half-length head lands on the picture's head
 hcY=82*K+OY; J2['crown']=(J2['crown'][0], round(J2['neck'][1]-(J2['neck'][1]-hcY)/0.52,1))
+for k in ('hR','kR','aR','tR','hL','kL','aL','tL'): J2[k]=(round(J2[k][0]-4,1),J2[k][1])   # rep 3: both legs sit 4 px left of where I read them
 def L(a,b): return ((J2[b][0]-J2[a][0])**2+(J2[b][1]-J2[a][1])**2)**0.5
 CHAINS=[[a,b,round(L(a,b),1),0] for a,b in (("sR","eR"),("eR","wR"),("wR","fR"),("sL","eL"),("eL","wL"),("wL","fL"),
         ("hR","kR"),("kR","aR"),("hL","kL"),("kL","aL"))]
