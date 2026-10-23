@@ -41,6 +41,8 @@ export const SPOTS = [
  {id: 'ginn', name: 'Ginn Field', at: 'ginn', line: 'The train park, by the lakes.', coins: 1, where: 'data'},
  {id: 'horn', name: 'Horn Pond', at: 'horn', line: 'The long walk round the pond.', coins: 1, where: 'data'},
  {id: 'lab', name: 'The science lab', at: 'centre', line: 'Green goo bubbles in a beaker by the door. Tap the beaker to shrink down into a cell.', coins: 0, where: 'new', link: '/studies/cell/play.html'},
+ {id: 'home', name: "Abbie's house", at: 'fixed', pos: [5520, 3790], line: "Home. Her treehouse is in the backyard, and Daddy's bunker is under it: a round steel door in the grass.", coins: 1, where: 'family'},
+ {id: 'ani', name: "Ani's house", at: 'fixed', pos: [3380, 2830], line: "Ani's home, with her own treehouse in the backyard.", coins: 1, where: 'family'},
  {id: 'common', name: 'The town common', at: 'common', line: 'The middle of everything: the church, the flag, the pond.', coins: 0, where: 'data'},
 ];
 // Off the map: roads out of town lead to them, and they show on the horizon.
@@ -145,8 +147,9 @@ export function growTown(land, {charm = 1, seed = ASSUMPTIONS.seed} = {}) {
    const lot = lots.find(l => !out.spots.some(o => Math.hypot(o.x - l.x, o.y - l.y) < 28) && !occ.hit(l.x, l.y, 7, 'road'));
    ({x, y, face} = lot);
   } else if (s.at === 'horn') { const h = hornShore(); [x, y] = h; toward = [h[2], h[3]]; }
+  else if (s.at === 'fixed') { [x, y] = s.pos; const n = nearestOn(roads, x, y); if (n && Math.hypot(n.x - x, n.y - y) < 150) face = Math.atan2(n.x - x, -(n.y - y)); }
   else [x, y] = raw.spots[s.at];
-  const spot = {...s, x, y, z: land.heightAt(x, y), face, toward, radius: s.at === 'centre' ? 11 : s.id === 'common' ? 32 : 40};
+  const spot = {...s, x, y, z: land.heightAt(x, y), face, toward, radius: s.at === 'centre' ? 11 : s.at === 'fixed' ? 34 : s.id === 'common' ? 32 : 40};
   out.spots.push(spot); occ.add(x, y, spot.radius, 'spot');
   for (let k = 0; k < s.coins; k++) out.coins.push({spot: s.id, x: x + Math.cos(k * 2.4) * (k ? 3 + k : 0), y: y + Math.sin(k * 2.4) * (k ? 3 + k : 0), hidden: s.id === 'cafe' && k > 0});
  }

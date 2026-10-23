@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-abbietown-homes",
+      "date": "2026-10-23",
+      "title": "Abbie's Town: home, treehouses and a splash pad",
+      "line": "Abbie's house and Ani's house now stand in the town, each with a treehouse in the backyard, and Daddy's hideaway door is in the grass under Abbie's. Horn Pond has a splash pad on the shore.",
+      "image": "/whats-new/2026-10-23-abbietown-homes.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0042 - Abbie's Town",
+      "tour": false,
+      "link": "/studies/abbietown/"
+    },
+    {
       "id": "2026-10-23-abbietown-timelapse",
       "date": "2026-10-23",
       "title": "Abbie's Town through the years",
