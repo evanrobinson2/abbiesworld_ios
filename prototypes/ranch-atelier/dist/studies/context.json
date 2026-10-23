@@ -761,8 +761,53 @@
    "recorded": "2026-10-23, gathered afterwards from the study docs"
   },
   "family-cast": {
-   "items": [],
-   "recorded": "2026-10-23, gathered afterwards from the study docs"
+   "items": [
+    {
+     "k": "tutorial",
+     "t": "ElevenLabs Voice Design API (text-to-voice/design, eleven_ttv_v3)",
+     "href": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+     "note": "3 previews per description; children's voice descriptions are blocked, so kids are cast as adult voice actors"
+    },
+    {
+     "k": "tutorial",
+     "t": "ElevenLabs: save a designed voice (text-to-voice)",
+     "href": "https://elevenlabs.io/docs/api-reference/text-to-voice/create",
+     "note": "Turns a picked preview into a reusable voice id"
+    },
+    {
+     "k": "reference",
+     "t": "ElevenLabs streaming text to speech (Flash v2.5)",
+     "href": "https://elevenlabs.io/docs/api-reference/text-to-speech/stream",
+     "note": "Why every saved voice can speak new lines live"
+    },
+    {
+     "k": "reference",
+     "t": "Faceted Hero proposal: Abbie and Ani looks (AW-STUDY-0029)",
+     "href": "https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa",
+     "note": "Copper bob, blue eyes, pink; Ani brown hair and eyes, purple"
+    },
+    {
+     "k": "canon",
+     "t": "Welcome tour narration workflow (the pattern voice-cast follows)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/.github/workflows/welcome-narration.yml"
+    },
+    {
+     "k": "canon",
+     "t": "Sound engineer and the sound store (sound pack slots)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/sound-engineer/README.md"
+    },
+    {
+     "k": "canon",
+     "t": "How Abbie's World shows information (sound on the same 2x2)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md"
+    },
+    {
+     "k": "canon",
+     "t": "Voice cast tool and per-unit voices",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/voice-cast/README.md"
+    }
+   ],
+   "recorded": "2026-10-23, as worked (Family cast thread)"
   },
   "welcome": {
    "items": [
