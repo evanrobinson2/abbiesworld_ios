@@ -1,0 +1,42 @@
+{
+  "id": "ranch-today",
+  "date": "2026-10-23",
+  "place": "ranch",
+  "note": "The live /sandbox (branch claude/live-snapshot-2026-10-22), measured from captures taken 2026-10-21/22 (project files live-a, night-a, midnight-a, atelier-pack). Roles are the dominant clusters the checker measured over the world crop; UI colours were sampled from the same captures.",
+  "roles": {
+    "meadow":   {"hex": "#acb572", "kind": "ground",   "hue_family": "green"},
+    "meadow_2": {"hex": "#a0ab68", "kind": "ground",   "hue_family": "green"},
+    "grass":    {"hex": "#98a339", "kind": "figure",   "hue_family": "green"},
+    "foliage":  {"hex": "#8c9857", "kind": "figure",   "hue_family": "green"},
+    "deep_leaf":{"hex": "#4b5731", "kind": "figure",   "hue_family": "green"},
+    "roof":     {"hex": "#3f7a80", "kind": "figure",   "hue_family": "teal"},
+    "void":     {"hex": "#c1c5b6", "kind": "backdrop", "hue_family": "grey"}
+  },
+  "ui": {
+    "panel": "#e4e6d8",
+    "ink": "#3b3a30",
+    "pause_red": "#c0412f",
+    "button": "#fbf8ea",
+    "night_panel": "#2d3330"
+  },
+  "meanings": [],
+  "signals": [
+    {"id": "time", "drives": ["lens"],
+     "states": {"day":   {"capture": "captures/ranch-day.jpg",   "crop": [725, 300, 245, 300]},
+                "night": {"capture": "captures/ranch-night.jpg", "crop": [725, 300, 245, 300]},
+                "midnight": {"capture": "captures/ranch-midnight.jpg", "crop": [725, 300, 245, 300]}}},
+    {"id": "season", "drives": ["foliage", "ground"],
+     "states": {"summer": {"capture": "captures/ranch-summer.jpg", "crop": [125, 125, 550, 300]},
+                "autumn": {"capture": "captures/ranch-autumn.jpg", "crop": [125, 125, 550, 300]},
+                "frost":  {"capture": "captures/ranch-frost.jpg",  "crop": [125, 125, 550, 300]}}}
+  ],
+  "motifs": [],
+  "shape_language": {},
+  "kid_safe": {"alarm_red": false, "max_flash_hz": 0, "fail_desaturate": false},
+  "captures": [
+    {"file": "captures/ranch-day.jpg", "crop": [725, 300, 245, 300]},
+    {"file": "captures/ranch-summer.jpg", "crop": [125, 125, 550, 300]},
+    {"file": "captures/ranch-autumn.jpg", "crop": [125, 125, 550, 300]},
+    {"file": "captures/ranch-frost.jpg", "crop": [125, 125, 550, 300]}
+  ]
+}
