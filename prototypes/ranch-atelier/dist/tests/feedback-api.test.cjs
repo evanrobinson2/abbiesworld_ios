@@ -1,5 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
+// These tests cover the handler itself, so they pin the owner lock off; tests/owner-only.test.cjs covers it on.
+const UNLOCKED = { env: {} };
 const { createHandler } = require('../api/feedback.js');
 function fakeBlob() {
   const files = new Map();
@@ -16,7 +18,7 @@ async function call(handler, req) {
 }
 const jpeg = 'data:image/jpeg;base64,' + Buffer.from('fake-jpeg').toString('base64');
 test('feedback stores note and picture, lists newest first, serves the picture', async () => {
-  const blob = fakeBlob(), handler = createHandler(blob);
+  const blob = fakeBlob(), handler = createHandler(blob, UNLOCKED);
   const first = await call(handler, { method: 'POST', body: { note: 'barn is too red', image: jpeg, thread: 'cmsg_01ABCDEFGHIJKLMNOP', page: '/sandbox' } });
   assert.equal(first.status, 200);
   await new Promise(r => setTimeout(r, 5));
@@ -33,7 +35,7 @@ test('feedback stores note and picture, lists newest first, serves the picture',
   assert.equal(Buffer.from(picture.body).toString(), 'fake-jpeg');
 });
 test('feedback rejects empty posts, bad pictures and foreign origins', async () => {
-  const handler = createHandler(fakeBlob());
+  const handler = createHandler(fakeBlob(), UNLOCKED);
   assert.equal((await call(handler, { method: 'POST', body: { note: '  ' } })).status, 400);
   assert.equal((await call(handler, { method: 'POST', body: { image: 'data:image/png;base64,AAAA' } })).status, 400);
   assert.equal((await call(handler, { method: 'POST', headers: { origin: 'https://evil.test' }, body: { note: 'hi' } })).status, 403);

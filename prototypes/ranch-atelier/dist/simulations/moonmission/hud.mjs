@@ -1,7 +1,7 @@
 // AW-STUDY-0036 Moon Mission couch HUD: the mission card, the clock, the caption, the choices and the per-player key panels.
 // One factory so the studies page and the Abbie's Town stage show the same thing. Words live only here and in captions.
 const CSS = `
-#mm-hud{--ink:#1b2238;--dim:#5b6785;--line:#cdd7ee;--key:#fff;--glow:#ff7eb6;--bar:rgba(255,255,255,.92);position:fixed;inset:0;pointer-events:none;color:var(--ink);font:clamp(16px,2vw,26px)/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;z-index:30}
+#mm-hud{z-index:10;--ink:#1b2238;--dim:#5b6785;--line:#cdd7ee;--key:#fff;--glow:#ff7eb6;--bar:rgba(255,255,255,.92);position:fixed;inset:0;pointer-events:none;color:var(--ink);font:clamp(16px,2vw,26px)/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;z-index:30}
 #mm-hud[data-mood=dark]{--ink:#eef1fb;--dim:#9aa6c8;--line:#26304f;--key:#121a33;--bar:rgba(5,7,15,.92)}
 #mm-hud *{box-sizing:border-box}
 #mm-hud .top{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;gap:16px;padding:12px 20px 0;align-items:flex-start}
