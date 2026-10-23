@@ -20,7 +20,10 @@
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font:400 14px/1.35 var(--font);overflow:hidden;-webkit-font-smoothing:antialiased}
 #stage{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
-.frame{position:fixed;inset:0;border:0;width:100%;height:100%;background:var(--bg)}
+[hidden]{display:none!important} /* .rail and .drawer set display, which would otherwise beat the hidden attribute */
+/* a room (2D, Cast, Crowd) sits under the bar, never behind it, so its own title can't collide with ours */
+.frame{position:fixed;left:0;right:0;bottom:0;top:calc(env(safe-area-inset-top,0px) + 52px);border:0;width:100%;height:calc(100% - env(safe-area-inset-top,0px) - 52px);background:var(--bg)}
+body[data-room] .bar{background:var(--bg)}
 .bar{position:fixed;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;gap:10px;
  padding:calc(env(safe-area-inset-top,0px) + 10px) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))}
 .mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:700 13px var(--font);letter-spacing:.5px;flex:none}
@@ -196,6 +199,9 @@ function setRoom(r) {
  const f = $('#room'), stage = r === 'stage';
  f.hidden = stage; ['#cast', '#dirs', '.drawer'].forEach(s => { $(s).hidden = !stage; }); canvas.style.visibility = stage ? 'visible' : 'hidden';
  if (!stage && !f.src.endsWith(r)) f.src = r;
+ // the dark-stage words belong to the 3D stage only
+ document.body.toggleAttribute('data-room', !stage);
+ document.body.toggleAttribute('data-dark', stage && !!dressed?.stage?.dark);
 }
 
 // an art direction restyles the body and the stage together
@@ -204,7 +210,7 @@ function applyDir() {
  if (!actor) return;
  dressed = dir === 'studio' ? null : dress(T, actor, dir, drawing);
  const st = dressed?.stage || {sky: ['#efe4d2'], floor: '#e3cba8', sun: '#fff1dc', sunI: 2.6, hemi: ['#dfe9ff', '#b9906a', 1.1], shadow: true};
- document.body.toggleAttribute('data-dark', !!st.dark);
+ document.body.toggleAttribute('data-dark', !!st.dark && room === 'stage');
  renderer.setClearColor(st.sky[0]); film.U.fogHigh.value.set(st.sky[0]); film.U.fogLow.value.set(st.sky[1] || st.sky[0]);
  floor.material.color.set(st.floor); sun.color.set(st.sun); sun.intensity = st.sunI;
  hemi.color.set(st.hemi[0]); hemi.groundColor.set(st.hemi[1]); hemi.intensity = st.hemi[2]; sun.castShadow = st.shadow;
