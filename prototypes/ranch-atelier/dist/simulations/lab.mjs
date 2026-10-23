@@ -84,6 +84,8 @@ import {applyDorfRanch} from './dorf-ranch-materials.mjs';
 import {setLabHexDiameter} from './tile-metrics.js';
 import {OrbitControls} from './vendor/OrbitControls.js';
 import {cameraOwnsPointer,sandboxWheel} from './vendor/sandbox-camera.mjs';
+import {installFirstPerson} from './first-person.mjs?v=1';
+import {installGamepad} from './gamepad.mjs?v=1';
 import {createRanchComposer} from './ranch-composer.js?paths=15';
 import {planAssembly} from './tile-adapter.js?paths=2';
 import {terrainSampler} from './tile-landscape.js?terrain=2';
@@ -136,7 +138,9 @@ const look=loadLook();ink.setLook(look);
 const orbit=new OrbitControls(camera,renderer.domElement);orbit.mouseButtons={LEFT:T.MOUSE.ROTATE,MIDDLE:T.MOUSE.ROTATE,RIGHT:T.MOUSE.PAN};orbit.touches={ONE:T.TOUCH.ROTATE,TWO:T.TOUCH.DOLLY_PAN};orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;
 const cameraFollow=createCameraFollow(camera,orbit);orbit.addEventListener('start',()=>cameraFollow.stop());
 renderer.domElement.addEventListener('wheel',e=>{if(e.shiftKey&&!e.ctrlKey)cameraFollow.stop();},{capture:true});
-renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();e.stopImmediatePropagation();sandboxWheel(T,camera,orbit,e)},{capture:true,passive:false});
+// At the bottom of the zoom the camera steps down into first person (first-person.mjs); zooming out steps back up.
+const firstPerson=installFirstPerson({T,camera,orbit,canvas:renderer.domElement,getActive:()=>busy?null:active,onEnter:()=>{cameraFollow.stop();closeInspection();}});window.RanchFirstPerson=firstPerson;
+renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();e.stopImmediatePropagation();if(firstPerson.wheel(e))return;sandboxWheel(T,camera,orbit,e)},{capture:true,passive:false});
 const sky=new T.HemisphereLight('#e6efff','#9b784d',2),sun=new T.DirectionalLight('#ffdfac',3.5),fill=new T.DirectionalLight('#a8c8ed',.6);sun.position.set(-12,18,9);fill.position.set(12,8,-12);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-19,right:19,top:19,bottom:-19,near:.1,far:70});sun.shadow.normalBias=.015;sun.shadow.bias=-.0001;scene.add(sky,sun,sun.target,fill);
 const floor=new T.Mesh(new T.PlaneGeometry(500,500),glowFloorMaterial());floor.rotation.x=-Math.PI/2;floor.position.y=-1.3;floor.receiveShadow=true;scene.add(floor);
 const wall=new T.Mesh(new T.PlaneGeometry(500,100),new T.MeshStandardMaterial({color:'#e0e3d9',roughness:1}));wall.position.set(0,48,-18);wall.receiveShadow=true;scene.add(wall);
@@ -307,7 +311,10 @@ const pickRay=new T.Raycaster(),pickPointer=new T.Vector2(),pickCanvas=renderer.
 pickCanvas.addEventListener('pointerdown',e=>{gesture=!cameraOwnsPointer(e)&&!e.altKey?{id:e.pointerId,x:e.clientX,y:e.clientY,moved:false}:null;});
 pickCanvas.addEventListener('pointermove',e=>{if(gesture&&Math.hypot(e.clientX-gesture.x,e.clientY-gesture.y)>5)gesture.moved=true;});
 pickCanvas.addEventListener('pointercancel',()=>gesture=null);
-pickCanvas.addEventListener('pointerup',e=>{const g=gesture;gesture=null;if(!g||g.id!==e.pointerId||g.moved||busy||!active||active.arrival&&!active.arrival.done)return;const rect=pickCanvas.getBoundingClientRect();pickPointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);pickRay.setFromCamera(pickPointer,camera);const hit=firstVisibleHit(pickRay,active.group);if(hit)inspectHit(hit);else closeInspection();});
+function pickAt(clientX,clientY){if(busy||!active||active.arrival&&!active.arrival.done)return;const rect=pickCanvas.getBoundingClientRect();pickPointer.set((clientX-rect.left)/rect.width*2-1,-(clientY-rect.top)/rect.height*2+1);pickRay.setFromCamera(pickPointer,camera);const hit=firstVisibleHit(pickRay,active.group);if(hit)inspectHit(hit);else closeInspection();}
+pickCanvas.addEventListener('pointerup',e=>{const g=gesture;gesture=null;if(!g||g.id!==e.pointerId||g.moved)return;pickAt(e.clientX,e.clientY);});
+// Gamepad and other non-pointer inputs pick through the same path (gamepad.mjs: A taps what is under the screen centre).
+window.RanchPickAt=pickAt;window.RanchCamera={T,camera,orbit,canvas:pickCanvas,stopFollow:()=>cameraFollow.stop()};installGamepad();
 pickCanvas.addEventListener('dblclick',e=>{
  if(cameraOwnsPointer(e)||e.altKey||busy||!active||active.arrival&&!active.arrival.done||itemPickup?.active||motionUI?.active)return;
  const rect=pickCanvas.getBoundingClientRect();pickPointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);pickRay.setFromCamera(pickPointer,camera);

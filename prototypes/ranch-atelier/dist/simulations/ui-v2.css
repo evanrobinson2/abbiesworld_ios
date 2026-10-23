@@ -135,3 +135,47 @@ html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced[
 html.ui-v2 #v2-chrono :is(button,.ch-reg),html.ui-v2 #v2-hand-more,html.ui-v2 #v2-box{min-height:0!important}
 @media(max-width:520px){#v2-chrono:not(.open) :is(.ch-pushers,.ch-reg:not(.ch-offer)){display:none}#v2-chrono:not(.open).paused .ch-time::after{content:' ·  paused';font-size:11px;font-weight:600;opacity:.7}}
 html.ui-v2 #inspection{display:none!important}
+/* Chronograph round 3 (Evan, 2026-10-23: "make it bigger? and crisper", the timer as a stopwatch, world then tile tiers). */
+#v2-chrono{gap:10px;padding:6px 9px 6px 6px;color:#1b2230;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+#v2-chrono .ch-dial,#v2-chrono .ch-dial svg{width:78px;height:78px}
+#v2-chrono .ch-nap{inset:16px}
+#v2-chrono .ch-time{font-size:24px;letter-spacing:-.015em}
+#v2-chrono .ch-date{font-size:13px;font-weight:700;opacity:.8}
+#v2-chrono .ch-read{min-width:92px}
+#v2-chrono .ch-registers{gap:7px}
+#v2-chrono .ch-registers .ch-reg{width:42px;height:42px}
+#v2-chrono .ch-registers .ch-reg>svg{inset:2px;width:38px;height:38px}
+#v2-chrono .ch-registers .ch-reg .ch-g,#v2-chrono .ch-registers .ch-reg .ch-g svg{width:23px;height:23px}
+#v2-chrono .ch-pushers{gap:6px}
+#v2-chrono .ch-push{min-width:50px;height:34px;border-radius:17px!important}
+#v2-chrono .ch-push svg{width:18px;height:18px}
+#v2-chrono .ch-push b{font-size:13.5px}
+/* The second tier: this place's dials, a slimmer band tucked under the case, starting under the time. */
+#v2-chrono .ch-tiles{position:absolute;left:92px;top:calc(100% + 6px);display:flex;gap:6px;align-items:center;padding:4px 7px;border-radius:24px}
+#v2-chrono .ch-tiles:empty{display:none}
+#v2-chrono .ch-tiles .ch-reg{width:34px;height:34px}
+#v2-chrono .ch-tiles .ch-reg.ch-add{width:26px;height:26px}
+#v2-chrono-pop{top:calc(env(safe-area-inset-top) + 150px)}
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace :is(#scene-clock-control-choices,#scene-weather-control-choices,#scene-season-control-choices,#simulation-speed-choices){top:calc(env(safe-area-inset-top) + 108px)!important}
+@media(max-width:520px){#v2-chrono{gap:6px;padding:4px 6px 4px 4px}#v2-chrono .ch-dial,#v2-chrono .ch-dial svg{width:60px;height:60px}#v2-chrono .ch-nap{inset:12px}#v2-chrono .ch-time{font-size:18px}#v2-chrono .ch-read{min-width:0}
+ #v2-chrono .ch-registers .ch-reg{width:34px;height:34px}#v2-chrono .ch-registers .ch-reg>svg{width:30px;height:30px}#v2-chrono .ch-registers .ch-reg .ch-g,#v2-chrono .ch-registers .ch-reg .ch-g svg{width:18px;height:18px}
+ #v2-chrono .ch-push{min-width:38px;height:28px}#v2-chrono .ch-tiles{left:68px}#v2-chrono:not(.open) .ch-tiles{display:none}
+ #v2-chrono-pop{top:calc(env(safe-area-inset-top) + 124px)}html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body.simulation-workspace :is(#scene-clock-control-choices,#scene-weather-control-choices,#scene-season-control-choices,#simulation-speed-choices){top:calc(env(safe-area-inset-top) + 82px)!important}}
+/* The hand, round 4 (Evan, 2026-10-23: "make them 2x bigger in the tray"; "When cards are in the lowered position, zero
+   cards shall be earmarked. hover should pull up whole hand as is but cards should be further fanned out so each card
+   is fully visible"). Twice the 120 px card, a gentle fan with no overlap, and a lowered hand where every card sits level. */
+html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:240px!important;height:336px!important;margin:0 7px!important;border-radius:11px!important;transform-origin:50% 100%!important}
+#v2-hand{height:calc(env(safe-area-inset-bottom) + 372px);transition:transform .16s ease-out}
+#v2-hand.tucked{transform:translate(-50%,236px)}
+#v2-hand.tucked .generator-hero,#v2-hand.tucked .generator-hero:hover,#v2-hand.tucked .generator-hero[aria-pressed=true]{--lift:0px!important}
+@media(max-height:760px){html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:180px!important;height:252px!important;margin:0 5px!important}#v2-hand{height:calc(env(safe-area-inset-bottom) + 288px)}#v2-hand.tucked{transform:translate(-50%,176px)}}
+@media(max-width:520px){html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{width:min(68px,calc((100vw - 120px) / 4))!important;height:auto!important;aspect-ratio:63/88;margin:0 2px!important;border-radius:5px!important}#v2-hand{height:calc(env(safe-area-inset-bottom) + 132px)}#v2-hand.tucked{transform:translateY(58px)}}
+/* The held card: lifted out of the hand, sharp, tilting toward the finger with a moving sheen. Nothing masks the world. */
+#v2-held{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;perspective:1100px;pointer-events:auto;cursor:pointer}
+#v2-held .v2-held-card{position:relative;border-radius:18px;overflow:hidden;transform:translate(var(--from-x),var(--from-y)) scale(var(--from-s));transition:transform .32s cubic-bezier(.2,1.25,.4,1),box-shadow .32s;box-shadow:0 2px 4px #0003,0 30px 60px -18px #0a1a2a99;will-change:transform}
+#v2-held.up .v2-held-card{transform:translate(0,0) scale(1) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .32s cubic-bezier(.2,1.25,.4,1)}
+#v2-held.up .v2-held-card:not(:hover){transition:transform .5s ease-out}
+#v2-held.down .v2-held-card{transition:transform .2s ease-in;transform:translate(var(--from-x),var(--from-y)) scale(var(--from-s))}
+#v2-held .v2-held-face{display:block;width:100%;height:100%}
+#v2-held .v2-held-sheen{position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;background:radial-gradient(circle at var(--sx,30%) var(--sy,20%),#ffffffc0,#ffffff30 28%,transparent 55%),linear-gradient(115deg,transparent 35%,#ffffff40 48%,transparent 60%);background-size:100% 100%,240% 240%;background-position:0 0,var(--sx,30%) var(--sy,20%);opacity:.9}
+@media(prefers-reduced-motion:reduce){#v2-held .v2-held-card{transition:none!important;--rx:0deg!important;--ry:0deg!important}}
