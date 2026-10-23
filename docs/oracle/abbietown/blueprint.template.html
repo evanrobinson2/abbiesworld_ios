@@ -1,0 +1,109 @@
+<title>Winchester Blueprint</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;600&family=Bricolage+Grotesque:wght@600;800&display=swap">
+<style>
+/* layout: a drafting table. One master plan, then seven sheets, one per hex; cyanotype paper, zone inks. */
+:root{--paper:#0e2747;--paper2:#12315a;--ink:#d8ebff;--dim:#8fb0d4;--grid:rgba(160,200,255,.14);--down:#ffb347;--ani:#6fe0c0;--abbie:#ff8fb5;--water:#2f78b8;--display:'Bricolage Grotesque','IBM Plex Sans Condensed',system-ui,sans-serif;--body:'IBM Plex Sans Condensed',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.5 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 60px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px}
+.wrap{max-width:1100px;margin:0 auto;display:grid;gap:36px}
+h1{font:800 clamp(34px,6vw,60px)/1 var(--display);margin:0;letter-spacing:-.01em}
+h2{font:600 24px/1.1 var(--display);margin:0 0 10px}
+h3{font:600 22px/1.1 var(--display);margin:0}
+p{margin:0;max-width:68ch}
+.kicker{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.lede{font-size:19px;margin-top:14px}
+.sheet{border:1px solid var(--dim);background:rgba(8,28,54,.55);padding:14px;border-radius:2px}
+.sheet svg{display:block;width:100%;height:auto}
+.paper{fill:var(--paper2)}
+.cmin{stroke:#5e8dc0;stroke-width:.5;fill:none;opacity:.5}.cmaj{stroke:#8fb7e6;stroke-width:.9;fill:none;opacity:.8}
+.water{fill:var(--water);fill-opacity:.55;stroke:#7fc0f0;stroke-width:.8}.stream{fill:none;stroke:#7fc0f0;stroke-width:.8}
+.road{fill:none;stroke:#d8ebff;stroke-linecap:round;stroke-linejoin:round}.c1,.c2{stroke-width:2.4}.c3{stroke-width:1.8}.c4{stroke-width:1}.c5{stroke-width:.5;opacity:.6}
+.rail{fill:none;stroke:#e9d27a;stroke-width:1.4;stroke-dasharray:6 3}
+.hexo{fill:none;stroke-width:2.2}.z-downtown.hexo{stroke:var(--down)}.z-anis.hexo{stroke:var(--ani)}.z-abbie.hexo{stroke:var(--abbie)}
+.hexn{font:800 30px var(--display);text-anchor:middle;opacity:.95}.hexn.z-downtown{fill:var(--down)}.hexn.z-anis{fill:var(--ani)}.hexn.z-abbie{fill:var(--abbie)}
+.hexl{font:500 11px var(--mono);text-anchor:middle;fill:var(--ink);letter-spacing:.04em}
+.wedge{stroke:var(--down);stroke-width:1.2;stroke-dasharray:3 4;opacity:.8}
+.launch{fill:none;stroke:#fff;stroke-width:3;stroke-dasharray:10 7;opacity:.85}
+.dot{stroke:var(--paper);stroke-width:1.2}.dot.z-downtown,.pin.z-downtown{fill:var(--down)}.dot.z-anis,.pin.z-anis{fill:var(--ani)}.dot.z-abbie,.pin.z-abbie{fill:var(--abbie)}
+.pin{stroke:var(--paper);stroke-width:1.5}.pint{font:600 11px var(--mono);text-anchor:middle;fill:#08203c}
+.bld{fill:rgba(255,179,71,.28);stroke:var(--down);stroke-width:.8}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;font:500 12px var(--mono);color:var(--dim);margin-top:12px}.legend span::before{content:"";display:inline-block;width:18px;height:0;border-top:3px solid;margin-right:7px;vertical-align:middle}
+.lg-d::before{border-color:var(--down)}.lg-a::before{border-color:var(--ani)}.lg-b::before{border-color:var(--abbie)}.lg-r::before{border-color:#e9d27a;border-top-style:dashed}.lg-l::before{border-color:#fff;border-top-style:dashed}.lg-w::before{border-color:var(--water)}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.zonebox{border:1px solid var(--dim);padding:14px;display:grid;gap:6px;align-content:start}.zonebox h3{font-size:19px}
+.zonebox.z-downtown{border-color:var(--down)}.zonebox.z-anis{border-color:var(--ani)}.zonebox.z-abbie{border-color:var(--abbie)}
+.zonebox b{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:22px}
+.card{border:1px solid var(--dim);background:rgba(8,28,54,.55);padding:14px;display:grid;gap:12px;align-content:start;min-width:0}
+.card.z-downtown{border-top:4px solid var(--down)}.card.z-anis{border-top:4px solid var(--ani)}.card.z-abbie{border-top:4px solid var(--abbie)}
+.card header{display:flex;gap:12px;align-items:center}.hid{font:800 30px var(--display)}.z-downtown .hid{color:var(--down)}.z-anis .hid{color:var(--ani)}.z-abbie .hid{color:var(--abbie)}
+.zone{font:500 12px var(--mono);color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.map{border:1px solid rgba(143,176,212,.5)}.map svg{display:block;width:100%;height:auto}
+.theme{font-size:17px;font-weight:600}
+.items{margin:0;padding:0;list-style:none;display:grid;gap:6px}.items li{display:grid;grid-template-columns:22px 1fr;gap:2px 8px}.items li b{font:600 12px var(--mono);color:var(--dim);grid-row:1/3;padding-top:3px}.items li span{color:var(--dim);font-size:14px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:14px}dt{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding-top:3px}dd{margin:0}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid rgba(143,176,212,.35);padding:8px 10px;text-align:left;vertical-align:top}th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}.tw{overflow-x:auto}
+.ask{border:2px solid var(--down);padding:16px;display:grid;gap:8px}.ask b{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--down)}
+@media (max-width:560px){.card header .hid{font-size:24px}dl{grid-template-columns:1fr}dt{padding-top:6px}}
+</style>
+<div class="wrap">
+<header>
+ <div class="kicker">AW-STUDY-0042 &middot; Abbie's Town &middot; Proposal for approval</div>
+ <h1>Winchester in seven hexes</h1>
+ <p class="lede">Seven hexes, three zones. Each hex is one hand-modelled miniature with a single job, drawn on the real hills, ponds and roads. Nothing gets built until you approve this sheet.</p>
+</header>
+
+<section>
+ <h2>The master plan</h2>
+ <div class="sheet"><!--MASTER-->/*MASTER*/
+ <div class="legend"><span class="lg-d">Downtown</span><span class="lg-a">Ani's side</span><span class="lg-b">Abbie and Daddy's side</span><span class="lg-r">Railway</span><span class="lg-l">Launch Road</span><span class="lg-w">Real water</span></div></div>
+ <p style="margin-top:12px;color:var(--dim);font-size:14px">Drawn from public MassGIS data at true scale: 10 m contours, lakes, brooks, roads and the railway. North is up. The dashed spokes in the centre hex are the 120&deg; cuts that make the three zones one third each on the ground. Homes are placed loosely, with no addresses.</p>
+</section>
+
+<section>
+ <h2>Three zones, seven hexes</h2>
+ <div class="grid3">
+  <div class="zonebox z-downtown"><h3>Downtown</h3><b>H1 Square, H2 Depot and River, H3 Reservoir Hills</b><p>The place where things happen: the town square, the coffee shop and its basement, Frozen Hoagies, the lab, the train, the big water. Three hexes, because it holds the most doors.</p></div>
+  <div class="zonebox z-anis"><h3>Ani's side</h3><b>H4 Neighbourhood Streets, H5 Ani's Pond Side</b><p>Ani's cul de sac and tree house, Horn Pond with its splash pad and hill, and Launch on the ridge. A quiet suburb you can wander, with the nine house types on show.</p></div>
+  <div class="zonebox z-abbie"><h3>Abbie and Daddy's side</h3><b>H6 Abbie's Yard, H7 Gingerbread Hill</b><p>Abbie's house, back yard and tree house, the school door, then a road to the Gingerbread House, where Daddy's sealed bunker door waits in the hillside.</p></div>
+ </div>
+</section>
+
+<section class="ask">
+ <b>Three things to confirm</b>
+ <p><strong>1. Hex count by zone.</strong> I recommend Downtown 3, Ani 2, Abbie 2, because the centre hex is the square. On the ground the zones still carve one third each. The other option is to split the centre hex three ways, which makes the square three small, cramped pieces.</p>
+ <p><strong>2. Launch Road.</strong> The car road runs from Launch in H5 across the north of H6 to Gingerbread Hill in H7, so Launch sits some distance from both homes, as you asked.</p>
+ <p><strong>3. Ginn Field.</strong> It shrinks to a small train-park corner in H2, not a hero, since you asked for none.</p>
+</section>
+
+<section>
+ <h2>The seven sheets</h2>
+ <div class="cards">/*CARDS*/</div>
+</section>
+
+<section>
+ <h2>What changes in every hex</h2>
+ <div class="tw"><table>
+  <tr><th>Layer</th><th>Today</th><th>Target</th></tr>
+  <tr><td>Houses</td><td>Boxes, then nine kit types</td><td>The nine types in three tiers with real materials, yards, fences, hedges, driveways, lit windows at dusk</td></tr>
+  <tr><td>Trees</td><td>Lumpy crowns, tiered pines</td><td>Species by hex (oak, maple, birch, pine, willow), under-planting, leaf piles, 3 sizes</td></tr>
+  <tr><td>Streets</td><td>Flat ribbons</td><td>Curbs, granite-sett Main Street, crosswalks, painted lines, lamps, signs, hydrants, mailboxes</td></tr>
+  <tr><td>Water</td><td>Depth colour, foam, ripples</td><td>Shore reeds, lily pads, ducks and boats, a splash pad, reflections</td></tr>
+  <tr><td>Camera</td><td>Player-owned</td><td>Open-land camera per zone, a tilt-shift pass on the miniature, nothing auto-driven</td></tr>
+  <tr><td>Doors</td><td>Registry and stage API</td><td>Every door in the sheets above uses the entrance registry and returns you to the same spot</td></tr>
+ </table></div>
+</section>
+
+<section>
+ <h2>Build order</h2>
+ <div class="tw"><table>
+  <tr><th>Step</th><th>Hex</th><th>Why first</th></tr>
+  <tr><td>1</td><td>H1 The Square</td><td>Most doors: café, cellar, lab, Moon Mission start. Everything else hangs off it.</td></tr>
+  <tr><td>2</td><td>H5 Ani's Pond Side</td><td>Launch and the cul de sac; the Moon Mission needs both.</td></tr>
+  <tr><td>3</td><td>H6 Abbie's Yard, then H7 Gingerbread Hill</td><td>The tree house, the bunker door and the road between them.</td></tr>
+  <tr><td>4</td><td>H2, H3, H4</td><td>The quieter hexes: river and train, the reservoir, the streets.</td></tr>
+ </table></div>
+ <p style="margin-top:12px">I post a picture of each hex as it is finished, and the whole seven-hex structure plays on /town once every hex has its first pass.</p>
+</section>
+</div>
