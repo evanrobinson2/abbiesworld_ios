@@ -95,6 +95,10 @@ tr.lead td{background:color-mix(in srgb,var(--good) 9%,transparent)}
 .rule dd{margin:0;color:var(--muted);font-size:15px}
 section{display:grid;gap:14px}
 /* scaling version */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.trio .frame model-viewer{background:#82837d}
+@media (max-width:640px){.trio{grid-template-columns:1fr}}
+
 .lede{font-size:18px;max-width:70ch}
 .trail{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
 .shot{margin:0;display:grid;gap:6px;min-width:0}
@@ -153,6 +157,13 @@ section{display:grid;gap:14px}
    <li><b>Check</b><span class="muted">Read it back in words (measure) and against the hero from four sides plus his picture's camera. Undo is one command.</span><code>python3 scale/edit.py measure forearm
 python3 scale/edit.py undo</code></li>
   </ol>
+  <h3>Brute #2, same scripts</h3>
+  <p class="muted">His picture, then Meshy's model, then ours at 3,000 faces. Drag to orbit, pinch or scroll to zoom.</p>
+  <div class="trio">
+   <div class="frame"><img class="ref" src="scale/brute2.jpg" alt="Brute #2 reference picture"><span class="tag">His picture</span></div>
+   <div class="frame"><model-viewer src="scale/brute2_meshy.wasm" alt="Brute #2, Meshy model" camera-controls touch-action="pan-y" interaction-prompt="none" shadow-intensity="0.6" loading="lazy"></model-viewer><span class="tag">Meshy</span></div>
+   <div class="frame"><model-viewer src="scale/brute2_ours.wasm" alt="Brute #2, scaling version, 3,000 faces" camera-controls touch-action="pan-y" interaction-prompt="none" shadow-intensity="0.6" loading="lazy"></model-viewer><span class="tag">Ours · 3,000 faces</span></div>
+  </div>
   <h3>Every step, in screenshots</h3>
   <p class="muted">Top row: Meshy. Bottom row: ours. From the left: front, three-quarter, side, back, then his picture's camera. Click any sheet for full size.</p>
   <div class="trail" id="trail"></div>
@@ -300,6 +311,6 @@ document.addEventListener('click', e => {
 });
 
 Promise.all([fetch('results.json', {cache: 'no-store'}).then(r => r.json()), fetch('chunks.json').then(r => r.json())])
- .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || (d.arms.some(a => a.id === 'G' && a.status === 'done') ? 'G' : null) || leader() || d.arms[0].id; drawChunks(); render(); drawTrail(); })
+ .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || (d.arms.some(a => a.id === 'G' && a.status === 'done') ? 'G' : null) || leader() || d.arms[0].id; drawChunks(); render(); drawTrail(); loadViewer(); })
  .catch(() => { $('#state span').textContent = 'Results could not load; reload to try again'; });
 </script>
