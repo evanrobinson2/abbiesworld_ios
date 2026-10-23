@@ -5,7 +5,7 @@
 import {mountChrono} from './chrono.mjs?v=3';
 import {cardFace,cardArt,setCardArt} from './hand-cards.mjs?v=13';
 import {openCallout,closeCallout} from '../look/callout.mjs?v=2';
-import {inventory} from './inventory.mjs?v=1';
+import {inventory} from './inventory.mjs?v=2';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
 function start(){
@@ -62,7 +62,7 @@ function start(){
 
  // The chronograph (chrono.mjs): time of day, pause and speed pushers, weather, season and pinned dials.
  const chrono=mountChrono({press,icons:I});
- // Abbie's pocket hangs on the chronograph once she carries something (inventory.mjs).
+ // Abbie's backpack hangs on the chronograph once she carries something (inventory.mjs).
  inventory();
 
  // Hand of cards: the real generator cards move here, keeping their tap, drag-to-board and live previews.
