@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-23-freeciv-recovery",
-  "updatedAt": "2026-10-23T07:37:11.533438+00:00",
+  "revision": "anatomy-2026-10-23-wesnoth-prediction-ui",
+  "updatedAt": "2026-10-23T11:45:27.587660+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 95,
+    "findings": 97,
     "runtimeObserved": 0,
-    "sourceFilesFetched": 54,
+    "sourceFilesFetched": 56,
     "selectedClassesDecompiled": 5
   },
   "method": [
@@ -1273,6 +1273,64 @@
             "url": "/data/anatomy/wesnoth.json",
             "path": "package inventory / static analysis"
           }
+        },
+        {
+          "domain": "ui",
+          "title": "Combat prediction display selects a subset of outcomes",
+          "finding": "The dialog obtains attacker and defender combatants and statistics from battle_context, then populates both sides. It shows the untouched probability separately from the HP graph. The HP row selector keeps only probabilities strictly greater than 0.001, chooses at most ten highest-probability outcomes, then orders those by descending HP. The selector does not renormalize retained probabilities. The graph therefore need not show every possible HP outcome or sum to 100 percent. Probability text uses one decimal place and explicitly prints 100% above 0.9995; the label alone is not proof of certainty.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/gui/dialogs/attack_predictions.cpp",
+            "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/gui/dialogs/attack_predictions.cpp#L46-L405",
+            "blobSha": "222e97792722885f4c59c1de05bbb74e1d249c54",
+            "lines": [
+              46,
+              405
+            ]
+          },
+          "supportingEvidence": [
+            {
+              "path": "src/gui/dialogs/attack_predictions.cpp",
+              "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/gui/dialogs/attack_predictions.cpp",
+              "sha256": "8aba4de67ab0319d47caa096d4d080a5a97dd1bfe1a21b0325e38379869b6f05",
+              "gitBlobSha": "222e97792722885f4c59c1de05bbb74e1d249c54"
+            },
+            {
+              "path": "data/gui/window/attack_predictions.cfg",
+              "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/gui/window/attack_predictions.cfg",
+              "sha256": "6d677ddf63ac7db23f7db5158c2efd2b473127896b886d1226afbecdef1368ad",
+              "gitBlobSha": "de1f340f37a949d47c03e1a51b52a048bcfae47d"
+            }
+          ]
+        },
+        {
+          "domain": "ui",
+          "title": "Risk colors do not guarantee rare losses remain visible",
+          "finding": "Graph drawing colors retained HP-zero rows red, reduced-HP rows yellow (grey when the opponent petrifies), and current-or-higher HP rows green. Row selection occurs first and does not reserve a slot for death. Therefore a sufficiently rare death outcome can be omitted. Each retained bar uses round(probability * 182), with a two-pixel minimum; small probabilities can have identical bar lengths. The dialog-specific WML labels the graph Expected Battle Result (HP), and neither this layout nor the reviewed drawing/selection functions supplies an omitted-mass label. This is bounded static inspection, not a claim about all help content, themes, or runtime configurations.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/gui/dialogs/attack_predictions.cpp",
+            "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/gui/dialogs/attack_predictions.cpp#L303-L405",
+            "blobSha": "222e97792722885f4c59c1de05bbb74e1d249c54",
+            "lines": [
+              303,
+              405
+            ]
+          },
+          "supportingEvidence": [
+            {
+              "path": "src/gui/dialogs/attack_predictions.cpp",
+              "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/gui/dialogs/attack_predictions.cpp",
+              "sha256": "8aba4de67ab0319d47caa096d4d080a5a97dd1bfe1a21b0325e38379869b6f05",
+              "gitBlobSha": "222e97792722885f4c59c1de05bbb74e1d249c54"
+            },
+            {
+              "path": "data/gui/window/attack_predictions.cfg",
+              "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/gui/window/attack_predictions.cfg",
+              "sha256": "6d677ddf63ac7db23f7db5158c2efd2b473127896b886d1226afbecdef1368ad",
+              "gitBlobSha": "de1f340f37a949d47c03e1a51b52a048bcfae47d"
+            }
+          ]
         }
       ],
       "coverage": {
@@ -1280,9 +1338,9 @@
         "systems": "not yet studied",
         "simulation": "not yet studied",
         "procedural-generation": "partial static evidence",
-        "ui": "not yet studied",
+        "ui": "partial static evidence; prediction dialog selection and drawing traced",
         "ux": "not yet studied",
-        "rendering": "not yet studied",
+        "rendering": "partial static evidence; graph construction only",
         "assets": "partial static evidence",
         "audio": "not yet studied",
         "models": "not yet studied",
@@ -1291,9 +1349,9 @@
       "inventoryUrl": "/data/anatomy/wesnoth.json",
       "lesson": {
         "status": "design inference; not implemented in Ranch Atelier",
-        "text": "Preserve the original recipe while generating variations, and expose uncertainty rather than presenting a random outcome as guaranteed."
+        "text": "Preserve the original recipe while generating variations, and expose uncertainty rather than presenting a random outcome as guaranteed. A truncated distribution should disclose omitted probability mass and rounding; risk colors alone cannot communicate an outcome that has been filtered out."
       },
-      "nextPass": "Trace prediction into the combat dialog, inspect animation frame references, and observe a tactical encounter. No playthrough-based UI/UX findings yet.",
+      "nextPass": "Trace animation frame references in pinned source. Prediction selection, graph drawing and dialog layout inspected; actual game rendering and combat execution consistency remain unexamined. Do not launch the game during research passes.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },
