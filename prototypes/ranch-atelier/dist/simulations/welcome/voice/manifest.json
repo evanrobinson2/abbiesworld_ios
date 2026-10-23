@@ -1,0 +1,34 @@
+{
+ "study": "AW-STUDY-0022",
+ "source": "tour-stops.mjs",
+ "voice": "XrExE9yKIg1WjnnlVkGX",
+ "model": "eleven_multilingual_v2",
+ "rendered": "2026-10-23T07:47:03+00:00",
+ "lines": {
+  "build": "build.mp3",
+  "alive": "alive.mp3",
+  "animals": "animals.mp3",
+  "people": "people.mp3",
+  "time": "time.mp3",
+  "cards": "cards.mp3",
+  "yours": "yours.mp3"
+ },
+ "text": {
+  "build": "This is Abbie\u2019s World.",
+  "alive": "Where everything you make\u2026 comes alive.",
+  "animals": "The goats have opinions. The horses have best friends.",
+  "people": "And everyone has somewhere to be.",
+  "time": "Days roll by. Lanterns glow.",
+  "cards": "Pick a card, drop it in, and watch your world grow.",
+  "yours": "Now it\u2019s your turn."
+ },
+ "hash": {
+  "build": "a586431baccc",
+  "alive": "0cceec679fe6",
+  "animals": "66eb1fafc832",
+  "people": "705c15ee0ef4",
+  "time": "62f1f67b7907",
+  "cards": "7b77e595b15a",
+  "yours": "5fdd1cbdc4f8"
+ }
+}
