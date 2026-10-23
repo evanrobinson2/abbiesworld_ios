@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Abbie's café at every distance, its colours, moods, lighting and play.">
 <title>The café study</title>
-<link rel="stylesheet" href="cafe.css?v=3">
+<link rel="stylesheet" href="cafe.css?v=4">
 <!-- This study owns its look and does not load /app-style.css (Evan: studies overrule the app styling). Words: docs/oracle/cafe/CAFE_STUDY.md -->
 </head>
 <body>
@@ -97,17 +97,18 @@
 
  <section><h2>Pick a model style</h2>
   <div class="grid g3">
-   <a class="link" href="round2.html"><figure class="pic sq"><img src="img/r2/asset-espresso-bricks_1.jpg" alt=""><figcaption>Toy bricks</figcaption></figure></a>
-   <a class="link" href="round2.html"><figure class="pic sq"><img src="img/r2/asset-espresso-vinyl_0.jpg" alt=""><figcaption>Vinyl toy</figcaption></figure></a>
-   <a class="link" href="round2.html"><figure class="pic sq"><img src="img/r2/asset-espresso-lowpoly_0.jpg" alt=""><figcaption>Low poly</figcaption></figure></a>
+   <div class="link" data-pick="style=bricks" data-label="Toy bricks" data-group="Model style"><figure class="pic sq"><img src="img/r2/asset-espresso-bricks_1.jpg" alt=""><figcaption>Toy bricks</figcaption></figure></div>
+   <div class="link" data-pick="style=vinyl" data-label="Vinyl toy" data-group="Model style"><figure class="pic sq"><img src="img/r2/asset-espresso-vinyl_0.jpg" alt=""><figcaption>Vinyl toy</figcaption></figure></div>
+   <div class="link" data-pick="style=lowpoly" data-label="Low poly" data-group="Model style"><figure class="pic sq"><img src="img/r2/asset-espresso-lowpoly_0.jpg" alt=""><figcaption>Low poly</figcaption></figure></div>
   </div>
-  <p style="margin-top:12px"><a href="round2.html">All five pieces in all three styles</a></p>
+  <p style="margin-top:12px">Tap one to pick it, then Lock in. <a href="round2.html">All five pieces in all three styles</a>, where you can pick a favourite of each.</p>
  </section>
 
  <section><h2>Your call</h2>
-  <div class="ask"><div class="glass"><span class="n">1</span>Which style for the models: toy bricks, vinyl toy or low poly?</div></div>
+  <div class="ask"><div class="glass"><span class="n">1</span>Which style for the models? Tap one above, then Lock in.</div></div>
  </section>
 
 </div>
+<script src="picks.js?v=1"></script>
 </body>
 </html>
