@@ -2,6 +2,16 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-models-load",
+      "date": "2026-10-23",
+      "title": "Models open faster",
+      "line": "The model browser shows a quiet loading ring while a 3D model arrives, loads the next ones ahead, and the laser print effect is gone.",
+      "image": "/whats-new/2026-10-23-models-load.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYSpDBruCTumUhsPACMFHGkt",
+      "threadTitle": "Free high-end asset sources",
+      "tour": false
+    },
+    {
       "id": "2026-10-23-backpack-floating",
       "date": "2026-10-23",
       "title": "The backpack floats out to dress up",
