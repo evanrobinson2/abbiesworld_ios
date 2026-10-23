@@ -12,8 +12,8 @@ hammer) and equal anims for receiving punches, blocking, etc. ... can you paint 
 - Fighters: brute one (red shorts, white tank) and brute two (blue shorts, yellow tank), from his two pictures, about
   3,000 faces each, one painted texture each, materials still named by role (Skin, TankTop, Shorts).
 - Skeleton: 20 bones, the same names on both, placed from each brute's learned rings.
-- 19 clips: idle, walk_fwd, walk_back, jump, block, jab, heavy, uppercut, axe; hit_jab, hit_heavy, hit_uppercut, hit_axe,
-  block_hit, block_heavy, hurt, fall, getup, victory.
+- 20 clips: idle, walk_fwd, walk_back, jump, block, jab, heavy, uppercut, axe; hit_jab, hit_heavy, hit_uppercut, hit_axe,
+  block_hit, block_heavy, block_overhead, hurt, fall, getup, victory.
 - Every blow maps to a hit reaction and a blocked reaction (`moves.json`). The hammer knocks a standing brute flat; an
   uppercut also catches a jumper.
 - Play: AI against AI until the player touches or presses a key, then the player is red. `?show=moves` shows each blow
@@ -31,7 +31,7 @@ hammer) and equal anims for receiving punches, blocking, etc. ... can you paint 
 Timeline (local time, UTC-4):
 - 05:35 Evan's words.
 - 05:36-05:43 Found both brutes and the Bruiser cleanup tools; installed Blender as a Python module (`pip install bpy`).
-- 05:43-05:46 Wrote `build.py` (paint, rig, weights) and `moves.py` (19 clips as numbers) in one pass.
+- 05:43-05:46 Wrote `build.py` (paint, rig, weights) and `moves.py` (20 clips as numbers) in one pass.
 - 05:46 First full build ran in 20 s; the contact sheet showed working clips at once. Meshy's texture was plain grey.
 - 05:47-05:49 Fixes: sRGB/linear paint colours; brute two's fists hang by his hips and were weighted to the thigh (spikes),
   fixed by claiming any vertex near a hand bone for the arm; unbound toes painted as shorts.
@@ -56,3 +56,25 @@ Speedups for next time:
 4. Name GLBs `.wasm` wherever a preview might carry them.
 5. Next step for the game: share `play.html`'s Brute class as `simulations/brawler.mjs` so the next fighter or place
    (a Moonbase ring with radio and holograms) starts from it.
+
+## Research pass (2026-10-23, afternoon)
+Consulted after shipping, at the coordinator's ask; the fight changed where it helped.
+- **Game Oracle**: asked for a plan for "a side-on cartoon fighting game like Street Fighter 6, Smash Bros and Absolver".
+  It holds no fighting game yet: its studies-only plan fell back to Anno and Cartel Tycoon, which don't fit. Its identity
+  schema's feel layer (`juice`: hit-stop, screen shake, camera kick, sound tied to the action) is the checklist used
+  here. Gap to fill: a fighting-game identity record (Street Fighter 6, Smash, Absolver).
+- **Sakurai on hit-stop** (Famitsu column 490 via Source Gaming; his 2022 video via Nintendo Wire): attacker and
+  defender freeze for the same time, longer for more damage with a cap; the hit character shakes horizontally on the
+  ground and vertically in the air, fading, scaled by camera distance, with the hurtbox left in place; the attacker
+  trembles slightly; the flinch shows at once and blends into the hurt motion. **Applied**: all of it (`freeze()`,
+  `stopShake()`, reactions start at their flinch key, `peak` in `moves.json`).
+- **Capcom's frame column (SFV)** and an impact-freeze breakdown (Sonic Hurricane): hit-stop and block-stop are set per
+  game and kept similar, about 9/11/13 frames for light/medium/heavy. **Applied**: 7 + 0.3 x damage frames, capped at
+  13, the same on hit and block (jab 9, heavy 11, uppercut 12, hammer 13).
+- **Street Fighter 6's dynamic blocking** (EventHubs): the block pose changes with where the attack comes from.
+  **Applied**: a new `block_overhead` clip for a blocked hammer.
+- **Skullgirls, "Fluid and Powerful Animation within Frame Restrictions"** (Mariel Cartwright, GDC 2014) and the
+  Gnomon attack-animation workshop: strong key poses, anticipation and recovery, animate with startup/active/recovery
+  in mind. Our clips already key a windup, a contact pose and a recovery to guard; noted as the rule for new moves.
+- **Absolver** (GamingBolt and Game Developer interviews): every attack starts and ends in a stance, and simple shapes
+  keep moves readable. Ours all return to the guard stance; stance-to-stance chains are a next step.
