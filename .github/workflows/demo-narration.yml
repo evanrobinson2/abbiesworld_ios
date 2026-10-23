@@ -1,0 +1,29 @@
+# Narration for the demo's opening tour (tools/demo-narration/render.py): Abbie's and Ani's designed voices from
+# tools/voice-cast/cast.json. Manual only, so it never spends credits on its own (ten short lines). Runs on a runner because
+# the cloud box can't reach api.elevenlabs.io. Secret: ELEVENLABS_API_KEY. Commits simulations/demo/voice/*.mp3 and manifest.json.
+name: demo-narration
+on:
+  workflow_dispatch:
+    inputs:
+      force: { description: 'Render every line again (true/false)', default: 'false' }
+permissions:
+  contents: write
+jobs:
+  narrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Render
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: python3 tools/demo-narration/render.py ${{ inputs.force == 'true' && '--force' || '' }}
+      - name: Commit
+        run: |
+          git config user.name "demo-narration"; git config user.email "actions@users.noreply.github.com"
+          git add prototypes/ranch-atelier/dist/simulations/demo/voice
+          git diff --cached --quiet && exit 0
+          git commit -m "Demo tour: narration from ElevenLabs [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"

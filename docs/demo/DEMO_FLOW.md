@@ -22,7 +22,7 @@ the board, `?at=scientist` jumps to the scientist chat, `?play=1` locks the Moon
    Finishing the Moon Mission unlocks the Moon tile in real play; the demo starts with it in the bag.
 
 ## What other threads own, and the hooks the demo uses
-- **Winchester (hex city thread).** `board.mjs` builds its own seven-hex stand-in. To swap in the real town, set
+- **Winchester (hex city thread).** Evan wants exactly one Winchester. `board.mjs` has a seven-hex stand-in only so the flow runs until the hex city thread's board has an API; it is a fallback, to be deleted once `WINCHESTER.provider` loads the real one. To swap in the real town, set
   `WINCHESTER.provider = ({T, world, put, groundAt, spots}) => {...}` before `createStage`: add the hexes with `put(kind, q, r)`,
   and register `spots.cafe`, `spots.cafeRoof` (an Object3D on the café roof), `spots.lab`, `spots.school`, `spots.noticeboard`.
   Tiles conform by sharing one land height: `tileHeight(kind, x, z)` is `landHeight(x, z)` plus the tile's own relief, which fades
@@ -30,7 +30,7 @@ the board, `?at=scientist` jumps to the scientist chat, `?play=1` locks the Moon
 - **Moon Mission thread.** Needs: `?beat=outpost` for mining (exists), a `rocket` charm on completion (exists), and the toy
   rocket from `moonmission/world3d.mjs` (used on the launch pad).
 - **Café.** The launch pad grows from `spots.cafeRoof`; it expects a flat roof about 5 m across.
-- **Voices (family cast).** Fill `VOICES` or pass `--abbie`/`--ani` voice ids to the render script.
+- **Voices.** Abbie and Ani use their designed voices from tools/voice-cast/cast.json; the demo-narration workflow renders the tour lines.
 
 ## Tour rule
 Tour: **no** for the demo page itself (it is the tour). The chest and the noticeboard are `tour: yes` per the charms study.

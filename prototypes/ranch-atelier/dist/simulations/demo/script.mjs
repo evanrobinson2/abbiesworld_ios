@@ -58,4 +58,4 @@ export const SCIENTIST = [
 ];
 
 // Voice slots for the tour: one designed voice per speaker, filled from /studies/family-cast/cast.json when Evan picks.
-export const VOICES = {abbie: null, ani: null};
+// Voices are Abbie's and Ani's designed voices in tools/voice-cast/cast.json (rendered by the demo-narration workflow).

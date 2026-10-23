@@ -4,10 +4,10 @@
 The lines live in one place, simulations/demo/script.mjs (TOUR beats with an id, a speaker and a text). This reads them
 and writes simulations/demo/voice/<id>.mp3 plus manifest.json, which the tour plays (chat.mjs falls back to the browser
 voice for any line without a file). A line whose text and voice have not changed is kept. Designed voices only, never a
-clone: the voice ids come from the family cast (studies/family-cast/cast.json, 'abbie' and 'ani', once Evan picks) or --abbie/--ani.
+clone: the voice ids come from the family cast (tools/voice-cast/cast.json, 'voices': abbie and ani), or --abbie/--ani.
 Spend goes through wallet().charge, so run this from the workflow, not by hand; the cloud box can't reach api.elevenlabs.io.
 
-    ELEVENLABS_API_KEY=... python3 tools/demo-narration/render.py --abbie <voice id> --ani <voice id> [--dry-run]
+    ELEVENLABS_API_KEY=... python3 tools/demo-narration/render.py [--abbie <voice id> --ani <voice id>] [--dry-run]
 """
 import argparse, hashlib, json, os, re, sys, urllib.request
 from datetime import datetime, timezone
@@ -42,7 +42,8 @@ def main():
     a.add_argument('--force', action='store_true')
     a.add_argument('--dry-run', action='store_true')
     args = a.parse_args()
-    voices = {'abbie': args.abbie, 'ani': args.ani}
+    cast = json.loads((ROOT / 'tools/voice-cast/cast.json').read_text()).get('voices', {})
+    voices = {'abbie': args.abbie or cast.get('abbie'), 'ani': args.ani or cast.get('ani')}
     ls = lines()
     if args.dry_run:
         for lid, who, text in ls:
@@ -50,7 +51,7 @@ def main():
         return
     key = os.environ.get('ELEVENLABS_API_KEY')
     if not key or not all(voices.values()):
-        sys.exit('Set ELEVENLABS_API_KEY and pass --abbie and --ani (designed voice ids).')
+        sys.exit('Set ELEVENLABS_API_KEY; abbie and ani voice ids come from tools/voice-cast/cast.json.')
     VOICE_DIR.mkdir(parents=True, exist_ok=True)
     mf = VOICE_DIR / 'manifest.json'
     old = json.loads(mf.read_text()) if mf.exists() else {}
