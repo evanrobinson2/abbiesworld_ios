@@ -1,0 +1,13 @@
+{
+  "asset": "grace-computer",
+  "rounds": [
+    {"round": 1, "date": "2026-10-23", "asked": "Model the pictured machine from parts; generic badge; ultra fine does not mean high poly",
+     "did": "Shell profile extrusion, bezel with window and chamfered funnel, bulged CRT face, plinth with floppy (slot, latch, eject, light) and three blank bays, side vent ribs, badge disc, four controls, feet. Tuned width, window and bezel height against the photo from its camera (width 0.32 -> 0.295, bezel bottom 0.142 -> 0.112, window 0.204 x 0.178).",
+     "gaps": "Bays slightly low and narrow; bezel corner radius tighter than the photo; rear housing a touch short.",
+     "parts": 57, "triangles": 1296,
+     "files": ["round1-model.jpg", "round1-beside-photo.jpg"]},
+    {"round": 1, "asset": "grace-floppy", "date": "2026-10-23", "asked": "A 3.5\" floppy from parts: shell, sliding shutter, hub, label, write-protect tab",
+     "did": "Shell with cut corner, shutter on both faces and the edge, head window, hub with spindle and drive slot, write-protect window and slide, label with our own ruled lines (or a label texture in the scene).", "parts": 16, "triangles": 268}
+  ],
+  "state_in_world": "The screen carries the computer's state: dark glass when off, GRACE-DOS glowing when on; the drive light and chatter when a disk is read."
+}

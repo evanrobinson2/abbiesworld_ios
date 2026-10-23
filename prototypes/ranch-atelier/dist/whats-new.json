@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-grace-basement",
+      "date": "2026-10-23",
+      "title": "Grace's basement",
+      "line": "Under the café is Aunt Grace's basement. Turn on the light, walk down the stairs and sit at her 1986 computer. Play KEYSTORM, try her disks, and find the ten gold coins.",
+      "image": "/whats-new/2026-10-23-grace-basement.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
       "id": "2026-10-23-welcome",
       "date": "2026-10-23",
       "title": "Welcome to Abbie’s World",

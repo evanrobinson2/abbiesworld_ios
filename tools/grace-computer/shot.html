@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><style>html,body{margin:0;background:#fff}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"/prototypes/ranch-atelier/dist/vendor/three.module.js"}}</script>
+<script type="module">
+// Same-camera shot of Grace's computer against Evan's photo (1024x768). Query: theta, phi, dist, fov, ty, ex (exploded).
+import * as T from 'three';
+import {createGraceComputer, createGraceFloppy} from '/prototypes/ranch-atelier/dist/simulations/grace-computer.mjs';
+import {GLTFLoader} from '/prototypes/ranch-atelier/dist/vendor/loaders/GLTFLoader.js';
+const q = new URLSearchParams(location.search), n = (k, d) => q.has(k) ? +q.get(k) : d;
+const r = new T.WebGLRenderer({antialias: true, preserveDrawingBuffer: true}); r.setSize(1024, 768); r.shadowMap.enabled = true;
+r.toneMapping = T.ACESFilmicToneMapping; r.toneMappingExposure = 1.05; document.body.append(r.domElement);
+const s = new T.Scene(); s.background = new T.Color('#f6f6f4');
+s.add(new T.HemisphereLight('#ffffff', '#cfcac0', 1.5));
+const k = new T.DirectionalLight('#ffffff', 1.6); k.position.set(-1.2, 2, 2.2); k.castShadow = true; k.shadow.bias = -.0004; k.shadow.normalBias = .01; k.shadow.mapSize.set(2048, 2048); s.add(k);
+const f = new T.DirectionalLight('#ffffff', .6); f.position.set(2, 1, 1); s.add(f);
+const floor = new T.Mesh(new T.PlaneGeometry(6, 6), new T.ShadowMaterial({opacity: .12})); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; s.add(floor);
+const m = q.has('glb') ? (await new GLTFLoader().loadAsync(q.get('glb'))).scene : q.has('floppy') ? createGraceFloppy() : createGraceComputer(); s.add(m);
+if (q.has('floppy') && !q.has('glb')) { m.rotation.x = -1.2; m.position.y = .03; }
+const th = n('theta', -32) * Math.PI / 180, ph = n('phi', 82) * Math.PI / 180, d = n('dist', 1.1);
+const c = new T.PerspectiveCamera(n('fov', 30), 1024 / 768, .01, 20), tgt = new T.Vector3(n('tx', 0), n('ty', .19), 0);
+c.position.set(tgt.x + d * Math.sin(ph) * Math.sin(th), tgt.y + d * Math.cos(ph), tgt.z + d * Math.sin(ph) * Math.cos(th));
+c.lookAt(tgt); c.setViewOffset(1024, 768, n('ox', 0), n('oy', 0), 1024, 768);
+r.render(s, c); window.done = true;
+</script>
