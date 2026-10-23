@@ -1,16 +1,71 @@
 {
   "asset": "Leaping wooden mannequin, low poly",
   "requested": [
-    {"at": "2026-10-23T12:56:36Z", "by": "Evan", "ask": "render me a low poly mannequin, the one from the reference exactly"},
-    {"at": "2026-10-23T12:56:46Z", "by": "Evan", "ask": "render each piece in blender separately"},
-    {"at": "2026-10-23T12:56:58Z", "by": "Evan", "ask": "done when the whole mannequin is in that pose"},
-    {"at": "2026-10-23T12:58:29Z", "by": "Evan", "ask": "show it in each custom shader in a simple scene, theme banana split day"}
+    {
+      "at": "2026-10-23T12:56:36Z",
+      "by": "Evan",
+      "ask": "render me a low poly mannequin, the one from the reference exactly"
+    },
+    {
+      "at": "2026-10-23T12:56:46Z",
+      "by": "Evan",
+      "ask": "render each piece in blender separately"
+    },
+    {
+      "at": "2026-10-23T12:56:58Z",
+      "by": "Evan",
+      "ask": "done when the whole mannequin is in that pose"
+    },
+    {
+      "at": "2026-10-23T12:58:29Z",
+      "by": "Evan",
+      "ask": "show it in each custom shader in a simple scene, theme banana split day"
+    },
+    {
+      "at": "2026-10-23T13:39:31Z",
+      "by": "Evan",
+      "ask": "yes to a smooth, fully rounded version beside the low-poly one"
+    }
   ],
   "reference": "private stock photo (watermarked); never committed. Silhouette scored from a mask made off it.",
   "rounds": [
-    {"round": 1, "iou": 0.705, "faces": 1154, "change": "joints read off the photo, depth from true bone lengths, cones for limbs", "lesson": "limbs far too thin; a mannequin's limbs are as wide as its joints"},
-    {"round": 2, "iou": 0.798, "faces": 1538, "change": "lathe-profile limbs with the bulge high (Bridgman), bigger joints, chest, head", "lesson": "thickness was most of the miss; the pose was already right"},
-    {"round": 3, "iou": 0.795, "faces": 1538, "change": "wider feet and pelvis, thicker thighs", "lesson": "kept for the better-looking feet; silhouette unchanged"}
+    {
+      "round": 1,
+      "iou": 0.705,
+      "faces": 1154,
+      "change": "joints read off the photo, depth from true bone lengths, cones for limbs",
+      "lesson": "limbs far too thin; a mannequin's limbs are as wide as its joints"
+    },
+    {
+      "round": 2,
+      "iou": 0.798,
+      "faces": 1538,
+      "change": "lathe-profile limbs with the bulge high (Bridgman), bigger joints, chest, head",
+      "lesson": "thickness was most of the miss; the pose was already right"
+    },
+    {
+      "round": 3,
+      "iou": 0.795,
+      "faces": 1538,
+      "change": "wider feet and pelvis, thicker thighs",
+      "lesson": "kept for the better-looking feet; silhouette unchanged"
+    },
+    {
+      "round": 4,
+      "iou": 0.801,
+      "faces": 1538,
+      "change": "feet: longer paddles centred near the ankle (heel behind), wider",
+      "lesson": "a mannequin foot is a paddle with a heel behind the ankle, not a point hanging past it"
+    }
   ],
-  "method": "build.py (bpy 5.2, headless) builds 30 named parts, renders silhouette + shaded from the photo's orthographic camera and exports GLB; parts.py renders each part alone; score.py gives IoU against the private mask."
+  "method": "build.py (bpy 5.2, headless) builds 30 named parts, renders silhouette + shaded from the photo's orthographic camera and exports GLB; parts.py renders each part alone; score.py gives IoU against the private mask.",
+  "variants": [
+    {
+      "name": "smooth",
+      "file": "mannequin-smooth.glb",
+      "iou": 0.799,
+      "faces": 13650,
+      "how": "SMOOTH=1 python build.py: same parts and pose, 3x segments, smooth shaded"
+    }
+  ]
 }
