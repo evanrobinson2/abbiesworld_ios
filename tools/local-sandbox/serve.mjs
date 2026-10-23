@@ -2,13 +2,11 @@
 // Honours vercel.json rewrites (exact, :param and :path*), proxies /r2/* to the public R2 bucket, never caches.
 // /app-release.json is stamped from git: the main commit this copy contains. When live runs that same commit, the
 // stamp is live's own, so the version label in the corner reads exactly as it does on abbies.world.
-// Usage (from the repo root): node tools/local-sandbox/serve.mjs [port] [--follow main]   then open http://localhost:5173/sandbox
-// --follow <branch>: every minute, fetch and fast-forward this clone to origin/<branch>, so a refresh shows the
-// newest merge (use a clone kept only for this; local edits there are discarded).
+// Usage (from the repo root): node tools/local-sandbox/serve.mjs [port]   then open http://localhost:5173/sandbox
 import http from 'node:http';import https from 'node:https';import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';import {execFileSync} from 'node:child_process';
 const here=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(here,'../../prototypes/ranch-atelier/dist');
-const args=process.argv.slice(2),port=Number(args.find(a=>/^\d+$/.test(a))||process.env.PORT||5173),follow=args.includes('--follow')?args[args.indexOf('--follow')+1]||'main':null;
+const port=Number(process.argv[2]||process.env.PORT||5173);
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.gif':'image/gif','.glb':'model/gltf-binary','.gltf':'model/gltf+json','.bin':'application/octet-stream','.wasm':'application/wasm','.mp3':'audio/mpeg','.ogg':'audio/ogg','.wav':'audio/wav','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.ktx2':'image/ktx2','.hdr':'application/octet-stream'};
 const rules=(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).rewrites||[]).map(r=>{
   const keys=[];const re=new RegExp('^'+r.source.replace(/[.+?^${}()|[\]\\]/g,'\\$&').replace(/:(\w+)\*/g,(_,k)=>{keys.push(k);return '(.*)';}).replace(/:(\w+)/g,(_,k)=>{keys.push(k);return '([^/]+)';})+'$');
@@ -35,4 +33,3 @@ http.createServer((req,res)=>{
   res.writeHead(200,{'content-type':types[path.extname(file).toLowerCase()]||'application/octet-stream','cache-control':'no-store'});
   fs.createReadStream(file).pipe(res);
 }).listen(port,()=>console.log(`Abbie's World running locally: http://localhost:${port}/sandbox`));
-if(follow){const sync=()=>{if(!git('fetch','-q','origin',follow)&&!git('rev-parse','origin/'+follow))return;const before=git('rev-parse','HEAD');git('checkout','-q','-B',follow,'origin/'+follow);git('reset','-q','--hard','origin/'+follow);const after=git('rev-parse','HEAD');if(after!==before)console.log(new Date().toLocaleTimeString(),'now at',after.slice(0,8),git('log','-1','--format=%s'));};sync();setInterval(sync,60000);}
