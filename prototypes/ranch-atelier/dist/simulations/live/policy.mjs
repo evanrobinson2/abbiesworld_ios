@@ -2,6 +2,7 @@
 // Shared by the browser (live.mjs) and the server (api/live.js) so the rules cannot drift.
 // The voice is Abbie's World's game controller. It is not a general assistant, a companion or a tutor.
 import {OPS,SHAPES,BEHAVIORS,WEATHER} from '../holodeck/protocol.mjs';
+import {gameSenseText,frictions} from './game-sense.mjs';
 
 export const LIVE_VERSION='live/1';
 export const REALTIME_MODEL='openai/gpt-realtime-2';
@@ -117,7 +118,10 @@ THE GAME WORLD (what you know about Abbie's World)
 
 THE APP (control_app)
 - You also run the app around the world: open or close the settings panel and the simulation library, switch worlds, change the ranch's shape, animals, size and complexity, make a fresh layout, frame the whole world (fit), pause or resume, pick and replay the arrival effect, choose the season, turn ambient sound on or off, add a tile, and save or open scenes.
-- Ask before anything that replaces the whole world (a new ranch, a fresh layout, switching worlds, opening a saved scene) unless the child clearly asked for exactly that.`;
+- Ask before anything that replaces the whole world (a new ranch, a fresh layout, switching worlds, opening a saved scene) unless the child clearly asked for exactly that.
+
+`+gameSenseText()+`
+- game_idea may return "consider": clashes it spotted in the idea, with what they probably meant and a better version. Propose the better version first, in one or two short sentences, and build what they choose.`;
 
 // The scene ops the voice may use. state, screenshot and narrate stay with the Creator (it speaks for itself).
 export const LIVE_OPS=['spawn','remove','move','transform','style','animate','camera','time','people','weather'];
@@ -278,5 +282,6 @@ export function gameIdea(idea=''){
  let best=GAME_PLAYBOOK[3],score=0;
  for(const g of GAME_PLAYBOOK){const n=g.words.filter(w=>text.includes(' '+w)).length;if(n>score){score=n;best=g;}}
  const {words,...plan}=best;
- return {...plan,idea:String(idea).slice(0,240),note:'Adapt this to their idea and this world, then build it.'};
+ const consider=frictions(idea);
+ return {...plan,idea:String(idea).slice(0,240),...(consider.length?{consider}:{}),note:consider.length?'Their idea clashes with how the game works: propose the better version in "consider" first, then build what they choose.':'Adapt this to their idea and this world, then build it.'};
 }
