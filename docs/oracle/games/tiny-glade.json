@@ -93,6 +93,22 @@
       "confidence": 0.7,
       "lesson": "Soft bounce light and contact shadows make simple shapes look handmade."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "procedural",
+      "mocap": 0.0,
+      "locomotion": [
+        "procedural"
+      ],
+      "tricks": [
+        "Buildings grow and settle procedurally as you draw; the \"animation\" is the architecture answering the stroke",
+        "Sheep and birds wander with simple procedural motion; nothing is mocap"
+      ],
+      "lesson": "The world answering a stroke is the animation; spend motion on growth and settling, not characters.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Gentle ambient.",
     "pacing": "slow, short sessions",

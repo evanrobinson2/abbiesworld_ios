@@ -52,6 +52,7 @@
       "source": "derived from the art note by rendering_notes.RULES",
       "confidence": 0.15
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "Medieval.",
     "pacing": "brisk, short sessions",

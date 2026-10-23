@@ -517,3 +517,71 @@ def cash_register():
         for t in (-1, 1):
             cyl(f'foot_{s}_{t}', 0.016, 0.008, 'Rubber_Black', loc=(s * (W / 2 - 0.03), t * (D / 2 - 0.03), -0.008), parent=R, verts=8)
     return R
+
+
+@asset('pin_board', 'Pin board', 'Back bar', 'support',
+       'Context pass 2026-10-23: Unpacking (Witch Beam, GDC 2022) "No item? No trait!"; MAGES set-dressing guide (focal points, varied density)',
+       real='cork pin board in a honey-oak frame, about 900 x 600 mm, with photo strips, a crayon drawing, a postcard and a lost mitten held by push pins',
+       moving='the pinned things lift off their pins; the mitten swings')
+def pin_board():
+    """The café's life story, told by what is pinned up (no words): two photo-booth strips say friends come here and love
+    the booth, a crayon drawing says little kids do too, a moon postcard says somebody dreams of space, and a lost lime mitten
+    says someone left in a hurry. Hangs on the wall behind the machines, front at -Y like the menu board."""
+    R = empty('pin_board')
+    W, H = 0.9, 0.6
+    box('cork', (W - 0.05, 0.016, H - 0.05), 'Cork_Board', loc=(0, 0, 0.025), parent=R, origin='bottom')
+    for nm, sz, loc in [('frame_top', (W, 0.03, 0.025), (0, 0, H - 0.025)), ('frame_bottom', (W, 0.03, 0.025), (0, 0, 0)),
+                        ('frame_left', (0.025, 0.03, H), (-W / 2 + 0.0125, 0, 0)), ('frame_right', (0.025, 0.03, H), (W / 2 - 0.0125, 0, 0))]:
+        box(nm, sz, 'Plank_Honey', loc=loc, parent=R, bevel=0.004, origin='bottom')
+    F = -0.009   # the cork's face
+    def pin(nm, x, z, m='Plastic_Pink'):
+        cyl(nm, 0.008, 0.008, m, loc=(x, F - 0.003, z), rot=(math.pi / 2, 0, 0), parent=R, verts=6)
+    def pinned(nm, x, z, tilt):
+        it = empty(nm, loc=(x, F, z), rot=(0, math.radians(tilt), 0), parent=R); joint(it, 'lift', (0, -1, 0), 0, 0.2, 'comes off its pin')
+        return it
+    # two photo strips from the booth: four squares of friends each (colour blocks for faces, no real photos)
+    for s, (x, tilt, cols) in enumerate([(-0.32, -4, ['Plaster_Pink', 'Plaster_Teal', 'Plaster_Sun', 'Plaster_Purple']),
+                                         (-0.22, 6, ['Plaster_Teal', 'Plaster_Tangerine', 'Plaster_Pink', 'Plaster_Sun'])]):
+        st = pinned(f'photo_strip_{s}', x, 0.10, tilt)
+        box(f'photo_strip_{s}_paper', (0.07, 0.002, 0.26), 'Paper_Photo', parent=st, origin='bottom')
+        for i, c in enumerate(cols):
+            box(f'photo_strip_{s}_frame_{i}', (0.058, 0.002, 0.055), c, loc=(0, -0.0015, 0.012 + i * 0.062), parent=st, origin='bottom')
+            blob(f'photo_strip_{s}_friend_{i}', (0.012, 0.003, 0.014), 'Plaster_Cream', loc=(0.008 * (-1) ** i, -0.003, 0.034 + i * 0.062), parent=st, subdiv=1)
+        pin(f'photo_strip_{s}_pin', x, 0.345)
+    # a crayon drawing: the pink cup and a big star (a little customer's present)
+    dr = pinned('crayon_drawing', 0.0, 0.24, 3)
+    box('drawing_paper', (0.21, 0.002, 0.28), 'Paper_Pages', parent=dr, origin='bottom')
+    prism('drawn_cup', [(-0.05, 0.05), (0.05, 0.05), (0.06, 0.15), (-0.06, 0.15)], 0.002, 'Plaster_Pink', loc=(0, -0.0015, 0), rot=(math.pi / 2, 0, 0), parent=dr)
+    star('drawn_star', 0.045, 0.002, 'Plaster_Sun', loc=(0.02, -0.003, 0.215), parent=dr)
+    for i in range(3):
+        tube(f'drawn_steam_{i}', [(-0.03 + i * 0.03, -0.003, 0.16), (-0.035 + i * 0.03, -0.003, 0.18)], 0.0025, 'Plaster_Teal', parent=dr, verts=4)
+    pin('crayon_drawing_pin', 0.0, 0.51, 'Plastic_Teal')
+    # a postcard of the moon
+    pc = pinned('moon_postcard', 0.24, 0.33, -5)
+    box('postcard', (0.15, 0.002, 0.10), 'Plank_BlackPly', parent=pc, origin='bottom')
+    cyl('postcard_moon', 0.032, 0.002, 'Plaster_Cream', loc=(-0.03, -0.0015, 0.05), rot=(math.pi / 2, 0, 0), parent=pc, verts=10)
+    for i, (x, z) in enumerate([(0.03, 0.075), (0.05, 0.03), (0.015, 0.02)]):
+        star(f'postcard_star_{i}', 0.008, 0.002, 'Plaster_Sun', loc=(x, -0.0015, z), parent=pc)
+    pin('moon_postcard_pin', 0.24, 0.425, 'Plastic_Lime')
+    # a lost mitten, hung by its cuff from one pin
+    mt = empty('lost_mitten', loc=(0.27, F - 0.012, 0.25), parent=R); joint(mt, 'hinge', (0, 1, 0), -0.4, 0.4, 'swings on its pin')
+    blob('mitten_hand', (0.04, 0.014, 0.055), 'Cloth_Lime', loc=(0, 0, -0.08), parent=mt, subdiv=1)
+    blob('mitten_thumb', (0.014, 0.012, 0.025), 'Cloth_Lime', loc=(0.042, 0, -0.07), rot=(0, math.radians(-30), 0), parent=mt, subdiv=1)
+    cyl('mitten_cuff', 0.036, 0.03, 'Cloth_Plush', loc=(0, 0, -0.035), parent=mt, verts=8)
+    pin('lost_mitten_pin', 0.27, 0.25, 'Plastic_Orange')
+    return R
+
+
+@asset('tip_jar', 'Tip jar', 'Bar', 'support',
+       'Context pass 2026-10-23: Unpacking "everything is an opportunity to tell a story"; the till side of the bar needed a small human thing',
+       real='500 ml glass jam jar with a pink ribbon, a few copper coins inside (copper, so gold coins stay special)',
+       moving='coins rattle and can be tipped out')
+def tip_jar():
+    """A jam jar on the bar by the till, a pink ribbon round its neck and a few copper coins in the bottom."""
+    R = empty('tip_jar')
+    shell(lathe('jar', [(0.0, 0.0), (0.038, 0.0), (0.042, 0.01), (0.042, 0.085), (0.034, 0.10), (0.034, 0.115)], 'Glass_Clear', parent=R, verts=12), 0.003, open=True)
+    torus('ribbon', 0.0365, 0.004, 'Cloth_Magenta', loc=(0, 0, 0.098), parent=R, seg=12, verts=4)
+    blob('ribbon_bow', (0.014, 0.006, 0.01), 'Cloth_Magenta', loc=(0, -0.038, 0.1), parent=R, subdiv=1)
+    for i, (x, y, z, a) in enumerate([(0.0, 0.0, 0.004, 0), (0.012, 0.008, 0.007, 20), (-0.014, 0.004, 0.006, -15), (0.006, -0.014, 0.009, 35), (-0.004, 0.012, 0.011, 60)]):
+        cyl(f'coin_{i}', 0.011, 0.002, 'Metal_Copper', loc=(x, y, z), rot=(math.radians(a * 0.3), math.radians(a * 0.2), 0), parent=R, verts=10)
+    return R

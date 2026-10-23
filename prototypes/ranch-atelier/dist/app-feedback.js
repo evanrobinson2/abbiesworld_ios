@@ -37,6 +37,10 @@
   .afb-row{display:flex;gap:10px;margin-top:14px;align-items:center}
   .afb-row .afb-more{flex:1;font-size:12px;color:var(--app-muted,#797058)}
   .afb-row button.afb-more{background:none;border:0;padding:0;text-align:left;cursor:pointer;font-weight:700;font-size:13px;color:var(--app-accent,#b64932);min-height:40px}
+  .afb-acts{margin:0;padding:12px 16px 0}.afb-acts .afb-btn{flex:1}
+  .afb-foot{margin-top:12px}
+  .afb-link{background:none;border:0;padding:0 2px;min-height:40px;cursor:pointer;font:700 13px var(--app-font,system-ui,sans-serif);color:var(--app-muted,#797058)}
+  .afb-x{position:absolute;z-index:3;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:1px solid #fff8;background:color-mix(in srgb,var(--app-paper,#fffcf0) 80%,transparent);color:var(--app-ink,#4c4330);font:400 22px/1 var(--app-font,system-ui,sans-serif);cursor:pointer;display:grid;place-items:center;padding:0;box-shadow:0 2px 8px #0002}
   .afb-btn{min-height:44px;padding:0 18px;border-radius:14px;border:1px solid var(--app-border,#ded5b2);background:transparent;color:inherit;font:700 15px var(--app-font,system-ui,sans-serif);cursor:pointer}
   .afb-btn.primary{background:var(--app-accent,#b64932);border-color:transparent;color:#fff}
   .afb-btn[disabled]{opacity:.55}
@@ -68,22 +72,30 @@
     return (/^Merge pull request/.test(lines[0] || '') ? lines[1] : lines[0]) || '';
   };
 
-  function showCard({ kicker, entry, extra, fallback, primary, onPrimary, onClose }) {
+  // Layout (Evan, 2026-10-23 14:17Z): Later and Dismiss always in the same spot, right under the picture; "+N more",
+  // History and Dismiss all at the bottom; a close button so he never has to decide (it hides the card, dismisses nothing).
+  const openHistory = show => { card?.remove(); card = null; import('/look/whats-new-viewer.mjs?v=1').then(m => m.openWhatsNew(show)).catch(openNotices); };
+  function showCard({ kicker, entry, extra, fallback, primary, onPrimary, onClose, onDismissAll }) {
     card?.remove();
+    const hide = () => { card?.remove(); card = null; };
+    const acts = el('div', { class: 'afb-row afb-acts' },
+      el('button', { class: 'afb-btn', type: 'button', text: 'Later', onclick: hide }),
+      primary ? el('button', { class: 'afb-btn primary', type: 'button', text: primary, onclick: onPrimary })
+        : el('button', { class: 'afb-btn', type: 'button', text: entry ? 'Dismiss' : 'Close', onclick: () => { hide(); onClose?.(); } }));
     const body = el('div', { class: 'afb-body' },
       el('div', { class: 'afb-kicker', text: kicker }),
       el('div', { class: 'afb-title', text: entry?.title || fallback || 'A new version is ready' }),
       el('p', { class: 'afb-line', text: entry?.line || (entry ? '' : 'Tap Reload to get it.') }),
-      el('div', { class: 'afb-row' },
-        extra > 0 ? el('button', { class: 'afb-more', type: 'button', text: `+${extra} more`, onclick: () => { card?.remove(); card = null; openNotices(); } }) : el('span', { class: 'afb-more' }),
-        ...(entry && !primary ? [el('button', { class: 'afb-btn', type: 'button', text: 'Later', onclick: () => { card?.remove(); card = null; } })] : []),
-        el('button', { class: 'afb-btn', type: 'button', text: primary ? 'Later' : entry ? 'Dismiss' : 'Close', onclick: () => { card?.remove(); card = null; onClose?.(); } }),
-        ...(primary ? [el('button', { class: 'afb-btn primary', type: 'button', text: primary, onclick: onPrimary })] : [])));
+      el('div', { class: 'afb-row afb-foot' },
+        extra > 0 ? el('button', { class: 'afb-more', type: 'button', text: `+${extra} more`, onclick: () => openHistory('unread') }) : el('span', { class: 'afb-more' }),
+        el('button', { class: 'afb-link', type: 'button', text: 'History', onclick: () => openHistory('all') }),
+        ...(onDismissAll && extra > 0 ? [el('button', { class: 'afb-link', type: 'button', text: 'Dismiss all', onclick: () => { hide(); onDismissAll(); } })] : [])));
     card = el('section', { class: 'afb-card', role: 'status', 'aria-live': 'polite', 'data-feedback-ui': '' });
     // A NEW sash across the corner (Evan, 2026-10-23 04:47Z: "put a NEW banner!!").
     card.append(el('div', { class: 'afb-new', 'aria-hidden': 'true', text: 'NEW' }));
+    card.append(el('button', { class: 'afb-x', type: 'button', 'aria-label': 'Close for now', text: '\u00d7', onclick: hide }));
     if (entry?.image) card.append(el('img', { class: 'afb-pic', src: entry.image, alt: entry.title || 'What changed' }));
-    card.append(body);
+    card.append(acts, body);
     document.body.append(card);
   }
 
@@ -98,7 +110,8 @@
       kicker: 'New version ready', entry: list[0], extra: list.length - 1, fallback: releaseLine(rel) || 'A new version is ready',
       primary: 'Reload',
       onPrimary: () => { store.set('afb-build', remote); location.reload(); },
-      onClose: () => { dismissedBuild = remote; }
+      onClose: () => { dismissedBuild = remote; },
+      onDismissAll: () => dismiss(list.map(n => n.id))
     });
   }
 
@@ -109,7 +122,7 @@
     store.set('afb-build', loadedBuild || '');
     // Arrived on a new version without tapping Reload (a fresh launch): show what changed once.
     // Dismiss takes off only the notice on the card and shows the next one; the rest wait under Notices.
-    const next = () => { const fresh = unseen(); if (fresh.length) showCard({ kicker: "What's new", entry: fresh[0], extra: fresh.length - 1, onClose: () => { dismiss([fresh[0].id]); next(); } }); };
+    const next = () => { const fresh = unseen(); if (fresh.length) showCard({ kicker: "What's new", entry: fresh[0], extra: fresh.length - 1, onClose: () => { dismiss([fresh[0].id]); next(); }, onDismissAll: () => dismiss(fresh.map(n => n.id)) }); };
     // A first visit ever has nothing "new": the welcome guide (simulations/welcome) greets new players instead.
     if (loadedBuild && previous && previous !== loadedBuild) next();
     setInterval(check, 60000);

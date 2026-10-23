@@ -44,6 +44,8 @@ dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-t
 .group ol{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:14.5px}
 .group li span{font:500 11px var(--mono);color:var(--muted);margin-right:8px}
 .group li.drawn{color:var(--suit);font-weight:600}.group li a{color:var(--green);font:500 11px var(--mono)}
+.ctx-wrap{--aw-ink:var(--ink);--aw-soft:var(--muted);--aw-bg:var(--bg);--aw-surface:var(--paper);--aw-line:var(--line);--aw-accent:var(--suit);--aw-on-accent:#111;--aw-font:var(--body);--aw-display:var(--display)}
+.ctx-wrap .ctx-aside{margin:0!important;max-width:520px!important}
 .rules{display:grid;gap:9px;padding-left:22px;margin:0;max-width:80ch}.rules li::marker{color:var(--suit);font-weight:700}
 
 </style></head><body><main>
@@ -249,6 +251,38 @@ dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-t
 </ol>
 <h2>Next</h2>
 <p>The dome and the tower are the first two of the five base buildings the Moon Heroes study handed over. The habitat and hangar, the airlock door and the supply crate follow as soon as Midjourney can draw their pictures. Then the kit goes onto the Moon tile for the shooter.</p>
+<div class="ctx-wrap"><aside class="ctx-aside" style="max-width:340px;margin:24px 0 24px auto"><style>/* The context engineering card (look/context-card.mjs). Uses the --aw-* tokens from theme/boot.js. */
+.ctx-card{display:grid;gap:10px;font:14px/1.45 var(--aw-font,system-ui,sans-serif);color:var(--aw-ink,#2b211a)}
+.ctx-card h3{margin:0;font:600 17px/1.2 var(--aw-display,inherit)}
+.ctx-lead{margin:0;color:var(--aw-soft,#6b5d52)}
+.ctx-kind{border:1px solid var(--aw-line,#0002);border-radius:14px;background:var(--aw-bg,#fff);padding:0 12px}
+.ctx-kind summary{display:flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none}
+.ctx-kind summary::-webkit-details-marker{display:none}
+.ctx-kind summary::after{content:'';margin-left:auto;width:7px;height:7px;border:solid var(--aw-soft,#6b5d52);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.ctx-kind[open] summary::after{transform:rotate(-135deg)}
+.ctx-kind summary b{font-weight:600}
+.ctx-kind summary i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--aw-accent,#7a4b2a);color:var(--aw-on-accent,#fff)}
+.ctx-kind summary i:empty{display:none}
+.ctx-kind ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+.ctx-kind li{display:grid;gap:1px}
+.ctx-kind a{color:var(--aw-ink,#2b211a);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 30%,transparent);text-underline-offset:2px}
+.ctx-kind a:hover{text-decoration-color:currentColor}
+.ctx-kind small{color:var(--aw-soft,#6b5d52);font-size:12px}
+.ctx-none{margin:0 0 10px;color:var(--aw-soft,#6b5d52);font-style:italic}
+.ctx-foot{margin:0;font-size:12px;color:var(--aw-soft,#6b5d52)}
+.ctx-foot a{color:inherit}
+</style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
+  <p class="ctx-lead">What this study drew on.</p>
+  <details class="ctx-kind" open><summary><b>Oracle consultation</b><i>3</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json" target="_blank" rel="noopener">Astroneer identity record</a><small>Modules, low HUD, state in the world. State lights stay separate named parts.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/deliver-us-the-moon.json" target="_blank" rel="noopener">Deliver Us The Moon identity record</a><small>Diegetic holograms; story props are the breadcrumbs.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/subnautica-2.json" target="_blank" rel="noopener">Subnautica 2 identity record</a><small>A base built from its own pieces: dome, corridor and airlock must snap.</small></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i>2</i></summary>
+   <ul><li><a href="https://www.unrealengine.com/en-US/spotlights/how-system-era-softworks-leveraged-ue4-to-create-astroneer-s-wonderful-universe" target="_blank" rel="noopener">How System Era used UE4 to create Astroneer (Unreal Engine spotlight)</a><small>Low poly for speed; one material with switchable emissive lights.</small></li><li><a href="https://www.indiegraze.com/?p=617" target="_blank" rel="noopener">Interview: Deliver Us The Moon&#39;s Jordy Velasquez (IndieGraze)</a><small>Story placed organically as a breadcrumb trail.</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i>2</i></summary>
+   <ul><li><a href="https://www.gamedeveloper.com/design/skyrim-s-modular-approach-to-level-design" target="_blank" rel="noopener">Skyrim&#39;s Modular Approach to Level Design (Joel Burgess, GDC 2013)</a><small>Pivot at ground centre, 2 m snap, one door size; now checked in bkit.build().</small></li><li><a href="https://80.lv/articles/building-huge-open-worlds-modularity-kits-art-fatigue" target="_blank" rel="noopener">Building huge open worlds: modularity, kits and art fatigue (80 Level)</a><small>No patch pieces; lock pivots and footprints early.</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i>2</i></summary>
+   <ul><li><a href="https://polycount.com/discussion/comment/1688746" target="_blank" rel="noopener">Face weighted normals discussion (Polycount)</a><small>Not with a baked normal map; we keep chamfer plus bake.</small></li><li><a href="https://80.lv/articles/tools-and-guides-for-hard-surface-scene-production" target="_blank" rel="noopener">Tools and guides for hard-surface scene production (80 Level)</a><small>Trim sheets as a later step for shared seams.</small></li></ul></details><details class="ctx-kind" open><summary><b>Our canon</b><i>6</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/remaster/REMASTER_STUDY.md" target="_blank" rel="noopener">Moon remaster wave 1 (MR-002 to MR-004)</a><small>The dome is an upgrade of MR-002.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/moon/moon-regolith.mjs" target="_blank" rel="noopener">Regolith grammar</a><small>Ground and rock colours.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/ART_DIRECTION.html" target="_blank" rel="noopener">Faceted Hero art direction (Moon Heroes)</a><small>Flat planes, gunmetal and off-white hull, orange for people; cyan and gold reserved.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md" target="_blank" rel="noopener">HUD study: diegetic first</a><small>Lamp posts, gauges and door rings carry air, power and safety instead of a HUD bar.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md" target="_blank" rel="noopener">Modeler conventions: material names are game roles</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moon-base-kit/MOON_BASE_KIT_STUDY.md" target="_blank" rel="noopener">Moon base kit study</a></li></ul></details><details class="ctx-kind" open><summary><b>References</b><i>2</i></summary>
+   <ul><li><span>Moon Mission pack paintings (moonbase, Abbie at the base)</span><small>Style and scale reference, from the Moon Mission pack trek.zip.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/moon-base-kit/mj/" target="_blank" rel="noopener">Midjourney proofs and picks for every built piece</a><small>Each pick is assets/&lt;slug&gt;/concept.jpg, with its job id in provenance.json.</small></li></ul></details>
+  <p class="ctx-foot">Recorded 2026-10-23: canon and references from the thread as it ran; Oracle, design, dev blog and tutorial pass after round 3 (see the study doc, Research pass). <a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
+<p class="ctx-foot"><a href="https://app.abbies.world/studies/#moon-base-kit">Live study page</a></p></aside>
+</div>
 </main>
 <script>
 let mv;

@@ -18,14 +18,17 @@ export const HOUSE_IDENTITY=[
 ];
 
 const STOP=new Set('a an the and or of to in on at for with my me i we us you it is are be make made game games like want let lets let\'s some that this there where when what who how about into from so very can could would please play'.split(' '));
-export function terms(text){return [...new Set(String(text||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').split(' ').filter(w=>w.length>2&&!STOP.has(w)))];}
-function score(words,fields){let s=0;for(const [text,weight]of fields){const t=' '+String(text||'').toLowerCase().replace(/[^a-z0-9]+/g,' ')+' ';for(const w of words)if(t.includes(' '+w)||t.includes(w+' '))s+=weight;}return s;}
+// Words match at the start of a word, so "fight" finds "fighter"; a plural is cut to its stem first ("brutes"
+// finds "brute"), and a word never matches inside another ("side" does not find "inside").
+const stem=w=>w.length>4&&w.endsWith('s')&&!w.endsWith('ss')?w.slice(0,-1):w;
+export function terms(text){return [...new Set(String(text||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').split(' ').filter(w=>w.length>2&&!STOP.has(w)).map(stem))];}
+function score(words,fields){let s=0;for(const [text,weight]of fields){const t=' '+String(text||'').toLowerCase().replace(/[^a-z0-9]+/g,' ')+' ';for(const w of words)if(t.includes(' '+w))s+=weight;}return s;}
 const flat=v=>v==null?'':typeof v==='object'?Object.values(v).map(flat).join(' '):String(v);
 
 // Compact views: enough for a search hit or a model prompt, never the whole record.
 export function identityCard(r){
  return {id:r.id,kind:'identity',title:r.game?.title,steamAppId:r.game?.steam_appid??null,fantasy:r.core?.fantasy,pillars:r.core?.pillars||[],
-  signatureMoment:r.core?.signature_moment,antiGoals:r.core?.anti_goals||[],
+  signatureMoment:r.core?.signature_moment,verbs:(r.layers?.mechanics?.verbs||[]).map(v=>v.verb).slice(0,5),loop:r.layers?.mechanics?.core_loop?.steps||[],antiGoals:r.core?.anti_goals||[],
   signatures:(r.core?.signatures||[]).map(s=>({id:s.id,layer:s.layer,description:s.description,class:s.class})),
   take:(r.assimilation?.take||[]).map(t=>({layer:t.layer,target:t.target,setting:t.setting})),leave:r.assimilation?.leave||[],
   expression:(r.ledger?.expression||[]).map(e=>typeof e==='string'?e:e.description||e.id),file:r.file};
@@ -36,7 +39,7 @@ export function profileCard(p){
 function anatomyCard(g){return {id:g.id,kind:g.kind==='design-lesson'?'lesson':'anatomy',title:g.title,genre:g.genre,lesson:g.lesson||null,findings:(g.claims||[]).slice(0,6).map(c=>({domain:c.domain,title:c.title,finding:c.finding})),studyUrl:`https://abbies-game-oracle.vercel.app/game-anatomy?game=${g.id}`};}
 
 export function getIdentity(id){
- const r=repo.identities.find(x=>x.id===id||String(x.game?.steam_appid)===String(id));if(r)return {record:r,profile:(r.game?.steam_appid!=null&&repo.profiles.find(p=>p.appid===r.game.steam_appid))||null};
+ const r=repo.identities.find(x=>x.id===id||String(x.game?.steam_appid)===String(id));if(r)return {record:r,profile:((r.game?.steam_appid!=null?repo.profiles.find(p=>p.appid===r.game.steam_appid):repo.profiles.find(p=>p.appid==null&&p.id===r.id)))||null};
  const p=repo.profiles.find(x=>x.id===id||String(x.appid)===String(id));return p?{record:null,profile:p}:null;
 }
 

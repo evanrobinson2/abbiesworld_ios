@@ -39,6 +39,8 @@ LAYOUT = {
     'bar_stools': [(3.72, y, DECK, 0) for y in (-1.1, -0.1, 0.9, 1.9)],
     'giant_sundaes': [(4.35, y, DECK + 1.10, 0) for y in (-1.2, 0.35, 1.55)],
     'bar_bits': [(4.45, 2.1, DECK + 1.10, 0)],
+    # context pass 2026-10-23 (Unpacking, set dressing): small human things that say who comes here
+    'tip_jar': [(4.15, -0.62, DECK + 1.10, 0)],
     'back_counter': [(BC_X, 0.0, DECK, 0)],
     # Grace's computer and her manual moved to the basement (Evan 08:52Z); the register holds the basement key
     'cash_register': [(5.62, -1.5, TOP, -90)],
@@ -49,6 +51,7 @@ LAYOUT = {
     'pastry_case': [(5.66, 1.05, TOP, -90)],
     'cup_shelves': [(5.88, 3.3, 1.3, 0)],
     'menu_board': [(5.99, -2.25, 2.1, -90)],
+    'pin_board': [(5.98, 2.0, 1.6, -90)],
     'back_stars': [(5.97, 3.0, 2.55, -90)],
 }
 

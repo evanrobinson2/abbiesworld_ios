@@ -1,0 +1,108 @@
+{
+  "appid": 1055540,
+  "name": "A Short Hike",
+  "store_url": "https://store.steampowered.com/app/1055540/",
+  "genres": [
+    "Adventure",
+    "Exploration",
+    "Cozy"
+  ],
+  "short_description": "Hike, climb and glide around a small island park to reach the peak and get a phone signal.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Exploration",
+    "Cozy"
+  ],
+  "summary": "Hike, climb and glide around a small island park to reach the peak and get a phone signal.",
+  "identity": {
+    "core_loop": "Wander, chat, find golden feathers, climb a cliff until your stamina runs out, glide down, find another way up.",
+    "mechanics": null,
+    "ui_and_game_feel": "Light and free; climbing feels like a small brave push, gliding like a reward.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Golden feathers in a small row show how much climb you have; the park's signs, hikers and paths point the way. A paper map is summoned.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Chunky low-poly world drawn at low resolution with crisp pixels, soft flat colour.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "pixel_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [
+        "low resolution"
+      ],
+      "signature": "Simple low-poly 3D rendered at a low resolution and scaled up with crisp pixels, so soft colours and shapes read like pixel art.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.7,
+      "lesson": "Rendering small and scaling up crisp is a one-line look that makes simple models charming."
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "procedural"
+      ],
+      "tricks": [
+        "A few simple keyed cycles on a chunky low-poly bird, carried by the low-resolution pixel look",
+        "Climbing and gliding are separate simple states with quick, forgiving transitions"
+      ],
+      "lesson": "A tiny animation set is enough when the style is chunky and the transitions are quick.",
+      "sources": [
+        {
+          "title": "Wikipedia: A Short Hike",
+          "url": "https://en.wikipedia.org/wiki/A_Short_Hike"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.4
+    },
+    "palette": null,
+    "audio_mood": "Bright adaptive music that shifts by area; birds and wind.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Climbing with a visible stamina you grow by exploring; a small island that is fully readable from the peak. Very close to School Jump's latch climb."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.22,
+      "social": 0.33,
+      "systems": 0.22,
+      "chance": 0.44,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

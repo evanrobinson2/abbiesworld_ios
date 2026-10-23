@@ -1,0 +1,354 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Jusant",
+    "developer": "Don't Nod",
+    "publisher": "Don't Nod",
+    "release": "2023",
+    "steam_appid": 1977170
+  },
+  "core": {
+    "fantasy": "You are a lone climber scaling a vast tower of rock, hand over hand, with a rope and a small water creature for company.",
+    "pillars": [
+      "Every hold is a choice of hand",
+      "The rope makes falling safe",
+      "The climb tells the story"
+    ],
+    "signature_moment": "You let go with one hand, swing on the rope across a gap, and catch a hold you could only just see.",
+    "anti_goals": [
+      "no combat",
+      "no fail screens",
+      "almost no HUD"
+    ],
+    "signatures": [
+      {
+        "id": "two_hand_climb",
+        "layer": "interaction",
+        "description": "Each hand is its own trigger: hold to grip, release and reach with the other.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "stamina_on_body",
+        "layer": "information_grammar",
+        "description": "Stamina shows in the climber's breathing and trembling arms, not a bar.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "rope_safety",
+        "layer": "mechanics",
+        "description": "Pitons and a rope turn falls into swings, so risk becomes play.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "height_haze",
+        "layer": "art",
+        "description": "Soft sun-bleached rock with deep haze below sells the height.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "sensation": 0.35,
+        "discovery": 0.3,
+        "submission": 0.2,
+        "narrative": 0.15
+      },
+      "emotional_targets": {
+        "awe": 0.9,
+        "focus": 0.7,
+        "calm": 0.6
+      },
+      "audience": {
+        "age": "everyone, best for older children and up",
+        "skill_floor": "low",
+        "context": "a few evenings"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "reach left hand",
+          "input": "left trigger"
+        },
+        {
+          "verb": "reach right hand",
+          "input": "right trigger"
+        },
+        {
+          "verb": "place piton",
+          "input": "button"
+        },
+        {
+          "verb": "swing",
+          "input": "stick"
+        },
+        {
+          "verb": "wake plants",
+          "input": "echo button"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "look up",
+          "plan a route",
+          "climb hand over hand",
+          "place a piton",
+          "swing or rest",
+          "reach the next ledge"
+        ],
+        "period_s": {
+          "value": 180,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "none",
+        "win": "reach the top",
+        "resources": [
+          "stamina",
+          "rope length"
+        ]
+      },
+      "randomness": {
+        "amount": 0.0,
+        "kind": "none"
+      },
+      "information": "perfect",
+      "systems": [
+        "two-hand grip",
+        "rope physics",
+        "stamina recovered on ledges"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 5,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "controller",
+          "keyboard and mouse"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "third_person",
+        "constrained": false
+      },
+      "forgiveness": {
+        "snapping": "none",
+        "undo": "no",
+        "preview_before_commit": false,
+        "auto_repair": true
+      },
+      "juice": {
+        "sound_on_action": 0.8,
+        "camera_kick": 0.2,
+        "particles": 0.3,
+        "squash_stretch": 0.0,
+        "scale_pop": 0.0,
+        "screen_shake": 0.1,
+        "hit_stop": 0.0,
+        "procedural_settle": 0.2
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "painterly",
+        "family": "painterly_3d",
+        "light": "soft_wrap",
+        "outlines": false,
+        "outline": "none",
+        "surface": "gradient",
+        "post": [
+          "fog",
+          "bloom",
+          "colour grade"
+        ],
+        "signature": "Huge sculpted rock in soft sun-bleached gradients with deep height haze, clean comic-like shapes and no outlines.",
+        "lesson": "Height haze sells scale for climbing: the further down, the paler and bluer the world."
+      },
+      "references": [
+        "Moebius-like clean comic shapes",
+        "desert canyons",
+        "climbing films"
+      ],
+      "motion": "mixed; Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics"
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "body": {
+          "mix": {
+            "diegetic": 0.9,
+            "overlay": 0.1
+          },
+          "timing": "on_threshold",
+          "note": "Breathing and trembling arms show stamina; a small ring appears only near empty.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "navigation": {
+          "mix": {
+            "diegetic": 1.0
+          },
+          "timing": "always_on",
+          "note": "Handholds read by shape and colour on the rock; the summit is always above.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "diegetic": 1.0
+          },
+          "timing": "absent",
+          "note": "Up is the goal; letters and homes on the way tell the story.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.8,
+        "spatial": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "world_material",
+        "fade_rule": "Nothing on screen except a stamina ring when nearly empty."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "height and time of day",
+            "channels": [
+              "light",
+              "music",
+              "weather",
+              "sound"
+            ]
+          }
+        ],
+        "max_channels": 4
+      },
+      "note": "Almost no HUD: stamina shows in the climber's breathing and trembling arms. Handholds read by their shape and colour on the rock. Story lives in letters and abandoned homes."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "embedded": 0.6,
+        "evoked": 0.4
+      },
+      "tone": {
+        "cozy_tense": -0.2,
+        "whimsical_grounded": 0.2,
+        "earnest_ironic": -0.7,
+        "quiet_loud": -0.7,
+        "handmade_industrial": -0.4
+      },
+      "themes": [
+        "endurance",
+        "loss and renewal",
+        "water"
+      ]
+    },
+    "pacing": {
+      "structure": "campaign",
+      "tension_curve": "rising_to_end",
+      "failure_cost": "none"
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "mixed",
+      "mocap": 0.3,
+      "locomotion": [
+        "procedural_ik",
+        "blend_tree"
+      ],
+      "tricks": [
+        "Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics",
+        "Breathing and trembling arms show stamina"
+      ],
+      "lesson": "Let the player drive each hand; IK and a little physics make any wall climbable.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.22,
+      "structure": 0.33,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.75
+  },
+  "ledger": {
+    "style": [
+      "two-hand trigger climbing",
+      "stamina on the body",
+      "rope turns falls into swings",
+      "handholds read by shape",
+      "height haze"
+    ],
+    "expression": [
+      "its tower, world and story",
+      "its creature companion",
+      "its art and music"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "information_grammar",
+        "target": "School Jump climb",
+        "setting": "Show tiredness on Abbie's body (puffing, slower reach), not as a bar.",
+        "from_signature": "stamina_on_body"
+      },
+      {
+        "layer": "mechanics",
+        "target": "School Jump safety",
+        "setting": "A rope or latch catches every fall so risk is a swing, never a fail.",
+        "from_signature": "rope_safety"
+      },
+      {
+        "layer": "art",
+        "target": "School Jump film look",
+        "setting": "Height haze: the further down, the paler and bluer the world.",
+        "from_signature": "height_haze"
+      }
+    ],
+    "leave": [
+      "its tower and its story",
+      "its creature",
+      "long solitary pacing"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

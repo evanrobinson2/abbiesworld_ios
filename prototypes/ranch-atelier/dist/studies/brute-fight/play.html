@@ -11,6 +11,8 @@ html,body{margin:0;height:100%;background:#2b2233;overflow:hidden;touch-action:n
 canvas{display:block;width:100vw;height:100dvh}
 .glass{position:fixed;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(255,255,255,.1));border:1px solid rgba(255,255,255,.5);
  box-shadow:0 10px 30px rgba(30,15,40,.35),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -6px 14px rgba(90,50,40,.2);-webkit-backdrop-filter:none;backdrop-filter:none}
+#look{right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));width:40px;height:40px;display:grid;place-items:center;opacity:.7;cursor:pointer}
+#look svg{width:22px;height:22px}#look.on{opacity:1;background:linear-gradient(180deg,rgba(255,236,190,.6),rgba(255,200,120,.25))}
 #back{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));width:40px;height:40px;display:grid;place-items:center;color:#fff;text-decoration:none;opacity:.85}
 .hp{top:max(18px,env(safe-area-inset-top));width:min(30vw,190px);height:12px;padding:2px;box-sizing:border-box}
 .hp i{display:block;height:100%;border-radius:999px;transition:width .25s ease-out}
@@ -41,6 +43,7 @@ canvas{display:block;width:100vw;height:100dvh}
  <div class="b glass" id="bA" data-m="axe" aria-label="Two-fisted hammer"><svg viewBox="0 0 32 32" fill="#fff"><rect x="5" y="4" width="10" height="10" rx="3"/><rect x="17" y="4" width="10" height="10" rx="3"/><path d="M16 17v11M12 24l4 4 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
 </div>
 <div id="blockb" class="glass" aria-label="Block"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M7 25L24 6M25 25L8 6"/></svg></div>
+<div id="look" class="glass" aria-label="Drawn by hand, 12 frames"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26l2-7L21 6l5 5-13 13z"/><path d="M18 9l5 5"/></svg></div>
 <div id="stick" class="glass"><i></i></div>
 <div id="cue" class="glass" aria-hidden="true"></div>
 <script type="module">
@@ -173,13 +176,13 @@ class Brute {
   this.x = x; this.vx = 0; this.face = 1; this.hp = 100; this.tint = tint; this.reset(x);
  }
  reset(x) { this.x = x; this.vx = 0; this.hp = 100; this.state = 'idle'; this.t = 0; this.cur = null; this.play('idle'); }
- play(name, fade = .08, speed = 1) {
+ play(name, fade = .08, from = 0) {
   const a = this.acts[name]; if (!a) return;
   if (this.cur && this.cur !== a) this.cur.fadeOut(fade);
-  a.reset(); a.setEffectiveTimeScale(speed); a.setEffectiveWeight(1); a.fadeIn(fade); a.play(); this.cur = a; this.clip = name;
+  a.reset(); a.time = from; a.setEffectiveTimeScale(1); a.setEffectiveWeight(1); a.fadeIn(fade); a.play(); this.cur = a; this.clip = name;
  }
  len(name) { return (CLIPS[name] || {length: .5}).length; }
- set(state, clip, fade) { this.state = state; this.t = 0; this.hitDone = false; this.play(clip || state, fade); }
+ set(state, clip, fade, from = 0) { this.state = state; this.t = from; this.hitDone = false; this.play(clip || state, fade, from); }
  busy() { return ['attack', 'react', 'jump', 'down', 'getup', 'ko', 'win'].includes(this.state); }
  attack(m) { if (this.busy()) return; this.move = m; this.set('attack', m); SFX.whoosh(); }
  update(dt, input, foe) {
@@ -223,15 +226,47 @@ class Brute {
   this.root.rotation.y = this.face * Math.PI / 2; this.model.scale.x = -1;
   this.mixer.update(dt);
  }
- react(clip, push) { this.blocking = this.state === 'block'; this.set('react', clip, .04); this.vx += push; }
- fall(push) { this.landed = false; this.set('down', 'fall', .05); this.vx += push; }
+ // a reaction jumps straight to its flinch so the hit-stop freeze frame already shows it, then plays on (Sakurai)
+ react(clip, push) { this.blocking = this.state === 'block'; this.set('react', clip, 0, CLIPS[clip].peak || 0); this.vx += push; }
+ fall(push) { this.landed = false; this.set('down', 'fall', 0, CLIPS.fall.peak || 0); this.vx += push; }
 }
 const red = new Brute(gR, -1.5, '#c8322f'), blue = new Brute(gB, 1.5, '#2f5fc4');
+
+// Drawn by hand, 12 frames (AW-STUDY-0051): the brutes as limited animation, switched by the pencil button or ?look=hand|toon.
+// Pose stepping is the mixer's; hit-stop already sets dt to 0, so every blow holds the drawing, which is the Xrd trick.
+const HD = await opt('/simulations/hand-drawn.mjs');
+const handKey = 'aw.fight.look';
+let handOn = q.get('look') ? q.get('look') === 'hand' : (() => { try { return localStorage.getItem(handKey) === 'hand'; } catch { return false; } })();
+const hands = [], unstep = [];
+function setHand(on) {
+ handOn = on; try { localStorage.setItem(handKey, on ? 'hand' : 'toon'); } catch {}
+ if (on && HD.handDrawn && !hands.length) {
+  for (const b of [red, blue]) { hands.push(HD.handDrawn(T, b.model, {accent: b.tint})); unstep.push(HD.stepMixer(b.mixer, 12)); }
+  hands[0].warm(renderer, scene, camera);
+ } else if (!on) { for (const h of hands) h.restore(); for (const u of unstep) u(); hands.length = unstep.length = 0; }
+ lookBtn?.classList.toggle('on', handOn);
+}
+const lookBtn = document.getElementById('look');
+lookBtn?.addEventListener('click', () => setHand(!handOn));
+if (handOn) setHand(true);
 red.foe = blue; blue.foe = red;
 const hpEl = {red: document.querySelector('#hpR i'), blue: document.querySelector('#hpB i')};
 
-let hitstop = 0, shakeAmt = 0, roundOver = 0;
+let hitstop = 0, stopLen = 0, stopHit = null, shakeAmt = 0, roundOver = 0;
 const shake = (a) => { shakeAmt = Math.max(shakeAmt, a); };
+// Hit-stop: both brutes freeze for the same time, longer for bigger blows and capped, the same on a block
+// (Capcom's frame column; about 9/11/13 frames for light/medium/heavy). The one who was hit shakes, side to side on the
+// ground and up and down in the air, fading out, bigger when the camera is far; the attacker trembles a little. The
+// shake is drawn only: where each brute really stands (his x) does not move (Sakurai, Famitsu 490 and his 2022 video).
+function freeze(a, b, dmg) { stopLen = hitstop = Math.min(13, 7 + dmg * .3) / 60; stopHit = {a, b}; }
+function stopShake() {
+ for (const f of [red, blue]) { f.root.position.x = f.x; f.root.position.y = 0; }
+ if (hitstop <= 0 || !stopHit) return;
+ const k = hitstop / stopLen, amp = .045 * k * camera.position.z / 7, wob = Math.sin(performance.now() / 16);
+ const {a, b} = stopHit;
+ if (b.state === 'jump') b.root.position.y = wob * amp; else b.root.position.x = b.x + wob * amp;
+ a.root.position.x = a.x - wob * amp * .25;
+}
 function resolve(a, b, moveName, force = false) {
  const m = MOVES[moveName], d = Math.abs(a.x - b.x);
  const reachOK = force || d <= m.reach;
@@ -240,11 +275,11 @@ function resolve(a, b, moveName, force = false) {
  const blocked = b.state === 'block' || (b.state === 'react' && b.blocking);
  if (blocked) {
   b.hp = Math.max(1, b.hp - m.damage * .15); b.react(m.blocked, a.face * m.push * 4);
-  burst(ringTex, at, .55, .25, 2.2); SFX.clack(); hitstop = .05; shake(.04);
+  burst(ringTex, at, .55, .25, 2.2); SFX.clack(); freeze(a, b, m.damage); shake(.04);
  } else {
   b.hp = Math.max(0, b.hp - m.damage);
   if (b.hp <= 0 || m.knockdown) b.fall(a.face * 2.6); else b.react(m.react, a.face * m.push * 6);
-  burst(starTex, at, moveName === 'jab' ? .45 : .7, .28, 1.8); SFX.bonk(moveName !== 'jab'); hitstop = moveName === 'jab' ? .05 : .09; shake(moveName === 'jab' ? .05 : .12);
+  burst(starTex, at, moveName === 'jab' ? .45 : .7, .28, 1.8); SFX.bonk(moveName !== 'jab'); freeze(a, b, m.damage); shake(moveName === 'jab' ? .05 : .12);
   if (b.hp <= 0) { roundOver = 3.6; setTimeout(() => { if (a.state !== 'ko') a.set('win', 'victory'); ringBell(); }, 900); }
  }
  hpEl.red.style.width = red.hp + '%'; hpEl.blue.style.width = blue.hp + '%';
@@ -371,7 +406,9 @@ renderer.setAnimationLoop(() => {
   blue.update(dt, brain(blue), red);
   if (roundOver > 0 && (roundOver -= DT) <= 0) { red.reset(-1.5); blue.reset(1.5); hpEl.red.style.width = hpEl.blue.style.width = '100%'; ringBell(); }
  }
+ stopShake();
  frame(DT);
+ if (hands.length) { const k = hands[0].tick(now / 1000); hands[1].brush.setFrame(k.frame); }
  renderer.render(scene, camera);
 });
 </script>

@@ -1,0 +1,257 @@
+{
+ "study": "AW-STUDY-0040 Texture Studio",
+ "note": "The four art directions for the character studio (AW-STUDY-0037), as data. Each look gives every named part (role) a colour, a surface pattern (painted into colour and into the bump), roughness, metal and sheen, and picks a shader from simulations/toon-kit.mjs. Any rigged GLB whose materials are named by role (Skin, TankTop, Shorts, Armor, Light, Glass) wears any look. Patterns: smudge, fingerprint, knit, felt, wood, brush, flat.",
+ "roles": {
+  "Skin": "skin",
+  "TankTop": "cloth (top)",
+  "Shorts": "cloth (bottom)",
+  "Armor": "metal",
+  "Light": "light",
+  "Glass": "glass"
+ },
+ "looks": {
+  "whimsy": {
+   "name": "Whimsical Clay",
+   "says": "Soft hand-pressed clay, pastel and warm, light glowing through ears and fingers.",
+   "shader": "clay",
+   "sky": [
+    "#ffe3cf",
+    "#cdb4e8"
+   ],
+   "ground": "#efd2b4",
+   "fog": "#f3d9c6",
+   "detail": 0.65,
+   "posterize": 0,
+   "saturate": 1.08,
+   "mottle": 0.07,
+   "normal": 0.55,
+   "roles": {
+    "Skin": {
+     "color": "#f2b59b",
+     "pattern": "smudge",
+     "rough": 0.72,
+     "sheen": 0.35,
+     "sheenColor": "#ffc2a8"
+    },
+    "TankTop": {
+     "color": "#ffe08f",
+     "pattern": "smudge",
+     "rough": 0.8
+    },
+    "Shorts": {
+     "color": "#86b9ee",
+     "pattern": "smudge",
+     "rough": 0.8
+    },
+    "Armor": {
+     "color": "#c9b8e6",
+     "rough": 0.6,
+     "metal": 0.1
+    },
+    "Light": {
+     "color": "#ffcf6b",
+     "glow": 1.4
+    },
+    "Glass": {
+     "color": "#bfe8ff",
+     "rough": 0.15,
+     "opacity": 0.55
+    }
+   }
+  },
+  "stickman": {
+   "name": "Stick Man Storybook",
+   "says": "A picture book come to life: felt clothes, wood-grain skin, muted earthy colours, soft daylight.",
+   "shader": "sunday",
+   "sky": [
+    "#f4ecd2",
+    "#a9c7c0"
+   ],
+   "ground": "#b7b77a",
+   "fog": "#e6e2c8",
+   "detail": 0.7,
+   "posterize": 0,
+   "saturate": 0.8,
+   "mottle": 0.05,
+   "normal": 0.8,
+   "roles": {
+    "Skin": {
+     "color": "#d2ad84",
+     "pattern": "wood",
+     "rough": 0.85
+    },
+    "TankTop": {
+     "color": "#d9cba4",
+     "pattern": "felt",
+     "rough": 1,
+     "sheen": 0.8,
+     "sheenColor": "#fff4dc"
+    },
+    "Shorts": {
+     "color": "#6d8a4f",
+     "pattern": "felt",
+     "rough": 1,
+     "sheen": 0.8,
+     "sheenColor": "#e7f2c8"
+    },
+    "Armor": {
+     "color": "#8f8a7c",
+     "rough": 0.7,
+     "metal": 0.35
+    },
+    "Light": {
+     "color": "#ffd98a",
+     "glow": 1
+    },
+    "Glass": {
+     "color": "#d8efe6",
+     "rough": 0.3,
+     "opacity": 0.6
+    }
+   }
+  },
+  "plasticine": {
+   "name": "Plasticine Workshop",
+   "says": "Wallace and Gromit style: glossy plasticine with thumbprints, a knitted green vest, warm studio lamps.",
+   "shader": "film",
+   "sky": [
+    "#fbe7c0",
+    "#8b6f5c"
+   ],
+   "ground": "#a7835f",
+   "fog": "#e8cfa8",
+   "detail": 0.7,
+   "posterize": 0,
+   "saturate": 1.12,
+   "mottle": 0.05,
+   "normal": 1,
+   "roles": {
+    "Skin": {
+     "color": "#f3b9a0",
+     "pattern": "fingerprint",
+     "rough": 0.42,
+     "clearcoat": 0.35
+    },
+    "TankTop": {
+     "color": "#4f8f3a",
+     "pattern": "knit",
+     "rough": 0.75
+    },
+    "Shorts": {
+     "color": "#8a5a3c",
+     "pattern": "fingerprint",
+     "rough": 0.5,
+     "clearcoat": 0.2
+    },
+    "Armor": {
+     "color": "#c6ccd4",
+     "pattern": "fingerprint",
+     "rough": 0.38,
+     "metal": 0.15,
+     "clearcoat": 0.4
+    },
+    "Light": {
+     "color": "#ff6b4a",
+     "glow": 1.2
+    },
+    "Glass": {
+     "color": "#e9f6ff",
+     "rough": 0.08,
+     "opacity": 0.45
+    }
+   }
+  },
+  "action": {
+   "name": "Saturday Action",
+   "says": "1980s cartoon action with a Marvel Rivals finish: bold colours, two-tone light, ink lines, painted highlights.",
+   "shader": "ink",
+   "sky": [
+    "#ffd27a",
+    "#5a7bd8"
+   ],
+   "ground": "#d98c52",
+   "fog": "#f0b07a",
+   "detail": 0.5,
+   "posterize": 4,
+   "saturate": 1.12,
+   "mottle": 0.04,
+   "normal": 0.6,
+   "roles": {
+    "Skin": {
+     "color": "#eeb08a",
+     "pattern": "brush",
+     "rough": 0.55
+    },
+    "TankTop": {
+     "color": "#e8352b",
+     "pattern": "brush",
+     "rough": 0.6
+    },
+    "Shorts": {
+     "color": "#2b4fd8",
+     "pattern": "brush",
+     "rough": 0.6
+    },
+    "Armor": {
+     "color": "#d8dde6",
+     "rough": 0.25,
+     "metal": 0.85
+    },
+    "Light": {
+     "color": "#55f0ff",
+     "glow": 2.2
+    },
+    "Glass": {
+     "color": "#9fe6ff",
+     "rough": 0.05,
+     "opacity": 0.5
+    }
+   }
+  },
+  "original": {
+   "name": "As modelled",
+   "says": "The texture exactly as it came from the model (Meshy's own paint and UVs on the Meshy brutes), under film light.",
+   "shader": "film",
+   "original": true,
+   "sky": [
+    "#fff1e0",
+    "#9fb8d8"
+   ],
+   "ground": "#c9b49a",
+   "fog": "#ece2d6",
+   "detail": 1,
+   "posterize": 0,
+   "saturate": 1,
+   "mottle": 0,
+   "normal": 1,
+   "roles": {
+    "Skin": {
+     "color": "#e2a77f",
+     "rough": 0.6
+    },
+    "TankTop": {
+     "color": "#f3eee2",
+     "rough": 0.8
+    },
+    "Shorts": {
+     "color": "#c8322f",
+     "rough": 0.8
+    },
+    "Armor": {
+     "color": "#c8ccd4",
+     "rough": 0.35,
+     "metal": 0.8
+    },
+    "Light": {
+     "color": "#ffd36b",
+     "glow": 1.4
+    },
+    "Glass": {
+     "color": "#bfe8ff",
+     "rough": 0.1,
+     "opacity": 0.5
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,375 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Animal Crossing: New Horizons",
+    "developer": "Nintendo",
+    "publisher": "Nintendo",
+    "release": "2020",
+    "platforms": [
+      "Nintendo Switch"
+    ],
+    "steam_appid": null
+  },
+  "core": {
+    "fantasy": "You are a new islander whose small daily chores slowly grow a home, a town and friendships, in step with the real calendar.",
+    "pillars": [
+      "The real clock and seasons are the heartbeat",
+      "Neighbours who notice you",
+      "Your island, your way"
+    ],
+    "signature_moment": "The first snowy morning: the island has turned white overnight, a neighbour waves and says they missed you.",
+    "anti_goals": [
+      "no fail state",
+      "no combat",
+      "no rush"
+    ],
+    "signatures": [
+      {
+        "id": "real_time_world",
+        "layer": "pacing",
+        "description": "The game runs on the real date and time: shops open and close, creatures and festivals follow the real seasons.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "rolling_log_world",
+        "layer": "art",
+        "description": "The world curves away from the camera like a rolling log, so the horizon stays close and the island feels cosy.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "neighbours_notice",
+        "layer": "information_grammar",
+        "description": "News and goals come from animal neighbours who talk about what you did.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "summoned_phone",
+        "layer": "interface",
+        "description": "A phone with apps is the only menu, summoned when you want it; the screen is almost empty while you walk.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "expression": 0.3,
+        "fellowship": 0.2,
+        "discovery": 0.2,
+        "submission": 0.2,
+        "fantasy": 0.1
+      },
+      "emotional_targets": {
+        "calm": 0.9,
+        "belonging": 0.8,
+        "pride": 0.6
+      },
+      "audience": {
+        "age": "everyone, including young children",
+        "skill_floor": "none",
+        "context": "daily short sessions, family"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "gather",
+          "input": "button"
+        },
+        {
+          "verb": "catch",
+          "input": "timed press"
+        },
+        {
+          "verb": "craft",
+          "input": "menu"
+        },
+        {
+          "verb": "decorate",
+          "input": "place furniture"
+        },
+        {
+          "verb": "talk",
+          "input": "button"
+        },
+        {
+          "verb": "terraform",
+          "input": "tool"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "wake up",
+          "see what changed",
+          "gather and catch",
+          "sell and buy",
+          "decorate",
+          "talk",
+          "come back tomorrow"
+        ],
+        "period_s": {
+          "value": 1800,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "none",
+        "scoring": "island rating and loan payments, both gentle"
+      },
+      "randomness": {
+        "amount": 0.4,
+        "kind": "input"
+      },
+      "information": "partial",
+      "systems": [
+        "real-time calendar",
+        "neighbour friendship and schedules",
+        "seasonal creatures",
+        "furniture placement grid"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 6,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "controller"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "third_person",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "grid",
+        "undo": "pick it up again",
+        "preview_before_commit": true,
+        "auto_repair": false
+      },
+      "juice": {
+        "sound_on_action": 0.9,
+        "scale_pop": 0.5,
+        "squash_stretch": 0.4,
+        "particles": 0.5,
+        "procedural_settle": 0.4,
+        "screen_shake": 0.0,
+        "hit_stop": 0.0,
+        "camera_kick": 0.0
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "toon",
+        "family": "toon",
+        "light": "soft_wrap",
+        "outlines": false,
+        "outline": "none",
+        "surface": "hand_painted",
+        "post": [
+          "bloom",
+          "depth of field"
+        ],
+        "signature": "Soft wrapped light on round chunky toy shapes, with the whole island bent away from the camera like a rolling log so the horizon stays close and cosy.",
+        "lesson": "Curving the world away from the camera keeps a small place feeling big but safe; we can bend the Ranch the same way in a vertex shader."
+      },
+      "references": [
+        "toy figures",
+        "Japanese picture books",
+        "village life"
+      ],
+      "motion": "keyframe; Squat toy-proportioned villagers with bouncy keyed walks and big emotes (reactions) for every mood"
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "time": {
+          "mix": {
+            "diegetic": 0.8,
+            "overlay": 0.2
+          },
+          "timing": "on_change",
+          "note": "Light, music, shops and creatures follow the real hour; the clock shows briefly when you stop.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "social": {
+          "mix": {
+            "spatial": 0.6,
+            "diegetic": 0.4
+          },
+          "timing": "on_change",
+          "note": "Neighbours emote and walk over to talk; speech bubbles with gibberish voices.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "diegetic": 0.5,
+            "overlay": 0.5
+          },
+          "timing": "summoned",
+          "note": "Requests come from neighbours; the phone holds the rest.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 0.8,
+            "diegetic": 0.2
+          },
+          "timing": "summoned",
+          "note": "Tool ring and phone are summoned; the tool shows in your hand.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.6,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "world_material",
+        "fade_rule": "Nothing on screen while you walk; the time card shows when you stop moving."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "real hour and season",
+            "channels": [
+              "light",
+              "music",
+              "npcs",
+              "animals",
+              "weather",
+              "sound"
+            ]
+          }
+        ],
+        "max_channels": 6
+      },
+      "note": "The island carries the information: the real clock sets the light, the season, the shop hours and the creatures. Neighbours tell you news. A phone with apps is summoned; the screen is almost empty while you walk."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "emergent": 0.6,
+        "enacted": 0.2,
+        "evoked": 0.2
+      },
+      "tone": {
+        "cozy_tense": -0.9,
+        "whimsical_grounded": -0.7,
+        "earnest_ironic": -0.4,
+        "quiet_loud": -0.5,
+        "handmade_industrial": -0.6
+      },
+      "themes": [
+        "community",
+        "seasons",
+        "making a home"
+      ]
+    },
+    "pacing": {
+      "structure": "sandbox",
+      "tension_curve": "flat_calm",
+      "failure_cost": "none"
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "procedural_ik"
+      ],
+      "tricks": [
+        "Squat toy-proportioned villagers with bouncy keyed walks and big emotes (reactions) for every mood",
+        "Footsteps and run speed change with the ground; the head turns to look at things nearby"
+      ],
+      "lesson": "Emotes as a vocabulary: a small set of big readable reactions carries all the social information.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.22,
+      "expression": 0.78,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.33,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "ledger": {
+    "style": [
+      "real-time calendar world",
+      "curved-horizon camera",
+      "neighbours as news",
+      "summoned phone menu",
+      "hourly music"
+    ],
+    "expression": [
+      "its animal characters and their names",
+      "its furniture, clothes and item designs",
+      "its music",
+      "its art and UI"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "pacing",
+        "target": "Ranch day clock",
+        "setting": "Let the Ranch follow Evan's real hour and season so light, music and animals match his day.",
+        "from_signature": "real_time_world"
+      },
+      {
+        "layer": "art",
+        "target": "Ranch camera shader",
+        "setting": "Bend the far ground away from the camera so the horizon stays close and cosy.",
+        "from_signature": "rolling_log_world"
+      },
+      {
+        "layer": "information_grammar",
+        "target": "Ranch people",
+        "setting": "Neighbours bring news and requests in person, on the character, never as a quest log.",
+        "from_signature": "neighbours_notice"
+      }
+    ],
+    "leave": [
+      "its animal villagers and their names",
+      "its debt-and-loan economy",
+      "its item catalogue"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

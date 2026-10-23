@@ -85,5 +85,17 @@
   12.83,
   5.74
  ],
- "maps": "2048 px base, roughness, normal"
+ "maps": "2048 px base, roughness, normal",
+ "kit": {
+  "structural": true,
+  "snap_m": 2.0,
+  "cells": [
+   6,
+   7
+  ],
+  "pivot_offset_m": 0.735,
+  "ground_z_m": -0.13,
+  "pivot_ok": true,
+  "pivot": "dome centre; the tunnel reaches out the front"
+ }
 }

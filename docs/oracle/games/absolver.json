@@ -1,0 +1,110 @@
+{
+  "appid": 473690,
+  "name": "Absolver",
+  "store_url": "https://store.steampowered.com/app/473690/",
+  "genres": [
+    "Fighting",
+    "Action",
+    "Martial arts"
+  ],
+  "short_description": "Wander a ruined land in a mask and build your own martial-arts style from moves you learn by fighting.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Fighting",
+    "Action",
+    "Martial arts"
+  ],
+  "summary": "Wander a ruined land in a mask and build your own martial-arts style from moves you learn by fighting.",
+  "identity": {
+    "core_loop": "Explore, meet a fighter, duel in stances, learn the moves you blocked, arrange them into your own combat deck, fight better.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deliberate and dance-like; each stance flows into the next move in your deck.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "meta": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.45,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Very little HUD: a small stance indicator and health. The fighter's body and stance tell you what comes next.",
+      "confidence": 0.65,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Faceted low-poly bodies and ruins in flat painted colour, with flowing cloth and masks.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "flat_low_poly",
+      "family": "flat_low_poly",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [
+        "fog",
+        "colour grade"
+      ],
+      "signature": "Faceted low-poly bodies and ruins in flat painted colour with soft fog; the detail is spent on cloth, masks and motion.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Spend detail on what moves (cloth, masks) and keep the rest faceted and flat; animation then carries the beauty."
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "mocap",
+      "mocap": 0.7,
+      "locomotion": [
+        "root_motion",
+        "blend_tree"
+      ],
+      "tricks": [
+        "Martial-arts moves built as chains across four stances; each move ends in the stance the next one starts from",
+        "Custom Unreal animation system so designers could assemble decks of moves without code",
+        "Cloth and masks carry secondary motion on simple faceted bodies"
+      ],
+      "lesson": "Moves that end where the next begins let players chain their own combos; secondary motion on cloth sells it.",
+      "sources": [
+        {
+          "title": "Unreal Engine interview: crafting a unique combat experience in Absolver",
+          "url": "https://www.unrealengine.com/en-US/developer-interviews/crafting-a-unique-combat-experience-in-absolver"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
+    "palette": null,
+    "audio_mood": "Ambient strings and wind; sharp, dry hit sounds.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Let players compose their own fighting style from moves they collect: expression inside a fight. The body is the readout."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.89,
+      "expression": 0.67,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.11
+    },
+    "confidence": 0.65
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

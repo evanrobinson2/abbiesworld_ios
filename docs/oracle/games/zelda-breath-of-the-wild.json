@@ -1,0 +1,108 @@
+{
+  "appid": null,
+  "name": "The Legend of Zelda: Breath of the Wild (and Tears of the Kingdom)",
+  "store_url": null,
+  "genres": [
+    "Adventure",
+    "Open world",
+    "Action"
+  ],
+  "short_description": "Explore a huge ruined kingdom freely: climb anything, glide, cook, fight and solve shrines with physics.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Open world",
+    "Action"
+  ],
+  "summary": "Explore a huge ruined kingdom freely: climb anything, glide, cook, fight and solve shrines with physics.",
+  "identity": {
+    "core_loop": "See something on the horizon, go there, climb and glide, find a shrine or a fight, cook and gear up, repeat.",
+    "mechanics": null,
+    "ui_and_game_feel": "Free and physical; the world answers with chemistry and physics.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.05,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Stamina is a wheel next to Link only while you use it; heat, cold and noise show on the body and the screen edge; the world (towers, smoke, birds) shows where to go.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Painterly, softly shaded world with gentle outlines on characters and big atmospheric haze.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "colour grade"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "procedural_ik"
+      ],
+      "tricks": [
+        "About eight directional climb loops blended by input direction, with IK holding hands and feet to any wall",
+        "Body tilts with the slope, so climbing flattens into walking on all fours as the wall lies back",
+        "Effort shows on the body: a rhythmic bounce, glancing at the next hold, sweat drops, a panicked scramble when stamina runs out"
+      ],
+      "lesson": "A small keyed set plus IK lets a character climb anything; show effort on the body instead of a meter.",
+      "sources": [
+        {
+          "title": "New Frame Plus: How Link's climbing animation works in Breath of the Wild (transcript)",
+          "url": "https://amara.org/videos/0IXJ0B4bKKKN/en/3103528"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.7
+    },
+    "palette": null,
+    "audio_mood": "Sparse piano, nature sounds, music swelling for fights and towns.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Climb anything, with a stamina wheel that appears only while it matters, and a body that shows effort. The world is the quest log."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.67,
+      "expression": 0.78,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

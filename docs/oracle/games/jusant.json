@@ -1,0 +1,104 @@
+{
+  "appid": 1977170,
+  "name": "Jusant",
+  "store_url": "https://store.steampowered.com/app/1977170/",
+  "genres": [
+    "Adventure",
+    "Climbing",
+    "Puzzle"
+  ],
+  "short_description": "Climb a vast tower of rock that rises out of a dried-up sea, hand over hand, with a rope and a little water creature.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Climbing",
+    "Puzzle"
+  ],
+  "summary": "Climb a vast tower of rock that rises out of a dried-up sea, hand over hand, with a rope and a little water creature.",
+  "identity": {
+    "core_loop": "Look up, plan a route, reach with the left hand then the right, place a piton, swing, rest on a ledge, read what the old climbers left behind.",
+    "mechanics": null,
+    "ui_and_game_feel": "Physical and patient; each hold is a choice of hand, and the rope makes falling safe.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "spatial": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.52,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Almost no HUD: stamina shows in the climber's breathing and trembling arms. Handholds read by their shape and colour on the rock. Story lives in letters and abandoned homes.",
+      "confidence": 0.75,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Big sculpted rock in soft gradients, sun-bleached colour and deep atmospheric haze, clean shapes without outlines.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "fog",
+        "bloom",
+        "colour grade"
+      ],
+      "signature": "Huge sculpted rock in soft sun-bleached gradients with deep height haze, clean comic-like shapes and no outlines.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.65,
+      "lesson": "Height haze sells scale for climbing: the further down, the paler and bluer the world."
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "mixed",
+      "mocap": 0.3,
+      "locomotion": [
+        "procedural_ik",
+        "blend_tree"
+      ],
+      "tricks": [
+        "Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics",
+        "Breathing and trembling arms show stamina"
+      ],
+      "lesson": "Let the player drive each hand; IK and a little physics make any wall climbable.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
+    "palette": null,
+    "audio_mood": "Sparse soundscape, wind and stone; music swells as you reach new heights.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Show stamina on the body, not a bar; make the safety rope the fun of falling. Handholds that read by shape are a no-HUD climbing grammar."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.22,
+      "structure": 0.33,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.75
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -57,5 +57,5 @@ for i in range(8):
     a = random.uniform(0.2, math.pi - 0.2)
     rr = R + random.uniform(1.4, 2.4)
     k.rock(f'EjectaRock{i}', random.uniform(0.2, 0.45), (rr * math.cos(a), rr * math.sin(a), 0.1), 'Stone_BasaltDark', seed=60 + i, squash=0.75)
-k.build(HERE, {'id': 'MK-096', 'name': 'Crater rim, half crater'}, bake_size=1024,
+k.build(HERE, {'id': 'MK-096', 'name': 'Crater rim, half crater', 'pivot': 'crater centre, so two halves rotate into a whole crater'}, bake_size=1024,
         view=dict(hero_cam=((3.5, -17.0, 7.5), (0.0, 2.0, 0.0))), fps_eye=((0.8, -1.0, 0.6), (0.0, 5.5, 1.4)))

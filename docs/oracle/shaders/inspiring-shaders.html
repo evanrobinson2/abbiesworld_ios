@@ -1,0 +1,546 @@
+<title>Inspiring Shaders</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a review board. Each shader is one card: live scene on the left, the reading and your pick on the right; stacks on phones. */
+:root{
+  --bg:#edf0f5; --plate:#ffffff; --ink:#1b2433; --soft:#56627a; --line:#d4dbe6;
+  --pink:#c42e6b; --teal:#1f7f84; --gold:#a8720e; --love:#c42e6b; --maybe:#a8720e; --pass:#6b778c;
+  --display:"Fredoka",ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1520; --plate:#172031; --ink:#e7ecf4; --soft:#9eabc1; --line:#2a364b;
+  --pink:#f0679c; --teal:#4cc0c4; --gold:#e4b04a; --love:#f0679c; --maybe:#e4b04a; --pass:#8f9bb0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1520; --plate:#172031; --ink:#e7ecf4; --soft:#9eabc1; --line:#2a364b;
+  --pink:#f0679c; --teal:#4cc0c4; --gold:#e4b04a; --love:#f0679c; --maybe:#e4b04a; --pass:#8f9bb0; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 80px}
+main{max-width:1120px;margin:0 auto;display:grid;gap:48px}
+.col{max-width:700px;width:100%;margin:0 auto;min-width:0}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.08;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.8rem)}
+h1 em{font-style:normal;color:var(--pink)}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
+h3{font-size:1.05rem}
+p,ul{margin:0}
+ul{padding-left:1.1em;display:grid;gap:4px}
+.stack{display:grid;gap:14px}
+.eyebrow{font:600 .76rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.lede{font-size:1.15rem;color:var(--soft)}
+.meta{font:500 .86rem var(--display);color:var(--soft)}
+a{color:var(--teal);text-underline-offset:3px}
+code{font:400 .85em var(--mono)}
+.plate{position:relative;border-radius:20px;overflow:hidden;background:#9fc6dc;aspect-ratio:4/3;max-width:100%;
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 18px 40px -24px rgba(20,30,50,.5)}
+.plate.wide{aspect-ratio:16/9}
+.plate canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.plate canvas.px{image-rendering:pixelated}
+.split{position:absolute;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.15);pointer-events:none}
+.split::after{content:"";position:absolute;top:50%;left:50%;width:30px;height:30px;margin:-15px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tag{position:absolute;top:12px;font:600 .7rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.85);color:#1b2433;pointer-events:none}
+.tag.l{left:12px}.tag.r{right:12px}
+.tally{display:flex;flex-wrap:wrap;gap:10px;font:600 .9rem var(--display)}
+.tally span{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--plate)}
+.tally b{font-variant-numeric:tabular-nums}
+/* cards */
+.card{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px 28px;align-items:start;background:var(--plate);border:1px solid var(--line);border-radius:24px;padding:18px}
+@media (max-width:820px){.card{grid-template-columns:1fr}}
+.card>*{min-width:0}
+.card .head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.rank{font:700 1rem var(--mono);color:var(--pink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:500 .76rem var(--display);padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--teal) 12%,transparent);color:var(--teal)}
+.tags span.lib{background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold)}
+.card h4{font:600 .78rem var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:0}
+.card .fit{border-left:3px solid var(--pink);padding-left:12px}
+.card .src{font-size:.84rem;color:var(--soft)}
+.card .src a{word-break:break-word}
+.pick{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 .88rem var(--display);border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed=true][data-v=love]{background:var(--love);border-color:var(--love);color:#fff}
+.chip[aria-pressed=true][data-v=maybe]{background:var(--maybe);border-color:var(--maybe);color:#fff}
+.chip[aria-pressed=true][data-v=pass]{background:var(--pass);border-color:var(--pass);color:#fff}
+.chip:focus-visible,textarea:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+textarea{width:100%;min-height:62px;resize:vertical;font:400 .95rem var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 11px}
+.saved{font:500 .78rem var(--display);color:var(--soft);min-height:1em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding-top:10px;font:500 .86rem var(--display);color:var(--soft)}
+.ctl input[type=range]{width:120px;accent-color:var(--pink)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 .76rem var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+td:first-child{font:700 .9rem var(--mono);color:var(--pink)}
+td:nth-child(2){font-family:var(--display);font-weight:600;white-space:nowrap}
+.designcard{background:var(--plate);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:8px;font-size:.98rem}
+.designcard b{font-family:var(--display);font-weight:600}
+.note{font-size:.88rem;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<main>
+<header class="col stack" style="gap:18px">
+  <span class="eyebrow">AW-STUDY-0045 · Inspiring shaders · 23 Oct 2026</span>
+  <h1>Inspiring shaders, <em>rebuilt live</em> for review</h1>
+  <p class="lede">Fourteen looks from modern games, each one recreated in three.js on our own models, ranked for Abbie's World. Pick the ones you love and leave a note on any card; I read the picks back and build from them.</p>
+  <div class="tally" id="tally" aria-live="polite"><span>Loved <b id="tLove">0</b></span><span>Maybe <b id="tMaybe">0</b></span><span>Not for us <b id="tPass">0</b></span><span id="tSave" class="meta" style="border:0;background:none;padding:6px 0">Picks save to this page.</span></div>
+</header>
+
+<section class="stack" style="gap:14px">
+  <div class="col stack">
+    <span class="eyebrow">You asked for this one</span>
+    <h2>Arcane-inspired, on the mannequin and the brute</h2>
+    <p>Left is Sunday Toon, the Ranch default. Right is the new Painted Brush look, on the same two figures: brush-stroke light, a painted surface, a teal rim against warm skin, broken ink lines and a neon lamp whose glow flickers at 12 frames a second like a hand-drawn effect. Drag to turn them. It's inspired by how Fortiche paints light into its textures. No Arcane art is used; the models are ours.</p>
+  </div>
+  <div class="plate wide" data-demo="hero"><canvas aria-label="Mannequin and brute: Sunday Toon on the left, Painted Brush on the right"></canvas><span class="tag l">Sunday Toon</span><span class="tag r">Painted Brush</span></div>
+</section>
+
+<section class="col stack">
+  <span class="eyebrow">How to review</span>
+  <p>Each card says what makes the look, how studios build it (from talks, breakdowns and the Oracle's "How it's drawn" notes), what our live version does, and where it would fit. The rank is my recommendation for Abbie's World. Tap Love it, Maybe or Not for us, and add a note if you like. Drag any scene to turn it.</p>
+</section>
+
+<section id="cards" class="stack" style="gap:22px"></section>
+
+<section class="stack" style="gap:16px">
+  <div class="col stack">
+    <span class="eyebrow">Ranked shortlist</span>
+    <h2>What I'd build first</h2>
+    <p>The first four change how the world feels to a child, not just how it looks: soft light, wind that guides you, painted heroes and a world that moves to the music.</p>
+  </div>
+  <div class="tablewrap col" style="max-width:1120px"><table><thead><tr><th>#</th><th>Look</th><th>Why for Abbie's World</th><th>Where</th><th>Cost</th></tr></thead><tbody id="shortRows"></tbody></table></div>
+</section>
+
+<section class="col stack">
+  <span class="eyebrow">Design card</span>
+  <div class="designcard">
+    <p><b>What the player feels or knows:</b> "My world looks like a picture book, and it changes with the day, the music and the weather."</p>
+    <p><b>How would the character know?</b> The light, wind, glow and colour are the world itself: wind bends the grass toward where you're going, lamps glow at dusk, the café floor pulses with the song.</p>
+    <p><b>Mode:</b> none and diegetic. Shading is how the world is, so it never becomes interface. Outlines and the lens look stay on the presentation side and characters don't perceive them.</p>
+    <p><b>Who it's for:</b> the player (the child). The pick board here is a grown-up tool.</p>
+    <p><b>The whole game adapts:</b> every look is one material whose numbers (sun, shadow tint, rim, fog, glow, wind) come from one game signal, so time, weather, mood and music move light, sound and animals together.</p>
+  </div>
+  <p class="note">Style, never expression: every scene is built from our own models and primitives. No game screenshots, textures, shaders or code were used. Sources are public talks and articles, linked on each card.</p>
+</section>
+</main>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {mergeGeometries, mergeVertices} from 'three/addons/utils/BufferGeometryUtils.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+
+/* ================= the study ================= */
+const SHADERS=[
+ {id:'tinyglade',rank:1,name:'Soft daylight',game:'Tiny Glade',studio:'Pounce Light, 2024',tags:['soft light','contact shadows'],lib:true,scene:'ranch',
+  what:'Clean shapes under soft sun and a cool sky, with deep soft darkness wherever things touch. Nothing is outlined and nothing is hard; it reads as a handmade model village.',
+  how:['Soft global light: sun plus sky bounce, so shadow sides stay coloured, never black.','Strong contact darkening at every join and on the ground under things.','Procedural detail (stones, moss, roof tiles) so surfaces stay clean but rich.'],
+  ours:'Wrapped light with no bands, sky-tinted shadows, contact shadows and a faint rim.',
+  fit:"Already our Sunday Toon family and the look all five of your favourites share. The base for the Ranch.",where:'Ranch, free building',cost:'light',
+  src:[['Oracle: Tiny Glade, how it\'s drawn','https://abbies-game-oracle.vercel.app/game?id=tiny-glade']]},
+ {id:'ghost',rank:2,name:'Guiding wind',game:'Ghost of Tsushima',studio:'Sucker Punch, 2020',tags:['wind','grass fields','diegetic'],scene:'meadow',
+  what:'Endless fields of grass and flowers that move with the wind, and the wind itself is the waypoint: swipe and the grass, leaves and your cloak all lean toward where you need to go.',
+  how:['Procedural grass blades generated on the GPU in tiles, each bent by a shared wind field (GDC 2021, "Procedural Grass in Ghost of Tsushima").','One wind direction drives grass, trees, leaves, cloth and particles, so the whole world agrees.','Saturated colour fields (gold pampas, red maples, white flowers) per place.'],
+  ours:'2,500 instanced grass blades bent by one wind field, golden dusk light, and drifting leaves that stream along the wind.',
+  fit:'The best "how would the character know?" answer in this list: no arrows, the wind points the way. Fits the Ranch and every open field.',where:'Ranch fields, open land, exploring',cost:'medium',
+  src:[['GDC Vault: Procedural Grass in Ghost of Tsushima','https://gdcvault.com/play/1027214/Advanced-Graphics-Summit-Procedural-Grass'],['GDC: how the guiding wind came to life','https://gdconf.com/news/see-how-ghost-tsushima%E2%80%99s-guiding-wind-came-life-gdc-2021']]},
+ {id:'arcane',rank:3,name:'Painted Brush',game:'Inspired by Arcane',studio:'Fortiche (animated series), 2021',tags:['painted light','brush strokes','12 fps effects'],scene:'figures',
+  what:'3D characters that look painted: light and shadow sit on the surface as brush strokes, rims glow in a contrasting colour, and the effects (smoke, sparks, magic) are hand-drawn and run at half the frame rate of the characters.',
+  how:['Highlights and shadows are painted into the textures by hand, oil-paint style, instead of coming only from CG lights.','2D effects drawn on top and timed at 12 frames a second while characters run at 24, which gives the staccato feel.','Matte paintings projected onto simple 3D sets; Nuke compositing ties the 2D and 3D together.'],
+  ours:'A brush-stroke pattern breaks the light-to-shadow edge, the surface carries a painted grain, purple shadows meet a teal rim, ink lines break up along their length, and a neon lamp glows with a 12 fps flicker.',
+  fit:'Hero characters, the family cast and the Arcane-style astronauts being made for the Moonbase. Use it for people; keep Sunday Toon for the land around them.',where:'Characters, close-ups, the Moonbase heroes',cost:'medium',
+  src:[['RedShark: how Fortiche built the Arcane pipeline','https://redsharknews.com/why-netflixs-arcane-looks-so-good-how-fortiche-ramped-up-the-animation-pipeline'],['80.lv: recreating Ekko with painted textures','https://80.lv/articles/3d-artist-recreates-arcane-s-ekko-with-substance-3d-blender']]},
+ {id:'hifirush',rank:4,name:'On the beat',game:'Hi-Fi Rush',studio:'Tango Gameworks, 2023',tags:['comic toon','halftone','world on the beat'],scene:'figures',
+  what:'A bright comic-book world where everything moves to the music: lamps, plants, machines and enemies pulse on the beat, and the shading is crisp two-tone with printed-dot shadows and bold lines.',
+  how:['A deferred toon renderer on Unreal Engine 4 with custom toon lights, toon face shadows and a comic shading pass (GDC 2024, "3D Toon Rendering in Hi-Fi Rush").','Custom render passes combined in post-process volumes, so characters and environments share one look.','The whole world is animated to the song\'s tempo.'],
+  ours:'Two hard bands, halftone dots in the shadows, a yellow rim and bold lines, with the figures and the rim pulsing at 120 beats a minute.',
+  fit:'The café dance floor and any music moment: one signal (the song) drives light, motion and sound together, exactly the whole-game-adapts rule.',where:'Café, music, parties',cost:'light',
+  src:[['GDC Vault: 3D Toon Rendering in Hi-Fi Rush','https://gdcvault.com/play/1034251/3D-Toon-Rendering-in-Hi'],['80.lv: the making of Hi-Fi Rush\'s toon style','https://80.lv/articles/the-making-of-hi-fi-rush-s-3d-toon-rendering-style']]},
+ {id:'splatoon',rank:5,name:'Paint the world',game:'Splatoon',studio:'Nintendo, 2015 onward',tags:['world paint','game is the shader'],scene:'ranch',
+  what:'Ink sprays onto every surface and stays there. The painted ground is the score, the path and the weapon; the shader is the game.',
+  how:['Each surface keeps a paint mask that the game writes into as ink lands.','The shader mixes the ink colour over the base with a glossy, wobbly edge.','Two bold team colours on a clean, quiet world so the ink always reads.'],
+  ours:'Paint blobs grow in world space over grass, barn and tree with a wobbly edge, in two bright colours.',
+  fit:'Kids love leaving marks. Painting the Ranch with chalk, flowers or mud that stays is a building verb, not just a look.',where:'Ranch play, school yard, art',cost:'medium',
+  src:[['Nintendo: Splatoon 3','https://splatoon.nintendo.com/']]},
+ {id:'zelda',rank:6,name:'Watercolour distance',game:'Zelda: Breath of the Wild and Tears of the Kingdom',studio:'Nintendo, 2017 and 2023',tags:['soft two-tone','painted distance','wind grass'],scene:'meadow',
+  what:'Soft two-tone characters with bright rims in a huge world whose far hills turn soft and painterly, with grass that bows in the wind.',
+  how:['Two-tone light with a strong rim on characters (our reading of the game).','Distance gets softer and more painted, like a watercolour landscape, which hides detail and adds mood.','Wind and weather drive grass, rain and light together.'],
+  ours:'Soft two bands and a cool rim, painted strokes that grow with distance, and wind-blown grass.',
+  fit:'Big open land without big polygon budgets: the far world gets softer instead of more detailed.',where:'Open land, big vistas',cost:'medium',
+  src:[['Nintendo: Tears of the Kingdom','https://zelda.nintendo.com/tears-of-the-kingdom/']]},
+ {id:'genshin',rank:7,name:'Anime character light',game:'Genshin Impact',studio:'HoYoverse, 2020',tags:['ramp per material','face shadows','tinted lines'],scene:'figures',
+  what:'Clean anime shading on characters: soft lilac shadows from a painted ramp per material, faces that never get ugly shadow blotches, a crisp rim, and outlines tinted to the colour beside them instead of black.',
+  how:['A ramp texture per material sets the shadow colour and softness (community breakdowns).','A special face shadow map decides where the shadow falls on the face by light angle, so it always looks drawn.','A rim from the depth edge and outlines from a pushed-out shell, tinted per material.'],
+  ours:'Two soft bands into lilac shadows, painted normals on the head, a white rim and a thin outline tinted plum instead of black.',
+  fit:'Abbie, Ani and the family cast close up. The face-shadow trick is the one to steal for every child character.',where:'Family cast, dialogue close-ups',cost:'light',
+  src:[['Community breakdown: Genshin-style shading','https://bjayers.artstation.com/blog/category/5'],['Open shader study (URP)','https://github.com/NoiRC256/URPSimpleGenshinShaders']]},
+ {id:'ggxrd',rank:8,name:'Drawn by hand, 12 frames',game:'Guilty Gear Xrd',studio:'Arc System Works, 2014',tags:['edited normals','held frames','line width paint'],scene:'figures',
+  what:'3D fighters that pass for hand-drawn anime: every shadow shape is designed, lines thicken and thin like a pen, and the animation holds poses instead of tweening smoothly.',
+  how:['Artists edit vertex normals by hand so shadows fall in drawn shapes (GDC 2015 talk on Xrd\'s art style).','Outline shells whose width is painted per vertex, plus lines drawn into the textures.','Animation and camera on held frames, like limited animation.'],
+  ours:'Hard two bands, painted normals on the head, a bold outline, and the whole scene stepping at 12 frames a second.',
+  fit:'The brute fight. Held frames make hits feel heavy and readable, and it costs nothing.',where:'Brute fight, action beats',cost:'light',
+  src:[['GDC Vault: Guilty Gear Xrd\'s art style','https://www.gdcvault.com/play/1022031/GuiltyGearXrd-s-Art-Style-The']]},
+ {id:'seaofstars',rank:9,name:'Lit pixel art',game:'Sea of Stars',studio:'Sabotage Studio, 2023',tags:['pixel art','real-time light','day and night'],scene:'ranch',
+  what:'Pixel art that is lit live: lanterns glow, day turns to night and light moves across the sprites, so a retro look feels alive.',
+  how:['Pixel-art sprites combined with real-time lights and a day and night cycle.','Light sources on lanterns and fires that colour nearby pixels.','Low resolution kept crisp, with modern light on top.'],
+  ours:'A quarter-size render with dithered bands at night, lit by a warm lantern by the barn door.',
+  fit:"Grace's basement, Daddy's 8-bit coins and the memory places, with real light so they don't feel flat.",where:'Memory places, the basement',cost:'light',
+  src:[['80.lv: next-gen pixel art with dynamic light','https://80.lv/articles/exploring-next-gen-pixel-art-with-real-time-dynamic-lighting']]},
+ {id:'okami',rank:10,name:'Ink and paper',game:'Okami',studio:'Clover Studio, 2006',tags:['sumi-e ink','paper','brush lines'],scene:'ranch',
+  what:'The world as an ink-wash scroll: paper grain, thick brush outlines and soft grey washes, with a few accent colours kept bright.',
+  how:['Thick outline shells with varying width, like a brush.','A paper texture over the whole frame.','Colour pulled toward ink and paper, with accents kept.'],
+  ours:'Everything washes to ink on paper except the red barn, with broken brush lines and paper grain.',
+  fit:'Storybook pages, papercraft figures, a dream or a story Daddy tells.',where:'Stories, papercraft, dreams',cost:'medium',
+  src:[['Okami on Steam','https://store.steampowered.com/app/587620/OKAMI_HD/']]},
+ {id:'cocoon',rank:11,name:'Worlds in orbs',game:'Cocoon',studio:'Geometric Interactive, 2023',tags:['world in a world','soft glow','smooth gradients'],scene:'orb',
+  what:'Each world is carried as a glowing orb you can step into. Surfaces are smooth gradients with soft glowing rims; nothing is busy.',
+  how:['Whole levels nested inside spheres you carry and dive into.','Smooth gradient materials, strong colour per world.','Soft glow and fog to hold each world together.'],
+  ours:'A tiny ranch inside a glass orb on a pedestal, with soft wrapped light and a warm glowing rim.',
+  fit:'This is the Holodeck idea itself: tile cards and studies as little worlds you hold, then step into.',where:'Tile cards, the Studies home',cost:'light',
+  src:[['Cocoon','https://www.cocoongame.com/']]},
+ {id:'obradinn',rank:12,name:'One-bit dither',game:'Return of the Obra Dinn',studio:'Lucas Pope, 2018',tags:['1-bit','dither','two colours'],scene:'ranch',
+  what:'Two colours only, with all shading done by dithered dots, like an old Mac screen. Striking, and readable once your eyes adjust.',
+  how:['Render in 3D, then turn brightness into a pattern of on and off pixels.','A lot of work went into keeping the dots stable as the camera turns (the developer\'s devlog).','Outlines to keep shapes clear in two colours.'],
+  ours:'A half-size render turned into two colours with an ordered dither and dark lines.',
+  fit:'A one-off: a flashback, an old computer in the basement, a dream. Too stark for everyday play.',where:'Basement computer, flashbacks',cost:'light',
+  src:[['Lucas Pope: Obra Dinn devlog (dither)','https://forums.tigsource.com/index.php?topic=40832.msg1363742#msg1363742']]},
+ {id:'sable',rank:13,name:'Line art',game:'Sable',studio:'Shedworks, 2021',tags:['thick lines','flat colour'],lib:true,scene:'ranch',
+  what:'Thick ink lines and flat colour fields with almost no shading, like a comic page come to life.',
+  how:['Lines carry the form; shading is minimal or flat.','Big flat colour areas and a sky that changes colour through the day.'],
+  ours:'Bold outlines, two flat tones with warm shadows, a sandy sky.',
+  fit:'Lovely, but with no shading it fights our soft-light favourites. Good for a single themed place.',where:'A themed place',cost:'medium',
+  src:[['Oracle: Sable, how it\'s drawn','https://abbies-game-oracle.vercel.app/game?id=sable']]},
+ {id:'dredge',rank:14,name:'Dusk dread',game:'Dredge',studio:'Black Salt Games, 2023',tags:['painterly','fog at night','lantern'],lib:true,scene:'ranch',
+  what:'A cosy painted coast that turns uneasy at night: the fog turns green and thick, and your lantern is the only warm light.',
+  how:['Stylised painterly surfaces.','Time of day drives fog colour and density, grade and danger together.'],
+  ours:'Green night fog, a painted surface grain and a warm lantern.',
+  fit:'The mood rule in action, but for kids keep it playful-tense, never scary. Halloween is the place.',where:'Halloween night',cost:'light',
+  src:[['Oracle: Dredge, how it\'s drawn','https://abbies-game-oracle.vercel.app/game?id=dredge']]},
+];
+
+/* ================= shared shader ================= */
+const C=h=>new THREE.Color(h);
+function sharedUniforms(){return{
+ uLightDir:{value:new THREE.Vector3(.55,.75,.35).normalize()},uSun:{value:C('#fff4e0')},uSky:{value:C('#a8d4f0')},uGround:{value:C('#7fae5a')},
+ uShadowTint:{value:C('#6a78c8')},uRimCol:{value:C('#fff1d6')},uFogCol:{value:C('#bfe0f2')},
+ uMode:{value:0},uBands:{value:3},uSoft:{value:.3},uHalf:{value:0},uHue:{value:0},uRim:{value:0},uFog:{value:0},
+ uPaper:{value:0},uHalftone:{value:0},uDither:{value:0},uSphereN:{value:0},uPx:{value:1},uAmb:{value:.35},
+ uPaint:{value:0},uBrush:{value:0},uFarPaint:{value:0},uOneBit:{value:0},uBitA:{value:C('#e8e4c9')},uBitB:{value:C('#2b2a24')},uWash:{value:0},
+ uPointPos:{value:new THREE.Vector3(0,-50,0)},uPointCol:{value:C('#000000')},uPointR:{value:4},
+ uSplat:{value:0},uSplats:{value:[0,1,2,3,4,5].map(()=>new THREE.Vector4(0,-99,0,0))},uSplatA:{value:C('#ff2fa8')},uSplatB:{value:C('#2fe0c0')},
+ uTime:{value:0},uWind:{value:0},uWindDir:{value:new THREE.Vector2(1,.3).normalize()},uGrassRoot:{value:C('#4f8a3a')},uGrassTip:{value:C('#b9dd6a')}};}
+const NOISE=`float h2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float nz(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h2(i),h2(i+vec2(1,0)),f.x),mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),f.x),f.y);}`;
+const VERT=`#include <common>
+#include <skinning_pars_vertex>
+attribute vec3 aSphereN;uniform float uSphereN;varying vec3 vN;varying vec3 vW;varying vec2 vUv;
+void main(){vec3 objectNormal=normalize(mix(normal,aSphereN,uSphereN));
+#include <skinbase_vertex>
+#include <skinnormal_vertex>
+vec3 transformed=position;
+#include <skinning_vertex>
+vUv=uv;vN=normalize(mat3(modelMatrix)*objectNormal);vec4 w=modelMatrix*vec4(transformed,1.);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`;
+const FRAG=`uniform vec3 uColor,uLightDir,uSun,uSky,uGround,uShadowTint,uRimCol,uFogCol,uBitA,uBitB,uPointPos,uPointCol,uSplatA,uSplatB;
+uniform float uMode,uBands,uSoft,uHalf,uHue,uRim,uFog,uPaper,uHalftone,uDither,uPx,uAmb,uPaint,uBrush,uFarPaint,uOneBit,uWash,uPointR,uSplat,uUseMap;
+uniform vec4 uSplats[6];uniform sampler2D uMap;
+varying vec3 vN;varying vec3 vW;varying vec2 vUv;
+${NOISE}
+float bayer(vec2 p){p=mod(floor(p),4.);int i=int(p.x)+int(p.y)*4;
+ float m[16];m[0]=0.;m[1]=8.;m[2]=2.;m[3]=10.;m[4]=12.;m[5]=4.;m[6]=14.;m[7]=6.;m[8]=3.;m[9]=11.;m[10]=1.;m[11]=9.;m[12]=15.;m[13]=7.;m[14]=13.;m[15]=5.;
+ float r=0.;for(int k=0;k<16;k++){if(k==i)r=m[k];}return r/16.;}
+float stroke(vec3 p){vec2 q=vec2(dot(p,vec3(.82,.42,.38))*2.2,dot(p,vec3(-.35,.88,.3))*11.);return nz(q)*.65+nz(q*2.1+vec2(7.,3.))*.35;}
+void main(){
+ vec3 n=normalize(vN);if(!gl_FrontFacing)n=-n;vec3 V=normalize(cameraPosition-vW);float dist=length(cameraPosition-vW);
+ vec3 base=uColor;if(uUseMap>.5)base*=texture2D(uMap,vUv).rgb;
+ float st=stroke(vW*1.6);float paintAmt=clamp(uPaint+uFarPaint*smoothstep(7.,16.,dist),0.,1.);
+ base*=mix(1.,.9+.2*st,paintAmt);
+ float ndl=dot(n,uLightDir);float l=mix(max(ndl,0.),ndl*.5+.5,uHalf);
+ l+=(st-.5)*uBrush*.3;
+ vec2 sp=gl_FragCoord.xy/uPx;float lb=clamp(l,0.,1.);
+ if(uMode>.5){float b=max(uBands,2.);float x=clamp(l,0.,1.)*b+(bayer(sp)-.5)*uDither;float f=fract(x),i=floor(x);float s=uSoft*.5+.002;lb=clamp((i+smoothstep(1.-2.*s,1.,f))/max(b-1.,1.),0.,1.);}
+ vec3 col=mix(base*mix(vec3(.16),mix(vec3(1.),uShadowTint*2.2,.6)*.62,uHue),base*uSun*1.08,lb);
+ col+=base*mix(uGround,uSky,n.y*.5+.5)*uAmb*(1.-lb*.6)*.5;
+ vec3 L=uPointPos-vW;float pd=length(L);float pl=max(dot(n,L/max(pd,1e-3)),0.)*pow(clamp(1.-pd/uPointR,0.,1.),2.);
+ col+=base*uPointCol*(uMode>.5?smoothstep(.04,.3,pl):pl)*.9;
+ float fr=pow(1.-max(dot(n,V),0.),3.);
+ col+=uRimCol*fr*uRim*(.35+.65*(ndl*.5+.5))*(1.-smoothstep(.35,.9,n.y));
+ for(int k=0;k<6;k++){vec4 s=uSplats[k];float d=length(vW-s.xyz);float wob=nz(vW.xz*5.+float(k)*3.)*.35+nz(vW.yz*4.)*.2;
+  float m=uSplat*(1.-smoothstep(s.w*.85,s.w,d+wob*s.w*.5));vec3 sc=(mod(float(k),2.)<.5?uSplatA:uSplatB);
+  col=mix(col,sc*mix(.55,1.1,lb)+fr*.35,m);}
+ float cs=7.;vec2 q=mat2(.7071,-.7071,.7071,.7071)*sp;vec2 cell=fract(q/cs)-.5;float rad=sqrt(clamp(1.-lb,0.,1.))*.62;
+ col*=mix(1.,length(cell)<rad?.55:1.,uHalftone);
+ float lum=dot(col,vec3(.3,.59,.11));
+ float red=smoothstep(.12,.35,base.r-max(base.g,base.b));
+ col=mix(col,mix(vec3(.07,.06,.09),vec3(.95,.91,.83),smoothstep(.04,.55,lum)),uWash*(1.-red*.85));
+ col*=1.-uPaper*(nz(sp*.9)*.14+nz(sp*.045)*.1);
+ float ff=1.-exp(-pow(dist*uFog,2.));col=mix(col,uFogCol,ff);
+ lum=dot(col,vec3(.3,.59,.11));col=mix(col,lum>bayer(sp)*.9+.05?uBitA:uBitB,uOneBit);
+ gl_FragColor=vec4(col,1.);
+ #include <colorspace_fragment>
+}`;
+const HULLV=`#include <common>
+#include <skinning_pars_vertex>
+uniform float uW,uScreen,uBreak;
+void main(){vec3 objectNormal=normal;
+#include <skinbase_vertex>
+#include <skinnormal_vertex>
+vec3 transformed=position;
+#include <skinning_vertex>
+vec4 w=modelMatrix*vec4(transformed,1.);vec3 n=normalize(mat3(modelMatrix)*objectNormal);float d=length(cameraPosition-w.xyz);
+float br=mix(1.,smoothstep(.15,.85,.5+.5*sin(w.x*9.+sin(w.y*7.)*2.3+w.z*6.)),uBreak);
+float k=uW*mix(clamp(1.6-d*.06,.35,1.4),d*.09,uScreen)*br;w.xyz+=n*k;gl_Position=projectionMatrix*viewMatrix*w;}`;
+const HULLF=`uniform vec3 uInk;void main(){gl_FragColor=vec4(uInk,1.);
+#include <colorspace_fragment>
+}`;
+const GRASSV=`uniform float uTime,uWind;uniform vec2 uWindDir;varying float vY;varying vec3 vW;
+${NOISE}
+void main(){vec3 p=position;vY=uv.y;
+#ifdef USE_INSTANCING
+vec4 w=modelMatrix*instanceMatrix*vec4(p,1.);
+#else
+vec4 w=modelMatrix*vec4(p,1.);
+#endif
+float gust=nz(w.xz*.35-uWindDir*uTime*1.4)*1.2+.25*sin(uTime*2.3+w.x*1.7+w.z*1.3);
+w.xz+=uWindDir*vY*vY*uWind*gust*.42;w.y-=vY*vY*uWind*gust*.08;vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`;
+const GRASSF=`uniform vec3 uGrassRoot,uGrassTip,uSun,uSky,uFogCol;uniform float uFog;varying float vY;varying vec3 vW;
+void main(){vec3 col=mix(uGrassRoot,uGrassTip,smoothstep(0.,1.,vY))*(uSun*.85+uSky*.25);
+float d=length(cameraPosition-vW);col=mix(col,uFogCol,1.-exp(-pow(d*uFog,2.)));gl_FragColor=vec4(col,1.);
+#include <colorspace_fragment>
+}`;
+
+/* ================= presets ================= */
+const BASE={mode:0,bands:3,soft:.3,half:0,hue:0,rim:0,fog:0,paper:0,halftone:0,dither:0,sphereN:0,amb:.35,paint:0,brush:0,farPaint:0,oneBit:0,wash:0,splat:0,
+ ink:0,inkScreen:0,inkBreak:0,inkCol:'#2a2238',contact:1,px:1,point:0,pointCol:'#ffb35a',glow:0,glowCol:'#ffb35a',flicker:0,step:0,beat:0,wind:0,leaves:0,
+ sun:'#fff4e0',sky:'#a8d4f0',ground:'#7fae5a',tint:'#6a78c8',rimCol:'#fff1d6',fogCol:'#bfe0f2',bg:'#a8d4f0',grassRoot:'#4f8a3a',grassTip:'#b9dd6a',bitA:'#e8e4c9',bitB:'#2b2a24',lightDir:null};
+const SUNDAY={mode:1,bands:3,soft:.45,half:.6,hue:1,rim:.45,fog:.008,sphereN:1,contact:1};
+const P={
+ sunday:SUNDAY,
+ tinyglade:{mode:0,half:1,hue:1,rim:.3,fog:.008,sphereN:1,amb:.45},
+ ghost:{mode:1,bands:3,soft:.6,half:.7,hue:1,rim:.6,rimCol:'#ffe2a8',sphereN:1,sun:'#ffcf8a',sky:'#f3c98b',bg:'#f3c98b',fogCol:'#f0c890',fog:.045,tint:'#8a5a8a',grassRoot:'#7a6a2a',grassTip:'#f2cf6a',wind:1.4,leaves:1,lightDir:[.8,.35,.2]},
+ arcane:{mode:1,bands:3,soft:.55,half:.55,hue:1,tint:'#46307e',sun:'#ffd2a1',rim:1.1,rimCol:'#3fe6d4',paint:1,brush:1,ink:.012,inkBreak:1,inkCol:'#1d1530',
+   sky:'#2b3550',bg:'#262f4a',fogCol:'#343a5e',fog:.03,amb:.3,point:1,pointCol:'#ff6fd0',glow:1,glowCol:'#ff6fd0',flicker:12,sphereN:1,ground:'#3a3550'},
+ hifirush:{mode:1,bands:2,soft:.05,half:.35,hue:.8,halftone:.85,ink:.022,rim:.7,rimCol:'#ffe14d',sky:'#7ad3ff',bg:'#7ad3ff',sun:'#fff2d0',tint:'#5a50c8',beat:1,sphereN:1},
+ splatoon:{mode:1,bands:2,soft:.12,half:.4,hue:.7,rim:.4,splat:1,sky:'#bfe9ff',bg:'#bfe9ff',sphereN:1},
+ zelda:{mode:1,bands:2,soft:.3,half:.6,hue:.9,rim:.8,rimCol:'#e2f4ff',fog:.028,fogCol:'#cfe8f0',bg:'#cfe8f0',sky:'#bfe3f2',farPaint:1,wind:.6,sphereN:1,grassRoot:'#3f7a3a',grassTip:'#9fd36a'},
+ genshin:{mode:1,bands:2,soft:.25,half:.5,hue:1,tint:'#9a86d8',rim:.9,rimCol:'#ffffff',ink:.009,inkCol:'#5a3a52',sky:'#9fd7ff',bg:'#9fd7ff',sphereN:1},
+ ggxrd:{mode:1,bands:2,soft:.02,half:.3,hue:.7,rim:.3,ink:.026,sphereN:1,step:12,sky:'#ffd9a0',bg:'#ffd9a0',tint:'#7a4a8a'},
+ seaofstars:{mode:1,bands:3,soft:0,dither:.6,half:.5,hue:1,px:.25,point:1,pointCol:'#ffb35a',glow:1,glowCol:'#ffb35a',sun:'#5a6aa8',sky:'#1d2347',bg:'#1d2347',fogCol:'#1d2347',fog:.02,tint:'#1a1f4a',amb:.25,rim:.25,rimCol:'#8fa8ff',ground:'#2a2f45'},
+ okami:{mode:1,bands:2,soft:.4,half:.5,wash:1,paper:1,ink:.04,inkBreak:.8,inkCol:'#141018',sky:'#efe6d2',bg:'#efe6d2',contact:.7},
+ cocoon:{mode:0,half:1,hue:1,rim:1.2,rimCol:'#ffe7b8',sun:'#fff0d8',sky:'#ffcf9a',bg:'#f6b98a',fogCol:'#f6b98a',fog:.03,tint:'#a05a7a',sphereN:1},
+ obradinn:{oneBit:1,px:.5,ink:.02,inkCol:'#2b2a24',mode:0,half:.4,contact:0,bg:'#e8e4c9'},
+ sable:{mode:1,bands:2,soft:0,half:.3,hue:.5,ink:.05,sphereN:1,tint:'#e0a070',sky:'#f2d7a6',bg:'#f2d7a6',rim:0,contact:.4},
+ dredge:{mode:1,bands:3,soft:.5,half:.6,hue:1,paint:.4,fog:.075,fogCol:'#4f6b5a',sky:'#3d5a4f',bg:'#3d5a4f',sun:'#c8d6a0',tint:'#1f3a3a',point:1,pointCol:'#ffd27a',glow:1,glowCol:'#ffd27a',amb:.25,sphereN:1,ground:'#2f4a3a'},
+};
+const preset=p=>({...BASE,...p});
+
+/* ================= scene kit ================= */
+function radialTex(stops){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');const r=g.createRadialGradient(64,64,2,64,64,62);stops.forEach(([o,s])=>r.addColorStop(o,s));g.fillStyle=r;g.fillRect(0,0,128,128);return new THREE.CanvasTexture(c);}
+const BLOB=radialTex([[0,'rgba(20,25,40,.75)'],[.55,'rgba(20,25,40,.35)'],[1,'rgba(20,25,40,0)']]);
+const GLOW=radialTex([[0,'rgba(255,255,255,1)'],[.25,'rgba(255,255,255,.45)'],[1,'rgba(255,255,255,0)']]);
+function withSphereN(geo,center){const p=geo.attributes.position,n=geo.attributes.normal,a=new Float32Array(p.count*3);
+ for(let i=0;i<p.count;i++){let x,y,z;if(center){x=p.getX(i)-center.x;y=p.getY(i)-center.y;z=p.getZ(i)-center.z;const L=Math.hypot(x,y,z)||1;x/=L;y/=L;z/=L;}else{x=n.getX(i);y=n.getY(i);z=n.getZ(i);}a.set([x,y,z],i*3);}
+ geo.setAttribute('aSphereN',new THREE.BufferAttribute(a,3));return geo;}
+function weldN(geo){const p=geo.attributes.position,n=geo.attributes.normal,acc=new Map(),k=i=>`${p.getX(i).toFixed(4)},${p.getY(i).toFixed(4)},${p.getZ(i).toFixed(4)}`,a=new Float32Array(p.count*3);
+ for(let i=0;i<p.count;i++){const q=acc.get(k(i))||[0,0,0];q[0]+=n.getX(i);q[1]+=n.getY(i);q[2]+=n.getZ(i);acc.set(k(i),q);}
+ for(let i=0;i<p.count;i++){const q=acc.get(k(i)),l=Math.hypot(...q)||1;a.set([q[0]/l,q[1]/l,q[2]/l],i*3);}
+ geo.setAttribute('aSphereN',new THREE.BufferAttribute(a,3));return geo;}
+function hullGeo(geo){const g=geo.clone();for(const k of Object.keys(g.attributes))if(!['position','skinIndex','skinWeight'].includes(k))g.deleteAttribute(k);const m=mergeVertices(g,1e-3);m.computeVertexNormals();return m;}
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+
+function kit(U){
+ const root=new THREE.Group(),hulls=[],blobs=[],bouncers=[],glows=[],mixers=[];
+ const hullU={uW:{value:0},uScreen:{value:0},uBreak:{value:0},uInk:{value:C('#2a2238')}};
+ const hullMat=new THREE.ShaderMaterial({uniforms:hullU,vertexShader:HULLV,fragmentShader:HULLF,side:THREE.BackSide});
+ const mat=(hex,map)=>new THREE.ShaderMaterial({uniforms:{...U,uColor:{value:C(hex)},uMap:{value:map||null},uUseMap:{value:map?1:0}},vertexShader:VERT,fragmentShader:FRAG});
+ const mats={};const cmat=hex=>mats[hex]||(mats[hex]=mat(hex));
+ const add=(geo,hex,pos,{center,outline=true,parent=root}={})=>{withSphereN(geo,center);const m=new THREE.Mesh(geo,cmat(hex));m.position.copy(pos);parent.add(m);
+  if(outline){const hm=new THREE.Mesh(hullGeo(geo),hullMat);hm.position.copy(pos);parent.add(hm);hulls.push(hm);}return m;};
+ const blob=(x,z,s,parent=root,y=.205)=>{const b=new THREE.Mesh(new THREE.PlaneGeometry(s,s),new THREE.MeshBasicMaterial({map:BLOB,transparent:true,depthWrite:false}));b.rotation.x=-Math.PI/2;b.position.set(x,y,z);parent.add(b);blobs.push(b);};
+ const lamp=(x,z,h=2.1,parent=root)=>{const g=new THREE.Group();g.position.set(x,0,z);parent.add(g);
+  add(new THREE.CylinderGeometry(.05,.07,h,8),'#2c2a36',V(0,h/2+.2,0),{parent:g});
+  const bulb=new THREE.Mesh(new THREE.SphereGeometry(.13,16,10),new THREE.MeshBasicMaterial({color:'#ffffff'}));bulb.position.set(0,h+.25,0);g.add(bulb);
+  const halo=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true}));halo.scale.set(1.6,1.6,1);halo.position.copy(bulb.position);g.add(halo);
+  const cone=new THREE.Mesh(new THREE.ConeGeometry(1.1,h,24,1,true),new THREE.MeshBasicMaterial({map:GLOW,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.18,side:THREE.DoubleSide}));cone.position.set(0,h/2+.25,0);g.add(cone);
+  glows.push({g,bulb,halo,cone});return g;};
+ return {root,hulls,hullU,hullMat,blobs,bouncers,glows,mixers,add,blob,lamp,mat};
+}
+function ranch(K,parent=K.root){
+ const add=(g,c,p,o={})=>K.add(g,c,p,{...o,parent}),blob=(x,z,s)=>K.blob(x,z,s,parent);
+ add(new THREE.CylinderGeometry(6,6.3,.4,48),'#86c060',V(0,0,0),{outline:false});
+ add(new THREE.SphereGeometry(3,32,16,0,Math.PI*2,0,Math.PI/2),'#78b356',V(-3.2,-.6,-3.4),{outline:false});
+ const barn=new THREE.Group();parent.add(barn);K.bouncers.push(barn);
+ add(new THREE.BoxGeometry(1.8,1.3,1.5),'#c8423f',V(1.4,.85,-.6),{parent:barn});
+ const roof=new THREE.CylinderGeometry(1.1,1.1,2.05,3,1);roof.rotateX(-Math.PI/2);roof.rotateY(Math.PI/2);add(roof,'#f4ead8',V(1.4,2.05,-.6),{parent:barn});
+ add(new THREE.BoxGeometry(.55,.8,.06),'#5b3a2a',V(1.4,.6,.17),{outline:false,parent:barn});blob(1.4,-.6,3.2);
+ const tree=new THREE.Group();parent.add(tree);K.bouncers.push(tree);
+ const lumps=[[0,0,0,.95],[.6,.25,.2,.7],[-.55,.2,-.1,.72],[.1,.55,-.4,.66],[-.1,-.2,.55,.62],[.3,.7,.35,.55]].map(([x,y,z,r])=>{const g=new THREE.IcosahedronGeometry(r,2);g.translate(x,y,z);return g;});
+ add(mergeGeometries(lumps),'#3f9a4c',V(-1.7,2.35,.5),{center:V(0,.2,0),parent:tree});add(new THREE.CylinderGeometry(.14,.2,1.5,10),'#7a5032',V(-1.7,.95,.5),{parent:tree});blob(-1.7,.5,2.6);
+ const kid=new THREE.Group();parent.add(kid);K.bouncers.push(kid);
+ add(new THREE.CapsuleGeometry(.28,.45,6,16),'#f07aa8',V(.1,.75,1.6),{parent:kid});add(new THREE.SphereGeometry(.3,24,16),'#f2c7a5',V(.1,1.42,1.6),{center:V(0,0,0),parent:kid});
+ add(new THREE.SphereGeometry(.32,24,16,0,Math.PI*2,0,Math.PI*.45),'#6b3e2e',V(.1,1.47,1.57),{parent:kid});blob(.1,1.6,1.1);
+ [[-3,.4,2.2,.42,'#a7a3a8'],[3.4,.35,1.8,.32,'#9d99a0']].forEach(([x,y,z,r,c])=>{add(new THREE.DodecahedronGeometry(r,0),c,V(x,y,z));blob(x,z,r*3);});
+ [[3.1,.5,-2.4,.5],[-.6,.45,-2.4,.45],[2.4,.4,2.8,.35]].forEach(([x,y,z,r])=>{add(new THREE.IcosahedronGeometry(r,2),'#4fa85a',V(x,y,z),{center:V(0,0,0)});blob(x,z,r*3);});
+ for(let i=0;i<7;i++){const a=-.3+i*.32;add(new THREE.BoxGeometry(.12,.7,.12),'#d9b07a',V(Math.cos(a)*4.6,.55,Math.sin(a)*4.6));}
+ K.lamp(.55,.55,1.6,parent);
+}
+const loader=new GLTFLoader();const glbCache={};
+const loadGLB=url=>glbCache[url]||(glbCache[url]=new Promise((res,rej)=>loader.load(url,res,undefined,rej)));
+function fitModel(obj,height,x){const box=new THREE.Box3().setFromObject(obj),s=height/(box.max.y-box.min.y);obj.scale.setScalar(s);
+ const b2=new THREE.Box3().setFromObject(obj);obj.position.x+=x-(b2.min.x+b2.max.x)/2;obj.position.z-=(b2.min.z+b2.max.z)/2;obj.position.y+=.2-b2.min.y;}
+async function figure(K,url,height,x,fallbackHex){
+ try{const gltf=await loadGLB(url);const {clone}=await import('three/addons/utils/SkeletonUtils.js');const obj=clone(gltf.scene);
+  const swaps=[];obj.traverse(o=>{if(o.isMesh)swaps.push(o);});
+  for(const o of swaps){const src=o.material,map=src.map||null;const hex='#'+(src.color?src.color.getHexString():'cccccc');
+   let tint=hex;if(/wood_body/i.test(src.name||''))tint='#e8c79a';if(/wood_joint/i.test(src.name||''))tint='#c99a66';
+   if(map)map.colorSpace=THREE.SRGBColorSpace;
+   weldN(o.geometry);o.material=K.mat(tint,map);
+   const hg=hullGeo(o.geometry);let hm;if(o.isSkinnedMesh){hm=new THREE.SkinnedMesh(hg,K.hullMat);hm.bind(o.skeleton,o.bindMatrix);}else hm=new THREE.Mesh(hg,K.hullMat);
+   hm.position.copy(o.position);hm.quaternion.copy(o.quaternion);hm.scale.copy(o.scale);o.parent.add(hm);K.hulls.push(hm);}
+  fitModel(obj,height,x);K.root.add(obj);K.bouncers.push(obj);K.blob(x,0,1.3);
+  if(gltf.animations?.length){const mixer=new THREE.AnimationMixer(obj);const clip=gltf.animations.find(a=>/idle/i.test(a.name))||gltf.animations[0];mixer.clipAction(clip).play();K.mixers.push(mixer);}
+ }catch(e){const g=new THREE.Group();K.root.add(g);K.add(new THREE.CapsuleGeometry(.35,1,6,16),fallbackHex,V(x,1.1,0),{parent:g});K.add(new THREE.SphereGeometry(.28,20,14),'#f2c7a5',V(x,2.05,0),{center:V(0,0,0),parent:g});K.bouncers.push(g);}
+}
+function figures(K){
+ K.add(new THREE.CylinderGeometry(3.2,3.4,.4,48),'#b8b0a6',V(0,0,0),{outline:false});
+ K.lamp(1.5,-1.1,2.3);
+ figure(K,'models/mannequin.json',1.8,-.6,'#e8c79a');figure(K,'models/brute.json',2.0,.65,'#d06a4a');
+}
+function meadow(K,U){
+ K.add(new THREE.CylinderGeometry(7,7.3,.4,56),'#6f9a42',V(0,0,0),{outline:false});
+ const blade=new THREE.PlaneGeometry(.06,.55,1,4);blade.translate(0,.275,0);const pa=blade.attributes.position;
+ for(let i=0;i<pa.count;i++){const y=pa.getY(i)/.55;pa.setX(i,pa.getX(i)*(1-y*.9));}
+ const gm=new THREE.ShaderMaterial({uniforms:U,vertexShader:GRASSV,fragmentShader:GRASSF,side:THREE.DoubleSide});
+ const N=2600,inst=new THREE.InstancedMesh(blade,gm,N),m=new THREE.Matrix4(),q=new THREE.Quaternion(),s=new THREE.Vector3();
+ for(let i=0;i<N;i++){const r=Math.sqrt(Math.random())*6.6,a=Math.random()*Math.PI*2;q.setFromAxisAngle(V(0,1,0),Math.random()*Math.PI);const k=.7+Math.random()*.8;s.set(k,k,k);m.compose(V(Math.cos(a)*r,.2,Math.sin(a)*r),q,s);inst.setMatrixAt(i,m);}
+ K.root.add(inst);
+ const tree=new THREE.Group();K.root.add(tree);
+ const lumps=[[0,0,0,1.1],[.7,.3,.2,.8],[-.6,.25,-.1,.8],[.1,.6,-.45,.7]].map(([x,y,z,r])=>{const g=new THREE.IcosahedronGeometry(r,2);g.translate(x,y,z);return g;});
+ K.add(mergeGeometries(lumps),'#c2452e',V(-2.4,2.8,-1.6),{center:V(0,.2,0),parent:tree});K.add(new THREE.CylinderGeometry(.16,.24,2,10),'#5a3a28',V(-2.4,1.1,-1.6),{parent:tree});K.blob(-2.4,-1.6,3);
+ [[2.2,.45,1.2,.5,'#a7a3a8'],[1.4,.35,-2.6,.38,'#9d99a0']].forEach(([x,y,z,r,c])=>{K.add(new THREE.DodecahedronGeometry(r,0),c,V(x,y,z));K.blob(x,z,r*3);});
+ const kid=new THREE.Group();K.root.add(kid);K.add(new THREE.CapsuleGeometry(.28,.45,6,16),'#f07aa8',V(.4,.75,1.2),{parent:kid});K.add(new THREE.SphereGeometry(.3,24,16),'#f2c7a5',V(.4,1.42,1.2),{center:V(0,0,0),parent:kid});K.blob(.4,1.2,1.1);
+ const LN=70,lg=new THREE.BufferGeometry(),lp=new Float32Array(LN*3);for(let i=0;i<LN;i++){lp.set([(Math.random()-.5)*13,.4+Math.random()*2.4,(Math.random()-.5)*13],i*3);}
+ lg.setAttribute('position',new THREE.BufferAttribute(lp,3));const leaves=new THREE.Points(lg,new THREE.PointsMaterial({color:'#fff3c4',size:.09,transparent:true,opacity:.85,depthWrite:false}));leaves.visible=false;K.root.add(leaves);K.leaves=leaves;
+}
+function orb(K){
+ K.add(new THREE.CylinderGeometry(4,4.2,.4,48),'#d98a6a',V(0,0,0),{outline:false});
+ K.add(new THREE.CylinderGeometry(.6,.9,1,24),'#f2d0b0',V(0,.7,0),{outline:false});K.blob(0,0,2.4);
+ const inner=new THREE.Group();inner.scale.setScalar(.2);inner.position.set(0,2.35,0);K.root.add(inner);ranch(K,inner);
+ const glass=new THREE.Mesh(new THREE.SphereGeometry(1.35,48,32),new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
+  uniforms:{uCol:{value:C('#ffe2b0')}},vertexShader:`varying vec3 vN;varying vec3 vW;void main(){vN=normalize(mat3(modelMatrix)*normal);vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,
+  fragmentShader:`uniform vec3 uCol;varying vec3 vN;varying vec3 vW;void main(){float f=pow(1.-abs(dot(normalize(vN),normalize(cameraPosition-vW))),2.5);gl_FragColor=vec4(uCol*f*.5,1.);
+#include <colorspace_fragment>
+}`}));glass.position.set(0,2.45,0);K.root.add(glass);
+ const halo=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,color:'#ffd9a0',blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.28}));halo.scale.set(4.4,4.4,1);halo.position.copy(glass.position);K.root.add(halo);
+}
+const SCENES={ranch:{build:K=>ranch(K),R:13.5,h:6.2,look:[0,1,0]},figures:{build:K=>figures(K),R:6.2,h:2.2,look:[0,1.2,0]},meadow:{build:(K,U)=>meadow(K,U),R:11.5,h:4.2,look:[0,1,0]},orb:{build:K=>orb(K),R:8.5,h:3.4,look:[0,1.8,0]}};
+
+function apply(ctx,p,t){const U=ctx.U,K=ctx.K;
+ const set=(k,v)=>U[k].value=v;
+ set('uMode',p.mode);set('uBands',p.bands);set('uSoft',p.soft);set('uHalf',p.half);set('uHue',p.hue);set('uRim',p.rim);set('uFog',p.fog);set('uPaper',p.paper);set('uHalftone',p.halftone);
+ set('uDither',p.dither);set('uSphereN',p.sphereN);set('uAmb',p.amb);set('uPaint',p.paint);set('uBrush',p.brush);set('uFarPaint',p.farPaint);set('uOneBit',p.oneBit);set('uWash',p.wash);set('uSplat',p.splat);set('uWind',p.wind);
+ U.uSun.value.set(p.sun);U.uSky.value.set(p.sky);U.uGround.value.set(p.ground);U.uShadowTint.value.set(p.tint);U.uRimCol.value.set(p.rimCol);U.uFogCol.value.set(p.fogCol);
+ U.uGrassRoot.value.set(p.grassRoot);U.uGrassTip.value.set(p.grassTip);U.uBitA.value.set(p.bitA);U.uBitB.value.set(p.bitB);
+ if(p.lightDir)U.uLightDir.value.set(...p.lightDir).normalize();else U.uLightDir.value.set(.55,.75,.35).normalize();
+ const pulse=p.beat?Math.pow(1-((t*2)%1),4):0;if(p.beat)U.uRim.value=p.rim+pulse*.8;
+ K.bouncers.forEach(b=>{if(!b.userData.s0)b.userData.s0=b.scale.clone();b.scale.set(b.userData.s0.x*(1-pulse*.02),b.userData.s0.y*(1+pulse*.05),b.userData.s0.z*(1-pulse*.02));});
+ K.hullU.uW.value=p.ink;K.hullU.uScreen.value=p.inkScreen;K.hullU.uBreak.value=p.inkBreak;K.hullU.uInk.value.set(p.inkCol);K.hulls.forEach(h=>h.visible=p.ink>0);
+ K.blobs.forEach(b=>{b.visible=p.contact>0&&!p.oneBit;b.material.opacity=p.contact;});
+ const ft=p.flicker?Math.floor(t*p.flicker)/p.flicker:t;const fl=p.flicker?.82+.36*((Math.sin(ft*37.1)*43758.5)%1+1)%1:1;
+ K.glows.forEach(gl=>{gl.g.visible=!!p.glow;gl.halo.material.color.set(p.glowCol);gl.cone.material.color.set(p.glowCol);gl.bulb.material.color.set(p.glowCol).lerp(C('#ffffff'),.6);gl.halo.scale.setScalar(1.6*fl);gl.cone.material.opacity=.16*fl;});
+ if(p.point&&K.glows[0]){K.glows[0].bulb.getWorldPosition(U.uPointPos.value);U.uPointCol.value.set(p.pointCol).multiplyScalar(fl);U.uPointR.value=4.2;}else{U.uPointCol.value.set('#000000');}
+ if(p.splat){const sp=[[1.4,1.3,0,1.3],[-1.6,.3,1.8,1.5],[2.8,.2,1.2,1.2],[-1.7,2.6,.6,1],[.2,.2,-1.8,1.4],[-3,.3,-1,1.1]];sp.forEach((s,i)=>{const g=Math.min(1,Math.max(0,((t*.35+i*.17)%1.6)*1.4));U.uSplats.value[i].set(s[0],s[1],s[2],s[3]*Math.min(g,1));});}
+ if(K.leaves){K.leaves.visible=!!p.leaves;if(p.leaves){const a=K.leaves.geometry.attributes.position,d=U.uWindDir.value;for(let i=0;i<a.count;i++){let x=a.getX(i)+d.x*.06,z=a.getZ(i)+d.y*.06,y=a.getY(i)+Math.sin(t*3+i)*.006;if(Math.hypot(x,z)>7){x=-d.x*6.5+(Math.random()-.5)*6;z=-d.y*6.5+(Math.random()-.5)*6;}a.setXYZ(i,x,y,z);}a.needsUpdate=true;}}
+ ctx.scene.background=ctx.bg.set(p.bg);
+}
+
+/* ================= demo runner ================= */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const live=new Map();
+const DEMO={hero:{scene:'figures',main:()=>preset(P.arcane),pair:()=>preset(P.sunday),sway:true}};
+SHADERS.forEach(s=>DEMO[s.id]={scene:s.scene,main:()=>preset(P[s.id])});
+function start(el){
+ const def=DEMO[el.dataset.demo],canvas=el.querySelector('canvas');let renderer;
+ try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch(e){el.insertAdjacentHTML('beforeend','<p style="position:absolute;inset:auto 12px 12px;color:#fff">3D needs WebGL, which this browser has turned off.</p>');return;}
+ renderer.outputColorSpace=THREE.SRGBColorSpace;
+ const U=sharedUniforms(),K=kit(U),scene=new THREE.Scene();scene.add(K.root);
+ const S=SCENES[def.scene];S.build(K,U);
+ const cam=new THREE.PerspectiveCamera(36,4/3,.1,100);
+ const ctx={U,K,scene,bg:new THREE.Color(),az:.6,split:.5,raf:0,key:''};
+ let line;if(def.split||def.pair){line=document.createElement('div');line.className='split';el.appendChild(line);if(def.pair)line.style.left='50%';}
+ const size=()=>{const r=canvas.getBoundingClientRect();ctx.w=r.width;ctx.h=r.height;cam.aspect=(def.pair?r.width/2:r.width)/Math.max(r.height,1);cam.updateProjectionMatrix();};size();
+ const ro=new ResizeObserver(size);ro.observe(canvas);
+ canvas.addEventListener('pointerdown',e=>{ctx.drag={x:e.clientX,az:ctx.az};canvas.setPointerCapture(e.pointerId);});
+ canvas.addEventListener('pointermove',e=>{if(!ctx.drag)return;const r=canvas.getBoundingClientRect();if(def.split)ctx.split=Math.min(.97,Math.max(.03,(e.clientX-r.left)/r.width));else ctx.az=ctx.drag.az+(e.clientX-ctx.drag.x)*.008;});
+ canvas.addEventListener('pointerup',()=>ctx.drag=null);
+ const clock=new THREE.Clock();let held=0,heldT=0;
+ const draw=()=>{const dt=Math.min(clock.getDelta(),.1),t=clock.elapsedTime;const main=def.main();
+  let adt=dt,at=t;if(main.step){held+=dt;if(held<1/main.step){adt=0;at=heldT;}else{adt=held;held=0;heldT=t;at=t;}}
+  if(!reduce&&!ctx.drag)ctx.az+=adt*(def.sway?.06:.11);U.uTime.value=at;K.mixers.forEach(m=>m.update(adt));
+  const az=def.sway?Math.sin(ctx.az)*.7:ctx.az;cam.position.set(Math.sin(az)*S.R,S.h,Math.cos(az)*S.R);cam.lookAt(...S.look);
+  const pr=Math.min(devicePixelRatio,2),key=pr*main.px+'|'+ctx.w+'|'+ctx.h;if(key!==ctx.key){ctx.key=key;renderer.setPixelRatio(pr*main.px);renderer.setSize(ctx.w,ctx.h,false);canvas.classList.toggle('px',main.px<1);}
+  U.uPx.value=Math.max(1,pr*main.px);
+  if(def.split){const sx=Math.round(ctx.w*ctx.split);line.style.left=(ctx.split*100)+'%';renderer.setScissorTest(true);
+   apply(ctx,def.split(),at);renderer.setScissor(0,0,sx,ctx.h);renderer.render(scene,cam);apply(ctx,main,at);renderer.setScissor(sx,0,ctx.w-sx,ctx.h);renderer.render(scene,cam);renderer.setScissorTest(false);}
+  else if(def.pair){const hw=Math.floor(ctx.w/2);renderer.setScissorTest(true);
+   apply(ctx,def.pair(),at);renderer.setViewport(0,0,hw,ctx.h);renderer.setScissor(0,0,hw,ctx.h);renderer.render(scene,cam);
+   apply(ctx,main,at);renderer.setViewport(hw,0,ctx.w-hw,ctx.h);renderer.setScissor(hw,0,ctx.w-hw,ctx.h);renderer.render(scene,cam);renderer.setScissorTest(false);}
+  else{apply(ctx,main,at);renderer.render(scene,cam);}
+  ctx.raf=requestAnimationFrame(draw);};
+ ctx.raf=requestAnimationFrame(draw);
+ live.set(el,{stop(){cancelAnimationFrame(ctx.raf);ro.disconnect();renderer.dispose();renderer.forceContextLoss();line?.remove();canvas.replaceWith(canvas.cloneNode());}});
+}
+
+/* ================= cards ================= */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById('cards').innerHTML=SHADERS.map(s=>`
+<article class="card" id="${s.id}">
+ <div class="stack" style="gap:10px">
+  <div class="plate" data-demo="${s.id}"><canvas aria-label="${esc(s.name)}: live recreation"></canvas></div>
+  <p class="meta">Our build: ${esc(s.ours)}</p>
+ </div>
+ <div class="stack">
+  <div class="head"><span class="rank">#${s.rank}</span><h2 style="font-size:1.45rem">${esc(s.name)}</h2></div>
+  <p class="meta">${esc(s.game)} · ${esc(s.studio)}</p>
+  <div class="tags">${s.tags.map(t=>`<span>${esc(t)}</span>`).join('')}${s.lib?'<span class="lib">in your library</span>':''}</div>
+  <p>${esc(s.what)}</p>
+  <h4>How it's built</h4><ul>${s.how.map(h=>`<li>${esc(h)}</li>`).join('')}</ul>
+  <p class="fit"><b style="font-family:var(--display)">For Abbie's World:</b> ${esc(s.fit)}</p>
+  <p class="src">Sources: ${s.src.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join(' · ')}</p>
+  <div class="pick" data-id="${s.id}">
+   <div class="chips" role="group" aria-label="Your pick for ${esc(s.name)}">
+    <button class="chip" data-v="love" aria-pressed="false">Love it</button><button class="chip" data-v="maybe" aria-pressed="false">Maybe</button><button class="chip" data-v="pass" aria-pressed="false">Not for us</button>
+   </div>
+   <label class="meta" for="note-${s.id}">Your note</label>
+   <textarea id="note-${s.id}" placeholder="What you like, what to change, where it should go"></textarea>
+   <span class="saved" aria-live="polite"></span>
+  </div>
+ </div>
+</article>`).join('');
+document.getElementById('shortRows').innerHTML=SHADERS.map(s=>`<tr><td>${s.rank}</td><td>${esc(s.name)}</td><td>${esc(s.fit)}</td><td>${esc(s.where)}</td><td>${esc(s.cost)}</td></tr>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!live.has(e.target))start(e.target);else if(!e.isIntersecting&&live.has(e.target)){live.get(e.target).stop();live.delete(e.target);}}),{rootMargin:'200px 0px'});
+document.querySelectorAll('[data-demo]').forEach(el=>io.observe(el));
+
+/* ================= picks (saved to the page's store) ================= */
+const $=id=>document.getElementById(id);const picks={};let col=null;
+const LS='aw0045-picks';try{Object.assign(picks,JSON.parse(localStorage.getItem(LS)||'{}'));}catch(e){}
+function render(){let c={love:0,maybe:0,pass:0};
+ document.querySelectorAll('.pick').forEach(box=>{const p=picks[box.dataset.id]||{};box.querySelectorAll('.chip').forEach(b=>b.setAttribute('aria-pressed',String(p.pick===b.dataset.v)));
+  const ta=box.querySelector('textarea');if(document.activeElement!==ta)ta.value=p.note||'';if(p.pick)c[p.pick]++;});
+ $('tLove').textContent=c.love;$('tMaybe').textContent=c.maybe;$('tPass').textContent=c.pass;}
+async function save(id,patch,box){picks[id]={...(picks[id]||{}),...patch,at:new Date().toISOString()};render();
+ try{localStorage.setItem(LS,JSON.stringify(picks));}catch(e){}
+ const msg=box.querySelector('.saved');
+ if(col){try{await col.doc(id).set(picks[id]);msg.textContent='Saved';}catch(e){msg.textContent='Not saved: this view can only read picks.';}}
+ else msg.textContent='Saved on this device only.';}
+document.querySelectorAll('.pick').forEach(box=>{const id=box.dataset.id;let tm;
+ box.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>save(id,{pick:(picks[id]?.pick===b.dataset.v)?null:b.dataset.v},box)));
+ box.querySelector('textarea').addEventListener('input',e=>{clearTimeout(tm);tm=setTimeout(()=>save(id,{note:e.target.value.slice(0,2000)},box),700);});});
+render();
+(async()=>{const db=await window.claude?.use?.('db');if(!db){$('tSave').textContent='Picks save on this device.';return;}
+ col=db.collection('picks');$('tSave').textContent='Picks save to this page, and I can read them.';
+ col.onSnapshot(s=>{s.docs.forEach(d=>{const v=d.data();if(v&&typeof v==='object')picks[d.id]={pick:['love','maybe','pass'].includes(v.pick)?v.pick:null,note:String(v.note||'').slice(0,2000),at:v.at};});render();},()=>{});})();
+</script>

@@ -1,0 +1,153 @@
+{
+ "idle": {
+  "clip": "Idle_Loop",
+  "what": "idle, breathing",
+  "loop": true
+ },
+ "talk": {
+  "clip": "Idle_Talking_Loop",
+  "what": "talking",
+  "loop": true
+ },
+ "cast": {
+  "clip": "Spell_Simple_Shoot",
+  "what": "cast a spell",
+  "loop": false
+ },
+ "swim": {
+  "clip": "Swim_Fwd_Loop",
+  "what": "swim forward",
+  "loop": true,
+  "travel": true,
+  "lift": 0.45,
+  "install": false
+ },
+ "kart": {
+  "clip": "Driving_Loop",
+  "what": "driving",
+  "loop": true,
+  "install": false
+ },
+ "roll": {
+  "clip": "Roll",
+  "what": "dodge roll",
+  "loop": false
+ },
+ "peek": {
+  "clip": "Crouch_Idle_Loop",
+  "what": "crouch behind cover",
+  "loop": true
+ },
+ "tiptoe": {
+  "clip": "Crouch_Fwd_Loop",
+  "what": "crouch walk",
+  "loop": true,
+  "travel": true
+ },
+ "ko": {
+  "clip": "Death01",
+  "what": "knocked down",
+  "loop": false
+ },
+ "aimwalk": {
+  "clip": "Pistol_Idle_Loop",
+  "what": "pistol ready",
+  "loop": true,
+  "install": false
+ },
+ "q_walk": {
+  "clip": "Walk_Loop",
+  "what": "walk",
+  "loop": true,
+  "travel": true,
+  "install": false
+ },
+ "q_run": {
+  "clip": "Sprint_Loop",
+  "what": "sprint",
+  "loop": true,
+  "travel": true,
+  "install": false
+ },
+ "jog": {
+  "clip": "Jog_Fwd_Loop",
+  "what": "jog",
+  "loop": true,
+  "travel": true
+ },
+ "q_jab": {
+  "clip": "Punch_Jab",
+  "what": "jab",
+  "loop": false,
+  "install": false
+ },
+ "q_cross": {
+  "clip": "Punch_Cross",
+  "what": "cross",
+  "loop": false,
+  "install": false
+ },
+ "q_dance": {
+  "clip": "Dance_Loop",
+  "what": "dance",
+  "loop": true,
+  "install": false
+ },
+ "q_sit": {
+  "clip": "Sitting_Idle_Loop",
+  "what": "sitting",
+  "loop": true,
+  "install": false
+ },
+ "q_jump": {
+  "clip": "Jump_Start",
+  "what": "jump start",
+  "loop": false,
+  "install": false,
+  "air": true
+ },
+ "fix": {
+  "clip": "Fixing_Kneeling",
+  "what": "fixing, kneeling",
+  "loop": true
+ },
+ "pickup": {
+  "clip": "PickUp_Table",
+  "what": "pick up",
+  "loop": false
+ },
+ "hit": {
+  "clip": "Hit_Chest",
+  "what": "hit in the chest",
+  "loop": false
+ },
+ "q_interact": {
+  "clip": "Interact",
+  "what": "interact",
+  "loop": false,
+  "install": false
+ },
+ "q_shoot": {
+  "clip": "Pistol_Shoot",
+  "what": "pistol shoot",
+  "loop": false,
+  "install": false
+ },
+ "q_formal": {
+  "clip": "Walk_Formal_Loop",
+  "what": "formal walk",
+  "loop": true,
+  "travel": true,
+  "install": false
+ },
+ "slash": {
+  "clip": "Sword_Attack",
+  "what": "sword attack",
+  "loop": false
+ },
+ "push": {
+  "clip": "Push_Loop",
+  "what": "push something heavy",
+  "loop": true
+ }
+}

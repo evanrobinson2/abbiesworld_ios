@@ -1,0 +1,108 @@
+{
+  "appid": null,
+  "name": "Super Smash Bros. Ultimate",
+  "store_url": null,
+  "genres": [
+    "Fighting",
+    "Platform",
+    "Party"
+  ],
+  "short_description": "A party platform fighter: knock friends off the stage instead of draining a health bar.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Fighting",
+    "Platform",
+    "Party"
+  ],
+  "summary": "A party platform fighter: knock friends off the stage instead of draining a health bar.",
+  "identity": {
+    "core_loop": "Run, jump, attack; every hit raises the other fighter's damage number, and high damage means they fly further; push them off the edge.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic, bouncy, funny; four players and items make every match different.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "meta": 0.2,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "One number per player at the bottom of the screen; the bigger it is the further you fly. Fighters flash and smoke when they are in danger, and a big hit freezes the screen for a moment.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Each fighter keeps their own home look, held together by strong rim light, bloom and one shared hit-spark language.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+        "bloom"
+      ],
+      "signature": "Every fighter keeps their own home look; one strong rim light, bright bloom and a shared hit-spark style make them belong to one game.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "Mixed styles can live together if light, rim and effects are shared. Useful for Abbie's World characters made by different factories."
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "root_motion"
+      ],
+      "tricks": [
+        "Hand-keyed moves for every fighter, tuned frame by frame for timing",
+        "Hit-stop: the struck fighter shakes in place, horizontally on the ground and vertically in the air, fading out; the attacker keeps moving a little",
+        "Damage poses are blended in, and shake scales with camera distance"
+      ],
+      "lesson": "Hit-stop is animation: freeze, shake the victim, keep the attacker alive, fade the shake.",
+      "sources": [
+        {
+          "title": "Nintendo Wire: Sakurai's \"Eight Hit Stop Techniques\" and other episodes",
+          "url": "https://nintendowire.com/news/2022/12/12/this-week-in-sakurai-12-5-12-11-fine-tuning-hit-stop-and-cheating-the-system/"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.7
+    },
+    "palette": null,
+    "audio_mood": "Huge library of upbeat remixes; loud bright hit sounds.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Push-off-the-edge beats health bars for kids: nobody 'dies', they fly away and come back. Danger shows on the fighter, not in a meter."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 1.0,
+      "challenge": 0.78,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.22
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
