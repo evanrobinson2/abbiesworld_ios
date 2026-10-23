@@ -2220,6 +2220,29 @@
           "note": "stand-in for the hero set while Midjourney waits on Evan's Chrome"
         }
       ]
+    },
+    "figures-pencil": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "canon",
+          "t": "The Perfect Drawing Pipeline, AW-STUDY-0045",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/trace-lab/pencil.py",
+          "note": "the code pencil used for the final drawing"
+        },
+        {
+          "k": "canon",
+          "t": "Bodies study base layers (male-toned, female-toned)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/studies/bodies",
+          "note": "the PG sealed mannequin bodies we posed"
+        },
+        {
+          "k": "canon",
+          "t": "Base heroes PG rules",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/BASE_ROSTER.md",
+          "note": "smooth featureless bodies, true adult proportions, no anatomical detail"
+        }
+      ]
     }
   }
 }
