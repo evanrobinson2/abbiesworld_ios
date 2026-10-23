@@ -366,12 +366,14 @@
  "picks": {
   "daddy-young": 1,
   "street-grownup": 1,
-  "janitor": 1
+  "janitor": 1,
+  "daddy-now": 1
  },
  "voices": {
   "daddy-young": "CgihQ2SXCatWXGd6dIUA",
   "street-grownup": "o587ZevsDIT8gmoRG7cJ",
-  "janitor": "c33yEXOhDbqcoLWO8H2I"
+  "janitor": "c33yEXOhDbqcoLWO8H2I",
+  "daddy-now": "pISeyczFuBlv1qciFtad"
  },
  "study": "AW-STUDY-0030"
 }
