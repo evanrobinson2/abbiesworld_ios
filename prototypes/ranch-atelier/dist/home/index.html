@@ -10,7 +10,7 @@
 <body>
 <header class="bar">
  <a class="mark" href="/" aria-label="Abbie's World home">AW</a>
- <nav><a href="#how">How it works</a><a href="#pg">Always PG</a><a href="#support">Support</a></nav>
+ <nav><a href="#how">How it works</a><a href="#pg">Always PG</a><a href="#support">Support</a><a href="/terms">Terms</a></nav>
  <a class="signin" id="signin" href="/api/auth/login?return=/sandbox">Sign in</a>
 </header>
 
@@ -53,14 +53,16 @@
 
  <section id="support" class="support">
   <div class="card">
-   <h2>Help keep it going</h2>
-   <p>Everything here is free. If you like it, you can give $5 a month to help pay for the servers and the AI that builds your worlds. It's a donation, so you get nothing extra, and you can stop any time.</p>
-   <a class="btn primary" id="donate" href="#support" hidden>Give $5 a month</a>
-   <p class="fine" id="donate-soon">Monthly giving opens soon.</p>
+   <h2>Support Abbie's World</h2>
+   <p>Playing is free, and so is a little AI magic. For $5 a month you get $4 of AI magic every month: talking to the Computer and having it build for you. The other dollar helps pay for the servers. You can cancel any time.</p>
+   <a class="btn primary" id="support-start" href="/api/support?start=1" hidden>Support for $5 a month</a>
+   <a class="btn" id="support-manage" href="/api/support?manage=1" hidden>Change or cancel</a>
+   <p class="fine" id="support-note">Monthly support opens soon.</p>
+   <p class="fine"><a href="/terms">The short terms</a></p>
   </div>
   <div class="card studio">
    <h2>A studio of all of us</h2>
-   <p>Abbie's World is made by Evan, a dad building it for his daughter, with a lot of help from AI. If the Kickstarter raises $200,000, Evan will quit his job, build it full time and start a studio where everyone who makes it shares the money and makes games together.</p>
+   <p>Abbie's World is made by Evan, a dad building it for his daughter, with a lot of help from AI. If the Kickstarter raises $200,000, Evan will take a leave of absence from his job to found a studio and build it full time: a studio where everyone who makes it shares the money and makes games together.</p>
    <p>Everyone who gives $1,000 or more gets up to 8 hours with Evan, learning how he builds all of this.</p>
    <a class="btn" id="kickstarter" href="#support" hidden>Back it on Kickstarter</a>
    <p class="fine" id="kickstarter-soon">The Kickstarter is coming soon.</p>

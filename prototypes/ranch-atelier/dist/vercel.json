@@ -5,6 +5,14 @@
       "destination": "/home/index.html"
     },
     {
+      "source": "/support/thanks",
+      "destination": "/home/thanks.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/home/terms.html"
+    },
+    {
       "source": "/explore",
       "destination": "/explore/index.html"
     },
@@ -393,6 +401,17 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/:path*",
+      "permanent": false
+    },
     {
       "source": "/review",
       "destination": "/studies/",

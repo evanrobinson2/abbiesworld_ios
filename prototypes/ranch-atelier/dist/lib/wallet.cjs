@@ -34,9 +34,18 @@ function blobStore(){
  };
 }
 
-function createWallet({store=blobStore(),caps=CAPS}={}){
+// plan(a, spentNow) gives a supporter's cap for this month ({cap}) or null (lib/support.cjs). Supporters pay for their
+// own AI, so while paid up they are charged only on their own ledger, never against the public pool.
+function createWallet({store=blobStore(),caps=CAPS,plan=null}={}){
  const personPath=a=>`${ROOT}people/${a.id}.json`,poolPath=a=>`${ROOT}${a.owner?'owner':'public'}.json`;
- const personCap=a=>a.owner?caps.owner:caps.person,poolCap=a=>a.owner?caps.owner:caps.public;
+ const poolCap=a=>a.owner?caps.owner:caps.public;
+ const spent=async a=>spentOf((await store.read(personPath(a))).value);
+ // The account's own cap, and whether it draws on a pool: the owner and paid-up supporters don't.
+ async function terms(a){
+  if(a.owner)return {cap:caps.owner,pool:false};
+  const p=plan&&await plan(a,()=>spent(a)).catch(e=>{console.error('[wallet] plan',e.message);return null;});
+  return p?{cap:Math.max(caps.person,p.cap),pool:false}:{cap:caps.person,pool:true};
+ }
  const spentOf=v=>Number(v?.usd)||0;
  // Adds usd to one ledger unless that would pass cap. Retries on a concurrent write.
  async function add(path,usd,cap){
@@ -52,24 +61,27 @@ function createWallet({store=blobStore(),caps=CAPS}={}){
  }
  return {
   caps,
+  spent,
   // Dollars this account may still spend: the smaller of its own room and its pool's room.
   async left(a){
    if(!a)return 0;
-   const [p,q]=await Promise.all([store.read(personPath(a)),a.owner?null:store.read(poolPath(a))]);
-   const mine=personCap(a)-spentOf(p.value);
-   return Math.max(0,Math.min(mine,a.owner?mine:poolCap(a)-spentOf(q.value)));
+   const t=await terms(a);
+   const [p,q]=await Promise.all([store.read(personPath(a)),t.pool?store.read(poolPath(a)):null]);
+   const mine=t.cap-spentOf(p.value);
+   return Math.max(0,Math.min(mine,t.pool?poolCap(a)-spentOf(q.value):mine));
   },
   // Records a charge before (or while) money is spent. false means stop: a cap would be crossed.
   async charge(a,usd){
    if(!a||!(usd>0))return !!a;
-   if(a.owner)return (await add(personPath(a),usd,personCap(a))).ok;
+   const t=await terms(a);
+   if(!t.pool)return (await add(personPath(a),usd,t.cap)).ok;
    const pool=await add(poolPath(a),usd,poolCap(a));if(!pool.ok)return false;
-   const mine=await add(personPath(a),usd,personCap(a));
+   const mine=await add(personPath(a),usd,t.cap);
    if(!mine.ok){await add(poolPath(a),-usd,Infinity).catch(()=>{});return false;}
    return true;
   }
  };
 }
 let shared;
-const wallet=()=>shared??=createWallet();
-module.exports={createWallet,wallet,CAPS,PRICES};
+const wallet=()=>shared??=createWallet({plan:(a,spentNow)=>{const s=require('./support.cjs').support();return s.ready?s.plan(a,spentNow):null;}});
+module.exports={createWallet,wallet,blobStore,CAPS,PRICES};
