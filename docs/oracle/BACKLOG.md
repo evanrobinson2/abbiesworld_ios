@@ -40,3 +40,4 @@ Record a short timeline for one representative scene from each game (timestamp, 
 - Pacing notes become defaults for the director: shot lengths, hold times and how long to wait before a prompt.
 - Kid-fit notes decide when a style should read aloud, show pictures instead of words, or slow down.
 - The score study (AW-STUDY-0010, `score/SCORE_STUDY.md`, page https://claude.ai/artifact/5Es88srv8cG13XiYU6FFCW) holds the Music Bible (canon) and the listening room; music for new titles follows its identity and `trace` metadata.
+- The over-the-shoulder study (AW-STUDY-0011, `shoulder/SHOULDER_STUDY.md`, page https://claude.ai/artifact/F8HG8LMckTjCwQzDsHDsoz) covers the shoulder camera, collision and occlusion, the dive from board to shoulder and the player's animation, with five options (soft shoulder, the dive, a living body, touch the world, ride along). Measure its `estimate` numbers on the PC.

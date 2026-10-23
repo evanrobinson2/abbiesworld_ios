@@ -1,0 +1,346 @@
+<title>AW-STUDY-0011 - Over-the-Shoulder Play</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the same dusk family as the card, HUD and cutscene studies. A live dive at the top, then four
+   small diagrams, then the five options. Single committed dark look so the scene's light reads true. */
+:root {
+  --dusk: #171b31;
+  --dusk-deep: #0f1224;
+  --dusk-lift: #232946;
+  --ink: #f3ead8;
+  --muted: #aab0cb;
+  --sun: #f2be54;
+  --teal: #5cb8b2;
+  --rose: #f08c74;
+  --leaf: #8fcf7a;
+  --rule: rgba(243, 234, 216, 0.14);
+  --display: "Fredoka", "Baloo 2", "Trebuchet MS", sans-serif;
+  --body: "Nunito", "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--dusk);
+  background-image: radial-gradient(ellipse at 50% -20%, rgba(242, 190, 84, 0.12), transparent 55%);
+  color: var(--ink);
+  font: 17px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 72px;
+}
+.wrap { max-width: 1100px; margin: 0 auto; display: grid; gap: 64px; }
+.read { max-width: 66ch; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; line-height: 1.12; margin: 0; }
+h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); }
+h2 { font-size: clamp(1.45rem, 3.2vw, 2rem); }
+h3 { font-size: 1.12rem; }
+p { margin: 0; }
+.eyebrow { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sun); }
+.muted { color: var(--muted); }
+header { padding-top: 48px; display: grid; gap: 14px; }
+section { display: grid; gap: 20px; }
+
+/* Live dive */
+.stage { position: relative; border-radius: 22px; overflow: hidden; background: var(--dusk-deep);
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.7), inset 0 0 0 1px var(--rule); aspect-ratio: 16 / 9; max-width: 100%; }
+.stage canvas { display: block; width: 100%; height: 100%; }
+.dial { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.dial label { font: 500 0.85rem var(--mono); color: var(--muted); }
+.dial input[type=range] { flex: 1 1 220px; accent-color: var(--sun); min-width: 0; }
+.dial button { font: 600 1rem var(--display); color: var(--dusk-deep); background: var(--sun); border: 0;
+  border-radius: 999px; padding: 10px 22px; cursor: pointer; }
+.dial button:focus-visible, .dial input:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.caption { font-size: 0.95rem; color: var(--muted); max-width: 66ch; }
+
+/* Four diagrams */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+.fig { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.fig svg { width: 100%; height: auto; background: var(--dusk-lift); border-radius: 16px; }
+.fig p { font-size: 0.95rem; color: var(--muted); }
+svg text { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+
+/* Options */
+.opts { display: grid; gap: 14px; }
+.opt { display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: start; padding: 18px 20px;
+  border-radius: 18px; background: var(--dusk-lift); }
+.opt .key { font: 700 1.8rem/1 var(--display); color: var(--sun); width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; background: rgba(242,190,84,.12); }
+.opt.later .key { color: var(--muted); background: rgba(170,176,203,.12); }
+.opt div { min-width: 0; display: grid; gap: 4px; }
+.tag { font: 500 0.72rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
+.opt.later .tag { color: var(--muted); }
+.order { font-family: var(--display); font-size: 1.15rem; }
+.order b { color: var(--sun); font-weight: 600; }
+footer { font-size: 0.85rem; color: var(--muted); max-width: 66ch; display: grid; gap: 8px; }
+@media (max-width: 520px) { .opt { grid-template-columns: 1fr; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">AW-STUDY-0011 · Oracle study · 23 Oct 2026</span>
+    <h1>Over-the-Shoulder Play</h1>
+    <p class="read muted">How proper third-person games frame the camera, dodge walls, drop you from a map into a body,
+      and make that body feel alive, and what Abbie's World should take from them. Nothing here is built yet.</p>
+  </header>
+
+  <section aria-labelledby="dive-h">
+    <h2 id="dive-h">The dive</h2>
+    <div class="stage"><canvas id="c" aria-label="A small ranch seen from above; the slider lowers the camera to behind a child's shoulder"></canvas></div>
+    <div class="dial">
+      <button id="go" type="button">Dive</button>
+      <label for="t">board</label>
+      <input id="t" type="range" min="0" max="1000" value="0">
+      <label for="t">shoulder</label>
+    </div>
+    <p class="caption">One unbroken move, about 1.2 seconds, anchored on the child you picked. The camera keeps looking
+      down until the last third, then lifts its eyes to the horizon. At the bottom she glances back at you, then faces
+      the goat she has noticed. No cut, no fade, no words.</p>
+  </section>
+
+  <section aria-labelledby="four-h">
+    <h2 id="four-h">What the good ones share</h2>
+    <div class="grid">
+      <div class="fig">
+        <svg viewBox="0 0 260 170" role="img" aria-label="Top view: a chase camera centred behind while moving, sliding to the shoulder when stopped">
+          <circle cx="130" cy="58" r="13" fill="#f2be54"/>
+          <path d="M130 38 l-7 -12 h14z" fill="#f2be54"/>
+          <path d="M130 120 L95 40 M130 120 L165 40" stroke="#aab0cb" stroke-dasharray="3 4" fill="none"/>
+          <rect x="122" y="116" width="16" height="12" rx="3" fill="#5cb8b2"/>
+          <path d="M160 132 L118 52 M160 132 L198 52" stroke="#f08c74" stroke-dasharray="3 4" fill="none" opacity=".8"/>
+          <rect x="152" y="128" width="16" height="12" rx="3" fill="#f08c74"/>
+          <path d="M140 122 C148 124 150 126 152 132" stroke="#f3ead8" fill="none" marker-end="url(#ar)"/>
+          <defs><marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L6 3L0 6z" fill="#f3ead8"/></marker></defs>
+          <text x="70" y="160">moving</text><text x="168" y="160">stopped</text>
+        </svg>
+        <h3>A soft shoulder</h3>
+        <p>True over-the-shoulder is for aiming, and we have no guns. Centre the camera while she runs; slide to the
+          shoulder when she stops, so what she faces gets the open half.</p>
+      </div>
+      <div class="fig">
+        <svg viewBox="0 0 260 170" role="img" aria-label="Boom length over time: drops instantly at a wall, eases back out over half a second">
+          <path d="M30 20 V140 H240" stroke="#aab0cb" fill="none" opacity=".5"/>
+          <path d="M30 40 H95 V110 H140 C165 110 180 44 220 40 H240" stroke="#f2be54" stroke-width="3" fill="none"/>
+          <path d="M95 30 V140" stroke="#f08c74" stroke-dasharray="3 3"/>
+          <text x="99" y="30">wall</text>
+          <text x="36" y="34">boom</text>
+          <text x="100" y="128">in: one frame</text>
+          <text x="150" y="80">out: 0.5 s</text>
+          <text x="206" y="156">time</text>
+        </svg>
+        <h3>Fast in, slow out</h3>
+        <p>A small sphere cast finds walls and snaps the camera in front of them, then eases back. Posts, fences,
+          leaves and goats never push it; they thin to a soft dither for the player only.</p>
+      </div>
+      <div class="fig">
+        <svg viewBox="0 0 260 170" role="img" aria-label="Side view: the dive path from high above the board down to behind the head">
+          <path d="M20 140 H240" stroke="#8fcf7a" stroke-width="3"/>
+          <circle cx="200" cy="126" r="7" fill="#f2be54"/><rect x="196" y="132" width="8" height="8" fill="#f2be54"/>
+          <path d="M40 22 C70 60 120 110 168 120" stroke="#f3ead8" stroke-dasharray="5 5" fill="none"/>
+          <g fill="#5cb8b2"><rect x="34" y="14" width="14" height="10" rx="2"/><rect x="96" y="72" width="14" height="10" rx="2" opacity=".7"/><rect x="160" y="114" width="14" height="10" rx="2"/></g>
+          <path d="M41 24 L45 44 M103 82 L120 98 M174 119 L192 121" stroke="#f2be54" stroke-width="2"/>
+          <text x="54" y="20">board · looks down</text>
+          <text x="118" y="70">pitch lifts late</text>
+          <text x="128" y="160">shoulder · looks along</text>
+        </svg>
+        <h3>One curve, one anchor</h3>
+        <p>Height, pitch, lens and look-ahead all ride one dial. Detail swaps in while the camera moves, where the eye
+          forgives it. Pinch out and the same curve takes you back to the exact board view.</p>
+      </div>
+      <div class="fig">
+        <svg viewBox="0 0 260 170" role="img" aria-label="Stacked layers of the player's body: clips at the bottom, cheap procedural layers on top">
+          <g font-family="IBM Plex Mono">
+            <rect x="20" y="126" width="220" height="26" rx="8" fill="#2d3458"/><text x="32" y="143" fill="#f3ead8">clips · idle, walk, run (speed-matched)</text>
+            <rect x="20" y="96" width="220" height="26" rx="8" fill="#2a4a55"/><text x="32" y="113" fill="#f3ead8">lean · turn-step · feet on ground</text>
+            <rect x="20" y="66" width="220" height="26" rx="8" fill="#3d4a3a"/><text x="32" y="83" fill="#f3ead8">head looks at what matters</text>
+            <rect x="20" y="36" width="220" height="26" rx="8" fill="#4b4030"/><text x="32" y="53" fill="#f3ead8">springy ears, tails, scarves</text>
+            <rect x="20" y="6" width="220" height="26" rx="8" fill="#523535"/><text x="32" y="23" fill="#f3ead8">mood · shiver, hurry, yawn</text>
+          </g>
+        </svg>
+        <h3>A body that notices</h3>
+        <p>AAA uses motion matching on hours of capture. We get most of the feel from a few clips and cheap layers on
+          top. Her head turning to the bleating sheep tells you more than any marker.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="opt-h">
+    <h2 id="opt-h">Five options for Abbie's World</h2>
+    <div class="opts">
+      <div class="opt"><span class="key">A</span><div><span class="tag">camera</span><h3>Soft shoulder, automatic</h3>
+        <p class="muted">The camera follows, recentres behind her and leans toward bells, gates and animals. One thumb
+          anywhere walks; a second finger looks around. Nothing on screen until a thumb lands.</p></div></div>
+      <div class="opt"><span class="key">B</span><div><span class="tag">transition</span><h3>The dive</h3>
+        <p class="muted">Tap a character and fall into them in one move. She glances back to say "it's me now". Pinch
+          out to rise back to the board.</p></div></div>
+      <div class="opt"><span class="key">C</span><div><span class="tag">animation</span><h3>A living body</h3>
+        <p class="muted">The upgraded player animation: speed-matched walk and run, lean, turn-steps, a head that looks,
+          springy ears and scarves, and a body that shivers, hurries or yawns with the weather and time.</p></div></div>
+      <div class="opt"><span class="key">D</span><div><span class="tag">interaction</span><h3>Touch the world</h3>
+        <p class="muted">Near things warm softly. Tap one and she walks over and does it, hand reaching the real thing:
+          pet the goat, pick the apple, ring the bell. No prompts and no words.</p></div></div>
+      <div class="opt later"><span class="key">E</span><div><span class="tag">idea only</span><h3>Ride along</h3>
+        <p class="muted">For "play my day": the camera follows a character through their own day; a thumb takes the
+          wheel and you "run around"; let go and they carry on.</p></div></div>
+    </div>
+    <p class="order">Start with <b>A and B together</b> (one camera system), then <b>C</b>, then <b>D</b>. E waits.</p>
+  </section>
+
+  <section aria-labelledby="phone-h">
+    <h2 id="phone-h">Cheap on a phone</h2>
+    <p class="read muted">Only the player gets a skeleton: one skinned model, a few thousand triangles, at most three
+      clips blending. Everyone else keeps today's light motion. The camera does three short casts against simple boxes,
+      never the real meshes. Together the camera and body should cost under half a millisecond a frame.</p>
+  </section>
+
+  <footer>
+    <p>Lessons taken from Manor Lords, Valheim, Enshrouded, Sable, Fall Guys, Bluey, PAW Patrol World, State of Decay 2
+      and The Alters (all in Evan's library), plus Mario Odyssey, Breath of the Wild, Sky, Astro Bot, A Short Hike,
+      God of War, Resident Evil 4 and Journey. Style yes, expression never: ideas and techniques, never their
+      characters, clips, footage or camera data.</p>
+    <p>Game facts are estimates from public knowledge and developer talks, not measured captures.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  const canvas = document.getElementById('c');
+  const slider = document.getElementById('t');
+  const go = document.getElementById('go');
+  if (!window.THREE) { canvas.parentElement.style.display = 'none'; return; }
+  const T = THREE;
+  const renderer = new T.WebGLRenderer({canvas, antialias: true});
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  renderer.shadowMap.enabled = true;
+  const scene = new T.Scene();
+  scene.background = new T.Color(0xf6c98a);
+  scene.fog = new T.Fog(0xf6c98a, 40, 90);
+  const camera = new T.PerspectiveCamera(40, 16/9, 0.05, 200);
+  scene.add(new T.HemisphereLight(0xfff1d6, 0x5a6b3a, 0.85));
+  const sun = new T.DirectionalLight(0xffe0a8, 0.9);
+  sun.position.set(-14, 22, 10); sun.castShadow = true;
+  sun.shadow.mapSize.set(1024, 1024);
+  Object.assign(sun.shadow.camera, {left: -18, right: 18, top: 18, bottom: -18});
+  scene.add(sun);
+  const mat = c => new T.MeshLambertMaterial({color: c});
+  const add = (geo, m, x, y, z, ry) => { const o = new T.Mesh(geo, m); o.position.set(x, y, z); if (ry) o.rotation.y = ry; o.castShadow = o.receiveShadow = true; scene.add(o); return o; };
+
+  // Hex tile of ground
+  const ground = add(new T.CylinderGeometry(16, 16, 1, 6), mat(0x8fbf5a), 0, -0.5, 0);
+  ground.castShadow = false;
+  const meadow = new T.Mesh(new T.CircleGeometry(120, 24), mat(0x7fae52)); meadow.rotation.x = -Math.PI/2; meadow.position.y = -0.9; meadow.receiveShadow = true; scene.add(meadow);
+  // Barn
+  add(new T.BoxGeometry(5, 3.2, 4), mat(0xb5523b), -6, 1.6, -5, 0.3);
+  const roof = add(new T.CylinderGeometry(0.01, 3.4, 2, 4, 1), mat(0x6b3a2a), -6, 4.1, -5, 0.3 + Math.PI/4);
+  roof.scale.set(1.05, 1, 0.85);
+  // Trees
+  [[7,-7],[9,2],[-10,4],[4,9],[-3,-11]].forEach(([x,z],i) => {
+    add(new T.CylinderGeometry(0.2, 0.3, 1.6), mat(0x7a5233), x, 0.8, z);
+    add(new T.ConeGeometry(1.4 + (i%2)*0.4, 3.2, 7), mat(i%2 ? 0x4f8a3e : 0x5f9b45), x, 3.1, z);
+  });
+  // Fence
+  for (let i = 0; i < 9; i++) add(new T.BoxGeometry(0.18, 1, 0.18), mat(0xd9b98a), 1 + i*1.1, 0.5, -2.5);
+  add(new T.BoxGeometry(9, 0.12, 0.08), mat(0xd9b98a), 5.4, 0.75, -2.5);
+  // Goat
+  const goat = new T.Group();
+  const gbody = add(new T.BoxGeometry(1.1, 0.6, 0.5), mat(0xf3ead8), 0, 0, 0); goat.add(gbody); gbody.position.set(0, 0.7, 0);
+  const ghead = add(new T.BoxGeometry(0.4, 0.4, 0.35), mat(0xe8dcc4), 0, 0, 0); goat.add(ghead); ghead.position.set(0.7, 1.05, 0);
+  [-0.35, 0.35].forEach(x => [-0.15, 0.15].forEach(z => { const l = add(new T.BoxGeometry(0.12, 0.45, 0.12), mat(0x6b5a48), 0, 0, 0); goat.add(l); l.position.set(x, 0.22, z); }));
+  goat.position.set(4.5, 0, -5.5); goat.rotation.y = 2.4; scene.add(goat);
+
+  // The child
+  const kid = new T.Group();
+  const body = add(new T.CylinderGeometry(0.32, 0.4, 0.9, 10), mat(0x5cb8b2), 0, 0, 0); kid.add(body); body.position.y = 0.75;
+  const legs = add(new T.CylinderGeometry(0.28, 0.24, 0.4, 10), mat(0x3a4a7a), 0, 0, 0); kid.add(legs); legs.position.y = 0.2;
+  const head = new T.Group(); head.position.y = 1.45; kid.add(head);
+  const skull = add(new T.SphereGeometry(0.36, 16, 12), mat(0xf0c9a0), 0, 0, 0); head.add(skull);
+  const hair = add(new T.SphereGeometry(0.38, 16, 12, 0, Math.PI*2, 0, Math.PI/2.1), mat(0x7a4a2a), 0, 0.04, -0.02); head.add(hair);
+  const scarf = new T.Group(); scarf.position.set(0, 1.18, -0.3); kid.add(scarf);
+  const tail = add(new T.BoxGeometry(0.14, 0.5, 0.05), mat(0xf2be54), 0, 0, 0); scarf.add(tail); tail.position.y = -0.25;
+  const ring = new T.Mesh(new T.TorusGeometry(0.3, 0.07, 6, 14), mat(0xf2be54)); ring.rotation.x = Math.PI/2; ring.position.y = 1.2; kid.add(ring);
+  kid.position.set(0, 0, 3); scene.add(kid);
+
+  // Dive curve: t in [0,1] drives distance, pitch, lens together. Pitch lifts late.
+  const ease = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3)/2;
+  const lerp = (a, b, k) => a + (b - a) * k;
+  let t = 0, target = null, start = 0, from = 0;
+  const pivot = new T.Vector3(), look = new T.Vector3(), pos = new T.Vector3();
+  function placeCamera(time){
+    const k = ease(t);
+    const late = Math.max(0, (k - 0.6) / 0.4);
+    const facing = kid.rotation.y;
+    // board: high and steep, gently orbiting; shoulder: behind the head, slightly right
+    const yaw = lerp(0.6 + Math.sin(time*0.05)*0.08, facing + Math.PI, k);
+    const dist = lerp(34, 3.6, k);
+    const pitch = lerp(1.05, 0.2, late*late);
+    const side = lerp(0, -0.75, late);
+    pivot.set(kid.position.x, lerp(0, 1.35, k), kid.position.z);
+    pos.set(
+      pivot.x + Math.sin(yaw) * Math.cos(pitch) * dist + Math.cos(yaw) * side,
+      pivot.y + Math.sin(pitch) * dist + lerp(0, 0.25, late),
+      pivot.z + Math.cos(yaw) * Math.cos(pitch) * dist - Math.sin(yaw) * side);
+    camera.position.copy(pos);
+    // look a little ahead of her at the bottom
+    look.set(pivot.x - Math.sin(yaw)*lerp(0, 3, late), pivot.y - lerp(0, 0.2, late), pivot.z - Math.cos(yaw)*lerp(0, 3, late));
+    camera.lookAt(look);
+    camera.fov = lerp(40, 58, late);
+    camera.updateProjectionMatrix();
+  }
+
+  kid.rotation.y = Math.atan2(goat.position.x - kid.position.x, goat.position.z - kid.position.z) - 0.45;
+  const goatDir = new T.Vector3();
+  let glance = 0;
+  function animateBody(time){
+    // breathing, a gentle sway, a scarf that lags, and a head that looks
+    body.scale.set(1, 1 + Math.sin(time*2.2)*0.015, 1);
+    kid.position.y = Math.abs(Math.sin(time*2.2))*0.01;
+    scarf.rotation.x = 0.25 + Math.sin(time*1.7)*0.12;
+    goatDir.copy(goat.position).sub(kid.position);
+    const toGoat = Math.atan2(goatDir.x, goatDir.z) - kid.rotation.y;
+    let wrapped = Math.atan2(Math.sin(toGoat), Math.cos(toGoat));
+    wrapped = Math.max(-1.1, Math.min(1.1, wrapped));
+    // at the bottom of the dive she glances back at the camera first
+    const glanceYaw = Math.PI * 0.62 * Math.sin(Math.min(1, glance) * Math.PI);
+    head.rotation.y = lerp(head.rotation.y, glance > 0 && glance < 1 ? glanceYaw : wrapped * (0.6 + 0.4*ease(t)), 0.08);
+    ghead.rotation.z = Math.sin(time*1.3)*0.15;
+  }
+
+  function resize(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== Math.floor(w * renderer.getPixelRatio()) || canvas.height !== Math.floor(h * renderer.getPixelRatio())) {
+      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    }
+  }
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let lastT = 0;
+  function frame(ms){
+    const time = ms / 1000;
+    resize();
+    if (target !== null) {
+      const p = Math.min(1, (time - start) / 1.2);
+      t = lerp(from, target, p);
+      slider.value = Math.round(t * 1000);
+      if (p >= 1) { if (target === 1) glance = 0.001; target = null; }
+    }
+    if (glance > 0 && glance < 1) glance += 1/60/1.1;
+    if (lastT < 0.98 && t >= 0.98 && glance === 0) glance = 0.001;
+    if (t < 0.9) glance = 0;
+    lastT = t;
+    placeCamera(time);
+    animateBody(time);
+    renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+  slider.addEventListener('input', () => { target = null; t = slider.value / 1000; go.textContent = t > 0.5 ? 'Rise' : 'Dive'; });
+  go.addEventListener('click', () => {
+    const now = performance.now() / 1000;
+    from = t; target = t > 0.5 ? 0 : 1; start = now;
+    if (reduce) { t = target; slider.value = t * 1000; target = null; }
+    go.textContent = (target === null ? t : target) === 1 ? 'Rise' : 'Dive';
+  });
+  requestAnimationFrame(frame);
+})();
+</script>

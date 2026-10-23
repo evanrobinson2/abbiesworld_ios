@@ -1,0 +1,504 @@
+{
+ "study": "AW-STUDY-0011 - Over-the-Shoulder Play",
+ "date": "2026-10-23",
+ "schema": "docs/oracle/identity/game-identity.schema.json (camera descriptor; framing, collision, transition and body are study notes, not yet schema fields)",
+ "note": "Hand estimates from knowledge of the games and developer talks, not captures (source: estimate). owned = in Evan's Steam library. style = we may learn from it; expression = we never copy it.",
+ "games": [
+  {
+   "game": "manor-lords",
+   "name": "Manor Lords",
+   "owned": true,
+   "why": "Zooms from the city view down to walking the village as a person.",
+   "camera": {
+    "model": "orbit-diorama + third_person walk",
+    "framing": "Board camera at height; walk mode behind the lord.",
+    "collision": "Ground follow.",
+    "transition": "Continuous zoom, same world, pitch tied to height.",
+    "source": "estimate",
+    "confidence": 0.5
+   },
+   "body": "Grounded medieval walk.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "One camera and one world from board to body."
+    },
+    {
+     "kind": "expression",
+     "never": "Its UI, models and village layouts."
+    }
+   ]
+  },
+  {
+   "game": "valheim",
+   "name": "Valheim",
+   "owned": true,
+   "why": "Owned survival game with a calm behind-the-shoulder camera.",
+   "camera": {
+    "model": "third_person",
+    "framing": "Slightly right of centre, free orbit, zoomable boom.",
+    "collision": "Pulls in on walls.",
+    "transition": "None (always third person).",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Weighty walk, simple clips.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Zoomable boom distance the player can set once."
+    },
+    {
+     "kind": "expression",
+     "never": "Its creatures, art and sounds."
+    }
+   ]
+  },
+  {
+   "game": "enshrouded",
+   "name": "Enshrouded",
+   "owned": true,
+   "why": "Owned; a modern over-the-shoulder camera with building.",
+   "camera": {
+    "model": "third_person over-shoulder",
+    "framing": "Offset right, closer when aiming.",
+    "collision": "Sphere-style pull-in.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Climb and glide clips.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Shoulder offset grows only when aiming or building."
+    },
+    {
+     "kind": "expression",
+     "never": "Its characters and world."
+    }
+   ]
+  },
+  {
+   "game": "sable",
+   "name": "Sable",
+   "owned": true,
+   "why": "Owned; a gentle exploration camera and lovely climbing and cape motion.",
+   "camera": {
+    "model": "third_person chase",
+    "framing": "Wide, low, behind.",
+    "collision": "Soft.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Cape and cloth secondary motion; lean on the bike.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Secondary motion on cloth sells a simple character."
+    },
+    {
+     "kind": "expression",
+     "never": "Its Moebius-inspired art and characters."
+    }
+   ]
+  },
+  {
+   "game": "fall-guys",
+   "name": "Fall Guys",
+   "owned": true,
+   "why": "Owned; physical comedy bodies loved by kids.",
+   "camera": {
+    "model": "third_person chase",
+    "framing": "Centred behind and above.",
+    "collision": "Pulls in.",
+    "transition": "Round preview flyover then drop in behind.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Wobbly physics, squash on landing, ragdoll stumbles.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Wobble and squash beat realism for kids."
+    },
+    {
+     "kind": "expression",
+     "never": "Its bean characters and costumes."
+    }
+   ]
+  },
+  {
+   "game": "bluey-the-videogame",
+   "name": "Bluey: The Videogame",
+   "owned": true,
+   "why": "Owned kids' game; children barely steer the camera.",
+   "camera": {
+    "model": "third_person mostly automatic",
+    "framing": "Automatic, room-framed.",
+    "collision": "Rooms framed rather than collided.",
+    "transition": "Cuts between rooms.",
+    "source": "estimate",
+    "confidence": 0.4
+   },
+   "body": "Show-accurate simple clips.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Let the camera frame the room for small children."
+    },
+    {
+     "kind": "expression",
+     "never": "Bluey characters, the show's art and voices."
+    }
+   ]
+  },
+  {
+   "game": "paw-patrol-world",
+   "name": "PAW Patrol World",
+   "owned": true,
+   "why": "Owned open-world kids' game.",
+   "camera": {
+    "model": "third_person chase",
+    "framing": "Behind, automatic recentre.",
+    "collision": "Pull-in.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.4
+   },
+   "body": "Vehicle and pup clips.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Strong auto recentre for kids."
+    },
+    {
+     "kind": "expression",
+     "never": "PAW Patrol characters and vehicles."
+    }
+   ]
+  },
+  {
+   "game": "state-of-decay-2",
+   "name": "State of Decay 2",
+   "owned": true,
+   "why": "Owned; switch which survivor you are in a community.",
+   "camera": {
+    "model": "third_person over-shoulder",
+    "framing": "Offset right.",
+    "collision": "Pull-in.",
+    "transition": "Character switch from the base menu.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Survivor clips.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "You can inhabit any member of a community."
+    },
+    {
+     "kind": "expression",
+     "never": "Its zombies, survivors and UI."
+    }
+   ]
+  },
+  {
+   "game": "the-alters",
+   "name": "The Alters",
+   "owned": true,
+   "why": "Owned; walking a base and talking to versions of yourself.",
+   "camera": {
+    "model": "third_person over-shoulder",
+    "framing": "Close shoulder, cinematic.",
+    "collision": "Pull-in indoors.",
+    "transition": "Into conversation framing.",
+    "source": "estimate",
+    "confidence": 0.4
+   },
+   "body": "Conversation staging.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Close shoulder framing for conversations."
+    },
+    {
+     "kind": "expression",
+     "never": "Its story and characters."
+    }
+   ]
+  },
+  {
+   "game": "strange-brigade",
+   "name": "Strange Brigade",
+   "owned": true,
+   "why": "Owned co-op shooter; a classic aiming shoulder cam.",
+   "camera": {
+    "model": "third_person over-shoulder",
+    "framing": "Offset right, tighter on aim.",
+    "collision": "Pull-in.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Pulp action clips.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Shoulder offset exists for aiming; we have none."
+    },
+    {
+     "kind": "expression",
+     "never": "Its narrator, characters and art."
+    }
+   ]
+  },
+  {
+   "game": "marvel-rivals",
+   "name": "Marvel Rivals",
+   "owned": true,
+   "why": "Owned hero shooter.",
+   "camera": {
+    "model": "third_person over-shoulder",
+    "framing": "Offset, centred reticle.",
+    "collision": "Pull-in.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.4
+   },
+   "body": "High-energy hero clips.",
+   "lessons": [
+    {
+     "kind": "expression",
+     "never": "Marvel characters and abilities."
+    }
+   ]
+  },
+  {
+   "game": "super-mario-odyssey",
+   "name": "Super Mario Odyssey",
+   "owned": false,
+   "why": "The reference chase camera for kids' 3D platforming.",
+   "camera": {
+    "model": "third_person chase",
+    "framing": "Behind and above, lag with dead zone, auto recentre.",
+    "collision": "Silhouette of Mario through walls.",
+    "transition": "Capture: dive into another creature and become it.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Lean, squash, look-at, huge expressive clip set.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Becoming another creature as a quick, joyful transition."
+    },
+    {
+     "kind": "expression",
+     "never": "Mario, Cappy and all Nintendo characters and sounds."
+    }
+   ]
+  },
+  {
+   "game": "zelda-breath-of-the-wild",
+   "name": "The Legend of Zelda: Breath of the Wild",
+   "owned": false,
+   "why": "Points of interest and head look-at.",
+   "camera": {
+    "model": "third_person",
+    "framing": "Behind, recentre on move.",
+    "collision": "Pull-in, fades small foliage.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Head turns to interesting things.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Head look-at as a marker-free signal."
+    },
+    {
+     "kind": "expression",
+     "never": "Link, Hyrule and its art."
+    }
+   ]
+  },
+  {
+   "game": "sky-children-of-the-light",
+   "name": "Sky: Children of the Light",
+   "owned": false,
+   "why": "Phone-first third person: one thumb moves, the camera follows.",
+   "camera": {
+    "model": "third_person chase",
+    "framing": "Behind, gentle, automatic.",
+    "collision": "Soft.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Cape secondary motion, emotes.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Touch anywhere to move; no on-screen stick at rest."
+    },
+    {
+     "kind": "expression",
+     "never": "Its world, art and characters."
+    }
+   ]
+  },
+  {
+   "game": "astro-bot",
+   "name": "Astro Bot",
+   "owned": false,
+   "why": "Tight, readable chase camera and lively small body.",
+   "camera": {
+    "model": "third_person chase",
+    "framing": "Behind and above.",
+    "collision": "Pull-in.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Lean, squash, constant tiny reactions.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "A small character with many tiny reactions feels alive."
+    },
+    {
+     "kind": "expression",
+     "never": "Astro and PlayStation cameos."
+    }
+   ]
+  },
+  {
+   "game": "a-short-hike",
+   "name": "A Short Hike",
+   "owned": false,
+   "why": "Indie, gentle, kid-friendly exploration.",
+   "camera": {
+    "model": "third_person automatic",
+    "framing": "Automatic follow.",
+    "collision": "Soft.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Head look-at, glide.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Simple model plus look-at reads well at low resolution."
+    },
+    {
+     "kind": "expression",
+     "never": "Its characters and island."
+    }
+   ]
+  },
+  {
+   "game": "god-of-war-2018",
+   "name": "God of War (2018)",
+   "owned": false,
+   "why": "Close shoulder camera; whole game in one shot.",
+   "camera": {
+    "model": "third_person over-shoulder",
+    "framing": "Character left of frame, world opens to the right.",
+    "collision": "Close quarters handled carefully.",
+    "transition": "No cuts: every transition is the play camera.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Weighty motion matched clips.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Hand-back on the play camera; never cut away."
+    },
+    {
+     "kind": "expression",
+     "never": "Kratos, Atreus and Norse setting."
+    }
+   ]
+  },
+  {
+   "game": "resident-evil-4",
+   "name": "Resident Evil 4",
+   "owned": false,
+   "why": "Popularised the over-the-shoulder camera, for aiming.",
+   "camera": {
+    "model": "third_person over-shoulder",
+    "framing": "Offset right, close.",
+    "collision": "Pull-in.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Aim-driven.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Shoulder offset is an aiming tool."
+    },
+    {
+     "kind": "expression",
+     "never": "Its characters and horror."
+    }
+   ]
+  },
+  {
+   "game": "journey",
+   "name": "Journey",
+   "owned": false,
+   "why": "Gentle automatic camera and scarf motion.",
+   "camera": {
+    "model": "third_person chase",
+    "framing": "Wide, behind.",
+    "collision": "Soft.",
+    "transition": "None.",
+    "source": "estimate",
+    "confidence": 0.6
+   },
+   "body": "Scarf secondary motion.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "A scarf or tail can carry a lot of feeling."
+    },
+    {
+     "kind": "expression",
+     "never": "Its traveller design and music."
+    }
+   ]
+  },
+  {
+   "game": "the-last-of-us-part-ii",
+   "name": "The Last of Us Part II",
+   "owned": false,
+   "why": "Motion matching at AAA scale; out of our reach.",
+   "camera": {
+    "model": "third_person over-shoulder",
+    "framing": "Close shoulder.",
+    "collision": "Pull-in.",
+    "transition": "Seamless cutscene hand-back.",
+    "source": "estimate",
+    "confidence": 0.5
+   },
+   "body": "Motion matching on large capture sets.",
+   "lessons": [
+    {
+     "kind": "style",
+     "lesson": "Know the ceiling; do not chase it."
+    },
+    {
+     "kind": "expression",
+     "never": "Its characters and story."
+    }
+   ]
+  }
+ ]
+}
