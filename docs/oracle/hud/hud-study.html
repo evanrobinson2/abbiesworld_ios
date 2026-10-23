@@ -367,6 +367,20 @@ footer { margin-top: 56px; color: var(--muted); font-size: 0.9rem; border-top: 1
 </section>
 
 <section>
+  <span class="eyebrow">Evan's notes on today's sandbox · 2026-10-23</span>
+  <h2>Keep the glass, lose the page and the mask</h2>
+  <div class="ledger">
+    <div><h3 style="color:var(--meadow)">Keep</h3><ul>
+      <li><b>Liquid glass.</b> The HUD toys can be glass, as long as they read as objects with thickness, a rim highlight and a contact shadow.</li>
+      <li><b>Rich colours.</b></li>
+      <li><b>Live previews.</b> Each card in the hand shows a live render of the tile it places, like today's tile preview cards.</li></ul></div>
+    <div><h3 style="color:var(--bad)">Lose</h3><ul>
+      <li><b>The web-page layout:</b> top bar, right-side settings panel, Low/Medium/High segmented buttons and section headings. Settings go to the workbench.</li>
+      <li><b>The mask:</b> the pale haze that fades the world at its edges and behind the panels. The world stays fully visible, edge to edge. Glass may refract what is directly behind it but never dims the world around it.</li></ul></div>
+  </div>
+</section>
+
+<section>
   <span class="eyebrow">Rubric</span>
   <h2>Seven gates, then 100 points</h2>
   <div class="pair">
@@ -1154,7 +1168,7 @@ const CHECKS = [
   ['G1 chrome budget', 'pass', '7.6% both orientations', 'fail', '42.9%'], ['G2 words', 'pass', '0', 'fail', '173 always on, 57 summoned'],
   ['G3 targets and edges', 'pass', 'all 64 px, inside safe area', 'fail', '36 px toolbar buttons, 24 px sliders'], ['G4 no hover-only', 'pass', '', 'fail', 'button title tooltips'],
   ['G5 numerals', 'pass', 'sizes ok', 'pass', 'needs captures'], ['Always-on count', 'pass', '3', 'fail', '5'],
-  ['State on things', 'pass', '9 of 10 readouts', 'fail', '0 of 5'], ['World echo', 'pass', 'sun dial and light', 'fail', '4 meters with none'], ['One signal, many channels', 'pass', 'time, storm, festival each drive 4+', 'fail', 'no signals'],
+  ['State on things', 'pass', '9 of 10 readouts', 'fail', '0 of 5'], ['World echo', 'pass', 'sun dial and light', 'fail', '4 meters with none'], ['World unmasked', 'pass', 'world edge to edge', 'fail', 'haze over the world'], ['One signal, many channels', 'pass', 'time, storm, festival each drive 4+', 'fail', 'no signals'],
   ['Fade rules declared', 'pass', 'focus, change, idle, threshold, summon', 'fail', 'none'], ['Web red flags (CSS)', 'pass', 'n/a', 'fail', '31 1px borders, system font, 5 hover-only colours']];
 document.getElementById('checks').innerHTML = CHECKS.map(([n, a, at, b, bt]) => `<tr><td>${n}</td><td><span class="verdict ${a}">${a}</span> <span class="muted">${at}</span></td><td><span class="verdict ${b}">${b}</span> <span class="muted">${bt}</span></td></tr>`).join('');
 

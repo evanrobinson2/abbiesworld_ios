@@ -381,6 +381,29 @@ The café sign is not on the HUD: it is a sign on the café (T1), and the score 
 
 - Free-build mode (no season running) hides the sun dial's day strip and shows only the hand and the toy box.
 
+### Evan's notes on today's sandbox (2026-10-23)
+
+Screenshot (browser chrome cropped): `evan/sandbox-2026-10-23.jpg`. This is a newer layout than the audit below: a
+top bar (ranch name, Talk, pause, speed, music, code, sliders, layers), a clock and weather card at top left, and a
+"Tiles" settings panel on the right with tile preview cards, segmented buttons and sections.
+
+| Keep | Lose |
+|---|---|
+| **Liquid glass**: the translucent, glassy material of the controls | **The web-page layout**: top bar, right-side settings panel, segmented Low/Medium/High buttons, section headings |
+| **Rich colours** | **The mask**: the pale haze that fades and covers the world toward its edges and behind the panels. The world must stay fully visible, edge to edge |
+| **Live previews**: the tile picture cards and the live 3D tile preview | |
+
+What this means for the HUD spec:
+
+- The three always-on toys (sun dial, hand of cards, toy box) may be made of liquid glass, as long as they read as
+  objects: glass with thickness, a rim highlight and a contact shadow, not flat frosted rectangles.
+- The hand of cards keeps the live previews: each card's art is a live render of the tile it places (the preview
+  the sandbox already has), not a static icon.
+- No full-screen or edge mask, fog, haze, vignette-to-white or backdrop blur over the world in play mode. Glass may
+  refract what is directly behind it, but it never dims or hides the world around it. (Night and the meta
+  vignette in the core rule are world light, tied to a game signal, not a permanent mask.)
+- Settings such as density, variety, size and buildings go to the workbench (Law 12), where a tool look is allowed.
+
 ### Audit of today's `/sandbox` (live branch, 2026-10-22)
 
 `prototypes/ranch-atelier/dist/simulations/index.html` on `claude/live-snapshot-2026-10-22`:
