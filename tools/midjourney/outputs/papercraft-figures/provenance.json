@@ -255,6 +255,42 @@
           "bytes": 1278025
         }
       ]
+    },
+    {
+      "name": "male-base-toned",
+      "prompt": "A full-body standing base male figure made of matte ivory-white folded papercraft, well toned athletic build, wearing only simple fitted boxer briefs folded as a separate paper part, neutral A-pose, front view, smooth featureless head, faceted paper limbs with clear joints at shoulders, elbows, hips and knees, crisp creases and faceted folds, character base model reference for a strategy game, centered and entirely visible, orthographic, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "adc9fe3e-8bd2-41d2-b15d-31834c855353",
+      "created": "2026-10-23T03:09:47Z",
+      "files": [
+        {
+          "file": "images/male-base-toned_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/adc9fe3e-8bd2-41d2-b15d-31834c855353/0_0.png",
+          "sha256": "cfc053c2c39fd97280c777615715a4a2d97a1e8f060056db12d4e900f9be7b9e",
+          "bytes": 1173801
+        },
+        {
+          "file": "images/male-base-toned_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/adc9fe3e-8bd2-41d2-b15d-31834c855353/0_1.png",
+          "sha256": "2f6aa3741dc1a6e71d8af4092d8973a0232d524282a5d53d184106a14ce87479",
+          "bytes": 1140151
+        },
+        {
+          "file": "images/male-base-toned_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/adc9fe3e-8bd2-41d2-b15d-31834c855353/0_2.png",
+          "sha256": "478abe68bc2d4b121c2e0349303050fde94719e9a3f54d4cfcde521b5abf4004",
+          "bytes": 1147069
+        },
+        {
+          "file": "images/male-base-toned_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/adc9fe3e-8bd2-41d2-b15d-31834c855353/0_3.png",
+          "sha256": "cec9c82fb2016d745b5cc81f56d0e1dd4175cd5546d1f4c5b4023d1b5dd256c3",
+          "bytes": 1225447
+        }
+      ]
     }
   ]
 }
