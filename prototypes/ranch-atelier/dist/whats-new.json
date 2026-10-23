@@ -1,28 +1,39 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
-   {
-     "id": "2026-10-23-event-deck",
-     "date": "2026-10-23",
-     "title": "Play world events from the toy box",
-     "line": "Open World events in the toy box: a column of event cards on the far right. Tap one to make it rain, snow, storm, fog, dawn, nightfall or paint fall.",
-     "image": "/whats-new/2026-10-23-event-deck.png",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
-     "threadTitle": "World event cards",
-     "tour": false,
-     "link": "/sandbox"
-   },
-   {
-     "id": "2026-10-23-moon-at-bakery",
-     "date": "2026-10-23",
-     "title": "The Moon Mission starts at the bakery",
-     "line": "The Moon Mission now starts and launches from the French bakery on Main Street.",
-     "image": "/whats-new/2026-10-23-moon-at-bakery.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
-     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
-     "tour": false,
-     "link": "/town?mission"
-   },
+    {
+      "id": "2026-10-23-character-studio-heroes",
+      "date": "2026-10-23",
+      "title": "Character Studio: the Meshy heroes",
+      "line": "The Meshy heroes are in the studio: the claymation adventurer, the plasticine inventor, the 80s action hero and the twelve astronauts (Commander, Engineer, Daddy, Abbie, Ani and the alien crewmate, each in two looks). Every move plays on all of them.",
+      "image": "/whats-new/2026-10-23-character-studio-heroes.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMMgGWzaue2qNoRR7u64j2y",
+      "threadTitle": "AW-STUDY-0037 - Character Studio",
+      "tour": false,
+      "link": "/studies/character-studio/#idle"
+    },
+    {
+      "id": "2026-10-23-event-deck",
+      "date": "2026-10-23",
+      "title": "Play world events from the toy box",
+      "line": "Open World events in the toy box: a column of event cards on the far right. Tap one to make it rain, snow, storm, fog, dawn, nightfall or paint fall.",
+      "image": "/whats-new/2026-10-23-event-deck.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+      "threadTitle": "World event cards",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-moon-at-bakery",
+      "date": "2026-10-23",
+      "title": "The Moon Mission starts at the bakery",
+      "line": "The Moon Mission now starts and launches from the French bakery on Main Street.",
+      "image": "/whats-new/2026-10-23-moon-at-bakery.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+      "tour": false,
+      "link": "/town?mission"
+    },
     {
       "id": "2026-10-23-world-event-cards",
       "date": "2026-10-23",

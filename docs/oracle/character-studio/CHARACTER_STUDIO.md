@@ -148,6 +148,8 @@ rendered on the red brute. Known weakness: the brutes' skin weights are auto-mad
 moves; proper weights, and the new Meshy heroes (AW-STUDY-0043, with the full Meshy animation library), wait on Evan's
 "go" in the Meshy hero thread. When they land they go at the top of `BODIES`.
 
+**Update, 21:40Z.** The 12 Meshy astronaut heroes (AW-STUDY-0043; Commander, Engineer, Daddy, Abbie, Ani, alien crewmate, each plasticine and painterly) are rigged to our 20 bones and live in `studies/moon-mission/heroes/`; `bodies.mjs` reads their manifest (`heroes.json`) and puts them first, so the studio's default is the painterly Commander. All moves play on them with no tearing. The Midjourney heroes cs-1 (claymation adventurer), cs-2 (plasticine inventor) and cs-4 (80s action hero) are Meshy-made and rigged (`models/heroes/`) and lead the cast, the action hero being the default; cs-3, the stick man, failed Meshy's rigger ("pose estimation failed") and is still unrigged. The astronauts show in their suits only (the manifest also lists tee versions). The full Meshy animation library is still to come; the brutes' Meshy repaints (`tools/character-studio/meshy/brute1`, `brute2`) are unrigged and not used yet.
+
 ## What's next
 
 - Inertialized transitions between moves (Bollo), so a change of move keeps momentum.
