@@ -8,7 +8,8 @@ The rubric lives in docs/oracle/cards/card-rubric.json; the study in docs/oracle
 The manifest (card.json) is what a generator writes next to each render:
 
     {"id": "ranch-001", "ppi": 600, "bleed": true, "rarity": "bloom", "type": "animal",
-     "art":   {"bbox": [x, y, w, h], "source_px": [w, h], "layer": "art-only.png (needed for translucent plates)"},
+     "art":   {"bbox": [x, y, w, h], "source_px": [w, h], "layer": "art-only.png (needed for translucent plates)",
+               "mode": ["portal"], "layers": ["bg.png", "subject.png"], "subject_bbox": [x, y, w, h]},
      "boxes": [{"role": "name|text|numeral|gem|collector", "bbox": [x, y, w, h],
                 "font_pt": 10, "family": "Fredoka", "text_colour": "#2b1d0e",
                 "plate": "opaque|translucent"}],
@@ -135,6 +136,33 @@ def clear_of_corners(b, r, rad):
     return True
 
 
+def check_art_mode(man, boxes, th, b):
+    """Mode-specific checks from card-rubric.json art_modes, for the parts a manifest can prove."""
+    art = man["art"]
+    modes = art.get("mode", ["portal"])
+    modes = [modes] if isinstance(modes, str) else modes
+    known = {m["id"] for m in RUBRIC["art_modes"]["modes"]}
+    out = {"art_mode_known": (set(modes) <= known, f"{modes}")}
+    if "popout" in modes:
+        sb = art.get("subject_bbox")
+        if not sb:
+            out["popout"] = (False, "popout needs art.subject_bbox")
+        else:
+            brk = (art["bbox"][1] - sb[1]) / th
+            hits = [x["role"] for x in boxes if x["role"] == "numeral" and not (
+                sb[0] + sb[2] <= x["bbox"][0] or x["bbox"][0] + x["bbox"][2] <= sb[0] or
+                sb[1] + sb[3] <= x["bbox"][1] or x["bbox"][1] + x["bbox"][3] <= sb[1])]
+            out["popout"] = (0.05 <= brk <= 0.15 and not hits,
+                             f"breaks {brk:.0%} of card height" + (f", covers {hits}" if hits else ""))
+    if "shadowbox" in modes:
+        layers = art.get("layers", [])
+        out["shadowbox"] = (len(layers) >= 3, f"{len(layers)} layers")
+    if "overlay" in modes:
+        out["overlay_plates"] = (all(x.get("plate") in ("opaque", "translucent") for x in boxes
+                                     if x["role"] in ("name", "text")), "every text box on a plate")
+    return out
+
+
 def check_card(img_path, man_path):
     im = Image.open(img_path).convert("RGB")
     man = json.loads(Path(man_path).read_text())
@@ -237,6 +265,8 @@ def check_card(img_path, man_path):
     res["frame_share"] = ((0.15 <= fshare <= 0.30) or sun, f"frame {fshare:.0%} of face")
     lum = gray[framemask] / 255.0 if framemask.any() else np.zeros(1)
     res["material_value_range"] = (float(lum.std()) >= 0.08 or sun, f"frame luminance std {lum.std():.3f}")
+
+    res.update(check_art_mode(man, boxes, th, b))
 
     masks = man.get("finish_masks", [])
     okm = all(Image.open(Path(man_path).parent / m).size == (W, H) for m in masks)
