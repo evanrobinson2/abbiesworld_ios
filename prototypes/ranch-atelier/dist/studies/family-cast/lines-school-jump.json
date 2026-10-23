@@ -282,6 +282,24 @@
    "text": "Bub's waiting. Better get moving.",
    "hash": "e4fe3d6a7c",
    "url": "/r2/voices/lines/school-jump/hurry-e4fe3d6a7c.mp3"
+  },
+  "outroHollywood": {
+   "who": "daddy-now",
+   "text": "I never told anyone about that coin. Don't try this at home, okay?",
+   "hash": "5d71593ef2",
+   "url": "/r2/voices/lines/school-jump/outroHollywood-5d71593ef2.mp3"
+  },
+  "outroListened": {
+   "who": "daddy-now",
+   "text": "That little voice was right. It was a big jump.",
+   "hash": "4e3cf7bd85",
+   "url": "/r2/voices/lines/school-jump/outroListened-4e3cf7bd85.mp3"
+  },
+  "outroJanitor": {
+   "who": "daddy-now",
+   "text": "I nearly broke my ankle that night. That's why you never, ever try this at home.",
+   "hash": "1c603fa20a",
+   "url": "/r2/voices/lines/school-jump/outroJanitor-1c603fa20a.mp3"
   }
  }
 }
