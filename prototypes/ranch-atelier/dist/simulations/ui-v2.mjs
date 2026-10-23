@@ -3,7 +3,7 @@
 // The v1 controls stay in the DOM with their own handlers; each toy calls the original control, so no feature is lost.
 // The mode is chosen in index.html's boot script (html.ui-v2); "Classic layout" in the toy box switches back to v1.
 import {mountChrono} from './chrono.mjs?v=3';
-import {cardFace,cardArt,setCardArt} from './hand-cards.mjs?v=12';
+import {cardFace,cardArt,setCardArt} from './hand-cards.mjs?v=13';
 import {openCallout,closeCallout} from '../look/callout.mjs';
 if(document.documentElement.classList.contains('ui-v2'))start();
 

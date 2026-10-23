@@ -49,6 +49,19 @@ function bounds(img) {
  boundsCache.set(img, b); return b;
 }
 
+// The tile's profile mark (Evan, 2026-10-23: "maybe giving one more little logo in the tile that shows it's shape? just
+// profile outline?"): the place seen level from the side, the slab and everything standing on it, as one hairline.
+// The outlines come from tools/hand-card-art/render-profile.cjs (profiles.json); a place without one gets none.
+let profiles = null;
+const loadProfiles = () => profiles ??= fetch(new URL('./profiles.json?v=1', import.meta.url)).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+function profileMark(ctx, prof, right, base, {width = 13, height = 6.4, colour}) {
+ if (!prof?.top?.length) return;
+ const w = Math.min(width, height * prof.aspect), h = w / prof.aspect, x0 = right - w, y0 = base - h;
+ ctx.save(); ctx.strokeStyle = colour; ctx.lineWidth = 0.26; ctx.lineJoin = 'round'; ctx.globalAlpha = 0.85; ctx.beginPath();
+ prof.top.forEach(([u, v], i) => ctx[i ? 'lineTo' : 'moveTo'](x0 + u * w, y0 + v * h));
+ ctx.lineTo(x0 + w, y0 + h); ctx.lineTo(x0, y0 + h); ctx.closePath(); ctx.stroke(); ctx.restore();
+}
+
 // Pixels for a card at a given ppi. The diecut style needs headroom above the card for the part that breaks out.
 export function facePixels({dpi = 600, bleed = false, style = 'slice'} = {}) {
  const b = bleed ? CARD.bleed : 0, head = style === 'diecut' ? 12 : 0;
@@ -61,7 +74,7 @@ export async function renderFace(spec, opts = {}) {
  const style = STYLES.includes(opts.style) ? opts.style : 'slice', dpi = opts.dpi || 300;
  const P = {...(PLACES[spec.id] || PLACES.ranch), ...(spec.palette || {})};
  await loadFonts();
- const art = spec.art ? await loadImage(spec.art) : null;
+ const art = spec.art ? await loadImage(spec.art) : null, prof = (await loadProfiles())[spec.id];
  const {w, h, b, head} = facePixels({dpi, bleed: opts.bleed, style});
  const canvas = opts.canvas || document.createElement('canvas'); canvas.width = w; canvas.height = h;
  const ctx = canvas.getContext('2d'), px = dpi / 25.4;
@@ -69,7 +82,7 @@ export async function renderFace(spec, opts = {}) {
  ctx.clearRect(-b, -b - head, CARD.w + 2 * b, CARD.h + 2 * b + head);
  // Without bleed the face is the cut card: round its corners (the die-cut style rounds its own body).
  if (!b && style !== 'diecut') { round(ctx, 0, 0, CARD.w, CARD.h, CARD.radius); ctx.clip(); }
- const regions = PAINT[style](ctx, {P, art, name: spec.name || P.name, edition: spec.edition, b, set: spec.set || 4});
+ const regions = PAINT[style](ctx, {P, art, name: spec.name || P.name, edition: spec.edition, b, set: spec.set || 4, prof});
  return {canvas, style, dpi, regions, head, bleed: b};
 }
 
@@ -101,7 +114,7 @@ function earth(ctx, P, y, hgt, b) {
 }
 
 const PAINT = {
- slice(ctx, {P, art, name, edition, b, set}) {
+ slice(ctx, {P, art, name, edition, b, set, prof}) {
   const band = 66;
   ctx.fillStyle = P.air; ctx.fillRect(-b, -b, CARD.w + 2 * b, band + b);
   if (P.night) starfield(ctx, P, band);
@@ -110,11 +123,12 @@ const PAINT = {
   earth(ctx, P, band, CARD.h - band, b);
   ctx.fillStyle = SCENE.cream; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
   font(ctx, 800, 6.4, 0.1); ctx.fillText(name, 5, band + 10.6);
+  profileMark(ctx, prof, CARD.w - 5, band + 10.6, {colour: SCENE.cream});
   font(ctx, 500, 2.1, 0.35); ctx.globalAlpha = 0.78; ctx.fillText(`${String(edition ?? P.no).padStart(2, '0')} / ${String(set).padStart(2, '0')}`, 5.2, CARD.h - 4.6);
   ctx.textAlign = 'right'; font(ctx, 900, 2.4, 0.4); ctx.fillText('AW', CARD.w - 5, CARD.h - 4.6); ctx.globalAlpha = 1;
   return {gloss: at ? [at] : [], art: box};
  },
- print(ctx, {P, art, name, edition, b, set}) {
+ print(ctx, {P, art, name, edition, b, set, prof}) {
   ctx.fillStyle = SCENE.cream; ctx.fillRect(-b, -b, CARD.w + 2 * b, CARD.h + 2 * b);
   const win = {x: 5, y: 5, w: 53, h: 58};
   ctx.fillStyle = P.night ? P.air : mix(P.air, P.grass, 0.18); ctx.fillRect(win.x, win.y, win.w, win.h);
@@ -127,12 +141,13 @@ const PAINT = {
   ctx.strokeStyle = SCENE.ink; ctx.lineWidth = 0.12; ctx.strokeRect(win.x, win.y, win.w, win.h);
   ctx.fillStyle = SCENE.ink; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
   font(ctx, 700, 5.2, 0); ctx.fillText(name, 5, 72.4);
+  profileMark(ctx, prof, 58, 72.4, {height: 5, colour: SCENE.ink});
   ctx.fillRect(5, 75, 53, 0.12);
   font(ctx, 400, 2.15, 0.3); ctx.globalAlpha = 0.72; ctx.fillText(`No. ${edition ?? P.no} of ${set}  ·  First Light`, 5, 79.2);
   ctx.textAlign = 'right'; font(ctx, 900, 2.4, 0.4); ctx.globalAlpha = 1; ctx.fillStyle = P.body; ctx.fillText('AW', 58, 79.2);
   return {gloss: [win], art: win};
  },
- diecut(ctx, {P, art, name, edition, b, set}) {
+ diecut(ctx, {P, art, name, edition, b, set, prof}) {
   const band = 68, box = {x: 2.5, y: -11, w: 58, h: band + 11};
   // Place the cartoon first: the die line runs round its upper half, so the card's silhouette is the place itself.
   const B = art && bounds(art), s = art ? Math.min(box.h * 0.92 / B.h, box.w / B.w) : 1;
@@ -145,6 +160,7 @@ const PAINT = {
   const at = stand(ctx, art, {x: box.x, y: ay, w: box.w, h: ah}, {fill: 1, ground: 1, shadow: '#00000026'});
   ctx.fillStyle = SCENE.cream; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
   font(ctx, 800, 6.4, 0.1); ctx.fillText(name, 5, band + 10.6);
+  profileMark(ctx, prof, CARD.w - 5, band + 10.6, {colour: SCENE.cream});
   font(ctx, 500, 2.1, 0.35); ctx.globalAlpha = 0.78; ctx.fillText(`${String(edition ?? P.no).padStart(2, '0')} / ${String(set).padStart(2, '0')}`, 5.2, CARD.h - 4.6);
   ctx.textAlign = 'right'; font(ctx, 900, 2.4, 0.4); ctx.fillText('AW', CARD.w - 5, CARD.h - 4.6); ctx.globalAlpha = 1;
   return {gloss: at ? [at] : [], art: box, cut: 'alpha'};
