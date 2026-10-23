@@ -258,5 +258,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T17:05:24Z"
+  },
+  {
+    "id": "A3-clay-suit",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "c66517f7-0c8c-4ff6-a901-562195fcd29f",
+    "files": [
+      "tools/meshy-heroes/refs/A3-clay-suit/mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_0.png",
+      "tools/meshy-heroes/refs/A3-clay-suit/mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_1.png",
+      "tools/meshy-heroes/refs/A3-clay-suit/mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_2.png",
+      "tools/meshy-heroes/refs/A3-clay-suit/mj_c66517f7-0c8c-4ff6-a901-562195fcd29f_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:07:15Z"
+  },
+  {
+    "id": "A3-clay-tee",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "bb1e4a43-99d7-4622-9381-ae3c4e859900",
+    "files": [
+      "tools/meshy-heroes/refs/A3-clay-tee/mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_0.png",
+      "tools/meshy-heroes/refs/A3-clay-tee/mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_1.png",
+      "tools/meshy-heroes/refs/A3-clay-tee/mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_2.png",
+      "tools/meshy-heroes/refs/A3-clay-tee/mj_bb1e4a43-99d7-4622-9381-ae3c4e859900_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:09:04Z"
   }
 ]
