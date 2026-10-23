@@ -63,6 +63,13 @@
       "faces": 1538,
       "change": "legs: thigh 28->24 top radius with less bulge, shin 19->23 (near-even pegs)",
       "lesson": "I gave it a human thigh; a wooden mannequin's legs are near-even pegs, thigh barely wider than shin. Measure the miss per limb before choosing what to change."
+    },
+    {
+      "round": 6,
+      "iou": 0.84,
+      "faces": 1538,
+      "change": "forearms thicker (L 17,11 -> 20,15; R 15,10 -> 17,13)",
+      "lesson": "the leg lesson holds one limb up: a mannequin forearm is nearly as thick as its upper arm. limbs.py (per-limb miss) picks the change."
     }
   ],
   "method": "build.py (bpy 5.2, headless) builds 30 named parts, renders silhouette + shaded from the photo's orthographic camera and exports GLB; parts.py renders each part alone; score.py gives IoU against the private mask.",
@@ -70,7 +77,7 @@
     {
       "name": "smooth",
       "file": "mannequin-smooth.glb",
-      "iou": 0.828,
+      "iou": 0.836,
       "faces": 13650,
       "how": "SMOOTH=1 python build.py: same parts and pose, 3x segments, smooth shaded"
     }
