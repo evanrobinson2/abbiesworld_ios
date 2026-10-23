@@ -1,0 +1,24 @@
+{
+ "job": "aurora_1_2",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/image-to-3d",
+   "task_id": "01a16aae-58c3-705f-9bef-1db2f9a116c0",
+   "credits": 20,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": false,
+    "enable_pbr": false,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "on"
+   },
+   "views": [
+    "aurora_1_2.png"
+   ]
+  }
+ ],
+ "credits": 20
+}
