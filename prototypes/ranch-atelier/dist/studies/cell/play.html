@@ -639,7 +639,7 @@ function winScene(P) {
   {choices: [{label: 'Play again', go: () => location.reload()}, {label: 'Back to the lab', go: () => leave()}]}), 900);
  renderHud(players[0]);
 }
-const leave = () => { location.href = Q.get('from') || '/studies/abbietown/'; };
+const leave = () => { location.href = Q.get('from') || '/town'; };
 
 // ---- drawing -----------------------------------------------------------------------------------------------------
 function renderHud(P) {

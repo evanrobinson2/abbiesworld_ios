@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/town",
+      "destination": "/studies/abbietown/index.html"
+    },
+    {
       "source": "/welcome",
       "destination": "/home/index.html"
     },
