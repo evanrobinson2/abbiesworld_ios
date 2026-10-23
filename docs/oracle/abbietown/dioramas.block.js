@@ -108,7 +108,7 @@ function buildDiorama(d, ti) {
   if (h.H.shore) { const wp = nearWater(h.x, h.y, 0); if (wp) { let sx = 0, sy = 0, n = 0; for (let r = 4; r < 70; r += 4) for (let k = 0; k < 24; k++) { const a = k * Math.PI / 12, px = h.x + Math.cos(a) * r, py = h.y + Math.sin(a) * r; if (!isNaN(waterY(px, py))) { sx += px - h.x; sy += py - h.y; n++; } } s.drop = p.ph - waterY(wp.x, wp.y); g.rotation.y = n > 6 ? Math.atan2(-sx, sy) : Math.atan2(-(wp.x - h.x), wp.y - h.y); } } // out over the middle of the nearest water // face the water, and say how far it lies below the pad
   BUILD[h.id]?.(g, s); const local = new THREE.Group(); local.add(g); local.scale.setScalar(h.H.sc); local.position.set(h.x, p.ph, -h.y); out.add(local);
   if (!h.H.keepRot) { let rot = h.rot ?? faceOf(h); if (h.H.rail) { let b = null, bd = 1e9; for (const run of railIn) for (let i = 1; i < run.length; i++) { const mx = (run[i][0] + run[i - 1][0]) / 2, my = (run[i][1] + run[i - 1][1]) / 2, dd = Math.hypot(mx - h.x, my - h.y); if (dd < bd) { bd = dd; b = Math.atan2(run[i][1] - run[i - 1][1], run[i][0] - run[i - 1][0]); } } if (b != null) rot = b; } local.rotation.y = rot; } // beside the line: its long side runs along the nearest rail
-  (dioSpots[d.id] ||= {})[h.id] = {x: h.x, z: -h.y, y: p.ph, facing: local.rotation.y}; if (h.id === 'cafe') { dioCafes.push(cafe); } }
+  (dioSpots[d.id] ||= {})[h.id] = {x: h.x, z: -h.y, y: p.ph, facing: local.rotation.y, g: local}; if (h.id === 'cafe') { dioCafes.push(cafe); } }
  G = realG; cafe = realCafe;
  // 7 houses of the real mix, thinned and set along the streets
  const taken = [...pads.map(p => ({x: p.h.x, y: p.h.y, r: p.h.r + 6}))], mine = [];
@@ -273,7 +273,40 @@ function setView(on) {
  if (on) visitDio('dio-trio'); else { look = LOOK_REAL; home(); }
 }
 document.getElementById('dio').onclick = () => setView(!viewDio);
+// ---- the sky: a soft gradient behind the board, driven by the world clock (time of day, season, weather). It is the sky of the
+// fiction, drawn first and behind everything, so it can never cover the world. Evan 2026-10-23: "at least try for a simple background".
+const SKY_SEASON = {Spring: {top: '#6bb4e6', hor: '#e9f2e0'}, Summer: {top: '#4f9fe0', hor: '#e6f1f7'}, Autumn: {top: '#74a6d2', hor: '#f5dcb8'}, Winter: {top: '#a9bccd', hor: '#eef0f2'}};
+const SKY_NIGHT = {top: '#0d1530', hor: '#2a3558'}, SKY_DUSK = '#f0a58a';
+const sky = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
+ depthTest: false, depthWrite: false, toneMapped: false,
+ uniforms: {uTop: {value: new THREE.Color(SKY_SEASON.Autumn.top)}, uHor: {value: new THREE.Color(SKY_SEASON.Autumn.hor)}, uGnd: {value: new THREE.Color('#cfe2ea')}, uCloud: {value: 0.5}, uT: {value: 0}, uInv: {value: new THREE.Matrix4()}, uCam: {value: new THREE.Matrix4()}},
+ vertexShader: 'varying vec2 vN; void main(){ vN = position.xy; gl_Position = vec4(position.xy, 1.0, 1.0); }',
+ fragmentShader: `varying vec2 vN; uniform vec3 uTop, uHor, uGnd; uniform float uCloud, uT; uniform mat4 uInv, uCam;
+  float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+  float n(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f); return mix(mix(h(i), h(i + vec2(1, 0)), f.x), mix(h(i + vec2(0, 1)), h(i + vec2(1, 1)), f.x), f.y); }
+  void main(){
+   vec4 v = uInv * vec4(vN, -1.0, 1.0); vec3 d = normalize((uCam * vec4(v.xyz / v.w, 0.0)).xyz);
+   float up = smoothstep(-0.03, 0.3, d.y);
+   vec3 c = mix(uHor, uTop, up);
+   c = mix(c, uGnd, 0.35 * smoothstep(0.1, -0.5, d.y));
+   c = mix(c, uTop, 0.3 * (vN.y * 0.5 + 0.5)); // always a little lighter toward the top of the screen, even looking straight down
+   float cl = smoothstep(0.55, 0.8, n(vec2(atan(d.x, d.z) * 2.2 + uT * 0.004, d.y * 14.0)) * 0.65 + n(vec2(atan(d.x, d.z) * 5.0 - uT * 0.006, d.y * 30.0)) * 0.35) * smoothstep(0.03, 0.1, d.y) * (1.0 - smoothstep(0.22, 0.5, d.y));
+   c = mix(c, mix(uHor, vec3(1.0), 0.6), cl * uCloud);
+   gl_FragColor = vec4(c, 1.0);
+  }`}));
+sky.frustumCulled = false; sky.renderOrder = -1000; sky.name = 'sky'; scene.add(sky);
+const skyC = {top: new THREE.Color(), hor: new THREE.Color(), a: new THREE.Color(), dusk: new THREE.Color(SKY_DUSK)}; let skyClock = {daylight: 1, season: 'Autumn', weather: 'Clear', hour: 12};
+addEventListener('aw-world-clock', e => { skyClock = e.detail; });
+function skyFrame(t) {
+ const s = SKY_SEASON[skyClock.season] || SKY_SEASON.Autumn, day = Math.min(1, skyClock.daylight * 2.2); // full sky once the sun is well up
+ skyC.top.set(SKY_NIGHT.top).lerp(skyC.a.set(s.top), day); skyC.hor.set(SKY_NIGHT.hor).lerp(skyC.a.set(s.hor), day);
+ const glow = Math.max(0, 1 - Math.abs(skyClock.daylight - 0.18) / 0.18) * 0.8; skyC.hor.lerp(skyC.dusk, glow); // dawn and dusk warm the horizon
+ const grey = skyClock.weather === 'Rain' ? 0.6 : skyClock.weather === 'Cloudy' ? 0.35 : 0; if (grey) { skyC.top.lerp(skyC.a.set('#8d98a6'), grey * day); skyC.hor.lerp(skyC.a.set('#c9cfd6'), grey * day); }
+ const u = sky.material.uniforms; u.uTop.value.copy(skyC.top); u.uHor.value.copy(skyC.hor); u.uGnd.value.copy(scene.background).lerp(skyC.a.set(SKY_NIGHT.hor), 1 - day);
+ u.uCloud.value = skyClock.weather === 'Clear' ? 0.55 : 0.9; u.uT.value = t; u.uInv.value.copy(camera.projectionMatrixInverse); u.uCam.value.copy(camera.matrixWorld);
+}
 function dioFrame(dt, t) {
+ skyFrame(t);
  waterU.uWT.value = t;
  const k = 1 - Math.exp(-dt * 3.5), L = look;
  if (WC.zone !== (L.wash || 'off')) WC.setZone(L.wash || 'off'); // each zone's opinion about its own distance
