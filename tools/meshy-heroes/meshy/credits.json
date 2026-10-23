@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 490,
+ "total": 500,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -166,6 +166,16 @@
    "what": "A1-paint-suit remesh",
    "credits": 5,
    "at": "2026-10-23T20:24:06Z"
+  },
+  {
+   "what": "A2-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:27:00Z"
+  },
+  {
+   "what": "A2-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:27:00Z"
   }
  ]
 }
