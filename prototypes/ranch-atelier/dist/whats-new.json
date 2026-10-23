@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-light-study",
+      "date": "2026-10-23",
+      "title": "Light study: fourteen ways to light the world",
+      "line": "Golden hour, a café window shaft, a bare basement bulb, a hard-sun Moon base and a cosy Halloween dusk, all rebuilt live on our ranch. Pick the ones you love.",
+      "image": "/whats-new/2026-10-23-light-study.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXjLkpqwFiWaYuFKjT8TA8G",
+      "threadTitle": "Light study",
+      "tour": false,
+      "link": "/studies/light/"
+    },
+    {
       "id": "2026-10-23-grace-basement-6",
       "date": "2026-10-23",
       "title": "Up the stairs into the café",

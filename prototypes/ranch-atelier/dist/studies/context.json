@@ -1732,6 +1732,140 @@
       ],
       "recorded": "2026-10-23, by the study as it was made"
     },
+    "light": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: how it's drawn (identity.rendering on 368 games)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/rendering/RENDERING_STUDY.md",
+          "note": "Light families per game; used to pick the looks"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Tiny Glade",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=tiny-glade",
+          "note": "Applied: soft sky and ground bounce, no black shadows"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: GRIS",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=steam-683320",
+          "note": "Applied: flat pastel wash, one palette per chapter"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Outer Wilds",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=steam-753640",
+          "note": "Applied: hard sun with no air, campfire against cold night"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: DREDGE",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=steam-1562430",
+          "note": "Applied, tuned down: lantern pools for the Halloween mood"
+        },
+        {
+          "k": "devblog",
+          "t": "GDC 2016: Making the world of Firewatch (Jane Ng)",
+          "href": "https://media.gdcvault.com/gdc2016/Presentations/Ng_Jane_MakingTheWorld.pdf",
+          "note": "Applied: sky colours first, layered fog depth, time-of-day tables"
+        },
+        {
+          "k": "devblog",
+          "t": "Game Developer: vorticles and wind in Ghost of Tsushima",
+          "href": "https://www.gamedeveloper.com/design/using-vorticles-to-simulate-wind-in-i-ghost-of-tsushima-i-",
+          "note": "Read for the golden-hour world that the wind and light share"
+        },
+        {
+          "k": "devblog",
+          "t": "GDC 2024: 3D toon rendering in Hi-Fi Rush",
+          "href": "https://gdcvault.com/play/1034251/3D-Toon-Rendering-in-Hi",
+          "note": "Applied: hard bands and the world pulsing on the beat"
+        },
+        {
+          "k": "devblog",
+          "t": "Unity: crafting Dredge's cozy atmospheric horror",
+          "href": "https://unity.com/resources/crafting-dredge-cozy-atmospheric-horror",
+          "note": "Applied: fog and lantern pools, kept cosy"
+        },
+        {
+          "k": "devblog",
+          "t": "Game Developer: layering worlds in Cocoon",
+          "href": "https://www.gamedeveloper.com/design/the-challenges-of-laying-worlds-upon-worlds-in-puzzle-game-cocoon",
+          "note": "Applied: one colour and one light per world"
+        },
+        {
+          "k": "design",
+          "t": "Thumbsticks: GDC 2015, the art of Firewatch",
+          "href": "https://www.thumbsticks.com/gdc-2015-the-art-of-firewatch/"
+        },
+        {
+          "k": "design",
+          "t": "Mobius Digital: changing the Outer Wilds art style",
+          "href": "https://www.mobiusdigitalgames.com/news/changing-the-outer-wilds-art-style"
+        },
+        {
+          "k": "design",
+          "t": "Creative Review: Gris, watercolour comes to life",
+          "href": "https://www.creativereview.co.uk/watercolour-paintings-come-to-life-in-platform-game-gris/"
+        },
+        {
+          "k": "design",
+          "t": "80.lv: Tiny Glade lighting update",
+          "href": "https://80.lv/articles/tiny-glade-s-update-with-movable-clutter-multiple-lights-is-here"
+        },
+        {
+          "k": "design",
+          "t": "Muchopixels: Angus Doolan on Unpacking",
+          "href": "https://www.muchopixels.com/post/angus-doolan-interview",
+          "note": "Applied: warm window light as the room's clock"
+        },
+        {
+          "k": "design",
+          "t": "GamesBeat: Polyarc's Moss",
+          "href": "https://gamesbeat.com/polyarcs-moss-hides-clever-vr-game-design-under-its-cuteness/"
+        },
+        {
+          "k": "tutorial",
+          "t": "Alan Zucconi: Journey's sand shader, part 1",
+          "href": "https://www.alanzucconi.com/2019/10/08/journey-sand-shader-1/",
+          "note": "Applied: backlight, warm bounce, rim"
+        },
+        {
+          "k": "tutorial",
+          "t": "thatgamecompany: sand rendering in Journey (slides)",
+          "href": "https://slidetodoc.com/sand-rendering-in-journey-john-edwards-thatgamecompany-shipping/"
+        },
+        {
+          "k": "tutorial",
+          "t": "80.lv: the making of Hi-Fi Rush's toon style",
+          "href": "https://80.lv/articles/the-making-of-hi-fi-rush-s-3d-toon-rendering-style"
+        },
+        {
+          "k": "canon",
+          "t": "LOOK.md: the Abbie's World look",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/look/LOOK.md",
+          "note": "The sky behind every page; no masks, no vignette"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0045 Inspiring Shaders",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md",
+          "note": "Painted Brush, Watercolour and Paint-the-world pair with these lights"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0028 Storybook Light",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/storybook/STORYBOOK_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "This study's doc",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/light/LIGHT_STUDY.md"
+        }
+      ],
+      "recorded": "2026-10-23, as the study was made"
+    },
     "shaders": {
       "items": [
         {
