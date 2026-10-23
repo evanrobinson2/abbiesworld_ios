@@ -383,6 +383,9 @@ function ribbon(curve, w, t, segs, mat, name) {
  const uv = []; for (let i = 0; i <= segs; i++) for (let j = 0; j < 8; j++) uv.push(j / 8 * 2, i / segs * 6); g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); g.computeVertexNormals();
  const o = new T.Mesh(g, mat); o.name = name; o.userData.frames = fr; return o;
 }
+// One charm on its own, without its chain (for reference renders and side-by-side with its Meshy model).
+export async function charmModel(id) { await three(); const c = charmMesh(id, materials(look(), styleOf('classic'))); return c.children[1]; }
+
 export function buildBackpack(l = look(), {charms = []} = {}) {
  const st = styleOf(l.style), m = materials(l, st), shape = SIL[st.id]();
  const half = DEPTH[st.id] ?? .15, bev = .045, puff = PUFF[st.id] ?? .2;
