@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-world-look",
+      "date": "2026-10-23",
+      "title": "World look: three looks, one switch",
+      "line": "Developer tools only: Storybook (the town's own), Sunday toon (the Ranch's original) and the new Comic ink, thick black cartoon outlines. Open /town?dev and use the World look box.",
+      "image": "/whats-new/2026-10-23-world-look.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF4XcQhA4n7xJdKC6b5zPq8",
+      "threadTitle": "Shaders article",
+      "tour": false,
+      "link": "/town?dev"
+    },
+    {
       "id": "2026-10-23-skatepark-hifi",
       "date": "2026-10-23",
       "title": "A proper skate park",
