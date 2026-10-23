@@ -5,7 +5,7 @@
 const {account}=require('../lib/account.cjs');
 const {wallet}=require('../lib/wallet.cjs');
 // worlds, plus the gold coins and charms a player has earned (the town and the games keep those)
-const KEYS=new Set(['abbies-simulations-v1','abbies-suburban-v1','aw-memory-coins','aw-backpack']);
+const KEYS=new Set(['abbies-simulations-v1','abbies-suburban-v1','aw-memory-coins','aw-backpack','aw-cell-creation','aw-cell-clears']);
 const MAX=4000000;
 const json=(res,code,body)=>{res.statusCode=code;res.setHeader('Content-Type','application/json');res.end(JSON.stringify(body));};
 

@@ -8,7 +8,7 @@ here = pathlib.Path(__file__).parent
 root = here.parents[2]
 sim = root / 'prototypes/ranch-atelier/dist/simulations'
 parts = []
-for rel in ['abbietown/regions.mjs', 'worlds/worlds.mjs']:
+for rel in ['abbietown/regions.mjs', 'worlds/worlds.mjs', 'worlds/boards.mjs']:
     code = (sim / rel).read_text()
     code = re.sub(r'^import .*?;\n', '', code, flags=re.M)
     code = re.sub(r'^export ', '', code, flags=re.M)

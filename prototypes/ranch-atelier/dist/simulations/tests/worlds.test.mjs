@@ -42,3 +42,39 @@ test('ties on the TV go to the Captain\'s Hat', () => {
  assert.deepEqual(tally({abbie: 'go', ani: 'stay', daddy: 'go'}, 'ani'), {go: true, by: 'majority'});
  assert.deepEqual(tally({abbie: 'go', ani: 'stay'}, 'ani'), {go: false, by: 'hat'});
 });
+
+// ---- round 2: boards ---------------------------------------------------------------------------------------
+import {newLibrary, newBoard, switchTo, rename, place, archive, restore, overview, layout, spiral, tileCount, pointerOf} from '../worlds/boards.mjs';
+test('a new board is blank, shown at once, and leaves the old one untouched', () => {
+ const a = newLibrary(), b = newBoard(a);
+ assert.equal(b.boards.length, 2); assert.equal(b.current, 'board-2'); assert.equal(tileCount(b.boards[1]), 0);
+ assert.deepEqual(b.boards[0], a.boards[0]);
+ assert.equal(newBoard(b).boards[2].name, 'A place of your own 2');
+});
+test('a copy keeps where it came from and edits do not touch the original', () => {
+ let l = newBoard(newLibrary(), {from: 'board-1'}); const c = l.boards[1];
+ assert.equal(c.made, 'copy'); assert.equal(c.from, 'board-1'); assert.equal(c.name, 'Copy of Our ranch');
+ l = place(l, c.id, 2, 0, 'pond'); assert.equal(tileCount(l.boards[1]), tileCount(l.boards[0]) + 1);
+});
+test('switching only moves the pointer; a board in the attic cannot be shown until restored', () => {
+ let l = newBoard(newLibrary(), {name: 'Moon ranch', land: 'moon'});
+ assert.equal(switchTo(l, 'board-1').current, 'board-1'); assert.deepEqual(pointerOf(switchTo(l, 'board-1')), {key: 'current', id: 'board-1'});
+ l = archive(l, 'board-2'); assert.equal(l.current, 'board-1'); assert.throws(() => switchTo(l, 'board-2'));
+ l = restore(l, 'board-2'); assert.equal(l.current, 'board-2'); assert.equal(l.boards.length, 2);
+ assert.throws(() => archive(archive(l, 'board-2'), 'board-1'), /at least one/);
+});
+test('names are trimmed, short and unique', () => {
+ let l = newBoard(newLibrary(), {name: '  Dino   Valley  '}); assert.equal(l.boards[1].name, 'Dino Valley');
+ assert.throws(() => rename(l, 'board-2', 'Our ranch')); assert.throws(() => rename(l, 'board-2', '   '));
+ assert.equal(rename(l, 'board-2', 'x'.repeat(50)).boards[1].name.length, 32);
+});
+test('the zoomed-out view puts the shown board in the middle and keeps one open slot', () => {
+ let l = newBoard(newBoard(newLibrary())); l = switchTo(l, 'board-1'); const o = overview(l);
+ assert.deepEqual(o.boards[0], {id: 'board-1', q: 0, r: 0}); assert.equal(o.boards.length, 3);
+ const seen = new Set([...o.boards, o.openSlot].map(s => s.q + ',' + s.r)); assert.equal(seen.size, 4);
+ assert.equal(new Set(spiral(19).map(s => s.q + ',' + s.r)).size, 19);
+});
+test('the stable map keeps each board in its slot when you switch', () => {
+ const l = newBoard(newBoard(newLibrary())), a = layout(l), b = layout(switchTo(l, 'board-1'));
+ assert.deepEqual(a, b); assert.equal(a.boards.length, 3); assert.deepEqual(a.openSlot, spiral(4)[3]);
+});

@@ -91,6 +91,11 @@ pieces of one memory, keep the first minute short, and share the kit with the sc
     device speech only when asked. `innerVoice({font}).say(text, {choices, hold})`.
   - With `coin-reward.mjs`, `memory-coins.mjs` and `inventory.mjs`, a new memory place starts with the look, the voice,
     the coins and the pocket already working.
+- Dialog scripts (`memory-kit/dialog.mjs`, round 5): a place's talk is JSON, `{start, nodes: {id: {say, hold, choices: [{label, next, if, set, do}], next, branch, set, do, once}}}`,
+  run with `dialog(voice, {actions, key}).run(script)`. Conditions are `flag`, `!flag`, `flag=value` or arrays; flags can persist
+  with `key`. It only calls `voice.say()`, so it needs no DOM of its own (unit test: `tools/minigame-test/dialog.test.mjs`).
+  Daddy's call in the basement is the first script; the Moon Mission reuses the same format.
+- Both ways up now land in the café diorama (`/studies/cafe/diorama.html?from=basement`), which walks her up the stairs.
 - Test hooks: `?ending` (Daddy calls soon after it opens), `?stay` (powers down but stays). The end-to-end test
   (`tools/minigame-test/basement-flow.cjs`) now plays through to the power-down.
 

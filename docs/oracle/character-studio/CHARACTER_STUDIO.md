@@ -137,6 +137,17 @@ owns the run and waits on Evan's go), baked with the same bake step; CMU and Qua
 shovel, bat, bottle, torch, chair, ledge, ladder) bring cut moves back. A webcam take of Evan in the browser
 (MediaPipe) is the fallback for anything still missing; never the kids.
 
+## Meshy figures only (2026-10-23, 18:39Z)
+Evan, after the quality pass: "I still see bullshit player meshes and no meshy heroes". The cast is now only
+Meshy-made figures: the two Bruiser-study Meshy brutes (task ids in `tools/brute-fight/fighters.json`), cleaned up and
+skinned by the Brute Fight study. They already carry the studio's 20 bone names, so every move plays on them with no
+alias map. The wooden and smooth mannequins, the Quaternius game figure, Young Daddy, the girl and the recipe characters
+are `hidden` in `bodies.mjs`: loadable by id (the Scores room's reference pane still plays the original Quaternius clip
+on its own rig) but never offered. The Crowd room's townsfolk are the two brutes too, and the picture blocks are
+rendered on the red brute. Known weakness: the brutes' skin weights are auto-made, so shoulders can tear on big arm
+moves; proper weights, and the new Meshy heroes (AW-STUDY-0043, with the full Meshy animation library), wait on Evan's
+"go" in the Meshy hero thread. When they land they go at the top of `BODIES`.
+
 ## What's next
 
 - Inertialized transitions between moves (Bollo), so a change of move keeps momentum.

@@ -139,8 +139,23 @@
           "faces": 1538,
           "change": "both legs 4 px left (sweep: R/L shifts -4/-4 best; -8/-4 0.835, -4/+4 0.831). Also fixed the target mask: the reference stand pole between the legs was counted as mannequin (+0.002, not the model)",
           "lesson": "Check the target before the model: a stray pole in the mask shows up as a thin orange stripe between parts. Then legs sit on their centre lines (same as leap rep 7). Gains are shrinking (+0.013): next pose."
+        },
+        {
+          "round": 4,
+          "iou": 0.855,
+          "faces": 1538,
+          "change": "ankle and toe on the viewer-right leg +10 px in x (sweep +4 0.850, +8 0.854, +12 0.855); head x offset scored flat",
+          "lesson": "Move the joint, not the part: shifting the ankle re-aims the whole shin. A part whose photo-only and model-only misses are equal on both sides (the head) is mis-shaped, not mis-placed."
+        },
+        {
+          "round": 5,
+          "iou": 0.855,
+          "faces": 1538,
+          "change": "none kept. head taper/size sweeps best 0.857 (+0.002); arm x shifts 0.830-0.854 (all same or worse)",
+          "lesson": "Plateau signal again: every sweep inside 0.005 means the pose is done; move to a new pose instead of polishing."
         }
-      ]
+      ],
+      "status": "plateau at 0.855 after 5 reps; next pose waits on Evan"
     }
   ]
 }

@@ -38,6 +38,10 @@ export const ZONES = {
  'capsule': {name: 'The capsule', scene: 'interior', mood: 'light', size: [4, 3], anchor: {zone: 'launch-pad'}},
  'orbit': {name: 'Earth orbit', scene: 'space', mood: 'dark', size: [40, 40], anchor: {off: 'orbit'}},
  'lunar-descent': {name: 'Lunar descent', scene: 'space', mood: 'dark', size: [2000, 2000], anchor: {off: 'moon'}},
+ 'airlock': {name: 'The airlock', scene: 'interior', mood: 'dark', size: [6, 5], anchor: {off: 'moon'}},
+ 'habitat': {name: 'The habitat', scene: 'interior', mood: 'dark', size: [16, 12], anchor: {off: 'moon'}},
+ 'star-child-cave': {name: 'The Star Child’s cave', scene: 'moon', mood: 'dark', size: [40, 30], anchor: {off: 'moon'}},
+ 'crater-road': {name: 'The crater road', scene: 'moon', mood: 'dark', size: [60, 700], anchor: {off: 'moon'}},
  'moon-base-pad': {name: 'Moon base pad', scene: 'moon', mood: 'dark', size: [300, 300], anchor: {off: 'moon'}},
 };
 

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a0b2e">
+<title>Abbie's Café</title>
+<!-- AW-STUDY-0013: the café as a diorama. The real room model (tools/cafe-build, 65 placed assets), cut away like a dollhouse,
+     lit by one signal (the time of day) that drives sun, lamps, neon, the disco ball and the sky together. Abbie walks the
+     floor; the café's own things answer (register, old door, jukebox, photo booth, front doors). No words in play: the one
+     text is her inner voice, as in the basement. Entering: ?from=town | ?from=basement. Test hooks: ?t=day|dusk|night, window.__cafe. -->
+<style>
+:root{color-scheme:dark}
+html,body{margin:0;height:100%;background:#1a0b2e;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+ font-family:ui-rounded,"SF Pro Rounded","Avenir Next Rounded",system-ui,sans-serif}
+canvas#c{display:block;width:100vw;height:100dvh;outline:none}
+#veil{position:fixed;inset:0;background:#0b0412;opacity:1;pointer-events:none;transition:opacity .8s ease;z-index:20}
+#veil.clear{opacity:0}
+#spark{position:fixed;left:50%;top:50%;width:46px;height:46px;margin:-23px;pointer-events:none;z-index:21;transition:opacity .4s}
+#spark.off{opacity:0}
+#spark svg{width:100%;height:100%;animation:spin 2.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#sky{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;
+ border:1px solid rgba(255,255,255,.35);padding:0;cursor:pointer;z-index:6;
+ background:radial-gradient(circle at 34% 26%,rgba(255,255,255,.6),rgba(255,255,255,.1) 46%,rgba(255,120,190,.28));
+ box-shadow:inset 0 -7px 14px rgba(0,0,0,.28),inset 0 5px 10px rgba(255,255,255,.4),0 8px 20px rgba(0,0,0,.35);transition:transform .12s}
+#sky:active{transform:scale(.92)}
+#sky svg{width:30px;height:30px;display:block;margin:auto}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="veil"></div>
+<div id="spark"><svg viewBox="0 0 24 24"><path d="M12 1.5l2.6 7 7.4.4-5.8 4.6 2 7.2L12 16.7 5.8 20.7l2-7.2L2 8.9l7.4-.4z" fill="#ffd24a"/></svg></div>
+<button id="sky" aria-label="Change the time of day"></button>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from '/vendor/loaders/GLTFLoader.js';
+import {OrbitControls} from '/vendor/OrbitControls.js';
+import {playerCamera, presentation, volunteer} from '/simulations/presentation-layer.mjs';
+import {innerVoice} from '/simulations/memory-kit/inner-voice.mjs';
+import {loadWorker, setPose, tween, stepTweens, POSES} from '/simulations/worker-rig.mjs';
+import {navGrid} from '/simulations/nav-grid.mjs';
+import {cafeSound} from '/simulations/cafe-sound.mjs';
+import {KEY, BASEMENT, inventory, takeKey} from '/simulations/cafe-key.mjs';
+
+const q = new URLSearchParams(location.search);
+const FROM = q.get('from') || 'town';
+// the game's contract: opened with ?from=<url>, go back by setting location.href to it. Our own places say who they are instead.
+const BACK = /^\/(?!\/)/.test(FROM) ? FROM : '/town?at=town:cafe-door';
+const $ = id => document.getElementById(id);
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+
+// ---------- renderer, camera ----------
+const canvas = $('c');
+const renderer = new T.WebGLRenderer({canvas, antialias: true, powerPreference: 'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+const scene = new T.Scene();
+const camera = playerCamera(new T.PerspectiveCamera(30, 1, .5, 120));
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.dampingFactor = .09; controls.enablePan = false;
+controls.minPolarAngle = .62; controls.maxPolarAngle = 1.22;
+controls.minAzimuthAngle = -1.15; controls.maxAzimuthAngle = .3;   // the camera stays on the street side, so the near walls stay cut away
+const ROOM = {x: 6, z: 5, h: 4.2}, CENTER = new T.Vector3(0, 1.1, 0);
+let fitDist = 24;
+function fit() {
+  const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h;
+  const R = 7.6, vf = camera.fov * Math.PI / 180, hf = 2 * Math.atan(Math.tan(vf / 2) * camera.aspect);
+  fitDist = R / Math.sin(Math.min(vf, hf) / 2) * .84;
+  controls.minDistance = fitDist * .22; controls.maxDistance = fitDist * 1.35; camera.updateProjectionMatrix();
+}
+function frame(az = -.42, polar = camera.aspect < .8 ? .8 : 1.0, dist = camera.aspect < .8 ? .86 : 1) {
+  const d = fitDist * dist; camera.position.set(CENTER.x + d * Math.sin(polar) * Math.sin(az), CENTER.y + d * Math.cos(polar), CENTER.z + d * Math.sin(polar) * Math.cos(az));
+  controls.target.copy(CENTER); controls.update();
+}
+addEventListener('resize', () => { const k = camera.position.distanceTo(controls.target) / fitDist; fit(); const dir = camera.position.clone().sub(controls.target).normalize(); camera.position.copy(controls.target).addScaledVector(dir, fitDist * k); });
+fit(); frame();
+
+// ---------- the time of day: one signal, 0 = day, .5 = dusk, 1 = night ----------
+const hr = new Date().getHours() + new Date().getMinutes() / 60;
+const clockMood = hr >= 7 && hr < 9 ? .18 : hr >= 9 && hr < 16.5 ? .08 : hr >= 16.5 && hr < 19 ? .52 : 1;
+let mood = q.get('t') === 'day' ? 0 : q.get('t') === 'dusk' ? .5 : q.get('t') === 'night' ? 1 : clockMood, moodGoal = mood;
+const STOPS = {   // [day, dusk, night]
+  skyTop: ['#bfe3ff', '#7a5aa8', '#160a2e'], skyLow: ['#ffe9d6', '#ff9fb8', '#43204f'],
+  sun: ['#fff0d0', '#ffb27a', '#8fa8ff'], sunI: [2.7, 1.5, .55], sunY: [15, 8, 11],
+  hemiSky: ['#cfe8ff', '#b79ad6', '#40356e'], hemiGround: ['#f4cfae', '#c78aa0', '#1d1030'], hemiI: [1.15, .8, .5],
+  exposure: [1.0, 1.0, 1.08], lamp: [.55, 1.1, 1.8], neon: [.8, 1.25, 1.9], disco: [.15, .7, 1.0], halo: [.25, .7, 1]
+};
+const C = (k) => STOPS[k].map(c => new T.Color(c));
+const mix = (k, m) => { const s = STOPS[k]; const a = m < .5 ? 0 : 1, t = m < .5 ? m * 2 : (m - .5) * 2; if (typeof s[0] === 'number') return lerp(s[a], s[a + 1], t); const o = new T.Color(s[a]); return o.lerp(new T.Color(s[a + 1]), t); };
+const skyCv = document.createElement('canvas'); skyCv.width = 4; skyCv.height = 256; const skyTex = new T.CanvasTexture(skyCv); skyTex.colorSpace = T.SRGBColorSpace; scene.background = skyTex;
+function paintSky(m) { const g = skyCv.getContext('2d'), gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, '#' + mix('skyTop', m).getHexString()); gr.addColorStop(1, '#' + mix('skyLow', m).getHexString()); g.fillStyle = gr; g.fillRect(0, 0, 4, 256); skyTex.needsUpdate = true; }
+
+const hemi = new T.HemisphereLight('#fff', '#000', 1); scene.add(hemi);
+const sun = new T.DirectionalLight('#fff', 2); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, {left: -9, right: 9, top: 9, bottom: -9, near: 1, far: 40}); sun.shadow.bias = -.0005; sun.shadow.normalBias = .03; sun.shadow.radius = 3;
+sun.target.position.set(0, 0, 0); scene.add(sun, sun.target);
+
+// a small studio of pink, cyan and warm panels so metal, glass and the disco ball have something to reflect
+{ const pm = new T.PMREMGenerator(renderer), es = new T.Scene();
+  const sph = new T.Mesh(new T.SphereGeometry(10, 24, 16), new T.MeshBasicMaterial({side: T.BackSide, vertexColors: true})), pos = sph.geometry.attributes.position, col = [];
+  const top = new T.Color('#ffd9ee'), bot = new T.Color('#5a2f78'); for (let i = 0; i < pos.count; i++) { const k = (pos.getY(i) / 10 + 1) / 2, c = bot.clone().lerp(top, k); col.push(c.r, c.g, c.b); }
+  sph.geometry.setAttribute('color', new T.Float32BufferAttribute(col, 3)); es.add(sph);
+  const panel = (c, x, y, z, w, h) => { const m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({color: c, side: T.DoubleSide})); m.position.set(x, y, z); m.lookAt(0, 0, 0); es.add(m); };
+  panel('#ff4fa8', -8, 3, 2, 6, 4); panel('#38e8ff', 8, 2, -3, 6, 4); panel('#fff1d6', 0, 9, 0, 8, 8); panel('#ffb36b', 3, 1, 8, 6, 3);
+  scene.environment = pm.fromScene(es, .03).texture; scene.environmentIntensity = .45; pm.dispose(); }
+
+// ---------- sound, voice ----------
+const snd = cafeSound();
+const voice = innerVoice({font: 'ui-rounded,"SF Pro Rounded","Avenir Next Rounded",system-ui', size: 22, onTouch: () => snd.unlock()});
+{ const st = document.createElement('style'); st.textContent = '.aw-caption{text-shadow:0 1px 10px rgba(10,0,20,.75),0 0 2px rgba(10,0,20,.6)}.aw-choice{text-shadow:0 1px 10px rgba(10,0,20,.75)}'; document.head.append(st); }
+
+// ---------- load the room ----------
+const loader = new GLTFLoader();
+const load = url => new Promise((ok, no) => loader.load(url, g => ok(g.scene), undefined, no));
+const roomRoot = await load('/models/cafe-room/model.glb'); scene.add(roomRoot);
+const node = new Map(); roomRoot.traverse(o => { if (o.name && !node.has(o.name)) node.set(o.name, o); });
+const N = n => node.get(n);
+roomRoot.updateMatrixWorld(true);
+const bbox = (o, b = new T.Box3()) => b.setFromObject(o);
+
+// cut the room away like a dollhouse: the street wall, the near side wall and the ceiling go; the rest stays
+const CUT = ['sky', 'wall_front', 'wall_left', 'window_left', 'ceiling', 'ceiling_vent', 'downlights', 'soffit_teal', 'stars_pink'];
+CUT.forEach(n => { if (N(n)) N(n).visible = false; });
+// the front doors stay: propped open, they are the way out
+const doors = ['entrance_door_l', 'entrance_door_r'].map(n => N(n)).filter(Boolean);
+for (const d of doors) { d.userData.keep = true; scene.attach(d); d.rotation.y = d.name.endsWith('_l') ? 1.4 : -1.4; }   // propped open inwards
+
+// materials: glass becomes plain alpha (no transmission pass on a phone), neon is remembered so the time of day can drive it
+const neonMats = [], glowPts = [];
+const seen = new Set();
+roomRoot.traverse(o => {
+  if (!o.isMesh) return;
+  const m = o.material; if (!m) return;
+  o.castShadow = !m.transparent && !/Glass|Light_/.test(m.name); o.receiveShadow = true;
+  if (!seen.has(m)) {
+    seen.add(m);
+    if (m.transmission > 0) { m.transmission = 0; m.transparent = true; m.opacity = Math.min(m.opacity, .3); m.depthWrite = false; }
+    if (/^(Glass_Neon|Light_|Glass_Led)/.test(m.name) || (m.emissive && m.emissive.getHex() > 0 && m.emissiveIntensity > .5)) neonMats.push({m, base: m.emissiveIntensity || 1});
+  }
+});
+for (const d of doors) d.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; if (o.material?.name === 'Timber_DoorDark') { o.material = o.material.clone(); o.material.color.set('#7b4a3a'); o.material.emissive = new T.Color('#5a2a22'); o.material.emissiveIntensity = .35; } } });
+
+// ---------- measure what is really there ----------
+const B = n => N(n) ? bbox(N(n)) : null;
+const at = n => { const b = B(n); return b ? b.getCenter(new T.Vector3()) : new T.Vector3(); };
+const deck = B('bar_deck'), DECK_X = deck.min.x + .02, DECK_Y = deck.max.y;
+const floorAt = (x, z) => x > DECK_X && z > -5 && z < 5 ? DECK_Y : 0;
+const dance = B('dance_floor'), danceC = dance.getCenter(new T.Vector3());
+// what she stands on: the floor, the bar deck step, the rugs, the beanbags she walks over (cast straight down)
+const groundObjs = ['plank_floor', 'bar_deck', 'dance_floor', 'star_rug', 'confetti_carpet', 'beanbag_lime', 'beanbag_lime_big', 'beanbag_orange', 'beanbag_orange_big', 'beanbags_pink_1', 'beanbags_pink_2', 'plush_toys'].map(n => N(n)).filter(Boolean);
+const gRay = new T.Raycaster(); gRay.layers.set(0); const gDir = new T.Vector3(0, -1, 0), gFrom = new T.Vector3();
+const ground = (x, z) => { gRay.set(gFrom.set(x, 3, z), gDir); const h = gRay.intersectObjects(groundObjs, true)[0]; return h ? h.point.y : floorAt(x, z); };
+
+// ---------- the walking grid: what is solid is read from the meshes themselves ----------
+const nav = navGrid({minX: -5.6, maxX: 5.6, minZ: -4.65, maxZ: 6.4, cell: .12});
+const SOLID = ['bar_stools_1', 'bar_stools_2', 'bar_stools_3', 'bar_stools_4', 'cup_dj_booth', 'jukebox', 'speakers_1', 'speakers_2', 'photo_booth', 'cup_shelves', 'boombox'];   // beanbags and plush are soft: she can walk over them
+const WALKER = .2;
+for (const n of SOLID) N(n)?.traverse(o => { if (!o.isMesh) return; const b = bbox(o); if (b.max.y > DECK_Y + .05 && b.min.y < 1.3 && b.max.y - b.min.y > .12) nav.block(b.min.x, b.min.z, b.max.x, b.max.z, WALKER); });
+// the bar is an L whose bounding box is the whole staff area, so it is described by hand: the counter, its arm to the wall, and the back counter
+nav.block(3.7, -2.45, 4.6, 1.85, WALKER); nav.block(4.2, 1.85, 5.7, 2.65, WALKER); nav.block(5.32, -1.85, 6, 1.85, WALKER);
+nav.block(-6, 4.5, -.82, 7, 0); nav.block(.82, 4.5, 6, 7, 0);   // the street wall, with the front doors' gap
+nav.block(-6, -4.75, 6, -5.2, 0);
+const walkable = (x, z) => nav.free(x, z);
+// the diorama's base: a dark plinth under the floor, drawn for the player (presentation layer, not part of the fiction)
+{ const plinth = presentation(new T.Mesh(new T.BoxGeometry(12.5, .5, 10.5), new T.MeshStandardMaterial({color: '#2a1238', roughness: .8})), {purpose: 'diorama base'}); plinth.position.set(0, -.27, 0); plinth.raycast = () => {}; scene.add(plinth); }
+
+// ---------- lamps, neon and the disco ball ----------
+const lamps = [];
+{ const ds = [...node.values()].filter(o => /^downlight_\d+$/.test(o.name)); const pick = ds.filter((_, i) => i % Math.max(1, Math.floor(ds.length / 4)) === 0).slice(0, 4);
+  for (const d of pick) { const p = d.getWorldPosition(new T.Vector3()); const l = new T.SpotLight('#ffd8a8', 0, 9, .85, .75, 1.3); l.position.copy(p); l.target.position.set(p.x, 0, p.z); scene.add(l, l.target); lamps.push(l); } }
+const neonPink = new T.PointLight('#ff4fa8', 0, 7, 1.5); neonPink.position.set(4.3, 3.1, 0); scene.add(neonPink);
+const neonCyan = new T.PointLight('#38e8ff', 0, 7, 1.5); neonCyan.position.set(3.6, 2.6, -3.6); scene.add(neonCyan);
+const discoPos = at('disco_ball_big'); const discoLight = new T.PointLight('#ff7ad9', 0, 8, 1.2); discoLight.position.copy(discoPos).add(new T.Vector3(0, -.5, 0)); scene.add(discoLight);
+const lampMat = new Map();
+// the disco balls hang from a cord that goes up out of the cut-away ceiling
+for (const n of ['disco_ball_big', 'disco_ball_small']) { const b = B(n); if (!b) continue; const c = b.getCenter(new T.Vector3()); const cord = new T.Mesh(new T.CylinderGeometry(.012, .012, 3, 6), new T.MeshStandardMaterial({color: '#2a1a35', roughness: .6})); cord.position.set(c.x, b.max.y + 1.5, c.z); scene.add(cord); }
+
+// soft glow around every neon tube and bulb (an additive point sprite: no post pass needed)
+const dotTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(.25, 'rgba(255,255,255,.55)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; return t; })();
+let glow = null;
+{ const pos = [], col = [];
+  roomRoot.traverse(o => { if (!o.isMesh || !o.visible) return; let hidden = false; for (let p = o; p; p = p.parent) if (p.visible === false) hidden = true; if (hidden) return;
+    const m = o.material; if (!/^(Glass_Neon|Light_Bulb)/.test(m?.name || '')) return; const b = bbox(o); if (b.isEmpty()) return;
+    const c = b.getCenter(new T.Vector3()); pos.push(c.x, c.y, c.z); const e = m.emissive.clone(); col.push(e.r, e.g, e.b); });
+  const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new T.Float32BufferAttribute(col, 3));
+  glow = new T.Points(g, new T.PointsMaterial({map: dotTex, size: .55, sizeAttenuation: true, vertexColors: true, transparent: true, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false, opacity: .5}));
+  glow.frustumCulled = false; scene.add(glow); }
+
+// mirror-ball light: dots of coloured light sweep the dance floor
+const DOTS = 56, dots = new T.InstancedMesh(new T.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({map: dotTex, transparent: true, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false}), DOTS * 2);
+dots.frustumCulled = false; dots.renderOrder = 3; dots.raycast = () => {}; scene.add(dots);
+const dotCols = ['#ff5fb5', '#3ee6ff', '#ffe36a', '#b277ff', '#7dff9b'].map(c => new T.Color(c));
+const _m = new T.Matrix4(), _c = new T.Color();
+function stepDisco(t, k) {
+  const balls = [[at('disco_ball_big'), .22, 1], [at('disco_ball_small'), -.31, 0.8]]; let n = 0;
+  for (const [p, sp, sz] of balls) for (let i = 0; i < DOTS; i++) {
+    const ring = i % 7, az = (i / DOTS) * Math.PI * 2 * 3.1 + t * sp * 2.1, el = .55 + ring * .12;   // angle below horizontal
+    const dx = Math.cos(el) * Math.cos(az), dz = Math.cos(el) * Math.sin(az), dy = -Math.sin(el);
+    const hy = p.y - .31, tt = hy / -dy, x = p.x + dx * tt, z = p.z + dz * tt;
+    const ok = x > -5.7 && x < 3.0 && z > -4.8 && z < 4.8 && k > .02;
+    const s = ok ? (.2 + ring * .03) * sz * (1 + .25 * Math.sin(t * 5 + i)) * Math.min(1, k * 1.5) : 0;
+    _m.makeScale(s || 1e-4, 1, s || 1e-4).setPosition(x, .09 + ring * .001, z); dots.setMatrixAt(n, _m); _c.copy(dotCols[(i + Math.floor(t * 1.3)) % dotCols.length]).multiplyScalar(.9 + .4 * Math.sin(t * 3 + i * 1.7)); dots.setColorAt(n, _c); n++;
+  }
+  dots.instanceMatrix.needsUpdate = true; if (dots.instanceColor) dots.instanceColor.needsUpdate = true;
+}
+
+// ---------- applying the one signal ----------
+function applyMood(m, t = 0) {
+  paintSky(m);
+  const hc = mix('hemiSky', m), gc = mix('hemiGround', m); hemi.color.copy(hc); hemi.groundColor.copy(gc); hemi.intensity = mix('hemiI', m);
+  sun.color.copy(mix('sun', m)); sun.intensity = mix('sunI', m); const sy = mix('sunY', m); sun.position.set(-9, sy, 8).multiplyScalar(1.5);
+  renderer.toneMappingExposure = mix('exposure', m); scene.environmentIntensity = lerp(.55, .3, m);
+  const lamp = mix('lamp', m), neon = mix('neon', m); lamps.forEach(l => l.intensity = lamp * 3.2);
+  neonPink.intensity = neon * 1.8; neonCyan.intensity = neon * 1.4;
+  for (const {m: mat, base} of neonMats) mat.emissiveIntensity = base * neon;
+  if (glow) glow.material.opacity = .15 + .5 * mix('halo', m);
+}
+paintSky(mood); applyMood(mood);
+
+// ---------- steam and confetti ----------
+const puffs = [];
+const puffMat = new T.SpriteMaterial({map: dotTex, color: '#ffffff', transparent: true, opacity: .0, depthWrite: false});
+function emitSteam(p, n = 14, spread = .06) { for (let i = 0; i < n; i++) { const sp = new T.Sprite(puffMat.clone()); sp.position.copy(p).add(new T.Vector3((Math.random() - .5) * spread, 0, (Math.random() - .5) * spread)); sp.scale.setScalar(.06); sp.userData = {age: -i * .08, life: 1.4 + Math.random() * .8, v: new T.Vector3((Math.random() - .5) * .05, .22 + Math.random() * .12, (Math.random() - .5) * .05)}; sp.raycast = () => {}; scene.add(sp); puffs.push(sp); } }
+function stepPuffs(dt) { for (let i = puffs.length - 1; i >= 0; i--) { const s = puffs[i], u = s.userData; u.age += dt; if (u.age < 0) { s.material.opacity = 0; continue; } const k = u.age / u.life; if (k >= 1) { scene.remove(s); s.material.dispose(); puffs.splice(i, 1); continue; } s.position.addScaledVector(u.v, dt); s.scale.setScalar(.06 + k * .32); s.material.opacity = Math.sin(k * Math.PI) * .42; } }
+const CONF = 140, confGeo = new T.BufferGeometry(), confPos = new Float32Array(CONF * 3), confCol = new Float32Array(CONF * 3), confV = [];
+for (let i = 0; i < CONF; i++) { confPos.set([danceC.x + (Math.random() - .5) * 5, Math.random() * 4, danceC.z + (Math.random() - .5) * 4], i * 3); _c.copy(dotCols[i % 5]); confCol.set([_c.r, _c.g, _c.b], i * 3); confV.push(.12 + Math.random() * .2, Math.random() * 6); }
+confGeo.setAttribute('position', new T.BufferAttribute(confPos, 3)); confGeo.setAttribute('color', new T.BufferAttribute(confCol, 3));
+const confetti = new T.Points(confGeo, new T.PointsMaterial({size: .07, vertexColors: true, transparent: true, opacity: .85, depthWrite: false, sizeAttenuation: true})); confetti.frustumCulled = false; confetti.raycast = () => {}; scene.add(confetti);
+function stepConfetti(t, dt, k) { for (let i = 0; i < CONF; i++) { let y = confPos[i * 3 + 1] - confV[i * 2] * dt * (.4 + k); if (y < .05) y = 4.1; confPos[i * 3 + 1] = y; confPos[i * 3] += Math.sin(t * .8 + confV[i * 2 + 1]) * dt * .12; } confGeo.attributes.position.needsUpdate = true; confetti.material.opacity = .25 + .6 * k; }
+
+// ---------- the cast ----------
+const abbie = await loadWorker(T, loader, 'abbie', {height: 1.18});
+const [ani, alexis, mommy] = await Promise.all([loadWorker(T, loader, 'ani', {height: 1.24}), loadWorker(T, loader, 'alexis', {height: 1.24}), loadWorker(T, loader, 'mommy', {height: 1.34})]);
+for (const w of [abbie, ani, alexis, mommy]) { scene.add(w.holder); w.face = 0; w.vy = 0; }
+const place = (w, x, z, face = 0) => { w.holder.position.set(x, floorAt(x, z), z); w.holder.rotation.y = w.face = face; };
+const toCam = Math.atan2(camera.position.x, camera.position.z);   // facing the camera
+place(ani, danceC.x - .85, danceC.z - .1, toCam + .5); place(alexis, danceC.x + .95, danceC.z - .55, toCam - .55); place(mommy, 4.85, .65, Math.PI / 2);
+const spriteHolder = new T.Group(); scene.add(spriteHolder);
+
+// ---------- Abbie: walking ----------
+const ab = {x: 0, z: 6, route: [], resolve: null, speed: 1.75, phase: 0, lastStep: 0, locked: false, mode: 'idle', speaking: 0};
+place(abbie, 0, 6, Math.PI);
+const turn = (w, dt, rate = 9) => { let d = w.face - w.holder.rotation.y; d = Math.atan2(Math.sin(d), Math.cos(d)); w.holder.rotation.y += d * Math.min(1, dt * rate); };
+function stopWalking(ok = false) { ab.route = []; const r = ab.resolve; ab.resolve = null; r && r(ok); }
+function walkTo(x, z, face = null) {
+  stopWalking(false);
+  const here = {x: abbie.holder.position.x, z: abbie.holder.position.z}, route = nav.path(here, {x, z});
+  if (!route) return Promise.resolve(false);
+  ab.route = route; ab.faceAtEnd = face;
+  return new Promise(res => { ab.resolve = res; });
+}
+function stepAbbie(dt, t) {
+  const p = abbie.holder.position;
+  if (ab.route.length) {
+    const g = ab.route[0], dx = g.x - p.x, dz = g.z - p.z, d = Math.hypot(dx, dz), step = ab.speed * dt;
+    if (d <= step) { p.x = g.x; p.z = g.z; ab.route.shift(); if (!ab.route.length) { if (ab.faceAtEnd != null) abbie.face = ab.faceAtEnd; const r = ab.resolve; ab.resolve = null; r && r(true); } }
+    else { p.x += dx / d * step; p.z += dz / d * step; abbie.face = Math.atan2(dx, dz); }
+    ab.phase += dt * 9.2; ab.mode = 'walk';
+    const s = Math.sin(ab.phase); if (Math.sin(ab.phase + 1.6) * Math.sin(ab.lastStep) < 0 && Math.sin(ab.phase + 1.6) > 0) snd.sfx.step(); ab.lastStep = ab.phase + 1.6;
+    setPose(abbie, {arms: [.4 - .5 * s, .4 + .5 * s], legs: [.7 * s, -.7 * s], head: .03 * Math.sin(ab.phase * .5), lean: 0, lift: Math.abs(Math.cos(ab.phase)) * .035});
+  } else if (!ab.locked) {
+    ab.mode = 'idle'; setPose(abbie, {arms: [.04 + .03 * Math.sin(t * 1.8), .04 + .03 * Math.sin(t * 1.8 + 1)], legs: [0, 0], head: .035 * Math.sin(t * 1.1), lean: 0, lift: 0});
+  }
+  const fy = ground(p.x, p.z); p.y += (fy - p.y) * Math.min(1, dt * 14);
+  turn(abbie, dt);
+}
+
+// ---------- dancers, barista ----------
+const BPM = 118; let danceK = .28, danceKGoal = .28;
+function stepCast(t, dt) {
+  danceK += (danceKGoal - danceK) * Math.min(1, dt * 2.5);
+  const beat = t * Math.PI * 2 * BPM / 60, k = danceK;
+  for (const [w, off, fl] of [[ani, 0, 1], [alexis, 1.7, -1]]) {
+    const b = beat + off, hop = Math.abs(Math.sin(b / 2));
+    setPose(w, {arms: [clamp(.5 + (.55 + .55 * k) * Math.sin(b / 2), 0, 2.2), clamp(.5 + (.55 + .55 * k) * Math.sin(b / 2 + Math.PI), 0, 2.2)], legs: [.35 * k * Math.sin(b / 2), -.35 * k * Math.sin(b / 2)],
+      head: fl * .14 * Math.sin(b / 4) * (.4 + k), lean: .07 * k * Math.sin(b / 4 + 1), lift: hop * (.03 + .08 * k)});
+    w.face = toCam + fl * (.55 + .35 * Math.sin(t * .4 + off)); turn(w, dt, 5);
+  }
+  const s = Math.sin(t * 2.4);
+  setPose(mommy, {arms: [.05, 1.05 + .45 * Math.sin(t * 1.3)], legs: [0, 0], head: .08 * Math.sin(t * .9), lean: 0, lift: 0}); turn(mommy, dt, 4);
+}
+
+// ---------- voice (her inner voice, as in the basement) ----------
+const say = (text, opts) => { voice.say(text, opts); };
+const LINES = {
+  welcome: "It's loud and pink and it smells like warm milk in here.", fromBasement: "Back upstairs. Those two are still dancing.",
+  locked1: "Locked. It looks older than the café.", locked2: "Somebody keeps the key close. Behind the bar, maybe?", hint: "I wonder what's in that old register...",
+  drawerEmpty: "Only copper coins now.", fits: "It fits.", cold: "Cold air, and a bulb humming somewhere down there.", later: "Later. The dancing is calling.",
+  staff: "That's the staff door. Staff only.", booth: "A photo booth!", pin: "Look, our photo strips. That's me!", jar: "Copper coins. The shiny gold ones are for something else.",
+  sundae: "Too big for one spoon.", menu: "Pictures, so everyone can read it.", espresso: "Mommy makes the best foam."
+};
+
+// ---------- the key, the door, the booth ----------
+let busy = false, unlockedDoor = false, tries = 0, hinted = false;
+const drawer = N('drawer'), keyNode = N('basement_key'), leaf = N('basement_door_leaf');
+const drawerHome = drawer ? drawer.position.clone() : null;
+const mat3 = o => o;
+const slide = (o, from, to, ms) => new Promise(res => { const t0 = performance.now(); const f = () => { const k = clamp((performance.now() - t0) / ms, 0, 1); o(lerp(from, to, ease(k))); k < 1 ? requestAnimationFrame(f) : res(); }; f(); });
+const hasKey = async () => (await inventory()).has(KEY.id);
+if (await hasKey() && keyNode) keyNode.visible = false;
+
+function focus(x, y, z, k = .42, ms = 1100) {
+  const to = new T.Vector3(x, y, z), from = controls.target.clone(), off0 = camera.position.clone().sub(from), dist0 = off0.length();
+  const dir = off0.clone().normalize(), dist1 = fitDist * k; controls.enabled = false;
+  return slide(v => { controls.target.lerpVectors(from, to, v); camera.position.copy(controls.target).addScaledVector(dir, lerp(dist0, dist1, v)); }, 0, 1, ms).then(() => { controls.enabled = true; controls.update(); });
+}
+function unfocus(ms = 1100) {
+  const from = controls.target.clone(), off0 = camera.position.clone().sub(from), dir = off0.clone().normalize(), d0 = off0.length(); controls.enabled = false;
+  return slide(v => { controls.target.lerpVectors(from, CENTER, v); camera.position.copy(controls.target).addScaledVector(dir, lerp(d0, fitDist, v)); }, 0, 1, ms).then(() => { controls.enabled = true; controls.update(); });
+}
+const veil = (on, ms = 800) => { const v = $('veil'); v.style.transitionDuration = ms + 'ms'; v.classList.toggle('clear', !on); return wait(ms); };
+
+async function registerBeat() {
+  const reg = N('cash_register'), bp = at('cash_register');
+  if (!await walkTo(4.96, bp.z, Math.PI / 2)) return; abbie.locked = true;
+  focus(bp.x, bp.y, bp.z, .3); tween(abbie, 'reach', {ms: 450}); await wait(550);
+  snd.sfx.drawer(); if (drawer) await slide(v => drawer.position.z = drawerHome.z + .3 * v, 0, 1, 520); snd.sfx.cash();
+  if (await hasKey()) { say(LINES.drawerEmpty); await wait(1500); }
+  else if (keyNode) {
+    await wait(350); snd.sfx.key(); const home = keyNode.position.clone(), rot = keyNode.rotation.clone();
+    await slide(v => { keyNode.position.y = home.y + .14 * v; keyNode.rotation.y = rot.y + v * 5; keyNode.scale.setScalar(1 + .25 * v); }, 0, 1, 700);
+    emitSteam(keyNode.getWorldPosition(new T.Vector3()), 6, .03); await wait(250);
+    keyNode.visible = false; await takeKey(); await wait(2800);
+    keyNode.position.copy(home); keyNode.rotation.copy(rot); keyNode.scale.setScalar(1);
+  }
+  snd.sfx.drawer(); if (drawer) await slide(v => drawer.position.z = drawerHome.z + .3 * (1 - v), 0, 1, 480);
+  tween(abbie, 'rest', {ms: 350}); abbie.locked = false; await unfocus();
+}
+
+const doorGlow = new T.PointLight('#ffb15e', 0, 4, 1.4); doorGlow.position.set(4.93, 1.2, -4.5); scene.add(doorGlow);
+const doorAngle = a => { if (leaf) leaf.rotation.y = -a; };
+async function openDoor(ms = 1100) { snd.sfx.creak(); await slide(v => { doorAngle(v * 1.5); doorGlow.intensity = v * 2.6; }, 0, 1, ms); }
+async function closeDoor(ms = 700) { await slide(v => { doorAngle((1 - v) * 1.5); doorGlow.intensity = (1 - v) * 2.6; }, 0, 1, ms); snd.sfx.thunk(); }
+async function doorBeat() {
+  const bd = at('basement_door');
+  if (!await walkTo(bd.x + .05, -4.05, Math.PI)) return; abbie.locked = true;
+  focus(bd.x, 1.1, bd.z, .34, 900); await wait(500);
+  const have = await hasKey(), unlocked = unlockedDoor || (() => { try { return localStorage.getItem(BASEMENT.storage) === '1'; } catch { return false; } })() && have;
+  if (!have) {
+    snd.sfx.rattle(); if (leaf) { const t0 = performance.now(); await slide(v => { doorAngle(Math.sin(v * 38) * .018 * (1 - v)); }, 0, 1, 450); doorAngle(0); }
+    say(++tries % 2 ? LINES.locked1 : LINES.locked2); await wait(2600);
+  } else {
+    if (!unlocked) { snd.sfx.unlock(); await wait(500); say(LINES.fits, {hold: 1400}); await wait(900); }
+    unlockedDoor = true; try { localStorage.setItem(BASEMENT.storage, '1'); } catch {}
+    await openDoor(); say(LINES.cold, {choices: [{label: 'Go down', go: () => descend()}, {label: 'Not yet', go: () => notYet()}]});
+    busy = false; abbie.locked = false; return;   // the choices decide
+  }
+  abbie.locked = false; await unfocus();
+}
+async function descend() {
+  busy = true; voice.hush(); abbie.locked = false;
+  await walkTo(4.93, -4.7); await Promise.all([veil(true, 700), wait(0)]); location.href = BASEMENT.url;
+}
+async function notYet() { busy = true; voice.hush(); say(LINES.later, {hold: 1800}); await closeDoor(); abbie.locked = false; await unfocus(); busy = false; }
+
+async function boothBeat() {
+  if (!await walkTo(-3.9, 4.05, -Math.PI / 2)) return; say(LINES.booth, {hold: 1200}); await wait(900); await veil(true, 600);
+  location.href = '/studies/cafe/photobooth.html?with=' + (Math.random() < .5 ? 'ani' : 'alexis');
+}
+async function exitBeat() {
+  if (!await walkTo(0, 4.05, 0)) return; voice.hush(); snd.sfx.bell(); await walkTo(0, 6.2, 0); await veil(true, 700); location.href = BACK;
+}
+let juke = false;
+async function jukeBeat() {
+  const jp = at('jukebox'); if (!await walkTo(jp.x, jp.z - .85, 0)) return; snd.unlock();
+  juke = !juke; snd.music(juke); danceKGoal = juke ? 1 : .28; snd.sfx.ding();
+}
+async function baristaBeat(n) { const p = at(n); emitSteam(p.clone().add(new T.Vector3(-.05, .35, 0)), 18); snd.unlock(); snd.sfx.steam(); say(LINES.espresso, {hold: 1800}); tween(mommy, {arms: [.05, 1.4], head: .2}, {ms: 300}); }
+const ONE_LINERS = {pin_board: LINES.pin, tip_jar: LINES.jar, giant_sundaes: LINES.sundae, menu_board: LINES.menu};
+const ACT = {cash_register: registerBeat, basement_door: doorBeat, photo_booth: boothBeat, jukebox: jukeBeat, boombox: jukeBeat, door_pink: async () => { await walkTo(2.8, -4.0, Math.PI); say(LINES.staff, {hold: 2200}); },
+  espresso_machine: () => baristaBeat('espresso_machine'), grinder: () => baristaBeat('grinder'), smoothie_machine: () => baristaBeat('smoothie_machine'), urn: () => baristaBeat('urn')};
+
+// ---------- tapping ----------
+const ray = new T.Raycaster(); ray.layers.set(0); const ptr = new T.Vector2();
+const ring = presentation(new T.Mesh(new T.RingGeometry(.1, .14, 28).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({color: '#fff1c4', transparent: true, opacity: 0, depthWrite: false, toneMapped: false})), {purpose: 'selection'}); ring.raycast = () => {}; scene.add(ring);
+let ringT = 0;
+const assetOf = o => { for (let p = o; p; p = p.parent) { if (/^entrance_door/.test(p.name)) return 'entrance'; if (p.userData?.asset) return p.userData.asset; } return null; };
+function tap(cx, cy) {
+  snd.unlock(); const r = canvas.getBoundingClientRect(); ptr.set((cx - r.left) / r.width * 2 - 1, -(cy - r.top) / r.height * 2 + 1); ray.setFromCamera(ptr, camera);
+  const shown = o => { for (let p = o; p; p = p.parent) if (p.visible === false) return false; return true; };   // a raycast ignores a hidden parent, so ask
+  const hits = ray.intersectObjects([roomRoot, ...doors], true).filter(h => shown(h.object) && h.object.material && !(h.object.material.transparent && h.object.material.opacity < .5));
+  const h = hits[0]; if (!h || busy) return;
+  const name = assetOf(h.object); idle = 0;
+  if (name === 'entrance') return void run(exitBeat);
+  if (ACT[name]) return void run(ACT[name]);
+  if (ONE_LINERS[name]) { say(ONE_LINERS[name], {hold: 2600}); return; }
+  const p = h.point; ring.position.set(p.x, floorAt(p.x, p.z) + .02, p.z); ringT = 1;
+  const d = nav.nearest(p.x, p.z); if (d) walkTo(d.x, d.z);
+}
+async function run(fn) { if (busy) return; busy = true; try { await fn(); } finally { if (!voice.thought?.choices) busy = false; } }
+let down = null;
+canvas.addEventListener('pointerdown', e => { down = {x: e.clientX, y: e.clientY, t: performance.now()}; });
+canvas.addEventListener('pointerup', e => { if (down && Math.hypot(e.clientX - down.x, e.clientY - down.y) < 8 && performance.now() - down.t < 450) tap(e.clientX, e.clientY); down = null; });
+
+// ---------- the sky button ----------
+const SKY_ICON = {day: '<circle cx="12" cy="12" r="4.2" fill="#ffd24a" stroke="none"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" stroke="#ffd24a"/>',
+  dusk: '<path d="M3 17h18" stroke="#ff8fb5"/><path d="M6.5 17a5.5 5.5 0 0 1 11 0z" fill="#ff8fb5" stroke="none"/><path d="M12 5.5v2.5M5 9.5l1.7 1.7M19 9.5l-1.7 1.7" stroke="#ff8fb5"/>',
+  night: '<path d="M18.5 14.6A7.5 7.5 0 1 1 9.4 5.5a6 6 0 0 0 9.1 9.1z" fill="#d9ccff" stroke="none"/><circle cx="17.5" cy="6" r="1" fill="#fff" stroke="none"/><circle cx="20" cy="10" r=".7" fill="#fff" stroke="none"/>'};
+const skyName = () => mood < .25 ? 'day' : mood < .75 ? 'dusk' : 'night';
+const drawSky = () => { $('sky').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round">${SKY_ICON[skyName()]}</svg>`; };
+$('sky').addEventListener('click', e => { e.stopPropagation(); snd.unlock(); moodGoal = skyName() === 'day' ? .5 : skyName() === 'dusk' ? 1 : 0; drawSky(); });
+drawSky();
+
+// ---------- what the scene knows, for the directors and the voice ----------
+volunteer('cafe', {place: "Abbie's café", dialect: 'pink neon, painted signs, warm planks', items: [
+  {id: 'time-of-day', says: 'whether it is day, dusk or night outside', kind: 'level', who: 'characters', for: ['player', 'director'], read: () => +mood.toFixed(2), prefer: ['diegetic'], ways: {diegetic: 'sun through the windows, lamps coming on, neon, the disco ball'}},
+  {id: 'music', says: 'whether the jukebox is playing', kind: 'state', who: 'characters', for: ['player', 'director'], read: () => juke, prefer: ['diegetic'], ways: {diegetic: 'the tune, the dancers, the mirror-ball dots'}},
+  {id: 'basement-door', says: 'whether the old door behind the bar is unlocked', kind: 'state', who: 'player', for: ['player', 'director'], read: () => unlockedDoor, prefer: ['meta'], ways: {meta: 'her inner voice and the cold light from the stairs'}}]});
+
+// ---------- the loop ----------
+let last = performance.now(), idle = 0, slow = 0, frames = 0, quality = 1;
+function tick(now) {
+  const dt = Math.min(q.has('fast') ? .35 : .05, (now - last) / 1000); last = now; const t = now / 1000;
+  if (Math.abs(moodGoal - mood) > .001) { mood += Math.sign(moodGoal - mood) * Math.min(Math.abs(moodGoal - mood), dt * .7); applyMood(mood); }
+  idle += dt; if (!hinted && idle > 45 && !busy && !(await_hasKey)) { hinted = true; say(LINES.hint, {hold: 3200}); }
+  stepAbbie(dt, t); stepCast(t, dt); stepTweens(now); stepPuffs(dt);
+  const music = snd.isOn(), k = Math.max(mix('disco', mood), music ? 1 : 0) * (music ? 1 : .7);
+  stepDisco(t, k); stepConfetti(t, dt, music ? 1 : .15 * mix('disco', mood) + .1);
+  const bp = music ? Math.pow(1 - snd.beatPhase(), 3) : 0;
+  discoLight.intensity = (mix('disco', mood) * 1.1 + bp * 1.6) * (music ? 1.3 : .8); discoLight.color.setHSL((t * .15) % 1, .9, .62);
+  neonPink.intensity += bp * .9;
+  if (ringT > 0) { ringT = Math.max(0, ringT - dt * 1.6); ring.material.opacity = ringT * .9; ring.scale.setScalar(1 + (1 - ringT) * 2.2); }
+  voice.tick(now); controls.update(); renderer.render(scene, camera);
+  if (++frames > 90 && quality === 1) { slow += dt > .034 ? 1 : 0; if (frames === 240 && slow > 100) { quality = 0; renderer.setPixelRatio(1); sun.castShadow = false; fit(); } }
+  frameHook && frameHook(dt, t);
+}
+let await_hasKey = await hasKey(), frameHook = null;
+inventory().then?.(i => i.on(async () => { await_hasKey = await hasKey(); }));
+window.__cafe = {get busy() { return busy; }, exitBeat, boothBeat, T, scene, camera, controls, node, N, B, at, renderer, nav, abbie, ani, alexis, mommy, ab, walkTo, tap, say, voice, snd, get mood() { return mood; }, setMood: m => { moodGoal = m; }, registerBeat, doorBeat, openDoor, closeDoor, floorAt, run, focus, unfocus, set hook(f) { frameHook = f; }};
+// the room is ready: arrive
+fit(); frame();
+renderer.setAnimationLoop(tick);
+$('spark').classList.add('off');
+(async () => {
+  if (FROM === 'basement') { place(abbie, 4.93, -4.5, 0); await wait(50); $('veil').classList.add('clear'); busy = true; abbie.locked = false; doorAngle(1.5); doorGlow.intensity = 2.6; await wait(900); await walkTo(4.93, -3.4); await closeDoor(); say(LINES.fromBasement, {hold: 3200}); busy = false; }
+  else { place(abbie, 0, 6.3, Math.PI); $('veil').classList.add('clear'); busy = true; await wait(500); snd.sfx.bell(); await walkTo(.1, 3.3, 2.4); say(LINES.welcome, {hold: 3600}); busy = false; }
+})();
+</script>
+</body>
+</html>

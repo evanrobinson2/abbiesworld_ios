@@ -73,7 +73,7 @@ body[data-dark] .title small,body[data-dark] .now .src{color:#d9d2e6}
 <body>
 <canvas id="stage" aria-label="The character on stage. Press on it to pick it up."></canvas>
 <iframe class="frame" id="room" hidden title="Character Studio room"></iframe>
-<div id="load">Rigging the mannequin…</div>
+<div id="load">Rigging the brute…</div>
 <header class="bar">
  <div class="mark" aria-hidden="true">AW</div>
  <div class="title">Character Studio<small>AW-STUDY-0037</small></div>
@@ -128,7 +128,7 @@ box.castShadow = true; box.visible = false; scene.add(box);
 toonify(T, scene, TOON_LOOKS.sunday);
 const film = filmLook(T, renderer, scene, camera, {fogDensity: .02, fogStart: 9, focus: 6, aperture: .7, aoRadius: .3, bloom: .12, threshold: 1.3, sunCol: '#ffd6a0'});
 
-let dir = 'studio', bodyId = 'game', room = 'stage', real = true, tour = false, dressed = null;
+let dir = 'studio', bodyId = 'red', room = 'stage', real = true, tour = false, dressed = null;
 let actor = null, move = byId.idle, t0 = performance.now() / 1000;
 const loader = new GLTFLoader(), cache = {}, drawing = {value: 0};
 let mocap = {};

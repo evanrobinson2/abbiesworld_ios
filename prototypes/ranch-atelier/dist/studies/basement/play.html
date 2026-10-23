@@ -26,11 +26,14 @@ import {volunteer, playerCamera, presentation} from '/simulations/presentation-l
 import {coinReward} from '/simulations/coin-reward.mjs';
 import {eraPass, WARM_UP} from '/simulations/memory-kit/era-pass.mjs';
 import {innerVoice} from '/simulations/memory-kit/inner-voice.mjs';
+import {dialog} from '/simulations/memory-kit/dialog.mjs';
 import {inventory} from '/simulations/inventory.mjs';
 import {give as giveMemoryCoin} from '/simulations/memory-coins.mjs';
 
 const q = new URLSearchParams(location.search);
 const fromCafe = q.get('from') === 'cafe';
+// Both ways up (the door, and the ending) land in the café diorama, which walks her up the stairs.
+const CAFE_EXIT = '/studies/cafe/diorama.html?from=basement';
 const renderer = new T.WebGLRenderer({antialias: false, powerPreference: 'high-performance'});
 renderer.setPixelRatio(1); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.BasicShadowMap;
 renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
@@ -499,10 +502,15 @@ function callDown() {
  // Muffled through the floor: two syllables, "Ab-bie!", a grown-up's voice filtered by the stairs and the door.
  blip({f: 150, t: .26, type: 'sawtooth', g: .05, slide: 15, lp: 700}); blip({f: 128, t: .5, type: 'sawtooth', g: .05, slide: -30, lp: 600, at: .32});
  blip({f: 150, t: .26, type: 'sawtooth', g: .03, slide: 15, lp: 700, at: 1.5}); blip({f: 128, t: .5, type: 'sawtooth', g: .03, slide: -30, lp: 600, at: 1.82});
- setTimeout(() => say("Someone's calling from upstairs... it's Daddy! Time to go up.", {choices: [
-  {label: 'Coming, Daddy!', go: headHome},
-  {label: 'Just one more minute...', go: () => say('Just one more minute. The door will take me home.', {hold: 3200})}]}), 1400);
+ setTimeout(() => talk.run(ENDING_TALK), 1400);
 }
+// Her talk with herself when Daddy calls: data, not code (memory-kit/dialog.mjs), so Moon Mission scripts can look the same.
+const ENDING_TALK = {start: 'call', nodes: {
+ call: {say: "Someone's calling from upstairs... it's Daddy! Time to go up.", choices: [
+  {label: 'Coming, Daddy!', do: 'headHome'},
+  {label: 'Just one more minute...', next: 'wait'}]},
+ wait: {say: 'Just one more minute. The door will take me home.', hold: 3200}}};
+const talk = dialog(voice, {actions: {headHome: () => headHome()}});
 function headHome() {
  if (ending.leaving) return; ending.leaving = true; hush();
  if (cam.mode === 'close') { cam.close = null; washing = null; if (me.state === 'seated') glide('desk', 'desk'); else leaveClose(); }
@@ -548,11 +556,11 @@ function frame(now) {
  // ...and "I have to know" brings her back to the start: the same dark, the same two choices.
  if (me.goneT) { const s = (now - me.goneT) / 1000; me.gone = s < 1 ? s : s < 3 ? 1 : Math.max(0, 4 - s); U.door.rotation.y = s < 1.2 ? -.42 - s * .6 : s < 3 ? -.05 : -.05 - Math.min(1, s - 3) * .37;
   if (ending.leaving) { me.gone = Math.min(1, s); U.door.rotation.y = s < 1.2 ? -.42 - s * .6 : -1.14 + Math.min(1, (s - 1.2) / .6) * 1.09; if (s > 1.8 && !me.shut) { me.shut = true; SFX.door(); ending.offT = time; } }
-  else { if (s > 1.15 && !me.shut) { me.shut = true; SFX.door(); if (fromCafe) setTimeout(() => { location.href = '/#cafe-study'; }, 600); }
+  else { if (s > 1.15 && !me.shut) { me.shut = true; SFX.door(); if (fromCafe) setTimeout(() => { location.href = CAFE_EXIT; }, 600); }
   if (!fromCafe && s > 3 && !me.back) { me.back = true; SFX.door(); say("...but what's down there? I have to know."); } if (!fromCafe && s > 4.2) { me.goneT = 0; me.gone = 0; me.shut = me.back = false; if (!lightsOn()) setTimeout(() => { if (!voice.thought?.choices && !lightsOn()) opening(); }, 2600); } } }
  // The ending: wait for the disk's coin to settle, then the room warms and Daddy calls; at the last, the set powers down.
  if (ending.pending && !ending.called && !rewards.length && !flying.length) { ending.wait += dt; if (ending.wait > 2.2) { ending.pending = false; callDown(); } }
- if (ending.offT) { ending.off = Math.min(1, (time - ending.offT) / 1.6); if (ending.off >= 1 && !ending.home) { ending.home = true; if (!q.has('stay')) setTimeout(() => { location.href = '/#cafe-study'; }, 400); } }
+ if (ending.offT) { ending.off = Math.min(1, (time - ending.offT) / 1.6); if (ending.off >= 1 && !ending.home) { ending.home = true; if (!q.has('stay')) setTimeout(() => { location.href = CAFE_EXIT; }, 400); } }
  placeKid(dt);
  for (const w of [...rewards]) if (!w.r.update(rdt)) { rewards.splice(rewards.indexOf(w), 1); w.then(); }
  for (const f of [...flying]) { f.t = Math.min(1, f.t + rdt / f.dur); f.step(f.t); if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done(); } }
