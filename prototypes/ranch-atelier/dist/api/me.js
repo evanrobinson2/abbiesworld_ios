@@ -14,6 +14,9 @@ function createHandler({env=process.env,who=account,purse=wallet,blob=()=>requir
  try{
   if(req.method==='GET'){
    const q=new URL(req.url||'/','https://x.invalid').searchParams;
+   // Ledger self-test against the real Blob store, for checking a deployment: a throwaway account with a
+   // 5-cent cap takes ten 1-cent charges at once; exactly five may land. Key: HMAC of the session secret.
+   if(q.get('selftest'))return selftest(res,env,q.get('selftest'),blob);
    if(!q.get('save'))return json(res,200,{signedIn:!!me,owner:!!me?.owner,tag:me?me.id.slice(0,8):null,left:me?Math.floor(await purse().left(me)*100)/100:0,signInReady:!!(env.AUTH0_WEB_CLIENT_ID&&env.AUTH_SESSION_SECRET)});
    if(!me)return json(res,401,{error:'Sign in to load your worlds.'});
    const got=await blob().get(path,{access:'private',useCache:false}).catch(()=>null);
@@ -33,4 +36,13 @@ function createHandler({env=process.env,who=account,purse=wallet,blob=()=>requir
   return json(res,405,{error:'Use GET or PUT.'});
  }catch(e){console.error('[me]',e.message);return json(res,500,{error:'Your account is resting. Your worlds stay saved on this device.'});}
 };}
+async function selftest(res,env,key,blob){
+ const {createHmac,randomBytes}=require('node:crypto'),{createWallet}=require('../lib/wallet.cjs');
+ if(!env.AUTH_SESSION_SECRET||key!==createHmac('sha256',env.AUTH_SESSION_SECRET).update('ledger-selftest').digest('hex').slice(0,32))return json(res,404,{error:'Not found.'});
+ const who={id:'selftest-'+randomBytes(6).toString('hex'),owner:true},w=createWallet({caps:{person:0.05,public:0,owner:0.05}});
+ const results=await Promise.all(Array.from({length:10},()=>w.charge(who,0.01).catch(e=>'error: '+e.message)));
+ const left=await w.left(who);
+ await blob().del(`spend/v1/people/${who.id}.json`).catch(()=>{});
+ return json(res,200,{landed:results.filter(r=>r===true).length,refused:results.filter(r=>r===false).length,errors:results.filter(r=>typeof r==='string'),left});
+}
 module.exports=createHandler();module.exports.createHandler=createHandler;
