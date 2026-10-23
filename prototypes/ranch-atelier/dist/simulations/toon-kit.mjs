@@ -2,13 +2,15 @@
 // MeshStandard/MeshPhysical materials, so every texture, normal map, shadow and fog a scene already has keeps working.
 //   toonify(T, scene, look)   patches every lit material under scene (call again after adding meshes; it skips done ones)
 //   inkHulls(T, root, look)    adds the ink shell (a back-face copy pushed out along normals) to every mesh under root
-//   TOON_LOOKS                 sunday (the Ranch default), ink (the school, comic moments), plain (three as it was)
+//   TOON_LOOKS                 sunday (the Ranch default), clay (characters: smooth wrap, warm terminator), ink (the school,
+//                              comic moments), plain (three as it was)
 // What the patch does, per light: wraps the light round the back (half), quantises it into soft bands, and fills the
 // unlit side with a sky tint instead of black. Then a warm rim on edges turning away from the camera. Cost: a few lines
 // in the one material, no post-processing.
 export const TOON_LOOKS = {
  plain: null,
  sunday: {bands: 3, soft: .45, half: .6, tint: '#6a5fb0', tintK: .55, rim: .35, rimCol: '#ffd9a8', ink: 0},
+ clay: {bands: 12, soft: 1, half: .72, tint: '#a0506a', tintK: .5, rim: .55, rimCol: '#ffb08a', ink: 0},
  ink: {bands: 2, soft: .06, half: .35, tint: '#5a4f9a', tintK: .5, rim: .2, rimCol: '#ffd9a8', ink: .03, inkCol: '#2a1f30'},
 };
 
@@ -59,6 +61,22 @@ export function setToonLook(T, U, L) {
  U.uToonRim.value = L.rim; U.uToonRimCol.value.set(L.rimCol);
 }
 
+// skinned characters (the brutes, the mannequin): the same shell, bent by the same skeleton
+function skinnedHull(T, o, look) {
+ const m = new T.MeshBasicMaterial({color: look.inkCol || '#2a1f30', side: T.BackSide});
+ m.onBeforeCompile = sh => {
+  sh.uniforms.uW = {value: look.ink};
+  sh.vertexShader = 'uniform float uW;\n' + sh.vertexShader.replace('#include <skinning_vertex>', `#include <skinning_vertex>
+   { float d = length(cameraPosition - (modelMatrix * vec4(transformed, 1.)).xyz); transformed += normalize(objectNormal) * uW * clamp(1.6 - d * .06, .35, 1.4); }`);
+ };
+ // faceted meshes split their normals at every edge, which would crack the shell: average normals by position first
+ const g = o.geometry.clone(), P = g.attributes.position, N = g.attributes.normal, acc = new Map(), k = i => `${P.getX(i).toFixed(4)},${P.getY(i).toFixed(4)},${P.getZ(i).toFixed(4)}`;
+ for (let i = 0; i < P.count; i++) { const a = acc.get(k(i)) || [0, 0, 0]; a[0] += N.getX(i); a[1] += N.getY(i); a[2] += N.getZ(i); acc.set(k(i), a); }
+ for (let i = 0; i < P.count; i++) { const a = acc.get(k(i)), l = Math.hypot(...a) || 1; N.setXYZ(i, a[0] / l, a[1] / l, a[2] / l); }
+ const h = new T.SkinnedMesh(g, m); h.bind(o.skeleton, o.bindMatrix); h.frustumCulled = false;
+ return h;
+}
+
 // the ink shell: thins with distance like a pen line in perspective. Characters and cars only; buildings read by light.
 export function inkHulls(T, root, look = TOON_LOOKS.ink) {
  if (!look?.ink) return [];
@@ -76,7 +94,7 @@ export function inkHulls(T, root, look = TOON_LOOKS.ink) {
  const hulls = [];
  root.traverse(o => {
   if (!o.isMesh || o.userData.ink || o.userData.noInk || !o.geometry?.attributes.normal || !o.material.isMeshStandardMaterial || o.material.transparent) return;
-  const h = new T.Mesh(o.geometry, mat); h.userData.ink = true; h.castShadow = h.receiveShadow = false; h.raycast = () => {}; hulls.push([o, h]);
+  const h = o.isSkinnedMesh ? skinnedHull(T, o, look) : new T.Mesh(o.geometry, mat); h.userData.ink = true; h.castShadow = h.receiveShadow = false; h.raycast = () => {}; hulls.push([o, h]);
  });
  for (const [o, h] of hulls) o.add(h);
  return hulls.map(x => x[1]);

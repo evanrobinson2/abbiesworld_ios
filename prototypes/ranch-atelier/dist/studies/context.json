@@ -1,0 +1,1366 @@
+{
+ "about": "Context engineering per study (Evan, 2026-10-23: every study lists what it drew on). Kinds: oracle, devblog, design, tutorial, research, canon, reference. A study can 'use' a shared digest or be the 'same' as another. Missing kinds show as none recorded. New studies add their entry here in the PR that ships them.",
+ "kinds": {
+  "oracle": "Oracle consultation",
+  "devblog": "Game dev blogs",
+  "design": "Game design blogs",
+  "tutorial": "Game design tutorials",
+  "research": "Research",
+  "canon": "Our canon",
+  "reference": "References"
+ },
+ "required": [
+  "oracle",
+  "devblog",
+  "design",
+  "tutorial"
+ ],
+ "digests": {
+  "blender-techniques": {
+   "t": "Blender game-art techniques (Oracle digest, 31 sources)",
+   "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/blender-techniques.md",
+   "items": [
+    {
+     "k": "design",
+     "t": "Joel Burgess, Skyrim's modular approach to level design (GDC 2013)",
+     "href": "https://gamedeveloper.com/design/skyrim-s-modular-approach-to-level-design"
+    },
+    {
+     "k": "design",
+     "t": "Oskar Stålberg, How Townscaper works",
+     "href": "https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making"
+    },
+    {
+     "k": "devblog",
+     "t": "Junya Motomura, Guilty Gear Xrd's art style (GDC 2015)",
+     "href": "https://gdcvault.com/play/1022031/GuiltyGearXrd-s-Art-Style-The"
+    },
+    {
+     "k": "devblog",
+     "t": "Insomniac, The Ultimate Trim: texturing Sunset Overdrive (GDC 2015)",
+     "href": "https://gdcvault.com/play/1022323/The-Ultimate-Trim-Texturing-Techniques"
+    },
+    {
+     "k": "devblog",
+     "t": "80.lv, Tiny Glade developers on Bevy and proceduralism",
+     "href": "https://80.lv/articles/exclusive-tiny-glade-developers-discuss-bevy-proceduralism-publishers-cozy-games/"
+    },
+    {
+     "k": "devblog",
+     "t": "80.lv, Procedural windows in Tiny Glade",
+     "href": "https://80.lv/articles/procedural-windows-in-pounce-light-s-tiny-glade-get-an-upgrade"
+    },
+    {
+     "k": "devblog",
+     "t": "VGC, Paper Mario: The Origami King developer interview",
+     "href": "https://videogameschronicle.com/features/interviews/paper-mario-origami-king"
+    },
+    {
+     "k": "devblog",
+     "t": "Rex Crowle, Building the touchy-feely world of Tearaway (GDC 2013)",
+     "href": "https://gamedeveloper.com/design/video-building-the-touchy-feely-world-of-i-tearaway-i-"
+    },
+    {
+     "k": "devblog",
+     "t": "Blender Studio, One thing I've learned from Sprite Fright: shading",
+     "href": "https://studio.blender.org/blog/one-thing-ive-learned-from-sprite-fright-shading-edition"
+    },
+    {
+     "k": "devblog",
+     "t": "C.R. Cherry, How I make stylized assets (devlog)",
+     "href": "https://crcherry.itch.io/searchlight-hotel/devlog/548271/how-i-make-stylized-assets"
+    },
+    {
+     "k": "tutorial",
+     "t": "Boris the Brave, Townscaper grid tutorial",
+     "href": "https://boristhebrave.com/docs/sylves/1/articles/tutorials/townscaper.html"
+    },
+    {
+     "k": "tutorial",
+     "t": "Maxime Heckel, Moebius-style post-processing",
+     "href": "https://blog.maximeheckel.com/posts/moebius-style-post-processing"
+    },
+    {
+     "k": "tutorial",
+     "t": "Omar Shehata, Better outlines using surface IDs",
+     "href": "https://omar-shehata.medium.com/better-outline-rendering-using-surface-ids-with-webgl-e13cdab1fd94"
+    },
+    {
+     "k": "tutorial",
+     "t": "80.lv, Assets in the mid-poly workflow",
+     "href": "https://80.lv/articles/creating-assets-within-the-mid-poly-workflow-in-ue5/"
+    },
+    {
+     "k": "tutorial",
+     "t": "80.lv, Low poly scenes with Blender",
+     "href": "https://80.lv/articles/low-poly-scenes-with-blender/"
+    },
+    {
+     "k": "tutorial",
+     "t": "Polycount, Face weighted normals",
+     "href": "https://polycount.com/discussion/comment/1688746"
+    },
+    {
+     "k": "tutorial",
+     "t": "BNPR handbook, Inverse hull outlines",
+     "href": "https://bnpr.gitbook.io/bnpr/outline/inverse-hull-method"
+    },
+    {
+     "k": "tutorial",
+     "t": "StraySpark, Blender vertex colours for game engines",
+     "href": "https://www.strayspark.studio/blog/blender-vertex-colors-game-engine-workflows"
+    },
+    {
+     "k": "tutorial",
+     "t": "BlenderNation, Procedural modelling with Geometry Nodes",
+     "href": "https://www.blendernation.com/2024/06/26/master-procedural-modelling-with-geometry-nodes/"
+    },
+    {
+     "k": "tutorial",
+     "t": "HeatPhoenix, Low poly texture painting",
+     "href": "https://www.patreon.com/posts/50369227"
+    },
+    {
+     "k": "tutorial",
+     "t": "Blender Manual, Render baking (Cycles)",
+     "href": "https://docs.blender.org/manual/en/2.81/render/cycles/baking.html"
+    },
+    {
+     "k": "tutorial",
+     "t": "three.js docs, MeshToonMaterial",
+     "href": "https://threejs.org/docs/pages/MeshToonMaterial.html"
+    },
+    {
+     "k": "tutorial",
+     "t": "glTF Transform, simplify()",
+     "href": "https://gltf-transform.dev/modules/functions/functions/simplify"
+    },
+    {
+     "k": "reference",
+     "t": "Tomohiro Tachi, Origamizing polyhedral surfaces",
+     "href": "https://origami.c.u-tokyo.ac.jp/~tachi/cg/OrigamizingPolyhedralSurfaces_tachi_IEEETVCG.pdf"
+    },
+    {
+     "k": "reference",
+     "t": "Export Paper Model from Blender (add-on)",
+     "href": "https://github.com/addam/export-paper-model-from-blender"
+    }
+   ]
+  },
+  "llm-3d-modeling": {
+   "t": "LLMs that model in Blender (Oracle research digest)",
+   "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/llm-3d-modeling.md",
+   "items": [
+    {
+     "k": "research",
+     "t": "LL3M: Large Language 3D Modelers",
+     "href": "https://arxiv.org/abs/2508.08228"
+    },
+    {
+     "k": "research",
+     "t": "SceneCraft (ICML 2024)",
+     "href": "https://arxiv.org/abs/2403.01248"
+    },
+    {
+     "k": "research",
+     "t": "BlenderAlchemy (ECCV 2024)",
+     "href": "https://arxiv.org/abs/2404.17672"
+    },
+    {
+     "k": "research",
+     "t": "ShapeLib",
+     "href": "https://arxiv.org/abs/2502.08884"
+    },
+    {
+     "k": "research",
+     "t": "CADCodeVerify (ICLR 2025)",
+     "href": "https://arxiv.org/abs/2410.05340"
+    },
+    {
+     "k": "research",
+     "t": "BlenderGym (CVPR 2025)",
+     "href": "https://arxiv.org/abs/2504.01786"
+    },
+    {
+     "k": "research",
+     "t": "3DHarnessBench",
+     "href": "https://arxiv.org/abs/2609.06535"
+    }
+   ]
+  },
+  "figure-books": {
+   "t": "The figure books (Bodies study sources)",
+   "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/BODIES_STUDY.md",
+   "items": [
+    {
+     "k": "reference",
+     "t": "Gray, Anatomy of the Human Body (1918)",
+     "href": "https://en.wikisource.org/wiki/Anatomy_of_the_Human_Body"
+    },
+    {
+     "k": "reference",
+     "t": "Bridgman, Constructive Anatomy (1920)",
+     "href": "https://archive.org/search?query=bridgman+constructive+anatomy"
+    },
+    {
+     "k": "reference",
+     "t": "Duval, Artistic Anatomy (1884)",
+     "href": "https://www.gutenberg.org/ebooks/77743"
+    },
+    {
+     "k": "reference",
+     "t": "Vanderpoel, The Human Figure (1907)",
+     "href": "https://drawingbooks.org"
+    },
+    {
+     "k": "reference",
+     "t": "Loomis, Figure Drawing for All It's Worth (1943)"
+    },
+    {
+     "k": "reference",
+     "t": "Lee and Buscema, How to Draw Comics the Marvel Way (1978)"
+    },
+    {
+     "k": "tutorial",
+     "t": "Proko, average and idealistic figure lessons (Richer's canon, Loomis)",
+     "href": "https://www.proko.com"
+    },
+    {
+     "k": "reference",
+     "t": "Wikipedia, Body proportions",
+     "href": "https://en.wikipedia.org/wiki/Body_proportions"
+    }
+   ]
+  }
+ },
+ "studies": {
+  "school-jump": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "Speed review canon (Oracle game studies, HUD grammar, GAME_FEEL, interaction grammar, design card)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md",
+     "note": "What CLAUDE.md credits for this game's speed"
+    },
+    {
+     "k": "canon",
+     "t": "HUD and information study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Interaction grammar",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+    },
+    {
+     "k": "canon",
+     "t": "Presentation layer",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs"
+    },
+    {
+     "k": "canon",
+     "t": "Design card and speed review",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Climb and low-poly kits",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/"
+    },
+    {
+     "k": "canon",
+     "t": "Modeler recipe rules",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "school-ready": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Memory places review",
+     "href": "https://claude.ai/artifact/1qPFbCMZ81PTMb44cSfZcN",
+     "note": "The dog is the hook, headlights on a rhythm, busted slides you back to cover, the climb verb in the shared kit, one timing ring"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle consult, studies-only plan",
+     "note": "It matched building games (Bricktales, Tiny Glade); kept one rule: no wrong moves. The Oracle has no climbing or stealth study yet"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle catalog: Monaco, Shadow Tactics, Shadow of Mordor",
+     "note": "Stealth read from light and vision; being seen builds up, it isn't an instant fail"
+    },
+    {
+     "k": "oracle",
+     "t": "Shaders article and the rendering index (62 games)",
+     "href": "https://claude.ai/artifact/2qnHmuYv8iy5TV7BR4cW9z",
+     "note": "Sunday Toon: soft bands, sky-tinted shadows, warm rim, no outlines"
+    },
+    {
+     "k": "devblog",
+     "t": "Illustrative Rendering in Team Fortress 2 (Valve, 2007)",
+     "href": "https://www.advances.realtimerendering.com/s2007/Mitchell-IllustrativeRenderingInTF2(Siggraph07%20Course%20Notes).pdf",
+     "note": "Wrap the light half-way round, then a ramp; shadows never go black"
+    },
+    {
+     "k": "devblog",
+     "t": "Stylization with a Purpose (Valve, GDC 2008)",
+     "href": "https://cdn.fastly.steamstatic.com/apps/valve/2008/GDC2008_StylizationWithAPurpose_TF2.pdf",
+     "note": "Silhouette first, so a child reads the kid against the brick"
+    },
+    {
+     "k": "devblog",
+     "t": "Celeste's hidden forgiveness (Maddy Thorson)",
+     "href": "https://gigazine.net/gsc_news/en/20200317-celeste-action-feel-things",
+     "note": "Cheat in the player's favour: big thumb targets, the game picks the hand, no dead ends"
+    },
+    {
+     "k": "design",
+     "t": "Stealth game spotting, deconstructed (Critical Points)",
+     "href": "https://critpoints.net/2015/03/30/stealth-game-spotting-deconstruction/",
+     "note": "Detection meter with grace time and last known position: our burning headlights and the slide back to cover"
+    },
+    {
+     "k": "design",
+     "t": "Breath of the Wild's cut climbing rest (Destructoid)",
+     "href": "https://www.destructoid.com/you-could-originally-regain-stamina-while-climbing-in-zelda-breath-of-the-wild-but-miyamoto-nixed-it/",
+     "note": "Nintendo cut resting mid-climb; for a child we keep it: two hands on and your arms recover"
+    },
+    {
+     "k": "tutorial",
+     "t": "A toon light shader, step by step (hexaquo)",
+     "href": "https://hexaquo.at/pages/understanding-godot-light-shaders-and-light-calculations-by-implementing-a-toon-light-shader/",
+     "note": "Band the light term per light with smoothstep: how toon-kit.mjs patches three's lighting"
+    },
+    {
+     "k": "tutorial",
+     "t": "Ramp and toon shaders (UMBC)",
+     "href": "https://userpages.umbc.edu/~bailey/Courses/Tutorials/RenderingDemo/RampToonShader.html",
+     "note": "A ramp you can repaint per place"
+    },
+    {
+     "k": "canon",
+     "t": "The School Jump study (0026) and its speed review",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Game-ready review and the canon it learned",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_READY_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "HUD and information study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Interaction grammar (climbing: tap what shines)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's key art for the school jump (Midjourney)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/school/img/concepts/1-key-art.jpg"
+    }
+   ],
+   "recorded": "2026-10-23, the study's own list (also its page's card)"
+  },
+  "basement": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "Speed review canon (Oracle game studies, HUD grammar, GAME_FEEL, interaction grammar, design card)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md",
+     "note": "What CLAUDE.md credits for this game's speed"
+    },
+    {
+     "k": "canon",
+     "t": "HUD and information study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Interaction grammar",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+    },
+    {
+     "k": "canon",
+     "t": "Presentation layer",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs"
+    },
+    {
+     "k": "reference",
+     "t": "Typing Tutor III and Letter Invaders (Kriya Systems, 1984)",
+     "href": "https://en.wikipedia.org/wiki/Typing_game",
+     "note": "Pacing and layout only; nothing copied"
+    },
+    {
+     "k": "reference",
+     "t": "Gunship (MicroProse, 1986)",
+     "href": "https://en.wikipedia.org/wiki/Gunship_(video_game)"
+    },
+    {
+     "k": "reference",
+     "t": "Questprobe featuring Spider-Man (1984)",
+     "href": "https://en.wikipedia.org/wiki/Questprobe_featuring_Spider-Man"
+    },
+    {
+     "k": "reference",
+     "t": "IBM PS/2 Model 25",
+     "href": "https://en.wikipedia.org/wiki/IBM_PS/2_Model_25"
+    },
+    {
+     "k": "canon",
+     "t": "Café study, section 9 (the office basement)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cafe/CAFE_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Scene information manifest",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INFO_MANIFEST.md"
+    },
+    {
+     "k": "canon",
+     "t": "Games study and speed review",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/basement/BASEMENT_STUDY.md"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "space-mail": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "PAW Patrol World",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1952520"
+    },
+    {
+     "k": "oracle",
+     "t": "Fall Guys",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1097150"
+    },
+    {
+     "k": "oracle",
+     "t": "Dome Keeper",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1637320"
+    },
+    {
+     "k": "oracle",
+     "t": "Overcooked! 2",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=728880"
+    },
+    {
+     "k": "oracle",
+     "t": "Trackmania",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2225070"
+    },
+    {
+     "k": "oracle",
+     "t": "Bluey: The Videogame",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2078350"
+    },
+    {
+     "k": "oracle",
+     "t": "Sable",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=757310"
+    },
+    {
+     "k": "oracle",
+     "t": "Dorfromantik",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1455840"
+    },
+    {
+     "k": "oracle",
+     "t": "Tiny Glade",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2198150"
+    },
+    {
+     "k": "oracle",
+     "t": "Besiege",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=346010"
+    },
+    {
+     "k": "oracle",
+     "t": "9 Kings",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2784470"
+    },
+    {
+     "k": "canon",
+     "t": "Fifteen games as Oracle DNA signatures",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/spacemail/spacemail-signatures.json"
+    },
+    {
+     "k": "canon",
+     "t": "Space Mail identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/spacemail/space-mail.identity.json"
+    },
+    {
+     "k": "canon",
+     "t": "Game identity schema",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Abbie's World identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/examples/abbies-world.json"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "cafe-study": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Besiege",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=346010"
+    },
+    {
+     "k": "oracle",
+     "t": "Townscaper",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1291340"
+    },
+    {
+     "k": "oracle",
+     "t": "Planet Zoo",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=703080"
+    },
+    {
+     "k": "canon",
+     "t": "Café study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cafe/CAFE_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Room manifest",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cafe/room-manifest.json"
+    },
+    {
+     "k": "canon",
+     "t": "Scene information manifest",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INFO_MANIFEST.md"
+    },
+    {
+     "k": "canon",
+     "t": "Café model kit (Blender Python recipes, materials, mass, joints)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/cafe-build/kit.py",
+     "note": "every café model is built from these recipes"
+    },
+    {
+     "k": "canon",
+     "t": "Presentation layer: renderWorldOnly",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs",
+     "note": "the photo booth takes each picture from the world layer only"
+    },
+    {
+     "k": "canon",
+     "t": "Material roles for the game",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md",
+     "note": "material names read as shading roles"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's locked pick: the dance-party room",
+     "href": "/studies/cafe/img/interior-party_0.jpg",
+     "note": "Midjourney 5ab4584f image 0, the target for the whole room"
+    },
+    {
+     "k": "reference",
+     "t": "Round 2 low-poly asset proofs",
+     "href": "/studies/cafe/round2.html",
+     "note": "espresso, smoothie, stool, beanbag and cup booth picks"
+    },
+    {
+     "k": "reference",
+     "t": "Worker characters (Abbie and friends)",
+     "href": "/simulation-assets/workers/manifest.json",
+     "note": "the in-game characters the photo booth poses"
+    }
+   ],
+   "recorded": "2026-10-23; models and photo booth round added 14:15Z. No outside dev blogs or tutorials were read for the model build or the booth."
+  },
+  "cafe-r2": {
+   "same": "cafe-study",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "cafe-manifest": {
+   "same": "cafe-study",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "cafe": {
+   "same": "cafe-study",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "bodies-study": {
+   "use": [
+    "figure-books"
+   ],
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Valheim",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=892970",
+     "note": "in the human ladder"
+    },
+    {
+     "k": "oracle",
+     "t": "Team Fortress 2",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=440",
+     "note": "in the human ladder"
+    },
+    {
+     "k": "oracle",
+     "t": "Marvel Rivals",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2767030",
+     "note": "in the human ladder"
+    },
+    {
+     "k": "oracle",
+     "t": "Fall Guys",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1097150",
+     "note": "in the human ladder"
+    },
+    {
+     "k": "oracle",
+     "t": "Disney Dreamlight Valley",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1401590",
+     "note": "in the human ladder"
+    },
+    {
+     "k": "oracle",
+     "t": "Red Dead Redemption 2",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1174180",
+     "note": "in the human ladder"
+    },
+    {
+     "k": "tutorial",
+     "t": "easydrawingguides.com superhero tutorials",
+     "href": "https://easydrawingguides.com",
+     "note": "Evan's reference for the contour-first order"
+    },
+    {
+     "k": "tutorial",
+     "t": "Adobe, How to draw people",
+     "href": "https://www.adobe.com/creativecloud/illustration/discover/how-to-draw-people.html"
+    },
+    {
+     "k": "canon",
+     "t": "How humans are drawn across 379 Oracle game profiles",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/humans/human-ladder.html"
+    },
+    {
+     "k": "canon",
+     "t": "Human canon",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/human-canon.json"
+    },
+    {
+     "k": "canon",
+     "t": "The artist's method",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/ARTIST_METHOD.md"
+    },
+    {
+     "k": "canon",
+     "t": "Drawing the figure",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/DRAWING.md"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "turnaround-hero": {
+   "use": [
+    "llm-3d-modeling"
+   ],
+   "items": [
+    {
+     "k": "canon",
+     "t": "Bodies human canon (Loomis, the Marvel Way)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/human-canon.json"
+    },
+    {
+     "k": "canon",
+     "t": "The bruiser method",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "bruiser": {
+   "use": [
+    "llm-3d-modeling"
+   ],
+   "items": [
+    {
+     "k": "canon",
+     "t": "Bruiser study tools and Meshy provenance",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/"
+    },
+    {
+     "k": "canon",
+     "t": "Bodies human canon",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/human-canon.json"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "brute-fight": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Oracle consult: a side-on cartoon fighting game like SF6, Smash and Absolver",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/brute-fight/BRUTE_FIGHT_STUDY.md",
+     "note": "No fighting game on file yet; the studies-only plan fell back to Anno and Cartel Tycoon. Gap logged."
+    },
+    {
+     "k": "oracle",
+     "t": "Game identity schema, feel layer (juice: hit-stop, shake, camera kick)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md",
+     "note": "The checklist the fight's feel was set against"
+    },
+    {
+     "k": "devblog",
+     "t": "Sakurai on hit-stop (Famitsu column 490, Source Gaming translation)",
+     "href": "https://sourcegaming.info/2015/11/11/thoughts-on-hitstop-sakurais-famitsu-column-vol-490-1/",
+     "note": "Applied: same freeze for both, scaled by damage and capped, defender shake that fades, flinch shown in the freeze"
+    },
+    {
+     "k": "devblog",
+     "t": "Sakurai's video on fine-tuning hit-stop (Nintendo Wire summary)",
+     "href": "https://nintendowire.com/news/2022/12/12/this-week-in-sakurai-12-5-12-11-fine-tuning-hit-stop-and-cheating-the-system/",
+     "note": "Applied: shake horizontal on the ground and vertical in the air, scaled by camera distance; attacker trembles"
+    },
+    {
+     "k": "design",
+     "t": "Capcom Fighters Network column on hit-stop and block-stop",
+     "href": "https://game.capcom.com/cfn/sfv/column/131545",
+     "note": "Applied: one rule for the whole game, the same on hit and block"
+    },
+    {
+     "k": "design",
+     "t": "Impact Freeze (Sonic Hurricane)",
+     "href": "https://sonichurricane.com/?p=1043",
+     "note": "Applied: about 9/11/13 frames for light/medium/heavy"
+    },
+    {
+     "k": "design",
+     "t": "SF6 dynamic blocking animations (EventHubs)",
+     "href": "https://www.eventhubs.com/news/2022/jun/11/dynamic-blocking-animations-sf6",
+     "note": "Applied: new block_overhead clip for a blocked hammer"
+    },
+    {
+     "k": "design",
+     "t": "Absolver interview: Dancing with Combat (GamingBolt)",
+     "href": "https://gamingbolt.com/absolver-interview-dancing-with-combat",
+     "note": "Attacks start and end in a stance; ours return to guard. Stance chains are next."
+    },
+    {
+     "k": "tutorial",
+     "t": "GDC 2014: Fluid and Powerful Animation within Frame Restrictions (Mariel Cartwright, Skullgirls)",
+     "href": "https://gdcvault.com/play/1020575/Animation-Bootcamp-Fluid-and-Powerful",
+     "note": "Strong key poses and anticipation inside a tight frame budget"
+    },
+    {
+     "k": "tutorial",
+     "t": "Animating Stylized Attacks in Maya (Brad Faucheux, Gnomon)",
+     "href": "https://ccs.thegnomonworkshop.com/blog/animating-stylized-attacks-in-maya/",
+     "note": "Startup, active and recovery as readable phases; contact pose"
+    },
+    {
+     "k": "research",
+     "t": "Slap City hitstop formula (wiki)",
+     "href": "https://slapcity.wiki.gg/wiki/Hitstop",
+     "note": "Another damage-scaled formula, for comparison"
+    },
+    {
+     "k": "canon",
+     "t": "Bruiser study scaling pipeline",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/scale/README.md",
+     "note": "The Meshy cleanup both fighters go through"
+    },
+    {
+     "k": "canon",
+     "t": "How Abbie's World shows information (CLAUDE.md)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md",
+     "note": "Ring bell, tired idle, wordless overlay inside 8%"
+    },
+    {
+     "k": "canon",
+     "t": "Presentation layer",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs"
+    },
+    {
+     "k": "canon",
+     "t": "Brute fight build tool",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/brute-fight/README.md"
+    },
+    {
+     "k": "canon",
+     "t": "Study doc, research pass and speed review",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/brute-fight/BRUTE_FIGHT_STUDY.md"
+    },
+    {
+     "k": "reference",
+     "t": "Meshy task 01a167ca (brute one)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/meshy/provenance.json"
+    },
+    {
+     "k": "reference",
+     "t": "Meshy task 01a16806 (brute two)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/meshy2/provenance.json"
+    }
+   ],
+   "recorded": "2026-10-23 by the study's own thread: a real consult and reading pass after shipping; what each source changed is in its note."
+  },
+  "figures": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "The artist's method",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/ARTIST_METHOD.md"
+    },
+    {
+     "k": "canon",
+     "t": "Figures study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/figures/FIGURES_STUDY.md"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "moon-heroes": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Tiny Glade",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=2198150"
+    },
+    {
+     "k": "canon",
+     "t": "Plan and base roster",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/PLAN.md"
+    },
+    {
+     "k": "canon",
+     "t": "Faceted Hero art direction",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/ART_DIRECTION.html"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "moon-base-kit": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Astroneer identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json",
+     "note": "Modules, low HUD, state in the world. State lights stay separate named parts."
+    },
+    {
+     "k": "oracle",
+     "t": "Deliver Us The Moon identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/deliver-us-the-moon.json",
+     "note": "Diegetic holograms; story props are the breadcrumbs."
+    },
+    {
+     "k": "oracle",
+     "t": "Subnautica 2 identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/subnautica-2.json",
+     "note": "A base built from its own pieces: dome, corridor and airlock must snap."
+    },
+    {
+     "k": "design",
+     "t": "Skyrim's Modular Approach to Level Design (Joel Burgess, GDC 2013)",
+     "href": "https://www.gamedeveloper.com/design/skyrim-s-modular-approach-to-level-design",
+     "note": "Pivot at ground centre, 2 m snap, one door size; now checked in bkit.build()."
+    },
+    {
+     "k": "design",
+     "t": "Building huge open worlds: modularity, kits and art fatigue (80 Level)",
+     "href": "https://80.lv/articles/building-huge-open-worlds-modularity-kits-art-fatigue",
+     "note": "No patch pieces; lock pivots and footprints early."
+    },
+    {
+     "k": "devblog",
+     "t": "How System Era used UE4 to create Astroneer (Unreal Engine spotlight)",
+     "href": "https://www.unrealengine.com/en-US/spotlights/how-system-era-softworks-leveraged-ue4-to-create-astroneer-s-wonderful-universe",
+     "note": "Low poly for speed; one material with switchable emissive lights."
+    },
+    {
+     "k": "devblog",
+     "t": "Interview: Deliver Us The Moon's Jordy Velasquez (IndieGraze)",
+     "href": "https://www.indiegraze.com/?p=617",
+     "note": "Story placed organically as a breadcrumb trail."
+    },
+    {
+     "k": "tutorial",
+     "t": "Face weighted normals discussion (Polycount)",
+     "href": "https://polycount.com/discussion/comment/1688746",
+     "note": "Not with a baked normal map; we keep chamfer plus bake."
+    },
+    {
+     "k": "tutorial",
+     "t": "Tools and guides for hard-surface scene production (80 Level)",
+     "href": "https://80.lv/articles/tools-and-guides-for-hard-surface-scene-production",
+     "note": "Trim sheets as a later step for shared seams."
+    },
+    {
+     "k": "canon",
+     "t": "Moon remaster wave 1 (MR-002 to MR-004)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/remaster/REMASTER_STUDY.md",
+     "note": "The dome is an upgrade of MR-002."
+    },
+    {
+     "k": "canon",
+     "t": "Regolith grammar",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/moon/moon-regolith.mjs",
+     "note": "Ground and rock colours."
+    },
+    {
+     "k": "canon",
+     "t": "Faceted Hero art direction (Moon Heroes)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/ART_DIRECTION.html",
+     "note": "Flat planes, gunmetal and off-white hull, orange for people; cyan and gold reserved."
+    },
+    {
+     "k": "canon",
+     "t": "HUD study: diegetic first",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+     "note": "Lamp posts, gauges and door rings carry air, power and safety instead of a HUD bar."
+    },
+    {
+     "k": "canon",
+     "t": "Modeler conventions: material names are game roles",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md"
+    },
+    {
+     "k": "canon",
+     "t": "Moon base kit study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moon-base-kit/MOON_BASE_KIT_STUDY.md"
+    },
+    {
+     "k": "reference",
+     "t": "Moon Mission pack paintings (moonbase, Abbie at the base)",
+     "note": "Style and scale reference, from the Moon Mission pack trek.zip."
+    },
+    {
+     "k": "reference",
+     "t": "Midjourney proofs and picks for every built piece",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/moon-base-kit/mj/",
+     "note": "Each pick is assets/<slug>/concept.jpg, with its job id in provenance.json."
+    }
+   ],
+   "recorded": "2026-10-23: canon and references from the thread as it ran; Oracle, design, dev blog and tutorial pass after round 3 (see the study doc, Research pass)"
+  },
+  "overview": {
+   "use": [
+    "blender-techniques",
+    "llm-3d-modeling"
+   ],
+   "items": [
+    {
+     "k": "canon",
+     "t": "Paper warrior tools",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/paper-warrior/"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "round1": {
+   "same": "overview",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "round2": {
+   "same": "overview",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "round3": {
+   "same": "overview",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "props": {
+   "same": "overview",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "props3d": {
+   "same": "overview",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "helmet": {
+   "use": [
+    "blender-techniques",
+    "llm-3d-modeling"
+   ],
+   "items": [
+    {
+     "k": "canon",
+     "t": "Paper helmet tools",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/paper-helmet/"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "ridge": {
+   "same": "helmet",
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "bodies": {
+   "use": [
+    "blender-techniques"
+   ],
+   "items": [
+    {
+     "k": "canon",
+     "t": "Papercraft grammar",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/paper-warrior/"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "roman-parts": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "Paper warrior kit (the six-part Roman kit)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/paper-warrior/"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "atelier": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "Modeler rules",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md"
+    },
+    {
+     "k": "canon",
+     "t": "Tile profile",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/PROFILE.md"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "storybook": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "Storybook study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/storybook/STORYBOOK_STUDY.md"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "family-cast": {
+   "items": [
+    {
+     "k": "tutorial",
+     "t": "ElevenLabs Voice Design API (text-to-voice/design, eleven_ttv_v3)",
+     "href": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+     "note": "3 previews per description; children's voice descriptions are blocked, so kids are cast as adult voice actors"
+    },
+    {
+     "k": "tutorial",
+     "t": "ElevenLabs: save a designed voice (text-to-voice)",
+     "href": "https://elevenlabs.io/docs/api-reference/text-to-voice/create",
+     "note": "Turns a picked preview into a reusable voice id"
+    },
+    {
+     "k": "reference",
+     "t": "ElevenLabs streaming text to speech (Flash v2.5)",
+     "href": "https://elevenlabs.io/docs/api-reference/text-to-speech/stream",
+     "note": "Why every saved voice can speak new lines live"
+    },
+    {
+     "k": "reference",
+     "t": "Faceted Hero proposal: Abbie and Ani looks (AW-STUDY-0029)",
+     "href": "https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa",
+     "note": "Copper bob, blue eyes, pink; Ani brown hair and eyes, purple"
+    },
+    {
+     "k": "canon",
+     "t": "Welcome tour narration workflow (the pattern voice-cast follows)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/.github/workflows/welcome-narration.yml"
+    },
+    {
+     "k": "canon",
+     "t": "Sound engineer and the sound store (sound pack slots)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/sound-engineer/README.md"
+    },
+    {
+     "k": "canon",
+     "t": "How Abbie's World shows information (sound on the same 2x2)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/CLAUDE.md"
+    },
+    {
+     "k": "canon",
+     "t": "Voice cast tool and per-unit voices",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/voice-cast/README.md"
+    }
+   ],
+   "recorded": "2026-10-23, as worked (Family cast thread)"
+  },
+  "welcome": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "Tour stops",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/welcome/tour-stops.mjs"
+    }
+   ],
+   "recorded": "2026-10-23, gathered afterwards from the study docs"
+  },
+  "faces": {
+   "file": "faces/context.json",
+   "recorded": "2026-10-23, by the study as it was made"
+  },
+  "hexcity": {
+   "recorded": "2026-10-23, gathered afterwards from the study docs",
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Anno 117: Pax Romana",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=3274580",
+     "note": "Oracle profile, plus a full identity record made in this study"
+    },
+    {
+     "k": "canon",
+     "t": "Anno identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/examples/anno-117-pax-romana.json"
+    },
+    {
+     "k": "canon",
+     "t": "City study: the first-principles rule (PR #151)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/city/"
+    },
+    {
+     "k": "canon",
+     "t": "Hex city study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hexcity/HEXCITY_STUDY.md"
+    },
+    {
+     "k": "reference",
+     "t": "Tobler's hiking function",
+     "href": "https://en.wikipedia.org/wiki/Tobler%27s_hiking_function",
+     "note": "daily walking cost of each founding place"
+    }
+   ]
+  },
+  "puppet": {
+   "recorded": "2026-10-23, round 2 (animation pass) recorded as worked",
+   "items": [
+    {
+     "k": "canon",
+     "t": "Character Studio shared rig names",
+     "note": "rig.mjs names, shared with the Character Studio"
+    },
+    {
+     "k": "canon",
+     "t": "The blue-graphite mannequin and its joints",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/figure-practice/"
+    },
+    {
+     "k": "canon",
+     "t": "Puppet study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/puppet/PUPPET_STUDY.md"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's wooden mannequin photo",
+     "note": "joints read off it"
+    },
+    {
+     "k": "oracle",
+     "t": "Shoulder study: locomotion and idle",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shoulder/SHOULDER_STUDY.md",
+     "note": "no foot sliding: play the stride at ground speed; feet that settle; speed blend walk to run; squash on landing"
+    },
+    {
+     "k": "tutorial",
+     "t": "Richard Williams, The Animator's Survival Kit",
+     "href": "https://en.wikipedia.org/wiki/The_Animator%27s_Survival_Kit",
+     "note": "walk keys contact, down, passing, up; arms counter the legs; body lowest just after contact"
+    },
+    {
+     "k": "design",
+     "t": "The twelve basic principles of animation (Thomas and Johnston)",
+     "href": "https://en.wikipedia.org/wiki/Twelve_basic_principles_of_animation",
+     "note": "overlap and follow-through, slow in and out only on holds, arcs"
+    },
+    {
+     "k": "devblog",
+     "t": "David Rosen, Animation Bootcamp: An Indie Approach to Procedural Animation (GDC 2014)",
+     "note": "Overgrowth: a few poses plus procedural foot paths and IK beat a pile of keys"
+    },
+    {
+     "k": "research",
+     "t": "Human gait cycle",
+     "href": "https://en.wikipedia.org/wiki/Gait_(human)",
+     "note": "walk: each foot planted about 60% of the cycle, double support; run: under 40%, with a flight phase; heel strike, heel rise, toe off"
+    }
+   ]
+  },
+  "moon-mission": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Oracle knowledge search: Bluey: The Videogame",
+     "href": "https://abbies-game-oracle.vercel.app/api/knowledge?q=couch%20co-op%20launch%20countdown%20family%20voice&limit=8",
+     "note": "Gentle no-fail co-op for parents and kids: Act 1 stays low-challenge"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle knowledge search: Overcooked! 2",
+     "href": "https://abbies-game-oracle.vercel.app/api/knowledge?q=couch%20co-op%20launch%20countdown%20family%20voice&limit=8",
+     "note": "Talking is the game; keep the shouted jobs, drop the time stress"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle knowledge search: Deliver Us The Moon",
+     "href": "https://abbies-game-oracle.vercel.app/api/knowledge?q=space%20moon%20first%20person%20cockpit%20lander&limit=6",
+     "note": "Slow atmospheric tempo: a calm cutscene between scenes"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle knowledge search: Kerbal Space Program",
+     "href": "https://abbies-game-oracle.vercel.app/api/knowledge?q=space%20moon%20first%20person%20cockpit%20lander&limit=6",
+     "note": "Real launch words can be funny and teach"
+    },
+    {
+     "k": "devblog",
+     "t": "Everybody Shake! The Making of Spaceteam, chapter 2",
+     "href": "https://episodiccontentmag.com/2016/01/29/everybodyshake2/",
+     "note": "One person's instruction is another's job: \"PLUG IN OUR OXYGEN!!!\""
+    },
+    {
+     "k": "devblog",
+     "t": "First Deliver Us Mars dev diary",
+     "href": "https://www.thesixthaxis.com/2022/05/06/first-deliver-us-mars-dev-diary-journeys-to-the-red-planet/",
+     "note": "Launch-day rhythm (style only)"
+    },
+    {
+     "k": "devblog",
+     "t": "Interview with Koen Deetman, game director of Deliver Us Mars",
+     "href": "https://gamingtrend.com/interviews/we-interview-koen-deetman-game-director-for-deliver-us-mars/"
+    },
+    {
+     "k": "devblog",
+     "t": "Ghost Town Games: Overcooked is \"an evening thing\"",
+     "href": "https://www.nintendolife.com/features/interview-were-not-making-a-party-game-now-its-more-of-an-evening-thing-ghost-town-is-moving-on-from-overcooked",
+     "note": "One act per evening"
+    },
+    {
+     "k": "design",
+     "t": "These design principles made Jackbox a party game phenomenon",
+     "href": "https://builtin.com/media-gaming/jackbox-games-design-party-pack",
+     "note": "One task at a time, paced like a TV show: Houston is the host"
+    },
+    {
+     "k": "tutorial",
+     "t": "GDC: Designing Asymmetric Gameplay for Keep Talking and Nobody Explodes",
+     "href": "https://gdcvault.com/play/1023113/Designing-Asymmetric-Gameplay-For-Keep",
+     "note": "The girls spot on the PIP camera while Daddy flies"
+    },
+    {
+     "k": "research",
+     "t": "Built-in hold",
+     "href": "https://en.wikipedia.org/wiki/Built-in_hold",
+     "note": "The launch clock always ticks, with planned holds so nobody fails"
+    },
+    {
+     "k": "research",
+     "t": "Why the shuttle countdown has so many stops and starts",
+     "href": "https://www.scientificamerican.com/article/shuttle-countdown-clock/"
+    },
+    {
+     "k": "canon",
+     "t": "Moon Mission study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonmission/MOON_MISSION_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Game identity schema",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md"
+    },
+    {
+     "k": "canon",
+     "t": "HUD and information study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Interaction grammar",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+    },
+    {
+     "k": "canon",
+     "t": "School and basement speed reviews",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Moon Heroes: Faceted Hero art direction (AW-STUDY-0029)",
+     "href": "https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's trek pack: Abbie and Daddy's Moon Mission (story and minigames)",
+     "note": "Private project file"
+    },
+    {
+     "k": "reference",
+     "t": "Moon Mission concept art (Midjourney, 13 items)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/moon-mission/art/README.md"
+    }
+   ],
+   "recorded": "2026-10-23, as the study was made"
+  },
+  "figure-practice": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "Artist method and rep protocol (Bodies study)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/ARTIST_METHOD.md",
+     "note": "practise one thing, score, one lesson"
+    },
+    {
+     "k": "canon",
+     "t": "Drawing the figure: construction order and limb rules",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/DRAWING.md"
+    },
+    {
+     "k": "canon",
+     "t": "Human canon: proportions and landmarks",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/human-canon.json"
+    },
+    {
+     "k": "canon",
+     "t": "Shaders article and the 7-look toon set (banana split day)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/rendering/shaders-article.html"
+    },
+    {
+     "k": "tutorial",
+     "t": "Constructive Anatomy, George B. Bridgman (1920)",
+     "href": "https://archive.org/details/constructiveanat00brid",
+     "note": "limb bulges high, joints as boxes"
+    },
+    {
+     "k": "tutorial",
+     "t": "Figure Drawing for All It's Worth, Andrew Loomis (1943)",
+     "note": "line of action, stick figure to masses"
+    },
+    {
+     "k": "reference",
+     "t": "Midjourney sketches of the pose, 4 styles x 4",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/midjourney/outputs/figure-practice-sketches/provenance.json"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's reference photo of a leaping wooden mannequin",
+     "note": "stock photo, private, not committed"
+    }
+   ]
+  }
+ }
+}

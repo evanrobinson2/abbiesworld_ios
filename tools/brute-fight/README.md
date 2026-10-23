@@ -14,8 +14,8 @@ Page: `prototypes/ranch-atelier/dist/studies/brute-fight/` (`index.html` is the 
 |---|---|
 | `fighters.json` | The fighters: Meshy hero, learned rings (spec), Meshy task, his picture, and the paint (role colours and shadow tint). |
 | `build.py` | One command for everything: weld + decimate (the Bruiser cleanup), roles per hero face, bake colour, AO and height from the 30k hero onto fresh UVs on the 3k fighter, combine into `paint.png`, place the 20-bone skeleton from the rings, weight by part and distance, key every move, export `out/<fighter>/fighter.glb`. `--sheet` also renders `moves.jpg`. |
-| `moves.py` | The move set as numbers: key poses about the body's own axes (see its docstring), 19 clips, and the game data in `MOVES` (when the blow lands, reach, damage, which reaction, push). Written to `out/moves.json` for the game. |
-| `out/<fighter>/` | `fighter.glb` (mesh, paint, skeleton, 19 animations), `paint.png`, `rig.json` (joint positions), `moves.jpg` (contact sheet). |
+| `moves.py` | The move set as numbers: key poses about the body's own axes (see its docstring), 20 clips, and the game data in `MOVES` (when the blow lands, reach, damage, which reaction, push). Written to `out/moves.json` for the game. |
+| `out/<fighter>/` | `fighter.glb` (mesh, paint, skeleton, 20 animations), `paint.png`, `rig.json` (joint positions), `moves.jpg` (contact sheet). |
 
 `python3 build.py --sheet` rebuilds both (about 20 s each; needs `pip install bpy`, and on a bare Linux box `libegl1`).
 Then copy `out/*/fighter.glb` and `out/moves.json` into the study folder.

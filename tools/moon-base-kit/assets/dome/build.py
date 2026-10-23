@@ -106,5 +106,5 @@ for s in (-1, 1):
 k.box('TunnelLamp', (0.4, 0.06, 0.1), (TX, -R - 2.1, 2.82), 'Lamp_Green', bevel=0.02)
 k.cyl('AntennaMast', 0.04, 1.6, (R - 0.6, -2.4, 1.7), 'Metal_Steel', n=6)
 k.sphere('AntennaTip', 0.07, (R - 0.6, -2.4, 2.55), 'Lamp_Red', seg=8, rings=5)
-k.build(HERE, {'id': 'MK-029', 'name': 'Main dome, upgraded'}, bake_size=2048,
+k.build(HERE, {'id': 'MK-029', 'name': 'Main dome, upgraded', 'pivot': 'dome centre; the tunnel reaches out the front'}, bake_size=2048,
         view=dict(yaw=18, pitch=12), fps_eye=((4.5, -15.0, 1.1), (0.5, -2.0, 2.6)))

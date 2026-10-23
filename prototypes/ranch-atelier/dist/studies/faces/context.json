@@ -1,0 +1,32 @@
+{
+ "schema": "aw.context-engineering.v1",
+ "study": "AW-STUDY-0039 - Facial Expressions",
+ "date": "2026-10-23",
+ "groups": [
+  {"kind": "Oracle consultation", "items": [
+   {"title": "Game Oracle: 380 game records, identity + 'How it's drawn' (rendering family, camera)", "ref": "docs/oracle/games/*.json", "used": "picked the 40 games with faces worth learning from, by camera and rendering family"},
+   {"title": "HUD and information grammar (2x2 + none)", "ref": "docs/oracle/hud/HUD_STUDY.md", "used": "face and body are world; the far-away bubble is spatial, on the presentation layer"},
+   {"title": "Rendering study", "ref": "docs/oracle/rendering/RENDERING_STUDY.md", "used": "which art families suit bone faces, swaps or faceless"},
+   {"title": "Family cast + live voices (AW-STUDY-0030)", "ref": "tools/voice-cast/cast.json", "used": "the voice that drives the face; kid-face and PG rules"}
+  ]},
+  {"kind": "Game dev blogs and talks", "items": [
+   {"title": "Cyberpunk 2077 uses JALI to automate facial animation (80.lv)", "url": "https://80.lv/articles/cyberpunk-2077-uses-jali-to-automate-facial-animation", "used": "voice + script tags drive the face automatically"},
+   {"title": "JALI at SIGGRAPH (history.siggraph.org)", "url": "https://history.siggraph.org/?p=76962", "used": "jaw and lip as two separate controls"},
+   {"title": "Game Animation: What Happened to Mass Effect? (80.lv)", "url": "https://80.lv/articles/game-animation-what-happened-to-mass-effect/?amp=1", "used": "eye life and holds; why automatic realism fails"},
+   {"title": "The Art of Hades (Kotaku)", "url": "https://kotaku.com/the-art-of-hades-1845443438", "used": "dialogue portraits for small figures"}
+  ]},
+  {"kind": "Game design writing", "items": [
+   {"title": "Character designs in Hades and what makes them great", "url": "https://criticalvideogamestudies.com/character-designs-in-hades-and-what-makes-them-so-great/", "used": "readable shape language and expression"},
+   {"title": "Eleven v3 audio tags, and why they matter (ElevenLabs)", "url": "https://elevenlabs.io/blog/v3-audiotags", "used": "one [tag] in the line directs the voice and the face"}
+  ]},
+  {"kind": "Tutorials and references", "items": [
+   {"title": "Valve Faceposer reference", "url": "https://developer.valvesoftware.com/wiki/Faceposer_reference", "used": "flex sliders, the Garry's Mod face toy"},
+   {"title": "Valve: Flex animation", "url": "https://developer.valvesoftware.com/wiki/Flex_animation", "used": "blendshape channels per feature"},
+   {"title": "Valve: Expression creation", "url": "https://developer.valvesoftware.com/wiki/Expression_Creation", "used": "expressions as named slider sets"},
+   {"title": "Toon Boom: creating a mouth chart", "url": "https://learn.toonboom.com/modules/lip-sync-animation1/topic/activity-1-creating-a-mouth-chart", "used": "the swap sheet and our 10 mouth shapes"},
+   {"title": "Rhubarb Lip Sync (open source)", "url": "https://github.com/DanielSWolf/rhubarb-lip-sync", "used": "classic cartoon mouth set; audio to mouth shapes offline"},
+   {"title": "three.js skinning and morphing example", "url": "https://threejs.org/examples/webgl_animation_skinning_morph", "used": "morph targets on a skinned toy in the browser"},
+   {"title": "How audio tags work with Eleven v3 (docs)", "url": "https://elevenlabs.io/docs/help-center/product/core-capabilities/text-to-speech/how-do-audio-tags-work-with-eleven-v3-alpha", "used": "which tags the voice honours"}
+  ]}
+ ]
+}

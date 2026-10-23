@@ -1,16 +1,71 @@
 {
-  "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
+  "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
       "id": "2026-10-23-character-studio",
       "date": "2026-10-23",
-      "title": "Character Studio: the mannequin moves",
-      "line": "The wooden mannequin now has a skeleton and 50 moves from every kind of game, from a cozy wave to a roundhouse kick, a golf swing and the robot. The same moves play on the Meshy brutes, and the 2D puppet sits in the next tab.",
+      "title": "Character Studio: real motion",
+      "line": "The wooden mannequin moves with real motion capture: 50 moves from every kind of game, filmed with depth, haze and a golden-hour crowd. Try four looks (clay, plasticine, stick man, 80s action), pick the doll up, and the 2D puppet sits next door.",
       "image": "/whats-new/2026-10-23-character-studio.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMMgGWzaue2qNoRR7u64j2y",
       "threadTitle": "AW-STUDY-0037 - Character Studio",
       "tour": false,
       "link": "/studies/character-studio/"
+    },
+    {
+      "id": "2026-10-23-texture-studio",
+      "date": "2026-10-23",
+      "title": "Texture Studio: dress the heroes",
+      "line": "Pick a brute and one of four looks (whimsical clay, Stick Man storybook, Wallace and Gromit plasticine, 80s cartoon action). Paint him with a brush or fill a whole part, then watch all four heroes walk from a distance.",
+      "image": "/whats-new/2026-10-23-texture-studio.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A",
+      "threadTitle": "AW-STUDY-0040 - Texture Studio",
+      "tour": false,
+      "link": "/studies/texture-studio/"
+    },
+    {
+      "id": "2026-10-23-whats-new-history",
+      "date": "2026-10-23",
+      "title": "Every new thing, in one place",
+      "line": "Later and Dismiss now sit right under the picture, with a close button so you never have to choose. \"+ more\" and History open a viewer of every update, unread and read, each linking to its study.",
+      "image": "/whats-new/2026-10-23-whats-new-history.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-puppet-gait",
+      "date": "2026-10-23",
+      "title": "The puppet walks like a person now",
+      "line": "The mannequin's feet stay planted on a floor that slides by, its hips rise and fall with each step, and its arms swing and trail behind. One dial takes it from a walk to a jog to a run.",
+      "image": "/whats-new/2026-10-23-puppet-gait.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYR1MXxaykLkRfrfxAEMjsd5",
+      "threadTitle": "AW-STUDY-0038 - 2D Mannequin Puppet",
+      "tour": false,
+      "link": "/studies/character-studio/puppet.html?move=Walk"
+    },
+    {
+      "id": "2026-10-23-study-context",
+      "date": "2026-10-23",
+      "title": "What each study drew on",
+      "line": "Every study now has a Context card on the right: the Oracle games it consulted, the dev and design blogs, the tutorials and our own canon. Where nothing was written down it says so.",
+      "image": "/whats-new/2026-10-23-study-context.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/studies/#bodies-study"
+    },
+    {
+      "id": "2026-10-23-faces",
+      "date": "2026-10-23",
+      "title": "Faces that feel",
+      "line": "A toy with 18 feelings, from joy to sleepy, as a 3D face, a painted face and a faceless wooden body. Type a line and it says it with the right face. Plus how 40 of your games do faces.",
+      "image": "/whats-new/2026-10-23-faces.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXPv4h99Qoyh4YdoLaDVtxx",
+      "threadTitle": "AW-STUDY-0039 - Facial Expressions",
+      "tour": false,
+      "link": "/studies/faces/"
     },
     {
       "id": "2026-10-23-moon-base-kit-r3",
@@ -328,7 +383,8 @@
       "image": "/whats-new/2026-10-23-welcome.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYW3oVJ5iRfHfiFPSwzDx1a9",
       "threadTitle": "Welcome to Abbie's World intro",
-      "tour": true
+      "tour": true,
+      "link": "/studies/#welcome"
     },
     {
       "id": "2026-10-23-billing",
@@ -338,7 +394,8 @@
       "image": "/whats-new/2026-10-23-front-door.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
       "threadTitle": "Front door, sign-in and donations",
-      "tour": false
+      "tour": false,
+      "link": "/billing"
     },
     {
       "id": "2026-10-23-notices",
@@ -348,7 +405,8 @@
       "image": "/whats-new/2026-10-23-notices.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
       "threadTitle": "Design lead",
-      "tour": true
+      "tour": true,
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-front-door",
@@ -357,7 +415,8 @@
       "line": "abbies.world now opens on a front door: what Abbie's World is, how it works, the PG promise, Play and Sign in, and support from $5 a month. Your home-screen app still goes straight to the ranch.",
       "image": "/whats-new/2026-10-23-front-door.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
-      "threadTitle": "Front door, sign-in and donations"
+      "threadTitle": "Front door, sign-in and donations",
+      "link": "/welcome"
     },
     {
       "id": "2026-10-23-models-one-screen",
@@ -366,7 +425,8 @@
       "line": "Each model now fits on one screen: a hero bar with its name, the picture and the model side by side, and your feedback in its own panel on the right that you can hide. A menu on the left folds away. Profile and settings now open from your avatar, with 20 styles that change the whole app, and Studies has a home page.",
       "image": "/whats-new/2026-10-23-models-one-screen.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead"
+      "threadTitle": "Design lead",
+      "link": "/models"
     },
     {
       "id": "2026-10-23-cel-hand-cards",
@@ -375,7 +435,8 @@
       "line": "Your hand cards now show the cartoon of each place in clean cel shading with ink lines: the barn and silo, the kitchen garden, a wildflower meadow with a bee skep, and the moon dome. Tap anything in the world and its card opens right beside it.",
       "image": "/whats-new/2026-10-23-cel-hand-cards.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
-      "threadTitle": "Sandbox v2 interface"
+      "threadTitle": "Sandbox v2 interface",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-low-clouds",
@@ -384,7 +445,8 @@
       "line": "Clouds now sail low over the tiles, about 20 m up, and their shadows slide across the fields beneath them.",
       "image": "/whats-new/2026-10-23-low-clouds.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
-      "threadTitle": "Weather and clouds"
+      "threadTitle": "Weather and clouds",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-cel-cards",
@@ -393,7 +455,8 @@
       "line": "The cards dropped the fake wood, brass and parchment. Every card now shows the real in-game model, cel-shaded with ink lines, in a flat frame with a quiet pattern for its place: barn boards on the ranch, sprout rows in the garden, flowers in the meadow, stars on the moon. Any card that isn't ready says PRELIMINARY · idea only.",
       "image": "/whats-new/2026-10-23-cel-cards.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
-      "threadTitle": "Card generator"
+      "threadTitle": "Card generator",
+      "link": "/cards"
     },
     {
       "id": "2026-10-23-models-browser",
@@ -402,7 +465,8 @@
       "line": "See them all shows every model as a small card: the picture in its frame and the model beside it. Switch between one at a time and all at once. The gear now has App and Game: Game puts the page under the sky with seven styles, from Gallery to Candy party.",
       "image": "/whats-new/2026-10-23-models-browser.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead"
+      "threadTitle": "Design lead",
+      "link": "/models"
     },
     {
       "id": "2026-10-23-models-tighter",
@@ -411,7 +475,8 @@
       "line": "Your picture and its words sit together in one frame, and the model stands free beside it, printing itself in with a half-second laser. Labels and names are in Title Case, and Reject, Chat and Keep sit right under the pair.",
       "image": "/whats-new/2026-10-23-models-tighter.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead"
+      "threadTitle": "Design lead",
+      "link": "/models"
     },
     {
       "id": "2026-10-23-moon-remaster",
@@ -420,7 +485,8 @@
       "line": "The Moon is grey-blue now, with craters you can see, rocks thrown out round their rims, and tracks that stay in the dust. A glass dome with an orange band, a charcoal moon buggy that drives out to the geology field, and something new: a dark meteorite in a fresh crater, glowing cyan like a slow heartbeat.",
       "image": "/whats-new/2026-10-23-moon-remaster.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1",
-      "threadTitle": "Moon remaster build"
+      "threadTitle": "Moon remaster build",
+      "link": "/moon/"
     },
     {
       "id": "2026-10-23-models-new-look",
@@ -429,7 +495,8 @@
       "line": "Model pages are simpler: AW in the corner, wordless counters, and your picture and the 3D model the same size. Numbered points show what matters on your picture and whether the model gets each one right. Reject, Chat (talk or type) and Keep sit under your right thumb. The gear switches between Default, Rome and Efficient, and the cart asks for more, with a camera. Every order starts as concept art.",
       "image": "/whats-new/2026-10-23-models-new-look.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead"
+      "threadTitle": "Design lead",
+      "link": "/models"
     },
     {
       "id": "2026-10-23-weather-fronts",
@@ -438,7 +505,8 @@
       "line": "Weather now arrives in fronts: the wind picks up, clouds gather and the animals settle before the rain, then the sky breaks up as it clears. Soft clouds float around your ranch and their shadows drift across the fields. Storms grey the sky, dim the sun and light the lamps, and a gentle flash brings thunder. The light is new too: a paper sky by day, a gold sunset, an ink-blue moonlit night with lamps that come on one by one at dusk, and Earthshine with lit windows on the Moon at night.",
       "image": "/whats-new/2026-10-23-weather-fronts.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
-      "threadTitle": "Weather and clouds"
+      "threadTitle": "Weather and clouds",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-model-review-row",
@@ -447,7 +515,8 @@
       "line": "Each model page is now your picture, the 3D model, and your notes with Reject, Adjust and Accept on the right. Name and score sit above, details below. Your verdict comes straight to Claude.",
       "image": "/whats-new/2026-10-23-model-review-row.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa",
-      "threadTitle": "Models review"
+      "threadTitle": "Models review",
+      "link": "/models"
     },
     {
       "id": "2026-10-23-sign-in",
@@ -456,7 +525,8 @@
       "line": "Sign in is in the toy box now. Anyone can sign in with Google and play the ranch as their own copy, and their worlds follow them to any device. It's free, and we ask nothing of them. Talking to the Computer needs a sign-in, and everyone's AI spending has a cap: $1 a person, $100 for all players together, and $1000 for you.",
       "image": "/whats-new/2026-10-23-sign-in.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
-      "threadTitle": "Sign-in to play the ranch"
+      "threadTitle": "Sign-in to play the ranch",
+      "link": "/welcome"
     },
     {
       "id": "2026-10-23-no-masks",
@@ -465,7 +535,8 @@
       "line": "Opening a panel no longer dims or blurs the ranch, the teleport map floats over the world on a glass tray, and teleporting is a sparkle on the pad instead of a white-out.",
       "image": "/whats-new/2026-10-23-no-masks.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
-      "threadTitle": "Design knowledge into practice"
+      "threadTitle": "Design knowledge into practice",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-sandbox-chronograph",
@@ -474,7 +545,8 @@
       "line": "Time of day, pause, speed, weather and season are back in one glass dial at the top. Pin any dial you like, such as friends on the way or hungry animals, and keep your own to-dos there. The ranch suggests dials, and you can pin them or wave them off. The cards in your hand now have proper card faces.",
       "image": "/whats-new/2026-10-23-sandbox-chronograph.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
-      "threadTitle": "Sandbox v2 interface"
+      "threadTitle": "Sandbox v2 interface",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-selection-ring",
@@ -483,7 +555,8 @@
       "line": "Tap a building and a warm ring now glows on the ground around it, instead of the red debug box. Only you see the ring: the people on the ranch and the voice see just the ranch.",
       "image": "/whats-new/2026-10-23-selection-ring.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
-      "threadTitle": "Design knowledge into practice"
+      "threadTitle": "Design knowledge into practice",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-game-sense",
@@ -492,7 +565,8 @@
       "line": "Ask the voice for something that fights the game, like a timer floating in the sky, and it suggests a better version first (a bell that rings faster) and asks. Say no and it does it your way. A giant monkey stomping the town? You get it, and the townsfolk run and grumble.",
       "image": "/whats-new/2026-10-23-game-sense.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
-      "threadTitle": "Live voice world control"
+      "threadTitle": "Live voice world control",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-sandbox-v2",
@@ -501,7 +575,8 @@
       "line": "The sandbox lost its toolbar and side panel. Three glass toys remain: a sun dial at the top (tap to pause, hold for time and weather), your tile cards at the bottom, and a toy box with everything else. No more haze over the world. Classic layout is in the toy box.",
       "image": "/whats-new/2026-10-23-sandbox-v2.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
-      "threadTitle": "Sandbox v2 interface"
+      "threadTitle": "Sandbox v2 interface",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-card-forge",
@@ -510,7 +585,8 @@
       "line": "Open a pack of 15 Ranch cards made from the game's animals and buildings. Tilt them in the light, browse the binder, and print the whole set at studio quality. Settings, Studies, Cards.",
       "image": "/whats-new/2026-10-23-card-forge.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
-      "threadTitle": "Card generator"
+      "threadTitle": "Card generator",
+      "link": "/cards"
     },
     {
       "id": "2026-10-23-ranch-rebuild",
@@ -519,7 +595,8 @@
       "line": "Every building, animal, tree, prop and plant on the ranch was redrawn as concept art and rebuilt from it. The pen sheds, the cows and the goats are all new.",
       "image": "/whats-new/2026-10-23-ranch-rebuild.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJJwV5vW99BgS3tVwgdy9Q5",
-      "threadTitle": "Ranch tile rebuild"
+      "threadTitle": "Ranch tile rebuild",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-live-voice-settings",
@@ -528,7 +605,68 @@
       "line": "Settings → Voice opens Live voice: choose OpenAI or ElevenLabs, the voice, speed, personality, reply length and how long it waits for little ones. Safety stays locked.",
       "image": "/whats-new/2026-10-23-live-voice-settings.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
-      "threadTitle": "Live voice world control"
+      "threadTitle": "Live voice world control",
+      "link": "/live-voice"
+    },
+    {
+      "id": "study-school-ready",
+      "date": "2026-10-23",
+      "title": "School Jump: Game-Ready",
+      "line": "The school jump made game ready: the climb fixed, a full UX pass, and every model rebuilt as a hero low-poly recipe that the next memory game can reuse.",
+      "image": "/studies/school-ready/img/thumb.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Studies",
+      "tour": false,
+      "link": "/studies/#school-ready",
+      "backfill": true
+    },
+    {
+      "id": "study-turnaround-hero",
+      "date": "2026-10-23",
+      "title": "Turnaround Hero",
+      "line": "Applies the bruiser method to a second figure: turnaround, depth ruler, anatomy base, planes.",
+      "image": "/studies/turnaround-hero/img/thumb.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Studies",
+      "tour": false,
+      "link": "/studies/#turnaround-hero",
+      "backfill": true
+    },
+    {
+      "id": "study-moon-heroes",
+      "date": "2026-10-23",
+      "title": "Moon Heroes",
+      "line": "One faceted body set, PG and true to shape, that every hero and the gear kit fit.",
+      "image": "/studies/moon-heroes/ad/trio.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Studies",
+      "tour": false,
+      "link": "/studies/#moon-heroes",
+      "backfill": true
+    },
+    {
+      "id": "study-space-mail",
+      "date": "2026-10-23",
+      "title": "Space Mail",
+      "line": "A whole mini game designed from our identity; waiting on your go to build it.",
+      "image": "/studies/spacemail/img/thumb.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Studies",
+      "tour": false,
+      "link": "/studies/#space-mail",
+      "backfill": true
+    },
+    {
+      "id": "study-overview",
+      "date": "2026-10-23",
+      "title": "Paper warrior",
+      "line": "Set the parts-first rule: each piece is modelled and fitted on its own.",
+      "image": "/studies/warrior/img/proof_c.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Studies",
+      "tour": false,
+      "link": "/studies/#overview",
+      "backfill": true
     },
     {
       "id": "2026-10-22-voice-app-control",
@@ -537,7 +675,8 @@
       "line": "The Computer now knows the ranch, its animals and the other worlds. Ask for a real barn, more goats, winter, a new tile or the moon base, and it does it.",
       "image": "/whats-new/2026-10-22-voice-app-control.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
-      "threadTitle": "Live voice world control"
+      "threadTitle": "Live voice world control",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-22-sounds",
@@ -546,7 +685,8 @@
       "line": "450 sounds for the ranch and beyond, picked and levelled by the sound engineer. Open Sounds from Settings to browse them; they start playing once storage is switched on.",
       "image": "/whats-new/2026-10-22-sounds.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9qGUVvGpSmdcwZSzez8qgn",
-      "threadTitle": "Sound engineer and sound browser"
+      "threadTitle": "Sound engineer and sound browser",
+      "link": "/sounds"
     },
     {
       "id": "2026-10-22-live-mode",
@@ -555,7 +695,8 @@
       "line": "Tap the microphone and just say what you want: the Computer builds it as you talk. It only plays the game, and it keeps things PG.",
       "image": "/whats-new/2026-10-22-live-mode.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
-      "threadTitle": "Live voice world control"
+      "threadTitle": "Live voice world control",
+      "link": "/live-voice"
     },
     {
       "id": "2026-10-22-workshop",
@@ -564,7 +705,8 @@
       "line": "Concept art and models fly in as they're made. Tap the factory button to see every job, its progress and the machines.",
       "image": "/whats-new/2026-10-22-workshop.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
-      "threadTitle": "iPhone update and feedback loop"
+      "threadTitle": "iPhone update and feedback loop",
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-22-update-card",
@@ -573,7 +715,32 @@
       "line": "This card shows up when a new version is ready. Tap the speech bubble to send Claude a picture and a note.",
       "image": "/whats-new/2026-10-22-update-card.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
-      "threadTitle": "iPhone update and feedback loop"
+      "threadTitle": "iPhone update and feedback loop",
+      "link": "/sandbox"
+    },
+    {
+      "id": "study-helmet",
+      "date": "2026-10-22",
+      "title": "Paper helmet",
+      "line": "Made \"same camera before and after\" a rule for every study.",
+      "image": "/studies/helmet/C.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Studies",
+      "tour": false,
+      "link": "/studies/#helmet",
+      "backfill": true
+    },
+    {
+      "id": "study-atelier",
+      "date": "2026-10-22",
+      "title": "Atelier pack",
+      "line": "Its trees, rocks and props replaced the Ranch’s old models in the game.",
+      "image": "/studies/atelier/img/after-z.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Studies",
+      "tour": false,
+      "link": "/studies/#atelier",
+      "backfill": true
     }
   ]
 }
