@@ -239,6 +239,240 @@
           "bytes": 1079572
         }
       ]
+    },
+    {
+      "name": "asset-stool-bricks",
+      "group": "assets",
+      "asset": "stool",
+      "style": "bricks",
+      "prompt": "a round teal bar stool with a magenta post and foot ring, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "ce5652b9-4c02-478a-bd59-8e59e6f73c34",
+      "created": "2026-10-23T07:19:54Z",
+      "files": [
+        {
+          "file": "images/asset-stool-bricks_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/ce5652b9-4c02-478a-bd59-8e59e6f73c34/0_0.png",
+          "sha256": "67e33029130551d572e41c635ca628801695a6c43ef504c1c9318d5f6ac9b439",
+          "bytes": 1031048
+        },
+        {
+          "file": "images/asset-stool-bricks_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/ce5652b9-4c02-478a-bd59-8e59e6f73c34/0_1.png",
+          "sha256": "007521147f329d5490f31f801e34944ac12a142a8d1278e0ee847102f1761887",
+          "bytes": 1104095
+        },
+        {
+          "file": "images/asset-stool-bricks_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/ce5652b9-4c02-478a-bd59-8e59e6f73c34/0_2.png",
+          "sha256": "b27b1d2ec5b89d9eb20f8a2d2a10bf66bf1c6a2aac566b7f188bec4e4d0fa40a",
+          "bytes": 1022864
+        },
+        {
+          "file": "images/asset-stool-bricks_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/ce5652b9-4c02-478a-bd59-8e59e6f73c34/0_3.png",
+          "sha256": "8f2801f8ec633031396907ff292f35c29faed2912030d841063596635329ad42",
+          "bytes": 953045
+        }
+      ]
+    },
+    {
+      "name": "asset-beanbag-bricks",
+      "group": "assets",
+      "asset": "beanbag",
+      "style": "bricks",
+      "prompt": "a slouchy orange beanbag chair, built entirely from generic interlocking plastic toy bricks with round studs, toy brick model, no logos, not a branded set, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "7c5b8b92-4983-4877-980f-6d0436c73ec7",
+      "created": "2026-10-23T07:20:11Z",
+      "files": [
+        {
+          "file": "images/asset-beanbag-bricks_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/7c5b8b92-4983-4877-980f-6d0436c73ec7/0_0.png",
+          "sha256": "657f4ccd94b165bd3787e8e809b79fde432a47c4c7f281bd77a1af195a6a0684",
+          "bytes": 1098684
+        },
+        {
+          "file": "images/asset-beanbag-bricks_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/7c5b8b92-4983-4877-980f-6d0436c73ec7/0_1.png",
+          "sha256": "9d84a648580a97ea22a5953bc4751b06c090087907a2437403b6166256da4dff",
+          "bytes": 1105216
+        },
+        {
+          "file": "images/asset-beanbag-bricks_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/7c5b8b92-4983-4877-980f-6d0436c73ec7/0_2.png",
+          "sha256": "c0edcd42b5271547edbf7152a0a333402a7f1232cdf7a94149b422d8c9897654",
+          "bytes": 1078858
+        },
+        {
+          "file": "images/asset-beanbag-bricks_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/7c5b8b92-4983-4877-980f-6d0436c73ec7/0_3.png",
+          "sha256": "67a9cef105dc3e146cbcbdfc26b8f1413e4ddb9bbb8461bff6270f07f8a6ff3a",
+          "bytes": 1132052
+        }
+      ]
+    },
+    {
+      "name": "asset-cup-booth-vinyl",
+      "group": "assets",
+      "asset": "cup-booth",
+      "style": "vinyl",
+      "prompt": "a DJ booth built inside a giant pink coffee cup with a handle, a glowing window and turntables, on a round stage, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "18da7e8d-2bbc-4a45-9df3-aa98dd6dd2df",
+      "created": "2026-10-23T07:20:38Z",
+      "files": [
+        {
+          "file": "images/asset-cup-booth-vinyl_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/18da7e8d-2bbc-4a45-9df3-aa98dd6dd2df/0_0.png",
+          "sha256": "e145b158ceaa3cd3e419bf786fa8eff7463d98b65bb5314c1364c217ec1dd99a",
+          "bytes": 969980
+        },
+        {
+          "file": "images/asset-cup-booth-vinyl_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/18da7e8d-2bbc-4a45-9df3-aa98dd6dd2df/0_1.png",
+          "sha256": "657104c3c63e0764d9a5327433a5ab574a14fd640ff4e860bd0ce0372b8374e5",
+          "bytes": 1009672
+        },
+        {
+          "file": "images/asset-cup-booth-vinyl_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/18da7e8d-2bbc-4a45-9df3-aa98dd6dd2df/0_2.png",
+          "sha256": "c633e38b8d1702ab9d9adbb622fbbdc77bf1a1f77389515e6102115aa31b771a",
+          "bytes": 1055205
+        },
+        {
+          "file": "images/asset-cup-booth-vinyl_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/18da7e8d-2bbc-4a45-9df3-aa98dd6dd2df/0_3.png",
+          "sha256": "658433e9a75bb223beaf38edcba1cfa1df7923981c5a456184e54dce9f1959e1",
+          "bytes": 993756
+        }
+      ]
+    },
+    {
+      "name": "asset-espresso-vinyl",
+      "group": "assets",
+      "asset": "espresso",
+      "style": "vinyl",
+      "prompt": "a chunky retro espresso machine with pink panels, chrome, two portafilters and two small cups, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "3e1f350b-3661-4b19-b0f5-3b40b361b5b1",
+      "created": "2026-10-23T07:20:57Z",
+      "files": [
+        {
+          "file": "images/asset-espresso-vinyl_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/3e1f350b-3661-4b19-b0f5-3b40b361b5b1/0_0.png",
+          "sha256": "ade255ecd78be4ff06b79284ec2e263b44e153ebd5d56bf09078cb499e9e5df0",
+          "bytes": 1037774
+        },
+        {
+          "file": "images/asset-espresso-vinyl_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/3e1f350b-3661-4b19-b0f5-3b40b361b5b1/0_1.png",
+          "sha256": "0f61b19c6fe9d90e076bf68e2addcf38548c3f6ebd22b4ac274c0b9a3c58f117",
+          "bytes": 996903
+        },
+        {
+          "file": "images/asset-espresso-vinyl_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/3e1f350b-3661-4b19-b0f5-3b40b361b5b1/0_2.png",
+          "sha256": "775ae7bdfc8daf053b8a4d1e46533fff622a02c11813df90fdfc0728a26aae93",
+          "bytes": 943580
+        },
+        {
+          "file": "images/asset-espresso-vinyl_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/3e1f350b-3661-4b19-b0f5-3b40b361b5b1/0_3.png",
+          "sha256": "99a66c0b930d7994456b33565807231aa76ff93dee6685c9944ecb6e891fa9fc",
+          "bytes": 921967
+        }
+      ]
+    },
+    {
+      "name": "asset-smoothie-vinyl",
+      "group": "assets",
+      "asset": "smoothie",
+      "style": "vinyl",
+      "prompt": "a giant bubbly smoothie blender machine with a swirling pink fruit jar and big buttons, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "9146367b-6330-4b52-b6e9-1721c70a33e9",
+      "created": "2026-10-23T07:21:23Z",
+      "files": [
+        {
+          "file": "images/asset-smoothie-vinyl_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/9146367b-6330-4b52-b6e9-1721c70a33e9/0_0.png",
+          "sha256": "668c8752019fdd167dbf776481a6bdb10c0696fd526e87d0d2f84939d0e95593",
+          "bytes": 951623
+        },
+        {
+          "file": "images/asset-smoothie-vinyl_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/9146367b-6330-4b52-b6e9-1721c70a33e9/0_1.png",
+          "sha256": "ad70a373061f35401016a30e8c5251d57e33c66e3d4440316059e667e3ca0d78",
+          "bytes": 1027857
+        },
+        {
+          "file": "images/asset-smoothie-vinyl_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/9146367b-6330-4b52-b6e9-1721c70a33e9/0_2.png",
+          "sha256": "f454be6c47d4987d2f29a9645dff57f8cbe625ad66635f2cf159f45251a11c74",
+          "bytes": 1019858
+        },
+        {
+          "file": "images/asset-smoothie-vinyl_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/9146367b-6330-4b52-b6e9-1721c70a33e9/0_3.png",
+          "sha256": "463daa084bea5e4fa3daf5b8ab0e34179063f7f8f5ef3df2236621e3108ea695",
+          "bytes": 1198256
+        }
+      ]
+    },
+    {
+      "name": "asset-stool-vinyl",
+      "group": "assets",
+      "asset": "stool",
+      "style": "vinyl",
+      "prompt": "a round teal bar stool with a magenta post and foot ring, as a soft rounded designer vinyl toy, smooth glossy plastic, chunky friendly proportions, hot magenta pink, electric violet, tangerine, lime green, turquoise teal and sunshine yellow, single object centred, three-quarter view, soft studio light, plain light grey background --ar 1:1 --v 8.2 --no text, letters, people",
+      "job_id": "54bf5afa-7f4c-468c-86ec-2c3d35ee68f7",
+      "created": "2026-10-23T07:21:47Z",
+      "files": [
+        {
+          "file": "images/asset-stool-vinyl_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/54bf5afa-7f4c-468c-86ec-2c3d35ee68f7/0_0.png",
+          "sha256": "615fc4768096d541aebc1a3a727b081323608bce6181470d32536f6e712ef47a",
+          "bytes": 830061
+        },
+        {
+          "file": "images/asset-stool-vinyl_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/54bf5afa-7f4c-468c-86ec-2c3d35ee68f7/0_1.png",
+          "sha256": "d94096cdf2cdac4afae9cf4905f75dfdf45f33ce75e5ecc59ae46b6ce73db193",
+          "bytes": 945862
+        },
+        {
+          "file": "images/asset-stool-vinyl_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/54bf5afa-7f4c-468c-86ec-2c3d35ee68f7/0_2.png",
+          "sha256": "fd03afa63e9986d40164d50877c439fa4d375089dd2369229b5abcf38abd0960",
+          "bytes": 815955
+        },
+        {
+          "file": "images/asset-stool-vinyl_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/54bf5afa-7f4c-468c-86ec-2c3d35ee68f7/0_3.png",
+          "sha256": "53b35070fc32cc1a565cdb582ce35d32c678b8dca496294e2e9b65347273559c",
+          "bytes": 857645
+        }
+      ]
     }
   ]
 }
