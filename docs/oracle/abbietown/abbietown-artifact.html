@@ -300,6 +300,8 @@ const SPOTS = [
  {id: 'ginn', name: 'Ginn Field', at: 'ginn', line: 'The train park, by the lakes.', coins: 1, where: 'data'},
  {id: 'horn', name: 'Horn Pond', at: 'horn', line: 'The long walk round the pond.', coins: 1, where: 'data'},
  {id: 'lab', name: 'The science lab', at: 'centre', line: 'Green goo bubbles in a beaker by the door. Tap the beaker to shrink down into a cell.', coins: 0, where: 'new', link: '/studies/cell/play.html'},
+ {id: 'home', name: "Abbie's house", at: 'fixed', pos: [5520, 3790], line: "Home. Her treehouse is in the backyard, and Daddy's bunker is under it: a round steel door in the grass.", coins: 1, where: 'family'},
+ {id: 'ani', name: "Ani's house", at: 'fixed', pos: [3380, 2830], line: "Ani's home, with her own treehouse in the backyard.", coins: 1, where: 'family'},
  {id: 'common', name: 'The town common', at: 'common', line: 'The middle of everything: the church, the flag, the pond.', coins: 0, where: 'data'},
 ];
 // Off the map: roads out of town lead to them, and they show on the horizon.
@@ -404,8 +406,9 @@ function growTown(land, {charm = 1, seed = ASSUMPTIONS.seed} = {}) {
    const lot = lots.find(l => !out.spots.some(o => Math.hypot(o.x - l.x, o.y - l.y) < 28) && !occ.hit(l.x, l.y, 7, 'road'));
    ({x, y, face} = lot);
   } else if (s.at === 'horn') { const h = hornShore(); [x, y] = h; toward = [h[2], h[3]]; }
+  else if (s.at === 'fixed') { [x, y] = s.pos; const n = nearestOn(roads, x, y); if (n && Math.hypot(n.x - x, n.y - y) < 150) face = Math.atan2(n.x - x, -(n.y - y)); }
   else [x, y] = raw.spots[s.at];
-  const spot = {...s, x, y, z: land.heightAt(x, y), face, toward, radius: s.at === 'centre' ? 11 : s.id === 'common' ? 32 : 40};
+  const spot = {...s, x, y, z: land.heightAt(x, y), face, toward, radius: s.at === 'centre' ? 11 : s.at === 'fixed' ? 34 : s.id === 'common' ? 32 : 40};
   out.spots.push(spot); occ.add(x, y, spot.radius, 'spot');
   for (let k = 0; k < s.coins; k++) out.coins.push({spot: s.id, x: x + Math.cos(k * 2.4) * (k ? 3 + k : 0), y: y + Math.sin(k * 2.4) * (k ? 3 + k : 0), hidden: s.id === 'cafe' && k > 0});
  }
@@ -690,7 +693,7 @@ function manifestCSV(rows) {
 const land = makeLand(JSON.parse(document.getElementById('land').textContent));
 const W = land.W, D = land.D;
 const X = x => x - W / 2, Z = y => -(y - D / 2);
-const ICON = {lab: '\u{1F9EA}', cafe: '☕', comellas: '\u{1F355}', hoagies: '\u{1F96A}', muraco: '\u{1F3EB}', leonard: '⚽', ginn: '\u{1F682}', horn: '\u{1F986}', common: '⛪', launch: '\u{1F680}', nova: '✨'};
+const ICON = {home: '\u{1F3E1}', ani: '\u{1F3E0}', lab: '\u{1F9EA}', cafe: '☕', comellas: '\u{1F355}', hoagies: '\u{1F96A}', muraco: '\u{1F3EB}', leonard: '⚽', ginn: '\u{1F682}', horn: '\u{1F986}', common: '⛪', launch: '\u{1F680}', nova: '✨'};
 
 // ---------- time: when things were built, from the assessor's year built (no owners or addresses) ----------
 const hist = JSON.parse(document.getElementById('history').textContent);
@@ -880,6 +883,29 @@ function drape(g, s, w, d, c, ox = 0, oz = 0, lift = .35) {
  geo.computeVertexNormals(); const m = new THREE.Mesh(geo, M(c)); m.receiveShadow = true; g.add(m); return m;
 }
 function coin(g, x, y, z) { const m = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, .5, 24), coinMat); m.rotation.x = Math.PI / 2; m.position.set(x, y, z); m.castShadow = true; g.add(m); coins.push(m); return m; }
+// a family home: a clapboard house facing the street and a treehouse in the backyard; Abbie's has the cellar door of Daddy's hideaway in the grass
+function family(g, wall, accent, pink) {
+ const house = new THREE.Mesh(boxGeo, BODY.colonial.map(m => { const c = m.clone(); c.color = new THREE.Color(wall); return c; })); house.scale.set(11, 6.4, 9); house.castShadow = house.receiveShadow = true; g.add(house);
+ gable(g, 11.8, 4.4, 10, '#4a4a52', 0, 6.4, 0); box(g, 1.6, 3, 1.6, '#8a4a36', 3.4, 8, -2); box(g, 3, .3, 1.6, '#f7f0dc', 0, .6, 5.4); box(g, 1.4, 2.6, .2, accent, 0, 0, 4.55);
+ const tx = pink ? -9 : 8, tz = -20, bark = pink ? '#8a4a4a' : '#7a5a3a', leaf = pink ? '#f08fb0' : '#3f7a3a';
+ cyl(g, 1.1, 1.7, 10, bark, tx, 0, tz, 9);
+ for (const [lx, ly, lz, r] of [[0, 15, 0, 7.5], [-5, 12, 2, 5], [5, 13, -2, 5.5], [1, 18, 3, 4.5]]) { const c = new THREE.Mesh(new THREE.IcosahedronGeometry(r, 1), M(leaf, {flatShading: true})); c.position.set(tx + lx, ly, tz + lz); c.castShadow = true; g.add(c); }
+ cyl(g, 4.2, 4.2, .4, pink ? '#e8b9c8' : '#a9824f', tx, 6.2, tz, 14);
+ box(g, 3.6, 2.6, 3.6, pink ? '#fbe3ec' : '#8b6a42', tx, 6.6, tz); gable(g, 4.4, 2, 4.2, accent, tx, 9.2, tz);
+ const win = cyl(g, .55, .55, .2, '#6a8ca8', 0, 0, 0, 12); win.rotation.x = Math.PI / 2; win.position.set(tx, 7.9, tz + 1.85);
+ for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2; box(g, .18, 1.1, .18, bark, tx + Math.cos(a) * 3.9, 6.6, tz + Math.sin(a) * 3.9); }
+ const lad = box(g, .25, 7, .8, '#b99a6a', tx + 2, 3.2, tz + 4.2); lad.rotation.x = -.38;
+ box(g, 1.6, .9, .1, accent, tx + .8, 12.6, tz); cyl(g, .08, .08, 3, '#e8e8e8', tx, 9.8, tz, 5);
+ if (pink) { // under the backyard: a mound and a round steel door set into a concrete frame
+  const bx = 11, bz = -18, mound = new THREE.Mesh(new THREE.SphereGeometry(6, 18, 8, 0, Math.PI * 2, 0, Math.PI / 2), M('#6f9a45')); mound.scale.y = .42; mound.position.set(bx, 0, bz); mound.receiveShadow = true; g.add(mound);
+  box(g, 7.4, 3.2, 3.2, '#8d9296', bx, 0, bz + 4.6);
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(2.1, .35, 10, 28), M('#caa23a', {metalness: .4, roughness: .4})); ring.position.set(bx, 1.7, bz + 6.25); g.add(ring);
+  const door = cyl(g, 1.95, 1.95, .5, M('#6f7a82', {metalness: .6, roughness: .35}), 0, 0, 0, 28); door.rotation.x = Math.PI / 2; door.position.set(bx, 1.7, bz + 6.3);
+  for (let i = 0; i < 3; i++) { const sp = box(g, 3.6, .3, .2, '#aab2b8', bx, 1.7, bz + 6.6); sp.rotation.z = i * Math.PI / 3; }
+  for (let i = 0; i < 4; i++) box(g, .9, .35, .12, i % 2 ? '#222' : '#f1c232', bx - 1.6 + i * 1.07, 3.1, bz + 6.3);
+ }
+ coin(g, 0, 12, 0);
+}
 let cafe = null; const beakers = []; const CELL_GAME = 'https://app.abbies.world/studies/cell/play.html';
 const BUILD = {
  cafe(g) { const s = shopfront('#f1e6d6', '#2f8f86', '#ffffff'); g.add(s.g); cafe = s;
@@ -916,7 +942,13 @@ const BUILD = {
  horn(g, s) { if (s.toward) g.rotation.y = Math.atan2(-(s.toward[0] - s.x), (s.toward[1] - s.y)); // the dock runs out over the water
   box(g, 3, .4, 40, '#9a7a52', 0, 1, -24); for (let i = 0; i < 4; i++) box(g, 2.2, .8, .6, '#7a5a3a', -8 + i * 5, 0, 6);
   const boat = new THREE.Mesh(new THREE.CapsuleGeometry(1, 3, 4, 8), M('#e8e2d0')); boat.rotation.z = Math.PI / 2; boat.scale.set(1, 1, .6); const lvl = Math.max(...land.raw.water.filter(w => /horn pond/i.test(w.n)).map(w => w.lvl)); boat.position.set(4, lvl - s.z + .6, -40); g.add(boat);
+  // the splash pad on the shore: a flat blue rubber pad, a ring of jets and a mushroom shower
+  drape(g, s, 26, 26, '#4fb3d9', -26, 16, .5); const jetM = M('#e8f6fb', {roughness: .3, metalness: .2}), spray = M('#bfe8f7', {transparent: true, opacity: .55, roughness: .1});
+  for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2, jx = -26 + Math.cos(a) * 7, jz = 16 + Math.sin(a) * 7, h = land.heightAt(s.x + jx, s.y - jz) - s.z; cyl(g, .35, .35, 1.1, jetM, jx, h + .5, jz, 8); const j = new THREE.Mesh(new THREE.ConeGeometry(.9, 4.2, 8, 1, true), spray); j.position.set(jx, h + 3.2, jz); g.add(j); }
+  { const h = land.heightAt(s.x - 26, s.y - 16) - s.z; cyl(g, .5, .5, 6, '#f4a62a', -26, h + .5, 16, 10); const cap = new THREE.Mesh(new THREE.SphereGeometry(3.2, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), M('#e95b84')); cap.position.set(-26, h + 6.5, 16); cap.castShadow = true; g.add(cap); const rain = new THREE.Mesh(new THREE.CylinderGeometry(3, 3.4, 4.6, 16, 1, true), spray); rain.position.set(-26, h + 4.4, 16); g.add(rain); }
   coin(g, 0, 10, 0); },
+ home(g) { family(g, '#f6c8da', '#d9578d', true); },
+ ani(g) { family(g, '#e4d6f0', '#7e57b0', false); },
  lab(g) { const b = shopfront('#e4eef0', '#3aa0a8', '#ffffff'); g.add(b.g);
   const dome = new THREE.Mesh(new THREE.SphereGeometry(3.4, 18, 10, 0, Math.PI * 2, 0, Math.PI / 2), M('#c9d4da', {metalness: .4, roughness: .3})); dome.position.set(-3, 10.4, -2); dome.castShadow = true; g.add(dome);
   const flask = cyl(g, 2.2, 2.2, .5, '#3aa0a8', 0, 0, 0, 24); flask.rotation.x = Math.PI / 2; flask.position.set(0, 7.4, 7.3);
@@ -940,6 +972,7 @@ function placeSpots() {
  for (const s of town.spots) {
   const g = new THREE.Group(); BUILD[s.id]?.(g, s);
   g.position.set(X(s.x), s.z, Z(s.y));
+  if (s.at === 'fixed') g.rotation.y = s.face;
   if (s.at === 'centre') { const n = nearestOn(town.roads, s.x, s.y); g.rotation.y = Math.atan2(n.x - s.x, -(n.y - s.y)); } // face the street
   spotGroup.add(g); spotByID[s.id] = {...s, g};
  }
@@ -960,7 +993,7 @@ function placeSpots() {
 
 // ---------- pins, bubbles, the camera ----------
 const pinsEl = document.getElementById('pins'), bubble = document.getElementById('bubble');
-const ORDER = ['cafe', 'comellas', 'hoagies', 'lab', 'common', 'muraco', 'leonard', 'ginn', 'horn', 'launch', 'nova'];
+const ORDER = ['cafe', 'comellas', 'hoagies', 'lab', 'common', 'muraco', 'leonard', 'ginn', 'horn', 'home', 'ani', 'launch', 'nova'];
 const pins = {};
 function makePins() {
  for (const id of ORDER) { const s = spotByID[id]; if (!s) continue; const b = document.createElement('button'); b.className = 'pin'; b.setAttribute('aria-label', s.name); b.innerHTML = `<span>${ICON[id]}</span>`; b.onclick = () => visit(id); pinsEl.appendChild(b); pins[id] = b; }
@@ -1042,7 +1075,7 @@ document.querySelector('#assume tbody').innerHTML = Object.entries({
  'Height': 'true scale: 1 m up is 1 m across', 'Data': 'MassGIS public layers; style, use and year from the assessor, nothing personal'}).map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
 
 // ---------- places list ----------
-document.getElementById('places').innerHTML = [...SPOTS, ...BEYOND].map(s => `<button class="place" data-id="${s.id}"><span class="t"><span>${ICON[s.id]}</span>${s.name}${s.becomes ? ` <span class="muted" style="font-size:13px">becomes ${s.becomes}</span>` : ''}</span><span class="w ${s.where === 'guess' ? 'guess' : ''}">${s.where === 'data' ? 'from the map' : s.where === 'guess' ? 'placed by the common, to confirm' : s.where === 'new' ? 'new in Abbie\'s town' : 'off the map'}</span><p>${s.line}</p>${s.coins ? `<span class="coins">● ${s.coins} coin${s.coins > 1 ? 's' : ''}${s.key ? ' and the register key' : ''}</span>` : ''}</button>`).join('');
+document.getElementById('places').innerHTML = [...SPOTS, ...BEYOND].map(s => `<button class="place" data-id="${s.id}"><span class="t"><span>${ICON[s.id]}</span>${s.name}${s.becomes ? ` <span class="muted" style="font-size:13px">becomes ${s.becomes}</span>` : ''}</span><span class="w ${s.where === 'guess' ? 'guess' : ''}">${s.where === 'data' ? 'from the map' : s.where === 'guess' ? 'placed by the common, to confirm' : s.where === 'new' ? 'new in Abbie\'s town' : s.where === 'family' ? 'in the family\'s neighbourhood, placed loosely' : 'off the map'}</span><p>${s.line}</p>${s.coins ? `<span class="coins">● ${s.coins} coin${s.coins > 1 ? 's' : ''}${s.key ? ' and the register key' : ''}</span>` : ''}</button>`).join('');
 document.querySelectorAll('.place').forEach(b => b.onclick = () => { stage.scrollIntoView({behavior: 'smooth', block: 'center'}); visit(b.dataset.id); });
 
 // ---------- go ----------

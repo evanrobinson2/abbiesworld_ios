@@ -56,8 +56,10 @@ From MassGIS public layers (downloaded from the state's S3 bucket; OpenStreetMap
 | Muraco | MassGIS schools | the long brick school, the drainpipe, the flagpole, a coin on the roof: the school jump goes here |
 | Leonard Field | MassGIS open space ("Leonard Field and Beach") | the field laid over the real slope, goals, backstop, bleachers, by the water |
 | Ginn Field | MassGIS open space | the train park: a little engine and coaches |
-| Horn Pond | MassGIS hydrography | a dock out over the pond, a rowboat, benches |
+| Horn Pond | MassGIS hydrography | a dock out over the pond, a rowboat, benches, and a splash pad on the shore with a mushroom shower |
 | The science lab | new in Abbie's town (2026-10-23, for AW-STUDY-0047) | a lab with a little dome; the beaker of strange green goo by its door opens the cell game (`/studies/cell/play.html`) |
+| Abbie's house | in the neighbourhood, deliberately not at the real address (a public repo) | a pink-trimmed house, the pink treehouse in the backyard, and a round steel door in the grass: Daddy's hideaway under the yard |
+| Ani's house | the same | a lilac house and a wooden treehouse in her backyard |
 | The town common | MassGIS open space | white church with steeple, flagpole, bandstand |
 | Launch | off the map, up the road north | the pink rocket on its own island past the edge |
 | New Nova | off the map, south past the lakes (where Boston would be) | a bright glass city on its own island |
