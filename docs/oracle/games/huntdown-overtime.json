@@ -1,0 +1,68 @@
+{
+  "appid": 2473350,
+  "name": "Huntdown: Overtime",
+  "store_url": "https://store.steampowered.com/app/2473350/",
+  "genres": [
+    "Action",
+    "Platformer"
+  ],
+  "short_description": "A pixel-art 80s action platformer.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Platformer"
+  ],
+  "summary": "A pixel-art 80s action platformer.",
+  "identity": {
+    "core_loop": "Run, shoot, beat the boss.",
+    "mechanics": null,
+    "ui_and_game_feel": "Punchy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Little HUD.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel 80s.",
+    "palette": null,
+    "audio_mood": "Synth.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Nothing for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.56,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.56,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

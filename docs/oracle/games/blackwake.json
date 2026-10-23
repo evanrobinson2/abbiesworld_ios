@@ -1,0 +1,70 @@
+{
+  "appid": 420290,
+  "name": "Blackwake",
+  "store_url": "https://store.steampowered.com/app/420290/",
+  "genres": [
+    "Naval",
+    "Co-op",
+    "Multiplayer"
+  ],
+  "short_description": "Crew a sailing warship with other players.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Naval",
+    "Co-op",
+    "Multiplayer"
+  ],
+  "summary": "Crew a sailing warship with other players.",
+  "identity": {
+    "core_loop": "Sail, load cannons, repair, board.",
+    "mechanics": null,
+    "ui_and_game_feel": "Team chaos.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Ship damage in the world.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic sea.",
+    "palette": null,
+    "audio_mood": "Sea.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Shared ship jobs again; pirate-crew fun."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

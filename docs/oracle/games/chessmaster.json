@@ -1,0 +1,67 @@
+{
+  "appid": 37200,
+  "name": "Chessmaster",
+  "store_url": "https://store.steampowered.com/app/37200/",
+  "genres": [
+    "Board game",
+    "Chess"
+  ],
+  "short_description": "Chess with lessons and opponents.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Board game",
+    "Chess"
+  ],
+  "summary": "Chess with lessons and opponents.",
+  "identity": {
+    "core_loop": "Play, learn openings, practise.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The board is everything.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Classic board.",
+    "palette": null,
+    "audio_mood": "Calm.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Lessons built into the opponent; chess teaches thinking."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.11,
+      "challenge": 0.89,
+      "expression": 0.22,
+      "structure": 0.11,
+      "social": 0.33,
+      "systems": 1.0,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

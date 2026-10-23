@@ -1,0 +1,69 @@
+{
+  "appid": 8870,
+  "name": "BioShock Infinite",
+  "store_url": "https://store.steampowered.com/app/8870/",
+  "genres": [
+    "Shooter",
+    "Story"
+  ],
+  "short_description": "A floating city in the sky with a companion who helps you.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Story"
+  ],
+  "summary": "A floating city in the sky with a companion who helps you.",
+  "identity": {
+    "core_loop": "Explore, fight, follow the story with Elizabeth.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cinematic.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Companion tosses you items (diegetic).",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Bright Americana.",
+    "palette": null,
+    "audio_mood": "Period songs.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A companion who helps without being asked; nothing else for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.44,
+      "expression": 0.56,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.33,
+      "chance": 0.44,
+      "session": 0.11
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

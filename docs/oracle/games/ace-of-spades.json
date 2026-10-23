@@ -1,0 +1,68 @@
+{
+  "appid": 224540,
+  "name": "Ace of Spades",
+  "store_url": "https://store.steampowered.com/app/224540/",
+  "genres": [
+    "Shooter",
+    "Voxel"
+  ],
+  "short_description": "A voxel team shooter where everything can be dug and built.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Voxel"
+  ],
+  "summary": "A voxel team shooter where everything can be dug and built.",
+  "identity": {
+    "core_loop": "Dig, build, shoot, take the flag.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Team colours in the world.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Blocky voxel.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Building and digging during a match is a fun idea; shooting is not for us."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.56,
+      "expression": 0.78,
+      "structure": 0.22,
+      "social": 0.56,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.33
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

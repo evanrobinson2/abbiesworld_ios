@@ -1,0 +1,68 @@
+{
+  "appid": 249050,
+  "name": "Dungeon of the ENDLESS",
+  "store_url": "https://store.steampowered.com/app/249050/",
+  "genres": [
+    "Roguelike",
+    "Tower defense"
+  ],
+  "short_description": "Power rooms in a dungeon as you climb out.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Roguelike",
+    "Tower defense"
+  ],
+  "summary": "Power rooms in a dungeon as you climb out.",
+  "identity": {
+    "core_loop": "Open doors, power rooms, defend the crystal.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Lit rooms show what you power (diegetic).",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Pixel 3D.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Light as resource: lit rooms are safe."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.67,
+      "session": 0.33
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
