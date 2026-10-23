@@ -1,0 +1,127 @@
+{
+  "set": "coffee-shop-0013",
+  "study": "AW-STUDY-0013 - The Coffee Shop",
+  "round": 1,
+  "generated": "2026-10-23",
+  "tool": "Midjourney web (v8.2), grid only, no upscale",
+  "prompts_file": "tools/midjourney/prompts/coffee-shop-0013.json",
+  "notes": [
+    "Draft Mode was on in the account when this run began; the first tile-elegant submission came back as a 24-image draft batch (job a9adb3a1-bcb0-43e0-9772-09face3fd36d, not downloaded). Draft Mode was switched off and every job below is a standard 4-image grid."
+  ],
+  "jobs": [
+    {
+      "name": "tile-elegant",
+      "view": "tile",
+      "style": "elegant",
+      "prompt": "isometric miniature diorama on a single hexagonal grass tile floating on a plain background: an elegant contemporary small cafe pavilion called Abbie's Cafe, slim black steel frame, tall arched glass windows, blush rose and dusty mauve painted wood, champagne gold trim, a painted wooden sign with three gold stars, terrace of ivory bistro tables under a mauve awning, clipped hedges, a gravel path to the tile edge, warm taupe stone, soft morning light, tasteful upscale boutique architecture, tiny tilt-shift scale, no people --ar 1:1 --v 8.2 --no text, letters",
+      "job_id": "2cfc97c8-d518-4d3e-85ab-ee85089c66fb",
+      "created": "2026-10-23T05:02:00Z",
+      "files": [
+        {
+          "file": "images/tile-elegant_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/2cfc97c8-d518-4d3e-85ab-ee85089c66fb/0_0.png",
+          "sha256": "1f95903688662da6d45baeb81aa025af2bccf7a62468bb5a74f1549624d4e7df",
+          "bytes": 1322606
+        },
+        {
+          "file": "images/tile-elegant_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/2cfc97c8-d518-4d3e-85ab-ee85089c66fb/0_1.png",
+          "sha256": "899cdc67440f7a096090ff0e6a544e6d53130f04f7ec7ce39cb74df25571633e",
+          "bytes": 1505520
+        },
+        {
+          "file": "images/tile-elegant_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/2cfc97c8-d518-4d3e-85ab-ee85089c66fb/0_2.png",
+          "sha256": "3d5b40575420c6d2177ad62414675a21f3b94f4f922c141f0f246268f1047c64",
+          "bytes": 1167350
+        },
+        {
+          "file": "images/tile-elegant_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/2cfc97c8-d518-4d3e-85ab-ee85089c66fb/0_3.png",
+          "sha256": "b3639cc3ac10a47253d7fd985e5912069a43046161f1934279aade5863317451",
+          "bytes": 1274390
+        }
+      ]
+    },
+    {
+      "name": "tile-party",
+      "view": "tile",
+      "style": "party",
+      "prompt": "isometric miniature diorama on a single hexagonal tile floating on a plain background: Abbie's Cafe as a zany cartoon hangout clubhouse, a chunky curvy building with a giant hot magenta pink coffee cup on the roof, disco ball, string lights, a painted sign with three big yellow stars, electric violet and tangerine stripes, lime green turf, turquoise splash pool, speakers, rooftop dance floor with checker tiles, playful Planet Coaster theme park game art, bold saturated colours, not fairy, not princess, no animals, no people --ar 1:1 --v 8.2 --no text, letters",
+      "job_id": "5a71d562-84a7-4a46-8d53-9ccfb9a9b895",
+      "created": "2026-10-23T05:02:43Z",
+      "files": [
+        {
+          "file": "images/tile-party_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5a71d562-84a7-4a46-8d53-9ccfb9a9b895/0_0.png",
+          "sha256": "19e183eab733869435a2a30a5e66bed0ff6d313c258a0a8f36662de87bc660e2",
+          "bytes": 1113656
+        },
+        {
+          "file": "images/tile-party_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5a71d562-84a7-4a46-8d53-9ccfb9a9b895/0_1.png",
+          "sha256": "e7da2070d99cda8a25ff580803603fa63b8d6b7ed3fbbf125dd612dd1c9c8bcf",
+          "bytes": 1500780
+        },
+        {
+          "file": "images/tile-party_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5a71d562-84a7-4a46-8d53-9ccfb9a9b895/0_2.png",
+          "sha256": "3f4e14c3a432e9b966b9607eb193361c6a9e74e615061a73778841ed1b1e8424",
+          "bytes": 1242647
+        },
+        {
+          "file": "images/tile-party_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5a71d562-84a7-4a46-8d53-9ccfb9a9b895/0_3.png",
+          "sha256": "c1864f56264f2596b578b290da72f62e686c24779c37f8349f813732f3bd328c",
+          "bytes": 910472
+        }
+      ]
+    },
+    {
+      "name": "tile-game",
+      "view": "tile",
+      "style": "game",
+      "prompt": "isometric game asset on a single hexagonal grass tile floating on a plain background: Abbie's Cafe, a cosy stylised cartoon coffee shop like a modern mobile 3D game building, bubblegum pink walls, mint green roof shingles, cream window frames, coral awning, butter yellow wooden sign with three stars, outdoor tables with umbrellas, flower planters, cobble path, sky blue water barrel, clean hand-painted textures, soft ambient occlusion, Unity style 3D render, no people --ar 1:1 --v 8.2 --no text, letters",
+      "job_id": "436818d7-dc5e-4882-b25c-a018cb9bc4e6",
+      "created": "2026-10-23T05:03:17Z",
+      "files": [
+        {
+          "file": "images/tile-game_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/436818d7-dc5e-4882-b25c-a018cb9bc4e6/0_0.png",
+          "sha256": "fb6a7b10f11d785d8233bdca5b487ec0c9244bd6d0eb176e48976e1744d4c1a1",
+          "bytes": 1269504
+        },
+        {
+          "file": "images/tile-game_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/436818d7-dc5e-4882-b25c-a018cb9bc4e6/0_1.png",
+          "sha256": "c05f05d83b6be094c3a93b993589b0e96d9ed6d803b7f21d683f44833b174258",
+          "bytes": 1292587
+        },
+        {
+          "file": "images/tile-game_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/436818d7-dc5e-4882-b25c-a018cb9bc4e6/0_2.png",
+          "sha256": "d1bbe379815e3bfa46c9913df5afa978d08ad0e43c83f154a3a2e8c1db15329c",
+          "bytes": 1308883
+        },
+        {
+          "file": "images/tile-game_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/436818d7-dc5e-4882-b25c-a018cb9bc4e6/0_3.png",
+          "sha256": "b8cc0948b16176532000001a39dff6ab39e9930af4b433f2cea069a9d6b685db",
+          "bytes": 1195122
+        }
+      ]
+    }
+  ]
+}
