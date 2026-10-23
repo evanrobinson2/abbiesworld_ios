@@ -75,9 +75,9 @@ function drawPocket(bump = false) {
   if (!document.body) return;
   if (!document.getElementById('v2-chrono') && document.documentElement.classList.contains('ui-v2') && !pocket) { setTimeout(() => drawPocket(bump), 300); return; }
   const list = read(), p = mountPocket();
-  p.hidden = !list.length && !earnedCharms().length;
+  p.hidden = false; // always there: one obvious control (the backpack on the top bar, or B)
   p.innerHTML = `<span class="ch-g">${glyph(bagLook())}</span>${list.length > 1 ? `<span class="aw-pocket-n">${list.length}</span>` : ''}`;
-  p.title = list.length ? "Abbie's backpack: " + list.map(i => i.name).join(', ') : "Abbie's backpack";
+  p.title = (list.length ? "Abbie's backpack: " + list.map(i => i.name).join(', ') : "Abbie's backpack") + ' (B)';
   if (bump) { p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump'); }
   if (pop && !pop.hidden && !pop.classList.contains('dressing') && view) view.setContents({items: list, coins: coinCount(), charms: earnedCharms()});
 }
@@ -134,7 +134,11 @@ function jingle() {
   } catch {}
 }
 addEventListener('pointerdown', e => { if (pop && !pop.hidden && !e.target.closest?.('.aw-pocket,.aw-pocket-pop,.aw-bp-tag')) closePop(); }, true);
-addEventListener('keydown', e => { if (e.key === 'Escape') closePop(); });
+addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePop();
+  // B opens and closes the backpack, unless she is typing or a game has taken the keyboard.
+  else if ((e.code === 'KeyB') && !e.metaKey && !e.ctrlKey && !e.altKey && !e.repeat && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target?.tagName || '') && !e.target?.isContentEditable && !window.AWKeysTaken) { pop && !pop.hidden ? closePop() : (drawPocket(), openPop()); }
+});
 
 // ---------- picking something up: her inner voice, then into the backpack ----------
 function pickUp(item, thought, done = null) {
