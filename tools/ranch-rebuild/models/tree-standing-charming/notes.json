@@ -1,0 +1,32 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/tree-standing (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same states (standing, stump), same origin (trunk base on the ground) and front (-Y), same object names (trunk, leaves_light, leaves_dark, crown_fill; stump, stump_cut, chip_N) and the same materials and roles (Bark_Brown timber; Leaf_Light, Leaf_Dark, Leaf_Deep foliage; Timber_Cut, Timber_Chip). Footprint 5.44 m x 3.93 m (width/depth 1.39 against the normal tree's 1.44); 6.5 m tall, so after to_game rescales it to the old footprint it stands a little taller than the normal tree, as the hero's taller 1.28 h/w asks."],
+  ["Targets", "make_views.py (unchanged method, pointed at mj/tree-standing-charming) keys out the floor strip and cast shadow by saturation. This time the sheet agrees with the hero (front h/w 1.24 vs hero 1.28, side 1.97 gives a crown about 0.63 as deep as wide), so all three sheet views are kept and scored from views/. The sheet's trunk bends the other way from the hero's; the hero wins, so the official mean IoU loses a little at the trunk."],
+  ["Trunk", "A chubby S-curved trunk read from the hero's mask: it bulges right over the roots, swings 0.45 m left at 1.85 m and comes back to the fork at 2.35 m. Five root toes (rotated 18 deg so they spread left and right, none points at the viewer) end in low rounded paddles that reach 1.7 m, and the buttress ridges spiral 150 deg up the trunk (the normal tree: 70 deg) for the soft twisty toy look. Six fat limbs (radius 0.2 to 0.1 m): one sweeps out left to the low-left clumps, a right stem rises into the big front puff, one goes out right, two go back and one up the middle. The fork stays open under the crown, as in the hero."],
+  ["Crown", "Seven plump swirl puffs (lime Leaf_Light, and two mid-green Leaf_Dark at the top left and back left), each a soft 320-triangle blob with broad lobes and one to three raised cinnamon-roll spirals: tapered 5-sided tubes lying on the surface, 1.6 turns, facing front and up (the back puffs face back and up). Under them four dark leafy clumps (right, low left, under-centre behind the fork, back right): round-ended chunky toy leaves (Leaf_Dark) over a coarse Leaf_Deep fill, replacing the normal tree's pointed down-hanging plates. Clump positions were fitted to the hero's row-by-row silhouette."],
+  ["Stump", "The same S-trunk loft cut at 0.8 m with the axe slant and the round pale cut (Timber_Cut), now with a growth-ring swirl ridge on the cut face (stump_rings, Timber_Chip, echoing the crown swirls) and four chunky chips (0.44 x 0.24 x 0.12 m) lying in the gaps between the root toes where they can be seen."],
+  ["Game readiness", "4,142 triangles standing (normal tree 4,906; budget 4k raised to 5k for this tree), 418 stump. One material per object, flat colours, export_animations=False. to_game.py tree-standing-charming installs the charming twin of organics/tree."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.821 from the hero's direction: the narrow domed top, the wide crown shoulders, the low-left clump, the open fork and the root spread line up row by row.",
+  "Reads as the same shade tree, storybook version: lime and mid-green swirl puffs on top, dark leafy clumps under them, a twisting olive trunk on fat root toes.",
+  "The swirls are big enough to read as shading lines at tile size, and they come from geometry, not textures.",
+  "Standing and stump share one build.py and one trunk loft, so the stump's roots match the tree's."
+ ],
+ "off": [
+  "The puffs are 320-triangle blobs and the game uses flat normals, so they look faceted up close; the hero's puffs are perfectly smooth and each is a cluster of many swirls. Smoother puffs would need about 1,000 triangles each.",
+  "The hero's trunk splits into two stems that cross before the limbs; mine is one twisting trunk with the left limb leaving low, which gives the same S read but not the crossing.",
+  "The sheet's trunk leans the other way and its crown is fuller and lower; I followed the hero, so sheet IoU is 0.688.",
+  "The right leafy clump pokes slightly past the hero's right edge (the model is 5.44 m wide against the hero's ~5.0 m); the footprint ratio is still 1.39 against the normal 1.44."
+ ],
+ "rounds": [
+  {"round": 1, "change": "Normal build reshaped: S-curved trunk, 7 swirl puffs with one spiral each, 4 leafy clumps; 2,816 tris. Swirls read, but leafy clumps hidden, roots spiky, lime too yellow.", "mean_iou": 0.688, "hero_iou": 0.769},
+  {"round": 2, "change": "Bigger leafy clumps with larger plates, 2 to 3 swirls on the big puffs, softer greens and olive bark, thicker root stations; 4,070 tris.", "mean_iou": 0.697, "hero_iou": 0.797},
+  {"round": 3, "change": "Row-by-row fit to the hero: top-left puff lowered, right leafy clump raised, low-left leafy clump bigger, flatter wider roots.", "mean_iou": 0.699, "hero_iou": 0.813},
+  {"round": 4, "change": "Root toes rotated 18 deg so they spread sideways instead of one pointing at the viewer; blunter toe tips.", "mean_iou": 0.687, "hero_iou": 0.822},
+  {"round": 5, "change": "Stronger S in the trunk, the under-centre leafy clump moved back so the fork shows, round-ended toy leaves angled outward instead of hanging.", "mean_iou": 0.68, "hero_iou": 0.817},
+  {"round": 6, "change": "Slimmer mid trunk and lower ridges so the S reads, low paddle toes; stump chips moved between the toes and made chunky, ring swirl on the cut; final 768 px / 48 samples.", "mean_iou": 0.688, "hero_iou": 0.821}
+ ],
+ "moving_parts": "None: the game poses the tree itself (export_animations=False). The two states are variants/standing.glb (same as tree-standing-charming.glb) and variants/stump.glb.",
+ "creative_additions": "Cinnamon-roll swirl ridges on every puff, a growth-ring swirl on the stump's cut that echoes them, and round-ended chunky toy leaves on the dark clumps."
+}
