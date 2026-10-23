@@ -1,0 +1,90 @@
+{
+  "id": "bruiser",
+  "study": "AW-STUDY-0021 Bruiser Study",
+  "says": "A huge, top-heavy brawler: small blocky bald head, heavy brow, neck as wide as his jaw, giant shoulders and forearms, big hands, legs shorter than his torso suggests. Grey tank top and grey shorts, barefoot. Faceted low-poly.",
+  "body": {
+    "_doc": "MPFB (MakeHuman) macros, 0..1. These make a real human body, so anatomy stays correct.",
+    "gender": 1.0,
+    "age": 0.5,
+    "muscle": 1.0,
+    "weight": 1.0,
+    "proportions": 1.0,
+    "height": 0.75
+  },
+  "shape": {
+    "_doc": "MPFB detail targets, 0..1 weight each. Names are the target files under MPFB data/targets.",
+    "torso/measure-shoulder-dist-incr": 1.375,
+    "torso/torso-scale-horiz-incr": 1.0,
+    "torso/torso-scale-depth-incr": 1.8,
+    "torso/torso-muscle-pectoral-incr": 1.675,
+    "torso/torso-muscle-dorsi-incr": 1.188,
+    "torso/measure-waist-circ-incr": 0.3,
+    "arms/l-upperarm-muscle-incr": 1.0,
+    "arms/r-upperarm-muscle-incr": 1.0,
+    "arms/l-lowerarm-muscle-incr": 1.0,
+    "arms/r-lowerarm-muscle-incr": 1.0,
+    "arms/l-upperarm-shoulder-muscle-incr": 1.0,
+    "arms/r-upperarm-shoulder-muscle-incr": 1.0,
+    "neck/measure-neck-circ-incr": 1.0,
+    "neck/neck-scale-horiz-incr": 1.0,
+    "neck/measure-neck-height-decr": 0.6,
+    "genitals/penis-length-decr": 1.0,
+    "genitals/penis-circ-decr": 1.0,
+    "genitals/penis-testicles-decr": 1.0,
+    "pelvis/bulge-decr": 1.0,
+    "head/head-square": 1.0,
+    "head/head-scale-vert-incr": 0.5,
+    "chin/chin-width-incr": 1.0,
+    "chin/chin-height-incr": 0.5,
+    "chin/chin-prominent-incr": 1.0,
+    "chin/chin-bones-incr": 1.0,
+    "eyebrows/eyebrows-trans-forward": 1.0,
+    "eyebrows/eyebrows-trans-down": 0.6
+  },
+  "stylise": {
+    "_doc": "Cartoon proportions on top of the real body, as Rigify bone scales (1 = real anatomy). girth scales across the bone, length along it. Children inherit (a bigger forearm also means a bigger hand).",
+    "head": 0.8,
+    "neck_girth": 1.375,
+    "upper_arm_girth": 1.0,
+    "forearm_girth": 1.025,
+    "forearm_length": 0.932,
+    "hand": 1.5,
+    "thigh_girth": 1.0,
+    "shin_girth": 0.8,
+    "leg_length": 0.8,
+    "foot": 0.76
+  },
+  "pose": {
+    "_doc": "Degrees. Arms hang this far off vertical; elbows bend forward this much.",
+    "arm_drop_from_vertical": 17.0,
+    "elbow_bend": 1.25
+  },
+  "outfit": {
+    "_doc": "Cloth as a thin shell over the skin, cut at body landmarks so hems are clean. Landmarks come from the Rigify bones: waist = top of the lower spine (DEF-spine.001 head), mid_thigh = where the thigh's two deform bones meet, chest = DEF-spine.003 head, neck_base = top of the shoulders (DEF-shoulder heads; his neck bone starts inside the trapezius). Arms and hands are never cloth.",
+    "thickness": 0.006,
+    "tank_top": {
+      "from": "waist",
+      "to": "neck_base",
+      "neckline_drop": 0.45,
+      "overlap_shorts": 0.04
+    },
+    "shorts": {
+      "from": "mid_thigh",
+      "to": "waist",
+      "overlap_tank": 0.04
+    }
+  },
+  "lowpoly": {
+    "_doc": "Decimate collapse ratio of the ~13k-face body, then flat shading.",
+    "ratio": 0.08
+  },
+  "fit": {
+    "target": "meshy/bruiser_meshy.glb",
+    "views": [
+      "front",
+      "side"
+    ],
+    "silhouette_iou": 0.8295,
+    "steps": 80
+  }
+}
