@@ -1,0 +1,67 @@
+{
+  "appid": 34900,
+  "name": "Bad Rats",
+  "store_url": "https://store.steampowered.com/app/34900/",
+  "genres": [
+    "Puzzle",
+    "Physics"
+  ],
+  "short_description": "Rats build physics contraptions to get rid of a cat.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Physics"
+  ],
+  "summary": "Rats build physics contraptions to get rid of a cat.",
+  "identity": {
+    "core_loop": "Place objects, start the chain, watch.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clunky.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "World only.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Cheap 3D.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Chain-reaction contraptions are fun even when the game is rough."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.44,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

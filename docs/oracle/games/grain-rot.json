@@ -1,0 +1,49 @@
+{
+  "appid": 4450620,
+  "name": "GRAIN ROT",
+  "store_url": "https://store.steampowered.com/app/4450620/",
+  "genres": [
+    "Unknown"
+  ],
+  "short_description": "A recent game we can't study from here.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Unknown"
+  ],
+  "summary": "A recent game we can't study from here.",
+  "identity": {
+    "core_loop": null,
+    "mechanics": null,
+    "ui_and_game_feel": null,
+    "information_grammar": null,
+    "camera": null,
+    "art_direction": null,
+    "palette": null,
+    "audio_mood": null,
+    "pacing": null,
+    "lessons_for_abbies_world": null
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.0,
+      "challenge": 0.0,
+      "expression": 0.0,
+      "structure": 0.0,
+      "social": 0.0,
+      "systems": 0.0,
+      "chance": 0.0,
+      "session": 0.0
+    },
+    "confidence": 0.1
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "needs play session",
+    "date": "2026-10-23"
+  }
+}

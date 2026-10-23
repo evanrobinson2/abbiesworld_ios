@@ -1,0 +1,70 @@
+{
+  "appid": 2062430,
+  "name": "BALL x PIT",
+  "store_url": "https://store.steampowered.com/app/2062430/",
+  "genres": [
+    "Action",
+    "Roguelite",
+    "Brick breaker"
+  ],
+  "short_description": "A brick breaker roguelite that also builds a base between runs.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Roguelite",
+    "Brick breaker"
+  ],
+  "summary": "A brick breaker roguelite that also builds a base between runs.",
+  "identity": {
+    "core_loop": "Fire balls, fuse them, survive, build the town.",
+    "mechanics": null,
+    "ui_and_game_feel": "Snappy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Balls and enemies on the board.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Upbeat.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "A simple bouncing verb with a town that grows between runs."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.78,
+      "session": 0.33
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "appid": 1097200,
+  "name": "Twelve Minutes",
+  "store_url": "https://store.steampowered.com/app/1097200/",
+  "genres": [
+    "Adventure",
+    "Time loop"
+  ],
+  "short_description": "A twelve-minute time loop in an apartment.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Time loop"
+  ],
+  "summary": "A twelve-minute time loop in an apartment.",
+  "identity": {
+    "core_loop": "Learn, repeat, change the loop.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "None.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A short loop where knowledge carries over, like Outer Wilds."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.44,
+      "expression": 0.56,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.33,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "appid": 1716740,
+  "name": "Starfield",
+  "store_url": "https://store.steampowered.com/app/1716740/",
+  "genres": [
+    "RPG",
+    "Space"
+  ],
+  "short_description": "A big space RPG.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "RPG",
+    "Space"
+  ],
+  "summary": "A big space RPG.",
+  "identity": {
+    "core_loop": "Quest, explore, build ships.",
+    "mechanics": null,
+    "ui_and_game_feel": "Big.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "NASA-punk.",
+    "palette": null,
+    "audio_mood": "Orchestral.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Ship building and NASA-punk look are relevant for the Moonbase."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.44,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.78,
+      "session": 0.44
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

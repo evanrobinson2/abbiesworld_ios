@@ -1,0 +1,70 @@
+{
+  "appid": 489630,
+  "name": "Warhammer 40,000: Gladius - Relics of War",
+  "store_url": "https://store.steampowered.com/app/489630/",
+  "genres": [
+    "Strategy",
+    "4X",
+    "Hex"
+  ],
+  "short_description": "A hex 4X war game.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "4X",
+    "Hex"
+  ],
+  "summary": "A hex 4X war game.",
+  "identity": {
+    "core_loop": "Expand, fight on hexes.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deep.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.16,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Grimdark.",
+    "palette": null,
+    "audio_mood": "Epic.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Hex-board strategy; theme not for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.67,
+      "expression": 0.67,
+      "structure": 0.78,
+      "social": 0.67,
+      "systems": 0.78,
+      "chance": 0.44,
+      "session": 0.89
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

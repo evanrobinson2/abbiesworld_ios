@@ -1,0 +1,68 @@
+{
+  "appid": 20570,
+  "name": "Warhammer 40,000: Dawn of War II - Chaos Rising",
+  "store_url": "https://store.steampowered.com/app/20570/",
+  "genres": [
+    "Strategy",
+    "RTS"
+  ],
+  "short_description": "Dawn of War II expansion.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "RTS"
+  ],
+  "summary": "Dawn of War II expansion.",
+  "identity": {
+    "core_loop": "Lead squads.",
+    "mechanics": null,
+    "ui_and_game_feel": "Punchy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Grimdark.",
+    "palette": null,
+    "audio_mood": "Epic.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Same as Dawn of War II."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.67,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.67,
+      "session": 0.33
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

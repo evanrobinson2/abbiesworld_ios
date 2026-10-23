@@ -1,0 +1,68 @@
+{
+  "appid": 243040,
+  "name": "Startopia",
+  "store_url": "https://store.steampowered.com/app/243040/",
+  "genres": [
+    "Management",
+    "Space"
+  ],
+  "short_description": "Run a space station for aliens, with a famous funny AI narrator.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Management",
+    "Space"
+  ],
+  "summary": "Run a space station for aliens, with a famous funny AI narrator.",
+  "identity": {
+    "core_loop": "Build, keep aliens happy, earn.",
+    "mechanics": null,
+    "ui_and_game_feel": "Funny.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.3,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Aliens show needs; overlay.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Quirky sci-fi.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A cheeky narrator who comments on what you do."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.33
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

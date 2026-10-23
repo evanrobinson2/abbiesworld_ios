@@ -1,0 +1,68 @@
+{
+  "appid": 1238000,
+  "name": "Mass Effect: Andromeda Deluxe Edition",
+  "store_url": "https://store.steampowered.com/app/1238000/",
+  "genres": [
+    "RPG",
+    "Sci-fi"
+  ],
+  "short_description": "Explore a new galaxy as a pathfinder.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "RPG",
+    "Sci-fi"
+  ],
+  "summary": "Explore a new galaxy as a pathfinder.",
+  "identity": {
+    "core_loop": "Explore, talk, fight, scan.",
+    "mechanics": null,
+    "ui_and_game_feel": "Big.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay and scanner.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Glossy sci-fi.",
+    "palette": null,
+    "audio_mood": "Sci-fi.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Scanning planets and creatures as discovery."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.67,
+      "systems": 0.56,
+      "chance": 0.67,
+      "session": 0.44
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

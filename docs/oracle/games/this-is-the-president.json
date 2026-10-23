@@ -1,0 +1,67 @@
+{
+  "appid": 730430,
+  "name": "This Is the President",
+  "store_url": "https://store.steampowered.com/app/730430/",
+  "genres": [
+    "Strategy",
+    "Satire"
+  ],
+  "short_description": "A satirical politics game.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Satire"
+  ],
+  "summary": "A satirical politics game.",
+  "identity": {
+    "core_loop": "Choose.",
+    "mechanics": null,
+    "ui_and_game_feel": "Dark comedy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "overlay": 0.9
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.14,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.2,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Cartoon.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Nothing for us."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.33,
+      "structure": 0.22,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.33
+    },
+    "confidence": 0.2
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
