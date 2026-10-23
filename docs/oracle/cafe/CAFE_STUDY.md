@@ -237,8 +237,13 @@ grinder, the portafilter, the steam knob, the blender jar), and the world answer
 
 Evan: "of course the main loop is you run the shop for the day." Everything above hangs off one day:
 
-1. **Morning: open up.** The café is calm (day mode). Deliveries arrive from the neighbouring tiles; empty jars fill.
-   Deal the day's decoration cards and place a few.
+1. **Morning: open up.** The café is calm (day mode). **Your crew arrives** (Evan: "your workers come, take the
+   chairs, setup"): they walk in, take the chairs down off the tables, wipe the bar and switch on the machines, so
+   you see the shop wake up. Deliveries arrive from the neighbouring tiles; empty jars fill. **Pick the pastries**
+   for the case, or your crew picks them for you (Evan: "you can pick the pastries or your crew will for you"), so a
+   child who just wants to play is never stuck on a menu. Deal the day's decoration cards and place a few.
+   The crew are people with roles (the people core's hat and prop silhouettes): a barista, a baker and a DJ, who
+   keep working on their own whenever Abbie is busy in a mini game.
 2. **The day: customers come.** They arrive from the town's schedules, with picture bubbles for what they want. An
    espresso order may need the machine fixed first (Game 1); a smoothie order is Game 2. Happy customers raise the
    party signal and add stars to the sign.
