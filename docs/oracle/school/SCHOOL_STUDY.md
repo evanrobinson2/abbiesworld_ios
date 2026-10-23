@@ -97,3 +97,13 @@ To go faster:
 4. A scripted playthrough (`window.schoolJump`) from the start: one run checks every phase and takes the screenshots.
 5. Ask the one question that unlocks the most (here: "what does the jump mean?") and start building on the likeliest
    reading at the same time.
+
+### Round two, speed review (2026-10-23)
+- What slowed us: a new art direction arrived mid-rewrite, so the climb camera, palette and kid pose were patched after
+  the fact. Next time, freeze the reference picture first (it is the art target) and write the camera and palette
+  from it before gameplay code.
+- Lighting tuned by eye took three passes (whiteout, then too bright, then right). A fixed "seen / not seen" screenshot
+  pair from the Playwright script is now the check; keep it as a reusable harness for every minigame.
+- The whats-new.json merge conflict happens on every ship because every thread adds to the top. A tiny script that
+  re-inserts our entry on top of main's file fixed it in seconds; it should live in tools/ for all threads.
+- Concept art (Midjourney on Evan's Mac) ran in parallel with the code and never blocked it. Keep doing that.
