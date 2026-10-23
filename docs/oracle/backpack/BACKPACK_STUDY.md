@@ -115,3 +115,24 @@ Next: bake contact shading into the vertex colours, a leather label on the pocke
 - New charm `toy-car` (the charms study's chest of eleven): 10 of the 16 stars in the toy-car coaster, granted by the
   coaster game with `earnCharm('toy-car')`. Hand-built until it has a Midjourney pick and a Meshy model.
 - Next: textured Meshy runs for the floppy disk (Evan's picture has a yellow label and silver shutter) and the rocket.
+
+## Round 6: the floating mini (Evan, 22:55Z)
+
+"I like back pack as a stand alone ... floating mini's just idly floating around waiting to be interacted with ...
+bring back pack to center ... arrange slots for the cards, but use card designer please", "the settings / slots for
+cards include the facets, and the styles", "they are all used to control the style".
+
+- Tapping the backpack register on the weather instrument (or B) flies the backpack to the middle of the screen. It
+  hangs in the air there with a slow bob and sway, and no floor or shadow. Nothing behind it is dimmed or blurred,
+  because the page is see-through everywhere except the backpack, the slots and the hand.
+- Six slots sit around it, three on each side: Style, Colour, Pattern, Pocket, Straps and Lining. Each one shows the
+  Cards v3 card (`face.mjs`, print style) the backpack wears now.
+- Tap a slot and that hand is dealt above the play dock. Drop a card into its slot, or onto the backpack, or just tap
+  it, and the backpack restyles live and the slot's card updates. Tap the backpack to open it half shell.
+- Player clothes will join it later as more floating minis. For now there is only the backpack.
+- Also fixed: a dragged card could be left stuck on the world (Evan, 22:56Z, "saddlebag is stuck in live game").
+  Drags now always clean up.
+- Files: `inventory.mjs` (float layout, slots), `backpack.mjs` (`float`, `deckHost`, `overSlot`, `deal()`) and
+  `backpack-cards.mjs` (`slotFace()`, split colour and pattern hands).
+
+Tour: no.

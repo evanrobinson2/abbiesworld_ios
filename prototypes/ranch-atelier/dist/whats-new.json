@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-backpack-floating",
+      "date": "2026-10-23",
+      "title": "The backpack floats out to dress up",
+      "line": "Tap the backpack on the weather instrument and it floats to the middle of the screen, with a card slot for its style, colour, pattern, pocket, straps and lining. Drop a card in a slot and it changes straight away.",
+      "image": "/whats-new/2026-10-23-backpack-floating.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-skatepark-hifi",
       "date": "2026-10-23",
       "title": "A proper skate park",
