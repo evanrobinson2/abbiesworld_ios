@@ -468,12 +468,92 @@
   {
    "id": "charm-tardigrade",
    "kind": "image-to-3d",
-   "image": "tools/meshy-heroes/refs/charm-tardigrade/pick.png (Midjourney proof from the Backpack thread)",
+   "image": "tools/meshy-heroes/refs/charm-tardigrade/pick.png",
    "should_texture": true,
    "credits": 30,
    "save_to": "tools/meshy-heroes/meshy/charm-tardigrade/",
-   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged, small keepsake",
-   "note": "more charms are added here as the Backpack thread sends shapes, about 30 credits each"
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-gold-coin",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-gold-coin/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-gold-coin/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-star",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-star/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-star/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-brass-key",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-brass-key/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-brass-key/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-moon",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-moon/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-moon/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-floppy-disk",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-floppy-disk/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-floppy-disk/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-heart",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-heart/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-heart/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-bub",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-bub/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-bub/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-coffee-cup",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-coffee-cup/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-coffee-cup/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "charm-rocket",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/charm-rocket/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/charm-rocket/",
+   "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
   }
  ],
  "total_credits": 620,
@@ -490,7 +570,7 @@
  },
  "pricing_source": "https://docs.meshy.ai/en/api/pricing (checked 2026-10-23): multi-image textured 30, rigging 5, animation 3 per action, retexture 10",
  "licence": "Paid plans: private licence, full commercial use, we own the output (https://docs.meshy.ai/en/webapp/pricing)",
- "total_credits_before_anims": 1060,
+ "total_credits_before_anims": 1330,
  "texture_paint_test": {
   "asked": "Evan 16:58Z: 'after clean up, we can also paint textures with meshy too ... test the texture painting? ... one way we could ensure a base costume, but another way we could add our own flair beyond simple shading and svg decals'",
   "when": "after our Blender cleanup of the first astronaut (A3 Daddy, uniform, painterly), on the cleaned GLB with our own UVs",
