@@ -1,0 +1,106 @@
+{
+  "appid": null,
+  "name": "Just Dance",
+  "store_url": null,
+  "genres": [
+    "Rhythm",
+    "Dance",
+    "Party"
+  ],
+  "short_description": "Follow a dancing coach on screen and copy the moves to pop songs.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Rhythm",
+    "Dance",
+    "Party"
+  ],
+  "summary": "Follow a dancing coach on screen and copy the moves to pop songs.",
+  "identity": {
+    "core_loop": "Watch the coach, copy the move as it comes, get rated, keep dancing.",
+    "mechanics": null,
+    "ui_and_game_feel": "Joyful and silly; nobody is bad at it.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "meta": 0.3,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.52,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Pictograms scroll along the bottom for the next move; ratings pop on each move; the coach is the main readout.",
+      "confidence": 0.75,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Real dancers filmed in full costume on green screen, then stylised in post.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+        "bloom"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "mixed",
+      "mocap": 0.0,
+      "locomotion": [
+        "sprite_frames"
+      ],
+      "tricks": [
+        "Coaches are real dancers filmed in full costume and make-up on green screen, then stylised in post: video, not rigged animation",
+        "Pictograms scroll along the bottom to show the next move; the player is scored by the controller (or a phone camera with a trained model)"
+      ],
+      "lesson": "When the dance must be perfect, film or capture a real performer; mirror the player and rate every move without failing them.",
+      "sources": [
+        {
+          "title": "Dance Spirit: Real dancers, really dancing, the making of Just Dance 2024",
+          "url": "https://dancespirit.com/just-dance-2024/"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Licensed pop songs.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Copy a performer: the coach is real people filmed, not keyed animation. Mirror the player, rate every move, never fail."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.22,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.22,
+      "systems": 0.44,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.75
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

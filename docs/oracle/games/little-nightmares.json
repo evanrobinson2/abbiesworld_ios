@@ -1,0 +1,107 @@
+{
+  "appid": 424840,
+  "name": "Little Nightmares",
+  "store_url": "https://store.steampowered.com/app/424840/",
+  "genres": [
+    "Puzzle platformer",
+    "Horror",
+    "Adventure"
+  ],
+  "short_description": "A small child in a raincoat sneaks through a giant, grotesque ship.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle platformer",
+    "Horror",
+    "Adventure"
+  ],
+  "summary": "A small child in a raincoat sneaks through a giant, grotesque ship.",
+  "identity": {
+    "core_loop": "Sneak, climb, hide, solve a small physical puzzle, run from a giant, reach the next room.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense and tactile; you feel small against everything.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.0,
+          "source": "estimate",
+          "confidence": 0.52,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "No HUD at all: a lighter in the dark, footsteps and the giants' bodies tell you everything.",
+      "confidence": 0.75,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Dollhouse diorama seen from the side, dark with warm pools of light.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "soft_diorama",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "depth of field"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "root_motion"
+      ],
+      "tricks": [
+        "A small state machine (idle, start, move) with designer-swappable override slots, so wading, ash and water reuse one set at new speeds",
+        "Ability sets combine (holding hands while wading) without new code",
+        "Monsters are built on one exaggerated trait each (a long neck, walking on the ceiling) and scripted with the state machine"
+      ],
+      "lesson": "Override slots let one child walk through many grounds; give each giant one exaggerated way of moving.",
+      "sources": [
+        {
+          "title": "Unreal Engine interview: how Little Nightmares II plumbs the depths of adolescent angst",
+          "url": "https://www.unrealengine.com/en-US/developer-interviews/how-little-nightmares-ii-plumbs-the-depths-of-adolescent-angst"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Low drones, creaks, music box moments.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A dollhouse side view and no HUD at all; size alone tells you you are small. Kid-safe only in its framing, not its horror."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.44,
+      "expression": 0.22,
+      "structure": 0.44,
+      "social": 0.22,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "confidence": 0.75
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
