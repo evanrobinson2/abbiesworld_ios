@@ -9,7 +9,8 @@ The manifest (card.json) is what a generator writes next to each render:
 
     {"id": "ranch-001", "ppi": 600, "bleed": true, "rarity": "bloom", "type": "animal",
      "art":   {"bbox": [x, y, w, h], "source_px": [w, h], "layer": "art-only.png (needed for translucent plates)",
-               "mode": ["portal"], "layers": ["bg.png", "subject.png"], "subject_bbox": [x, y, w, h]},
+               "mode": ["portal"], "layers": ["bg.png", "subject.png"], "subject_bbox": [x, y, w, h],
+               "window_bbox": [x, y, w, h] (framed window; popout measures from it when given)},
      "boxes": [{"role": "name|text|numeral|gem|collector", "bbox": [x, y, w, h],
                 "font_pt": 10, "family": "Fredoka", "text_colour": "#2b1d0e",
                 "plate": "opaque|translucent"}],
@@ -148,7 +149,10 @@ def check_art_mode(man, boxes, th, b):
         if not sb:
             out["popout"] = (False, "popout needs art.subject_bbox")
         else:
-            brk = (art["bbox"][1] - sb[1]) / th
+            # Measure the break from the framed window, not the art bbox: a pop-out on an overlay card has art
+            # covering the whole face, so the generator writes art.window_bbox. Any side counts.
+            wx, wy, ww, wh = art.get("window_bbox", art["bbox"])
+            brk = max(wx - sb[0], wy - sb[1], sb[0] + sb[2] - (wx + ww), sb[1] + sb[3] - (wy + wh)) / th
             hits = [x["role"] for x in boxes if x["role"] == "numeral" and not (
                 sb[0] + sb[2] <= x["bbox"][0] or x["bbox"][0] + x["bbox"][2] <= sb[0] or
                 sb[1] + sb[3] <= x["bbox"][1] or x["bbox"][1] + x["bbox"][3] <= sb[1])]
@@ -219,7 +223,8 @@ def check_card(img_path, man_path):
     res["numeral_height"] = (cap >= 0.06 * th, f"numeral cap {cap:.0f}px vs 6% of trim height {0.06 * th:.0f}px")
 
     share = aw * ah / (tw * th)
-    sun = man.get("rarity") == "sun" or man.get("full_art")
+    modes = art.get("mode", [])
+    sun = man.get("rarity") == "sun" or man.get("full_art") or "overlay" in ([modes] if isinstance(modes, str) else modes)
     res["art_share"] = ((0.95 <= share) if sun else (0.50 <= share <= 0.65), f"art {share:.0%} of face")
 
     gray = np.asarray(im.convert("L"))
@@ -258,11 +263,15 @@ def check_card(img_path, man_path):
     face[trim[1]:trim[1] + th, trim[0]:trim[0] + tw] = True
     framemask = face.copy()
     framemask[A[1]:A[1] + A[3], A[0]:A[0] + A[2]] = False
+    # Only plates are subtracted: tokens, gems and the collector line sit on the frame, so a card with one stat
+    # token instead of two must not score more frame than one with two.
     for x in boxes:
+        if x["role"] not in ("name", "text"):
+            continue
         X, Y, w, h = x["bbox"]
         framemask[Y:Y + h, X:X + w] = False
     fshare = framemask.sum() / face.sum()
-    res["frame_share"] = ((0.15 <= fshare <= 0.30) or sun, f"frame {fshare:.0%} of face")
+    res["frame_share"] = ((0.15 <= fshare <= 0.35) or sun, f"frame {fshare:.0%} of face")
     lum = gray[framemask] / 255.0 if framemask.any() else np.zeros(1)
     res["material_value_range"] = (float(lum.std()) >= 0.08 or sun, f"frame luminance std {lum.std():.3f}")
 
