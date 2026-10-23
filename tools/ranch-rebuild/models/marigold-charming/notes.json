@@ -1,0 +1,98 @@
+{
+ "what_i_did": [
+  [
+   "Start",
+   "Copied ../marigold/build.py, hero_check.py, make_views.py and run.sh and reshaped them: same six meshes and material names (Flower_Petal_Orange, Flower_Petal_Amber, Flower_Petal_Gold, Stem_Green, Leaf_Green, Leaf_Dark), same origin (base centre on the ground), front -Y, same 0.315 m height, footprint stretched to the normal model's 1.24 width/depth ratio (0.311 x 0.251 m against 0.306 x 0.246 m). No variants (plant group)."
+  ],
+  [
+   "Views",
+   "Hero only (no turnaround was made). make_views.py keys the cream backdrop and the grey-tan cast shadow, which in this hero falls to the lower LEFT (blue channel above 104, below row 1100 of the 2048 px hero), plus the brown contact shadow under the rosette (R > G + 18 below row 1540). Scored by hero_check.py from a matched front camera: yaw 0, 18 deg up (calibration was flat between 12 and 22 deg)."
+  ],
+  [
+   "Blooms",
+   "Seven oversized flat daisies instead of sixteen small pom-poms, placed from the hero: the biggest at the top, two lower ones turned square to the viewer. Each is a ring of 13 plump square-tipped orange petals cupped up at the tips, a raised ring of 10 shorter amber petals turned half a petal (the hero's yellow streaks), a domed deep-orange heart (Flower_Petal_Gold, now a deep orange, as the hero's centres) and an under-cone through the petal notches for thickness. 81 triangles each."
+  ],
+  [
+   "Stems",
+   "Seven thick bowed stems (3 sides, two segments) from an 8 cm crown, one leaf on each."
+  ],
+  [
+   "Foliage",
+   "Puffy spoon leaves (6 triangles, widest near the round tip, raised midrib) replace the narrow diamond cards: a low rosette of 26 broad leaves plus 20 fat upright leaves that fan mostly left and right to mid height, as in the hero, and a smaller dark lumpy core. Leaves and petals are smooth-shaded so they read soft and toy-like."
+  ],
+  [
+   "Charming tilt",
+   "The whole crown leans a little to +X (x += 0.06 z^2, base fixed), the blooms fan out wider (x positions x1.10) and each disc tips toward its side of the clump."
+  ],
+  [
+   "Game readiness",
+   "1,060 triangles (normal: 1,080; plant budget 1k, art director's 1.2k allowance for blooms), 6 meshes, one flat material each, double-sided. to_game.py marigold-charming installed it as simulations/regional-assets-charming/GF-250.glb."
+  ]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.749 at 768 px / 48 samples from the matched camera (best 384 px round 0.755).",
+  "Reads as the same marigold clump at a glance, but with fewer, much bigger, friendlier blooms and fat spoon leaves.",
+  "Fewer triangles than the normal model (1,060 vs 1,080) and the same material set, so it drops in for the normal one."
+ ],
+ "off": [
+  "The hero's petals are soft, rounded and layered with curled tips; mine are flat-shaded-looking square-tipped cards with clear notches, so up close the blooms read a little like paper pinwheels.",
+  "The hero's foliage fills up to the lower blooms all round; mine is fuller at the bottom and sides but thinner in the middle behind the lower blooms.",
+  "Raising the top bloom to show the hero's bare stem gap cost 0.03 IoU (it narrows the relative width), so the top bloom sits closer to the middle one than in the hero.",
+  "Flower_Petal_Gold keeps its name and role but is now a deep orange (the hero's bloom centres), not gold.",
+  "60 triangles over the 1k plant budget, within the 1.2k allowance used for the normal marigold."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First charming build from the normal script: 7 flat daisies from the hero, spoon leaves, bowed thick stems, crown lean. 1,135 tris.",
+   "mean_iou": 0.65
+  },
+  {
+   "round": 2,
+   "change": "Blooms 30 % bigger, wider amber ring, 3-sided stems, longer and wider rosette and upright leaves, bigger core.",
+   "mean_iou": 0.721
+  },
+  {
+   "round": 3,
+   "change": "Bloom x positions fanned out x1.12, blooms a bit bigger, flatter rosette.",
+   "mean_iou": 0.737
+  },
+  {
+   "round": 4,
+   "change": "Camera calibrated (flat 12-22 deg; set 18). Longer, flatter rosette and wider fan: the bottom spread too far and the score fell.",
+   "mean_iou": 0.717
+  },
+  {
+   "round": 5,
+   "change": "Rosette back to shorter; upright leaves longer and splayed out (28-62 deg) to fill the mid height.",
+   "mean_iou": 0.744
+  },
+  {
+   "round": 6,
+   "change": "Blooms back down to the measured heights and smaller (x1.15), 13 outer petals, smaller amber ring and heart, deeper amber, more upright leaves.",
+   "mean_iou": 0.735
+  },
+  {
+   "round": 7,
+   "change": "Upright leaves fan mostly left and right (the hero's side leaves at mid height), shorter rosette.",
+   "mean_iou": 0.755
+  },
+  {
+   "round": 8,
+   "change": "Under-cone through the petal notches only: 1,242 to 1,060 tris, same silhouette; smooth shading on petals and leaves.",
+   "mean_iou": 0.754
+  },
+  {
+   "round": 9,
+   "change": "Tried a taller top bloom with a stem gap (0.725) and a seed sweep (0.717-0.728): reverted, seed 3 kept; X_SPREAD and upright-leaf length sweeps confirmed 1.10 and 0.40-0.56.",
+   "mean_iou": 0.754
+  },
+  {
+   "round": 10,
+   "change": "Final 768 px / 48 sample render and hero score; to_game.py marigold-charming.",
+   "mean_iou": 0.749
+  }
+ ],
+ "moving_parts": "None (plant group; the game poses models itself).",
+ "creative_additions": "The whole crown leans gently to one side and the two lowest blooms turn square to the viewer like faces in a picture book (no faces painted on), with oversized petals and puffy spoon leaves for the storybook-toy look."
+}
