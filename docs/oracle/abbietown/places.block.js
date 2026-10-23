@@ -5,6 +5,27 @@ const trainCar = (g, x, z, body, roof) => { box(g, 9, 3.6, 3.4, body, x, 1.1, z)
 const engine = (g, x, z, body) => { const b = cyl(g, 1.7, 1.7, 8, body, x, 0, z, 14); b.rotation.z = Math.PI / 2; b.position.set(x, 3.2, z); box(g, 3.6, 4.6, 3.6, '#2a2a2e', x - 4.4, 1.2, z); box(g, 4, .5, 4, '#3a3a40', x - 4.4, 5.8, z); cyl(g, .5, .8, 2.2, '#2a2a2e', x + 2.6, 4.7, z, 8); const dome = new THREE.Mesh(new THREE.SphereGeometry(.9, 10, 6), hkM('#c8a24a')); dome.position.set(x - .2, 5.2, z); g.add(dome); for (const k of [-2.8, 0, 2.8]) { cyl(g, 1.1, 1.1, .4, '#2a2a2e', x + k, .1, z + 1.7, 12).rotation.x = Math.PI / 2; cyl(g, 1.1, 1.1, .4, '#2a2a2e', x + k, .1, z - 1.7, 12).rotation.x = Math.PI / 2; } const lamp = box(g, .8, .8, .8, '#ffe9a0', x + 4.3, 3.2, z); lamp.material = hkM('#ffe9a0'); };
 const track = (g, z, len, x0 = 0) => { box(g, len, .3, .35, '#7a7570', x0, .3, z - 1.1); box(g, len, .3, .35, '#7a7570', x0, .3, z + 1.1); for (let i = 0; i < len / 2.2; i++) box(g, .7, .2, 3.4, '#5a4636', x0 - len / 2 + i * 2.2 + 1.1, .1, z); };
 const windowsRow = (g, n, gap, y, z, w = 1.6, h = 2.2, c = '#3a5468', x0 = 0) => { for (let i = 0; i < n; i++) box(g, w, h, .3, c, x0 + (i - (n - 1) / 2) * gap, y, z); };
+const blob = (g, r, c, x, y, z, sx = 1, sy = 1, sz = 1) => { const m = new THREE.Mesh(new THREE.IcosahedronGeometry(r, 1), hkM(c)); m.scale.set(sx, sy, sz); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
+const stairs = (g, x0, z0, ang, r, y0, y1, n, c) => { for (let i = 0; i < n; i++) { const a = ang + i * .42, y = y0 + (y1 - y0) * i / n; box(g, 3.4, .4, 1.5, c, x0 + Math.cos(a) * r, y, z0 + Math.sin(a) * r, -a); } };
+// the two treehouses from the iPad game's art (Abbie's pink blossom tree with a unicorn balloon, Ani's violet tree with a moon balloon and a slide)
+function buildTreehouse(g, K) {
+ const bark = K.bark, wood = K.wood, roof = K.roof, roof2 = K.roof2, wall = K.wall, glow = '#ffe3a0';
+ cyl(g, 5.2, 8, 12, bark, 0, 0, 0, 10); cyl(g, 4, 5.2, 16, bark, 0, 12, 0, 10); for (let i = 0; i < 5; i++) { const a = i * 1.26; box(g, 2.6, 3.4, 5, bark, Math.cos(a) * 7, 0, Math.sin(a) * 7, -a); }
+ const deck = (y, rr, c = K.deck) => { cyl(g, rr, rr, .7, c, 0, y, 0, 16); cyl(g, rr + .35, rr + .35, .25, K.trim, 0, y + .7, 0, 16); };
+ const cabin = (x, y, z, w, d, h, ry, r1) => { const q = new THREE.Group(); q.position.set(x, y, z); q.rotation.y = ry; q.scale.setScalar(1.3); g.add(q); box(q, w, h, d, wall, 0, 0, 0); gable(q, w + 2, 3.4, d + 2, r1, 0, h, 0); box(q, w + 2.4, .5, d + 2.4, K.trim, 0, h - .1, 0); box(q, 2.4, 3.4, .3, K.door, w * .2, 0, d / 2 + .1); for (const wx of [-w * .28, w * .02]) { box(q, 2, 2.6, .3, glow, wx, h * .35, d / 2 + .1); box(q, 2.4, .35, .4, K.trim, wx, h * .35 + 2.7, d / 2 + .12); box(q, .25, 2.6, .35, K.trim, wx, h * .35, d / 2 + .15); } for (const sx of [-1, 1]) box(q, .3, 2.4, 2.2, glow, sx * (w / 2 + .1), h * .4, 0); return q; };
+ K.build(g, {deck, cabin, blob, stairs});
+ // the canopy: a few big soft crowns, with little ones drifting off it
+ for (const [x, y, z, r, sy] of K.crowns) blob(g, r, K.leaf[0], x, y, z, 1, sy, 1);
+ K.crowns.forEach(([x, y, z, r], i) => blob(g, r * .55, K.leaf[1 + i % (K.leaf.length - 1)], x + r * .5, y + r * .45, z - r * .3, 1, .8, 1));
+ for (let i = 0; i < K.charms; i++) { const a = i * 2.4, rr = 13 + (i % 3) * 3, y = 22 + (i % 4) * 2; cyl(g, .05, .05, 3 + i % 3, '#d8d0c8', Math.cos(a) * rr, y - 3 - i % 3, Math.sin(a) * rr, 4); const c = new THREE.Mesh(new THREE.OctahedronGeometry(.9, 0), hkM(K.charm[i % K.charm.length])); c.position.set(Math.cos(a) * rr, y - 4 - i % 3, Math.sin(a) * rr); g.add(c); }
+ // stones and flowers at the roots, and a path
+ for (let i = 0; i < 9; i++) { const a = i * .7 + .3; blob(g, 1.5, K.stone[i % 3], Math.cos(a) * 15, .7, Math.sin(a) * 13 + 1, 1, .65, 1); }
+ for (let i = 0; i < 7; i++) { const a = i * .9; cyl(g, .12, .12, 1.4, '#5f9a46', Math.cos(a) * 11, 0, Math.sin(a) * 10 + 2, 4); blob(g, .8, K.flower, Math.cos(a) * 11, 1.5, Math.sin(a) * 10 + 2, 1, .6, 1); }
+ for (let i = 0; i < 6; i++) box(g, 2.6, .2, 2.2, K.path, -3 + i * 2.2, .1, 14 + i * 1.8, .2 + i * .1);
+ // the little ground-floor door in the trunk with its round roof
+ box(g, 6, 5, 4, wall, -7, 0, 6.5, .5); gable(g, 7.6, 2.6, 5.6, roof2, -7, 5, 6.5).rotation.y = .5; box(g, 1.7, 3.2, .3, K.door, -6.3, 0, 8.7, .5);
+ K.sky(g);
+}
 Object.assign(BUILD, {
  highschool(g) { // the school where the three zones meet: a long brick front, two wings, a clock tower, flag and front steps
   const brick = '#a8563e', trim = '#e6dccb';
@@ -71,6 +92,17 @@ Object.assign(BUILD, {
   box(g, 10, .35, .35, '#c8452a', 4, 1.5, 0); for (const x of [-1, 9]) box(g, .3, 1.5, .3, '#4a4a50', x, .5, 0); box(g, 6, .9, 3, '#e8b23a', -14, .5, 11); box(g, 3.4, 1.4, 3.4, '#5a8ad8', 16, .5, 0).rotation.y = .4;
   for (let i = 0; i < 12; i++) box(g, .2, 1.6, .2, '#4a4a50', -20 + i * 3.64, .5, -15); box(g, 40, .15, .15, '#4a4a50', 0, 1.9, -15); box(g, 4, .3, 1, '#6a4a2e', -14, 1, 16); box(g, 4, .8, .18, '#6a4a2e', -14, 1.4, 16.5);
  },
+ abbieTree(g) { buildTreehouse(g, {
+  bark: '#a85a4e', wood: '#d9a98c', roof: '#f08aa8', roof2: '#f2a0b8', wall: '#f6e2c4', trim: '#fbe7ee', door: '#d96a8a', deck: '#e87a9a', leaf: ['#ee7a92', '#f4a0b4', '#e4627f', '#f8b8c8'], stone: ['#c8a8d8', '#d8b8e0', '#b898c8'], flower: '#f06a8a', path: '#f4c8d4', charm: ['#f8b8e0', '#fbd0ec', '#d8a0f0'], charms: 9,
+  crowns: [[-8, 44, -6, 11, .75], [7, 42, -4, 9, .8], [-20, 30, -6, 6, .8], [18, 30, -10, 5.5, .8]],
+  build(g, k) { k.deck(13, 14); k.cabin(-2, 13.9, -2, 10, 8, 7, .3, '#f08aa8'); k.cabin(7, 13.9, 5, 8, 7, 6, -.6, '#f4a0b8'); k.deck(25, 9); k.cabin(0, 25.9, 0, 8, 7, 6, .5, '#ee7a92'); k.deck(8, 6.5); k.cabin(-14, 8.9, 7, 5, 5, 4.4, .2, '#f2a0b8'); box(g, 9, .6, 1.6, '#c8826a', -9, 8.3, 5, .35); k.stairs(g, 0, 0, .3, 9.4, 1, 13, 18, '#c8826a'); },
+  sky(g) { const b = new THREE.Group(); b.position.set(20, 40, -4); g.add(b); blob(b, 4.6, '#fdf2f8', 0, 0, 0, 1.3, .9, .9); blob(b, 2.4, '#fdf2f8', -5.4, 1.6, 0, 1, 1, 1); const h = new THREE.Mesh(new THREE.ConeGeometry(.9, 4, 8), hkM('#fbe9a8')); h.position.set(-6, 5.2, 0); h.rotation.z = .35; b.add(h); for (const sx of [-1, 1]) blob(b, .5, '#f06a8a', -5.6, 1.9, sx * 1.9, 1, 1, 1); blob(b, 1.7, '#f4a0c4', 1.5, 3.6, 0, 1.6, 1, .7); for (let i = 0; i < 4; i++) { const r = box(b, .25, 14, 1.2, '#f8c8d8', 2 + i * 1.2, -14, 0); r.rotation.z = .12 + i * .04; } }}); },
+ aniTree(g) { buildTreehouse(g, {
+  bark: '#7a5a4a', wood: '#a88868', roof: '#6a50b0', roof2: '#7a60c0', wall: '#f0d8a8', trim: '#c8a8e0', door: '#6a50a8', deck: '#b89890', leaf: ['#5a3c8a', '#7a58b0', '#4a2e78', '#8a68c0'], stone: ['#c0a8d8', '#a890c8', '#d0b8e8'], flower: '#a070e0', path: '#d8c8e8', charm: ['#c8a0f0', '#e8d0ff', '#a080e0'], charms: 12,
+  crowns: [[-8, 46, -6, 11, .75], [7, 45, -6, 10, .8], [-20, 33, -6, 6, .8], [20, 33, -8, 5.5, .8]],
+  build(g, k) { k.deck(10, 14); k.cabin(-5, 10.9, -2, 11, 8, 7.4, .3, '#6a50b0'); k.deck(21, 12); k.cabin(6, 21.9, 1, 9, 8, 6.4, -.5, '#7a60c0'); k.deck(31, 8); k.cabin(0, 31.9, 0, 8, 7, 5.6, .4, '#5a44a0'); k.cabin(-14, 8, 6, 5, 5, 4, .2, '#7a60c0'); k.stairs(g, 0, 0, 1.2, 9.4, 1, 10, 14, '#a88868'); k.stairs(g, 0, 0, 3.2, 8.4, 11, 21, 14, '#a88868'); k.stairs(g, 0, 0, 5.2, 7.4, 22, 31, 12, '#a88868');
+   const sl = new THREE.Mesh(new THREE.TorusGeometry(8, 1.8, 8, 16, 3.6), hkM('#c8a8e8')); sl.position.set(10, 8.2, 2); sl.rotation.x = Math.PI / 2; sl.rotation.z = 1.6; g.add(sl); cyl(g, .3, .3, 8, '#8a7aa8', 16, 8, -2, 5); },
+  sky(g) { const m = new THREE.Mesh(new THREE.TorusGeometry(3.6, 1.1, 8, 20, 4.5), hkM('#c8a8f0')); m.position.set(18, 44, 0); m.rotation.z = 2.2; g.add(m); cyl(g, .06, .06, 14, '#d8d0e0', 18, 30, 0, 4); for (let i = 0; i < 6; i++) { const a = i * 1.1, l = new THREE.Mesh(new THREE.SphereGeometry(.9, 8, 6), hkM('#ffe3a0')); l.position.set(Math.cos(a) * 15, 20 + (i % 3) * 2, Math.sin(a) * 15); g.add(l); } }}); },
  gingerbread(g) { buildGingerbread(g); },
  bunker(g) { buildBunker(g); },
 });
