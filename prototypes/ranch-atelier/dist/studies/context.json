@@ -1544,6 +1544,24 @@
      "t": "Hex city study",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hexcity/HEXCITY_STUDY.md",
      "note": "round one: process makes the land, the town grows on it"
+    },
+    {
+     "k": "research",
+     "t": "MassGIS: assessor year built (Winchester tax parcels) and building footprints",
+     "href": "https://www.mass.gov/info-details/massgis-data-property-tax-parcels",
+     "note": "the time lapse: each grown house takes the year of a real building near it; no owners or addresses"
+    },
+    {
+     "k": "research",
+     "t": "MassGIS: MassDOT roads, all classes",
+     "href": "https://www.mass.gov/info-details/massgis-data-massdot-roads",
+     "note": "the translucent real-map overlay draws every real street; shapes only"
+    },
+    {
+     "k": "research",
+     "t": "Winchester history: railway 1835, incorporated 1850",
+     "href": "https://en.wikipedia.org/wiki/Winchester,_Massachusetts",
+     "note": "the two marks on the year slider"
     }
    ]
   },

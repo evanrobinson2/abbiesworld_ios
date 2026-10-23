@@ -16,11 +16,14 @@ for name in ['town.mjs', 'manifest.mjs']:
     parts.append(f'// ---- simulations/abbietown/{name} ----\n' + code)
 modules = '\n'.join(parts)
 land = json.dumps(json.loads((sim / 'land.json').read_text()), separators=(',', ':')).replace('</', '<\\/')
+history = json.dumps(json.loads((sim / 'history.json').read_text()), separators=(',', ':'))
+import base64
+overlay = 'data:image/png;base64,' + base64.b64encode((sim / 'overlay.png').read_bytes()).decode()
 context = subprocess.run(['node', str(root / 'tools/context-card/snippet.mjs'), 'abbietown'], capture_output=True, text=True, check=True).stdout
 template = (here / 'abbietown.template.html').read_text()
 def page(three, orbit):
     imap = json.dumps({'imports': {'three': three, 'three/addons/controls/OrbitControls.js': orbit}})
-    return template.replace('/*IMPORTMAP*/', imap).replace('/*MODULES*/', modules).replace('/*LAND*/', land).replace('/*CONTEXT*/', context)
+    return template.replace('/*IMPORTMAP*/', imap).replace('/*MODULES*/', modules).replace('/*LAND*/', land).replace('/*CONTEXT*/', context).replace('/*HISTORY*/', history).replace('/*OVERLAY*/', overlay)
 art = page('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js', 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js')
 btns = '<div class="chips"><button class="btn" id="csv">Download the manifest (CSV)</button><button class="chip" id="json">JSON</button></div>'
 assert btns in art

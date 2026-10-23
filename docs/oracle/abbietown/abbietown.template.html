@@ -48,6 +48,12 @@ section,header{display:flex;flex-direction:column;gap:16px}
 .hud input[type=range]{width:clamp(70px,18vw,180px);accent-color:#c8502c}
 .hud .sep{width:1px;height:22px;background:rgba(40,50,54,.18);flex:none}
 .hud .tiny{width:14px;height:14px;color:#2a3236;flex:none} .hud .big{width:22px;height:22px;color:#2a3236;flex:none}
+.timebar{bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+.timebar[hidden]{display:none}
+.timebar .track{position:relative;display:flex;flex-direction:column;padding-bottom:12px}
+.timebar input{width:clamp(130px,38vw,340px)!important}
+.timebar .marks span{position:absolute;bottom:-4px;transform:translateX(-50%);font-size:12px;line-height:1}
+.timebar output{font:600 15px var(--mono);min-width:3.2em;text-align:center;color:#2a3236}
 .pin{position:absolute;transform:translate(-50%,-100%);width:34px;height:34px;border-radius:50% 50% 50% 4px;rotate:-45deg;border:0;padding:0;cursor:pointer;
  background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(255,255,255,.72));box-shadow:0 6px 14px -6px rgba(30,30,40,.55),inset 0 1px 0 #fff;display:grid;place-items:center;transition:opacity .3s}
 .pin span{rotate:45deg;font-size:17px;line-height:1}
@@ -108,10 +114,18 @@ td .kit{font:500 11px var(--mono);color:var(--lawn)}
    <canvas id="c" aria-label="Abbie's town in 3D. Drag to look around, pinch or scroll to zoom, tap a pin to visit a place."></canvas>
    <div id="pins"></div>
    <div class="bubble" id="bubble" style="opacity:0"></div>
+   <div class="hud timebar" id="timebar" hidden role="group" aria-label="Years">
+    <button id="play" aria-pressed="false" aria-label="Play the years"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button>
+    <div class="track"><input id="yr" type="range" min="1700" max="2026" step="1" value="2026" aria-label="Year"><div class="marks" id="marks"></div></div>
+    <output id="yrnum" class="num">2026</output>
+   </div>
    <div class="hud" role="toolbar" aria-label="Town controls">
     <button id="home" aria-label="See the whole town"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></button>
     <button id="prev" aria-label="Previous place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
     <button id="next" aria-label="Next place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    <span class="sep"></span>
+    <button id="map" aria-pressed="false" aria-label="Lay the real map over the town"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></button>
+    <button id="clock" aria-pressed="false" aria-label="Watch the town grow through the years"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></button>
     <span class="sep"></span>
     <svg class="tiny" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 12l8-6 8 6v8H4z"/><rect x="7" y="13" width="3" height="3" fill="#fff"/><rect x="14" y="13" width="3" height="3" fill="#fff"/></svg>
     <input id="charm" type="range" min="0" max="1" step="0.05" value="1" aria-label="From the real town's density to Abbie's charming town">
@@ -205,6 +219,8 @@ td .kit{font:500 11px var(--mono);color:var(--lawn)}
 </div>
 
 <script id="land" type="application/json">/*LAND*/</script>
+<script id="overlay" type="text/plain">/*OVERLAY*/</script>
+<script id="history" type="application/json">/*HISTORY*/</script>
 <script type="importmap">/*IMPORTMAP*/</script>
 <script type="module">
 import * as THREE from 'three';
@@ -215,6 +231,21 @@ const land = makeLand(JSON.parse(document.getElementById('land').textContent));
 const W = land.W, D = land.D;
 const X = x => x - W / 2, Z = y => -(y - D / 2);
 const ICON = {lab: '\u{1F9EA}', cafe: '☕', comellas: '\u{1F355}', hoagies: '\u{1F96A}', muraco: '\u{1F3EB}', leonard: '⚽', ginn: '\u{1F682}', horn: '\u{1F986}', common: '⛪', launch: '\u{1F680}', nova: '✨'};
+
+// ---------- time: when things were built, from the assessor's year built (no owners or addresses) ----------
+const hist = JSON.parse(document.getElementById('history').textContent);
+const HISTORY = {rail: 1835, town: 1850, from: 1700, to: 2026};
+let overlay = null, townGroup = null, houseGroup = null, town = null, S = null, laneMeshes = [], railMeshes = [], lapse = false, year = 2026;
+function hectareYears(x, y) { // the years recorded in the hectare, or in the nearest hectares that have any
+ const i = Math.floor(x / hist.dc), j = Math.floor(y / hist.dc);
+ for (let r = 0; r <= 4; r++) { const out = []; for (let a = -r; a <= r; a++) for (let b = -r; b <= r; b++) { if (Math.max(Math.abs(a), Math.abs(b)) !== r) continue; const ii = i + a, jj = j + b; if (ii < 0 || jj < 0 || ii >= hist.dnx || jj >= hist.dny) continue; const k = jj * hist.dnx + ii; for (let n = hist.off[k]; n < hist.off[k + 1]; n++) if (hist.y[n] > 1650) out.push(hist.y[n]); } if (out.length) return out; }
+ return [1950];
+}
+function giveYears(t) { // each grown house takes the year of a real building near it, so each part of town ages as it really did
+ const r = rng(7), cache = new Map();
+ for (const h of t.houses) { const k = Math.floor(h.x / hist.dc) + ',' + Math.floor(h.y / hist.dc); let ys = cache.get(k); if (!ys) cache.set(k, ys = hectareYears(h.x, h.y)); h.year = ys[Math.floor(r() * ys.length)]; }
+ for (const l of t.lanes) { const mx = l.p[Math.floor(l.p.length / 2)], near = t.houses.filter(h => Math.hypot(h.x - mx[0], h.y - mx[1]) < 70).map(h => h.year).sort((a, b) => a - b); l.year = near.length ? near[Math.floor(near.length * .25)] : 1950; }
+}
 
 // ---------- scene ----------
 const stage = document.getElementById('stage'), canvas = document.getElementById('c');
@@ -250,6 +281,10 @@ new ResizeObserver(resize).observe(stage); resize();
  }
  geo.setAttribute('color', new THREE.BufferAttribute(col, 3)); geo.computeVertexNormals();
  const ground = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({vertexColors: true, roughness: .95})); ground.receiveShadow = true; scene.add(ground);
+ // the real map, laid over the land in a second skin that follows every hill: streets, footprints, water
+ const mg = geo.clone(), uv = new Float32Array(pos.count * 2); for (let k = 0; k < pos.count; k++) { const i = k % nx, j = Math.floor(k / nx); uv[k * 2] = (i + .5) / nx; uv[k * 2 + 1] = 1 - (j + .5) / ny; } mg.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+ const tex = new THREE.TextureLoader().load(document.getElementById('overlay').textContent.trim()); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+ overlay = new THREE.Mesh(mg, new THREE.MeshBasicMaterial({map: tex, transparent: true, opacity: 0, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2})); overlay.position.y = .9; overlay.visible = false; overlay.renderOrder = 5; scene.add(overlay);
  // the tile's edges: soil and rock down to a base, as every Abbie's World tile
  const skirt = new THREE.MeshStandardMaterial({color: '#7a5a3c', roughness: 1}), base = -40;
  const edge = (pts) => { const g = new THREE.BufferGeometry(), v = []; for (let k = 1; k < pts.length; k++) { const [a, b] = [pts[k - 1], pts[k]]; v.push(a[0], a[2], a[1], b[0], b[2], b[1], b[0], base, b[1], a[0], a[2], a[1], b[0], base, b[1], a[0], base, a[1]); } g.setAttribute('position', new THREE.Float32BufferAttribute(v, 3)); g.computeVertexNormals(); scene.add(new THREE.Mesh(g, skirt)); };
@@ -285,8 +320,7 @@ function merge(geos) { // a small merge for non-indexed and indexed BufferGeomet
  const brook = new THREE.MeshStandardMaterial({color: '#4a90b0', roughness: .25});
  scene.add(new THREE.Mesh(merge(land.raw.streams.map(s => ribbon(s.p, 4, .35))), brook));
  const ballast = new THREE.MeshStandardMaterial({color: '#8b7f72', roughness: 1}), steel = new THREE.MeshStandardMaterial({color: '#4a4440', roughness: .5, metalness: .6});
- scene.add(new THREE.Mesh(merge(land.raw.rail.map(r => ribbon(r, 6, .4))), ballast));
- scene.add(new THREE.Mesh(merge(land.raw.rail.map(r => ribbon(r, 1.7, .7))), steel));
+ for (const [w, l, mat] of [[6, .4, ballast], [1.7, .7, steel]]) { const rm = new THREE.Mesh(merge(land.raw.rail.map(r => ribbon(r, w, l))), mat); scene.add(rm); railMeshes.push(rm); }
  const asphalt = new THREE.MeshStandardMaterial({color: '#5d6064', roughness: .9}), line = new THREE.MeshStandardMaterial({color: '#e9d36a', roughness: .8});
  const roads = land.raw.roads.filter(r => r.c <= 4);
  const rg = merge(roads.map(r => ribbon(r.p, roadWidth(r.c), .45))); const rm = new THREE.Mesh(rg, asphalt); rm.receiveShadow = true; scene.add(rm);
@@ -319,7 +353,7 @@ const gableGeo = (() => { const s = new THREE.Shape([new THREE.Vector2(-.5, 0), 
 const hipGeo = new THREE.ConeGeometry(.7072, 1, 4, 1).rotateY(Math.PI / 4).translate(0, .5, 0);
 const crownGeo = new THREE.IcosahedronGeometry(1, 0), pineGeo = new THREE.ConeGeometry(1, 1, 7).translate(0, .5, 0), trunkGeo = new THREE.CylinderGeometry(.18, .26, 1, 5).translate(0, .5, 0);
 const roofMat = new THREE.MeshStandardMaterial({roughness: .8}), plainMat = new THREE.MeshStandardMaterial({roughness: .85}), leafMat = new THREE.MeshStandardMaterial({roughness: .9, flatShading: true});
-let townGroup = null, town = null, S = null;
+const laneMat = new THREE.MeshStandardMaterial({color: '#6a6c6f', roughness: .9});
 const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), v3 = new THREE.Vector3(), sc = new THREE.Vector3(), col = new THREE.Color();
 function inst(geo, mat, list, fill) {
  const mesh = new THREE.InstancedMesh(geo, mat, Math.max(1, list.length)); mesh.count = list.length; mesh.castShadow = true; mesh.receiveShadow = true;
@@ -328,8 +362,25 @@ function inst(geo, mat, list, fill) {
 }
 function buildTown(charm) {
  if (townGroup) { scene.remove(townGroup); townGroup.traverse(o => o.isInstancedMesh && o.dispose()); }
+ if (houseGroup) { scene.remove(houseGroup); houseGroup.traverse(o => o.isInstancedMesh && o.dispose()); houseGroup = null; }
  town = growTown(land, {charm}); S = summary(land, town); townGroup = new THREE.Group(); scene.add(townGroup);
- const H = town.houses, yaw = h => Math.atan2(h.fx, -h.fy);
+ giveYears(town);
+ // lanes, drawn as ribbons with a turning circle; a lane appears with the houses along it
+ laneMeshes = town.lanes.map(l => { const m = new THREE.Mesh(merge([ribbon(l.p, l.w, .42), (() => { const g = new THREE.CircleGeometry(9, 14); g.rotateX(-Math.PI / 2); g.translate(X(l.end[0]), land.heightAt(...l.end) + .44, Z(l.end[1])); return g; })()]), laneMat); m.receiveShadow = true; m.userData.year = l.year; townGroup.add(m); return m; });
+ // trees
+ const T = town.trees, broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine');
+ townGroup.add(inst(trunkGeo, plainMat, broad, t => { v3.set(X(t.x), t.z, Z(t.y)); q.identity(); sc.set(t.s, 4 * t.s, t.s); col.set('#6b4f36'); }));
+ townGroup.add(inst(crownGeo, leafMat, broad, t => { const s = t.kind === 'birch' ? .75 : 1; v3.set(X(t.x), t.z + 6.2 * t.s * s, Z(t.y)); q.setFromEuler(e.set(t.x % 1, t.y % 3, 0)); sc.set(3.8 * t.s * s, 4.4 * t.s * s, 3.8 * t.s * s); col.set(t.c); }));
+ townGroup.add(inst(pineGeo, leafMat, pine, t => { v3.set(X(t.x), t.z + .8, Z(t.y)); q.identity(); sc.set(2.8 * t.s, 13 * t.s, 2.8 * t.s); col.set(t.c); }));
+ drawHouses(); showFacts(); showManifest();
+}
+// the houses that stand in the chosen year (the whole town when the time lapse is off)
+function drawHouses() {
+ if (houseGroup) { scene.remove(houseGroup); houseGroup.traverse(o => o.isInstancedMesh && o.dispose()); }
+ houseGroup = new THREE.Group(); scene.add(houseGroup);
+ const townGroup = houseGroup, H = lapse ? town.houses.filter(h => h.year <= year) : town.houses, yaw = h => Math.atan2(h.fx, -h.fy);
+ for (const l of laneMeshes) l.visible = !lapse || l.userData.year <= year;
+ for (const m of railMeshes) m.visible = !lapse || year >= HISTORY.rail;
  for (const fam of Object.keys(BODY)) {
   const list = H.filter(h => h.fam === fam); if (!list.length) continue;
   townGroup.add(inst(boxGeo, BODY[fam], list, h => { v3.set(X(h.x), h.z - .4, Z(h.y)); q.setFromEuler(e.set(0, yaw(h), 0)); sc.set(h.w, h.h + .4, h.d); col.set(h.wall); }));
@@ -345,15 +396,6 @@ function buildTown(charm) {
  // awnings on the shops, in striped colours
  const sh = H.filter(h => h.fam === 'shop'), awn = ['#2f7d6a', '#b8423a', '#2f5d8a', '#d9a03a', '#6a4a8a'];
  townGroup.add(inst(boxGeo, plainMat, sh, (h, i) => { const a = yaw(h); v3.set(X(h.x) + Math.sin(a) * (h.d / 2 + .9), h.z + 3.1, Z(h.y) + Math.cos(a) * (h.d / 2 + .9)); q.setFromEuler(e.set(-.35, a, 0, 'YXZ')); sc.set(h.w * .9, .2, 2.2); col.set(awn[i % awn.length]); }));
- // lanes, drawn as ribbons with a turning circle
- const lanes = town.lanes.map(l => ribbon(l.p, l.w, .42)), circles = town.lanes.map(l => { const g = new THREE.CircleGeometry(9, 14); g.rotateX(-Math.PI / 2); g.translate(X(l.end[0]), land.heightAt(...l.end) + .44, Z(l.end[1])); return g; });
- if (lanes.length) { const m = new THREE.Mesh(merge([...lanes, ...circles]), new THREE.MeshStandardMaterial({color: '#6a6c6f', roughness: .9})); m.receiveShadow = true; townGroup.add(m); }
- // trees
- const T = town.trees, broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine');
- townGroup.add(inst(trunkGeo, plainMat, broad, t => { v3.set(X(t.x), t.z, Z(t.y)); q.identity(); sc.set(t.s, 4 * t.s, t.s); col.set('#6b4f36'); }));
- townGroup.add(inst(crownGeo, leafMat, broad, t => { const s = t.kind === 'birch' ? .75 : 1; v3.set(X(t.x), t.z + 6.2 * t.s * s, Z(t.y)); q.setFromEuler(e.set(t.x % 1, t.y % 3, 0)); sc.set(3.8 * t.s * s, 4.4 * t.s * s, 3.8 * t.s * s); col.set(t.c); }));
- townGroup.add(inst(pineGeo, leafMat, pine, t => { v3.set(X(t.x), t.z + .8, Z(t.y)); q.identity(); sc.set(2.8 * t.s, 13 * t.s, 2.8 * t.s); col.set(t.c); }));
- showFacts(); showManifest();
 }
 
 // ---------- the places: hero models, bigger than life ----------
@@ -493,6 +535,21 @@ canvas.addEventListener('pointerup', e => {
  let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) location.href = o.userData.link;
 });
 canvas.addEventListener('pointermove', e => { if (e.buttons) return; const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); canvas.style.cursor = ray.intersectObjects(beakers, true).length ? 'pointer' : ''; });
+// the real map: off, then faint, then strong
+{ const b = document.getElementById('map'), lv = [0, .4, .8]; let at = 0;
+ b.onclick = () => { at = (at + 1) % 3; overlay.visible = at > 0; overlay.material.opacity = lv[at]; b.setAttribute('aria-pressed', at > 0); }; }
+// the time lapse: a year slider; the train line and the town's birth are marked on it
+{ const bar = document.getElementById('timebar'), yr = document.getElementById('yr'), num = document.getElementById('yrnum'), clk = document.getElementById('clock'), play = document.getElementById('play');
+ const span = HISTORY.to - HISTORY.from;
+ document.getElementById('marks').innerHTML = [[HISTORY.rail, '\u{1F682}'], [HISTORY.town, '\u{1F514}']].map(([y, g]) => `<span style="left:${(y - HISTORY.from) / span * 100}%">${g}</span>`).join('');
+ let raf = 0, last = 0;
+ const set = y => { year = Math.round(y); yr.value = year; num.textContent = year; drawHouses(); };
+ yr.oninput = () => { stop(); set(+yr.value); };
+ function stop() { play.setAttribute('aria-pressed', 'false'); cancelAnimationFrame(raf); raf = 0; }
+ function tick(now) { const dt = (now - last) / 1000; last = now; const y = Math.min(HISTORY.to, year + dt * 24); if (Math.round(y) !== year) set(y); if (y >= HISTORY.to) { stop(); return; } raf = requestAnimationFrame(tick); }
+ play.onclick = () => { if (raf) { stop(); return; } if (year >= HISTORY.to) set(HISTORY.from); play.setAttribute('aria-pressed', 'true'); last = performance.now(); raf = requestAnimationFrame(tick); };
+ clk.onclick = () => { lapse = !lapse; clk.setAttribute('aria-pressed', lapse); bar.hidden = !lapse; if (lapse) { set(HISTORY.from); play.onclick(); } else { stop(); year = 2026; drawHouses(); } };
+}
 let charmTimer = 0;
 document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => buildTown(+e.target.value), 120); };
 

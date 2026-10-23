@@ -95,6 +95,18 @@ On the page's right side, from `studies/context.json` (`abbietown`).
 - The places are bigger than life (a sub on the roof, a pizza on the sign) but stand where they really are.
 - Tour: `"tour": false`. A study, not yet part of the play loop.
 
+## Round 2 (Evan, 2026-10-23 1:03 PM): the plan and the first two pieces
+Plan: the Claude Doc "Abbie's Town: round 2 plan". Evan then named the zones that get hi-fi: downtown with the coffee
+shop, Ginn Field, the family homes with treehouses and the bunker, Launch, and the Horn Pond splash pad. The rest of
+the town stays the charming grown version.
+- **Time lapse** (`tools/extract_overlay.py` writes `history.json`): the assessor's year built for the buildings in each
+  hectare. Each grown house takes the year of a real building near it; a lane appears with the houses along it; the
+  railway appears in 1835. A clock button opens a year slider (1700 to 2026) with a play button; marks for the railway
+  (1835) and the town's birth (1850).
+- **Real map overlay** (`overlay.png`, 4 m a pixel): every real street, every building footprint and the water as
+  shapes only, laid over the land in a second skin that follows every hill. The map button steps off, faint, strong.
+- Privacy: homes are placed loosely on their real streets, with no house numbers or street names in the code.
+
 ## Still to do
 
 - Where the coffee shop, Comella's and Frozen Hoagies really are on Main Street.
