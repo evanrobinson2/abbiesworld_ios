@@ -38,42 +38,71 @@ function blobStore(){
  };
 }
 
-function createWallet({store=blobStore(),caps=CAPS}={}){
- const personPath=a=>`${ROOT}people/${a.id}.json`,poolPath=a=>`${ROOT}${a.owner?'owner':'public'}.json`;
- const personCap=a=>a.owner?caps.owner:caps.person,poolCap=a=>a.owner?caps.owner:caps.public;
+// The public pool is split into SHARDS ledgers, each holding an equal share of the cap, so a launch-day crowd charging at
+// once spreads its conditional writes over many files instead of fighting over one (docs/launch/SURGE.md). A charge
+// that doesn't fit in one shard takes what it can from several; if the pool as a whole can't cover it, every part is
+// given back. spend/v1/public.json, the single pool from before sharding, still counts: its total comes off the cap.
+const SHARDS=16;
+function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS}={}){
+ const personPath=a=>`${ROOT}people/${a.id}.json`,legacyPath=`${ROOT}public.json`;
+ const shardPath=k=>`${ROOT}public/${k}.json`;
+ const personCap=a=>a.owner?caps.owner:caps.person;
  const spentOf=v=>Number(v?.usd)||0;
  // Adds usd to one ledger unless that would pass cap. Retries on a concurrent write.
  async function add(path,usd,cap){
+  const r=await upTo(path,usd,cap,usd);
+  return {ok:r.took>=usd-1e-9,spent:r.spent};
+ }
+ // Adds as much of usd as fits under cap, but nothing if less than least would fit. Returns what it took.
+ async function upTo(path,usd,cap,least){
   for(let i=0;i<12;i++){
    // Back off a little after a lost race so a crowd of charges spreads out.
    if(i)await new Promise(r=>setTimeout(r,Math.random()*40*i));
    const {value,etag}=await store.read(path),spent=spentOf(value);
-   if(usd>0&&spent+usd>cap+1e-9)return {ok:false,spent};
-   const next={usd:Math.max(0,Math.round((spent+usd)*1e6)/1e6),updated:new Date().toISOString(),calls:(value?.calls||0)+(usd>0?1:0)};
-   if(await store.write(path,next,etag))return {ok:true,spent:next.usd};
+   const took=usd>0?Math.min(usd,Math.max(0,cap-spent)):usd;
+   if(usd>0&&(took<least-1e-9||took<=1e-9))return {took:0,spent};
+   const next={usd:Math.max(0,Math.round((spent+took)*1e6)/1e6),updated:new Date().toISOString(),calls:(value?.calls||0)+(took>0?1:0)};
+   if(await store.write(path,next,etag))return {took,spent:next.usd};
   }
   throw Error('ledger busy');
  }
+ // The pre-shard pool is frozen, so one read per instance is enough.
+ let legacy;
+ const shardCap=async()=>{legacy??=spentOf((await store.read(legacyPath)).value);return Math.max(0,caps.public-legacy)/shards;};
+ const order=()=>{const ks=[...Array(shards).keys()];for(let i=ks.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ks[i],ks[j]]=[ks[j],ks[i]];}return ks;};
+ const pool={
+  async room(){const cap=await shardCap(),all=await Promise.all(order().map(k=>store.read(shardPath(k))));return all.reduce((n,r)=>n+Math.max(0,cap-spentOf(r.value)),0);},
+  async take(usd){
+   const cap=await shardCap(),parts=[];let rest=usd;
+   for(const k of order()){
+    const {took}=await upTo(shardPath(k),rest,cap,0);
+    if(took>0){parts.push([k,took]);rest-=took;}
+    if(rest<=1e-9)return parts;
+   }
+   await pool.give(parts);return null;
+  },
+  async give(parts){await Promise.all(parts.map(([k,usd])=>add(shardPath(k),-usd,Infinity).catch(()=>{})));}
+ };
  return {
   caps,
   // Dollars this account may still spend: the smaller of its own room and its pool's room.
   async left(a){
    if(!a)return 0;
-   const [p,q]=await Promise.all([store.read(personPath(a)),a.owner?null:store.read(poolPath(a))]);
-   const mine=personCap(a)-spentOf(p.value);
-   return Math.max(0,Math.min(mine,a.owner?mine:poolCap(a)-spentOf(q.value)));
+   if(a.owner)return Math.max(0,caps.owner-spentOf((await store.read(personPath(a))).value));
+   const [p,room]=await Promise.all([store.read(personPath(a)),pool.room()]);
+   return Math.max(0,Math.min(personCap(a)-spentOf(p.value),room));
   },
   // Records a charge before (or while) money is spent. false means stop: a cap would be crossed.
   async charge(a,usd){
    if(!a||!(usd>0))return !!a;
    if(a.owner)return (await add(personPath(a),usd,personCap(a))).ok;
-   const pool=await add(poolPath(a),usd,poolCap(a));if(!pool.ok)return false;
+   const parts=await pool.take(usd);if(!parts)return false;
    const mine=await add(personPath(a),usd,personCap(a));
-   if(!mine.ok){await add(poolPath(a),-usd,Infinity).catch(()=>{});return false;}
+   if(!mine.ok){await pool.give(parts);return false;}
    return true;
   }
  };
 }
 let shared;
 const wallet=()=>shared??=createWallet();
-module.exports={createWallet,wallet,capFrom,CAPS,PRICES};
+module.exports={createWallet,wallet,capFrom,CAPS,PRICES,SHARDS};

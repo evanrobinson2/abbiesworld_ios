@@ -13,7 +13,7 @@ and real-money AI is capped at **$1 per person** and **$100 for the whole public
 | Pool runs dry | Paid calls answer 402 ("used up its magic"). | The game keeps playing on its built-in models; the invent demo must also work by hand from the same parts box (see the launch plan). |
 | Inventing from abbies.world | `/api/ai-compose` only accepted the `vercel.app` origin, so it refused `ranch.abbies.world` and `www.abbies.world`. | It now accepts every host in `lib/account.cjs` `HOSTS`. |
 | Vercel bill | Fast Data Transfer: 1 TB included on Pro, then about $0.15/GB. | Measure the real bytes per visitor with the load test below; set Vercel Spend Management to pause at $1,000 (owner setting). |
-| One hot ledger file | Every public charge writes `spend/v1/public.json` with a conditional write and retries 12 times; hundreds at once can return "ledger busy". | Next: shard the public pool (after the support plan's wallet change lands). |
+| One hot ledger file | Every public charge wrote `spend/v1/public.json` with a conditional write and 12 retries; hundreds at once would return "ledger busy". | The public pool is now 16 shards (`spend/v1/public/<k>.json`), each an equal share of the cap; a charge picks shards at random and spans several if it must. The old `public.json` total still comes off the cap. Supporters and the owner never touch the pool. |
 
 ## Switches (Vercel env on `abbies-ranch-atelier`, production; they take effect on the next deploy)
 
