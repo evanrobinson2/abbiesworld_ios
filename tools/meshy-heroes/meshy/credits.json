@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 570,
+ "total": 630,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -246,6 +246,21 @@
    "what": "A6-paint-suit remesh",
    "credits": 5,
    "at": "2026-10-23T20:47:26Z"
+  },
+  {
+   "what": "charm-brass-key 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-coffee-cup 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-bub 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
   }
  ]
 }
