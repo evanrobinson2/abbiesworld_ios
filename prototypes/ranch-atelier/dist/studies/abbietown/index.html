@@ -103,29 +103,9 @@ td.n{font-family:var(--mono);text-align:right;white-space:nowrap;font-variant-nu
 tr.g td{font:600 13px var(--body);color:var(--maple);background:color-mix(in srgb,var(--paper) 85%,var(--maple))}
 td .kit{font:500 11px var(--mono);color:var(--lawn)}
 .btn{font:600 14px var(--body);padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--ink);color:var(--bg);cursor:pointer}
-/* Play mode (/town): the town alone, full screen, with a way home and a way to sign in. */
-body.play{margin:0;overflow:hidden;background:#cfe2ea}
-body.play .wrap>header,body.play .wrap>section:not(:first-of-type),body.play .facts,body.play aside,body.play .ctx-card{display:none!important}
-body.play .page,body.play .wrap,body.play .wrap>section{display:block;margin:0;padding:0;max-width:none;width:auto}
-body.play .stage{position:fixed;inset:0;height:100dvh;min-height:0;border-radius:0;box-shadow:none}
-.pl-door{position:fixed;z-index:20;top:calc(12px + env(safe-area-inset-top,0px));left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}
-.pl-door a,.pl-door button{pointer-events:auto;font:600 14px var(--body);padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.9);color:#2a3236;text-decoration:none;cursor:pointer;
- background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.46));box-shadow:0 8px 20px -10px rgba(40,40,50,.55),inset 0 1px 0 #fff;backdrop-filter:blur(8px)}
-.pl-door button[data-in=true]{color:#2f6a22}
 </style>
 </head>
 <body>
-<script>
-// Play mode: /town (or ?play) shows only the town, with a door home and a sign-in chip (nothing is asked of players).
-if (location.pathname === '/town' || /[?&]play\b/.test(location.search)) {
- document.body.classList.add('play');
- const d = document.createElement('div'); d.className = 'pl-door';
- d.innerHTML = '<a href="/sandbox" aria-label="Back to the ranch">Ranch</a><button type="button" id="pl-account">Sign in</button>';
- document.body.append(d);
- const b = d.querySelector('button'), here = encodeURIComponent(location.pathname + location.search);
- fetch('/api/me', {cache: 'no-store'}).then(r => r.json()).then(me => { b.dataset.in = !!me.signedIn; b.textContent = me.signedIn ? 'Signed in' : 'Sign in'; b.onclick = () => { location.href = me.signedIn ? '/welcome' : '/api/auth/login?return=' + here; }; }).catch(() => { b.hidden = true; });
-}
-</script>
 
 
 <div class="page">
@@ -153,6 +133,7 @@ if (location.pathname === '/town' || /[?&]play\b/.test(location.search)) {
     <button id="next" aria-label="Next place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
     <span class="sep"></span>
     <button id="map" aria-pressed="false" aria-label="Lay the real map over the town"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></button>
+    <button id="hexes" aria-pressed="false" aria-label="Show the seven-hex region and its three parts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l4 2.3v4.4L12 12 8 9.7V5.3z"/><path d="M8 9.7l4 2.3v4.5L8 19l-4-2.5V12z" opacity=".7"/><path d="M16 9.7l4 2.3v4.5L16 19l-4-2.5V12z" opacity=".7"/></svg></button>
     <button id="clock" aria-pressed="false" aria-label="Watch the town grow through the years"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></button>
     <span class="sep"></span>
     <svg class="tiny" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 12l8-6 8 6v8H4z"/><rect x="7" y="13" width="3" height="3" fill="#fff"/><rect x="14" y="13" width="3" height="3" fill="#fff"/></svg>
@@ -553,6 +534,34 @@ function summary(land, town) {
   realStreetKm: Object.values(real.roads_m).reduce((a, b) => a + b, 0) / 1000, sizeKm: [land.W / 1000, land.D / 1000], hmin: real.hmin, hmax: real.hmax, coins: town.coins.length};
 }
 
+// ---- simulations/abbietown/regions.mjs ----
+// AW-STUDY-0042 + AW-STUDY-0048 Abbie's Town: the final Winchester region is a mega-structure of seven hexes (a centre
+// and its six neighbours) inside one greater hex. Three regions are carved at 120 degrees each. The centre hex is cut
+// into three wedges and each region takes two outer hexes plus one wedge, so each region is exactly 7/3 hexes: one third.
+// Local metres as in town.mjs (x east, y north). Bearings run clockwise from north. First version, Evan 2026-10-23 1:30 PM.
+const HEX = {side: 880, centre: [4300, 2450]}; // flat-top hexes; seven of them cover about 14 km2 of the real town's 16.5
+const REGIONS = [
+ {id: 'school-hill', name: 'School Hill', from: 330, to: 90, outer: [0, 60], line: 'Muraco, Leonard Field, the family homes on the hill, and the road north to Launch.'},
+ {id: 'pond-side', name: 'Pond Side', from: 210, to: 330, outer: [240, 300], line: 'Horn Pond, its splash pad and the streets above it.'},
+ {id: 'lake-country', name: 'Lake Country', from: 90, to: 210, outer: [120, 180], line: 'Ginn Field, the train park, and the lakes the railway runs beside.'},
+];
+const deg = (x, y) => (Math.atan2(x - HEX.centre[0], y - HEX.centre[1]) * 180 / Math.PI + 360) % 360;
+const within = (b, from, to) => from <= to ? b >= from && b < to : b >= from || b < to;
+const hexCentres = () => [{id: 'centre', x: HEX.centre[0], y: HEX.centre[1], bearing: null}, ...[0, 60, 120, 180, 240, 300].map(b => ({id: 'outer-' + b, bearing: b,
+ x: HEX.centre[0] + Math.sin(b * Math.PI / 180) * HEX.side * Math.sqrt(3), y: HEX.centre[1] + Math.cos(b * Math.PI / 180) * HEX.side * Math.sqrt(3)}))];
+// which hex a point is in (the nearest centre, which is exact for a hex grid), or null outside the greater hex
+function hexOf(x, y) {
+ let best = null; for (const h of hexCentres()) { const d = Math.hypot(x - h.x, y - h.y); if (!best || d < best.d) best = {...h, d}; }
+ const dx = Math.abs(x - best.x), dy = Math.abs(y - best.y), s = HEX.side; // inside a flat-top hex of side s
+ return dy <= s * Math.sqrt(3) / 2 && dx <= s - dy / Math.sqrt(3) ? best : null;
+}
+function regionOf(x, y) {
+ const h = hexOf(x, y); if (!h) return null;
+ const r = REGIONS.find(r => within(deg(x, y), r.from, r.to)); return {hex: h.id, region: r.id, seam: h.id === 'centre'};
+}
+// where each place falls (computed from the town, so it stays true when places move)
+function placeRegions(town) { return Object.fromEntries(town.spots.map(s => [s.id, regionOf(s.x, s.y)])); }
+
 // ---- simulations/abbietown/manifest.mjs ----
 // AW-STUDY-0042 asset manifest: everything a New England suburban town needs, down to the size of a soccer ball.
 // Each row is counted by a rule from what the town has (houses, street length, junctions, shops, shoreline, trees),
@@ -827,6 +836,15 @@ function merge(geos) { // a small merge for non-indexed and indexed BufferGeomet
  for (const g of geos) { pos.set(g.attributes.position.array, o * 3); if (g.index) for (let i = 0; i < g.index.count; i++) idx[q++] = g.index.array[i] + o; else for (let i = 0; i < g.attributes.position.count; i++) idx[q++] = i + o; o += g.attributes.position.count; }
  const out = new THREE.BufferGeometry(); out.setAttribute('position', new THREE.BufferAttribute(pos, 3)); out.setIndex(new THREE.BufferAttribute(idx, 1)); out.computeVertexNormals(); return out;
 }
+// the seven-hex region: outlines draped on the land, in each region's colour (a presentation layer, off until the hex button is pressed)
+const regionsGroup = new THREE.Group(); regionsGroup.visible = false; scene.add(regionsGroup);
+{
+ const col = {'school-hill': '#e8643c', 'pond-side': '#2f9ac4', 'lake-country': '#6aa84f', centre: '#ffffff'}, s = HEX.side, hexes = hexCentres();
+ const pts = c => Array.from({length: 7}, (_, k) => [c.x + Math.cos(k * Math.PI / 3) * s, c.y + Math.sin(k * Math.PI / 3) * s]);
+ for (const h of hexes) { const r = h.bearing === null ? 'centre' : REGIONS.find(r => r.outer.includes(h.bearing)).id; regionsGroup.add(new THREE.Mesh(merge([ribbon(pts(h), 46, 4, 20)]), new THREE.MeshBasicMaterial({color: col[r], depthTest: false, transparent: true, opacity: .95}))); }
+ for (const r of REGIONS) for (const b of [r.from]) { const a = b * Math.PI / 180, e = [HEX.centre[0] + Math.sin(a) * s * 2.6, HEX.centre[1] + Math.cos(a) * s * 2.6]; regionsGroup.add(new THREE.Mesh(merge([ribbon([HEX.centre, e], 30, 4, 20)]), new THREE.MeshBasicMaterial({color: col[r.id], depthTest: false, transparent: true, opacity: .55}))); }
+ regionsGroup.traverse(o => { if (o.isMesh) o.renderOrder = 8; });
+}
 {
  const brook = new THREE.MeshStandardMaterial({color: '#4a90b0', roughness: .25});
  scene.add(new THREE.Mesh(merge(land.raw.streams.map(s => ribbon(s.p, 4, .35))), brook));
@@ -954,7 +972,7 @@ function family(g, wall, accent, pink) {
  }
  coin(g, 0, 12, 0);
 }
-let cafe = null; const beakers = []; const CELL_GAME = '/studies/cell/play.html' + (document.body.classList.contains('play') ? '?from=' + encodeURIComponent('/town') : '');
+let cafe = null; const beakers = []; const CELL_GAME = '/studies/cell/play.html';
 const BUILD = {
  cafe(g) { const s = shopfront('#f1e6d6', '#2f8f86', '#ffffff'); g.add(s.g); cafe = s;
   const sign = cyl(g, 2.4, 2.4, .5, '#2f8f86', 0, 0, 0, 24); sign.rotation.x = Math.PI / 2; sign.position.set(0, 7.4, 7.3); cafe.sign = sign;
@@ -1068,7 +1086,6 @@ document.getElementById('signin').onclick = e => {
  cafe.key.visible = !signedIn; cafe.pop = 1; visit('cafe');
 };
 const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down = null;
-window.__town = {beakers, camera, canvas, visit, THREE}; // test hooks (tools/minigame-test)
 canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
 canvas.addEventListener('pointerup', e => {
  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return; const r = canvas.getBoundingClientRect();
@@ -1081,6 +1098,7 @@ canvas.addEventListener('pointermove', e => { if (e.buttons) return; const r = c
 // the real map: off, then faint, then strong
 { const b = document.getElementById('map'), lv = [0, .4, .8]; let at = 0;
  b.onclick = () => { at = (at + 1) % 3; overlay.visible = at > 0; overlay.material.opacity = lv[at]; b.setAttribute('aria-pressed', at > 0); }; }
+document.getElementById('hexes').onclick = e => { regionsGroup.visible = !regionsGroup.visible; e.currentTarget.setAttribute('aria-pressed', regionsGroup.visible); };
 // the time lapse: a year slider; the train line and the town's birth are marked on it
 { const bar = document.getElementById('timebar'), yr = document.getElementById('yr'), num = document.getElementById('yrnum'), clk = document.getElementById('clock'), play = document.getElementById('play');
  const span = HISTORY.to - HISTORY.from;
