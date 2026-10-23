@@ -15,7 +15,7 @@ asset only)".
 - **Padlock:** `tools/charms/padlock.py` builds `models/padlock/padlock.glb`: 158 triangles, flat shaded, parts
   `padlock body`, `padlock shackle`, `padlock keyhole`, materials `metal gold`, `metal steel`, `keyhole dark`. The page renders
   the real GLB once to a picture for the board. When a charm is earned the padlock should spring open (animation not built).
-- **Chest:** ten slots shaped like their charms, lid engraved "n of 10". `first-memory` was removed from `CHARMS` (backpack PR #418), so ten is the whole set. The floppy is won by beating the basement word game. Moon cheese is repeatable, one slot, two on the keychain.
+- **Chest:** ten slots shaped like their charms, lid engraved "n of 10". `first-memory` was removed from `CHARMS` (backpack PR #418), so the set is now eleven (toy car added; Moon is renamed Moon base). The floppy is won by beating the basement word game. Moon cheese is repeatable, one slot, two on the keychain.
 - **Jewellery box:** drawer box with a glass dome over each charm (recommended); wall shadow-box is the bedroom alternative.
   Hang up to two on the bag; the box toggle uses `putInBox` / `inBox` from `backpack.mjs?v=6`.
 - **Charm places:** tardigrade at the lab, floppy at the café cellar door, key and coffee cup at the café, star at the
@@ -35,3 +35,38 @@ Tour: yes for the chest and the mission board when built; this study page itself
 ## Not built
 Chest and noticeboard inside `/town`, real tile-conforming terrain, the padlock opening animation, the grown-up charm list,
 a hero picture for moon cheese.
+
+## The charm track (Evan, 2026-10-23 5:43 PM)
+The overland loop: explore, find the minigames, collect world charms, unlock card blueprints, expand the board with new
+tiles (Moon base, farm, a Science tile with the high school where the science fair happens). That progression is **the
+charm track**; other tracks come later. The page shows it as rungs: charms -> blueprint -> tile, driven by one `TRACK` list.
+Proposed rungs (for Evan to rearrange): tardigrade + star -> Science blueprint -> Science tile; Moon base + rocket -> Moon
+base blueprint -> Moon tile; bub + coffee cup -> Farm blueprint -> Ranch tile; floppy + brass key -> Basement arcade card
+blueprint; toy car -> Coaster blueprint (card); heart (every other charm) -> World of boards. Open: the high school now lives
+on the Science tile, not the Winchester centre (Winchester files untouched here).
+
+## Eleven charms (Evan 5:44 PM)
+Added Toy car (10 of 16 stars in the coaster game; a placeholder spot on Abbie and Daddy's side). The Moon base charm is the
+existing `moon-key` charm shown as "Moon base" (one charm for the base; rocket stays for finishing the mission, cheese is
+repeatable mining). Backpack thread to confirm or ask Evan for a separate charm.
+
+## Floating charms (Evan, 2026-10-23 6:51 PM): drafted, not in the game
+Charms are the only reward and hang in the world as spinning, glowing pickups, like the hidden packages in GTA 3. Two kinds:
+*won* charms drop at their place when the minigame ends; *found* charms (bub, coffee cup, brass key) sit hidden until explored to.
+The Heart never floats. Hint is meta only: a chime that rises as you near one (the study shows a shimmer ring). The study page
+has a playable preview. Placements are Winchester edits and are listed in the page for the hex city thread; nothing was edited here.
+Dispatch check: the newest dispatch (the loading screen with the chalkboard card gesture) says nothing about charms and was already taken by the intro and precompile thread.
+
+## Winchester notes (22:53Z)
+Lab gone (science adventure parked); Science tile cancelled, high school stays in the Downtown centre hex (first track rung parked);
+black truck parks at the French bakery curb; skate park beside the café is a candidate charm spot; the oak is Abbie's pink tree house.
+Floating spots updated on the page; use `AbbieTown.board.heightAt` and `board.obstaclesNear` when placing.
+
+## Medallions, beams, current track, intro (Evan, 2026-10-23 7:00 PM): drafted
+- Each minigame gets an iconic gold medallion (floppy, rocket, school jump, toy-car coaster) hovering over its place with a halo
+  laser into the sky, matching the Effect Hunt beams. Medallion = the door, floating charm = the prize. Previewed on the floating
+  charms board. Placements are Winchester edits (hex city thread); beams belong to the Effect Hunt and Kart threads.
+- The track is named **Collect the Backpack Charms** and has a line in the existing mission and notebook list.
+- Intro (Performance thread): black screen, charms circle with a spotlight, second light on the backpack; when shaders are loaded the
+  charms fold into the backpack, lights shut off, then Abbie's World fades up, overlay first, then the massive scene drop. This
+  supersedes the single-tile chalkboard intro from the loading-screen dispatch (Evan's newest message).

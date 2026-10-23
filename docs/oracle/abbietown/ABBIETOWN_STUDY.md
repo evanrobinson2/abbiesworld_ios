@@ -200,3 +200,6 @@ land at one shared squeeze (`BOARD` in `dioramas.block.js`), so heights meet acr
 - Not done yet: Main Street granite setts, a tilt-shift pass for the opening tour, the hand-modelled tree houses.
 - Skate park (for the toy-car coaster, AW-STUDY-0054): a flat concrete pad by the high school on the `downtown` hex. Spot
   `downtown.skatepark` (tile-local x, z, y, facing, `curb`, `out`, `street`); scene id `skate-park` (region `downtown`).
+
+### Board queries for the cart (Effect Hunt)
+`AbbieTown.board.obstaclesNear(x, y, r)` returns houses, places and trees within `r` of a point (board metres east/north of the middle hex) as `{x, y, r, kind: 'tree'|'building', hex}`. `AbbieTown.board.roadSpawns(every = 30)` returns drivable street points as `{hex, x, y, heading (radians, east = 0, counter-clockwise), width}`.

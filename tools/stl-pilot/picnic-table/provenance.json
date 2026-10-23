@@ -1,0 +1,24 @@
+{
+  "slug": "picnic-table",
+  "title": "Picnic Table",
+  "model_url": "https://www.printables.com/model/446580-picnic-table",
+  "author": "makers (gunna)",
+  "author_url": "https://www.printables.com/@gunna",
+  "licence": "Creative Commons Zero / Public Domain (CC0 1.0)",
+  "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source_file": "Picnic Table.stl",
+  "category": "town prop",
+  "origin": "author's original creation",
+  "attribution_required": false,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source.stl",
+      "sha256": "1e957c581ca6171a0b8b99b0c3bf25ddaf8fed9b97aed0ca1ffb213ba666bed9",
+      "bytes": 24584
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

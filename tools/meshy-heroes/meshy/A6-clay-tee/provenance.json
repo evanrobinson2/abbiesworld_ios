@@ -1,0 +1,35 @@
+{
+ "job": "A6-clay-tee",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16aa3-56fd-747d-87f6-e7c2d4bf28ba",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view_front.png",
+    "view_side.png",
+    "view_back.png"
+   ]
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16aa5-1948-74d0-8c58-06a6d8227367",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16aa3-56fd-747d-87f6-e7c2d4bf28ba",
+    "height_meters": 1.0
+   }
+  }
+ ],
+ "credits": 35
+}

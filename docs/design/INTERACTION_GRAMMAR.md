@@ -79,3 +79,18 @@ Tapping your own hand lets it go. Being seen costs ground, not the run: you slid
 - Which sound does each material make?
 - What changes in the room afterwards (the information mode)?
 - Does any part of it still need a word on screen? If so, it is her thought, as a caption at the bottom.
+
+## The four ways of acting on the world (Evan, 2026-10-23 21:50Z: "I think we found our rules")
+
+| You are | You use | It does |
+|---|---|---|
+| Making the world | **Tiles** (and the tile cut-outs that place hexes) | create the world |
+| A god, from the map | **Cards** (the effect cards: weather, season, events) | interact with the world as a god |
+| Running the game | **HUD and overlay** (the simulation controls and the app) | speed, pause, weather and season controls, settings |
+| Someone in it (FPS) | The first-person view | play as Evan, Abbie or Ani |
+
+- Cards replace the old panel on the right for world events, and are made to look clearly different from tiles and
+  from the HUD, so which kind of thing you are holding is obvious at a glance (the `/cards` look).
+- Players are never told this explicitly. It is how the interface is organised, not something a screen explains.
+- When you add a feature, decide which row it belongs to before you design it. A world effect is a card, a piece of
+  terrain or a building is a tile, a control is HUD, and anything you do as a person is FPS.

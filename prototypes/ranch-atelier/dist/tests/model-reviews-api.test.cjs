@@ -1,5 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
+// These tests cover the handler itself, so they pin the owner lock off; tests/owner-only.test.cjs covers it on.
+const UNLOCKED = { env: {} };
 const { createHandler } = require('../api/model-reviews.js');
 function fakeBlob() {
   const files = new Map();
@@ -15,7 +17,7 @@ async function call(handler, req) {
   return { status: res.statusCode, body: JSON.parse(res.body) };
 }
 test('a verdict is kept per model, replaced by the next one, and dropped in the feedback inbox', async () => {
-  const blob = fakeBlob(), handler = createHandler(blob);
+  const blob = fakeBlob(), handler = createHandler(blob, UNLOCKED);
   assert.equal((await call(handler, { method: 'POST', body: { id: 'ranch-barn-shelter', verdict: 'adjust', notes: 'roof steeper', via: 'voice', name: 'Barn shelter' } })).status, 200);
   assert.equal((await call(handler, { method: 'POST', body: JSON.stringify({ id: 'ranch-barn-shelter', verdict: 'accept' }) })).status, 200);
   const listed = await call(handler, { method: 'GET' });
@@ -30,7 +32,7 @@ test('a verdict is kept per model, replaced by the next one, and dropped in the 
   assert.deepEqual((await call(handler, { method: 'GET' })).body.reviews, {});
 });
 test('bad reviews are refused', async () => {
-  const handler = createHandler(fakeBlob());
+  const handler = createHandler(fakeBlob(), UNLOCKED);
   assert.equal((await call(handler, { method: 'POST', body: { id: 'ranch-cow', verdict: 'adjust', notes: '  ' } })).status, 400);
   assert.equal((await call(handler, { method: 'POST', body: { id: '../etc', verdict: 'accept' } })).status, 400);
   assert.equal((await call(handler, { method: 'POST', body: { id: 'ranch-cow', verdict: 'maybe' } })).status, 400);

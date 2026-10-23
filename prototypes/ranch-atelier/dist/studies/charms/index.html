@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AW-STUDY-0053 - Charms Map and Jewellery Box</title>
-<meta name="description" content="Where do I earn my charms? A charm chest of ten that fills like the coin chest, a jewellery box with glass encasements, and the mission board, all on the seven-hex Winchester board with the tardigrade in the science lab.">
+<meta name="description" content="Where do I earn my charms? A charm chest that fills like the coin chest, a jewellery box with glass encasements, and the mission board, all on the seven-hex Winchester board with the tardigrade in the science lab.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 :root{
@@ -46,6 +46,8 @@ button{font:inherit;cursor:pointer}
 .board text{font-family:var(--body);font-weight:700;pointer-events:none}
 .glint{animation:bob 2.2s ease-in-out infinite;cursor:pointer}
 @keyframes bob{50%{transform:translateY(-6px)}}
+.spin{animation:spin 2.4s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{0%{transform:scaleX(1)}25%{transform:scaleX(.12)}50%{transform:scaleX(-1)}75%{transform:scaleX(.12)}100%{transform:scaleX(1)}}
 .glow{animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.35}}
 .paw{animation:pawin .5s both}
@@ -63,7 +65,7 @@ button{font:inherit;cursor:pointer}
 .mini{position:absolute;left:14px;top:14px;width:86px;height:86px;filter:drop-shadow(0 6px 8px rgba(40,25,10,.35))}
 .panel{position:absolute;left:14px;bottom:128px;width:min(300px,calc(100% - 28px));padding:12px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.4));border:1px solid var(--rim);box-shadow:0 14px 30px -12px rgba(40,25,10,.5),inset 0 1px 0 #fff;color:#2a2420;display:none}
 .panel.on{display:block}
-.slots{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.slots{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
 .slot{aspect-ratio:1;border-radius:12px;border:0;padding:3px;background:radial-gradient(circle at 50% 35%,#7a2f3a,#4d1a25);box-shadow:inset 0 3px 6px rgba(0,0,0,.55);position:relative;display:grid;place-items:center}
 .slot img,.slot svg{width:100%;height:100%;object-fit:contain}
 .slot.empty img,.slot.empty svg{filter:brightness(0) opacity(.35)}
@@ -94,6 +96,21 @@ button{font:inherit;cursor:pointer}
 .pick img{width:140px}
 @keyframes pickup{0%{transform:translate(-50%,-30%) scale(.2);opacity:0}30%{transform:translate(-50%,-50%) scale(1.15);opacity:1;filter:drop-shadow(0 0 22px gold)}70%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-210%,150%) scale(.25);opacity:.2}}
 
+.lane{display:flex;flex-direction:column;gap:12px}
+.rung{display:grid;grid-template-columns:minmax(0,1.1fr) auto minmax(0,.9fr) auto minmax(0,.8fr);gap:10px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:12px}
+.rung .cs{display:flex;gap:6px;flex-wrap:wrap}
+.rung .c{width:56px;height:56px;border-radius:12px;background:radial-gradient(circle at 50% 35%,#7a2f3a,#4d1a25);padding:4px;box-shadow:inset 0 3px 6px rgba(0,0,0,.55)}
+.rung .c img,.rung .c svg{width:100%;height:100%;object-fit:contain}
+.rung .c.no img,.rung .c.no svg{filter:brightness(0) opacity(.35)}
+.rung .arr{font-size:22px;color:var(--brass)}
+.rung .bp{background:#fffaf0;color:#2a2420;border:2px dashed #c9a14a;border-radius:12px;padding:8px 10px;font-size:13px;line-height:1.3}
+.rung .bp b{display:block;font:600 15px var(--display)}
+.rung.on .bp{border-style:solid;background:linear-gradient(135deg,#fff3c4,#fffaf0)}
+.rung .tl2{display:flex;align-items:center;gap:8px;font:600 14px var(--display)}
+.rung .tl2 svg{width:54px;flex:none;filter:drop-shadow(0 4px 4px rgba(40,25,10,.3))}
+.rung:not(.on) .tl2 svg{filter:grayscale(1) opacity(.55)}
+.rung.ghost{border-style:dashed;opacity:.7;grid-template-columns:1fr}
+@media (max-width:760px){.rung{grid-template-columns:1fr}.rung .arr{transform:rotate(90deg);justify-self:center}}
 /* Mission board */
 .cork{position:relative;background:radial-gradient(circle at 20% 15%,#d7a96f,#bd8a52 70%);border:12px solid var(--wood);border-image:linear-gradient(135deg,#a8703f,#6d4426) 1;box-shadow:inset 0 0 0 3px #4a2c16,inset 0 6px 22px rgba(0,0,0,.35),0 18px 30px -16px var(--shade);border-radius:6px;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .cork .plate{grid-column:1/-1;justify-self:center;background:linear-gradient(#d9a642,#a87820);color:#3a2308;font:600 15px var(--display);padding:3px 22px;border-radius:5px;box-shadow:0 2px 4px rgba(0,0,0,.4),inset 0 1px 0 #ffe8a0;letter-spacing:.04em}
@@ -113,7 +130,7 @@ button{font:inherit;cursor:pointer}
 .tl{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
 .tl div{flex:1 1 150px;padding:10px 12px;border-right:1px solid var(--line);font-size:13px} .tl b{display:block;font:500 11px var(--mono);color:var(--clay);margin-bottom:2px}
 /* Jewellery box */
-.jb{position:relative;border-radius:22px;padding:14px;background:linear-gradient(145deg,#a8703f,#6d4426);box-shadow:0 20px 34px -16px var(--shade),inset 0 2px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,0,0,.35);display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.jb{position:relative;border-radius:22px;padding:14px;background:linear-gradient(145deg,#a8703f,#6d4426);box-shadow:0 20px 34px -16px var(--shade),inset 0 2px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,0,0,.35);display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
 .jb::before{content:"";position:absolute;inset:8px;border-radius:16px;border:2px solid rgba(255,220,140,.5);pointer-events:none}
 .case{position:relative;aspect-ratio:1;border:0;padding:0;border-radius:14px;background:radial-gradient(circle at 50% 30%,#8a3a4a,#4d1a25);box-shadow:inset 0 4px 8px rgba(0,0,0,.6);display:grid;place-items:center;overflow:visible}
 .case .it{width:70%;height:70%;display:grid;place-items:center;transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
@@ -144,7 +161,7 @@ button{font:inherit;cursor:pointer}
 <header style="display:flex;flex-direction:column;gap:12px">
  <div class="eyebrow">AW-STUDY-0053 · Charms · Winchester board · demo prep</div>
  <h1>Where can I earn my charms?</h1>
- <p>A chest that holds all ten charms the way the coin chest holds Daddy's memories. Open it and the places that can pay a charm start to glint on the Winchester board. Every earned charm then lives in a jewellery box under a little glass dome. This page also fixes the style of the <b>mission board</b> the demo will build, and the zoom that takes you from the board into a mission. The stage below is playable: open the chest, place the Moon and Ranch tiles, tap the noticeboard in the town square.</p>
+ <p>A chest that holds every charm the way the coin chest holds Daddy's memories. Open it and the places that can pay a charm start to glint on the Winchester board. Every earned charm then lives in a jewellery box under a little glass dome. This page also fixes the style of the <b>mission board</b> the demo will build, and the zoom that takes you from the board into a mission. The stage below is playable: open the chest, place the Moon and Ranch tiles, tap the noticeboard in the town square.</p>
 </header>
 
 <section id="card">
@@ -201,17 +218,17 @@ button{font:inherit;cursor:pointer}
 </section>
 
 <section id="chest">
- <div class="head"><div class="eyebrow">Question 2</div><h2>The charm chest: ten, just like the coins</h2></div>
+ <div class="head"><div class="eyebrow">Question 2</div><h2>The charm chest: eleven now, just like the coins</h2></div>
  <div class="cards">
   <div class="opt rec"><span class="tag">Recommended</span><h3>The chest</h3>
    <div class="chestwrap" id="chestDemo"></div>
-   <p>Ten velvet slots shaped like their charms. An earned charm drops in with the same golden pickup as a gold coin; the lid shows the count as engraved numerals ("4 of 10"), the only number in sight. Tap a charm and the camera comes close, as in the backpack.</p></div>
+   <p>Eleven velvet slots shaped like their charms. An earned charm drops in with the same golden pickup as a gold coin; the lid shows the count as engraved numerals ("4 of 10"), the only number in sight. Tap a charm and the camera comes close, as in the backpack.</p></div>
   <div class="card"><h3>Like the coins, in four ways</h3><ul>
    <li><b>Same store.</b> <code>earnCharm(id)</code> in <code>simulations/backpack.mjs</code>; the chest only reads <code>earnedCharms()</code>.</li>
    <li><b>Same pickup.</b> The golden reward animation from <code>inventory.mjs</code>.</li>
    <li><b>Same place.</b> Beside the coin pile at the backpack, and the chest button on the board.</li>
    <li><b>Same rule.</b> You can't lose one, and the empty slot shows what you're missing, not a number you failed.</li></ul>
-   <p><b>Ten, the whole set.</b> The plain gold coin charm (<code>first-memory</code>) has been removed from <code>CHARMS</code> (Backpack thread), so the ten slots are the whole set. Moon cheese is repeatable and takes one slot, with up to two on the keychain. The jewellery box's "put in the box" toggle should call <code>putInBox(id, yes)</code> / <code>inBox(id)</code> from <code>backpack.mjs</code>; <code>keychain()</code> then leaves boxed charms off the worn backpack.</p></div>
+   <p><b>Eleven, and it can grow.</b> The plain gold coin charm (<code>first-memory</code>) has been removed from <code>CHARMS</code> (Backpack thread), so the eleven slots are the whole set. Moon cheese is repeatable and takes one slot, with up to two on the keychain. The jewellery box's "put in the box" toggle should call <code>putInBox(id, yes)</code> / <code>inBox(id)</code> from <code>backpack.mjs</code>; <code>keychain()</code> then leaves boxed charms off the worn backpack.</p></div>
  </div>
  <table><thead><tr><th>#</th><th>Charm</th><th>Earned by</th><th>Where on the board</th></tr></thead><tbody id="ctable"></tbody></table>
 </section>
@@ -228,6 +245,41 @@ button{font:inherit;cursor:pointer}
    <p>Each charm pinned in a frame behind one big sheet of glass, brass plate under it. Prettier hung in her room; harder to lift and dress with. Keep it for the bedroom wall, not the backpack.</p></div>
  </div>
  <div class="bagkey"><b>On the bag:</b><div class="hook" id="h1"></div><div class="hook" id="h2"></div><button class="btn" id="jEarn">Earn the next charm</button><span class="muted" id="hmsg">Tap an earned charm below, then "hang it".</span></div>
+</section>
+
+<section id="track">
+ <div class="head"><div class="eyebrow">Evan's core loop · the current track</div><h2>Collect the Backpack Charms</h2></div>
+ <div class="lockcard" style="max-width:460px" id="notebook"></div>
+ <p>The overland loop: explore the world, find the minigames, collect world charms, unlock card blueprints, and grow the board with new tiles. This progression is <b>the charm track</b>, and its name in the notebook is <b>Collect the Backpack Charms</b> (above: its line in the existing mission and notebook list, with a progress count that is the only number). Other tracks can sit beside it later. Each rung below lights up as you earn its charms in the stage above ("Pretend I earned one" works too).</p>
+ <div id="trackLane" class="lane"></div>
+ <p class="muted"><b>This grouping is my proposal, ready for Evan to rearrange.</b> The data is one list (<code>TRACK</code>), so a rung can change its charms, blueprint or tile without touching the layout. Update from the Winchester thread: the Science tile plan was cancelled and the high school stays in the Downtown centre hex, so the first rung is parked until Evan decides. This study does not edit Winchester files.</p>
+</section>
+
+<section id="floating">
+ <div class="head"><div class="eyebrow">Evan, 6:51 PM · drafted, not in the game yet</div><h2>Floating charms, iconic medallions and halo beams</h2></div>
+ <p>Charms are the only reward, and they hang in the world as spinning, glowing pickups. Walk into one and it flies to your chest. Try it: the board below is the Winchester sample, every charm floats in a hidden nook near its place. Move the pointer over the board and a small ring shimmers faster the closer you are to an uncollected charm (the hot and cold feel, with no arrow and no list). Tap a floating charm to collect it. The round gold <b>medallions</b> with a halo laser into the sky mark the minigames (basement, Moon Mission, school jump, toy-car coaster): the medallion is the door to a game, the floating charm is the prize, and the beam is visible from across the board. Beam style should match the Effect Hunt beams.</p>
+ <div class="stage" style="height:min(70vh,600px)" id="flStage"><svg class="board" id="fl" viewBox="0 0 900 640"></svg>
+  <div class="row" style="position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.7);border-radius:99px;padding:6px 14px;font-weight:700;color:#2a2420"><span id="flCnt"></span></div></div>
+ <div class="cards">
+  <div class="card"><h3>How it behaves</h3><ul>
+   <li><b>Look.</b> The charm's own hero model, slowly spinning and bobbing, a soft gold glow and a ground shadow that breathes.</li>
+   <li><b>Find.</b> Two kinds. <i>Won</i> charms (tardigrade, floppy, toy car, rocket, moon cheese, star) appear at the place when you finish the minigame, as a drop. <i>Found</i> charms (bub, coffee cup, brass key) sit hidden in nooks until you explore to them. The Heart never floats: it comes by itself.</li>
+   <li><b>Hint.</b> Meta only: a faint chime that rises in pitch as you near one, and the sparkle ring above. No minimap dots. The chest's locked cards still give a "Show me where" for anyone who wants it.</li>
+   <li><b>Pickup.</b> Walk in, golden pickup animation (the coin one), the charm flies into the chest and the slot lights.</li></ul></div>
+  <div class="card"><h3>Placement (a proposal for the hex city thread)</h3><p>These spots are Winchester edits, so I only list them; I touched no town files. Offsets are from the place's door, in metres on the town's local grid: café window box (-2, +1), café cellar steps (0, -1.5), the back corner of the skate park beside the café, Abbie's pink tree house (spot <code>abbie-daddy-side.abbieTree</code>), the school roof ladder (0, +3; the school model has no ladder yet), the curb where the black truck parks outside the French bakery (<code>bakery-curb</code>). The lab spot is dropped: the science adventure is parked. Town code to use: <code>AbbieTown.board.heightAt(x,y)</code> for ground height, <code>board.obstaclesNear(x,y,r)</code> to keep pickups clear of houses and trees, <code>AbbieTown.stage.tiles[hexId].spots[id]</code> for positions. This preview's board still draws the lab as a mock. Moon outpost and the coaster follow their own tiles.</p><p><b>Not built:</b> the in-game spinner (a shared <code>charm-pickup</code> world sprite), the proximity chime, and the drop when a minigame ends.</p></div>
+ </div>
+</section>
+
+<section id="intro">
+ <div class="head"><div class="eyebrow">Evan, 7:00 PM · drafted · owned by the Performance thread</div><h2>The intro is the charms circling the backpack</h2></div>
+ <div class="tl">
+  <div><b>1 · Black screen</b>The eleven charms circle in the dark. A spotlight picks out the charms, a second light picks out the backpack. Nothing else on screen.</div>
+  <div><b>2 · Loading</b>The circle keeps turning while the shaders load. No bar, no words (progress can be the charms' glow rising).</div>
+  <div><b>3 · Fold</b>When the shaders are ready the charms fold into the backpack, one by one.</div>
+  <div><b>4 · Lights out</b>The scene lights shut off.</div>
+  <div><b>5 · Drop</b>Abbie's World fades up fully working: the overlay loads first, then the massive scene drop with the animation.</div>
+ </div>
+ <p class="muted">This replaces the single-tile chalkboard card idea: the charms-circling intro is the one (Evan's newest word). Nothing here is built; the black screen is the one place a full-screen dark is intended, and it hides nothing in the world because the world isn't loaded yet.</p>
 </section>
 
 <section id="mission">
@@ -254,7 +306,7 @@ button{font:inherit;cursor:pointer}
  <div class="card"><ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">
   <li><b>Board.</b> Start on the seven-tile Winchester board: three zones plus the high school at the centre, no minimap logo there. Downtown, Ani's side and Abbie and Daddy's side each get a minimap logo (this page's glyphs: cup, waves, rocket and star).</li>
   <li><b>Tile bag.</b> Moon and Ranch tiles as two tokens bottom right. A placed tile snaps to the nearest open edge and takes the height of the neighbour's edge, then slopes off, so contour lines run straight across the seam (the stage shows the seam flash). Real game: the Moon token is the prize of the Moon Mission; the demo may start with it in the bag.</li>
-  <li><b>Chest.</b> Bottom-left object as styled here; opens the earn map (A/B/C above). Reads <code>earnedCharms()</code>; slots are the ten in the table.</li>
+  <li><b>Chest.</b> Bottom-left object as styled here; opens the earn map (A/B/C above). Reads <code>earnedCharms()</code>; slots are the eleven in the table; the chest reads <code>CHARMS</code>, so a new charm is a new slot.</li>
   <li><b>Mission board.</b> Option A above, in the town square. Cards in order: Coffee shop basement, Science lab, Moon base mining (locked until a Moon tile is on the board), then the large Moon Mission card. Finishing the Moon Mission earns the rocket and the moon-key charms and gives the Moon token.</li>
   <li><b>Zoom.</b> Use the timeline above; the puff is a sprite on the place, not a full-screen mask. The game-feel world-cover check must still pass.</li>
   <li><b>Tour.</b> The kids' tour (Abbie and Ani) should name the chest in one line: "Everything you find on a mission lands in your charm chest." Tour decision for the chest and the mission board: <b>yes</b>.</li>
@@ -265,7 +317,7 @@ button{font:inherit;cursor:pointer}
   items: [
     {id: 'earned', says: 'the charms I have', kind: 'list', who: 'characters', for: ['player', 'grown-up'],
      read: () => earnedCharms(), prefer: ['diegetic', 'overlay'],
-     ways: {diegetic: 'charms sit in velvet slots in the chest', overlay: 'engraved "4 of 10" on the lid'}},
+     ways: {diegetic: 'charms sit in velvet slots in the chest', overlay: 'engraved "4 of 11" on the lid'}},
     {id: 'where', says: 'where I can earn the rest', kind: 'place', who: 'player', for: ['player', 'director'],
      read: () => CHARMS.filter(c => !has(c.id)).map(c => ({charm: c.id, place: placeOf(c.id)})),
      prefer: ['spatial', 'diegetic'],
@@ -299,7 +351,7 @@ volunteer('mission-board', {
 const $ = s => document.querySelector(s), SVGNS = 'http://www.w3.org/2000/svg';
 const IMG = id => `img/${id}.png`;
 const cheese = `<svg viewBox="0 0 64 64"><path d="M6 44 L58 30 L58 46 L6 56 Z" fill="#e8a91a"/><path d="M6 44 L58 30 L40 14 Z" fill="#ffd45a"/><circle cx="34" cy="26" r="3" fill="#e8a91a"/><circle cx="22" cy="38" r="4" fill="#e8a91a"/><circle cx="47" cy="38" r="3" fill="#c98a0a"/><path d="M6 44 L58 30" stroke="#a96d00" stroke-width="2" fill="none"/></svg>`;
-// Charm ids and quests follow simulations/backpack.mjs CHARMS; the chest shows ten (see "Ten, not eleven").
+// Charm ids and quests follow simulations/backpack.mjs CHARMS; the chest shows them all.
 const CH = [
  {id:'tardigrade', name:'Tardigrade', quest:"Win Abbie's science adventure", at:'lab', how:'Win the cell game in the science lab'},
  {id:'basement', name:'Floppy disk', quest:"Beat the word game in Grace's basement", at:'cellar', how:'Beat the word game in Grace\'s basement (about two minutes)'},
@@ -307,13 +359,15 @@ const CH = [
  {id:'barista', name:'Coffee cup', quest:'Serve your first coffee in the café', at:'cafe', how:'Serve your first coffee'},
  {id:'school-roof', name:'Star', quest:'Climb onto the school roof', at:'school', how:'Climb onto the school roof (the school game)'},
  {id:'bub', name:'Bub', quest:'Play fetch with bub', at:'yard', how:'Play fetch with bub'},
- {id:'moon-key', name:'Moon', quest:'Earn the key to the Moon base', at:'truck', how:'Earn the Moon base key in the Moon Mission'},
+ {id:'moon-key', name:'Moon base', quest:'Earn the key to the Moon base', at:'truck', how:'Earn the key to the Moon base in the Moon Mission (this is the Moon base charm)'},
  {id:'rocket', name:'Rocket', quest:'Finish the Moon Mission', at:'truck', how:'Finish the Moon Mission'},
  {id:'moon-cheese', name:'Moon cheese', quest:'Mine three moon cheeses at the Moon kiosk', at:'outpost', how:'Mine three cheeses on the Moon (repeatable)', moon:true},
+ {id:'toy-car', name:'Toy car', quest:'Collect 10 of the 16 stars in the toy-car coaster', at:'coaster', how:'Ten of 16 stars in the toy-car coaster game'},
  {id:'all-memories', name:'Heart', quest:'Earn every other charm', at:'everywhere', how:'Earn every other charm (comes by itself; moon cheese does not count)'}
 ];
 const byId = Object.fromEntries(CH.map(c => [c.id, c]));
-const picHTML = id => id === 'moon-cheese' ? cheese : `<img src="${IMG(id)}" alt="${byId[id].name}">`;
+const toycar = `<svg viewBox="0 0 64 64"><ellipse cx="32" cy="52" rx="26" ry="5" fill="rgba(0,0,0,.2)"/><path d="M6 44v-8l8-3 8-10h20l10 10 6 3v8z" fill="#e5392d" stroke="#8a1a12" stroke-width="2"/><path d="M24 24h8v9H18zM36 24h6l8 9H36z" fill="#9fd8f5"/><circle cx="18" cy="46" r="7" fill="#222"/><circle cx="18" cy="46" r="3" fill="#ccc"/><circle cx="48" cy="46" r="7" fill="#222"/><circle cx="48" cy="46" r="3" fill="#ccc"/><path d="M10 38h44" stroke="#ffd45a" stroke-width="3"/></svg>`;
+const picHTML = id => id === 'moon-cheese' ? cheese : id === 'toy-car' ? toycar : `<img src="${IMG(id)}" alt="${byId[id].name}">`;
 
 // ---------- padlock: the real game-ready model, rendered once to a picture for the SVG board ----------
 let PADLOCK = '';
@@ -342,7 +396,7 @@ const glyph = z => ({
 }[z]);
 
 function place(name) { // where each place stands: hex + offset
- const P = {cafe:[0,1,-20,-4,'cafe'], cellar:[0,1,28,10,'cellar'], lab:[1,0,0,0,'lab'], truck:[0,1,-50,28,'truck'], school:[0,0,0,-6,'school'], yard:[0,-1,0,2,'house'], board:[0,0,-48,26,'board'], outpost:[0,-2,28,4,'outpost'], moonbase:[0,-2,-26,-2,'dome'], ranchbarn:[2,-1,0,0,'barn'], anihouse:[-1,0,-10,0,'house2'], pond:[-1,1,6,6,'pond'], lakes:[1,0,38,26,'lake']}[name];
+ const P = {cafe:[0,1,-20,-4,'cafe'], cellar:[0,1,28,10,'cellar'], lab:[1,0,0,0,'lab'], truck:[0,1,-50,28,'truck'], school:[0,0,0,-6,'school'], yard:[0,-1,0,2,'house'], coaster:[1,-1,-16,10,'coaster'], board:[0,0,-48,26,'board'], outpost:[0,-2,28,4,'outpost'], moonbase:[0,-2,-26,-2,'dome'], ranchbarn:[2,-1,0,0,'barn'], anihouse:[-1,0,-10,0,'house2'], pond:[-1,1,6,6,'pond'], lakes:[1,0,38,26,'lake']}[name];
  const [q, r, dx, dy] = P, [x, y] = hc(q, r);
  const lift = (name === 'outpost' || name === 'moonbase') ? TILES.moon.lift : name === 'ranchbarn' ? TILES.ranch.lift : HEXES.find(h => h.q === q && h.r === r).lift;
  return {x: x + dx * SC, y: y + dy * SC * K - lift, kind: P[4]};
@@ -360,6 +414,7 @@ const art = { // tiny 2.5D buildings drawn around (0,0) = base of the building
  lake:()=>`<ellipse cx="0" cy="0" rx="26" ry="9" fill="#6fb8d6"/>`,
  dome:()=>`<ellipse cx="0" cy="4" rx="28" ry="8" fill="rgba(0,0,0,.2)"/><path d="M-26 2a26 26 0 0 1 52 0z" fill="#e8ecf5"/><path d="M-14 2a14 14 0 0 1 28 0z" fill="#7fd1ff"/><rect x="-5" y="-6" width="10" height="8" fill="#3a4160"/>`,
  outpost:()=>`<ellipse cx="0" cy="3" rx="18" ry="6" fill="rgba(0,0,0,.2)"/><rect x="-14" y="-18" width="28" height="20" rx="3" fill="#cfd5e6"/><path d="M-18-18L0-30 18-18z" fill="#8a93b3"/><g transform="translate(0,-10) scale(.3) translate(-32,-32)">${cheese.replace('<svg ','<svg width="64" height="64" ')}</g>`,
+ coaster:()=>`<ellipse cx="0" cy="4" rx="26" ry="7" fill="rgba(0,0,0,.18)"/><path d="M-26 2Q-18-34 -6-8T14-22Q24-26 26 2" fill="none" stroke="#ff7a1a" stroke-width="5" stroke-linecap="round"/><path d="M-16-16v18M0-10v12M16-18v20" stroke="#9a5b2e" stroke-width="3"/>`,
  barn:()=>`<ellipse cx="0" cy="4" rx="28" ry="8" fill="rgba(0,0,0,.18)"/><rect x="-22" y="-24" width="44" height="26" fill="#b84a3a"/><path d="M-26-24L-14-42h28L26-24z" fill="#8a3226"/><path d="M-8 2v-16h16V2M-8-14l16 16M8-14L-8 2" stroke="#fff" fill="none" stroke-width="1.5"/>`
 };
 const g = (x, y, inner, cls = '', extra = '') => `<g transform="translate(${x},${y})" class="${cls}" ${extra}>${inner}</g>`;
@@ -432,10 +487,10 @@ function wireMarks() { main.querySelectorAll('[data-charm]').forEach(n => n.addE
 const say = t => { const h = $('#hint'); h.textContent = t; h.classList.add('on'); clearTimeout(say.t); say.t = setTimeout(() => h.classList.remove('on'), 4200); };
 
 // chest art
-const chestSVG = (open, n) => `<svg viewBox="0 0 120 100" class="${open ? 'open' : ''}"><ellipse cx="60" cy="94" rx="50" ry="6" fill="rgba(0,0,0,.25)"/><rect x="10" y="44" width="100" height="46" rx="6" fill="#8a5a34" stroke="#4a2c16" stroke-width="3"/><rect x="10" y="60" width="100" height="6" fill="#c9a14a"/><g class="lid"><path d="M8 46V32q0-18 52-18t52 18v14z" fill="#a8703f" stroke="#4a2c16" stroke-width="3"/><path d="M8 38h104" stroke="#c9a14a" stroke-width="5"/><text x="60" y="34" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="14" fill="#ffe9a8" stroke="#4a2c16" stroke-width=".6">${n} of 10</text></g><rect x="52" y="56" width="16" height="16" rx="3" fill="#e8c26a" stroke="#4a2c16" stroke-width="2"/><circle cx="60" cy="64" r="3" fill="#4a2c16"/></svg>`;
+const chestSVG = (open, n) => `<svg viewBox="0 0 120 100" class="${open ? 'open' : ''}"><ellipse cx="60" cy="94" rx="50" ry="6" fill="rgba(0,0,0,.25)"/><rect x="10" y="44" width="100" height="46" rx="6" fill="#8a5a34" stroke="#4a2c16" stroke-width="3"/><rect x="10" y="60" width="100" height="6" fill="#c9a14a"/><g class="lid"><path d="M8 46V32q0-18 52-18t52 18v14z" fill="#a8703f" stroke="#4a2c16" stroke-width="3"/><path d="M8 38h104" stroke="#c9a14a" stroke-width="5"/><text x="60" y="34" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="14" fill="#ffe9a8" stroke="#4a2c16" stroke-width=".6">${n} of ${CH.length}</text></g><rect x="52" y="56" width="16" height="16" rx="3" fill="#e8c26a" stroke="#4a2c16" stroke-width="2"/><circle cx="60" cy="64" r="3" fill="#4a2c16"/></svg>`;
 function renderChest() {
  $('#chestBtn').innerHTML = chestSVG(state.open, state.earned.size);
- $('#cnt').textContent = `${state.earned.size} of 10`;
+ $('#cnt').textContent = `${state.earned.size} of ${CH.length}`;
  $('#slots').innerHTML = CH.map(c => { const has = state.earned.has(c.id); return `<button class="slot ${has ? '' : 'empty'} ${state.focus === c.id ? 'sel' : ''} ${state.fresh === c.id ? 'new' : ''}" data-id="${c.id}" aria-label="${has ? c.name : 'An empty slot'}">${picHTML(c.id)}</button>`; }).join('');
  $('#slots').querySelectorAll('.slot').forEach(b => b.onclick = () => { const c = byId[b.dataset.id]; if (state.earned.has(c.id)) { say(c.name + ': ' + c.quest); return; } if (c.at === 'everywhere') { say("It comes by itself once you have every other charm"); return; } lockedCard(c); });
  // bag
@@ -448,7 +503,7 @@ function renderAll() { renderMain(); renderChest(); $('#panel').classList.toggle
 $('#chestBtn').onclick = () => { state.open = !state.open; if (!state.open) { state.mode = 'none'; state.focus = null; } else state.mode = 'glints'; renderAll(); $('#stageNote').textContent = state.open ? 'Glints show where each missing charm can be earned. Tap an empty slot to light just that one.' : 'Tap the chest.'; };
 $('#bubBtn').onclick = () => { const next = state.focus ? byId[state.focus] : CH.find(c => !state.earned.has(c.id) && c.at !== 'everywhere' && !(c.moon && !state.tiles.moon)); if (!next) { say('Bub has nothing left to show you here.'); return; } state.focus = next.id; state.mode = 'trail'; renderAll(); say('Bub: this way!'); };
 $('#earnBtn').onclick = () => { const next = CH.find(c => !state.earned.has(c.id) && c.at !== 'everywhere' && !(c.moon && !state.tiles.moon) && c.id !== 'moon-key' && c.id !== 'rocket') || CH.find(c => !state.earned.has(c.id)); if (next) earn(next.id); };
-function earn(id) { if (state.earned.has(id)) return; state.earned.add(id); state.fresh = id; const p = $('#pick'); p.querySelector('img').src = id === 'moon-cheese' ? 'data:image/svg+xml,' + encodeURIComponent(cheese.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')) : IMG(id); p.classList.remove('go'); void p.offsetWidth; p.classList.add('go'); if (state.focus === id) { state.focus = null; state.lock = false; } if (state.mode === 'beam' || state.mode === 'trail') state.mode = 'glints'; renderAll(); renderTable(); renderJewel(); setTimeout(() => { state.fresh = null; renderChest(); }, 1100); }
+function earn(id) { if (state.earned.has(id)) return; state.earned.add(id); state.fresh = id; const p = $('#pick'); p.querySelector('img').src = (id === 'moon-cheese' || id === 'toy-car') ? 'data:image/svg+xml,' + encodeURIComponent((id === 'toy-car' ? toycar : cheese).replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')) : IMG(id); p.classList.remove('go'); void p.offsetWidth; p.classList.add('go'); if (state.focus === id) { state.focus = null; state.lock = false; } if (state.mode === 'beam' || state.mode === 'trail') state.mode = 'glints'; renderAll(); renderTable(); renderJewel(); setTimeout(() => { state.fresh = null; renderChest(); }, 1100); }
 document.querySelectorAll('#rules [data-rules]').forEach(b => b.onclick = () => { state.rules = b.dataset.rules; document.querySelectorAll('#rules [data-rules]').forEach(x => x.setAttribute('aria-pressed', x === b)); renderChest(); });
 $('#reset').onclick = () => { Object.assign(state, {earned: new Set(), tiles: {}, open: false, focus: null, lock: false, mode: 'none', moonDone: false, missions: new Set()}); renderAll(); renderTable(); renderJewel(); $('#stageNote').textContent = 'Tap the chest.'; };
 
@@ -518,7 +573,7 @@ const mC = $('#mC'); boardSVG(mC, {mode:'pennants', earned:new Set(['moon-key','
 $('#chestDemo').innerHTML = `<div style="width:min(300px,90%)">${chestSVG(true, 4)}</div><div class="panel on" style="position:static;width:100%;max-width:340px;display:block"><div class="slots" id="slots2"></div></div>`;
 $('#slots2').innerHTML = CH.map((c, i) => `<div class="slot ${i < 4 ? '' : 'empty'}">${picHTML(c.id)}</div>`).join('');
 // ---------- table ----------
-const PL = {lab:'Science lab, Downtown', cellar:'Café cellar door, Downtown', cafe:'Coffee shop, Downtown', school:'High school, the centre', yard:"Abbie's yard, Abbie and Daddy's side", truck:'Black truck at the café curb', outpost:'Moon outpost (needs the Moon tile)', everywhere:'Comes by itself, no place'};
+const PL = {lab:'Science lab, Downtown', cellar:'Café cellar door, Downtown', cafe:'Coffee shop, Downtown', school:'High school, the centre', yard:"Abbie's yard, Abbie and Daddy's side", truck:'Black truck at the café curb', outpost:'Moon outpost (needs the Moon tile)', coaster:'Toy-car coaster, Abbie and Daddy\'s side (placeholder spot)', everywhere:'Comes by itself, no place'};
 function renderTable() { $('#ctable').innerHTML = CH.map((c, i) => `<tr><td>${i + 1}</td><td>${c.name}${state.earned.has(c.id) ? ' ✓' : ''}</td><td>${c.how}</td><td>${PL[c.at]}</td></tr>`).join(''); }
 // ---------- jewellery box ----------
 const hung = [];
@@ -528,12 +583,46 @@ function renderJewel() {
  $('#jb').querySelectorAll('.case').forEach(b => b.onclick = () => { const id = b.dataset.id; if (!state.earned.has(id)) { b.classList.add('shake'); setTimeout(() => b.classList.remove('shake'), 400); $('#hmsg').textContent = byId[id].quest; return; } if (pickedCase === id) { hang(id); } else { pickedCase = id; $('#hmsg').textContent = byId[id].name + ': tap it again to hang it on the bag.'; renderJewel(); } });
  [0, 1].forEach(i => $('#h' + (i + 1)).innerHTML = hung[i] ? picHTML(hung[i]) : '');
 }
-const zoneOf = a => ({lab:'downtown', cellar:'downtown', cafe:'downtown', truck:'downtown', school:'centre', yard:'abbie', outpost:'centre', everywhere:'centre'}[a]);
+const zoneOf = a => ({lab:'downtown', cellar:'downtown', cafe:'downtown', truck:'downtown', school:'centre', yard:'abbie', coaster:'abbie', outpost:'centre', everywhere:'centre'}[a]);
 function hang(id) { const i = hung.indexOf(id); if (i >= 0) { hung.splice(i, 1); $('#hmsg').textContent = byId[id].name + ' is back in its case.'; } else if (hung.length >= 2) { const f = $('#jb').querySelector(`[data-id="${hung[0]}"]`); f.classList.add('shake'); setTimeout(() => f.classList.remove('shake'), 400); $('#hmsg').textContent = 'Two at a time. Tap one on the bag to put it back.'; } else { hung.push(id); $('#hmsg').textContent = byId[id].name + ' is hanging on the bag.'; } pickedCase = null; renderJewel(); }
 ['#h1', '#h2'].forEach((s, i) => $(s).onclick = () => { if (hung[i]) hang(hung[i]); });
 // wall shadow-box
-$('#sb').innerHTML = CH.map((c, i) => { const x = 40 + (i % 5) * 68, y = 44 + Math.floor(i / 5) * 92; return `<g transform="translate(${x},${y})"><rect width="58" height="62" rx="3" fill="#e9d8b0" stroke="#b8832a"/><foreignObject x="6" y="4" width="46" height="46"><div xmlns="http://www.w3.org/1999/xhtml" style="width:46px;height:46px;display:grid;place-items:center;${state.earned.has(c.id) ? '' : 'filter:brightness(0) opacity(.25)'}">${picHTML(c.id).replace('<img ', '<img style="width:44px;height:44px;object-fit:contain" ').replace('<svg ', '<svg style="width:44px;height:44px" ')}</div></foreignObject><rect x="9" y="52" width="40" height="6" rx="2" fill="#d9a642"/></g>`; }).join('') + '<rect x="24" y="24" width="352" height="212" fill="rgba(255,255,255,.25)"/><path d="M40 24L24 70M120 24L24 130" stroke="rgba(255,255,255,.5)" stroke-width="10"/>';
+$('#sb').innerHTML = CH.map((c, i) => { const x = 30 + (i % 6) * 58, y = 44 + Math.floor(i / 6) * 92; return `<g transform="translate(${x},${y})"><rect width="52" height="62" rx="3" fill="#e9d8b0" stroke="#b8832a"/><foreignObject x="6" y="4" width="46" height="46"><div xmlns="http://www.w3.org/1999/xhtml" style="width:46px;height:46px;display:grid;place-items:center;${state.earned.has(c.id) ? '' : 'filter:brightness(0) opacity(.25)'}">${picHTML(c.id).replace('<img ', '<img style="width:44px;height:44px;object-fit:contain" ').replace('<svg ', '<svg style="width:44px;height:44px" ')}</div></foreignObject><rect x="9" y="52" width="40" height="6" rx="2" fill="#d9a642"/></g>`; }).join('') + '<rect x="24" y="24" width="352" height="212" fill="rgba(255,255,255,.25)"/><path d="M40 24L24 70M120 24L24 130" stroke="rgba(255,255,255,.5)" stroke-width="10"/>';
 $('#jEarn').onclick = () => $('#earnBtn').click();
+const TRACK = [ // each rung: charms to earn -> blueprint card -> tile it expands the board with (proposal)
+ {charms:['tardigrade','school-roof'], bp:'Science blueprint (parked)', line:'Parked: the science adventure is on hold and the high school stays in the Downtown centre hex', tile:'#9be0b8', rim:'#3e8a5a'},
+ {charms:['moon-key','rocket'], bp:'Moon base blueprint', line:'Moon tile: the Moon base, with mining for moon cheese', tile:'#cdd1dc', rim:'#8e93a6'},
+ {charms:['bub','barista'], bp:'Farm blueprint', line:'Farm tile (the Ranch): bub, animals and chores', tile:'#a9cc78', rim:'#6f9a3d'},
+ {charms:['basement','brass-key'], bp:'Basement arcade blueprint', line:'A card blueprint, not a tile: arcade cards for the café basement', tile:null},
+ {charms:['toy-car'], bp:'Coaster blueprint', line:'A card blueprint, not a tile: track pieces for the toy-car coaster', tile:null},
+ {charms:['all-memories'], bp:'World of boards', line:'Capstone: every other charm opens a new board (see Changing worlds)', tile:'#f6d27a', rim:'#b8832a'}
+];
+const hexT = (c, r) => c ? `<svg viewBox="-40 -34 80 70"><polygon points="-34,0 -17,21 17,21 34,0 34,9 17,30 -17,30 -34,9" fill="#85593a"/><polygon points="${[0,1,2,3,4,5].map(i => `${34 * Math.cos(i * Math.PI / 3)},${24 * Math.sin(i * Math.PI / 3)}`).join(' ')}" fill="${c}" stroke="${r}" stroke-width="3"/></svg>` : '<svg viewBox="-40 -34 80 70"><rect x="-22" y="-26" width="44" height="52" rx="5" fill="#fffaf0" stroke="#c9a14a" stroke-width="3"/><path d="M-12-8h24M-12 2h24M-12 12h14" stroke="#c9a14a" stroke-width="3"/></svg>';
+function renderTrack() {
+ $('#notebook').innerHTML = `<div class="art" style="background:#fffaf0">${picHTML('bub')}</div><div><h4>Collect the Backpack Charms</h4><p>${state.earned.size} of ${CH.length} found. Charms unlock blueprints, blueprints unlock tiles.</p></div>`; $('#notebook .art img,#notebook .art svg').style.filter = 'none'; $('#notebook .art img,#notebook .art svg').style.opacity = 1;
+ $('#trackLane').innerHTML = TRACK.map(t => { const n = t.charms.filter(c => state.earned.has(c)).length, on = n === t.charms.length;
+  return `<div class="rung ${on ? 'on' : ''}"><div class="cs">${t.charms.map(c => `<div class="c ${state.earned.has(c) ? '' : 'no'}">${picHTML(c)}</div>`).join('')}</div><span class="arr">&rarr;</span><div class="bp"><b>${t.bp}</b>${on ? 'Unlocked' : n + ' of ' + t.charms.length + ' charms'}</div><span class="arr">&rarr;</span><div class="tl2">${hexT(t.tile, t.rim)}<span>${t.line}</span></div></div>`; }).join('') + '<div class="rung ghost"><div class="bp" style="border-style:dashed">Another track later (a second set of charms, blueprints and tiles beside this one)</div></div>';
+}
+const FOFF = {tardigrade:[34,-4], basement:[-6,-14], 'brass-key':[10,10], barista:[-32,6], 'school-roof':[0,-70], bub:[40,-6], 'moon-key':[-28,-14], rocket:[-6,-10], 'moon-cheese':[0,0], 'toy-car':[16,-10]};
+const fl = $('#fl'); let flPtr = null;
+function renderFloat() {
+ boardSVG(fl, {tiles: state.tiles, earned: state.earned, mode: 'none'});
+ let h = '';
+ CH.filter(c => !state.earned.has(c.id) && c.at !== 'everywhere' && !(c.moon && !state.tiles.moon)).forEach((c, i) => { const p = place(c.at), o = FOFF[c.id] || [0, 0], x = p.x + o[0], y = p.y + o[1] - 18;
+  h += `<g transform="translate(${x},${y})" data-f="${c.id}" style="cursor:pointer"><ellipse cx="0" cy="${26}" rx="14" ry="4" fill="rgba(0,0,0,.28)" class="glow"/><g class="glint" style="animation-delay:${i * .2}s"><circle r="22" fill="rgba(255,226,122,.45)" class="glow"/><g class="spin" style="animation-delay:${i * .3}s"><foreignObject x="-17" y="-17" width="34" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="width:34px;height:34px;display:grid;place-items:center">${picHTML(c.id).replace('<img ', '<img style="width:34px;height:34px;object-fit:contain" ').replace('<svg ', '<svg style="width:34px;height:34px" ')}</div></foreignObject></g></g></g>`; });
+ const MED = [{at:'cellar', k:'floppy', beam:'#7fd1ff', dx:0, dy:-8, g:'<rect x="-9" y="-9" width="18" height="18" rx="2" fill="#5a7fd1"/><rect x="-5" y="-9" width="10" height="7" fill="#e8ecf5"/><rect x="-5" y="2" width="10" height="7" fill="#2a3a6a"/>'},
+ {at:'truck', k:'rocket', beam:'#ffb74a', dx:0, dy:-6, g:'<path d="M0-11c4 4 5 9 3 14h-6c-2-5-1-10 3-14z" fill="#e8ecf5"/><circle cx="0" cy="-3" r="2.2" fill="#5ab0e8"/><path d="M-5 3l-4 5 6-2M5 3l4 5-6-2" fill="#e5392d"/>'},
+ {at:'school', k:'jump', beam:'#ff7aa8', dx:34, dy:-30, g:'<path d="M-9 8h18M-6 8V-2h12V8M-3-2v-6h6v6" fill="none" stroke="#e5739c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="0" cy="-11" r="2.4" fill="#e5739c"/>'},
+ {at:'coaster', k:'coaster', beam:'#7dff9b', dx:0, dy:-6, g:'<path d="M-10 6Q-6-10 0 0T10-8" fill="none" stroke="#ff7a1a" stroke-width="3" stroke-linecap="round"/><circle cx="8" cy="-8" r="2.6" fill="#e5392d"/>'}];
+let md = '';
+MED.forEach((m, i) => { const p = place(m.at), x = p.x + m.dx, y = p.y + m.dy - 44;
+ md += `<g data-med="${m.k}"><polygon points="${x - 7},${y} ${x + 7},${y} ${x + 3},-20 ${x - 3},-20" fill="${m.beam}" opacity=".55" class="glow" style="animation-delay:${i * .4}s"/><polygon points="${x - 2.5},${y} ${x + 2.5},${y} ${x + 1},-20 ${x - 1},-20" fill="#fff" opacity=".9"/><ellipse cx="${x}" cy="${y + 40}" rx="16" ry="5" fill="${m.beam}" opacity=".5" class="glow"/><g transform="translate(${x},${y})"><g class="glint" style="animation-delay:${i * .3}s"><circle r="17" fill="#ffd96a" stroke="#a87820" stroke-width="3"/><circle r="13" fill="#fffaf0" stroke="#e0a528" stroke-width="1.5"/>${m.g}</g></g></g>`; });
+fl.insertAdjacentHTML('beforeend', md + h + '<circle id="flRing" r="0" fill="none" stroke="#ffd45a" stroke-width="3" opacity="0"/>');
+ fl.querySelectorAll('[data-f]').forEach(n => n.onclick = e => { e.stopPropagation(); earn(n.dataset.f); });
+ $('#flCnt').textContent = state.earned.size + ' of ' + CH.length + ' in the chest';
+}
+fl.addEventListener('pointermove', e => { const r = fl.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 900, y = (e.clientY - r.top) / r.height * 640; let d = 1e9; fl.querySelectorAll('[data-f]').forEach(n => { const m = /translate\(([-\d.]+),([-\d.]+)\)/.exec(n.getAttribute('transform')); d = Math.min(d, Math.hypot(x - m[1], y - m[2])); }); const ring = $('#flRing'); if (!ring) return; const near = Math.max(0, 1 - d / 260); ring.setAttribute('cx', x); ring.setAttribute('cy', y); ring.setAttribute('r', 10 + near * 26); ring.setAttribute('opacity', near > 0.02 ? .25 + near * .7 : 0); ring.style.animation = `pulse ${Math.max(.25, 1.6 - near * 1.4)}s ease-in-out infinite`; });
+const _ra = renderAll; renderAll = function () { _ra(); renderTrack(); renderFloat(); };
 renderAll(); renderTable(); renderJewel();
 </script>
 <script type="module" src="/look/context-card.mjs" data-context-study="charms"></script>

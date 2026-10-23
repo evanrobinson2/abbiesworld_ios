@@ -11,24 +11,25 @@ const ZONE_LOOK = {
 };
 // bearing = where the hex lies from the middle one (clockwise from north, as the real town); zone = which third it belongs to
 const DIOS = [
- {id: 'downtown', n: 'H1', zone: 'downtown', name: 'Downtown', bearing: null, pin: '⛪', heroes: ['highschool', 'common', 'cafe', 'comellas', 'hoagies', 'lab', 'noticeboard', 'skatepark'], look: ZONE_LOOK.downtown},
+ {id: 'downtown', n: 'H1', zone: 'downtown', name: 'Downtown', bearing: null, pin: '⛪', heroes: ['highschool', 'common', 'cafe', 'bakery', 'comellas', 'hoagies', 'noticeboard', 'skatepark'], look: ZONE_LOOK.downtown},
  {id: 'depot-river', n: 'H2', zone: 'downtown', name: 'Depot and River', bearing: 180, heroes: ['depot', 'railyard', 'mill'], houses: 24, look: {...ZONE_LOOK.downtown, bg: '#ead7bd', mood: 'trains and a river, mill-brown and warm', dist: 240, azimuth: 190}},
  {id: 'reservoir-hills', n: 'H3', zone: 'downtown', name: 'Reservoir Hills', bearing: 120, heroes: ['dock', 'lookout'], houses: 18, walls: 1, look: {...ZONE_LOOK.downtown, bg: '#d6e4e8', sun: '#fff0d6', sunI: 2.4, sky: '#e2f0ff', grass: ['#6f9a58', '#98b068'], mood: 'a clear afternoon above the big water', fov: 38, dist: 300, azimuth: 215, lowPitch: 28, highPitch: 62}},
  {id: 'neighbourhood', n: 'H4', zone: 'anis-side', name: 'Neighbourhood Streets', bearing: 240, heroes: ['trailhead'], houses: 120, walls: 1, look: {...ZONE_LOOK['anis-side'], mood: 'quiet streets, three kinds of house', dist: 300, azimuth: 160}},
- {id: 'anis-side', n: 'H5', zone: 'anis-side', name: "Ani's side", bearing: 300, pin: '\u{1F986}', heroes: ['horn', 'ani', 'launch'], houses: 40, look: ZONE_LOOK['anis-side']},
- {id: 'abbie-daddy-side', n: 'H6', zone: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 0, pin: '\u{1F3E1}', heroes: ['home', 'muraco', 'leonard'], houses: 28, look: ZONE_LOOK['abbie-daddy-side']},
+ {id: 'anis-side', n: 'H5', zone: 'anis-side', name: "Ani's side", bearing: 300, pin: '\u{1F986}', heroes: ['horn', 'ani', 'aniTree', 'launch'], houses: 40, look: ZONE_LOOK['anis-side']},
+ {id: 'abbie-daddy-side', n: 'H6', zone: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 0, pin: '\u{1F3E1}', heroes: ['home', 'abbieTree', 'muraco', 'leonard'], houses: 28, look: ZONE_LOOK['abbie-daddy-side']},
  {id: 'gingerbread-hill', n: 'H7', zone: 'abbie-daddy-side', name: 'Gingerbread Hill', bearing: 60, heroes: ['gingerbread', 'bunker'], houses: 8, walls: 1, look: {...ZONE_LOOK['abbie-daddy-side'], bg: '#f4bfc6', mood: 'sugar-pink sunset on the hill, a pond below', azimuth: 225}},
 ];
 const tileOff = d => d.bearing == null ? {x: 0, y: 0} : {x: Math.sin(d.bearing * Math.PI / 180) * DIO_R * R3, y: Math.cos(d.bearing * Math.PI / 180) * DIO_R * R3}; // local metres, north up
 // places that are not in the town's own list yet: where they really are (map metres)
-const EXTRA = {highschool: [4376, 2020], noticeboard: [4404, 1996], skatepark: [4452, 2030], depot: [4106, 939], railyard: [4296, 504], mill: [4216, 864], dock: [5904, 1174], lookout: [5670, 1270], trailhead: [3396, 1222], launch: [3760, 2860], gingerbread: [5636, 2265], bunker: [5700, 2250]};
+const EXTRA = {highschool: [4376, 2020], noticeboard: [4404, 1996], skatepark: [4452, 2030], depot: [4106, 939], railyard: [4296, 504], mill: [4216, 864], dock: [5904, 1174], lookout: [5670, 1270], trailhead: [3396, 1222], launch: [3760, 2860], gingerbread: [5636, 2265], bunker: [5700, 2250], bakery: [4350, 2040], abbieTree: [4740, 3600], aniTree: [3350, 2860]};
 // hero places: model scale on the tile, footprint radius for the layout, and how the place sits (shop = hugs the street, fixed = where it really is, rail = beside the line, keepRot = its own builder turns it)
-const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
+const HERO = {cafe: {sc: .85, r: 12, shop: 1}, bakery: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
  muraco: {sc: .5, r: 21}, leonard: {sc: .5, r: 29}, horn: {sc: .6, r: 16, fixed: 1, keepRot: 1}, home: {sc: .8, r: 22}, ani: {sc: .8, r: 22},
  highschool: {sc: .62, r: 20, fixed: 1}, depot: {sc: .75, r: 22, rail: 1}, railyard: {sc: .62, r: 20, rail: 1}, mill: {sc: .8, r: 15}, dock: {sc: .8, r: 7, fixed: 1, keepRot: 1, shore: 1}, lookout: {sc: .8, r: 8, fixed: 1},
- trailhead: {sc: .8, r: 6}, noticeboard: {sc: .8, r: 5}, skatepark: {sc: .8, r: 17}, launch: {sc: .75, r: 20}, gingerbread: {sc: 1, r: 17, fixed: 1}, bunker: {sc: 1, r: 14, fixed: 1, behind: 'gingerbread'}};
+ trailhead: {sc: .8, r: 6}, noticeboard: {sc: .8, r: 5}, skatepark: {sc: .8, r: 17, shop: 1}, launch: {sc: .75, r: 20}, abbieTree: {sc: .6, r: 17}, aniTree: {sc: .6, r: 17}, gingerbread: {sc: 1, r: 17, fixed: 1}, bunker: {sc: 1, r: 14, fixed: 1, behind: 'gingerbread'}};
+const realLayer = scene.children.filter(c => !c.isLight && c.type !== 'Object3D'); // the whole real-land map (terrain, water, roads, houses, islands): everything in the scene before the board exists
 const dioGroup = new THREE.Group(); dioGroup.position.set(X(DIO_ORIGIN[0]), 0, Z(DIO_ORIGIN[1])); scene.add(dioGroup); dioGroup.visible = false;
-const SQUARE = /*SQUARE*/null; const dioHouses = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
+const SQUARE = /*SQUARE*/null; const dioHouses = {}, dioObs = {}, dioRoads = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
 const dioTile = {}; // id -> {cx, cy (map metres of the tile's middle), group, ...}
 const smooth = t => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
 const inHex = (x, y, R) => { const ax = Math.abs(x), ay = Math.abs(y); return ay <= R * R3 / 2 && ax <= R - ay / R3; }; // flat-top, corners east and west
@@ -45,6 +46,7 @@ function buildDiorama(d, ti) {
  // 2 the roads of the tile (main roads, real; scaled), clipped to the hex
  const roads = [];
  for (const r of town.roads) { let run = []; for (const [x, y] of r.p) { const px = (x - d.centre[0]) / scl, py = (y - d.centre[1]) / scl; if (inHex(px, py, DIO_R * .97)) run.push([px, py]); else { if (run.length > 1) roads.push({c: r.c, p: run}); run = []; } } if (run.length > 1) roads.push({c: r.c, p: run}); }
+ dioRoads[d.id] = roads;
  const roadPts = []; for (const r of roads) for (let i = 1; i < r.p.length; i++) { const [ax, ay] = r.p[i - 1], [bx, by] = r.p[i], l = Math.hypot(bx - ax, by - ay); for (let t = 0; t < l; t += 3) roadPts.push({x: ax + (bx - ax) * t / l, y: ay + (by - ay) * t / l, w: r.c <= 3 ? 5.4 : 4.2, tx: (bx - ax) / l, ty: (by - ay) / l}); }
  const nearRoad = (x, y) => { let b = null, bd = 1e9; for (const p of roadPts) { const dd = Math.hypot(p.x - x, p.y - y); if (dd < bd) { bd = dd; b = p; } } return b && {...b, d: bd}; };
  // 3 the places, pushed together: start where they really are, then keep them apart and off the street
@@ -54,7 +56,7 @@ function buildDiorama(d, ti) {
   if (main) { const pts = main.p, along = (t) => { let run = 0; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); if (t <= run + l || i === pts.length - 1) { const k = (t - run) / l; return {x: pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * k, y: pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * k, tx: (pts[i][0] - pts[i - 1][0]) / l, ty: (pts[i][1] - pts[i - 1][1]) / l}; } run += l; } };
    let total = 0; for (let i = 1; i < pts.length; i++) total += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
    const c = heroes.find(h => h.id === 'common'); let t0 = total / 2, bd = 1e9; for (let t = 0; t < total; t += 2) { const a = along(t), dd = Math.hypot(a.x - c.x, a.y - c.y); if (dd < bd) { bd = dd; t0 = t; } }
-   const school = heroes.find(h => h.id === 'highschool'), put = sh => { [['cafe', 1, -14], ['comellas', 1, 8], ['hoagies', -1, -14], ['lab', -1, 8]].forEach(([id, side, off]) => { const h = heroes.find(q => q.id === id); if (!h) return; const a = along(t0 + sh + off + 22); h.x = a.x - a.ty * side * 12; h.y = a.y + a.tx * side * 12; h.shop = {tx: a.tx, ty: a.ty, side}; h.pinned = true; });
+   const school = heroes.find(h => h.id === 'highschool'), put = sh => { [['cafe', 1, -14], ['bakery', 1, 30], ['comellas', 1, 8], ['hoagies', -1, -14], ['skatepark', 1, -48]].forEach(([id, side, off]) => { const h = heroes.find(q => q.id === id); if (!h) return; const a = along(t0 + sh + off + 22), lat = id === 'skatepark' ? 22 : 12; h.x = a.x - a.ty * side * lat; h.y = a.y + a.tx * side * lat; h.shop = {tx: a.tx, ty: a.ty, side}; h.pinned = true; });
     if (c) { const a = along(t0 + sh), side = -1; c.x = a.x - a.ty * side * 40; c.y = a.y + a.tx * side * 40; } };
    let sh = 0; put(sh); // the high school stands at the middle where the zones meet: slide the shop row down the street until it clears
    if (school) for (; sh < 90; sh += 4) { put(sh); if (heroes.every(h => !h.shop || Math.hypot(h.x - school.x, h.y - school.y) > school.r + h.r + 3)) break; } } }
@@ -138,7 +140,7 @@ function buildDiorama(d, ti) {
   const chim = mine.filter(h => h.chimney); grp.add(inst(boxGeo, plainMat, chim, h => { const a = yaw(h), o = h.w * HS * .32; v3.set(h.px + Math.cos(a) * o, h.hz + h.h * HS, -h.py - Math.sin(a) * o); q.setFromEuler(e.set(0, a, 0)); sc.set(.9, h.d * HS * .5 * h.pitch + 1.8, .9); col.set('#8a4a36'); })); }
  // 8 trees, thinned, in the zone's colours
  { const T = [], spots = taken.slice(); for (const t of town.trees) { const px = (t.x - d.centre[0]) / scl, py = (t.y - d.centre[1]) / scl; if (!inHex(px, py, DIO_R * .94) || !isNaN(waterY(px, py))) continue; const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 2) continue;
-   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 3.2 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 520) break; }
+   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 3.2 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 520) break; } dioObs[d.id] = spots;
   const grp = new THREE.Group(), broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine'), tint = new THREE.Color(L.grass[1]);
   grp.add(inst(TREE_HI.trunk, plainMat, broad, t => { v3.set(t.px, t.hz, -t.py); q.identity(); sc.set(.7 * t.s, 2.6 * t.s, .7 * t.s); col.set('#6b4f36'); }));
   grp.add(inst(TREE_HI.crown, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
@@ -262,10 +264,11 @@ function visitDio(id) {
  const s = spotByID[id], L = id === 'dio-trio' ? LOOK_TRIO : DIOS.find(d => 'dio-' + d.id === id).look; shown = id; current = ORDER_DIO.indexOf(id); look = L;
  const tgt = new THREE.Vector3(X(s.x), s.z, Z(s.y)), pitch = pitchFor(L.dist, L), az = rad(L.azimuth), h = Math.cos(pitch) * L.dist;
  fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(tgt.x + Math.sin(az) * h, tgt.y + Math.sin(pitch) * L.dist, tgt.z - Math.cos(az) * h), t1: tgt};
- bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1; clearTimeout(visitDio.t); visitDio.t = setTimeout(() => { bubble.style.opacity = 0; }, 7000);
+ clearTimeout(visitDio.t); if (id === 'dio-trio') { bubble.style.opacity = 0; return; } // Evan: no callout card on the whole board
+ bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1; visitDio.t = setTimeout(() => { bubble.style.opacity = 0; }, 7000);
 }
 function setView(on) {
- viewDio = on; dioGroup.visible = on; bubble.classList.toggle('dock', on); bubble.onclick = () => { bubble.style.opacity = 0; }; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
+ viewDio = on; dioGroup.visible = on; for (const o of realLayer) { if (on) { if (o.userData.realVis === undefined) o.userData.realVis = o.visible; o.visible = false; } else if (o.userData.realVis !== undefined) { o.visible = o.userData.realVis; delete o.userData.realVis; } } // Evan: only the seven-hex Winchester board shows; the old map comes back only if the board view is switched off bubble.classList.toggle('dock', on); bubble.onclick = () => { bubble.style.opacity = 0; }; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
  controls.minDistance = on ? 20 : 30; controls.maxDistance = on ? 1400 : 14000;
  if (on) visitDio('dio-trio'); else { look = LOOK_REAL; home(); }
 }
@@ -313,9 +316,12 @@ function setupStage() {
  for (const t of Object.values(dioTiles)) for (const sp of Object.values(t.spots)) { const f = sp.facing || 0, ox = Math.sin(f), oz = Math.cos(f); sp.out = {dirX: ox, dirZ: oz}; sp.street = {dirX: oz, dirZ: -ox}; const cx = sp.x + ox * 8.5, cz = sp.z + oz * 8.5; sp.curb = {x: cx, y: t.hf(cx, -cz), z: cz}; }
  // the named scenes: the café curb, the homes, and Launch sit on their tiles
  const at = (tile, hero, extra = {}) => { const sp = dioTiles[tile]?.spots[hero]; if (!sp) return; registerScene({id: extra.id, region: tile, anchor: [sp.x, sp.z], y: sp.y, facing: sp.facing, bounds: extra.bounds || 30}); };
- at('downtown', 'cafe', {id: 'cafe-curb'}); at('abbie-daddy-side', 'home', {id: 'abbie-kitchen'}); at('abbie-daddy-side', 'home', {id: 'treehouse'}); at('anis-side', 'ani', {id: 'anis-kitchen'}); at('anis-side', 'launch', {id: 'launch-pad'}); at('downtown', 'lab', {id: 'lab-door'}); at('downtown', 'skatepark', {id: 'skate-park', bounds: 26}); at('abbie-daddy-side', 'muraco', {id: 'school-door'});
+ at('downtown', 'cafe', {id: 'cafe-curb'}); at('downtown', 'bakery', {id: 'bakery-curb'}); at('abbie-daddy-side', 'home', {id: 'abbie-kitchen'}); at('abbie-daddy-side', 'abbieTree', {id: 'treehouse'}); at('anis-side', 'aniTree', {id: 'ani-treehouse'}); at('anis-side', 'ani', {id: 'anis-kitchen'}); at('anis-side', 'launch', {id: 'launch-pad'}); at('downtown', 'skatepark', {id: 'skate-park', bounds: 26}); at('abbie-daddy-side', 'muraco', {id: 'school-door'});
  for (const d of DIOS) { const t = dioTiles[d.id]; scenes['dio-' + d.id] = {id: 'dio-' + d.id, region: d.id, anchor: [0, 0], world: t.centre.clone(), bounds: DIO_R}; }
- const board = {name: BOARD.name, hexSide: DIO_R, hexes: DIOS.map(d => ({id: d.id, n: d.n, zone: d.zone, name: d.name})), slots: BOARD_SLOTS, heightAt: boardRaw, tileAt: (px, py) => DIOS.find(d => { const o = tileOff(d); return inHex(px - o.x, py - o.y, DIO_R); })?.id || null}; // board metres east and north of the middle hex
+ // for the cart in the Effect Hunt: what stands near a point (board metres east/north of the middle hex), and where a car may start on a street
+ const obstaclesNear = (x, y, r) => { const out = []; for (const d of DIOS) { const o = tileOff(d); for (const t of dioObs[d.id] || []) { const bx = o.x + t.x, by = o.y + t.y, rr = t.tree ? 1.6 : (t.r || 8) * .8; if (Math.hypot(bx - x, by - y) < r + rr) out.push({x: bx, y: by, r: rr, kind: t.tree ? 'tree' : 'building', hex: d.id}); } } return out; };
+ const roadSpawns = (every = 30) => { const out = []; for (const d of DIOS) { const o = tileOff(d); for (const rd of dioRoads[d.id] || []) { if (rd.c > 4) continue; let run = 0, next = every / 2; for (let i = 1; i < rd.p.length; i++) { const [ax, ay] = rd.p[i - 1], [bx, by] = rd.p[i], l = Math.hypot(bx - ax, by - ay); while (next <= run + l) { const k = (next - run) / l, px = ax + (bx - ax) * k, py = ay + (by - ay) * k; if (inHex(px, py, DIO_R * .85)) out.push({hex: d.id, x: o.x + px, y: o.y + py, heading: Math.atan2(by - ay, bx - ax), width: rd.c <= 3 ? 5.4 : 4.2}); next += every; } run += l; } } } return out; };
+ const board = {name: BOARD.name, hexSide: DIO_R, hexes: DIOS.map(d => ({id: d.id, n: d.n, zone: d.zone, name: d.name})), slots: BOARD_SLOTS, heightAt: boardRaw, obstaclesNear, roadSpawns, tileAt: (px, py) => DIOS.find(d => { const o = tileOff(d); return inHex(px - o.x, py - o.y, DIO_R); })?.id || null}; // board metres east and north of the middle hex
  Object.assign(window.AbbieTown, {board, entrances: ENTRANCES, backUrl, go: (gate, st) => { const e = ENTRANCES[gate]; if (!e || !available(gate, st)) return false; if (e.kind === 'stage') { window.dispatchEvent(new CustomEvent('abbietown:enter', {detail: {gate, scene: e.scene, module: e.module}})); return enterScene(e.scene); } location.href = e.url; return true; }, stage, scenes, enterScene, exitScene, registerScene, mount: mountScene});
  { const at = new URLSearchParams(location.search).get('at'), e = at && ENTRANCES[at]; // coming back from a game: land at the gate you left by
    if (e && scenes[e.scene]) { setView(true); setTimeout(() => enterScene(e.scene, {dist: 70}), 60); } }

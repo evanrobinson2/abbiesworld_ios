@@ -8,10 +8,16 @@
 import * as T from 'three';
 import {PAINT_COLOURS} from './alien-plants.mjs';
 
-const VERT = `varying vec2 vP;varying vec3 vW;
-void main(){vP=uv*2.-1.;vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`;
+// The log-depth chunks make the paint sort correctly on boards that use a logarithmic depth buffer (the town does).
+const VERT = `#include <common>
+#include <logdepthbuf_pars_vertex>
+varying vec2 vP;varying vec3 vW;
+void main(){vP=uv*2.-1.;vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;
+#include <logdepthbuf_vertex>
+}`;
 
-const FRAG = `precision highp float;
+const FRAG = `#include <common>
+#include <logdepthbuf_pars_fragment>
 varying vec2 vP;varying vec3 vW;
 uniform float uNow,uBirth,uSeed,uGrow,uDay,uWash;uniform vec3 uCol,uDeep,uCam;
 float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
@@ -28,6 +34,7 @@ float ink(vec2 p,float s){
  return f;
 }
 void main(){
+ #include <logdepthbuf_fragment>
  float age=(uNow-uBirth)/24.;
  float g=clamp(uGrow/.5,0.,1.);float gs=1.-pow(1.-g,3.)+.07*sin(g*10.)*(1.-g);gs=max(gs,.02);
  float f=ink(vP/gs,uSeed)*gs;
@@ -78,7 +85,7 @@ export function createSplatPool({size = 14, segs = 26} = {}) {
    const P = slot.mesh.geometry.attributes.position, n = segs + 1;
    for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) {
     const x = o.x + (i / segs * 2 - 1) * o.R, z = o.z + (j / segs * 2 - 1) * o.R, h = o.heightAt(x, z);
-    P.setXYZ(j * n + i, x, (Number.isFinite(h) ? h : 0) + .006, z);
+    P.setXYZ(j * n + i, x, (Number.isFinite(h) ? h : o.base ?? 0) + (o.lift ?? .006), z);
    }
    P.needsUpdate = true; slot.mesh.geometry.computeBoundingSphere();
    const u = slot.mesh.material.uniforms, c = PAINT_COLOURS[o.colour] || PAINT_COLOURS.pink;

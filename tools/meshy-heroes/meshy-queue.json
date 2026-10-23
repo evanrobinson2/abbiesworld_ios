@@ -408,7 +408,8 @@
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
    "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
-   "target_polycount": 8000
+   "target_polycount": 8000,
+   "recover_task": "01a16a88-a724-7520-811b-115361c79586"
   },
   {
    "id": "brute1-retexture",
@@ -446,7 +447,8 @@
     }
    },
    "save_to": "tools/midjourney/outputs/character-studio/1-claymation-adventurer/meshy/",
-   "for": "Character Studio (Evan 16:53Z)"
+   "for": "Character Studio (Evan 16:53Z)",
+   "deliver_to": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/"
   },
   {
    "id": "cs-2-plasticine-inventor",
@@ -460,7 +462,8 @@
     }
    },
    "save_to": "tools/midjourney/outputs/character-studio/2-plasticine-inventor/meshy/",
-   "for": "Character Studio (Evan 16:53Z)"
+   "for": "Character Studio (Evan 16:53Z)",
+   "deliver_to": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/"
   },
   {
    "id": "cs-3-stick-man",
@@ -474,7 +477,8 @@
     }
    },
    "save_to": "tools/midjourney/outputs/character-studio/3-stick-man/meshy/",
-   "for": "Character Studio (Evan 16:53Z)"
+   "for": "Character Studio (Evan 16:53Z)",
+   "deliver_to": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/"
   },
   {
    "id": "cs-4-80s-action-hero",
@@ -488,7 +492,8 @@
     }
    },
    "save_to": "tools/midjourney/outputs/character-studio/4-80s-action-hero/meshy/",
-   "for": "Character Studio (Evan 16:53Z)"
+   "for": "Character Studio (Evan 16:53Z)",
+   "deliver_to": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/"
   },
   {
    "id": "charm-gold-coin",
@@ -525,7 +530,8 @@
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
    "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
-   "target_polycount": 8000
+   "target_polycount": 8000,
+   "recover_task": "01a16a88-a729-7692-86e3-93ea9afec100"
   },
   {
    "id": "charm-moon",
@@ -573,7 +579,8 @@
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
    "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
-   "target_polycount": 8000
+   "target_polycount": 8000,
+   "recover_task": "01a16a88-a72e-7575-9916-3f090f9dd192"
   },
   {
    "id": "charm-rocket",
@@ -613,6 +620,102 @@
    "save_to": "tools/meshy-heroes/meshy/A3-paint-suit/paint-clay/",
    "text_style_prompt": "same uniform as handmade plasticine, flat bright clay colours with faint thumbprints",
    "for": "Texture Studio (cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A)"
+  },
+  {
+   "id": "aurora_1_0",
+   "kind": "image-to-3d",
+   "image": "tools/aurora-mk2/meshy/refs/aurora_1_0.png",
+   "single_view": true,
+   "should_texture": false,
+   "credits": 20,
+   "target_polycount": 30000,
+   "symmetry_mode": "on",
+   "save_to": "tools/aurora-mk2/meshy/aurora_1_0/",
+   "note": "Aurora Mk 2 ship concept, cropped to one ship, untextured, symmetry on; Blender mirror pass follows"
+  },
+  {
+   "id": "aurora_1_1",
+   "kind": "image-to-3d",
+   "image": "tools/aurora-mk2/meshy/refs/aurora_1_1.png",
+   "single_view": true,
+   "should_texture": false,
+   "credits": 20,
+   "target_polycount": 30000,
+   "symmetry_mode": "on",
+   "save_to": "tools/aurora-mk2/meshy/aurora_1_1/",
+   "note": "Aurora Mk 2 ship concept, cropped to one ship, untextured, symmetry on; Blender mirror pass follows"
+  },
+  {
+   "id": "aurora_1_2",
+   "kind": "image-to-3d",
+   "image": "tools/aurora-mk2/meshy/refs/aurora_1_2.png",
+   "single_view": true,
+   "should_texture": false,
+   "credits": 20,
+   "target_polycount": 30000,
+   "symmetry_mode": "on",
+   "save_to": "tools/aurora-mk2/meshy/aurora_1_2/",
+   "note": "Aurora Mk 2 ship concept, cropped to one ship, untextured, symmetry on; Blender mirror pass follows"
+  },
+  {
+   "id": "aurora_1_3",
+   "kind": "image-to-3d",
+   "image": "tools/aurora-mk2/meshy/refs/aurora_1_3.png",
+   "single_view": true,
+   "should_texture": false,
+   "credits": 20,
+   "target_polycount": 30000,
+   "symmetry_mode": "on",
+   "save_to": "tools/aurora-mk2/meshy/aurora_1_3/",
+   "note": "Aurora Mk 2 ship concept, cropped to one ship, untextured, symmetry on; Blender mirror pass follows"
+  },
+  {
+   "id": "aurora_2_0",
+   "kind": "image-to-3d",
+   "image": "tools/aurora-mk2/meshy/refs/aurora_2_0.png",
+   "single_view": true,
+   "should_texture": false,
+   "credits": 20,
+   "target_polycount": 30000,
+   "symmetry_mode": "on",
+   "save_to": "tools/aurora-mk2/meshy/aurora_2_0/",
+   "note": "Aurora Mk 2 ship concept, cropped to one ship, untextured, symmetry on; Blender mirror pass follows"
+  },
+  {
+   "id": "aurora_2_1",
+   "kind": "image-to-3d",
+   "image": "tools/aurora-mk2/meshy/refs/aurora_2_1.png",
+   "single_view": true,
+   "should_texture": false,
+   "credits": 20,
+   "target_polycount": 30000,
+   "symmetry_mode": "on",
+   "save_to": "tools/aurora-mk2/meshy/aurora_2_1/",
+   "note": "Aurora Mk 2 ship concept, cropped to one ship, untextured, symmetry on; Blender mirror pass follows"
+  },
+  {
+   "id": "aurora_2_2",
+   "kind": "image-to-3d",
+   "image": "tools/aurora-mk2/meshy/refs/aurora_2_2.png",
+   "single_view": true,
+   "should_texture": false,
+   "credits": 20,
+   "target_polycount": 30000,
+   "symmetry_mode": "on",
+   "save_to": "tools/aurora-mk2/meshy/aurora_2_2/",
+   "note": "Aurora Mk 2 ship concept, cropped to one ship, untextured, symmetry on; Blender mirror pass follows"
+  },
+  {
+   "id": "aurora_2_3",
+   "kind": "image-to-3d",
+   "image": "tools/aurora-mk2/meshy/refs/aurora_2_3.png",
+   "single_view": true,
+   "should_texture": false,
+   "credits": 20,
+   "target_polycount": 30000,
+   "symmetry_mode": "on",
+   "save_to": "tools/aurora-mk2/meshy/aurora_2_3/",
+   "note": "Aurora Mk 2 ship concept, cropped to one ship, untextured, symmetry on; Blender mirror pass follows"
   }
  ],
  "total_credits": 620,

@@ -31,6 +31,12 @@ function part(geo, hex, o = {}) {
  return g;
 }
 const merge = list => list.length ? mergeGeometries(list, false) : new T.BufferGeometry();
+// A soft additive halo around every glow part, so lit parts bloom in the dark (made from the glow parts' own bounds).
+function halo(list, scale = 2.6) {
+ const out = [], box = new T.Box3(), c = new T.Vector3(), sz = new T.Vector3();
+ for (const g of list) { g.computeBoundingBox(); box.copy(g.boundingBox); box.getCenter(c); box.getSize(sz); out.push(part(new T.IcosahedronGeometry(1, 1), '#ffffff', {x: c.x, y: c.y, z: c.z, s: Math.max(.05, Math.max(sz.x, sz.y, sz.z) * .5 * scale)})); }
+ return merge(out);
+}
 const cone = (r0, r1, h, seg = 6) => new T.CylinderGeometry(r1, r0, h, seg, 1).translate(0, h / 2, 0);
 const ball = (r, d = 1) => new T.IcosahedronGeometry(r, d);
 const bell = (r, seg = 9, rings = 4) => new T.SphereGeometry(r, seg, rings, 0, Math.PI * 2, 0, Math.PI / 2);
@@ -55,7 +61,7 @@ const SPECIES = {
   head.push(part(bell(.62, 10, 5), p.head, {y: 0, sy: .7}), part(new T.CylinderGeometry(.62, .62, .07, 10), p.rim, {y: .01}));
   for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2, L = .55 + (i % 3) * .18; head.push(part(cone(.04, .01, L, 4), p.head, {x: Math.cos(a) * .52, z: Math.sin(a) * .52, y: -L, rz: 0})); glow.push(part(ball(.065, 1), p.glow, {x: Math.cos(a) * .52, z: Math.sin(a) * .52, y: -L})); }
   for (let i = 0; i < 4; i++) glow.push(part(ball(.06, 0), p.glow, {x: Math.cos(i * 1.6) * .22, y: .38 + (i % 2) * .08, z: Math.sin(i * 1.6) * .22}));
-  return {stem: merge(stem), head: merge(head), glow: merge(glow), stemH: 1.55,
+  return {stem: merge(stem), head: merge(head), glow: merge(glow), halo: halo(glow), stemH: 1.55,
    pose(m, s, g, b, t) { m.head.rotation.z = Math.sin(t * 1.3) * .08 * b; m.head.position.y += Math.sin(t * 1.7) * .05 * b; }};
  }},
  teal: {name: 'Spiral Fern', blurb: 'Five fronds that start as tight curls and uncurl as they grow.', fern: true, build() {
@@ -94,7 +100,7 @@ const SPECIES = {
    geo.attributes.position.needsUpdate = true; geo.computeBoundingSphere();
   }
   function u(s, n) { return s / n; }
-  return {stem: merge(stem), head, glow: merge(glow), stemH: .05, fernCurl: setCurl,
+  return {stem: merge(stem), head, glow: merge(glow), halo: halo(glow), stemH: .05, fernCurl: setCurl,
    pose(m, s, g, b, t) { m.head.position.y = 0; m.head.rotation.y = Math.sin(t * .6) * .06; }};
  }},
  lime: {name: 'Pom Reed', blurb: 'Tall reeds that bow in the wind, each tipped with a fuzzy pom that lights up.', build() {
@@ -105,7 +111,7 @@ const SPECIES = {
    stem.push(part(cone(.07, .035, h, 5), p.stem, {x, z, rz: -Math.cos(a) * lean, rx: Math.sin(a) * lean}));
    const tx = x + Math.cos(a) * Math.sin(lean) * h, tz = z + Math.sin(a) * Math.sin(lean) * h, ty = Math.cos(lean) * h;
    head.push(part(ball(.26 + (i % 2) * .05, 1), p.head, {x: tx, y: ty, z: tz})); glow.push(part(ball(.1, 0), p.glow, {x: tx, y: ty + .02, z: tz})); });
-  return {stem: merge(stem), head: merge(head), glow: merge(glow), stemH: 0, headFollowsStem: true,
+  return {stem: merge(stem), head: merge(head), glow: merge(glow), halo: halo(glow), stemH: 0, headFollowsStem: true,
    pose(m, s, g, b, t) { m.stem.rotation.z = Math.sin(t * .9) * .05 * g; m.head.rotation.z = m.stem.rotation.z; }};
  }},
  violet: {name: 'Glowcap', blurb: 'A cluster of mushroom caps, freckled with lights that pulse after dark.', build() {
@@ -115,7 +121,7 @@ const SPECIES = {
    part(cone(.1, .07, .45, 6), p.stem, {x: -.38, z: -.12, rz: .22}), part(bell(.22, 8, 4), p.head, {x: -.46, y: .42, z: -.14, rz: .22}));
   head.push(part(bell(.78, 11, 5), p.head, {sy: .62}), part(new T.CylinderGeometry(.74, .6, .08, 11), p.rim, {y: -.02}));
   for (let i = 0; i < 9; i++) { const a = i * 2.4, rr = .18 + (i % 3) * .17, y = Math.sqrt(Math.max(0, .78 * .78 - rr * rr)) * .62; glow.push(part(ball(.075, 0), p.glow, {x: Math.cos(a) * rr, y: y + .01, z: Math.sin(a) * rr, sy: .6})); }
-  return {stem: merge(stem), head: merge(head), glow: merge(glow), stemH: .9,
+  return {stem: merge(stem), head: merge(head), glow: merge(glow), halo: halo(glow), stemH: .9,
    pose(m, s, g, b, t, night) { m.head.scale.y *= 1 + Math.sin(t * 2.2) * .04 * b; }};
  }},
  sun: {name: 'Star Spire', blurb: 'A twisting spire of star-shaped discs that turn slowly and shed tiny glowing pods.', build() {
@@ -127,7 +133,7 @@ const SPECIES = {
   head.push(part(cone(.07, .01, .42, 5), p.rim, {y: .55}));
   glow.push(part(ball(.15, 1), p.glow, {y: 1.02}));
   for (let i = 0; i < 5; i++) { const a = i / 5 * Math.PI * 2; glow.push(part(ball(.06, 0), p.glow, {x: Math.cos(a) * 1, y: .15 + (i % 2) * .2, z: Math.sin(a) * 1})); }
-  return {stem: merge(stem), head: merge(head), glow: merge(glow), stemH: 1.45,
+  return {stem: merge(stem), head: merge(head), glow: merge(glow), halo: halo(glow), stemH: 1.45,
    pose(m, s, g, b, t) { m.head.rotation.y = t * (.25 + .9 * b); m.glow.rotation.y = m.head.rotation.y; }};
  }}
 };
@@ -138,6 +144,7 @@ const built = new Map(), mats = {};
 function species(id) { if (!built.has(id)) built.set(id, SPECIES[id].build()); return built.get(id); }
 // Materials are created once; glow gets a clone per plant (its own pulse), which shares the compiled program.
 function bodyMat() { return mats.body ??= Object.assign(new T.MeshStandardMaterial({vertexColors: true, flatShading: true, roughness: .78, metalness: 0, side: T.DoubleSide}), {name: 'alien-plant-body'}); }
+function haloTemplate() { return mats.halo ??= Object.assign(new T.MeshBasicMaterial({color: '#ffffff', transparent: true, opacity: 0, depthWrite: false, blending: T.AdditiveBlending}), {name: 'alien-plant-halo'}); }
 function glowTemplate() { return mats.glow ??= Object.assign(new T.MeshStandardMaterial({vertexColors: true, flatShading: true, roughness: .4, emissive: '#ffffff', emissiveIntensity: .5, emissiveMap: null}), {name: 'alien-plant-glow'}); }
 
 export function makePlant(id, seed = 1) {
@@ -146,10 +153,11 @@ export function makePlant(id, seed = 1) {
   // The fern owns its head geometry (it uncurls), everything else shares the species geometry.
   const headGeo = sp.fernCurl ? sp.head.clone() : sp.head, glowMat = glowTemplate().clone();
   glowMat.emissive.set(PAL[id].glow);
-  const stem = new T.Mesh(sp.stem, bodyMat()), headG = new T.Group(), head = new T.Mesh(headGeo, bodyMat()), glow = new T.Mesh(sp.glow, glowMat);
+  const haloMat = haloTemplate().clone(); haloMat.color.set(PAL[id].glow);
+  const stem = new T.Mesh(sp.stem, bodyMat()), headG = new T.Group(), head = new T.Mesh(headGeo, bodyMat()), glow = new T.Mesh(sp.glow, glowMat), haloMesh = new T.Mesh(sp.halo, haloMat); haloMesh.name = 'glow-halo'; haloMesh.raycast = () => {}; haloMesh.renderOrder = 3;
   stem.name = 'stalk'; head.name = 'head'; glow.name = 'glow-parts';
   for (const m of [stem, head, glow]) { m.castShadow = true; m.frustumCulled = !sp.fernCurl; }
-  headG.add(head, glow); group.add(stem, headG);
+  headG.add(head, glow, haloMesh); group.add(stem, headG);
   const m = {stem, head: headG, glow: headG};
   const P = {id, group, seed, stage: -1, _curl: -1,
    pose(s, t = 0, night = 0) {
@@ -163,12 +171,13 @@ export function makePlant(id, seed = 1) {
      headG.scale.setScalar(Math.max(.001, ease((s - .28) / .3) * .42 + b * .58));
     }
     headG.visible = s > .27; glow.visible = b > .02 || s > .5;
-    glowMat.emissiveIntensity = (.25 + .9 * night) * (.3 + .7 * b);
+    glowMat.emissiveIntensity = (.3 + 2.4 * night) * (.35 + .65 * b);
+    const pulse = .85 + .15 * Math.sin(tt * 2.4 + wobble * 6); haloMat.opacity = night > .05 ? Math.min(.55, .6 * night * (.25 + .75 * b) * pulse) : 0; haloMesh.visible = haloMat.opacity > .01;
     if (sp.fernCurl) { const curl = 1 - ease((s - .22) / .6), c = Math.round(curl * 60) / 60, size = .25 + .75 * ease(s / .5); if (c !== P._curl || Math.abs(size - (P._size || 0)) > .01) { sp.fernCurl(headGeo, c, size); P._curl = c; P._size = size; } headG.visible = s > .12; }
     sp.pose(m, s, g, b, tt, night);
     P.stage = s;
    },
-   dispose() { glowMat.dispose(); if (sp.fernCurl) headGeo.dispose(); }};
+   dispose() { glowMat.dispose(); haloMat.dispose(); if (sp.fernCurl) headGeo.dispose(); }};
   if (sp.fernCurl) sp.fernCurl(headGeo, 1, .25);
   P.pose(0);
   return P;

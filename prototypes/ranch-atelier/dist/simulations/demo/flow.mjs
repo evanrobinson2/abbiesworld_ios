@@ -98,16 +98,16 @@ export async function start() {
  // marks the place; then go there overhead, or drive there when the mission offers it.
  let picked = null;
  const placeOf = m => typeof m.at === 'function' ? m.at(stage) : m.at === 'moon' ? [...stage.tiles.values()].find(t => t.userData.kind === 'moon')?.userData.anchor : stage.spots[m.at];
- function pick(m) { picked = m; const at = placeOf(m); stage.halo(at); if (at) stage.lookAt(at); buildBoard(); }
+ function pick(m) { if (picked !== m) picked?.onDeselect?.(stage); picked = m; m.onSelect?.(stage); const at = placeOf(m); stage.halo(at); if (at) stage.lookAt(at); buildBoard(); }
  function buildBoard() {
   board?.remove();
   const el = board = document.createElement('section'); el.className = 'missions'; el.setAttribute('aria-label', 'Missions notebook');
   el.innerHTML = `<i class="rings">${'<u></u>'.repeat(9)}</i><h2>Missions</h2><ul>${MISSIONS.map(m => { const sealed = m.needs === 'moon' && !stage.has('moon'), d = isDone(m), on = picked?.id === m.id;
-   return `<li class="${sealed ? 'sealed' : ''} ${d ? 'done' : ''} ${on ? 'on' : ''} ${m.finale ? 'finale' : ''}" data-id="${m.id}"><span class="box">${d ? '✓' : ''}</span><span class="txt"><b>${m.icon} ${m.title}</b><small>${sealed ? 'Needs the Moon tile' : m.line}</small></span><span class="charm">${CHARM_ICON(m.charm)}</span>${sealed ? '<em>Show me where</em>' : on ? `<span class="go"><button class="glass" data-go="god" aria-label="Go overhead">🛰️</button>${m.drive ? '<button class="glass" data-go="drive" aria-label="Drive there">🏎️</button>' : ''}</span>` : ''}</li>`; }).join('')}</ul>`;
+   return `<li class="${sealed ? 'sealed' : ''} ${d ? 'done' : ''} ${on ? 'on' : ''} ${m.finale ? 'finale' : ''}" data-id="${m.id}"><span class="box">${d ? '✓' : ''}</span><span class="txt"><b>${m.icon} ${m.title}</b><small>${sealed ? 'Needs the Moon tile' : m.line}</small></span><span class="charm">${m.charmIcon || CHARM_ICON(m.charm)}</span>${sealed ? '<em>Show me where</em>' : on ? `<span class="go"><button class="glass" data-go="god" aria-label="Go overhead">🛰️</button>${m.drive ? '<button class="glass" data-go="drive" aria-label="Drive there">🏎️</button>' : ''}</span>` : ''}</li>`; }).join('')}</ul>`;
   document.body.appendChild(el);
   el.querySelectorAll('li').forEach(li => li.onclick = e => { const m = MISSIONS.find(x => x.id === li.dataset.id), go = e.target.closest('[data-go]')?.dataset.go;
    if (li.classList.contains('sealed')) return showWhere(m);
-   if (go === 'god') return launch(m); if (go === 'drive') { closeBoard(); return m.drive(m, stage); }
+   if (go === 'god') { if (m.overhead) { closeBoard(); return m.overhead(m, stage); } return launch(m); } if (go === 'drive') { closeBoard(); return m.drive(m, stage); }
    pick(m); });
   requestAnimationFrame(() => el.classList.add('in'));
  }
@@ -126,7 +126,14 @@ export async function start() {
  async function launch(m) {
   closeBoard(); stage.halo(null); picked = null; const where = m.at === 'moon' ? [...stage.tiles.values()].find(t => t.userData.kind === 'moon') : null, spot = where ? where.userData.anchor : stage.spots[m.at] || stage.spots.cafe;
   const go = where ? stage.tileView(where.userData.slot) : stage.spotView(stage.spots[m.at] ? m.at : 'cafe', 55);
-  await sleep(.5); await Promise.all([go, smoke(() => { const f = $('#mission'); f.hidden = false; f.querySelector('iframe').src = m.page; }, stage.project(spot))]);
+  await sleep(.5);
+  // the Moon Mission plays inside the real town (it launches from the café roof pad) and hands the camera back on scene-exit
+  const tw = $('#town').contentWindow;
+  if (m.inTown && tw.AbbieTown?.go) {
+   await go; const back = () => { tw.removeEventListener('abbietown:scene-exit', back); refreshBoard(); drawChest(true); openBoard(); };
+   tw.addEventListener('abbietown:scene-exit', back); tw.AbbieTown.go(m.inTown, {crew: true}); return;
+  }
+  await Promise.all([go, smoke(() => { const f = $('#mission'); f.hidden = false; f.querySelector('iframe').src = m.page; }, stage.project(spot))]);
  }
  $('#mission button').onclick = async () => {
   const f = $('#mission');

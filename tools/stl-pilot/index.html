@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STL Pilot Results</title>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+:root{--bg:#fbf8f3;--ink:#1f1a14;--muted:#6b6258;--card:#fff;--line:#e6dfd3;--accent:#c4521f}
+@media (prefers-color-scheme:dark){:root{--bg:#16130f;--ink:#f3ede4;--muted:#a69b8d;--card:#201c17;--line:#3a332b;--accent:#ff8a57}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.7rem;margin:0 0 4px}p.lede{color:var(--muted);margin:0 0 24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 20px}
+.card h2{margin:0 0 12px;font-size:1.15rem}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.pair{grid-template-columns:1fr}}
+figure{margin:0}figure img,model-viewer{width:100%;height:320px;border-radius:10px;background:#efe9de;object-fit:contain;display:block}
+@media (prefers-color-scheme:dark){figure img,model-viewer{background:#2a251f}}
+figcaption,.muted{color:var(--muted);font-size:.85rem}
+.src{margin:12px 0 4px;font-size:.92rem}a{color:var(--accent)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin-top:8px}th,td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--line)}.num{text-align:right;font-variant-numeric:tabular-nums}
+summary{cursor:pointer;color:var(--muted);font-size:.9rem}
+</style></head><body><main>
+<h1>STL pilot: 10 Printables models, cleaned</h1>
+<p class="lede">Every model is CC0 or CC BY and carries its author, licence and source link in its own provenance.json. Left: the Printables source image. Right: our cleaned GLB (repair, decimate, UV, normal + AO bake, role-named materials).</p>
+<section class="card" id="pirate-chest">
+  <h2>Pirate&#x27;s Treasure Chest - Solid</h2>
+  <div class="pair">
+    <figure><img src="pirate-chest/source-image.jpg" alt="Printables source image for Pirate&#x27;s Treasure Chest - Solid" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="pirate-chest/pirate-chest.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Pirate&#x27;s Treasure Chest - Solid"></model-viewer><figcaption>Cleaned GLB, 896 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC BY 4.0</b> · by <a href="https://www.printables.com/@YourBuddyDinec">YourBuddyDinec</a> · <a href="https://www.printables.com/model/634848-pirates-treasure-chest-solid">model page</a> · <a href="pirate-chest/provenance.json">provenance.json</a> · <a href="pirate-chest/licence.jpg">licence screenshot</a><br><span class="muted">author&#x27;s original creation</span></p>
+  <details><summary>74,246 → 896 triangles in 4s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.0s</td><td class=num>74,246</td></tr><tr><td>repair</td><td class=num>0.3s</td><td class=num>73,262</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>73,262</td></tr><tr><td>decimate</td><td class=num>0.4s</td><td class=num>896</td></tr><tr><td>uv</td><td class=num>0.7s</td><td class=num>896</td></tr><tr><td>bake</td><td class=num>0.9s</td><td class=num>896</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>896</td></tr><tr><td>export</td><td class=num>0.3s</td><td class=num>896</td></tr></tbody></table></details>
+</section><section class="card" id="potion-bottle">
+  <h2>Wizard Potion Bottle</h2>
+  <div class="pair">
+    <figure><img src="potion-bottle/source-image.jpg" alt="Printables source image for Wizard Potion Bottle" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="potion-bottle/potion-bottle.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Wizard Potion Bottle"></model-viewer><figcaption>Cleaned GLB, 698 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC BY 4.0</b> · by <a href="https://www.printables.com/@JcWentzel_289380">Jc Wentzel</a> · <a href="https://www.printables.com/model/257760-wizard-potion-bottle">model page</a> · <a href="potion-bottle/provenance.json">provenance.json</a> · <a href="potion-bottle/licence.jpg">licence screenshot</a><br><span class="muted">author&#x27;s original creation (imported from Thingiverse by the author)</span></p>
+  <details><summary>208,680 → 698 triangles in 7s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.0s</td><td class=num>208,680</td></tr><tr><td>repair</td><td class=num>0.7s</td><td class=num>208,666</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>208,666</td></tr><tr><td>decimate</td><td class=num>1.8s</td><td class=num>698</td></tr><tr><td>uv</td><td class=num>1.7s</td><td class=num>698</td></tr><tr><td>bake</td><td class=num>0.7s</td><td class=num>698</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>698</td></tr><tr><td>export</td><td class=num>0.3s</td><td class=num>698</td></tr></tbody></table></details>
+</section><section class="card" id="space-helmet">
+  <h2>Retro Space Helmet 1</h2>
+  <div class="pair">
+    <figure><img src="space-helmet/source-image.jpg" alt="Printables source image for Retro Space Helmet 1" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="space-helmet/space-helmet.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Retro Space Helmet 1"></model-viewer><figcaption>Cleaned GLB, 1,726 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC0 1.0</b> · by <a href="https://www.printables.com/@CraigStaples_1107886">Craig Staples</a> · <a href="https://www.printables.com/model/885271-retro-space-helmet-1">model page</a> · <a href="space-helmet/provenance.json">provenance.json</a> · <a href="space-helmet/licence.jpg">licence screenshot</a><br><span class="muted">author&#x27;s original creation</span></p>
+  <details><summary>58,236 → 1,726 triangles in 6s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.0s</td><td class=num>58,236</td></tr><tr><td>repair</td><td class=num>0.1s</td><td class=num>58,220</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>58,220</td></tr><tr><td>decimate</td><td class=num>0.5s</td><td class=num>1,726</td></tr><tr><td>uv</td><td class=num>2.8s</td><td class=num>1,726</td></tr><tr><td>bake</td><td class=num>0.5s</td><td class=num>1,726</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>1,726</td></tr><tr><td>export</td><td class=num>0.3s</td><td class=num>1,726</td></tr></tbody></table></details>
+</section><section class="card" id="street-lamp">
+  <h2>Parisian Street Lamp</h2>
+  <div class="pair">
+    <figure><img src="street-lamp/source-image.jpg" alt="Printables source image for Parisian Street Lamp" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="street-lamp/street-lamp.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Parisian Street Lamp"></model-viewer><figcaption>Cleaned GLB, 1,493 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC0 1.0</b> · by <a href="https://www.printables.com/@Citron_295663">Citron</a> · <a href="https://www.printables.com/model/873657-parisian-street-lamp">model page</a> · <a href="street-lamp/provenance.json">provenance.json</a> · <a href="street-lamp/licence.jpg">licence screenshot</a><br><span class="muted">author&#x27;s original creation</span></p>
+  <details><summary>224,990 → 1,493 triangles in 6s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.0s</td><td class=num>224,990</td></tr><tr><td>repair</td><td class=num>0.6s</td><td class=num>224,990</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>224,990</td></tr><tr><td>decimate</td><td class=num>2.0s</td><td class=num>1,493</td></tr><tr><td>uv</td><td class=num>1.4s</td><td class=num>1,493</td></tr><tr><td>bake</td><td class=num>0.6s</td><td class=num>1,493</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>1,493</td></tr><tr><td>export</td><td class=num>0.3s</td><td class=num>1,493</td></tr></tbody></table></details>
+</section><section class="card" id="sci-fi-crate">
+  <h2>Sci Fi Crate (90mm Single Color: bottom and top)</h2>
+  <div class="pair">
+    <figure><img src="sci-fi-crate/source-image.jpg" alt="Printables source image for Sci Fi Crate (90mm Single Color: bottom and top)" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="sci-fi-crate/sci-fi-crate.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Sci Fi Crate (90mm Single Color: bottom and top)"></model-viewer><figcaption>Cleaned GLB, 968 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC BY 4.0</b> · by <a href="https://www.printables.com/@SecretPersono_537888">Secret Person of Secrets</a> · <a href="https://www.printables.com/model/531037-sci-fi-crate">model page</a> · <a href="sci-fi-crate/provenance.json">provenance.json</a> · <a href="sci-fi-crate/licence.jpg">licence screenshot</a><br><span class="muted">author&#x27;s original creation</span></p>
+  <details><summary>4,980 → 968 triangles in 4s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.0s</td><td class=num>4,980</td></tr><tr><td>repair</td><td class=num>0.0s</td><td class=num>4,990</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>4,990</td></tr><tr><td>decimate</td><td class=num>0.0s</td><td class=num>974</td></tr><tr><td>uv</td><td class=num>2.0s</td><td class=num>968</td></tr><tr><td>bake</td><td class=num>0.6s</td><td class=num>968</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>968</td></tr><tr><td>export</td><td class=num>0.4s</td><td class=num>968</td></tr></tbody></table></details>
+</section><section class="card" id="picnic-table">
+  <h2>Picnic Table</h2>
+  <div class="pair">
+    <figure><img src="picnic-table/source-image.jpg" alt="Printables source image for Picnic Table" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="picnic-table/picnic-table.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Picnic Table"></model-viewer><figcaption>Cleaned GLB, 490 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC0 1.0</b> · by <a href="https://www.printables.com/@gunna">makers (gunna)</a> · <a href="https://www.printables.com/model/446580-picnic-table">model page</a> · <a href="picnic-table/provenance.json">provenance.json</a> · <a href="picnic-table/licence.jpg">licence screenshot</a><br><span class="muted">author&#x27;s original creation</span></p>
+  <details><summary>490 → 490 triangles in 3s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.0s</td><td class=num>490</td></tr><tr><td>repair</td><td class=num>0.0s</td><td class=num>490</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>490</td></tr><tr><td>decimate</td><td class=num>0.0s</td><td class=num>490</td></tr><tr><td>uv</td><td class=num>1.1s</td><td class=num>490</td></tr><tr><td>bake</td><td class=num>0.5s</td><td class=num>490</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>490</td></tr><tr><td>export</td><td class=num>0.3s</td><td class=num>490</td></tr></tbody></table></details>
+</section><section class="card" id="park-bench">
+  <h2>the park bench</h2>
+  <div class="pair">
+    <figure><img src="park-bench/source-image.jpg" alt="Printables source image for the park bench" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="park-bench/park-bench.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of the park bench"></model-viewer><figcaption>Cleaned GLB, 3,000 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC0 1.0</b> · by <a href="https://www.printables.com/@gabi123_3353521">gabi123</a> · <a href="https://www.printables.com/model/1560190-the-park-bench">model page</a> · <a href="park-bench/provenance.json">provenance.json</a> · <a href="park-bench/licence.jpg">licence screenshot</a><br><span class="muted">author&#x27;s original creation; page marks the preview image as AI-generated</span></p>
+  <details><summary>1,499,696 → 3,000 triangles in 96s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.3s</td><td class=num>1,499,696</td></tr><tr><td>repair</td><td class=num>74.0s</td><td class=num>999,735</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>999,735</td></tr><tr><td>decimate</td><td class=num>18.6s</td><td class=num>3,000</td></tr><tr><td>uv</td><td class=num>0.1s</td><td class=num>3,000</td></tr><tr><td>bake</td><td class=num>1.0s</td><td class=num>3,000</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>3,000</td></tr><tr><td>export</td><td class=num>0.5s</td><td class=num>3,000</td></tr></tbody></table></details>
+</section><section class="card" id="lighthouse">
+  <h2>Low Poly Lighthouse</h2>
+  <div class="pair">
+    <figure><img src="lighthouse/source-image.jpg" alt="Printables source image for Low Poly Lighthouse" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="lighthouse/lighthouse.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Low Poly Lighthouse"></model-viewer><figcaption>Cleaned GLB, 5,000 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC BY 4.0</b> · by <a href="https://www.printables.com/@erre_stvdio">erre_stvdio</a> · <a href="https://www.printables.com/model/58833-low-poly-lighthouse">model page</a> · <a href="lighthouse/provenance.json">provenance.json</a> · <a href="lighthouse/licence.jpg">licence screenshot</a><br><span class="muted">author&#x27;s original creation (imported from Thingiverse by the author)</span></p>
+  <details><summary>5,128 → 5,000 triangles in 3s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.0s</td><td class=num>5,128</td></tr><tr><td>repair</td><td class=num>0.0s</td><td class=num>5,128</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>5,128</td></tr><tr><td>decimate</td><td class=num>0.0s</td><td class=num>5,000</td></tr><tr><td>uv</td><td class=num>0.9s</td><td class=num>5,000</td></tr><tr><td>bake</td><td class=num>0.3s</td><td class=num>5,000</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>5,000</td></tr><tr><td>export</td><td class=num>0.3s</td><td class=num>5,000</td></tr></tbody></table></details>
+</section><section class="card" id="tractor">
+  <h2>Tractor (base body + complete wheels)</h2>
+  <div class="pair">
+    <figure><img src="tractor/source-image.jpg" alt="Printables source image for Tractor (base body + complete wheels)" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="tractor/tractor.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Tractor (base body + complete wheels)"></model-viewer><figcaption>Cleaned GLB, 5,996 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC BY 4.0</b> · by <a href="https://www.printables.com/@Thijs">Thijs</a> · <a href="https://www.printables.com/model/81929-tractor">model page</a> · <a href="tractor/provenance.json">provenance.json</a> · <a href="tractor/licence.jpg">licence screenshot</a><br><span class="muted">remix of &#x27;Tractor&#x27; by lemairec (thingiverse.com/lemairec); credit both</span></p>
+  <details><summary>20,830 → 5,996 triangles in 3s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.0s</td><td class=num>20,830</td></tr><tr><td>repair</td><td class=num>0.0s</td><td class=num>20,714</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>20,714</td></tr><tr><td>decimate</td><td class=num>0.1s</td><td class=num>5,997</td></tr><tr><td>uv</td><td class=num>1.0s</td><td class=num>5,996</td></tr><tr><td>bake</td><td class=num>0.3s</td><td class=num>5,996</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>5,996</td></tr><tr><td>export</td><td class=num>0.4s</td><td class=num>5,996</td></tr></tbody></table></details>
+</section><section class="card" id="chicken">
+  <h2>Chicken</h2>
+  <div class="pair">
+    <figure><img src="chicken/source-image.jpg" alt="Printables source image for Chicken" loading="lazy"><figcaption>Source image from Printables</figcaption></figure>
+    <figure><model-viewer src="chicken/chicken.glb" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="0.8" exposure="1.1" alt="Cleaned 3D model of Chicken"></model-viewer><figcaption>Cleaned GLB, 8,000 triangles (drag to orbit, scroll to zoom)</figcaption></figure>
+  </div>
+  <p class="src"><b>CC BY 4.0</b> · by <a href="https://www.printables.com/@opslasher2000_882122">opslasher2000 (re-upload)</a> · <a href="https://www.printables.com/model/496190-chicken">model page</a> · <a href="chicken/provenance.json">provenance.json</a> · <a href="chicken/licence.jpg">licence screenshot</a><br><span class="muted">re-upload of &#x27;Chicken&#x27; by Infalivia (thingiverse.com), CC BY; credit Infalivia as original author</span></p>
+  <details><summary>1,110,016 → 8,000 triangles in 27s</summary>
+  <table><thead><tr><th>stage</th><th>time</th><th>tris after</th></tr></thead><tbody><tr><td>import</td><td class=num>0.2s</td><td class=num>1,110,016</td></tr><tr><td>repair</td><td class=num>3.4s</td><td class=num>1,110,016</td></tr><tr><td>assemble scale pivot</td><td class=num>0.0s</td><td class=num>1,110,016</td></tr><tr><td>decimate</td><td class=num>18.7s</td><td class=num>8,000</td></tr><tr><td>uv</td><td class=num>1.1s</td><td class=num>8,000</td></tr><tr><td>bake</td><td class=num>1.4s</td><td class=num>8,000</td></tr><tr><td>material</td><td class=num>0.0s</td><td class=num>8,000</td></tr><tr><td>export</td><td class=num>0.7s</td><td class=num>8,000</td></tr></tbody></table></details>
+</section>
+</main></body></html>

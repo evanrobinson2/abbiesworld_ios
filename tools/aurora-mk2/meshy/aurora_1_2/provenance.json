@@ -1,0 +1,38 @@
+{
+ "job": "aurora_1_2",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/image-to-3d",
+   "task_id": "01a16aae-58c3-705f-9bef-1db2f9a116c0",
+   "credits": 20,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": false,
+    "enable_pbr": false,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "on"
+   },
+   "views": [
+    "aurora_1_2.png"
+   ]
+  }
+ ],
+ "credits": 20,
+ "symmetrize": {
+  "mirror_axis": "z",
+  "plane": -0.0183,
+  "asymmetry_before_m": 0.02317,
+  "asymmetry_after_m": 0.0,
+  "length_m_units": [
+   1.881,
+   0.981,
+   0.458
+  ],
+  "faces_full": 32624,
+  "faces_viewer": 15477,
+  "tool": "Blender 5.2.3 LTS"
+ }
+}

@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 1260,
+ "total": 1500,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -441,6 +441,76 @@
    "what": "A5-paint-tee 3d",
    "credits": 30,
    "at": "2026-10-23T21:20:35Z"
+  },
+  {
+   "what": "A6-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:20:51Z"
+  },
+  {
+   "what": "A5-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:22:40Z"
+  },
+  {
+   "what": "A5-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:22:40Z"
+  },
+  {
+   "what": "A6-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:22:47Z"
+  },
+  {
+   "what": "A6-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:23:19Z"
+  },
+  {
+   "what": "A6-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:25:25Z"
+  },
+  {
+   "what": "aurora_1_0 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:32:53Z"
+  },
+  {
+   "what": "aurora_1_1 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:32:53Z"
+  },
+  {
+   "what": "aurora_1_2 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:32:53Z"
+  },
+  {
+   "what": "aurora_1_3 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:34:08Z"
+  },
+  {
+   "what": "aurora_2_0 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:34:59Z"
+  },
+  {
+   "what": "aurora_2_1 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:35:40Z"
+  },
+  {
+   "what": "aurora_2_2 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:36:24Z"
+  },
+  {
+   "what": "aurora_2_3 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:36:44Z"
   }
  ]
 }

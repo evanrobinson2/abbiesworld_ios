@@ -13,8 +13,8 @@ Live page: /studies/paint-world/ (Tab 1 study, Tab 2 production assets). Code: `
 - One signal, many outputs: the day clock drives paint age, plant growth, night glow and light.
 
 ## Rules
-Paint lives 24 game hours (wet glint 4 h, dries, shrinks over the last 6). Plants start 0.5 to 3.5 h after landing,
-grow over 20 h (sprout, grow, bloom), live 72 h, then sink into the soil. Caps: 14 splats, 30 plants. Everything is
+Paint lives 24 game hours (wet glint 4 h, dries, shrinks over the last 6). Plants start 0.3 to 1.8 h after landing,
+grow over 12 h (sprout, grow, bloom), live 72 h, then sink into the soil. Caps: 14 splats, 30 plants. Everything is
 derived from `day * 24 + hour`, so pause pauses growth and the time-of-day picker advances it.
 
 ## Modules
@@ -65,3 +65,9 @@ tour: yes. A one-tap verb with a payoff in minutes.
 ## Next
 Winchester diorama hook (any board with a scene, height function and clock works), plants as café ingredients, sound
 from the Ranch's own set, Blender build.py and GLB export of the plants for the model store.
+
+## Splat balls (Evan, 2026-10-23)
+Spending the card grants a random handful: count 3 to 7 (weights 1,2,4,2,1, so five is usual) and a size from tiny .55x, small .78x, regular 1x, big 1.35x, giant 1.6x (weights 1,2,4,2,1). Colours alternate within a pair. Balls wait in a tray on the right edge (), sized to show their splat. Drag one and release: pointer speed over the last 120 ms becomes the flick, mapped onto the ground by the camera;  arcs it (gravity, a little squash and stretch) and it splats where it lands. Letting go on the tray puts it back. Plants glow in the dark through additive halos around each lit part.
+
+## In Winchester (/town)
+`paint-world/town-mount.mjs` mounts on `AbbieTown.stage` like the Moon Mission: it uses the town's scene and camera, and the stage's tiles for the height function (NaN off the seven hexes, so paint never lands in the void). The town has no hour of the day, so the paint keeps its own game clock (a day in three minutes) and its plants never glow (no night). Units: the module's `unit` is render units per metre (sandbox .1, town 1); every size derives from it. The paint shader includes the three.js log-depth chunks because the town uses a logarithmic depth buffer. The card and tray are the same modules as the sandbox; the god-view deck's `ranch:play-event` with `paint-rain` also grants balls here.

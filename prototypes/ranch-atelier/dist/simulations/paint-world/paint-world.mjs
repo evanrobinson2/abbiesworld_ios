@@ -13,7 +13,7 @@ import {makePlant, PLANT_IDS, PAINT_COLOURS, SPECIES} from './alien-plants.mjs';
 
 export const PAINT_IDS = PLANT_IDS;
 export const hoursOf = clock => clock.day * 24 + clock.hour;
-export const PLANT_GROW_HOURS = 20, PLANT_LIFE_HOURS = 72, PAINT_LIFE_HOURS = 24;
+export const PLANT_GROW_HOURS = 12, PLANT_LIFE_HOURS = 72, PAINT_LIFE_HOURS = 24;
 const rng = seed => () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 export const daylightAt = h => { const x = ((h % 24) + 24) % 24, s = (a, b, v) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t); }; return s(5.5, 8, x) * (1 - s(18, 20.5, x)); };
 
@@ -22,8 +22,8 @@ export function createPaintWorld({scene, heightAt, unit = .1, camera, wash = .6,
  const pool = createSplatPool({size: 14}); root.add(pool.root);
  const plantRoot = new T.Group(); plantRoot.name = 'paint-plants'; root.add(plantRoot);
  const dropRoot = new T.Group(); dropRoot.name = 'paint-drops'; root.add(dropRoot);
- const hAt = (x, z) => heightAt(x / unit, z / unit) * unit;
- let real = 0, now = 0, plants = [], seedCounter = 1 + Math.floor(Math.random() * 9000);
+ const hAt = (x, z) => heightAt(x / unit, z / unit) * unit, K = unit / .1; // K: how many times bigger than the ranch's 0.1 units a metre is
+ let real = 0, now = 0, balls = [], plants = [], seedCounter = 1 + Math.floor(Math.random() * 9000);
 
  // ---- the sky drops: a pooled teardrop that stretches as it falls, plus tiny flung droplets on landing
  const tear = new T.LatheGeometry([[0, .5], [.12, .26], [.2, .0], [.17, -.12], [.09, -.2], [0, -.22]].map(([x, y]) => new T.Vector2(x, y)), 8);
@@ -37,14 +37,14 @@ export function createPaintWorld({scene, heightAt, unit = .1, camera, wash = .6,
  for (let i = 0; i < 24; i++) bitPool.push(makeBit());
 
  function landed(d, clock) {
-  const birth = hoursOf(clock), r = rng(d.seed * 977 + 11), n = 4 + Math.floor(r() * 3);
-  pool.spawn({x: d.x, z: d.z, R: d.R, colour: d.colour, seed: d.seed, birth, landed: real, heightAt: hAt});
+  const birth = hoursOf(clock), r = rng(d.seed * 977 + 11), n = Math.max(2, Math.min(9, Math.round((4 + Math.floor(r() * 3)) * Math.pow(d.R / (.95 * K), 1.3))));
+  pool.spawn({x: d.x, z: d.z, R: d.R, colour: d.colour, seed: d.seed, birth, landed: real, heightAt: hAt, lift: .006 * K, base: hAt(d.x, d.z)});
   for (let i = 0; i < n; i++) { // plants sit inside the paint, spread by the golden angle so they never crowd
    const a = i * 2.39996 + r() * .4, rr = Math.sqrt((i + .6) / n) * d.R * .6;
-   addPlant({x: d.x + Math.cos(a) * rr, z: d.z + Math.sin(a) * rr, colour: d.colour, seed: d.seed + i * 31, birth: birth + .5 + r() * 3, ry: r() * 6.28, sc: .8 + r() * .5});
+   addPlant({x: d.x + Math.cos(a) * rr, z: d.z + Math.sin(a) * rr, colour: d.colour, seed: d.seed + i * 31, birth: birth + .3 + r() * 1.5, ry: r() * 6.28, sc: .8 + r() * .5});
   }
   const y0 = hAt(d.x, d.z);
-  for (let i = 0; i < 6; i++) { const b = take(bitPool, makeBit); b.busy = true; b.mesh.material = dropMat(d.colour); b.mesh.visible = true; const a = r() * 6.28, sp = .5 + r() * .8; Object.assign(b, {vx: Math.cos(a) * sp * unit * 6, vz: Math.sin(a) * sp * unit * 6, vy: (1.2 + r()) * unit * 8, t: 0, s: .05 + r() * .06, base: y0}); b.mesh.position.set(d.x, y0 + .03, d.z); }
+  for (let i = 0; i < 6; i++) { const b = take(bitPool, makeBit); b.busy = true; b.mesh.material = dropMat(d.colour); b.mesh.visible = true; const a = r() * 6.28, sp = .5 + r() * .8; Object.assign(b, {vx: Math.cos(a) * sp * unit * 6, vz: Math.sin(a) * sp * unit * 6, vy: (1.2 + r()) * unit * 8, t: 0, s: (.05 + r() * .06) * K, base: y0}); b.mesh.position.set(d.x, y0 + .03 * K, d.z); }
  }
  function addPlant(o) {
   if (plants.length >= maxPlants) removePlant(plants.reduce((a, b) => (a.birth <= b.birth ? a : b)));
@@ -57,16 +57,22 @@ export function createPaintWorld({scene, heightAt, unit = .1, camera, wash = .6,
  return {
   root, pool, plants: () => plants, unit,
   // Card play: `count` drops fall around `at`, coloured in turn from `colours`, staggered, and splat where they land.
-  play({colours = PLANT_IDS.slice(0, 2), at = {x: 0, z: 0}, count = 4, spread = 1.6, R = [.75, 1.15]} = {}, clock = {day: 1, hour: 12}) {
+  play({colours = PLANT_IDS.slice(0, 2), at = {x: 0, z: 0}, count = 4, spread = 1.6, R = [.75 * K, 1.15 * K]} = {}, clock = {day: 1, hour: 12}) {
    const r = rng(seedCounter++ * 7919 + 13); let made = 0;
    for (let i = 0; i < count; i++) {
     const a = i / count * Math.PI * 2 + r() * 1.1, rr = spread * (.25 + .75 * Math.sqrt(r())), x = at.x + Math.cos(a) * rr, z = at.z + Math.sin(a) * rr;
     if (!Number.isFinite(hAt(x, z))) continue;
     const colour = colours[i % colours.length], d = take(dropPool, makeDrop); d.busy = true; d.mesh.material = dropMat(colour);
-    Object.assign(d, {x, z, colour, R: R[0] + r() * (R[1] - R[0]), seed: 1 + Math.floor(r() * 99999), delay: i * .22 + r() * .12, t: 0, fall: .75 + r() * .3, top: 6, clock: {...clock}});
+    Object.assign(d, {x, z, colour, R: R[0] + r() * (R[1] - R[0]), seed: 1 + Math.floor(r() * 99999), delay: i * .22 + r() * .12, t: 0, fall: .75 + r() * .3, top: 6 * K, clock: {...clock}});
     d.mesh.visible = false; made++;
    }
    return made;
+  },
+  // A thrown splat ball (the card's reward): leaves a hand at (x, z) with horizontal velocity (vx, vz) in render units per
+  // second, arcs under gravity and splats where it comes down, sized by R. Inertia carries it; nothing steers it.
+  launch({x, z, vx = 0, vz = 0, colour = 'pink', R = .95, lift = .45 * K, vy = 1.1 * K} = {}, clock = {day: 1, hour: 12}) {
+   const b = {x, z, vx, vz, vy, y: hAt(x, z) + lift, colour, R, seed: 1 + Math.floor(Math.random() * 99999), clock: {...clock}, mesh: new T.Mesh(bit, dropMat(colour))};
+   b.mesh.scale.setScalar((.14 + .12 * R / K) * K); b.mesh.raycast = () => {}; dropRoot.add(b.mesh); balls.push(b); return b;
   },
   update(dt, clock, {daylight} = {}) {
    real += dt; now = hoursOf(clock);
@@ -79,6 +85,12 @@ export function createPaintWorld({scene, heightAt, unit = .1, camera, wash = .6,
     const stretch = 1 + u * 1.1, w = unit * 7 * (.7 + .3 * Math.min(1, u * 4)); d.mesh.scale.set(w / Math.sqrt(stretch), w * stretch, w / Math.sqrt(stretch));
     if (u >= 1) { d.busy = false; d.mesh.visible = false; landed(d, d.clock); }
    }
+   for (const b of balls.slice()) {
+    b.vy -= unit * 60 * dt; b.x += b.vx * dt; b.z += b.vz * dt; b.y += b.vy * dt;
+    const g = hAt(b.x, b.z); b.mesh.position.set(b.x, b.y, b.z); b.mesh.rotation.x += dt * 6;
+    const sp = Math.hypot(b.vx, b.vz, b.vy); b.mesh.scale.set(1, 1, 1).multiplyScalar((.14 + .12 * b.R / K) * K).multiply(new T.Vector3(1 / (1 + sp * .04), 1 + sp * .08, 1 / (1 + sp * .04)));
+    if (b.y <= g + .01 || b.y < -5) { b.mesh.removeFromParent(); balls = balls.filter(q => q !== b); if (Number.isFinite(g)) landed({x: b.x, z: b.z, colour: b.colour, R: b.R, seed: b.seed}, b.clock); }
+   }
    for (const b of bitPool) {
     if (!b.busy) continue;
     b.t += dt; b.vy -= unit * 40 * dt; const p = b.mesh.position; p.x += b.vx * dt; p.z += b.vz * dt; p.y += b.vy * dt;
@@ -86,6 +98,7 @@ export function createPaintWorld({scene, heightAt, unit = .1, camera, wash = .6,
     if (b.t > .9 || p.y < b.base) { b.busy = false; b.mesh.visible = false; }
    }
    pool.update(now, real, camera, day, wash);
+
    for (const p of plants.slice()) {
     const age = now - p.birth;
     if (age > PLANT_LIFE_HOURS) { removePlant(p); continue; }
@@ -114,7 +127,7 @@ export function createPaintWorld({scene, heightAt, unit = .1, camera, wash = .6,
   },
   save(key) { try { localStorage.setItem('paint-world:' + key, JSON.stringify(this.snapshot())); } catch {} },
   load(key) { try { return this.restore(JSON.parse(localStorage.getItem('paint-world:' + key))); } catch { return false; } },
-  clear() { pool.hideAll(); for (const p of plants.slice()) removePlant(p); },
+  clear() { pool.hideAll(); for (const b of balls) b.mesh.removeFromParent(); balls = []; for (const p of plants.slice()) removePlant(p); },
   setWash(w) { wash = w; },
   summary: () => ({splats: pool.live().length, plants: plants.length, stages: plants.map(p => +p.P.stage.toFixed(2))}),
   dispose() { this.clear(); pool.dispose(); root.removeFromParent(); }

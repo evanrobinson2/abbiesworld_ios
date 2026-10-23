@@ -102,7 +102,7 @@ def views_for(job, tmp):
 
 def git(msg, paths):
     """Commit outputs, rebase onto the branch, then add this run's ledger entries to the branch's credits.json."""
-    br = "claude/project-thread-4a30bd"
+    br = os.environ.get("MESHY_BRANCH", "claude/project-thread-4a30bd")
     sh = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True)
     with lock:
         sh("add", "-f", *[str(p) for p in paths if Path(p) != CREDITS])
@@ -196,7 +196,7 @@ def run(job):
     textured = job.get("should_texture", True)
     n = len(views)
     body = {"ai_model": "latest", "should_texture": textured, "enable_pbr": textured,
-            "should_remesh": True, "topology": "triangle", "target_polycount": job.get("target_polycount", 30000), "symmetry_mode": "auto"}
+            "should_remesh": True, "topology": "triangle", "target_polycount": job.get("target_polycount", 30000), "symmetry_mode": job.get("symmetry_mode", "auto")}
     if kind == "multi-image-to-3d" and n >= 2:
         ep, body["image_urls"] = "/v1/multi-image-to-3d", [data_uri(v) for v in views]
     else:
@@ -235,6 +235,41 @@ if __name__ == "__main__":
     KEY = key()
     queue = {j["id"]: j for j in json.loads((HERE / "meshy-queue.json").read_text())["jobs"]}
     ids = sys.argv[1:]
+    if ids == ["animlib"]:  # the free list of Meshy's animation library
+        d = ROOT / "tools/meshy-heroes/meshy/anims"; d.mkdir(parents=True, exist_ok=True)
+        lib = call("GET", "/v1/animations/library")
+        (d / "library.json").write_text(json.dumps(lib, indent=1))
+        git("Meshy: animation library listing (free)", [d]); sys.exit()
+    if ids and ids[0] == "--anims":  # --anims <rig_task_id> <action_id> ...: 3 credits each, onto one reference rig
+        rig_tid, actions = ids[1], ids[2:]
+        d = ROOT / "tools/meshy-heroes/meshy/anims"; d.mkdir(parents=True, exist_ok=True)
+        pf = d / "provenance.json"
+        prov = json.loads(pf.read_text()) if pf.exists() else {"rig_task_id": rig_tid, "clips": {}}
+        def one(a):
+            if a in prov["clips"]:
+                return
+            spend(3, f"anim {a}")
+            tid = call("POST", "/v1/animations", {"rig_task_id": rig_tid, "action_id": int(a)})["result"]
+            r = poll("/v1/animations", tid, f"anim {a}")
+            rr = r.get("result") or r
+            files = []
+            for k, u in rr.items():
+                if isinstance(u, str) and u.startswith("http") and "glb" in k:
+                    fetch(u, d / f"{a}_{k.replace('_url', '')}.glb"); files.append(f"{a}_{k.replace('_url', '')}.glb")
+            with lock:
+                prov["clips"][a] = {"task_id": tid, "credits": 3, "files": files}
+        def safe_one(a):
+            try:
+                one(a)
+            except Exception as e:
+                print("FAIL anim", a, str(e).replace(KEY, "***"), flush=True)
+        from concurrent.futures import ThreadPoolExecutor
+        for i in range(0, len(actions), 10):
+            with ThreadPoolExecutor(5) as ex:
+                list(ex.map(safe_one, actions[i:i + 10]))
+            pf.write_text(json.dumps(prov, indent=1))
+            git(f"Meshy animations: {len(prov['clips'])} clips on the reference rig", [d])
+        sys.exit()
     if ids == ["tasks"]:  # recent image-to-3d tasks with thumbnails, to recover runs whose push failed
         d = ROOT / "tools/meshy-heroes/meshy/recent-tasks"; d.mkdir(parents=True, exist_ok=True)
         rows = call("GET", "/v1/image-to-3d?page_size=12&sort_by=-created_at")

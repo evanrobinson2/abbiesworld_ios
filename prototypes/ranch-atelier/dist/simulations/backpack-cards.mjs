@@ -10,7 +10,7 @@
 //   deck.show('style' | 'colour' | 'pocket' | 'trim' | 'lining');  deck.dispose();
 // Presentation layer: the hand is drawn for the player and is invisible to every perception.
 import {renderFace} from '../cards/v3/face.mjs?v=2';
-import {STYLES, FACETS, option, styleOf, patternCanvas, accentFor, pocketPath} from './backpack.mjs?v=6';
+import {STYLES, FACETS, option, styleOf, patternCanvas, accentFor, pocketPath} from './backpack.mjs?v=7';
 
 const styleArt = id => new URL(`./assets/backpack/style-${id}.png`, import.meta.url).href;
 const faces = new Map();
@@ -64,9 +64,11 @@ export function cardDeck(el, {look, onDrop}) {
  hand.innerHTML = '<span class="aw-bp-hand-name"></span><div class="aw-bp-cards" role="listbox"></div>';
  el.append(hand);
  const row = hand.querySelector('.aw-bp-cards'), label = hand.querySelector('.aw-bp-hand-name');
- let current = null, gen = 0;
+ let current = null, gen = 0, drops = [];
+ const clearDrags = () => { drops.splice(0).forEach(f => f()); document.querySelectorAll('.aw-bp-ghost').forEach(g => g.remove()); };
  async function show(facet) {
   current = facet; const my = ++gen, l = look(), cards = cardsFor(facet, l);
+  clearDrags();
   label.textContent = {style: 'Styles', colour: 'Colour and pattern', pocket: 'Pockets', trim: 'Straps', lining: 'Lining'}[facet] || '';
   row.innerHTML = '';
   cards.forEach((cd, i) => {
@@ -103,8 +105,14 @@ export function cardDeck(el, {look, onDrop}) {
   };
   const land = ok => { if (!ok) return; setTimeout(() => show(current), 60); };
   b.addEventListener('pointerup', end); b.addEventListener('pointercancel', end);
+  // A drag must never leave its card behind on the world (Evan, 22:56Z: "saddlebag is stuck in live game"): if the
+  // pointer goes up elsewhere, capture is lost, or the hand is re-dealt or put away mid-drag, the ghost goes home.
+  b.addEventListener('lostpointercapture', e => { if (ghost) end({type: 'pointercancel', clientX: e.clientX, clientY: e.clientY}); });
+  const stray = e => { if (start && e.pointerId === start.id) end(e); };
+  addEventListener('pointerup', stray, true); addEventListener('pointercancel', stray, true);
+  drops.push(() => { removeEventListener('pointerup', stray, true); removeEventListener('pointercancel', stray, true); if (ghost) { ghost.remove(); ghost = null; } start = null; });
  }
- return {show, get facet() { return current; }, dispose() { gen++; hand.remove(); }};
+ return {show, get facet() { return current; }, dispose() { gen++; clearDrags(); hand.remove(); }};
 }
 
 function css() {

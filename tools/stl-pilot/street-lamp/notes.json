@@ -1,0 +1,87 @@
+{
+  "slug": "street-lamp",
+  "stages": {
+    "import": {
+      "seconds": 0.03,
+      "tris": 224990,
+      "files": [
+        "source.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.62,
+      "tris": 224990,
+      "open_edges_before": 164,
+      "open_edges_after": 164,
+      "dust_shells_removed": 0,
+      "welded_verts": 6
+    },
+    "assemble_scale_pivot": {
+      "seconds": 0.0,
+      "tris": 224990,
+      "final_size_m": [
+        0.426,
+        1.117,
+        4.2
+      ]
+    },
+    "decimate": {
+      "seconds": 1.97,
+      "tris": 1493,
+      "per_part": {
+        "lamp": {
+          "fallback": null,
+          "before": 224990,
+          "budget": 1500,
+          "ratio": 0.1,
+          "after": 1493,
+          "attempts": 1
+        }
+      }
+    },
+    "uv": {
+      "seconds": 1.41,
+      "tris": 1493,
+      "islands": "smart_project+pack"
+    },
+    "bake": {
+      "seconds": 0.58,
+      "tris": 1493,
+      "texture_px": 512,
+      "extrusion_m": 0.084
+    },
+    "material": {
+      "seconds": 0.0,
+      "tris": 1493,
+      "materials": [
+        "mat_cast_iron"
+      ]
+    },
+    "export": {
+      "seconds": 0.35,
+      "tris": 1493,
+      "glb": "street-lamp.glb",
+      "bytes": 208056
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 1500,
+  "scale_to_metres": {
+    "factor": 0.001944070675973417,
+    "source_size_mm": [
+      219.37,
+      574.78,
+      2160.42
+    ],
+    "final_size_m": [
+      0.426,
+      1.117,
+      4.2
+    ]
+  },
+  "high_poly_tris": 224990,
+  "final_tris": 1493,
+  "script_total_s": 5.41,
+  "process_wall_s": 6.31,
+  "bake_source": "repaired high-poly (224990 tris) built from the source STL(s) in this folder; not stored separately"
+}
