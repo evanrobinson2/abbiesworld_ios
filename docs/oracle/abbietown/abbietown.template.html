@@ -568,7 +568,7 @@ const pinsEl = document.getElementById('pins'), bubble = document.getElementById
 const ORDER = ['cafe', 'comellas', 'hoagies', 'lab', 'common', 'muraco', 'leonard', 'ginn', 'horn', 'home', 'ani', 'launch', 'nova'];
 const pins = {};
 function makePins() {
- for (const id of [...ORDER, ...ORDER_DIO]) { const s = spotByID[id]; if (!s) continue; const b = document.createElement('button'); b.className = 'pin'; b.setAttribute('aria-label', s.name); b.innerHTML = `<span>${ICON[id]}</span>`; b.onclick = () => visit(id); pinsEl.appendChild(b); pins[id] = b; }
+ for (const id of [...ORDER, ...ORDER_DIO]) { const s = spotByID[id]; if (!s || (id.startsWith('dio-') && !ICON[id])) continue; const b = document.createElement('button'); b.className = 'pin'; b.setAttribute('aria-label', s.name); b.innerHTML = `<span>${ICON[id]}</span>`; b.onclick = () => visit(id); pinsEl.appendChild(b); pins[id] = b; }
 }
 let fly = null, current = -1, shown = null;
 function visit(id) {

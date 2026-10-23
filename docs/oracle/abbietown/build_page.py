@@ -26,7 +26,7 @@ import base64
 square = json.dumps(json.loads((sim / 'square.json').read_text()), separators=(',', ':'))
 overlay = 'data:image/png;base64,' + base64.b64encode((sim / 'overlay.png').read_bytes()).decode()
 context = subprocess.run(['node', str(root / 'tools/context-card/snippet.mjs'), 'abbietown'], capture_output=True, text=True, check=True).stdout
-template = (here / 'abbietown.template.html').read_text().replace('/*DIORAMAS*/', (here / 'housekit.block.js').read_text() + (here / 'dioramas.block.js').read_text() + chr(10) + (here / 'mission.block.js').read_text())
+template = (here / 'abbietown.template.html').read_text().replace('/*DIORAMAS*/', (here / 'housekit.block.js').read_text() + (here / 'places.block.js').read_text() + (here / 'decorate.block.js').read_text() + (here / 'dioramas.block.js').read_text() + chr(10) + (here / 'mission.block.js').read_text())
 def page(three, orbit, gltf, mm):  # mm: where the Moon Mission's modules load from (mission.block.js)
     imap = json.dumps({'imports': {'three': three, 'three/addons/controls/OrbitControls.js': orbit, 'three/addons/loaders/GLTFLoader.js': gltf}})
     return template.replace('/*IMPORTMAP*/', imap).replace('/*MMBASE*/', mm).replace('/*MODULES*/', modules).replace('/*LAND*/', land).replace('/*CONTEXT*/', context).replace('/*HISTORY*/', history).replace('/*OVERLAY*/', overlay).replace('/*SQUARE*/null', square)
