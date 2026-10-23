@@ -5,6 +5,10 @@
       "destination": "/studies/cell/play.html"
     },
     {
+      "source": "/demo",
+      "destination": "/demo/index.html"
+    },
+    {
       "source": "/town",
       "destination": "/studies/abbietown/index.html"
     },

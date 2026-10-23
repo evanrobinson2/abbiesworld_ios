@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "demo-flow",
+      "date": "2026-10-23",
+      "title": "The demo: tour, town and missions",
+      "line": "Cartoon Abbie and Ani give a tour of Winchester, the strange scientist unfolds a launch pad from the café roof, then you place tiles and pick a mission.",
+      "image": "/whats-new/2026-10-23-demo.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYLTSYoBA67Hq9pKF8RGmvkm",
+      "threadTitle": "Demo flow and opening tour",
+      "tour": false,
+      "link": "/demo"
+    },
+    {
       "id": "study-charms",
       "date": "2026-10-23",
       "title": "Charms map and jewellery box",
