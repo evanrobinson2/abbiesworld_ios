@@ -172,3 +172,17 @@ html[data-motif="efficient"] .ask{font-size:13px}
 html[data-motif="efficient"] .thumb{box-shadow:none}
 @media (prefers-reduced-motion:reduce){.chalk .trail,.chalk .hand,.orb{animation:none}}
 model-viewer:not(.placed) .fp{visibility:hidden}
+/* Evan 03:48Z: labels inset in the frames, the decide cluster pulled up under the pair, a tighter page */
+.desk2{padding:12px;gap:10px}
+.pair2{gap:10px}
+.sq2 .inset{position:absolute;left:10px;top:10px;z-index:3;padding:4px 9px;border-radius:999px;background:color-mix(in srgb,var(--surface) 88%,transparent);color:var(--ink-soft);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+.decide{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.decide .ask{flex:1;min-width:0;font-size:14px;line-height:1.35}
+.decide .thumb{position:static;flex:none;padding:4px;gap:8px;box-shadow:none}
+.decide .tb{width:52px;height:52px;min-height:52px}.decide .tb svg{width:24px;height:24px}
+@media (max-width:640px){
+  .desk2{padding:8px;gap:8px}.pair2{gap:6px}
+  .sq2 .inset{left:6px;top:6px;padding:3px 7px;font-size:10px}
+  .decide{flex-wrap:wrap}.decide .ask{order:2;flex-basis:100%;font-size:13px}.decide .thumb{margin-left:auto}
+}
+html[data-motif="efficient"] .sq2 .inset{background:#fff;color:#666}

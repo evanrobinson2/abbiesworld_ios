@@ -1,0 +1,51 @@
+/* The model card as an in-game callout (look/callout.mjs). Flat, Roboto, the look's tokens with fallbacks so it works
+   on pages that don't load look.css. No backdrop and no scrim: the world stays visible around it. */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+.awcall{
+  --c-surface:var(--surface,#fbf8f2);--c-ink:var(--ink,#2b2218);--c-soft:var(--ink-soft,#6b5d4c);--c-line:var(--line,rgba(110,80,40,.18));
+  --c-keep:var(--keep,#4f8a34);--c-note:var(--note,#c89a2c);--c-reject:var(--reject,#b8452f);--c-active:var(--active,#2f8b87);
+  position:fixed;z-index:60;width:min(340px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;
+  padding:12px;border-radius:18px;background:var(--c-surface);color:var(--c-ink);border:1px solid var(--c-line);
+  box-shadow:0 1px 2px rgba(60,40,20,.08),0 14px 34px -16px rgba(60,40,20,.45);
+  font:400 14px/1.4 Roboto,'Helvetica Neue',Arial,sans-serif;opacity:0;transform:scale(.96);transform-origin:left var(--ty,40px);
+  transition:opacity .16s ease,transform .16s ease;
+}
+.awcall.two{width:min(420px,calc(100vw - 24px))}
+.awcall.in{opacity:1;transform:none}
+.awcall.left{transform-origin:right var(--ty,40px)}
+.awcall *{font-family:inherit;box-sizing:border-box}
+.awcall header{display:flex;align-items:baseline;gap:8px;margin:0 0 10px}
+.awcall h2{margin:0;font-size:18px;font-weight:700;line-height:1.2;flex:0 1 auto}
+.awcall header span{color:var(--c-soft);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;flex:1}
+.awcall .x{margin-left:auto;width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:var(--c-soft);font-size:22px;line-height:1;cursor:pointer}
+.awcall .x:hover{background:color-mix(in srgb,var(--c-ink) 7%,transparent)}
+.awcall .pair{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.awcall.two .pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+.awcall figure{margin:0}
+.awcall figcaption{margin-top:4px;color:var(--c-soft);font-size:12px;font-weight:500}
+.awcall .sq{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:color-mix(in srgb,var(--c-surface) 60%,#e9e2d4)}
+.awcall .sq img,.awcall .sq model-viewer,.awcall .sq canvas{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover;display:block;--poster-color:transparent}
+.awcall p{margin:10px 2px 0;color:var(--c-soft)}
+.awcall ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:2px}
+.awcall li{display:grid;grid-template-columns:auto 1fr auto;gap:2px 8px;align-items:center;padding:6px;border-radius:10px;cursor:pointer}
+.awcall li.lit{background:color-mix(in srgb,var(--c-ink) 6%,transparent)}
+.awcall li b{font-weight:500}
+.awcall li em{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.awcall li span{grid-column:2/-1;color:var(--c-soft);font-size:13px}
+.awcall em.fair{color:var(--c-keep)}.awcall em.close{color:var(--c-note)}.awcall em.off{color:var(--c-reject)}
+.awfp{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;padding:0;border-radius:50%;border:2px solid #fff;color:#fff;
+  font:700 12px/1 Roboto,Arial,sans-serif;font-style:normal;display:grid;place-items:center;cursor:pointer;background:var(--c-active);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.awcall li .awfp{position:static;transform:none;width:22px;height:22px;box-shadow:none;border:0}
+.awfp.fair{background:var(--c-keep)}.awfp.close{background:var(--c-note)}.awfp.off{background:var(--c-reject)}
+.awfp.lit{outline:3px solid var(--c-ink);outline-offset:2px}
+/* the tail points at the tapped thing */
+.awcall .tail{position:absolute;top:calc(var(--ty,40px) - 8px);left:-8px;width:16px;height:16px;background:var(--c-surface);
+  border-left:1px solid var(--c-line);border-bottom:1px solid var(--c-line);transform:rotate(45deg);pointer-events:none}
+.awcall.left .tail{left:auto;right:-8px;transform:rotate(-135deg)}
+.awcall{overflow:visible}
+/* phones: a sheet along the bottom, thumb height, the world above stays clear */
+.awcall.sheet{left:12px!important;right:12px;top:auto!important;bottom:calc(12px + env(safe-area-inset-bottom));width:auto;max-height:58vh;overflow:auto;transform-origin:center bottom}
+.awcall.sheet .tail{display:none}
+.awcall.sheet li span{display:none}
+html[data-motif="efficient"] .awcall{border-radius:10px;box-shadow:none;border-color:#e3e3e3}
+html[data-motif="efficient"] .awcall li span{display:none}

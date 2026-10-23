@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-models-tighter",
+      "date": "2026-10-23",
+      "title": "Models, tighter",
+      "line": "The Inspiration and Model labels sit inside the pictures, and Reject, Chat and Keep sit right under them, so the page is tighter.",
+      "image": "/whats-new/2026-10-23-models-tighter.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead"
+    },
+    {
       "id": "2026-10-23-models-new-look",
       "date": "2026-10-23",
       "title": "Models get the new look",

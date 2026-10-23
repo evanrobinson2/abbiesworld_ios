@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Callout demo</title><link rel="stylesheet" href="/look.css?v=1">
+<style>html,body{margin:0;height:100%;background:#9bb36f} .world{position:fixed;inset:0;background:url(/whats-new/2026-10-23-ranch-rebuild.jpg) center/cover}
+.thing{position:fixed;left:38%;top:52%;width:18px;height:18px;margin:-9px;border-radius:50%;border:2px solid #fff1c4;background:none;cursor:pointer}</style></head>
+<body><div class="world"></div><button class="thing" aria-label="Cuirass"></button>
+<script type="module">
+import {openCallout} from '/look/callout.mjs';
+const thing=document.querySelector('.thing');
+const show=()=>openCallout({name:'Cuirass',kind:'Paper warrior',description:"Segmented chest armour (lorica) with shoulder guards",art:'/models/cuirass/ref.jpg',glb:'/models/cuirass/model.glb',focal:[{"n": 1, "label": "Neck opening", "img": [47, 24], "at": [0, 0.46, 0.05], "verdict": "fair", "note": "The scooped neck opening lines up with yours."}, {"n": 2, "label": "Chest plates", "img": [44, 40], "at": [0, 0.18, 0.5], "verdict": "off", "note": "Mine split down the middle; yours is closed at the front."}, {"n": 3, "label": "Shoulder guards", "img": [72, 27], "at": [0.36, 0.36, 0.1], "verdict": "off", "note": "Too flat and too square; yours curve over the shoulder."}, {"n": 4, "label": "Girth hoops", "img": [52, 66], "at": [0, -0.22, 0.5], "verdict": "close", "note": "They read as lorica bands, but yours are deeper and more stepped."}],anchor:()=>{const r=thing.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};}});
+thing.onclick=show; show();
+</script></body></html>
