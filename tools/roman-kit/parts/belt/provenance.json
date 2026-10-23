@@ -1,0 +1,30 @@
+{
+  "part": "belt",
+  "date": "2026-10-23",
+  "concept": {
+    "source": "Midjourney",
+    "job_id": "3c090e7c-775d-4813-ac52-023fb472271e",
+    "image_index": 0,
+    "file": "concept.png",
+    "prompt": "A single stylish Roman centurion military belt only, cingulum, fastened into an empty wearable oval, bold sculpted geometric buckle with an abstract sunburst emblem, broad tapered band, alternating beveled armor plaques with restrained embossed laurel motifs, elegant raised edge trim, strong rhythmic design and confident proportions, premium heroic strategy-game equipment, stylized low-poly with deliberate broad planar facets, ivory-white monochromatic material throughout, decorative detail sculpted into the geometry, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, standalone equipment reference for a game-ready 3D mesh --no person, figure, mannequin, anatomy, skin, head, face, body, pedestal, text, scenery, helmet, skirt, tassels --ar 1:1 --stylize 200 --v 8.2",
+    "created": "2026-10-22T15:56:50.487920+00:00",
+    "picked_by": "Evan"
+  },
+  "mask": {
+    "tool": "rembg isnet-general-use",
+    "file": "concept_mask.png"
+  },
+  "construction": {
+    "recipe": "build.py",
+    "tool": "Blender 5.2 (bpy) headless",
+    "output": "belt.glb"
+  },
+  "scoring": {
+    "tool": "../../score.py",
+    "outputs": [
+      "r/score.json",
+      "r/compare.jpg",
+      "r/hero.png"
+    ]
+  }
+}

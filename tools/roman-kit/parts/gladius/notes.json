@@ -1,0 +1,42 @@
+{
+  "part": "gladius",
+  "name": "Gladius",
+  "role": "weapon: the short sword",
+  "what_i_did": "Lies on its flat along X. A diamond-section blade with a raised centre ridge, widest at the guard and tapering into a long point; a half-oval guard; a grip with four finger ridges; a faceted ball pommel with a small cap.",
+  "good": [
+    "Outline match 0.91: blade taper, guard, ringed grip and pommel all line up.",
+    "420 triangles.",
+    "Blade and hilt are separate materials (BladeIvory and Ivory), so the blade can turn to steel without touching the hilt."
+  ],
+  "off": [
+    "The concept's guard is a flatter flared collar; mine is a block.",
+    "The concept's blade has visible facets along its length; mine is smoother between the ridge and the edges."
+  ],
+  "creative_additions": "A raised spine line down the blade so the fuller reads from above.",
+  "rounds": [
+    {
+      "n": 1,
+      "t": "First build and score."
+    },
+    {
+      "n": 2,
+      "t": "Camera search with roll, so the diagonal concept lines up; final render."
+    }
+  ],
+  "score": {
+    "iou": 0.909,
+    "camera": {
+      "yaw": -26.0,
+      "pitch": 68.0,
+      "lens": 35.0,
+      "roll": -19.0
+    },
+    "triangles": 420,
+    "dimensions_m": [
+      0.665,
+      0.069,
+      0.053
+    ],
+    "method": "silhouette IoU after bounding-box normalising both masks; camera found by grid search on the model, so a guide"
+  }
+}
