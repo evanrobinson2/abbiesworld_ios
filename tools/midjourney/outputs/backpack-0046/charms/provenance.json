@@ -1,0 +1,234 @@
+{
+  "study": "AW-STUDY-0046",
+  "subject": "Backpack charms (Meshy reference pictures)",
+  "generator": "Midjourney web (v7, 1:1 grids, not upscaled)",
+  "repo_copy": "JPEG, longest side 768 px, quality 85 (sips)",
+  "note": "tardigrade was picked earlier and is not part of this run",
+  "charms": [
+    {
+      "name": "gold-coin",
+      "prompt": "a faceted gold coin with a struck star, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "693a621f-60c9-4455-a1b6-f86f2dc939e6",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "gold-coin/gold-coin-0.jpg",
+        "gold-coin/gold-coin-1.jpg",
+        "gold-coin/gold-coin-2.jpg",
+        "gold-coin/gold-coin-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/693a621f-60c9-4455-a1b6-f86f2dc939e6/0_0.png",
+        "https://cdn.midjourney.com/693a621f-60c9-4455-a1b6-f86f2dc939e6/0_1.png",
+        "https://cdn.midjourney.com/693a621f-60c9-4455-a1b6-f86f2dc939e6/0_2.png",
+        "https://cdn.midjourney.com/693a621f-60c9-4455-a1b6-f86f2dc939e6/0_3.png"
+      ],
+      "sha256": [
+        "1fbb078c54136f414fbb67092483d53b127f954feb7931654b236e2e775a1724",
+        "df1c109d6ec44004f574a21157aff6a320641e455a55c61042c8e5fa706c8cf3",
+        "c343aa24df6d556366ea9b655de73778dbf5cf71562ca4c967a31ffe62b52283",
+        "dd1fb3f5baf017e188a93bb5ffe89d9b0b11954f6d7574cd65fb4e6434914fc3"
+      ]
+    },
+    {
+      "name": "star",
+      "prompt": "a faceted gold star, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "06c603a2-630c-4182-aee0-c005b0815022",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "star/star-0.jpg",
+        "star/star-1.jpg",
+        "star/star-2.jpg",
+        "star/star-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/06c603a2-630c-4182-aee0-c005b0815022/0_0.png",
+        "https://cdn.midjourney.com/06c603a2-630c-4182-aee0-c005b0815022/0_1.png",
+        "https://cdn.midjourney.com/06c603a2-630c-4182-aee0-c005b0815022/0_2.png",
+        "https://cdn.midjourney.com/06c603a2-630c-4182-aee0-c005b0815022/0_3.png"
+      ],
+      "sha256": [
+        "983cb617c11ab7894d2058d76201af48f861ee050ffebfb1cb68be81524bdf92",
+        "a7c906bc71cb064874c209227765767e00516942bbcc16c70cb6a75afdaa56ec",
+        "0e0e33d11c99b494b955821280a8e873ca3868fde4dd962a0c9fb2bfdcc7bd3a",
+        "35886e39ed072637fc0ae12af5f099fa01c1e3f0eef6ab4e831f811f0f6049d6"
+      ]
+    },
+    {
+      "name": "brass-key",
+      "prompt": "a brass key with a heart-shaped bow, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "f6e2af31-11ad-4d6d-b6db-32420002b3e9",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "brass-key/brass-key-0.jpg",
+        "brass-key/brass-key-1.jpg",
+        "brass-key/brass-key-2.jpg",
+        "brass-key/brass-key-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/f6e2af31-11ad-4d6d-b6db-32420002b3e9/0_0.png",
+        "https://cdn.midjourney.com/f6e2af31-11ad-4d6d-b6db-32420002b3e9/0_1.png",
+        "https://cdn.midjourney.com/f6e2af31-11ad-4d6d-b6db-32420002b3e9/0_2.png",
+        "https://cdn.midjourney.com/f6e2af31-11ad-4d6d-b6db-32420002b3e9/0_3.png"
+      ],
+      "sha256": [
+        "38a7d15de1e475acf6f274c1e2acf8145b5f01cf2d81a5edf8b10d7eae2172d0",
+        "46689f90ab7b56ebb89e13e2533dbf89eca2c11859ed64a9ea3703e14b501480",
+        "9a76452c2c33e5139893c4a354411f7119216c134298157954f5436a7e78049e",
+        "380873ae9e0e2cbd7d7f096b4557a96957b74708f0564a7da4d852db5d2cbac7"
+      ]
+    },
+    {
+      "name": "moon",
+      "prompt": "a gold crescent moon resting on two small white clouds, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "436ac2a3-9618-4450-98f7-b86c9f6ab563",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "moon/moon-0.jpg",
+        "moon/moon-1.jpg",
+        "moon/moon-2.jpg",
+        "moon/moon-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/436ac2a3-9618-4450-98f7-b86c9f6ab563/0_0.png",
+        "https://cdn.midjourney.com/436ac2a3-9618-4450-98f7-b86c9f6ab563/0_1.png",
+        "https://cdn.midjourney.com/436ac2a3-9618-4450-98f7-b86c9f6ab563/0_2.png",
+        "https://cdn.midjourney.com/436ac2a3-9618-4450-98f7-b86c9f6ab563/0_3.png"
+      ],
+      "sha256": [
+        "ee2b546f437ae12876b839cb6f599afc8c9a41d24fd49ad891aa95f05bbccf40",
+        "c8532f148f66cb34f8e6f1e1b1db8b3c8b550f21c911f5df9f41905246c16e43",
+        "f9b69509f1b91c0f90297070eb4fd8761c32c5b2d429854a33274f1feb5b3fd9",
+        "5c536ab8b58ac994a5ffe766d78769719f3703670f100bdeb6a54a08ac095ba4"
+      ]
+    },
+    {
+      "name": "floppy-disk",
+      "prompt": "a blue 3.5 inch floppy disk, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "18ea216f-ce0e-4bfe-868e-ccf0dc181058",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "floppy-disk/floppy-disk-0.jpg",
+        "floppy-disk/floppy-disk-1.jpg",
+        "floppy-disk/floppy-disk-2.jpg",
+        "floppy-disk/floppy-disk-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/18ea216f-ce0e-4bfe-868e-ccf0dc181058/0_0.png",
+        "https://cdn.midjourney.com/18ea216f-ce0e-4bfe-868e-ccf0dc181058/0_1.png",
+        "https://cdn.midjourney.com/18ea216f-ce0e-4bfe-868e-ccf0dc181058/0_2.png",
+        "https://cdn.midjourney.com/18ea216f-ce0e-4bfe-868e-ccf0dc181058/0_3.png"
+      ],
+      "sha256": [
+        "fe7309752febe92e89a033107267dd9931a7c05e052da25a98147e244d759c9e",
+        "13c19e136c01b4a9f1d9693e2c6eb114f46d184c71007dbfb21a7d813b6ba958",
+        "1a4c999dc07ee6bf99ed3fceb82e1a418a534f15df25421e5c0f0cc2cd73452c",
+        "b1d1cbb6c626f8cdcb63843f7cbe62db720afc5d4427791eff96fcfe51738050"
+      ]
+    },
+    {
+      "name": "heart",
+      "prompt": "a faceted red heart, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "b5833785-1194-43ab-93b6-1b4f79cf5216",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "heart/heart-0.jpg",
+        "heart/heart-1.jpg",
+        "heart/heart-2.jpg",
+        "heart/heart-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/b5833785-1194-43ab-93b6-1b4f79cf5216/0_0.png",
+        "https://cdn.midjourney.com/b5833785-1194-43ab-93b6-1b4f79cf5216/0_1.png",
+        "https://cdn.midjourney.com/b5833785-1194-43ab-93b6-1b4f79cf5216/0_2.png",
+        "https://cdn.midjourney.com/b5833785-1194-43ab-93b6-1b4f79cf5216/0_3.png"
+      ],
+      "sha256": [
+        "b6b9e64cd45089d029c7acebf1fa5d1e5541e555ebce08beeee270f730d10ab7",
+        "455288c75e8de285bab78836baf522faa807bde5216e81a94c947e92294d420a",
+        "27e84f7d71d6fade70121d9be09a44e31088c9c9e09cdda919583064f2d68d16",
+        "32b88db6ad28eab1002a6f53bced31252143d928dd56260fb325cc5c50b13d9d"
+      ]
+    },
+    {
+      "name": "bub",
+      "prompt": "a small black labrador dog with brown eyes and a red collar, standing, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "c0eaac68-a849-4343-83f9-148745424cb9",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "bub/bub-0.jpg",
+        "bub/bub-1.jpg",
+        "bub/bub-2.jpg",
+        "bub/bub-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/c0eaac68-a849-4343-83f9-148745424cb9/0_0.png",
+        "https://cdn.midjourney.com/c0eaac68-a849-4343-83f9-148745424cb9/0_1.png",
+        "https://cdn.midjourney.com/c0eaac68-a849-4343-83f9-148745424cb9/0_2.png",
+        "https://cdn.midjourney.com/c0eaac68-a849-4343-83f9-148745424cb9/0_3.png"
+      ],
+      "sha256": [
+        "6671487af8e783f296d63b51cd21ad721089012ebc335390e6f3810e42b55e8f",
+        "233dedc01d0ccfcb1e34678c26be858bc025c326447da84af4656328d6d1bb7a",
+        "cff1a70e6ce92ec280ee112c4bab6d46c82bff441363a06494a0ad163f795280",
+        "6fb5c39dbaefcb3729369ac710bb1cfba204786b4539133297c893475907614e"
+      ]
+    },
+    {
+      "name": "coffee-cup",
+      "prompt": "a takeaway coffee cup with a brown sleeve, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "c9a84b86-acc9-4bdc-8c73-2d99592306cf",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "coffee-cup/coffee-cup-0.jpg",
+        "coffee-cup/coffee-cup-1.jpg",
+        "coffee-cup/coffee-cup-2.jpg",
+        "coffee-cup/coffee-cup-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/c9a84b86-acc9-4bdc-8c73-2d99592306cf/0_0.png",
+        "https://cdn.midjourney.com/c9a84b86-acc9-4bdc-8c73-2d99592306cf/0_1.png",
+        "https://cdn.midjourney.com/c9a84b86-acc9-4bdc-8c73-2d99592306cf/0_2.png",
+        "https://cdn.midjourney.com/c9a84b86-acc9-4bdc-8c73-2d99592306cf/0_3.png"
+      ],
+      "sha256": [
+        "9285961653529746906efa5c0dfc9e7632d656545ee53f55f42acbb55c3e8cf9",
+        "ba2c057c466b7def760400d85333392db53a5720d6a8ab04ec4b108292a16f8e",
+        "1a2df38a11669886c164f948a4797fc6c26c2db4b0df46012cc9af2a1c3cf4ba",
+        "3b14967f95a7f5af60624c8ea746625270e3500ba756c49592fd77a58855dad4"
+      ]
+    },
+    {
+      "name": "rocket",
+      "prompt": "a red and white rocket with a round porthole and three fins, a single backpack charm, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, the charm alone centred on a plain warm cream background, no chain, no text, no logos --ar 1:1 --v 7",
+      "job_id": "f9d3bb50-a70d-4eb3-9f66-14ae578187f8",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "rocket/rocket-0.jpg",
+        "rocket/rocket-1.jpg",
+        "rocket/rocket-2.jpg",
+        "rocket/rocket-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/f9d3bb50-a70d-4eb3-9f66-14ae578187f8/0_0.png",
+        "https://cdn.midjourney.com/f9d3bb50-a70d-4eb3-9f66-14ae578187f8/0_1.png",
+        "https://cdn.midjourney.com/f9d3bb50-a70d-4eb3-9f66-14ae578187f8/0_2.png",
+        "https://cdn.midjourney.com/f9d3bb50-a70d-4eb3-9f66-14ae578187f8/0_3.png"
+      ],
+      "sha256": [
+        "7ea2f9ec587567b87e6b2f398c8346f9b896cbebdb932c4d29ea411de7700527",
+        "ca737f606341f8ce0a38bf2647a46df90774afaf7642783e7c0ebc16c98706a9",
+        "deaece32b3b6e3372c54be4715c0507919cc2bd942ccd68df81324e796cd129f",
+        "9434105db73bc9595781ddcbba2e9ddd87cc2b611f5b80212b4f0f82b82bd916"
+      ]
+    }
+  ]
+}
