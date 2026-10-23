@@ -108,7 +108,7 @@ function card(it) {
   else if (it.image) big = `<img class="single-big" src="${esc(it.image)}" alt="">`;
   if (it.glb) big += `<model-viewer src="${esc(it.glb)}" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="1" exposure="1.1" loading="lazy"></model-viewer>`;
   const acts = `<div class="acts">${it.link ? `<a class="btn" href="${esc(it.link)}" target="_blank" rel="noopener">Open ${esc(it.linkLabel || '')}</a>` : ''}<button class="btn ghost" data-done>${done[it.id] ? 'Bring back' : 'Done'}</button></div>`;
-  el.innerHTML = `${thumb}<div class="meta"><h2>${esc(it.title)}</h2><p class="ask">${esc(it.ask)}</p><div class="when"><span class="badge ${coming ? 'coming' : ''}">${coming ? 'on the way' : 'needs you'}</span>${ago(it.at)}</div></div>${coming ? '' : `<div class="detail">${big}${acts}</div>`}`;
+  el.innerHTML = `${thumb}<div class="meta"><h2>${esc(it.title)}</h2><p class="ask">${esc(it.ask)}</p><div class="when"><span class="badge ${coming ? 'coming' : ''}">${coming ? 'on the way' : it.models ? 'tap to review' : 'needs you'}</span>${ago(it.at)}</div></div>${coming ? '' : `<div class="detail">${big}${acts}</div>`}`;
   if (!coming) {
     el.addEventListener('click', e => {
       if (e.target.closest('a,model-viewer')) return;
@@ -116,6 +116,7 @@ function card(it) {
         if (done[it.id]) delete done[it.id]; else done[it.id] = Date.now();
         save(); render(); return;
       }
+      if (it.models) { location.href = `/models/?set=${encodeURIComponent(it.id)}`; return; }
       el.classList.toggle('open');
     });
   }
@@ -128,7 +129,7 @@ function render() {
   list.innerHTML = '';
   const live = items.filter(i => i.status !== 'done' && (showDone ? done[i.id] : !done[i.id]));
   live.sort((a, b) => new Date(b.at) - new Date(a.at));
-  live.forEach((it, n) => { const c = card(it); if (n === 0 && !showDone && it.status !== 'coming') c.classList.add('open'); list.append(c); });
+  live.forEach((it, n) => { const c = card(it); if (n === 0 && !showDone && it.status !== 'coming' && !it.models) c.classList.add('open'); list.append(c); });
   if (!live.length) list.innerHTML = `<p class="empty-all">${showDone ? 'Nothing marked done yet.' : 'All caught up.'}</p>`;
   const waiting = items.filter(i => i.status === 'waiting' && !done[i.id]).length;
   document.getElementById('count').textContent = waiting;
