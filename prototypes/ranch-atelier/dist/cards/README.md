@@ -31,8 +31,11 @@ millimetres) makes the in-game hand cards, the inspect view and the 600 ppi prin
     "flavour": "Shown in the inspect caption, never on the face.",
     "finish": "standard",           // optional: standard | shimmer | golden_hour | frost (defaults by tier)
     "artMode": "model",             // optional: force the 3D model when the card has both
-    "biome": "orchard",             // optional backdrop
+    "biome": "orchard",             // optional backdrop: ranch | orchard | garden | meadow | dusk | moon
+    "pattern": "barn-boards",       // optional frame pattern (see The look)
     "art": { "image": "/cards/art/cow-cut.png", "source": "/cards/art/cow.jpg",
+             "status": "final",     // an image ships only when someone approved it; otherwise PRELIMINARY
+             "outline": true,       // ink silhouette line round a cut-out or model (default on)
              "model": "/simulation-assets/organics/cow-idle.glb",
              "view": { "yaw": -28, "pitch": 16, "fill": 0.8, "lift": 0.46 } }
   }]
@@ -43,17 +46,35 @@ Icons: coin, milk, heart, egg, wheat, wood, star, apple, paw, sun, water, wool, 
 
 ## Rarity, art style and frame
 
-| Tier | Frame | Art style (rubric art mode) | Default finish |
+| Tier | Frame colour | Art style (rubric art mode) | Default finish |
 | --- | --- | --- | --- |
-| Seed | painted pine | specimen: subject on paper | standard |
-| Sprout | pine with green trim and brass caps | portal: painted ranch world | standard |
-| Bloom | lacquer with brass | portal | standard |
-| Harvest | gilded with filigree | shadowbox: world, subject, foreground grass | golden hour |
+| Seed | wheat | specimen: subject on a flat plate | standard |
+| Sprout | leaf green | portal: flat cel world | standard |
+| Bloom | sky blue | portal | standard |
+| Harvest | gold with plum line | shadowbox: world, subject, foreground grass | golden hour |
 | Sun | borderless, gold window | overlay + pop-out: the subject steps out of the window | shimmer |
+
+## The look
+
+Cel-shaded, never fake materials (Evan, 2026-10-23): flat colour, ink lines, one hard highlight on discs, no wood
+grain, metal, parchment, bevels, filigree, gradients, blur or grain. The frame carries one quiet pattern that says
+where the card lives: `barn-boards` (ranch), `sprout-rows` (garden, crops), `meadow-flowers` (meadow), `stars`
+(moon), `waves`, `cobbles` or `plain`. Order: `spec.pattern`, then `spec.tile` (or an id like `tile-meadow`), then
+crop cards get sprout rows, then the biome, then barn boards.
+
+Model art gets a cel render pass: toon materials with a three-step ramp, flat ambient plus one key light, ink lines
+where two parts meet, an ink silhouette and a crisp contact shadow. Cut-outs get the same ink silhouette.
+
+## The ship bar
+
+A card ships only when no check fails, the art is sharp enough for that output (300 ppi in print, the output's ppi
+in game), and the art is ours to ship: a game model rendered here, or an image with `art.status: "final"`. Anything
+else renders with a **PRELIMINARY · idea only** label across the art, `qc.ship` is false and `qc.preliminary` says
+why. Pass `allowPreliminary: false` to `renderCard` to throw instead.
 
 ## Quality check
 
-Every render returns a grade: **collection** (all checks pass), **playable** (warnings only) or **blocked**.
+Every render returns a grade and `qc.ship` (see The ship bar): **collection** (all checks pass), **playable** (warnings only) or **blocked**.
 Checks: name and rules fit at 8 pt or larger, 15 words or fewer on the face, reading level (warning only), PG word
 list, known icons, name length, two stats or fewer, everything inside the safe zone, art resolution at the output
 ppi, subject centred and sized for the art style, nothing clipped, and pop-out height (5–15% of the card).

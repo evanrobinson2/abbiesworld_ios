@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-cel-cards",
+      "date": "2026-10-23",
+      "title": "Cards in clean cel shading",
+      "line": "The cards dropped the fake wood, brass and parchment. Every card now shows the real in-game model, cel-shaded with ink lines, in a flat frame with a quiet pattern for its place: barn boards on the ranch, sprout rows in the garden, flowers in the meadow, stars on the moon. Any card that isn't ready says PRELIMINARY · idea only.",
+      "image": "/whats-new/2026-10-23-cel-cards.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
+      "threadTitle": "Card generator"
+    },
+    {
       "id": "2026-10-23-models-browser",
       "date": "2026-10-23",
       "title": "All the models, and Game mode",
