@@ -1,0 +1,11 @@
+{
+ "cap": 2000,
+ "total": 450,
+ "log": [
+  {
+   "what": "PC run 19:32Z: 12 astronaut suit models (360), 12 failed rigs (60, Meshy refunds failed tasks; counted anyway), tardigrade (30); ledger kept on the PC until it is pushed",
+   "credits": 450,
+   "at": "2026-10-23T19:50:00Z"
+  }
+ ]
+}
