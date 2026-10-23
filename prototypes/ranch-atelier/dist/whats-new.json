@@ -112,6 +112,17 @@
       "link": "/town"
     },
     {
+      "id": "2026-10-23-basement-games",
+      "date": "2026-10-23",
+      "title": "Games in Grace's basement",
+      "line": "A pocket game player on Grace's desk plays falling blocks in one-bit dither, and her DOS computer now has real games on disks: BLOCKS and DUSKBLADE, a sword-and-traps palace in our own style. Type GAMES.",
+      "image": "/whats-new/2026-10-23-basement-games.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
       "id": "2026-10-23-rig-hero",
       "date": "2026-10-23",
       "title": "Your hero, rigged",
