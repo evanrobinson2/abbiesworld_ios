@@ -9,9 +9,9 @@
   const getJSON = url => fetch(url, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
   const el = (tag, attrs = {}, ...children) => { const node = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === 'text') node.textContent = v; else if (k.startsWith('on')) node.addEventListener(k.slice(2), v); else node.setAttribute(k, v); } node.append(...children); return node; };
   const ago = iso => { const m = Math.round((Date.now() - Date.parse(iso)) / 60000); return !isFinite(m) ? '' : m < 1 ? 'just now' : m < 60 ? `${m} min ago` : `${Math.round(m / 60)} h ago`; };
-  // Version name: v1.<PR number of the live merge>.<local date>.<local time>, e.g. v1.181.2026.10.23.1248AM.
+  // Version name: v1.<PR number of the live merge or squash commit>.<local date>.<local time>, e.g. v1.181.2026.10.23.1248AM.
   const version = rel => {
-    const d = new Date(rel?.builtAt), pr = (String(rel?.message || '').match(/^Merge pull request #(\d+)/) || [])[1] || '0';
+    const d = new Date(rel?.builtAt), msg = String(rel?.message || ''), pr = (msg.match(/^Merge pull request #(\d+)/) || msg.split('\n')[0].match(/\(#(\d+)\)\s*$/) || [])[1] || '0';
     if (isNaN(d)) return 'v1.' + pr;
     const p2 = n => String(n).padStart(2, '0'), h = d.getHours() % 12 || 12;
     return `v1.${pr}.${d.getFullYear()}.${p2(d.getMonth() + 1)}.${p2(d.getDate())}.${h}${p2(d.getMinutes())}${d.getHours() < 12 ? 'AM' : 'PM'}`;
