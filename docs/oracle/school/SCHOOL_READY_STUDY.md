@@ -34,6 +34,27 @@ closing lines, and the voiced lines, keyed by text. Young Daddy has a blond mop 
 - **Framing in metres.** `frameFov(halfW, halfH, dist)` caps at aspect 1, so a portrait phone sees the same climb as a
   laptop. No views are blocked by poles, parked cars or the sign.
 
+## Round two: the school and Sunday Toon (Evan, 12:47Z / 8:47 AM)
+
+> the school sucks really needs work, and you need to try that toon shader you just built
+
+- **The building follows the key art.** A thin slate metal roof edge replaces the cream slab. The sun is lower and
+  more orange and rakes across the wall. A tree on the lawn throws its leaf shadow over the climb, and the low wing
+  has classroom windows facing the street.
+- **It reads as a school from the street.** It has a brick boiler chimney, a flag on a pole, swings and a slide,
+  chalk hopscotch on the yard, and a chain-link run off the wall (wire cut from an alpha map, not a grey sheet).
+- **Sunday Toon** is the default look (`simulations/toon-kit.mjs`). It ports the Shaders article's toon set as an
+  `onBeforeCompile` patch on three's own materials, so maps, shadows and fog keep working:
+  - The light is wrapped, then falls into three soft bands per light.
+  - Indirect light is tinted violet.
+  - A warm rim picks out edges.
+  - `?look=ink` adds ink shells to the kid, bub and the cars. `?look=plain` turns the look off.
+  - The article suggested Ink Toon for the school. Sunday was chosen as the default because Evan's five favourite
+    games use no outlines; Ink stays one switch away.
+- Lesson: the toon tint has to go after `lights_fragment_end`, because the hemisphere and environment light only
+  land in `indirectDiffuse` there. Tinting earlier does nothing. Test a new shader patch with absurd values (green
+  tint, blue rim) before tuning it.
+
 ## The memory-places review, applied
 
 - **The dog is the hook.** When the ball lands on the roof, bub looks up and whines (`SFX.whine`). Before this, he
