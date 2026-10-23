@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 690,
+ "total": 730,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -276,6 +276,16 @@
    "what": "charm-moon 3d",
    "credits": 20,
    "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-rocket 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:59Z"
+  },
+  {
+   "what": "charm-star 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:59Z"
   }
  ]
 }
