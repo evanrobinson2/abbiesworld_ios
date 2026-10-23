@@ -20,5 +20,19 @@
    ]
   }
  ],
- "credits": 20
+ "credits": 20,
+ "symmetrize": {
+  "mirror_axis": "z",
+  "plane": -0.0222,
+  "asymmetry_before_m": 0.05425,
+  "asymmetry_after_m": 0.0,
+  "length_m_units": [
+   1.89,
+   1.167,
+   0.646
+  ],
+  "faces_full": 43342,
+  "faces_viewer": 15189,
+  "tool": "Blender 5.2.3 LTS"
+ }
 }

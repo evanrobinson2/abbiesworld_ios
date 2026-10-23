@@ -1,17 +1,28 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
-   {
-     "id": "2026-10-23-moon-heroes-pack",
-     "date": "2026-10-23",
-     "title": "Real astronauts on the Moon",
-     "line": "The Moon Mission crew are now the Meshy astronauts, and Abbie wears her backpack with her jingling charms on the Moon.",
-     "image": "/whats-new/2026-10-23-moon-heroes-pack.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
-     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
-     "tour": false,
-     "link": "/studies/moon-mission/world.html?beat=touchdown"
-   },
+    {
+      "id": "2026-10-23-aurora-mk2-ships",
+      "date": "2026-10-23",
+      "title": "Aurora Mk 2 in 3D: eight ships",
+      "line": "Meshy turned all eight ship pictures into 3D models, and each one is mirrored so it is exactly symmetric. Spin each beside its picture and tell me which one to build out.",
+      "image": "/whats-new/2026-10-23-aurora-mk2-ships.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJNoFLSpdq2Dfxnhw1Dt7fJ",
+      "threadTitle": "Aurora Mk 2 spaceship",
+      "tour": false,
+      "link": "/studies/spaceships/models.html"
+    },
+    {
+      "id": "2026-10-23-moon-heroes-pack",
+      "date": "2026-10-23",
+      "title": "Real astronauts on the Moon",
+      "line": "The Moon Mission crew are now the Meshy astronauts, and Abbie wears her backpack with her jingling charms on the Moon.",
+      "image": "/whats-new/2026-10-23-moon-heroes-pack.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+      "tour": false,
+      "link": "/studies/moon-mission/world.html?beat=touchdown"
+    },
     {
       "id": "2026-10-23-backpack-worn",
       "date": "2026-10-23",

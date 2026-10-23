@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aurora Mk 2 Ships</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* AW-STUDY-0035, Aurora Mk 2: the eight Meshy ships, each beside the picture it came from, same camera.
+   Shows only the models; the viewer is for the grown-up workbench, not the play screen. */
+:root{--bg:#0b0f19;--paper:#121828;--raised:#1a2236;--ink:#e9edf5;--muted:#9aa5ba;--line:#26304a;--orange:#ff8a3d;--cyan:#59c8ff;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef1f6;--paper:#fff;--raised:#f3f5f9;--ink:#141a26;--muted:#566176;--line:#d5dbe6;--orange:#c85a10;--cyan:#0b6fa8;color-scheme:light}}
+:root[data-theme="light"]{--bg:#eef1f6;--paper:#fff;--raised:#f3f5f9;--ink:#141a26;--muted:#566176;--line:#d5dbe6;--orange:#c85a10;--cyan:#0b6fa8;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "IBM Plex Sans",system-ui,sans-serif;padding:24px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px))}
+main{max-width:1180px;margin:0 auto;display:grid;gap:18px}
+h1{font:700 clamp(30px,6vw,52px)/1.05 "Chakra Petch",system-ui,sans-serif;margin:0}
+p{margin:0;max-width:70ch}.muted{color:var(--muted)}a{color:var(--cyan)}
+.pick{display:flex;flex-wrap:wrap;gap:8px}
+.pick button{font:600 14px "IBM Plex Sans",system-ui,sans-serif;color:var(--ink);background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#111}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.pair{grid-template-columns:minmax(0,1fr)}}
+.pair figure{margin:0;display:grid;gap:6px}
+.pair img,.view{width:100%;aspect-ratio:10/7;object-fit:contain;border-radius:14px;border:1px solid var(--line);background:#05070d;display:block}
+.view{position:relative;overflow:hidden}.view canvas{width:100%;height:100%;display:block}
+figcaption{font-size:13px;color:var(--muted)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.thumbs button{padding:0;border:2px solid var(--line);border-radius:10px;overflow:hidden;background:none;cursor:pointer}
+.thumbs button[aria-pressed="true"]{border-color:var(--orange)}
+.thumbs img{width:100%;aspect-ratio:10/7;object-fit:cover;display:block}
+.facts{font:500 13px "IBM Plex Sans",system-ui,sans-serif;color:var(--muted)}
+</style></head><body><main>
+<h1>Aurora Mk 2, eight ships</h1>
+<p class="muted">Each concept picture went to Meshy untextured with symmetry on, then through a Blender mirror pass: the better half of the hull is kept and mirrored, so every ship is exactly left to right symmetric. Drag to spin, scroll to zoom. <a href="index.html#concepts">Back to the concept art</a>.</p>
+<div class="pick" id="pick" role="group" aria-label="Pick a ship"></div>
+<div class="pair"><figure><img id="pic" alt="The concept picture this ship came from"><figcaption id="capPic"></figcaption></figure>
+<figure><div class="view" id="view"></div><figcaption id="capView"></figcaption></figure></div>
+<p class="facts" id="facts"></p>
+<div class="thumbs" id="thumbs"></div>
+</main>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+const SHIPS=[['1_0','Key art 1'],['1_1','Key art 2'],['1_2','Key art 3'],['1_3','Key art 4'],['2_0','Design sheet 1'],['2_1','Design sheet 2'],['2_2','Design sheet 3'],['2_3','Design sheet 4']];
+const $=id=>document.getElementById(id);
+const host=$('view');
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));host.appendChild(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x0a0e18);
+scene.add(new THREE.HemisphereLight(0xdfe8ff,0x2a2230,1.1));
+const sun=new THREE.DirectionalLight(0xfff1dc,2.4);sun.position.set(4,6,3);scene.add(sun);
+const rim=new THREE.DirectionalLight(0x59c8ff,1.0);rim.position.set(-4,2,-5);scene.add(rim);
+const cam=new THREE.PerspectiveCamera(40,10/7,.05,50);cam.position.set(2.6,1.2,3.0);
+const ctl=new OrbitControls(cam,renderer.domElement);ctl.enableDamping=true;ctl.target.set(0,0,0);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;ctl.autoRotate=!reduce;ctl.autoRotateSpeed=1.4;
+const clay=new THREE.MeshStandardMaterial({color:0xe8e2d6,roughness:.62,metalness:.08,flatShading:false});
+const loader=new GLTFLoader();let cur=null;
+function size(){const w=host.clientWidth,h=host.clientHeight||w*.7;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+renderer.setAnimationLoop(()=>{ctl.update();renderer.render(scene,cam)});
+ctl.addEventListener('start',()=>{ctl.autoRotate=false});
+function show(i){
+  const [k,name]=SHIPS[i];
+  document.querySelectorAll('#pick button,#thumbs button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.i===i)));
+  $('pic').src=`models/aurora_${k}.jpg`;$('capPic').textContent=`${name}: the concept picture (Midjourney)`;
+  $('capView').textContent='The Meshy ship, mirrored (drag to spin)';
+  $('facts').textContent='Loading the ship…';
+  loader.load(`models/aurora_${k}.glb`,g=>{
+    if(cur)scene.remove(cur);
+    cur=g.scene;cur.traverse(o=>{if(o.isMesh){o.material=clay}});
+    const b=new THREE.Box3().setFromObject(cur),c=b.getCenter(new THREE.Vector3()),s=b.getSize(new THREE.Vector3());
+    cur.position.sub(c);const f=2.4/Math.max(s.x,s.y,s.z);cur.scale.setScalar(f);scene.add(cur);
+    ctl.target.set(0,0,0);
+    $('facts').textContent=`15,000 triangles, symmetric to the weld, one mesh. Cleanup into named parts is the next step.`;
+  },undefined,()=>{$('facts').textContent='This ship did not load.'});
+}
+SHIPS.forEach(([k,name],i)=>{
+  const b=document.createElement('button');b.textContent=name;b.dataset.i=i;b.onclick=()=>show(i);$('pick').appendChild(b);
+  const t=document.createElement('button');t.dataset.i=i;t.setAttribute('aria-label',name);const im=document.createElement('img');im.src=`models/aurora_${k}.jpg`;im.alt='';t.appendChild(im);t.onclick=()=>show(i);$('thumbs').appendChild(t);
+});
+show(0);
+</script></body></html>
