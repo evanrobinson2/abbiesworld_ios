@@ -19,7 +19,8 @@ export const ASSUMPTIONS = {
  talus: .62,            // slope (rise/run) above which rock sheds
  river: 1.1e6,          // contributing area, m^2, where a stream shows as open water
  treeline: 620,         // metres above the lake where spruce gives way to tundra
- snowline: 820          // metres above the lake where snow lies on gentle ground
+ snowline: 820,         // metres above the lake where snow lies on gentle ground
+ site: [-925, 25]       // the camp the land chose on its first run (chooseSite), pinned so the board stays put
 };
 const A = ASSUMPTIONS;
 
@@ -77,7 +78,13 @@ function drain(N, h, cell) {
  return { fill, to, area, order };
 }
 
-export function makeBasin(seed = 7) {
+// Edits are changes a person asked for, applied to the eroded land before the water settles, so the rivers
+// respect them: a 'lake' edit scoops a bowl, the flood fills it to its spill point, streams feed it and its outlet
+// drains it. The camp site is chosen from the natural land first, so edits never move the board.
+export const EDITS = [
+ { kind: 'lake', x: -1172, z: 387, r: 210, depth: 9, outlet: [.7, -.7], by: 'Evan', at: '2026-10-23T05:21:59Z', note: 'carve that area into a lake: the meadow between the two stream bends' }
+];
+export function makeBasin(seed = 7, { edits = EDITS } = {}) {
  const t0 = Date.now(), N = A.N, cell = A.cell, half = (N - 1) * cell / 2, h = new Float32Array(N * N), U = uplift(seed);
  const X = i => (i % N) * cell - half, Z = i => ((i / N) | 0) * cell - half;
  for (let i = 0; i < N * N; i++) h[i] = U(X(i), Z(i));
@@ -96,6 +103,18 @@ export function makeBasin(seed = 7) {
   h.set(next);
  }
  D = drain(N, h, cell);
+ const site = A.site ? Math.round((A.site[1] + half) / cell) * N + Math.round((A.site[0] + half) / cell) : chooseSite(N, cell, h, D, X, Z);
+ for (const e of edits) if (e.kind === 'lake') {
+  // The water stands at the meadow's own height; where a stream had cut the rim, a low moraine sill holds it,
+  // and the stream leaves over that sill.
+  const level = e.level ?? (() => { const v = []; for (let i = 0; i < N * N; i++) if (Math.hypot(X(i) - e.x, Z(i) - e.z) < e.r) v.push(h[i]); v.sort((a, b) => a - b); return v[v.length >> 1]; })();
+  const { fbm } = noise(seed ^ 0x1a4e), out = Math.atan2(e.outlet?.[0] ?? 0, e.outlet?.[1] ?? -1);
+  for (let i = 0; i < N * N; i++) { const dx = X(i) - e.x, dz = Z(i) - e.z, a = Math.atan2(dx, dz), d = Math.hypot(dx, dz) / (e.r * (.8 + .45 * fbm(Math.cos(a) * 1.3 + 4, Math.sin(a) * 1.3 + 9, 3)));
+   if (d < 1) h[i] = Math.min(h[i], level - .5 - e.depth * Math.cos(d * Math.PI / 2) ** 1.2);
+   else if (d < 1.3) h[i] = Math.max(h[i], level + (Math.cos(a - out) > .5 ? .4 : 1.2)); }   // the shore holds the water; it leaves over the low sill on the outlet side
+  e.level = +level.toFixed(2);
+ }
+ if (edits.length) D = drain(N, h, cell);
  // Water: the lake below its level, tarns where the filled surface stands above the ground, rivers by catchment.
  const water = new Float32Array(N * N).fill(-1e9), wet = new Float32Array(N * N), slope = new Float32Array(N * N);
  let rivers = 0, tarns = 0;
@@ -104,23 +123,28 @@ export function makeBasin(seed = 7) {
   const gx = (h[y * N + Math.min(N - 1, x + 1)] - h[y * N + Math.max(0, x - 1)]) / (2 * cell), gz = (h[Math.min(N - 1, y + 1) * N + x] - h[Math.max(0, y - 1) * N + x]) / (2 * cell);
   slope[c] = Math.hypot(gx, gz);
   if (h[c] < A.lake) { water[c] = A.lake; continue; }
-  const pond = D.fill[c] - h[c]; if (pond > 2.5 && D.fill[c] > A.lake + 5) { water[c] = D.fill[c]; tarns++; continue; }
+  const pond = D.fill[c] - h[c]; if (pond > (edits.some(e => Math.hypot(X(c) - e.x, Z(c) - e.z) < e.r * 1.4) ? .3 : 2.5) && D.fill[c] > A.lake + 5) { water[c] = D.fill[c]; tarns++; continue; }
   if (D.area[c] > A.river) { const depth = Math.min(3, .6 + 1.2 * Math.log10(D.area[c] / A.river + 1)); h[c] -= depth; water[c] = h[c] + depth * .8; rivers++; }
  }
  for (let c = 0; c < N * N; c++) wet[c] = Math.min(1, Math.log10(D.area[c] / (cell * cell)) / 3.4);
  // Where the river leaves the valley and the main stem.
  let mouth = -1; for (let c = 0; c < N * N; c++) if (water[c] > -1e8 && h[c] >= A.lake && D.to[c] >= 0 && h[D.to[c]] < A.lake && (mouth < 0 || D.area[c] > D.area[mouth])) mouth = c;
- // A camp: flat valley floor, a short walk from the river, the lake in view down the valley.
- let site = -1, best = -Infinity;
- for (let c = 0; c < N * N; c++) { if (water[c] > -1e8 || h[c] < 3 || h[c] > 120) continue; const x = X(c), z = Z(c);
-  let flat = 0; for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++) { const j = c + dy * N + dx; if (j >= 0 && j < N * N) flat = Math.max(flat, slope[j]); }
-  let river = 1e9; for (let dy = -16; dy <= 16; dy += 2) for (let dx = -16; dx <= 16; dx += 2) { const j = c + dy * N + dx; if (j >= 0 && j < N * N && water[j] > -1e8 && h[j] >= A.lake) river = Math.min(river, Math.hypot(dx, dy) * cell); }
-  const toShore = z - A.shore, score = -flat * 40 - Math.abs(river - 180) / 60 - Math.abs(toShore - 1300) / 300 - Math.abs(x) / 900;
-  if (score > best) { best = score; site = c; } }
  const lakeArea = [...water].filter((w, i) => w === A.lake && h[i] < A.lake).length * cell * cell;
- return { seed, N, cell, half, h, water, wet, slope, area: D.area, to: D.to, mouth, site, siteXZ: [X(site), Z(site)], siteHeight: h[site],
+ return { seed, N, cell, half, h, edits, water, wet, slope, area: D.area, to: D.to, mouth, site, siteXZ: [X(site), Z(site)], siteHeight: h[site],
   uplift: U, ms: Date.now() - t0,
   facts: { rivers, tarns, lakeKm2: +(lakeArea / 1e6).toFixed(1), peak: Math.round(Math.max(...h)), mouthFlowKm2: mouth >= 0 ? +(D.area[mouth] / 1e6).toFixed(1) : 0 } };
+}
+
+// A camp: flat valley floor, a short walk from the river, the lake in view down the valley. Judged on the natural land.
+function chooseSite(N, cell, h, D, X, Z) {
+ const river = c => D.area[c] > A.river && h[c] >= A.lake, slope = c => { const x = c % N, y = (c / N) | 0; return Math.hypot((h[y * N + Math.min(N - 1, x + 1)] - h[y * N + Math.max(0, x - 1)]) / (2 * cell), (h[Math.min(N - 1, y + 1) * N + x] - h[Math.max(0, y - 1) * N + x]) / (2 * cell)); };
+ let site = -1, best = -Infinity;
+ for (let c = 0; c < N * N; c++) { if (river(c) || h[c] < 3 || h[c] > 120 || D.fill[c] - h[c] > 2.5) continue; const x = X(c), z = Z(c);
+  let flat = 0; for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++) { const j = c + dy * N + dx; if (j >= 0 && j < N * N) flat = Math.max(flat, slope(j)); }
+  let near = 1e9; for (let dy = -16; dy <= 16; dy += 2) for (let dx = -16; dx <= 16; dx += 2) { const j = c + dy * N + dx; if (j >= 0 && j < N * N && river(j)) near = Math.min(near, Math.hypot(dx, dy) * cell); }
+  const toShore = z - A.shore, score = -flat * 40 - Math.abs(near - 180) / 60 - Math.abs(toShore - 1300) / 300 - Math.abs(x) / 900;
+  if (score > best) { best = score; site = c; } }
+ return site;
 }
 
 // Ground cover by elevation, slope and wetness: the colours the view paints and where the trees grow.
