@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<title>AW-STUDY-0026 - The School Jump</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Evan's memory of climbing his old school at dusk, told in a few minutes and built as a playable game: a first-person climb, an iso roof, 31 tennis balls for the dog, a hang-drop and a gold memory coin.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* The school jump keeps the game's own look: dusk brick, headlight gold, the basement's VT323 for its voice. */
+:root{--bg:#1d1726;--paper:#29203a;--ink:#f3e9dc;--muted:#b3a5b8;--line:#43365a;--accent:#ffcf6a;--brick:#e07a50;
+ --display:"VT323","Courier New",monospace;--body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+:root[data-theme="light"]{--bg:#f6efe6;--paper:#fffaf3;--ink:#2a2230;--muted:#6f6377;--line:#e0d3c4;--accent:#a8641a;--brick:#a8462a;color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);padding:20px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;letter-spacing:.02em;text-wrap:balance}
+h1{font-size:clamp(44px,8vw,76px);line-height:.9;color:var(--accent)} h2{font-size:34px;line-height:1}
+p{margin:0;max-width:68ch} .muted{color:var(--muted)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--brick)}
+header,section{display:grid;gap:14px}
+.play{position:relative;display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:#000}
+.play img{width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated}
+.play span{position:absolute;left:50%;top:50%;translate:-50% -50%;width:84px;height:84px;border-radius:50%;background:rgba(255,207,106,.92);box-shadow:0 10px 40px rgba(255,190,90,.45)}
+.play span::after{content:"";position:absolute;left:33px;top:24px;border-left:28px solid #2a1d0c;border-top:18px solid transparent;border-bottom:18px solid transparent}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+figure img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;display:block;background:#000;image-rendering:pixelated}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
+@media (max-width:700px){.pair{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+ <header>
+  <div class="eyebrow">AW-STUDY-0026</div>
+  <h1>The School Jump</h1>
+  <p class="muted">A memory of climbing the old school at dusk, told in a few minutes on the night of 2026-10-23 and built as a game. It is a super-stylized version: no real names, no photos of the real building, and the gas pipe became a drainpipe.</p>
+ </header>
+ <a class="play" href="play.html" aria-label="Play the school jump"><img src="img/roof.jpg" alt="The iso roof at dusk: the kid on the roof edge, air handlers to hide behind, the street with a passing car"><span></span></a>
+ <section>
+  <h2>How it plays</h2>
+  <div class="pair">
+   <figure><img src="img/door.jpg" alt="First person at the steel door: hinges, knob, the mesh grate above"><figcaption>1. The north-west wall, first person, in the basement's pixel look.</figcaption></figure>
+   <figure><img src="img/climb.jpg" alt="Two small hands on the door frame and grate, the drainpipe and conduit above"><figcaption>2. Hand over hand: hinges, knob, door frame, grate, drainpipe, conduit.</figcaption></figure>
+  </div>
+  <ol>
+   <li><b>The climb.</b> Tap a hold to grab it. Holds you can reach have a worn shine. A wrong grab or the wobbly lamp tires your arms: the view sways, you breathe harder, your little inner voice cheers you on. Too many and you slide down and start again.</li>
+   <li><b>Over the top.</b> The camera rises over the coping from where your hands were and keeps going up into the iso roof. No cut.</li>
+   <li><b>The roof.</b> Tap to walk. 21 tennis balls on the main roofs and 5 on the gym. Carry three at a time; tap your dog in the field to throw one down. The pile by the dog is the count.</li>
+   <li><b>The cars.</b> One every ten seconds, alternating directions, so you can learn the rhythm. If a headlight is on you, they see you: the car brakes, its tail lights flare, a heartbeat starts and a ring at your feet fills. Stay seen two seconds and a grown-up shouts you off the roof. Walls, the stairwell and air handlers cast headlight shadows to hide in.</li>
+   <li><b>The gym and the hang-drop.</b> Climb the gym wall, then hang off its edge. The one overlay, a small glass timing bar, shows only while you hang. Let go in the gold zone to drop onto the entrance canopy, where the last five balls and the gold coin wait.</li>
+   <li><b>The gold coin.</b> The coins are Daddy's core memories. It lifts out of the world toward you, turns in a burst of light and sparkles to a chiming fanfare, and is kept. It counts with Grace's basement coins.</li>
+   <li><b>The Hollywood ending.</b> Climb the small wall back to the main roof, then the same way home: conduit, grate, door, past the hydro cage under its sheet-metal hood. Feet on the grass, dog at your side. The alternate ending is still to come.</li>
+  </ol>
+ </section>
+ <section>
+  <h2>How it shows information</h2>
+  <ul>
+   <li>Diegetic: headlights sweep the roof on a steady rhythm, engines rise before a car arrives, the dog's pile grows, the lamp rattles when it's loose.</li>
+   <li>Meta: tired arms are breathing, sway and trembling hands; being seen is a heartbeat; the coin reward is a feeling, not a label.</li>
+   <li>Spatial: the shine on reachable holds and the ring at your feet when a car is looking.</li>
+   <li>Overlay: only the hang-drop timing bar, because the timing has to be exact. Zero words on screen; the voice speaks.</li>
+  </ul>
+ </section>
+</div>
+</html>
