@@ -119,7 +119,7 @@ async function openPop() {
     pop.querySelector('.aw-bp-stage').innerHTML = `<strong>In my backpack</strong>${list.length ? `<ul>${list.map(i => `<li>${iconHtml(i.icon, 'ic')}<b>${esc(i.name)}</b></li>`).join('')}</ul>` : '<p>Nothing yet.</p>'}`;
   }
 }
-function closePop() { if (!pop || pop.hidden) return; view?.close(); if (pop.classList.contains('dressing')) { pop.classList.remove('dressing'); view?.dressUp(false); } setTimeout(() => { if (pop && !view?.isOpen) pop.hidden = true; }, 420); }
+function closePop() { document.querySelectorAll('.aw-bp-ghost').forEach(g => g.remove()); if (!pop || pop.hidden) return; view?.close(); if (pop.classList.contains('dressing')) { pop.classList.remove('dressing'); view?.dressUp(false); } setTimeout(() => { if (pop && !view?.isOpen) pop.hidden = true; }, 420); }
 
 // ---------- charms: a new one jingles onto the backpack ----------
 let charmQueue = [], charmBusy = false;
