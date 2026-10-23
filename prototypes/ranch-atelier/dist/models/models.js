@@ -88,6 +88,8 @@ const ICON = {
   plus:'<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
 };
 const ico = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
+// Names read in Title Case (Evan, 03:51Z); small joining words stay lower case.
+const titleCase = s => String(s).replace(/\S+/g, (w, i) => i && /^(a|an|and|at|for|in|of|on|or|the|to|with)$/i.test(w) ? w.toLowerCase() : w[0].toUpperCase() + w.slice(1));
 const FAIR = {fair:'Fair', close:'Close', off:'Off'};
 const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
 const motifFor = m => { try { const v = localStorage.getItem('aw-motif'); if (v) return v; } catch {} return /paper warrior|roman/i.test(m.group || '') ? 'rome' : 'default'; };
@@ -97,7 +99,7 @@ function topbar(m, seq, i){
   return `<header class="awbar">
     <a class="aw" href="/sandbox" aria-label="Abbie’s World">AW</a>
     <div class="nm"><button type="button" class="peb" data-step="-1" aria-label="Previous model" ${i <= 0 ? 'disabled' : ''}>${ico('left')}</button>
-      <h1>${esc(m.name)}</h1>
+      <h1>${esc(titleCase(m.name))}</h1>
       <button type="button" class="peb" data-step="1" aria-label="Next model" ${i >= seq.length - 1 ? 'disabled' : ''}>${ico('right')}</button></div>
     <div class="tools">
       <div class="ctrs" role="group" aria-label="Which models">${counter('todo','To look at')}${counter('accept','Kept')}${counter('adjust','Notes sent')}${counter('reject','Rejected')}</div>
@@ -124,26 +126,37 @@ function review(){
   <article class="desk2">
     ${r ? `<p class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></p>` : ''}
     <div class="pair2">
-      <figure><figcaption>Inspiration</figcaption><div class="sq2"><img src="${esc(m.urls.ref)}" alt="The inspiration for the ${esc(m.name.toLowerCase())}">${dots}</div></figure>
-      <figure><figcaption>Model</figcaption><div class="sq2"><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
+      <figure class="print"><div class="sq2 pic"><span class="inset">Inspiration</span><img src="${esc(m.urls.ref)}" alt="The inspiration for the ${esc(m.name.toLowerCase())}">${dots}</div>${m.ask || m.subject ? `<button type="button" class="said" data-said aria-label="Show the whole prompt">“${esc(m.ask || m.subject)}”</button>` : ''}</figure>
+      <figure><div class="sq2 alive"><span class="inset">Model</span><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
         auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.8" exposure="0.8" environment-image="neutral">${spots}</model-viewer>
         <div class="chalk" aria-hidden="true"><svg viewBox="0 0 150 110"><path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/></g></svg></div></div></figure>
     </div>
+    <div class="decide"><span></span>
+    <div class="thumb" role="group" aria-label="Decide">
+      <button type="button" class="tb reject" data-verdict="reject" aria-label="Reject">${ico('reject')}</button>
+      <button type="button" class="tb chat" id="chat" aria-label="Talk or type a note">${ico('mic')}</button>
+      <button type="button" class="tb accept" data-verdict="accept" aria-label="Keep it">${ico('accept')}</button>
+    </div>
+    </div>
     ${fp.length ? `<ol class="focal">${fp.map(f => `<li data-fp="${+f.n}"><span class="fp ${esc(f.verdict)}">${+f.n}</span><b>${esc(f.label)}</b><em class="${esc(f.verdict)}">${FAIR[f.verdict] || ''}</em><span>${esc(f.note)}</span></li>`).join('')}</ol>` : ''}
-    ${m.ask || m.subject ? `<p class="ask">“${esc(m.ask || m.subject)}”</p>` : ''}
     <div class="notes2">${(m.good || []).length ? `<div><h2>What matches</h2><ul>${m.good.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}${(m.off || []).length ? `<div><h2>What is off</h2><ul>${m.off.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}</div>
     <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}"><img src="${esc(x.urls.ref)}" alt="" loading="lazy"><i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
-  </article>
-  <div class="thumb" role="group" aria-label="Decide">
-    <button type="button" class="tb reject" data-verdict="reject" aria-label="Reject">${ico('reject')}</button>
-    <button type="button" class="tb chat" id="chat" aria-label="Talk or type a note">${ico('mic')}</button>
-    <button type="button" class="tb accept" data-verdict="accept" aria-label="Keep it">${ico('accept')}</button>
-  </div>`;
+  </article>`;
   const on = root.querySelector('.strip .on'); if (on){ const st = on.parentElement; st.scrollLeft = on.offsetLeft - st.clientWidth / 2 + on.clientWidth / 2; }
   placeSpots(root.querySelector('model-viewer'), fp);
+  laserPrint(root.querySelector('.sq2.alive'));
   root.querySelector('model-viewer').addEventListener('pointerdown', () => root.querySelector('.chalk')?.classList.add('gone'), {once:true});
 }
 // Focal points on the model sit at fractions of its bounding box ("at": x, y, z from -0.5 to 0.5, +z facing the camera).
+// The model prints itself out of the picture: a half-second laser line sweeps up as it appears (Evan, 03:52Z).
+function laserPrint(box){
+  if (!box) return;
+  const mv = box.querySelector('model-viewer'), go = () => { if (box.classList.contains('printing') || box.classList.contains('printed')) return; box.classList.add('printing'); setTimeout(() => box.classList.replace('printing', 'printed'), 560); };
+  box.classList.add('unprinted');
+  mv.addEventListener('load', go, {once:true});
+  setTimeout(go, 6000);
+}
+
 function placeSpots(mv, fp){
   if (!mv || !fp.length) return;
   mv.addEventListener('load', () => {
@@ -348,6 +361,7 @@ function stopListening(){ listening = false; setMic(false); if (rec) try { rec.s
 // ---------- events ----------
 document.addEventListener('click', e => {
   const t = e.target.closest('button, a[data-open]'); if (!t) return;
+  if (t.hasAttribute('data-said')){ t.classList.toggle('open'); return; }
   if (t.dataset.flip){ e.preventDefault(); flipped.has(t.dataset.flip) ? flipped.delete(t.dataset.flip) : flipped.add(t.dataset.flip); render(); }
   else if (t.dataset.show){ gridShow = t.dataset.show; flipped.clear(); render(); }
   else if (t.dataset.open){ e.preventDefault(); cur = t.dataset.open; view = 'review'; render(true); scrollTo({top:0}); }

@@ -56,3 +56,21 @@ New motifs are made by Claude with the `motif-maker` skill, on request; there is
 
 Evan rejected the four drawn options (little world, snow globe, house A, planet o). For now the mark is plain "AW".
 The old badge stays as "Abbie's Ranch", the place.
+
+## The model card as a callout (Evan, 2026-10-23 03:38Z)
+"This model card is actually perfect as a call out from the simple view when you click on something in game."
+- `prototypes/ranch-atelier/dist/look/callout.mjs` + `callout.css`: `openCallout({name, kind, description, art, glb | hero, focal, anchor})`.
+  The same card as /models: name, inspiration and live model as equal squares, numbered focal points marked fair, close or off.
+- Spatial presentation layer: plain DOM beside the tapped thing with a tail pointing at it, never in the scene. No scrim. Phones get a
+  bottom sheet at thumb height. Escape or × closes it. Demo: /look/callout-demo.html.
+- Sandbox v2 owns the tap hookup (`ranch:inspect` events from simulations/lab.mjs) and ships it.
+
+## Model page, tighter (Evan, 2026-10-23 03:48Z)
+Labels sit inset inside the frames; the Reject, Chat and Keep cluster sits right under the two squares (not pinned to the screen
+bottom); less padding everywhere.
+
+## Coming alive (Evan, 2026-10-23 03:51-03:52Z)
+"It indicates a transformation from a picture and description of a thing to the thing itself, coming alive out of the picture."
+- The inspiration is a print: the image and its prompt share one frame. The model has no frame and stands free on the page.
+- Labels ("Inspiration", "Model") use the title's type, Title Case, no chips or shadows. Names are Title Case.
+- The model appears with a 0.5 s laser print, bottom to top (skipped under reduced motion).
