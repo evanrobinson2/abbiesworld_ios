@@ -53,8 +53,23 @@ deleted. Nothing from them is in the repo or in R2.
 - Adapts: one switch drives the bulb, cone, dust, hum and the hall light's share.
 - Tour: no for now; it joins the tour when the café's office door leads here.
 
+## Round 2 (2026-10-23)
+Evan's asks, all built: "make the dos actual", a dark start with her thought ("It's dark in here... it feels old.")
+and two choices, three switches where only up-down-up (101) lights both lamps (000 is off; anything else gives the
+first lamp and a useless brown glow), a higher-fidelity girl with every limb (the Quaternius CC0 rig), faint 8-bit
+music that grows near the computer, and Grace's clipboard list done for real: plug it in, wash and dry the screen,
+turn on the power, put in a disk. She sits only when you tap the chair.
+- Real DOS: FreeDOS on the v86 emulator, built from source by `tools/grace-dos/` (licences in its README).
+  Programs tell the scene things over COM1 (`AW:<id>`).
+- Interaction grammar: `docs/design/INTERACTION_GRAMMAR.md`, written from this scene.
+- Canon (Evan): the gold coins are Daddy's core memories, one for each of his memory places. The coin disk shows
+  "A GOLDEN MEMORY!" and her thought names it as Daddy's.
+- Café link: the key in the café's cash register opens `basement_door`; the scene is entered with `?from=cafe`,
+  and "Go back up" returns to the café.
+- Voice: the device's speech voice (free) for now; a recorded or realtime kid voice goes through the wallet later.
+
 ## Next
 1. Evan's pick between ROTOR RANGER and CLOCKTOWER (or both), then build them as GRACE-DOS programs.
 2. The manual's pages, readable in the scene.
-3. A door from the café's office to these stairs; then the tour stop.
+3. The café door is agreed; add the tour stop once it is live.
 4. Coins kept on the player's account rather than the browser.
