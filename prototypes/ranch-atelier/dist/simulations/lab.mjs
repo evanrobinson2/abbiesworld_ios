@@ -42,6 +42,7 @@ import {retainEstablishedLayout,exposedEdges} from './expansion-layout.mjs';
 import {rollTile as dropTile,createImpactEffects,sharedImpactSound,IMPACT_DUST} from './tile-drop-impact.mjs?v=2';
 import {createTileChooser} from './tile-chooser.mjs?v=23';
 import {createWarmUpCard} from './warm-up-card.mjs';
+import {createIntroScene} from './intro-scene.mjs';
 import {createLightBudget} from './light-budget.mjs';
 import {extendTiles,frontier,tileCenter} from './tile-expansion.mjs';
 import {SUGAR_SHACK} from './poi/sugar-shack-spec.mjs';
@@ -251,6 +252,11 @@ function ensureStage(room=null){return stageLoading??=import('./holodeck/stage.m
  walkPace:value=>{const state=active?.life.state;if(state&&value!==undefined)state.walkPace=value;return state?.walkPace??1;},
  clock:()=>({hour:farmClock.hour,day:farmClock.day,paused:!running,speed:simulationSpeed,weather:active?.life.state.weather??null,weatherMode}),
  setHour:h=>{farmClock={...farmClock,hour:h%24};updateClock(0);},setPaused:p=>{running=!p;syncPlayback();persist();},setSpeed:v=>{simulationSpeed=normalizeSpeed(v);syncSpeedControl();persist();},setWeather:chooseWeather},{room,relay:new URLSearchParams(location.search).get('relay')});window.holodeck=creator;return creator;});}
+// World event cards (event-hand.mjs): the god-view effects. Weather and time are set through the same code the buttons use.
+addEventListener('ranch:play-event',e=>{const id=e.detail?.id,hour=h=>{farmClock={...farmClock,hour:h};updateClock(0);};
+ if(id==='paint-rain'){if(typeof playPaintCard==='function')playPaintCard();return;}
+ const fx={'rain-shower':['rain'],thunderstorm:['hail'],snowfall:['snow'],'morning-fog':['cloudy',6],rainbow:['clear',15],'golden-dawn':['clear',6.5],'starry-night':['clear',22]}[id];
+ if(!fx)return;chooseWeather(fx[0]);if(fx[1]!==undefined)hour(fx[1]);});
 // Developer mode only: scripted captures (time, weather, pause) for the weather and light checks.
 try{if(localStorage.getItem('sandbox-developer')==='true')window.ranchDev={setHour:h=>{farmClock={...farmClock,hour:h%24};updateClock(0);},setWeather:chooseWeather,setPaused:p=>{running=!p;syncPlayback();},state:()=>active?.life.state,weather:()=>active?.weather,lampAnchors:()=>active?.lights?.anchors?.()??[],group:()=>active?.group,settle:()=>{active?.weather?.settle(active.life.state);updateSun();}};}catch{}
 if(new URLSearchParams(location.search).has('creator'))import('./holodeck/stage.mjs').then(({creatorRoom})=>{const room=creatorRoom();if(room)ensureStage(room);});
@@ -555,7 +561,8 @@ tileChooser=createTileChooser({scene,camera,orbit,renderer,canvas:renderer.domEl
 document.querySelector('.scene-world-settings')?.append(worldBackdrop.picker);
 // Compile every tile type's shaders once, right after the first board is up, so placements never wait on the graphics driver.
 // ?nowarm skips it (profiling).
-if(!new URLSearchParams(location.search).has('nowarm'))(function startWarmUp(){const card=createWarmUpCard();const tick=()=>{if(!tileChooser||!active||busy||family!=='ranch')return void setTimeout(tick,500);lightBudget.apply(true);tileChooser.warm((done,total,id)=>card.step(done,total,id),{decorate:g=>{const mode=$('#arrival').value;if(!mode||!arrivalPresets[mode]&&!ARRIVALS.some(([id])=>id===mode))return null;const arrival=createArrival(g,mode,{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,parameters:arrivalPresets[mode]});return ()=>arrival.finish();}}).then(ok=>{card.finish(ok);document.body.dataset.shadersWarm=ok?'1':'0';}).catch(error=>{console.warn(error);card.finish(false);});};setTimeout(tick,1500);})();
+if(!new URLSearchParams(location.search).has('nowarm'))(function startWarmUp(){// Players get the opening scene at Grace's computer; automated runs (tests, profiling) get the small card instead.
+ const card=navigator.webdriver||new URLSearchParams(location.search).has('nointro')?createWarmUpCard():createIntroScene();const tick=()=>{if(!tileChooser||!active||busy||family!=='ranch')return void setTimeout(tick,500);lightBudget.apply(true);tileChooser.warm((done,total,id)=>card.step(done,total,id),{decorate:g=>{const mode=$('#arrival').value;if(!mode||!arrivalPresets[mode]&&!ARRIVALS.some(([id])=>id===mode))return null;const arrival=createArrival(g,mode,{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,parameters:arrivalPresets[mode]});return ()=>arrival.finish();}}).then(ok=>{card.finish(ok);document.body.dataset.shadersWarm=ok?'1':'0';}).catch(error=>{console.warn(error);card.finish(false);});};setTimeout(tick,1500);})();
 
 // AI tiles remain ordinary saved board entries and reuse the shared placement path.
 function saveAIState(id,patch){const tile=extraTiles.find(t=>t.id===id);if(!tile)throw Error('AI tile no longer exists.');tile.ai={...tile.ai,...patch};persist();}

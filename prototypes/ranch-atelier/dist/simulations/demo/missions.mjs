@@ -7,8 +7,8 @@ import {HUNT_MISSION} from '../effect-hunt/demo-mission.mjs';
 export const MISSIONS = [
  {id: 'basement', title: 'The coffee shop basement', line: 'The register key opens a door under the stairs.', icon: '🗝️', charm: 'basement', page: '/studies/basement/play.html', at: 'cafe', tint: '#ffb86b'},
  {id: 'lab', title: 'The science lab', line: 'Shrink down into the green goo and win a tardigrade.', icon: '🔬', charm: 'tardigrade', page: '/studies/cell/play.html', at: 'lab', tint: '#7dff9a'},
- {id: 'mining', title: 'Moon base mining', line: 'Swing a pickaxe. One rock in three hides moon cheese.', icon: '🧀', charm: 'moon-cheese', page: '/studies/moon-mission/play.html?beat=outpost', at: 'moon', needs: 'moon', tint: '#ffd95a'},
- {id: 'moon', title: 'The Moon Mission', line: 'The whole trip, from the driveway to the far side. Finishing it unlocks the Moon tile.', icon: '🚀', charm: 'rocket', page: '/studies/moon-mission/play.html', at: 'cafe', tint: '#ff7eb6', finale: true}
+ {id: 'mining', title: 'Moon base mining', line: 'Swing a pickaxe. One rock in three hides moon cheese.', icon: '🧀', charm: 'moon-cheese', page: '/town?mission&chapter=2&beat=outpost', at: 'moon', needs: 'moon', tint: '#ffd95a'},
+ {id: 'moon', title: 'The Moon Mission', line: 'The whole trip, from the driveway to the far side. Finishing it unlocks the Moon tile.', icon: '🚀', charm: 'rocket', page: '/town?mission&chapter=1', inTown: 'town:truck', at: 'cafe', tint: '#ff7eb6', finale: true}
 ];
 
 // Other threads add their missions here (the Effect hunt and jet cart thread, for one):

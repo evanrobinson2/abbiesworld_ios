@@ -92,6 +92,15 @@ Object.assign(BUILD, {
   box(g, 10, .35, .35, '#c8452a', 4, 1.5, 0); for (const x of [-1, 9]) box(g, .3, 1.5, .3, '#4a4a50', x, .5, 0); box(g, 6, .9, 3, '#e8b23a', -14, .5, 11); box(g, 3.4, 1.4, 3.4, '#5a8ad8', 16, .5, 0).rotation.y = .4;
   for (let i = 0; i < 12; i++) box(g, .2, 1.6, .2, '#4a4a50', -20 + i * 3.64, .5, -15); box(g, 40, .15, .15, '#4a4a50', 0, 1.9, -15); box(g, 4, .3, 1, '#6a4a2e', -14, 1, 16); box(g, 4, .8, .18, '#6a4a2e', -14, 1.4, 16.5);
  },
+ bakery(g) { // the French bakery: a cream shopfront with a blue awning, a croissant sign, baguettes in the window and a bistro table out front
+  const s = shopfront('#f6e8d0', '#2f4f9a', '#ffffff'); g.add(s.g);
+  const sign = box(g, 9, 2.2, .5, '#2f4f9a', 0, 11.6, 7.4); box(g, 8, .3, .2, '#f6e8d0', 0, 12.4, 7.7);
+  const cr = new THREE.Mesh(new THREE.TorusGeometry(1.5, .65, 6, 12, Math.PI * 1.3), hkM('#d8a050')); cr.position.set(0, 13.6, 7.6); cr.rotation.z = Math.PI * .85; g.add(cr);
+  for (let i = 0; i < 5; i++) { const bg = cyl(g, .32, .32, 4.4, '#d8a050', -3 + i * 1.5, 0, 0, 6); bg.position.set(-3 + i * 1.5, 1.2, 7.6); bg.rotation.z = .25 + (i % 2) * .15; }
+  box(g, 1.8, 3.4, .3, '#2f4f9a', 5.6, 0, 7.1); box(g, 4, 2.4, .3, '#bfe0f0', -3.2, 1.4, 7.1);
+  cyl(g, .12, .12, 2, '#3a3a3e', 12.5, 0, 10, 6); cyl(g, 1.4, 1.4, .2, '#f6e8d0', 12.5, 2, 10, 14); for (const dx of [-2.2, 2.2]) { cyl(g, .1, .1, 1.2, '#3a3a3e', 12.5 + dx, 0, 10, 4); box(g, 1.1, .15, 1.1, '#b8323a', 12.5 + dx, 1.2, 10); }
+  for (const x of [-6.4, 6.4]) { cyl(g, .5, .6, .8, '#a8563e', x, 0, 8.6, 8); blob(g, .9, '#5f9a46', x, 1.2, 8.6, 1, .9, 1); }
+ },
  abbieTree(g) { buildTreehouse(g, {
   bark: '#a85a4e', wood: '#d9a98c', roof: '#f08aa8', roof2: '#f2a0b8', wall: '#f6e2c4', trim: '#fbe7ee', door: '#d96a8a', deck: '#e87a9a', leaf: ['#ee7a92', '#f4a0b4', '#e4627f', '#f8b8c8'], stone: ['#c8a8d8', '#d8b8e0', '#b898c8'], flower: '#f06a8a', path: '#f4c8d4', charm: ['#f8b8e0', '#fbd0ec', '#d8a0f0'], charms: 9,
   crowns: [[-8, 44, -6, 11, .75], [7, 42, -4, 9, .8], [-20, 30, -6, 6, .8], [18, 30, -10, 5.5, .8]],

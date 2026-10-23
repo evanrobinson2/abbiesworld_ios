@@ -1,5 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
+// Pins the owner lock off so the handler is tested alone; tests/owner-only.test.cjs covers it on.
 const { createHandler } = require('../api/activity.js');
 async function call(handler, req) {
   const res = { headers: {}, setHeader(k, v) { this.headers[k] = v; }, end(b) { this.body = b; } };
@@ -8,7 +9,7 @@ async function call(handler, req) {
 }
 test('activity proxies the dispatch feed with the key and reports offline without it', async () => {
   const seen = [];
-  const handler = createHandler(async (url, opts) => { seen.push({ url, opts }); return { ok: true, status: 200, json: async () => ({ events: [{ id: 'e1' }], jobs: [{ parcel_id: 'd1' }], machines: [] }) }; });
+  const handler = createHandler(async (url, opts) => { seen.push({ url, opts }); return { ok: true, status: 200, json: async () => ({ events: [{ id: 'e1' }], jobs: [{ parcel_id: 'd1' }], machines: [] }) }; }, { env: {} });
   delete process.env.DISPATCH_FEED_KEY;
   assert.equal((await call(handler, { method: 'GET' })).body.source, 'offline');
   process.env.DISPATCH_FEED_KEY = 'k';

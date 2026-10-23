@@ -2998,6 +2998,31 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/demo/DEMO_FLOW.md"
         }
       ]
+    },
+    "world-event-cards": {
+      "items": [
+        {
+          "k": "canon",
+          "t": "Card Forge (renderer, rarity, no-fake-materials look)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/cards/README.md"
+        },
+        {
+          "k": "canon",
+          "t": "Card art modes: events are scene art (CARD_ART.md)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cards/CARD_ART.md"
+        },
+        {
+          "k": "canon",
+          "t": "HUD and information study: an event is a spatial/overlay cue, never in the world",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Paint the World study (paint colours and alien plants)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/paint-world/PAINT_WORLD_STUDY.md"
+        }
+      ],
+      "note": "No Oracle, blog or tutorial consultation yet; recorded honestly so the card shows what is missing."
     }
   }
 }

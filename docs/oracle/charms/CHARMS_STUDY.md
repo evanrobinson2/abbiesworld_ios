@@ -15,7 +15,7 @@ asset only)".
 - **Padlock:** `tools/charms/padlock.py` builds `models/padlock/padlock.glb`: 158 triangles, flat shaded, parts
   `padlock body`, `padlock shackle`, `padlock keyhole`, materials `metal gold`, `metal steel`, `keyhole dark`. The page renders
   the real GLB once to a picture for the board. When a charm is earned the padlock should spring open (animation not built).
-- **Chest:** ten slots shaped like their charms, lid engraved "n of 10". `first-memory` was removed from `CHARMS` (backpack PR #418), so ten is the whole set. The floppy is won by beating the basement word game. Moon cheese is repeatable, one slot, two on the keychain.
+- **Chest:** ten slots shaped like their charms, lid engraved "n of 10". `first-memory` was removed from `CHARMS` (backpack PR #418), so the set is now eleven (toy car added; Moon is renamed Moon base). The floppy is won by beating the basement word game. Moon cheese is repeatable, one slot, two on the keychain.
 - **Jewellery box:** drawer box with a glass dome over each charm (recommended); wall shadow-box is the bedroom alternative.
   Hang up to two on the bag; the box toggle uses `putInBox` / `inBox` from `backpack.mjs?v=6`.
 - **Charm places:** tardigrade at the lab, floppy at the café cellar door, key and coffee cup at the café, star at the
@@ -35,3 +35,17 @@ Tour: yes for the chest and the mission board when built; this study page itself
 ## Not built
 Chest and noticeboard inside `/town`, real tile-conforming terrain, the padlock opening animation, the grown-up charm list,
 a hero picture for moon cheese.
+
+## The charm track (Evan, 2026-10-23 5:43 PM)
+The overland loop: explore, find the minigames, collect world charms, unlock card blueprints, expand the board with new
+tiles (Moon base, farm, a Science tile with the high school where the science fair happens). That progression is **the
+charm track**; other tracks come later. The page shows it as rungs: charms -> blueprint -> tile, driven by one `TRACK` list.
+Proposed rungs (for Evan to rearrange): tardigrade + star -> Science blueprint -> Science tile; Moon base + rocket -> Moon
+base blueprint -> Moon tile; bub + coffee cup -> Farm blueprint -> Ranch tile; floppy + brass key -> Basement arcade card
+blueprint; toy car -> Coaster blueprint (card); heart (every other charm) -> World of boards. Open: the high school now lives
+on the Science tile, not the Winchester centre (Winchester files untouched here).
+
+## Eleven charms (Evan 5:44 PM)
+Added Toy car (10 of 16 stars in the coaster game; a placeholder spot on Abbie and Daddy's side). The Moon base charm is the
+existing `moon-key` charm shown as "Moon base" (one charm for the base; rocket stays for finishing the mission, cheese is
+repeatable mining). Backpack thread to confirm or ask Evan for a separate charm.
