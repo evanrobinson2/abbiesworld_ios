@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/home/index.html"
+    },
+    {
       "source": "/explore",
       "destination": "/explore/index.html"
     },
@@ -430,17 +434,6 @@
       ],
       "destination": "/explore",
       "permanent": false
-    },
-    {
-      "source": "/",
-      "destination": "/sandbox",
-      "permanent": false,
-      "missing": [
-        {
-          "type": "host",
-          "value": "explore.abbies.world"
-        }
-      ]
     },
     {
       "source": "/town-life",

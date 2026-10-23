@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-front-door",
+      "date": "2026-10-23",
+      "title": "A front door for Abbie's World",
+      "line": "abbies.world now opens on a front door: what Abbie's World is, how it works, the PG promise, Play and Sign in, a $5-a-month donation and the studio Kickstarter. Your home-screen app still goes straight to the ranch.",
+      "image": "/whats-new/2026-10-23-front-door.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+      "threadTitle": "Front door, sign-in and donations"
+    },
+    {
       "id": "2026-10-23-models-one-screen",
       "date": "2026-10-23",
       "title": "Models fit on one screen",
