@@ -29,7 +29,7 @@ CFG = {
                          mats={"shell": ("painted_metal", (0.80, 0.82, 0.86, 1))}),
     "street-lamp": dict(files=[("source.stl", "lamp")], dim=("Z", 4.2), target=1500, tex=512,
                         mats={"lamp": ("cast_iron", (0.07, 0.07, 0.08, 1))}),
-    "sci-fi-crate": dict(files=[("source_bottom.stl", "tray"), ("source_top.stl", "lid")], dim=("MAX", 0.60), target=1000, tex=512,
+    "sci-fi-crate": dict(files=[("source_bottom.stl", "tray"), ("source_top.stl", "lid")], dim=("MAX", 0.60), target=1500, tex=512, bake_ext=0.006, ao_samples=64,
                          mats={"tray": ("crate_plastic", (0.30, 0.34, 0.38, 1)), "lid": ("crate_lid", (0.36, 0.40, 0.44, 1))},
                          assemble="crate"),
     "picnic-table": dict(files=[("source.stl", "table")], dim=("MAX", 1.80), target=490, tex=512,
@@ -282,10 +282,10 @@ record("uv", st.dt, tri_count([low]), islands="smart_project+pack")
 
 # ---- bake normal + AO ----------------------------------------------------------
 size_m = max(notes["scale_to_metres"]["final_size_m"])
-ext = size_m * 0.02
+ext = size_m * CFG.get("bake_ext", 0.02)
 tex = CFG["tex"]
 sc = bpy.context.scene
-sc.render.engine = "CYCLES"; sc.cycles.device = "CPU"; sc.cycles.samples = 16
+sc.render.engine = "CYCLES"; sc.cycles.device = "CPU"; sc.cycles.samples = CFG.get("ao_samples", 16)
 with Stage("bake") as st:
     imgs = {}
     for kind in ("normal", "ao"):
