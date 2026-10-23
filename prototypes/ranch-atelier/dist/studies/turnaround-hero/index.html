@@ -1,0 +1,112 @@
+<title>AW-STUDY-0023 - Turnaround Hero</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="One exact low-poly heroic figure, modelled with the method the Bruiser Study found: turnaround first, a depth ruler, an anatomy base, then planes.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: his figure beside the empty model slot (same camera) is the page; the turnaround row, plan and gates follow. */
+:root{
+ --bg:#e7e6e1; --paper:#f4f3ef; --ink:#23242a; --muted:#6b6c70; --line:#cfcdc6;
+ --accent:#e0592a; --good:#2f8a5b;
+ --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+ --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#1c1d20; --paper:#26272b; --ink:#ecebe6; --muted:#9c9da2; --line:#3a3b40; --accent:#ff7a47; --good:#5cc08b; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#1c1d20; --paper:#26272b; --ink:#ecebe6; --muted:#9c9da2; --line:#3a3b40; --accent:#ff7a47; --good:#5cc08b; color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,58px);line-height:.95}
+h2{font-size:28px;line-height:1.05}
+p{margin:0;max-width:66ch}
+.muted{color:var(--muted)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+header{display:grid;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);padding:7px 10px;border-radius:99px;border:1px solid var(--line);background:var(--paper);width:max-content;max-width:100%}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+section{display:grid;gap:14px}
+
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.frame{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:#8d8e8a}
+.row3 .frame{aspect-ratio:1/2}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;left:10px;top:10px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+ color:#f4f3ef;background:rgba(20,20,22,.55);padding:6px 8px;border-radius:6px}
+.slot{outline:2px dashed rgba(244,243,239,.4);outline-offset:-14px}
+.slot .ghost{position:absolute;inset:0;opacity:.13;filter:grayscale(1) brightness(1.6)}
+.empty{position:absolute;left:0;right:0;bottom:16px;padding:0 12px;text-align:center;color:#f4f3ef;font:600 15px/1.3 var(--body);text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.empty small{display:block;font:500 11px/1.4 var(--mono);opacity:.85}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;counter-reset:s;padding:0;margin:0;list-style:none}
+.steps li{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:6px;align-content:start;min-width:0}
+.steps li::before{counter-increment:s;content:counter(s);font:800 34px/1 var(--display);color:var(--accent)}
+.steps b{font:600 17px/1.2 var(--body)}
+.steps span{color:var(--muted);font-size:15px}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0}
+.rule{border-top:3px solid var(--ink);padding-top:10px;display:grid;gap:4px}
+.rule dt{font:600 17px/1.2 var(--body)}
+.rule dd{margin:0;color:var(--muted);font-size:15px}
+blockquote{margin:0;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:14px 16px;font:500 14px/1.55 var(--mono);overflow-wrap:anywhere}
+@media (max-width:640px){.pair{grid-template-columns:1fr}.row3{gap:8px}}
+</style>
+
+<div class="wrap">
+ <header>
+  <div class="eyebrow">AW-STUDY-0023</div>
+  <h1>Turnaround Hero</h1>
+  <p class="muted">One exact figure: your grey, blocky, heroic man. We build him with what the Bruiser Study learned. Turnaround first, a depth ruler, an anatomy base, then big flat planes. Every round is shown beside your picture from the same camera.</p>
+  <span class="chip"><i></i><span>Ready: starts after your Bruiser feedback</span></span>
+ </header>
+
+ <section aria-label="Your figure and the model, same camera">
+  <div class="pair">
+   <div class="frame"><img src="img/front.jpg" alt="Reference front: grey low-poly heroic man, bald small head, huge shoulders, fists, briefs, faceted shins"><span class="tag">Your figure · front</span></div>
+   <div class="frame slot"><img class="ghost" src="img/front.jpg" alt=""><span class="tag">Model · same camera</span>
+    <div class="empty">Waiting for your go<small>first round lands here, beside him</small></div></div>
+  </div>
+  <div class="pair">
+   <div class="frame"><img src="img/back.jpg" alt="Reference back: the same figure from behind"><span class="tag">Your figure · back</span></div>
+   <div class="frame slot"><img class="ghost" src="img/back.jpg" alt=""><span class="tag">Model · same camera</span>
+    <div class="empty">Waiting for your go<small>scored from the back too</small></div></div>
+  </div>
+ </section>
+
+ <section aria-labelledby="ta">
+  <h2 id="ta">Step one: the turnaround</h2>
+  <p class="muted">Your prompt, word for word, with your figure attached so Midjourney keeps him. You pick the sheet; the model is then scored from all three sides.</p>
+  <blockquote>front, side, back views of the same figure, a grey 3d ultra low polygon count, blocky, heroic male figure in a traditional A pose on a gray backdrop, each view is exactly the same character, wearing tight fitted briefs</blockquote>
+  <div class="row3">
+   <div class="frame slot"><span class="tag">Front</span><div class="empty">Queued</div></div>
+   <div class="frame slot"><span class="tag">Side</span><div class="empty">Queued</div></div>
+   <div class="frame slot"><span class="tag">Back</span><div class="empty">Queued</div></div>
+  </div>
+ </section>
+
+ <section aria-labelledby="how">
+  <h2 id="how">How we build him</h2>
+  <p class="muted">The method from the Bruiser Study. If your feedback changes the winner, this follows it.</p>
+  <ol class="steps">
+   <li><b>Turnaround first</b><span>Front, side and back of this exact man before any Blender work.</span></li>
+   <li><b>A depth ruler</b><span>Meshy builds a rough 3D version from the three views. We measure it; we don't ship it.</span></li>
+   <li><b>An anatomy base</b><span>An MPFB human body, muscular and heavy, with a Rigify skeleton in his A pose.</span></li>
+   <li><b>Big flat planes</b><span>Decimate (planar) turns the body into broad facets, the low-poly look.</span></li>
+   <li><b>Tuned to him</b><span>Part by part, torso out: small bald head, heavy brow, nose, jaw, giant shoulders, fists, faceted shins.</span></li>
+  </ol>
+ </section>
+
+ <section aria-labelledby="gates">
+  <h2 id="gates">What every round must pass</h2>
+  <dl class="rules">
+   <div class="rule"><dt>Same outline, three sides</dt><dd>Silhouette match from the front, side and back against your pick, from the same camera.</dd></div>
+   <div class="rule"><dt>Anatomy check</dt><dd>Head count, limb lengths and joint heights against the Bodies study's human canon.</dd></div>
+   <div class="rule"><dt>Simplification</dt><dd>Fewer, bigger planes. No noisy little facets.</dd></div>
+   <div class="rule"><dt>Plain briefs</dt><dd>A smooth, plain base layer. Nothing drawn between the legs, ever.</dd></div>
+   <div class="rule"><dt>This man, not a cousin</dt><dd>Five fingers on each fist, his face with brow, nose and jaw, his calves and shoes.</dd></div>
+  </dl>
+ </section>
+</div>
