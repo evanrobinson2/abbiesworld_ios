@@ -13,6 +13,17 @@
       "link": "/town"
     },
     {
+      "id": "2026-10-23-paint-in-town",
+      "date": "2026-10-23",
+      "title": "Paint the World in Winchester",
+      "line": "The Paint card and splat balls now work in the town too: get a handful, drag one onto the hexes and let go. The paint splats, and strange plants grow from it.",
+      "image": "/whats-new/2026-10-23-paint-in-town.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFsUNxMs2CS8NZsWeXQJCoG",
+      "threadTitle": "AW-STUDY-0049 - Paint the World",
+      "tour": true,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-town-events",
       "date": "2026-10-23",
       "title": "World event cards in Abbie's Town",
