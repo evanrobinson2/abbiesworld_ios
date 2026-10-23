@@ -1,0 +1,287 @@
+{
+ "game": "school-jump",
+ "lines": {
+  "walk": {
+   "who": "daddy-young",
+   "text": "Come on, bub. To the wall.",
+   "hash": "26bd4cefbc",
+   "url": "/r2/voices/lines/school-jump/walk-26bd4cefbc.mp3"
+  },
+  "further1": {
+   "who": "daddy-young",
+   "text": "Oh, you want it further, do ya bub?",
+   "hash": "ec3db8ac62",
+   "url": "/r2/voices/lines/school-jump/further1-ec3db8ac62.mp3"
+  },
+  "further2": {
+   "who": "daddy-young",
+   "text": "Further? Okay, bub. Hang on.",
+   "hash": "e0303bb7c3",
+   "url": "/r2/voices/lines/school-jump/further2-e0303bb7c3.mp3"
+  },
+  "onRoof": {
+   "who": "daddy-young",
+   "text": "Uh oh.",
+   "hash": "b870dc4bd9",
+   "url": "/r2/voices/lines/school-jump/onRoof-b870dc4bd9.mp3"
+  },
+  "getIt": {
+   "who": "daddy-young",
+   "text": "Stay, bub. I'll get it.",
+   "hash": "5abb78f29a",
+   "url": "/r2/voices/lines/school-jump/getIt-5abb78f29a.mp3"
+  },
+  "latchHint": {
+   "who": "daddy-young",
+   "text": "Tap a hand to let go.",
+   "hash": "bed2af50e9",
+   "url": "/r2/voices/lines/school-jump/latchHint-bed2af50e9.mp3"
+  },
+  "hold": {
+   "who": "daddy-young",
+   "text": "Whoa! Hold on!",
+   "hash": "80e850c0d7",
+   "url": "/r2/voices/lines/school-jump/hold-80e850c0d7.mp3"
+  },
+  "cross": {
+   "who": "daddy-young",
+   "text": "Nope, hands don't cross.",
+   "hash": "32cb4e6f16",
+   "url": "/r2/voices/lines/school-jump/cross-32cb4e6f16.mp3"
+  },
+  "far-0": {
+   "who": "daddy-young",
+   "text": "Too far.",
+   "hash": "21bbfb1c4a",
+   "url": "/r2/voices/lines/school-jump/far-0-21bbfb1c4a.mp3"
+  },
+  "far-1": {
+   "who": "daddy-young",
+   "text": "Can't reach that.",
+   "hash": "24b79fcadd",
+   "url": "/r2/voices/lines/school-jump/far-1-24b79fcadd.mp3"
+  },
+  "far-2": {
+   "who": "daddy-young",
+   "text": "Closer one.",
+   "hash": "f7e279117a",
+   "url": "/r2/voices/lines/school-jump/far-2-f7e279117a.mp3"
+  },
+  "wrong-0": {
+   "who": "daddy-young",
+   "text": "Oops.",
+   "hash": "402a81379f",
+   "url": "/r2/voices/lines/school-jump/wrong-0-402a81379f.mp3"
+  },
+  "wrong-1": {
+   "who": "daddy-young",
+   "text": "Breathe. Find the shiny one.",
+   "hash": "6f9192f522",
+   "url": "/r2/voices/lines/school-jump/wrong-1-6f9192f522.mp3"
+  },
+  "wrong-2": {
+   "who": "daddy-young",
+   "text": "Arms getting wobbly...",
+   "hash": "87353e0c6e",
+   "url": "/r2/voices/lines/school-jump/wrong-2-87353e0c6e.mp3"
+  },
+  "wrong-3": {
+   "who": "daddy-young",
+   "text": "You can do it. One more good grab.",
+   "hash": "ab75053f5d",
+   "url": "/r2/voices/lines/school-jump/wrong-3-ab75053f5d.mp3"
+  },
+  "loose": {
+   "who": "daddy-young",
+   "text": "Whoa, that one wiggles!",
+   "hash": "4d4d78b519",
+   "url": "/r2/voices/lines/school-jump/loose-4d4d78b519.mp3"
+  },
+  "tired": {
+   "who": "daddy-young",
+   "text": "Whew. Noodle arms. Let's try again.",
+   "hash": "81e57e00d2",
+   "url": "/r2/voices/lines/school-jump/tired-81e57e00d2.mp3"
+  },
+  "top": {
+   "who": "daddy-young",
+   "text": "Made it!",
+   "hash": "302bc1e81d",
+   "url": "/r2/voices/lines/school-jump/top-302bc1e81d.mp3"
+  },
+  "firstBall": {
+   "who": "daddy-young",
+   "text": "There's one!",
+   "hash": "ccbd45b89c",
+   "url": "/r2/voices/lines/school-jump/firstBall-ccbd45b89c.mp3"
+  },
+  "full": {
+   "who": "daddy-young",
+   "text": "My hands are full. Throw some to bub.",
+   "hash": "f014957eb3",
+   "url": "/r2/voices/lines/school-jump/full-f014957eb3.mp3"
+  },
+  "dog-0": {
+   "who": "daddy-young",
+   "text": "Good dog!",
+   "hash": "0c600d300e",
+   "url": "/r2/voices/lines/school-jump/dog-0-0c600d300e.mp3"
+  },
+  "dog-1": {
+   "who": "daddy-young",
+   "text": "Catch, bub!",
+   "hash": "f293c04713",
+   "url": "/r2/voices/lines/school-jump/dog-1-f293c04713.mp3"
+  },
+  "dog-2": {
+   "who": "daddy-young",
+   "text": "Go get it!",
+   "hash": "455110f1ad",
+   "url": "/r2/voices/lines/school-jump/dog-2-455110f1ad.mp3"
+  },
+  "dog-3": {
+   "who": "daddy-young",
+   "text": "Good catch!",
+   "hash": "209f65395d",
+   "url": "/r2/voices/lines/school-jump/dog-3-209f65395d.mp3"
+  },
+  "busted": {
+   "who": "street-grownup",
+   "text": "Hey! You! Down off that roof!",
+   "hash": "99f8d9d76f",
+   "url": "/r2/voices/lines/school-jump/busted-99f8d9d76f.mp3"
+  },
+  "afterBust": {
+   "who": "daddy-young",
+   "text": "Oops. Watch the cars next time.",
+   "hash": "df30495f90",
+   "url": "/r2/voices/lines/school-jump/afterBust-df30495f90.mp3"
+  },
+  "gym": {
+   "who": "daddy-young",
+   "text": "The gym roof. Higher.",
+   "hash": "0e5246ab72",
+   "url": "/r2/voices/lines/school-jump/gym-0e5246ab72.mp3"
+  },
+  "notYet": {
+   "who": "daddy-young",
+   "text": "Not yet. There are still balls up here.",
+   "hash": "f9312b8ca8",
+   "url": "/r2/voices/lines/school-jump/notYet-f9312b8ca8.mp3"
+  },
+  "hang": {
+   "who": "daddy-young",
+   "text": "Wait for it...",
+   "hash": "7d310a7cde",
+   "url": "/r2/voices/lines/school-jump/hang-7d310a7cde.mp3"
+  },
+  "home": {
+   "who": "daddy-young",
+   "text": "Now home. Same way down.",
+   "hash": "46aff042eb",
+   "url": "/r2/voices/lines/school-jump/home-46aff042eb.mp3"
+  },
+  "allBalls": {
+   "who": "daddy-young",
+   "text": "Thirty-one! That's all of them!",
+   "hash": "0465e0886d",
+   "url": "/r2/voices/lines/school-jump/allBalls-0465e0886d.mp3"
+  },
+  "missDrop": {
+   "who": "daddy-young",
+   "text": "Not yet... pull back up.",
+   "hash": "69b917f54e",
+   "url": "/r2/voices/lines/school-jump/missDrop-69b917f54e.mp3"
+  },
+  "drop": {
+   "who": "daddy-young",
+   "text": "Yes!",
+   "hash": "025b211b67",
+   "url": "/r2/voices/lines/school-jump/drop-025b211b67.mp3"
+  },
+  "coin": {
+   "who": "daddy-young",
+   "text": "A gold coin! One of Daddy's memories.",
+   "hash": "31ec7b6e45",
+   "url": "/r2/voices/lines/school-jump/coin-31ec7b6e45.mp3"
+  },
+  "done": {
+   "who": "daddy-young",
+   "text": "Best day ever, bub.",
+   "hash": "80c3e0551f",
+   "url": "/r2/voices/lines/school-jump/done-80c3e0551f.mp3"
+  },
+  "softer-0": {
+   "who": "daddy-young",
+   "text": "Too hard. Softer.",
+   "hash": "93457ce7a2",
+   "url": "/r2/voices/lines/school-jump/softer-0-93457ce7a2.mp3"
+  },
+  "softer-1": {
+   "who": "daddy-young",
+   "text": "Whoa, easy.",
+   "hash": "cbf052b1ac",
+   "url": "/r2/voices/lines/school-jump/softer-1-cbf052b1ac.mp3"
+  },
+  "softer-2": {
+   "who": "daddy-young",
+   "text": "A little softer.",
+   "hash": "39d6f92a81",
+   "url": "/r2/voices/lines/school-jump/softer-2-39d6f92a81.mp3"
+  },
+  "harder-0": {
+   "who": "daddy-young",
+   "text": "Too soft. Harder!",
+   "hash": "734f242f25",
+   "url": "/r2/voices/lines/school-jump/harder-0-734f242f25.mp3"
+  },
+  "harder-1": {
+   "who": "daddy-young",
+   "text": "Bit harder.",
+   "hash": "0bc31469d1",
+   "url": "/r2/voices/lines/school-jump/harder-1-0bc31469d1.mp3"
+  },
+  "harder-2": {
+   "who": "daddy-young",
+   "text": "Put some arm into it!",
+   "hash": "71b681100c",
+   "url": "/r2/voices/lines/school-jump/harder-2-71b681100c.mp3"
+  },
+  "bigJump": {
+   "who": "daddy-young",
+   "text": "That seems like a big jump. Maybe I shouldn't do it.",
+   "hash": "167c34e1fc",
+   "url": "/r2/voices/lines/school-jump/bigJump-167c34e1fc.mp3"
+  },
+  "listened": {
+   "who": "daddy-young",
+   "text": "Maybe next time, bub. Let's go home.",
+   "hash": "9a15535a31",
+   "url": "/r2/voices/lines/school-jump/listened-9a15535a31.mp3"
+  },
+  "janitor": {
+   "who": "janitor",
+   "text": "Hey! What are you doing up there? Get down! I'm calling the police!",
+   "hash": "a04a2a9976",
+   "url": "/r2/voices/lines/school-jump/janitor-a04a2a9976.mp3"
+  },
+  "jump": {
+   "who": "daddy-young",
+   "text": "Uh oh. Gotta go!",
+   "hash": "7ba965d5d1",
+   "url": "/r2/voices/lines/school-jump/jump-7ba965d5d1.mp3"
+  },
+  "ankle": {
+   "who": "daddy-young",
+   "text": "Ow, ow, ow! My ankle!",
+   "hash": "7d68c0b553",
+   "url": "/r2/voices/lines/school-jump/ankle-7d68c0b553.mp3"
+  },
+  "hurry": {
+   "who": "daddy-young",
+   "text": "Bub's waiting. Better get moving.",
+   "hash": "e4fe3d6a7c",
+   "url": "/r2/voices/lines/school-jump/hurry-e4fe3d6a7c.mp3"
+  }
+ }
+}
