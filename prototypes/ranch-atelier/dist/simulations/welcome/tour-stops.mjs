@@ -35,6 +35,8 @@ registerTourStop({id:'animals',order:300,shot:'follow',seconds:4.4,title:'The go
 registerTourStop({id:'people',order:400,shot:'follow',seconds:3.6,title:'Everyone has somewhere to be.',line:'And everyone has somewhere to be.',find:world=>findIn(world,o=>!!o.userData?.person)});
 registerTourStop({id:'time',order:500,shot:'timelapse',seconds:4.4,title:'Days roll by.',line:'Days roll by. Lanterns glow.',find:world=>world});
 registerTourStop({id:'cards',order:600,shot:'card',seconds:4.8,title:'Pick a card. Drop it in.',line:'Pick a card, drop it in, and watch your world grow.',find:world=>world});
+// AW-STUDY-0025 Tile pull and print (Tour: yes): the model comes off its card, and goes back on it to be made yours.
+registerTourStop({id:'pull',order:650,shot:'orbit',seconds:4.4,title:'Pull it off the card.',line:'Pull a tile off its card. Put it back on the card to make it yours.',find:world=>world});
 registerTourStop({id:'yours',order:900,shot:'hero',seconds:4,title:'Now it’s your turn.',line:'Now it’s your turn.',find:world=>world});
 
 // Chalk hints for real play: one at a time, drawn beside the thing, gone when you do it (or after a while).
