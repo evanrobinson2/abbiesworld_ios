@@ -46,6 +46,8 @@ button{font:inherit;cursor:pointer}
 .board text{font-family:var(--body);font-weight:700;pointer-events:none}
 .glint{animation:bob 2.2s ease-in-out infinite;cursor:pointer}
 @keyframes bob{50%{transform:translateY(-6px)}}
+.spin{animation:spin 2.4s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{0%{transform:scaleX(1)}25%{transform:scaleX(.12)}50%{transform:scaleX(-1)}75%{transform:scaleX(.12)}100%{transform:scaleX(1)}}
 .glow{animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.35}}
 .paw{animation:pawin .5s both}
@@ -250,6 +252,21 @@ button{font:inherit;cursor:pointer}
  <p>The overland loop: explore the world, find the minigames, collect world charms, unlock card blueprints, and grow the board with new tiles. This progression is <b>the charm track</b>. Other tracks can sit beside it later. Each rung below lights up as you earn its charms in the stage above ("Pretend I earned one" works too).</p>
  <div id="trackLane" class="lane"></div>
  <p class="muted"><b>This grouping is my proposal, ready for Evan to rearrange.</b> The data is one list (<code>TRACK</code>), so a rung can change its charms, blueprint or tile without touching the layout. Open question for the Winchester and hex-city threads: the high school now sits on the Science tile, where the science fair is, so it no longer stands at the centre of Winchester. This study does not edit Winchester files.</p>
+</section>
+
+<section id="floating">
+ <div class="head"><div class="eyebrow">Evan, 6:51 PM · drafted, not in the game yet</div><h2>Floating charms, like the hidden packages in GTA 3</h2></div>
+ <p>Charms are the only reward, and they hang in the world as spinning, glowing pickups. Walk into one and it flies to your chest. Try it: the board below is the Winchester sample, every charm floats in a hidden nook near its place. Move the pointer over the board and a small ring shimmers faster the closer you are to an uncollected charm (the hot and cold feel, with no arrow and no list). Tap a floating charm to collect it.</p>
+ <div class="stage" style="height:min(70vh,600px)" id="flStage"><svg class="board" id="fl" viewBox="0 0 900 640"></svg>
+  <div class="row" style="position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.7);border-radius:99px;padding:6px 14px;font-weight:700;color:#2a2420"><span id="flCnt"></span></div></div>
+ <div class="cards">
+  <div class="card"><h3>How it behaves</h3><ul>
+   <li><b>Look.</b> The charm's own hero model, slowly spinning and bobbing, a soft gold glow and a ground shadow that breathes.</li>
+   <li><b>Find.</b> Two kinds. <i>Won</i> charms (tardigrade, floppy, toy car, rocket, moon cheese, star) appear at the place when you finish the minigame, as a drop. <i>Found</i> charms (bub, coffee cup, brass key) sit hidden in nooks until you explore to them. The Heart never floats: it comes by itself.</li>
+   <li><b>Hint.</b> Meta only: a faint chime that rises in pitch as you near one, and the sparkle ring above. No minimap dots. The chest's locked cards still give a "Show me where" for anyone who wants it.</li>
+   <li><b>Pickup.</b> Walk in, golden pickup animation (the coin one), the charm flies into the chest and the slot lights.</li></ul></div>
+  <div class="card"><h3>Placement (a proposal for the hex city thread)</h3><p>These spots are Winchester edits, so I only list them; I touched no town files. Offsets are from the place's door, in metres on the town's local grid: lab back corner (+3, -2), café window box (-2, +1), café cellar steps (0, -1.5), Abbie's yard under the oak (+4, +2), school roof ladder (0, +3), curb by the black truck (-3, 0). Moon outpost and the coaster follow their own tiles.</p><p><b>Not built:</b> the in-game spinner (a shared <code>charm-pickup</code> world sprite), the proximity chime, and the drop when a minigame ends.</p></div>
+ </div>
 </section>
 
 <section id="mission">
@@ -572,7 +589,19 @@ function renderTrack() {
  $('#trackLane').innerHTML = TRACK.map(t => { const n = t.charms.filter(c => state.earned.has(c)).length, on = n === t.charms.length;
   return `<div class="rung ${on ? 'on' : ''}"><div class="cs">${t.charms.map(c => `<div class="c ${state.earned.has(c) ? '' : 'no'}">${picHTML(c)}</div>`).join('')}</div><span class="arr">&rarr;</span><div class="bp"><b>${t.bp}</b>${on ? 'Unlocked' : n + ' of ' + t.charms.length + ' charms'}</div><span class="arr">&rarr;</span><div class="tl2">${hexT(t.tile, t.rim)}<span>${t.line}</span></div></div>`; }).join('') + '<div class="rung ghost"><div class="bp" style="border-style:dashed">Another track later (a second set of charms, blueprints and tiles beside this one)</div></div>';
 }
-const _ra = renderAll; renderAll = function () { _ra(); renderTrack(); };
+const FOFF = {tardigrade:[34,-4], basement:[-6,-14], 'brass-key':[10,10], barista:[-32,6], 'school-roof':[0,-70], bub:[40,-6], 'moon-key':[-28,-14], rocket:[-6,-10], 'moon-cheese':[0,0], 'toy-car':[16,-10]};
+const fl = $('#fl'); let flPtr = null;
+function renderFloat() {
+ boardSVG(fl, {tiles: state.tiles, earned: state.earned, mode: 'none'});
+ let h = '';
+ CH.filter(c => !state.earned.has(c.id) && c.at !== 'everywhere' && !(c.moon && !state.tiles.moon)).forEach((c, i) => { const p = place(c.at), o = FOFF[c.id] || [0, 0], x = p.x + o[0], y = p.y + o[1] - 18;
+  h += `<g transform="translate(${x},${y})" data-f="${c.id}" style="cursor:pointer"><ellipse cx="0" cy="${26}" rx="14" ry="4" fill="rgba(0,0,0,.28)" class="glow"/><g class="glint" style="animation-delay:${i * .2}s"><circle r="22" fill="rgba(255,226,122,.45)" class="glow"/><g class="spin" style="animation-delay:${i * .3}s"><foreignObject x="-17" y="-17" width="34" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="width:34px;height:34px;display:grid;place-items:center">${picHTML(c.id).replace('<img ', '<img style="width:34px;height:34px;object-fit:contain" ').replace('<svg ', '<svg style="width:34px;height:34px" ')}</div></foreignObject></g></g></g>`; });
+ fl.insertAdjacentHTML('beforeend', h + '<circle id="flRing" r="0" fill="none" stroke="#ffd45a" stroke-width="3" opacity="0"/>');
+ fl.querySelectorAll('[data-f]').forEach(n => n.onclick = e => { e.stopPropagation(); earn(n.dataset.f); });
+ $('#flCnt').textContent = state.earned.size + ' of ' + CH.length + ' in the chest';
+}
+fl.addEventListener('pointermove', e => { const r = fl.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 900, y = (e.clientY - r.top) / r.height * 640; let d = 1e9; fl.querySelectorAll('[data-f]').forEach(n => { const m = /translate\(([-\d.]+),([-\d.]+)\)/.exec(n.getAttribute('transform')); d = Math.min(d, Math.hypot(x - m[1], y - m[2])); }); const ring = $('#flRing'); if (!ring) return; const near = Math.max(0, 1 - d / 260); ring.setAttribute('cx', x); ring.setAttribute('cy', y); ring.setAttribute('r', 10 + near * 26); ring.setAttribute('opacity', near > 0.02 ? .25 + near * .7 : 0); ring.style.animation = `pulse ${Math.max(.25, 1.6 - near * 1.4)}s ease-in-out infinite`; });
+const _ra = renderAll; renderAll = function () { _ra(); renderTrack(); renderFloat(); };
 renderAll(); renderTable(); renderJewel();
 </script>
 <script type="module" src="/look/context-card.mjs" data-context-study="charms"></script>

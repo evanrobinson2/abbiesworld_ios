@@ -49,3 +49,10 @@ on the Science tile, not the Winchester centre (Winchester files untouched here)
 Added Toy car (10 of 16 stars in the coaster game; a placeholder spot on Abbie and Daddy's side). The Moon base charm is the
 existing `moon-key` charm shown as "Moon base" (one charm for the base; rocket stays for finishing the mission, cheese is
 repeatable mining). Backpack thread to confirm or ask Evan for a separate charm.
+
+## Floating charms (Evan, 2026-10-23 6:51 PM): drafted, not in the game
+Charms are the only reward and hang in the world as spinning, glowing pickups, like the hidden packages in GTA 3. Two kinds:
+*won* charms drop at their place when the minigame ends; *found* charms (bub, coffee cup, brass key) sit hidden until explored to.
+The Heart never floats. Hint is meta only: a chime that rises as you near one (the study shows a shimmer ring). The study page
+has a playable preview. Placements are Winchester edits and are listed in the page for the hex city thread; nothing was edited here.
+Dispatch check: the newest dispatch (issue #482, loading screen with the chalkboard card gesture) says nothing about charms and was already taken by the intro and precompile thread.
