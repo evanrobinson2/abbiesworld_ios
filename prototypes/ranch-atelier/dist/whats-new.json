@@ -13,6 +13,28 @@
       "link": "/town"
     },
     {
+      "id": "2026-10-23-tile-reveal",
+      "date": "2026-10-23",
+      "title": "Tiles build themselves",
+      "line": "Drop a tile and it rolls in bare, then every tree, building and fence drops from the air, tumbles, hovers and snaps into place, all in about a second and a half. Accept in the card designer now prints the tile with a laser and signs it with a tick.",
+      "image": "/whats-new/2026-10-23-tile-reveal.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-world-look",
+      "date": "2026-10-23",
+      "title": "World look: three looks, one switch",
+      "line": "Developer tools only: Storybook (the town's own), Sunday toon (the Ranch's original) and the new Comic ink, thick black cartoon outlines. Open /town?dev and use the World look box.",
+      "image": "/whats-new/2026-10-23-world-look.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF4XcQhA4n7xJdKC6b5zPq8",
+      "threadTitle": "Shaders article",
+      "tour": false,
+      "link": "/town?dev"
+    },
+    {
       "id": "2026-10-23-skatepark-hifi",
       "date": "2026-10-23",
       "title": "A proper skate park",

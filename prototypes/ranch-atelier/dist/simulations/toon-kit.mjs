@@ -34,7 +34,7 @@ const DIRECT_TO = `float dotNL = saturate( dot( geometryNormal, directLight.dire
 export function toonMaterial(T, mat, U) {
  if (!mat || mat.userData.toon || !(mat.isMeshStandardMaterial)) return;
  mat.userData.toon = true;
- const prev = mat.onBeforeCompile;
+ const prev = mat.onBeforeCompile; mat.userData.toonPrev = {prev, key: mat.customProgramCacheKey};
  mat.onBeforeCompile = (sh, r) => {
   prev?.call(mat, sh, r);
   Object.assign(sh.uniforms, U);
@@ -48,6 +48,11 @@ export function toonMaterial(T, mat, U) {
  const key = mat.customProgramCacheKey?.bind(mat);
  mat.customProgramCacheKey = () => (key ? key() : '') + '|toon';
  mat.needsUpdate = true;
+}
+
+// takes the patch back off (the World look switch): the material compiles as three made it
+export function untoonify(scene) {
+ scene.traverse(o => { if (!o.isMesh) return; for (const m of [].concat(o.material)) { const p = m?.userData?.toonPrev; if (!p) continue; m.onBeforeCompile = p.prev || (() => {}); m.customProgramCacheKey = p.key; delete m.userData.toon; delete m.userData.toonPrev; m.needsUpdate = true; } });
 }
 
 // returns the shared uniforms; change look later with setToonLook(T, U, look)
