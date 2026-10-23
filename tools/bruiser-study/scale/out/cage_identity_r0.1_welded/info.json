@@ -1,0 +1,18 @@
+{
+ "tag": "cage_identity_r0.1_welded",
+ "spec": "spec",
+ "base": "spec",
+ "ratio": 0.1,
+ "planar": 0,
+ "faces": 2996,
+ "bound": 15002,
+ "unbound": 0,
+ "iou_vs_hero": {
+  "front": 0.9915,
+  "three-quarter": 0.993,
+  "side": 0.9934,
+  "back": 0.9917
+ },
+ "iou_mean": 0.9924,
+ "shot": "shots/008_cage_identity_r0.1_welded.png"
+}

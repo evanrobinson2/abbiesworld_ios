@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>AW-STUDY-0021 - Bruiser Study</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -93,6 +94,19 @@ tr.lead td{background:color-mix(in srgb,var(--good) 9%,transparent)}
 .rule dt{font:600 17px/1.2 var(--body)}
 .rule dd{margin:0;color:var(--muted);font-size:15px}
 section{display:grid;gap:14px}
+/* scaling version */
+.lede{font-size:18px;max-width:70ch}
+.trail{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.shot{margin:0;display:grid;gap:6px;min-width:0}
+.shot a{display:block;border-radius:10px;overflow:hidden;background:#82837d}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:14px;color:var(--muted);line-height:1.35}
+.shot figcaption b{font:500 12px/1 var(--mono);color:var(--accent);margin-right:6px}
+.loop{padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;counter-reset:step}
+.loop li{list-style:none;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:6px;align-content:start}
+.loop li::before{counter-increment:step;content:counter(step);font:800 30px/1 var(--display);color:var(--accent)}
+.loop code{font:500 12px/1.45 var(--mono);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 7px;display:block;white-space:pre-wrap;word-break:break-word}
+
 @media (max-width:640px){.pair{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -101,7 +115,7 @@ section{display:grid;gap:14px}
  <header>
   <div class="eyebrow">AW-STUDY-0021</div>
   <h1>Bruiser Study</h1>
-  <p class="muted">One brute, built six ways. Each arm splits the Blender work differently; every result is rendered from the reference's own camera and scored against it. The method that lands closest to this exact figure, hands, fingers, face and nose included, wins.</p>
+  <p class="muted">One brute, built many ways. Each arm splits the Blender work differently; every result is rendered from the reference's own camera and scored against it. The method that lands closest to this exact figure, hands, fingers, face and nose included, wins.</p>
   <span class="chip" id="state"><i></i><span>Shell: no runs yet</span></span>
  </header>
 
@@ -124,6 +138,24 @@ section{display:grid;gap:14px}
    <button id="toggle3d" aria-pressed="false" hidden>Turn it in 3D</button>
   </div>
   <div class="metrics-line" id="pickedLine"></div>
+ </section>
+
+
+ <section aria-labelledby="sv">
+  <span class="eyebrow">Round 4 · Meshy as the target</span>
+  <h2 id="sv">The scaling version</h2>
+  <p class="lede">Meshy made a near-perfect 3D model of him from his picture in about 40 seconds (arm M). Arm G learns from it: every 2 cm of height the Meshy body is cut into rings, one stack per named part (torso, each arm, each leg, the hands). The rings are the recipe. They are written down in numbers and in words, they drive Meshy's own surface like a cage, and Blender takes the result to whatever polygon count we ask for.</p>
+  <ol class="loop">
+   <li><b>Learn</b><span class="muted">Read the hero mesh into named parts and rings, and write it down in numbers and in words.</span><code>python3 scale/learn.py
+→ spec.json, spec.md</code></li>
+   <li><b>Say it</b><span class="muted">Ask for a change in body words. A person or a model picks the op, region and amount; the words are kept with the edit.</span><code>python3 scale/edit.py scale forearm --width 1.2 --depth 1.2 --say "make his forearms 20% bigger"</code></li>
+   <li><b>Build</b><span class="muted">The rings move Meshy's vertices, then Decimate sets the polygon count. Every step saves a screenshot.</span><code>python3 scale/deform.py --spec spec --ratio 0.1 --shots</code></li>
+   <li><b>Check</b><span class="muted">Read it back in words (measure) and against the hero from four sides plus his picture's camera. Undo is one command.</span><code>python3 scale/edit.py measure forearm
+python3 scale/edit.py undo</code></li>
+  </ol>
+  <h3>Every step, in screenshots</h3>
+  <p class="muted">Top row: Meshy. Bottom row: ours. From the left: front, three-quarter, side, back, then his picture's camera. Click any sheet for full size.</p>
+  <div class="trail" id="trail"></div>
  </section>
 
  <section aria-labelledby="sb">
@@ -152,7 +184,7 @@ section{display:grid;gap:14px}
   <h2 id="mx">What we measure</h2>
   <dl class="rules">
    <div class="rule"><dt>Silhouette IoU</dt><dd>Overlap of the model's outline with the reference outline, from the same front camera. 1.0 is a perfect match.</dd></div>
-   <div class="rule"><dt>Leads</dt><dd>Best all-round likeness: the average of the front, side and back outline scores, so getting his depth right counts as much as matching the picture.</dd></div>
+   <div class="rule"><dt>Leads</dt><dd>Best all-round likeness among the hand-built arms: the average of the front, side and back outline scores, so getting his depth right counts as much as matching the picture. Meshy (M) and the scaling version (G) are the target and what we learn from it, so they aren't ranked against them.</dd></div>
    <div class="rule"><dt>Loss</dt><dd>The paper-warrior image loss: silhouette, outline distance, structure, facet edges and tone, weighted into one number. 0 is perfect.</dd></div>
    <div class="rule"><dt>Per-part score</dt><dd>Silhouette IoU inside each chunk's box, so a great torso can't hide a missing hand.</dd></div>
    <div class="rule"><dt>Time and cost</dt><dd>Wall-clock from first job to assembled model, and the model spend for all of an arm's jobs.</dd></div>
@@ -175,8 +207,14 @@ const name = id => (CHUNKS.chunks.find(c => c.id === id) || {}).name || id;
 
 // All-round likeness: front, side and back outline together (depth counts as much as the picture).
 const allRound = a => a.side != null && a.back != null ? (a.iou + a.side + a.back) / 3 : null;
+function drawTrail() {
+ fetch('scale/shots.json').then(r => r.ok ? r.json() : []).then(list => {
+  $('#trail').innerHTML = list.map(t => `<figure class="shot"><a href="${esc(t.src)}" target="_blank" rel="noopener"><img src="${esc(t.src)}" alt="${esc(t.cap)}" loading="lazy" width="1920" height="768"></a><figcaption><b>${esc(t.n)}</b>${esc(t.cap)}</figcaption></figure>`).join('');
+ }).catch(() => {});
+}
+
 function leader() {
- const done = DATA.arms.filter(a => allRound(a) != null);
+ const done = DATA.arms.filter(a => allRound(a) != null && a.kind !== 'import');
  return done.length ? done.reduce((b, a) => allRound(a) > allRound(b) ? a : b).id : null;
 }
 
@@ -262,6 +300,6 @@ document.addEventListener('click', e => {
 });
 
 Promise.all([fetch('results.json', {cache: 'no-store'}).then(r => r.json()), fetch('chunks.json').then(r => r.json())])
- .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || leader() || d.arms[0].id; drawChunks(); render(); })
+ .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || (d.arms.some(a => a.id === 'G' && a.status === 'done') ? 'G' : null) || leader() || d.arms[0].id; drawChunks(); render(); drawTrail(); })
  .catch(() => { $('#state span').textContent = 'Results could not load; reload to try again'; });
 </script>

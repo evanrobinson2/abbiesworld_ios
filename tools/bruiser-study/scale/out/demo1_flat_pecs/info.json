@@ -1,0 +1,28 @@
+{
+ "tag": "demo1_flat_pecs",
+ "spec": "spec_demo",
+ "sides": 8,
+ "step": 2,
+ "torso_mult": 3,
+ "tol": 0.006,
+ "faces": 1210,
+ "parts": [
+  "hand_R_2",
+  "hand_L_2",
+  "hand_R",
+  "hand_L",
+  "leg_R",
+  "leg_L",
+  "arm_R",
+  "arm_L",
+  "torso"
+ ],
+ "iou_vs_hero": {
+  "front": 0.9571,
+  "three-quarter": 0.9522,
+  "side": 0.9657,
+  "back": 0.961
+ },
+ "iou_mean": 0.959,
+ "shot": "shots/005_demo1_flat_pecs.png"
+}

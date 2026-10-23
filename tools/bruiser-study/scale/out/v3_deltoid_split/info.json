@@ -1,0 +1,21 @@
+{
+ "tag": "v3_deltoid_split",
+ "spec": "spec",
+ "sides": 8,
+ "step": 1,
+ "torso_mult": 3,
+ "tol": 0.006,
+ "faces": 1690,
+ "parts": [
+  "hand_R_2",
+  "hand_L_2",
+  "hand_R",
+  "hand_L",
+  "leg_R",
+  "leg_L",
+  "arm_R",
+  "arm_L",
+  "torso"
+ ],
+ "shot": "shots/003_v3_deltoid_split.png"
+}

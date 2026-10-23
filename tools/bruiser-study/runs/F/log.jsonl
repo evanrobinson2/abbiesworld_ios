@@ -1,0 +1,15 @@
+{"t": 1792742386.5, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3819363222871994, "loss": 0.6700704081489262}
+{"t": 1792742510.8, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.38224590590070184, "loss": 0.6654512745029091}
+{"t": 1792742553.6, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3840026118184786, "loss": 0.6640797672100714}
+{"t": 1792742584.1, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3846705337939125, "loss": 0.6640637350745295}
+{"t": 1792742602.0, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3846705337939125, "loss": 0.662616276927223}
+{"t": 1792742647.8, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.521115796302303, "loss": 0.5357191885750093}
+{"t": 1792742647.9, "who": "F:preview", "chunks": ["chest", "hips", "head", "armR", "armL", "legs"], "focus": "", "iou": 0.9345044873018904, "loss": 0.21442050795197568}
+{"t": 1792742657.8, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.521115796302303, "loss": 0.5357191885750093}
+{"t": 1792742784.2, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.5225424500683105, "loss": 0.5291329887146311}
+{"t": 1792742818.7, "who": "F:hips", "chunks": ["chest", "hips", "head", "armR", "armL", "legs"], "focus": "hips", "iou": 0.9383123058390921, "loss": 0.20955248577778862}
+{"t": 1792742878.2, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.5225424500683105, "loss": 0.5276031974475419}
+{"t": 1792742921.3, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.5235741692137608, "loss": 0.5296637670080255}
+{"t": 1792742950.2, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.5235741692137608, "loss": 0.5307330791611538}
+{"t": 1792742971.6, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.523744470465782, "loss": 0.5309934078015}
+{"t": 1792742990.4, "who": "F:hips", "chunks": ["chest", "hips", "head", "armR", "armL", "legs"], "focus": "hips", "iou": 0.9388272583201268, "loss": 0.21114452570869058}

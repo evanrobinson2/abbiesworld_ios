@@ -1,0 +1,18 @@
+{
+ "tag": "cage_identity_r0.1",
+ "spec": "spec",
+ "base": "spec",
+ "ratio": 0.1,
+ "planar": 0,
+ "faces": 2997,
+ "bound": 26974,
+ "unbound": 874,
+ "iou_vs_hero": {
+  "front": 0.9678,
+  "three-quarter": 0.9655,
+  "side": 0.9682,
+  "back": 0.9681
+ },
+ "iou_mean": 0.9674,
+ "shot": "shots/007_cage_identity_r0.1.png"
+}

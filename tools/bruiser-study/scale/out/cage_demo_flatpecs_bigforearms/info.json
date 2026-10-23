@@ -1,0 +1,18 @@
+{
+ "tag": "cage_demo_flatpecs_bigforearms",
+ "spec": "spec_demo",
+ "base": "spec",
+ "ratio": 0.1,
+ "planar": 0,
+ "faces": 2996,
+ "bound": 15002,
+ "unbound": 0,
+ "iou_vs_hero": {
+  "front": 0.9666,
+  "three-quarter": 0.9714,
+  "side": 0.9786,
+  "back": 0.968
+ },
+ "iou_mean": 0.9712,
+ "shot": "shots/009_cage_demo_flatpecs_bigforearms.png"
+}

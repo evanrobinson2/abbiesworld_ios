@@ -40,3 +40,5 @@
 {"arm":"E","chunk":"armR","tokens":95252,"ms":275490}
 {"arm":"E","chunk":"armL","tokens":74926,"ms":172348}
 {"arm":"E","chunk":"legs","tokens":101387,"ms":264886}
+{"arm":"F","chunk":"chest","tokens":84751,"ms":286884}
+{"arm":"F","chunk":"hips","tokens":93095,"ms":375806}
