@@ -88,6 +88,8 @@ const ICON = {
   plus:'<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
 };
 const ico = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
+// Names read in Title Case (Evan, 03:51Z); small joining words stay lower case.
+const titleCase = s => String(s).replace(/\S+/g, (w, i) => i && /^(a|an|and|at|for|in|of|on|or|the|to|with)$/i.test(w) ? w.toLowerCase() : w[0].toUpperCase() + w.slice(1));
 const FAIR = {fair:'Fair', close:'Close', off:'Off'};
 const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
 const motifFor = m => { try { const v = localStorage.getItem('aw-motif'); if (v) return v; } catch {} return /paper warrior|roman/i.test(m.group || '') ? 'rome' : 'default'; };
@@ -97,7 +99,7 @@ function topbar(m, seq, i){
   return `<header class="awbar">
     <a class="aw" href="/sandbox" aria-label="Abbie’s World">AW</a>
     <div class="nm"><button type="button" class="peb" data-step="-1" aria-label="Previous model" ${i <= 0 ? 'disabled' : ''}>${ico('left')}</button>
-      <h1>${esc(m.name)}</h1>
+      <h1>${esc(titleCase(m.name))}</h1>
       <button type="button" class="peb" data-step="1" aria-label="Next model" ${i >= seq.length - 1 ? 'disabled' : ''}>${ico('right')}</button></div>
     <div class="tools">
       <div class="ctrs" role="group" aria-label="Which models">${counter('todo','To look at')}${counter('accept','Kept')}${counter('adjust','Notes sent')}${counter('reject','Rejected')}</div>

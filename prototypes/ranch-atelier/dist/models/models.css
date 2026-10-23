@@ -186,3 +186,7 @@ model-viewer:not(.placed) .fp{visibility:hidden}
   .decide{flex-wrap:wrap}.decide .ask{order:2;flex-basis:100%;font-size:13px}.decide .thumb{margin-left:auto}
 }
 html[data-motif="efficient"] .sq2 .inset{background:#fff;color:#666}
+/* Evan 03:51Z: the labels use the title's font and Title Case, no shadow */
+.sq2 .inset{padding:4px 12px;font-size:18px;font-weight:500;letter-spacing:-.01em;text-transform:none;color:var(--ink);background:color-mix(in srgb,var(--surface) 90%,transparent);box-shadow:none}
+@media (max-width:640px){.sq2 .inset{padding:2px 8px;font-size:14px}}
+html[data-motif="efficient"] .sq2 .inset{color:var(--ink)}
