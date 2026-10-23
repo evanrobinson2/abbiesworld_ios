@@ -48,11 +48,12 @@
       "id": "abbies-world-score",
       "at": "2026-10-23T03:44:00Z",
       "title": "Abbie's World Score",
-      "ask": "Read the score and say if it measures the right things.",
+      "ask": "Melody A or B? Then name the world versions you'd keep.",
       "thread": "AW-STUDY-0010 - Abbie's World Score",
       "link": "https://claude.ai/artifact/5Es88srv8cG13XiYU6FFCW",
-      "linkLabel": "The score",
-      "status": "waiting"
+      "linkLabel": "Listen",
+      "status": "waiting",
+      "image": "img/abbies-world-score.jpg"
     },
     {
       "id": "ranch-remaster-concepts",
