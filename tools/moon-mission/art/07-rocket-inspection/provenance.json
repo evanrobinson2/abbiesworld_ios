@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "7. First-person rocket inspection walk",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "First person view walking around the base of a huge rounded pink-and-white rocket on its launch pad, my hand holding an inspection clipboard with a simple picture checklist in the foreground, looking up at the big fins and silver engine bells, bright morning daylight, blue sky, soft shadows, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "6a824bbd-9e3a-404f-93c4-6bb3a5e8db91",
+  "page": "https://www.midjourney.com/jobs/6a824bbd-9e3a-404f-93c4-6bb3a5e8db91?index=3",
+  "pick_index": 3,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/6a824bbd-9e3a-404f-93c4-6bb3a5e8db91/0_3.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "ef12ad68682343c343f4c5ef921ad2138dd2d39f1ac743e8840b96554b3d9223"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 3: the only first-person view, hand and clipboard with a picture checklist, pink fins and engine bells above. The rocket here is a realistic tall launcher, not the rounded toy rocket of item 1."
+}
