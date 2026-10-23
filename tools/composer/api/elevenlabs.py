@@ -110,6 +110,13 @@ def main():
                       'model': a.model, 'briefs': a.briefs, 'song_id': song, 'request': body,
                       'date': datetime.date.today().isoformat(), 'sha256': hashlib.sha256(audio).hexdigest(),
                       'licence': 'ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)'}
+            # Traceability (Music Bible section 9): identity, source motif, world/place/situation, key, tempo,
+            # instrumentation, mood, intensity, variants and intended length, when the briefs file carries them.
+            if 'identity' in briefs or 'trace' in c:
+                record['trace'] = {**briefs.get('identity', {}), **c.get('trace', {}),
+                                   'briefs_about': briefs.get('about', ''), 'styles': c['styles'],
+                                   'sections': [[n, st, ms] for n, st, ms in c['sections']],
+                                   'duration_ms': sum(s[2] for s in c['sections'])}
             if not a.no_master:
                 record['master'] = os.path.basename(master(path, c['lufs']))
             json.dump(record, open(path.replace('.mp3', '.json'), 'w'), indent=1)
