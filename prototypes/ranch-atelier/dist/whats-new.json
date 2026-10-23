@@ -24,6 +24,49 @@
       "link": "/town"
     },
     {
+      "id": "2026-10-23-models-load",
+      "date": "2026-10-23",
+      "title": "Models open faster",
+      "line": "The model browser shows a quiet loading ring while a 3D model arrives, loads the next ones ahead, and the laser print effect is gone.",
+      "image": "/whats-new/2026-10-23-models-load.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYSpDBruCTumUhsPACMFHGkt",
+      "threadTitle": "Free high-end asset sources",
+      "tour": false
+    },
+    {
+      "id": "2026-10-23-backpack-floating",
+      "date": "2026-10-23",
+      "title": "The backpack floats out to dress up",
+      "line": "Tap the backpack on the weather instrument and it floats to the middle of the screen, with a card slot for its style, colour, pattern, pocket, straps and lining. Drop a card in a slot and it changes straight away.",
+      "image": "/whats-new/2026-10-23-backpack-floating.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-23-tile-reveal",
+      "date": "2026-10-23",
+      "title": "Tiles build themselves",
+      "line": "Drop a tile and it rolls in bare, then every tree, building and fence drops from the air, tumbles, hovers and snaps into place, all in about a second and a half. Accept in the card designer now prints the tile with a laser and signs it with a tick.",
+      "image": "/whats-new/2026-10-23-tile-reveal.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-world-look",
+      "date": "2026-10-23",
+      "title": "World look: three looks, one switch",
+      "line": "Developer tools only: Storybook (the town's own), Sunday toon (the Ranch's original) and the new Comic ink, thick black cartoon outlines. Open /town?dev and use the World look box.",
+      "image": "/whats-new/2026-10-23-world-look.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF4XcQhA4n7xJdKC6b5zPq8",
+      "threadTitle": "Shaders article",
+      "tour": false,
+      "link": "/town?dev"
+    },
+    {
       "id": "2026-10-23-skatepark-hifi",
       "date": "2026-10-23",
       "title": "A proper skate park",

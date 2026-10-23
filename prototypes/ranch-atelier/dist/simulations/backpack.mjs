@@ -695,7 +695,7 @@ function itemTexture(icon) {
 }
 
 // el: a positioned element the canvas fills. items: [{id, name, icon}], coins: a number, charms: charm ids.
-export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true} = {}) {
+export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true, float = false, deckHost = null, overSlot = null, onDeal = null} = {}) {
  await three();
  const canvas = document.createElement('canvas'); canvas.className = 'aw-bp-canvas';
  Object.assign(canvas.style, {position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block', touchAction: 'none', cursor: 'pointer'});
@@ -789,7 +789,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   const ch = r.intersectObjects(bp.charms.map(p => p.mesh), true)[0];
   if (ch) { let o = ch.object; while (o && !o.userData.charm) o = o.parent; const i = bp.charms.findIndex(p => p.mesh === o); if (i >= 0) { api.focusCharm(i); return; } }
   if (focus != null) { api.unfocus(); return; }
-  if (deck) { const f = hitPart(e.clientX, e.clientY); deck.show(f && f !== 'charm' ? f : 'style'); highlight(f && f !== 'style' && f !== 'charm' ? f : null); return; }
+  if (deck) { const f = hitPart(e.clientX, e.clientY), g = f && f !== 'charm' ? f : 'style'; deck.show(g); onDeal?.(g); highlight(g !== 'style' ? g : null); return; }
   if (r.intersectObject(bp.group, true).length || want > .5) api.toggle();
  });
  let tag = null;
@@ -805,12 +805,12 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  // cards show and you drop into the facet"). The cards are Cards v3 faces (backpack-cards.mjs); dropping one on the
  // backpack, or tapping it, puts that choice on.
  let deck = null;
- async function mountDeck() {
-  const {cardDeck} = await import('./backpack-cards.mjs?v=3');
+ async function mountDeck(first = 'style') {
+  const {cardDeck} = await import('./backpack-cards.mjs?v=5');
   if (deck || !alive) return;
-  deck = cardDeck(el, {look: () => state.l,
-   onDrop: (facet, value, x, y) => { const f = facet === 'style' ? 'style' : facet; const over = x == null || hitPart(x, y) != null; if (!over) return false; apply(f, value); return true; }});
-  deck.show('style');
+  deck = cardDeck(deckHost || el, {look: () => state.l, split: !!deckHost,
+   onDrop: (facet, value, x, y) => { const f = facet === 'style' ? 'style' : facet; const over = x == null || hitPart(x, y) != null || !!overSlot?.(x, y, f); if (!over) return false; apply(f, value); return true; }});
+  deck.show(first); onDeal?.(first);
  }
  function apply(f, value) {
   if (f === 'style') change({style: value}, true); else change({[f]: value});
@@ -839,7 +839,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   const goal = deck && focus == null ? Math.max(want, .36) : want;
   t += Math.sign(goal - t) * Math.min(Math.abs(goal - t), dt / .55); const e = ease(t);
   bp.setOpen(e);
-  if (spin && !drag && idle > 2 && want < .5 && !deck && focus == null) yawWant += dt * .25;
+  if ((spin || float) && !drag && idle > 2 && want < .5 && !deck && focus == null) yawWant += dt * (float ? .12 : .25);
   // In close-up the bag turns its charm's seam toward you, rather than the camera flying round (or through) it.
   const fSide = focus != null && bp.charms[focus] ? Math.sign(bp.charms[focus].anchor.position.x || 1) : 0;
   if (focus != null) yawWant += (-fSide * 1.1 - yawWant) * Math.min(1, dt * 4);
@@ -849,6 +849,8 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   holder.rotation.x = -e * .38;
   const s = bp.group.scale.x; bp.group.scale.setScalar(s + (1 - s) * Math.min(1, dt * 10));
   holder.position.y = e * bp.H * .98;
+  // The floating mini (Evan, 22:55Z): the backpack hangs in the air on its own and idles there, waiting to be touched.
+  if (float) { const k = 1 - e * .7; holder.position.y += Math.sin(now / 900) * bp.H * .035 * k; holder.rotation.z = Math.sin(now / 1300) * .05 * k; holder.rotation.x += Math.sin(now / 1100) * .03 * k; }
   for (const sp of sprites) { sp.visible = e > .6; sp.material.opacity = Math.min(1, (e - .6) * 4); }
   // Glow the part being decorated, gently.
   if (glow) { const k = .18 + .12 * Math.sin(now / 260) + burst * .5; bp.group.traverse(o => { if (o.isMesh && o.material?.emissive && facetOf(o) === glow) { o.material.emissive.setHex(0xfff3d0); o.material.emissiveIntensity = k; } }); }
@@ -864,14 +866,14 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
    const d = Math.max(.3, p.size * 2.6) * zoom * (1 + hop * 1.6);
    wantPos.copy(wantAt).add(tmpV.set(fSide * d * .12, d * .15, d));
   } else {
-   const ty = H * (.5 + .5 * e) + (deck ? -H * .12 : 0), span = H * (1.35 + e * 1.15) * (deck ? 1.45 : 1), wide = (bp.W + .5) * 1.25;
+   const inHand = deck && !deckHost, ty = H * (.5 + .5 * e) + (inHand ? -H * .12 : 0), span = H * (1.35 + e * 1.15) * (inHand ? 1.45 : 1), wide = (bp.W + .5) * 1.25;
    const dist = Math.max(span / 2 / Math.tan(fov / 2), wide / 2 / Math.tan(fov / 2) / cam.aspect) * 1.08;
    wantAt.set(0, ty, 0); wantPos.set(0, ty + .35 * (1 - e) + .1, dist * zoom);
   }
   if (!snapped) { camPos.copy(wantPos); camAt.copy(wantAt); snapped = true; }
   const k = Math.min(1, dt * (focus != null ? 4 : 7)); camPos.lerp(wantPos, k); camAt.lerp(wantAt, k);
   cam.position.copy(camPos); cam.lookAt(camAt);
-  floor.visible = e < .5 && focus == null; floor.material.opacity = .18 * (1 - e * 2);
+  floor.visible = !float && e < .5 && focus == null; floor.material.opacity = .18 * (1 - e * 2);
   bp.update(dt);
   renderer.render(scene, cam);
  }
@@ -885,6 +887,9 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   setContents({items: it = state.items, coins: c = state.coins, charms: ch = state.charms} = {}) { state.items = it; state.coins = c; state.charms = ch; rebuild(); },
   // Decorate (the old name dressUp is kept for callers): the backpack opens part way, the style cards are dealt.
   dressUp(on = true) { if (on && !deck) { focus = null; mountDeck(); } else if (!on && deck) { deck.dispose(); deck = null; highlight(null); } },
+  // Deal one facet's hand (the slots around the floating backpack); null puts the hand away.
+  deal(f) { if (f == null) { api.dressUp(false); onDeal?.(null); return; } focus = null; if (!deck) mountDeck(f); else { deck.show(f); onDeal?.(f); } highlight(f === 'style' ? null : f === 'pattern' ? 'colour' : f); },
+  get dealt() { return deck?.facet || null; },
   get charmCount() { return bp.charms.length; },
   focusCharm(i = 0) {
    const n = bp.charms.length; if (!n) { say('No charms yet: finish a quest to earn one.'); return; }

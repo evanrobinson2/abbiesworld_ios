@@ -248,15 +248,16 @@ button{font:inherit;cursor:pointer}
 </section>
 
 <section id="track">
- <div class="head"><div class="eyebrow">Evan's core loop · the charm track</div><h2>Charms unlock blueprints, blueprints unlock tiles</h2></div>
- <p>The overland loop: explore the world, find the minigames, collect world charms, unlock card blueprints, and grow the board with new tiles. This progression is <b>the charm track</b>. Other tracks can sit beside it later. Each rung below lights up as you earn its charms in the stage above ("Pretend I earned one" works too).</p>
+ <div class="head"><div class="eyebrow">Evan's core loop · the current track</div><h2>Collect the Backpack Charms</h2></div>
+ <div class="lockcard" style="max-width:460px" id="notebook"></div>
+ <p>The overland loop: explore the world, find the minigames, collect world charms, unlock card blueprints, and grow the board with new tiles. This progression is <b>the charm track</b>, and its name in the notebook is <b>Collect the Backpack Charms</b> (above: its line in the existing mission and notebook list, with a progress count that is the only number). Other tracks can sit beside it later. Each rung below lights up as you earn its charms in the stage above ("Pretend I earned one" works too).</p>
  <div id="trackLane" class="lane"></div>
  <p class="muted"><b>This grouping is my proposal, ready for Evan to rearrange.</b> The data is one list (<code>TRACK</code>), so a rung can change its charms, blueprint or tile without touching the layout. Update from the Winchester thread: the Science tile plan was cancelled and the high school stays in the Downtown centre hex, so the first rung is parked until Evan decides. This study does not edit Winchester files.</p>
 </section>
 
 <section id="floating">
- <div class="head"><div class="eyebrow">Evan, 6:51 PM · drafted, not in the game yet</div><h2>Floating charms, like the hidden packages in GTA 3</h2></div>
- <p>Charms are the only reward, and they hang in the world as spinning, glowing pickups. Walk into one and it flies to your chest. Try it: the board below is the Winchester sample, every charm floats in a hidden nook near its place. Move the pointer over the board and a small ring shimmers faster the closer you are to an uncollected charm (the hot and cold feel, with no arrow and no list). Tap a floating charm to collect it.</p>
+ <div class="head"><div class="eyebrow">Evan, 6:51 PM · drafted, not in the game yet</div><h2>Floating charms, iconic medallions and halo beams</h2></div>
+ <p>Charms are the only reward, and they hang in the world as spinning, glowing pickups. Walk into one and it flies to your chest. Try it: the board below is the Winchester sample, every charm floats in a hidden nook near its place. Move the pointer over the board and a small ring shimmers faster the closer you are to an uncollected charm (the hot and cold feel, with no arrow and no list). Tap a floating charm to collect it. The round gold <b>medallions</b> with a halo laser into the sky mark the minigames (basement, Moon Mission, school jump, toy-car coaster): the medallion is the door to a game, the floating charm is the prize, and the beam is visible from across the board. Beam style should match the Effect Hunt beams.</p>
  <div class="stage" style="height:min(70vh,600px)" id="flStage"><svg class="board" id="fl" viewBox="0 0 900 640"></svg>
   <div class="row" style="position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.7);border-radius:99px;padding:6px 14px;font-weight:700;color:#2a2420"><span id="flCnt"></span></div></div>
  <div class="cards">
@@ -267,6 +268,18 @@ button{font:inherit;cursor:pointer}
    <li><b>Pickup.</b> Walk in, golden pickup animation (the coin one), the charm flies into the chest and the slot lights.</li></ul></div>
   <div class="card"><h3>Placement (a proposal for the hex city thread)</h3><p>These spots are Winchester edits, so I only list them; I touched no town files. Offsets are from the place's door, in metres on the town's local grid: café window box (-2, +1), café cellar steps (0, -1.5), the back corner of the skate park beside the café, Abbie's pink tree house (spot <code>abbie-daddy-side.abbieTree</code>), the school roof ladder (0, +3; the school model has no ladder yet), the curb where the black truck parks outside the French bakery (<code>bakery-curb</code>). The lab spot is dropped: the science adventure is parked. Town code to use: <code>AbbieTown.board.heightAt(x,y)</code> for ground height, <code>board.obstaclesNear(x,y,r)</code> to keep pickups clear of houses and trees, <code>AbbieTown.stage.tiles[hexId].spots[id]</code> for positions. This preview's board still draws the lab as a mock. Moon outpost and the coaster follow their own tiles.</p><p><b>Not built:</b> the in-game spinner (a shared <code>charm-pickup</code> world sprite), the proximity chime, and the drop when a minigame ends.</p></div>
  </div>
+</section>
+
+<section id="intro">
+ <div class="head"><div class="eyebrow">Evan, 7:00 PM · drafted · owned by the Performance thread</div><h2>The intro is the charms circling the backpack</h2></div>
+ <div class="tl">
+  <div><b>1 · Black screen</b>The eleven charms circle in the dark. A spotlight picks out the charms, a second light picks out the backpack. Nothing else on screen.</div>
+  <div><b>2 · Loading</b>The circle keeps turning while the shaders load. No bar, no words (progress can be the charms' glow rising).</div>
+  <div><b>3 · Fold</b>When the shaders are ready the charms fold into the backpack, one by one.</div>
+  <div><b>4 · Lights out</b>The scene lights shut off.</div>
+  <div><b>5 · Drop</b>Abbie's World fades up fully working: the overlay loads first, then the massive scene drop with the animation.</div>
+ </div>
+ <p class="muted">This replaces the single-tile chalkboard card idea: the charms-circling intro is the one (Evan's newest word). Nothing here is built; the black screen is the one place a full-screen dark is intended, and it hides nothing in the world because the world isn't loaded yet.</p>
 </section>
 
 <section id="mission">
@@ -586,6 +599,7 @@ const TRACK = [ // each rung: charms to earn -> blueprint card -> tile it expand
 ];
 const hexT = (c, r) => c ? `<svg viewBox="-40 -34 80 70"><polygon points="-34,0 -17,21 17,21 34,0 34,9 17,30 -17,30 -34,9" fill="#85593a"/><polygon points="${[0,1,2,3,4,5].map(i => `${34 * Math.cos(i * Math.PI / 3)},${24 * Math.sin(i * Math.PI / 3)}`).join(' ')}" fill="${c}" stroke="${r}" stroke-width="3"/></svg>` : '<svg viewBox="-40 -34 80 70"><rect x="-22" y="-26" width="44" height="52" rx="5" fill="#fffaf0" stroke="#c9a14a" stroke-width="3"/><path d="M-12-8h24M-12 2h24M-12 12h14" stroke="#c9a14a" stroke-width="3"/></svg>';
 function renderTrack() {
+ $('#notebook').innerHTML = `<div class="art" style="background:#fffaf0">${picHTML('bub')}</div><div><h4>Collect the Backpack Charms</h4><p>${state.earned.size} of ${CH.length} found. Charms unlock blueprints, blueprints unlock tiles.</p></div>`; $('#notebook .art img,#notebook .art svg').style.filter = 'none'; $('#notebook .art img,#notebook .art svg').style.opacity = 1;
  $('#trackLane').innerHTML = TRACK.map(t => { const n = t.charms.filter(c => state.earned.has(c)).length, on = n === t.charms.length;
   return `<div class="rung ${on ? 'on' : ''}"><div class="cs">${t.charms.map(c => `<div class="c ${state.earned.has(c) ? '' : 'no'}">${picHTML(c)}</div>`).join('')}</div><span class="arr">&rarr;</span><div class="bp"><b>${t.bp}</b>${on ? 'Unlocked' : n + ' of ' + t.charms.length + ' charms'}</div><span class="arr">&rarr;</span><div class="tl2">${hexT(t.tile, t.rim)}<span>${t.line}</span></div></div>`; }).join('') + '<div class="rung ghost"><div class="bp" style="border-style:dashed">Another track later (a second set of charms, blueprints and tiles beside this one)</div></div>';
 }
@@ -596,7 +610,14 @@ function renderFloat() {
  let h = '';
  CH.filter(c => !state.earned.has(c.id) && c.at !== 'everywhere' && !(c.moon && !state.tiles.moon)).forEach((c, i) => { const p = place(c.at), o = FOFF[c.id] || [0, 0], x = p.x + o[0], y = p.y + o[1] - 18;
   h += `<g transform="translate(${x},${y})" data-f="${c.id}" style="cursor:pointer"><ellipse cx="0" cy="${26}" rx="14" ry="4" fill="rgba(0,0,0,.28)" class="glow"/><g class="glint" style="animation-delay:${i * .2}s"><circle r="22" fill="rgba(255,226,122,.45)" class="glow"/><g class="spin" style="animation-delay:${i * .3}s"><foreignObject x="-17" y="-17" width="34" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="width:34px;height:34px;display:grid;place-items:center">${picHTML(c.id).replace('<img ', '<img style="width:34px;height:34px;object-fit:contain" ').replace('<svg ', '<svg style="width:34px;height:34px" ')}</div></foreignObject></g></g></g>`; });
- fl.insertAdjacentHTML('beforeend', h + '<circle id="flRing" r="0" fill="none" stroke="#ffd45a" stroke-width="3" opacity="0"/>');
+ const MED = [{at:'cellar', k:'floppy', beam:'#7fd1ff', dx:0, dy:-8, g:'<rect x="-9" y="-9" width="18" height="18" rx="2" fill="#5a7fd1"/><rect x="-5" y="-9" width="10" height="7" fill="#e8ecf5"/><rect x="-5" y="2" width="10" height="7" fill="#2a3a6a"/>'},
+ {at:'truck', k:'rocket', beam:'#ffb74a', dx:0, dy:-6, g:'<path d="M0-11c4 4 5 9 3 14h-6c-2-5-1-10 3-14z" fill="#e8ecf5"/><circle cx="0" cy="-3" r="2.2" fill="#5ab0e8"/><path d="M-5 3l-4 5 6-2M5 3l4 5-6-2" fill="#e5392d"/>'},
+ {at:'school', k:'jump', beam:'#ff7aa8', dx:34, dy:-30, g:'<path d="M-9 8h18M-6 8V-2h12V8M-3-2v-6h6v6" fill="none" stroke="#e5739c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="0" cy="-11" r="2.4" fill="#e5739c"/>'},
+ {at:'coaster', k:'coaster', beam:'#7dff9b', dx:0, dy:-6, g:'<path d="M-10 6Q-6-10 0 0T10-8" fill="none" stroke="#ff7a1a" stroke-width="3" stroke-linecap="round"/><circle cx="8" cy="-8" r="2.6" fill="#e5392d"/>'}];
+let md = '';
+MED.forEach((m, i) => { const p = place(m.at), x = p.x + m.dx, y = p.y + m.dy - 44;
+ md += `<g data-med="${m.k}"><polygon points="${x - 7},${y} ${x + 7},${y} ${x + 3},-20 ${x - 3},-20" fill="${m.beam}" opacity=".55" class="glow" style="animation-delay:${i * .4}s"/><polygon points="${x - 2.5},${y} ${x + 2.5},${y} ${x + 1},-20 ${x - 1},-20" fill="#fff" opacity=".9"/><ellipse cx="${x}" cy="${y + 40}" rx="16" ry="5" fill="${m.beam}" opacity=".5" class="glow"/><g transform="translate(${x},${y})"><g class="glint" style="animation-delay:${i * .3}s"><circle r="17" fill="#ffd96a" stroke="#a87820" stroke-width="3"/><circle r="13" fill="#fffaf0" stroke="#e0a528" stroke-width="1.5"/>${m.g}</g></g></g>`; });
+fl.insertAdjacentHTML('beforeend', md + h + '<circle id="flRing" r="0" fill="none" stroke="#ffd45a" stroke-width="3" opacity="0"/>');
  fl.querySelectorAll('[data-f]').forEach(n => n.onclick = e => { e.stopPropagation(); earn(n.dataset.f); });
  $('#flCnt').textContent = state.earned.size + ' of ' + CH.length + ' in the chest';
 }
