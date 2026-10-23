@@ -31,6 +31,10 @@ Grown-up information is real and welcome, but it never appears in play. Example 
 income statement; Abbie never sees it, she feels the morning rush. Evan reads in the grown-up view that she spent $5K
 on a new espresso machine.
 
+Before the card, pick the way of acting (Evan, 2026-10-23): tiles create the world, cards interact with it as a god, HUD and
+overlay hold simulation controls and the app, FPS is playing as Evan, Abbie or Ani. Never explain it to players
+(`docs/design/INTERACTION_GRAMMAR.md`).
+
 ## 2. While you build: two layers in code
 
 Ranch Atelier code uses `prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs`:
