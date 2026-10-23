@@ -6,7 +6,7 @@ S=0.01
 import os
 SMOOTH=os.environ.get('SMOOTH')=='1'   # fully rounded twin: same parts and pose, dense and smooth-shaded
 K=3 if SMOOTH else 1
-J2 = dict(hR=(232,650), hL=(292,645), kR=(213,845), aR=(195,1045), tR=(160,1112),
+J2 = dict(hR=(240,652), hL=(292,645), kR=(220,845), aR=(195,1045), tR=(160,1112),
  kL=(205,820), aL=(350,955), tL=(392,1000), hc=(262,640), waist=(322,500), neck=(420,396), crown=(494,324),
  sR=(332,422), eR=(283,372), wR=(268,332), fR=(266,300),
  sL=(445,436), eL=(575,408), wL=(705,370), fL=(770,334))
