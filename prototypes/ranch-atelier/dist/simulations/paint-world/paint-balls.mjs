@@ -56,3 +56,16 @@ export function createBallTray({onThrow}) {
  return {el, count: () => balls.length,
   grant(g) { for (let i = 0; i < g.count && balls.length < 14; i++) addBall({colour: g.colours[i % g.colours.length], size: g.size, R: g.size.mult}); return balls.length; }};
 }
+
+// A release at screen (x, y) px with velocity (vx, vy) px/s becomes a ground launch: where the finger is on the ground
+// plane at the camera target's height, and the flick mapped onto the ground by the camera's right and forward.
+// Units follow the scene (the caller's world units per second). Returns null when the finger is above the horizon.
+export function groundThrow(T, camera, canvas, target, x, y, vx, vy) {
+ const r = canvas.getBoundingClientRect(), ray = new T.Raycaster();
+ ray.setFromCamera(new T.Vector2((x - r.left) / r.width * 2 - 1, -((y - r.top) / r.height * 2 - 1)), camera);
+ const t = (target.y - ray.ray.origin.y) / ray.ray.direction.y; if (!(t > 0)) return null;
+ const P = ray.ray.at(t, new T.Vector3()), f = new T.Vector3(); camera.getWorldDirection(f); f.y = 0; f.normalize();
+ const rt = new T.Vector3().crossVectors(f, new T.Vector3(0, 1, 0)).normalize();
+ const k = 2 * camera.position.distanceTo(target) * Math.tan(camera.fov * Math.PI / 360) / r.height * .5;
+ return {x: P.x, z: P.z, vx: (rt.x * vx - f.x * vy) * k, vz: (rt.z * vx - f.z * vy) * k};
+}
