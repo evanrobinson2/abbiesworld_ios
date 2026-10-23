@@ -58,7 +58,7 @@ function chips(){
 let browse = (() => { try { return localStorage.getItem('aw-browse') || 'screen'; } catch (e) { return 'screen'; } })();
 function grid(){
   document.title = 'Models';
-  crumb.innerHTML = '<a href="/models">Models</a>';
+  crumb.innerHTML = set ? `<a href="/review/">Inbox</a> · ${esc(set.title)}` : '<a href="/models">Models</a>';
   const ms = shown(), row = browse === 'row';
   applyLook(null);
   const toggle = `<div class="tools"><div class="lay" role="group" aria-label="Layout">${[['row', 'One at a time', 'row'], ['screen', 'All at once', 'grid']].map(([k, l, i]) =>
@@ -94,6 +94,19 @@ const ICON = {
 const ico = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 // Names read in Title Case (Evan, 03:51Z); small joining words stay lower case.
 const titleCase = s => String(s).replace(/\S+/g, (w, i) => i && /^(a|an|and|at|for|in|of|on|or|the|to|with)$/i.test(w) ? w.toLowerCase() : w[0].toUpperCase() + w.slice(1));
+// The modeler's notes stay in the manifest as written; the page shows them in plain words (Evan, 04:58Z: no
+// technobabble). Sentences about scores, seeds and renders are dropped, measurements in brackets go, and "the hero"
+// becomes "your picture".
+const JARGON = /\bIoU\b|\bseed\b|\bpx\b|\bsamples?\b|SSIM|\bscor(e|ed|es|ing)\b|\bthe AD\b|\bAD\b|\bround \d|\bmean\b|±|\bW\/L\b|\bloss\b|\btriangles?\b|\bbudget\b|\b0\.\d{2,}\b|[-+][XYZ]\b/i;
+function plainNote(note){
+  const said = String(note).split(/(?<=[.!?])\s+(?=[A-Z])/).filter(t => !JARGON.test(t)).map(t => t
+    .replace(/\s*\([^)]*\d[^)]*\)/g, '')
+    .replace(/\bthe (?:turnaround )?sheet's front and side views\b/gi, 'the side views').replace(/\bthe hero (?!(?:wins|has|is|was|shows|keeps|uses|reads|looks|leans|sits|stands|camera)\b)(?=[a-z]{3,}\b)/gi, 'your picture\u2019s ').replace(/\bthe hero's\b/gi, 'your picture\u2019s').replace(/\bthe hero\b/gi, 'your picture').replace(/\bhero\b/gi, 'picture')
+    .replace(/\b(the )?turnaround sheet('s)?\b/gi, (w, a, b) => 'the side views' + (b ? '\u2019' : '')).replace(/\bthe sheet('s)?\b/gi, (w, b) => 'the side views' + (b ? '\u2019' : ''))
+    .replace(/\bsheet views?\b/gi, 'side views').replace(/\bthe side views wants\b/gi, 'the side views want').replace(/\btile size\b/gi, 'game size').replace(/\s{2,}/g, ' ').trim()).join(' ');
+  return said.length > 14 ? said[0].toUpperCase() + said.slice(1) : '';
+}
+const plainList = xs => (xs || []).map(plainNote).filter(Boolean);
 const FAIR = {fair:'Fair', close:'Close', off:'Off'};
 const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
 // Two modes (Evan, 04:03Z). App mode is the flat look (Default, Rome, Efficient) and the default from the Studies and
@@ -164,19 +177,16 @@ function review(){
     ${r ? `<p class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></p>` : ''}
     <div class="pair2">
       <figure class="print"><div class="sq2 pic"><span class="inset">Inspiration</span><img src="${esc(m.urls.ref)}" alt="The inspiration for the ${esc(m.name.toLowerCase())}">${dots}</div>${m.ask || m.subject ? `<button type="button" class="said" data-said aria-label="Show the whole prompt">“${esc(m.ask || m.subject)}”</button>` : ''}</figure>
-      <figure><div class="sq2 alive"><span class="inset">Model</span><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
+      <figure class="livefig"><div class="sq2 alive"><span class="inset">Model</span><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
         auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.8" exposure="0.8" environment-image="neutral">${spots}</model-viewer>
-        <div class="chalk" aria-hidden="true"><svg viewBox="0 0 150 110"><path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/></g></svg></div></div></figure>
-    </div>
-    <div class="decide"><span></span>
-    <div class="thumb" role="group" aria-label="Decide">
+        <div class="chalk" aria-hidden="true"><svg viewBox="0 0 150 110"><path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/></g></svg></div></div><div class="thumb decide" role="group" aria-label="Decide">
       <button type="button" class="tb reject" data-verdict="reject" aria-label="Reject">${ico('reject')}</button>
       <button type="button" class="tb chat" id="chat" aria-label="Talk or type a note">${ico('mic')}</button>
       <button type="button" class="tb accept" data-verdict="accept" aria-label="Keep it">${ico('accept')}</button>
-    </div>
+    </div></figure>
     </div>
     ${fp.length ? `<ol class="focal">${fp.map(f => `<li data-fp="${+f.n}"><span class="fp ${esc(f.verdict)}">${+f.n}</span><b>${esc(f.label)}</b><em class="${esc(f.verdict)}">${FAIR[f.verdict] || ''}</em><span>${esc(f.note)}</span></li>`).join('')}</ol>` : ''}
-    <div class="notes2">${(m.good || []).length ? `<div><h2>What matches</h2><ul>${m.good.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}${(m.off || []).length ? `<div><h2>What is off</h2><ul>${m.off.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}</div>
+    <div class="notes2">${plainList(m.good).length ? `<div><h2>What matches</h2><ul>${plainList(m.good).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}${plainList(m.off).length ? `<div><h2>What is off</h2><ul>${plainList(m.off).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}</div>
     <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}"><img src="${esc(x.urls.ref)}" alt="" loading="lazy"><i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
   </article>`;
   const on = root.querySelector('.strip .on'); if (on){ const st = on.parentElement; st.scrollLeft = on.offsetLeft - st.clientWidth / 2 + on.clientWidth / 2; }
@@ -265,8 +275,8 @@ async function sendOrders(){
 
 function render(push){
   if (view === 'grid') grid(); else review();
-  const path = view === 'review' && cur ? `/models/${encodeURIComponent(cur)}` : '/models';
-  if (push && location.pathname !== path) history.pushState({cur, view}, '', path);
+  const path = (view === 'review' && cur ? `/models/${encodeURIComponent(cur)}` : '/models') + (set ? `?set=${encodeURIComponent(set.id)}` : '');
+  if (push && location.pathname + location.search !== path) history.pushState({cur, view}, '', path);
 }
 
 // ---------- verdicts ----------
@@ -296,7 +306,8 @@ async function decide(verdict, notes, via){
   if (via === 'voice') say(next ? `Next, the ${full(next)}.` : filter === 'todo' ? 'That was the last one.' : 'Saved.');
 }
 // Paper warrior models belong to the Roman model study thread, so their verdicts also reach that thread's feedback inbox.
-const OWNER = [[/^paper warrior/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', 'Models review']];
+const OWNER = [[/^(paper warrior|paper figures|roman parts)/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', 'Models review'],
+  [/^moon remaster/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1', 'Models review']];
 async function send(m, verdict, notes, via){
   try {
     const r = await fetch('/api/model-reviews', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({id:m.id, name:`${m.name}${m.style ? ' (' + m.style + ')' : ''}`, verdict, notes, via})});
@@ -453,7 +464,15 @@ function route(){
   else if (reviews[cur]) filter = 'all';
 }
 
+// A study set (/models?set=<review inbox item id>) shows only that study's models, listed by the item's `models`
+// (ids; a trailing * matches a prefix). The set is the unit a later "upgrade" or "re-imagine the whole set" acts on.
+const set = await (async () => {
+  const id = new URLSearchParams(location.search).get('set'); if (!id) return null;
+  try { const f = await (await fetch('/review/feed.json', {cache:'no-cache'})).json(); const it = (f.items || []).find(x => x.id === id); return it && it.models ? it : null; } catch { return null; }
+})();
+const inSet = m => set.models.some(p => p.endsWith('*') ? m.id.startsWith(p.slice(0, -1)) : m.id === p);
 [list] = await Promise.all([catalogue(), loadReviews()]);
+if (set){ list = list.filter(inSet).sort((a, b) => set.models.findIndex(p => p === a.id) - set.models.findIndex(p => p === b.id)); document.documentElement.dataset.set = set.id; }
 if (!list.length) root.innerHTML = '<p class="empty">No models yet.</p>';
 else {
   route(); render(false);

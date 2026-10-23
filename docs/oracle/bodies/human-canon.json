@@ -1,0 +1,97 @@
+{
+  "study": "AW-STUDY-0016 - Bodies and Creatures",
+  "installment": 1,
+  "title": "The normal human",
+  "version": "1.0",
+  "date": "2026-10-23",
+  "unit": "head: one head height, crown to chin",
+  "frames": {
+    "upper": "heights in heads measured down from the crown (head and torso stay about 4 heads in every build)",
+    "lower": "heights as a fraction of crotch height above the floor (legs take the extra length in tall builds)",
+    "widths": "full widths in heads, seen from the front; depths in heads, seen from the side",
+    "stature": "for scoring, every landmark is also given as a fraction of standing height from the floor"
+  },
+  "sources": [
+    {"id": "gray", "title": "Anatomy of the Human Body (Gray's Anatomy), 20th ed.", "author": "Henry Gray, rev. W. H. Lewis", "year": 1918, "access": "public domain"},
+    {"id": "bridgman", "title": "Constructive Anatomy", "author": "George B. Bridgman", "year": 1920, "access": "public domain, archive.org (constructiveanat00brid)"},
+    {"id": "duval", "title": "Artistic Anatomy (Duval's Artistic Anatomy)", "author": "Mathias Duval", "year": 1884, "access": "public domain, Project Gutenberg #77743"},
+    {"id": "richer", "title": "Artistic Anatomy / Canon des proportions du corps humain", "author": "Paul Richer", "year": 1890, "access": "original public domain; canon as tabulated by Proko's average-figure lesson"},
+    {"id": "thomson", "title": "A Handbook of Anatomy for Art Students", "author": "Arthur Thomson", "year": 1896, "access": "public domain"},
+    {"id": "loomis", "title": "Figure Drawing for All It's Worth", "author": "Andrew Loomis", "year": 1943, "access": "publisher edition (Titan, 2011) and Proko's idealistic-figure lesson; not reproduced"},
+    {"id": "vanderpoel", "title": "The Human Figure", "author": "John H. Vanderpoel", "year": 1907, "access": "public domain, drawingbooks.org"},
+    {"id": "marvel", "title": "How to Draw Comics the Marvel Way", "author": "Stan Lee and John Buscema", "year": 1978, "access": "publisher edition and published summaries; not reproduced"}
+  ],
+  "landmarks": {
+    "crown":     {"name": "Top of the head", "find": "highest point of the skull"},
+    "chin":      {"name": "Chin", "find": "bottom of the jaw; one head down from the crown"},
+    "pit":       {"name": "Pit of the neck", "find": "notch at the top of the breastbone, between the collarbones"},
+    "acromion":  {"name": "Shoulder point", "find": "bony tip of the shoulder at the outer end of the collarbone"},
+    "nipple":    {"name": "Chest line", "find": "two heads down; the nipple line on a man, the bust apex on a woman"},
+    "ribs":      {"name": "Bottom of the ribcage", "find": "lowest edge of the rib arch at the side"},
+    "elbow":     {"name": "Elbow", "find": "point of the elbow with the arm hanging; level with the bottom of the ribs or the waist"},
+    "waist":     {"name": "Waist", "find": "narrowest part of the trunk; higher on a woman"},
+    "navel":     {"name": "Navel", "find": "three heads down; just above the top of the hip bone"},
+    "iliac":     {"name": "Top of the hip bone", "find": "the iliac crest; the one stable hip landmark (Bridgman)"},
+    "asis":      {"name": "Front hip point", "find": "the bony point at the front of the pelvis (ASIS)"},
+    "wrist":     {"name": "Wrist", "find": "with the arm hanging, at the level of the crotch"},
+    "troch":     {"name": "Hip joint bump", "find": "the great trochanter: the widest bony point of the hips, outer thigh"},
+    "crotch":    {"name": "Crotch", "find": "the middle of the body's height sits at the pubic bone, just above it"},
+    "fingertip": {"name": "Fingertips", "find": "with the arm hanging, at mid-thigh"},
+    "knee":      {"name": "Knee", "find": "bottom of the kneecap; halfway from the front hip point to the floor (Richer)"},
+    "calf":      {"name": "Widest calf", "find": "inner calf bulges lower than the outer"},
+    "ankle":     {"name": "Ankle", "find": "outer ankle bone; the inner ankle sits higher (Bridgman)"}
+  },
+  "upper_keys": ["chin", "pit", "acromion", "nipple", "ribs", "elbow", "waist", "navel", "iliac", "asis", "wrist", "troch", "crotch", "fingertip"],
+  "lower_keys": ["knee", "calf", "ankle"],
+  "figures": {
+    "male-average": {
+      "label": "Man, average", "heads": 7.5,
+      "upper": {"chin": 1.0, "pit": 1.27, "acromion": 1.3, "nipple": 2.0, "ribs": 2.6, "elbow": 2.75, "waist": 2.85, "navel": 3.0, "iliac": 3.08, "asis": 3.35, "wrist": 3.95, "troch": 3.6, "crotch": 3.98, "fingertip": 4.73},
+      "lower": {"knee": 0.6, "calf": 0.43, "ankle": 0.085},
+      "width": {"head": 0.68, "neck": 0.55, "shoulders": 2.0, "chest": 1.45, "waist": 1.25, "hips": 1.55, "thigh": 0.74, "knee": 0.44, "calf": 0.5, "ankle": 0.28, "upper_arm": 0.46, "forearm": 0.4, "wrist": 0.27, "hand": 0.4, "foot": 0.42},
+      "depth": {"head": 0.86, "neck": 0.55, "chest": 1.05, "waist": 0.86, "buttocks": 1.0, "thigh": 0.8, "calf": 0.62, "foot": 1.1},
+      "notes": "Richer's average man. Shoulders twice the head; hips narrower than shoulders (about 1.3 to 1)."
+    },
+    "female-average": {
+      "label": "Woman, average", "heads": 7.4,
+      "upper": {"chin": 1.0, "pit": 1.25, "acromion": 1.3, "nipple": 2.05, "ribs": 2.6, "elbow": 2.72, "waist": 2.72, "navel": 3.0, "iliac": 3.03, "asis": 3.3, "wrist": 3.92, "troch": 3.62, "crotch": 3.98, "fingertip": 4.68},
+      "lower": {"knee": 0.6, "calf": 0.43, "ankle": 0.085},
+      "width": {"head": 0.66, "neck": 0.47, "shoulders": 1.78, "chest": 1.32, "waist": 1.1, "hips": 1.68, "thigh": 0.82, "knee": 0.44, "calf": 0.48, "ankle": 0.26, "upper_arm": 0.38, "forearm": 0.33, "wrist": 0.23, "hand": 0.36, "foot": 0.39},
+      "depth": {"head": 0.84, "neck": 0.48, "chest": 1.1, "waist": 0.78, "buttocks": 1.08, "thigh": 0.84, "calf": 0.58, "foot": 1.05},
+      "notes": "Narrower shoulders, wider and deeper pelvis, higher waist, the trochanters are the widest point; shoulders and hips about equal (1.05 to 1)."
+    }
+  },
+  "builds": {
+    "average": {"label": "Average", "heads_add": 0.0, "width": {}, "depth": {}},
+    "heroic": {
+      "label": "Heroic", "heads": {"male": 8.5, "female": 8.2},
+      "upper": {"male": {"nipple": 1.95, "ribs": 2.55, "elbow": 2.75, "waist": 2.9, "wrist": 4.05, "fingertip": 4.95, "crotch": 4.0},
+                "female": {"nipple": 2.0, "elbow": 2.72, "waist": 2.75, "wrist": 4.0, "fingertip": 4.85, "crotch": 4.0}},
+      "width": {"male": {"shoulders": 1.2, "chest": 1.17, "waist": 1.04, "hips": 0.98, "thigh": 1.12, "calf": 1.18, "upper_arm": 1.3, "forearm": 1.22, "neck": 1.25},
+                "female": {"shoulders": 1.1, "chest": 1.08, "waist": 1.0, "hips": 1.0, "thigh": 1.06, "calf": 1.1, "upper_arm": 1.18, "forearm": 1.12, "neck": 1.1}},
+      "depth": {"male": {"chest": 1.12, "buttocks": 1.04, "thigh": 1.1, "calf": 1.12}, "female": {"chest": 1.04, "buttocks": 1.04}},
+      "notes": "Loomis's heroic figure (8.5 heads) and the Marvel Way hero (about 8.75): the extra length goes into the legs, the shoulders reach 2.33 heads on a man, the head looks smaller."
+    },
+    "skinny": {
+      "label": "Skinny", "heads_add": 0.1,
+      "width": {"all": {"shoulders": 0.92, "chest": 0.86, "waist": 0.86, "hips": 0.9, "thigh": 0.78, "calf": 0.8, "upper_arm": 0.76, "forearm": 0.82, "neck": 0.86, "knee": 0.92, "ankle": 0.92}},
+      "depth": {"all": {"chest": 0.86, "waist": 0.86, "buttocks": 0.85, "thigh": 0.8, "calf": 0.82}},
+      "notes": "Same skeleton, less on it: joints read big against thin limbs, the collarbones, ribs and hip points show."
+    },
+    "heavy": {
+      "label": "Heavy", "heads_add": -0.1,
+      "width": {"male": {"shoulders": 1.08, "chest": 1.24, "waist": 1.5, "hips": 1.24, "thigh": 1.34, "calf": 1.22, "upper_arm": 1.34, "forearm": 1.2, "neck": 1.3, "knee": 1.15},
+                "female": {"shoulders": 1.06, "chest": 1.2, "waist": 1.38, "hips": 1.3, "thigh": 1.4, "calf": 1.25, "upper_arm": 1.36, "forearm": 1.18, "neck": 1.22, "knee": 1.18}},
+      "depth": {"male": {"chest": 1.2, "waist": 1.65, "buttocks": 1.2, "thigh": 1.3, "calf": 1.2}, "female": {"chest": 1.22, "waist": 1.45, "buttocks": 1.3, "thigh": 1.35, "calf": 1.2}},
+      "notes": "Same skeleton, more soft mass. Men carry it on the belly in front; women on the hips, thighs and seat. Joints and the head stay their size."
+    }
+  },
+  "ratios": {
+    "shoulder_to_hip": {"male": [1.15, 1.4], "female": [0.98, 1.12], "source": "Richer; Wikipedia 'Body proportions' (lateral widths, means 1.18 and 1.03)"},
+    "arm_span_to_height": [0.98, 1.05],
+    "hand_to_head": [0.7, 0.85],
+    "foot_to_head": [1.0, 1.2],
+    "head_width_to_height": [0.62, 0.72]
+  },
+  "tolerance": {"height": 0.15, "width": 0.12, "note": "heights within 0.15 head of the canon, widths within 12 percent"}
+}

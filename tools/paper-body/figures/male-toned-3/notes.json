@@ -1,0 +1,9 @@
+{
+  "asset": "male-toned-3",
+  "request": "Evan, 2026-10-23 04:39Z: \"can you model https://www.midjourney.com/jobs/d9420c89-239a-408b-a2c6-058c6045ff11?index=2 and https://www.midjourney.com/jobs/adc9fe3e-8bd2-41d2-b15d-31834c855353?index=3 .. but reduce the female shoulder bulbs\" (this asset is the adc9fe3e index 3 man)",
+  "rounds": [
+    {"round": 1, "date": "2026-10-23", "score_iou": 0.923, "triangles": 2734,
+     "notes": "Built with male-hero round 2's method: torso, arm and leg widths traced row by row from this pick's mask; parts, depth, fold ridges and seams from the recipe. Pick-specific: narrow helmet head with a pointed chin, wide waistband over briefs cut high at the hip, arms hanging nearly straight with an elbow cuff, knee bands, ankle cuffs, slim pointed slipper feet. Fixed an upper-arm row that read the merged shoulder run (a flat plate across the chest). Still differs: the deltoids read as separate rounded blocks rather than flowing from steep traps, and the pec and ab planes are softer than the pick's crisp folds."}
+  ],
+  "same_camera_shot": "r/shot.png (tools/paper-body/figures/shot.py)"
+}

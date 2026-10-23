@@ -28,3 +28,10 @@ When something needs Evan's eyes, append one item to `feed.json` in your PR, the
 - `status`: `waiting` (needs Evan), `coming` (on the way, no action), `done` (hidden).
 - When Evan answers, set your item to `done` or replace it with the next round (new `id`, keep the old one as `done`).
 - Evan's own "Done" taps are stored on his phone only.
+
+## Model studies
+
+Add `"models": ["id-1", "id-2"]` (catalogue ids from `models/manifest.json`; `"moon-*"` matches a prefix) to make the
+item a study set. Tapping it opens `/models/?set=<item id>`: the models review desk showing only that set, concept on the
+left, 3D in the middle, keep / talk / reject on the right. Verdicts go to `/api/model-reviews` and, for owned groups,
+to the owning thread's feedback inbox (`OWNER` in `models/models.js`). Put each model in `models/manifest.json` first.
