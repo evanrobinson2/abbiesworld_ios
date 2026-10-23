@@ -1,0 +1,383 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Spore (Cell Stage)",
+    "developer": "Maxis",
+    "publisher": "Electronic Arts",
+    "release": "2008",
+    "steam_appid": 17390
+  },
+  "core": {
+    "fantasy": "You are a tiny new cell in a drop of water, eating, growing and redesigning yourself until you are big enough to leave the pool.",
+    "pillars": [
+      "You design yourself",
+      "Eat or be eaten, by size",
+      "Grow and the world rises with you"
+    ],
+    "signature_moment": "You fit a new spike from a fallen meteor fragment, swim back out, and the thing that chased you a minute ago is now your lunch.",
+    "anti_goals": [
+      "no harsh failure: death respawns you from an egg",
+      "no reading",
+      "no long tutorial"
+    ],
+    "signatures": [
+      {
+        "id": "size_is_the_rule",
+        "layer": "mechanics",
+        "description": "Who eats whom is decided by size and parts you can see: smaller things are food, bigger things are danger.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "cell_editor",
+        "layer": "mechanics",
+        "description": "A mating call opens a playful editor where you drag parts (mouths, spikes, flagella, eyes, poison) onto your cell, paint it and swim off changed.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "parts_found_in_world",
+        "layer": "pacing",
+        "description": "New parts are found in the world, in meteor fragments and in creatures you eat, then become editor choices.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "water_layers",
+        "layer": "art",
+        "description": "The pool is stacked in parallax layers: blurred giants drift below, sunlit specks float above, and growing lifts you to the next layer.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "diet_by_mouth",
+        "layer": "mechanics",
+        "description": "The mouth you choose sets your diet (plants, meat or both), which changes how you play.",
+        "class": "style",
+        "confidence": 0.7
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "expression": 0.35,
+        "discovery": 0.25,
+        "sensation": 0.2,
+        "challenge": 0.1,
+        "fantasy": 0.1
+      },
+      "emotional_targets": {
+        "wonder": 0.8,
+        "pride": 0.7,
+        "mischief": 0.4,
+        "mild tension": 0.4
+      },
+      "audience": {
+        "age": "everyone, including children",
+        "skill_floor": "low",
+        "context": "about an hour for the Cell Stage"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "swim",
+          "input": "click or WASD"
+        },
+        {
+          "verb": "eat",
+          "input": "touch food"
+        },
+        {
+          "verb": "attack",
+          "input": "ram or part ability"
+        },
+        {
+          "verb": "edit cell",
+          "input": "drag parts in the editor"
+        },
+        {
+          "verb": "paint",
+          "input": "pick colours"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "swim",
+          "eat or flee",
+          "collect DNA",
+          "find a part",
+          "call a mate",
+          "edit the cell",
+          "grow to the next layer"
+        ],
+        "period_s": {
+          "value": 240,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "soft",
+        "win": "fill the DNA bar to grow legs and leave the water",
+        "resources": [
+          "DNA points",
+          "health"
+        ],
+        "scoring": "DNA points fill an evolution bar"
+      },
+      "randomness": {
+        "amount": 0.2,
+        "kind": "output"
+      },
+      "information": "perfect",
+      "systems": [
+        "size-based predator and prey",
+        "diet set by mouth part",
+        "part abilities (spikes, poison, electric, jets)",
+        "procedural animation of any editor creation",
+        "depth layers that change scale"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 5,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse",
+          "keyboard"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "top_down",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "freeform_autofit",
+        "undo": "unlimited in the editor",
+        "preview_before_commit": true,
+        "auto_repair": true
+      },
+      "juice": {
+        "procedural_settle": 0.7,
+        "squash_stretch": 0.6,
+        "sound_on_action": 0.9,
+        "particles": 0.5,
+        "scale_pop": 0.5,
+        "camera_kick": 0.2,
+        "screen_shake": 0.1,
+        "hit_stop": 0.0
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "stylised_pbr",
+        "family": "stylised_pbr",
+        "light": "soft_wrap",
+        "outlines": false,
+        "outline": "none",
+        "surface": "gradient",
+        "post": [
+          "depth of field",
+          "bloom",
+          "fog"
+        ],
+        "signature": "Cell Stage: soft translucent 3D cells with glowing rims, seen straight down, floating in parallax layers of water whose blur and tint grow with depth, so giant creatures drift past below like shadows.",
+        "lesson": "A top-down 2D game can still have depth: stack the pool in blurred, tinted layers and move the player up a layer as they grow. Our film-look depth of field and an SVG or shader cell rim do the rest."
+      },
+      "references": [
+        "microscope photography of pond life",
+        "soft toy and plush shapes",
+        "nature documentaries"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "body": {
+          "mix": {
+            "overlay": 0.6,
+            "diegetic": 0.4
+          },
+          "timing": "on_change",
+          "note": "A small health bar; the cell flashes and wobbles when hit.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "threat": {
+          "mix": {
+            "diegetic": 0.7,
+            "spatial": 0.3
+          },
+          "timing": "always_on",
+          "note": "Size and spikes show danger; bigger creatures loom as blurred shapes in the layer below before they rise.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "overlay": 0.7,
+            "diegetic": 0.3
+          },
+          "timing": "always_on",
+          "note": "The DNA bar fills toward the next evolution; meteor fragments glint where new parts are.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 0.8,
+            "diegetic": 0.2
+          },
+          "timing": "summoned",
+          "note": "The cell editor is a separate screen opened by a mating call; changes show at once on the cell.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "navigation": {
+          "mix": {
+            "diegetic": 0.6,
+            "none": 0.4
+          },
+          "timing": "absent",
+          "note": "No map: you drift where the food is; the edge of the drop is soft.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "neutral_overlay",
+        "fade_rule": "Only health and the DNA bar while you swim; the editor is summoned."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "your size (growth)",
+            "channels": [
+              "camera",
+              "npcs",
+              "music",
+              "light"
+            ]
+          }
+        ],
+        "max_channels": 4
+      },
+      "note": "The cell carries most of it: parts show what it can do, size shows who can eat whom, and bigger shapes drift by in blurred layers below. A thin DNA bar and health are the only overlay; the editor is summoned by a mating call."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "emergent": 0.6,
+        "enacted": 0.2,
+        "evoked": 0.2
+      },
+      "tone": {
+        "cozy_tense": -0.3,
+        "whimsical_grounded": -0.6,
+        "earnest_ironic": 0.2,
+        "quiet_loud": -0.4,
+        "handmade_industrial": -0.5
+      },
+      "themes": [
+        "growth",
+        "evolution",
+        "self-expression"
+      ]
+    },
+    "pacing": {
+      "structure": "campaign",
+      "tension_curve": "rising_to_end",
+      "failure_cost": "none"
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.33,
+      "expression": 0.89,
+      "structure": 0.67,
+      "social": 0.11,
+      "systems": 0.56,
+      "chance": 0.33,
+      "session": 0.44
+    },
+    "confidence": 0.8
+  },
+  "ledger": {
+    "style": [
+      "top-down eat-or-be-eaten by size",
+      "parts found in the world feed a playful cell editor",
+      "diet chosen by mouth part",
+      "parallax water layers with depth blur",
+      "growing lifts you to a bigger layer",
+      "procedural animation of any creation"
+    ],
+    "expression": [
+      "Spore's creatures, parts and their designs",
+      "its cell and pool art",
+      "its music and sounds",
+      "its editor UI",
+      "the Spore name and logo"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "mechanics",
+        "target": "Abbie's science adventure rules",
+        "setting": "Size decides who eats whom, shown on the creatures themselves; being eaten just pops you back out of an egg.",
+        "from_signature": "size_is_the_rule"
+      },
+      {
+        "layer": "mechanics",
+        "target": "Abbie's science adventure editor",
+        "setting": "Parts found in the goo become choices in a playful cell editor; every change shows at once in how Abbie's cell swims.",
+        "from_signature": "cell_editor"
+      },
+      {
+        "layer": "art",
+        "target": "Abbie's science adventure 2D view",
+        "setting": "A top-down drop of water drawn in SVG and shaders: soft translucent cells with glowing rims, and parallax layers that blur and tint with depth.",
+        "from_signature": "water_layers"
+      },
+      {
+        "layer": "pacing",
+        "target": "Abbie's science adventure progression",
+        "setting": "Growing lifts the camera to the next, bigger layer of the pool, where the old giants are now your size.",
+        "from_signature": "water_layers"
+      }
+    ],
+    "leave": [
+      "Spore's creatures and parts",
+      "its later stages (creature, tribe, civilisation, space)",
+      "its menus and editor art"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/owned_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

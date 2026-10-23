@@ -1,0 +1,89 @@
+{
+  "appid": 17390,
+  "name": "Spore",
+  "store_url": "https://store.steampowered.com/app/17390/",
+  "genres": [
+    "Simulation",
+    "Creature creator",
+    "Sandbox"
+  ],
+  "short_description": "Guide a creature from a single cell in a tide pool to a space-faring civilisation, designing it yourself at every stage.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Simulation",
+    "Creature creator",
+    "Sandbox"
+  ],
+  "summary": "Guide a creature from a single cell in a tide pool to a space-faring civilisation, designing it yourself at every stage.",
+  "identity": {
+    "core_loop": "Cell Stage: swim through a drop of water, eat or be eaten, collect DNA, find new parts, call a mate to open the editor, rebuild your cell, grow, and rise into bigger layers of the pool until you grow legs.",
+    "mechanics": null,
+    "ui_and_game_feel": "Playful and light; every few minutes you redesign yourself and feel the change at once in how you swim and fight.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The cell carries most of it: parts show what it can do, size shows who can eat whom, and bigger shapes drift by in blurred layers below. A thin DNA bar and health are the only overlay; the editor is summoned by a mating call.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Soft translucent cells seen from above in a sunlit drop of water, with parallax layers of blurred, tinted creatures above and below.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "depth of field",
+        "bloom",
+        "fog"
+      ],
+      "signature": "Cell Stage: soft translucent 3D cells with glowing rims, seen straight down, floating in parallax layers of water whose blur and tint grow with depth, so giant creatures drift past below like shadows.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.7,
+      "lesson": "A top-down 2D game can still have depth: stack the pool in blurred, tinted layers and move the player up a layer as they grow. Our film-look depth of field and an SVG or shader cell rim do the rest."
+    },
+    "palette": null,
+    "audio_mood": "Gentle procedural ambient music, wet squelches and chomps; the editor plays your creature's own tune.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "The Cell Stage is the model for Abbie's science adventure: one drop of water seen from above, eat-or-be-eaten by size, new parts found in the world and fitted in a playful editor, and the camera rising to a bigger layer as you grow."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.33,
+      "expression": 0.89,
+      "structure": 0.67,
+      "social": 0.11,
+      "systems": 0.56,
+      "chance": 0.33,
+      "session": 0.44
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
