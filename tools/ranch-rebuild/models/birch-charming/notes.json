@@ -1,0 +1,112 @@
+{
+ "what_i_did": [
+  [
+   "Starting point",
+   "Copied build.py, make_views.py, hero_check.py and run.sh from models/birch and reshaped them. Same conventions: Z up, metres, origin at the trunk base on the ground, front -Y, no animation and no variants (tree group), export_animations=False. Same parts and material names (trunk, trunk_base, bark_marks, branches, leaves_light, leaves_dark; Bark_White, Bark_Dark, Bark_Black, Leaf_Light, Leaf_Dark), plus one new part for the new detail: leaf_puffs (Leaf_Puff, foliage role)."
+  ],
+  [
+   "Footprint",
+   "4.19 x 4.41 x 7.33 m. Width/depth 0.95, close to the normal birch's 0.98. It is a bit chubbier than the normal one relative to its height (0.59 against 0.49), as the charming style asks. The hero is drawn from 30 deg off the front, so the trunk's S and the spread of the clumps are laid out along that view's screen axis, and the far-right clump is pushed back in depth to keep the footprint square."
+  ],
+  [
+   "Views",
+   "make_views.py now keys mj/birch-charming. The hero's soft cast-shadow band survived the shadow filter and was joined to the trunk base. Below 84% of the image height only the trunk's columns are kept, and inside them a colour test keeps the greyer bark and dark feet and drops the warmer shadow. The sheet's grass discs are cut off at the trunk base (0.903). All three sheet views are kept but they disagree with the hero: they show a taller, thinner trunk with a two-lobed crown starting halfway up, not the hero's five clumps on a short S trunk. The hero wins, so the sheet IoU is capped around 0.5."
+  ],
+  [
+   "Trunk",
+   "A chubby soft S-twist read from the hero: 9 sides, 26 horizontal rings (no twisting frame, widened by the slope so it keeps its thickness through the bends), smooth shaded, with soft bulges. Radius 0.36 m at the ground, 0.25 at 2 m, 0.06 at the top. Dark Bark_Dark root toes and a ragged collar at the base, and 20 big wrapped black Bark_Black dashes."
+  ],
+  [
+   "Crown",
+   "Five plump clumps (left, lower left, the big top one, upper right, far right), each on a short Bark_White branch arching from the trunk. Each clump has a cap of 4 to 6 soft Leaf_Puff cloud puffs, a Leaf_Dark inner skirt with a zigzag hem so the curtain reads as a mass, and about 15 threads per metre of radius made of chunky diamond leaf cards (0.33 x 0.30 m, larger than the normal birch's), 70% Leaf_Light. More threads face the hero camera, and the back threads hang shorter."
+  ],
+  [
+   "Game readiness",
+   "3,863 triangles, under the normal birch's 4k budget. 7 meshes, one flat material each, doubleSided leaf cards. to_game.py birch-charming installed simulations/regional-assets-charming/WW-139.glb cleanly."
+  ]
+ ],
+ "good": [
+  "It reads as the same weeping silver birch, made into a toy: a fat white S-trunk with black dashes, and round puffy clumps with drooping leaf curtains.",
+  "The hero IoU is 0.757, against 0.558 for the normal birch's final version.",
+  "Width/depth matches the normal model, so it swaps in place."
+ ],
+ "off": [
+  "The hero's puffs have painted swirl spirals. They are under 3% of the tree at game size, so they are left out; the puffs are plain soft balls.",
+  "The hero's curtains are hundreds of tiny leaves. Within 4k triangles this is fewer, larger cards over a dark skirt, so the skirt shows as flat panels from the back.",
+  "The sheet views are a different tree (taller, thinner trunk, two-lobed crown), so the sheet mean is 0.54.",
+  "The dark root feet are smaller than the hero's mossy toes."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First charming build: S trunk, five clumps of squashed puffs with threads of chunky cards. Puffs read as mushrooms and the curtains were stringy. 5.3k triangles.",
+   "mean_iou": 0.452,
+   "hero_iou": 0.609
+  },
+  {
+   "round": 2,
+   "change": "Fatter trunk, rounder and cheaper puffs (7x4), a dark solid skirt inside each curtain, larger cards, 3.6k triangles.",
+   "mean_iou": 0.511,
+   "hero_iou": 0.76
+  },
+  {
+   "round": 3,
+   "change": "Zigzag skirt hem, 70% of threads facing the camera, mostly Leaf_Light threads.",
+   "mean_iou": 0.511,
+   "hero_iou": 0.747
+  },
+  {
+   "round": 4,
+   "change": "Bigger S in the trunk, top clump raised, lower-left and far-right curtains shortened, Leaf_Light toned down, simpler bark dashes.",
+   "mean_iou": 0.529,
+   "hero_iou": 0.764
+  },
+  {
+   "round": 5,
+   "change": "Bark dashes made bigger and set off the trunk's flat facets so they show.",
+   "mean_iou": 0.52,
+   "hero_iou": 0.773
+  },
+  {
+   "round": 6,
+   "change": "Trunk rebuilt from horizontal rings, which removes the pinches at the bends caused by the tube frame flipping.",
+   "mean_iou": 0.516,
+   "hero_iou": 0.777
+  },
+  {
+   "round": 7,
+   "change": "Shorter, narrower inner skirts so the threads cover them, fewer puffs, more threads (4.06k).",
+   "mean_iou": 0.516,
+   "hero_iou": 0.761
+  },
+  {
+   "round": 8,
+   "change": "Threads trimmed to 15 per metre to get back under 4k (3,863).",
+   "mean_iou": 0.52,
+   "hero_iou": 0.758
+  },
+  {
+   "round": 9,
+   "change": "Far-right clump moved back in depth, so the footprint is square (width/depth 0.95, like the normal birch).",
+   "mean_iou": 0.54,
+   "hero_iou": 0.759
+  },
+  {
+   "round": 10,
+   "change": "Final 768 px / 48 sample render and score; to_game.py birch-charming.",
+   "mean_iou": 0.54,
+   "hero_iou": 0.757
+  }
+ ],
+ "scores_final": {
+  "front": 0.543,
+  "side": 0.496,
+  "back": 0.582,
+  "mean_iou": 0.54,
+  "hero_iou": 0.757,
+  "hero_camera": "yaw 30, elev 10 (same as models/birch)"
+ },
+ "moving_parts": "None. Trees are static GLBs that the game sways itself.",
+ "creative_additions": "Cloud-puff caps on each clump and the fat dark root toes. Chunky oversized leaf cards and bark dashes, as storybook toy details.",
+ "charming_changes": "From the normal birch: one tall faceted S trunk became a short, chubby, smooth soft S-twist (radius 0.36 m at the ground against 0.15). One even weeping crown became five separate puffy clumps leaning off to one side. Puff caps (the new Leaf_Puff material) were added on top of each clump. Leaf cards and bark dashes are larger, and the dark base has root toes. Materials, origin, orientation and footprint ratio are the same as the normal birch."
+}
