@@ -39,6 +39,21 @@
     },
     "camera": "isometric",
     "art_direction": "Painterly Japan.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "colour grade"
+      ],
+      "signature": "Painterly Japan with clean readable surfaces and a graded sky per level.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
+    },
     "palette": null,
     "audio_mood": "Japanese score.",
     "pacing": "slow, short sessions",

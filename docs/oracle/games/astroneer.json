@@ -41,6 +41,23 @@
     },
     "camera": "third_person",
     "art_direction": "Bright pastel low-poly planets.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "flat_low_poly",
+      "family": "flat_low_poly",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "bloom",
+        "fog"
+      ],
+      "signature": "Pastel low-poly planets with smooth gradients and soft atmosphere.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "Smooth gradients across low-poly faces look soft and friendly to kids."
+    },
     "palette": null,
     "audio_mood": "Soft synth.",
     "pacing": "slow, short sessions",

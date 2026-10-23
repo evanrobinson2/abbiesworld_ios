@@ -39,6 +39,22 @@
     },
     "camera": "third_person",
     "art_direction": "Comic-book cel shading.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "toon",
+      "family": "comic_ink",
+      "light": "banded",
+      "outlines": true,
+      "outline": "inverted_hull",
+      "surface": "hand_painted",
+      "post": [
+        "bloom"
+      ],
+      "signature": "Comic-book shading with crisp light bands and outlines that thin with distance.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "Outline width should follow distance and importance, not stay one fixed pixel width."
+    },
     "palette": null,
     "audio_mood": "Hero voices and big stings.",
     "pacing": "fast, short sessions",

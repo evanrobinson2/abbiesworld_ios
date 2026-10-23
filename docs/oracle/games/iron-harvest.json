@@ -39,6 +39,21 @@
     },
     "camera": "orbit_diorama",
     "art_direction": "Painterly diesel-punk.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "colour grade"
+      ],
+      "signature": "Painterly diesel-punk taken from a painter's alternate-history paintings.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
+    },
     "palette": null,
     "audio_mood": "Orchestral.",
     "pacing": "brisk, medium sessions",

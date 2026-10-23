@@ -36,6 +36,21 @@
     },
     "camera": "first_person",
     "art_direction": "Photoreal Unreal 5 interiors.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "realistic",
+      "family": "realistic",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+        "colour grade"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
     "palette": null,
     "audio_mood": "Loud realistic gunfire.",
     "pacing": "fast, short sessions",

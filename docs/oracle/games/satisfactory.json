@@ -41,6 +41,21 @@
     },
     "camera": "first_person",
     "art_direction": "Bright industrial sci-fi.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+        "bloom"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
     "palette": null,
     "audio_mood": "Calm ambient, machine hum.",
     "pacing": "slow, long sessions",

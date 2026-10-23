@@ -41,6 +41,23 @@
     },
     "camera": "first_person",
     "art_direction": "Cel-shaded.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "toon",
+      "family": "comic_ink",
+      "light": "banded",
+      "outlines": true,
+      "outline": "screen_edges",
+      "surface": "hand_painted",
+      "post": [
+        "edge detection",
+        "bloom"
+      ],
+      "signature": "The Borderlands ink recipe pushed toward saturated fantasy colour.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "Saturated colour needs darker, thicker ink to keep forms readable."
+    },
     "palette": null,
     "audio_mood": "Fantasy.",
     "pacing": "fast, short sessions",

@@ -42,6 +42,23 @@
     },
     "camera": "third_person",
     "art_direction": "Stylised painterly coast.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "fog",
+        "colour grade"
+      ],
+      "signature": "Stylised painterly coast whose fog and grade turn cold and wrong at night.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "One time-of-day signal driving fog, grade and danger together."
+    },
     "palette": null,
     "audio_mood": "Melancholy sea-shanty mood.",
     "pacing": "brisk, short sessions",

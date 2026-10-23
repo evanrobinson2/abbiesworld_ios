@@ -38,6 +38,21 @@
     },
     "camera": "top_down",
     "art_direction": "Neon blueprint.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "graphic_minimal",
+      "light": "flat",
+      "outlines": true,
+      "outline": "screen_edges",
+      "surface": "flat_colour",
+      "post": [
+        "bloom"
+      ],
+      "signature": "Glowing blueprint lines on dark.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
+    },
     "palette": null,
     "audio_mood": "Electronic.",
     "pacing": "brisk, short sessions",

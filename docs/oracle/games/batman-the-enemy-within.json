@@ -39,6 +39,22 @@
     },
     "camera": "third_person",
     "art_direction": "Comic-book 3D.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "toon",
+      "family": "comic_ink",
+      "light": "banded",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "hand_painted",
+      "post": [
+        "colour grade"
+      ],
+      "signature": "Comic-book ink on characters with heavy black shadow shapes.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.5,
+      "lesson": "Big designed shadow shapes read better than accurate soft shadows in a comic look."
+    },
     "palette": null,
     "audio_mood": "Cinematic.",
     "pacing": "slow, short sessions",

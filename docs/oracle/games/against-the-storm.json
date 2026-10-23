@@ -42,6 +42,23 @@
     },
     "camera": "top_down",
     "art_direction": "Painterly fantasy diorama with rain and foliage.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "fog",
+        "colour grade"
+      ],
+      "signature": "Painterly diorama whose storm season recolours the whole map.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "One weather signal drives light, music and danger at once."
+    },
     "palette": null,
     "audio_mood": "Folk instruments that darken in the storm.",
     "pacing": "brisk, long sessions",
