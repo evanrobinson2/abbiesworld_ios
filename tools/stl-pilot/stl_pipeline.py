@@ -18,6 +18,11 @@ T0 = time.perf_counter()
 ROOT = os.path.dirname(os.path.abspath(__file__))
 slug = sys.argv[sys.argv.index("--") + 1]
 D = os.path.join(ROOT, slug)
+if slug.startswith("car-"):  # toy-car variant: separate named wheels, car faces +Z, wheels on y=0
+    sys.path.insert(0, ROOT)
+    import stl_cars
+    stl_cars.run(slug, D)
+    raise SystemExit(0)
 
 # dim: ("Z"|"MAX", metres) is the real-world size we scale the assembled model to.
 CFG = {

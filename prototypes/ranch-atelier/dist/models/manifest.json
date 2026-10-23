@@ -10677,6 +10677,361 @@
      "CC BY 4.0 (credit the author)"
     ]
    ]
+  },
+  {
+   "id": "stl-car-racer",
+   "name": "Toy racer",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "good",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-racer/ref.jpg",
+    "glb": "/models/stl-car-racer/model.glb"
+   },
+   "good": [
+    "Chunky, friendly racer with a clear nose, cockpit bump and big tyres.",
+    "Four separate wheels, each named wheel, with the axle running side to side so they can spin.",
+    "Sits on the ground facing forward, at about car size."
+   ],
+   "off": [
+    "Wheel positions were placed by eye from the body shape, so they may sit a little off the real axles.",
+    "One plain tan colour, with no number plate or stripes."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "3dworkbench",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/624877-3dworkbench-toy-car",
+    "authorUrl": "https://www.printables.com/@3dworkbench",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Toy racer by 3dworkbench on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.344 wide × 1.216 tall × 3.2 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-toddler",
+   "name": "Chunky toddler car",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-toddler/ref.jpg",
+    "glb": "/models/stl-car-toddler/model.glb"
+   },
+   "good": [
+    "Soft, rounded toy shape that suits a storybook garage.",
+    "Four separate wheels that can spin."
+   ],
+   "off": [
+    "The body is a flat slab with a window hole, more of a toy block than a car.",
+    "Wheels are huge for the body and were placed by eye."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Thump2010",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/457455-safer-toddlers-toy-car",
+    "authorUrl": "https://www.printables.com/@Thump2010_791839",
+    "credit": "remix of 'Toddlers Toy Car' by Newton101 (thingiverse.com); credit both"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Chunky toddler car by Thump2010 on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.675 wide × 1.489 tall × 2.6 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-pickup",
+   "name": "Toy pickup truck",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-pickup/ref.jpg",
+    "glb": "/models/stl-car-pickup/model.glb"
+   },
+   "good": [
+    "Reads clearly as a pickup, with a cab and an open bed.",
+    "Four separate wheels that can spin."
+   ],
+   "off": [
+    "The wheels are tiny compared with the body, so it looks like it is gliding.",
+    "Wheel positions were placed by eye.",
+    "The original has a print-in-place tailgate that is not kept."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Korbinian",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/389381-toy-car",
+    "authorUrl": "https://www.printables.com/@Korbinian",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Toy pickup truck by Korbinian on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.45 wide × 1.069 tall × 4.6 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-sedan",
+   "name": "Red sedan",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-sedan/ref.jpg",
+    "glb": "/models/stl-car-sedan/model.glb"
+   },
+   "good": [
+    "Plain, readable family car shape.",
+    "Wheels were found inside the file automatically, so they sit exactly right and can spin."
+   ],
+   "off": [
+    "Very simple flat panels with no real detail.",
+    "Lighter than the usual size for a car, so it can take more detail."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Jibraan Ahmed",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/834935-low-poly-car",
+    "authorUrl": "https://www.printables.com/@JibraanAhmed_1958699",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Red sedan by Jibraan Ahmed on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.056 wide × 1.352 tall × 4.4 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-wedge",
+   "name": "Wedge toy car",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "weak",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-wedge/ref.jpg",
+    "glb": "/models/stl-car-wedge/model.glb"
+   },
+   "good": [
+    "Great retro wedge silhouette."
+   ],
+   "off": [
+    "The wheels are fused to the body, so they cannot spin and the car cannot be used for driving as it is.",
+    "To use it, the wheels would need to be cut out and rebuilt."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "jirka.skladal",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/303932-toy-car",
+    "authorUrl": "https://www.printables.com/@jirkaskladal_405051",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Wedge toy car by jirka.skladal on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.086 wide × 1.419 tall × 4.2 long, m"
+    ],
+    [
+     "Wheels",
+     "Fused to the body"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-concept",
+   "name": "Concept sports car",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "weak",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-concept/ref.jpg",
+    "glb": "/models/stl-car-concept/model.glb"
+   },
+   "good": [
+    "The most detailed and exciting shape of the set."
+   ],
+   "off": [
+    "The wheels are fused to the body, so they cannot spin.",
+    "The source is very heavy and was shrunk a long way, which softens the detail.",
+    "The Printables picture is marked as AI-generated, so treat the design as inspiration."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "SirJellybeans",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/1554985-low-poly-print-in-place-futuristic-model-car",
+    "authorUrl": "https://www.printables.com/@SirJellybeans",
+    "credit": "author's own model; the Printables picture is marked AI-generated"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Concept sports car by SirJellybeans on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.155 wide × 1.11 tall × 4.6 long, m"
+    ],
+    [
+     "Wheels",
+     "Fused to the body"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
   }
  ]
 }

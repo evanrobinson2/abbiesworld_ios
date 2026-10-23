@@ -1,0 +1,77 @@
+{
+  "slug": "car-toddler",
+  "stages": {
+    "import": {
+      "seconds": 0.01,
+      "tris": 25128,
+      "files": [
+        "source_body.stl",
+        "source_wheel.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.26,
+      "tris": 25128,
+      "open_edges_before": 0,
+      "open_edges_after": 0,
+      "dust_shells_removed": 0
+    },
+    "orient_and_wheels": {
+      "seconds": 0.01,
+      "tris": 67896,
+      "wheels": 4,
+      "body_dims_mm": [
+        109.5,
+        34.5,
+        62.7
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.02,
+      "tris": 67896,
+      "final_size_m_wh_l": [
+        1.675,
+        1.489,
+        2.6
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 5.9,
+      "tris": 4498,
+      "parts": {
+        "body": {
+          "before": 10872,
+          "after": 3618
+        },
+        "wheel": {
+          "before": 14256,
+          "after": 220
+        }
+      },
+      "texture_px": 512
+    },
+    "export": {
+      "seconds": 0.26,
+      "tris": 4498,
+      "glb": "car-toddler.glb",
+      "bytes": 206752
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 4500,
+  "pipeline": "stl_cars.py",
+  "scale_to_metres": {
+    "factor": 0.023754338053437934,
+    "final_size_m": [
+      1.675,
+      1.489,
+      2.6
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 4498,
+  "high_poly_tris": 10872,
+  "wheel_count": 4,
+  "script_total_s": 6.87,
+  "process_wall_s": 7.81
+}

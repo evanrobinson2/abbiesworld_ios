@@ -1,0 +1,73 @@
+{
+  "slug": "car-concept",
+  "stages": {
+    "import": {
+      "seconds": 0.26,
+      "tris": 890236,
+      "files": [
+        "source_body.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 4.07,
+      "tris": 889814,
+      "open_edges_before": 31,
+      "open_edges_after": 31,
+      "dust_shells_removed": 1
+    },
+    "orient_and_wheels": {
+      "seconds": 1.02,
+      "tris": 889814,
+      "wheels": 0,
+      "body_dims_mm": [
+        2001.1,
+        937.5,
+        483.0
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.26,
+      "tris": 889814,
+      "final_size_m_wh_l": [
+        2.155,
+        1.11,
+        4.6
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 12.29,
+      "tris": 6000,
+      "parts": {
+        "body": {
+          "before": 889814,
+          "after": 6000
+        }
+      },
+      "texture_px": 1024
+    },
+    "export": {
+      "seconds": 0.16,
+      "tris": 6000,
+      "glb": "car-concept.glb",
+      "bytes": 612332
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 6000,
+  "pipeline": "stl_cars.py",
+  "wheel_shells_found": 0,
+  "scale_to_metres": {
+    "factor": 0.0022987116046956834,
+    "final_size_m": [
+      2.155,
+      1.11,
+      4.6
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 6000,
+  "high_poly_tris": 889814,
+  "wheel_count": 0,
+  "script_total_s": 18.41,
+  "process_wall_s": 19.31
+}
