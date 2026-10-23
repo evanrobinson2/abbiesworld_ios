@@ -402,14 +402,47 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/welcome",
       "has": [
         {
           "type": "host",
           "value": "abbies.world"
         }
       ],
-      "destination": "https://www.abbies.world/:path*",
+      "destination": "https://www.abbies.world/welcome",
+      "permanent": false
+    },
+    {
+      "source": "/terms",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/terms",
+      "permanent": false
+    },
+    {
+      "source": "/support/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/support/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/api/support",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/api/support",
       "permanent": false
     },
     {
@@ -456,17 +489,6 @@
     },
     {
       "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.abbies.world"
-        }
-      ],
-      "destination": "/welcome",
-      "permanent": false
-    },
-    {
-      "source": "/",
       "destination": "/sandbox",
       "permanent": false,
       "missing": [
@@ -477,10 +499,6 @@
         {
           "type": "host",
           "value": "app.abbies.world"
-        },
-        {
-          "type": "host",
-          "value": "www.abbies.world"
         }
       ]
     },
