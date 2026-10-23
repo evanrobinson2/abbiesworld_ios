@@ -1,0 +1,618 @@
+<title>What Makes a Great Card</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a felt card table. One column of reading width; cards and diagrams break wider. Single committed dark look. */
+:root {
+  --felt: #1d3529;
+  --felt-deep: #142820;
+  --felt-lift: #26443a;
+  --ink: #f1e8d4;
+  --muted: #b7c2b0;
+  --brass: #e4b85e;
+  --rule: rgba(241, 232, 212, 0.14);
+  --plate: #f6ecd6;
+  --plate-ink: #2b1d0e;
+  --bad: #ef8a6f;
+  --good: #9fd38a;
+  --display: "Fredoka", "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--felt);
+  background-image:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 230, 170, 0.10), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 5px);
+  color: var(--ink);
+  font: 17px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+.read { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; line-height: 1.12; margin: 0; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); color: var(--ink); }
+h3 { font-size: 1.2rem; }
+p { margin: 0; }
+a { color: var(--brass); }
+a:focus-visible, button:focus-visible, .card:focus-visible { outline: 3px solid var(--brass); outline-offset: 4px; }
+.eyebrow { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass); }
+.muted { color: var(--muted); }
+section { padding-block: 56px 8px; border-top: 1px solid var(--rule); margin-top: 48px; display: grid; gap: 22px; }
+.mono { font-family: var(--mono); font-size: 0.86em; }
+
+/* Hero */
+header.hero { padding-block: 48px 8px; display: grid; gap: 18px; }
+.hero .lede { font-size: 1.15rem; color: var(--muted); max-width: 62ch; }
+.table { position: relative; overflow-x: clip; min-width: 0; margin-top: 8px; padding: 28px 0 8px; display: grid; justify-items: center; gap: 18px; }
+.hand { min-width: 0; display: flex; justify-content: center; align-items: flex-end; min-height: min(300px, 34vw); padding-bottom: 14px; width: 100%; perspective: 1400px; }
+.hand .slot { flex: none; width: min(190px, 19vw); margin: 0 max(-26px, -2vw); transform-origin: 50% 120%; transition: transform 380ms cubic-bezier(.34,1.56,.64,1); }
+.hand .slot:hover, .hand .slot:focus-within { z-index: 5; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+button.chip {
+  font: 600 0.95rem/1 var(--display); color: var(--plate-ink); background: linear-gradient(#f3d995, #d9a94a);
+  border: 0; border-radius: 999px; padding: 11px 18px; cursor: pointer;
+  box-shadow: 0 2px 0 #8a6420, 0 6px 14px rgba(0,0,0,0.35);
+}
+button.chip.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--rule); }
+button.chip:active { transform: translateY(2px); box-shadow: 0 0 0 #8a6420, 0 3px 8px rgba(0,0,0,0.35); }
+
+/* Card object */
+.card { position: relative; width: 100%; aspect-ratio: 63 / 88; border-radius: 4.8% / 3.4%; transform-style: preserve-3d;
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1); cursor: pointer; --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; --lift: 0px; --s: 1;
+  transform: translateY(var(--lift)) scale(var(--s)) rotateX(var(--rx)) rotateY(var(--ry)); }
+.card .face, .card .back { position: absolute; inset: 0; border-radius: inherit; backface-visibility: hidden; overflow: hidden;
+  box-shadow: 0 1px 0 #6b4a26, 0 2px 0 #4f351b, 0 3px 0 #3b2712, 0 14px 26px rgba(0,0,0,0.45); }
+.card .face svg, .card .back svg { width: 100%; height: 100%; display: block; }
+.card .back { transform: rotateY(180deg); }
+.card.flipped .inner { transform: rotateY(180deg); }
+.card .inner { position: absolute; inset: 0; border-radius: inherit; transform-style: preserve-3d; transition: transform 430ms cubic-bezier(.3,1.25,.5,1); }
+.card .shine { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; mix-blend-mode: soft-light; opacity: 0;
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.75), rgba(255,255,255,0) 45%); transition: opacity 200ms; }
+.card.hovering .shine { opacity: 1; }
+.card .foil { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; mix-blend-mode: color-dodge; opacity: 0.28;
+  background: linear-gradient(115deg, transparent 20%, #ff7ab8 32%, #ffe36e 40%, #7dffb0 48%, #6ec8ff 56%, #c58bff 64%, transparent 76%);
+  background-size: 260% 260%; background-position: var(--mx) var(--my); animation: sweep 5s ease-in-out infinite alternate; }
+.card.hovering .foil { animation: none; opacity: 0.5; }
+@keyframes sweep { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+.card .glow { position: absolute; inset: 0; border-radius: 6%; pointer-events: none; opacity: 0; filter: blur(14px); transition: opacity 260ms; }
+.card.charging .glow { opacity: 1; animation: pulse 420ms ease-in-out infinite alternate; }
+@keyframes pulse { from { transform: scale(1.0); } to { transform: scale(1.1); } }
+.card.sun .living, .card.harvest .living { animation: drift 7s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: translateX(-12px); } to { transform: translateX(14px); } }
+.card.idle { animation: sway var(--period, 4s) ease-in-out infinite alternate; }
+@keyframes sway { from { rotate: -1.5deg; } to { rotate: 1.5deg; } }
+
+/* Principles */
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.pr { background: var(--felt-lift); border-radius: 14px; padding: 18px; display: grid; gap: 6px; box-shadow: inset 0 0 0 1px var(--rule); }
+.pr b { font-family: var(--display); font-weight: 600; font-size: 1.08rem; }
+.pr span { color: var(--muted); font-size: 0.95rem; }
+
+/* Games */
+.games { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.game { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: start; padding: 16px; border-radius: 14px; background: rgba(0,0,0,0.16); box-shadow: inset 0 0 0 1px var(--rule); min-width: 0; }
+.game svg { width: 96px; height: auto; display: block; }
+.game h3 { font-size: 1.05rem; }
+.game p { font-size: 0.9rem; color: var(--muted); margin-top: 4px; }
+.game p b { color: var(--ink); font-weight: 700; }
+.game .take { color: #cfe6c4; }
+.game .leave { color: #f0b8a6; }
+
+/* Figures */
+figure { margin: 0; display: grid; gap: 10px; }
+figcaption { color: var(--muted); font-size: 0.92rem; max-width: 70ch; }
+.row { display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-end; }
+.row > * { min-width: 0; }
+.lod { display: grid; gap: 8px; justify-items: center; text-align: center; }
+.lod .tag { font: 500 0.8rem var(--mono); color: var(--brass); }
+.lod small { color: var(--muted); font-size: 0.82rem; max-width: 22ch; }
+.scroll { overflow-x: auto; }
+.anatomy { display: grid; grid-template-columns: minmax(220px, 320px) 1fr; gap: 28px; align-items: center; }
+@media (max-width: 720px) { .anatomy { grid-template-columns: 1fr; } }
+.callouts { display: grid; gap: 10px; }
+.callouts div { display: grid; grid-template-columns: 112px 1fr; gap: 10px; font-size: 0.95rem; }
+.callouts div b { font-family: var(--display); font-weight: 600; color: var(--brass); }
+.callouts div span { color: var(--muted); }
+.shapes { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; }
+.shapes figure { justify-items: center; text-align: center; }
+.ladder { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 640px) { .ladder { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ladder .t { display: grid; gap: 6px; justify-items: center; text-align: center; font-size: 0.86rem; }
+.ladder .t b { font-family: var(--display); font-size: 1rem; }
+.cvd { display: grid; grid-template-columns: 110px repeat(5, 1fr); gap: 6px; align-items: center; font: 0.8rem var(--mono); color: var(--muted); }
+.cvd i { display: block; height: 26px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.25); }
+.pairs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pair .verdict { font: 600 0.8rem var(--mono); text-align: center; margin-top: 4px; }
+.pair .verdict.no { color: var(--bad); } .pair .verdict.yes { color: var(--good); }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 500 0.75rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass); }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ledger { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.ledger div { padding: 18px; border-radius: 14px; box-shadow: inset 0 0 0 1px var(--rule); }
+.ledger ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.94rem; }
+@media (prefers-reduced-motion: reduce) {
+  .card, .card .inner, .hand .slot { transition-duration: 150ms !important; }
+  .card.idle, .card .foil, .card .living, .card.charging .glow { animation: none !important; }
+}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Game Oracle study · 22 Oct 2026 · for the card generator</span>
+    <h1>What makes a great card</h1>
+    <p class="lede">Ten card games and the premium print trade, boiled down to a spec and a rubric for Abbie's World cards. Every card on this page is drawn for this study; none copies another game's art, frames or text. Touch a card to tilt it, then deal the pack.</p>
+    <div class="table">
+      <div class="hand" id="hand"></div>
+      <div class="controls">
+        <button class="chip" id="deal" type="button">Deal the pack</button>
+        <button class="chip ghost" id="flipall" type="button">Turn all face down</button>
+      </div>
+      <p class="muted" style="font-size:.9rem;text-align:center;max-width:56ch">Each face-down card glows its rarity before it turns. Seed turns at once; Sun waits 1.2 seconds with a pulse. That wait is the anticipation Hearthstone's pack glow and a pack tear create.</p>
+    </div>
+  </header>
+
+  <section>
+    <span class="eyebrow">The short version</span>
+    <h2>Eight things every great card does</h2>
+    <div class="principles">
+      <div class="pr"><b>It is an object first</b><span>Thickness, edge, material and moving light. A flat rectangle reads as a website.</span></div>
+      <div class="pr"><b>The art is the card</b><span>50 to 65% of a standard face, all of a top-tier one. The frame is a stage.</span></div>
+      <div class="pr"><b>It has levels of detail</b><span>Inspect shows everything, the hand shows art and numbers, the board shows art, cost and one stat.</span></div>
+      <div class="pr"><b>A cost and two stats, at most</b><span>Big, outlined, in fixed corners. Everything else is an icon or waits for inspect.</span></div>
+      <div class="pr"><b>Rarity is triple-coded</b><span>Colour, shape and finish together, so it survives colour blindness and a 72 px thumbnail.</span></div>
+      <div class="pr"><b>Rarity shows before the flip</b><span>A glow and a wait that grow with rarity. Half the joy is the anticipation.</span></div>
+      <div class="pr"><b>Top tiers change the silhouette</b><span>Borderless, frame-break, living art and foil, recognisable across the room.</span></div>
+      <div class="pr"><b>Collectible down to the metadata</b><span>Set mark, number out of total, maker line and variant code. Kids complete sets.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">The games</span>
+    <h2>What each one teaches</h2>
+    <p class="read muted">Schematics are abstract layout diagrams, drawn here, showing where the elements sit. Gold is a number, the light block is the art window, the lined block is text.</p>
+    <div class="games" id="games"></div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Readability</span>
+    <h2>One card, three sizes</h2>
+    <p class="read">Every digital card game draws a different card at each size. Rules text only has to be readable when you inspect a card; in the hand you need art, name and numbers; on the board, art, cost and one stat. The checker's thumbnail test shrinks a card to 72 px tall and asks a vision model for cost, stat, rarity and type.</p>
+    <div class="scroll"><div class="row" id="lods" style="min-width:520px"></div></div>
+  </section>
+
+  <section>
+    <span class="eyebrow">The Abbie's World card</span>
+    <h2>Anatomy</h2>
+    <div class="anatomy">
+      <div id="anatomyCard"></div>
+      <div class="callouts">
+        <div><b>Cost</b><span>Top-left token. One chunky outlined numeral, 18 pt or more in print.</span></div>
+        <div><b>Name</b><span>Ribbon across the top. Rounded display face, 10 pt or more, 18 characters or fewer.</span></div>
+        <div><b>Art window</b><span>Its outline is the card type. 50 to 65% of the face. One subject, centred, with headroom.</span></div>
+        <div><b>Rarity gem</b><span>On the seam between art and text plate. A growth stage: seed, sprout, bloom, harvest, sun.</span></div>
+        <div><b>Text plate</b><span>Never text on raw art. 15 words or fewer, or up to three ability icons. 8 pt or more.</span></div>
+        <div><b>Stats</b><span>Bottom-left and bottom-right tokens. Two stats at most; the board view keeps one.</span></div>
+        <div><b>Collector line</b><span>Set mark, number out of total, maker line (Midjourney job or artist), variant code. Inside the 3 mm safe area.</span></div>
+        <div><b>Frame</b><span>Ranch materials: pine, paint, brass, lacquer, gilt. 15 to 30% of the face, with a real bevel.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Type by shape</span>
+    <h2>The window's outline says what the card is</h2>
+    <p class="read">Hearthstone and Slay the Spire both arrived at this: you know the card type before you read a word. Our shapes come from things on the Ranch, so they don't echo either game.</p>
+    <div class="shapes" id="shapes"></div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Rarity</span>
+    <h2>Growth stages, from Seed to Sun</h2>
+    <p class="read">Kids already know that a seed becomes a sprout, a bloom and a harvest. Each tier changes the gem's shape, its colour and lightness, and the frame's material. The finish (Shimmer foil, Golden Hour, Frost) is a separate axis that any tier can carry.</p>
+    <div class="ladder" id="ladder"></div>
+    <figure>
+      <div class="cvd" id="cvd"></div>
+      <figcaption>The same five gem colours as seen with deuteranopia and protanopia (Machado 2009 simulation). The checker requires an OKLab distance of at least 15 between any two tiers in all three rows; the current colours score 20.8, 17.4 and 18.2. The gem shapes carry the difference too.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <span class="eyebrow">Art crop</span>
+    <h2>Good and bad framing</h2>
+    <div class="pairs" id="pairs"></div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Print</span>
+    <h2>Collection grade on paper</h2>
+    <div class="anatomy">
+      <figure class="svgfig" id="printfig"></figure>
+      <div class="callouts">
+        <div><b>Trim</b><span>63 × 88 mm, the standard trading-card size. Fits 66 × 91 mm sleeves.</span></div>
+        <div><b>Bleed</b><span>3 mm beyond trim on every side. Art and frame colour run into it.</span></div>
+        <div><b>Safe</b><span>Text, numbers and gems stay 3 mm inside trim and clear of the 3 mm corner arcs.</span></div>
+        <div><b>Pixels</b><span>Master at 600 ppi: 1630 × 2221 px with bleed (trim 1488 × 2079). 300 ppi is the floor.</span></div>
+        <div><b>Colour</b><span>PDF/X-4, coated CMYK (FOGRA39 or GRACoL 2013). Total ink 300% or less. Small text in 100% black only.</span></div>
+        <div><b>Stock</b><span>300 to 330 gsm black-core card, about 0.30 mm, smooth or linen.</span></div>
+        <div><b>Finishes</b><span>Holofoil laminate, cold foil, spot UV, etched foil, embossing, a holo stamp on rare and up. Each needs a mask layer.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Juice</span>
+    <h2>Timing, in milliseconds</h2>
+    <p class="read">These are targets for the in-game card (three.js), estimated from the games above and to be measured on capture. Sound accompanies every motion; iOS web apps have no vibration, so sound carries the feel on Evan's iPhone.</p>
+    <figure class="svgfig"><div class="scroll" id="timeline"></div>
+      <figcaption>Reduced motion swaps every movement for a 150 ms crossfade. Budget: 60 fps with ten cards in hand on an iPhone 12-class device.</figcaption></figure>
+  </section>
+
+  <section>
+    <span class="eyebrow">The rubric</span>
+    <h2>Seven gates, then 100 points</h2>
+    <p class="read">Any failed gate rejects the card. A card ships at 80 points or more. The full rubric, with thresholds and how each check is measured, is <span class="mono">docs/oracle/cards/card-rubric.json</span>; the reference checker is <span class="mono">tools/card-rubric/check_card.py</span>.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Gate</th><th>Passes when</th></tr></thead>
+      <tbody>
+        <tr><td>Geometry</td><td>Canvas is 1630 × 2221 px at 600 ppi, or 814 × 1109 at 300 ppi, with bleed</td></tr>
+        <tr><td>Safe area</td><td>Every text, number and gem box is 3 mm inside trim and clear of the corner arcs</td></tr>
+        <tr><td>Text size</td><td>Text 8 pt, name 10 pt, numerals 18 pt or more in print</td></tr>
+        <tr><td>Contrast</td><td>Text 4.5:1 against its plate; numerals 3:1</td></tr>
+        <tr><td>Art resolution</td><td>Art source at least the window's size at 300 ppi, upscaled 2× at most</td></tr>
+        <tr><td>Expression ledger</td><td>No other game's art, frame, icon, font or text; provenance recorded</td></tr>
+        <tr><td>Kid-safe</td><td>PG; reading grade 3 or below; 15 words or fewer on the face</td></tr>
+      </tbody>
+    </table></div>
+    <figure class="svgfig"><div class="scroll" id="weights"></div>
+      <figcaption>Scored dimensions and their weights. Thumbnail readability, hierarchy, art crop and juice carry half of the score between them.</figcaption></figure>
+  </section>
+
+  <section>
+    <span class="eyebrow">The legal line</span>
+    <h2>Style we learn, expression we never copy</h2>
+    <div class="ledger">
+      <div><h3 style="color:var(--good)">Free to learn from</h3><ul>
+        <li>Cost in a corner, stats in the bottom corners, rarity tiers, foil: card-game conventions</li>
+        <li>Shape-coded card types and rarity symbols as ideas</li>
+        <li>Levels of detail, two-number faces, text on inspect</li>
+        <li>Variant ladders, finishes and flares as collectible axes</li>
+        <li>Juice timings, tilt, glow before the reveal</li>
+        <li>All print specs and finishes</li></ul></div>
+      <div><h3 style="color:var(--bad)">Never copied</h3><ul>
+        <li>Any game's card art, frame art, gems, symbols, card backs</li>
+        <li>Their fonts (Beleren, Plantin and the rest) and logos</li>
+        <li>Characters, creatures and card names or text</li>
+        <li>One game's whole look taken together (trade dress)</li>
+        <li>Another game's card image as a Midjourney or modeler reference</li></ul></div>
+    </div>
+    <p class="read muted" style="font-size:.92rem">Every game's findings are recorded as identity-schema signatures, each marked style or expression, in <span class="mono">docs/oracle/cards/card-signatures.json</span>.</p>
+  </section>
+
+  <section>
+    <span class="eyebrow">Sources</span>
+    <div class="read muted" style="font-size:.92rem;display:grid;gap:6px">
+      <p><a href="https://mtg.wiki/page/Frame">MTG Wiki: Card frame</a> · <a href="https://hearthstone.wiki.gg/wiki/Rarity">Hearthstone Wiki: Rarity</a> · <a href="https://snap.fan/guides/infinity-splits-and-frame-breaks-guide/">snap.fan: splits and frame breaks</a> · <a href="https://outof.games/news/2659-riot-comments-on-the-recent-changes-to-runeterras-card-frames/">Riot on Runeterra card frames</a> · <a href="https://slaythespire.wiki.gg/wiki/Cards">Slay the Spire Wiki: Cards</a> · <a href="https://www.pokeguardian.com/guides/1258277_international-scarlet-violet-pokemon-card-rarities-list">PokeGuardian: Scarlet &amp; Violet rarities</a> · <a href="https://en.wikipedia.org/wiki/9_Kings">Wikipedia: 9 Kings</a> · <a href="https://blakecrosley.com/zh-Hans/guides/design/balatro">Balatro feedback write-up</a> · <a href="https://v2.4over4.com/guide/trading-card-sizes-the-complete-guide">4over4 trading card guide</a></p>
+      <p>Game feel: Swink, <i>Game Feel</i> (2008); Jonasson and Purho, "Juice it or lose it" (2012). Colour-blind simulation: Machado, Oliveira and Fernandes (2009). Saliency: Hou and Zhang (2007). Juice timings are estimates until measured.</p>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+const TIERS = {
+  seed:    { label: 'Seed',    kid: 'common',    gem: '#633e1d', hold: 0,    glow: '#b88552' },
+  sprout:  { label: 'Sprout',  kid: 'uncommon',  gem: '#549a44', hold: 200,  glow: '#7fd36a' },
+  bloom:   { label: 'Bloom',   kid: 'rare',      gem: '#45aade', hold: 450,  glow: '#6cc8ff' },
+  harvest: { label: 'Harvest', kid: 'epic',      gem: '#993f94', hold: 800,  glow: '#e07be0' },
+  sun:     { label: 'Sun',     kid: 'legendary', gem: '#fac547', hold: 1200, glow: '#ffd862' },
+};
+const ORDER = ['seed', 'sprout', 'bloom', 'harvest', 'sun'];
+let uid = 0;
+
+// Art window outlines in card units (630 x 880, 10 units per mm). Window spans x 50..580, y 112..640.
+const WINDOW = {
+  animal:   'M50,640 V377 A265,265 0 0 1 580,377 V640 Z',
+  building: 'M50,640 V262 L315,112 L580,262 V640 Z',
+  crop:     'M50,640 V165 a53,53 0 0 1 106,0 a53,53 0 0 1 106,0 a53,53 0 0 1 106,0 a53,53 0 0 1 106,0 a53,53 0 0 1 106,0 V640 Z',
+  weather:  'M315,112 A264,264 0 1 1 314.9,112 Z',
+  helper:   'M50,640 V192 L130,112 H500 L580,192 V640 Z',
+};
+const TYPE_LABEL = { animal: 'Animal', building: 'Building', crop: 'Crop', weather: 'Weather', helper: 'Helper' };
+
+function gemShape(tier, cx, cy, r, fill) {
+  const s = 'stroke="#2b1d0e" stroke-width="5"';
+  if (tier === 'seed') return `<ellipse cx="${cx}" cy="${cy}" rx="${r*0.72}" ry="${r}" fill="${fill}" ${s} transform="rotate(-25 ${cx} ${cy})"/><path d="M${cx-r*0.2},${cy-r*0.5} q${r*0.3},${r*0.5} 0,${r}" stroke="#f3d7a8" stroke-width="4" fill="none" opacity=".6"/>`;
+  if (tier === 'sprout') return `<path d="M${cx},${cy+r} V${cy-r*0.1}" stroke="#2b1d0e" stroke-width="9"/><path d="M${cx},${cy-r*0.1} C${cx-r*1.3},${cy-r*0.2} ${cx-r*1.1},${cy-r*1.2} ${cx-r*0.1},${cy-r*0.9} Z M${cx},${cy-r*0.1} C${cx+r*1.3},${cy-r*0.2} ${cx+r*1.1},${cy-r*1.2} ${cx+r*0.1},${cy-r*0.9} Z" fill="${fill}" ${s}/>`;
+  if (tier === 'bloom') { let p = ''; for (let k = 0; k < 5; k++) { const a = k / 5 * Math.PI * 2 - Math.PI / 2; p += `<circle cx="${cx + r*0.55*Math.cos(a)}" cy="${cy + r*0.55*Math.sin(a)}" r="${r*0.48}" fill="${fill}" ${s}/>`; } return p + `<circle cx="${cx}" cy="${cy}" r="${r*0.32}" fill="#ffd862" ${s}/>`; }
+  if (tier === 'harvest') { let p = `<path d="M${cx},${cy+r} V${cy-r*0.8}" stroke="#2b1d0e" stroke-width="7"/>`; for (let k = 0; k < 3; k++) { const y = cy - r*0.6 + k*r*0.5; p += `<ellipse cx="${cx-r*0.32}" cy="${y}" rx="${r*0.3}" ry="${r*0.2}" fill="${fill}" ${s} transform="rotate(-30 ${cx-r*0.32} ${y})"/><ellipse cx="${cx+r*0.32}" cy="${y}" rx="${r*0.3}" ry="${r*0.2}" fill="${fill}" ${s} transform="rotate(30 ${cx+r*0.32} ${y})"/>`; } return p + `<ellipse cx="${cx}" cy="${cy-r*0.95}" rx="${r*0.2}" ry="${r*0.3}" fill="${fill}" ${s}/>`; }
+  let p = ''; for (let k = 0; k < 12; k++) { const a = k / 12 * Math.PI * 2; const r1 = k % 2 ? r*0.95 : r*1.15; p += `<path d="M${cx + r*0.45*Math.cos(a - 0.22)},${cy + r*0.45*Math.sin(a - 0.22)} L${cx + r1*Math.cos(a)},${cy + r1*Math.sin(a)} L${cx + r*0.45*Math.cos(a + 0.22)},${cy + r*0.45*Math.sin(a + 0.22)} Z" fill="${fill}" ${s}/>`; }
+  return p + `<circle cx="${cx}" cy="${cy}" r="${r*0.55}" fill="${fill}" ${s}/>`;
+}
+
+// Subjects drawn in card units, with the ground near y 600. dx/scale move the subject for the crop examples.
+const SUBJECT = {
+  sheep: () => `<g><g fill="#2b2420"><rect x="250" y="500" width="22" height="80" rx="10"/><rect x="300" y="505" width="22" height="78" rx="10"/><rect x="350" y="505" width="22" height="78" rx="10"/><rect x="392" y="500" width="22" height="80" rx="10"/></g>
+    <g fill="#fbf8ef" stroke="#d9d2c0" stroke-width="4">${[[260,420],[300,390],[350,388],[392,410],[410,455],[380,500],[330,510],[280,500],[245,465],[330,450]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="58"/>`).join('')}</g>
+    <ellipse cx="445" cy="395" rx="44" ry="54" fill="#2f2622"/><ellipse cx="410" cy="365" rx="22" ry="12" fill="#2f2622" transform="rotate(-30 410 365)"/><ellipse cx="482" cy="362" rx="22" ry="12" fill="#2f2622" transform="rotate(30 482 362)"/><circle cx="432" cy="388" r="7" fill="#fff"/><circle cx="460" cy="388" r="7" fill="#fff"/><circle cx="433" cy="390" r="3.5" fill="#111"/><circle cx="461" cy="390" r="3.5" fill="#111"/><ellipse cx="447" cy="420" rx="10" ry="6" fill="#e9a1a1"/></g>`,
+  barn: () => `<g><path d="M170,600 V380 L315,250 L460,380 V600 Z" fill="#c4473a" stroke="#6e2019" stroke-width="8"/><path d="M150,392 L315,238 L480,392" fill="none" stroke="#f3ead8" stroke-width="22" stroke-linejoin="round"/>
+    <rect x="255" y="450" width="120" height="150" fill="#9c3328" stroke="#f3ead8" stroke-width="12"/><path d="M255,450 L375,600 M375,450 L255,600" stroke="#f3ead8" stroke-width="10"/><rect x="290" y="330" width="50" height="50" fill="#f3d58b" stroke="#f3ead8" stroke-width="8"/>
+    <path d="M460,600 V470 H520 V600" fill="#d9b25a" stroke="#7a5b24" stroke-width="6"/><path d="M455,470 Q490,430 525,470" fill="#e8c56a" stroke="#7a5b24" stroke-width="6"/></g>`,
+  sunflower: () => `<g><path d="M315,620 C305,520 330,450 315,360" stroke="#4f8a3a" stroke-width="16" fill="none"/><path d="M318,520 C360,480 410,490 430,505 C400,535 350,540 318,520 Z" fill="#62a34a"/><path d="M312,470 C270,430 220,440 200,455 C230,485 280,490 312,470 Z" fill="#62a34a"/>
+    <g>${Array.from({length: 16}, (_, k) => { const a = k / 16 * Math.PI * 2; return `<ellipse cx="${315 + 92*Math.cos(a)}" cy="${300 + 92*Math.sin(a)}" rx="52" ry="22" fill="#f6c02c" stroke="#c98b12" stroke-width="4" transform="rotate(${a*180/Math.PI} ${315 + 92*Math.cos(a)} ${300 + 92*Math.sin(a)})"/>`; }).join('')}</g>
+    <circle cx="315" cy="300" r="62" fill="#6b3f1d" stroke="#3d220e" stroke-width="6"/><g fill="#8a5a2c">${Array.from({length: 18}, (_, k) => `<circle cx="${315 + (k%6-2.5)*16}" cy="${300 + (Math.floor(k/6)-1)*18}" r="5"/>`).join('')}</g></g>`,
+  rain: () => `<g><path d="M150,520 A170,170 0 0 1 480,520" fill="none" stroke="#ff6b6b" stroke-width="18"/><path d="M168,520 A152,152 0 0 1 462,520" fill="none" stroke="#ffc04d" stroke-width="18"/><path d="M186,520 A134,134 0 0 1 444,520" fill="none" stroke="#7fd36a" stroke-width="18"/><path d="M204,520 A116,116 0 0 1 426,520" fill="none" stroke="#5fb4ff" stroke-width="18"/>
+    <g fill="#fbfbff" stroke="#c9d3e6" stroke-width="5">${[[230,300,62],[300,270,80],[380,290,66],[430,320,48],[180,330,44]].map(([x,y,r]) => `<circle cx="${x}" cy="${y}" r="${r}"/>`).join('')}<rect x="180" y="300" width="250" height="70" rx="35" stroke="none"/></g>
+    <g stroke="#5fb4ff" stroke-width="10" stroke-linecap="round">${[[220,400],[270,420],[320,400],[370,425],[410,400]].map(([x,y]) => `<path d="M${x},${y} l-10,30"/>`).join('')}</g></g>`,
+  can: () => `<g><path d="M200,560 L215,400 H405 L420,560 Z" fill="#7aa6b8" stroke="#2f4f5b" stroke-width="8"/><path d="M405,430 L520,350 L535,365 L420,470" fill="#7aa6b8" stroke="#2f4f5b" stroke-width="8"/><ellipse cx="530" cy="355" rx="22" ry="30" fill="#5a8798" stroke="#2f4f5b" stroke-width="6" transform="rotate(-35 530 355)"/>
+    <path d="M250,400 C250,320 370,320 370,400" fill="none" stroke="#2f4f5b" stroke-width="16"/><rect x="215" y="455" width="190" height="24" fill="#d9b25a"/><g fill="#5fb4ff">${[[560,400],[575,430],[555,450]].map(([x,y]) => `<ellipse cx="${x}" cy="${y}" rx="7" ry="11"/>`).join('')}</g></g>`,
+  rooster: () => `<g><g transform="translate(315 395)"><path d="M40,-30 C140,-170 210,-60 160,40 C200,-40 140,-120 90,-40 Z" fill="#2f7d6b" stroke="#183f36" stroke-width="7"/><path d="M50,-10 C170,-110 230,10 150,80 C190,0 130,-60 70,10 Z" fill="#c84b2f" stroke="#6e2019" stroke-width="7"/>
+    <ellipse cx="0" cy="40" rx="140" ry="110" fill="#f0a53a" stroke="#8a4f12" stroke-width="8"/><path d="M-60,40 C-10,10 50,30 80,80 C30,110 -40,100 -60,40 Z" fill="#d9822b" stroke="#8a4f12" stroke-width="6"/>
+    <ellipse cx="-95" cy="-70" rx="62" ry="78" fill="#f5b94e" stroke="#8a4f12" stroke-width="8"/><path d="M-130,-140 q10,-40 30,-10 q15,-40 30,-5 q20,-30 25,10 Z" fill="#e2412c" stroke="#7a1d12" stroke-width="6"/>
+    <path d="M-155,-70 L-200,-58 L-155,-46 Z" fill="#ffcd3c" stroke="#8a4f12" stroke-width="5"/><path d="M-140,-30 q-8,40 18,40 q10,-20 0,-40 Z" fill="#e2412c" stroke="#7a1d12" stroke-width="5"/>
+    <circle cx="-110" cy="-82" r="12" fill="#fff"/><circle cx="-112" cy="-82" r="6" fill="#111"/><path d="M-20,145 V200 M40,145 V200" stroke="#c98b12" stroke-width="12"/></g></g>`,
+};
+
+function skyFor(tier, id) {
+  const sets = { seed: ['#bfe3f2', '#e9f4e6'], sprout: ['#a8d8f0', '#e2f2df'], bloom: ['#8fc8ee', '#f6e8c8'], harvest: ['#f4b26b', '#f7dfae'], sun: ['#ffcf6b', '#ffeccc'] };
+  const [a, b] = sets[tier];
+  return `<linearGradient id="sky${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`;
+}
+function frameFill(tier, id) {
+  const g = {
+    seed: ['#d6a468', '#b07a42', '#8c5a2b'],
+    sprout: ['#d9a96c', '#b5804a', '#8f5f30'],
+    bloom: ['#a3603a', '#7c4527', '#5a2e17'],
+    harvest: ['#f6dc8c', '#d9a640', '#9c6c18'],
+    sun: ['#f6dc8c', '#d9a640', '#9c6c18'],
+  }[tier];
+  return `<linearGradient id="fr${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${g[0]}"/><stop offset=".55" stop-color="${g[1]}"/><stop offset="1" stop-color="${g[2]}"/></linearGradient>
+    <pattern id="grain${id}" width="630" height="24" patternUnits="userSpaceOnUse"><path d="M0,6 C160,0 300,14 630,5" stroke="rgba(60,30,10,.22)" stroke-width="3" fill="none"/><path d="M0,17 C200,22 420,10 630,19" stroke="rgba(255,240,210,.18)" stroke-width="2" fill="none"/></pattern>`;
+}
+
+function token(cx, cy, r, n, tier) {
+  const ring = tier === 'bloom' || tier === 'harvest' || tier === 'sun' ? '#e4b85e' : '#5a3b1c';
+  return `<circle cx="${cx}" cy="${cy+5}" r="${r}" fill="rgba(0,0,0,.35)"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8eed6" stroke="${ring}" stroke-width="12"/><circle cx="${cx}" cy="${cy}" r="${r-14}" fill="none" stroke="rgba(43,29,14,.18)" stroke-width="3"/>
+    <text x="${cx}" y="${cy + r*0.36}" text-anchor="middle" font-family="Fredoka, Baloo 2, sans-serif" font-weight="700" font-size="${r*1.08}" fill="#2b1d0e" stroke="#f8eed6" stroke-width="6" paint-order="stroke">${n}</text>`;
+}
+
+// Build a card face as an SVG string.
+function cardSVG(o) {
+  const id = ++uid;
+  const t = o.tier, lod = o.lod || 0, full = t === 'sun' && !o.noFull;
+  const win = WINDOW[o.type];
+  const sub = SUBJECT[o.subject]();
+  const sc = o.scale || 1, dx = o.dx || 0, dy = o.dy || 0;
+  const subj = `<g transform="translate(${315 + dx} ${420 + dy}) scale(${sc}) translate(-315 -420)">${sub}</g>`;
+  const busy = o.busy ? `<g opacity=".9">${Array.from({length: 26}, (_, k) => `<path d="M${-40 + k*30},112 L${k*30 + 120},640" stroke="${k%2 ? '#e86f5b' : '#3b7bd1'}" stroke-width="14"/>`).join('')}</g>` : '';
+  const ground = `<ellipse cx="315" cy="700" rx="420" ry="150" fill="${t === 'harvest' ? '#c9a24a' : '#79b456'}"/><ellipse cx="315" cy="690" rx="420" ry="140" fill="${t === 'harvest' ? '#d9b65e' : '#8cc566'}" opacity=".6"/>`;
+  const clouds = `<g class="living" fill="#fff" opacity=".85"><ellipse cx="140" cy="230" rx="60" ry="20"/><ellipse cx="180" cy="215" rx="40" ry="22"/><ellipse cx="470" cy="190" rx="54" ry="18"/></g>`;
+  const rays = full ? `<g opacity=".35" class="living">${Array.from({length: 18}, (_, k) => { const a = k / 18 * Math.PI * 2; return `<path d="M315,380 L${315 + 900*Math.cos(a)},${380 + 900*Math.sin(a)} L${315 + 900*Math.cos(a + 0.12)},${380 + 900*Math.sin(a + 0.12)} Z" fill="#fff7d6"/>`; }).join('')}</g>` : '';
+  const showText = lod === 0, showName = lod <= 1;
+  const plateFill = full ? 'rgba(255,248,230,.78)' : '#f6ecd6';
+  let s = `<svg viewBox="0 0 630 880" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${o.name}, ${TIERS[t].label} ${TYPE_LABEL[o.type]} card"><defs>${skyFor(t, id)}${frameFill(t, id)}<clipPath id="win${id}"><path d="${full ? 'M0,0 H630 V880 H0 Z' : win}"/></clipPath>
+    <linearGradient id="gloss${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>`;
+  // Frame body with bevel and grain.
+  s += `<rect width="630" height="880" fill="url(#fr${id})"/><rect width="630" height="880" fill="url(#grain${id})"/>
+    <rect x="9" y="9" width="612" height="862" rx="26" fill="none" stroke="rgba(255,240,205,.45)" stroke-width="6"/><rect x="18" y="18" width="594" height="844" rx="22" fill="none" stroke="rgba(40,20,5,.45)" stroke-width="5"/>`;
+  if (t === 'sprout') s += `<rect x="30" y="30" width="570" height="820" rx="18" fill="none" stroke="#4f9a44" stroke-width="10"/>${[[30,30],[600,30],[30,850],[600,850]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="16" fill="#e4b85e" stroke="#7a5b24" stroke-width="4"/>`).join('')}`;
+  if (t === 'bloom') s += `<rect x="30" y="30" width="570" height="820" rx="18" fill="none" stroke="#e4b85e" stroke-width="8"/><rect x="40" y="40" width="550" height="800" rx="14" fill="none" stroke="#7a5b24" stroke-width="3"/>`;
+  if (t === 'harvest') s += `<rect x="28" y="28" width="574" height="824" rx="18" fill="none" stroke="#7a3a78" stroke-width="12"/><g fill="#fff3c4" opacity=".5">${Array.from({length: 22}, (_, k) => `<circle cx="${30 + (k * 97) % 570}" cy="${40 + (k * 151) % 800}" r="3"/>`).join('')}</g>`;
+  // Art window.
+  s += `<g clip-path="url(#win${id})"><rect width="630" height="880" fill="url(#sky${id})"/>${rays}${clouds}${busy}${ground}${subj}</g>`;
+  if (!full) s += `<path d="${win}" fill="none" stroke="rgba(30,15,5,.75)" stroke-width="10"/><path d="${win}" fill="none" stroke="rgba(255,240,205,.35)" stroke-width="3" transform="translate(0 -4)"/>`;
+  if (t === 'sun' || t === 'harvest') s += `<rect width="630" height="880" fill="url(#gloss${id})" opacity=".6"/>`;
+  // Name ribbon.
+  if (showName) {
+    const fs = o.name.length > 12 ? 44 : 52;
+    s += `<path d="M138,40 H590 a8,8 0 0 1 8,8 V94 a8,8 0 0 1 -8,8 H138 Z" fill="rgba(0,0,0,.3)" transform="translate(0 5)"/><path d="M138,40 H590 a8,8 0 0 1 8,8 V94 a8,8 0 0 1 -8,8 H138 Z" fill="${plateFill}" stroke="${t === 'seed' || t === 'sprout' ? '#5a3b1c' : '#e4b85e'}" stroke-width="5"/>
+      <text x="368" y="${71 + fs*0.35}" text-anchor="middle" font-family="Fredoka, Baloo 2, sans-serif" font-weight="600" font-size="${fs}" fill="#2b1d0e">${o.name}</text>`;
+  }
+  // Text plate.
+  if (showText && o.plate !== false) s += `<rect x="62" y="664" width="506" height="150" rx="18" fill="rgba(0,0,0,.25)" transform="translate(0 5)"/><rect x="62" y="664" width="506" height="150" rx="18" fill="${plateFill}" stroke="${t === 'seed' || t === 'sprout' ? '#5a3b1c' : '#e4b85e'}" stroke-width="5"/>`;
+  if (showText) {
+    s += `<text x="315" y="712" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="20" letter-spacing="4" fill="${o.plate === false ? '#fff' : '#7a5b24'}">${TYPE_LABEL[o.type].toUpperCase()}</text>`;
+    const lines = o.text || [];
+    lines.forEach((ln, i) => { s += `<text x="315" y="${752 + i*34}" text-anchor="middle" font-family="Nunito, sans-serif" font-size="30" fill="${o.plate === false ? '#fff' : '#2b1d0e'}">${ln}</text>`; });
+  } else if (lod === 1 && o.icons) {
+    o.icons.forEach((ic, i) => { const x = 315 + (i - (o.icons.length - 1) / 2) * 90; s += `<circle cx="${x}" cy="745" r="36" fill="${plateFill}" stroke="#5a3b1c" stroke-width="5"/><text x="${x}" y="760" text-anchor="middle" font-size="40">${ic}</text>`; });
+  }
+  // Gem on the seam.
+  s += gemShape(t, 315, 646, lod === 2 ? 58 : 40, TIERS[t].gem);
+  // Cost and stats.
+  s += token(88, 78, lod === 2 ? 76 : 58, o.cost, t);
+  if (o.stats) {
+    if (lod === 2) s += token(542, 802, 70, o.stats[1], t);
+    else { s += token(92, 796, 54, o.stats[0], t); s += token(538, 796, 54, o.stats[1], t); }
+  }
+  // Collector line.
+  if (showText) s += `<text x="315" y="858" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="17" fill="${full ? '#5a3b1c' : 'rgba(255,240,210,.85)'}" letter-spacing="1.5">RANCH · ${o.num || '001'}/035 · ${TIERS[t].label.toUpperCase()} · ${o.finish || 'STD'}</text>`;
+  return s + '</svg>';
+}
+
+function backSVG() {
+  const id = ++uid;
+  return `<svg viewBox="0 0 630 880" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>${frameFill('bloom', id)}
+    <radialGradient id="bk${id}" cx=".5" cy=".45" r=".6"><stop offset="0" stop-color="#2f5a47"/><stop offset="1" stop-color="#173126"/></radialGradient></defs>
+    <rect width="630" height="880" fill="url(#fr${id})"/><rect width="630" height="880" fill="url(#grain${id})"/><rect x="34" y="34" width="562" height="812" rx="20" fill="url(#bk${id})" stroke="#e4b85e" stroke-width="8"/>
+    <g fill="none" stroke="#e4b85e" stroke-width="5" opacity=".55">${Array.from({length: 9}, (_, k) => `<circle cx="315" cy="440" r="${60 + k*34}"/>`).join('')}</g>
+    ${gemShape('seed', 205, 440, 26, '#b88552')}${gemShape('sprout', 260, 440, 26, '#7fd36a')}${gemShape('bloom', 315, 440, 26, '#6cc8ff')}${gemShape('harvest', 370, 440, 26, '#e07be0')}${gemShape('sun', 425, 440, 26, '#ffd862')}
+    <text x="315" y="580" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="46" fill="#f1e8d4">Abbie's World</text><text x="315" y="622" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="20" letter-spacing="6" fill="#e4b85e">RANCH ATELIER</text></svg>`;
+}
+
+// A card element: face, back, foil, shine, glow; pointer tilt with a moving highlight.
+function makeCard(o, opts = {}) {
+  const el = document.createElement('div');
+  el.className = `card ${o.tier}` + (opts.idle ? ' idle' : '');
+  el.tabIndex = opts.focus === false ? -1 : 0;
+  el.style.setProperty('--period', (3 + Math.random() * 2).toFixed(2) + 's');
+  const foil = o.tier === 'sun' || o.tier === 'harvest' || o.finish === 'SHIMMER';
+  el.innerHTML = `<div class="glow" style="background:${TIERS[o.tier].glow}"></div><div class="inner"><div class="face">${cardSVG(o)}${foil ? '<div class="foil"></div>' : ''}<div class="shine"></div></div><div class="back">${backSVG()}</div></div>`;
+  if (opts.tilt !== false) {
+    const max = 12;
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      el.classList.add('hovering');
+      el.style.setProperty('--ry', ((x - 0.5) * 2 * max).toFixed(2) + 'deg');
+      el.style.setProperty('--rx', ((0.5 - y) * 2 * max).toFixed(2) + 'deg');
+      el.style.setProperty('--mx', (100 - x * 100).toFixed(1) + '%'); el.style.setProperty('--my', (100 - y * 100).toFixed(1) + '%');
+      el.style.setProperty('--lift', opts.lift ? '-10%' : '0px'); el.style.setProperty('--s', opts.lift ? '1.12' : '1.03');
+    });
+    el.addEventListener('pointerleave', () => { el.classList.remove('hovering'); ['--rx', '--ry'].forEach(p => el.style.setProperty(p, '0deg')); el.style.setProperty('--lift', '0px'); el.style.setProperty('--s', '1'); });
+  }
+  return el;
+}
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function reveal(el, tier) {
+  return new Promise(res => {
+    if (!el.classList.contains('flipped')) return res();
+    const hold = reduce ? 0 : TIERS[tier].hold;
+    el.classList.add('charging');
+    setTimeout(() => { el.classList.remove('charging'); el.classList.remove('flipped'); setTimeout(res, reduce ? 150 : 430); }, hold);
+  });
+}
+
+// Hero hand.
+const HAND = [
+  { tier: 'seed', type: 'animal', subject: 'sheep', name: 'Woolly', cost: 1, stats: [1, 3], text: ['Grows a wool coat', 'every morning.'], icons: ['🧶'], num: '004' },
+  { tier: 'sprout', type: 'building', subject: 'barn', name: 'Red Barn', cost: 3, stats: [0, 6], text: ['Animals next to it', 'sleep warm.'], icons: ['🛏️'], num: '011' },
+  { tier: 'bloom', type: 'crop', subject: 'sunflower', name: 'Tall Sunny', cost: 2, stats: [2, 2], text: ['Turns to face the sun.', 'Bees love it.'], icons: ['🐝', '☀️'], num: '019', finish: 'SHIMMER' },
+  { tier: 'harvest', type: 'weather', subject: 'rain', name: 'Rainbow Rain', cost: 4, stats: [3, 3], text: ['Every crop grows', 'one step.'], icons: ['🌱'], num: '027', finish: 'GOLDEN HOUR' },
+  { tier: 'sun', type: 'animal', subject: 'rooster', name: 'Dawn Rooster', cost: 5, stats: [5, 4], text: ['Wakes the whole ranch.', 'Everyone gets a turn.'], icons: ['⏰'], num: '035', finish: 'SHIMMER' },
+];
+const hand = document.getElementById('hand');
+const handCards = HAND.map((o, i) => {
+  const slot = document.createElement('div'); slot.className = 'slot';
+  const angle = (i - 2) * 7; slot.style.transform = `rotate(${angle}deg) translateY(${Math.abs(i - 2) * 10}px)`;
+  const el = makeCard(o, { idle: true, lift: true });
+  el.addEventListener('click', () => { if (el.classList.contains('flipped')) reveal(el, o.tier); else el.classList.add('flipped'); });
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
+  slot.appendChild(el); hand.appendChild(slot); return el;
+});
+document.getElementById('flipall').onclick = () => handCards.forEach(c => c.classList.add('flipped'));
+document.getElementById('deal').onclick = async () => {
+  handCards.forEach(c => c.classList.add('flipped'));
+  await new Promise(r => setTimeout(r, reduce ? 160 : 520));
+  for (let i = 0; i < handCards.length; i++) await reveal(handCards[i], HAND[i].tier);
+};
+
+// Games.
+const GAMES = [
+  { n: 'Magic: The Gathering', y: 'Wizards of the Coast, 1993', s: [['n', 8, 6, 84, 10], ['c', 80, 11], ['a', 8, 18, 84, 42], ['n', 8, 62, 84, 8], ['t', 8, 72, 84, 34], ['c', 86, 106]],
+    l: 'Name and cost across the top, a 43% art box, type line, a dense rules box, power and toughness bottom right, collector data on black.', t: 'Variant treatments (borderless, extended, foil) as the collectible; a real collector line; a holo stamp on rares.', x: 'Frames, mana and set symbols, its typefaces, every word.' },
+  { n: 'Pokémon TCG', y: 'The Pokémon Company, 1996', s: [['n', 8, 6, 84, 10], ['c', 82, 11], ['a', 10, 18, 80, 40], ['t', 8, 62, 84, 40], ['g', 50, 108]],
+    l: 'Name and HP on top, art, attacks with icon costs and big damage, then rarity by symbol shape.', t: 'Shape-coded rarity, icon costs a pre-reader can count, art behind text and embossed texture for top tiers.', x: 'Creatures, energy symbols, the ball, frames, every word.' },
+  { n: 'Hearthstone', y: 'Blizzard, 2014', s: [['c', 16, 14], ['o', 50, 42, 32, 28], ['n', 14, 66, 72, 10], ['g', 50, 80], ['t', 14, 84, 72, 20], ['c', 16, 110], ['c', 84, 110]],
+    l: 'A physical-looking frame: cost gem top left, an oval portrait for minions, a banner name, rarity gem, attack and health bottom corners.', t: 'Art-window shape tells type; rarity glow before the flip; golden and animated variants; nothing teleports.', x: 'Frame art, gems, the dragon, fonts, card back.' },
+  { n: 'Gwent', y: 'CD Projekt Red, 2018', s: [['a', 6, 6, 88, 108], ['c', 16, 16], ['n', 6, 104, 88, 10]],
+    l: 'Almost all art, one power number top left, cost and faction at the bottom; name and ability on inspect.', t: 'Art as the face; animated premiums that keep the layout readable.', x: 'All art, frames and faction marks.' },
+  { n: 'Legends of Runeterra', y: 'Riot, 2020', s: [['c', 16, 14], ['i', 84, 14], ['a', 8, 20, 84, 50], ['n', 8, 72, 84, 9], ['t', 8, 84, 84, 22], ['c', 16, 110], ['c', 84, 110]],
+    l: 'Cost, art, name, keyword icons, attack and health. Riot moved the region icon out from behind the text for readability.', t: 'No watermark behind text; one meaning per colour; never colour alone; a level-up second face.', x: 'Champions, regions, frames, icons.' },
+  { n: 'Marvel Snap', y: 'Second Dinner, 2022', s: [['a', 6, 6, 88, 108], ['c', 16, 16], ['c', 84, 16], ['n', 18, 96, 64, 12]],
+    l: 'Cost, power and a logo-style name over full art. Ability text on inspect. The most kid-legible face here.', t: 'Two numbers only; frame break and parallax as top tiers; finishes and flares as separate collectible axes.', x: 'Characters, art, logos, its tier names and colours.' },
+  { n: 'Slay the Spire', y: 'Mega Crit, 2019', s: [['c', 14, 12], ['n', 20, 8, 72, 10], ['p', 12, 22, 76, 40], ['n', 30, 66, 40, 7], ['t', 10, 76, 80, 32]],
+    l: 'Energy orb, banner name, an art window shaped by card type, short keyword text. Upgrades add a plus and coloured numbers.', t: 'Window shape by type; visible upgrades; numbers that change colour when buffed.', x: 'Art, frames, card names and text.' },
+  { n: 'Inscryption', y: 'Daniel Mullins, 2021', s: [['n', 8, 6, 84, 10], ['i', 84, 20], ['a', 8, 18, 84, 56], ['i', 38, 88], ['i', 62, 88], ['c', 16, 110], ['c', 84, 110]],
+    l: 'Cards are props on a table: cost as drops or bones, ability sigils, attack and health corners. Slapped down, picked up.', t: 'The card as a prop in the world, not a menu; icons instead of sentences.', x: 'Woodcut art, sigils, the table, its tone.' },
+  { n: '9 Kings', y: 'Sad Socket, 2025', s: [['a', 10, 10, 80, 70], ['n', 10, 84, 80, 12], ['c', 18, 18]],
+    l: 'Chunky pixel cards, few words, dragged onto a plot grid once a year. (Visual specifics to confirm on capture.)', t: 'The card quickly becomes a thing in the world. On the Ranch, a played card lands as its 3D model.', x: 'Pixel art, kings, card content.' },
+  { n: 'Balatro', y: 'LocalThunk, 2024', s: [['c', 16, 14], ['a', 22, 22, 56, 76], ['c', 84, 106]],
+    l: 'Playing cards and jokers under a CRT look. Cards sway, tilt toward the cursor, pop with rising pitch when they score.', t: 'Idle sway; pointer tilt; rising-pitch scoring; editions as shaders over the same art.', x: 'Art, jokers, the CRT look as a whole.' },
+];
+function schematic(spec) {
+  let s = '<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="1" y="1" width="98" height="118" rx="7" fill="#2a4a3d" stroke="#e4b85e" stroke-width="1.5"/>';
+  for (const [k, ...v] of spec) {
+    if (k === 'a') s += `<rect x="${v[0]}" y="${v[1]}" width="${v[2]}" height="${v[3]}" rx="3" fill="#cfe1d6" opacity=".85"/>`;
+    if (k === 'o') s += `<ellipse cx="${v[0]}" cy="${v[1]}" rx="${v[2]}" ry="${v[3]}" fill="#cfe1d6" opacity=".85"/>`;
+    if (k === 'p') s += `<path d="M${v[0]},${v[1]} h${v[2]} v${v[3] - 8} l-${v[2] / 2},8 l-${v[2] / 2},-8 Z" fill="#cfe1d6" opacity=".85"/>`;
+    if (k === 'n') s += `<rect x="${v[0]}" y="${v[1]}" width="${v[2]}" height="${v[3]}" rx="2" fill="#f1e8d4" opacity=".55"/>`;
+    if (k === 't') { s += `<rect x="${v[0]}" y="${v[1]}" width="${v[2]}" height="${v[3]}" rx="2" fill="#f1e8d4" opacity=".18"/>`; for (let y = v[1] + 5; y < v[1] + v[3] - 2; y += 5) s += `<path d="M${v[0] + 5},${y} h${v[2] - 10}" stroke="#f1e8d4" stroke-width="1.4" opacity=".55"/>`; }
+    if (k === 'c') s += `<circle cx="${v[0]}" cy="${v[1]}" r="7" fill="#e4b85e" stroke="#142820" stroke-width="1.5"/>`;
+    if (k === 'g') s += `<path d="M${v[0]},${v[1] - 5} l5,5 l-5,5 l-5,-5 Z" fill="#c58bff" stroke="#142820" stroke-width="1"/>`;
+    if (k === 'i') s += `<rect x="${v[0] - 5}" y="${v[1] - 5}" width="10" height="10" rx="2" fill="#9fd38a" stroke="#142820" stroke-width="1"/>`;
+  }
+  return s + '</svg>';
+}
+document.getElementById('games').innerHTML = GAMES.map(g => `<div class="game">${schematic(g.s)}<div style="min-width:0"><h3>${g.n}</h3><p class="mono" style="margin-top:2px">${g.y}</p><p>${g.l}</p><p class="take"><b>Take:</b> ${g.t}</p><p class="leave"><b>Leave:</b> ${g.x}</p></div></div>`).join('');
+
+// LODs.
+const L = HAND[2];
+document.getElementById('lods').innerHTML = [
+  { w: 260, lod: 0, tag: 'L0 · inspect', d: 'Everything, including text and collector line. Print and full-screen inspect.' },
+  { w: 130, lod: 1, tag: 'L1 · hand', d: 'Art, name, cost, stats, gem, icons. 120 to 200 pt tall.' },
+  { w: 64, lod: 2, tag: 'L2 · board', d: 'Art, cost, one stat, gem. No words. 48 to 96 pt.' },
+  { w: 52, lod: 0, tag: 'L0 shrunk', d: 'What happens without LODs: the text is mush and the numbers shrink.', bad: true },
+].map(x => `<div class="lod"><div style="width:${x.w}px">${cardSVG({ ...L, lod: x.lod })}</div><span class="tag" style="${x.bad ? 'color:var(--bad)' : ''}">${x.tag}</span><small>${x.d}</small></div>`).join('');
+
+// Anatomy.
+document.getElementById('anatomyCard').appendChild(makeCard(HAND[1]));
+
+// Types by shape.
+const TYPES = [['animal', 'sheep', 'Barn-door arch'], ['building', 'barn', 'Gabled roof'], ['crop', 'sunflower', 'Seed-packet scallop'], ['weather', 'rain', 'Round window'], ['helper', 'can', 'Crate chamfer']];
+document.getElementById('shapes').innerHTML = TYPES.map(([ty, su, lab]) => `<figure><div style="width:120px">${cardSVG({ tier: 'seed', type: ty, subject: su, name: TYPE_LABEL[ty], cost: 2, stats: [1, 2], lod: 1 })}</div><figcaption><b style="color:var(--ink)">${TYPE_LABEL[ty]}</b><br>${lab}</figcaption></figure>`).join('');
+
+// Rarity ladder.
+const ld = document.getElementById('ladder');
+ORDER.forEach((t, i) => {
+  const wrap = document.createElement('div'); wrap.className = 't';
+  const c = makeCard({ ...HAND[i], tier: t, type: 'animal', subject: 'sheep', name: 'Woolly', text: ['Grows a wool coat', 'every morning.'], finish: t === 'bloom' ? 'SHIMMER' : undefined }, { idle: false });
+  c.style.width = '100%';
+  wrap.appendChild(c);
+  wrap.insertAdjacentHTML('beforeend', `<b>${TIERS[t].label}</b><span class="muted">${TIERS[t].kid} · reveal hold ${TIERS[t].hold} ms</span>`);
+  ld.appendChild(wrap);
+});
+const CVD = { normal: ['#633e1d', '#549a44', '#45aade', '#993f94', '#fac547'], deuteranopia: ['#524a1d', '#94884a', '#7b99dd', '#566791', '#ead24d'], protanopia: ['#49411a', '#9e8e3c', '#90a8e1', '#385b96', '#ddc535'] };
+document.getElementById('cvd').innerHTML = Object.entries(CVD).map(([k, v]) => `<span>${k}</span>${v.map(c => `<i style="background:${c}" title="${c}"></i>`).join('')}`).join('');
+
+// Crop pairs.
+const base = HAND[0];
+const PAIRS = [
+  ['Subject centred, 35 to 65% of the window, headroom', { ...base }, { ...base, dx: 190, dy: 40 }, 'Subject pushed off the edge'],
+  ['Subject reads at a glance', { ...base }, { ...base, scale: 0.38, dy: 120 }, 'Subject too small to name at 72 px'],
+  ['Text on a plate', { ...base }, { ...base, plate: false, busy: true }, 'Text on raw, busy art'],
+];
+document.getElementById('pairs').innerHTML = PAIRS.map(([g, a, b, bl]) => `<div class="pair"><div><div>${cardSVG(a)}</div><p class="verdict yes">✓ ${g}</p></div><div><div>${cardSVG(b)}</div><p class="verdict no">✗ ${bl}</p></div></div>`).join('');
+
+// Print diagram, in mm (x10).
+document.getElementById('printfig').innerHTML = `<svg viewBox="-40 -40 770 1020" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" role="img" aria-label="Bleed, trim and safe area diagram">
+  <rect x="0" y="0" width="690" height="940" fill="#3b2a18"/><rect x="30" y="30" width="630" height="880" rx="30" fill="#6b4a26"/>
+  <g transform="translate(30 30)">${cardSVG({ ...HAND[2] }).replace('<svg ', '<svg width="630" height="880" ')}</g>
+  <rect x="0" y="0" width="690" height="940" fill="none" stroke="#ef8a6f" stroke-width="4" stroke-dasharray="14 10"/>
+  <rect x="30" y="30" width="630" height="880" rx="30" fill="none" stroke="#f1e8d4" stroke-width="4"/>
+  <rect x="60" y="60" width="570" height="820" fill="none" stroke="#9fd38a" stroke-width="4" stroke-dasharray="10 8"/>
+  <g font-size="26" fill="#f1e8d4"><text x="0" y="-12" fill="#ef8a6f">bleed 69 × 94 mm</text><text x="690" y="-12" text-anchor="end">trim 63 × 88 mm</text>
+  <text x="345" y="975" text-anchor="middle" fill="#9fd38a">safe 57 × 82 mm · corner radius 3 mm</text></g></svg>`;
+
+// Timeline.
+const TL = [['Hover lift + tilt', 0, 220, '#6cc8ff'], ['Inspect grow', 0, 220, '#6cc8ff'], ['Draw (overshoot)', 0, 340, '#9fd38a'], ['Play to tile + settle', 0, 600, '#9fd38a'],
+  ['Reveal: Seed', 0, 430, '#b88552'], ['Reveal: Sprout', 200, 630, '#7fd36a'], ['Reveal: Bloom', 450, 880, '#6cc8ff'], ['Reveal: Harvest', 800, 1230, '#e07be0'], ['Reveal: Sun', 1200, 1630, '#ffd862']];
+const tw = 760, x0 = 190, sx = (tw - x0 - 20) / 1700;
+let tl = `<svg viewBox="0 0 ${tw} ${TL.length * 34 + 56}" width="${tw}" font-family="IBM Plex Mono, monospace" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Juice timings chart">`;
+for (let ms = 0; ms <= 1600; ms += 400) tl += `<path d="M${x0 + ms * sx},10 V${TL.length * 34 + 16}" stroke="rgba(241,232,212,.14)"/><text x="${x0 + ms * sx}" y="${TL.length * 34 + 38}" fill="#b7c2b0" font-size="12" text-anchor="middle">${ms} ms</text>`;
+TL.forEach(([lab, a, b, c], i) => {
+  const y = 16 + i * 34;
+  tl += `<text x="${x0 - 12}" y="${y + 15}" fill="#f1e8d4" font-size="13" text-anchor="end">${lab}</text>`;
+  if (lab.startsWith('Reveal') && a > 0) tl += `<rect x="${x0}" y="${y + 4}" width="${a * sx}" height="16" rx="4" fill="${c}" opacity=".28"/><text x="${x0 + 6}" y="${y + 16}" fill="#142820" font-size="11">glow hold</text>`;
+  tl += `<rect x="${x0 + a * sx}" y="${y + 2}" width="${(b - a) * sx}" height="20" rx="5" fill="${c}"/>`;
+  if (lab.startsWith('Reveal')) tl += `<text x="${x0 + b * sx + 6}" y="${y + 16}" fill="#b7c2b0" font-size="11">flip</text>`;
+});
+document.getElementById('timeline').innerHTML = tl + '</svg>';
+
+// Weights.
+const W = [['Thumbnail', 15], ['Hierarchy', 12], ['Art crop', 12], ['Juice', 12], ['Rarity', 10], ['Frame', 10], ['Typography', 8], ['Collect', 8], ['Print', 8], ['House', 5]];
+const ww = 760; let acc = 0;
+let wsvg = `<svg viewBox="0 0 ${ww} 86" width="${ww}" font-family="IBM Plex Mono, monospace" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rubric weights">`;
+const pal = ['#e4b85e', '#d9a640', '#c58b2e', '#9fd38a', '#6cc8ff', '#7aa6b8', '#e07be0', '#c58bff', '#ef8a6f', '#b7c2b0'];
+W.forEach(([n, w], i) => { const x = acc / 100 * ww, wd = w / 100 * ww - 3; wsvg += `<rect x="${x}" y="8" width="${wd}" height="38" rx="6" fill="${pal[i]}"/><text x="${x + wd / 2}" y="32" text-anchor="middle" fill="#142820" font-size="14" font-weight="600">${w}</text><text x="${x + wd / 2}" y="68" text-anchor="middle" fill="#f1e8d4" font-size="11">${n}</text>`; acc += w; });
+document.getElementById('weights').innerHTML = wsvg + '</svg>';
+})();
+</script>
