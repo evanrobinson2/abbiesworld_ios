@@ -68,11 +68,38 @@ turn on the power, put in a disk. She sits only when you tap the chair.
   and "Go back up" returns to the café.
 - Voice: the device's speech voice (free) for now; a recorded or realtime kid voice goes through the wallet later.
 
+## Round 4: the ending (2026-10-23)
+From the game review (https://claude.ai/artifact/1qPFbCMZ81PTMb44cSfZcN): give the basement an ending, make the coins
+pieces of one memory, keep the first minute short, and share the kit with the school.
+- The ending: once the gold disk's coin has settled in the jar, the room warms (a warm fill, the hall light spills
+  brighter through the door) and Daddy calls down, a muffled "Ab-bie!" through the floor. Her thought: "Someone's
+  calling from upstairs... it's Daddy! Time to go up." with `> Coming, Daddy!` and `> Just one more minute...`.
+  Coming: she stands, walks up to the door, says "I'll keep this one, Aunt Grace.", the door shuts and the old set
+  powers down (the picture squeezes to a line, then a dot), then she is back in the café (`/#cafe-study`). One more
+  minute: she stays, and the door is then the way home with the memory.
+- Coins are pieces: each coin is one of ten pieces of Daddy's memory of this basement. She carries the memory, not ten
+  coins, in the shared player inventory (`simulations/inventory.mjs`, item `memory-grace-basement`, "(n of 10
+  pieces)"), and each coin is also counted in `simulations/memory-coins.mjs`. All ten play the memory's closing beat:
+  the jar glows warm, a music box plays the tune's opening, and she sees it whole ("Daddy, little, typing at this desk
+  with Aunt Grace.").
+- The first minute stays short: lights, clipboard, disk, then the ending. KEYSTORM and the other coins are optional
+  finds. ROTOR RANGER and CLOCKTOWER are on hold.
+- The memory kit (`simulations/memory-kit/`), shared with the school roof:
+  - `era-pass.mjs`: the chunky pixel and Bayer dither pass that sharpens at a screen, the 3 s CRT warm-up and the
+    power-down. `eraPass(T, renderer).render(scene, camera, {sharp, time, boot, off})`.
+  - `inner-voice.mjs`: her inner voice as white captions in the era's font at the bottom, choices beneath as `>` lines,
+    device speech only when asked. `innerVoice({font}).say(text, {choices, hold})`.
+  - With `coin-reward.mjs`, `memory-coins.mjs` and `inventory.mjs`, a new memory place starts with the look, the voice,
+    the coins and the pocket already working.
+- Test hooks: `?ending` (Daddy calls soon after it opens), `?stay` (powers down but stays). The end-to-end test
+  (`tools/minigame-test/basement-flow.cjs`) now plays through to the power-down.
+
 ## Next
-1. Evan's pick between ROTOR RANGER and CLOCKTOWER (or both), then build them as GRACE-DOS programs.
+1. On hold: ROTOR RANGER and CLOCKTOWER, as GRACE-DOS programs.
 2. The manual's pages, readable in the scene.
 3. The café door is agreed; add the tour stop once it is live.
-4. Coins kept on the player's account rather than the browser.
+4. Coins and the pocket kept on the player's account rather than the browser.
+5. Daddy's call in his designed voice (family cast) once voices go through the wallet.
 
 ## How it was made, and how to be faster next time
 Evan's routine (09:20Z): after every natural-language minigame, look at the process and find ways to go faster.
