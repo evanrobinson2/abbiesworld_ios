@@ -3,3 +3,6 @@
 {"t": 1792742553.6, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3840026118184786, "loss": 0.6640797672100714}
 {"t": 1792742584.1, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3846705337939125, "loss": 0.6640637350745295}
 {"t": 1792742602.0, "who": "F:chest", "chunks": ["chest"], "focus": "chest", "iou": 0.3846705337939125, "loss": 0.662616276927223}
+{"t": 1792742647.8, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.521115796302303, "loss": 0.5357191885750093}
+{"t": 1792742647.9, "who": "F:preview", "chunks": ["chest", "hips", "head", "armR", "armL", "legs"], "focus": "", "iou": 0.9345044873018904, "loss": 0.21442050795197568}
+{"t": 1792742657.8, "who": "F:hips", "chunks": ["chest", "hips"], "focus": "hips", "iou": 0.521115796302303, "loss": 0.5357191885750093}
