@@ -28,14 +28,22 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36'
           for id in $(jq -r '.songs[].id' tools/composer/suno/songs.json); do
-            curl -fsSL --retry 3 -A 'Mozilla/5.0' -o "out/$id.mp3" "https://cdn1.suno.ai/$id.mp3" || { echo "::warning::no audio for $id"; rm -f "out/$id.mp3"; continue; }
+            ok=
+            for u in "https://cdn1.suno.ai/$id.mp3" "https://cdn2.suno.ai/$id.mp3" "https://audiopipe.suno.ai/?item_id=$id"; do
+              code=$(curl -sSL --retry 2 -A "$UA" -e 'https://suno.com/' -o "out/$id.mp3" -w '%{http_code}' "$u" || true)
+              [ "$code" = 200 ] && { ok=1; break; }
+              echo "$id $u -> $code"
+            done
+            [ -n "$ok" ] || { echo "::warning::no audio for $id"; rm -f "out/$id.mp3"; continue; }
             d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "out/$id.mp3" || echo 0)
             if ! awk "BEGIN{exit !($d > 5)}"; then echo "::warning::$id does not decode (duration $d)"; rm -f "out/$id.mp3"; continue; fi
             ffmpeg -v error -i "out/$id.mp3" -t 30 -f null - || { echo "::warning::$id has decode errors"; rm -f "out/$id.mp3"; continue; }
-            curl -fsSL --retry 3 -A 'Mozilla/5.0' -o "out/$id.jpeg" "https://cdn2.suno.ai/image_$id.jpeg" || rm -f "out/$id.jpeg"
+            curl -fsSL --retry 3 -A "$UA" -e 'https://suno.com/' -o "out/$id.jpeg" "https://cdn2.suno.ai/image_$id.jpeg" || rm -f "out/$id.jpeg"
             echo "$id ${d}s $(stat -c%s "out/$id.mp3") bytes"
           done
+          ls out/*.mp3 >/dev/null 2>&1 || { echo "::error::Suno's CDN gave no audio (songs private?)"; exit 1; }
           jq --slurpfile ok <(for f in out/*.mp3; do i=$(basename "$f" .mp3); printf '{"id":"%s","d":%s,"art":%s}\n' "$i" "$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")" "$( [ -f "out/$i.jpeg" ] && echo true || echo false)"; done) \
             '.songs |= map(. as $s | ($ok | map(select(.id == $s.id)) | first) as $o | if $o then . + {duration: $o.d, audio: ("music/suno/" + .id + ".mp3"), art: (if $o.art then "music/suno/" + .id + ".jpeg" else null end)} else . end)' \
             tools/composer/suno/songs.json > out/catalog.json
