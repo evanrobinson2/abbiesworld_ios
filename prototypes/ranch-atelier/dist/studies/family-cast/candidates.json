@@ -1,0 +1,134 @@
+{
+ "characters": {
+  "daddy-young": {
+   "name": "Young Daddy",
+   "group": "young",
+   "sample": "Okay bub, stay right there. I'm gonna climb up, get every single ball, and throw them all down to you. Don't tell Mom, okay? This is gonna be the best night ever!",
+   "descriptions": [
+    "A bright, curious eight-year-old American boy with a slightly raspy, eager voice, full of mischief and wonder, speaking quickly when excited. Clean studio recording. Read by a voice actor performing a kid in a warm animated family film.",
+    "A small, energetic young boy voice, high and clear with a playful grin in it, a little breathless from running around outside at dusk. Close, warm microphone."
+   ],
+   "candidates": [],
+   "errors": [
+    {
+     "description": 0,
+     "error": "403 {\"detail\":{\"type\":\"authorization_error\",\"code\":\"forbidden\",\"message\":\"Sorry, this prompt potentially doesn't follow our safety guidelines and therefore has been blocked.\",\"status\":\"blocked_generation\",\"request_id\":\"c5c96668071a477aeb9bbc8e93be3ae6\"}}"
+    },
+    {
+     "description": 1,
+     "error": "403 {\"detail\":{\"type\":\"authorization_error\",\"code\":\"forbidden\",\"message\":\"Sorry, this prompt potentially doesn't follow our safety guidelines and therefore has been blocked.\",\"status\":\"blocked_generation\",\"request_id\":\"687a0430892675089433e55f3f887691\"}}"
+    }
+   ]
+  },
+  "street-grownup": {
+   "name": "The grown-up on the street",
+   "group": "game",
+   "sample": "Hey! You up there! What do you think you're doing on that roof? Get down from there right now, before I call your mother! And take that dog home, it's getting dark!",
+   "descriptions": [
+    "A gruff but harmless American neighbour man in his fifties, booming voice calling out from a car window at dusk, stern but not scary, like a cartoon crossing guard. Clean studio recording.",
+    "A deep-voiced, friendly-but-firm dad in his fifties shouting from across the street, surprised and a little exasperated, warm underneath. Close microphone."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "o587ZevsDIT8gmoRG7cJ",
+     "url": "/r2/voices/cast/street-grownup/202610231000-1.mp3",
+     "seconds": 10.8
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "XOvjrxUg9xW8jneqB5Jj",
+     "url": "/r2/voices/cast/street-grownup/202610231000-2.mp3",
+     "seconds": 10.2
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "GDUBdZbJ33Z1phGArOqi",
+     "url": "/r2/voices/cast/street-grownup/202610231000-3.mp3",
+     "seconds": 11.7
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "VLx1kzI2JieIPuPOkJzF",
+     "url": "/r2/voices/cast/street-grownup/202610231000-4.mp3",
+     "seconds": 10.2
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "LqPBVF0KHXcxieAe6rji",
+     "url": "/r2/voices/cast/street-grownup/202610231000-5.mp3",
+     "seconds": 10.0
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "n5I9QZbbo0qgGf8vSwcN",
+     "url": "/r2/voices/cast/street-grownup/202610231000-6.mp3",
+     "seconds": 10.5
+    }
+   ],
+   "errors": []
+  },
+  "janitor": {
+   "name": "The school janitor",
+   "group": "game",
+   "sample": "Hey! Who's up on my roof? I can see you, you know! You come down this minute, or I'm calling the police, and then your parents! Go on, scram, and take your ball with you!",
+   "descriptions": [
+    "A grumpy old American school janitor in his sixties, gravelly voice echoing across an empty schoolyard at night, more bluster than bite, like a cartoon caretaker. Clean studio recording.",
+    "A tired, crotchety older man with a low, rumbling voice and a slow drawl, jangling his keys, stern but secretly soft-hearted. Close microphone."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "c33yEXOhDbqcoLWO8H2I",
+     "url": "/r2/voices/cast/janitor/202610231000-1.mp3",
+     "seconds": 14.2
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "mBjwXxtCWDTFLfP8ngAn",
+     "url": "/r2/voices/cast/janitor/202610231000-2.mp3",
+     "seconds": 11.9
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "IuJ8W4JCkf4FbrCGuaab",
+     "url": "/r2/voices/cast/janitor/202610231000-3.mp3",
+     "seconds": 13.0
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "Q1ZzGpU0KmgTD9xXtC1l",
+     "url": "/r2/voices/cast/janitor/202610231000-4.mp3",
+     "seconds": 12.5
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "7st9T9HhrUybk0DGnxDD",
+     "url": "/r2/voices/cast/janitor/202610231000-5.mp3",
+     "seconds": 13.8
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "iqSo5eCiA7eD9ijyGEtX",
+     "url": "/r2/voices/cast/janitor/202610231000-6.mp3",
+     "seconds": 20.0
+    }
+   ],
+   "errors": []
+  }
+ },
+ "model": "eleven_ttv_v3",
+ "rendered": "2026-10-23T10:01:34Z"
+}
