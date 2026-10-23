@@ -45,6 +45,8 @@ Shown side by side with Sunday Toon on the mannequin and the brute.
 Loved, in the review page's `picks` collection:
 - **#10 Ink and paper (Okami).** "This is wonderful for flashbacks and in game storytelling I love it."
 - **#11 Worlds in orbs (Cocoon).** "This is a fun unlock to a new world."
+- **#13 Line art (Sable).** "Love this too."
+- **#12 One-bit dither (Obra Dinn):** no pick given; Evan is using it for a Game Boy and old-screen flashback in Grace's basement.
 Plans only. No production build until Evan says go.
 
 ### Ink and paper: the flashback and storytelling look
@@ -73,6 +75,22 @@ A glass orb is the world's key, and holding one is the unlock:
 - Cost: medium (render target per visible orb, capped at two live; the rest are baked thumbnails). Tour: yes.
 First build when Evan says go: `orb-kit.mjs` (orb mesh and the little live world), the unlock moment, and one real
 world behind it (Moon base or the town).
+
+### Line art: one themed place
+Sable's thick ink lines and flat colour fight the soft light of the Ranch, so it is a place's own dialect, not the
+default (place dialects: the Ranch is wood and bells; this place is ink and flat colour). Candidates, for Evan to pick:
+- **The Storybook shelf / comic place:** a tile world drawn as a comic page, entered through a Cocoon orb (the two
+  picks fit: the orb is the door, the line art is the room).
+- **Abbie's sketchbook:** Abbie's own drawings come alive; kids' drawings become flat-colour fields with thick lines.
+- **Desert or dunes world:** Sable's own palette (sandy sky) if a dry world is wanted.
+Build: the `sable` preset (2 flat tones, warm shadow, `ink: .05`) as a `lineart` entry in TOON_LOOKS with `bands: 2,
+soft: 0`, ink shells on characters and props (not terrain), sky colour driven by time of day. Cost: medium (ink shells).
+Tour: only if it ships as a place in the unlock flow.
+
+### One-bit dither: Game Boy and old-screen flashback in Grace's basement
+Fits straight onto the existing basement computer (FreeDOS) and the old TV warm-up: a `oneBit` pass at half or quarter
+resolution with a four-shade green palette for the Game Boy and two colours for the Mac look; a dither pattern kept
+stable by anchoring it to the screen. It is diegetic (the machine is in the room), so it needs no UI. Plan only.
 
 Open questions for Evan (only if he wants to steer): which story is the first flashback, and what earns the first orb.
 
