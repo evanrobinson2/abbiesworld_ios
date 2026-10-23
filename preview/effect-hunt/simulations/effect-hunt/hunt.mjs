@@ -20,14 +20,14 @@ export const MODES = [
  {id: 'coaster', icon: '🏎️', name: 'Toy car', vehicle: 'coaster'}, {id: 'god', icon: '🛰️', name: 'Overhead', vehicle: null}
 ];
 
-export function createHunt({scene, camera, renderer, world, paint = null, clock = {day: 1, hour: 18.5}, ui = true, mode = 'cart', beacons = true, onFound, onAll, offset = {x: 0, y: 0, z: 0}, wins = [window], uiRoot = document.body, onExit, fov = 58, camHold = 0, vehicleScale = 1.9, chase = {dist: 20, height: 8.5}}) {
+export function createHunt({scene, camera, renderer, world, paint = null, clock = {day: 1, hour: 18.5}, ui = true, mode = 'cart', beacons = true, onFound, onAll, offset = {x: 0, y: 0, z: 0}, wins = [window], uiRoot = document.body, onExit, fov = 58, camHold = 0, vehicleScale = 1.9, chase = {dist: 20, height: 8.5}, tune = {}}) {
  const effectsAt = e => { const s = spotOf(e, world.board), p = world.toScene(s.x, s.y); return {x: p.x, y: world.heightAt(p.x, p.z), z: p.z}; };
  const places = new Map(EFFECTS.map(e => { const p = effectsAt(e); return [e.id, p]; }));
  const beam = createBeacons({scene, effects: EFFECTS, place: e => { const p = places.get(e.id); return {x: p.x, y: p.y, z: p.z}; }});
  beam.restore(found()); beam.set(beacons);
  const fx = createFx({scene, heightAt: world.heightAt});
- const start = (() => { const s = world.toScene(0, -40); return {x: s.x, z: s.z, heading: Math.PI}; })();
- const driver = createDriver({world, start});
+ const start = world.roadStart?.(0, -40) || (() => { const s = world.toScene(0, -40); return {x: s.x, z: s.z, heading: Math.PI}; })();
+ const driver = createDriver({world, start, tune});
  const tow = createTow({scene, world, driver, home: world.home});
  const vehicleRoot = new T.Group(); vehicleRoot.name = 'vehicle'; scene.add(vehicleRoot);
  const VS = vehicleScale; // a toy-sized vehicle in a toy-sized town: bigger than life so it reads from the sky

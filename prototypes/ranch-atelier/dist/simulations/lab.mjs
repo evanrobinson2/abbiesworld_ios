@@ -70,6 +70,7 @@ import {ranchName} from './ranch-names.mjs';
 import {advanceClock,timeOfDay,TIME_HOURS,nightProgress} from './ranch-clock.mjs?v=2';
 import {createPaintWorld} from './paint-world/paint-world.mjs';
 import {mountPaintHand} from './paint-world/paint-card.mjs';
+import {createBallTray,rollGrant} from './paint-world/paint-balls.mjs';
 import {createFarmLights} from './ranch-lights.mjs?clock=6';
 import {facetPicker} from './facet-picker.mjs';
 import {REGIONAL} from './ranch-regional.mjs?v=3';
@@ -148,24 +149,33 @@ const look=loadLook();ink.setLook(look);
 const orbit=new OrbitControls(camera,renderer.domElement);orbit.mouseButtons={LEFT:T.MOUSE.ROTATE,MIDDLE:T.MOUSE.ROTATE,RIGHT:T.MOUSE.PAN};orbit.touches={ONE:T.TOUCH.ROTATE,TWO:T.TOUCH.DOLLY_PAN};
 // Paint the World card (AW-STUDY-0049, paint-world/): the card rains paint on the board; it stays one day of game time and
 // strange plants grow from it. Made once, after the first ranch generation, with its shader compiled up front.
-let paintWorld=null,paintHand=null,paintSeed=null,paintPair=0;
-const PAINT_PAIRS=[['pink','teal'],['lime','violet'],['sun','pink'],['teal','violet'],['sun','lime']];
+let paintWorld=null,paintHand=null,paintTray=null,paintSeed=null;
 function paintWorldReady(){
  if(family!=='ranch'||!active)return;
  if(!paintWorld){
   paintWorld=createPaintWorld({scene,camera,unit:.1,heightAt:(x,z)=>active?.heightAt?.(x,z)??0});paintWorld.warm(renderer,camera);
-  const el=document.createElement('div');el.id='paint-hand';document.body.append(el);paintHand=mountPaintHand(el,playPaintCard,PAINT_PAIRS[paintPair][0]);
+  paintTray=createBallTray({onThrow:throwPaintBall});
+  const el=document.createElement('div');el.id='paint-hand';document.body.append(el);paintHand=mountPaintHand(el,playPaintCard);
  }
  if(paintSeed!==sceneSeed){paintSeed=sceneSeed;paintWorld.load('ranch-'+sceneSeed)||paintWorld.clear();}
 }
+// Spending the card gives a random handful of splat balls (how many, how big); they wait on the right edge to be flung.
 function playPaintCard(){
  if(!paintWorld||family!=='ranch'||!active||busy)return;
- const pair=PAINT_PAIRS[paintPair=(paintPair+1)%PAINT_PAIRS.length];
- paintWorld.play({colours:pair,at:{x:orbit.target.x,z:orbit.target.z},count:4,spread:Math.max(1,Math.min(3,camera.position.distanceTo(orbit.target)*.16))},farmClock);
- paintHand.set(PAINT_PAIRS[(paintPair+1)%PAINT_PAIRS.length][0]);setTimeout(()=>paintWorld.save('ranch-'+paintSeed),2500);
- renderer.domElement.dataset.paintPlays=String(Number(renderer.domElement.dataset.paintPlays||0)+1);
+ const grant=rollGrant();paintTray.grant(grant);paintHand.set(grant.colours[0]);
+ renderer.domElement.dataset.paintPlays=String(Number(renderer.domElement.dataset.paintPlays||0)+1);renderer.domElement.dataset.paintGrant=JSON.stringify({count:grant.count,size:grant.size.id});
 }
-function paintFrame(dt){if(!paintWorld)return;const on=family==='ranch'&&!!active;paintWorld.root.visible=on;paintHand.el.style.display=on?'':'none';if(on)paintWorld.update(dt,farmClock);}orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;
+// A ball let go at (x,y) px with velocity (vx,vy) px/s: it starts on the ground under the finger and carries the flick.
+function throwPaintBall(ball,x,y,vx,vy){
+ if(!paintWorld||family!=='ranch'||!active)return false;
+ const r=renderer.domElement.getBoundingClientRect(),ray=new T.Raycaster();ray.setFromCamera(new T.Vector2((x-r.left)/r.width*2-1,-((y-r.top)/r.height*2-1)),camera);
+ const gy=orbit.target.y,t=(gy-ray.ray.origin.y)/ray.ray.direction.y;if(!(t>0))return false;
+ const P=ray.ray.at(t,new T.Vector3()),f=new T.Vector3();camera.getWorldDirection(f);f.y=0;f.normalize();const rt=new T.Vector3().crossVectors(f,new T.Vector3(0,1,0)).normalize();
+ const perPx=2*camera.position.distanceTo(orbit.target)*Math.tan(camera.fov*Math.PI/360)/r.height,k=perPx*.5;
+ paintWorld.launch({x:P.x,z:P.z,vx:(rt.x*vx-f.x*vy)*k,vz:(rt.z*vx-f.z*vy)*k,colour:ball.colour,R:(.75+Math.random()*.4)*ball.R,lift:.45,vy:1.1},farmClock);
+ setTimeout(()=>paintWorld.save('ranch-'+paintSeed),4000);return true;
+}
+function paintFrame(dt){if(!paintWorld)return;const on=family==='ranch'&&!!active;paintWorld.root.visible=on;paintHand.el.style.display=on?'':'none';paintTray.el.style.display=on?'':'none';if(on)paintWorld.update(dt,farmClock);}orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;
 const cameraFollow=createCameraFollow(camera,orbit);orbit.addEventListener('start',()=>cameraFollow.stop());
 renderer.domElement.addEventListener('wheel',e=>{if(e.shiftKey&&!e.ctrlKey)cameraFollow.stop();},{capture:true});
 // At the bottom of the zoom the camera steps down into first person (first-person.mjs); zooming out steps back up.
@@ -252,9 +262,11 @@ function ensureStage(room=null){return stageLoading??=import('./holodeck/stage.m
  walkPace:value=>{const state=active?.life.state;if(state&&value!==undefined)state.walkPace=value;return state?.walkPace??1;},
  clock:()=>({hour:farmClock.hour,day:farmClock.day,paused:!running,speed:simulationSpeed,weather:active?.life.state.weather??null,weatherMode}),
  setHour:h=>{farmClock={...farmClock,hour:h%24};updateClock(0);},setPaused:p=>{running=!p;syncPlayback();persist();},setSpeed:v=>{simulationSpeed=normalizeSpeed(v);syncSpeedControl();persist();},setWeather:chooseWeather},{room,relay:new URLSearchParams(location.search).get('relay')});window.holodeck=creator;return creator;});}
+let worldFx=null;
 // World event cards (event-hand.mjs): the god-view effects. Weather and time are set through the same code the buttons use.
 addEventListener('ranch:play-event',e=>{const id=e.detail?.id,hour=h=>{farmClock={...farmClock,hour:h};updateClock(0);};
  if(id==='paint-rain'){if(typeof playPaintCard==='function')playPaintCard();return;}
+ if(['fireball','waterball','cats-dogs','tie-dye'].includes(id)){import('./world-effects.mjs?v=1').then(({createWorldEffects})=>{worldFx||=createWorldEffects({T,scene,orbit,canvas:renderer.domElement,heightAt:(x,z)=>active?.heightAt?.(x,z)??0,clock:()=>farmClock});worldFx.play(id);});return;}
  const fx={'rain-shower':['rain'],thunderstorm:['hail'],snowfall:['snow'],'morning-fog':['cloudy',6],rainbow:['clear',15],'golden-dawn':['clear',6.5],'starry-night':['clear',22]}[id];
  if(!fx)return;chooseWeather(fx[0]);if(fx[1]!==undefined)hour(fx[1]);});
 // Developer mode only: scripted captures (time, weather, pause) for the weather and light checks.

@@ -1,0 +1,24 @@
+{
+  "slug": "lighthouse",
+  "title": "Low Poly Lighthouse",
+  "model_url": "https://www.printables.com/model/58833-low-poly-lighthouse",
+  "author": "erre_stvdio",
+  "author_url": "https://www.printables.com/@erre_stvdio",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "source_file": "LOWPOLY_Lighthouse.stl",
+  "category": "building",
+  "origin": "author's original creation (imported from Thingiverse by the author)",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source.stl",
+      "sha256": "46ee759b97cf9d3ea792f078969a163241dc9d6cbe1003e8c11566ac5e3e9a34",
+      "bytes": 256484
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

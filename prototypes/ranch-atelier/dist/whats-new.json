@@ -11,6 +11,26 @@
       "threadTitle": "AW-STUDY-0058 - Kart mode racetrack",
       "tour": false,
       "link": "/studies/kart/play.html"
+      "id": "2026-10-23-paint-balls",
+      "date": "2026-10-23",
+      "title": "Fling your own paint",
+      "line": "Spending the Paint card now gives you a random handful of splat balls, big or small. Drag one from the right edge and let go: it flies, splats, and grows glowing plants, faster than before.",
+      "image": "/whats-new/2026-10-23-paint-balls.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFsUNxMs2CS8NZsWeXQJCoG",
+      "threadTitle": "AW-STUDY-0049 - Paint the World",
+      "tour": true,
+      "link": "/sandbox"
+    },
+    {
+      "id": "2026-10-23-more-world-events",
+      "date": "2026-10-23",
+      "title": "Fireballs, water balloons, cats and dogs, tie-dye",
+      "line": "Four new world event cards: drop a fireball or a giant waterball, rain cats and dogs, or turn the whole world tie-dye with a sitar. Each lasts a day and nobody is hurt.",
+      "image": "/whats-new/2026-10-23-tie-dye.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+      "threadTitle": "World event cards",
+      "tour": false,
+      "link": "/sandbox"
     },
     {
       "id": "2026-10-23-character-studio-heroes",
@@ -127,6 +147,17 @@
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
       "threadTitle": "AW-STUDY-0036 - Moon Mission game",
       "tour": false
+    },
+    {
+      "id": "2026-10-23-toy-car-coaster",
+      "date": "2026-10-23",
+      "title": "A toy-car coaster at the skate park",
+      "line": "Zoom down onto the skate park, tap the little yellow car and ride a 30 second first-person coaster with a loop, a corkscrew and a jump. Catch ten stars and win the Toy car charm.",
+      "image": "/whats-new/2026-10-23-toy-car-coaster.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHBUxVuF2cp3znG1VAyAmzx",
+      "threadTitle": "AW-STUDY-0054 - Toy-car coaster ride",
+      "tour": true,
+      "link": "/studies/coaster/play.html"
     },
     {
       "id": "2026-10-23-backpack-worn",
