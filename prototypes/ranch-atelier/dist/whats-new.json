@@ -2,6 +2,16 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-billing",
+      "date": "2026-10-23",
+      "title": "See every cent of your magic",
+      "line": "Signed in, your account now has a billing page: every talk, build and safety check, what it cost, and what's left this month. Support now comes in $5, $45 or $80 a month, almost all of it back as magic. The Kickstarter is gone.",
+      "image": "/whats-new/2026-10-23-front-door.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+      "threadTitle": "Front door, sign-in and donations",
+      "tour": false
+    },
+    {
       "id": "2026-10-23-notices",
       "date": "2026-10-23",
       "title": "New things wait for you",
@@ -15,7 +25,7 @@
       "id": "2026-10-23-front-door",
       "date": "2026-10-23",
       "title": "A front door for Abbie's World",
-      "line": "abbies.world now opens on a front door: what Abbie's World is, how it works, the PG promise, Play and Sign in, a $5-a-month donation and the studio Kickstarter. Your home-screen app still goes straight to the ranch.",
+      "line": "abbies.world now opens on a front door: what Abbie's World is, how it works, the PG promise, Play and Sign in, and support from $5 a month. Your home-screen app still goes straight to the ranch.",
       "image": "/whats-new/2026-10-23-front-door.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
       "threadTitle": "Front door, sign-in and donations"

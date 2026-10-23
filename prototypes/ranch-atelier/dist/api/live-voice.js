@@ -51,7 +51,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,p
  // Every spoken character is charged to the player first: the ticket's for a session, the cookie's for a preview.
  const me=preview?who(req,env):ticketAccount(body.ticket);
  if(!me)return json(401,{error:'Sign in to hear the voices.'});
- if(!await purse().charge(me,text.length*PRICES.elevenChar))return json(402,{error:'The voice has used up its magic for now.',budget:true});
+ if(!await purse().charge(me,text.length*PRICES.elevenChar,'The Computer speaking'))return json(402,{error:'The voice has used up its magic for now.',budget:true});
  const speed=Number.isFinite(body.speed)?Math.min(1.2,Math.max(0.7,body.speed)):1;
  try{
   const r=await fetcher(`${API}/v1/text-to-speech/${voice}/stream?output_format=pcm_24000`,{method:'POST',signal:AbortSignal.timeout(15000),

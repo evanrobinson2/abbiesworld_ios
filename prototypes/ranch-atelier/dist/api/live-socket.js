@@ -43,7 +43,7 @@ async function relay(client,token,me){
  const meter=async()=>{
   const usd=owed+heard/FRAME_BYTES_PER_SECOND/60*PRICES.realtimeInputMinute+said/FRAME_BYTES_PER_SECOND/60*PRICES.realtimeOutputMinute;heard=said=owed=0;
   if(usd<=0||spent)return;
-  let ok=false;try{ok=await server.wallet().charge(me,usd);}catch(e){console.error('[live-socket] ledger',e.message);owed=usd;ok=usd<0.25;}
+  let ok=false;try{ok=await server.wallet().charge(me,usd,'Talking with the Computer');}catch(e){console.error('[live-socket] ledger',e.message);owed=usd;ok=usd<0.25;}
   if(!ok){spent=true;if(upstream.readyState<2)upstream.close(1000);if(client.readyState<2)client.close(4402,'The Computer has used up its magic for now');}
  };
  const metering=setInterval(meter,METER_MS);

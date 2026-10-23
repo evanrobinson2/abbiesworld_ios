@@ -56,13 +56,26 @@ function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS,plan=null}={}){
   return p?{cap:Math.max(caps.person,p.cap),pool:false}:{cap:caps.person,pool:true};
  }
  const spentOf=v=>Number(v?.usd)||0;
- // Adds usd to one ledger unless that would pass cap. Retries on a concurrent write.
- async function add(path,usd,cap){
-  const r=await upTo(path,usd,cap,usd);
+ // The billing log rides in the same write as the charge (no extra ledger traffic): totals by month and kind for the last
+ // 13 months, and the latest 60 items, with repeats of one kind within 10 minutes folded into one line.
+ const r6=n=>Math.round(n*1e6)/1e6;
+ function itemise(value,what,usd,at){
+  const month=at.slice(0,7),by={...(value?.by||{})},m={...(by[month]||{})},k=m[what]||{usd:0,n:0};
+  m[what]={usd:r6(k.usd+usd),n:k.n+1};by[month]=m;
+  for(const old of Object.keys(by).sort().slice(0,-13))delete by[old];
+  const items=[...(value?.items||[])],last=items[items.length-1];
+  if(last&&last.what===what&&Date.parse(at)-Date.parse(last.at)<600000&&Math.sign(last.usd)===Math.sign(usd))items[items.length-1]={...last,at,usd:r6(last.usd+usd),n:(last.n||1)+1};
+  else items.push({at,what,usd:r6(usd)});
+  return {by,items:items.slice(-60)};
+ }
+ // Adds usd to one ledger unless that would pass cap. Retries on a concurrent write. what names the charge on a
+ // person's own ledger, for their billing page.
+ async function add(path,usd,cap,what){
+  const r=await upTo(path,usd,cap,usd,what);
   return {ok:r.took>=usd-1e-9,spent:r.spent};
  }
  // Adds as much of usd as fits under cap, but nothing if less than least would fit. Returns what it took.
- async function upTo(path,usd,cap,least){
+ async function upTo(path,usd,cap,least,what){
   for(let i=0;i<12;i++){
    // Back off a little after a lost race so a crowd of charges spreads out.
    if(i)await new Promise(r=>setTimeout(r,Math.random()*40*i));
@@ -70,6 +83,7 @@ function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS,plan=null}={}){
    const took=usd>0?Math.min(usd,Math.max(0,cap-spent)):usd;
    if(usd>0&&(took<least-1e-9||took<=1e-9))return {took:0,spent};
    const next={usd:Math.max(0,Math.round((spent+took)*1e6)/1e6),updated:new Date().toISOString(),calls:(value?.calls||0)+(took>0?1:0)};
+   if(what)Object.assign(next,itemise(value,what,took,next.updated));
    if(await store.write(path,next,etag))return {took,spent:next.usd};
   }
   throw Error('ledger busy');
@@ -94,6 +108,8 @@ function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS,plan=null}={}){
  return {
   caps,
   spent,
+  // The player's own billing log: {spent, by:{'YYYY-MM':{kind:{usd,n}}}, items:[{at,what,usd,n?}]}. Only their account.
+  async billing(a){const v=(await store.read(personPath(a))).value;return {spent:spentOf(v),by:v?.by||{},items:v?.items||[]};},
   // Dollars this account may still spend: the smaller of its own room and its pool's room.
   async left(a){
    if(!a)return 0;
@@ -102,20 +118,20 @@ function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS,plan=null}={}){
    return Math.max(0,Math.min(t.cap-spentOf(p.value),room));
   },
   // Records a charge before (or while) money is spent. false means stop: a cap would be crossed.
-  async charge(a,usd){
+  async charge(a,usd,what='AI magic'){
    if(!a||!(usd>0))return !!a;
    const t=await terms(a);
-   if(!t.pool)return (await add(personPath(a),usd,t.cap)).ok;
+   if(!t.pool)return (await add(personPath(a),usd,t.cap,what)).ok;
    const parts=await pool.take(usd);if(!parts)return false;
-   const mine=await add(personPath(a),usd,t.cap);
+   const mine=await add(personPath(a),usd,t.cap,what);
    if(!mine.ok){await pool.give(parts);return false;}
    return true;
   },
   // Gives a player back credit they spent (a Make rebate, api/invent.js). Only their own ledger: the money really
   // was spent, so the public pool, which caps Evan's real bill, keeps counting it.
-  async refund(a,usd){
+  async refund(a,usd,what='Money back'){
    if(!a||!(usd>0))return false;
-   await add(personPath(a),-usd,Infinity);return true;
+   await add(personPath(a),-usd,Infinity,what);return true;
   }
  };
 }

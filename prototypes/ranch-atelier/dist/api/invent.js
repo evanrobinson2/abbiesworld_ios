@@ -88,7 +88,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,p
   // Once per toy, on its first use by anyone else; the rebate record is written only if it isn't there yet.
   const rebate=async entry=>{
    const by=entry?.by;if(!by?.id||by.id===me.id||!(entry.cost>0))return;
-   try{if(await store.claim(`${ROOT}rebates/${hash(entry.by.id+':'+(wishKey(entry.recipe?.name)||entry.wish))}.json`,{to:by.id,usd:entry.cost,at:new Date(at).toISOString()}))await purse().refund(by,entry.cost);}
+   try{if(await store.claim(`${ROOT}rebates/${hash(entry.by.id+':'+(wishKey(entry.recipe?.name)||entry.wish))}.json`,{to:by.id,usd:entry.cost,at:new Date(at).toISOString()}))await purse().refund(by,entry.cost,'Money back: someone else made your idea too');}
    catch(e){console.error('[invent] rebate',e.message);}
   };
   const keep=async(recipe,cachedHit,entry)=>{
@@ -113,10 +113,10 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,p
     if(busy>=MAX_INFLIGHT)return json(res,503,{error:'Lots of builders right now! Try again in a moment.',busy:true});
     mine=true;busy++;
     job=(async()=>{
-     if(!await purse().charge(me,PRICES.guardCall))return {tired:true};
+     if(!await purse().charge(me,PRICES.guardCall,'Safety check'))return {tired:true};
      const verdict=await guard(fetcher,headers,'CHILD',`Please make this toy in the game: ${wish}`);
      if(verdict.verdict!=='ok')return {verdict:verdict.verdict};
-     if(!await purse().charge(me,PRICES.inventCall))return {tired:true};
+     if(!await purse().charge(me,PRICES.inventCall,'Making a new thing'))return {tired:true};
      const recipe=await design(wish,headers,constrain,DESIGNER_PROMPT);
      // by: the inventor (hashed account id and owner flag only), so a later use by someone else can rebate them.
      const entry={wish,recipe,madeAt:new Date(at).toISOString(),version:INVENT_VERSION,by:{id:me.id,owner:!!me.owner},cost:PRICES.guardCall+PRICES.inventCall};
