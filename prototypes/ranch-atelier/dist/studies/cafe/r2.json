@@ -1,1 +1,14 @@
-{}
+{
+ "asset-beanbag-bricks": 4,
+ "asset-cup-booth-bricks": 4,
+ "asset-cup-booth-vinyl": 4,
+ "asset-espresso-bricks": 4,
+ "asset-espresso-vinyl": 4,
+ "asset-smoothie-bricks": 4,
+ "asset-smoothie-vinyl": 4,
+ "asset-stool-bricks": 4,
+ "asset-stool-vinyl": 4,
+ "backbar-front": 4,
+ "backbar-machines": 4,
+ "backbar-wide": 4
+}
