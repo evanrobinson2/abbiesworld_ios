@@ -1,0 +1,19 @@
+{
+ "id": "sting-victory",
+ "take": 2,
+ "title": "Victory",
+ "kind": "sting",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "l0ryayOQqQ0eeqSH2Os1",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, triumphant but warm, brass and strings fanfare, timpani roll, big final major chord. Sting: short fanfare, complete musical gesture. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 6000
+ },
+ "date": "2026-10-22",
+ "sha256": "0d28d3a265a7d245fd671493159ee01806feb0435c3267dd4c7feecbcab51ebd",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-2.master.mp3"
+}

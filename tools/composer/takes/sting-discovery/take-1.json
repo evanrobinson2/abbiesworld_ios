@@ -1,0 +1,19 @@
+{
+ "id": "sting-discovery",
+ "take": 1,
+ "title": "Discovery",
+ "kind": "sting",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "eG4PKjgidYwSVCiUOWs4",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, curious, pizzicato and celesta question then answer, you found something. Sting: very short, complete musical gesture. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 3000
+ },
+ "date": "2026-10-22",
+ "sha256": "80eb9d6c1ba9dda900b1c4ed2c84500406e9b4f64a128b659f18c3aa2ae6334b",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-1.master.mp3"
+}

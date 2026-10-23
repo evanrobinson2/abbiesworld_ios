@@ -1,0 +1,19 @@
+{
+ "id": "wonder",
+ "take": 3,
+ "title": "Wonder",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "y7vB9q6RiPywJ8wIRbCK",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, adventure and discovery, E lydian, 92 bpm, shimmering harp, celesta, soaring strings, light timpani swells, exploring a magical new world. Arrival: harp and celesta shimmer, sense of a new place. Explore: strings lift, woodwinds dart. Soar: full orchestra, still gentle, horn melody. Settle: back to shimmer, loops cleanly. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 120000
+ },
+ "date": "2026-10-22",
+ "sha256": "461b1c4bb07bf771b472df86ce98a9ac9fb45986d80b8dceb12875d17e89918e",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-3.master.mp3"
+}

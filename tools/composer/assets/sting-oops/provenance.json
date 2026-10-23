@@ -1,0 +1,208 @@
+{
+ "id": "sting-oops",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "6cf918116eb3533a70cb812fe90f47e29097f92033e4905190f96b4a207c879e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "65603d56886cd2aca08f0f723c7e518fed952453eca87f68f3d7262900ec45ef"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "3bede96ca01b6abf8179f2ada335b8a36f43801e0129497a2348b3d76062aebc"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "ac1ee8ac94abe40bb34330d579684952cbb3d31e7a74eba16b84821c685bf6f0"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "a950c8ca45da77a25a61cc8f296e4407f11a2d1ddeb7183417f40f3b6f995668"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "1f6055a2dbcd8ea4ed70a525ce37735db203816a9e023bbcd098d57162b5397e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "7d717c959782a2b16f6b32669023ae4a82beb972bbd39651f9dbad25aded7a67"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "64be1f725cd6d78cdcf18e2b9611038d1c768ad0494b0b47edad4a7d876e8ce9"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "5cf4abc84b41f196c7fe74babe2adefe1a8cdc09a80d9d579e0452a44de923ff"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "af32d69a668a9c0753141d7c6bf16a81dafb29e65ad5377c72c27f093c618615"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "73ac8786db34fff892b4fd2fc442bcd5a9b37a793db0e6bf3ccd0e9831517156"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "9ef4b5ad3ff86c2e6327127906d8656bf89f789d68b158d4cea992b2c8ab15c0"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "5cf4abc84b41f196c7fe74babe2adefe1a8cdc09a80d9d579e0452a44de923ff"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "af32d69a668a9c0753141d7c6bf16a81dafb29e65ad5377c72c27f093c618615"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "73ac8786db34fff892b4fd2fc442bcd5a9b37a793db0e6bf3ccd0e9831517156"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "9ef4b5ad3ff86c2e6327127906d8656bf89f789d68b158d4cea992b2c8ab15c0"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "5cf4abc84b41f196c7fe74babe2adefe1a8cdc09a80d9d579e0452a44de923ff"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "af32d69a668a9c0753141d7c6bf16a81dafb29e65ad5377c72c27f093c618615"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "73ac8786db34fff892b4fd2fc442bcd5a9b37a793db0e6bf3ccd0e9831517156"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "9ef4b5ad3ff86c2e6327127906d8656bf89f789d68b158d4cea992b2c8ab15c0"
+  }
+ ],
+ "title": "Oops",
+ "kind": "sting",
+ "brief": "Bassoon slips down a half step and lands softly on pizzicato. Gentle, never mocking.",
+ "uses": [
+  "mistake",
+  "try again",
+  "blocked action"
+ ],
+ "tags": [
+  "sting",
+  "oops",
+  "bassoon",
+  "light"
+ ],
+ "score": "tools/composer/cues/stings.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/stings.py",
+  "bpm": 110,
+  "meter": "4/4",
+  "key": "E major",
+  "bars": 1,
+  "instruments": [
+   "bassoon",
+   "bassoon_stac",
+   "cellos_pizz"
+  ],
+  "percussion": [],
+  "hall_seconds": 1.8,
+  "target_lufs": -16.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "D": {
+   "audio": "/music/composer/sting-oops.D.mp3",
+   "sha256": "5cf4abc84b41f196c7fe74babe2adefe1a8cdc09a80d9d579e0452a44de923ff",
+   "bytes": 52485,
+   "duration": 2.653,
+   "loudness": -16.0,
+   "peak": -3.9,
+   "loopPoints": null,
+   "stems": []
+  },
+  "G": {
+   "audio": "/music/composer/sting-oops.G.mp3",
+   "sha256": "af32d69a668a9c0753141d7c6bf16a81dafb29e65ad5377c72c27f093c618615",
+   "bytes": 48117,
+   "duration": 2.699,
+   "loudness": -16.0,
+   "peak": -3.5,
+   "loopPoints": null,
+   "stems": []
+  },
+  "Bb": {
+   "audio": "/music/composer/sting-oops.Bb.mp3",
+   "sha256": "73ac8786db34fff892b4fd2fc442bcd5a9b37a793db0e6bf3ccd0e9831517156",
+   "bytes": 48621,
+   "duration": 2.726,
+   "loudness": -16.0,
+   "peak": -3.1,
+   "loopPoints": null,
+   "stems": []
+  },
+  "E": {
+   "audio": "/music/composer/sting-oops.E.mp3",
+   "sha256": "9ef4b5ad3ff86c2e6327127906d8656bf89f789d68b158d4cea992b2c8ab15c0",
+   "bytes": 49989,
+   "duration": 2.747,
+   "loudness": -16.0,
+   "peak": -4.0,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}

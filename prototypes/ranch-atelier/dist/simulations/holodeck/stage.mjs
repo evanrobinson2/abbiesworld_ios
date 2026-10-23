@@ -13,8 +13,11 @@ export function createStage(ctx,{room,relay}){
  const layer=new T.Group();layer.name='holodeck';scene.add(layer);
  const entities=new Map(),pendingAcks=[],shots=[];let socket=null,peers={creator:0},rev=0,lastSent='',tapped=null,selected=null,retry=500,closed=false;
  const loader=new GLTFLoader(),catalog=fetch('/simulation-assets/catalog.json').then(r=>r.json()).catch(()=>[]);
+ // The model library (R2 catalogue, bundled manifest as fallback). Its ids are spawned as "lib-<id>".
+ let libraryList=null;
+ const library=()=>libraryList??=fetch('/api/models').then(r=>r.ok?r.json():Promise.reject(Error('store'))).catch(()=>fetch('/models/manifest.json').then(r=>r.json())).then(d=>(d.models||[]).filter(m=>m.urls?.glb)).catch(()=>[]);
  const v=a=>new T.Vector3(...a),round=x=>Math.round(x*100)/100,arr=p=>[round(p.x),round(p.y),round(p.z)];
- const ui=createOverlay(ctx.host);
+ const ui=createOverlay(ctx.host,{chip:!!room});
 
  // ---- world reading -------------------------------------------------------------------
  let worldCache={at:0,list:[]};
@@ -60,9 +63,17 @@ export function createStage(ctx,{room,relay}){
  const GEO={box:()=>new T.BoxGeometry(1,1,1).translate(0,.5,0),sphere:()=>new T.SphereGeometry(.5,24,16).translate(0,.5,0),cone:()=>new T.ConeGeometry(.5,1,24).translate(0,.5,0),cylinder:()=>new T.CylinderGeometry(.5,.5,1,24).translate(0,.5,0),torus:()=>new T.TorusGeometry(.4,.12,12,32).rotateX(Math.PI/2).translate(0,.12,0),capsule:()=>new T.CapsuleGeometry(.3,.4,6,16).translate(0,.5,0),pyramid:()=>new T.ConeGeometry(.6,1,4).translate(0,.5,0),ring:()=>new T.TorusGeometry(.5,.05,8,48).translate(0,.55,0),star:starGeometry};
  function starGeometry(){const s=new T.Shape();for(let i=0;i<10;i++){const r=i%2?.22:.5,a=i/10*Math.PI*2+Math.PI/2;s[i?'lineTo':'moveTo'](Math.cos(a)*r,Math.sin(a)*r);}return new T.ExtrudeGeometry(s,{depth:.16,bevelEnabled:true,bevelSize:.03,bevelThickness:.03,bevelSegments:2}).translate(0,.5,-.08);}
  async function build(a){
-  const unit=personHeight();
+  const unit=a.parent?1:personHeight();
+  if(a.shape==='empty'){const g=new T.Group();g.userData.baseScale=unit;return g;}
   if(a.shape){const m=new T.Mesh(GEO[a.shape](),new T.MeshStandardMaterial({color:a.color||'#f2b134',roughness:.55,metalness:.05}));m.castShadow=m.receiveShadow=true;const g=new T.Group();g.add(m);g.userData.baseScale=unit;return g;}
-  if(a.person){const n=entities.size;const role=a.person.role,child=role==='child',zombie=role==='zombie';const person={index:n,appearance:{build:1,height:child?1.2:1.7,skin:zombie?['#9cbf7a','#8fb37f','#a7c48a'][n%3]:['#e8b98f','#c68c5e','#8d5a3b','#f3d0b0'][n%4],hair:zombie?'#4b4a3a':['#3b2a1e','#a0522d','#e2c16b','#222'][n%4],hairStyle:n%3},wardrobe:{top:a.color||(zombie?['#6f6a8a','#7a5b4a','#56706a'][n%3]:'#4f7cac'),bottom:zombie?'#4a4a3e':'#4a4036',hat:role==='rancher'?'brim':'none',accessory:'none'}};const body=makePerson(person),g=new T.Group();g.add(body);g.userData.baseScale=unit/1.75;g.userData.rig=body.userData;if(zombie){const [l,,r]=body.userData.limbs;l.rotation.x=r.rotation.x=-1.45;}return g;}
+  if(a.person){if(a.parent)throw Error('People cannot be parts');const n=entities.size;const role=a.person.role,child=role==='child',zombie=role==='zombie';const person={index:n,appearance:{build:1,height:child?1.2:1.7,skin:zombie?['#9cbf7a','#8fb37f','#a7c48a'][n%3]:['#e8b98f','#c68c5e','#8d5a3b','#f3d0b0'][n%4],hair:zombie?'#4b4a3a':['#3b2a1e','#a0522d','#e2c16b','#222'][n%4],hairStyle:n%3},wardrobe:{top:a.color||(zombie?['#6f6a8a','#7a5b4a','#56706a'][n%3]:'#4f7cac'),bottom:zombie?'#4a4a3e':'#4a4036',hat:role==='rancher'?'brim':'none',accessory:'none'}};const body=makePerson(person),g=new T.Group();g.add(body);g.userData.baseScale=unit/1.75;g.userData.rig=body.userData;if(zombie){const [l,,r]=body.userData.limbs;l.rotation.x=r.rotation.x=-1.45;}return g;}
+  // Pages with a procedural kit (Family Teleport) build those ids locally, with no download.
+  if(ctx.kit?.has(a.asset)){const g=new T.Group();g.add(ctx.kit.build(a.asset));g.userData.baseScale=unit;return g;}
+  // Library models come in any size: normalise to one person tall on the ground, then scale like shapes.
+  if(a.asset.startsWith('lib-')){const m=(await library()).find(m=>'lib-'+m.id===a.asset);if(!m)throw Error('Unknown asset '+a.asset+'; use op catalog');
+   const gltf=await loader.loadAsync(m.urls.glb),model=gltf.scene;model.traverse(o=>{if(o.isMesh)o.castShadow=o.receiveShadow=true;});
+   const box=new T.Box3().setFromObject(model),size=box.getSize(new T.Vector3()),c=box.getCenter(new T.Vector3()),k=1/Math.max(1e-3,size.y||Math.max(size.x,size.z));
+   model.scale.setScalar(k);model.position.set(-c.x*k,-box.min.y*k,-c.z*k);const g=new T.Group();g.add(model);g.userData.baseScale=unit;return g;}
   const item=(await catalog).find(c=>c.id===a.asset);if(!item)throw Error('Unknown asset '+a.asset+'; use op catalog');
   const gltf=await loader.loadAsync(item.glb);const g=new T.Group();gltf.scene.traverse(o=>{if(o.isMesh)o.castShadow=o.receiveShadow=true;});g.add(gltf.scene);g.userData.baseScale=1;return g;
  }
@@ -90,24 +101,28 @@ export function createStage(ctx,{room,relay}){
  let cameraTween=null;
  const OPS_RUN={
   async state(a){return snapshot(a.world!==false);},
-  async catalog(){return (await catalog).map(c=>({id:c.id,label:c.label,category:c.category}));},
+  async catalog(){return [...(ctx.kit?.list()||[]),...(await catalog).map(c=>({id:c.id,label:c.label,category:c.category})),...(await library()).map(m=>({id:'lib-'+m.id,label:m.name,category:'library'}))];},
   async spawn(a){
    const id=a.id||(a.shape||a.asset||'person')+'-'+(entities.size+1);
    if(entities.has(id))OPS_RUN.remove({id});
-   const object=await build(a),e={id,kind:a.shape?'shape':a.asset?'asset':'person',type:a.shape||a.asset||a.person.role||'person',object,behavior:'none',phase:Math.random()*6};
+   const parent=a.parent?get(a.parent):null;if(parent&&a.parent===id)throw Error('An entity cannot be its own part');
+   const object=await build(a),e={id,kind:a.shape?'shape':a.asset?'asset':'person',type:a.shape||a.asset||a.person.role||'person',object,behavior:'none',phase:Math.random()*6,parent:parent?.id};
    object.name='holodeck:'+id;object.userData.holodeckId=id;
-   object.position.copy(placement(a));e.base=object.position.clone();object.rotation.y=T.MathUtils.degToRad(a.rotationY||0);
-   applyScale(e,a.scale);layer.add(object);entities.set(id,e);restyle(e,a);if(a.behavior)e.behavior=a.behavior;
+   // A part sits in its parent's space: at/offset are in parent sizes and it never snaps to the ground.
+   if(parent){object.position.copy(a.at?v(a.at):new T.Vector3());if(a.offset)object.position.add(v(a.offset));}else object.position.copy(placement(a));
+   e.base=object.position.clone();object.rotation.y=T.MathUtils.degToRad(a.rotationY||0);
+   applyScale(e,a.scale);(parent?parent.object:layer).add(object);entities.set(id,e);restyle(e,a);if(a.behavior)e.behavior=a.behavior;
    e.appear={t:0,duration:.35};object.scale.multiplyScalar(.001);
    return {id,position:arr(object.position)};
   },
   async remove(a){
    if(a.all){for(const id of [...entities.keys()])OPS_RUN.remove({id});return {removed:'all'};}
-   const e=get(a.id);layer.remove(e.object);e.object.traverse(o=>{if(o.isMesh&&o.userData.ownMaterial)o.material.dispose();});entities.delete(a.id);return {removed:a.id};
+   const e=get(a.id);for(const part of [...entities.values()])if(part.parent===a.id&&entities.has(part.id))OPS_RUN.remove({id:part.id});
+   e.object.parent?.remove(e.object);e.object.traverse(o=>{if(o.isMesh&&o.userData.ownMaterial)o.material.dispose();});entities.delete(a.id);return {removed:a.id};
   },
-  async move(a){const e=get(a.id),to=placement({...a,ground:a.ground??!a.to},e.object.position);const d=a.duration??1;
+  async move(a){const e=get(a.id),to=e.parent?(a.to?v(a.to):e.object.position.clone()).add(a.offset?v(a.offset):new T.Vector3()):placement({...a,ground:a.ground??!a.to},e.object.position);const d=a.duration??1;
    if(!d){e.object.position.copy(to);e.base=to.clone();e.tween=null;}else e.tween={from:e.object.position.clone(),to,t:0,d};
-   e.object.lookAt(to.x,e.object.position.y,to.z);return {id:a.id,to:arr(to)};},
+   if(!e.parent)e.object.lookAt(to.x,e.object.position.y,to.z);return {id:a.id,to:arr(to)};},
   async transform(a){const e=get(a.id);if(a.position){e.object.position.copy(v(a.position));e.base=e.object.position.clone();}
    if(a.rotation)e.object.rotation.set(...a.rotation.map(T.MathUtils.degToRad));if(a.rotationY!==undefined)e.object.rotation.y=T.MathUtils.degToRad(a.rotationY);
    if(a.scale!==undefined){applyScale(e,a.scale);fixLabel(e);}return {id:a.id};},
@@ -195,7 +210,7 @@ export function createStage(ctx,{room,relay}){
   const c=ctx.clock();
   return {protocol:PROTOCOL,rev,family:ctx.family(),name:ctx.name(),clock:{hour:round(c.hour),day:c.day,paused:c.paused,speed:c.speed},weather:c.weather,weatherMode:c.weatherMode,peopleSpeed:ctx.walkPace?.(),
    camera:{position:arr(camera.position),target:arr(orbit.target),fov:camera.fov},viewport:{width:innerWidth,height:innerHeight},scaleHint:{personHeight:round(personHeight())},
-   entities:[...entities.values()].map(e=>({id:e.id,kind:e.kind,type:e.type,position:arr(e.object.position),scale:e.scale,color:e.color,label:e.label,behavior:e.behavior,visible:e.object.visible,moving:!!e.tween})),
+   entities:[...entities.values()].map(e=>({id:e.id,parent:e.parent,kind:e.kind,type:e.type,position:arr(e.object.position),scale:e.scale,color:e.color,label:e.label,behavior:e.behavior,visible:e.object.visible,moving:!!e.tween})),
    world:world?worldThings().map(({name,kind,doing,position})=>({name,kind,doing,position})):undefined,lastTap:tapped,selected,hidden:document.hidden};
  }
  setInterval(()=>{
@@ -215,12 +230,18 @@ export function createStage(ctx,{room,relay}){
  // ---- transport -----------------------------------------------------------------------
  function send(m){if(socket?.readyState===1)socket.send(JSON.stringify(m));}
  async function onCommand(m){
-  const received=performance.now(),receivedEpoch=Date.now(),results=[];let error=null;
-  try{if(!Array.isArray(m.ops)||!m.ops.length||m.ops.length>64)throw Error('ops must be a non-empty array of at most 64');m.ops.forEach(checkCommand);for(const op of m.ops)results.push(await OPS_RUN[op.op](op.args??{}));}
-  catch(e){error=e.message;console.warn('[holodeck]',e.stack||e);}
-  if(m.ops?.some?.(o=>OPS[o.op]?.mutates))rev++;
+  const received=performance.now(),receivedEpoch=Date.now();let results,error;
+  ({results,error}=await apply(m.ops));
   const timing={receivedEpoch,applied:round(performance.now()-received)},ack={received,timing,probe:m.probe,message:()=>({t:'ack',id:m.id,ok:!error,error,results,timing,sentAt:m.sentAt})};
   if(document.hidden){timing.drawn=null;send(ack.message());}else pendingAcks.push(ack);
+ }
+ // Applies a batch in this frame. Shared by the relay and by in-page drivers such as live voice mode.
+ async function apply(ops){
+  const results=[];let error=null;
+  try{if(!Array.isArray(ops)||!ops.length||ops.length>64)throw Error('ops must be a non-empty array of at most 64');ops.forEach(checkCommand);for(const op of ops)results.push(await OPS_RUN[op.op](op.args??{}));}
+  catch(e){error=e.message;console.warn('[holodeck]',e.stack||e);}
+  if(ops?.some?.(o=>OPS[o.op]?.mutates))rev++;
+  return {ok:!error,results,error};
  }
  function connect(){
   if(closed)return;
@@ -235,11 +256,11 @@ export function createStage(ctx,{room,relay}){
    else if(m.t==='ping')send({t:'pong',at:m.at});};
   socket.onclose=()=>{ui.status('offline');peers={creator:0};setTimeout(connect,retry);retry=Math.min(retry*2,8000);};
  }
- connect();
- return {frame,rendered,snapshot,dispose(){closed=true;socket?.close();scene.remove(layer);}};
+ if(room)connect();
+ return {frame,rendered,snapshot,apply,caption:ui.caption,dispose(){closed=true;socket?.close();scene.remove(layer);}};
 }
 
-function createOverlay(host){
+function createOverlay(host,{chip:showChip=true}={}){
  const style=document.createElement('style');
  style.textContent=`.holodeck-caption{position:fixed;left:50%;bottom:max(110px,14vh);transform:translate(-50%,12px);max-width:min(720px,calc(100vw - 32px));padding:12px 20px;border-radius:18px;background:rgba(26,22,18,.72);backdrop-filter:blur(10px);color:#fff8ec;font:500 19px/1.4 Fraunces,Georgia,serif;text-align:center;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;z-index:40}
 .holodeck-caption.show{opacity:1;transform:translate(-50%,0)}
@@ -249,7 +270,7 @@ function createOverlay(host){
  document.head.append(style);
  const cap=document.createElement('div');cap.className='holodeck-caption';cap.setAttribute('role','status');cap.setAttribute('aria-live','polite');document.body.append(cap);
  const chip=document.createElement('span');chip.className='holodeck-status';chip.innerHTML='<i></i><span>Computer</span>';
- (document.querySelector('header .toolbar-spacer')?.after?document.querySelector('header .toolbar-spacer').after(chip):document.body.append(chip));
+ if(showChip)(document.querySelector('header .toolbar-spacer')?.after?document.querySelector('header .toolbar-spacer').after(chip):document.body.append(chip));
  let timer=0;const labels={online:'Computer online',waiting:'Computer: waiting for Creator',connecting:'Computer: connecting',offline:'Computer offline'};
  return {caption(text,seconds){cap.textContent=text;cap.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>cap.classList.remove('show'),seconds*1000);},
   status(s){chip.dataset.s=s;chip.title=labels[s];chip.lastChild.textContent=s==='online'?'Computer':s==='waiting'?'Computer…':'Computer ✕';}};

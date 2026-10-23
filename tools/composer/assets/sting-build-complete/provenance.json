@@ -1,0 +1,210 @@
+{
+ "id": "sting-build-complete",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "eb1ae97a003c57a486326556ee581c640c88b1e9997bc008fe49780862637daa"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "73ba597e7cd40aa89bc74475bfd9f058adf8d957743db1ec595944727663e06d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "6ea90c761aa8b00efdc476cfb89fc999c89b743d4ef54d33f4df63696be41794"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "41902f540c77c3b34489b9f854f61568482e0cf6d912027de8b2fe8d3f7e18dc"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "bf37e230738a1fd7274122a4dd1ac1422d33ec1f2ab35113d54f87b58cbfb01f"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "6d588cf87a4585aea0f7639a1395f83d3dff0d50d77132d8f11f6fa559d3d8bf"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "38d462056d4f5f25c93bfbcb4aca0ce752a407d20f1dec6c49999d11a7cdc6ee"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "f0b516622f7dac6b40df5d01055a8cfd8629af21066e7d242bb2b259ff728afe"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "5f54aa33da22b5a444ec1cb63c3caabca6c1b4475b354479ddb67037aae7814b"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "30f770401d945f80e0673d376b2204bdd519b193c32d7e199a34079b9d03485e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "8559fe365e4b6d78a0e8f2693c4bd6dee97ca111972f6ba2e7446a612d17b8aa"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "7bc0961d21962788e0cd5bed5ba6c3b3a715aaa461dc20e87dec1bd63e6f522b"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "5f54aa33da22b5a444ec1cb63c3caabca6c1b4475b354479ddb67037aae7814b"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "30f770401d945f80e0673d376b2204bdd519b193c32d7e199a34079b9d03485e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "8559fe365e4b6d78a0e8f2693c4bd6dee97ca111972f6ba2e7446a612d17b8aa"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "7bc0961d21962788e0cd5bed5ba6c3b3a715aaa461dc20e87dec1bd63e6f522b"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "5f54aa33da22b5a444ec1cb63c3caabca6c1b4475b354479ddb67037aae7814b"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "30f770401d945f80e0673d376b2204bdd519b193c32d7e199a34079b9d03485e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "8559fe365e4b6d78a0e8f2693c4bd6dee97ca111972f6ba2e7446a612d17b8aa"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "7bc0961d21962788e0cd5bed5ba6c3b3a715aaa461dc20e87dec1bd63e6f522b"
+  }
+ ],
+ "title": "Build Complete",
+ "kind": "sting",
+ "brief": "Marimba runs up to a horn and pizzicato hit with a bell on top.",
+ "uses": [
+  "building finished",
+  "tile placed",
+  "upgrade done"
+ ],
+ "tags": [
+  "sting",
+  "build",
+  "marimba",
+  "success"
+ ],
+ "score": "tools/composer/cues/stings.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/stings.py",
+  "bpm": 120,
+  "meter": "4/4",
+  "key": "E major",
+  "bars": 1,
+  "instruments": [
+   "glock",
+   "horn_stac",
+   "marimba",
+   "timpani",
+   "violins_pizz"
+  ],
+  "percussion": [],
+  "hall_seconds": 2.2,
+  "target_lufs": -16.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "D": {
+   "audio": "/music/composer/sting-build-complete.D.mp3",
+   "sha256": "5f54aa33da22b5a444ec1cb63c3caabca6c1b4475b354479ddb67037aae7814b",
+   "bytes": 45261,
+   "duration": 2.263,
+   "loudness": -16.4,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "G": {
+   "audio": "/music/composer/sting-build-complete.G.mp3",
+   "sha256": "30f770401d945f80e0673d376b2204bdd519b193c32d7e199a34079b9d03485e",
+   "bytes": 41973,
+   "duration": 2.087,
+   "loudness": -17.4,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "Bb": {
+   "audio": "/music/composer/sting-build-complete.Bb.mp3",
+   "sha256": "8559fe365e4b6d78a0e8f2693c4bd6dee97ca111972f6ba2e7446a612d17b8aa",
+   "bytes": 47637,
+   "duration": 2.36,
+   "loudness": -16.8,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "E": {
+   "audio": "/music/composer/sting-build-complete.E.mp3",
+   "sha256": "7bc0961d21962788e0cd5bed5ba6c3b3a715aaa461dc20e87dec1bd63e6f522b",
+   "bytes": 43293,
+   "duration": 2.29,
+   "loudness": -16.2,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}

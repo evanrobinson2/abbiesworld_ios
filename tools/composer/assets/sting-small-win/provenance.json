@@ -1,0 +1,208 @@
+{
+ "id": "sting-small-win",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "43b2d08a9f303842ac256d1956e05bb20133a0843a0def228764c1cadf3bb547"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "877b2a3494e96cd5a42eac12436a02279069c713281256a198ceb6e9cdea4b1e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "315cb035fcca0768c4869e94627a17701a6365a6f50a02804f47a58c77f62654"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "58ae6d95409930622eb5c565c48047731459848fc3e4eedb63ed0966f487d50d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "f6dcf759860fa44552c6ded7d259a7be97b294ac18d370cb5657305e4e88185d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "39a83d7a93f161ef9d27c2f5a420ad523fe196f29919a8de73c5b14f09b2347d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "4103d70f7ec5c1d83bcb956d391e83ab088896cf4d4b086163b7d0a2f39e7820"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "dc5f91d00961e4b25e6d470849884f053eb5489d30bb135624b706dcedf8095d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "f6b8b9a1992803ee526752b6593dd495618b80ab00637ad5546ef5f19a9ec3fa"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "789150f37a96d048e19a5c6a5116cab1f39a1304cb9a071dfec0705dc1dbabbc"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "d19c49522636a88b1201d0e14381cccbb91d822a0679505601472ee76eda27e5"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "848cb7eb8953392034e54fe9b7c58f60eeced99c47e4a72d02f32f5d01278dd6"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "f6b8b9a1992803ee526752b6593dd495618b80ab00637ad5546ef5f19a9ec3fa"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "789150f37a96d048e19a5c6a5116cab1f39a1304cb9a071dfec0705dc1dbabbc"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "d19c49522636a88b1201d0e14381cccbb91d822a0679505601472ee76eda27e5"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "848cb7eb8953392034e54fe9b7c58f60eeced99c47e4a72d02f32f5d01278dd6"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "f6b8b9a1992803ee526752b6593dd495618b80ab00637ad5546ef5f19a9ec3fa"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "789150f37a96d048e19a5c6a5116cab1f39a1304cb9a071dfec0705dc1dbabbc"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "d19c49522636a88b1201d0e14381cccbb91d822a0679505601472ee76eda27e5"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "848cb7eb8953392034e54fe9b7c58f60eeced99c47e4a72d02f32f5d01278dd6"
+  }
+ ],
+ "title": "Small Win",
+ "kind": "sting",
+ "brief": "Three plucked notes and a bell: a quick, friendly yes.",
+ "uses": [
+  "collecting",
+  "small success",
+  "task done"
+ ],
+ "tags": [
+  "sting",
+  "success",
+  "pizzicato",
+  "short"
+ ],
+ "score": "tools/composer/cues/stings.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/stings.py",
+  "bpm": 120,
+  "meter": "4/4",
+  "key": "E major",
+  "bars": 1,
+  "instruments": [
+   "glock",
+   "harp",
+   "violins_pizz"
+  ],
+  "percussion": [],
+  "hall_seconds": 2.0,
+  "target_lufs": -16.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "D": {
+   "audio": "/music/composer/sting-small-win.D.mp3",
+   "sha256": "f6b8b9a1992803ee526752b6593dd495618b80ab00637ad5546ef5f19a9ec3fa",
+   "bytes": 41133,
+   "duration": 2.134,
+   "loudness": -16.0,
+   "peak": -2.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "G": {
+   "audio": "/music/composer/sting-small-win.G.mp3",
+   "sha256": "789150f37a96d048e19a5c6a5116cab1f39a1304cb9a071dfec0705dc1dbabbc",
+   "bytes": 40941,
+   "duration": 2.006,
+   "loudness": -16.8,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "Bb": {
+   "audio": "/music/composer/sting-small-win.Bb.mp3",
+   "sha256": "d19c49522636a88b1201d0e14381cccbb91d822a0679505601472ee76eda27e5",
+   "bytes": 43365,
+   "duration": 2.216,
+   "loudness": -16.0,
+   "peak": -2.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "E": {
+   "audio": "/music/composer/sting-small-win.E.mp3",
+   "sha256": "848cb7eb8953392034e54fe9b7c58f60eeced99c47e4a72d02f32f5d01278dd6",
+   "bytes": 40533,
+   "duration": 2.043,
+   "loudness": -16.1,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}

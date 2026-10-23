@@ -1,0 +1,215 @@
+{
+ "id": "sting-reveal",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "63cc60145535d6162d90f50ff636e52905673ea5ca6d54476c5a165ef018b974"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "d4697a9c5ce77a4eaad282384cc5f68768fc13449bc24ae8e42c30eb7e369e28"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "a2cac0bf5175980e1d1c80b1c68735fcae6f7c86b48a07ff7758cc9370c269c1"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "3e455da6afdd8fba2714d462ff8f980d0d2d85dfe52d66816204be393c4330a2"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "3e82e2315ca76e5abb2d7fa5f91e60075a002a49163a800b0e61c2e31f0e2b6d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "0f6cfbcfe6593272ae6996454d82f6eebe2a9dcb4293bd049dc3ab1fa74b6eda"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "2eeec18c35c862fd13e65c8b7a5868107368e2f61596d8deb39b2c6c62441889"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "537ab5dbfb2e7b97583a27b43a45c9d59a8ba23095b351c2dc853fd64fb6a82b"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "4e75169b707f9706003d72443f54f009fa55acbcc7749c5848b3b252c3f707de"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "d754efdb5d9aae3d6ddffac73604d8a134fa2ac80f12cf8f4bd93f56bcbbb4de"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "49f960139b6cc1f01bc35f3e0673546ccc45352aaff13ac00e4bff6e077f9c22"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "3479fa906643f198b84cb623c118134e7c982963cfbb6bcf199914ee162797cd"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "4e75169b707f9706003d72443f54f009fa55acbcc7749c5848b3b252c3f707de"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "d754efdb5d9aae3d6ddffac73604d8a134fa2ac80f12cf8f4bd93f56bcbbb4de"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "49f960139b6cc1f01bc35f3e0673546ccc45352aaff13ac00e4bff6e077f9c22"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "3479fa906643f198b84cb623c118134e7c982963cfbb6bcf199914ee162797cd"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "4e75169b707f9706003d72443f54f009fa55acbcc7749c5848b3b252c3f707de"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "d754efdb5d9aae3d6ddffac73604d8a134fa2ac80f12cf8f4bd93f56bcbbb4de"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "49f960139b6cc1f01bc35f3e0673546ccc45352aaff13ac00e4bff6e077f9c22"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "3479fa906643f198b84cb623c118134e7c982963cfbb6bcf199914ee162797cd"
+  }
+ ],
+ "title": "Reveal",
+ "kind": "sting",
+ "brief": "Strings swell on the flat-six chord and open onto the home chord with horns, harp and bells.",
+ "uses": [
+  "revealing a new world",
+  "unveiling a build",
+  "surprise"
+ ],
+ "tags": [
+  "sting",
+  "reveal",
+  "swell",
+  "cinematic"
+ ],
+ "score": "tools/composer/cues/stings.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/stings.py",
+  "bpm": 80,
+  "meter": "4/4",
+  "key": "E major",
+  "bars": 2,
+  "instruments": [
+   "bass",
+   "cellos",
+   "glock",
+   "harp",
+   "horn",
+   "timpani",
+   "violas",
+   "violins"
+  ],
+  "percussion": [
+   "cymbal_swell"
+  ],
+  "hall_seconds": 3.0,
+  "target_lufs": -16.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "D": {
+   "audio": "/music/composer/sting-reveal.D.mp3",
+   "sha256": "4e75169b707f9706003d72443f54f009fa55acbcc7749c5848b3b252c3f707de",
+   "bytes": 151725,
+   "duration": 7.279,
+   "loudness": -16.0,
+   "peak": -2.7,
+   "loopPoints": null,
+   "stems": []
+  },
+  "G": {
+   "audio": "/music/composer/sting-reveal.G.mp3",
+   "sha256": "d754efdb5d9aae3d6ddffac73604d8a134fa2ac80f12cf8f4bd93f56bcbbb4de",
+   "bytes": 153645,
+   "duration": 7.172,
+   "loudness": -16.0,
+   "peak": -2.7,
+   "loopPoints": null,
+   "stems": []
+  },
+  "Bb": {
+   "audio": "/music/composer/sting-reveal.Bb.mp3",
+   "sha256": "49f960139b6cc1f01bc35f3e0673546ccc45352aaff13ac00e4bff6e077f9c22",
+   "bytes": 155397,
+   "duration": 7.483,
+   "loudness": -16.0,
+   "peak": -3.1,
+   "loopPoints": null,
+   "stems": []
+  },
+  "E": {
+   "audio": "/music/composer/sting-reveal.E.mp3",
+   "sha256": "3479fa906643f198b84cb623c118134e7c982963cfbb6bcf199914ee162797cd",
+   "bytes": 148893,
+   "duration": 6.767,
+   "loudness": -16.0,
+   "peak": -1.6,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}

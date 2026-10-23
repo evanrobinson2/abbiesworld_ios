@@ -21,6 +21,30 @@
       "destination": "/models/model.html"
     },
     {
+      "source": "/live-voice",
+      "destination": "/live-voice/index.html"
+    },
+    {
+      "source": "/live-voice/",
+      "destination": "/live-voice/index.html"
+    },
+    {
+      "source": "/sounds",
+      "destination": "/sounds/index.html"
+    },
+    {
+      "source": "/sounds/",
+      "destination": "/sounds/index.html"
+    },
+    {
+      "source": "/sounds/:id",
+      "destination": "/sounds/sound.html"
+    },
+    {
+      "source": "/sounds/:id/",
+      "destination": "/sounds/sound.html"
+    },
+    {
       "source": "/sandbox/Claude",
       "destination": "/simulations/index.html"
     },
@@ -31,6 +55,14 @@
     {
       "source": "/sandbox/claude",
       "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/teleport",
+      "destination": "/teleport/index.html"
+    },
+    {
+      "source": "/teleport/",
+      "destination": "/teleport/index.html"
     },
     {
       "source": "/moon",
@@ -282,6 +314,37 @@
         }
       ],
       "source": "/view-build.json"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ],
+      "source": "/app-release.json"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ],
+      "source": "/whats-new.json"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/manifest+json"
+        }
+      ],
+      "source": "/manifest.webmanifest"
     }
   ],
   "redirects": [

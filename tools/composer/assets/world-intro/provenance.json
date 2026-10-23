@@ -1,0 +1,74 @@
+{
+ "id": "world-intro",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "7d663e35e10fe1df1cc0f795c7a65ff7eb514f313d726d9449b8bd19e3aa98ed"
+  }
+ ],
+ "title": "World Intro",
+ "kind": "interlude",
+ "brief": "Abbie's motif in full: harp sweep, strings and horns, timpani, bells. The title card for arriving somewhere new.",
+ "uses": [
+  "entering a world",
+  "title card",
+  "level start"
+ ],
+ "tags": [
+  "intro",
+  "theme",
+  "cinematic"
+ ],
+ "score": "tools/composer/cues/interludes.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/interludes.py",
+  "bpm": 72,
+  "meter": "4/4",
+  "key": "D major",
+  "bars": 6,
+  "instruments": [
+   "bass",
+   "cellos",
+   "flute",
+   "glock",
+   "harp",
+   "horn",
+   "timpani",
+   "timpani_roll",
+   "trumpet",
+   "violas",
+   "violins"
+  ],
+  "percussion": [
+   "cymbal_swell",
+   "cymbal_swell_long"
+  ],
+  "hall_seconds": 2.8,
+  "target_lufs": -17.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "main": {
+   "audio": "/music/composer/world-intro.mp3",
+   "sha256": "7d663e35e10fe1df1cc0f795c7a65ff7eb514f313d726d9449b8bd19e3aa98ed",
+   "bytes": 499005,
+   "duration": 23.471,
+   "loudness": -17.0,
+   "peak": -3.0,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}
