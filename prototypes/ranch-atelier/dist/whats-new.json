@@ -1,6 +1,17 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
+   {
+     "id": "2026-10-23-backpack-fidelity",
+     "date": "2026-10-23",
+     "title": "A better-made backpack",
+     "line": "Abbie's backpack now looks sewn and zipped: real cloth and leather grain, stitching round every panel, zip teeth, padded straps, and shiny gold that catches the light.",
+     "image": "/whats-new/2026-10-23-backpack-fidelity.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+     "threadTitle": "AW-STUDY-0046 - Backpack inventory",
+     "tour": false,
+     "link": "/studies/backpack/"
+   },
     {
       "id": "2026-10-23-built-looks",
       "date": "2026-10-23",

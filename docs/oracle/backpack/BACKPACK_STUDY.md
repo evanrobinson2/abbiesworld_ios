@@ -69,3 +69,20 @@ first charm is a tardigrade, won by finishing Abbie's science adventure (the cel
 Lessons: framing a close-up by moving the camera round a bag sends it through the bag between charms. Turning the bag
 instead, and leaving the camera in front, keeps the bag out of the shot. Charms must hang clear of the widest point
 below their ring, not just of the seam beside it.
+
+## Round 3 (2026-10-23): higher-fidelity pass
+Evan, 18:37Z: "Backpack is approved for higher fidelity pass." Still low-poly parts, with real materials and real small
+parts, so it reads as made rather than extruded.
+- Cloth relief is a real normal map built from a grain-only height canvas (canvas twill, pebbled leather, nubbly plush,
+  basket weave, vinyl speckle). Before, the colour canvas drove the bump, so stripes and dots rose off the surface.
+- Material roles got physical properties: sheen on plush and canvas, clearcoat on vinyl and leather, glass with a
+  clearcoat, harder metal.
+- A small studio is baked once for reflections (sky gradient, a warm key softbox, a cool rim strip). Gold reads as
+  gold instead of brown.
+- Real parts: stitching round each shell and along both edges of every strap (instanced, one draw call each), zip teeth
+  along each rim, padded rounded-rectangle shoulder straps swept along a curve instead of round tubes.
+- Fixed: the heart charm's facets were wound the wrong way and half of it vanished; `gem()` now checks the outline's
+  winding.
+- Charms stay hand-built placeholders until the Meshy versions land (tardigrade first, then the rest, via the Meshy hero
+  thread). Meshy references are Midjourney pictures of each charm on a plain background, run per charm on the Mac.
+Next: bake contact shading into the vertex colours, a leather label on the pocket, and swap in the cleaned Meshy charms.
