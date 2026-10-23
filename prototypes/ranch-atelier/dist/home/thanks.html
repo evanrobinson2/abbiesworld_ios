@@ -21,7 +21,7 @@
   const r=await fetch('/api/support?confirm='+encodeURIComponent(id||''),{cache:'no-store'});const out=await r.json();
   const s=out.ok?await (await fetch('/api/support',{cache:'no-store'})).json().catch(()=>({})):{};
   const credit=s.supporter?.credit;
-  $('line').textContent=out.ok?`You're supporting Abbie's World. You have ${credit?'$'+credit:'your'} AI magic to use this month: talk to the Computer and let it build for you.`
+  $('line').textContent=out.ok?`You're supporting Abbie's World. You have ${credit?'$'+credit:'your'} AI magic to use this month: talk to the Computer and let it build for you. Thank you: Abbie's World is in early access, so this is a donation and a thank-you, not a promise.`
    :r.status===401?'Sign in again with the same account to finish.':"We couldn't confirm the payment yet. If Stripe charged you, it will show up in a minute; nothing is lost.";
   if(!out.ok)$('title').textContent='Almost there';
  }catch{$('line').textContent="We couldn't reach the server. If Stripe charged you, nothing is lost: come back in a minute.";}
