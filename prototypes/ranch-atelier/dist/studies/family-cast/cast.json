@@ -285,8 +285,8 @@
    "sample": "Whoa. Look at all the stars. Do you think there's a ranch up there too? With sheep and a little red barn? I want to go see. Will you come with me? Hold my hand, okay?",
    "looks": {
     "age": 6,
-    "hair": "light brown with a bow",
-    "hairColor": "#a8733f",
+    "hair": "copper bob",
+    "hairColor": "#c8642e",
     "eyes": "#4f7fb0",
     "outfit": "pink dress and sneakers",
     "color": "#e8579a",
@@ -294,7 +294,8 @@
      "small girl",
      "voice of wonder",
      "pink"
-    ]
+    ],
+    "ref": "AW-STUDY-0029 Faceted Hero (tools/moon-heroes/00-abbie/ref)"
    }
   },
   {
@@ -316,8 +317,12 @@
     "evan": [
      "brown eyes",
      "brown hair",
-     "purple"
-    ]
+     "purple",
+     "darker skin"
+    ],
+    "skin": "#a86e4a",
+    "skinShade": "#8e5838",
+    "ref": "AW-STUDY-0029 Faceted Hero (tools/moon-heroes/00-ani/ref)"
    }
   },
   {

@@ -96,7 +96,7 @@ function portrait(ch){
  let back='',front='';
  const fill=H?`fill="${H}"`:'';
  if(H){
-  if(/long|ponytail|braid|pigtail|shoulder|half up/.test(hair)){
+  if(/long|ponytail|braid|pigtail|shoulder|half up|(^|[^y] )bob/.test(hair)){
    const len=/shoulder/.test(hair)?30:/long|half/.test(hair)?52:20;
    back+=`<path ${fill} d="M${66-hr-4} ${cy}q0 -${hr+8} ${hr+4} -${hr+8}t${hr+4} ${hr+8}v${len}h-${2*hr+8}z"/>`;
   }
@@ -173,7 +173,7 @@ function render(cast,cand){
   return `<article class="person"><h2>${esc(title)}${ids.length>1?'<small>Then and now</small>':''}</h2><div class="ages">${ids.map(id=>{
    const ch=by[id],L=ch.looks||{};
    const tag=ch.group==='young'?'Back then':ch.group==='now'?'Now':'In the games';
-   return `<div class="who" style="--c:${L.color};--c2:${L.color}"><div class="art">${portrait(ch)}</div><div class="txt"><span class="tag">${tag}</span><h3>${esc(ch.name)}</h3>${sheet(ch)}</div>${voices(ch,cand.characters?.[id])}</div>`;
+   return `<div class="who" style="--c:${L.color};--c2:${L.color}${L.skin?`;--skin:${L.skin};--skin-shade:${L.skinShade||L.skin}`:''}"><div class="art">${portrait(ch)}</div><div class="txt"><span class="tag">${tag}</span><h3>${esc(ch.name)}</h3>${sheet(ch)}</div>${voices(ch,cand.characters?.[id])}</div>`;
   }).join('')}</div></article>`;
  }).join('');
  showPicks();
