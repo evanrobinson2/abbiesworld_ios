@@ -245,3 +245,20 @@ figure.print .said.open{-webkit-line-clamp:unset}
 .gearpop .modes button{flex:1;text-align:center;padding:0 14px}
 .awbar>.tools .lay+.peb{margin-left:4px}
 .awbar .gearpop{right:0;top:52px}
+/* One grid (Evan, 05:05Z: "that alignment"). Two equal columns. Both columns carry the same 6px inset, so the
+   picture and the model are the same size and share a top and a bottom edge. Under the picture sits its prompt; under
+   the model, on the same row and at the right edge, sit Reject, Chat and Keep. The notes use the same two columns. */
+.pair2{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
+figure.print,figure.livefig{margin:0;padding:6px;border:1px solid transparent;border-radius:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.print{border-color:var(--line)}
+figure.print .sq2,figure.livefig .sq2{width:100%;aspect-ratio:1;flex:none}
+figure.print .said{margin:0 4px;min-height:52px;display:-webkit-box}
+figure.livefig .decide{position:static;margin:0 0 0 auto;min-height:52px;align-self:flex-end;padding:0;gap:8px;border:0;background:none;box-shadow:none}
+figure.livefig .decide .tb{width:52px;height:52px;min-height:52px}
+.notes2{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 7px}
+@media (max-width:640px){
+  .pair2{gap:6px}figure.print,figure.livefig{padding:4px;gap:6px}
+  figure.print .said,figure.livefig .decide{min-height:44px}
+  figure.livefig .decide{gap:4px}figure.livefig .decide .tb{width:44px;height:44px;min-height:44px}
+  .notes2{grid-template-columns:minmax(0,1fr);padding:0 5px}
+}

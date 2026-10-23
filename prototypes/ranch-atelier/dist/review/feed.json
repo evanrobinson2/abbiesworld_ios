@@ -1,5 +1,5 @@
 {
-  "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md.",
+  "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md. models (optional): catalogue ids for a study set (a trailing * matches a prefix); tapping the item opens /models/?set=<id> with only those models, concept left and keep/talk/reject on the right.",
   "items": [
     {
       "id": "cards-v3-1",
@@ -11,6 +11,39 @@
       "after": "img/cards-v3-diecut.jpg",
       "link": "https://claude.ai/artifact/DXMqNPNe2399VBwqCKS8x3",
       "linkLabel": "Pick and notes",
+      "status": "waiting"
+    },
+    {
+      "id": "bodies-study-1",
+      "at": "2026-10-23T05:30:00Z",
+      "title": "Bodies and Creatures 1: the normal human",
+      "ask": "Real adult proportions, front, side and back, with muscle and bone layers, four body types and our toy rule. Say if the toy rule (7¼ heads, hands and feet a bit bigger) is right before heroic humans.",
+      "thread": "AW-STUDY-0016 - Bodies and Creatures",
+      "image": "img/bodies-study.jpg",
+      "link": "https://app.abbies.world/studies/#bodies-study",
+      "linkLabel": "Open the study",
+      "status": "waiting"
+    },
+    {
+      "id": "cafe-study-proofs",
+      "at": "2026-10-23T05:20:00Z",
+      "title": "Abbie's café, proofs",
+      "ask": "Pick a style (elegant, dance party or typical 3D game) and your favourite picture in each view.",
+      "thread": "AW-STUDY-0013 - The Coffee Shop",
+      "image": "img/cafe-study.jpg",
+      "link": "https://app.abbies.world/#cafe",
+      "linkLabel": "The café study",
+      "status": "waiting"
+    },
+    {
+      "id": "space-mail-study",
+      "at": "2026-10-23T05:05:00Z",
+      "title": "Space Mail, a playable sketch",
+      "ask": "Play the low-gravity letter romp on the Moon. Say what feels fun, and whether to build it.",
+      "thread": "AW-STUDY-0012 - Space Mail Mini Game",
+      "image": "img/space-mail.jpg",
+      "link": "https://app.abbies.world/studies/#space-mail",
+      "linkLabel": "Play it",
       "status": "waiting"
     },
     {
@@ -29,35 +62,50 @@
       "at": "2026-10-23T04:58:30Z",
       "title": "Heroic woman 2",
       "ask": "Your pick beside the model, with the shoulder bulbs cut to about two thirds. Keep her, or say what's off.",
-      "thread": "Roman model study",
+      "thread": "AW-STUDY-0017 - Papercraft Figures",
       "status": "waiting",
       "before": "img/paper-woman-2-pick.jpg",
       "after": "img/paper-woman-2-model.jpg",
-      "glb": "3d/paper-woman-2.glb"
+      "glb": "3d/paper-woman-2.glb",
+      "models": [
+        "paper-woman-2",
+        "paper-man-3",
+        "paper-man-1"
+      ]
     },
     {
       "id": "paper-man-3",
       "at": "2026-10-23T04:58:00Z",
       "title": "Paper man 3",
       "ask": "Your pick beside the model. The shape is right, but the folds are softer than your pick. Keep him, or say what's off.",
-      "thread": "Roman model study",
+      "thread": "AW-STUDY-0017 - Papercraft Figures",
       "status": "waiting",
       "before": "img/paper-man-3-pick.jpg",
       "after": "img/paper-man-3-model.jpg",
-      "glb": "3d/paper-man-3.glb"
+      "glb": "3d/paper-man-3.glb",
+      "models": [
+        "paper-man-3",
+        "paper-man-1",
+        "paper-woman-2"
+      ]
     },
     {
       "id": "paper-man-1",
       "at": "2026-10-23T04:45:00Z",
       "title": "Paper man #1, round 2",
       "ask": "Round 2: re-measured from your pick, with heavier shoulders, arms and thighs. It's closer, but the folds are still softer than your pick. Your new picks (man 3, woman 2) are being built the same way.",
-      "thread": "Roman model study",
+      "thread": "AW-STUDY-0017 - Papercraft Figures",
       "before": "img/paper-man-1-pick.jpg",
       "after": "img/paper-man-1-model.jpg",
       "glb": "3d/paper-man-1.glb",
       "link": "https://ranch.abbies.world/studies/#bodies",
       "linkLabel": "Paper bodies",
-      "status": "waiting"
+      "status": "waiting",
+      "models": [
+        "paper-man-1",
+        "paper-man-3",
+        "paper-woman-2"
+      ]
     },
     {
       "id": "ranch-remaster-wave-1",
@@ -95,7 +143,7 @@
       "at": "2026-10-23T04:00:00Z",
       "title": "Heroic woman, pick one",
       "ask": "Pick the heroic woman from the grid, so she can be built next.",
-      "thread": "Roman model study",
+      "thread": "AW-STUDY-0017 - Papercraft Figures",
       "image": "img/paper-bodies.jpg",
       "link": "https://claude.ai/artifact/MJ7asT8iPXEmhtHfELHbMc",
       "linkLabel": "Figure picks",
@@ -133,7 +181,10 @@
       "after": "img/moon-dome-model.jpg",
       "link": "https://claude.ai/artifact/97nD2NM8crDv7pruh9iBNS",
       "linkLabel": "Moon desk",
-      "status": "waiting"
+      "status": "waiting",
+      "models": [
+        "moon-*"
+      ]
     },
     {
       "id": "ranch-models",
@@ -145,7 +196,10 @@
       "after": "img/ranch-barn-model.jpg",
       "link": "https://ranch.abbies.world/models",
       "linkLabel": "Models",
-      "status": "waiting"
+      "status": "waiting",
+      "models": [
+        "ranch-*"
+      ]
     },
     {
       "id": "sandbox-hand-cards",
@@ -163,12 +217,15 @@
       "at": "2026-10-23T02:18:00Z",
       "title": "Roman parts",
       "ask": "Accept or redo each of the six Roman parts.",
-      "thread": "Roman model study",
+      "thread": "AW-STUDY-0017 - Papercraft Figures",
       "before": "img/roman-helmet-pick.jpg",
       "after": "img/roman-helmet-model.jpg",
       "link": "https://claude.ai/artifact/Hf5MLkWn3ZUcng7D7uk6C5",
       "linkLabel": "Roman desk",
-      "status": "waiting"
+      "status": "waiting",
+      "models": [
+        "roman-*"
+      ]
     }
   ]
 }
