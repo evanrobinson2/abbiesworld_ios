@@ -50,3 +50,8 @@ Claude calls run on Evan's Max plan and are not counted.
 - Ledger: `spend/v1/people/<id>.json`, `spend/v1/public.json`, `spend/v1/owner.json` in the private
   Blob store, written with `ifMatch` so simultaneous charges never overwrite each other.
 - To give everyone more, raise `CAPS`; to reset someone, delete their ledger file.
+
+## Coins and charms follow the account
+`account-keep.js` (loaded by the town and the cell game) joins a signed-in player's gold coins (`aw-memory-coins`) and
+backpack charms (`aw-backpack`) with their account: it merges, never replaces. `PUT /api/me` now keeps any saved key a
+request does not name, so the sandbox's world save and the coin save do not erase each other.
