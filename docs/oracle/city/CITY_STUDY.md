@@ -8,14 +8,23 @@ Fourth Oracle study after cards, HUD and aesthetic. It follows the rules in `CLA
 information"), `GAME_FEEL.md`, the aesthetic study's palette, and the scene information manifest
 (`docs/design/INFO_MANIFEST.md`).
 
+## Revision, 2026-10-23: the town is founded by simulation
+
+Evan rejected the hand-drawn plan below: "it should be procedurally generated. start with topology, a founding story,
+put it near 2 rivers and an ocean. and simulated." The plan, the street layout, the quarters and the landmarks are
+now produced by the founding simulation in `FOUNDING.md` (live page https://claude.ai/artifact/2dV9NZvL5piemoHvRLwiKg).
+Where this study names a high street, quarters or a clock tower, read them as things the generated town is checked
+for, not things we draw. The rest of the study (crowd tiers, budget, information grammar, assets, fit) stands.
+
 ## The short version
 
 - **The City is a market town of 1,000 people on three hexes**, not a skyline. Three Ranch-sized hexes (160 m across)
   hold about 5 hectares, which puts 1,000 people at about 200 per hectare: the density of a historic walled town.
   So the number is honest. We don't need to fake the population with a few walkers and a counter.
-- **It reads as a city because of structure, not size.** One high street, one square with a clock tower, three
-  quarters, an edge (river, wall or canal), and a daily rhythm everyone shares: Kevin Lynch's paths, edges, districts,
-  nodes and landmarks, at board-game scale.
+- **It is founded, not drawn.** The land is computed first (hills, two rivers that meet, the sea); a founding party
+  picks the safe place that costs the least walking; the town grows year by year, and its paths, bridge, mill, market
+  and bell tower appear where and when the simulation measures the need (`FOUNDING.md`). Lynch's paths, edges,
+  districts, nodes and landmarks are the test the result must pass, not a layout.
 - **Schedule is the truth; motion is a view.** Every one of the 1,000 people has a home, a job or school, and a day
   plan. Where a person is at any moment is computed from their plan, so it costs nothing to know where everyone is.
   Only the people near the camera walk as full agents. The rest are an instanced crowd, and far away the town shows
@@ -83,8 +92,9 @@ size. One hex would need 600 per hectare (a tower block), which is the wrong pic
 
 ### The five things a mind uses to read a city
 
-Kevin Lynch, *The Image of the City* (1960), found that people hold a city in their head as five elements. At tile
-scale each one becomes one deliberate design move:
+Kevin Lynch, *The Image of the City* (1960), found that people hold a city in their head as five elements. These are
+the checks a founded town must pass at tile scale (first draft below; the founding simulation produces the actual
+streets, river edge, market node and bell tower):
 
 | Lynch | The City | Why it reads at board-game hover |
 | --- | --- | --- |
