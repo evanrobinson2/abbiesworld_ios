@@ -14,6 +14,7 @@ rules, and a checklist modelers score against.
 | # | Installment | State |
 |---|---|---|
 | 1 | The normal human | this file, 2026-10-23 |
+| 1b | Drawing the figure: gesture, construction, clean limbs | `DRAWING.md`, 2026-10-23 |
 | 2 | Heroic humans (the Marvel Way hero, gesture and action) | next |
 | 3 | Bipedal aliens | |
 | 4 | Weird aliens | |
