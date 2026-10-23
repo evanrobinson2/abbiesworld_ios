@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Tools
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+        run: pip install -q mutagen  # duration check; apt mirrors have hung this job for 30 min
       - name: R2 keys
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
@@ -42,6 +42,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
+          dur() { python3 -c 'import sys,mutagen.mp3 as m;print(round(m.MP3(sys.argv[1]).info.length,2))' "$1" 2>/dev/null || echo 0; }
           UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36'
           for id in $(jq -r '.songs[].id' tools/composer/suno/songs.json); do
             ok=
@@ -52,14 +53,13 @@ jobs:
               echo "$id $u -> $code"
             done
             [ -n "$ok" ] || { echo "::warning::no audio for $id"; rm -f "out/$id.mp3"; continue; }
-            d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "out/$id.mp3" || echo 0)
+            d=$(dur "out/$id.mp3")
             if ! awk "BEGIN{exit !($d > 5)}"; then echo "::warning::$id does not decode (duration $d)"; rm -f "out/$id.mp3"; continue; fi
-            ffmpeg -v error -i "out/$id.mp3" -t 30 -f null - || { echo "::warning::$id has decode errors"; rm -f "out/$id.mp3"; continue; }
             curl -fsSL --retry 3 -A "$UA" -e 'https://suno.com/' -o "out/$id.jpeg" "https://cdn2.suno.ai/image_$id.jpeg" || rm -f "out/$id.jpeg"
             echo "$id ${d}s $(stat -c%s "out/$id.mp3") bytes"
           done
           ls out/*.mp3 >/dev/null 2>&1 || { echo "::error::Suno's CDN gave no audio (songs private?)"; exit 1; }
-          jq --slurpfile ok <(for f in out/*.mp3; do i=$(basename "$f" .mp3); printf '{"id":"%s","d":%s,"art":%s}\n' "$i" "$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")" "$( [ -f "out/$i.jpeg" ] && echo true || echo false)"; done) \
+          jq --slurpfile ok <(for f in out/*.mp3; do i=$(basename "$f" .mp3); printf '{"id":"%s","d":%s,"art":%s}\n' "$i" "$(dur "$f")" "$( [ -f "out/$i.jpeg" ] && echo true || echo false)"; done) \
             '.songs |= map(. as $s | ($ok | map(select(.id == $s.id)) | first) as $o | if $o then . + {duration: $o.d, audio: ("music/suno/" + .id + ".mp3"), art: (if $o.art then "music/suno/" + .id + ".jpeg" else null end)} else . end)' \
             tools/composer/suno/songs.json > out/catalog.json
           echo "stored $(ls out/*.mp3 | wc -l) of $(jq '.songs|length' tools/composer/suno/songs.json)"
