@@ -1,16 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/studies/abbietown/index.html",
-      "missing": [
-        {
-          "type": "host",
-          "value": "explore.abbies.world"
-        }
-      ]
-    },
-    {
       "source": "/classic",
       "destination": "/simulations/index.html"
     },
@@ -457,6 +447,17 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/",
+      "destination": "/town",
+      "permanent": false,
+      "missing": [
+        {
+          "type": "host",
+          "value": "explore.abbies.world"
+        }
+      ]
+    },
     {
       "source": "/science-lab",
       "destination": "/town",
