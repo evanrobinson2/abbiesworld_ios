@@ -36,7 +36,7 @@ function createSupport({env=process.env,store,fetcher,now=()=>Date.now()}={}){
     line_items:{0:{quantity:1,price_data:{currency:'usd',unit_amount:MONTHLY_CENTS,recurring:{interval:'month'},product_data:{name:"Support Abbie's World",description:'$4 of AI magic in the game each month'}}}},
     allow_promotion_codes:'false',billing_address_collection:'auto',
     metadata:{account:a.id},subscription_data:{metadata:{account:a.id}},
-    success_url:`${origin}/support/thanks?session={CHECKOUT_SESSION_ID}`,cancel_url:`${origin}/#support`});
+    success_url:`${origin}/support/thanks?session={CHECKOUT_SESSION_ID}`,cancel_url:`${origin}/welcome#support`});
    return s.url;
   },
   // Back from Checkout: check the session belongs to this account and is paid, then open the first month.
@@ -65,7 +65,7 @@ function createSupport({env=process.env,store,fetcher,now=()=>Date.now()}={}){
   // Stripe's own page to change the card or cancel (cancel must be as easy as joining).
   async manage(a,origin){
    const rec=await read(a);if(!rec?.customer)return null;
-   const open=()=>stripe('POST','billing_portal/sessions',{customer:rec.customer,return_url:`${origin}/#support`});
+   const open=()=>stripe('POST','billing_portal/sessions',{customer:rec.customer,return_url:`${origin}/welcome#support`});
    try{return (await open()).url;}
    catch(e){if(!/configuration/i.test(e.message))throw e;
     await stripe('POST','billing_portal/configurations',{business_profile:{headline:"Abbie's World"},features:{subscription_cancel:{enabled:'true',mode:'immediately'},payment_method_update:{enabled:'true'},invoice_history:{enabled:'true'}}});

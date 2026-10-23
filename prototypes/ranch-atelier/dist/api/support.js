@@ -26,13 +26,13 @@ function createHandler({env=process.env,who=account,purse=wallet,club=support}={
  const origin=`https://${host}`,q=new URL(req.url||'/','https://x.invalid').searchParams,me=who(req,env),s=club();
  try{
   if(q.get('start')){
-   if(!s.ready)return go(res,'/#support');
+   if(!s.ready)return go(res,'/welcome#support');
    if(!me)return go(res,'/api/auth/login?return='+encodeURIComponent('/api/support?start=1'));
    return go(res,await s.checkout(me,origin));
   }
   if(q.get('manage')){
    if(!me)return go(res,'/api/auth/login?return='+encodeURIComponent('/api/support?manage=1'));
-   return go(res,(s.ready&&await s.manage(me,origin))||'/#support');
+   return go(res,(s.ready&&await s.manage(me,origin))||'/welcome#support');
   }
   if(q.get('confirm')){
    if(!me)return json(res,401,{error:'Sign in again to finish.'});
