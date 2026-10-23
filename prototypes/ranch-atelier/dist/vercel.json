@@ -432,6 +432,11 @@
   ],
   "redirects": [
     {
+      "source": "/studies",
+      "destination": "/studies/",
+      "permanent": false
+    },
+    {
       "source": "/welcome",
       "has": [
         {
