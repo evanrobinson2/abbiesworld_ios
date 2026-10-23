@@ -104,3 +104,27 @@ two lenses to pick from, with a timer, and the game never pauses).
 Each player's corner: a glass pill with a live dot of their cell's colour (it heats as they're hit and shrinks when
 they're off the drop), five growth beads, and (player one) Daddy's coins. Rivals' pills are smaller. Phones stack
 rivals top right. Hands of cards sit low, away from the captions. The back button is a small glass button top centre.
+
+## How it was made, and how to be faster next time
+Times are local (UTC-4) on 2026-10-23. Evan's first words 12:18 PM; round 1 playable about 12:50 PM; round 1 in review
+1:00 PM; Evan's round 2 brief 12:49 PM; round 2 playable about 1:05 PM (advance preview 1:12 PM); merged about 1:10 PM.
+
+Where the time went: about 30% on the two new kits (lens pond shader, microbe rig), 25% on round 2 game logic (couch
+input, heat and ring-outs, bots, cards, evolution), 20% on screenshot loops, 15% on the study page, docs, context card
+and PR, 10% waiting (merge conflict, permission prompt on a merge).
+
+What slowed it down:
+1. Software WebGL makes each flow run take 3 to 6 minutes. The first run was always the one that found the bug.
+2. Round 1 art was drawn from memory, then fixed from screenshots (stroke widths in a scaled SVG group, the lab bench
+   cropped on desktop). `vector-effect` and units-of-one drawing should be the default for kit parts.
+3. Hand-edited shared files (`whats-new.json`, `studies/context.json`) conflicted with another thread's merge. Both are
+   append-style files; a tiny merge helper that unions entries would have saved the conflict.
+4. The Oracle's Spore record and the Backpack thread's charm call arrived while I was building, so I built to the
+   written contract and wired the real calls last. That worked; the asks should go out in the first minute.
+
+Speedups for the next game:
+- `simulations/lens-pond.mjs`, `microbe-kit.mjs` (cells and the tardigrade), `couch-input.mjs` and `boost-cards.mjs` are
+  shared: a new 2D brawl is a rules file and a rig, not a rewrite.
+- `tools/minigame-test/cell-flow.cjs` plays lab to win by game state, with a second keyboard player dropping in. Copy it.
+- Start from the Oracle identity records (Spore, Smash, Brawlhalla) for the HUD table before drawing anything.
+- A `tools/merge-json-entries.mjs` helper for the two shared JSON files.
