@@ -1,0 +1,298 @@
+{
+  "set": "school-jump-concepts",
+  "study": "AW-STUDY-0026 - The School Jump",
+  "generated": "2026-10-23",
+  "tool": "Midjourney web, standard 4-image grids, no upscales",
+  "notes": [
+    "Each job was matched by its prompt text in the Create feed, not by being newest (the account is shared with other sessions).",
+    "<n>-<name>.png is a 2x2 contact sheet of the grid (images 0,1 top; 2,3 bottom), each cell downscaled by half; the full-size images are in images/.",
+    "No prompt was refused for moderation. No real school is named."
+  ],
+  "jobs": [
+    {
+      "n": 1,
+      "name": "key-art",
+      "prompt": "a small boy in a red ball cap climbing the brick wall of a one-storey 1980s suburban elementary school at dusk, one hand on a drainpipe, his scruffy golden dog watching from the grass below, headlights of a passing station wagon sweeping across the wall, painterly stylized indie game key art in the spirit of Annapurna Interactive games, warm autumn dusk palette, soft volumetric light, simple low poly shapes --ar 16:9",
+      "job_id": "ad949bf0-bac4-425e-a1b4-4a9369dff506",
+      "job_url": "https://www.midjourney.com/jobs/ad949bf0-bac4-425e-a1b4-4a9369dff506",
+      "grid_sheet": {
+        "file": "1-key-art.png",
+        "sha256": "318dd33431d41106ea41c7762cf9710227f7fdecc1e789875e0d6693dea9d552"
+      },
+      "files": [
+        {
+          "file": "images/1-key-art_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/ad949bf0-bac4-425e-a1b4-4a9369dff506/0_0.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "1415431f0b14a21a31a34082498910469ade4fbfc1718bca47efc219342c1e29",
+          "bytes": 1512766
+        },
+        {
+          "file": "images/1-key-art_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/ad949bf0-bac4-425e-a1b4-4a9369dff506/0_1.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "be9b6d271702e8a98a33c6679afa9db8c41cc028a1586487b375339210cf5489",
+          "bytes": 1433251
+        },
+        {
+          "file": "images/1-key-art_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/ad949bf0-bac4-425e-a1b4-4a9369dff506/0_2.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "e74465d37c7969c92813eeb7baa46bff8df7ef15f8502d3934ecf61d5b8e35de",
+          "bytes": 1146616
+        },
+        {
+          "file": "images/1-key-art_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/ad949bf0-bac4-425e-a1b4-4a9369dff506/0_3.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "c43ef7bf54eb15cc38710cd5e8fedd76e5245ea3c16a80a2e0d5b8a3c6c7048c",
+          "bytes": 1416654
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "name": "roof",
+      "prompt": "isometric view of a flat gravel school rooftop at dusk with air handlers, low brick divider walls and scattered tennis balls, a tiny kid in a red cap hiding behind a vent as car headlights sweep across from the street, stylized low poly indie game art, Annapurna Interactive spirit, warm and cool contrast --ar 16:9",
+      "job_id": "bd63cb05-5545-463d-8151-c3f6c9f71597",
+      "job_url": "https://www.midjourney.com/jobs/bd63cb05-5545-463d-8151-c3f6c9f71597",
+      "grid_sheet": {
+        "file": "2-roof.png",
+        "sha256": "7ef28ac1130ccd7fafa2cfb03a3a5e2977a258f2347e90444d768266a491d254"
+      },
+      "files": [
+        {
+          "file": "images/2-roof_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/bd63cb05-5545-463d-8151-c3f6c9f71597/0_0.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "d1f9fb981b8ce987ac486d1759223f86b8cdef6a9a3e31c9874b0d93fc676d5f",
+          "bytes": 1983547
+        },
+        {
+          "file": "images/2-roof_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/bd63cb05-5545-463d-8151-c3f6c9f71597/0_1.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "912e59191f67b022c083f3e09286df71f22fb109fc473dbfaf0e9bef3bf78136",
+          "bytes": 2281641
+        },
+        {
+          "file": "images/2-roof_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/bd63cb05-5545-463d-8151-c3f6c9f71597/0_2.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "505eab3112f8255213242a329580747729511d4ce5b0e7a315143021330469c9",
+          "bytes": 2079962
+        },
+        {
+          "file": "images/2-roof_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/bd63cb05-5545-463d-8151-c3f6c9f71597/0_3.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "62af550169b671ef70990e97217c2ae47e5f1b9ad3bdc1e443d52bb51a2133cb",
+          "bytes": 1699834
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "name": "first-person",
+      "prompt": "first person view looking up a cartoonishly tall brick school wall, a child's small hands gripping a steel door hinge and a mesh vent grate, a drainpipe and electrical conduit rising to a roof edge far above, painterly stylized game art, dusk light --ar 16:9",
+      "job_id": "2d312ab5-4856-4fc9-92aa-4a382fc02d40",
+      "job_url": "https://www.midjourney.com/jobs/2d312ab5-4856-4fc9-92aa-4a382fc02d40",
+      "grid_sheet": {
+        "file": "3-first-person.png",
+        "sha256": "50bc9281c3443a512fbcc401880f51adae07d8cb66cbcd2485f20c470a997d29"
+      },
+      "files": [
+        {
+          "file": "images/3-first-person_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/2d312ab5-4856-4fc9-92aa-4a382fc02d40/0_0.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "8b0e6b8f2ed6d820ce9a456f471068d7f07f893f0496d498ea5eff7cfcd0bc0c",
+          "bytes": 1957700
+        },
+        {
+          "file": "images/3-first-person_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/2d312ab5-4856-4fc9-92aa-4a382fc02d40/0_1.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "e19efa23e1835d2cc135ca88e9b5752fc52d944273dea7b86cded96c836a8156",
+          "bytes": 1963870
+        },
+        {
+          "file": "images/3-first-person_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/2d312ab5-4856-4fc9-92aa-4a382fc02d40/0_2.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "b7a2ff05b82bc0ccfb413893c56b454821f224ec15a9dbd7109da314b5d0d868",
+          "bytes": 2051936
+        },
+        {
+          "file": "images/3-first-person_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/2d312ab5-4856-4fc9-92aa-4a382fc02d40/0_3.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "6636baa275aed25ee8eeb856199a6bce4099a4973d290e1bf0a50bd054c619fe",
+          "bytes": 1584016
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "name": "wall",
+      "prompt": "the north-west face of a 1970s single storey brick elementary school, teal steel door with a small mesh grate above it, beside the door an angled sheet-metal hood over a transformer in a wire mesh cage with aluminium bollards, a drainpipe and conduit, three bays, stylized low poly game environment concept art, Annapurna Interactive spirit, dusk --ar 16:9",
+      "job_id": "cb3ac3a5-6aa3-43e0-a770-a6c506e24614",
+      "job_url": "https://www.midjourney.com/jobs/cb3ac3a5-6aa3-43e0-a770-a6c506e24614",
+      "grid_sheet": {
+        "file": "4-wall.png",
+        "sha256": "9d5f236865c46e531947f63eba0c107b04e0c0c4c54b37659ff52f6c43f0449a"
+      },
+      "files": [
+        {
+          "file": "images/4-wall_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/cb3ac3a5-6aa3-43e0-a770-a6c506e24614/0_0.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "e95d2fe0b09859068e9c7606a104f51a7e828e979d9d4639d1b358c22ea53c1e",
+          "bytes": 1797557
+        },
+        {
+          "file": "images/4-wall_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/cb3ac3a5-6aa3-43e0-a770-a6c506e24614/0_1.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "8c4f377d0f316a5a8cfb952b94d78de3119eda887898d30c36223af85e804c91",
+          "bytes": 1930182
+        },
+        {
+          "file": "images/4-wall_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/cb3ac3a5-6aa3-43e0-a770-a6c506e24614/0_2.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "fec1599568dc953dc8b3fd412b91130f2fec1af0b281e0b7069cb4728058a2f3",
+          "bytes": 1625983
+        },
+        {
+          "file": "images/4-wall_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/cb3ac3a5-6aa3-43e0-a770-a6c506e24614/0_3.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "3d04167bec7d62feb6ad9b4280c96583ad9be4b197af931f0ddc141ad52ee30c",
+          "bytes": 1577144
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "name": "characters",
+      "prompt": "character turnaround sheet, an 8 year old boy in a red ball cap and blue windbreaker, and his scruffy golden mutt dog, 1986, stylized low poly indie game characters, front side and back views, plain warm grey background --ar 16:9",
+      "job_id": "b16349fe-ab1c-44e4-a5f8-4ec9d38beb84",
+      "job_url": "https://www.midjourney.com/jobs/b16349fe-ab1c-44e4-a5f8-4ec9d38beb84",
+      "grid_sheet": {
+        "file": "5-characters.png",
+        "sha256": "23dcb5911869c2ef320ebc789d3bbd499722baa747c9d976728c3f8d03312f34"
+      },
+      "files": [
+        {
+          "file": "images/5-characters_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/b16349fe-ab1c-44e4-a5f8-4ec9d38beb84/0_0.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "cb5ca1904ccfcd1eacbaaded909fed20cd7a09ab9eb3adf69fd0c91e770d26d0",
+          "bytes": 1198849
+        },
+        {
+          "file": "images/5-characters_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/b16349fe-ab1c-44e4-a5f8-4ec9d38beb84/0_1.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "4bc3910547d1616922da1d4afb06c63d92ab86e364f35fb0b85925f4c1b1f29a",
+          "bytes": 1157090
+        },
+        {
+          "file": "images/5-characters_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/b16349fe-ab1c-44e4-a5f8-4ec9d38beb84/0_2.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "bad36b79cd7c46c2280dbbef11f2d0fb31a2d1a90ed9bf48f65c9ead108026a1",
+          "bytes": 1172491
+        },
+        {
+          "file": "images/5-characters_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/b16349fe-ab1c-44e4-a5f8-4ec9d38beb84/0_3.png",
+          "size": [
+            1456,
+            816
+          ],
+          "sha256": "581a05ed0b1b1f176fdcd6b09a0db735591778f3a7bf6177dc32766be6514940",
+          "bytes": 1144799
+        }
+      ]
+    }
+  ]
+}

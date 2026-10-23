@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>The School Jump</title>
 <style>
-/* AW-STUDY-0026: the school jump. A first-person climb in the basement's 8-bit look that rises, without a cut, into an
-   iso roof you sneak across. No words on screen. The one overlay is the hang-drop timing glass, shown only while you hang. */
+/* AW-STUDY-0026: the school jump, round 2. Walk the dog, three throws, the third lands on the roof. A first-person
+   latch-and-let-go climb in the basement's 8-bit look rises, without a cut, into an iso roof you sneak across while
+   cars sweep past. No words on screen: the score chip is icons and numbers, the hang-drop glass shows only while you hang. */
 html,body{margin:0;height:100%;background:#1b1426;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
 canvas{display:block;width:100vw;height:100dvh;image-rendering:pixelated}
 .glass{position:fixed;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.1));border:1px solid rgba(255,255,255,.45);
@@ -18,11 +19,20 @@ canvas{display:block;width:100vw;height:100dvh;image-rendering:pixelated}
 #back,#again{width:44px;height:44px;display:grid;place-items:center;color:#fff;text-decoration:none;cursor:pointer}
 #back{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));opacity:.8}
 #again{left:50%;bottom:max(22px,env(safe-area-inset-bottom));translate:-50% 0;width:64px;height:64px;display:none}
+#hud{right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));height:34px;padding:0 12px;display:none;align-items:center;gap:10px;
+ color:#fff;font:700 15px/1 ui-rounded,"SF Pro Rounded",system-ui,sans-serif;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px rgba(40,20,60,.6)}
+#hud span{display:flex;align-items:center;gap:4px}
+#hud i{display:inline-block;width:14px;height:14px;border-radius:50%}
+.ib{background:radial-gradient(circle at 35% 30%,#f4ff9a,#cfe63a 60%,#8ea01a)}
+.ic{background:radial-gradient(circle at 35% 30%,#fff3b0,#ffcc33 55%,#b8860b)}
+.is{background:none!important;width:14px;height:14px;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);background-color:#ffe08a!important}
+.pop{position:fixed;pointer-events:none;color:#fff7c2;font:800 18px/1 ui-rounded,system-ui,sans-serif;text-shadow:0 2px 6px rgba(60,30,0,.7);translate:-50% -50%;transition:transform 1s ease-out,opacity 1s ease-in}
 </style>
 <script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
 </head>
 <body>
 <a id="back" class="glass" href="./" aria-label="Back to the study"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
+<div id="hud" class="glass" aria-label="Score"><span><i class="ib"></i><b id="nb">0</b></span><span><i class="ic"></i><b id="nc">0</b></span><span><i class="is"></i><b id="ns">0</b></span></div>
 <div id="hang" class="glass" aria-hidden="true"><div id="zone"></div><i id="dot"></i></div>
 <div id="again" class="glass" role="button" aria-label="Play again"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg></div>
 <script type="module">
@@ -34,28 +44,28 @@ const [PL, GB, MC, CR] = await Promise.all([opt('/simulations/presentation-layer
 const presentation = PL.presentation || ((o) => o);
 const playerCamera = PL.playerCamera || ((c) => c);
 
-const q = new URLSearchParams(location.search);
 const renderer = new T.WebGLRenderer({antialias: false, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFShadowMap;
 renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
 document.body.prepend(renderer.domElement);
 const scene = new T.Scene();
-const DUSK = new T.Color('#f2a07a'), NIGHTSKY = new T.Color('#3b2f5c');
-scene.background = new T.Color('#c9849a'); scene.fog = new T.Fog('#b98aa6', 40, 95);
-const camera = playerCamera(new T.PerspectiveCamera(66, 1, .05, 200));
+const NIGHTSKY = new T.Color('#3b2f5c');
+scene.background = new T.Color('#b98a9e'); scene.fog = new T.Fog('#d98a5e', 40, 120);
+const camera = playerCamera(new T.PerspectiveCamera(66, 1, .05, 220));
 
 // ---------- Light: one late-October dusk drives sky, sun, windows and streetlights. ----------
-scene.add(new T.HemisphereLight('#ffd9c2', '#3a3150', 1.1));
-const sun = new T.DirectionalLight('#ffb27a', 2.2); sun.position.set(-30, 22, -12); sun.castShadow = true;
-Object.assign(sun.shadow.camera, {left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 90}); sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0006;
+const hemi = new T.HemisphereLight('#ffd2b0', '#4a3040', .75); scene.add(hemi);
+// a low golden sun from the street side, raking across the climbing wall (Evan's picture, 09:36Z)
+const sun = new T.DirectionalLight('#ffa060', 3.0); sun.position.set(-34, 12, 26); sun.castShadow = true;
+Object.assign(sun.shadow.camera, {left: -30, right: 30, top: 30, bottom: -30, near: 1, far: 100}); sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0006;
 scene.add(sun, sun.target);
 
 // ---------- Materials, named by what they are. ----------
 function brickTex() {
  const c = Object.assign(document.createElement('canvas'), {width: 128, height: 128}), g = c.getContext('2d');
- g.fillStyle = '#7a3f2c'; g.fillRect(0, 0, 128, 128);
- for (let r = 0; r < 16; r++) for (let k = -1; k < 5; k++) { const x = k * 32 + (r % 2) * 16, y = r * 8; g.fillStyle = ['#a65a3c', '#b4643f', '#9b5236', '#ad6044'][(r * 7 + k * 3) & 3]; g.fillRect(x + 1, y + 1, 30, 6); }
- const t = new T.CanvasTexture(c); t.wrapS = t.wrapT = T.RepeatWrapping; t.colorSpace = T.SRGBColorSpace; t.magFilter = T.NearestFilter; return t;
+ g.fillStyle = '#8a4a34'; g.fillRect(0, 0, 128, 128);
+ for (let r = 0; r < 16; r++) for (let k = -1; k < 5; k++) { const x = k * 32 + (r % 2) * 16, y = r * 8; g.fillStyle = ['#c0643f', '#c96e46', '#b25a3a', '#c4683f'][(r * 7 + k * 3) & 3]; g.fillRect(x + 1, y + 1, 30, 6); }
+ const t = new T.CanvasTexture(c); t.wrapS = t.wrapT = T.RepeatWrapping; t.colorSpace = T.SRGBColorSpace; t.magFilter = T.LinearFilter; return t;
 }
 function meshTex() {
  const c = Object.assign(document.createElement('canvas'), {width: 32, height: 32}), g = c.getContext('2d');
@@ -75,12 +85,14 @@ const M = {
  steel: new T.MeshStandardMaterial({color: '#9aa3ab', roughness: .4, metalness: .8, name: 'galvanised steel'}),
  pipe: new T.MeshStandardMaterial({color: '#c9c3b5', roughness: .5, metalness: .3, name: 'drainpipe'}),
  conduit: new T.MeshStandardMaterial({color: '#7d8a92', roughness: .4, metalness: .7, name: 'electrical conduit'}),
+ phone: new T.MeshStandardMaterial({color: '#59646b', roughness: .5, metalness: .5, name: 'telephone junction box'}),
  grate: new T.MeshStandardMaterial({map: meshTex(), roughness: .6, metalness: .6, name: 'mesh grate'}),
  hvac: new T.MeshStandardMaterial({color: '#b9bec4', roughness: .5, metalness: .5, name: 'rooftop air handler'}),
  hvacDark: new T.MeshStandardMaterial({color: '#4a4f5a', roughness: .7, name: 'air handler vents'}),
  wall: new T.MeshStandardMaterial({color: '#a2735c', roughness: .9, name: 'parapet wall'}),
  grass: new T.MeshStandardMaterial({color: '#6f8a4a', roughness: 1, name: 'school field grass'}),
  asphalt: new T.MeshStandardMaterial({color: '#5d5966', roughness: 1, name: 'schoolyard asphalt'}),
+ sidewalk: new T.MeshStandardMaterial({color: '#a99fa4', roughness: 1, name: 'concrete sidewalk'}),
  road: new T.MeshStandardMaterial({color: '#3e3a47', roughness: 1, name: 'street asphalt'}),
  paint: new T.MeshStandardMaterial({color: '#f1e6b0', roughness: 1, name: 'road paint'}),
  window: new T.MeshStandardMaterial({color: '#2b3550', emissive: '#ffcf8a', emissiveIntensity: .15, roughness: .2, name: 'classroom window'}),
@@ -89,25 +101,31 @@ const M = {
  bark: new T.MeshStandardMaterial({color: '#4a3528', roughness: 1, name: 'tree bark'}),
  ball: new T.MeshStandardMaterial({color: '#d7f04a', roughness: .9, emissive: '#7a8a10', emissiveIntensity: .25, name: 'tennis ball felt'}),
  skin: new T.MeshStandardMaterial({color: '#f0c29b', roughness: .8, name: 'skin'}),
- jacket: new T.MeshStandardMaterial({color: '#3e6fd8', roughness: .8, name: 'kid jacket'}),
+ jacket: new T.MeshStandardMaterial({color: '#f2ede4', roughness: .8, name: 'white t-shirt'}),
+ shorts: new T.MeshStandardMaterial({color: '#c8322e', roughness: .8, name: 'red shorts'}),
  cap: new T.MeshStandardMaterial({color: '#d83a3a', roughness: .8, name: 'ball cap'}),
  jeans: new T.MeshStandardMaterial({color: '#2e3550', roughness: .9, name: 'jeans'}),
- fur: new T.MeshStandardMaterial({color: '#b5793f', roughness: 1, name: 'dog fur'}),
+ fur: new T.MeshStandardMaterial({color: '#d8a055', roughness: 1, flatShading: true, name: 'shaggy dog fur'}),
  furDark: new T.MeshStandardMaterial({color: '#6e4524', roughness: 1, name: 'dog ears'}),
+ collar: new T.MeshStandardMaterial({color: '#d83a3a', roughness: .6, name: 'dog collar'}),
  house: ['#c9b79c', '#9fb2c4', '#d9c6a0', '#b7a3b8'].map((c, i) => new T.MeshStandardMaterial({color: c, roughness: .9, name: `house siding ${i}`})),
  shingle: new T.MeshStandardMaterial({color: '#4e3f45', roughness: 1, flatShading: true, name: 'roof shingles'}),
+ lampPost: new T.MeshStandardMaterial({color: '#3a3644', roughness: .6, metalness: .5, name: 'street lamp post'}),
+ lampGlow: new T.MeshStandardMaterial({color: '#fff3c8', emissive: '#ffd27a', emissiveIntensity: 0, name: 'street lamp'}),
 };
 const box = (w, h, d, mat, x, y, z, name) => { const m = new T.Mesh(new T.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; if (name) m.name = name; scene.add(m); return m; };
 const cyl = (r, h, mat, x, y, z, name, seg = 10) => { const m = new T.Mesh(new T.CylinderGeometry(r, r, h, seg), mat); m.position.set(x, y, z); m.castShadow = true; if (name) m.name = name; scene.add(m); return m; };
+const v3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z);
 
-// ---------- The school: a stylized version of the one-storey brick school from Evan's aerial photo. ----------
-// Main block A, north wing B, the taller gym C, a lower annex D and the entrance canopy E. Heights in metres.
-const H = 4.2, GYM = 6.4, CANOPY = 3.0;
-const RECT = {A: [-7, 5, -3.5, 3.5, H], B: [1, 7, -7, -3.5, H], C: [0, 8, 3.5, 9, GYM], D: [-10, -7, -5, -1, 3.4], E: [5, 7.6, -1, 3.5, CANOPY]};
+// ---------- The school: a stylized, cartoon-tall version of the one-storey brick school from Evan's aerial photo. ----------
+// Main block A, north wing B, the taller gym C, a lower annex D and the entrance canopy E. The street runs along the
+// west side, in front of the climbing wall, so in the iso view cars cross diagonally from top right to bottom left.
+const H = 7, GYM = 9.5, CANOPY = 4.6;
+const RECT = {A: [-7, 5, -3.5, 3.5, H], B: [1, 7, -7, -3.5, H], C: [0, 8, 3.5, 9, GYM], D: [-10, -7, -5, -1, 5], E: [5, 7.6, -1, 3.5, CANOPY]};
 const occluders = [];
 for (const [k, [x0, x1, z0, z1, h]] of Object.entries(RECT)) {
  const w = x1 - x0, d = z1 - z0, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
- if (k === 'E') { // the canopy: a flat slab on four posts
+ if (k === 'E') { // the canopy: a flat slab on posts
   const s = box(w, .25, d, M.coping, cx, h - .12, cz, 'entrance canopy'); occluders.push(s);
   for (const [px, pz] of [[x1 - .2, z0 + .2], [x1 - .2, z1 - .2]]) cyl(.09, h - .25, M.steel, px, (h - .25) / 2, pz, 'canopy post');
   continue;
@@ -115,15 +133,13 @@ for (const [k, [x0, x1, z0, z1, h]] of Object.entries(RECT)) {
  const body = box(w, h, d, M.brick(w / 2.2, h / 1.1), cx, h / 2, cz, `school ${k === 'C' ? 'gym' : 'wing'} wall`); occluders.push(body);
  const top = box(w, .06, d, k === 'C' ? M.gymRoof : M.roof, cx, h + .03, cz, 'roof'); top.castShadow = false;
  for (const [px, pz, pw, pd] of [[cx, z0 + .1, w, .2], [cx, z1 - .1, w, .2], [x0 + .1, cz, .2, d], [x1 - .1, cz, .2, d]]) occluders.push(box(pw, .35, pd, M.coping, px, h + .17, pz, 'parapet coping'));
- // classroom windows on every long face except the climbing wall
- if (k !== 'C') for (let x = x0 + 1.2; x < x1 - .8; x += 1.6) for (const [z, n] of [[z0 - .02, 'n'], [z1 + .02, 's']]) {
-  const win = box(1.1, 1.1, .05, M.window, x, 1.8, z); win.castShadow = false;
- }
+ if (k !== 'C') for (let x = x0 + 1.2; x < x1 - .8; x += 1.6) for (const z of [z0 - .02, z1 + .02]) { const win = box(1.1, 1.4, .05, M.window, x, 2.2, z); win.castShadow = false; }
 }
-// Walls and such on the roof to hide behind (from the aerial: stairwell, air handlers, the dark gym units, a divider).
+// Walls and such on the roof to hide behind (from the aerial: stairwell, air handlers, the dark gym units, dividers).
+// Two barriers only (Evan, 09:36Z: "make it really obvious"): a tall brick wall and the big air handler. Their
+// headlight shadows are the only safe places on the main roof.
 const BLOCKERS = [
- [-3, -1.2, -2, 0, 1.8, 'stairwell'], [-5.4, -3.8, .8, 2.4, 1.1, 'air handler'], [-1, -.6, .8, 3.5, 1.05, 'divider wall'],
- [-6, -3.8, -2.7, -2.3, 1, 'divider wall'], [2, 4, -6.2, -4.6, 1.2, 'air handler'], [2.2, 3.6, -1.6, -.4, .9, 'air handler'],
+ [-4.4, -3.8, -3, 1.6, 1.6, 'brick barrier wall'], [-.6, 1.6, -1.8, 1.4, 1.5, 'big air handler'],
  [1.4, 3.4, 5.2, 7, 1, 'gym unit'], [5, 7, 5.6, 8, 1, 'gym unit'],
 ];
 for (const [x0, x1, z0, z1, h, name] of BLOCKERS) {
@@ -131,161 +147,205 @@ for (const [x0, x1, z0, z1, h, name] of BLOCKERS) {
  const b = box(x1 - x0, h, z1 - z0, name.includes('wall') ? M.wall : M.hvac, (x0 + x1) / 2, base + h / 2, (z0 + z1) / 2, name); occluders.push(b);
  if (!name.includes('wall')) { const v = box((x1 - x0) * .7, .05, (z1 - z0) * .5, M.hvacDark, (x0 + x1) / 2, base + h + .03, (z0 + z1) / 2); v.castShadow = false; }
 }
-// skylight domes (the white dots in the photo)
-for (const [x, z] of [[-4.5, -1], [-1.8, 2.2], [0, -2.5], [3.5, 1.5], [4, -6]]) { const d = new T.Mesh(new T.SphereGeometry(.28, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), M.window); d.position.set(x, H + .05, z); d.name = 'skylight dome'; scene.add(d); }
+for (const [x, z] of [[-5.5, -1.2], [-1.8, 2.2], [0, -2.5], [3.5, 1.5], [4, -6]]) { const d = new T.Mesh(new T.SphereGeometry(.28, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), M.window); d.position.set(x, H + .05, z); d.name = 'skylight dome'; scene.add(d); }
 
-// Ground: field to the east, asphalt yard north, parking south-west, the street to the south, houses across it.
+// Ground: the yard in front of the climbing wall, sidewalk and street along the west, houses across it, field east.
+const ROAD_X = -19, LANES = [-18.1, -19.9];
 const ground = (w, d, mat, x, z, y = 0) => { const m = new T.Mesh(new T.PlaneGeometry(w, d), mat); m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); m.receiveShadow = true; scene.add(m); return m; };
-ground(140, 140, M.grass, 0, 0, -.02); ground(16, 9, M.asphalt, 4, -11.5, .005); ground(10, 14, M.asphalt, -15, 7, .005); ground(140, 6, M.road, 0, 15.5, .01);
-for (let x = -60; x < 60; x += 4) ground(1.8, .14, M.paint, x, 15.5, .02);
-for (let x = -16; x <= -9; x += 2.2) ground(.1, 3.4, M.paint, x, 3.8, .02);
+ground(160, 160, M.grass, 0, 0, -.02); ground(16, 9, M.asphalt, 4, -12, .005); ground(2.2, 160, M.sidewalk, -16.4, 0, .008); ground(5.6, 160, M.road, ROAD_X, 0, .01);
+for (let z = -70; z < 70; z += 4) ground(.14, 1.8, M.paint, ROAD_X, z, .02);
+ground(6.5, 3, M.asphalt, -10.2, 1.0, .006); // the path to the north-west door
 function tree(x, z, s = 1, conifer = false) {
  cyl(.14 * s, 1.6 * s, M.bark, x, .8 * s, z, 'tree trunk');
  const g = conifer ? new T.ConeGeometry(1.1 * s, 3 * s, 7) : new T.IcosahedronGeometry(1.4 * s, 0);
  const c = new T.Mesh(g, conifer ? M.leaf2 : M.leaf); c.position.set(x, (conifer ? 2.8 : 2.6) * s, z); c.castShadow = true; c.name = conifer ? 'spruce' : 'maple'; scene.add(c);
 }
-[[-12, -6, 1.1], [-9.5, 10.5, 1.3], [-4, 11, 1], [11.5, -9, 1.2, true], [14, 11, 1.1], [-13, 12, .9, true], [9, 12.5, 1], [18, -2, 1.4]].forEach(a => tree(...a));
-for (let i = 0; i < 7; i++) { // houses across the street
- const x = -27 + i * 9, m = M.house[i % 4];
- box(6, 3.2, 6, m, x, 1.6, 23, 'house');
- const r = new T.Mesh(new T.ConeGeometry(4.8, 2, 4), M.shingle); r.rotation.y = Math.PI / 4; r.position.set(x, 4.2, 23); r.scale.z = .75; r.castShadow = true; r.name = 'house roof'; scene.add(r);
- const w = box(1.2, 1, .05, M.window, x - 1.2, 1.8, 19.97); w.castShadow = false;
+[[-13.5, -8, 1.1], [-12.5, 9.5, 1.3], [-4, 12, 1], [11.5, -9, 1.2, true], [14, 11, 1.1], [-14.5, 14, .9, true], [9, 12.5, 1], [16, -2, 1.4], [-25, -14, 1.2], [-26, 9, 1.1, true]].forEach(a => tree(...a));
+for (let i = 0; i < 8; i++) { // houses across the street
+ const z = -32 + i * 9, m = M.house[i % 4];
+ box(6, 3.2, 6, m, -29, 1.6, z, 'house');
+ const r = new T.Mesh(new T.ConeGeometry(4.8, 2, 4), M.shingle); r.rotation.y = Math.PI / 4; r.position.set(-29, 4.2, z); r.scale.x = .75; r.castShadow = true; r.name = 'house roof'; scene.add(r);
+ const w = box(.05, 1, 1.2, M.window, -25.97, 1.8, z - 1.2); w.castShadow = false;
 }
+const streetLamps = [-24, -6, 12].map(z => { cyl(.07, 4.4, M.lampPost, -15.6, 2.2, z, 'street lamp post'); const l = box(.5, .18, .3, M.lampGlow, -15.9, 4.4, z, 'street lamp'); const p = new T.PointLight('#ffcf8a', 0, 9, 1.6); p.position.set(-15.9, 4.1, z); scene.add(p); return p; });
 
-// ---------- The climbing walls: the north-west face (door, hinges, knob, grate, drainpipe, conduit) and the gym wall. ----------
-// A wall is an origin on the ground, a right vector and the normal toward the climber. Holds are (u along, y up).
+// ---------- The climbing walls. A wall is an origin on the ground, a right vector and the normal toward the climber. ----------
 class Wall {
  constructor(origin, right, normal) { this.o = origin; this.r = right; this.n = normal; }
- at(u, y, out = 0) { return this.o.clone().addScaledVector(this.r, u).add(new T.Vector3(0, y, 0)).addScaledVector(this.n, out); }
+ at(u, y, out = 0) { return this.o.clone().addScaledVector(this.r, u).add(v3(0, y, 0)).addScaledVector(this.n, out); }
  put(mesh, u, y, out = 0) { mesh.position.copy(this.at(u, y, out)); mesh.lookAt(mesh.position.clone().add(this.n)); scene.add(mesh); mesh.castShadow = true; return mesh; }
 }
-const NW = new Wall(new T.Vector3(-7, 0, 1.0), new T.Vector3(0, 0, 1), new T.Vector3(-1, 0, 0));
-const GW = new Wall(new T.Vector3(2.5, H, 3.5), new T.Vector3(-1, 0, 0), new T.Vector3(0, 0, -1));
+const NW = new Wall(v3(-7, 0, 1.0), v3(0, 0, 1), v3(-1, 0, 0));
+const GW = new Wall(v3(2.5, H, 3.5), v3(-1, 0, 0), v3(0, 0, -1));
+const SW = new Wall(v3(5, CANOPY, 1.2), v3(0, 0, -1), v3(1, 0, 0));
 const part = (geo, mat, name) => Object.assign(new T.Mesh(geo, mat), {name});
-// north-west face: three bays (the middle one with the door) stepped out a little
-NW.put(part(new T.BoxGeometry(1.5, H, .12), M.brick(.7, 1.9), 'bay pilaster'), 2.25, H / 2, .06);
+const upright = m => { m.rotation.set(0, 0, 0); return m; };
+const along = (m, wall) => { m.quaternion.setFromUnitVectors(v3(0, 1, 0), wall.r); return m; };
+// north-west face: the door bay with pilasters, the hydro cage, drainpipe, two conduit runs, the telephone box
+NW.put(part(new T.BoxGeometry(1.5, H, .12), M.brick(.7, 3), 'bay pilaster'), 2.25, H / 2, .06);
+const fasciaMat = new T.MeshStandardMaterial({color: '#6f7d96', roughness: .7, name: 'painted fascia board'});
+occluders.push(box(.7, .45, 7.4, fasciaMat, -7.25, H + .1, 0, 'roof fascia overhang'));
+cyl(.12, 11, M.bark, -15.2, 5.5, 7.5, 'power pole'); box(2.2, .12, .12, M.bark, -15.2, 10.4, 7.5, 'power pole crossarm');
+for (const dx of [-.9, .9]) { const wire = new T.Mesh(new T.CylinderGeometry(.012, .012, 90, 4), new T.MeshBasicMaterial({color: '#2a2230', name: 'power line'})); wire.rotation.x = Math.PI / 2; wire.position.set(-15.2 + dx, 10.5, 0); scene.add(wire); }
 NW.put(part(new T.BoxGeometry(1.24, 2.3, .08), M.frame, 'door frame'), 0, 1.15, .04);
 NW.put(part(new T.BoxGeometry(1.0, 2.1, .06), M.door, 'steel door'), 0, 1.05, .09);
-NW.put(part(new T.BoxGeometry(.56, .4, .05), M.grate, 'mesh grate'), -.03, 2.53, .07);
+NW.put(part(new T.BoxGeometry(.56, .42, .05), M.grate, 'mesh grate'), 0, 2.6, .07);
 NW.put(part(new T.BoxGeometry(.18, .26, .05), M.steel, 'wall lamp'), -1.0, 2.45, .2);
-const pipe = NW.put(part(new T.CylinderGeometry(.06, .06, H - .3, 10), M.pipe, 'drainpipe'), .95, (H - .3) / 2 + .15, .14); pipe.lookAt(pipe.position.clone().add(new T.Vector3(0, 1, 0))); pipe.rotation.set(0, 0, 0);
-const cond = NW.put(part(new T.CylinderGeometry(.035, .035, 2.6, 8), M.conduit, 'electrical conduit'), .2, 3.1, .1); cond.rotation.set(Math.PI / 2, 0, 0);
-// beside the door: the hydro station in its wire-mesh cage behind aluminium poles, under an angled sheet-metal hood.
-// Scenery only, never a handhold.
-{
+upright(NW.put(part(new T.CylinderGeometry(.06, .06, H - .3, 10), M.pipe, 'drainpipe'), .95, (H - .3) / 2 + .15, .14));
+along(NW.put(part(new T.CylinderGeometry(.035, .035, 2.4, 8), M.conduit, 'electrical conduit'), .55, 3.2, .1), NW);
+along(NW.put(part(new T.CylinderGeometry(.035, .035, 1.8, 8), M.conduit, 'electrical conduit'), .45, 5.6, .1), NW);
+upright(NW.put(part(new T.CylinderGeometry(.03, .03, 1.2, 8), M.conduit, 'telephone line'), .4, 5.0, .08));
+NW.put(part(new T.BoxGeometry(.34, .44, .14), M.phone, 'telephone junction box'), .4, 4.4, .1);
+{ // beside the door: the hydro station in its wire-mesh cage behind aluminium poles, under an angled sheet-metal hood. Scenery only.
  const alu = new T.MeshStandardMaterial({color: '#c4cad0', roughness: .35, metalness: .85, name: 'aluminium sheet metal'});
  const cage = new T.MeshStandardMaterial({map: meshTex(), transparent: true, opacity: .85, roughness: .6, metalness: .6, name: 'wire mesh cage'});
  NW.put(part(new T.BoxGeometry(.75, 1.5, .7), cage, 'hydro station cage'), -1.75, .75, .38);
  NW.put(part(new T.BoxGeometry(.5, 1.1, .4), new T.MeshStandardMaterial({color: '#5d6a52', roughness: .7, name: 'hydro transformer box'}), 'hydro transformer'), -1.75, .55, .3);
- const hood = NW.put(part(new T.BoxGeometry(.9, .12, .85), alu, 'angled sheet-metal hood'), -1.75, 1.62, .42); hood.rotateX(-.35);
- for (const du of [-.5, 0, .5]) NW.put(part(new T.CylinderGeometry(.04, .04, 1.0, 8), alu, 'aluminium pole'), -1.75 + du, .5, 1.0).rotation.set(0, 0, 0);
+ NW.put(part(new T.BoxGeometry(.9, .12, .85), alu, 'angled sheet-metal hood'), -1.75, 1.62, .42).rotateX(-.35);
+ for (const du of [-.5, 0, .5]) upright(NW.put(part(new T.CylinderGeometry(.04, .04, 1.0, 8), alu, 'aluminium pole'), -1.75 + du, .5, 1.0));
 }
 GW.put(part(new T.BoxGeometry(.7, .5, .08), M.grate, 'louvre vent'), -.3, .9, .04);
 GW.put(part(new T.BoxGeometry(.7, .5, .08), M.grate, 'louvre vent'), -.25, 1.85, .04);
-const pipe2 = GW.put(part(new T.CylinderGeometry(.05, .05, 2.2, 10), M.pipe, 'drainpipe'), .38, 1.1, .1); pipe2.rotation.set(0, 0, 0);
+upright(GW.put(part(new T.CylinderGeometry(.05, .05, 2.4, 10), M.pipe, 'drainpipe'), .38, 1.2, .1));
+SW.put(part(new T.BoxGeometry(.6, .25, .3), M.steel, 'vent hood'), -.2, .55, .1);
+upright(SW.put(part(new T.CylinderGeometry(.05, .05, 2.4, 10), M.pipe, 'drainpipe'), .25, 1.2, .1));
 
 const HOLD_GEO = {
  hinge: new T.CylinderGeometry(.035, .035, .14, 8), knob: new T.SphereGeometry(.055, 10, 8), bar: new T.BoxGeometry(.5, .05, .06),
- clamp: new T.TorusGeometry(.075, .022, 6, 12), lip: new T.BoxGeometry(.5, .08, .12), lamp: new T.BoxGeometry(.2, .04, .25),
+ clamp: new T.TorusGeometry(.075, .022, 6, 12), lip: new T.BoxGeometry(.5, .08, .12), lamp: new T.BoxGeometry(.2, .04, .25), box: new T.BoxGeometry(.12, .12, .06),
 };
 const glowTex = (() => { const c = Object.assign(document.createElement('canvas'), {width: 64, height: 64}), g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 2, 32, 32, 30); r.addColorStop(0, 'rgba(255,240,190,1)'); r.addColorStop(1, 'rgba(255,200,120,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new T.CanvasTexture(c); })();
 function holds(wall, list) {
  return list.map(([id, u, y, kind, extra = {}]) => {
-  const geo = HOLD_GEO[kind === 'top' ? 'lip' : kind]; const mat = kind === 'knob' ? M.brass : kind === 'lip' || kind === 'top' ? M.coping : M.steel;
-  const mesh = part(geo, mat, id); wall.put(mesh, u, y, .13);
-  if (kind === 'hinge') mesh.rotation.set(0, 0, 0);
-  if (kind === 'clamp') mesh.rotation.y = 0;
+  const geo = HOLD_GEO[kind === 'top' ? 'lip' : kind]; const mat = kind === 'knob' ? M.brass : kind === 'top' ? M.coping : M.steel;
+  const mesh = part(geo, mat, id); wall.put(mesh, u, y, .13); if (kind === 'hinge') upright(mesh);
   // the worn, shiny spot where small hands have been: a soft glow drawn for the player only
   const glow = presentation(new T.Sprite(new T.SpriteMaterial({map: glowTex, transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0})), {purpose: 'reachable hold'});
-  glow.scale.setScalar(.34); glow.position.copy(wall.at(u, y, .2)); scene.add(glow);
-  const hit = new T.Mesh(new T.SphereGeometry(.17, 8, 6), new T.MeshBasicMaterial({visible: false})); hit.position.copy(glow.position); hit.userData.hold = true; scene.add(hit);
+  glow.scale.setScalar(.6); glow.position.copy(wall.at(u, y, .2)); scene.add(glow);
+  const hit = new T.Mesh(new T.SphereGeometry(.32, 8, 6), new T.MeshBasicMaterial({visible: false})); hit.position.copy(glow.position); scene.add(hit);
   const h = {id, u, y, kind, wall, mesh, glow, hit, ...extra}; hit.userData.h = h; return h;
  });
 }
+// The north-west climb, cartoonishly tall. Hands go left and right of each other, never across.
 const CLIMB1 = {wall: NW, top: H, holds: holds(NW, [
  ['low hinge', -.5, .35, 'hinge'], ['middle hinge', -.5, 1.05, 'hinge'], ['top hinge', -.5, 1.75, 'hinge'], ['door knob', .38, 1.0, 'knob'],
- ['door frame top', 0, 2.2, 'bar'], ['grate corner', -.25, 2.5, 'clamp'], ['grate top', .15, 2.72, 'bar'],
- ['pipe bracket', .95, 2.45, 'clamp'], ['conduit clamp', .45, 3.1, 'clamp'], ['far conduit clamp', 1.45, 3.1, 'clamp'], ['high pipe bracket', .95, 3.6, 'clamp'],
- ['roof edge', .6, 4.25, 'top'], ['roof edge east', 1.3, 4.25, 'top'], ['wall lamp', -1.0, 2.45, 'lamp', {loose: true}],
+ ['door frame top', 0, 2.2, 'bar'], ['grate corner', -.15, 2.55, 'clamp'], ['grate top', .15, 2.82, 'bar'],
+ ['pipe bracket', .95, 2.6, 'clamp'], ['conduit clamp', .45, 3.2, 'clamp'], ['far conduit clamp', 1.45, 3.2, 'clamp'], ['second pipe bracket', .95, 3.8, 'clamp'],
+ ['telephone box', .4, 4.4, 'box'], ['third pipe bracket', .95, 5.0, 'clamp'], ['high conduit clamp', .45, 5.6, 'clamp'], ['top pipe bracket', .95, 6.2, 'clamp'],
+ ['roof edge', .5, 7.05, 'top'], ['roof edge east', 1.3, 7.05, 'top'],
+ ['wall lamp', -1.0, 2.45, 'lamp', {loose: true}], ['loose bracket', 1.5, 4.6, 'lamp', {loose: true}],
 ])};
 const CLIMB2 = {wall: GW, top: GYM - H, holds: holds(GW, [
- ['low louvre', -.3, .9, 'bar'], ['pipe clamp', .38, 1.4, 'clamp'], ['high louvre', -.25, 1.85, 'bar'], ['gym edge', .1, 2.28, 'top'], ['loose bracket', .85, 1.9, 'lamp', {loose: true}],
+ ['low louvre', -.3, .9, 'bar'], ['pipe clamp', .38, 1.4, 'clamp'], ['high louvre', -.25, 1.85, 'bar'], ['gym edge', .1, 2.55, 'top'], ['loose gym bracket', .85, 1.9, 'lamp', {loose: true}],
 ])};
-const SW = new Wall(new T.Vector3(5, CANOPY, 1.2), new T.Vector3(0, 0, -1), new T.Vector3(1, 0, 0));
-const CLIMB3 = {wall: SW, top: H - CANOPY, holds: holds(SW, [['vent hood', -.2, .55, 'bar'], ['main roof edge', .15, 1.3, 'top']])};
+const CLIMB3 = {wall: SW, top: H - CANOPY, holds: holds(SW, [['vent hood', -.2, .55, 'bar'], ['canopy pipe clamp', .25, 1.6, 'clamp'], ['main roof edge', 0, 2.45, 'top']])};
 const allHolds = [...CLIMB1.holds, ...CLIMB2.holds, ...CLIMB3.holds];
 
-// ---------- The kid (you), the dog, tennis balls. ----------
+// ---------- The kid (you), the dog, the leash, tennis balls. ----------
 function makeKid() {
  const g = new T.Group(); g.name = 'kid';
  const add = (geo, mat, x, y, z, name) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; m.name = name; g.add(m); return m; };
- const legs = [add(new T.CylinderGeometry(.07, .07, .42, 6), M.jeans, -.09, .21, 0, 'left leg'), add(new T.CylinderGeometry(.07, .07, .42, 6), M.jeans, .09, .21, 0, 'right leg')];
- add(new T.CapsuleGeometry(.17, .28, 3, 8), M.jacket, 0, .66, 0, 'jacket');
+ const legs = [add(new T.CylinderGeometry(.055, .05, .42, 6), M.skin, -.09, .21, 0, 'left leg'), add(new T.CylinderGeometry(.055, .05, .42, 6), M.skin, .09, .21, 0, 'right leg')];
+ for (const x of [-.09, .09]) add(new T.BoxGeometry(.1, .07, .16), M.jeans, x, .03, .03, 'sneaker');
+ add(new T.CylinderGeometry(.18, .17, .2, 10), M.shorts, 0, .44, 0, 'red shorts');
+ const body = add(new T.CapsuleGeometry(.17, .28, 3, 8), M.jacket, 0, .66, 0, 'jacket');
  add(new T.SphereGeometry(.16, 10, 8), M.skin, 0, 1.05, 0, 'head');
  add(new T.CylinderGeometry(.165, .17, .08, 10), M.cap, 0, 1.15, 0, 'cap'); add(new T.BoxGeometry(.18, .025, .16), M.cap, 0, 1.12, .14, 'cap brim');
- const arms = new T.Group(); g.add(arms);
+ const arm = add(new T.CapsuleGeometry(.05, .3, 2, 6), M.jacket, .2, .7, 0, 'throwing arm');
  const carry = []; for (let i = 0; i < 3; i++) { const b = new T.Mesh(new T.SphereGeometry(.07, 8, 6), M.ball); b.position.set((i - 1) * .12, .7 + (i === 1 ? .09 : 0), .2); b.visible = false; b.name = 'carried ball'; g.add(b); carry.push(b); }
- g.userData = {legs, carry}; return g;
+ g.userData = {legs, carry, arm, body}; return g;
 }
-const kid = makeKid(); kid.scale.setScalar(1.25); kid.visible = false; scene.add(kid);
+const kid = makeKid(); kid.scale.setScalar(1.3); scene.add(kid);
 function makeDog() {
  const g = new T.Group(); g.name = 'dog';
  const add = (geo, mat, x, y, z) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
  add(new T.CapsuleGeometry(.2, .45, 3, 8), M.fur, 0, .42, 0).rotation.z = Math.PI / 2;
  const head = add(new T.SphereGeometry(.18, 10, 8), M.fur, .42, .62, 0); add(new T.BoxGeometry(.16, .1, .12), M.fur, .58, .58, 0);
+ add(new T.TorusGeometry(.13, .03, 6, 12), M.collar, .33, .55, 0).rotation.y = Math.PI / 2;
  add(new T.BoxGeometry(.06, .16, .1), M.furDark, .4, .72, .14); add(new T.BoxGeometry(.06, .16, .1), M.furDark, .4, .72, -.14);
- for (const [x, z] of [[.22, .1], [.22, -.1], [-.22, .1], [-.22, -.1]]) add(new T.CylinderGeometry(.05, .05, .3, 6), M.fur, x, .15, z);
+ const legs = []; for (const [x, z] of [[.22, .1], [.22, -.1], [-.22, .1], [-.22, -.1]]) legs.push(add(new T.CylinderGeometry(.05, .05, .3, 6), M.fur, x, .15, z));
  const tail = add(new T.CylinderGeometry(.03, .02, .3, 6), M.fur, -.42, .58, 0); tail.rotation.z = -.8;
- const hit = new T.Mesh(new T.SphereGeometry(1.1, 8, 6), new T.MeshBasicMaterial({visible: false})); hit.position.y = .5; g.add(hit);
- g.userData = {head, tail, hit}; g.scale.setScalar(1.3); return g;
+ const mouth = new T.Object3D(); mouth.position.set(.66, .55, 0); g.add(mouth);
+ const hit = new T.Mesh(new T.SphereGeometry(1.2, 8, 6), new T.MeshBasicMaterial({visible: false})); hit.position.y = .5; g.add(hit);
+ g.userData = {head, tail, hit, legs, mouth}; g.scale.setScalar(1.3); return g;
 }
-const dog = makeDog(); dog.position.set(12, 0, 2); dog.rotation.y = Math.PI; scene.add(dog);
-const PILE = new T.Vector3(13.4, 0, -1.5);
+const dog = makeDog(); scene.add(dog);
+const leashGeo = new T.BufferGeometry().setFromPoints([v3(), v3(), v3()]);
+const leash = new T.Line(leashGeo, new T.LineBasicMaterial({color: '#d83a3a', name: 'leash'})); leash.frustumCulled = false; scene.add(leash);
+const PILE = v3(-11.6, 0, 4.2);
 
 let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-const REGIONS = {low: ['A', 'B'], gym: ['C'], canopy: ['E']};
-const inRect = (k, x, z, m = .35) => { const [x0, x1, z0, z1] = RECT[k]; return x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m; };
-const inBlock = (x, z, m = .32) => BLOCKERS.some(([x0, x1, z0, z1]) => x > x0 - m && x < x1 + m && z > z0 - m && z < z1 + m);
-const walkable = (lvl, x, z) => REGIONS[lvl].some(k => inRect(k, x, z)) && !inBlock(x, z);
-const levelY = lvl => ({low: H, gym: GYM, canopy: CANOPY})[lvl];
+const REGIONS = {low: ['A', 'B'], gym: ['C'], canopy: ['E'], yard: ['Y']};
+RECT.Y = [-16, -7.2, -9, 9, 0];
+const YARD_BLOCK = [[-10.2, -7, -5.2, -.9], [-8.4, -7, -1.4, -.1]]; // the annex and the hydro cage
+const inRect = (k, x, z, m = .35) => { const [x0, x1, z0, z1] = RECT[k]; return x > x0 + m && x < x1 - m && z > z0 - (k === 'Y' ? -m : -m) + 0 && z < z1 - m && z > z0 + m; };
+const inBlock = (lvl, x, z, m = .32) => (lvl === 'yard' ? YARD_BLOCK.map(([a, b, c, d]) => [a, b, c, d]) : BLOCKERS).some(([x0, x1, z0, z1]) => x > x0 - m && x < x1 + m && z > z0 - m && z < z1 + m);
+const walkable = (lvl, x, z) => REGIONS[lvl].some(k => inRect(k, x, z)) && !inBlock(lvl, x, z);
+const levelY = lvl => ({low: H, gym: GYM, canopy: CANOPY, yard: 0})[lvl];
+const ballMat = M.ball;
 const balls = [];
-for (const [lvl, n] of [['low', 21], ['gym', 5], ['canopy', 5]]) {
+function addBall(lvl, x, z) { const m = new T.Mesh(new T.SphereGeometry(.09, 10, 8), ballMat); m.castShadow = true; m.name = 'tennis ball'; const home = v3(x, levelY(lvl) + .09, z); m.position.copy(home); scene.add(m); const b = {m, home, lvl, state: 'roof', bob: rnd() * 6}; balls.push(b); return b; }
+for (const [lvl, n] of [['low', 20], ['gym', 5], ['canopy', 5]]) {
  let made = 0, tries = 0;
  while (made < n && tries++ < 5000) {
   const k = REGIONS[lvl][Math.floor(rnd() * REGIONS[lvl].length)], [x0, x1, z0, z1] = RECT[k];
   const x = x0 + .6 + rnd() * (x1 - x0 - 1.2), z = z0 + .6 + rnd() * (z1 - z0 - 1.2);
-  if (!walkable(lvl, x, z) || balls.some(b => b.home.distanceTo(new T.Vector3(x, levelY(lvl) + .09, z)) < (lvl === 'canopy' ? .5 : 1.2))) continue;
-  if (lvl === 'low' && Math.hypot(x + 6.4, z - 1.2) < 1.5) continue;
-  const m = new T.Mesh(new T.SphereGeometry(.09, 10, 8), M.ball); m.castShadow = true; m.name = 'tennis ball';
-  const home = new T.Vector3(x, levelY(lvl) + .09, z); m.position.copy(home); scene.add(m);
-  balls.push({m, home, lvl, state: 'roof'}); made++;
+  if (!walkable(lvl, x, z) || balls.some(b => b.home.distanceTo(v3(x, levelY(lvl) + .09, z)) < (lvl === 'canopy' ? .5 : 1.2))) continue;
+  if (lvl === 'low' && Math.hypot(x + 6.4, z - 1.4) < 1.5) continue;
+  addBall(lvl, x, z); made++;
  }
 }
+// the dog's ball: in your hand for the walk; the third throw makes it ball 31, up on the roof
+const dogBall = new T.Mesh(new T.SphereGeometry(.09, 10, 8), ballMat); dogBall.name = 'tennis ball'; dogBall.castShadow = true; scene.add(dogBall);
+const TOTAL = 31;
 const memoryCoin = GB.createCoin ? GB.createCoin(.16) : new T.Mesh(new T.CylinderGeometry(.16, .16, .03, 16), new T.MeshStandardMaterial({color: '#ffcc33', metalness: .8, roughness: .3, name: 'coin gold'}));
 if (!GB.createCoin) memoryCoin.rotation.x = Math.PI / 2;
 memoryCoin.name = 'gold memory coin'; memoryCoin.position.set(6.9, CANOPY + .35, -.3); scene.add(memoryCoin);
-const coinTaken = () => MC.has?.('school-jump:canopy');
-if (coinTaken()) memoryCoin.visible = false;
+if (MC.has?.('school-jump:canopy')) memoryCoin.visible = false;
 
-// ---------- The street: cars on a steady rhythm. Headlights are the "seen" signal: if their light is on you, they see you. ----------
-const ROAD_Z = 15.5, CAR_PERIOD = 10, CAR_SPEED = 10;
-const carColors = ['#c8423a', '#e6d36a', '#4d7fd6', '#e9e4dc', '#2f8a6a'];
+// Where to go next on each level: a soft marker on the spot, for the player only.
+const SPOTS = {gymWall: {lvl: 'low', at: v3(2.5, H, 2.75)}, hang: {lvl: 'gym', at: v3(6.2, GYM, 4.0)}, smallWall: {lvl: 'canopy', at: v3(5.6, CANOPY, 1.2)}, home: {lvl: 'low', at: v3(-6.5, H, 1.6)}};
+const spotMat = new T.MeshBasicMaterial({color: '#ffe7a3', transparent: true, opacity: .0, depthWrite: false, side: T.DoubleSide});
+for (const s of Object.values(SPOTS)) { s.mark = presentation(new T.Mesh(new T.RingGeometry(.35, .5, 32), spotMat.clone()), {purpose: 'next spot'}); s.mark.rotation.x = -Math.PI / 2; s.mark.position.copy(s.at).add(v3(0, .05, 0)); scene.add(s.mark); }
+
+// ---------- The street: cars on a steady rhythm, top right to bottom left. If their light is on you, they see you. ----------
+const CAR_PERIOD = 16, CAR_SPEED = 6, CAR_RUN = 36; // slow and readable: 12 s across, a 4 s gap, the same every time
+const carColors = ['#7a3a34', '#3d5a7a', '#c8a050', '#e9e4dc', '#2f6a5a'];
+const coneTex = (() => { const c = Object.assign(document.createElement('canvas'), {width: 8, height: 64}), g = c.getContext('2d'), l = g.createLinearGradient(0, 0, 0, 64); l.addColorStop(0, 'rgba(255,240,200,0)'); l.addColorStop(1, 'rgba(255,240,200,1)'); g.fillStyle = l; g.fillRect(0, 0, 8, 64); return new T.CanvasTexture(c); })();
+const SHAFT_GEO = new T.ConeGeometry(1, 1, 24, 1, true).translate(0, -.5, 0);
 function makeCar(i) {
  const g = new T.Group(); g.name = 'passing car';
- const paint = new T.MeshStandardMaterial({color: carColors[i % carColors.length], roughness: .4, metalness: .4, name: 'car paint'});
- const b = new T.Mesh(new T.BoxGeometry(3.6, .7, 1.7), paint); b.position.y = .55; b.castShadow = true; g.add(b);
- const c = new T.Mesh(new T.BoxGeometry(2, .55, 1.5), new T.MeshStandardMaterial({color: '#2a2f3c', roughness: .2, name: 'car glass'})); c.position.set(-.2, 1.15, 0); g.add(c);
- const lampMat = new T.MeshStandardMaterial({color: '#fff6d8', emissive: '#fff1b8', emissiveIntensity: 2, name: 'headlamp'});
+ const paint = new T.MeshStandardMaterial({color: carColors[i % carColors.length], roughness: .35, metalness: .45, name: 'car paint'});
+ const chrome = new T.MeshStandardMaterial({color: '#e8e8ee', roughness: .15, metalness: 1, name: 'chrome bumper'});
+ const b = new T.Mesh(new T.BoxGeometry(4.8, .8, 2), paint); b.position.y = .62; b.castShadow = true; g.add(b);
+ const c = new T.Mesh(new T.BoxGeometry(2.9, .66, 1.8), new T.MeshStandardMaterial({color: '#2a2f3c', roughness: .15, metalness: .3, name: 'car glass'})); c.position.set(-.35, 1.33, 0); c.castShadow = true; g.add(c);
+ const roof = new T.Mesh(new T.BoxGeometry(3.4, .08, 1.85), paint); roof.position.set(-.6, 1.7, 0); g.add(roof);
+ c.scale.x = 1.17; c.position.x = -.6; // a station wagon: the long glasshouse
+ for (const z of [-.75, .75]) { const rail = new T.Mesh(new T.BoxGeometry(2.6, .06, .06), chrome); rail.position.set(-.7, 1.82, z); g.add(rail); }
+ for (const x of [2.42, -2.42]) { const bm = new T.Mesh(new T.BoxGeometry(.1, .2, 2.05), chrome); bm.position.set(x, .38, 0); g.add(bm); }
+ for (const [x, z] of [[1.5, 1], [1.5, -1], [-1.5, 1], [-1.5, -1]]) { const w = new T.Mesh(new T.CylinderGeometry(.36, .36, .26, 12), new T.MeshStandardMaterial({color: '#18161c', roughness: .9, name: 'tyre'})); w.rotation.x = Math.PI / 2; w.position.set(x, .36, z); g.add(w); }
+ const lampMat = new T.MeshStandardMaterial({color: '#fff6d8', emissive: '#fff1b8', emissiveIntensity: 3, name: 'headlamp'});
  const tailMat = new T.MeshStandardMaterial({color: '#7a1010', emissive: '#ff2a2a', emissiveIntensity: .6, name: 'tail lamp'});
- for (const z of [-.55, .55]) { const h = new T.Mesh(new T.BoxGeometry(.06, .16, .3), lampMat); h.position.set(1.81, .62, z); g.add(h); const t = new T.Mesh(new T.BoxGeometry(.06, .14, .3), tailMat); t.position.set(-1.81, .62, z); g.add(t); }
- // the beam: a spot that sweeps the roof edge as the car passes (stylized: the driver glances up at the school)
- const beam = new T.SpotLight('#fff1c8', 0, 30, .5, .55, 1.1); beam.castShadow = true; beam.shadow.mapSize.set(512, 512); beam.shadow.bias = -.002;
- beam.position.set(0, 8, 0); g.add(beam); g.add(beam.target);
- scene.add(g); return {g, beam, tailMat, i, x: 999, dir: 1, active: false, seen: 0, brake: 0};
+ const beams = [];
+ for (const z of [-.62, .62]) {
+  const h = new T.Mesh(new T.BoxGeometry(.06, .2, .36), lampMat); h.position.set(2.42, .72, z); g.add(h);
+  const t = new T.Mesh(new T.BoxGeometry(.06, .16, .36), tailMat); t.position.set(-2.42, .72, z); g.add(t);
+  // a long soft headlight cone down the road: the drama you can see coming
+  const cone = new T.Mesh(new T.ConeGeometry(2.2, 12, 16, 1, true), new T.MeshBasicMaterial({map: coneTex, color: '#fff1c8', transparent: true, opacity: .22, depthWrite: false, blending: T.AdditiveBlending, side: T.DoubleSide, name: 'headlight beam'}));
+  cone.rotation.z = Math.PI / 2; cone.position.set(8.4, .7, z); g.add(cone); beams.push(cone);
+ }
+ // the glance: the light that sweeps the school as the car passes (stylized: the driver looks up at the school)
+ const beam = new T.SpotLight('#fff1c8', 0, 36, .5, .55, 1.0); beam.castShadow = true; beam.shadow.mapSize.set(512, 512); beam.shadow.bias = -.002;
+ beam.position.set(0, 10, 0); g.add(beam); scene.add(beam.target);
+ // the light you can see, from the car all the way to where it lands
+ const shaft = new T.Mesh(SHAFT_GEO, new T.MeshBasicMaterial({color: '#fff0c0', transparent: true, opacity: 0, depthWrite: false, blending: T.AdditiveBlending, side: T.DoubleSide, name: 'headlight glare'}));
+ shaft.frustumCulled = false; scene.add(shaft);
+ g.rotation.y = Math.PI / 2; // local +x points down the street, -z in the world; local +z points at the school
+ scene.add(g); return {g, beam, beams, shaft, tailMat, i, z: 999, lane: LANES[i % 2], active: false, brake: 0, wasLive: false};
 }
 const cars = [makeCar(0), makeCar(1)];
 
-// ---------- Sound: synthesised; the street, the dog and the climb are in the world; the heartbeat is meta. ----------
+// ---------- Sound: synthesised. The street, the dog and the climb are in the world; the heartbeat and the dread are meta. ----------
 let ac = null;
 function audio() { if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { ac = null; } } if (ac?.state === 'suspended') ac.resume(); return ac; }
 function blip({f = 440, t = .08, type = 'square', g = .08, slide = 0, noise = false, lp = 0, delay = 0} = {}) {
@@ -298,25 +358,39 @@ function blip({f = 440, t = .08, type = 'square', g = .08, slide = 0, noise = fa
 const SFX = {
  grab: () => { blip({f: 140, t: .07, type: 'triangle', g: .14}); blip({noise: true, t: .03, g: .06, lp: 2400}); },
  metal: () => blip({f: 900, t: .1, type: 'triangle', g: .05, slide: -300}),
+ release: () => blip({f: 520, t: .06, type: 'triangle', g: .05, slide: 200}),
  slip: () => { blip({noise: true, t: .22, g: .1, lp: 1400}); blip({f: 300, t: .2, type: 'sawtooth', g: .02, slide: -200, lp: 900}); },
+ nope: () => { blip({f: 220, t: .09, type: 'square', g: .04}); blip({f: 180, t: .12, type: 'square', g: .04, delay: .1}); },
  rattle: () => { for (let i = 0; i < 4; i++) blip({f: 1400 + i * 90, t: .03, type: 'square', g: .03, delay: i * .05}); },
  breath: (k = 1) => blip({noise: true, t: .35 + .1 * k, g: .02 + .02 * k, lp: 700}),
  haul: () => [330, 392, 523].forEach((f, i) => blip({f, t: .12, type: 'square', g: .04, delay: i * .09})),
  step: () => blip({noise: true, t: .04, g: .04, lp: 900}),
- pick: () => blip({f: 660, t: .08, type: 'square', g: .04, slide: 300}),
+ pick: () => { blip({f: 660, t: .08, type: 'square', g: .04, slide: 300}); blip({f: 990, t: .06, type: 'square', g: .03, delay: .07}); },
+ full: () => blip({f: 200, t: .08, type: 'square', g: .03}),
+ throwIt: () => blip({noise: true, t: .12, g: .06, lp: 2200}),
  bounce: () => blip({f: 180, t: .09, type: 'sine', g: .12, slide: -60}),
+ thwack: () => { blip({f: 120, t: .08, type: 'sine', g: .2}); blip({noise: true, t: .05, g: .1, lp: 1800}); },
  bark: () => { blip({f: 520, t: .09, type: 'square', g: .05, slide: -220, lp: 1600}); blip({f: 480, t: .1, type: 'square', g: .05, slide: -200, lp: 1600, delay: .16}); },
- beat: (k) => { blip({f: 58, t: .12, type: 'sine', g: .2 + .15 * k}); blip({f: 52, t: .1, type: 'sine', g: .14 + .1 * k, delay: .16}); },
- horn: () => { blip({f: 392, t: .5, type: 'sawtooth', g: .05, lp: 1400}); blip({f: 466, t: .5, type: 'sawtooth', g: .04, lp: 1400}); },
+ beat: (k) => { blip({f: 58, t: .12, type: 'sine', g: .2 + .2 * k}); blip({f: 52, t: .1, type: 'sine', g: .14 + .14 * k, delay: .16}); },
+ horn: () => { blip({f: 392, t: .6, type: 'sawtooth', g: .06, lp: 1400}); blip({f: 466, t: .6, type: 'sawtooth', g: .05, lp: 1400}); },
+ screech: () => blip({f: 1800, t: .5, type: 'sawtooth', g: .02, slide: -900, lp: 3000}),
+ sting: () => [196, 233, 277].forEach((f, i) => blip({f, t: .5, type: 'sawtooth', g: .025, lp: 900, delay: i * .02})),
  coin: () => [988, 1319, 1568, 1976].forEach((f, i) => blip({f, t: .14, type: 'square', g: .035, delay: i * .08})),
  tick: () => blip({f: 1600, t: .02, type: 'square', g: .015}),
  win: () => [523, 659, 784, 1047, 784, 1047].forEach((f, i) => blip({f, t: .16, type: 'square', g: .04, delay: i * .12})),
 };
 let engine = null;
-function engineUpdate(level, pitch) {
+function engineUpdate(level, pitch, dread, burn = 0) {
  const a = ac; if (!a) return;
- if (!engine) { const o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain(); o.type = 'sawtooth'; f.type = 'lowpass'; f.frequency.value = 320; g.gain.value = 0; o.connect(f).connect(g).connect(a.destination); o.start(); engine = {o, g}; }
- engine.g.gain.setTargetAtTime(level * .05, a.currentTime, .1); engine.o.frequency.setTargetAtTime(55 + pitch * 30, a.currentTime, .2);
+ if (!engine) {
+  const o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain(); o.type = 'sawtooth'; f.type = 'lowpass'; f.frequency.value = 380; g.gain.value = 0; o.connect(f).connect(g).connect(a.destination); o.start();
+  const d = a.createOscillator(), d2 = a.createOscillator(), dg = a.createGain(), df = a.createBiquadFilter(); d.type = d2.type = 'sawtooth'; d.frequency.value = 55; d2.frequency.value = 58.3; df.type = 'lowpass'; df.frequency.value = 240; dg.gain.value = 0; d.connect(df); d2.connect(df); df.connect(dg).connect(a.destination); d.start(); d2.start();
+  const wv = a.createOscillator(), wg = a.createGain(); wv.type = 'sine'; wv.frequency.value = 2900; wg.gain.value = 0; wv.connect(wg).connect(a.destination); wv.start();
+  engine = {o, g, dg, wg, wv};
+ }
+ engine.g.gain.setTargetAtTime(level * .07, a.currentTime, .08); engine.o.frequency.setTargetAtTime(50 + pitch * 50, a.currentTime, .15);
+ engine.dg.gain.setTargetAtTime(dread * .05, a.currentTime, .3);
+ engine.wg.gain.setTargetAtTime(burn * .018, a.currentTime, .15); engine.wv.frequency.setTargetAtTime(2600 + burn * 900, a.currentTime, .2);
 }
 // The little inner voice (and one grown-up). Spoken, never written on screen.
 function say(text, {grownUp = false} = {}) {
@@ -326,143 +400,183 @@ function say(text, {grownUp = false} = {}) {
   s.speak(u); } catch {}
 }
 const LINES = {
- start: 'Okay. Door first. Like always.', wrong: ['Oops. Not that one.', 'Breathe. Find the shiny one.', 'Arms getting wobbly...', 'You can do it. One more good grab.'],
- loose: 'Whoa, that one wiggles!', tired: 'Whew. Noodle arms. Let\'s try again.', top: 'Made it!', firstBall: 'There\'s one!', dog: ['Good dog!', 'Catch!', 'Go get it!', 'Good catch!'],
- busted: 'Hey! You! Down off that roof!', afterBust: 'Oops. Wait for the cars next time.', gym: 'The gym roof. Higher.', notYet: 'Not yet. There are still balls up here.',
- hang: 'Wait for it...', home: 'Now home. Same way down.', allBalls: 'Thirty-one! That\'s all of them!', missDrop: 'Not yet... pull back up.', drop: 'Yes!', coin: 'A gold coin! One of Daddy\'s memories.', done: 'Best day ever.',
+ walk: 'Come on, bub. To the wall.', further1: 'Oh, you want it further, do ya bub?', further2: 'Further? Okay, bub. Hang on.', onRoof: 'Uh oh.', getIt: 'Stay, bub. I\'ll get it.',
+ latchHint: 'Tap a hand to let go.', hold: 'Whoa! Hold on!', cross: 'Nope, hands don\'t cross.', far: ['Too far.', 'Can\'t reach that.', 'Closer one.'],
+ wrong: ['Oops.', 'Breathe. Find the shiny one.', 'Arms getting wobbly...', 'You can do it. One more good grab.'],
+ loose: 'Whoa, that one wiggles!', tired: 'Whew. Noodle arms. Let\'s try again.', top: 'Made it!', firstBall: 'There\'s one!', full: 'My hands are full. Throw some to bub.', dog: ['Good dog!', 'Catch, bub!', 'Go get it!', 'Good catch!'],
+ busted: 'Hey! You! Down off that roof!', afterBust: 'Oops. Watch the cars next time.', gym: 'The gym roof. Higher.', notYet: 'Not yet. There are still balls up here.',
+ hang: 'Wait for it...', home: 'Now home. Same way down.', allBalls: 'Thirty-one! That\'s all of them!', missDrop: 'Not yet... pull back up.', drop: 'Yes!', coin: 'A gold coin! One of Daddy\'s memories.', done: 'Best day ever, bub.',
 };
-let wrongLine = 0;
+let lineN = 0; const pickLine = arr => arr[lineN++ % arr.length];
 
-// ---------- Game state. ----------
-const S = {mode: 'climb', climb: CLIMB1, hands: [null, null], wrong: 0, lvl: 'low', target: null, carry: 0, thrown: 0, seen: 0, beatAt: 0,
- hangT: 0, hangMiss: 0, tween: null, ended: false, said: {}};
-const MAX_WRONG = 4, REACH = .9, STAND_REACH = 1.9;
-const CLIMB_PIX = .24, ROOF_PIX = .4; // the basement's chunky pixels, a little finer on the roof so the street reads
-let time = 0, pixK = CLIMB_PIX;
+// ---------- Game state and score. ----------
+const S = {mode: 'walk', climb: CLIMB1, hands: [null, null], stam: 1, wrongs: 0, lvl: 'yard', target: null, carry: 0, thrown: 0, seen: 0, beatAt: 0,
+ hangT: 0, hangMiss: 0, tween: null, ended: false, said: {}, throws: 0, score: 0, coins: 0, dogTask: null, slow: 1, look: v3()};
+const REACH = 1.2, STAND_REACH = 1.9;
+const CLIMB_PIX = .45, ROOF_PIX = .45; // the basement's chunky pixels, a little finer outdoors so the street reads
+let time = 0, pixK = ROOF_PIX;
+const hud = document.getElementById('hud');
+function addScore(n, at) {
+ S.score += n; document.getElementById('ns').textContent = S.score; document.getElementById('nb').textContent = S.thrown; document.getElementById('nc').textContent = S.coins;
+ if (!at) return;
+ const p = at.clone().project(camera); const el = document.createElement('div'); el.className = 'pop'; el.textContent = '+' + n;
+ el.style.left = (p.x * .5 + .5) * innerWidth + 'px'; el.style.top = (-p.y * .5 + .5) * innerHeight + 'px'; document.body.append(el);
+ requestAnimationFrame(() => { el.style.transform = 'translateY(-46px)'; el.style.opacity = '0'; }); setTimeout(() => el.remove(), 1100);
+}
 
-const v3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z);
 const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const latched = () => S.hands.filter(Boolean);
+const offGround = () => latched().some(h => h.y > STAND_REACH);
+// The climb is seen side-on from across the street, the whole wall in frame (Evan's picture, 09:36Z).
 function climbView(c = S.climb) {
- const hs = S.hands.filter(Boolean), w = c.wall;
- const u = hs.length ? hs.reduce((s, h) => s + h.u, 0) / hs.length : 0.1;
- const top = hs.length ? Math.max(...hs.map(h => h.y)) : 0;
- const eye = Math.max(1.15, top - .2), sway = Math.sin(time * 1.6) * .012 * (1 + S.wrong * 1.5);
- const pos = w.at(u * .7 + sway, eye + sway * .5, 1.5), look = w.at(u * .7, eye + .3, 0);
- return {pos, look, fov: 66};
+ const hs = latched(), w = c.wall, u = (hs.length ? hs.reduce((s, h) => s + h.u, 0) / hs.length : .1) * .6;
+ if (c === CLIMB1) return {pos: w.at(u, 3.8, 17), look: w.at(u, 3.6, 0), fov: 27};
+ return {pos: w.at(u, c.top * .5 + 1.2, 7.5), look: w.at(u, c.top * .5 + .4, 0), fov: 36};
 }
 function isoView() {
- const p = kid.position, look = v3(p.x + 1.2, levelY(S.lvl) * .6, p.z + 3.2);
- return {pos: look.clone().add(v3(-9.5, 13, -9.5)), look, fov: 36};
+ const p = kid.position, y = levelY(S.lvl), look = v3(p.x + .6, y * .7, p.z + 1.2), k = 1 - .3 * Math.min(1, S.seen / 2.2);
+ return {pos: look.clone().add(v3(-9.5, 13, -9.5).multiplyScalar(k)), look, fov: 36};
 }
 function tweenCamera(to, dur, done, k = null) { S.tween = {from: {pos: camera.position.clone(), look: S.look.clone(), fov: camera.fov, k: pixK}, to, t: 0, dur, done, k}; }
-S.look = v3();
 
-function reachable(h) {
- if (!['climb', 'descend'].includes(S.mode) || h.wall !== S.climb.wall || S.hands.includes(h)) return false;
- const hs = S.hands.filter(Boolean), top = hs.length ? Math.max(...hs.map(x => x.y)) : 0;
- if (S.mode === 'descend') { // going home: reach down from the lower hand
-  const anchor = hs.reduce((a, b) => (!a || b.y < a.y ? b : a), null);
-  return h.kind !== 'top' && h.y < top - .05 && Math.hypot(h.u - anchor.u, h.y - anchor.y) <= REACH;
- }
- if (top <= 1.5 && h.y <= STAND_REACH) return true; // still standing: anything you can reach from the ground
- const anchor = hs.reduce((a, b) => (!a || b.y > a.y ? b : a), null);
- return !!anchor && Math.hypot(h.u - anchor.u, h.y - anchor.y) <= REACH;
+// ---------- The climb: tap a hold to latch a free hand, tap a held hold (or its hand) to let go. Hands never cross. ----------
+function freeHandFor(h) {
+ const [L, R] = S.hands;
+ if (!L && !R) return h.u < (S.bodyU ?? .1) ? 0 : 1;
+ if (!L) return 0; if (!R) return 1; return -1;
 }
-function grab(h) {
+function check(h) { // why a latch would fail, or null
+ if (!['climb', 'descend'].includes(S.mode) || h.wall !== S.climb.wall) return 'off';
+ if (S.hands.includes(h)) return 'held';
+ const i = freeHandFor(h); if (i < 0) return 'busy';
+ const other = S.hands[1 - i];
+ if (S.mode === 'descend' && h.kind === 'top') return 'off';
+ if (!other) return h.y <= STAND_REACH || latched().length ? null : 'far';
+ if (Math.hypot(h.u - other.u, h.y - other.y) > REACH) return 'far';
+ if (i === 0 ? h.u > other.u + .02 : h.u < other.u - .02) return 'cross';
+ return null;
+}
+const reachable = h => check(h) === null;
+function tapHold(h) {
  audio();
- if (!reachable(h)) return wrongMove(h, false);
- if (h.loose) { h.wobble = 1; SFX.rattle(); say(LINES.loose); return wrongMove(h, true); }
- const lower = () => S.hands[0].y <= S.hands[1].y ? 0 : 1;
- const i = !S.hands[0] ? 0 : !S.hands[1] ? 1 : S.mode === 'descend' ? 1 - lower() : lower();
- S.hands[i] = h; h.wiggle = .6; SFX.grab(); if (h.kind !== 'knob') SFX.metal();
- if (h.kind === 'top') return topOut();
- if (S.mode === 'descend' && Math.min(...S.hands.map(x => x.y)) <= 1.1) return landHome();
+ const i = S.hands.indexOf(h);
+ if (i >= 0) { // let go
+  if (!S.hands[1 - i] && h.y > STAND_REACH) { SFX.slip(); S.shake = .4; say(LINES.hold); S.stam -= .08; return; }
+  S.hands[i] = null; SFX.release(); return;
+ }
+ const why = check(h);
+ if (why === 'busy') { SFX.tick(); S.pulse = 1; if (!S.said.latch) { S.said.latch = 1; say(LINES.latchHint); } return; }
+ if (why === 'cross') { SFX.nope(); say(LINES.cross); return wrongMove(.12); }
+ if (why === 'far') { SFX.slip(); say(pickLine(LINES.far)); S.fumble = {h, t: 0}; return wrongMove(.18); }
+ if (why) return;
+ if (h.loose) { h.wobble = 1; SFX.rattle(); say(LINES.loose); return wrongMove(.2); }
+ const j = freeHandFor(h); S.hands[j] = h; h.wiggle = .6; SFX.grab(); if (h.kind !== 'knob') SFX.metal();
+ if (S.mode === 'climb' && h.kind === 'top') return topOut();
+ if (S.mode === 'descend' && latched().length === 2 && Math.max(...latched().map(x => x.y)) <= STAND_REACH) return landHome();
+ if (latched().length === 2 && !S.said.latch && h.y > STAND_REACH) { S.said.latch = 1; S.pulse = 1; say(LINES.latchHint); }
 }
-function wrongMove(h, silent) {
- S.wrong++; S.shake = .5; SFX.slip(); SFX.breath(S.wrong / MAX_WRONG);
- if (S.wrong > MAX_WRONG) return tired();
- if (!silent) say(LINES.wrong[wrongLine++ % LINES.wrong.length]);
- S.fumble = {h, t: 0};
+function wrongMove(cost) {
+ S.wrongs++; S.stam -= cost; S.shake = .5; SFX.breath(1 - S.stam);
+ if (S.stam <= 0) return tired();
+ if (S.stam < .5 && !S.said.wobbly) { S.said.wobbly = 1; say(LINES.wrong[2]); }
 }
 function tired() {
- say(LINES.tired); S.mode = 'slide';
- const from = climbView(), c = S.climb; S.hands = [null, null];
- setTimeout(() => { S.wrong = 0; S.mode = 'climb'; }, 1600);
- tweenCamera(climbView(c), 1.4);
+ say(LINES.tired); S.mode = 'slide'; const c = S.climb; S.hands = [null, null];
+ tweenCamera(climbView(c), 1.4, () => { S.stam = 1; S.mode = 'climb'; });
 }
 function topOut() {
- S.mode = 'haul'; SFX.haul(); say(S.climb === CLIMB1 ? LINES.top : LINES.gym);
+ S.mode = 'haul'; SFX.haul(); say(S.climb === CLIMB2 ? LINES.gym : LINES.top);
+ if (!S.climbWrongs) addScore(250, null); // a clean climb
  const c = S.climb, w = c.wall, standY = w.o.y + c.top;
- const spot = w.at(.6, 0, -.7); kid.position.set(spot.x, standY, spot.z); kid.rotation.y = Math.atan2(-w.n.x, -w.n.z);
- // the camera rises over the coping from exactly where the hands were, then swings up into the iso view
- const over = {pos: w.at(.6, c.top + 1.0, .4), look: w.at(.6, c.top + .3, -2.5), fov: 60};
- tweenCamera(over, .9, () => {
-  S.lvl = c === CLIMB2 ? 'gym' : 'low'; kid.visible = true; S.hands = [null, null]; S.wrong = 0;
+ const spot = w.at(.5, 0, -.7); spot.y = standY; S.onWall = false; S.hands = [null, null];
+ fly(kid, kid.position.clone(), spot, standY + .7, .7, () => {
+  kid.rotation.y = Math.atan2(-w.n.x, -w.n.z); S.lvl = c === CLIMB2 ? 'gym' : 'low'; S.stam = 1; hud.style.display = 'flex';
   tweenCamera(isoView(), 1.8, () => { S.mode = 'roof'; }, ROOF_PIX);
  });
 }
-function startClimb(c, {fromIso = false} = {}) {
- S.climb = c; S.hands = [null, null]; S.wrong = 0; S.mode = fromIso ? 'tween' : 'climb';
- if (fromIso) { kid.visible = false; tweenCamera(climbView(c), 1.6, () => { S.mode = 'climb'; }, .22); }
+function startClimb(c) {
+ S.climb = c; S.hands = [null, null]; S.stam = 1; S.mode = 'tween'; S.climbWrongs = 0; S.wrongsAt = S.wrongs; S.onWall = true;
+ tweenCamera(climbView(c), 1.6, () => { S.mode = 'climb'; }, CLIMB_PIX);
 }
 
-// ---------- Roof: walk, pick up, throw to the dog, hide from headlights. ----------
+// ---------- The walk: you and bub at the wall. Three throws; the third goes on the roof. ----------
 const ray = new T.Raycaster(), ndc = new T.Vector2();
 function pick(ev) { const r = renderer.domElement.getBoundingClientRect(); ndc.set((ev.clientX - r.left) / r.width * 2 - 1, -(ev.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); }
-const SPOTS = {gymWall: {lvl: 'low', at: v3(2.5, H, 2.8)}, hang: {lvl: 'gym', at: v3(6.2, GYM, 4.0)}, smallWall: {lvl: 'canopy', at: v3(5.6, CANOPY, 1.2)}, home: {lvl: 'low', at: v3(-6.5, H, 1.6)}};
-function onRoofTap(ev) {
- pick(ev);
- if (S.carry && ray.intersectObject(dog.userData.hit).length) return throwBall();
- const y = levelY(S.lvl), p = v3(); ray.ray.intersectPlane(new T.Plane(v3(0, 1, 0), -y), p);
- if (!p) return;
- for (const [k, s] of Object.entries(SPOTS)) if (s.lvl === S.lvl && Math.hypot(p.x - s.at.x, p.z - s.at.z) < 1.3) { S.target = s.at.clone(); S.onArrive = k; return; }
- S.target = p; S.onArrive = null;
+const THROW_SPOT = v3(-10.4, 0, 1.2);
+function onWalkTap(ev) {
+ pick(ev); const p = v3(); ray.ray.intersectPlane(new T.Plane(v3(0, 1, 0), 0), p);
+ const wallHit = ray.intersectObjects(occluders, false)[0];
+ if (S.dogTask) return; // wait for bub to bring it back
+ if (wallHit || (p && p.x > -8.2)) { S.target = THROW_SPOT.clone(); S.onArrive = 'throw'; return; }
+ if (p) { S.target = p; S.onArrive = null; }
 }
-function arrive(k) {
- if (k === 'gymWall') return startClimb(CLIMB2, {fromIso: true});
- if (k === 'smallWall') return startClimb(CLIMB3, {fromIso: true});
- if (k === 'home') return coinTaken() || S.canopyDone ? startDescent() : null;
- if (k === 'hang') {
-  const left = balls.filter(b => b.lvl !== 'canopy' && b.state !== 'dog').length;
-  if (left) return say(LINES.notYet);
-  return startHang();
+function wallThrow() {
+ S.throws++; kid.rotation.y = Math.PI / 2; S.armSwing = 1; SFX.throwIt(); leash.visible = false; S.leashOff = true;
+ const from = kid.position.clone().add(v3(.2, 1.1, 0));
+ if (S.throws < 3) {
+  const hitAt = v3(-7.05, S.throws === 1 ? 1.6 : 4.2, S.throws === 1 ? 1.5 : .4), land = S.throws === 1 ? v3(-10.6, .09, 2.6) : v3(-12.8, .09, -.6);
+  fly(dogBall, from, hitAt, Math.max(from.y, hitAt.y) + .5, S.throws === 1 ? .45 : .6, () => {
+   SFX.thwack(); fly(dogBall, hitAt.clone(), land, hitAt.y + .6, .7, () => { SFX.bounce(); S.dogTask = {phase: 'fetch', at: land.clone()}; });
+  });
+ } else {
+  const over = v3(-6.6, H + .7, 1.3), land = v3(-5.6, H + .09, 1.6);
+  fly(dogBall, from, over, H + 2.5, .9, () => fly(dogBall, over, land, H + .9, .4, () => {
+   SFX.bounce(); dogBall.visible = false; addBall('low', land.x, land.z);
+   SFX.bark(); S.dogHop = 1; say(LINES.onRoof);
+   setTimeout(() => { say(LINES.getIt); S.target = v3(-8.2, 0, 1.0); S.onArrive = 'toWall'; }, 1500);
+  }));
  }
 }
-// Hollywood ending: back the way you came, down the conduit, the grate and the door, feet on the grass, dog at your side.
-function startDescent() {
- S.climb = CLIMB1; S.mode = 'tween'; kid.visible = false; S.wrong = 0;
- S.hands = [CLIMB1.holds.find(h => h.id === 'roof edge'), CLIMB1.holds.find(h => h.id === 'roof edge east')];
- tweenCamera(climbView(CLIMB1), 1.8, () => { S.mode = 'descend'; say(LINES.home); }, CLIMB_PIX);
+function dogBrought() {
+ SFX.bark(); S.dogHop = 1; dogBall.visible = true;
+ setTimeout(() => say(S.throws === 1 ? LINES.further1 : LINES.further2), 450);
 }
-function landHome() {
- S.mode = 'ending'; SFX.bounce(); S.hands = [null, null];
- kid.position.copy(NW.at(.3, 0, 1.1)); kid.position.y = 0; kid.rotation.y = -Math.PI / 2; kid.visible = true;
- dog.position.set(-8.2, 0, 2.6); S.dogHome = true;
- tweenCamera({pos: v3(-14, 3.2, -3), look: v3(-7.5, 1.6, 1.5), fov: 50}, 2.4, () => finish('hollywood'), ROOF_PIX);
+
+// ---------- Roof: walk, pick up, throw to bub, hide from headlights. ----------
+function onRoofTap(ev) {
+ pick(ev);
+ if (ray.intersectObject(dog.userData.hit).length) { if (S.carry) return throwBall(); }
+ const y = levelY(S.lvl), p = v3(); ray.ray.intersectPlane(new T.Plane(v3(0, 1, 0), -y), p);
+ if (!p) return;
+ for (const [k, s] of Object.entries(SPOTS)) if (s.lvl === S.lvl && spotOpen(k) && Math.hypot(p.x - s.at.x, p.z - s.at.z) < 1.3) { S.target = s.at.clone(); S.onArrive = k; return; }
+ S.target = p; S.onArrive = null;
+}
+const roofBallsLeft = () => balls.filter(b => b.lvl !== 'canopy' && b.state !== 'dog').length;
+function spotOpen(k) {
+ if (k === 'home') return S.coinDone;
+ if (k === 'hang') return !roofBallsLeft() && !S.coinDone;
+ if (k === 'gymWall') return !S.coinDone;
+ return true;
+}
+function arrive(k) {
+ if (k === 'throw') return wallThrow();
+ if (k === 'toWall') return startClimb(CLIMB1);
+ if (k === 'gymWall') return startClimb(CLIMB2);
+ if (k === 'smallWall') return startClimb(CLIMB3);
+ if (k === 'home') return startDescent();
+ if (k === 'hang') return roofBallsLeft() ? say(LINES.notYet) : startHang();
 }
 function throwBall() {
- const d = Math.hypot(dog.position.x - kid.position.x, dog.position.z - kid.position.z);
- if (d > 11) return;
  const b = balls.find(x => x.state === 'carried'); if (!b) return;
- b.state = 'flying'; S.carry--; b.m.visible = true; b.m.position.copy(kid.position).add(v3(0, .8, 0));
- const from = b.m.position.clone(), to = dog.position.clone().add(v3(.4, 1, 0)), peak = Math.max(from.y, to.y) + 1.6;
- say(LINES.dog[S.thrown % LINES.dog.length]);
- fly(b.m, from, to, peak, .9, () => {
-  SFX.bark(); S.dogHop = 1; b.state = 'dog'; S.thrown++;
+ b.state = 'flying'; S.carry--; b.m.visible = true; b.m.position.copy(kid.position).add(v3(0, 1, 0)); S.armSwing = 1; SFX.throwIt();
+ const from = b.m.position.clone(), to = dog.position.clone().add(v3(.5, 1.3, 0)), peak = Math.max(from.y, to.y) + 1.8;
+ say(pickLine(LINES.dog));
+ fly(b.m, from, to, peak, 1.0, () => {
+  SFX.bark(); S.dogHop = 1; b.state = 'dog'; S.thrown++; addScore(100, dog.position.clone().add(v3(0, 1.6, 0)));
   const n = S.thrown - 1, layer = n < 16 ? 0 : n < 25 ? 1 : n < 29 ? 2 : 3, idx = [n, n - 16, n - 25, n - 29][layer], side = [4, 3, 2, 1][layer];
   const spot = PILE.clone().add(v3((idx % side - (side - 1) / 2) * .19, .09 + layer * .16, (Math.floor(idx / side) - (side - 1) / 2) * .19));
   setTimeout(() => fly(b.m, b.m.position.clone(), spot, spot.y + .5, .5, () => SFX.bounce()), 400);
-  if (S.thrown >= balls.length) { S.canopyDone = true; SFX.win(); say(LINES.allBalls); S.dogParty = 2.5; }
+  if (S.thrown >= TOTAL) { S.canopyDone = true; SFX.win(); say(LINES.allBalls); S.dogParty = 2.5; addScore(500, dog.position.clone().add(v3(0, 2, 0))); }
  });
 }
 const flying = [];
-function fly(obj, from, to, peak, dur, done) { flying.push({obj, from, to, peak, dur, t: 0, done}); }
+function fly(obj, from, to, peak, dur, done) { flying.push({obj, from: from.clone(), to: to.clone(), peak, dur, t: 0, done}); }
 function busted() {
- if (S.mode !== 'roof') return;
- S.mode = 'busted'; SFX.horn(); say(LINES.busted, {grownUp: true}); S.seen = 0;
+ if (S.mode !== 'roof' && S.mode !== 'climb') return;
+ S.mode = 'busted'; SFX.screech(); SFX.horn(); say(LINES.busted, {grownUp: true}); S.bustT = 1.2;
  for (const b of balls) if (b.state === 'carried') { b.state = 'roof'; b.m.visible = true; b.m.position.copy(b.home); }
  S.carry = 0; S.target = null;
- setTimeout(() => { kid.visible = false; S.lvl = 'low'; startClimb(CLIMB1); S.mode = 'tween'; tweenCamera(climbView(CLIMB1), 2.2, () => { S.mode = 'climb'; say(LINES.afterBust); }, .22); }, 1300);
+ setTimeout(() => { S.seen = 0; S.lvl = 'low'; startClimb(CLIMB1); setTimeout(() => say(LINES.afterBust), 1800); }, 1500);
 }
 // ---------- The hang drop: the one overlay, because the timing has to be exact. ----------
 const hangEl = document.getElementById('hang'), zoneEl = document.getElementById('zone'), dotEl = document.getElementById('dot');
@@ -470,36 +584,52 @@ const ZONE = [.62, .82];
 function startHang() {
  S.mode = 'hang'; S.hangT = 0; say(LINES.hang); hangEl.style.display = 'block';
  zoneEl.style.left = ZONE[0] * 100 + '%'; zoneEl.style.width = (ZONE[1] - ZONE[0]) * 100 + '%';
- kid.position.set(6.2, GYM - 1.05, 3.32); kid.rotation.y = Math.PI;
- tweenCamera({pos: v3(1.5, GYM + 2.4, -3.5), look: v3(6.2, GYM - 1.6, 3.2), fov: 44}, 1);
+ kid.position.set(6.2, GYM - 1.35, 3.32); kid.rotation.y = Math.PI;
+ tweenCamera({pos: v3(1.2, GYM + 2.6, -4.5), look: v3(6.2, GYM - 2.2, 3.0), fov: 46}, 1);
 }
 const swing = () => .5 + .5 * Math.sin(S.hangT * (2.2 + S.hangMiss * .15));
 function dropTry() {
  const s = swing();
  if (s >= ZONE[0] && s <= ZONE[1]) {
-  hangEl.style.display = 'none'; SFX.haul(); say(LINES.drop); S.mode = 'drop';
+  hangEl.style.display = 'none'; SFX.haul(); say(LINES.drop); S.mode = 'drop'; addScore(300, kid.position.clone());
   const from = kid.position.clone(), to = v3(6.2, CANOPY, 2.6);
-  fly(kid, from, to, from.y + .2, .55, () => { SFX.bounce(); S.lvl = 'canopy'; kid.rotation.set(0, Math.PI, 0); tweenCamera(isoView(), 1.2, () => { S.mode = 'roof'; }); });
+  fly(kid, from, to, from.y + .2, .7, () => { SFX.bounce(); S.lvl = 'canopy'; kid.rotation.set(0, Math.PI, 0); tweenCamera(isoView(), 1.2, () => { S.mode = 'roof'; }); });
  } else {
   S.hangMiss++; SFX.slip(); SFX.breath(S.hangMiss / 3); say(LINES.missDrop); S.shake = .5;
   if (S.hangMiss >= 3) { S.hangMiss = 0; hangEl.style.display = 'none'; say(LINES.tired); kid.position.set(6.2, GYM, 4.1); S.lvl = 'gym'; S.mode = 'tween'; tweenCamera(isoView(), 1, () => { S.mode = 'roof'; }); }
  }
 }
-// ---------- Endings. ----------
+// ---------- Hollywood ending: back the way you came, down the conduit, the grate and the door, feet on the grass, bub at your side. ----------
+function startDescent() {
+ S.climb = CLIMB1; S.mode = 'tween'; S.onWall = true; S.stam = 1;
+ S.hands = [CLIMB1.holds.find(h => h.id === 'roof edge'), CLIMB1.holds.find(h => h.id === 'roof edge east')];
+ tweenCamera(climbView(CLIMB1), 1.8, () => { S.mode = 'descend'; say(LINES.home); }, CLIMB_PIX);
+}
+function landHome() {
+ S.mode = 'ending'; SFX.bounce(); S.hands = [null, null]; S.onWall = false;
+ kid.position.copy(NW.at(.3, 0, 1.1)); kid.position.y = 0; kid.rotation.y = -Math.PI / 2; kid.visible = true; S.lvl = 'yard';
+ S.dogTask = {phase: 'come'};
+ tweenCamera({pos: v3(-15, 3.4, -4), look: v3(-7.8, 1.8, 1.4), fov: 50}, 2.4, () => finish('hollywood'), ROOF_PIX);
+}
 const againEl = document.getElementById('again');
 function finish(kind) {
- if (S.ended) return; S.ended = kind; SFX.win(); say(LINES.done); S.dogParty = 99;
+ if (S.ended) return; S.ended = kind; SFX.win(); say(LINES.done); S.dogParty = 99; addScore(1000, kid.position.clone().add(v3(0, 2, 0)));
  setTimeout(() => { againEl.style.display = 'grid'; }, 3500);
 }
 againEl.onclick = () => location.reload();
 
 // ---------- Input. ----------
 renderer.domElement.addEventListener('pointerdown', ev => {
- audio(); if (!S.greeted) { S.greeted = true; say(LINES.start); }
+ audio(); if (!S.greeted) { S.greeted = true; say(LINES.walk); }
  if (S.mode === 'climb' || S.mode === 'descend') {
   pick(ev); const hit = ray.intersectObjects(S.climb.holds.map(h => h.hit))[0];
-  if (hit) grab(hit.object.userData.h); else { SFX.tick(); }
+  if (hit) tapHold(hit.object.userData.h); else {
+   const hh = ray.intersectObjects(hands.map(x => x.g), true)[0]; // tapping a hand lets it go
+   const i = hh ? hands.findIndex(x => x.g === hh.object.parent || x.g === hh.object) : -1;
+   if (i >= 0 && S.hands[i]) tapHold(S.hands[i]); else SFX.tick();
+  }
  } else if (S.mode === 'roof') onRoofTap(ev);
+ else if (S.mode === 'walk') onWalkTap(ev);
  else if (S.mode === 'hang') dropTry();
 });
 const keys = {};
@@ -507,22 +637,22 @@ addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; if (e.key =
 addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
 
 // ---------- Information manifest. ----------
-PL.volunteer?.('school-jump', {place: 'The school roof at dusk', dialect: 'Suburb at dusk, 1986: brick, headlights, a dog in the field, a little inner voice', items: [
- {id: 'tired', says: 'how tired my arms are', who: 'player', for: ['player'], prefer: ['meta'], read: () => S.wrong / MAX_WRONG, ways: {meta: 'breathing gets heavier, the view sways more, the inner voice encourages'}},
- {id: 'reach', says: 'which hold I can reach', who: 'player', for: ['player'], prefer: ['spatial'], read: () => allHolds.filter(reachable).map(h => h.id), ways: {spatial: 'a soft worn shine on the holds within reach'}},
- {id: 'cars', says: 'a car is coming', who: 'characters', for: ['player', 'director'], prefer: ['diegetic'], read: () => cars.filter(c => c.active).length, ways: {diegetic: 'engine sound rises; headlights sweep the roof edge on a steady rhythm'}},
- {id: 'seen', says: 'the car sees me', who: 'characters', for: ['player', 'director'], prefer: ['diegetic', 'meta', 'spatial'], read: () => S.seen, ways: {diegetic: 'you stand in the headlight, the car brakes and its tail lights flare', meta: 'a heartbeat that speeds up', spatial: 'a ring at your feet fills as they look'}},
- {id: 'balls', says: 'how many balls the dog has', who: 'characters', for: ['player', 'director'], prefer: ['diegetic'], read: () => S.thrown, ways: {diegetic: 'the pile by the dog grows'}},
+PL.volunteer?.('school-jump', {place: 'The school at dusk', dialect: 'Suburb at dusk, 1986: brick, headlights, a dog called bub, a little inner voice', items: [
+ {id: 'tired', says: 'how tired my arms are', who: 'player', for: ['player'], prefer: ['meta'], read: () => 1 - S.stam, ways: {meta: 'breathing gets heavier, the view sways more, hands tremble, the inner voice encourages'}},
+ {id: 'reach', says: 'which hold I can reach', who: 'player', for: ['player'], prefer: ['spatial'], read: () => allHolds.filter(reachable).map(h => h.id), ways: {spatial: 'a soft worn shine on the holds a free hand can reach'}},
+ {id: 'cars', says: 'a car is coming', who: 'characters', for: ['player', 'director'], prefer: ['diegetic'], read: () => cars.filter(c => c.active).length, ways: {diegetic: 'headlight beams down the street, engine sound rising, on a steady rhythm'}},
+ {id: 'seen', says: 'the car sees me', who: 'characters', for: ['player', 'director'], prefer: ['diegetic', 'meta', 'spatial'], read: () => S.seen, ways: {diegetic: 'you stand in the headlight, the car brakes and its tail lights flare', meta: 'heartbeat, the camera closes in, time slows', spatial: 'a ring at your feet fills as they look'}},
+ {id: 'balls', says: 'how many balls bub has', who: 'characters', for: ['player', 'director'], prefer: ['diegetic', 'overlay'], read: () => S.thrown, ways: {diegetic: 'the pile by bub grows', overlay: 'ball count in the score chip'}},
+ {id: 'score', says: 'my score', who: 'player', for: ['player'], prefer: ['overlay'], read: () => S.score, ways: {overlay: 'a small glass chip of icons and numbers, top right'}},
  {id: 'hang', says: 'when to let go', who: 'player', for: ['player'], prefer: ['overlay'], read: () => S.mode === 'hang' ? swing() : null, ways: {overlay: 'a small glass timing bar, only while hanging'}},
 ]});
 
 // ---------- Seen ring (presentation layer): fills while a car is looking at you. ----------
 const ringMat = new T.MeshBasicMaterial({color: '#ffd166', transparent: true, opacity: .9, depthWrite: false, side: T.DoubleSide});
 const ring = presentation(new T.Mesh(new T.RingGeometry(.5, .72, 40, 1, 0, .01), ringMat), {purpose: 'seen by a car'}); ring.rotation.x = -Math.PI / 2; scene.add(ring);
-const tmpV = v3(), occ = [];
-function carSees(car) {
- const chest = kid.position.clone().add(v3(0, .6, 0)), src = car.beam.getWorldPosition(v3()), aim = car.beam.target.getWorldPosition(v3()).sub(src).normalize();
- const to = chest.clone().sub(src), dist = to.length(); to.normalize();
+function carSees(car, at) {
+ const src = car.beam.getWorldPosition(v3()), aim = car.beam.target.getWorldPosition(v3()).sub(src).normalize();
+ const to = at.clone().sub(src), dist = to.length(); to.normalize();
  if (dist > car.beam.distance * .95 || to.angleTo(aim) > car.beam.angle * .85) return false;
  ray.set(src, to); ray.far = dist - .25; const hit = ray.intersectObjects(occluders, false)[0]; ray.far = Infinity;
  return !hit;
@@ -533,120 +663,195 @@ const view = {w: 0, h: 0};
 function resize() { view.w = innerWidth; view.h = innerHeight; camera.aspect = view.w / view.h; camera.updateProjectionMatrix(); setRes(); }
 function setRes() { const k = Math.min(1, Math.max(.18, pixK)) * Math.min(2, devicePixelRatio); renderer.setPixelRatio(1); renderer.setSize(Math.round(view.w * k), Math.round(view.h * k), false); }
 addEventListener('resize', resize); resize();
-const start = climbView(); camera.position.copy(start.pos); S.look.copy(start.look); camera.lookAt(S.look);
+// start: on the sidewalk with bub on the leash, ball in hand
+kid.position.set(-14.8, 0, -6.5); kid.rotation.y = Math.PI / 4; dog.position.set(-15.4, 0, -7.4);
+{ const v = isoView(); camera.position.copy(v.pos); S.look.copy(v.look); camera.fov = v.fov; camera.updateProjectionMatrix(); camera.lookAt(S.look); }
 
 // hands and arms for the first-person climb
 const hands = [0, 1].map(i => {
  const g = new T.Group(); g.name = 'my hand';
- const palm = new T.Mesh(new T.SphereGeometry(.07, 10, 8), M.skin); palm.scale.set(1, 1.1, .7); g.add(palm);
- const arm = new T.Mesh(new T.CylinderGeometry(.055, .065, 1, 8), M.jacket); arm.name = 'my sleeve'; scene.add(arm);
- scene.add(g); return {g, arm, pos: v3(), rest: v3()};
+ const palm = new T.Mesh(new T.SphereGeometry(.075, 10, 8), M.skin); palm.scale.set(1, 1.1, .7); g.add(palm);
+ const hit = new T.Mesh(new T.SphereGeometry(.16, 8, 6), new T.MeshBasicMaterial({visible: false})); g.add(hit);
+ const arm = new T.Mesh(new T.CylinderGeometry(.045, .05, 1, 8), M.skin); arm.name = 'my arm'; scene.add(arm);
+ scene.add(g); return {g, arm, pos: v3()};
 });
 const up = v3(0, 1, 0);
+// On the wall: the kid hangs from whatever the hands hold, arms reaching up to the holds, legs dangling.
 function placeHands(dt) {
- const climbing = !kid.visible && S.mode !== 'roof';
- const w = S.climb.wall, fwd = v3(), right = v3(); camera.getWorldDirection(fwd); right.crossVectors(fwd, up).normalize();
+ const show = !!S.onWall;
+ const w = S.climb.wall;
+ S.pulse = Math.max(0, (S.pulse || 0) - dt * .8);
+ kid.userData.arm.visible = !show;
+ if (show) {
+  const hs = latched(), sc = kid.scale.y;
+  const u = hs.length ? hs.reduce((s, h) => s + h.u, 0) / hs.length : .1;
+  const handY = hs.length ? Math.max(...hs.map(h => h.y)) : 0;
+  const feet = hs.length ? Math.max(0, hs.reduce((s, h) => s + h.y, 0) / hs.length - 1.45 * sc / 1.3) : 0;
+  const target = w.at(u, feet, .28); target.y = w.o.y + feet;
+  if (S.mode !== 'haul') kid.position.lerp(target, Math.min(1, dt * 8));
+  kid.rotation.y = Math.atan2(-w.n.x, -w.n.z);
+  const kick = hs.length === 1 ? Math.sin(time * 9) * .5 : .1;
+  kid.userData.legs[0].rotation.x = kick; kid.userData.legs[1].rotation.x = -kick * .7;
+ }
  hands.forEach((hd, i) => {
-  hd.g.visible = hd.arm.visible = climbing;
+  hd.g.visible = hd.arm.visible = show;
+  if (!show) return;
   const h = S.hands[i], side = i ? 1 : -1;
-  const shoulder = camera.position.clone().addScaledVector(right, side * .22).add(v3(0, -.32, 0)).addScaledVector(fwd, .15);
+  const shoulder = kid.position.clone().add(v3(0, .86 * kid.scale.y, 0)).addScaledVector(w.r, side * .2 * kid.scale.y).addScaledVector(w.n, .05);
   let target;
-  if (h) { target = w.at(h.u + side * .03, h.y - .03, .2); if (h.wiggle) h.wiggle = Math.max(0, h.wiggle - dt * 2); }
+  if (h) { target = w.at(h.u, h.y - .03, .2); if (h.wiggle) h.wiggle = Math.max(0, h.wiggle - dt * 2); }
   else if (S.fumble && i === (S.hands[0] ? 1 : 0)) { const f = S.fumble; f.t += dt; target = w.at(f.h.u, f.h.y - f.t * 1.2, .25); if (f.t > .45) S.fumble = null; }
-  else target = shoulder.clone().addScaledVector(fwd, .45).add(v3(0, -.08, 0)).addScaledVector(right, side * .05);
-  const tremble = S.wrong * .004 * Math.sin(time * 40 + i * 2);
-  hd.pos.lerp(target, Math.min(1, dt * 14)); hd.g.position.copy(hd.pos).add(v3(tremble, tremble, 0));
+  else target = shoulder.clone().add(v3(0, -.42, 0)).addScaledVector(w.n, .06);
+  const tremble = (1 - S.stam) * .02 * Math.sin(time * 40 + i * 2);
+  hd.pos.lerp(target, Math.min(1, dt * 14)); hd.g.position.copy(hd.pos).add(v3(0, tremble, 0));
+  const lower = S.hands[0] && S.hands[1] && S.hands[i].y <= S.hands[1 - i].y;
+  hd.g.scale.setScalar(1.3 * (1 + (lower ? S.pulse * .6 * (.5 + .5 * Math.sin(time * 12)) : 0)));
   const mid = shoulder.clone().add(hd.g.position).multiplyScalar(.5), dir = hd.g.position.clone().sub(shoulder), len = dir.length();
-  hd.arm.position.copy(mid); hd.arm.scale.set(1, len, 1); hd.arm.quaternion.setFromUnitVectors(up, dir.normalize());
+  hd.arm.position.copy(mid); hd.arm.scale.set(.9, len, .9); hd.arm.quaternion.setFromUnitVectors(up, dir.normalize());
  });
 }
-let last = performance.now(), stepT = 0;
+function walkKid(dt) {
+ let mv = v3();
+ if (keys.w || keys.arrowup) mv.add(v3(1, 0, 1)); if (keys.s || keys.arrowdown) mv.add(v3(-1, 0, -1));
+ if (keys.a || keys.arrowleft) mv.add(v3(1, 0, -1)); if (keys.d || keys.arrowright) mv.add(v3(-1, 0, 1));
+ if (mv.lengthSq()) S.target = null;
+ else if (S.target) { mv = S.target.clone().sub(kid.position); mv.y = 0; if (mv.length() < .12) { const k = S.onArrive; S.target = null; S.onArrive = null; if (k) arrive(k); mv.set(0, 0, 0); } }
+ if (mv.lengthSq()) {
+  mv.normalize().multiplyScalar(3.4 * dt); const p = kid.position;
+  if (walkable(S.lvl, p.x + mv.x, p.z + mv.z)) p.add(mv); else if (walkable(S.lvl, p.x + mv.x, p.z)) p.x += mv.x; else if (walkable(S.lvl, p.x, p.z + mv.z)) p.z += mv.z; else { S.target = null; S.onArrive = null; }
+  kid.rotation.y = Math.atan2(mv.x, mv.z); S.stepT = (S.stepT || 0) + dt; if (S.stepT > .28) { S.stepT = 0; SFX.step(); }
+  kid.userData.legs[0].rotation.x = Math.sin(time * 14) * .5; kid.userData.legs[1].rotation.x = -Math.sin(time * 14) * .5;
+ } else kid.userData.legs.forEach(l => l.rotation.x *= .8);
+ kid.position.y = levelY(S.lvl);
+}
+function dogTo(target, speed, dt) {
+ const d = target.clone().sub(dog.position); d.y = 0; const L = d.length();
+ if (L > .05) { dog.rotation.y = Math.atan2(-d.z, d.x); dog.position.addScaledVector(d.normalize(), Math.min(L, speed * dt)); dog.userData.legs.forEach((l, i) => l.rotation.z = Math.sin(time * 18 + i * 1.6) * .5); }
+ return L;
+}
+function updateDog(dt) {
+ const D = dog.userData, task = S.dogTask;
+ if (task?.phase === 'fetch') { if (dogTo(task.at, 6, dt) < .3) { task.phase = 'back'; } }
+ else if (task?.phase === 'back') { dogBall.position.copy(D.mouth.getWorldPosition(v3())); if (dogTo(kid.position.clone().add(v3(-.7, 0, .3)), 5, dt) < .35) { S.dogTask = null; dogBall.position.copy(kid.position).add(v3(.2, .9, 0)); dogBrought(); } }
+ else if (task?.phase === 'come') dogTo(kid.position.clone().add(v3(-.9, 0, .6)), 4, dt);
+ else if (S.mode === 'walk') { const L = dogTo(kid.position.clone().add(v3(-.8, 0, -.7)), 3.6, dt); if (L < .3) D.legs.forEach(l => l.rotation.z *= .8); }
+ else if (!S.ended) { // waiting in the yard below, following you along the wall
+  const z = Math.max(-8, Math.min(8, kid.visible ? kid.position.z : 1));
+  dogTo(v3(-10.5, 0, z), 3, dt);
+ }
+ if (S.mode === 'walk' && !S.dogTask && !S.throwing && dogBall.visible && S.throws < 3) dogBall.position.copy(kid.position).add(v3(.25, .85, .1).applyAxisAngle(up, kid.rotation.y));
+ S.dogHop = Math.max(0, (S.dogHop || 0) - dt * 1.6); dog.position.y = Math.sin(S.dogHop * Math.PI) * .7;
+ D.tail.rotation.x = Math.sin(time * (S.carry || S.dogTask ? 22 : 8)) * .6;
+ if (S.dogParty > 0) { S.dogParty -= dt; dog.rotation.y += dt * 6; dog.position.y = Math.abs(Math.sin(time * 6)) * .4; }
+ // the leash, from your hand to bub's collar, with a little sag
+ if (!S.leashOff) { const a = kid.position.clone().add(v3(0, .9, 0)), b = D.head.getWorldPosition(v3()).add(v3(-.1, -.1, 0)), m = a.clone().lerp(b, .5).add(v3(0, -.25, 0)); leashGeo.setFromPoints([a, m, b]); }
+}
+let last = performance.now();
 function frame(now) {
- const dt = Math.min(.05, (now - last) / 1000); last = now; time += dt;
+ const rdt = Math.min(.05, (now - last) / 1000); last = now;
+ const k = Math.min(1, S.seen / 2.2); S.slow += ((1 - .5 * k) - S.slow) * Math.min(1, rdt * 4);
+ const dt = rdt * S.slow; time += dt;
  // camera
  if (S.tween) {
-  const tw = S.tween; tw.t = Math.min(1, tw.t + dt / tw.dur); const e = ease(tw.t);
-  const to = typeof tw.to === 'function' ? tw.to() : tw.to;
-  camera.position.lerpVectors(tw.from.pos, to.pos, e); S.look.lerpVectors(tw.from.look, to.look, e); camera.fov = tw.from.fov + (to.fov - tw.from.fov) * e; camera.updateProjectionMatrix();
+  const tw = S.tween; tw.t = Math.min(1, tw.t + rdt / tw.dur); const e = ease(tw.t);
+  camera.position.lerpVectors(tw.from.pos, tw.to.pos, e); S.look.lerpVectors(tw.from.look, tw.to.look, e); camera.fov = tw.from.fov + (tw.to.fov - tw.from.fov) * e; camera.updateProjectionMatrix();
   if (tw.k != null) { pixK = tw.from.k + (tw.k - tw.from.k) * e; setRes(); }
   if (tw.t >= 1) { S.tween = null; tw.done?.(); }
- } else if (S.mode === 'climb' || S.mode === 'slide' || S.mode === 'descend') {
-  const v = climbView(); camera.position.lerp(v.pos, Math.min(1, dt * 5)); S.look.lerp(v.look, Math.min(1, dt * 5));
- } else if (S.mode === 'roof' || S.mode === 'busted') {
-  const v = isoView(); camera.position.lerp(v.pos, Math.min(1, dt * 3)); S.look.lerp(v.look, Math.min(1, dt * 3));
+ } else if (['climb', 'slide', 'descend'].includes(S.mode)) {
+  const v = climbView(); camera.position.lerp(v.pos, Math.min(1, rdt * 5)); S.look.lerp(v.look, Math.min(1, rdt * 5));
+  if (Math.abs(camera.fov - v.fov) > .1) { camera.fov += (v.fov - camera.fov) * Math.min(1, rdt * 4); camera.updateProjectionMatrix(); }
+ } else if (['roof', 'busted', 'walk'].includes(S.mode)) {
+  const v = isoView(); camera.position.lerp(v.pos, Math.min(1, rdt * 3)); S.look.lerp(v.look, Math.min(1, rdt * 3));
  }
- if (S.shake) { S.shake = Math.max(0, S.shake - dt); camera.position.x += (Math.random() - .5) * S.shake * .06; camera.position.y += (Math.random() - .5) * S.shake * .06; }
+ const shake = (S.shake || 0) + k * .35 + (S.bustT || 0);
+ S.shake = Math.max(0, (S.shake || 0) - rdt); S.bustT = Math.max(0, (S.bustT || 0) - rdt);
+ if (shake) { camera.position.x += (Math.random() - .5) * shake * .06; camera.position.y += (Math.random() - .5) * shake * .06; }
  camera.lookAt(S.look);
- placeHands(dt);
- // holds: shine on what you can reach, the loose lamp wobbles
- for (const h of allHolds) {
-  const r = reachable(h) && !S.tween; h.glow.material.opacity += ((r ? .55 + .25 * Math.sin(time * 4) : 0) - h.glow.material.opacity) * Math.min(1, dt * 8);
-  if (h.loose) { h.wobble = Math.max(0, (h.wobble || 0) - dt); h.mesh.rotation.z = Math.sin(time * 30) * .25 * h.wobble + Math.sin(time * 2.3) * .03; }
+ placeHands(rdt);
+ // stamina: hanging by one hand drains it, two hands rest
+ if (['climb', 'descend'].includes(S.mode)) {
+  const n = latched().length, high = latched().some(h => h.y > STAND_REACH);
+  if (high && n === 1) S.stam -= .06 * dt; else if (n === 2) S.stam = Math.min(1, S.stam + .025 * dt);
+  if (S.stam <= 0) tired();
+  S.breathT = (S.breathT || 0) - dt; if (S.stam < .6 && S.breathT < 0) { SFX.breath(1 - S.stam); S.breathT = .6 + S.stam; }
+  S.climbWrongs = S.wrongs - (S.wrongsAt || 0);
+  S.bodyU = latched().length ? latched().reduce((s, h) => s + h.u, 0) / latched().length : .1;
  }
- // walking on the roof
+ for (const h of allHolds) {
+  const r = reachable(h) && !S.tween; h.glow.material.opacity += ((r ? .55 + .25 * Math.sin(time * 4) : 0) - h.glow.material.opacity) * Math.min(1, rdt * 8);
+  if (h.loose) { h.wobble = Math.max(0, (h.wobble || 0) - rdt); h.mesh.rotation.z = Math.sin(time * 30) * .25 * h.wobble + Math.sin(time * 2.3) * .03; }
+ }
+ for (const [kk, s] of Object.entries(SPOTS)) s.mark.material.opacity += (((S.mode === 'roof' && S.lvl === s.lvl && spotOpen(kk)) ? .5 + .3 * Math.sin(time * 3) : 0) - s.mark.material.opacity) * Math.min(1, rdt * 4);
+ if (S.mode === 'walk' || S.mode === 'roof') walkKid(dt);
  if (S.mode === 'roof') {
-  let mv = v3();
-  if (keys.w || keys.arrowup) mv.add(v3(1, 0, 1)); if (keys.s || keys.arrowdown) mv.add(v3(-1, 0, -1));
-  if (keys.a || keys.arrowleft) mv.add(v3(1, 0, -1)); if (keys.d || keys.arrowright) mv.add(v3(-1, 0, 1));
-  if (mv.lengthSq()) S.target = null;
-  else if (S.target) { mv = S.target.clone().sub(kid.position); mv.y = 0; if (mv.length() < .12) { const k = S.onArrive; S.target = null; S.onArrive = null; if (k) arrive(k); mv.set(0, 0, 0); } }
-  if (mv.lengthSq()) {
-   mv.normalize().multiplyScalar(3.2 * dt); const p = kid.position;
-   if (walkable(S.lvl, p.x + mv.x, p.z + mv.z)) p.add(mv); else if (walkable(S.lvl, p.x + mv.x, p.z)) p.x += mv.x; else if (walkable(S.lvl, p.x, p.z + mv.z)) p.z += mv.z; else S.target = null;
-   kid.rotation.y = Math.atan2(mv.x, mv.z); stepT += dt; if (stepT > .28) { stepT = 0; SFX.step(); }
-   kid.userData.legs[0].rotation.x = Math.sin(time * 14) * .5; kid.userData.legs[1].rotation.x = -Math.sin(time * 14) * .5;
-  } else kid.userData.legs.forEach(l => l.rotation.x *= .8);
-  kid.position.y = levelY(S.lvl);
-  for (const b of balls) if (b.state === 'roof' && b.lvl === S.lvl && S.carry < 3 && b.m.position.distanceTo(kid.position.clone().add(v3(0, .09, 0))) < .55) {
-   b.state = 'carried'; b.m.visible = false; S.carry++; SFX.pick(); if (!S.said.ball) { S.said.ball = 1; say(LINES.firstBall); }
+  for (const b of balls) if (b.state === 'roof' && b.lvl === S.lvl && b.m.position.distanceTo(kid.position.clone().add(v3(0, .09, 0))) < .6) {
+   if (S.carry >= 3) { if (!S.said.full) { S.said.full = 1; say(LINES.full); SFX.full(); } continue; }
+   b.state = 'pickup'; S.carry++; SFX.pick(); if (!S.said.ball) { S.said.ball = 1; say(LINES.firstBall); }
+   fly(b.m, b.m.position.clone(), kid.position.clone().add(v3(0, .9, 0)), kid.position.y + 1.4, .25, () => { b.m.visible = false; if (b.state === 'pickup') b.state = 'carried'; });
   }
   if (S.lvl === 'canopy' && memoryCoin.visible && kid.position.distanceTo(v3(6.9, CANOPY, -.3)) < .7) {
-   memoryCoin.visible = false; MC.give?.('school-jump:canopy', 'The school roof'); S.dogHop = 1; SFX.bark();
+   memoryCoin.visible = false; S.coinDone = true; S.coins++; MC.give?.('school-jump:canopy', 'The school roof'); S.dogHop = 1; SFX.bark(); addScore(1000, null);
    if (CR.coinReward) { S.reward = CR.coinReward(T, {scene, camera, from: memoryCoin.position.clone(), coin: memoryCoin, audio: audio(), presentation}); setTimeout(() => say(LINES.coin), 1200); }
    else { SFX.coin(); say(LINES.coin); }
   }
+  if (S.lvl === 'canopy' && !memoryCoin.visible && !S.coinDone) S.coinDone = true;
  }
+ for (const b of balls) if (b.state === 'roof') b.m.position.y = b.home.y + Math.abs(Math.sin(time * 2 + b.bob)) * .04;
  kid.userData.carry.forEach((b, i) => { b.visible = i < S.carry; });
+ S.armSwing = Math.max(0, (S.armSwing || 0) - rdt * 3); kid.userData.arm.rotation.x = -S.armSwing * 2.4;
  if (S.mode === 'hang') { S.hangT += dt; const s = swing(); dotEl.style.left = s * 100 + '%'; kid.rotation.z = (s - .5) * .5; } else kid.rotation.z = 0;
- // dog: follows you along the field edge, hops for a catch, wags
- const dz = Math.max(-6, Math.min(9, kid.visible ? kid.position.z : 2)), D = dog.userData;
- if (!S.dogHome) dog.position.z += (dz - dog.position.z) * Math.min(1, dt * 1.2);
- S.dogHop = Math.max(0, (S.dogHop || 0) - dt * 1.6); dog.position.y = Math.sin(S.dogHop * Math.PI) * .7;
- D.tail.rotation.x = Math.sin(time * (S.carry ? 22 : 8)) * .6;
- if (S.dogParty > 0) { S.dogParty -= dt; dog.rotation.y += dt * 6; dog.position.y = Math.abs(Math.sin(time * 6)) * .4; }
- // cars on a steady rhythm: one every CAR_PERIOD seconds, alternating directions
- let loud = 0, near = 99, anySeen = false;
+ updateDog(dt);
+ // cars on a steady rhythm: one every CAR_PERIOD seconds, alternating lanes, always top right to bottom left
+ let loud = 0, anySeen = false, dread = 0;
+ const me = kid.position.clone().add(v3(0, .8 * kid.scale.y, 0));
  cars.forEach((c, i) => {
   const phase = ((time + i * CAR_PERIOD) % (CAR_PERIOD * 2)), live = phase < CAR_PERIOD;
-  c.dir = i ? -1 : 1; c.active = live;
-  if (!live) { c.g.visible = false; c.beam.intensity = 0; c.wasLive = false; c.brake = 0; return; }
-  if (!c.wasLive) { c.x = -c.dir * 38; c.wasLive = true; }
-  c.g.visible = true; c.x += c.dir * CAR_SPEED * (1 - c.brake * .65) * dt;
-  c.g.position.set(c.x, 0, ROAD_Z + (c.dir > 0 ? .9 : -.9)); c.g.rotation.y = c.dir > 0 ? 0 : Math.PI;
-  c.beam.intensity = 260 * Math.max(0, 1 - Math.abs(c.x) / 40); c.beam.target.position.set(6, H, c.dir > 0 ? -12 : 12); // forward and up at the school (local axes turn with the car)
-  const sees = (S.mode === 'roof') && kid.visible && carSees(c);
-  c.brake += ((sees ? 1 : 0) - c.brake) * Math.min(1, dt * 4); c.tailMat.emissiveIntensity = .6 + c.brake * 3;
-  anySeen ||= sees; const d = Math.abs(c.x - kid.position.x); near = Math.min(near, d); loud = Math.max(loud, Math.max(0, 1 - d / 40));
+  c.active = live;
+  if (live && !c.wasLive) { c.z = CAR_RUN; c.wasLive = true; }
+  if (!live || c.z < -CAR_RUN) { c.g.visible = false; c.shaft.visible = false; c.beam.intensity = 0; if (!live) c.wasLive = false; c.brake = 0; c.active = false; return; }
+  c.g.visible = true; c.z -= CAR_SPEED * (1 - c.brake * .75) * dt;
+  c.g.position.set(c.lane, 0, c.z);
+  const near = 1 - Math.min(1, Math.abs(c.z - 1) / 30);
+  const onWall = S.onWall && S.climb === CLIMB1;
+  // the glance sweeps ahead of the car: across the lower wall while you climb, across the roof once you're up
+  const aim = onWall ? v3(-7, 2.4, c.z - 2.5) : v3(-2.5, H, c.z - 4);
+  c.beam.angle = onWall ? .2 : .5; c.beam.target.position.copy(aim); c.beam.target.updateMatrixWorld();
+  c.beam.intensity = (onWall ? 600 : 240) * near; c.beams.forEach(b => b.material.opacity = .18 + .14 * near);
+  c.g.updateMatrixWorld(); const src = c.beam.getWorldPosition(v3()), d = aim.clone().sub(src), L = d.length();
+  c.shaft.position.copy(src); c.shaft.quaternion.setFromUnitVectors(v3(0, -1, 0), d.normalize()); const rr = L * Math.tan(c.beam.angle) * .8; c.shaft.scale.set(rr, L, rr);
+  c.shaft.material.opacity = .07 * near + .1 * c.brake; c.shaft.visible = true;
+  const watching = (S.mode === 'roof' || (S.mode === 'climb' && offGround())) && me && !S.ended;
+  const sees = watching && carSees(c, me);
+  c.brake += ((sees ? 1 : 0) - c.brake) * Math.min(1, rdt * 4); c.tailMat.emissiveIntensity = .6 + c.brake * 4;
+  if (sees && !c.stung) { c.stung = true; SFX.sting(); }
+  if (!sees && c.brake < .1) c.stung = false;
+  anySeen ||= sees; loud = Math.max(loud, near); if (watching) dread = Math.max(dread, near);
  });
- if (ac) engineUpdate(loud, loud);
- S.seen = anySeen ? S.seen + dt : Math.max(0, S.seen - dt * .7);
- if (S.seen > 2) busted();
+ if (ac) engineUpdate(loud, loud, dread, Math.min(1, S.seen / 2.2));
+ const rate = S.mode === 'climb' ? .6 : 1; // on the wall there is nowhere to hide, so they see you a little slower
+ S.seen = anySeen ? S.seen + rdt * rate : Math.max(0, S.seen - rdt * .7);
+ if (S.seen > 2.2) busted();
+ // meta, the burning lights: the glare floods your eyes (exposure, warmth), a ringing whine climbs, the heart pounds,
+ // the camera closes in and time slows. Nothing covers the world; it gets too bright to bear.
+ renderer.toneMappingExposure += ((1.05 + .75 * k * k) - renderer.toneMappingExposure) * Math.min(1, rdt * 6);
+ hemi.color.setRGB(1, .82 - .1 * k, .69 - .25 * k); hemi.intensity = .75 + .9 * k;
+ if (!S.onWall && !S.armSwing) kid.userData.arm.rotation.x = -2.6 * Math.min(1, k * 2); // shield your eyes
  // meta: heartbeat speeds up while they look; spatial: the ring at your feet fills
- const k = Math.min(1, S.seen / 2);
  if (k > .05 && time > S.beatAt) { SFX.beat(k); S.beatAt = time + (.9 - .5 * k); }
- ring.visible = k > .02 && kid.visible; ring.position.copy(kid.position).add(v3(0, .03, 0));
+ ring.visible = k > .02 && !S.onWall; ring.position.copy(kid.position).add(v3(0, .03, 0));
  ring.geometry.dispose(); ring.geometry = new T.RingGeometry(.5, .72, 40, 1, Math.PI / 2, Math.max(.01, k * Math.PI * 2)); ringMat.color.setHSL(.12 - .12 * k, .95, .6);
- // flights
+ if (!S.onWall) kid.userData.body.scale.y = 1 - .12 * k + (k ? Math.sin(time * 50) * .015 * k : 0); // crouch and tremble while seen
  for (const f of [...flying]) { f.t = Math.min(1, f.t + dt / f.dur); const e = f.t; f.obj.position.lerpVectors(f.from, f.to, e); f.obj.position.y = (1 - e) * (1 - e) * f.from.y + 2 * (1 - e) * e * f.peak + e * e * f.to.y; if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done?.(); } }
  if (memoryCoin.visible) memoryCoin.rotation.z += dt * 2;
- if (S.reward && !S.reward.update(dt)) S.reward = null;
- // the light: dusk deepens slowly; windows and headlights matter more as it does
+ if (S.reward && !S.reward.update(rdt)) S.reward = null;
+ // the light: dusk deepens; windows and streetlamps come up as it does
  const night = Math.min(1, time / 240); scene.background.copy(new T.Color('#c9849a').lerp(NIGHTSKY, night)); sun.intensity = 2.2 - 1.5 * night; M.window.emissiveIntensity = .15 + .9 * night;
+ M.lampGlow.emissiveIntensity = night > .25 ? 2 : 0; streetLamps.forEach(l => l.intensity = night > .25 ? 6 : 0);
  renderer.render(scene, camera);
  requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
-window.schoolJump = {S, startDescent, CLIMB3, grab, allHolds, CLIMB1, CLIMB2, kid, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb};
+window.schoolJump = {S, tapHold, allHolds, CLIMB1, CLIMB2, CLIMB3, kid, dog, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb, startDescent, wallThrow};
 </script>
 </body>
 </html>

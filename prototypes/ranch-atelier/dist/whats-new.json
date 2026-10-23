@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+     "id": "2026-10-23-school-jump-2",
+     "date": "2026-10-23",
+     "title": "The school jump, at golden dusk",
+     "line": "Walk your dog, throw the ball until it lands on the roof, then climb the long wall side-on, one hand at a time. Slow station wagons sweep the roof with their lights. Hide behind the two big walls, because getting caught burns.",
+     "image": "/whats-new/2026-10-23-school-jump-2.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+     "threadTitle": "The school jump",
+     "tour": false,
+     "link": "/studies/school/play.html"
+    },
+    {
       "id": "2026-10-23-grace-basement-3",
       "date": "2026-10-23",
       "title": "Grace's basement, warmed up",
