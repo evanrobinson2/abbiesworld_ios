@@ -1,5 +1,7 @@
 # AW-STUDY-0026 - The School Jump
 
+The game-ready pass (new climb, UX, art, the memory-places review) is AW-STUDY-0032: `SCHOOL_READY_STUDY.md`.
+
 Play: `/studies/school/play.html` (study page `/studies/school/`). Code: `prototypes/ranch-atelier/dist/studies/school/play.html`,
 shared pieces `simulations/coin-reward.mjs` (the gold coin moment) and `simulations/memory-coins.mjs` (one coin count).
 
