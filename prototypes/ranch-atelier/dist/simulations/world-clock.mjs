@@ -34,14 +34,14 @@ function publish() {
 }
 function tick(now) {
   const dt = Math.min(1, (now - last) / 1000); last = now;
-  if (!state.paused) { state.minutes += dt * MIN_PER_SEC * SPEEDS[state.speed]; while (state.minutes >= 1440) { state.minutes -= 1440; state.day++; } if (!state.speed) state.minutes = nowMinutes(new Date()); } // at 1x the clock is the player's own, even after a sleeping tab
+  if (!state.paused) { state.minutes += dt * MIN_PER_SEC * SPEEDS[state.speed]; while (state.minutes >= 1440) { state.minutes -= 1440; state.day++; } if (!state.speed) state.minutes = ((nowMinutes(new Date()) + state.offset) % 1440 + 1440) % 1440; } // at 1x the clock is the player's own, even after a sleeping tab
   publish();
 }
 // Starts the clock (once) and returns the off-screen controls the chronograph presses. Safe to call twice.
 export function startWorldClock({hour = 14} = {}) {
   if (state) return state;
   const saved = load(), now = new Date();
-  state = {minutes: nowMinutes(now), day: 1, weather: saved?.weather ?? 0, season: seasonOf(now), speed: 0, paused: false};
+  state = {minutes: nowMinutes(now), day: 1, weather: saved?.weather ?? 0, season: seasonOf(now), speed: 0, paused: false, offset: 0}; // offset: minutes the player has jumped away from now
   readouts = document.createElement('div'); readouts.hidden = true; readouts.setAttribute('data-feedback-ui', '');
   readouts.innerHTML = `<div id="scene-readouts"><span class="clock-time"></span><span class="clock-date"></span><span class="weather-symbol"></span><span class="weather-name"></span><span class="weather-season"></span></div>
     <button id="pause"><span class="pause-icon"></span><span class="play-icon" hidden></span></button><button id="simulation-speed"><span class="pace-badge"></span></button>
@@ -49,8 +49,8 @@ export function startWorldClock({hour = 14} = {}) {
   document.body.append(readouts);
   const on = (sel, fn) => readouts.querySelector(sel).addEventListener('click', () => { fn(); save(state); publish(); });
   on('#pause', () => { state.paused = !state.paused; });
-  on('#simulation-speed', () => { state.speed = (state.speed + 1) % SPEEDS.length; });
-  on('#scene-clock-control', () => { state.minutes = (Math.floor(state.minutes / 360) + 1) * 360 % 1440; if (state.minutes === 0) state.day++; }); // jumps to the next six o'clock mark
+  on('#simulation-speed', () => { state.speed = (state.speed + 1) % SPEEDS.length; if (!state.speed) state.offset = state.minutes - nowMinutes(new Date()); });
+  on('#scene-clock-control', () => { state.minutes = (Math.floor(state.minutes / 360) + 1) * 360 % 1440; if (state.minutes === 0) state.day++; state.offset = state.minutes - nowMinutes(new Date()); }); // jumps to the next six o'clock mark
   on('#scene-weather-control', () => { state.weather = (state.weather + 1) % WEATHER.length; });
   on('#scene-season-control', () => { state.season = (state.season + 1) % SEASONS.length; });
   last = performance.now(); publish();
