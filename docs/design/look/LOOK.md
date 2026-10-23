@@ -5,7 +5,20 @@ All pages and all studies need to carry this design, and I'm issuing a logo do-o
 Owner: the Design lead thread. Previews: https://claude.ai/artifact/WcNpa9yNKCy4k3ySrWSPL1 (the look and logos) and
 https://claude.ai/artifact/SvCdPuULhWsmVXg2Nx2F7d (the cuirass page with the Legion motif). Sources in `previews/`.
 
-## The idea: the toy table
+## Latest direction (Evan, 2026-10-23 03:29-03:31Z): simple, flat, classy
+
+These override anything below that conflicts:
+- "Too Rome 1999 Total War. I like the colours but cut the gradients, add class." "Terrible. Just simplify." So: flat
+  colour, no gradients, no plaques, no 3D or extruded letters, no ornament. Hairlines and soft shadows only.
+- Font: Roboto everywhere ("use roboto font").
+- Logo: the drawn options are rejected ("I hate it"). For now the mark is just **AW**, simple, on the motif's sign colour.
+- Feedback buttons: **Reject, Chat, Keep** under the right thumb (Reject was dropped by mistake and is back).
+- Request more (cart) has its own camera; the top camera is a shortcut into it. The app should register as a "Send to"
+  (share) destination: the Web Share Target in the manifest works on Android and desktop Chrome; iPhone web apps
+  cannot register, so iPhone gets a one-tap Shortcut instead.
+- Less space between the top bar and the content.
+
+## The idea: the toy table (first proposal, kept for the structure)
 
 Every page is a table standing under the world's own sky. Things sit on it as thick toy pieces you could pick up.
 
@@ -16,7 +29,7 @@ Every page is a table standing under the world's own sky. Things sit on it as th
 4. **Glass is a lens.** Small and floating, it shows the sky through it. Never a frosted sheet over the world.
 5. **Show the thing.** Real art and live 3D on every page; words short. Counters have no words.
 
-Type: Fredoka for names, signs and buttons; Nunito for reading. A motif may swap the sign face only (Legion: Cinzel).
+Type: Roboto (Evan, 2026-10-23). The first proposal used Fredoka and Nunito.
 
 ## Motifs
 
@@ -28,11 +41,11 @@ New motifs are made by Claude with the `motif-maker` skill, on request; there is
 ## Model review and model pages (Evan, 2026-10-23)
 
 - One top bar: home mark, ← sign →, wordless counters (to look at, kept, notes sent), camera, cart.
-- Inspiration on the left (plain text label), MODEL on the right (3D block letters). Frames and text are straight and
+- Inspiration on the left, Model on the right, both plain small labels. Frames and text are straight and
   aligned to the sides ("it was cute but it didn't age well").
 - Turning the model is taught by a white chalk finger with motion, gone at first touch. No words.
-- Feedback is one modality: **Chat** (talk or type in the same place; it dispatches to feedback) and **Keep**. Both
-  sit under the right thumb, bottom right. Voice is a centred overlay orb like ChatGPT's voice mode, with a text field.
+- Feedback is one modality: **Reject**, **Chat** (talk or type in the same place; it dispatches to feedback) and **Keep**.
+  All sit under the right thumb, bottom right. Voice is a centred overlay orb like ChatGPT's voice mode, with a text field.
 - **Request more** is a shopping cart (top right). Each order goes to Claude as a new order and always starts as
   concept art for Evan to pick; it never bypasses the concept stage.
 - **Camera** (top right) uses the device's own camera. PG layer on every photo: photos with faces may be taken, but a
@@ -41,5 +54,5 @@ New motifs are made by Claude with the `motif-maker` skill, on request; there is
 
 ## Logo
 
-Four drawn options in the look preview: A the little floating world (recommended), B the snow globe, C the house A,
-D the planet o. The old badge stays as "Abbie's Ranch", the place. Waiting on Evan's pick.
+Evan rejected the four drawn options (little world, snow globe, house A, planet o). For now the mark is plain "AW".
+The old badge stays as "Abbie's Ranch", the place.
