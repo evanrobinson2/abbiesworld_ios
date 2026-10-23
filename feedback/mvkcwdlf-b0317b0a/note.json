@@ -1,0 +1,14 @@
+{
+  "id": "mvkcwdlf-b0317b0a",
+  "receivedAt": "2026-10-23T02:34:11.965Z",
+  "kind": "model-review",
+  "model": "ranch-bench",
+  "verdict": "accept",
+  "note": "Accepted: Bench (normal)",
+  "page": "/models/ranch-bench",
+  "title": "Model review",
+  "via": "tap",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "hasImage": false,
+  "picture": null
+}

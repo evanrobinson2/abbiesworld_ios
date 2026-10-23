@@ -1,0 +1,14 @@
+{
+  "id": "mvkcweqm-898e3f82",
+  "receivedAt": "2026-10-23T02:34:13.375Z",
+  "kind": "model-review",
+  "model": "ranch-bench-charming",
+  "verdict": "accept",
+  "note": "Accepted: Bench (charming)",
+  "page": "/models/ranch-bench-charming",
+  "title": "Model review",
+  "via": "tap",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "hasImage": false,
+  "picture": null
+}

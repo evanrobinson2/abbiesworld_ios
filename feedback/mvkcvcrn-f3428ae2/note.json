@@ -1,0 +1,14 @@
+{
+  "id": "mvkcvcrn-f3428ae2",
+  "receivedAt": "2026-10-23T02:33:24.182Z",
+  "kind": "model-review",
+  "model": "ranch-apple-tree",
+  "verdict": "accept",
+  "note": "Accepted: Apple tree (normal) — testing I can't hear anything",
+  "page": "/models/ranch-apple-tree",
+  "title": "Model review",
+  "via": "tap",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "hasImage": false,
+  "picture": null
+}
