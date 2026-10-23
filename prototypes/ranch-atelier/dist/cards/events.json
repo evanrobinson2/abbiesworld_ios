@@ -11,7 +11,7 @@
       "number": 1,
       "name": "Paint Rain",
       "type": "event",
-      "subtype": "Sky · a day",
+      "subtype": "Sky \u00b7 a day",
       "rarity": "bloom",
       "artMode": "scene",
       "color": "#ff3fa4",
@@ -33,7 +33,7 @@
       "number": 2,
       "name": "Meteorite",
       "type": "event",
-      "subtype": "Space · a night",
+      "subtype": "Space \u00b7 a night",
       "rarity": "sun",
       "artMode": "scene",
       "color": "#35c8e8",
@@ -60,7 +60,7 @@
       "number": 3,
       "name": "Rain Shower",
       "type": "event",
-      "subtype": "Weather · an hour",
+      "subtype": "Weather \u00b7 an hour",
       "rarity": "seed",
       "artMode": "scene",
       "color": "#4aa3ff",
@@ -82,7 +82,7 @@
       "number": 4,
       "name": "Thunderstorm",
       "type": "event",
-      "subtype": "Weather · an hour",
+      "subtype": "Weather \u00b7 an hour",
       "rarity": "bloom",
       "artMode": "scene",
       "color": "#ffe45c",
@@ -108,7 +108,7 @@
       "number": 5,
       "name": "Snowfall",
       "type": "event",
-      "subtype": "Weather · a day",
+      "subtype": "Weather \u00b7 a day",
       "rarity": "sprout",
       "artMode": "scene",
       "color": "#9fd4ff",
@@ -130,7 +130,7 @@
       "number": 6,
       "name": "Rainbow",
       "type": "event",
-      "subtype": "Sky · a few minutes",
+      "subtype": "Sky \u00b7 a few minutes",
       "rarity": "harvest",
       "artMode": "scene",
       "color": "#ff8fb8",
@@ -151,7 +151,7 @@
       "number": 7,
       "name": "Golden Dawn",
       "type": "event",
-      "subtype": "Time · morning",
+      "subtype": "Time \u00b7 morning",
       "rarity": "seed",
       "artMode": "scene",
       "color": "#ffcf55",
@@ -173,7 +173,7 @@
       "number": 8,
       "name": "Starry Night",
       "type": "event",
-      "subtype": "Time · night",
+      "subtype": "Time \u00b7 night",
       "rarity": "sprout",
       "artMode": "scene",
       "color": "#8f9bff",
@@ -195,7 +195,7 @@
       "number": 9,
       "name": "Morning Fog",
       "type": "event",
-      "subtype": "Weather · a morning",
+      "subtype": "Weather \u00b7 a morning",
       "rarity": "seed",
       "artMode": "scene",
       "color": "#c9d8d6",
@@ -217,7 +217,7 @@
       "number": 10,
       "name": "Northern Lights",
       "type": "event",
-      "subtype": "Sky · a night",
+      "subtype": "Sky \u00b7 a night",
       "rarity": "sun",
       "artMode": "scene",
       "color": "#59e6b0",
@@ -232,6 +232,94 @@
       "art": {
         "status": "final"
       }
+    },
+    {
+      "id": "fireball",
+      "number": 11,
+      "name": "Fireball Drop",
+      "type": "event",
+      "subtype": "Sky \u00b7 a day",
+      "rarity": "sun",
+      "artMode": "scene",
+      "color": "#ff8a1f",
+      "stats": [
+        {
+          "icon": "sun",
+          "value": 1
+        }
+      ],
+      "rules": "A cartoon fireball bonks the ground. Warm glow, a scorch mark, nobody hurt.",
+      "flavour": "Bub watches it, then wags.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "fireball"
+    },
+    {
+      "id": "waterball",
+      "number": 12,
+      "name": "Giant Waterball",
+      "type": "event",
+      "subtype": "Sky \u00b7 a day",
+      "rarity": "bloom",
+      "artMode": "scene",
+      "color": "#58b8ff",
+      "stats": [
+        {
+          "icon": "star",
+          "value": 1
+        }
+      ],
+      "rules": "A huge wobbly water balloon splashes down. Puddles for everyone.",
+      "flavour": "The ducks arrive first.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "waterball"
+    },
+    {
+      "id": "cats-dogs",
+      "number": 13,
+      "name": "Cats and Dogs",
+      "type": "event",
+      "subtype": "Weather \u00b7 a day",
+      "rarity": "harvest",
+      "artMode": "scene",
+      "color": "#b07a4a",
+      "stats": [
+        {
+          "icon": "paw",
+          "value": 1
+        }
+      ],
+      "rules": "It rains cats and dogs! They land softly, stay, and live their normal lives.",
+      "flavour": "There is enough food and water for all.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "cats-dogs"
+    },
+    {
+      "id": "tie-dye",
+      "number": 14,
+      "name": "Tie-Dye Mode",
+      "type": "event",
+      "subtype": "World \u00b7 a day",
+      "rarity": "seed",
+      "artMode": "scene",
+      "color": "#8a5cff",
+      "stats": [
+        {
+          "icon": "star",
+          "value": 1
+        }
+      ],
+      "rules": "The whole world, sky and all, swirls in tie-dye colours. A sitar strums.",
+      "flavour": "Far out.",
+      "art": {
+        "status": "final"
+      },
+      "scene": "tie-dye"
     }
   ]
 }
