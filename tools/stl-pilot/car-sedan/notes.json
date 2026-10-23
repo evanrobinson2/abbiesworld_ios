@@ -1,0 +1,77 @@
+{
+  "slug": "car-sedan",
+  "stages": {
+    "import": {
+      "seconds": 0.0,
+      "tris": 2944,
+      "files": [
+        "source_body.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.21,
+      "tris": 3000,
+      "open_edges_before": 256,
+      "open_edges_after": 192,
+      "dust_shells_removed": 0
+    },
+    "orient_and_wheels": {
+      "seconds": 0.0,
+      "tris": 3000,
+      "wheels": 4,
+      "body_dims_mm": [
+        4.4,
+        2.0,
+        1.2
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.0,
+      "tris": 3000,
+      "final_size_m_wh_l": [
+        2.056,
+        1.352,
+        4.4
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 7.01,
+      "tris": 1664,
+      "parts": {
+        "body": {
+          "before": 784,
+          "after": 784
+        },
+        "wheel": {
+          "before": 554,
+          "after": 220
+        }
+      },
+      "texture_px": 512
+    },
+    "export": {
+      "seconds": 0.16,
+      "tris": 1664,
+      "glb": "car-sedan.glb",
+      "bytes": 155300
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 4500,
+  "pipeline": "stl_cars.py",
+  "wheel_shells_found": 4,
+  "scale_to_metres": {
+    "factor": 1.0030775970516865,
+    "final_size_m": [
+      2.056,
+      1.352,
+      4.4
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 1664,
+  "high_poly_tris": 784,
+  "wheel_count": 4,
+  "script_total_s": 7.74,
+  "process_wall_s": 8.66
+}

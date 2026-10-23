@@ -1,0 +1,23 @@
+{
+  "slug": "car-concept",
+  "title": "Concept sports car",
+  "model_url": "https://www.printables.com/model/1554985-low-poly-print-in-place-futuristic-model-car",
+  "author": "SirJellybeans",
+  "author_url": "https://www.printables.com/@SirJellybeans",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "category": "toy car",
+  "origin": "author's own model; the Printables picture is marked AI-generated",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_body.stl",
+      "sha256": "e52828cdf96996b36f898d377b66178bf39fe6be8e2be742664b70f84616a577",
+      "bytes": 44511884
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}
