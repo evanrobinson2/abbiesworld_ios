@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 450,
+ "total": 460,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -126,6 +126,16 @@
    "what": "charm-tardigrade 3d",
    "credits": 30,
    "at": "2026-10-23T19:49:28Z"
+  },
+  {
+   "what": "A3-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:15:32Z"
+  },
+  {
+   "what": "A3-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:15:32Z"
   }
  ]
 }
