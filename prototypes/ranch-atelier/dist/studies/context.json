@@ -1203,6 +1203,73 @@
     }
    ],
    "recorded": "2026-10-23, as the study was made"
+  },
+  "meshy-heroes": {
+   "use": [
+    "llm-3d-modeling"
+   ],
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Mass Effect: Andromeda",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1238000",
+     "note": "many alien species read clearly from silhouette alone"
+    },
+    {
+     "k": "oracle",
+     "t": "Starfield",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1716740",
+     "note": "one base body, shaped by sliders, takes any outfit"
+    },
+    {
+     "k": "oracle",
+     "t": "Fallout 4",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=377160",
+     "note": "body shape triangle; gear fits every body"
+    },
+    {
+     "k": "oracle",
+     "t": "Valheim",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=892970",
+     "note": "low-poly faceted bodies that still read as heroes"
+    },
+    {
+     "k": "canon",
+     "t": "Base roster (40 PG bodies)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/BASE_ROSTER.md"
+    },
+    {
+     "k": "canon",
+     "t": "Moon heroes plan",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/PLAN.md"
+    },
+    {
+     "k": "canon",
+     "t": "Faceted Hero art direction (AW-STUDY-0029)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/ART_DIRECTION.html"
+    },
+    {
+     "k": "canon",
+     "t": "Bruiser scale pipeline and gear kit",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/scale/README.md"
+    },
+    {
+     "k": "canon",
+     "t": "Bodies human canon",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/human-canon.json"
+    },
+    {
+     "k": "reference",
+     "t": "Meshy image-to-3D API",
+     "href": "https://docs.meshy.ai/en/api/image-to-3d"
+    },
+    {
+     "k": "tutorial",
+     "t": "Blender manual: armature skinning and weights",
+     "href": "https://docs.blender.org/manual/en/latest/animation/armatures/skinning/index.html"
+    }
+   ],
+   "recorded": "2026-10-23, recorded while drafting the roster"
   }
  }
 }

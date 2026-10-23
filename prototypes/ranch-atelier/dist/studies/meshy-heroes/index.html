@@ -1,0 +1,434 @@
+<meta charset="utf-8">
+<title>Meshy Hero Characters</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Casting call on the Moon Heroes briefing ground: roster grid of clay plinths, the route and budget beside it. */
+:root{--bg:#eef0f3;--paper:#ffffff;--ink:#1d2129;--muted:#5a6170;--line:#d3d8e0;--suit:#e8762c;--cyan:#1aa7b8;--clay:#e4e6ea;
+--display:"Barlow Condensed",system-ui,sans-serif;--body:"Source Sans 3",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--paper:#171b24;--ink:#e7eaf0;--muted:#9aa3b3;--line:#2a3140;--suit:#f08a45;--cyan:#3fd0de;--clay:#232937;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1118;--paper:#171b24;--ink:#e7eaf0;--muted:#9aa3b3;--line:#2a3140;--suit:#f08a45;--cyan:#3fd0de;--clay:#232937;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}}
+main{display:flex;flex-direction:column;gap:22px;min-width:0}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--suit)}
+h1{font:700 clamp(36px,6vw,58px)/1 var(--display);margin:0;text-wrap:balance}
+h2{font:700 30px/1.1 var(--display);margin:14px 0 0;text-wrap:balance}
+p{margin:0;max-width:72ch}.lede{font-size:19px}.muted{color:var(--muted)}
+img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+.status{display:flex;flex-wrap:wrap;gap:10px 22px;font:500 13px/1.3 var(--mono);color:var(--muted)}
+.status b{color:var(--ink);font-variant-numeric:tabular-nums}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.row figure{margin:0;display:grid;gap:6px}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.hero{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px;display:grid;gap:8px;align-content:start;min-width:0}
+.blank{aspect-ratio:3/4;border-radius:10px;background:radial-gradient(ellipse 40% 8% at 50% 92%,color-mix(in srgb,var(--ink) 14%,transparent),transparent),linear-gradient(var(--clay),var(--bg));display:grid;place-items:center}
+.blank span{font:700 34px/1 var(--display);color:color-mix(in srgb,var(--ink) 22%,transparent)}
+.hero[data-group="hero"] .blank span,.hero[data-group="creature"] .blank span{color:color-mix(in srgb,var(--suit) 55%,transparent)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+@media (max-width:420px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.halves{display:grid;grid-template-columns:1fr 1fr;gap:8px}.half{display:grid;gap:6px;align-content:start;min-width:0}
+.blank.clay{background:radial-gradient(ellipse 40% 8% at 50% 92%,color-mix(in srgb,var(--ink) 14%,transparent),transparent),linear-gradient(color-mix(in srgb,var(--suit) 22%,var(--clay)),var(--bg))}
+.blank.aint{background:radial-gradient(ellipse 40% 8% at 50% 92%,color-mix(in srgb,var(--ink) 14%,transparent),transparent),linear-gradient(135deg,color-mix(in srgb,var(--cyan) 26%,var(--clay)),color-mix(in srgb,var(--suit) 18%,var(--bg)))}
+.blank.clay span,.blank.aint span{font-size:22px;color:color-mix(in srgb,var(--ink) 40%,transparent)}
+.meta{display:grid;gap:2px}.meta b{font:700 19px/1.1 var(--display)}.sub{font:500 11px/1.3 var(--mono);color:var(--muted)}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font:500 10.5px/1 var(--mono);padding:5px 7px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
+.pill.done,.pill.picked{border-color:var(--cyan);color:var(--cyan)}.pill.running{border-color:var(--suit);color:var(--suit)}
+details summary{cursor:pointer;font:500 11px/1.3 var(--mono);color:var(--muted)}
+code{font:500 11.5px/1.5 var(--mono);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px;display:block;white-space:pre-wrap;word-break:break-word;margin-top:6px}
+ol.route{display:grid;gap:10px;padding-left:22px;margin:0;max-width:78ch}ol.route li::marker{color:var(--suit);font-weight:700}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:grid;gap:16px;min-width:0}
+@media (max-width:900px){.side{position:static}}
+.budget{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:8px}
+.budget div{display:flex;justify-content:space-between;gap:10px;font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:6px;background:var(--bg);overflow:hidden;border:1px solid var(--line)}.bar i{display:block;height:100%;background:var(--suit)}
+.ctx-aside{max-width:none!important;margin:0!important}
+:root{--aw-ink:var(--ink);--aw-soft:var(--muted);--aw-line:var(--line);--aw-bg:var(--paper);--aw-accent:var(--suit);--aw-on-accent:#fff;--aw-display:var(--display);--aw-font:var(--body)}
+a{color:inherit}
+</style>
+<div class="wrap">
+<main>
+ <header style="display:grid;gap:10px">
+  <span class="eyebrow">AW-STUDY-0043 · Roster for your read-ahead</span>
+  <h1>Meshy hero characters</h1>
+  <p class="lede">First up: the Moon astronauts for the FPS, each in two looks side by side, plasticine claymation and painterly. Behind them, the 40 smooth PG base bodies and the story heroes. None has been run in Meshy yet. Each one gets a Midjourney turnaround first, then one Meshy run, then our Blender cleanup, gear and a rig.</p>
+  <div class="status"><span>Run in Meshy <b>0 of 57</b></span><span>Credits spent <b>0</b></span><span>Next: the 6 astronauts in both looks</span></div>
+ </header>
+
+ <section style="display:grid;gap:12px">
+  <h2>Moon astronauts, two looks</h2>
+  <p class="muted">Left: plasticine, like a handmade stop-motion clay figure with thumbprints, run untextured and shaded as clay in the game. Right: painterly, hand-painted brush strokes and hard graphic shapes, run with Meshy's paint on. The look is ours; no studio's characters are copied.</p>
+  <div class="grid2"><article class="hero astro"><div class="meta"><b>Abbie</b><span class="sub">A1 · pink suit lights</span></div>
+ <div class="halves"><div class="half"><div class="blank clay"><span>Plasticine</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Plasticine prompt</summary><code>cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2</code></details></div><div class="half"><div class="blank aint"><span>Painterly</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Painterly prompt</summary><code>cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2</code></details></div></div></article>
+<article class="hero astro"><div class="meta"><b>Ani</b><span class="sub">A2 · purple suit lights</span></div>
+ <div class="halves"><div class="half"><div class="blank clay"><span>Plasticine</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Plasticine prompt</summary><code>cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2</code></details></div><div class="half"><div class="blank aint"><span>Painterly</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Painterly prompt</summary><code>cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2</code></details></div></div></article>
+<article class="hero astro"><div class="meta"><b>Daddy</b><span class="sub">A3 · orange suit lights</span></div>
+ <div class="halves"><div class="half"><div class="blank clay"><span>Plasticine</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Plasticine prompt</summary><code>adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2</code></details></div><div class="half"><div class="blank aint"><span>Painterly</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Painterly prompt</summary><code>adult man about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2</code></details></div></div></article>
+<article class="hero astro"><div class="meta"><b>Commander</b><span class="sub">A4 · cyan suit lights</span></div>
+ <div class="halves"><div class="half"><div class="blank clay"><span>Plasticine</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Plasticine prompt</summary><code>adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2</code></details></div><div class="half"><div class="blank aint"><span>Painterly</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Painterly prompt</summary><code>adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2</code></details></div></div></article>
+<article class="hero astro"><div class="meta"><b>Engineer</b><span class="sub">A5 · yellow suit lights</span></div>
+ <div class="halves"><div class="half"><div class="blank clay"><span>Plasticine</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Plasticine prompt</summary><code>stocky adult man astronaut engineer, tool belt, yellow suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2</code></details></div><div class="half"><div class="blank aint"><span>Painterly</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Painterly prompt</summary><code>stocky adult man astronaut engineer, tool belt, yellow suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2</code></details></div></div></article>
+<article class="hero astro"><div class="meta"><b>Alien crewmate</b><span class="sub">A6 · green suit lights</span></div>
+ <div class="halves"><div class="half"><div class="blank clay"><span>Plasticine</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Plasticine prompt</summary><code>friendly small grey alien crewmate, big eyes, green suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2</code></details></div><div class="half"><div class="blank aint"><span>Painterly</span></div><div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+  <details><summary>Painterly prompt</summary><code>friendly small grey alien crewmate, big eyes, green suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2</code></details></div></div></article></div>
+ </section>
+
+ <section style="display:grid;gap:12px">
+  <h2>What each one becomes</h2>
+  <div class="row">
+   <figure><img src="img/trio.jpg" alt="Daddy, the Star Child and Abbie on the Moon"><figcaption>The Moon art they come from</figcaption></figure>
+   <figure><img src="img/g.jpg" alt="Meshy brute on top, our cleaned-up version below"><figcaption>Meshy (top) after our cleanup (bottom): 99% match at 3,000 faces</figcaption></figure>
+   <figure><img src="img/gear.jpg" alt="One gear kit on two different bodies"><figcaption>One gear kit fits any body</figcaption></figure>
+  </div>
+ </section>
+
+ <section style="display:grid;gap:12px">
+  <h2>Story heroes</h2>
+  <p class="muted">Fully dressed in the Faceted Hero look, each with their own accent light. Abbie and Ani stay cartoon kids, never drawn from a photo.</p>
+  <div class="grid"><article class="hero" data-group="hero">
+ <div class="blank"><span>S1</span></div>
+ <div class="meta"><b>Abbie</b><span class="sub">S1 · pink accent</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>Abbie, cartoon girl hero about 4.5 heads tall, copper bob haircut, blue eyes, pink suit lights, front side and back views of the same character, A-pose with arms a little away from the body, orthographic, square to the camera, full body, faceted low-poly hero style, gunmetal suit with accent lights, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="hero">
+ <div class="blank"><span>S2</span></div>
+ <div class="meta"><b>Ani</b><span class="sub">S2 · purple accent</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>Ani, cartoon girl hero about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple suit lights, front side and back views of the same character, A-pose with arms a little away from the body, orthographic, square to the camera, full body, faceted low-poly hero style, gunmetal suit with accent lights, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="hero">
+ <div class="blank"><span>S3</span></div>
+ <div class="meta"><b>Daddy</b><span class="sub">S3 · orange accent</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>Daddy, adult explorer about 7.5 heads tall, bald, salt and pepper beard, orange suit lights, no helmet, front side and back views of the same character, A-pose with arms a little away from the body, orthographic, square to the camera, full body, faceted low-poly hero style, gunmetal suit with accent lights, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="hero">
+ <div class="blank"><span>S4</span></div>
+ <div class="meta"><b>Star Child</b><span class="sub">S4 · cyan accent</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>Star Child, small glowing glass crystal alien with cat-like ear points, friendly face, cyan glow, front side and back views of the same creature, orthographic, square to the camera, full body, faceted low-poly glass and crystal planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="creature">
+ <div class="blank"><span>S5</span></div>
+ <div class="meta"><b>Gem bug</b><span class="sub">S5 · cyan accent</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>gem bug, friendly crystal beetle creature, six legs, cyan gem shell, PG, front side and back views of the same creature, orthographic, square to the camera, full body, faceted low-poly glass and crystal planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article></div>
+ </section>
+
+ <section style="display:grid;gap:12px">
+  <h2>The 40 base bodies</h2>
+  <p class="muted">Adults and creatures only, smooth like a store mannequin, bald, A-pose, white clay. Women and men keep true adult shapes. These are what all the gear, outfits and faces go on.</p>
+  <div class="grid"><article class="hero" data-group="base">
+ <div class="blank"><span>B01</span></div>
+ <div class="meta"><b>Average human</b><span class="sub">B01 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>average adult woman, true adult proportions, natural chest, waist and hips, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B02</span></div>
+ <div class="meta"><b>Average human</b><span class="sub">B02 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>average adult man, true adult proportions, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B03</span></div>
+ <div class="meta"><b>Athletic hero</b><span class="sub">B03 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>athletic heroic adult woman, toned, true adult proportions, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B04</span></div>
+ <div class="meta"><b>Athletic hero</b><span class="sub">B04 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>athletic heroic adult man, broad shoulders, toned, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B05</span></div>
+ <div class="meta"><b>Heavy and strong</b><span class="sub">B05 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>heavy strong adult woman, broad and solid, true adult proportions, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B06</span></div>
+ <div class="meta"><b>Heavy and strong</b><span class="sub">B06 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>heavy strong adult man, big barrel chest, thick limbs, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B07</span></div>
+ <div class="meta"><b>Tall and lean</b><span class="sub">B07 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>tall lean adult woman, long limbs, true adult proportions, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B08</span></div>
+ <div class="meta"><b>Tall and lean</b><span class="sub">B08 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>tall lean adult man, long limbs, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B09</span></div>
+ <div class="meta"><b>Elder</b><span class="sub">B09 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>elderly adult woman, slight stoop, softer shape, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B10</span></div>
+ <div class="meta"><b>Elder</b><span class="sub">B10 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>elderly adult man, slight stoop, softer shape, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B11</span></div>
+ <div class="meta"><b>Short and stocky</b><span class="sub">B11 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>short stocky adult woman, compact and sturdy, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B12</span></div>
+ <div class="meta"><b>Short and stocky</b><span class="sub">B12 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>short stocky adult man, compact and sturdy, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B13</span></div>
+ <div class="meta"><b>Elf</b><span class="sub">B13 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>tall slender elf woman, long pointed ears, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B14</span></div>
+ <div class="meta"><b>Elf</b><span class="sub">B14 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>tall slender elf man, long pointed ears, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B15</span></div>
+ <div class="meta"><b>Dwarf</b><span class="sub">B15 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>short broad dwarf woman, big hands, sturdy legs, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B16</span></div>
+ <div class="meta"><b>Dwarf</b><span class="sub">B16 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>short broad dwarf man, big hands, sturdy legs, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B17</span></div>
+ <div class="meta"><b>Orc</b><span class="sub">B17 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>muscular orc woman, small tusks, heavy brow, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B18</span></div>
+ <div class="meta"><b>Orc</b><span class="sub">B18 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>bruiser orc man, tusks, heavy brow, huge shoulders, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B19</span></div>
+ <div class="meta"><b>Halfling</b><span class="sub">B19 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>small halfling adult woman, adult proportions at small scale, large feet, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B20</span></div>
+ <div class="meta"><b>Halfling</b><span class="sub">B20 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>small halfling adult man, adult proportions at small scale, large feet, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B21</span></div>
+ <div class="meta"><b>Goblin</b><span class="sub">B21 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>wiry goblin woman, big pointed ears, long fingers, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B22</span></div>
+ <div class="meta"><b>Goblin</b><span class="sub">B22 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>wiry goblin man, big pointed ears, long fingers, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B23</span></div>
+ <div class="meta"><b>Troll / giant</b><span class="sub">B23 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>huge troll giant man, long arms, hunched shoulders, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B24</span></div>
+ <div class="meta"><b>Ogress / giantess</b><span class="sub">B24 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>huge ogress giantess, broad and tall, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B25</span></div>
+ <div class="meta"><b>Lizardfolk</b><span class="sub">B25 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>lizardfolk woman, reptile head, long tail, scaled planes, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B26</span></div>
+ <div class="meta"><b>Lizardfolk</b><span class="sub">B26 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>lizardfolk man, reptile head, long tail, scaled planes, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B27</span></div>
+ <div class="meta"><b>Catfolk</b><span class="sub">B27 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>catfolk woman, cat ears, tail, digitigrade legs, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B28</span></div>
+ <div class="meta"><b>Catfolk</b><span class="sub">B28 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>catfolk man, cat ears, tail, digitigrade legs, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B29</span></div>
+ <div class="meta"><b>Minotaur / bovine</b><span class="sub">B29 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>bovine minotaur woman, small horns, hooves, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B30</span></div>
+ <div class="meta"><b>Minotaur / bovine</b><span class="sub">B30 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>minotaur man, big horns, hooves, broad chest, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B31</span></div>
+ <div class="meta"><b>Grey alien</b><span class="sub">B31 · Either</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>slender grey alien, large head, big almond eyes, thin limbs, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B32</span></div>
+ <div class="meta"><b>Insectoid biped</b><span class="sub">B32 · Either</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>insectoid alien biped with four arms, segmented plates, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B33</span></div>
+ <div class="meta"><b>Crystal being</b><span class="sub">B33 · Either</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>adult crystal being made of glass facets, kin of the Star Child, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B34</span></div>
+ <div class="meta"><b>Amphibian alien</b><span class="sub">B34 · Either</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>smooth frog-like amphibian alien, wide mouth, long fingers, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B35</span></div>
+ <div class="meta"><b>Heavy-gravity alien</b><span class="sub">B35 · Either</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>wide short heavy-gravity alien, armoured plates, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B36</span></div>
+ <div class="meta"><b>Tentacle-armed alien</b><span class="sub">B36 · Either</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>alien with tentacle arms, smooth dome head, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B37</span></div>
+ <div class="meta"><b>Robot / android</b><span class="sub">B37 · Either</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>robot android frame, panel lines, mechanical joints, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B38</span></div>
+ <div class="meta"><b>Golem</b><span class="sub">B38 · Either</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>stone golem made of large rock planes, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B39</span></div>
+ <div class="meta"><b>Winged humanoid</b><span class="sub">B39 · Woman</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>winged humanoid woman, large feathered wings folded on the back, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article>
+<article class="hero" data-group="base">
+ <div class="blank"><span>B40</span></div>
+ <div class="meta"><b>Centaur</b><span class="sub">B40 · Man</span></div>
+ <div class="pills"><span class="pill queued">Picture · Waiting</span><span class="pill queued">Meshy · Waiting</span></div>
+ <details><summary>Midjourney prompt</summary><code>centaur man, horse body, human torso, smooth featureless seamless store mannequin, bald, PG, no anatomical detail, A-pose with arms a little away from the body, front side and back views of the same figure, orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, plain light grey background, even studio light --ar 3:2</code></details>
+</article></div>
+ </section>
+
+ <section style="display:grid;gap:12px">
+  <h2>How each hero is made</h2>
+  <ol class="route">
+   <li>A Midjourney turnaround (front, side, back) on your Mac. Fast while you're around, Relax when you're not.</li>
+   <li>One Meshy image-to-3D run, untextured, 20 credits. Your Mac copies the key from the clipboard; it is never saved.</li>
+   <li>Our cleanup: weld, cut into named body rings, rebuild at 6,000 to 12,000 faces, real material names.</li>
+   <li>The gear kit fits it automatically, then a rig with proper weights for Character Studio.</li>
+   <li>Every model goes on one page beside its picture, spinnable, same camera.</li>
+  </ol>
+ </section>
+</main>
+<aside class="side">
+ <div class="budget">
+  <span class="eyebrow">Meshy budget</span>
+  <div><span>Cap</span><b>2,000</b></div>
+  <div><span>One run each</span><b>1,200</b></div>
+  <div><span>Astronauts, both looks</span><b>300</b></div>
+  <div><span>Left for redos</span><b>800</b></div>
+  <div class="bar"><i style="width:0%"></i></div>
+  <span class="sub">0 spent. The astronauts go first (300); the rest wait on how they look.</span>
+ </div>
+ <aside class="ctx-aside" style="max-width:340px;margin:24px 0 24px auto"><style>/* The context engineering card (look/context-card.mjs). Uses the --aw-* tokens from theme/boot.js. */
+.ctx-card{display:grid;gap:10px;font:14px/1.45 var(--aw-font,system-ui,sans-serif);color:var(--aw-ink,#2b211a)}
+.ctx-card h3{margin:0;font:600 17px/1.2 var(--aw-display,inherit)}
+.ctx-lead{margin:0;color:var(--aw-soft,#6b5d52)}
+.ctx-kind{border:1px solid var(--aw-line,#0002);border-radius:14px;background:var(--aw-bg,#fff);padding:0 12px}
+.ctx-kind summary{display:flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none}
+.ctx-kind summary::-webkit-details-marker{display:none}
+.ctx-kind summary::after{content:'';margin-left:auto;width:7px;height:7px;border:solid var(--aw-soft,#6b5d52);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.ctx-kind[open] summary::after{transform:rotate(-135deg)}
+.ctx-kind summary b{font-weight:600}
+.ctx-kind summary i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--aw-accent,#7a4b2a);color:var(--aw-on-accent,#fff)}
+.ctx-kind summary i:empty{display:none}
+.ctx-kind ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+.ctx-kind li{display:grid;gap:1px}
+.ctx-kind a{color:var(--aw-ink,#2b211a);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 30%,transparent);text-underline-offset:2px}
+.ctx-kind a:hover{text-decoration-color:currentColor}
+.ctx-kind small{color:var(--aw-soft,#6b5d52);font-size:12px}
+.ctx-none{margin:0 0 10px;color:var(--aw-soft,#6b5d52);font-style:italic}
+.ctx-foot{margin:0;font-size:12px;color:var(--aw-soft,#6b5d52)}
+.ctx-foot a{color:inherit}
+</style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
+  <p class="ctx-lead">What this study drew on.</p>
+  <details class="ctx-kind" open><summary><b>Oracle consultation</b><i>4</i></summary>
+   <ul><li><a href="https://abbies-game-oracle.vercel.app/game?id=1238000" target="_blank" rel="noopener">Mass Effect: Andromeda</a><small>many alien species read clearly from silhouette alone</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=1716740" target="_blank" rel="noopener">Starfield</a><small>one base body, shaped by sliders, takes any outfit</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=377160" target="_blank" rel="noopener">Fallout 4</a><small>body shape triangle; gear fits every body</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=892970" target="_blank" rel="noopener">Valheim</a><small>low-poly faceted bodies that still read as heroes</small></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i>1</i></summary>
+   <ul><li><a href="https://docs.blender.org/manual/en/latest/animation/armatures/skinning/index.html" target="_blank" rel="noopener">Blender manual: armature skinning and weights</a></li></ul></details><details class="ctx-kind"><summary><b>Research</b><i>7</i></summary>
+   <ul><li><a href="https://arxiv.org/abs/2508.08228" target="_blank" rel="noopener">LL3M: Large Language 3D Modelers</a><small>via LLMs that model in Blender (Oracle research digest)</small></li><li><a href="https://arxiv.org/abs/2403.01248" target="_blank" rel="noopener">SceneCraft (ICML 2024)</a><small>via LLMs that model in Blender (Oracle research digest)</small></li><li><a href="https://arxiv.org/abs/2404.17672" target="_blank" rel="noopener">BlenderAlchemy (ECCV 2024)</a><small>via LLMs that model in Blender (Oracle research digest)</small></li><li><a href="https://arxiv.org/abs/2502.08884" target="_blank" rel="noopener">ShapeLib</a><small>via LLMs that model in Blender (Oracle research digest)</small></li><li><a href="https://arxiv.org/abs/2410.05340" target="_blank" rel="noopener">CADCodeVerify (ICLR 2025)</a><small>via LLMs that model in Blender (Oracle research digest)</small></li><li><a href="https://arxiv.org/abs/2504.01786" target="_blank" rel="noopener">BlenderGym (CVPR 2025)</a><small>via LLMs that model in Blender (Oracle research digest)</small></li><li><a href="https://arxiv.org/abs/2609.06535" target="_blank" rel="noopener">3DHarnessBench</a><small>via LLMs that model in Blender (Oracle research digest)</small></li></ul></details><details class="ctx-kind" open><summary><b>Our canon</b><i>6</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/BASE_ROSTER.md" target="_blank" rel="noopener">Base roster (40 PG bodies)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/PLAN.md" target="_blank" rel="noopener">Moon heroes plan</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/ART_DIRECTION.html" target="_blank" rel="noopener">Faceted Hero art direction (AW-STUDY-0029)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/scale/README.md" target="_blank" rel="noopener">Bruiser scale pipeline and gear kit</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/human-canon.json" target="_blank" rel="noopener">Bodies human canon</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/llm-3d-modeling.md" target="_blank" rel="noopener">LLMs that model in Blender (Oracle research digest)</a></li></ul></details><details class="ctx-kind" open><summary><b>References</b><i>1</i></summary>
+   <ul><li><a href="https://docs.meshy.ai/en/api/image-to-3d" target="_blank" rel="noopener">Meshy image-to-3D API</a></li></ul></details>
+  <p class="ctx-foot">Recorded 2026-10-23, recorded while drafting the roster. <a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
+<p class="ctx-foot"><a href="https://app.abbies.world/studies/#meshy-heroes">Live study page</a></p></aside>
+
+</aside>
+</div>
