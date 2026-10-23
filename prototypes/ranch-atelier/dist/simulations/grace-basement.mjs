@@ -8,7 +8,8 @@ import {DISKS, drawCoin} from './grace-dos.mjs';
 // World units are metres; x runs along the room (stairs at 0..3), y is up, the back wall is at z = -1.5 and the
 // cutaway front is open. Everything here is world layer: in the fiction, perceivable.
 export const ROOM = {x0: -.3, x1: 8.3, back: -1.5, ceil: 2.6, landing: 1.6, stairs: [.9, 2.9], walkZ: -.42,
- chair: {x: 4.62, z: -.62}, desk: {x0: 4.85, x1: 6.25, z0: -.98, z1: -.3, top: .76}, bulb: {x: 5.25, y: 2.02, z: -.62}, switch: {x: 1.02, y: 2.62}};
+ chair: {x: 4.62, z: -.62}, desk: {x0: 4.85, x1: 6.25, z0: -.98, z1: -.3, top: .76}, bulb: {x: 5.25, y: 2.02, z: -.62}, switch: {x: 1.07, y: 2.62},
+ lamp1: {x: 3.3, y: 2.2, z: -.75}, outlet: {x: 5.95, y: .32}};
 
 // Walkable floor height under x: the landing, the stairs, then the concrete.
 export function floorY(x) {
@@ -59,10 +60,13 @@ export function createBasement() {
  box('door slab', .74, 1.98, .05, M('painted door', {color: '#7b6a55'}), .37, .99, 0, door).position.z = .03;
  box('door knob', .05, .05, .06, M('brass knob', {color: '#b0903a', metalness: .6, roughness: .4}), .66, .95, .08, door);
  door.rotation.y = -.42;
- const sw = new T.Group(); sw.name = 'light switch'; sw.position.set(ROOM.switch.x, ROOM.switch.y, ROOM.back + .01); root.add(sw);
- box('switch plate', .08, .12, .015, M('switch plate', {color: '#d8d0bd'}), 0, 0, 0, sw);
- const toggle = box('switch toggle', .018, .04, .03, M('switch toggle', {color: '#e8e2d2'}), 0, -.015, .015, sw);
- const glowDot = box('glow-in-the-dark dot', .02, .02, .005, new T.MeshBasicMaterial({color: '#8dffb0', name: 'glow paint'}), 0, .045, .01, sw); glowDot.castShadow = false;
+ // Three switches on one old plate. Only one pattern (up, down, up) lights both lamps; Grace never labelled them.
+ const sw = new T.Group(); sw.name = 'light switches'; sw.position.set(ROOM.switch.x, ROOM.switch.y, ROOM.back + .01); root.add(sw);
+ box('switch plate', .2, .13, .015, M('switch plate', {color: '#d8d0bd'}), 0, 0, 0, sw);
+ const toggleM = M('switch toggle', {color: '#e8e2d2'});
+ const toggles = [-1, 0, 1].map((i, n) => { const t = box(`switch toggle ${n + 1}`, .022, .045, .032, toggleM, i * .06, -.016, .016, sw); box('switch slot', .03, .06, .004, M('switch slot', {color: '#3a352c'}), i * .06, 0, .009, sw).castShadow = false; return t; });
+ const toggle = toggles[0];
+ const glowDot = box('glow-in-the-dark dot', .02, .02, .005, new T.MeshBasicMaterial({color: '#8dffb0', name: 'glow paint'}), 0, .05, .01, sw); glowDot.castShadow = false;
 
  // Stairs: eight treads with risers and a stringer, and a plain rail.
  for (let i = 0; i < 8; i++) { const x = ROOM.stairs[0] + i * .25 + .125, y = ROOM.landing - (i + 1) * .2;
@@ -129,6 +133,40 @@ export function createBasement() {
  const bulbM = new T.MeshStandardMaterial({color: '#f4ecd8', emissive: '#ffd9a0', emissiveIntensity: 0, roughness: .2, name: 'bulb glass'});
  const bulb = add('light bulb', new T.SphereGeometry(.045, 10, 8), bulbM, B.x, B.y, B.z); bulb.castShadow = false;
  const chain = box('pull chain', .006, .25, .006, M('chain brass', {color: '#a08840', metalness: .7}), B.x + .02, B.y - .08, B.z);
+ // The first light: a caged bulb over the shelves, nearer the stairs.
+ const L = ROOM.lamp1;
+ box('lamp cord', .01, ROOM.ceil - L.y - .1, .01, iron, L.x, (ROOM.ceil + L.y + .1) / 2, L.z);
+ add('porcelain socket', new T.CylinderGeometry(.03, .035, .07, 8), M('porcelain', {color: '#e8e2d4'}), L.x, L.y + .08, L.z);
+ const lamp1M = new T.MeshStandardMaterial({color: '#f4ecd8', emissive: '#ffd9a0', emissiveIntensity: 0, roughness: .2, name: 'bulb glass'});
+ add('first light bulb', new T.SphereGeometry(.045, 10, 8), lamp1M, L.x, L.y, L.z).castShadow = false;
+ for (let i = 0; i < 4; i++) { const w = box('bulb cage wire', .004, .12, .004, iron, L.x + Math.cos(i * 1.57) * .06, L.y, L.z + Math.sin(i * 1.57) * .06); w.castShadow = false; }
+
+ // Under the desk: the wall outlet, and the computer's cord with its plug lying on the floor.
+ box('outlet plate', .07, .11, .01, M('outlet plate', {color: '#d8d0bd'}), ROOM.outlet.x, ROOM.outlet.y, ROOM.back + .005);
+ for (const dy of [.025, -.025]) box('outlet socket', .03, .03, .004, M('outlet socket', {color: '#c8bfa8'}), ROOM.outlet.x, ROOM.outlet.y + dy, ROOM.back + .012);
+ const plug = new T.Group(); plug.name = 'power plug'; root.add(plug);
+ box('plug body', .04, .05, .03, M('plug black rubber', {color: '#1d1d1d', roughness: .8}), 0, 0, 0, plug);
+ for (const dx of [-.008, .008]) box('plug prong', .004, .012, .018, M('prong brass', {color: '#b09040', metalness: .7}), dx, 0, -.022, plug).castShadow = false;
+ const cordM = M('cord black', {color: '#161616', roughness: .7});
+ const cord = add('power cord', new T.BufferGeometry(), cordM, 0, 0, 0); cord.castShadow = false;
+ const plugHome = {p: new T.Vector3(5.75, .02, -.85), r: new T.Euler(-Math.PI / 2, 0, .6)}, plugIn = {p: new T.Vector3(ROOM.outlet.x, ROOM.outlet.y - .025, ROOM.back + .03), r: new T.Euler(0, 0, 0)};
+ const setPlug = k => {
+  plug.position.lerpVectors(plugHome.p, plugIn.p, k); plug.quaternion.slerpQuaternions(new T.Quaternion().setFromEuler(plugHome.r), new T.Quaternion().setFromEuler(plugIn.r), k);
+  const from = new T.Vector3(5.62 + .1, ROOM.desk.top + .04, -.64 - .19), sag = new T.Vector3(5.85, .02, -1.05), end = plug.position.clone().add(new T.Vector3(0, 0, .02).applyQuaternion(plug.quaternion));
+  const curve = new T.CatmullRomCurve3([from, from.clone().add(new T.Vector3(.05, -.2, -.1)), sag.clone().lerp(end, .4).setY(.02 + k * .05), end]);
+  cord.geometry.dispose(); cord.geometry = new T.TubeGeometry(curve, 24, .006, 5);
+ };
+ setPlug(0);
+
+ // On the desk: Grace's clipboard with her list, a spray bottle of window cleaner and a folded towel.
+ const clip = createClipboard(); clip.position.set(4.98, D.top, -.4); clip.rotation.y = -.35; root.add(clip);
+ const spray = new T.Group(); spray.name = 'spray bottle'; spray.position.set(6.12, D.top, -.42); root.add(spray);
+ add('spray bottle body', new T.CylinderGeometry(.03, .034, .16, 10), M('bottle plastic blue', {color: '#4f8fc8', roughness: .3, transparent: true, opacity: .85}), 0, .08, 0, spray);
+ add('spray bottle neck', new T.CylinderGeometry(.012, .02, .03, 8), M('bottle plastic white', {color: '#eeeeea'}), 0, .175, 0, spray);
+ box('spray trigger head', .03, .03, .05, M('bottle plastic white', {color: '#eeeeea'}), 0, .2, .012, spray);
+ box('spray trigger', .008, .03, .012, M('trigger red', {color: '#c0392b'}), 0, .17, .03, spray);
+ const towel = box('towel', .16, .025, .12, M('towel terry yellow', {color: '#e0c060', roughness: 1}), 6.12, D.top + .0125, -.22);
+ for (const z of [-.03, .03]) box('towel stripe', .162, .026, .012, M('towel stripe red', {color: '#b04a3a', roughness: 1}), 0, 0, z, towel);
 
  // Furnace, water heater and pipes on the right; a high window with moonlight.
  const steel = M('furnace enamel', {color: '#5b5f55', metalness: .2, roughness: .6});
@@ -150,7 +188,8 @@ export function createBasement() {
   {id: 'rug', obj: rug}, {id: 'manual', obj: manual}, {id: 'stair-box', obj: named('under-stair box')},
   {id: 'window-sill', obj: named('window sill')}, {id: 'pencil-mug', obj: mug},
  ];
- root.userData = {computer, keyboard, disks, jar, addJarCoin, coinSpots, manual, bulb, bulbM, chain, door, toggle, glowDot, hall, flame, screen: computer.userData.screen, chair};
+ root.userData = {computer, keyboard, disks, jar, addJarCoin, coinSpots, manual, bulb, bulbM, chain, door, toggle, toggles, switches: sw, glowDot, hall, flame, screen: computer.userData.screen, chair,
+  lamp1M, plug, setPlug, clipboard: clip, spray, towel, rocker: computer.userData.rocker};
  return root;
 }
 
@@ -169,6 +208,29 @@ export function createCoin(r = .03) {
  const edge = new T.MeshStandardMaterial({color: '#d8a020', metalness: .8, roughness: .35, name: 'coin gold'}), face = new T.MeshStandardMaterial({map: coinFace, metalness: .5, roughness: .4, name: 'coin face'});
  const m = new T.Mesh(new T.CylinderGeometry(r, r, r * .18, 14), [edge, face, face]); m.name = 'coin'; m.rotation.x = Math.PI / 2; m.castShadow = true;
  return m;
+}
+
+// Grace's clipboard: her list for waking the computer, in her hand. setTicks([...]) pencils a tick beside each job done.
+export const CHORES = ['Plug it in', 'Wash the screen', 'Dry the screen', 'Turn on the power', 'Put in a disk'];
+function createClipboard() {
+ const g = new T.Group(); g.name = 'clipboard';
+ const c = Object.assign(document.createElement('canvas'), {width: 256, height: 320}), x = c.getContext('2d');
+ const tex = new T.CanvasTexture(c); tex.colorSpace = T.SRGBColorSpace; tex.anisotropy = 4;
+ const draw = (ticks = []) => {
+  x.fillStyle = '#f3ecd8'; x.fillRect(0, 0, 256, 320); x.fillStyle = '#c9d6e6'; for (let y = 64; y < 320; y += 28) x.fillRect(0, y, 256, 2);
+  x.fillStyle = '#d9a0a0'; x.fillRect(30, 0, 2, 320);
+  x.fillStyle = '#2b3a6a'; x.font = 'italic 22px "Comic Sans MS", "Bradley Hand", cursive'; x.fillText('To wake my computer:', 38, 48);
+  x.font = 'italic 21px "Comic Sans MS", "Bradley Hand", cursive';
+  CHORES.forEach((t, i) => { const y = 90 + i * 42; x.strokeStyle = '#2b3a6a'; x.lineWidth = 2; x.strokeRect(38, y - 16, 16, 16); x.fillText(t, 64, y);
+   if (ticks[i]) { x.strokeStyle = '#3a3a3a'; x.lineWidth = 4; x.beginPath(); x.moveTo(36, y - 10); x.lineTo(46, y + 2); x.lineTo(62, y - 24); x.stroke(); } });
+  x.fillText('Then type  A:  and  GO', 38, 312 - 26); x.fillText('- G.', 196, 312); tex.needsUpdate = true;
+ };
+ draw();
+ const board = new T.Mesh(new T.BoxGeometry(.2, .008, .27), new T.MeshStandardMaterial({color: '#8a6a44', roughness: .8, name: 'clipboard hardboard'})); board.name = 'clipboard board'; board.position.y = .004; board.castShadow = board.receiveShadow = true; g.add(board);
+ const paper = new T.Mesh(new T.PlaneGeometry(.18, .225), new T.MeshStandardMaterial({map: tex, roughness: .95, name: 'clipboard paper'})); paper.name = 'clipboard paper'; paper.rotation.x = -Math.PI / 2; paper.position.set(0, .0085, .015); g.add(paper);
+ const clamp = new T.Mesh(new T.BoxGeometry(.09, .012, .03), new T.MeshStandardMaterial({color: '#b8b8b0', metalness: .8, roughness: .3, name: 'clip steel'})); clamp.name = 'clipboard clip'; clamp.position.set(0, .012, -.12); g.add(clamp);
+ g.userData = {setTicks: draw, paper};
+ return g;
 }
 
 // The spiral manual beside the keyboard, "Grace's" on the cover in pen (the café study's manual).
