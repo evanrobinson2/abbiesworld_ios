@@ -1,0 +1,69 @@
+{
+  "appid": 312670,
+  "name": "Strange Brigade",
+  "store_url": "https://store.steampowered.com/app/312670/",
+  "genres": [
+    "Shooter",
+    "Co-op"
+  ],
+  "short_description": "1930s pulp adventure co-op shooter with a cheeky narrator.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Co-op"
+  ],
+  "summary": "1930s pulp adventure co-op shooter with a cheeky narrator.",
+  "identity": {
+    "core_loop": "Shoot mummies, solve puzzles, find treasure.",
+    "mechanics": null,
+    "ui_and_game_feel": "Pulpy fun.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.1,
+        "meta": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Narrator; HUD.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Pulp adventure.",
+    "palette": null,
+    "audio_mood": "Narrator voice.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A narrator can add humour to play."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.67,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.33
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

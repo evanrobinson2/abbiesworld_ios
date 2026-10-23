@@ -1,0 +1,70 @@
+{
+  "appid": 1272320,
+  "name": "Diplomacy is Not an Option",
+  "store_url": "https://store.steampowered.com/app/1272320/",
+  "genres": [
+    "Strategy",
+    "RTS",
+    "Tower defense"
+  ],
+  "short_description": "Medieval city builder against huge sieges of thousands of units.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "RTS",
+    "Tower defense"
+  ],
+  "summary": "Medieval city builder against huge sieges of thousands of units.",
+  "identity": {
+    "core_loop": "Build economy, wall up, survive massive waves.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm build then overwhelming battles.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Waves announced; resources overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Low-poly medieval.",
+    "palette": null,
+    "audio_mood": "Battle music.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "Many simple units is a spectacle on its own."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.78
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

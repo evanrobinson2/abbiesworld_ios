@@ -1,0 +1,68 @@
+{
+  "appid": 466560,
+  "name": "Northgard: Definitive Edition",
+  "store_url": "https://store.steampowered.com/app/466560/",
+  "genres": [
+    "Strategy",
+    "RTS"
+  ],
+  "short_description": "Viking clans expand tile by tile through harsh winters.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "RTS"
+  ],
+  "summary": "Viking clans expand tile by tile through harsh winters.",
+  "identity": {
+    "core_loop": "Colonise a zone, assign workers, prepare for winter, win a victory type.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clear, readable, seasonal.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Winters frost the map; overlay resource bar.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Stylised low-poly.",
+    "palette": null,
+    "audio_mood": "Nordic score.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Winter as one signal changing land, food and music together."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.56
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

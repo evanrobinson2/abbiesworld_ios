@@ -1,0 +1,71 @@
+{
+  "appid": 383120,
+  "name": "Empyrion - Galactic Survival",
+  "store_url": "https://store.steampowered.com/app/383120/",
+  "genres": [
+    "Survival",
+    "Sandbox",
+    "Space"
+  ],
+  "short_description": "Build ships and bases block by block and explore planets and space.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Sandbox",
+    "Space"
+  ],
+  "summary": "Build ships and bases block by block and explore planets and space.",
+  "identity": {
+    "core_loop": "Survive, gather, build ships, fly, explore.",
+    "mechanics": null,
+    "ui_and_game_feel": "Huge and clunky but freeing.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.1,
+        "meta": 0.1,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Survival overlays; ship state in cockpit.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Voxel sci-fi.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Building your own vehicle is a deep motivator."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.33,
+      "systems": 1.0,
+      "chance": 0.22,
+      "session": 0.89
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

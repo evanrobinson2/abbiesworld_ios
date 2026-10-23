@@ -1,0 +1,70 @@
+{
+  "appid": 291550,
+  "name": "Brawlhalla",
+  "store_url": "https://store.steampowered.com/app/291550/",
+  "genres": [
+    "Fighting",
+    "Platform fighter"
+  ],
+  "short_description": "A free platform fighter where you knock friends off the stage.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Fighting",
+    "Platform fighter"
+  ],
+  "summary": "A free platform fighter where you knock friends off the stage.",
+  "identity": {
+    "core_loop": "Move, dodge, hit, launch the enemy off-screen.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fast, easy to start.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.4,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Damage colour changes on the character (spatial).",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Bright cartoon.",
+    "palette": null,
+    "audio_mood": "Upbeat.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Damage shown as a character changing colour is a good wordless gauge."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.67,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.89,
+      "systems": 0.56,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "fighting"
+  },
+  "review": "Easy to pick up, couch friendly. The character slowly turning red as it gets hurt is a nice wordless damage meter."
+}

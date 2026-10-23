@@ -1,0 +1,68 @@
+{
+  "appid": 1434950,
+  "name": "HighFleet",
+  "store_url": "https://store.steampowered.com/app/1434950/",
+  "genres": [
+    "Strategy",
+    "Action"
+  ],
+  "short_description": "Command an airship fleet across a desert map; fight battles yourself.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Action"
+  ],
+  "summary": "Command an airship fleet across a desert map; fight battles yourself.",
+  "identity": {
+    "core_loop": "Plan moves on a strategic map, intercept, fight side-on, refit.",
+    "mechanics": null,
+    "ui_and_game_feel": "Very diegetic: radar, radio, physical consoles.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "meta": 0.1,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Strategic info comes through radio intercepts and a radar console; very little floating UI.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Retro-industrial, dieselpunk.",
+    "palette": null,
+    "audio_mood": "Radio and engines.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "A strategic layer delivered through in-world instruments (radio, radar)."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.89,
+      "expression": 0.44,
+      "structure": 0.78,
+      "social": 0.44,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.78
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

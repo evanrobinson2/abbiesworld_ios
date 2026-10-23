@@ -1,0 +1,69 @@
+{
+  "appid": 3274580,
+  "name": "Anno 117: Pax Romana",
+  "store_url": "https://store.steampowered.com/app/3274580/",
+  "genres": [
+    "Strategy",
+    "City builder"
+  ],
+  "short_description": "A Roman-era Anno: build provinces, chain production, and balance Roman and local cultures.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "City builder"
+  ],
+  "summary": "A Roman-era Anno: build provinces, chain production, and balance Roman and local cultures.",
+  "identity": {
+    "core_loop": "Settle, chain goods, raise citizen tiers, trade and expand.",
+    "mechanics": null,
+    "ui_and_game_feel": "Lush, slow, satisfying zoom from province to street.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.3,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.16,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Streets fill with people as needs are met; needs and goods are overlay panels; unrest shows in the people.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Sunny classical diorama, rich detail at every zoom.",
+    "palette": null,
+    "audio_mood": "Orchestral calm with market bustle.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Zooming from a map to a living street makes the economy feel real."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.89,
+      "social": 0.33,
+      "systems": 0.89,
+      "chance": 0.33,
+      "session": 1.0
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

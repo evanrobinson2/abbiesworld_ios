@@ -46,18 +46,64 @@
     }
   },
   "identity": {
-    "core_loop": null,
+    "core_loop": "Draw a tile, place it to match edges, finish quests, keep the stack alive.",
     "mechanics": null,
-    "ui_and_game_feel": null,
-    "camera": null,
-    "art_direction": null,
+    "ui_and_game_feel": "Calm, tactile, soft clicks.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.1,
+        "overlay": 0.2,
+        "none": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Quests as small flags on the land; the tile stack count is the one overlay.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Watercolour toy landscape.",
     "palette": null,
-    "audio_mood": null,
-    "pacing": null,
-    "lessons_for_abbies_world": null
+    "audio_mood": "Gentle acoustic loops.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "The world answers placement; few rules, endless calm decisions."
   },
   "sources": [
     "steam store api",
-    "install file names (no contents)"
-  ]
+    "install file names (no contents)",
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Builder"
+  ],
+  "summary": "Place hex tiles to grow a peaceful landscape and complete little quests.",
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.56,
+      "structure": 0.33,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.67,
+      "session": 0.56
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
 }

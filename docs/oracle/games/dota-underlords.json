@@ -1,0 +1,68 @@
+{
+  "appid": 1046930,
+  "name": "Dota Underlords",
+  "store_url": "https://store.steampowered.com/app/1046930/",
+  "genres": [
+    "Auto battler",
+    "Strategy"
+  ],
+  "short_description": "Draft Dota heroes onto a board and watch them fight automatically.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Auto battler",
+    "Strategy"
+  ],
+  "summary": "Draft Dota heroes onto a board and watch them fight automatically.",
+  "identity": {
+    "core_loop": "Buy units, form synergies, position, watch the round.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chill drafting, swingy fights.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.24,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Board and bench in world; shop and gold overlay.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Chunky stylised heroes.",
+    "palette": null,
+    "audio_mood": "Light score.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Watching your arrangement play out is its own reward (like 9 Kings)."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.22,
+      "structure": 0.78,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.89,
+      "session": 0.56
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

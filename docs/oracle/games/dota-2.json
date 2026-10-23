@@ -1,0 +1,69 @@
+{
+  "appid": 570,
+  "name": "Dota 2",
+  "store_url": "https://store.steampowered.com/app/570/",
+  "genres": [
+    "MOBA",
+    "Strategy"
+  ],
+  "short_description": "Five-versus-five hero battles on one map; a deep, competitive classic.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "MOBA",
+    "Strategy"
+  ],
+  "summary": "Five-versus-five hero battles on one map; a deep, competitive classic.",
+  "identity": {
+    "core_loop": "Farm, fight, push towers, take the Ancient.",
+    "mechanics": null,
+    "ui_and_game_feel": "Ultra deep, intense, team-reliant.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.28,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Dense overlay (minimap, items, abilities); creeps and towers in world.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Detailed fantasy.",
+    "palette": null,
+    "audio_mood": "Voiced heroes, announcers.",
+    "pacing": "fast, medium sessions",
+    "lessons_for_abbies_world": "Depth from interactions, but the screen cost is high."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.89,
+      "expression": 0.33,
+      "structure": 0.89,
+      "social": 1.0,
+      "systems": 0.89,
+      "chance": 0.89,
+      "session": 0.56
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

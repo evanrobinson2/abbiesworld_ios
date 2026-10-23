@@ -1,0 +1,68 @@
+{
+  "appid": 3590,
+  "name": "Plants vs. Zombies: Game of the Year",
+  "store_url": "https://store.steampowered.com/app/3590/",
+  "genres": [
+    "Tower defense",
+    "Casual"
+  ],
+  "short_description": "Plant defenders in lanes to stop a slow zombie parade.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Tower defense",
+    "Casual"
+  ],
+  "summary": "Plant defenders in lanes to stop a slow zombie parade.",
+  "identity": {
+    "core_loop": "Collect sun, plant, hold the lanes, unlock new plants.",
+    "mechanics": null,
+    "ui_and_game_feel": "Funny, readable, kid-friendly.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Lanes and plants are the board; sun count overlay.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Bright cartoon.",
+    "palette": null,
+    "audio_mood": "Catchy score.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "The friendliest tower defense ever made: clear lanes, clear threats."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.33,
+      "structure": 0.56,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

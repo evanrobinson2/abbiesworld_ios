@@ -1,0 +1,68 @@
+{
+  "appid": 20540,
+  "name": "Company of Heroes: Tales of Valor",
+  "store_url": "https://store.steampowered.com/app/20540/",
+  "genres": [
+    "Strategy",
+    "RTS"
+  ],
+  "short_description": "Standalone CoH expansion with short hero-unit campaigns.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "RTS"
+  ],
+  "summary": "Standalone CoH expansion with short hero-unit campaigns.",
+  "identity": {
+    "core_loop": "Short missions with a few elite units.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tighter, more personal than the base game.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "As Company of Heroes.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Grounded WWII.",
+    "palette": null,
+    "audio_mood": "Combat audio.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Small casts make big systems personal."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.78,
+      "expression": 0.33,
+      "structure": 0.78,
+      "social": 0.44,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.67
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

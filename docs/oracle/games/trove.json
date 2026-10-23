@@ -1,0 +1,72 @@
+{
+  "appid": 304050,
+  "name": "Trove",
+  "store_url": "https://store.steampowered.com/app/304050/",
+  "genres": [
+    "MMO",
+    "Voxel",
+    "Sandbox"
+  ],
+  "short_description": "A voxel MMO with classes, dungeons and building.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "MMO",
+    "Voxel",
+    "Sandbox"
+  ],
+  "summary": "A voxel MMO with classes, dungeons and building.",
+  "identity": {
+    "core_loop": "Explore, dungeon, loot, build a cornerstone home.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cheerful and grindy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.16,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay heavy.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright voxel.",
+    "palette": null,
+    "audio_mood": "Cheerful.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Voxel building in a cheerful world appeals to kids, but grind dulls it."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.67,
+      "expression": 0.67,
+      "structure": 0.67,
+      "social": 0.78,
+      "systems": 0.78,
+      "chance": 0.56,
+      "session": 0.67
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "mmo"
+  },
+  "review": "Looks like a toy, plays like a grind. The personal home plot you carry between worlds is a nice idea."
+}

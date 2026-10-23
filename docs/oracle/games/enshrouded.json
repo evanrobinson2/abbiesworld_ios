@@ -1,0 +1,71 @@
+{
+  "appid": 1203620,
+  "name": "Enshrouded",
+  "store_url": "https://store.steampowered.com/app/1203620/",
+  "genres": [
+    "Survival",
+    "Action RPG",
+    "Building"
+  ],
+  "short_description": "Co-op survival in a fog-cursed fantasy world with voxel building.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Action RPG",
+    "Building"
+  ],
+  "summary": "Co-op survival in a fog-cursed fantasy world with voxel building.",
+  "identity": {
+    "core_loop": "Explore, fight, gather, build a base, push into the shroud.",
+    "mechanics": null,
+    "ui_and_game_feel": "Smooth building, generous co-op.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The shroud is a diegetic danger zone; timer overlay inside it.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Lush fantasy.",
+    "palette": null,
+    "audio_mood": "Orchestral.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "A visible danger zone (the fog) explains the rules without text."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.78,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.89
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

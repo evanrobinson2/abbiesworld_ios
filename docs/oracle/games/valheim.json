@@ -1,0 +1,70 @@
+{
+  "appid": 892970,
+  "name": "Valheim",
+  "store_url": "https://store.steampowered.com/app/892970/",
+  "genres": [
+    "Survival",
+    "Sandbox"
+  ],
+  "short_description": "Viking survival in a procedural afterlife; build, sail, fight bosses.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Sandbox"
+  ],
+  "summary": "Viking survival in a procedural afterlife; build, sail, fight bosses.",
+  "identity": {
+    "core_loop": "Gather, build, sail, beat a boss, unlock more.",
+    "mechanics": null,
+    "ui_and_game_feel": "Atmospheric co-op.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.1,
+        "meta": 0.1,
+        "overlay": 0.1,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Weather and light carry mood; small HUD.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Low-poly with modern light.",
+    "palette": null,
+    "audio_mood": "Atmospheric.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "Weather, light and music shifting together."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.67,
+      "social": 0.44,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.78
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

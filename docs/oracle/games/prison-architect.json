@@ -1,0 +1,68 @@
+{
+  "appid": 233450,
+  "name": "Prison Architect",
+  "store_url": "https://store.steampowered.com/app/233450/",
+  "genres": [
+    "Simulation",
+    "Management"
+  ],
+  "short_description": "Design and run a prison with needs, routines and riots.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Simulation",
+    "Management"
+  ],
+  "summary": "Design and run a prison with needs, routines and riots.",
+  "identity": {
+    "core_loop": "Build, schedule, manage needs, handle incidents.",
+    "mechanics": null,
+    "ui_and_game_feel": "Systemic, darkly comic.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.4,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Needs over prisoners' heads (spatial); many overlay panels.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Flat cartoon top-down.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Routines plus needs make a society to watch."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.89,
+      "chance": 0.44,
+      "session": 0.89
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

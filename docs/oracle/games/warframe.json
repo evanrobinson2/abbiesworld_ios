@@ -1,0 +1,73 @@
+{
+  "appid": 230410,
+  "name": "Warframe",
+  "store_url": "https://store.steampowered.com/app/230410/",
+  "genres": [
+    "Action",
+    "Looter",
+    "Co-op"
+  ],
+  "short_description": "Space ninjas in fast co-op missions, with an enormous gear and crafting web.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Looter",
+    "Co-op"
+  ],
+  "summary": "Space ninjas in fast co-op missions, with an enormous gear and crafting web.",
+  "identity": {
+    "core_loop": "Run a mission, loot, craft, master new frames and weapons.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fast, flashy movement; overwhelming menus.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Gameplay is readable but the meta-game is a maze of overlay menus.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Ornate biomech sci-fi.",
+    "palette": null,
+    "audio_mood": "Electronic and orchestral.",
+    "pacing": "fast, medium sessions",
+    "lessons_for_abbies_world": "Movement can feel great while menus bury the fun; keep the fun on the surface."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.78,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 1.0,
+      "systems": 0.78,
+      "chance": 0.67,
+      "session": 0.67
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "shooter"
+  },
+  "review": "Moving feels like flying, which is why it lasts. The menus are the opposite of what we want. Great movement, terrible front door."
+}

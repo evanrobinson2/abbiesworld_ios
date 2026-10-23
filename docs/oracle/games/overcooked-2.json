@@ -1,0 +1,68 @@
+{
+  "appid": 728880,
+  "name": "Overcooked! 2",
+  "store_url": "https://store.steampowered.com/app/728880/",
+  "genres": [
+    "Party",
+    "Co-op"
+  ],
+  "short_description": "Frantic co-op cooking in absurd kitchens.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Party",
+    "Co-op"
+  ],
+  "summary": "Frantic co-op cooking in absurd kitchens.",
+  "identity": {
+    "core_loop": "Chop, cook, plate, serve, wash, shout.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hilarious chaos; tight timing.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.5,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Orders across the top; progress bars over food (spatial).",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Bright cartoon.",
+    "palette": null,
+    "audio_mood": "Upbeat.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Shared chaos is joyful for families."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.89,
+      "expression": 0.33,
+      "structure": 0.44,
+      "social": 0.78,
+      "systems": 0.56,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

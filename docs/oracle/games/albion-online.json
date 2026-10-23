@@ -1,0 +1,70 @@
+{
+  "appid": 761890,
+  "name": "Albion Online",
+  "store_url": "https://store.steampowered.com/app/761890/",
+  "genres": [
+    "MMO",
+    "Sandbox"
+  ],
+  "short_description": "A player-driven sandbox MMO where everything is crafted by players.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "MMO",
+    "Sandbox"
+  ],
+  "summary": "A player-driven sandbox MMO where everything is crafted by players.",
+  "identity": {
+    "core_loop": "Gather, craft, trade, fight over territory.",
+    "mechanics": null,
+    "ui_and_game_feel": "Economy first.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Market and crafting overlays.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Stylised low-poly.",
+    "palette": null,
+    "audio_mood": "Medieval.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "A player-made economy is fascinating for grown-ups; hide it from kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.89,
+      "social": 1.0,
+      "systems": 0.89,
+      "chance": 0.56,
+      "session": 0.78
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "mmo"
+  },
+  "review": "Every sword was made by another player. A real economy game wearing an MMO costume. Interesting for the grown-up layer only."
+}
