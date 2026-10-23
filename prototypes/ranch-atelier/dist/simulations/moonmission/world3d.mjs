@@ -3,6 +3,7 @@
 // Heroes are placeholder faceted figures until the Meshy heroes land: drop a GLB at HERO_URL(id) and it replaces the stand-in.
 // Coordinates in each scene are local metres (three.js: x east, y up, -z north). Main Street is the coffee shop curb.
 import * as THREE from 'three';
+import {suit} from './suit.mjs';
 
 export const HERO_URL = id => `/studies/moon-mission/heroes/${id}.glb`;
 const HEROES = {daddy: {suit: 0xffffff, trim: 0x6f9bff, skin: 0xe0b08c, h: 1.8}, abbie: {suit: 0xffffff, trim: 0xff7eb6, skin: 0xe8c0a0, h: 1.15}, ani: {suit: 0xffffff, trim: 0xb18cff, skin: 0xddb08c, h: 1.2}};
@@ -19,15 +20,9 @@ function label(text, w, h, bg, fg, font = 'bold 64px sans-serif') {
 }
 
 export function hero(id, suited = true) {
- const s = HEROES[id], g = new THREE.Group(), k = s.h / 1.8;
- const body = at(cyl(.22 * k, .26 * k, .8 * k, suited ? s.suit : 0x7a8aa8, 8), 0, 1.0 * k, 0), belt = at(cyl(.27 * k, .27 * k, .08 * k, s.trim, 8), 0, .8 * k, 0);
- const head = at(new THREE.Mesh(new THREE.IcosahedronGeometry(.2 * k, 1), mat(s.skin)), 0, 1.6 * k, 0);
- const legs = [-.1, .1].map(x => at(cyl(.09 * k, .09 * k, .6 * k, suited ? s.suit : 0x4a5570, 6), x * k, .3 * k, 0));
- const arms = [-.3, .3].map(x => at(cyl(.07 * k, .07 * k, .6 * k, suited ? s.suit : 0x7a8aa8, 6), x * k, 1.05 * k, 0));
- add(g, body, belt, head, ...legs, ...arms);
- if (suited) { const hl = at(new THREE.Mesh(new THREE.SphereGeometry(.26 * k, 12, 10), mat(0xbfe4ff, {transparent: true, opacity: .35, roughness: .1})), 0, 1.6 * k, 0); const patch = at(new THREE.Mesh(new THREE.CircleGeometry(.07 * k, 8), new THREE.MeshBasicMaterial({color: s.trim})), -.13 * k, 1.2 * k, .22 * k); add(g, hl, patch); }
- g.userData = {id, bob: 0}; g.traverse(o => { if (o.isMesh) o.castShadow = true; });
- return g;
+ const s = HEROES[id], g = suit(id, {trim: s.trim, skin: s.skin, h: s.h, childHead: id === 'daddy' ? 1 : 1.12});
+ if (!suited) g.traverse(o => { if (o.isMesh && o.material.name === 'suit_fabric') o.material = o.material.clone(), o.material.color.set(0x7a8aa8); });
+ g.userData = {id, bob: 0}; return g;
 }
 function swapHeroGLB(group, id) { // quiet: a missing file leaves the placeholder
  import('/vendor/loaders/GLTFLoader.js').then(({GLTFLoader}) => new GLTFLoader().load(HERO_URL(id), gl => { const m = gl.scene; const box3 = new THREE.Box3().setFromObject(m), h = box3.max.y - box3.min.y; m.scale.setScalar(HEROES[id].h / h); group.clear(); group.add(m); }, undefined, () => {})).catch(() => {});
