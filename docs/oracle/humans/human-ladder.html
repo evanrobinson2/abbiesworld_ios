@@ -1,0 +1,110 @@
+<title>Oracle Human Ladder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a five-rung ladder from toy to real; each rung is a band of game cards, takeaways first. */
+:root{
+ --bg:#f3f1ec;--ink:#22262b;--muted:#5d646c;--line:#d9d5cc;--card:#fbfaf7;--accent:#2f6f73;--rung:#e7e3da;
+ --display:"Fraunces",Georgia,serif;--body:"Public Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17191c;--ink:#e8e6e1;--muted:#a3a8ae;--line:#33373c;--card:#1f2226;--accent:#7cc4c7;--rung:#262a2f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17191c;--ink:#e8e6e1;--muted:#a3a8ae;--line:#33373c;--card:#1f2226;--accent:#7cc4c7;--rung:#262a2f;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body)}
+.wrap{max-width:1100px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+h1{font:700 clamp(28px,5vw,44px)/1.1 var(--display);margin:0;text-wrap:balance}
+h2{font:600 22px/1.2 var(--display);margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:68ch;margin:6px 0 0}
+.label{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.take{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.take div{border-top:2px solid var(--accent);padding-top:10px;min-width:0}
+.take b{display:block;font-family:var(--display);font-size:17px;margin-bottom:2px}
+.rung{background:var(--rung);border-radius:14px;padding:18px;display:grid;gap:14px}
+.rung header{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.rung header p{margin:0;color:var(--muted);flex:1 1 320px;min-width:0}
+.heads{font:500 12px var(--mono);color:var(--muted)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.g{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:6px;align-content:start;min-width:0}
+.g h3{margin:0;font:600 16px/1.25 var(--body)}
+.g h3 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+.g h3 a:hover,.g h3 a:focus-visible{border-color:var(--accent);outline:none}
+.g dl{margin:0;display:grid;grid-template-columns:5.2em 1fr;gap:3px 8px;font-size:13.5px}
+.g dt{color:var(--muted)}.g dd{margin:0;min-width:0}
+.g .borrow{font-size:13.5px;border-left:3px solid var(--accent);padding-left:8px}
+.note{color:var(--muted);font-size:13px;max-width:72ch}
+</style>
+
+<div class="wrap">
+<header>
+ <span class="label">Game Oracle · human characters in 3D</span>
+ <h1>How 3D games build their people</h1>
+ <p class="lede">The Oracle has 379 games. These 30 are 3D and have human characters you see clearly. They are sorted on a ladder from toy-like to realistic, with what each does with proportions, faces, hands and detail. These are written observations from the Oracle's study, not copied art.</p>
+</header>
+
+<section>
+ <span class="label">What the Oracle has learned so far</span>
+ <div class="take" style="margin-top:10px">
+  <div><b>Pick one rung and stay on it</b>Every game that reads well commits to one level of stylisation for heads, hands, clothes and props. Mixing a realistic face with a toy body is what looks wrong.</div>
+  <div><b>Heads get bigger as games get friendlier</b>Toy and cosy games sit at 2 to 4 heads tall; heroic stylised games at 6 to 7; realistic games at 7.5 to 8.</div>
+  <div><b>Silhouette before detail</b>Team Fortress 2, Marvel Rivals and Fall Guys prove a character must read as a shape from far away before any texture counts.</div>
+  <div><b>Faces: few features, big expressions</b>Stylised games keep eyes, brows and mouth large and simple, and drop pores, wrinkles and fine noses. The nose stays, as a simple shape.</div>
+  <div><b>Hands are simplified, never removed</b>Even LEGO keeps a readable hand. Stylised games use chunky mitten-like hands with a separate thumb, sometimes four fingers.</div>
+  <div><b>Clothes carry the detail</b>Stylised humans move detail into big readable clothing shapes (a hat, a scarf, a belt) instead of small surface noise.</div>
+  <div><b>Flat or soft colour, little texture</b>Most friendly 3D humans use flat or gently painted colour with a few material roles (skin, cloth, leather, metal), which suits our engineered-geometry modeler.</div>
+  <div><b>Our rung</b>For Abbie's World: 4 to 6 heads tall, real adult proportions in limbs, simple faces with nose and brows, mitten hands with a thumb, chunky clothes. Between Dreamlight Valley and Valheim.</div>
+ </div>
+</section>
+
+<div id="ladder"></div>
+
+<p class="note">Sources: the Oracle's study profiles (docs/oracle/games) and its public-knowledge notes on each game's character style. Head counts are estimates. Each game name opens its Oracle page.</p>
+</div>
+
+<script>
+const ORACLE='https://abbies-game-oracle.vercel.app/game?id=';
+const LADDER=[
+ {rung:'1. Toy figures',heads:'2–3.5 heads tall',about:'People as toys: blocky or bean shapes, big heads, few joints. Kids read them instantly.',games:[
+  ['LEGO Bricktales',1898290,'Minifigure: 3 heads tall, cylinder head, block torso','Printed simple face, swapped for expressions','C-shaped clip hands','Very low geometry; detail is printed decals','A face can be a swappable printed decal on a simple head.'],
+  ['Fall Guys',1097150,'Jellybean body, no neck, about 2 heads','Two dots and a mouth on a visor-like front','Small round stubs','Detail only in costume skins','Silhouette and costume do all the work; perfect for crowds.'],
+  ['Overcooked! 2',728880,'Chunky 2.5 heads, short legs','Simple eyes and mouth, big hats','No visible hands; tools float','Low, flat colour','For a busy job game, drop the hands and let held objects read.'],
+  ['Wobbly Life',1211020,'Soft jelly people, about 3 heads','Minimal face','Mitten hands','Low','Floppy physics bodies make simple people funny and alive.'],
+  ['Totally Accurate Battle Simulator',508440,'Wobbly 3-head figures','Dot eyes, often blank','Mitten hands','Very low','A blank face plus exaggerated physics reads as character.'],
+ ]},
+ {rung:'2. Chunky cartoon',heads:'3–4.5 heads tall',about:'Cartoon people with real faces and personalities, big hands and feet, simplified anatomy.',games:[
+  ['Disney Dreamlight Valley',1401590,'Avatar about 4.5 heads; big eyes','Large expressive eyes, small nose, soft mouth','Four-finger simplified hands','Medium; soft painted clothes','The closest match to a friendly Abbie\'s World villager.'],
+  ['Dungeon Defenders',65800,'Chibi, about 3 heads','Big anime eyes','Chunky hands','Low-medium','Chibi works for heroes kids pick; too cute for grown-up NPCs.'],
+  ['Orcs Must Die! 3',1522820,'Heroic cartoon about 5 heads, oversized hands and boots','Bold expressive face','Big gloved hands','Medium','Oversized hands and feet sell action from a high camera.'],
+  ['Tiny Tina\'s Wonderlands',1286680,'Stylised heroic 6 heads','Comic faces with ink outlines','Full hands','Cel shaded, hand-inked lines','Inked outlines make a simple model look drawn.'],
+  ['Rec Room',471710,'Floating head, torso and hands; no arms or legs','Simple cartoon face','Floating mitten hands','Very low','A person can be just head, body and hands and still feel present.'],
+ ]},
+ {rung:'3. Stylised heroic',heads:'5.5–7 heads tall',about:'Real adult proportions pushed toward shape language: broad shoulders, clear silhouettes, painted materials.',games:[
+  ['Team Fortress 2',440,'Nine body types, each a distinct silhouette, about 6 heads','Caricatured, strong jaws and noses','Large readable hands','Painted, few textures','Every role needs its own body shape, readable from 100 metres.'],
+  ['Marvel Rivals',2767030,'Heroic 7 heads, comic proportions','Comic faces, clean planes','Full hands','Cel shading','Clean planes on the face read better than detail.'],
+  ['Apex Legends',1172470,'Realistic-heroic 7.5 heads','Stylised realism','Full hands','Medium-high','Distinct legend silhouettes even at realistic proportions.'],
+  ['Warframe',230410,'Elongated 8+ heads, sleek armour','Mostly masked','Armoured hands','High ornament','A masked head saves face work entirely.'],
+  ['Borderlands 3',397540,'Exaggerated 6-7 heads','Hand-inked comic faces','Full hands','Cel shaded, ink','Hand-drawn line textures on simple geometry.'],
+  ['Shadow Tactics',418240,'Small on screen, about 7 heads','Barely visible; read by hat and colour','Simple','Medium','From a high camera, a hat and a colour are the face.'],
+ ]},
+ {rung:'4. Painterly and low-poly realism',heads:'6.5–7.5 heads tall',about:'Real proportions with simplified, faceted or painted surfaces. The most useful rung for our papercraft and Roman figures.',games:[
+  ['Valheim',892970,'Real Viking proportions, about 7 heads','Low-detail faces, big beards and hair as shapes','Simple full hands','Low-poly with painterly lighting','Real proportions, low detail, and lighting does the beauty.'],
+  ['Manor Lords',1363080,'Realistic medieval villagers','Real but small on screen','Full hands','High, historical clothing','Clothing silhouettes tell class and job; good for Roman and Gothic crowds.'],
+  ['Kingdom Come: Deliverance',379430,'Fully realistic medieval','Scanned realism','Full hands','Very high','Reference for real medieval garment construction, not style.'],
+  ['Mount & Blade II: Bannerlord',261550,'Realistic 7.5 heads, generated faces','Face sliders','Full hands','Medium-high','A face generator from a few sliders makes crowds varied.'],
+  ['Total War: ROME II',214950,'Realistic soldiers in big crowds','Small, varied heads','Full hands','Medium per soldier','Thousands of people stay readable through shields, helmets and colour.'],
+  ['Enshrouded',1203620,'Stylised realism, 7 heads','Soft painted faces','Full hands','Medium','Soft painted realism sits well with lush fantasy worlds.'],
+ ]},
+ {rung:'5. Realistic',heads:'7.5–8 heads tall',about:'Real anatomy, faces and cloth. Not our target, but the source of truth for proportions and garments.',games:[
+  ['Red Dead Redemption 2',1174180,'True anatomy','Highly detailed faces, real expression','Full articulated hands','Very high','How real people stand, shift weight and wear clothes.'],
+  ['Cyberpunk 2077',1091500,'True anatomy, fashion-heavy','Detailed','Full hands','Very high','Clothes and accessories make a crowd feel like a culture.'],
+  ['Days Gone',1259420,'True anatomy','Detailed','Full hands','High','Only weight and posture; nothing else for us.'],
+  ['Metro Exodus',412020,'True anatomy','Detailed, often masked','Full hands visible in first person','High','First-person hands holding things are a whole character.'],
+  ['The Alters',1601570,'Realistic, many versions of one man','Same face, different lives','Full hands','High','One base face, many variations through clothes and posture.'],
+  ['Arma 3',107410,'Realistic soldiers','Realistic','Full hands','High','Only for real proportions and gear fit.'],
+ ]},
+ {rung:'Wild cards',heads:'',about:'Not human, but they teach something about making people.',games:[
+  ['Among Us',945360,'Bean with a visor, no face at all','None','None','Very low','A colour and a hat are enough identity for a party game.'],
+  ['Stacking',115110,'Russian-doll people, painted on','Painted folk faces','No hands','Low; painted wood','Painted-on people suit a toy-box world.'],
+ ]},
+];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+document.getElementById('ladder').innerHTML=LADDER.map(r=>`<section class="rung" style="margin-bottom:18px"><header><h2>${esc(r.rung)}</h2>${r.heads?`<span class="heads">${esc(r.heads)}</span>`:''}<p>${esc(r.about)}</p></header><div class="grid">${r.games.map(([n,id,body,face,hands,detail,borrow])=>`<article class="g"><h3><a href="${ORACLE}${id}" target="_blank" rel="noopener">${esc(n)}</a></h3><dl><dt>Body</dt><dd>${esc(body)}</dd><dt>Face</dt><dd>${esc(face)}</dd><dt>Hands</dt><dd>${esc(hands)}</dd><dt>Detail</dt><dd>${esc(detail)}</dd></dl><p class="borrow" style="margin:4px 0 0">${esc(borrow)}</p></article>`).join('')}</div></section>`).join('');
+</script>

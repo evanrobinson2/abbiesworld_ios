@@ -38,8 +38,8 @@ test('$5 a month gives $4 of magic this month, on top of the free dollar, outsid
  assert.equal(await club.confirm(player,'cs_1',await w.spent(player)),true);
  assert.equal(Math.round(await w.left(player)*100)/100,4.5,'$4 plus the unused half of the free dollar');
  assert.equal(await w.charge(player,4.4),true);assert.equal(await w.charge(player,0.2),false,'no more than that this month');
- assert.equal(store.data.has('spend/v1/public.json'),true);
- assert.equal(JSON.parse(store.data.get('spend/v1/public.json').body).usd,0.5,'supporter spending stays off the public pool');
+ const pool=[...store.data].filter(([k])=>k.startsWith('spend/v1/public/')).reduce((n,[,v])=>n+JSON.parse(v.body).usd,0);
+ assert.equal(Math.round(pool*100)/100,0.5,'supporter spending stays off the public pool');
 });
 
 test('next paid month resets to $4; a cancelled one stops it; unused magic does not carry over',async()=>{

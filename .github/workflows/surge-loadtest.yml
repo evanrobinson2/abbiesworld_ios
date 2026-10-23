@@ -1,0 +1,41 @@
+# Launch-day load test (docs/launch/SURGE.md, tools/surge/loadtest.mjs). On demand only: Actions > surge-loadtest > Run workflow.
+# It replays a first-time visit (GETs only, no paid AI) from many virtual visitors and writes the report to the run summary.
+# Every run moves real bytes on Vercel: keep visitors modest (200 visitors is about 2-4 GB) and --max-gb guards the rest.
+name: surge-loadtest
+on:
+  workflow_dispatch:
+    inputs:
+      url: { description: 'Site to test', default: 'https://ranch.abbies.world' }
+      pages: { description: 'Pages a visitor opens, comma separated', default: '/,/sandbox' }
+      visitors: { description: 'Virtual visitors in total', default: '200' }
+      concurrency: { description: 'Visitors at the same time', default: '50' }
+      max_gb: { description: 'Refuse to run past this many GB', default: '10' }
+concurrency:
+  group: surge-loadtest
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: { sparse-checkout: tools/surge }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Install a browser for the capture
+        working-directory: tools/surge
+        run: npm init -y >/dev/null && npm install playwright@1.56.1 && npx playwright install --with-deps chromium
+      - name: Capture one visit, then replay it
+        working-directory: tools/surge
+        env:
+          URL: ${{ inputs.url }}
+          PAGES: ${{ inputs.pages }}
+          VISITORS: ${{ inputs.visitors }}
+          CONCURRENCY: ${{ inputs.concurrency }}
+          MAX_GB: ${{ inputs.max_gb }}
+        run: node loadtest.mjs --url "$URL" --pages "$PAGES" --visitors "$VISITORS" --concurrency "$CONCURRENCY" --max-gb "$MAX_GB" --out surge-report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: surge-report, path: 'tools/surge/surge-report*.json' }

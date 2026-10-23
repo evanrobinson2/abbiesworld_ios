@@ -236,7 +236,8 @@ if(new URLSearchParams(location.search).has('creator'))import('./holodeck/stage.
   sound:{description:'Turn the ambient ranch sound on or off',schema:obj({on:{type:'boolean'}},['on']),run:({on})=>{ambientSound.enable(on);const box=soundBox();if(box)box.checked=on;return bump();}}
  }});}
 // Live mode: talk to the world. Loads its code only when the mic is tapped.
-import('./live/button.mjs').then(({mountLiveButton})=>mountLiveButton({ensureStage})).catch(e=>console.warn('[live]',e));
+import('./live/button.mjs').then(({mountLiveButton})=>mountLiveButton({ensureStage})).catch(e=>console.warn('[live]',e))
+ .finally(()=>import('./invent/make.mjs').then(({mountMake})=>mountMake({ensureStage})).catch(e=>console.warn('[make]',e)));// Make: a wish becomes a toy (INVENT.md)
 installRanchInfo({getClock:()=>farmClock,getActive:()=>active}); // what this scene knows, for the HUD, grown-ups and the voice
 let halloweenUI;function focusHalloween(id){if(family!=='suburban'||!active)return;const target=active.focusPoint(id);orbit.target.copy(target);const direction=id==='party'?active.focusPoint('road210').sub(target).setY(0).normalize().multiplyScalar(3):new T.Vector3(1.8,0,3.1);direction.y=3;camera.position.copy(target).add(direction);orbit.update();}try{setupWorkspace();halloweenUI=createHalloweenUI({getActive:()=>family==='suburban'?active:null,focus:focusHalloween,persist,fit,isRunning:()=>running,togglePause:()=>{running=!running;syncPlayback();persist();}});applyConfig(initial);restoring=initial;await generate()}catch(e){$('#error').textContent=e.message;console.error(e)}
 

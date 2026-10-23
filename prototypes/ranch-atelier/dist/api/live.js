@@ -59,6 +59,9 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
   // Out of money means the Computer rests; the game itself keeps playing with its built-in models.
   const tired=()=>json(402,{error:'The Computer has used up its magic for now. Keep playing!',budget:true});
   if(body.action==='session'){
+   // Surge mode (launch day, AI_SURGE_MODE=true): talking costs up to $1 in two minutes, so the public's share of the
+   // pool is kept for inventing things; the owner can still talk. See docs/launch/SURGE.md.
+   if(env.AI_SURGE_MODE==='true'&&!me.owner)return json(402,{error:'The Computer is resting while lots of friends visit. You can still invent things!',budget:true,surge:true});
    if(await purse().left(me)<0.05||!await purse().charge(me,PRICES.realtimeOpen))return tired();
    // The page connects to our relay (api/live-socket.js), which holds the credential and enforces
    // the rules and tools server-side. The ticket is good for 60 seconds.
@@ -102,4 +105,4 @@ async function judge(fetcher,headers,who,text){
  finally{clearTimeout(timer);}
 }
 
-module.exports=createHandler();module.exports.createHandler=createHandler;module.exports.GUARD_PROMPT=GUARD_PROMPT;
+module.exports=createHandler();module.exports.createHandler=createHandler;module.exports.GUARD_PROMPT=GUARD_PROMPT;module.exports.judge=judge;

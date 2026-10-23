@@ -15,6 +15,7 @@ function start(){
  addEventListener('ranch:inspect-close',()=>closeCallout({silent:true}));
  const svg=(body,view='0 0 24 24')=>`<svg viewBox="${view}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
  const I={cards:svg('<rect x="4" y="3" width="11" height="16" rx="2"/><path d="M15 6l4 1.5-4 13.5-6-1.6"/><path d="M7 13l2-3 2 2 2-3"/>'),
+  make:svg('<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/>'),
   talk:svg('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'),
   scenes:svg('<path d="M3 10.5 12 4l9 6.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/>'),
   tiles:svg('<path d="m12 2.5 8 4.6v9.8l-8 4.6-8-4.6V7.1z"/><path d="m12 12 8-4.6M12 12v9.4M12 12 4 7.4"/>'),
@@ -67,7 +68,7 @@ function start(){
  const box=make('button',{id:'v2-box',className:'v2-toy v2-glass',type:'button',title:'Toy box'},I.box+'<span class="v2-dot"></span>');box.setAttribute('aria-label','Toy box: tap for the shelf, hold for settings');
  const shelf=make('div',{id:'v2-shelf',className:'v2-toy v2-glass',hidden:true});shelf.setAttribute('role','menu');
  const items=[
-  ['talk','Talk',()=>press('#live-toggle'),'talk'],['scenes','Scenes',()=>press('#compact-scene-title')||press('#library-open')],['tiles','Tile options',()=>toggleSheet(true)],
+  ['talk','Talk',()=>press('#live-toggle'),'talk'],['make','Make',()=>press('#make-toggle'),'talk'],['scenes','Scenes',()=>press('#compact-scene-title')||press('#library-open')],['tiles','Tile options',()=>toggleSheet(true)],
   ['cards',cardArt()==='concept'?'Cards: concept':'Cards: in game',()=>{const next=cardArt()==='concept'?'ingame':'concept';setCardArt(next);const b=shelf.querySelector('[data-item=cards]');if(b)b.lastElementChild.textContent=next==='concept'?'Cards: concept':'Cards: in game';}],
   ['music','Music',()=>press('#app-jukebox-toggle')],['workshop','Workshop',()=>press('.aw-fab')],['feedback','Feedback',()=>press('.afb-fab')],
   null,

@@ -1,0 +1,13 @@
+{
+  "image": "ref/bruiser.png",
+  "size": [1024, 1024],
+  "note": "The six chunks of the bruiser, in reference-image pixels [x0, y0, x1, y1]. Arm A crops the image to these boxes; arms B to D give each job the full image and one chunk to own. Per-part scores are IoU inside each box.",
+  "chunks": [
+    {"id": "head",  "name": "Head and neck",          "box": [430, 45, 600, 200],  "owns": "skull block, brow, nose, jaw, ears, neck to the trapezius"},
+    {"id": "chest", "name": "Chest and shoulders",    "box": [320, 150, 740, 490], "owns": "tank top with straps and neckline, pecs, delts, upper back"},
+    {"id": "armR",  "name": "His right arm and hand", "box": [262, 280, 425, 665], "owns": "upper arm, elbow, forearm, wrist, hand with four fingers and thumb"},
+    {"id": "armL",  "name": "His left arm and hand",  "box": [625, 280, 782, 675], "owns": "upper arm, elbow, forearm, wrist, hand with four fingers and thumb"},
+    {"id": "hips",  "name": "Hips and shorts",        "box": [395, 450, 640, 640], "owns": "tank-top hem, shorts with leg openings, crotch"},
+    {"id": "legs",  "name": "Legs and feet",          "box": [360, 610, 690, 990], "owns": "thighs below the shorts, knees, shins, ankles, bare feet with toes"}
+  ]
+}
