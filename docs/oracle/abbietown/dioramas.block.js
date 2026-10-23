@@ -28,7 +28,7 @@ const HERO = {cafe: {sc: .85, r: 12, shop: 1}, bakery: {sc: .85, r: 12, shop: 1}
  highschool: {sc: .62, r: 20, fixed: 1}, depot: {sc: .75, r: 22, rail: 1}, railyard: {sc: .62, r: 20, rail: 1}, mill: {sc: .8, r: 15}, dock: {sc: .8, r: 7, fixed: 1, keepRot: 1, shore: 1}, lookout: {sc: .8, r: 8, fixed: 1},
  trailhead: {sc: .8, r: 6}, noticeboard: {sc: .8, r: 5}, skatepark: {sc: .8, r: 17}, launch: {sc: .75, r: 20}, abbieTree: {sc: .6, r: 17}, aniTree: {sc: .6, r: 17}, gingerbread: {sc: 1, r: 17, fixed: 1}, bunker: {sc: 1, r: 14, fixed: 1, behind: 'gingerbread'}};
 const dioGroup = new THREE.Group(); dioGroup.position.set(X(DIO_ORIGIN[0]), 0, Z(DIO_ORIGIN[1])); scene.add(dioGroup); dioGroup.visible = false;
-const SQUARE = /*SQUARE*/null; const dioHouses = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
+const SQUARE = /*SQUARE*/null; const dioHouses = {}, dioObs = {}, dioRoads = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
 const dioTile = {}; // id -> {cx, cy (map metres of the tile's middle), group, ...}
 const smooth = t => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
 const inHex = (x, y, R) => { const ax = Math.abs(x), ay = Math.abs(y); return ay <= R * R3 / 2 && ax <= R - ay / R3; }; // flat-top, corners east and west
@@ -45,6 +45,7 @@ function buildDiorama(d, ti) {
  // 2 the roads of the tile (main roads, real; scaled), clipped to the hex
  const roads = [];
  for (const r of town.roads) { let run = []; for (const [x, y] of r.p) { const px = (x - d.centre[0]) / scl, py = (y - d.centre[1]) / scl; if (inHex(px, py, DIO_R * .97)) run.push([px, py]); else { if (run.length > 1) roads.push({c: r.c, p: run}); run = []; } } if (run.length > 1) roads.push({c: r.c, p: run}); }
+ dioRoads[d.id] = roads;
  const roadPts = []; for (const r of roads) for (let i = 1; i < r.p.length; i++) { const [ax, ay] = r.p[i - 1], [bx, by] = r.p[i], l = Math.hypot(bx - ax, by - ay); for (let t = 0; t < l; t += 3) roadPts.push({x: ax + (bx - ax) * t / l, y: ay + (by - ay) * t / l, w: r.c <= 3 ? 5.4 : 4.2, tx: (bx - ax) / l, ty: (by - ay) / l}); }
  const nearRoad = (x, y) => { let b = null, bd = 1e9; for (const p of roadPts) { const dd = Math.hypot(p.x - x, p.y - y); if (dd < bd) { bd = dd; b = p; } } return b && {...b, d: bd}; };
  // 3 the places, pushed together: start where they really are, then keep them apart and off the street
@@ -138,7 +139,7 @@ function buildDiorama(d, ti) {
   const chim = mine.filter(h => h.chimney); grp.add(inst(boxGeo, plainMat, chim, h => { const a = yaw(h), o = h.w * HS * .32; v3.set(h.px + Math.cos(a) * o, h.hz + h.h * HS, -h.py - Math.sin(a) * o); q.setFromEuler(e.set(0, a, 0)); sc.set(.9, h.d * HS * .5 * h.pitch + 1.8, .9); col.set('#8a4a36'); })); }
  // 8 trees, thinned, in the zone's colours
  { const T = [], spots = taken.slice(); for (const t of town.trees) { const px = (t.x - d.centre[0]) / scl, py = (t.y - d.centre[1]) / scl; if (!inHex(px, py, DIO_R * .94) || !isNaN(waterY(px, py))) continue; const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 2) continue;
-   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 3.2 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 520) break; }
+   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 3.2 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 520) break; } dioObs[d.id] = spots;
   const grp = new THREE.Group(), broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine'), tint = new THREE.Color(L.grass[1]);
   grp.add(inst(TREE_HI.trunk, plainMat, broad, t => { v3.set(t.px, t.hz, -t.py); q.identity(); sc.set(.7 * t.s, 2.6 * t.s, .7 * t.s); col.set('#6b4f36'); }));
   grp.add(inst(TREE_HI.crown, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
@@ -315,7 +316,10 @@ function setupStage() {
  const at = (tile, hero, extra = {}) => { const sp = dioTiles[tile]?.spots[hero]; if (!sp) return; registerScene({id: extra.id, region: tile, anchor: [sp.x, sp.z], y: sp.y, facing: sp.facing, bounds: extra.bounds || 30}); };
  at('downtown', 'cafe', {id: 'cafe-curb'}); at('downtown', 'bakery', {id: 'bakery-curb'}); at('abbie-daddy-side', 'home', {id: 'abbie-kitchen'}); at('abbie-daddy-side', 'abbieTree', {id: 'treehouse'}); at('anis-side', 'aniTree', {id: 'ani-treehouse'}); at('anis-side', 'ani', {id: 'anis-kitchen'}); at('anis-side', 'launch', {id: 'launch-pad'}); at('downtown', 'lab', {id: 'lab-door'}); at('downtown', 'skatepark', {id: 'skate-park', bounds: 26}); at('abbie-daddy-side', 'muraco', {id: 'school-door'});
  for (const d of DIOS) { const t = dioTiles[d.id]; scenes['dio-' + d.id] = {id: 'dio-' + d.id, region: d.id, anchor: [0, 0], world: t.centre.clone(), bounds: DIO_R}; }
- const board = {name: BOARD.name, hexSide: DIO_R, hexes: DIOS.map(d => ({id: d.id, n: d.n, zone: d.zone, name: d.name})), slots: BOARD_SLOTS, heightAt: boardRaw, tileAt: (px, py) => DIOS.find(d => { const o = tileOff(d); return inHex(px - o.x, py - o.y, DIO_R); })?.id || null}; // board metres east and north of the middle hex
+ // for the cart in the Effect Hunt: what stands near a point (board metres east/north of the middle hex), and where a car may start on a street
+ const obstaclesNear = (x, y, r) => { const out = []; for (const d of DIOS) { const o = tileOff(d); for (const t of dioObs[d.id] || []) { const bx = o.x + t.x, by = o.y + t.y, rr = t.tree ? 1.6 : (t.r || 8) * .8; if (Math.hypot(bx - x, by - y) < r + rr) out.push({x: bx, y: by, r: rr, kind: t.tree ? 'tree' : 'building', hex: d.id}); } } return out; };
+ const roadSpawns = (every = 30) => { const out = []; for (const d of DIOS) { const o = tileOff(d); for (const rd of dioRoads[d.id] || []) { if (rd.c > 4) continue; let run = 0, next = every / 2; for (let i = 1; i < rd.p.length; i++) { const [ax, ay] = rd.p[i - 1], [bx, by] = rd.p[i], l = Math.hypot(bx - ax, by - ay); while (next <= run + l) { const k = (next - run) / l, px = ax + (bx - ax) * k, py = ay + (by - ay) * k; if (inHex(px, py, DIO_R * .85)) out.push({hex: d.id, x: o.x + px, y: o.y + py, heading: Math.atan2(by - ay, bx - ax), width: rd.c <= 3 ? 5.4 : 4.2}); next += every; } run += l; } } } return out; };
+ const board = {name: BOARD.name, hexSide: DIO_R, hexes: DIOS.map(d => ({id: d.id, n: d.n, zone: d.zone, name: d.name})), slots: BOARD_SLOTS, heightAt: boardRaw, obstaclesNear, roadSpawns, tileAt: (px, py) => DIOS.find(d => { const o = tileOff(d); return inHex(px - o.x, py - o.y, DIO_R); })?.id || null}; // board metres east and north of the middle hex
  Object.assign(window.AbbieTown, {board, entrances: ENTRANCES, backUrl, go: (gate, st) => { const e = ENTRANCES[gate]; if (!e || !available(gate, st)) return false; if (e.kind === 'stage') { window.dispatchEvent(new CustomEvent('abbietown:enter', {detail: {gate, scene: e.scene, module: e.module}})); return enterScene(e.scene); } location.href = e.url; return true; }, stage, scenes, enterScene, exitScene, registerScene, mount: mountScene});
  { const at = new URLSearchParams(location.search).get('at'), e = at && ENTRANCES[at]; // coming back from a game: land at the gate you left by
    if (e && scenes[e.scene]) { setView(true); setTimeout(() => enterScene(e.scene, {dist: 70}), 60); } }
