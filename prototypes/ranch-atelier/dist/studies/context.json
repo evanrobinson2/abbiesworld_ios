@@ -2203,6 +2203,23 @@
           "note": "the intended pictures the tracing is scored against"
         }
       ]
+    },
+    "pencil": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Why Our Drawing Is Weak, AW-STUDY-0044",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/drawing/DRAWING_WEAKNESS_STUDY.md",
+          "note": "the traced strokes and fitted mannequin this pipeline starts from"
+        },
+        {
+          "k": "reference",
+          "t": "Midjourney figure-practice sketches",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/tools/midjourney/outputs/figure-practice-sketches",
+          "note": "stand-in for the hero set while Midjourney waits on Evan's Chrome"
+        }
+      ]
     }
   }
 }
