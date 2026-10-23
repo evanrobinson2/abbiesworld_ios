@@ -1,0 +1,32 @@
+# Runs Meshy hero jobs (tools/meshy-heroes/meshy_run.py) in GitHub instead of on Evan's PC, so a Claude thread can start
+# them itself once Evan has said go. The Meshy key lives only in the repo secret MESHY_API_KEY, which Evan sets himself.
+# The runner keeps the 2,000 credit cap in tools/meshy-heroes/meshy/credits.json and pushes each finished hero to the
+# branch the workflow runs on.
+name: meshy-run
+on:
+  workflow_dispatch:
+    inputs:
+      jobs: { description: 'Job ids from meshy-queue.json, space separated', required: true }
+      rig_only: { description: 'Only remesh + rig heroes whose model already exists', type: boolean, default: false }
+permissions:
+  contents: write
+concurrency: { group: meshy-run, cancel-in-progress: false }
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Meshy jobs
+        env:
+          MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
+          JOBS: ${{ inputs.jobs }}
+          RIG_ONLY: ${{ inputs.rig_only }}
+        run: |
+          set -eu
+          if [ -z "$MESHY_API_KEY" ]; then echo "MESHY_API_KEY secret is not set"; exit 1; fi
+          pip install -q pillow numpy
+          git config user.name "meshy-run"; git config user.email "meshy-run@users.noreply.github.com"
+          if [ "$RIG_ONLY" = "true" ]; then set -- --rig-only $JOBS; else set -- $JOBS; fi
+          python3 tools/meshy-heroes/meshy_run.py "$@" | tee /tmp/meshy.log
+          if grep -q '^FAIL\|^RIG FAIL' /tmp/meshy.log; then echo "::warning::some jobs failed, see the log"; fi
