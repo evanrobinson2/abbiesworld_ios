@@ -50,6 +50,18 @@
    3.66,
    2.84
   ],
-  "maps": "1024 px base, roughness, normal"
+  "maps": "1024 px base, roughness, normal",
+  "kit": {
+   "structural": true,
+   "snap_m": 2.0,
+   "cells": [
+    3,
+    2
+   ],
+   "pivot_offset_m": 0.376,
+   "ground_z_m": -0.228,
+   "pivot_ok": true,
+   "pivot": "rocks sink into the dust on purpose"
+  }
  }
 }

@@ -851,6 +851,60 @@
   "moon-base-kit": {
    "items": [
     {
+     "k": "oracle",
+     "t": "Astroneer identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json",
+     "note": "Modules, low HUD, state in the world. State lights stay separate named parts."
+    },
+    {
+     "k": "oracle",
+     "t": "Deliver Us The Moon identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/deliver-us-the-moon.json",
+     "note": "Diegetic holograms; story props are the breadcrumbs."
+    },
+    {
+     "k": "oracle",
+     "t": "Subnautica 2 identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/subnautica-2.json",
+     "note": "A base built from its own pieces: dome, corridor and airlock must snap."
+    },
+    {
+     "k": "design",
+     "t": "Skyrim's Modular Approach to Level Design (Joel Burgess, GDC 2013)",
+     "href": "https://www.gamedeveloper.com/design/skyrim-s-modular-approach-to-level-design",
+     "note": "Pivot at ground centre, 2 m snap, one door size; now checked in bkit.build()."
+    },
+    {
+     "k": "design",
+     "t": "Building huge open worlds: modularity, kits and art fatigue (80 Level)",
+     "href": "https://80.lv/articles/building-huge-open-worlds-modularity-kits-art-fatigue",
+     "note": "No patch pieces; lock pivots and footprints early."
+    },
+    {
+     "k": "devblog",
+     "t": "How System Era used UE4 to create Astroneer (Unreal Engine spotlight)",
+     "href": "https://www.unrealengine.com/en-US/spotlights/how-system-era-softworks-leveraged-ue4-to-create-astroneer-s-wonderful-universe",
+     "note": "Low poly for speed; one material with switchable emissive lights."
+    },
+    {
+     "k": "devblog",
+     "t": "Interview: Deliver Us The Moon's Jordy Velasquez (IndieGraze)",
+     "href": "https://www.indiegraze.com/?p=617",
+     "note": "Story placed organically as a breadcrumb trail."
+    },
+    {
+     "k": "tutorial",
+     "t": "Face weighted normals discussion (Polycount)",
+     "href": "https://polycount.com/discussion/comment/1688746",
+     "note": "Not with a baked normal map; we keep chamfer plus bake."
+    },
+    {
+     "k": "tutorial",
+     "t": "Tools and guides for hard-surface scene production (80 Level)",
+     "href": "https://80.lv/articles/tools-and-guides-for-hard-surface-scene-production",
+     "note": "Trim sheets as a later step for shared seams."
+    },
+    {
      "k": "canon",
      "t": "Moon remaster wave 1 (MR-002 to MR-004)",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/remaster/REMASTER_STUDY.md",
@@ -896,7 +950,7 @@
      "note": "Each pick is assets/<slug>/concept.jpg, with its job id in provenance.json."
     }
    ],
-   "recorded": "2026-10-23, from the thread as it ran; no Oracle, blog or tutorial was consulted for this study"
+   "recorded": "2026-10-23: canon and references from the thread as it ran; Oracle, design, dev blog and tutorial pass after round 3 (see the study doc, Research pass)"
   },
   "overview": {
    "use": [
