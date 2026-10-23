@@ -1,0 +1,10 @@
+{
+ "source": "tools/meshy-heroes/meshy/charm-rocket/charm-rocket.glb",
+ "out": "prototypes/ranch-atelier/dist/simulations/assets/backpack/charms/rocket.glb",
+ "tris_before": 8028,
+ "tris": 8000,
+ "largest_side": 1.0,
+ "textured": false,
+ "bytes": 384700,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/charm_cleanup.py"
+}

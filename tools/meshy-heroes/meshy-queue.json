@@ -447,7 +447,8 @@
     }
    },
    "save_to": "tools/midjourney/outputs/character-studio/1-claymation-adventurer/meshy/",
-   "for": "Character Studio (Evan 16:53Z)"
+   "for": "Character Studio (Evan 16:53Z)",
+   "deliver_to": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/"
   },
   {
    "id": "cs-2-plasticine-inventor",
@@ -461,7 +462,8 @@
     }
    },
    "save_to": "tools/midjourney/outputs/character-studio/2-plasticine-inventor/meshy/",
-   "for": "Character Studio (Evan 16:53Z)"
+   "for": "Character Studio (Evan 16:53Z)",
+   "deliver_to": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/"
   },
   {
    "id": "cs-3-stick-man",
@@ -475,7 +477,8 @@
     }
    },
    "save_to": "tools/midjourney/outputs/character-studio/3-stick-man/meshy/",
-   "for": "Character Studio (Evan 16:53Z)"
+   "for": "Character Studio (Evan 16:53Z)",
+   "deliver_to": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/"
   },
   {
    "id": "cs-4-80s-action-hero",
@@ -489,7 +492,8 @@
     }
    },
    "save_to": "tools/midjourney/outputs/character-studio/4-80s-action-hero/meshy/",
-   "for": "Character Studio (Evan 16:53Z)"
+   "for": "Character Studio (Evan 16:53Z)",
+   "deliver_to": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/"
   },
   {
    "id": "charm-gold-coin",
