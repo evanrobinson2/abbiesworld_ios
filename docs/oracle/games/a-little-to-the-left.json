@@ -1,0 +1,84 @@
+{
+  "appid": 1629520,
+  "name": "A Little to the Left",
+  "store_url": "https://store.steampowered.com/app/1629520/",
+  "genres": [
+    "Puzzle",
+    "Cozy",
+    "Casual"
+  ],
+  "short_description": "Tidy, sort and straighten household things into satisfying order, while a cat keeps messing it up.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Cozy",
+    "Casual"
+  ],
+  "summary": "Tidy, sort and straighten household things into satisfying order, while a cat keeps messing it up.",
+  "identity": {
+    "core_loop": "Look at a messy little scene, drag things until they line up or sort, the puzzle snaps tidy; a cat sometimes undoes it.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fussy in the nicest way; the snap when things line up is the reward.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "meta": 0.1,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The scene is the whole interface: the finished state shows itself by clicking into place. Hints are summoned, and some puzzles accept more than one tidy answer.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Soft hand-drawn objects on paper-like backgrounds.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "hand_painted_2d",
+      "light": "flat",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "paper",
+      "post": [],
+      "signature": "Soft hand-drawn objects with gentle ink edges on warm paper-textured backgrounds, lit flat like an illustration.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "A paper ground and soft ink lines make tidy puzzles feel homely rather than clinical."
+    },
+    "palette": null,
+    "audio_mood": "Light piano and plucks; small clicks and rustles for every object.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Order is a pleasure: a puzzle can be 'make it neat' with several right answers. A pet that undoes your work is comedy, not failure."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.67,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.11,
+      "chance": 0.56,
+      "session": 0.22
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

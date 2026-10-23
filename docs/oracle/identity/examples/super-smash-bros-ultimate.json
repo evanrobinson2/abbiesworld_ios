@@ -1,0 +1,344 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Super Smash Bros. Ultimate",
+    "developer": "Bandai Namco Studios and Sora Ltd.",
+    "publisher": "Nintendo",
+    "release": "2018",
+    "platforms": [
+      "Nintendo Switch"
+    ],
+    "steam_appid": null
+  },
+  "core": {
+    "fantasy": "You are a toy-box hero in a bouncy party brawl, where the aim is to knock friends off the stage rather than knock them out.",
+    "pillars": [
+      "Push off the edge, not drain a bar",
+      "Anyone can pick it up",
+      "Chaos you laugh at"
+    ],
+    "signature_moment": "Your friend is at a huge damage number, clinging to the ledge, and one well-timed swing sends them flying off with a star twinkle.",
+    "anti_goals": [
+      "no health bars",
+      "no gore",
+      "no long matches"
+    ],
+    "signatures": [
+      {
+        "id": "ring_out_damage",
+        "layer": "mechanics",
+        "description": "Hits raise a damage number; the bigger it is, the further you fly, and leaving the stage loses a life.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "danger_on_fighter",
+        "layer": "information_grammar",
+        "description": "Danger shows on the fighter: smoke, flashing and a freeze-frame on a finishing hit.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "shared_light_mixed_styles",
+        "layer": "art",
+        "description": "Fighters from many art styles share one rim light, bloom and hit-spark language so they belong together.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "simple_inputs",
+        "layer": "interaction",
+        "description": "Two attack buttons and a direction make every move; no long motion inputs.",
+        "class": "style",
+        "confidence": 0.7
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "fellowship": 0.4,
+        "sensation": 0.25,
+        "challenge": 0.25,
+        "fantasy": 0.1
+      },
+      "emotional_targets": {
+        "laughter": 0.8,
+        "excitement": 0.9,
+        "triumph": 0.6
+      },
+      "audience": {
+        "age": "everyone, including children",
+        "skill_floor": "mash buttons and still have fun",
+        "context": "couch party, family"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "run",
+          "input": "stick"
+        },
+        {
+          "verb": "jump",
+          "input": "button"
+        },
+        {
+          "verb": "attack",
+          "input": "button plus direction"
+        },
+        {
+          "verb": "special",
+          "input": "button plus direction"
+        },
+        {
+          "verb": "shield",
+          "input": "trigger"
+        },
+        {
+          "verb": "grab",
+          "input": "button"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "run in",
+          "trade hits",
+          "build damage",
+          "launch them",
+          "they come back",
+          "last one standing"
+        ],
+        "period_s": {
+          "value": 180,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "retry_level",
+        "win": "most knock-outs or last one standing",
+        "resources": [
+          "damage percent",
+          "lives"
+        ]
+      },
+      "randomness": {
+        "amount": 0.3,
+        "kind": "output"
+      },
+      "information": "perfect",
+      "systems": [
+        "knockback that grows with damage",
+        "items",
+        "ledge recovery",
+        "up to eight players"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 6,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        }
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "controller"
+        ],
+        "mapping": "direct"
+      },
+      "camera": {
+        "model": "side",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "none",
+        "undo": "no",
+        "preview_before_commit": false,
+        "auto_repair": false
+      },
+      "juice": {
+        "hit_stop": 0.8,
+        "screen_shake": 0.6,
+        "particles": 0.8,
+        "camera_kick": 0.8,
+        "sound_on_action": 1.0,
+        "squash_stretch": 0.4,
+        "scale_pop": 0.4,
+        "procedural_settle": 0.0
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "stylised_pbr",
+        "family": "stylised_pbr",
+        "light": "soft_wrap",
+        "outlines": false,
+        "outline": "none",
+        "surface": "pbr",
+        "post": [
+          "bloom"
+        ],
+        "signature": "Every fighter keeps their own home look; one strong rim light, bright bloom and a shared hit-spark style make them belong to one game.",
+        "lesson": "Mixed styles can live together if light, rim and effects are shared. Useful for Abbie's World characters made by different factories."
+      },
+      "references": [
+        "toy boxes of action figures",
+        "party games",
+        "Saturday-morning cartoons"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "body": {
+          "mix": {
+            "overlay": 0.6,
+            "spatial": 0.3,
+            "meta": 0.1
+          },
+          "timing": "always_on",
+          "note": "One damage number per player along the bottom; the fighter smokes and flashes when high.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "threat": {
+          "mix": {
+            "spatial": 0.6,
+            "diegetic": 0.4
+          },
+          "timing": "on_change",
+          "note": "Charge glows, items in hands and the stage edge show danger.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "social": {
+          "mix": {
+            "spatial": 0.7,
+            "overlay": 0.3
+          },
+          "timing": "always_on",
+          "note": "Player tags float over each fighter in big matches.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.1,
+        "meta": 0.2,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "Oracle reference study 2026-10-23: public knowledge (dev talks, reviews, store pages), in our own words; not yet measured on capture"
+        },
+        "drawn_as": "neutral_overlay",
+        "fade_rule": "Damage numbers stay; tags show when fighters overlap."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "match climax",
+            "channels": [
+              "camera",
+              "sound",
+              "music",
+              "lens"
+            ]
+          }
+        ],
+        "max_channels": 3
+      },
+      "note": "One number per player at the bottom of the screen; the bigger it is the further you fly. Fighters flash and smoke when they are in danger, and a big hit freezes the screen for a moment."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "emergent": 0.8,
+        "evoked": 0.2
+      },
+      "tone": {
+        "cozy_tense": 0.3,
+        "whimsical_grounded": -0.8,
+        "earnest_ironic": 0.1,
+        "quiet_loud": 0.9,
+        "handmade_industrial": 0.0
+      },
+      "themes": [
+        "play",
+        "friendly rivalry"
+      ]
+    },
+    "pacing": {
+      "structure": "mixed",
+      "tension_curve": "sawtooth",
+      "failure_cost": "retry_level"
+    }
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 1.0,
+      "challenge": 0.78,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.22
+    },
+    "confidence": 0.8
+  },
+  "ledger": {
+    "style": [
+      "ring-out damage instead of health",
+      "danger shown on the fighter",
+      "shared rim light and hit sparks across styles",
+      "two-button move set"
+    ],
+    "expression": [
+      "its characters, all borrowed from other series",
+      "its stages and items",
+      "its music",
+      "its logo and UI"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "mechanics",
+        "target": "Brute Fight rules",
+        "setting": "Knock the other brute out of the ring instead of draining health: nobody gets hurt, they fly off and bounce back in.",
+        "from_signature": "ring_out_damage"
+      },
+      {
+        "layer": "information_grammar",
+        "target": "Brute Fight HUD",
+        "setting": "Show danger on the brute: puffing, wobbling, glowing; at most one tiny number per player.",
+        "from_signature": "danger_on_fighter"
+      },
+      {
+        "layer": "art",
+        "target": "Character factory",
+        "setting": "Unify models from different makers with one rim light and one effects style.",
+        "from_signature": "shared_light_mixed_styles"
+      }
+    ],
+    "leave": [
+      "its characters and franchises",
+      "its item list",
+      "its stages"
+    ]
+  },
+  "sources": [
+    "Oracle reference study 2026-10-23 from public knowledge (developer talks, reviews, store pages), in our own words",
+    "tools/steam-study/reference_notes.py (profile row)",
+    "tools/steam-study/rendering_notes.py (How it's drawn)"
+  ]
+}

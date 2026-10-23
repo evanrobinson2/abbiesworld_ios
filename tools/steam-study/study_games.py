@@ -1,6 +1,7 @@
 """Write Oracle study notes into Steam profiles (docs/oracle/games/<slug>.json).
 
-    python study_games.py          # library_notes.py (installed), owned_notes.py (owned, not installed), free_notes.py
+    python study_games.py          # library_notes.py (installed), owned_notes.py (owned, not installed), free_notes.py,
+                                   # reference_notes.py (reference games outside the library)
 
 Rendering (how each game is shaded) comes from rendering_notes.py.
 
@@ -14,6 +15,7 @@ from pathlib import Path
 from free_notes import FREE
 from library_notes import LIBRARY
 from owned_notes import OWNED
+from reference_notes import REFERENCE
 from rendering_notes import rendering_for
 
 GAMES = Path(__file__).resolve().parents[2] / 'docs' / 'oracle' / 'games'
@@ -61,7 +63,7 @@ def study(row, free):
     return slug, appid, name, genres.split(';'), summary, identity, dna, family, review, studied
 
 
-def write(row, free, installed=True):
+def write(row, free, installed=True, owned=True):
     slug, appid, name, genres, summary, identity, dna, family, review, studied = study(row, free)
     path = GAMES / f'{slug}.json'
     profile = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {
@@ -73,8 +75,8 @@ def write(row, free, installed=True):
     profile['summary'] = summary
     profile['identity'] = identity
     profile['dna'] = dna
-    profile['study'] = {'set': 'free-25' if free else 'library' if installed else 'owned',
-                        'owned': not free, 'installed': not free and installed,
+    profile['study'] = {'set': 'free-25' if free else 'reference' if not owned else 'library' if installed else 'owned',
+                        'owned': not free and owned, 'installed': not free and owned and installed,
                         'status': 'studied' if studied else 'needs play session', 'date': '2026-10-23'}
     if family:
         profile['study']['family'] = family
@@ -89,5 +91,6 @@ if __name__ == '__main__':
     lib = [write(r, False) for r in LIBRARY]
     owned = [write(r, False, installed=False) for r in OWNED]
     free = [write(r, True) for r in FREE]
+    ref = [write(r, False, installed=False, owned=False) for r in REFERENCE]
     print(f'library: {sum(lib)} of {len(lib)} studied; owned: {sum(owned)} of {len(owned)} studied; '
-          f'free: {sum(free)} of {len(free)} studied')
+          f'free: {sum(free)} of {len(free)} studied; reference: {sum(ref)} of {len(ref)} studied')

@@ -1568,6 +1568,12 @@
      "note": "The film look: contact shadows, height haze, depth of field, bloom and grade, now simulations/film-look.mjs"
     },
     {
+     "k": "canon",
+     "t": "Painted Brush shader (AW-STUDY-0045 shaders thread)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs",
+     "note": "The sixth direction, Painted: brush-broken light, purple shadows, teal rim, broken ink"
+    },
+    {
      "k": "devblog",
      "t": "Simon Clavet, Motion Matching and The Road to Next-Gen Animation (GDC 2016)",
      "href": "https://gdcvault.com/play/1023280/Motion-Matching-and-The-Road",
@@ -1623,6 +1629,87 @@
     }
    ],
    "recorded": "2026-10-23, by the study as it was made"
+  },
+  "shaders": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Oracle: how it's drawn (identity.rendering on 368 games)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/rendering/RENDERING_STUDY.md",
+     "note": "Light families, outlines and lessons for Tiny Glade, Sable, Dredge and the rest; Evan's five favourites all use soft light and no outlines"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle: Tiny Glade, how it's drawn",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=tiny-glade"
+    },
+    {
+     "k": "devblog",
+     "t": "GDC 2021: Procedural Grass in Ghost of Tsushima",
+     "href": "https://gdcvault.com/play/1027214/Advanced-Graphics-Summit-Procedural-Grass",
+     "note": "Applied: instanced blades bent by one shared wind field"
+    },
+    {
+     "k": "devblog",
+     "t": "GDC 2024: 3D Toon Rendering in Hi-Fi Rush",
+     "href": "https://gdcvault.com/play/1034251/3D-Toon-Rendering-in-Hi",
+     "note": "Applied: two hard bands, halftone shadows, the world pulsing on the beat"
+    },
+    {
+     "k": "devblog",
+     "t": "GDC 2015: Guilty Gear Xrd's art style",
+     "href": "https://www.gdcvault.com/play/1022031/GuiltyGearXrd-s-Art-Style-The",
+     "note": "Applied: designed normals, bold lines and held frames at 12 fps"
+    },
+    {
+     "k": "devblog",
+     "t": "Lucas Pope: Obra Dinn devlog (dither)",
+     "href": "https://forums.tigsource.com/index.php?topic=40832.msg1363742#msg1363742"
+    },
+    {
+     "k": "design",
+     "t": "RedShark: how Fortiche built the Arcane pipeline",
+     "href": "https://redsharknews.com/why-netflixs-arcane-looks-so-good-how-fortiche-ramped-up-the-animation-pipeline",
+     "note": "Applied in Painted Brush: light painted into the surface, effects at 12 fps"
+    },
+    {
+     "k": "design",
+     "t": "80.lv: the making of Hi-Fi Rush's toon style",
+     "href": "https://80.lv/articles/the-making-of-hi-fi-rush-s-3d-toon-rendering-style"
+    },
+    {
+     "k": "tutorial",
+     "t": "80.lv: recreating Ekko with painted textures",
+     "href": "https://80.lv/articles/3d-artist-recreates-arcane-s-ekko-with-substance-3d-blender"
+    },
+    {
+     "k": "tutorial",
+     "t": "Genshin-style shading breakdown",
+     "href": "https://bjayers.artstation.com/blog/category/5"
+    },
+    {
+     "k": "tutorial",
+     "t": "80.lv: next-gen pixel art with dynamic light",
+     "href": "https://80.lv/articles/exploring-next-gen-pixel-art-with-real-time-dynamic-lighting"
+    },
+    {
+     "k": "canon",
+     "t": "Shaders: What They Don't Teach You in 3D School",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/rendering/shaders-article.html",
+     "note": "The nine rules and the seven-look toon set this study builds on"
+    },
+    {
+     "k": "canon",
+     "t": "AW-STUDY-0045 study doc",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "AW-STUDY-0028 Storybook Light",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/storybook/STORYBOOK_STUDY.md"
+    }
+   ],
+   "recorded": "2026-10-23, as the study was made"
   },
   "texture-studio": {
    "items": [

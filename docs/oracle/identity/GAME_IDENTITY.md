@@ -395,6 +395,16 @@ brief says otherwise:
 6. **Low failure cost.** No fail (Tiny Glade, mostly Dorfromantik) or instant retries (Besiege, Bricktales); 9 Kings
    is the outlier with run loss, softened by short runs.
 
+### Reference records (2026-10-23)
+
+Ten more records were added because studies consulting the Oracle found nothing to stand on: Coffee Talk, Unpacking,
+A Little to the Left and Animal Crossing: New Horizons (cozy shops and homes), Street Fighter 6, Super Smash Bros.
+Ultimate and Absolver (fighting), and A Short Hike, Jusant and Untitled Goose Game (climbing and kid-friendly
+stealth). They use schema 1.2, carry `art.rendering` with the one-trick `signature` ("How it's drawn"), a `dna`
+block on the same 0 to 9 axes as the Steam profiles, and an `assimilation` that names the study each take serves.
+All values are estimates from public knowledge, in our own words; the ledger keeps every character, level and
+piece of art on the expression side.
+
 ## Validating a record
 
 ```

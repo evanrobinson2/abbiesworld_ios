@@ -8,3 +8,13 @@ test('filters, pagination and bounds',()=>{assert(search({installed:'true',owner
 test('similarity is explained; unknown IDs fail',()=>{const result=similar('steam-728880');assert(result.results.every(g=>g.shared.length&&!g.id.endsWith('-728880')));assert.equal(similar('missing'),null);});
 test('API validates inputs and verbs',()=>{const res={setHeader(){},status(n){this.code=n;return this},json(body){this.body=body;return this}};handler({method:'GET',url:'/api/games?installed=maybe'},res);assert.equal(res.code,400);handler({method:'GET',url:'/api/games?id=missing'},res);assert.equal(res.code,404);handler({method:'POST',url:'/api/games'},res);assert.equal(res.code,405);});
 test('published catalog contains no machine paths, account IDs or secrets',()=>{const raw=readFileSync(new URL('./data/catalog.json',import.meta.url),'utf8');assert(!/Users[\\/]|7656119\d{10}|api[_-]?key|Bearer |localhost|127\.0\.0\.1/i.test(raw));assert.equal(catalog.meta.storage.pcRequiredForReads,false);});
+test('consult finds the reference games studies asked for (café, Brute Fight, School Jump)',async()=>{
+ const {retrieve}=await import('./lib/director.js'),{getIdentity}=await import('./lib/knowledge.js');
+ const top=q=>retrieve(q).identities.map(i=>i.id);
+ assert(top('a cozy coffee shop where you make drinks for customers').includes('coffee-talk'));
+ assert(['super-smash-bros-ultimate','street-fighter-6','absolver'].includes(top('a side-on cartoon fighting game where two brutes brawl')[0]));
+ assert(top('a girl climbs the school drainpipe and sneaks past the teachers').some(id=>['a-short-hike','jusant','untitled-goose-game'].includes(id)));
+ assert(!top('a side-on fighting game').includes('coffee-talk'),'"side" must not match "inside"');
+ assert.equal(getIdentity('animal-crossing-new-horizons').profile.name,'Animal Crossing: New Horizons');
+ assert.equal(getIdentity('abbies-world').profile,null);
+});
