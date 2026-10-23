@@ -294,7 +294,7 @@ function setupStage() {
  const stage = {THREE, scene, camera, controls, renderer, clock, dioGroup, farGroup, tiles: dioTiles, scenes,
   frame: fn => { stageFrames.push(fn); return () => { const i = stageFrames.indexOf(fn); if (i >= 0) stageFrames.splice(i, 1); }; },
   flyTo: (target, o = {}) => { const v = target.isVector3 ? target : new THREE.Vector3(target.x, target.y || 0, target.z); const dist = o.dist || 120, pitch = rad(o.pitch ?? 50), az = rad(o.azimuth ?? 180), h = Math.cos(pitch) * dist; fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(v.x + Math.sin(az) * h, v.y + Math.sin(pitch) * dist, v.z - Math.cos(az) * h), t1: v.clone()}; },
-  setLook: l => { look = {...look, ...l}; }, hideChrome: on => { document.querySelector('.hud').style.display = on ? 'none' : ''; bubble.style.opacity = on ? 0 : bubble.style.opacity; }};
+  setLook: l => { look = {...look, ...l}; }, hideChrome: on => { document.querySelectorAll('.hud').forEach(h => { h.style.display = on ? 'none' : ''; }); /* the toolbar and the year bar */ bubble.style.opacity = on ? 0 : bubble.style.opacity; }};
  const ground = (wx, wz) => { for (const d of DIOS) { const t = dioTiles[d.id], px = wx - t.group.position.x - dioGroup.position.x, py = -(wz - t.group.position.z - dioGroup.position.z); if (inHex(px, py, DIO_R)) return t.hf(px, py) + dioGroup.position.y; } return 0; };
  stage.ground = ground;
  for (const t of Object.values(dioTiles)) for (const sp of Object.values(t.spots)) { const f = sp.facing || 0, ox = Math.sin(f), oz = Math.cos(f); sp.out = {dirX: ox, dirZ: oz}; sp.street = {dirX: oz, dirZ: -ox}; const cx = sp.x + ox * 8.5, cz = sp.z + oz * 8.5; sp.curb = {x: cx, y: t.hf(cx, -cz), z: cz}; }

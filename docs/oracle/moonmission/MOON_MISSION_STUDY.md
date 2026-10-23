@@ -575,6 +575,10 @@ The 3D version (Evan, 18:40Z: "make the moon mission in the game world; Meshy fo
 
 Goal 3 (Evan, 19:15Z): production quality, low-poly isometric, following the same loop. Built so far: the isometric camera is the default in `world.html` (rooms cut away, `?view=fp` for first person), and games 3 to 6 are pure models in `simulations/moonmission/games.mjs` (wire puzzle at the airlock, bug zapper in the habitat, Star Child harmonizer in the cave, buggy ride on the crater road), each with its own 3D scene, per-player controls and a bot test. Nobody can fail in any of them. Still missing for "done": real Meshy heroes (stand-ins today), the cafe and truck hi-fi model passes, sound and the designed voices on the 3D page, dialog moved onto the shared kit's tree runner, and the slide-to-escape style framing and effects polish.
 
+In the town (Evan, 19:33Z / 3:33 PM: "this needs to be fully integrated into the winchester diorama"): /town now starts
+the mission. A black truck waits in Main Street outside the café on the Downtown diorama; tapping it (or `/town?mission`)
+runs `town-mount.mjs` on the town's stage through the `town:truck` entrance (town side: `docs/oracle/abbietown/mission.block.js`).
+
 ## 16. How it was made, and how to be faster next time
 To be written when Part 1 ships (CLAUDE.md speed-review rule). Speedups applied from the school and basement reviews:
 the reference art is frozen first (section 9), the couch kit goes into `simulations/`, tests run by state, the

@@ -166,3 +166,12 @@ The town is the in-game hub the café, basement, science lab and Moon Mission pl
 - Coming back: a game opened from the town gets `?from=<url>`; the url is `/town?at=<gate id>`, and the town flies to that gate's scene. The older `?from=cafe` also lands Downtown.
 - `window.AbbieTown`: `entrances`, `go(gate, state)`, `scenes`, `enterScene(id, {look, fov, dist, azimuth, pitch, lock})`, `exitScene()`, `registerScene({id, region, anchor, facing, bounds, look})` (region null parks it off-map), `mount(id, {onFrame, onExit})` returning `{group, setMood, dispose}`, and `stage` (THREE, scene, camera, controls, renderer, clock, dioGroup, farGroup, tiles with spots, `frame(fn)`, `flyTo`, `setLook`, `hideChrome`). Events: `abbietown:scene-enter`, `abbietown:scene-exit`, `abbietown:enter`, `abbietown:cafe-door`.
 - Scenes on the tiles: `cafe-curb`, `lab-door`, `abbie-kitchen`, `treehouse`, `anis-kitchen`, `launch-pad`, `school-door`, and `dio-<region>`.
+
+## The Moon Mission starts at the café curb (Evan, 2026-10-23 3:33 PM)
+"This needs to be fully integrated into the winchester diorama." The town side of the `town:truck` entrance is
+`mission.block.js` (inlined after `dioramas.block.js`): a black truck parked in Main Street outside the café. Tapping it
+calls `AbbieTown.go('town:truck')`; the `abbietown:enter` listener for module `moon-mission` loads
+`simulations/moonmission/town-mount.mjs` (the mission side, AW-STUDY-0036) and starts it on the stage. `/town?mission`
+opens straight on it (`?beat=<id>` jumps ahead). While a stage module runs, `stage.hideChrome` now hides every town bar
+(the toolbar and the year bar); the truck comes back to the curb when the mission ends.
+
