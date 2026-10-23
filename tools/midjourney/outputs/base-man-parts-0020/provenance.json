@@ -1,0 +1,189 @@
+{
+  "set": "base-man-parts-0020",
+  "round": 1,
+  "generated": "2026-10-23",
+  "tool": "Midjourney web (v8.2), grid only, no upscale",
+  "prompts": "tools/midjourney/prompts/base-man-parts-0020.txt",
+  "jobs": [
+    {
+      "name": "head",
+      "prompt": "isolated anatomical study of a single adult male bald head and neck with a calm neutral face, strong brow, straight nose, defined cheekbones, closed lips, square jaw and chin, both ears, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view and side profile view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "15888bb3-61ca-4c5b-816c-10dff27965b4",
+      "created": "2026-10-23T07:10:00Z",
+      "files": [
+        {
+          "file": "images/head_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/15888bb3-61ca-4c5b-816c-10dff27965b4/0_0.png",
+          "sha256": "ca21c51a3480de5c2ef086a9c17b79624c2bc37348f0a997d008badd638c0b90",
+          "bytes": 855981
+        },
+        {
+          "file": "images/head_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/15888bb3-61ca-4c5b-816c-10dff27965b4/0_1.png",
+          "sha256": "ca6daa90cb9681ddb7ac095374a37be2d3bae025f88a4e21644cc80d406f6f04",
+          "bytes": 942890
+        },
+        {
+          "file": "images/head_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/15888bb3-61ca-4c5b-816c-10dff27965b4/0_2.png",
+          "sha256": "308111b54d2554f00f3fbe60aff64821fbe414c41d409ade6b59296e834fee57",
+          "bytes": 836530
+        },
+        {
+          "file": "images/head_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/15888bb3-61ca-4c5b-816c-10dff27965b4/0_3.png",
+          "sha256": "691a72544158f44abe409e41af891c740b4dfe06d2a05704a1d580ecf17eeb3c",
+          "bytes": 838785
+        }
+      ]
+    },
+    {
+      "name": "ear",
+      "prompt": "isolated anatomical study of a single adult male right ear, helix, antihelix, tragus and lobe clearly shaped, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, side view and front view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "2f2a93a1-7903-4a81-8161-c6b1abbcd496",
+      "created": "2026-10-23T07:12:00Z",
+      "files": [
+        {
+          "file": "images/ear_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/2f2a93a1-7903-4a81-8161-c6b1abbcd496/0_0.png",
+          "sha256": "71e84db2a8222637b55c54539f3c234d4797db1901bbac4e782636c1edffa740",
+          "bytes": 355913
+        },
+        {
+          "file": "images/ear_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/2f2a93a1-7903-4a81-8161-c6b1abbcd496/0_1.png",
+          "sha256": "75ea56ddf26d27512548994df22730a1b0fa0ad5251fa6ebbf19491d1fa5ff07",
+          "bytes": 668816
+        },
+        {
+          "file": "images/ear_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/2f2a93a1-7903-4a81-8161-c6b1abbcd496/0_2.png",
+          "sha256": "3afa2daf6d9fab635a073db4a7d1586a872f67c4b2fd48541cdfa1fe267e2544",
+          "bytes": 555959
+        },
+        {
+          "file": "images/ear_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/2f2a93a1-7903-4a81-8161-c6b1abbcd496/0_3.png",
+          "sha256": "72923c8dc3aac65845c15e325870d02f9d4df0edabfbfb748e2c3893b2887cc5",
+          "bytes": 519232
+        }
+      ]
+    },
+    {
+      "name": "eyes-nose-mouth",
+      "prompt": "isolated anatomical study of a single adult male face mask showing the brow, eye sockets with eyelids, nose with nostrils, lips and chin, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view and three-quarter view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "68dd7d22-4f3f-4ce0-ac28-765119c3100d",
+      "created": "2026-10-23T07:12:48Z",
+      "files": [
+        {
+          "file": "images/eyes-nose-mouth_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/68dd7d22-4f3f-4ce0-ac28-765119c3100d/0_0.png",
+          "sha256": "a28709d777d9309bc7822db13e9f43121485078a8fe8f5a4925d82f479896b0e",
+          "bytes": 948767
+        },
+        {
+          "file": "images/eyes-nose-mouth_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/68dd7d22-4f3f-4ce0-ac28-765119c3100d/0_1.png",
+          "sha256": "308acdb3090a7faed62635280ecc372bdb755089980c87e6cafd9d7f00ad4b21",
+          "bytes": 1089970
+        },
+        {
+          "file": "images/eyes-nose-mouth_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/68dd7d22-4f3f-4ce0-ac28-765119c3100d/0_2.png",
+          "sha256": "dacfdac61cec65c6299305aed10fe2f44330426f6c2d491d19f1f9afa197a0f0",
+          "bytes": 990947
+        },
+        {
+          "file": "images/eyes-nose-mouth_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/68dd7d22-4f3f-4ce0-ac28-765119c3100d/0_3.png",
+          "sha256": "cb28e832e3369129560fae7b654f3f288724eb5cd1ea92485b8d55bb61bb911a",
+          "bytes": 1015938
+        }
+      ]
+    },
+    {
+      "name": "neck-shoulders",
+      "prompt": "isolated anatomical study of a single adult male neck, trapezius and collarbones down to the shoulder tips, no arms, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "b40203f8-870d-41fe-83e3-0541e02e7b72",
+      "created": "2026-10-23T07:13:38Z",
+      "files": [
+        {
+          "file": "images/neck-shoulders_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/b40203f8-870d-41fe-83e3-0541e02e7b72/0_0.png",
+          "sha256": "286945c2ee1410524a2b7ae4b157fb4932c0c9e84add003d8d1db21bb372316a",
+          "bytes": 869849
+        },
+        {
+          "file": "images/neck-shoulders_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/b40203f8-870d-41fe-83e3-0541e02e7b72/0_1.png",
+          "sha256": "659fc473e284ae905be51da408b75d3cf428eaf514c396322a02af4dc8f7f9f0",
+          "bytes": 831840
+        },
+        {
+          "file": "images/neck-shoulders_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/b40203f8-870d-41fe-83e3-0541e02e7b72/0_2.png",
+          "sha256": "1139b384381ec3107d7f420040cff12f6d4db29f7553fb93444baa3d59ab8220",
+          "bytes": 1125515
+        },
+        {
+          "file": "images/neck-shoulders_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/b40203f8-870d-41fe-83e3-0541e02e7b72/0_3.png",
+          "sha256": "01a6129f0da1e81384d3dbcfd14e85ae1481770b74e3ab8128dec4bbbf1d6ada",
+          "bytes": 900903
+        }
+      ]
+    },
+    {
+      "name": "torso-front",
+      "prompt": "isolated anatomical study of a single adult male torso from collarbones to hips, athletic pectorals, rib cage, serratus, six-pack abdominals and obliques, no arms, no head, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view and side profile view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "d93a771a-8dc9-4643-bde2-21a550e08c67",
+      "created": "2026-10-23T07:14:32Z",
+      "files": [
+        {
+          "file": "images/torso-front_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/d93a771a-8dc9-4643-bde2-21a550e08c67/0_0.png",
+          "sha256": "7bd9523ae433f6fdddb71c0c698e9f1e537ae690b9b2e6fd5a83d6589a18f56a",
+          "bytes": 599165
+        },
+        {
+          "file": "images/torso-front_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/d93a771a-8dc9-4643-bde2-21a550e08c67/0_1.png",
+          "sha256": "8e7a4a63097384cd432bc8b89f3c67f6195aad462194cab758db75fba5b93837",
+          "bytes": 751918
+        },
+        {
+          "file": "images/torso-front_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/d93a771a-8dc9-4643-bde2-21a550e08c67/0_2.png",
+          "sha256": "a3be3b51e60b0e7d680b7ecc30e27a7232ad81e7a4ff21c479425c270c82aac8",
+          "bytes": 651678
+        },
+        {
+          "file": "images/torso-front_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/d93a771a-8dc9-4643-bde2-21a550e08c67/0_3.png",
+          "sha256": "188c6f82587b72e34a7fa3a4a959c6b0f59cee7b4ff43d0a808f4ac4c6f31706",
+          "bytes": 651097
+        }
+      ]
+    }
+  ]
+}
