@@ -1,0 +1,48 @@
+{
+  "study": "AW-STUDY-0021 Bruiser Study (brute 2)",
+  "tool": "Meshy image-to-3D (OpenAPI v1)",
+  "source_image": "tools/bruiser-study/ref/bruiser-2-queued.png",
+  "meshy_task_id": "01a16806-f882-743e-ae4e-ec866c693b4d",
+  "request_settings": {
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "should_texture": false,
+    "enable_pbr": false,
+    "pose_mode": "default (not set)",
+    "image_url": "base64 data URI of source_image"
+  },
+  "submitted_at": "2026-10-23T09:10:49.343866+00:00",
+  "meshy_created_at": 1792746650817,
+  "meshy_started_at": 1792746650826,
+  "meshy_finished_at": 1792746680160,
+  "downloaded_at": "2026-10-23T09:11:22.838283+00:00",
+  "credits_used": 20,
+  "glb": {
+    "path": "tools/bruiser-study/meshy2/brute2_meshy.glb",
+    "inspect": {
+      "path": "tools/bruiser-study/meshy2/brute2_meshy.glb",
+      "file_size_bytes": 1084028,
+      "file_size_mb": 1.034,
+      "glb_version": 2,
+      "glb_declared_length": 1084028,
+      "mesh_count": 1,
+      "node_count": 1,
+      "skeleton_skin_present": false,
+      "skin_count": 0,
+      "joint_bone_count": 0,
+      "joint_names_sample": [],
+      "animation_clip_count": 0,
+      "animation_clip_names": [],
+      "material_count": 0,
+      "texture_count": 0,
+      "image_count": 0,
+      "triangle_count_approx": 30746,
+      "extensions_used": [],
+      "asset": {
+        "generator": "Khronos glTF Blender I/O v4.3.47",
+        "version": "2.0"
+      }
+    }
+  }
+}
