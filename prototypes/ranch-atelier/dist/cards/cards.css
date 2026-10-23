@@ -15,7 +15,7 @@
 html, body { margin: 0; height: 100%; overflow: hidden; background: #140d08; color: var(--ink); font-family: CardNunito, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
 button { font: inherit; color: inherit; }
 
-/* The table: a walnut tabletop with a felt mat and a warm lamp over it. */
+/* The table: a walnut tabletop with a felt mat and a warm lamp over it. game-feel: ok, the table is the place itself, not a layer over a world. */
 #table {
   position: fixed; inset: 0; overflow: hidden; touch-action: manipulation;
   background:

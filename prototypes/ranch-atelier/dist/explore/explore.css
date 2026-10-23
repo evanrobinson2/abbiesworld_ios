@@ -16,6 +16,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ember);outline-offset:2px;border-radius:10px}
+/* game-feel: ok, the room is the backdrop behind everything, not a layer over a world. */
 .room{position:fixed;inset:0;z-index:-1;background:
   radial-gradient(1200px 700px at 30% -10%,#3a2a1822,transparent 70%),
   radial-gradient(900px 600px at 110% 110%,#5a2c1a1c,transparent 70%),
