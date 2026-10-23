@@ -95,6 +95,9 @@ static void rect(int x, int y, int w, int h, int c) { for (int j = 0; j < h; j++
 static void clear(int c) { u32 v = c * 0x01010101; for (u32 a = 0; a < 64000; a += 4) __asm__ volatile("movl %0,%%gs:(%1)" :: "r"(v), "r"(a) : "memory"); }
 static void ch(int x, int y, int c, int col) { const u8 *g = font + (c & 127) * 8; for (int j = 0; j < 8; j++) for (int i = 0; i < 8; i++) if (g[j] & (0x80 >> i)) px(x + i, y + j, col); }
 static void str(int x, int y, const char *s, int col) { for (; *s; s++, x += 8) ch(x, y, *s, col); }
+static void bigch(int x, int y, int c, int sc, int col) { const u8 *g = font + (c & 127) * 8; for (int j = 0; j < 8; j++) for (int i = 0; i < 8; i++) if (g[j] & (0x80 >> i)) rect(x + i * sc, y + j * sc, sc, sc, col); }
+static void bigstr(int x, int y, const char *s, int sc, int col) { for (; *s; s++, x += 8 * sc) bigch(x, y, *s, sc, col); }
+static int slen(const char *s) { int n = 0; while (*s++) n++; return n; }
 static void num(int x, int y, int n, int digits, int col) { for (int i = digits - 1; i >= 0; i--) { ch(x + i * 8, y, '0' + n % 10, col); n /= 10; } }
 
 // Time: the BIOS tick count (18.2 Hz) plus the timer chip's own counter give 1/1193182 s steps. v86 has no steady
