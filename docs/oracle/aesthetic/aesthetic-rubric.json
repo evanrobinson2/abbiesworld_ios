@@ -1,0 +1,390 @@
+{
+ "rubric_version": "1.0",
+ "name": "Abbie's World motif, aesthetic and palette rubric",
+ "date": "2026-10-23",
+ "doc": "docs/oracle/aesthetic/AESTHETIC_STUDY.md",
+ "checker": "tools/aesthetic-rubric/check_aesthetic.py",
+ "source_enum_note": "source values are the identity schema's enum (docs/oracle/identity/game-identity.schema.json): footage_cv = computer vision over our own captures, llm_judge = VLM with saved prompt, pairwise and both orders, playtrace = in-game log, human = Evan or a child playtest, estimate = not yet measured.",
+ "ship_threshold": 80,
+ "colour_space": "OKLab / OKLCH (Ottosson 2020). CVD simulation: Machado, Oliveira and Fernandes 2009 at severity 1.0.",
+ "taxonomy": {
+  "layers": {
+   "motif": "a recurring shape, object or pattern that carries the world's identity and usually a meaning (the bell, the teal roof cap)",
+   "shape_language": "which primitive (round, square, triangle) each family of things is built from, and what that says (round = friendly, square = steady, triangle = alert)",
+   "aesthetic": "the whole set of choices (rendering, material, proportion, detail density, motion, light) that makes every asset look like it came from one hand",
+   "palette": "the structured set of colours: roles, value plan, hue families, saturation ladder, accent budget, and how it shifts with time, season, weather and mood"
+  },
+  "palette_roles": [
+   "ground",
+   "figure",
+   "accent",
+   "backdrop",
+   "light",
+   "shadow"
+  ],
+  "value_keys": [
+   "high",
+   "mid",
+   "low"
+  ],
+  "shapes": [
+   "round",
+   "square",
+   "triangle"
+  ],
+  "signals": [
+   "time",
+   "season",
+   "weather",
+   "mood",
+   "threat",
+   "place"
+  ],
+  "information_modes": {
+   "diegetic": "the world's own colour changes (crop wilts to straw, windows glow at dusk)",
+   "spatial": "colour on a cue attached to a thing, presentation layer only (need bubble)",
+   "meta": "a grade on the lens for a feeling (gentle warm vignette at bedtime)",
+   "overlay": "a precise colour key on screen (the hand of cards' suit colours)",
+   "none": "the world's palette just shifts and the child feels it (autumn)"
+  }
+ },
+ "targets": {
+  "value_bands": [
+   0.5,
+   0.78
+  ],
+  "band_floor": 0.1,
+  "contrast_rms_min": 0.06,
+  "figure_ground_dL": 0.08,
+  "cvd_min_de": 0.08,
+  "world_channels": [
+   "sky",
+   "sun",
+   "fog",
+   "windows",
+   "foliage",
+   "water",
+   "ground",
+   "music",
+   "sound",
+   "npcs",
+   "animals",
+   "lens"
+  ],
+  "night_dL_min": 0.12,
+  "state_de_min": 0.06,
+  "engine_share_max": 0.001,
+  "roles": [
+   5,
+   12
+  ],
+  "hue_families_max": 6,
+  "accent_chroma": 0.12,
+  "accent_share_max": 0.12,
+  "world_chroma": [
+   0.04,
+   0.13
+  ],
+  "in_gamut_de": 0.09,
+  "in_gamut_min": 0.8,
+  "figure_chroma_ratio": 1.1,
+  "ui_from_world_de": 0.12,
+  "web_colours": [
+   "#007aff",
+   "#0a84ff",
+   "#6200ee",
+   "#1a73e8",
+   "#2196f3"
+  ],
+  "grey_chroma": 0.012,
+  "motifs_min": 3,
+  "world_meanings_min": 3,
+  "state_warmth_min": 0.1,
+  "greyscale_dL": 0.05,
+  "time_states_min": 4,
+  "season_states_min": 3
+ },
+ "targets_doc": {
+  "value_bands": "OKLab L thresholds for dark | mid | light bands (notan)",
+  "band_floor": "a band counts when it holds at least this share of world pixels",
+  "figure_ground_dL": "minimum OKLab L difference between every figure role and every ground role",
+  "cvd_min_de": "minimum OKLab distance between a meaning and its ground (and meanings sharing a ground) in normal vision and under protan, deutan and tritan simulation",
+  "night_dL_min": "world mean lightness must fall at least this much from day to night",
+  "accent_share_max": "share of pixels that are accents (chroma >= accent_chroma and >= 2x median)",
+  "world_chroma": "band for mean world chroma (OKLCH): below is muddy, above is neon",
+  "in_gamut_min": "share of world pixels within in_gamut_de of a declared palette role",
+  "ui_from_world_de": "every UI colour (except ink) within this distance of a world role"
+ },
+ "gates": [
+  {
+   "id": "G1_value_readable",
+   "check": "The world reads in greyscale: every capture has at least two value bands over the floor and RMS lightness contrast over the minimum, and every figure role separates from every ground role in lightness.",
+   "method": "captures + manifest roles, OKLab L",
+   "source": "footage_cv",
+   "auto": true
+  },
+  {
+   "id": "G2_colour_never_alone",
+   "check": "Every state shown by colour also shows by shape, motion or sound.",
+   "method": "manifest meanings[].also",
+   "source": "footage_cv",
+   "auto": true
+  },
+  {
+   "id": "G3_cvd_safe",
+   "check": "Every meaning separates from its ground, and from meanings that share that ground, under normal vision and protan, deutan and tritan simulation.",
+   "method": "Machado 2009 matrices, OKLab distance",
+   "source": "footage_cv",
+   "auto": true
+  },
+  {
+   "id": "G4_light_follows_signal",
+   "check": "Each signal (time, season, weather, mood) drives at least three world channels, and its states really differ in the world: night is darker than day by the minimum; other states differ by palette distance or warmth. A change that only re-tints the UI fails.",
+   "method": "captures per state, or specified sky colours until captured",
+   "source": "footage_cv",
+   "auto": true
+  },
+  {
+   "id": "G5_no_engine_colours",
+   "check": "No axis primaries (#ff0000, #00ff00, #0000ff) or missing-texture magenta in the world over 0.1% of pixels.",
+   "method": "captures",
+   "source": "footage_cv",
+   "auto": true
+  },
+  {
+   "id": "G6_kid_safe",
+   "check": "No alarm red for failure, no flashing over 3 Hz, no draining of colour as a punishment.",
+   "method": "manifest kid_safe; playtrace for flashes",
+   "source": "playtrace",
+   "auto": true
+  },
+  {
+   "id": "G7_expression_ledger",
+   "check": "Nothing copies a studied game's expression: its particular palette as a whole, character designs, motifs, textures, logos. Style (principles, structures, ratios) is free.",
+   "method": "aesthetic-signatures.json classes; llm_judge pairwise against reference games",
+   "source": "llm_judge",
+   "auto": false
+  }
+ ],
+ "dimensions": [
+  {
+   "id": "D1_motif_shape",
+   "weight": 14,
+   "label": "Motif and shape language",
+   "checks": [
+    {
+     "id": "motif_recurs",
+     "check": "At least 3 motifs, each appearing in 3 or more things.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "shape_language_declared",
+     "check": "At least 3 families of things declare a primitive, using at least 2 different primitives.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "silhouette_squint",
+     "check": "At 48 px, blurred and greyscale, a VLM (later a child) names home, barn, animal and tree from silhouettes alone; score = correct / shown.",
+     "source": "llm_judge"
+    },
+    {
+     "id": "motif_meaning",
+     "check": "Each motif means something in play (brass means 'something to know'; the teal cap means 'a home for someone').",
+     "source": "human"
+    }
+   ]
+  },
+  {
+   "id": "D2_coherence",
+   "weight": 16,
+   "label": "Aesthetic coherence",
+   "checks": [
+    {
+     "id": "in_gamut",
+     "check": "At least 80% of world pixels sit near a declared palette role.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "one_world_pairwise",
+     "check": "Shown an asset beside the world, pairwise and both orders, a VLM says it belongs; at least 90% of assets.",
+     "source": "llm_judge"
+    },
+    {
+     "id": "one_hand",
+     "check": "Edge treatment, detail density and material roles are the same across assets (identity schema assets.geometry and assets.materials).",
+     "source": "llm_judge"
+    },
+    {
+     "id": "dialect_judge",
+     "check": "Each place speaks the shared grammar in its own materials (Ranch: wood, bells, painted signs; Moonbase: lights, radio, holograms).",
+     "source": "llm_judge"
+    }
+   ]
+  },
+  {
+   "id": "D3_palette_structure",
+   "weight": 18,
+   "label": "Palette structure",
+   "checks": [
+    {
+     "id": "role_count",
+     "check": "5 to 12 roles in at most 6 hue families.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "accent_scarcity",
+     "check": "Accents cover at most 12% of the world.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "saturation_ladder",
+     "check": "Figures are more saturated than the ground they stand on, and the backdrop is the quietest.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "warm_light_cool_shadow",
+     "check": "The key light is warm and shadows lean cool (or the reverse at night), never grey.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "rich_not_neon",
+     "check": "World mean chroma sits in the band: rich, not muddy, not neon.",
+     "source": "footage_cv",
+     "auto": true
+    }
+   ]
+  },
+  {
+   "id": "D4_palette_information",
+   "weight": 20,
+   "label": "Palette carries information",
+   "checks": [
+    {
+     "id": "palette_carries_state",
+     "check": "At least 3 states are shown by the world's own colour (diegetic), not by a UI badge.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "one_meaning_per_colour",
+     "check": "No colour means two things.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "reserved_hues",
+     "check": "Signal hues (brass, lamp glow, storm slate) appear only where they mean their thing.",
+     "source": "llm_judge"
+    },
+    {
+     "id": "survives_greyscale",
+     "check": "Every meaning differs from its ground in lightness too.",
+     "source": "footage_cv",
+     "auto": true
+    }
+   ]
+  },
+  {
+   "id": "D5_light_mood",
+   "weight": 12,
+   "label": "Light, time and mood",
+   "checks": [
+    {
+     "id": "time_states",
+     "check": "At least 4 times of day (dawn, day, dusk, night) with their own sky and sun.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "season_states",
+     "check": "At least 3 seasons with captures.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "mood_script",
+     "check": "A colour script: each story beat or mood has a palette, and the music bible's mood for that beat agrees.",
+     "source": "human"
+    }
+   ]
+  },
+  {
+   "id": "D6_accessibility",
+   "weight": 10,
+   "label": "Accessibility",
+   "checks": [
+    {
+     "id": "cvd_margin",
+     "check": "Worst CVD distance is at least 1.25x the gate minimum.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "glare",
+     "check": "No large pure-white or pure-black fields (sky and panels stay inside L 0.12 to 0.96).",
+     "source": "footage_cv",
+     "auto": true
+    }
+   ]
+  },
+  {
+   "id": "D7_evan_taste",
+   "weight": 10,
+   "label": "Evan's taste",
+   "checks": [
+    {
+     "id": "ui_speaks_world",
+     "check": "Every UI colour comes from the world palette; no web blues.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "no_dead_grey",
+     "check": "No neutral grey fills in the UI; glass takes the world's warmth.",
+     "source": "footage_cv",
+     "auto": true
+    },
+    {
+     "id": "glass_reads_as_object",
+     "check": "The liquid glass has depth (rim light, refraction of the world behind it, a shadow on the world), not a flat frosted panel.",
+     "source": "llm_judge"
+    },
+    {
+     "id": "previews_live",
+     "check": "Pickers show live previews in the world's palette, not icons.",
+     "source": "human"
+    }
+   ]
+  }
+ ],
+ "core_rule": {
+  "id": "one_signal_one_palette",
+  "text": "One game-state signal moves the whole palette together: sky, sun, fog, windows, foliage, water, music and sound. Colour is a channel of the whole-game adaptation from the HUD study, never a separate theme switch for the UI."
+ },
+ "evan_taste": {
+  "date": "2026-10-23",
+  "keep": [
+   "liquid glass as objects with depth",
+   "rich colours",
+   "live previews"
+  ],
+  "lose": [
+   "web-page palette: grey panels, system blue, white cards",
+   "flat colour themes that re-skin the UI but leave the world unchanged"
+  ],
+  "loves": [
+   "Tiny Glade",
+   "Besiege",
+   "9 Kings",
+   "Bricktales",
+   "Dorfromantik"
+  ]
+ }
+}
