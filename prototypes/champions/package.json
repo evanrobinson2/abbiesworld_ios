@@ -1,0 +1,8 @@
+{
+  "name": "champions",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "balance": "node tools/balance.mjs 4"
+  }
+}

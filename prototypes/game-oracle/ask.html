@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Ask the Oracle</title><link rel="stylesheet" href="/style.css">
+<style>
+.ask{max-width:860px;margin:0 auto;padding:16px}
+.ask textarea{width:100%;min-height:96px;font:inherit;padding:12px;border-radius:12px;border:1px solid #c9c0ad;box-sizing:border-box}
+.ask .row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.ask select,.ask button{font:inherit;padding:8px 12px;border-radius:10px}
+.plan section{margin:18px 0}.plan h2{margin:0 0 6px}.plan li{margin:4px 0}
+.plan .meta{opacity:.7;font-size:.9em}
+.plan .choice{border-left:3px solid #c9a36a;padding-left:10px;margin:8px 0}
+</style></head><body>
+<header><a class="brand" href="/">Oracle <span>Ask the Oracle</span></a></header>
+<main class="ask">
+<p class="eyebrow">IDEA → RULES, BEATS, CHOICES, STYLE, FACTORY REQUESTS</p>
+<h1>Ask the Oracle</h1>
+<p>Describe a game, a scene or a moment in plain words. The Oracle answers with a design plan grounded in its game studies.</p>
+<form id="f"><textarea id="idea" maxlength="1200" placeholder="Abbie and the sheep play hide and seek on the ranch at sunset" required></textarea>
+<div class="row"><select id="audience"><option value="kid">For Abbie</option><option value="family" selected>For the family</option><option value="maker">For a game maker</option></select>
+<select id="style"><option value="">Style: Oracle picks</option></select>
+<button class="primary" type="submit">Ask</button></div></form>
+<div id="out" class="plan" aria-live="polite"></div>
+<p><a href="/steam">Steam library</a> · <a href="/">Game art library</a> · <a href="/game-anatomy">Game anatomy</a> · <a href="/api-docs.html">API</a></p>
+</main>
+<script type="module">
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const info=await fetch('/api/consult').then(r=>r.json()).catch(()=>({styles:[]}));
+for(const s of info.styles||[])$('#style').add(new Option('Style: '+s,s));
+const list=(items,fn)=>items?.length?'<ul>'+items.map(i=>'<li>'+fn(i)+'</li>').join('')+'</ul>':'<p class="meta">None.</p>';
+$('#f').onsubmit=async e=>{e.preventDefault();const btn=e.submitter;btn.disabled=true;$('#out').innerHTML='<p>Thinking…</p>';
+ try{const r=await fetch('/api/consult',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({idea:$('#idea').value,audience:$('#audience').value,style:$('#style').value||undefined})});
+  const p=await r.json();if(!r.ok)throw Error(p.error||'The Oracle could not answer.');
+  $('#out').innerHTML=`<section><h2>${esc(p.title)}</h2><p>${esc(p.pitch)}</p><p class="meta">${esc(p.reading)} · ${p.source==='model'?'model plan':'from studies only'}</p>${p.fantasy?`<p><b>Fantasy:</b> ${esc(p.fantasy)}</p>`:''}${p.verbs.length?`<p><b>Verbs:</b> ${p.verbs.map(esc).join(', ')}</p>`:''}</section>
+  <section><h2>Rules</h2>${list(p.rules,r=>esc(r.rule)+(r.why?` <span class="meta">(${esc(r.why)})</span>`:''))}<p><b>Goal:</b> ${esc(p.goal)}${p.fail?` · <b>On a mistake:</b> ${esc(p.fail)}`:''}</p></section>
+  <section><h2>Beats</h2><ol>${p.beats.map((b,i)=>`<li><b>${esc(b.title)}</b>: ${esc(b.what)}${b.player?` <span class="meta">Player: ${esc(b.player)}</span>`:''}${p.choices.filter(c=>c.atBeat===i).map(c=>`<div class="choice"><b>${esc(c.prompt)}</b>${c.timerSeconds?` <span class="meta">${c.timerSeconds}s</span>`:''}${list(c.options,o=>`<b>${esc(o.label)}</b>: ${esc(o.consequence)}`)}${c.remembered?`<p class="meta">Remembered: ${esc(c.remembered)}</p>`:''}</div>`).join('')}</li>`).join('')}</ol></section>
+  <section><h2>Presentation: ${esc(p.presentation.name)}</h2><p>${esc(p.presentation.why)}</p><p class="meta">${p.presentation.overlays.map(esc).join(' · ')}${p.presentation.readAloud?' · read aloud':''}</p></section>
+  <section><h2>Factory requests</h2>${list(p.factory,f=>`<b>${esc(f.factory)}</b> ${esc(f.name)}: ${esc(f.brief)} <span class="meta">for ${esc(f.for)}</span>`)}</section>
+  <section><h2>Grounding</h2>${list(p.references,r=>`<b>${esc(r.title)}</b>: take ${esc(r.take)}${r.leave?`; leave ${esc(r.leave)}`:''}`)}${p.kidFit?`<p><b>Who can play:</b> ${esc(p.kidFit)}</p>`:''}</section>`;
+ }catch(err){$('#out').innerHTML='<p role="alert">'+esc(err.message)+'</p>';}finally{btn.disabled=false;}};
+</script></body></html>

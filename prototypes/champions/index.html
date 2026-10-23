@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#5d9ee0">
+<title>Champions of the Drifting Isles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+</head>
+<body>
+<canvas id="world"></canvas>
+
+<div id="hud" class="hidden">
+  <button id="year" class="toy medallion" aria-label="Year">
+    <svg viewBox="0 0 100 100" class="ring"><g id="yearTicks"></g></svg>
+    <span class="big" id="yearNum">1</span>
+    <span class="small" id="yearNext"></span>
+  </button>
+  <button id="attacker" class="toy" aria-label="Who attacks this year">
+    <span class="portrait"><img id="attackerImg" alt=""></span>
+    <span class="reroll" id="attackerReroll"></span>
+  </button>
+  <div id="purse" class="toy"><span class="coin-ico"></span><span id="gold">0</span></div>
+  <div id="lives" class="toy"></div>
+  <button id="mute" class="toy mini" aria-label="Sound"></button>
+</div>
+
+<div id="hand"></div>
+<button id="horn" class="hidden" aria-label="To battle"><span class="horn-ico"></span><span id="hornLabel"></span></button>
+<button id="speed" class="hidden" aria-label="Battle speed"><span id="speedLabel">1×</span></button>
+<div id="labels"></div>
+<div id="bubble" class="hidden"></div>
+<div id="banner" class="hidden"><div class="banner-inner"><div id="bannerTitle"></div><div id="bannerSub"></div></div></div>
+<div id="overlay" class="hidden"></div>
+<div id="fly"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

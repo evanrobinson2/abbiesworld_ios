@@ -21,7 +21,7 @@ const gh = (...args) => execFileSync('gh', args, { encoding: 'utf8' }).trim();
 const readme = path.join(dir, 'README.md');
 if (!fs.existsSync(readme)) {
   // First run: start the inbox branch and its never-merged PR, which the watching Claude thread subscribes to.
-  fs.writeFileSync(readme, '# Feedback inbox\n\nNotes and pictures Evan sends from the app\'s speech-bubble button, one folder per item.\nCopied here by `.github/workflows/feedback-inbox.yml`; see `prototypes/ranch-atelier/dist/FEEDBACK.md` on the live branch.\nThis branch is never merged.\n');
+  fs.writeFileSync(readme, '# Feedback inbox\n\nNotes and pictures Evan sends from the app\'s speech-bubble button, one folder per item.\nCopied here by `.github/workflows/feedback-inbox.yml`; see `prototypes/ranch-atelier/dist/FEEDBACK.md` on main.\nThis branch is never merged.\n');
   git('add', 'feedback'); commit('Start the feedback inbox'); git('push', 'origin', 'HEAD:feedback-inbox');
   // Needs "Allow GitHub Actions to create pull requests"; otherwise open the PR by hand from branch feedback-inbox.
   if (repo && process.env.GH_TOKEN) try { gh('pr', 'create', '--repo', repo, '--draft', '--base', 'main', '--head', 'feedback-inbox', '--title', 'Feedback inbox (never merge)',

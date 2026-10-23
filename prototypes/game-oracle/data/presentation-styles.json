@@ -1,0 +1,62 @@
+{
+  "schema": "oracle.presentation-styles.v1",
+  "revision": "2026-10-22",
+  "source": "docs/oracle/BACKLOG.md (study list) and prototypes/ranch-atelier/dist/fritigern/overlays.js (STYLES) on the live branch. Reference titles are study targets, not copied assets.",
+  "styles": [
+    {
+      "id": "clean",
+      "name": "Clean",
+      "summary": "No framing at all: the world on its own, for building and free play.",
+      "overlays": [],
+      "pacing": { "shotSeconds": null, "promptWaitSeconds": null },
+      "readAloud": false,
+      "kidFit": "Best for free building; nothing to read.",
+      "keywords": ["build", "sandbox", "free play", "toy", "diorama", "relax", "cozy"],
+      "references": ["Tiny Glade", "Dorfromantik"]
+    },
+    {
+      "id": "cinema",
+      "name": "Cinematic cut",
+      "summary": "2.39:1 letterbox, vignette, a title card and an end card; the camera does the storytelling.",
+      "overlays": ["letterbox", "vignette", "title card", "end card"],
+      "pacing": { "shotSeconds": [3, 7], "promptWaitSeconds": null },
+      "readAloud": false,
+      "kidFit": "Easy to watch, nothing to read beyond the title; keep it under a minute for young children.",
+      "keywords": ["movie", "film", "cutscene", "cinematic", "trailer", "epic", "music video", "song"],
+      "references": ["Mixtape", "Sayonara Wild Hearts", "Stray"]
+    },
+    {
+      "id": "storybook",
+      "name": "Storybook read-aloud",
+      "summary": "A narrator reads to a child; big gentle subtitles; narration can be written into the world.",
+      "overlays": ["narrator subtitles", "chapter title", "words in the world"],
+      "pacing": { "shotSeconds": [5, 10], "promptWaitSeconds": 8 },
+      "readAloud": true,
+      "kidFit": "The default for children who can't read yet: everything is spoken, words are large and few.",
+      "keywords": ["story", "bedtime", "once upon", "fairy tale", "read", "book", "narrator", "gentle"],
+      "references": ["What Remains of Edith Finch", "Gorogoa", "Florence"]
+    },
+    {
+      "id": "hud",
+      "name": "Game HUD",
+      "summary": "A small, light HUD with an objective line, a prompt and name tags over the things that matter.",
+      "overlays": ["objective", "prompt", "name tags", "minimap"],
+      "pacing": { "shotSeconds": null, "promptWaitSeconds": 4 },
+      "readAloud": false,
+      "kidFit": "Keep it to one objective and icons; read the objective aloud for non-readers.",
+      "keywords": ["game", "play", "race", "collect", "score", "level", "mission", "quest", "chase", "hunt", "find"],
+      "references": ["Stray", "Outer Wilds"]
+    },
+    {
+      "id": "telltale",
+      "name": "Telltale dialogue and choices",
+      "summary": "Episode card, speaker subtitles, a timed dialogue choice where silence counts, and a 'will remember that' notice.",
+      "overlays": ["episode card", "speaker subtitles", "timed choice", "remembered notice"],
+      "pacing": { "shotSeconds": [2, 5], "promptWaitSeconds": 10 },
+      "readAloud": true,
+      "kidFit": "Two or three choices with pictures, a generous timer or none, and the choices read aloud.",
+      "keywords": ["choice", "choose", "decide", "dialogue", "talk", "trust", "episode", "detective", "mystery"],
+      "references": ["The Wolf Among Us", "The Walking Dead, Season One", "Kentucky Route Zero"]
+    }
+  ]
+}

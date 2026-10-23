@@ -1,0 +1,336 @@
+{
+  "schema_note": "Each entry uses the 'signature' shape from docs/oracle/identity/game-identity.schema.json. class=style may be learned from; class=expression is never copied.",
+  "date": "2026-10-23",
+  "games": {
+    "this-war-of-mine": [
+      {
+        "id": "severity_words",
+        "layer": "interface",
+        "description": "Survivor state written as graded words on the portrait, not bars or numbers.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "object_interaction_icons",
+        "layer": "interaction",
+        "description": "Usable objects show small icons in the world; you tap the icon on the object. No action bar.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "noise_rings",
+        "layer": "interface",
+        "description": "Noise you make and sounds you hear drawn as expanding rings at their source; unseen rooms dark and hatched.",
+        "class": "style",
+        "confidence": 0.75
+      },
+      {
+        "id": "dollhouse_cutaway",
+        "layer": "interface",
+        "description": "Side-on cutaway of the shelter; the camera pans across rooms like a dollhouse.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "diegetic_radio",
+        "layer": "interface",
+        "description": "The shelter radio carries prices and weather news the characters also hear.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "twom_sketch_ui_art",
+        "layer": "art",
+        "description": "The charcoal and pencil UI art, frames, icons, title cards and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "dont-starve": [
+      {
+        "id": "three_needs_plus_clock",
+        "layer": "interface",
+        "description": "Exactly three always-on need badges and a day clock in one corner; positions never move.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "segmented_day_dial",
+        "layer": "interface",
+        "description": "Round day clock split into day, dusk and night segments, with the moon phase at night.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "rate_arrows",
+        "layer": "interface",
+        "description": "Need badges show which way they are moving as well as the level.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "meter_bends_world",
+        "layer": "interface",
+        "description": "Low sanity desaturates and warps the screen and brings shadow creatures and whispers: the meter becomes the world.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "ui_in_world_ink",
+        "layer": "art",
+        "description": "Overlay badges drawn in the same inked line and paper texture as the world.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "ds_badge_art_icons",
+        "layer": "art",
+        "description": "The organ-shaped badges, inventory and crafting art, gothic style, characters and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "sons-of-the-forest": [
+      {
+        "id": "one_corner_cluster",
+        "layer": "interface",
+        "description": "All vitals in one compact round cluster in a bottom corner: health, stamina with vitality outline, three small need rings.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "grey_low_health",
+        "layer": "interface",
+        "description": "Screen turns grey at critically low health; cold and wet greys part of stamina.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "press_vs_hold_prompts",
+        "layer": "interaction",
+        "description": "Filled prompt for a press, hollow for a hold; pictogram prompts on objects.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "inventory_on_mat",
+        "layer": "interaction",
+        "description": "Opening the backpack lays every item physically on a mat; crafting is placing items on a crafting mat.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "blueprint_ghosts",
+        "layer": "interaction",
+        "description": "A chosen blueprint appears as a ghost in the world that fills in as you add materials.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "held_gps_map",
+        "layer": "interface",
+        "description": "The map is a GPS tracker held in the hand.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "sotf_ui_art",
+        "layer": "art",
+        "description": "The mat, book, GPS and icon art, Kelvin, horror tone and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "steamworld-dig": [
+      {
+        "id": "segmented_bars",
+        "layer": "interface",
+        "description": "A short strip of segmented bars (health, light, water) plus money; pickups add whole segments.",
+        "class": "style",
+        "confidence": 0.75
+      },
+      {
+        "id": "lamp_light_radius",
+        "layer": "interface",
+        "description": "As lamp light runs down the lit area around the player shrinks and the mine darkens.",
+        "class": "style",
+        "confidence": 0.55
+      },
+      {
+        "id": "world_is_map",
+        "layer": "interface",
+        "description": "Every tunnel stays dug, so the mine is its own record of where you have been.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "loot_flies_to_counter",
+        "layer": "interaction",
+        "description": "Ore pops with sparkle and sound, flies to the player, fills the bag; selling is a coin cascade with rising sound.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "swd_ui_art",
+        "layer": "art",
+        "description": "Western-steampunk frames, robots, fonts and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "tiny-glade": [
+      {
+        "id": "verb_is_ui",
+        "layer": "interaction",
+        "description": "The held tool is the interface; drag shapes walls and paths; almost no HUD.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "sun_object_time",
+        "layer": "interface",
+        "description": "Time of day is a sun you move.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "tg_art_icons",
+        "layer": "art",
+        "description": "Tool icons, procedural look and art.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "dorfromantik": [
+      {
+        "id": "stack_with_count",
+        "layer": "interface",
+        "description": "Remaining tiles shown as a physical stack with its count painted on it.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "quests_on_groups",
+        "layer": "interface",
+        "description": "Goal numbers float over the tile group that wants them, with a flag when done.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "points_from_tile",
+        "layer": "interaction",
+        "description": "Points float up from the tile that earned them; new tiles fly to the stack.",
+        "class": "style",
+        "confidence": 0.8
+      },
+      {
+        "id": "dorf_art",
+        "layer": "art",
+        "description": "Tile designs, flags, banners and art.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "lego-bricktales": [
+      {
+        "id": "build_is_a_place",
+        "layer": "interaction",
+        "description": "Building happens in a separate build space with a palette and a physics test; exploring has almost no HUD.",
+        "class": "style",
+        "confidence": 0.65
+      },
+      {
+        "id": "bt_art",
+        "layer": "art",
+        "description": "Bricks, minifigures, palette art and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "9-kings": [
+      {
+        "id": "board_is_hud",
+        "layer": "interface",
+        "description": "Small hand of cards at the bottom, a year counter, and the board shows every consequence.",
+        "class": "style",
+        "confidence": 0.65
+      },
+      {
+        "id": "nk_art",
+        "layer": "art",
+        "description": "Pixel art, card art and kings.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "dead-space": [
+      {
+        "id": "state_on_body",
+        "layer": "interface",
+        "description": "Health is a light bar on the suit's spine; stasis a ring on the back; ammo a hologram on the weapon.",
+        "class": "style",
+        "confidence": 0.95
+      },
+      {
+        "id": "world_menus_no_pause",
+        "layer": "interface",
+        "description": "Inventory, map and messages are holograms projected in the world without pausing.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "floor_locator",
+        "layer": "interface",
+        "description": "A path line projected on the floor replaces a hard-to-use 3D map.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "dsp_art",
+        "layer": "art",
+        "description": "The suit, hologram art, horror tone and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "firewatch": [
+      {
+        "id": "held_paper_map",
+        "layer": "interface",
+        "description": "No HUD; a paper map and compass held in the hands, collecting notes over the story.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "radio_dialogue",
+        "layer": "interaction",
+        "description": "Dialogue through a raised walkie-talkie; choices appear as lines.",
+        "class": "style",
+        "confidence": 0.85
+      },
+      {
+        "id": "fw_art",
+        "layer": "art",
+        "description": "The map art, radio, story and text.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ],
+    "journey": [
+      {
+        "id": "meter_is_costume",
+        "layer": "interface",
+        "description": "Flight energy shown by the scarf's length and glyphs; no HUD.",
+        "class": "style",
+        "confidence": 0.9
+      },
+      {
+        "id": "jr_art",
+        "layer": "art",
+        "description": "Scarf, glyph and world art.",
+        "class": "expression",
+        "confidence": 0.95
+      }
+    ]
+  }
+}

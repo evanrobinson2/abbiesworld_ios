@@ -4,7 +4,7 @@ Every model lives in Cloudflare R2, catalogued in Postgres. The game and `/model
 in the repo are the source the store is filled from and the fallback when the store can't be reached.
 
 ```
-repo (main + claude/live-snapshot-2026-10-22)
+repo (main)                              
    │  GitHub Action "model-store" (on model changes, or Run workflow)
    ▼
 tools/model-store/sync.mjs ──► R2  models/blobs/<sha256>/<file>       GLB, reference image, render, provenance

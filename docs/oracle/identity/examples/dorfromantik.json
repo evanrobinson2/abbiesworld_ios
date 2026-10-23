@@ -1,0 +1,525 @@
+{
+  "schema_version": "1.1",
+  "game": {
+    "title": "Dorfromantik",
+    "steam_appid": 1455840,
+    "developer": "Toukana Interactive",
+    "publisher": "Toukana Interactive",
+    "release": "2022",
+    "early_access": "2021",
+    "engine": {
+      "value": "Unity",
+      "source": "estimate",
+      "confidence": 0.6,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    },
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Switch"
+    ]
+  },
+  "core": {
+    "fantasy": "You are a peaceful landscaper patching together a countryside one hex at a time.",
+    "pillars": [
+      "One more tile",
+      "Matching edges feel right",
+      "Calm, never rushed"
+    ],
+    "signature_moment": "Closing a long river with the perfect tile and hearing a soft chime as the quest completes.",
+    "anti_goals": [
+      "no timer",
+      "no combat",
+      "no text-heavy UI"
+    ],
+    "signatures": [
+      {
+        "id": "hex_match",
+        "layer": "mechanics",
+        "description": "Draw, rotate and place hex tiles; matching edges score.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "stack_quests",
+        "layer": "pacing",
+        "description": "Quests reward more tiles, extending the run softly.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "pastel_hex_world",
+        "layer": "art",
+        "description": "Saturated-pastel low-poly hexes with tilt-shift and gentle ambient life.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ],
+    "recognisability": {
+      "value": 0.85,
+      "source": "estimate",
+      "confidence": 0.4,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    }
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "submission": 0.3,
+        "challenge": 0.25,
+        "sensation": 0.2,
+        "expression": 0.15,
+        "discovery": 0.1
+      },
+      "motivations": {
+        "mastery": 0.5,
+        "creativity": 0.6,
+        "immersion": 0.5,
+        "achievement": 0.5,
+        "action": 0.0,
+        "social": 0.1
+      },
+      "emotional_targets": {
+        "calm": 0.9,
+        "satisfaction": 0.8,
+        "mild tension": 0.3
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "rotate tile",
+          "input": "scroll/right click"
+        },
+        {
+          "verb": "place tile",
+          "input": "click"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "see next tile",
+          "rotate",
+          "place",
+          "score and quest check"
+        ],
+        "period_s": {
+          "value": 10,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "s"
+        }
+      },
+      "meta_loop": {
+        "steps": [
+          "unlock tile types and biomes by score"
+        ]
+      },
+      "rules": {
+        "scoring": "edge matches and quests",
+        "failure_model": "soft",
+        "loss": "stack runs out",
+        "resources": [
+          "tile stack"
+        ]
+      },
+      "randomness": {
+        "amount": 0.5,
+        "kind": "input"
+      },
+      "information": "partial",
+      "systems": [
+        "edge matching",
+        "group-size quests",
+        "flag/quest tiles"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 2,
+          "source": "estimate",
+          "confidence": 0.6,
+          "method": "prior knowledge of public footage and store page; to be measured"
+        },
+        "rules_in_first_10_min": {
+          "value": 3,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "prior knowledge of public footage and store page; to be measured"
+        }
+      }
+    },
+    "dynamics": {
+      "emergent_behaviours": [
+        "long-river and long-rail planning",
+        "leaving holes for future tiles"
+      ],
+      "decision_density_per_min": {
+        "value": 6,
+        "source": "estimate",
+        "confidence": 0.4,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "/min"
+      },
+      "skill_strategy_chance": {
+        "skill": 0.0,
+        "strategy": 0.6,
+        "chance": 0.4
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse",
+          "gamepad"
+        ],
+        "mapping": "cursor"
+      },
+      "response": {
+        "action_anim_ms": {
+          "value": 300,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "ms"
+        },
+        "easing": "drop and settle"
+      },
+      "camera": {
+        "model": "orbit_diorama",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "hex",
+        "undo": "none",
+        "preview_before_commit": true
+      },
+      "juice": {
+        "scale_pop": 0.5,
+        "sound_on_action": 0.95,
+        "particles": 0.3,
+        "procedural_settle": 0.5,
+        "screen_shake": 0.0
+      },
+      "time_to_first_delight_s": {
+        "value": 10,
+        "source": "estimate",
+        "confidence": 0.4,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "s"
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "flat_low_poly",
+        "outlines": false,
+        "post": [
+          "tilt-shift depth of field",
+          "soft bloom"
+        ]
+      },
+      "palette": {
+        "dominant_hex": [
+          "#A9C46C",
+          "#E7D17A",
+          "#5B8C5A",
+          "#7FB6C9",
+          "#D96D4B"
+        ],
+        "value_key": "high",
+        "mean_saturation": 0.55,
+        "warmth": 0.65,
+        "variation": "seasons"
+      },
+      "lighting": {
+        "gi_ao": "soft AO",
+        "atmosphere": "edge fade to void"
+      },
+      "shape_language": {
+        "round": 0.5,
+        "square": 0.3,
+        "triangle": 0.2,
+        "silhouette_readability": 0.9
+      },
+      "proportion_and_scale": {
+        "stylisation": 0.6,
+        "toyness": 0.9
+      },
+      "motion": "trains, boats, windmills, gentle ambient life",
+      "references": [
+        "German countryside",
+        "board games",
+        "miniatures"
+      ]
+    },
+    "assets": {
+      "kit": "modular",
+      "geometry": {
+        "poly_class": "low",
+        "edges": "soft",
+        "surface": "clean"
+      },
+      "materials": {
+        "texture_strategy": "flat_colour",
+        "role_count": {
+          "value": 8,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "prior knowledge of public footage and store page; to be measured"
+        },
+        "roles": [
+          "grass",
+          "field",
+          "forest",
+          "water",
+          "roof",
+          "wall",
+          "rail",
+          "sand"
+        ],
+        "roughness_character": "matte"
+      },
+      "asset_vocabulary": [
+        "house",
+        "wheat field",
+        "forest",
+        "river",
+        "lake",
+        "rail",
+        "train",
+        "windmill",
+        "boat",
+        "flag"
+      ]
+    },
+    "interface": {
+      "ui_mode_mix": {
+        "diegetic": 0.3,
+        "non_diegetic": 0.4,
+        "spatial": 0.3,
+        "meta": 0.0
+      },
+      "hud_coverage": {
+        "value": 0.07,
+        "source": "estimate",
+        "confidence": 0.4,
+        "method": "prior knowledge of public footage and store page; to be measured"
+      },
+      "text_words_per_min": {
+        "value": 3,
+        "source": "estimate",
+        "confidence": 0.4,
+        "method": "prior knowledge of public footage and store page; to be measured"
+      },
+      "onboarding": "contextual_hints",
+      "feedback_language": [
+        "score pop",
+        "quest number ticks",
+        "chime"
+      ]
+    },
+    "audio": {
+      "music": {
+        "style": "ambient acoustic",
+        "density": 0.5,
+        "mode_character": "major, gentle"
+      },
+      "sfx_character": "musical",
+      "action_coupling": 0.95,
+      "ambience": [
+        "birds",
+        "water",
+        "wind"
+      ],
+      "voice": "none"
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.5,
+        "enacted": 0.0,
+        "embedded": 0.0,
+        "emergent": 0.5
+      },
+      "tone": {
+        "cozy_tense": -0.8,
+        "whimsical_grounded": -0.2,
+        "earnest_ironic": -0.6,
+        "quiet_loud": -0.8,
+        "handmade_industrial": -0.6
+      },
+      "themes": [
+        "countryside",
+        "harmony"
+      ],
+      "characters": "none"
+    },
+    "pacing": {
+      "structure": "endless_with_goals",
+      "session_minutes": {
+        "value": 40,
+        "source": "estimate",
+        "confidence": 0.3,
+        "method": "prior knowledge of public footage and store page; to be measured",
+        "unit": "min"
+      },
+      "tension_curve": "flat_calm",
+      "failure_cost": "lose_run",
+      "unlocks": [
+        "tile types",
+        "biomes",
+        "creative mode"
+      ]
+    },
+    "market": {
+      "steam_tags": [
+        "Strategy",
+        "Relaxing",
+        "City Builder",
+        "Puzzle",
+        "Hex Grid"
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "time": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "The tile stack count is the clock.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "thing_state": {
+          "mix": {
+            "spatial": 0.7,
+            "diegetic": 0.3
+          },
+          "timing": "on_change",
+          "note": "Edge-match highlights on the placement preview.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "spatial": 0.8,
+            "overlay": 0.2
+          },
+          "timing": "always_on",
+          "note": "Quest numbers float over tile groups; score in the corner.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Next tile preview.",
+          "confidence": 0.6,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.4,
+        "overlay": 0.3,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.07,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "always_on_count": {
+          "value": 3,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "drawn_as": "neutral_overlay"
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "season",
+            "channels": [
+              "light",
+              "sound"
+            ],
+            "note": "The palette shifts with seasons; otherwise calm and constant."
+          }
+        ],
+        "max_channels": {
+          "value": 2,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "adapts_score": {
+          "value": 0.4,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        }
+      },
+      "social_channel": {
+        "carriers": {
+          "none": 0.7,
+          "body_language": 0.3
+        },
+        "note": "Trains, boats and windmills as ambient life."
+      },
+      "dialects": [],
+      "card_art": {
+        "uses_cards": false
+      },
+      "signatures_ref": "docs/oracle/hud/hud-signatures.json#dorfromantik"
+    }
+  },
+  "ledger": {
+    "style": [
+      "hex tile placement with edge matching (an old board-game idea)",
+      "quests that extend the run",
+      "pastel low-poly with tilt-shift",
+      "musical placement sounds"
+    ],
+    "expression": [
+      "Dorfromantik's tile models and art",
+      "its music and sounds",
+      "its UI art and badges"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "audio",
+        "target": "sound library tags",
+        "setting": "Placement plays a pitched note from a pentatonic set, rising with combo.",
+        "from_signature": "hex_match"
+      },
+      {
+        "layer": "pacing",
+        "target": "Oracle rules",
+        "setting": "Soft goals: little quests on ranch tiles that reward more pieces, never a timer.",
+        "from_signature": "stack_quests"
+      },
+      {
+        "layer": "art",
+        "target": "palette preset",
+        "setting": "High-key, saturation about 0.5, warm, matte; seasons swap the palette.",
+        "from_signature": "pastel_hex_world"
+      }
+    ],
+    "leave": [
+      "hex-only world",
+      "run-ending stack exhaustion for kids"
+    ]
+  },
+  "sources": [
+    "Steam store page",
+    "public gameplay footage"
+  ]
+}

@@ -1,0 +1,2667 @@
+{
+  "id": "simfarm",
+  "name": "Sim Farm",
+  "fileCount": 61,
+  "extractedBytes": 4486017,
+  "extensions": {
+    ".crp": 24,
+    ".adv": 15,
+    ".ssm": 8,
+    ".exe": 4,
+    ".cim": 2,
+    ".txt": 2,
+    ".mxs": 1,
+    ".eea": 1,
+    ".idx": 1,
+    ".cfg": 1,
+    ".ad": 1,
+    ".opl": 1
+  },
+  "packages": [
+    {
+      "name": "002-SimFarm.zip",
+      "sha256": "7ff228a6fbbf93770cf54b87250e8aecbe77fac9863d39f01587f52f28888916",
+      "exitCode": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "package-1/SimFarm/INFO.EXE",
+      "bytes": 27025
+    },
+    {
+      "path": "package-1/SimFarm/INSTALL.EXE",
+      "bytes": 103735
+    },
+    {
+      "path": "package-1/SimFarm/INSTALL.MXS",
+      "bytes": 5580
+    },
+    {
+      "path": "package-1/SimFarm/MAXIS.CIM",
+      "bytes": 67557
+    },
+    {
+      "path": "package-1/SimFarm/MEGADATA.EEA",
+      "bytes": 2213377
+    },
+    {
+      "path": "package-1/SimFarm/MEGADATA.IDX",
+      "bytes": 3040
+    },
+    {
+      "path": "package-1/SimFarm/POSTCARD.CIM",
+      "bytes": 15341
+    },
+    {
+      "path": "package-1/SimFarm/README.TXT",
+      "bytes": 3993
+    },
+    {
+      "path": "package-1/SimFarm/README_U.TXT",
+      "bytes": 1072
+    },
+    {
+      "path": "package-1/SimFarm/SCEN0.SSM",
+      "bytes": 139072
+    },
+    {
+      "path": "package-1/SimFarm/SCEN1.SSM",
+      "bytes": 139072
+    },
+    {
+      "path": "package-1/SimFarm/SCEN2.SSM",
+      "bytes": 139072
+    },
+    {
+      "path": "package-1/SimFarm/SCEN3.SSM",
+      "bytes": 139072
+    },
+    {
+      "path": "package-1/SimFarm/SCEN4.SSM",
+      "bytes": 139072
+    },
+    {
+      "path": "package-1/SimFarm/SCEN5.SSM",
+      "bytes": 139072
+    },
+    {
+      "path": "package-1/SimFarm/SCEN6.SSM",
+      "bytes": 139072
+    },
+    {
+      "path": "package-1/SimFarm/SCEN7.SSM",
+      "bytes": 139072
+    },
+    {
+      "path": "package-1/SimFarm/SIMFARM.CFG",
+      "bytes": 67
+    },
+    {
+      "path": "package-1/SimFarm/SIMFARM.EXE",
+      "bytes": 595897
+    },
+    {
+      "path": "package-1/SimFarm/VRF_ADV.EXE",
+      "bytes": 18686
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/ALMONDS.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/APPLES.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/BARLEY.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/CARROTS.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/CORN.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/COTTON.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/GLADIOLU.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/GRAPES.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/LETTUCE.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/OATS.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/ONIONS.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/ORANGES.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/PEANUTS.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/POTATOES.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/RICE.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/SORGHUM.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/SOYBEANS.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/STRAWBER.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/SUGAR.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/SUNFLOWE.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/SWEET.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/TOBACCO.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/TOMATOES.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/CROPS/WHEAT.CRP",
+      "bytes": 5890
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/ADLIB.ADV",
+      "bytes": 14775
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/ADLIBG.ADV",
+      "bytes": 16257
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/ALGDIG.ADV",
+      "bytes": 5770
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/GMT32MPU.ADV",
+      "bytes": 10843
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/MT32MPU.ADV",
+      "bytes": 10707
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/PASDIG.ADV",
+      "bytes": 4361
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/PASFM.ADV",
+      "bytes": 15242
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/PASOPL.ADV",
+      "bytes": 16333
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/PCSPKR.ADV",
+      "bytes": 8434
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/SBDIG.ADV",
+      "bytes": 4667
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/SBFM.ADV",
+      "bytes": 14825
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/SBP1FM.ADV",
+      "bytes": 15235
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/SBP2FM.ADV",
+      "bytes": 16357
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/SBPDIG.ADV",
+      "bytes": 4946
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/SIMFARM.AD",
+      "bytes": 3622
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/SIMFARM.OPL",
+      "bytes": 5591
+    },
+    {
+      "path": "package-1/SimFarm/SOUND/TANDY.ADV",
+      "bytes": 8746
+    }
+  ],
+  "analysis": {
+    "id": "simfarm",
+    "imageFileCount": 0,
+    "commonImageDimensions": {},
+    "imageExamples": [],
+    "imageReadErrors": [],
+    "binaryCount": 4,
+    "binaries": [
+      {
+        "path": "package-1/SimFarm/INFO.EXE",
+        "bytes": 27025,
+        "sha256": "fde21404f345808926edc3ee4e47152df3c81cd6692c9e449e564f0b1f0269a7",
+        "format": "DOS MZ",
+        "headerBytes": 512,
+        "entryFileOffset": 512,
+        "entryDisassembly": [
+          {
+            "address": "0x0",
+            "mnemonic": "mov",
+            "operands": "dx, 0x327"
+          },
+          {
+            "address": "0x3",
+            "mnemonic": "mov",
+            "operands": "word ptr cs:[0x28b], dx"
+          },
+          {
+            "address": "0x8",
+            "mnemonic": "mov",
+            "operands": "ah, 0x30"
+          },
+          {
+            "address": "0xa",
+            "mnemonic": "int",
+            "operands": "0x21"
+          },
+          {
+            "address": "0xc",
+            "mnemonic": "mov",
+            "operands": "bp, word ptr [2]"
+          },
+          {
+            "address": "0x10",
+            "mnemonic": "mov",
+            "operands": "bx, word ptr [0x2c]"
+          },
+          {
+            "address": "0x14",
+            "mnemonic": "mov",
+            "operands": "ds, dx"
+          },
+          {
+            "address": "0x16",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x7d], ax"
+          },
+          {
+            "address": "0x19",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x7b], es"
+          },
+          {
+            "address": "0x1d",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x77], bx"
+          },
+          {
+            "address": "0x21",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x91], bp"
+          },
+          {
+            "address": "0x25",
+            "mnemonic": "call",
+            "operands": "0x179"
+          },
+          {
+            "address": "0x28",
+            "mnemonic": "mov",
+            "operands": "ax, word ptr [0x77]"
+          },
+          {
+            "address": "0x2b",
+            "mnemonic": "mov",
+            "operands": "es, ax"
+          },
+          {
+            "address": "0x2d",
+            "mnemonic": "xor",
+            "operands": "ax, ax"
+          },
+          {
+            "address": "0x2f",
+            "mnemonic": "mov",
+            "operands": "bx, ax"
+          },
+          {
+            "address": "0x31",
+            "mnemonic": "mov",
+            "operands": "di, ax"
+          },
+          {
+            "address": "0x33",
+            "mnemonic": "mov",
+            "operands": "cx, 0x7fff"
+          },
+          {
+            "address": "0x36",
+            "mnemonic": "cld",
+            "operands": ""
+          },
+          {
+            "address": "0x37",
+            "mnemonic": "repne scasb",
+            "operands": "al, byte ptr es:[di]"
+          },
+          {
+            "address": "0x39",
+            "mnemonic": "jcxz",
+            "operands": "0x7e"
+          },
+          {
+            "address": "0x3b",
+            "mnemonic": "inc",
+            "operands": "bx"
+          },
+          {
+            "address": "0x3c",
+            "mnemonic": "cmp",
+            "operands": "byte ptr es:[di], al"
+          },
+          {
+            "address": "0x3f",
+            "mnemonic": "jne",
+            "operands": "0x37"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      },
+      {
+        "path": "package-1/SimFarm/INSTALL.EXE",
+        "bytes": 103735,
+        "sha256": "2ebb9e038c16cfff20733745db8479e026b0c704957e3494482f5a25efd4bf2a",
+        "format": "DOS MZ",
+        "headerBytes": 5120,
+        "entryFileOffset": 5120,
+        "entryDisassembly": [
+          {
+            "address": "0x0",
+            "mnemonic": "mov",
+            "operands": "dx, 0x108a"
+          },
+          {
+            "address": "0x3",
+            "mnemonic": "mov",
+            "operands": "word ptr cs:[0x291], dx"
+          },
+          {
+            "address": "0x8",
+            "mnemonic": "mov",
+            "operands": "ah, 0x30"
+          },
+          {
+            "address": "0xa",
+            "mnemonic": "int",
+            "operands": "0x21"
+          },
+          {
+            "address": "0xc",
+            "mnemonic": "mov",
+            "operands": "bp, word ptr [2]"
+          },
+          {
+            "address": "0x10",
+            "mnemonic": "mov",
+            "operands": "bx, word ptr [0x2c]"
+          },
+          {
+            "address": "0x14",
+            "mnemonic": "mov",
+            "operands": "ds, dx"
+          },
+          {
+            "address": "0x16",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x7d], ax"
+          },
+          {
+            "address": "0x19",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x7b], es"
+          },
+          {
+            "address": "0x1d",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x77], bx"
+          },
+          {
+            "address": "0x21",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x91], bp"
+          },
+          {
+            "address": "0x25",
+            "mnemonic": "call",
+            "operands": "0x17d"
+          },
+          {
+            "address": "0x28",
+            "mnemonic": "mov",
+            "operands": "ax, word ptr [0x77]"
+          },
+          {
+            "address": "0x2b",
+            "mnemonic": "mov",
+            "operands": "es, ax"
+          },
+          {
+            "address": "0x2d",
+            "mnemonic": "xor",
+            "operands": "ax, ax"
+          },
+          {
+            "address": "0x2f",
+            "mnemonic": "mov",
+            "operands": "bx, ax"
+          },
+          {
+            "address": "0x31",
+            "mnemonic": "mov",
+            "operands": "di, ax"
+          },
+          {
+            "address": "0x33",
+            "mnemonic": "mov",
+            "operands": "cx, 0x7fff"
+          },
+          {
+            "address": "0x36",
+            "mnemonic": "cld",
+            "operands": ""
+          },
+          {
+            "address": "0x37",
+            "mnemonic": "repne scasb",
+            "operands": "al, byte ptr es:[di]"
+          },
+          {
+            "address": "0x39",
+            "mnemonic": "jcxz",
+            "operands": "0x7e"
+          },
+          {
+            "address": "0x3b",
+            "mnemonic": "inc",
+            "operands": "bx"
+          },
+          {
+            "address": "0x3c",
+            "mnemonic": "cmp",
+            "operands": "byte ptr es:[di], al"
+          },
+          {
+            "address": "0x3f",
+            "mnemonic": "jne",
+            "operands": "0x37"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      },
+      {
+        "path": "package-1/SimFarm/SIMFARM.EXE",
+        "bytes": 595897,
+        "sha256": "8b86a2d3d07e0b6f77ce491e27e538feeccf5d1af149f42bc0f6a0631c3e58ce",
+        "format": "DOS MZ",
+        "headerBytes": 8704,
+        "entryFileOffset": 161740,
+        "entryDisassembly": [
+          {
+            "address": "0x255cc",
+            "mnemonic": "mov",
+            "operands": "word ptr cs:[0xa86], es"
+          },
+          {
+            "address": "0x255d1",
+            "mnemonic": "mov",
+            "operands": "word ptr cs:[0xa88], ds"
+          },
+          {
+            "address": "0x255d6",
+            "mnemonic": "mov",
+            "operands": "bx, 0x24e6"
+          },
+          {
+            "address": "0x255d9",
+            "mnemonic": "mov",
+            "operands": "ds, bx"
+          },
+          {
+            "address": "0x255db",
+            "mnemonic": "push",
+            "operands": "ds"
+          },
+          {
+            "address": "0x255dc",
+            "mnemonic": "call",
+            "operands": "0x25615"
+          },
+          {
+            "address": "0x255df",
+            "mnemonic": "pop",
+            "operands": "ds"
+          },
+          {
+            "address": "0x255e0",
+            "mnemonic": "mov",
+            "operands": "bx, word ptr [0xc0f]"
+          },
+          {
+            "address": "0x255e4",
+            "mnemonic": "or",
+            "operands": "bx, bx"
+          },
+          {
+            "address": "0x255e6",
+            "mnemonic": "je",
+            "operands": "0x255f3"
+          },
+          {
+            "address": "0x255e8",
+            "mnemonic": "mov",
+            "operands": "cx, ss"
+          },
+          {
+            "address": "0x255ea",
+            "mnemonic": "mov",
+            "operands": "dx, sp"
+          },
+          {
+            "address": "0x255ec",
+            "mnemonic": "cli",
+            "operands": ""
+          },
+          {
+            "address": "0x255ed",
+            "mnemonic": "mov",
+            "operands": "ss, bx"
+          },
+          {
+            "address": "0x255ef",
+            "mnemonic": "mov",
+            "operands": "sp, 0x200"
+          },
+          {
+            "address": "0x255f2",
+            "mnemonic": "sti",
+            "operands": ""
+          },
+          {
+            "address": "0x255f3",
+            "mnemonic": "push",
+            "operands": "bx"
+          },
+          {
+            "address": "0x255f4",
+            "mnemonic": "push",
+            "operands": "cx"
+          },
+          {
+            "address": "0x255f5",
+            "mnemonic": "push",
+            "operands": "dx"
+          },
+          {
+            "address": "0x255f6",
+            "mnemonic": "push",
+            "operands": "ds"
+          },
+          {
+            "address": "0x255f7",
+            "mnemonic": "call",
+            "operands": "0x25686"
+          },
+          {
+            "address": "0x255fa",
+            "mnemonic": "pop",
+            "operands": "ds"
+          },
+          {
+            "address": "0x255fb",
+            "mnemonic": "pop",
+            "operands": "dx"
+          },
+          {
+            "address": "0x255fc",
+            "mnemonic": "pop",
+            "operands": "cx"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      },
+      {
+        "path": "package-1/SimFarm/VRF_ADV.EXE",
+        "bytes": 18686,
+        "sha256": "5894120424ee86f4f3a8a5dd90ab382b90a1f4ba9fdce8ca212169e915de16fd",
+        "format": "DOS MZ",
+        "headerBytes": 512,
+        "entryFileOffset": 512,
+        "entryDisassembly": [
+          {
+            "address": "0x0",
+            "mnemonic": "mov",
+            "operands": "dx, 0x424"
+          },
+          {
+            "address": "0x3",
+            "mnemonic": "mov",
+            "operands": "word ptr cs:[0x291], dx"
+          },
+          {
+            "address": "0x8",
+            "mnemonic": "mov",
+            "operands": "ah, 0x30"
+          },
+          {
+            "address": "0xa",
+            "mnemonic": "int",
+            "operands": "0x21"
+          },
+          {
+            "address": "0xc",
+            "mnemonic": "mov",
+            "operands": "bp, word ptr [2]"
+          },
+          {
+            "address": "0x10",
+            "mnemonic": "mov",
+            "operands": "bx, word ptr [0x2c]"
+          },
+          {
+            "address": "0x14",
+            "mnemonic": "mov",
+            "operands": "ds, dx"
+          },
+          {
+            "address": "0x16",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x7d], ax"
+          },
+          {
+            "address": "0x19",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x7b], es"
+          },
+          {
+            "address": "0x1d",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x77], bx"
+          },
+          {
+            "address": "0x21",
+            "mnemonic": "mov",
+            "operands": "word ptr [0x91], bp"
+          },
+          {
+            "address": "0x25",
+            "mnemonic": "call",
+            "operands": "0x17d"
+          },
+          {
+            "address": "0x28",
+            "mnemonic": "mov",
+            "operands": "ax, word ptr [0x77]"
+          },
+          {
+            "address": "0x2b",
+            "mnemonic": "mov",
+            "operands": "es, ax"
+          },
+          {
+            "address": "0x2d",
+            "mnemonic": "xor",
+            "operands": "ax, ax"
+          },
+          {
+            "address": "0x2f",
+            "mnemonic": "mov",
+            "operands": "bx, ax"
+          },
+          {
+            "address": "0x31",
+            "mnemonic": "mov",
+            "operands": "di, ax"
+          },
+          {
+            "address": "0x33",
+            "mnemonic": "mov",
+            "operands": "cx, 0x7fff"
+          },
+          {
+            "address": "0x36",
+            "mnemonic": "cld",
+            "operands": ""
+          },
+          {
+            "address": "0x37",
+            "mnemonic": "repne scasb",
+            "operands": "al, byte ptr es:[di]"
+          },
+          {
+            "address": "0x39",
+            "mnemonic": "jcxz",
+            "operands": "0x7e"
+          },
+          {
+            "address": "0x3b",
+            "mnemonic": "inc",
+            "operands": "bx"
+          },
+          {
+            "address": "0x3c",
+            "mnemonic": "cmp",
+            "operands": "byte ptr es:[di], al"
+          },
+          {
+            "address": "0x3f",
+            "mnemonic": "jne",
+            "operands": "0x37"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      }
+    ],
+    "modelFileCandidates": [],
+    "note": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers."
+  },
+  "extractionErrors": [],
+  "source": null,
+  "inspectedSourceFiles": [],
+  "resourceDecoding": {
+    "method": "Direct static format analysis, checked against every entry in this acquired package. No gameplay execution.",
+    "createdAt": "2026-10-21T07:08:26.542037+00:00",
+    "inputs": [
+      {
+        "file": "MEGADATA.IDX",
+        "bytes": 3040,
+        "sha256": "61c7dc75ffe97258c796c353b6dc6420e29477257de145126f1d020f8f3e2a35"
+      },
+      {
+        "file": "MEGADATA.EEA",
+        "bytes": 2213377,
+        "sha256": "fc606502cd14cd2de8b84b3769ac273aaefa09872da9608855b206a25e7b7416"
+      }
+    ],
+    "decoderSha256": "8a2018de815f0c7792335c1f872c7b9b12480cdcc12626ed3f7bb23d3246b1af",
+    "indexRecordBytes": 20,
+    "indexRecords": 152,
+    "nonEmptyResources": 151,
+    "endMarker": {
+      "name": "card48.hc",
+      "offset": 2213377,
+      "bytes": 0
+    },
+    "partitionBytes": 2213377,
+    "partitionCoversArchiveExactly": true,
+    "extensions": {
+      ".bmp": 22,
+      ".btl": 3,
+      ".cmp": 1,
+      ".dat": 15,
+      ".epl": 3,
+      ".fnt": 1,
+      ".int": 5,
+      ".pal": 6,
+      ".lzs": 1,
+      ".mbm": 1,
+      ".spr": 8,
+      ".til": 7,
+      ".odt": 1,
+      ".xmi": 8,
+      ".voc": 25,
+      ".txt": 1,
+      ".hc": 43
+    },
+    "resources": [
+      {
+        "name": "about.bmp",
+        "offset": 0,
+        "bytes": 44808,
+        "sha256": "abdb074afbf560d99f0452387a87b7edf7a31f40e87eeeefb89899169919f805"
+      },
+      {
+        "name": "airpwndo.bmp",
+        "offset": 44808,
+        "bytes": 22536,
+        "sha256": "0704617f6eaf1098f8ccaa2e9286da88a14df4413b436075e25cbca768b99b67"
+      },
+      {
+        "name": "bankterm.bmp",
+        "offset": 67344,
+        "bytes": 32264,
+        "sha256": "0808f7e390e8bbae23828204134dbd12ce840af994457f656b44ed647bd8b0f9"
+      },
+      {
+        "name": "bankhelp.bmp",
+        "offset": 99608,
+        "bytes": 4488,
+        "sha256": "d788be1b7e353c5eee1be5990bd1288d717335ea3c8cebff410de0d8fd3a9ee6"
+      },
+      {
+        "name": "cashflow.bmp",
+        "offset": 104096,
+        "bytes": 44808,
+        "sha256": "ca4766300bd98d207038618656bbac75927f510ab4a000d8d936f83744251778"
+      },
+      {
+        "name": "farmburo.bmp",
+        "offset": 148904,
+        "bytes": 44808,
+        "sha256": "f83003044612a61cf22a6b1cec08f6c2287a32ae1d841cd603bf993f51f4fc6f"
+      },
+      {
+        "name": "buywndo.bmp",
+        "offset": 193712,
+        "bytes": 28680,
+        "sha256": "892ce962a019d605a94106ed183c177b6a4b15c3267554275adf030df601cb37"
+      },
+      {
+        "name": "choscrop.bmp",
+        "offset": 222392,
+        "bytes": 35848,
+        "sha256": "508aedfb30a8b209fe5aa8634cfcb5d08fbd073c9ad378b101ac7c19bea2cb71"
+      },
+      {
+        "name": "cntlbtnh.bmp",
+        "offset": 258240,
+        "bytes": 10248,
+        "sha256": "6099e6fd31c27d73c0a20c1ee63a0ac1f41bfbff0f9fa54e739e11637a3c2b0f"
+      },
+      {
+        "name": "edithelp.bmp",
+        "offset": 268488,
+        "bytes": 8808,
+        "sha256": "3316d1a47b2def6d5840111d68cc251ccea7d179084010b1fb635f64b582e2b5"
+      },
+      {
+        "name": "evaluate.bmp",
+        "offset": 277296,
+        "bytes": 33800,
+        "sha256": "136878cc449017978fc883b656ef788327e28028615defc91cfb6fd62cc224e9"
+      },
+      {
+        "name": "examine.bmp",
+        "offset": 311096,
+        "bytes": 21640,
+        "sha256": "8cc7e89c7c270b701fbbeaa8e21d8e721815e710c55df2b49127c32afe902fc9"
+      },
+      {
+        "name": "fdstatus.bmp",
+        "offset": 332736,
+        "bytes": 37640,
+        "sha256": "38b29a5769e673d984fd13e9ed09b9ffd2c2f059fc21812786e742fce8a9aa3f"
+      },
+      {
+        "name": "filegenr.bmp",
+        "offset": 370376,
+        "bytes": 21640,
+        "sha256": "2ede6d65181e5a91fe08f2d09a11c2061ffc42cd8545b3221bbe7c8d61119495"
+      },
+      {
+        "name": "futures.bmp",
+        "offset": 392016,
+        "bytes": 33288,
+        "sha256": "bcdbf865f2c33c75024583ff9e80b6fb48c8e3689c72cd16a3fbb6dd90c4c01a"
+      },
+      {
+        "name": "maphelp.bmp",
+        "offset": 425304,
+        "bytes": 4808,
+        "sha256": "ee9a1a40980023b3daeae726a2611d9af1ae98c5f36a339e1d0abeb6fc8340f6"
+      },
+      {
+        "name": "mapwndo.bmp",
+        "offset": 430112,
+        "bytes": 34568,
+        "sha256": "bb582dd2c18f50ee9cea0607e29b06e3ad7a74ac978d5835fc522a73a5ea52de"
+      },
+      {
+        "name": "popup.bmp",
+        "offset": 464680,
+        "bytes": 24584,
+        "sha256": "13c67ce4fce48a351a23e3f814c2f9c487ed5f6efc04377272978a6ce37d7685"
+      },
+      {
+        "name": "sellwndo.bmp",
+        "offset": 489264,
+        "bytes": 24584,
+        "sha256": "ecd39bfa55152440e8c0687ecfb55011875fe53990dc826309deb8df2416a48f"
+      },
+      {
+        "name": "twnchoic.bmp",
+        "offset": 513848,
+        "bytes": 41224,
+        "sha256": "20923a8dba2ad4624c12335e48512a3450214d7b86083d4ca9bf2fc857187e86"
+      },
+      {
+        "name": "weather.bmp",
+        "offset": 555072,
+        "bytes": 32264,
+        "sha256": "109c54d3ebe5d7188c9b568051d09556229c8f7a5acc8fe88419b0f6307df569"
+      },
+      {
+        "name": "lzrdlogo.bmp",
+        "offset": 587336,
+        "bytes": 5832,
+        "sha256": "99552faeaf5bd38a1592b62081554881870d16f9578d03cf70aa65fce4a44c98"
+      },
+      {
+        "name": "alltiles.btl",
+        "offset": 593168,
+        "bytes": 286900,
+        "sha256": "f77032c6726cc13c38adf15082c59babf0573724a8a0a01dc7a61d866e4dd502"
+      },
+      {
+        "name": "wethgrnd.btl",
+        "offset": 880068,
+        "bytes": 7196,
+        "sha256": "b94bc32839743c1053df5671c20d8bb7d5379cfd6682c81eff3685066763c950"
+      },
+      {
+        "name": "wethsky.btl",
+        "offset": 887264,
+        "bytes": 7196,
+        "sha256": "47cc417ab7854f8a464de88e9c42322ed7f8edba3f80212993c56b1434f27514"
+      },
+      {
+        "name": "townly0.cmp",
+        "offset": 894460,
+        "bytes": 1920,
+        "sha256": "6f8f3cac0d93bda8aa7d0be96fd4a07f6dace1241ffbc3f13a756ebfecec5be7"
+      },
+      {
+        "name": "events.dat",
+        "offset": 896380,
+        "bytes": 16282,
+        "sha256": "616d4c3c7de1e6f60718933a4cefacaacaf915c0c704d1dd179165eb45e346cb"
+      },
+      {
+        "name": "itemtext.dat",
+        "offset": 912662,
+        "bytes": 18929,
+        "sha256": "63469b3bf1adcf819b65b88b8d7d783f3ff7a0f82a38e9d6afc774b4b365db75"
+      },
+      {
+        "name": "qmessage.dat",
+        "offset": 931591,
+        "bytes": 4866,
+        "sha256": "f49a867d63b52d4157977f6e06dfc231af3689042af3da8ae032cbfcff5594b1"
+      },
+      {
+        "name": "rain0.dat",
+        "offset": 936457,
+        "bytes": 540,
+        "sha256": "956489b5ddb15f16085d7f3dc16bb1951ce1888e68aa91bfa0764b83d48c266b"
+      },
+      {
+        "name": "rain1.dat",
+        "offset": 936997,
+        "bytes": 540,
+        "sha256": "d8bd1404d50f3f31b9457539db4250b5d9b2d776a8cbcc484cd3ad2b2ae4a7a3"
+      },
+      {
+        "name": "rain2.dat",
+        "offset": 937537,
+        "bytes": 540,
+        "sha256": "980da545d6bfe8f80459ba22de622301f439c45de4117314bfd2656820fd4149"
+      },
+      {
+        "name": "rain3.dat",
+        "offset": 938077,
+        "bytes": 540,
+        "sha256": "a4b0cae3e6e0b3016e731ab3eeae4de3a2fd80d3db5617c7b204dd965a68e2fa"
+      },
+      {
+        "name": "temp0.dat",
+        "offset": 938617,
+        "bytes": 780,
+        "sha256": "32ba25918db67f0dbdc5c9e157b29b06274220dd9c67c9d79a7a227cfe74cbb4"
+      },
+      {
+        "name": "temp1.dat",
+        "offset": 939397,
+        "bytes": 780,
+        "sha256": "b88fdc0a66e8070c18906a186844433865143b3d3a7f4e9bbd04e1c686ed9e04"
+      },
+      {
+        "name": "temp2.dat",
+        "offset": 940177,
+        "bytes": 780,
+        "sha256": "4581f6cccc97128cfeda1e0f2cae5fc428f717630adbb0725b965b5ed2e731ed"
+      },
+      {
+        "name": "temp3.dat",
+        "offset": 940957,
+        "bytes": 780,
+        "sha256": "b69d60ee553d14cc657ab93fa27f079b5b39426264d8bfcdb90eec1bf6706525"
+      },
+      {
+        "name": "wind0.dat",
+        "offset": 941737,
+        "bytes": 540,
+        "sha256": "21c112c6152d7c8c2fc0acf360040c4f47871dcef76fc4deb0f6660cfe698345"
+      },
+      {
+        "name": "wind1.dat",
+        "offset": 942277,
+        "bytes": 580,
+        "sha256": "6a5a7ceefbd499c8ee719e6d654c6333890bcba8d0c2577b58ceac29f1e14177"
+      },
+      {
+        "name": "wind2.dat",
+        "offset": 942857,
+        "bytes": 775,
+        "sha256": "a4259d1759a3357af8b374e7b308302716c7e84da478326de6d43d2390ce8528"
+      },
+      {
+        "name": "wind3.dat",
+        "offset": 943632,
+        "bytes": 780,
+        "sha256": "4820ec479e4c8c2398a466e487bd9314e0dda1c69c30067396839d07ac3b9634"
+      },
+      {
+        "name": "simfarm.epl",
+        "offset": 944412,
+        "bytes": 17,
+        "sha256": "1835b728a8b86bcc69d6bbe526b3be7a70174fe9e235293c02e5e3e4d931b195"
+      },
+      {
+        "name": "sftitle.epl",
+        "offset": 944429,
+        "bytes": 17,
+        "sha256": "7ea5714ab972a09badc1d16766ea319b75568e526506612a8e1767538e6815a7"
+      },
+      {
+        "name": "prsnt350.epl",
+        "offset": 944446,
+        "bytes": 17,
+        "sha256": "6ab24af44896a692aa6d0a260a4868433957f46a2716935cc5d9293904044449"
+      },
+      {
+        "name": "egafont.fnt",
+        "offset": 944463,
+        "bytes": 3840,
+        "sha256": "3172a72ca4fd137d36b3b0eb834899d6d5ed3e7cdfae1ae4f630987a80d7e2cc"
+      },
+      {
+        "name": "defworld.int",
+        "offset": 948303,
+        "bytes": 153600,
+        "sha256": "68942e94ec397ccc644ffe1d1b3d123a54f5ffa73f401be06e75316d295ca57b"
+      },
+      {
+        "name": "scenario.int",
+        "offset": 1101903,
+        "bytes": 153600,
+        "sha256": "6d0e8c46a7daa234156297c30d5c7f3c31495cd75b8c7af49def4a4798e0da4c"
+      },
+      {
+        "name": "prsnt480.int",
+        "offset": 1255503,
+        "bytes": 153600,
+        "sha256": "88da110ca42f4111a0643618226c65ff70647630063617029e98686b328ff843"
+      },
+      {
+        "name": "prsnt350.int",
+        "offset": 1409103,
+        "bytes": 153600,
+        "sha256": "691acd239e7071ec06aa179412bb5410f7e283cbf652b56ffd2128bafe600e89"
+      },
+      {
+        "name": "sftitle.int",
+        "offset": 1562703,
+        "bytes": 153600,
+        "sha256": "afe829e3a4e823295a32af21e2d3ba0f8bd88bd8f1f655db5f6dc1cbcf953cc5"
+      },
+      {
+        "name": "frostpal.pal",
+        "offset": 1716303,
+        "bytes": 48,
+        "sha256": "df5a1fbfc083a474731d0122f30e21cc92c095d2eb0872cf2f40d25418c6c02d"
+      },
+      {
+        "name": "prsnt480.pal",
+        "offset": 1716351,
+        "bytes": 48,
+        "sha256": "ad260bd9c322f80eefc823a791f39c241b3837d6120f94cfb2609eabbed94397"
+      },
+      {
+        "name": "rainpal.pal",
+        "offset": 1716399,
+        "bytes": 48,
+        "sha256": "249330f03e83d767c014894dfcbf4718024701795cbae49e31c717ef74c0cc89"
+      },
+      {
+        "name": "scenario.pal",
+        "offset": 1716447,
+        "bytes": 48,
+        "sha256": "9524ff84a87e7da93571bf2daddef6c2c9e3569393f3022266a63618295f3b10"
+      },
+      {
+        "name": "sftitle.pal",
+        "offset": 1716495,
+        "bytes": 48,
+        "sha256": "521aa38f525cb5f5c9e44b2e0c9e6c7c127812e0e8cf46a21ba95fa7230ba93b"
+      },
+      {
+        "name": "simfarm.pal",
+        "offset": 1716543,
+        "bytes": 48,
+        "sha256": "9fed4acc48a4059b7910fda28463a2e8701ecb22b3639c4c81e2a62f1d7e8975"
+      },
+      {
+        "name": "editeasy.lzs",
+        "offset": 1716591,
+        "bytes": 2225,
+        "sha256": "fa398c509ed630a9d9f21197e47cde2e102291e7954d1f489ef39cb8ec55d84b"
+      },
+      {
+        "name": "far_mapc.mbm",
+        "offset": 1718816,
+        "bytes": 1920,
+        "sha256": "2fad5b9a88d639e943af13b85124898451edb055ec7acf12b0a5c49046ca5043"
+      },
+      {
+        "name": "airplane.spr",
+        "offset": 1720736,
+        "bytes": 5130,
+        "sha256": "96596a523c83b3988d751afd4bd84575ecd8c7e244e6ea32a3c09cedea1011d9"
+      },
+      {
+        "name": "apshadow.spr",
+        "offset": 1725866,
+        "bytes": 5130,
+        "sha256": "b2d31dfc6a40db9e50a8e08df1e2b776ee1f1371dbb0c52996b54f526a64a93f"
+      },
+      {
+        "name": "cowman1.spr",
+        "offset": 1730996,
+        "bytes": 17610,
+        "sha256": "ee5ae422fb4c9240835bf086b116da8a505a1a9d109697379dd25800aa949153"
+      },
+      {
+        "name": "cowman2.spr",
+        "offset": 1748606,
+        "bytes": 17610,
+        "sha256": "e2a9153fa9f28b1cc4b1210afb41380f61ad3fd44417c1bc9969f80d2b0c7c3e"
+      },
+      {
+        "name": "cowman3.spr",
+        "offset": 1766216,
+        "bytes": 17610,
+        "sha256": "5eb0739a75c93fa66fff84a502d85136274ed9d91b3ab72463384e0a3ba3287a"
+      },
+      {
+        "name": "cropdust.spr",
+        "offset": 1783826,
+        "bytes": 1290,
+        "sha256": "da48747a817847977b8936bce384b0e545b672073f6b4087699099ff59476848"
+      },
+      {
+        "name": "tornado.spr",
+        "offset": 1785116,
+        "bytes": 5770,
+        "sha256": "ac8960867e84acd422ea9e6ffd26a77e63f5af65f748b83c86011231f6fdb2f7"
+      },
+      {
+        "name": "swarm.spr",
+        "offset": 1790886,
+        "bytes": 6410,
+        "sha256": "9217f7d2e3896e2072f36fd4c4e544d989009ad185ce40787478b914e8a67603"
+      },
+      {
+        "name": "buttons.til",
+        "offset": 1797296,
+        "bytes": 10368,
+        "sha256": "326c56476dc871cfd583b89d23b8c8b085463884ea25b5c0985a0fe44976cfb2"
+      },
+      {
+        "name": "ega16til.til",
+        "offset": 1807664,
+        "bytes": 112640,
+        "sha256": "bab4818f7622b695354435ea9ea8b36268c4c306a2f1a88f79ca19dcd72a3f2d"
+      },
+      {
+        "name": "fldgrph.til",
+        "offset": 1920304,
+        "bytes": 11520,
+        "sha256": "f4f1e37a9465679781786d85d3b2d34b0e3e97757fb0c12bb53eef06a77a5fe6"
+      },
+      {
+        "name": "mskdtile.til",
+        "offset": 1931824,
+        "bytes": 25600,
+        "sha256": "f68a38c5be55f98c11e656fc4675ba65d8676b742d89a3650194fcc05efe386c"
+      },
+      {
+        "name": "twnevent.til",
+        "offset": 1957424,
+        "bytes": 20480,
+        "sha256": "533e3c7f544bfcd1b18752f3eff0f222771ca9bb2d21cd46e4b401844647aac2"
+      },
+      {
+        "name": "wethvane.til",
+        "offset": 1977904,
+        "bytes": 1024,
+        "sha256": "427c9aa6fb418899b5421f2030468b5299082910ab3f69b8f245bcc4fe9d281b"
+      },
+      {
+        "name": "cursors.til",
+        "offset": 1978928,
+        "bytes": 1536,
+        "sha256": "84e9dbb9a5453ccea46f4ffb89a47751fee3a5322978090dd31d5fd8871efbc1"
+      },
+      {
+        "name": "scenario.odt",
+        "offset": 1980464,
+        "bytes": 4042,
+        "sha256": "96f92b484fd6f531446aa8c203a75823c78055411fcfe627b3993b3b8b0da3b9"
+      },
+      {
+        "name": "alien.xmi",
+        "offset": 1984506,
+        "bytes": 738,
+        "sha256": "1f3a529c0fdb61e0fd82953fcef9cdd1ecfc6e0483c5b9640b0b216d0d24eb1a"
+      },
+      {
+        "name": "amain.xmi",
+        "offset": 1985244,
+        "bytes": 4748,
+        "sha256": "3711c3d7b0449e90e2f0450677816d4074aefd8bb75ad64b548ad088c66d9a69"
+      },
+      {
+        "name": "carnival.xmi",
+        "offset": 1989992,
+        "bytes": 3530,
+        "sha256": "caae91a48c8a9a0edb414146358bc5b67e00299be376e480e93187fb85ac095b"
+      },
+      {
+        "name": "cowman.xmi",
+        "offset": 1993522,
+        "bytes": 5762,
+        "sha256": "3e70f9615ab0cdd01f0db4bb5cbfff8cf00b99e6ab6a276aaa65b7134ba00b12"
+      },
+      {
+        "name": "dfarm.xmi",
+        "offset": 1999284,
+        "bytes": 928,
+        "sha256": "07d2aaef738bb03b5131b84277e38ef7aa257bcca11c9defb029e3c43f8061f3"
+      },
+      {
+        "name": "ffarm.xmi",
+        "offset": 2000212,
+        "bytes": 1878,
+        "sha256": "ff7ab8e1db63d2f39a0b80c044bf9a2bbef2ac1d3b2900028b6d8b704a3f47a7"
+      },
+      {
+        "name": "genfarm.xmi",
+        "offset": 2002090,
+        "bytes": 2518,
+        "sha256": "662c27606f2ca4386f95c32ce40c86b1e505e992e941fa74d88595e8cd7bc5a2"
+      },
+      {
+        "name": "rodeo.xmi",
+        "offset": 2004608,
+        "bytes": 2142,
+        "sha256": "1e10f94da75f9646e2318225b8fb3e73c7bfb63e3c8db028fffa699864bf141a"
+      },
+      {
+        "name": "bird1.voc",
+        "offset": 2006750,
+        "bytes": 8637,
+        "sha256": "4c79db063d1f70a7351cf421142674cd50f78abdef380c7b245578b19233a90b"
+      },
+      {
+        "name": "bird2.voc",
+        "offset": 2015387,
+        "bytes": 5619,
+        "sha256": "80ce5adf54fc1f3209286c4da3acb35f9f71a49ed330c2f22af9978fe3b8e5a8"
+      },
+      {
+        "name": "boos.voc",
+        "offset": 2021006,
+        "bytes": 11696,
+        "sha256": "3668bf93bb7bb9ffada31e0e08e27c2885d78ead067345724817f0ca7059b54c"
+      },
+      {
+        "name": "cheers.voc",
+        "offset": 2032702,
+        "bytes": 12376,
+        "sha256": "2cdd94ec59fce671b210619133fa9c875b9b8623099104e70411890b09496a05"
+      },
+      {
+        "name": "compbeep.voc",
+        "offset": 2045078,
+        "bytes": 1770,
+        "sha256": "1aa9de9c820d18e5cc8c205035264c0e933555d7e429350dafd6d0e24fe00e2c"
+      },
+      {
+        "name": "cow1.voc",
+        "offset": 2046848,
+        "bytes": 7901,
+        "sha256": "3cb705ffd984e36a03ae6e3702af7e2942abe18cd9b71872a008e433b3b20e95"
+      },
+      {
+        "name": "cow2.voc",
+        "offset": 2054749,
+        "bytes": 8243,
+        "sha256": "9b1a384ca0fed18494a9c880cc6ecd3248dfe85b50b924d29f04f3367557e946"
+      },
+      {
+        "name": "plane.voc",
+        "offset": 2062992,
+        "bytes": 12881,
+        "sha256": "96b0153d97a84086d82a7a960597ce8c641da73f556c0b8707bce3c12456c95b"
+      },
+      {
+        "name": "sheep1.voc",
+        "offset": 2075873,
+        "bytes": 6489,
+        "sha256": "d7a093603e91aa73f5f9cd1c1eec165d8bd675913bacafdef119174752ec8dc5"
+      },
+      {
+        "name": "sheep2.voc",
+        "offset": 2082362,
+        "bytes": 11252,
+        "sha256": "801f9e35392e327e0fe0d746dd9c6718cd4d7399f6918115aff193f629be7365"
+      },
+      {
+        "name": "thunder.voc",
+        "offset": 2093614,
+        "bytes": 10713,
+        "sha256": "d3c07c76b8f62ab306ac1255f300894513eb69f5a49ce023663fe61ac4543b11"
+      },
+      {
+        "name": "wind.voc",
+        "offset": 2104327,
+        "bytes": 12165,
+        "sha256": "a2077a3cb17160f7d228d01bd2e6295de92d98568063c683820c0cc0bd341918"
+      },
+      {
+        "name": "horse1.voc",
+        "offset": 2116492,
+        "bytes": 8333,
+        "sha256": "82925dd4a69bb81ea8d1b98e7712b8bba776e27786ab658b74122c12080843f6"
+      },
+      {
+        "name": "pig.voc",
+        "offset": 2124825,
+        "bytes": 5237,
+        "sha256": "2b37747e7efebe87df9e90a154bd0ae8ec89f36271b71b962b3ad95c5f4109ee"
+      },
+      {
+        "name": "rooster.voc",
+        "offset": 2130062,
+        "bytes": 13251,
+        "sha256": "ad02176c3c24d8c43db77c5a09bcd7a00bfd03a09aca33881f52994ef2bcd3de"
+      },
+      {
+        "name": "swarm.voc",
+        "offset": 2143313,
+        "bytes": 7292,
+        "sha256": "694dc046f73a3a99034d59febbd1ade9509c13ec4b7c4a64e0ae6799565e43f0"
+      },
+      {
+        "name": "smack.voc",
+        "offset": 2150605,
+        "bytes": 1500,
+        "sha256": "a4f4d1de4fd51164e51387a4548bf55e74bd661718f2c6e0f7acec65a98df3a7"
+      },
+      {
+        "name": "bulldoze.voc",
+        "offset": 2152105,
+        "bytes": 2788,
+        "sha256": "0d0e0e24731a5506e7644d60f5eef427caa3621a056a93e647bc1f50fd2b31e3"
+      },
+      {
+        "name": "click.voc",
+        "offset": 2154893,
+        "bytes": 2700,
+        "sha256": "04264e7398f20199cd1cd982a3d00aeaea9dd24e5e945b6315ff6a32cb694510"
+      },
+      {
+        "name": "explode.voc",
+        "offset": 2157593,
+        "bytes": 12769,
+        "sha256": "1156a56ebd0d8bc2cd598d2ad91b6fb9d9f00b5c82db0a8c9f5bc065dd29c59f"
+      },
+      {
+        "name": "flood.voc",
+        "offset": 2170362,
+        "bytes": 9762,
+        "sha256": "bd0a36865d2f968a380678bb3ff7d0f99d923fa2eb232ff9592863673e0405ae"
+      },
+      {
+        "name": "plopitem.voc",
+        "offset": 2180124,
+        "bytes": 7055,
+        "sha256": "55090423cb78e8e6a6364e4ecf735c3127fbfd3937b4e4a988d3f18d2ae9adf1"
+      },
+      {
+        "name": "ploptool.voc",
+        "offset": 2187179,
+        "bytes": 1422,
+        "sha256": "9e499755c7dc872b77cad5ec085fbca2d35d4d3c4d1d95132e3222844f3caebe"
+      },
+      {
+        "name": "tornado.voc",
+        "offset": 2188601,
+        "bytes": 11582,
+        "sha256": "9d07506ad9833c92711ad6cc623d430e859af19c0974bb597cdefd8a5058fee8"
+      },
+      {
+        "name": "uhoh.voc",
+        "offset": 2200183,
+        "bytes": 2326,
+        "sha256": "790158721270b66bf8069f2c4660b891eee75f1ed6e85aa621b40301607c55d8"
+      },
+      {
+        "name": "creditz.txt",
+        "offset": 2202509,
+        "bytes": 2517,
+        "sha256": "36855786d3cb12c28a17175cabff93dd983ffa2e42c51438de50163a82b67e6d"
+      },
+      {
+        "name": "card1.hc",
+        "offset": 2205026,
+        "bytes": 198,
+        "sha256": "9908bb5f4c9337411d4c7df41825f6fa499c7a4a88dcc0ac54cce498aadc309e"
+      },
+      {
+        "name": "card2.hc",
+        "offset": 2205224,
+        "bytes": 464,
+        "sha256": "3d77ae35e75974602e56b7c89392f3256e177b1e0a1c03127e79b581e2a0a5b3"
+      },
+      {
+        "name": "card5.hc",
+        "offset": 2205688,
+        "bytes": 184,
+        "sha256": "9e9088d475a2128a0bd9465c8e40ed7255ed5366350089d730a2babd6036d6e5"
+      },
+      {
+        "name": "card6.hc",
+        "offset": 2205872,
+        "bytes": 189,
+        "sha256": "947b81f8f5e885a44e6c4cbe3776954d0779d7ac22d99b97b92eeef76b46ff48"
+      },
+      {
+        "name": "card7.hc",
+        "offset": 2206061,
+        "bytes": 191,
+        "sha256": "c040320600b8506bbc095cb5725bf155bc4f7b6f888c3538ff8388f9a2352be3"
+      },
+      {
+        "name": "card8.hc",
+        "offset": 2206252,
+        "bytes": 184,
+        "sha256": "33c3f553b6564e4422811bb2c0e2f61d5ed3692e824bc2d29753ba10c4f45533"
+      },
+      {
+        "name": "card10.hc",
+        "offset": 2206436,
+        "bytes": 85,
+        "sha256": "d5e9c8dcb09e16f62f30dbce976635be7dbaf79883725bc035995439e0713b95"
+      },
+      {
+        "name": "card11.hc",
+        "offset": 2206521,
+        "bytes": 94,
+        "sha256": "2c390654c73f24feea4c8c46d50096a2145d45baa93d57ab7e4522214346667e"
+      },
+      {
+        "name": "card12.hc",
+        "offset": 2206615,
+        "bytes": 94,
+        "sha256": "6579495aaf4eb4ea15dce9ff7fa696981e86082904afbc0230723b00b651822b"
+      },
+      {
+        "name": "card13.hc",
+        "offset": 2206709,
+        "bytes": 94,
+        "sha256": "862c95b8ef66dd5ab13f4fd937d698552e71e4b9a6cfd725902963f35b48f12e"
+      },
+      {
+        "name": "card14.hc",
+        "offset": 2206803,
+        "bytes": 94,
+        "sha256": "47b4d7e0182902eb36ccb6d56b49113003535a687bdaf3899d0113c1d7de0551"
+      },
+      {
+        "name": "card15.hc",
+        "offset": 2206897,
+        "bytes": 94,
+        "sha256": "0eae8f69d21bbdf1a9ca6b744bc49bc72f99e397cfd4bfa0eb0f537563161256"
+      },
+      {
+        "name": "card16.hc",
+        "offset": 2206991,
+        "bytes": 94,
+        "sha256": "627b25c9e73352a8e6491c4b006de60bd14b609eb4af2e49d808f1a2b9939ff2"
+      },
+      {
+        "name": "card17.hc",
+        "offset": 2207085,
+        "bytes": 94,
+        "sha256": "09c3506ebde68691d07b5590e429d75b4f87d72742a304c99b646c3920d400c8"
+      },
+      {
+        "name": "card18.hc",
+        "offset": 2207179,
+        "bytes": 94,
+        "sha256": "e4d35e64a3175dd33efe9d4cc43e3b1b3f6316faa4d25c764a89b9907ed80be9"
+      },
+      {
+        "name": "card19.hc",
+        "offset": 2207273,
+        "bytes": 94,
+        "sha256": "5ac6295caa2c6a0de59511f689ba2fbba0f24a55aca853cc10f4918fcab1cdcd"
+      },
+      {
+        "name": "card20.hc",
+        "offset": 2207367,
+        "bytes": 94,
+        "sha256": "f6e69642df081c398faf34ccbe2a04c7de4700ee23fa08874577638bcfa3d56b"
+      },
+      {
+        "name": "card21.hc",
+        "offset": 2207461,
+        "bytes": 94,
+        "sha256": "bebe0dfa4ea48cc6619553d44ae139b02e6e6f7eaa2ed53c98ec29ecbc56ae59"
+      },
+      {
+        "name": "card22.hc",
+        "offset": 2207555,
+        "bytes": 94,
+        "sha256": "2353a82aa140e22c9911ed350a3803a7b625fcea23e02e23d82b2bce98a60f37"
+      },
+      {
+        "name": "card23.hc",
+        "offset": 2207649,
+        "bytes": 94,
+        "sha256": "c42fe9ebaf44d2872ff44d1de91c6268497731d9abbdef97cccb9b5476adaa69"
+      },
+      {
+        "name": "card24.hc",
+        "offset": 2207743,
+        "bytes": 94,
+        "sha256": "c2f83f8508494890b529fd80448038319baf76ac34e6e4c7a83fb255b6ba7b78"
+      },
+      {
+        "name": "card25.hc",
+        "offset": 2207837,
+        "bytes": 85,
+        "sha256": "7b79df75db452b01280478ce16aaa4b49d71face7c9158e2e3b05a212ded84f3"
+      },
+      {
+        "name": "card26.hc",
+        "offset": 2207922,
+        "bytes": 285,
+        "sha256": "401e94a6545eff869836333147e2011754c064f2b254fd1478d8c73cd9a49cb5"
+      },
+      {
+        "name": "card27.hc",
+        "offset": 2208207,
+        "bytes": 244,
+        "sha256": "be42e3bc95b6633b57832ec0327451f9552dad9b1e27bacd762b5b3ee7dfca38"
+      },
+      {
+        "name": "card28.hc",
+        "offset": 2208451,
+        "bytes": 241,
+        "sha256": "3325e3342fdf27548c967554ccad03b5993918464b87b3b92dafeef41536f507"
+      },
+      {
+        "name": "card29.hc",
+        "offset": 2208692,
+        "bytes": 228,
+        "sha256": "a773ba131e8e90baf15e439946b0a8450971f222f6756992a5456b617460a0a3"
+      },
+      {
+        "name": "card30.hc",
+        "offset": 2208920,
+        "bytes": 222,
+        "sha256": "93f15ee32ddafd683b18d04d4165b1b1096b7ef93735053f15af8ac30332447a"
+      },
+      {
+        "name": "card31.hc",
+        "offset": 2209142,
+        "bytes": 243,
+        "sha256": "ae2c43b93e22f2fb93f57aca7240da6e18aa5ba12c2cbe30965733522db5b65e"
+      },
+      {
+        "name": "card32.hc",
+        "offset": 2209385,
+        "bytes": 304,
+        "sha256": "414ccf29bdfd0cfdcc56d096c0dc732ce8d4b4c480b10b46e310c398465d11c0"
+      },
+      {
+        "name": "card33.hc",
+        "offset": 2209689,
+        "bytes": 323,
+        "sha256": "ff1dcf7816e2d0a06228ca6cee3edf7ebc438a1c909bb81b3ec8505cc3011720"
+      },
+      {
+        "name": "card34.hc",
+        "offset": 2210012,
+        "bytes": 323,
+        "sha256": "db47e99a4eb66689ab52a2ff65cb79fbbb008f155a4a8163cef490456a27161d"
+      },
+      {
+        "name": "card35.hc",
+        "offset": 2210335,
+        "bytes": 278,
+        "sha256": "d5bcedc92f3b162dddce497b5395eb28dbfa05ff146365e0ff9bbf72d01c781e"
+      },
+      {
+        "name": "card36.hc",
+        "offset": 2210613,
+        "bytes": 242,
+        "sha256": "b7b0b17ea06886230f1c34323b91ea7339a77b8324e2c93845882575dd840bdf"
+      },
+      {
+        "name": "card37.hc",
+        "offset": 2210855,
+        "bytes": 233,
+        "sha256": "a9d955b6ac89e0920f7b692fc60548b1c029db0bf6d3b408887d6b07a8f022e8"
+      },
+      {
+        "name": "card40.hc",
+        "offset": 2211088,
+        "bytes": 194,
+        "sha256": "53e930b8fc7a0f812bd1910e069de01cef1ee5322cd4f4b6c2da9e3136406c93"
+      },
+      {
+        "name": "card41.hc",
+        "offset": 2211282,
+        "bytes": 206,
+        "sha256": "5e09a9e66bf791d552c11dd730ae8f3942dd405fc985b20701dd75027996ef2b"
+      },
+      {
+        "name": "card42.hc",
+        "offset": 2211488,
+        "bytes": 209,
+        "sha256": "033c546331b570b7a947bc9502d0e557ae330bddd05b0b0520347ebdce43844f"
+      },
+      {
+        "name": "card43.hc",
+        "offset": 2211697,
+        "bytes": 210,
+        "sha256": "b3585648794fcb9d98092d020e4042a696866d83b39c06bea8778a4291410d5a"
+      },
+      {
+        "name": "card44.hc",
+        "offset": 2211907,
+        "bytes": 313,
+        "sha256": "fd46e774380645ca05a14597a36ef365574fdac1216b7dfa9b488a91fd5a6268"
+      },
+      {
+        "name": "card45.hc",
+        "offset": 2212220,
+        "bytes": 284,
+        "sha256": "3cd17d599011f470b81907e7f11315432abeb8b20a765e7feb7b507a2f3eaa70"
+      },
+      {
+        "name": "card46.hc",
+        "offset": 2212504,
+        "bytes": 284,
+        "sha256": "a77e7d672cbb0fae02496706549ba501a856de1ba0d850e2dc35c3d95b3a2e83"
+      },
+      {
+        "name": "card47.hc",
+        "offset": 2212788,
+        "bytes": 290,
+        "sha256": "632104ee94ecfa83953f0da379c95706f4a7c9b90939813fd6169322e2468928"
+      },
+      {
+        "name": "card48.hc",
+        "offset": 2213078,
+        "bytes": 299,
+        "sha256": "ad2dd7d1a68a32c91fc2193f38dabafd61950f29e6692efff17a5944feaba2a6"
+      }
+    ],
+    "bitmapLayout": "8-byte little-endian header, four contiguous bitplanes, high bit first in each byte",
+    "decodedBitmaps": [
+      {
+        "name": "about.bmp",
+        "width": 400,
+        "height": 224,
+        "rowBytesPerPlane": 50,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "airpwndo.bmp",
+        "width": 256,
+        "height": 176,
+        "rowBytesPerPlane": 32,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "bankterm.bmp",
+        "width": 288,
+        "height": 224,
+        "rowBytesPerPlane": 36,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "bankhelp.bmp",
+        "width": 224,
+        "height": 40,
+        "rowBytesPerPlane": 28,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "cashflow.bmp",
+        "width": 400,
+        "height": 224,
+        "rowBytesPerPlane": 50,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "farmburo.bmp",
+        "width": 400,
+        "height": 224,
+        "rowBytesPerPlane": 50,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "buywndo.bmp",
+        "width": 256,
+        "height": 224,
+        "rowBytesPerPlane": 32,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "choscrop.bmp",
+        "width": 320,
+        "height": 224,
+        "rowBytesPerPlane": 40,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "cntlbtnh.bmp",
+        "width": 640,
+        "height": 32,
+        "rowBytesPerPlane": 80,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "edithelp.bmp",
+        "width": 88,
+        "height": 200,
+        "rowBytesPerPlane": 11,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "evaluate.bmp",
+        "width": 352,
+        "height": 192,
+        "rowBytesPerPlane": 44,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "examine.bmp",
+        "width": 208,
+        "height": 208,
+        "rowBytesPerPlane": 26,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "fdstatus.bmp",
+        "width": 336,
+        "height": 224,
+        "rowBytesPerPlane": 42,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "filegenr.bmp",
+        "width": 208,
+        "height": 208,
+        "rowBytesPerPlane": 26,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "futures.bmp",
+        "width": 320,
+        "height": 208,
+        "rowBytesPerPlane": 40,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "maphelp.bmp",
+        "width": 80,
+        "height": 120,
+        "rowBytesPerPlane": 10,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "mapwndo.bmp",
+        "width": 288,
+        "height": 240,
+        "rowBytesPerPlane": 36,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "popup.bmp",
+        "width": 256,
+        "height": 192,
+        "rowBytesPerPlane": 32,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "sellwndo.bmp",
+        "width": 192,
+        "height": 256,
+        "rowBytesPerPlane": 24,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "twnchoic.bmp",
+        "width": 368,
+        "height": 224,
+        "rowBytesPerPlane": 46,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "weather.bmp",
+        "width": 336,
+        "height": 192,
+        "rowBytesPerPlane": 42,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      },
+      {
+        "name": "lzrdlogo.bmp",
+        "width": 104,
+        "height": 112,
+        "rowBytesPerPlane": 13,
+        "planes": 4,
+        "unknownHeaderWord": 1,
+        "roundTripExact": true
+      }
+    ],
+    "visualInspection": {
+      "resource": "weather.bmp",
+      "result": "Plane-major decoding produces legible weather panel labels and aligned panel borders; row-interleaved interpretation is visibly corrupted.",
+      "scope": "Static artwork only. Dynamic values, controls and behavior were not observed."
+    },
+    "palette": {
+      "file": "simfarm.pal",
+      "entries": 16,
+      "channelsPerEntry": 3,
+      "storedChannelRange": [
+        0,
+        63
+      ],
+      "previewScaling": "Each channel scaled to 0–255; hardware palette selection remains untraced."
+    },
+    "weatherTables": [
+      {
+        "name": "rain0.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 1,
+        "maximum": 4,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "rain1.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 0,
+        "maximum": 5,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "rain2.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 1,
+        "maximum": 5,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "rain3.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 1,
+        "maximum": 4,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "temp0.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 10,
+        "maximum": 70,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "temp1.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 30,
+        "maximum": 75,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "temp2.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 40,
+        "maximum": 75,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "temp3.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 50,
+        "maximum": 80,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "wind0.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 2,
+        "maximum": 8,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "wind1.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 5,
+        "maximum": 12,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "wind2.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 9,
+        "maximum": 41,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      },
+      {
+        "name": "wind3.dat",
+        "rows": 60,
+        "columns": 4,
+        "minimum": 15,
+        "maximum": 44,
+        "meaning": "Names suggest weather parameters; units, calendar mapping and runtime consumption remain unverified."
+      }
+    ],
+    "audioSignatures": [
+      {
+        "name": "bird1.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "bird2.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "boos.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "cheers.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "compbeep.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "cow1.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "cow2.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "plane.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "sheep1.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "sheep2.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "thunder.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "wind.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "horse1.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "pig.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "rooster.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "swarm.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "smack.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "bulldoze.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "click.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "explode.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "flood.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "plopitem.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "ploptool.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "tornado.voc",
+        "creativeVoiceSignature": true
+      },
+      {
+        "name": "uhoh.voc",
+        "creativeVoiceSignature": true
+      }
+    ],
+    "remainingGaps": [
+      "Crop records and simulation routines",
+      "Sprite and tile framing, masks and animation",
+      "Runtime use of weather tables and time/units mapping",
+      "Actual UI interaction and gameplay observation"
+    ]
+  },
+  "cropDecoding": {
+    "method": "Static fixed-record text decoding across all 24 acquired CRP files; no game execution or recovered simulation formulas.",
+    "createdAt": "2026-10-21T08:11:54.623478+00:00",
+    "decoderSha256": "cfc09ce4cd0e8ef0ff8e9f83c30d32e87b71d3b4d7e98dcc5cc978e32bf45e4b",
+    "layout": {
+      "fileBytes": 5890,
+      "undecodedPrefix": [
+        0,
+        5376
+      ],
+      "name": [
+        5376,
+        5392
+      ],
+      "unmappedParameters": [
+        5392,
+        5504
+      ],
+      "briefText": {
+        "offset": 5504,
+        "records": 8,
+        "recordBytes": 16
+      },
+      "detailedText": {
+        "offset": 5632,
+        "records": 8,
+        "recordBytes": 32
+      },
+      "trailerOffset": 5888,
+      "textFraming": "CRLF-ended fixed records; trailing @ padding; ~ field breaks"
+    },
+    "crops": [
+      {
+        "file": "ALMONDS.CRP",
+        "bytes": 5890,
+        "sha256": "6453724581539bb8d00f25902e198f99b1530fee5ff8e7bb892fe8313c942fd0",
+        "name": "Almonds",
+        "guidance": {
+          "temperatureCategory": "chill-hours",
+          "rainDaysAsPrinted": 11,
+          "resistance": {
+            "pest": "low",
+            "weed": "high",
+            "disease": "low"
+          },
+          "replantAfterHarvest": false
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "APPLES.CRP",
+        "bytes": 5890,
+        "sha256": "fe73912ebbd5d730c018330d7d42fa583a8bc030f464361952aac1f570678c16",
+        "name": "Apples",
+        "guidance": {
+          "temperatureCategory": "chill-hours",
+          "rainDaysAsPrinted": 8,
+          "resistance": {
+            "pest": "low",
+            "weed": "high",
+            "disease": "low"
+          },
+          "replantAfterHarvest": false
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "BARLEY.CRP",
+        "bytes": 5890,
+        "sha256": "9168322d48e9638ba4b68432e13492d1ae6b5f9f9c2c163f26397a5bb925109b",
+        "name": "Barley",
+        "guidance": {
+          "temperatureCategory": "avoid-freezing",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "high",
+            "weed": "low",
+            "disease": "high"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "CARROTS.CRP",
+        "bytes": 5890,
+        "sha256": "bae42be5bd33f78f67030bffb41b806ba7992e9dc109dde3534f8851aecaa921",
+        "name": "Carrots",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 5,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "CORN.CRP",
+        "bytes": 5890,
+        "sha256": "4145da2db039b98e40dba44622dd25b295cd945b115d35c42784d28b7f14928f",
+        "name": "Corn",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "low",
+            "weed": "high",
+            "disease": "high"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "COTTON.CRP",
+        "bytes": 5890,
+        "sha256": "12ffc14faa154d7090f14d64de233c73ada3bf5746f06b856fcf82f5cbbe7a19",
+        "name": "Cotton",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 8,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "high"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "GLADIOLU.CRP",
+        "bytes": 5890,
+        "sha256": "26bc50a3e57e90979aca09b17b147cb91dc3300dd8e9505aa5aa8ef5a972c769",
+        "name": "Gladiolus",
+        "guidance": {
+          "temperatureCategory": "avoid-freezing",
+          "rainDaysAsPrinted": 8,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "GRAPES.CRP",
+        "bytes": 5890,
+        "sha256": "415d2b57febacbbc10ae44d215c1e43694ffa5c6be52206520b88ef4f926b4d8",
+        "name": "Grapes",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": false
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "LETTUCE.CRP",
+        "bytes": 5890,
+        "sha256": "2ca31bb94b1773cd0ed740029a771210403d757508dceb54c5decff0f540e9b4",
+        "name": "Lettuce",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 5,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "OATS.CRP",
+        "bytes": 5890,
+        "sha256": "5a8e8349dff62c3d0baa54b2126d20e4fca271a8d8b3fea75c8f83c700d2d1d6",
+        "name": "Oats",
+        "guidance": {
+          "temperatureCategory": "avoid-freezing",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "ONIONS.CRP",
+        "bytes": 5890,
+        "sha256": "8a83fcf2f141e21d9711bc143536f11caf97250241555703a87dbfee23347f56",
+        "name": "Onions",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "high",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "ORANGES.CRP",
+        "bytes": 5890,
+        "sha256": "fd5281cbc36c6d726645465a45f16b4540ddd157d43d336717841cd348d821b3",
+        "name": "Oranges",
+        "guidance": {
+          "temperatureCategory": "avoid-freezing",
+          "rainDaysAsPrinted": 11,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": false
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "PEANUTS.CRP",
+        "bytes": 5890,
+        "sha256": "e8a65b6aced5b6bcab43618ce1bb1d32596e33d4efe744db47073f7490e008dc",
+        "name": "Peanuts",
+        "guidance": {
+          "temperatureCategory": "avoid-freezing",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "high",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "POTATOES.CRP",
+        "bytes": 5890,
+        "sha256": "28ea74edd75d887a24c61d868a014531cdcabd325b7d55dee4421ad3f07a1ff0",
+        "name": "Potatoes",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 8,
+          "resistance": {
+            "pest": "high",
+            "weed": "high",
+            "disease": "high"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "RICE.CRP",
+        "bytes": 5890,
+        "sha256": "0c3f2c16bc163f24e2a7d2756a7072c76a1b7f02b5a25c0839a173be5e120a47",
+        "name": "Rice",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 14,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "SORGHUM.CRP",
+        "bytes": 5890,
+        "sha256": "ca2318054a78c5aef2a1d258b856b9f2261b1c1b63ef8e652be6b6b8a30a2a33",
+        "name": "Sorghum",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "high",
+            "weed": "high",
+            "disease": "high"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "SOYBEANS.CRP",
+        "bytes": 5890,
+        "sha256": "f02a2448295c727fe6b4ec88bf7c727ed31f4a2dc9c05f151b6a51dc69fcd55e",
+        "name": "Soybeans",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 2,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "high"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "STRAWBER.CRP",
+        "bytes": 5890,
+        "sha256": "8ed18e38ce9d2fb72ceca7acab4d3640383189e54f6ad8679514667269682e1d",
+        "name": "Strawberries",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 9,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "SUGAR.CRP",
+        "bytes": 5890,
+        "sha256": "59bdb6a7cb9b3b56a3b7fa66f767d49c6eb0a3209114f17ffd3b7c215fbc65a6",
+        "name": "Sugar Beets",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 5,
+          "resistance": {
+            "pest": "high",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "SUNFLOWE.CRP",
+        "bytes": 5890,
+        "sha256": "8aae60c11b6c53c8192eeca210f648e15210553bb6496f52fe1ad2989578db43",
+        "name": "Sunflower",
+        "guidance": {
+          "temperatureCategory": "avoid-freezing",
+          "rainDaysAsPrinted": 3,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "SWEET.CRP",
+        "bytes": 5890,
+        "sha256": "c784e2401c8e3e25d5cfd8f30af5ec3ce37990861a4d456294f30f653aca3b07",
+        "name": "Sweet Potato",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 8,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "TOBACCO.CRP",
+        "bytes": 5890,
+        "sha256": "6f1053cf9840862353702d79b40797f06725aedfae60cdf5f95cb2a17280bcd8",
+        "name": "Tobacco",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 5,
+          "resistance": {
+            "pest": "high",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "TOMATOES.CRP",
+        "bytes": 5890,
+        "sha256": "c66ddd4232953d10a448e962a7d8998f3ee6245368dfbe03088ec38da7b01220",
+        "name": "Tomatoes",
+        "guidance": {
+          "temperatureCategory": "degree-days",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "low",
+            "weed": "low",
+            "disease": "low"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      },
+      {
+        "file": "WHEAT.CRP",
+        "bytes": 5890,
+        "sha256": "8c6ce3e4ef13e7846f56f289d4dcac5b57a6ed1cd7d26ce82ed9b243e3e696d8",
+        "name": "Wheat",
+        "guidance": {
+          "temperatureCategory": "avoid-freezing",
+          "rainDaysAsPrinted": 6,
+          "resistance": {
+            "pest": "high",
+            "weed": "low",
+            "disease": "high"
+          },
+          "replantAfterHarvest": true
+        },
+        "briefTextDecoded": true,
+        "detailFieldsDecoded": 7
+      }
+    ],
+    "coverage": {
+      "textLayout": "verified",
+      "guidanceFields": "verified as authored text",
+      "numericParameters": "unexamined semantics",
+      "artwork": "partial exploratory decoding; no frame count established",
+      "runtimeRules": "unexamined"
+    },
+    "unresolved": [
+      "Map binary parameter bytes to executable consumers.",
+      "Determine actual units, timing and interpretation of rain-day labels.",
+      "Verify resistance and replanting behavior in runtime before treating guidance as tested rules.",
+      "Resolve prefix artwork dimensions, frames, masks and palette."
+    ]
+  }
+}

@@ -1,0 +1,1369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/evanrobinson2/abbiesworld_ios/docs/oracle/identity/game-identity.schema.json",
+  "title": "Game identity record",
+  "description": "One record per game. See GAME_IDENTITY.md for what each layer means and how to measure it. Any leaf may be a plain value or a Measured object carrying source and confidence.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "game",
+    "core",
+    "layers",
+    "ledger"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0",
+        "1.1"
+      ]
+    },
+    "game": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "steam_appid": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "developer": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string",
+          "description": "Year or ISO date; note early access separately."
+        },
+        "early_access": {
+          "type": "string"
+        },
+        "engine": {
+          "$ref": "#/$defs/maybeMeasured"
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "core": {
+      "type": "object",
+      "required": [
+        "fantasy",
+        "pillars",
+        "signature_moment"
+      ],
+      "properties": {
+        "fantasy": {
+          "type": "string",
+          "description": "One sentence: the player's role and verb."
+        },
+        "pillars": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "signature_moment": {
+          "type": "string"
+        },
+        "anti_goals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "signatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/signature"
+          },
+          "description": "The 2-5 tells a fan would name. Each also appears in the ledger."
+        },
+        "recognisability": {
+          "$ref": "#/$defs/maybeMeasured"
+        }
+      }
+    },
+    "layers": {
+      "type": "object",
+      "properties": {
+        "aesthetics": {
+          "type": "object",
+          "properties": {
+            "fun_mix": {
+              "$ref": "#/$defs/funMix"
+            },
+            "motivations": {
+              "$ref": "#/$defs/weights",
+              "description": "Quantic Foundry axes 0-1: action, social, mastery, achievement, immersion, creativity."
+            },
+            "emotional_targets": {
+              "$ref": "#/$defs/weights"
+            },
+            "audience": {
+              "type": "object"
+            }
+          }
+        },
+        "mechanics": {
+          "type": "object",
+          "properties": {
+            "verbs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/verb"
+              }
+            },
+            "core_loop": {
+              "$ref": "#/$defs/loop"
+            },
+            "meta_loop": {
+              "$ref": "#/$defs/loop"
+            },
+            "rules": {
+              "type": "object",
+              "properties": {
+                "scoring": {
+                  "type": "string"
+                },
+                "win": {
+                  "type": "string"
+                },
+                "loss": {
+                  "type": "string"
+                },
+                "failure_model": {
+                  "enum": [
+                    "none",
+                    "soft",
+                    "retry_level",
+                    "run_ending"
+                  ]
+                },
+                "resources": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "randomness": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "kind": {
+                  "enum": [
+                    "none",
+                    "input",
+                    "output",
+                    "mixed"
+                  ]
+                }
+              }
+            },
+            "information": {
+              "enum": [
+                "perfect",
+                "partial",
+                "hidden"
+              ]
+            },
+            "systems": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "complexity": {
+              "type": "object",
+              "properties": {
+                "verb_count": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "entity_types": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "rules_in_first_10_min": {
+                  "$ref": "#/$defs/maybeMeasured"
+                }
+              }
+            }
+          }
+        },
+        "dynamics": {
+          "type": "object",
+          "properties": {
+            "emergent_behaviours": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "decision_density_per_min": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "skill_strategy_chance": {
+              "$ref": "#/$defs/weights"
+            },
+            "expression_space": {
+              "$ref": "#/$defs/unitOrMeasured"
+            }
+          }
+        },
+        "interaction": {
+          "type": "object",
+          "properties": {
+            "input": {
+              "type": "object",
+              "properties": {
+                "devices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "controls_count": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "mapping": {
+                  "enum": [
+                    "direct",
+                    "cursor",
+                    "stroke",
+                    "card_select",
+                    "mixed"
+                  ]
+                }
+              }
+            },
+            "response": {
+              "type": "object",
+              "properties": {
+                "input_latency_ms": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "action_anim_ms": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "easing": {
+                  "type": "string"
+                }
+              }
+            },
+            "camera": {
+              "type": "object",
+              "properties": {
+                "model": {
+                  "enum": [
+                    "orbit_diorama",
+                    "top_down",
+                    "isometric",
+                    "side",
+                    "third_person",
+                    "first_person",
+                    "free_fly",
+                    "fixed"
+                  ]
+                },
+                "pitch_deg": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "fov_deg": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "zoom_range": {
+                  "type": "string"
+                },
+                "constrained": {
+                  "type": "boolean"
+                },
+                "motion": {
+                  "type": "string"
+                }
+              }
+            },
+            "forgiveness": {
+              "type": "object",
+              "properties": {
+                "snapping": {
+                  "enum": [
+                    "none",
+                    "grid",
+                    "hex",
+                    "stud",
+                    "freeform_autofit",
+                    "slots"
+                  ]
+                },
+                "undo": {
+                  "type": "string"
+                },
+                "preview_before_commit": {
+                  "type": "boolean"
+                },
+                "auto_repair": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "juice": {
+              "type": "object",
+              "description": "Intensity 0-1 for each.",
+              "properties": {
+                "squash_stretch": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "particles": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "screen_shake": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "hit_stop": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "scale_pop": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "sound_on_action": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "camera_kick": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "procedural_settle": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                }
+              }
+            },
+            "time_to_first_delight_s": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "friction_points": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "art": {
+          "type": "object",
+          "properties": {
+            "rendering": {
+              "type": "object",
+              "properties": {
+                "style": {
+                  "enum": [
+                    "stylised_pbr",
+                    "toon",
+                    "painterly",
+                    "flat_low_poly",
+                    "pixel_art",
+                    "voxel",
+                    "realistic",
+                    "mixed"
+                  ]
+                },
+                "outlines": {
+                  "type": "boolean"
+                },
+                "post": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "palette": {
+              "type": "object",
+              "properties": {
+                "dominant_hex": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^#[0-9a-fA-F]{6}$"
+                  }
+                },
+                "mean_saturation": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "mean_lightness": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "value_key": {
+                  "enum": [
+                    "high",
+                    "mid",
+                    "low"
+                  ]
+                },
+                "contrast_rms": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "warmth": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "variation": {
+                  "type": "string"
+                }
+              }
+            },
+            "lighting": {
+              "type": "object",
+              "properties": {
+                "time_of_day": {
+                  "type": "string"
+                },
+                "gi_ao": {
+                  "type": "string"
+                },
+                "atmosphere": {
+                  "type": "string"
+                },
+                "shadow_softness": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                }
+              }
+            },
+            "shape_language": {
+              "type": "object",
+              "properties": {
+                "round": {
+                  "$ref": "#/$defs/unit"
+                },
+                "square": {
+                  "$ref": "#/$defs/unit"
+                },
+                "triangle": {
+                  "$ref": "#/$defs/unit"
+                },
+                "silhouette_readability": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                }
+              }
+            },
+            "proportion_and_scale": {
+              "type": "object",
+              "properties": {
+                "stylisation": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "toyness": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                }
+              }
+            },
+            "detail_density": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "motion": {
+              "type": "string"
+            },
+            "references": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "assets": {
+          "type": "object",
+          "properties": {
+            "kit": {
+              "enum": [
+                "modular",
+                "procedural",
+                "unique",
+                "mixed"
+              ]
+            },
+            "distinct_asset_types": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "geometry": {
+              "type": "object",
+              "properties": {
+                "poly_class": {
+                  "enum": [
+                    "low",
+                    "mid",
+                    "high"
+                  ]
+                },
+                "edges": {
+                  "enum": [
+                    "sharp",
+                    "chamfered",
+                    "rounded",
+                    "soft"
+                  ]
+                },
+                "surface": {
+                  "enum": [
+                    "clean",
+                    "hand_wobble",
+                    "scanned"
+                  ]
+                }
+              }
+            },
+            "materials": {
+              "type": "object",
+              "properties": {
+                "texture_strategy": {
+                  "enum": [
+                    "vertex_colour",
+                    "flat_colour",
+                    "hand_painted",
+                    "trim_sheet",
+                    "pbr_scanned",
+                    "pixel",
+                    "mixed"
+                  ]
+                },
+                "role_count": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "roles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "roughness_character": {
+                  "type": "string"
+                }
+              }
+            },
+            "procedural": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "asset_vocabulary": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pipeline_mapping": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Their element -> our material role, recipe or system."
+            }
+          }
+        },
+        "interface": {
+          "type": "object",
+          "properties": {
+            "ui_mode_mix": {
+              "type": "object",
+              "properties": {
+                "diegetic": {
+                  "$ref": "#/$defs/unit"
+                },
+                "non_diegetic": {
+                  "$ref": "#/$defs/unit"
+                },
+                "spatial": {
+                  "$ref": "#/$defs/unit"
+                },
+                "meta": {
+                  "$ref": "#/$defs/unit"
+                }
+              }
+            },
+            "hud_coverage": {
+              "$ref": "#/$defs/unitOrMeasured"
+            },
+            "text_words_per_min": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "menu_depth": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "typography": {
+              "type": "string"
+            },
+            "iconography": {
+              "type": "string"
+            },
+            "onboarding": {
+              "enum": [
+                "none",
+                "contextual_hints",
+                "scripted_levels",
+                "tutorial_mode"
+              ]
+            },
+            "feedback_language": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "audio": {
+          "type": "object",
+          "properties": {
+            "music": {
+              "type": "object",
+              "properties": {
+                "style": {
+                  "type": "string"
+                },
+                "instrumentation": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "bpm_range": {
+                  "type": "string"
+                },
+                "adaptive": {
+                  "type": "string"
+                },
+                "density": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "mode_character": {
+                  "type": "string"
+                }
+              }
+            },
+            "sfx_character": {
+              "enum": [
+                "realistic_foley",
+                "toy",
+                "synthetic",
+                "musical",
+                "mixed"
+              ]
+            },
+            "action_coupling": {
+              "$ref": "#/$defs/unitOrMeasured"
+            },
+            "action_sound_latency_ms": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "ambience": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "voice": {
+              "enum": [
+                "none",
+                "gibberish",
+                "barks",
+                "full_vo"
+              ]
+            },
+            "loudness_lufs": {
+              "$ref": "#/$defs/maybeMeasured"
+            }
+          }
+        },
+        "narrative": {
+          "type": "object",
+          "properties": {
+            "narrative_mode": {
+              "type": "object",
+              "properties": {
+                "evoked": {
+                  "$ref": "#/$defs/unit"
+                },
+                "enacted": {
+                  "$ref": "#/$defs/unit"
+                },
+                "embedded": {
+                  "$ref": "#/$defs/unit"
+                },
+                "emergent": {
+                  "$ref": "#/$defs/unit"
+                }
+              }
+            },
+            "tone": {
+              "type": "object",
+              "description": "Each axis -1 to 1.",
+              "properties": {
+                "cozy_tense": {
+                  "$ref": "#/$defs/axis"
+                },
+                "whimsical_grounded": {
+                  "$ref": "#/$defs/axis"
+                },
+                "earnest_ironic": {
+                  "$ref": "#/$defs/axis"
+                },
+                "quiet_loud": {
+                  "$ref": "#/$defs/axis"
+                },
+                "handmade_industrial": {
+                  "$ref": "#/$defs/axis"
+                }
+              }
+            },
+            "themes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "writing": {
+              "type": "object"
+            },
+            "characters": {
+              "type": "string"
+            },
+            "humour": {
+              "type": "string"
+            }
+          }
+        },
+        "pacing": {
+          "type": "object",
+          "properties": {
+            "structure": {
+              "enum": [
+                "sandbox",
+                "campaign",
+                "roguelite_runs",
+                "endless_with_goals",
+                "puzzle_levels",
+                "mixed"
+              ]
+            },
+            "session_minutes": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "tension_curve": {
+              "enum": [
+                "flat_calm",
+                "sawtooth",
+                "rising_to_end",
+                "mixed"
+              ]
+            },
+            "unlock_cadence_min": {
+              "$ref": "#/$defs/maybeMeasured"
+            },
+            "unlocks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "failure_cost": {
+              "enum": [
+                "none",
+                "retry_level",
+                "lose_run",
+                "lose_progress"
+              ]
+            },
+            "first_ten_minutes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "t": {
+                    "type": "string"
+                  },
+                  "event": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "market": {
+          "type": "object",
+          "description": "From the Steam indexer. Context, not identity.",
+          "properties": {
+            "steam_tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "price_usd": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "review_score": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "review_count": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "median_playtime_h": {
+              "$ref": "#/$defs/maybeMeasured"
+            }
+          }
+        },
+        "information_grammar": {
+          "type": "object",
+          "description": "How the game tells the player things: which channel carries each kind of information, how much screen it costs, whether one game state drives the whole world, how entities signal each other, how places change the grammar, and how cards present art. Added in 1.1 from the HUD study (PR #108, #113) and card studies (PR #101, #103).",
+          "properties": {
+            "info_kinds": {
+              "type": "object",
+              "description": "Keys are kinds of information; recommended keys: body (the player's or a character's needs and health), time, threat, thing_state (state of objects and creatures in the world), goals (score, quests, objectives), tools (inventory, current tool, hand), navigation, social (one entity signalling another), resources.",
+              "additionalProperties": {
+                "$ref": "#/$defs/infoKind"
+              }
+            },
+            "overall_mix": {
+              "$ref": "#/$defs/modeMix"
+            },
+            "screen_budget": {
+              "type": "object",
+              "properties": {
+                "hud_coverage": {
+                  "$ref": "#/$defs/unitOrMeasured"
+                },
+                "always_on_count": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "words_on_screen": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "fade_rule": {
+                  "type": "string"
+                },
+                "drawn_as": {
+                  "enum": [
+                    "world_material",
+                    "neutral_overlay",
+                    "web_ui",
+                    "mixed"
+                  ],
+                  "description": "Is the HUD drawn as an object from the world (ink, pencil, suit lights) or as generic UI panels?"
+                }
+              }
+            },
+            "adaptive_state": {
+              "type": "object",
+              "description": "'The whole game adapts': one game-state signal drives many world channels together.",
+              "properties": {
+                "signals": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "signal",
+                      "channels"
+                    ],
+                    "properties": {
+                      "signal": {
+                        "type": "string"
+                      },
+                      "channels": {
+                        "type": "array",
+                        "items": {
+                          "enum": [
+                            "light",
+                            "music",
+                            "npcs",
+                            "animals",
+                            "sound",
+                            "weather",
+                            "lens",
+                            "ui",
+                            "camera",
+                            "haptics"
+                          ]
+                        }
+                      },
+                      "note": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "max_channels": {
+                  "$ref": "#/$defs/maybeMeasured"
+                },
+                "adapts_score": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/unitOrMeasured"
+                    }
+                  ],
+                  "description": "0 to 1: the most world channels (not lens or ui) one signal drives, divided by 5, capped at 1. 3 or more channels passes the HUD rubric check one_signal_many_channels."
+                }
+              }
+            },
+            "social_channel": {
+              "type": "object",
+              "description": "How entities signal each other and the player.",
+              "properties": {
+                "carriers": {
+                  "type": "object",
+                  "description": "Weights summing to about 1.",
+                  "properties": {
+                    "body_language": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "speech_bubbles": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "barks_audio": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "spatial_icons": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "portrait_text": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "dialogue_ui": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "meta_effects": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "none": {
+                      "$ref": "#/$defs/unit"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            },
+            "dialects": {
+              "type": "array",
+              "description": "Places or modes that shift the grammar (a shop that uses more meta, a build mode that adds overlay).",
+              "items": {
+                "type": "object",
+                "required": [
+                  "place"
+                ],
+                "properties": {
+                  "place": {
+                    "type": "string"
+                  },
+                  "mix": {
+                    "$ref": "#/$defs/modeMix"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "card_art": {
+              "type": "object",
+              "description": "Only for games with cards. Mode weights from docs/oracle/cards/CARD_ART.md.",
+              "properties": {
+                "uses_cards": {
+                  "type": "boolean"
+                },
+                "modes": {
+                  "type": "object",
+                  "properties": {
+                    "portal": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "overlay": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "pop_out": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "shadowbox": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "panorama": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "specimen": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "emblem": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "portrait": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "scene": {
+                      "$ref": "#/$defs/unit"
+                    },
+                    "living": {
+                      "$ref": "#/$defs/unit"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            },
+            "signatures_ref": {
+              "type": "string",
+              "description": "Path to the game's entry in hud-signatures.json or card-signatures.json."
+            }
+          }
+        }
+      }
+    },
+    "ledger": {
+      "type": "object",
+      "description": "Every signature sorted into what we may learn from (style) and what we must never copy (expression).",
+      "required": [
+        "style",
+        "expression"
+      ],
+      "properties": {
+        "style": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assimilation": {
+      "type": "object",
+      "description": "The identity recipe: what we would set in Abbie's World systems to move toward this game, in our own words.",
+      "properties": {
+        "take": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/recipeItem"
+          }
+        },
+        "leave": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Superseded values, with when and why, like an asset's revision rounds."
+    }
+  },
+  "$defs": {
+    "measured": {
+      "type": "object",
+      "required": [
+        "value",
+        "source"
+      ],
+      "properties": {
+        "value": {},
+        "unit": {
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "steam_api",
+            "store_page",
+            "footage_cv",
+            "playtrace",
+            "install_files",
+            "reviews_nlp",
+            "llm_judge",
+            "human",
+            "estimate"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "method": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "maybeMeasured": {
+      "anyOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "$ref": "#/$defs/measured"
+        }
+      ]
+    },
+    "unit": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "axis": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1
+    },
+    "unitOrMeasured": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/unit"
+        },
+        {
+          "$ref": "#/$defs/measured"
+        }
+      ]
+    },
+    "weights": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/unit"
+      }
+    },
+    "funMix": {
+      "type": "object",
+      "description": "LeBlanc's eight kinds of fun, weights summing to about 1.",
+      "properties": {
+        "sensation": {
+          "$ref": "#/$defs/unit"
+        },
+        "fantasy": {
+          "$ref": "#/$defs/unit"
+        },
+        "narrative": {
+          "$ref": "#/$defs/unit"
+        },
+        "challenge": {
+          "$ref": "#/$defs/unit"
+        },
+        "fellowship": {
+          "$ref": "#/$defs/unit"
+        },
+        "discovery": {
+          "$ref": "#/$defs/unit"
+        },
+        "expression": {
+          "$ref": "#/$defs/unit"
+        },
+        "submission": {
+          "$ref": "#/$defs/unit"
+        }
+      },
+      "additionalProperties": false
+    },
+    "verb": {
+      "type": "object",
+      "required": [
+        "verb"
+      ],
+      "properties": {
+        "verb": {
+          "type": "string"
+        },
+        "input": {
+          "type": "string"
+        },
+        "per_minute": {
+          "$ref": "#/$defs/maybeMeasured"
+        }
+      }
+    },
+    "loop": {
+      "type": "object",
+      "properties": {
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "period_s": {
+          "$ref": "#/$defs/maybeMeasured"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "required": [
+        "id",
+        "layer",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "layer": {
+          "enum": [
+            "core",
+            "aesthetics",
+            "mechanics",
+            "dynamics",
+            "interaction",
+            "art",
+            "assets",
+            "interface",
+            "audio",
+            "narrative",
+            "pacing",
+            "information_grammar"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "class": {
+          "enum": [
+            "style",
+            "expression"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "recipeItem": {
+      "type": "object",
+      "required": [
+        "layer",
+        "target",
+        "setting"
+      ],
+      "properties": {
+        "layer": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string",
+          "description": "Our system: camera preset, GAME_FEEL juice, modeler material roles, sound tags, Oracle rules."
+        },
+        "setting": {
+          "type": "string"
+        },
+        "from_signature": {
+          "type": "string"
+        }
+      }
+    },
+    "modeMix": {
+      "type": "object",
+      "description": "Share of this information shown each way (weights summing to about 1). See docs/oracle/hud/HUD_STUDY.md.",
+      "properties": {
+        "diegetic": {
+          "$ref": "#/$defs/unit"
+        },
+        "spatial": {
+          "$ref": "#/$defs/unit"
+        },
+        "meta": {
+          "$ref": "#/$defs/unit"
+        },
+        "overlay": {
+          "$ref": "#/$defs/unit"
+        },
+        "none": {
+          "$ref": "#/$defs/unit"
+        }
+      },
+      "additionalProperties": false
+    },
+    "infoKind": {
+      "type": "object",
+      "required": [
+        "mix"
+      ],
+      "properties": {
+        "mix": {
+          "$ref": "#/$defs/modeMix"
+        },
+        "timing": {
+          "enum": [
+            "always_on",
+            "on_change",
+            "on_threshold",
+            "summoned",
+            "mixed",
+            "absent"
+          ]
+        },
+        "note": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "source": {
+          "$ref": "#/$defs/measured/properties/source"
+        }
+      }
+    }
+  }
+}

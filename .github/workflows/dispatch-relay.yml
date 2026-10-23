@@ -1,0 +1,154 @@
+# Carries Claude's replies on dispatch issues back to the Abbie's World MCP (studio-mock),
+# where ChatGPT reads them with status()/inbox(). Also runs the bridge's watchdog every 10 minutes.
+#
+# Claude's cloud sessions can't reach *.vercel.app, so Claude writes to GitHub and this relays.
+# Auth is this workflow's own GitHub OIDC token (audience = the relay URL); no secrets needed.
+# The relay only trusts comments from the repo owner/collaborators (Claude posts as Evan) or claude[bot].
+# See docs/dispatch/README.md.
+name: dispatch-relay
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created, edited]
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+  id-token: write
+concurrency:
+  group: dispatch-relay-${{ github.event.issue.number || 'sweep' }}
+  cancel-in-progress: false
+jobs:
+  relay:
+    if: >-
+      github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
+      contains(github.event.comment.body || github.event.issue.body, 'abbies-dispatch:v1')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          RELAY_URL: https://studio-mock-iota.vercel.app/api/dispatch-relay
+        with:
+          script: |
+            const RELAY = process.env.RELAY_URL;
+            const MARK = /<!--\s*abbies-dispatch:v1\s+(\{[\s\S]*?\})\s*-->/;
+            const TRUSTED = new Set(['OWNER', 'MEMBER', 'COLLABORATOR']);
+            const { owner, repo } = context.repo;
+
+            async function post(payload) {
+              const token = await core.getIDToken(RELAY);
+              for (let attempt = 1; attempt <= 4; attempt++) {
+                try {
+                  const res = await fetch(RELAY, {
+                    method: 'POST',
+                    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                  });
+                  const text = await res.text();
+                  core.info(`relay ${payload.op} -> ${res.status} ${text.slice(0, 400)}`);
+                  if (res.status < 500) return { status: res.status, text };
+                } catch (err) {
+                  core.warning(`relay attempt ${attempt} failed: ${err.message}`);
+                }
+                await new Promise((r) => setTimeout(r, 2000 * 2 ** attempt));
+              }
+              throw new Error('relay unreachable');
+            }
+
+            // Completion claims are checked against GitHub before they count as verified.
+            async function verify(marker) {
+              const detail = { commits: {}, prs: {} };
+              let ok = true;
+              const commits = Array.isArray(marker.commits) ? marker.commits.slice(0, 20) : [];
+              for (const sha of commits) {
+                try {
+                  const { data } = await github.rest.repos.getCommit({ owner, repo, ref: sha });
+                  detail.commits[sha] = { exists: true, sha: data.sha, message: data.commit.message.split('\n')[0] };
+                } catch {
+                  detail.commits[sha] = { exists: false };
+                  ok = false;
+                }
+              }
+              const prs = Array.isArray(marker.prs) ? marker.prs : marker.pr ? [marker.pr] : [];
+              for (const n of prs.slice(0, 10)) {
+                try {
+                  const { data } = await github.rest.pulls.get({ owner, repo, pull_number: Number(n) });
+                  detail.prs[n] = { state: data.state, merged: data.merged, url: data.html_url, head: data.head.ref };
+                } catch {
+                  detail.prs[n] = { exists: false };
+                  ok = false;
+                }
+              }
+              if (!commits.length && !prs.length) ok = false;
+              return { ok, checkedAt: new Date().toISOString(), detail };
+            }
+
+            async function relayItem(kind, item, issue) {
+              const body = item.body || '';
+              const m = body.match(MARK);
+              if (!m) return;
+              let marker;
+              try { marker = JSON.parse(m[1]); } catch { core.warning('bad marker JSON'); return; }
+              const author = item.user?.login || '';
+              if (!TRUSTED.has(item.author_association) && author !== 'claude[bot]') {
+                core.warning(`ignoring marker from untrusted author ${author} (${item.author_association})`);
+                return;
+              }
+              const verification = marker.kind === 'completed' ? await verify(marker) : null;
+              await post({
+                op: 'event',
+                source: {
+                  kind,
+                  id: String(item.id),
+                  url: item.html_url,
+                  issueNumber: issue.number,
+                  issueUrl: issue.html_url,
+                  body,
+                  author,
+                  authorAssociation: item.author_association,
+                  createdAt: item.created_at,
+                  verification,
+                },
+              });
+            }
+
+            if (context.eventName === 'issues') {
+              await relayItem('issue', context.payload.issue, context.payload.issue);
+              return;
+            }
+            if (context.eventName === 'issue_comment') {
+              await relayItem('comment', context.payload.comment, context.payload.issue);
+              return;
+            }
+
+            // Scheduled / manual: replay the last 3 hours of dispatch traffic (the relay ignores
+            // anything it already has), so a dropped webhook can't lose a message. Then sweep.
+            const since = new Date(Date.now() - 3 * 3600 * 1000).toISOString();
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, state: 'all', labels: 'dispatch', since, per_page: 50,
+            });
+            for (const issue of issues) {
+              await relayItem('issue', issue, issue);
+              const comments = await github.paginate(github.rest.issues.listComments, {
+                owner, repo, issue_number: issue.number, since, per_page: 100,
+              });
+              for (const c of comments) await relayItem('comment', c, issue);
+            }
+            const swept = await post({ op: 'sweep' });
+            // Steering for running sessions: post queued revisions on their issues so Claude sees them
+            // at its next checkpoint, then tell the MCP they're posted.
+            let pending = [];
+            try { pending = JSON.parse(swept.text).post_revisions || []; } catch {}
+            for (const r of pending) {
+              const marker = JSON.stringify({ id: r.dispatch_id, rev: r.revision });
+              const { data } = await github.rest.issues.createComment({
+                owner, repo, issue_number: r.issue,
+                body: `<!-- abbies-dispatch-revision:v1 ${marker} -->\n**Change from Evan (revision ${r.revision}):**\n\n${r.instructions}`,
+              });
+              await post({ op: 'revision_posted', dispatch_id: r.dispatch_id, revision: r.revision, comment_url: data.html_url });
+            }

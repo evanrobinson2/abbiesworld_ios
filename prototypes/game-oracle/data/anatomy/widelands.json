@@ -1,0 +1,258 @@
+{
+  "id": "widelands",
+  "name": "Widelands",
+  "fileCount": 0,
+  "extractedBytes": 0,
+  "extensions": {},
+  "packages": [
+    {
+      "name": "001-1-Widelands-1.3.1-x64.exe",
+      "sha256": "c8f335006c2900ef4943f91f5d51ea35d048a08d741631e518c5f42323aa68c6",
+      "exitCode": 2
+    }
+  ],
+  "files": [],
+  "analysis": {
+    "id": "widelands",
+    "imageFileCount": 0,
+    "commonImageDimensions": {},
+    "imageExamples": [],
+    "imageReadErrors": [],
+    "binaryCount": 0,
+    "binaries": [],
+    "modelFileCandidates": [],
+    "note": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers."
+  },
+  "extractionErrors": [
+    "Installer extraction unsupported by 7-Zip and innoextract 1.9."
+  ],
+  "source": {
+    "id": "widelands",
+    "repository": "widelands/widelands",
+    "requestedRef": "v1.3.1",
+    "treeSha": "1cbe8aa45b3b3e5626b36257944184aad6af5da5",
+    "truncated": false,
+    "basis": "release source"
+  },
+  "inspectedSourceFiles": [
+    {
+      "game": "widelands",
+      "path": "src/economy/economy.cc",
+      "bytes": 44334,
+      "blobSha": "4aed07fbcb3c3c0313b1c9253832360db935cdb9",
+      "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/economy/economy.cc"
+    },
+    {
+      "game": "widelands",
+      "path": "src/economy/road.cc",
+      "bytes": 15289,
+      "blobSha": "5fb82a9ec0e60275270454c66d4edb84781f4bc9",
+      "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/economy/road.cc"
+    },
+    {
+      "game": "widelands",
+      "path": "src/logic/map_objects/tribes/productionsite.cc",
+      "bytes": 47664,
+      "blobSha": "8daed7da59e8706ea7d6cafc0f637b6ca06b78ac",
+      "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/productionsite.cc"
+    },
+    {
+      "game": "widelands",
+      "path": "src/editor/map_generator.cc",
+      "bytes": 37996,
+      "blobSha": "66b2926105b777576236a96f8ffd4897b0cc750e",
+      "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/editor/map_generator.cc"
+    },
+    {
+      "game": "widelands",
+      "path": "src/graphic/game_renderer.cc",
+      "bytes": 4232,
+      "blobSha": "77f3b1b2849cd1b7292037ca7d927c4fd0d8550c",
+      "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/graphic/game_renderer.cc"
+    },
+    {
+      "game": "widelands",
+      "path": "data/tribes/buildings/productionsites/barbarians/bakery/init.lua",
+      "bytes": 1634,
+      "blobSha": "ae664d3965ea4f61e833c956638dbd1c4234bae3",
+      "sha256": "5aee7382317ba84fa622ba274245eb3e46925e0ab177047656a4b34b618439f6",
+      "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/data/tribes/buildings/productionsites/barbarians/bakery/init.lua"
+    },
+    {
+      "game": "widelands",
+      "path": "src/logic/map_objects/tribes/production_program.cc",
+      "bytes": 90164,
+      "blobSha": "b13bfa2950195ba0b99fd197449ea0a39676d4f4",
+      "sha256": "08c15721038e588b8ecd2f2f141cbe0ff3ce6b1243dcb686393fe363d8444a04",
+      "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/production_program.cc"
+    }
+  ],
+  "installerFormat": {
+    "file": "001-1-Widelands-1.3.1-x64.exe",
+    "sha256": "c8f335006c2900ef4943f91f5d51ea35d048a08d741631e518c5f42323aa68c6",
+    "method": "Static ASCII marker scan; installer never executed",
+    "markers": [
+      {
+        "offset": 741644,
+        "value": "Inno Setup Setup Data (6.7.0)"
+      },
+      {
+        "offset": 741708,
+        "value": "Inno Setup Messages (6.5.0) (u)"
+      },
+      {
+        "offset": 456367619,
+        "value": "Inno Setup Setup Data (6.7.0)"
+      }
+    ],
+    "status": "unextracted; existing 7-Zip and innoextract 1.9 attempts failed; this pass identifies format markers only"
+  },
+  "productionLifecycle": {
+    "scope": "ProductionSite scheduling, staffing, pending-output handling and program-result transitions",
+    "method": "Static original release-source inspection",
+    "sourceSha256": "2454783053e72f3434f8a193ab027b1a59ef4ac37a2536114772439e3185dbb2",
+    "blobSha": "8daed7da59e8706ea7d6cafc0f637b6ca06b78ac",
+    "sourceUrl": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/productionsite.cc",
+    "coverage": {
+      "controlFlow": "verified in pinned source",
+      "inputConsumption": "unexamined action implementations",
+      "recipes": "unexamined",
+      "runtimeRecovery": "unexamined",
+      "downloadedBinaryEquivalence": "unavailable"
+    },
+    "transitions": [
+      {
+        "from": "stopped at first instruction",
+        "to": "failed outcome and delayed act",
+        "lines": [
+          906,
+          919
+        ]
+      },
+      {
+        "from": "pending output",
+        "to": "worker drop-off task before further production work",
+        "lines": [
+          1014,
+          1033
+        ]
+      },
+      {
+        "from": "outstanding worker request",
+        "to": "idle retry",
+        "lines": [
+          959,
+          965,
+          1074,
+          1077
+        ]
+      },
+      {
+        "from": "failed or skipped result",
+        "to": "timestamp stored; nonproductive statistics; delayed next start",
+        "lines": [
+          1126,
+          1136,
+          1159,
+          1175
+        ]
+      },
+      {
+        "from": "completed result",
+        "to": "retry timestamp cleared; worker training; productive statistics",
+        "lines": [
+          1165,
+          1169
+        ]
+      }
+    ]
+  },
+  "bakeryStudy": {
+    "method": "Static recipe and action-handler inspection",
+    "recipe": {
+      "workers": {
+        "barbarians_baker": 1
+      },
+      "inputQueueLimits": {
+        "water": 6,
+        "wheat": 6
+      },
+      "batchInputs": {
+        "water": 3,
+        "wheat": 3
+      },
+      "batchOutputs": {
+        "barbarians_bread": 2
+      },
+      "authoredSleepSeconds": 20.8,
+      "authoredWorkStagesSeconds": [
+        20,
+        20
+      ]
+    },
+    "sources": [
+      {
+        "game": "widelands",
+        "path": "data/tribes/buildings/productionsites/barbarians/bakery/init.lua",
+        "bytes": 1634,
+        "blobSha": "ae664d3965ea4f61e833c956638dbd1c4234bae3",
+        "sha256": "5aee7382317ba84fa622ba274245eb3e46925e0ab177047656a4b34b618439f6",
+        "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/data/tribes/buildings/productionsites/barbarians/bakery/init.lua"
+      },
+      {
+        "game": "widelands",
+        "path": "src/logic/map_objects/tribes/production_program.cc",
+        "bytes": 90164,
+        "blobSha": "b13bfa2950195ba0b99fd197449ea0a39676d4f4",
+        "sha256": "08c15721038e588b8ecd2f2f141cbe0ff3ce6b1243dcb686393fe363d8444a04",
+        "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/production_program.cc"
+      }
+    ],
+    "coverage": {
+      "recipe": "verified in pinned source",
+      "inputFailureBranch": "verified in pinned source",
+      "runtimeThroughput": "unexamined",
+      "deliveryCompletion": "unexamined"
+    },
+    "gaps": [
+      "Trace economy needs predicate and target quantities.",
+      "Observe actual input shortage recovery and deliveries.",
+      "Installer remains unextracted."
+    ]
+  },
+  "demandStudy": {
+    "method": "Static branch tracing of original release source",
+    "evidence": [
+      {
+        "path": "src/economy/economy.cc",
+        "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/economy/economy.cc#L513-L594",
+        "blobSha": "4aed07fbcb3c3c0313b1c9253832360db935cdb9",
+        "lines": [
+          513,
+          594
+        ]
+      },
+      {
+        "path": "src/logic/map_objects/tribes/production_program.cc",
+        "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/production_program.cc#L447-L450",
+        "blobSha": "b13bfa2950195ba0b99fd197449ea0a39676d4f4",
+        "lines": [
+          447,
+          450
+        ]
+      }
+    ],
+    "coverage": {
+      "wareDemandPredicate": "verified in pinned source",
+      "warehousePolicies": "predicate branches verified; policy-setting UI unexamined",
+      "deliveryCompletion": "unexamined",
+      "runtime": "unexamined"
+    },
+    "cases": [
+      "Positive target plus warehouses: global and district stock branch.",
+      "Sufficient global stock with local shortage: storage/preference checks can suppress demand.",
+      "Zero target or no warehouses: matching open requests branch.",
+      "Infinite-production override: bypass demand predicate."
+    ]
+  }
+}

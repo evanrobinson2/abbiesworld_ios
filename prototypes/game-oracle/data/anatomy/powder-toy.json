@@ -1,0 +1,261 @@
+{
+  "id": "powder-toy",
+  "name": "The Powder Toy",
+  "fileCount": 3,
+  "extractedBytes": 8734798,
+  "extensions": {
+    ".txt": 2,
+    ".exe": 1
+  },
+  "packages": [
+    {
+      "name": "024-1-powder.zip",
+      "sha256": "c96094e9f5ebb416cf1f1385830fbfb77792f89354af00880f7ebfdd8daa0dc0",
+      "exitCode": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "package-1/license.txt",
+      "bytes": 35147
+    },
+    {
+      "path": "package-1/Powder.exe",
+      "bytes": 8690342
+    },
+    {
+      "path": "package-1/readme.txt",
+      "bytes": 9309
+    }
+  ],
+  "analysis": {
+    "id": "powder-toy",
+    "imageFileCount": 0,
+    "commonImageDimensions": {},
+    "imageExamples": [],
+    "imageReadErrors": [],
+    "binaryCount": 1,
+    "binaries": [
+      {
+        "path": "package-1/Powder.exe",
+        "bytes": 8690342,
+        "sha256": "df32b616b31dabae10b82028731ebdfd6867c872198b81f29d418cbafbf460c3",
+        "format": "PE",
+        "machine": "0x8664",
+        "sections": [
+          ".text",
+          ".data",
+          ".rdata",
+          ".pdata",
+          ".xdata",
+          ".bss",
+          ".idata",
+          ".tls",
+          ".rsrc",
+          ".reloc",
+          "/4"
+        ],
+        "importedLibraries": [
+          "ADVAPI32.dll",
+          "bcrypt.dll",
+          "CRYPT32.dll",
+          "dbghelp.dll",
+          "GDI32.dll",
+          "IMM32.dll",
+          "KERNEL32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "ole32.dll",
+          "OLEAUT32.dll",
+          "SHELL32.dll",
+          "USER32.dll",
+          "VERSION.dll",
+          "WINMM.dll",
+          "WS2_32.dll",
+          "WSOCK32.dll"
+        ],
+        "entryDisassembly": [
+          {
+            "address": "0x140001470",
+            "mnemonic": "mov",
+            "operands": "rax, qword ptr [rip + 0x7542b9]"
+          },
+          {
+            "address": "0x140001477",
+            "mnemonic": "mov",
+            "operands": "dword ptr [rax], 1"
+          },
+          {
+            "address": "0x14000147d",
+            "mnemonic": "jmp",
+            "operands": "0x1400010a0"
+          },
+          {
+            "address": "0x140001482",
+            "mnemonic": "nop",
+            "operands": "dword ptr [rax]"
+          },
+          {
+            "address": "0x140001485",
+            "mnemonic": "nop",
+            "operands": "word ptr cs:[rax + rax]"
+          },
+          {
+            "address": "0x140001490",
+            "mnemonic": "mov",
+            "operands": "rax, qword ptr [rip + 0x754299]"
+          },
+          {
+            "address": "0x140001497",
+            "mnemonic": "mov",
+            "operands": "dword ptr [rax], 0"
+          },
+          {
+            "address": "0x14000149d",
+            "mnemonic": "jmp",
+            "operands": "0x1400010a0"
+          },
+          {
+            "address": "0x1400014a2",
+            "mnemonic": "nop",
+            "operands": "dword ptr [rax]"
+          },
+          {
+            "address": "0x1400014a5",
+            "mnemonic": "nop",
+            "operands": "word ptr cs:[rax + rax]"
+          },
+          {
+            "address": "0x1400014b0",
+            "mnemonic": "jmp",
+            "operands": "0x1401fa590"
+          },
+          {
+            "address": "0x1400014b5",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014b6",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014b7",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014b8",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014b9",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014ba",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014bb",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014bc",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014bd",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014be",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014bf",
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "address": "0x1400014c0",
+            "mnemonic": "lea",
+            "operands": "rcx, [rip + 9]"
+          },
+          {
+            "address": "0x1400014c7",
+            "mnemonic": "jmp",
+            "operands": "0x1400014b0"
+          }
+        ],
+        "scope": "Bounded entry-point disassembly only; startup code does not establish gameplay mechanics."
+      }
+    ],
+    "modelFileCandidates": [],
+    "note": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers."
+  },
+  "extractionErrors": [],
+  "source": {
+    "id": "powder-toy",
+    "repository": "The-Powder-Toy/The-Powder-Toy",
+    "requestedRef": "v100.1.400",
+    "treeSha": "d768aeb89acad986bd252d7e904bf44bb374545f",
+    "truncated": false,
+    "basis": "release source"
+  },
+  "inspectedSourceFiles": [
+    {
+      "game": "powder-toy",
+      "path": "src/simulation/Simulation.cpp",
+      "bytes": 108401,
+      "blobSha": "bf5e40372c3aaf3c2d79551362eea27287569bc7",
+      "url": "https://github.com/The-Powder-Toy/The-Powder-Toy/blob/d768aeb89acad986bd252d7e904bf44bb374545f/src/simulation/Simulation.cpp"
+    },
+    {
+      "game": "powder-toy",
+      "path": "src/simulation/Air.cpp",
+      "bytes": 16365,
+      "blobSha": "42353735b57d9183980a5f71eb9dd92dfb24dcf1",
+      "url": "https://github.com/The-Powder-Toy/The-Powder-Toy/blob/d768aeb89acad986bd252d7e904bf44bb374545f/src/simulation/Air.cpp"
+    },
+    {
+      "game": "powder-toy",
+      "path": "src/simulation/elements/WATR.cpp",
+      "bytes": 2484,
+      "blobSha": "fc777cce870ac9b5935c2d6a7c83285c57528a60",
+      "url": "https://github.com/The-Powder-Toy/The-Powder-Toy/blob/d768aeb89acad986bd252d7e904bf44bb374545f/src/simulation/elements/WATR.cpp"
+    },
+    {
+      "game": "powder-toy",
+      "path": "src/graphics/Renderer.cpp",
+      "bytes": 47780,
+      "blobSha": "d3b9bac09a9d32a37960563b4cce368e078ea229",
+      "url": "https://github.com/The-Powder-Toy/The-Powder-Toy/blob/d768aeb89acad986bd252d7e904bf44bb374545f/src/graphics/Renderer.cpp"
+    },
+    {
+      "game": "powder-toy",
+      "path": "src/gui/game/GameView.cpp",
+      "bytes": 78959,
+      "blobSha": "1bdf7719420962aa8680721d8366ec7746172b77",
+      "url": "https://github.com/The-Powder-Toy/The-Powder-Toy/blob/d768aeb89acad986bd252d7e904bf44bb374545f/src/gui/game/GameView.cpp"
+    }
+  ]
+}

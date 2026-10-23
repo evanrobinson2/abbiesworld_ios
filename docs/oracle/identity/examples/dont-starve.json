@@ -1,0 +1,249 @@
+{
+  "schema_version": "1.1",
+  "game": {
+    "title": "Don't Starve",
+    "steam_appid": 219740,
+    "developer": "Klei Entertainment",
+    "publisher": "Klei Entertainment",
+    "release": "2013"
+  },
+  "core": {
+    "fantasy": "You are a gentleman scientist stranded in a strange gothic wilderness, keeping yourself fed, sane and alive one day at a time.",
+    "pillars": [
+      "Survive the night",
+      "Learn by dying",
+      "A world that turns on you as your mind slips"
+    ],
+    "signature_moment": "Sanity dropping, the screen wobbling and shadow hands reaching for the campfire.",
+    "anti_goals": [
+      "no hand-holding",
+      "no stated goal"
+    ],
+    "signatures": [
+      {
+        "id": "three_badges",
+        "layer": "information_grammar",
+        "description": "Three need badges with direction arrows and a segmented day dial are the whole always-on HUD.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "sanity_bends_world",
+        "layer": "information_grammar",
+        "description": "A meter doubled by the world: low sanity desaturates, wobbles and spawns shadows.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "ink_paper",
+        "layer": "art",
+        "description": "Everything, HUD included, is drawn in the same ink-and-paper style.",
+        "class": "expression",
+        "confidence": 0.8
+      }
+    ]
+  },
+  "layers": {
+    "information_grammar": {
+      "info_kinds": {
+        "body": {
+          "mix": {
+            "overlay": 0.7,
+            "meta": 0.3
+          },
+          "timing": "always_on",
+          "note": "Three need badges with direction arrows; sanity bends the screen as it drops.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "time": {
+          "mix": {
+            "overlay": 0.7,
+            "diegetic": 0.3
+          },
+          "timing": "always_on",
+          "note": "Segmented day dial with moon phase; dusk and night darken the world.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "threat": {
+          "mix": {
+            "meta": 0.4,
+            "diegetic": 0.3,
+            "none": 0.2,
+            "overlay": 0.1
+          },
+          "timing": "on_threshold",
+          "note": "Shadow creatures flicker, whispers start, total darkness attacks; hounds growl before a wave.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "thing_state": {
+          "mix": {
+            "diegetic": 0.6,
+            "spatial": 0.4
+          },
+          "timing": "on_change",
+          "note": "Crops, fires and creatures show state in their art; examine quips above the head.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "none": 0.8,
+            "overlay": 0.2
+          },
+          "timing": "absent",
+          "note": "No stated goal beyond surviving days.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Inventory row and equipment slots at the bottom; crafting tabs on the left.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "social": {
+          "mix": {
+            "spatial": 0.7,
+            "diegetic": 0.3
+          },
+          "timing": "on_change",
+          "note": "The character speaks one-line quips above their head; pigs and beefalo show mood by behaviour.",
+          "confidence": 0.5,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.15,
+        "meta": 0.2,
+        "overlay": 0.4,
+        "none": 0.05
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.15,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "always_on_count": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "drawn_as": "world_material",
+        "fade_rule": "Badges pulse and show numbers on change or hover; nothing fades."
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "sanity",
+            "channels": [
+              "lens",
+              "sound",
+              "npcs",
+              "light"
+            ],
+            "note": "Desaturation and wobble, whispers, shadow creatures appear."
+          },
+          {
+            "signal": "time of day",
+            "channels": [
+              "light",
+              "music",
+              "sound",
+              "animals",
+              "ui"
+            ],
+            "note": "Dusk tint, night darkness, creatures go home, a dusk sting."
+          }
+        ],
+        "max_channels": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "adapts_score": {
+          "value": 0.8,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        }
+      },
+      "social_channel": {
+        "carriers": {
+          "speech_bubbles": 0.4,
+          "body_language": 0.4,
+          "barks_audio": 0.2
+        },
+        "note": "Spoken quips as floating text; creatures signal by behaviour."
+      },
+      "dialects": [
+        {
+          "place": "caves",
+          "mix": {
+            "overlay": 0.4,
+            "meta": 0.3,
+            "diegetic": 0.3
+          },
+          "note": "No day dial underground; light and sound carry more."
+        }
+      ],
+      "card_art": {
+        "uses_cards": false
+      },
+      "signatures_ref": "docs/oracle/hud/hud-signatures.json#dont-starve"
+    },
+    "narrative": {
+      "tone": {
+        "cozy_tense": 0.6,
+        "whimsical_grounded": -0.3,
+        "earnest_ironic": 0.3
+      },
+      "themes": [
+        "survival",
+        "madness",
+        "discovery"
+      ]
+    }
+  },
+  "ledger": {
+    "style": [
+      "a small fixed always-on set",
+      "need badges with a rate arrow",
+      "a segmented day dial",
+      "a meter doubled by the world"
+    ],
+    "expression": [
+      "the ink-and-paper look and badge art",
+      "characters, creatures and text",
+      "the gothic tone"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "information_grammar",
+        "target": "Ranch HUD",
+        "setting": "A round sun dial with day segments; night coming is shown by light, animals and sound together, at kid-safe strength.",
+        "from_signature": "sanity_bends_world"
+      }
+    ],
+    "leave": [
+      "horror effects",
+      "permadeath"
+    ]
+  },
+  "sources": [
+    "docs/oracle/hud/HUD_STUDY.md",
+    "public guides"
+  ]
+}

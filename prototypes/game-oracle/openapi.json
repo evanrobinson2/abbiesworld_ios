@@ -1,0 +1,208 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Oracle Game Art API",
+    "version": "1.0.0",
+    "description": "Read-only, evidence-qualified game style catalog. Versioned hosted snapshot, independent of the ingestion PC. No authentication required."
+  },
+  "servers": [
+    {
+      "url": "https://abbies-game-oracle.vercel.app"
+    }
+  ],
+  "paths": {
+    "/api/games": {
+      "get": {
+        "operationId": "searchGames",
+        "summary": "Search, retrieve, or find visually related game records",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Concept-expanded search, maximum 240 characters"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Stable game ID, for example steam-728880"
+          },
+          {
+            "name": "similar",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Game ID for shared-art-attribute similarity"
+          },
+          {
+            "name": "dimension",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exact dimension facet from /api/meta"
+          },
+          {
+            "name": "perspective",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exact perspective facet"
+          },
+          {
+            "name": "rendering",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exact rendering facet"
+          },
+          {
+            "name": "ownership",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "owned-snapshot or unverified"
+          },
+          {
+            "name": "installed",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "true or false"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "source-reported or unclassified"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zero-based offset"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "1 to 100, default 30"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON results with snapshot version and evidence"
+          },
+          "400": {
+            "description": "Invalid filter"
+          },
+          "404": {
+            "description": "Unknown game ID"
+          }
+        }
+      }
+    },
+    "/api/meta": {
+      "get": {
+        "operationId": "getCatalogMetadata",
+        "summary": "Coverage, counts, version, facets and dictionary",
+        "responses": {
+          "200": {
+            "description": "Catalog metadata"
+          }
+        }
+      }
+    },
+    "/data/catalog.json": {
+      "get": {
+        "operationId": "downloadCatalog",
+        "summary": "Complete versioned snapshot",
+        "responses": {
+          "200": {
+            "description": "Metadata and games"
+          }
+        }
+      }
+    },
+    "/api/anatomy": {
+      "get": {
+        "operationId": "searchGameAnatomy",
+        "summary": "Read evidence-qualified game anatomy studies or a study by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Study record or paged study summaries"
+          },
+          "400": {
+            "description": "Invalid query"
+          },
+          "404": {
+            "description": "Unknown anatomy ID"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "appid": 1898290,
+  "name": "LEGO® Bricktales",
+  "store_url": "https://store.steampowered.com/app/1898290/",
+  "developers": [
+    "ClockStone"
+  ],
+  "release": "Oct 12, 2022",
+  "short_description": "In this puzzle-adventure, use an intuitive brick-by-brick building mechanic to solve puzzles and bring your creations to life! Experience a charming story as you explore beautiful LEGO® dioramas and help the people inhabiting them.",
+  "genres": [
+    "Adventure",
+    "Casual",
+    "Simulation"
+  ],
+  "categories": [
+    "Single-player",
+    "Steam Achievements",
+    "Full controller support",
+    "Steam Trading Cards",
+    "Steam Cloud",
+    "Family Sharing"
+  ],
+  "store_text_words": 565,
+  "header_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1898290/header.jpg?t=1759330526",
+  "install": {
+    "engine": "Unity",
+    "engine_hints": [
+      "Unity"
+    ],
+    "files": 469,
+    "top_extensions": {
+      ".dll": 209,
+      ".chroma": 66,
+      "(none)": 55,
+      ".assets": 53,
+      ".ress": 49,
+      ".resource": 11,
+      ".config": 7,
+      ".json": 3,
+      ".aspx": 3,
+      ".map": 3,
+      ".browser": 3,
+      ".xml": 2
+    }
+  },
+  "identity": {
+    "core_loop": null,
+    "mechanics": null,
+    "ui_and_game_feel": null,
+    "camera": null,
+    "art_direction": null,
+    "palette": null,
+    "audio_mood": null,
+    "pacing": null,
+    "lessons_for_abbies_world": null
+  },
+  "sources": [
+    "steam store api",
+    "install file names (no contents)"
+  ]
+}

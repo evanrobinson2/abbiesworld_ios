@@ -1,0 +1,41 @@
+# Game feel PR check: CLAUDE.md "How Abbie's World shows information", enforced.
+# 1. lint: no engine helpers, world masks, unfiltered perception or web vocabulary in new player-facing code.
+# 2. cover: the Ranch /sandbox may not hide more of the world than it did before the change (phone and desktop).
+name: game-feel
+on:
+  pull_request:
+    branches: [main]
+    paths: ['prototypes/**', 'tools/game-feel-check/**']
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: node tools/game-feel-check/lint.mjs origin/${{ github.base_ref }}
+  cover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - id: scope
+        run: |
+          if [ -d prototypes/ranch-atelier/dist ] && git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -qE '^prototypes/ranch-atelier/dist/.*\.(html|css|m?js)$'; then echo run=1 >> "$GITHUB_OUTPUT"; fi
+      - if: steps.scope.outputs.run
+        uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - if: steps.scope.outputs.run
+        working-directory: tools/game-feel-check
+        run: npm install --no-audit --no-fund && npx playwright install --with-deps chromium
+      - if: steps.scope.outputs.run
+        run: |
+          git worktree add ../base origin/${{ github.base_ref }}
+          cd tools/game-feel-check
+          SHOT_PREFIX=before node world-cover.mjs ../../../base/prototypes/ranch-atelier/dist /sandbox --json cover-base.json
+          SHOT_PREFIX=after node world-cover.mjs ../../prototypes/ranch-atelier/dist /sandbox --json cover-head.json
+          node ratchet.mjs cover-base.json cover-head.json
+      - if: always() && steps.scope.outputs.run
+        uses: actions/upload-artifact@v4
+        with: {name: world-cover, path: 'tools/game-feel-check/*.png'}
