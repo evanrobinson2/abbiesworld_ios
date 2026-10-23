@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-inspiring-shaders",
+      "date": "2026-10-23",
+      "title": "Inspiring Shaders: pick the looks you love",
+      "line": "Fourteen game looks rebuilt live on our mannequin, brute and ranch, starting with the Arcane-inspired Painted Brush beside Sunday Toon. Tap Love it, Maybe or Not for us on each, and add a note.",
+      "image": "/whats-new/2026-10-23-inspiring-shaders.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF4XcQhA4n7xJdKC6b5zPq8",
+      "threadTitle": "Shaders article",
+      "tour": false,
+      "link": "/studies/shaders/"
+    },
+    {
       "id": "2026-10-23-puppet-studio-moves",
       "date": "2026-10-23",
       "title": "The puppet does all 50 Character Studio moves",
