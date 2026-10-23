@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-moon-base-kit-r2",
+      "date": "2026-10-23",
+      "title": "Moon base kit, rebuilt from your Midjourney picks",
+      "line": "18 of the 20 Moon base pieces rebuilt to match their Midjourney pictures: chunky white modules in dark frames with warm orange windows. Each card shows the picture, the model you can spin, Abbie's view and the first try.",
+      "image": "/whats-new/2026-10-23-moon-base-kit-r2.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYNtqXxwWeYiUhSxEPUykrHL",
+      "threadTitle": "Moon base FPS assets",
+      "tour": false,
+      "link": "/studies/moon-base-kit/"
+    },
+    {
       "id": "2026-10-23-school-toon",
       "date": "2026-10-23",
       "title": "The school, redone at dusk",

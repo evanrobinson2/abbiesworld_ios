@@ -1,28 +1,42 @@
 {
  "asset": "comms-dish",
  "name": "Comms dish on a turntable",
- "brief": "MK-005 Comms dish on a turntable. A 3.2 m dish on a yoke, a feed horn on three struts, a counterweight and a red blinker. It turns to follow Earth; when it is talking to home its feed lamp glows and the turntable hums.",
+ "brief": "MK-005 Comms dish on a turntable. Round 2, matched to the pick: a domed, framed turntable housing with warm orange windows, a yoke and a 3.2 m panelled dish with a feed on three struts and a red blinker. It turns to follow Earth; when it is talking to home the windows pulse and the turntable hums.",
  "rounds": [
   {
    "n": 1,
    "date": "2026-10-23",
    "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  },
+  {
+   "n": 2,
+   "date": "2026-10-23",
+   "from": "concept.jpg (the Midjourney pick)",
+   "t": "Rebuilt against the Midjourney pick: chunky off-white modules held by dark bumper frames (bkit.module), warm orange windows (bkit.window), darker ground. Round 1 kept in round1/."
   }
  ],
  "stats": {
   "id": "MK-005",
   "name": "Comms dish on a turntable",
-  "triangles": 1300,
-  "parts": 16,
+  "triangles": 1936,
+  "parts": 24,
   "part_names": [
    "Plinth",
+   "Housing",
+   "HousingRim",
+   "HousingWindow0Frame",
+   "HousingWindow0Pane",
+   "HousingWindow1Frame",
+   "HousingWindow1Pane",
    "Turntable",
-   "YokeBase",
    "YokeArmL",
+   "YokeCapL",
    "YokeArmR",
+   "YokeCapR",
    "ElevationAxle",
    "DishHub",
    "Dish",
+   "DishRim",
    "FeedStrut0",
    "FeedStrut1",
    "FeedStrut2",
@@ -35,18 +49,17 @@
   "materials": [
    "HeadlightGlass",
    "Lamp_Red",
-   "Metal_Charcoal",
    "Metal_Gunmetal",
    "Metal_Hull",
-   "Metal_HullDark",
-   "Metal_Steel"
+   "Metal_Steel",
+   "Window_Warm"
   ],
-  "mass_kg": 4883.3,
-  "moon_weight_kg": 807.7,
+  "mass_kg": 6216.4,
+  "moon_weight_kg": 1028.2,
   "size_m": [
-   3.24,
-   2.37,
-   3.52
+   3.28,
+   2.67,
+   3.69
   ],
   "maps": "1024 px base, roughness, normal"
  }

@@ -43,7 +43,17 @@ for slug in sorted(os.listdir(os.path.join(HERE, 'assets'))):
     if any(os.path.exists(os.path.join(d, 'r/fps.' + e)) for e in ('png', 'jpg')):
         jpg(os.path.join(d, 'r/fps.png'), os.path.join(OUT, 'img', f'{slug}-fps.jpg'), 900)
     shutil.copy(os.path.join(d, f'{slug}.glb'), os.path.join(OUT, 'm', f'{slug}.wasm'))
-    assets.append(dict(slug=slug, body=' '.join(body.split()), **st))
+    # Round 2 rebuilds against the Midjourney pick; round 1 stays beside it as history.
+    r2 = 'Round 2' in doc
+    pick = r2 and os.path.exists(os.path.join(d, 'concept.jpg'))
+    if pick:
+        jpg(os.path.join(d, 'concept.jpg'), os.path.join(OUT, 'img', f'{slug}-pick.jpg'), 900)
+    r1 = r2 and os.path.exists(os.path.join(d, 'round1', 'hero.jpg'))
+    if r1:
+        jpg(os.path.join(d, 'round1', 'hero.jpg'), os.path.join(OUT, 'img', f'{slug}-r1.jpg'), 600)
+    body = body.replace('Round 2, matched to the pick: ', '').strip()
+    body = body[:1].upper() + body[1:]
+    assets.append(dict(slug=slug, body=' '.join(body.split()), r2=r2, pick=pick, r1=r1, **st))
 order = [i['id'] for i in cat['items']]
 assets.sort(key=lambda a: order.index(a['id']))
 for src, dst in (('moonbase.png', 'pack-moonbase.jpg'), ('abbie at the base.png', 'pack-abbie-base.jpg')):
@@ -62,12 +72,21 @@ cards = []
 for a in assets:
     mats = ''.join(chip(m) for m in a['materials'])
     sz = ' × '.join(f'{v:g}' for v in a['size_m'])
+    n = esc(a["name"])
+    spin = (f'<figure class="spin" data-src="m/{a["slug"]}.wasm" data-alt="{n}"><img src="img/{a["slug"]}.jpg" alt="{n}, '
+            f'three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>{"Round 2" if a["r2"] else "Round 1"}'
+            f', the model</figcaption></figure>')
+    first = (f'<figure><img class="sq" src="img/{a["slug"]}-pick.jpg" alt="Midjourney concept for {n}" loading="lazy">'
+             f'<figcaption>The Midjourney pick</figcaption></figure>' if a['pick'] else
+             '<figure class="wait"><div class="sq">Midjourney rerun coming: the first proofs put buildings in the rock.</div>'
+             '<figcaption>The Midjourney pick</figcaption></figure>')
+    fps = (f'<figure><img class="sq" src="img/{a["slug"]}-fps.jpg" alt="{n} from Abbie\'s eye height" loading="lazy">'
+           f'<figcaption>Abbie\'s eye, 1.1 m</figcaption></figure>')
+    old = (f'<figure><img src="img/{a["slug"]}-r1.jpg" alt="{n}, round 1" loading="lazy">'
+           f'<figcaption>Round 1, before the pick</figcaption></figure>' if a['r1'] else '')
     cards.append(f'''<article class="card" id="{a["slug"]}">
- <header><span class="id">{a["id"]}</span><h3>{esc(a["name"])}</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/{a["slug"]}.wasm" data-alt="{esc(a["name"])}"><img src="img/{a["slug"]}.jpg" alt="{esc(a["name"])}, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/{a["slug"]}-fps.jpg" alt="{esc(a["name"])} from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
+ <header><span class="id">{a["id"]}</span><h3>{n}</h3></header>
+ <div class="views">{first}{spin}{fps}{old}</div>
  <p>{esc(a["body"])}</p>
  <dl><div><dt>Triangles</dt><dd>{a["triangles"]:,}</dd></div><div><dt>Parts</dt><dd>{a["parts"]}</dd></div>
  <div><dt>Mass</dt><dd>{a["mass_kg"]:,} kg</dd></div><div><dt>Moon weight</dt><dd>{a["moon_weight_kg"]:,} kg</dd></div>
@@ -113,11 +132,13 @@ figcaption{{font:500 12px/1.4 var(--mono);color:var(--muted)}}
 .card{{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px;align-content:start}}
 .card header{{display:flex;gap:10px;align-items:baseline}}
 .id{{font:500 12px/1 var(--mono);color:var(--suit)}}
-.views{{display:grid;grid-template-columns:1.25fr 1fr;gap:8px;align-items:start}}
+.views{{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start}}
+.sq{{aspect-ratio:1;object-fit:contain;background:#0b0e14}}
+.wait .sq{{display:grid;place-items:center;padding:18px;text-align:center;border-radius:10px;border:1px dashed var(--line);color:var(--muted);font-size:14px}}
 .views figure{{margin:0;position:relative;display:grid;gap:4px}}
-.spin{{aspect-ratio:1}}
-.spin img,.spin model-viewer{{width:100%;height:100%;object-fit:cover;border-radius:10px;background:#0b0e14}}
-.spin button{{position:absolute;right:8px;bottom:8px;border:0;border-radius:999px;padding:7px 13px;font:600 13px var(--body);color:#111;background:rgba(255,255,255,.82);cursor:pointer}}
+.spin{{aspect-ratio:auto}}
+.spin img,.spin model-viewer{{width:100%;aspect-ratio:1;height:auto;object-fit:contain;border-radius:10px;background:#0b0e14}}
+.spin button{{position:absolute;right:8px;bottom:28px;border:0;border-radius:999px;padding:7px 13px;font:600 13px var(--body);color:#111;background:rgba(255,255,255,.82);cursor:pointer}}
 .spin.on button{{display:none}}
 dl{{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0}}
 dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}}dd{{margin:0;font-weight:600;font-variant-numeric:tabular-nums}}
@@ -130,10 +151,10 @@ dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;tex
 .group li span{{font:500 11px var(--mono);color:var(--muted);margin-right:8px}}
 .group li.drawn{{color:var(--suit);font-weight:600}}.group li a{{color:var(--green);font:500 11px var(--mono)}}
 .rules{{display:grid;gap:9px;padding-left:22px;margin:0;max-width:80ch}}.rules li::marker{{color:var(--suit);font-weight:700}}
-@media (max-width:560px){{.views{{grid-template-columns:1fr}}}}
+
 </style></head><body><main>
 <header style="display:grid;gap:10px">
- <span class="eyebrow">AW-STUDY-0031 · Moon Base Kit · round 1</span>
+ <span class="eyebrow">AW-STUDY-0031 · Moon Base Kit · round 2</span>
  <h1>The Moon base, built to walk through</h1>
  <p class="lede">200 low-poly pieces proposed for the low-gravity Moon shooter, and the first 20 built: {tri:,} triangles in all. Each one is made of named parts with real materials. Panel seams, brushed metal and rock pits are baked into colour, roughness and normal maps, so they still look solid up close in first person. Every part also knows its own mass, so low gravity can throw it honestly.</p>
  <p class="muted">The look follows the Moon Heroes "Faceted Hero" direction: flat planes, gunmetal and off-white hull, orange for people and warm windows, green, amber and red lamps for state. Cyan is kept for the Star Child and crystals, and gold for Daddy's memory coins. The heroes, buggy and lander belong to the Moon Heroes study.</p>
@@ -143,7 +164,7 @@ dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;tex
  <figure><img src="img/pack-abbie-base.jpg" alt="Abbie looking at the moon base"><figcaption>Abbie at the base: the scale we build for</figcaption></figure>
 </section>
 <h2>The 20, built</h2>
-<p class="muted">Left: the three-quarter view. Tap "Spin it" to turn the real model. Right: what Abbie sees from her own eye height, which is the view that matters in first person. These were drawn in Blender tonight because the Mac was offline; Midjourney proofs for all 20 are queued for morning, and round 2 rebuilds each piece against its pick from the same camera.</p>
+<p class="muted">Round 2 rebuilds each piece against its Midjourney pick: chunky off-white modules held by dark bumper frames, with warm orange windows. Top left is the pick, top right the model (tap "Spin it" to turn it), bottom left what Abbie sees from her own eye height, and bottom right round 1, drawn before the picks existed.</p>
 <div class="cards">{''.join(cards)}</div>
 <h2>All 200</h2>
 <p class="muted">Orange ones are built. The groups are what a whole base needs, from the outside in.</p>
@@ -157,7 +178,7 @@ dl div{{display:grid}}dt{{font:500 10px/1.3 var(--mono);letter-spacing:.08em;tex
  <li><b>Built for Abbie's size.</b> Everything is checked from 1.1 m eye height. Consoles have a kid step, and the lower bunk and the lettuce tier sit at her height.</li>
 </ol>
 <h2>Next</h2>
-<p>Midjourney proofs for the 20 come next, then round 2 against your picks. After that: the five base buildings the Moon Heroes study handed over (dome, tower, habitat and hangar, airlock, supply crate), and then placing the kit on the Moon tile for the shooter.</p>
+<p>A Midjourney rerun for the crater rim and the boulders, which came back with buildings in the rock. After that: the five base buildings the Moon Heroes study handed over (dome, tower, habitat and hangar, airlock, supply crate), and then placing the kit on the Moon tile for the shooter.</p>
 </main>
 <script>
 let mv;

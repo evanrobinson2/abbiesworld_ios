@@ -1,33 +1,40 @@
 {
  "id": "MK-146",
  "name": "Oxygen canister",
- "triangles": 1124,
- "parts": 9,
+ "triangles": 1196,
+ "parts": 14,
  "part_names": [
   "Body",
   "Shoulder",
-  "Foot",
-  "GripBand",
+  "BaseRing",
+  "BaseBand",
+  "FrontPlate",
+  "AirWindowFrame",
+  "AirWindowPane",
   "Neck",
-  "ValveHead",
+  "ValveBlock",
+  "ValvePortL",
+  "ValvePortR",
+  "FullRing",
   "ValveKnob",
-  "CarryLoop",
-  "FullLamp"
+  "Strap"
  ],
  "materials": [
+  "Cloth_Blue",
   "Lamp_Green",
   "Metal_Gunmetal",
-  "Metal_Hazard",
+  "Metal_Hull",
   "Metal_OxygenBlue",
   "Metal_Steel",
-  "Rubber_Black"
+  "OrangeBand",
+  "Window_Warm"
  ],
- "mass_kg": 13.9,
- "moon_weight_kg": 2.3,
+ "mass_kg": 65.4,
+ "moon_weight_kg": 10.8,
  "size_m": [
-  0.2,
-  0.2,
-  0.72
+  0.35,
+  0.37,
+  0.73
  ],
  "maps": "512 px base, roughness, normal"
 }

@@ -8,10 +8,18 @@
   "trek.zip outputs/images/abbie at the base.png",
   "Faceted Hero direction https://claude.ai/artifact/JV5ALAFxhkEcvQubse1joa"
  ],
- "concept": null,
+ "concept": "concept.jpg (Midjourney job dbfc7f22-cc26-4921-b1ae-e9554f2262cd, image 1)",
  "midjourney": {
-  "status": "queued: Mac offline 2026-10-23 10:06Z",
-  "prompt": "a wall panel with two big round pressure gauges behind glass, green white red arcs, a pipe with a valve wheel, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw"
+  "status": "ran 2026-10-23 on the Mac",
+  "job_id": "dbfc7f22-cc26-4921-b1ae-e9554f2262cd",
+  "prompt": "a wall panel with two big round pressure gauges behind glass, green white red arcs, a pipe with a valve wheel, low-poly faceted 3D game asset, flat-shaded planes, crisp chamfered edges, Moon base kit in the style of a cozy kids' sci-fi adventure, matte gunmetal and off-white hull panels with panel seams, warm orange window light, hazard-yellow trim, hard white sun with blue earthlight fill, black sky, grey lunar regolith ground, three-quarter view, single object centred, game asset concept sheet --ar 4:3 --style raw",
+  "grid": [
+   "tools/moon-base-kit/mj/MK-162/0.jpg",
+   "tools/moon-base-kit/mj/MK-162/1.jpg",
+   "tools/moon-base-kit/mj/MK-162/2.jpg",
+   "tools/moon-base-kit/mj/MK-162/3.jpg"
+  ],
+  "pick": 1
  },
  "built_with": "Blender Python (bpy 5.2.3) recipe build.py + bkit.py; Cycles bake of procedural role surfaces"
 }
