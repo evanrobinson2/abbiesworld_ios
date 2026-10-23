@@ -129,6 +129,17 @@
       "tour": false
     },
     {
+      "id": "2026-10-23-toy-car-coaster",
+      "date": "2026-10-23",
+      "title": "A toy-car coaster at the skate park",
+      "line": "Zoom down onto the skate park, tap the little yellow car and ride a 30 second first-person coaster with a loop, a corkscrew and a jump. Catch ten stars and win the Toy car charm.",
+      "image": "/whats-new/2026-10-23-toy-car-coaster.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHBUxVuF2cp3znG1VAyAmzx",
+      "threadTitle": "AW-STUDY-0054 - Toy-car coaster ride",
+      "tour": true,
+      "link": "/studies/coaster/play.html"
+    },
+    {
       "id": "2026-10-23-backpack-worn",
       "date": "2026-10-23",
       "title": "Abbie wears her backpack",
