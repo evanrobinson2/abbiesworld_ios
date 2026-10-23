@@ -65,7 +65,8 @@ export async function startLive({stage,audio,button}){
    for(const o of ops)if(!LIVE_OPS.includes(o?.op))throw Error('Op '+o?.op+' is not available in live mode');
    const r=await stage.apply(ops.map(o=>({op:o.op,args:o.args||{}})));return compact(r);
   },
-  build:async a=>{if(!a?.id||!Array.isArray(a.parts)||!a.parts.length)throw Error('build needs an id and parts');return compact(await stage.apply(buildOps(a)));},
+  // Voice builds pass the same toy-kit gate as Make (invent/contract.mjs), with the voice's wider bounds.
+  build:async a=>{if(!a?.id||!Array.isArray(a.parts)||!a.parts.length)throw Error('build needs an id and parts');const {constrain,LIMITS}=await import('../invent/contract.mjs');return compact(await stage.apply(buildOps({...a,parts:constrain({parts:a.parts},LIMITS.voice).parts})));},
   order_model:async a=>{
    const r=await fetch('/api/live',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'order',description:a.description,for:a.for})});
    const out=await r.json().catch(()=>({}));

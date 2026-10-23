@@ -97,7 +97,8 @@ test('the public pool stops at $100 however many people sign up',async()=>{
  const store=memoryStore(),w=createWallet({store});
  let ok=0;for(let i=10;i<112;i++)if(await w.charge(person(i),1))ok++;
  assert.equal(ok,100);assert.equal(await w.left(person(500)),0);
- assert.equal(JSON.parse(store.data.get('spend/v1/public.json').body).usd,100);
+ const pool=[...store.data].filter(([k])=>k.startsWith('spend/v1/public/')).reduce((n,[,v])=>n+JSON.parse(v.body).usd,0);
+ assert.equal(Math.round(pool*1e6)/1e6,100,'the shards add up to exactly $100');
  assert.equal(store.data.has(`spend/v1/people/${person(111).id}.json`),false,'a refused charge leaves no trace');
 });
 
