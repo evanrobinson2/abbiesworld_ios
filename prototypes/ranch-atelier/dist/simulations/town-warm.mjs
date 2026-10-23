@@ -1,7 +1,7 @@
 // Winchester's opening. Programs compiled on another page don't carry over, so the town compiles its own scene here, behind
 // the charm intro (intro-charms.mjs): black, the backpack charms circling under a spotlight. When the shaders are ready
 // the charms fold into the backpack, the lights go out, the overlay (pins, weather, backpack) is already there, and then
-// the whole town drops in (Evan, 2026-10-23). Shown once per session for people; automated browsers, ?nointro and ?nowarm
+// the whole town drops in (Evan, 2026-10-23). Shown once per session for people (?intro=1 replays it); automated browsers, ?nointro and ?nowarm
 // skip the show and just warm quietly. Late mounted modules (events, coaster, mission) get a second compile pass, and every
 // program is kept so nothing is thrown away between cards.
 import {createCharmIntro} from './intro-charms.mjs';
@@ -14,7 +14,7 @@ function dropScene(scene){return new Promise(resolve=>{const t0=performance.now(
 export async function warmTown({renderer,scene,camera,controls,ready}){
  const q=new URLSearchParams(location.search);
  let seen=false;try{seen=sessionStorage.getItem('aw-town-intro')==='1';}catch{}
- const show=!navigator.webdriver&&!q.has('nointro')&&!q.has('nowarm')&&!seen;
+ const show=q.has('intro')||(!navigator.webdriver&&!q.has('nointro')&&!q.has('nowarm')&&!seen); // ?intro=1 replays it any time
  let intro=null;
  if(show){try{sessionStorage.setItem('aw-town-intro','1');}catch{}if(controls)controls.enabled=false;scene.position.y=DROP;intro=createCharmIntro();}
  const compile=async()=>{try{await (renderer.compileAsync?renderer.compileAsync(scene,camera):Promise.resolve(renderer.compile(scene,camera)));}catch{}keepPrograms(renderer);};
