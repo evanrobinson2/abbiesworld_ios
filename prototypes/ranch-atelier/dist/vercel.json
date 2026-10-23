@@ -390,6 +390,16 @@
   ],
   "redirects": [
     {
+      "source": "/review",
+      "destination": "/review/",
+      "permanent": false
+    },
+    {
+      "source": "/inbox",
+      "destination": "/review/",
+      "permanent": false
+    },
+    {
       "source": "/simulations",
       "destination": "/simulations/",
       "permanent": false
