@@ -6,7 +6,7 @@ export function basinRequested(){const q=new URLSearchParams(location.search).ge
 export async function createBasinWorld(scene){
  if(!basinRequested())return null;
  const {createBasinWorld:build}=await import('./basin-view.mjs');
- const world=build({seed:Number(new URLSearchParams(location.search).get('basin-seed'))||7});scene.add(world.root);
+ const q=new URLSearchParams(location.search),world=build({seed:Number(q.get('basin-seed'))||7,trees:q.get('trees')||'v1',season:q.get('season')||'summer'});scene.add(world.root);
  document.documentElement.dataset.world='basin';
  let framed=false;
  return {world,

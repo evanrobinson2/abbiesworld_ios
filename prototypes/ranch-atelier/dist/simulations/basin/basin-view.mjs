@@ -1,11 +1,13 @@
 import * as T from 'three';
 import {makeBasin,cover,noise,ASSUMPTIONS as A} from './basin-land.mjs';
+import {plantFlora} from './basin-flora.mjs';
 // Draws the Basin: the eroded land, its rivers and tarns, the lake running out to a far shore, the forests by cover,
 // and the far mountains beyond the map (the same uplift with no erosion). Render units are 0.1 m like the tiles,
 // and the land is shifted so the camp site the land chose sits at the origin, where the first tile will go.
 const U=.1;
 const COVER={water:'#5d7f6a',shore:'#9ba46c',meadow:'#7fae45',willow:'#5d8f36',aspen:'#6c9c3c',spruce:'#2f5a2c',cliff:'#6f6a5f',tundra:'#8e9661',scree:'#9a958a',rock:'#7d7a74',snow:'#eef2f6'};
-export function createBasinWorld({seed=7}={}){
+// trees: 'v1' (the first pass) or 'v2' (the AW-STUDY-0019 overhaul in basin-flora.mjs); season tints v2 groves.
+export function createBasinWorld({seed=7,trees='v1',season='summer'}={}){
  const L=makeBasin(seed),{N,cell,half,h}=L,[sx,sz]=L.siteXZ,sy=L.siteHeight;
  const root=new T.Group();root.name='Basin world';
  const toX=x=>(x-sx)*U,toY=y=>(y-sy)*U,toZ=z=>(z-sz)*U,lakeY=toY(A.lake);
@@ -38,18 +40,22 @@ export function createBasinWorld({seed=7}={}){
  for(let i=0;i<F*F;i++){const y=fp.getY(i)/U+sy,steep=1-fn.getY(i),k=y<A.lake+2?'shore':steep>.32?(y>A.treeline?'rock':'cliff'):y>A.snowline+250?'snow':y>A.treeline+120?'scree':y>A.treeline?'tundra':y>90?'spruce':'aspen';colours[k].toArray(fcol,i*3);}
  fg.setAttribute('color',new T.BufferAttribute(fcol,3));
  const farMat=new T.MeshStandardMaterial({vertexColors:true,roughness:1});farMat.userData.dorfRole='ground';farMat.userData.seasonRole='ground';const far=new T.Mesh(fg,farMat);far.name='Basin far mountains';root.add(far);
+ const forests=[];let flora=null;
+ if(trees==='v2'){flora=plantFlora({L,covers,toX,toY,toZ,seed,season,landGeo:geo,root});restCol.set(col);land.onBeforeRender=(r,sc,camera)=>flora.update(camera);
+  flora.group.traverse(m=>{if(!m.isInstancedMesh)return;m.userData.rest=Array.from({length:m.count},(_,j)=>{const x=new T.Matrix4();m.getMatrixAt(j,x);return x;});forests.push(m);});}
+ else{
  // Trees by cover: spruce on the slopes, aspen groves lower down, willow along wet ground. Instanced, deterministic.
  const r=(()=>{let s=(seed*2654435761)>>>0||1;return()=>{s^=s<<13;s>>>=0;s^=s>>>17;s^=s<<5;s>>>=0;return s/4294967296;};})();
  const spruceGeo=mergeCones([[0,.5,.34,.55],[.35,.95,.27,.45],[.7,1.25,.18,.35]],'#2c5a2e','#1f3f22'),aspenGeo=blob('#79a845','#5d8a34'),willowGeo=blob('#6e9a3e','#4f7a2c');
  const spots={spruce:[],aspen:[],willow:[]};
  for(let i=0;i<N*N;i++){const k=covers[i];const per=k==='spruce'?1.6:k==='aspen'?1.1:k==='willow'?.8:k==='tundra'?.05:k==='meadow'?.03:0;let n=Math.floor(per+r());
   while(n-->0){const x=(i%N+r()-.5)*cell-half,z=(((i/N)|0)+r()-.5)*cell-half,y=L.h[i];if(L.water[i]>-1e8)break;spots[k==='tundra'?'spruce':k==='meadow'?'aspen':k].push([x,y,z]);}}
- const forests=[];
  const m4=new T.Matrix4(),q=new T.Quaternion(),s3=new T.Vector3(),p3=new T.Vector3(),up=new T.Vector3(0,1,0);
  const plant=(geo,list,size,name,role)=>{if(!list.length)return;const mat=new T.MeshStandardMaterial({vertexColors:true,roughness:.9});mat.userData.dorfRole='foliage';mat.userData.seasonRole=role;const mesh=new T.InstancedMesh(geo,mat,list.length);mesh.name=name;
   list.forEach(([x,y,z],j)=>{const t=size[0]+(size[1]-size[0])*r();q.setFromAxisAngle(up,r()*6.28);s3.set(t*(.8+.3*r()),t,t*(.8+.3*r()));p3.set(toX(x),toY(y)-.05,toZ(z));mesh.setMatrixAt(j,m4.compose(p3,q,s3));});
   mesh.castShadow=true;mesh.receiveShadow=true;mesh.userData.rest=list.map((_,j)=>{const m=new T.Matrix4();mesh.getMatrixAt(j,m);return m;});root.add(mesh);forests.push(mesh);};
  plant(spruceGeo,spots.spruce,[1.6,2.8],'Spruce forest','evergreen');plant(aspenGeo,spots.aspen,[1.1,1.8],'Aspen groves','deciduous');plant(willowGeo,spots.willow,[.5,.9],'Willow thickets','deciduous');
+ }
  // Facts for readouts and later tiles: where the river meets the lake, the land's own numbers.
  const mouth=L.mouth>=0?new T.Vector3(toX((L.mouth%N)*cell-half),lakeY,toZ(((L.mouth/N)|0)*cell-half)):new T.Vector3(0,lakeY,-80);
  const heightAt=(x,z)=>{const gx=(x/U+sx+half)/cell,gz=(z/U+sz+half)/cell,i=Math.max(0,Math.min(N-2,Math.floor(gx))),j=Math.max(0,Math.min(N-2,Math.floor(gz))),u=Math.min(1,Math.max(0,gx-i)),v=Math.min(1,Math.max(0,gz-j));
@@ -69,7 +75,7 @@ export function createBasinWorld({seed=7}={}){
   const zero=new T.Matrix4().makeScale(0,0,0),p=new T.Vector3();
   for(const mesh of forests){mesh.userData.rest.forEach((m,j)=>{p.setFromMatrixPosition(m);mesh.setMatrixAt(j,cells.length&&wOf(p.x,p.z)>.02?zero:m);});mesh.instanceMatrix.needsUpdate=true;}
  }
- return {root,land:L,facts:L.facts,heightAt,mouth,frame,fitBoard,dispose(){root.traverse(o=>{o.geometry?.dispose();});}};
+ return {root,land:L,facts:L.facts,flora,heightAt,mouth,frame,fitBoard,dispose(){root.traverse(o=>{o.geometry?.dispose();});}};
 }
 function smoothstep(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
 function mergeCones(tiers,light,dark){const parts=[];for(const [y0,y1,rad,] of tiers){const g=new T.ConeGeometry(rad,y1-y0,7,1);g.translate(0,(y0+y1)/2,0);parts.push(g);}const trunk=new T.CylinderGeometry(.04,.05,.3,5);trunk.translate(0,.15,0);parts.push(trunk);return merge(parts,(i,y)=>i===parts.length-1?'#5b4330':y>.8?light:dark);}

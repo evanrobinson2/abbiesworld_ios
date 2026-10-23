@@ -8,7 +8,7 @@ const q=new URLSearchParams(location.search),renderer=new T.WebGLRenderer({antia
 const scene=new T.Scene();scene.background=new T.Color('#a9c4d8');scene.fog=new T.Fog('#b9cad6',300,2900);
 const camera=new T.PerspectiveCamera(34,1,.05,3200),orbit=new OrbitControls(camera,renderer.domElement);orbit.maxPolarAngle=Math.PI*.47;
 scene.add(new T.HemisphereLight('#e6efff','#7b6a4d',1.6));const sun=new T.DirectionalLight('#ffe2b5',3.2);sun.position.set(-60,90,40);sun.castShadow=true;Object.assign(sun.shadow.camera,{left:-60,right:60,top:60,bottom:-60,far:300});sun.shadow.mapSize.set(2048,2048);scene.add(sun,sun.target);
-const world=createBasinWorld({seed:Number(q.get('seed'))||7});scene.add(world.root);world.frame(camera,orbit);
+const world=createBasinWorld({seed:Number(q.get('seed'))||7,trees:q.get('trees')||'v1',season:q.get('season')||'summer'});scene.add(world.root);world.frame(camera,orbit);
 if(q.get('cam')){const [px,py,pz,tx,ty,tz]=q.get('cam').split(',').map(Number);camera.position.set(px,py,pz);orbit.target.set(tx,ty,tz);orbit.update();}
 window.basin=world;window.view={camera,orbit};document.title='The Basin · '+JSON.stringify(world.facts);
 const size=()=>{renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();};addEventListener('resize',size);size();
