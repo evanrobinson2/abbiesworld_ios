@@ -13,6 +13,50 @@
       "link": "/studies/shaders/built.html"
     },
     {
+      "id": "2026-10-23-paint-the-world",
+      "date": "2026-10-23",
+      "title": "A card that paints the world",
+      "line": "Play the Paint the World card and coloured paint falls from the sky onto your board. It stays for a day of game time, and strange alien plants grow out of it.",
+      "image": "/whats-new/2026-10-23-paint-the-world.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFsUNxMs2CS8NZsWeXQJCoG",
+      "threadTitle": "AW-STUDY-0049 - Paint the World",
+      "tour": true,
+      "link": "/studies/paint-world/"
+    },
+    {
+      "id": "2026-10-23-rigging",
+      "date": "2026-10-23",
+      "title": "Characters drawn in pieces, and moving",
+      "line": "The mannequin drawn the way Spine and Rive games do it: SVG pieces on bones, joints that never gap, arms you can pull, and a jump with a real wind-up and squash. Six practice tries side by side, each one better.",
+      "image": "/whats-new/2026-10-23-rigging.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY71Gi6xSzAGcdMibSmMEgC9",
+      "threadTitle": "AW-STUDY-0041 - 2D Character Rigging",
+      "tour": false,
+      "link": "/studies/rigging/"
+    },
+    {
+      "id": "2026-10-23-light-study",
+      "date": "2026-10-23",
+      "title": "Light study: fourteen ways to light the world",
+      "line": "Golden hour, a café window shaft, a bare basement bulb, a hard-sun Moon base and a cosy Halloween dusk, all rebuilt live on our ranch. Pick the ones you love.",
+      "image": "/whats-new/2026-10-23-light-study.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXjLkpqwFiWaYuFKjT8TA8G",
+      "threadTitle": "Light study",
+      "tour": false,
+      "link": "/studies/light/"
+    },
+    {
+      "id": "2026-10-23-watercolour-distance",
+      "date": "2026-10-23",
+      "title": "Watercolour distance",
+      "line": "Pull back in Abbie's Town and the far world turns to wet watercolour. Downtown, Ani's side and Abbie and Daddy's side each paint their distance in their own colours.",
+      "image": "/whats-new/2026-10-23-watercolour-distance.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXqxTopZ32Vo7Wzbt9v3Pse",
+      "threadTitle": "Watercolour distance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-rig-hero",
       "date": "2026-10-23",
       "title": "Your hero, rigged",

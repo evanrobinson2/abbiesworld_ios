@@ -794,6 +794,153 @@ const ENTRANCES = {
 const returnTo = (gate, from) => from || ENTRANCES[gate]?.back || backUrl(gate);
 const available = (gate, st = {}) => { const e = ENTRANCES[gate]; if (!e) return false; return !e.needs || (e.needs.item ? (st.items || []).includes(e.needs.item) : !!st[Object.keys(e.needs)[0]]); };
 
+// ---- simulations/watercolour-distance.mjs ----
+// Watercolour distance, the Zelda-inspired look from AW-STUDY-0045 entry 6 (docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md),
+// promoted to a production shader. Near the camera the world stays exactly as drawn. With distance it turns into wet
+// watercolour: the colours lift towards the paper and shift towards the zone's wash colour, edges soften and bleed into
+// each other, the tones settle into flat pooled washes, pigment granulates, and the paper's grain shows through.
+// Style only: nothing from the game itself, just how a painted distance is made.
+//   const W = watercolourDistance(T, renderer, {logDepth: true})   one per renderer (after the renderer's own settings)
+//   W.setZone('downtown')          eases to that zone's numbers; 'off' eases to no wash (and then costs nothing)
+//   W.update(dt)                   per frame: eases the live numbers towards the zone
+//   W.render(scene, camera)        in place of renderer.render(scene, camera)
+//   W.ready                        promise: the scene and the pass are compiled; until it resolves render() draws directly
+//   W.tune({bleed: 4, wash: '#ffaa88'}) edits the live zone (the study page's sliders, the developer console)
+//   W.dispose()
+// Cost: one extra full-screen pass (a colour+depth target, then 10 taps only where the wash is above 0.4%). The shader is
+// compiled once, up front; zones and sliders only move uniforms, so nothing compiles while you play.
+// The pass reads only depth and colour, never materials, so it composes with the look of the things drawn (Sunday Toon,
+// Painted Brush, the paint of Paint the world): they draw into the target, the wash paints the distance over them.
+const WASH_ZONES = {
+ // distances are camera-space metres of the page's world; wash colours are sRGB hex; blur and bleed are pixels at full wash
+ real: {mood: 'the real town from far above, a cool wet horizon', start: 2600, end: 11000, curve: 1.15, max: .78, wash: '#c3d3dc', paper: '#f1ecdf', tint: .55, lift: .32, desat: .3, blur: 3.2, bleed: 2.4, levels: 6, flat: .5, gran: .2, paper_grain: .45, edge: .3},
+ trio: {mood: 'three little worlds on one table, a warm hazy edge', start: 340, end: 980, curve: 1.1, max: .74, wash: '#dcc8b2', paper: '#f6ecdc', tint: .5, lift: .3, desat: .28, blur: 3, bleed: 2, levels: 6, flat: .5, gran: .2, paper_grain: .45, edge: .3},
+ downtown: {mood: 'late afternoon, brick and brass dissolving into rose', start: 150, end: 430, curve: 1.2, max: .78, wash: '#e3ae94', paper: '#f7ead4', tint: .62, lift: .34, desat: .34, blur: 3, bleed: 2.2, levels: 5, flat: .6, gran: .24, paper_grain: .5, edge: .38},
+ 'anis-side': {mood: 'a cool morning by the pond, wide, airy and wet', start: 200, end: 540, curve: 1, max: .84, wash: '#9cc6d6', paper: '#eef5f3', tint: .66, lift: .46, desat: .38, blur: 4.6, bleed: 3.2, levels: 7, flat: .45, gran: .18, paper_grain: .42, edge: .26},
+ 'abbie-daddy-side': {mood: 'a sunset hill, rose and violet pooling in the valleys', start: 180, end: 480, curve: 1.25, max: .8, wash: '#d48aa4', paper: '#f9e4d3', tint: .66, lift: .36, desat: .3, blur: 3.6, bleed: 2.6, levels: 4, flat: .65, gran: .26, paper_grain: .5, edge: .5},
+};
+// the numbers the sliders may move, with their limits (the study page builds its controls from this)
+const WASH_CONTROLS = {
+ start: {min: 40, max: 3000, label: 'Clear until'}, end: {min: 200, max: 12000, label: 'Fully washed by'}, curve: {min: .5, max: 3, label: 'Falloff curve'},
+ max: {min: 0, max: .9, label: 'Most wash'}, tint: {min: 0, max: 1, label: 'Colour shift'}, lift: {min: 0, max: .8, label: 'Towards the paper'}, desat: {min: 0, max: .8, label: 'Pigment fade'},
+ blur: {min: 0, max: 9, label: 'Softness (px)'}, bleed: {min: 0, max: 8, label: 'Edge bleed (px)'}, levels: {min: 2, max: 12, label: 'Wash steps'}, flat: {min: 0, max: 1, label: 'Flat washes'},
+ gran: {min: 0, max: .6, label: 'Granulation'}, paper_grain: {min: 0, max: 1, label: 'Paper grain'}, edge: {min: 0, max: 1, label: 'Wet edge'},
+};
+const WC_NUMERIC = Object.keys(WASH_CONTROLS), WC_COLOURS = ['wash', 'paper'];
+const WC_OFF = {...WASH_ZONES.real, max: 0};
+
+// how much wash a surface at this distance carries (0 to zone.max), the same curve the shader uses
+function washAt(dist, z) {
+ const t = Math.max(0, Math.min(1, (dist - z.start) / Math.max(1, z.end - z.start))), s = t * t * (3 - 2 * t);
+ return Math.pow(s, z.curve) * z.max;
+}
+function zoneParams(id) { return {...(WASH_ZONES[id] || WC_OFF)}; }
+// the numbers between two zones (k 0 gives a, 1 gives b): colours mix in sRGB hex, so a crossing never passes through grey
+function mixZones(a, b, k) {
+ const out = {...b}, h = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+ for (const n of WC_NUMERIC) out[n] = a[n] + (b[n] - a[n]) * k;
+ for (const n of WC_COLOURS) { const x = h(a[n]), y = h(b[n]); out[n] = '#' + x.map((v, i) => Math.round(v + (y[i] - v) * k).toString(16).padStart(2, '0')).join(''); }
+ return out;
+}
+
+const WC_VERT = `varying vec2 vUv;void main(){vUv=position.xy*.5+.5;gl_Position=vec4(position.xy,0.,1.);}`;
+const WC_TAPS = 10;
+const WC_FRAG = `precision highp float;
+uniform sampler2D tColor,tDepth;uniform vec2 uRes;uniform float uNear,uFar,uLog;
+uniform float uStart,uEnd,uCurve,uMax,uTint,uLift,uDesat,uBlur,uBleed,uLevels,uFlat,uGran,uPaperK,uEdge,uDpr;
+uniform vec3 uWashMul,uPaper;varying vec2 vUv;
+float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1,1)),f.x),f.y);}
+float viewZ(float d){if(uLog>.5)return pow(uFar+1.,d)-1.;float zn=d*2.-1.;return 2.*uNear*uFar/(uFar+uNear-zn*(uFar-uNear));}
+float wash(vec2 uv){float z=viewZ(texture2D(tDepth,uv).x);float t=clamp((z-uStart)/max(1.,uEnd-uStart),0.,1.);return pow(t*t*(3.-2.*t),uCurve)*uMax;}
+float lum(vec3 c){return dot(c,vec3(.2126,.7152,.0722));}
+void main(){
+ vec2 px=1./uRes;vec4 src=texture2D(tColor,vUv);float w=wash(vUv);
+ vec3 col=src.rgb;
+ if(w>.004){
+  vec2 fc=gl_FragCoord.xy/uDpr;
+  // wet bleed: the colour runs a little way along the paper's own wobble
+  vec2 warp=(vec2(vn(fc*.045),vn(fc*.045+vec2(17.,5.)))-.5)*2.*uBleed*w*px*uDpr;
+  vec2 uv=vUv+warp;float r=uBlur*w*uDpr;vec3 acc=src.rgb;float tw=1.;
+  for(int i=0;i<${WC_TAPS};i++){
+   float a=float(i)*2.39996+h21(fc)*6.2832,rr=sqrt((float(i)+.5)/${WC_TAPS}.)*r;vec2 o=uv+vec2(cos(a),sin(a))*rr*px;
+   // a near thing never paints itself over what is behind it: taps count only when they are as washed as this pixel
+   float k=smoothstep(w-.22,w,wash(o));acc+=texture2D(tColor,o).rgb*k;tw+=k;}
+  col=acc/tw;
+  float l=lum(col);
+  // settle the tones into flat, pooled washes
+  float lv=max(2.,uLevels),ql=(floor(l*lv+.5)+smoothstep(.35,.65,fract(l*lv+.5)))/lv;ql=mix(l,ql,w*uFlat);
+  col*=clamp(ql/max(l,.002),.6,1.5);l=lum(col);
+  // atmospheric shift: pigment fades, the zone's colour comes up, everything lifts towards the paper
+  float wk=w/max(uMax,.001)*min(1.,uMax*1.25);
+  col=mix(col,vec3(l),wk*uDesat);col=mix(col,col*uWashMul,wk*uTint);col=mix(col,uPaper*(.55+l*.6),wk*uLift);
+  // the pigment pools at the edge of each wash
+  float e=length(vec2(lum(texture2D(tColor,vUv+vec2(px.x,0.)*uDpr*1.5).rgb)-lum(texture2D(tColor,vUv-vec2(px.x,0.)*uDpr*1.5).rgb),lum(texture2D(tColor,vUv+vec2(0.,px.y)*uDpr*1.5).rgb)-lum(texture2D(tColor,vUv-vec2(0.,px.y)*uDpr*1.5).rgb)));
+  col*=1.-clamp(e*3.,0.,1.)*uEdge*wk*.5;
+  // granulation (pigment in the paper's dips) and the paper's own fibres: both live on the paper, not the world
+  float g=vn(fc*.55)*.6+vn(fc*1.7+9.)*.4,f=h21(floor(fc*1.)+.5)*.5+vn(fc*vec2(.9,.25))*.5;
+  col*=1.+(g-.5)*uGran*wk*1.6;col*=1.+(f-.5)*uPaperK*wk*.5;
+ }
+ col+=(h21(gl_FragCoord.xy)-.5)/255.;
+ gl_FragColor=vec4(col,1.);
+ #include <tonemapping_fragment>
+ #include <colorspace_fragment>
+}`;
+
+function watercolourDistance(T, renderer, opts = {}) {
+ const logDepth = opts.logDepth ?? !!renderer.capabilities.logarithmicDepthBuffer, samples = opts.samples ?? 4;
+ const live = zoneParams('off'), target = zoneParams('off'); let zone = 'off';
+ const size = new T.Vector2(), dpr = () => renderer.getPixelRatio();
+ let rt = null;
+ const makeTarget = (w, h) => {
+  rt?.depthTexture?.dispose(); rt?.dispose();
+  const depth = new T.DepthTexture(w, h); depth.type = T.UnsignedIntType;
+  rt = new T.WebGLRenderTarget(w, h, {samples, type: T.HalfFloatType, depthTexture: depth, colorSpace: T.LinearSRGBColorSpace});
+ };
+ const U = {tColor: {value: null}, tDepth: {value: null}, uRes: {value: new T.Vector2(1, 1)}, uNear: {value: .1}, uFar: {value: 1000}, uLog: {value: logDepth ? 1 : 0}, uDpr: {value: 1},
+  uStart: {value: live.start}, uEnd: {value: live.end}, uCurve: {value: live.curve}, uMax: {value: 0}, uTint: {value: live.tint}, uLift: {value: live.lift}, uDesat: {value: live.desat},
+  uBlur: {value: live.blur}, uBleed: {value: live.bleed}, uLevels: {value: live.levels}, uFlat: {value: live.flat}, uGran: {value: live.gran}, uPaperK: {value: live.paper_grain}, uEdge: {value: live.edge},
+  uWashMul: {value: new T.Color()}, uPaper: {value: new T.Color()}};
+ const mat = new T.ShaderMaterial({uniforms: U, vertexShader: WC_VERT, fragmentShader: WC_FRAG, depthTest: false, depthWrite: false});
+ const quadGeo = new T.BufferGeometry(); quadGeo.setAttribute('position', new T.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3));
+ const quad = new T.Mesh(quadGeo, mat); quad.frustumCulled = false; const quadScene = new T.Scene(); quadScene.add(quad); const quadCam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+ const c0 = new T.Color(), c1 = new T.Color();
+ const W = {
+  zones: WASH_ZONES, live, target, enabled: opts.enabled !== false, ready: Promise.resolve(), compiled: false, passes: 0, lastPassMs: 0,
+  get zone() { return zone; },
+  setZone(id, snap = false) { zone = WASH_ZONES[id] ? id : 'off'; Object.assign(target, zoneParams(zone)); if (zone === 'off') target.max = 0; if (snap) { Object.assign(live, target); W.apply(); } return zone; },
+  // edit the live zone; the zone keeps easing to these numbers rather than back to its preset
+  tune(v) { for (const n of WC_NUMERIC) if (v[n] != null) target[n] = Math.max(WASH_CONTROLS[n].min, Math.min(WASH_CONTROLS[n].max, +v[n])); for (const n of WC_COLOURS) if (v[n]) target[n] = v[n]; return target; },
+  update(dt = .016) {
+   const k = 1 - Math.exp(-dt * 3.2), m = mixZones(live, target, k); Object.assign(live, m); live.max += (target.max - live.max) * k; if (Math.abs(live.max - target.max) < 1e-3) live.max = target.max; W.apply();
+  },
+  apply() {
+   U.uStart.value = live.start; U.uEnd.value = live.end; U.uCurve.value = live.curve; U.uMax.value = live.max; U.uTint.value = live.tint; U.uLift.value = live.lift; U.uDesat.value = live.desat;
+   U.uBlur.value = live.blur; U.uBleed.value = live.bleed; U.uLevels.value = live.levels; U.uFlat.value = live.flat; U.uGran.value = live.gran; U.uPaperK.value = live.paper_grain; U.uEdge.value = live.edge;
+   c0.set(live.wash); const l = c0.r * .2126 + c0.g * .7152 + c0.b * .0722; U.uWashMul.value.copy(c0).multiplyScalar(1 / Math.max(l, .02)); c1.set(live.paper); U.uPaper.value.copy(c1);
+  },
+  active() { return W.enabled && live.max > .002; },
+  // compile the scene's materials and the pass up front, so the first washed frame costs the same as any other
+  precompile(scene, camera) {
+   W.apply(); const bw = renderer.getDrawingBufferSize(size).x, bh = size.y; if (!rt || rt.width !== bw || rt.height !== bh) makeTarget(bw, bh);
+   const go = renderer.compileAsync ? p => renderer.compileAsync(p[0], p[1]) : p => Promise.resolve(renderer.compile(p[0], p[1]));
+   W.ready = Promise.all([go([scene, camera]), go([quadScene, quadCam])]).then(() => { U.tColor.value = rt.texture; U.tDepth.value = rt.depthTexture; W.compiled = true; });
+   return W.ready;
+  },
+  render(scene, camera) {
+   if (!W.active() || !W.compiled) { renderer.render(scene, camera); return; }
+   const t0 = performance.now(), bw = renderer.getDrawingBufferSize(size).x, bh = size.y;
+   if (!rt || rt.width !== bw || rt.height !== bh) { makeTarget(bw, bh); U.tColor.value = rt.texture; U.tDepth.value = rt.depthTexture; }
+   U.uRes.value.set(bw, bh); U.uNear.value = camera.near; U.uFar.value = camera.far; U.uDpr.value = dpr();
+   renderer.setRenderTarget(rt); renderer.render(scene, camera); renderer.setRenderTarget(null); renderer.render(quadScene, quadCam);
+   W.passes++; W.lastPassMs = performance.now() - t0;
+  },
+  dispose() { rt?.depthTexture?.dispose(); rt?.dispose(); mat.dispose(); quadGeo.dispose(); },
+ };
+ W.setZone(opts.zone || 'off', true);
+ return W;
+}
+
 
 const land = makeLand(JSON.parse(document.getElementById('land').textContent));
 const W = land.W, D = land.D;
@@ -820,6 +967,7 @@ const stage = document.getElementById('stage'), canvas = document.getElementById
 const renderer = new THREE.WebGLRenderer({canvas, antialias: true, logarithmicDepthBuffer: true});
 renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const WC = watercolourDistance(THREE, renderer, {logDepth: true}); // the pulled-back view's painted distance, per zone (simulations/watercolour-distance.mjs)
 const clock = new THREE.Clock(); const sunDir = new THREE.Vector3(-600, 900, 400);
 const scene = new THREE.Scene(); scene.background = new THREE.Color('#cfe2ea');
 const camera = new THREE.PerspectiveCamera(42, 1, 2, 40000);
@@ -1213,7 +1361,7 @@ function buildHouse(type, tier, W, D, H, wall, roofc, hash) {
  const roof = (w, rh, d, c, x, y, z, ry = 0) => { const m = new THREE.Mesh(gableGeo, hkM(c)); m.scale.set(d, rh, w); m.position.set(x, y, z); m.rotation.y = Math.PI / 2 + ry; m.castShadow = true; g.add(m); return m; }; // ridge along x
  const cylM = (r, h, c, x, y, z) => { const m = new THREE.Mesh(HK.cyl, hkM(c)); m.scale.set(r, h, r); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
  const cone = (r, h, c, x, y, z) => { const m = new THREE.Mesh(HK.cone, hkM(c)); m.scale.set(r, h, r); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
- const win = (x, y, z, w = .9, h = 1.1, side = 0) => { if (side) b(.12, h, w, WIN, x, y, z); else { b(w + .3, h + .3, .1, TRIM, x, y - .15, z - .01); b(w, h, .16, WIN, x, y, z); } };
+ const win = (x, y, z, w = .9, h = 1.1, side = 0) => { if (side) b(.12, h, w, WIN, x, y, z); else { b(w + .3, h + .3, .1, TRIM, x, y - .15, z - .01); b(w, h, .16, WIN, x, y, z); b(.07, h, .2, TRIM, x, y, z + .02); b(w, .07, .2, TRIM, x, y + h / 2 - .05, z + .02); if (tier > 0) { b(.22, h, .12, DOOR, x - w / 2 - .22, y - .15, z); b(.22, h, .12, DOOR, x + w / 2 + .22, y - .15, z); } } };
  const door = (x, z) => { b(1.1, 1.9, .2, DOOR, x, 0, z); b(.12, .12, .24, '#d8b24a', x + .35, .95, z); };
  const chimney = (x, z, hh, c = '#8a4a36') => b(.6, hh, .6, c, x, 0, z);
  const row = (n, y, z, span, w, hgt) => { for (let i = 0; i < n; i++) win(n === 1 ? 0 : -span / 2 + span * i / (n - 1), y, z, w, hgt); };
@@ -1312,17 +1460,17 @@ function buildBunker(g) { // a grassy mound, a concrete frame and a round vault-
 // real land (heights, lakes, main roads, the real mix of houses) squeezed to a fifth of a mile across, with the real
 // places pushed together and built big. Each has its own look and its own pulled-back camera. The three sit as the three
 // regions of the seven-hex structure, beyond the east edge of the real town.
-const DIO_R = 105, DIO_N = 44, DIO_ORIGIN = [land.W + 3600, land.D / 2]; // tile circumradius, lattice rings, where the trio's middle is (map metres)
+const DIO_R = 105, DIO_N = 66, DIO_ORIGIN = [land.W + 3600, land.D / 2]; // tile circumradius, lattice rings, where the trio's middle is (map metres)
 const DIOS = [
- {id: 'downtown', name: 'Downtown', bearing: 180, centre: [4340, 1640], R: 900, vex: 2.4, pin: '⛪', heroes: ['common', 'cafe', 'comellas', 'hoagies', 'lab', 'ginn'],
+ {id: 'downtown', name: 'Downtown', bearing: 180, centre: [4340, 1640], R: 900, vex: 2.4, pin: '⛪', heroes: ['common', 'cafe', 'comellas', 'hoagies', 'lab'],
   look: {bg: '#f3dcbd', sun: '#ffd49a', sunI: 2.7, sunDir: [-520, 520, 620], sky: '#ffe9cf', gnd: '#8a6a4a', hemiI: 1.05, grass: ['#7fa14f', '#a8b45e'], soil: '#8a5a3a', fov: 32, dist: 250, azimuth: 205, lowPitch: 20, highPitch: 54,
-   mood: 'a late-afternoon square, brass and brick'}},
+   mood: 'a late-afternoon square, brass and brick', wash: 'downtown'}},
  {id: 'anis-side', name: "Ani's side", bearing: 300, centre: [3180, 3020], R: 820, vex: 3.4, pin: '\u{1F986}', heroes: ['horn', 'ani'],
   look: {bg: '#cfe8f1', sun: '#eef4ff', sunI: 2.0, sunDir: [420, 900, -380], sky: '#dff1ff', gnd: '#4d6a5c', hemiI: 1.3, grass: ['#64a07c', '#8bb86a'], soil: '#5d6b4a', fov: 48, dist: 330, azimuth: 150, lowPitch: 30, highPitch: 70,
-   mood: 'a cool bright morning by the pond, wide and airy'}},
+   mood: 'a cool bright morning by the pond, wide and airy', wash: 'anis-side'}},
  {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 60, centre: [4930, 3440], R: 820, vex: 2.8, pin: '\u{1F3E1}', heroes: ['home', 'muraco', 'leonard'], houses: 9,
   look: {bg: '#f6c4ad', sun: '#ff9d6a', sunI: 2.9, sunDir: [-800, 360, 120], sky: '#ffd5c2', gnd: '#7a4a5a', hemiI: 1.0, grass: ['#c2a447', '#d98a45'], soil: '#7a4a3a', fov: 40, dist: 300, azimuth: 235, lowPitch: 38, highPitch: 78,
-   mood: 'a sunset hill, almost a board seen from above'}},
+   mood: 'a sunset hill, almost a board seen from above', wash: 'abbie-daddy-side'}},
 ];
 // hero places: model scale on the tile, footprint radius for the layout, and whether the place hugs the street
 const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
@@ -1433,11 +1581,14 @@ function buildDiorama(d, ti) {
   const chim = mine.filter(h => h.chimney); grp.add(inst(boxGeo, plainMat, chim, h => { const a = yaw(h), o = h.w * HS * .32; v3.set(h.px + Math.cos(a) * o, h.hz + h.h * HS, -h.py - Math.sin(a) * o); q.setFromEuler(e.set(0, a, 0)); sc.set(.9, h.d * HS * .5 * h.pitch + 1.8, .9); col.set('#8a4a36'); })); }
  // 8 trees, thinned, in the zone's colours
  { const T = [], spots = taken.slice(); for (const t of town.trees) { const px = (t.x - d.centre[0]) / scl, py = (t.y - d.centre[1]) / scl; if (!inHex(px, py, DIO_R * .94) || !isNaN(waterY(px, py))) continue; const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 2) continue;
-   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 5 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 150) break; }
+   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 3.2 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 420) break; }
   const grp = new THREE.Group(), broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine'), tint = new THREE.Color(L.grass[1]);
-  grp.add(inst(trunkGeo, plainMat, broad, t => { v3.set(t.px, t.hz, -t.py); q.identity(); sc.set(.7 * t.s, 2.6 * t.s, .7 * t.s); col.set('#6b4f36'); }));
-  grp.add(inst(crownGeo, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
-  grp.add(inst(pineGeo, leafMat, pine, t => { v3.set(t.px, t.hz + .4, -t.py); q.identity(); sc.set(1.9 * t.s, 8 * t.s, 1.9 * t.s); col.set(t.c); })); out.add(grp); }
+  grp.add(inst(TREE_HI.trunk, plainMat, broad, t => { v3.set(t.px, t.hz, -t.py); q.identity(); sc.set(.7 * t.s, 2.6 * t.s, .7 * t.s); col.set('#6b4f36'); }));
+  grp.add(inst(TREE_HI.crown, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
+  grp.add(inst(TREE_HI.pine, leafMat, pine, t => { v3.set(t.px, t.hz + .4, -t.py); q.identity(); sc.set(1.9 * t.s, 8 * t.s, 1.9 * t.s); col.set(t.c); })); out.add(grp); }
+ { const poles = [], heads = []; for (const r of mainR) walk(r, 30, (x, y, tx, ty) => { if (!inHex(x, y, DIO_R * .9) || !isNaN(waterY(x, y))) return; const s = poles.length % 2 ? 1 : -1, px = x - ty * s * 4.2, py = y + tx * s * 4.2; if (taken.some(t => Math.hypot(t.x - px, t.y - py) < (t.r || 6) * .5)) return; poles.push({px, py, hz: hf(px, py)}); });
+  const lg = new THREE.Group(), pm = new THREE.MeshStandardMaterial({color: '#2f3a3a', roughness: .6}), hm = new THREE.MeshStandardMaterial({color: '#ffe3a0', emissive: '#ffcf70', emissiveIntensity: .9});
+  lg.add(inst(HK.cyl, pm, poles, p => { v3.set(p.px, p.hz, -p.py); q.identity(); sc.set(.12, 3.8, .12); col.set('#ffffff'); }), inst(new THREE.IcosahedronGeometry(1, 1), hm, poles, p => { v3.set(p.px, p.hz + 4, -p.py); q.identity(); sc.set(.42, .5, .42); col.set('#ffffff'); }), inst(boxGeo, pm, poles, p => { v3.set(p.px, p.hz + 3.7, -p.py); q.identity(); sc.set(.6, .1, .6); col.set('#ffffff'); })); out.add(lg); }
  // 9 what only this place has
  DRESS[d.id]?.(out, {hf, pads, roads, nearRoad, waterY, mainR, verts, taken, gb, cds});
  return {group: out, hf, pads, tile: tileC, roads, verts};
@@ -1480,6 +1631,12 @@ function waterMaterial() { // shallow turquoise to deep blue by depth, a foam li
    .replace('#include <opaque_fragment>', `float gl = pow(max(0.0, sin(vWP.x * 5.0 + uWT * 2.2) * sin(vWP.z * 4.6 - uWT * 1.8)), 9.0) * .28; outgoingLight += vec3(gl);
     #include <opaque_fragment>`); };
  return m; }
+
+// hi-fi low-poly trees: lumpy multi-blob crowns, tiered pines, tapered trunks (shared by every tile)
+const TREE_HI = (() => { const jit = (g, k) => { const p = g.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), n = 1 + .13 * Math.sin(x * 5.1 + k) * Math.cos(z * 4.3 + y * 3.7 + k); p.setXYZ(i, x * n, y * n, z * n); } g.computeVertexNormals(); return g; };
+ const blob = (x, y, z, r, k) => jit(new THREE.IcosahedronGeometry(r, 1), k).translate(x, y, z), cone = (r, h, y) => new THREE.ConeGeometry(r, h, 10).translate(0, y + h / 2, 0);
+ return {crown: merge([blob(0, 0, 0, 1, 0), blob(.68, -.22, .2, .72, 2), blob(-.62, -.3, -.28, .76, 4), blob(.1, .55, -.42, .62, 6), blob(-.15, .4, .5, .55, 8)]),
+  pine: merge([cone(1, .42, 0), cone(.8, .38, .26), cone(.6, .34, .5), cone(.38, .3, .72)]), trunk: new THREE.CylinderGeometry(.16, .3, 1, 8).translate(0, .5, 0)}; })();
 const dioCafes = [];
 
 // ---- what only each place has ----
@@ -1534,8 +1691,8 @@ const DRESS = {
 // ---- the view: each region has its own opinion about the pulled-back view (palette, light, lens, tilt, distance) ----
 // The pitch-by-zoom curve is the open-land camera's (simulations/land-camera.mjs, AW-STUDY-0018), tuned for each region.
 const ORDER_DIO = ['dio-trio', 'dio-downtown', 'dio-anis-side', 'dio-abbie-daddy-side'];
-const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42};
-const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70};
+const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42, wash: 'real'};
+const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70, wash: 'trio'};
 let viewDio = false, look = LOOK_REAL, dragging = false; const dioC = new THREE.Color(), dioV = new THREE.Vector3(), rad = a => a * Math.PI / 180;
 const pitchFor = (dist, L) => rad(L.lowPitch + (L.highPitch - L.lowPitch) * Math.pow(Math.max(0, Math.min(1, Math.log(dist / 40) / Math.log(760 / 40))), .8));
 canvas.addEventListener('pointerdown', () => { dragging = true; }); addEventListener('pointerup', () => { dragging = false; });
@@ -1560,6 +1717,7 @@ document.getElementById('dio').onclick = () => setView(!viewDio);
 function dioFrame(dt, t) {
  waterU.uWT.value = t;
  const k = 1 - Math.exp(-dt * 3.5), L = look;
+ if (WC.zone !== (L.wash || 'off')) WC.setZone(L.wash || 'off'); // each zone's opinion about its own distance
  scene.background.lerp(dioC.set(L.bg), k); hemi.color.lerp(dioC.set(L.sky), k); hemi.groundColor.lerp(dioC.set(L.gnd), k); sun.color.lerp(dioC.set(L.sun), k);
  sun.intensity += (L.sunI - sun.intensity) * k; hemi.intensity += (L.hemiI - hemi.intensity) * k; sunDir.lerp(dioV.set(...L.sunDir), k);
  if (Math.abs(camera.fov - L.fov) > .05) { camera.fov += (L.fov - camera.fov) * k; camera.updateProjectionMatrix(); }
@@ -1612,10 +1770,11 @@ function setupStage() {
 // ---------- go ----------
 buildTown(1);
 const {train, line} = placeSpots(); setupDioramas(); makePins();
-window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID}; // for other studies; the anchors are in simulations/abbietown/town.mjs
+window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
+WC.precompile(scene, camera); if (/[?&]watercolour=off\b/.test(location.search)) WC.enabled = false; // compiled before the first washed frame; ?watercolour=off for comparing
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();
 function onLine(d) { d = ((d % lineLen) + lineLen) % lineLen; for (let i = 1; i < line.length; i++) { const l = Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); if (d <= l) { const t = d / l; return [line[i - 1][0] + (line[i][0] - line[i - 1][0]) * t, line[i - 1][1] + (line[i][1] - line[i - 1][1]) * t]; } d -= l; } return line[line.length - 1]; }
 const tmp = new THREE.Vector3();
@@ -1631,7 +1790,7 @@ renderer.setAnimationLoop(() => {
  if (cafe) { cafe.key.rotation.y = t; if (cafe.pop) { cafe.pop = Math.max(0, cafe.pop - dt * 1.5); const s = 1 + Math.sin(cafe.pop * Math.PI) * .15; cafe.g.scale.setScalar(s); } }
  if (!reduce) { const d = (t * 16) % (lineLen * 2), dir = d < lineLen ? 1 : -1, at = d < lineLen ? d : lineLen * 2 - d, [px, py] = onLine(at), [qx, qy] = onLine(at + dir * 5); train.position.set(X(px), land.heightAt(px, py) + 1, Z(py)); train.lookAt(X(qx), land.heightAt(px, py) + 1, Z(qy)); }
  dioFrame(dt, t);
- renderer.render(scene, camera);
+ WC.update(dt); WC.render(scene, camera);
  // pins and the bubble ride on their places (spatial layer)
  const r = stage.getBoundingClientRect(), camD = camera.position.distanceTo(tg);
  for (const id in pins) { const s = spotByID[id]; tmp.set(X(s.x), s.z + (s.far ? 160 : 26), Z(s.y)).project(camera); const on = tmp.z < 1 && Math.abs(tmp.x) < 1.05 && Math.abs(tmp.y) < 1.05; pins[id].style.left = (tmp.x + 1) / 2 * r.width + 'px'; pins[id].style.top = (1 - tmp.y) / 2 * r.height + 'px'; pins[id].classList.toggle('far', !on || (id.startsWith('dio-') !== viewDio) || (!s.far && camD > 9000)); }

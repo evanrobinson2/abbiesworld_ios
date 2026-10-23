@@ -16,6 +16,15 @@ from `worlds.template.html`). Model: `simulations/worlds/worlds.mjs` (test: `sim
 - Tour: yes, once there are two boards ("Pinch out to see all your worlds").
 - Next: library over the board store and pointer; pull-back camera past the region edge; land as a per-board choice.
 
+## Round 3 (Evan, 2026-10-23 19:40Z): worlds in orbs, and the ranch gate
+- Evan loved #11 "Worlds in orbs" (Cocoon) from the Inspiring Shaders study: "a fun unlock to a new world". Option D in the
+  prototype: a new world arrives as a glowing orb with the little world inside, earned or found, carried in the backpack, waiting
+  on a pedestal in the next free slot of the board of boards; lean in and the camera goes through the glass and the orb becomes a
+  new board. Model: `earnOrb`, `openOrb` in `boards.mjs` (made: 'orb'). Blank boards still come from the dashed hex.
+- The ranch gate (first in-game ride, ranch into town): a first version is on branch `claude/ranch-gate-ride` (not merged; the hex city thread
+  owns the town side now, per Evan 19:59Z, so it was handed over). It is a wooden gate with a painted house sign on the ranch board's rim;
+  tapping it walks the camera through and loads `/town?at=town:ranch-gate`. Not yet verified in a browser end to end.
+
 ## The ask, round 1 (Evan, 2026-10-23 17:30Z)
 "we still don't have a proper way to change worlds in the game ... do a study for the UX around that ... the final
 winchester region should a mega structure of 7 hexes in a greater hex ... carve the 3 regions roughly 33% each."

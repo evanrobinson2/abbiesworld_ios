@@ -1732,6 +1732,140 @@
       ],
       "recorded": "2026-10-23, by the study as it was made"
     },
+    "light": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: how it's drawn (identity.rendering on 368 games)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/rendering/RENDERING_STUDY.md",
+          "note": "Light families per game; used to pick the looks"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Tiny Glade",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=tiny-glade",
+          "note": "Applied: soft sky and ground bounce, no black shadows"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: GRIS",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=steam-683320",
+          "note": "Applied: flat pastel wash, one palette per chapter"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Outer Wilds",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=steam-753640",
+          "note": "Applied: hard sun with no air, campfire against cold night"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: DREDGE",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=steam-1562430",
+          "note": "Applied, tuned down: lantern pools for the Halloween mood"
+        },
+        {
+          "k": "devblog",
+          "t": "GDC 2016: Making the world of Firewatch (Jane Ng)",
+          "href": "https://media.gdcvault.com/gdc2016/Presentations/Ng_Jane_MakingTheWorld.pdf",
+          "note": "Applied: sky colours first, layered fog depth, time-of-day tables"
+        },
+        {
+          "k": "devblog",
+          "t": "Game Developer: vorticles and wind in Ghost of Tsushima",
+          "href": "https://www.gamedeveloper.com/design/using-vorticles-to-simulate-wind-in-i-ghost-of-tsushima-i-",
+          "note": "Read for the golden-hour world that the wind and light share"
+        },
+        {
+          "k": "devblog",
+          "t": "GDC 2024: 3D toon rendering in Hi-Fi Rush",
+          "href": "https://gdcvault.com/play/1034251/3D-Toon-Rendering-in-Hi",
+          "note": "Applied: hard bands and the world pulsing on the beat"
+        },
+        {
+          "k": "devblog",
+          "t": "Unity: crafting Dredge's cozy atmospheric horror",
+          "href": "https://unity.com/resources/crafting-dredge-cozy-atmospheric-horror",
+          "note": "Applied: fog and lantern pools, kept cosy"
+        },
+        {
+          "k": "devblog",
+          "t": "Game Developer: layering worlds in Cocoon",
+          "href": "https://www.gamedeveloper.com/design/the-challenges-of-laying-worlds-upon-worlds-in-puzzle-game-cocoon",
+          "note": "Applied: one colour and one light per world"
+        },
+        {
+          "k": "design",
+          "t": "Thumbsticks: GDC 2015, the art of Firewatch",
+          "href": "https://www.thumbsticks.com/gdc-2015-the-art-of-firewatch/"
+        },
+        {
+          "k": "design",
+          "t": "Mobius Digital: changing the Outer Wilds art style",
+          "href": "https://www.mobiusdigitalgames.com/news/changing-the-outer-wilds-art-style"
+        },
+        {
+          "k": "design",
+          "t": "Creative Review: Gris, watercolour comes to life",
+          "href": "https://www.creativereview.co.uk/watercolour-paintings-come-to-life-in-platform-game-gris/"
+        },
+        {
+          "k": "design",
+          "t": "80.lv: Tiny Glade lighting update",
+          "href": "https://80.lv/articles/tiny-glade-s-update-with-movable-clutter-multiple-lights-is-here"
+        },
+        {
+          "k": "design",
+          "t": "Muchopixels: Angus Doolan on Unpacking",
+          "href": "https://www.muchopixels.com/post/angus-doolan-interview",
+          "note": "Applied: warm window light as the room's clock"
+        },
+        {
+          "k": "design",
+          "t": "GamesBeat: Polyarc's Moss",
+          "href": "https://gamesbeat.com/polyarcs-moss-hides-clever-vr-game-design-under-its-cuteness/"
+        },
+        {
+          "k": "tutorial",
+          "t": "Alan Zucconi: Journey's sand shader, part 1",
+          "href": "https://www.alanzucconi.com/2019/10/08/journey-sand-shader-1/",
+          "note": "Applied: backlight, warm bounce, rim"
+        },
+        {
+          "k": "tutorial",
+          "t": "thatgamecompany: sand rendering in Journey (slides)",
+          "href": "https://slidetodoc.com/sand-rendering-in-journey-john-edwards-thatgamecompany-shipping/"
+        },
+        {
+          "k": "tutorial",
+          "t": "80.lv: the making of Hi-Fi Rush's toon style",
+          "href": "https://80.lv/articles/the-making-of-hi-fi-rush-s-3d-toon-rendering-style"
+        },
+        {
+          "k": "canon",
+          "t": "LOOK.md: the Abbie's World look",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/look/LOOK.md",
+          "note": "The sky behind every page; no masks, no vignette"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0045 Inspiring Shaders",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md",
+          "note": "Painted Brush, Watercolour and Paint-the-world pair with these lights"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0028 Storybook Light",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/storybook/STORYBOOK_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "This study's doc",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/light/LIGHT_STUDY.md"
+        }
+      ],
+      "recorded": "2026-10-23, as the study was made"
+    },
     "shaders": {
       "items": [
         {
@@ -2377,6 +2511,167 @@
           "t": "Pasted hero picture from Evan",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/tools/rig-cutout/example",
           "note": "the source of every part sprite"
+        }
+      ]
+    },
+    "watercolour": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Zelda: Breath of the Wild",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/zelda-breath-of-the-wild.json",
+          "note": "the identity record for the game this look is read from; the far world gets softer instead of more detailed"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: GRIS",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/gris.json",
+          "note": "watercolour as a whole-game language; colour carries the mood"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Dorfromantik",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dorfromantik.json",
+          "note": "a tile board seen from above in soft painted washes"
+        },
+        {
+          "k": "devblog",
+          "t": "Zelda: Breath of the Wild art director on the game's art style",
+          "href": "https://nintendoeverything.com/zelda-breath-of-the-wild-art-director-on-how-the-wind-waker-hd-shaped-the-games-art-style/",
+          "note": "why the world reads as a painted picture rather than a simulation of light"
+        },
+        {
+          "k": "design",
+          "t": "Inspiring Shaders, entry 6 (our study)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md",
+          "note": "the starting point: distance gets softer and more painted, it hides detail and adds mood"
+        },
+        {
+          "k": "tutorial",
+          "t": "Interactive watercolor rendering: tutorial (Bousseau, Inria)",
+          "href": "https://artis.inrialpes.fr/Membres/Adrien.Bousseau/watercolor_tutorial/tutorial2.pdf",
+          "note": "the ingredients we kept: abstraction into flat washes, pigment granulation, paper texture, edge darkening"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and GAME_FEEL: nothing masks the world",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "wash is capped and only grows with distance; no HUD or words added"
+        },
+        {
+          "k": "canon",
+          "t": "Painted Brush and the toon kit",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs",
+          "note": "the pass reads colour and depth only, so it composes with every material look and with Paint the world"
+        }
+      ]
+    },
+    "meshy-heroes": {
+      "use": [
+        "llm-3d-modeling"
+      ],
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Mass Effect: Andromeda",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=1238000",
+          "note": "many alien species read clearly from silhouette alone"
+        },
+        {
+          "k": "oracle",
+          "t": "Starfield",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=1716740",
+          "note": "one base body, shaped by sliders, takes any outfit"
+        },
+        {
+          "k": "oracle",
+          "t": "Fallout 4",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=377160",
+          "note": "body shape triangle; gear fits every body"
+        },
+        {
+          "k": "oracle",
+          "t": "Valheim",
+          "href": "https://abbies-game-oracle.vercel.app/game?id=892970",
+          "note": "low-poly faceted bodies that still read as heroes"
+        },
+        {
+          "k": "canon",
+          "t": "Base roster (40 PG bodies)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/BASE_ROSTER.md"
+        },
+        {
+          "k": "canon",
+          "t": "Moon heroes plan",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/PLAN.md"
+        },
+        {
+          "k": "canon",
+          "t": "Faceted Hero art direction (AW-STUDY-0029)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/ART_DIRECTION.html"
+        },
+        {
+          "k": "canon",
+          "t": "Bruiser scale pipeline and gear kit",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/bruiser-study/scale/README.md"
+        },
+        {
+          "k": "canon",
+          "t": "Bodies human canon",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/human-canon.json"
+        },
+        {
+          "k": "reference",
+          "t": "Meshy image-to-3D API",
+          "href": "https://docs.meshy.ai/en/api/image-to-3d"
+        },
+        {
+          "k": "tutorial",
+          "t": "Blender manual: armature skinning and weights",
+          "href": "https://docs.blender.org/manual/en/latest/animation/armatures/skinning/index.html"
+        }
+      ],
+      "recorded": "2026-10-23, recorded while drafting the roster"
+    },
+    "rigging": {
+      "file": "rigging/context.json",
+      "recorded": "2026-10-23, by the study as it was made"
+    },
+    "paint-world": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Splatoon 3 record (core loop, motion trick, 'paint the world as the score')",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/splatoon-3.json",
+          "note": "Style yes, expression never. Used the splash-hides-the-swap lesson for sprouts."
+        },
+        {
+          "k": "design",
+          "t": "New Frame Plus: How do Inkling transformations work? (transcript, from the Oracle record)",
+          "href": "https://amara.org/videos/0hbtI1ckjQff/info/how-do-inkling-transformations-work",
+          "note": "Applied: a short splash with overshoot hides the change"
+        },
+        {
+          "k": "reference",
+          "t": "Nintendo: Splatoon 3",
+          "href": "https://splatoon.nintendo.com/",
+          "note": "Look reference only; no art, names or sounds used"
+        },
+        {
+          "k": "canon",
+          "t": "Inspiring Shaders study, #5 Paint the world and #6 Watercolour distance",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and information grammar (diegetic first, one overlay: the card)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INFO_MANIFEST.md"
+        },
+        {
+          "k": "canon",
+          "t": "Cards v3 die-cut face (same renderer as the boost cards)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cards-v3/CARDS_V3.md"
         }
       ]
     }

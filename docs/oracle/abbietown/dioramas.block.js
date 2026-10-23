@@ -3,17 +3,17 @@
 // real land (heights, lakes, main roads, the real mix of houses) squeezed to a fifth of a mile across, with the real
 // places pushed together and built big. Each has its own look and its own pulled-back camera. The three sit as the three
 // regions of the seven-hex structure, beyond the east edge of the real town.
-const DIO_R = 105, DIO_N = 44, DIO_ORIGIN = [land.W + 3600, land.D / 2]; // tile circumradius, lattice rings, where the trio's middle is (map metres)
+const DIO_R = 105, DIO_N = 66, DIO_ORIGIN = [land.W + 3600, land.D / 2]; // tile circumradius, lattice rings, where the trio's middle is (map metres)
 const DIOS = [
- {id: 'downtown', name: 'Downtown', bearing: 180, centre: [4340, 1640], R: 900, vex: 2.4, pin: '⛪', heroes: ['common', 'cafe', 'comellas', 'hoagies', 'lab', 'ginn'],
+ {id: 'downtown', name: 'Downtown', bearing: 180, centre: [4340, 1640], R: 900, vex: 2.4, pin: '⛪', heroes: ['common', 'cafe', 'comellas', 'hoagies', 'lab'],
   look: {bg: '#f3dcbd', sun: '#ffd49a', sunI: 2.7, sunDir: [-520, 520, 620], sky: '#ffe9cf', gnd: '#8a6a4a', hemiI: 1.05, grass: ['#7fa14f', '#a8b45e'], soil: '#8a5a3a', fov: 32, dist: 250, azimuth: 205, lowPitch: 20, highPitch: 54,
-   mood: 'a late-afternoon square, brass and brick'}},
+   mood: 'a late-afternoon square, brass and brick', wash: 'downtown'}},
  {id: 'anis-side', name: "Ani's side", bearing: 300, centre: [3180, 3020], R: 820, vex: 3.4, pin: '\u{1F986}', heroes: ['horn', 'ani'],
   look: {bg: '#cfe8f1', sun: '#eef4ff', sunI: 2.0, sunDir: [420, 900, -380], sky: '#dff1ff', gnd: '#4d6a5c', hemiI: 1.3, grass: ['#64a07c', '#8bb86a'], soil: '#5d6b4a', fov: 48, dist: 330, azimuth: 150, lowPitch: 30, highPitch: 70,
-   mood: 'a cool bright morning by the pond, wide and airy'}},
+   mood: 'a cool bright morning by the pond, wide and airy', wash: 'anis-side'}},
  {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 60, centre: [4930, 3440], R: 820, vex: 2.8, pin: '\u{1F3E1}', heroes: ['home', 'muraco', 'leonard'], houses: 9,
   look: {bg: '#f6c4ad', sun: '#ff9d6a', sunI: 2.9, sunDir: [-800, 360, 120], sky: '#ffd5c2', gnd: '#7a4a5a', hemiI: 1.0, grass: ['#c2a447', '#d98a45'], soil: '#7a4a3a', fov: 40, dist: 300, azimuth: 235, lowPitch: 38, highPitch: 78,
-   mood: 'a sunset hill, almost a board seen from above'}},
+   mood: 'a sunset hill, almost a board seen from above', wash: 'abbie-daddy-side'}},
 ];
 // hero places: model scale on the tile, footprint radius for the layout, and whether the place hugs the street
 const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
@@ -124,11 +124,14 @@ function buildDiorama(d, ti) {
   const chim = mine.filter(h => h.chimney); grp.add(inst(boxGeo, plainMat, chim, h => { const a = yaw(h), o = h.w * HS * .32; v3.set(h.px + Math.cos(a) * o, h.hz + h.h * HS, -h.py - Math.sin(a) * o); q.setFromEuler(e.set(0, a, 0)); sc.set(.9, h.d * HS * .5 * h.pitch + 1.8, .9); col.set('#8a4a36'); })); }
  // 8 trees, thinned, in the zone's colours
  { const T = [], spots = taken.slice(); for (const t of town.trees) { const px = (t.x - d.centre[0]) / scl, py = (t.y - d.centre[1]) / scl; if (!inHex(px, py, DIO_R * .94) || !isNaN(waterY(px, py))) continue; const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 2) continue;
-   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 5 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 150) break; }
+   if (spots.some(o => Math.hypot(o.x - px, o.y - py) < (o.tree ? 3.2 : (o.r || 8) * .8))) continue; spots.push({x: px, y: py, tree: 1}); T.push({...t, px, py, hz: hf(px, py)}); if (T.length > 420) break; }
   const grp = new THREE.Group(), broad = T.filter(t => t.kind !== 'pine'), pine = T.filter(t => t.kind === 'pine'), tint = new THREE.Color(L.grass[1]);
-  grp.add(inst(trunkGeo, plainMat, broad, t => { v3.set(t.px, t.hz, -t.py); q.identity(); sc.set(.7 * t.s, 2.6 * t.s, .7 * t.s); col.set('#6b4f36'); }));
-  grp.add(inst(crownGeo, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
-  grp.add(inst(pineGeo, leafMat, pine, t => { v3.set(t.px, t.hz + .4, -t.py); q.identity(); sc.set(1.9 * t.s, 8 * t.s, 1.9 * t.s); col.set(t.c); })); out.add(grp); }
+  grp.add(inst(TREE_HI.trunk, plainMat, broad, t => { v3.set(t.px, t.hz, -t.py); q.identity(); sc.set(.7 * t.s, 2.6 * t.s, .7 * t.s); col.set('#6b4f36'); }));
+  grp.add(inst(TREE_HI.crown, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
+  grp.add(inst(TREE_HI.pine, leafMat, pine, t => { v3.set(t.px, t.hz + .4, -t.py); q.identity(); sc.set(1.9 * t.s, 8 * t.s, 1.9 * t.s); col.set(t.c); })); out.add(grp); }
+ { const poles = [], heads = []; for (const r of mainR) walk(r, 30, (x, y, tx, ty) => { if (!inHex(x, y, DIO_R * .9) || !isNaN(waterY(x, y))) return; const s = poles.length % 2 ? 1 : -1, px = x - ty * s * 4.2, py = y + tx * s * 4.2; if (taken.some(t => Math.hypot(t.x - px, t.y - py) < (t.r || 6) * .5)) return; poles.push({px, py, hz: hf(px, py)}); });
+  const lg = new THREE.Group(), pm = new THREE.MeshStandardMaterial({color: '#2f3a3a', roughness: .6}), hm = new THREE.MeshStandardMaterial({color: '#ffe3a0', emissive: '#ffcf70', emissiveIntensity: .9});
+  lg.add(inst(HK.cyl, pm, poles, p => { v3.set(p.px, p.hz, -p.py); q.identity(); sc.set(.12, 3.8, .12); col.set('#ffffff'); }), inst(new THREE.IcosahedronGeometry(1, 1), hm, poles, p => { v3.set(p.px, p.hz + 4, -p.py); q.identity(); sc.set(.42, .5, .42); col.set('#ffffff'); }), inst(boxGeo, pm, poles, p => { v3.set(p.px, p.hz + 3.7, -p.py); q.identity(); sc.set(.6, .1, .6); col.set('#ffffff'); })); out.add(lg); }
  // 9 what only this place has
  DRESS[d.id]?.(out, {hf, pads, roads, nearRoad, waterY, mainR, verts, taken, gb, cds});
  return {group: out, hf, pads, tile: tileC, roads, verts};
@@ -171,6 +174,12 @@ function waterMaterial() { // shallow turquoise to deep blue by depth, a foam li
    .replace('#include <opaque_fragment>', `float gl = pow(max(0.0, sin(vWP.x * 5.0 + uWT * 2.2) * sin(vWP.z * 4.6 - uWT * 1.8)), 9.0) * .28; outgoingLight += vec3(gl);
     #include <opaque_fragment>`); };
  return m; }
+
+// hi-fi low-poly trees: lumpy multi-blob crowns, tiered pines, tapered trunks (shared by every tile)
+const TREE_HI = (() => { const jit = (g, k) => { const p = g.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), n = 1 + .13 * Math.sin(x * 5.1 + k) * Math.cos(z * 4.3 + y * 3.7 + k); p.setXYZ(i, x * n, y * n, z * n); } g.computeVertexNormals(); return g; };
+ const blob = (x, y, z, r, k) => jit(new THREE.IcosahedronGeometry(r, 1), k).translate(x, y, z), cone = (r, h, y) => new THREE.ConeGeometry(r, h, 10).translate(0, y + h / 2, 0);
+ return {crown: merge([blob(0, 0, 0, 1, 0), blob(.68, -.22, .2, .72, 2), blob(-.62, -.3, -.28, .76, 4), blob(.1, .55, -.42, .62, 6), blob(-.15, .4, .5, .55, 8)]),
+  pine: merge([cone(1, .42, 0), cone(.8, .38, .26), cone(.6, .34, .5), cone(.38, .3, .72)]), trunk: new THREE.CylinderGeometry(.16, .3, 1, 8).translate(0, .5, 0)}; })();
 const dioCafes = [];
 
 // ---- what only each place has ----
@@ -225,8 +234,8 @@ const DRESS = {
 // ---- the view: each region has its own opinion about the pulled-back view (palette, light, lens, tilt, distance) ----
 // The pitch-by-zoom curve is the open-land camera's (simulations/land-camera.mjs, AW-STUDY-0018), tuned for each region.
 const ORDER_DIO = ['dio-trio', 'dio-downtown', 'dio-anis-side', 'dio-abbie-daddy-side'];
-const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42};
-const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70};
+const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42, wash: 'real'};
+const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70, wash: 'trio'};
 let viewDio = false, look = LOOK_REAL, dragging = false; const dioC = new THREE.Color(), dioV = new THREE.Vector3(), rad = a => a * Math.PI / 180;
 const pitchFor = (dist, L) => rad(L.lowPitch + (L.highPitch - L.lowPitch) * Math.pow(Math.max(0, Math.min(1, Math.log(dist / 40) / Math.log(760 / 40))), .8));
 canvas.addEventListener('pointerdown', () => { dragging = true; }); addEventListener('pointerup', () => { dragging = false; });
@@ -251,6 +260,7 @@ document.getElementById('dio').onclick = () => setView(!viewDio);
 function dioFrame(dt, t) {
  waterU.uWT.value = t;
  const k = 1 - Math.exp(-dt * 3.5), L = look;
+ if (WC.zone !== (L.wash || 'off')) WC.setZone(L.wash || 'off'); // each zone's opinion about its own distance
  scene.background.lerp(dioC.set(L.bg), k); hemi.color.lerp(dioC.set(L.sky), k); hemi.groundColor.lerp(dioC.set(L.gnd), k); sun.color.lerp(dioC.set(L.sun), k);
  sun.intensity += (L.sunI - sun.intensity) * k; hemi.intensity += (L.hemiI - hemi.intensity) * k; sunDir.lerp(dioV.set(...L.sunDir), k);
  if (Math.abs(camera.fov - L.fov) > .05) { camera.fov += (L.fov - camera.fov) * k; camera.updateProjectionMatrix(); }
