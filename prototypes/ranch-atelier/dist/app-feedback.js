@@ -46,9 +46,7 @@
   .afb-note{width:100%;box-sizing:border-box;min-height:84px;margin-top:8px;padding:10px 12px;border-radius:14px;border:1px solid var(--app-border,#ded5b2);background:#fff;color:inherit;font:16px/1.4 var(--app-font,system-ui,sans-serif);resize:vertical}
   .afb-to{font-size:12px;color:var(--app-muted,#797058);margin-top:6px}
   .afb-toast{position:fixed;z-index:10030;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 24px);background:var(--app-ink,#4c4330);color:#fff;padding:12px 18px;border-radius:16px;font:700 14px var(--app-font,system-ui,sans-serif);box-shadow:0 10px 30px #0004}
-  .afb-new{position:absolute;z-index:2;top:22px;left:-42px;width:170px;transform:rotate(-45deg);background:var(--app-accent,#b64932);color:#fff;text-align:center;font:900 17px/1 var(--app-font,system-ui,sans-serif);letter-spacing:.18em;padding:8px 0;box-shadow:0 4px 12px #2b281f55;pointer-events:none;animation:afb-pop .5s .25s cubic-bezier(.2,.9,.3,1.4) both}
-  @keyframes afb-pop{from{opacity:0;transform:rotate(-45deg) scale(.4)}}
-  @media (prefers-reduced-motion:reduce){.afb-card,.afb-sheet,.afb-new{animation:none}}`;
+  @media (prefers-reduced-motion:reduce){.afb-card,.afb-sheet{animation:none}}`;
   head.append(el('style', { 'data-feedback-ui': '' }, css));
 
   // 2. New version watcher.
@@ -74,8 +72,6 @@
         el('button', { class: 'afb-btn', type: 'button', text: primary ? 'Later' : 'Close', onclick: () => { card?.remove(); card = null; onClose?.(); } }),
         ...(primary ? [el('button', { class: 'afb-btn primary', type: 'button', text: primary, onclick: onPrimary })] : [])));
     card = el('section', { class: 'afb-card', role: 'status', 'aria-live': 'polite', 'data-feedback-ui': '' });
-    // A NEW sash across the corner (Evan, 2026-10-23 04:47Z: "put a NEW banner!!").
-    card.append(el('div', { class: 'afb-new', 'aria-hidden': 'true', text: 'NEW' }));
     if (entry?.image) card.append(el('img', { class: 'afb-pic', src: entry.image, alt: entry.title || 'What changed' }));
     card.append(body);
     document.body.append(card);
