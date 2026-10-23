@@ -68,3 +68,9 @@ The old badge stays as "Abbie's Ranch", the place.
 ## Model page, tighter (Evan, 2026-10-23 03:48Z)
 Labels sit inset inside the frames; the Reject, Chat and Keep cluster sits right under the two squares (not pinned to the screen
 bottom); less padding everywhere.
+
+## Coming alive (Evan, 2026-10-23 03:51-03:52Z)
+"It indicates a transformation from a picture and description of a thing to the thing itself, coming alive out of the picture."
+- The inspiration is a print: the image and its prompt share one frame. The model has no frame and stands free on the page.
+- Labels ("Inspiration", "Model") use the title's type, Title Case, no chips or shadows. Names are Title Case.
+- The model appears with a 0.5 s laser print, bottom to top (skipped under reduced motion).
