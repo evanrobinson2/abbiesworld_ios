@@ -2,6 +2,37 @@
   "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md.",
   "items": [
     {
+      "id": "paper-man-1",
+      "at": "2026-10-23T04:45:00Z",
+      "title": "Paper man #1, round 2",
+      "ask": "Round 2: re-measured from your pick, with heavier shoulders, arms and thighs. It's closer, but the folds are still softer than your pick. Your new picks (man 3, woman 2) are being built the same way.",
+      "thread": "Roman model study",
+      "before": "img/paper-man-1-pick.jpg",
+      "after": "img/paper-man-1-model.jpg",
+      "glb": "3d/paper-man-1.glb",
+      "link": "https://ranch.abbies.world/studies/#bodies",
+      "linkLabel": "Paper bodies",
+      "status": "waiting"
+    },
+    {
+      "id": "paper-woman-2",
+      "at": "2026-10-23T04:44:30Z",
+      "title": "Heroic woman 2",
+      "ask": "Being modelled from your pick now, with smaller shoulder bulbs.",
+      "thread": "Roman model study",
+      "image": "img/paper-woman-2-pick.jpg",
+      "status": "coming"
+    },
+    {
+      "id": "paper-man-3",
+      "at": "2026-10-23T04:44:00Z",
+      "title": "Paper man 3",
+      "ask": "Being modelled from your pick now.",
+      "thread": "Roman model study",
+      "image": "img/paper-man-3-pick.jpg",
+      "status": "coming"
+    },
+    {
       "id": "ranch-remaster-wave-1",
       "at": "2026-10-23T04:35:00Z",
       "title": "Ranch remaster, wave 1",
@@ -25,19 +56,6 @@
       "status": "waiting"
     },
     {
-      "id": "paper-man-1",
-      "at": "2026-10-23T04:30:00Z",
-      "title": "Paper man #1",
-      "ask": "Does the paper man match your pick? Keep it, or say what's off.",
-      "thread": "Roman model study",
-      "before": "img/paper-man-1-pick.jpg",
-      "after": "img/paper-man-1-model.jpg",
-      "glb": "3d/paper-man-1.glb",
-      "link": "https://claude.ai/artifact/MJ7asT8iPXEmhtHfELHbMc",
-      "linkLabel": "Figure picks",
-      "status": "waiting"
-    },
-    {
       "id": "park-proofs",
       "at": "2026-10-23T04:24:00Z",
       "title": "The park, Midjourney proofs",
@@ -54,7 +72,7 @@
       "image": "img/paper-bodies.jpg",
       "link": "https://claude.ai/artifact/MJ7asT8iPXEmhtHfELHbMc",
       "linkLabel": "Figure picks",
-      "status": "waiting"
+      "status": "done"
     },
     {
       "id": "abbies-world-score",
