@@ -13,8 +13,7 @@ export const ENTRANCES = {
   'town:cafe-cellar': {name: 'Cellar bulkhead', kind: 'door', region: 'downtown', scene: 'cafe-curb', via: 'town:cafe-door', url: '/studies/basement/play.html?from=cafe', needs: {item: 'cafe-key'}, owner: 'AW-STUDY-0024',
     unlock: "localStorage 'aw-basement-unlocked' (simulations/cafe-key.mjs)", back: '/studies/cafe/diorama.html?from=basement',
     note: 'Reached from inside the café. The basement returns to the café diorama, and the café front door returns to the town.'},
-  'town:lab-door': {name: 'Lab door', kind: 'door', region: 'downtown', scene: 'lab-door', url: `/science-lab?from=${encodeURIComponent(backUrl('town:lab-door'))}`, owner: 'science-lab',
-    grants: ['tardigrade charm', "coin 'science-lab:off-the-slide'"]},
+  // 'town:lab-door' (the science lab beaker) is parked: Evan took the cell game off the town on 2026-10-23 ("it's not ready"; the science adventure becomes the high school game after Moon Base). The game's code stays; to bring it back, restore the 'lab' hero in dioramas.block.js and this entrance.
   'town:truck': {name: 'The black truck', kind: 'stage', region: 'downtown', scene: 'bakery-curb', needs: {crew: true}, module: 'moon-mission', owner: 'AW-STUDY-0036',
     note: 'The mission mounts on AbbieTown.stage at the café curb; its scenes are registered with AbbieTown.registerScene.'},
   'town:launch': {name: 'Launch', kind: 'stage', region: 'abbie-daddy-side', scene: 'launch-pad', module: 'moon-mission', owner: 'AW-STUDY-0036',
