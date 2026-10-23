@@ -29,7 +29,7 @@ shared pieces `simulations/coin-reward.mjs` (the gold coin moment) and `simulati
 - Busted = a grown-up's shout, then you start the climb again. Tired = you slide gently down. Nobody falls or gets hurt.
 - Seen = in a headlight. The car's beam is a real shadow-casting spot, so the light you see is exactly the rule:
   if it's on you they see you, and anything that shadows you hides you.
-- Pixel look throughout (render at 24% on the climb, 40% on the roof so the street reads).
+- Pixel look throughout (round two renders at 45% on both the climb and the roof so the painterly dusk reads).
 - Tour: false for now (a study, not yet a door in the world).
 
 ## Design card
@@ -40,7 +40,36 @@ shared pieces `simulations/coin-reward.mjs` (the gold coin moment) and `simulati
 - Who it's for: the player (the child).
 - The whole game adapts: dusk deepens over four minutes; windows warm up as the sky darkens.
 
+## Round two (Evan, 2026-10-23 09:30-09:36Z)
+In his words: "cars travel diagonally from top right to bottom left across the front. upgrade everything to game ready
+including pick up mechanics and score for user. meta for getting caught ... make the cars much more dramatic and make
+the climb feel cartoonishly far - and use click to latch and click to unlatch - crossover isn't allowed ... start by
+walking your dog. and then you throw the ball against the wall, after each time the dog barks and user says oh you want
+it further do ya bub, then throws it harder, and on the third one it goes to the roof." "Like Annapurna games." "Put it
+through a full game development process ... we need better assets."
+New direction (09:36Z, his picture: side-on painterly golden dusk, a kid in a red cap, white tee and red shorts on the
+brick by a drainpipe, a shaggy golden dog below, a station wagon's headlights): "do same top as current, but make the
+cars move slower, give only 2 barriers, make it really obvious, make the lights go all the way to player and use meta
+to make us FEEL the burning lights" of getting caught.
+
+What changed:
+- Intro: walk bub on the leash; three throws at the wall, each harder; the third lands on the roof.
+- The climb is side-on (his picture), the kid visible on the wall, a tall wall of door, grate, drainpipe brackets,
+  conduit clamps and the phone box. Click to latch, click to unlatch; hands never cross; you can't let go of your last
+  hand in mid-air. Stamina drains on one hand and recovers on two.
+- Roof: two big barriers only (a brick wall and the big air handler). Pick up by walking over a ball (carry three),
+  tap bub to throw. Score chip (balls, coins, points) in one glass pill; +N pops on the thing that scored.
+- Cars: station wagons, every 16 s, slow, travelling diagonally top-right to bottom-left on screen. A visible light
+  shaft runs from the headlights all the way to the player; the beam is still the shadow-casting seen rule.
+- Getting caught (meta): exposure and warm glare climb (capped below a whiteout: nothing masks the world), a high
+  whine, heartbeat, camera push-in, shake and slow motion; the kid shields their eyes.
+- Concept proofs (Midjourney, Evan's Mac): key art, roof, wall, first person, characters. Job ids and picks in
+  `tools/midjourney/outputs/school-jump-concepts/provenance.json`; the study page shows them.
+- Next for assets: turnarounds of the kid and bub, wall pieces, rooftop props and the station wagon from the picks,
+  built as hero low-poly recipes per `tools/ranch-rebuild/MODELER.md`.
+
 ## Still to do
+- Asset pass from the concept picks (kid, bub, station wagon, wall kit, roof props).
 - The alternate ending (waiting on Evan).
 - Grace's basement can call `coinReward()` for its ten coins (owned by that thread).
 
