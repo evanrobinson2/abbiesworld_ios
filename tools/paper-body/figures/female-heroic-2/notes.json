@@ -1,0 +1,12 @@
+{
+  "asset": "female-heroic-2",
+  "request": "Evan, 2026-10-23 04:39Z: model female-base-heroic_2 (job d9420c89, index 2) \"but reduce the female shoulder bulbs\"",
+  "deliberate_changes_from_pick": [
+    "Shoulder caps are about 65% of the pick's bulge (build.py SHOULDER_SCALE = 0.65): about 42 px half-width instead of 52, tucked over the arm line instead of reaching out to x=247 and up to y=235. The silhouette at the shoulders is narrower than the pick on purpose."
+  ],
+  "rounds": [
+    {"round": 1, "date": "2026-10-23", "score_iou": 0.894, "triangles": 2824,
+     "notes": "Built from per-row mask runs of the pick: torso rings (waist read from the mask), shoulder caps, separate upper arm, elbow strap, forearm bracer, hand, thigh, knee band, shin and pointed turned-out feet. The halter sports top and the boy-short briefs are separate Cloth parts; folded seams (under-band, cup edges, straps and leg-hole edges) let them read from the front. The bust is two folded lobes under the top. Gaps: the pick's crisp diagonal folds on the thighs, the bracer flaps and the halter collar are only roughly there, and the lobes read faintly from the front."}
+  ],
+  "shot": "r/shot.png (tools/paper-body/figures/shot.py, the same camera as every figure)"
+}
