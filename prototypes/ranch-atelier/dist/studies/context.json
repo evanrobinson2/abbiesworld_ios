@@ -2142,6 +2142,18 @@
      "t": "Family Teleport (/teleport)",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/teleport",
      "note": "arrival feel in the existing toy"
+    },
+    {
+     "k": "reference",
+     "t": "Board storage today (card-library.js) and the ◎ World menu (board3.js)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/card-library.js",
+     "note": "boards are stored by id with one 'current' pointer; the Basin is ?world=basin"
+    },
+    {
+     "k": "oracle",
+     "t": "Townscaper",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=1291340",
+     "note": "many small builds you open and keep; no save screens"
     }
    ]
   }

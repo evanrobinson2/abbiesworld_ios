@@ -122,6 +122,22 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
 .todo li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:10px}
 .todo li:before{content:counter(s);font:700 15px var(--mono);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--maple);color:#fff}
 @media (prefers-reduced-motion:reduce){.gate.hot .halo,.wobble,.vote,.pop{animation:none}}
+.signinput{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:min(60%,300px);text-align:center;font:700 17px var(--body);color:#fff8e6;background:#8b5a2b;border:3px solid #6b4220;border-radius:10px;padding:7px 10px;box-shadow:0 4px 10px #0004}
+.signinput:focus-visible{outline:3px solid #fff}
+.shelf{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:none;gap:10px;padding:10px 14px;border-radius:12px;background:linear-gradient(#a56c34,#8b5a2b);box-shadow:0 6px 14px #0005;max-width:94%;overflow-x:auto}
+.shelf button{all:unset;cursor:pointer;width:64px;height:64px;border-radius:12px;background:#0002;position:relative}
+.shelf button[aria-current=true]{outline:3px solid #fff}
+.shelf svg{width:100%;height:100%}
+.bpanel{position:absolute;right:10px;top:58px;display:none;flex-direction:column;gap:6px;width:min(60%,270px);max-height:80%;overflow:auto;padding:10px;border-radius:18px;background:rgba(255,255,255,.62);backdrop-filter:blur(4px);box-shadow:inset 0 1px 0 #fff9,0 8px 24px #0004;color:#222;font-size:14px}
+.bpanel.on{display:flex}
+.bpanel .row{all:unset;cursor:pointer;display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:center;padding:4px;border-radius:12px}
+.bpanel .row[aria-current=true]{background:#fff9}
+.bpanel .row svg{width:44px;height:44px}
+.bpanel small{color:#555}
+[data-bopt="A"] .shelf{display:flex}
+[data-bopt="C"] #bmenu{display:grid!important}
+[data-bopt="B"] #bzoom{display:grid!important}
+[data-bopt="A"] #bzoom,[data-bopt="C"] #bzoom{display:none!important}
 </style>
 
 <div class="page">
@@ -130,17 +146,73 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
 <header>
  <span class="eyebrow">AW-STUDY-0048 · UX · Evan, 2026-10-23</span>
  <h1>Changing worlds</h1>
- <p class="lede">Rooms are doors. Worlds are rides. The map is a memory, not a menu. You carry one backpack everywhere, and every way there is the same way back.</p>
+ <p class="lede">A world is a whole board. People need to switch which board is shown, start a new one, name it and keep them all. Pull back and your boards are hexes of a bigger board; tap one and you land in it.</p>
  <div class="rule">
-  <div><b>Recommended: doorways and rides</b>The truck, the train, the ranch gate and the rocket port carry you between worlds. The tile and the map are not extra menus: the tile is how a <em>new</em> world arrives, the map is a backpack page that lights only places you have been.</div>
-  <div><b>Why it fits the canon</b>A character would know how to leave a place (a door, a truck, a bell). Nothing masks the world, so the camera goes <em>through</em> the way; there is no white fade and no loading card.</div>
-  <div><b>Tour: yes</b>Once a second world is playable, the tour gets one line: "The black truck takes you out of town." Written as <code>"tour": true</code> on the whats-new entry.</div>
+  <div><b>Recommended: zoom out to the board of boards</b>The same camera and the same hexes as the tiles. A dashed hex beside your boards is the next new board; each board wears its name on a painted sign. The ◎ World menu keeps a Boards list as the grown-up page.</div>
+  <div><b>New, copy, name, keep</b>New boards start blank, as a copy (the original never changes) or on another land such as the Basin. Everything saves by itself. A board goes to the attic, never the bin, and you cannot put your last board away.</div>
+  <div><b>Tour: yes</b>Once there are two boards: "Pinch out to see all your worlds." The earlier travel work (doors, rides, the family TV) stays below as its own section.</div>
  </div>
 </header>
 
+<section id="boards">
+ <span class="eyebrow">Switching boards</span>
+ <h2>Your boards, and a way to make a new one</h2>
+ <p>Today the sandbox has one saved board. Boards are already stored under their own ids (<code>card-library.js</code>), and a single "current" pointer says which one is shown, so more than one board needs a library, a pointer move and a way to see them. The land is a separate choice: <code>?world=basin</code> swaps the floor, and a board can stand on either. The prototype shows three ways to switch. Tap a tile on the board to place one, then switch away and back: nothing is lost.</p>
+ <div class="ctl">
+  <div class="seg" id="bopts" role="group" aria-label="Switching option">
+   <button data-o="A" aria-pressed="false">A. Shelf of boards</button><button data-o="B" aria-pressed="true">B. Zoom out to the board of boards</button><button data-o="C" aria-pressed="false">C. Boards in the World menu</button>
+  </div>
+ </div>
+ <div class="ctl">
+  <button class="btn" id="bnew">New blank board</button>
+  <button class="btn" id="bcopy">Copy this board</button>
+  <button class="btn" id="bbasin">New board in the Basin</button>
+  <button class="btn" id="barch">Put this board in the attic</button>
+  <button class="btn" id="brest">Bring one back</button>
+  <button class="btn" id="breset">Start over</button>
+ </div>
+ <div class="lab" data-bopt="B" id="blab">
+  <div class="stagebox" id="bstage" style="aspect-ratio:1000/700">
+   <svg id="bsvg" viewBox="-500 -350 1000 700" role="img" aria-label="Playable prototype of switching boards"></svg>
+   <input id="bname" class="signinput" maxlength="32" aria-label="Board name" autocomplete="off">
+   <button class="mapbtn" id="bzoom" aria-label="Zoom out to all boards" style="display:grid"></button>
+   <button class="mapbtn" id="bmenu" aria-label="World menu" style="display:none;left:auto;right:10px;bottom:auto;top:10px"></button>
+   <div class="shelf" id="bshelf"></div>
+   <div class="bpanel" id="bpanel"></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+   <div class="card" style="gap:6px"><span class="badge" id="bwhich"></span><p id="bsays"></p></div>
+   <div>
+    <small class="muted" style="font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase">What just happened, by information mode</small>
+    <ul class="log" id="blog"></ul>
+   </div>
+  </div>
+ </div>
+ <div class="cards">
+  <div class="card"><span class="badge">A · Shelf</span><h3>Boards on a shelf</h3>
+   <p>The board sits on a table. A shelf at the edge holds miniatures of your other boards and an empty frame. Tap a miniature and the table slides to that board.</p>
+   <ul><li>Diegetic and instantly understood: boards are objects.</li><li>Fits three or four boards; ten crowd the shelf.</li><li>A frame on the shelf is the new-board button.</li></ul></div>
+  <div class="card pick"><span class="badge">B · Recommended</span><h3>Pull back to the board of boards</h3>
+   <p>Pinch or scroll out past the edge of your board and every board is one hex of a bigger board, each with its painted name. A ghost hex beside them is the next new board. Tap a hex and the camera lands in it.</p>
+   <ul><li>No menu: it is the same camera and the same hex grammar as the tiles, and the same idea as Winchester's seven hexes.</li><li>Scales from two boards to thirty; the map never reshuffles, each board keeps its slot.</li><li>The new board is where you can see it will go.</li></ul></div>
+  <div class="card"><span class="badge">C · World menu</span><h3>A Boards list</h3>
+   <p>The existing ◎ World menu gets a Boards page: thumbnail, name, land, tile count, and a New row. It is how most apps do it.</p>
+   <ul><li>Precise and quick to build, and good for a grown-up's rename and clean-up.</li><li>An overlay: it leaves the world and shows rows, not places.</li><li>Keep it as the grown-up page behind B, not the first thing a child meets.</li></ul></div>
+ </div>
+ <div class="share">
+  <div style="--c:var(--pond)"><b>Start a new board</b>Three ways, all from the empty hex or the New button: a blank clearing, a copy of the board you are on (the original never changes, and the copy remembers where it came from), or a blank board on another land such as the Basin. A new board is shown at once, ready for the first tile.</div>
+  <div style="--c:var(--pink)"><b>Name it</b>The name lives on a painted wooden sign over the board, in the Ranch's materials. Tap the sign to type. Names are trimmed to 32 letters and unique; a new board starts as "A place of your own".</div>
+  <div style="--c:var(--lawn)"><b>Keep it</b>Every change saves on its own, as today. Switching only moves the "current" pointer, so nothing is overwritten and every board keeps its own undo history.</div>
+  <div style="--c:var(--gold)"><b>Put it away</b>A board is never deleted by one tap. It goes to the attic and Bring one back returns it. You can never put your last board away.</div>
+ </div>
+ <p class="muted" style="font-size:14px">The model is <code>simulations/worlds/boards.mjs</code> (new, copy, rename, place, attic, the stable board map) with tests. Mapping to the game: the library is a list of the board ids already in the <code>boards</code> store; <code>pointerOf(library)</code> is the existing <code>current</code> pointer. Tour: yes, once there are two boards: "Pinch out to see all your worlds."</p>
+</section>
+
+
+
 <section id="try">
- <span class="eyebrow">Try it</span>
- <h2>One prototype, three ways to travel</h2>
+ <span class="eyebrow">Round 1 · travel between places</span>
+ <h2>Doors for rooms, rides for worlds</h2>
  <p>Tap the café key over the shop, then the cellar bulkhead. Take the black truck to Launch, then the pink rocket to the Moon base. Switch the option and do it again. Turn on <b>Family TV</b> to see what the crew sees.</p>
  <div class="ctl">
   <div class="seg" id="opts" role="group" aria-label="Option">
@@ -266,7 +338,11 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
  <span class="eyebrow">Plan</span>
  <h2>What to build, in order</h2>
  <ol class="todo">
-  <li><div><b>Land the model.</b> <code>simulations/worlds/worlds.mjs</code> (gates, first-arrival rewards, crew, vote) with its test. Done in this study; the Moon Mission thread can read the same file for Main Street, Launch and Moon base.</div></li>
+  <li><div><b>Boards library.</b> <code>simulations/worlds/boards.mjs</code> sits on the existing board store: list the saved board ids, move the <code>current</code> pointer, new / copy / rename / attic. No change to how a single board saves.</div></li>
+  <li><div><b>Zoom out in the sandbox.</b> Past the region edge the camera pulls back to the board of boards, with painted signs and the dashed new-board hex. Keep the ◎ World menu Boards page as the grown-up route.</div></li>
+  <li><div><b>Land as its own choice.</b> Fold <code>?world=basin</code> into a per-board land, so one set of tiles can stand on the Ranch floor or in the Basin.</div></li>
+  <li><div><b>Then travel.</b> The model for doors and rides is <code>worlds.mjs</code>; the black truck is the first ride.</div></li>
+  <li><div><b>Land the travel model.</b> <code>simulations/worlds/worlds.mjs</code> (gates, first-arrival rewards, crew, vote) with its test. Done in this study; the Moon Mission thread can read the same file for Main Street, Launch and Moon base.</div></li>
   <li><div><b>Make the backpack travel.</b> Items and the visited list join coins and charms in the account-backed store, so a second page of the game sees the same backpack.</div></li>
   <li><div><b>One ride first: the black truck.</b> Café curb to Launch, with the cutscene, the rocket tile drop and the crew's job presses. Everything else copies it.</div></li>
   <li><div><b>Doors next.</b> Cellar bulkhead (needs the key), Muraco door, lab door: each pairs two existing pages with the camera-through move.</div></li>
@@ -297,13 +373,13 @@ code{font:500 13px var(--mono);background:color-mix(in srgb,var(--paper) 60%,var
 .ctx-foot a{color:inherit}
 </style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
   <p class="ctx-lead">What this study drew on.</p>
-  <details class="ctx-kind"><summary><b>Oracle consultation</b><i>7</i></summary>
-   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/zelda-breath-of-the-wild.json" target="_blank" rel="noopener">Zelda: Breath of the Wild</a><small>fast travel only to places you have touched: a map is earned</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=753640" target="_blank" rel="noopener">Outer Wilds</a><small>travel is physical and is the game; too slow for every trip, right for the rocket&#39;s first flight</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=275850" target="_blank" rel="noopener">No Man&#39;s Sky</a><small>the ship is the diegetic menu, the galaxy map only chooses</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=1145360" target="_blank" rel="noopener">Hades</a><small>doors that show what is behind them; one home that always catches you</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=1055540" target="_blank" rel="noopener">A Short Hike</a><small>regions are walked; no menus</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json" target="_blank" rel="noopener">Animal Crossing: New Horizons</a><small>the airport: one predictable doorway for going away</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=2198150" target="_blank" rel="noopener">Tiny Glade and Portal</a><small>a gentle scene change; see the other side through the door (Portal, 400)</small></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i>1</i></summary>
+  <details class="ctx-kind"><summary><b>Oracle consultation</b><i>8</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/zelda-breath-of-the-wild.json" target="_blank" rel="noopener">Zelda: Breath of the Wild</a><small>fast travel only to places you have touched: a map is earned</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=753640" target="_blank" rel="noopener">Outer Wilds</a><small>travel is physical and is the game; too slow for every trip, right for the rocket&#39;s first flight</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=275850" target="_blank" rel="noopener">No Man&#39;s Sky</a><small>the ship is the diegetic menu, the galaxy map only chooses</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=1145360" target="_blank" rel="noopener">Hades</a><small>doors that show what is behind them; one home that always catches you</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=1055540" target="_blank" rel="noopener">A Short Hike</a><small>regions are walked; no menus</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json" target="_blank" rel="noopener">Animal Crossing: New Horizons</a><small>the airport: one predictable doorway for going away</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=2198150" target="_blank" rel="noopener">Tiny Glade and Portal</a><small>a gentle scene change; see the other side through the door (Portal, 400)</small></li><li><a href="https://abbies-game-oracle.vercel.app/game?id=1291340" target="_blank" rel="noopener">Townscaper</a><small>many small builds you open and keep; no save screens</small></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i>1</i></summary>
    <ul><li><a href="https://gonintendo.com/stories/339412-animal-crossing-new-horizons-devs-talk-about-the-island-premise" target="_blank" rel="noopener">Animal Crossing: New Horizons island premise (GoNintendo, dev talk)</a><small>found by search, not read in full</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i>2</i></summary>
    <ul><li><a href="https://www.gamedeveloper.com/design/fast-travel-sucks" target="_blank" rel="noopener">Fast Travel Sucks (Game Developer)</a><small>found by search, title and argument only; not read in full. Supports making travel part of the world</small></li><li><a href="https://gamingbolt.com/dragons-dogma-2s-developers-explain-restricted-fast-travel-options" target="_blank" rel="noopener">Dragon&#39;s Dogma 2 devs on restricted fast travel (GamingBolt)</a><small>found by search, not read in full; why a map should be limited</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i></i></summary>
    <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Our canon</b><i>4</i></summary>
-   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md" target="_blank" rel="noopener">HUD study: the 2x2 plus none</a><small>diegetic first; nothing masks the world</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonmission/MOON_MISSION_STUDY.md" target="_blank" rel="noopener">Moon Mission study (AW-STUDY-0036)</a><small>jobs not turns, Captain&#39;s Hat, truck, rocket port</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/abbietown/ABBIETOWN_STUDY.md" target="_blank" rel="noopener">Abbie&#39;s Town (AW-STUDY-0042) and its seven-hex regions</a><small>regions.mjs ids and the three-way cut</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md" target="_blank" rel="noopener">Abbie&#39;s Backpack (AW-STUDY-0046)</a><small>the one shared store</small></li></ul></details><details class="ctx-kind" open><summary><b>References</b><i>1</i></summary>
-   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/teleport" target="_blank" rel="noopener">Family Teleport (/teleport)</a><small>arrival feel in the existing toy</small></li></ul></details>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md" target="_blank" rel="noopener">HUD study: the 2x2 plus none</a><small>diegetic first; nothing masks the world</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonmission/MOON_MISSION_STUDY.md" target="_blank" rel="noopener">Moon Mission study (AW-STUDY-0036)</a><small>jobs not turns, Captain&#39;s Hat, truck, rocket port</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/abbietown/ABBIETOWN_STUDY.md" target="_blank" rel="noopener">Abbie&#39;s Town (AW-STUDY-0042) and its seven-hex regions</a><small>regions.mjs ids and the three-way cut</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md" target="_blank" rel="noopener">Abbie&#39;s Backpack (AW-STUDY-0046)</a><small>the one shared store</small></li></ul></details><details class="ctx-kind" open><summary><b>References</b><i>2</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/teleport" target="_blank" rel="noopener">Family Teleport (/teleport)</a><small>arrival feel in the existing toy</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/card-library.js" target="_blank" rel="noopener">Board storage today (card-library.js) and the ◎ World menu (board3.js)</a><small>boards are stored by id with one &#39;current&#39; pointer; the Basin is ?world=basin</small></li></ul></details>
   <p class="ctx-foot">Recorded 2026-10-23, while building. <a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
 <p class="ctx-foot"><a href="https://app.abbies.world/studies/#worlds">Live study page</a></p></aside>
 </div>
@@ -451,6 +527,72 @@ function viaMemory(st, worldId, o = {}) {
  const to = Object.keys(GATES).find(k => GATES[k].world === worldId);
  return arrive(st, to, [{mode: 'meta', text: 'The coin warms in your hand and hums. Everyone feels it.'}], 'memory', o);
 }
+
+// ---- simulations/worlds/boards.mjs ----
+// AW-STUDY-0048 round 2: which overall board is shown, and how people make new ones.
+// A board is the whole tile world a player builds (the thing card-library.js saves under its own id). Today the sandbox
+// keeps one pointer ('current') to one saved board; boards are already stored by id, so more than one is a library
+// plus a pointer. Land is a separate axis: the same tiles can stand on the Ranch floor or in the Basin (?world=basin).
+// Pure functions, no drawing. Boards are never overwritten or deleted by one tap: a copy keeps where it came from,
+// and "archive" moves a board to the attic where restore brings it back (change requests make a new version).
+const LANDS = {ranch: {name: 'The Ranch'}, basin: {name: 'The Basin'}, town: {name: "Abbie's Town"}, moon: {name: 'Moon base'}};
+const TILE_KINDS = ['meadow', 'trees', 'pond', 'barn', 'field', 'path'];
+const MAX_NAME = 32;
+
+// axial hex spiral: 0 is the centre, then rings of 6, 12, ... in a fixed order, so board slots keep their place
+function spiral(n) {
+ const out = [{q: 0, r: 0}], dirs = [[1, 0], [0, 1], [-1, 1], [-1, 0], [0, -1], [1, -1]];
+ for (let k = 1; out.length < n; k++) { let q = 0, r = -k; for (const d of [[1, 0], [0, 1], [-1, 1], [-1, 0], [0, -1], [1, -1]]) for (let i = 0; i < k; i++) { out.push({q, r}); q += d[0]; r += d[1]; } }
+ return out.slice(0, n);
+}
+const key = (q, r) => q + ',' + r;
+const uid = lib => 'board-' + (lib.seq + 1);
+
+function newLibrary() {
+ const ranch = {id: 'board-1', name: 'Our ranch', land: 'ranch', made: 'seed', from: null, revision: 1, cells: {'0,0': 'barn', '1,0': 'meadow', '0,1': 'trees', '-1,1': 'pond', '-1,0': 'meadow', '0,-1': 'field'}};
+ return {seq: 1, current: ranch.id, boards: [ranch], attic: []};
+}
+const find = (lib, id) => lib.boards.find(b => b.id === id);
+const uniqueName = (lib, base) => { const names = new Set([...lib.boards, ...lib.attic].map(b => b.name)); let n = base, i = 2; while (names.has(n)) n = base + ' ' + i++; return n; };
+const cleanName = s => String(s ?? '').replace(/\s+/g, ' ').trim().slice(0, MAX_NAME);
+
+// Start a new board: blank (just a clearing), a copy of one you have (never changes the original), or a land with no tiles.
+function newBoard(lib, {name, land = 'ranch', from = null} = {}) {
+ if (!LANDS[land]) throw Error('Unknown land');
+ const src = from && find(lib, from); if (from && !src) throw Error('Nothing to copy');
+ const base = cleanName(name) || (src ? 'Copy of ' + src.name : 'A place of your own');
+ const b = {id: uid(lib), name: uniqueName(lib, base), land: src ? src.land : land, made: src ? 'copy' : 'blank', from: src?.id ?? null, revision: 1, cells: src ? {...src.cells} : {}};
+ return {...lib, seq: lib.seq + 1, current: b.id, boards: [...lib.boards, b]};
+}
+function switchTo(lib, id) { if (!find(lib, id)) throw Error('That board is in the attic or gone'); return {...lib, current: id}; }
+function rename(lib, id, name) {
+ const n = cleanName(name); if (!n) throw Error('A board needs a name'); if (lib.boards.some(b => b.id !== id && b.name === n)) throw Error('Another board has that name');
+ return {...lib, boards: lib.boards.map(b => b.id === id ? {...b, name: n, revision: b.revision + 1} : b)};
+}
+function place(lib, id, q, r, kind) {
+ if (kind !== null && !TILE_KINDS.includes(kind)) throw Error('Unknown tile');
+ return {...lib, boards: lib.boards.map(b => { if (b.id !== id) return b; const cells = {...b.cells}; kind === null ? delete cells[key(q, r)] : cells[key(q, r)] = kind; return {...b, cells, revision: b.revision + 1}; })};
+}
+// Never the last board; the next board to show is the one before it in the library.
+function archive(lib, id) {
+ const i = lib.boards.findIndex(b => b.id === id); if (i < 0) throw Error('No such board'); if (lib.boards.length === 1) throw Error('Keep at least one board');
+ const boards = lib.boards.filter(b => b.id !== id);
+ return {...lib, boards, attic: [...lib.attic, lib.boards[i]], current: lib.current === id ? boards[Math.max(0, i - 1)].id : lib.current};
+}
+function restore(lib, id) {
+ const b = lib.attic.find(x => x.id === id); if (!b) throw Error('Not in the attic');
+ return {...lib, attic: lib.attic.filter(x => x.id !== id), boards: [...lib.boards, {...b, name: uniqueName({...lib, attic: []}, b.name)}], current: id};
+}
+// The zoomed-out view: every board is one hex of a bigger hex board, the current one in the middle, plus one open slot.
+function overview(lib) {
+ const order = [lib.boards.find(b => b.id === lib.current), ...lib.boards.filter(b => b.id !== lib.current)], slots = spiral(order.length + 1);
+ return {boards: order.map((b, i) => ({id: b.id, ...slots[i]})), openSlot: slots[order.length]};
+}
+// What the saved pointer needs: the library is a list of ids; the existing 'current' pointer stays the single source of "shown".
+const pointerOf = lib => ({key: 'current', id: lib.current});
+const tileCount = b => Object.keys(b.cells).length;
+// The stable map of boards: each board keeps its slot (by order made), so the world does not reshuffle when you switch.
+function layout(lib) { const s = spiral(lib.boards.length + 1); return {boards: lib.boards.map((b, i) => ({id: b.id, ...s[i]})), openSlot: s[lib.boards.length]}; }
 
 
 // ---- the prototype (view only; the rules are simulations/worlds/worlds.mjs) ---------------------------------
@@ -666,6 +808,85 @@ $('#guest').onclick = e => { GUEST = !GUEST; e.currentTarget.setAttribute('aria-
 $('#reset').onclick = () => { ST = newState(); BUSY = false; TRAYGATE = null; lastPill = ''; $('#votes').innerHTML = ''; log([], true); setVB([500, 390], 1); render(); };
 log([{mode: 'diegetic', text: 'You start on Main Street. The café key floats over the shop; the black truck waits at the curb.'}], true);
 render(); setVB([500, 390], 1);
+
+// ---- the boards prototype (view only; the rules are simulations/worlds/boards.mjs) ----------------------------
+{
+ const bsvg = $('#bsvg'), blab = $('#blab'), BP = 290, C = 22, TILE_COL = {meadow: '#9fd07a', trees: '#4f8f4a', pond: '#7cc2dd', barn: '#c8502c', field: '#e3cb6a', path: '#d8c4a0'};
+ const LAND_COL = {ranch: '#c6dca8', basin: '#a8d6bd', town: '#f2d99c', moon: '#c9ccd8'};
+ let LIB, BOPT = 'B', ZOOMED = true, BBUSY = false, cam = {c: [0, 0], k: 2.9};
+ const startLib = () => { let l = newBoard(newLibrary(), {name: 'The Basin', land: 'basin'}); return switchTo(l, 'board-1'); };
+ const slotXY = s => [BP * (s.q + s.r / 2), BP * .866 * s.r];
+ const hexP = (cx, cy, s) => [0, 1, 2, 3, 4, 5].map(i => `${(cx + s * Math.cos(Math.PI / 3 * i)).toFixed(1)},${(cy + s * Math.sin(Math.PI / 3 * i)).toFixed(1)}`).join(' ');
+ const cellXY = (q, r, c) => [c * 1.5 * q, c * Math.sqrt(3) * (r + q / 2)];
+ const bglyph = (k, x, y, c) => k === 'trees' ? `<circle cx="${x}" cy="${y - 2}" r="${c * .45}" fill="#2f6a34"/><circle cx="${x + 5}" cy="${y + 3}" r="${c * .3}" fill="#3f7f42"/>` : k === 'barn' ? `<rect x="${x - c * .45}" y="${y - c * .3}" width="${c * .9}" height="${c * .6}" fill="#a8341c"/><path d="M${x - c * .55} ${y - c * .3}L${x} ${y - c * .75}L${x + c * .55} ${y - c * .3}z" fill="#7a2410"/>` : k === 'pond' ? `<ellipse cx="${x}" cy="${y}" rx="${c * .5}" ry="${c * .32}" fill="#4fa6c8"/>` : k === 'field' ? `<path d="M${x - c * .5} ${y - c * .2}h${c} M${x - c * .5} ${y + c * .1}h${c} M${x - c * .5} ${y + c * .4}h${c}" stroke="#b79a30" stroke-width="2.4"/>` : k === 'path' ? `<path d="M${x - c * .5} ${y + c * .2}Q${x} ${y - c * .5} ${x + c * .5} ${y + c * .2}" stroke="#a88a5a" stroke-width="3" fill="none"/>` : '';
+ // one board: its land plate, its cells (empty ghosts and tiles) and, optionally, its painted sign
+ function drawBoard(b, cx, cy, c, o = {}) {
+  let h = `<g transform="translate(${cx},${cy})"><polygon points="${hexP(0, 0, c * 5.1)}" fill="${LAND_COL[b.land]}" stroke="#fff" stroke-width="${Math.max(2, c / 5)}"/>`;
+  if (b.land === 'basin') h += `<ellipse cx="${c * 1.2}" cy="${c * 3.2}" rx="${c * 2.6}" ry="${c * .9}" fill="#7cc2dd" opacity=".85"/>`;
+  for (const s of spiral(19)) {
+   const [x, y] = cellXY(s.q, s.r, c), k = b.cells[s.q + ',' + s.r];
+   h += `<polygon ${o.hit ? `data-b="${b.id}" data-q="${s.q}" data-r="${s.r}" style="cursor:pointer"` : ''} points="${hexP(x, y, c * .96)}" fill="${k ? TILE_COL[k] : '#ffffff'}" fill-opacity="${k ? 1 : .22}" stroke="#fff" stroke-opacity="${k ? .9 : .5}" stroke-width="${c / 11}"/>${k ? bglyph(k, x, y, c) : ''}`;
+  }
+  if (o.sign) h += `<g transform="translate(0,${c * 6})"><rect x="-${c * 3.4}" y="-${c * .8}" width="${c * 6.8}" height="${c * 1.4}" rx="${c * .3}" fill="#8b5a2b" stroke="#6b4220" stroke-width="3"/><text y="${c * .2}" text-anchor="middle" font-family="Figtree,system-ui" font-weight="700" font-size="${c * .78}" fill="#fff8e6">${b.name.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</text></g>`;
+  return h + '</g>';
+ }
+ const thumb = b => `<svg viewBox="-60 -60 120 120">${drawBoard(b, 0, 0, 10)}</svg>`;
+ const worldXY = id => { const L = layout(LIB), s = L.boards.find(x => x.id === id); return slotXY(s); };
+ const setCam = (c, k) => { cam = {c, k}; const w = 1000 / k, h = 700 / k; bsvg.setAttribute('viewBox', `${(c[0] - w / 2).toFixed(1)} ${(c[1] - h / 2).toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)}`); };
+ const ZOUT = {c: [0, 40], k: .86}, ZIN = id => ({c: worldXY(id), k: 2.9});
+ const flyTo = (to, ms) => new Promise(res => { const f = {...cam}; if (REDUCED) { setCam(to.c, to.k); return res(); } const t0 = performance.now(); (function s(n) { const t = ease(Math.min(1, (n - t0) / ms)); setCam([f.c[0] + (to.c[0] - f.c[0]) * t, f.c[1] + (to.c[1] - f.c[1]) * t], f.k * Math.pow(to.k / f.k, t)); t < 1 ? requestAnimationFrame(s) : res(); })(t0); });
+ const KIND_NAME = {A: 'Shelf', B: 'Zoom out', C: 'World menu'};
+ function brender() {
+  const L = layout(LIB), cur = LIB.current, showAll = BOPT === 'B' && !ZOOMED || BBUSY;
+  let h = '<rect x="-3000" y="-3000" width="6000" height="6000" fill="#cfe8e0"/>';
+  for (const s of L.boards) { const b = LIB.boards.find(x => x.id === s.id), [x, y] = slotXY(s); if (showAll || b.id === cur) h += `<g ${b.id !== cur && BOPT === 'B' ? `class="bhex" data-pick="${b.id}" style="cursor:pointer"` : ''}>${drawBoard(b, x, y, C, {sign: true, hit: ZOOMED && b.id === cur})}</g>`; }
+  if (BOPT === 'B' && !ZOOMED) { const [x, y] = slotXY(L.openSlot); h += `<g data-pick="+" style="cursor:pointer" transform="translate(${x},${y})"><polygon points="${hexP(0, 0, C * 5.1)}" fill="#fff" fill-opacity=".25" stroke="#fff" stroke-width="5" stroke-dasharray="14 10"/><path d="M-30 0h60M0 -30v60" stroke="#fff" stroke-width="10" stroke-linecap="round"/></g>`; }
+  bsvg.innerHTML = h;
+  const b = LIB.boards.find(x => x.id === cur), nm = $('#bname'); nm.hidden = !(ZOOMED || BOPT !== 'B'); if (document.activeElement !== nm) nm.value = b.name;
+  $('#bshelf').innerHTML = LIB.boards.map(x => `<button data-id="${x.id}" aria-label="${x.name.replace(/"/g, '')}" aria-current="${x.id === cur}">${thumb(x)}</button>`).join('') + '<button data-id="+" aria-label="New board"><svg viewBox="-60 -60 120 120"><polygon points="' + hexP(0, 0, 50) + '" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="10 8"/><path d="M-20 0h40M0 -20v40" stroke="#fff" stroke-width="8" stroke-linecap="round"/></svg></button>';
+  $('#bpanel').innerHTML = LIB.boards.map(x => `<button class="row" data-id="${x.id}" aria-current="${x.id === cur}">${thumb(x)}<span><b>${x.name.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</b><br><small>${LANDS[x.land].name} · ${tileCount(x)} tiles${x.from ? ' · copy' : ''}</small></span></button>`).join('') + '<button class="row" data-id="+"><svg viewBox="-60 -60 120 120"><polygon points="' + hexP(0, 0, 50) + '" fill="none" stroke="#555" stroke-width="5" stroke-dasharray="10 8"/><path d="M-20 0h40M0 -20v40" stroke="#555" stroke-width="8" stroke-linecap="round"/></svg><span><b>New board</b></span></button>' + (LIB.attic.length ? `<small>Attic: ${LIB.attic.map(x => x.name).join(', ')}</small>` : '');
+  $('#bzoom').innerHTML = ICON.map; $('#bmenu').innerHTML = '<svg viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="8" fill="none" stroke="#2f6f8c" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#2f6f8c"/></svg>';
+  $('#bwhich').textContent = `Option ${BOPT}: ${KIND_NAME[BOPT]}`; $('#bsays').textContent = ({A: 'Tap a miniature on the shelf to slide the table to that board. The frame at the end starts a new one.', B: ZOOMED ? 'Tap the map button, or scroll out, to see every board. Tap a tile to place one.' : 'Tap a board to land in it. The dashed hex is the next new board.', C: 'Open the ◎ menu and pick a board from the list. This is the grown-up baseline.'})[BOPT];
+  $('#bzoom').setAttribute('aria-label', ZOOMED ? 'Zoom out to all boards' : 'Zoom in');
+ }
+ function blog(items, clear) { const el = $('#blog'); if (clear) el.innerHTML = ''; for (const e of items) el.insertAdjacentHTML('afterbegin', `<li><span class="tag ${e[0]}">${e[0]}</span><span>${e[1]}</span></li>`); }
+ const nameOf = id => LIB.boards.find(b => b.id === id)?.name;
+ async function goTo(id, how) {
+  if (BBUSY) return; BBUSY = true; const from = LIB.current;
+  try {
+   if (id === from && ZOOMED) return;
+   LIB = switchTo(LIB, id); brender();
+   if (BOPT === 'B' && !ZOOMED) { await flyTo(ZIN(id), 900); ZOOMED = true; }
+   else { await flyTo({c: worldXY(id), k: 2.9}, 650); }
+  } finally { BBUSY = false; brender(); setCam(worldXY(LIB.current), 2.9); }
+  blog(BOPT === 'A' ? [['diegetic', 'The table slides along to ' + nameOf(id) + '. Everything on it is as you left it.'], ['spatial', 'Its painted sign comes into view.'], ['meta', 'A soft wooden clack.'], ['none', 'Boards in the attic stay out of sight.']] : BOPT === 'B' ? [['diegetic', 'You pull back, see your boards as hexes of a bigger board, and the camera lands in ' + nameOf(id) + '.'], ['spatial', 'Each board wears its name on a painted sign.'], ['none', 'The other boards keep going without you.']] : [['overlay', 'The list closes and the table changes to ' + nameOf(id) + '. A menu is precise, but it leaves the world.']], true);
+ }
+ async function zoomOut() { if (BBUSY || BOPT !== 'B') return; BBUSY = true; ZOOMED = false; brender(); try { await flyTo(ZOUT, 900); } finally { BBUSY = false; brender(); } blog([['spatial', 'Every board is one hex. The dashed one is the next new board.'], ['meta', 'The sound opens out, like stepping back from a table.']], true); }
+ async function made(lib, say) { LIB = lib; ZOOMED = true; brender(); setCam(cam.c, cam.k); BBUSY = false; await flyTo({c: worldXY(LIB.current), k: 2.9}, 650); brender(); blog(say, true); }
+ const doNew = (opts, say) => { try { made(newBoard(LIB, opts), say); } catch (e) { blog([['none', e.message]], true); } };
+ bsvg.addEventListener('click', e => {
+  const pick = e.target.closest('[data-pick]');
+  if (pick && !BBUSY) { const id = pick.dataset.pick; return id === '+' ? doNew({}, [['spatial', 'A blank board appears where the dashed hex was, with its sign saying "A place of your own".'], ['diegetic', 'You land in it. Nothing else has changed.']]) : goTo(id); }
+  const cell = e.target.closest('[data-q]'); if (!cell || BBUSY || !ZOOMED) return;
+  const b = LIB.boards.find(x => x.id === cell.dataset.b), q = +cell.dataset.q, r = +cell.dataset.r, cur = b.cells[q + ',' + r], i = TILE_KINDS.indexOf(cur), next = i + 1 < TILE_KINDS.length ? TILE_KINDS[i + 1] : null;
+  LIB = place(LIB, b.id, q, r, cur === undefined ? TILE_KINDS[0] : next); brender(); setCam(cam.c, cam.k);
+  blog([['diegetic', next === null && cur ? 'The tile lifts off the board.' : 'A tile settles into the hex.'], ['none', 'It saves by itself, on this board only.']], true);
+ });
+ $('#bshelf').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; b.dataset.id === '+' ? doNew({}, [['diegetic', 'An empty frame comes off the shelf and slides onto the table.'], ['spatial', 'Its sign says "A place of your own".']]) : goTo(b.dataset.id); });
+ $('#bpanel').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $('#bpanel').classList.remove('on'); b.dataset.id === '+' ? doNew({}, [['overlay', 'A new blank board is added to the list and shown.']]) : goTo(b.dataset.id); });
+ $('#bmenu').onclick = () => $('#bpanel').classList.toggle('on');
+ $('#bzoom').onclick = () => ZOOMED ? zoomOut() : goTo(LIB.current);
+ bsvg.addEventListener('wheel', e => { if (BOPT === 'B' && ZOOMED && e.deltaY > 0) { e.preventDefault(); zoomOut(); } else if (BOPT === 'B' && !ZOOMED && e.deltaY < 0) { e.preventDefault(); goTo(LIB.current); } }, {passive: false});
+ $('#bname').addEventListener('change', e => { try { LIB = rename(LIB, LIB.current, e.target.value); blog([['spatial', 'The sign is repainted: ' + nameOf(LIB.current) + '.'], ['none', 'Names are trimmed to 32 letters and are never the same as another board.']], true); } catch (err) { blog([['none', err.message + '. The sign keeps its old name.']], true); } brender(); });
+ $('#bopts').addEventListener('click', e => { const b = e.target.closest('button'); if (!b || BBUSY) return; BOPT = b.dataset.o; blab.dataset.bopt = BOPT; $('#bopts').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); $('#bpanel').classList.remove('on'); ZOOMED = true; brender(); setCam(worldXY(LIB.current), 2.9); blog([['overlay', 'Switched to option ' + BOPT + '. The same boards, a different way to change between them.']], true); });
+ $('#bnew').onclick = () => doNew({}, [['spatial', 'A blank board takes the next free slot and is shown.'], ['none', 'Your other boards are untouched.']]);
+ $('#bcopy').onclick = () => doNew({from: LIB.current}, [['spatial', 'A copy appears, named for the original. The original does not change.'], ['none', 'The copy remembers which board it came from.']]);
+ $('#bbasin').onclick = () => doNew({land: 'basin', name: 'Basin board'}, [['diegetic', 'The same table, a new floor: the lush basin and its lake.'], ['none', 'Tiles and land are separate: any board can stand on either.']]);
+ $('#barch').onclick = () => { try { const old = LIB.current; LIB = archive(LIB, old); brender(); setCam(worldXY(LIB.current), 2.9); blog([['diegetic', 'The board is lifted away to the attic. ' + nameOf(LIB.current) + ' is on the table.'], ['none', 'Nothing is deleted. Bring one back returns it.']], true); } catch (e) { blog([['none', e.message + '.']], true); } };
+ $('#brest').onclick = () => { try { const a = LIB.attic.at(-1); if (!a) throw Error('The attic is empty'); LIB = restore(LIB, a.id); brender(); setCam(worldXY(LIB.current), 2.9); blog([['diegetic', a.name + ' comes back down from the attic and onto the table.']], true); } catch (e) { blog([['none', e.message + '.']], true); } };
+ $('#breset').onclick = () => { LIB = startLib(); ZOOMED = true; BBUSY = false; brender(); setCam(worldXY(LIB.current), 2.9); blog([['diegetic', 'Two boards: Our ranch on the Ranch floor, and The Basin, which has no tiles yet.']], true); };
+ LIB = startLib(); brender(); setCam(worldXY(LIB.current), 2.9); blog([['diegetic', 'Two boards: Our ranch on the Ranch floor, and The Basin, which has no tiles yet. Try the options above.']], true);
+}
 
 // ---- the Winchester figure and the shares -------------------------------------------------------------------
 {

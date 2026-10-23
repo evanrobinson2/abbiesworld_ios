@@ -3,7 +3,20 @@
 Page: `/studies/worlds/` (`prototypes/ranch-atelier/dist/studies/worlds/index.html`, built by `docs/oracle/changing-worlds/build_page.py`
 from `worlds.template.html`). Model: `simulations/worlds/worlds.mjs` (test: `simulations/tests/worlds.test.mjs`).
 
-## The ask (Evan, 2026-10-23 17:30Z)
+## Round 2 (Evan, 2026-10-23 18:35Z): what "changing worlds" means
+"No I mean users changing which overall board is shown so you can make new boards." Round 1 read it as travel between places
+(Town, Launch, Moon base). Round 2 leads with boards; travel stays as a section.
+- Today: one saved board. Boards are stored by id (`card-library.js`, IndexedDB `boards`) and a single `current` pointer says which is
+  shown; the ◎ World menu in the sandbox edits the one board's name; `?world=basin` swaps the floor (remembered per device).
+- Model: `simulations/worlds/boards.mjs`: library, `newBoard` (blank, copy that remembers its source, or another land), `switchTo`,
+  `rename` (trimmed, 32 letters, unique), `place`, `archive` / `restore` (the attic; never delete, never the last board), `layout`
+  (the stable board of boards). Tests in `tests/worlds.test.mjs`.
+- Options: A shelf of miniatures on the table; **B zoom out to the board of boards (recommended)**: boards are hexes of a bigger
+  board with painted-sign names and a dashed new-board hex; C a Boards page in the ◎ World menu (grown-up baseline).
+- Tour: yes, once there are two boards ("Pinch out to see all your worlds").
+- Next: library over the board store and pointer; pull-back camera past the region edge; land as a per-board choice.
+
+## The ask, round 1 (Evan, 2026-10-23 17:30Z)
 "we still don't have a proper way to change worlds in the game ... do a study for the UX around that ... the final
 winchester region should a mega structure of 7 hexes in a greater hex ... carve the 3 regions roughly 33% each."
 Extra scope from the Moon Mission thread: Ranch, Abbie's Town, Launch, Moon base and New Nova; arrive and return; what the
