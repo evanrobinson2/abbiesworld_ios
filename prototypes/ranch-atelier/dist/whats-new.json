@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-moon-mission-world",
+      "date": "2026-10-23",
+      "title": "Moon Mission: the black truck, the rocket port and the pink ship, in the town",
+      "image": "/whats-new/2026-10-23-moon-mission-world.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission",
+      "tour": false,
+      "link": "/studies/#cell",
+      "line": "Moon Mission Part 1 now plays in the 3D world. A black truck pulls up at the coffee shop, you accept, a huge rocket port lands and the pink ship falls right after. Then the kitchen, the tree house, launch, the Moon landing and the Moon base, all low-poly scenes. Stand-in figures until the Meshy heroes arrive."
+    },
+    {
       "id": "study-cell",
       "date": "2026-10-23",
       "title": "Abbie's Science Adventure",

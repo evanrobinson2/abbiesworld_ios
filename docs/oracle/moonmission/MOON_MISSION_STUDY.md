@@ -571,6 +571,8 @@ Part 1 now runs as a loop (`prototypes/ranch-atelier/dist/simulations/moonmissio
 - Homes not yet placed in the town fall back to the common, marked pending.
 - Changing worlds (town to Launch to Moon) has no proper UX yet. A study is dispatched through the coordinator; until it lands, the mission uses a calm cutscene between zones.
 
+The 3D version (Evan, 18:40Z: "make the moon mission in the game world; Meshy for heroes, low poly hi fi for the rest") is `studies/moon-mission/world.html`, built on `simulations/moonmission/world3d.mjs`. One scene per micro-zone, driven by the same engine effects: the truck pulls up at the cafe curb, the rocket port lands, the pink ship falls right after, then interiors, launch, orbit, the lander and the Moon base. The three heroes are faceted stand-ins; drop `studies/moon-mission/heroes/<daddy|abbie|ani>.glb` and it replaces the stand-in on load. Not yet in the scenes: the real town land (these are micro-zones), the cafe's own hi-fi models, voices for the 3D page.
+
 ## 16. How it was made, and how to be faster next time
 To be written when Part 1 ships (CLAUDE.md speed-review rule). Speedups applied from the school and basement reviews:
 the reference art is frozen first (section 9), the couch kit goes into `simulations/`, tests run by state, the
