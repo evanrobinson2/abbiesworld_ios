@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-moon-mission-storyboard",
+      "date": "2026-10-23",
+      "title": "Moon Mission: the storyboard for tonight",
+      "line": "The family Moon game, planned for the big TV: 13 frames from the kitchen to the Moon base pad, everyone's jobs, live Houston on the radio, white suits on Earth and dark mode on the Moon.",
+      "image": "/whats-new/2026-10-23-moon-mission-storyboard.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "Moon Mission game",
+      "tour": false,
+      "link": "/studies/moon-mission/"
+    },
+    {
       "id": "2026-10-23-moon-base-kit-r2",
       "date": "2026-10-23",
       "title": "Moon base kit, rebuilt from your Midjourney picks",
