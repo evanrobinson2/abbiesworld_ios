@@ -90733,14 +90733,14 @@
     "id": "wesnoth",
     "imageFileCount": 17583,
     "commonImageDimensions": {
-      "72×72": 9571,
-      "126×180": 760,
-      "126×144": 742,
-      "30×30": 584,
-      "144×144": 469,
-      "25×25": 325,
-      "60×60": 304,
-      "400×400": 272
+      "72Ã—72": 9571,
+      "126Ã—180": 760,
+      "126Ã—144": 742,
+      "30Ã—30": 584,
+      "144Ã—144": 469,
+      "25Ã—25": 325,
+      "60Ã—60": 304,
+      "400Ã—400": 272
     },
     "imageExamples": [
       {
@@ -91358,6 +91358,116 @@
       "bytes": 91685,
       "blobSha": "62fd405580a4208c292db548bf3586e4cca77691",
       "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/display.cpp"
+    },
+    {
+      "game": "wesnoth",
+      "path": "src/gui/dialogs/attack_predictions.cpp",
+      "bytes": 12026,
+      "blobSha": "222e97792722885f4c59c1de05bbb74e1d249c54",
+      "sha256": "8aba4de67ab0319d47caa096d4d080a5a97dd1bfe1a21b0325e38379869b6f05",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/gui/dialogs/attack_predictions.cpp"
+    },
+    {
+      "game": "wesnoth",
+      "path": "data/gui/window/attack_predictions.cfg",
+      "bytes": 5169,
+      "blobSha": "de1f340f37a949d47c03e1a51b52a048bcfae47d",
+      "sha256": "6d677ddf63ac7db23f7db5158c2efd2b473127896b886d1226afbecdef1368ad",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/gui/window/attack_predictions.cfg"
     }
-  ]
+  ],
+  "predictionUiStudy": {
+    "at": "2026-10-23T09:38:10.715604+00:00",
+    "game": "wesnoth",
+    "method": "Pinned 1.18.8 original source inspection; not gameplay observation",
+    "source": {
+      "path": "src/gui/dialogs/attack_predictions.cpp",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/gui/dialogs/attack_predictions.cpp",
+      "sha256": "8aba4de67ab0319d47caa096d4d080a5a97dd1bfe1a21b0325e38379869b6f05",
+      "gitBlobSha": "222e97792722885f4c59c1de05bbb74e1d249c54"
+    },
+    "findings": [
+      {
+        "title": "Combat prediction display selects a subset of outcomes",
+        "finding": "The dialog obtains attacker and defender combatants and statistics from battle_context, then populates both sides. It shows the untouched probability separately from the HP graph. The HP row selector keeps only probabilities strictly greater than 0.001, chooses at most ten highest-probability outcomes, then orders those by descending HP. The selector does not renormalize retained probabilities. The graph therefore need not show every possible HP outcome or sum to 100 percent. Probability text uses one decimal place and explicitly prints 100% above 0.9995; the label alone is not proof of certainty.",
+        "evidenceRanges": [
+          [
+            46,
+            74
+          ],
+          [
+            101,
+            111
+          ],
+          [
+            377,
+            405
+          ]
+        ]
+      },
+      {
+        "title": "Risk colors do not guarantee rare losses remain visible",
+        "finding": "Graph drawing colors retained HP-zero rows red, reduced-HP rows yellow (grey when the opponent petrifies), and current-or-higher HP rows green. Row selection occurs first and does not reserve a slot for death. Therefore a sufficiently rare death outcome can be omitted. Each retained bar uses round(probability * 182), with a two-pixel minimum; small probabilities can have identical bar lengths. The dialog-specific WML labels the graph Expected Battle Result (HP), and neither this layout nor the reviewed drawing/selection functions supplies an omitted-mass label. This is bounded static inspection, not a claim about all help content, themes, or runtime configurations.",
+        "evidenceRanges": [
+          [
+            303,
+            369
+          ],
+          [
+            377,
+            405
+          ]
+        ],
+        "layoutEvidence": "_GUI_HP_GRAPH and _GUI_DATA_COLUMN macros; entire pinned dialog layout inspected."
+      }
+    ],
+    "coverage": {
+      "predictionToDialogData": "verified in pinned source",
+      "rowSelectionAndFormatting": "verified in pinned source",
+      "renderedGameUX": "unexamined",
+      "combatExecutionConsistency": "unexamined",
+      "graphDrawingAndDialogLayout": "verified in pinned source; not rendered gameplay"
+    },
+    "designInference": "When displaying a truncated distribution, make omitted probability mass and rounding visible. This recommendation is not implemented Ranch behavior.",
+    "next": "Inspect animation frame references in pinned source; gameplay remains unobserved.",
+    "layoutSource": {
+      "path": "data/gui/window/attack_predictions.cfg",
+      "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/gui/window/attack_predictions.cfg",
+      "sha256": "6d677ddf63ac7db23f7db5158c2efd2b473127896b886d1226afbecdef1368ad",
+      "gitBlobSha": "de1f340f37a949d47c03e1a51b52a048bcfae47d"
+    },
+    "syntheticChecks": {
+      "method": "Independent arithmetic examples following the inspected selector and bar formula; not execution of Wesnoth, and distributions are constructed rather than observed encounters.",
+      "cases": [
+        {
+          "input": "HP 0 probability 0.001; HP 20 probability 0.999",
+          "retainedHP": [
+            20
+          ],
+          "omittedMass": 0.001,
+          "implication": "Threshold can omit death."
+        },
+        {
+          "input": "HP 0 probability 0.01; ten other HP outcomes each probability 0.099",
+          "retainedRows": 10,
+          "omittedMass": 0.01,
+          "implication": "Ten-row cap can omit death even above threshold."
+        },
+        {
+          "inputProbabilities": [
+            0.002,
+            0.005,
+            0.01
+          ],
+          "barPixels": [
+            2,
+            2,
+            2
+          ],
+          "implication": "Minimum-width bars lose relative magnitude at low probabilities."
+        }
+      ]
+    },
+    "updatedAt": "2026-10-23T10:46:55.940424+00:00"
+  }
 }
