@@ -76,5 +76,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T15:53:27Z"
+  },
+  {
+    "id": "A4-clay",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "bd990a91-fea0-4caf-9eb3-105e63ac9d7a",
+    "files": [
+      "tools/meshy-heroes/refs/A4-clay/mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_0.png",
+      "tools/meshy-heroes/refs/A4-clay/mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_1.png",
+      "tools/meshy-heroes/refs/A4-clay/mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_2.png",
+      "tools/meshy-heroes/refs/A4-clay/mj_bd990a91-fea0-4caf-9eb3-105e63ac9d7a_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:54:00Z"
+  },
+  {
+    "id": "A4-paint",
+    "prompt": "adult woman astronaut commander, true adult proportions, short dark hair, cyan suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "1dc6c194-6017-40ce-8030-496292057520",
+    "files": [
+      "tools/meshy-heroes/refs/A4-paint/mj_1dc6c194-6017-40ce-8030-496292057520_0.png",
+      "tools/meshy-heroes/refs/A4-paint/mj_1dc6c194-6017-40ce-8030-496292057520_1.png",
+      "tools/meshy-heroes/refs/A4-paint/mj_1dc6c194-6017-40ce-8030-496292057520_2.png",
+      "tools/meshy-heroes/refs/A4-paint/mj_1dc6c194-6017-40ce-8030-496292057520_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:54:30Z"
   }
 ]
