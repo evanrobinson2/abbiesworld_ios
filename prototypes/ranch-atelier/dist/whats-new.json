@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-town-hud",
+      "date": "2026-10-23",
+      "title": "The town screen, tidied",
+      "line": "Drafted: one row along the top for the clock and the world effects (icons now, not cards), a glowing hex grid button, and the Paint card back in a hand at the bottom. The old bottom bar is gone. The backpack and notebook bar on the left comes from the backpack thread.",
+      "image": "/whats-new/2026-10-23-town-hud.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-charm-intro",
       "date": "2026-10-23",
       "title": "The charms light the way in",

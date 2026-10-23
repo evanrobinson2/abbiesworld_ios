@@ -1,22 +1,39 @@
-// World event cards for Abbie's World, Winchester (/town). The same god-view deck as the Sandbox (event-hand.mjs), with the effects
-// that need no ranch simulation: fireball, waterball, cats and dogs and tie-dye. Weather and time-of-day cards stay dimmed until the town has a clock.
+// World effects for Abbie's World, Winchester (/town), as icons on the top row (Evan, 2026-10-23 23:39Z: "the effect cards
+// didn't look good, so just keep the world effects as icons"). Tap one and it happens: fireball, waterball, cats and dogs,
+// tie-dye, and the Fire Wheels toggle once the Hot Wheels charm is won. The icons sit in the HUD's effects pill (town-hud.mjs,
+// window.AWHud.effects); the god-view card deck stays in the Sandbox (event-hand.mjs). Weather and time of day are the chronograph's.
 // One call from the town page, after the scene exists:
 //   import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt}));
-// (heightAt is optional; the town is in metres, y up.) Presentation layer only: the little glass button and the deck are not in the world.
-import {mountEventHand} from './event-hand.mjs';
+// (heightAt is optional; the town is in metres, y up.) Presentation layer only: the icons are not in the world; the effects they start are.
 import {createWorldEffects} from './world-effects.mjs';
 
-const PLAYABLE = new Set(['fireball', 'waterball', 'cats-dogs', 'tie-dye']);
-const DAY_SECONDS = 360; // the town has no clock yet: an effect's "day" is six minutes
+const DAY_SECONDS = 360; // the town has no clock for effects yet: an effect's "day" is six minutes
+const svg = body => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
+const EFFECTS = [
+  {id: 'fireball', name: 'Fireball', icon: svg('<path d="M12 21c-4 0-7-2.8-7-6.4 0-3.2 2.3-5 3.6-7.4.6 1.6 1.4 2.4 2.4 3 0-3.4 1.2-6.2 3.4-8.2.3 3 3.6 5.2 3.6 9.6 0 4.2-2.8 9.4-6 9.4z" fill="#ff9a3c" stroke="#7a2a0a"/><path d="M12 20c-1.9 0-3.2-1.3-3.2-3 0-1.6 1.4-2.4 2-3.8.9.8 1.4 1.6 1.4 2.6 1-.6 1.6-1.6 1.7-2.8 1 1.2 1.4 2.3 1.4 3.4 0 1.9-1.4 3.6-3.3 3.6z" fill="#ffe27a" stroke="none"/>')},
+  {id: 'waterball', name: 'Waterball', icon: svg('<path d="M12 3c3.6 4.6 6.2 7.8 6.2 11.2a6.2 6.2 0 0 1-12.4 0C5.8 10.8 8.4 7.6 12 3z" fill="#6cc4ff" stroke="#16507a"/><path d="M9 14.6a3.2 3.2 0 0 0 2.4 3" stroke="#fff" stroke-width="1.6"/>')},
+  {id: 'cats-dogs', name: 'Cats and dogs', icon: svg('<ellipse cx="12" cy="15.5" rx="4.6" ry="4" fill="#d9a066" stroke="#5a3514"/><ellipse cx="5.8" cy="11" rx="1.9" ry="2.4" fill="#d9a066" stroke="#5a3514"/><ellipse cx="9.6" cy="6.8" rx="1.9" ry="2.5" fill="#d9a066" stroke="#5a3514"/><ellipse cx="14.4" cy="6.8" rx="1.9" ry="2.5" fill="#d9a066" stroke="#5a3514"/><ellipse cx="18.2" cy="11" rx="1.9" ry="2.4" fill="#d9a066" stroke="#5a3514"/>')},
+  {id: 'tie-dye', name: 'Tie-dye', icon: svg('<circle cx="12" cy="12" r="8.6" fill="#ff6fb1" stroke="#5a1a4a"/><path d="M12 12m0 0a1.4 1.4 0 0 1 2.6.6 3 3 0 0 1-4.2 2.4 4.6 4.6 0 0 1 1.2-7 6.4 6.4 0 0 1 8.2 6.4" stroke="#fff3a8" stroke-width="2.2" fill="none"/><path d="M5.4 9a7 7 0 0 1 4-4" stroke="#6cc4ff" stroke-width="2.2" fill="none"/>')},
+  {id: 'fire-wheels', name: 'Fire wheels', locked: true, icon: svg('<circle cx="12" cy="13" r="6.4" fill="#444" stroke="#111"/><circle cx="12" cy="13" r="2.2" fill="#ddd" stroke="#111"/><path d="M4 11c-1.4 1-1.6 3.4-.4 5M6 6c-1.6.2-2.6 1.8-2.2 3.2" stroke="#ff7a14" stroke-width="2.2"/><path d="M19.4 5c1.6 1.2 1.6 3.4.4 4.4" stroke="#ff7a14" stroke-width="2.2"/>')}];
 
 export function mountTownEvents({THREE, scene, camera, controls, renderer, heightAt}) {
   const fx = createWorldEffects({T: THREE, scene, orbit: controls, camera, canvas: renderer.domElement, heightAt, clock: () => ({day: 0, hour: performance.now() / 1000 / DAY_SECONDS * 24})});
-  const deck = mountEventHand({playable: PLAYABLE, onPlay: id => fx.play(id)});
-  const b = document.createElement('button');
-  b.id = 'town-events-btn'; b.type = 'button'; b.dataset.layer = 'presentation'; b.setAttribute('aria-label', 'World events');
-  b.style.cssText = 'position:fixed;right:12px;bottom:calc(env(safe-area-inset-bottom) + 14px);z-index:18;width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7);background:linear-gradient(160deg,rgba(60,76,150,.7),rgba(20,26,70,.75));box-shadow:0 6px 16px rgba(6,8,30,.45);cursor:pointer;display:grid;place-items:center;touch-action:manipulation';
-  b.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="#ffd666" stroke="#2a1c12" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 5 13h6l-1 9 8-12h-6z"/></svg>';
-  b.onclick = () => deck.toggle();
-  document.body.append(b);
-  return {fx, deck};
+  const buttons = {};
+  // The icons go in the HUD's effects pill; wait for the HUD if it is not up yet (a few seconds at most, then the page body).
+  const hud = window.AWHud ? Promise.resolve() : new Promise(r => { addEventListener('aw-hud-ready', r, {once: true}); setTimeout(r, 4000); });
+  hud.then(() => {
+  const host = window.AWHud?.effects || document.body, balloons = window.AWHud?.balloons;
+  for (const e of EFFECTS) {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'aw-ico'; b.dataset.layer = 'presentation'; b.dataset.effect = e.id; b.title = e.name; b.setAttribute('aria-label', e.name); b.innerHTML = e.icon;
+    if (e.locked) b.dataset.locked = '1';
+    b.onclick = async () => {
+      if (e.id === 'fire-wheels') { const m = await import('./fire-wheels.mjs').catch(() => null); if (m?.fireWheelsUnlocked()) m.setFireWheels(!m.fireWheelsOn()); else b.title = 'Fire wheels: win the toy car charm first'; return; }
+      fx.play(e.id); b.classList.remove('pulse'); void b.offsetWidth; b.classList.add('pulse');
+    };
+    host.insertBefore(b, balloons?.parentElement === host ? balloons : null); buttons[e.id] = b;
+  }
+  });
+  // Fire wheels wakes up when the charm is won, and shows whether the trail is on.
+  import('./fire-wheels.mjs').then(m => { const sync = () => { const b = buttons['fire-wheels']; if (!b) return; if (m.fireWheelsUnlocked()) delete b.dataset.locked; else b.dataset.locked = '1'; b.setAttribute('aria-pressed', String(m.fireWheelsOn())); }; sync(); m.onFireWheels(sync); addEventListener('focus', sync); setInterval(sync, 4000); }).catch(() => {});
+  return {fx, buttons};
 }
