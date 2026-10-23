@@ -206,5 +206,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T16:56:58Z"
+  },
+  {
+    "id": "A2-clay-suit",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "59244d06-e3f2-47c0-b683-1f0e6fd5ebd2",
+    "files": [
+      "tools/meshy-heroes/refs/A2-clay-suit/mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_0.png",
+      "tools/meshy-heroes/refs/A2-clay-suit/mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_1.png",
+      "tools/meshy-heroes/refs/A2-clay-suit/mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_2.png",
+      "tools/meshy-heroes/refs/A2-clay-suit/mj_59244d06-e3f2-47c0-b683-1f0e6fd5ebd2_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T16:59:35Z"
+  },
+  {
+    "id": "A2-clay-tee",
+    "prompt": "cartoon girl about 4.5 heads tall, brown hair, brown eyes, light warm tan skin, purple accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "56800351-ba17-4541-978f-1247557fb146",
+    "files": [
+      "tools/meshy-heroes/refs/A2-clay-tee/mj_56800351-ba17-4541-978f-1247557fb146_0.png",
+      "tools/meshy-heroes/refs/A2-clay-tee/mj_56800351-ba17-4541-978f-1247557fb146_1.png",
+      "tools/meshy-heroes/refs/A2-clay-tee/mj_56800351-ba17-4541-978f-1247557fb146_2.png",
+      "tools/meshy-heroes/refs/A2-clay-tee/mj_56800351-ba17-4541-978f-1247557fb146_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:01:22Z"
   }
 ]
