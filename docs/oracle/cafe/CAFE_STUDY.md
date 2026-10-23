@@ -209,7 +209,9 @@ Draft Mode was on in the account for the first try and was switched off; the dra
 
 ### The café's roadmap, in Evan's order
 
-1. Ultra-finely modelled coffee maker and espresso maker (hero props, close-up quality).
+1. Ultra-finely modelled coffee maker and espresso maker (hero props, close-up quality). Evan: "ultra fine does not
+   mean high poly": fine means every real part is there and named (portafilter, group head, steam wand, drip tray,
+   knobs, gauge), in clean low-count geometry with bevels and good shading, not dense meshes.
 2. Two maker games (making coffee and making a smoothie or milkshake; the existing six-step recipe in
    `coffee-recipe.mjs` is the start, done with the hands on the machine).
 3. A mini game for dance-party mode.
