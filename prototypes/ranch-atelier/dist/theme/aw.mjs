@@ -36,7 +36,7 @@ export function avatar(p = getProfile(), size = 36) {
   return `<span class="aw-avatar" style="--s:${size}px;background:${bg}" aria-hidden="true">${esc(p.avatar || '🦊')}</span>`;
 }
 const buttons = new Set();
-function refreshButtons() { for (const b of buttons) b.innerHTML = avatar(getProfile(), Number(b.dataset.size) || 36); }
+function refreshButtons() { for (const b of buttons) b.innerHTML = avatar(getProfile(), Number(b.dataset.size) || 36); badge(); }
 export function mountProfileButton(target, {size = 36, floating = false} = {}) {
   const b = document.createElement('button');
   b.type = 'button'; b.className = 'aw-me' + (floating ? ' float' : ''); b.dataset.size = size;
@@ -48,14 +48,36 @@ export function mountProfileButton(target, {size = 36, floating = false} = {}) {
 }
 addEventListener('storage', e => { if (e.key === PROFILE) refreshButtons(); });
 
+// ---------- notices: the new things, each kept until dismissed on its own (Evan, 06:43Z) ----------
+const NOTICE_DAYS = 7, DISMISSED = 'aw-notices-dismissed';
+let notes = null;
+const dismissedSet = () => new Set(load(DISMISSED, []));
+export async function notices() {
+  if (!notes) { try { const r = await fetch('/whats-new.json', {cache: 'no-store'}); notes = r.ok ? ((await r.json()).entries || []) : []; } catch { notes = []; } }
+  const d = dismissedSet(), recent = notes.filter(n => n && n.id && Date.now() - Date.parse(n.date || 0) < NOTICE_DAYS * 86400000);
+  return {open: recent.filter(n => !d.has(n.id)), done: recent.filter(n => d.has(n.id))};
+}
+export function dismissNotice(ids) { const d = dismissedSet(); [].concat(ids).forEach(id => d.add(id)); save(DISMISSED, [...d].slice(-300)); dispatchEvent(new CustomEvent('aw-notices-change')); }
+async function badge() {
+  const n = (await notices()).open.length;
+  for (const b of buttons) {
+    let i = b.querySelector('.aw-badge'); if (!n) { i?.remove(); continue; }
+    if (!i) { i = document.createElement('i'); i.className = 'aw-badge'; b.append(i); }
+    i.textContent = n > 9 ? '9+' : n; b.setAttribute('aria-label', `Profile and settings, ${n} new`);
+  }
+}
+addEventListener('aw-notices-change', badge);
+addEventListener('storage', e => { if (e.key === DISMISSED) badge(); });
+
 // ---------- the sheet ----------
-const PAGES = [['profile', 'Profile'], ['style', 'Style'], ['sound', 'Sound'], ['controls', 'Controls'], ['access', 'Accessibility'], ['places', 'Places']];
+const PAGES = [['profile', 'Profile'], ['notices', 'Notices'], ['style', 'Style'], ['sound', 'Sound'], ['controls', 'Controls'], ['access', 'Accessibility'], ['places', 'Places']];
 const ICON = {
   profile: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
   style: '<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.6" fill="currentColor"/><circle cx="12" cy="7.5" r="1.6" fill="currentColor"/><circle cx="16" cy="10" r="1.6" fill="currentColor"/><path d="M12 21c-1.5 0-2-1-2-2s1-2 2-2h2a3 3 0 0 0 3-3"/>',
   sound: '<path d="M4 10v4h4l5 4V6L8 10z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>',
   controls: '<rect x="2.5" y="7" width="19" height="10" rx="5"/><path d="M7 10v4M5 12h4"/><circle cx="16" cy="11" r="1" fill="currentColor"/><circle cx="18" cy="13" r="1" fill="currentColor"/>',
   access: '<circle cx="12" cy="4.5" r="2"/><path d="M4 8.5l8 1.5 8-1.5M12 10v5l-3 6M12 15l3 6"/>',
+  notices: '<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
   places: '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>'
 };
 const svg = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>`;
@@ -108,9 +130,17 @@ function placesPage() {
   const a = (href, t, s) => `<a class="aws-place" href="${href}"><b>${t}</b><small>${s}</small></a>`;
   return `<div class="aws-places">${a('/studies/', 'Studies', 'Every study, newest first')}${a('/models', 'Models', 'Each model beside its picture')}${a('/cards', 'Cards', 'Open a pack, browse the binder')}${a('/sounds', 'Sounds', 'Every sound in the game')}${a('/live-voice', 'Voice', 'How Suzy sounds and listens')}${a('/sandbox', 'Play', 'Back to the world')}</div>`;
 }
-const RENDER = {profile: profilePage, style: stylePage, sound: soundPage, controls: controlsPage, access: accessPage, places: placesPage};
+let noticeList = {open: [], done: []};
+function noticesPage() {
+  const item = (n, open) => `<div class="aws-notice${open ? '' : ' done'}">${n.image ? `<img src="${esc(n.image)}" alt="" loading="lazy">` : ''}<span><b>${esc(n.title)}</b><small>${esc(n.line || '')}</small></span>${open ? `<button type="button" class="aws-btn" data-dismiss="${esc(n.id)}">Dismiss</button>` : ''}</div>`;
+  const {open, done} = noticeList;
+  return `${open.length ? `<div class="aws-notices">${open.map(n => item(n, true)).join('')}</div>${open.length > 1 ? '<button type="button" class="aws-btn" data-dismiss-all>Dismiss all</button>' : ''}` : '<p class="aws-quiet">Nothing new. You\u2019re all caught up.</p>'}
+  ${done.length ? `<h3>Seen</h3><div class="aws-notices">${done.map(n => item(n, false)).join('')}</div>` : ''}`;
+}
+const RENDER = {notices: noticesPage, profile: profilePage, style: stylePage, sound: soundPage, controls: controlsPage, access: accessPage, places: placesPage};
 
-function show(page) {
+async function show(page) {
+  if (page === 'notices') noticeList = await notices();
   dlg.dataset.page = page;
   dlg.querySelectorAll('.aws-nav [data-page]').forEach(b => b.setAttribute('aria-current', b.dataset.page === page ? 'page' : 'false'));
   const body = dlg.querySelector('.aws-body');
@@ -141,6 +171,8 @@ function build() {
     else if (t.dataset.filter) { filter = t.dataset.filter; show('style'); }
     else if (t.dataset.avatar) { setProfile({avatar: t.dataset.avatar}); show('profile'); head(); }
     else if (t.dataset.color !== undefined) { setProfile({color: t.dataset.color}); show('profile'); head(); }
+    else if (t.dataset.dismiss) { dismissNotice(t.dataset.dismiss); show('notices'); }
+    else if (t.dataset.dismissAll !== undefined) { dismissNotice(noticeList.open.map(n => n.id)); show('notices'); }
   });
   dlg.addEventListener('change', e => {
     const t = e.target;

@@ -36,6 +36,7 @@
   .afb-line{font-size:14px;line-height:1.4;color:var(--app-muted,#797058);margin:0}
   .afb-row{display:flex;gap:10px;margin-top:14px;align-items:center}
   .afb-row .afb-more{flex:1;font-size:12px;color:var(--app-muted,#797058)}
+  .afb-row button.afb-more{background:none;border:0;padding:0;text-align:left;cursor:pointer;font-weight:700;font-size:13px;color:var(--app-accent,#b64932);min-height:40px}
   .afb-btn{min-height:44px;padding:0 18px;border-radius:14px;border:1px solid var(--app-border,#ded5b2);background:transparent;color:inherit;font:700 15px var(--app-font,system-ui,sans-serif);cursor:pointer}
   .afb-btn.primary{background:var(--app-accent,#b64932);border-color:transparent;color:#fff}
   .afb-btn[disabled]{opacity:.55}
@@ -53,10 +54,14 @@
 
   // 2. New version watcher.
   let loadedBuild = null, release = null, notes = [], card = null, dismissedBuild = null, lastCheck = 0;
-  const seen = new Set(JSON.parse(store.get('afb-seen') || '[]'));
-  const markSeen = ids => { ids.forEach(id => seen.add(id)); store.set('afb-seen', JSON.stringify([...seen].slice(-200))); };
+  // Notices (Evan, 2026-10-23 06:43Z): each new thing stays reviewable until it is dismissed on its own. Dismissed ids
+  // live in 'aw-notices-dismissed', shared with the Notices page of Profile and settings (theme/aw.mjs).
+  const NOTICE_DAYS = 7, DISMISSED = 'aw-notices-dismissed';
+  const dismissed = () => { try { return new Set(JSON.parse(store.get(DISMISSED) || '[]')); } catch { return new Set(); } };
+  const dismiss = ids => { const d = dismissed(); ids.forEach(id => d.add(id)); store.set(DISMISSED, JSON.stringify([...d].slice(-300))); window.dispatchEvent(new CustomEvent('aw-notices-change')); };
   const loadNotes = async () => { const data = await getJSON('/whats-new.json'); notes = Array.isArray(data?.entries) ? data.entries : []; return notes; };
-  const unseen = () => notes.filter(n => n && n.id && !seen.has(n.id));
+  const unseen = () => { const d = dismissed(); return notes.filter(n => n && n.id && !d.has(n.id) && Date.now() - Date.parse(n.date || 0) < NOTICE_DAYS * 86400000); };
+  const openNotices = () => import('/theme/aw.mjs').then(m => m.openSettings('notices')).catch(() => {});
   const releaseLine = r => {
     const msg = String(r?.message || '');
     const lines = msg.split('\n').map(s => s.trim()).filter(Boolean);
@@ -70,8 +75,9 @@
       el('div', { class: 'afb-title', text: entry?.title || fallback || 'A new version is ready' }),
       el('p', { class: 'afb-line', text: entry?.line || (entry ? '' : 'Tap Reload to get it.') }),
       el('div', { class: 'afb-row' },
-        el('span', { class: 'afb-more', text: extra > 0 ? `+${extra} more change${extra > 1 ? 's' : ''}` : '' }),
-        el('button', { class: 'afb-btn', type: 'button', text: primary ? 'Later' : 'Close', onclick: () => { card?.remove(); card = null; onClose?.(); } }),
+        extra > 0 ? el('button', { class: 'afb-more', type: 'button', text: `+${extra} more`, onclick: () => { card?.remove(); card = null; openNotices(); } }) : el('span', { class: 'afb-more' }),
+        ...(entry && !primary ? [el('button', { class: 'afb-btn', type: 'button', text: 'Later', onclick: () => { card?.remove(); card = null; } })] : []),
+        el('button', { class: 'afb-btn', type: 'button', text: primary ? 'Later' : entry ? 'Dismiss' : 'Close', onclick: () => { card?.remove(); card = null; onClose?.(); } }),
         ...(primary ? [el('button', { class: 'afb-btn primary', type: 'button', text: primary, onclick: onPrimary })] : [])));
     card = el('section', { class: 'afb-card', role: 'status', 'aria-live': 'polite', 'data-feedback-ui': '' });
     // A NEW sash across the corner (Evan, 2026-10-23 04:47Z: "put a NEW banner!!").
@@ -87,11 +93,11 @@
     const remote = (await getJSON('/view-build.json'))?.buildId;
     if (!remote || remote === loadedBuild || remote === dismissedBuild) return;
     const [fresh, rel] = await Promise.all([loadNotes(), getJSON('/app-release.json')]);
-    const list = fresh.filter(n => n && n.id && !seen.has(n.id));
+    const list = unseen();
     showCard({
       kicker: 'New version ready', entry: list[0], extra: list.length - 1, fallback: releaseLine(rel) || 'A new version is ready',
       primary: 'Reload',
-      onPrimary: () => { markSeen(list.map(n => n.id)); store.set('afb-build', remote); location.reload(); },
+      onPrimary: () => { store.set('afb-build', remote); location.reload(); },
       onClose: () => { dismissedBuild = remote; }
     });
   }
@@ -102,10 +108,9 @@
     const previous = store.get('afb-build');
     store.set('afb-build', loadedBuild || '');
     // Arrived on a new version without tapping Reload (a fresh launch): show what changed once.
-    const fresh = unseen().filter(n => Date.now() - Date.parse(n.date || 0) < 7 * 86400000);
-    if (loadedBuild && previous !== loadedBuild && fresh.length) {
-      showCard({ kicker: "What's new", entry: fresh[0], extra: fresh.length - 1, onClose: () => markSeen(unseen().map(n => n.id)) });
-    } else markSeen(unseen().map(n => n.id));
+    // Dismiss takes off only the notice on the card and shows the next one; the rest wait under Notices.
+    const next = () => { const fresh = unseen(); if (fresh.length) showCard({ kicker: "What's new", entry: fresh[0], extra: fresh.length - 1, onClose: () => { dismiss([fresh[0].id]); next(); } }); };
+    if (loadedBuild && previous !== loadedBuild) next();
     setInterval(check, 60000);
   }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) check(true); });
