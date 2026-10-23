@@ -54,7 +54,7 @@
     return window.AWLook.state;
   }
   window.AWLook = {KEY, ABBIE, read, tokens, apply, state: null};
-  if (!document.querySelector('link[data-aw-css]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/theme/aw.css?v=1'; l.dataset.awCss = ''; document.head.append(l); }
+  if (!document.querySelector('link[data-aw-css]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/theme/aw.css?v=2'; l.dataset.awCss = ''; document.head.append(l); }
   apply();
   // Mute: every sound that starts playing on this page starts muted.
   document.addEventListener('play', e => { if (window.AWLook.state?.prefs?.mute && e.target && 'muted' in e.target) e.target.muted = true; }, true);
