@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Brute Fight</title>
+<style>
+/* AW-STUDY-0027: two Meshy brutes, painted, rigged and animated, in a ranch ring. A cartoon brawl: stars, dust and
+   bonks, never blood. No words on screen. Overlay: two health pills (precision) and, on touch, the move pad. */
+html,body{margin:0;height:100%;background:#2b2233;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;font-family:system-ui,sans-serif}
+canvas{display:block;width:100vw;height:100dvh}
+.glass{position:fixed;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(255,255,255,.1));border:1px solid rgba(255,255,255,.5);
+ box-shadow:0 10px 30px rgba(30,15,40,.35),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -6px 14px rgba(90,50,40,.2);-webkit-backdrop-filter:none;backdrop-filter:none}
+#back{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));width:40px;height:40px;display:grid;place-items:center;color:#fff;text-decoration:none;opacity:.85}
+.hp{top:max(18px,env(safe-area-inset-top));width:min(30vw,190px);height:12px;padding:2px;box-sizing:border-box}
+.hp i{display:block;height:100%;border-radius:999px;transition:width .25s ease-out}
+#hpR{left:calc(max(12px,env(safe-area-inset-left)) + 52px)} #hpB{right:max(16px,env(safe-area-inset-right))}
+#hpR i{background:linear-gradient(180deg,#ff8a7a,#c8322f);box-shadow:0 0 10px #ff6a5a88}
+#hpB{direction:rtl} #hpB i{background:linear-gradient(180deg,#8fb4ff,#2f5fc4);box-shadow:0 0 10px #6a9aff88}
+#pad{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));width:136px;height:136px;display:none}
+#pad .b,#blockb,#walk{position:absolute;width:46px;height:46px;display:grid;place-items:center;color:#fff;border-radius:50%}
+#pad .b svg,#blockb svg{width:26px;height:26px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+#pad .b.on,#blockb.on{transform:scale(.9);background:linear-gradient(180deg,rgba(255,240,200,.6),rgba(255,200,120,.25))}
+#bJ{left:0;top:45px} #bH{left:45px;top:0} #bU{right:0;top:45px} #bA{left:45px;bottom:0}
+#blockb{right:calc(max(14px,env(safe-area-inset-right)) + 146px);bottom:calc(max(14px,env(safe-area-inset-bottom)) + 45px);display:none}
+#stick{position:fixed;width:64px;height:64px;margin:-32px 0 0 -32px;display:none;pointer-events:none}
+#stick i{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffe9c9 45%,#e0a96a)}
+#cue{left:50%;bottom:max(16px,env(safe-area-inset-bottom));translate:-50% 0;height:44px;padding:0 14px;display:none;align-items:center;gap:6px;color:#fff}
+#cue svg{width:26px;height:26px}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js"}}</script>
+</head>
+<body>
+<a id="back" class="glass" href="./" aria-label="Back to the study"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
+<div id="hpR" class="glass hp" aria-label="Red brute's strength"><i style="width:100%"></i></div>
+<div id="hpB" class="glass hp" aria-label="Blue brute's strength"><i style="width:100%"></i></div>
+<div id="pad" aria-label="Punches">
+ <div class="b glass" id="bJ" data-m="jab" aria-label="Jab"><svg viewBox="0 0 32 32" fill="#fff"><rect x="9" y="11" width="12" height="10" rx="4"/><rect x="3" y="13" width="7" height="6" rx="2" opacity=".7"/><path d="M23 16h6" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+ <div class="b glass" id="bH" data-m="heavy" aria-label="Heavy punch"><svg viewBox="0 0 32 32" fill="#fff"><rect x="7" y="8" width="17" height="15" rx="5"/><path d="M26 10l4-3M27 16h4M26 22l4 3" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+ <div class="b glass" id="bU" data-m="uppercut" aria-label="Uppercut"><svg viewBox="0 0 32 32" fill="#fff"><rect x="10" y="13" width="12" height="12" rx="4"/><path d="M16 10V3M12 7l4-4 4 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+ <div class="b glass" id="bA" data-m="axe" aria-label="Two-fisted hammer"><svg viewBox="0 0 32 32" fill="#fff"><rect x="5" y="4" width="10" height="10" rx="3"/><rect x="17" y="4" width="10" height="10" rx="3"/><path d="M16 17v11M12 24l4 4 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+</div>
+<div id="blockb" class="glass" aria-label="Block"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M7 25L24 6M25 25L8 6"/></svg></div>
+<div id="stick" class="glass"><i></i></div>
+<div id="cue" class="glass" aria-hidden="true"></div>
+<script type="module">
+import * as T from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const opt = async (p) => { try { return await import(p); } catch { return {}; } };
+const PL = await opt('/simulations/presentation-layer.mjs');
+const presentation = PL.presentation || ((o) => o);
+
+const q = new URLSearchParams(location.search);
+const SHOW = q.get('show') === 'moves';
+const BASE = new URL('.', import.meta.url);
+const DATA = await (await fetch(new URL('moves.json', BASE))).json();
+const MOVES = DATA.moves, CLIPS = DATA.clips;
+
+// ---------- renderer, scene, one warm afternoon over a ranch ring ----------
+const renderer = new T.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+document.body.prepend(renderer.domElement);
+const scene = new T.Scene();
+scene.background = new T.Color('#f3b98a'); scene.fog = new T.Fog('#f1c39a', 22, 60);
+const camera = new T.PerspectiveCamera(34, 1, .1, 200);
+scene.add(new T.HemisphereLight('#ffe6c8', '#6b4b3a', 1.25));
+const sun = new T.DirectionalLight('#ffd2a0', 2.4); sun.position.set(-6, 10, 7); sun.castShadow = true;
+Object.assign(sun.shadow.camera, {left: -8, right: 8, top: 8, bottom: -8, near: 1, far: 40}); sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0004;
+scene.add(sun, sun.target);
+
+function canvasTex(w, h, draw, rep = 1) {
+ const c = Object.assign(document.createElement('canvas'), {width: w, height: h}); draw(c.getContext('2d'), w, h);
+ const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(rep, rep); return t;
+}
+// dirt floor of the ring, a grass field beyond it
+const dirt = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#c99a68'; g.fillRect(0, 0, w, h);
+ for (let i = 0; i < 1400; i++) { g.fillStyle = ['#b98a5a', '#d6a874', '#a87a4d', '#e0b585'][i & 3]; g.globalAlpha = .45; g.fillRect(Math.random() * w, Math.random() * h, 2 + Math.random() * 5, 1 + Math.random() * 3); } }, 4);
+const grass = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#7fa65a'; g.fillRect(0, 0, w, h);
+ for (let i = 0; i < 1600; i++) { g.fillStyle = ['#6f9a4b', '#8db866', '#5f8a40'][i % 3]; g.globalAlpha = .5; g.fillRect(Math.random() * w, Math.random() * h, 2, 4 + Math.random() * 4); } }, 18);
+const field = new T.Mesh(new T.CircleGeometry(60, 48), new T.MeshStandardMaterial({map: grass, roughness: 1})); field.rotation.x = -Math.PI / 2; field.position.y = -.01; field.receiveShadow = true; scene.add(field);
+const ring = new T.Mesh(new T.CircleGeometry(6.2, 48), new T.MeshStandardMaterial({map: dirt, roughness: 1})); ring.rotation.x = -Math.PI / 2; ring.receiveShadow = true; scene.add(ring);
+// a split-rail fence round the ring, posts and two rails, painted wood
+const wood = new T.MeshStandardMaterial({color: '#8a5a36', roughness: .9, flatShading: true});
+const woodLight = new T.MeshStandardMaterial({color: '#b07a4c', roughness: .9, flatShading: true});
+const N = 22, R = 6.4;
+for (let i = 0; i < N; i++) {
+ const a = i / N * Math.PI * 2, b = (i + 1) / N * Math.PI * 2;
+ if (Math.sin(a) > .2 && Math.sin(b) > .2) continue;   // the near side stays open so the fence never stands in front of the fight
+ const post = new T.Mesh(new T.CylinderGeometry(.09, .11, 1.3, 6), wood); post.position.set(Math.cos(a) * R, .65, Math.sin(a) * R); post.castShadow = true; scene.add(post);
+ const p0 = new T.Vector3(Math.cos(a) * R, 0, Math.sin(a) * R), p1 = new T.Vector3(Math.cos(b) * R, 0, Math.sin(b) * R), len = p0.distanceTo(p1);
+ for (const y of [.55, 1.05]) {
+  const rail = new T.Mesh(new T.BoxGeometry(len, .08, .06), woodLight); rail.position.copy(p0).add(p1).multiplyScalar(.5); rail.position.y = y;
+  rail.rotation.y = -Math.atan2(p1.z - p0.z, p1.x - p0.x); rail.castShadow = true; scene.add(rail);
+ }
+}
+// hay bales and the ring bell on its post (the bell is how everyone in the ring knows a round starts and ends)
+const hay = new T.MeshStandardMaterial({color: '#e2c065', roughness: 1, flatShading: true});
+for (const [x, z, r] of [[-7.6, -2.5, .3], [-7.2, -1.2, -.2], [7.4, -2.2, .5], [-3, -7.3, .1], [3.4, -7.1, -.3], [4.6, -6.6, .8]]) {
+ const b = new T.Mesh(new T.BoxGeometry(1.1, .55, .6), hay); b.position.set(x, .28, z); b.rotation.y = r; b.castShadow = b.receiveShadow = true; scene.add(b);
+}
+const bellPost = new T.Group(); bellPost.position.set(0, 0, -7.2); scene.add(bellPost);
+const bp = new T.Mesh(new T.CylinderGeometry(.11, .14, 3.1, 6), wood); bp.position.y = 1.55; bp.castShadow = true; bellPost.add(bp);
+const arm = new T.Mesh(new T.BoxGeometry(.9, .12, .12), wood); arm.position.set(.35, 3, 0); bellPost.add(arm);
+const bellG = new T.Group(); bellG.position.set(.7, 2.92, 0); bellPost.add(bellG);
+const bell = new T.Mesh(new T.LatheGeometry([[0, 0], [.2, -.02], [.2, -.06], [.16, -.12], [.13, -.3], [.06, -.38], [0, -.4]].map(([x, y]) => new T.Vector2(x, y)), 10),
+ new T.MeshStandardMaterial({color: '#d9a640', metalness: .8, roughness: .3, flatShading: true}));
+bell.castShadow = true; bellG.add(bell);
+// rolling low-poly hills
+const hillM = new T.MeshStandardMaterial({color: '#8fae63', roughness: 1, flatShading: true});
+for (let i = 0; i < 9; i++) {
+ const h = new T.Mesh(new T.IcosahedronGeometry(8 + (i % 3) * 3, 0), hillM); const a = Math.PI * (1.1 + i * .1);
+ h.position.set(Math.cos(a) * 42, -3, Math.sin(a) * 36 - 6); h.scale.y = .45; scene.add(h);
+}
+
+// ---------- sound: punches thud, blocks clack, the bell rings ----------
+let AC = null;
+const audio = () => { if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch {} } if (AC && AC.state === 'suspended') AC.resume(); return AC; };
+function noise(dur, f0, f1, gain, type = 'lowpass') {
+ const a = AC; if (!a) return; const n = a.createBuffer(1, a.sampleRate * dur, a.sampleRate), d = n.getChannelData(0);
+ for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length) ** 2;
+ const s = a.createBufferSource(); s.buffer = n; const f = a.createBiquadFilter(); f.type = type; f.frequency.setValueAtTime(f0, a.currentTime); f.frequency.exponentialRampToValueAtTime(f1, a.currentTime + dur);
+ const g = a.createGain(); g.gain.value = gain; s.connect(f).connect(g).connect(a.destination); s.start();
+}
+function tone(freq, dur, gain, type = 'sine', drop = .5) {
+ const a = AC; if (!a) return; const o = a.createOscillator(), g = a.createGain(); o.type = type;
+ o.frequency.setValueAtTime(freq, a.currentTime); o.frequency.exponentialRampToValueAtTime(freq * drop, a.currentTime + dur);
+ g.gain.setValueAtTime(gain, a.currentTime); g.gain.exponentialRampToValueAtTime(.001, a.currentTime + dur); o.connect(g).connect(a.destination); o.start(); o.stop(a.currentTime + dur);
+}
+const SFX = {
+ whoosh: () => noise(.18, 900, 2600, .12, 'bandpass'),
+ bonk: (big) => { tone(big ? 110 : 160, big ? .35 : .2, .5, 'sine', .45); noise(.12, 1800, 300, big ? .5 : .32); tone(big ? 520 : 700, .12, .08, 'triangle', 1.6); },
+ clack: () => { noise(.08, 3000, 1200, .35, 'highpass'); tone(420, .08, .12, 'square', .8); },
+ thump: () => { tone(70, .4, .7, 'sine', .5); noise(.3, 600, 120, .35); },
+ bell: () => { if (!AC) return; [1, 2.76, 5.4, 8.9].forEach((m, i) => tone(520 * m, 2.4 / (1 + i * .6), .16 / (1 + i), 'sine', .995)); },
+};
+
+// ---------- effects: stars on a hit, a ring on a block, dust on landing ----------
+const starTex = canvasTex(128, 128, (g) => { g.translate(64, 64); g.beginPath();
+ for (let i = 0; i < 16; i++) { const r = i % 2 ? 22 : 60, a = i / 16 * Math.PI * 2; g.lineTo(Math.cos(a) * r, Math.sin(a) * r); }
+ g.closePath(); const gr = g.createRadialGradient(0, 0, 4, 0, 0, 60); gr.addColorStop(0, '#fff'); gr.addColorStop(.4, '#fff3a0'); gr.addColorStop(1, '#ffb030'); g.fillStyle = gr; g.fill(); g.lineWidth = 5; g.strokeStyle = '#fff'; g.stroke(); });
+const ringTex = canvasTex(128, 128, (g) => { g.lineWidth = 10; g.strokeStyle = '#dff0ff'; g.shadowColor = '#7ab8ff'; g.shadowBlur = 14; g.beginPath(); g.arc(64, 64, 44, 0, Math.PI * 2); g.stroke(); });
+const dustTex = canvasTex(64, 64, (g) => { const gr = g.createRadialGradient(32, 32, 2, 32, 32, 30); gr.addColorStop(0, 'rgba(225,190,140,.9)'); gr.addColorStop(1, 'rgba(225,190,140,0)'); g.fillStyle = gr; g.fillRect(0, 0, 64, 64); });
+const fx = [];
+function burst(tex, pos, size, life, grow = 1.6, vel = null) {
+ const s = presentation(new T.Sprite(new T.SpriteMaterial({map: tex, transparent: true, depthWrite: false, depthTest: false})));
+ s.position.copy(pos); s.scale.setScalar(size); s.renderOrder = 10; scene.add(s); fx.push({s, t: 0, life, size, grow, vel, spin: (Math.random() - .5) * 6});
+}
+function dust(x, z) { for (let i = 0; i < 7; i++) burst(dustTex, new T.Vector3(x + (Math.random() - .5) * 1.2, .15, z + (Math.random() - .5) * .6), .5, .7, 2.6, new T.Vector3((Math.random() - .5) * 1.5, .5, (Math.random() - .5) * .5)); }
+function stepFx(dt) {
+ for (let i = fx.length - 1; i >= 0; i--) {
+  const f = fx[i]; f.t += dt; const k = f.t / f.life;
+  f.s.scale.setScalar(f.size * (1 + (f.grow - 1) * Math.min(1, k * 2))); f.s.material.opacity = 1 - k * k; f.s.material.rotation += f.spin * dt;
+  if (f.vel) f.s.position.addScaledVector(f.vel, dt);
+  if (k >= 1) { scene.remove(f.s); f.s.material.dispose(); fx.splice(i, 1); }
+ }
+}
+
+// ---------- fighters ----------
+const loader = new GLTFLoader();
+const load = (u) => new Promise((ok, no) => loader.load(new URL(u, BASE).href, ok, undefined, no));
+const [gR, gB] = await Promise.all([load('red/fighter.glb'), load('blue/fighter.glb')]);
+const ARENA = 4.9, MIN_GAP = .95, WALK = 1.7;
+
+class Brute {
+ constructor(gltf, x, tint) {
+  this.root = new T.Group(); this.model = gltf.scene; this.root.add(this.model); scene.add(this.root);
+  this.model.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; o.frustumCulled = false; if (o.material.map) o.material.map.anisotropy = 4; } });
+  this.mixer = new T.AnimationMixer(this.model); this.acts = {};
+  for (const c of gltf.animations) { const a = this.mixer.clipAction(c); const info = CLIPS[c.name] || {}; a.setLoop(info.loop ? T.LoopRepeat : T.LoopOnce); a.clampWhenFinished = true; this.acts[c.name] = a; }
+  this.x = x; this.vx = 0; this.face = 1; this.hp = 100; this.tint = tint; this.reset(x);
+ }
+ reset(x) { this.x = x; this.vx = 0; this.hp = 100; this.state = 'idle'; this.t = 0; this.cur = null; this.play('idle'); }
+ play(name, fade = .08, speed = 1) {
+  const a = this.acts[name]; if (!a) return;
+  if (this.cur && this.cur !== a) this.cur.fadeOut(fade);
+  a.reset(); a.setEffectiveTimeScale(speed); a.setEffectiveWeight(1); a.fadeIn(fade); a.play(); this.cur = a; this.clip = name;
+ }
+ len(name) { return (CLIPS[name] || {length: .5}).length; }
+ set(state, clip, fade) { this.state = state; this.t = 0; this.hitDone = false; this.play(clip || state, fade); }
+ busy() { return ['attack', 'react', 'jump', 'down', 'getup', 'ko', 'win'].includes(this.state); }
+ attack(m) { if (this.busy()) return; this.move = m; this.set('attack', m); SFX.whoosh(); }
+ update(dt, input, foe) {
+  this.t += dt;
+  const toward = Math.sign(foe.x - this.x) || this.face;
+  if (!this.busy()) this.face = toward;
+  if (this.state === 'attack') {
+   const m = MOVES[this.move];
+   if (!this.hitDone && this.t >= m.hit) { this.hitDone = true; resolve(this, foe, this.move); }
+   if (this.t >= this.len(this.move)) this.set('idle');
+  } else if (this.state === 'react') {
+   if (this.t >= this.len(this.clip)) this.set(this.blocking ? 'block' : 'idle', this.blocking ? 'block' : 'idle');
+  } else if (this.state === 'jump') {
+   this.x += this.jdir * 2.2 * dt;
+   if (this.t >= this.len('jump')) { this.set('idle'); dust(this.x, 0); }
+  } else if (this.state === 'down') {
+   if (this.t > .72 && !this.landed) { this.landed = true; dust(this.x, 0); SFX.thump(); shake(.18); }
+   if (this.t >= this.len('fall') + .5) { if (this.hp > 0) this.set('getup'); else this.state = 'ko'; }
+  } else if (this.state === 'getup') {
+   if (this.t >= this.len('getup')) this.set('idle');
+  } else if (!this.busy()) {
+   // free: block, jump, attack, walk
+   this.blocking = !!input.block;
+   if (input.attack) { this.attack(input.attack); }
+   else if (input.jump) { this.jdir = input.move || 0; this.set('jump'); SFX.whoosh(); }
+   else if (input.block) { if (this.state !== 'block') this.set('block'); }
+   else if (input.move) {
+    const fwd = input.move === this.face; const clip = fwd ? 'walk_fwd' : 'walk_back';
+    if (this.state !== 'walk' || this.clip !== clip) { this.state = 'walk'; this.play(clip, .12); }
+    this.x += input.move * WALK * (fwd ? 1 : .75) * dt;
+   } else if (this.state !== 'idle') this.set('idle', 'idle', .14);
+  }
+  // shove, arena walls, never inside each other
+  this.x += this.vx * dt; this.vx *= Math.exp(-dt * 7);
+  this.x = Math.max(-ARENA, Math.min(ARENA, this.x));
+  if (Math.abs(foe.x - this.x) < MIN_GAP && this.state !== 'jump' && foe.state !== 'jump') { const mid = (this.x + foe.x) / 2, s = Math.sign(this.x - foe.x) || -this.face; this.x = mid + s * MIN_GAP / 2; }
+  // tired brutes sway slower and lower: how the other brute (and you) can tell
+  if (this.clip === 'idle' && this.cur) this.cur.setEffectiveTimeScale(this.hp < 35 ? .7 : 1);
+  this.root.position.x = this.x;
+  // drawn mirrored, so his stance opens toward the camera whichever way he faces (both show their chest, like a 2D fighter)
+  this.root.rotation.y = this.face * Math.PI / 2; this.model.scale.x = -1;
+  this.mixer.update(dt);
+ }
+ react(clip, push) { this.blocking = this.state === 'block'; this.set('react', clip, .04); this.vx += push; }
+ fall(push) { this.landed = false; this.set('down', 'fall', .05); this.vx += push; }
+}
+const red = new Brute(gR, -1.5, '#c8322f'), blue = new Brute(gB, 1.5, '#2f5fc4');
+red.foe = blue; blue.foe = red;
+const hpEl = {red: document.querySelector('#hpR i'), blue: document.querySelector('#hpB i')};
+
+let hitstop = 0, shakeAmt = 0, roundOver = 0;
+const shake = (a) => { shakeAmt = Math.max(shakeAmt, a); };
+function resolve(a, b, moveName, force = false) {
+ const m = MOVES[moveName], d = Math.abs(a.x - b.x);
+ const reachOK = force || d <= m.reach;
+ if (!reachOK || b.state === 'down' || b.state === 'ko' || b.state === 'getup' || (b.state === 'jump' && moveName !== 'uppercut')) return;
+ const at = new T.Vector3((a.x + b.x) / 2 + a.face * .15, moveName === 'axe' ? 1.55 : moveName === 'uppercut' ? 1.75 : 1.6, .2);
+ const blocked = b.state === 'block' || (b.state === 'react' && b.blocking);
+ if (blocked) {
+  b.hp = Math.max(1, b.hp - m.damage * .15); b.react(m.blocked, a.face * m.push * 4);
+  burst(ringTex, at, .55, .25, 2.2); SFX.clack(); hitstop = .05; shake(.04);
+ } else {
+  b.hp = Math.max(0, b.hp - m.damage);
+  if (b.hp <= 0 || m.knockdown) b.fall(a.face * 2.6); else b.react(m.react, a.face * m.push * 6);
+  burst(starTex, at, moveName === 'jab' ? .45 : .7, .28, 1.8); SFX.bonk(moveName !== 'jab'); hitstop = moveName === 'jab' ? .05 : .09; shake(moveName === 'jab' ? .05 : .12);
+  if (b.hp <= 0) { roundOver = 3.6; setTimeout(() => { if (a.state !== 'ko') a.set('win', 'victory'); ringBell(); }, 900); }
+ }
+ hpEl.red.style.width = red.hp + '%'; hpEl.blue.style.width = blue.hp + '%';
+}
+let bellSwing = 0;
+function ringBell() { SFX.bell(); bellSwing = 1; }
+
+// ---------- who drives: AI for both until you touch or press, then you are red ----------
+let human = false;
+const keys = new Set(), pressed = [];
+const KEYMAP = {KeyJ: 'jab', KeyK: 'heavy', KeyL: 'uppercut', KeyI: 'axe'};
+addEventListener('keydown', e => { audio(); takeOver(); if (!e.repeat) { if (KEYMAP[e.code]) pressed.push({attack: KEYMAP[e.code]}); if (e.code === 'KeyW' || e.code === 'ArrowUp' || e.code === 'Space') pressed.push({jump: true}); } keys.add(e.code); });
+addEventListener('keyup', e => keys.delete(e.code));
+function takeOver() { if (SHOW || human) return; human = true; }
+const touchy = matchMedia('(pointer:coarse)').matches;
+const pad = document.getElementById('pad'), blockb = document.getElementById('blockb'), stick = document.getElementById('stick');
+if (touchy && !SHOW) { pad.style.display = 'block'; blockb.style.display = 'grid'; }
+if (SHOW) { for (const id of ['pad', 'blockb', 'hpR', 'hpB']) document.getElementById(id).style.display = 'none'; }
+let touchBlock = false, stickMove = 0, stickId = null, stickY0 = 0;
+pad.querySelectorAll('.b').forEach(b => b.addEventListener('pointerdown', e => { e.preventDefault(); audio(); takeOver(); pressed.push({attack: b.dataset.m}); b.classList.add('on'); setTimeout(() => b.classList.remove('on'), 140); }));
+blockb.addEventListener('pointerdown', e => { e.preventDefault(); audio(); takeOver(); touchBlock = true; blockb.classList.add('on'); });
+const unblock = () => { touchBlock = false; blockb.classList.remove('on'); };
+blockb.addEventListener('pointerup', unblock); blockb.addEventListener('pointercancel', unblock); blockb.addEventListener('pointerleave', unblock);
+// left half of the screen: drag to walk, flick up to jump
+renderer.domElement.addEventListener('pointerdown', e => {
+ audio(); if (SHOW) return; takeOver();
+ if (e.clientX > innerWidth * .55 || stickId !== null) return;
+ stickId = e.pointerId; stick.style.display = 'block'; stick.style.left = e.clientX + 'px'; stick.style.top = e.clientY + 'px'; stick.x0 = e.clientX; stickY0 = e.clientY;
+});
+addEventListener('pointermove', e => {
+ if (e.pointerId !== stickId) return;
+ const dx = e.clientX - stick.x0, dy = e.clientY - stickY0;
+ stickMove = Math.abs(dx) > 14 ? Math.sign(dx) : 0;
+ stick.firstElementChild.style.transform = `translate(${Math.max(-20, Math.min(20, dx))}px,${Math.max(-20, Math.min(20, dy))}px)`;
+ if (dy < -38) { pressed.push({jump: true}); stickY0 = e.clientY; }
+});
+const endStick = e => { if (e.pointerId !== stickId) return; stickId = null; stickMove = 0; stick.style.display = 'none'; stick.firstElementChild.style.transform = ''; };
+addEventListener('pointerup', endStick); addEventListener('pointercancel', endStick);
+
+function humanInput() {
+ const inp = {move: 0, block: keys.has('KeyS') || keys.has('ArrowDown') || touchBlock};
+ if (keys.has('KeyA') || keys.has('ArrowLeft')) inp.move -= 1;
+ if (keys.has('KeyD') || keys.has('ArrowRight')) inp.move += 1;
+ if (stickMove) inp.move = stickMove;
+ const p = pressed.shift(); if (p) Object.assign(inp, p);
+ return inp;
+}
+function brain(me) {
+ // a simple brawler: close in, swing, sometimes block what's coming, sometimes back off or hop
+ const foe = me.foe, d = Math.abs(foe.x - me.x), toward = Math.sign(foe.x - me.x);
+ me.ai = me.ai || {cd: .6, hold: 0, wander: 0};
+ const ai = me.ai; ai.cd -= DT; ai.hold -= DT; ai.wander -= DT;
+ if (ai.hold > 0) return {block: true};
+ if (foe.state === 'attack' && foe.t < .2 && d < 1.8 && Math.random() < .045) { ai.hold = .5 + Math.random() * .3; return {block: true}; }
+ if (ai.wander > 0) return {move: -toward};
+ if (d > 1.3) return {move: toward};
+ if (ai.cd <= 0) {
+  ai.cd = .35 + Math.random() * .8;
+  const r = Math.random();
+  if (r < .06) { ai.wander = .5; return {move: -toward}; }
+  if (r < .1) return {jump: true, move: toward};
+  const w = [['jab', 4], ['heavy', 2.2], ['uppercut', 2], ['axe', 1.1]]; let s = Math.random() * 9.3;
+  for (const [m, k] of w) { if ((s -= k) <= 0) return {attack: m}; }
+  return {attack: 'jab'};
+ }
+ return {};
+}
+
+// ---------- the moves show: every blow, then its hit reaction and its blocked reaction ----------
+const cue = document.getElementById('cue');
+const ICON = Object.fromEntries([...pad.querySelectorAll('.b')].map(b => [b.dataset.m, b.innerHTML]));
+const SHOWLIST = ['jab', 'heavy', 'uppercut', 'axe'].flatMap(m => [{m, block: false}, {m, block: true}]).concat([{jump: true}, {victory: true}]);
+let showI = -1, showT = 0;
+function showStep(dt) {
+ showT -= dt;
+ if (showT > 0) return;
+ showI = (showI + 1) % SHOWLIST.length; const s = SHOWLIST[showI];
+ red.reset(-.65); blue.reset(.65); red.face = 1; blue.face = -1; hpEl.red.style.width = hpEl.blue.style.width = '100%';
+ const atk = showI % 4 < 2 ? red : blue, def = atk.foe;   // take turns being the one who swings
+ cue.style.display = 'flex'; cue.innerHTML = s.m ? ICON[s.m] + (s.block ? '<svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M7 25L24 6M25 25L8 6"/></svg>' : '') : '';
+ if (!s.m) cue.style.display = 'none';
+ setTimeout(() => {
+  if (s.jump) { red.set('jump'); setTimeout(() => blue.set('jump'), 300); }
+  else if (s.victory) { red.set('win', 'victory'); blue.set('win', 'victory'); ringBell(); }
+  else { if (s.block) def.set('block'); atk.attack(s.m); atk.showForce = true; }
+ }, 450);
+ showT = s.m === 'axe' && !s.block ? 4.6 : s.victory ? 3.2 : 2.3;
+}
+
+// ---------- camera: a side-on fight camera that frames both brutes, with a little shake ----------
+function frame(dt) {
+ const mid = (red.x + blue.x) / 2, gap = Math.abs(red.x - blue.x);
+ const aspect = innerWidth / innerHeight;
+ const needW = gap + (aspect < 1 ? 2.2 : 3.4), needH = 3.0;
+ const vfov = camera.fov * Math.PI / 180, distH = needH / 2 / Math.tan(vfov / 2), distW = needW / 2 / Math.tan(vfov / 2) / aspect;
+ const dist = Math.max(distH, distW, 6);
+ const target = new T.Vector3(mid, 1.08, 0);
+ const want = new T.Vector3(mid, 1.45 + dist * .05, dist);
+ camera.position.lerp(want, Math.min(1, dt * 4));
+ shakeAmt *= Math.exp(-dt * 10);
+ camera.position.x += (Math.random() - .5) * shakeAmt; camera.position.y += (Math.random() - .5) * shakeAmt;
+ camera.lookAt(target);
+}
+function resize() { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+
+// ---------- loop ----------
+let DT = 1 / 60, last = performance.now();
+camera.position.set(0, 1.8, 9);
+setTimeout(ringBell, 500);
+renderer.setAnimationLoop(() => {
+ const now = performance.now(); let dt = Math.min(.05, (now - last) / 1000); last = now; DT = dt;
+ stepFx(dt);
+ bellSwing *= Math.exp(-dt * 1.4); bellG.rotation.z = Math.sin(now / 90) * .35 * bellSwing;
+ if (hitstop > 0) { hitstop -= dt; dt = 0; }
+ if (SHOW) {
+  showStep(DT);
+  for (const b of [red, blue]) {
+   if (b.state === 'attack' && b.showForce && !b.hitDone && b.t + dt >= MOVES[b.move].hit) { b.hitDone = true; resolve(b, b.foe, b.move, true); b.showForce = false; }
+   b.update(dt, b.state === 'block' ? {block: true} : {}, b.foe);
+  }
+ } else {
+  red.update(dt, human ? humanInput() : brain(red), blue);
+  blue.update(dt, brain(blue), red);
+  if (roundOver > 0 && (roundOver -= DT) <= 0) { red.reset(-1.5); blue.reset(1.5); hpEl.red.style.width = hpEl.blue.style.width = '100%'; ringBell(); }
+ }
+ frame(DT);
+ renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
