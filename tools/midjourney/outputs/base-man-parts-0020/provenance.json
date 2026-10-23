@@ -544,6 +544,150 @@
           "bytes": 629889
         }
       ]
+    },
+    {
+      "name": "hips",
+      "prompt": "isolated anatomical study of a single adult male pelvis and hips wearing plain fitted grey briefs, glutes, hip bones and the tops of the thighs, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "30b2ffee-0755-4d3f-ac57-f6fba11420c9",
+      "created": "2026-10-23T07:24:59Z",
+      "files": [
+        {
+          "file": "images/hips_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/30b2ffee-0755-4d3f-ac57-f6fba11420c9/0_0.png",
+          "sha256": "808e3f6f1e1f837d43deb021b3b668cf3f5cf3f4ad3814ef0b861ff175c63746",
+          "bytes": 659397
+        },
+        {
+          "file": "images/hips_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/30b2ffee-0755-4d3f-ac57-f6fba11420c9/0_1.png",
+          "sha256": "3923669c48f6c6ef23f87ebfb72d47f43e0b153e8965cebed732f1ddd5c38bef",
+          "bytes": 742257
+        },
+        {
+          "file": "images/hips_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/30b2ffee-0755-4d3f-ac57-f6fba11420c9/0_2.png",
+          "sha256": "53381ae0d41091fb349e83085017e92a8b648367aa6d8a72f718fd8ba043528b",
+          "bytes": 635274
+        },
+        {
+          "file": "images/hips_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/30b2ffee-0755-4d3f-ac57-f6fba11420c9/0_3.png",
+          "sha256": "3c931d5713d3a57757a580e3abb92b19f10a1a1ca3d1700d7f2fd5b0bae93eca",
+          "bytes": 700828
+        }
+      ]
+    },
+    {
+      "name": "thigh",
+      "prompt": "isolated anatomical study of a single adult male right thigh from hip to knee, quadriceps in front, hamstrings behind, inner thigh lower than outer, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "44b60a17-bd22-4836-897a-166a8a5632a4",
+      "created": "2026-10-23T07:25:42Z",
+      "files": [
+        {
+          "file": "images/thigh_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/44b60a17-bd22-4836-897a-166a8a5632a4/0_0.png",
+          "sha256": "c84f3f3a0918190be17d158d1d209323ae23b578bea5506546185cab7a22350a",
+          "bytes": 543360
+        },
+        {
+          "file": "images/thigh_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/44b60a17-bd22-4836-897a-166a8a5632a4/0_1.png",
+          "sha256": "df8c97335729d9cd5494c67a07e63e9d6461bc86d21b76c9632a81a7f13310d8",
+          "bytes": 617313
+        },
+        {
+          "file": "images/thigh_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/44b60a17-bd22-4836-897a-166a8a5632a4/0_2.png",
+          "sha256": "47f7e850bd8ce673b2a61cd2e4c448ab484fa73763be3352f263f90dbbc8547f",
+          "bytes": 621292
+        },
+        {
+          "file": "images/thigh_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/44b60a17-bd22-4836-897a-166a8a5632a4/0_3.png",
+          "sha256": "d554d19234c7c195429d9d3d195e6f31f074f9af0cd6d05734fa3c35558ee831",
+          "bytes": 515560
+        }
+      ]
+    },
+    {
+      "name": "knee",
+      "prompt": "isolated anatomical study of a single adult male right knee joint, kneecap, the bulge of the inner thigh above it and the shin below, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "7cbaca2e-6278-4902-a5f8-ef962285e88b",
+      "created": "2026-10-23T07:26:24Z",
+      "files": [
+        {
+          "file": "images/knee_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/7cbaca2e-6278-4902-a5f8-ef962285e88b/0_0.png",
+          "sha256": "312493d0de8025f16cb076a6493a0c8f764d93e03b8fe2dcc6e264c3e6f8d100",
+          "bytes": 450251
+        },
+        {
+          "file": "images/knee_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/7cbaca2e-6278-4902-a5f8-ef962285e88b/0_1.png",
+          "sha256": "508d08c42ec28cf8f4f44c467460b11d2917638099af3eeed0972b8419853119",
+          "bytes": 483287
+        },
+        {
+          "file": "images/knee_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/7cbaca2e-6278-4902-a5f8-ef962285e88b/0_2.png",
+          "sha256": "ae385414a9f7596ea6e32f48db2f6eb7d41fad545ee54037b4af205d953e556e",
+          "bytes": 588137
+        },
+        {
+          "file": "images/knee_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/7cbaca2e-6278-4902-a5f8-ef962285e88b/0_3.png",
+          "sha256": "a1611a8a79d8e202e548a51dd8815594c5c59bcb0045295a380e2f6e5ad12e47",
+          "bytes": 431648
+        }
+      ]
+    },
+    {
+      "name": "lower-leg",
+      "prompt": "isolated anatomical study of a single adult male right lower leg from knee to ankle, straight shin in front, curved calf behind, inner calf lower than outer, digital sculpt base mesh in smooth matte grey clay, anatomically correct adult proportions, clean simple planes and defined bony landmarks, front view, side view and back view side by side, orthographic, same scale, soft even studio light, pure white background, ZBrush style render --no text, labels, wrinkles, skin texture, hair, extra fingers, distorted, rubber hose, sausage, body, scenery --ar 3:2 --v 8.2",
+      "job_id": "0ac6d957-cbe2-42a6-b3fd-5260002406f5",
+      "created": "2026-10-23T07:27:06Z",
+      "files": [
+        {
+          "file": "images/lower-leg_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/0ac6d957-cbe2-42a6-b3fd-5260002406f5/0_0.png",
+          "sha256": "183f567965a934e61e2e9eb0e35094bf2816432dd146f18c76aa6333258e9121",
+          "bytes": 373472
+        },
+        {
+          "file": "images/lower-leg_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/0ac6d957-cbe2-42a6-b3fd-5260002406f5/0_1.png",
+          "sha256": "4f71f3f0c447a5a549f0021164cfa3f15e9d511b52aef8823d92706b4b29bcd8",
+          "bytes": 253750
+        },
+        {
+          "file": "images/lower-leg_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/0ac6d957-cbe2-42a6-b3fd-5260002406f5/0_2.png",
+          "sha256": "34364fc31bbf7ca70797dc5fb135b0d4aaaef65640165f67e2e700cefd271134",
+          "bytes": 372551
+        },
+        {
+          "file": "images/lower-leg_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/0ac6d957-cbe2-42a6-b3fd-5260002406f5/0_3.png",
+          "sha256": "be346259bb075fa586cc9d7fe3bfbce431befc7b81d59bd81b32402e61367d23",
+          "bytes": 263025
+        }
+      ]
     }
   ]
 }
