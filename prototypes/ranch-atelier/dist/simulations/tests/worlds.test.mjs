@@ -78,3 +78,10 @@ test('the stable map keeps each board in its slot when you switch', () => {
  const l = newBoard(newBoard(newLibrary())), a = layout(l), b = layout(switchTo(l, 'board-1'));
  assert.deepEqual(a, b); assert.equal(a.boards.length, 3); assert.deepEqual(a.openSlot, spiral(4)[3]);
 });
+import {earnOrb, openOrb} from '../worlds/boards.mjs';
+test('an orb is earned, carried, and opened into a new board on its land', () => {
+ let l = earnOrb(newLibrary(), {land: 'moon', why: 'Moon Mission'}); assert.equal(l.orbs.length, 1); assert.equal(l.boards.length, 1);
+ l = openOrb(l, 'orb-1'); assert.equal(l.orbs.length, 0); assert.equal(l.boards.length, 2);
+ const b = l.boards[1]; assert.equal(b.made, 'orb'); assert.equal(b.land, 'moon'); assert.equal(b.name, 'Moon base'); assert.equal(l.current, b.id);
+ assert.throws(() => openOrb(l, 'orb-1')); assert.equal(earnOrb(l).orbs[0].id, 'orb-2');
+});
