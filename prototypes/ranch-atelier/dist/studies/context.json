@@ -2379,6 +2379,59 @@
           "note": "the source of every part sprite"
         }
       ]
+    },
+    "watercolour": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Zelda: Breath of the Wild",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/zelda-breath-of-the-wild.json",
+          "note": "the identity record for the game this look is read from; the far world gets softer instead of more detailed"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: GRIS",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/gris.json",
+          "note": "watercolour as a whole-game language; colour carries the mood"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Dorfromantik",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dorfromantik.json",
+          "note": "a tile board seen from above in soft painted washes"
+        },
+        {
+          "k": "devblog",
+          "t": "Zelda: Breath of the Wild art director on the game's art style",
+          "href": "https://nintendoeverything.com/zelda-breath-of-the-wild-art-director-on-how-the-wind-waker-hd-shaped-the-games-art-style/",
+          "note": "why the world reads as a painted picture rather than a simulation of light"
+        },
+        {
+          "k": "design",
+          "t": "Inspiring Shaders, entry 6 (our study)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md",
+          "note": "the starting point: distance gets softer and more painted, it hides detail and adds mood"
+        },
+        {
+          "k": "tutorial",
+          "t": "Interactive watercolor rendering: tutorial (Bousseau, Inria)",
+          "href": "https://artis.inrialpes.fr/Membres/Adrien.Bousseau/watercolor_tutorial/tutorial2.pdf",
+          "note": "the ingredients we kept: abstraction into flat washes, pigment granulation, paper texture, edge darkening"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and GAME_FEEL: nothing masks the world",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "wash is capped and only grows with distance; no HUD or words added"
+        },
+        {
+          "k": "canon",
+          "t": "Painted Brush and the toon kit",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs",
+          "note": "the pass reads colour and depth only, so it composes with every material look and with Paint the world"
+        }
+      ]
     }
   }
 }

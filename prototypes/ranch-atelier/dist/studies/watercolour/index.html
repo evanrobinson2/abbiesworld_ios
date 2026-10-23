@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Watercolour distance</title>
+<style>
+:root{--bg:#f6f1e7;--ink:#2b2622;--mut:#7a6f64;--card:#fffdf8;--line:#e3d9c8;--acc:#c4492a;--code:#2b2622;--codebg:#f0e8d8}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1d1a18;--ink:#f1eadf;--mut:#a89d90;--card:#262220;--line:#3b3531;--acc:#ff8a64;--code:#f1eadf;--codebg:#171412}}
+:root[data-theme=dark]{--bg:#1d1a18;--ink:#f1eadf;--mut:#a89d90;--card:#262220;--line:#3b3531;--acc:#ff8a64;--code:#f1eadf;--codebg:#171412}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:18px 16px 0;max-width:1180px;margin:auto}h1{margin:0;font-size:24px}.sub{color:var(--mut);margin:4px 0 12px}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);max-width:1180px;margin:auto;padding:0 16px}
+.tab{background:none;border:0;border-bottom:3px solid transparent;color:var(--mut);padding:10px 14px;font:inherit;font-weight:600;cursor:pointer}.tab[aria-selected=true]{color:var(--ink);border-color:var(--acc)}
+main{max-width:1180px;margin:auto;padding:16px}.pane[hidden]{display:none}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.stagebox{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#ddd;aspect-ratio:16/10}canvas{display:block;width:100%;height:100%}
+.split{position:absolute;top:0;bottom:0;width:3px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.25);cursor:ew-resize;touch-action:none}.split:after{content:"";position:absolute;top:50%;left:-13px;width:29px;height:29px;margin-top:-14px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.4)}
+.tag{position:absolute;top:10px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.85);color:#2b2622;font-size:12px;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}.card h2{margin:0 0 8px;font-size:15px}
+.zones{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.zones button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:5px 11px;font:inherit;font-size:13px;cursor:pointer}.zones button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.mood{color:var(--mut);font-size:13px;margin:0 0 10px}
+.row{display:grid;grid-template-columns:120px 1fr 44px;gap:8px;align-items:center;font-size:13px;margin:3px 0}.row input[type=range]{width:100%}.row output{color:var(--mut);text-align:right;font-variant-numeric:tabular-nums}
+.cols{display:flex;gap:12px;margin-top:8px}.cols label{font-size:13px;display:flex;gap:6px;align-items:center}
+.read{font-variant-numeric:tabular-nums;color:var(--mut);font-size:12px;margin-top:8px}
+h3{margin:22px 0 6px;font-size:17px}p{margin:6px 0}ul{margin:6px 0;padding-left:20px}
+pre{background:var(--codebg);color:var(--code);padding:12px;border-radius:10px;overflow:auto;font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;max-height:420px}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}.shots figure{margin:0}.shots img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}.shots figcaption{font-size:12px;color:var(--mut);margin-top:3px}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;border:1px solid var(--line)}
+.ctx{margin-top:22px}
+</style>
+</head><body>
+<header><h1>Watercolour distance</h1><p class="sub">AW-STUDY-0050 &middot; promoted from Inspiring Shaders #6 (Zelda: Breath of the Wild) &middot; 2026-10-23</p></header>
+<div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" data-t="study">Study</button><button class="tab" role="tab" aria-selected="false" data-t="assets">Production assets</button></div>
+<main>
+<section class="pane" id="study">
+<div class="grid">
+ <div>
+  <div class="stagebox" id="box"><canvas id="c"></canvas><span class="tag" style="left:10px">Plain</span><span class="tag" style="right:10px">Watercolour distance</span><div class="split" id="split"></div></div>
+  <p class="read" id="read"></p>
+  <h3>What it is</h3>
+  <p>Close things stay exactly as drawn. Further away the world turns into wet watercolour: colour lifts towards the paper and takes the zone's wash colour, edges soften and bleed into each other, tones settle into flat pooled washes, pigment granulates, and the paper's fibres show through. A far hill is hidden by mood, not by fog, and nothing near is ever covered.</p>
+  <p>Each part of Winchester has its own opinion about its zoomed-out view: Downtown is brick and brass dissolving to rose, Ani's side is cool, wide and wet, Abbie and Daddy's side pools rose and violet in the valleys. Same shader, three sets of numbers.</p>
+  <h3>Design card</h3>
+  <ul><li><b>What the player feels:</b> the far world is a painting, the near world is a place. Pulling back feels like stepping away from a picture.</li>
+  <li><b>How would the character know?</b> They would not: it is the way distance looks to a child's eye, so it is none, the world simply looks different. No label, gauge or hint appears.</li>
+  <li><b>Layers:</b> a presentation-layer look on the finished picture; it never touches the world, so characters, AI and <code>look</code> are unaffected.</li>
+  <li><b>Whole-game adaptation:</b> the wash colour follows the zone's light; time of day and weather can drive <code>tune()</code> later.</li>
+  <li><b>No masking:</b> wash is capped below 85% and only grows with distance; the play HUD is untouched. Style yes, expression never. PG.</li></ul>
+  <h3>Composes with Paint the world</h3>
+  <p>The pass reads only colour and depth, never materials. Splatoon-style world paint is drawn into the scene first, so painted ground simply washes with the rest of the distance; Painted Brush and Sunday Toon do the same.</p>
+ </div>
+ <aside class="card">
+  <h2>Zone</h2><div class="zones" id="zones"></div><p class="mood" id="mood"></p>
+  <div id="sliders"></div>
+  <div class="cols"><label>Wash <input type="color" id="cwash"></label><label>Paper <input type="color" id="cpaper"></label></div>
+  <div class="cols"><label><input type="checkbox" id="on" checked> Watercolour on</label></div>
+ </aside>
+</div>
+</section>
+<section class="pane" id="assets" hidden>
+ <h3 style="margin-top:0">In the game</h3>
+ <p>Live in Abbie's Town: <code>/town</code> (the three dioramas and the pulled-back trio). Each region's look carries a <code>wash</code> zone; the camera's own distance drives the rest. <b>tour: false</b> (a look, not a thing to learn). Add <code>?watercolour=off</code> to the town address to compare; developer console: <code>AbbieTown.watercolour.tune({bleed: 5})</code>.</p>
+ <div class="shots" id="shots"><figure><img src="img/town-trio.jpg" alt="The three regions, pulled back: each tile keeps its own light and wash." loading="lazy"><figcaption>The three regions, pulled back: each tile keeps its own light and wash.</figcaption></figure><figure><img src="img/z-downtown.jpg" alt="Downtown: brick and brass dissolving to rose." loading="lazy"><figcaption>Downtown: brick and brass dissolving to rose.</figcaption></figure><figure><img src="img/z-anis-side.jpg" alt="Ani's side: cool, wide and wet." loading="lazy"><figcaption>Ani's side: cool, wide and wet.</figcaption></figure><figure><img src="img/z-abbie-daddy-side.jpg" alt="Abbie and Daddy's side: rose and violet pooling." loading="lazy"><figcaption>Abbie and Daddy's side: rose and violet pooling.</figcaption></figure></div>
+ <h3>Per-zone numbers</h3><table id="ztable"></table>
+ <h3>Controls</h3><table id="ctable"></table>
+ <h3>API (simulations/watercolour-distance.mjs)</h3>
+<pre>const W = watercolourDistance(THREE, renderer, {logDepth: true});   // after the renderer's own settings
+W.precompile(scene, camera);          // compiles the scene and the pass up front; render() draws directly until it is done
+W.setZone('downtown');                // 'off' eases to no wash and costs nothing
+// per frame
+W.update(dt); W.render(scene, camera);   // in place of renderer.render
+W.tune({wash: '#ffaa88', bleed: 4});  // live edit, clamped to WASH_CONTROLS
+washAt(distance, zone)                // the same falloff in JS, for tests and for gameplay that needs to know</pre>
+ <h3>Cost and the precompile rule</h3>
+ <ul><li>One colour+depth target (MSAA 4x, half float) and one full-screen pass; 10 taps only where wash is above 0.4%, none in the near field.</li>
+ <li>Uniforms only change at run time, so no shader compiles during play. <code>compileAsync</code> runs at load; nothing is drawn washed until it is ready.</li>
+ <li>Depth is decoded for the page's logarithmic depth buffer (<code>pow(far+1, d) - 1</code>), or the perspective form when <code>logDepth</code> is false.</li>
+ <li>The readout under the study view shows the pass's CPU submit time and the frame time on <i>your</i> device. Measured here: <span id="perf">see readout</span>.</li></ul>
+ <h3>Source</h3><pre id="src">// Watercolour distance, the Zelda-inspired look from AW-STUDY-0045 entry 6 (docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md),
+// promoted to a production shader. Near the camera the world stays exactly as drawn. With distance it turns into wet
+// watercolour: the colours lift towards the paper and shift towards the zone&#x27;s wash colour, edges soften and bleed into
+// each other, the tones settle into flat pooled washes, pigment granulates, and the paper&#x27;s grain shows through.
+// Style only: nothing from the game itself, just how a painted distance is made.
+//   const W = watercolourDistance(T, renderer, {logDepth: true})   one per renderer (after the renderer&#x27;s own settings)
+//   W.setZone(&#x27;downtown&#x27;)          eases to that zone&#x27;s numbers; &#x27;off&#x27; eases to no wash (and then costs nothing)
+//   W.update(dt)                   per frame: eases the live numbers towards the zone
+//   W.render(scene, camera)        in place of renderer.render(scene, camera)
+//   W.ready                        promise: the scene and the pass are compiled; until it resolves render() draws directly
+//   W.tune({bleed: 4, wash: &#x27;#ffaa88&#x27;}) edits the live zone (the study page&#x27;s sliders, the developer console)
+//   W.dispose()
+// Cost: one extra full-screen pass (a colour+depth target, then 10 taps only where the wash is above 0.4%). The shader is
+// compiled once, up front; zones and sliders only move uniforms, so nothing compiles while you play.
+// The pass reads only depth and colour, never materials, so it composes with the look of the things drawn (Sunday Toon,
+// Painted Brush, the paint of Paint the world): they draw into the target, the wash paints the distance over them.
+export const WASH_ZONES = {
+ // distances are camera-space metres of the page&#x27;s world; wash colours are sRGB hex; blur and bleed are pixels at full wash
+ real: {mood: &#x27;the real town from far above, a cool wet horizon&#x27;, start: 2600, end: 11000, curve: 1.15, max: .78, wash: &#x27;#c3d3dc&#x27;, paper: &#x27;#f1ecdf&#x27;, tint: .55, lift: .32, desat: .3, blur: 3.2, bleed: 2.4, levels: 6, flat: .5, gran: .2, paper_grain: .45, edge: .3},
+ trio: {mood: &#x27;three little worlds on one table, a warm hazy edge&#x27;, start: 340, end: 980, curve: 1.1, max: .74, wash: &#x27;#dcc8b2&#x27;, paper: &#x27;#f6ecdc&#x27;, tint: .5, lift: .3, desat: .28, blur: 3, bleed: 2, levels: 6, flat: .5, gran: .2, paper_grain: .45, edge: .3},
+ downtown: {mood: &#x27;late afternoon, brick and brass dissolving into rose&#x27;, start: 150, end: 430, curve: 1.2, max: .78, wash: &#x27;#e3ae94&#x27;, paper: &#x27;#f7ead4&#x27;, tint: .62, lift: .34, desat: .34, blur: 3, bleed: 2.2, levels: 5, flat: .6, gran: .24, paper_grain: .5, edge: .38},
+ &#x27;anis-side&#x27;: {mood: &#x27;a cool morning by the pond, wide, airy and wet&#x27;, start: 200, end: 540, curve: 1, max: .84, wash: &#x27;#9cc6d6&#x27;, paper: &#x27;#eef5f3&#x27;, tint: .66, lift: .46, desat: .38, blur: 4.6, bleed: 3.2, levels: 7, flat: .45, gran: .18, paper_grain: .42, edge: .26},
+ &#x27;abbie-daddy-side&#x27;: {mood: &#x27;a sunset hill, rose and violet pooling in the valleys&#x27;, start: 180, end: 480, curve: 1.25, max: .8, wash: &#x27;#d48aa4&#x27;, paper: &#x27;#f9e4d3&#x27;, tint: .66, lift: .36, desat: .3, blur: 3.6, bleed: 2.6, levels: 4, flat: .65, gran: .26, paper_grain: .5, edge: .5},
+};
+// the numbers the sliders may move, with their limits (the study page builds its controls from this)
+export const WASH_CONTROLS = {
+ start: {min: 40, max: 3000, label: &#x27;Clear until&#x27;}, end: {min: 200, max: 12000, label: &#x27;Fully washed by&#x27;}, curve: {min: .5, max: 3, label: &#x27;Falloff curve&#x27;},
+ max: {min: 0, max: .9, label: &#x27;Most wash&#x27;}, tint: {min: 0, max: 1, label: &#x27;Colour shift&#x27;}, lift: {min: 0, max: .8, label: &#x27;Towards the paper&#x27;}, desat: {min: 0, max: .8, label: &#x27;Pigment fade&#x27;},
+ blur: {min: 0, max: 9, label: &#x27;Softness (px)&#x27;}, bleed: {min: 0, max: 8, label: &#x27;Edge bleed (px)&#x27;}, levels: {min: 2, max: 12, label: &#x27;Wash steps&#x27;}, flat: {min: 0, max: 1, label: &#x27;Flat washes&#x27;},
+ gran: {min: 0, max: .6, label: &#x27;Granulation&#x27;}, paper_grain: {min: 0, max: 1, label: &#x27;Paper grain&#x27;}, edge: {min: 0, max: 1, label: &#x27;Wet edge&#x27;},
+};
+const WC_NUMERIC = Object.keys(WASH_CONTROLS), WC_COLOURS = [&#x27;wash&#x27;, &#x27;paper&#x27;];
+const WC_OFF = {...WASH_ZONES.real, max: 0};
+
+// how much wash a surface at this distance carries (0 to zone.max), the same curve the shader uses
+export function washAt(dist, z) {
+ const t = Math.max(0, Math.min(1, (dist - z.start) / Math.max(1, z.end - z.start))), s = t * t * (3 - 2 * t);
+ return Math.pow(s, z.curve) * z.max;
+}
+export function zoneParams(id) { return {...(WASH_ZONES[id] || WC_OFF)}; }
+// the numbers between two zones (k 0 gives a, 1 gives b): colours mix in sRGB hex, so a crossing never passes through grey
+export function mixZones(a, b, k) {
+ const out = {...b}, h = c =&gt; [1, 3, 5].map(i =&gt; parseInt(c.slice(i, i + 2), 16));
+ for (const n of WC_NUMERIC) out[n] = a[n] + (b[n] - a[n]) * k;
+ for (const n of WC_COLOURS) { const x = h(a[n]), y = h(b[n]); out[n] = &#x27;#&#x27; + x.map((v, i) =&gt; Math.round(v + (y[i] - v) * k).toString(16).padStart(2, &#x27;0&#x27;)).join(&#x27;&#x27;); }
+ return out;
+}
+
+const WC_VERT = `varying vec2 vUv;void main(){vUv=position.xy*.5+.5;gl_Position=vec4(position.xy,0.,1.);}`;
+const WC_TAPS = 10;
+const WC_FRAG = `precision highp float;
+uniform sampler2D tColor,tDepth;uniform vec2 uRes;uniform float uNear,uFar,uLog;
+uniform float uStart,uEnd,uCurve,uMax,uTint,uLift,uDesat,uBlur,uBleed,uLevels,uFlat,uGran,uPaperK,uEdge,uDpr;
+uniform vec3 uWashMul,uPaper;varying vec2 vUv;
+float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1,1)),f.x),f.y);}
+float viewZ(float d){if(uLog&gt;.5)return pow(uFar+1.,d)-1.;float zn=d*2.-1.;return 2.*uNear*uFar/(uFar+uNear-zn*(uFar-uNear));}
+float wash(vec2 uv){float z=viewZ(texture2D(tDepth,uv).x);float t=clamp((z-uStart)/max(1.,uEnd-uStart),0.,1.);return pow(t*t*(3.-2.*t),uCurve)*uMax;}
+float lum(vec3 c){return dot(c,vec3(.2126,.7152,.0722));}
+void main(){
+ vec2 px=1./uRes;vec4 src=texture2D(tColor,vUv);float w=wash(vUv);
+ vec3 col=src.rgb;
+ if(w&gt;.004){
+  vec2 fc=gl_FragCoord.xy/uDpr;
+  // wet bleed: the colour runs a little way along the paper&#x27;s own wobble
+  vec2 warp=(vec2(vn(fc*.045),vn(fc*.045+vec2(17.,5.)))-.5)*2.*uBleed*w*px*uDpr;
+  vec2 uv=vUv+warp;float r=uBlur*w*uDpr;vec3 acc=src.rgb;float tw=1.;
+  for(int i=0;i&lt;${WC_TAPS};i++){
+   float a=float(i)*2.39996+h21(fc)*6.2832,rr=sqrt((float(i)+.5)/${WC_TAPS}.)*r;vec2 o=uv+vec2(cos(a),sin(a))*rr*px;
+   // a near thing never paints itself over what is behind it: taps count only when they are as washed as this pixel
+   float k=smoothstep(w-.22,w,wash(o));acc+=texture2D(tColor,o).rgb*k;tw+=k;}
+  col=acc/tw;
+  float l=lum(col);
+  // settle the tones into flat, pooled washes
+  float lv=max(2.,uLevels),ql=(floor(l*lv+.5)+smoothstep(.35,.65,fract(l*lv+.5)))/lv;ql=mix(l,ql,w*uFlat);
+  col*=clamp(ql/max(l,.002),.6,1.5);l=lum(col);
+  // atmospheric shift: pigment fades, the zone&#x27;s colour comes up, everything lifts towards the paper
+  float wk=w/max(uMax,.001)*min(1.,uMax*1.25);
+  col=mix(col,vec3(l),wk*uDesat);col=mix(col,col*uWashMul,wk*uTint);col=mix(col,uPaper*(.55+l*.6),wk*uLift);
+  // the pigment pools at the edge of each wash
+  float e=length(vec2(lum(texture2D(tColor,vUv+vec2(px.x,0.)*uDpr*1.5).rgb)-lum(texture2D(tColor,vUv-vec2(px.x,0.)*uDpr*1.5).rgb),lum(texture2D(tColor,vUv+vec2(0.,px.y)*uDpr*1.5).rgb)-lum(texture2D(tColor,vUv-vec2(0.,px.y)*uDpr*1.5).rgb)));
+  col*=1.-clamp(e*3.,0.,1.)*uEdge*wk*.5;
+  // granulation (pigment in the paper&#x27;s dips) and the paper&#x27;s own fibres: both live on the paper, not the world
+  float g=vn(fc*.55)*.6+vn(fc*1.7+9.)*.4,f=h21(floor(fc*1.)+.5)*.5+vn(fc*vec2(.9,.25))*.5;
+  col*=1.+(g-.5)*uGran*wk*1.6;col*=1.+(f-.5)*uPaperK*wk*.5;
+ }
+ col+=(h21(gl_FragCoord.xy)-.5)/255.;
+ gl_FragColor=vec4(col,1.);
+ #include &lt;tonemapping_fragment&gt;
+ #include &lt;colorspace_fragment&gt;
+}`;
+
+export function watercolourDistance(T, renderer, opts = {}) {
+ const logDepth = opts.logDepth ?? !!renderer.capabilities.logarithmicDepthBuffer, samples = opts.samples ?? 4;
+ const live = zoneParams(&#x27;off&#x27;), target = zoneParams(&#x27;off&#x27;); let zone = &#x27;off&#x27;;
+ const size = new T.Vector2(), dpr = () =&gt; renderer.getPixelRatio();
+ let rt = null;
+ const makeTarget = (w, h) =&gt; {
+  rt?.depthTexture?.dispose(); rt?.dispose();
+  const depth = new T.DepthTexture(w, h); depth.type = T.UnsignedIntType;
+  rt = new T.WebGLRenderTarget(w, h, {samples, type: T.HalfFloatType, depthTexture: depth, colorSpace: T.LinearSRGBColorSpace});
+ };
+ const U = {tColor: {value: null}, tDepth: {value: null}, uRes: {value: new T.Vector2(1, 1)}, uNear: {value: .1}, uFar: {value: 1000}, uLog: {value: logDepth ? 1 : 0}, uDpr: {value: 1},
+  uStart: {value: live.start}, uEnd: {value: live.end}, uCurve: {value: live.curve}, uMax: {value: 0}, uTint: {value: live.tint}, uLift: {value: live.lift}, uDesat: {value: live.desat},
+  uBlur: {value: live.blur}, uBleed: {value: live.bleed}, uLevels: {value: live.levels}, uFlat: {value: live.flat}, uGran: {value: live.gran}, uPaperK: {value: live.paper_grain}, uEdge: {value: live.edge},
+  uWashMul: {value: new T.Color()}, uPaper: {value: new T.Color()}};
+ const mat = new T.ShaderMaterial({uniforms: U, vertexShader: WC_VERT, fragmentShader: WC_FRAG, depthTest: false, depthWrite: false});
+ const quadGeo = new T.BufferGeometry(); quadGeo.setAttribute(&#x27;position&#x27;, new T.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3));
+ const quad = new T.Mesh(quadGeo, mat); quad.frustumCulled = false; const quadScene = new T.Scene(); quadScene.add(quad); const quadCam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+ const c0 = new T.Color(), c1 = new T.Color();
+ const W = {
+  zones: WASH_ZONES, live, target, enabled: opts.enabled !== false, ready: Promise.resolve(), compiled: false, passes: 0, lastPassMs: 0,
+  get zone() { return zone; },
+  setZone(id, snap = false) { zone = WASH_ZONES[id] ? id : &#x27;off&#x27;; Object.assign(target, zoneParams(zone)); if (zone === &#x27;off&#x27;) target.max = 0; if (snap) { Object.assign(live, target); W.apply(); } return zone; },
+  // edit the live zone; the zone keeps easing to these numbers rather than back to its preset
+  tune(v) { for (const n of WC_NUMERIC) if (v[n] != null) target[n] = Math.max(WASH_CONTROLS[n].min, Math.min(WASH_CONTROLS[n].max, +v[n])); for (const n of WC_COLOURS) if (v[n]) target[n] = v[n]; return target; },
+  update(dt = .016) {
+   const k = 1 - Math.exp(-dt * 3.2), m = mixZones(live, target, k); Object.assign(live, m); live.max += (target.max - live.max) * k; if (Math.abs(live.max - target.max) &lt; 1e-3) live.max = target.max; W.apply();
+  },
+  apply() {
+   U.uStart.value = live.start; U.uEnd.value = live.end; U.uCurve.value = live.curve; U.uMax.value = live.max; U.uTint.value = live.tint; U.uLift.value = live.lift; U.uDesat.value = live.desat;
+   U.uBlur.value = live.blur; U.uBleed.value = live.bleed; U.uLevels.value = live.levels; U.uFlat.value = live.flat; U.uGran.value = live.gran; U.uPaperK.value = live.paper_grain; U.uEdge.value = live.edge;
+   c0.set(live.wash); const l = c0.r * .2126 + c0.g * .7152 + c0.b * .0722; U.uWashMul.value.copy(c0).multiplyScalar(1 / Math.max(l, .02)); c1.set(live.paper); U.uPaper.value.copy(c1);
+  },
+  active() { return W.enabled &amp;&amp; live.max &gt; .002; },
+  // compile the scene&#x27;s materials and the pass up front, so the first washed frame costs the same as any other
+  precompile(scene, camera) {
+   W.apply(); const bw = renderer.getDrawingBufferSize(size).x, bh = size.y; if (!rt || rt.width !== bw || rt.height !== bh) makeTarget(bw, bh);
+   const go = renderer.compileAsync ? p =&gt; renderer.compileAsync(p[0], p[1]) : p =&gt; Promise.resolve(renderer.compile(p[0], p[1]));
+   W.ready = Promise.all([go([scene, camera]), go([quadScene, quadCam])]).then(() =&gt; { U.tColor.value = rt.texture; U.tDepth.value = rt.depthTexture; W.compiled = true; });
+   return W.ready;
+  },
+  render(scene, camera) {
+   if (!W.active() || !W.compiled) { renderer.render(scene, camera); return; }
+   const t0 = performance.now(), bw = renderer.getDrawingBufferSize(size).x, bh = size.y;
+   if (!rt || rt.width !== bw || rt.height !== bh) { makeTarget(bw, bh); U.tColor.value = rt.texture; U.tDepth.value = rt.depthTexture; }
+   U.uRes.value.set(bw, bh); U.uNear.value = camera.near; U.uFar.value = camera.far; U.uDpr.value = dpr();
+   renderer.setRenderTarget(rt); renderer.render(scene, camera); renderer.setRenderTarget(null); renderer.render(quadScene, quadCam);
+   W.passes++; W.lastPassMs = performance.now() - t0;
+  },
+  dispose() { rt?.depthTexture?.dispose(); rt?.dispose(); mat.dispose(); quadGeo.dispose(); },
+ };
+ W.setZone(opts.zone || &#x27;off&#x27;, true);
+ return W;
+}
+</pre>
+ <h3>Checks</h3><ul><li>Headless: falloff is monotonic and zero before <code>start</code>, zones mix without passing through grey, tune() clamps, shader declares every uniform it is given (<code>simulations/tests/watercolour.test.mjs</code>).</li>
+ <li>Browser: the town runs with the pass compiled (<code>AbbieTown.watercolour.compiled</code>), the near field is pixel-identical when wash is 0.</li></ul>
+ <div class="ctx"><aside class="ctx-aside" style="max-width:340px;margin:24px 0 24px auto"><style>/* The context engineering card (look/context-card.mjs). Uses the --aw-* tokens from theme/boot.js. */
+.ctx-card{display:grid;gap:10px;font:14px/1.45 var(--aw-font,system-ui,sans-serif);color:var(--aw-ink,#2b211a)}
+.ctx-card h3{margin:0;font:600 17px/1.2 var(--aw-display,inherit)}
+.ctx-lead{margin:0;color:var(--aw-soft,#6b5d52)}
+.ctx-kind{border:1px solid var(--aw-line,#0002);border-radius:14px;background:var(--aw-bg,#fff);padding:0 12px}
+.ctx-kind summary{display:flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none}
+.ctx-kind summary::-webkit-details-marker{display:none}
+.ctx-kind summary::after{content:'';margin-left:auto;width:7px;height:7px;border:solid var(--aw-soft,#6b5d52);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.ctx-kind[open] summary::after{transform:rotate(-135deg)}
+.ctx-kind summary b{font-weight:600}
+.ctx-kind summary i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--aw-accent,#7a4b2a);color:var(--aw-on-accent,#fff)}
+.ctx-kind summary i:empty{display:none}
+.ctx-kind ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+.ctx-kind li{display:grid;gap:1px}
+.ctx-kind a{color:var(--aw-ink,#2b211a);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 30%,transparent);text-underline-offset:2px}
+.ctx-kind a:hover{text-decoration-color:currentColor}
+.ctx-kind small{color:var(--aw-soft,#6b5d52);font-size:12px}
+.ctx-none{margin:0 0 10px;color:var(--aw-soft,#6b5d52);font-style:italic}
+.ctx-foot{margin:0;font-size:12px;color:var(--aw-soft,#6b5d52)}
+.ctx-foot a{color:inherit}
+</style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
+  <p class="ctx-lead">What this study drew on.</p>
+  <details class="ctx-kind" open><summary><b>Oracle consultation</b><i>3</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/zelda-breath-of-the-wild.json" target="_blank" rel="noopener">Oracle: Zelda: Breath of the Wild</a><small>the identity record for the game this look is read from; the far world gets softer instead of more detailed</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/gris.json" target="_blank" rel="noopener">Oracle: GRIS</a><small>watercolour as a whole-game language; colour carries the mood</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dorfromantik.json" target="_blank" rel="noopener">Oracle: Dorfromantik</a><small>a tile board seen from above in soft painted washes</small></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i>1</i></summary>
+   <ul><li><a href="https://nintendoeverything.com/zelda-breath-of-the-wild-art-director-on-how-the-wind-waker-hd-shaped-the-games-art-style/" target="_blank" rel="noopener">Zelda: Breath of the Wild art director on the game&#39;s art style</a><small>why the world reads as a painted picture rather than a simulation of light</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i>1</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md" target="_blank" rel="noopener">Inspiring Shaders, entry 6 (our study)</a><small>the starting point: distance gets softer and more painted, it hides detail and adds mood</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i>1</i></summary>
+   <ul><li><a href="https://artis.inrialpes.fr/Membres/Adrien.Bousseau/watercolor_tutorial/tutorial2.pdf" target="_blank" rel="noopener">Interactive watercolor rendering: tutorial (Bousseau, Inria)</a><small>the ingredients we kept: abstraction into flat washes, pigment granulation, paper texture, edge darkening</small></li></ul></details><details class="ctx-kind" open><summary><b>Our canon</b><i>2</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md" target="_blank" rel="noopener">HUD study and GAME_FEEL: nothing masks the world</a><small>wash is capped and only grows with distance; no HUD or words added</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs" target="_blank" rel="noopener">Painted Brush and the toon kit</a><small>the pass reads colour and depth only, so it composes with every material look and with Paint the world</small></li></ul></details>
+  <p class="ctx-foot">Recorded 2026-10-23, while building. <a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
+<p class="ctx-foot"><a href="https://app.abbies.world/studies/#watercolour">Live study page</a></p></aside>
+</div>
+</section>
+</main>
+<script type="importmap">{"imports": {"three": "/vendor/three.module.js", "three/addons/controls/OrbitControls.js": "/vendor/OrbitControls.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {WASH_ZONES, WASH_CONTROLS, washAt, zoneParams, mixZones, watercolourDistance} from '/simulations/watercolour-distance.mjs';
+const $ = s => document.querySelector(s);
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => { document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x === b)); document.querySelectorAll('.pane').forEach(p => p.hidden = p.id !== b.dataset.t); if (b.dataset.t === 'study') onResize(); });
+// ---- tables
+$('#ctable').innerHTML = '<tr><th>Control</th><th>Range</th></tr>' + Object.entries(WASH_CONTROLS).map(([k, v]) => `<tr><td>${v.label} <code>${k}</code></td><td>${v.min} to ${v.max}</td></tr>`).join('');
+const ZN = {downtown: 'Downtown', 'anis-side': "Ani's side", 'abbie-daddy-side': "Abbie and Daddy's side", trio: 'Three regions', real: 'Real town'};
+$('#ztable').innerHTML = '<tr><th>Zone</th><th>Wash</th><th>Paper</th><th>Clear until</th><th>Full by</th><th>Most</th><th>Soft</th><th>Bleed</th><th>Mood</th></tr>' + Object.entries(WASH_ZONES).map(([k, z]) => `<tr><td>${ZN[k]}</td><td><span class="swatch" style="background:${z.wash}"></span> ${z.wash}</td><td><span class="swatch" style="background:${z.paper}"></span> ${z.paper}</td><td>${z.start}</td><td>${z.end}</td><td>${z.max}</td><td>${z.blur}</td><td>${z.bleed}</td><td>${z.mood}</td></tr>`).join('');
+// ---- the live view: rows of hills, villages and trees running to the horizon, lit per zone
+const LOOKS = {
+ downtown: {bg: '#f3dcbd', sun: '#ffd49a', sunI: 2.7, sky: '#ffe9cf', gnd: '#8a6a4a', grass: ['#7fa14f', '#a8b45e'], dist: 250, fov: 32},
+ 'anis-side': {bg: '#cfe8f1', sun: '#eef4ff', sunI: 2, sky: '#dff1ff', gnd: '#4d6a5c', grass: ['#64a07c', '#8bb86a'], dist: 330, fov: 48},
+ 'abbie-daddy-side': {bg: '#f6c4ad', sun: '#ff9d6a', sunI: 2.9, sky: '#ffd5c2', gnd: '#7a4a5a', grass: ['#c2a447', '#d98a45'], dist: 300, fov: 40},
+ trio: {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sky: '#f2efe6', gnd: '#7a6a4a', grass: ['#8fa957', '#b9b560'], dist: 560, fov: 36},
+ real: {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sky: '#e6f1ff', gnd: '#7a6a4a', grass: ['#7fa14f', '#a8b45e'], dist: 3600, fov: 42},
+};
+const canvas = $('#c'), box = $('#box');
+const renderer = new THREE.WebGLRenderer({canvas, antialias: true, logarithmicDepthBuffer: true});
+renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(36, 1.6, 2, 40000);
+const hemi = new THREE.HemisphereLight('#fff', '#888', 1), sun = new THREE.DirectionalLight('#fff', 2.4); sun.position.set(-520, 520, 620); scene.add(hemi, sun);
+const rnd = (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+const noise = (x, y) => Math.sin(x * .013) * Math.cos(y * .011) * 18 + Math.sin(x * .031 + y * .02) * 7 + Math.sin(y * .05) * 3;
+const SZ = 14000, seg = 220, geo = new THREE.PlaneGeometry(SZ, SZ, seg, seg); geo.rotateX(-Math.PI / 2);
+const cols = new Float32Array(geo.attributes.position.count * 3); geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
+const ground = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({vertexColors: true, roughness: 1, flatShading: true})); scene.add(ground);
+const hAt = (x, z) => { const far = Math.max(0, Math.hypot(x, z) - 500); return noise(x, z) + far * .035 * (1 + Math.sin(x * .004) * .5) * (.5 + .5 * Math.sin(z * .003 + 1)); };
+const pos = geo.attributes.position; for (let i = 0; i < pos.count; i++) pos.setY(i, hAt(pos.getX(i), pos.getZ(i))); geo.computeVertexNormals();
+function paint(look) { const a = new THREE.Color(look.grass[0]), b = new THREE.Color(look.grass[1]), c = new THREE.Color(); for (let i = 0; i < pos.count; i++) { c.copy(a).lerp(b, Math.min(1, Math.max(0, .5 + Math.sin(pos.getX(i) * .02) * Math.cos(pos.getZ(i) * .017) * .5 + pos.getY(i) / 400))); cols.set([c.r, c.g, c.b], i * 3); } geo.attributes.color.needsUpdate = true; }
+const treeG = new THREE.ConeGeometry(1, 1, 6), houseG = new THREE.BoxGeometry(1, 1, 1), N = 2600;
+const trees = new THREE.InstancedMesh(treeG, new THREE.MeshStandardMaterial({color: '#4f7a45', flatShading: true}), N), houses = new THREE.InstancedMesh(houseG, new THREE.MeshStandardMaterial({color: '#e7d9c2', flatShading: true}), 420);
+const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), v = new THREE.Vector3(), s = new THREE.Vector3(), col = new THREE.Color(), leaf = ['#4f7a45', '#c8602b', '#e0a52f', '#2f5d3a', '#b8472a'];
+for (let i = 0; i < N; i++) { const a = rnd() * 6.283, r = 30 + Math.pow(rnd(), .8) * 6000, x = Math.cos(a) * r, z = Math.sin(a) * r, k = (5 + rnd() * 9) * .5 + r * .003; v.set(x, hAt(x, z) + k * 1.2, z); s.set(k * .7, k * 2.4, k * .7); m4.compose(v, q, s); trees.setMatrixAt(i, m4); trees.setColorAt(i, col.set(leaf[i % 5])); }
+for (let i = 0; i < 420; i++) { const a = rnd() * 6.283, r = 40 + Math.pow(rnd(), .7) * 5000, x = Math.cos(a) * r, z = Math.sin(a) * r, k = (9 + rnd() * 7) * .55 + r * .003; q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rnd() * 3); v.set(x, hAt(x, z) + k * .5, z); s.set(k * 1.5, k, k * 1.1); m4.compose(v, q, s); houses.setMatrixAt(i, m4); houses.setColorAt(i, col.set(['#e7d9c2', '#b9654a', '#d9c06a', '#8fa7b8'][i % 4])); }
+scene.add(trees, houses);
+const controls = new OrbitControls(camera, canvas); controls.enableDamping = true; controls.maxPolarAngle = 1.5; controls.minDistance = 40; controls.maxDistance = 9000;
+const W = watercolourDistance(THREE, renderer, {logDepth: true});
+let zoneId = 'downtown', split = .5; const look = () => LOOKS[zoneId];
+function setZone(id, fly = true) {
+ zoneId = id; const L = look(); scene.background = new THREE.Color(L.bg); hemi.color.set(L.sky); hemi.groundColor.set(L.gnd); sun.color.set(L.sun); sun.intensity = L.sunI; camera.fov = L.fov; camera.updateProjectionMatrix(); paint(L);
+ const d = L.dist, p = .34; if (fly) { camera.position.set(0, Math.sin(p) * d + 30, Math.cos(p) * d); controls.target.set(0, 20, 0); controls.update(); }
+ W.setZone(id); $('#mood').textContent = WASH_ZONES[id].mood; syncUI();
+}
+function syncUI() { const z = W.target; for (const [k, r] of Object.entries(rows)) { r.i.value = z[k]; r.o.textContent = +(+z[k]).toFixed(2); } $('#cwash').value = z.wash; $('#cpaper').value = z.paper; document.querySelectorAll('#zones button').forEach(b => b.setAttribute('aria-pressed', b.dataset.z === zoneId)); }
+const rows = {};
+for (const [k, c] of Object.entries(WASH_CONTROLS)) { const r = document.createElement('div'); r.className = 'row'; r.innerHTML = `<span>${c.label}</span><input type="range" min="${c.min}" max="${c.max}" step="${(c.max - c.min) / 200}"><output></output>`; $('#sliders').append(r); rows[k] = {i: r.querySelector('input'), o: r.querySelector('output')}; rows[k].i.oninput = () => { W.tune({[k]: +rows[k].i.value}); rows[k].o.textContent = +(+rows[k].i.value).toFixed(2); }; }
+$('#cwash').oninput = e => W.tune({wash: e.target.value}); $('#cpaper').oninput = e => W.tune({paper: e.target.value});
+for (const id of Object.keys(LOOKS)) { const b = document.createElement('button'); b.textContent = ZN[id]; b.dataset.z = id; b.onclick = () => setZone(id); $('#zones').append(b); }
+$('#on').onchange = e => { W.enabled = e.target.checked; };
+const sp = $('#split'); let drag = false; sp.onpointerdown = e => { drag = true; sp.setPointerCapture(e.pointerId); }; sp.onpointerup = () => drag = false;
+sp.onpointermove = e => { if (!drag) return; const r = box.getBoundingClientRect(); split = Math.max(.02, Math.min(.98, (e.clientX - r.left) / r.width)); };
+function onResize() { const r = box.getBoundingClientRect(); if (r.width < 10) return; renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix(); }
+new ResizeObserver(onResize).observe(box); onResize();
+setZone('downtown'); W.precompile(scene, camera);
+let last = performance.now(), fAvg = 16, shown = 0; const clock = new THREE.Clock();
+renderer.setAnimationLoop(now => {
+ const dt = Math.min(.05, clock.getDelta()); fAvg += ((now - last) - fAvg) * .05; last = now; controls.update(); W.update(dt);
+ const w = renderer.domElement.width, h = renderer.domElement.height;
+ if (W.enabled && W.active() && W.compiled) { // before and after on one picture
+  renderer.setScissorTest(true); renderer.setViewport(0, 0, w / renderer.getPixelRatio(), h / renderer.getPixelRatio());
+  renderer.setScissor(0, 0, Math.round(w * split), h); renderer.render(scene, camera);
+  renderer.setScissor(Math.round(w * split), 0, w, h); W.render(scene, camera); renderer.setScissorTest(false);
+ } else W.render(scene, camera);
+ sp.style.left = `calc(${split * 100}% - 1px)`; sp.style.display = W.enabled ? '' : 'none';
+ if (now - shown > 500) { shown = now; $('#read').textContent = `Frame ${fAvg.toFixed(1)} ms (${(1000 / fAvg).toFixed(0)} fps) on this device · wash pass submit ${W.lastPassMs.toFixed(2)} ms · zone ${zoneId} · ${W.compiled ? 'compiled' : 'compiling'}`; }
+});
+</script>
+</body></html>
