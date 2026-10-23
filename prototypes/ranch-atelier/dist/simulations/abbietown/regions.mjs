@@ -2,11 +2,13 @@
 // and its six neighbours) inside one greater hex. Three regions are carved at 120 degrees each. The centre hex is cut
 // into three wedges and each region takes two outer hexes plus one wedge, so each region is exactly 7/3 hexes: one third.
 // Local metres as in town.mjs (x east, y north). Bearings run clockwise from north. First version, Evan 2026-10-23 1:30 PM.
-export const HEX = {side: 880, centre: [4300, 2450]}; // flat-top hexes; seven of them cover about 14 km2 of the real town's 16.5
+export const HEX = {side: 760, centre: [4376, 2020], downtownRadius: 260}; // flat-top hexes centred on the common and its church park; seven of them cover about 10.5 km2 of the real town's 16.5
+// Evan 1:34 PM: "ani has her side, abbie and I have ours ... then there's a downtown area", the church park at the centre.
+// The old working names (School Hill, Pond Side, Lake Country) stay as sub-areas.
 export const REGIONS = [
- {id: 'school-hill', name: 'School Hill', from: 330, to: 90, outer: [0, 60], line: 'Muraco, Leonard Field, the family homes on the hill, and the road north to Launch.'},
- {id: 'pond-side', name: 'Pond Side', from: 210, to: 330, outer: [240, 300], line: 'Horn Pond, its splash pad and the streets above it.'},
- {id: 'lake-country', name: 'Lake Country', from: 90, to: 210, outer: [120, 180], line: 'Ginn Field, the train park, and the lakes the railway runs beside.'},
+ {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", sub: 'School Hill', from: 330, to: 90, outer: [0, 60], line: "Abbie's house and treehouse, Daddy's hideaway, Muraco, Leonard Field, and the road north to Launch."},
+ {id: 'anis-side', name: "Ani's side", sub: 'Pond Side', from: 210, to: 330, outer: [240, 300], line: "Ani's house and treehouse, Horn Pond with its splash pad."},
+ {id: 'downtown', name: 'Downtown', sub: 'Lake Country', from: 90, to: 210, outer: [120, 180], line: 'The church park and common, Main Street and the coffee shop, Ginn Field and the train park, the lakes.'},
 ];
 const deg = (x, y) => (Math.atan2(x - HEX.centre[0], y - HEX.centre[1]) * 180 / Math.PI + 360) % 360;
 const within = (b, from, to) => from <= to ? b >= from && b < to : b >= from || b < to;
@@ -20,7 +22,8 @@ export function hexOf(x, y) {
 }
 export function regionOf(x, y) {
  const h = hexOf(x, y); if (!h) return null;
- const r = REGIONS.find(r => within(deg(x, y), r.from, r.to)); return {hex: h.id, region: r.id, seam: h.id === 'centre'};
+ // the church park at the middle of the structure, and the streets round it, are Downtown whichever way the wedge points
+ const r = Math.hypot(x - HEX.centre[0], y - HEX.centre[1]) < HEX.downtownRadius ? REGIONS[2] : REGIONS.find(r => within(deg(x, y), r.from, r.to)); return {hex: h.id, region: r.id, seam: h.id === 'centre'};
 }
 // where each place falls (computed from the town, so it stays true when places move)
 export function placeRegions(town) { return Object.fromEntries(town.spots.map(s => [s.id, regionOf(s.x, s.y)])); }

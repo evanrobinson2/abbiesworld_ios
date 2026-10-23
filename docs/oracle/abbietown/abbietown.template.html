@@ -320,7 +320,7 @@ function merge(geos) { // a small merge for non-indexed and indexed BufferGeomet
 // the seven-hex region: outlines draped on the land, in each region's colour (a presentation layer, off until the hex button is pressed)
 const regionsGroup = new THREE.Group(); regionsGroup.visible = false; scene.add(regionsGroup);
 {
- const col = {'school-hill': '#e8643c', 'pond-side': '#2f9ac4', 'lake-country': '#6aa84f', centre: '#ffffff'}, s = HEX.side, hexes = hexCentres();
+ const col = {'abbie-daddy-side': '#e8643c', 'anis-side': '#2f9ac4', downtown: '#6aa84f', centre: '#ffffff'}, s = HEX.side, hexes = hexCentres();
  const pts = c => Array.from({length: 7}, (_, k) => [c.x + Math.cos(k * Math.PI / 3) * s, c.y + Math.sin(k * Math.PI / 3) * s]);
  for (const h of hexes) { const r = h.bearing === null ? 'centre' : REGIONS.find(r => r.outer.includes(h.bearing)).id; regionsGroup.add(new THREE.Mesh(merge([ribbon(pts(h), 46, 4, 20)]), new THREE.MeshBasicMaterial({color: col[r], depthTest: false, transparent: true, opacity: .95}))); }
  for (const r of REGIONS) for (const b of [r.from]) { const a = b * Math.PI / 180, e = [HEX.centre[0] + Math.sin(a) * s * 2.6, HEX.centre[1] + Math.cos(a) * s * 2.6]; regionsGroup.add(new THREE.Mesh(merge([ribbon([HEX.centre, e], 30, 4, 20)]), new THREE.MeshBasicMaterial({color: col[r.id], depthTest: false, transparent: true, opacity: .55}))); }

@@ -109,20 +109,22 @@ the town stays the charming grown version.
   shapes only, laid over the land in a second skin that follows every hill. The map button steps off, faint, strong.
 - Privacy: homes are placed loosely on their real streets, with no house numbers or street names in the code.
 
-## The seven-hex region (Evan, 2026-10-23 1:30 PM, first version)
-"The final Winchester region should be a mega structure of 7 hexes in a greater hex ... carve the 3 regions roughly 33% each."
-Read as: a centre hex and its six neighbours form one greater hex; Winchester's three parts take a third each.
-- `simulations/abbietown/regions.mjs`: `HEX` (side 880 m, flat-top, seven of them cover about 14 km2 of the real town's
-  16.5), `REGIONS`, `hexOf`, `regionOf`, `placeRegions`. The hex button on the page draws the outlines on the land.
-- The cut: the centre hex is split into three 120 degree wedges; each region takes two outer hexes and one wedge, so each
-  is 7/3 hexes: exactly 33.3% of the area (tested), and about a third of the houses (451, 435 and 511 of 1,635).
-- The seam: the centre hex is downtown, where all three regions meet. The centre of the greater hex is the middle of
-  town, and the boundaries run out from it at 330, 90 and 210 degrees (clockwise from north).
-- **School Hill** (north and north-east): Muraco, Leonard Field, Abbie's house, the road to Launch.
-- **Pond Side** (west and north-west): Horn Pond with the splash pad, Ani's house.
-- **Lake Country** (south and south-east): Ginn Field and the train park, the lakes, and (by where the real centre sits
-  south of the greater hex's middle) downtown with the coffee shop, Comella's, Frozen Hoagies, the lab and the common.
-- How you change regions is the changing-worlds UX study (AW-STUDY-0048); the region ids above are the stable names for it.
+## The seven-hex region (Evan, 2026-10-23 1:30 and 1:34 PM, first version)
+"The final Winchester region should be a mega structure of 7 hexes in a greater hex ... carve the 3 regions roughly 33%
+each." Then: "ani has her side, abbie and I have ours ... then there's a downtown area", with the church park at the centre.
+- `simulations/abbietown/regions.mjs`: `HEX` (side 760 m, flat-top, centred on the common and its church park; seven of
+  them cover about 10.5 km2 of the real town's 16.5), `REGIONS`, `hexOf`, `regionOf`, `placeRegions`. The hex button on
+  the page draws the outlines on the land.
+- The cut: the centre hex is split into three 120 degree wedges; each region takes two outer hexes and one wedge, so
+  each is about a third of the area (tested: 32.5%, 32.6%, 34.9%) and of the houses (437, 385 and 409 of 1,635, with
+  the rest outside the greater hex). Boundaries run out from the common at 330, 90 and 210 degrees (clockwise from north).
+- **Downtown** (south and south-east, plus the streets round the church park at the middle): the church park and
+  common, Main Street and the coffee shop, Comella's, Frozen Hoagies, the lab, Ginn Field and the train park, the lakes.
+  Sub-area: Lake Country.
+- **Ani's side** (west and north-west): Ani's house and treehouse, Horn Pond with the splash pad. Sub-area: Pond Side.
+- **Abbie and Daddy's side** (north and north-east): Abbie's house and treehouse, Daddy's hideaway, Muraco, Leonard
+  Field, the road to Launch. Sub-area: School Hill.
+- Region ids (stable, for the changing-worlds study AW-STUDY-0048): `downtown`, `anis-side`, `abbie-daddy-side`.
 
 ## Anchors for other studies
 `anchors(land, town)` in `simulations/abbietown/town.mjs` (also `window.AbbieTown.anchors` on the page) returns the coffee
