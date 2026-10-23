@@ -18,6 +18,12 @@ export function cartoonLandmark(type){
  }else if(type==='crop'){
   for(let row=0;row<3;row++){box('#856246',0,.08,(row-1)*.62,2.05,.16,.43);for(let col=0;col<3;col++){const x=(col-1)*.62,z=(row-1)*.62;ball('#779347',x,.36,z,.27);ball('#a7b965',x+.08,.46,z,.2);}}group.userData.landmark='Kitchen garden';
  }else if(type==='meadow'){group.userData.landmark='Wildflower meadow';
+ }else if(type==='moon'){
+  mesh(new T.SphereGeometry(.95,14,7,0,Math.PI*2,0,Math.PI/2),'#eef1f4',0,0,0);mesh(new T.CylinderGeometry(1,1,.12,14),'#7f8a99',0,.06,0);box('#5d6b85',0,.32,.92,.5,.62,.4);box('#ffd36a',0,.42,1.13,.26,.3,.04);
+  for(const a of [0,1.05,2.1])box('#9fb3c9',Math.sin(a)*.5,.62+Math.cos(a)*.12,Math.cos(a)*.5-.05,.16,.16,.04).lookAt(0,1.4,0);
+  box('#b9c0cc',-1.25,.55,-.25,.08,1.1,.08);const dish=mesh(new T.ConeGeometry(.3,.16,12,1,true),'#e6e9ef',-1.25,1.16,-.25);dish.rotation.x=-.7;dish.material.side=T.DoubleSide;ball('#ff7a5a',-1.25,1.32,-.25,.06);
+  const panel=box('#2f4f9a',1.35,.5,.25,.85,.05,.55);panel.rotation.z=-.45;box('#b9c0cc',1.3,.24,.25,.06,.48,.06);
+  group.userData.landmark='Moon dome';
  }else return null;
  group.userData.representationOnly=true;return group;
 }

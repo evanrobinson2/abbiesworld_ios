@@ -757,7 +757,8 @@ export function cardPixels({ dpi = 600, bleed = false } = {}) {
 /**
  * Paint one card.
  * opts: {dpi (default 600), bleed (print master: 3 mm bleed, square), lod: 'inspect'|'hand'|'board',
- *        finish: overrides the tier's finish, guides: trim and safe lines}
+ *        finish: overrides the tier's finish, guides: trim and safe lines,
+ *        plate: false drops the hand LOD's rules/ability plate and gives its room to the art}
  * Returns {canvas, qc, manifest, masks}: qc is the quality report for this exact output, manifest is the rubric
  * checker's card.json (boxes in canvas px), masks are the finish layers to draw with renderMask().
  */
@@ -775,8 +776,10 @@ export async function renderCard(spec, opts = {}) {
   const seed = hashSeed(spec.id || spec.name);
   const qc = newQC(spec), boxes = [], toPx = (x, y, bw, bh) => [x, y, bw, bh].map((v, i) => Math.round((i < 2 ? v + b : v) * pxmm));
   const style = lod === 'board' && sun ? 'portal' : spec.artStyle || ART_STYLES[tier];
-  const A = lod === 'board' ? { x: 4, y: 4, w: 55, h: 72 } : sun ? L.sunArt : L.art;
-  const sub = lod === 'board' ? { x: 4, y: 12, w: 55, h: 60 } : sun ? L.sunSubject : L.subject;
+  // A hand card with plate:false keeps its name but gives the plate's room to the art (a tile card's art is the point).
+  const tall = lod === 'board' || (lod === 'hand' && opts.plate === false && !sun);
+  const A = tall ? { x: 4, y: 4, w: 55, h: 72 } : sun ? L.sunArt : L.art;
+  const sub = lod === 'board' ? { x: 4, y: 12, w: 55, h: 60 } : tall ? { x: 4, y: 20, w: 55, h: 54 } : sun ? L.sunSubject : L.subject;
 
   let art = null;
   try { art = await prepareArt(spec, { artDpi: Math.max(600, dpi), box: sub, view: style === 'specimen' ? { fill: 0.92 } : {} }); }
@@ -853,7 +856,7 @@ export async function renderCard(spec, opts = {}) {
   }
 
   // Gem where art meets the plate; type line under it
-  const G = lod === 'board' ? { cx: 31.5, cy: 79.8, r: 3.4 } : L.gem;
+  const G = tall ? { cx: 31.5, cy: 79.8, r: 3.4 } : L.gem;
   if (lod === 'inspect') {
     const T = L.type, tp = () => rrect(ctx, T.x, T.y, T.w, T.h, 1.2);
     ctx.save(); tp(); const tg = ctx.createLinearGradient(0, T.y, 0, T.y + T.h); tg.addColorStop(0, mix(TYPES[type].accent, '#000000', 0.25)); tg.addColorStop(1, mix(TYPES[type].accent, '#000000', 0.55)); ctx.fillStyle = tg; ctx.fill(); ctx.restore();
@@ -869,7 +872,7 @@ export async function renderCard(spec, opts = {}) {
   boxes.push({ role: 'gem', bbox: toPx(G.cx - G.r, G.cy - G.r, G.r * 2, G.r * 2) });
 
   // Rules plate (inspect) or ability icons (hand)
-  if (lod !== 'board') {
+  if (!tall) {
     const X = L.text, xp = () => rrect(ctx, X.x, X.y, X.w, X.h, 1.4);
     bevel(ctx, xp, trim, 0.5);
     parchment(ctx, xp, X.x, X.y, X.w, X.h, seed + 2);
