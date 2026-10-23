@@ -19,7 +19,7 @@ const DIOS = [
 const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
  muraco: {sc: .5, r: 21}, leonard: {sc: .5, r: 29}, horn: {sc: .6, r: 16, fixed: 1}, home: {sc: .8, r: 22}, ani: {sc: .8, r: 22}};
 const dioGroup = new THREE.Group(); dioGroup.position.set(X(DIO_ORIGIN[0]), 0, Z(DIO_ORIGIN[1])); scene.add(dioGroup); dioGroup.visible = false;
-const dioHouses = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
+const SQUARE = /*SQUARE*/null; const dioHouses = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
 const dioTile = {}; // id -> {cx, cy (map metres of the tile's middle), group, ...}
 const smooth = t => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
 const inHex = (x, y, R) => { const a = 30 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), u = x * ca + y * sa, v = -x * sa + y * ca, ax = Math.abs(u), ay = Math.abs(v); return ay <= R * Math.sqrt(3) / 2 && ax <= R - ay / Math.sqrt(3); };
@@ -90,6 +90,13 @@ function buildDiorama(d, ti) {
  G = realG; cafe = realCafe;
  // 7 houses of the real mix, thinned and set along the streets
  const taken = [...pads.map(p => ({x: p.h.x, y: p.h.y, r: p.h.r + 6}))], mine = [];
+ if (d.id === 'downtown') { // the town square: the real outline of the buildings around the common (public footprints, shapes only), shrunk to cartoon scale
+  const cp = pads.find(p => p.h.id === 'common'); if (cp) { const K = .21, grp = new THREE.Group(), WALL = ['#b5604a', '#d9c9a4', '#c9c0ae', '#e0c070', '#a9735a', '#cfd6cf'], ROOF = ['#5a4a40', '#6b5648', '#4a4f55'];
+   SQUARE.buildings.forEach((b, i) => { const sh = new THREE.Shape(b.p.map(([x, y]) => new THREE.Vector2(x * K, y * K))), hgt = b.a > 1500 ? 7 : 3.4 + (i * 37 % 10) / 5, hs = (i * 53 % 17) / 17;
+    const gx = cp.h.x + b.p.reduce((s, p) => s + p[0], 0) / b.p.length * K, gy = cp.h.y + b.p.reduce((s, p) => s + p[1], 0) / b.p.length * K; if (!inHex(gx, gy, DIO_R * .9)) return;
+    const geo = new THREE.ExtrudeGeometry(sh, {depth: hgt, bevelEnabled: false}).rotateX(-Math.PI / 2), m = new THREE.Mesh(geo, hkM(WALL[i % WALL.length])), cap = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, {depth: .5, bevelEnabled: false}).rotateX(-Math.PI / 2), hkM(ROOF[i % ROOF.length]));
+    const ey = hf(gx, gy); for (const o of [m, cap]) { o.position.set(cp.h.x, ey - .3, -cp.h.y); o.castShadow = o.receiveShadow = true; } cap.position.y = ey - .3 + hgt; grp.add(m, cap); taken.push({x: gx, y: gy, r: Math.sqrt(b.a) * K * .5 + 3}); });
+   out.add(grp); } }
  for (const h of town.houses.slice().sort((a, b) => Math.hypot(a.x - d.centre[0], a.y - d.centre[1]) - Math.hypot(b.x - d.centre[0], b.y - d.centre[1]))) {
   const px = (h.x - d.centre[0]) / scl, py = (h.y - d.centre[1]) / scl; if (!inHex(px, py, DIO_R * .88)) continue; const wy = waterY(px, py); if (!isNaN(wy)) continue;
   const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 4.6) continue; if (taken.some(t => Math.hypot(t.x - px, t.y - py) < (t.r || 9.5))) continue; if (h.fam === 'shop' && d.id !== 'downtown') continue;
