@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "horse-charming",
+  "group": "animal",
+  "replaces": "simulation-assets/organics/horse-{idle,feeding,rest}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "58a95a3d-4c3b-4696-83f7-f09ebef33a8f",
+      "grid_url": "https://www.midjourney.com/jobs/58a95a3d-4c3b-4696-83f7-f09ebef33a8f?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "504fe4db-c2c8-4ee5-a268-4f995a025faa",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:33:23.992Z",
+      "grid_done_at": "2026-10-23T00:33:41.994Z",
+      "upscale_clicked_at": "2026-10-23T00:33:52.041Z",
+      "downloaded_at": "2026-10-23T00:35:04.081Z",
+      "pick_reason": "closest to a side view, chibi proportions with cream blaze, dark mane, tail and hooves"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view, chibi proportions, a big round head, short stubby legs, rosy cheeks, plush toy-like, cheerful, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "c3fa3e78-a3c2-4cf6-b9ca-c77721a30a55",
+      "grid_url": "https://www.midjourney.com/jobs/c3fa3e78-a3c2-4cf6-b9ca-c77721a30a55?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "c88eff55-1342-47a2-a05e-72421e551bac",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:35:13.470Z",
+      "grid_done_at": "2026-10-23T00:35:31.472Z",
+      "upscale_clicked_at": "2026-10-23T00:35:47.903Z",
+      "downloaded_at": "2026-10-23T00:37:13.008Z",
+      "pick_reason": "front, three-quarter and back of one chibi horse, separated; no variant drew a true side profile, so the middle view is three-quarter"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "0cc6be46a480982ca36db7007effd3c917ada851850864b2cf67a7b5ee142bf4",
+      "bytes": 1035026,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/504fe4db-c2c8-4ee5-a268-4f995a025faa/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "cdc9a744459f901a4854cd9883c6f51833569aa5819fe969d285bc0926d9e49f",
+      "bytes": 2975124,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/c88eff55-1342-47a2-a05e-72421e551bac/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "8d5b50c0996efa450b1cd91b5ec148a37b00e1739f2fd28d4eb5e909d7066dd4",
+      "bytes": 959776,
+      "pixels": [
+        759,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-charming [('front', 174, 933), ('side', 1040, 1904), ('back', 1998, 2753)]"
+    },
+    "view_side.png": {
+      "sha256": "9e52e82924f39bb10058eda10b9d60e33993891f92c749cf06d61be5b56f8329",
+      "bytes": 1056578,
+      "pixels": [
+        864,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-charming [('front', 174, 933), ('side', 1040, 1904), ('back', 1998, 2753)]"
+    },
+    "view_back.png": {
+      "sha256": "c3b0ed0f28fd69e30ead44bf3bedf2affa7e48e826c7ba2fc97fa0585dd5f129",
+      "bytes": 809203,
+      "pixels": [
+        755,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-charming [('front', 174, 933), ('side', 1040, 1904), ('back', 1998, 2753)]"
+    }
+  }
+}
