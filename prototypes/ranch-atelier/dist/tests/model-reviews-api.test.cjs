@@ -22,7 +22,8 @@ test('a verdict is kept per model, replaced by the next one, and dropped in the 
   assert.equal(listed.body.reviews['ranch-barn-shelter'].verdict, 'accept');
   const inbox = [...blob.files.keys()].filter(p => p.startsWith('feedback/v1/'));
   assert.equal(inbox.length, 2);
-  const first = JSON.parse(blob.files.get(inbox.sort()[0]));
+  // Both posts can land in the same millisecond, so find the adjust note by its verdict, not by id order.
+  const first = inbox.map(p => JSON.parse(blob.files.get(p))).find(f => f.verdict === 'adjust');
   assert.equal(first.kind, 'model-review'); assert.match(first.note, /^Adjust: Barn shelter — roof steeper$/); assert.equal(first.via, 'voice');
   assert.match(inbox[0].slice('feedback/v1/'.length, -5), /^[a-z0-9]{8,12}-[a-f0-9]{8}$/);
   assert.equal((await call(handler, { method: 'POST', body: { id: 'ranch-barn-shelter', verdict: 'clear' } })).status, 200);
