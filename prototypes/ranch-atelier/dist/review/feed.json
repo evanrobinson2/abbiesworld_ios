@@ -2,6 +2,17 @@
   "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md.",
   "items": [
     {
+      "id": "shoulder-study",
+      "at": "2026-10-23T04:30:30Z",
+      "title": "Over-the-shoulder play",
+      "ask": "Pick which of the five ideas to build first (I'd start with the soft shoulder and the dive).",
+      "thread": "AW-STUDY-0011 - Over-the-Shoulder Play",
+      "image": "img/shoulder-study.jpg",
+      "link": "https://claude.ai/artifact/F8HG8LMckTjCwQzDsHDsoz",
+      "linkLabel": "The study",
+      "status": "waiting"
+    },
+    {
       "id": "paper-man-1",
       "at": "2026-10-23T04:30:00Z",
       "title": "Paper man #1",
