@@ -65,8 +65,8 @@ const BUILD = {
   for (const x of [-36, -10, 14, 36]) { const t = new THREE.Group(); add(t, at(cyl(.3, .4, 3, 0x6b4a2f, 6), 0, 1.5, 0), at(new THREE.Mesh(new THREE.IcosahedronGeometry(2.2, 0), mat(0x5fa05b)), 0, 4.5, 0)); t.position.set(x, 0, -3); g.add(t); }
   }
   S.truck = truck(); S.truck.position.set(-80, 0, 7.5); g.add(S.truck);
-  S.port = new THREE.Group(); add(S.port, at(cyl(15, 15, .3, 0x6c7384, 40), 0, .1, 0), at(cyl(11, 11, .35, 0x2c313d, 40), 0, .15, 0)); for (let i = 0; i < 16; i++) { const a = i / 16 * 6.283; S.port.add(at(box(.5, .08, 1.4, i % 2 ? 0xffc94a : 0x15171c), Math.sin(a) * 13, .3, Math.cos(a) * 13)); } S.port.position.set(22, 0, 4); S.port.scale.set(0, 0, 0); g.add(S.port);
-  S.rocket = rocket(1); S.rocket.position.set(22, 160, 4); S.rocket.visible = false; g.add(S.rocket);
+  S.port = new THREE.Group(); add(S.port, at(cyl(15, 15, .3, 0x6c7384, 40), 0, .1, 0), at(cyl(11, 11, .35, 0x2c313d, 40), 0, .15, 0)); for (let i = 0; i < 16; i++) { const a = i / 16 * 6.283; S.port.add(at(box(.5, .08, 1.4, i % 2 ? 0xffc94a : 0x15171c), Math.sin(a) * 13, .3, Math.cos(a) * 13)); } S.port.position.set(S.bare ? 15 : 22, 0, S.bare ? 7 : 4); S.port.scale.set(0, 0, 0); g.add(S.port);
+  S.rocket = rocket(1); S.rocket.position.set(S.bare ? 15 : 22, 160, S.bare ? 7 : 4); S.rocket.visible = false; g.add(S.rocket);
   S.heroes = { daddy: at(hero('daddy', false), 1, 0, 3), abbie: at(hero('abbie', false), 3, 0, 3.6), ani: at(hero('ani', false), 5, 0, 3.2) }; for (const h of Object.values(S.heroes)) { h.rotation.y = .3; g.add(h); }
   return g;
  },
@@ -141,7 +141,7 @@ export function createWorld(canvas, ZONES, host = null) {
  function onFx(e) {
   if (e.fx === 'zone') setZone(e.id, e.mood);
   else if (e.fx === 'mood') setMood(e.to);
-  else if (e.fx === 'kaboom' && S.rocket && S.port) { S.rocket.visible = true; S.rocket.position.y = 160; drop = {t: 0}; S.port.scale.set(.01, .01, .01); }
+  else if (e.fx === 'kaboom' && S.rocket && S.port) { S.rocket.visible = true; S.rocket.position.y = 160; drop = {t: 0}; S.port.scale.set(.01, .01, .01); S.portK = S.bare ? .55 : 1; S.rocket.scale.setScalar(S.bare ? .7 : 1); }
   else if (e.fx === 'liftoff' && S.rocket) { liftoff = 1; shake = 1.2; if (S.rocket.getObjectByName('flame')) S.rocket.getObjectByName('flame').visible = true; }
   else if (e.fx === 'board') board(e.draw, e.color);
   else if (e.fx === 'stamp') shake = Math.max(shake, .3);
@@ -181,7 +181,7 @@ export function createWorld(canvas, ZONES, host = null) {
   t += dt; if (own) resize(); const k = 1 - Math.pow(.02, dt);
   if (own) { const sky = new THREE.Color(INSIDE[curId] || SKY[mood]); scene.background.lerp(sky, k); sun.intensity += ((mood === 'light' ? 2.4 : .9) - sun.intensity) * k; hemi.intensity += ((mood === 'light' ? 1.1 : .35) - hemi.intensity) * k; sun.color.set(mood === 'light' ? 0xffffff : 0xaec6ff); }
   if (driving && S.truck) { truckT += dt; const f = Math.min(1, truckT / 5), e = 1 - Math.pow(1 - f, 3); S.truck.position.x = -80 + (-9 + 80) * e; if (f >= 1) driving = false; }
-  if (drop && S.rocket && S.port) { drop.t += dt; const f = Math.min(1, drop.t / .9); S.port.scale.setScalar(Math.max(.01, f)); // the rocket port lands, then the ship falls right after
+  if (drop && S.rocket && S.port) { drop.t += dt; const f = Math.min(1, drop.t / .9); S.port.scale.setScalar(Math.max(.01, f) * (S.portK || 1)); // the rocket port lands, then the ship falls right after
    if (drop.t > .9) { const g = Math.min(1, (drop.t - .9) / 0.7); S.rocket.position.y = 160 * (1 - g * g); if (g >= 1) { drop = null; shake = 1.4; S.launched = true; } } }
   if (liftoff && S.rocket) { liftoff += dt; S.rocket.position.y += Math.pow(liftoff, 2) * 3 * dt * 6; shake = Math.max(shake, .5); }
   if (S.rocket && curId === 'orbit') { S.rocket.position.y = Math.sin(t) * .3; }
