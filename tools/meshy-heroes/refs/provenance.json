@@ -180,5 +180,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T16:53:06Z"
+  },
+  {
+    "id": "A1-paint-suit",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "858315e9-3e87-4778-9a44-bf5b29b36e99",
+    "files": [
+      "tools/meshy-heroes/refs/A1-paint-suit/mj_858315e9-3e87-4778-9a44-bf5b29b36e99_0.png",
+      "tools/meshy-heroes/refs/A1-paint-suit/mj_858315e9-3e87-4778-9a44-bf5b29b36e99_1.png",
+      "tools/meshy-heroes/refs/A1-paint-suit/mj_858315e9-3e87-4778-9a44-bf5b29b36e99_2.png",
+      "tools/meshy-heroes/refs/A1-paint-suit/mj_858315e9-3e87-4778-9a44-bf5b29b36e99_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T16:55:09Z"
+  },
+  {
+    "id": "A1-paint-tee",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "7a945f66-ee08-48be-83b9-a09a214d04a0",
+    "files": [
+      "tools/meshy-heroes/refs/A1-paint-tee/mj_7a945f66-ee08-48be-83b9-a09a214d04a0_0.png",
+      "tools/meshy-heroes/refs/A1-paint-tee/mj_7a945f66-ee08-48be-83b9-a09a214d04a0_1.png",
+      "tools/meshy-heroes/refs/A1-paint-tee/mj_7a945f66-ee08-48be-83b9-a09a214d04a0_2.png",
+      "tools/meshy-heroes/refs/A1-paint-tee/mj_7a945f66-ee08-48be-83b9-a09a214d04a0_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T16:56:58Z"
   }
 ]
