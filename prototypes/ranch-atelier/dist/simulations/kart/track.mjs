@@ -21,12 +21,13 @@ export function boardSlots(R) {
 
 // What the track sees of a board: the seven hexes with their middles, plus any tiles placed in slots (extraIds). The key changes
 // whenever the set of tiles changes, which is what makes the track rebuild itself.
-export function layoutOf(board, extraIds = []) {
+export function layoutOf(board, extraIds = [], {width = TRACK.width} = {}) {
  const R = board.hexSide || 105, centre = id => (board.centreOf || hexCentre)(id);
  const hexes = board.hexes.map(h => ({id: h.id, zone: h.zone || ZONES[h.id] || 'new', ...centre(h.id)}));
  const slots = board.slots || boardSlots(R), placed = [];
  for (const id of [...extraIds].sort()) { const sl = slots.find(p => p.id === id); if (sl && !hexes.some(h => h.slot === id)) { const hx = {id: 'tile:' + id, slot: id, zone: 'new', extra: true, x: sl.x, y: sl.y}; hexes.push(hx); placed.push(hx); } }
- const L = {R, hexes, placed, key: hexes.map(h => h.id).sort().join('|'), heightAt: board.heightAt, board};
+ const obstacles = board.obstaclesNear ? board.obstaclesNear(0, 0, 1e5) : []; // the town's houses and trees: the track threads between them
+ const L = {R, hexes, placed, width, obstacles, key: hexes.map(h => h.id).sort().join('|') + '@' + width + '#' + obstacles.length, heightAt: board.heightAt, board};
  L.hexAt = (x, y) => { for (const h of hexes) if (inHex(x - h.x, y - h.y, R)) return h; return null; };
  L.onBoard = (x, y) => !!L.hexAt(x, y);
  return L;
@@ -99,13 +100,33 @@ export function indexSamples(samples, cell = 12) {
 
 export const TRACK = {width: 16, shortcutWidth: 9};
 
+// ---- threading between obstacles (houses and trees from board.obstaclesNear)
+const OC = 24, okey = (x, y) => Math.floor(x / OC) * 100003 + Math.floor(y / OC);
+function obstacleGrid(list) { const g = new Map(); for (const o of list) { const k = okey(o.x, o.y); (g.get(k) || g.set(k, []).get(k)).push(o); } return g; }
+function near(g, x, y, reach) { const out = [], c = Math.ceil(reach / OC) + 1; for (let a = -c; a <= c; a++) for (let b = -c; b <= c; b++) for (const o of g.get(okey(x + a * OC, y + b * OC)) || []) out.push(o); return out; }
+function relax(pts, closed, width, grid, L) {
+ const n = pts.length, P = pts.map(p => ({...p})), keep = closed ? [] : [0, n - 1];
+ for (let it = 0; it < 40; it++) for (let i = 0; i < n; i++) {
+  if (keep.includes(i)) continue; const p = P[i], was = {x: p.x, y: p.y};
+  for (const o of near(grid, p.x, p.y, 14 + width)) { const d = Math.hypot(p.x - o.x, p.y - o.y), need = o.r + width / 2 + 1.5; if (d < need) { const k = (need - d) * .6 / (d || 1); p.x += (p.x - o.x) * k + (d ? 0 : .5); p.y += (p.y - o.y) * k; } }
+  const a = P[(i + n - 1) % n], b = P[(i + 1) % n]; p.x += ((a.x + b.x) / 2 - p.x) * .2; p.y += ((a.y + b.y) / 2 - p.y) * .2;
+  if (!L.onBoard(p.x, p.y)) { p.x = was.x; p.y = was.y; }
+ }
+ return P;
+}
+
 // Builds the whole track in slices so it can run in the background. Drive it with runLazily(). The result is plain data: samples,
 // surfaceAt, props, ramps, gates. Nothing here draws; kart.mjs turns it into meshes.
 export function* buildTrack(L) {
- const seed = hashOf(L.key), r = seeded(seed), t0 = Date.now(), W = TRACK.width;
+ const seed = hashOf(L.key), r = seeded(seed), t0 = Date.now(), W = L.width ?? TRACK.width;
  const plan = planLoop(L); yield 'planned';
- const main = sampleCurve(plan.points, true, 3); yield 'curve';
- const cut = sampleCurve(plan.shortcut, false, 3);
+ let main = sampleCurve(plan.points, true, 3), cut = sampleCurve(plan.shortcut, false, 3);
+ if (L.obstacles.length) { // thread the road between the town's houses: push points off anything in the lane, then re-fit the curve
+  const grid = obstacleGrid(L.obstacles);
+  main = sampleCurve(relax(main.samples.filter((_, i) => i % 2 === 0).map(p => ({x: p.x, y: p.y})), true, W, grid, L), true, 3);
+  cut = sampleCurve(relax(cut.samples.filter((_, i) => i % 2 === 0 || i === cut.samples.length - 1).map(p => ({x: p.x, y: p.y})), false, TRACK.shortcutWidth, grid, L), false, 3);
+ }
+ yield 'curve';
  const nearMain = indexSamples(main.samples), nearCut = indexSamples(cut.samples); yield 'indexed';
  const surfaceAt = (x, y) => {
   if (!L.onBoard(x, y)) return 'void';
@@ -120,9 +141,11 @@ export function* buildTrack(L) {
   'abbie-daddy-side': [['hay', 1.6, 'soft'], ['tree', 1.1, 'hard'], ['scarecrow', .7, 'soft'], ['fence', 1.6, 'soft'], ['rock', 1.4, 'hard'], ['pumpkin', .7, 'soft']],
   new: [['cone', .6, 'soft'], ['crate', 1.1, 'soft'], ['rock', 1.4, 'hard'], ['hay', 1.6, 'soft']],
  };
+const og = L.obstacles.length ? obstacleGrid(L.obstacles) : null, grid2 = p => og && near(og, p.x, p.y, 12).some(o => Math.hypot(o.x - p.x, o.y - p.y) < o.r + W / 2 + 8);
  const props = [], LANE = [['cone', .6, 'soft'], ['crate', 1.1, 'soft'], ['puddle', 3, 'puddle'], ['hay', 1.6, 'soft'], ['cone', .6, 'soft']];
  for (let i = 6; i < main.samples.length; i += 5) {
   const p = main.samples[i], hex = L.hexAt(p.x, p.y); if (!hex) continue;
+  if (L.obstacles.length && grid2(p)) continue;
   const kinds = KINDS[hex.zone] || KINDS.new, nx = -p.ty, ny = p.tx, side = r() < .5 ? -1 : 1, off = W / 2 + 2.5 + r() * 9, [kind, rad, hard] = kinds[Math.floor(r() * kinds.length)];
   props.push({kind, r: rad, hard: hard === 'hard', soft: hard === 'soft', x: p.x + nx * off * side, y: p.y + ny * off * side, rot: r() * 6.28, hex: hex.id});
   if (r() < .26 && p.s > 30) { const lane = (r() - .5) * (W - 6), k = LANE[Math.floor(r() * LANE.length)]; props.push({kind: k[0], r: k[1], hard: false, soft: k[2] === 'soft', puddle: k[2] === 'puddle', x: p.x + nx * lane, y: p.y + ny * lane, rot: r() * 6.28, hex: hex.id, inLane: true}); }
