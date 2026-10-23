@@ -53,6 +53,18 @@
   ],
   "pick": {
     "index": 3,
-    "upscale": null
+    "upscale": {
+      "mode": "Upscale (Subtle), Relax",
+      "job_id": "28c993df-637c-4d0d-8ee3-b2ab18763657",
+      "page": "https://www.midjourney.com/jobs/28c993df-637c-4d0d-8ee3-b2ab18763657",
+      "file": "upscale.png",
+      "url": "https://cdn.midjourney.com/28c993df-637c-4d0d-8ee3-b2ab18763657/0_0.png",
+      "size": [
+        2688,
+        1792
+      ],
+      "sha256": "5260fe8a7049fb10976c010a4d80a036ef632b10302f951c3592e20eb099e0e6",
+      "time_utc": "2026-10-23T14:20-14:31Z"
+    }
   }
 }
