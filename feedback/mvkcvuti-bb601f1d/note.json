@@ -1,0 +1,14 @@
+{
+  "id": "mvkcvuti-bb601f1d",
+  "receivedAt": "2026-10-23T02:33:47.615Z",
+  "kind": "model-review",
+  "model": "ranch-barn-shelter",
+  "verdict": "accept",
+  "note": "Accepted: Barn shelter (normal)",
+  "page": "/models/ranch-barn-shelter",
+  "title": "Model review",
+  "via": "tap",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "hasImage": false,
+  "picture": null
+}
