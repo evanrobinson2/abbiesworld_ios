@@ -1315,6 +1315,52 @@
     }
    ],
    "recorded": "2026-10-23, as the study was made"
+  },
+  "figure-practice": {
+   "items": [
+    {
+     "k": "canon",
+     "t": "Artist method and rep protocol (Bodies study)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/ARTIST_METHOD.md",
+     "note": "practise one thing, score, one lesson"
+    },
+    {
+     "k": "canon",
+     "t": "Drawing the figure: construction order and limb rules",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/DRAWING.md"
+    },
+    {
+     "k": "canon",
+     "t": "Human canon: proportions and landmarks",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/bodies/human-canon.json"
+    },
+    {
+     "k": "canon",
+     "t": "Shaders article and the 7-look toon set (banana split day)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/rendering/shaders-article.html"
+    },
+    {
+     "k": "tutorial",
+     "t": "Constructive Anatomy, George B. Bridgman (1920)",
+     "href": "https://archive.org/details/constructiveanat00brid",
+     "note": "limb bulges high, joints as boxes"
+    },
+    {
+     "k": "tutorial",
+     "t": "Figure Drawing for All It's Worth, Andrew Loomis (1943)",
+     "note": "line of action, stick figure to masses"
+    },
+    {
+     "k": "reference",
+     "t": "Midjourney sketches of the pose, 4 styles x 4",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/midjourney/outputs/figure-practice-sketches/provenance.json"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's reference photo of a leaping wooden mannequin",
+     "note": "stock photo, private, not committed"
+    }
+   ]
   }
  }
 }
