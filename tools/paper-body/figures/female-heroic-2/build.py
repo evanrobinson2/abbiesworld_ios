@@ -52,13 +52,14 @@ def dense(rows, step=18):
     return out + [rows[-1]]
 
 
-def piece(name, rows, depth, n=8, mat=PAPER, mirror=False, twist=0.0, creases=()):
+def piece(name, rows, depth, n=8, mat=PAPER, mirror=False, twist=0.0, creases=(), wide=1.0):
     """One folded paper part: a loft through rows of (y, centre x, half-width[, forward shift]), capped both ends.
     twist turns the rings progressively down the part, so the fold ridges run diagonally across it. creases are
-    folds pressed into the paper: lists of (y, u) with u in -1..1 across the front; the vertex under each is pushed out."""
+    folds pressed into the paper: lists of (y, u) with u in -1..1 across the front; the vertex under each is pushed out.
+    wide scales the half-width, so a few-sided ring still spans the outline it was read from."""
     rings = []
     for i, r in enumerate(rows):
-        y, cx, hw = r[:3]; fw = r[3] if len(r) > 3 else 0.0
+        y, cx, hw = r[:3]; fw = r[3] if len(r) > 3 else 0.0; hw *= wide
         turn = twist * i / max(1, len(rows) - 1) * (-1 if mirror else 1)
         rg = ring(y, 2 * MID - cx if mirror else cx, hw, depth, n, fw, turn); c = rg[:, :2].mean(0)
         for cr in creases:
@@ -158,29 +159,22 @@ def tri_mesh(name, verts, faces, mat):
 
 
 def head_neck():
-    """Head, part by part: a folded paper hood with a flat face shield set into it. The shield has a sharp centre
-    ridge that is the nose and runs down to a pointed chin; a fold at the eye line; a raised edge outlines the face
-    from the forehead peak down the jaw to the chin, as in the pick."""
+    """Head: one faceted paper egg, as in the pick. Eight sides, so the faces are big folded planes. A sharp ridge runs
+    dead ahead from the crown down the forehead into the nose and on to a pointed chin; the two large face planes either
+    side are set back from it, and the cheek facets narrow into the jaw."""
     piece('neck', [(266, MID, 25, 4), (222, MID, 21, 6)], 0.95, 8)
-    # (y, half-width from the mask, depth ratio, forward shift, nose ridge px, eye-line fold)
-    rows = [(233, 5, 1.0, -17, 0, 0), (226, 13, 0.95, -15, 5, 0), (212, 24, 0.95, -11, 7, 0), (192, 35, 1.0, -6, 8, 0),
-            (166, 46, 1.04, -3, 8, 1), (160, 48, 1.05, -2, 8, 0), (135, 51, 1.08, -1, 8, 0), (110, 49, 1.1, 0, 7, 0),
-            (92, 43, 1.1, 1, 4, 0), (84, 38, 1.1, 1, 1, 0), (78, 32, 1.1, 2, 0, 0), (67, 18, 1.05, 3, 0, 0), (62, 4, 1.0, 3, 0, 0)]
-    n = 16; rings = []
-    for y, hw, d, fw, ridge, fold in rows:
-        r = ring(y, MID, hw, d, n, fw)
-        cy = fw * S; depth = hw * d * S
-        if 84 <= y <= 230:
-            # the face shield, recessed into the hood: the two facets beside the ridge lie on a plane set back from
-            # the hood's rim (the vertices at +-45 deg), so the rim reads as the outline of the face
-            # the shield is pointed at the forehead and the chin and widest at the eye line, as in the pick
-            sw = float(np.interp(y, [84, 100, 125, 166, 192, 214, 230], [0.12, 0.45, 0.72, 0.86, 0.78, 0.55, 0.22]))
-            rim = cy - depth * 0.9; plane = rim + 7 * S + (2 * S if fold else 0)
-            for i in (1, n - 1):
-                r[i, 1] = plane; r[i, 0] = math.copysign(hw * sw * 0.5 * S, r[i, 0])
-            for i in (2, n - 2):
-                r[i, 1] = rim - 1.5 * S; r[i, 0] = math.copysign(hw * sw * S, r[i, 0])
-            r[0, 1] = plane - ridge * S            # the nose ridge, dead ahead
+    # (y, half-width, depth ratio, forward shift, ridge px ahead of the egg, set-back of the face planes)
+    rows = [(62, 6, 1.0, 3, 0, 0), (74, 30, 1.05, 2, 4, 0.08), (98, 47, 1.1, 0, 8, 0.26), (132, 51, 1.1, -1, 10, 0.38),
+            (160, 49, 1.08, -2, 12, 0.42), (186, 40, 1.02, -5, 11, 0.38), (210, 27, 0.98, -9, 9, 0.3), (228, 12, 0.95, -14, 6, 0.14),
+            (235, 3, 0.9, -16, 2, 0)]
+    n = 8; rings = []
+    for y, hw, d, fw, ridge, back in rows:
+        r = ring(y, MID, hw, d, n, fw); cy = fw * S
+        r[0, 1] -= ridge * S                                   # the ridge: crown, forehead, nose, chin
+        for i in (1, n - 1):                                   # the face planes, set back from the ridge
+            r[i, 1] = cy + (r[i, 1] - cy) * (1 - back); r[i, 0] *= 1 - back * 0.35
+        for i in (2, n - 2):                                   # cheek facets narrowing into the jaw
+            r[i, 0] *= 1 - back * 0.15
         rings.append(r)
     kit.loft('head', rings, PAPER, cap_start=True, cap_end=True)
 
@@ -231,21 +225,32 @@ def hand(tag, m, wx, wy):
     kit.tube(f'thumb_{tag}', [Q(*p) for p in th], np.array([8, 7, 5, 1.6]) * S, 4, PAPER)
 
 
+def pyramid(name, base, apex, mat=PAPER):
+    """A folded paper plate: a closed fan from a base outline (points in metres) to an apex standing off it."""
+    v = list(base) + [apex]; k = len(base)
+    return tri_mesh(name, v, [(i, (i + 1) % k, k) for i in range(k)] + [tuple(range(k))[::-1]], mat)
+
+
 def arm(tag, m):
     k = SHOULDER_SCALE
-    # shoulder cap, faceted: the pick's is ~52 px; this one is 65% of it and tucked in over the arm (Evan's request)
-    piece(f'shoulder_cap_{tag}', [(258, 312, 18), (270, 303, 36), (288, 297, 52 * k + 12, -3), (316, 296, 52 * k + 13, -4),
-                                  (340, 296, 40), (362, 296, 22)], 1.0, 6, mirror=m, twist=0.7)
+    # shoulder cap: a puffed paper cap of a few large fold planes (five sides, four rows, turned), at 65% of the pick's
+    # size and tucked in over the arm, as Evan asked
+    piece(f'shoulder_cap_{tag}', [(256, 312, 16), (276, 300, 40, -2), (312, 295, 52 * k + 13, -5), (352, 296, 26)], 1.0, 5,
+          mirror=m, twist=0.9)
     piece(f'arm_upper_{tag}', [(320, 296, 32), (370, 293, 35), (410, 289, 36, -2), (450, 282, 33), (482, 276, 31)], 0.9, 8, mirror=m)
     # pleated elbow strap: banded folds, like the cuff in the pick
     piece(f'elbow_strap_{tag}', [(470, 274, 32), (475, 272, 37), (481, 270, 33), (487, 268, 38), (493, 266, 34), (499, 264, 38), (505, 263, 33)],
           0.9, 10, CLOTH, mirror=m)
-    # forearm bracer: a six-sided folded guard that flares toward the elbow side, with a flap down its outer face
-    rows = [(496, 263, 33), (527, 252, 37), (567, 249, 43, -2), (607, 236, 36), (647, 223, 28), (664, 219, 23)]
-    piece(f'bracer_{tag}', rows, 0.8, 6, mirror=m)
-    flap = [P(252 - 37, 522, -12, m), P(249 - 44, 570, -10, m), P(223 - 29, 650, -6, m), P(223 - 6, 652, -27, m), P(249 - 10, 566, -36, m), P(252 - 6, 520, -32, m)]
-    tri_mesh(f'bracer_flap_{tag}', flap, [(0, 1, 4, 5), (1, 2, 3, 4)] if not m else [(5, 4, 1, 0), (4, 3, 2, 1)], PAPER)
-    piece(f'wrist_cuff_{tag}', [(660, 220, 22), (666, 219, 25), (672, 219, 21)], 0.85, 8, CLOTH, mirror=m)
+    # forearm guard: a six-sided core, and a flat flap plate down its outer face whose outer edge follows the pick's
+    # outline, flaring out toward the wrist (x 236 at the elbow to 195 at the wrist)
+    piece(f'bracer_{tag}', [(500, 262, 30), (540, 254, 32, -2), (590, 245, 32, -3), (630, 236, 29, -3), (662, 228, 25, -2)], 0.85, 6, mirror=m, wide=1.08)
+    edge = [(488, 246), (560, 211), (610, 201), (650, 196), (666, 193)]
+    outer = [P(x - 2 - 8 * (y - 488) / 178, y, -14, m) for y, x in edge]
+    inner = [P(x + (10 if y < 500 else 34), y, -46, m) for y, x in edge[::-1]]
+    flap = outer + inner; kf = len(edge)
+    faces = [(i, i + 1, 2 * kf - 2 - i, 2 * kf - 1 - i) for i in range(kf - 1)]
+    o = tri_mesh(f'bracer_flap_{tag}', flap, faces, PAPER); kit.solidify(o, 4 * S)
+    piece(f'wrist_cuff_{tag}', [(660, 220, 24), (666, 219, 27), (672, 219, 22)], 0.85, 8, CLOTH, mirror=m)
     hand(tag, m, 219, 668)
     sh = 2 * MID - 297 if m else 297; hd = 2 * MID - 226 if m else 226
     return [round((sh - MID) * S, 3), 0.0, round(z(300), 3)], [round((hd - MID) * S, 3), 0.0, round(z(727), 3)]
@@ -259,31 +264,32 @@ def limb_front(rows, depth, y, u, m):
     return P(cx + u * hw, y, fw - hw * depth * math.sqrt(max(0.0, 1 - u * u)) * 1.04, m)
 
 
-THIGH = [(600, 382, 62), (640, 368, 70), (687, 355, 69, -3), (727, 347, 71, -4), (767, 341, 64, -4),
-         (807, 338, 56, -3), (847, 333, 49, -2), (887, 331, 42), (918, 322, 36)]
-SHIN = [(955, 305, 37), (1007, 293, 45, -2), (1047, 289, 46, -2), (1087, 281, 39), (1127, 269, 29),
-        (1167, 257, 21), (1207, 254, 20), (1252, 249, 21)]
+# legs as angular segments, rows read off the mask; six sides with a flat inner face, so the inner plane of the thigh
+# is one long diagonal from the crotch to the knee
+THIGH = [(600, 380, 62), (690, 354, 70, -3), (780, 341, 61, -6), (870, 332, 46, -8), (905, 327, 37, -9)]
+SHIN = [(945, 312, 34, -6), (1015, 294, 47, -2), (1080, 283, 41), (1150, 262, 24), (1228, 252, 20), (1268, 246, 20)]
 
 
 def leg(tag, m):
-    # thigh and shin: seven-sided, so the paper breaks into planes; the ridge turns down the leg, which makes the
-    # pick's diagonal facets, and raised creases mark its strongest folds
-    piece(f'leg_upper_{tag}', dense(THIGH), 0.88, 10, mirror=m, twist=0.5,
-          creases=[[(650, -0.8), (720, -0.45), (790, 0.05), (850, 0.45)], [(700, 0.8), (770, 0.6), (840, 0.5)]])
-    piece(f'knee_{tag}', [(905, 323, 39, -2), (920, 318, 41, -8), (935, 313, 38, -6), (962, 306, 37, -2)], 0.92, 6, mirror=m)
-    piece(f'leg_lower_{tag}', dense(SHIN), 0.95, 10, mirror=m, twist=-0.45,
-          creases=[[(980, -0.8), (1050, -0.35), (1120, 0.15), (1190, 0.4)]])
-    # foot: a pointed folded wedge, heel under the ankle, toes forward and turned out, as in the pick
-    cx = 2 * MID - 246 if m else 246; x0 = (cx - MID) * S; out = (1 if m else -1) * math.radians(20)
-    heel = kit.ring(24 * S, 28 * S, 0, 8, a0=FRONT, a1=FRONT + 2 * math.pi, cy=10 * S)
-    ank = kit.ring(21 * S, 24 * S, 72 * S, 8, a0=FRONT, a1=FRONT + 2 * math.pi, cy=6 * S)
-    kit.loft(f'heel_{tag}', [heel, ank], PAPER, cap_start=True, cap_end=True).location = (x0, 0, 0)
-    toe = kit.plate(f'foot_{tag}', [(-30 * S, 26 * S), (30 * S, 26 * S), (34 * S, -100 * S), (6 * S, -150 * S), (-6 * S, -150 * S), (-34 * S, -100 * S)], 26 * S, PAPER)
-    toe.location = (x0, 0, 0); toe.rotation_euler = (0, 0, out)
-    instep = kit.loft(f'instep_{tag}', [kit.ring(26 * S, 36 * S, 26 * S, 6, cy=-50 * S), kit.ring(16 * S, 18 * S, 62 * S, 6, cy=-8 * S)], PAPER, cap_start=True, cap_end=True)
-    instep.location = (x0, 0, 0); instep.rotation_euler = (0, 0, out)
-    hip = 2 * MID - 382 if m else 382
-    return [round((hip - MID) * S, 3), 0.0, round(z(600), 3)], [round(x0, 3), round(-60 * S, 3), 0.0]
+    piece(f'leg_upper_{tag}', THIGH, 0.86, 6, mirror=m, twist=0.35, wide=1.14)
+    piece(f'knee_{tag}', [(898, 328, 36, -9), (925, 319, 38, -12), (952, 311, 34, -7)], 0.95, 6, mirror=m, twist=0.5, wide=1.1)
+    # the knee fold plate: a diamond standing proud on the front of the knee, its point forward, the hard kink of the leg
+    kp = [P(326, 884, -40, m), P(352, 918, -44, m), P(312, 960, -38, m), P(292, 920, -42, m)]
+    pyramid(f'knee_plate_{tag}', kp if not m else kp[::-1], P(322, 916, -58, m))
+    piece(f'leg_lower_{tag}', SHIN, 0.92, 6, mirror=m, twist=-0.5, wide=1.12)
+    # foot: a low, sharp folded paper wedge, its point forward and turned out, a ridge running from the ankle to the toe
+    out = math.radians(40) * (1 if m else -1); ax = (2 * MID - 246 if m else 246 - MID) if False else ((2 * MID - 246) if m else 246) - MID
+    def F(u, v, h):
+        c, s_ = math.cos(out), math.sin(out)
+        return np.array([ax + u * c - v * s_, u * s_ + v * c, h]) * S
+    sole = [F(-22, 26, 0), F(22, 26, 0), F(26, -30, 0), F(0, -92, 0), F(-26, -30, 0)]
+    top = [F(-18, 20, 62), F(18, 20, 62), F(0, -36, 38), F(0, -92, 4)]
+    v = sole + top
+    faces = [(4, 3, 2, 1, 0), (0, 1, 6, 5), (1, 2, 7, 6), (2, 3, 8, 7), (3, 4, 7, 8), (4, 0, 5, 7), (5, 6, 7)]
+    tri_mesh(f'foot_{tag}', v, faces, PAPER)
+    piece(f'ankle_{tag}', [(1262, 246, 21, 2), (1300, 246, 17, 4)], 0.95, 6, mirror=m)
+    hip = 2 * MID - 382 if m else 382; fx = ((2 * MID - 246) if m else 246) - MID
+    return [round((hip - MID) * S, 3), 0.0, round(z(600), 3)], [round(fx * S, 3), round(-60 * S, 3), 0.0]
 
 
 def build(export):
