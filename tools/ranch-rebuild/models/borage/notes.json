@@ -1,0 +1,175 @@
+{
+ "what_i_did": [
+  [
+   "Target",
+   "No turnaround, so per the AD the hero is the only target. make_views.py keys the hero against its cream backdrop; the olive cast shadow has the same hue range as the leaves, so below row 1600 (of 2048) only hand-traced polygons round the lowest rosette leaves and the stem base are kept. views/hero.png and views/hero_mask.png."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py renders front-on (yaw 0) from 15 deg up with the harness lens and scores the silhouette against views/hero.png. It is the AD's matched camera; a calibration grid would have preferred 18 deg and yaw -15, which I did not use."
+  ],
+  [
+   "Rosette",
+   "10 broad oval leaf cards (6 triangles, cupped edges, drooping tips) radiating flat from the crown, 0.17-0.185 m long, two of them straddling the front, clamped to the ground. Leaf_Green with every third Leaf_Pale."
+  ],
+  [
+   "Body",
+   "50 oval leaves (0.8 width ratio) aimed from near the axis at tip points on a dome envelope: half-width 0.16 m up to 0.22 m, narrowing to 0.08 m at 0.29 m, 20 % fuller on the right as in the hero, each rolled about its midrib so its face shows. A 6-sided faceted core inside keeps the mass solid."
+  ],
+  [
+   "Stems and flowers",
+   "6 curved upright Stem_Green stems (3-sided) with 2 small leaves each, short green side branches, and a short Stem_Red stalk under each of 15 hand-placed five-point Petal_Blue stars (0.068 m across, points cupped forward) with a pale Flower_White pentagonal cone centre. Flowers in the leaf dome are pushed out onto its surface; two nod sideways-down at the left and upper right."
+  ],
+  [
+   "Game readiness",
+   "993 triangles (budget 1k), 6 meshes, one flat material each: Leaf_Green, Leaf_Pale, Stem_Green, Stem_Red, Petal_Blue, Flower_White, all double-sided. 0.368 x 0.327 x 0.410 m (old GF-249: 0.338 x 0.319 x 0.412), origin at the base on the ground. No animation, no variants. to_game.py borage ran cleanly and GF-249.glb is byte-identical to borage.glb."
+  ]
+ ],
+ "good": [
+  "Hero IoU 0.657 at 768 px: a dome-shaped clump on a wider flat rosette with blue stars spread through the upper half and round the edges, aspect close to the hero's.",
+  "Reads at tile distance as a green mound sprinkled with chunky bright-blue stars with white eyes; red flower stalks show at the tips.",
+  "Same height as the old model and nearly the same footprint, under the 1k budget."
+ ],
+ "off": [
+  "The hero's silhouette is ragged with many separate leaf tips, stems and hairs; at 1k triangles the edge is coarser, which caps the IoU around 0.65-0.69 (seed noise +-0.015).",
+  "Width is 0.368 m against the old 0.338 m (+9 %): the hero's rosette is clearly wider than a 0.34 m footprint allows at 0.41 m tall. Depth 0.327 m matches.",
+  "The hero's upper stems carry more leaves; here the stems above the body are mostly bare, to spend triangles on the body silhouette.",
+  "Hairs and the dark anther cone in the flower centre are left out (stylised to a pale centre as asked)."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build: 9-leaf rosette, 18 small body leaves, 6 hand-placed stems to 15 hero-placed stars. 867 tris. Far too sparse.",
+   "mean_iou": 0.403,
+   "hero_iou": 0.403
+  },
+  {
+   "round": 2,
+   "change": "Body leaves 30 and larger, broader star points, smaller centres, 3-segment stems.",
+   "mean_iou": 0.556,
+   "hero_iou": 0.556
+  },
+  {
+   "round": 3,
+   "change": "6-triangle leaf cards (was 8) to afford 40 body leaves; 10 rosette leaves.",
+   "mean_iou": 0.607,
+   "hero_iou": 0.607
+  },
+  {
+   "round": 4,
+   "change": "Stretched flower layout 1.12x sideways; whole clump scaled to the old 0.41 m height.",
+   "mean_iou": 0.621,
+   "hero_iou": 0.621
+  },
+  {
+   "round": 5,
+   "change": "Longer rosette, steeper body leaves (worse, reverted in part).",
+   "mean_iou": 0.596,
+   "hero_iou": 0.596
+  },
+  {
+   "round": 6,
+   "change": "Hero camera fixed at front-on, 15 deg up (inside the AD's 10-15 deg; calibration grid liked 18 deg / yaw -15, not used). Leaves climbing the stems instead of a body (worse).",
+   "mean_iou": 0.561,
+   "hero_iou": 0.561
+  },
+  {
+   "round": 7,
+   "change": "Body leaves rise outward with height (lean) - single long leaves stuck out and widened the bbox.",
+   "mean_iou": 0.535,
+   "hero_iou": 0.535
+  },
+  {
+   "round": 8,
+   "change": "Body leaves aimed at tip points on a dome envelope (half-width body_R to a shoulder, then narrowing).",
+   "mean_iou": 0.584,
+   "hero_iou": 0.584
+  },
+  {
+   "round": 9,
+   "change": "Leaves rolled 30-60 deg about the midrib so they show width from the front.",
+   "mean_iou": 0.568,
+   "hero_iou": 0.568
+  },
+  {
+   "round": 10,
+   "change": "Wider body envelope, round rosette.",
+   "mean_iou": 0.599,
+   "hero_iou": 0.599
+  },
+  {
+   "round": 11,
+   "change": "Flower spread back to hero scale (1.0), longer rosette.",
+   "mean_iou": 0.591,
+   "hero_iou": 0.591
+  },
+  {
+   "round": 12,
+   "change": "Body shoulder raised to 0.25 m, 40 body leaves.",
+   "mean_iou": 0.601,
+   "hero_iou": 0.601
+  },
+  {
+   "round": 13,
+   "change": "Flatter rosette, body fuller on the right as in the hero.",
+   "mean_iou": 0.596,
+   "hero_iou": 0.596
+  },
+  {
+   "round": 14,
+   "change": "Shorter front/back rosette leaves; 48 broader body leaves.",
+   "mean_iou": 0.609,
+   "hero_iou": 0.609
+  },
+  {
+   "round": 15,
+   "change": "Bug fix: rosette squash now shortens front/back leaves; broader rosette leaves (w 0.7).",
+   "mean_iou": 0.622,
+   "hero_iou": 0.622
+  },
+  {
+   "round": 16,
+   "change": "54 body leaves, nodding flowers opened toward the side, flowers 0.062 m across; seed sweep +-0.015 noise, seed 7 kept.",
+   "mean_iou": 0.65,
+   "hero_iou": 0.65
+  },
+  {
+   "round": 17,
+   "change": "Two rosette leaves straddle the front (phase 0), body skew 0.2 to the right.",
+   "mean_iou": 0.664,
+   "hero_iou": 0.664
+  },
+  {
+   "round": 18,
+   "change": "Low faceted foliage core (Leaf_Green) inside the body so it reads solid; body half-width 0.16-0.17.",
+   "mean_iou": 0.687,
+   "hero_iou": 0.687
+  },
+  {
+   "round": 19,
+   "change": "Footprint pulled back toward the old model (rosette 0.17-0.185 m, body_R 0.16).",
+   "mean_iou": 0.676,
+   "hero_iou": 0.676
+  },
+  {
+   "round": 20,
+   "change": "Rounder plan (depth squash 0.95) to bring the depth up to the old 0.32 m.",
+   "mean_iou": 0.672,
+   "hero_iou": 0.672
+  },
+  {
+   "round": 21,
+   "change": "Flowers inside the leaf dome moved out to its surface so ~13 show from the front; body top lowered to 0.29 m. Bigger stars (r 0.034).",
+   "mean_iou": 0.671,
+   "hero_iou": 0.671
+  },
+  {
+   "round": 22,
+   "change": "Trimmed to budget (50 body leaves, 6-sided core): 993 tris. Final 768 px / 48 samples; to_game.py borage.",
+   "mean_iou": 0.657,
+   "hero_iou": 0.657
+  }
+ ],
+ "moving_parts": "None. The game poses and sways plants itself; export_animations=False.",
+ "creative_additions": "A faceted core inside the leaf mass so it reads solid at tile distance, star points cupped forward so the flowers catch light, and the hero's right-heavy fullness kept as a body skew."
+}
