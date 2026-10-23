@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-moon-mission-town",
+      "date": "2026-10-23",
+      "title": "The Moon Mission starts in the town",
+      "line": "A black truck is parked on Main Street outside the coffee shop. Tap it and the Moon Mission begins right there in the town diorama.",
+      "image": "/whats-new/2026-10-23-moon-mission-town.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission",
+      "tour": false,
+      "link": "/town?mission"
+    },
+    {
       "id": "2026-10-23-built-looks",
       "date": "2026-10-23",
       "title": "Your loved looks, built",
