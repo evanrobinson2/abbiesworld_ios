@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "bramble-charming",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/WW-273.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a low sprawling blackberry bramble with arching canes, leaves and dark berries, oversized plump petals and leaves, bouncy rounded toy-like shapes, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "8f204f5b-f4cc-4ba5-8f8c-5ac5a85aa53e",
+      "grid_url": "https://www.midjourney.com/jobs/8f204f5b-f4cc-4ba5-8f8c-5ac5a85aa53e?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "450c1764-87eb-4ba8-82b9-4434e768af74",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T01:55:00.167Z",
+      "grid_done_at": "2026-10-23T01:55:18.171Z",
+      "upscale_clicked_at": "2026-10-23T01:55:28.137Z",
+      "downloaded_at": "2026-10-23T01:56:54.731Z",
+      "pick_reason": "low sprawl with a clear arching cane, plump leaves and many dark berries, whole bramble in frame"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "fbd2cecb7fdb2b0da85425a9e90edabee5df30e2a39044d647ac3f96cdd22b0f",
+      "bytes": 2220224,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/450c1764-87eb-4ba8-82b9-4434e768af74/0_0.png"
+    }
+  }
+}
