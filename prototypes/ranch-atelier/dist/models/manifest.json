@@ -66,6 +66,48 @@
    "off": []
   },
   {
+   "id": "cafe-pin-board",
+   "name": "Pin board",
+   "group": "Café · low poly",
+   "subject": "pin board",
+   "style": "low poly",
+   "ask": "The café's life story, told by what is pinned up (no words): two photo-booth strips say friends come here and love\nthe booth, a crayon drawing says little kids do too, a moon postcard says somebody dreams of space, and a lost lime mitten\nsays someone left in a hurry. Hangs on the wall behind the machines, front at -Y like the menu board.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-pin-board/model.glb",
+    "render": "/models/cafe-pin-board/render.jpg"
+   },
+   "outline": "888 triangles, 3.589 kg, 0.90 x 0.07 x 0.60 m, 5 moving parts. Real: cork pin board in a honey-oak frame, about 900 x 600 mm, with photo strips, a crayon drawing, a postcard and a lost mitten held by push pins",
+   "good": [],
+   "off": []
+  },
+  {
+   "id": "cafe-tip-jar",
+   "name": "Tip jar",
+   "group": "Café · low poly",
+   "subject": "tip jar",
+   "style": "low poly",
+   "ask": "A jam jar on the bar by the till, a pink ribbon round its neck and a few copper coins in the bottom.",
+   "date": "2026-10-23",
+   "orbit": [
+    -35,
+    24
+   ],
+   "urls": {
+    "ref": "/studies/cafe/img/interior-party_0.jpg",
+    "glb": "/models/cafe-tip-jar/model.glb",
+    "render": "/models/cafe-tip-jar/render.jpg"
+   },
+   "outline": "414 triangles, 0.172 kg, 0.08 x 0.09 x 0.12 m, 0 moving parts. Real: 500 ml glass jam jar with a pink ribbon, a few copper coins inside (copper, so gold coins stay special)",
+   "good": [],
+   "off": []
+  },
+  {
    "id": "cafe-espresso-machine",
    "name": "Espresso machine",
    "group": "Café · low poly",

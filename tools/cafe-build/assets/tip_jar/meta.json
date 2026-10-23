@@ -1,0 +1,79 @@
+{
+ "id": "tip_jar",
+ "name": "Tip jar",
+ "group": "Bar",
+ "tier": "support",
+ "intent": "A jam jar on the bar by the till, a pink ribbon round its neck and a few copper coins in the bottom.",
+ "real": "500 ml glass jam jar with a pink ribbon, a few copper coins inside (copper, so gold coins stay special)",
+ "moving": "coins rattle and can be tipped out",
+ "reference": "Context pass 2026-10-23: Unpacking \"everything is an opportunity to tell a story\"; the till side of the bar needed a small human thing",
+ "size_m": [
+  0.084,
+  0.085,
+  0.115
+ ],
+ "triangles": 414,
+ "mass_kg": 0.172,
+ "centre_of_mass": [
+  -0.0,
+  -0.0,
+  0.045
+ ],
+ "materials": [
+  "Cloth_Magenta",
+  "Glass_Clear",
+  "Metal_Copper"
+ ],
+ "joints": [],
+ "parts": [
+  {
+   "part": "jar",
+   "material": "Glass_Clear",
+   "mass_kg": 0.1394,
+   "made": "shell 3.0 mm"
+  },
+  {
+   "part": "coin_0",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0064,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "coin_1",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0064,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "coin_2",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0064,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "coin_3",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0064,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "coin_4",
+   "material": "Metal_Copper",
+   "mass_kg": 0.0064,
+   "made": "shell 1.5 mm"
+  },
+  {
+   "part": "ribbon",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.0002,
+   "made": "solid"
+  },
+  {
+   "part": "ribbon_bow",
+   "material": "Cloth_Magenta",
+   "mass_kg": 0.0001,
+   "made": "solid"
+  }
+ ],
+ "built": "2026-10-23T14:18Z"
+}
