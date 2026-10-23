@@ -135,6 +135,7 @@ function noticesPage() {
   const item = (n, open) => `<div class="aws-notice${open ? '' : ' done'}">${n.image ? `<img src="${esc(n.image)}" alt="" loading="lazy">` : ''}<span><b>${esc(n.title)}</b><small>${esc(n.line || '')}</small></span>${open ? `<button type="button" class="aws-btn" data-dismiss="${esc(n.id)}">Dismiss</button>` : ''}</div>`;
   const {open, done} = noticeList;
   return `${open.length ? `<div class="aws-notices">${open.map(n => item(n, true)).join('')}</div>${open.length > 1 ? '<button type="button" class="aws-btn" data-dismiss-all>Dismiss all</button>' : ''}` : '<p class="aws-quiet">Nothing new. You\u2019re all caught up.</p>'}
+  <button type="button" class="aws-btn" data-history>See the whole history</button>
   ${done.length ? `<h3>Seen</h3><div class="aws-notices">${done.map(n => item(n, false)).join('')}</div>` : ''}`;
 }
 const RENDER = {notices: noticesPage, profile: profilePage, style: stylePage, sound: soundPage, controls: controlsPage, access: accessPage, places: placesPage};
@@ -172,6 +173,7 @@ function build() {
     else if (t.dataset.avatar) { setProfile({avatar: t.dataset.avatar}); show('profile'); head(); }
     else if (t.dataset.color !== undefined) { setProfile({color: t.dataset.color}); show('profile'); head(); }
     else if (t.dataset.dismiss) { dismissNotice(t.dataset.dismiss); show('notices'); }
+    else if (t.dataset.history !== undefined) { dlg.close(); import('/look/whats-new-viewer.mjs?v=1').then(m => m.openWhatsNew('all')); }
     else if (t.dataset.dismissAll !== undefined) { dismissNotice(noticeList.open.map(n => n.id)); show('notices'); }
   });
   dlg.addEventListener('change', e => {
