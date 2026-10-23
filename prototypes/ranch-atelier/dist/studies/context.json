@@ -1809,6 +1809,24 @@
   "backpack": {
    "items": [
     {
+     "k": "canon",
+     "t": "Cards v3 faces (AW-STUDY-0014)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/cards/v3/face.mjs",
+     "note": "Decorating deals real Cards v3 faces (print style), one per option, so the backpack speaks the same card language as the tiles."
+    },
+    {
+     "k": "canon",
+     "t": "Tile pull and print designer (AW-STUDY-0025)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/studies",
+     "note": "Lift a card, drop it on the thing: the same pull-and-drop gesture, now dropped onto a part of the bag."
+    },
+    {
+     "k": "canon",
+     "t": "Abbie's science adventure (AW-STUDY-0047)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/docs/oracle",
+     "note": "Evan, 16:49Z: winning the cell game earns the tardigrade, the first backpack charm; its pink water bear sets the charm's colours."
+    },
+    {
      "k": "oracle",
      "t": "Astroneer identity record",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json",

@@ -39,3 +39,33 @@ offline and is matched to the proofs when they land.
 - 10 styles, 5 facets (10 colours, 6 patterns, 5 pockets, 6 strap/hardware sets, 6 linings), 9 charms (6 earned from
   coins and items, 3 waiting on their quests: fetch with bub, first coffee, the Moon Mission).
 - Dress-up in game: the brush orb on the open backpack; arrows and dots change style, five orbs cycle the facets.
+
+## Round 2 (2026-10-23): decorating with cards, hero charms, the charm camera
+Evan, 16:34Z: "use the card system though instead? ... maybe the card system can be used as a decoration mini game ??
+you can just click the part of the backpack to change then the cards show and you drop into the facet?" and "these are
+perfect, build the charms, and make sure there's a camera view in inventory that closes in on charms". Then 16:49Z: the
+first charm is a tardigrade, won by finishing Abbie's science adventure (the cell game, AW-STUDY-0047).
+
+- Decorating is a card game (`simulations/backpack-cards.mjs`). The brush on the open backpack turns on dress-up. Tap
+  a part of the bag (`facetOf` maps part names to facets: the shell is colour and pattern, straps and zips are trim,
+  the inside is lining, the front pocket is pocket, anything else is style). A hand of Cards v3 faces is dealt for
+  that facet (`cards/v3/face.mjs`, `renderFace`, print style), each showing a flat bag drawn in that option. Lift a
+  card and drop it on the bag to apply it, or tap it. The part being decorated glows gently. One card system, not a
+  fork: the faces, the lift and the drop come from Cards v3 and the tile print designer (AW-STUDY-0014, 0025).
+- Hero charms, modelled from the Midjourney charm sheet (`12-charms`): faceted gold or enamel pieces on a four-link
+  gold chain. The coin with a struck star, star, heart, crescent moon on a cloud, brass key with a heart bow, floppy
+  disk, bub the black lab, coffee cup and rocket. A full set hangs in staggered rows on the two side seams, clear of the
+  widest part of the bag below each ring.
+- The tardigrade is the first charm in `CHARMS`: a plump segmented water bear on four pairs of stubby legs, pink enamel
+  with gold claws, matching the cell game's pink water bear. That game calls `earnCharm('tardigrade')` on its win
+  screen. Every page with the backpack then plays the golden pickup ("A tardigrade charm for my backpack!") because
+  `inventory.mjs` now also checks for new charms on `aw-backpack-change`. No Midjourney proof yet for this one (the
+  Mac was busy on other proofs); it was modelled from the cell game's art direction and real tardigrade anatomy.
+- The charm camera. Tap a charm, or the star button on the open backpack, and the camera closes in. The bag turns that
+  charm's seam toward you, the charm turns its face to the camera with a slow sway, and its quest is told in a bubble
+  at the bottom. Swipe sideways for the next charm (the camera steps back a little between charms so the move reads);
+  tap anywhere else to come back.
+
+Lessons: framing a close-up by moving the camera round a bag sends it through the bag between charms. Turning the bag
+instead, and leaving the camera in front, keeps the bag out of the shot. Charms must hang clear of the widest point
+below their ring, not just of the seam beside it.
