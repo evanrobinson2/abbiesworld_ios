@@ -149,6 +149,150 @@
           "bytes": 1221824
         }
       ]
+    },
+    {
+      "name": "head-sheet",
+      "prompt": "Character reference sheet of a single isolated head and neck of a Roman legionary sculpted from matte ivory-white folded papercraft, no helmet, short cropped hair as folded paper facets, strong brow, a clear straight nose, defined cheekbones, closed lips, square chin, both ears, front view and side profile view side by side at the same scale and eye height, orthographic, crisp creases and faceted folds, soft even studio light, plain light gray background --no text, labels, scenery, pedestal, body, helmet --ar 3:2 --v 8.2",
+      "job_id": "bc9be00a-4fc3-49e7-abc4-473a38bbfe25",
+      "created": "2026-10-23T06:03:30Z",
+      "files": [
+        {
+          "file": "images/head-sheet_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/bc9be00a-4fc3-49e7-abc4-473a38bbfe25/0_0.png",
+          "sha256": "bad8096c8d5239c2149392ace61d80e724ecaa98cb54a39ca3b64c9541dc9242",
+          "bytes": 1492501
+        },
+        {
+          "file": "images/head-sheet_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/bc9be00a-4fc3-49e7-abc4-473a38bbfe25/0_1.png",
+          "sha256": "3becee7060dbf50313013246a12f2e774e86a3b7edcabdce54d82dd35e8c1460",
+          "bytes": 1481625
+        },
+        {
+          "file": "images/head-sheet_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/bc9be00a-4fc3-49e7-abc4-473a38bbfe25/0_2.png",
+          "sha256": "339f72f26ecf61cc5b51e3e770d7a0c760241d2368d39d8d35d47699db42deac",
+          "bytes": 1533020
+        },
+        {
+          "file": "images/head-sheet_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/bc9be00a-4fc3-49e7-abc4-473a38bbfe25/0_3.png",
+          "sha256": "f79266f328b9978f0b988dd2f86502d9e7aff55398738bbb088ca2f28b3c0870",
+          "bytes": 1462728
+        }
+      ]
+    },
+    {
+      "name": "bust-sheet",
+      "prompt": "Character reference sheet of a single isolated upper body of a Roman legionary made of matte ivory-white folded papercraft, no head, broad shoulders with layered paper shoulder guards, the upper bands of a segmented lorica cuirass across the chest, both arms hanging relaxed with two complete five-fingered hands, cut off cleanly at the bottom of the ribcage, front view and side profile view side by side at the same scale, orthographic, crisp creases and faceted folds, soft even studio light, plain light gray background --no text, labels, scenery, pedestal, head, legs, weapons --ar 3:2 --v 8.2",
+      "job_id": "6a4ca5df-3d47-4f25-b06f-d7c7e4a56414",
+      "created": "2026-10-23T06:04:09Z",
+      "files": [
+        {
+          "file": "images/bust-sheet_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/6a4ca5df-3d47-4f25-b06f-d7c7e4a56414/0_0.png",
+          "sha256": "aa813e4003db4987e7839033f17ae3e8dc9835dbb4dc15f6df325910c34e7eff",
+          "bytes": 1344477
+        },
+        {
+          "file": "images/bust-sheet_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/6a4ca5df-3d47-4f25-b06f-d7c7e4a56414/0_1.png",
+          "sha256": "0996d606c76faffe48043ac357b3a90b17304d5ae7224f0bf491dc4a8c3bad55",
+          "bytes": 1394527
+        },
+        {
+          "file": "images/bust-sheet_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/6a4ca5df-3d47-4f25-b06f-d7c7e4a56414/0_2.png",
+          "sha256": "cad389f9a36102bd255143d1e3be9398ba4cc8ad8fea4ccc5e52eca2521bb438",
+          "bytes": 1316928
+        },
+        {
+          "file": "images/bust-sheet_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/6a4ca5df-3d47-4f25-b06f-d7c7e4a56414/0_3.png",
+          "sha256": "fc8d1f24713d994aeed86a6ad4958f91d9ed69cfcc8e0fc37cce752ee7ac6a65",
+          "bytes": 1289766
+        }
+      ]
+    },
+    {
+      "name": "torso-sheet",
+      "prompt": "Character reference sheet of a single isolated waist and hips section of a Roman legionary made of matte ivory-white folded papercraft, the lower bands of a segmented lorica cuirass, a belt with square plaques and an octagonal sunburst buckle, a hanging apron of studded paper straps, a pleated tunic skirt over the hips, cut off cleanly above and below, front view and side profile view side by side at the same scale, orthographic, crisp creases and faceted folds, soft even studio light, plain light gray background --no text, labels, scenery, pedestal, head, arms, legs --ar 3:2 --v 8.2",
+      "job_id": "61852360-ad5e-4de8-85f9-3218083646b2",
+      "created": "2026-10-23T06:04:50Z",
+      "files": [
+        {
+          "file": "images/torso-sheet_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/61852360-ad5e-4de8-85f9-3218083646b2/0_0.png",
+          "sha256": "1009bbf46def29980f0dbd6ce5d7614b501de6fbf894fdfa236daa7ec12b5200",
+          "bytes": 1271447
+        },
+        {
+          "file": "images/torso-sheet_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/61852360-ad5e-4de8-85f9-3218083646b2/0_1.png",
+          "sha256": "3ba69640e48326590bf18e8334375476e06f808e32bbac239926f5e8c58bf460",
+          "bytes": 1559089
+        },
+        {
+          "file": "images/torso-sheet_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/61852360-ad5e-4de8-85f9-3218083646b2/0_2.png",
+          "sha256": "0ac26de76b5ca70eebd302323de97b588a9cc3c9c02fa57dcebe42e047326716",
+          "bytes": 1375971
+        },
+        {
+          "file": "images/torso-sheet_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/61852360-ad5e-4de8-85f9-3218083646b2/0_3.png",
+          "sha256": "7a181d999a615fc898d84671f4ff82d54a59b41d870b278224f08eb4a6ad3e60",
+          "bytes": 1389349
+        }
+      ]
+    },
+    {
+      "name": "legs-sheet",
+      "prompt": "Character reference sheet of a single isolated pair of standing legs of a Roman legionary made of matte ivory-white folded papercraft, from the top of the thighs to the feet, the hem of a pleated tunic at mid-thigh, defined knees and calves, caged caligae sandals with crossing straps and visible toes, front view and side profile view side by side at the same scale, orthographic, crisp creases and faceted folds, soft even studio light, plain light gray background --no text, labels, scenery, pedestal, torso, arms, head --ar 3:2 --v 8.2",
+      "job_id": "391a8b70-f9cf-412c-a192-ae051c17efe8",
+      "created": "2026-10-23T06:05:31Z",
+      "files": [
+        {
+          "file": "images/legs-sheet_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/391a8b70-f9cf-412c-a192-ae051c17efe8/0_0.png",
+          "sha256": "864c731af331361fcd518c3628ae7053a94b235e275c38667fb0266ac891da49",
+          "bytes": 1143623
+        },
+        {
+          "file": "images/legs-sheet_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/391a8b70-f9cf-412c-a192-ae051c17efe8/0_1.png",
+          "sha256": "90658bd94ae6045e8e71abf4724911f779e9443d411ec735bc3ab8f555b2686c",
+          "bytes": 1184939
+        },
+        {
+          "file": "images/legs-sheet_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/391a8b70-f9cf-412c-a192-ae051c17efe8/0_2.png",
+          "sha256": "073069483c7ee44fe1ff5b886f572e3910d6fa26e2e9d11f7f50ebba556a51e8",
+          "bytes": 1199851
+        },
+        {
+          "file": "images/legs-sheet_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/391a8b70-f9cf-412c-a192-ae051c17efe8/0_3.png",
+          "sha256": "ab551095172fda085a3fc218eb069d0cf16e88e54faf70a19a7c9b245a7fecf4",
+          "bytes": 1227921
+        }
+      ]
     }
   ]
 }
