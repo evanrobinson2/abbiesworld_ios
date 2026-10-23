@@ -15,8 +15,8 @@ let forge = null;
 const loadForge = () => forge ??= import('../cards/forge.mjs?v=4');
 
 export async function cardFace(hero) {
- // Cards v3 (AW-STUDY-0014), local tryout: /sandbox?cards=slice|print|diecut turns it on for this device, ?cards=v2 off.
- if (/cards=|aw-cards/.test(location.search + safeStore())) { try { const v3 = await import('../cards/v3/hand.mjs'); if (v3.cardsStyle() && await v3.cardFace(hero)) return; } catch (error) { console.warn('Cards v3 face failed', error); } }
+ // Cards v3 (AW-STUDY-0014) is the default face; /sandbox?cards=v2 brings these v2 faces back on this device.
+ { try { const v3 = await import('../cards/v3/hand.mjs'); if (v3.cardsStyle() && await v3.cardFace(hero)) return; } catch (error) { console.warn('Cards v3 face failed', error); } }
  const id = hero.dataset.generator, base = SPECS[id] || {name: hero.querySelector('.generator-hero-name')?.textContent || id, type: 'helper', rarity: 'seed', enamel: '#4f5864'};
  try {
   const {renderCard, CARD, L} = await loadForge();
@@ -47,4 +47,3 @@ function shade(hex, t) {
  const n = parseInt(hex.slice(1), 16), c = [n >> 16, n >> 8 & 255, n & 255].map(v => Math.round(t > 0 ? v + (255 - v) * t : v * (1 + t)));
  return '#' + c.map(v => v.toString(16).padStart(2, '0')).join('');
 }
-function safeStore() { try { return localStorage.getItem('aw-cards') ? 'aw-cards' : ''; } catch { return ''; } }

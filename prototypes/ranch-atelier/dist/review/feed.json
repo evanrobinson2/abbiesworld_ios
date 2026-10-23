@@ -2,6 +2,18 @@
   "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md.",
   "items": [
     {
+      "id": "cards-v3-1",
+      "at": "2026-10-23T05:40:00Z",
+      "title": "Cards v3: bespoke cards",
+      "ask": "Your hand cards redrawn three ways (Die-cut is now the default). Tap a card to hold it big; the button turns it over to its settings. Pick a look per card and leave notes.",
+      "thread": "AW-STUDY-0014 - Cards v3: Print-Ready Beautiful Artifacts",
+      "before": "img/cards-v3-today.jpg",
+      "after": "img/cards-v3-diecut.jpg",
+      "link": "https://claude.ai/artifact/DXMqNPNe2399VBwqCKS8x3",
+      "linkLabel": "Pick and notes",
+      "status": "waiting"
+    },
+    {
       "id": "identity-readout-1",
       "at": "2026-10-23T04:55:00Z",
       "title": "Game identity: where we are",

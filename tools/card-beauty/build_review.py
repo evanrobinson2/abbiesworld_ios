@@ -57,9 +57,10 @@ explore = sorted((mj / 'explore').glob('*.png')) if (mj / 'explore').exists() el
 meta = {}
 if (mj / 'explore' / 'explore.json').exists():
     try:
-        for e in json.loads((mj / 'explore' / 'explore.json').read_text()): meta[pathlib.Path(e.get('file', '')).name] = e
+        data = json.loads((mj / 'explore' / 'explore.json').read_text())
+        for e in (data.get('picks', []) if isinstance(data, dict) else data): meta[pathlib.Path(e.get('file', '')).name] = e
     except Exception: pass
-grid = ''.join(f'<figure>{img(p, "Midjourney find", 520)}<figcaption>{html.escape(meta.get(p.name, {}).get("why", ""))}</figcaption></figure>' for p in explore) or '<div class="slot"><span>Coming from Midjourney</span></div>'
+grid = ''.join(f'<figure>{img(p, "Midjourney find", 520)}<figcaption class="why">{html.escape(meta.get(p.name, {}).get("why", ""))}</figcaption></figure>' for p in explore) or '<div class="slot"><span>Coming from Midjourney</span></div>'
 proofs = ''.join(f'<figure>{img(p, "Midjourney proof", 520)}<figcaption>{p.stem}</figcaption></figure>' for p in sorted(mj.glob('[A-D]-*.png'))) if mj.exists() else ''
 sec.append(f'''<section id="mj"><h2>The world's best cards</h2><div class="grid">{grid}</div>{note("mj-search", "The search")}
 <h2>Proofs</h2><div class="grid">{proofs or '<div class="slot"><span>Coming from Midjourney</span></div>'}</div>{note("mj-proofs", "The proofs")}</section>''')

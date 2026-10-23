@@ -89,12 +89,16 @@ art; the held card and print masters use the 1600 px art (about 650 ppi across t
 
 ## Trying it
 
-Local only until Evan picks: `/sandbox?cards=slice` (or `print`, `diecut`) turns Cards v3 on for that device,
-`?cards=v2` turns it off. `/cards/v3/` is a lab page with the hand over a still of the scene.
+Shipped on 2026-10-23 with Die-cut as the default hand face (Evan: "release them to main ... presume we're gonna use
+'em"). `/sandbox?cards=slice` (or `print`, `diecut`) picks a look on that device, `?cards=v2` brings the v2 faces back.
+`/cards/v3/` is a lab page with the hand over a still of the scene. Same-camera shots (9 am, seed 41) are in `shots/`.
 
 Tools: `tools/card-beauty/` (`capture.mjs` today's hand and the bare scene, `faces.mjs` every face, `inplace.mjs` each
 direction in the live sandbox at the same camera and hour plus held and turned-over shots, `lab-shot.mjs`,
-`build_review.py` the review page). Midjourney search and proofs: `tools/midjourney/outputs/card-beauty-0014/`.
+`build_review.py` the review page). Midjourney search and proofs: `tools/midjourney/outputs/card-beauty-0014/` (16 Explore picks with why each is great in
+`explore/explore.json`, and proofs A to D of the slice, print, die-cut and held-in-hand ideas). The proofs agree with the
+choices here: the slice reads at once as a cut of earth, the print's restraint loses the place, and a die-cut hex wants to
+be an object, which is why the held card is a real slab of stock.
 
 ## Sources
 

@@ -1,5 +1,6 @@
-// Cards v3 in the Sandbox v2 hand (AW-STUDY-0014). Local tryout only: on with /sandbox?cards=slice (or print, diecut),
-// off with ?cards=v2; the choice is remembered on this device. Evan's interaction (2026-10-23):
+// Cards v3 in the Sandbox v2 hand (AW-STUDY-0014). On by default with the die-cut look (Evan, 2026-10-23: "release them
+// to main ... presume we're gonna use 'em"); /sandbox?cards=slice|print|diecut picks another look and ?cards=v2 goes back
+// to the v2 faces, remembered on this device. Evan's interaction (2026-10-23):
 //   tap            opens the card large and beautiful (paper.mjs), sharp at 4x;
 //   hold and drag  picks it up into your hand; drop over a hex places it (the tile chooser's carry, unchanged);
 //   the button     on the held card turns it over to the tile's settings as card facets (facets.mjs).
@@ -7,14 +8,14 @@
 // hour and the weather like everything else in the scene: one signal, one palette.
 import {renderFace, PLACES, STYLES} from './face.mjs';
 
-const KEY = 'aw-cards';
+const KEY = 'aw-cards', DEFAULT = 'diecut';
 export function cardsStyle() {
  try {
   const q = new URLSearchParams(location.search).get('cards');
-  if (q === 'v2' || q === 'off') localStorage.removeItem(KEY);
-  else if (q) localStorage.setItem(KEY, STYLES.includes(q) ? q : 'slice');
-  const v = localStorage.getItem(KEY); return STYLES.includes(v) ? v : null;
- } catch { return null; }
+  if (q === 'v2' || q === 'off') localStorage.setItem(KEY, 'off');
+  else if (q) localStorage.setItem(KEY, STYLES.includes(q) ? q : DEFAULT);
+  const v = localStorage.getItem(KEY); return v === 'off' ? null : STYLES.includes(v) ? v : DEFAULT;
+ } catch { return DEFAULT; }
 }
 
 const art = id => new URL(`../../simulations/assets/tile-cards/${id}.webp?v=2`, import.meta.url).href;
@@ -27,12 +28,13 @@ let air = null, wired = false;
 export async function cardFace(hero, style = cardsStyle()) {
  const id = hero.dataset.generator; if (!PLACES[id]) return false;
  ensureCss(); wire();
+ air ??= world()?.dataset.air || null; // take the world's air now, so the first hand already matches it
  const old = hero.querySelector('.v2-face');
  const cssW = 120, dpr = Math.min(3, Math.max(1, devicePixelRatio || 1)), dpi = Math.ceil(cssW * dpr * 1.25 / (63 / 25.4));
  const {canvas} = await renderFace({id, art: art(id), palette: airFor(id)}, {style, dpi});
  canvas.className = 'v2-face cv3-face'; canvas.setAttribute('aria-hidden', 'true');
  if (old) old.replaceWith(canvas); else hero.prepend(canvas);
- hero.classList.add('v2-faced', 'cv3', 'cv3-' + style); hero.dataset.cv3 = style;
+ hero.classList.remove(...STYLES.map(s => 'cv3-' + s)); hero.classList.add('v2-faced', 'cv3', 'cv3-' + style); hero.dataset.cv3 = style;
  faces.add(hero); return true;
 }
 
