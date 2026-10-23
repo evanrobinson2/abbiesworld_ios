@@ -15,7 +15,10 @@ export async function createBasinWorld(scene){
   haze(fog,reach){fog.near=Math.max(260,reach*2);fog.far=fog.near+2600;},
   // No tiles placed: the starting tiles stay hidden; tiles the player places show, and the land opens around them.
   showBoard({group,tileObjects=[],life,tiles=[],placed=new Set(),diameter,heightAt}){
-   for(const t of tileObjects)t.object.visible=placed.has(t.id);if(life?.root)life.root.visible=placed.size>0;
+   for(const t of tileObjects)t.object.visible=placed.has(t.id);
+   // Residents and buildings of the hidden starting tiles stay hidden with them; those on placed tiles show.
+   const hidden=tiles.filter(t=>!placed.has(t.id)).map(t=>({x:t.center.x*.1,z:t.center.z*.1})),r=diameter/2*.1,p=new (life?.root?.position.constructor)();
+   life?.root?.updateMatrixWorld(true);for(const o of life?.root?.children||[]){o.getWorldPosition(p);o.visible=placed.size>0&&!hidden.some(c=>Math.hypot(p.x-c.x,p.z-c.z)<r);}
    const shown=tiles.filter(t=>placed.has(t.id)),cells=[...shown,...frontier(shown.length?shown:tiles,diameter).map(c=>({center:tileCenter(c.q,c.r,diameter)}))];
    if(!shown.length)cells.push(...tiles);
    world.fitBoard({cells:cells.map(t=>({x:t.center.x*.1,z:t.center.z*.1})),radius:diameter/2*.1,heightAt});},
