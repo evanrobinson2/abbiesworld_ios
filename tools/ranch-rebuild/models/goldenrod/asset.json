@@ -1,0 +1,213 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/goldenrod",
+ "name": "goldenrod",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "meadow flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a clump of goldenrod, upright stems topped with plumes of yellow flowers",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a clump of goldenrod, upright stems topped with plumes of yellow flowers, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "c33006cd-d69a-4c57-af9d-23de6b89c8f9",
+    "grid_url": "https://www.midjourney.com/jobs/c33006cd-d69a-4c57-af9d-23de6b89c8f9?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "015c79eb-005e-4c00-b655-3d9455759e47",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:02:18.673Z",
+    "grid_done_at": "2026-10-23T00:02:36.675Z",
+    "upscale_clicked_at": "2026-10-23T00:02:48.432Z",
+    "downloaded_at": "2026-10-23T00:03:57.093Z",
+    "pick_reason": "upright clump with yellow plumes and margin above the tallest plume"
+   }
+  },
+  "files": {
+   "hero.png": "9b423252091429f1fee55a9fbe54e0d372f15009f6fbe08498d9dfaff52886a4"
+  },
+  "folder": "tools/ranch-rebuild/mj/goldenrod"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/goldenrod/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 9 stems placed from the hero, 4 blobs per plume plus side sprigs, small core. 1,070 tris.",
+    "mean_iou": 0.643
+   },
+   {
+    "round": 2,
+    "change": "Plumes 1.7x wider with 5 blobs each, shorter blob apexes, bigger core and longer base leaves.",
+    "mean_iou": 0.792
+   },
+   {
+    "round": 3,
+    "change": "Dropped the side sprigs and a stem segment to get under 1k; more stem and base leaves, smaller core: base splayed too flat and the score fell.",
+    "mean_iou": 0.739
+   },
+   {
+    "round": 4,
+    "change": "Base leaves more upright (40-75 deg) around a column-shaped core.",
+    "mean_iou": 0.753
+   },
+   {
+    "round": 5,
+    "change": "Row-by-row silhouette check: shifted the foot left, widened it, moved the centre tip left.",
+    "mean_iou": 0.79
+   },
+   {
+    "round": 6,
+    "change": "Smaller foot shift, wider foot, plumes 1.9x, outer low plumes start lower.",
+    "mean_iou": 0.807
+   },
+   {
+    "round": 7,
+    "change": "The core read as a green boulder: made it small and covered it with bigger, wider upright leaves; plume blobs tilt randomly so stacks look ragged.",
+    "mean_iou": 0.799
+   },
+   {
+    "round": 8,
+    "change": "Front-back squash 0.82 to keep the plan close to the old footprint, thicker stems; seed sweep (+-0.01), seed 3 kept.",
+    "mean_iou": 0.8
+   },
+   {
+    "round": 9,
+    "change": "Final 768 px / 48 sample render and hero score; to_game.py goldenrod.",
+    "mean_iou": 0.799
+   }
+  ],
+  "what_was_done": [
+   [
+    "Views",
+    "Scored on the hero alone (no turnaround). make_views.py keys the hero against its right-edge cream backdrop and drops the long tan cast shadow on the left (below the ground line: everything left of the plant's foot, and backdrop-darkened pixels without much hue change), then removes specks and fills small holes. hero_check.py scores views/hero.png from a matched camera: front-on (yaw 0), 6 deg up, harness lens."
+   ],
+   [
+    "Stems",
+    "9 slender Stem_Rust stems (3-sided, 2 segments) from feet inside a 6 cm circle to tips read off the hero, tallest in the centre (u 0.04, v 0.99 in hero units). Horizontal offset grows as s^1.5, so each stem rises near-upright and fans out towards the tip, which gives the outward arch."
+   ],
+   [
+    "Plumes",
+    "The top 50-60 % of each stem is a plume of 5 stacked jagged blobs (6-point star ring between a short bottom and a long top apex, 12 triangles each), widest second from the bottom and tapering to a long pointed tip blob. The lower blobs tilt randomly up to 14 deg and sit slightly off the stem, so the stack reads ragged and fluffy rather than as a cone. Flower_Gold, with the tip blob and about a third of the others in Flower_GoldLight."
+   ],
+   [
+    "Leaves",
+    "10 narrow lance cards (2 triangles, double-sided) up each stem below the plume, denser low, plus 50 bigger upright lance leaves splaying from the crown around a small lumpy Leaf_Dark core, so the base is densest and reads as leaves. Leaf_Green and Leaf_Dark, darker towards the base."
+   ],
+   [
+    "Game readiness",
+    "964 triangles (budget 1k), 5 meshes, one flat material each: Flower_Gold, Flower_GoldLight, Stem_Rust, Leaf_Green, Leaf_Dark (all match the regional loader's foliage words). Height 0.837 m as the old WW-347; ground footprint centred on the origin. No animation, no variants (plant group). to_game.py goldenrod ran cleanly and the game GLB is byte-identical to goldenrod.glb."
+   ]
+  ],
+  "creative_additions": "The tip blob of every plume is in the light gold, as if sunlit, and leaf darkness grows towards the base for depth."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.5474664568901062,
+   0.3570129871368408,
+   0.8370000123977661
+  ],
+  "triangles": 964,
+  "materials": [
+   "Leaf_Dark",
+   "Leaf_Green",
+   "Flower_Gold",
+   "Flower_GoldLight",
+   "Stem_Rust"
+  ],
+  "parts": [
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_green",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "plumes_gold",
+    "materials": [
+     "Flower_Gold"
+    ]
+   },
+   {
+    "name": "plumes_light",
+    "materials": [
+     "Flower_GoldLight"
+    ]
+   },
+   {
+    "name": "stems",
+    "materials": [
+     "Stem_Rust"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.799,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.799 at 768 px from the matched camera: the flame-like clump of nine pointed plumes, tallest in the centre and the outer ones low and fanned out, over a dense leafy foot.",
+   "Reads as goldenrod at a glance: tall golden spires over a green base.",
+   "Under budget at 964 triangles (old model 13.2k), about 56 % of them on the plumes."
+  ],
+  "off": [
+   "Width follows the hero (about 1.5x as tall as wide): 0.547 x 0.357 m against the old 0.387 x 0.334 m. The height is kept exactly (0.837 m) and the leafy foot is about 0.30 m across, but the fanned plumes make the overall plan about 40 % wider than the old GLB.",
+   "The plumes are faceted stacked blobs; at close range they read a little like stacked diamonds rather than the hero's soft feathery sprays, though at tile size they read as pointed golden spires.",
+   "The rust stems are mostly hidden inside the leaves and plumes; the hero shows more bare reddish stem in the middle third.",
+   "The IoU moves by about +-0.01 with the random seed alone; seed 3 kept."
+  ]
+ },
+ "exports": {
+  "runtime": "goldenrod.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/WW-347.glb"
+   ]
+  }
+ },
+ "files": {
+  "goldenrod.glb": {
+   "sha256": "4f62eb668539d1080d8a535b7c11c269ba494b0b45ade3cc2d893510f84a7914",
+   "bytes": 77172
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "302ea10b5521d2b0b1f4ec81e0085e9334f9829b",
+  "path": "tools/ranch-rebuild/models/goldenrod"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

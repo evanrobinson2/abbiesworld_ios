@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "goat-shelter-charming",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/goat-shelter-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a small timber goat shelter, rose-pink plank walls, a teal shingled gable roof, a low open doorway with a wooden ramp, a raised plank platform beside it for goats to climb on, a small hay rack, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "09ccefca-ece6-4b9e-b557-e335e746c173",
+      "grid_url": "https://www.midjourney.com/jobs/09ccefca-ece6-4b9e-b557-e335e746c173?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "bb0f5dac-db37-4b16-9ac2-c195e9e9abd7",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:21:01.882Z",
+      "grid_done_at": "2026-10-23T00:21:19.885Z",
+      "upscale_clicked_at": "2026-10-23T00:21:34.299Z",
+      "downloaded_at": "2026-10-23T00:22:47.286Z",
+      "pick_reason": "low doorway with ramp, raised plank platform with hay rack, leaning chubby shape, no extra animal in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a small timber goat shelter, rose-pink plank walls, a teal shingled gable roof, a low open doorway with a wooden ramp, a raised plank platform beside it for goats to climb on, a small hay rack, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "d83f8b6f-8ee4-4717-8e45-170b39eafe78",
+      "grid_url": "https://www.midjourney.com/jobs/d83f8b6f-8ee4-4717-8e45-170b39eafe78?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "341f13b9-1f47-44ad-9d9b-5f275ce8f1d3",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:22:56.766Z",
+      "grid_done_at": "2026-10-23T00:23:14.772Z",
+      "upscale_clicked_at": "2026-10-23T00:23:24.686Z",
+      "downloaded_at": "2026-10-23T00:24:47.703Z",
+      "pick_reason": "front, side with ramp and platform, and back of one shelter, large and separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "b536f8a46cfdbe597f557ecc63a2f6437115a85c03ee78e2c360d9152aa00536",
+      "bytes": 4793560,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/bb0f5dac-db37-4b16-9ac2-c195e9e9abd7/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "b6cca0148fcc29acde54a31dad4d9fbef8b0a70dd69edc95c32fc142a09aeafb",
+      "bytes": 4999059,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/341f13b9-1f47-44ad-9d9b-5f275ce8f1d3/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "b38fa9fef11c23d092d96560b4e66ce01c1ff2af8f076525ada6afcd77547f4f",
+      "bytes": 1463572,
+      "pixels": [
+        845,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-shelter-charming [('front', 113, 958), ('side', 958, 1959), ('back', 1959, 2799)]"
+    },
+    "view_side.png": {
+      "sha256": "ff390de59f4408b579e958b6c2c8978c6320e8c5df4e5aafe4f42fa84db51467",
+      "bytes": 1822956,
+      "pixels": [
+        1001,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-shelter-charming [('front', 113, 958), ('side', 958, 1959), ('back', 1959, 2799)]"
+    },
+    "view_back.png": {
+      "sha256": "92d279d9678b035a782f11b6e5ac209494c6869b40d93af0e2f1db1b3b4f4bb4",
+      "bytes": 1322512,
+      "pixels": [
+        840,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-shelter-charming [('front', 113, 958), ('side', 958, 1959), ('back', 1959, 2799)]"
+    }
+  }
+}

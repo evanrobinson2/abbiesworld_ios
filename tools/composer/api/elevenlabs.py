@@ -64,11 +64,12 @@ def main():
     ap.add_argument('--takes', type=int, default=2)
     ap.add_argument('--model', default='music_v2_5')
     ap.add_argument('--format', default='', help='output_format, e.g. mp3_48000_192 (default: API auto)')
+    ap.add_argument('--briefs', default='briefs.json', help='briefs file in tools/composer/api')
     ap.add_argument('--dry-run', action='store_true')
     ap.add_argument('--no-master', action='store_true')
     a = ap.parse_args()
 
-    briefs = json.load(open(os.path.join(HERE, 'briefs.json')))
+    briefs = json.load(open(os.path.join(HERE, a.briefs)))
     cues = [c for c in briefs['cues'] if not a.only or c['id'] in a.only]
     if a.dry_run:
         for c in cues:
@@ -106,9 +107,16 @@ def main():
             path = os.path.join(folder, f'take-{n}.mp3')
             open(path, 'wb').write(audio)
             record = {'id': c['id'], 'take': n, 'title': c['title'], 'kind': c['kind'], 'provider': 'elevenlabs',
-                      'model': a.model, 'song_id': song, 'request': body,
+                      'model': a.model, 'briefs': a.briefs, 'song_id': song, 'request': body,
                       'date': datetime.date.today().isoformat(), 'sha256': hashlib.sha256(audio).hexdigest(),
                       'licence': 'ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)'}
+            # Traceability (Music Bible section 9): identity, source motif, world/place/situation, key, tempo,
+            # instrumentation, mood, intensity, variants and intended length, when the briefs file carries them.
+            if 'identity' in briefs or 'trace' in c:
+                record['trace'] = {**briefs.get('identity', {}), **c.get('trace', {}),
+                                   'briefs_about': briefs.get('about', ''), 'styles': c['styles'],
+                                   'sections': [[n, st, ms] for n, st, ms in c['sections']],
+                                   'duration_ms': sum(s[2] for s in c['sections'])}
             if not a.no_master:
                 record['master'] = os.path.basename(master(path, c['lufs']))
             json.dump(record, open(path.replace('.mp3', '.json'), 'w'), indent=1)

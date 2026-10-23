@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Live voice</title>
+<link rel="stylesheet" href="/app-style.css?v=1">
+<link rel="stylesheet" href="/models/models.css?v=2">
+<link rel="stylesheet" href="/live-voice/live-voice.css?v=1">
+</head>
+<body>
+<header class="mbar"><a class="home" href="/sandbox" aria-label="Back to Ranch Atelier"><img src="/abbies-ranch-logo.png" alt=""></a><div class="crumb"><a href="/live-voice">Live voice</a></div><a class="mbar-link" href="/sandbox">Back to the ranch</a></header>
+<main class="wrap lv" id="root">
+ <section class="intro"><h1>Live voice</h1><p>How the Computer sounds and listens when you tap Talk. Changes save on this device and apply the next time live mode starts.</p></section>
+
+ <section class="lv-card" aria-labelledby="h-provider"><h2 id="h-provider">Voice provider</h2>
+  <div class="lv-choices two" role="radiogroup" aria-labelledby="h-provider" data-setting="provider">
+   <button type="button" role="radio" data-value="openai"><strong>OpenAI</strong><span>One model hears, thinks and speaks. Fastest replies.</span></button>
+   <button type="button" role="radio" data-value="elevenlabs"><strong>ElevenLabs</strong><span>The same brain and safety, with ElevenLabs voices. Only the Computer's words go to ElevenLabs.</span></button>
+  </div>
+  <p class="lv-note" id="eleven-status"></p>
+ </section>
+
+ <section class="lv-card" aria-labelledby="h-voice"><h2 id="h-voice">Voice</h2>
+  <div id="voices-openai" class="lv-voices" role="radiogroup" aria-labelledby="h-voice" data-setting="openaiVoice"></div>
+  <div id="voices-eleven" class="lv-voices" role="radiogroup" aria-labelledby="h-voice" data-setting="elevenVoice" hidden></div>
+  <p class="lv-note" id="voice-note"></p>
+ </section>
+
+ <section class="lv-card" aria-labelledby="h-talk"><h2 id="h-talk">How it talks</h2>
+  <label class="lv-row"><span>Speaking speed <output id="speed-out"></output></span><input type="range" id="speed" min="0.7" max="1.2" step="0.05" aria-describedby="speed-note"></label>
+  <p class="lv-note" id="speed-note">Speed applies to ElevenLabs voices.</p>
+  <div class="lv-row"><span id="h-personality">Personality</span><div class="lv-seg" role="radiogroup" aria-labelledby="h-personality" data-setting="personality">
+   <button type="button" role="radio" data-value="calm">Calm</button><button type="button" role="radio" data-value="warm">Warm</button><button type="button" role="radio" data-value="playful">Playful</button><button type="button" role="radio" data-value="silly">Silly</button></div></div>
+  <div class="lv-row"><span id="h-replies">Reply length</span><div class="lv-seg" role="radiogroup" aria-labelledby="h-replies" data-setting="replies">
+   <button type="button" role="radio" data-value="short">Short</button><button type="button" role="radio" data-value="normal">Normal</button><button type="button" role="radio" data-value="more">A bit more</button></div></div>
+ </section>
+
+ <section class="lv-card" aria-labelledby="h-listen"><h2 id="h-listen">How it listens</h2>
+  <div class="lv-row"><span id="h-wait">Waits before answering</span><div class="lv-seg" role="radiogroup" aria-labelledby="h-wait" data-setting="wait">
+   <button type="button" role="radio" data-value="smart">Smart</button><button type="button" role="radio" data-value="quick">Quick</button><button type="button" role="radio" data-value="normal">Normal</button><button type="button" role="radio" data-value="patient">Patient</button></div></div>
+  <p class="lv-note">Smart waits until a sentence sounds finished. Patient gives little ones time to think mid-sentence.</p>
+  <div class="lv-row"><span id="h-hearing">Room</span><div class="lv-seg" role="radiogroup" aria-labelledby="h-hearing" data-setting="hearing">
+   <button type="button" role="radio" data-value="quiet-room">Quiet</button><button type="button" role="radio" data-value="normal">Normal</button><button type="button" role="radio" data-value="noisy-room">Noisy</button></div></div>
+  <p class="lv-note">Noisy needs louder speech to start a turn (TV on, siblings playing). Used with Quick, Normal and Patient.</p>
+  <label class="lv-switch"><input type="checkbox" data-setting="interrupt"><span>Let us interrupt the Computer</span></label>
+ </section>
+
+ <section class="lv-card" aria-labelledby="h-screen"><h2 id="h-screen">On screen</h2>
+  <label class="lv-switch"><input type="checkbox" data-setting="greeting"><span>Say hello when live mode starts</span></label>
+  <label class="lv-switch"><input type="checkbox" data-setting="captions"><span>Show what was heard and said</span></label>
+ </section>
+
+ <section class="lv-card lv-locked" aria-labelledby="h-safety"><h2 id="h-safety"><span aria-hidden="true">🔒</span> Always on</h2>
+  <ul><li>Game controller only: no homework answers, chit-chat or companionship.</li><li>PG words, names and builds, checked as they happen.</li><li>Rules can't be changed by anyone talking to it.</li><li>No personal details asked for or repeated.</li><li>Serious worries: "find a grown-up you trust".</li></ul>
+  <p class="lv-note">These come from the game itself, so they are not settings.</p>
+ </section>
+
+ <div class="lv-actions"><button type="button" id="reset">Reset to defaults</button><a class="lv-primary" href="/sandbox">Done</a></div>
+</main>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+<script type="module" src="/live-voice/live-voice.mjs?v=1"></script>
+</body>
+</html>

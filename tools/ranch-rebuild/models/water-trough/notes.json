@@ -1,0 +1,32 @@
+{
+ "what_i_did": [
+  ["Targets", "The hero is the main target. The three sheet views are all end-on views of the short end, not front/side/back, so view_front and view_back are dropped. The left end view is re-cropped from turnaround.png (split.py's crops run down into the 3/4 view), its top rows (the far end and the water drawn in perspective) are blanked, and it is scored as view_side (the harness looks from +X at the end). It is only a guide: the sheet's ends have two planks, much taller legs and wider iron plates than the hero, and the hero wins on those."],
+  ["Hero key", "make_views.py keys the hero: the harness mask kept the big tan cast shadow (it shifts hue a little, so the harness's shadow test misses it). A pixel is backdrop or shadow when every channel stays at or above 62% of the backdrop. Below row 1150, the deeper, redder contact shadow under the long wall is also dropped (R at least 0.66 and B at least 0.36 of the backdrop). The wood, iron and water all fall far lower in at least one channel. The output is views/hero_mask.png."],
+  ["Hero camera", "hero_check.py renders from the hero's direction with the harness lens and distance: 36 deg off the front towards -X and 28 deg up. The camera was calibrated over a yaw/elevation grid once the proportions were fixed (round 4), then held. Camera distance (1.2 to 2.5 x the diagonal) made no real difference."],
+  ["Massing", "The trough is 1.75 x 0.62 m at the base of the walls, with the rim at 0.41 m. The walls run from 0.10 to 0.41 m on four tapered 0.13 m square feet, inset 0.065 m. Each long wall is three 0.075 m thick planks running full length, flared outwards 5 deg, with 6 mm grooves between them. The top plank is cut in 6 segments, so its top edge has a gentle hump and random +-10 mm unevenness. The ends are three 0.07 m planks set between the long walls, also with uneven tops. All the planks have a 9 mm bevel."],
+  ["Iron", "Each corner has two flat iron plates (Metal_Iron), one on the long face and one on the end face. Each is set back 22 mm from the corner so the plank end grain shows between them, as in the hero. Each plate has a tab folded over the rim and three rivet nubs (two on the face, one on the tab)."],
+  ["Fill states", "One build.py with a STATE switch writes variants/full.glb (water at 0.36 m, 5 cm under the rim), variants/partial.glb (water at 0.25 m) and variants/empty.glb (no water, so the dry plank floor shows). water-trough.glb is the full state. There is no carried state (the trough has none)."],
+  ["Game readiness", "1,182 triangles (supply budget 2k, art director's 1.5k). There are 5 meshes, each with one flat material: Plank_Trough (walls), Plank_TroughFloor (floor), Timber_Leg (feet), Metal_Iron (straps), Water (water surface, which hits to_game's water role). Origin at the footprint centre on the ground, front at -Y, no animation. to_game.py water-trough ran cleanly: it scaled x0.996 to keep the old 1.79-unit footprint and wrote water-trough-{full,partial,empty}.json/.glb, with roles timber, timber, metal, timber, water."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.899 from the matched camera at the final 768 px / 48 samples render.",
+  "The read at tile size: a long, low reddish-brown plank box, dark iron corners with caps over the rim, a blue water panel and short square feet. The three fill states read apart clearly (brim, half, dry floor).",
+  "Under budget at 1.18k triangles, and every part maps to the right game role."
+ ],
+ "off": [
+  "Proportions: the art director's 1.6 x 0.5 x 0.45 m reads too tall and too narrow against the hero. Every sweep of the matched camera preferred a wider, lower trough (hero 0.88 at 1.6/0.5/0.45, 0.90 at 1.75/0.62/0.41). The sheet's end view agrees (side IoU 0.56 rising to 0.77-0.81), so the build uses 1.75 x 0.62 x 0.41 m. The game rescales to the old footprint anyway.",
+  "The hero's wood is carved, with grain, cracks and rounded, irregular plank edges. Mine is flat-shaded bevelled boxes with wavy tops only. The hero's water has ripples and a dark band at the wall line. Mine is a flat blue plane.",
+  "The rivets are small (13 mm) and barely read at tile size. The hero's iron plates are slightly bent and hammered, while mine are flat boxes.",
+  "The sheet end view is a guide only: it has two planks per end, legs about twice as tall and plates outside the corners, and it is drawn with perspective. It was not matched where it disagrees with the hero."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build from the brief: 1.6 x 0.5 x 0.45 m, three planks per wall, wrapped L-shaped corner straps with L caps, water 4 cm under the rim. Camera at -35/26.", "mean_iou": 0.876},
+  {"round": 2, "change": "Longer (1.7 m), thicker walls (0.08 m), wider straps, water lowered and muted, camera at -36/26.", "mean_iou": 0.884},
+  {"round": 3, "change": "Replaced the wrapped L straps with two separate plates per corner, each with a tab over the rim, so the end grain shows between them as in the hero (0.841 at -36/26). Re-calibrated the camera to -32/28.", "mean_iou": 0.864},
+  {"round": 4, "change": "Proportions from sweeps: 1.75 x 0.62 x 0.41 m, feet 0.09 m. The sheet end view rose from 0.56 to 0.81. Camera re-calibrated and fixed at -36/28.", "mean_iou": 0.897},
+  {"round": 5, "change": "Tried the feet near the corners (0.03 m inset, 0.845) and settled on a 0.065 m inset. Darker, browner wood.", "mean_iou": 0.901},
+  {"round": 6, "change": "Taller, chunkier feet (0.10 m, 0.13 m square) so they read under the walls as in the hero, and darker teal water. Final render at 768 px / 48 samples.", "mean_iou": 0.899}
+ ],
+ "moving_parts": "None. The game poses the trough itself, and the fill level is swapped between the full, partial and empty variants.",
+ "creative_additions": "A slightly darker plank floor (Plank_TroughFloor), so the empty trough reads as dry and empty rather than as a solid box, and a small outward flare on the long walls taken from the sheet."
+}

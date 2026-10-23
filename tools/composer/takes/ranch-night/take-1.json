@@ -1,0 +1,19 @@
+{
+ "id": "ranch-night",
+ "take": 1,
+ "title": "Ranch Night",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "GLTJXKzPhhu5oOGRzs0K",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, lullaby, 3/4 waltz, B-flat major, 60 bpm, soft felt piano ripples, hushed strings, clarinet then solo violin, fireflies, safe and warm. Hush: piano alone, very soft. Song: clarinet sings over piano and strings. Violin: solo violin takes the tune, a touch of harp. Fade: back to piano, loops cleanly. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 120000
+ },
+ "date": "2026-10-22",
+ "sha256": "13b2a5ee7482ddd5d52a60ac1b0131d48b48ff7214aafd8949ab7490135d822f",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-1.master.mp3"
+}

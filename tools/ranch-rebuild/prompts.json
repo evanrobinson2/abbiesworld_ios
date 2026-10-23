@@ -1,0 +1,352 @@
+[
+ {
+  "name": "family-home",
+  "group": "building",
+  "turnaround": true,
+  "prompt": "a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation",
+  "replaces": "simulation-assets/buildings/family-home-*.json",
+  "role": "the household's home",
+  "hero": "a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "feed-store",
+  "group": "building",
+  "turnaround": true,
+  "prompt": "a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation",
+  "replaces": "simulation-assets/buildings/feed-store-*.json",
+  "role": "where feed and rations are kept",
+  "hero": "a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small timber feed store shed, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide plank door with a hand-painted sign board above it, grain sacks and a scoop by the door, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "water-point",
+  "group": "building",
+  "turnaround": true,
+  "prompt": "a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim",
+  "replaces": "simulation-assets/buildings/water-point-*.json",
+  "role": "residents fetch water here",
+  "hero": "a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "horse-shelter",
+  "group": "building",
+  "turnaround": true,
+  "prompt": "a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation",
+  "replaces": "simulation-assets/buildings/cattle-shelter-*.json",
+  "role": "shelter for horses and cattle",
+  "hero": "a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "goat-shelter",
+  "group": "building",
+  "turnaround": true,
+  "prompt": "a small timber goat shelter, rose-pink plank walls, a teal shingled gable roof, a low open doorway with a wooden ramp, a raised plank platform beside it for goats to climb on, a small hay rack",
+  "replaces": "simulation-assets/buildings/goat-shelter-*.json",
+  "role": "shelter for goats",
+  "hero": "a small timber goat shelter, rose-pink plank walls, a teal shingled gable roof, a low open doorway with a wooden ramp, a raised plank platform beside it for goats to climb on, a small hay rack, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small timber goat shelter, rose-pink plank walls, a teal shingled gable roof, a low open doorway with a wooden ramp, a raised plank platform beside it for goats to climb on, a small hay rack, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "chicken-coop",
+  "group": "building",
+  "turnaround": true,
+  "prompt": "a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh",
+  "replaces": "simulation-assets/buildings/chicken-coop-*.json",
+  "role": "home for the hens",
+  "hero": "a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a raised timber chicken coop on short stout legs, cream plank walls with timber trim, a teal shingled gable roof, a slatted wooden ramp up to a little pop door, a hinged nest box on the side, a small window with wire mesh, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "barn-shelter",
+  "group": "building",
+  "turnaround": true,
+  "prompt": "a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation",
+  "replaces": "simulation-assets/buildings/shelter-*.json",
+  "role": "general barn / work shelter",
+  "hero": "a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small timber work barn, rose-pink plank walls with timber corner posts, a teal shingled gable roof, a wide open doorway showing a workbench and hanging tools inside, a small hayloft opening in the gable, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "horse",
+  "group": "animal",
+  "turnaround": true,
+  "prompt": "a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view",
+  "replaces": "simulation-assets/organics/horse-{idle,feeding,rest}.json",
+  "role": "grazes, rests, walks the paddock",
+  "hero": "a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "cow",
+  "group": "animal",
+  "turnaround": true,
+  "prompt": "a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view",
+  "replaces": "simulation-assets/organics/cow-{idle,feeding,rest}.json",
+  "role": "grazes and rests in the pasture",
+  "hero": "a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "goat",
+  "group": "animal",
+  "turnaround": true,
+  "prompt": "a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view",
+  "replaces": "simulation-assets/organics/goat-{idle,feeding,rest}.json",
+  "role": "browses and climbs",
+  "hero": "a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "chicken",
+  "group": "animal",
+  "turnaround": true,
+  "prompt": "a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view",
+  "replaces": "simulation-assets/organics/chicken-{idle,feeding,rest}.json",
+  "role": "pecks around the run",
+  "hero": "a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "tree-standing",
+  "group": "tree",
+  "turnaround": true,
+  "prompt": "a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens",
+  "replaces": "simulation-assets/organics/tree-standing.json",
+  "role": "the main shade tree",
+  "hero": "a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "birch",
+  "group": "tree",
+  "turnaround": true,
+  "prompt": "a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves",
+  "replaces": "simulations/regional-assets/WW-139.glb",
+  "role": "woodland edge tree",
+  "hero": "a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "maple",
+  "group": "tree",
+  "turnaround": true,
+  "prompt": "a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green",
+  "replaces": "simulations/regional-assets/WW-151.glb",
+  "role": "shade tree",
+  "hero": "a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "apple-tree",
+  "group": "tree",
+  "turnaround": true,
+  "prompt": "a small orchard apple tree, a short twisty trunk, a spreading rounded crown with clusters of red apples",
+  "replaces": "simulations/regional-assets/GF-153.glb",
+  "role": "orchard tree",
+  "hero": "a small orchard apple tree, a short twisty trunk, a spreading rounded crown with clusters of red apples, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small orchard apple tree, a short twisty trunk, a spreading rounded crown with clusters of red apples, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "hazel",
+  "group": "tree",
+  "turnaround": true,
+  "prompt": "a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts",
+  "replaces": "simulations/regional-assets/GF-158.glb",
+  "role": "hedge shrub",
+  "hero": "a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "elder",
+  "group": "tree",
+  "turnaround": true,
+  "prompt": "an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets",
+  "replaces": "simulations/regional-assets/GF-159.glb",
+  "role": "hedge shrub",
+  "hero": "an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "compost-bay",
+  "group": "prop",
+  "turnaround": true,
+  "prompt": "a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top",
+  "replaces": "garden-assets/GF-019.glb",
+  "role": "garden compost",
+  "hero": "a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "potting-bench",
+  "group": "prop",
+  "turnaround": true,
+  "prompt": "a rustic wooden potting bench with a back shelf, terracotta pots, a trowel and a seed tray",
+  "replaces": "garden-assets/GF-020.glb",
+  "role": "garden work bench",
+  "hero": "a rustic wooden potting bench with a back shelf, terracotta pots, a trowel and a seed tray, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a rustic wooden potting bench with a back shelf, terracotta pots, a trowel and a seed tray, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "watering-pot",
+  "group": "prop",
+  "turnaround": false,
+  "prompt": "a round glazed terracotta watering pot with a long spout and a curved handle",
+  "replaces": "garden-assets/GF-074.glb",
+  "role": "garden watering pot",
+  "hero": "a round glazed terracotta watering pot with a long spout and a curved handle, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "bench",
+  "group": "prop",
+  "turnaround": true,
+  "prompt": "a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher",
+  "replaces": "garden-assets/GF-194.glb",
+  "role": "household bench",
+  "hero": "a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "hay-rack",
+  "group": "supply",
+  "turnaround": true,
+  "prompt": "a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay",
+  "replaces": "simulation-assets/supplies/hay-{full,partial,empty,carried}.json",
+  "role": "animals eat from it; fill level changes",
+  "hero": "a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a wooden slatted hay feeder rack on four legs, V-shaped slats, filled with golden hay, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "ration-jar",
+  "group": "supply",
+  "turnaround": false,
+  "prompt": "a cream ceramic storage jar for animal feed with a fitted wooden lid, a rope tied round the neck, a wooden scoop hanging on the side",
+  "replaces": "simulation-assets/supplies/ration-{full,partial,empty,carried}.json",
+  "role": "feed store; fill level changes",
+  "hero": "a cream ceramic storage jar for animal feed with a fitted wooden lid, a rope tied round the neck, a wooden scoop hanging on the side, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "water-bucket",
+  "group": "supply",
+  "turnaround": false,
+  "prompt": "a wooden stave bucket with iron hoops and a rope handle, full of clear water",
+  "replaces": "simulation-assets/supplies/water-bucket-{full,partial,empty,carried}.json",
+  "role": "carried from the water point",
+  "hero": "a wooden stave bucket with iron hoops and a rope handle, full of clear water, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "water-trough",
+  "group": "supply",
+  "turnaround": true,
+  "prompt": "a long wooden plank water trough on short feet with iron corner bands, full of clear water",
+  "replaces": "simulation-assets/supplies/water-trough-{full,partial,empty}.json",
+  "role": "animals drink from it; fill level changes",
+  "hero": "a long wooden plank water trough on short feet with iron corner bands, full of clear water, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a long wooden plank water trough on short feet with iron corner bands, full of clear water, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9"
+ },
+ {
+  "name": "stone-edging",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a short straight row of rounded garden edging stones with small white and yellow flowers growing between them",
+  "replaces": "simulations/regional-assets/GF-010.glb",
+  "role": "path and bed edging",
+  "hero": "a short straight row of rounded garden edging stones with small white and yellow flowers growing between them, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "borage",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a borage plant clump with soft hairy leaves and star-shaped bright blue flowers",
+  "replaces": "simulations/regional-assets/GF-249.glb",
+  "role": "garden flower",
+  "hero": "a borage plant clump with soft hairy leaves and star-shaped bright blue flowers, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "marigold",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a pot marigold plant clump with bright orange and yellow daisy-like flowers",
+  "replaces": "simulations/regional-assets/GF-250.glb",
+  "role": "garden flower",
+  "hero": "a pot marigold plant clump with bright orange and yellow daisy-like flowers, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "sunflower",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem",
+  "replaces": "simulations/regional-assets/GF-567.glb",
+  "role": "garden flower",
+  "hero": "a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "hollyhock",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base",
+  "replaces": "simulations/regional-assets/GF-634.glb",
+  "role": "garden flower",
+  "hero": "a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "coneflower",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a clump of purple coneflowers with drooping pink petals and orange-brown cones",
+  "replaces": "simulations/regional-assets/GF-679.glb",
+  "role": "meadow flower",
+  "hero": "a clump of purple coneflowers with drooping pink petals and orange-brown cones, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "clover",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a low patch of pasture clover with round white and pink flower heads",
+  "replaces": "simulations/regional-assets/UP-051.glb",
+  "role": "meadow ground cover",
+  "hero": "a low patch of pasture clover with round white and pink flower heads, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "fern",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a woodland fern clump with arching feathery fronds",
+  "replaces": "simulations/regional-assets/WW-046.glb",
+  "role": "woodland ground cover",
+  "hero": "a woodland fern clump with arching feathery fronds, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "bramble",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a low sprawling blackberry bramble with arching canes, leaves and dark berries",
+  "replaces": "simulations/regional-assets/WW-273.glb",
+  "role": "hedge bramble",
+  "hero": "a low sprawling blackberry bramble with arching canes, leaves and dark berries, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ },
+ {
+  "name": "goldenrod",
+  "group": "plant",
+  "turnaround": false,
+  "prompt": "a clump of goldenrod, upright stems topped with plumes of yellow flowers",
+  "replaces": "simulations/regional-assets/WW-347.glb",
+  "role": "meadow flower",
+  "hero": "a clump of goldenrod, upright stems topped with plumes of yellow flowers, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+  "turnaround_prompt": null
+ }
+]

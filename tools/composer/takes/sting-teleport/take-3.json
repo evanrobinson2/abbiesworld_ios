@@ -1,0 +1,20 @@
+{
+ "id": "sting-teleport",
+ "take": 3,
+ "title": "Teleport",
+ "kind": "sting",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-score.json",
+ "song_id": "mrMhIX9E7SRVvvnHZZHw",
+ "request": {
+  "prompt": "upbeat family adventure soundtrack, bright, warm and joyful, catchy instrumental hook, light, bouncy percussion, strong melodic bass line, polished modern production, instrumental, D major, rising sparkly whoosh made of music, lifts off then lands. Sting: short, complete. No vocals, no lyrics, no singing, no humming, no dark, no aggressive, no heavy drums, no EDM drop, no dubstep, no distorted guitar, no cheesy, no kazoo, no 8-bit",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 4000
+ },
+ "date": "2026-10-23",
+ "sha256": "e0824731d118158aa150f60eaa813a96a5a2a7b62854c9fcebc086c740ca5341",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-3.master.mp3"
+}

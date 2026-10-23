@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "bramble",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/WW-273.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a low sprawling blackberry bramble with arching canes, leaves and dark berries, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "7cc0c9f9-215f-401c-abf2-513ce44ff50d",
+      "grid_url": "https://www.midjourney.com/jobs/7cc0c9f9-215f-401c-abf2-513ce44ff50d?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "6fed4a39-d40a-4f6a-9e6f-49505a2b2b01",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:00:27.322Z",
+      "grid_done_at": "2026-10-23T00:00:45.328Z",
+      "upscale_clicked_at": "2026-10-23T00:00:55.495Z",
+      "downloaded_at": "2026-10-23T00:02:05.152Z",
+      "pick_reason": "low sprawl with clearly arching canes, leaves and dark berries, whole bramble in frame"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "11ab7124227f0d2eacacceada488a886665f0ce51771f74c665d6d3f82a857ed",
+      "bytes": 2889962,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/6fed4a39-d40a-4f6a-9e6f-49505a2b2b01/0_0.png"
+    }
+  }
+}

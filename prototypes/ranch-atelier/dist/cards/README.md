@@ -58,4 +58,4 @@ Checks: name and rules fit at 8 pt or larger, 15 words or fewer on the face, rea
 list, known icons, name length, two stats or fewer, everything inside the safe zone, art resolution at the output
 ppi, subject centred and sized for the art style, nothing clipped, and pop-out height (5–15% of the card).
 
-Picture sources and the cut-out method are in `provenance.json`. Fonts are Fredoka and Nunito (SIL OFL, in `fonts/`).
+`library/` holds web previews listed in /explore (Cards). Picture sources and the cut-out method are in `provenance.json`. Fonts are Fredoka and Nunito (SIL OFL, in `fonts/`).

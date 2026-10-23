@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "water-bucket",
+  "group": "supply",
+  "replaces": "simulation-assets/supplies/water-bucket-{full,partial,empty,carried}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a wooden stave bucket with iron hoops and a rope handle, full of clear water, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "44e292c8-f175-4a7c-92ed-154d4aa57ba8",
+      "grid_url": "https://www.midjourney.com/jobs/44e292c8-f175-4a7c-92ed-154d4aa57ba8?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "a69c3882-7841-48a0-b83d-974eae2dded3",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:39:18.075Z",
+      "grid_done_at": "2026-10-22T23:39:36.079Z",
+      "upscale_clicked_at": "2026-10-22T23:39:48.266Z",
+      "downloaded_at": "2026-10-22T23:41:00.944Z",
+      "pick_reason": "stave bucket with two iron hoops, rope handle fully in frame, clear water"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "9c649ffb22e4dfc028b29f765fcc480546155f1358809d5961ff82369e0df74b",
+      "bytes": 3574620,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/a69c3882-7841-48a0-b83d-974eae2dded3/0_0.png"
+    }
+  }
+}

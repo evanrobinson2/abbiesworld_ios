@@ -1,0 +1,89 @@
+{
+ "what_i_did": [
+  [
+   "Target",
+   "There is no turnaround, so the hero is the only target (AD). The harness mask kept the long brown cast shadow on the right and dropped the lit cream shoulder, which is the backdrop's exact colour (246,218,177 vs 238,210,166). make_views.py keys the hero itself: colour distance plus a blue/red chroma test above the ground line, hand-traced polygons around the jar foot and the scoop bowl below it, and a polygon forced inside the jar body. It writes views/hero.png and views/hero_mask.png."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py renders from the hero's direction with the harness lens and distance and scores against views/hero_mask.png. The yaw/elevation grid is flat and noisy (0.86 to 0.89). Its best point sat at 6 deg elevation, which contradicts the hero's lid ellipse, so I held the camera at yaw -5 / elevation 14, the grid's best near the AD's ~15 deg."
+  ],
+  [
+   "Jar",
+   "An 11-facet lathe jar with jittered radii (3.5%) and randomly rotated rings, flat shaded, for the chunky hand-carved facets. Foot about 0.34 m across, widest 0.40 m at z 0.30, shoulder rolling into a short straight 0.27 m neck with a small lip, rim at 0.486 m. The mouth is open (inner wall and floor in Ceramic_Inside) so the fill states can show what is inside."
+  ],
+  [
+   "Lid",
+   "A thick 0.146 m radius round lid made of 3 planks along X. Each plank's top is inset, so the outer edge is bevelled and the joints read as V grooves. In the full and carried states it sits on the neck, nudged 12 mm to -X as in the hero. Partial and empty prop it on its edge against the back of the neck, plank side facing front."
+  ],
+  [
+   "Rope and scoop",
+   "Twisted jute rope: a 5-sided tube with alternating radii, rotated along the path. Two loops go round the neck, and a third loose loop sags from the knot on the left (z 0.27) to the right of the neck (z 0.42). Two strands run from a knot on the neck down to a lumpy lower knot, which has two tapered tails. The wooden scoop hangs from that knot: a 9-sided bowl with its opening to the front-left, resting by the ground and leaning on the jar, and a tapered handle up to the knot."
+  ],
+  [
+   "States",
+   "build.py STATE switch: full (lid on, as the hero; also ration-jar.glb), partial (lid off and propped, a Feed_Grain mound down in the neck at z 0.385, and a heap of grain in the scoop), empty (lid off and propped, the dark inside and floor showing, empty scoop), carried (the full jar, identical to full, so the game's full-object rule holds). Materials: Ceramic_Cream, Ceramic_Inside, Wood_Lid, Wood_Scoop, Rope_Jute, Feed_Grain. to_game maps them to clay, clay, timber, timber, fiber and food."
+  ],
+  [
+   "Game readiness",
+   "1,260 triangles for full, empty and carried, and 1,328 for partial (budget 1.5k), in 4 to 6 meshes with one material each (the jar has 2: outside and inside). Origin at the footprint centre on the ground, front at -Y, no animation. to_game.py ration-jar installed ration-{full,partial,empty,carried}.json/.glb (plus the sandbox2 mirrors) at x1.490 to keep the old 0.76-unit footprint."
+  ]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.923 from the matched camera at the final 768 px / 48 samples render. The squat faceted jar, thick lid, rope with a left-side knot, and the scoop by the ground all line up with the hero.",
+  "The states read apart from a high tile camera: full has the lid on. Partial has the lid propped up behind and yellow grain in the mouth and the scoop. Empty has the lid propped and a dark empty mouth.",
+  "Well under budget at 1.26k to 1.33k triangles."
+ ],
+ "off": [
+  "The hero's rope is a thick, soft, braided bundle with a big floppy knot. Mine is thinner, a faceted twisted tube with lumpy icosphere knots, and the twist reads as small zigzags close up.",
+  "The hero's scoop handle is thick and clearly visible from the knot down. Mine is a thinner bar, partly hidden behind the knot tails, and the bowl reads as an octagon up close.",
+  "The hero's facets are many small hand-carved planes. Mine are 11 x 12 bigger lathe facets with jitter: the same idea at a lower density, to stay inside budget and readable at tile size.",
+  "The propped lid in partial and empty reaches about 4 cm further back than the jar. to_game recentres every state on its own bounding box, so in game the jar sits about 0.03 units further forward in those two states than when full.",
+  "Silhouette aspect: the model is a little taller relative to its width (1.14) than the hero (1.13), mostly because the scoop sits a few mm closer to the jar.",
+  "The cream renders lighter and yellower than the hero's shaded beige under the harness light. The scoop and lid woods are flat colours with no grain."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build from the hero: 11-facet carved jar, 3-plank lid, two neck loops plus a sagging loop and a knot on the left, hanging scoop. Camera 0/15.",
+   "mean_iou": 0.86
+  },
+  {
+   "round": 2,
+   "change": "Wider foot, narrower neck and lid, bigger knots, larger scoop, darker lid wood. Grid-calibrated the camera, held at -5/14.",
+   "mean_iou": 0.859
+  },
+  {
+   "round": 3,
+   "change": "Squashed all heights to 0.93 and pushed the knot out: worse, because the hero is taller than I read.",
+   "mean_iou": 0.844
+  },
+  {
+   "round": 4,
+   "change": "Heights back to 1.0, shoulder narrowed and lowered, lid radius 0.139, scoop raised off the ground line.",
+   "mean_iou": 0.9
+  },
+  {
+   "round": 5,
+   "change": "Foot widened again, knot further out, lid nudged 12 mm to -X, scoop moved in towards the jar.",
+   "mean_iou": 0.889
+  },
+  {
+   "round": 6,
+   "change": "Jar radii x1.03, lower knot dropped to z 0.255 and closer to the shoulder, sash loop lowered to match.",
+   "mean_iou": 0.921
+  },
+  {
+   "round": 7,
+   "change": "Radii x1.05, bigger knot cluster, scoop bowl x1.07, warmer cream.",
+   "mean_iou": 0.922
+  },
+  {
+   "round": 8,
+   "change": "Thinner lid (0.032 m), rope loops hugging the jar, a wider foot, a less orange scoop. Final render at 768 px / 48 samples.",
+   "mean_iou": 0.923
+  }
+ ],
+ "moving_parts": "None. The game poses supplies itself. Exported with export_animations=False. The fill states are separate GLBs in variants/.",
+ "creative_additions": "A dark Ceramic_Inside wall and floor, so the empty jar reads empty from above. In the partial state the lid is propped on its edge behind the neck and the scoop holds a small heap of grain."
+}

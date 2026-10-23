@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "coneflower",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-679.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a clump of purple coneflowers with drooping pink petals and orange-brown cones, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "430a00e7-d61a-46fd-9033-c4b2492c5f6a",
+      "grid_url": "https://www.midjourney.com/jobs/430a00e7-d61a-46fd-9033-c4b2492c5f6a?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "5f95c298-5d73-48e1-b28f-59990fc719f1",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:54:57.927Z",
+      "grid_done_at": "2026-10-22T23:55:15.931Z",
+      "upscale_clicked_at": "2026-10-22T23:55:25.381Z",
+      "downloaded_at": "2026-10-22T23:56:34.908Z",
+      "pick_reason": "full clump with drooping pink petals and orange-brown cones, whole plant in frame"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "4c7d5dc82fab56723763c17af2260f917cb5f0bc30c63e82111f382f6cea72fe",
+      "bytes": 4289187,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/5f95c298-5d73-48e1-b28f-59990fc719f1/0_0.png"
+    }
+  }
+}

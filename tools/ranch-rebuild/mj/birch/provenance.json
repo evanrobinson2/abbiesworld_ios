@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "birch",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/WW-139.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "5e455e41-8e74-4a31-8887-53494a045dd5",
+      "grid_url": "https://www.midjourney.com/jobs/5e455e41-8e74-4a31-8887-53494a045dd5?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "5da2de5d-2260-498e-a827-ac81bf45cd17",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:59:53.582Z",
+      "grid_done_at": "2026-10-22T23:00:11.584Z",
+      "upscale_clicked_at": "2026-10-22T23:00:21.653Z",
+      "downloaded_at": "2026-10-22T23:01:30.192Z",
+      "pick_reason": "slender trunk with clear white bark and black markings, drooping bright green clusters, whole tree in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a slender silver birch tree, white bark with black markings, light airy drooping clusters of small bright green leaves, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "1ecda5f9-fc54-4d47-a7a6-6aaa6625124a",
+      "grid_url": "https://www.midjourney.com/jobs/1ecda5f9-fc54-4d47-a7a6-6aaa6625124a?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "56545071-24d8-4762-8ec7-e9a4b4c44a15",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:01:39.129Z",
+      "grid_done_at": "2026-10-22T23:01:57.134Z",
+      "upscale_clicked_at": "2026-10-22T23:02:07.524Z",
+      "downloaded_at": "2026-10-22T23:03:27.431Z",
+      "pick_reason": "three separated views at the same scale, crowns not cropped at the top"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "e61e99f26f7d41fcd9a264016c8f80fd82c3dbde6b19d11e2cda26700ea13b99",
+      "bytes": 3110531,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/5da2de5d-2260-498e-a827-ac81bf45cd17/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "9605fffaeddbd970feb442a73080998dbc479c8ed93a3f8d709c446e347dc224",
+      "bytes": 4377207,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/56545071-24d8-4762-8ec7-e9a4b4c44a15/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "97cb15bdf88c65baebea57869fc38065f7e0d79bed338066493b00f34d29cfc7",
+      "bytes": 1148847,
+      "pixels": [
+        688,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/birch [('front', 302, 990), ('side', 1004, 1707), ('back', 1742, 2491)]"
+    },
+    "view_side.png": {
+      "sha256": "d42b6d840308ff17a661e77fcd2423ce9801ebd61ac7c66ad3d1d4d68d300596",
+      "bytes": 1144166,
+      "pixels": [
+        703,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/birch [('front', 302, 990), ('side', 1004, 1707), ('back', 1742, 2491)]"
+    },
+    "view_back.png": {
+      "sha256": "04286fd9670355a0ce6c30c7a7dd4e24e0b0ebf6de0508a670dfef7c78832055",
+      "bytes": 1291322,
+      "pixels": [
+        749,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/birch [('front', 302, 990), ('side', 1004, 1707), ('back', 1742, 2491)]"
+    }
+  }
+}

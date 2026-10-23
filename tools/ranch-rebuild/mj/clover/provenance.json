@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "clover",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/UP-051.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a low patch of pasture clover with round white and pink flower heads, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "0ab8ef0b-4f32-4424-88da-80a1d730fc6e",
+      "grid_url": "https://www.midjourney.com/jobs/0ab8ef0b-4f32-4424-88da-80a1d730fc6e?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "1444744b-2743-4384-bee1-8465354618ab",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:56:48.265Z",
+      "grid_done_at": "2026-10-22T23:57:06.270Z",
+      "upscale_clicked_at": "2026-10-22T23:57:16.080Z",
+      "downloaded_at": "2026-10-22T23:58:24.689Z",
+      "pick_reason": "low patch with readable trefoil leaves and round white-pink heads, whole patch with margin"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "f5f7d9a77bfe8d2450ffb2a53373e8d6b18cc105f58016277e619bbaa6bf95c1",
+      "bytes": 2192623,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/1444744b-2743-4384-bee1-8465354618ab/0_0.png"
+    }
+  }
+}

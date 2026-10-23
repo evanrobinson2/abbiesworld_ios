@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "potting-bench",
+  "group": "prop",
+  "replaces": "garden-assets/GF-020.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a rustic wooden potting bench with a back shelf, terracotta pots, a trowel and a seed tray, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "fdc249a5-bdf8-4332-b717-482f0d0a1830",
+      "grid_url": "https://www.midjourney.com/jobs/fdc249a5-bdf8-4332-b717-482f0d0a1830?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "43e996fd-f2aa-4ea4-a5a6-9433312c5bfa",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:23:49.271Z",
+      "grid_done_at": "2026-10-22T23:24:07.275Z",
+      "upscale_clicked_at": "2026-10-22T23:24:17.492Z",
+      "downloaded_at": "2026-10-22T23:25:29.118Z",
+      "pick_reason": "back shelf with terracotta pots, trowel and seed tray on the top, whole bench in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a rustic wooden potting bench with a back shelf, terracotta pots, a trowel and a seed tray, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "5b9f208d-1b82-4b19-8769-b5a7f2f87a12",
+      "grid_url": "https://www.midjourney.com/jobs/5b9f208d-1b82-4b19-8769-b5a7f2f87a12?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "b36c2919-010b-439a-8ec1-774be03ecb11",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:25:38.254Z",
+      "grid_done_at": "2026-10-22T23:25:56.258Z",
+      "upscale_clicked_at": "2026-10-22T23:26:06.707Z",
+      "downloaded_at": "2026-10-22T23:27:26.970Z",
+      "pick_reason": "true front, narrow side and plank back of one bench with shelf and pots; others were three near-identical three-quarter views"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "25892afbd804da291bd6feafd6d4e0c362dfdaf1323716f5182027e94a4f55e2",
+      "bytes": 3908832,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/43e996fd-f2aa-4ea4-a5a6-9433312c5bfa/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "5f21ed6728a2b0efc174c2daebde53de2e41e37ea0e0ecd584ae284da32ede43",
+      "bytes": 5121985,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/b36c2919-010b-439a-8ec1-774be03ecb11/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "2f9d199994548688a99c6bac05fd4ff4af49dd7de31343fdcc3d4613fce706b1",
+      "bytes": 2181136,
+      "pixels": [
+        1207,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/potting-bench [('front', 54, 1261), ('side', 1261, 1826), ('back', 1826, 2729)]"
+    },
+    "view_side.png": {
+      "sha256": "9785b179644a83414d5f87284977663f2580dfd2bc8b7db9afd11ff9170611c8",
+      "bytes": 1026336,
+      "pixels": [
+        565,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/potting-bench [('front', 54, 1261), ('side', 1261, 1826), ('back', 1826, 2729)]"
+    },
+    "view_back.png": {
+      "sha256": "9ccfae77f4b206f83dfe65b1970f89fa4c3dee1be3ff33caa7be19ee84b28729",
+      "bytes": 1599039,
+      "pixels": [
+        903,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/potting-bench [('front', 54, 1261), ('side', 1261, 1826), ('back', 1826, 2729)]"
+    }
+  }
+}

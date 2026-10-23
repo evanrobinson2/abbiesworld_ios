@@ -1,0 +1,109 @@
+{
+ "what_i_did": [
+  [
+   "Orientation and size",
+   "Z up, metres, origin at the trunk base on the ground, front -Y. 6.97 m tall, crown about 3.2 x 3.0 m. No animation and no variants (tree group), exported with export_animations=False."
+  ],
+  [
+   "Views",
+   "views/ holds re-keyed targets made by make_views.py. The harness mask lost most of the white trunk (white bark on a cream backdrop is under its colour threshold, and what survived was removed by its shadow and size filters), and kept the ground line and cast shadow. make_views.py uses a lower threshold, applies the shadow filter only near the ground, closes the trunk pieces together, and cuts everything below the trunk base. All three sheet views are kept. They are three different individual trees rather than one tree turned, and front and side are lopsided in directions that contradict the hero, so they score lower than the back. views/hero.png is the hero keyed the same way."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py renders from the hero's own direction, 30 deg off the front towards +X and 10 deg up, with the harness lens and distance. A yaw/elevation grid barely separated the candidates (a weeping tree is nearly round), so the hero's near-level view was chosen and held fixed from round 2."
+  ],
+  [
+   "Trunk",
+   "A 7-sided faceted tube along a Catmull-Rom S-curve (bends +X low, -X through the crown, back near the top). It flares to 0.15 m radius at the ground and tapers to 0.03 m at 6.75 m. A dark rough Bark_Dark sleeve with a ragged top covers the base up to about 0.75 m. 36 wrapped Bark_Black patches sit on it: big black diamonds below 2 m and thin bands higher up."
+  ],
+  [
+   "Crown",
+   "12 thin Bark_White branches (3-sided) arch out and up from the trunk between 3.7 and 6.4 m, then over and down. Their crests show above the leaves at the crown top. Each branch drops 6 hanging threads, and 10 short dark inner threads add depth. Each thread hangs from a random point past the middle of its arch, within +-9 deg of the branch, so there is open sky between one branch's curtain and the next, and the trunk and arches show through in several places. A thread is a string of loose diamond leaf cards (2 triangles each), each with its own size (0.5-1.3x, smaller towards the tip), spacing, turn (+-50 deg) and tilt (+-25 deg). A thread takes one main green, with about 20% of its cards in the other. Threads hanging nearer the trunk are dark. Tips end anywhere from 2.0 to 4.2 m, and longer threads on the +X side reach 1.4 to 2.0 m as in the hero."
+  ],
+  [
+   "Game readiness",
+   "3,789 triangles (budget raised to 4k), 6 meshes, one flat material each: Bark_White, Bark_Dark, Bark_Black, Leaf_Light, Leaf_Dark. Single-plane cards with doubleSided materials (the game keeps double-sided materials for regional plants). to_game.py birch ran cleanly."
+  ]
+ ],
+ "good": [
+  "It reads as an airy weeping birch: fine threads of loose leaf cards with sky between them, the white trunk with black patches visible up through the crown, and arching branch tops above the leaves.",
+  "Mixed greens per thread, darker inside, with no striping.",
+  "3.8k triangles, under the 4k budget."
+ ],
+ "off": [
+  "IoU is lower than in round 10 (hero 0.558, sheet mean 0.511) because the target masks are solid and every gap now counts against it. The AD asked for openness over IoU.",
+  "The sheet's front and side views are different lopsided trees, as noted before.",
+  "The hero crown is denser and fuller than this one. Matching its hundreds of tiny leaves within 4k triangles means fewer, larger cards and more sky.",
+  "The dark base reads as a smooth brown sleeve rather than rough bark."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build: S-curved trunk, bark patches, 11 arching branches, wide (0.42 m) smooth V-section ribbons hanging to 2.0 to 2.7 m. Read as a banana plant. Targets re-keyed in views/ to get the white trunk back and drop the ground line. Hero scored at a 45/12 guess.",
+   "mean_iou": 0.473,
+   "hero_iou": 0.683
+  },
+  {
+   "round": 2,
+   "change": "Ribbons replaced by chains of twisted sawtooth leaf cards; narrower crown (radius 1.65), curtains end higher (2.6 to 3.4 m). Hero camera calibrated to 30/10.",
+   "mean_iou": 0.547,
+   "hero_iou": 0.651
+  },
+  {
+   "round": 3,
+   "change": "Wider, lower crown for the hero (radius 1.8, tips 2.3 to 3.0 m, long strands on the +X side to 1.5 to 2.0 m), cheaper 3-sided branches.",
+   "mean_iou": 0.53,
+   "hero_iou": 0.733
+  },
+  {
+   "round": 4,
+   "change": "Crown top leans -X as in the hero; fewer card rows and inner curtains to get under 3k. The gaps that opened cost IoU.",
+   "mean_iou": 0.501,
+   "hero_iou": 0.712
+  },
+  {
+   "round": 5,
+   "change": "Fuller cards (0.5 m, neck 0.5, twist 15 deg), crown radius x0.85, 12 branches x 4 curtains.",
+   "mean_iou": 0.604,
+   "hero_iou": 0.792
+  },
+  {
+   "round": 6,
+   "change": "Narrower crown top, a 20 deg window in the curtains so the trunk shows, Leaf_Light toned down.",
+   "mean_iou": 0.601,
+   "hero_iou": 0.768
+  },
+  {
+   "round": 7,
+   "change": "13 branches, using the triangles freed in round 6.",
+   "mean_iou": 0.608,
+   "hero_iou": 0.775
+  },
+  {
+   "round": 8,
+   "change": "Bark: bigger black diamonds below 2 m, thin bands above, taller ragged dark base (0.75 m).",
+   "mean_iou": 0.613,
+   "hero_iou": 0.781
+  },
+  {
+   "round": 9,
+   "change": "Half the outer curtains Leaf_Dark (was a third), Leaf_Light slightly duller, for the hero's mix of greens.",
+   "mean_iou": 0.613,
+   "hero_iou": 0.781
+  },
+  {
+   "round": 10,
+   "change": "Final 768 px / 48 sample render and score; to_game.py birch.",
+   "mean_iou": 0.615,
+   "hero_iou": 0.779
+  },
+  {
+   "round": 11,
+   "change": "AD round: curtains rebuilt as about 80 thinner threads of loose, randomised diamond leaf cards (size, spacing, turn, tilt), one green per thread with 20% of cards in the other, dark threads inside, threads fanned per branch so the crown is open, branch crests above the leaves, broader crown top, budget 4k. Final 768/48.",
+   "mean_iou": 0.511,
+   "hero_iou": 0.558
+  }
+ ],
+ "moving_parts": "None. The game scales, poses and recolours regional trees itself (seasonal recolour from the Leaf_ material names).",
+ "creative_additions": "The ragged dark base sleeve, and leaf cards that shrink towards each thread's tip."
+}

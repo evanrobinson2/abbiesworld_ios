@@ -1,0 +1,19 @@
+{
+ "id": "sting-reveal",
+ "take": 2,
+ "title": "Reveal",
+ "kind": "sting",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "CZ6Onm5ANJ4e0cTXKgzb",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, held breath then a bright orchestral bloom, glockenspiel sparkle, ta-da without being cheesy. Sting: short, complete musical gesture. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 4000
+ },
+ "date": "2026-10-22",
+ "sha256": "5039a92e69871917dd9aa5cd64123e9f08956310eccc14d368216b5ef0068df9",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-2.master.mp3"
+}

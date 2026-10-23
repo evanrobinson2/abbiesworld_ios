@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "goldenrod",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/WW-347.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a clump of goldenrod, upright stems topped with plumes of yellow flowers, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "c33006cd-d69a-4c57-af9d-23de6b89c8f9",
+      "grid_url": "https://www.midjourney.com/jobs/c33006cd-d69a-4c57-af9d-23de6b89c8f9?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "015c79eb-005e-4c00-b655-3d9455759e47",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:02:18.673Z",
+      "grid_done_at": "2026-10-23T00:02:36.675Z",
+      "upscale_clicked_at": "2026-10-23T00:02:48.432Z",
+      "downloaded_at": "2026-10-23T00:03:57.093Z",
+      "pick_reason": "upright clump with yellow plumes and margin above the tallest plume"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "9b423252091429f1fee55a9fbe54e0d372f15009f6fbe08498d9dfaff52886a4",
+      "bytes": 4132609,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/015c79eb-005e-4c00-b655-3d9455759e47/0_0.png"
+    }
+  }
+}

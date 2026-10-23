@@ -1,0 +1,394 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/family-home-charming",
+ "name": "family-home-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "the household's home",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "2c04a9b6-58b2-421b-a0f8-db6ef58b8c09",
+    "grid_url": "https://www.midjourney.com/jobs/2c04a9b6-58b2-421b-a0f8-db6ef58b8c09?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "88224c25-520b-44e8-8577-51e36f7433f7",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:04:33.631Z",
+    "grid_done_at": "2026-10-23T00:04:51.633Z",
+    "upscale_clicked_at": "2026-10-23T00:05:02.919Z",
+    "downloaded_at": "2026-10-23T00:06:15.210Z",
+    "pick_reason": "chubby storybook cottage with two blue-shuttered windows and flower boxes, stone step, chimney and stone foundation"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "a9a07666-3641-49b2-9c80-1f0ddcc92438",
+    "grid_url": "https://www.midjourney.com/jobs/a9a07666-3641-49b2-9c80-1f0ddcc92438?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "dccb360c-7285-495f-8cb2-4680ac4fb1fc",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:06:25.276Z",
+    "grid_done_at": "2026-10-23T00:06:43.279Z",
+    "upscale_clicked_at": "2026-10-23T00:06:53.717Z",
+    "downloaded_at": "2026-10-23T00:08:16.994Z",
+    "pick_reason": "front with door, gable side and back of one chubby cottage, well separated; sheet 1 had identical side and back"
+   }
+  },
+  "files": {
+   "hero.png": "f2fd10649f22175e2350478f200b63216b778606c84bbd84edf4cff107c85287",
+   "turnaround.png": "359f66b39597320ad56a2800e0aa1747a62f46817ef61e6f911936447608d252",
+   "view_front.png": "7504ece37404ef3fa350e0bc3239da192363ba71327b1353e00715531563aeb5",
+   "view_side.png": "12dc138e14bb94538239c872f127d0436c580ac5bb259569cbff0dda8983cb81",
+   "view_back.png": "56609544005c3a3aa570da788c0dba00b107f93f3f12698d7fcab779e7d4be54"
+  },
+  "folder": "tools/ranch-rebuild/mj/family-home-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/family-home-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First full charming build: 6.5 x 4.6 m, 51 deg roof, scalloped tabs, rolled ridge, sag deform, bulging plaster skins, bowed timbers, dormer, gable door. 15.5k tris, then budget cuts (no timber bevel, 3-point butts, larger courses) to 9.9k. Hero camera from the normal model's estimate.",
+    "hero_iou": 0.815
+   },
+   {
+    "round": 2,
+    "change": "Hero camera refit to 45 deg / 8 deg; deeper eaves (0.7) and gable overhang (0.55), more eave flare, 49 deg pitch, bigger and lower dormer, taller and wider chimney.",
+    "hero_iou": 0.836
+   },
+   {
+    "round": 3,
+    "change": "Footing stones open on their unseen faces (8.9k tris), chimney moved from the back slope to just in front of the ridge so it shows as in the hero, bigger windows, door, chimney cap and pots, brick patches on the visible face, fuller flower boxes, stronger plaster bulge.",
+    "hero_iou": 0.841
+   },
+   {
+    "round": 4,
+    "change": "Whole-house toy lean (0.12 m toward +X at the ridge), with the chimney riding the roof deform; the chimney (x 2.4) and dormer (x -1.0) pulled apart so the stack shows to the right of the dormer.",
+    "hero_iou": 0.837
+   },
+   {
+    "round": 5,
+    "change": "Final render at 768 px with 48 samples.",
+    "hero_iou": 0.835
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/family-home (build.py, make_views.py, hero_check.py, run.sh) and reshaped it. Same STATE switch and states (planned, foundation, frame, roof, complete), same origin (footprint centre on the ground), Z up, ridge along X, front -Y, same material names and roles, plus new ones only for new details: Stone_Cream (chimney stack), Clay_Pot (chimney pots), Flower_Orange. Cloth_Mat and Grass_Green are gone because the hero has no doormat and no grass."
+   ],
+   [
+    "Orientation",
+    "The hero wins: its door is on the gable end, not the long side as in the normal model. So the -X gable (the hero's visible gable) carries the big arched door and its stone step, and the -Y long side carries the two arched shuttered windows with flower boxes and the dormer above them. The chimney stands just in front of the ridge toward the +X end, to the right of the dormer as in the hero. The back wall and the +X gable each get one shuttered window, so all four sides read."
+   ],
+   [
+    "Footprint",
+    "The hero's plan is close to square (about 1.15:1), the normal model's bounding box is 1.32:1 and the game rescales uniformly to the old footprint, so I compromised: 6.5 x 4.6 m walls, with an 8.23 x 6.51 m bounding box (1.26:1)."
+   ],
+   [
+    "Views (views/, built by make_views.py)",
+    "Only views/hero.png is scored. The turnaround sheet draws a different, tall and narrow cottage on a near-square plan, with the door on the long side, no dormer, flat rectangular windows and a much steeper roof, and its 'front' is a 3/4 view. So view_front, view_side and view_back are all dropped. The harness mask kept the hero's cast shadow on the left and lost the cream chimney stack (almost the backdrop colour). make_views.py keys the hero itself: it removes the orange-tinted shadow in its corner, traces the chimney stack by hand, and gives near-backdrop plaster a darker, hue-shifted tint so the harness doesn't read it as shadow."
+   ],
+   [
+    "Hero check (hero_check.py)",
+    "Renders from the MJ hero's direction (about 45 deg off the front toward -X, 8 deg up) with the harness lens and scores against views/hero.png. A sweep from 35 to 55 deg and 4 to 12 deg moved the IoU by only about 0.02, so the direction was picked by eye."
+   ],
+   [
+    "Charming shape",
+    "One deform pass shapes the storybook roofline. Weighted by height above the girt, the ridge sags 0.24 m mid-length, sits 0.14 m higher at the -X end and wanders 0.1 m in plan. The eave tips flick up 0.2 m, and the whole house leans 0.12 m toward +X at the ridge. Walls and footing stay put; the chimney rides along with the roof, then gets its own 5 deg lean."
+   ],
+   [
+    "Craft",
+    "There are about 230 big rounded scalloped shingle tabs (0.62 m courses, butts lifted 0.15 m, rounded butt outlines, 30% lighter teal) under a thick rolled ridge (0.26 m tube) that runs past both gables. The dormer has its own scalloped roof, rolled ridge, timber rake trim and an arched window. Cream plaster skins bulge up to 0.14 m between the timbers (0.08 m in the gable triangles). The timbers are proud and bowed: corner posts, girts with their ends running past the corners, curved knee braces, wishbone arched braces on both gable triangles, arched braces flanking the door and the +X window. The oversized arched plank door has a round window, an iron latch, a raised plaster arch reveal and a thick curved timber hood, with two chunky stone steps. The arched windows have chunky frames, mullions, sills, chunky blue shutters and flower boxes on brackets with leaf clumps and pink and orange flowers. The footing is big soft-bevelled fieldstones in one or two lumpy courses. The chimney is a tapered cream stone stack with brick patches, a chunky brick cap with a corbel ring of big bricks, and two clay pots. Soft bevels (Bevel modifier, applied on export) are on the stones, step, chimney, bricks and stakes."
+   ],
+   [
+    "Construction states",
+    "planned: corner stakes, batter boards, orange mason's lines, a dug footing trench and a door peg on the -X gable. foundation: stone footing, plank floor and the door steps. frame: adds the bowed timber frame, sills and window posts (bare-frame only), and a ridge beam and rafters, all following the sagging roofline. roof: adds the deck, scalloped shingles, rolled ridge, barge boards and chimney, with the walls still open (the dormer arrives with the walls). complete: identical to family-home-charming.glb."
+   ],
+   [
+    "Game readiness",
+    "8,884 triangles complete (budget 9k). Other states: planned 1,196, foundation 1,032, frame 2,164, roof 5,814. 28 meshes, one flat Principled material each, named by role, exported with export_animations=False. To get under budget, the stone footing leaves the unseen bottom and back faces of each stone open, the shingle butts have 3 rounding points, and the timbers have no bevel."
+   ]
+  ],
+  "creative_additions": "Two clay chimney pots on a corbelled brick cap, an iron latch and knob on the door, a raised plaster arch reveal round the door, orange and pink flowers mixed in the boxes, a slight whole-house lean, and a door peg in the planned stage marking where the gable door goes."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   8.227920532226562,
+   6.506035804748535,
+   8.713129997253418
+  ],
+  "triangles": 8884,
+  "materials": [
+   "Timber_Brown",
+   "Stone_Cream",
+   "Brick_Red",
+   "Clay_Pot",
+   "Metal_Iron",
+   "Plank_Door",
+   "Stone_Step",
+   "Plaster_Cream",
+   "Plank_Floor",
+   "Leaf_Green",
+   "Flower_Pink",
+   "Flower_Orange",
+   "Stone_Dark",
+   "Stone_Grey",
+   "Roof_TealDark",
+   "Roof_Teal",
+   "Roof_TealLight",
+   "Plank_Shutter",
+   "Glass_Blue"
+  ],
+  "parts": [
+   {
+    "name": "barge_boards",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "chimney",
+    "materials": [
+     "Stone_Cream"
+    ]
+   },
+   {
+    "name": "chimney_bricks",
+    "materials": [
+     "Brick_Red"
+    ]
+   },
+   {
+    "name": "chimney_cap",
+    "materials": [
+     "Brick_Red"
+    ]
+   },
+   {
+    "name": "chimney_pots",
+    "materials": [
+     "Clay_Pot"
+    ]
+   },
+   {
+    "name": "door_frame",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "door_handle",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "door_leaf",
+    "materials": [
+     "Plank_Door"
+    ]
+   },
+   {
+    "name": "door_step",
+    "materials": [
+     "Stone_Step"
+    ]
+   },
+   {
+    "name": "dormer_walls",
+    "materials": [
+     "Plaster_Cream"
+    ]
+   },
+   {
+    "name": "floor",
+    "materials": [
+     "Plank_Floor"
+    ]
+   },
+   {
+    "name": "flower_boxes",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "flower_leaves",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "flowers",
+    "materials": [
+     "Flower_Pink"
+    ]
+   },
+   {
+    "name": "flowers_orange",
+    "materials": [
+     "Flower_Orange"
+    ]
+   },
+   {
+    "name": "foundation_core",
+    "materials": [
+     "Stone_Dark"
+    ]
+   },
+   {
+    "name": "foundation_stones",
+    "materials": [
+     "Stone_Grey"
+    ]
+   },
+   {
+    "name": "plaster_trim",
+    "materials": [
+     "Plaster_Cream"
+    ]
+   },
+   {
+    "name": "plaster_walls",
+    "materials": [
+     "Plaster_Cream"
+    ]
+   },
+   {
+    "name": "roof_deck",
+    "materials": [
+     "Roof_TealDark"
+    ]
+   },
+   {
+    "name": "roof_ridge",
+    "materials": [
+     "Roof_TealDark"
+    ]
+   },
+   {
+    "name": "roof_shingles",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "roof_shingles_light",
+    "materials": [
+     "Roof_TealLight"
+    ]
+   },
+   {
+    "name": "shutters",
+    "materials": [
+     "Plank_Shutter"
+    ]
+   },
+   {
+    "name": "timber_frame",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "wall_core",
+    "materials": [
+     "Plaster_Cream"
+    ]
+   },
+   {
+    "name": "window_frames",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "window_glass",
+    "materials": [
+     "Glass_Blue"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "complete",
+  "foundation",
+  "frame",
+  "planned",
+  "roof"
+ ],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.835,
+  "per_view": {},
+  "triangle_budget": 9000,
+  "within_budget": true,
+  "good": [
+   "It reads as the hero: a chubby half-timbered cottage with a deep teal scalloped roof, a sagging, crooked rolled ridge, a dormer, a leaning cream-stone chimney with a brick cap and pots, an arched door on the gable and blue-shuttered arched windows with flower boxes. Hero IoU 0.835 at 768 px.",
+   "It's still clearly the same object and game piece as family-home: same states, origin, material roles and a similar footprint ratio. The construction states read as a clear sequence."
+  ],
+  "off": [
+   "The hero's plan is nearly square; I kept it longer (1.26:1 bounding box) so it fills the normal model's footprint in the game.",
+   "The hero has strong perspective that the harness lens doesn't match. The gable looks broader and the ridge drops more steeply to the right in the hero than in any render.",
+   "The chimney is smaller in the frame and partly hidden behind the dormer roof from the hero direction. In the hero, the full stack stands clear to the right of the dormer.",
+   "The plaster bulge and the roof tabs are low-poly and flat-shaded, not the hero's sculpted clay softness. The footing stones are bevelled boxes, not truly round.",
+   "The door is on the -X gable (hero), not on the front -Y side as in the normal model. If the game expects the door to face the street, rotate the placement."
+  ]
+ },
+ "exports": {
+  "runtime": "family-home-charming.glb",
+  "variants": {
+   "complete": "variants/complete.glb",
+   "foundation": "variants/foundation.glb",
+   "frame": "variants/frame.glb",
+   "planned": "variants/planned.glb",
+   "roof": "variants/roof.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/family-home-planned.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/family-home-foundation.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/family-home-frame.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/family-home-roof.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/family-home-complete.json"
+   ]
+  }
+ },
+ "files": {
+  "family-home-charming.glb": {
+   "sha256": "27d8eb4ca09c2fdab877682443de142c5fe43db0dbc5291d6e477a062fb5597a",
+   "bytes": 496804
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "7681a3eb071eac01bf83dcd5785ce2b7a61e43d8",
+  "path": "tools/ranch-rebuild/models/family-home-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

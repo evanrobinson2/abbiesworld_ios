@@ -1,0 +1,19 @@
+{
+ "id": "ranch-workday",
+ "take": 1,
+ "title": "Ranch Workday",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "1ZgVh54ZoedI7jHvTcaw",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, playful but not silly, G major, 104 bpm, pizzicato strings, marimba ostinato, clarinet melody, staccato flute and bassoon, busy farm chores. Groove: pizzicato and marimba set the pulse. Tune: clarinet melody over the pulse. Trade: flute and bassoon trade a light staccato figure, glockenspiel sparkles. Turnaround: back to the groove, loops cleanly. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 120000
+ },
+ "date": "2026-10-22",
+ "sha256": "e8d116e0bc9bd47cbdd8ab3cc9420c9cd2dd78e5d2d3beecc3822a302fad5498",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-1.master.mp3"
+}

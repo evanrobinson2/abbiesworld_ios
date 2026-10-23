@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#120f0b">
+<title>Explore · Abbie's World</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap">
+<link rel="stylesheet" href="/explore/explore.css?v=2">
+<script type="importmap">{"imports":{"three":"/simulations/vendor/three.module.js"}}</script>
+</head>
+<body>
+<!-- Explore keeps its own look and quiet: these markers tell view-context.js to skip the app theme and the jukebox here. -->
+<script type="text/plain" data-app-appearance data-app-jukebox></script>
+<script src="/view-context.js"></script>
+<div class="room" aria-hidden="true"></div>
+
+<nav class="rail" id="rail" aria-label="Library">
+  <div class="rail-top">
+    <a class="door" id="door" href="/sandbox" title="Back to the ranch"><img src="/abbies-ranch-logo.png" alt="Back to the ranch"></a>
+    <button class="fold" id="fold" aria-label="Fold the shelf rail" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  </div>
+  <div class="rail-word">Explore</div>
+  <div class="collections" id="collections" role="list"></div>
+  <div class="rail-head"><span>Shelves</span><button class="mini" id="new-shelf" aria-label="New shelf">+</button></div>
+  <div class="shelves" id="shelves" role="list"></div>
+  <a class="back" id="back" href="/sandbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Back to the ranch</span></a>
+</nav>
+
+<header class="bar">
+  <button class="burger" id="unfold" aria-label="Show the shelf rail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+  <label class="seek"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="q" type="search" placeholder="Find anything" autocomplete="off" spellcheck="false"><kbd>/</kbd></label>
+  <div class="density" role="group" aria-label="Tile size">
+    <button data-d="-1" aria-label="Smaller tiles"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></button>
+    <button data-d="1" aria-label="Bigger tiles"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/></svg></button>
+  </div>
+  <button class="drawer-toggle" id="drawer-toggle" aria-label="Filters and view" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><b id="filter-count" hidden></b></button>
+</header>
+
+<main class="field" id="field" tabindex="-1">
+  <section class="studies" id="studies" hidden></section>
+  <div id="grid" class="grid-root"></div>
+</main>
+
+<aside class="drawer" id="drawer" aria-label="Filters and view">
+  <section class="picked" id="picked" hidden>
+    <div class="picked-count"><b id="picked-n">0</b><span>picked</span></div>
+    <div class="picked-strip" id="picked-strip"></div>
+    <div class="picked-actions" id="picked-actions"></div>
+    <button class="ghost" id="picked-clear">Let go</button>
+  </section>
+  <section class="facet" id="facets"></section>
+  <section class="facet">
+    <h3>View</h3>
+    <div class="toggles" id="view-toggles"></div>
+  </section>
+  <section class="keys">
+    <h3>Keys</h3>
+    <dl><dt>/</dt><dd>Find</dd><dt>1–5</dt><dd>Collections</dd><dt>− +</dt><dd>Tile size</dd><dt>⇧ click</dt><dd>Pick a run</dd><dt>⌘ click</dt><dd>Pick one more</dd><dt>← →</dt><dd>Step in the viewer</dd><dt>Esc</dt><dd>Close / let go</dd></dl>
+  </section>
+</aside>
+
+<div class="lens" id="lens" hidden aria-modal="true" role="dialog" aria-label="Viewer">
+  <div class="lens-veil" id="lens-veil"></div>
+  <div class="lens-stage" id="lens-stage"></div>
+  <aside class="lens-info" id="lens-info"></aside>
+  <div class="lens-strip" id="lens-strip" aria-label="Neighbours"></div>
+  <button class="lens-close" id="lens-close" aria-label="Close viewer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="lens-step prev" data-step="-1" aria-label="Previous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lens-step next" data-step="1" aria-label="Next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+
+<div class="ghost-drag" id="ghost-drag" hidden></div>
+<script type="module" src="/explore/explore.js?v=2"></script>
+</body>
+</html>

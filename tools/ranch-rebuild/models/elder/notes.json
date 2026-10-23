@@ -1,0 +1,127 @@
+{
+ "what_i_did": [
+  [
+   "Targets",
+   "The umbels are almost the colour of the cream backdrop, so the harness colour mask drops most of the hero's top half. make_views.py keys by colour difference OR local texture (the florets are speckled, the backdrop is flat), closes, fills small holes and drops the cast shadow. Near the ground it keeps only dark-green foliage, because the floor horizon and the green-grey shadow also differ from the edge colour. Correction: in rounds 1 to 12 the hero mask was cut at 0.692 of the image height. The real base is at 0.87, so the bottom fifth of the shrub was missing and the hero looked 1.55x wider than tall. With the correct cut the hero is about 1.15x wider than tall (aspect 0.87), which agrees with the AD. Rounds 1 to 12 were scored against the truncated mask, so their hero numbers do not compare with the later rounds. Per the AD, the sheet is used for proportion only: views/view_* are the sheet masks stretched to aspect 0.85, which checks that the dome reads from every side. They still carry the sheet's bare waist and two-tier gap, which this model leaves out on purpose."
+  ],
+  [
+   "Hero camera",
+   "hero_check.py renders from 30 deg off the front, 8 deg up. A yaw/elevation grid (hero_check.py calibrate) on the corrected mask put the best elevation at 6 to 12 deg. Yaw barely matters for a near-round shrub."
+  ],
+  [
+   "Massing",
+   "A dome of revolution, rounder and taller after the AD round. The half-width is 1.30 m at the ground, widest (1.82 m) at 1.0 m, with a round top at 2.9 m. The whole shrub is scaled to 0.95 horizontally. It is 3.15 m tall (to the crowning head) and about 4.1 x 3.8 m across, so width is about 1.3x height, as asked. A lumpy core in a deep shade green (Leaf_Shade) keeps the dome solid and reads as the shadowed interior between the sprays."
+  ],
+  [
+   "Foliage",
+   "118 pinnate sprays, each with two leaflet pairs and a terminal leaflet. Each leaflet is a pointed diamond card, 0.42 x 0.31 m, folded on its midrib (2 triangles). They lie along the shell like shingles and fan sideways higher up. No spray starts within 0.42 m of a flower head, so the heads sit clear on top. Five foliage gaps are left open for stems. About a third of the sprays are Leaf_Mid, the rest Leaf_Dark."
+  ],
+  [
+   "Umbels",
+   "15 cauliflower heads, with no flat discs. Nine sit on the shoulders at about 1.75 m, leaning out along the shell. Four more are at about 2.45 m, one crowns the top and one smaller head sits low at the front left, as in the hero. Each head is a loose, slightly irregular dome of 15 to 19 faceted florets (jittered triangular bipyramids, 6 triangles each, 0.13 to 0.17 m) on a sunflower spiral 0.32 to 0.34 m in radius, plus 3 florets drooping over the rim. The florets come in three cream tones: Flower_Cream, Flower_Ivory and Flower_Butter."
+  ],
+  [
+   "Stems",
+   "12 reddish-brown stems (Stem_Brown) arch from a clustered base out to the shell between 1.3 and 2.5 m. Five more stems run out through the foliage gaps, two of them on the hero side and the others round the sides, and curl over outside the leaves, so the arching branches show."
+  ],
+  [
+   "Game readiness",
+   "3,483 triangles (raised budget 3.5k) in 7 meshes, one flat double-sided material each: Leaf_Shade, Leaf_Dark, Leaf_Mid, Stem_Brown, Flower_Cream, Flower_Ivory and Flower_Butter. The game's seasons recolour all of them by name. Origin is at the base centre on the ground, Z up, front -Y. No animation and no variants. to_game.py elder ran cleanly, and GF-159.glb is byte-identical to elder.glb."
+  ]
+ ],
+ "good": [
+  "Hero IoU 0.792 against the corrected hero mask, from the hero's direction. The round dome, the cream crown of heads and the bulk to the ground all read.",
+  "The heads read as fluffy cream clusters, not flat discs, and the dark core gives the foliage depth.",
+  "The arching red-brown stems now show at the sides and in the gaps.",
+  "3,483 triangles, inside the raised 3.5k budget."
+ ],
+ "off": [
+  "The hero's heads are bigger and fuller still: cream covers most of its top half. Mine follow the AD's size (about 0.6 m spiral plus the floret size) and leave more leaves showing between them.",
+  "Width is about 1.3x height, as the AD asked. The corrected hero mask suggests about 1.15x, so the model is slightly wider than the hero.",
+  "The sheet views score 0.62 to 0.67 against the stretched sheet masks, because the sheet's open, bare-stemmed, two-tier shrub is deliberately not matched.",
+  "The leaflets are fewer and larger than the hero's, to pay for the florets.",
+  "The hero camera direction was calibrated against this model, so the hero number is a guide."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build: 3 m dome, 150 five-leaflet sprays pointing out, 15 disc umbels, 12 stems, dark core (hero camera at 30/12 deg).",
+   "mean_iou": 0.686,
+   "hero_iou": 0.602
+  },
+  {
+   "round": 2,
+   "change": "Bigger leaflets and umbels, a flatter top. It read as a drum with a spiky leaf skirt.",
+   "mean_iou": 0.584,
+   "hero_iou": 0.668
+  },
+  {
+   "round": 3,
+   "change": "Elliptical dome profile. Sprays lie along the surface like shingles instead of sticking out. Hero camera recalibrated to 30/3 deg (0.715 there).",
+   "mean_iou": 0.722,
+   "hero_iou": 0.715
+  },
+  {
+   "round": 4,
+   "change": "Squatter dome (top 2.66 m) with a wider base.",
+   "mean_iou": 0.662,
+   "hero_iou": 0.771
+  },
+  {
+   "round": 5,
+   "change": "Widest point lowered to 0.8 m, and the umbel rings lowered with it.",
+   "mean_iou": 0.656,
+   "hero_iou": 0.778
+  },
+  {
+   "round": 6,
+   "change": "Tried a wider ground base (worse, reverted). Kept taller umbels with 5 floret blobs.",
+   "mean_iou": 0.65,
+   "hero_iou": 0.767
+  },
+  {
+   "round": 7,
+   "change": "Narrower upper shoulders.",
+   "mean_iou": 0.664,
+   "hero_iou": 0.765
+  },
+  {
+   "round": 8,
+   "change": "Horizontal spread x1.08 to the hero's width-to-height ratio.",
+   "mean_iou": 0.61,
+   "hero_iou": 0.819
+  },
+  {
+   "round": 9,
+   "change": "Bigger leaflets (0.42 m) for coverage, so the core no longer shows as a smooth ball. Rounder floret blobs.",
+   "mean_iou": 0.609,
+   "hero_iou": 0.834
+  },
+  {
+   "round": 10,
+   "change": "Umbels rebuilt as faceted shallow domes with 3 clumps (fewer triangles). 175 sprays. The leaves now buried the umbels.",
+   "mean_iou": 0.58,
+   "hero_iou": 0.835
+  },
+  {
+   "round": 11,
+   "change": "Umbels pushed out and lifted onto the foliage, upper sprays tucked under them, spread back to x1.04.",
+   "mean_iou": 0.605,
+   "hero_iou": 0.831
+  },
+  {
+   "round": 12,
+   "change": "Darker greens to match the hero, thicker stems. Final 768 px / 48 sample render and score. to_game.py elder.",
+   "mean_iou": 0.605,
+   "hero_iou": 0.826
+  },
+  {
+   "round": 13,
+   "change": "AD round: heads rebuilt as cauliflower clusters of 15 to 19 faceted florets in 3 cream tones, some drooping, leaning out on the shoulders. Rounder dome, widest at 1 m, 3.15 m tall and width about 1.3x height. 5 stems shown through foliage gaps. Leaves cleared round the heads, deep-shade core. Hero mask fixed (it had been cut at 0.69 instead of 0.87) and the hero camera recalibrated to 8 deg.",
+   "mean_iou": 0.652,
+   "hero_iou": 0.792
+  }
+ ],
+ "moving_parts": "None. The game poses and recolours the shrub itself (seasons work from the Leaf_, Stem_ and Flower_ material names).",
+ "creative_additions": "One smaller head low on the front left, as in the hero. Florets drooping over the rim of each head. Stems curling out through gaps in the foliage. A deep-shade core so the gaps read as depth."
+}

@@ -1,0 +1,211 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/bench",
+ "name": "bench",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "household bench",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "aaf33b53-0f4a-48d1-8cac-6a8749a565df",
+    "grid_url": "https://www.midjourney.com/jobs/aaf33b53-0f4a-48d1-8cac-6a8749a565df?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "b4ccbf6e-77fd-4bef-bd10-e56e34c08fd8",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:29:33.127Z",
+    "grid_done_at": "2026-10-22T23:29:51.130Z",
+    "upscale_clicked_at": "2026-10-22T23:30:01.093Z",
+    "downloaded_at": "2026-10-22T23:31:11.791Z",
+    "pick_reason": "thick plank seat on clearly splayed legs with a stretcher, whole bench in frame"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a simple rustic wooden garden bench, a thick plank seat on sturdy splayed legs with a stretcher, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "383043a0-a240-4d9c-8719-3fbba11e95f9",
+    "grid_url": "https://www.midjourney.com/jobs/383043a0-a240-4d9c-8719-3fbba11e95f9?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "eee14c61-29d8-436c-af57-f635f02d1625",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:31:20.873Z",
+    "grid_done_at": "2026-10-22T23:31:38.877Z",
+    "upscale_clicked_at": "2026-10-22T23:31:48.929Z",
+    "downloaded_at": "2026-10-22T23:33:10.797Z",
+    "pick_reason": "long side, end view and three-quarter view in one row; the others stacked views in two rows"
+   }
+  },
+  "files": {
+   "hero.png": "9b1dfb841a15975fe6716d146e9165f84ffd1f497a1d74da21ae443796e31db8",
+   "turnaround.png": "6abdf05730b106e0b3de35d2996bd9cc926aaa46a60f3f0a58cf8b19552ead8a",
+   "view_front.png": "cf4173f63f26884dda366b77e2e9276020aa33cf73f41195213f7af64a797966",
+   "view_side.png": "b112ccfe5aa6d2365f590ae40c98daa212228fc0712ac31afdffa82eded389b6",
+   "view_back.png": "7f7e06a3ec33f198e2726970f37a356a0bc0cf1bb5d578c620ab41f9fab66606"
+  },
+  "folder": "tools/ranch-rebuild/mj/bench"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/bench/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build to the brief: 1.60 x 0.42 x 0.45 m, 0.12 m two-plank seat, A-frame legs (0.105 to 0.135 m), caps, end rails, stretcher with tenon and peg, small braces. Orthographic hero camera calibrated to -40/16.",
+    "mean_iou": null,
+    "hero_iou": 0.718
+   },
+   {
+    "round": 2,
+    "change": "Seat top raised to 0.56 m, legs chunkier (0.13 to 0.16 m), wider splay (feet at +-0.27), braces bigger (0.075 m) and longer; recalibrated to -34/12.",
+    "mean_iou": null,
+    "hero_iou": 0.816
+   },
+   {
+    "round": 3,
+    "change": "Darker walnut and dark timber, crisper bevels, wider seam, longer tenon and bigger peg; harness run for the sheet reference view.",
+    "mean_iou": 0.272,
+    "hero_iou": 0.819
+   },
+   {
+    "round": 4,
+    "change": "Height swept (0.47 to 0.56 m) and settled at 0.52 m as a compromise with the brief's low bench; feet clamped flat to the ground; hero camera switched to an 85 mm perspective at -38/12.",
+    "mean_iou": null,
+    "hero_iou": 0.827
+   },
+   {
+    "round": 5,
+    "change": "Stretcher and end rails lowered to 0.17 m and thickened (0.10 m), legs lean 3 cm outward along X, braces from x 0.50 to 0.24; lowering the stretcher further to 0.155 m scored lower and was reverted. Final 768 px / 48 samples render.",
+    "mean_iou": 0.322,
+    "hero_iou": 0.858
+   }
+  ],
+  "what_was_done": [
+   [
+    "Orientation",
+    "A 1.6 m trestle bench with its long side at the front (-Y). The MJ hero sees the left (-X) end and the long front, so it is matched from off the front-left corner (-X, -Y)."
+   ],
+   [
+    "Views",
+    "The hero wins. views/hero.png is the MJ hero keyed by hue (backdrop and cast shadow have G/R about 0.9, the wood is red-brown), keeping the real openings between seat, legs, braces and stretcher. The turnaround sheet drew a taller, lighter bench with thin straight legs, so per the art director it is used for proportions of parts only; its long view (view_front.png) is scored for reference (0.32) and the end and second long views are dropped."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders from 38 deg off the front towards -X and 12 deg up with an 85 mm perspective lens pulled back to the harness framing (the hero's near end is slightly larger than the far one; orthographic scored 0.02 lower and the harness 50 mm lens 0.06 lower). Calibrated over a yaw/elevation grid, then held fixed."
+   ],
+   [
+    "Seat",
+    "Plank_Walnut: two 0.203 m planks, 0.12 m thick, 1.60 m long, with a 16 mm seam down the middle; each plank is a slightly different length and its end vertices are pushed and pulled up to 12 mm for rough, chunky sawn ends. 12 mm one-segment bevels."
+   ],
+   [
+    "Legs",
+    "Plank_Walnut: two A-frame pairs at x = +-0.58 m, splayed from y = +-0.12 at the cap to +-0.27 at the foot and leaning 3 cm outward along X, tapering from 0.13 x 0.10 m at the top to 0.16 x 0.12 m at the foot; feet cut flat to the ground. A 0.13 x 0.44 x 0.065 m cross-rail (cap) under the seat at each end."
+   ],
+   [
+    "Bracing",
+    "Timber_Dark: a low end rail between each leg pair, a 0.075 x 0.10 m stretcher at 0.17 m running through both end rails and out 0.13 m as a through-tenon, a vertical peg through each tenon, and a diagonal brace from the stretcher (x = +-0.50) up to the seat underside (x = +-0.24) at each end."
+   ],
+   [
+    "Game",
+    "3 objects, one material each: seat and legs Plank_Walnut, frame Timber_Dark (both timber role). 660 triangles (budget 2k). Origin at the footprint centre on the ground. No animation, export_animations=False."
+   ]
+  ],
+  "creative_additions": "Rough sawn plank ends of slightly different lengths, and through-tenons with pegs at both ends of the stretcher."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.6200358867645264,
+   0.6442094445228577,
+   0.5259476900100708
+  ],
+  "triangles": 660,
+  "materials": [
+   "Timber_Dark",
+   "Plank_Walnut"
+  ],
+  "parts": [
+   {
+    "name": "frame",
+    "materials": [
+     "Timber_Dark"
+    ]
+   },
+   {
+    "name": "legs",
+    "materials": [
+     "Plank_Walnut"
+    ]
+   },
+   {
+    "name": "seat",
+    "materials": [
+     "Plank_Walnut"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": 0.322,
+  "hero_iou": 0.858,
+  "per_view": {
+   "front": 0.322
+  },
+  "triangle_budget": 2000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.858 from the calibrated hero camera.",
+   "Reads at small size as a heavy slab on two splayed trestles with a dark stretcher and braces: two browns, chunky blocks.",
+   "660 triangles, a third of the budget."
+  ],
+  "off": [
+   "Seat top is at 0.52 m, not the 0.45 m in the brief: the hero's legs are longer relative to the 1.6 m seat (IoU rose steadily with height: 0.735 at 0.47 m, 0.80 at 0.53 m, 0.82 at 0.56 m), so 0.52 m is a compromise between the hero and a low bench.",
+   "The splayed feet make the footprint 0.64 m deep against the 0.42 m seat; the hero's feet stand out past the seat edges, and narrower feet scored lower.",
+   "The turnaround sheet view scores 0.32: it drew a taller, lighter bench with thin straight legs, which the art director told us to ignore.",
+   "The hero's peg is a lumpy hand-cut block; here it is a plain bevelled block on the tenon end.",
+   "No wood grain, cracks or knots: flat colours only, per the game rules."
+  ]
+ },
+ "exports": {
+  "runtime": "bench.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/garden-assets/GF-194.glb"
+   ]
+  }
+ },
+ "files": {
+  "bench.glb": {
+   "sha256": "fbc2cffdb900f1442e6e97f0d03a55bfd75bae1b18c4fb1619a963af5b4bc86e",
+   "bytes": 40720
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "d88b12aa9e152a366836de7c3ce34f2787c1a55a",
+  "path": "tools/ranch-rebuild/models/bench"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

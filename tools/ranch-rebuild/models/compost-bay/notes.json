@@ -1,0 +1,31 @@
+{
+ "what_i_did": [
+  ["Orientation", "The front (-Y) is a long 1.8 m wall and is the open working side: it is one board lower (2 planks, top at 0.48 m) and its two mid posts stop at 0.49 m, so the heap slopes down to it. The other three walls have 3 planks (top 0.73 m). The MJ hero shows a short end wall on the left and a long wall on the right, so it is matched from off the front-left corner (-X, -Y)."],
+  ["Views", "The hero wins. views/hero.png is the MJ hero keyed by hue (backdrop and its large cast shadow are warm and pale; timber is redder, compost darker) with a wide closing to fill the pale rim highlights. The turnaround sheet drew a near-cube box, so it is used for detail only (post rhythm, gaps, heap colour), not proportions. Its only orthographic view (split.py's view_back.png, a straight-on wall) is scored as views/view_front.png for reference; the two 3/4 views are dropped."],
+  ["Hero camera", "hero_check.py renders from the hero's own direction, 45 deg off the front towards -X and 18 deg up, with an orthographic camera (the hero reads near-isometric; the harness's close 50 mm lens converges far more). Calibrated over a yaw/elevation grid on the round-2 model, then fixed."],
+  ["Massing", "1.81 x 1.31 m footprint, 0.755 m corner posts (0.13 m square), walls 0.73 m. Mid posts (0.10 x 0.06 m) stand proud of the planks and finish flush with the corner posts: two per wall. Planks 0.20 m tall, 0.045 m thick, with 0.055 m real gaps through which the heap's dark sides show. Each board has a small random skew and tilt."],
+  ["Heap", "Soil_Compost: a closed 14 x 10 grid, jittered and displaced (lumps up to 5 cm), mounding 3.5 cm in the middle and sloping down to the low front board, flat shaded, plus 26 loose pyramid clods on top. Its sides run down to the ground so the plank gaps show compost, not air."],
+  ["Clippings", "Leaf_Green: 168 folded diamond leaf cards (2 tris each) in two clumps: a large one over the left (-X) half and a strip along the back right, as in the hero."],
+  ["Game", "4 objects, one material each: posts Timber_Post, planks Plank_Brown, compost Soil_Compost, clippings Leaf_Green (seasons recolour the leaves). 1848 triangles (budget 2k). No animation, export_animations=False."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.946 from the calibrated hero camera.",
+  "Reads at small size as a low brown slatted box with a dark top and two green patches; the lowered front wall marks the working side.",
+  "Real gaps between the planks show the compost behind them."
+ ],
+ "off": [
+  "The front wall is one board lower than in the hero, by art direction, so the hero's right-hand wall is lower than drawn.",
+  "The sheet view scores 0.41: it drew a near-cube (taller than wide), which the art director told us to ignore.",
+  "The hero's clippings are dense, fine-cut sprigs; 2-triangle leaf cards read as a coarser, spikier patch.",
+  "The hero doubles the near corner post (each wall ends in its own post); one square post per corner here.",
+  "No wood grain or knots: flat colours only, per the game rules."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build: 1.8 x 1.3 m, 0.78 m posts poking above 0.73 m walls, 3 plank rows (2 at the front), mounded heap (base 0.66, mound 0.08), two sparse clumps of 86 small leaves. Hero scored with the harness perspective lens from -X/-Y (best grid camera -45/12).", "mean_iou": null, "hero_iou": 0.889},
+  {"round": 2, "change": "Posts cut to wall height (0.755 corner, flush mids), heap raised nearer the brim (0.68) and flatter, more and bigger leaves, darker timber. Hero camera switched to orthographic and recalibrated to -45/18.", "mean_iou": null, "hero_iou": 0.944},
+  {"round": 3, "change": "Heap flatter (mound 0.035) and lumpier (0.05), front slope ends at 0.52; clumps widened to match the hero (168 broader leaves); timber darkened again.", "mean_iou": null, "hero_iou": 0.944},
+  {"round": 4, "change": "26 pyramid clods on the heap for the hero's chunky compost; planks set deeper so mid posts finish flush with the corner posts (footprint now 1.81 x 1.31 instead of 1.90 x 1.40). Final 768 px / 48 samples render; sheet front view scored for reference.", "mean_iou": 0.413, "hero_iou": 0.946}
+ ],
+ "moving_parts": "None: a static garden prop; the game poses models itself.",
+ "creative_additions": "The heap slopes down to the low front board like a turned working face, and loose clods sit on the surface."
+}
