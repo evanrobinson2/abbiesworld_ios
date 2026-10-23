@@ -384,7 +384,7 @@
         ".tar": 1
       },
       "commonImageDimensions": {
-        "32Ã—32": 1
+        "32×32": 1
       },
       "claims": [
         {
@@ -628,14 +628,14 @@
         ".crt": 1
       },
       "commonImageDimensions": {
-        "19Ã—19": 582,
-        "14Ã—14": 582,
-        "44Ã—30": 575,
-        "29Ã—20": 575,
-        "64Ã—48": 249,
-        "16Ã—16": 55,
-        "1017Ã—586": 6,
-        "128Ã—128": 5
+        "19×19": 582,
+        "14×14": 582,
+        "44×30": 575,
+        "29×20": 575,
+        "64×48": 249,
+        "16×16": 55,
+        "1017×586": 6,
+        "128×128": 5
       },
       "claims": [
         {
@@ -717,7 +717,7 @@
         {
           "domain": "mechanics",
           "title": "Classic Granary separates prerequisites from food effects",
-          "finding": "In the pinned classic ruleset, the Granary requires player technology Pottery, declares build_cost 40 and upkeep 1, and separately contributes 50 to Growth_Food and 50 to Shrink_Food when present in the city. The engine obtains each combined city bonus and clamps its savings percentage to 0â€“100. The building contribution is not necessarily the total city effect: other effects can contribute. This is configuration and source evidence, not confirmation that every game uses the classic ruleset.",
+          "finding": "In the pinned classic ruleset, the Granary requires player technology Pottery, declares build_cost 40 and upkeep 1, and separately contributes 50 to Growth_Food and 50 to Shrink_Food when present in the city. The engine obtains each combined city bonus and clamps its savings percentage to 0–100. The building contribution is not necessarily the total city effect: other effects can contribute. This is configuration and source evidence, not confirmation that every game uses the classic ruleset.",
           "basis": "pinned ruleset plus original engine-source inspection; runtime unobserved",
           "evidence": {
             "path": "data/classic/effects.ruleset",
@@ -884,14 +884,14 @@
         ".html": 1
       },
       "commonImageDimensions": {
-        "2048Ã—2048": 11,
-        "64Ã—64": 7,
-        "1024Ã—1024": 6,
-        "256Ã—256": 4,
-        "128Ã—128": 3,
-        "512Ã—512": 3,
-        "447Ã—1": 1,
-        "48Ã—48": 1
+        "2048×2048": 11,
+        "64×64": 7,
+        "1024×1024": 6,
+        "256×256": 4,
+        "128×128": 3,
+        "512×512": 3,
+        "447×1": 1,
+        "48×48": 1
       },
       "claims": [
         {
@@ -1014,7 +1014,7 @@
         {
           "domain": "rendering",
           "title": "Visuals are computed from particle properties",
-          "finding": "The particle renderer starts from each elementâ€™s color and a flat pixel mode, then supports glow, blur and fire modes with fallback behavior based on enabled rendering modes.",
+          "finding": "The particle renderer starts from each element’s color and a flat pixel mode, then supports glow, blur and fire modes with fallback behavior based on enabled rendering modes.",
           "basis": "source inspection",
           "evidence": {
             "path": "src/graphics/Renderer.cpp",
@@ -1090,14 +1090,14 @@
         ".jpeg": 1
       },
       "commonImageDimensions": {
-        "720Ã—360": 572,
-        "100Ã—100": 390,
-        "80Ã—80": 357,
-        "40Ã—40": 240,
-        "60Ã—60": 215,
-        "120Ã—120": 215,
-        "90Ã—90": 206,
-        "70Ã—70": 193
+        "720×360": 572,
+        "100×100": 390,
+        "80×80": 357,
+        "40×40": 240,
+        "60×60": 215,
+        "120×120": 215,
+        "90×90": 206,
+        "70×70": 193
       },
       "claims": [
         {
@@ -1118,7 +1118,7 @@
         {
           "domain": "ui",
           "title": "The map changes meaning with the selected metric",
-          "finding": "Map nodes are filtered by knowledge/access and colored from the selected criterion. In the commodity branch, prices are normalized against the commodityâ€™s low and high values.",
+          "finding": "Map nodes are filtered by knowledge/access and colored from the selected criterion. In the commodity branch, prices are normalized against the commodity’s low and high values.",
           "basis": "source inspection",
           "evidence": {
             "path": "source/MapPanel.cpp",
@@ -1218,20 +1218,20 @@
         ".xcf": 1
       },
       "commonImageDimensions": {
-        "72Ã—72": 9571,
-        "126Ã—180": 760,
-        "126Ã—144": 742,
-        "30Ã—30": 584,
-        "144Ã—144": 469,
-        "25Ã—25": 325,
-        "60Ã—60": 304,
-        "400Ã—400": 272
+        "72×72": 9571,
+        "126×180": 760,
+        "126×144": 742,
+        "30×30": 584,
+        "144×144": 469,
+        "25×25": 325,
+        "60×60": 304,
+        "400×400": 272
       },
       "claims": [
         {
           "domain": "mechanics",
           "title": "Combat prediction tracks distributions",
-          "finding": "The inspected combat predictor includes an exact probability matrix with both combatantsâ€™ hit points, damage, slow and drain parameters. Its code warns that very complex cases are expensive; this does not mean every fight always uses this exact path.",
+          "finding": "The inspected combat predictor includes an exact probability matrix with both combatants’ hit points, damage, slow and drain parameters. Its code warns that very complex cases are expensive; this does not mean every fight always uses this exact path.",
           "basis": "source inspection",
           "evidence": {
             "path": "src/attack_prediction.cpp",
@@ -1478,14 +1478,14 @@
         ".s3m": 1
       },
       "commonImageDimensions": {
-        "120Ã—78": 2664,
-        "160Ã—104": 2663,
-        "60Ã—39": 2663,
-        "48Ã—48": 764,
-        "32Ã—32": 476,
-        "40Ã—40": 173,
-        "64Ã—64": 117,
-        "16Ã—16": 103
+        "120×78": 2664,
+        "160×104": 2663,
+        "60×39": 2663,
+        "48×48": 764,
+        "32×32": 476,
+        "40×40": 173,
+        "64×64": 117,
+        "16×16": 103
       },
       "claims": [
         {
@@ -1674,7 +1674,7 @@
         {
           "domain": "rendering",
           "title": "Animation sequences can move the character",
-          "finding": "SDLPoPâ€™s sequence interpreter handles x/y displacement, facing changes, jumps within the sequence and action-state changes. This connects animation playback to motion rather than treating animation as a purely decorative layer.",
+          "finding": "SDLPoP’s sequence interpreter handles x/y displacement, facing changes, jumps within the sequence and action-state changes. This connects animation playback to motion rather than treating animation as a purely decorative layer.",
           "basis": "reimplementation source inspection",
           "evidence": {
             "path": "seg006.c",
@@ -1743,7 +1743,7 @@
       "rank": 13,
       "status": "partial binary and documentary study",
       "version": "Windows English disc image; exact original build unverified",
-      "sourceBasis": "Original installer data decoded. Selected recognition routines tested in the archiveâ€™s modified alternate executable under emulation. Community reconstruction used as a pinned guide; pristine retail equivalence and full gameplay remain unverified.",
+      "sourceBasis": "Original installer data decoded. Selected recognition routines tested in the archive’s modified alternate executable under emulation. Community reconstruction used as a pinned guide; pristine retail equivalence and full gameplay remain unverified.",
       "fileCount": 1134,
       "imageFileCount": 0,
       "modelCandidates": 0,
@@ -1824,7 +1824,7 @@
         {
           "domain": "mechanics",
           "title": "81 gesture templates decoded; matcher tested in isolation",
-          "finding": "InstallShield extraction recovered 1,012 files. Gestures.jty contains 81 templates across all IDs 1â€“23, with 6â€“26 active points each. A bounded emulator ran the supplied alternate executableâ€™s MatchGesture routine on 324 template-based cases: all 81 self-matches passed, opposite starting directions passed only the nine direction-insensitive templates, and adding 90 degrees to each interior turn rejected all 81. These are synthetic keypoint tests, not measured mouse accuracy or a game playthrough.",
+          "finding": "InstallShield extraction recovered 1,012 files. Gestures.jty contains 81 templates across all IDs 1–23, with 6–26 active points each. A bounded emulator ran the supplied alternate executable’s MatchGesture routine on 324 template-based cases: all 81 self-matches passed, opposite starting directions passed only the nine direction-insensitive templates, and adding 90 degrees to each interior turn rejected all 81. These are synthetic keypoint tests, not measured mouse accuracy or a game playthrough.",
           "basis": "direct original-data decoding + isolated archive-binary execution",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
@@ -1834,7 +1834,7 @@
         {
           "domain": "binary",
           "title": "Evidence is stronger than reconstruction alone, but version-qualified",
-          "finding": "The installer executable has a high-entropy protected code section. The ISO also supplies a modified alternate executable whose readable matcher is at VA 0x00545e80. That image was never launched as a Windows process: selected routines ran in Unicorn memory with a 100,000-instruction call limit and synthetic 800Ã—600 screen state. Its SHA-256 and per-function hashes are recorded. The community BW1W100 symbol map locates the routines, but the modified image cannot be certified as untouched retail.",
+          "finding": "The installer executable has a high-entropy protected code section. The ISO also supplies a modified alternate executable whose readable matcher is at VA 0x00545e80. That image was never launched as a Windows process: selected routines ran in Unicorn memory with a 100,000-instruction call limit and synthetic 800×600 screen state. Its SHA-256 and per-function hashes are recorded. The community BW1W100 symbol map locates the routines, but the modified image cannot be certified as untouched retail.",
           "basis": "PE inspection, disassembly, pinned address map and bounded emulation",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
@@ -1844,7 +1844,7 @@
         {
           "domain": "systems",
           "title": "Recognition reduces the stroke to turns and starting direction",
-          "finding": "The traced design retains screen-space positions alongside world positions in an 80-sample ring, derives junctions and signed turns, and encodes direction in eight sectors. Matching scans possible start positions and compares the turn sequence; small neighboring turns can be skipped when that reduces accumulated error. This explains tolerance to drawing detail without treating every outline as an exact pixel match. The matcher was executed locally; the samplerâ€™s complete live-input path was inspected through the pinned reconstruction, not replayed end-to-end.",
+          "finding": "The traced design retains screen-space positions alongside world positions in an 80-sample ring, derives junctions and signed turns, and encodes direction in eight sectors. Matching scans possible start positions and compares the turn sequence; small neighboring turns can be skipped when that reduces accumulated error. This explains tolerance to drawing detail without treating every outline as an exact pixel match. The matcher was executed locally; the sampler’s complete live-input path was inspected through the pinned reconstruction, not replayed end-to-end.",
           "basis": "matcher disassembly and emulation; sampling reconstruction inspected separately",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
@@ -1860,7 +1860,7 @@
         {
           "domain": "mechanics",
           "title": "Tolerance is explicit; inverse does not mean drawing backwards",
-          "finding": "The executableâ€™s own initializer routines produce approximately 16.875Â° junction tolerance, 29.53125Â° skip tolerance and 33.75Â° accumulated-turn-error limit. Seventy-two templates check starting direction; only three enable the inverse path. That path negates turns while advancing through the samples in their existing order. All three opted-in templates return the inverse flag for negated-turn inputs; four other templates accept those inputs through the ordinary path. Do not promise arbitrary rotation or backward-stroke support.",
+          "finding": "The executable’s own initializer routines produce approximately 16.875° junction tolerance, 29.53125° skip tolerance and 33.75° accumulated-turn-error limit. Seventy-two templates check starting direction; only three enable the inverse path. That path negates turns while advancing through the samples in their existing order. All three opted-in templates return the inverse flag for negated-turn inputs; four other templates accept those inputs through the ordinary path. Do not promise arbitrary rotation or backward-stroke support.",
           "basis": "decoded template flags, disassembled branches and controlled machine-code probes",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
@@ -1870,7 +1870,7 @@
         {
           "domain": "systems",
           "title": "Shape proportions are a coarse gate with an asymmetric edge case",
-          "finding": "Seventy-four templates enable aspect checks. The routine uses thresholds near 0.15 and 4.0 rather than a precise ratio-distance score. An isolated wide-input test accepts an ordinary 0.8-ratio template, while a thin-input test rejects it and accepts a 0.05-ratio template. The wide branch compares the stored ratio against the thin threshold. Preserve this as an observed compatibility quirk, not a rule to copy into Abbieâ€™s World.",
+          "finding": "Seventy-four templates enable aspect checks. The routine uses thresholds near 0.15 and 4.0 rather than a precise ratio-distance score. An isolated wide-input test accepts an ordinary 0.8-ratio template, while a thin-input test rejects it and accepts a 0.05-ratio template. The wide branch compares the stored ratio against the thin threshold. Preserve this as an observed compatibility quirk, not a rule to copy into Abbie’s World.",
           "basis": "direct CheckForGestureRatio execution with synthetic regions",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
@@ -1889,8 +1889,8 @@
         },
         {
           "domain": "systems",
-          "title": "Abbieâ€™s World: adapt the small recognizer, not its hidden assumptions",
-          "finding": "Proposed implementation: separate screen-space recognition from world-space targeting; keep bounded, distance-resampled strokes; allow multiple examples per action; declare orientation and inverse policy explicitly. Use a small vocabulary of well-separated gestures with ordinary right-drawer controls. Avoid copying fixed 4/12-pixel sampler distances or a 70-repeat reset directly: touch density, device scale and event rate differ. Commit only a supported typed action with a target, revision, preview and undo. No LLM is required to classify this small vocabulary. These are recommendations, not features added to Abbieâ€™s World.",
+          "title": "Abbie’s World: adapt the small recognizer, not its hidden assumptions",
+          "finding": "Proposed implementation: separate screen-space recognition from world-space targeting; keep bounded, distance-resampled strokes; allow multiple examples per action; declare orientation and inverse policy explicitly. Use a small vocabulary of well-separated gestures with ordinary right-drawer controls. Avoid copying fixed 4/12-pixel sampler distances or a 70-repeat reset directly: touch density, device scale and event rate differ. Commit only a supported typed action with a target, revision, preview and undo. No LLM is required to classify this small vocabulary. These are recommendations, not features added to Abbie’s World.",
           "basis": "design inference from decoded data and tested code; proposed only",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
@@ -1900,7 +1900,7 @@
         {
           "domain": "ui",
           "title": "Guard against partial matches and measure confusion before release",
-          "finding": "Because the matcher tries multiple starting positions, a sub-pattern can satisfy a template. For Abbieâ€™s World, require an explicit drawing mode and a deliberate stroke-end decision; compare competing candidates and reject ambiguous ones. Test zoom, different screen sizes, extra leading/trailing strokes, tremor, slow input, camera motion and touch interruption. Track wrong-action rate separately from rejection rate. Never treat the 81/81 self-match result as human usability evidence.",
+          "finding": "Because the matcher tries multiple starting positions, a sub-pattern can satisfy a template. For Abbie’s World, require an explicit drawing mode and a deliberate stroke-end decision; compare competing candidates and reject ambiguous ones. Test zoom, different screen sizes, extra leading/trailing strokes, tremor, slow input, camera motion and touch interruption. Track wrong-action rate separately from rejection rate. Never treat the 81/81 self-match result as human usability evidence.",
           "basis": "design inference and evaluation plan; no human testing performed",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
@@ -1947,7 +1947,7 @@
           "domain": "ui",
           "title": "Equivalent controls make gestures optional shortcuts",
           "finding": "The bundled readme explicitly maps M to miracle selection and R to repeating a miracle, identifying both as equivalents of gestures. It also documents holding Ctrl+Shift to inspect the hand closely and releasing to restore the previous view. Gesture input and an ordinary command can share meaning.",
-          "basis": "direct inspection of packaged Controller Notes, lines 130â€“141",
+          "basis": "direct inspection of packaged Controller Notes, lines 130–141",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
             "path": "sources: disc-readme"
@@ -1957,7 +1957,7 @@
           "domain": "mechanics",
           "title": "Physical actions have distinct sensory feedback",
           "finding": "The readme associates tactile effects with extracting trees, charging powers, and stroking or slapping the creature. It distinguishes three TouchSense support levels. These are authored descriptions of supported interaction, not measurements of recognition thresholds, learning rules or force output on current hardware.",
-          "basis": "packaged documentation, lines 144â€“167; no game execution",
+          "basis": "packaged documentation, lines 144–167; no game execution",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
             "path": "sources: disc-readme, gdc"
@@ -1975,9 +1975,9 @@
         },
         {
           "domain": "ui",
-          "title": "Abbieâ€™s World: preserve the physical metaphor and make mode visible",
+          "title": "Abbie’s World: preserve the physical metaphor and make mode visible",
           "finding": "Proposed adaptation: grab and place movable props directly; give eligible objects a clear contact highlight and a placement ghost. Separate camera movement, object dragging and command drawing with an explicit gesture mode. On phones, retain normal navigation outside that mode and cancel a stroke when a second touch begins. Keep navigation on the left and gesture presets, practice and fallback commands in the right drawer. These controls are a design proposal, not shipped functionality.",
-          "basis": "original design inference from this study and Evanâ€™s interaction requirements",
+          "basis": "original design inference from this study and Evan’s interaction requirements",
           "evidence": {
             "url": "/data/anatomy/black-white.json",
             "path": "sources: disc-readme, making"
@@ -1985,7 +1985,7 @@
         },
         {
           "domain": "systems",
-          "title": "Abbieâ€™s World: recognize intent, then validate a typed action",
+          "title": "Abbie’s World: recognize intent, then validate a typed action",
           "finding": "Proposed flow: collect a stroke, show a candidate, validate a supported action against object capabilities and world state, preview its effect, then commit with an undo record. UI, gestures, voice and MCP should call the same action function. Send the resolved intent, stable target IDs and revision through MCP, not raw pointer movement or arbitrary code. Reject ambiguous strokes without changing the world. Add a repeat shortcut only when repeating the action is valid.",
           "basis": "original architecture proposal; not recovered Lionhead code and not implemented",
           "evidence": {
@@ -2019,10 +2019,10 @@
       },
       "inventoryUrl": "/data/anatomy/black-white.json",
       "lesson": {
-        "status": "design inference; not implemented in Abbieâ€™s World or Ranch Atelier",
+        "status": "design inference; not implemented in Abbie’s World or Ranch Atelier",
         "text": "A bounded turn-based recognizer can make interaction feel physical without an LLM. Keep recognition separate from target/effect validation, declare directional policy per action, tolerate varied drawing, and expose cancellation plus ordinary controls. Avoid reproducing legacy aspect-ratio quirks or event-rate-dependent thresholds."
       },
-      "nextPass": "Trace full input scheduling, active-template selection and action dispatch; compare the selected function bytes with a verified original release image. Replay raw strokes through sampling and recognition, then measure touch/mouse confusion in an Abbieâ€™s World prototype. Full gameplay has not been observed.",
+      "nextPass": "Trace full input scheduling, active-template selection and action dispatch; compare the selected function bytes with a verified original release image. Replay raw strokes through sampling and recognition, then measure touch/mouse confusion in an Abbie’s World prototype. Full gameplay has not been observed.",
       "runtimeObserved": false,
       "binaryRoutineObserved": true,
       "gestureTemplateCount": 81
@@ -2128,7 +2128,7 @@
         {
           "domain": "procedural-generation",
           "title": "Exhibit placement reserves water and attractions",
-          "finding": "The pen builder checks reachable cells and excludes river tiles and reserved attraction footprints. Separate tests handle the Ferris wheel, cafÃ©, gift shop and marimba. This provides a useful spatial separation between animal pens and visitor attractions, but this static pass has not validated generated maps end to end.",
+          "finding": "The pen builder checks reachable cells and excludes river tiles and reserved attraction footprints. Separate tests handle the Ferris wheel, café, gift shop and marimba. This provides a useful spatial separation between animal pens and visitor attractions, but this static pass has not validated generated maps end to end.",
           "basis": "direct packaged JavaScript inspection; gameplay unobserved",
           "evidence": {
             "url": "/data/anatomy/alpha-zoo.json",
@@ -2216,7 +2216,7 @@
       },
       "inventoryUrl": "/data/anatomy/alpha-zoo.json",
       "lesson": {
-        "status": "design inference; not implemented in Abbieâ€™s World",
+        "status": "design inference; not implemented in Abbie’s World",
         "text": "Make small interventions immediately visible: revealing an exhibit, throwing food and watching an animal respond. Give trees and other props explicit behavioral contact points. For our zoo, add an independent planner and needs/economy model; this study does not establish those management systems in Alpha Zoo."
       },
       "nextPass": "Observe the installed game to test reveal, feeding, shop purchases and tree behavior; verify route connectivity from the entrance on generated maps. Keep learning-game rewards distinct from proposed zoo operating economics.",
