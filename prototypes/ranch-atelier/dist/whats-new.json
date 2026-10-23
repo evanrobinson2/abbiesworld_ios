@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-ranch-rebuild",
+      "date": "2026-10-23",
+      "title": "A rebuilt ranch",
+      "line": "Every building, animal, tree, prop and plant on the ranch was redrawn as concept art and rebuilt from it. The pen sheds, the cows and the goats are all new.",
+      "image": "/whats-new/2026-10-23-ranch-rebuild.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJJwV5vW99BgS3tVwgdy9Q5",
+      "threadTitle": "Ranch tile rebuild"
+    },
+    {
       "id": "2026-10-23-live-voice-settings",
       "date": "2026-10-23",
       "title": "Pick the Computer's voice",
