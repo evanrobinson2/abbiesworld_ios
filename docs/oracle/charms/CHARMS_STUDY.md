@@ -56,3 +56,8 @@ Charms are the only reward and hang in the world as spinning, glowing pickups, l
 The Heart never floats. Hint is meta only: a chime that rises as you near one (the study shows a shimmer ring). The study page
 has a playable preview. Placements are Winchester edits and are listed in the page for the hex city thread; nothing was edited here.
 Dispatch check: the newest dispatch (issue #482, loading screen with the chalkboard card gesture) says nothing about charms and was already taken by the intro and precompile thread.
+
+## Winchester notes (22:53Z)
+Lab gone (science adventure parked); Science tile cancelled, high school stays in the Downtown centre hex (first track rung parked);
+black truck parks at the French bakery curb; skate park beside the café is a candidate charm spot; the oak is Abbie's pink tree house.
+Floating spots updated on the page; use `AbbieTown.board.heightAt` and `board.obstaclesNear` when placing.
