@@ -82,9 +82,15 @@ def target(part_dir):
     return np.asarray(Image.open(os.path.join(part_dir, 'concept_mask.png')).convert('L')) > 127
 
 
+def square(m, n):
+    """Pad a mask to a square, then resize it, so tall (2:3) concepts keep their proportions."""
+    h, w = m.shape; k = max(h, w); sq = np.zeros((k, k), bool); sq[(k - h) // 2:(k - h) // 2 + h, (k - w) // 2:(k - w) // 2 + w] = m
+    return np.asarray(Image.fromarray(sq).resize((n, n))) > 0
+
+
 def calibrate(tris, tgt, rolls=(0,), pitches=range(0, 46, 5), yaws=range(-180, 180, 10)):
     best = (-1, None)
-    tg = np.asarray(Image.fromarray(tgt).resize((192, 192))) > 0
+    tg = square(tgt, 192)
     lenses = (35, 50, 85)
     for lens in lenses:
         for rl in rolls:
@@ -94,7 +100,7 @@ def calibrate(tris, tgt, rolls=(0,), pitches=range(0, 46, 5), yaws=range(-180, 1
                     if s > best[0]:
                         best = (s, (yw, pt, lens, rl))
     yw0, pt0, lens, rl0 = best[1]
-    t2 = np.asarray(Image.fromarray(tgt).resize((256, 256))) > 0
+    t2 = square(tgt, 256)
     rr = (rl0,) if len(rolls) == 1 else (rl0 - 4, rl0, rl0 + 4)
     for yw in np.arange(yw0 - 8, yw0 + 8.1, 2):
         for pt in np.arange(pt0 - 6, pt0 + 6.1, 2):
@@ -139,7 +145,9 @@ def main():
     ap.add_argument('--cam', help='yaw,pitch,lens[,roll]: set the camera by hand instead of searching')
     ap.add_argument('--rolls', default='0', help='comma-separated camera rolls to search, e.g. -45,-30,-15,0 for the gladius')
     a = ap.parse_args()
-    pd = os.path.join(HERE, 'parts', a.part); glb = os.path.join(pd, f'{a.part}.glb'); rd = os.path.join(pd, 'r')
+    # PART is a folder under parts/, or a path to any asset folder laid out the same way
+    pd = a.part if os.path.isdir(a.part) else os.path.join(HERE, 'parts', a.part)
+    name = os.path.basename(os.path.normpath(pd)); glb = os.path.join(pd, f'{name}.glb'); rd = os.path.join(pd, 'r')
     os.makedirs(rd, exist_ok=True)
     tris = load(glb); tgt = target(pd)
     cp = os.path.join(pd, 'cam.json')
@@ -150,7 +158,7 @@ def main():
         p0, p1 = (int(x) for x in a.pitch.split(','))
         json.dump(calibrate(tris, tgt, tuple(float(x) for x in a.rolls.split(',')), range(p0, p1 + 1, 5), range(int(a.yaw.split(',')[0]), int(a.yaw.split(',')[1]) + 1, 10)), open(cp, 'w'), indent=1)
     cam = json.load(open(cp))
-    tg = np.asarray(Image.fromarray(tgt).resize((512, 512))) > 0
+    tg = square(tgt, 512)
     sil = silhouette(tris, cam['yaw'], cam['pitch'], cam['lens'], 512, cam.get('roll', 0))
     s, nt, nr = iou(tg, sil)
     lo, hi = tris.reshape(-1, 3).min(0), tris.reshape(-1, 3).max(0)

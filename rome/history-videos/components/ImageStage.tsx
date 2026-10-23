@@ -1,0 +1,173 @@
+"use client";
+
+import Image from "next/image";
+import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import type { FeedbackAction, FeedbackEntry, ShotItem } from "@/lib/types";
+import { moodLabel, shotUrl } from "@/lib/types";
+import { ImageLightbox } from "./ImageLightbox";
+
+interface ImageStageProps {
+  item: ShotItem;
+  index: number;
+  total: number;
+  onPrev: () => void;
+  onNext: () => void;
+  feedback?: FeedbackEntry | null;
+  onFeedback?: (action: FeedbackAction, note?: string) => void;
+}
+
+export function ImageStage({
+  item,
+  index,
+  total,
+  onPrev,
+  onNext,
+  feedback,
+  onFeedback,
+}: ImageStageProps) {
+  const touchX = useRef<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+  const [showLightbox, setShowLightbox] = useState(false);
+
+  const url = shotUrl(item);
+
+  // Reset loading state when image changes
+  useEffect(() => {
+    setIsLoading(true);
+    setLoadError(false);
+  }, [url]);
+
+  return (
+    <div className="relative flex flex-col gap-2">
+      <div className="flex items-center justify-between gap-3 px-0.5">
+        <div className="min-w-0">
+          <p className="truncate text-xs text-bone-muted">
+            {String(item.shotNumber).padStart(2, "0")} / {total}
+            <span className="mx-1.5 text-white/20">·</span>
+            {moodLabel(item.mood)}
+          </p>
+          <p className="truncate text-sm text-bone/80">{item.storyPart}</p>
+        </div>
+        <div className="flex shrink-0 gap-1">
+          <NavButton onClick={onPrev} label="Previous" disabled={index === 0}>
+            <ChevronLeft size={22} />
+          </NavButton>
+          <NavButton
+            onClick={onNext}
+            label="Next"
+            disabled={index === total - 1}
+          >
+            <ChevronRight size={22} />
+          </NavButton>
+        </div>
+      </div>
+
+      <div
+        className="relative aspect-video w-full overflow-hidden rounded-xl bg-black/40 touch-pan-y"
+        onTouchStart={(e) => {
+          touchX.current = e.changedTouches[0]?.clientX ?? null;
+        }}
+        onTouchEnd={(e) => {
+          if (touchX.current == null) return;
+          const dx = (e.changedTouches[0]?.clientX ?? 0) - touchX.current;
+          touchX.current = null;
+          if (Math.abs(dx) < 48) return;
+          if (dx < 0) onNext();
+          else onPrev();
+        }}
+      >
+        {/* Loading skeleton with pulse animation */}
+        {isLoading && url && !loadError && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-indigo-dark/80">
+            <div className="flex flex-col items-center gap-3">
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-bone/20 border-t-bone/80" />
+              <p className="text-xs text-bone-muted animate-pulse">Loading frame...</p>
+            </div>
+          </div>
+        )}
+
+        {url && !loadError ? (
+          <>
+            <Image
+              key={url}
+              src={url}
+              alt={item.description || item.id}
+              fill
+              className={`object-contain transition-opacity duration-300 cursor-pointer ${
+                isLoading ? "opacity-0" : "opacity-100"
+              }`}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              priority={index < 3}
+              draggable={false}
+              onClick={() => setShowLightbox(true)}
+              onLoad={() => setIsLoading(false)}
+              onError={() => {
+                setIsLoading(false);
+                setLoadError(true);
+              }}
+            />
+            {/* Expand button */}
+            {!isLoading && (
+              <button
+                onClick={() => setShowLightbox(true)}
+                className="absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white/80 hover:bg-black/70 hover:text-white transition-colors"
+                aria-label="Expand image"
+              >
+                <Expand size={16} />
+              </button>
+            )}
+          </>
+        ) : (
+          <div className="flex h-full min-h-[200px] items-center justify-center text-sm text-bone-muted">
+            {loadError ? `Failed to load: ${item.id}` : `Missing: ${item.filename || item.id}`}
+          </div>
+        )}
+        
+        {/* Lightbox */}
+        {showLightbox && url && (
+          <ImageLightbox
+            src={url}
+            alt={item.description || item.id}
+            itemId={item.id}
+            feedback={feedback}
+            onFeedback={onFeedback}
+            onClose={() => setShowLightbox(false)}
+          />
+        )}
+      </div>
+
+      {/* Provenance badge */}
+      {item.physical?.generator && (
+        <p className="text-[10px] text-bone-muted/60 text-right pr-1">
+          Generated by {item.physical.generator}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function NavButton({
+  onClick,
+  label,
+  disabled,
+  children,
+}: {
+  onClick: () => void;
+  label: string;
+  disabled: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-indigo-mid/60 text-bone active:bg-white/10 disabled:opacity-25"
+    >
+      {children}
+    </button>
+  );
+}

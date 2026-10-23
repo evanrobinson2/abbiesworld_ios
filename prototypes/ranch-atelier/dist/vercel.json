@@ -390,6 +390,16 @@
   ],
   "redirects": [
     {
+      "source": "/review",
+      "destination": "/review/",
+      "permanent": false
+    },
+    {
+      "source": "/inbox",
+      "destination": "/review/",
+      "permanent": false
+    },
+    {
       "source": "/simulations",
       "destination": "/simulations/",
       "permanent": false
@@ -399,18 +409,7 @@
       "has": [
         {
           "type": "host",
-          "value": "abbies.world"
-        }
-      ],
-      "destination": "/studies/",
-      "permanent": false
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.abbies.world"
+          "value": "app.abbies.world"
         }
       ],
       "destination": "/studies/",

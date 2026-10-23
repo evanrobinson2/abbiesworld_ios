@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Paper bodies</title>
+<link rel="stylesheet" href="/app-style.css?v=1">
+<script type="module" src="/vendor/model-viewer.min.js"></script>
+<style>
+/* Paper bodies study: each model beside the Midjourney picture it was built from, then the body-type lineups. */
+body{margin:0;background:var(--app-canvas,#f4edcf);color:var(--app-ink);font:15px/1.45 system-ui,-apple-system,sans-serif;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 40px}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+h1{margin:0;font-size:26px}h2{margin:0 0 8px;font-size:18px}
+p{margin:0;color:var(--app-muted);max-width:65ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:16px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
+figure img{display:block;width:100%;height:min(70vh,560px);object-fit:contain}
+figure img.wide{height:auto}
+model-viewer{width:100%;height:min(70vh,560px);display:block;--poster-color:transparent}
+figcaption{padding:8px 12px;font-size:13px;color:var(--app-muted)}
+@media (max-width:640px){.pair{grid-template-columns:1fr}figure img,model-viewer{height:58vh}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header><h1>Paper bodies</h1><p>The base bodies every papercraft figure is dressed on. Each one is built from a Midjourney picture and shown beside it. Drag a model to turn it.</p></header>
+ <section><h2>Man #1</h2>
+  <div class="pair">
+   <figure><img src="man1-concept.jpg" alt="Midjourney picture of a toned papercraft man in briefs"><figcaption>The picture: Midjourney, toned man, take 1</figcaption></figure>
+   <figure><model-viewer src="man1.glb" alt="3D papercraft man built from the picture" camera-controls auto-rotate auto-rotate-delay="1500" camera-orbit="0deg 85deg auto" shadow-intensity="0.8" exposure="0.9" touch-action="pan-y" interaction-prompt="none"></model-viewer><figcaption>The model: 1.85 m, about 1,200 triangles, silhouette match 83%</figcaption></figure>
+  </div>
+ </section>
+ <section><h2>The toned pair</h2>
+  <div class="pair">
+   <figure><model-viewer src="male-toned.glb" alt="Toned paper man in briefs" camera-controls auto-rotate auto-rotate-delay="1500" camera-orbit="20deg 80deg auto" shadow-intensity="0.8" exposure="0.9" touch-action="pan-y" interaction-prompt="none"></model-viewer><figcaption>Man, toned (from the body slider recipe)</figcaption></figure>
+   <figure><model-viewer src="female-toned.glb" alt="Toned paper woman in a sports top and briefs" camera-controls auto-rotate auto-rotate-delay="1500" camera-orbit="20deg 80deg auto" shadow-intensity="0.8" exposure="0.9" touch-action="pan-y" interaction-prompt="none"></model-viewer><figcaption>Woman, toned. A heroic version is next, from new Midjourney pictures</figcaption></figure>
+  </div>
+ </section>
+ <section><h2>Eight body types</h2>
+  <figure><img class="wide" src="lineup.jpg" alt="Eight papercraft bodies: man and woman, each average, heroic, skinny and fat" loading="lazy"><figcaption>One recipe with sliders: man, then woman, each average, heroic, skinny, fat</figcaption></figure>
+ </section>
+ <section><h2>Dressed in the Roman kit</h2>
+  <figure><img class="wide" src="roman-lineup.jpg" alt="The eight bodies wearing the Roman helmet, cuirass, shoulder guards, belt, sword and sandals" loading="lazy"><figcaption>The six Roman parts fitted to every body automatically</figcaption></figure>
+ </section>
+</div>
+</body>
+</html>

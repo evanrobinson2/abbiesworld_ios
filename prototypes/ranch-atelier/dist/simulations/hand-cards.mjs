@@ -12,17 +12,18 @@ const SPECS = {
  moon:   {name: 'Moonbase', type: 'helper',   rarity: 'bloom',  enamel: '#3b4f86', biome: 'moon'}
 };
 let forge = null;
-const loadForge = () => forge ??= import('../cards/forge.mjs?v=3');
+const loadForge = () => forge ??= import('../cards/forge.mjs?v=4');
 
 export async function cardFace(hero) {
  const id = hero.dataset.generator, base = SPECS[id] || {name: hero.querySelector('.generator-hero-name')?.textContent || id, type: 'helper', rarity: 'seed', enamel: '#4f5864'};
  try {
   const {renderCard, CARD, L} = await loadForge();
   // The tile's cartoon, as comic mode draws it in the game (tools/hand-card-art), so the card matches the place it makes.
+  // Evan accepted the four tile cartoons on 2026-10-23 ("ship it"); any other generator's thumbnail stays PRELIMINARY.
   const thumb = new URL((SPECS[id] ? './assets/tile-cards/' : './assets/tile-thumbs/') + id + '.webp?v=2', import.meta.url).href;
   const cssWidth = 120, dpr = Math.min(3, Math.max(1, devicePixelRatio || 1)), dpi = cssWidth * dpr / (CARD.w / 25.4);
   // cost 0 reserves the token on the ribbon's left; the icon is painted over it below.
-  const {canvas} = await renderCard({id: 'tile-' + id, name: base.name, type: base.type, rarity: base.rarity, cost: 0, biome: base.biome, art: {image: thumb, outline: false}}, {dpi, lod: 'hand', plate: false});
+  const {canvas} = await renderCard({id: 'tile-' + id, name: base.name, type: base.type, rarity: base.rarity, cost: 0, biome: base.biome, art: {image: thumb, outline: false, status: SPECS[id] ? 'final' : 'draft'}}, {dpi, lod: 'hand', plate: false});
   await paintIcon(canvas, dpi, L.cost, base.enamel, uiIcon(id));
   canvas.className = 'v2-face'; canvas.setAttribute('aria-hidden', 'true');
   hero.prepend(canvas); hero.classList.add('v2-faced');

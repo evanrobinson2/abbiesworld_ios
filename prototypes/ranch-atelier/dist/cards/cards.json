@@ -3,7 +3,7 @@
     "id": "ranch",
     "name": "Ranch · First Harvest",
     "biome": "ranch",
-    "about": "The starter set for Abbie's Ranch. Art is the Ranch rebuild concept art, cut out and stood in a painted Ranch, or the in-game 3D model rendered for the card. Flavour lines show in the inspect view, not on the face (the face carries at most 15 words)."
+    "about": "The starter set for Abbie's Ranch. Every card shows the in-game 3D model, cel-rendered for the card (Evan, 2026-10-23: actual in-game things, not concept art). The concept-art cut-outs stay in art.image for reference. Flavour lines show in the inspect view, not on the face (the face carries at most 15 words)."
   },
   "cards": [
     {
@@ -13,6 +13,7 @@
       "type": "animal",
       "subtype": "Dairy Cow",
       "rarity": "seed",
+      "artMode": "model",
       "cost": 2,
       "stats": [
         {
@@ -28,7 +29,8 @@
         "source": "/cards/art/cow.jpg",
         "model": "/simulation-assets/organics/cow-idle.glb",
         "view": {
-          "yaw": -28
+          "yaw": -28,
+          "fill": 1.18
         }
       }
     },
@@ -39,6 +41,7 @@
       "type": "animal",
       "subtype": "Laying Hen",
       "rarity": "seed",
+      "artMode": "model",
       "cost": 1,
       "stats": [
         {
@@ -54,7 +57,8 @@
         "source": "/cards/art/chicken.jpg",
         "model": "/simulation-assets/organics/chicken-idle.glb",
         "view": {
-          "yaw": -28
+          "yaw": -28,
+          "fill": 1.08
         }
       }
     },
@@ -65,6 +69,7 @@
       "type": "animal",
       "subtype": "Climbing Goat",
       "rarity": "sprout",
+      "artMode": "model",
       "cost": 2,
       "stats": [
         {
@@ -84,7 +89,8 @@
         "source": "/cards/art/goat.jpg",
         "model": "/simulation-assets/organics/goat-idle.glb",
         "view": {
-          "yaw": -28
+          "yaw": -28,
+          "fill": 0.95
         }
       }
     },
@@ -123,6 +129,7 @@
       "type": "animal",
       "subtype": "Gentle Horse",
       "rarity": "bloom",
+      "artMode": "model",
       "cost": 4,
       "stats": [
         {
@@ -142,7 +149,8 @@
         "source": "/cards/art/horse.jpg",
         "model": "/simulation-assets/organics/horse-idle.glb",
         "view": {
-          "yaw": -28
+          "yaw": -28,
+          "fill": 0.95
         }
       }
     },
@@ -239,6 +247,7 @@
       "type": "building",
       "subtype": "Chicken Coop",
       "rarity": "seed",
+      "artMode": "model",
       "cost": 2,
       "stats": [
         {
@@ -265,6 +274,7 @@
       "type": "building",
       "subtype": "Pump & Trough",
       "rarity": "seed",
+      "artMode": "model",
       "cost": 1,
       "stats": [
         {
@@ -291,6 +301,7 @@
       "type": "building",
       "subtype": "Barn",
       "rarity": "sprout",
+      "artMode": "model",
       "cost": 3,
       "stats": [
         {
@@ -321,6 +332,7 @@
       "type": "building",
       "subtype": "Feed Store",
       "rarity": "bloom",
+      "artMode": "model",
       "cost": 4,
       "stats": [
         {
@@ -347,6 +359,7 @@
       "type": "building",
       "subtype": "Farmhouse",
       "rarity": "harvest",
+      "artMode": "model",
       "cost": 5,
       "stats": [
         {
@@ -377,6 +390,7 @@
       "type": "crop",
       "subtype": "Orchard",
       "rarity": "sprout",
+      "artMode": "model",
       "cost": 2,
       "stats": [
         {

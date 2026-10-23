@@ -467,7 +467,7 @@
     "state": "planned",
     "json": "/simulation-assets/buildings/goat-shelter-planned.json",
     "glb": "/simulation-assets/buildings/goat-shelter-planned.glb",
-    "triangles": 192,
+    "triangles": 120,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
@@ -485,7 +485,7 @@
     "state": "foundation",
     "json": "/simulation-assets/buildings/goat-shelter-foundation.json",
     "glb": "/simulation-assets/buildings/goat-shelter-foundation.glb",
-    "triangles": 300,
+    "triangles": 202,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
@@ -503,7 +503,7 @@
     "state": "frame",
     "json": "/simulation-assets/buildings/goat-shelter-frame.json",
     "glb": "/simulation-assets/buildings/goat-shelter-frame.glb",
-    "triangles": 588,
+    "triangles": 1118,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
@@ -521,7 +521,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/goat-shelter-roof.json",
     "glb": "/simulation-assets/buildings/goat-shelter-roof.glb",
-    "triangles": 1540,
+    "triangles": 2122,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
@@ -539,7 +539,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/goat-shelter-complete.json",
     "glb": "/simulation-assets/buildings/goat-shelter-complete.glb",
-    "triangles": 3412,
+    "triangles": 4102,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
