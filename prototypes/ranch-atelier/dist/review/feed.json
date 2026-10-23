@@ -2,6 +2,17 @@
   "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md.",
   "items": [
     {
+      "id": "space-mail-study",
+      "at": "2026-10-23T05:05:00Z",
+      "title": "Space Mail, a playable sketch",
+      "ask": "Play the low-gravity letter romp on the Moon. Say what feels fun, and whether to build it.",
+      "thread": "AW-STUDY-0012 - Space Mail Mini Game",
+      "image": "img/space-mail.jpg",
+      "link": "https://app.abbies.world/studies/#space-mail",
+      "linkLabel": "Play it",
+      "status": "waiting"
+    },
+    {
       "id": "identity-readout-1",
       "at": "2026-10-23T04:55:00Z",
       "title": "Game identity: where we are",

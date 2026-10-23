@@ -1,0 +1,596 @@
+{
+  "study": "AW-STUDY-0012 - Space Mail Mini Game",
+  "date": "2026-10-23",
+  "about": "Evidence for the Space Mail design: each studied game as an Oracle DNA vector (oracle.dna.v1) plus the lessons we take (style) and what we never take (expression). Library games come from docs/oracle/games; the rest are estimates marked as such. distance_to_space_mail is the RMS distance over the eight axes (0 = same, 1 = opposite).",
+  "axes": [
+    "tempo",
+    "challenge",
+    "expression",
+    "structure",
+    "social",
+    "systems",
+    "chance",
+    "session"
+  ],
+  "space_mail_target": {
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.22,
+      "expression": 0.44,
+      "structure": 0.33,
+      "social": 0.44,
+      "systems": 0.33,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "why": "A mini game inside Abbie's World: quicker than home (a romp), but still low challenge, low structure, short session, no fail."
+  },
+  "abbies_world_home": {
+    "axes": {
+      "tempo": 0.28,
+      "challenge": 0.5,
+      "expression": 0.73,
+      "structure": 0.36,
+      "social": 0.3,
+      "systems": 0.39,
+      "chance": 0.53,
+      "session": 0.3
+    },
+    "from": [
+      "tiny-glade",
+      "dorfromantik",
+      "9-kings",
+      "lego-bricktales"
+    ],
+    "why": "Mean DNA of Evan's taste list in the library (GAME_IDENTITY.md, What the five share). Besiege has no library record."
+  },
+  "distance_home_to_space_mail": 0.219,
+  "games": [
+    {
+      "id": "astro-bot",
+      "title": "Astro Bot",
+      "owned": false,
+      "in_library": false,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.7,
+          "challenge": 0.35,
+          "expression": 0.3,
+          "structure": 0.55,
+          "social": 0.3,
+          "systems": 0.45,
+          "chance": 0.15,
+          "session": 0.25
+        },
+        "confidence": 0.4,
+        "source": "estimate: public knowledge of the game, our words, not in the library"
+      },
+      "core_loop": null,
+      "lessons": [
+        {
+          "id": "rescued_crowd",
+          "layer": "pacing",
+          "lesson": "The bots you helped gather in one place and cheer: the crowd is the trophy cabinet.",
+          "class": "style"
+        },
+        {
+          "id": "hover_jets",
+          "layer": "interaction",
+          "lesson": "A short hover after a jump lets small hands fix a bad jump.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.138
+    },
+    {
+      "id": "paw-patrol",
+      "title": "PAW Patrol World",
+      "owned": true,
+      "in_library": true,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.33,
+          "challenge": 0.22,
+          "expression": 0.33,
+          "structure": 0.22,
+          "social": 0.33,
+          "systems": 0.22,
+          "chance": 0.33,
+          "session": 0.11
+        },
+        "confidence": 0.4,
+        "source": "oracle library record docs/oracle/games/paw-patrol-world.json"
+      },
+      "core_loop": "Pick a pup, drive, do a rescue, collect.",
+      "lessons": [
+        {
+          "id": "vehicle_powerup",
+          "layer": "mechanics",
+          "lesson": "Kids love vehicles and roles: a ride is the best power-up.",
+          "class": "style"
+        },
+        {
+          "id": "mission_from_characters",
+          "layer": "narrative",
+          "lesson": "Characters hand you missions in person; badges collect in a book.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.148
+    },
+    {
+      "id": "crazy-taxi",
+      "title": "Crazy Taxi",
+      "owned": false,
+      "in_library": false,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.95,
+          "challenge": 0.55,
+          "expression": 0.5,
+          "structure": 0.4,
+          "social": 0.3,
+          "systems": 0.35,
+          "chance": 0.35,
+          "session": 0.25
+        },
+        "confidence": 0.4,
+        "source": "estimate: public knowledge of the game, our words, not in the library"
+      },
+      "core_loop": null,
+      "lessons": [
+        {
+          "id": "pickup_dropoff_loop",
+          "layer": "mechanics",
+          "lesson": "Pick up, drop off, repeat: a fare is a ten-second goal with a cheer at the end.",
+          "class": "style"
+        },
+        {
+          "id": "combo_tricks",
+          "layer": "interaction",
+          "lesson": "Style while delivering pays extra (near misses, jumps).",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.165
+    },
+    {
+      "id": "a-short-hike",
+      "title": "A Short Hike",
+      "owned": false,
+      "in_library": false,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.3,
+          "challenge": 0.2,
+          "expression": 0.6,
+          "structure": 0.15,
+          "social": 0.45,
+          "systems": 0.3,
+          "chance": 0.2,
+          "session": 0.15
+        },
+        "confidence": 0.4,
+        "source": "estimate: public knowledge of the game, our words, not in the library"
+      },
+      "core_loop": null,
+      "lessons": [
+        {
+          "id": "feathers_more_air",
+          "layer": "mechanics",
+          "lesson": "Each golden feather gives one more flap: power-ups that are more air, more freedom.",
+          "class": "style"
+        },
+        {
+          "id": "mail_sidequest",
+          "layer": "narrative",
+          "lesson": "Delivering mail between friendly islanders is a gentle reason to roam.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.165
+    },
+    {
+      "id": "pokemon-snap",
+      "title": "Pokémon Snap",
+      "owned": false,
+      "in_library": false,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.35,
+          "challenge": 0.3,
+          "expression": 0.7,
+          "structure": 0.5,
+          "social": 0.35,
+          "systems": 0.3,
+          "chance": 0.4,
+          "session": 0.25
+        },
+        "confidence": 0.4,
+        "source": "estimate: public knowledge of the game, our words, not in the library"
+      },
+      "core_loop": null,
+      "lessons": [
+        {
+          "id": "photo_album_reward",
+          "layer": "meta",
+          "lesson": "The reward is a picture you keep, scored and shown in an album.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.166
+    },
+    {
+      "id": "mario-galaxy",
+      "title": "Super Mario Galaxy",
+      "owned": false,
+      "in_library": false,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.7,
+          "challenge": 0.45,
+          "expression": 0.3,
+          "structure": 0.55,
+          "social": 0.2,
+          "systems": 0.4,
+          "chance": 0.15,
+          "session": 0.3
+        },
+        "confidence": 0.4,
+        "source": "estimate: public knowledge of the game, our words, not in the library"
+      },
+      "core_loop": null,
+      "lessons": [
+        {
+          "id": "floaty_jump_hold",
+          "layer": "interaction",
+          "lesson": "Low gravity reads as joy when holding jump floats you higher and landings puff.",
+          "class": "style"
+        },
+        {
+          "id": "collect_celebrate",
+          "layer": "pacing",
+          "lesson": "Every star ends in a short pose and fanfare.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.167
+    },
+    {
+      "id": "bluey",
+      "title": "Bluey: The Videogame",
+      "owned": true,
+      "in_library": true,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.22,
+          "challenge": 0.11,
+          "expression": 0.33,
+          "structure": 0.11,
+          "social": 0.33,
+          "systems": 0.11,
+          "chance": 0.22,
+          "session": 0.11
+        },
+        "confidence": 0.5,
+        "source": "oracle library record docs/oracle/games/bluey-the-videogame.json"
+      },
+      "core_loop": "Explore the house, play little games, find collectibles.",
+      "lessons": [
+        {
+          "id": "helper_coop",
+          "layer": "mechanics",
+          "lesson": "A grown-up can help without taking over; nobody can lose.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.212
+    },
+    {
+      "id": "sable",
+      "title": "Sable",
+      "owned": true,
+      "in_library": true,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.22,
+          "challenge": 0.33,
+          "expression": 0.78,
+          "structure": 0.11,
+          "social": 0.44,
+          "systems": 0.56,
+          "chance": 0.22,
+          "session": 0.11
+        },
+        "confidence": 0.7,
+        "source": "oracle library record docs/oracle/games/sable.json"
+      },
+      "core_loop": "Ride, climb, explore, collect masks, choose who to be.",
+      "lessons": [
+        {
+          "id": "free_roam_no_threat",
+          "layer": "aesthetics",
+          "lesson": "Moving through an open place with nothing chasing you is the reward; the journey is the game.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.239
+    },
+    {
+      "id": "dome-keeper",
+      "title": "Dome Keeper",
+      "owned": true,
+      "in_library": true,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.56,
+          "challenge": 0.67,
+          "expression": 0.33,
+          "structure": 0.67,
+          "social": 0.33,
+          "systems": 0.44,
+          "chance": 0.44,
+          "session": 0.56
+        },
+        "confidence": 0.6,
+        "source": "oracle library record docs/oracle/games/dome-keeper.json"
+      },
+      "core_loop": "Mine, haul, upgrade, sprint home, defend.",
+      "lessons": [
+        {
+          "id": "carry_and_return",
+          "layer": "dynamics",
+          "lesson": "A full bag and a long way home turns greed into a feeling.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.249
+    },
+    {
+      "id": "fall-guys",
+      "title": "Fall Guys",
+      "owned": false,
+      "in_library": true,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.89,
+          "challenge": 0.67,
+          "expression": 0.22,
+          "structure": 0.56,
+          "social": 0.78,
+          "systems": 0.67,
+          "chance": 0.22,
+          "session": 0.33
+        },
+        "confidence": 0.8,
+        "source": "oracle library record docs/oracle/games/fall-guys.json"
+      },
+      "core_loop": "Run, jump, grab, survive rounds, crown.",
+      "lessons": [
+        {
+          "id": "funny_failure",
+          "layer": "interaction",
+          "lesson": "Floppy bodies make missing a jump funny, so children keep trying.",
+          "class": "style"
+        },
+        {
+          "id": "crown_moment",
+          "layer": "pacing",
+          "lesson": "The round ends on a celebration everyone watches: one hero shot, one prize.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.276
+    },
+    {
+      "id": "spaz",
+      "title": "Space Pirates and Zombies",
+      "owned": true,
+      "in_library": true,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.56,
+          "challenge": 0.67,
+          "expression": 0.44,
+          "structure": 0.56,
+          "social": 0.33,
+          "systems": 0.67,
+          "chance": 0.44,
+          "session": 0.67
+        },
+        "confidence": 0.4,
+        "source": "oracle library record docs/oracle/games/space-pirates-and-zombies.json"
+      },
+      "core_loop": "Fly, fight, salvage, upgrade.",
+      "lessons": [
+        {
+          "id": "top_down_swarm",
+          "layer": "mechanics",
+          "lesson": "Top-down twin-stick swarms: the other scenario Evan named (night shift), not this one.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.276
+    },
+    {
+      "id": "animal-crossing",
+      "title": "Animal Crossing",
+      "owned": false,
+      "in_library": false,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.15,
+          "challenge": 0.1,
+          "expression": 0.9,
+          "structure": 0.2,
+          "social": 0.7,
+          "systems": 0.5,
+          "chance": 0.4,
+          "session": 0.4
+        },
+        "confidence": 0.4,
+        "source": "estimate: public knowledge of the game, our words, not in the library"
+      },
+      "core_loop": null,
+      "lessons": [
+        {
+          "id": "letters_from_neighbours",
+          "layer": "narrative",
+          "lesson": "Letters from neighbours make a place feel lived in; the mailbox flag says there is post.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.284
+    },
+    {
+      "id": "trackmania",
+      "title": "Trackmania",
+      "owned": false,
+      "in_library": true,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 1.0,
+          "challenge": 0.78,
+          "expression": 0.78,
+          "structure": 0.22,
+          "social": 0.67,
+          "systems": 0.33,
+          "chance": 0.33,
+          "session": 0.44
+        },
+        "confidence": 0.8,
+        "source": "oracle library record docs/oracle/games/trackmania.json"
+      },
+      "core_loop": "Drive, crash, restart instantly, shave milliseconds.",
+      "lessons": [
+        {
+          "id": "medal_ladder",
+          "layer": "pacing",
+          "lesson": "Bronze, silver, gold, author: a medal ladder tells you how good that run was without words.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.285
+    },
+    {
+      "id": "overcooked-2",
+      "title": "Overcooked! 2",
+      "owned": true,
+      "in_library": true,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.89,
+          "challenge": 0.89,
+          "expression": 0.33,
+          "structure": 0.44,
+          "social": 0.78,
+          "systems": 0.56,
+          "chance": 0.33,
+          "session": 0.22
+        },
+        "confidence": 0.8,
+        "source": "oracle library record docs/oracle/games/overcooked-2.json"
+      },
+      "core_loop": "Chop, cook, plate, serve, wash, shout.",
+      "lessons": [
+        {
+          "id": "deliver_orders_stars",
+          "layer": "pacing",
+          "lesson": "Deliver orders before the clock; one to three stars at the end makes replay irresistible.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.294
+    },
+    {
+      "id": "death-stranding",
+      "title": "Death Stranding",
+      "owned": false,
+      "in_library": false,
+      "dna": {
+        "schema": "oracle.dna.v1",
+        "axes": {
+          "tempo": 0.3,
+          "challenge": 0.6,
+          "expression": 0.4,
+          "structure": 0.6,
+          "social": 0.6,
+          "systems": 0.7,
+          "chance": 0.3,
+          "session": 0.8
+        },
+        "confidence": 0.4,
+        "source": "estimate: public knowledge of the game, our words, not in the library"
+      },
+      "core_loop": null,
+      "lessons": [
+        {
+          "id": "delivery_as_connection",
+          "layer": "aesthetics",
+          "lesson": "Delivery is about connecting people; thanks from the people you served is the score.",
+          "class": "style"
+        }
+      ],
+      "expression_never": [
+        "its characters, art, models, music, sounds, text and level layouts"
+      ],
+      "distance_to_space_mail": 0.327
+    }
+  ]
+}
