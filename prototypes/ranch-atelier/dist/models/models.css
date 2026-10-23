@@ -219,3 +219,29 @@ figure.print .said.open{-webkit-line-clamp:unset}
 @media (max-width:640px){figure.print{padding:4px 4px 6px}figure.print .said{font-size:12px!important;-webkit-line-clamp:3;margin:4px 2px 0}}
 .sq2.alive{overflow:hidden}
 .sq2 model-viewer::part(default-progress-bar){display:none}
+/* The browser (Evan 04:00Z): small review cards; Row = one at a time to swipe, Screen = all as a grid */
+.awbar .lay{display:flex;gap:6px}
+.awbar .lay .peb[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:10px}
+.rowcards{display:grid;grid-auto-flow:column;grid-auto-columns:min(86vw,760px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 2px 14px;scrollbar-width:none}
+.rowcards::-webkit-scrollbar{display:none}
+.mc{display:grid;gap:8px;padding:10px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--ink);text-decoration:none;scroll-snap-align:center;min-width:0}
+.mc:hover{border-color:var(--ink-soft)}
+.mn{display:flex;align-items:baseline;gap:8px;min-width:0}
+.mn strong{font-size:16px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mn small{color:var(--ink-soft);font-size:12px;white-space:nowrap}
+.mn .dot{position:static;margin-left:auto;flex:none}
+.mpair{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start}
+.mprint{display:grid;gap:4px;padding:4px;border-radius:10px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.mprint img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:7px;display:block}
+.mprint em{font-style:normal;font-size:13px;line-height:1.35;color:var(--ink-soft);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:0 2px 2px}
+.malive{position:relative;aspect-ratio:1}
+.malive model-viewer{position:absolute;inset:0;width:100%;height:100%;--poster-color:transparent;background:transparent}
+.malive model-viewer::part(default-progress-bar){display:none}
+.rowcards .mn strong{font-size:22px}
+.rowcards .mpair{gap:14px}
+@media (max-width:640px){.cards{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.cards .mc{padding:6px;gap:6px}.cards .mn small{display:none}.cards .mn strong{font-size:14px}.cards .mpair{gap:4px}.mprint{padding:3px}}
+.gearpop .modes{display:flex;gap:4px;padding:2px;margin-bottom:4px;border-radius:12px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.gearpop .modes button{flex:1;text-align:center;padding:0 14px}
+.awbar>.tools .lay+.peb{margin-left:4px}
+.awbar .gearpop{right:0;top:52px}
