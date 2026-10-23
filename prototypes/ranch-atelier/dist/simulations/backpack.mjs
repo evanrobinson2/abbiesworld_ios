@@ -60,13 +60,15 @@ export const STYLES = [
 // signal yet call earnCharm(id) when they finish.
 export const CORE_MEMORIES = 11; // Grace's basement 10 + the school roof 1, so far
 export const CHARMS = [
+ // The first charm (Evan, 16:49Z): win the cell game, Abbie's science adventure, and get off the slide.
+ {id: 'tardigrade', name: 'Tardigrade', icon: '🦠', quest: "Win Abbie's science adventure"},
  {id: 'first-memory', name: 'Gold coin', icon: '🪙', quest: "Find one of Daddy's core memories", when: s => s.coins >= 1},
  {id: 'basement', name: 'Floppy disk', icon: '💾', quest: "Find all ten memories in Grace's basement", when: s => s.places["Grace's basement"] >= 10},
  {id: 'school-roof', name: 'Star', icon: '⭐', quest: 'Find the memory on the school roof', when: s => Object.keys(s.places).some(p => /school/i.test(p) && s.places[p] > 0)},
  {id: 'brass-key', name: 'Brass key', icon: '🗝️', quest: "Find the café's secret key", when: s => s.items.includes('cafe-basement-key')},
  {id: 'moon-key', name: 'Moon', icon: '🌙', quest: 'Earn the key to the Moon base', when: s => s.items.some(i => /moon/i.test(i))},
  {id: 'all-memories', name: 'Heart', icon: '💛', quest: "Find every one of Daddy's core memories", when: s => s.coins >= CORE_MEMORIES},
- {id: 'bub', name: 'Bone', icon: '🦴', quest: 'Play fetch with bub'},
+ {id: 'bub', name: 'Bub', icon: '🐕', quest: 'Play fetch with bub'},
  {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café'},
  {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'}
 ];
@@ -133,6 +135,11 @@ const texCache = new Map();
 function patternTexture(base, pattern, accent, cloth) {
  const key = [base, pattern, accent, cloth].join('|');
  if (texCache.has(key)) return texCache.get(key);
+ const t = new T.CanvasTexture(patternCanvas(base, pattern, accent, cloth)); t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(2.6, 2.6); t.colorSpace = T.SRGBColorSpace; t.anisotropy = 4;
+ texCache.set(key, t); return t;
+}
+// The cloth as a flat 256 px tile: colour, pattern and grain (also what the decorating cards print).
+export function patternCanvas(base, pattern, accent, cloth) {
  const N = 256, cv = Object.assign(document.createElement('canvas'), {width: N, height: N}), g = cv.getContext('2d');
  g.fillStyle = base; g.fillRect(0, 0, N, N);
  g.fillStyle = accent; g.strokeStyle = accent;
@@ -152,8 +159,7 @@ function patternTexture(base, pattern, accent, cloth) {
  // Fabric grain: a fine weave so cloth reads as cloth, and the same canvas drives the bump.
  if (cloth !== 'vinyl' && cloth !== 'leather') { g.globalAlpha = .07; g.fillStyle = '#000'; for (let i = 0; i < N; i += 4) { g.fillRect(i, 0, 1, N); g.fillRect(0, i + 2, N, 1); } g.globalAlpha = 1; }
  if (cloth === 'leather') { g.globalAlpha = .08; for (let i = 0; i < 900; i++) { g.fillStyle = Math.random() < .5 ? '#000' : '#fff'; g.fillRect(Math.random() * N, Math.random() * N, 2, 2); } g.globalAlpha = 1; }
- const t = new T.CanvasTexture(cv); t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(2.6, 2.6); t.colorSpace = T.SRGBColorSpace; t.anisotropy = 4;
- texCache.set(key, t); return t;
+ return cv;
 }
 function star2d(g, cx, cy, r, ri) { g.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? ri : r; g.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr); } g.closePath(); g.fill(); }
 function heart2d(g, cx, cy, s) { g.beginPath(); g.moveTo(cx, cy + s * .9); g.bezierCurveTo(cx - s * 1.4, cy - s * .1, cx - s * .6, cy - s * 1.1, cx, cy - s * .35); g.bezierCurveTo(cx + s * .6, cy - s * 1.1, cx + s * 1.4, cy - s * .1, cx, cy + s * .9); g.fill(); }
@@ -169,6 +175,8 @@ function liningTexture(o) {
 }
 
 const shade = (hex, k) => { const c = new T.Color(hex); const h = {}; c.getHSL(h); return c.setHSL(h.h, Math.min(1, h.s * (k < 0 ? 1.05 : .92)), Math.max(0, Math.min(1, h.l + k))); };
+export function accentFor(l) { const col = option('colour', l.colour).c, trim = option('trim', l.trim); return l.pattern === 'plain' ? col : (lightness(col) > .7 ? trim.strap : '#fff6e2'); }
+const lightness = hex => { const n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255; return (Math.max(r, g, b) + Math.min(r, g, b)) / 510; };
 function materials(l, st) {
  const col = option('colour', l.colour).c, trim = option('trim', l.trim), lin = option('lining', l.lining);
  const cloth = st.cloth, light = new T.Color(col).getHSL({}).l > .7;
@@ -219,28 +227,99 @@ function pocketShape(id, w) {
  return s;
 }
 
+// Hero charms (Evan, 2026-10-23 16:34Z, on the Midjourney charm sheet: "these are perfect, build the charms"). Built from
+// tools/midjourney/outputs/backpack-0046/12-charms-sheet-*: chunky faceted enamel-and-gold pieces on a gold jump ring
+// and a short chain. Faceted means cut like a gem: a "pillow" from a flat outline with a raised apex on each face.
+// About 5 cm tall in the world; every part is named.
+function gem(points, t, apex, centre = [0, 0]) {
+ // points: the outline (x, y), counter-clockwise. A rim band of thickness 2t, and a fan to an apex on each side.
+ const pos = [], n = points.length, [cx, cy] = centre;
+ const P = (x, y, z) => pos.push(x, y, z);
+ for (let i = 0; i < n; i++) {
+  const [ax, ay] = points[i], [bx, by] = points[(i + 1) % n];
+  P(cx, cy, t + apex); P(ax, ay, t); P(bx, by, t);            // front facet
+  P(cx, cy, -t - apex); P(bx, by, -t); P(ax, ay, -t);         // back facet
+  P(ax, ay, t); P(ax, ay, -t); P(bx, by, -t); P(ax, ay, t); P(bx, by, -t); P(bx, by, t); // rim
+ }
+ const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.computeVertexNormals(); return g;
+}
+const starPts = (r, ri, k = 5) => Array.from({length: k * 2}, (_, i) => { const a = Math.PI / 2 + i * Math.PI / k, q = i % 2 ? ri : r; return [Math.cos(a) * q, Math.sin(a) * q]; });
+const heartPts = (k, n = 18) => { const s = new T.Shape(); heartShape(s, k); return s.getSpacedPoints(n).slice(0, -1).map(p => [p.x, p.y]); };
+function heartShape(s, k) { s.moveTo(0, -k * .9); s.bezierCurveTo(-k * 1.5, k * .1, -k * .7, k * 1.2, 0, k * .45); s.bezierCurveTo(k * .7, k * 1.2, k * 1.5, k * .1, 0, -k * .9); }
+
 function charmMesh(id, m) {
  const g = new T.Group(); g.name = `charm ${id}`;
- const add = (geo, mat, x = 0, y = 0, z = 0) => { const o = new T.Mesh(geo, mat); o.position.set(x, y, z); g.add(o); return o; };
- const ext = (shape, d, mat) => { const geo = new T.ExtrudeGeometry(shape, {depth: d, bevelEnabled: true, bevelThickness: .005, bevelSize: .005, bevelSegments: 1, curveSegments: 4}); geo.center(); return add(geo, mat); };
- const M = (c, o = {}) => new T.MeshStandardMaterial({color: c, flatShading: true, roughness: .4, ...o});
- const gold = m.gold;
- if (id === 'first-memory') { const c = add(new T.CylinderGeometry(.055, .055, .014, 10), gold); c.rotation.x = Math.PI / 2; const h = new T.Shape(); heartShape(h, .022); const e = ext(h, .004, M('#fff1b0', {metalness: .6})); e.position.z = .009; }
- else if (id === 'basement') { add(new T.BoxGeometry(.1, .1, .012), M('#3b5bd9')); add(new T.BoxGeometry(.05, .032, .014), M('#d9dde4', {metalness: .7}), .005, .032, 0); add(new T.BoxGeometry(.07, .04, .014), M('#fbf7ee'), 0, -.024, 0); }
- else if (id === 'school-roof') { const s = new T.Shape(); for (let i = 0; i < 10; i++) { const a = Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? .026 : .06; i ? s.lineTo(Math.cos(a) * r, Math.sin(a) * r) : s.moveTo(Math.cos(a) * r, Math.sin(a) * r); } ext(s, .014, M('#ffd23f', {emissive: '#6a4b00', emissiveIntensity: .3})); }
- else if (id === 'brass-key') { const r = add(new T.TorusGeometry(.024, .008, 4, 10), gold); r.position.y = .03; add(new T.BoxGeometry(.012, .07, .01), gold, 0, -.02, 0); add(new T.BoxGeometry(.022, .01, .01), gold, .012, -.045, 0); add(new T.BoxGeometry(.016, .01, .01), gold, .01, -.028, 0); }
- else if (id === 'moon-key') { const s = new T.Shape(); s.absarc(0, 0, .055, Math.PI * .3, Math.PI * 1.7, false); s.absarc(.025, 0, .044, Math.PI * 1.55, Math.PI * .45, true); ext(s, .016, M('#fff3b8', {emissive: '#5c5220', emissiveIntensity: .25})); }
- else if (id === 'all-memories') { const h = new T.Shape(); heartShape(h, .05); ext(h, .02, M('#ff4f7a', {roughness: .25})); }
- else if (id === 'bub') { add(new T.BoxGeometry(.08, .022, .02), M('#f6efe0')); for (const x of [-.042, .042]) for (const y of [-.012, .012]) add(new T.IcosahedronGeometry(.016, 0), M('#f6efe0'), x, y, 0); }
- else if (id === 'barista') { add(new T.CylinderGeometry(.03, .024, .05, 8, 1), M('#fbf7ee')); add(new T.CylinderGeometry(.026, .026, .004, 8), M('#6b3a1f'), 0, .024, 0); const h = add(new T.TorusGeometry(.014, .005, 4, 8, Math.PI), M('#fbf7ee'), .03, 0, 0); h.rotation.z = -Math.PI / 2; add(new T.CylinderGeometry(.045, .045, .006, 10), M('#7fc8c2'), 0, -.028, 0); }
- else if (id === 'rocket') { add(new T.CylinderGeometry(.02, .022, .06, 8), M('#f1ede3')); add(new T.ConeGeometry(.02, .035, 8), M('#e2533b'), 0, .047, 0); for (const s of [-1, 1]) { const f = add(new T.BoxGeometry(.03, .025, .006), M('#e2533b'), s * .022, -.024, 0); f.rotation.z = s * .5; } add(new T.CylinderGeometry(.009, .009, .004, 8), M('#5fb7ff'), 0, .008, .021).rotation.x = Math.PI / 2; }
- // The jump ring and a short chain: it hangs from the pivot at the group's origin.
- const top = new T.Box3().setFromObject(g).max.y, chain = new T.Group();
- [0, 1, 2].forEach(i => { const l = new T.Mesh(new T.TorusGeometry(.009, .0028, 4, 8), m.metal); l.position.y = -i * .014; l.rotation.y = i % 2 ? Math.PI / 2 : 0; chain.add(l); });
- const body = new T.Group(); g.children.slice().forEach(c => body.add(c)); body.position.y = -.04 - top;
- const out = new T.Group(); out.name = g.name; out.add(chain, body); return out;
+ const M = (name, c, o = {}) => Object.assign(new T.MeshStandardMaterial({color: c, flatShading: true, roughness: .38, ...o}), {name});
+ const gold = M('metal gold charm', '#f7c23c', {metalness: .55, roughness: .3, emissive: '#6a4600', emissiveIntensity: .4});
+ const add = (geo, mat, name, x = 0, y = 0, z = 0) => { const o = new T.Mesh(geo, mat); o.name = name; o.position.set(x, y, z); g.add(o); return o; };
+ const ext = (shape, d, mat, name, bev = .006) => { const geo = new T.ExtrudeGeometry(shape, {depth: d, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 1, curveSegments: 6}); geo.center(); return add(geo, mat, name); };
+ if (id === 'first-memory') { // the gold coin of Daddy's core memories, a faceted star struck on both faces
+  add(new T.CylinderGeometry(.058, .058, .02, 14), gold, 'coin body').rotation.x = Math.PI / 2;
+  add(new T.TorusGeometry(.056, .007, 4, 14), gold, 'coin rim');
+  const st = add(gem(starPts(.034, .015), .004, .008), M('metal gold bright', '#ffd65a', {metalness: .9, roughness: .2, emissive: '#6a4a00', emissiveIntensity: .3}), 'struck star'); st.position.z = 0;
+  st.scale.z = 1.9;
+ } else if (id === 'school-roof') { // the faceted gold star
+  add(gem(starPts(.066, .03), .01, .02), M('metal gold star', '#ffc93a', {metalness: .7, roughness: .3, emissive: '#6a4300', emissiveIntensity: .3}), 'faceted star');
+ } else if (id === 'all-memories') { // the faceted red heart
+  add(gem(heartPts(.052), .012, .022, [0, .005]), M('enamel heart red', '#e8334f', {roughness: .22, metalness: .1}), 'faceted heart');
+ } else if (id === 'moon-key') { // the crescent moon resting on a little cloud
+  const s = new T.Shape(); s.absarc(0, 0, .058, Math.PI * .28, Math.PI * 1.72, false); s.absarc(.028, .006, .046, Math.PI * 1.6, Math.PI * .4, true);
+  ext(s, .016, M('metal gold moon', '#f0b93a', {metalness: .75, roughness: .28, emissive: '#5a3c00', emissiveIntensity: .3}), 'crescent');
+  for (const [x, y, r] of [[-.02, -.045, .018], [.004, -.05, .021], [.03, -.044, .016], [-.036, -.036, .013]]) add(new T.IcosahedronGeometry(r, 0), M('enamel cloud white', '#f6f1e6', {roughness: .6}), 'cloud puff', x, y, .008);
+ } else if (id === 'brass-key') { // the café key, brass
+  const bow = add(new T.TorusGeometry(.024, .009, 5, 12), gold, 'key bow'); bow.position.y = .036;
+  add(gem(heartPts(.012, 10), .003, .004), M('enamel key red', '#e8334f', {roughness: .25}), 'bow heart', 0, .036, 0);
+  add(new T.BoxGeometry(.013, .072, .012), gold, 'key shaft', 0, -.014, 0);
+  add(new T.BoxGeometry(.024, .011, .012), gold, 'key bit', .012, -.042, 0); add(new T.BoxGeometry(.017, .01, .012), gold, 'key bit', .009, -.026, 0);
+ } else if (id === 'basement') { // Grace's floppy disk
+  add(new T.BoxGeometry(.1, .1, .014), M('enamel floppy blue', '#3b5bd9', {roughness: .3}), 'floppy body');
+  add(new T.BoxGeometry(.052, .034, .016), M('metal shutter', '#d9dde4', {metalness: .8, roughness: .25}), 'floppy shutter', .006, .031, 0);
+  add(new T.BoxGeometry(.016, .022, .018), M('ink dark', '#26304f'), 'shutter window', .012, .031, 0);
+  add(new T.BoxGeometry(.072, .042, .016), M('paper label', '#fbf7ee', {roughness: .8}), 'floppy label', 0, -.022, 0);
+  add(new T.BoxGeometry(.05, .004, .017), M('ink label line', '#e8334f'), 'label line', 0, -.012, 0);
+ } else if (id === 'tardigrade') { // a water bear: a plump segmented body on four pairs of stubby legs, in pink enamel (to match the cell game's water bear) with gold claws
+  const skin = M('enamel tardigrade pink', '#f6a8c4', {roughness: .3, emissive: '#5a1f38', emissiveIntensity: .2}), fold = M('enamel tardigrade fold', '#e889ab', {roughness: .3});
+  [-.03, -.01, .01, .03].forEach((x, i) => { const seg = add(new T.IcosahedronGeometry(.024, 1), i % 2 ? fold : skin, 'tardigrade segment', x, .002 * (i % 2), 0); seg.scale.set(.95, .82 - Math.abs(x) * 2, .8); });
+  const head = add(new T.IcosahedronGeometry(.02, 1), skin, 'tardigrade head', -.05, .006, 0); head.scale.set(1, .85, .8);
+  add(new T.CylinderGeometry(.006, .008, .012, 6), fold, 'tardigrade snout', -.068, .004, 0).rotation.z = Math.PI / 2;
+  for (const z of [-1, 1]) add(new T.IcosahedronGeometry(.0045, 0), M('tardigrade eye', '#1b1424', {roughness: .2}), 'tardigrade eye', -.058, .016, z * .011);
+  [-.036, -.012, .012, .036].forEach(x => { for (const z of [-1, 1]) {
+   const leg = add(new T.CylinderGeometry(.007, .009, .018, 6), skin, 'tardigrade leg', x, -.022, z * .012); leg.rotation.x = z * .25;
+   add(new T.ConeGeometry(.004, .008, 4), gold, 'tardigrade claw', x - .004, -.033, z * .015).rotation.z = Math.PI * .6;
+  } });
+ } else if (id === 'bub') { // bub, the black lab, faceted like the sheet's little dog
+  const fur = M('fur black lab', '#2b2724', {roughness: .55}), muzzle = M('fur muzzle', '#3d3632', {roughness: .55});
+  const body = add(new T.IcosahedronGeometry(.034, 0), fur, 'dog body', 0, -.012, 0); body.scale.set(1.45, .9, .85);
+  const head = add(new T.IcosahedronGeometry(.027, 0), fur, 'dog head', -.038, .02, 0); head.scale.set(1, .95, .9);
+  add(new T.IcosahedronGeometry(.013, 0), muzzle, 'dog muzzle', -.06, .012, 0).scale.set(1.3, .8, .9);
+  add(new T.IcosahedronGeometry(.005, 0), M('dog nose', '#111'), 'dog nose', -.074, .015, 0);
+  for (const z of [-1, 1]) { const ear = add(new T.ConeGeometry(.012, .026, 4), fur, 'dog ear', -.034, .03, z * .018); ear.rotation.set(z * .5, 0, Math.PI * .85);
+   add(new T.IcosahedronGeometry(.0045, 0), M('dog eye brown', '#6b3a1f', {roughness: .2}), 'dog eye', -.055, .028, z * .013); }
+  for (const [x, z] of [[-.03, -.014], [-.03, .014], [.03, -.014], [.03, .014]]) add(new T.BoxGeometry(.012, .03, .012), fur, 'dog leg', x, -.04, z);
+  const tail = add(new T.ConeGeometry(.007, .04, 4), fur, 'dog tail', .056, .006, 0); tail.rotation.z = -1.0;
+  add(new T.TorusGeometry(.014, .004, 4, 10), M('collar red', '#e8334f'), 'dog collar', -.03, .002, 0).rotation.y = Math.PI / 2;
+ } else if (id === 'barista') { // a takeaway cup from the café
+  add(new T.CylinderGeometry(.034, .026, .07, 10), M('paper cup cream', '#f4efe4', {roughness: .7}), 'cup');
+  add(new T.CylinderGeometry(.0335, .0305, .032, 10), M('paper sleeve brown', '#8a5a3c', {roughness: .8}), 'cup sleeve', 0, -.005, 0);
+  add(new T.CylinderGeometry(.037, .037, .012, 10), M('lid white', '#fbf7ee', {roughness: .4}), 'cup lid', 0, .04, 0);
+  add(new T.CylinderGeometry(.03, .036, .008, 10), M('lid white', '#fbf7ee', {roughness: .4}), 'lid rim', 0, .049, 0);
+  add(new T.IcosahedronGeometry(.008, 0), M('enamel leaf', '#4f9a45'), 'sleeve mark', 0, -.005, .034).scale.z = .3;
+ } else if (id === 'rocket') { // the red rocket with a porthole
+  const red = M('enamel rocket red', '#d9393a', {roughness: .25}), cream = M('enamel rocket cream', '#f4ece0', {roughness: .3});
+  add(new T.CylinderGeometry(.024, .026, .07, 8), cream, 'rocket body');
+  add(new T.ConeGeometry(.024, .04, 8), red, 'rocket nose', 0, .055, 0);
+  const ring = add(new T.TorusGeometry(.011, .004, 4, 10), gold, 'rocket porthole', 0, .012, .025); ring.rotation.x = 0;
+  add(new T.CircleGeometry(.011, 10), M('glass porthole', '#5fb7ff', {roughness: .1, emissive: '#1d4d7a', emissiveIntensity: .3}), 'porthole glass', 0, .012, .0255);
+  for (const a of [0, 2.1, 4.2]) { const f = add(new T.BoxGeometry(.022, .03, .006), a ? red : M('enamel fin blue', '#2e4fb8'), 'rocket fin', Math.cos(a) * .026, -.03, Math.sin(a) * .026); f.rotation.y = -a; f.rotation.z = .25 * Math.sign(Math.cos(a) || 1); }
+  add(new T.CylinderGeometry(.016, .02, .012, 8), gold, 'rocket nozzle', 0, -.041, 0);
+ }
+ // The gold jump ring, a short chain and the bail: it hangs from the pivot at the group's origin.
+ const top = new T.Box3().setFromObject(g).max.y, chain = new T.Group(); chain.name = 'charm chain';
+ [0, 1, 2, 3].forEach(i => { const l = new T.Mesh(new T.TorusGeometry(.008, .0026, 4, 8), gold); l.name = 'chain link'; l.position.y = -i * .012; l.rotation.y = i % 2 ? Math.PI / 2 : 0; chain.add(l); });
+ const bail = new T.Mesh(new T.TorusGeometry(.009, .003, 4, 8), gold); bail.name = 'charm bail'; bail.position.y = -.05; bail.rotation.y = Math.PI / 2; chain.add(bail);
+ const body = new T.Group(); body.name = 'charm body'; g.children.slice().forEach(c => body.add(c)); body.position.y = -.058 - top;
+ const out = new T.Group(); out.name = g.name; out.userData.charm = id; out.add(chain, body); return out;
 }
-function heartShape(s, k) { s.moveTo(0, -k * .9); s.bezierCurveTo(-k * 1.5, k * .1, -k * .7, k * 1.2, 0, k * .45); s.bezierCurveTo(k * .7, k * 1.2, k * 1.5, k * .1, 0, -k * .9); }
 
 // Build one backpack. Returns the group, both halves, the open control and the charm pendulums.
 export function buildBackpack(l = look(), {charms = []} = {}) {
@@ -251,6 +330,8 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
  const r2 = (x, y) => Math.min(1, (x / (W / 2)) ** 2 + ((y - cy) / (H / 2)) ** 2);
  const surfaceZ = (x, y) => half * (1 + puff * (1 - r2(x, y)));
  const halfWidthAt = y => Math.max(...outline.filter(p => Math.abs(p.y - y) < .05).map(p => Math.abs(p.x)), .1);
+ // A charm hangs down its chain, so its ring sits clear of the widest part of the bag below it, not just beside the ring.
+ const clearBelow = y => Math.max(...outline.filter(p => p.y < y + .05 && p.y > y - .26).map(p => Math.abs(p.x)), halfWidthAt(y)) + bev;
 
  const root = new T.Group(); root.name = `backpack ${st.id}`;
  const back = new T.Group(); back.name = 'half back'; const front = new T.Group(); front.name = 'half front';
@@ -378,10 +459,11 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
  // Charms hang from rings on the back half's side seams, alternating sides, and swing as pendulums.
  const pend = [];
  charms.forEach((id, i) => {
-  const side = i % 2 ? 1 : -1, row = Math.floor(i / 2), y = H * (.78 - row * .13);
-  const anchor = new T.Object3D(); anchor.position.set(side * (halfWidthAt(y) + .03), y, -.02); back.add(anchor);
+  // Rows share the seam; every other row steps back across the side panel so a full set hangs staggered, not stacked.
+  const rows = Math.ceil(charms.length / 2), gap = Math.min(.2, .6 / Math.max(1, rows - 1)), side = i % 2 ? 1 : -1, row = Math.floor(i / 2), y = H * (.8 - row * gap);
+  const anchor = new T.Object3D(); anchor.position.set(side * (clearBelow(y) + .03), y, row % 2 ? -half * .8 : -.02); back.add(anchor);
   const ring = new T.Mesh(new T.TorusGeometry(.018, .006, 4, 8), m.metal); ring.name = 'charm ring'; ring.position.copy(anchor.position); ring.rotation.y = Math.PI / 2; back.add(ring);
-  const c = charmMesh(id, m); c.scale.setScalar(1.6); root.add(c);
+  const c = charmMesh(id, m); c.scale.setScalar(rows > 3 ? 1.3 : 1.6); root.add(c);
   pend.push({id, anchor, mesh: c, ax: 0, az: 0, vx: 0, vz: 0, last: null, vel: new T.Vector3()});
  });
 
@@ -429,7 +511,7 @@ function itemTexture(icon) {
 }
 
 // el: a positioned element the canvas fills. items: [{id, name, icon}], coins: a number, charms: charm ids.
-export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, yaw = -.45, spin = true} = {}) {
+export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true} = {}) {
  await three();
  const canvas = document.createElement('canvas'); canvas.className = 'aw-bp-canvas';
  Object.assign(canvas.style, {position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block', touchAction: 'none', cursor: 'pointer'});
@@ -470,64 +552,90 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  const ro = new ResizeObserver(fit); ro.observe(el);
  rebuild();
 
- // Taps: on a closed backpack, open it; on an item, name it; on the open shell, close it.
+ // Which facet a part of the backpack belongs to: tap the part and its cards come up (Evan, 16:34Z).
+ const facetOf = o => {
+  for (; o && o !== bp.group; o = o.parent) {
+   const n = o.name || '';
+   if (/^charm /.test(n)) return 'charm';
+   if (/^lining/.test(n)) return 'lining';
+   if (/pocket/.test(n)) return 'pocket';
+   if (/strap|handle|piping|buckle|zip|clip|nozzle|fin$/.test(n)) return 'trim';
+   if (/^shell|ear$|flap|rolled top|plate|colour block|lid band/.test(n)) return 'colour';
+  }
+  return 'style';
+ };
+ let glow = null;
+ function highlight(f) {
+  glow = f;
+  bp.group.traverse(o => { if (!o.isMesh || !o.material?.emissive) return; const m = o.material;
+   m.userData.base ??= {c: m.emissive.getHex(), i: m.emissiveIntensity};
+   if (!(f && facetOf(o) === f)) { m.emissive.setHex(m.userData.base.c); m.emissiveIntensity = m.userData.base.i; } });
+ }
+
+ // Taps: an item names itself, a charm brings the camera in close, a part (while decorating) deals its cards,
+ // anything else opens or closes the backpack.
  const ray = new T.Raycaster(), ndc = new T.Vector2();
- const pick = e => { const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, cam); return ray; };
+ const pick = (x, y) => { const r = canvas.getBoundingClientRect(); ndc.set((x - r.left) / r.width * 2 - 1, -(y - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, cam); return ray; };
+ const hitPart = (x, y) => { const h = pick(x, y).intersectObject(bp.group, true).find(h => h.object.visible && !h.object.isSprite); return h ? facetOf(h.object) : null; };
  canvas.addEventListener('pointerdown', e => { touches.set(e.pointerId, e); drag = {x: e.clientX, y: e.clientY, yaw: yawWant, moved: touches.size > 1, pinch: touches.size > 1 ? gap() : 0, zoom}; canvas.setPointerCapture?.(e.pointerId); });
  const gap = () => { const [a, b] = [...touches.values()]; return a && b ? Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY) : 0; };
  canvas.addEventListener('pointercancel', e => { touches.delete(e.pointerId); drag = null; });
  canvas.addEventListener('wheel', e => { e.preventDefault(); zoom = Math.max(.55, Math.min(1.6, zoom * (1 + e.deltaY * .0012))); }, {passive: false});
  canvas.addEventListener('pointermove', e => { if (touches.has(e.pointerId)) touches.set(e.pointerId, e); if (!drag) return;
-  if (touches.size > 1 && drag.pinch) { zoom = Math.max(.55, Math.min(1.6, drag.zoom * drag.pinch / Math.max(1, gap()))); return; } const dx = e.clientX - drag.x; if (Math.abs(dx) > 6) drag.moved = true; yawWant = drag.yaw + dx * .01; idle = 0; });
+  if (touches.size > 1 && drag.pinch) { zoom = Math.max(.55, Math.min(1.6, drag.zoom * drag.pinch / Math.max(1, gap()))); return; }
+  const dx = e.clientX - drag.x; if (Math.abs(dx) > 6) drag.moved = true;
+  if (focus != null) { if (Math.abs(dx) > 40 && !drag.swiped) { drag.swiped = true; api.focusCharm(focus + (dx < 0 ? 1 : -1)); } return; }
+  yawWant = drag.yaw + dx * .01; idle = 0; });
  canvas.addEventListener('pointerup', e => {
   touches.delete(e.pointerId); const d = drag; drag = null; if (!d || d.moved) return;
-  const r = pick(e);
-  if (want > .5) {
+  const r = pick(e.clientX, e.clientY);
+  if (want > .5 && !deck) {
    const hit = r.intersectObjects([...sprites, ...(coinPile ? [coinPile] : [])], true)[0];
    if (hit) { let o = hit.object; while (o && !o.userData.item) o = o.parent; if (o) { say(o.userData.item.name, e); onTap?.(o.userData.item); return; } }
   }
   const ch = r.intersectObjects(bp.charms.map(p => p.mesh), true)[0];
-  if (ch) { let o = ch.object; while (o && !/^charm /.test(o.name)) o = o.parent; const c = CHARMS.find(x => o && o.name === 'charm ' + x.id); if (c) { say(`${c.name}: ${c.quest}`, e); const p = bp.charms.find(q => q.id === c.id); if (p) p.vx += 4; return; } }
+  if (ch) { let o = ch.object; while (o && !o.userData.charm) o = o.parent; const i = bp.charms.findIndex(p => p.mesh === o); if (i >= 0) { api.focusCharm(i); return; } }
+  if (focus != null) { api.unfocus(); return; }
+  if (deck) { const f = hitPart(e.clientX, e.clientY); deck.show(f && f !== 'charm' ? f : 'style'); highlight(f && f !== 'style' && f !== 'charm' ? f : null); return; }
   if (r.intersectObject(bp.group, true).length || want > .5) api.toggle();
  });
  let tag = null;
- function say(text, e) {
+ function say(text, e, ms = 2200) {
   tag?.remove(); tag = document.createElement('div'); tag.className = 'aw-bp-tag'; tag.textContent = text;
-  const r = el.getBoundingClientRect();
-  Object.assign(tag.style, {position: 'absolute', left: Math.max(8, Math.min(r.width - 200, e.clientX - r.left - 60)) + 'px', top: Math.max(6, e.clientY - r.top - 46) + 'px', zIndex: 3, maxWidth: '220px', padding: '6px 11px', borderRadius: '14px',
+  const r = el.getBoundingClientRect(), x = e ? e.clientX - r.left - 60 : r.width / 2 - 100, y = e ? e.clientY - r.top - 46 : r.height - 70;
+  Object.assign(tag.style, {position: 'absolute', left: Math.max(8, Math.min(r.width - 220, x)) + 'px', top: Math.max(6, y) + 'px', zIndex: 3, maxWidth: '220px', padding: '6px 11px', borderRadius: '14px',
    background: 'linear-gradient(160deg,#ffffffe8,#ffffffb8)', color: '#3a2a4a', font: '600 13px/1.25 var(--app-font,system-ui)', boxShadow: '0 8px 20px -8px #2a103066,inset 0 1px 0 #fff', pointerEvents: 'none'});
-  el.append(tag); const me = tag; setTimeout(() => { me.style.transition = 'opacity .3s'; me.style.opacity = 0; setTimeout(() => me.remove(), 320); }, 2200);
+  el.append(tag); const me = tag; setTimeout(() => { me.style.transition = 'opacity .3s'; me.style.opacity = 0; setTimeout(() => me.remove(), 320); }, ms);
  }
 
- // Dress-up: ten styles on either side, five facet orbs below. Each tap is a change she can see at once.
- let dress = null;
- function mountDress() {
-  dress = document.createElement('div'); dress.className = 'aw-bp-dress';
-  const facetOrb = f => `<button type="button" class="aw-bp-orb" data-f="${f.id}" aria-label="${f.name}"></button>`;
-  dress.innerHTML = `<button type="button" class="aw-bp-orb aw-bp-prev" aria-label="Previous style">‹</button><button type="button" class="aw-bp-orb aw-bp-next" aria-label="Next style">›</button>
-   <div class="aw-bp-dots">${STYLES.map((s, i) => `<i data-i="${i}" title="${s.name}"></i>`).join('')}</div><div class="aw-bp-orbs">${FACETS.map(facetOrb).join('')}</div>`;
-  el.append(dress);
-  const step = d => { const i = STYLES.findIndex(s => s.id === state.l.style); change({style: STYLES[(i + d + STYLES.length) % STYLES.length].id}, true); };
-  dress.querySelector('.aw-bp-prev').onclick = () => step(-1); dress.querySelector('.aw-bp-next').onclick = () => step(1);
-  dress.querySelectorAll('.aw-bp-dots i').forEach(d => d.onclick = () => change({style: STYLES[+d.dataset.i].id}, true));
-  dress.querySelectorAll('.aw-bp-orbs button').forEach(b => b.onclick = e => {
-   const f = FACETS.find(x => x.id === b.dataset.f), i = f.options.findIndex(o => o.id === state.l[f.id]), o = f.options[(i + 1) % f.options.length];
-   change({[f.id]: o.id}); say(o.name, e);
-  });
-  drawDress();
+ // Decorating is a card game (Evan, 16:34Z: "use the card system ... click the part of the backpack to change then the
+ // cards show and you drop into the facet"). The cards are Cards v3 faces (backpack-cards.mjs); dropping one on the
+ // backpack, or tapping it, puts that choice on.
+ let deck = null;
+ async function mountDeck() {
+  const {cardDeck} = await import('./backpack-cards.mjs?v=2');
+  if (deck || !alive) return;
+  deck = cardDeck(el, {look: () => state.l,
+   onDrop: (facet, value, x, y) => { const f = facet === 'style' ? 'style' : facet; const over = x == null || hitPart(x, y) != null; if (!over) return false; apply(f, value); return true; }});
+  deck.show('style');
  }
- function drawDress() {
-  if (!dress) return;
-  const i = STYLES.findIndex(s => s.id === state.l.style);
-  dress.querySelectorAll('.aw-bp-dots i').forEach((d, k) => d.classList.toggle('on', k === i));
-  dress.querySelectorAll('.aw-bp-orbs button').forEach(b => { b.style.background = swatch(b.dataset.f, state.l); b.innerHTML = b.dataset.f === 'pocket' ? pocketSvg(state.l.pocket) : ''; });
+ function apply(f, value) {
+  if (f === 'style') change({style: value}, true); else change({[f]: value});
+  burst = 1; if (f === 'lining') { want = Math.max(want, .62); }
+  highlight(f === 'style' ? null : f);
+  if (f === 'pattern') highlight('colour');
  }
  function change(patch, styleChange = false) {
   let nl = {...state.l, ...patch};
   if (styleChange) nl = {...styleOf(patch.style).look, style: patch.style};
-  state.l = nl; rebuild(); drawDress(); onChange?.(nl);
-  if (bp) bp.group.scale.setScalar(.92);
+  state.l = nl; rebuild(); if (glow) highlight(glow); onChange?.(nl);
+  if (bp) bp.group.scale.setScalar(.9);
  }
+
+ // The charm close-up: the camera comes in on one charm, it turns slowly, its quest is told; swipe for the next.
+ let focus = null;
+ const camPos = new T.Vector3(), camAt = new T.Vector3(), wantPos = new T.Vector3(), wantAt = new T.Vector3(), tmpV = new T.Vector3();
+ let snapped = false, burst = 0, hop = 0; const fBox = new T.Box3(), fQ = new T.Quaternion(), fQ2 = new T.Quaternion(), fUp = new T.Vector3(0, 1, 0);
 
  let raf = 0, prev = performance.now(), alive = true;
  const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
@@ -535,21 +643,42 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   if (!alive) return; raf = requestAnimationFrame(frame);
   if (!el.isConnected) return;
   const dt = Math.min(.05, (now - prev) / 1000); prev = now; idle += dt;
-  t += Math.sign(want - t) * Math.min(Math.abs(want - t), dt / .55); const e = ease(t);
+  const goal = deck && focus == null ? Math.max(want, .36) : want;
+  t += Math.sign(goal - t) * Math.min(Math.abs(goal - t), dt / .55); const e = ease(t);
   bp.setOpen(e);
-  if (spin && !drag && idle > 2 && want < .5) yawWant += dt * .25;
-  if (want > .5 && !drag) yawWant += (.32 - yawWant) * Math.min(1, dt * 3);
+  if (spin && !drag && idle > 2 && want < .5 && !deck && focus == null) yawWant += dt * .25;
+  // In close-up the bag turns its charm's seam toward you, rather than the camera flying round (or through) it.
+  const fSide = focus != null && bp.charms[focus] ? Math.sign(bp.charms[focus].anchor.position.x || 1) : 0;
+  if (focus != null) yawWant += (-fSide * 1.1 - yawWant) * Math.min(1, dt * 4);
+  else if (want > .5 && !drag) yawWant += (.32 - yawWant) * Math.min(1, dt * 3);
   yawNow += (yawWant - yawNow) * Math.min(1, dt * 8);
   holder.rotation.y = yawNow;
   holder.rotation.x = -e * .38;
   const s = bp.group.scale.x; bp.group.scale.setScalar(s + (1 - s) * Math.min(1, dt * 10));
   holder.position.y = e * bp.H * .98;
-  for (const sp of sprites) { sp.visible = e > .45; sp.material.opacity = Math.min(1, (e - .45) * 3); }
-  // Frame the closed pack, then the open clamshell (twice as tall).
-  const H = bp.H, ty = H * (.5 + .5 * e), span = H * (1.35 + e * 1.15), wide = (bp.W + .5) * 1.25;
-  const fov = cam.fov * Math.PI / 180, dist = Math.max(span / 2 / Math.tan(fov / 2), wide / 2 / Math.tan(fov / 2) / cam.aspect) * 1.08;
-  cam.position.set(0, ty + .35 * (1 - e) + .1, dist * zoom); cam.lookAt(0, ty, 0);
-  floor.visible = e < .5; floor.material.opacity = .18 * (1 - e * 2);
+  for (const sp of sprites) { sp.visible = e > .6; sp.material.opacity = Math.min(1, (e - .6) * 4); }
+  // Glow the part being decorated, gently.
+  if (glow) { const k = .18 + .12 * Math.sin(now / 260) + burst * .5; bp.group.traverse(o => { if (o.isMesh && o.material?.emissive && facetOf(o) === glow) { o.material.emissive.setHex(0xfff3d0); o.material.emissiveIntensity = k; } }); }
+  burst = Math.max(0, burst - dt * 2);
+  const H = bp.H, fov = cam.fov * Math.PI / 180;
+  if (focus != null && bp.charms[focus]) {
+   const p = bp.charms[focus]; scene.updateMatrixWorld(true);
+   const body = p.mesh.children[1]; fBox.setFromObject(body).getCenter(wantAt);
+   // Turn the charm's face to the camera whatever its chain is doing, with a slow sway.
+   body.parent.getWorldQuaternion(fQ).invert(); body.quaternion.copy(fQ).multiply(fQ2.setFromAxisAngle(fUp, .45 * Math.sin(now / 900))); hop = Math.max(0, hop - dt * .9);
+   // Frame it from in front; between charms the camera steps back a little so the swap reads as a move.
+   if (!p.size) { const b = new T.Box3().setFromObject(body), v = b.getSize(new T.Vector3()); p.size = Math.max(v.x, v.y, v.z) || .1; }
+   const d = Math.max(.3, p.size * 2.6) * zoom * (1 + hop * 1.6);
+   wantPos.copy(wantAt).add(tmpV.set(fSide * d * .12, d * .15, d));
+  } else {
+   const ty = H * (.5 + .5 * e) + (deck ? -H * .12 : 0), span = H * (1.35 + e * 1.15) * (deck ? 1.45 : 1), wide = (bp.W + .5) * 1.25;
+   const dist = Math.max(span / 2 / Math.tan(fov / 2), wide / 2 / Math.tan(fov / 2) / cam.aspect) * 1.08;
+   wantAt.set(0, ty, 0); wantPos.set(0, ty + .35 * (1 - e) + .1, dist * zoom);
+  }
+  if (!snapped) { camPos.copy(wantPos); camAt.copy(wantAt); snapped = true; }
+  const k = Math.min(1, dt * (focus != null ? 4 : 7)); camPos.lerp(wantPos, k); camAt.lerp(wantAt, k);
+  cam.position.copy(camPos); cam.lookAt(camAt);
+  floor.visible = e < .5 && focus == null; floor.material.opacity = .18 * (1 - e * 2);
   bp.update(dt);
   renderer.render(scene, cam);
  }
@@ -557,13 +686,23 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
 
  const api = {
   canvas, get isOpen() { return want > .5; },
-  open() { want = 1; idle = 0; }, close() { want = 0; idle = 0; }, toggle() { want = want > .5 ? 0 : 1; idle = 0; },
+  open() { want = 1; idle = 0; }, close() { want = 0; idle = 0; focus = null; }, toggle() { want = want > .5 ? 0 : 1; idle = 0; },
   get look() { return state.l; },
-  setLook(nl) { state.l = look(nl); rebuild(); drawDress(); },
+  setLook(nl) { state.l = look(nl); rebuild(); },
   setContents({items: it = state.items, coins: c = state.coins, charms: ch = state.charms} = {}) { state.items = it; state.coins = c; state.charms = ch; rebuild(); },
-  dressUp(on = true) { if (on && !dress) { mountDress(); want = 0; } else if (!on && dress) { dress.remove(); dress = null; } },
+  // Decorate (the old name dressUp is kept for callers): the backpack opens part way, the style cards are dealt.
+  dressUp(on = true) { if (on && !deck) { focus = null; mountDeck(); } else if (!on && deck) { deck.dispose(); deck = null; highlight(null); } },
+  get charmCount() { return bp.charms.length; },
+  focusCharm(i = 0) {
+   const n = bp.charms.length; if (!n) { say('No charms yet: finish a quest to earn one.'); return; }
+   const was = focus; if (was != null && bp.charms[was]) { bp.charms[was].mesh.children[1].quaternion.identity(); hop = 1; }
+   focus = ((i % n) + n) % n; const p = bp.charms[focus], c = CHARMS.find(x => x.id === p.id);
+   p.vx += 3; if (c) say(`${c.name}: ${c.quest}`, null, 3200); onFocus?.(focus);
+  },
+  unfocus() { if (focus == null) return; const p = bp.charms[focus]; if (p) p.mesh.children[1].quaternion.identity(); focus = null; onFocus?.(null); },
+  get focused() { return focus; },
   bounce() { if (bp) bp.group.scale.setScalar(1.12); bp?.charms.forEach(p => p.vz += 3); },
-  dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); canvas.remove(); dress?.remove(); tag?.remove(); }
+  dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); canvas.remove(); deck?.dispose(); tag?.remove(); }
  };
  style();
  if (dressUp) api.dressUp(true);
@@ -577,6 +716,8 @@ export function swatch(f, l) {
  if (f === 'lining') { const o = option('lining', l.lining); return o.rainbow ? 'linear-gradient(#ff6b6b,#ffb347,#ffe066,#7bd389,#5fb7ff,#a98bff)' : o.stars ? `radial-gradient(#ffe9a8 15%,transparent 20%) 0 0/8px 8px,${o.c}` : o.c; }
  return 'linear-gradient(160deg,#ffffffd0,#ffffff70)';
 }
+const POCKET_PATHS = {round: 'M5 13a7 5.6 0 1 0 14 0a7 5.6 0 1 0-14 0z', square: 'M7.5 8h9a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2z', heart: 'M12 19s-7-4.4-7-9a3.6 3.6 0 0 1 7-1.2A3.6 3.6 0 0 1 19 10c0 4.6-7 9-7 9z', star: 'M12 4.5l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L4.8 9.8l5-.7z', none: 'M12 12z'};
+export const pocketPath = id => POCKET_PATHS[id] || POCKET_PATHS.none;
 export function pocketSvg(id) {
  const p = {round: '<ellipse cx="12" cy="13" rx="7" ry="5.6"/>', square: '<rect x="5.5" y="8" width="13" height="10" rx="2"/>', heart: '<path d="M12 19s-7-4.4-7-9a3.6 3.6 0 0 1 7-1.2A3.6 3.6 0 0 1 19 10c0 4.6-7 9-7 9z"/>', star: '<path d="M12 4.5l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L4.8 9.8l5-.7z"/>', none: '<path d="M6 18L18 6" stroke-width="2"/>'}[id];
  return `<svg viewBox="0 0 24 24" fill="#fff8" stroke="#2b1d0e" stroke-opacity=".6" stroke-width="1.4">${p}</svg>`;

@@ -16,7 +16,7 @@
 // opens the backpack in 3D, cleaved into two half shells, with what she carries in both halves and her charms hanging
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
-import {glyph, look as bagLook, earnedCharms, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs';
+import {glyph, look as bagLook, earnedCharms, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=3';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const read = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } };
@@ -43,7 +43,7 @@ export function inventory() {
   window.AbbieInventory = api;
   addEventListener('storage', e => { if (e.key === KEY) dispatchEvent(new CustomEvent(EVENT, {detail: read()})); });
   addEventListener(EVENT, () => { drawPocket(); checkCharms(); });
-  addEventListener('aw-backpack-change', () => drawPocket());
+  addEventListener('aw-backpack-change', () => { drawPocket(); checkCharms(); });
   addEventListener('aw-memory-coins-change', () => checkCharms());
   addEventListener('storage', e => { if (/^aw-(memory-coins|basement-coins|backpack)$/.test(e.key || '')) { drawPocket(); checkCharms(); } });
   import('./presentation-layer.mjs').then(({volunteer}) => volunteer('abbie', {place: 'anywhere', dialect: 'her own backpack', items: [
@@ -89,15 +89,18 @@ async function openPop() {
     pop = Object.assign(document.createElement('div'), {className: 'aw-pocket-pop aw-bp-pop'});
     pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', "Abbie's backpack");
     pop.innerHTML = '<div class="aw-bp-stage"></div><button type="button" class="aw-bp-brush" aria-label="Dress up my backpack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14.5 4.5l5 5-7.8 7.8-5-5z" fill="#ffd23f55"/><path d="M6.7 12.3c-2 .4-3 2-3.2 4.2-.1 1.4-.8 2.2-1.5 2.5 2.6 1.3 6.2.6 7.5-1.6"/></svg></button>';
-    pop.querySelector('.aw-bp-brush').onclick = e => { e.stopPropagation(); if (!view) return; const on = !pop.classList.contains('dressing'); pop.classList.toggle('dressing', on); view.dressUp(on); if (!on) view.open(); };
+    pop.insertAdjacentHTML('beforeend', '<button type="button" class="aw-bp-brush aw-bp-charmcam" aria-label="Look at my charms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4"/><circle cx="12" cy="8.5" r="1.6"/><path d="M12 10.5l2.2 4.4 4.8.7-3.5 3.3.9 4.6L12 21.3l-4.4 2.2.9-4.6L5 15.6l4.8-.7z" fill="#ffd23f88"/></svg></button>');
+    pop.querySelector('.aw-bp-charmcam').onclick = e => { e.stopPropagation(); if (!view) return; if (view.focused != null) view.unfocus(); else { if (pop.classList.contains('dressing')) { pop.classList.remove('dressing'); view.dressUp(false); } view.open(); view.focusCharm(0); } };
+    pop.querySelector('.aw-bp-brush').onclick = e => { e.stopPropagation(); if (!view) return; const on = !pop.classList.contains('dressing'); pop.classList.toggle('dressing', on); view.unfocus(); view.dressUp(on); if (!on) view.open(); };
   }
   document.body.append(pop); pop.hidden = false;
   const w = Math.min(360, innerWidth - 16), h = Math.min(520, innerHeight - r.bottom - 18);
   Object.assign(pop.style, {width: w + 'px', height: Math.max(300, h) + 'px', left: Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + 'px', top: (r.bottom + 10) + 'px'});
   const contents = {items: list, coins: coinCount(), charms: earnedCharms()};
+  pop.querySelector('.aw-bp-charmcam').hidden = !contents.charms.length;
   try {
     if (!view) {
-      const {backpackView} = await import('./backpack.mjs');
+      const {backpackView} = await import('./backpack.mjs?v=3');
       view = await backpackView(pop.querySelector('.aw-bp-stage'), {...contents, look: bagLook(), spin: false, onChange: l => setLook(l)});
     } else { view.setLook(bagLook()); view.setContents(contents); }
     if (!pop.classList.contains('dressing')) setTimeout(() => view.open(), 120);
@@ -191,7 +194,7 @@ function style() {
   .aw-bp-stage{position:absolute;inset:0}.aw-bp-pop.flat .aw-bp-stage{position:static}
   .aw-bp-brush{position:absolute;right:6px;top:6px;z-index:4;width:40px;height:40px;border-radius:50%;border:1.5px solid #ffffffe0;display:grid;place-items:center;cursor:pointer;color:#3a2a4a;
     background:linear-gradient(160deg,#ffffffe8,#ffffff90);box-shadow:inset 0 2px 0 #fff,inset 0 -6px 10px #0000001f,0 8px 18px -6px #2a103066}
-  .aw-bp-brush svg{width:22px;height:22px}.aw-bp-pop.dressing .aw-bp-brush{background:linear-gradient(160deg,#fff6c8,#ffd23f)}.aw-bp-pop.flat .aw-bp-brush{display:none}
+  .aw-bp-brush svg{width:22px;height:22px}.aw-bp-charmcam{top:52px}.aw-bp-brush[hidden]{display:none}.aw-bp-pop.dressing .aw-bp-brush:not(.aw-bp-charmcam){background:linear-gradient(160deg,#fff6c8,#ffd23f)}.aw-bp-pop.flat .aw-bp-brush{display:none}
   .aw-pocket-pop strong{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-bottom:6px}
   .aw-pocket-pop ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:8px}
   .aw-pocket-pop li{display:grid;justify-items:center;gap:4px;text-align:center}

@@ -1,0 +1,464 @@
+{
+  "study": "AW-STUDY-0046",
+  "subject": "Abbie's backpack",
+  "generator": "Midjourney web (v7, 1:1 grids, not upscaled)",
+  "prompts": [
+    {
+      "number": 1,
+      "slug": "classic-school",
+      "prompt": "a kid's classic school backpack with a big rounded front pocket and two zips, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "f54de31d-e587-478c-8d54-d6032d7370f6",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "01-classic-school-0.jpg",
+        "01-classic-school-1.jpg",
+        "01-classic-school-2.jpg",
+        "01-classic-school-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/f54de31d-e587-478c-8d54-d6032d7370f6/0_0.png",
+        "https://cdn.midjourney.com/f54de31d-e587-478c-8d54-d6032d7370f6/0_1.png",
+        "https://cdn.midjourney.com/f54de31d-e587-478c-8d54-d6032d7370f6/0_2.png",
+        "https://cdn.midjourney.com/f54de31d-e587-478c-8d54-d6032d7370f6/0_3.png"
+      ],
+      "original_files": [
+        "01-classic-school-0.png",
+        "01-classic-school-1.png",
+        "01-classic-school-2.png",
+        "01-classic-school-3.png"
+      ],
+      "original_sha256": [
+        "1cd067f897237d6fcdcab3773e92f5713161a03335afe1c6f362d74ba006b384",
+        "8cc7ed76ae9ad5f275d99f82fd93d857ad7e20f1bf2eaa5a6f29effab8d08c39",
+        "104c8c92c46eb3712af684ea4eeb85da0e70b1f0c2c4f82b0b22e2e3477a7b6a",
+        "5def6501a511b137d0b1f054fd4b740091ea1b497d879495ecf732329a93e0c7"
+      ],
+      "sha256": [
+        "a99032391c2a6de89ae80c0462e79ee515396d44aeb6e9ce988e9f7a44f3e080",
+        "ef82359f3da378b08e5bae98d90976912401a6a1a0964b587f5d81dfa460bed3",
+        "47b66772ee79518b32048240fff21812cfa3ee2312ad5af1364937802fba8e9a",
+        "bffb2df28736a0f115e5998d119467fadf96fe56d08ffdab573e20c81eaa7c60"
+      ]
+    },
+    {
+      "number": 2,
+      "slug": "explorer-rucksack",
+      "prompt": "a kid's explorer hiking rucksack with a rolled bedroll on top and side bottle pocket, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "d6b84660-957d-4928-b83f-72f9d1acde39",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "02-explorer-rucksack-0.jpg",
+        "02-explorer-rucksack-1.jpg",
+        "02-explorer-rucksack-2.jpg",
+        "02-explorer-rucksack-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/d6b84660-957d-4928-b83f-72f9d1acde39/0_0.png",
+        "https://cdn.midjourney.com/d6b84660-957d-4928-b83f-72f9d1acde39/0_1.png",
+        "https://cdn.midjourney.com/d6b84660-957d-4928-b83f-72f9d1acde39/0_2.png",
+        "https://cdn.midjourney.com/d6b84660-957d-4928-b83f-72f9d1acde39/0_3.png"
+      ],
+      "original_files": [
+        "02-explorer-rucksack-0.png",
+        "02-explorer-rucksack-1.png",
+        "02-explorer-rucksack-2.png",
+        "02-explorer-rucksack-3.png"
+      ],
+      "original_sha256": [
+        "a6373d09107ac985a382efa0dfc322d77e366914f75d95594f20606b55f6d256",
+        "4525eb4adf00e2d2084d10d6a606b9f6bd052de88716181de6fc05f4e775779b",
+        "6d5439c58344d743f580e08b579765e3978b62ccfa594f654dd3e5a65e2ee9bc",
+        "46dd3ee0b4b71a94d5dea625b5735bdeb035157e481e5798ffa1a303c3c4e99c"
+      ],
+      "sha256": [
+        "fc247af494ac4d2663ddc6cca7969fc8c0b7dcc0efe2eb2e9294a29a080a4854",
+        "b6b30fcad0f12069f984429104e69456b7aa614da0cb87634f770aae993393e2",
+        "59255f0b7b3457a734e7ea36b340cb4528b5a9f8905fde9232b8f05950efcc8f",
+        "63ff4be45fccdd8e680962c9e1b157aa336131ecb29013c6491fd7d248888ae9"
+      ]
+    },
+    {
+      "number": 3,
+      "slug": "astronaut-bubble",
+      "prompt": "a kid's round bubble astronaut backpack with a porthole window and antenna, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "d322b37d-282e-42d4-891a-fb1731ec123e",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "03-astronaut-bubble-0.jpg",
+        "03-astronaut-bubble-1.jpg",
+        "03-astronaut-bubble-2.jpg",
+        "03-astronaut-bubble-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/d322b37d-282e-42d4-891a-fb1731ec123e/0_0.png",
+        "https://cdn.midjourney.com/d322b37d-282e-42d4-891a-fb1731ec123e/0_1.png",
+        "https://cdn.midjourney.com/d322b37d-282e-42d4-891a-fb1731ec123e/0_2.png",
+        "https://cdn.midjourney.com/d322b37d-282e-42d4-891a-fb1731ec123e/0_3.png"
+      ],
+      "original_files": [
+        "03-astronaut-bubble-0.png",
+        "03-astronaut-bubble-1.png",
+        "03-astronaut-bubble-2.png",
+        "03-astronaut-bubble-3.png"
+      ],
+      "original_sha256": [
+        "24db59de5adc9da0801afa0bf776b21e5657ea7abdd641e3da8133f0cb09cda0",
+        "a3d970536af25d4c75dcf98663573e7df220616b9ad88e8ee851ced7af87994d",
+        "aadcfdffc0d318305224174a651fb55002691b553412b5783bbe37b249794ab2",
+        "67d3edc42329f64a5069919e55b1cb85b8957f6e2d5c4f67af9ec13c8a1b6ea2"
+      ],
+      "sha256": [
+        "390d78c2f0e6ecdd25def396d2cedb238179f6f4c6e400336f33dd8d1dc3b46e",
+        "d2485e8e80463ecb23bcbbfa0b5100866f98a59d1309c0b4acebc1c6ffcfae43",
+        "60dd787b4d95760019b5afb42d12a0b6f5cdcc44998a506ed954350831c4c030",
+        "8cee7f217bf36b4d860fb321b42d1767bc6a8ef47fec39236b18d6fdc5e2731c"
+      ]
+    },
+    {
+      "number": 4,
+      "slug": "bunny",
+      "prompt": "a kid's cute bunny backpack with soft floppy ears and a face on the front flap, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "3678dc4a-719a-430f-9795-22b7646b0338",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "04-bunny-0.jpg",
+        "04-bunny-1.jpg",
+        "04-bunny-2.jpg",
+        "04-bunny-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/3678dc4a-719a-430f-9795-22b7646b0338/0_0.png",
+        "https://cdn.midjourney.com/3678dc4a-719a-430f-9795-22b7646b0338/0_1.png",
+        "https://cdn.midjourney.com/3678dc4a-719a-430f-9795-22b7646b0338/0_2.png",
+        "https://cdn.midjourney.com/3678dc4a-719a-430f-9795-22b7646b0338/0_3.png"
+      ],
+      "original_files": [
+        "04-bunny-0.png",
+        "04-bunny-1.png",
+        "04-bunny-2.png",
+        "04-bunny-3.png"
+      ],
+      "original_sha256": [
+        "d9d168e06a0e8ac9eede86a70a4b886392743b79dd038155f760d38ea71a32e7",
+        "6a852ec665ab85e30f2203d8351d710bb30bc046c9ea01055cfc66beb9e4c8ff",
+        "640fa2c1a39aa184417432c461cc5bc5f2d0c560bcd3dd5f33c5aff13eae243c",
+        "4efac7038c0f51574ec89049d58c507e3519e3f6ac65abb128ca081b31900a8e"
+      ],
+      "sha256": [
+        "2ec1e07f7b69b4cddff135f922650b3c6d3991110639525a90a036f695153c55",
+        "148e4a5d73fca251954ab7393ac96eb17c5cac8dec4069709e094507e6af1443",
+        "93379cc616b5ddd1ad6f0186f3e37460d7f73aea8a8cf5a10aaee9f652268120",
+        "081164d3daaf53667d24720728f64dbe20122883604831914992f827b62dbc13"
+      ]
+    },
+    {
+      "number": 5,
+      "slug": "ranch-saddlebag",
+      "prompt": "a kid's tan leather ranch saddlebag backpack with brass buckles and stitched flap, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "a94479c0-6d6e-4263-9a79-c83d10bc88d8",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "05-ranch-saddlebag-0.jpg",
+        "05-ranch-saddlebag-1.jpg",
+        "05-ranch-saddlebag-2.jpg",
+        "05-ranch-saddlebag-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/a94479c0-6d6e-4263-9a79-c83d10bc88d8/0_0.png",
+        "https://cdn.midjourney.com/a94479c0-6d6e-4263-9a79-c83d10bc88d8/0_1.png",
+        "https://cdn.midjourney.com/a94479c0-6d6e-4263-9a79-c83d10bc88d8/0_2.png",
+        "https://cdn.midjourney.com/a94479c0-6d6e-4263-9a79-c83d10bc88d8/0_3.png"
+      ],
+      "original_files": [
+        "05-ranch-saddlebag-0.png",
+        "05-ranch-saddlebag-1.png",
+        "05-ranch-saddlebag-2.png",
+        "05-ranch-saddlebag-3.png"
+      ],
+      "original_sha256": [
+        "e38938fc40d1cff7c645551378ac3bfd1485ab176f2b9535be19c3e1b0cbe47f",
+        "5866645900ca152c2f76f9feb7a029a6c49486991edfe49f8cae6a44e3207ce8",
+        "a804a87d0b335a6b5d2968d78077b909f077a9a97033002176fb446ce0894f13",
+        "91a80fb8cda243152e1b5634d5c84e4d6acc1eae68faac2477fa9f7e0a44e674"
+      ],
+      "sha256": [
+        "8101ab2fa750c215cb5285febe0f0045469ab575ea78b2b1ab10d7df5948fe04",
+        "9e683458827f20e83febdbe24dd87662fa15f1f5c19042ece1ff12bd0c1cd470",
+        "35df3106e9989482b4b5e98283592a4cf73e6b28f13ac44cdf52487c43e1e4dc",
+        "95c9d12a8427c22acdd26130b1ee39e66764ae7359fe8da802e33fe755c4c8be"
+      ]
+    },
+    {
+      "number": 6,
+      "slug": "turtle-shell",
+      "prompt": "a kid's turtle shell dome backpack, hexagon plates on the shell, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "1b3f8a83-e96e-4b83-a862-0d8d1016980d",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "06-turtle-shell-0.jpg",
+        "06-turtle-shell-1.jpg",
+        "06-turtle-shell-2.jpg",
+        "06-turtle-shell-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/1b3f8a83-e96e-4b83-a862-0d8d1016980d/0_0.png",
+        "https://cdn.midjourney.com/1b3f8a83-e96e-4b83-a862-0d8d1016980d/0_1.png",
+        "https://cdn.midjourney.com/1b3f8a83-e96e-4b83-a862-0d8d1016980d/0_2.png",
+        "https://cdn.midjourney.com/1b3f8a83-e96e-4b83-a862-0d8d1016980d/0_3.png"
+      ],
+      "original_files": [
+        "06-turtle-shell-0.png",
+        "06-turtle-shell-1.png",
+        "06-turtle-shell-2.png",
+        "06-turtle-shell-3.png"
+      ],
+      "original_sha256": [
+        "e0efa9632b4bd258fbe341adfe820d65d736ced019f977c333bdaa8e36cbacde",
+        "4420648d2aab9746f68327558d4ad0dea46f5eb7388fcfbef802a75454bc4fca",
+        "68a1087cc078dcdb87c5e7e77c491e2fbdb275d8728ef43358c4bd1734115053",
+        "7704da03905b8ee1128d6ae30723128a50763cadca1152e30188765524512f09"
+      ],
+      "sha256": [
+        "03a4f32b6599c84e30ddc11790e7d5ff1beb735efda648d6aa33c0bce5b7c8ad",
+        "65b6a27f5cec5ae675b9f3a628cec5b17fc69d575403aa018717f1689fc2b4c4",
+        "995267503f46b26d686dabb5fe89c6c8eb0a75ac49a68b27a0ca2d229a6b9504",
+        "414bc0007ae0f28cd5813515eed42e5b4af229932e44f997c7cc1507f00de892"
+      ]
+    },
+    {
+      "number": 7,
+      "slug": "roll-top",
+      "prompt": "a kid's roll-top bucket backpack with a folded top and clip buckle, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "40512036-075f-4319-b95b-d192f70dcb2e",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "07-roll-top-0.jpg",
+        "07-roll-top-1.jpg",
+        "07-roll-top-2.jpg",
+        "07-roll-top-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/40512036-075f-4319-b95b-d192f70dcb2e/0_0.png",
+        "https://cdn.midjourney.com/40512036-075f-4319-b95b-d192f70dcb2e/0_1.png",
+        "https://cdn.midjourney.com/40512036-075f-4319-b95b-d192f70dcb2e/0_2.png",
+        "https://cdn.midjourney.com/40512036-075f-4319-b95b-d192f70dcb2e/0_3.png"
+      ],
+      "original_files": [
+        "07-roll-top-0.png",
+        "07-roll-top-1.png",
+        "07-roll-top-2.png",
+        "07-roll-top-3.png"
+      ],
+      "original_sha256": [
+        "e38e24f3615b8e998145affb0cc8aa5ac03937b1863141e292ea1fb42a0a9bfe",
+        "f1466400b3ee4b3631455e9158d3d095b746fcc403494cf4062c57115e4af94b",
+        "521afe4631ce367f2b16c565468a47346966c0c1244472f98bb290f851e08944",
+        "a1f66b08b265440188cb4bcd584e3bc9f88854ad6e84589d43c2e3c64af4669f"
+      ],
+      "sha256": [
+        "101d9e2a31655e2bf5475f8cce6d87efe80ef60cda1f89089ff82ea89dad08f3",
+        "2aa118eb454eaa60b0ea84ee4b7e751b474079f2060f7e2d5d180fda0ed4235c",
+        "adbc9a0d056815135d877988a61f5006dfec761a975dee2901f9e0330d34d6ed",
+        "4dc7ffd21fdc576d67d41ca544be04f137151375410e38369848a3343982e513"
+      ]
+    },
+    {
+      "number": 8,
+      "slug": "retro-neon",
+      "prompt": "a kid's retro 1980s neon backpack, chunky colour blocks, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "dc7644df-7876-4264-b20a-6de61a040f2d",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "08-retro-neon-0.jpg",
+        "08-retro-neon-1.jpg",
+        "08-retro-neon-2.jpg",
+        "08-retro-neon-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/dc7644df-7876-4264-b20a-6de61a040f2d/0_0.png",
+        "https://cdn.midjourney.com/dc7644df-7876-4264-b20a-6de61a040f2d/0_1.png",
+        "https://cdn.midjourney.com/dc7644df-7876-4264-b20a-6de61a040f2d/0_2.png",
+        "https://cdn.midjourney.com/dc7644df-7876-4264-b20a-6de61a040f2d/0_3.png"
+      ],
+      "original_files": [
+        "08-retro-neon-0.png",
+        "08-retro-neon-1.png",
+        "08-retro-neon-2.png",
+        "08-retro-neon-3.png"
+      ],
+      "original_sha256": [
+        "bfb0313a711401c5b70ec4e2cd5eb8b9e471af8ebfd3a36eac6059df11b59875",
+        "f74757a9cf339e6b2865bc1160848118ca6b4c3b1571d7972bc5fd7d7764e40d",
+        "3d4c760c39661f9e381e73eadf89112a762062b35fac5dbcf779fd3138929226",
+        "026ab14488d5210fbf1796da62aec7c62ce03e2dbe32bc2bac755ff0852a96ac"
+      ],
+      "sha256": [
+        "00a3651516f7655726b9cc2d0404059d0c691a93b0aecc6cf48545fc4ff7e4f4",
+        "c8833214bab8d46ba1885bf632fb7834746ccf60bc925416f18d783a4a17a924",
+        "5cbe7591997f588bc2dc71ae276db0db076111409eda72e044a2913a06d322a2",
+        "dfc505ac68141af0b4bbfc7a2e83340c049b0bd35b496690e96caaff64ca80ba"
+      ]
+    },
+    {
+      "number": 9,
+      "slug": "wicker-basket",
+      "prompt": "a kid's woven wicker basket backpack with leather straps and a flower, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "12a2ba00-467a-4c79-9f0e-22faec9361a1",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "09-wicker-basket-0.jpg",
+        "09-wicker-basket-1.jpg",
+        "09-wicker-basket-2.jpg",
+        "09-wicker-basket-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/12a2ba00-467a-4c79-9f0e-22faec9361a1/0_0.png",
+        "https://cdn.midjourney.com/12a2ba00-467a-4c79-9f0e-22faec9361a1/0_1.png",
+        "https://cdn.midjourney.com/12a2ba00-467a-4c79-9f0e-22faec9361a1/0_2.png",
+        "https://cdn.midjourney.com/12a2ba00-467a-4c79-9f0e-22faec9361a1/0_3.png"
+      ],
+      "original_files": [
+        "09-wicker-basket-0.png",
+        "09-wicker-basket-1.png",
+        "09-wicker-basket-2.png",
+        "09-wicker-basket-3.png"
+      ],
+      "original_sha256": [
+        "841d3f78ddfd4739314444cace8519cb6c2ce40e4e433561af3ac13a9732e214",
+        "246d2f03f5fd218d89094b8076a97a8dc84f35f6af84cebd3df18eb23caf2452",
+        "9efa08e9adb9f8bf6af65708696bd01da29088857dced2f35668c6911a4a8968",
+        "b09ad773caa9b82460e6e3c6ac521f9b8f79218b9083409d2d9d025bd985b164"
+      ],
+      "sha256": [
+        "0b1a9fd2f3a6486bb68e72d0329a1fc93e52f1c22e1b3940b1a756b926926794",
+        "8a27b7903a4afaa2adffb967c80786107fba41e04d4f40397775102c811b6b1c",
+        "a3ae65c344c71cb1edbc04f09b914809a4d9e3f39425ed79bcbf268754999932",
+        "27c13e7433babb1a1cdf04377a44281d6e0a33bbb442787194fed2a9cb391c26"
+      ]
+    },
+    {
+      "number": 10,
+      "slug": "rocket",
+      "prompt": "a kid's little rocket backpack with fins and a nose cone, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "6e33a9ef-5976-474f-9f84-0b049fec159a",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "10-rocket-0.jpg",
+        "10-rocket-1.jpg",
+        "10-rocket-2.jpg",
+        "10-rocket-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/6e33a9ef-5976-474f-9f84-0b049fec159a/0_0.png",
+        "https://cdn.midjourney.com/6e33a9ef-5976-474f-9f84-0b049fec159a/0_1.png",
+        "https://cdn.midjourney.com/6e33a9ef-5976-474f-9f84-0b049fec159a/0_2.png",
+        "https://cdn.midjourney.com/6e33a9ef-5976-474f-9f84-0b049fec159a/0_3.png"
+      ],
+      "original_files": [
+        "10-rocket-0.png",
+        "10-rocket-1.png",
+        "10-rocket-2.png",
+        "10-rocket-3.png"
+      ],
+      "original_sha256": [
+        "5429de4d309f224ce40be28652244619df6c3ad20577a4e6dc2eae4b22b4c972",
+        "668be7e39f55915eb19cf4f2892fdf673370f02ac8e801a0e83696189777da97",
+        "defbfb0a22efb08f9dce8075293327294f0eae1ebd4f63a811ff90cf6abc6a77",
+        "d6b80f859908fa5657fb96d1f6df517b51254719e3adb6f925a37cf734c2b3e3"
+      ],
+      "sha256": [
+        "ae489fef3272d11cca4c4b0685fdb7eb2937adea71f95ab0303e0191ee288786",
+        "7f63f41b328f82d3c3d4aa33240ff9ffe8358b89087c46ca9da6bb1c39810fa4",
+        "e4f701a2149db9634a5194062ac02065e3f009558fba8372bcb94f5995d55f18",
+        "38c90edd443a41fe882fb5775630c445367e4787603b0cf68eca33a03cd2e77f"
+      ]
+    },
+    {
+      "number": 11,
+      "slug": "clamshell-open",
+      "prompt": "a kid's backpack opened fully flat like a clamshell split into two mirrored halves, colourful lining, small treasures (brass key, gold coins, crayons, a toy) nestled in both halves, top-down view, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "0da22e47-d51b-4353-b9f2-6492f833dda9",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "11-clamshell-open-0.jpg",
+        "11-clamshell-open-1.jpg",
+        "11-clamshell-open-2.jpg",
+        "11-clamshell-open-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/0da22e47-d51b-4353-b9f2-6492f833dda9/0_0.png",
+        "https://cdn.midjourney.com/0da22e47-d51b-4353-b9f2-6492f833dda9/0_1.png",
+        "https://cdn.midjourney.com/0da22e47-d51b-4353-b9f2-6492f833dda9/0_2.png",
+        "https://cdn.midjourney.com/0da22e47-d51b-4353-b9f2-6492f833dda9/0_3.png"
+      ],
+      "original_files": [
+        "11-clamshell-open-0.png",
+        "11-clamshell-open-1.png",
+        "11-clamshell-open-2.png",
+        "11-clamshell-open-3.png"
+      ],
+      "original_sha256": [
+        "81ec8719991db7bd6ad6d2b06a7542e6096550272748a13a0c6ac165f2819192",
+        "5c0f28cc0909d400900e199ef551d266a54a3e78c5c4a2789ed31cd562bb69f5",
+        "933238d286f48d803579bbef8ec07e8c645b99a5055393456a1f9e0d7096aab1",
+        "6ae489e33194c8c6d50b4e8ac8167c79ee683359e2b6d7513229a14cb22e1196"
+      ],
+      "sha256": [
+        "488550683ab73d5437e6bdf28fe5e9f2746f2c9607de066b021c66ce5e155413",
+        "05615fbfd83ba6639dbc8bea5e058e86edee4fada83ecc87dc82e270069c13e1",
+        "aa8aa4d67f81b72926a81bb1a6790ee3934ac0e90fcd39fe98b5abfe027c40c1",
+        "48c8215ec8765361685dd68f9b6a4db8d82aebd4cfe304abe21431cc405b4cd7"
+      ]
+    },
+    {
+      "number": 12,
+      "slug": "charms-sheet",
+      "prompt": "a sheet of nine tiny backpack charms (a gold coin, a star, a bell, a moon, a horseshoe, a heart, a little dog, a coffee cup, a rocket) on short chains, enamel pin style, stylized low-poly hero game prop, chunky handcrafted toy look, clean faceted shapes, rich saturated colours, soft studio light, three-quarter view, single object centred on a plain warm cream background, no text, no logos --ar 1:1 --v 7",
+      "job_id": "57944ff9-0ee2-415d-8faf-394b695ca5bb",
+      "date": "2026-10-23",
+      "mode": "Fast",
+      "files": [
+        "12-charms-sheet-0.jpg",
+        "12-charms-sheet-1.jpg",
+        "12-charms-sheet-2.jpg",
+        "12-charms-sheet-3.jpg"
+      ],
+      "source_urls": [
+        "https://cdn.midjourney.com/57944ff9-0ee2-415d-8faf-394b695ca5bb/0_0.png",
+        "https://cdn.midjourney.com/57944ff9-0ee2-415d-8faf-394b695ca5bb/0_1.png",
+        "https://cdn.midjourney.com/57944ff9-0ee2-415d-8faf-394b695ca5bb/0_2.png",
+        "https://cdn.midjourney.com/57944ff9-0ee2-415d-8faf-394b695ca5bb/0_3.png"
+      ],
+      "original_files": [
+        "12-charms-sheet-0.png",
+        "12-charms-sheet-1.png",
+        "12-charms-sheet-2.png",
+        "12-charms-sheet-3.png"
+      ],
+      "original_sha256": [
+        "56d0b5516967691e6497b4fe86f8e047cef55bbee902c58d5592693b3c5de24a",
+        "f0641fd0c49665c55ed173fabd86cc73f997c2d76703bb860e7ffce3038e77cd",
+        "ef7c8a5d12924895a8823c6e07ceafc8f81ed105398266d1ae905b56e8cf89d8",
+        "c2b1aac65ed5b63c3e1fdc379bff90a619d149f5755a056d96f75ddfa35fcda8"
+      ],
+      "sha256": [
+        "31b6409dce798c6e4cf216c089001318949469b39cf4a8419d982d4af6fb7563",
+        "a7456e55b9e2c386f027a21e0df4296937398a058d705892861b136a89678370",
+        "769e6f21ae7e794ac517d71d9f68fe85bd431c6e2eff2a68355e0be0d1f7fb6a",
+        "358e94d4a490b8deeb623c01ca9e8a3922b5e6d620dbb056aad29bcce2141130"
+      ]
+    }
+  ],
+  "repo_copy": "JPEG, longest side 768 px, quality 85 (sips). original_sha256 is of the full-size Midjourney PNG."
+}

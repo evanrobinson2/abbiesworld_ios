@@ -37,6 +37,7 @@ a{color:var(--teal)}
 @media (max-width:640px){.compare{grid-template-columns:1fr}}
 .pane{position:relative;aspect-ratio:1;border-radius:22px;overflow:hidden;background:#efe7da;border:1px solid var(--line)}
 .pane img{width:100%;height:100%;object-fit:cover;display:block}
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;height:100%}.quad img{width:100%;height:100%;object-fit:cover}
 .pane .tag{position:absolute;left:10px;top:10px;z-index:3;font:600 .7rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:#ffffffd8;color:#2b1d2e}
 .pane .wait{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:#6c5f70;font:500 .95rem var(--display)}
 .strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
@@ -73,8 +74,8 @@ a{color:var(--teal)}
   <span class="eyebrow">AW-STUDY-0046 · Game canon</span>
   <h1>Abbie's <em>backpack</em></h1>
   <p class="lede">Every player's inventory is a backpack. Tap it and it opens all the way, half shell, like a clamshell split in two, with what she carries sitting in both halves. She picks one of ten styles, dresses five facets, and hangs a charm on it for every quest she finishes.</p>
-  <div class="btns"><button class="btn main" id="bOpen">Open it</button><button class="btn" id="bDress">Dress it up</button><button class="btn" id="bMine">Make this her backpack</button></div>
-  <p class="meta" id="mineMsg">Drag to turn it, pinch or scroll to zoom. Tap a thing inside to hear its name; tap a charm to see its quest.</p>
+  <div class="btns"><button class="btn main" id="bOpen">Open it</button><button class="btn" id="bDress">Decorate it</button><button class="btn" id="bCharms">Look at the charms</button><button class="btn" id="bMine">Make this her backpack</button></div>
+  <p class="meta" id="mineMsg">Drag to turn it, pinch or scroll to zoom. Tap a thing inside to hear its name. Tap a charm and the camera comes in close; swipe for the next one.</p>
  </div>
 </section>
 
@@ -93,14 +94,18 @@ a{color:var(--teal)}
 <section class="col">
  <span class="eyebrow">Five facets</span>
  <h2>What she can change</h2>
- <p>Every style has a look of its own until she changes it. In the game the facets are five glass orbs under the backpack; each tap is the next choice, seen at once.</p>
+ <p>Decorating is a card game. Press <b>Decorate it</b>, then tap a part of the backpack: its cards are dealt (the body deals colours and patterns, the pocket deals pockets, a strap deals straps, the inside deals linings). Drag a card onto the backpack, or tap it, and that choice goes on. The cards are the same Cards v3 stock as the tile hand; each card's window shows the backpack wearing that choice. Every style has a look of its own until she changes it.</p>
  <div class="facets" id="facets"></div>
 </section>
 
 <section class="col">
  <span class="eyebrow">Charms</span>
  <h2>A vanity badge for every quest</h2>
- <p>Charms hang from rings on the backpack's side seams and swing when it moves. They come from quests, and most of them from Daddy's core memories, the gold coins. A charm she has already earned on this device shows in gold.</p>
+ <p>Charms hang from rings on the backpack's side seams and swing when it moves. They come from quests, and most of them from Daddy's core memories, the gold coins. Each is a chunky faceted gold-and-enamel piece on a jump ring and chain, built from the Midjourney charm sheet. Tap one, or <b>Look at the charms</b>, and the camera closes in on it while it turns; swipe for the next.</p>
+ <div class="compare">
+  <div class="pane"><span class="tag">Midjourney proof</span><img src="proofs/12-charms-sheet-2.jpg" alt="Midjourney proof: a sheet of backpack charms"></div>
+  <div class="pane" id="charmStage"><span class="tag">Live 3D · swipe for the next</span></div>
+ </div>
  <div class="charms" id="charms"></div>
 </section>
 
@@ -129,28 +134,29 @@ a{color:var(--teal)}
 </main>
 
 <script type="module">
-import {STYLES, FACETS, CHARMS, look, setLook, earnedCharms, backpackView, swatch, pocketSvg, styleOf} from '../../simulations/backpack.mjs';
+import {STYLES, FACETS, CHARMS, look, setLook, earnedCharms, backpackView, swatch, pocketSvg, styleOf} from '../../simulations/backpack.mjs?v=3';
 const $ = id => document.getElementById(id);
 const DEMO = [{id: 'cafe-basement-key', name: 'Brass key', icon: '🗝️'}, {id: 'crayon', name: 'Purple crayon', icon: '🖍️'}, {id: 'map', name: "Daddy's map", icon: '🗺️'}, {id: 'apple', name: 'An apple for bub', icon: '🍎'}, {id: 'shell', name: 'A seashell', icon: '🐚'}];
-const DEMO_CHARMS = ['first-memory', 'school-roof', 'brass-key', 'basement', 'all-memories'];
+const DEMO_CHARMS = ['tardigrade', 'first-memory', 'school-roof', 'brass-key', 'basement', 'all-memories', 'moon-key', 'bub', 'barista', 'rocket'];
 let cur = look();
 const hero = await backpackView($('stage'), {look: cur, items: DEMO, coins: 5, charms: DEMO_CHARMS, onChange: l => { cur = l; sync(); }});
 $('stage').addEventListener('pointerup', () => setTimeout(() => $('hint').textContent = hero.isOpen ? 'Tap it again to close' : 'Tap it to open', 50));
 let dressing = false;
 $('bOpen').onclick = () => { if (dressing) { dressing = false; hero.dressUp(false); } hero.toggle(); setTimeout(() => { $('bOpen').textContent = hero.isOpen ? 'Close it' : 'Open it'; $('hint').textContent = hero.isOpen ? 'Tap it again to close' : 'Tap it to open'; }, 20); };
-$('bDress').onclick = () => { dressing = !dressing; hero.dressUp(dressing); $('bDress').textContent = dressing ? 'Done' : 'Dress it up'; };
+$('bDress').onclick = () => { dressing = !dressing; hero.dressUp(dressing); $('bDress').textContent = dressing ? 'Done' : 'Decorate it'; $('hint').textContent = dressing ? 'Tap a part, then drop a card on it' : 'Tap it to open'; };
+$('bCharms').onclick = () => { if (hero.focused != null) { hero.unfocus(); $('bCharms').textContent = 'Look at the charms'; } else { hero.focusCharm(0); $('bCharms').textContent = 'Back to the backpack'; } };
 $('bMine').onclick = () => { setLook(cur); $('mineMsg').textContent = `Saved: in the game, Abbie's backpack on this device is now the ${styleOf(cur.style).name} one.`; };
 
-// Proofs: tools/midjourney/outputs/backpack-0046/, copied into proofs/ (null until the Mac sends them).
-const PROOFS = window.BACKPACK_PROOFS || {};
+// Proofs: tools/midjourney/outputs/backpack-0046/ (provenance.json there), copied here at 480 px.
+const PROOFS = {classic: '01-classic-school', explorer: '02-explorer-rucksack', bubble: '03-astronaut-bubble', bunny: '04-bunny', saddlebag: '05-ranch-saddlebag', turtle: '06-turtle-shell', rolltop: '07-roll-top', retro: '08-retro-neon', wicker: '09-wicker-basket', rocket: '10-rocket'};
 const model = await backpackView($('model'), {look: {style: cur.style}, items: DEMO.slice(0, 2), coins: 2, charms: DEMO_CHARMS.slice(0, 3)});
 function showStyle(id) {
  const st = styleOf(id), p = PROOFS[id];
- $('proof').innerHTML = '<span class="tag">Midjourney proof</span>' + (p ? `<img src="${p}" alt="Midjourney proof: ${st.name} backpack">` : '<div class="wait">The Midjourney proof for this style is on its way from the Mac.</div>');
+ $('proof').innerHTML = '<span class="tag">Midjourney proofs</span><div class="quad">' + [0, 1, 2, 3].map(i => `<img src="proofs/${p}-${i}.jpg" alt="Midjourney proof ${i + 1}: ${st.name} backpack">`).join('') + '</div>';
  model.setLook({style: id}); $('styleLine').textContent = `${st.name}: ${st.line}`;
  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.id === id));
 }
-$('strip').innerHTML = STYLES.map(s => `<button class="chip" data-id="${s.id}"><img src="img/style-${s.id}.png" alt="">${s.name}</button>`).join('');
+$('strip').innerHTML = STYLES.map(s => `<button class="chip" data-id="${s.id}"><img src="../../simulations/assets/backpack/style-${s.id}.png" alt="">${s.name}</button>`).join('');
 $('strip').querySelectorAll('.chip').forEach(c => c.onclick = () => { showStyle(c.dataset.id); hero.setLook({...cur, style: c.dataset.id, ...styleOf(c.dataset.id).look}); cur = hero.look; sync(); });
 showStyle(cur.style);
 
@@ -159,6 +165,8 @@ function sync() {
  $('facets').querySelectorAll('button').forEach(b => b.onclick = () => { cur = {...cur, [b.dataset.f]: b.dataset.o}; hero.setLook(cur); sync(); });
 }
 sync();
+const charmView = await backpackView($('charmStage'), {look: {style: 'classic'}, items: [], coins: 0, charms: DEMO_CHARMS, spin: false});
+let ci = 0; charmView.focusCharm(0); setInterval(() => { if (document.hidden) return; const box = $('charmStage').getBoundingClientRect(); if (box.bottom < 0 || box.top > innerHeight) return; charmView.focusCharm(++ci); }, 4200);
 const got = new Set(earnedCharms());
 $('charms').innerHTML = CHARMS.map(c => `<div class="charm ${got.has(c.id) ? 'got' : ''}"><span class="i">${c.icon}</span><div><b>${c.name}</b><small>${c.quest}${c.when ? '' : ' (quest coming)'}</small></div></div>`).join('');
 </script>
