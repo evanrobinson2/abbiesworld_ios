@@ -35,7 +35,8 @@ const seenIds = (() => { try { return JSON.parse(fs.readFileSync(path.join(root,
 const results = [];
 for (const [name, viewport] of [['phone', {width: 390, height: 844}], ['desktop', {width: 1440, height: 900}]]) {
   const tab = await browser.newPage({viewport, deviceScaleFactor: 1});
-  await tab.addInitScript(ids => { try { localStorage.setItem('afb-seen', JSON.stringify(ids)); } catch {} }, seenIds);
+  // The welcome guide (AW-STUDY-0022) is a one-off for new players, like the what's-new card: count it as answered.
+  await tab.addInitScript(ids => { try { localStorage.setItem('afb-seen', JSON.stringify(ids)); localStorage.setItem('aw-welcome', JSON.stringify({mode: 'none', hints: []})); } catch {} }, seenIds);
   await tab.goto(`http://127.0.0.1:${port}${page}`, {waitUntil: 'load', timeout: 60000}).catch(() => {});
   await tab.waitForTimeout(settle);
   await tab.waitForFunction(() => !/Preparing|Loading/i.test(document.body.innerText || ''), null, {timeout: 60000}).catch(() => {});

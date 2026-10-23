@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Welcome to Abbie’s World</title>
+<link rel="stylesheet" href="/app-style.css?v=1">
+<style>
+/* AW-STUDY-0022 Welcome to Abbie's World: the tour guide, the three welcomes, the storyboard and shot list. Every frame is a
+   capture of the built tour running in the real sandbox (simulations/welcome), not concept art. */
+body{margin:0;background:var(--app-canvas,#f4edcf);color:var(--app-ink);font:15px/1.45 system-ui,-apple-system,sans-serif;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:34px}
+.id{font-size:12px;letter-spacing:.1em;color:var(--app-muted)}
+h1{margin:2px 0 0;font-size:26px}h2{margin:0 0 10px;font-size:19px}
+p{margin:0;color:var(--app-muted);max-width:68ch}
+a{color:inherit}
+figure{margin:0;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:16px;overflow:hidden;min-width:0;position:relative}
+figure img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+figcaption{padding:8px 12px 10px;font-size:13px;color:var(--app-muted)}
+figcaption b{color:var(--app-ink)}
+.hero img{aspect-ratio:auto}
+.row{display:grid;gap:12px}
+.r3{grid-template-columns:repeat(3,minmax(0,1fr))}.r2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.shot .t{position:absolute;left:10px;top:10px;background:#000a;color:#fff;border-radius:999px;padding:3px 9px;font:600 12px/1.3 system-ui}
+.shot .super{display:block;font-weight:800;color:var(--app-ink);font-size:15px;margin-bottom:2px}
+.shot q{display:block;font-style:italic}
+.shot small{display:block;margin-top:4px}
+.choice{background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:16px;padding:14px}
+.choice b{display:block;font-size:16px;margin-bottom:4px}
+.choice.rec{border-color:#e0a24a;box-shadow:0 0 0 2px #f3c77a inset}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--app-paper,#fffdf4);border-radius:14px;overflow:hidden}
+td,th{padding:8px 10px;border-bottom:1px solid var(--app-border);text-align:left;vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--app-muted)}
+.card5{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:16px;padding:14px}
+.card5 b{color:var(--app-ink)}.card5 span{color:var(--app-muted)}
+.play{display:inline-block;margin-top:10px;padding:10px 16px;border-radius:999px;background:#f4b65d;color:#4a2a0a;font-weight:700;text-decoration:none}
+@media (max-width:760px){.r3,.r2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="id">AW-STUDY-0022</div>
+ <h1>Welcome to Abbie’s World</h1>
+ <p>A tour guide meets every new player and asks how they want to start. The grand tour builds a sample world in front of
+  them, then shows it off like a thirty-second commercial, narrated, while the simulation really runs. The last shot eases
+  into the real game, and a few chalk notes follow, drawn beside the real controls and gone as soon as you use them.</p>
+ <a class="play" href="/sandbox?welcome=guide">Try it in the ranch</a>
+</header>
+
+<figure class="hero"><img src="img/guide.jpg" alt="The tour guide's welcome card over the ranch"><figcaption><b>The tour guide.</b> One question, three answers, over the live world. The only words on screen before the world is yours.</figcaption></figure>
+
+<section>
+ <h2>Three welcomes</h2>
+ <div class="row r3">
+  <div class="choice rec"><b>1. The grand tour</b><p>The world builds itself, a narrated camera tour of the live ranch (about 30 seconds), then it fades into play and the chalk notes follow. It is also the product tour: toy box, Welcome tour.</p></div>
+  <div class="choice"><b>2. Show me the basics</b><p>Straight into play with chalk notes, one at a time: drag to look around, pick a card, tap anyone to say hi, pause or speed up time, more toys in here.</p></div>
+  <div class="choice"><b>3. Just let me play</b><p>No tips. The guide can be called back any time from the toy box.</p></div>
+ </div>
+</section>
+
+<section>
+ <h2>Storyboard: the grand tour</h2>
+ <p>Seven stops, hard cuts like a commercial, each camera move measured on the world as it is now (the real goats, the real
+  porch), so the tour never shows something that is not there. A stop whose subject is missing is skipped.</p>
+ <div class="board" id="board" style="margin-top:12px"></div>
+</section>
+
+<section>
+ <h2>Into the game, then chalk</h2>
+ <div class="row r2">
+  <figure><img src="img/play.jpg" alt="The last shot settled into play with the toys back"><figcaption><b>The hand-off.</b> The camera settles where play frames the world and the toys come back. No fade to white, nothing over the world.</figcaption></figure>
+  <figure><img src="img/chalk.jpg" alt="A chalk note pointing at the hand of cards"><figcaption><b>Chalk notes.</b> Drawn over the canvas, never in the world, never taking a tap. Each one goes when you do the thing, or after about ten seconds, and a missed note comes back once on the next visit.</figcaption></figure>
+ </div>
+</section>
+
+<section>
+ <h2>Shot list</h2>
+ <table id="shots"><thead><tr><th>#</th><th>Stop</th><th>Shot</th><th>Seconds</th><th>Narrator</th><th>What the world is doing</th></tr></thead><tbody></tbody></table>
+</section>
+
+<section>
+ <h2>The tour is a list of stops</h2>
+ <p>Evan’s rule: every new feature decides whether it goes into the tour. A feature joins by registering a stop (a camera
+  shot, a super and a narrator line) or a chalk hint in <code>simulations/welcome/tour-stops.mjs</code>, and the feature brief
+  (<code>docs/design/briefs/feature.md</code>) now asks “Tour: yes or no”. Narration is rendered from those same lines by the
+  <code>welcome-narration</code> workflow (ElevenLabs), with the browser’s voice until it has run.</p>
+</section>
+
+<section>
+ <h2>Design card</h2>
+ <div class="card5">
+  <b>Feel</b><span>“Whoa, I made that, and it’s alive.” Wonder first, then confidence: I know the three things to try.</span>
+  <b>How would a character know?</b><span>They wouldn’t: the guide, the supers and the chalk are for the player. The world build is the one piece of fiction, and the ranch simply lives (goats wander, lanterns light at dusk).</span>
+  <b>Mode</b><span>Overlay for the guide and the supers (summoned, one-off); spatial chalk for “tap anyone”; none for the world itself. All on the presentation layer, invisible to every perception.</span>
+  <b>Who it’s for</b><span>The player (a new child, or a grown-up seeing the product).</span>
+  <b>What else adapts</b><span>Time of day runs to golden hour in the time-lapse, so light, lanterns and people change together. Music waits for the composer to come back; the ranch’s own sound plays.</span>
+ </div>
+</section>
+</div>
+<script>
+const SHOTS=[
+ ['build','The build','crane',5,'This is Abbie’s World.','The camera looks at the sky while the sample world (the seven-hex flower) is made, then cranes down as it flies in from space.'],
+ ['alive','Comes alive','push',4.2,'Where everything you make… comes alive.','A slow push on the porch lamp of the family home; people start their morning.'],
+ ['animals','Animals','follow',4.4,'The goats have opinions. The horses have best friends.','The camera rides with a real goat as it wanders.'],
+ ['people','People','follow',3.6,'And everyone has somewhere to be.','Follows a resident on their way (the post or the delivery rider).'],
+ ['time','Time','timelapse',4.4,'Days roll by. Lanterns glow.','The clock runs to golden hour; sun, shadows and lanterns follow the one signal.'],
+ ['cards','Cards','card',4.8,'Pick a card, drop it in, and watch your world grow.','The hand comes up, a garden card is printed and dropped on a free hex, and it lands with the tile drop.'],
+ ['yours','Your turn','hero',4,'Now it’s your turn.','Pull back to the whole world at golden hour, then ease into the play camera.']];
+const board=document.getElementById('board'),tbody=document.querySelector('#shots tbody');let t=0;
+SHOTS.forEach(([id,name,shot,sec,line,world],i)=>{
+ const f=document.createElement('figure');f.className='shot';
+ f.innerHTML=`<img loading="lazy" src="img/${id}.jpg" alt=""><span class="t">${i+1} · ${t.toFixed(0)}–${(t+sec).toFixed(0)} s</span><figcaption><span class="super"></span><q></q><small></small></figcaption>`;
+ f.querySelector('.super').textContent=name+' · '+shot;f.querySelector('q').textContent=line;f.querySelector('small').textContent=world;board.append(f);
+ const tr=document.createElement('tr');for(const v of [i+1,name,shot,sec,line,world]){const td=document.createElement('td');td.textContent=v;tr.append(td);}tbody.append(tr);t+=sec;});
+</script>
+</body>
+</html>
