@@ -1,6 +1,17 @@
 {
-  "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md.",
+  "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md. models (optional): catalogue ids for a study set (a trailing * matches a prefix); tapping the item opens /models/?set=<id> with only those models, concept left and keep/talk/reject on the right.",
   "items": [
+    {
+      "id": "space-mail-study",
+      "at": "2026-10-23T05:05:00Z",
+      "title": "Space Mail, a playable sketch",
+      "ask": "Play the low-gravity letter romp on the Moon. Say what feels fun, and whether to build it.",
+      "thread": "AW-STUDY-0012 - Space Mail Mini Game",
+      "image": "img/space-mail.jpg",
+      "link": "https://app.abbies.world/studies/#space-mail",
+      "linkLabel": "Play it",
+      "status": "waiting"
+    },
     {
       "id": "identity-readout-1",
       "at": "2026-10-23T04:55:00Z",
@@ -21,7 +32,12 @@
       "status": "waiting",
       "before": "img/paper-woman-2-pick.jpg",
       "after": "img/paper-woman-2-model.jpg",
-      "glb": "3d/paper-woman-2.glb"
+      "glb": "3d/paper-woman-2.glb",
+      "models": [
+        "paper-woman-2",
+        "paper-man-3",
+        "paper-man-1"
+      ]
     },
     {
       "id": "paper-man-3",
@@ -32,7 +48,12 @@
       "status": "waiting",
       "before": "img/paper-man-3-pick.jpg",
       "after": "img/paper-man-3-model.jpg",
-      "glb": "3d/paper-man-3.glb"
+      "glb": "3d/paper-man-3.glb",
+      "models": [
+        "paper-man-3",
+        "paper-man-1",
+        "paper-woman-2"
+      ]
     },
     {
       "id": "paper-man-1",
@@ -45,7 +66,12 @@
       "glb": "3d/paper-man-1.glb",
       "link": "https://ranch.abbies.world/studies/#bodies",
       "linkLabel": "Paper bodies",
-      "status": "waiting"
+      "status": "waiting",
+      "models": [
+        "paper-man-1",
+        "paper-man-3",
+        "paper-woman-2"
+      ]
     },
     {
       "id": "ranch-remaster-wave-1",
@@ -121,7 +147,10 @@
       "after": "img/moon-dome-model.jpg",
       "link": "https://claude.ai/artifact/97nD2NM8crDv7pruh9iBNS",
       "linkLabel": "Moon desk",
-      "status": "waiting"
+      "status": "waiting",
+      "models": [
+        "moon-*"
+      ]
     },
     {
       "id": "ranch-models",
@@ -133,7 +162,10 @@
       "after": "img/ranch-barn-model.jpg",
       "link": "https://ranch.abbies.world/models",
       "linkLabel": "Models",
-      "status": "waiting"
+      "status": "waiting",
+      "models": [
+        "ranch-*"
+      ]
     },
     {
       "id": "sandbox-hand-cards",
@@ -156,7 +188,10 @@
       "after": "img/roman-helmet-model.jpg",
       "link": "https://claude.ai/artifact/Hf5MLkWn3ZUcng7D7uk6C5",
       "linkLabel": "Roman desk",
-      "status": "waiting"
+      "status": "waiting",
+      "models": [
+        "roman-*"
+      ]
     }
   ]
 }

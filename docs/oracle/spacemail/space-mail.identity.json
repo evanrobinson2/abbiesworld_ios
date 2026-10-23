@@ -1,0 +1,524 @@
+{
+  "schema_version": "1.2",
+  "game": {
+    "title": "Space Mail (Abbie's World mini game)",
+    "steam_appid": null,
+    "developer": "Abbie's World",
+    "release": "study 2026-10-23",
+    "engine": {
+      "value": "three.js in the browser",
+      "source": "install_files",
+      "confidence": 1.0,
+      "method": "the sketch at /studies/spacemail/play.html"
+    },
+    "platforms": [
+      "iPhone home-screen app",
+      "web",
+      "gamepad on any device"
+    ]
+  },
+  "core": {
+    "fantasy": "You are the Moon's happy-mail runner, bounding in low gravity to carry the letters people send home to the ferry.",
+    "pillars": [
+      "A free-spirited romp: moving is the fun",
+      "Every delivery is answered by the world",
+      "The people thank you: a trophy and a photo you keep"
+    ],
+    "signature_moment": "A huge floaty hop catches a runaway letter mid-air, you land with a dust puff right at the ferry hatch, and six letters fly in with a rising chime.",
+    "anti_goals": [
+      "no fail state",
+      "no enemies in this scenario",
+      "no words in the play HUD",
+      "no timer on the screen (the ferry's pad lamps are the clock)",
+      "no menu to start: a card on a cell"
+    ],
+    "signatures": [
+      {
+        "id": "floaty_hop",
+        "layer": "interaction",
+        "description": "Low-gravity hop that floats while held, double hop with moon boots, dust puff and squash on landing.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "mailbox_flag",
+        "layer": "information_grammar",
+        "description": "A letter waiting is told by the world: the mailbox flag goes up, the colonist hops, the envelope glows over their head.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "ferry_lamps_clock",
+        "layer": "pacing",
+        "description": "Twelve lamps around the ferry pad light one by one; the horn ends the round. A diegetic clock everyone in the world can see.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "reward_shot",
+        "layer": "cinematics",
+        "description": "The colonists gather, give the ship a trophy, and the game composes one posed, high-quality photo for the player's album.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ],
+    "recognisability": {
+      "value": 0.5,
+      "source": "estimate",
+      "confidence": 0.2,
+      "method": "design target for AW-STUDY-0012; measure on the playable sketch"
+    }
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "sensation": 0.35,
+        "fellowship": 0.15,
+        "discovery": 0.15,
+        "challenge": 0.15,
+        "expression": 0.1,
+        "fantasy": 0.1
+      },
+      "motivations": {
+        "action": 0.6,
+        "achievement": 0.6,
+        "immersion": 0.5,
+        "social": 0.3,
+        "mastery": 0.3,
+        "creativity": 0.1
+      },
+      "emotional_targets": {
+        "joy": 0.9,
+        "freedom": 0.8,
+        "pride": 0.7,
+        "mild hurry": 0.25
+      },
+      "audience": {
+        "age_band": "4-10 with a grown-up",
+        "skill_floor": "can push a stick or drag a finger",
+        "session_context": "couch or phone, 2-3 minutes a round"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "run",
+          "input": "left stick / drag"
+        },
+        {
+          "verb": "hop (hold to float)",
+          "input": "A / tap hop button / Space"
+        },
+        {
+          "verb": "jet puff",
+          "input": "X or RT / small button / Shift"
+        },
+        {
+          "verb": "ping (where next?)",
+          "input": "Y / tap satchel / E"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "see a flag go up",
+          "bound over and grab the letter",
+          "fill the satchel",
+          "hop into the ferry hatch",
+          "get a parcel back for a home"
+        ],
+        "period_s": {
+          "value": 15,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "design target for AW-STUDY-0012; measure on the playable sketch",
+          "unit": "s"
+        }
+      },
+      "meta_loop": {
+        "steps": [
+          "ferry horn ends the round",
+          "trophy and reward shot",
+          "badge (Seed to Sun) and stats saved to your account",
+          "photo in the album",
+          "new mission cards light up on other cells"
+        ]
+      },
+      "rules": {
+        "scoring": "10 per letter, bigger bags score more (x1.25 per extra letter), 1.5x if delivered mid-air; 15 per parcel (22 mid-air)",
+        "failure_model": "none",
+        "loss": "none",
+        "resources": [
+          "satchel (6 slots)",
+          "power-ups"
+        ]
+      },
+      "randomness": {
+        "amount": 0.3,
+        "kind": "input"
+      },
+      "information": "perfect",
+      "systems": [
+        "colonists write letters on a timer",
+        "runaway letters drift upward",
+        "power-ups respawn",
+        "ferry answers each delivery with a parcel"
+      ],
+      "complexity": {
+        "verb_count": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.9,
+          "method": "design target for AW-STUDY-0012; measure on the playable sketch"
+        },
+        "rules_in_first_10_min": {
+          "value": 3,
+          "source": "estimate",
+          "confidence": 0.6,
+          "method": "design target for AW-STUDY-0012; measure on the playable sketch"
+        }
+      }
+    },
+    "dynamics": {
+      "emergent_behaviours": [
+        "holding letters to cash a big bag",
+        "chaining a mid-air delivery off a crater rim",
+        "racing the buggy across the tile"
+      ],
+      "decision_density_per_min": {
+        "value": 8,
+        "source": "estimate",
+        "confidence": 0.3,
+        "method": "design target for AW-STUDY-0012; measure on the playable sketch",
+        "unit": "/min"
+      },
+      "skill_strategy_chance": {
+        "skill": 0.55,
+        "strategy": 0.3,
+        "chance": 0.15
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "gamepad",
+          "touch",
+          "keyboard"
+        ],
+        "mapping": "direct"
+      },
+      "response": {
+        "action_anim_ms": {
+          "value": 120,
+          "source": "estimate",
+          "confidence": 0.5,
+          "method": "design target for AW-STUDY-0012; measure on the playable sketch",
+          "unit": "ms"
+        },
+        "easing": "springy, squash on land"
+      },
+      "camera": {
+        "model": "third_person",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "none",
+        "undo": "none",
+        "preview_before_commit": false
+      },
+      "juice": {
+        "squash_stretch": 0.6,
+        "particles": 0.6,
+        "screen_shake": 0.0,
+        "hit_stop": 0.0,
+        "scale_pop": 0.5,
+        "sound_on_action": 0.95,
+        "camera_kick": 0.1,
+        "procedural_settle": 0.4
+      },
+      "time_to_first_delight_s": {
+        "value": 5,
+        "source": "estimate",
+        "confidence": 0.5,
+        "method": "design target for AW-STUDY-0012; measure on the playable sketch",
+        "unit": "s"
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "stylised_pbr",
+        "outlines": false,
+        "post": [
+          "ACES tone map",
+          "soft shadows"
+        ]
+      },
+      "palette": {
+        "dominant_hex": [
+          "#E8E6F0",
+          "#2B2440",
+          "#FF8A3D",
+          "#FFD36B",
+          "#00FFD1"
+        ],
+        "value_key": "high",
+        "warmth": 0.4,
+        "variation": "home colours on flags and suits"
+      },
+      "proportion_and_scale": {
+        "stylisation": 0.5,
+        "toyness": 0.8
+      },
+      "motion": "colonists hop and wave, letters bob, the ferry breathes",
+      "references": [
+        "Moon Mission pack (trek.zip)",
+        "AW-STUDY-0007 Moon remaster"
+      ]
+    },
+    "assets": {
+      "kit": "modular",
+      "asset_vocabulary": [
+        "RE-072 ferry",
+        "ME-070 pad",
+        "MR-002 dome",
+        "ME-001/ME-082 habitats",
+        "ME-008 astronauts",
+        "MR-003 buggy",
+        "MR-004 meteorite",
+        "mailbox (new)",
+        "envelope (new)",
+        "trophy (new)"
+      ]
+    },
+    "interface": {
+      "ui_mode_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "non_diegetic": 0.15,
+        "meta": 0.05
+      },
+      "hud_coverage": {
+        "value": 0.03,
+        "source": "estimate",
+        "confidence": 0.5,
+        "method": "design target for AW-STUDY-0012; measure on the playable sketch"
+      },
+      "text_words_per_min": {
+        "value": 0,
+        "source": "estimate",
+        "confidence": 0.9,
+        "method": "design target for AW-STUDY-0012; measure on the playable sketch"
+      },
+      "onboarding": "contextual_hints",
+      "feedback_language": [
+        "mailbox flag",
+        "rising pentatonic chime per letter",
+        "+points stamp over the ferry",
+        "colonist cheer and door light"
+      ]
+    },
+    "audio": {
+      "music": {
+        "style": "Music Bible D major, 124 bpm, 3+3+2",
+        "density": 0.5,
+        "mode_character": "major, bouncy"
+      },
+      "sfx_character": "musical",
+      "action_coupling": 0.95,
+      "ambience": [
+        "suit breath",
+        "ferry hum"
+      ],
+      "voice": "none"
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.4,
+        "enacted": 0.2,
+        "embedded": 0.1,
+        "emergent": 0.3
+      },
+      "themes": [
+        "letters home",
+        "community",
+        "thanks"
+      ],
+      "characters": "the colonists, Abbie"
+    },
+    "pacing": {
+      "structure": "mixed",
+      "session_minutes": {
+        "value": 2.5,
+        "source": "estimate",
+        "confidence": 0.5,
+        "method": "design target for AW-STUDY-0012; measure on the playable sketch",
+        "unit": "min"
+      },
+      "tension_curve": "rising_to_end",
+      "failure_cost": "none",
+      "unlocks": [
+        "badge tiers Seed to Sun",
+        "photos in the album",
+        "new mission cards"
+      ],
+      "first_ten_minutes": [
+        {
+          "t": "0:00",
+          "event": "a cell on the Moon glows with rising light"
+        },
+        {
+          "t": "0:05",
+          "event": "the Happy Letters card"
+        },
+        {
+          "t": "0:07",
+          "event": "the dive into Abbie"
+        },
+        {
+          "t": "0:10",
+          "event": "first flag up, first letter"
+        },
+        {
+          "t": "2:00",
+          "event": "ferry horn, trophy, reward shot"
+        }
+      ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "goals": {
+          "mix": {
+            "diegetic": 0.6,
+            "spatial": 0.3,
+            "overlay": 0.1
+          },
+          "timing": "on_change",
+          "note": "Mailbox flags, glowing envelopes over the senders, coloured parcels that match a home's flag.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "time": {
+          "mix": {
+            "diegetic": 1.0
+          },
+          "timing": "always_on",
+          "note": "The ferry pad's twelve lamps, then the horn.",
+          "confidence": 0.7,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 0.7,
+            "spatial": 0.3
+          },
+          "timing": "always_on",
+          "note": "The glass satchel shows six slots; the active power-up glows round it as a draining ring.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "navigation": {
+          "mix": {
+            "spatial": 1.0
+          },
+          "timing": "summoned",
+          "note": "Ping draws a short ground arrow to the next useful thing, for the player only.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "social": {
+          "mix": {
+            "diegetic": 0.8,
+            "spatial": 0.2
+          },
+          "timing": "on_change",
+          "note": "Colonists hop, face you and cheer; door lights flash in their colour.",
+          "confidence": 0.6,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.55,
+        "spatial": 0.25,
+        "overlay": 0.15,
+        "meta": 0.05
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.5,
+          "method": "design target for AW-STUDY-0012; measure on the playable sketch"
+        },
+        "always_on_count": {
+          "value": 1,
+          "source": "estimate",
+          "confidence": 0.9,
+          "method": "design target for AW-STUDY-0012; measure on the playable sketch"
+        },
+        "drawn_as": "world_material"
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "ferry departure",
+            "channels": [
+              "light",
+              "sound",
+              "npcs",
+              "music"
+            ],
+            "note": "Pad lamps fill, colonists hurry their letters, the music lifts, the horn sounds."
+          }
+        ]
+      }
+    }
+  },
+  "ledger": {
+    "style": [
+      "pick-up and drop-off loop",
+      "low-gravity floaty jump",
+      "power-ups that give more air or reach",
+      "end-of-round celebration and photo",
+      "medal ladder",
+      "letters from neighbours and a mailbox flag"
+    ],
+    "expression": [
+      "any studied game's characters, art, models, music, sounds, text or levels",
+      "Mario's star pose",
+      "Crazy Taxi's arrow and voice",
+      "Fall Guys' crown",
+      "Animal Crossing's letters and stationery"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "interaction",
+        "target": "player controller",
+        "setting": "Gravity 5.2, hop 6.4 m/s, hold to float (gravity x0.45 while rising), air control 0.55.",
+        "from_signature": "floaty_hop"
+      },
+      {
+        "layer": "pacing",
+        "target": "mission runtime",
+        "setting": "Diegetic round clock on the giver's place (pad lamps), 120 s, no fail.",
+        "from_signature": "ferry_lamps_clock"
+      },
+      {
+        "layer": "cinematics",
+        "target": "reward shot",
+        "setting": "Gather givers, place trophy, pose the player, render offline, add to the album.",
+        "from_signature": "reward_shot"
+      }
+    ],
+    "leave": [
+      "countdown numbers",
+      "losing",
+      "enemies in Space Mail (they belong to the night-shift scenario, if Evan wants it)"
+    ]
+  },
+  "sources": [
+    "docs/oracle/spacemail/spacemail-signatures.json",
+    "docs/oracle/identity/GAME_IDENTITY.md (What the five share)",
+    "Evan's notes in the thread, 2026-10-23"
+  ]
+}
