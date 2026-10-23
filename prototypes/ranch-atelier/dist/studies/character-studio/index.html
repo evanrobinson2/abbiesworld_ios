@@ -20,7 +20,10 @@
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font:400 14px/1.35 var(--font);overflow:hidden;-webkit-font-smoothing:antialiased}
 #stage{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
-.frame{position:fixed;inset:0;border:0;width:100%;height:100%;background:var(--bg)}
+[hidden]{display:none!important} /* .rail and .drawer set display, which would otherwise beat the hidden attribute */
+/* a room (2D, Cast, Crowd) sits under the bar, never behind it, so its own title can't collide with ours */
+.frame{position:fixed;left:0;right:0;bottom:0;top:calc(env(safe-area-inset-top,0px) + 52px);border:0;width:100%;height:calc(100% - env(safe-area-inset-top,0px) - 52px);background:var(--bg)}
+body[data-room] .bar{background:var(--bg)}
 .bar{position:fixed;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;gap:10px;
  padding:calc(env(safe-area-inset-top,0px) + 10px) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))}
 .mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:700 13px var(--font);letter-spacing:.5px;flex:none}
@@ -70,13 +73,14 @@ body[data-dark] .title small,body[data-dark] .now .src{color:#d9d2e6}
 <body>
 <canvas id="stage" aria-label="The character on stage. Press on it to pick it up."></canvas>
 <iframe class="frame" id="room" hidden title="Character Studio room"></iframe>
-<div id="load">Rigging the mannequin…</div>
+<div id="load">Rigging the brute…</div>
 <header class="bar">
  <div class="mark" aria-hidden="true">AW</div>
  <div class="title">Character Studio<small>AW-STUDY-0037</small></div>
  <span class="grow"></span>
  <button class="block" data-room="stage" aria-pressed="true">3D</button>
  <button class="block" data-room="puppet.html" aria-pressed="false">2D</button>
+ <button class="block" data-room="review.html" aria-pressed="false">Scores</button>
  <button class="block" data-room="crowd.html" aria-pressed="false">Crowd</button>
 </header>
 <nav class="rail left" id="cast" aria-label="Who"></nav>
@@ -124,11 +128,13 @@ box.castShadow = true; box.visible = false; scene.add(box);
 toonify(T, scene, TOON_LOOKS.sunday);
 const film = filmLook(T, renderer, scene, camera, {fogDensity: .02, fogStart: 9, focus: 6, aperture: .7, aoRadius: .3, bloom: .12, threshold: 1.3, sunCol: '#ffd6a0'});
 
-let dir = 'studio', bodyId = 'mannequin', room = 'stage', real = true, tour = false, dressed = null;
+let dir = 'studio', bodyId = 'red', room = 'stage', real = true, tour = false, dressed = null;
 let actor = null, move = byId.idle, t0 = performance.now() / 1000;
 const loader = new GLTFLoader(), cache = {}, drawing = {value: 0};
 let mocap = {};
 const active = () => (real && mocap[move.id]) || move;
+// the moves on offer: the quality pass cut the ones that didn't hold up next to real motion (moves.mjs CUT)
+const LIVE = MOVES.filter(m => !m.cut);
 
 // pictures for the blocks, rendered once by tools/character-studio/thumbs.mjs: one tile per move, in MOVES order
 const COLS = 10;
@@ -158,7 +164,7 @@ function dirBlocks() {
 let genre = 'cozy';
 function genreBlocks() {
  const el = $('#genres'); el.innerHTML = '';
- for (const g of GENRES) {
+ for (const g of GENRES.filter(g => LIVE.some(m => m.genre === g.id))) {
   const b = document.createElement('button'); b.className = 'block genre'; b.setAttribute('aria-pressed', String(g.id === genre));
   const i = document.createElement('i'); sprite(i, MOVES.findIndex(m => m.genre === g.id));
   b.append(i, g.name); b.onclick = () => { genre = g.id; genreBlocks(); moveTiles(); };
@@ -168,11 +174,11 @@ function genreBlocks() {
 function moveTiles() {
  const el = $('#moves'); el.innerHTML = '';
  MOVES.forEach((m, i) => {
-  if (m.genre !== genre) return;
+  if (m.genre !== genre || m.cut) return;
   const b = document.createElement('button'); b.className = 'block pose'; b.setAttribute('aria-pressed', String(m.id === move.id));
   // the pose picture sits above the name, never under it
   const pic = document.createElement('i'); pic.className = 'pic'; sprite(pic, i); b.appendChild(pic);
-  b.insertAdjacentHTML('beforeend', `<span class="nm">${m.name}</span>${real && mocap[m.id] ? '<span class="tag">motion capture</span>' : ''}`);
+  b.insertAdjacentHTML('beforeend', `<span class="nm">${m.name}</span>${real && mocap[m.id] ? `<span class="tag">${mocap[m.id].by === 'quaternius' ? 'game animation' : 'motion capture'}</span>` : ''}`);
   b.onclick = () => pick(m.id);
   el.appendChild(b);
  });
@@ -182,7 +188,7 @@ function pick(id, keepTour) {
  if (!keepTour) { tour = false; $('#tour').setAttribute('aria-pressed', 'false'); }
  const g = GENRES.find(x => x.id === move.genre), a = active();
  $('#nowName').textContent = move.name;
- $('#nowSrc').textContent = a.source ? `CMU motion capture · take ${a.source}` : `Hand-keyed · ${g.name}, as in ${g.from}`;
+ $('#nowSrc').textContent = a.by === 'quaternius' ? `Game animation · Quaternius, ${a.source.replace(/_/g, ' ')}` : a.source ? `CMU motion capture · take ${a.source}` : `Hand-keyed · ${g.name}, as in ${g.from}`;
  if (genre !== move.genre) { genre = move.genre; genreBlocks(); }
  moveTiles();
  try { history.replaceState(null, '', '#' + id); } catch {}
@@ -195,6 +201,9 @@ function setRoom(r) {
  const f = $('#room'), stage = r === 'stage';
  f.hidden = stage; ['#cast', '#dirs', '.drawer'].forEach(s => { $(s).hidden = !stage; }); canvas.style.visibility = stage ? 'visible' : 'hidden';
  if (!stage && !f.src.endsWith(r)) f.src = r;
+ // the dark-stage words belong to the 3D stage only
+ document.body.toggleAttribute('data-room', !stage);
+ document.body.toggleAttribute('data-dark', stage && !!dressed?.stage?.dark);
 }
 
 // an art direction restyles the body and the stage together
@@ -203,7 +212,7 @@ function applyDir() {
  if (!actor) return;
  dressed = dir === 'studio' ? null : dress(T, actor, dir, drawing);
  const st = dressed?.stage || {sky: ['#efe4d2'], floor: '#e3cba8', sun: '#fff1dc', sunI: 2.6, hemi: ['#dfe9ff', '#b9906a', 1.1], shadow: true};
- document.body.toggleAttribute('data-dark', !!st.dark);
+ document.body.toggleAttribute('data-dark', !!st.dark && room === 'stage');
  renderer.setClearColor(st.sky[0]); film.U.fogHigh.value.set(st.sky[0]); film.U.fogLow.value.set(st.sky[1] || st.sky[0]);
  floor.material.color.set(st.floor); sun.color.set(st.sun); sun.intensity = st.sunI;
  hemi.color.set(st.hemi[0]); hemi.groundColor.set(st.hemi[1]); hemi.intensity = st.hemi[2]; sun.castShadow = st.shadow;
@@ -277,7 +286,7 @@ function frame() {
  const t = fps ? Math.floor(raw * fps) / fps : raw;
  drawing.value = fps ? Math.floor(now * fps) % 1000 : 0;
  const a = active();
- if (tour && t > Math.max(a.len * (a.travel ? 2 : 1), 2.5)) { const i = MOVES.indexOf(move); pick(MOVES[(i + 1) % MOVES.length].id, true); }
+ if (tour && t > Math.max(a.len * (a.travel ? 2 : 1), 2.5)) { const i = LIVE.indexOf(move); pick(LIVE[(i + 1) % LIVE.length].id, true); }
  if (actor) {
   const o = actor.object;
   if (hold.state) actor.pose(holdPose(now)); else actor.play(a, t);
@@ -304,13 +313,14 @@ function frame() {
  if (plain) { renderer.setRenderTarget(null); renderer.render(scene, camera); } else film.render();
 }
 // for screenshots, thumbnails and the 2D puppet's tray
-window.studio = {pick, freeze: v => { freeze = v; }, body: async id => { bodyId = id; await setBody(); }, dir: id => { dir = id; applyDir(); },
+window.studio = {pick, clip: id => { const m = mocap[id]; move = {id, name: id, genre: move.genre, fn: m.fn, len: m.len}; t0 = performance.now() / 1000; dist = 0; },
+ mocap: () => mocap, freeze: v => { freeze = v; }, body: async id => { bodyId = id; await setBody(); }, dir: id => { dir = id; applyDir(); },
  real: v => { real = v; pick(move.id); }, moves: MOVES, camera, controls, P, film, scene, floor, renderer, plain: v => { plain = v; },
  ready: () => Object.keys(mocap).length > 0, activeLen: () => active().len,
  custom: pose => { move = {id: 'custom', name: 'Custom pose', genre: move.genre, fn: () => P(pose), len: 1}; }};
 castBlocks(); dirBlocks(); genreBlocks();
 const start = location.hash.slice(1);
-pick(byId[start] ? start : 'idle');
+pick(byId[start] && !byId[start].cut ? start : 'idle');
 loadMocap(T, BASE).then(m => { mocap = m; pick(move.id); }).catch(e => console.warn('mocap', e));
 setBody().then(() => frame());
 </script>

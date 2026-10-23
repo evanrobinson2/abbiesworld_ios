@@ -54,6 +54,7 @@
       "source": "derived from the art note by rendering_notes.RULES",
       "confidence": 0.3
     },
+    "motion": null,
     "palette": null,
     "audio_mood": "80s.",
     "pacing": "slow, long sessions",

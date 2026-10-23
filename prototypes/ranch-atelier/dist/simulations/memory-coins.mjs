@@ -17,5 +17,6 @@ export function give(id, place) {
  if (mine[id]) return false;
  mine[id] = {place, at: new Date().toISOString()};
  try { localStorage.setItem(KEY, JSON.stringify(mine)); } catch {}
+ try { dispatchEvent(new CustomEvent('aw-memory-coins-change', {detail: {id, place}})); } catch {} // a backpack charm may be earned
  return true;
 }

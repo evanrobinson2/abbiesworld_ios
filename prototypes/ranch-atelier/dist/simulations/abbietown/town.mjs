@@ -40,6 +40,9 @@ export const SPOTS = [
  {id: 'leonard', name: 'Leonard Field', at: 'leonard', line: 'The field and the little beach on the pond.', coins: 1, where: 'data'},
  {id: 'ginn', name: 'Ginn Field', at: 'ginn', line: 'The train park, by the lakes.', coins: 1, where: 'data'},
  {id: 'horn', name: 'Horn Pond', at: 'horn', line: 'The long walk round the pond.', coins: 1, where: 'data'},
+ {id: 'lab', name: 'The science lab', at: 'centre', line: 'Green goo bubbles in a beaker by the door. Tap the beaker to shrink down into a cell.', coins: 0, where: 'new', link: '/studies/cell/play.html'},
+ {id: 'home', name: "Abbie's house", at: 'fixed', pos: [4700, 3560], line: "Home. Her treehouse is in the backyard, and Daddy's bunker is under it: a round steel door in the grass.", coins: 1, where: 'family'},
+ {id: 'ani', name: "Ani's house", at: 'fixed', pos: [3380, 2830], line: "Ani's home, with her own treehouse in the backyard.", coins: 1, where: 'family'},
  {id: 'common', name: 'The town common', at: 'common', line: 'The middle of everything: the church, the flag, the pond.', coins: 0, where: 'data'},
 ];
 // Off the map: roads out of town lead to them, and they show on the horizon.
@@ -144,8 +147,9 @@ export function growTown(land, {charm = 1, seed = ASSUMPTIONS.seed} = {}) {
    const lot = lots.find(l => !out.spots.some(o => Math.hypot(o.x - l.x, o.y - l.y) < 28) && !occ.hit(l.x, l.y, 7, 'road'));
    ({x, y, face} = lot);
   } else if (s.at === 'horn') { const h = hornShore(); [x, y] = h; toward = [h[2], h[3]]; }
+  else if (s.at === 'fixed') { [x, y] = s.pos; const n = nearestOn(roads, x, y); if (n && Math.hypot(n.x - x, n.y - y) < 150) face = Math.atan2(n.x - x, -(n.y - y)); }
   else [x, y] = raw.spots[s.at];
-  const spot = {...s, x, y, z: land.heightAt(x, y), face, toward, radius: s.at === 'centre' ? 11 : s.id === 'common' ? 32 : 40};
+  const spot = {...s, x, y, z: land.heightAt(x, y), face, toward, radius: s.at === 'centre' ? 11 : s.at === 'fixed' ? 34 : s.id === 'common' ? 32 : 40};
   out.spots.push(spot); occ.add(x, y, spot.radius, 'spot');
   for (let k = 0; k < s.coins; k++) out.coins.push({spot: s.id, x: x + Math.cos(k * 2.4) * (k ? 3 + k : 0), y: y + Math.sin(k * 2.4) * (k ? 3 + k : 0), hidden: s.id === 'cafe' && k > 0});
  }
@@ -231,6 +235,26 @@ export function growTown(land, {charm = 1, seed = ASSUMPTIONS.seed} = {}) {
  return out;
 }
 function projectOn(p, x, y) { let best = Infinity, at = 0, run = 0; for (let i = 1; i < p.length; i++) { const [ax, ay] = p[i - 1], [bx, by] = p[i], dx = bx - ax, dy = by - ay, l = Math.hypot(dx, dy) || 1, t = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / (l * l))), d = Math.hypot(ax + dx * t - x, ay + dy * t - y); if (d < best) { best = d; at = run + t * l; } run += l; } return at; }
+
+// Named anchors for other studies (Moon Mission's opening starts at the coffee shop). Local metres: x east, y north, z up,
+// from the south-west corner of the 6.8 x 4.8 km land; three.js world = (x - W/2, z, -(y - D/2)). Angles are radians
+// counter-clockwise from east. The anchors follow the coffee shop, so they stay put if the shop moves.
+export function anchors(land, town) {
+ const s = town.spots.find(p => p.id === 'cafe'), n = nearestOn(town.roads, s.x, s.y), len = Math.hypot(n.x - s.x, n.y - s.y) || 1;
+ const ux = (n.x - s.x) / len, uy = (n.y - s.y) / len, rw = roadWidth(n.road.c), at = (x, y) => ({x, y, z: land.heightAt(x, y)});
+ const along = Math.atan2(n.ty, n.tx);
+ return {
+  coords: {W: land.W, D: land.D, world: 'X = x - W/2, Y = z, Z = -(y - D/2)'},
+  cafe: {
+   at: at(s.x, s.y), // the middle of the shop
+   door: {...at(s.x + ux * 7.4, s.y + uy * 7.4), facing: Math.atan2(uy, ux)}, // the door, facing the street
+   curb: {...at(n.x - ux * rw / 2, n.y - uy * rw / 2), facing: Math.atan2(uy, ux)}, // the kerb in front of the shop
+   street: {...at(n.x, n.y), along, width: rw}, // the street's middle line there; `along` is the direction of travel one way
+   rocketPort: {...at(n.x + ux * rw * .1, n.y + uy * rw * .1), radius: rw * 1.1}, // a clear spot in the street for the launch port
+  },
+  event: 'abbietown:cafe-door', // dispatched on window with detail {id: 'cafe'} when the shop's door is tapped
+ };
+}
 
 export function summary(land, town) {
  const fam = {}; for (const h of town.houses) fam[h.fam] = (fam[h.fam] || 0) + 1;

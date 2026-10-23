@@ -1,0 +1,109 @@
+{
+  "appid": null,
+  "name": "Wii Sports",
+  "store_url": null,
+  "genres": [
+    "Sports",
+    "Party",
+    "Motion control"
+  ],
+  "short_description": "Play tennis, bowling, baseball, golf and boxing by swinging the remote like the real thing.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Sports",
+    "Party",
+    "Motion control"
+  ],
+  "summary": "Play tennis, bowling, baseball, golf and boxing by swinging the remote like the real thing.",
+  "identity": {
+    "core_loop": "Swing the remote like a racket, bat or ball; your Mii does the same; score and play again.",
+    "mechanics": null,
+    "ui_and_game_feel": "Instant and physical; anyone in the room can play.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "meta": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The sport itself is the readout: ball flight, pins, crowd. A few simple overlays for score.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Clean, simple bright figures and fields; Miis with no arms or legs on fielders.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "mixed",
+      "family": "graphic_minimal",
+      "light": "flat",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree"
+      ],
+      "tricks": [
+        "Simple Mii bodies; fielders have no visible arms or legs and still read as moving",
+        "The player's real swing drives the timing of the Mii's swing, so the gesture is the animation",
+        "Realism was never the goal: the mind fills in the detail"
+      ],
+      "lesson": "Simple bodies let players see themselves; tie the swing animation to the player's own gesture.",
+      "sources": [
+        {
+          "title": "Iwata Asks: Wii Sports, A Question of Realism",
+          "url": "https://nintendo.com/en-gb/Iwata-Asks/Iwata-Asks-Wii/Iwata-Asks-Wii-Sports/2-A-Question-of-Realism/2-A-Question-of-Realism-217824.html"
+        },
+        {
+          "title": "Iwata Asks: Wii Sports",
+          "url": "https://iwataasks.nintendo.com/interviews/wii/wii_sports/0/1"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.6
+    },
+    "palette": null,
+    "audio_mood": "Cheerful jingles and crowd reactions.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Simple figures let players see themselves; the gesture is the control and the animation at once."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.22,
+      "expression": 0.11,
+      "structure": 0.89,
+      "social": 0.11,
+      "systems": 0.67,
+      "chance": 0.11,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "reference",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

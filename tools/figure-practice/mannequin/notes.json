@@ -70,6 +70,29 @@
       "faces": 1538,
       "change": "forearms thicker (L 17,11 -> 20,15; R 15,10 -> 17,13)",
       "lesson": "the leg lesson holds one limb up: a mannequin forearm is nearly as thick as its upper arm. limbs.py (per-limb miss) picks the change."
+    },
+    {
+      "round": 7,
+      "iou": 0.857,
+      "faces": 1538,
+      "change": "straight leg hip (232,650)->(240,652), knee (213,845)->(220,845) in photo px",
+      "lesson": "I read joints off the limb's outer edge; a joint sits on the limb's centre line. A size change that scores flat (head) means the miss is placement."
+    },
+    {
+      "round": 8,
+      "iou": 0.869,
+      "smooth_iou": 0.861,
+      "faces": 1538,
+      "change": "crown (494,324)->(500,338) in photo px; sweep 0.863-0.869",
+      "lesson": "Equal-width blue and orange bands on opposite sides of a part mean it is shifted, not mis-sized: move it toward the orange. Gain +0.012; the next flat rep switches pose."
+    },
+    {
+      "round": 9,
+      "iou": 0.871,
+      "smooth_iou": 0.863,
+      "faces": 1538,
+      "change": "foot ellipsoid depth radius 14->20 (wedge, not slipper); sweeps of foot size, t and ankle placement all within 0.866-0.871",
+      "lesson": "When every sweep on the top miss scores within 0.005, the pose has given what it can teach; switch to a new pose rather than polishing."
     }
   ],
   "method": "build.py (bpy 5.2, headless) builds 30 named parts, renders silhouette + shaded from the photo's orthographic camera and exports GLB; parts.py renders each part alone; score.py gives IoU against the private mask.",
@@ -77,9 +100,62 @@
     {
       "name": "smooth",
       "file": "mannequin-smooth.glb",
-      "iou": 0.836,
+      "iou": 0.853,
       "faces": 13650,
       "how": "SMOOTH=1 python build.py: same parts and pose, 3x segments, smooth shaded"
+    }
+  ],
+  "poses": [
+    {
+      "pose": 2,
+      "name": "standing, front view",
+      "asked": "running stride (picked 16:40Z by Claude as recommended on the pose card; Evan had not answered)",
+      "why_changed": "No freely licensed running-mannequin photo was found on Wikimedia Commons (searched 17:12Z); Commons search pages are blocked from the cloud container, only upload.wikimedia.org thumbnails load.",
+      "reference": {
+        "source": "Wikimedia Commons",
+        "file": "File:Wooden_Mannequin.jpg",
+        "url": "https://commons.wikimedia.org/wiki/File:Wooden_Mannequin.jpg",
+        "note": "reference only, never copied; image not committed (licence page could not be read from the container); 500px thumbnail used"
+      },
+      "recipe": "POSE=pose2/pose.json build.py; score with POSE=... MASK=<ref mask> score.py / limbs.py (mask: non-white pixels above the base, pole opened out, mapped into the leap's 866x1290 frame at scale 1.47)",
+      "rounds": [
+        {
+          "round": 1,
+          "iou": 0.798,
+          "faces": 1538,
+          "change": "first build from joints read off the reference",
+          "lesson": "Pose transfers cleanly when joints and true bone lengths are right (first try 0.80 vs the leap's 0.71). The remaining miss is part size: a real mannequin's head and chest are bigger and blockier than the leap-tuned ones."
+        },
+        {
+          "round": 2,
+          "iou": 0.832,
+          "faces": 1538,
+          "change": "per-pose sizes in pose.json: head (70,56,52), chest (86,78,52), chest taper 0.4 (shield)",
+          "lesson": "Shape beats size: the shield taper gave +0.018, head size +0.010, chest size +0.006. Per-pose size overrides keep the leap untouched."
+        },
+        {
+          "round": 3,
+          "iou": 0.845,
+          "faces": 1538,
+          "change": "both legs 4 px left (sweep: R/L shifts -4/-4 best; -8/-4 0.835, -4/+4 0.831). Also fixed the target mask: the reference stand pole between the legs was counted as mannequin (+0.002, not the model)",
+          "lesson": "Check the target before the model: a stray pole in the mask shows up as a thin orange stripe between parts. Then legs sit on their centre lines (same as leap rep 7). Gains are shrinking (+0.013): next pose."
+        },
+        {
+          "round": 4,
+          "iou": 0.855,
+          "faces": 1538,
+          "change": "ankle and toe on the viewer-right leg +10 px in x (sweep +4 0.850, +8 0.854, +12 0.855); head x offset scored flat",
+          "lesson": "Move the joint, not the part: shifting the ankle re-aims the whole shin. A part whose photo-only and model-only misses are equal on both sides (the head) is mis-shaped, not mis-placed."
+        },
+        {
+          "round": 5,
+          "iou": 0.855,
+          "faces": 1538,
+          "change": "none kept. head taper/size sweeps best 0.857 (+0.002); arm x shifts 0.830-0.854 (all same or worse)",
+          "lesson": "Plateau signal again: every sweep inside 0.005 means the pose is done; move to a new pose instead of polishing."
+        }
+      ],
+      "status": "plateau at 0.855 after 5 reps; next pose waits on Evan"
     }
   ]
 }

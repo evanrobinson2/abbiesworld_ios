@@ -56,6 +56,29 @@
       "confidence": 0.75,
       "lesson": "Tinted shadows instead of grey ones keep a flat-colour world warm and readable from far away."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "keyframe",
+      "mocap": 0.0,
+      "locomotion": [
+        "blend_tree",
+        "procedural_ik"
+      ],
+      "tricks": [
+        "Animated in Blender, played in Unity: a small set of goose clips (waddle, run with flapping wings, crouch, honk, grab)",
+        "Villagers react with clear, readable body language (look up, chase, shoo), which is the stealth readout",
+        "Neck and head lead the body, so the goose looks curious before it moves"
+      ],
+      "lesson": "Readable reactions on the people are worth more than a big animation set; lead with the head.",
+      "sources": [
+        {
+          "title": "Game Developer: Road to the IGF, House House's Untitled Goose Game",
+          "url": "https://www.gamedeveloper.com/game-platforms/road-to-the-igf-house-house-s-i-untitled-goose-game-i-"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Piano that follows the action, softer when sneaking and racing when you are spotted.",
     "pacing": "brisk, short sessions",

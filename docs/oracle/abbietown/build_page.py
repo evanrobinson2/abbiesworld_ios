@@ -9,23 +9,33 @@ here = pathlib.Path(__file__).parent
 root = here.parents[2]
 sim = root / 'prototypes/ranch-atelier/dist/simulations/abbietown'
 parts = []
-for name in ['town.mjs', 'manifest.mjs']:
+for name in ['town.mjs', 'regions.mjs', 'manifest.mjs', 'entrances.mjs']:
     code = (sim / name).read_text()
     code = re.sub(r'^import .*?;\n', '', code, flags=re.M)
     code = re.sub(r'^export ', '', code, flags=re.M)
     parts.append(f'// ---- simulations/abbietown/{name} ----\n' + code)
+# the watercolour distance pass (AW-STUDY-0050) lives in the shared kit, one folder up
+code = (sim.parent / 'watercolour-distance.mjs').read_text()
+code = re.sub(r'^import .*?;\n', '', code, flags=re.M)
+code = re.sub(r'^export ', '', code, flags=re.M)
+parts.append('// ---- simulations/watercolour-distance.mjs ----\n' + code)
 modules = '\n'.join(parts)
 land = json.dumps(json.loads((sim / 'land.json').read_text()), separators=(',', ':')).replace('</', '<\\/')
+history = json.dumps(json.loads((sim / 'history.json').read_text()), separators=(',', ':'))
+import base64
+square = json.dumps(json.loads((sim / 'square.json').read_text()), separators=(',', ':'))
+overlay = 'data:image/png;base64,' + base64.b64encode((sim / 'overlay.png').read_bytes()).decode()
 context = subprocess.run(['node', str(root / 'tools/context-card/snippet.mjs'), 'abbietown'], capture_output=True, text=True, check=True).stdout
-template = (here / 'abbietown.template.html').read_text()
+template = (here / 'abbietown.template.html').read_text().replace('/*DIORAMAS*/', (here / 'housekit.block.js').read_text() + (here / 'dioramas.block.js').read_text())
 def page(three, orbit):
     imap = json.dumps({'imports': {'three': three, 'three/addons/controls/OrbitControls.js': orbit}})
-    return template.replace('/*IMPORTMAP*/', imap).replace('/*MODULES*/', modules).replace('/*LAND*/', land).replace('/*CONTEXT*/', context)
+    return template.replace('/*IMPORTMAP*/', imap).replace('/*MODULES*/', modules).replace('/*LAND*/', land).replace('/*CONTEXT*/', context).replace('/*HISTORY*/', history).replace('/*OVERLAY*/', overlay).replace('/*SQUARE*/null', square)
 art = page('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js', 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js')
 btns = '<div class="chips"><button class="btn" id="csv">Download the manifest (CSV)</button><button class="chip" id="json">JSON</button></div>'
 assert btns in art
 # the preview cannot hand out files: point to the live page for the CSV and JSON
 art = art.replace(btns, '<p class="muted">The CSV and JSON downloads are on the live study page, /studies/abbietown/.</p><span hidden><button id="csv"></button><button id="json"></button></span>')
+art = art.replace("const CELL_GAME = '/studies/cell/play.html';", "const CELL_GAME = 'https://app.abbies.world/studies/cell/play.html';")
 (here / 'abbietown-artifact.html').write_text(art)
 live = page('/vendor/three.module.js', '/vendor/OrbitControls.js')
 head_end = live.index('</style>') + len('</style>')

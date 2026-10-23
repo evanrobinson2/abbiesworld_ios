@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-23-wesnoth-prediction-ui",
-  "updatedAt": "2026-10-23T11:45:27.587660+00:00",
+  "revision": "anatomy-2026-10-23-wesnoth-animation",
+  "updatedAt": "2026-10-23T17:34:40.877992+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 97,
+    "findings": 100,
     "runtimeObserved": 0,
-    "sourceFilesFetched": 56,
+    "sourceFilesFetched": 65,
     "selectedClassesDecompiled": 5
   },
   "method": [
@@ -1331,6 +1331,69 @@
               "gitBlobSha": "de1f340f37a949d47c03e1a51b52a048bcfae47d"
             }
           ]
+        },
+        {
+          "domain": "rendering",
+          "title": "A combat animation composes independently timed tracks",
+          "finding": "Bowman bow attack filters by weapon name, supplies body images for south-facing versus north-facing directions, and defines missile and hit/miss sound tracks separately. Body start_time is -445, missile_start_time -150 with duration 150, and the sound macro receives -230. The source constructor discovers named _frame children as sub-animations, and frame duration can be derived from image/diagonal/halo durations when not explicit. This traces authored composition and loading, not runtime synchronization or perceived timing. The square-bracket parser expands ranges and repetitions, then combines equal-length bracket groups positionally. Thus Bowman [1~4,1] with [75*2,100,130,65] describes five image occurrences with durations 75,75,100,130,65, reusing image 1. These are sequence occurrences, not five unique sprites.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "data/core/units/humans/Loyalist_Bowman.cfg",
+            "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/core/units/humans/Loyalist_Bowman.cfg#L39-L73",
+            "blobSha": "9120d222f66867a56257fb0099df643214197ac4",
+            "lines": [
+              39,
+              73
+            ]
+          },
+          "supportingEvidence": [
+            "data/core/units/humans/Loyalist_Bowman.cfg:39-73",
+            "src/units/animation.cpp:302-316",
+            "src/units/frame.cpp:100-112",
+            "src/units/frame_private.hpp:152-191",
+            "src/serialization/string_utils.cpp:101-225"
+          ]
+        },
+        {
+          "domain": "rendering",
+          "title": "Animation outcome filters distinguish hits from kills",
+          "finding": "The SOUND:HIT_AND_MISS macro selects hits=yes versus hits=no. The animation constructor maps yes to both hit and kill, no to miss, and literal hit to hit only. Animation matching rejects an outcome absent from that allowed set. DEFENSE_ANIM_DIRECTIONAL_RANGE uses literal hits=hit for its hit-sound branch. This establishes a selection distinction; it does not prove the complete death-sound or combat dispatch flow.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "data/core/macros/sound-utils.cfg",
+            "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/data/core/macros/sound-utils.cfg#L590-L609",
+            "blobSha": "662c0aa19bda73a5a5d3b44d0272682267e195b3",
+            "lines": [
+              590,
+              609
+            ]
+          },
+          "supportingEvidence": [
+            "data/core/macros/sound-utils.cfg:590-609",
+            "data/core/macros/animation-utils.cfg:182-209",
+            "src/units/animation.cpp:349-360",
+            "src/units/animation.cpp:444-450"
+          ]
+        },
+        {
+          "domain": "rendering",
+          "title": "Combat presentation temporarily changes HP before the combat action commits damage",
+          "finding": "The combat action calls unit_display::unit_attack only when display updates are enabled, then calls defender.take_hit(damage). The display routine can skip animation for visibility or combat-display preferences. When shown, it classifies the presentation as kill when damage reaches current defender HP, hit for positive lesser damage, otherwise miss. It selects attack and defend animations, waits until animation time zero, removes HP incrementally during playback, waits for completion and restores the saved HP. The caller then applies the actual damage. This is a normal-path source trace, not evidence of runtime rollback under exceptions or a claim that presentation never mutates model objects.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/actions/attack.cpp",
+            "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/actions/attack.cpp#L1042-L1082",
+            "blobSha": "c08cfd03fd74c49653b4b9ed6f1ece2ba48089ad",
+            "lines": [
+              1042,
+              1082
+            ]
+          },
+          "supportingEvidence": [
+            "src/actions/attack.cpp:1042-1082",
+            "src/units/udisplay.cpp:607-659",
+            "src/units/udisplay.cpp:745-770"
+          ]
         }
       ],
       "coverage": {
@@ -1342,16 +1405,16 @@
         "ux": "not yet studied",
         "rendering": "partial static evidence; graph construction only",
         "assets": "partial static evidence",
-        "audio": "not yet studied",
+        "audio": "partial static evidence; sound selection, not playback",
         "models": "not yet studied",
         "binary": "not yet studied"
       },
       "inventoryUrl": "/data/anatomy/wesnoth.json",
       "lesson": {
         "status": "design inference; not implemented in Ranch Atelier",
-        "text": "Preserve the original recipe while generating variations, and expose uncertainty rather than presenting a random outcome as guaranteed. A truncated distribution should disclose omitted probability mass and rounding; risk colors alone cannot communicate an outcome that has been filtered out."
+        "text": "Preserve the original recipe while generating variations, and expose uncertainty rather than presenting a random outcome as guaranteed. A truncated distribution should disclose omitted probability mass and rounding; risk colors alone cannot communicate an outcome that has been filtered out. Animation tracks can reuse image assets while selecting presentation by combat outcome; distinguish temporary display updates from committed simulation state."
       },
-      "nextPass": "Trace animation frame references in pinned source. Prediction selection, graph drawing and dialog layout inspected; actual game rendering and combat execution consistency remain unexamined. Do not launch the game during research passes.",
+      "nextPass": "Inspect one further pilot subsystem, retaining unresolved runtime, exceptional-path and full asset coverage.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },
