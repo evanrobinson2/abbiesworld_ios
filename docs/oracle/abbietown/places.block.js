@@ -65,6 +65,12 @@ Object.assign(BUILD, {
   cyl(g, .22, .22, 4.6, '#6a4a2e', -2.4, 0, 0, 6); cyl(g, .22, .22, 4.6, '#6a4a2e', 2.4, 0, 0, 6); box(g, 6.2, 3.2, .3, '#b88a52', 0, 1.2, 0); box(g, 6.8, .4, 1.6, '#5a4636', 0, 4.4, 0);
   [[-1.8, 2.8, '#f6d04a'], [0, 3.2, '#f08ab0'], [1.8, 2.6, '#8fc8f2'], [-.6, 1.8, '#ffffff'], [1.2, 1.7, '#b99af0']].forEach(([x, y, c], i) => box(g, 1.3, 1, .08, c, x, y, .22).rotation.z = (i - 2) * .06);
  },
+ skatepark(g) { // the skate park by the high school: a concrete slab, a shallow bowl, quarter-pipes, a rail, a low fence and a bench
+  box(g, 40, .5, 30, '#b9b6ae', 0, 0, 0); cyl(g, 7.5, 7.5, .1, '#8f8c85', -9, .5, -3, 20); cyl(g, 5, 5, .12, '#a6a39b', -9, .5, -3, 20);
+  for (const [x, z, ry] of [[12, -11, 0], [12, 11, Math.PI]]) { const q = box(g, 12, 3, 1.2, '#8f8c85', x, .5, z, ry); q.rotation.x = z < 0 ? -.45 : .45; box(g, 12, .3, 3, '#a6a39b', x, 2.4, z + (z < 0 ? -1.2 : 1.2)); }
+  box(g, 10, .35, .35, '#c8452a', 4, 1.5, 0); for (const x of [-1, 9]) box(g, .3, 1.5, .3, '#4a4a50', x, .5, 0); box(g, 6, .9, 3, '#e8b23a', -14, .5, 11); box(g, 3.4, 1.4, 3.4, '#5a8ad8', 16, .5, 0).rotation.y = .4;
+  for (let i = 0; i < 12; i++) box(g, .2, 1.6, .2, '#4a4a50', -20 + i * 3.64, .5, -15); box(g, 40, .15, .15, '#4a4a50', 0, 1.9, -15); box(g, 4, .3, 1, '#6a4a2e', -14, 1, 16); box(g, 4, .8, .18, '#6a4a2e', -14, 1.4, 16.5);
+ },
  gingerbread(g) { buildGingerbread(g); },
  bunker(g) { buildBunker(g); },
 });
