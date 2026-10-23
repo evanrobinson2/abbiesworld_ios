@@ -1574,6 +1574,18 @@
      "note": "The sixth direction, Painted: brush-broken light, purple shadows, teal rim, broken ink"
     },
     {
+     "k": "canon",
+     "t": "Midjourney concept art: four next characters (Relax mode)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/tools/midjourney/outputs/character-studio",
+     "note": "Turnaround sheets with job ids and picks in provenance.json; each 3D character is shown beside its pick"
+    },
+    {
+     "k": "canon",
+     "t": "Modeler canon: engineered geometry from a recipe, parts named by what they are",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md",
+     "note": "characters.mjs builds each character as the mannequin's named parts, so it rides the same 20 bones and every move"
+    },
+    {
      "k": "devblog",
      "t": "Simon Clavet, Motion Matching and The Road to Next-Gen Animation (GDC 2016)",
      "href": "https://gdcvault.com/play/1023280/Motion-Matching-and-The-Road",

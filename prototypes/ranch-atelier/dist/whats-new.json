@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-character-studio-cast",
+      "date": "2026-10-23",
+      "title": "Character Studio: four new characters",
+      "line": "The claymation adventurer, the plasticine inventor, the stick man and the 80s action hero from Midjourney are now 3D characters that play every move. The new Cast room shows each one beside its picture.",
+      "image": "/whats-new/2026-10-23-character-studio-cast.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMMgGWzaue2qNoRR7u64j2y",
+      "threadTitle": "AW-STUDY-0037 - Character Studio",
+      "tour": false,
+      "link": "/studies/character-studio/"
+    },
+    {
       "id": "2026-10-23-texture-studio-brush",
       "date": "2026-10-23",
       "title": "Texture Studio: a painted, Arcane-style light",
