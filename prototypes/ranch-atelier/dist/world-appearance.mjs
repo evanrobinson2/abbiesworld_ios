@@ -1,9 +1,9 @@
 import * as T from './vendor/three.module.js';
 import {themes} from './app-style-presets.mjs';
 const owned=new WeakSet();
-export function appearanceIndex(){const n=Number(document.documentElement.dataset.appStyle)-1;return Number.isInteger(n)&&themes[n]?n:7;}
+export function appearanceIndex(){const n=Number(document.documentElement.dataset.appStyle)-1;return Number.isInteger(n)&&themes[n]?n:0;}
 export function applyWorldAppearance(root,index=appearanceIndex()){
- const t=themes[index]||themes[7],original=index===7;
+ const t=themes[index]||themes[0],original=index===0;
  if(root.isScene){if(root.background?.isColor)root.background.set(original?'#e7ecde':t[4]);if(root.fog)root.fog.color.set(original?'#e7ecde':t[4]);}
  root.traverse(o=>{
   if(o.isLight){o.userData.appearanceBase??={color:o.color.getHex(),ground:o.groundColor?.getHex()};const b=o.userData.appearanceBase;o.color.set(original?b.color:t[5]);if(o.groundColor)o.groundColor.set(original?b.ground:t[11]);return;}
