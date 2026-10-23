@@ -130,6 +130,16 @@ export const BEATS = [
   say('houston', 'Welcome to the Moon base, crew.'),
   say('houston', 'The airlock panel is yours. Match every wire to its socket.'),
  ]},
+ {id: 'outpost', zone: 'mining-outpost', clock: 11640, steps: [
+  cut(3),
+  say('houston', 'The old mining outpost is just past the pad. The kiosk there trades moon cheese for backpack charms.'),
+  say('abbie', 'Moon cheese is real?'),
+  say('houston', 'One in three moon rocks hides a cheese. Bring three to the kiosk.'),
+  {k: 'game', game: 'mining'},
+  {k: 'item', id: 'moon-cheese', name: 'Moon cheese charm', icon: '🧀', from: 'the mining kiosk'},
+  say('ani', 'Daddy, hold the door, I have cheese.'),
+  cut(3),
+ ]},
  {id: 'airlock', zone: 'airlock', clock: 11700, steps: [
   cut(3, fx('sound', {id: 'airlock-hiss'})),
   say('abbie', 'Daddy, the door has wires!'),

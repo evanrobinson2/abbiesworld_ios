@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import {createMission, PLAYERS, fmtClock} from '../moonmission/mission.mjs';
 import {BEATS} from '../moonmission/script.mjs';
 import {ZONES, REGIONS, hexFlower, regionAt, resolveZones, startCoordinate} from '../moonmission/zones.mjs';
-import {botMoves} from '../moonmission/games.mjs';
+import {botMoves, moonMining, CHEESE_CHANCE} from '../moonmission/games.mjs';
 import {newLander, stepLander, SOFT} from '../moonmission/lander.mjs';
 import {makeLand, growTown, anchors} from '../abbietown/town.mjs';
 
@@ -27,7 +27,7 @@ function play(m, {maxS = 4000, choice = () => 0, onFx = () => {}} = {}) {
 
 test('the four moon-base games are played to the end by a bot family', () => {
  const m = createMission(), fx = play(m), done = fx.filter(e => e.fx === 'game-done').map(e => e.game);
- assert.deepEqual(done, ['wire', 'zapper', 'harmonizer', 'buggy']);
+ assert.deepEqual(done, ['mining', 'wire', 'zapper', 'harmonizer', 'buggy']);
  for (const id of ['airlock-badge', 'gem-shard', 'star-seed']) assert.ok(m.state.items.some(i => i.id === id), id);
 });
 
@@ -147,3 +147,19 @@ test('the mission starts at the coffee shop curb on Main Street, from the town a
 });
 
 test('the clock reads like a launch clock', () => { assert.equal(fmtClock(-2700), 'T-00:45:00'); assert.equal(fmtClock(10), 'T+00:00:10'); assert.equal(fmtClock(-86400), 'T-24:00:00'); });
+
+test('moon cheese: a bot crew wins the charm with exactly three cheeses, and a kiosk win repeats', () => {
+ for (const seed of [1, 2, 3, 4, 5]) {
+  const g = moonMining(['daddy', 'abbie', 'ani'], seed); let t = 0;
+  while (!g.done && t < 600) { for (const e of botMoves({name: 'mining', ...g.view()})) g.input(e); g.step(.2); t += .2; }
+  assert.ok(g.done, 'seed ' + seed); assert.equal(g.G.cheese, 3); assert.equal(g.G.charm, true);
+ }
+});
+test('moon cheese: about one broken rock in three drops cheese, rocks grow back, nobody fails', () => {
+ let broke = 0, cheese = 0;
+ for (let seed = 1; seed <= 300; seed++) { const g = moonMining(['daddy'], seed, 1e9); for (let i = 0; i < 6; i++) { g.input({player: 'daddy', rock: i, swing: true}); g.step(.5); g.input({player: 'daddy', rock: i, swing: true}); g.step(.5); }
+  g.step(1); broke += g.G.mined; cheese += g.G.rocks.filter(r => r.state === 'cheese').length + g.G.cheese; }
+ assert.ok(Math.abs(cheese / broke - CHEESE_CHANCE) < .04, String(cheese / broke));
+ const g = moonMining(['daddy'], 9, 1e9); g.input({player: 'daddy', rock: 0, swing: true}); g.step(.5); g.input({player: 'daddy', rock: 0, swing: true}); g.step(5); g.step(5);
+ assert.equal(g.G.rocks[0].state, 'rock'); assert.equal(g.G.rocks[0].hp, 2);
+});
