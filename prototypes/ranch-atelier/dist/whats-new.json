@@ -2,6 +2,16 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-welcome",
+      "date": "2026-10-23",
+      "title": "Welcome to Abbie’s World",
+      "line": "New players meet a tour guide: take the grand tour (the world builds itself, then a narrated tour of the live ranch), get a few chalk tips, or just play. Call it back any time from the toy box: Welcome tour.",
+      "image": "/whats-new/2026-10-23-welcome.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYW3oVJ5iRfHfiFPSwzDx1a9",
+      "threadTitle": "Welcome to Abbie's World intro",
+      "tour": true
+    },
+    {
       "id": "2026-10-23-billing",
       "date": "2026-10-23",
       "title": "See every cent of your magic",

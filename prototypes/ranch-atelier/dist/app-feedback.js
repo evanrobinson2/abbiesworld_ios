@@ -110,7 +110,8 @@
     // Arrived on a new version without tapping Reload (a fresh launch): show what changed once.
     // Dismiss takes off only the notice on the card and shows the next one; the rest wait under Notices.
     const next = () => { const fresh = unseen(); if (fresh.length) showCard({ kicker: "What's new", entry: fresh[0], extra: fresh.length - 1, onClose: () => { dismiss([fresh[0].id]); next(); } }); };
-    if (loadedBuild && previous !== loadedBuild) next();
+    // A first visit ever has nothing "new": the welcome guide (simulations/welcome) greets new players instead.
+    if (loadedBuild && previous && previous !== loadedBuild) next();
     setInterval(check, 60000);
   }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) check(true); });

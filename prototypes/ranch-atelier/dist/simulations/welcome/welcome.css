@@ -1,0 +1,48 @@
+/* Welcome to Abbie's World (AW-STUDY-0022). The guide is one glass object; the tour hides the toys and lets the world fill
+   the screen; captions are commercial supers; chalk is drawn over the canvas and never takes a tap. Nothing masks the world. */
+.aw-welcome{font-family:var(--app-font,ui-rounded,"SF Pro Rounded",system-ui,sans-serif);z-index:60}
+.aw-guide{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(560px,calc(100vw - 32px));
+ border-radius:30px;padding:20px 20px 18px;text-align:center;animation:aw-rise .55s cubic-bezier(.2,.9,.25,1.15) both}
+.aw-guide.leaving{animation:aw-sink .38s ease-in forwards}
+.aw-guide-mark{width:52px;height:52px;margin:-46px auto 4px;border-radius:50%;display:grid;place-items:center;
+ background:radial-gradient(circle at 35% 30%,#fff,#ffe6a8 45%,#f2a64a);box-shadow:0 8px 22px #a8641e55,inset 0 -3px 6px #c0742a66,inset 0 2px 2px #fff}
+.aw-guide-mark svg{width:30px;height:30px;fill:#fffaf0;stroke:#b8611f;stroke-width:1.6;stroke-linejoin:round;animation:aw-twinkle 2.6s ease-in-out infinite}
+.aw-guide h2{margin:0;font-size:clamp(20px,4.6vw,26px);letter-spacing:-.01em}
+.aw-guide p{margin:2px 0 14px;opacity:.75;font-size:15px}
+.aw-choices{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:10px}
+.aw-choice{appearance:none;border:1px solid #ffffffb0;border-radius:20px;padding:12px 10px 11px;display:grid;justify-items:center;gap:3px;cursor:pointer;color:inherit;font:inherit;
+ background:linear-gradient(170deg,#ffffffa8,#ffffff38);box-shadow:0 6px 16px #2a1f1222,inset 0 1px 0 #fff,inset 0 -2px 4px #00000012;transition:transform .18s,box-shadow .18s}
+.aw-choice:hover,.aw-choice:focus-visible{transform:translateY(-3px);box-shadow:0 12px 24px #2a1f1230,inset 0 1px 0 #fff;outline:none}
+.aw-choice:active{transform:translateY(1px) scale(.98)}
+.aw-choice svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.aw-choice b{font-size:15px;line-height:1.15}.aw-choice small{font-size:12px;opacity:.7;line-height:1.2}
+.aw-choice-hero{background:linear-gradient(170deg,#ffe9b8,#f4b65d);border-color:#fff3d6;color:#4a2a0a}
+.aw-choice-hero svg{stroke:#7a3f0c}
+@media (max-width:520px){.aw-choices{grid-template-columns:1fr}.aw-choice{grid-template-columns:34px 1fr;justify-items:start;text-align:left;column-gap:10px;padding:10px 14px}.aw-choice svg{grid-row:span 2;align-self:center}}
+
+/* The tour: the toys step aside (opacity, not removal, so nothing loses its state) and the world fills the screen. */
+html.aw-tour body>*:not(.aw-stage):not(.aw-welcome):not(.aw-chalk){opacity:0!important;pointer-events:none!important;transition:opacity .45s}
+html.aw-tour.aw-tour-cards body>#v2-hand{opacity:1!important}
+.aw-caption{position:fixed;left:max(28px,5vw);bottom:max(56px,11vh);right:28px;pointer-events:none;color:#fff;
+ font-weight:800;font-size:clamp(28px,6.2vw,64px);line-height:1.02;letter-spacing:-.02em;text-shadow:0 2px 3px #0000004d,0 10px 34px #0000005e}
+.aw-caption span{display:inline-block;max-width:14ch;opacity:0;transform:translateY(18px)}
+.aw-caption.in span{animation:aw-super .7s cubic-bezier(.2,.9,.2,1) forwards}
+.aw-caption.leaving{opacity:0;transition:opacity .5s}
+.aw-skip,.aw-mute{position:fixed;top:max(14px,env(safe-area-inset-top));border-radius:999px;font:600 14px/1 var(--app-font,system-ui);padding:10px 16px;cursor:pointer;animation:aw-fade .6s .8s both}
+.aw-skip{right:16px}.aw-mute{right:96px;padding:7px 10px}
+.aw-mute svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block}
+.aw-mute.off .aw-wave{opacity:.15}
+.aw-skip.leaving,.aw-mute.leaving{opacity:0;transition:opacity .4s}
+
+/* Chalk notes */
+.aw-chalk{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:55;overflow:visible}
+.aw-chalk-note{filter:url(#aw-chalk-grain)}
+.aw-chalk-stroke{fill:none;stroke:#fffdf3;stroke-linecap:round;stroke-linejoin:round;opacity:.94}
+.aw-chalk-words{fill:#fffdf3;font-family:"Gochi Hand","Chalkboard SE","Comic Sans MS",cursive;letter-spacing:.02em;opacity:.96}
+
+@keyframes aw-rise{from{opacity:0;transform:translate(-50%,40px) scale(.96)}}
+@keyframes aw-sink{to{opacity:0;transform:translate(-50%,30px) scale(.97)}}
+@keyframes aw-super{to{opacity:1;transform:none}}
+@keyframes aw-fade{from{opacity:0}}
+@keyframes aw-twinkle{50%{transform:rotate(12deg) scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.aw-guide,.aw-caption.in span,.aw-guide-mark svg{animation-duration:.01s}}
