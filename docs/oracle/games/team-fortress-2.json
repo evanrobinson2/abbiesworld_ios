@@ -1,0 +1,70 @@
+{
+  "appid": 440,
+  "name": "Team Fortress 2",
+  "store_url": "https://store.steampowered.com/app/440/",
+  "genres": [
+    "Shooter",
+    "Class-based"
+  ],
+  "short_description": "Nine cartoon classes fight over control points and carts.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Class-based"
+  ],
+  "summary": "Nine cartoon classes fight over control points and carts.",
+  "identity": {
+    "core_loop": "Pick a class, push or defend the objective, swap class to counter.",
+    "mechanics": null,
+    "ui_and_game_feel": "Readable silhouettes, comic timing, huge personality.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Team colours and class shapes tell you everything at a glance; the objective is a cart you can see.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Painterly 1960s spy-movie cartoon.",
+    "palette": null,
+    "audio_mood": "Brassy spy themes and voice barks.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Silhouette is information: each role readable from across the map."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.67,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.78,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.22
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "shooter"
+  },
+  "review": "Still the gold standard for character readability. Nine shapes, nine jobs, and you know which is which from 100 metres. Abbie's World animals should read that clearly."
+}

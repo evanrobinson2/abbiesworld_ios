@@ -31,7 +31,7 @@ export function identityCard(r){
   expression:(r.ledger?.expression||[]).map(e=>typeof e==='string'?e:e.description||e.id),file:r.file};
 }
 export function profileCard(p){
- return {id:p.id,kind:'steam-profile',title:p.name,steamAppId:p.appid,developers:p.developers||[],genres:p.genres||[],summary:p.short_description,engine:p.install?.engine||null,storeUrl:p.store_url,file:p.file};
+ return {id:p.id,kind:'steam-profile',title:p.name,steamAppId:p.appid,developers:p.developers||[],genres:p.genres||[],summary:p.short_description,feel:p.identity?.ui_and_game_feel||null,dna:p.dna?.axes||null,study:p.study||null,engine:p.install?.engine||null,storeUrl:p.store_url,file:p.file};
 }
 function anatomyCard(g){return {id:g.id,kind:g.kind==='design-lesson'?'lesson':'anatomy',title:g.title,genre:g.genre,lesson:g.lesson||null,findings:(g.claims||[]).slice(0,6).map(c=>({domain:c.domain,title:c.title,finding:c.finding})),studyUrl:`https://abbies-game-oracle.vercel.app/game-anatomy?game=${g.id}`};}
 
@@ -44,7 +44,7 @@ export function getIdentity(id){
 export function searchKnowledge({q='',kinds=['identity','steam-profile','anatomy','lesson','catalog','style'],limit=12}={}){
  const words=terms(q),hits=[];
  if(kinds.includes('identity'))for(const r of repo.identities)hits.push({s:score(words,[[r.game?.title,8],[r.core?.fantasy,3],[(r.core?.pillars||[]).join(' '),3],[flat(r.core?.signatures),2],[flat(r.layers),1],[flat(r.assimilation),2]]),card:identityCard(r)});
- if(kinds.includes('steam-profile'))for(const p of repo.profiles)hits.push({s:score(words,[[p.name,8],[(p.genres||[]).join(' '),2],[p.short_description,2]]),card:profileCard(p)});
+ if(kinds.includes('steam-profile'))for(const p of repo.profiles)hits.push({s:score(words,[[p.name,8],[(p.genres||[]).join(' '),2],[p.short_description,2],[[p.identity?.core_loop,p.identity?.ui_and_game_feel,p.identity?.lessons_for_abbies_world,p.review].filter(Boolean).join(' '),1]]),card:profileCard(p)});
  for(const g of anatomy.games){const kind=g.kind==='design-lesson'?'lesson':'anatomy';if(!kinds.includes(kind))continue;hits.push({s:score(words,[[g.title,8],[g.genre,3],[g.lesson,2],[flat((g.claims||[]).map(c=>[c.title,c.finding,c.domain])),1]]),card:anatomyCard(g)});}
  if(kinds.includes('style'))for(const st of styles.styles)hits.push({s:score(words,[[st.name,6],[st.keywords.join(' '),4],[st.summary,1],[st.references.join(' '),3]]),card:{id:st.id,kind:'style',title:st.name,summary:st.summary,references:st.references}});
  if(kinds.includes('catalog')&&q){const c=searchCatalog({q,limit:6});for(const g of c.results)hits.push({s:Math.min(g.score,12)*0.5,card:{id:g.id,kind:'catalog',title:g.name,steamAppId:g.steamAppId,styles:g.styles,ownership:g.ownership,installed:g.installation?.present||false,summary:g.summary}});}

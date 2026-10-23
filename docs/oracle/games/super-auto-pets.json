@@ -1,0 +1,66 @@
+{
+  "appid": 1714040,
+  "name": "Super Auto Pets",
+  "store_url": "https://store.steampowered.com/app/1714040/",
+  "genres": [
+    "Auto battler"
+  ],
+  "short_description": "Line up cute animals that fight automatically.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Auto battler"
+  ],
+  "summary": "Line up cute animals that fight automatically.",
+  "identity": {
+    "core_loop": "Buy pets, combine, order, watch the fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cute and clever.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.6,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Stats on each pet (spatial).",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Emoji-like animals.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Simple rules, cute creatures, deep combos: kid-friendly strategy."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.22,
+      "structure": 0.56,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.89,
+      "session": 0.22
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

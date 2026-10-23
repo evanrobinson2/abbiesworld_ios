@@ -1,0 +1,68 @@
+{
+  "appid": 3028310,
+  "name": "Nordhold",
+  "store_url": "https://store.steampowered.com/app/3028310/",
+  "genres": [
+    "Tower defense",
+    "Roguelite"
+  ],
+  "short_description": "A Norse tower-defense roguelite with a village economy.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Tower defense",
+    "Roguelite"
+  ],
+  "summary": "A Norse tower-defense roguelite with a village economy.",
+  "identity": {
+    "core_loop": "Build towers and economy, survive waves, upgrade between runs.",
+    "mechanics": null,
+    "ui_and_game_feel": "Strategic, rich in buffs.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay heavy.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Stylised Norse.",
+    "palette": null,
+    "audio_mood": "Folk.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Tower defense remains a clear kid-friendly frame."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.67,
+      "expression": 0.33,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.56
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

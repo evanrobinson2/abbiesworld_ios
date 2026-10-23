@@ -1,0 +1,70 @@
+{
+  "appid": 1449850,
+  "name": "Yu-Gi-Oh! Master Duel",
+  "store_url": "https://store.steampowered.com/app/1449850/",
+  "genres": [
+    "Card",
+    "Strategy"
+  ],
+  "short_description": "Digital Yu-Gi-Oh with flashy summons.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Card",
+    "Strategy"
+  ],
+  "summary": "Digital Yu-Gi-Oh with flashy summons.",
+  "identity": {
+    "core_loop": "Draw, summon, chain effects, duel.",
+    "mechanics": null,
+    "ui_and_game_feel": "Explosive animations, long combos.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.28,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Card text heavy.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Anime fantasy.",
+    "palette": null,
+    "audio_mood": "Dramatic.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Big summon moments are delightful; walls of text are not."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 1.0,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.89,
+      "session": 0.56
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "free-25",
+    "owned": false,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23",
+    "family": "card"
+  },
+  "review": "The summon animations are pure joy, the rules text is a wall. Good reference for making a card feel like an event."
+}

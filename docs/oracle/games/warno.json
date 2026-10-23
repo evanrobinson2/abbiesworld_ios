@@ -1,0 +1,68 @@
+{
+  "appid": 1611600,
+  "name": "WARNO",
+  "store_url": "https://store.steampowered.com/app/1611600/",
+  "genres": [
+    "Strategy",
+    "RTS"
+  ],
+  "short_description": "Cold War gone hot: large-scale realistic RTS.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "RTS"
+  ],
+  "summary": "Cold War gone hot: large-scale realistic RTS.",
+  "identity": {
+    "core_loop": "Deploy, recon, maneuver, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Huge and precise.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Dense overlay.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Military.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Expert-level overlay; the opposite of a kid game."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.89,
+      "expression": 0.33,
+      "structure": 1.0,
+      "social": 0.44,
+      "systems": 0.89,
+      "chance": 0.67,
+      "session": 0.67
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

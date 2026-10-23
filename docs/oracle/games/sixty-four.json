@@ -1,0 +1,68 @@
+{
+  "appid": 2659900,
+  "name": "Sixty Four",
+  "store_url": "https://store.steampowered.com/app/2659900/",
+  "genres": [
+    "Incremental",
+    "Puzzle"
+  ],
+  "short_description": "A minimalist incremental game about mining cubes with strange machines.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Incremental",
+    "Puzzle"
+  ],
+  "summary": "A minimalist incremental game about mining cubes with strange machines.",
+  "identity": {
+    "core_loop": "Click, mine, place machines, unlock stranger ones.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hypnotic and mysterious.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Machines in the world show output.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Clean monochrome isometric.",
+    "palette": null,
+    "audio_mood": "Minimal.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Incremental games can be beautiful when the machines are the interface."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.33,
+      "structure": 0.44,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

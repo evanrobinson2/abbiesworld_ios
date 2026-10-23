@@ -1,0 +1,49 @@
+{
+  "appid": 4595350,
+  "name": "Isolation Edge",
+  "store_url": "https://store.steampowered.com/app/4595350/",
+  "genres": [
+    "Survival"
+  ],
+  "short_description": "Recent release; not yet studied.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival"
+  ],
+  "summary": "Recent release; not yet studied.",
+  "identity": {
+    "core_loop": null,
+    "mechanics": null,
+    "ui_and_game_feel": null,
+    "information_grammar": null,
+    "camera": null,
+    "art_direction": null,
+    "palette": null,
+    "audio_mood": null,
+    "pacing": null,
+    "lessons_for_abbies_world": null
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.44,
+      "structure": 0.44,
+      "social": 0.44,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.44
+    },
+    "confidence": 0.1
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "needs play session",
+    "date": "2026-10-23"
+  }
+}

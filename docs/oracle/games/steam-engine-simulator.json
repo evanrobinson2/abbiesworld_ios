@@ -1,0 +1,66 @@
+{
+  "appid": 2381620,
+  "name": "Steam Engine Simulator",
+  "store_url": "https://store.steampowered.com/app/2381620/",
+  "genres": [
+    "Simulation"
+  ],
+  "short_description": "A steam locomotive driving sim (recent release; details not yet studied).",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Simulation"
+  ],
+  "summary": "A steam locomotive driving sim (recent release; details not yet studied).",
+  "identity": {
+    "core_loop": "Fire, pressure, drive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Mechanical and procedural.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "spatial": 0.1,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.03,
+          "source": "estimate",
+          "confidence": 0.21,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Gauges in the cab (diegetic).",
+      "confidence": 0.3,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Mechanical.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Gauges in the world as the HUD."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.78,
+      "chance": 0.22,
+      "session": 0.44
+    },
+    "confidence": 0.3
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

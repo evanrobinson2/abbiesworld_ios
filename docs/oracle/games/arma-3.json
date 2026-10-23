@@ -1,0 +1,68 @@
+{
+  "appid": 107410,
+  "name": "Arma 3",
+  "store_url": "https://store.steampowered.com/app/107410/",
+  "genres": [
+    "Military sim",
+    "Shooter"
+  ],
+  "short_description": "An open military sandbox with realistic ballistics, vehicles and a huge editor.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Military sim",
+    "Shooter"
+  ],
+  "summary": "An open military sandbox with realistic ballistics, vehicles and a huge editor.",
+  "identity": {
+    "core_loop": "Plan, move a long way, take contact, survive, adapt.",
+    "mechanics": null,
+    "ui_and_game_feel": "Heavy, slow, unforgiving; long quiet stretches and sudden chaos.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "meta": 0.2,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Information is mostly diegetic: maps, radio and what you can see; HUD is minimal by design.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Grounded realism on a huge island.",
+    "palette": null,
+    "audio_mood": "Realistic gunfire and radio chatter.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "Scarcity of information is a feeling: radio and maps instead of markers."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.89,
+      "expression": 0.56,
+      "structure": 0.78,
+      "social": 0.33,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.78
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

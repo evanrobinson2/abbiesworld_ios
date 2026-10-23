@@ -1,0 +1,71 @@
+{
+  "appid": 1143810,
+  "name": "Black Skylands",
+  "store_url": "https://store.steampowered.com/app/1143810/",
+  "genres": [
+    "Action",
+    "Adventure",
+    "Base building"
+  ],
+  "short_description": "A top-down sky-pirate adventure: fly an airship between floating islands, fight, and build a base.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Adventure",
+    "Base building"
+  ],
+  "summary": "A top-down sky-pirate adventure: fly an airship between floating islands, fight, and build a base.",
+  "identity": {
+    "core_loop": "Explore islands, shoot pirates, salvage, upgrade the ship and base.",
+    "mechanics": null,
+    "ui_and_game_feel": "Twin-stick action with crafting in between.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Health and ammo overlays; ship state shown on the ship.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Detailed pixel art steampunk sky.",
+    "palette": null,
+    "audio_mood": "Adventure score.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Vehicles as homes: the airship is both map and base."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.22,
+      "systems": 0.56,
+      "chance": 0.33,
+      "session": 0.44
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

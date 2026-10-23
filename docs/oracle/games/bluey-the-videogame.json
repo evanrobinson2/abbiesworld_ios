@@ -1,0 +1,70 @@
+{
+  "appid": 2078350,
+  "name": "Bluey: The Videogame",
+  "store_url": "https://store.steampowered.com/app/2078350/",
+  "genres": [
+    "Kids",
+    "Adventure",
+    "Family"
+  ],
+  "short_description": "Play as Bluey and family in their house and yard, with simple co-op games from the show.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Kids",
+    "Adventure",
+    "Family"
+  ],
+  "summary": "Play as Bluey and family in their house and yard, with simple co-op games from the show.",
+  "identity": {
+    "core_loop": "Explore the house, play little games, find collectibles.",
+    "mechanics": null,
+    "ui_and_game_feel": "Gentle, co-op, no fail; for preschoolers and parents together.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "spatial": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Almost everything is in the world; few prompts.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Faithful show look: soft colours and shapes.",
+    "palette": null,
+    "audio_mood": "Show music and voices.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Parent and child co-op where the parent can help without taking over."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.11,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.33,
+      "systems": 0.11,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

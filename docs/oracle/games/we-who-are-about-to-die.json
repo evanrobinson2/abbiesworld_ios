@@ -1,0 +1,69 @@
+{
+  "appid": 973230,
+  "name": "We Who Are About To Die",
+  "store_url": "https://store.steampowered.com/app/973230/",
+  "genres": [
+    "Action",
+    "Roguelite"
+  ],
+  "short_description": "Gladiator roguelite with physics combat.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Roguelite"
+  ],
+  "summary": "Gladiator roguelite with physics combat.",
+  "identity": {
+    "core_loop": "Fight, die, inherit, try again.",
+    "mechanics": null,
+    "ui_and_game_feel": "Brutal physics duels.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.21,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Minimal.",
+      "confidence": 0.3,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Stylised.",
+    "palette": null,
+    "audio_mood": "Arena.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Physical combat feel."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.89,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.67,
+      "session": 0.56
+    },
+    "confidence": 0.3
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

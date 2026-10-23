@@ -1,0 +1,68 @@
+{
+  "appid": 1976950,
+  "name": "Desktop Dungeons: Rewind",
+  "store_url": "https://store.steampowered.com/app/1976950/",
+  "genres": [
+    "Puzzle",
+    "Roguelike"
+  ],
+  "short_description": "Ten-minute dungeon puzzles where exploring heals you and every fight is a sum.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Roguelike"
+  ],
+  "summary": "Ten-minute dungeon puzzles where exploring heals you and every fight is a sum.",
+  "identity": {
+    "core_loop": "Reveal tiles, pick fights you can win, level up, beat the boss.",
+    "mechanics": null,
+    "ui_and_game_feel": "Pure decision puzzle; bite-sized runs.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.1,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.25,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Perfect information: numbers on every monster (overlay).",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Clean painted tiles.",
+    "palette": null,
+    "audio_mood": "Light fantasy score.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Short runs with full information turn a roguelike into a puzzle."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.78,
+      "expression": 0.44,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.89,
+      "chance": 0.33,
+      "session": 0.78
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

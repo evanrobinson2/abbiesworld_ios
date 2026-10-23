@@ -1,0 +1,67 @@
+{
+  "appid": 701160,
+  "name": "Kingdom Two Crowns",
+  "store_url": "https://store.steampowered.com/app/701160/",
+  "genres": [
+    "Strategy",
+    "Side-scroller"
+  ],
+  "short_description": "Ride left and right, drop coins to build and recruit, survive nightly attacks.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Side-scroller"
+  ],
+  "summary": "Ride left and right, drop coins to build and recruit, survive nightly attacks.",
+  "identity": {
+    "core_loop": "Ride, spend coins, build walls, survive nights, sail on.",
+    "mechanics": null,
+    "ui_and_game_feel": "Minimal, beautiful, mysterious.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "none": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.01,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "No HUD at all: your purse jingles, subjects show their jobs, the night shows danger.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Gorgeous pixel art with reflections.",
+    "palette": null,
+    "audio_mood": "Ambient, layered.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Proof a whole strategy game can run with zero words on screen."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.44,
+      "expression": 0.44,
+      "structure": 0.44,
+      "social": 0.44,
+      "systems": 0.44,
+      "chance": 0.56,
+      "session": 0.67
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "library",
+    "owned": true,
+    "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
