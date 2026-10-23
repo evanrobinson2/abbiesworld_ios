@@ -87,6 +87,7 @@ tr.lead td{background:color-mix(in srgb,var(--good) 9%,transparent)}
 .chunk b{font:600 15px/1.2 var(--body)}
 .chunk small{color:var(--muted);font-size:13px;line-height:1.35}
 
+.findings{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
 .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
 .rule{border-top:3px solid var(--ink);padding-top:10px;display:grid;gap:4px}
 .rule dt{font:600 17px/1.2 var(--body)}
@@ -127,9 +128,10 @@ section{display:grid;gap:14px}
 
  <section aria-labelledby="sb">
   <h2 id="sb">Scoreboard</h2>
-  <p class="muted">Lower loss is better; higher IoU is better. Per-part squares fill from pale to green as each chunk's own silhouette IoU rises: head, chest, right arm, left arm, hips, legs.</p>
+  <p class="muted">Lower loss is better; higher IoU is better. Side IoU compares his profile with the Midjourney turnaround of the same guy, which is where depth shows. Per-part squares fill from pale to green as each chunk's own silhouette IoU rises: head, chest, right arm, left arm, hips, legs.</p>
+  <ul class="findings" id="findings"></ul>
   <div class="table-wrap"><table>
-   <thead><tr><th>Arm</th><th>Method</th><th class="num">Silhouette IoU</th><th class="num">Loss</th><th>Per part</th><th class="num">Time</th><th class="num">Cost</th><th>Status</th></tr></thead>
+   <thead><tr><th>Arm</th><th>Method</th><th class="num">Silhouette IoU</th><th class="num">Loss</th><th class="num">Side IoU</th><th>Per part</th><th class="num">Time</th><th class="num">Cost</th><th>Status</th></tr></thead>
    <tbody id="rows"></tbody>
   </table></div>
  </section>
@@ -150,6 +152,7 @@ section{display:grid;gap:14px}
   <h2 id="mx">What we measure</h2>
   <dl class="rules">
    <div class="rule"><dt>Silhouette IoU</dt><dd>Overlap of the model's outline with the reference outline, from the same front camera. 1.0 is a perfect match.</dd></div>
+   <div class="rule"><dt>Leads</dt><dd>Best all-round likeness: the average of the front, side and back outline scores, so getting his depth right counts as much as matching the picture.</dd></div>
    <div class="rule"><dt>Loss</dt><dd>The paper-warrior image loss: silhouette, outline distance, structure, facet edges and tone, weighted into one number. 0 is perfect.</dd></div>
    <div class="rule"><dt>Per-part score</dt><dd>Silhouette IoU inside each chunk's box, so a great torso can't hide a missing hand.</dd></div>
    <div class="rule"><dt>Time and cost</dt><dd>Wall-clock from first job to assembled model, and the model spend for all of an arm's jobs.</dd></div>
@@ -170,20 +173,24 @@ const partColor = v => v == null ? '' : `background:color-mix(in srgb,var(--good
 const orderOf = a => Array.isArray(a.order) ? a.order : null;
 const name = id => (CHUNKS.chunks.find(c => c.id === id) || {}).name || id;
 
+// All-round likeness: front, side and back outline together (depth counts as much as the picture).
+const allRound = a => a.side != null && a.back != null ? (a.iou + a.side + a.back) / 3 : null;
 function leader() {
- const done = DATA.arms.filter(a => a.loss != null);
- return done.length ? done.reduce((b, a) => a.loss < b.loss ? a : b).id : null;
+ const done = DATA.arms.filter(a => allRound(a) != null);
+ return done.length ? done.reduce((b, a) => allRound(a) > allRound(b) ? a : b).id : null;
 }
 
 function render() {
  const lead = leader();
  $('#state span').textContent = DATA.status || '';
+ $('#findings').innerHTML = (DATA.findings || []).map(f => `<li>${esc(f)}</li>`).join('');
  $('#rows').innerHTML = DATA.arms.map(a => `
   <tr class="${a.id === lead ? 'lead' : ''}">
    <td class="arm-id">${esc(a.id)}</td>
    <td><b>${esc(a.name)}</b><br><span class="muted">${esc(a.sees === 'crop' ? 'sees its crop' : 'sees the full figure')}, ${orderOf(a) ? 'in sequence' : 'in parallel'}</span></td>
    <td class="num">${fmt(a.iou)}</td>
    <td class="num">${fmt(a.loss)}</td>
+   <td class="num">${fmt(a.side)}</td>
    <td><div class="parts">${PARTS.map(p => `<i title="${esc(name(p))}: ${a.parts && a.parts[p] != null ? a.parts[p].toFixed(2) : 'not run'}" style="${partColor(a.parts && a.parts[p])}"></i>`).join('')}</div></td>
    <td class="num">${fmtTime(a.seconds)}</td>
    <td class="num">${fmtCost(a.cost_usd)}</td>
@@ -229,7 +236,7 @@ let viewerP = null;
 function loadViewer() {
  return viewerP ||= new Promise((ok, no) => {
   const s = document.createElement('script'); s.type = 'module';
-  s.src = 'https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js'; s.onload = ok; s.onerror = no;
+  s.src = 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js'; s.onload = ok; s.onerror = no;
   document.head.appendChild(s);
  });
 }
@@ -255,6 +262,6 @@ document.addEventListener('click', e => {
 });
 
 Promise.all([fetch('results.json', {cache: 'no-store'}).then(r => r.json()), fetch('chunks.json').then(r => r.json())])
- .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || d.arms[0].id; drawChunks(); render(); })
+ .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || leader() || d.arms[0].id; drawChunks(); render(); })
  .catch(() => { $('#state span').textContent = 'Results could not load; reload to try again'; });
 </script>
