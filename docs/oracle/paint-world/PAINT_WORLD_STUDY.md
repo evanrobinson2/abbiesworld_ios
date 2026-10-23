@@ -28,6 +28,33 @@ derived from `day * 24 + hour`, so pause pauses growth and the time-of-day picke
 Shader and plant materials compile once in `warm()`; a play rewrites position buffers of pooled meshes and touches no
 tile or shared material. Plants are three meshes each.
 
+## Why the splat looks so good (Evan, 2026-10-23: "out of control good"). Keep it exactly, reuse the recipe.
+The look is locked. Values live in `simulations/paint-world/paint-splat.mjs` (shader) and `paint-world.mjs` (timing, drops).
+
+Shape (one signed field, all from the seed, so every splat is different but the family is the same)
+- A wobbly blob: base radius .5 plus three sine lobes (3, 5 and 8 per turn) plus a little noise of the angle.
+- Five tapered splash arms (length .2 to .42 beyond the blob, width falling with distance) so it reads as thrown paint.
+- Seven flung droplets at .72 to .96 of the radius, each .03 to .075 wide.
+
+Surface
+- Colour is two tones per paint (bright and deep). Deep pools at the rim (35%), bright swirls from low-frequency noise inside.
+- Wet for the first ~4 game hours: a soft glint blob up-left and a light line just inside the edge. Then it dries to a chalky, slightly darker, grainy tone. In the last quarter of the day it shrinks irregularly with noise and goes translucent.
+- At night it glows softly (the colour added back at 38%), so paint reads as light.
+- Far from the camera the edge softens and the colour goes pastel (Watercolour distance, `uWash`).
+
+Timing (real seconds, not game time)
+- Teardrops fall in about .75 to 1.05 s with an ease-in (y = top * (1 - u*u)), stretching taller and thinner as they speed up. Drops are staggered by .22 s plus up to .12 s of jitter, so four land like a rhythm, not together.
+- On landing the splat spreads in .5 s with an ease-out cubic and a small overshoot (a damped sine, +7%), which is the "squash then settle" that sells it.
+- Six tiny paint droplets fly out with a ballistic arc for .9 s, shrinking as they go.
+- Splat quad is a 26 x 26 draped grid, lifted .006 above the terrain, with polygon offset so it never z-fights.
+
+Reuse the recipe
+1. Draw the shape as a signed distance, not a texture: blob, arms, droplets, then smoothstep the edge.
+2. Animate the radius, never the colour: ease-out with a damped overshoot over about half a second.
+3. Put a falling object with stretch in front of every impact, and stagger the impacts.
+4. Make it wet then dry then gone, driven by the game clock, with a night glow.
+5. One shared shader program and a pool, compiled up front, so playing it never hitches.
+
 ## Composes with Watercolour distance (AW-STUDY-0050)
 `uWash` softens far paint's edge and moves it toward pastel with camera distance. When 0050 ships a shared far-wash
 uniform, feed it to `world.setWash()`.
