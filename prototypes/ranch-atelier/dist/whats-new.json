@@ -4,8 +4,8 @@
     {
       "id": "2026-10-23-winchester-warm",
       "date": "2026-10-23",
-      "title": "Winchester gets ready before you walk in",
-      "line": "The first visit each session starts at Grace's computer while Winchester's shaders compile, so the town doesn't hitch later.",
+      "title": "Winchester warms up quietly",
+      "line": "The town compiles its own shaders in the background so placing and walking don't hitch.",
       "image": "/whats-new/2026-10-23-intro-scene.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
       "threadTitle": "Performance",
