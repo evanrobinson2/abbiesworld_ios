@@ -48,12 +48,12 @@
       "id": "2026-10-23-precompiled-shaders",
       "date": "2026-10-23",
       "title": "Walk in at Grace's computer",
-      "line": "The Ranch now opens in the dark. A desk lamp clicks on and Grace's computer glows, calling you to tap it and play her basement game while the tiles get ready. When it's ready, a popup lets you enter the ranch, and tiles land far smoother.",
+      "line": "Abbie's World now opens in the dark. A desk lamp clicks on and Grace's computer glows, calling you to tap it and play her basement game while the shaders get ready. When it's ready, a popup lets you enter Winchester.",
       "image": "/whats-new/2026-10-23-intro-scene.jpg",
       "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
       "threadTitle": "Engine speed and placement lag",
       "tour": false,
-      "link": "/sandbox"
+      "link": "/town"
     },
     {
       "id": "2026-10-23-bakery",

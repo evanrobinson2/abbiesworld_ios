@@ -1,9 +1,9 @@
 // Opening scene while the sandbox compiles every tile's shaders. The site starts black, a desk lamp clicks on, and you
 // are standing beside Grace's DOS computer in her basement. The screen glows and pulses to beckon you; tapping it moves
 // you in so you can play the basement game on it. The amber lights under the screen fill as tile types finish compiling.
-// When everything is ready a popup offers to leave for the ranch; nobody is ever pulled out of the game.
+// When everything is ready a popup offers to enter Winchester (the town, /town); nobody is ever pulled out of the game.
 // Same step()/finish() interface as warm-up-card.mjs. No words until the popup.
-const GAME='/studies/basement/play.html?embed=1';
+const GAME='/studies/basement/play.html?embed=1',TOWN='/town';
 const STYLE=`#intro-scene{position:fixed;inset:0;z-index:2147483000;overflow:hidden;background:#000;transition:opacity .7s ease;perspective:1400px}
 #intro-scene.leaving{opacity:0;pointer-events:none}
 #intro-scene .room{position:absolute;inset:0;background:radial-gradient(90% 70% at 22% 30%,#4a3622 0%,#22170f 42%,#09070a 100%);opacity:0}
@@ -49,14 +49,14 @@ const STYLE=`#intro-scene{position:fixed;inset:0;z-index:2147483000;overflow:hid
 @keyframes intro-touch{0%{opacity:.9;transform:scale(.5)}100%{opacity:0;transform:scale(1.7)}}
 @media (prefers-reduced-motion:reduce){#intro-scene.on .room{animation:intro-room .4s ease forwards}#intro-scene.on .black{animation:intro-black-r .4s forwards}#intro-scene.on .bulb,#intro-scene.on .cone{animation:none;opacity:1}#intro-scene.lit .halo{animation:none;opacity:.8}#intro-scene.lit .touch{animation:none}@keyframes intro-black-r{to{opacity:0}}}
 @media (max-width:700px){#intro-scene .stage{left:50%;width:94vw;transform:translate(-50%,-46%) rotateY(-9deg)}#intro-scene .lamp{left:2%;bottom:26%;width:22vw}#intro-scene.close .stage{transform:translate(-50%,-50%) rotateY(0) rotateX(0) scale(1.03)}}`;
-export function createIntroScene(){
+export function createIntroScene({destination=TOWN}={}){
  const style=document.createElement('style');style.textContent=STYLE;document.head.append(style);
- const scene=document.createElement('div');scene.id='intro-scene';scene.setAttribute('role','dialog');scene.setAttribute('aria-label',"Grace's computer. Your ranch is getting ready.");
+ const scene=document.createElement('div');scene.id='intro-scene';scene.setAttribute('role','dialog');scene.setAttribute('aria-label',"Grace's computer. Winchester is getting ready.");
  const LIGHTS=10;
  scene.innerHTML='<div class="room"><div class="lamp"><div class="stem"></div><div class="base"></div><div class="hood"></div><div class="bulb"></div></div></div><div class="cone"></div>'
   +'<div class="stage" role="button" tabindex="0" aria-label="Use the computer"><div class="halo"></div><div class="crt"><div class="glass"><iframe title="Grace\'s Basement" allow="autoplay;fullscreen"></iframe></div><div class="panel"><span class="power"></span><span class="lights">'+'<i></i>'.repeat(LIGHTS)+'</span><span class="slot"></span></div></div><div class="touch"></div></div>'
   +'<div class="black"></div><button class="exit" type="button" aria-label="Back to the ranch">×</button>'
-  +'<div class="ready" role="status" hidden><span>Your ranch is ready</span><button type="button">Enter the ranch</button></div>';
+  +'<div class="ready" role="status" hidden><span>Winchester is ready</span><button type="button">Enter Winchester</button></div>';
  document.body.append(scene);
  const stage=scene.querySelector('.stage'),frame=scene.querySelector('iframe'),lights=[...scene.querySelectorAll('.lights i')],ready=scene.querySelector('.ready'),enter=ready.querySelector('button'),exit=scene.querySelector('.exit');
  let closed=false;
@@ -66,7 +66,7 @@ export function createIntroScene(){
  function useIt(){if(closed||scene.classList.contains('close'))return;scene.classList.add('close');frame.contentWindow?.postMessage({type:'resume'},'*');setTimeout(()=>frame.focus(),1200);}
  stage.addEventListener('click',useIt);stage.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();useIt();}});
  function close(){if(closed)return;closed=true;frame.contentWindow?.postMessage({type:'pause'},'*');scene.classList.add('leaving');setTimeout(()=>{scene.remove();style.remove();},800);}
- enter.onclick=close;exit.onclick=close;
+ enter.onclick=()=>{frame.contentWindow?.postMessage({type:'pause'},'*');location.assign(destination);};exit.onclick=close;
  addEventListener('keydown',e=>{if(e.key==='Escape'&&!closed&&!ready.hidden)close();});
  addEventListener('message',e=>{if(e.source===frame.contentWindow&&e.data?.event==='quit')close();});
  return {
