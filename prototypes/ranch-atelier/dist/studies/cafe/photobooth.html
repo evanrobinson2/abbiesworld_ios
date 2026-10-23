@@ -36,7 +36,7 @@ canvas{display:block;width:100vw;height:100dvh}
 <script type="module">
 import * as T from 'three';
 import {GLTFLoader} from '/vendor/loaders/GLTFLoader.js';
-import {playerCamera} from '/simulations/presentation-layer.mjs';
+import {playerCamera, renderWorldOnly} from '/simulations/presentation-layer.mjs';
 
 // ---------- the poses: what the booth asks for, and how a character does it ----------
 const ICON = {
@@ -186,11 +186,9 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 let chosen = null, frames = [];
 function setRing(n, colour = '#ffcf7a') { ring.forEach((b, i) => { const on = i < n; b.material.emissive.set(on ? colour : '#000000'); b.material.emissiveIntensity = on ? 6 : 0; b.material.color.set(on ? '#fff1c9' : '#4a3640'); }); }
 function snap() {
- renderer.render(scene, camera);
- const c = document.createElement('canvas'), w = 360, h = Math.round(w * renderer.domElement.height / renderer.domElement.width);
- const s = Math.min(w, h); c.width = c.height = s;
- c.getContext('2d').drawImage(renderer.domElement, (renderer.domElement.width - renderer.domElement.width * s / w) / 2, (renderer.domElement.height - renderer.domElement.width * s / w) / 2,
-  renderer.domElement.width * s / w, renderer.domElement.width * s / w, 0, 0, s, s);
+ const src = renderWorldOnly(renderer, scene, camera);   // the picture holds only the world: the booth and the kids
+ const W = src.width, H = src.height, side = Math.min(W, H), c = document.createElement('canvas'); c.width = c.height = 360;
+ c.getContext('2d').drawImage(src, (W - side) / 2, (H - side) / 2, side, side, 0, 0, 360, 360);
  return c;
 }
 function printStrip() {
