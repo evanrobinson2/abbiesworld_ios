@@ -1,0 +1,28 @@
+[
+  {
+    "id": "A1-clay",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "b4f4d7b1-a2ad-44ff-b7d7-11725626de6a",
+    "files": [
+      "tools/meshy-heroes/refs/A1-clay/mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_0.png",
+      "tools/meshy-heroes/refs/A1-clay/mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_1.png",
+      "tools/meshy-heroes/refs/A1-clay/mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_2.png",
+      "tools/meshy-heroes/refs/A1-clay/mj_b4f4d7b1-a2ad-44ff-b7d7-11725626de6a_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:50:11Z"
+  },
+  {
+    "id": "A1-paint",
+    "prompt": "cartoon girl about 4.5 heads tall, copper bob, blue eyes, pink suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "89b947b3-3c51-4be5-8636-5f4df8aeffab",
+    "files": [
+      "tools/meshy-heroes/refs/A1-paint/mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_0.png",
+      "tools/meshy-heroes/refs/A1-paint/mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_1.png",
+      "tools/meshy-heroes/refs/A1-paint/mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_2.png",
+      "tools/meshy-heroes/refs/A1-paint/mj_89b947b3-3c51-4be5-8636-5f4df8aeffab_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:51:00Z"
+  }
+]
