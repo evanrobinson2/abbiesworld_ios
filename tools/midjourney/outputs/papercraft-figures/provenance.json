@@ -327,6 +327,42 @@
           "bytes": 1067556
         }
       ]
+    },
+    {
+      "name": "female-base-heroic",
+      "prompt": "A full-body standing heroic female warrior base figure made of matte ivory-white folded papercraft, powerful athletic heroic build, broad strong shoulders, defined arms and legs, strong core, confident heroic stance with feet planted apart and chest lifted, wearing a simple modest sports bra top and fitted boy-short briefs, each folded as a clearly visible separate paper part with distinct edges, front view, smooth featureless head, faceted paper limbs with clear joints at shoulders, elbows, hips and knees, crisp creases and faceted folds, character base model reference for a strategy game hero, centered and entirely visible, orthographic, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "d9420c89-239a-408b-a2c6-058c6045ff11",
+      "created": "2026-10-23T03:55:01Z",
+      "files": [
+        {
+          "file": "images/female-base-heroic_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/d9420c89-239a-408b-a2c6-058c6045ff11/0_0.png",
+          "sha256": "b2fe0d060114a2087716a019e15e71d82e5a415198e10e77ee900803f6871982",
+          "bytes": 1131045
+        },
+        {
+          "file": "images/female-base-heroic_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/d9420c89-239a-408b-a2c6-058c6045ff11/0_1.png",
+          "sha256": "7bacd86d8d5f653ebd77791e510519eff100fb640a777d5931417ee23c1c5c6b",
+          "bytes": 1143979
+        },
+        {
+          "file": "images/female-base-heroic_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/d9420c89-239a-408b-a2c6-058c6045ff11/0_2.png",
+          "sha256": "ad92818c7ba16b8028b26524cc5b2f977cf1fa73c7d314126d75f16294b01f51",
+          "bytes": 1108938
+        },
+        {
+          "file": "images/female-base-heroic_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/d9420c89-239a-408b-a2c6-058c6045ff11/0_3.png",
+          "sha256": "6ab76caeb76e537304d10e871c8a5e8feb030d4d84271df8e2d7a02778d6d902",
+          "bytes": 1078218
+        }
+      ]
     }
   ]
 }
