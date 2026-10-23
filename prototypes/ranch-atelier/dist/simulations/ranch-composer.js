@@ -14,6 +14,7 @@ import {drawDomesticGroup} from './domestic-assets.js';
 import * as T from 'three';
 import {mergeGeometries} from './vendor/utils/BufferGeometryUtils.js';
 import {ranchMaterial} from './tile-materials.js';
+import {kitchenGarden} from './ranch-kits.mjs';
 import {styledJSON,styleKey} from './model-style.mjs';
 import {calibratedScale,modelDimensions} from './model-calibration.js';
 import {dressingPlan,landscapeSettings} from './tile-landscape.js?diversity=3';
@@ -49,7 +50,7 @@ function contactShade(geo,groundAt){
 // Contact pools on the terrain under everything that touches the ground (trees, fences, buildings, grass clumps).
 function groundContact(g,terrain,ground,R){
  const cells=48,size=2*R/cells,density=new Float32Array(cells*cells),v=new T.Vector3();g.updateMatrixWorld(true);
- g.traverse(o=>{if(!o.isMesh||o===terrain||o.material?.vertexColors)return;const p=o.geometry.getAttribute('position');if(!p)return;const step=Math.max(1,Math.floor(p.count/600));for(let i=0;i<p.count;i+=step){v.fromBufferAttribute(p,i).applyMatrix4(o.matrixWorld);if(v.y-ground(v.x,v.z)>.05)continue;const cx=Math.floor((v.x+R)/size),cz=Math.floor((v.z+R)/size);if(cx>=0&&cz>=0&&cx<cells&&cz<cells)density[cz*cells+cx]+=step;}});
+ g.traverse(o=>{if(!o.isMesh||o.isInstancedMesh||o===terrain||o.material?.vertexColors)return;const p=o.geometry.getAttribute('position');if(!p)return;const step=Math.max(1,Math.floor(p.count/600));for(let i=0;i<p.count;i+=step){v.fromBufferAttribute(p,i).applyMatrix4(o.matrixWorld);if(v.y-ground(v.x,v.z)>.05)continue;const cx=Math.floor((v.x+R)/size),cz=Math.floor((v.z+R)/size);if(cx>=0&&cz>=0&&cx<cells&&cz<cells)density[cz*cells+cx]+=step;}});
  const blurred=new Float32Array(cells*cells);for(let z=0;z<cells;z++)for(let x=0;x<cells;x++){let s=0,w=0;for(let dz=-1;dz<=1;dz++)for(let dx=-1;dx<=1;dx++){const X=x+dx,Z=z+dz;if(X<0||Z<0||X>=cells||Z>=cells)continue;const k=dx||dz?.6:1;s+=density[Z*cells+X]*k;w+=k;}blurred[z*cells+x]=s/w;}
  const p=terrain.geometry.getAttribute('position'),c=terrain.geometry.getAttribute('color');
  for(let i=0;i<p.count;i++){const cx=Math.floor((p.getX(i)+R)/size),cz=Math.floor((p.getZ(i)+R)/size);if(cx<0||cz<0||cx>=cells||cz>=cells)continue;const f=1-.32*smooth(0,40,blurred[cz*cells+cx]);c.setXYZ(i,c.getX(i)*f,c.getY(i)*f,c.getZ(i)*f);}
@@ -100,7 +101,8 @@ async function content(tile,plan,options={}){
   }else if(o.role==='sugar-shack'){const shack=sugarShack({seed:plan.seed??1});shack.scale.setScalar(S);part.add(shack);part.userData.inspect=shack.userData.inspect;
   }else if(o.role==='playground'){const play=playground(o.level);play.scale.multiplyScalar(S);part.add(play);part.userData.inspect=play.userData.inspect;
   }else if(o.role==='field'){
-   if(!tile.garden){for(let row=0;row<4;row++){const z=-o.d*S*.35+row*o.d*S*.23;box(part,0,.025,z,o.w*S,.045,.17,'#816349');for(let j=0;j<6;j++)box(part,-o.w*S*.4+j*o.w*S*.16,.08,z,.055,.1,.07,row%2?'#68814e':'#789455');}}else{const planting=gardenPlanting(o.w,o.d,tile.garden);part.userData.garden=planting.settings;part.userData.inspect={title:planting.settings.facet+' garden',kind:'Working garden',description:planting.plants.length+' plantings per bed · '+planting.settings.variety+' planting variants. Garden tending uses the existing ranch activity system.'};
+   // The ranch's kitchen garden: real-scale raised beds and crops from the kitchen-garden kit (remaster R2), instanced.
+   if(type==='ranch'||!tile.garden){const garden=await kitchenGarden({w:o.w,d:o.d,seed:(plan.seed??1)+Math.floor(Math.abs(o.x*13+o.z*7)),S});part.add(garden);part.userData.inspect=garden.userData.inspect;part.userData.kitchenGarden=garden.userData.kitchenGarden;part.userData.keepInstanced=true;}else{const planting=gardenPlanting(o.w,o.d,tile.garden);part.userData.garden=planting.settings;part.userData.inspect={title:planting.settings.facet+' garden',kind:'Working garden',description:planting.plants.length+' plantings per bed · '+planting.settings.variety+' planting variants. Garden tending uses the existing ranch activity system.'};
    for(let row=0;row<planting.rows;row++){const z=(row/(planting.rows-1)-.5)*o.d*S*.75;box(part,0,.025,z,o.w*S,.045,Math.min(.17,o.d*S/planting.rows*.65),'#816349');}
    for(const plant of planting.plants){if(plant.asset){const model=await regionalAsset(plant.asset),bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());model.scale.multiplyScalar(Math.min(1,plant.spacing*S/Math.max(size.x,size.z,.001)));model.position.set(plant.x*S,.05,plant.z*S);part.add(model);}else box(part,plant.x*S,.08,plant.z*S,.055,.07+plant.variant*.012,.07,['#68814e','#789455','#8f934c','#5b7956','#b3a064'][plant.variant]);}}
   }else if(o.role==='water'){
@@ -138,7 +140,7 @@ async function content(tile,plan,options={}){
  const result=new T.Group(),sectors=Array.from({length:6},()=>new T.Group()),groundAt=(x,z)=>ground(x/S,z/S);
  groundContact(g,terrain,groundAt,R);
  for(const child of [...g.children]){
-  if(child.userData.npcMotion){result.add(child);continue;}
+  if(child.userData.npcMotion||child.userData.keepInstanced){g.remove(child);result.add(child);continue;}
   if(child.userData.motionKey){g.remove(child);const pos=child.position.clone(),rot=child.rotation.clone(),scale=child.scale.clone(),key=child.userData.motionKey;child.position.set(0,0,0);child.rotation.set(0,0,0);child.scale.set(1,1,1);const piece=batchTile(child,{groundAt:()=>0});piece.position.copy(pos);piece.rotation.copy(rot);piece.scale.copy(scale);piece.userData.motionKey=key;piece.userData.inspect=child.userData.inspect;piece.userData.asset=child.userData.asset;piece.userData.variant=child.userData.variant;result.add(piece);}
   else if(child.isGroup){const sector=Math.floor((Math.atan2(child.position.z,child.position.x)+Math.PI)/(Math.PI/3))%6;sectors[sector].add(child);}
  }

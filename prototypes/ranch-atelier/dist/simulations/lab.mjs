@@ -64,7 +64,7 @@ import {setEcologyYear} from './ranch-seasons.mjs?v=6';
 import {ACTIVITY_RATE,dayName} from './ranch-rhythm.mjs?v=3';
 import {ranchName} from './ranch-names.mjs';
 import {advanceClock,timeOfDay,TIME_HOURS,nightProgress} from './ranch-clock.mjs?v=2';
-import {createFarmLights} from './ranch-lights.mjs?clock=5';
+import {createFarmLights} from './ranch-lights.mjs?clock=6';
 import {facetPicker} from './facet-picker.mjs';
 import {REGIONAL} from './ranch-regional.mjs?v=3';
 import {attachSeasons,setSeasonAppearance} from './ranch-seasons.mjs?v=6';
@@ -84,7 +84,7 @@ import {applyDorfRanch} from './dorf-ranch-materials.mjs';
 import {setLabHexDiameter} from './tile-metrics.js';
 import {OrbitControls} from './vendor/OrbitControls.js';
 import {cameraOwnsPointer,sandboxWheel} from './vendor/sandbox-camera.mjs';
-import {createRanchComposer} from './ranch-composer.js?paths=13';
+import {createRanchComposer} from './ranch-composer.js?paths=15';
 import {planAssembly} from './tile-adapter.js?paths=2';
 import {terrainSampler} from './tile-landscape.js?terrain=2';
 import {completeDomesticPaths} from './domestic-scenes.js';
@@ -202,7 +202,7 @@ function ensureStage(room=null){return stageLoading??=import('./holodeck/stage.m
  clock:()=>({hour:farmClock.hour,day:farmClock.day,paused:!running,speed:simulationSpeed,weather:active?.life.state.weather??null,weatherMode}),
  setHour:h=>{farmClock={...farmClock,hour:h%24};updateClock(0);},setPaused:p=>{running=!p;syncPlayback();persist();},setSpeed:v=>{simulationSpeed=normalizeSpeed(v);syncSpeedControl();persist();},setWeather:chooseWeather},{room,relay:new URLSearchParams(location.search).get('relay')});window.holodeck=creator;return creator;});}
 // Developer mode only: scripted captures (time, weather, pause) for the weather and light checks.
-try{if(localStorage.getItem('sandbox-developer')==='true')window.ranchDev={setHour:h=>{farmClock={...farmClock,hour:h%24};updateClock(0);},setWeather:chooseWeather,setPaused:p=>{running=!p;syncPlayback();},state:()=>active?.life.state,weather:()=>active?.weather,settle:()=>{active?.weather?.settle(active.life.state);updateSun();}};}catch{}
+try{if(localStorage.getItem('sandbox-developer')==='true')window.ranchDev={setHour:h=>{farmClock={...farmClock,hour:h%24};updateClock(0);},setWeather:chooseWeather,setPaused:p=>{running=!p;syncPlayback();},state:()=>active?.life.state,weather:()=>active?.weather,lampAnchors:()=>active?.lights?.anchors?.()??[],group:()=>active?.group,settle:()=>{active?.weather?.settle(active.life.state);updateSun();}};}catch{}
 if(new URLSearchParams(location.search).has('creator'))import('./holodeck/stage.mjs').then(({creatorRoom})=>{const room=creatorRoom();if(room)ensureStage(room);});
 // App controls as page-owned actions (voice and the action bridge): panels, simulations, ranch shape and herd, arrival, season, sound.
 {const SEASONS={auto:'auto',spring:'0',summer:'1',autumn:'2',winter:'3'},COUNTS=['horses','cows','goats','chickens','goatPlay','playground','size','complexity'];let appRevision=0;

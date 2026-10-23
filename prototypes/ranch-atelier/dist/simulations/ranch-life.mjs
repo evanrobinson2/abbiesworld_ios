@@ -8,7 +8,7 @@ import {terrainWalkable} from './ranch-terrain-planner.mjs';
 import {createFeelings} from './ranch-feelings.mjs';
 import {createPoseOwnership} from './simulation/pose-ownership.mjs';
 import {ensureStories} from './ranch-story-adapter.mjs';
-import {createEcology} from './ranch-ecology.mjs?v=6';
+import {createEcology} from './ranch-ecology.mjs?v=7';
 import {createAdvisors} from './ranch-advisors.mjs';
 import {createGenerations,generationSummary} from './ranch-generations.mjs?v=6';
 import {goatPlay,playHeight} from './ranch-play.mjs';
