@@ -1,0 +1,69 @@
+{
+  "appid": 227580,
+  "name": "10,000,000",
+  "store_url": "https://store.steampowered.com/app/227580/",
+  "genres": [
+    "Puzzle",
+    "RPG",
+    "Match-3"
+  ],
+  "short_description": "A match-3 dungeon runner: match tiles to fight and loot as you run.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "RPG",
+    "Match-3"
+  ],
+  "summary": "A match-3 dungeon runner: match tiles to fight and loot as you run.",
+  "identity": {
+    "core_loop": "Match tiles to attack, open doors and gather, keep running.",
+    "mechanics": null,
+    "ui_and_game_feel": "Snappy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The board and the runner are linked: matches become actions.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Chiptune.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A puzzle board driving a little hero's actions is a clean kid-friendly link."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.44,
+      "expression": 0.33,
+      "structure": 0.22,
+      "social": 0.44,
+      "systems": 0.67,
+      "chance": 0.44,
+      "session": 0.22
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

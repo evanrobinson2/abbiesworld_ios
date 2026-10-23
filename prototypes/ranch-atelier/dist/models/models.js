@@ -58,12 +58,12 @@ function chips(){
 let browse = (() => { try { return localStorage.getItem('aw-browse') || 'screen'; } catch (e) { return 'screen'; } })();
 function grid(){
   document.title = 'Models';
-  crumb.innerHTML = '<a href="/models">Models</a>';
+  crumb.innerHTML = set ? `<a href="/studies/">Studies</a> · ${esc(set.title)}` : '<a href="/models">Models</a>';
   const ms = shown(), row = browse === 'row';
   applyLook(null);
   const toggle = `<div class="tools"><div class="lay" role="group" aria-label="Layout">${[['row', 'One at a time', 'row'], ['screen', 'All at once', 'grid']].map(([k, l, i]) =>
     `<button type="button" class="peb" data-browse="${k}" aria-label="${l}" aria-pressed="${browse === k}">${ico(i)}</button>`).join('')}</div><button type="button" class="peb" id="gear" aria-label="Look" aria-expanded="false">${ico('gear')}</button></div><div class="gearpop" id="gearpop" hidden role="group" aria-label="Look">${gearPop()}</div>`;
-  root.innerHTML = `<header class="awbar"><a class="aw" href="/sandbox" aria-label="Abbie’s World">AW</a><div class="nm"><h1>Models</h1></div>${toggle}</header>` + chips() +
+  root.innerHTML = `<header class="awbar hero"><div class="nm"><div class="ttl"><h1>Models</h1><small>Each model beside the picture it came from</small></div></div>${toggle}</header>` + chips() +
     (ms.length ? `<div class="${row ? 'rowcards' : 'cards'}">${ms.map(m => { const r = reviews[m.id]; return `
     <a class="mc" href="/models/${encodeURIComponent(m.id)}" data-open="${esc(m.id)}">
       <span class="mn"><strong>${esc(titleCase(m.name))}</strong>${m.style ? `<small>${esc(m.style)}</small>` : ''}<i class="dot ${r ? r.verdict : ''}" title="${r ? LABEL[r.verdict] : 'To review'}"></i></span>
@@ -94,6 +94,19 @@ const ICON = {
 const ico = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 // Names read in Title Case (Evan, 03:51Z); small joining words stay lower case.
 const titleCase = s => String(s).replace(/\S+/g, (w, i) => i && /^(a|an|and|at|for|in|of|on|or|the|to|with)$/i.test(w) ? w.toLowerCase() : w[0].toUpperCase() + w.slice(1));
+// The modeler's notes stay in the manifest as written; the page shows them in plain words (Evan, 04:58Z: no
+// technobabble). Sentences about scores, seeds and renders are dropped, measurements in brackets go, and "the hero"
+// becomes "your picture".
+const JARGON = /\bIoU\b|\bseed\b|\bpx\b|\bsamples?\b|SSIM|\bscor(e|ed|es|ing)\b|\bthe AD\b|\bAD\b|\bround \d|\bmean\b|±|\bW\/L\b|\bloss\b|\btriangles?\b|\bbudget\b|\b0\.\d{2,}\b|[-+][XYZ]\b/i;
+function plainNote(note){
+  const said = String(note).split(/(?<=[.!?])\s+(?=[A-Z])/).filter(t => !JARGON.test(t)).map(t => t
+    .replace(/\s*\([^)]*\d[^)]*\)/g, '')
+    .replace(/\bthe (?:turnaround )?sheet's front and side views\b/gi, 'the side views').replace(/\bthe hero (?!(?:wins|has|is|was|shows|keeps|uses|reads|looks|leans|sits|stands|camera)\b)(?=[a-z]{3,}\b)/gi, 'your picture\u2019s ').replace(/\bthe hero's\b/gi, 'your picture\u2019s').replace(/\bthe hero\b/gi, 'your picture').replace(/\bhero\b/gi, 'picture')
+    .replace(/\b(the )?turnaround sheet('s)?\b/gi, (w, a, b) => 'the side views' + (b ? '\u2019' : '')).replace(/\bthe sheet('s)?\b/gi, (w, b) => 'the side views' + (b ? '\u2019' : ''))
+    .replace(/\bsheet views?\b/gi, 'side views').replace(/\bthe side views wants\b/gi, 'the side views want').replace(/\btile size\b/gi, 'game size').replace(/\s{2,}/g, ' ').trim()).join(' ');
+  return said.length > 14 ? said[0].toUpperCase() + said.slice(1) : '';
+}
+const plainList = xs => (xs || []).map(plainNote).filter(Boolean);
 const FAIR = {fair:'Fair', close:'Close', off:'Off'};
 const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
 // Two modes (Evan, 04:03Z). App mode is the flat look (Default, Rome, Efficient) and the default from the Studies and
@@ -111,18 +124,17 @@ const GAME = [
 const GVARS = ['--sky-top','--sky-low','--hill-far','--hill','--tile','--tile-edge','--signc','--ink','--ink-soft'];
 const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch {} return null; };
 const pageMode = () => { const q = new URLSearchParams(location.search).get('mode'); if (q === 'game' || q === 'app') return q; return store('aw-mode') || 'app'; };
-function applyLook(m){
-  const r = document.documentElement, mode = pageMode();
-  r.dataset.mode = mode;
+// The style comes from the one theme system (theme/boot.js writes the tokens and data-mode); the gear opens the
+// shared profile and settings sheet at Style. Candy Party keeps its wobble.
+function applyLook(){
+  const r = document.documentElement;
   GVARS.forEach(k => r.style.removeProperty(k));
-  r.classList.remove('silly');
-  if (mode === 'game'){
-    const g = GAME.find(x => x.id === store('aw-game-style')) || GAME[0];
-    r.dataset.motif = 'game-' + g.id;
-    if (g.c) Object.entries(g.c).forEach(([k, v]) => r.style.setProperty(k, v));
-    if (g.silly) r.classList.add('silly');
-  } else r.dataset.motif = m ? motifFor(m) : (store('aw-motif') || 'default');
+  r.classList.toggle('silly', r.dataset.awTheme === 'candy');
 }
+addEventListener('aw-look-change', () => applyLook());
+const fbOff = () => store('aw-models-fb') === 'off';
+document.documentElement.classList.toggle('fb-off', fbOff());
+import('/theme/appnav.mjs').then(n => n.mountAppNav({current: 'models'}));
 function gearPop(){
   const r = document.documentElement, mode = r.dataset.mode || 'app';
   const items = mode === 'game' ? GAME.map(g => `<button type="button" data-gstyle="${g.id}" aria-pressed="${r.dataset.motif === 'game-' + g.id}">${g.name}</button>`)
@@ -133,10 +145,10 @@ const motifFor = m => { try { const v = localStorage.getItem('aw-motif'); if (v)
 function topbar(m, seq, i){
   const c = counts();
   const counter = (k, label) => `<button type="button" class="ctr ${k}" data-filter="${k}" aria-pressed="${filter === k}" aria-label="${label}: ${c[k] || 0}"><i>${ico(k === 'todo' ? 'todo' : k)}</i><b>${c[k] || 0}</b></button>`;
-  return `<header class="awbar">
-    <a class="aw" href="/sandbox" aria-label="Abbie’s World">AW</a>
+  const sub = [m.group, m.style === 'charming' ? 'Charming' : '', seq.length > 1 ? `${i + 1} of ${seq.length}` : ''].filter(Boolean).join(' \u00b7 ');
+  return `<header class="awbar hero">
     <div class="nm"><button type="button" class="peb" data-step="-1" aria-label="Previous model" ${i <= 0 ? 'disabled' : ''}>${ico('left')}</button>
-      <h1>${esc(titleCase(m.name))}</h1>
+      <div class="ttl"><h1>${esc(titleCase(m.name))}</h1>${sub ? `<small>${esc(sub)}</small>` : ''}</div>
       <button type="button" class="peb" data-step="1" aria-label="Next model" ${i >= seq.length - 1 ? 'disabled' : ''}>${ico('right')}</button></div>
     <div class="tools">
       <div class="ctrs" role="group" aria-label="Which models">${counter('todo','To look at')}${counter('accept','Kept')}${counter('adjust','Notes sent')}${counter('reject','Rejected')}</div>
@@ -144,8 +156,8 @@ function topbar(m, seq, i){
       <button type="button" class="peb" id="gear" aria-label="Look" aria-expanded="false">${ico('gear')}</button>
       <button type="button" class="peb" id="cam" aria-label="Take a photo to make into a model">${ico('camera')}</button>
       <button type="button" class="peb" id="cart" aria-label="Request more">${ico('cart')}<span class="badge" id="badge"${orders.length ? '' : ' hidden'}>${orders.length}</span></button>
+      <button type="button" class="peb" id="fbtoggle" aria-label="Show or hide your feedback" aria-pressed="${!fbOff()}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M15 4v16"/></svg></button>
     </div>
-    <div class="gearpop" id="gearpop" hidden role="group" aria-label="Look">${gearPop()}</div>
   </header>`;
 }
 
@@ -159,26 +171,33 @@ function review(){
   const fp = m.focal || [];
   const dots = fp.map(f => `<button type="button" class="fp ${esc(f.verdict)}" data-fp="${+f.n}" style="left:${+f.img[0]}%;top:${+f.img[1]}%" aria-label="${+f.n}: ${esc(f.label)}">${+f.n}</button>`).join('');
   const spots = fp.map(f => `<button type="button" slot="hotspot-${+f.n}" class="fp ${esc(f.verdict)}" data-fp="${+f.n}" data-position="0 0 0" aria-label="${+f.n}: ${esc(f.label)}, ${FAIR[f.verdict] || ''}">${+f.n}</button>`).join('');
+  const was = r ? `<p class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></p>` : '';
+  const good = plainList(m.good), off = plainList(m.off);
+  // One screen (Evan, 05:37Z): the hero bar, the picture and the model as big as the window allows with the strip under
+  // them, and your feedback in its own panel on the right, which hides.
   root.innerHTML = `${topbar(m, seq, i)}
-  <article class="desk2">
-    ${r ? `<p class="was ${r.verdict}"><b>${LABEL[r.verdict]}</b>${r.notes ? ` “${esc(r.notes)}”` : ''}<button type="button" data-clear>Change</button></p>` : ''}
+  <div class="mshell">
+  <article class="desk2 stage">
     <div class="pair2">
       <figure class="print"><div class="sq2 pic"><span class="inset">Inspiration</span><img src="${esc(m.urls.ref)}" alt="The inspiration for the ${esc(m.name.toLowerCase())}">${dots}</div>${m.ask || m.subject ? `<button type="button" class="said" data-said aria-label="Show the whole prompt">“${esc(m.ask || m.subject)}”</button>` : ''}</figure>
-      <figure><div class="sq2 alive"><span class="inset">Model</span><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
+      <figure class="livefig"><div class="sq2 alive"><span class="inset">Model</span><model-viewer class="got" autoplay src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" camera-controls touch-action="pan-y" camera-orbit="${+theta}deg ${+phi}deg auto"
         auto-rotate auto-rotate-delay="2500" rotation-per-second="16deg" interaction-prompt="none" shadow-intensity="0.8" exposure="0.8" environment-image="neutral">${spots}</model-viewer>
         <div class="chalk" aria-hidden="true"><svg viewBox="0 0 150 110"><path class="trail" d="M30 34 Q75 14 120 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><g class="hand" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 40 V76 M70 40 a5.5 5.5 0 0 1 11 0 V66 M81 58 a5.5 5.5 0 0 1 11 1 V69 M92 62 a5.5 5.5 0 0 1 10 2 V80 C102 94 94 104 82 104 H74 C66 104 61 99 57 92 L46 74 a5 5 0 0 1 8 -6 L70 82"/></g></svg></div></div></figure>
     </div>
-    <div class="decide"><span></span>
-    <div class="thumb" role="group" aria-label="Decide">
+    <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}"><img src="${esc(x.urls.ref)}" alt="" loading="lazy"><i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
+  </article>
+  <aside class="fb" aria-label="Your feedback">
+    <h2 class="fbh">Your feedback</h2>
+    ${was}
+    <div class="thumb decide" role="group" aria-label="Decide">
       <button type="button" class="tb reject" data-verdict="reject" aria-label="Reject">${ico('reject')}</button>
       <button type="button" class="tb chat" id="chat" aria-label="Talk or type a note">${ico('mic')}</button>
       <button type="button" class="tb accept" data-verdict="accept" aria-label="Keep it">${ico('accept')}</button>
     </div>
-    </div>
-    ${fp.length ? `<ol class="focal">${fp.map(f => `<li data-fp="${+f.n}"><span class="fp ${esc(f.verdict)}">${+f.n}</span><b>${esc(f.label)}</b><em class="${esc(f.verdict)}">${FAIR[f.verdict] || ''}</em><span>${esc(f.note)}</span></li>`).join('')}</ol>` : ''}
-    <div class="notes2">${(m.good || []).length ? `<div><h2>What matches</h2><ul>${m.good.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}${(m.off || []).length ? `<div><h2>What is off</h2><ul>${m.off.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}</div>
-    <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}"><img src="${esc(x.urls.ref)}" alt="" loading="lazy"><i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
-  </article>`;
+    ${fp.length ? `<div><h2>Points to check</h2><ol class="focal">${fp.map(f => `<li data-fp="${+f.n}"><span class="fp ${esc(f.verdict)}">${+f.n}</span><b>${esc(f.label)}</b><em class="${esc(f.verdict)}">${FAIR[f.verdict] || ''}</em><span>${esc(f.note)}</span></li>`).join('')}</ol></div>` : ''}
+    <div class="notes2">${good.length ? `<div><h2>What matches</h2><ul>${good.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}${off.length ? `<div><h2>What is off</h2><ul>${off.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}</div>
+  </aside>
+  </div>`;
   const on = root.querySelector('.strip .on'); if (on){ const st = on.parentElement; st.scrollLeft = on.offsetLeft - st.clientWidth / 2 + on.clientWidth / 2; }
   placeSpots(root.querySelector('model-viewer'), fp);
   laserPrint(root.querySelector('.sq2.alive'));
@@ -190,8 +209,9 @@ function laserPrint(box){
   if (!box) return;
   const mv = box.querySelector('model-viewer'), go = () => { if (box.classList.contains('printing') || box.classList.contains('printed')) return; box.classList.add('printing'); setTimeout(() => box.classList.replace('printing', 'printed'), 560); };
   box.classList.add('unprinted');
-  mv.addEventListener('load', go, {once:true});
-  setTimeout(go, 6000);
+  mv.addEventListener('load', go, {once:true}); mv.addEventListener('error', go, {once:true});
+  if (mv.loaded) go();
+  setTimeout(go, 4000);
 }
 
 function placeSpots(mv, fp){
@@ -265,8 +285,8 @@ async function sendOrders(){
 
 function render(push){
   if (view === 'grid') grid(); else review();
-  const path = view === 'review' && cur ? `/models/${encodeURIComponent(cur)}` : '/models';
-  if (push && location.pathname !== path) history.pushState({cur, view}, '', path);
+  const path = (view === 'review' && cur ? `/models/${encodeURIComponent(cur)}` : '/models') + (set ? `?set=${encodeURIComponent(set.id)}` : '');
+  if (push && location.pathname + location.search !== path) history.pushState({cur, view}, '', path);
 }
 
 // ---------- verdicts ----------
@@ -296,7 +316,8 @@ async function decide(verdict, notes, via){
   if (via === 'voice') say(next ? `Next, the ${full(next)}.` : filter === 'todo' ? 'That was the last one.' : 'Saved.');
 }
 // Paper warrior models belong to the Roman model study thread, so their verdicts also reach that thread's feedback inbox.
-const OWNER = [[/^paper warrior/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', 'Models review']];
+const OWNER = [[/^(paper warrior|paper figures|roman parts)/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', 'Models review'],
+  [/^moon remaster/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1', 'Models review']];
 async function send(m, verdict, notes, via){
   try {
     const r = await fetch('/api/model-reviews', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({id:m.id, name:`${m.name}${m.style ? ' (' + m.style + ')' : ''}`, verdict, notes, via})});
@@ -411,7 +432,8 @@ document.addEventListener('click', e => {
   else if (t.id === 'mic') listening ? stopListening() : startListening();
   else if (t.id === 'chat') openChat();
   else if (t.id === 'chatclose') closeChat();
-  else if (t.id === 'gear'){ const g = document.getElementById('gearpop'); g.hidden = !g.hidden; t.setAttribute('aria-expanded', String(!g.hidden)); }
+  else if (t.id === 'gear'){ import('/theme/aw.mjs').then(m => m.openSettings('style')); }
+  else if (t.id === 'fbtoggle'){ const off = !fbOff(); store('aw-models-fb', off ? 'off' : 'on'); document.documentElement.classList.toggle('fb-off', off); t.setAttribute('aria-pressed', String(!off)); }
   else if (t.dataset.mode && t.closest('#gearpop')){ store('aw-mode', t.dataset.mode); const u = new URL(location.href); if (u.searchParams.has('mode')){ u.searchParams.delete('mode'); history.replaceState(history.state, '', u); } applyLook(view === 'review' ? list.find(x => x.id === cur) : null); document.getElementById('gearpop').innerHTML = gearPop(); }
   else if (t.dataset.gstyle){ store('aw-game-style', t.dataset.gstyle); applyLook(null); document.getElementById('gearpop').innerHTML = gearPop(); }
   else if (t.dataset.motif){ try { localStorage.setItem('aw-motif', t.dataset.motif); } catch {} document.documentElement.dataset.motif = t.dataset.motif; document.querySelectorAll('[data-motif]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.motif === t.dataset.motif))); }
@@ -453,7 +475,15 @@ function route(){
   else if (reviews[cur]) filter = 'all';
 }
 
+// A study set (/models?set=<review inbox item id>) shows only that study's models, listed by the item's `models`
+// (ids; a trailing * matches a prefix). The set is the unit a later "upgrade" or "re-imagine the whole set" acts on.
+const set = await (async () => {
+  const id = new URLSearchParams(location.search).get('set'); if (!id) return null;
+  try { const f = await (await fetch('/review/feed.json', {cache:'no-cache'})).json(); const it = (f.items || []).find(x => x.id === id); return it && it.models ? it : null; } catch { return null; }
+})();
+const inSet = m => set.models.some(p => p.endsWith('*') ? m.id.startsWith(p.slice(0, -1)) : m.id === p);
 [list] = await Promise.all([catalogue(), loadReviews()]);
+if (set){ list = list.filter(inSet).sort((a, b) => set.models.findIndex(p => p === a.id) - set.models.findIndex(p => p === b.id)); document.documentElement.dataset.set = set.id; }
 if (!list.length) root.innerHTML = '<p class="empty">No models yet.</p>';
 else {
   route(); render(false);

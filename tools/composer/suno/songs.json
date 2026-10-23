@@ -1,0 +1,301 @@
+{
+ "about": "Evan's own Suno songs (Premier plan). Ids and metadata only; the audio lives on our R2 CDN at music/suno/<id>.mp3, copied from Suno's CDN by .github/workflows/suno-store.yml. Read from the PC library 2026-10-23.",
+ "refrain": [
+  "Wake up, the sun is shining",
+  "A brand-new day is here",
+  "Every road is full of wonder",
+  "Every friend is near"
+ ],
+ "songs": [
+  {
+   "id": "1110c575-422f-47e1-a5a9-26290637d3e8",
+   "title": "Abbie and Daddy at Launch",
+   "family": "launch",
+   "style": "Playful hip-hop, 128–132 BPM, chantable chorus, THREE! TWO! ONE! LAUNCH!",
+   "vocals": true,
+   "created": "2026-08-28",
+   "source": "suno",
+   "url": "https://suno.com/song/1110c575-422f-47e1-a5a9-26290637d3e8"
+  },
+  {
+   "id": "4306cdfb-2b25-4394-8dd2-c76ce5818ae6",
+   "title": "Abbie and Daddy at Launch",
+   "family": "launch",
+   "style": "Playful hip-hop, 128–132 BPM (second take)",
+   "vocals": true,
+   "created": "2026-08-28",
+   "source": "suno",
+   "url": "https://suno.com/song/4306cdfb-2b25-4394-8dd2-c76ce5818ae6"
+  },
+  {
+   "id": "0e507ab7-0f58-452a-ab22-6db1cc7c637c",
+   "title": "Abbie’s World",
+   "family": "theme",
+   "style": "Snappy children’s pop anthem, bright synths, handclaps, huge sing-along chorus (the original)",
+   "vocals": true,
+   "created": "2026-09-13",
+   "source": "suno",
+   "url": "https://suno.com/song/0e507ab7-0f58-452a-ab22-6db1cc7c637c"
+  },
+  {
+   "id": "489d2d5e-daf1-4cfd-9c76-1a051a0cf09f",
+   "title": "Abbie’s World",
+   "family": "theme",
+   "style": "Snappy children’s pop anthem, second lyric (\"Morning at the kitchen table\")",
+   "vocals": true,
+   "created": "2026-09-13",
+   "source": "suno",
+   "url": "https://suno.com/song/489d2d5e-daf1-4cfd-9c76-1a051a0cf09f"
+  },
+  {
+   "id": "0d8c3fff-55fc-4432-acb5-d3715b53d803",
+   "title": "Abbie's World",
+   "family": "theme",
+   "style": "Dance-pop remix, 124 BPM four-on-the-floor, sidechained synths",
+   "vocals": true,
+   "created": "2026-09-18",
+   "source": "suno",
+   "url": "https://suno.com/song/0d8c3fff-55fc-4432-acb5-d3715b53d803"
+  },
+  {
+   "id": "d7f48201-c025-43c1-a5e8-1af40b140af0",
+   "title": "Abbie's World",
+   "family": "theme",
+   "style": "Dance-pop remix, 124 BPM (second take)",
+   "vocals": true,
+   "created": "2026-09-18",
+   "source": "suno",
+   "url": "https://suno.com/song/d7f48201-c025-43c1-a5e8-1af40b140af0"
+  },
+  {
+   "id": "3d21d668-5db0-4436-8cd1-304e2f03d21e",
+   "title": "Abbie's World",
+   "family": "theme",
+   "style": "Halloween adventure pop, harpsichord lead, 126 BPM 3+3+2, D6/9–G6–A(add9)",
+   "vocals": true,
+   "created": "2026-09-19",
+   "source": "suno",
+   "url": "https://suno.com/song/3d21d668-5db0-4436-8cd1-304e2f03d21e"
+  },
+  {
+   "id": "67c1bbac-7f93-4abc-87c1-7c9b7e011496",
+   "title": "Abbie's World",
+   "family": "theme",
+   "style": "Whimsical game theme, harpsichord, celesta, toy piano, 3+3+2 at 126 BPM",
+   "vocals": true,
+   "created": "2026-09-19",
+   "source": "suno",
+   "url": "https://suno.com/song/67c1bbac-7f93-4abc-87c1-7c9b7e011496"
+  },
+  {
+   "id": "512767b8-16f4-4633-8663-e20c17b2cbd4",
+   "title": "Abbie’s World",
+   "family": "theme",
+   "style": "Russian folk-flavoured adventure pop, accordion and glockenspiel hook, D major 126 BPM",
+   "vocals": true,
+   "created": "2026-09-21",
+   "source": "suno",
+   "url": "https://suno.com/song/512767b8-16f4-4633-8663-e20c17b2cbd4"
+  },
+  {
+   "id": "9c2a3b2d-2ece-42fe-a36f-231fab4c66dc",
+   "title": "Abbie’s World",
+   "family": "theme",
+   "style": "Russian folk-flavoured adventure pop (second take)",
+   "vocals": true,
+   "created": "2026-09-21",
+   "source": "suno",
+   "url": "https://suno.com/song/9c2a3b2d-2ece-42fe-a36f-231fab4c66dc"
+  },
+  {
+   "id": "3459faed-20de-453b-9f4e-1a99fe3f212f",
+   "title": "Abbie's World",
+   "family": "theme",
+   "style": "Studio acoustic, fingerpicked steel-string, upright bass, brushes, female lead",
+   "vocals": true,
+   "created": "2026-10-13",
+   "source": "suno",
+   "url": "https://suno.com/song/3459faed-20de-453b-9f4e-1a99fe3f212f"
+  },
+  {
+   "id": "ac3c4c8c-6c86-46a7-843c-142ad2ce7294",
+   "title": "Abbie's World",
+   "family": "theme",
+   "style": "Studio acoustic, buoyant bounce, female lead (second take)",
+   "vocals": true,
+   "created": "2026-10-13",
+   "source": "suno",
+   "url": "https://suno.com/song/ac3c4c8c-6c86-46a7-843c-142ad2ce7294"
+  },
+  {
+   "id": "2b3d6e55-4ecc-4431-984d-5650023267cb",
+   "title": "Abbie's World",
+   "family": "theme",
+   "style": "Indie folk acoustic pop, coffee-shop warmth, female vocals",
+   "vocals": null,
+   "created": "2026-10-13",
+   "source": "suno",
+   "url": "https://suno.com/song/2b3d6e55-4ecc-4431-984d-5650023267cb"
+  },
+  {
+   "id": "78d5507c-c303-457b-99b2-532920ba2c26",
+   "title": "Abbie's World",
+   "family": "theme",
+   "style": "Indie folk acoustic pop, instrumental",
+   "vocals": false,
+   "created": "2026-10-13",
+   "source": "suno",
+   "url": "https://suno.com/song/78d5507c-c303-457b-99b2-532920ba2c26"
+  },
+  {
+   "id": "51b29b53-96c2-4484-9e16-9b7035255793",
+   "title": "Abbie's World Reimagined",
+   "family": "reimagined",
+   "style": "Lo-fi hip-hop, 88 BPM, music-box accents trace the theme",
+   "vocals": false,
+   "created": "2026-10-13",
+   "source": "suno",
+   "url": "https://suno.com/song/51b29b53-96c2-4484-9e16-9b7035255793"
+  },
+  {
+   "id": "82fba4e0-de45-45b6-b76a-aa04ef44a6cf",
+   "title": "Abbie's World Reimagined",
+   "family": "reimagined",
+   "style": "Lo-fi hip-hop, 88 BPM (second take)",
+   "vocals": false,
+   "created": "2026-10-13",
+   "source": "suno",
+   "url": "https://suno.com/song/82fba4e0-de45-45b6-b76a-aa04ef44a6cf"
+  },
+  {
+   "id": "5f864f8d-2e4b-4a38-a744-83bc7872038d",
+   "title": "Abbie's World Reimagined",
+   "family": "reimagined",
+   "style": "Industrial house dubstep, half-time drops",
+   "vocals": false,
+   "created": "2026-10-15",
+   "source": "suno",
+   "url": "https://suno.com/song/5f864f8d-2e4b-4a38-a744-83bc7872038d"
+  },
+  {
+   "id": "fe786457-d0f0-4616-b5e3-ec0ca603ea2e",
+   "title": "Abbie's World Reimagined",
+   "family": "reimagined",
+   "style": "Industrial house dubstep, dub tape echo (second take)",
+   "vocals": false,
+   "created": "2026-10-15",
+   "source": "suno",
+   "url": "https://suno.com/song/fe786457-d0f0-4616-b5e3-ec0ca603ea2e"
+  },
+  {
+   "id": "0a4216dc-a18c-4d7e-b8aa-404b86f074a3",
+   "title": "Crayon Physics · Normal",
+   "family": "crayon-physics",
+   "style": "Lo-fi hip-hop, 88 BPM swung boom-bap, loop-friendly",
+   "vocals": false,
+   "created": "2026-10-18",
+   "source": "suno",
+   "url": "https://suno.com/song/0a4216dc-a18c-4d7e-b8aa-404b86f074a3"
+  },
+  {
+   "id": "4dfb984b-4550-483e-9bc5-86e35e3d4175",
+   "title": "Crayon Physics · Normal",
+   "family": "crayon-physics",
+   "style": "Lo-fi hip-hop, 88 BPM (second take)",
+   "vocals": false,
+   "created": "2026-10-18",
+   "source": "suno",
+   "url": "https://suno.com/song/4dfb984b-4550-483e-9bc5-86e35e3d4175"
+  },
+  {
+   "id": "15de25fd-e8d9-4b92-a272-2e55cb434faf",
+   "title": "Crayon Physics · Tense",
+   "family": "crayon-physics",
+   "style": "Lo-fi hip-hop, 94 BPM, minor-key suspense",
+   "vocals": false,
+   "created": "2026-10-18",
+   "source": "suno",
+   "url": "https://suno.com/song/15de25fd-e8d9-4b92-a272-2e55cb434faf"
+  },
+  {
+   "id": "a5e67fdd-b936-4ad4-8993-cc66061e6659",
+   "title": "Crayon Physics · Tense",
+   "family": "crayon-physics",
+   "style": "Lo-fi hip-hop, 94 BPM minor-key suspense (second take)",
+   "vocals": false,
+   "created": "2026-10-18",
+   "source": "suno",
+   "url": "https://suno.com/song/a5e67fdd-b936-4ad4-8993-cc66061e6659"
+  },
+  {
+   "id": "307c8d49-9fae-47dc-b5af-7e6122750e0f",
+   "title": "Crayon Physics · French House",
+   "family": "crayon-physics",
+   "style": "French-house lo-fi, 112 BPM, filtered chords, disco bass",
+   "vocals": false,
+   "created": "2026-10-18",
+   "source": "suno",
+   "url": "https://suno.com/song/307c8d49-9fae-47dc-b5af-7e6122750e0f"
+  },
+  {
+   "id": "8055c535-3c9a-43fa-823e-5ef2933028a8",
+   "title": "Crayon Physics · French House",
+   "family": "crayon-physics",
+   "style": "French-house lo-fi, 112 BPM (second take)",
+   "vocals": false,
+   "created": "2026-10-18",
+   "source": "suno",
+   "url": "https://suno.com/song/8055c535-3c9a-43fa-823e-5ef2933028a8"
+  },
+  {
+   "id": "9338863b-8a41-405c-84b2-7772bca88eb2",
+   "title": "Crayon Physics · Pop",
+   "family": "crayon-physics",
+   "style": "Lo-fi pop, 102 BPM, Rhodes and synth plucks",
+   "vocals": false,
+   "created": "2026-10-18",
+   "source": "suno",
+   "url": "https://suno.com/song/9338863b-8a41-405c-84b2-7772bca88eb2"
+  },
+  {
+   "id": "bdc689fe-6134-4bf8-a212-8d28ea92f282",
+   "title": "Crayon Physics · Pop",
+   "family": "crayon-physics",
+   "style": "Lo-fi pop, 102 BPM (second take)",
+   "vocals": false,
+   "created": "2026-10-18",
+   "source": "suno",
+   "url": "https://suno.com/song/bdc689fe-6134-4bf8-a212-8d28ea92f282"
+  },
+  {
+   "id": "8d559913-3e58-44da-b77d-d654c4d2e18b",
+   "title": "Launch Jackpot",
+   "family": "launch-jackpot",
+   "style": "Hip-hop soul, 122 BPM, brass stabs, group chants",
+   "vocals": true,
+   "created": "2026-09-04",
+   "source": "suno",
+   "url": "https://suno.com/song/8d559913-3e58-44da-b77d-d654c4d2e18b"
+  },
+  {
+   "id": "4b5def3c-849e-47e2-98d6-f2a2a7f0af49",
+   "title": "Launch Jackpot",
+   "family": "launch-jackpot",
+   "style": "Hip-hop soul, 122 BPM (second take)",
+   "vocals": true,
+   "created": "2026-09-04",
+   "source": "suno",
+   "url": "https://suno.com/song/4b5def3c-849e-47e2-98d6-f2a2a7f0af49"
+  },
+  {
+   "id": "74584c91-206e-495d-8ddb-aa84367b2e4a",
+   "title": "Launch Jackpot",
+   "family": "launch-jackpot",
+   "style": "Hip-hop soul, 122 BPM (third take)",
+   "vocals": true,
+   "created": "2026-09-04",
+   "source": "suno",
+   "url": "https://suno.com/song/74584c91-206e-495d-8ddb-aa84367b2e4a"
+  }
+ ]
+}

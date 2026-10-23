@@ -1,0 +1,260 @@
+<title>AW-STUDY-0021 - Bruiser Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="A bake-off of ways to split the modeling of one exact figure across Blender jobs, scored against the reference from the same camera.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: the same-camera pair is the page; scoreboard under it, then how each arm splits the work. */
+:root{
+ --bg:#e7e6e1; --paper:#f4f3ef; --ink:#23242a; --muted:#6b6c70; --line:#cfcdc6;
+ --clay:#8b8c86; --accent:#e0592a; --good:#2f8a5b; --ghost:rgba(35,36,42,.13);
+ --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+ --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#1c1d20; --paper:#26272b; --ink:#ecebe6; --muted:#9c9da2; --line:#3a3b40;
+ --clay:#8b8c86; --accent:#ff7a47; --good:#5cc08b; --ghost:rgba(236,235,230,.12); color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#1c1d20; --paper:#26272b; --ink:#ecebe6; --muted:#9c9da2; --line:#3a3b40;
+ --clay:#8b8c86; --accent:#ff7a47; --good:#5cc08b; --ghost:rgba(236,235,230,.12); color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,58px);line-height:.95}
+h2{font-size:28px;line-height:1.05}
+h3{font-size:20px;font-weight:600}
+p{margin:0;max-width:66ch}
+.muted{color:var(--muted)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+header{display:grid;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);padding:7px 10px;border-radius:99px;border:1px solid var(--line);background:var(--paper);width:max-content}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+/* the pair: reference left, model right, identical frames */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.frame{position:relative;aspect-ratio:1;max-width:100%;border-radius:14px;overflow:hidden;background:#82837d}
+.frame img.ref{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;left:10px;top:10px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+ color:#f4f3ef;background:rgba(20,20,22,.55);padding:6px 8px;border-radius:6px}
+.ghost{position:absolute;inset:0;background:rgba(244,243,239,.16);
+ -webkit-mask:url(img/ghost.png) center/100% 100% no-repeat;mask:url(img/ghost.png) center/100% 100% no-repeat}
+.ghost-line{position:absolute;inset:0;outline:2px dashed rgba(244,243,239,.35);outline-offset:-14px;border-radius:14px}
+.empty{position:absolute;left:0;right:0;bottom:16px;text-align:center;color:#f4f3ef;font:600 15px/1.3 var(--body);text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.empty small{display:block;font:500 11px/1.4 var(--mono);opacity:.8}
+.frame model-viewer{position:absolute;inset:0;width:100%;height:100%;--poster-color:transparent}
+.boxes{position:absolute;inset:0;pointer-events:none}
+.boxes div{position:absolute;border:2px solid var(--accent);border-radius:4px}
+.boxes span{position:absolute;left:-2px;top:-20px;font:500 10px/1 var(--mono);background:var(--accent);color:#fff;padding:4px 5px;border-radius:3px;white-space:nowrap}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+button{font:600 14px/1 var(--body);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.metrics-line{display:flex;flex-wrap:wrap;gap:6px 18px;font:500 13px/1.4 var(--mono);color:var(--muted);margin-top:8px}
+.metrics-line b{color:var(--ink);font-weight:500}
+
+/* scoreboard */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:860px;font-variant-numeric:tabular-nums}
+th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font:500 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td.num{font:500 14px/1 var(--mono);text-align:right}
+th.num{text-align:right}
+.arm-id{font:800 22px/1 var(--display);color:var(--accent);width:44px}
+.dash{color:var(--muted)}
+.parts{display:grid;grid-template-columns:repeat(6,22px);gap:3px}
+.parts i{height:22px;border-radius:4px;background:var(--ghost);display:block}
+.status{font:500 11px/1 var(--mono);padding:5px 7px;border-radius:6px;border:1px solid var(--line);white-space:nowrap}
+.status.run{border-color:var(--accent);color:var(--accent)}
+.status.done{border-color:var(--good);color:var(--good)}
+tr.lead td{background:color-mix(in srgb,var(--good) 9%,transparent)}
+
+/* arms */
+.arms{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.arm{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.arm .k{font:800 34px/1 var(--display);color:var(--accent)}
+.flow{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font:500 11px/1 var(--mono)}
+.flow span{padding:5px 6px;border-radius:5px;background:var(--bg);border:1px solid var(--line)}
+.flow em{font-style:normal;color:var(--muted)}
+
+/* chunks */
+.chunks{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.chunk{display:grid;gap:6px;min-width:0}
+.crop{aspect-ratio:1;max-width:100%;border-radius:10px;background-color:#82837d;background-image:url(img/reference.jpg);background-repeat:no-repeat}
+.chunk b{font:600 15px/1.2 var(--body)}
+.chunk small{color:var(--muted);font-size:13px;line-height:1.35}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.rule{border-top:3px solid var(--ink);padding-top:10px;display:grid;gap:4px}
+.rule dt{font:600 17px/1.2 var(--body)}
+.rule dd{margin:0;color:var(--muted);font-size:15px}
+section{display:grid;gap:14px}
+@media (max-width:640px){.pair{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+ <header>
+  <div class="eyebrow">AW-STUDY-0021</div>
+  <h1>Bruiser Study</h1>
+  <p class="muted">One brute, built six ways. Each arm splits the Blender work differently; every result is rendered from the reference's own camera and scored against it. The method that lands closest to this exact figure, hands, fingers, face and nose included, wins.</p>
+  <span class="chip" id="state"><i></i><span>Shell: no runs yet</span></span>
+ </header>
+
+ <section aria-label="Reference and model, same camera">
+  <div class="pair">
+   <div class="frame" id="refFrame">
+    <img class="ref" src="img/reference.jpg" alt="Reference: a low-poly bald bruiser in a grey tank top and shorts, standing barefoot, arms hanging">
+    <div class="boxes" id="boxes" hidden></div>
+    <span class="tag">Reference</span>
+   </div>
+   <div class="frame" id="modelFrame">
+    <div class="ghost"></div><div class="ghost-line"></div>
+    <span class="tag" id="modelTag">Model · same camera</span>
+    <div class="empty" id="empty">Waiting for the first run<small>the outline is the reference silhouette each arm is scored against</small></div>
+   </div>
+  </div>
+  <div class="controls">
+   <div class="seg" role="group" aria-label="Choose an arm" id="armPick"></div>
+   <button id="toggleBoxes" aria-pressed="false">Show the six chunks</button>
+   <button id="toggle3d" aria-pressed="false" hidden>Turn it in 3D</button>
+  </div>
+  <div class="metrics-line" id="pickedLine"></div>
+ </section>
+
+ <section aria-labelledby="sb">
+  <h2 id="sb">Scoreboard</h2>
+  <p class="muted">Lower loss is better; higher IoU is better. Per-part squares fill from pale to green as each chunk's own silhouette IoU rises: head, chest, right arm, left arm, hips, legs.</p>
+  <div class="table-wrap"><table>
+   <thead><tr><th>Arm</th><th>Method</th><th class="num">Silhouette IoU</th><th class="num">Loss</th><th>Per part</th><th class="num">Time</th><th class="num">Cost</th><th>Status</th></tr></thead>
+   <tbody id="rows"></tbody>
+  </table></div>
+ </section>
+
+ <section aria-labelledby="arms-h">
+  <h2 id="arms-h">The arms</h2>
+  <p class="muted">Same reference, same six chunks, same Blender recipe kit and the same budget per job. Only how the work is split and ordered changes.</p>
+  <div class="arms" id="arms"></div>
+ </section>
+
+ <section aria-labelledby="ch">
+  <h2 id="ch">The six chunks</h2>
+  <p class="muted">In arm A each job sees only its crop below. In the other arms each job sees the whole figure and owns one chunk.</p>
+  <div class="chunks" id="chunks"></div>
+ </section>
+
+ <section aria-labelledby="mx">
+  <h2 id="mx">What we measure</h2>
+  <dl class="rules">
+   <div class="rule"><dt>Silhouette IoU</dt><dd>Overlap of the model's outline with the reference outline, from the same front camera. 1.0 is a perfect match.</dd></div>
+   <div class="rule"><dt>Loss</dt><dd>The paper-warrior image loss: silhouette, outline distance, structure, facet edges and tone, weighted into one number. 0 is perfect.</dd></div>
+   <div class="rule"><dt>Per-part score</dt><dd>Silhouette IoU inside each chunk's box, so a great torso can't hide a missing hand.</dd></div>
+   <div class="rule"><dt>Time and cost</dt><dd>Wall-clock from first job to assembled model, and the model spend for all of an arm's jobs.</dd></div>
+   <div class="rule"><dt>Fidelity check</dt><dd>Pass or fail by eye: this figure, not an inspired one. Five fingers per hand, a face with brow, nose and jaw, toes on bare feet.</dd></div>
+  </dl>
+ </section>
+</div>
+
+<script>
+const PARTS = ['head','chest','armR','armL','hips','legs'];
+let DATA = null, CHUNKS = null, picked = null, show3d = false;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = (v, d = 3) => v == null ? '<span class="dash">–</span>' : Number(v).toFixed(d);
+const fmtTime = s => s == null ? '<span class="dash">–</span>' : s < 90 ? Math.round(s) + ' s' : (s / 60).toFixed(1) + ' min';
+const fmtCost = c => c == null ? '<span class="dash">–</span>' : '$' + Number(c).toFixed(2);
+const partColor = v => v == null ? '' : `background:color-mix(in srgb,var(--good) ${Math.round(Math.max(0, Math.min(1, v)) * 100)}%,var(--ghost))`;
+const orderOf = a => Array.isArray(a.order) ? a.order : null;
+const name = id => (CHUNKS.chunks.find(c => c.id === id) || {}).name || id;
+
+function leader() {
+ const done = DATA.arms.filter(a => a.loss != null);
+ return done.length ? done.reduce((b, a) => a.loss < b.loss ? a : b).id : null;
+}
+
+function render() {
+ const lead = leader();
+ $('#state span').textContent = DATA.status || '';
+ $('#rows').innerHTML = DATA.arms.map(a => `
+  <tr class="${a.id === lead ? 'lead' : ''}">
+   <td class="arm-id">${esc(a.id)}</td>
+   <td><b>${esc(a.name)}</b><br><span class="muted">${esc(a.sees === 'crop' ? 'sees its crop' : 'sees the full figure')}, ${orderOf(a) ? 'in sequence' : 'in parallel'}</span></td>
+   <td class="num">${fmt(a.iou)}</td>
+   <td class="num">${fmt(a.loss)}</td>
+   <td><div class="parts">${PARTS.map(p => `<i title="${esc(name(p))}: ${a.parts && a.parts[p] != null ? a.parts[p].toFixed(2) : 'not run'}" style="${partColor(a.parts && a.parts[p])}"></i>`).join('')}</div></td>
+   <td class="num">${fmtTime(a.seconds)}</td>
+   <td class="num">${fmtCost(a.cost_usd)}</td>
+   <td><span class="status ${a.status === 'done' ? 'done' : a.status === 'running' ? 'run' : ''}">${esc(a.status)}${a.id === lead ? ' · leads' : ''}</span></td>
+  </tr>`).join('');
+
+ $('#arms').innerHTML = DATA.arms.map(a => {
+  const o = orderOf(a);
+  const flow = o ? o.map(id => `<span>${esc(name(id))}</span>`).join('<em>→</em>')
+                 : PARTS.map(id => `<span>${esc(name(id))}</span>`).join('<em>‖</em>');
+  return `<article class="arm"><div class="k">${esc(a.id)}</div><h3>${esc(a.name)}</h3><p class="muted">${esc(a.how)}</p><div class="flow">${flow}</div></article>`;
+ }).join('');
+
+ $('#armPick').innerHTML = DATA.arms.map(a => `<button data-arm="${esc(a.id)}" aria-pressed="${a.id === picked}">${esc(a.id)} · ${esc(a.name)}</button>`).join('');
+ showPicked();
+}
+
+function showPicked() {
+ const a = DATA.arms.find(x => x.id === picked) || DATA.arms[0];
+ const f = $('#modelFrame');
+ f.querySelectorAll('img.ref,model-viewer').forEach(e => e.remove());
+ $('#modelTag').textContent = `Arm ${a.id} · same camera`;
+ const has = !!a.render;
+ $('#empty').hidden = has;
+ f.querySelector('.ghost').hidden = has; f.querySelector('.ghost-line').hidden = has;
+ $('#toggle3d').hidden = !a.glb;
+ if (a.glb && show3d) {
+  loadViewer().then(() => {
+   const mv = document.createElement('model-viewer');
+   Object.assign(mv, {src: a.glb, alt: `Arm ${a.id} model`}); mv.setAttribute('camera-controls', ''); mv.setAttribute('shadow-intensity', '0.6');
+   f.prepend(mv);
+  });
+ } else if (has) {
+  const img = new Image(); img.className = 'ref'; img.src = a.render; img.alt = `Arm ${a.id} render from the reference camera`;
+  f.prepend(img);
+ }
+ $('#empty').innerHTML = has ? '' : `${a.status === 'running' ? 'Arm ' + esc(a.id) + ' is running' : 'Waiting for arm ' + esc(a.id)}<small>the outline is the reference silhouette each arm is scored against</small>`;
+ $('#pickedLine').innerHTML = `<span>IoU <b>${fmt(a.iou)}</b></span><span>loss <b>${fmt(a.loss)}</b></span><span>time <b>${fmtTime(a.seconds)}</b></span><span>cost <b>${fmtCost(a.cost_usd)}</b></span>${a.note ? `<span>${esc(a.note)}</span>` : ''}`;
+ document.querySelectorAll('#armPick button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.arm === a.id)));
+}
+
+let viewerP = null;
+function loadViewer() {
+ return viewerP ||= new Promise((ok, no) => {
+  const s = document.createElement('script'); s.type = 'module';
+  s.src = 'https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js'; s.onload = ok; s.onerror = no;
+  document.head.appendChild(s);
+ });
+}
+
+function drawChunks() {
+ const [W, H] = CHUNKS.size;
+ $('#boxes').innerHTML = CHUNKS.chunks.map(c => {
+  const [x0, y0, x1, y1] = c.box;
+  return `<div style="left:${x0 / W * 100}%;top:${y0 / H * 100}%;width:${(x1 - x0) / W * 100}%;height:${(y1 - y0) / H * 100}%"><span>${esc(c.name)}</span></div>`;
+ }).join('');
+ $('#chunks').innerHTML = CHUNKS.chunks.map(c => {
+  const [x0, y0, x1, y1] = c.box, s = Math.max(x1 - x0, y1 - y0), cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  const scale = W / s * 100, px = (cx - s / 2) / (W - s) * 100, py = (cy - s / 2) / (H - s) * 100;
+  return `<div class="chunk"><div class="crop" role="img" aria-label="Crop: ${esc(c.name)}" style="background-size:${scale}%;background-position:${px}% ${py}%"></div><b>${esc(c.name)}</b><small>${esc(c.owns)}</small></div>`;
+ }).join('');
+}
+
+document.addEventListener('click', e => {
+ const b = e.target.closest('button'); if (!b) return;
+ if (b.dataset.arm) { picked = b.dataset.arm; show3d = false; $('#toggle3d').setAttribute('aria-pressed', 'false'); showPicked(); }
+ if (b.id === 'toggleBoxes') { const on = $('#boxes').hidden; $('#boxes').hidden = !on; b.setAttribute('aria-pressed', String(on)); }
+ if (b.id === 'toggle3d') { show3d = !show3d; b.setAttribute('aria-pressed', String(show3d)); showPicked(); }
+});
+
+Promise.all([fetch('results.json', {cache: 'no-store'}).then(r => r.json()), fetch('chunks.json').then(r => r.json())])
+ .then(([d, c]) => { DATA = d; CHUNKS = c; picked = picked || d.arms[0].id; drawChunks(); render(); })
+ .catch(() => { $('#state span').textContent = 'Results could not load; reload to try again'; });
+</script>

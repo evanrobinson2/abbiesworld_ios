@@ -1,0 +1,69 @@
+{
+  "appid": 294100,
+  "name": "RimWorld",
+  "store_url": "https://store.steampowered.com/app/294100/",
+  "genres": [
+    "Colony sim",
+    "Management"
+  ],
+  "short_description": "A colony sim where a story generator throws events at a handful of survivors on a rim planet.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Colony sim",
+    "Management"
+  ],
+  "summary": "A colony sim where a story generator throws events at a handful of survivors on a rim planet.",
+  "identity": {
+    "core_loop": "Give orders, build, farm, survive raids, disease and weather, watch stories happen.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deep, emergent, often harsh.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.22,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Characters' moods are bubbles and needs lists; lots of overlay tabs; the storyteller picks events.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Simple top-down sprites.",
+    "palette": null,
+    "audio_mood": "Quiet guitar.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "An AI storyteller that paces events is a director we want, kid-friendly; but keep the needs on the characters, not in tabs."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.67,
+      "expression": 0.67,
+      "structure": 1.0,
+      "social": 0.78,
+      "systems": 0.78,
+      "chance": 0.44,
+      "session": 0.89
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

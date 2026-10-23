@@ -23,6 +23,8 @@ documents; what is built lives in the status documents. Keep these three apart.
   picture and your thread id, to `prototypes/ranch-atelier/dist/whats-new.json`; it becomes the app's
   "new version ready" card. His notes from the app's feedback button come back through the Feedback inbox PR
   (branch `feedback-inbox`). See `prototypes/ranch-atelier/dist/FEEDBACK.md`.
+- The tour rule (Evan, 2026-10-23 06:43Z): every new feature or capability gets a decision on whether it goes into the
+  player tour. Write it as `"tour": true` or `"tour": false` on its `whats-new.json` entry and say it in the PR.
 - Integrate the modeler vision incrementally. Don't overwrite existing conventions, file formats or loaders; extend them.
 
 ## How Abbie's World shows information

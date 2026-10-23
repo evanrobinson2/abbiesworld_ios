@@ -13,6 +13,10 @@ popover says one line: "We ask nothing of you and promise nothing."
 - Flow: `/api/auth/login` → Auth0 → `/api/auth/callback` (code exchanged server-side with PKCE, ID
   token verified against the tenant's JWKS) → `/api/auth/logout`. Registered callbacks:
   `https://{ranch.abbies.world,www.abbies.world,abbies-ranch-atelier.vercel.app}/api/auth/callback`.
+- One session for all of abbies.world: on an abbies.world host the cookie is set with `Domain=abbies.world`, so a
+  sign-in on www also counts on abbies.world, app.abbies.world and ranch. A host that isn't registered (abbies.world,
+  app.abbies.world) signs in through `https://www.abbies.world/api/auth/login` and is sent back to where it started,
+  so Auth0 needs no extra callbacks. Returns are only ever a path or an https abbies.world address.
 - What we keep: a signed, HttpOnly cookie (`aw_session`, 60 days, `AUTH_SESSION_SECRET`) holding a
   one-way account id (sha256 of the Auth0 user id) and an owner flag. The email is read once at
   sign-in, only to compare with `OWNER_EMAILS`, and never stored. Rotating `AUTH_SESSION_SECRET`

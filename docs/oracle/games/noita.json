@@ -1,0 +1,70 @@
+{
+  "appid": 881100,
+  "name": "Noita",
+  "store_url": "https://store.steampowered.com/app/881100/",
+  "genres": [
+    "Roguelite",
+    "Action",
+    "Physics"
+  ],
+  "short_description": "Every pixel is simulated: fire spreads, liquids flow, and you craft your own magic wands.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Roguelite",
+    "Action",
+    "Physics"
+  ],
+  "summary": "Every pixel is simulated: fire spreads, liquids flow, and you craft your own magic wands.",
+  "identity": {
+    "core_loop": "Descend, build wands, survive the simulated chaos.",
+    "mechanics": null,
+    "ui_and_game_feel": "Wildly emergent and hard.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The world itself is the information: everything burns, melts and flows.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel simulation.",
+    "palette": null,
+    "audio_mood": "Moody.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A world where every material is simulated is endlessly playful; ruthless for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.89,
+      "expression": 0.56,
+      "structure": 0.22,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.89,
+      "session": 0.22
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

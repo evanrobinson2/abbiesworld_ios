@@ -1,0 +1,68 @@
+{
+  "appid": 464920,
+  "name": "Surviving Mars",
+  "store_url": "https://store.steampowered.com/app/464920/",
+  "genres": [
+    "City builder",
+    "Space"
+  ],
+  "short_description": "Build domes and keep colonists alive on Mars.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "City builder",
+    "Space"
+  ],
+  "summary": "Build domes and keep colonists alive on Mars.",
+  "identity": {
+    "core_loop": "Drop supplies, build domes, settle colonists, research.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm and complex.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.16,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay heavy; drones and domes show activity.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Clean retro-future.",
+    "palette": null,
+    "audio_mood": "Retro radio.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Little domes on a red planet could suit the Moonbase."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.67,
+      "expression": 0.67,
+      "structure": 1.0,
+      "social": 0.67,
+      "systems": 0.89,
+      "chance": 0.33,
+      "session": 0.89
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

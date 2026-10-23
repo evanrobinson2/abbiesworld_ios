@@ -2,15 +2,20 @@
 // the chronograph (time, weather, season, pause, speed and pinned dials; chrono.mjs), the hand of cards (the tile preview cards) and the toy box (everything else).
 // The v1 controls stay in the DOM with their own handlers; each toy calls the original control, so no feature is lost.
 // The mode is chosen in index.html's boot script (html.ui-v2); "Classic layout" in the toy box switches back to v1.
-import {mountChrono} from './chrono.mjs?v=2';
-import {cardFace} from './hand-cards.mjs?v=2';
+import {mountChrono} from './chrono.mjs?v=3';
+import {cardFace,cardArt,setCardArt} from './hand-cards.mjs?v=12';
+import {openCallout,closeCallout} from '../look/callout.mjs';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
 function start(){
  const root=document.documentElement,$=s=>document.querySelector(s);
  const press=sel=>{const el=typeof sel==='string'?$(sel):sel;el?.click();return !!el;};
+ // Tapping a person, thing or tile opens its card as a callout beside it (look/callout.mjs) instead of the v1 side panel.
+ addEventListener('ranch:inspect',({detail:d})=>openCallout({name:d.name,kind:d.kind,description:d.description,hero:d.hero,focal:[],anchor:d.anchor,onClose:()=>press('#close-inspection')}));
+ addEventListener('ranch:inspect-close',()=>closeCallout({silent:true}));
  const svg=(body,view='0 0 24 24')=>`<svg viewBox="${view}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
- const I={
+ const I={cards:svg('<rect x="4" y="3" width="11" height="16" rx="2"/><path d="M15 6l4 1.5-4 13.5-6-1.6"/><path d="M7 13l2-3 2 2 2-3"/>'),
+  make:svg('<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/>'),
   talk:svg('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'),
   scenes:svg('<path d="M3 10.5 12 4l9 6.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/>'),
   tiles:svg('<path d="m12 2.5 8 4.6v9.8l-8 4.6-8-4.6V7.1z"/><path d="m12 12 8-4.6M12 12v9.4M12 12 4 7.4"/>'),
@@ -57,13 +62,14 @@ function start(){
  more.onclick=()=>toggleSheet();
  function toggleSheet(open=!root.classList.contains('v2-sheet')){closeAll('sheet');if(open&&document.body.classList.contains('scene-dropper-hidden'))press('#scene-dropper-toggle');root.classList.toggle('v2-sheet',open);}
  function adoptCards(){const cards=document.getElementById('current-scene-type');if(!cards)return false;if(cards.parentElement!==hand)hand.prepend(cards);fan();return true;}
- function fan(){const heroes=[...hand.querySelectorAll('.generator-hero')],n=heroes.length;heroes.forEach((h,i)=>{h.style.setProperty('--fan',((i-(n-1)/2)*5).toFixed(1)+'deg');if(!h.dataset.v2){h.dataset.v2='1';cardFace(h);let wasPressed=false;h.addEventListener('pointerdown',()=>{wasPressed=h.getAttribute('aria-pressed')==='true';},true);h.addEventListener('click',()=>{if(wasPressed)toggleSheet();});}});}
+ function fan(){const heroes=[...hand.querySelectorAll('.generator-hero')],n=heroes.length;heroes.forEach((h,i)=>{h.style.setProperty('--fan',((i-(n-1)/2)*1.5).toFixed(1)+'deg');if(!h.dataset.v2){h.dataset.v2='1';cardFace(h);let wasPressed=false;h.addEventListener('pointerdown',()=>{wasPressed=h.getAttribute('aria-pressed')==='true';},true);h.addEventListener('click',()=>{if(wasPressed)toggleSheet();});}});}
 
  // Toy box: tap for the shelf, hold for the grown-up workbench.
  const box=make('button',{id:'v2-box',className:'v2-toy v2-glass',type:'button',title:'Toy box'},I.box+'<span class="v2-dot"></span>');box.setAttribute('aria-label','Toy box: tap for the shelf, hold for settings');
  const shelf=make('div',{id:'v2-shelf',className:'v2-toy v2-glass',hidden:true});shelf.setAttribute('role','menu');
  const items=[
-  ['talk','Talk',()=>press('#live-toggle'),'talk'],['scenes','Scenes',()=>press('#compact-scene-title')||press('#library-open')],['tiles','Tile options',()=>toggleSheet(true)],
+  ['talk','Talk',()=>press('#live-toggle'),'talk'],['make','Make',()=>press('#make-toggle'),'talk'],['scenes','Scenes',()=>press('#compact-scene-title')||press('#library-open')],['tiles','Tile options',()=>toggleSheet(true)],
+  ['cards',cardArt()==='concept'?'Cards: concept':'Cards: in game',()=>{const next=cardArt()==='concept'?'ingame':'concept';setCardArt(next);const b=shelf.querySelector('[data-item=cards]');if(b)b.lastElementChild.textContent=next==='concept'?'Cards: concept':'Cards: in game';}],
   ['music','Music',()=>press('#app-jukebox-toggle')],['workshop','Workshop',()=>press('.aw-fab')],['feedback','Feedback',()=>press('.afb-fab')],
   null,
   ['explore','Library',()=>press('.ex-door')],['account','Sign in',()=>press('#account-chip')],['settings','Settings',()=>press('#app-settings-toggle')],['developer','Developer',()=>press('#developer-toggle')],
@@ -76,7 +82,9 @@ function start(){
  document.body.append(hand,box,shelf);hand.append(more);
 
  // Touching the world puts summoned things away; idle tucks the hand so the world gets the bottom edge back.
- let idle=0;const wake=()=>{hand.classList.remove('tucked');clearTimeout(idle);idle=setTimeout(()=>{if(!root.classList.contains('v2-sheet')&&!hand.matches(':hover'))hand.classList.add('tucked');},6000);};
+ let idle=0;const wake=()=>{hand.classList.remove('tucked');clearTimeout(idle);idle=setTimeout(()=>{if(!root.classList.contains('v2-sheet')&&!hand.matches(':hover'))hand.classList.add('tucked');},2500);};
+ // Hovering the lowered hand lifts the whole hand as it is (Evan, 2026-10-23); leaving it starts the tuck timer again.
+ hand.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')wake();});hand.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')wake();});
  addEventListener('pointerdown',e=>{wake();
   // The tile sheet closes on any tap outside it (not only on the world), so it can never trap the player.
   if(root.classList.contains('v2-sheet')&&!e.target.closest?.('#scene-tools-drawer,#v2-hand,.facet-picker,dialog,[popover]'))root.classList.remove('v2-sheet');

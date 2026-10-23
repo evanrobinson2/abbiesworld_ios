@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html data-aw-skin="look study"><head><script src="/theme/boot.js?v=1"></script><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Paper Warrior Studies</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -203,41 +203,7 @@ section.round .chart{background:var(--bg)}
 </section>
 
 <!-- ============================================================ ROUND 2 -->
-<section class="round r2" id="round2">
-<header>
-  <div class="eyebrow">Round 2 · 22 Oct, afternoon · after Evan's feedback</div>
-  <h2>Keep the style</h2>
-  <div class="verdict"><span>Judged loss v2 <b>0.447 → 0.306</b></span><span>Winner <b>C, hybrid</b></span><span>Status <b>done, with known gaps</b></span></div>
-</header>
-
-<h3>What you asked for</h3>
-<div class="col">
-<p>Your read of round 1 was that the geometry was good but the art style didn't survive. Three things carry the look:</p>
-<ul>
-<li>The <b>silhouette</b> of the crest, shoulders, shield and skirt matters more than any small detail.</li>
-<li>The <b>surface</b> has to be deliberate folds and overlapping plates, not arbitrary triangles.</li>
-<li><b>Art direction is not polygon reduction.</b> Fewer triangles does not make paper.</li>
-</ul>
-<p>The bigger point was about architecture. Don't reconstruct the finished model; reconstruct the rules. That means a papercraft construction grammar that could turn any asset into this style, from a knight to a London street. A shader can't fake a folded silhouette, so the rules have to make geometry. You asked for three competing experiments (geometry-first, procedural papercraft and a hybrid) and bet on the hybrid.</p>
-<p>You also asked whether the mesh is generated from scratch or optimised from an existing one. It is generated: every piece is Python in Blender, with no third-party mesh anywhere.</p>
-</div>
-
-<h3>What changed in the machine</h3>
-<div class="col">
-<p><b>A loss that looks where you look.</b> Loss v2 keeps the whole-figure terms and adds 512 px crops of the five parts you named (crest and helmet, shoulders, shield, skirt, legs and feet). Each crop is scored on overlap and structure. It also adds a style term that compares the distribution of edge strength and edge coherence inside the figure. Folded paper is mostly flat planes with a tail of strong, straight creases. Crumple noise is lots of medium, incoherent edges. That term lets the loss tell paper from clay, which round 1's edge term couldn't.</p>
-<p><b>A grammar instead of a model.</b> <code>paper.py</code> holds style rules that run on any mesh, whatever it depicts:</p>
-</div>
-<div class="tbl"><table>
-<tr><th>Rule</th><th>What it does</th><th>Applied to</th></tr>
-<tr><td><code>facet</code></td><td>Re-triangulates to a target edge length, then crumples by a fraction of the local edge, so the paper reads the same at any scale or detail level</td><td>Body skin, trim</td></tr>
-<tr><td><code>bands</code></td><td>Cuts the surface with straight, tilted planes, splits it along the cuts and lifts alternate bands, so armour reads as overlapping paper strips with clean seams</td><td>Torso armour</td></tr>
-<tr><td><code>plates</code></td><td>Clusters faces into plates, flattens each one, folds a ridge down its middle and overlaps them like shingles</td><td>Tried on the torso, then switched off (see below)</td></tr>
-<tr><td><code>stiffen</code></td><td>Gives sheet parts paper thickness and a slight hand-made twist per piece</td><td>Skirt tabs, shoulder flaps</td></tr>
-<tr><td>material</td><td>Matte paper: high roughness, a faint sheen and a tiny fibre bump. No fake folds in the shader.</td><td>Everything</td></tr>
-</table></div>
-
-<h3>Three experiments</h3>
-<div class="col"><p><b>A, geometry-first</b>: refit the plain builder with the part-crop loss and no grammar. <b>B, procedural papercraft</b>: keep round 1's geometry and run it through the grammar. <b>C, hybrid</b>: A's refitted geometry, then B's grammar. All three were judged on the same settings: loss v2, LOD2, 512 px, 48 samples.</p></div>
+<section class="round r2" id="round2" style="padding-top:24px">
 <div class="wide"><img src="img/abc_full.jpg" alt="Four panels: the reference, then experiments A, B and C from the reference camera"><figcaption>Reference · A geometry-first · B papercraft grammar · C hybrid</figcaption></div>
 <div class="tbl"><table>
 <tr><th>Version</th><th>Judged total</th><th>Whole silhouette</th><th>Crest</th><th>Shoulders</th><th>Shield</th><th>Skirt</th><th>Legs</th><th>Style</th></tr>

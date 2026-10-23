@@ -1,0 +1,70 @@
+{
+  "appid": 361420,
+  "name": "ASTRONEER",
+  "store_url": "https://store.steampowered.com/app/361420/",
+  "genres": [
+    "Exploration",
+    "Building",
+    "Co-op"
+  ],
+  "short_description": "Reshape planets with a terrain tool, build bases from modules and explore with friends.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Exploration",
+    "Building",
+    "Co-op"
+  ],
+  "summary": "Reshape planets with a terrain tool, build bases from modules and explore with friends.",
+  "identity": {
+    "core_loop": "Dig with the terrain tool, gather, build, connect, fly to new planets.",
+    "mechanics": null,
+    "ui_and_game_feel": "Playful, tactile, colourful.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Backpack shows items physically; oxygen tether lines in the world; very low HUD.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright pastel low-poly planets.",
+    "palette": null,
+    "audio_mood": "Soft synth.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Diegetic backpack inventory and terrain sculpting are kid-friendly toys; one of the best low-HUD references."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.44,
+      "expression": 0.67,
+      "structure": 0.44,
+      "social": 0.67,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

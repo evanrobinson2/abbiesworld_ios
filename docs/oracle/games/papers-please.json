@@ -1,0 +1,68 @@
+{
+  "appid": 239030,
+  "name": "Papers, Please",
+  "store_url": "https://store.steampowered.com/app/239030/",
+  "genres": [
+    "Puzzle",
+    "Simulation"
+  ],
+  "short_description": "A border inspector checks documents for a grim fictional state.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Simulation"
+  ],
+  "summary": "A border inspector checks documents for a grim fictional state.",
+  "identity": {
+    "core_loop": "Check papers, spot errors, stamp, feed your family.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense, moral, clever.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "meta": 0.1,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.0,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The desk is the interface: papers are physical objects (diegetic).",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Pixel-art drab.",
+    "palette": null,
+    "audio_mood": "Stark.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A desk of physical papers as the whole UI; diegetic paperwork. The theme is not for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.11,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

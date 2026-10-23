@@ -54,13 +54,31 @@ test('the session keeps only a hashed account id and whether it is the owner',as
  assert.equal(fetcher.seen.find(s=>s.url.endsWith('/oauth/token')).body.code_verifier.length>40,true);
  const me=acct.account(req('/',{cookie:cookieHeader(out.cookies)}),ENV);
  assert.deepEqual(me,{id:acct.accountId('google-oauth2|42'),owner:false});
- const session=out.cookies.find(c=>c.startsWith(acct.SESSION+'='));
+ const session=out.cookies.find(c=>c.startsWith(acct.SESSION+'=')&&!/Max-Age=0$/.test(c));
  const payload=Buffer.from(decodeURIComponent(session.split('=')[1].split(';')[0]).split('.')[0],'base64url').toString();
  assert.ok(!/parent|example|google/i.test(payload),'no email, name or provider id is stored: '+payload);
  const owner=(await signIn({sub:'google-oauth2|7',email:'OWNER@example.com',email_verified:true})).out;
  assert.equal(acct.account(req('/',{cookie:cookieHeader(owner.cookies)}),ENV).owner,true);
  const unverified=(await signIn({sub:'auth0|9',email:'owner@example.com',email_verified:false})).out;
  assert.equal(acct.account(req('/',{cookie:cookieHeader(unverified.cookies)}),ENV).owner,false,'an unverified email is not the owner');
+});
+
+test('one session covers every abbies.world address; other addresses sign in through www',async()=>{
+ const {out}=await signIn({sub:'google-oauth2|5'});
+ assert.ok(out.cookies.some(c=>c.startsWith(acct.SESSION+'=')&&/Domain=abbies\.world;/.test(c)&&!/Max-Age=0$/.test(c)),'shared across abbies.world');
+ const viaHub=acct.beginSignIn(req('/api/auth/login?return=/studies/',{host:'app.abbies.world'}),ENV);
+ assert.equal(viaHub.cookie,null);
+ assert.equal(viaHub.location,'https://www.abbies.world/api/auth/login?return='+encodeURIComponent('https://app.abbies.world/studies/'));
+ const apex=acct.beginSignIn(req('/api/auth/login?return=//evil.example',{host:'abbies.world'}),ENV);
+ assert.equal(apex.location,'https://www.abbies.world/api/auth/login?return='+encodeURIComponent('https://abbies.world/sandbox'));
+ const hub=acct.beginSignIn(req('/api/auth/login?return='+encodeURIComponent('https://app.abbies.world/studies/'),{host:'www.abbies.world'}),ENV);
+ const back=acct.beginSignIn(req('/api/auth/login?return='+encodeURIComponent('https://evil.example/'),{host:'www.abbies.world'}),ENV);
+ const pending=c=>JSON.parse(Buffer.from(decodeURIComponent(c.split('=')[1].split(';')[0]).split('.')[0],'base64url').toString()).r;
+ assert.equal(pending(hub.cookie),'https://app.abbies.world/studies/');
+ assert.equal(pending(back.cookie),'/sandbox','never back to another site');
+ assert.equal(acct.beginSignIn(req('/api/auth/login',{host:'notabbies.world'}),ENV),null);
+ const off=acct.signOut(req('/api/auth/logout',{host:'abbies.world'}),{...ENV});
+ assert.ok(Array.isArray(off.cookie)&&off.cookie.some(c=>/Domain=abbies\.world;/.test(c)));
 });
 
 test('forged, stale or mixed-up sign-ins are refused',async()=>{
@@ -97,7 +115,8 @@ test('the public pool stops at $100 however many people sign up',async()=>{
  const store=memoryStore(),w=createWallet({store});
  let ok=0;for(let i=10;i<112;i++)if(await w.charge(person(i),1))ok++;
  assert.equal(ok,100);assert.equal(await w.left(person(500)),0);
- assert.equal(JSON.parse(store.data.get('spend/v1/public.json').body).usd,100);
+ const pool=[...store.data].filter(([k])=>k.startsWith('spend/v1/public/')).reduce((n,[,v])=>n+JSON.parse(v.body).usd,0);
+ assert.equal(Math.round(pool*1e6)/1e6,100,'the shards add up to exactly $100');
  assert.equal(store.data.has(`spend/v1/people/${person(111).id}.json`),false,'a refused charge leaves no trace');
 });
 

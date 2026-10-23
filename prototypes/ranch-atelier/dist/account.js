@@ -39,6 +39,7 @@
 #account-chip[data-in=true]{background:rgba(64,140,90,.75)}
 #account-pop{position:fixed;z-index:60;top:84px;right:12px;max-width:min(320px,calc(100vw - 32px));padding:18px;border-radius:24px;background:linear-gradient(160deg,rgba(255,253,245,.97),rgba(238,236,224,.95));color:#3d3326;border:1px solid rgba(255,255,255,.8);box-shadow:inset 0 1px 0 #fff,0 14px 40px rgba(60,50,30,.25);font-size:15px;line-height:1.4}
 #account-pop p{margin:0 0 12px}#account-pop small{display:block;opacity:.7;margin-top:10px}
+#account-pop a.more{display:block;padding:0;margin-top:12px;background:none;color:#5d8a4e;font-weight:500;text-decoration:underline}
 #account-pop a{display:inline-block;padding:10px 18px;border-radius:999px;background:#5d8a4e;color:#fff;text-decoration:none;font-weight:600}`;
   document.head.append(css);
   const b=document.createElement('button');b.id='account-chip';b.type='button';
@@ -48,9 +49,10 @@
   b.onclick=()=>{
    let pop=document.getElementById('account-pop');if(pop)return pop.remove();
    pop=document.createElement('div');pop.id='account-pop';
+   const more=`<a class="more" href="/welcome">About Abbie's World and supporting it</a>`;
    pop.innerHTML=me?.signedIn
-    ?`<p>Your worlds are kept with your account, so they follow you to any device.</p><a href="/api/auth/logout">Sign out</a>`
-    :`<p>Sign in with Google to keep your worlds and talk to the Computer. A grown-up signs in; it is free.</p><a href="/api/auth/login?return=${here}">Continue</a><small>We ask nothing of you and promise nothing.</small>`;
+    ?`<p>Your worlds are kept with your account, so they follow you to any device.</p><a href="/api/auth/logout">Sign out</a><a class="more" href="/billing">Your billing: what your magic was spent on</a>${more}`
+    :`<p>Sign in with Google to keep your worlds and talk to the Computer. A grown-up signs in; it is free.</p><a href="/api/auth/login?return=${here}">Continue</a><small>We ask nothing of you and promise nothing.</small>${more}`;
    document.body.append(pop);
   };
   document.addEventListener('pointerdown',e=>{const pop=document.getElementById('account-pop');if(pop&&!pop.contains(e.target)&&e.target!==b)pop.remove();});

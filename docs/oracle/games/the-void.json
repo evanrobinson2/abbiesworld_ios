@@ -1,0 +1,68 @@
+{
+  "appid": 37000,
+  "name": "The Void",
+  "store_url": "https://store.steampowered.com/app/37000/",
+  "genres": [
+    "Adventure",
+    "Horror"
+  ],
+  "short_description": "A surreal colour-draining afterlife.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Horror"
+  ],
+  "summary": "A surreal colour-draining afterlife.",
+  "identity": {
+    "core_loop": "Gather colours, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Strange.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "meta": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Colour is the resource.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Surreal.",
+    "palette": null,
+    "audio_mood": "Moody.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Colour as resource is a neat idea; tone is not for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.33,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -17,7 +17,22 @@ export function cartoonLandmark(type){
   box('#f5ead5',0,.85,0,1.35,.8,.72);box('#f5ead5',.78,1.07,.05,.65,.72,.62);box('#dfb09c',1.06,.9,.05,.26,.3,.64);for(const x of [-.48,.48])for(const z of [-.24,.24])box('#57483e',x,.3,z,.18,.6,.18);box('#54473b',-.25,1.26,0,.5,.05,.5);for(const z of [-.34,.34])ball('#a58f70',.72,1.45,z,.12);for(const z of [-.32,.32])ball('#242d30',1.05,1.2,z,.055);group.userData.landmark='Grazing cow';
  }else if(type==='crop'){
   for(let row=0;row<3;row++){box('#856246',0,.08,(row-1)*.62,2.05,.16,.43);for(let col=0;col<3;col++){const x=(col-1)*.62,z=(row-1)*.62;ball('#779347',x,.36,z,.27);ball('#a7b965',x+.08,.46,z,.2);}}group.userData.landmark='Kitchen garden';
- }else if(type==='meadow'){group.userData.landmark='Wildflower meadow';
+ }else if(type==='meadow'){
+  // Wildflower drifts, a straw bee skep and butterflies: a meadow reads by its flowers and bees, not by an animal.
+  const drifts=[['#f27fa5',-1.1,.9],['#ffd34d',.5,1.25],['#fff4dc',1.35,-.1],['#a98be0',-.2,-1.15],['#ff9a4d',-1.45,-.35],['#f27fa5',.75,-1.05]];
+  let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  for(const [petal,cx,cz] of drifts)for(let k=0;k<13;k++){const a=rnd()*6.283,r=Math.sqrt(rnd())*.42,x=cx+Math.cos(a)*r*1.3,z=cz+Math.sin(a)*r,h=.16+rnd()*.14;
+   mesh(new T.CylinderGeometry(.012,.012,h,4),'#4f7a2c',x,h/2,z);const head=mesh(new T.CylinderGeometry(.075,.06,.03,6),petal,x,h,z);head.rotation.set((rnd()-.5)*.6,0,(rnd()-.5)*.6);ball('#f2a81d',x,h+.025,z,.028);
+   if(k%3===0)ball('#6f9a3c',x+.05,.05,z,.07);}
+  box('#8a6a45',.85,.12,.45,.4,.24,.4);for(const [r,y] of [[.27,.32],[.24,.44],[.19,.55],[.12,.64]])mesh(new T.CylinderGeometry(r*.85,r,.13,12),'#e2b552',.85,y,.45);box('#3d2a17',.85,.3,.68,.09,.07,.04);
+  for(const [x,y,z,c] of [[.2,.9,.55,'#ffb347'],[-.6,1.05,.2,'#7fc8f0'],[1.2,1.0,.9,'#f27fa5']]){for(const s of [-1,1]){const w=box(c,x+s*.06,y,z,.11,.015,.08);w.rotation.z=s*.5;}box('#3d2a17',x,y,z,.03,.03,.1);}
+  group.userData.landmark='Wildflower meadow';
+ }else if(type==='moon'){
+  mesh(new T.SphereGeometry(.95,14,7,0,Math.PI*2,0,Math.PI/2),'#eef1f4',0,0,0);mesh(new T.CylinderGeometry(1,1,.12,14),'#7f8a99',0,.06,0);box('#5d6b85',0,.32,.92,.5,.62,.4);box('#ffd36a',0,.42,1.13,.26,.3,.04);
+  for(const a of [0,1.05,2.1])box('#9fb3c9',Math.sin(a)*.5,.62+Math.cos(a)*.12,Math.cos(a)*.5-.05,.16,.16,.04).lookAt(0,1.4,0);
+  box('#b9c0cc',-1.25,.55,-.25,.08,1.1,.08);const dish=mesh(new T.ConeGeometry(.3,.16,12,1,true),'#e6e9ef',-1.25,1.16,-.25);dish.rotation.x=-.7;dish.material.side=T.DoubleSide;ball('#ff7a5a',-1.25,1.32,-.25,.06);
+  const panel=box('#2f4f9a',1.35,.5,.25,.85,.05,.55);panel.rotation.z=-.45;box('#b9c0cc',1.3,.24,.25,.06,.48,.06);
+  group.userData.landmark='Moon dome';
  }else return null;
  group.userData.representationOnly=true;return group;
 }

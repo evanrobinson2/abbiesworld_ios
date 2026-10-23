@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><script src="/theme/boot.js?v=1"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Your billing · Abbie's World</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="/home/home.css?v=2">
+</head>
+<body>
+<header class="bar"><a class="mark" href="/welcome" aria-label="Abbie's World home">AW</a><nav><a href="/welcome">Home</a><a href="/sandbox">Play</a></nav></header>
+<main>
+ <section class="billing">
+  <h1>Your billing</h1>
+  <p class="lede" id="line">Looking it up…</p>
+  <div class="stat" id="stats" hidden>
+   <div><small>Magic left this month</small><b id="left"></b></div>
+   <div><small>Spent this month</small><b id="month"></b></div>
+   <div><small>Your plan</small><b id="plan"></b></div>
+  </div>
+  <div class="actions" id="actions" hidden><a class="btn" id="manage" href="/api/support?manage=1" hidden>Receipts, change or cancel</a><a class="btn primary" id="support" href="/welcome#support" hidden>Support Abbie's World</a></div>
+  <div id="months"></div>
+  <h2 id="recent-title" hidden>Latest</h2>
+  <table class="bill" id="recent" hidden><thead><tr><th>When</th><th>What</th><th class="n">Cost</th></tr></thead><tbody></tbody></table>
+  <p class="fine">Payments and receipts are kept by Stripe. Magic is counted in dollars, to the tenth of a cent. <a href="/terms">The short terms</a>.</p>
+ </section>
+</main>
+<script>
+(async()=>{
+ const $=id=>document.getElementById(id),money=n=>(n<0?'−':'')+'$'+Math.abs(n).toFixed(Math.abs(n)<1&&Math.abs(n)>0?3:2);
+ const el=(tag,text,cls)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e;};
+ try{
+  const b=await (await fetch('/api/support?billing=1',{cache:'no-store'})).json();
+  if(!b.signedIn){$('line').textContent='Sign in to see your billing.';const a=el('a','Sign in','btn primary');a.href='/api/auth/login?return=/billing';$('actions').append(a);$('actions').hidden=false;return;}
+  const month=new Date().toISOString().slice(0,7),now=b.by?.[month]||{};
+  const total=o=>Object.values(o).reduce((n,k)=>n+k.usd,0);
+  $('line').textContent='Everything your magic was spent on, and what it cost.';
+  $('left').textContent=money(b.left);$('month').textContent=money(total(now));
+  $('plan').textContent=b.plan?`$${b.plan.amount} a month`:'Free';$('stats').hidden=false;
+  $('manage').hidden=!b.plan;$('support').hidden=!!b.plan||!b.ready;$('actions').hidden=false;
+  for(const m of Object.keys(b.by||{}).sort().reverse()){
+   const name=new Date(m+'-15').toLocaleDateString(undefined,{month:'long',year:'numeric'});
+   $('months').append(el('h2',name));
+   const t=el('table',null,'bill'),body=el('tbody');t.append(el('thead'),body);
+   t.tHead.innerHTML='<tr><th>What</th><th class="n">Times</th><th class="n">Cost</th></tr>';
+   for(const [what,k] of Object.entries(b.by[m]).sort((x,y)=>y[1].usd-x[1].usd)){const r=el('tr',null,k.usd<0?'back':'');r.append(el('td',what),el('td',String(k.n),'n'),el('td',money(k.usd),'n'));body.append(r);}
+   const r=el('tr');r.append(el('td','Total'),el('td','','n'),el('td',money(total(b.by[m])),'n'));r.style.fontWeight=700;body.append(r);
+   $('months').append(t);
+  }
+  if(!Object.keys(b.by||{}).length)$('months').append(el('p','Nothing spent yet.','fine'));
+  if(b.items?.length){
+   const body=$('recent').tBodies[0];
+   for(const i of [...b.items].reverse()){const r=el('tr',null,i.usd<0?'back':'');r.append(el('td',new Date(i.at).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})),el('td',i.what+(i.n>1?` (${i.n} times)`:'')),el('td',money(i.usd),'n'));body.append(r);}
+   $('recent').hidden=false;$('recent-title').hidden=false;
+  }
+ }catch{$('line').textContent="We couldn't reach the server. Try again in a minute.";}
+})();
+</script>
+</body></html>

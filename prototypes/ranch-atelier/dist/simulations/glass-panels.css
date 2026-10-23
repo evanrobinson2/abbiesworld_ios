@@ -1,0 +1,38 @@
+/* One liquid-glass style for every in-game panel (Evan, 2026-10-23 04:55Z: "all of these should have liquid glass
+   style"). Same recipe as the chronograph (.v2-glass in ui-v2.css): the panel is a thick glass object with a rim and a
+   contact shadow, and the controls inside are smaller glass chips, never flat paper. Nothing dims the world behind a
+   dialog (GAME_FEEL.md: nothing masks the world). Scoped to the in-game page; other pages are untouched. */
+body.simulation-workspace{
+  --gp-glass:color-mix(in srgb,var(--app-paper,#fffcf0) 46%,transparent);
+  --gp-chip:color-mix(in srgb,#fff 30%,transparent);
+  --gp-chip-hover:color-mix(in srgb,#fff 46%,transparent);
+  --gp-rim:color-mix(in srgb,#fff 82%,transparent);
+  --gp-ink:var(--app-ink,#2b1d0e);
+  --gp-accent:var(--app-accent,#b64932);
+  --gp-shadow:inset 0 1px 0 #fffffff2,inset 0 -2px 3px color-mix(in srgb,#0b1a2a 16%,transparent),inset 0 0 0 .5px #ffffff66,0 2px 3px #0000001f,0 16px 34px -8px #0c203052;
+  --gp-chip-shadow:inset 0 1px 0 #ffffffd9,inset 0 -1px 2px color-mix(in srgb,#0b1a2a 14%,transparent),0 1px 2px #0000001a;
+  --gp-blur:blur(14px) saturate(1.9) brightness(1.06);
+}
+html:root:not(#gp) body.simulation-workspace :is(dialog:not(#aw-settings),#app-jukebox,#app-settings,#saved-scenes,#inspection,#asset-dialog,#arrival-dialog,#library,.afb-card,.afb-sheet){
+  background:linear-gradient(160deg,#ffffff70,transparent 46%),var(--gp-glass)!important;
+  -webkit-backdrop-filter:var(--gp-blur)!important;backdrop-filter:var(--gp-blur)!important;
+  border:1px solid var(--gp-rim)!important;box-shadow:var(--gp-shadow)!important;color:var(--gp-ink)!important;
+  border-radius:24px!important}
+html:root:not(#gp) body.simulation-workspace :is(dialog:not(#aw-settings),#app-jukebox,#app-settings)::backdrop{background:transparent!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+
+/* Controls inside a panel are glass chips. */
+html:root:not(#gp) body.simulation-workspace :is(dialog:not(#aw-settings),#app-jukebox,#app-settings,#saved-scenes,#inspection,#library,.afb-card,.afb-sheet) :is(button,select,input[type=text],input[type=search],input[type=number],textarea,.afb-btn):not(.primary):not([data-play]):not([aria-pressed=true]):not(.afb-more){
+  background:var(--gp-chip)!important;border:1px solid var(--gp-rim)!important;box-shadow:var(--gp-chip-shadow)!important;color:inherit!important;border-radius:14px!important}
+html:root:not(#gp) body.simulation-workspace :is(dialog:not(#aw-settings),#app-jukebox,#app-settings,#saved-scenes,#inspection,#library,.afb-card,.afb-sheet) :is(button,.afb-btn):not(.primary):not([data-play]):not([aria-pressed=true]):hover{background:var(--gp-chip-hover)!important}
+/* The one main action stays coloured glass: the accent, lit from above, with the same rim. */
+html:root:not(#gp) body.simulation-workspace :is(dialog:not(#aw-settings),#app-jukebox,#app-settings,#saved-scenes,#inspection,#library,.afb-card,.afb-sheet) :is(.primary,[data-play],[aria-pressed=true]):is(button,.afb-btn){
+  background:linear-gradient(180deg,color-mix(in srgb,#fff 26%,transparent),transparent 55%),color-mix(in srgb,var(--gp-accent) 88%,transparent)!important;
+  border:1px solid color-mix(in srgb,#fff 55%,transparent)!important;box-shadow:var(--gp-chip-shadow)!important;color:#fff!important;border-radius:14px!important;outline:none}
+html:root:not(#gp) body.simulation-workspace :is(button,select,input,.afb-btn):is(:active){transform:scale(.97)}
+html:root:not(#gp) body.simulation-workspace :is(#app-jukebox,#app-settings,dialog) input[type=range]{accent-color:var(--gp-accent)}
+html:root:not(#gp) body.simulation-workspace :is(#app-jukebox,#app-settings,dialog) input[type=checkbox]{accent-color:var(--gp-accent);width:20px;height:20px}
+/* Text inside glass keeps its contrast over a busy scene. */
+html:root:not(#gp) body.simulation-workspace :is(dialog:not(#aw-settings),#app-jukebox,#app-settings,.afb-card,.afb-sheet) :is(p,small,label,.afb-line,.afb-more){color:color-mix(in srgb,var(--gp-ink) 82%,transparent)}
+
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){
+  html:root:not(#gp):not(#gp2) body.simulation-workspace :is(dialog:not(#aw-settings),#app-jukebox,#app-settings,#saved-scenes,#inspection,#asset-dialog,#arrival-dialog,#library,.afb-card,.afb-sheet){background:var(--app-paper,#fffcf0)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}}

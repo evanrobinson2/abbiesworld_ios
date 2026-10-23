@@ -1,0 +1,68 @@
+{
+  "appid": 921800,
+  "name": "Encased",
+  "store_url": "https://store.steampowered.com/app/921800/",
+  "genres": [
+    "RPG",
+    "Isometric"
+  ],
+  "short_description": "A retro sci-fi RPG inside a dome.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "RPG",
+    "Isometric"
+  ],
+  "summary": "A retro sci-fi RPG inside a dome.",
+  "identity": {
+    "core_loop": "Explore, talk, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Classic CRPG.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "70s sci-fi.",
+    "palette": null,
+    "audio_mood": "Retro.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Little for us."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.44,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.67,
+      "session": 0.67
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

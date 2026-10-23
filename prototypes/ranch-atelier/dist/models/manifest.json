@@ -3,6 +3,328 @@
  "updated": "2026-10-22",
  "models": [
   {
+   "id": "paper-man-1",
+   "name": "Paper man 1",
+   "style": "",
+   "group": "Paper figures",
+   "subject": "paper man 1",
+   "ask": "Papercraft figure matched to your Midjourney pick",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/review/img/paper-man-1-pick.jpg",
+    "glb": "/review/3d/paper-man-1.glb"
+   },
+   "good": [],
+   "off": [
+    "Round 3, built part by part from your pick. The head is the pick's folded mask: a crown plateau, and a forehead that overhangs a recessed face panel with a nose ridge down its middle. The cheek planes turn to the side and the jaw closes to a chin flap. The neck is a narrow column with cords and a throat strip. Each hand is a palm, four three-joint fingers and a thumb, relaxed under a flared, flap-cut wrist cuff. The limbs carry a raised front ridge with diagonal folds. The kneecap sits in a V notch on the shin shell. Gaps: the torso and arms are still smoother and boxier than the pick's sharp folds, and the arms lack its biceps and forearm mass."
+   ],
+   "outline": 0.897
+  },
+  {
+   "id": "paper-man-3",
+   "name": "Paper man 3",
+   "style": "",
+   "group": "Paper figures",
+   "subject": "paper man 3",
+   "ask": "Papercraft figure matched to your Midjourney pick",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/review/img/paper-man-3-pick.jpg",
+    "glb": "/review/3d/paper-man-3.glb"
+   },
+   "good": [],
+   "off": [
+    "Round 2, part by part from your pick. The head is a faceted origami wedge: two face planes meet at a nose ridge, with brow and cheek planes and a slanted jaw that closes to the pointed chin. The neck folds into the V of the two tendon planes. The torso is folded plates: a sharp centre line from sternum to navel, flat pec plates with a hard lower edge, and a narrow ab column whose sides turn back hard. A separate waistband with a folded lip sits over briefs with a V front. Each hand has a palm, four separate fingers hooked toward the thigh, and a pointed thumb flap. Limb planes run on the diagonal like the pick's folds, and the kneecaps and shoes are folded plates. Gaps: the pick's thin fold seams aren't modelled, and the side planes stay paler than the pick's deep creases."
+   ],
+   "outline": 0.915,
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.923,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ]
+  },
+  {
+   "id": "paper-woman-2",
+   "name": "Heroic woman 2 · round 2",
+   "style": "",
+   "group": "Paper figures",
+   "subject": "heroic woman 2",
+   "ask": "Papercraft figure matched to your Midjourney pick",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/review/img/paper-woman-2-pick.jpg",
+    "glb": "/review/3d/paper-woman-2.glb"
+   },
+   "good": [],
+   "off": [
+    "Round 2, rebuilt part by part to be THIS character: one faceted egg head with a sharp ridge from the crown through the nose to a pointed chin and the face planes set back from it; real hands with four curled fingers and a thumb; angular faceted legs with a long inner thigh plane, a knee fold plate and a flared shin; low pointed paper feet turned out; forearm guards with a flap plate flaring to the wrist; puffed shoulder caps in a few big fold planes, still at 65% of the pick as you asked. Still rough: fewer small folds than the pick, and the collar is rougher."
+   ],
+   "outline": 0.87,
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.894,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ]
+  },
+  {
+   "id": "moon-dome",
+   "name": "The dome",
+   "style": "",
+   "group": "Moon remaster",
+   "subject": "the dome",
+   "ask": "Moon remaster, wave 1: The dome",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/moon-dome/ref.jpg",
+    "glb": "/models/moon-dome/model.glb"
+   },
+   "good": [
+    "The painting's read: grid dome, orange band, airlock and ramp.",
+    "Same footprint as the torus habitat, so the base plan is unchanged.",
+    "At night the glass and the band glow from inside (they count as windows)."
+   ],
+   "off": [
+    "Built from the painting without a turnaround sheet.",
+    "The painting's dome sits on a taller drum with a side annex; the annex is the habitat kit (MB7).",
+    "Interior is a hint only."
+   ]
+  },
+  {
+   "id": "moon-buggy",
+   "name": "Moon buggy",
+   "style": "",
+   "group": "Moon remaster",
+   "subject": "moon buggy",
+   "ask": "Moon remaster, wave 1: Moon buggy",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/moon-buggy/ref.jpg",
+    "glb": "/models/moon-buggy/model.glb"
+   },
+   "good": [
+    "Silhouette of the sheet: big tyres, short wheelbase, split nose, tall bars, long tail.",
+    "Charcoal #3a4a5a and panel grey #4a5a6a straight from the spec sheet.",
+    "Leaves lasting twin tyre tracks in the dust as it drives (MB1)."
+   ],
+   "off": [
+    "Headlights are pale ice-white, not the sheet's cyan: on the Moon cyan is reserved for the meteorite and the Star Child (study rule). Easy to flip if Evan wants the sheet's cyan.",
+    "No cyan accent strips along the seams, for the same reason.",
+    "Engine and frame detail between the wheels is simpler than the sheet's mechanical clutter.",
+    "About 22k triangles, most in the tread blocks; can be halved if the tile needs it."
+   ]
+  },
+  {
+   "id": "moon-meteorite",
+   "name": "Mysterious meteorite",
+   "style": "",
+   "group": "Moon remaster",
+   "subject": "mysterious meteorite",
+   "ask": "Moon remaster, wave 1: Mysterious meteorite",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/moon-meteorite/ref.jpg",
+    "glb": "/models/moon-meteorite/model.glb"
+   },
+   "good": [
+    "Reads as the sheet: dark stone, cyan crystals, glow from inside the cracks.",
+    "The only #00ffd1 on the tile, so a child's eye goes straight to it.",
+    "States built in: buried, glowing, opening, open (life.meteorite.open())."
+   ],
+   "off": [
+    "Game size is 0.56 m across, not the story's 20-25 cm, so it reads from the tile camera (toy scale).",
+    "The sheet's pale weathered top plates are only hinted (a lighter rock material on upward faces).",
+    "No violet-blue highlights yet; the MeteorVein material exists for them."
+   ]
+  },
+  {
+   "id": "roman-belt",
+   "name": "Belt",
+   "style": "",
+   "group": "Roman parts",
+   "subject": "belt",
+   "ask": "waist: the centurion belt (cingulum)",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/roman-belt/ref.jpg",
+    "glb": "/models/roman-belt/model.glb"
+   },
+   "good": [
+    "Outline match 0.85: the oval, the plaque rhythm, the octagonal sunburst plate and the buckle at the back all read.",
+    "Leather and bronze are separate named materials, so the game can shade them differently.",
+    "About 2k triangles."
+   ],
+   "off": [
+    "The concept's laurel relief is a full embossed wreath; at game size it is one raised leaf rib per plaque.",
+    "The concept's band is taller and tapers towards the buckle; mine is an even 7 cm.",
+    "The bronze ribs poke slightly above the strap edge, which the concept doesn't do."
+   ]
+  },
+  {
+   "id": "roman-cuirass",
+   "name": "Cuirass",
+   "style": "",
+   "group": "Roman parts",
+   "subject": "cuirass",
+   "ask": "torso: segmented body armour (lorica segmentata)",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/roman-cuirass/ref.jpg",
+    "glb": "/models/roman-cuirass/model.glb"
+   },
+   "good": [
+    "Outline match 0.92, the best of the six: the stacked girth hoops, the shoulder lames and the neck opening all line up.",
+    "Hollow, with open neck and arm holes, so it can sit on a body.",
+    "Each hoop is its own piece, so the armour can flex or be dented hoop by hoop later."
+   ],
+   "off": [
+    "The concept's hoops have a stronger downward overlap and soft folded edges; mine are cleaner, stiffer bands.",
+    "At about 6.8k triangles it is the heaviest part; the hoops could share geometry if the budget gets tight."
+   ]
+  },
+  {
+   "id": "roman-gladius",
+   "name": "Gladius",
+   "style": "",
+   "group": "Roman parts",
+   "subject": "gladius",
+   "ask": "weapon: the short sword",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/roman-gladius/ref.jpg",
+    "glb": "/models/roman-gladius/model.glb"
+   },
+   "good": [
+    "Outline match 0.91: blade taper, guard, ringed grip and pommel all line up.",
+    "420 triangles.",
+    "Blade and hilt are separate materials (BladeIvory and Ivory), so the blade can turn to steel without touching the hilt."
+   ],
+   "off": [
+    "The concept's guard is a flatter flared collar; mine is a block.",
+    "The concept's blade has visible facets along its length; mine is smoother between the ridge and the edges."
+   ]
+  },
+  {
+   "id": "roman-helmet",
+   "name": "Helmet",
+   "style": "",
+   "group": "Roman parts",
+   "subject": "helmet",
+   "ask": "head: the centurion helmet with its transverse crest",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/roman-helmet/ref.jpg",
+    "glb": "/models/roman-helmet/model.glb"
+   },
+   "good": [
+    "The crest, bowl, brow band, studs and visor all line up with the concept; the crest arch is the strongest match.",
+    "Every piece is its own named mesh, so the crest or cheek guards can be swapped or recoloured on their own.",
+    "3,550 triangles, cheap enough for every soldier on screen."
+   ],
+   "off": [
+    "Outline match 0.76. The cheek guards are flatter slabs than the concept's folded, angled plates, and the neck guard flares out further to the back.",
+    "The concept is a three-quarter view; the score camera is the best-matching side view found by search, so the number is a guide.",
+    "The concept's ear guards are small curls; here they are simple tabs."
+   ]
+  },
+  {
+   "id": "roman-sandals",
+   "name": "Sandals",
+   "style": "",
+   "group": "Roman parts",
+   "subject": "sandals",
+   "ask": "feet: a left and right pair of caligae",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/roman-sandals/ref.jpg",
+    "glb": "/models/roman-sandals/model.glb"
+   },
+   "good": [
+    "Outline match 0.78: the thick soles, the lattice cage and the heel loops all read as the concept's caligae.",
+    "A true left and right, toes turned out a little, as the concept stands.",
+    "About 2.1k triangles for the pair."
+   ],
+   "off": [
+    "The concept's cage is denser and wraps further down the sides of the sole.",
+    "The heel loops are a little taller than the concept's.",
+    "The concept stands the pair side by side facing the camera; mine is staggered slightly, which costs some overlap in the score."
+   ]
+  },
+  {
+   "id": "roman-shoulders",
+   "name": "Shoulder guards",
+   "style": "",
+   "group": "Roman parts",
+   "subject": "shoulder guards",
+   "ask": "shoulders: a left and right pair of layered guards",
+   "orbit": [
+    -20,
+    78
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/roman-shoulders/ref.jpg",
+    "glb": "/models/roman-shoulders/model.glb"
+   },
+   "good": [
+    "Two separate pieces, a true left and a true right, so each one follows its own arm.",
+    "The stack of three hemmed plates is there, and each plate is its own named part.",
+    "3,600 triangles for the pair."
+   ],
+   "off": [
+    "Outline match 0.67, the weakest of the six. The concept's guards are smooth rounded shells; mine read boxier, and the lames step down more steeply.",
+    "The concept shows the two guards identical; I mirrored them on purpose so each fits its own shoulder.",
+    "This one most needs another round: rounder arches and softer steps between the plates."
+   ]
+  },
+  {
    "id": "ranch-apple-tree",
    "name": "Apple tree",
    "style": "normal",

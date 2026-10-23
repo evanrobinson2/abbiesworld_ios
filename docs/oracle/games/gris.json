@@ -1,0 +1,68 @@
+{
+  "appid": 683320,
+  "name": "GRIS",
+  "store_url": "https://store.steampowered.com/app/683320/",
+  "genres": [
+    "Platformer",
+    "Art"
+  ],
+  "short_description": "A girl walks through a watercolour world that gains colour as she heals.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Platformer",
+    "Art"
+  ],
+  "summary": "A girl walks through a watercolour world that gains colour as she heals.",
+  "identity": {
+    "core_loop": "Walk, gain abilities, colour returns, the world opens.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm and beautiful; no fail state.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.0,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "No HUD at all: colour coming back is the progress.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Watercolour art.",
+    "palette": null,
+    "audio_mood": "Lush piano and choir.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Colour returning to the world as the progress bar; feeling first."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.44,
+      "structure": 0.11,
+      "social": 0.56,
+      "systems": 0.11,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

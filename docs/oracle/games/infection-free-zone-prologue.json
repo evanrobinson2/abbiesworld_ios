@@ -1,0 +1,68 @@
+{
+  "appid": 2485640,
+  "name": "Infection Free Zone - Prologue",
+  "store_url": "https://store.steampowered.com/app/2485640/",
+  "genres": [
+    "Strategy",
+    "City builder"
+  ],
+  "short_description": "Defend your real hometown, built from real map data.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "City builder"
+  ],
+  "summary": "Defend your real hometown, built from real map data.",
+  "identity": {
+    "core_loop": "Pick a real place, build defences, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Novel.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Real map 3D.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Building a game world from real map data is a powerful idea for a family's own street."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.44
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

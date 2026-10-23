@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" data-aw-skin="look study">
+<head>
+<meta charset="utf-8"><script src="/theme/boot.js?v=1"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0016 - Bodies and Creatures</title>
+<meta name="description" content="Installment 1, the normal human: real adult proportions, landmarks, muscle and bone maps, body types, toy-style rules and a modeler scorecard.">
+<link rel="stylesheet" href="/app-style.css?v=1">
+<script type="module" src="/vendor/model-viewer.min.js"></script>
+<style>
+/* Bodies and Creatures study. Pictures first: the sheet with switchable layers, the eight types, the toy rule, the scorecard. */
+body{margin:0;background:var(--app-canvas,#f4edcf);color:var(--app-ink);font:15px/1.5 var(--app-font,system-ui);
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 56px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1{margin:0}h2{margin:0 0 6px}h3{margin:0 0 4px;font-size:16px}
+p{margin:0;max-width:68ch}.muted{color:var(--app-muted)}
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--app-accent)}
+header{display:grid;gap:6px}
+.card{background:var(--app-paper);border:1px solid var(--app-border);border-radius:18px;overflow:hidden}
+.sheet{display:grid;gap:10px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar button{min-height:40px;padding:6px 14px;border-radius:999px;border:1px solid var(--app-border);background:#fff;color:var(--app-ink);font-weight:700;cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--app-accent);border-color:var(--app-accent);color:var(--app-paper)}
+.bar .sep{width:1px;height:26px;background:var(--app-border);margin:0 4px}
+.svgbox{overflow-x:auto}.svgbox svg{display:block;width:100%;height:auto;min-width:640px}
+.lineup svg{min-width:860px}#toy svg,#hand svg,#gesture svg,#sections svg,#foreshorten svg{min-width:0}
+#build svg{min-width:820px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.rule{padding:14px 16px;display:grid;gap:4px}.rule b{font-size:15px}
+.rule .n{font-family:var(--app-heading);font-size:26px;color:var(--app-accent);line-height:1}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+ul.tight{margin:6px 0 0;padding-left:18px}ul.tight li{margin:3px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--app-border);text-align:left;white-space:nowrap}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--app-muted)}
+td.s{font-weight:800}.ok{color:#3d7a3a}.bad{color:var(--app-accent)}
+.tablebox{overflow-x:auto}
+model-viewer{width:100%;height:min(62vh,520px);display:block;--poster-color:transparent;background:#fffcf0}
+figcaption{padding:8px 12px;font-size:13px;color:var(--app-muted)}
+ol.check{margin:0;padding:14px 18px 14px 40px;display:grid;gap:8px}ol.check li b{display:block}
+.src{display:grid;gap:6px;font-size:14px}.src span{color:var(--app-muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <span class="eyebrow">AW-STUDY-0016 · Installment 1 of 5, with drawing techniques · 2026-10-23</span>
+  <h1>Bodies and Creatures: the normal human</h1>
+  <p class="muted">Real adult proportions, head to toe, front, side and back. Every drawing is generated from one set of numbers (the canon), so the pictures, the checklist and the scorer always agree.</p>
+ </header>
+
+ <section class="sheet">
+  <div class="bar" id="bar">
+   <button data-sex="male" aria-pressed="true">Man</button><button data-sex="female" aria-pressed="false">Woman</button>
+   <span class="sep"></span>
+   <button data-lay="landmarks" aria-pressed="true">Landmarks</button>
+   <button data-lay="construct" aria-pressed="false">Construction</button>
+   <button data-lay="muscle" aria-pressed="false">Muscles</button>
+   <button data-lay="bone" aria-pressed="false">Bones that show</button>
+  </div>
+  <div class="card svgbox" id="sheet"></div>
+  <p class="muted">A faceless figure-drawing mannequin in a fitted base layer. Construction shows Bridgman's masses (ribcage egg, pelvis bowl), the joints and the plumb line. Muscles is a simplified écorché: the groups that change the silhouette.</p>
+ </section>
+
+ <section>
+  <h2>Eight rules worth more than the rest</h2>
+  <div class="grid">
+   <div class="card rule"><span class="n">7½</span><b>Heads tall, for a real adult</b><span class="muted">8 is Loomis's ideal, 8½ to 8¾ is the comic hero. A woman is about 93% of a man's height, at about the same head count.</span></div>
+   <div class="card rule"><span class="n">½</span><b>The middle is the crotch</b><span class="muted">Half the height falls at the pubic bone. Head and torso take 4 heads; legs take the rest.</span></div>
+   <div class="card rule"><span class="n">1-2-3</span><b>Chin, chest, navel, crotch</b><span class="muted">One head apart each, counting down from the chin: chest line, navel, crotch.</span></div>
+   <div class="card rule"><span class="n">2 : 1½</span><b>Shoulders and hips</b><span class="muted">Man: shoulders 2 heads, hips about 1½ (1.15 to 1.4 to 1). Woman: shoulders 1¾, hips 1⅔, nearly equal.</span></div>
+   <div class="card rule"><span class="n">E·W·F</span><b>Elbow, wrist, fingertips</b><span class="muted">Arms hanging: elbow at the waist, wrist at the crotch, fingertips at mid-thigh. Arm span equals height.</span></div>
+   <div class="card rule"><span class="n">K</span><b>The knee is halfway down</b><span class="muted">Bottom of the kneecap sits halfway between the front hip point and the floor (Richer).</span></div>
+   <div class="card rule"><span class="n">|</span><b>One plumb line</b><span class="muted">Standing at rest, ear, shoulder, hip joint and the front of the ankle stack on one vertical. Off it, the figure falls.</span></div>
+   <div class="card rule"><span class="n">⇄</span><b>Masses tilt against each other</b><span class="muted">Ribcage and pelvis are rigid; the waist bends. When the hips tilt one way the shoulders tilt the other (contrapposto).</span></div>
+  </div>
+ </section>
+
+ <section class="sheet">
+  <h2>Body types</h2>
+  <p class="muted">Same skeleton, different covering. Landmark heights barely move between average, skinny and heavy; only widths and depths change. Heroic is the one stylisation: longer legs and a smaller head.</p>
+  <div class="card svgbox lineup" id="lineup"></div>
+  <div class="grid">
+   <div class="card rule"><b>Average</b><span class="muted">Richer's man (7½ heads) and woman (7.4). Use this unless a character asks for something else.</span></div>
+   <div class="card rule"><b>Heroic</b><span class="muted">8½ heads (man), 8.2 (woman). Shoulders 2⅓ heads on a man, narrow waist, extra length in the legs. Muscle grows, joints and hands stay true.</span></div>
+   <div class="card rule"><b>Skinny</b><span class="muted">Less on the same frame: joints look big, collarbones, ribs and hip points show. Never shorten the limbs.</span></div>
+   <div class="card rule"><b>Heavy</b><span class="muted">More soft mass on the same frame. Men carry it on the belly in front; women on hips, thighs and seat. Head, hands, wrists and ankles stay their size.</span></div>
+  </div>
+  <p class="muted">Kids and elders come in a later installment, as their own ranges.</p>
+ </section>
+
+ <section class="two">
+  <div class="card svgbox" id="toy" style="max-width:520px"></div>
+  <div>
+   <h2>Our toy style</h2>
+   <p>Abbie's World figures stay anatomically true. We push readability, not anatomy: a figure seen small on a phone needs a slightly bigger head, hands and feet, and clear planes.</p>
+   <h3 style="margin-top:14px">Exaggerate</h3>
+   <ul class="tight">
+    <li>Head about 3% bigger: 7¼ heads instead of 7½.</li>
+    <li>Hands and feet 10% bigger, so gestures and steps read.</li>
+    <li>The planes where bone is near the surface: collarbone, elbow, kneecap, shin, ankle, the hip points. On paper models these are the folds.</li>
+    <li>The silhouette turns: shoulder to waist to hip, the calf curve, the S of the spine from the side.</li>
+    <li>Gesture: the tilt of the masses, and weight on one leg.</li>
+   </ul>
+   <h3 style="margin-top:14px">Keep true</h3>
+   <ul class="tight">
+    <li>Every landmark height, measured against the height of the figure.</li>
+    <li>Limb segment lengths: the elbow, wrist and knee where the canon puts them.</li>
+    <li>Shoulder-to-hip ratios inside the real range for each sex.</li>
+    <li>Bust, waist and hips inside real adult ranges. No anime or fantasy shapes.</li>
+    <li>Where fat goes, by sex. Joints never get fat.</li>
+   </ul>
+  </div>
+ </section>
+
+ <section>
+  <h2>Head and hand</h2>
+  <p class="muted">The two places modelers go wrong first. Placement marks only: the head shows where features go, never a face.</p>
+  <div class="card svgbox" id="head" style="margin-top:12px"></div>
+  <div class="two" style="margin-top:12px">
+   <div class="card svgbox" id="hand"></div>
+   <div>
+    <h3>Head (Loomis)</h3><ul class="tight"><li>The face is three equal parts: hairline to brow, brow to nose, nose to chin (Loomis).</li><li>The eyes sit halfway down the head, not two thirds up; the head is five eyes wide.</li><li>The space between the eyes is one eye; the nose is about as wide as that space.</li><li>The mouth is a third of the way from the nose to the chin; its corners line up under the pupils.</li><li>The ear runs from the brow to the nose, behind the middle of the head in profile; the jaw angle sits under its front edge.</li><li>Men: heavier brow ridge, wider square jaw, bigger nose. Women: smoother brow, narrower jaw, rounder chin, more upright forehead.</li></ul>
+    <h3 style="margin-top:14px">Hand (Bridgman, Richer)</h3><ul class="tight"><li>The palm and the middle finger are about the same length; the whole hand is about the face, chin to hairline.</li><li>Each finger bone is about 0.6 to 0.7 of the one before it (Bridgman: segments grow by definite proportions).</li><li>The knuckles form an arc, highest at the middle finger; the little finger's knuckle sits lowest.</li><li>The index tip reaches the middle of the middle finger's last segment; the little finger's tip reaches the ring finger's last joint.</li><li>The thumb's tip reaches the index finger's base knuckle when the hand is relaxed; the thumb dominates the hand (Bridgman).</li><li>On a woman the hand is narrower and the fingers taper more; the proportions along the fingers are the same.</li></ul>
+   </div>
+  </div>
+ </section>
+
+ <section id="drawing">
+  <h2>Drawing the figure</h2>
+  <p class="muted">How the books build a body: gesture first, then simple forms on the canon's landmarks, then the contour, then detail. Modelers build the same way: primitives first, then the surface over them.</p>
+  <div class="card svgbox" id="build" style="margin-top:12px"></div>
+  <div class="two" style="margin-top:12px">
+   <div class="card svgbox" id="gesture"></div>
+   <div>
+    <h3>Gesture first</h3><ul class="tight"><li>One line of action runs from the head to the weight-bearing foot: a C or an S (Loomis).</li><li>Shoulders and hips tilt opposite ways; the standing ankle sits under the pit of the neck.</li><li>Ribcage and pelvis are rigid boxes; the waist between them bends and twists (Bridgman).</li><li>Exaggerate the gesture, never the joints (Marvel Way).</li></ul>
+    <h3 style="margin-top:14px">Proportion systems</h3><ul class="tight" id="systems"></ul>
+   </div>
+  </div>
+  <h3 style="margin-top:22px">Clean arms and legs</h3>
+  <div class="card svgbox" id="limbs" style="margin-top:8px"></div>
+  <div class="grid" style="margin-top:12px" id="limbrules"></div>
+  <div class="card svgbox" id="sections" style="margin-top:12px"></div>
+  <div class="card svgbox" id="foreshorten" style="margin-top:12px;max-width:640px"></div>
+  <details class="card" style="margin-top:12px;padding:12px 16px"><summary><b>The 17 construction steps</b> <span class="muted">which form goes between which landmarks, and how many planes</span></summary><ol class="tight" id="steps" style="padding-left:22px"></ol></details>
+  <div class="card rule" style="margin-top:12px"><b>Midjourney, for arms and legs</b><span class="muted">Add: <span id="mj-add"></span></span><span class="muted"><code>--no</code> <span id="mj-no"></span></span></div>
+  <p class="muted" style="margin-top:10px">Evan's easy-drawing superhero guides go contour first (head, neck, shoulders, arms in overlapping curves, torso, legs, then the costume). We keep their order of parts and their overlaps, but block the forms first, so the same drawing works as a 3D model. Data: <code>docs/oracle/bodies/construction.json</code>, write-up <code>DRAWING.md</code>.</p>
+ </section>
+
+ <section>
+  <h2>Our paper bodies, scored</h2>
+  <p class="muted">The scorer measured the ten paper bodies the Roman kit dresses. They all come out at 8 heads, so heads look too small for the toy rule. Two misses repeat on every body: the knees sit about a quarter of a head too low (the shins are short), and the fingertips stop about a third of a head too high (the arms are short).</p>
+  <div class="two" style="margin-top:12px">
+   <figure class="card" style="margin:0"><model-viewer src="3d/male-average.glb" alt="Paper man, average" camera-controls auto-rotate auto-rotate-delay="1500" camera-orbit="20deg 82deg auto" shadow-intensity="0.8" exposure="0.9" touch-action="pan-y" interaction-prompt="none"></model-viewer><figcaption>Paper man, average: drag to turn</figcaption></figure>
+   <figure class="card" style="margin:0"><model-viewer src="3d/female-average.glb" alt="Paper woman, average" camera-controls auto-rotate auto-rotate-delay="1500" camera-orbit="20deg 82deg auto" shadow-intensity="0.8" exposure="0.9" touch-action="pan-y" interaction-prompt="none"></model-viewer><figcaption>Paper woman, average</figcaption></figure>
+  </div>
+  <div class="card tablebox" style="margin-top:12px"><table id="scores"><thead><tr><th>Body</th><th>Heads</th><th>Score</th><th>Knee</th><th>Fingertips</th><th>Shoulder : hip</th><th>Other misses</th></tr></thead><tbody></tbody></table></div>
+  <p class="muted" style="margin-top:8px">Heroic bodies score low on purpose: they are bulked-up average bodies, not heroic proportions (no longer legs, no smaller head).</p>
+  <p class="muted" style="margin-top:4px">Rebuilt figures join the table as they land. Heroic woman 2 (rebuilt part by part): every height landmark within tolerance, knees and arms fixed; the misses are the pick's own styling (7.3 heads, a narrower frame).</p>
+ </section>
+
+ <section>
+  <h2>The checklist a modeler scores against</h2>
+  <ol class="check card">
+   <li><b>Head count</b>7¼ heads for toy average (real 7½, heroic 8½). Measure crown to chin, divide the height.</li>
+   <li><b>The middle</b>Half the height at the crotch, within a sixth of a head.</li>
+   <li><b>Torso stack</b>Chin, chest line, navel, crotch about one head apart.</li>
+   <li><b>Arms</b>Elbow at the waist, wrist at the crotch, fingertips at mid-thigh, arm span equal to height.</li>
+   <li><b>Knee</b>Halfway between the front hip point and the floor.</li>
+   <li><b>Widths</b>Shoulders, chest, waist and hips within 12% of the canon for the build; shoulder-to-hip ratio in the range for the sex.</li>
+   <li><b>Side view</b>The S of the spine, chest ahead of the belly (unless heavy), seat behind, calf behind the shin, ear over the ankle.</li>
+   <li><b>Bones that show</b>Collarbone, elbow, hip points, kneecap, shin and both ankle bones are hard planes, the inner ankle higher than the outer.</li>
+   <li><b>Fat and muscle</b>Mass goes where the build and sex put it; joints, hands and head stay their size.</li>
+   <li><b>PG</b>Base layer always on: briefs, and a fitted top on women. No nudity in any model, image or prompt.</li>
+  </ol>
+  <p class="muted" style="margin-top:8px">Checks 1 to 6 are automatic: <code>python tools/bodies/score_body.py body.json</code> scores a paper-body file or a plain list of landmark heights and widths.</p>
+ </section>
+
+ <section>
+  <h2>Sources</h2>
+  <div class="src card" style="padding:14px 16px">
+   <div><b>Anatomy (5).</b> <span>Gray, Anatomy of the Human Body (1918, public domain). Bridgman, Constructive Anatomy (1920, public domain, archive.org). Duval, Artistic Anatomy (1884, public domain, Project Gutenberg). Richer, Artistic Anatomy and his canon of proportions (1890, via Proko's average-figure lesson). Thomson, A Handbook of Anatomy for Art Students (1896, public domain).</span></div>
+   <div><b>Drawing the figure (2).</b> <span>Loomis, Figure Drawing for All It's Worth (1943; publisher edition and Proko's idealistic-figure lesson, not reproduced). Vanderpoel, The Human Figure (1907, public domain).</span></div>
+   <div><b>Comics (1).</b> <span>Lee and Buscema, How to Draw Comics the Marvel Way (1978; publisher edition and published summaries, not reproduced). Its heroic figure feeds installment 2.</span></div>
+   <div><span>Measured averages: Wikipedia, Body proportions (shoulder-to-hip ratios 1.18 for men, 1.03 for women).</span></div>
+  </div>
+ </section>
+
+ <section>
+  <h2>Next installments</h2>
+  <p class="muted">2 heroic humans (the Marvel Way hero, gesture and action), 3 bipedal aliens, 4 weird aliens, 5 animals: land animals first, then a few birds, fish and whales. Each one the same shape: a sheet, ranges, toy rules and a checklist.</p>
+ </section>
+</div>
+<script>
+const state={sex:'male',lays:new Set(['landmarks'])};const box=document.getElementById('sheet');const cache={};
+async function svgText(n){return cache[n]??=await (await fetch('img/'+n+'.svg')).text()}
+function applyLays(svg){if(!svg)return;for(const k of['landmarks','construct','muscle','bone'])svg.classList.toggle('show-'+k,state.lays.has(k))}
+async function draw(){box.innerHTML=await svgText('sheet-'+state.sex);applyLays(box.querySelector('svg'))}
+document.getElementById('bar').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.sex){state.sex=b.dataset.sex;for(const x of document.querySelectorAll('[data-sex]'))x.setAttribute('aria-pressed',x===b);draw();}
+ else{const k=b.dataset.lay;state.lays.has(k)?state.lays.delete(k):state.lays.add(k);b.setAttribute('aria-pressed',state.lays.has(k));applyLays(box.querySelector('svg'));}});
+draw();
+(async()=>{const c=await (await fetch('construction.json')).json();
+ document.getElementById('steps').innerHTML=c.steps.map(s=>`<li><b>${s.name}</b>: ${s.form}${s.from?` (${s.from} to ${s.to})`:s.at?` (at the ${s.at})`:''}${s.section?.planes?`, ${s.section.planes} planes`:''}. <span class="muted">${s.rule}</span></li>`).join('');
+ document.getElementById('limbrules').innerHTML=c.limb_rules.map(r=>`<div class="card rule"><span class="muted">${r}</span></div>`).join('');
+ document.getElementById('systems').innerHTML=c.proportion_systems.map(p=>`<li><b>${p.heads} heads</b>, ${p.name}: ${p.use}</li>`).join('');
+ document.getElementById('mj-add').textContent=c.midjourney.add;document.getElementById('mj-no').textContent=c.midjourney.no;})();
+(async()=>{for(const id of['build','gesture','limbs','sections','foreshorten']){const el=document.getElementById(id);el.innerHTML=await svgText(id)}})();
+(async()=>{for(const id of['lineup','toy','head','hand']){const el=document.getElementById(id);el.innerHTML=await svgText(id);el.querySelector('svg')?.classList.remove('show-landmarks')}
+ const d=await (await fetch('scores.json')).json();const tb=document.querySelector('#scores tbody');
+ const get=(b,k)=>b.checks.find(c=>c.check===k);const cell=c=>c?`<td class="${c.ok?'ok':'bad'}">${c.off_heads!=null?(c.off_heads>0?'+':'')+c.off_heads+' head':c.got}</td>`:'<td></td>';
+ for(const b of d.bodies){const other=b.misses.filter(m=>!['heads tall','knee height','fingertip height','shoulder to hip'].includes(m));
+  tb.insertAdjacentHTML('beforeend',`<tr><td>${b.name.replace('-',', ')}</td><td class="${get(b,'heads tall').ok?'ok':'bad'}">${b.heads}</td><td class="s">${b.score}%</td>${cell(get(b,'knee height'))}${cell(get(b,'fingertip height'))}${cell(get(b,'shoulder to hip'))}<td class="muted">${other.join(', ')||'none'}</td></tr>`)}})();
+</script>
+</body>
+</html>

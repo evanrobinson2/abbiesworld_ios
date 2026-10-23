@@ -1,0 +1,68 @@
+{
+  "appid": 790850,
+  "name": "Undead Horde",
+  "store_url": "https://store.steampowered.com/app/790850/",
+  "genres": [
+    "Action",
+    "Strategy"
+  ],
+  "short_description": "Raise an army of undead as a necromancer.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Strategy"
+  ],
+  "summary": "Raise an army of undead as a necromancer.",
+  "identity": {
+    "core_loop": "Raise followers, conquer.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Mostly world.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Cartoon.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A growing crowd of followers is a fun fantasy; theme not for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.44,
+      "expression": 0.56,
+      "structure": 0.33,
+      "social": 0.44,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.22
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

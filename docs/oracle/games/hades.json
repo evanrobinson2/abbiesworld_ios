@@ -1,0 +1,69 @@
+{
+  "appid": 1145360,
+  "name": "Hades",
+  "store_url": "https://store.steampowered.com/app/1145360/",
+  "genres": [
+    "Action",
+    "Roguelite"
+  ],
+  "short_description": "Escape the underworld room by room as the son of Hades, dying and returning with the story moving forward each time.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Roguelite"
+  ],
+  "summary": "Escape the underworld room by room as the son of Hades, dying and returning with the story moving forward each time.",
+  "identity": {
+    "core_loop": "Fight a room, pick a god's boon, push deeper, die, return home, talk, upgrade, try again.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fast, generous, beautifully reactive; failure moves the story on.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Doors show the reward behind them; enemy wind-ups are readable shapes; characters comment on what just happened. Moderate HUD.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Painted comic-book underworld.",
+    "palette": null,
+    "audio_mood": "Rock-mythic score, deep voice work for every character.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Make failure part of the story: every return home has new talk. Characters remember what the player did."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.67,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.78,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

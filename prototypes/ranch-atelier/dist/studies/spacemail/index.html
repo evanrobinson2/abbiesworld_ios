@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-aw-skin="look study">
+<head>
+<meta charset="utf-8"><script src="/theme/boot.js?v=1"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0012 - Space Mail Mini Game</title>
+<meta name="description" content="A low-gravity romp on the Moon: collect the happy letters people send home, grab power-ups, score points, and get a trophy and a photo at the end.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the dusk family of the Oracle studies. Play first, then four pictures, then short sections that each lead with
+   a picture or a diagram. Single committed dark look so the Moon reads true. */
+:root{--dusk:#171b31;--deep:#0f1224;--lift:#232946;--ink:#f3ead8;--muted:#aab0cb;--sun:#f2be54;--teal:#00ffd1;--rose:#f08c74;--leaf:#8fcf7a;
+ --rule:rgba(243,234,216,.14);--display:"Fredoka","Trebuchet MS",sans-serif;--body:"Nunito","Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--dusk);background-image:radial-gradient(ellipse at 50% -20%,rgba(242,190,84,.12),transparent 55%);color:var(--ink);font:17px/1.6 var(--body);
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px}
+.wrap{max-width:1100px;margin:0 auto;display:grid;gap:64px}
+.read{max-width:66ch}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.6rem)}h2{font-size:clamp(1.45rem,3.2vw,2rem)}h3{font-size:1.12rem}
+p{margin:0}
+.eyebrow{font:500 .78rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--sun)}
+.muted{color:var(--muted)}
+header{padding-top:48px;display:grid;gap:14px}
+section{display:grid;gap:20px}
+.stage{position:relative;border-radius:22px;overflow:hidden;background:var(--deep);aspect-ratio:16/9;box-shadow:0 30px 60px -30px rgba(0,0,0,.7),inset 0 0 0 1px var(--rule)}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.stage .open{position:absolute;right:12px;bottom:12px;font:600 .95rem var(--display);color:var(--deep);background:var(--sun);border-radius:999px;padding:8px 16px;text-decoration:none}
+@media (max-width:700px){.stage{aspect-ratio:3/4}}
+.controls{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.95rem;color:var(--muted)}
+.controls b{color:var(--ink);font-family:var(--display);font-weight:600}
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+figure{margin:0;display:grid;gap:8px;align-content:start;min-width:0}
+figure img{width:100%;display:block;border-radius:14px;box-shadow:inset 0 0 0 1px var(--rule)}
+figcaption{font-size:.92rem;color:var(--muted)}
+figcaption b{color:var(--ink);font-family:var(--display);font-weight:600;display:block;font-size:1.02rem}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:center}
+@media (max-width:800px){.two{grid-template-columns:1fr}}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--rule);border-radius:18px;padding:16px 18px;display:grid;gap:8px;align-content:start}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 .74rem/1 var(--mono);padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.07);color:var(--muted)}
+.chip.own{background:rgba(143,207,122,.16);color:var(--leaf)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 .74rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.scroll{overflow-x:auto}
+.ico{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.08);vertical-align:middle;margin-right:8px}
+svg text{font-family:var(--body)}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+code{font:.86em var(--mono);background:rgba(255,255,255,.06);padding:1px 6px;border-radius:5px}
+.note{border-left:3px solid var(--sun);padding:4px 0 4px 14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="eyebrow">AW-STUDY-0012 · Oracle study · 2026-10-23</div>
+ <h1>Space Mail</h1>
+ <p class="read" style="font-size:1.15rem">A free-spirited romp on the Moon. People write letters home; you bound around in low gravity picking them up, grab power-ups, hop them into the ferry for points, and at the end the colonists give your ship a trophy and you get the photo.</p>
+</header>
+
+<section aria-label="Play the sketch">
+ <div class="stage" id="stage"><img src="img/board.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <button id="playBtn" aria-label="Play the sketch" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;border:1px solid rgba(255,255,255,.5);cursor:pointer;background:radial-gradient(circle at 35% 30%,#fff2c2,#ffc94a 55%,#d58a12);box-shadow:0 14px 34px -10px #000,inset 0 2px 0 #fff8"><svg width="34" height="34" viewBox="0 0 26 26"><path d="M8 4l14 9-14 9z" fill="#5a3500"/></svg></button>
+  <a class="open" href="play.html" target="_blank" rel="noopener">Full screen</a></div>
+ <div class="controls">
+  <span><b>Gamepad</b> left stick run · A hop (hold to float) · X or RT jet puff · Y where next · B back</span>
+  <span><b>Touch</b> drag anywhere to run · big button hop · small button puff · tap the satchel for where next</span>
+  <span><b>Keys</b> WASD · Space · Shift · E</span>
+ </div>
+ <p class="muted read">Built from the real Moon tile kit (the ferry, pad, dome, habitats, astronauts, buggy, meteorite). Tap the glowing cell by the ferry to get the card. A sketch to feel the idea, not the build.</p>
+</section>
+
+<section aria-label="The four beats">
+ <div class="strip">
+  <figure><img src="img/board.jpg" alt="The Moon tile from above; thin gold lights rise around the ferry's cell"><figcaption><b>1. A cell lights up</b>Thin LEDs rise straight up around the cell's edge: a mission is here. The mailbox flags are up too.</figcaption></figure>
+  <figure><img src="img/card.jpg" alt="The Happy Letters card over the Moon tile"><figcaption><b>2. The card</b>"Happy Letters" with the ferry as it looks in the game. Play dives you into Abbie.</figcaption></figure>
+  <figure><img src="img/play.jpg" alt="Abbie mid-hop near a colonist holding up a glowing letter"><figcaption><b>3. The romp</b>Hop to the glowing letters, grab power-ups, hop the bag into the ferry. The glass satchel is the whole HUD.</figcaption></figure>
+  <figure><img src="img/reward.jpg" alt="Colonists and Abbie at the ferry with a gold trophy; a polaroid and badge card"><figcaption><b>4. The reward shot</b>The colonists gather and give the ship a trophy. One posed photo goes into your album, with your badge and stats.</figcaption></figure>
+ </div>
+</section>
+
+<section aria-label="The loop">
+ <h2>One round, in one picture</h2>
+ <svg viewBox="0 0 1000 250" role="img" aria-label="Loop: cell lights, card, dive, romp (letters to ferry, parcels to homes, power-ups), horn, trophy and reward shot, badge and album, new cells light" style="width:100%;height:auto">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#aab0cb"/></marker></defs>
+  <g font-size="15" fill="#f3ead8" text-anchor="middle">
+   <g><rect x="10" y="90" width="120" height="70" rx="16" fill="#232946" stroke="#f2be54"/><text x="70" y="121">Cell lights</text><text x="70" y="141" fill="#aab0cb" font-size="13">tap it</text></g>
+   <g><rect x="160" y="90" width="110" height="70" rx="16" fill="#232946" stroke="#f2be54"/><text x="215" y="121">Card</text><text x="215" y="141" fill="#aab0cb" font-size="13">play</text></g>
+   <g><rect x="300" y="90" width="110" height="70" rx="16" fill="#232946" stroke="#f2be54"/><text x="355" y="121">Dive</text><text x="355" y="141" fill="#aab0cb" font-size="13">1.3 s, no cut</text></g>
+   <g><rect x="440" y="20" width="230" height="210" rx="22" fill="#1d2240" stroke="#00ffd1"/><text x="555" y="50" font-size="17">The romp, 2 minutes</text>
+    <text x="555" y="86" fill="#aab0cb" font-size="13">flag up → grab the letter</text><text x="555" y="112" fill="#aab0cb" font-size="13">bag full → hop into the ferry</text>
+    <text x="555" y="138" fill="#aab0cb" font-size="13">ferry gives a parcel → its home</text><text x="555" y="164" fill="#aab0cb" font-size="13">power-ups: boots, magnet, comet, buggy</text>
+    <text x="555" y="198" fill="#f2be54" font-size="13">pad lamps fill → horn</text></g>
+   <g><rect x="700" y="90" width="130" height="70" rx="16" fill="#232946" stroke="#f2be54"/><text x="765" y="121">Trophy</text><text x="765" y="141" fill="#aab0cb" font-size="13">reward shot</text></g>
+   <g><rect x="860" y="90" width="130" height="70" rx="16" fill="#232946" stroke="#f2be54"/><text x="925" y="121">Badge, album</text><text x="925" y="141" fill="#aab0cb" font-size="13">saved to you</text></g>
+  </g>
+  <g stroke="#aab0cb" stroke-width="2" fill="none" marker-end="url(#ar)"><path d="M130 125H158"/><path d="M270 125H298"/><path d="M410 125H438"/><path d="M670 125H698"/><path d="M830 125H858"/><path d="M925 160C925 240 70 240 70 162"/></g>
+  <text x="500" y="246" fill="#aab0cb" font-size="13" text-anchor="middle">new cards light up on other cells</text>
+ </svg>
+</section>
+
+<section aria-label="Identity">
+ <div class="two">
+  <div style="display:grid;gap:14px">
+   <h2>Built on our identity</h2>
+   <p class="read">Every game in the Oracle has a DNA of eight axes, and Abbie's World now has its own identity record on the same axes. Space Mail matches it exactly on challenge, structure, social and chance (gentle, loose, together, fair), and trades building's expression and systems for tempo: it is a romp inside the builder. The closest studied games are Astro Bot, PAW Patrol World, Crazy Taxi and A Short Hike.</p>
+   <p class="read muted">We keep the house rules from <code>GAME_IDENTITY.md</code>: few verbs (four), the world answers every action in under half a second, the interface hides, and nothing is lost. The record is <code>docs/oracle/spacemail/space-mail.identity.json</code> (valid against the schema).</p>
+  </div>
+  <figure><svg id="radar" viewBox="0 0 420 400" role="img" aria-label="Radar chart of eight DNA axes for Space Mail, Abbie's World, Astro Bot and PAW Patrol World" style="width:100%;height:auto"></svg>
+   <figcaption id="legend"></figcaption></figure>
+ </div>
+</section>
+
+<section aria-label="What the Oracle found">
+ <h2>What great delivery and low-gravity games do</h2>
+ <div class="cards">
+  <div class="card"><h3>A delivery is a ten-second goal</h3><p>Pick up, drop off, cheer, repeat. Each fare or letter is a tiny story with an ending, so the loop never drags.</p><div class="chips"><span class="chip">Crazy Taxi</span><span class="chip own">Overcooked! 2</span><span class="chip">A Short Hike</span></div></div>
+  <div class="card"><h3>Low gravity feels like joy when you can float</h3><p>Hold hop to rise higher, puff on landing, a little hover to fix a bad jump. Small hands need the hover.</p><div class="chips"><span class="chip">Mario Galaxy</span><span class="chip">Astro Bot</span></div></div>
+  <div class="card"><h3>Power-ups are more freedom</h3><p>More air, more reach, more speed, or a ride. Never a weapon here. A vehicle is the one kids love most.</p><div class="chips"><span class="chip">A Short Hike</span><span class="chip own">PAW Patrol World</span></div></div>
+  <div class="card"><h3>A full bag is a feeling</h3><p>Carry more and score more, but the ferry is over there. Greed and the trip home make choices without rules.</p><div class="chips"><span class="chip own">Dome Keeper</span><span class="chip">Death Stranding</span></div></div>
+  <div class="card"><h3>The people are the score</h3><p>The ones you helped gather, cheer and give you something. A crowd beats a number.</p><div class="chips"><span class="chip">Astro Bot</span><span class="chip">Death Stranding</span><span class="chip">Animal Crossing</span></div></div>
+  <div class="card"><h3>End on one hero moment you keep</h3><p>A pose, a fanfare, and a picture in an album. A medal ladder says how well it went without words.</p><div class="chips"><span class="chip">Fall Guys</span><span class="chip">Pokémon Snap</span><span class="chip">Trackmania</span></div></div>
+ </div>
+ <p class="muted">Green chips are games in Evan's library. We take ideas (style), never any game's art, characters, music, text or levels (expression). Evidence: <code>docs/oracle/spacemail/spacemail-signatures.json</code>.</p>
+</section>
+
+<section aria-label="The design">
+ <h2>The game</h2>
+ <div class="scroll"><table>
+  <tr><th>Part</th><th>What it is</th><th>How you know (no words)</th></tr>
+  <tr><td><span class="ico"><svg width="20" height="16" viewBox="0 0 26 20"><rect x="1" y="2" width="24" height="16" rx="2" fill="#fff4dc"/><path d="M13 15c-3-3-6-1-4 1l4 3 4-3c2-2-1-4-4-1z" fill="#ff5f6d"/></svg></span>Happy letters</td><td>Colonists write home every few seconds. Some letters float away upward: catch them with a big hop.</td><td>The mailbox flag goes up, the sender hops and faces you, the envelope glows over their head (in the world).</td></tr>
+  <tr><td><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 6h16v12H4z" fill="#6bd3ff"/><path d="M4 10h16" stroke="#fff" stroke-width="2"/></svg></span>Parcels from Earth</td><td>Every bag you post, the ferry hands back a parcel for one home.</td><td>The parcel wears that home's colour, the same as its flag, door light and the colonist's suit trim.</td></tr>
+  <tr><td><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="#9be86b"/></svg></span>Power-ups</td><td>Moon boots (double hop), letter magnet (reach 7 m), comet (fast), the buggy (ride for 12 s).</td><td>A shape and a colour each; while active, a ring of that colour glows round the satchel and drains.</td></tr>
+  <tr><td><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 3h12v5a6 6 0 0 1-12 0z" fill="#ffd36b"/><path d="M10 14h4v4h3v3H7v-3h3z" fill="#e0a92e"/></svg></span>Points</td><td>10 a letter, bigger bags pay more (x1.25 each extra), 1.5x if you post it mid-hop; 15 a parcel.</td><td>A "+" stamp pops over the ferry or the home, with a rising chime in D major (Music Bible).</td></tr>
+  <tr><td><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#ffb84d" stroke-width="3" stroke-dasharray="4 3"/></svg></span>The clock</td><td>Two minutes. No fail: letters left over just go next time.</td><td>Twelve lamps round the ferry pad light one by one, then the horn. Everyone in the world can see it.</td></tr>
+  <tr><td><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 3l6 9h-4v9h-4v-9H6z" fill="#ffd36b"/></svg></span>Where next?</td><td>Y, or tap the satchel.</td><td>A short gold arrow on the ground under Abbie points at the next useful thing, for the player only.</td></tr>
+ </table></div>
+ <p class="note read">The play HUD is one glass satchel (about 3% of a phone screen, zero words): six slots, the score, and the power-up ring. Everything else is in the world. The mission light and the "where next" arrow are presentation layer: drawn for the player, invisible to colonists, the simulation and Suzy.</p>
+</section>
+
+<section aria-label="Controls">
+ <div class="two">
+  <svg viewBox="0 0 490 260" role="img" aria-label="Gamepad map" style="width:100%;height:auto">
+   <path d="M90 70h260c50 0 80 50 80 110 0 40-20 60-45 60-30 0-40-40-70-40H125c-30 0-40 40-70 40-25 0-45-20-45-60 0-60 30-110 80-110z" fill="#232946" stroke="#aab0cb"/>
+   <circle cx="130" cy="140" r="26" fill="#1a1f38" stroke="#f2be54" stroke-width="2"/><text x="130" y="96" text-anchor="middle" fill="#f3ead8" font-size="13">run</text>
+   <circle cx="275" cy="190" r="22" fill="#1a1f38" stroke="#aab0cb"/><text x="275" y="232" text-anchor="middle" fill="#aab0cb" font-size="12">nudge camera</text>
+   <g font-size="13" font-weight="700" text-anchor="middle"><circle cx="340" cy="160" r="15" fill="#5cbf6a"/><text x="340" y="165" fill="#0f1224">A</text>
+    <circle cx="370" cy="130" r="15" fill="#e2635a"/><text x="370" y="135" fill="#0f1224">B</text>
+    <circle cx="310" cy="130" r="15" fill="#4f8fe8"/><text x="310" y="135" fill="#0f1224">X</text>
+    <circle cx="340" cy="100" r="15" fill="#f2be54"/><text x="340" y="105" fill="#0f1224">Y</text></g>
+   <g font-size="12" fill="#f3ead8"><text x="365" y="190">hop, hold to float</text><text x="392" y="134">back</text><text x="252" y="122" text-anchor="end">jet puff</text><text x="340" y="80" text-anchor="middle">where next</text>
+    <text x="350" y="52" text-anchor="middle">RT jet puff</text><text x="90" y="52" text-anchor="middle">D-pad runs too</text></g>
+  </svg>
+  <div style="display:grid;gap:12px">
+   <h2>Gamepad first, touch too</h2>
+   <p class="read">The sketch reads any standard gamepad in the browser (the Gamepad API) and shows a small controller mark when one is connected. On the board the left stick picks a lit cell and A opens its card. Touch puts a glass stick wherever your thumb lands and two round glass buttons on the right; nothing is drawn until you touch.</p>
+   <p class="read muted">The camera is a high follow camera that keeps its heading, so "up on the stick" always means "up the screen" for small players. The right stick nudges it. The over-the-shoulder study (AW-STUDY-0011) owns the closer view.</p>
+  </div>
+ </div>
+</section>
+
+<section aria-label="Reward and records">
+ <div class="two">
+  <figure><img src="img/reward.jpg" alt="The reward shot: colonists, Abbie and the trophy at the ferry"></figure>
+  <div style="display:grid;gap:12px">
+   <h2>The reward shot, the album, the badge</h2>
+   <ul>
+    <li><b>Reward shot</b> is a kind of in-game shot: gather the mission's givers, place the trophy, pose the player, frame with a fixed recipe, and render once at print size. The sketch re-renders the scene at 1600x1000 with a bigger shadow map and a warm key light. The build swaps in a progressive path-traced render (three-gpu-pathtracer, a few seconds on a phone while the polaroid develops), so it really is the "ultimate" shot.</li>
+    <li><b>Album</b>: every reward shot goes into the player's photo album (camera button, top right). Other missions add theirs: the Moon Rock Hunt, a garden, a race.</li>
+    <li><b>Badge</b> uses the house ladder Seed, Sprout, Bloom, Harvest, Sun, the same as card rarity, so one ladder means "how special" everywhere.</li>
+    <li><b>Stats</b>: letters, parcels, best bag, biggest hop, power-ups, points.</li>
+   </ul>
+  </div>
+ </div>
+ <div class="card"><h3>Saved per player</h3><p>The sketch keeps records in this browser. The build stores them on the player's sign-in (the same account and Blob ledger as the AI wallet): a small record per player (plays, best, badges, stats) and the album photos as JPEGs. Nothing else is collected, as Evan asked for accounts.</p></div>
+</section>
+
+<section aria-label="Missions on the board">
+ <h2>Missions live on cells</h2>
+ <div class="two">
+  <figure><img src="img/board.jpg" alt="Two mission cells lit on the Moon tile: gold at the ferry, teal at the meteorite crater"><figcaption>Gold at the ferry (Happy Letters), teal at the meteorite crater (Moon Rock Hunt, a scavenger hunt, card only in the sketch).</figcaption></figure>
+  <div style="display:grid;gap:12px">
+   <p class="read">People and decorations give missions. In the world, the giver shows it (a flag up, a wave, a blinking dish). On the board, the cell gets a thin LED light rising straight up round its edge, in the mission's colour. Tap the cell (or select it with the stick and press A) and its card flips up.</p>
+   <p class="read">Mission cards are the same Card Forge cards as the hand, with their own tier gem. Sandbox v2 owns card tiers, so the mission light, the card and this HUD are shared with that thread to fit its tiers.</p>
+   <p class="read muted">Other scenarios on the same engine: Moon Rock Hunt (find five glowing rocks around the crater), and Evan's idea of a night-shift version as an overhead twin-stick game. That one is noted as an idea, not designed here.</p>
+  </div>
+ </div>
+</section>
+
+<section aria-label="To build">
+ <h2>To build it for real</h2>
+ <div class="cards">
+  <div class="card"><h3>1. Mission runtime</h3><p>A mission = giver, cell, card, rules, reward recipe. Space Mail is the first. Runs inside the Moon tile, not a separate page.</p></div>
+  <div class="card"><h3>2. Player body</h3><p>Abbie as the skinned player from AW-STUDY-0011 option C (run, hop, land, wave), with the satchel on her back.</p></div>
+  <div class="card"><h3>3. Reward shot</h3><p>Shot recipe + path-traced render + album store on the player's account.</p></div>
+  <div class="card"><h3>4. Mission light</h3><p>One shared presentation-layer effect for every place; Ranch in wood and bells, Moon in light.</p></div>
+ </div>
+</section>
+</div>
+<script>
+document.getElementById('playBtn').onclick=()=>{const f=document.createElement('iframe');f.src='play.html';f.title='Space Mail playable sketch';f.allow='gamepad; autoplay';const st=document.getElementById('stage');st.querySelector('img').remove();document.getElementById('playBtn').remove();st.prepend(f);f.focus();};
+// Radar from docs/oracle/spacemail/spacemail-signatures.json (copied here so the page stands alone).
+const AX=['tempo','challenge','expression','structure','social','systems','chance','session'];
+const S=[
+ ['Space Mail',{tempo:.67,challenge:.22,expression:.44,structure:.33,social:.44,systems:.33,chance:.33,session:.22},'#f2be54',3],
+ ["Abbie's World (identity record)",{tempo:.33,challenge:.22,expression:.89,structure:.33,social:.44,systems:.67,chance:.33,session:.44},'#8fcf7a',2],
+ ['Astro Bot (est.)',{tempo:.7,challenge:.35,expression:.3,structure:.55,social:.3,systems:.45,chance:.15,session:.25},'#00ffd1',1.5],
+ ['PAW Patrol World',{tempo:.33,challenge:.22,expression:.33,structure:.22,social:.33,systems:.22,chance:.33,session:.11},'#f08c74',1.5],
+];
+const svg=document.getElementById('radar'),cx=210,cy=200,r=150,ns='http://www.w3.org/2000/svg';
+const el=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;};
+const pt=(i,v)=>{const a=-Math.PI/2+i/AX.length*Math.PI*2;return [cx+Math.cos(a)*r*v,cy+Math.sin(a)*r*v];};
+for(const v of [.25,.5,.75,1])el('polygon',{points:AX.map((_,i)=>pt(i,v).join(',')).join(' '),fill:'none',stroke:'rgba(243,234,216,.14)'});
+AX.forEach((a,i)=>{const [x,y]=pt(i,1);el('line',{x1:cx,y1:cy,x2:x,y2:y,stroke:'rgba(243,234,216,.1)'});const [tx,ty]=pt(i,1.14);const t=el('text',{x:tx,y:ty+4,'text-anchor':'middle',fill:'#aab0cb','font-size':13});t.textContent=a;});
+for(const [n,d,c,w] of S.slice().reverse())el('polygon',{points:AX.map((a,i)=>pt(i,d[a]).join(',')).join(' '),fill:c,'fill-opacity':w>2?.18:.04,stroke:c,'stroke-width':w});
+document.getElementById('legend').innerHTML=S.map(([n,,c])=>`<span style="display:inline-flex;align-items:center;gap:6px;margin-right:14px"><i style="width:14px;height:4px;border-radius:2px;background:${c};display:inline-block"></i>${n}</span>`).join('');
+</script>
+</body>
+</html>

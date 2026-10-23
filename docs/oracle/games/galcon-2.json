@@ -1,0 +1,68 @@
+{
+  "appid": 294160,
+  "name": "Galcon 2",
+  "store_url": "https://store.steampowered.com/app/294160/",
+  "genres": [
+    "Strategy",
+    "Arcade"
+  ],
+  "short_description": "Send fleets between planets in minutes.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Arcade"
+  ],
+  "summary": "Send fleets between planets in minutes.",
+  "identity": {
+    "core_loop": "Tap planets, send ships, win.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fast.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Numbers on planets.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Minimal.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Numbers on the things; quick sessions."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.44,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.67,
+      "systems": 0.44,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

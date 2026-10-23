@@ -1,0 +1,14 @@
+{
+  "study": "AW-STUDY-0021",
+  "updated": "2026-10-23T06:40Z",
+  "status": "Shell: no runs yet",
+  "camera": "One front camera matched to the reference; every render is scored from it.",
+  "arms": [
+    {"id": "A",  "name": "Six crops",     "how": "Six parallel jobs. Each sees only its crop and models that sixth, then the parts are assembled.", "sees": "crop", "order": "parallel", "status": "queued"},
+    {"id": "B",  "name": "Full view, parallel", "how": "Six parallel jobs. Each sees the whole figure but owns one chunk.", "sees": "full", "order": "parallel", "status": "queued"},
+    {"id": "C",  "name": "Sequential, top down", "how": "One chunk at a time, head to feet. Each job sees the full image and everything built so far.", "sees": "full", "order": ["head", "chest", "armR", "armL", "hips", "legs"], "status": "queued"},
+    {"id": "D1", "name": "Feet up",       "how": "Sequential, starting from the feet so the stance sets the scale.", "sees": "full", "order": ["legs", "hips", "chest", "armR", "armL", "head"], "status": "queued"},
+    {"id": "D2", "name": "Torso out",     "how": "Sequential, starting from the chest so the mass sets everything else.", "sees": "full", "order": ["chest", "hips", "head", "armR", "armL", "legs"], "status": "queued"},
+    {"id": "D3", "name": "Face last",     "how": "Sequential, big masses first, then limbs, with the face and hands as the final detail pass.", "sees": "full", "order": ["chest", "hips", "legs", "armR", "armL", "head"], "status": "queued"}
+  ]
+}

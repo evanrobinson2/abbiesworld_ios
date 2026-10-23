@@ -1,0 +1,70 @@
+{
+  "appid": 211820,
+  "name": "Starbound",
+  "store_url": "https://store.steampowered.com/app/211820/",
+  "genres": [
+    "Sandbox",
+    "Exploration",
+    "Crafting"
+  ],
+  "short_description": "A 2D space sandbox: explore planets, build, craft and quest.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Sandbox",
+    "Exploration",
+    "Crafting"
+  ],
+  "summary": "A 2D space sandbox: explore planets, build, craft and quest.",
+  "identity": {
+    "core_loop": "Explore, mine, build, craft, quest.",
+    "mechanics": null,
+    "ui_and_game_feel": "Huge, charming, sprawling.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Moderate HUD; the world shows most things.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel art.",
+    "palette": null,
+    "audio_mood": "Lovely ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A 2D side-view world can be cosy and vast at once."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.78,
+      "structure": 0.33,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

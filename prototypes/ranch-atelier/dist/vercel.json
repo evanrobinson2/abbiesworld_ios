@@ -1,6 +1,22 @@
 {
   "rewrites": [
     {
+      "source": "/welcome",
+      "destination": "/home/index.html"
+    },
+    {
+      "source": "/support/thanks",
+      "destination": "/home/thanks.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/home/terms.html"
+    },
+    {
+      "source": "/billing",
+      "destination": "/home/billing.html"
+    },
+    {
       "source": "/explore",
       "destination": "/explore/index.html"
     },
@@ -386,17 +402,112 @@
           "value": "no-cache, must-revalidate"
         }
       ]
+    },
+    {
+      "source": "/r2/(.*)\\.(glb|gltf|bin|png|jpg|jpeg|webp|avif|ktx2|mp3|ogg|wav|m4a|mp4|webm)",
+      "headers": [
+        {
+          "key": "x-vercel-enable-rewrite-caching",
+          "value": "1"
+        },
+        {
+          "key": "CDN-Cache-Control",
+          "value": "max-age=86400, stale-while-revalidate=604800"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/r2/(.*)\\.json",
+      "headers": [
+        {
+          "key": "x-vercel-enable-rewrite-caching",
+          "value": "1"
+        },
+        {
+          "key": "CDN-Cache-Control",
+          "value": "max-age=60, stale-while-revalidate=600"
+        }
+      ]
     }
   ],
   "redirects": [
     {
+      "source": "/billing",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/billing",
+      "permanent": false
+    },
+    {
+      "source": "/studies",
+      "destination": "/studies/",
+      "permanent": false
+    },
+    {
+      "source": "/welcome",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/welcome",
+      "permanent": false
+    },
+    {
+      "source": "/terms",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/terms",
+      "permanent": false
+    },
+    {
+      "source": "/support/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/support/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/api/support",
+      "has": [
+        {
+          "type": "host",
+          "value": "abbies.world"
+        }
+      ],
+      "destination": "https://www.abbies.world/api/support",
+      "permanent": false
+    },
+    {
       "source": "/review",
-      "destination": "/review/",
+      "destination": "/studies/",
+      "permanent": false
+    },
+    {
+      "source": "/review/",
+      "destination": "/studies/",
       "permanent": false
     },
     {
       "source": "/inbox",
-      "destination": "/review/",
+      "destination": "/studies/",
       "permanent": false
     },
     {
@@ -434,6 +545,10 @@
         {
           "type": "host",
           "value": "explore.abbies.world"
+        },
+        {
+          "type": "host",
+          "value": "app.abbies.world"
         }
       ]
     },

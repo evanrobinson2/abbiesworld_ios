@@ -1,0 +1,15 @@
+{
+ "iou": 0.87,
+ "camera": {
+  "yaw": 1.0,
+  "pitch": -4.0,
+  "lens": 62.5,
+  "roll": 0.0
+ },
+ "triangles": 3130,
+ "dimensions_m": [
+  0.707,
+  0.215,
+  1.72
+ ]
+}

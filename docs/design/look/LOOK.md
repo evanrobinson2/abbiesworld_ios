@@ -83,3 +83,25 @@ bottom); less padding everywhere.
   The gear switches between them on every page; `?mode=game|app` picks one for a link. Tokens live in look.css.
 - The look page (https://claude.ai/artifact/WcNpa9yNKCy4k3ySrWSPL1) has the same switcher plus a style editor: change any
   colour, Save (your styles) or Save as, delete your styles with a confirm.
+
+## One theme system (Evan, 2026-10-23 05:26Z: "get your themes straight")
+- `dist/theme/boot.js` loads first on every page and writes the chosen style's tokens on `<html>`: the `--aw-*` names for
+  new work, plus the older `--app-*` names; pages that use look.css or study tokens opt in with
+  `<html data-aw-skin="look study">`. Every open page and study frame follows a change at once.
+- `dist/theme/themes.mjs` holds the 20 styles (12 light, 8 dark; flat or toy). `app-style-presets.mjs` serves them to the
+  world, so the ground, sky and timber follow the style. Abbie is the default and leaves the world as it was.
+- `dist/theme/aw.mjs` is the one profile and settings sheet, opened from your avatar: Profile (avatar, name, the Auth0
+  account), Style, Sound, Controls, Accessibility (reduce motion, larger text, more contrast, solid panels,
+  easy-reading letters) and Places. In the game the corner button is the same avatar.
+- `dist/theme/appnav.mjs` is the app's left menu (Studies, Models, Cards, Sounds, Play) that folds to icons.
+
+## Studies and Models layout (Evan, 05:27Z and 05:37Z)
+- Studies: a homepage with Recent, Trending and Most impactful; the list on the left and the details on the right each
+  hide (`[` and `]`) and drag wider, and remember.
+- Models: one screen. A hero bar with the name, the picture and the model side by side sized to the window, the strip
+  under them, and "Your feedback" in a right-side panel that hides. The review inbox page was retired (05:38Z).
+- Pictures are never cropped (Evan, 07:25Z "images should not crop like that"): cards, list thumbnails and the details
+  picture show the whole image (`object-fit: contain` on a neutral backdrop).
+- Studies may overrule the app styling (Evan, 07:25Z): a study page that wants its own look puts `data-aw-own-look` on
+  its `<html>`. It keeps the access settings and the `--aw-*` tokens, but its own palette and letters win over the
+  chosen style. A study page without boot.js keeps its own look too.

@@ -1,0 +1,98 @@
+# Evan's own Suno songs (tools/composer/suno/README.md) -> our CDN. Reads tools/composer/suno/songs.json (ids and
+# metadata only), takes each song's audio from Suno's CDN or, since the CDN refuses private songs outside the browser,
+# from a one-off upload branch `claude/suno-library` (run this workflow by hand after pushing it) (tools/composer/suno/library/, Suno downloads plus .json
+# sidecars, pushed from Evan's PC). It checks each file decodes, stores
+# it in R2 under music/suno/<id>.mp3 (+ .jpeg), with music/suno/catalog.json listing them. The site serves R2 at /r2/.
+# It also attaches the files to the `suno-library` release so cloud sessions (which can't reach R2) can build pages,
+# then deletes the upload branch so the audio doesn't stay in git.
+# Secrets as for model-store: R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET.
+name: suno-store
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/composer/suno/songs.json'
+      - '.github/workflows/suno-store.yml'
+concurrency:
+  group: suno-store-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  store:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Songs from the upload branch
+        id: upload
+        run: |
+          if git fetch -q --depth 1 origin claude/suno-library 2>/dev/null; then
+            git checkout FETCH_HEAD -- tools/composer/suno/library && echo "branch=1" >> "$GITHUB_OUTPUT"
+            ls tools/composer/suno/library | wc -l
+          else echo "No upload branch: Suno's CDN only"; fi
+      - name: Tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Collect the songs
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36'
+          L=tools/composer/suno/library
+          for id in $(jq -r '.songs[].id' tools/composer/suno/songs.json); do
+            ok=
+            if [ -d "$L" ]; then
+              f=$(ls "$L"/*.mp3 2>/dev/null | grep -F "$id" | head -1 || true)
+              if [ -z "$f" ]; then
+                j=$(grep -lF "$id" "$L"/*.json 2>/dev/null | grep -v index.json | head -1 || true)
+                [ -n "$j" ] && f=$(ls "${j%.json}"*.mp3 2>/dev/null | head -1 || true)
+              fi
+              [ -n "$f" ] && cp "$f" "out/$id.mp3" && ok=1 && echo "$id <- $f"
+            fi
+            [ -n "$ok" ] || for u in "https://cdn1.suno.ai/$id.mp3" "https://audiopipe.suno.ai/?item_id=$id"; do
+              code=$(curl -sSL --retry 2 -A "$UA" -e 'https://suno.com/' -o "out/$id.mp3" -w '%{http_code}' "$u" || true)
+              [ "$code" = 200 ] && { ok=1; break; }
+              echo "$id $u -> $code"
+            done
+            [ -n "$ok" ] || { echo "::warning::no audio for $id"; rm -f "out/$id.mp3"; continue; }
+            d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "out/$id.mp3" || echo 0)
+            if ! awk "BEGIN{exit !($d > 5)}"; then echo "::warning::$id does not decode (duration $d)"; rm -f "out/$id.mp3"; continue; fi
+            ffmpeg -v error -i "out/$id.mp3" -t 30 -f null - || { echo "::warning::$id has decode errors"; rm -f "out/$id.mp3"; continue; }
+            curl -fsSL --retry 3 -A "$UA" -e 'https://suno.com/' -o "out/$id.jpeg" "https://cdn2.suno.ai/image_$id.jpeg" || rm -f "out/$id.jpeg"
+            echo "$id ${d}s $(stat -c%s "out/$id.mp3") bytes"
+          done
+          ls out/*.mp3 >/dev/null 2>&1 || { echo "::error::Suno's CDN gave no audio (songs private?)"; exit 1; }
+          jq --slurpfile ok <(for f in out/*.mp3; do i=$(basename "$f" .mp3); printf '{"id":"%s","d":%s,"art":%s}\n' "$i" "$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")" "$( [ -f "out/$i.jpeg" ] && echo true || echo false)"; done) \
+            '.songs |= map(. as $s | ($ok | map(select(.id == $s.id)) | first) as $o | if $o then . + {duration: $o.d, audio: ("music/suno/" + .id + ".mp3"), art: (if $o.art then "music/suno/" + .id + ".jpeg" else null end)} else . end)' \
+            tools/composer/suno/songs.json > out/catalog.json
+          echo "stored $(ls out/*.mp3 | wc -l) of $(jq '.songs|length' tools/composer/suno/songs.json)"
+      - name: R2 keys
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: tools/model-store/r2-keys.sh
+      - name: Store in R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
+          AWS_DEFAULT_REGION: auto
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+        run: |
+          set -euo pipefail
+          ep="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          aws s3 cp out/ "s3://$R2_BUCKET/music/suno/" --recursive --exclude '*' --include '*.mp3' --content-type audio/mpeg --cache-control 'public, max-age=31536000, immutable' --endpoint-url "$ep" --only-show-errors
+          aws s3 cp out/ "s3://$R2_BUCKET/music/suno/" --recursive --exclude '*' --include '*.jpeg' --content-type image/jpeg --cache-control 'public, max-age=31536000, immutable' --endpoint-url "$ep" --only-show-errors
+          aws s3 cp out/catalog.json "s3://$R2_BUCKET/music/suno/catalog.json" --content-type application/json --cache-control 'public, max-age=60' --endpoint-url "$ep" --only-show-errors
+          echo "R2: music/suno/ ($(ls out | wc -l) files)"
+      - name: Attach to the suno-library release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view suno-library >/dev/null 2>&1 || gh release create suno-library --prerelease --title "Abbie's World: Evan's Suno songs" --notes "Evan's own Suno songs, mirrored from our R2 CDN (music/suno/). Metadata: tools/composer/suno/songs.json."
+          gh release upload suno-library out/* --clobber
+      - name: Delete the upload branch
+        if: ${{ steps.upload.outputs.branch == '1' }}
+        run: git push origin --delete claude/suno-library

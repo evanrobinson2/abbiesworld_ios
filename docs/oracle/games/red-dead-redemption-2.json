@@ -1,0 +1,71 @@
+{
+  "appid": 1174180,
+  "name": "Red Dead Redemption 2",
+  "store_url": "https://store.steampowered.com/app/1174180/",
+  "genres": [
+    "Action",
+    "Open world",
+    "Western"
+  ],
+  "short_description": "A vast, detailed western world.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Open world",
+    "Western"
+  ],
+  "summary": "A vast, detailed western world.",
+  "identity": {
+    "core_loop": "Ride, camp, hunt, mission.",
+    "mechanics": null,
+    "ui_and_game_feel": "Slow, immersive.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Horse, camp and animals behave; minimal HUD option.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Painterly realism.",
+    "palette": null,
+    "audio_mood": "Western score.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "A world where animals, weather and camp life simply behave; the 'none' mode at its best."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.33,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.78,
+      "session": 0.56
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

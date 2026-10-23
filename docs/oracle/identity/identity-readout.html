@@ -1,0 +1,116 @@
+<title>Game Identity Readout</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one phone-width column of "toy shelf" panels on a deep evening sky; the five information modes each own a colour */
+:root {
+  color-scheme: dark;
+  --sky: #16213a; --shelf: #1f2d4d; --line: #33456e; --ink: #f3efe6; --soft: #a9b4cf;
+  --gold: #f2c45a;
+  --diegetic: #6fcf8e; --spatial: #5fb4f0; --meta: #c98bf0; --overlay: #f0a35f; --none: #8590a8;
+  --display: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+body { background: var(--sky); color: var(--ink); font: 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 640px; margin: 0 auto; padding-block: 28px 56px; display: grid; gap: 18px; }
+h1, h2 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap: balance; line-height: 1.15; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.25rem; }
+p { margin: 0; }
+.eyebrow { font: 500 .72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.soft { color: var(--soft); }
+.panel { background: var(--shelf); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: grid; gap: 12px; min-width: 0; }
+.nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.num { display: grid; gap: 2px; }
+.num b { font: 600 2rem/1 var(--display); color: var(--gold); font-variant-numeric: tabular-nums; }
+.num span { font-size: .82rem; color: var(--soft); line-height: 1.3; }
+.bar { display: flex; height: 22px; border-radius: 11px; overflow: hidden; }
+.bar i { display: block; height: 100%; }
+.barrow { display: grid; grid-template-columns: 92px 1fr; gap: 10px; align-items: center; font-size: .85rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .8rem; color: var(--soft); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; background: var(--c); vertical-align: -1px; }
+ul { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; }
+.near { display: grid; gap: 7px; }
+.near div { display: grid; grid-template-columns: minmax(0, 1fr) 120px; gap: 10px; align-items: center; font-size: .9rem; }
+.near em { display: block; height: 8px; border-radius: 4px; background: var(--gold); font-style: normal; }
+.aw { border-color: var(--gold); }
+.pill { display: inline-block; font: 500 .72rem/1 var(--mono); padding: 5px 8px; border-radius: 999px; background: var(--sky); color: var(--soft); margin: 0 4px 4px 0; }
+.twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.twocol h3 { font: 600 .95rem var(--display); margin: 0 0 6px; }
+.twocol ol { margin: 0; padding-left: 1.2em; font-size: .88rem; display: grid; gap: 3px; }
+@media (max-width: 420px) { .nums { grid-template-columns: 1fr 1fr; } .twocol { grid-template-columns: 1fr; } .barrow { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+
+<main>
+  <header style="display:grid;gap:8px">
+    <span class="eyebrow">Game identity · 23 Oct 2026</span>
+    <h1>What your games are, and what Abbie's World is</h1>
+    <p class="soft">Every number here is a first pass from what's publicly known about each game. None of it is measured from play yet.</p>
+  </header>
+
+  <section class="panel">
+    <div class="nums">
+      <div class="num"><b>112</b><span>games with a profile</span></div>
+      <div class="num"><b>87</b><span>from your Steam library</span></div>
+      <div class="num"><b>25</b><span>free games we added</span></div>
+      <div class="num"><b>104</b><span>studied, with Game DNA and info grammar</span></div>
+      <div class="num"><b>8</b><span>library games still need a play session</span></div>
+      <div class="num"><b>9</b><span>full identity records, Abbie's World included</span></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>How your games tell you things</h2>
+    <p class="soft">The average across the 104 studied games, next to the target for Abbie's World.</p>
+    <div class="barrow"><span>Your games</span>
+      <div class="bar"><i style="width:43%;background:var(--diegetic)"></i><i style="width:19%;background:var(--spatial)"></i><i style="width:5%;background:var(--meta)"></i><i style="width:30%;background:var(--overlay)"></i><i style="width:3%;background:var(--none)"></i></div></div>
+    <div class="barrow"><span>Abbie's World</span>
+      <div class="bar"><i style="width:50%;background:var(--diegetic)"></i><i style="width:30%;background:var(--spatial)"></i><i style="width:5%;background:var(--meta)"></i><i style="width:10%;background:var(--overlay)"></i><i style="width:5%;background:var(--none)"></i></div></div>
+    <div class="legend"><span style="--c:var(--diegetic)">In the world</span><span style="--c:var(--spatial)">On the thing</span><span style="--c:var(--meta)">As a feeling</span><span style="--c:var(--overlay)">Overlay</span><span style="--c:var(--none)">Nothing shown</span></div>
+  </section>
+
+  <section class="panel">
+    <h2>What stands out</h2>
+    <ul>
+      <li><b>Your library leans on the world, not the screen.</b> On average 43% of a game's information lives in the world itself, and 30% sits in overlays.</li>
+      <li><b>Only 32 of 104 keep the HUD within our 8% budget.</b> Kingdom Two Crowns, Mouthwashing, Bongo Cat, Alpha Zoo and Sable are the cleanest. Card games are the heaviest, with Magic Arena and Breachway at about 30%.</li>
+      <li><b>Feeling-on-the-lens is rare.</b> 35 games use it at all, mostly horror and found footage: Bodycam, Doki Doki, Mouthwashing.</li>
+      <li><b>"Nothing on screen" is rarer still,</b> and the games that do it are the cozy builders you love: Tiny Glade, Townscaper, Dorfromantik, Kingdom Two Crowns.</li>
+      <li><b>Your library is mostly strategy and survival</b> (22 and 17 games). Cameras split evenly between top-down, third person, first person, isometric and the diorama orbit.</li>
+    </ul>
+    <div class="twocol">
+      <div><h3>Most "in the world"</h3><ol><li>Sable</li><li>Kingdom Two Crowns</li><li>HighFleet</li><li>Steam Engine Simulator</li><li>Alpha Zoo</li></ol></div>
+      <div><h3>Most overlay</h3><ol><li>Entropy</li><li>Fortix</li><li>Desktop Dungeons: Rewind</li><li>Quasimorph</li><li>Breachway</li></ol></div>
+    </div>
+  </section>
+
+  <section class="panel aw">
+    <span class="eyebrow">Abbie's World</span>
+    <h2>A living toy world that answers you</h2>
+    <p>You're a child whose words and hands make the world. Say it or place it, and the ranch, its animals and its people answer.</p>
+    <div>
+      <span class="pill">Building is the verb</span><span class="pill">Nothing you do is wrong</span><span class="pill">The world is the HUD</span><span class="pill">The whole game adapts</span><span class="pill">HUD ≤ 8%, zero words</span><span class="pill">Toy diorama, liquid glass</span>
+    </div>
+    <p class="soft"><b style="color:var(--ink)">Signature moment:</b> "a storm is coming". The sky darkens, the bell rings faster, the sheep head for the barn and the lamps come on, and there's no timer on screen. The target is one signal driving six channels. Don't Starve and Tiny Glade, the best we've studied, reach about four.</p>
+    <h2 style="font-size:1.05rem;margin-top:4px">Closest games in your library, by Game DNA</h2>
+    <div class="near">
+      <div><span>WorldBox: God Simulator</span><em style="width:100%"></em></div>
+      <div><span>Sable</span><em style="width:81%"></em></div>
+      <div><span>LEGO Bricktales</span><em style="width:78%"></em></div>
+      <div><span>Starcom: Unknown Space</span><em style="width:63%"></em></div>
+      <div><span>Dorfromantik</span><em style="width:63%"></em></div>
+    </div>
+    <p class="soft">Furthest away: Lost Ark, War Thunder, Counter-Strike 2, Dota 2. Tiny Glade is less close than you'd expect because it has no simulation, which is the one thing Abbie's World adds.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Still to do</h2>
+    <ul>
+      <li>Play sessions for 8 games: The Last Caretaker, DIVE or DIE, Isolation Edge, Pathogenic, Wanderburg, Scavland, Windrose and Big Bang to Us.</li>
+      <li>Replace the estimates with measurements from captures (HUD coverage, the information mix, timing).</li>
+    </ul>
+    <p class="soft">Source: docs/oracle/games (112 profiles), docs/oracle/identity (schema and records), all in evanrobinson2/abbiesworld_ios.</p>
+  </section>
+</main>

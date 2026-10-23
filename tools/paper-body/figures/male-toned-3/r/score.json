@@ -1,0 +1,16 @@
+{
+ "iou": 0.915,
+ "camera": {
+  "yaw": 5.0,
+  "pitch": -6.0,
+  "lens": 106.25,
+  "roll": 0.0,
+  "by_hand": true
+ },
+ "triangles": 2826,
+ "dimensions_m": [
+  0.751,
+  0.364,
+  1.849
+ ]
+}

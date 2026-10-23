@@ -1,0 +1,69 @@
+{
+  "appid": 108600,
+  "name": "Project Zomboid",
+  "store_url": "https://store.steampowered.com/app/108600/",
+  "genres": [
+    "Survival",
+    "Zombies"
+  ],
+  "short_description": "Deep isometric zombie survival.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Zombies"
+  ],
+  "summary": "Deep isometric zombie survival.",
+  "identity": {
+    "core_loop": "Scavenge, survive, build.",
+    "mechanics": null,
+    "ui_and_game_feel": "Harsh.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.1,
+        "meta": 0.1,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Moodles as needs.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Isometric.",
+    "palette": null,
+    "audio_mood": "Sparse.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Needs shown as small moodles on the character; nothing else for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.78,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.78,
+      "systems": 0.78,
+      "chance": 0.78,
+      "session": 0.33
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

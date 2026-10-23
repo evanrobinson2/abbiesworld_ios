@@ -1,0 +1,70 @@
+{
+  "appid": 261550,
+  "name": "Mount & Blade II: Bannerlord",
+  "store_url": "https://store.steampowered.com/app/261550/",
+  "genres": [
+    "RPG",
+    "Medieval",
+    "Strategy"
+  ],
+  "short_description": "A medieval sandbox of armies, clans and kingdoms.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "RPG",
+    "Medieval",
+    "Strategy"
+  ],
+  "summary": "A medieval sandbox of armies, clans and kingdoms.",
+  "identity": {
+    "core_loop": "Travel, trade, fight, build a kingdom.",
+    "mechanics": null,
+    "ui_and_game_feel": "Huge.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay; banners in the world.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Medieval.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Banners on armies tell you who is who; useful for Fritigern's Gothic and Roman forces."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.56,
+      "social": 0.67,
+      "systems": 0.78,
+      "chance": 0.78,
+      "session": 0.44
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

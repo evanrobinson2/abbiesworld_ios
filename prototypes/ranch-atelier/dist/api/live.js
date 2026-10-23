@@ -59,7 +59,10 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
   // Out of money means the Computer rests; the game itself keeps playing with its built-in models.
   const tired=()=>json(402,{error:'The Computer has used up its magic for now. Keep playing!',budget:true});
   if(body.action==='session'){
-   if(await purse().left(me)<0.05||!await purse().charge(me,PRICES.realtimeOpen))return tired();
+   // Surge mode (launch day, AI_SURGE_MODE=true): talking costs up to $1 in two minutes, so the public's share of the
+   // pool is kept for inventing things; the owner can still talk. See docs/launch/SURGE.md.
+   if(env.AI_SURGE_MODE==='true'&&!me.owner)return json(402,{error:'The Computer is resting while lots of friends visit. You can still invent things!',budget:true,surge:true});
+   if(await purse().left(me)<0.05||!await purse().charge(me,PRICES.realtimeOpen,'Starting a talk with the Computer'))return tired();
    // The page connects to our relay (api/live-socket.js), which holds the credential and enforces
    // the rules and tools server-side. The ticket is good for 60 seconds.
    const ticket=issueTicket(env,at,undefined,'',me);if(!ticket)return json(503,{error:'Live mode is not set up yet.'});
@@ -71,7 +74,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
    const who=body.who==='computer'?'COMPUTER':'CHILD',text=typeof body.text==='string'?body.text.trim().slice(0,600):'';
    if(!text)return json(200,{verdict:'ok'});
    const local=screen(text,{level:who==='COMPUTER'?'speech':'all'});if(!local.ok)return json(200,{verdict:'unsafe',why:'blocked word',local:true});
-   if(!await purse().charge(me,PRICES.guardCall))return tired();
+   if(!await purse().charge(me,PRICES.guardCall,'Safety check'))return tired();
    return json(200,await judge(fetcher,headers,who,text));
   }
   if(body.action==='order'){
@@ -80,7 +83,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
    if(description.length<3)return json(400,{error:'Describe the model.'});
    if(!screen(description).ok)return json(200,{ok:false,verdict:'unsafe'});
    // Orders fail closed: if the guard cannot judge, nothing is filed.
-   if(!await purse().charge(me,PRICES.guardCall))return tired();
+   if(!await purse().charge(me,PRICES.guardCall,'Safety check'))return tired();
    const verdict=await judge(fetcher,headers,'CHILD',`Please make a model of: ${description}`);
    if(verdict.verdict!=='ok')return json(200,{ok:false,verdict:verdict.verdict});
    const id=`${at.toString(36)}-${randomBytes(4).toString('hex')}`;
@@ -102,4 +105,4 @@ async function judge(fetcher,headers,who,text){
  finally{clearTimeout(timer);}
 }
 
-module.exports=createHandler();module.exports.createHandler=createHandler;module.exports.GUARD_PROMPT=GUARD_PROMPT;
+module.exports=createHandler();module.exports.createHandler=createHandler;module.exports.GUARD_PROMPT=GUARD_PROMPT;module.exports.judge=judge;

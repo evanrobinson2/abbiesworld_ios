@@ -1,0 +1,70 @@
+{
+  "appid": 1824220,
+  "name": "Chivalry 2",
+  "store_url": "https://store.steampowered.com/app/1824220/",
+  "genres": [
+    "Action",
+    "Medieval",
+    "Multiplayer"
+  ],
+  "short_description": "Huge medieval melee battles.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Medieval",
+    "Multiplayer"
+  ],
+  "summary": "Huge medieval melee battles.",
+  "identity": {
+    "core_loop": "Swing, block, charge, yell.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic and funny.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay light.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Medieval realism.",
+    "palette": null,
+    "audio_mood": "Shouts.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Shouting as a button is very funny; violence is not for us."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.22,
+      "social": 0.56,
+      "systems": 0.67,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

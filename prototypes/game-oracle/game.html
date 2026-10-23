@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Game Study</title><link rel="stylesheet" href="/style.css">
+<style>.gm{max-width:760px;margin:0 auto;padding:16px}.gm .meta{opacity:.7;font-size:.9em}.gm h2{margin:22px 0 6px;font-size:1.05em}.gm .lesson{padding:12px 14px;border-radius:14px;background:#f4ead6}
+.gm .bar{display:grid;grid-template-columns:7.5em 1fr 2.5em;gap:8px;align-items:center;margin:4px 0}.gm .bar i{display:block;height:10px;border-radius:5px;background:#e3dccd;overflow:hidden}.gm .bar b{display:block;height:100%;background:#b4683a}
+.gm .mix{display:flex;height:16px;border-radius:8px;overflow:hidden;margin:6px 0}.gm .mix span{display:block}.gm .keys{display:flex;flex-wrap:wrap;gap:10px;font-size:.9em}.gm .keys em{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px}
+@media (prefers-color-scheme:dark){.gm .lesson{background:#3a3226}.gm .bar i{background:#4a4338}}</style></head><body>
+<header><a class="brand" href="/steam">Oracle <span>Game study</span></a></header>
+<main class="gm" id="main"><p class="meta">Loading…</p></main>
+<script type="module">
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const AXES={tempo:'Tempo',challenge:'Challenge',expression:'Expression',structure:'Structure',social:'Social',systems:'Systems',chance:'Chance',session:'Session'};
+const MODES={diegetic:['In the world','#5b8c51'],spatial:['On things','#3f7fb0'],meta:['Feeling','#a35a9c'],overlay:['Screen gauge','#c9873a'],none:['World just behaves','#8a8a80']};
+const id=new URLSearchParams(location.search).get('id');
+const sec=(t,v)=>v?`<h2>${t}</h2><p>${esc(v)}</p>`:'';
+async function load(){
+ if(!id){$('#main').innerHTML='<p>Pick a game from the <a href="/steam">library</a>.</p>';return;}
+ const r=await fetch('/api/knowledge?identity='+encodeURIComponent(id));
+ if(!r.ok){$('#main').innerHTML='<p>The Oracle has not studied that game yet. <a href="/steam">Back to the library</a></p>';return;}
+ const {record,profile:p}=await r.json(),i=p?.identity||{},g=i.information_grammar,dna=p?.dna?.axes;
+ const name=p?.name||record?.game?.title||id;document.title=name;
+ const st=p?.study||{};
+ let h=`<h1>${esc(name)}</h1><p class="meta">${esc((p?.study_genres||p?.genres||[]).join(' · '))}${st.status?' · '+esc(st.status):''}${st.owned===false?' · not owned':st.installed===false?' · owned, not installed':''}</p>`;
+ if(p?.summary)h+=`<p>${esc(p.summary)}</p>`;
+ if(i.lessons_for_abbies_world)h+=`<h2>Lesson for Abbie's World</h2><p class="lesson">${esc(i.lessons_for_abbies_world)}</p>`;
+ if(p?.review)h+=sec('Review',p.review);
+ h+=sec('How it plays',i.core_loop)+sec('How it feels',i.ui_and_game_feel);
+ if(g){const mix=g.overall_mix||{},tot=Object.values(mix).reduce((a,b)=>a+b,0)||1;
+  h+=`<h2>How it shows information</h2><p>${esc(g.note||'')}</p><div class="mix">${Object.entries(mix).map(([m,v])=>`<span title="${esc(MODES[m]?.[0]||m)}" style="width:${v/tot*100}%;background:${MODES[m]?.[1]||'#999'}"></span>`).join('')}</div>
+  <div class="keys">${Object.entries(mix).map(([m,v])=>`<span><em style="background:${MODES[m]?.[1]||'#999'}"></em>${esc(MODES[m]?.[0]||m)} ${Math.round(v/tot*100)}%</span>`).join('')}</div>`;
+  const hud=g.screen_budget?.hud_coverage?.value;if(hud!=null)h+=`<p class="meta">Screen interface covers about ${Math.round(hud*100)}% (our target is 8% or less).</p>`;}
+ if(dna)h+=`<h2>Game DNA</h2>${Object.entries(AXES).map(([k,l])=>dna[k]==null?'':`<div class="bar"><span>${l}</span><i><b style="width:${dna[k]*100}%"></b></i><span class="meta">${Math.round(dna[k]*9)}/9</span></div>`).join('')}`;
+ h+=sec('Camera',i.camera)+sec('Art',i.art_direction)+sec('Sound',i.audio_mood)+sec('Pacing',i.pacing);
+ if(record)h+=`<h2>Full identity record</h2><p>${esc(record.core?.fantasy||'')}</p>`;
+ h+=`<p class="meta">Estimates from public knowledge, confidence ${esc(p?.dna?.confidence??'')}. <a href="/steam">Library</a> · <a href="/api/knowledge?identity=${esc(id)}">JSON</a></p>`;
+ $('#main').innerHTML=h;
+}
+load();
+</script></body></html>

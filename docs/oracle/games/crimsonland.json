@@ -1,0 +1,68 @@
+{
+  "appid": 262830,
+  "name": "Crimsonland",
+  "store_url": "https://store.steampowered.com/app/262830/",
+  "genres": [
+    "Action",
+    "Arcade"
+  ],
+  "short_description": "A top-down arcade shooter against swarms.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Action",
+    "Arcade"
+  ],
+  "summary": "A top-down arcade shooter against swarms.",
+  "identity": {
+    "core_loop": "Shoot, pick perks, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Frantic.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Pixel.",
+    "palette": null,
+    "audio_mood": "Rock.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Little for us."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.89,
+      "challenge": 0.67,
+      "expression": 0.33,
+      "structure": 0.22,
+      "social": 0.56,
+      "systems": 0.33,
+      "chance": 0.89,
+      "session": 0.33
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

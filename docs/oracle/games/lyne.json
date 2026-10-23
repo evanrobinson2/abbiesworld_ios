@@ -1,0 +1,68 @@
+{
+  "appid": 266010,
+  "name": "LYNE",
+  "store_url": "https://store.steampowered.com/app/266010/",
+  "genres": [
+    "Puzzle",
+    "Minimalist"
+  ],
+  "short_description": "Connect shapes into paths in minimalist puzzles.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Minimalist"
+  ],
+  "summary": "Connect shapes into paths in minimalist puzzles.",
+  "identity": {
+    "core_loop": "Draw a line through all shapes of one kind.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm, pure.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.2,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.0,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The board is everything.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Flat minimal shapes.",
+    "palette": null,
+    "audio_mood": "Soft tones.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Pure minimal puzzles; a good model for a calm kids' mini game."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.11,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

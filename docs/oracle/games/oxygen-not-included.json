@@ -1,0 +1,68 @@
+{
+  "appid": 457140,
+  "name": "Oxygen Not Included",
+  "store_url": "https://store.steampowered.com/app/457140/",
+  "genres": [
+    "Colony sim",
+    "Survival"
+  ],
+  "short_description": "Keep a colony of duplicants alive inside an asteroid by managing air, water, heat and food.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Colony sim",
+    "Survival"
+  ],
+  "summary": "Keep a colony of duplicants alive inside an asteroid by managing air, water, heat and food.",
+  "identity": {
+    "core_loop": "Dig, build, plumb, manage gases, keep everyone breathing.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cute but brutal systems.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "spatial": 0.3,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay modes for oxygen, heat and power; duplicants' faces and bubbles.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Cartoon cutaway.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "A cutaway side view makes invisible systems readable; overlays are for grown-ups."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.67,
+      "expression": 0.67,
+      "structure": 0.89,
+      "social": 0.89,
+      "systems": 0.89,
+      "chance": 0.33,
+      "session": 1.0
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "appid": 22370,
+  "name": "Fallout 3 - Game of the Year Edition",
+  "store_url": "https://store.steampowered.com/app/22370/",
+  "genres": [
+    "RPG",
+    "Open world"
+  ],
+  "short_description": "Post-apocalyptic open-world RPG.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "RPG",
+    "Open world"
+  ],
+  "summary": "Post-apocalyptic open-world RPG.",
+  "identity": {
+    "core_loop": "Explore, quest, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Lonely.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The Pip-Boy wrist computer is diegetic UI.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Ruined Americana.",
+    "palette": null,
+    "audio_mood": "1940s radio.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "A wrist computer as menu; radio songs as world mood."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.67,
+      "session": 0.56
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

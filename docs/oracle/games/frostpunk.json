@@ -1,0 +1,69 @@
+{
+  "appid": 323190,
+  "name": "Frostpunk",
+  "store_url": "https://store.steampowered.com/app/323190/",
+  "genres": [
+    "City builder",
+    "Survival"
+  ],
+  "short_description": "Keep the last city alive around a giant heat generator in a frozen world.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "City builder",
+    "Survival"
+  ],
+  "summary": "Keep the last city alive around a giant heat generator in a frozen world.",
+  "identity": {
+    "core_loop": "Gather, heat, make hard laws, survive the storm.",
+    "mechanics": null,
+    "ui_and_game_feel": "Grim and tense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "meta": 0.1,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Heat and cold are coloured into the city (diegetic); the temperature dial is the main gauge.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Snowy steampunk.",
+    "palette": null,
+    "audio_mood": "Mournful strings.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "One temperature signal driving everything is the whole-game-adapts rule; never as grim for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.89,
+      "social": 0.44,
+      "systems": 0.78,
+      "chance": 0.44,
+      "session": 0.56
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

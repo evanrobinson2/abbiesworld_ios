@@ -2,6 +2,62 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-billing",
+      "date": "2026-10-23",
+      "title": "See every cent of your magic",
+      "line": "Signed in, your account now has a billing page: every talk, build and safety check, what it cost, and what's left this month. Support now comes in $5, $45 or $80 a month, almost all of it back as magic. The Kickstarter is gone.",
+      "image": "/whats-new/2026-10-23-front-door.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+      "threadTitle": "Front door, sign-in and donations",
+      "tour": false
+    },
+    {
+      "id": "2026-10-23-notices",
+      "date": "2026-10-23",
+      "title": "New things wait for you",
+      "line": "Each new thing now stays until you dismiss it. Dismiss shows the next one, Later keeps them all, and every one waits under Notices in Profile and settings.",
+      "image": "/whats-new/2026-10-23-notices.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": true
+    },
+    {
+      "id": "2026-10-23-front-door",
+      "date": "2026-10-23",
+      "title": "A front door for Abbie's World",
+      "line": "abbies.world now opens on a front door: what Abbie's World is, how it works, the PG promise, Play and Sign in, and support from $5 a month. Your home-screen app still goes straight to the ranch.",
+      "image": "/whats-new/2026-10-23-front-door.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+      "threadTitle": "Front door, sign-in and donations"
+    },
+    {
+      "id": "2026-10-23-models-one-screen",
+      "date": "2026-10-23",
+      "title": "Models fit on one screen",
+      "line": "Each model now fits on one screen: a hero bar with its name, the picture and the model side by side, and your feedback in its own panel on the right that you can hide. A menu on the left folds away. Profile and settings now open from your avatar, with 20 styles that change the whole app, and Studies has a home page.",
+      "image": "/whats-new/2026-10-23-models-one-screen.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead"
+    },
+    {
+      "id": "2026-10-23-cel-hand-cards",
+      "date": "2026-10-23",
+      "title": "Hand cards show each place's cartoon",
+      "line": "Your hand cards now show the cartoon of each place in clean cel shading with ink lines: the barn and silo, the kitchen garden, a wildflower meadow with a bee skep, and the moon dome. Tap anything in the world and its card opens right beside it.",
+      "image": "/whats-new/2026-10-23-cel-hand-cards.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
+      "threadTitle": "Sandbox v2 interface"
+    },
+    {
+      "id": "2026-10-23-low-clouds",
+      "date": "2026-10-23",
+      "title": "Clouds over the ranch",
+      "line": "Clouds now sail low over the tiles, about 20 m up, and their shadows slide across the fields beneath them.",
+      "image": "/whats-new/2026-10-23-low-clouds.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
+      "threadTitle": "Weather and clouds"
+    },
+    {
       "id": "2026-10-23-cel-cards",
       "date": "2026-10-23",
       "title": "Cards in clean cel shading",
