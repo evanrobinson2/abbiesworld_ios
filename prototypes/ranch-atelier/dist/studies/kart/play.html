@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Kart Mode</title>
+<style>
+/* AW-STUDY-0055: kart mode. The play screen has no words: a few glass orbs, lap pips, and the world doing the telling.
+   Dev tools (?dev) are the grown-up workbench: tile slots to place, the beacon cheat, build timings. */
+html,body{margin:0;height:100%;background:#1c1530;overflow:hidden;overscroll-behavior:none;touch-action:none;-webkit-user-select:none;user-select:none}
+canvas{display:block;width:100vw;height:100vh;height:100dvh}
+#boot{position:fixed;inset:0;display:grid;place-items:center;color:#fff;font:600 28px ui-rounded,system-ui,sans-serif;background:#1c1530;transition:opacity .6s;z-index:50}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(255,255,255,.1));border:1px solid rgba(255,255,255,.45);box-shadow:0 8px 24px rgba(20,10,40,.35),inset 0 1px 0 rgba(255,255,255,.65),inset 0 -6px 14px rgba(80,40,120,.2)}
+#pips{position:fixed;top:max(12px,env(safe-area-inset-top));left:50%;translate:-50% 0;display:flex;gap:8px;padding:9px 14px;border-radius:999px;z-index:20}
+#pips i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.35);box-shadow:inset 0 1px 2px rgba(0,0,0,.25);transition:background .3s,transform .3s}
+#pips i.on{background:radial-gradient(circle at 35% 30%,#fff7c2,#ffcf3a 60%,#d99a00);transform:scale(1.15)}
+#back{position:fixed;left:max(12px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;z-index:20;opacity:.85}
+#dev{position:fixed;left:12px;top:12px;max-width:min(300px,64vw);padding:10px 12px;border-radius:16px;font:12px/1.35 ui-monospace,Menlo,monospace;color:#fff;z-index:30;display:none;background:rgba(20,10,40,.55);backdrop-filter:blur(6px)}
+#dev b{display:block;margin-bottom:4px;font:700 12px ui-rounded,system-ui,sans-serif}
+#dev .slots{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:6px 0}
+#dev button{font:600 11px system-ui;border:0;border-radius:8px;padding:5px 0;background:rgba(255,255,255,.22);color:#fff;cursor:pointer}
+#dev button.on{background:#ffcf3a;color:#2a1f33}
+#dev label{display:flex;gap:6px;align-items:center;margin-top:6px}
+</style>
+</head>
+<body>
+<div id="boot">🏁</div>
+<div id="pips" class="glass" aria-label="Laps" data-ui></div>
+<a id="back" class="glass" href="./" aria-label="Back to the study" data-ui><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
+<div id="dev" data-ui></div>
+<script>
+// Works from /studies/kart/play.html (modules two levels up) and from an instant preview (modules beside the page).
+const SIM = location.pathname.includes('/studies/') ? '../../simulations/' : './simulations/';
+const map = document.createElement('script'); map.type = 'importmap';
+map.textContent = JSON.stringify({imports: {three: new URL(SIM + 'vendor/three.module.js', location.href).href}});
+document.head.append(map);
+window.__SIM = new URL(SIM, location.href).href;
+</script>
+<script type="module">
+import * as T from 'three';
+const S = window.__SIM, q = new URLSearchParams(location.search), DEV = q.has('dev') || (() => { try { return localStorage.getItem('aw-developer') === '1'; } catch { return false; } })();
+const [{createHunt}, {makeStandin}, {fromBoard}, {createKart}, {boardSlots}, FX] = await Promise.all([import(S + 'effect-hunt/hunt.mjs'), import(S + 'effect-hunt/standin.mjs'), import(S + 'effect-hunt/world.mjs'), import(S + 'kart/kart.mjs'), import(S + 'kart/track.mjs'), import(S + 'effect-hunt/effects.mjs')]);
+
+const renderer = new T.WebGLRenderer({antialias: true}); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap; document.body.append(renderer.domElement);
+const scene = new T.Scene(), camera = new T.PerspectiveCamera(58, innerWidth / innerHeight, .5, 3000);
+const standin = makeStandin(); scene.add(standin.group);
+const world = fromBoard(standin.board, {near: standin.near});
+
+// afternoon by default; ?hour=18.6 for dusk. One number drives sky and light.
+let hour = +(q.get('hour') ?? 15);
+const hemi = new T.HemisphereLight('#bcd4ff', '#6a5a3a', 1), sun = new T.DirectionalLight('#ffd9a0', 2.2); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, {left: -90, right: 90, top: 90, bottom: -90, near: 1, far: 500}); scene.add(hemi, sun, sun.target);
+const day = h => { const s = (a, b, v) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t); }; return s(5.5, 8, h) * (1 - s(17.5, 20.5, h)); };
+function lighting() { const d = day(hour), dusk = Math.max(0, 1 - Math.abs(hour - 18.6) / 1.6); scene.background = new T.Color('#0f1030').lerp(new T.Color('#8fd0ff'), d).lerp(new T.Color('#ff9a7a'), dusk * .55); hemi.intensity = .35 + d * .9; sun.intensity = .3 + d * 2; sun.color.set('#ffd9a0').lerp(new T.Color('#fff'), d * (1 - dusk)); }
+lighting();
+
+const clock = {day: 1, hour};
+const hunt = createHunt({scene, camera, renderer, world, paint: null, clock, mode: q.get('mode') || 'cart', beacons: q.get('beacons') !== '0'});
+if (q.has('reset')) { try { localStorage.removeItem('aw-effects'); } catch {} }
+
+// ---- kart mode on top: the track is stencilled from the board, built in the background, and swapped in when ready
+const dev = document.getElementById('dev'), pips = document.getElementById('pips'), LAPS = +(q.get('laps') || 3);
+pips.innerHTML = '<i></i>'.repeat(LAPS);
+const kart = createKart({scene, world, driver: hunt.driver, board: standin.board, tow: hunt.tow, laps: LAPS, onEvent: (e) => {
+ if (e.t === 'lap') [...pips.children].forEach((p, i) => p.classList.toggle('on', i < e.lap));
+ if (e.t === 'rebuilt') { kart.clearScenery(); if (DEV) devRefresh(); }
+ if (DEV) console.debug('kart', e);
+}});
+await kart.ready(); kart.clearScenery(standin.group); // the stand-in's houses and trees on the road's line are stencilled away
+if (q.has('tiles')) await kart.setTiles(q.get('tiles').split(','));
+kart.prebuild();
+window.__hunt = hunt; window.__kart = kart; window.__world = world;
+
+// ---- grown-up workbench (?dev): place tiles in the slots and watch the track re-draw; the beacon cheat lives here too
+function devRefresh() {
+ const slots = boardSlots(105), on = new Set(kart.state.tiles), beac = (() => { try { return localStorage.getItem('aw-dev-beacons') === '1'; } catch { return false; } })();
+ dev.style.display = 'block';
+ dev.innerHTML = `<b>Developer tools</b>track ${kart.state.length | 0} m, built in ${kart.state.lastBuild} ms${kart.state.rebuilding ? ', rebuilding…' : ''}<br>lap ${kart.state.lap} / ${LAPS}, best ${kart.state.best ? kart.state.best.toFixed(1) + ' s' : '–'}, smashed ${kart.state.smashes}, crashes ${kart.state.crashes}
+ <div class="slots">${slots.map((s, i) => `<button data-s="${s.id}" class="${on.has(s.id) ? 'on' : ''}" title="${s.id}">${i + 1}</button>`).join('')}</div>
+ <label><input type="checkbox" id="cheat" ${beac ? 'checked' : ''}> Beacons from overhead (cheat)</label>`;
+ dev.querySelectorAll('button').forEach(b => b.onclick = () => { const id = b.dataset.s, next = new Set(kart.state.tiles); next.has(id) ? next.delete(id) : next.add(id); kart.setTiles([...next]); devRefresh(); });
+ dev.querySelector('#cheat').onchange = e => { try { localStorage.setItem('aw-dev-beacons', e.target.checked ? '1' : '0'); } catch {} hunt.setBeacons(true); };
+}
+if (DEV) { devRefresh(); setInterval(devRefresh, 1500); }
+
+window.addEventListener('keydown', e => { if (e.code === 'KeyN') { hour = day(hour) > .5 ? 22 : 15; clock.hour = hour; lighting(); } if (e.code === 'KeyG') hunt.setMode(hunt.mode === 'god' ? 'cart' : 'god'); });
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
+const s0 = hunt.driver.s; camera.position.set(s0.x, s0.y + 8, s0.z + 20);
+let last = performance.now();
+renderer.setAnimationLoop(now => {
+ const dt = (now - last) / 1000; last = now; clock.hour = hour; const s = hunt.frame(dt); kart.frame(dt);
+ sun.target.position.set(s.x, s.y, s.z); sun.position.set(s.x - 60, s.y + 90, s.z + 40);
+ renderer.render(scene, camera);
+});
+const boot = document.getElementById('boot'); boot.style.opacity = 0; setTimeout(() => boot.remove(), 700);
+</script>
+</body>
+</html>

@@ -64,8 +64,9 @@ export function createDriver({world, tune = {}, start = {x: 0, z: 0, heading: 0}
   }
   if (world.nearObstacles && !s.air) for (const o of world.nearObstacles(s.x, s.z)) { // bonk: soft push-out and a bouncy rebound
    const dx = s.x - o.x, dz = s.z - o.z, d = Math.hypot(dx, dz), R = o.r + 1.6; if (d >= R || d < 1e-4) continue;
+   if (o.soft && Math.abs(s.speed) > 8) { o.hit?.(Math.hypot(s.vx, s.vz), s); s.vx *= .9; s.vz *= .9; s.bonk = Math.max(s.bonk, .3); continue; } // kart mode: soft things burst (cones, crates, fences)
    const nx = dx / d, nz = dz / d, vn = s.vx * nx + s.vz * nz; s.x = o.x + nx * R; s.z = o.z + nz * R;
-   if (vn < 0) { s.vx -= (1 + .55) * vn * nx; s.vz -= (1 + .55) * vn * nz; s.vy = Math.max(s.vy, Math.min(9, -vn * .3)); s.squash = Math.min(.4, -vn * .02); s.bonk = Math.min(1, -vn / 14); }
+   if (vn < 0) { o.bump?.(-vn); s.vx -= (1 + .55) * vn * nx; s.vz -= (1 + .55) * vn * nz; s.vy = Math.max(s.vy, Math.min(9, -vn * .3)); s.squash = Math.min(.4, -vn * .02); s.bonk = Math.min(1, -vn / 14); }
   }
   s.squash += (0 - s.squash) * Math.min(1, dt * 6);
   s.landed = Math.max(0, s.landed - dt * 2);
