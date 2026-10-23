@@ -66,13 +66,22 @@ export function createBasement() {
  const toggleM = M('switch toggle', {color: '#e8e2d2'});
  const toggles = [-1, 0, 1].map((i, n) => { const t = box(`switch toggle ${n + 1}`, .022, .045, .032, toggleM, i * .06, -.016, .016, sw); box('switch slot', .03, .06, .004, M('switch slot', {color: '#3a352c'}), i * .06, 0, .009, sw).castShadow = false; return t; });
  const toggle = toggles[0];
+ // A small lamp just above the plate: a porcelain lampholder with a bare little bulb, the kind every old basement
+ // has by its stairs. It is the only light at the start, enough to find the switches by.
+ const switchLamp = new T.Group(); switchLamp.name = 'switch lamp'; switchLamp.position.set(0, .3, 0); sw.add(switchLamp);
+ const porcelain = M('porcelain lampholder', {color: '#ece6d6', roughness: .35});
+ const holder = new T.Mesh(new T.CylinderGeometry(.045, .05, .03, 14), porcelain); holder.name = 'lampholder base'; holder.rotation.x = Math.PI / 2; holder.position.z = .015; switchLamp.add(holder);
+ const neck = new T.Mesh(new T.CylinderGeometry(.022, .026, .04, 10), porcelain); neck.name = 'lampholder socket'; neck.position.set(0, -.025, .04); switchLamp.add(neck);
+ const smallBulbM = new T.MeshStandardMaterial({name: 'small bulb glass', color: '#fff4d8', emissive: '#ffcf8a', emissiveIntensity: 1.6, roughness: .2});
+ const smallBulb = new T.Mesh(new T.SphereGeometry(.026, 12, 9), smallBulbM); smallBulb.name = 'small bulb'; smallBulb.scale.set(1, 1.25, 1); smallBulb.position.set(0, -.07, .04); switchLamp.add(smallBulb);
+ const wire = new T.Mesh(new T.BoxGeometry(.008, .24, .006), M('cloth wire', {color: '#3a2e22'})); wire.name = 'lamp wire'; wire.position.set(.06, -.13, .003); sw.add(wire);
  const glowDot = box('glow-in-the-dark dot', .02, .02, .005, new T.MeshBasicMaterial({color: '#8dffb0', name: 'glow paint'}), 0, .05, .01, sw); glowDot.castShadow = false;
 
  // Stairs: eight treads with risers and a stringer, and a plain rail.
  for (let i = 0; i < 8; i++) { const x = ROOM.stairs[0] + i * .25 + .125, y = ROOM.landing - (i + 1) * .2;
   box('stair tread', .27, .04, .95, timber, x, y - .02, ROOM.walkZ); box('stair riser', .02, .2, .95, timber, x - .125, y + .1 - .02, ROOM.walkZ); }
  const run = Math.hypot(2, ROOM.landing), ang = Math.atan2(ROOM.landing, 2);
- for (const z of [ROOM.walkZ - .5, ROOM.walkZ + .5]) { const s = box('stair stringer', run, .22, .05, timber, 1.9, ROOM.landing / 2 - .1, z); s.rotation.z = -ang; }
+ for (const z of [ROOM.walkZ - .5, ROOM.walkZ + .5]) { const s = box('stair stringer', run, .22, .05, timber, 1.9, ROOM.landing / 2 - .26, z); s.rotation.z = -ang; }
  const rail = box('stair rail', run, .05, .05, timber, 1.9, ROOM.landing / 2 + .85, ROOM.walkZ + .52); rail.rotation.z = -ang;
  for (let i = 0; i <= 4; i++) box('rail post', .04, .9, .04, timber, .9 + i * .5, ROOM.landing - i * .4 + .4, ROOM.walkZ + .52);
  box('under-stair box', .6, .4, .5, M('cardboard', {color: '#8c6b45'}), 1.5, .2, -1.1); box('under-stair box', .45, .32, .4, M('cardboard', {color: '#7d5f3d'}), 1.6, .56, -1.12);
@@ -188,7 +197,7 @@ export function createBasement() {
   {id: 'rug', obj: rug}, {id: 'manual', obj: manual}, {id: 'stair-box', obj: named('under-stair box')},
   {id: 'window-sill', obj: named('window sill')}, {id: 'pencil-mug', obj: mug},
  ];
- root.userData = {computer, keyboard, disks, jar, addJarCoin, coinSpots, manual, bulb, bulbM, chain, door, toggle, toggles, switches: sw, glowDot, hall, flame, screen: computer.userData.screen, chair,
+ root.userData = {computer, keyboard, disks, jar, addJarCoin, coinSpots, manual, bulb, bulbM, chain, door, toggle, toggles, switches: sw, switchLamp, glowDot, hall, flame, screen: computer.userData.screen, chair,
   lamp1M, plug, setPlug, clipboard: clip, spray, towel, rocker: computer.userData.rocker};
  return root;
 }
