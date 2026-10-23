@@ -122,6 +122,120 @@
           "bytes": 1195122
         }
       ]
+    },
+    {
+      "name": "town-elegant",
+      "view": "town",
+      "style": "elegant",
+      "prompt": "isometric miniature of a small market town square on a hexagonal board game tile: on the corner sits an elegant contemporary cafe called Abbie's Cafe, blush rose and dusty mauve facade, tall arched glass, champagne gold trim, a painted sign with three gold stars, ivory terrace tables; around it timber and stone shops, a bell tower, a fountain, street trees, warm taupe cobbles, two tiny distant figures, soft golden light, tasteful and calm, tilt-shift --ar 16:9 --v 8.2 --no text, letters",
+      "job_id": "18a0860c-620c-482d-8313-d8d2ebaff17d",
+      "created": "2026-10-23T05:04:17Z",
+      "files": [
+        {
+          "file": "images/town-elegant_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/18a0860c-620c-482d-8313-d8d2ebaff17d/0_0.png",
+          "sha256": "6e656a27a6f31185fdfbd5b3a26b2b136d7150d9bd9c26b48a0ca0eb15ff1409",
+          "bytes": 1513098
+        },
+        {
+          "file": "images/town-elegant_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/18a0860c-620c-482d-8313-d8d2ebaff17d/0_1.png",
+          "sha256": "c0d59dc82ea46ff23471054f3362d82cfe3912bf0c821371c35bd32c7f5bf953",
+          "bytes": 1732980
+        },
+        {
+          "file": "images/town-elegant_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/18a0860c-620c-482d-8313-d8d2ebaff17d/0_2.png",
+          "sha256": "8057a1e470ab48bad7b9fb1e1557da55b45266b3b2590ccf3d312354bf698273",
+          "bytes": 1596879
+        },
+        {
+          "file": "images/town-elegant_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/18a0860c-620c-482d-8313-d8d2ebaff17d/0_3.png",
+          "sha256": "8779e0d798c2d195ff04c6a540701b134b60473684a5d70848d6a3baf945b48b",
+          "bytes": 1625597
+        }
+      ]
+    },
+    {
+      "name": "town-party",
+      "view": "town",
+      "style": "party",
+      "prompt": "isometric miniature of a cartoon town block on a hexagonal game tile: in the middle is Abbie's Cafe, the coolest hangout in town, a curvy hot magenta pink building with a giant coffee cup on the roof, disco lights and a rooftop dance floor, electric violet and tangerine stripes, a painted sign with three yellow stars; next to it a record shop, a skate ramp, an ice cream stand, a bell tower, turquoise fountain, lime green lawns, bold zany theme park game art, not fairy, not princess, no animals, tiny distant figures only --ar 16:9 --v 8.2 --no text, letters",
+      "job_id": "63d7d875-8ce4-443d-9ac5-b5c860fd9be7",
+      "created": "2026-10-23T05:04:49Z",
+      "files": [
+        {
+          "file": "images/town-party_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/63d7d875-8ce4-443d-9ac5-b5c860fd9be7/0_0.png",
+          "sha256": "f46e96682f11b2ae9e7e648e0b7901d95703ee55e453a47aa872ff86f42fc00f",
+          "bytes": 1655157
+        },
+        {
+          "file": "images/town-party_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/63d7d875-8ce4-443d-9ac5-b5c860fd9be7/0_1.png",
+          "sha256": "7d49c81255dc73b42c1a8e730611d95b92a97be264d80b58aa047f920a1b3be2",
+          "bytes": 973856
+        },
+        {
+          "file": "images/town-party_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/63d7d875-8ce4-443d-9ac5-b5c860fd9be7/0_2.png",
+          "sha256": "997f7a8fa983716ce0762f3d4b03e72a7e5b9f6538daa4aa11b14db5ac8cd6d3",
+          "bytes": 1585890
+        },
+        {
+          "file": "images/town-party_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/63d7d875-8ce4-443d-9ac5-b5c860fd9be7/0_3.png",
+          "sha256": "08769fe4f5efb02947fbf00c86e36e5b75e5ab7f9790126de7b8efd57716d136",
+          "bytes": 1481706
+        }
+      ]
+    },
+    {
+      "name": "town-game",
+      "view": "town",
+      "style": "game",
+      "prompt": "isometric stylised town tile like a modern cosy 3D builder game: a small town square with a bell tower, bakery, market stalls and houses, and on the corner Abbie's Cafe with bubblegum pink walls, mint roof, coral awning and a butter yellow sign with three stars, sky blue canal, cream paths, round trees, clean hand-painted textures, Unity style 3D render, soft shadows, tiny distant figures only --ar 16:9 --v 8.2 --no text, letters",
+      "job_id": "09518dff-55f1-48e4-9c90-a323adb6614a",
+      "created": "2026-10-23T05:05:24Z",
+      "files": [
+        {
+          "file": "images/town-game_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/09518dff-55f1-48e4-9c90-a323adb6614a/0_0.png",
+          "sha256": "14d06626487ec89527f1d351ecb001696e76879afcaa0c9b32dd6733e5115149",
+          "bytes": 1611321
+        },
+        {
+          "file": "images/town-game_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/09518dff-55f1-48e4-9c90-a323adb6614a/0_1.png",
+          "sha256": "461a3fdf3977ba9dd470a1185202e923e0fe0d80d2bacd149ebe115f2f0686d3",
+          "bytes": 1555473
+        },
+        {
+          "file": "images/town-game_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/09518dff-55f1-48e4-9c90-a323adb6614a/0_2.png",
+          "sha256": "3f71cc46e59e1d5064637c99b1ffc8058b8c0123390b29167fc3db2a1af990a2",
+          "bytes": 1716057
+        },
+        {
+          "file": "images/town-game_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/09518dff-55f1-48e4-9c90-a323adb6614a/0_3.png",
+          "sha256": "4baaf658aa2b9f45a511ad213f6392f5df619bd2872d31847831a5376259547a",
+          "bytes": 1700070
+        }
+      ]
     }
   ]
 }
