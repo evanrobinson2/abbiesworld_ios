@@ -1,6 +1,116 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
+   {
+     "id": "2026-10-23-moon-mining",
+     "date": "2026-10-23",
+     "title": "Mine moon cheese",
+     "line": "On the Moon there's a mining outpost with a kiosk. Break moon rocks: one in three hides a cheese, and three cheeses win a moon cheese charm for the backpack. Win as many as you like (two hang on the keychain).",
+     "image": "/whats-new/2026-10-23-moon-mining.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+     "tour": true,
+     "link": "/studies/moon-mission/world.html?beat=outpost"
+   },
+   {
+     "id": "2026-10-23-moon-suit",
+     "date": "2026-10-23",
+     "title": "A properly made space suit",
+     "line": "The crew's suits now have panels, seals at every joint, a chest control plate, life-support pack with tanks, a gold-tint visor and helmet lamps. Before on the left, after on the right.",
+     "image": "/whats-new/2026-10-23-moon-suit.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+     "threadTitle": "AW-STUDY-0036 - Moon Mission game",
+     "tour": false,
+     "link": "/studies/moon-mission/suit.html"
+   },
+   {
+     "id": "2026-10-23-backpack-fidelity",
+     "date": "2026-10-23",
+     "title": "A better-made backpack",
+     "line": "Abbie's backpack now looks sewn and zipped: real cloth and leather grain, stitching round every panel, zip teeth, padded straps, and shiny gold that catches the light.",
+     "image": "/whats-new/2026-10-23-backpack-fidelity.jpg",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+     "threadTitle": "AW-STUDY-0046 - Backpack inventory",
+     "tour": false,
+     "link": "/studies/backpack/"
+   },
+    {
+      "id": "2026-10-23-moon-mission-town",
+      "date": "2026-10-23",
+      "title": "The Moon Mission starts in the town",
+      "line": "A black truck is parked on Main Street outside the coffee shop. Tap it and the Moon Mission begins right there in the town diorama.",
+      "image": "/whats-new/2026-10-23-moon-mission-town.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "AW-STUDY-0036 - Moon Mission",
+      "tour": false,
+      "link": "/town?mission"
+    },
+    {
+      "id": "2026-10-23-built-looks",
+      "date": "2026-10-23",
+      "title": "Your loved looks, built",
+      "line": "Ink and paper, Line art, Dusk mist, One-bit and the world orb are now real kits you can drag a slider on: the page turns to ink, the mist rolls in, the old screen dithers, and the orb opens into a new world.",
+      "image": "/whats-new/2026-10-23-built-looks.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF4XcQhA4n7xJdKC6b5zPq8",
+      "threadTitle": "Shaders article",
+      "tour": false,
+      "link": "/studies/shaders/built.html"
+    },
+    {
+      "id": "2026-10-23-texture-studio-smudge",
+      "date": "2026-10-23",
+      "title": "Texture Studio: cleaner brute paint",
+      "line": "The dark smudges on the brute's skin and clothes are gone from every look; the Saturday Action ink look is the clean one to start with.",
+      "image": "/whats-new/2026-10-23-texture-studio-smudge.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A",
+      "threadTitle": "AW-STUDY-0040 - Texture Studio",
+      "tour": false,
+      "link": "/studies/texture-studio/?look=action&shader=ink"
+    },
+    {
+      "id": "2026-10-23-paint-the-world",
+      "date": "2026-10-23",
+      "title": "A card that paints the world",
+      "line": "Play the Paint the World card and coloured paint falls from the sky onto your board. It stays for a day of game time, and strange alien plants grow out of it.",
+      "image": "/whats-new/2026-10-23-paint-the-world.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFsUNxMs2CS8NZsWeXQJCoG",
+      "threadTitle": "AW-STUDY-0049 - Paint the World",
+      "tour": true,
+      "link": "/studies/paint-world/"
+    },
+    {
+      "id": "2026-10-23-rigging",
+      "date": "2026-10-23",
+      "title": "Characters drawn in pieces, and moving",
+      "line": "The mannequin drawn the way Spine and Rive games do it: SVG pieces on bones, joints that never gap, arms you can pull, and a jump with a real wind-up and squash. Six practice tries side by side, each one better.",
+      "image": "/whats-new/2026-10-23-rigging.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY71Gi6xSzAGcdMibSmMEgC9",
+      "threadTitle": "AW-STUDY-0041 - 2D Character Rigging",
+      "tour": false,
+      "link": "/studies/rigging/"
+    },
+    {
+      "id": "2026-10-23-light-study",
+      "date": "2026-10-23",
+      "title": "Light study: fourteen ways to light the world",
+      "line": "Golden hour, a café window shaft, a bare basement bulb, a hard-sun Moon base and a cosy Halloween dusk, all rebuilt live on our ranch. Pick the ones you love.",
+      "image": "/whats-new/2026-10-23-light-study.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXjLkpqwFiWaYuFKjT8TA8G",
+      "threadTitle": "Light study",
+      "tour": false,
+      "link": "/studies/light/"
+    },
+    {
+      "id": "2026-10-23-watercolour-distance",
+      "date": "2026-10-23",
+      "title": "Watercolour distance",
+      "line": "Pull back in Abbie's Town and the far world turns to wet watercolour. Downtown, Ani's side and Abbie and Daddy's side each paint their distance in their own colours.",
+      "image": "/whats-new/2026-10-23-watercolour-distance.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYXqxTopZ32Vo7Wzbt9v3Pse",
+      "threadTitle": "Watercolour distance",
+      "tour": false,
+      "link": "/town"
+    },
     {
       "id": "2026-10-23-basement-games",
       "date": "2026-10-23",

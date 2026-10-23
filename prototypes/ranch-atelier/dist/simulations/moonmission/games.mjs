@@ -59,7 +59,28 @@ export function buggyRide(ids, seed = 1, length = 600) {
   view() { return {...G}; }, get done() { return G.done; }};
 }
 
-export const GAMES = {wire: wirePuzzle, zapper: bugZapper, harmonizer, buggy: buggyRide};
+// 7. Moon cheese mining at the outpost kiosk (Evan, 20:10Z). Six moon rocks; each takes two swings. A broken rock drops cheese
+// with a 1 in 3 chance (otherwise rubble, and the rock grows back), and three cheeses buy a moon cheese charm at the kiosk.
+// Win as many charms as you like; the backpack keeps at most two on its keychain. Nobody can fail: rocks always grow back.
+export const CHEESE_CHANCE = 1 / 3, CHEESE_NEEDED = 3;
+export function moonMining(ids, seed = 1, need = CHEESE_NEEDED, chance = CHEESE_CHANCE) {
+ const r = rng(Math.imul(seed, 2654435761) ^ 0x9e3779b9), G = {rocks: Array.from({length: 6}, (_, i) => ({i, hp: 2, state: 'rock', t: 0})), cursor: Object.fromEntries(ids.map((id, i) => [id, (i * 2) % 6])), cool: {}, mined: 0, cheese: 0, need, charm: false, done: false, last: null};
+ return {G,
+  step(dt) { const calls = []; if (G.done) return calls;
+   for (const k of Object.keys(G.cool)) G.cool[k] = Math.max(0, G.cool[k] - dt);
+   for (const rk of G.rocks) { if (rk.state === 'rock') continue; rk.t += dt;
+    if (rk.state === 'cheese' && rk.t > .6) { G.cheese++; rk.state = 'rubble'; rk.t = 0; if (G.cheese === 1) calls.push({who: 'ani', text: 'Cheese! It really is cheese!'}); else if (G.cheese < need) calls.push({who: 'abbie', text: 'Another one!'});
+     if (G.cheese >= need) { G.done = G.charm = true; calls.push({who: 'houston', text: 'Three cheeses. The kiosk has a moon cheese charm for your backpack.'}); } }
+    else if (rk.state === 'rubble' && rk.t > 3) { rk.state = 'rock'; rk.hp = 2; rk.t = 0; } }
+   return calls; },
+  input(ev) { if (G.done) return; const p = ev.player, n = G.rocks.length; if (p == null) return;
+   if (ev.move) G.cursor[p] = (G.cursor[p] + ev.move + n) % n; if (ev.rock != null) G.cursor[p] = ((ev.rock % n) + n) % n;
+   if (ev.swing && !(G.cool[p] > 0)) { G.cool[p] = .4; const rk = G.rocks[G.cursor[p]]; if (rk.state !== 'rock') return; rk.hp--; G.last = rk.i;
+    if (rk.hp <= 0) { G.mined++; rk.t = 0; rk.state = r() < chance ? 'cheese' : 'rubble'; } } },
+  view() { return {...G, cool: undefined}; }, get done() { return G.done; }};
+}
+
+export const GAMES = {wire: wirePuzzle, zapper: bugZapper, harmonizer, buggy: buggyRide, mining: moonMining};
 
 // a bot family's moves for the current game view (tests and the ?beat= fast-forward use this)
 export function botMoves(g) {
@@ -68,5 +89,6 @@ export function botMoves(g) {
  else if (g.name === 'zapper') for (const [p, lane] of Object.entries(g.cursor)) { const b = g.bugs.slice().sort((a, c) => a.d - c.d)[0]; if (b) ev.push({player: p, lane: b.lane}, {player: p, zap: true}); }
  else if (g.name === 'harmonizer') { if (!g.listening) { const want = g.phrase[g.i]; const p = Object.keys(g.note).find(k => g.note[k] === want); if (p) ev.push({player: p, note: true}); } }
  else if (g.name === 'buggy') { const next = g.rocks.find(r => !r.hit && r.d > g.d - 2); ev.push({lights: true}, {lane: next && next.lane === 1 ? 0 : 1}); }
+ else if (g.name === 'mining') for (const [p, c] of Object.entries(g.cursor)) { const k = g.rocks.find(x => x.state === 'rock'); if (k) ev.push({player: p, rock: k.i}, {player: p, swing: true}); }
  return ev;
 }

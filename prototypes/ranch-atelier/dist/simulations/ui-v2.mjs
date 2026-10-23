@@ -5,7 +5,7 @@
 import {mountChrono} from './chrono.mjs?v=3';
 import {cardFace,cardArt,setCardArt} from './hand-cards.mjs?v=13';
 import {openCallout,closeCallout} from '../look/callout.mjs?v=2';
-import {inventory} from './inventory.mjs?v=5';
+import {inventory} from './inventory.mjs?v=7';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
 function start(){

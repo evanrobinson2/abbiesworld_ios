@@ -709,7 +709,7 @@ function winScene(P) {
  W2.querySelector('.stats').innerHTML = `<b>${mmss(secs)}</b><b>★ ${level5}</b>` + (rec.wins > 1 ? `<b>♛ ${mmss(rec.best)}</b>` : '');
  W2.classList.add('on');
  for (let k = 0; k < 14; k++) setTimeout(() => sparks(0, 0, 200, ['#ffd84a', '#fff', LOOKS[P.look].body][k % 3], 14, 1.2), 900 + k * 220);
- import('/simulations/backpack.mjs?v=3').then(m => m.earnCharm?.('tardigrade')).catch(() => {});
+ import('/simulations/backpack.mjs?v=5').then(m => m.earnCharm?.('tardigrade')).catch(() => {});
  let first = false; try { first = giveMemoryCoin('science-lab:off-the-slide', 'The science lab'); } catch {}
  setTimeout(() => voice.say((first ? "A gold coin too, one of Daddy's core memories! He showed me pond water under a microscope once. " : '') + 'And a tardigrade charm for my backpack!',
   {choices: [{label: 'Again', go: () => { location.search = `?level=${level5}&again=1${again()}`; }}, ...(level5 < 5 ? [{label: 'Harder goo', go: () => { location.search = `?level=${level5 + 1}&again=1${again()}`; }}] : []), {label: 'Back to town', go: () => leave()}]}), 900);

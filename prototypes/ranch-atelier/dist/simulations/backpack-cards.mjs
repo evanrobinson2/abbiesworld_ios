@@ -10,7 +10,7 @@
 //   deck.show('style' | 'colour' | 'pocket' | 'trim' | 'lining');  deck.dispose();
 // Presentation layer: the hand is drawn for the player and is invisible to every perception.
 import {renderFace} from '../cards/v3/face.mjs?v=2';
-import {STYLES, FACETS, option, styleOf, patternCanvas, accentFor, pocketPath} from './backpack.mjs?v=3';
+import {STYLES, FACETS, option, styleOf, patternCanvas, accentFor, pocketPath} from './backpack.mjs?v=5';
 
 const styleArt = id => new URL(`./assets/backpack/style-${id}.png`, import.meta.url).href;
 const faces = new Map();
