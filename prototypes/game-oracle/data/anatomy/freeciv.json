@@ -21368,14 +21368,14 @@
     "id": "freeciv",
     "imageFileCount": 2753,
     "commonImageDimensions": {
-      "19×19": 582,
-      "14×14": 582,
-      "44×30": 575,
-      "29×20": 575,
-      "64×48": 249,
-      "16×16": 55,
-      "1017×586": 6,
-      "128×128": 5
+      "19Ã—19": 582,
+      "14Ã—14": 582,
+      "44Ã—30": 575,
+      "29Ã—20": 575,
+      "64Ã—48": 249,
+      "16Ã—16": 55,
+      "1017Ã—586": 6,
+      "128Ã—128": 5
     },
     "imageExamples": [
       {
@@ -22553,7 +22553,6 @@
       "perActionEffects": "unexamined",
       "runtime": "unexamined"
     },
-    "publication": "staged for next evidence batch",
     "next": "Trace unit_perform_action and removal effects only as needed to close shortage subsystem boundaries; then move to the next pilot game."
   },
   "removalStudy": {
