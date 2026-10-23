@@ -19,7 +19,29 @@
     "view_side.png",
     "view_back.png"
    ]
+  },
+  {
+   "stage": "remesh",
+   "task_id": "01a16a7f-126b-714b-816d-1f7f46e8d3fe",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a46-762d-7133-b4a3-328b8d5f7031",
+    "target_formats": [
+     "glb"
+    ],
+    "topology": "triangle",
+    "target_polycount": 30000
+   }
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16a80-ef76-707c-97a4-a58ea29dce64",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a7f-126b-714b-816d-1f7f46e8d3fe",
+    "height_meters": 1.8
+   }
   }
  ],
- "credits": 30
+ "credits": 40
 }
