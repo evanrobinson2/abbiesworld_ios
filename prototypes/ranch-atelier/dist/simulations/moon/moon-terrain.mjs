@@ -1,6 +1,8 @@
 import {landscapeParameters} from '../landscape-parameters.mjs';
 import {slopeAt} from '../new-england-terrain.mjs';
 const cache=new Map(),EXTENT=96,STEP=.75,N=257;
+// Two-thirds of the way past the geology field (-11,10.8) along the route from the corridor (0,7).
+export const METEORITE_SITE={x:-13.46,z:11.65};
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 // Bake geological detail once. Runtime navigation and rendering read the same field.
 export function lunarTerrain(seed,parameters={}){
@@ -14,6 +16,9 @@ export function lunarTerrain(seed,parameters={}){
  const clearance=(x,z)=>smooth(worksDistance(x,z)/3);
  // At least one readable impact basin outside the operational pads on small tiles.
  for(let i=0;i<24;i++){const a=(i/24)*Math.PI*2+seed*.17,x=Math.cos(a)*26,z=Math.sin(a)*26;if(clearance(x,z)<.95)continue;craters.unshift({x,z,r:4.8,depth:1.8,age:.15,angle:a,stretch:.94});break;}
+ // MB4: the meteorite's fresh impact crater beside the geology field, where the survey buggy drives. Fresh craters
+ // keep their full shape even inside the works clearance (the pad is dented by the impact, not graded around it).
+ if(!mars&&!alien)craters.push({...METEORITE_SITE,r:2,depth:.6,age:0,angle:.4,stretch:1,fresh:true});
  const hoodoos=[];if(alien)for(let i=0;i<350&&hoodoos.length<46;i++){const a=random()*Math.PI*2,rr=hoodoos.length<20?24+random()*18:42+random()*48,x=Math.cos(a)*rr,z=Math.sin(a)*rr,r=1.4+random()*1.8;if(worksDistance(x,z)<r+3||hoodoos.some(h=>Math.hypot(h.x-x,h.z-z)<h.r+r+1))continue;hoodoos.push({x,z,r,height:(profile===2?10:7)+random()*12,phase:random()*6.28});}
  const raw=(x,z)=>{
   const radial=Math.hypot(x,z),edge=clearance(x,z),phase=seed*.31;
@@ -35,7 +40,7 @@ export function lunarTerrain(seed,parameters={}){
    const bowl=-c.depth*Math.max(0,1-d*d)**2;
    const rim=c.depth*(.28-.13*c.age)*Math.exp(-(((d-1.02)/(.12+c.age*.12))**2));
    const apron=d>1?c.depth*.10*Math.exp(-(d-1)*2.7)*(1+.3*Math.sin(angle*13+c.age*6)):0;
-   y+=edge*(bowl+rim+apron)*(mars?.45:1);
+   y+=(c.fresh?1:edge)*(bowl+rim+apron)*(mars?.45:1);
   }
   return y;
  };

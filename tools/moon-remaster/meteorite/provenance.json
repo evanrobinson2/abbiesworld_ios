@@ -1,0 +1,24 @@
+{
+  "asset": "meteorite",
+  "date": "2026-10-23",
+  "study": "AW-STUDY-0007 Ranch and Moon remaster (docs/oracle/remaster/REMASTER_STUDY.md)",
+  "construction": {
+    "tool": "Blender 5.2 (bpy) headless",
+    "recipe": "build.py",
+    "helpers": "../mkit.py"
+  },
+  "scoring": "Not scored by silhouette: the pack sheets are multi-view illustrations, so this round is judged by eye on the Moon review desk.",
+  "item": "MB4",
+  "name": "Mysterious meteorite",
+  "game_id": "MR-004",
+  "replaces": "nothing (new story object); placed in a fresh crater beside the geology field",
+  "concept": {
+    "source": "Moon Mission pack (/mnt/project-files/trek.zip)",
+    "file": "concept.jpg",
+    "original": "trek/outputs/images/mysterious_meteorite_reference.png",
+    "spec": "trek/entities/mysterious_meteorite_description.md",
+    "midjourney": null,
+    "picked_by": "Evan (the pack is his)"
+  },
+  "output": "meteorite.glb"
+}

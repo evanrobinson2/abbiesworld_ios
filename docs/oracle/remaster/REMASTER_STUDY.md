@@ -122,6 +122,14 @@ in-world activities on the base; its music (`moon_base_return.ogg` and three gam
 Owner: a new **Moon remaster build** thread, started through the coordinator once this plan is merged. It uses the
 Model challenge pipeline and Review Desk; light and sky items go to Weather and clouds.
 
+### Moon wave 1 build (2026-10-23)
+
+MB1 crater field, MB2 dome, MB3 buggy, MB4 meteorite and the cable half of MB11 are built: models and recipes in
+`tools/moon-remaster/`, the ground grammar in `simulations/moon/moon-regolith.mjs`, the meteorite in
+`moon-meteorite.mjs`. Same-camera after shots are in `captures/moon-after/` (plus a new `m10-meteorite` night shot).
+Review desk: https://claude.ai/artifact/97nD2NM8crDv7pruh9iBNS. Open: the landing pad beacon ring (MB11), one main
+dome rather than two (both habitat placements use the dome today), and MB9 light from Weather and clouds.
+
 ## Priority order
 
 1. **Ranch wave 1 (what Evan sees first):** R1 grass, R2 crop bed, R3 shelters, R4 lamps (models now; light with R5).

@@ -6,8 +6,8 @@ export function createMoonNightLights(root,plan){
  function register(object,id){
   object.traverse(o=>{if(!o.isMesh)return;const apply=material=>{
    const name=material.name||'',home=['ME-072','ME-082'].includes(id),lab=id==='ME-001';
-   const glass=(home&&/Teal/.test(name))||(lab&&/Amber/.test(name))||(/^RE-07[35]$/.test(id)&&/ShellGlass/.test(name));
-   const guide=id==='RE-074'&&/CradleMark/.test(name),lamp=/Amber|ShellLight/.test(name)&&!glass;
+   const glass=(home&&/Teal/.test(name))||(id==='MR-002'&&/DomeGlass|OrangeBand/.test(name))||(lab&&/Amber/.test(name))||(/^RE-07[35]$/.test(id)&&/ShellGlass/.test(name));
+   const guide=id==='RE-074'&&/CradleMark/.test(name),lamp=/Amber|ShellLight|HeadlightGlass|TailLight/.test(name)&&!glass;
    if(!glass&&!guide&&!lamp)return material;
    const key=material.uuid+':'+(glass?'window':guide?'guide':'lamp');if(cache.has(key))return cache.get(key);
    const m=material.clone();m.emissive.set(glass?'#ffcb83':guide?'#7de8ed':'#ffd18b');m.emissiveIntensity=0;m.userData={...m.userData,scienceBaseLight:true};cache.set(key,m);materials.push({m,kind:glass?'window':guide?'guide':'lamp'});return m;
