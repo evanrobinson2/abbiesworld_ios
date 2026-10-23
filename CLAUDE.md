@@ -25,3 +25,8 @@ Follow these principles; they matter more than any UI grammar. The full study is
   and has zero words. Everything else lives on things, is summoned, or goes to the grown-up workbench (`GAME_FEEL.md`).
 - Keep what Evan likes: liquid glass (as objects with depth, not flat frosted panels), rich colours and live previews.
   Check a HUD with `tools/hud-rubric/check_hud.py`.
+- In practice: load the `abbies-world-designer` skill (`.claude/skills/`) for any player-facing work. It gives the
+  design card to fill first, the presentation-layer API (`simulations/presentation-layer.mjs`: `presentation()`,
+  `developerHelper()`, `renderWorldOnly()`, `perceivable()`, `volunteer()` for the scene information manifest in
+  `docs/design/INFO_MANIFEST.md`) and the review. Every PR runs the `game-feel` check: a lint for engine artifacts
+  and world masks, and a ratchet that fails a change hiding more of /sandbox. Briefs: `docs/design/briefs/`.
