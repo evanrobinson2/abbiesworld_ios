@@ -79,6 +79,37 @@
         "file": "ref.png"
       },
       "verdict": "3 of 4 drew the whole buggy; #4 is the seat with its nose cone, the closest to a seat alone"
+    },
+    {
+      "role": "ref",
+      "job_id": "8b243fda-1411-4589-81b6-7b89cc9cbf3f",
+      "prompt": "only the detached seat cushion of this moon buggy, a single padded saddle seat floating on its own, no wheels, no body panels, no headlights, no handlebars, no frame, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal with a thin glowing orange light strip, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": "01-buggy/ref/ref.png",
+      "images": [
+        {
+          "file": "mj_8b243fda-1411-4589-81b6-7b89cc9cbf3f_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/8b243fda-1411-4589-81b6-7b89cc9cbf3f/0_0.png",
+          "sha256": "ffb14094460134ded66446c3e638bae020d25def390fb2fe331ed2fb1c738ff9"
+        },
+        {
+          "file": "mj_8b243fda-1411-4589-81b6-7b89cc9cbf3f_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/8b243fda-1411-4589-81b6-7b89cc9cbf3f/0_1.png",
+          "sha256": "d1b2d37348157d2373d3ff7b0f561a99132c1f202a8e7cb152b5ac66b6b22376"
+        },
+        {
+          "file": "mj_8b243fda-1411-4589-81b6-7b89cc9cbf3f_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/8b243fda-1411-4589-81b6-7b89cc9cbf3f/0_2.png",
+          "sha256": "60586f03feccab63d3518e4198104cad3cf940c1c1664d22bbed4203b7f39b89"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "ref.png"
+      },
+      "verdict": "Re-roll (coordinator 12:13Z) for a seat-only picture; #2 is a clean seat alone. Image #4 returned 403 (not served)."
     }
   ]
 }

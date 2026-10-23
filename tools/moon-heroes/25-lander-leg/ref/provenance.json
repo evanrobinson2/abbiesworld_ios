@@ -40,6 +40,37 @@
         "index": 1,
         "file": "ref.png"
       }
+    },
+    {
+      "role": "ref",
+      "job_id": "a44bb290-ddff-4333-bdb6-2669b39465b8",
+      "prompt": "one landing leg with shock strut and round footpad from this lunar lander, standing next to one rocket engine bell nozzle from the same lander, two separate parts, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, not realistic, not shiny gold, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": "23-lander/ref/ref.png",
+      "images": [
+        {
+          "file": "mj_a44bb290-ddff-4333-bdb6-2669b39465b8_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/a44bb290-ddff-4333-bdb6-2669b39465b8/0_0.png",
+          "sha256": "bfd383d399ad458d28321e1e3b492e3c87db2e3ba668d70fbab9e00c8b30f04b"
+        },
+        {
+          "file": "mj_a44bb290-ddff-4333-bdb6-2669b39465b8_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/a44bb290-ddff-4333-bdb6-2669b39465b8/0_1.png",
+          "sha256": "ed56d68332f08aaefc3596a3595457cf638086d0fd7541e6492c53a1cf84ac05"
+        },
+        {
+          "file": "mj_a44bb290-ddff-4333-bdb6-2669b39465b8_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/a44bb290-ddff-4333-bdb6-2669b39465b8/0_3.png",
+          "sha256": "d9de1d6337f1f27e102058188d10b64464904ebc14157149328e3f1490d6cc69"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "ref.png"
+      },
+      "verdict": "Re-roll (coordinator 12:13Z): round 1 came out realistic gold and steel; this one is Faceted Hero gunmetal to match the 23 lander. Image #3 returned 403 (not served)."
     }
   ]
 }
