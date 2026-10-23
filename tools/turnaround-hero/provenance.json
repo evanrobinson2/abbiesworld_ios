@@ -1,0 +1,10 @@
+{
+  "study": "AW-STUDY-0023 - Turnaround Hero",
+  "references": [
+    {"file": "ref/hero-front-back.png", "source": "Evan's upload in the study thread, 2026-10-23T07:10Z", "what": "front and back of the same grey low-poly heroic figure", "size": [512, 512]},
+    {"file": "ref/hero-front.png", "source": "left half of hero-front-back.png"},
+    {"file": "ref/hero-back.png", "source": "right half of hero-front-back.png"}
+  ],
+  "midjourney": [],
+  "picks": []
+}
