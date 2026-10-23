@@ -1,0 +1,30 @@
+{
+ "name": "turnaround-hero-front",
+ "sex": "male",
+ "build": "heroic",
+ "unit": "pixels of tools/turnaround-hero/ref/hero-front.png (512 tall), floor at row 486",
+ "how": "landmarks read by hand on a 16 px grid from the front view, about +/-3 px; slight low camera, so the legs read a little long",
+ "stature": 437,
+ "head": 46,
+ "heights": {
+  "chin": 391,
+  "pit": 376,
+  "acromion": 366,
+  "nipple": 340,
+  "waist": 271,
+  "troch": 241,
+  "crotch": 208,
+  "elbow": 261,
+  "wrist": 211,
+  "fingertip": 151,
+  "knee": 111,
+  "ankle": 31
+ },
+ "widths": {
+  "shoulders": 203,
+  "chest": 126,
+  "waist": 87,
+  "hips": 80,
+  "head": 32
+ }
+}
