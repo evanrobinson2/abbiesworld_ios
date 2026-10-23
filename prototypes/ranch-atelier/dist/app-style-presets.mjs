@@ -1,4 +1,7 @@
-export const themes=[
+// The styles now live in theme/themes.mjs (one theme system for every page). The older list stays for reference.
+import {THEMES, asPreset} from '/theme/themes.mjs';
+export const themes = THEMES.map(asPreset);
+export const legacyThemes=[
 ['Field Notes','Warm paper, vermilion accents, and a quietly expressive serif. Like a well-used field journal.','Fraunces','DM Sans','#efeee7','#fcfbf6','#30362e','#636c60','#d6d9cc','#a23e2b','#fffaf1','#b9c39e','#98b9bc','#ac654d','5px'],
 ['Nordic Air','Cool whites, lake blue, and clean geometry. Spacious, calm, and easy to read.','Manrope','Manrope','#e8eff2','#fafcfd','#213c4b','#5e737d','#cbd9df','#23617e','#ffffff','#a7bfaf','#8ebed1','#6e8e9d','10px'],
 ['Kiln & Clay','Chalk, baked earth, and an elegant tall serif. Warm without the garden-green cast.','Instrument Serif','Work Sans','#eee0d3','#fff8ef','#4b3029','#80665b','#dfc8b8','#a3442c','#fff8ef','#c8b492','#b6c6bc','#ad6550','3px'],
