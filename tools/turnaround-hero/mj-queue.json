@@ -1,0 +1,15 @@
+{
+  "study": "AW-STUDY-0023",
+  "status": "queued: runs after Evan's feedback on AW-STUDY-0021 (Bruiser)",
+  "queued_at": "2026-10-23T07:15Z",
+  "requested_by": "Evan, 2026-10-23T07:10Z",
+  "jobs": [
+    {
+      "prompt": "front, side, back views of the same figure, a grey 3d ultra low polygon count, blocky, heroic male figure in a traditional A pose on a gray backdrop, each view is exactly the same character, wearing tight fitted briefs",
+      "prompt_note": "Evan's words, verbatim. Do not edit the text.",
+      "image_reference": "ref/hero-front-back.png (attached to the prompt so Midjourney keeps this figure)",
+      "machine": "Evan's Mac, Midjourney in Chrome, one job at a time (the Bruiser thread may be using it)",
+      "save_to": "ref/turnaround/mj_<jobid>_<n>.png, with job ids and picks in provenance.json"
+    }
+  ]
+}
