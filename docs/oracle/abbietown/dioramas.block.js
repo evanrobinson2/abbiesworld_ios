@@ -19,7 +19,7 @@ const DIOS = [
 const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
  muraco: {sc: .5, r: 21}, leonard: {sc: .5, r: 29}, horn: {sc: .6, r: 16, fixed: 1}, home: {sc: .8, r: 22}, ani: {sc: .8, r: 22}};
 const dioGroup = new THREE.Group(); dioGroup.position.set(X(DIO_ORIGIN[0]), 0, Z(DIO_ORIGIN[1])); scene.add(dioGroup); dioGroup.visible = false;
-const dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
+const dioHouses = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
 const dioTile = {}; // id -> {cx, cy (map metres of the tile's middle), group, ...}
 const smooth = t => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
 const inHex = (x, y, R) => { const a = 30 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), u = x * ca + y * sa, v = -x * sa + y * ca, ax = Math.abs(u), ay = Math.abs(v); return ay <= R * Math.sqrt(3) / 2 && ax <= R - ay / Math.sqrt(3); };
@@ -95,6 +95,9 @@ function buildDiorama(d, ti) {
   const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 4.6) continue; if (taken.some(t => Math.hypot(t.x - px, t.y - py) < (t.r || 9.5))) continue; if (h.fam === 'shop' && d.id !== 'downtown') continue;
   taken.push({x: px, y: py, r: 9.5}); mine.push({...h, px, py, hz: hf(px, py)}); if (mine.length > 70) break; }
  { const yaw = h => Math.atan2(h.fx, -h.fy), HS = .66, grp = new THREE.Group(); out.add(grp);
+  const kit = mine.filter(h => h.fam !== 'shop'); // the real mix, rebuilt as the nine-type kit; shops stay as the instanced blocks
+  kit.forEach((h, i) => { const hs = Math.abs(Math.sin(h.px * 12.9 + h.py * 78.2)) , {tier, type} = houseType(h, hs), g = buildHouse(type, tier, h.w * HS, h.d * HS, Math.max(4.2, h.h * HS), h.wall, h.roofc, hs); g.position.set(h.px, h.hz - .2, -h.py); g.rotation.y = yaw(h); grp.add(g); (dioHouses[d.id] ||= []).push({x: h.px, z: -h.py, y: h.hz, type, tier, yaw: yaw(h)}); });
+  mine.splice(0, mine.length, ...mine.filter(h => h.fam === 'shop'));
   for (const fam of Object.keys(BODY)) { const list = mine.filter(h => h.fam === fam); if (list.length) grp.add(inst(boxGeo, BODY[fam], list, h => { v3.set(h.px, h.hz - .3, -h.py); q.setFromEuler(e.set(0, yaw(h), 0)); sc.set(h.w * HS, (h.h + .3) * HS, h.d * HS); col.set(h.wall); })); }
   const gab = mine.filter(h => h.roof === 'gable' || h.roof === 'steep'), hip = mine.filter(h => h.roof === 'hip'), flat = mine.filter(h => h.roof === 'flat');
   grp.add(inst(gableGeo, roofMat, gab, h => { v3.set(h.px, h.hz + h.h * HS, -h.py); q.setFromEuler(e.set(0, yaw(h), 0)); sc.set(h.w * HS * 1.06, h.d * .5 * h.pitch * 1.1 * HS, h.d * HS * 1.1); col.set(h.roofc); }));
@@ -158,7 +161,7 @@ const pitchFor = (dist, L) => rad(L.lowPitch + (L.highPitch - L.lowPitch) * Math
 canvas.addEventListener('pointerdown', () => { dragging = true; }); addEventListener('pointerup', () => { dragging = false; });
 function setupDioramas() {
  const DV = DIOS.map(buildDiorama);
- DIOS.forEach((d, i) => { const v = DV[i]; dioTiles[d.id] = {group: v.group, centre: v.group.position.clone().add(dioGroup.position), spots: dioSpots[d.id] || {}}; });
+ DIOS.forEach((d, i) => { const v = DV[i]; dioTiles[d.id] = {group: v.group, centre: v.group.position.clone().add(dioGroup.position), spots: dioSpots[d.id] || {}, houses: dioHouses[d.id] || []}; });
  DIOS.forEach((d, i) => { const t = DV[i].tile; spotByID['dio-' + d.id] = {id: 'dio-' + d.id, name: d.name, line: d.look.mood[0].toUpperCase() + d.look.mood.slice(1) + '.', x: DIO_ORIGIN[0] + t.x, y: DIO_ORIGIN[1] + t.y, z: 10}; ICON['dio-' + d.id] = d.pin; });
  spotByID['dio-trio'] = {id: 'dio-trio', name: 'Three regions', line: "Downtown, Ani's side, and Abbie and Daddy's side, small enough to hold.", x: DIO_ORIGIN[0], y: DIO_ORIGIN[1], z: 6}; ICON['dio-trio'] = '⬡';
 }
