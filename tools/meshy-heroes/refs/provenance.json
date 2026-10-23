@@ -284,5 +284,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T17:09:04Z"
+  },
+  {
+    "id": "A3-paint-suit",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "3b23d7cb-8c64-463e-9a71-3b312dabdac8",
+    "files": [
+      "tools/meshy-heroes/refs/A3-paint-suit/mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_0.png",
+      "tools/meshy-heroes/refs/A3-paint-suit/mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_1.png",
+      "tools/meshy-heroes/refs/A3-paint-suit/mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_2.png",
+      "tools/meshy-heroes/refs/A3-paint-suit/mj_3b23d7cb-8c64-463e-9a71-3b312dabdac8_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:10:45Z"
+  },
+  {
+    "id": "A3-paint-tee",
+    "prompt": "adult man about 7.5 heads tall, bald, salt and pepper beard, orange accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "32d9ff43-e6a1-43f1-9551-2694be291120",
+    "files": [
+      "tools/meshy-heroes/refs/A3-paint-tee/mj_32d9ff43-e6a1-43f1-9551-2694be291120_0.png",
+      "tools/meshy-heroes/refs/A3-paint-tee/mj_32d9ff43-e6a1-43f1-9551-2694be291120_1.png",
+      "tools/meshy-heroes/refs/A3-paint-tee/mj_32d9ff43-e6a1-43f1-9551-2694be291120_2.png",
+      "tools/meshy-heroes/refs/A3-paint-tee/mj_32d9ff43-e6a1-43f1-9551-2694be291120_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:12:35Z"
   }
 ]
