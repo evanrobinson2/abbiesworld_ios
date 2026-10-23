@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0015",
+  "name": "Upright wheel display stand",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 16,
+    "triangles": 864,
+    "bounds_min": [
+      -0.49000000953674316,
+      -0.44999998807907104,
+      0.0
+    ],
+    "bounds_max": [
+      0.5070861577987671,
+      0.44999998807907104,
+      0.9599999189376831
+    ],
+    "dimensions_m": [
+      0.9971,
+      0.9,
+      0.96
+    ],
+    "material_slots": [
+      "Timber",
+      "Rope",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Timber",
+    "Rope",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0015",
+  "intent": "A braced wooden support that presents one cart wheel vertically.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0015",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

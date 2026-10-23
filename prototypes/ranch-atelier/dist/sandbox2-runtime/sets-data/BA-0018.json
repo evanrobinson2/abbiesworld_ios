@@ -1,0 +1,45 @@
+{
+  "id": "aw.ranch.asset.ba-0018",
+  "name": "Vendor sitting stool",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 6,
+    "triangles": 152,
+    "bounds_min": [
+      -0.25,
+      -0.2657143175601959,
+      0.012930835597217083
+    ],
+    "bounds_max": [
+      0.2584451735019684,
+      0.25,
+      0.5199999809265137
+    ],
+    "dimensions_m": [
+      0.5084,
+      0.5157,
+      0.5071
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Timber"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "TimberLight",
+    "Timber"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0018",
+  "intent": "A low three legged stool tucked behind the selling surface.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0018",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

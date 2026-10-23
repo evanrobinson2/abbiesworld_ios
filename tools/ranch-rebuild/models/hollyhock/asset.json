@@ -1,0 +1,227 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/hollyhock",
+ "name": "hollyhock",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a tall hollyhock spire with stacked pink cup-shaped flowers and big round leaves at the base, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "75ebc3ef-489e-4703-b7c6-7847aceab84f",
+    "grid_url": "https://www.midjourney.com/jobs/75ebc3ef-489e-4703-b7c6-7847aceab84f?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "e8075318-94bc-4104-a75f-7adabb7f827f",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:53:07.136Z",
+    "grid_done_at": "2026-10-22T23:53:25.139Z",
+    "upscale_clicked_at": "2026-10-22T23:53:35.491Z",
+    "downloaded_at": "2026-10-22T23:54:44.240Z",
+    "pick_reason": "tall spire of stacked pink cups with big round base leaves, tip not cropped"
+   }
+  },
+  "files": {
+   "hero.png": "68b5cd93db915999b41f2263147e5b8073364bceb9286111f2ff2d90b324b38c"
+  },
+  "folder": "tools/ranch-rebuild/mj/hollyhock"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/hollyhock/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 18 blooms (R 8.2 to 4.6 cm) facing mostly outwards, five base leaves tilted up and out. Blooms read edge-on, leaves edge-on; spire far too thin.",
+    "mean_iou": 0.452
+   },
+   {
+    "round": 2,
+    "change": "Blooms turn strongly to the front, 20 of them, bigger (9.5 to 5.8 cm); base leaves turned to face the front.",
+    "mean_iou": 0.661
+   },
+   {
+    "round": 3,
+    "change": "Blooms set out a full radius from the stalk and a little bigger; six base leaves, lower, two more at the front corners.",
+    "mean_iou": 0.7
+   },
+   {
+    "round": 4,
+    "change": "Leaf rims clamped to the ground (they dipped 3 cm below); bloom spiral phase swept 0 to 5.4 rad, 3.0 puts the lowest bloom on the left as in the hero.",
+    "mean_iou": 0.753
+   },
+   {
+    "round": 5,
+    "change": "Smaller top blooms (0.745) and the left leaf pushed out (0.714): both worse, reverted. Greener Leaf_Pale kept.",
+    "mean_iou": 0.753
+   },
+   {
+    "round": 6,
+    "change": "Footprint held to the old GLB: base leaves scaled (distance 0.75, radius 0.85) to 0.444 m wide, the best of four splits at that width.",
+    "mean_iou": 0.726
+   },
+   {
+    "round": 7,
+    "change": "Final 768 px / 48 sample render and score.",
+    "mean_iou": 0.702
+   },
+   {
+    "round": 8,
+    "change": "AD round: blooms 25 % bigger (12.5 to 7.5 cm) and 24 of them packed at 0.8 radii so they overlap into a solid column; leaf_spread back to the wide version (1.0, 1.1); base leaves heart-shaped with a notch and 16-vertex rim. Spiral phase re-swept (3.0 still best). 0.802 at 384 px.",
+    "mean_iou": 0.802
+   },
+   {
+    "round": 9,
+    "change": "Final 768 px / 48 sample render and score.",
+    "mean_iou": 0.795
+   }
+  ],
+  "what_was_done": [
+   [
+    "Target",
+    "Per the art director, the hero is the only target (no turnaround). make_views.py keys the hero against its cream backdrop, drops the low-saturation grey-green cast shadow running off to the left below the ground line, and cuts below the lowest leaf tip (the warm contact shadow). Result: views/hero_mask.png, aspect 2.35."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders front-on from 6 deg above with the harness lens and distance, as the AD asked. A yaw/elevation grid was flat (a spiral spire looks alike from every side), so the camera was fixed front-on and the bloom spiral's phase (az0) was swept instead so the lowest bloom sits on the left as in the hero."
+   ],
+   [
+    "Spire",
+    "A single straight 5-sided Stem_Green stalk to 1.40 m. 24 open blooms spiral up it by the golden angle from 0.32 to 1.22 m, rim radius 12.5 cm at the bottom shrinking to 7.5 cm at the top, set 0.8 radii from the stalk so they overlap into a solid tapering pink column that hides the stalk, facing outwards with a strong front bias. Each bloom is a five-lobed faceted cup: a scalloped rim of 10 vertices and an inner ring of 5 (Petal_Pink), a Petal_Rose throat fan, and a small three-sided Flower_Yellow centre (21 triangles). Above: three closed pink bipyramid buds, then three green buds to the 1.455 m tip, and four small folded leaf cards on the stalk."
+   ],
+   [
+    "Base leaves",
+    "Six big heart-shaped, scalloped, cupped leaves (centre, ring of 8, rim of 16 alternating lobes and notches, 32 triangles each, with facet jitter), each with a deep notch towards the stalk where the petiole joins and two rounded lobes beside it, on short petioles from the stalk foot, faces turned up, out and to the front; four Leaf_Green and two Leaf_Pale. Rims are clamped to the ground. leaf_spread (1.0, 1.1) gives a 0.59 m spread, wider than the old 0.44 m footprint (AD approved)."
+   ],
+   [
+    "Game readiness",
+    "901 triangles (flower budget 1k), 7 meshes with one flat material each: Stem_Green, Petal_Pink, Petal_Rose, Flower_Yellow, Leaf_Bud, Leaf_Green, Leaf_Pale. All cards double-sided. 0.592 x 0.384 x 1.455 m (old GF-634: 0.438 x 0.440 x 1.455). Origin at the stalk foot on the ground, front -Y. No animation, no variants (plant)."
+   ]
+  ],
+  "creative_additions": "Facet jitter on the leaf cups, and the closed buds shading from pink to green up the tip."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.5921100378036499,
+   0.38373905420303345,
+   1.4550000429153442
+  ],
+  "triangles": 901,
+  "materials": [
+   "Petal_Pink",
+   "Leaf_Bud",
+   "Flower_Yellow",
+   "Leaf_Green",
+   "Leaf_Pale",
+   "Stem_Green",
+   "Petal_Rose"
+  ],
+  "parts": [
+   {
+    "name": "blooms",
+    "materials": [
+     "Petal_Pink"
+    ]
+   },
+   {
+    "name": "buds",
+    "materials": [
+     "Leaf_Bud"
+    ]
+   },
+   {
+    "name": "centres",
+    "materials": [
+     "Flower_Yellow"
+    ]
+   },
+   {
+    "name": "leaves",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "leaves_pale",
+    "materials": [
+     "Leaf_Pale"
+    ]
+   },
+   {
+    "name": "stalk",
+    "materials": [
+     "Stem_Green"
+    ]
+   },
+   {
+    "name": "throats",
+    "materials": [
+     "Petal_Rose"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.795,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero IoU 0.795 at the final 768 px / 48 sample render (0.802 at 384 px): a solid, crowded, tapering pink spire over a low clump of big heart-shaped leaves, matching the hero's outline.",
+   "Reads as a hollyhock at tile size: a fat pink column with a green foot, the rose throats and yellow centres giving each bloom a readable eye.",
+   "901 triangles, under the 1k budget; about 65 % on the blooms."
+  ],
+  "off": [
+   "Footprint is 0.59 x 0.38 m, wider than the old GLB's 0.44 m (approved by the AD for the hero's wide leaf clump).",
+   "Bud material is named Leaf_Bud, not Bud_Green: the game's role patterns don't match 'bud', so Bud_Green would get the plain role and no seasonal recolour.",
+   "The hero's blooms are rounder, softer cups with radiating veins; mine are five-lobed pentagonal cups, a touch more geometric up close.",
+   "The hero's leaves are veined; mine are flat faceted heart shapes. The stem leaves are now hidden behind the blooms."
+  ]
+ },
+ "exports": {
+  "runtime": "hollyhock.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-634.glb"
+   ]
+  }
+ },
+ "files": {
+  "hollyhock.glb": {
+   "sha256": "549dc6c66c01f96c68848b5831f553878f51e9bb3518d7bc1b5475658468b280",
+   "bytes": 73696
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "964316295a715d56f14db7a52fd961576b6ac8c0",
+  "path": "tools/ranch-rebuild/models/hollyhock"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

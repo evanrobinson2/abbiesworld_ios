@@ -1,0 +1,65 @@
+[
+  {
+    "id": "horse-faceted",
+    "subject": "horse",
+    "style": "faceted",
+    "triangles": 276,
+    "bytes": 37328
+  },
+  {
+    "id": "shelter-faceted",
+    "subject": "shelter",
+    "style": "faceted",
+    "triangles": 168,
+    "bytes": 22096
+  },
+  {
+    "id": "tree-faceted",
+    "subject": "tree",
+    "style": "faceted",
+    "triangles": 156,
+    "bytes": 20600
+  },
+  {
+    "id": "horse-soft-toy",
+    "subject": "horse",
+    "style": "soft-toy",
+    "triangles": 1676,
+    "bytes": 94760
+  },
+  {
+    "id": "shelter-soft-toy",
+    "subject": "shelter",
+    "style": "soft-toy",
+    "triangles": 1448,
+    "bytes": 104624
+  },
+  {
+    "id": "tree-soft-toy",
+    "subject": "tree",
+    "style": "soft-toy",
+    "triangles": 700,
+    "bytes": 34280
+  },
+  {
+    "id": "horse-wooden",
+    "subject": "horse",
+    "style": "wooden",
+    "triangles": 524,
+    "bytes": 62324
+  },
+  {
+    "id": "shelter-wooden",
+    "subject": "shelter",
+    "style": "wooden",
+    "triangles": 168,
+    "bytes": 21928
+  },
+  {
+    "id": "tree-wooden",
+    "subject": "tree",
+    "style": "wooden",
+    "triangles": 88,
+    "bytes": 9040
+  }
+]

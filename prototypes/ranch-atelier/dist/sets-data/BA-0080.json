@@ -1,0 +1,45 @@
+{
+  "id": "aw.ranch.asset.ba-0080",
+  "name": "Raised market gathering step",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 10,
+    "triangles": 440,
+    "bounds_min": [
+      -1.600000023841858,
+      -0.5699999928474426,
+      0.0
+    ],
+    "bounds_max": [
+      1.600000023841858,
+      0.5249999761581421,
+      0.36000001430511475
+    ],
+    "dimensions_m": [
+      3.2,
+      1.095,
+      0.36
+    ],
+    "material_slots": [
+      "Earth",
+      "Stone"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Earth",
+    "Stone"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0080",
+  "intent": "A broad low earthen step with stone edging at a meeting point.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0080",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

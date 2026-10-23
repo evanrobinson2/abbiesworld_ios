@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-10-19T05:10:57.410891+00:00",
+  "status": "pass-static-presentation",
+  "review_method": [
+    "Viewed both current 1600x1200 PNGs",
+    "Viewed side-by-side 360x270 downsample per castle as phone-card proxy",
+    "Read completed terrain-fix Blender log and assembly reports"
+  ],
+  "observations": [
+    "Both castle silhouettes remain distinct at 360px width: stepped blue friendly keep versus tall red enemy spire.",
+    "Gate arch opening and bridge approach remain legible at phone-card size.",
+    "Seven hex terrain tiles now meet continuously; former triangular courtyard holes are gone. Narrow intentional cap-edge seams remain.",
+    "No cropped towers, flags or terrain perimeter in either image.",
+    "Walls meet corner towers visually; bridge enters the gate and courtyard paving is visible through the passage."
+  ],
+  "limitations": [
+    "Static visual presentation pass only; no collision, navmesh, walk-through or gameplay test.",
+    "Phone proxy is a resized rendered image, not an actual device/browser test.",
+    "Small masonry marks and stair rails lose detail at phone size as expected.",
+    "Internal back-facing surfaces and concealed intersections were not exhaustively inspected."
+  ],
+  "artifacts": {
+    "sunward-castle": {
+      "png": "sunward-castle.png",
+      "sha256": "4e9c25f9981b37c9bc76c8518a5c159ed2024709cfac79292fcb907a0a4ccc8b",
+      "modified_utc": "2026-10-19T05:07:01.762262+00:00"
+    },
+    "iron-crown-fortress": {
+      "png": "iron-crown-fortress.png",
+      "sha256": "9148286b29003c7473e429b392ac3bfe1da0889e82e38078e00e345872750d7b",
+      "modified_utc": "2026-10-19T05:07:20.480783+00:00"
+    }
+  }
+}

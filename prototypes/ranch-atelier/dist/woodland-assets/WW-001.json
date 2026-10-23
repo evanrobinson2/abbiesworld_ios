@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.1.0",
+  "id": "WW-001",
+  "name": "Regrowing coppice stool",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "working-woodland",
+  "batch": 1,
+  "category": "plant",
+  "intent": "Keep an established woody rootstock productive through cycles of cutting and regrowth.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/working-woodland/ww-001",
+  "biome": "working-woodland",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 32,
+    "triangles": 572,
+    "bounds_min": [
+      -0.5748060345649719,
+      -0.530267059803009,
+      0.0
+    ],
+    "bounds_max": [
+      0.5789581537246704,
+      0.5886984467506409,
+      1.6116745471954346
+    ],
+    "dimensions_m": [
+      1.15376,
+      1.11897,
+      1.61167
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "managed-woodland-plant",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "cut",
+      "protect"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "root",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.06000000238418579
+        ],
+        "role": "root"
+      },
+      {
+        "id": "work",
+        "position_blender_m": [
+          0.0,
+          -0.699999988079071,
+          0.06000000238418579
+        ],
+        "role": "work"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "planting beds and water access",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "fresh-cut",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "young-shoots",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "leafy",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "mature-rods",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "dormant",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "damaged",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Keep an established woody rootstock productive through cycles of cutting and regrowth. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See coppice(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "working-woodland/batch_woodland.py",
+    "entry_point": "coppice",
+    "source_sha256": "56d872cea517e070d7f26f1a8e68d8dece3082a0992630ac46cfed46e52273b1",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- working-woodland batch_woodland.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable silhouette and material separation in rendered contact-sheet inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable silhouette and material separation in rendered contact-sheet inspection"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "WW-001.glb",
+    "sha256": "c03fd383c5d74849e96d596ff568fa2cfbc81c862b5aac38ff1c7cbd1832c14f",
+    "bytes": 38444
+  }
+}

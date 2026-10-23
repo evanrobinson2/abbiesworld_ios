@@ -1,0 +1,308 @@
+[
+  {
+    "id": "abbie-idle",
+    "label": "Abbie \u00b7 idle",
+    "category": "workers",
+    "subject": "abbie",
+    "state": "idle",
+    "json": "/simulation-assets/workers/abbie-idle.json",
+    "glb": "/simulation-assets/workers/abbie-idle.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Abbie",
+      "sourceAppearance": "/simulation-characters/abbie.svg",
+      "relativeHeight": 0.72,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "abbie-carry",
+    "label": "Abbie \u00b7 carry",
+    "category": "workers",
+    "subject": "abbie",
+    "state": "carry",
+    "json": "/simulation-assets/workers/abbie-carry.json",
+    "glb": "/simulation-assets/workers/abbie-carry.glb",
+    "triangles": 6276,
+    "simulationMapping": {
+      "workerName": "Abbie",
+      "sourceAppearance": "/simulation-characters/abbie.svg",
+      "relativeHeight": 0.72,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "abbie-work",
+    "label": "Abbie \u00b7 work",
+    "category": "workers",
+    "subject": "abbie",
+    "state": "work",
+    "json": "/simulation-assets/workers/abbie-work.json",
+    "glb": "/simulation-assets/workers/abbie-work.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Abbie",
+      "sourceAppearance": "/simulation-characters/abbie.svg",
+      "relativeHeight": 0.72,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "ani-idle",
+    "label": "Ani \u00b7 idle",
+    "category": "workers",
+    "subject": "ani",
+    "state": "idle",
+    "json": "/simulation-assets/workers/ani-idle.json",
+    "glb": "/simulation-assets/workers/ani-idle.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Ani",
+      "sourceAppearance": "/simulation-characters/ani.svg",
+      "relativeHeight": 0.72,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "ani-carry",
+    "label": "Ani \u00b7 carry",
+    "category": "workers",
+    "subject": "ani",
+    "state": "carry",
+    "json": "/simulation-assets/workers/ani-carry.json",
+    "glb": "/simulation-assets/workers/ani-carry.glb",
+    "triangles": 6276,
+    "simulationMapping": {
+      "workerName": "Ani",
+      "sourceAppearance": "/simulation-characters/ani.svg",
+      "relativeHeight": 0.72,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "ani-work",
+    "label": "Ani \u00b7 work",
+    "category": "workers",
+    "subject": "ani",
+    "state": "work",
+    "json": "/simulation-assets/workers/ani-work.json",
+    "glb": "/simulation-assets/workers/ani-work.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Ani",
+      "sourceAppearance": "/simulation-characters/ani.svg",
+      "relativeHeight": 0.72,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "mommy-idle",
+    "label": "Mommy \u00b7 idle",
+    "category": "workers",
+    "subject": "mommy",
+    "state": "idle",
+    "json": "/simulation-assets/workers/mommy-idle.json",
+    "glb": "/simulation-assets/workers/mommy-idle.glb",
+    "triangles": 5248,
+    "simulationMapping": {
+      "workerName": "Mommy",
+      "sourceAppearance": "/simulation-characters/mommy.svg",
+      "relativeHeight": 1.0,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "mommy-carry",
+    "label": "Mommy \u00b7 carry",
+    "category": "workers",
+    "subject": "mommy",
+    "state": "carry",
+    "json": "/simulation-assets/workers/mommy-carry.json",
+    "glb": "/simulation-assets/workers/mommy-carry.glb",
+    "triangles": 5604,
+    "simulationMapping": {
+      "workerName": "Mommy",
+      "sourceAppearance": "/simulation-characters/mommy.svg",
+      "relativeHeight": 1.0,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "mommy-work",
+    "label": "Mommy \u00b7 work",
+    "category": "workers",
+    "subject": "mommy",
+    "state": "work",
+    "json": "/simulation-assets/workers/mommy-work.json",
+    "glb": "/simulation-assets/workers/mommy-work.glb",
+    "triangles": 5248,
+    "simulationMapping": {
+      "workerName": "Mommy",
+      "sourceAppearance": "/simulation-characters/mommy.svg",
+      "relativeHeight": 1.0,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "daddy-idle",
+    "label": "Daddy \u00b7 idle",
+    "category": "workers",
+    "subject": "daddy",
+    "state": "idle",
+    "json": "/simulation-assets/workers/daddy-idle.json",
+    "glb": "/simulation-assets/workers/daddy-idle.glb",
+    "triangles": 5396,
+    "simulationMapping": {
+      "workerName": "Daddy",
+      "sourceAppearance": "/simulation-characters/daddy.svg",
+      "relativeHeight": 1.04,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "daddy-carry",
+    "label": "Daddy \u00b7 carry",
+    "category": "workers",
+    "subject": "daddy",
+    "state": "carry",
+    "json": "/simulation-assets/workers/daddy-carry.json",
+    "glb": "/simulation-assets/workers/daddy-carry.glb",
+    "triangles": 5752,
+    "simulationMapping": {
+      "workerName": "Daddy",
+      "sourceAppearance": "/simulation-characters/daddy.svg",
+      "relativeHeight": 1.04,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "daddy-work",
+    "label": "Daddy \u00b7 work",
+    "category": "workers",
+    "subject": "daddy",
+    "state": "work",
+    "json": "/simulation-assets/workers/daddy-work.json",
+    "glb": "/simulation-assets/workers/daddy-work.glb",
+    "triangles": 5396,
+    "simulationMapping": {
+      "workerName": "Daddy",
+      "sourceAppearance": "/simulation-characters/daddy.svg",
+      "relativeHeight": 1.04,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "jeff-idle",
+    "label": "Jeff \u00b7 idle",
+    "category": "workers",
+    "subject": "jeff",
+    "state": "idle",
+    "json": "/simulation-assets/workers/jeff-idle.json",
+    "glb": "/simulation-assets/workers/jeff-idle.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Jeff",
+      "sourceAppearance": "/simulation-characters/jeff.svg",
+      "relativeHeight": 1.02,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "jeff-carry",
+    "label": "Jeff \u00b7 carry",
+    "category": "workers",
+    "subject": "jeff",
+    "state": "carry",
+    "json": "/simulation-assets/workers/jeff-carry.json",
+    "glb": "/simulation-assets/workers/jeff-carry.glb",
+    "triangles": 6276,
+    "simulationMapping": {
+      "workerName": "Jeff",
+      "sourceAppearance": "/simulation-characters/jeff.svg",
+      "relativeHeight": 1.02,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "jeff-work",
+    "label": "Jeff \u00b7 work",
+    "category": "workers",
+    "subject": "jeff",
+    "state": "work",
+    "json": "/simulation-assets/workers/jeff-work.json",
+    "glb": "/simulation-assets/workers/jeff-work.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Jeff",
+      "sourceAppearance": "/simulation-characters/jeff.svg",
+      "relativeHeight": 1.02,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "alexis-idle",
+    "label": "Alexis \u00b7 idle",
+    "category": "workers",
+    "subject": "alexis",
+    "state": "idle",
+    "json": "/simulation-assets/workers/alexis-idle.json",
+    "glb": "/simulation-assets/workers/alexis-idle.glb",
+    "triangles": 5248,
+    "simulationMapping": {
+      "workerName": "Alexis",
+      "sourceAppearance": "/simulation-characters/alexis.svg",
+      "relativeHeight": 1.0,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "alexis-carry",
+    "label": "Alexis \u00b7 carry",
+    "category": "workers",
+    "subject": "alexis",
+    "state": "carry",
+    "json": "/simulation-assets/workers/alexis-carry.json",
+    "glb": "/simulation-assets/workers/alexis-carry.glb",
+    "triangles": 5604,
+    "simulationMapping": {
+      "workerName": "Alexis",
+      "sourceAppearance": "/simulation-characters/alexis.svg",
+      "relativeHeight": 1.0,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "alexis-work",
+    "label": "Alexis \u00b7 work",
+    "category": "workers",
+    "subject": "alexis",
+    "state": "work",
+    "json": "/simulation-assets/workers/alexis-work.json",
+    "glb": "/simulation-assets/workers/alexis-work.glb",
+    "triangles": 5248,
+    "simulationMapping": {
+      "workerName": "Alexis",
+      "sourceAppearance": "/simulation-characters/alexis.svg",
+      "relativeHeight": 1.0,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  }
+]

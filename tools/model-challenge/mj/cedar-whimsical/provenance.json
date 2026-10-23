@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "cedar-whimsical",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook old cedar tree with a twisty, plump trunk, swirling cloud-like layered evergreen tiers, a little door at its roots, a rope swing on a low branch, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "a7303c2f-5e5e-466c-97db-146b2474a0c7",
+      "grid_url": "https://www.midjourney.com/jobs/a7303c2f-5e5e-466c-97db-146b2474a0c7?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "fdc7ab19-b5ec-4492-b2b3-b9c5ef2092ce",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook old cedar tree with a twisty, plump trunk, swirling cloud-like layered evergreen tiers, a little door at its roots, a rope swing on a low branch, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "d8d4ea82-becd-47b4-9605-6cde660ab52e",
+      "grid_url": "https://www.midjourney.com/jobs/d8d4ea82-becd-47b4-9605-6cde660ab52e?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "d5c9f094-4c9a-40dc-ba46-d83ca933f206",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "4d60c1b97f4fcb379d40c8aef1055f58e2cd240fd82cd5f58fae9703925542b3",
+      "bytes": 2591672,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/fdc7ab19-b5ec-4492-b2b3-b9c5ef2092ce/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "96387b250a69a9f4c5a6cb80feb09d69a2185f4fc1eb2d948916ca20b58e92ea",
+      "bytes": 3368529,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/d5c9f094-4c9a-40dc-ba46-d83ca933f206/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "7d4ec5b8ab09d6952ecd285115d79d7000e2078c9799d01e3e5d7fac01b858f0",
+      "bytes": 1094774,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "67a6cc18e9865424fc1a5f108757e904a3a1ee91ec1530dfe27e9a7c88991050",
+      "bytes": 1242739,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "e0fe5329dc53898417c09b2ba19b391a3a1841d0bda6576b2cfb72dc92c9620c",
+      "bytes": 989653,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 0 has the plump twisty trunk, cloud-like tiers, root door and rope swing all visible. Turnaround pick 2 shows three consistent trees with the door in front and the swing on the side view."
+}

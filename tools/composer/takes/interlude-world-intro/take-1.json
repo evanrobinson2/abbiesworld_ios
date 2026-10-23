@@ -1,0 +1,19 @@
+{
+ "id": "interlude-world-intro",
+ "take": 1,
+ "title": "World Intro",
+ "kind": "interlude",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "EgyPdofQJrDPosFKUhVk",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, title-card theme, full warm orchestra, memorable melody, builds then lands. Intro: harp and strings. Theme: full theme statement. Cadence: clear ending. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 25000
+ },
+ "date": "2026-10-22",
+ "sha256": "edb358853a0c58b29b35aa7212d1cb08f16f4bc4b558fe504ca07cb99c0f9050",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-1.master.mp3"
+}

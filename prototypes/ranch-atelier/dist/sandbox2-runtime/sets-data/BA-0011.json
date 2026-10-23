@@ -1,0 +1,45 @@
+{
+  "id": "aw.ranch.asset.ba-0011",
+  "name": "Broad plank selling counter",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 18,
+    "triangles": 584,
+    "bounds_min": [
+      -1.140912652015686,
+      -0.48000001907348633,
+      -0.013619395904242992
+    ],
+    "bounds_max": [
+      1.140912652015686,
+      0.48000001907348633,
+      0.965999960899353
+    ],
+    "dimensions_m": [
+      2.2818,
+      0.96,
+      0.9796
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Timber"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "TimberLight",
+    "Timber"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0011",
+  "intent": "A rough plank surface on trestles with clearance for baskets below.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0011",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

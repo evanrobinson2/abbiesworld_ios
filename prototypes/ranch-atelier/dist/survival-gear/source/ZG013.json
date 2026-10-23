@@ -1,0 +1,44 @@
+{
+  "id": "ZG013",
+  "name": "Compact hatchet",
+  "authoring": "local Blender procedural geometry",
+  "units": "metres",
+  "parts": [
+    {
+      "name": "hatchet handle",
+      "location": [
+        0.0,
+        0.0,
+        0.20499999821186066
+      ],
+      "rotation": [
+        0.0,
+        -0.0,
+        3.141592502593994
+      ],
+      "dimensions": [
+        0.052000001072883606,
+        0.052000001072883606,
+        0.3699999749660492
+      ]
+    },
+    {
+      "name": "wedge head",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dimensions": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.17000001668930054
+      ]
+    }
+  ]
+}

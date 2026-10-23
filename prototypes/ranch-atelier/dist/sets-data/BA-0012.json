@@ -1,0 +1,49 @@
+{
+  "id": "aw.ranch.asset.ba-0012",
+  "name": "Low woven selling table",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 80,
+    "triangles": 1032,
+    "bounds_min": [
+      -0.7477951645851135,
+      -0.4667988717556,
+      -0.005963359493762255
+    ],
+    "bounds_max": [
+      0.7400000095367432,
+      0.4667988717556,
+      0.5450000166893005
+    ],
+    "dimensions_m": [
+      1.4878,
+      0.9336,
+      0.551
+    ],
+    "material_slots": [
+      "Timber",
+      "Rope",
+      "Reed"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Timber",
+    "Rope",
+    "Reed"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0012",
+  "intent": "A lightweight reed surface supported by short wooden legs.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0012",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

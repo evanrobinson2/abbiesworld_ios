@@ -1,0 +1,44 @@
+{
+ "meadow": {
+  "leaf": "7FA04A",
+  "leaf-dark": "5E8240",
+  "needle": "3F6B45",
+  "bark": "6E5039",
+  "bark-birch": "E6E0CF",
+  "birch-mark": "3B3934",
+  "stone": "9A9585",
+  "stone-moss": "7E8F55",
+  "wood": "9B7148",
+  "wood-cut": "D9B27A",
+  "hoop": "4E4B47",
+  "berry": "B8433A"
+ },
+ "autumn": {
+  "leaf": "D9892F",
+  "leaf-dark": "B4562A",
+  "needle": "3F6B45",
+  "bark": "634632",
+  "bark-birch": "E2D9C4",
+  "birch-mark": "3B3934",
+  "stone": "978F80",
+  "stone-moss": "9C8A4A",
+  "wood": "94683F",
+  "wood-cut": "D2A46C",
+  "hoop": "4E4B47",
+  "berry": "8E2F2A"
+ },
+ "frost": {
+  "leaf": "C9D6D3",
+  "leaf-dark": "9FB2B4",
+  "needle": "557468",
+  "bark": "5B4C42",
+  "bark-birch": "EDEDEA",
+  "birch-mark": "45474A",
+  "stone": "A7AAA8",
+  "stone-moss": "DDE5E6",
+  "wood": "86705A",
+  "wood-cut": "CDB79A",
+  "hoop": "55585B",
+  "berry": "9A3A3A"
+ }
+}

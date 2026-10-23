@@ -1,0 +1,19 @@
+{
+ "id": "sting-arrival",
+ "take": 1,
+ "title": "Arrival",
+ "kind": "sting",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "vn518HZZbJozulkaUaRf",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, harp glissando up into a warm major chord, horn swell, you have arrived somewhere wonderful. Sting: short, complete musical gesture, ring out. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 5000
+ },
+ "date": "2026-10-22",
+ "sha256": "f63e1aa1cce5f3364925c1b4533c61110b02a76a13fd775ee325b1707a132e8c",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-1.master.mp3"
+}

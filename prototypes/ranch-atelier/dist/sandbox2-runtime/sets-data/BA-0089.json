@@ -1,0 +1,62 @@
+{
+  "id": "aw.ranch.asset.ba-0089",
+  "name": "Older market regular",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 93,
+    "triangles": 5156,
+    "bounds_min": [
+      -0.35805001854896545,
+      -0.26969999074935913,
+      0.0
+    ],
+    "bounds_max": [
+      0.3368085026741028,
+      0.15240737795829773,
+      1.571700096130371
+    ],
+    "dimensions_m": [
+      0.6949,
+      0.4221,
+      1.5717
+    ],
+    "material_slots": [
+      "CharacterGreyHair",
+      "CharacterLeather",
+      "CharacterSkinOchre",
+      "CharacterEye",
+      "CharacterClay",
+      "CharacterOchre",
+      "CharacterLinen",
+      "CharacterWood"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 8
+  },
+  "materials": [
+    "CharacterGreyHair",
+    "CharacterLeather",
+    "CharacterSkinOchre",
+    "CharacterEye",
+    "CharacterClay",
+    "CharacterOchre",
+    "CharacterLinen",
+    "CharacterWood"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0089",
+  "intent": "An older adult with a walking support and a small purchase bundle.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0089",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

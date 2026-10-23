@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0044",
+  "name": "Fresh cheese selling board",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 4,
+    "triangles": 576,
+    "bounds_min": [
+      -0.3499999940395355,
+      -0.22499999403953552,
+      0.0
+    ],
+    "bounds_max": [
+      0.3499999940395355,
+      0.22499999403953552,
+      0.15000000596046448
+    ],
+    "dimensions_m": [
+      0.7,
+      0.45,
+      0.15
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Cheese",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "TimberLight",
+    "Cheese",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0044",
+  "intent": "A board with whole and cut cheese forms and a cloth cover.",
+  "family": "Food displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0044",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

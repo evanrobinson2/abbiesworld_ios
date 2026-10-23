@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "ME-048",
+  "name": "Indexed geological sample cache",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-exterior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Cylindrical cache and separately placed handled cap support field sample storage. Static scientific-fiction concept, not certified engineering.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-exterior/me-048",
+  "biome": "moon-base-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 7,
+    "triangles": 468,
+    "bounds_min": [
+      -0.2160000056028366,
+      -0.19500000774860382,
+      0.0
+    ],
+    "bounds_max": [
+      0.6399999856948853,
+      0.1899999976158142,
+      0.6350000500679016
+    ],
+    "dimensions_m": [
+      0.856,
+      0.385,
+      0.635
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "sample-caching",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "fill",
+      "seal",
+      "retrieve"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "cap",
+        "position_blender_m": [
+          0.44999998807907104,
+          0.0,
+          0.10999999940395355
+        ],
+        "role": "cap"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "open",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "filled",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "sealed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "retrieved",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Cylindrical cache and separately placed handled cap support field sample storage. Static scientific-fiction concept, not certified engineering. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See cache(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-exterior/batch_moon_exterior_5.py",
+    "entry_point": "cache",
+    "source_sha256": "6d12fa3f4187f50d7bc300530f72dc220bab27f558a436d7a778700e5aa774dd",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-exterior batch_moon_exterior_5.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "ME-048"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered inspection card checked: readable coherent base geometry and materials; static prototype",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered inspection card checked: readable coherent base geometry and materials; static prototype"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "ME-048.glb",
+    "sha256": "1a5f3b1fa18741c0393008b3a0180faeebd27bb47594c84669801118969e5f4f",
+    "bytes": 28572
+  }
+}

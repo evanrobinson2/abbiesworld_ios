@@ -1,0 +1,49 @@
+{
+  "id": "aw.ranch.asset.ba-0039",
+  "name": "Merchant seal and cord",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 6,
+    "triangles": 116,
+    "bounds_min": [
+      -0.04505804926156998,
+      -0.04500000923871994,
+      0.00402936153113842
+    ],
+    "bounds_max": [
+      0.20594923198223114,
+      0.24588143825531006,
+      0.07699999958276749
+    ],
+    "dimensions_m": [
+      0.251,
+      0.2909,
+      0.073
+    ],
+    "material_slots": [
+      "Stone",
+      "ClayLight",
+      "Rope"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Stone",
+    "ClayLight",
+    "Rope"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Seal emblem is fictional.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0039",
+  "intent": "A carved seal on a carrying cord with a distinct trade emblem.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0039",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

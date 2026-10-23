@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "1.65 m rounded adult ranch resident. Named BODY, CLOTHING, FACE and HAIR meshes share a reusable articulated transform hierarchy. In-place walk and breathing idle; separate sleeve, shirt, trouser, boot and accessory meshes for future outfit swaps.",
+  "blenderVersion": "5.2.1 LTS"
+}

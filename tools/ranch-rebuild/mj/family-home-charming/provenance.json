@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "family-home-charming",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/family-home-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "2c04a9b6-58b2-421b-a0f8-db6ef58b8c09",
+      "grid_url": "https://www.midjourney.com/jobs/2c04a9b6-58b2-421b-a0f8-db6ef58b8c09?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "88224c25-520b-44e8-8577-51e36f7433f7",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:04:33.631Z",
+      "grid_done_at": "2026-10-23T00:04:51.633Z",
+      "upscale_clicked_at": "2026-10-23T00:05:02.919Z",
+      "downloaded_at": "2026-10-23T00:06:15.210Z",
+      "pick_reason": "chubby storybook cottage with two blue-shuttered windows and flower boxes, stone step, chimney and stone foundation"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a cozy small timber-framed family farmhouse cottage, cream plaster walls between exposed timber posts and beams, a teal shingled gable roof, a brick chimney, a front door with a small stone step, two blue-shuttered windows with flower boxes, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "a9a07666-3641-49b2-9c80-1f0ddcc92438",
+      "grid_url": "https://www.midjourney.com/jobs/a9a07666-3641-49b2-9c80-1f0ddcc92438?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "dccb360c-7285-495f-8cb2-4680ac4fb1fc",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:06:25.276Z",
+      "grid_done_at": "2026-10-23T00:06:43.279Z",
+      "upscale_clicked_at": "2026-10-23T00:06:53.717Z",
+      "downloaded_at": "2026-10-23T00:08:16.994Z",
+      "pick_reason": "front with door, gable side and back of one chubby cottage, well separated; sheet 1 had identical side and back"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "f2fd10649f22175e2350478f200b63216b778606c84bbd84edf4cff107c85287",
+      "bytes": 2266526,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/88224c25-520b-44e8-8577-51e36f7433f7/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "359f66b39597320ad56a2800e0aa1747a62f46817ef61e6f911936447608d252",
+      "bytes": 4029559,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/dccb360c-7285-495f-8cb2-4680ac4fb1fc/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "7504ece37404ef3fa350e0bc3239da192363ba71327b1353e00715531563aeb5",
+      "bytes": 1470420,
+      "pixels": [
+        876,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/family-home-charming [('front', 241, 1117), ('side', 1125, 1884), ('back', 1884, 2775)]"
+    },
+    "view_side.png": {
+      "sha256": "12dc138e14bb94538239c872f127d0436c580ac5bb259569cbff0dda8983cb81",
+      "bytes": 1069810,
+      "pixels": [
+        759,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/family-home-charming [('front', 241, 1117), ('side', 1125, 1884), ('back', 1884, 2775)]"
+    },
+    "view_back.png": {
+      "sha256": "56609544005c3a3aa570da788c0dba00b107f93f3f12698d7fcab779e7d4be54",
+      "bytes": 1160554,
+      "pixels": [
+        891,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/family-home-charming [('front', 241, 1117), ('side', 1125, 1884), ('back', 1884, 2775)]"
+    }
+  }
+}

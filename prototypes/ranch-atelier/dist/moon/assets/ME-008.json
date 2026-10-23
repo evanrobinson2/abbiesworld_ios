@@ -1,0 +1,171 @@
+{
+  "schema_version": "1.1.0",
+  "id": "ME-008",
+  "name": "Pressure-suited astronaut",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-exterior",
+  "batch": 1,
+  "category": "animate",
+  "intent": "Continuous suit volumes, articulated joints, boots and curved visor identify an EVA worker. Scientific fiction; not certified engineering.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-exterior/me-008",
+  "biome": "moon-base-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 63,
+    "triangles": 2976,
+    "bounds_min": [
+      -0.47510579228401184,
+      -0.2527596056461334,
+      0.0
+    ],
+    "bounds_max": [
+      0.47510579228401184,
+      0.2199999839067459,
+      1.899999976158142
+    ],
+    "dimensions_m": [
+      0.95021,
+      0.47276,
+      1.9
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "worker",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "walk",
+      "inspect",
+      "service",
+      "sample"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "backpack",
+        "position_blender_m": [
+          0.0,
+          0.20000000298023224,
+          1.1799999475479126
+        ],
+        "role": "backpack"
+      },
+      {
+        "id": "feet",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "role": "feet"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "standing",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "walking",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "kneeling",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "working",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Continuous suit volumes, articulated joints, boots and curved visor identify an EVA worker. Scientific fiction; not certified engineering. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See astronaut(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-exterior/batch_moon_exterior.py",
+    "entry_point": "astronaut",
+    "source_sha256": "4a01f7ea8ee6f39ffe62d85c23c7f5d2fc8f48867d8e16ba8a75dea34291806a",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-exterior batch_moon_exterior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "ME-008"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable silhouette and material separation in rendered contact-sheet inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable silhouette and material separation in rendered contact-sheet inspection"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "ME-008.glb",
+    "sha256": "92a0863c587a045e4cc2ac227517982aefd5425adb3f58a7d37e25184f727d3d",
+    "bytes": 195524
+  }
+}

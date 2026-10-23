@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "hamper-upgrade",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a rectangular woven reed merchandise hamper with a separate fitted lid sitting on top, a tight basket weave, a reinforced rim, rope handles on both ends, a toggle and loop latch, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "f119bb58-8b37-435e-877e-fef57eaaa736",
+      "grid_url": "https://www.midjourney.com/jobs/f119bb58-8b37-435e-877e-fef57eaaa736?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "3626837f-aa30-405a-bb2c-9dc46d0c4368",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a rectangular woven reed merchandise hamper with a separate fitted lid sitting on top, a tight basket weave, a reinforced rim, rope handles on both ends, a toggle and loop latch, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "d76d3e19-8888-4196-b4b1-9563b21a3043",
+      "grid_url": "https://www.midjourney.com/jobs/d76d3e19-8888-4196-b4b1-9563b21a3043?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "1b4e49fe-c24f-438f-9ecd-86acf0f90484",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "7ee5032f23446cb96346c5ceb0c59faed36d26037da8ad401894f60db548cf4d",
+      "bytes": 4480203,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/3626837f-aa30-405a-bb2c-9dc46d0c4368/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "b80281ed223a592d26c3c91e7348449d418a9f4bd3119e4de7fc50e296f6e671",
+      "bytes": 5382827,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/1b4e49fe-c24f-438f-9ecd-86acf0f90484/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "cfd62a60f294e1b42ea659254e0bd52ff34f91c21f1a7ba78a7a518dbe5250d0",
+      "bytes": 1860977,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "a611c9ce76d0b0e48320a5dc9bb59ad2d225cdb2777f5438f99d01a74848b08c",
+      "bytes": 1865496,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "b23215c434df47aed0bd750542be313e49a8d6a6dc7d837e447eac46a031fb09",
+      "bytes": 1858589,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 2 shows the separate lid, rope handle and toggle latch most clearly. Turnaround pick 2 is the only sheet laid out as three views in a row; Midjourney drew end, front (latch) and end views rather than front, side and back."
+}

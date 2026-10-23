@@ -1,0 +1,1077 @@
+{
+  "name": "Weathered Timber and Curved Iron Park Bench",
+  "rationale": "A full-scale, stationary park bench with five separate seat slats, three inclined backrest slats, timber arm caps, and paired iron frames. Segmented round iron beams form curved legs and reclining back supports. Four ground-contact shoes and a transverse stretcher stabilize the frame. Exposed bolt heads identify timber-to-frame connections. Muted, individually varied timber colors suggest sun bleaching and worn finish; dark iron and dull hardware remain readable without excessive contrast. Openings between slats, beneath the arms, and between the legs are preserved. Seat timber tops are at 0.44 m. Beam start and end coordinates are absolute; beam locations mark their midpoints.",
+  "dimensionsM": {
+    "x": 1.6,
+    "y": 0.6,
+    "z": 0.85
+  },
+  "rotationUnits": "degrees",
+  "animation": {
+    "implemented": false,
+    "description": "Static assembled street furniture; no articulated or animated parts.",
+    "partAxes": []
+  },
+  "parts": [
+    {
+      "name": "Seat_Slat_01_Front_Worn",
+      "primitive": "box",
+      "colorhex": "#80705A",
+      "location": [
+        0,
+        -0.215,
+        0.421
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.6,
+        0.085,
+        0.038
+      ]
+    },
+    {
+      "name": "Seat_Slat_02",
+      "primitive": "box",
+      "colorhex": "#75634E",
+      "location": [
+        0,
+        -0.115,
+        0.421
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.6,
+        0.085,
+        0.038
+      ]
+    },
+    {
+      "name": "Seat_Slat_03",
+      "primitive": "box",
+      "colorhex": "#7C6B54",
+      "location": [
+        0,
+        -0.015,
+        0.421
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.6,
+        0.085,
+        0.038
+      ]
+    },
+    {
+      "name": "Seat_Slat_04",
+      "primitive": "box",
+      "colorhex": "#72614D",
+      "location": [
+        0,
+        0.085,
+        0.421
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.6,
+        0.085,
+        0.038
+      ]
+    },
+    {
+      "name": "Seat_Slat_05_Rear",
+      "primitive": "box",
+      "colorhex": "#796953",
+      "location": [
+        0,
+        0.185,
+        0.421
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.6,
+        0.085,
+        0.038
+      ]
+    },
+    {
+      "name": "Backrest_Slat_01_Lower",
+      "primitive": "box",
+      "colorhex": "#74624F",
+      "location": [
+        0,
+        0.199,
+        0.56
+      ],
+      "rotation": [
+        -10,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.6,
+        0.032,
+        0.095
+      ]
+    },
+    {
+      "name": "Backrest_Slat_02_Middle",
+      "primitive": "box",
+      "colorhex": "#7B6A55",
+      "location": [
+        0,
+        0.22,
+        0.68
+      ],
+      "rotation": [
+        -10,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.6,
+        0.032,
+        0.095
+      ]
+    },
+    {
+      "name": "Backrest_Slat_03_Top_Bleached",
+      "primitive": "box",
+      "colorhex": "#84735D",
+      "location": [
+        0,
+        0.241,
+        0.800443
+      ],
+      "rotation": [
+        -10,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.6,
+        0.032,
+        0.095
+      ]
+    },
+    {
+      "name": "Left_Front_Foot_Shoe",
+      "primitive": "box",
+      "colorhex": "#353A37",
+      "location": [
+        -0.64,
+        -0.255,
+        0.0175
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.12,
+        0.09,
+        0.035
+      ]
+    },
+    {
+      "name": "Left_Rear_Foot_Shoe",
+      "primitive": "box",
+      "colorhex": "#353A37",
+      "location": [
+        -0.64,
+        0.255,
+        0.0175
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.12,
+        0.09,
+        0.035
+      ]
+    },
+    {
+      "name": "Right_Front_Foot_Shoe",
+      "primitive": "box",
+      "colorhex": "#353A37",
+      "location": [
+        0.64,
+        -0.255,
+        0.0175
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.12,
+        0.09,
+        0.035
+      ]
+    },
+    {
+      "name": "Right_Rear_Foot_Shoe",
+      "primitive": "box",
+      "colorhex": "#353A37",
+      "location": [
+        0.64,
+        0.255,
+        0.0175
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.12,
+        0.09,
+        0.035
+      ]
+    },
+    {
+      "name": "Left_Front_Leg_Lower_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        -0.64,
+        -0.24,
+        0.1025
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        -0.255,
+        0.035
+      ],
+      "end": [
+        -0.64,
+        -0.225,
+        0.17
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Left_Front_Leg_Middle_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        -0.64,
+        -0.1875,
+        0.24
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        -0.225,
+        0.17
+      ],
+      "end": [
+        -0.64,
+        -0.15,
+        0.31
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Left_Front_Leg_Upper_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        -0.64,
+        -0.1525,
+        0.3525
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        -0.15,
+        0.31
+      ],
+      "end": [
+        -0.64,
+        -0.155,
+        0.395
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Left_Rear_Leg_Lower_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        -0.64,
+        0.24,
+        0.1025
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        0.255,
+        0.035
+      ],
+      "end": [
+        -0.64,
+        0.225,
+        0.17
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Left_Rear_Leg_Middle_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        -0.64,
+        0.1925,
+        0.24
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        0.225,
+        0.17
+      ],
+      "end": [
+        -0.64,
+        0.16,
+        0.31
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Left_Rear_Leg_Upper_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        -0.64,
+        0.1575,
+        0.3525
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        0.16,
+        0.31
+      ],
+      "end": [
+        -0.64,
+        0.155,
+        0.395
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Right_Front_Leg_Lower_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        0.64,
+        -0.24,
+        0.1025
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        -0.255,
+        0.035
+      ],
+      "end": [
+        0.64,
+        -0.225,
+        0.17
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Right_Front_Leg_Middle_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        0.64,
+        -0.1875,
+        0.24
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        -0.225,
+        0.17
+      ],
+      "end": [
+        0.64,
+        -0.15,
+        0.31
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Right_Front_Leg_Upper_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        0.64,
+        -0.1525,
+        0.3525
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        -0.15,
+        0.31
+      ],
+      "end": [
+        0.64,
+        -0.155,
+        0.395
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Right_Rear_Leg_Lower_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        0.64,
+        0.24,
+        0.1025
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        0.255,
+        0.035
+      ],
+      "end": [
+        0.64,
+        0.225,
+        0.17
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Right_Rear_Leg_Middle_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        0.64,
+        0.1925,
+        0.24
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        0.225,
+        0.17
+      ],
+      "end": [
+        0.64,
+        0.16,
+        0.31
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Right_Rear_Leg_Upper_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        0.64,
+        0.1575,
+        0.3525
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        0.16,
+        0.31
+      ],
+      "end": [
+        0.64,
+        0.155,
+        0.395
+      ],
+      "radius": 0.024
+    },
+    {
+      "name": "Left_Underseat_Bearing_Rail",
+      "primitive": "box",
+      "colorhex": "#343B36",
+      "location": [
+        -0.64,
+        -0.015,
+        0.3825
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.075,
+        0.51,
+        0.055
+      ]
+    },
+    {
+      "name": "Right_Underseat_Bearing_Rail",
+      "primitive": "box",
+      "colorhex": "#343B36",
+      "location": [
+        0.64,
+        -0.015,
+        0.3825
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.075,
+        0.51,
+        0.055
+      ]
+    },
+    {
+      "name": "Left_Back_Support_Lower_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        -0.64,
+        0.1965,
+        0.5025
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        0.165,
+        0.395
+      ],
+      "end": [
+        -0.64,
+        0.228,
+        0.61
+      ],
+      "radius": 0.018
+    },
+    {
+      "name": "Left_Back_Support_Upper_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        -0.64,
+        0.246,
+        0.7125
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        0.228,
+        0.61
+      ],
+      "end": [
+        -0.64,
+        0.264,
+        0.815
+      ],
+      "radius": 0.018
+    },
+    {
+      "name": "Right_Back_Support_Lower_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        0.64,
+        0.1965,
+        0.5025
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        0.165,
+        0.395
+      ],
+      "end": [
+        0.64,
+        0.228,
+        0.61
+      ],
+      "radius": 0.018
+    },
+    {
+      "name": "Right_Back_Support_Upper_Curve",
+      "primitive": "beam",
+      "colorhex": "#303633",
+      "location": [
+        0.64,
+        0.246,
+        0.7125
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        0.228,
+        0.61
+      ],
+      "end": [
+        0.64,
+        0.264,
+        0.815
+      ],
+      "radius": 0.018
+    },
+    {
+      "name": "Left_Arm_Timber_Cap_Worn",
+      "primitive": "box",
+      "colorhex": "#897861",
+      "location": [
+        -0.64,
+        -0.005,
+        0.635
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.105,
+        0.43,
+        0.03
+      ]
+    },
+    {
+      "name": "Left_Arm_Front_Iron_Riser",
+      "primitive": "beam",
+      "colorhex": "#343B36",
+      "location": [
+        -0.64,
+        -0.1675,
+        0.51
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        -0.155,
+        0.395
+      ],
+      "end": [
+        -0.64,
+        -0.18,
+        0.625
+      ],
+      "radius": 0.016
+    },
+    {
+      "name": "Left_Arm_Rear_Iron_Return",
+      "primitive": "beam",
+      "colorhex": "#343B36",
+      "location": [
+        -0.64,
+        0.2,
+        0.605
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        0.22,
+        0.585
+      ],
+      "end": [
+        -0.64,
+        0.18,
+        0.625
+      ],
+      "radius": 0.016
+    },
+    {
+      "name": "Right_Arm_Timber_Cap_Worn",
+      "primitive": "box",
+      "colorhex": "#84735C",
+      "location": [
+        0.64,
+        -0.005,
+        0.635
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.105,
+        0.43,
+        0.03
+      ]
+    },
+    {
+      "name": "Right_Arm_Front_Iron_Riser",
+      "primitive": "beam",
+      "colorhex": "#343B36",
+      "location": [
+        0.64,
+        -0.1675,
+        0.51
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        -0.155,
+        0.395
+      ],
+      "end": [
+        0.64,
+        -0.18,
+        0.625
+      ],
+      "radius": 0.016
+    },
+    {
+      "name": "Right_Arm_Rear_Iron_Return",
+      "primitive": "beam",
+      "colorhex": "#343B36",
+      "location": [
+        0.64,
+        0.2,
+        0.605
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.64,
+        0.22,
+        0.585
+      ],
+      "end": [
+        0.64,
+        0.18,
+        0.625
+      ],
+      "radius": 0.016
+    },
+    {
+      "name": "Rear_Leg_Transverse_Stretcher",
+      "primitive": "beam",
+      "colorhex": "#343B36",
+      "location": [
+        0,
+        0.202,
+        0.22
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.64,
+        0.202,
+        0.22
+      ],
+      "end": [
+        0.64,
+        0.202,
+        0.22
+      ],
+      "radius": 0.022
+    },
+    {
+      "name": "Seat_Front_Left_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#62645B",
+      "location": [
+        -0.64,
+        -0.215,
+        0.442
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Seat_Front_Right_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#62645B",
+      "location": [
+        0.64,
+        -0.215,
+        0.442
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Seat_Rear_Left_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#5C6058",
+      "location": [
+        -0.64,
+        0.185,
+        0.442
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Seat_Rear_Right_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#5C6058",
+      "location": [
+        0.64,
+        0.185,
+        0.442
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Back_Lower_Left_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#62645B",
+      "location": [
+        -0.64,
+        0.18,
+        0.5633
+      ],
+      "rotation": [
+        80,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Back_Lower_Right_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#62645B",
+      "location": [
+        0.64,
+        0.18,
+        0.5633
+      ],
+      "rotation": [
+        80,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Back_Middle_Left_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#62645B",
+      "location": [
+        -0.64,
+        0.201,
+        0.6833
+      ],
+      "rotation": [
+        80,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Back_Middle_Right_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#62645B",
+      "location": [
+        0.64,
+        0.201,
+        0.6833
+      ],
+      "rotation": [
+        80,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Back_Top_Left_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#68695E",
+      "location": [
+        -0.64,
+        0.222,
+        0.803743
+      ],
+      "rotation": [
+        80,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    },
+    {
+      "name": "Back_Top_Right_Bolt_Head",
+      "primitive": "cylinder",
+      "colorhex": "#68695E",
+      "location": [
+        0.64,
+        0.222,
+        0.803743
+      ],
+      "rotation": [
+        80,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.008
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 99.61883282661438,
+    "usage": {
+      "prompt_tokens": 223,
+      "completion_tokens": 6082,
+      "total_tokens": 6305,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1169,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

@@ -1,0 +1,483 @@
+{
+  "assets": {
+    "GF-004": {
+      "id": "GF-004",
+      "name": "Onion crop patch",
+      "url": "../../garden-farm/outputs/assets/GF-004.glb",
+      "sha256": "eb9114f7fb2d417778d8abaaa513412d8c21f703ac9133f0c732660fa41d79ee",
+      "dimensionsMetres": [
+        0.65281,
+        0.50119,
+        0.44
+      ],
+      "radius": 0.4115070814092997,
+      "anchors": [
+        {
+          "id": "harvest.001",
+          "position": {
+            "x": -0.013594239950180054,
+            "y": 0.019999999552965164,
+            "z": 0.5149999931454659
+          }
+        }
+      ]
+    },
+    "GF-008": {
+      "id": "GF-008",
+      "name": "Garden tender",
+      "url": "../../garden-farm/outputs/assets/GF-008.glb",
+      "sha256": "67c21c62369397b3dd5dac5835de0563d0819c4bab8c342ce5044273f7aa0c1b",
+      "dimensionsMetres": [
+        0.77277,
+        0.40328,
+        1.595
+      ],
+      "radius": 0.4358348974382386,
+      "anchors": [
+        {
+          "id": "left-hand",
+          "position": {
+            "x": -0.2800000011920929,
+            "y": 0.8399999737739563,
+            "z": 0.1633606031537056
+          }
+        },
+        {
+          "id": "right-hand",
+          "position": {
+            "x": 0.2800000011920929,
+            "y": 0.8399999737739563,
+            "z": 0.1633606031537056
+          }
+        }
+      ]
+    },
+    "GF-011": {
+      "id": "GF-011",
+      "name": "Stone lined garden draw well",
+      "url": "../../garden-farm/outputs/assets/GF-011.glb",
+      "sha256": "11379094477c8d00721e14a8caa8856480aa55fd91858075c4258bb007a0588e",
+      "dimensionsMetres": [
+        1.99289,
+        1.36,
+        1.695
+      ],
+      "radius": 1.20635924915632,
+      "anchors": [
+        {
+          "id": "draw-water",
+          "position": {
+            "x": -0.07644453644752502,
+            "y": 0.0,
+            "z": 1.100000023841858
+          }
+        },
+        {
+          "id": "maintenance",
+          "position": {
+            "x": 1.1235555112361908,
+            "y": 0.0,
+            "z": -0.0
+          }
+        }
+      ]
+    },
+    "GF-014": {
+      "id": "GF-014",
+      "name": "Cradled garden water jar",
+      "url": "../../garden-farm/outputs/assets/GF-014.glb",
+      "sha256": "bac438b53e970f675036c9454f0c87644bfda677ad3d84c76ceb39fc28fa9104",
+      "dimensionsMetres": [
+        1.08224,
+        0.70856,
+        1.04776
+      ],
+      "radius": 0.64678062184948,
+      "anchors": [
+        {
+          "id": "fill",
+          "position": {
+            "x": -0.12887749075889587,
+            "y": 0.011763693764805794,
+            "z": 0.800000011920929
+          }
+        }
+      ]
+    },
+    "GF-017": {
+      "id": "GF-017",
+      "name": "Reed roof garden rest shelter",
+      "url": "../../garden-farm/outputs/assets/GF-017.glb",
+      "sha256": "279bc09863c9b77a12eef41f5799c9cca942a23ebf3f613043018654b7fb6e66",
+      "dimensionsMetres": [
+        2.722,
+        1.95109,
+        2.18
+      ],
+      "radius": 1.6745175564994832,
+      "anchors": [
+        {
+          "id": "entry",
+          "position": {
+            "x": 1.1920928955078125e-07,
+            "y": 0.0,
+            "z": 1.2497386634349823
+          }
+        },
+        {
+          "id": "rest",
+          "position": {
+            "x": 1.1920928955078125e-07,
+            "y": 0.0,
+            "z": -0.10026133805513382
+          }
+        }
+      ]
+    },
+    "GF-025": {
+      "id": "GF-025",
+      "name": "Ventilated harvest carrying crate",
+      "url": "../../garden-farm/outputs/assets/GF-025.glb",
+      "sha256": "465f0877c778eb8f29fdb1acf3698557b579ebf269f968d4d0e46767f7fe5f7d",
+      "dimensionsMetres": [
+        1.17544,
+        0.785,
+        0.47725
+      ],
+      "radius": 0.7067326569502784,
+      "anchors": [
+        {
+          "id": "pickup.004",
+          "position": {
+            "x": 0.0,
+            "y": -0.004999995231628418,
+            "z": 0.75
+          }
+        }
+      ]
+    },
+    "GF-030": {
+      "id": "GF-030",
+      "name": "Three basin harvest sorting station",
+      "url": "../../garden-farm/outputs/assets/GF-030.glb",
+      "sha256": "3174a555b33fe0a33a460ad61d5e18e4f4b439c5a255a5554b560992fe4b823b",
+      "dimensionsMetres": [
+        1.87177,
+        0.788,
+        0.85387
+      ],
+      "radius": 1.0154391824353637,
+      "anchors": [
+        {
+          "id": "collect",
+          "position": {
+            "x": 1.1641128957271576,
+            "y": -0.01612743060104549,
+            "z": 0.44999998807907104
+          }
+        },
+        {
+          "id": "work.005",
+          "position": {
+            "x": -0.1358870565891266,
+            "y": -0.01612743060104549,
+            "z": 0.8999999761581421
+          }
+        }
+      ]
+    },
+    "GF-031": {
+      "id": "GF-031",
+      "name": "Flowering flax patch",
+      "url": "../../garden-farm/outputs/assets/GF-031.glb",
+      "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+      "dimensionsMetres": [
+        0.39,
+        0.32657,
+        0.53513
+      ],
+      "radius": 0.25433637416814764,
+      "anchors": [
+        {
+          "id": "harvest",
+          "position": {
+            "x": 0.0,
+            "y": 0.3002887740440201,
+            "z": 0.30000001192092896
+          }
+        },
+        {
+          "id": "root",
+          "position": {
+            "x": 0.0,
+            "y": 0.0002887695445679128,
+            "z": -0.0
+          }
+        }
+      ]
+    },
+    "GF-033": {
+      "id": "GF-033",
+      "name": "Broad bean stand",
+      "url": "../../garden-farm/outputs/assets/GF-033.glb",
+      "sha256": "ad2c0fa5fcaef77c843fc2abb31ad355cedaaaa2dcbbd4ae02b54a15dc797e23",
+      "dimensionsMetres": [
+        0.57,
+        0.18157,
+        0.62074
+      ],
+      "radius": 0.29911020749048334,
+      "anchors": [
+        {
+          "id": "harvest.001",
+          "position": {
+            "x": 0.004999995231628418,
+            "y": 0.4003869312291499,
+            "z": 0.32878443226218224
+          }
+        }
+      ]
+    },
+    "GF-153": {
+      "id": "GF-153",
+      "name": "Spreading apple orchard tree",
+      "url": "../../garden-farm/outputs/assets/GF-153.glb",
+      "sha256": "4369245ff65ace74e67a266e50a95f448af2df424b49a95b6a41bc903eb8a491",
+      "dimensionsMetres": [
+        1.88042,
+        1.88163,
+        1.83
+      ],
+      "radius": 1.330085601878691,
+      "anchors": [
+        {
+          "id": "harvest.002",
+          "position": {
+            "x": 0.004721909761428833,
+            "y": 0.0,
+            "z": 1.100000023841858
+          }
+        }
+      ]
+    },
+    "GF-154": {
+      "id": "GF-154",
+      "name": "Low quince fruit tree",
+      "url": "../../garden-farm/outputs/assets/GF-154.glb",
+      "sha256": "bd41438e1db591fced8d7b1ccf112bd9f316a7b2769353255f84cdd4db18cb89",
+      "dimensionsMetres": [
+        1.45477,
+        1.46415,
+        1.61071
+      ],
+      "radius": 1.0319993914000143,
+      "anchors": [
+        {
+          "id": "harvest.003",
+          "position": {
+            "x": -0.0926857590675354,
+            "y": 0.01070575974881649,
+            "z": 1.1070765554904938
+          }
+        }
+      ]
+    },
+    "GF-171": {
+      "id": "GF-171",
+      "name": "Garden household cat",
+      "url": "../../garden-farm/outputs/assets/GF-171.glb",
+      "sha256": "f50af33cd20d0e12375f4f04695619fa563f17f87a1a68767d0bb66f2dee27ca",
+      "dimensionsMetres": [
+        0.77853,
+        0.20049,
+        0.59321
+      ],
+      "radius": 0.40196554609817,
+      "anchors": [
+        {
+          "id": "observe",
+          "position": {
+            "x": 0.06838558614253998,
+            "y": 0.0,
+            "z": 0.6000000238418579
+          }
+        }
+      ]
+    },
+    "GF-152": {
+      "id": "GF-152",
+      "name": "Lance leaved olive tree",
+      "url": "../../garden-farm/outputs/assets/GF-152.glb",
+      "sha256": "f3cc8c0dccf524588572d107b629c0c3bbca009b95db9eb51be0a2f9da4d90e9",
+      "dimensionsMetres": [
+        1.51038,
+        1.49993,
+        1.93684
+      ],
+      "radius": 1.0643117199979526,
+      "anchors": [
+        {
+          "id": "harvest",
+          "position": {
+            "x": -0.08266851305961609,
+            "y": 0.007363598793745041,
+            "z": 1.040677398443222
+          }
+        }
+      ]
+    },
+    "GF-191": {
+      "id": "GF-191",
+      "name": "Enclosed courtyard household",
+      "url": "../../garden-farm/outputs/assets/GF-191.glb",
+      "sha256": "9e8d5a67c95bb2bcfada1994ba9d9bdcbf5fdc8c09c16ed50f9124c2659a14b7",
+      "dimensionsMetres": [
+        5.6,
+        4.68123,
+        2.53623
+      ],
+      "radius": 3.6494490787275002,
+      "anchors": [
+        {
+          "id": "courtyard",
+          "position": {
+            "x": 0.0,
+            "y": 0.07999999821186066,
+            "z": -0.034386277198791504
+          }
+        },
+        {
+          "id": "dropoff",
+          "position": {
+            "x": -1.649999976158142,
+            "y": 0.07999999821186066,
+            "z": -0.13438627868890762
+          }
+        },
+        {
+          "id": "entry",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 2.4656137228012085
+          }
+        },
+        {
+          "id": "worker_stand",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.9656137228012085
+          }
+        }
+      ]
+    },
+    "GF-194": {
+      "id": "GF-194",
+      "name": "Low shared household dining bench",
+      "url": "../../garden-farm/outputs/assets/GF-194.glb",
+      "sha256": "381ad823bf87e11454fa171549faf6071d27c80a3b51648676fe592736ca3e38",
+      "dimensionsMetres": [
+        1.75,
+        0.52008,
+        0.4737
+      ],
+      "radius": 0.9128229848114036,
+      "anchors": [
+        {
+          "id": "seating_left",
+          "position": {
+            "x": -0.44999998807907104,
+            "y": 0.46720343409106135,
+            "z": 1.4901161193847656e-08
+          }
+        },
+        {
+          "id": "seating_right",
+          "position": {
+            "x": 0.44999998807907104,
+            "y": 0.46720343409106135,
+            "z": 1.4901161193847656e-08
+          }
+        },
+        {
+          "id": "worker_stand.002",
+          "position": {
+            "x": 0.0,
+            "y": -0.012796558905392885,
+            "z": 0.7500000149011612
+          }
+        }
+      ]
+    },
+    "GF-410": {
+      "id": "GF-410",
+      "name": "Raised enclosed household grain granary",
+      "url": "../../garden-farm/outputs/assets/GF-410.glb",
+      "sha256": "b612c21afb42513130a743049e9967329e4a3115787df0c25fed3b2e05953074",
+      "dimensionsMetres": [
+        2.16,
+        2.44273,
+        2.72054
+      ],
+      "radius": 1.630378012371671,
+      "anchors": [
+        {
+          "id": "entry",
+          "position": {
+            "x": 0.0,
+            "y": 0.7300000190734863,
+            "z": 0.4263661205768585
+          }
+        },
+        {
+          "id": "grain_dropoff",
+          "position": {
+            "x": 0.0,
+            "y": 0.7300000190734863,
+            "z": -0.3236338794231415
+          }
+        },
+        {
+          "id": "worker_stand",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 1.4263661205768585
+          }
+        }
+      ]
+    },
+    "GF-567": {
+      "id": "GF-567",
+      "name": "Large spiral seed sunflower",
+      "url": "../../garden-farm/outputs/assets/GF-567.glb",
+      "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+      "dimensionsMetres": [
+        0.59541,
+        0.58855,
+        1.585
+      ],
+      "radius": 0.4186000987219186,
+      "anchors": [
+        {
+          "id": "root",
+          "position": {
+            "x": -0.002296820282936096,
+            "y": 0.004999999888241291,
+            "z": -0.0045760273933410645
+          }
+        },
+        {
+          "id": "seed_head",
+          "position": {
+            "x": -0.002296820282936096,
+            "y": 1.4049999713897705,
+            "z": 0.025423971936106682
+          }
+        }
+      ]
+    }
+  },
+  "uniqueBaseIncrement": 0
+}

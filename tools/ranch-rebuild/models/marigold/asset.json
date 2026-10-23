@@ -1,0 +1,237 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/marigold",
+ "name": "marigold",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "garden flower",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a pot marigold plant clump with bright orange and yellow daisy-like flowers",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a pot marigold plant clump with bright orange and yellow daisy-like flowers, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "e1786b08-2c8f-4d9e-9f8a-e7d693e01c10",
+    "grid_url": "https://www.midjourney.com/jobs/e1786b08-2c8f-4d9e-9f8a-e7d693e01c10?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "39bdba92-ec87-42d2-bddc-95ebd8a8e087",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:49:22.972Z",
+    "grid_done_at": "2026-10-22T23:49:40.978Z",
+    "upscale_clicked_at": "2026-10-22T23:49:52.152Z",
+    "downloaded_at": "2026-10-22T23:51:04.713Z",
+    "pick_reason": "open daisy-like orange and yellow flowers on a leafy clump, whole plant in frame"
+   }
+  },
+  "files": {
+   "hero.png": "d511e62501d7fd7fa8059a59097b493e8b45678ca04f5ffe2a7cf5cb227a6685"
+  },
+  "folder": "tools/ranch-rebuild/mj/marigold"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/marigold/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 16 blooms placed from the hero, base rosette, small dark core. 997 tris.",
+    "mean_iou": 0.583
+   },
+   {
+    "round": 2,
+    "change": "Blooms 35 % bigger with fuller notches, smaller gold centres, more and longer leaves, bigger core.",
+    "mean_iou": 0.709
+   },
+   {
+    "round": 3,
+    "change": "Base leaves longer, lower and higher up the crown: the bottom got wider than the top and the score fell.",
+    "mean_iou": 0.669
+   },
+   {
+    "round": 4,
+    "change": "Back to round 2's rosette; vase-shaped core plus 40 leaves out of the core at mid height.",
+    "mean_iou": 0.793
+   },
+   {
+    "round": 5,
+    "change": "Rounder balls (drooping outer tips, taller gold star, deeper under-cone), straight stems and fewer leaves to near 1k, lighter greens.",
+    "mean_iou": 0.749
+   },
+   {
+    "round": 6,
+    "change": "Wider core and longer leaves; then a horizontal SPREAD sweep (1.08-1.24) that only hurt, and a seed sweep showing +-0.03 noise; seed 1 kept.",
+    "mean_iou": 0.819
+   },
+   {
+    "round": 7,
+    "change": "Darker core, more mid leaves, then trimmed to exactly 1,000 triangles.",
+    "mean_iou": 0.805
+   },
+   {
+    "round": 8,
+    "change": "The core showed as a smooth boulder from the 3/4 view: made it smaller and lumpy, with longer, wider leaves coming out of it.",
+    "mean_iou": 0.8
+   },
+   {
+    "round": 9,
+    "change": "Final 768 px / 48 sample render and hero score; to_game.py marigold.",
+    "mean_iou": 0.797
+   },
+   {
+    "round": 10,
+    "change": "Art director: blooms as three stacked cupped orange rings (orange, amber, small gold-orange heart) instead of a big gold star; leaf body stops at half height so the upper stems show. 1,080 tris.",
+    "mean_iou": 0.753
+   },
+   {
+    "round": 11,
+    "change": "Wider ring notches for a rounder ruffled outline, blooms 8 % bigger; seed sweep, seed 1 kept.",
+    "mean_iou": 0.775
+   },
+   {
+    "round": 12,
+    "change": "Final 768 px / 48 sample render and hero score; to_game.py marigold.",
+    "mean_iou": 0.773
+   }
+  ],
+  "what_was_done": [
+   [
+    "Views",
+    "Scored on the hero alone (no turnaround). make_views.py keys the hero against its cream backdrop and drops the olive-tan cast shadow on the right (warm R > G + 6, not dark, in the lower right quadrant), then fills small holes. views/hero.png is the only target; hero_check.py scores it from a matched camera: front-on (yaw 0), 22 deg up, harness lens."
+   ],
+   [
+    "Blooms",
+    "16 pom-pom doubles placed from the hero: x across and image height, with a depth per bloom, converted through the 22 deg camera. The tallest sits at the top centre, the outer ones lean out and all turn a little toward the front. Each is a ruffled orange ball of 43 triangles: three stacked jagged rings cupped upward (7-tip wide orange, 6-tip lighter amber, 5-tip small gold-orange heart), each turned half a tip from the one below so the outline ruffles, plus an orange under-cone closing it to the stem."
+   ],
+   [
+    "Stems",
+    "One straight 3-sided Stem_Green stem per bloom from a 10 cm crown, with three leaves up each stem, angled out and up."
+   ],
+   [
+    "Foliage",
+    "A dark, lumpy vase-shaped Leaf_Dark core keeps the clump solid up to about half height. Narrow pointed folded-diamond leaf cards (2 triangles each, double-sided) splay out low from the crown, more come out of the core up to half height, and three leaves sit low on each flower stem, so the upper stems show bare between the leaf body and the blooms."
+   ],
+   [
+    "Game readiness",
+    "1,080 triangles (over the 1k budget, within the art director's 1.2k allowance for the blooms), 6 meshes, one flat material each: Flower_Petal_Orange, Flower_Petal_Amber, Flower_Petal_Gold, Stem_Green, Leaf_Green, Leaf_Dark. Petal materials start with Flower so the game gives them the groundcover role and seasons. Scaled to the old GF-250's height (0.315 m); 0.31 x 0.25 m footprint against the old 0.31 x 0.33 m. No animation, no variants (plant group)."
+   ]
+  ],
+  "creative_additions": "Outer blooms lean out of the dome and every bloom turns slightly to the front, so the faces read from the tile camera; three leaves on every flower stem make the stems leafy, as in the hero."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.30622386932373047,
+   0.2460978925228119,
+   0.3150000274181366
+  ],
+  "triangles": 1080,
+  "materials": [
+   "Flower_Petal_Amber",
+   "Flower_Petal_Gold",
+   "Flower_Petal_Orange",
+   "Leaf_Dark",
+   "Leaf_Green",
+   "Stem_Green"
+  ],
+  "parts": [
+   {
+    "name": "blooms_amber",
+    "materials": [
+     "Flower_Petal_Amber"
+    ]
+   },
+   {
+    "name": "blooms_gold",
+    "materials": [
+     "Flower_Petal_Gold"
+    ]
+   },
+   {
+    "name": "blooms_orange",
+    "materials": [
+     "Flower_Petal_Orange"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_green",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "stems",
+    "materials": [
+     "Stem_Green"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.773,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": false,
+  "good": [
+   "Hero silhouette IoU 0.773 at 768 px from the matched camera; the blooms now read as orange ruffled balls with a warm gold heart, as in the hero.",
+   "Bare upper stems show between the half-height leaf body and the dome of blooms.",
+   "1,080 triangles, about 64 % of them on the blooms."
+  ],
+  "off": [
+   "The hero's blooms are soft many-petalled doubles; mine are three stacked faceted rings, crisper than the painting.",
+   "Stopping the leaf mass at half height (art director's call) opens gaps at the sides that the hero fills with leafy stems, so the hero IoU fell from 0.797 to 0.773.",
+   "Leaf cards are plain pointed diamonds, not the hero's feathery leaves (too small to read at tile size).",
+   "The IoU moves by about +-0.03 with the random seed alone; seed 1 kept.",
+   "A lower camera (12 deg) scored a little higher, but I held the art director's 22 deg.",
+   "80 triangles over the 1k budget, spent on the third petal ring."
+  ]
+ },
+ "exports": {
+  "runtime": "marigold.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-250.glb"
+   ]
+  }
+ },
+ "files": {
+  "marigold.glb": {
+   "sha256": "13b8258408671dbf1ad906d4a842645117131efd4e0c273068f5491266817e1a",
+   "bytes": 87404
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "8fbd3eaee43eb2e85d86533401a83a63c29fceba",
+  "path": "tools/ranch-rebuild/models/marigold"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

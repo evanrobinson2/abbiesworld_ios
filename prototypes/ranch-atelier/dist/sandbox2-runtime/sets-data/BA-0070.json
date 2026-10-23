@@ -1,0 +1,53 @@
+{
+  "id": "aw.ranch.asset.ba-0070",
+  "name": "Market steward shade shelter",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 221,
+    "triangles": 8072,
+    "bounds_min": [
+      -1.8137749433517456,
+      -1.4839664697647095,
+      -0.0006250099977478385
+    ],
+    "bounds_max": [
+      1.8137749433517456,
+      1.4839664697647095,
+      2.9549999237060547
+    ],
+    "dimensions_m": [
+      3.6275,
+      2.9679,
+      2.9556
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Timber",
+      "Reed",
+      "ClayLight",
+      "Rope",
+      "Clay"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 6
+  },
+  "materials": [
+    "TimberLight",
+    "Timber",
+    "Reed",
+    "ClayLight",
+    "Rope",
+    "Clay"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0070",
+  "intent": "A small public shelter with a seat and record keeping surface.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0070",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

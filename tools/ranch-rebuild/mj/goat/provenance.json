@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "goat",
+  "group": "animal",
+  "replaces": "simulation-assets/organics/goat-{idle,feeding,rest}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "14b31620-84c2-45b5-aba9-93c9d26646f0",
+      "grid_url": "https://www.midjourney.com/jobs/14b31620-84c2-45b5-aba9-93c9d26646f0?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "b0a1f726-7e2e-4974-9c40-db96abf1b15b",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:48:05.703Z",
+      "grid_done_at": "2026-10-22T22:48:23.707Z",
+      "upscale_clicked_at": "2026-10-22T22:48:36.860Z",
+      "downloaded_at": "2026-10-22T22:49:49.035Z",
+      "pick_reason": "clean side view with curved horns, beard and tan leg accents"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a cheerful white farm goat with small curved horns, a little beard, cream fur with tan accents on the legs, standing alert in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "b131e3b8-04d0-45c7-b5e8-0f9d280c692d",
+      "grid_url": "https://www.midjourney.com/jobs/b131e3b8-04d0-45c7-b5e8-0f9d280c692d?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "ef478ba3-312e-486b-a5bb-c468fc51d483",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:49:57.862Z",
+      "grid_done_at": "2026-10-22T22:50:15.868Z",
+      "upscale_clicked_at": "2026-10-22T22:50:25.202Z",
+      "downloaded_at": "2026-10-22T22:51:44.764Z",
+      "pick_reason": "straight front, true side profile and back of one goat, well separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "fb71ea8bef6ac9e205105a1a9fe9d046fcb06f1e1eb4541cecf78f6bdc4e21c9",
+      "bytes": 2760494,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/b0a1f726-7e2e-4974-9c40-db96abf1b15b/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "4da36760ca3d48bba9080dc2f47e2ae80fed0bcd86a550d70def01b15c727c8f",
+      "bytes": 1362363,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/ef478ba3-312e-486b-a5bb-c468fc51d483/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "efaca56ea001846eb393ffc48aefa7a9a78839bd952b0833d80d3e8aa642ecd7",
+      "bytes": 357367,
+      "pixels": [
+        537,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat [('front', 181, 718), ('side', 882, 1961), ('back', 2204, 2726)]"
+    },
+    "view_side.png": {
+      "sha256": "384b8fdb42f01fd69b74fda8daa9a54151baf374d2971a18c1fe85674f2e9d14",
+      "bytes": 608486,
+      "pixels": [
+        1079,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat [('front', 181, 718), ('side', 882, 1961), ('back', 2204, 2726)]"
+    },
+    "view_back.png": {
+      "sha256": "1cadddc701a5ce687ad07838d57671277159be45ce4ebf2c4d0b506e50eb3eae",
+      "bytes": 358377,
+      "pixels": [
+        522,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat [('front', 181, 718), ('side', 882, 1961), ('back', 2204, 2726)]"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "water-point-charming",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/water-point-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical storybook version of a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "e68005cb-1ab4-479a-a488-31a6e27e1cf3",
+      "grid_url": "https://www.midjourney.com/jobs/e68005cb-1ab4-479a-a488-31a6e27e1cf3?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "ac3e05f3-1625-4db2-a637-b4c75fa0f5f5",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:12:37.890Z",
+      "grid_done_at": "2026-10-23T00:12:55.893Z",
+      "upscale_clicked_at": "2026-10-23T00:13:07.902Z",
+      "downloaded_at": "2026-10-23T00:14:22.400Z",
+      "pick_reason": "square stone cistern with timber rim, hand pump with lever, bucket on the rim and leaning teal canopy"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "f901c1ad-409e-42cc-bd49-8ceb1ea1b303",
+      "grid_url": "https://www.midjourney.com/jobs/f901c1ad-409e-42cc-bd49-8ceb1ea1b303?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "07d61322-05ec-4e2f-9e97-4576500175ae",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T00:14:31.466Z",
+      "grid_done_at": "2026-10-23T00:14:49.470Z",
+      "upscale_clicked_at": "2026-10-23T00:15:09.524Z",
+      "downloaded_at": "2026-10-23T00:16:32.401Z",
+      "pick_reason": "front, side and back of one cistern with pump, bucket and canopy, evenly spaced"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "5a7b2e203cb68045c47b3f7fb34d618821d59db8d361d17a7b12104edd21caf4",
+      "bytes": 2263147,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/ac3e05f3-1625-4db2-a637-b4c75fa0f5f5/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "95f00852706307ab74169d960f2c260000cce6e89ba256ac9298fce0f47e5090",
+      "bytes": 4283281,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/07d61322-05ec-4e2f-9e97-4576500175ae/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "107ccebc82693620d54280e9242827bee4f6480c59da9791a73aae833ca8558d",
+      "bytes": 1598154,
+      "pixels": [
+        919,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-point-charming [('front', 164, 1083), ('side', 1135, 1916), ('back', 1916, 2873)]"
+    },
+    "view_side.png": {
+      "sha256": "ee6d7e12031045f1986f6eb7adcf65131dccf9dee734a71a3191c9fa3b903b20",
+      "bytes": 1053933,
+      "pixels": [
+        781,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-point-charming [('front', 164, 1083), ('side', 1135, 1916), ('back', 1916, 2873)]"
+    },
+    "view_back.png": {
+      "sha256": "1c9de7e691b5d37e95a4b28b965d80b4894d8e4b34c9011a7b973e9f11feed16",
+      "bytes": 1409949,
+      "pixels": [
+        957,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-point-charming [('front', 164, 1083), ('side', 1135, 1916), ('back', 1916, 2873)]"
+    }
+  }
+}

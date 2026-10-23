@@ -1,0 +1,46 @@
+{
+  "id": "aw.ranch.asset.ba-0029",
+  "name": "Divided small goods tray",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 8,
+    "triangles": 352,
+    "bounds_min": [
+      -0.3125,
+      -0.20250000059604645,
+      0.0
+    ],
+    "bounds_max": [
+      0.3125,
+      0.20250000059604645,
+      0.10999999940395355
+    ],
+    "dimensions_m": [
+      0.625,
+      0.405,
+      0.11
+    ],
+    "material_slots": [
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0029",
+  "intent": "A shallow wooden tray with compartments for beads or fittings.",
+  "family": "Trade containers",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0029",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

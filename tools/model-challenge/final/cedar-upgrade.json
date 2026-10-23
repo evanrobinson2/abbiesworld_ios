@@ -1,0 +1,148 @@
+{
+ "name": "cedar-upgrade",
+ "asset": "cedar",
+ "style": "upgrade",
+ "stats": {
+  "triangles": 7211,
+  "meshes": 20,
+  "bounds_min": [
+   -5.396721839904785,
+   -3.662999391555786,
+   0.0
+  ],
+  "bounds_max": [
+   5.390646457672119,
+   3.725154161453247,
+   15.418319702148438
+  ],
+  "dimensions_m": [
+   10.787368774414062,
+   7.388153553009033,
+   15.418319702148438
+  ],
+  "animations": [
+   "Scene"
+  ]
+ },
+ "views_used": "models/cedar-upgrade/views",
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "score": {
+  "front": {
+   "iou": 0.66,
+   "aspect_target": 1.82,
+   "aspect_render": 1.444,
+   "mean_color_dist": 0.068
+  },
+  "side": {
+   "iou": 0.546,
+   "aspect_target": 1.656,
+   "aspect_render": 2.087,
+   "mean_color_dist": 0.073
+  },
+  "back": {
+   "iou": 0.626,
+   "aspect_target": 1.928,
+   "aspect_render": 1.444,
+   "mean_color_dist": 0.056
+  },
+  "mean_iou": 0.611
+ },
+ "hero_iou": 0.375,
+ "notes": {
+  "what_i_did": [
+   [
+    "Views cleaned",
+    "The turnaround views include the sheet's tan ground band, which the target mask counted as part of the tree; fix_views.py paints the band back to sky colour (keeping the root pixels) and crops below the root line into models/cedar-upgrade/views/, which is what I scored against. The labels (front, side, back) were fine."
+   ],
+   [
+    "Trunk",
+    "One fluted, tapering trunk mesh (24 sides, 11 flutes that twist slightly with height) that stays thick all the way up (0.3 m radius at the top), leans gently left, and has 7 lobed buttress roots built into the radius function. It uses warm red-brown CedarBark #8A4A35, with a lighter BarkStreak material on 7 flute columns for vertical streaks."
+   ],
+   [
+    "Feathery frond sprays",
+    "Each spray is a fan of flattened, tapered frond blades (wide at the base, pointed and drooping at the tip, arched over a raised midrib, with backward-pointing serration teeth on both edges), splayed outward like fingers in 4 stacked layers: dark below, then dark, mid and light on top, each layer shorter, narrower and lifted. A few short strands hang under some lower-layer tips. The silhouette edge is jagged and pointy, not straight-cut."
+   ],
+   [
+    "Tiers (hero gesture)",
+    "The foliage follows the hero: big sprays alternating left/right up the trunk (low W at 6.2 m, low E 7.9, mid W 10.0, mid E 11.4, plus a smaller back spray for depth), with sky and red trunk between them, and the top 25% a dense, slightly lopsided cluster of 6 frond sprays (one radiating all the way round) that hides the trunk tip."
+   ],
+   [
+    "Dead branches",
+    "Seven thin, crooked bare branches (3 kinked segments each, plus forked twigs) stick out of the trunk between the tiers, mostly at mid height, as in the hero, in a greyer DeadWood material."
+   ],
+   [
+    "Animation",
+    "crown_pivot (an empty at z 8.4) carries the upper trunk, the upper sprays and the upper dead branches, and rocks about 0.9 degrees; every one of the 11 spray clumps nods about 3 degrees about its own limb root on two axes with offset phases (alternating 1 and 2 cycles per loop). Frames 1 to 121 keyed, so the 120-frame loop is seamless; exports as one 'Scene' clip."
+   ]
+  ],
+  "good": [
+   "The hero gesture now matches: a long, massive red trunk visible between the tiers and up to the crown, big alternating flat-topped drooping sprays, a narrow leaning top, and crooked dead branches at mid height.",
+   "The sprays read as fans of jagged, drooping fronds in dark-to-light layers, with no spheres and no boxes.",
+   "7,211 triangles (budget 8k), 15.4 m tall, origin at the trunk centre on the ground, all materials flat Principled colours."
+  ],
+  "off": [
+   "The side view (0.52) scores lowest, because the turnaround's side tree has a broad umbrella top and sprays facing the viewer, which conflict with the hero; I followed the hero.",
+   "The root flare is a smooth lobed skirt rather than distinct gnarled roots.",
+   "The fronds are single blades, not the illustration's finely divided feathery fronds, so up close each frond reads as one serrated strip."
+  ],
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: fluted trunk with flare, 14 three-layer spray clumps with a solid hanging skirt, 4 dead branches, sway rig.",
+    "mean_iou": 0.652
+   },
+   {
+    "round": 2,
+    "change": "Re-placed clumps from the target row profiles: narrowed the front/back clumps, raised the east low clump, made the top elongated along Y, darkened the greens.",
+    "mean_iou": 0.677
+   },
+   {
+    "round": 3,
+    "change": "Raised the mid tier north/south, flattened the top umbrella, added two tip sprays.",
+    "mean_iou": 0.68
+   },
+   {
+    "round": 4,
+    "change": "Swapped the solid skirt for ragged strand teeth and made the shells fan-shaped and flatter, softened the root lobes, deepened the bark colour. This scored lower (thin strands cover less area) but reads much more like drooping cedar sprays, so I kept it.",
+    "mean_iou": 0.659
+   },
+   {
+    "round": 5,
+    "change": "Spaced the stacked layers further apart and lengthened the hang, for thicker clumps; widened the east/west top sprays.",
+    "mean_iou": 0.662
+   },
+   {
+    "round": 6,
+    "change": "Raised and flattened the top north/south sprays and tried two placements for the east low clump (0.652, then 0.658). Kept the second.",
+    "mean_iou": 0.658
+   },
+   {
+    "round": 7,
+    "change": "Taller, softer buttress roots instead of a flat starfish, deeper flutes, thicker and darker dead branches.",
+    "mean_iou": 0.66
+   },
+   {
+    "round": 8,
+    "change": "Final render at 768 px with 48 samples.",
+    "mean_iou": 0.661
+   },
+   {
+    "round": 9,
+    "change": "Art-director gesture round, following the hero: fewer, bigger, flat-topped sprays that alternate sides (low W at 6.2 m, low E 7.9, mid W 10.2, mid E 11.8, one small back spray) with sky and trunk showing between tiers; a narrow crown leaning to -X instead of the umbrella; a thicker trunk (base radius 1.15 m, top 0.30) with taller buttress roots; 7 thin crooked bare branches with twigs between the tiers; bark #8A4A35 with lighter BarkStreak flutes. The mean IoU drops from 0.661 to 0.585, mostly in the side view (0.669 to 0.521), because that view's broad umbrella top and Y-facing tiers were removed on purpose: the hero wins. Final at 768 px with 48 samples.",
+    "mean_iou": 0.585
+   },
+   {
+    "round": 10,
+    "change": "Spray-shape round (art director): replaced the shell-plus-strand-curtain sprays with fans of feathery fronds. Each frond is a flattened, tapered blade (wide base, pointed drooping tip, raised midrib, serrated jagged edges), and 6 to 9 of them splay out like fingers in 4 layers (two dark, mid, light), with a few short strands under some tips only. Sprays are about 20% bigger (the lowest pair reaches 5.6 to 5.8 m, about 7 m across). The top 25% is now a dense, lopsided cluster of 6 frond sprays that hides the trunk tip. A first try with flatter fronds scored 0.537; drooping the fronds more and adding a fourth layer gave 0.613 at 384 px. Final at 768 px with 48 samples.",
+    "mean_iou": 0.611
+   }
+  ],
+  "moving_parts": "crown_pivot rocks the upper trunk, the upper sprays and the upper dead branches about 0.9 degrees. Each of the 11 spray_* clumps nods about 3 degrees on its own limb pivot, on two axes, with offset phases (alternating 1 and 2 cycles per loop). The lower trunk and the lower dead branches stay still. 120-frame seamless loop at 24 fps, exported as one clip.",
+  "creative_additions": "Each spray has three colour layers, so light catches the top fronds while the undersides stay shadowed. Lighter streak flutes run up the bark. The dead branches end in forked twigs, a low dead branch near the base adds age, and the root buttresses are part of the trunk mesh."
+ },
+ "glb_bytes": 499676
+}

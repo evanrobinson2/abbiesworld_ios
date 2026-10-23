@@ -1,0 +1,92 @@
+# The sound engineer's pipeline (tools/sound-engineer/README.md), on a runner because the cloud box can't reach
+# the Sonniss hosts or R2:
+#   index  reads the directory of every Sonniss GDC bundle zip over HTTP ranges -> tools/sound-engineer/index/
+#   pick   fills every library slot with the best takes                          -> tools/sound-engineer/picks.json
+#   build  pulls only the seconds it needs, cuts, loops, levels, encodes MP3
+#   store  R2 (sounds/blobs/..., sounds/catalog.json) + Postgres sound_assets    -> dist/sounds/manifest.json
+# index and pick commit their (audio-free) results back to the branch. Audio never goes into git: the repo is
+# public and the Sonniss licence forbids passing the sounds on as sound effects (tools/sound-engineer/LICENSE.md).
+# Secrets as for model-store: R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET, R2_PUBLIC_BASE_URL,
+# optional POSTGRES_URL. Without R2 it still picks and builds and lists every sound as not stored yet.
+name: sound-store
+on:
+  workflow_dispatch:
+    inputs:
+      reindex: { description: 'Re-read every bundle directory', type: boolean, default: false }
+      repick: { description: 'Pick every slot again (otherwise only new slots)', type: boolean, default: false }
+      only: { description: 'Only these slots (comma separated)', default: '' }
+  push:
+    branches: [main, 'claude/project-thread-mzo2r5']
+    paths:
+      - 'tools/sound-engineer/*.mjs'
+      - 'tools/sound-engineer/picks.json'
+      - 'prototypes/ranch-atelier/dist/music/catalog.json'
+      - '.github/workflows/sound-store.yml'
+concurrency:
+  group: sound-store-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  sounds:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      SE: tools/sound-engineer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: FedericoCarboni/setup-ffmpeg@v3
+        id: ffmpeg
+      - name: Tools
+        timeout-minutes: 10
+        run: |
+          ffmpeg -hide_banner -version | head -1
+          npm install --prefix "$SE" --no-audit --no-fund
+          node --test "$SE/test.mjs"
+      - name: Index
+        timeout-minutes: 40
+        if: ${{ inputs.reindex || hashFiles('tools/sound-engineer/index/*.json') == '' }}
+        run: node "$SE/index.mjs"
+      - name: Pick
+        run: |
+          if [ -n "${{ inputs.only }}" ]; then node "$SE/pick.mjs" --only "${{ inputs.only }}";
+          elif [ "${{ inputs.repick }}" = true ]; then node "$SE/pick.mjs";
+          else node "$SE/pick.mjs" --keep; fi
+      - name: Restore built sounds
+        uses: actions/cache@v4
+        with:
+          path: tools/sound-engineer/out
+          key: sound-out-${{ github.run_id }}
+          restore-keys: sound-out-
+      - name: Build
+        run: |
+          if [ -n "${{ inputs.only }}" ]; then node "$SE/build.mjs" --only "${{ inputs.only }}"; else node "$SE/build.mjs"; fi
+          du -sh "$SE/out"
+      - name: R2 keys
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: tools/model-store/r2-keys.sh
+      - name: Store
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_PUBLIC_BASE_URL: ${{ secrets.R2_PUBLIC_BASE_URL }}
+          POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+        run: |
+          node "$SE/store.mjs"
+          [ -n "$R2_BUCKET" ] || echo "::warning::R2 secrets are not set, so the sounds are built but not stored. Add them at https://github.com/${{ github.repository }}/settings/secrets/actions (see tools/model-store/README.md) and run sound-store again."
+      - name: Commit index, picks and manifest (no audio)
+        # Also after a failed build, so the index and picks are not lost.
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "sound-store[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --ignore-errors "$SE/index" "$SE/picks.json" prototypes/ranch-atelier/dist/sounds/manifest.json
+          git diff --cached --quiet && { echo "Nothing changed"; exit 0; }
+          git commit -m "Sound engineer: index, picks and /sounds manifest from the sound-store run [skip ci]"
+          for i in 1 2 3; do git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done

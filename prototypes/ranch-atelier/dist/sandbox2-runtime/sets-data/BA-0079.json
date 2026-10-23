@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0079",
+  "name": "Stone edged market tree bed",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 17,
+    "triangles": 800,
+    "bounds_min": [
+      -0.9950000047683716,
+      -0.9950000047683716,
+      0.0
+    ],
+    "bounds_max": [
+      0.9950000047683716,
+      0.9950000047683716,
+      0.23000000417232513
+    ],
+    "dimensions_m": [
+      1.99,
+      1.99,
+      0.23
+    ],
+    "material_slots": [
+      "Clay",
+      "Stone"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Clay",
+    "Stone"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Tree supplied separately; this asset is the planting bed only.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0079",
+  "intent": "A protected planting pocket that can accept an existing tree.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0079",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "aw.ranch.asset.ba-0085",
+  "name": "Bronze goods trader",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 98,
+    "triangles": 4990,
+    "bounds_min": [
+      -0.382251113653183,
+      -0.2696700096130371,
+      0.0
+    ],
+    "bounds_max": [
+      0.382251113653183,
+      0.1655520349740982,
+      1.7069000005722046
+    ],
+    "dimensions_m": [
+      0.7645,
+      0.4352,
+      1.7069
+    ],
+    "material_slots": [
+      "CharacterBronze",
+      "CharacterHair",
+      "CharacterSkinWarm",
+      "CharacterLinen",
+      "CharacterEye",
+      "CharacterLeather",
+      "CharacterClay",
+      "CharacterWood"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 8
+  },
+  "materials": [
+    "CharacterBronze",
+    "CharacterHair",
+    "CharacterSkinWarm",
+    "CharacterLinen",
+    "CharacterEye",
+    "CharacterLeather",
+    "CharacterClay",
+    "CharacterWood"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0085",
+  "intent": "A tool roll and balance pouch distinguish the metal trade.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0085",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

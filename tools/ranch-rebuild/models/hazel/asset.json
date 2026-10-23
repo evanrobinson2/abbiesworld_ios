@@ -1,0 +1,241 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/hazel",
+ "name": "hazel",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "hedge shrub",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "5232b72e-954e-4095-95e4-3d2dbedbdd71",
+    "grid_url": "https://www.midjourney.com/jobs/5232b72e-954e-4095-95e4-3d2dbedbdd71?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "cbe5c3d6-5dc1-4225-a7ec-3d459b9fa323",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:11:35.642Z",
+    "grid_done_at": "2026-10-22T23:11:53.645Z",
+    "upscale_clicked_at": "2026-10-22T23:12:03.457Z",
+    "downloaded_at": "2026-10-22T23:13:16.124Z",
+    "pick_reason": "clearest straight upright stems from the base with round leaves; no variant showed hazelnut clusters clearly"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "adaea089-aefa-49aa-865f-3e0d2049962e",
+    "grid_url": "https://www.midjourney.com/jobs/adaea089-aefa-49aa-865f-3e0d2049962e?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "e2eccd8d-af66-432f-a0b1-db2f80553bc1",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:13:25.981Z",
+    "grid_done_at": "2026-10-22T23:13:43.984Z",
+    "upscale_clicked_at": "2026-10-22T23:13:54.131Z",
+    "downloaded_at": "2026-10-22T23:15:14.226Z",
+    "pick_reason": "three separated views of the shrub, the only sheet showing hazelnut clusters"
+   }
+  },
+  "files": {
+   "hero.png": "666422d7068ddf5304d4f75d1a82ef5ea88ba4bfe6f5d93b59eae4390156f1aa",
+   "turnaround.png": "81c100f359fef08d1b8262d5a7265e9c79fa1b0d3fb7cd01429c486c72fb2125",
+   "view_front.png": "2237a966b91f2d6bab8c77dfb7720d8456d6cfce964ca2dc4817c849116f45e3",
+   "view_side.png": "bcc9f1e1202eb5e1a6286fbbf3dc4057752b09dbc9efe3f2e456ef9f062ed35c",
+   "view_back.png": "7a0696358c2aa3906daf47a3c02c6adedbaef6c0be11e26c04fbdb15ca2a85f1"
+  },
+  "folder": "tools/ranch-rebuild/mj/hazel"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/hazel/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 20 stems in a cone (flare 0.55, tips 0.30-0.58 m), 15-21 cm leaves, 8 nut clusters. 3.0k tris.",
+    "mean_iou": 0.709,
+    "hero_iou": 0.736
+   },
+   {
+    "round": 2,
+    "change": "Stems fan out earlier (flare 0.38), narrower tips, outer stems shorter, bigger leaves (18-25 cm), leaves start lower, wider base.",
+    "mean_iou": 0.722,
+    "hero_iou": 0.752
+   },
+   {
+    "round": 3,
+    "change": "60 % of leaves face out of the clump (fewer see-through gaps), flare 0.30, more low leaves, stem bases clamped to the ground.",
+    "mean_iou": 0.745,
+    "hero_iou": 0.76
+   },
+   {
+    "round": 4,
+    "change": "Rounder leaves (width = length), slimmer crown, barer lower third (smaller, fewer low leaves), bigger nuts.",
+    "mean_iou": 0.726,
+    "hero_iou": 0.774
+   },
+   {
+    "round": 5,
+    "change": "Round plan instead of squashed front-to-back, wider foot (16 cm), flatter top.",
+    "mean_iou": 0.727,
+    "hero_iou": 0.771
+   },
+   {
+    "round": 6,
+    "change": "Leaf density pushed a little lower down the stems; seed sweep (3, 11, 19, 23, 31) showed +-0.015 noise, kept seed 7 for the hero.",
+    "mean_iou": 0.729,
+    "hero_iou": 0.774
+   },
+   {
+    "round": 7,
+    "change": "Nut clusters pushed out to the surface of the leaf mass so they show; softer light green.",
+    "mean_iou": 0.731,
+    "hero_iou": 0.773
+   },
+   {
+    "round": 8,
+    "change": "Final 768 px / 48 sample render and score; to_game.py hazel.",
+    "mean_iou": 0.729,
+    "hero_iou": 0.769
+   }
+  ],
+  "what_was_done": [
+   [
+    "Views",
+    "make_views.py keys the mj hero and the three sheet views into clean silhouettes in views/. The harness mask kept the hero's warm brown cast shadow as a strip across the bottom, so the hero is keyed against its right-edge backdrop only and light hue-shifted (R > G) pixels near the ground are dropped. The sheet's soil mounds and ground shadow are cut below the stem bases. All three sheet views are the same bush from slightly different sides and agree with the hero, so all three are scored."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders from 30 deg off the front and 8 deg up with the harness lens, as the hero is drawn almost level. A calibration grid showed yaw barely matters for this near-round bush; the direction was then held fixed."
+   ],
+   [
+    "Stems",
+    "20 thin, straight olive stems (Stem_Olive, 3-sided, 4 segments, radius 2.0 cm tapering to 0.7 cm) leave the ground inside a 16 cm circle and fan out to 0.24-0.48 m from the axis with r ~ z^0.3, so they spread early and then rise nearly straight: a vase. Tips at 2.1-2.4 m; outer stems are a little shorter, giving a rounded top. Each stem sweeps slightly sideways so the fan isn't a perfect cone."
+   ],
+   [
+    "Leaves",
+    "Round faceted leaf cards: 6 vertices, 4 triangles, folded along the midrib, double-sided material. 4 small leaves per stem low down (0.3-0.9 m), 18 full-size ones (17-23 cm) alternately up the rest, angled outward and up, plus a 3-leaf fan at each tip. 60 % of leaves turn their face out of the clump so the crown reads solid from every side; the rest are random. Two greens (Leaf_Dark, Leaf_Light), with dark leaves more likely on the shaded side."
+   ],
+   [
+    "Nuts",
+    "8 clusters of 2-3 hazelnuts (Fruit_Hazel, 6-sided pointed nuts 7 cm long) in pale frilled 6-point husk cups (Fruit_Husk), hung out and down at leaf axils between 1.15 and 2.15 m, at least 45 cm apart, pushed 10 cm out to the surface of the leaf mass so they show between the leaves."
+   ],
+   [
+    "Game readiness",
+    "2,936 triangles (budget 3k), 5 meshes, one flat material each: Stem_Olive, Leaf_Light, Leaf_Dark, Fruit_Hazel, Fruit_Husk. 1.45 x 1.42 x 2.50 m, origin at the base on the ground. No animation, no variants (plant group). to_game.py hazel ran cleanly."
+   ]
+  ],
+  "creative_additions": "A small fan of three leaves at every stem tip as new growth, dark leaves biased to the shaded side for depth, and smaller leaves on the low bare stems as in the hero's outer shoots."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.4455134868621826,
+   1.4177181720733643,
+   2.4999711513519287
+  ],
+  "triangles": 2936,
+  "materials": [
+   "Fruit_Husk",
+   "Leaf_Dark",
+   "Leaf_Light",
+   "Fruit_Hazel",
+   "Stem_Olive"
+  ],
+  "parts": [
+   {
+    "name": "husks",
+    "materials": [
+     "Fruit_Husk"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_light",
+    "materials": [
+     "Leaf_Light"
+    ]
+   },
+   {
+    "name": "nuts",
+    "materials": [
+     "Fruit_Hazel"
+    ]
+   },
+   {
+    "name": "stems",
+    "materials": [
+     "Stem_Olive"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": 0.729,
+  "hero_iou": 0.769,
+  "per_view": {
+   "front": 0.728,
+   "side": 0.708,
+   "back": 0.751
+  },
+  "triangle_budget": 3000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.769: the tall rounded column of leaves over a narrow foot of bare stems matches the hero's proportions (aspect 1.73 against the hero's 1.73).",
+   "Reads as a multi-stem hazel at a glance: the vase of straight olive stems is visible below, round leaves fill the upper two thirds, and the brown nuts with pale husks show as warm specks in the green.",
+   "Within budget at 2.9k triangles, about 80 % of them on leaves."
+  ],
+  "off": [
+   "The sheet views draw the bush a little squatter (aspect 1.65-1.72) with the leaf mass starting lower and the foot of stems wider. I kept the hero's taller shape and barer base, so the side view sits at 0.71.",
+   "The edges of the leaf mass are ragged leaf by leaf, so the IoU moves by about +-0.015 with the random seed alone; I kept the seed that scored best on the hero.",
+   "The hero's leaves are softly rounded with serrated edges; mine are 6-point faceted cards, which look a little more angular up close.",
+   "The sheet's small soil mound at the base is left out (not asked for, and the game places the plant on its own ground)."
+  ]
+ },
+ "exports": {
+  "runtime": "hazel.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-158.glb"
+   ]
+  }
+ },
+ "files": {
+  "hazel.glb": {
+   "sha256": "2fa13c081110117ec93f4d52777e9f35163d9409287af2cf3c58cf233d049f64",
+   "bytes": 221056
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "bf05fd7059de04b6c69aecdc150dd170e68a492e",
+  "path": "tools/ranch-rebuild/models/hazel"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

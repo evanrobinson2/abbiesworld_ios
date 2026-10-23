@@ -1,0 +1,62 @@
+{
+  "id": "ZG003",
+  "name": "Rimmed patrol helmet",
+  "authoring": "local Blender procedural geometry",
+  "units": "metres",
+  "parts": [
+    {
+      "name": "hollow helmet",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dimensions": [
+        0.28999999165534973,
+        0.36000001430511475,
+        0.1918560117483139
+      ]
+    },
+    {
+      "name": "protective rim",
+      "location": [
+        0.0,
+        0.0,
+        0.07999999821186066
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dimensions": [
+        0.3240000009536743,
+        0.3240000009536743,
+        0.024000000208616257
+      ]
+    },
+    {
+      "name": "front mount",
+      "location": [
+        0.0,
+        -0.17299999296665192,
+        0.1599999964237213
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dimensions": [
+        0.07000000029802322,
+        0.019999999552965164,
+        0.05000000074505806
+      ]
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.1.0",
+  "id": "SI-009",
+  "name": "Medical restraint and monitor station",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "space-station-interior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Medical restraint and monitor station; static scientific fiction, not certified engineering or medical equipment.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/space-station-interior/si-009",
+  "biome": "space-station-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 14,
+    "triangles": 444,
+    "bounds_min": [
+      -0.9750000238418579,
+      -0.38499999046325684,
+      0.0
+    ],
+    "bounds_max": [
+      0.9750000238418579,
+      0.4000000059604645,
+      1.5549999475479126
+    ],
+    "dimensions_m": [
+      1.95,
+      0.785,
+      1.555
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "medical",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "restrain",
+      "inspect",
+      "assist"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "access",
+        "position_blender_m": [
+          0.0,
+          -0.699999988079071,
+          0.0
+        ],
+        "role": "access"
+      },
+      {
+        "id": "patient",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.8600000143051147
+        ],
+        "role": "patient"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for space-station-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "ready",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "occupied",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "cleaning",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "packed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Medical restraint and monitor station; static scientific fiction, not certified engineering or medical equipment. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See medical(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "space-station-interior/batch_station_interior.py",
+    "entry_point": "medical",
+    "source_sha256": "e430c7b849abc332c69e8e1d3b2291bbec4af92911a8ace3650541efb28a3967",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- space-station-interior batch_station_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "SI-009"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "SI-009.glb",
+    "sha256": "69ae5e1a7199fc95a155008613d0a0d5a9d9a4075c8c329fad2449c37b99e8e5",
+    "bytes": 34184
+  }
+}

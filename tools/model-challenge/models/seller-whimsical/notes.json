@@ -1,0 +1,133 @@
+{
+ "what_i_did": [
+  [
+   "Fixed the views",
+   "The sheet's views touch: the front hat overlaps the side view's basket in x, and the side hat touches the back hat. The floor contact shadow also counted as object, so the side view picked up a sliver of the front hat and the front mask ran the full panel width. prep_views.py rebuilds views/ from turnaround.png. It fits the backdrop gradient, paints out the floor shadow under the feet, makes clean cuts between views, and darkens cream areas inside the silhouette slightly so the harness keeps them. It also mirrors the side view, because the sheet draws her right side and the harness side camera looks at her left. All scores use `score r views`."
+  ],
+  [
+   "Silhouette first",
+   "Built the signature shapes first: a big round head (0.47 m wide, about 30% of the height and about 45% with the hat crown) in a cream hood, a giant floppy straw hat (0.88 m brim, wider than the body) with a wavy brim that droops at the sides and back and curls up at the front, a carrot tucked in the rust band, a bell-shaped smock over a green skirt, stubby legs with pointed boots, and a staved wooden tub piled with vegetables and big leafy greens."
+  ],
+  [
+   "Storybook details",
+   "Dot eyes, rosy cheeks, a small open smile and a button nose; a ragged smock hem with ochre patches; a leather band across the chest and a pouch; a leather satchel of greens on her back; green sleeve cuffs; a tub with two hoops, a rim and a handle."
+  ],
+  [
+   "Rig and idle loop",
+   "Rigid parts in a hierarchy: seller > body > neck (head, hood, face, hat > hat_brim_pivot > hat_brim, carrot), shoulders > arms, tub > bucket and veg, satchel, smock, skirt, strap. The legs stay planted on the ground. Each frame of the 120-frame loop is keyed from periodic functions, so frame 120 runs straight back into frame 1. It exports as one 'Scene' clip."
+  ],
+  [
+   "Hero over sheet",
+   "The hero and the sheet disagree in two places, and I followed the hero both times. The hero holds the tub on her right hip at the front with a satchel behind, while the sheet wears the tub as a backpack. The hero tucks the carrot on the left back of the crown, while the sheet tucks it on the right. Both choices cost IoU on the sheet views (see 'off')."
+  ]
+ ],
+ "good": [
+  "The chibi reads at a glance: a huge hat, a big round face with dot eyes and rosy cheeks, a tiny bell body and stubby feet. The hat is the widest thing on her, as in both illustrations.",
+  "Final mean IoU 0.707 against the cleaned views (front 0.72, side 0.705, back 0.696), at 768 px and 48 samples.",
+  "7,630 triangles, well under the 12k budget. 1.24 m tall to the carrot leaves (1.17 m to the crown), origin at the centre of the footprint on the ground, front faces -Y.",
+  "The animation was checked after re-importing the GLB: one clip over frames 1 to 120. The body bounces, the neck tilts, the brim flops and the tub sways on every frame, and frame 120 runs smoothly into frame 1.",
+  "The front brim curls up, so the face stays visible from the elevated hero camera. A level brim hid the eyes."
+ ],
+ "off": [
+  "The sheet carries the vegetable tub on her back. I followed the hero and put it on her right hip, so the front and back views have extra tub on one side and are missing the big backpack mass. This is the biggest remaining IoU gap (the back view is the weakest at 0.70). A large back satchel of greens recovers part of it.",
+  "The carrot sits on the left back of the crown, as in the hero, while the sheet puts it on the right. Moving it from the sheet side to the hero side cost about 0.05 mean IoU before the lean-out placement won back about half of that.",
+  "Curling the front brim up so the face shows from the elevated hero camera costs about 0.01 IoU. I kept it because the face matters more.",
+  "Colours are flat, and the smock still reads a little paler and yellower than the illustration's warm beige (mean colour distance 0.20 to 0.32). There is no straw weave or wood grain, only geometry facets.",
+  "The hero's open-mouth grin is a small dark oval, and the hands are simple mitts with a thumb, with no fingers.",
+  "The hood is a cut sphere shell behind the face, so from some angles its inner side reads as a darker ring around the face."
+ ],
+ "rounds": [
+  {
+   "round": 0,
+   "change": "First build: head, hood, hat with a drooping wavy brim, smock, skirt, legs, a tub on the right hip, a small back satchel, idle animation",
+   "mean_iou": 0.655
+  },
+  {
+   "round": 1,
+   "change": "Tilted the hat so the front lifts, made the back satchel and greens bigger, warmer smock and straw colours",
+   "mean_iou": 0.704
+  },
+  {
+   "round": 2,
+   "change": "Bigger head (0.47 m wide), phased the brim waves so the front brim lifts and the sides and back droop, moved the tub forward",
+   "mean_iou": 0.698
+  },
+  {
+   "round": 3,
+   "change": "Moved the hat forward over the face as on the sheet, bigger eyes and carrot, removed the hood's solidify (it z-fought the head)",
+   "mean_iou": 0.73
+  },
+  {
+   "round": 4,
+   "change": "Lowered the carrot, widened the brim to 0.46 (too wide in the side and back views)",
+   "mean_iou": 0.716
+  },
+  {
+   "round": 5,
+   "change": "Moved the carrot to the hero's side (the character's left, toward the back) and set the brim to 0.44; the carrot leaves raised the bounding box",
+   "mean_iou": 0.662
+  },
+  {
+   "round": 6,
+   "change": "Carrot lower and leaning far back: hidden behind the crown, which shrank the box top and inflated everything else",
+   "mean_iou": 0.636
+  },
+  {
+   "round": 7,
+   "change": "Carrot upright on the left back",
+   "mean_iou": 0.649
+  },
+  {
+   "round": 8,
+   "change": "Carrot leans out from the band with its tip on the brim, placed by an angle around the crown (reads like the hero)",
+   "mean_iou": 0.672
+  },
+  {
+   "round": 9,
+   "change": "Width profiles showed the brim sitting too high on the crown: crown 0.15 to 0.19 m, less front lift, less tilt, carrot more upright, tub pulled in",
+   "mean_iou": 0.713
+  },
+  {
+   "round": 10,
+   "change": "Fixed both arms: they had been rotated into the body. The right arm now reaches to the tub and the left arm is out in an A-pose",
+   "mean_iou": 0.704
+  },
+  {
+   "round": 11,
+   "change": "Tilted the hat back 15 degrees to show the face from the hero camera (reverted, too costly)",
+   "mean_iou": 0.68
+  },
+  {
+   "round": 12,
+   "change": "Hat tilt back 10 degrees",
+   "mean_iou": 0.698
+  },
+  {
+   "round": 13,
+   "change": "Removed the sideways hat tilt, left arm less spread",
+   "mean_iou": 0.715
+  },
+  {
+   "round": 14,
+   "change": "Brim flop neutral at frame 1 (the renders had shown it mid-flop), opened the hood front",
+   "mean_iou": 0.706
+  },
+  {
+   "round": 15,
+   "change": "Resting brim droop 0.13 to 0.16 to make up for it",
+   "mean_iou": 0.717
+  },
+  {
+   "round": 16,
+   "change": "Curled the front brim up so the eyes and cheeks show from the hero camera (kept for readability)",
+   "mean_iou": 0.705
+  },
+  {
+   "round": 17,
+   "change": "Strap band pulled outside the smock and the patch moved where the tub doesn't hide it, warmer smock colour; final at 768 px / 48 samples: 0.707",
+   "mean_iou": 0.707
+  }
+ ],
+ "moving_parts": "One 120-frame seamless idle clip at 24 fps. body: four happy hops per loop (up to 3.5 cm), with a small squash and stretch on landing and a slow body twist; the legs stay planted. neck (head, hood, face and hat): a slow side-to-side head tilt (about 9 degrees) and turn (6 degrees), with a little nod on each landing. hat: lags the head by a few degrees. hat_brim_pivot: the brim's droop deepens and relaxes by about 24% twice per loop, so the brim flops after each hop. tub: sways on her hip (3 to 4 degrees, offset phases).",
+ "creative_additions": "The brim is generated as a wavy disc that curls up at the front to frame the face and flops at the sides and back, on its own pivot so it can flop in the idle. A leather satchel of greens on her back nods to the sheet's backpack basket. Red peppers and carrots poke out between the tomatoes, onions, cabbage and pumpkin in the tub. A hood ribbon knot under the chin and a bow with ribbon tails on the hat band. Ragged scalloped smock hem with ochre patches."
+}

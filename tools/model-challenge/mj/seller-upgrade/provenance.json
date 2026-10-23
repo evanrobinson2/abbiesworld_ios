@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "seller-upgrade",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a friendly Bronze Age ranch produce seller woman, linen tunic, ochre apron with a pocket, a leather belt, a hair wrap, sandals, carrying a woven basket of onions, carrots and greens on her hip, standing in a relaxed A-pose, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "f98149e3-18cc-4301-9cdd-e074fb537574",
+      "grid_url": "https://www.midjourney.com/jobs/f98149e3-18cc-4301-9cdd-e074fb537574?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "c6d0aac6-bde0-47d1-8bbb-0c5d16bd10cf",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a friendly Bronze Age ranch produce seller woman, linen tunic, ochre apron with a pocket, a leather belt, a hair wrap, sandals, carrying a woven basket of onions, carrots and greens on her hip, standing in a relaxed A-pose, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "25cef39a-0986-4647-a065-ce041b958961",
+      "grid_url": "https://www.midjourney.com/jobs/25cef39a-0986-4647-a065-ce041b958961?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "31f6af57-269f-4e2d-98d0-1f327ea9cdd5",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "b0c78c4a21f721be5a6adada9bac7c93e62dcf9486d58a9544c6f55ba4490678",
+      "bytes": 1905634,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/c6d0aac6-bde0-47d1-8bbb-0c5d16bd10cf/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "439d46d885107828357cc785f213a6d57c43a4ae0a29c08a1b1363ec9d4bff24",
+      "bytes": 4406692,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/31f6af57-269f-4e2d-98d0-1f327ea9cdd5/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "edfbbfaa326a7c949086e0b9a18920bed12d144489bec0dc2f620dbdba3c4477",
+      "bytes": 1475021,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "cff19601ca2689ff85b80e3cc2a04b3b3fca6c3d0e7126f4aa51840e04d94a0f",
+      "bytes": 1424130,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "afebaa9eac391a7fec53e56a92dce458b1b37842f92ecd340346eb0835e34b2f",
+      "bytes": 1402387,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 0 is the most frontal, full-figure pose with the basket on the hip. Turnaround pick 2 has a square-on front, a true profile and a back view, evenly spaced."
+}

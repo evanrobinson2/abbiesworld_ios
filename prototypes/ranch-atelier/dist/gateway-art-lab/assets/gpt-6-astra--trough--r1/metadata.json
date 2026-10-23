@@ -1,0 +1,10 @@
+{
+  "animationRanges": {
+    "water_state": [
+      1,
+      60
+    ]
+  },
+  "notes": "1.80 x 0.70 x 0.65 m timber trough. Continuous hollow metal liner, fitted individual planks, splayed trestles and knee braces. water_state drains the separate surface in place; its footprint follows the tapered interior, finishing concealed beneath the liner floor.",
+  "blenderVersion": "5.2.1 LTS"
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "warrior",
+    "name": "Bronze warrior"
+  },
+  {
+    "id": "cuirass",
+    "name": "Cuirass & shoulder plates"
+  },
+  {
+    "id": "shield",
+    "name": "Sunburst shield"
+  },
+  {
+    "id": "spear",
+    "name": "Leaf spear"
+  },
+  {
+    "id": "greaves",
+    "name": "Greaves"
+  }
+]

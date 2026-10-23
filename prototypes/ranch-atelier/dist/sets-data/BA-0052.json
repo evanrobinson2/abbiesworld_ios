@@ -1,0 +1,46 @@
+{
+  "id": "aw.ranch.asset.ba-0052",
+  "name": "Undyed cloth merchant assortment",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 25,
+    "triangles": 5508,
+    "bounds_min": [
+      -0.3400000035762787,
+      -0.1730000078678131,
+      0.004999963566660881
+    ],
+    "bounds_max": [
+      0.39000004529953003,
+      0.1730000078678131,
+      0.10500003397464752
+    ],
+    "dimensions_m": [
+      0.73,
+      0.346,
+      0.1
+    ],
+    "material_slots": [
+      "Linen",
+      "Reed"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Linen",
+    "Reed"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0052",
+  "intent": "Rolled and folded cloth in clearly different weave weights.",
+  "family": "Craft displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0052",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

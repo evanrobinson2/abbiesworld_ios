@@ -1,0 +1,170 @@
+{
+  "index.html": [
+    "/",
+    "Ranch home",
+    "Places",
+    "The authored ranch map."
+  ],
+  "board.html": [
+    "/board",
+    "Terrain Board",
+    "Tools",
+    "Inspect terrain and legacy board composition."
+  ],
+  "board3.html": [
+    "/sandbox",
+    "Sandbox",
+    "Play",
+    "Compose a world from living scene cards."
+  ],
+  "tile-game.html": [
+    "/game",
+    "Little Living World",
+    "Play",
+    "Pick up and arrange living hex tiles."
+  ],
+  "board3-design.html": [
+    "/board3/design",
+    "Board3 design",
+    "Studies",
+    "The four-stage world-building design."
+  ],
+  "3d.html": [
+    "/3d",
+    "3D ranch study",
+    "Studies",
+    "Explore the ranch and its building studies."
+  ],
+  "barn-builder.html": [
+    "/3d/barn-builder",
+    "Barn Builder",
+    "Tools",
+    "Compose and inspect a barn."
+  ],
+  "asset-studies.html": [
+    "/3d/asset-studies",
+    "Asset studies",
+    "Assets",
+    "Compare authored ranch assets."
+  ],
+  "simulation-assets.html": [
+    "/3d/simulation-assets",
+    "Living asset library",
+    "Assets",
+    "Browse simulation assets and their states."
+  ],
+  "simulation-characters/index.html": [
+    "/simulation-characters/",
+    "Character studies",
+    "Assets",
+    "Inspect the character collection."
+  ],
+  "continuous-scale.html": [
+    "/continuous-scale",
+    "Continuous scale",
+    "Studies",
+    "The corner provisioner scale study."
+  ],
+  "drawing-explorer.html": [
+    "/drawing-explorer.html",
+    "2D Illustrator",
+    "Tools",
+    "Explore illustration subjects and methods."
+  ],
+  "garden-farm.html": [
+    "/scene-generator/garden",
+    "Garden Farm study",
+    "Studies",
+    "The standalone garden and farm layout study."
+  ],
+  "halloween.html": [
+    "/halloween",
+    "Midnight Neighbours",
+    "Assets",
+    "The Halloween creature pack."
+  ],
+  "halloween-town.html": [
+    "/halloween-town",
+    "Lantern Lane",
+    "Scene generators",
+    "The Halloween town generator."
+  ],
+  "market.html": [
+    "/market",
+    "Market Day",
+    "Studies",
+    "The standalone market scene."
+  ],
+  "mood-board.html": [
+    "/mood-board",
+    "Mood Board",
+    "Studies",
+    "Visual references and illustration directions."
+  ],
+  "playground.html": [
+    "/playground.html",
+    "Playground",
+    "Studies",
+    "The original interactive playground."
+  ],
+  "proportion-study.html": [
+    "/proportion-study",
+    "Proportion Study",
+    "Studies",
+    "Compare scene proportions in Little Abundance."
+  ],
+  "ranch.html": [
+    "/ranch.html",
+    "Ranch Atelier",
+    "Places",
+    "The original ranch atelier."
+  ],
+  "bedroom.html": [
+    "/bedroom.html",
+    "Room Atelier",
+    "Places",
+    "The room composition workspace."
+  ],
+  "scene-generator.html": [
+    "/scene-generator/simulation",
+    "Scene simulation study",
+    "Studies",
+    "The standalone scene generator and simulation interface."
+  ],
+  "sets.html": [
+    "/sets",
+    "Sets",
+    "Assets",
+    "Browse all catalogued sets, scenes and pieces."
+  ],
+  "simulation.html": [
+    "/simulation",
+    "Simulation",
+    "Tools",
+    "The original simulation workspace."
+  ],
+  "themes.html": [
+    "/themes",
+    "Themes",
+    "Tools",
+    "Browse application and scene themes."
+  ],
+  "tile-editor.html": [
+    "/tile-editor.html",
+    "Tile Editor",
+    "Tools",
+    "The standalone tile composition editor."
+  ],
+  "units.html": [
+    "/units",
+    "Units",
+    "Tools",
+    "Inspect units and animation references."
+  ],
+  "working-woodland.html": [
+    "/scene-generator/woodland",
+    "Working Woodland study",
+    "Studies",
+    "The standalone woodland workspace."
+  ]
+}

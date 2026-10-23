@@ -1,0 +1,87 @@
+{
+ "what_i_did": [
+  [
+   "Orientation",
+   "Gable-front shed as in the hero: the ridge runs along Y and the door is in the -Y gable end. The sheet's three views are labelled correctly and were scored as-is; its side view draws a second door on the eave side, which contradicts the hero, so the side and back walls are plain planks and that view only guides the silhouette."
+  ],
+  [
+   "Views",
+   "views/ holds copies of the three sheet views plus views/hero.png, the hero with its long cast shadow at the lower left painted back to the backdrop (the harness mask kept it and the box nearly doubled in width). hero_iou.py scores r/hero.png against it with the harness's own masking."
+  ],
+  [
+   "Massing",
+   "2.3 x 1.85 m walls, 2.42 m eaves (raised 15% in the art director's round), 3.57 m ridge, so the shed is tall and narrow, plus a 0.16 m ridge log on top that overhangs the front by 0.42 m and the back by 0.12 m. The roof oversails the side walls by 0.2 m and the gables by 0.2 m. All of it is in the P dict."
+  ],
+  [
+   "Craft",
+   "Horizontal rose planks with a little jitter, vertical gable boards cut to the roof line, chunky corner posts, tie beams across both gables, knee braces either side of the door, door jambs and a long lintel plank, a 4-plank door, and five thick (0.13 m) teal shingle courses a side. Each course has 5 tabs with notches cut up between them, alternates between two teal tones, and has its undersides, butts and ends in a darker teal (Roof_TealDark). There is also a ring of irregular footing stones, a floor, and a light sign board on cords with raised blocky FEED letters in dark ink."
+  ],
+  [
+   "Props",
+   "Two slumped burlap sacks (lathed, with rope ties) left of the door, a metal scoop on a leaning handle right of the door, and overlapping gold grain heaps plus scattered kernels in front. They appear only in the complete stage."
+  ],
+  [
+   "Stages",
+   "build.py has a STATE switch. planned: four corner stakes, string lines and door pegs. foundation: stone footing and floor. frame: footing plus posts, tie beams, wall plates, knee braces, door frame, rafters and the ridge log. roof: the frame plus the shingle courses. complete: everything, and it is identical to feed-store.glb. Triangles: 168 / 300 / 744 / 1984 / 3750."
+  ],
+  [
+   "Game readiness",
+   "3,750 triangles (budget 9k), 22 meshes, one material each, flat colours, no textures, export_animations=False. Material names start with role words (Plank_Rose, Timber_Brown, Roof_Teal, Stone_Grey, Cloth_Burlap, Metal_Scoop, Grain_Gold, Rope_Tie...). to_game.py feed-store ran cleanly and mapped every part to the intended role."
+  ]
+ ],
+ "good": [
+  "Hero read: a tall rose shed with a teal stepped-course roof, a heavy overhanging ridge log, a FEED board under the gable, brown framing with knee braces, a big plank door, sacks left and scoop right on spilled grain.",
+  "Light on triangles (3.75k of 9k) while the silhouette parts (ridge log, eaves, sacks) carry the shape.",
+  "The construction stages share one design and grow cleanly from stakes to the finished shed."
+ ],
+ "off": [
+  "Hero IoU is 0.73 (0.78 before the art director's round). Raising the eaves 15% made the walls read taller in the render, as asked, but the silhouette now overshoots the hero's height inside the scorer's square. The illustration's lower, more frontal camera also shows the ridge log and front roof edge higher and further left than the harness's fixed hero camera can, and its walls look shallower than the sheet's (I compromised at a depth of 0.8 x the width).",
+  "Front and back IoU are about 0.72: the sheet draws a steeper roof whose eaves stop at the walls, and a wide stone plinth slab. I followed the hero's deeper eaves and plain footing.",
+  "The front view's colour distance is high because the sheet's door is grey; the hero's rose door wins.",
+  "The sacks and roof courses are smoother than the hero's hand-sculpted lumps and irregular shingles, and there is no rope from the sign to the apex beyond two thin cords."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First full build: gable-front shed, 4 jagged shingle courses a side, ridge log, framing, sign with letters, sacks, scoop, grain, all 5 stages.",
+   "mean_iou": 0.735
+  },
+  {
+   "round": 2,
+   "change": "Taller walls, lower rise, shorter eave overhang and butt kick; cleaned hero target (cast shadow removed); hero IoU went from 0.59 on the raw target to 0.78 on the cleaned one.",
+   "mean_iou": 0.741
+  },
+  {
+   "round": 3,
+   "change": "Ridge log overhangs more at the front and less at the back, bigger sacks further left, wider grain spill, footing more proud.",
+   "mean_iou": 0.733
+  },
+  {
+   "round": 4,
+   "change": "Swept proportions: W 2.3, D 1.85, eaves 2.1 m, eave overhang 0.2; wider and lower door (1.24 m, lintel at 1.76 m) as in the hero. Hero 0.796.",
+   "mean_iou": 0.749
+  },
+  {
+   "round": 5,
+   "change": "Thicker shingle courses, mid rafters stopped short of the eaves, larger scoop blade, grain as overlapping heaps.",
+   "mean_iou": 0.736
+  },
+  {
+   "round": 6,
+   "change": "Tie-beam ends shortened (they poked through the roof), grain pulled closer to the door.",
+   "mean_iou": 0.746
+  },
+  {
+   "round": 7,
+   "change": "Slumped wider sacks, shorter back log, footing 0.12 m proud; changes now within noise (about 0.01). Final render at 768 px, 48 samples: front 0.720, side 0.778, back 0.718, hero 0.776.",
+   "mean_iou": 0.739
+  },
+  {
+   "round": 8,
+   "change": "Art director round: eaves raised 15% (2.1 to 2.42 m, ridge rise unchanged, door lintel and sign moved up with them). Five thicker ragged shingle courses, each with 5 notched tabs and dark-teal undersides and edges. Warmer, more saturated gold grain spread around the scoop. Final render at 768 px, 48 samples: front 0.717, side 0.767, back 0.757, hero 0.730.",
+   "mean_iou": 0.747
+  }
+ ],
+ "moving_parts": "None. The game poses buildings itself, and its construction states are the 5 static variants in variants/.",
+ "creative_additions": "Two-tone teal courses, pale end grain on the ridge log, rope ties on the sacks, door pegs in the planned stage, and scattered kernels around the grain heaps."
+}

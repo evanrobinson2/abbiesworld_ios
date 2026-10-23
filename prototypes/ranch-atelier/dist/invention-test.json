@@ -1,0 +1,263 @@
+{
+  "name": "Tomato-Tin Rattlebike",
+  "rationale": "A cream-and-tomato survivor bicycle perched on a stable stationary stand. Pedalling would turn its little crank-mounted drum while a springy red beater supplies an invitingly terrible racket: a charming noise decoy for Night of the Dead.",
+  "dimensionsM": [1.9, 0.98, 1.13],
+  "actions": {
+    "status": "Proposed semantics only; no gameplay implemented.",
+    "interact": "Begin or stop pedalling the stationary decoy.",
+    "consume_stamina": "While pedalling, request a stamina cost; stop if that cost cannot be paid.",
+    "emit_noise": "While pedalling, request rhythmic drum noise originating at the prop."
+  },
+  "animation": {
+    "status": "Named pivots and tween candidates only; clips not built.",
+    "pivots": [
+      {
+        "name": "crankDrive",
+        "location": [-0.1, 0, 0.32],
+        "axis": [0, 1, 0],
+        "parts": ["crankAxle", "leftCrank", "rightCrank", "leftPedal", "rightPedal", "tinDrum"]
+      },
+      {
+        "name": "beaterHinge",
+        "location": [-0.1, 0.23, 0.55],
+        "axis": [0, 1, 0],
+        "parts": ["springBeater"]
+      }
+    ],
+    "tweenCandidates": [
+      "Loop crankDrive rotation while pedalling; ease to rest on stopping.",
+      "Counter-rotate both pedals about their individual Y axes to keep their platforms level.",
+      "Rock beaterHinge a few degrees away from the drum and back at pedal-timed strike phases.",
+      "Keep both wheels and the stand stationary."
+    ]
+  },
+  "parts": [
+    {
+      "name": "rearTire",
+      "primitive": "torus",
+      "color": "#292725",
+      "location": [-0.58, 0, 0.43],
+      "majorRadius": 0.335,
+      "minorRadius": 0.03,
+      "rotation": [1.5708, 0, 0]
+    },
+    {
+      "name": "frontTire",
+      "primitive": "torus",
+      "color": "#292725",
+      "location": [0.58, 0, 0.43],
+      "majorRadius": 0.335,
+      "minorRadius": 0.03,
+      "rotation": [1.5708, 0, 0]
+    },
+    {
+      "name": "rearRim",
+      "primitive": "torus",
+      "color": "#F2DFC0",
+      "location": [-0.58, 0, 0.43],
+      "majorRadius": 0.305,
+      "minorRadius": 0.012,
+      "rotation": [1.5708, 0, 0]
+    },
+    {
+      "name": "frontRim",
+      "primitive": "torus",
+      "color": "#F2DFC0",
+      "location": [0.58, 0, 0.43],
+      "majorRadius": 0.305,
+      "minorRadius": 0.012,
+      "rotation": [1.5708, 0, 0]
+    },
+    {
+      "name": "rearBroadSpoke",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [-0.885, 0, 0.43],
+      "end": [-0.275, 0, 0.43],
+      "radius": 0.016
+    },
+    {
+      "name": "frontBroadSpoke",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [0.275, 0, 0.43],
+      "end": [0.885, 0, 0.43],
+      "radius": 0.016
+    },
+    {
+      "name": "chainStay",
+      "primitive": "beam",
+      "color": "#D94A38",
+      "start": [-0.58, 0, 0.43],
+      "end": [-0.1, 0, 0.32],
+      "radius": 0.025
+    },
+    {
+      "name": "seatStay",
+      "primitive": "beam",
+      "color": "#D94A38",
+      "start": [-0.58, 0, 0.43],
+      "end": [-0.25, 0, 0.84],
+      "radius": 0.025
+    },
+    {
+      "name": "seatTube",
+      "primitive": "beam",
+      "color": "#D94A38",
+      "start": [-0.1, 0, 0.32],
+      "end": [-0.25, 0, 0.84],
+      "radius": 0.032
+    },
+    {
+      "name": "topTube",
+      "primitive": "beam",
+      "color": "#D94A38",
+      "start": [-0.25, 0, 0.84],
+      "end": [0.36, 0, 0.84],
+      "radius": 0.032
+    },
+    {
+      "name": "downTube",
+      "primitive": "beam",
+      "color": "#F2DFC0",
+      "start": [-0.1, 0, 0.32],
+      "end": [0.36, 0, 0.84],
+      "radius": 0.035
+    },
+    {
+      "name": "frontFork",
+      "primitive": "beam",
+      "color": "#D94A38",
+      "start": [0.36, 0, 0.84],
+      "end": [0.58, 0, 0.43],
+      "radius": 0.03
+    },
+    {
+      "name": "seatPost",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [-0.25, 0, 0.84],
+      "end": [-0.28, 0, 0.95],
+      "radius": 0.022
+    },
+    {
+      "name": "saddle",
+      "primitive": "box",
+      "color": "#292725",
+      "location": [-0.29, 0, 0.965],
+      "dimensions": [0.3, 0.19, 0.07]
+    },
+    {
+      "name": "handlebarStem",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [0.36, 0, 0.84],
+      "end": [0.4, 0, 1.1],
+      "radius": 0.023
+    },
+    {
+      "name": "handlebar",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [0.4, -0.32, 1.1],
+      "end": [0.4, 0.32, 1.1],
+      "radius": 0.025
+    },
+    {
+      "name": "crankAxle",
+      "primitive": "cylinder",
+      "color": "#353B3D",
+      "location": [-0.1, 0, 0.32],
+      "radius": 0.038,
+      "depth": 0.72,
+      "rotation": [1.5708, 0, 0]
+    },
+    {
+      "name": "leftCrank",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [-0.1, -0.34, 0.32],
+      "end": [0.04, -0.34, 0.21],
+      "radius": 0.022
+    },
+    {
+      "name": "rightCrank",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [-0.1, 0.34, 0.32],
+      "end": [-0.24, 0.34, 0.43],
+      "radius": 0.022
+    },
+    {
+      "name": "leftPedal",
+      "primitive": "box",
+      "color": "#292725",
+      "location": [0.04, -0.41, 0.21],
+      "dimensions": [0.12, 0.16, 0.045]
+    },
+    {
+      "name": "rightPedal",
+      "primitive": "box",
+      "color": "#292725",
+      "location": [-0.24, 0.41, 0.43],
+      "dimensions": [0.12, 0.16, 0.045]
+    },
+    {
+      "name": "rearStandFoot",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [-0.58, -0.43, 0.03],
+      "end": [-0.58, 0.43, 0.03],
+      "radius": 0.03
+    },
+    {
+      "name": "frontStandFoot",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [0.58, -0.43, 0.03],
+      "end": [0.58, 0.43, 0.03],
+      "radius": 0.03
+    },
+    {
+      "name": "rearStandUpright",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [-0.58, 0, 0.03],
+      "end": [-0.58, 0, 0.43],
+      "radius": 0.025
+    },
+    {
+      "name": "frontStandUpright",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [0.58, 0, 0.03],
+      "end": [0.58, 0, 0.43],
+      "radius": 0.025
+    },
+    {
+      "name": "tinDrum",
+      "primitive": "cylinder",
+      "color": "#F2DFC0",
+      "location": [-0.1, 0.2, 0.32],
+      "radius": 0.17,
+      "depth": 0.12,
+      "rotation": [1.5708, 0, 0]
+    },
+    {
+      "name": "beaterBracket",
+      "primitive": "beam",
+      "color": "#353B3D",
+      "start": [-0.25, 0, 0.84],
+      "end": [-0.1, 0.23, 0.55],
+      "radius": 0.018
+    },
+    {
+      "name": "springBeater",
+      "primitive": "beam",
+      "color": "#D94A38",
+      "start": [-0.1, 0.23, 0.55],
+      "end": [0.045, 0.23, 0.415],
+      "radius": 0.018
+    }
+  ]
+}

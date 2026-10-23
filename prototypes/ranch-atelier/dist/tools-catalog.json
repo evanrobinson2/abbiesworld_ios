@@ -1,0 +1,1703 @@
+{
+  "pages": [
+    {
+      "href": "/game",
+      "title": "Little Living World",
+      "category": "Play",
+      "description": "Pick up and arrange living hex tiles.",
+      "aliases": [
+        "/tile-game.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/outbreak",
+      "title": "Outbreak",
+      "category": "Play",
+      "description": "Zombies pursue people across connected tiles; equip survivors and run the encounter.",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/sandbox",
+      "title": "Sandbox",
+      "category": "Play",
+      "description": "Compose a world from living scene cards.",
+      "aliases": [
+        "/board3.html",
+        "/board3",
+        "/generators",
+        "/generators.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/animals",
+      "title": "Animals generator",
+      "category": "Scene generators",
+      "description": "Compose animals scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/animals"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/brains",
+      "title": "Brains generator",
+      "category": "Scene generators",
+      "description": "Compose brains scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/brains"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/castle",
+      "title": "Castle generator",
+      "category": "Scene generators",
+      "description": "Compose castle scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/castle"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/garden",
+      "title": "Farm generator",
+      "category": "Scene generators",
+      "description": "Compose farm scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/garden"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/gathering",
+      "title": "Gather generator",
+      "category": "Scene generators",
+      "description": "Compose gather scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/gathering"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/home",
+      "title": "Home generator",
+      "category": "Scene generators",
+      "description": "Compose home scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/home"
+      ],
+      "main": false
+    },
+    {
+      "href": "/halloween-town",
+      "title": "Lantern Lane",
+      "category": "Scene generators",
+      "description": "The Halloween town generator.",
+      "aliases": [
+        "/halloween-town.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/market",
+      "title": "Market generator",
+      "category": "Scene generators",
+      "description": "Compose market scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/market"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/neighborhood",
+      "title": "Neighborhood generator",
+      "category": "Scene generators",
+      "description": "Compose neighborhood scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/neighborhood"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/pottery",
+      "title": "Pottery generator",
+      "category": "Scene generators",
+      "description": "Compose pottery scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/pottery"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/preservation",
+      "title": "Preserve generator",
+      "category": "Scene generators",
+      "description": "Compose preserve scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/preservation"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/rabbits",
+      "title": "Rabbit Grove generator",
+      "category": "Scene generators",
+      "description": "Compose rabbit grove scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/rabbits"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/ranch",
+      "title": "Ranch generator",
+      "category": "Scene generators",
+      "description": "Compose ranch scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/ranch"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/seaside",
+      "title": "Seaside generator",
+      "category": "Scene generators",
+      "description": "Compose seaside scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/seaside"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/town",
+      "title": "Town generator",
+      "category": "Scene generators",
+      "description": "Compose town scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/town",
+        "/town-life",
+        "/town-life/",
+        "/town-life/index.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/wizard",
+      "title": "Wizard’s Clearing generator",
+      "category": "Scene generators",
+      "description": "Compose wizard’s clearing scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/wizard"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/woodland",
+      "title": "Woodland generator",
+      "category": "Scene generators",
+      "description": "Compose woodland scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/woodland"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sandbox/zombies",
+      "title": "Zombies generator",
+      "category": "Scene generators",
+      "description": "Compose zombies scenes in Sandbox.",
+      "aliases": [
+        "/tile-generator/zombies"
+      ],
+      "main": false
+    },
+    {
+      "href": "/drawing-explorer.html",
+      "title": "2D Illustrator",
+      "category": "Tools",
+      "description": "Explore illustration subjects and methods.",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/3d/barn-builder",
+      "title": "Barn Builder",
+      "category": "Tools",
+      "description": "Compose and inspect a barn.",
+      "aliases": [
+        "/barn-builder.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/simulation",
+      "title": "Simulation",
+      "category": "Tools",
+      "description": "The original simulation workspace.",
+      "aliases": [
+        "/simulation.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/board",
+      "title": "Terrain Board",
+      "category": "Tools",
+      "description": "Inspect terrain and legacy board composition.",
+      "aliases": [
+        "/board.html",
+        "/tile-generator",
+        "/scene-generator"
+      ],
+      "main": false
+    },
+    {
+      "href": "/procedural",
+      "title": "Terrain Generator",
+      "category": "Tools",
+      "description": "Shape the sandbox landscape.",
+      "aliases": [
+        "/terrain-editor",
+        "/procedural.html"
+      ],
+      "main": true
+    },
+    {
+      "href": "/themes",
+      "title": "Themes",
+      "category": "Tools",
+      "description": "Browse application and scene themes.",
+      "aliases": [
+        "/themes.html"
+      ],
+      "main": true
+    },
+    {
+      "href": "/tile-editor.html",
+      "title": "Tile Editor",
+      "category": "Tools",
+      "description": "The standalone tile composition editor.",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/units",
+      "title": "Units",
+      "category": "Tools",
+      "description": "Inspect units and animation references.",
+      "aliases": [
+        "/units.html"
+      ],
+      "main": true
+    },
+    {
+      "href": "/3d",
+      "title": "3D ranch study",
+      "category": "Studies",
+      "description": "Explore the ranch and its building studies.",
+      "aliases": [
+        "/3d.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/board3/design",
+      "title": "Board3 design",
+      "category": "Studies",
+      "description": "The four-stage world-building design.",
+      "aliases": [
+        "/board3-design.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/continuous-scale",
+      "title": "Continuous scale",
+      "category": "Studies",
+      "description": "The corner provisioner scale study.",
+      "aliases": [
+        "/continuous-scale.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/scene-generator/garden",
+      "title": "Garden Farm study",
+      "category": "Studies",
+      "description": "The standalone garden and farm layout study.",
+      "aliases": [
+        "/garden-farm.html",
+        "/scene-generator?scene=garden"
+      ],
+      "main": false
+    },
+    {
+      "href": "/market",
+      "title": "Market Day",
+      "category": "Studies",
+      "description": "The standalone market scene.",
+      "aliases": [
+        "/market.html",
+        "/scene-generator?scene=market",
+        "/scene-generator/market"
+      ],
+      "main": false
+    },
+    {
+      "href": "/mood-board",
+      "title": "Mood Board",
+      "category": "Studies",
+      "description": "Visual references and illustration directions.",
+      "aliases": [
+        "/mood-board.html"
+      ],
+      "main": true
+    },
+    {
+      "href": "/playground.html",
+      "title": "Playground",
+      "category": "Studies",
+      "description": "The original interactive playground.",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/proportion-study",
+      "title": "Proportion Study",
+      "category": "Studies",
+      "description": "Compare scene proportions in Little Abundance.",
+      "aliases": [
+        "/proportion-study.html"
+      ],
+      "main": true
+    },
+    {
+      "href": "/scene-generator/simulation",
+      "title": "Scene simulation study",
+      "category": "Studies",
+      "description": "The standalone scene generator and simulation interface.",
+      "aliases": [
+        "/scene-generator.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/scene-generator/woodland",
+      "title": "Working Woodland study",
+      "category": "Studies",
+      "description": "The standalone woodland workspace.",
+      "aliases": [
+        "/working-woodland.html",
+        "/scene-generator?scene=woodland"
+      ],
+      "main": false
+    },
+    {
+      "href": "/ranch.html",
+      "title": "Ranch Atelier",
+      "category": "Places",
+      "description": "The original ranch atelier.",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/",
+      "title": "Ranch home",
+      "category": "Places",
+      "description": "The authored ranch map.",
+      "aliases": [
+        "/index.html",
+        "/authored-ranch.html"
+      ],
+      "main": true
+    },
+    {
+      "href": "/bedroom.html",
+      "title": "Room Atelier",
+      "category": "Places",
+      "description": "The room composition workspace.",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/3d/asset-studies",
+      "title": "Asset studies",
+      "category": "Assets",
+      "description": "Compare authored ranch assets.",
+      "aliases": [
+        "/asset-studies.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/simulation-characters/",
+      "title": "Character studies",
+      "category": "Assets",
+      "description": "Inspect the character collection.",
+      "aliases": [
+        "/simulation-characters/index.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/3d/simulation-assets",
+      "title": "Living asset library",
+      "category": "Assets",
+      "description": "Browse simulation assets and their states.",
+      "aliases": [
+        "/simulation-assets.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/halloween",
+      "title": "Midnight Neighbours",
+      "category": "Assets",
+      "description": "The Halloween creature pack.",
+      "aliases": [
+        "/halloween.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/scene-generator/prefabs",
+      "title": "Prefabs",
+      "category": "Assets",
+      "description": "Search the catalog of reusable scenes and pieces.",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/sets",
+      "title": "Sets",
+      "category": "Assets",
+      "description": "Browse all catalogued sets, scenes and pieces.",
+      "aliases": [
+        "/sets.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0100",
+      "title": "Closing market pack down",
+      "category": "Sets",
+      "description": "Tied parcels, covered counters, and cleared central walking space.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0100"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0092",
+      "title": "Completed sale handoff",
+      "category": "Sets",
+      "description": "Seller and shopper positions with a removable purchase parcel.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0092"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0098",
+      "title": "Disputed measure scene",
+      "category": "Sets",
+      "description": "Two customer positions, a balance, and a market steward position.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0098"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/first-village",
+      "title": "First village",
+      "category": "Sets",
+      "description": "Cross the stream. Meet your neighbors. Find where things are made.",
+      "aliases": [
+        "/scene-generator/prefabs/first-village"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0095",
+      "title": "Fresh river delivery",
+      "category": "Sets",
+      "description": "Wet baskets, delivery space, and a path leading toward the landing.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0095"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market",
+      "title": "Market",
+      "category": "Sets",
+      "description": "Where the ranch meets the wider world.",
+      "aliases": [
+        "/scene-generator/prefabs/market"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0094",
+      "title": "New caravan arrival",
+      "category": "Sets",
+      "description": "Arrival staging with cargo space and reusable traveler attachment points.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0094"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0091",
+      "title": "Opening market setup",
+      "category": "Sets",
+      "description": "A folded stall, stacked furniture, and partially unpacked goods.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0091"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0096",
+      "title": "Quiet midday shade gathering",
+      "category": "Sets",
+      "description": "Seats and resting positions under a shared canopy.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0096"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0099",
+      "title": "Rain covered market goods",
+      "category": "Sets",
+      "description": "Raised containers and fitted covers that show a change in weather.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0099"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/ranch",
+      "title": "Ranch",
+      "category": "Sets",
+      "description": "A home, a clearing, and the life around it.",
+      "aliases": [
+        "/scene-generator/prefabs/ranch"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0097",
+      "title": "Spilled grain cleanup",
+      "category": "Sets",
+      "description": "A spilled sack, grain scatter, scoop, and worker attachment point.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0097"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0093",
+      "title": "Wheel inquiry scene",
+      "category": "Sets",
+      "description": "Wheel seller, customer position, display wheel, and a route pointing toward the workshop.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0093"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/woodland-worksite",
+      "title": "Woodland worksite",
+      "category": "Sets",
+      "description": "Follow a village wheel back to the woodland and its makers.",
+      "aliases": [
+        "/scene-generator/prefabs/woodland-worksite"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0032",
+      "title": "Balance support stand",
+      "category": "Pieces",
+      "description": "A tabletop upright with a hook for the portable balance.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0032"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0054",
+      "title": "Basket seller nested stack",
+      "category": "Pieces",
+      "description": "A nested stack showing carrying and storage basket sizes.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0054"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0060",
+      "title": "Bead merchant display",
+      "category": "Pieces",
+      "description": "Bead strings, loose beads, and small sample stones in trays.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0060"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0011",
+      "title": "Broad plank selling counter",
+      "category": "Pieces",
+      "description": "A rough plank surface on trestles with clearance for baskets below.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0011"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0017",
+      "title": "Bronze goods display board",
+      "category": "Pieces",
+      "description": "A plain timber panel with pegs and resting ledges for tools.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0017"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0085",
+      "title": "Bronze goods trader",
+      "category": "Pieces",
+      "description": "A tool roll and balance pouch distinguish the metal trade.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0085"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0059",
+      "title": "Bronze tool seller display",
+      "category": "Pieces",
+      "description": "A restrained assortment of finished bronze tools on a board.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0059"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0010",
+      "title": "Canopy rope anchor",
+      "category": "Pieces",
+      "description": "A stake, tensioned rope, and knot assembly securing a stall canopy.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0010"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0064",
+      "title": "Cargo unloading platform",
+      "category": "Pieces",
+      "description": "A low raised edge helping people transfer loads from carts.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0064"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0057",
+      "title": "Carpentry offcut sample display",
+      "category": "Pieces",
+      "description": "Timber samples with shaped edges and visible joints.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0057"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0072",
+      "title": "Cart rutted market tile",
+      "category": "Pieces",
+      "description": "Parallel wheel tracks that connect to departing roads.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0072"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0058",
+      "title": "Cart wheel seller display",
+      "category": "Pieces",
+      "description": "A wheel on its stand with a hub blank and axle sample.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0058"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0090",
+      "title": "Child accompanying a shopper",
+      "category": "Pieces",
+      "description": "A child scaled outfit and small basket; shares the household's visual language.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0090"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0038",
+      "title": "Clay sale record tablet",
+      "category": "Pieces",
+      "description": "A small tablet carrying fictional impressed marks for a transaction.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0038"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0084",
+      "title": "Cloth and yarn seller",
+      "category": "Pieces",
+      "description": "Layered woven clothing and a bundle of fabric samples.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0084"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0002",
+      "title": "Cloth shade stall",
+      "category": "Pieces",
+      "description": "Four freestanding posts, fabric canopy, and visible rope ties.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0002"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0061",
+      "title": "Communal drinking water station",
+      "category": "Pieces",
+      "description": "A large vessel, dipping cup, jar stand, and splash area.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0061"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0029",
+      "title": "Divided small goods tray",
+      "category": "Pieces",
+      "description": "A shallow wooden tray with compartments for beads or fittings.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0029"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0005",
+      "title": "Double bay market shelter",
+      "category": "Pieces",
+      "description": "Two adjoining vendor bays with a shared central support.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0005"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0045",
+      "title": "Dried fruit display",
+      "category": "Pieces",
+      "description": "Compartmented trays of dried orchard fruit.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0045"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0043",
+      "title": "Flatbread selling tray",
+      "category": "Pieces",
+      "description": "A woven tray holding overlapping flat loaves and a covering cloth.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0043"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0027",
+      "title": "Folded cloth parcel",
+      "category": "Pieces",
+      "description": "A square bundle tied at opposing corners for small purchases.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0027"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0006",
+      "title": "Folded traveling stall frame",
+      "category": "Pieces",
+      "description": "A tied bundle of poles and folding supports ready for transport.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0006"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0044",
+      "title": "Fresh cheese selling board",
+      "category": "Pieces",
+      "description": "A board with whole and cut cheese forms and a cloth cover.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0044"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0046",
+      "title": "Fresh fish selling mat",
+      "category": "Pieces",
+      "description": "Fish arranged on a damp reed mat beside a water vessel.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0046"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0068",
+      "title": "Goods repair mat",
+      "category": "Pieces",
+      "description": "A mat with binding cord, awl, patches, and a small work support.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0068"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0034",
+      "title": "Grain capacity measure",
+      "category": "Pieces",
+      "description": "An open cylinder with a straight rim for leveling grain.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0034"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0035",
+      "title": "Grain leveling stick",
+      "category": "Pieces",
+      "description": "A flat wooden blade spanning the capacity measure.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0035"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0042",
+      "title": "Grain sample display",
+      "category": "Pieces",
+      "description": "Open measures, small grain heaps, and one tied sack.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0042"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0024",
+      "title": "Handled ceramic market jar",
+      "category": "Pieces",
+      "description": "A transport jar with two handles, broad base, and separate stopper.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0024"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0014",
+      "title": "Hanging cloth display rail",
+      "category": "Pieces",
+      "description": "A horizontal rail for cloth lengths with removable hanging ties.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0014"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0077",
+      "title": "Hoof print ground patch",
+      "category": "Pieces",
+      "description": "A clustered trail between the tether station and the road.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0077"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0088",
+      "title": "Household shopper",
+      "category": "Pieces",
+      "description": "Everyday clothing and a removable shoulder basket.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0088"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0049",
+      "title": "Leafy herb selling bundles",
+      "category": "Pieces",
+      "description": "Several tied herb bundles in a shallow water dish.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0049"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0055",
+      "title": "Leather strap seller display",
+      "category": "Pieces",
+      "description": "Cut straps, tied bundles, and a pierced sample strip.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0055"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0023",
+      "title": "Lidded reed merchandise hamper",
+      "category": "Pieces",
+      "description": "A rectangular woven container with a separate fitted lid.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0023"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0036",
+      "title": "Liquid measuring cup",
+      "category": "Pieces",
+      "description": "A small ceramic cup used to portion a purchased liquid.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0036"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0069",
+      "title": "Lost goods keeping shelf",
+      "category": "Pieces",
+      "description": "An open shelf in the fictional market steward's sheltered space.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0069"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0004",
+      "title": "Low ground selling shelter",
+      "category": "Pieces",
+      "description": "A shallow canopy over a woven ground mat for small traders.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0004"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0012",
+      "title": "Low woven selling table",
+      "category": "Pieces",
+      "description": "A lightweight reed surface supported by short wooden legs.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0012"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0063",
+      "title": "Market animal watering trough",
+      "category": "Pieces",
+      "description": "A broad shallow trough placed away from foot traffic.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0063"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0007",
+      "title": "Market canopy corner",
+      "category": "Pieces",
+      "description": "A corner roof piece connecting two perpendicular stall fronts.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0007"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0008",
+      "title": "Market canopy end panel",
+      "category": "Pieces",
+      "description": "A triangular end screen that closes an exposed canopy.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0008"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0073",
+      "title": "Market drainage edge",
+      "category": "Pieces",
+      "description": "A shallow sloped channel along the market perimeter.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0073"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0078",
+      "title": "Market footpath junction",
+      "category": "Pieces",
+      "description": "Three worn pedestrian routes meeting between stalls.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0078"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0087",
+      "title": "Market porter",
+      "category": "Pieces",
+      "description": "A carrying pad and pole with an unobstructed load bearing silhouette.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0087"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0074",
+      "title": "Market puddle depression",
+      "category": "Pieces",
+      "description": "An irregular low patch with a separate water surface.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0074"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0070",
+      "title": "Market steward shade shelter",
+      "category": "Pieces",
+      "description": "A small public shelter with a seat and record keeping surface.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0070"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0067",
+      "title": "Market sweeping kit",
+      "category": "Pieces",
+      "description": "A bound twig broom, shallow scoop, and waste basket.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0067"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0037",
+      "title": "Merchant counting pebble tray",
+      "category": "Pieces",
+      "description": "A recessed tray with movable pebbles for a fictional counting practice.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0037"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0019",
+      "title": "Merchant document table",
+      "category": "Pieces",
+      "description": "A small flat work surface with raised edges to retain tablets.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0019"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0039",
+      "title": "Merchant seal and cord",
+      "category": "Pieces",
+      "description": "A carved seal on a carrying cord with a distinct trade emblem.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0039"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0041",
+      "title": "Mixed garden produce display",
+      "category": "Pieces",
+      "description": "A composed basket display of local vegetables; individual crops belong to the garden chunk.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0041"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0089",
+      "title": "Older market regular",
+      "category": "Pieces",
+      "description": "An older adult with a walking support and a small purchase bundle.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0089"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0048",
+      "title": "Onion and garlic hanging bundle",
+      "category": "Pieces",
+      "description": "Braided stems suspended from the stall rail.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0048"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0001",
+      "title": "Open timber stall",
+      "category": "Pieces",
+      "description": "Four posts and a pitched reed canopy; the reusable market stall frame.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0001"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0062",
+      "title": "Pack animal tether station",
+      "category": "Pieces",
+      "description": "Timber rail, tether loops, and space for removable animals.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0062"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0071",
+      "title": "Packed earth market tile",
+      "category": "Pieces",
+      "description": "A seamless compacted surface with subdued foot wear.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0071"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0031",
+      "title": "Portable beam balance",
+      "category": "Pieces",
+      "description": "A suspended beam, two pans, cords, and a handhold.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0031"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0065",
+      "title": "Porter carrying pole",
+      "category": "Pieces",
+      "description": "A shaped pole with suspended basket ties at both ends.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0065"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0051",
+      "title": "Pottery merchant assortment",
+      "category": "Pieces",
+      "description": "A coherent arrangement of cooking, storage, and serving vessels.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0051"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0076",
+      "title": "Pottery sherd ground scatter",
+      "category": "Pieces",
+      "description": "A small nonblocking cluster near the pottery seller.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0076"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0050",
+      "title": "Prepared food serving station",
+      "category": "Pieces",
+      "description": "A food pot, serving bowl, ladle, and low customer counter.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0050"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0080",
+      "title": "Raised market gathering step",
+      "category": "Pieces",
+      "description": "A broad low earthen step with stone edging at a meeting point.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0080"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0081",
+      "title": "Ranch produce seller",
+      "category": "Pieces",
+      "description": "Practical work clothing, carrying apron, and a recognizable produce basket.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0081"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0003",
+      "title": "Reed screen stall",
+      "category": "Pieces",
+      "description": "An enclosed rear screen and open customer side for exposed market edges.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0003"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0086",
+      "title": "River fish seller",
+      "category": "Pieces",
+      "description": "River work clothing and net carrying accessories.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0086"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0028",
+      "title": "Rope bound timber merchandise box",
+      "category": "Pieces",
+      "description": "A plank box held closed by external cord bindings.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0028"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0047",
+      "title": "Salt mound selling tray",
+      "category": "Pieces",
+      "description": "A low tray with a coarse salt mound and a portioning scoop.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0047"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0056",
+      "title": "Sandal seller display",
+      "category": "Pieces",
+      "description": "Pairs of simple sandals arranged by size on a mat.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0056"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0040",
+      "title": "Sealed clay parcel tag",
+      "category": "Pieces",
+      "description": "A clay lump bearing a cord impression and merchant emblem.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0040"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0030",
+      "title": "Shoulder carrying basket",
+      "category": "Pieces",
+      "description": "A basket and broad strap assembly worn by a market customer.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0030"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0025",
+      "title": "Small stoppered oil flask",
+      "category": "Pieces",
+      "description": "A narrow necked ceramic vessel with a removable stopper.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0025"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0009",
+      "title": "Stall post socket stone",
+      "category": "Pieces",
+      "description": "A heavy stone footing with a fitted timber socket.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0009"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0013",
+      "title": "Stepped pottery display",
+      "category": "Pieces",
+      "description": "Three shallow timber steps sized for pots of different heights.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0013"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0079",
+      "title": "Stone edged market tree bed",
+      "category": "Pieces",
+      "description": "A protected planting pocket that can accept an existing tree.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0079"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0033",
+      "title": "Stone weight set",
+      "category": "Pieces",
+      "description": "A nested group of distinct weight sizes with consistent fictional markings.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0033"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0022",
+      "title": "Tall grain carrying basket",
+      "category": "Pieces",
+      "description": "A deep basket with reinforced rim and two carrying loops.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0022"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0016",
+      "title": "Tilted produce tray stand",
+      "category": "Pieces",
+      "description": "A shallow inclined frame for removable produce trays.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0016"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0075",
+      "title": "Trampled straw ground scatter",
+      "category": "Pieces",
+      "description": "Short broken straw and chaff concentrated near produce stalls.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0075"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0082",
+      "title": "Traveling wheel seller",
+      "category": "Pieces",
+      "description": "Travel clothing with a wheel sample and woodworking belongings.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0082"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0020",
+      "title": "Under counter storage rack",
+      "category": "Pieces",
+      "description": "A two level open rack sized for baskets and bundled goods.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0020"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0052",
+      "title": "Undyed cloth merchant assortment",
+      "category": "Pieces",
+      "description": "Rolled and folded cloth in clearly different weave weights.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0052"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0015",
+      "title": "Upright wheel display stand",
+      "category": "Pieces",
+      "description": "A braced wooden support that presents one cart wheel vertically.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0015"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0066",
+      "title": "Vendor handwashing station",
+      "category": "Pieces",
+      "description": "Pouring jug, catch basin, and a cloth on a simple peg.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0066"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0018",
+      "title": "Vendor sitting stool",
+      "category": "Pieces",
+      "description": "A low three legged stool tucked behind the selling surface.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0018"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0083",
+      "title": "Village pottery seller",
+      "category": "Pieces",
+      "description": "Cloth head covering, clay marked workwear, and a vessel carrying pose.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0083"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0021",
+      "title": "Wide shallow produce basket",
+      "category": "Pieces",
+      "description": "An open woven basket whose contents can be swapped.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0021"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0026",
+      "title": "Woven grain sack",
+      "category": "Pieces",
+      "description": "A soft container with tied mouth and a readable grain filled silhouette.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0026"
+      ],
+      "main": false
+    },
+    {
+      "href": "/sets/market/ba-0053",
+      "title": "Yarn skein display",
+      "category": "Pieces",
+      "description": "Skeins hanging from a bar with fiber samples beneath.",
+      "aliases": [
+        "/scene-generator/prefabs/market/ba-0053"
+      ],
+      "main": false
+    },
+    {
+      "href": "/mini-world-1",
+      "title": "Abbie's World",
+      "category": "Other",
+      "description": "",
+      "aliases": [
+        "/mini-world-1.html",
+        "/mini-world-1/"
+      ],
+      "main": false
+    },
+    {
+      "href": "/animation-study.html",
+      "title": "Animation study",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/greek-warrior-study.html",
+      "title": "Bronze warrior",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/greek-animation-a.html",
+      "title": "Character motion",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/greek-animation-b.html",
+      "title": "Character motion B",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/character-study.html",
+      "title": "Character study",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/simulation-performance.html",
+      "title": "FPS vs assets",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/greek-helmet-study.html",
+      "title": "Helmet study",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/greek-character-lineup.html",
+      "title": "Hoplite character lineup",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/greek-character-lineup-2.html",
+      "title": "Hoplites",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/kingdom.html",
+      "title": "Kingdom",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/poi-sugar-shack.html",
+      "title": "Maple sugar shack",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/simulation-behavior-performance.html",
+      "title": "Movement CPU",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/night-of-the-dead",
+      "title": "Night of the Dead",
+      "category": "Other",
+      "description": "",
+      "aliases": [
+        "/night-of-the-dead.html"
+      ],
+      "main": false
+    },
+    {
+      "href": "/ranch-history.html",
+      "title": "Ranch",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/asset-variants.html",
+      "title": "Ranch asset variants",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/board10.html",
+      "title": "Sandbox 10m",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/asset-invention-test.html",
+      "title": "Single Asset Test",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/greek-battle-layout.html",
+      "title": "Six hexes",
+      "category": "Other",
+      "description": "",
+      "aliases": [],
+      "main": false
+    },
+    {
+      "href": "/zombie-run",
+      "title": "Zombie Run",
+      "category": "Other",
+      "description": "",
+      "aliases": [
+        "/zr.html"
+      ],
+      "main": true
+    },
+    {
+      "href": "/zoo-simulator",
+      "title": "Zoo Simulator",
+      "category": "Other",
+      "description": "",
+      "aliases": [
+        "/zoo-simulator.html"
+      ],
+      "main": false
+    }
+  ],
+  "count": 173,
+  "routeCount": 337
+}

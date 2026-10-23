@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Cream ranch goat with topology-colored chestnut patches, lateral amber eyes, swept horns and individually split hooves. Hierarchical articulated legs use sampled two-bone IK for planted stance and lifted swing; head, ears, beard and horns inherit body/head motion.",
+  "blenderVersion": "5.2.1 LTS"
+}

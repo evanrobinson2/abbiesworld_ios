@@ -1,0 +1,46 @@
+{
+  "id": "aw.ranch.asset.ba-0054",
+  "name": "Basket seller nested stack",
+  "dependencies": [
+    "BA-0021"
+  ],
+  "geometry": {
+    "mesh_objects": 186,
+    "triangles": 13200,
+    "bounds_min": [
+      -0.39100000262260437,
+      -0.39100000262260437,
+      0.005999998189508915
+    ],
+    "bounds_max": [
+      0.39100000262260437,
+      0.39100000262260437,
+      0.4410000145435333
+    ],
+    "dimensions_m": [
+      0.782,
+      0.782,
+      0.435
+    ],
+    "material_slots": [
+      "Reed"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 1
+  },
+  "materials": [
+    "Reed"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0054",
+  "intent": "A nested stack showing carrying and storage basket sizes.",
+  "family": "Craft displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0054",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

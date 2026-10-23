@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "ration-jar",
+  "group": "supply",
+  "replaces": "simulation-assets/supplies/ration-{full,partial,empty,carried}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a cream ceramic storage jar for animal feed with a fitted wooden lid, a rope tied round the neck, a wooden scoop hanging on the side, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "35775b25-9b48-473f-ac72-24edd6e33a22",
+      "grid_url": "https://www.midjourney.com/jobs/35775b25-9b48-473f-ac72-24edd6e33a22?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "15c5789b-efe0-4794-8472-c9c46187e74f",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:37:26.082Z",
+      "grid_done_at": "2026-10-22T23:37:44.085Z",
+      "upscale_clicked_at": "2026-10-22T23:37:53.737Z",
+      "downloaded_at": "2026-10-22T23:39:05.231Z",
+      "pick_reason": "fitted wooden lid, rope round the neck with the scoop hanging from it on the side"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "c2c51c7e3fb695e127c0dc39cdd63e5cf01c9e65369ae530cbf80519039ddaca",
+      "bytes": 2351202,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/15c5789b-efe0-4794-8472-c9c46187e74f/0_0.png"
+    }
+  }
+}

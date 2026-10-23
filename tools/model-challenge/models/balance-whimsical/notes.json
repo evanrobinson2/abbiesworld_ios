@@ -1,0 +1,87 @@
+{
+ "what_i_did": [
+  [
+   "Views",
+   "Cleaned view_front/view_back into views/ (views/make_views.py paints out the floor shadow streak) and dropped view_side: it is a third front-on pose, not a +X side. After the art director's round 7 notes the hero is the target: the sheet's tall single-spindle layout is no longer followed, so IoU against the sheet fell on purpose."
+  ],
+  [
+   "Structure (round 7, follows the hero)",
+   "Following the hero's proportions (round 8): H 0.975 m by W 0.77 m (1.26:1). A thin, flat turned teal base plate (3 cm thick, 0.36 m across); a slender turned wooden neck with a small teal bead up to 0.20 m; a thin shallow dish platform (4 cm, 0.46 m across, about 70% of the beam's length) with a teal underside and a wood top; a taller turned spindle with a red collar; a red bead; the hub and pivot at 0.75 m; the bell at about 0.85 m; and a finial pin with a mustard knob on top."
+  ],
+  [
+   "Toy arms",
+   "Two thicker wavy arms (1.6 cm) rise in a lazy S from under the platform rim, swing out past it and curl back in to small teal cradle dishes under each pan. The cradles sit 3.5 cm (left) and 3.0 cm (right) below each pan's lowest point over the whole loop, and build.py asserts this gap every frame."
+  ],
+  [
+   "Pans",
+   "Left: a chunky stack of a teal saucer with a mustard plate layer, a red bowl, and a cream teacup tipped 17 degrees with its handle turned toward the 3/4 camera. It hangs from a spring and a brass spreader bar so the cords clear the cup. Right: a mustard bowl on a long coil and a three-cord bridle."
+  ],
+  [
+   "Beam and bell",
+   "A pale teal beam with a curl on the left end, red collars, a mustard arrow-flag on the right end (no smiley), and a pointer needle under the hub. The brass bell hangs from a wooden crook on a red spring above the hub."
+  ],
+  [
+   "Mechatronics",
+   "The beam is keyed every frame from a damped sine: it rests 3 degrees toward the teacup, is kicked at frame 8, tips about +7 / -8 / +4 degrees and fades back to rest by frame 120. The pans' locations follow the rotated hang points with zero rotation, so they hang plumb, plus a small spring bounce. The bell wiggles on whole-cycle sines plus a share of the beam tilt. One 'Scene' clip, 1 to 120 at 24 fps, seamless."
+  ],
+  [
+   "Budget",
+   "3187 triangles (the art director allowed up to 3.5k for the thicker arms). The beam has no bevel, only the base plate keeps one, the springs use 3-sided wire, and the cradles use 8 segments."
+  ]
+ ],
+ "good": [
+  "The 3/4 view now reads like the hero: the big wooden saucer platform as the main mass, wavy arms with cradles, the layered teacup stack with a visible handle, and the bell on top.",
+  "Bright toy palette of teal, red, cream and mustard with wood; 0.975 m tall and 1.26 times taller than wide, with the pivot at 75% of the height. Origin on the ground.",
+  "The pans hang plumb through the whole loop and never touch their cradles (the gap is asserted in build.py). The loop is seamless."
+ ],
+ "off": [
+  "Mean IoU against the turnaround sheet is low (0.149), because the sheet draws a different, spindly design: a small disc, a single pan and no arms. The art director asked to follow the hero over the sheet.",
+  "In the hero, the arms visibly cradle the pans from below. Here the pans hang a few cm above the cradles so they can swing, so the arms read as stops rather than holders.",
+  "No smiley on the arrow-flag (the brief says no faces).",
+  "At 3187 triangles the model is over the original 3k budget, within the art director's 3.5k allowance."
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "change": "First build from views + hero kit (4242 tris, beam tilt sign wrong, pans too small and high, bell too tall)",
+   "mean_iou": 0.339
+  },
+  {
+   "round": 2,
+   "change": "Bevel removed from the stand (back under budget, 2772 tris), tilt sign fixed so the teacup end rests low, pans dropped lower and bigger, stem wiggle halved",
+   "mean_iou": 0.31
+  },
+  {
+   "round": 3,
+   "change": "Bell moved onto a short spring and wooden crook so the top lands at the finial height; left pan reshaped to a wide red bowl on a small saucer to match the sheet's wide cup; platform widened",
+   "mean_iou": 0.501
+  },
+  {
+   "round": 4,
+   "change": "Pulled the left pan out and narrowed the platform so the bowl no longer intersects the platform during the swing",
+   "mean_iou": 0.48
+  },
+  {
+   "round": 5,
+   "change": "Re-tuned the hang point to 0.24 m and the platform radius to 0.126 m: no intersection, and the silhouette is back",
+   "mean_iou": 0.503
+  },
+  {
+   "round": 6,
+   "change": "Straighter, thicker stem that swells toward the platform, as in the views (final 768px/48spp render scores 0.502)",
+   "mean_iou": 0.506
+  },
+  {
+   "round": 7,
+   "change": "Art director round, following the hero over the sheet: low wide teal base plate, short turned neck, 0.55 m wooden saucer platform a third of the way up, turned spindle with a red collar, two wavy arms ending in cradles 3 to 4 cm below each pan's lowest swing, a chunkier teal/red/cream teacup stack with the cup tipped so its handle shows, and a spreader bar so the cords clear the cup (768px/48spp final). Sheet IoU drops on purpose.",
+   "mean_iou": 0.149
+  },
+  {
+   "round": 8,
+   "change": "Proportions only, to the art director's numbers: thin flat base plate, a slender 17 cm neck, a thin 4 cm dish platform (underside at 20% of the height, 70% of the beam's length across), a taller spindle putting the pivot at 75% and the bell at about 85%, the width narrowed so H/W is 1.26, and thicker lazy-S arms rising from under the platform rim to the cradles (768px/48spp final). Sheet IoU is not the target any more.",
+   "mean_iou": 0.131
+  }
+ ],
+ "moving_parts": "beam (seesaws on the hub: kicked, tips one way, the other, settles to a 3 deg lean toward the teacup); pan_left and pan_right (locations follow the beam ends, rotation held at zero so they hang straight down, a small springy bounce, and they always clear their arm cradles); bell (wiggles on its crook, rung by the beam). All on one 120-frame scene clip.",
+ "creative_additions": "A toy contraption: wavy arms whose cradles act as stops under the pans, a beam that 'rings' the bell as it swings, a curly scroll end, a pointer needle under the hub, coiled spring cords that bounce, and a brass spreader bar so the teacup sits clear of its cords. The heavy teacup stack against the light mustard bowl gives the balance a reason to lean."
+}

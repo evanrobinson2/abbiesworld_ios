@@ -1,0 +1,70 @@
+[
+  {
+    "id": "broad",
+    "clips": [
+      "walk",
+      "idle 1",
+      "idle 2",
+      "idle 3",
+      "attack",
+      "defend",
+      "celebrate",
+      "perish",
+      "rest"
+    ],
+    "sourceSha256": "9d3ad8378257a3d4cd6b35b18a9c3d055184fe6d17732b9de3b20dfd4d97879d",
+    "rig": "Rigid weighted articulated armature; no soft skin deformation",
+    "status": "Animation study; not integrated into game asset database"
+  },
+  {
+    "id": "bighead",
+    "clips": [
+      "walk",
+      "idle 1",
+      "idle 2",
+      "idle 3",
+      "attack",
+      "defend",
+      "celebrate",
+      "perish",
+      "rest"
+    ],
+    "sourceSha256": "b827734d2d8b1a656652a2c91167430e73dc150d43509b5b1d78918ba9a0af94",
+    "rig": "Rigid weighted articulated armature; no soft skin deformation",
+    "status": "Animation study; not integrated into game asset database"
+  },
+  {
+    "id": "pear",
+    "clips": [
+      "walk",
+      "idle 1",
+      "idle 2",
+      "idle 3",
+      "attack",
+      "defend",
+      "celebrate",
+      "perish",
+      "rest"
+    ],
+    "sourceSha256": "fdd588c49907fdbf70005f96f380b4dfb0d4ae846279aea843084cb3d86968e6",
+    "rig": "Rigid weighted articulated armature; no soft skin deformation",
+    "status": "Animation study; not integrated into game asset database"
+  },
+  {
+    "id": "tall",
+    "clips": [
+      "walk",
+      "idle 1",
+      "idle 2",
+      "idle 3",
+      "attack",
+      "defend",
+      "celebrate",
+      "perish",
+      "rest"
+    ],
+    "sourceSha256": "c82c9fa925db5526b5fce082d2ffc85c009f573483e3f53b3c769c9ad8e811bf",
+    "rig": "Rigid weighted articulated armature; no soft skin deformation",
+    "status": "Animation study; not integrated into game asset database"
+  }
+]

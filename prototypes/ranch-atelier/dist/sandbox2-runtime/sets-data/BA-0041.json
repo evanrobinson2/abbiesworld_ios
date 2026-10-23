@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0041",
+  "name": "Mixed garden produce display",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 98,
+    "triangles": 6704,
+    "bounds_min": [
+      -0.42100000381469727,
+      -0.42100000381469727,
+      0.005999998189508915
+    ],
+    "bounds_max": [
+      0.42100000381469727,
+      0.42100000381469727,
+      0.4046320617198944
+    ],
+    "dimensions_m": [
+      0.842,
+      0.842,
+      0.3986
+    ],
+    "material_slots": [
+      "Reed",
+      "Onion",
+      "Leaf"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Reed",
+    "Onion",
+    "Leaf"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0041",
+  "intent": "A composed basket display of local vegetables; individual crops belong to the garden chunk.",
+  "family": "Food displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0041",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

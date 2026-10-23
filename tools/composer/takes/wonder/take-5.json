@@ -1,0 +1,20 @@
+{
+ "id": "wonder",
+ "take": 5,
+ "title": "Wonder",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-score.json",
+ "song_id": "9k0mhLlus9yCmVLkD0sZ",
+ "request": {
+  "prompt": "upbeat family adventure soundtrack, bright, warm and joyful, catchy instrumental hook, light, bouncy percussion, strong melodic bass line, polished modern production, instrumental, D major, 129 bpm, family adventure into a magical new world, sense of discovery, soaring hook. Arrival: sparkling, curious. Explore: adventure groove. Soar: the biggest, happiest part. Settle: back down so it loops. No vocals, no lyrics, no singing, no humming, no dark, no aggressive, no heavy drums, no EDM drop, no dubstep, no distorted guitar, no cheesy, no kazoo, no 8-bit",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 120000
+ },
+ "date": "2026-10-23",
+ "sha256": "4c1b7eb7225e47ddeaae39dcc6ac729c848c905517572938a58d995b6154b23c",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-5.master.mp3"
+}

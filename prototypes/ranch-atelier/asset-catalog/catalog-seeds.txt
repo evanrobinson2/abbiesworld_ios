@@ -1,0 +1,240 @@
+[emergent-life|Microscopic forms|micro]
+Lipid vesicle,Porous mineral chimney,Clay platelet,Organic droplet,Membrane pore,Membrane patch,Protein globule,Protein filament,RNA strand,Nucleotide cluster
+Rod bacterium,Spherical bacterium,Spiral bacterium,Curved bacterium,Stalked bacterium,Filamentous bacterium,Bacterial chain,Bacterial rosette,Bacterial sheet,Bacterial spore
+Flagellum bundle,Pilus tuft,Cell capsule,Cell wall segment,Division septum,Cellular inclusion,Gas vesicle cluster,Magnetosome chain,Photosynthetic membrane stack,Biofilm matrix
+Microbial mat,Stromatolite mound,Hydrothermal microbial tuft,Plankton colony,Sulfur granule colony,Iron deposit colony,Salt crystal colony,Ice brine colony,Rock pore colony,Hot spring microbial terrace
+Amoeboid cell,Ciliated cell,Flagellated protist,Stalked protist,Silica shelled microbe,Chambered microbe,Colonial green sphere,Filamentous alga,Diatom disc,Diatom needle
+[cellular-life|Cellular systems|micro]
+Cell nucleus,Nucleolus,Mitochondrion,Chloroplast,Ribosome cluster,Golgi stack,Endoplasmic reticulum,Lysosome,Vacuole,Centrosome
+Microtubule bundle,Actin mesh,Chromosome pair,Spindle apparatus,Nuclear pore,Rough membrane sheet,Smooth membrane tube,Transport vesicle,Secretory granule,Contractile vacuole
+Collar cell colony,Sheet cell colony,Hollow cell sphere,Branching cell colony,Adhesive cell stalk,Symbiotic cell pair,Fungal hypha,Yeast cell,Budding yeast chain,Spore sac
+Pollen grain,Seed embryo,Egg cell,Sperm cell,Muscle fiber,Nerve cell,Blood cell,Epithelial tile,Root hair cell,Guard cell pair
+Virus capsid,Bacteriophage,Enveloped virus,Helical virus,Crystal lattice,Microfluid channel,Bubble membrane,Cellular debris flake,Extracellular fiber,Organic sediment pellet
+[marine-life|Marine life|organism]
+Tube sponge,Barrel sponge,Branching sponge,Encrusting sponge,Sea anemone,Sea pen,Soft coral,Fan coral,Brain coral,Staghorn coral
+Moon jelly,Comb jelly,Box jelly,Siphonophore,Hydroid colony,Flatworm,Ribbon worm,Bristle worm,Tube worm,Acorn worm
+Trilobite,Horseshoe crab,Copepod,Krill,Shrimp,Lobster,Hermit crab,Fiddler crab,Barnacle,Amphipod
+Sea star,Brittle star,Sea urchin,Sand dollar,Sea cucumber,Nautilus,Ammonite,Cuttlefish,Octopus,Squid
+Clam,Mussel,Scallop,Oyster,Sea snail,Sea slug,Limpet,Chiton,Brachiopod,Tunicate
+[aquatic-vertebrates|Aquatic vertebrates|organism]
+Jawless fish,Lamprey,Hagfish,Armored fish,Coelacanth,Lungfish,Sturgeon,Gar,Bowfin,Paddlefish
+Reef shark,Hammerhead shark,Whale shark,Sawfish,Manta ray,Stingray,Skate,Chimaera,Guitarfish,Electric ray
+Salmon,Trout,Carp,Catfish,Perch,Pike,Sunfish,Bass,Eel,Mudskipper
+Clownfish,Angelfish,Butterflyfish,Parrotfish,Surgeonfish,Pufferfish,Seahorse,Pipefish,Lionfish,Triggerfish
+Tuna,Swordfish,Sailfish,Mackerel,Herring,Anchovy,Cod,Halibut,Anglerfish,Lanternfish
+[early-land|Early land and small fauna|organism]
+Liverwort mat,Hornwort patch,Clubmoss,Spike moss,Horsetail,Fern frond,Tree fern,Seed fern,Cycad,Ginkgo
+Centipede,Millipede,Scorpion,Whip scorpion,Harvestman,Orb spider,Jumping spider,Wolf spider,Tarantula,Tick
+Dragonfly,Damselfly,Mayfly,Stonefly,Silverfish,Springtail,Earwig,Roach,Termite,Mantis
+Ant,Bee,Wasp,Beetle,Weevil,Butterfly,Moth,Caterpillar,Grasshopper,Cricket
+Earthworm,Land snail,Slug,Woodlouse,Frog,Toad,Newt,Salamander,Caecilian,Early tetrapod
+[deep-time-fauna|Deep-time creature studies|organism]
+Sailback synapsid,Dicynodont,Gorgonopsian,Cynodont,Small theropod,Large theropod,Feathered raptor,Ostrich dinosaur,Longneck sauropod,Armored sauropod
+Stegosaur,Ankylosaur,Nodosaur,Hadrosaur,Iguanodont,Ceratopsian,Pachycephalosaur,Small ornithopod,Early dinosaur,Gliding reptile
+Longtail pterosaur,Shorttail pterosaur,Crested pterosaur,Ichthyosaur,Plesiosaur,Pliosaur,Mosasaur,Marine crocodile,Placodont,Archelon turtle
+Early mammal,Multituberculate,Giant ground sloth,Glyptodont,Saber tooth cat,Woolly mammoth,Mastodon,Woolly rhinoceros,Giant beaver,Cave bear
+Terror bird,Moa,Dodo,Great auk,Passenger pigeon,Thylacine,Quagga,Aurochs,Irish elk,Dire wolf
+[plants|Trees and shrubs|organism]
+Oak,Beech,Birch,Maple,Ash,Elm,Willow,Poplar,Aspen,Alder
+Cedar,Pine,Spruce,Fir,Hemlock,Larch,Juniper,Cypress,Redwood,Yew
+Apple tree,Pear tree,Peach tree,Cherry tree,Plum tree,Apricot tree,Orange tree,Lemon tree,Olive tree,Fig tree
+Palm,Banana plant,Mangrove,Baobab,Acacia,Eucalyptus,Banyan,Rubber tree,Cacao tree,Coffee shrub
+Hawthorn,Hazel,Holly,Elder,Dogwood,Sumac,Blueberry bush,Raspberry cane,Blackberry cane,Rose bush
+[ground-flora|Ground flora and fungi|organism]
+Meadow grass,Tussock grass,Reed,Sedge,Rush,Bamboo,Dune grass,Seagrass,Kelp,Water lily
+Clover,Dandelion,Daisy,Buttercup,Bluebell,Poppy,Sunflower,Lavender,Heather,Foxglove
+Thistle,Nettle,Dock,Plantain,Wild garlic,Yarrow,Chicory,Chamomile,Sorrel,Milkweed
+Cushion moss,Feather moss,Reindeer lichen,Crust lichen,Hanging lichen,Bracket fungus,Cap mushroom,Puffball,Morel,Coral fungus
+Barrel cactus,Prickly pear,Saguaro,Agave,Aloe,Succulent rosette,Pitcher plant,Sundew,Venus flytrap,Bromeliad
+[wildlife|Terrestrial wildlife|organism]
+Fox,Wolf,Coyote,Bear,Raccoon,Badger,Otter,Weasel,Ferret,Skunk
+Red deer,Elk,Moose,Reindeer,Antelope,Gazelle,Bison,Buffalo,Ibex,Chamois
+Elephant,Rhinoceros,Hippopotamus,Giraffe,Zebra,Lion,Tiger,Leopard,Cheetah,Hyena
+Squirrel,Chipmunk,Beaver,Porcupine,Hedgehog,Mole,Shrew,Mouse,Rat,Bat
+Kangaroo,Wallaby,Koala,Wombat,Possum,Armadillo,Anteater,Sloth,Lemur,Chimpanzee
+[birds-reptiles|Birds and reptiles|organism]
+Sparrow,Robin,Finch,Swallow,Wren,Blackbird,Thrush,Starling,Crow,Raven
+Owl,Hawk,Falcon,Eagle,Vulture,Osprey,Kestrel,Kingfisher,Woodpecker,Hoopoe
+Heron,Crane,Stork,Ibis,Flamingo,Pelican,Gull,Tern,Puffin,Penguin
+Parrot,Toucan,Hummingbird,Peacock,Pheasant,Quail,Partridge,Ostrich,Emu,Cassowary
+Tortoise,Terrapin,Crocodile,Alligator,Monitor lizard,Gecko,Chameleon,Iguana,Python,Cobra
+[landscape|Terrain forms|environment]
+Meadow surface,Forest floor,Desert sand,Salt flat,Mudflat,Marsh ground,Peat bog,Tundra ground,Snowfield,Glacier surface
+Rolling hill,Steep hill,Cliff face,Cliff cap,Ridge,Mountain saddle,Mountain peak,Volcanic cone,Caldera,Lava flow
+River straight,River bend,River junction,River delta,Stream source,Waterfall,Rapids,Lake shore,Pond basin,Estuary
+Sandy beach,Pebble beach,Rocky coast,Sea arch,Sea stack,Tidal pool,Reef shelf,Atoll,Lagoon,Undersea ridge
+Cave entrance,Cave chamber,Stalactite,Stalagmite,Boulder cluster,Scree slope,Rock ledge,Eroded gully,Sinkhole,Hot spring
+[geology-resources|Natural resources|resource]
+Granite outcrop,Basalt outcrop,Limestone outcrop,Sandstone outcrop,Slate outcrop,Marble outcrop,Quartz vein,Clay deposit,Gravel deposit,Sand deposit
+Iron ore node,Copper ore node,Tin ore node,Lead ore node,Zinc ore node,Nickel ore node,Gold vein,Silver vein,Bauxite node,Chromite node
+Coal seam,Peat deposit,Oil seep,Gas vent,Sulfur deposit,Salt deposit,Phosphate deposit,Potash deposit,Gypsum deposit,Graphite deposit
+Flint nodule,Obsidian shard,Pumice stone,Amber piece,Opal nodule,Jade boulder,Garnet crystal,Amethyst cluster,Diamond crystal,Emerald crystal
+Meteorite,Ice deposit,Brine pool,Manganese nodule,Rare earth ore,Lithium mineral,Cobalt ore,Titanium ore,Uranium ore,Geothermal fissure
+[foraging|Foraging and camps|prop]
+Stone handaxe,Stone scraper,Stone blade,Stone drill,Stone hammer,Grinding stone,Stone pestle,Bone awl,Bone needle,Antler tool
+Digging stick,Wooden spear,Spear thrower,Sling,Hunting bow,Arrow,Quiver,Fishing spear,Fish hook,Fishing net
+Gathering basket,Bark basket,Woven pouch,Hide bag,Water skin,Gourd flask,Shell bowl,Wooden bowl,Carved spoon,Food wrapping
+Camp hearth,Firewood bundle,Tinder nest,Ember pot,Cooking tripod,Roasting spit,Drying rack,Smoking rack,Stone oven,Hot stone pit
+Lean to,Hide tent,Brush hut,Sleeping mat,Fur blanket,Log seat,Camp windbreak,Food cache,Trail cairn,Camp totem
+[ranch-life|Ranch characters and animals|actor]
+Abbie,Ani,Mommy,Daddy,Jeff,Alexis,Pearl,Marley,Ranch visitor,Produce buyer
+Ranch horse,Donkey,Mule,Dairy cow,Beef cow,Goat,Sheep,Pig,Chicken,Turkey
+Duck,Goose,Alpaca,Llama,Rabbit,Barn cat,Farm dog,Pony,Ox,Guinea fowl
+Farrier,Veterinarian,Carpenter,Gardener,Field worker,Market seller,Delivery driver,Stable hand,Beekeeper,Shepherd
+Grooming brush,Hoof pick,Halter,Lead rope,Saddle,Saddle pad,Bridle,Riding helmet,Horse ball,Dog chew toy
+[ranch-buildings|Ranch buildings and care|building]
+Family farmhouse,Rescue barn,Equine shelter,Cattle shelter,Goat shelter,Sheep shelter,Pig house,Secure coop,Waterfowl house,Rabbit home
+Feed store,Tool shed,Hay loft,Root cellar,Potting shed,Greenhouse,Milking parlor,Wool shed,Workshop,Carriage house
+Hay rack,Feed tub,Chicken feeder,Poultry drinker,Water trough,Water tank,Water pump,Well head,Rain barrel,Water bucket
+Rail fence,Wire fence,Mesh fence,Stone wall,Hedge boundary,Pasture gate,Coop gate,Gate latch,Fence corner,Fence post
+Compost bay,Manure pile,Bedding pile,Hay bale,Feed sack,Timber pile,Board bundle,Supply crate,Stable partition,Nesting box
+[crops|Crops and harvests|organism]
+Wheat,Barley,Rye,Oats,Rice,Maize,Millet,Sorghum,Buckwheat,Quinoa
+Potato,Sweet potato,Cassava,Yam,Carrot,Parsnip,Turnip,Beet,Radish,Onion
+Garlic,Leek,Cabbage,Lettuce,Spinach,Kale,Broccoli,Cauliflower,Celery,Asparagus
+Pea,Bean,Lentil,Chickpea,Soybean,Peanut,Tomato,Pepper,Eggplant,Cucumber
+Squash,Pumpkin,Melon,Watermelon,Strawberry,Grape,Cotton,Flax,Hemp,Tea shrub
+[farming-tools|Farm production and trade|prop]
+Hoe,Spade,Shovel,Rake,Pitchfork,Sickle,Scythe,Pruning shears,Watering can,Seed dibber
+Hand plow,Animal drawn plow,Seed drill,Harrow,Cultivator,Reaper,Threshing machine,Winnowing basket,Grain sieve,Hand mill
+Wheelbarrow,Handcart,Produce wagon,Milk churn,Egg basket,Harvest crate,Grain sack,Seed packet,Planting tray,Nursery pot
+Raised bed,Seedbed,Furrow segment,Irrigation ditch,Drip line,Trellis,Bean pole,Orchard ladder,Scarecrow,Beehive
+Farm stall,Market canopy,Weighing scale,Cash box,Price board,Produce bin,Loading ramp,Delivery pallet,Cold frame,Cider press
+[early-settlements|Early settlements|building]
+Roundhouse,Longhouse,Pit house,Stilt house,Reed house,Mudbrick house,Stone cottage,Timber hut,Courtyard house,Communal hall
+Granary,Storehouse,Pottery shed,Weaving hut,Communal oven,Well enclosure,Cistern,Canal lock,Sluice gate,Drainage trench
+Palisade,Palisade gate,Watch platform,Earth rampart,Stone rampart,Ditch crossing,Log bridge,Rope bridge,Stepping stones,Trackway
+Village shrine,Meeting circle,Council shelter,Public hearth,Feasting table,Storytelling bench,Marker pole,Standing stone,Stone circle,Burial mound
+Basket workshop,Hide working frame,Clay mixing pit,Brick drying rack,Charcoal mound,Salt pan,Fish drying yard,Boat landing,Animal corral,Settlement sign
+[crafts|Craft workshops|prop]
+Potter wheel,Clay kiln,Glazing basin,Pottery shelf,Clay jar,Clay jug,Clay cup,Clay plate,Clay lamp,Amphora
+Loom,Spinning wheel,Drop spindle,Distaff,Shuttle,Carding comb,Dye vat,Fabric bolt,Sewing frame,Cloth cutting table
+Forge hearth,Anvil,Bellows,Smith tongs,Smith hammer,Quench tub,Metal ingot,Crucible,Casting mold,Ore basket
+Workbench,Wood vise,Hand saw,Adze,Chisel,Wood plane,Brace drill,Lathe,Drawknife,Tool chest
+Tanning vat,Leather rack,Cobbler bench,Shoe last,Ropewalk spindle,Basket mold,Glass furnace,Glass blowpipe,Jeweler bench,Stone mason stand
+[water-and-sail|Watercraft and waterfronts|vehicle]
+Log raft,Reed raft,Dugout canoe,Bark canoe,Outrigger canoe,Kayak,Coracle,Rowboat,Fishing skiff,River barge
+Sailing dinghy,Catamaran,Longboat,Coastal trader,Merchant cog,Caravel,Galleon,Schooner,Sloop,Clipper
+Paddle steamer,Tugboat,Ferry,Trawler,Lifeboat,Canal boat,Houseboat,Dredger,Icebreaker,Research vessel
+Dock plank,Pier piling,Floating pontoon,Mooring bollard,Mooring cleat,Anchor,Buoy,Capstan,Ship wheel,Ship mast
+Sail panel,Oar,Rudder,Ship hatch,Cargo hold module,Harbor crane,Boathouse,Lighthouse,Dry dock,Harbor breakwater
+[civic-life|Civic life and shared places|building]
+Village square,Town hall,Council chamber,Courthouse,Archive,Library,School,University hall,Observatory,Museum
+Clinic,Hospital,Pharmacy,Bathhouse,Public fountain,Washhouse,Public kitchen,Bakery,Brewery,Tea house
+Market hall,Trading post,Warehouse,Counting house,Post office,Fire station,Watch house,Community garden,Public park,Playground
+Theater,Amphitheater,Music pavilion,Dance hall,Art studio,Gallery,Printing shop,Bookshop,Toy shop,Flower shop
+Temple,Meeting house,Meditation pavilion,Sanctuary courtyard,Memorial garden,Cemetery gateway,Festival arch,Procession platform,Community noticeboard,Wayfinding kiosk
+[domestic-life|Homes and furnishings|prop]
+Single bed,Bunk bed,Cradle,Hammock,Floor cushion,Bedside table,Wardrobe,Clothes chest,Dressing screen,Coat stand
+Dining table,Kitchen table,Writing desk,Stool,Dining chair,Rocking chair,Armchair,Sofa,Bench seat,Window seat
+Cooking stove,Kitchen hearth,Kitchen sink,Pantry cabinet,Refrigerator,Icebox,Food safe,Dish rack,Spice shelf,Bread bin
+Cooking pot,Frying pan,Kettle,Teapot,Pitcher,Drinking glass,Serving tray,Cutlery set,Mortar bowl,Rolling pin
+Floor lamp,Table lamp,Wall lantern,Candlestick,Rug,Curtain,Wall clock,Picture frame,Flower vase,Wash basin
+[construction-kit|Reusable building components|module]
+Stone foundation,Brick foundation,Timber footing,Concrete footing,Floor joist,Floor plank,Stone floor tile,Clay floor tile,Concrete slab,Raised floor panel
+Timber post,Stone column,Brick pier,Steel column,Diagonal brace,Roof truss,Ceiling beam,Arch lintel,Straight lintel,Corbel
+Timber wall panel,Brick wall panel,Stone wall panel,Plaster wall panel,Glass wall panel,Wall corner,Wall junction,Curved wall section,Half wall,Parapet
+Gable roof,Hip roof,Flat roof,Conical roof,Barrel roof,Roof ridge,Roof valley,Eave section,Chimney,Dormer
+Door leaf,Door frame,Window frame,Shutter,Stair flight,Spiral stair,Railing,Balcony,Porch deck,Access ramp
+[roads-and-logistics|Roads and transport networks|infrastructure]
+Dirt road straight,Dirt road curve,Cobblestone road,Brick road,Asphalt lane,Concrete roadway,Footpath boardwalk,Footpath paving,Bicycle lane,Pedestrian crossing
+Road junction,Road roundabout,Road median,Road shoulder,Retaining wall,Drain grate,Culvert,Speed hump,Road barrier,Traffic cone
+Timber bridge,Stone arch bridge,Steel truss bridge,Suspension bridge,Cable bridge,Viaduct,Tunnel portal,Tunnel section,Mountain switchback,Ford crossing
+Rail straight,Rail curve,Rail switch,Rail buffer,Rail crossing,Rail signal,Rail platform,Rail depot,Rail turntable,Rail bridge
+Bus stop,Tram stop,Freight terminal,Distribution center,Loading dock,Parcel locker,Fuel station,Charging station,Parking shelter,Transit map board
+[industrial-production|Industry and machinery|machine]
+Waterwheel,Windmill rotor,Steam engine,Steam boiler,Steam turbine,Electric motor,Diesel engine,Gas turbine,Hydraulic press,Pneumatic compressor
+Conveyor belt,Roller conveyor,Bucket elevator,Screw conveyor,Material hopper,Industrial silo,Crusher,Ore sorter,Ball mill,Vibrating screen
+Blast furnace,Smelter,Rolling mill,Metal extruder,Sheet cutter,Stamping press,Drill press,Milling machine,Industrial lathe,Grinding machine
+Assembly robot,Welding station,Paint booth,Inspection gantry,Packaging machine,Bottling line,Canning machine,Textile machine,Paper machine,Glass forming machine
+Factory hall,Machine shed,Cooling tower,Exhaust stack,Pipe rack,Pressure vessel,Maintenance gantry,Control cabinet,Safety railing,Emergency station
+[land-vehicles|Land vehicles|vehicle]
+Ox cart,Donkey cart,Horse carriage,Stagecoach,Covered wagon,Freight wagon,Tractor,Combine harvester,Baler vehicle,Orchard sprayer
+Bicycle,Tricycle,Cargo bicycle,Motorcycle,Scooter,Small car,Family car,Pickup truck,Delivery van,Bus
+Flatbed truck,Box truck,Tanker truck,Dump truck,Cement mixer,Garbage truck,Fire engine,Ambulance,Tow truck,Street sweeper
+Excavator,Bulldozer,Backhoe,Wheel loader,Forklift,Mobile crane,Road roller,Grader,Tracked carrier,Snowplow
+Steam locomotive,Diesel locomotive,Electric locomotive,Passenger coach,Freight boxcar,Flat railcar,Rail tanker,Tram,Metro carriage,High speed train
+[air-travel|Air vehicles and airports|vehicle]
+Hot air balloon,Gas balloon,Rigid airship,Blimp,Hang glider,Sailplane,Propeller monoplane,Biplane,Floatplane,Amphibious plane
+Crop dusting plane,Bush plane,Passenger propeller plane,Regional jet,Airliner,Cargo airplane,Research aircraft,Firefighting aircraft,Medical helicopter,Utility helicopter
+Tiltrotor,Autogyro,Quadcopter,Hexacopter,Fixed wing drone,Cargo drone,Inspection drone,Survey drone,Delivery drone,Passenger multicopter
+Runway section,Taxiway section,Runway light,Approach light,Wind sock,Airport beacon,Control tower,Aircraft hangar,Passenger terminal,Boarding bridge
+Baggage cart,Aircraft tug,Ground power cart,Fuel bowser,Aircraft stairs,Deicing truck,Helipad,Drone landing pad,Air cargo loader,Weather radar
+[energy-water|Energy water and utilities|infrastructure]
+Reservoir dam,Hydroelectric turbine,Penstock,Spillway,Water treatment tank,Settling basin,Sand filter,Water tower,Pipe valve,Water meter
+Sewage pipe,Sewer manhole,Pumping station,Storm drain,Reed treatment bed,Biogas digester,Compost reactor,Desalination unit,Condensation collector,Water recycling unit
+Solar panel,Solar tracker,Solar thermal dish,Wind turbine,Tidal turbine,Wave energy buoy,Geothermal well,Biomass burner,Heat exchanger,District heating pipe
+Power pole,Power pylon,Transformer,Substation switch,Battery cabinet,Flywheel store,Power inverter,Charging cable,Fuel cell,Grid control station
+Fission reactor shell,Fusion reactor concept,Reactor cooling loop,Radiation shield module,Hydrogen electrolyzer,Hydrogen tank,Thermal salt tank,Power cable spool,Energy meter,Microgrid hub
+[science-medicine|Science and medicine|prop]
+Microscope,Telescope,Spectrometer,Centrifuge,Incubator,Autoclave,Fume hood,Laboratory bench,Sample cabinet,Cold storage freezer
+Test tube rack,Petri dish,Beaker,Measuring cylinder,Flask,Pipette,Sample vial,Slide tray,Lab balance,Lab burner
+Medical bed,Exam table,Wheelchair,Stretcher,Medicine cabinet,First aid kit,Ultrasound scanner,X ray scanner,MRI scanner,Patient monitor
+Thermometer,Stethoscope,Blood pressure cuff,Defibrillator,Oxygen cylinder,IV stand,Prosthetic arm,Prosthetic leg,Hearing device,Dental chair
+Seismometer,Weather station,Ocean sensor,Soil probe,Air sampler,Particle detector,Vacuum chamber,Optical bench,Cryostat,Cleanroom airlock
+[information-culture|Information culture and recreation|prop]
+Clay tablet,Writing slate,Scroll,Bound book,Printed newspaper,Map sheet,Blueprint roll,Printing block,Type case,Printing press
+Telegraph key,Telephone,Radio receiver,Radio transmitter,Television,Film camera,Film projector,Record player,Tape recorder,Portable music player
+Desktop computer,Laptop,Tablet computer,Mobile phone,Server rack,Network switch,Fiber cabinet,Satellite dish,Router,Antenna mast
+Piano,Violin,Flute,Drum,Guitar,Harp,Trumpet,Accordion,Music stand,Stage speaker
+Board game table,Chess set,Building blocks,Stuffed animal,Kite,Ball,Swing,Slide,Climbing frame,Carousel
+[robotics|Robotics and automation|actor]
+Wheeled scout robot,Tracked inspection robot,Quadruped robot,Hexapod robot,Biped service robot,Humanoid assistant,Warehouse robot,Cleaning robot,Garden robot,Farm weeding robot
+Harvest robot,Milking robot,Feeding robot,Construction robot,Bricklaying robot,Painting robot,Pipe inspection robot,Underwater robot,Rescue robot,Medical delivery robot
+Surgical manipulator,Rehabilitation robot,Companion robot,Teaching robot,Museum guide robot,Kitchen robot,Restaurant service robot,Laundry robot,Security patrol robot,Telepresence robot
+Robot gripper,Suction end effector,Magnetic end effector,Soft gripper,Robot wrist joint,Robot shoulder joint,Linear actuator,Rotary actuator,Robot sensor head,Robot charging dock
+Automation workcell,Collaborative arm,Mobile manipulator,Swarm docking tile,Tool changing station,Robot parts bin,Robot maintenance cradle,Calibration target,Robot test ramp,Autonomous forklift
+[orbital-access|Launch and orbital access|vehicle]
+Sounding rocket,Small launch rocket,Heavy launch rocket,Reusable booster,Upper stage,Payload fairing,Launch escape tower,Crew capsule,Cargo capsule,Spaceplane
+Launch tower,Launch mount,Flame trench,Service gantry,Propellant tank,Launch control bunker,Rocket transport crawler,Assembly building,Engine test stand,Landing pad
+Rocket engine bell,Engine chamber,Turbopump,Thrust frame,Reaction thruster,Cold gas thruster,Ion thruster,Hall thruster,Solar sail,Electrodynamic tether
+Weather satellite,Communication satellite,Navigation satellite,Earth observation satellite,Science satellite,Technology satellite,Relay satellite,Inspection satellite,Debris catcher,Orbital tug
+Docking ring,Capsule hatch,Heat shield,Parachute pack,Landing leg,Recovery vessel deck,Recovery crane,Payload adapter,Launch rail,Satellite deployment rack
+[space-habitats|Orbital living|module]
+Station hub,Station corridor,Station node,Station cupola,Station airlock,Station docking port,Station truss,Station radiator,Station solar wing,Station antenna
+Crew cabin,Station galley,Station dining nook,Station washroom,Exercise bay,Medical bay,Station laboratory,Station workshop,Station greenhouse,Station storage bay
+Water recovery rack,Air scrubber,Oxygen generator,Carbon dioxide collector,Station waste processor,Station freezer,Food growth rack,Algae bioreactor,Water bladder,Radiation shelter
+Station handrail,Foot restraint,Equipment tether,Storage net,Magnetic tray,Zero gravity desk,Observation shutter,Station light panel,Emergency mask,Pressure patch kit
+Rotating habitat ring,Habitat spoke,Counterweight boom,Artificial gravity drum,Inflatable habitat,Rigid habitat cylinder,Shielding water wall,Robotic station arm,External tool carrier,Spacewalk suit
+[planetary-exploration|Planetary exploration|vehicle]
+Robotic lander,Crew lander,Cargo lander,Ascent vehicle,Descent stage,Sample return capsule,Atmospheric probe,Aerial planetary drone,Hopper probe,Surface glider
+Small science rover,Pressurized rover,Unpressurized buggy,Tracked polar rover,Cliff climbing rover,Cave exploration robot,Ice drilling rover,Regolith hauling rover,Surface ambulance,Mobile habitat
+Sample scoop,Core drill,Rock saw,Sample bag,Sample tube,Sample carousel,Instrument mast,Panoramic camera arm,Ground radar,Spectrometer arm
+Surface beacon,Navigation marker,Field seismometer,Heat flow probe,Planetary weather mast,Dust monitor,Soil chemistry kit,Magnetic field sensor,Radiation monitor,Field communication dish
+Lander ramp,Lander footpad,Dust shield,Wheel fender,Rover wheel,Rover suspension,Space suit backpack,Pressure helmet,Sample storage vault,Field equipment sled
+[planetary-settlements|Planetary settlements|building]
+Surface habitat dome,Buried habitat,Tunnel habitat,Cliff habitat,Polar outpost,Volcanic outpost,Desert outpost,Ice moon outpost,Ocean platform habitat,Floating cloud habitat
+Surface power hub,Surface battery bunker,Regolith shielding berm,Regolith brick factory,Surface foundry,Surface machine shop,Surface repair hangar,Surface supply depot,Surface communications tower,Surface landing terminal
+Ice mine,Atmospheric extractor,Regolith processor,Oxygen refinery,Propellant refinery,Water purification dome,Hydroponic dome,Aquaculture dome,Food processing dome,Compost dome
+Pressurized walkway,Surface road mat,Dust lock,Surface cargo lift,Pressure bulkhead,Habitat foundation pad,Habitat anchor,Heat rejection mast,Surface cable trench,Surface pipe junction
+Settlement commons,Settlement school,Settlement clinic,Settlement garden,Settlement observatory,Settlement memorial,Surface emergency shelter,Surface rescue garage,Habitat expansion joint,Settlement resource kiosk
+[space-industry|Space industry|infrastructure]
+Asteroid mining rig,Asteroid anchor,Asteroid drill head,Asteroid capture net,Asteroid bag enclosure,Ore collection funnel,Magnetic ore separator,Vacuum smelter,Orbital casting bay,Orbital machine shop
+Orbital shipyard,Ship construction cradle,Orbital dry dock,Space crane,Robotic assembly spider,Orbital warehouse,Propellant depot,Ice depot,Spare parts depot,Orbital freight sorter
+Solar furnace,Orbital power collector,Beamed power emitter,Beamed power receiver,Space radiator farm,Cryogenic storage sphere,Superconductor coil,Magnetic bearing assembly,Vacuum transport tube,Mass driver
+Freight pod,Pressure cargo container,Cryogenic cargo pod,Ore capsule,Fuel tanker module,Bulk water module,Cargo docking latch,Cargo transfer arm,Tether reel,Tether climber
+Debris processing station,Satellite recycling dock,Orbital repair drone,Resource survey probe,Prospecting beacon,Space traffic beacon,Navigation buoy,Space customs terminal,Orbital rescue depot,Orbital refueling boom
+[interplanetary-ships|Interplanetary ships|vehicle]
+Crew transfer shuttle,Passenger liner,Interplanetary freighter,Propellant tanker,Water tanker,Ore hauler,Construction tender,Repair tender,Rescue ship,Hospital ship
+Science expedition ship,Survey ship,Comet probe,Asteroid scout,Gas giant probe,Ice moon explorer,Ocean moon submarine,Atmospheric balloon probe,Deep space relay ship,Outer system observatory
+Nuclear thermal ship,Fusion drive concept ship,Solar electric cargo ship,Solar sail cargo ship,Magnetic sail concept ship,Beamed sail probe,Rotating crew ship,Cycler habitat ship,Seed cargo ship,Mobile shipyard
+Ship command module,Ship crew ring,Ship laboratory module,Ship engine module,Ship radiator boom,Ship fuel spine,Ship cargo rack,Ship shield disc,Ship communications array,Ship docking bay
+Ship escape pod,Ship maintenance pod,Ship utility drone,Ship airlock collar,Ship observation blister,Ship landing cradle,Ship internal lift,Ship equipment locker,Ship galley module,Ship medical module
+[stellar-frontier|Stellar frontier concepts|speculative]
+Interstellar precursor probe,Interstellar seed probe,Interstellar survey vessel,Generation ship,Sleeper ship,Worldship,Interstellar ark,Automated colony ship,Interstellar courier,Interstellar rescue vessel
+Stellar collector petal,Dyson swarm satellite,Stellar shade,Star lifting concept rig,Stellar material reservoir,Stellar weather monitor,Flare shelter station,Stellar navigation beacon,Starward observatory,Polar stellar platform
+Interstellar sail film,Interstellar sail mast,Interstellar dust shield,Interstellar ram scoop concept,Antimatter containment concept,Fusion pellet store,Beamed propulsion receiver,Long baseline navigation array,Interstellar message capsule,Deep time archive
+Oort cloud depot,Comet habitat,Interstellar waypoint,Interstellar fuel cache,Rogue planet outpost,Brown dwarf outpost,Red dwarf habitat,White dwarf observatory,Binary star navigation station,Pulsar navigation receiver
+Colony ecology vault,Embryo archive concept,Seed genome library,Autonomous biosphere module,Interstellar classroom,Long duration repair foundry,Closed ecology habitat,Ark agricultural deck,Cultural memory chamber,Arrival survey swarm
+[galactic-civilization|Galactic civilization concepts|speculative]
+Galactic relay station,Galactic archive node,Galactic trade terminal,Galactic embassy,Galactic language exchange,Galactic research consortium hub,Galactic rescue coordination hub,Galactic navigation center,Galactic ecological reserve,Galactic heritage vault
+Ring habitat arc,Ring habitat ocean segment,Ring habitat mountain segment,Ring habitat transit spine,Ring habitat mirror,Ring habitat night shutter,Orbital forest cylinder,Orbital ocean cylinder,Orbital city cylinder,Orbital agricultural cylinder
+Wormhole gateway concept,Wormhole stabilizer concept,Jump relay concept,Metric drive concept module,Gateway traffic control,Gateway quarantine habitat,Gateway cargo interchange,Gateway rescue dock,Gateway power reservoir,Gateway approach beacon
+Intergalactic ark concept,Intergalactic messenger probe,Intergalactic observatory,Intergalactic waypoint concept,Galaxy edge settlement,Galaxy survey swarm,Deep void habitat concept,Deep void energy collector concept,Deep void navigation marker,Deep void archive
+Civilization seed vault,Artificial planet core concept,Artificial sun concept,World ecology controller concept,Planetary restoration foundry,Stellar ecosystem museum,Multi species meeting habitat,Distributed intelligence node,Planet moving engine concept,Universal fabrication concept hub
+[alien-ecologies|Imagined alien ecologies|speculative]
+Radial grazer,Tripod browser,Hexapod herd animal,Gliding membrane animal,Balloon floater,Jet swimming animal,Rolling shell animal,Burrowing ribbon animal,Crystal shelled crawler,Branching colonial animal
+Fan leaf tree,Spiral trunk tree,Segmented canopy tree,Translucent shrub,Bulb root plant,Walking root plant,Inflatable fruit plant,Heat vent plant,Ice lattice plant,Subsurface thread plant
+Alien reef tower,Alien reef fan,Alien tide mat,Alien spore forest,Alien fungal tower,Alien resin mound,Alien nest lattice,Alien burrow dome,Alien egg cluster,Alien pollinator pod
+Alien freshwater pool,Alien mineral spring,Alien salt garden,Alien thermal basin,Alien floating island,Alien cave web,Alien rock canopy,Alien dune crust,Alien ice garden,Alien luminous grotto
+Alien grazer feeder,Alien hydration station,Alien rest cradle,Alien habitat partition,Alien environment suit,Alien translation wearable,Alien mobility aid,Alien shared table,Alien ecology sampler,Alien rescue carrier

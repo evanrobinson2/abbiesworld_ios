@@ -1,0 +1,292 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/water-point",
+ "name": "water-point",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "residents fetch water here",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "a8ce3f24-49e9-45b1-bb0d-80a7fe39e008",
+    "grid_url": "https://www.midjourney.com/jobs/a8ce3f24-49e9-45b1-bb0d-80a7fe39e008?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "6d198b27-839a-440d-a564-3affc98e2974",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T20:44:41.619Z",
+    "grid_done_at": "2026-10-22T20:44:59.622Z",
+    "upscale_clicked_at": "2026-10-22T20:45:14.560Z",
+    "downloaded_at": "2026-10-22T20:46:26.625Z",
+    "pick_reason": "only variant with a square stone cistern, plus pump, canopy on four posts and bucket"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "9be01af3-3dde-4cbf-aadb-0310938a7589",
+    "grid_url": "https://www.midjourney.com/jobs/9be01af3-3dde-4cbf-aadb-0310938a7589?index=3",
+    "picked_index": 3,
+    "upscale_job_id": "a6b62a67-62c6-47cc-a3da-9eea99e927b4",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T20:46:36.253Z",
+    "grid_done_at": "2026-10-22T20:46:54.256Z",
+    "upscale_clicked_at": "2026-10-22T20:47:04.356Z",
+    "downloaded_at": "2026-10-22T20:48:25.682Z",
+    "pick_reason": "three views of one consistent square cistern with pump and canopy; other sheets mixed different wells"
+   }
+  },
+  "files": {
+   "hero.png": "39e287ac8777313dff676b3837e91d5b98de21539275eee726d3ac5a4b1f258a",
+   "turnaround.png": "9ccb04a298a1aa1e9b85e510488e35f6858019e01cd30a5b099ba5fa60a4ff5b",
+   "view_front.png": "76d1e3a5016b1b212f856093787bad5f401261aebd7220e669674ba58d3cb12e",
+   "view_side.png": "ffb76d0b78dc6b4efd3b0af22b023240f87cd494ba32c69cad1e9e27947f3ed2",
+   "view_back.png": "fe94e2a995d5fb56f6fe62ea312741091716399242b62e97b71a3c62e11732d7"
+  },
+  "folder": "tools/ranch-rebuild/mj/water-point"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/water-point/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: basin, posts on the back corners, canopy with ridge along X over the back, pump at the back-right corner. Harness hero direction (0.62,-0.78,0.42).",
+    "hero_iou": 0.624
+   },
+   {
+    "round": 2,
+    "change": "Read the hero's geometry: canopy smaller and steeper (pitch 0.8, 1.5 m ridge), moved over the back-left and turned 28 degrees so both posts land on the coping; pump to the back rim; pump and handle heights from the hero.",
+    "hero_iou": 0.676
+   },
+   {
+    "round": 3,
+    "change": "Tried the canopy square to the basin (yaw 0) with a longer roof and taller basin: worse (0.641). Swept yaw 0/14/20/26 and settled on 14 degrees with the canopy centre at (-0.25, 0.58).",
+    "hero_iou": 0.671
+   },
+   {
+    "round": 4,
+    "change": "Measured the hero camera (about 19 degrees elevation) and set the check to that elevation; basin lowered to 0.79 m to the coping top; pump top to 1.33 m; handle reach shortened from 0.85 to 0.62 m so the grip ends just past the basin as in the hero.",
+    "hero_iou": 0.714
+   },
+   {
+    "round": 5,
+    "change": "Canopy centre to (-0.35, 0.55); posts to the ground; outward knee braces trimmed to stay under the roof; coping no longer hides the timber band; bucket stave teeth removed; pump rebuilt with barrel, collars and upper column; thicker handle; greyer stone.",
+    "hero_iou": 0.717
+   },
+   {
+    "round": 6,
+    "change": "Final render at 768 px, 48 samples. Hero IoU 0.715 with the measured-elevation check; 0.701 from the harness's own hero camera direction (0.62,-0.78,0.42).",
+    "hero_iou": 0.715
+   }
+  ],
+  "what_was_done": [
+   [
+    "Scoring",
+    "Hero only, as the art director asked: the turnaround sheet drew three different designs (timber-rimmed trough, narrow pillar, gabled well), so no view_*.png is scored. views/hero.png is the MJ hero with its cast shadow flattened out (make_views.py); hero_check.py renders the model from the harness hero azimuth at the MJ hero's lower elevation, direction (0.62, -0.78, 0.34), and scores silhouette IoU against it. The sheet's right-hand view was only a hint for the back of the canopy (a symmetric back slope)."
+   ],
+   [
+    "Basin",
+    "1.5 m square, coping top at 0.79 m: a dark bottom course and two cream courses of chunky running-bond blocks, a 0.14 m timber band with iron bolt heads, and a ring of 12 coping slabs whose inner faces show above the turquoise water, which sits 6.5 cm below the coping."
+   ],
+   [
+    "Canopy",
+    "Two 15 cm posts, one on the left (-X) coping near the back and one on the back (+Y) coping, carrying a wall plate, tie beams, rafters, eave purlins, a ridge beam and knee braces both ways. Teal plank roof, two overlapping courses per slope (the upper course laps the lower), a chunky ridge board. The canopy is turned 14 degrees about Z and sits over the back-left of the basin, which is where the hero puts it."
+   ],
+   [
+    "Pump",
+    "Cast-iron pump on the back-right coping: base plate, flange, barrel with collars, upper column and cap, a spout that reaches over the water and turns down (with a vent knob), a pivot post and pump rod, and a long curved handle that rises over the pivot and sweeps down and out to screen-right ending in a wooden grip."
+   ],
+   [
+    "Bucket and stream",
+    "A 12-sided stave bucket with two iron hoops on the left coping, and a thin tapered water stream from the spout with a small splash ring."
+   ],
+   [
+    "Construction stages",
+    "One build.py with a STATE switch: planned (corner stakes, post pegs, string lines and a chalk outline), foundation (dark bottom course and basin floor), frame (plus posts, plate, ties, rafters, braces), roof (plus the plank roof and ridge board), complete (the stone walls, band, coping, water, pump, bucket, stream)."
+   ]
+  ],
+  "creative_additions": "Iron bolt heads on the timber band, a vent knob on the spout, a small splash ring where the stream meets the water, and post marker pegs plus a chalk outline in the planned stage."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   2.1288537979125977,
+   2.0109870433807373,
+   2.4800000190734863
+  ],
+  "triangles": 2406,
+  "materials": [
+   "Stone_Dark",
+   "Plank_Bucket",
+   "Metal_Iron",
+   "Timber_Brown",
+   "Stone_Cream",
+   "Roof_Teal",
+   "Water_Clear"
+  ],
+  "parts": [
+   {
+    "name": "basin_core",
+    "materials": [
+     "Stone_Dark"
+    ]
+   },
+   {
+    "name": "bucket",
+    "materials": [
+     "Plank_Bucket"
+    ]
+   },
+   {
+    "name": "bucket_hoops",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "frame_timber",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "pump",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "pump_grip",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "rim_band",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "rim_bolts",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "rim_coping",
+    "materials": [
+     "Stone_Cream"
+    ]
+   },
+   {
+    "name": "roof_planks",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "stones_bottom",
+    "materials": [
+     "Stone_Dark"
+    ]
+   },
+   {
+    "name": "stones_wall",
+    "materials": [
+     "Stone_Cream"
+    ]
+   },
+   {
+    "name": "water",
+    "materials": [
+     "Water_Clear"
+    ]
+   },
+   {
+    "name": "water_stream",
+    "materials": [
+     "Water_Clear"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "complete",
+  "foundation",
+  "frame",
+  "planned",
+  "roof"
+ ],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.715,
+  "per_view": {},
+  "triangle_budget": 9000,
+  "within_budget": true,
+  "good": [
+   "The three silhouette pieces read at small size: the block basin, the teal canopy and the pump handle sweeping out to the right.",
+   "Light: 2406 triangles for the complete model against a 9k budget; 14 objects, one material each, flat colours.",
+   "Material names carry the game roles: Stone_Cream, Stone_Dark, Timber_Brown, Roof_Teal, Water_Clear, Metal_Iron, Plank_Bucket (plus Rope_Twine for the planned string lines)."
+  ],
+  "off": [
+   "The hero is not structurally consistent: its right post hangs behind the pump and stops in mid air, and its two posts would stand in the water if the ridge ran parallel to the basin. I put the posts on the coping and turned the canopy 14 degrees, so the canopy covers the back-left of the basin like the hero but is not square to it.",
+   "The pump stands at the back-right corner as the brief asks; the hero draws it nearer the middle of the back rim, so the handle tip sits a little further right than the hero's (handle shortened to compensate).",
+   "The left post stands just inside the left coping and runs down to the ground beside the stone face.",
+   "Stones are flat-coloured boxes with no painted cracks or wear; the hero's water ripples and splash spray are reduced to a flat slab and a small splash ring.",
+   "The remaining IoU gap is mostly the basin's lower-right corner and the top-left of the coping (the perspective of the render camera against the illustration), and the hero's slightly lower, wider roof."
+  ]
+ },
+ "exports": {
+  "runtime": "water-point.glb",
+  "variants": {
+   "complete": "variants/complete.glb",
+   "foundation": "variants/foundation.glb",
+   "frame": "variants/frame.glb",
+   "planned": "variants/planned.glb",
+   "roof": "variants/roof.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/water-point-planned.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/water-point-foundation.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/water-point-frame.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/water-point-roof.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/water-point-complete.json"
+   ]
+  }
+ },
+ "files": {
+  "water-point.glb": {
+   "sha256": "432bb18dee7d7b3b460045148548b67d66137efd39c093a2c68660b4435dbc07",
+   "bytes": 133952
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "7e7a576e61cf31fc0c2c40f801b9444e409ca2f4",
+  "path": "tools/ranch-rebuild/models/water-point"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}

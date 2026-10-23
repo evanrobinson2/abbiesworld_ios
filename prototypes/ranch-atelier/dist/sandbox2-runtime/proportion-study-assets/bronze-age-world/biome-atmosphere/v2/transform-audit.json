@@ -1,0 +1,1301 @@
+{
+  "schemaVersion": 1,
+  "sourceBuild": "1b2b881d0d",
+  "status": "additive integration audit; not active effects or PC adapter",
+  "seed": 43,
+  "abundance": "balanced",
+  "units": "metres",
+  "up": "Y",
+  "instances": [
+    {
+      "id": "home",
+      "assetId": "GF-191",
+      "sourceSha256": "9e8d5a67c95bb2bcfada1994ba9d9bdcbf5fdc8c09c16ed50f9124c2659a14b7",
+      "scale": 2.5,
+      "yaw": 0.9151007005533605,
+      "position": {
+        "x": -13,
+        "y": 0,
+        "z": -10
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -21.906044321593004,
+          "y": 0,
+          "z": -19.116113304997707
+        },
+        "max": {
+          "x": -4.093955678406996,
+          "y": 6.340575,
+          "z": -0.8838866950022926
+        },
+        "supportRadius": 9.12362269681875
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -13.068138470509407,
+            "y": 0.19999999552965164,
+            "z": -10.052414208084159
+          },
+          "source": {
+            "assetId": "GF-191",
+            "sha256": "9e8d5a67c95bb2bcfada1994ba9d9bdcbf5fdc8c09c16ed50f9124c2659a14b7",
+            "anchorId": "courtyard"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": -15.781351322901699,
+            "y": 0.19999999552965164,
+            "z": -6.935267992755527
+          },
+          "source": {
+            "assetId": "GF-191",
+            "sha256": "9e8d5a67c95bb2bcfada1994ba9d9bdcbf5fdc8c09c16ed50f9124c2659a14b7",
+            "anchorId": "dropoff"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": -8.114238538605656,
+            "y": 0,
+            "z": -6.241721952773582
+          },
+          "source": {
+            "assetId": "GF-191",
+            "sha256": "9e8d5a67c95bb2bcfada1994ba9d9bdcbf5fdc8c09c16ed50f9124c2659a14b7",
+            "anchorId": "entry"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": -11.086578497747906,
+            "y": 0,
+            "z": -8.528137305959929
+          },
+          "source": {
+            "assetId": "GF-191",
+            "sha256": "9e8d5a67c95bb2bcfada1994ba9d9bdcbf5fdc8c09c16ed50f9124c2659a14b7",
+            "anchorId": "worker_stand"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "granary",
+      "assetId": "GF-410",
+      "sourceSha256": "b612c21afb42513130a743049e9967329e4a3115787df0c25fed3b2e05953074",
+      "scale": 2.6,
+      "yaw": -0.3,
+      "position": {
+        "x": 12,
+        "y": 0,
+        "z": -14
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 8.378976241792088,
+          "y": 0,
+          "z": -17.863538573011372
+        },
+        "max": {
+          "x": 15.621023758207912,
+          "y": 7.073404000000001,
+          "z": -10.136461426988628
+        },
+        "supportRadius": 4.238982832166345
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 11.672400509427707,
+            "y": 1.8980000495910645,
+            "z": -12.940959906943597
+          },
+          "source": {
+            "assetId": "GF-410",
+            "sha256": "b612c21afb42513130a743049e9967329e4a3115787df0c25fed3b2e05953074",
+            "anchorId": "entry"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 12.248664912417318,
+            "y": 1.8980000495910645,
+            "z": -14.80386606073853
+          },
+          "source": {
+            "assetId": "GF-410",
+            "sha256": "b612c21afb42513130a743049e9967329e4a3115787df0c25fed3b2e05953074",
+            "anchorId": "grain_dropoff"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 10.904047972108224,
+            "y": 0,
+            "z": -10.457085035217021
+          },
+          "source": {
+            "assetId": "GF-410",
+            "sha256": "b612c21afb42513130a743049e9967329e4a3115787df0c25fed3b2e05953074",
+            "anchorId": "worker_stand"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "well",
+      "assetId": "GF-011",
+      "sourceSha256": "11379094477c8d00721e14a8caa8856480aa55fd91858075c4258bb007a0588e",
+      "scale": 2,
+      "yaw": 0,
+      "position": {
+        "x": -5,
+        "y": 0,
+        "z": 2
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -6.99289,
+          "y": 0,
+          "z": 0.6399999999999999
+        },
+        "max": {
+          "x": -3.00711,
+          "y": 3.39,
+          "z": 3.3600000000000003
+        },
+        "supportRadius": 2.41271849831264
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -5.15288907289505,
+            "y": 0,
+            "z": 4.200000047683716
+          },
+          "source": {
+            "assetId": "GF-011",
+            "sha256": "11379094477c8d00721e14a8caa8856480aa55fd91858075c4258bb007a0588e",
+            "anchorId": "draw-water"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": -2.7528889775276184,
+            "y": 0,
+            "z": 2
+          },
+          "source": {
+            "assetId": "GF-011",
+            "sha256": "11379094477c8d00721e14a8caa8856480aa55fd91858075c4258bb007a0588e",
+            "anchorId": "maintenance"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "shelter",
+      "assetId": "GF-017",
+      "sourceSha256": "279bc09863c9b77a12eef41f5799c9cca942a23ebf3f613043018654b7fb6e66",
+      "scale": 2.5,
+      "yaw": 0.4,
+      "position": {
+        "x": -15,
+        "y": 0,
+        "z": 11
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -19.083647823963545,
+          "y": 0,
+          "z": 7.428662971808455
+        },
+        "max": {
+          "x": -10.916352176036453,
+          "y": 5.45,
+          "z": 14.571337028191545
+        },
+        "supportRadius": 4.186293891248709
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -13.783321828917735,
+            "y": 0,
+            "z": 13.877713722912445
+          },
+          "source": {
+            "assetId": "GF-017",
+            "sha256": "279bc09863c9b77a12eef41f5799c9cca942a23ebf3f613043018654b7fb6e66",
+            "anchorId": "entry"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": -15.097608735660128,
+            "y": 0,
+            "z": 10.769132864721488
+          },
+          "source": {
+            "assetId": "GF-017",
+            "sha256": "279bc09863c9b77a12eef41f5799c9cca942a23ebf3f613043018654b7fb6e66",
+            "anchorId": "rest"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "sorting",
+      "assetId": "GF-030",
+      "sourceSha256": "3174a555b33fe0a33a460ad61d5e18e4f4b439c5a255a5554b560992fe4b823b",
+      "scale": 2.5,
+      "yaw": 0,
+      "position": {
+        "x": -12,
+        "y": 0,
+        "z": 18
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -14.339712500000001,
+          "y": 0,
+          "z": 17.015
+        },
+        "max": {
+          "x": -9.660287499999999,
+          "y": 2.134675,
+          "z": 18.985
+        },
+        "supportRadius": 2.538597956088409
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -9.089717760682106,
+            "y": -0.04031857650261372,
+            "z": 19.124999970197678
+          },
+          "source": {
+            "assetId": "GF-030",
+            "sha256": "3174a555b33fe0a33a460ad61d5e18e4f4b439c5a255a5554b560992fe4b823b",
+            "anchorId": "collect"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": -12.339717641472816,
+            "y": -0.04031857650261372,
+            "z": 20.249999940395355
+          },
+          "source": {
+            "assetId": "GF-030",
+            "sha256": "3174a555b33fe0a33a460ad61d5e18e4f4b439c5a255a5554b560992fe4b823b",
+            "anchorId": "work.005"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "crate",
+      "assetId": "GF-025",
+      "sourceSha256": "465f0877c778eb8f29fdb1acf3698557b579ebf269f968d4d0e46767f7fe5f7d",
+      "scale": 2.4,
+      "yaw": 0,
+      "position": {
+        "x": -7,
+        "y": 0,
+        "z": 12
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -8.410528,
+          "y": 0,
+          "z": 11.058
+        },
+        "max": {
+          "x": -5.589472,
+          "y": 1.1454,
+          "z": 12.942
+        },
+        "supportRadius": 1.6961583766806685
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -7,
+            "y": -0.011999988555908203,
+            "z": 13.8
+          },
+          "source": {
+            "assetId": "GF-025",
+            "sha256": "465f0877c778eb8f29fdb1acf3698557b579ebf269f968d4d0e46767f7fe5f7d",
+            "anchorId": "pickup.004"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "jar",
+      "assetId": "GF-014",
+      "sourceSha256": "bac438b53e970f675036c9454f0c87644bfda677ad3d84c76ceb39fc28fa9104",
+      "scale": 2,
+      "yaw": 0,
+      "position": {
+        "x": -21,
+        "y": 0,
+        "z": 4
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -22.08224,
+          "y": 0,
+          "z": 3.29144
+        },
+        "max": {
+          "x": -19.91776,
+          "y": 2.09552,
+          "z": 4.70856
+        },
+        "supportRadius": 1.2935612436989599
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -21.25775498151779,
+            "y": 0.023527387529611588,
+            "z": 5.600000023841858
+          },
+          "source": {
+            "assetId": "GF-014",
+            "sha256": "bac438b53e970f675036c9454f0c87644bfda677ad3d84c76ceb39fc28fa9104",
+            "anchorId": "fill"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "cat",
+      "assetId": "GF-171",
+      "sourceSha256": "f50af33cd20d0e12375f4f04695619fa563f17f87a1a68767d0bb66f2dee27ca",
+      "scale": 2.8,
+      "yaw": 1.1,
+      "position": {
+        "x": -6,
+        "y": 0,
+        "z": 19
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -6.744542892845041,
+          "y": 0,
+          "z": 17.90131758662146
+        },
+        "max": {
+          "x": -5.255457107154959,
+          "y": 1.660988,
+          "z": 20.09868241337854
+        },
+        "supportRadius": 1.1255035290748758
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -4.4159171530224,
+            "y": 0,
+            "z": 19.591393448737207
+          },
+          "source": {
+            "assetId": "GF-171",
+            "sha256": "f50af33cd20d0e12375f4f04695619fa563f17f87a1a68767d0bb66f2dee27ca",
+            "anchorId": "observe"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "tree-1",
+      "assetId": "GF-152",
+      "sourceSha256": "f3cc8c0dccf524588572d107b629c0c3bbca009b95db9eb51be0a2f9da4d90e9",
+      "scale": 3.2240464987000452,
+      "yaw": 2.3407182193826883,
+      "position": {
+        "x": -21.15334488078952,
+        "y": 0,
+        "z": 17.191168576478958
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -24.584119415292793,
+          "y": 0,
+          "z": 13.760025360282658
+        },
+        "max": {
+          "x": -17.722570346286243,
+          "y": 6.244462220542196,
+          "z": 20.62231179267526
+        },
+        "supportRadius": 3.431390474384822
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -18.558910106648124,
+            "y": 0.023740584908805575,
+            "z": 15.04704627672945
+          },
+          "source": {
+            "assetId": "GF-152",
+            "sha256": "f3cc8c0dccf524588572d107b629c0c3bbca009b95db9eb51be0a2f9da4d90e9",
+            "anchorId": "harvest"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "tree-2",
+      "assetId": "GF-154",
+      "sourceSha256": "bd41438e1db591fced8d7b1ccf112bd9f316a7b2769353255f84cdd4db18cb89",
+      "scale": 3.2318377488292755,
+      "yaw": 5.681997771505267,
+      "position": {
+        "x": -12.264088351977989,
+        "y": 0,
+        "z": 24.586250241845846
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -15.540934135603058,
+          "y": 0,
+          "z": 21.30547807129006
+        },
+        "max": {
+          "x": -8.98724256835292,
+          "y": 5.205553380416803,
+          "z": 27.86702241240163
+        },
+        "supportRadius": 3.3352545898954045
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -14.534847754796598,
+            "y": 0.034599278486122154,
+            "z": 27.36738110811109
+          },
+          "source": {
+            "assetId": "GF-154",
+            "sha256": "bd41438e1db591fced8d7b1ccf112bd9f316a7b2769353255f84cdd4db18cb89",
+            "anchorId": "harvest.003"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "tree-4",
+      "assetId": "GF-152",
+      "sourceSha256": "f3cc8c0dccf524588572d107b629c0c3bbca009b95db9eb51be0a2f9da4d90e9",
+      "scale": 3.495998967252672,
+      "yaw": 5.781892328141257,
+      "position": {
+        "x": 7.875921451952308,
+        "y": 0,
+        "z": -23.73914995067753
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 4.300647408177636,
+          "y": 0,
+          "z": -27.307183077846553
+        },
+        "max": {
+          "x": 11.451195495726981,
+          "y": 6.771190639733665,
+          "z": -20.171116823508505
+        },
+        "supportRadius": 3.7208326739477573
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 5.874095323703251,
+            "y": 0.025743133778195683,
+            "z": -20.687466914707663
+          },
+          "source": {
+            "assetId": "GF-152",
+            "sha256": "f3cc8c0dccf524588572d107b629c0c3bbca009b95db9eb51be0a2f9da4d90e9",
+            "anchorId": "harvest"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "tree-5",
+      "assetId": "GF-154",
+      "sourceSha256": "bd41438e1db591fced8d7b1ccf112bd9f316a7b2769353255f84cdd4db18cb89",
+      "scale": 3.4574793638195844,
+      "yaw": 4.293460140712559,
+      "position": {
+        "x": 20.637719332473353,
+        "y": 0,
+        "z": -7.880853497888893
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 17.302440450617283,
+          "y": 0,
+          "z": -11.20791524836781
+        },
+        "max": {
+          "x": 23.972998214329422,
+          "y": 5.568996586097843,
+          "z": -4.553791747409976
+        },
+        "supportRadius": 3.5681165992399198
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 17.271381159478814,
+            "y": 0.03701494340554335,
+            "z": -9.730638711473983
+          },
+          "source": {
+            "assetId": "GF-154",
+            "sha256": "bd41438e1db591fced8d7b1ccf112bd9f316a7b2769353255f84cdd4db18cb89",
+            "anchorId": "harvest.003"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "tree-6",
+      "assetId": "GF-153",
+      "sourceSha256": "4369245ff65ace74e67a266e50a95f448af2df424b49a95b6a41bc903eb8a491",
+      "scale": 3.410189379635267,
+      "yaw": 0.500170114133507,
+      "position": {
+        "x": 23.048356308601797,
+        "y": 0,
+        "z": 1.7949249451048672
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 18.69618261751123,
+          "y": 0,
+          "z": -2.558069733165599
+        },
+        "max": {
+          "x": 27.400529999692363,
+          "y": 6.240646564732539,
+          "z": 6.1479196233753335
+        },
+        "supportRadius": 4.535843793532495
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 24.861471457725383,
+            "y": 0,
+            "z": 5.078891632201973
+          },
+          "source": {
+            "assetId": "GF-153",
+            "sha256": "4369245ff65ace74e67a266e50a95f448af2df424b49a95b6a41bc903eb8a491",
+            "anchorId": "harvest.002"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "tree-7",
+      "assetId": "GF-152",
+      "sourceSha256": "f3cc8c0dccf524588572d107b629c0c3bbca009b95db9eb51be0a2f9da4d90e9",
+      "scale": 3.3434244577540086,
+      "yaw": 2.859166562566534,
+      "position": {
+        "x": 19.494653416331857,
+        "y": 0,
+        "z": 21.07832837011665
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 16.370971953519884,
+          "y": 0,
+          "z": 17.96655571735235
+        },
+        "max": {
+          "x": 22.61833487914383,
+          "y": 6.475678226756274,
+          "z": 24.190101022880953
+        },
+        "supportRadius": 3.558445835315391
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 20.72976805419387,
+            "y": 0.024619636304095086,
+            "z": 17.81377730064059
+          },
+          "source": {
+            "assetId": "GF-152",
+            "sha256": "f3cc8c0dccf524588572d107b629c0c3bbca009b95db9eb51be0a2f9da4d90e9",
+            "anchorId": "harvest"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "flower-0",
+      "assetId": "GF-567",
+      "sourceSha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+      "scale": 1.5203312087338419,
+      "yaw": 5.036657343509311,
+      "position": {
+        "x": 6.442731194893131,
+        "y": 0,
+        "z": -19.167193696889942
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 5.87444358540324,
+          "y": 0,
+          "z": -19.738762776691033
+        },
+        "max": {
+          "x": 7.011018804383022,
+          "y": 2.4097249658431394,
+          "z": -18.595624617088852
+        },
+        "supportRadius": 0.636410794066
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 6.448213115974378,
+            "y": 0.007601655873758956,
+            "z": -19.17272027117224
+          },
+          "source": {
+            "assetId": "GF-567",
+            "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+            "anchorId": "root"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 6.404980183973665,
+            "y": 2.1360653047740232,
+            "z": -19.15818824504194
+          },
+          "source": {
+            "assetId": "GF-567",
+            "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+            "anchorId": "seed_head"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "flower-1",
+      "assetId": "GF-567",
+      "sourceSha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+      "scale": 1.6301346427761019,
+      "yaw": 0.9224582209332766,
+      "position": {
+        "x": 12.36232752064369,
+        "y": 0,
+        "z": 16.318064955305534
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 11.686903874887472,
+          "y": 0,
+          "z": 15.641560913679609
+        },
+        "max": {
+          "x": 13.037751166399909,
+          "y": 2.5837634088001216,
+          "z": 16.99456899693146
+        },
+        "supportRadius": 0.6823745223960956
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 12.354120669099169,
+            "y": 0.008150673031698766,
+            "z": 16.31654481774157
+          },
+          "source": {
+            "assetId": "GF-567",
+            "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+            "anchorId": "root"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 12.393101513317916,
+            "y": 2.290339126461897,
+            "z": 16.34607613561432
+          },
+          "source": {
+            "assetId": "GF-567",
+            "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+            "anchorId": "seed_head"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "flower-3",
+      "assetId": "GF-567",
+      "sourceSha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+      "scale": 1.7380908095743508,
+      "yaw": 4.477976534748277,
+      "position": {
+        "x": -5.659892906957053,
+        "y": 0,
+        "z": -23.701140411242772
+      },
+      "displayedBounds": {
+        "min": {
+          "x": -6.277567391525224,
+          "y": 0,
+          "z": -24.32322877999917
+        },
+        "max": {
+          "x": -5.042218422388881,
+          "y": 2.754873933175346,
+          "z": -23.079052042486374
+        },
+        "supportRadius": 0.7275649844754826
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": -5.651229630531631,
+            "y": 0.008690453853624968,
+            "z": -23.703175930358544
+          },
+          "source": {
+            "assetId": "GF-567",
+            "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+            "anchorId": "root"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": -5.701946301347367,
+            "y": 2.442017537724786,
+            "z": -23.715287200973957
+          },
+          "source": {
+            "assetId": "GF-567",
+            "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+            "anchorId": "seed_head"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "flower-8",
+      "assetId": "GF-567",
+      "sourceSha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+      "scale": 1.5095202170312405,
+      "yaw": 5.399281373512842,
+      "position": {
+        "x": 16.176301545167487,
+        "y": 0,
+        "z": -19.72419006619995
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 15.547850085851309,
+          "y": 0,
+          "z": -20.353361649277524
+        },
+        "max": {
+          "x": 16.804753004483665,
+          "y": 2.392589543994516,
+          "z": -19.095018483122374
+        },
+        "supportRadius": 0.6318853118720092
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 16.17944403130498,
+            "y": 0.007547600916454172,
+            "z": -19.73125126714889
+          },
+          "source": {
+            "assetId": "GF-567",
+            "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+            "anchorId": "root"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 16.144428277529297,
+            "y": 2.120875861741173,
+            "z": -19.702533971786917
+          },
+          "source": {
+            "assetId": "GF-567",
+            "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+            "anchorId": "seed_head"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "onions-0",
+      "assetId": "GF-004",
+      "sourceSha256": "eb9114f7fb2d417778d8abaaa513412d8c21f703ac9133f0c732660fa41d79ee",
+      "scale": 5.4,
+      "yaw": 0.1755262580467388,
+      "position": {
+        "x": 7.1,
+        "y": 0,
+        "z": 3.1999999999999993
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 5.128188917827432,
+          "y": 0,
+          "z": 1.5597853141789735
+        },
+        "max": {
+          "x": 9.071811082172568,
+          "y": 2.3760000000000003,
+          "z": 4.840214685821025
+        },
+        "supportRadius": 2.2221382396102185
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 7.513354875967146,
+            "y": 0.10799999758601189,
+            "z": 5.9510884039979635
+          },
+          "source": {
+            "assetId": "GF-004",
+            "sha256": "eb9114f7fb2d417778d8abaaa513412d8c21f703ac9133f0c732660fa41d79ee",
+            "anchorId": "harvest.001"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "onions-1",
+      "assetId": "GF-004",
+      "sourceSha256": "eb9114f7fb2d417778d8abaaa513412d8c21f703ac9133f0c732660fa41d79ee",
+      "scale": 5.4,
+      "yaw": 0.13090212063398213,
+      "position": {
+        "x": 10.9,
+        "y": 0,
+        "z": 6.8
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 8.975859738487951,
+          "y": 0,
+          "z": 5.228296343139929
+        },
+        "max": {
+          "x": 12.82414026151205,
+          "y": 2.3760000000000003,
+          "z": 8.37170365686007
+        },
+        "supportRadius": 2.2221382396102185
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 11.190219177544416,
+            "y": 0.10799999758601189,
+            "z": 9.566789202140871
+          },
+          "source": {
+            "assetId": "GF-004",
+            "sha256": "eb9114f7fb2d417778d8abaaa513412d8c21f703ac9133f0c732660fa41d79ee",
+            "anchorId": "harvest.001"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "beans-0",
+      "assetId": "GF-033",
+      "sourceSha256": "ad2c0fa5fcaef77c843fc2abb31ad355cedaaaa2dcbbd4ae02b54a15dc797e23",
+      "scale": 6.4,
+      "yaw": 0.1982563300291076,
+      "position": {
+        "x": 16.1,
+        "y": 0,
+        "z": 10.2
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 14.197290866212361,
+          "y": 0,
+          "z": 9.271102134360191
+        },
+        "max": {
+          "x": 18.002709133787643,
+          "y": 3.972736,
+          "z": 11.128897865639807
+        },
+        "supportRadius": 1.9143053279390931
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 16.545820627671006,
+            "y": 2.56247635986656,
+            "z": 12.256699131300097
+          },
+          "source": {
+            "assetId": "GF-033",
+            "sha256": "ad2c0fa5fcaef77c843fc2abb31ad355cedaaaa2dcbbd4ae02b54a15dc797e23",
+            "anchorId": "harvest.001"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "beans-1",
+      "assetId": "GF-033",
+      "sourceSha256": "ad2c0fa5fcaef77c843fc2abb31ad355cedaaaa2dcbbd4ae02b54a15dc797e23",
+      "scale": 6.4,
+      "yaw": 0.06521179934497923,
+      "position": {
+        "x": 19.9,
+        "y": 0,
+        "z": 13.8
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 18.042014206173974,
+          "y": 0,
+          "z": 13.101348952253195
+        },
+        "max": {
+          "x": 21.757985793826023,
+          "y": 3.972736,
+          "z": 14.498651047746806
+        },
+        "supportRadius": 1.9143053279390931
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 20.069054712915936,
+            "y": 2.56247635986656,
+            "z": 15.8976624735139
+          },
+          "source": {
+            "assetId": "GF-033",
+            "sha256": "ad2c0fa5fcaef77c843fc2abb31ad355cedaaaa2dcbbd4ae02b54a15dc797e23",
+            "anchorId": "harvest.001"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "flax-0",
+      "assetId": "GF-031",
+      "sourceSha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+      "scale": 6.4,
+      "yaw": 0.14499482978135347,
+      "position": {
+        "x": 5.1,
+        "y": 0,
+        "z": 16.1
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 3.7141029865992112,
+          "y": 0,
+          "z": 14.885621631986565
+        },
+        "max": {
+          "x": 6.485897013400788,
+          "y": 3.4248320000000003,
+          "z": 17.314378368013436
+        },
+        "supportRadius": 1.6277527946761454
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 5.37741565341719,
+            "y": 1.9218481538817287,
+            "z": 17.999852849093287
+          },
+          "source": {
+            "assetId": "GF-031",
+            "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+            "anchorId": "harvest"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 5.1,
+            "y": 0.0018481250852346422,
+            "z": 16.1
+          },
+          "source": {
+            "assetId": "GF-031",
+            "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+            "anchorId": "root"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "flax-1",
+      "assetId": "GF-031",
+      "sourceSha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+      "scale": 6.4,
+      "yaw": 0.15585676934570072,
+      "position": {
+        "x": 8.9,
+        "y": 0,
+        "z": 16.1
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 7.504911672487258,
+          "y": 0,
+          "z": 14.873920117810817
+        },
+        "max": {
+          "x": 10.295088327512744,
+          "y": 3.4248320000000003,
+          "z": 17.326079882189184
+        },
+        "supportRadius": 1.6277527946761454
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 9.198034969638766,
+            "y": 1.9218481538817287,
+            "z": 17.996727563421057
+          },
+          "source": {
+            "assetId": "GF-031",
+            "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+            "anchorId": "harvest"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 8.9,
+            "y": 0.0018481250852346422,
+            "z": 16.1
+          },
+          "source": {
+            "assetId": "GF-031",
+            "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+            "anchorId": "root"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "flax-2",
+      "assetId": "GF-031",
+      "sourceSha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+      "scale": 6.4,
+      "yaw": 0.2823722289176658,
+      "position": {
+        "x": 5.1,
+        "y": 0,
+        "z": 19.9
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 3.610244387798594,
+          "y": 0,
+          "z": 18.54862580154539
+        },
+        "max": {
+          "x": 6.589755612201405,
+          "y": 3.4248320000000003,
+          "z": 21.251374198454606
+        },
+        "supportRadius": 1.6277527946761454
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 5.634978668944916,
+            "y": 1.9218481538817287,
+            "z": 21.743962612620624
+          },
+          "source": {
+            "assetId": "GF-031",
+            "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+            "anchorId": "harvest"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 5.1,
+            "y": 0.0018481250852346422,
+            "z": 19.9
+          },
+          "source": {
+            "assetId": "GF-031",
+            "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+            "anchorId": "root"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    },
+    {
+      "id": "flax-3",
+      "assetId": "GF-031",
+      "sourceSha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+      "scale": 6.4,
+      "yaw": 0.04708215524442494,
+      "position": {
+        "x": 8.9,
+        "y": 0,
+        "z": 19.9
+      },
+      "displayedBounds": {
+        "min": {
+          "x": 7.604199177302472,
+          "y": 0,
+          "z": 18.79739723020931
+        },
+        "max": {
+          "x": 10.195800822697528,
+          "y": 3.4248320000000003,
+          "z": 21.002602769790688
+        },
+        "supportRadius": 1.6277527946761454
+      },
+      "anchors": [
+        {
+          "position": {
+            "x": 8.990364347475149,
+            "y": 1.9218481538817287,
+            "z": 21.817872409122707
+          },
+          "source": {
+            "assetId": "GF-031",
+            "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+            "anchorId": "harvest"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        },
+        {
+          "position": {
+            "x": 8.9,
+            "y": 0.0018481250852346422,
+            "z": 19.9
+          },
+          "source": {
+            "assetId": "GF-031",
+            "sha256": "35913085b709b52d7b3913b13c509920ca7cec574e9969bb37a59fd1e6613757",
+            "anchorId": "root"
+          },
+          "space": "world",
+          "status": "position resolved; interaction/effect unverified"
+        }
+      ]
+    }
+  ]
+}

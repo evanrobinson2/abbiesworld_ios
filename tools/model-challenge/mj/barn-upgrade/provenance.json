@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "barn-upgrade",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a cozy red timber farm barn with a teal shingled gable roof, a small cupola with a weathervane, big X-braced sliding doors on a rail, a hayloft door with a hoist beam, white trim, a stone foundation, visible plank rhythm and beveled corner posts, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "c5ebf1fb-2488-494c-abc0-756f1401f247",
+      "grid_url": "https://www.midjourney.com/jobs/c5ebf1fb-2488-494c-abc0-756f1401f247?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "75711100-c170-4c0d-b3fc-ed30802505b4",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a cozy red timber farm barn with a teal shingled gable roof, a small cupola with a weathervane, big X-braced sliding doors on a rail, a hayloft door with a hoist beam, white trim, a stone foundation, visible plank rhythm and beveled corner posts, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "93ccfdd6-007c-41ec-8013-f9dabb74c411",
+      "grid_url": "https://www.midjourney.com/jobs/93ccfdd6-007c-41ec-8013-f9dabb74c411?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "6d5e1e98-7f54-4343-ae8f-d94492a476d0",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "c681c2bf6f583215460546c032a12f21af68512da703c0e0985744a9a962be25",
+      "bytes": 3167209,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/75711100-c170-4c0d-b3fc-ed30802505b4/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "9bce5277108c6f5555a7d21c0cc19076e677c822409be494b5e81360778b53de",
+      "bytes": 3485859,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/6d5e1e98-7f54-4343-ae8f-d94492a476d0/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "5adb3171f07f33ebbe701c3edb57e47e6226173b0d28a9deb2418ce52f659964",
+      "bytes": 1070207,
+      "pixels": [
+        938,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 946; side 946 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "7bd275ea6fd5c19c925c4043f72d13d9cc20f8961b35721f5eecf803f86b3923",
+      "bytes": 1251674,
+      "pixels": [
+        987,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 946; side 946 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "003bd72d9e6eefc59af90e0630afa971e97854ea08cd259e83501849b370dfc1",
+      "bytes": 1027401,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 946; side 946 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "All four grid variants drew a gambrel roof on the sheet; hero pick 0 is the only true gable roof. Turnaround pick 1 has the cleanest cream background but its middle (side) view touches a lean-to on the front view, so the split is approximate."
+}

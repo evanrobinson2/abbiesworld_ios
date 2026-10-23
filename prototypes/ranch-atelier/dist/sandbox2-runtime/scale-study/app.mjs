@@ -1,0 +1,61 @@
+import * as T from '../vendor/three.module.js';
+import {OrbitControls} from '../vendor/OrbitControls.js';
+import {GLTFLoader} from '../vendor/loaders/GLTFLoader.js';
+import {population} from './core.mjs';
+import {makePerson,animatePerson,part} from './models.mjs';
+import {startEmote} from './emotes.mjs';
+import {FOOTPRINT,DOOR_Z,SHELF,insideBuilding,OBSTACLES,toWorld,toLocal,findRoute,routeLength,onRoute,hexCenter,hexPolygon,clipSegment} from './space.mjs';
+const $=id=>document.getElementById(id),scene=new T.Scene();scene.background=new T.Color('#dce2d0');
+const renderer=new T.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));renderer.outputColorSpace=T.SRGBColorSpace;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;$('viewport').append(renderer.domElement);
+const camera=new T.PerspectiveCamera(36,1,.1,150),controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.minDistance=3;controls.maxDistance=45;controls.maxPolarAngle=Math.PI*.49;
+scene.add(new T.HemisphereLight('#fff7e5','#839375',2.3));const sun=new T.DirectionalLight('#fff0d7',3.1);sun.position.set(-8,16,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-15,right:15,top:15,bottom:-15,near:.5,far:50});sun.shadow.normalBias=.03;scene.add(sun);
+const box=(g,color,size,p)=>part(g,'box',color,size,p);
+const plot=hexPolygon([0,2],13);
+function surface(points,y,color,depth=0){const shape=new T.Shape();points.forEach((p,i)=>i?shape.lineTo(p[0],-p[1]):shape.moveTo(p[0],-p[1]));shape.closePath();const geo=depth?new T.ExtrudeGeometry(shape,{depth,bevelEnabled:false}):new T.ShapeGeometry(shape);geo.rotateX(-Math.PI/2);const mesh=new T.Mesh(geo,new T.MeshStandardMaterial({color,roughness:.95}));mesh.position.y=y;mesh.receiveShadow=true;scene.add(mesh);return mesh;}
+function strip(z0,z1){let points=plot;for(const [value,sign] of [[z0,1],[z1,-1]]){const out=[];for(let i=0;i<points.length;i++){const a=points[i],b=points[(i+1)%points.length],ina=(a[1]-value)*sign>=0,inb=(b[1]-value)*sign>=0;if(ina)out.push(a);if(ina!==inb){const t=(value-a[1])/(b[1]-a[1]);out.push([a[0]+(b[0]-a[0])*t,value]);}}points=out;}return points;}
+surface(plot,-.18,'#a8b68f',.16);surface(strip(5.6,10.4),-.01,'#c5b99f');surface(strip(4.4,5.6),0,'#e0d7bf');
+for(const x of [-9,9]){part(scene,'cylinder','#887455',[.13,1.7,.13],[x,.85,3.8]);part(scene,'sphere','#7a8e5b',[1,1.3,.9],[x,2.5,3.8]);}
+const shop=new T.Group();scene.add(shop);const floor=surface(FOOTPRINT,-.1,'#e9d9b7',.1);shop.add(floor);const walls=[];
+for(const o of OBSTACLES.filter(o=>o.kind==='wall')){const m=box(shop,'#d0c4a8',[o.w,2.8,o.d],[o.x,1.4,o.z]);m.rotation.y=o.angle;walls.push(m);}
+const lintel=box(shop,'#d0c4a8',[1.2,.6,.2],[0,2.5,DOOR_Z]);walls.push(lintel);
+for(const x of [-.65,.65])box(shop,'#7c886a',[.1,2.2,.28],[x,1.1,DOOR_Z]);box(shop,'#7c886a',[1.4,.1,.28],[0,2.2,DOOR_Z]);
+const roof=surface(FOOTPRINT.map(p=>p.map(n=>n*1.06)),2.85,'#7d8b6d',.25);shop.add(roof);roof.visible=false;
+// Receiving shelf uses the same shared box kit as the town buildings and outfits.
+for(const x of [.95,2.65])box(shop,'#917c59',[.1,1.5,.65],[x,.75,SHELF[1]]);for(const y of [.15,.85,1.4])box(shop,'#b09a71',[1.8,.09,.65],[SHELF[0],y,SHELF[1]]);
+box(shop,'#a98e69',[1.8,.12,.9],[-1.4,1,-.9]);for(const x of [-2.15,-.65])box(shop,'#8e7755',[.12,1,.7],[x,.5,-.9]);
+const fine=new T.Group(),coarse=new T.Group();shop.add(fine);scene.add(coarse);
+function grid(g,boundary,spacing,color,y){const xs=boundary.map(p=>p[0]),zs=boundary.map(p=>p[1]),v=[],seen=new Set(),row=spacing*Math.sqrt(3)/2;
+ for(let r=Math.floor(Math.min(...zs)/row)-1;r<=Math.ceil(Math.max(...zs)/row)+1;r++)for(let q=Math.floor(Math.min(...xs)/spacing-r/2)-1;q<=Math.ceil(Math.max(...xs)/spacing-r/2)+1;q++){
+ const corners=hexPolygon(hexCenter([q,r],spacing),spacing/Math.sqrt(3));for(let i=0;i<6;i++){const seg=clipSegment(corners[i],corners[(i+1)%6],boundary);if(!seg)continue;const key=seg.map(p=>p.map(n=>Math.round(n*1e6)).join(',')).sort().join('|');if(seen.has(key))continue;seen.add(key);for(const p of seg)v.push(p[0],y,p[1]);}}
+ const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(v,3));g.add(new T.LineSegments(geo,new T.LineBasicMaterial({color,transparent:true,opacity:.42})));}
+grid(coarse,plot,1,'#718665',.008);grid(fine,FOOTPRINT,.25,'#a28b61',.018);
+const labels=[];function label(text,pos,local=false){const el=document.createElement('span');el.textContent=text;$('labels').append(el);labels.push({el,pos,local});}
+label('STREET HEXES · 1 m centres',[-4,.03,8]);label('ROOM HEXES · 0.25 m centres',[-.8,.03,.7],true);label('1.20 m clear opening',[0,2.4,DOOR_Z],true);label('Receiving shelf',[3.4,1.8,-2.4],true);label('HEX SHOP · 9 m corner to corner',[0,.1,-4.3],true);
+const rulerGroup=new T.Group();shop.add(rulerGroup);const rulerGeometry=new T.BufferGeometry().setFromPoints([new T.Vector3(-.6,.08,DOOR_Z+.3),new T.Vector3(.6,.08,DOOR_Z+.3)]);rulerGroup.add(new T.Line(rulerGeometry,new T.LineBasicMaterial({color:'#42685a'})));
+const person=population('43','alder').find(p=>p.role==='delivery');person.wardrobe={...person.wardrobe,accessory:'none'};const worker=makePerson(person);const h=new T.Box3().setFromObject(worker).getSize(new T.Vector3()).y;worker.scale.multiplyScalar(1.75/h);scene.add(worker);
+const clerk=makePerson(population('43','alder').find(p=>p.role==='grocer'));clerk.position.set(-1.4,0,-2);shop.add(clerk);
+let angle=0,offset=0,path,length,distance=0,last=0,hold=0,paused=false,follow=false,delivered=false,parcel,carriedScale,transferStart,ready=false;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');if(reduced.matches){paused=true;$('pause').textContent='Resume';}
+let routeLine;function updateRoute(){path=findRoute(angle,offset);length=routeLength(path);if(routeLine){scene.remove(routeLine);routeLine.geometry.dispose();routeLine.material.dispose();}const geo=new T.BufferGeometry().setFromPoints(path.map(p=>new T.Vector3(p[0],.04,p[1])));routeLine=new T.Line(geo,new T.LineDashedMaterial({color:'#537c73',dashSize:.25,gapSize:.13}));routeLine.computeLineDistances();routeLine.visible=$('route').checked;scene.add(routeLine);restart();}
+function restart(){distance=0;hold=0;delivered=false;transferStart=null;worker.userData.emote=null;if(parcel){worker.userData.limbs[2].add(parcel);parcel.position.set(.02,-.34,.14);parcel.quaternion.identity();parcel.scale.copy(carriedScale);}const s=onRoute(path,0);worker.position.set(s.position[0],0,s.position[1]);worker.rotation.y=s.heading;}
+function view(id){follow=false;$('follow').setAttribute('aria-pressed','false');if(id==='plan'){camera.position.set(0,28,2.01);controls.target.set(0,0,2);}else if(id==='door'){const p=toWorld([0,DOOR_Z],angle,offset);camera.position.set(p[0]+4,4,p[1]+6);controls.target.set(p[0],1,p[1]);}else{camera.position.set(18,22,30);controls.target.set(0,.3,2.1);}controls.update();}
+new ResizeObserver(()=>{const r=$('viewport').getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();}).observe($('viewport'));
+function cutaway(){for(const m of walls){if(m===lintel){m.visible=!$('cutaway').checked;continue;}m.scale.y=$('cutaway').checked?.55:2.8;m.position.y=$('cutaway').checked?.275:1.4;}}
+$('roof').onchange=()=>roof.visible=$('roof').checked;$('cutaway').onchange=cutaway;$('grid').onchange=()=>fine.visible=coarse.visible=$('grid').checked;$('route').onchange=()=>routeLine.visible=$('route').checked;
+$('measure').onchange=()=>{rulerGroup.visible=$('measure').checked;for(const l of labels)l.el.hidden=!$('measure').checked;};
+$('pause').onclick=()=>{paused=!paused;$('pause').textContent=paused?'Resume':'Pause';};$('replay').onclick=()=>{restart();paused=false;$('pause').textContent='Pause';};$('follow').onclick=()=>{follow=!follow;$('follow').setAttribute('aria-pressed',String(follow));};
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>view(b.dataset.view));
+function transform(){angle=Number($('rotation').value);offset=Number($('offset').value);shop.rotation.y=angle*Math.PI/180;shop.position.x=offset;$('offset-label').textContent=offset+' m';shop.updateMatrixWorld(true);updateRoute();}
+$('rotation').onchange=transform;$('offset').oninput=transform;
+const loader=new GLTFLoader();async function asset(id,width,parent,pos){const model=(await loader.loadAsync(`/domestic-assets/${id}.glb`)).scene;const b=new T.Box3().setFromObject(model),size=b.getSize(new T.Vector3()),center=b.getCenter(new T.Vector3()),wrapper=new T.Group();model.position.set(-center.x,-b.min.y,-center.z);wrapper.add(model);wrapper.scale.setScalar(width/size.x);wrapper.position.set(...pos);wrapper.traverse(o=>{if(o.isMesh)o.castShadow=o.receiveShadow=true;});parent.add(wrapper);return wrapper;}
+async function load(){try{await asset('GF-194',1.75,shop,[-1.8,0,1]);await asset('BA-0012',1.5,scene,[-6,0,4.8]);parcel=await asset('GF-025',.38,worker.userData.limbs[2],[.02,-.34,.14]);carriedScale=parcel.scale.clone();ready=true;restart();$('asset-status').textContent='Existing assets: town residents, GF-194 bench, BA-0012 selling table, GF-025 carrying crate. Shop shell and shelf use the shared building kit.';}catch(e){$('asset-status').textContent='An existing asset could not load. Reload to try again.';$('activity').textContent='Waiting for the asset library';console.error(e);}}
+function frame(now){const dt=Math.min(.05,(now-last)/1000||0);last=now;if(!document.hidden){const was=distance;if(!paused&&ready){if(distance<length)distance=Math.min(length,distance+dt*.95);else hold+=dt;}const state=onRoute(path,distance);worker.position.x=state.position[0];worker.position.z=state.position[1];const delta=Math.atan2(Math.sin(state.heading-worker.rotation.y),Math.cos(state.heading-worker.rotation.y));if(!paused)worker.rotation.y+=delta*(1-Math.exp(-dt*12));animatePerson(worker,{phase:distance<length?'travel':'work'},distance-was,dt,paused||!ready);animatePerson(clerk,{phase:'work'},0,dt,paused||!ready);
+ if(ready&&hold>1&&!transferStart){scene.attach(parcel);transferStart={position:parcel.position.clone(),rotation:parcel.quaternion.clone()};startEmote(worker,'nod',.7);}
+ if(transferStart&&!delivered){const target=toWorld(SHELF,angle,offset),t=Math.min(1,Math.max(0,(hold-1)/1.2)),ease=t*t*(3-2*t);parcel.position.lerpVectors(transferStart.position,new T.Vector3(target[0],.9,target[1]),ease);parcel.quaternion.slerpQuaternions(transferStart.rotation,new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),angle*Math.PI/180),ease);if(t===1)delivered=true;}
+ const local=toLocal(state.position,angle,offset),inside=insideBuilding(local),threshold=Math.abs(local[0])<.6&&Math.abs(local[1]-DOOR_Z)<.4;
+ if(ready)$('activity').textContent=delivered?'Delivered to the receiving shelf':hold>0?'Handing over the crate':threshold?'Crossing the same-space doorway':inside?'Inside · walking to the shelf':'Outside · approaching the shop';
+ $('position').textContent=`World x ${state.position[0].toFixed(2)} m · z ${state.position[1].toFixed(2)} m  /  ${distance.toFixed(1)} of ${length.toFixed(1)} m walked`;
+ if(follow){const target=new T.Vector3(worker.position.x,1,worker.position.z),shift=target.clone().sub(controls.target).multiplyScalar(1-Math.exp(-dt*5));controls.target.add(shift);camera.position.add(shift);}controls.update();renderer.render(scene,camera);
+ for(const l of labels){const p=new T.Vector3(...l.pos);if(l.local)shop.localToWorld(p);p.project(camera);l.el.hidden=!$('measure').checked||Math.abs(p.x)>1||Math.abs(p.y)>1||p.z>1;l.el.style.left=(p.x+1)*$('viewport').clientWidth/2+'px';l.el.style.top=(1-p.y)*$('viewport').clientHeight/2+'px';}
+ renderer.domElement.dataset.grid="hex";renderer.domElement.dataset.building="hex";renderer.domElement.dataset.location=inside?'inside':'outside';renderer.domElement.dataset.delivered=String(delivered);renderer.domElement.dataset.rotation=String(angle);renderer.domElement.dataset.workerScale=worker.scale.toArray().join(',');}requestAnimationFrame(frame);}
+updateRoute();cutaway();view('whole');load();requestAnimationFrame(frame);

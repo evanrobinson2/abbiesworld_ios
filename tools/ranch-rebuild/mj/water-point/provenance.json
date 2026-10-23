@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "water-point",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/water-point-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "a8ce3f24-49e9-45b1-bb0d-80a7fe39e008",
+      "grid_url": "https://www.midjourney.com/jobs/a8ce3f24-49e9-45b1-bb0d-80a7fe39e008?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "6d198b27-839a-440d-a564-3affc98e2974",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:44:41.619Z",
+      "grid_done_at": "2026-10-22T20:44:59.622Z",
+      "upscale_clicked_at": "2026-10-22T20:45:14.560Z",
+      "downloaded_at": "2026-10-22T20:46:26.625Z",
+      "pick_reason": "only variant with a square stone cistern, plus pump, canopy on four posts and bucket"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a shared village water point, a square stone cistern basin with a timber rim full of clear blue water, a cast-iron hand pump with a long lever and spout, a small teal shingled canopy on four timber posts, a wooden bucket on the rim, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "9be01af3-3dde-4cbf-aadb-0310938a7589",
+      "grid_url": "https://www.midjourney.com/jobs/9be01af3-3dde-4cbf-aadb-0310938a7589?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "a6b62a67-62c6-47cc-a3da-9eea99e927b4",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:46:36.253Z",
+      "grid_done_at": "2026-10-22T20:46:54.256Z",
+      "upscale_clicked_at": "2026-10-22T20:47:04.356Z",
+      "downloaded_at": "2026-10-22T20:48:25.682Z",
+      "pick_reason": "three views of one consistent square cistern with pump and canopy; other sheets mixed different wells"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "39e287ac8777313dff676b3837e91d5b98de21539275eee726d3ac5a4b1f258a",
+      "bytes": 2313496,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/6d198b27-839a-440d-a564-3affc98e2974/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "9ccb04a298a1aa1e9b85e510488e35f6858019e01cd30a5b099ba5fa60a4ff5b",
+      "bytes": 2654518,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/a6b62a67-62c6-47cc-a3da-9eea99e927b4/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "76d1e3a5016b1b212f856093787bad5f401261aebd7220e669674ba58d3cb12e",
+      "bytes": 1088309,
+      "pixels": [
+        1214,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-point [('front', 120, 1334), ('side', 1334, 1938), ('back', 1938, 2832)]"
+    },
+    "view_side.png": {
+      "sha256": "ffb76d0b78dc6b4efd3b0af22b023240f87cd494ba32c69cad1e9e27947f3ed2",
+      "bytes": 527540,
+      "pixels": [
+        604,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-point [('front', 120, 1334), ('side', 1334, 1938), ('back', 1938, 2832)]"
+    },
+    "view_back.png": {
+      "sha256": "fe94e2a995d5fb56f6fe62ea312741091716399242b62e97b71a3c62e11732d7",
+      "bytes": 984116,
+      "pixels": [
+        894,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/water-point [('front', 120, 1334), ('side', 1334, 1938), ('back', 1938, 2832)]"
+    }
+  }
+}

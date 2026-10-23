@@ -1,0 +1,53 @@
+{
+  "id": "aw.ranch.asset.ba-0055",
+  "name": "Leather strap seller display",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 34,
+    "triangles": 2820,
+    "bounds_min": [
+      -0.3374999761581421,
+      -0.22750000655651093,
+      0.0
+    ],
+    "bounds_max": [
+      0.3374999761581421,
+      0.22750000655651093,
+      0.10999999940395355
+    ],
+    "dimensions_m": [
+      0.675,
+      0.455,
+      0.11
+    ],
+    "material_slots": [
+      "Leather",
+      "Stone",
+      "Timber",
+      "Rope",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 5
+  },
+  "materials": [
+    "Leather",
+    "Stone",
+    "Timber",
+    "Rope",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Piercings are dark surface insets rather than through-holes.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0055",
+  "intent": "Cut straps, tied bundles, and a pierced sample strip.",
+  "family": "Craft displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0055",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

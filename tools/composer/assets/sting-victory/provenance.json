@@ -1,0 +1,219 @@
+{
+ "id": "sting-victory",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "7f22936856addc0b3b6b57be4ece67b93441210d8ce7a7ee79c94a3cbbddde50"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "3032c5b1686c9aa67f438de60ecc5ec98d00c663f8b7b063559691b3feff3403"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "46da5320729e19ae9c1bec0a1f7e51f9774ad1a1811c02bccdb7c10cafae734d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "26995696161b52ac326ed4efec597386a3c9f416eb5ecb90e4cf285d5c40b1f8"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "ed9ce6d2cc42d6b52154836b5d63f125ab0128ee0fe56086ced631d1d006120f"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "799794da0eb0cc42abf0e3aabb965494c7ca81073ca8f1aaa9bb08da82d75cfa"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "52c63a50a2e2f00b4a5df8f154c77adb4d59fd285b70ab82a258e66c2026b993"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "15cf3cbde00a5b136297fdcfd52c1426c02ddc384209964dd3ec452a6170b7df"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "950c885b3ba26eac5f88521a808e39adb8a7c6d8b4b712d74f0c8abeba1b7cc0"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "0d455fdb5a1903c95a1a001df741cd77882af51c6d7c98214da0b98d7d62c6f6"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "8930941cfd8165c8252b29fe8944479c1c4f473e84826d8cdcf6231980764f1e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "2dc840b0209c3b7068aa4a0db48e72a140a96058877a67b20b480a643d790968"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "27cc09280edaa1a6d6082ec4296968d7f586d9b1e0e352ea2651a882137b36a9"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "b4e3ed777def54c40186f600028376cd360bfe00309657f4720f7941528a9bb7"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "908ac52900cac190192bf2235dbb75fa6e03cbf19678c13258badbdca8387e1a"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "e36ba57d206e972af96be4733fc015b13558a66a5e417b776d4660b05299708a"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "27cc09280edaa1a6d6082ec4296968d7f586d9b1e0e352ea2651a882137b36a9"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "b4e3ed777def54c40186f600028376cd360bfe00309657f4720f7941528a9bb7"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "908ac52900cac190192bf2235dbb75fa6e03cbf19678c13258badbdca8387e1a"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "e36ba57d206e972af96be4733fc015b13558a66a5e417b776d4660b05299708a"
+  }
+ ],
+ "title": "Victory",
+ "kind": "sting",
+ "brief": "Brass fanfare on Abbie's motif over timpani and a full orchestra hit.",
+ "uses": [
+  "winning",
+  "quest complete",
+  "big achievement"
+ ],
+ "tags": [
+  "sting",
+  "victory",
+  "fanfare",
+  "brass"
+ ],
+ "score": "tools/composer/cues/stings.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/stings.py",
+  "bpm": 112,
+  "meter": "4/4",
+  "key": "E major",
+  "bars": 2,
+  "instruments": [
+   "bass",
+   "cellos",
+   "glock",
+   "horn",
+   "timpani",
+   "timpani_roll",
+   "trumpet",
+   "trumpet_stac",
+   "violas",
+   "violins",
+   "violins_spic"
+  ],
+  "percussion": [
+   "crash",
+   "triangle"
+  ],
+  "hall_seconds": 2.4,
+  "target_lufs": -16.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "D": {
+   "audio": "/music/composer/sting-victory.D.mp3",
+   "sha256": "27cc09280edaa1a6d6082ec4296968d7f586d9b1e0e352ea2651a882137b36a9",
+   "bytes": 124245,
+   "duration": 5.728,
+   "loudness": -16.0,
+   "peak": -3.7,
+   "loopPoints": null,
+   "stems": []
+  },
+  "G": {
+   "audio": "/music/composer/sting-victory.G.mp3",
+   "sha256": "b4e3ed777def54c40186f600028376cd360bfe00309657f4720f7941528a9bb7",
+   "bytes": 125037,
+   "duration": 5.712,
+   "loudness": -16.0,
+   "peak": -3.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "Bb": {
+   "audio": "/music/composer/sting-victory.Bb.mp3",
+   "sha256": "908ac52900cac190192bf2235dbb75fa6e03cbf19678c13258badbdca8387e1a",
+   "bytes": 118557,
+   "duration": 5.389,
+   "loudness": -16.0,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "E": {
+   "audio": "/music/composer/sting-victory.E.mp3",
+   "sha256": "e36ba57d206e972af96be4733fc015b13558a66a5e417b776d4660b05299708a",
+   "bytes": 119325,
+   "duration": 5.407,
+   "loudness": -16.0,
+   "peak": -3.0,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}

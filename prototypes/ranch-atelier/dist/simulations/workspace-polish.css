@@ -1,0 +1,69 @@
+/* Shared shell: one optical grid, explicit state, left navigation / right tools. */
+body.simulation-workspace>header.grouped-toolbar{align-items:center!important;gap:6px!important;padding:4px 8px!important;min-height:52px!important}
+body.simulation-workspace>header.grouped-toolbar #compact-scene-title{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;border:0!important;box-shadow:none!important;background:transparent!important;border-radius:6px!important;height:44px!important;padding:6px 8px!important;flex:1 1 220px!important;width:auto!important;max-width:360px!important;min-width:80px!important;font:600 16px var(--app-heading,Georgia)!important;color:var(--app-ink)!important}
+#compact-scene-title span:first-child{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#compact-scene-title span:last-child{align-self:center;font:16px system-ui!important;line-height:1!important;flex:none}
+body.simulation-workspace>header.grouped-toolbar>.live-status,body.simulation-workspace #library-open{display:none!important}
+body.simulation-workspace>header.grouped-toolbar #scene-dropper-toggle{width:44px!important;height:44px!important;min-width:44px!important;border:0!important;border-radius:8px!important;box-shadow:none!important}
+body.simulation-workspace>header.grouped-toolbar #scene-dropper-toggle[aria-pressed=true]{background:#e3e9df!important;color:#35523e!important;box-shadow:inset 0 -3px #49634c!important}
+#scene-dropper-toggle svg{width:24px!important;height:24px!important}
+#saved-scenes{inset:0 auto 0 0!important;border-left:0!important;border-right:1px solid var(--app-border)!important;width:min(360px,90vw)!important;padding:16px!important}
+#saved-scenes .saved-heading{top:-16px!important}.saved-heading h2{font-size:18px!important}
+#saved-scenes .saved-row{align-items:center;grid-template-columns:36px minmax(0,1fr)!important;gap:6px!important}#saved-scenes .saved-toolbar{align-items:center!important;gap:8px}
+#saved-scenes .saved-scope{margin-top:20px}#saved-status:empty{display:none}
+#scene-tools-drawer{position:fixed;right:12px;top:76px;bottom:12px;width:min(304px,calc(100vw - 96px));overflow:auto;overscroll-behavior:contain;box-sizing:border-box;padding:12px;background:var(--app-paper,#fff9ed);border:1px solid var(--app-border);border-radius:12px;z-index:34;color:var(--app-ink);font:13px var(--app-font,system-ui)}
+body.scene-dropper-hidden #scene-tools-drawer{display:none!important}.tile-tools-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.tile-tools-heading strong{font:600 17px var(--app-heading,Georgia)}.tile-tools-heading button{border:0;background:transparent;min-width:40px;min-height:40px;font-size:24px;color:inherit}
+#scene-tools-drawer #current-scene-type{position:static!important;inset:auto!important;transform:none!important;width:100%!important;height:auto!important;max-height:none!important;display:block!important;margin:0 0 12px!important}
+#scene-tools-drawer .generator-carousel-arrow{display:none!important}#scene-tools-drawer .generator-hero-track{display:grid;grid-template-columns:1fr 1fr;gap:6px;overflow:visible}
+#scene-tools-drawer #current-scene-type .generator-hero{display:flex;align-items:center;gap:7px;min-height:48px;height:48px;width:100%;padding:8px;border:1px solid var(--app-border);border-radius:8px;box-shadow:none;touch-action:none}
+#scene-tools-drawer .generator-hero-art,#scene-tools-drawer .generator-hero:has(.live-tray-canvas) .generator-hero-art{flex:0 0 23px!important;width:23px!important;height:23px!important;visibility:visible!important}#scene-tools-drawer .generator-hero-art svg{width:23px;height:23px}#scene-tools-drawer .generator-hero-name{font:600 12px/1.2 var(--app-font,system-ui)}
+#scene-tools-drawer #current-scene-type .generator-hero[aria-pressed=true]{background:#e3e9df!important;color:#35523e!important;border-color:#70866f!important;box-shadow:inset 0 -2px #70866f!important}
+#scene-tools-drawer #panel,#scene-tools-drawer #tile-chooser:not([hidden]){position:static!important;inset:auto!important;transform:none!important;width:100%!important;min-width:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;display:grid!important;grid-template-columns:44px minmax(0,1fr) 44px!important;gap:10px!important;overflow:visible!important}
+body[data-tile-tray=open] #scene-tools-drawer #panel{display:none!important}#scene-tools-drawer #tile-chooser-toggle{display:none!important}
+#scene-tools-drawer #tile-chooser .placement-facet{grid-column:1!important;grid-row:1!important}#scene-tools-drawer #tile-chooser .placement-advanced{grid-column:3!important;grid-row:1!important}#scene-tools-drawer #tile-chooser .placement-axes{grid-column:1/-1!important;grid-row:2!important;display:grid;grid-template-columns:1fr;gap:12px}
+#scene-tools-drawer #tile-chooser .placement-axes label{min-height:36px}#scene-tools-drawer #tile-chooser .tile-preview-status{grid-column:1/-1!important;grid-row:4!important;white-space:normal;max-height:none;font-size:12px;line-height:1.4}
+#scene-tools-drawer #tile-chooser .tile-expand-heading{display:none!important}#scene-tools-drawer #tile-chooser .tile-options{grid-column:2!important;grid-row:1!important;width:auto!important}#scene-tools-drawer #tile-chooser>.add-tile{grid-column:2!important;grid-row:3!important}
+#scene-tools-drawer #tile-chooser .placement-details{position:static!important;grid-column:1/-1!important;width:100%!important;max-height:none!important;box-sizing:border-box}
+body.simulation-workspace #inspection{top:76px!important;bottom:12px!important;left:auto!important;right:12px!important;width:min(304px,calc(100vw - 72px))!important;max-width:none!important;max-height:calc(100dvh - 88px)!important;overflow:auto!important;z-index:38!important}
+@media(max-width:760px){body.simulation-workspace>header.grouped-toolbar #compact-scene-title{font-size:14px!important;max-width:none!important;min-width:60px!important;padding:6px 4px!important}body.simulation-workspace>header.grouped-toolbar{gap:2px!important;padding:3px!important}#scene-tools-drawer{right:8px;top:66px;bottom:8px;padding:10px}body.simulation-workspace #inspection{right:8px!important;top:66px!important;bottom:8px!important;max-height:calc(100dvh - 74px)!important}}
+
+body:not([data-family=ranch]) #scene-tools-drawer,body:has(#world-navigation)[data-family=ranch] #scene-tools-drawer{display:none!important}
+
+/* Keep the title at the left; do not inherit the former right-aligned toolbar. */
+body.simulation-workspace>header.grouped-toolbar{left:12px!important;right:12px!important;top:12px!important;width:auto!important;max-width:none!important;margin:0!important;transform:none!important}
+body.simulation-workspace>header.grouped-toolbar #compact-scene-title{max-width:none!important;margin-right:auto!important}
+#scene-tools-drawer{bottom:auto!important;max-height:calc(100dvh - 88px);overflow-x:hidden}
+.scene-world-settings{border-top:1px solid var(--app-border);padding-top:8px;margin-top:8px}.scene-world-settings>summary{display:flex;align-items:center;min-height:40px;cursor:pointer;font-weight:600}.scene-world-settings>summary:after{content:'⌄';margin-left:auto}.scene-world-settings[open]>summary:after{content:'⌃'}
+body[data-tile-tray=open] .scene-world-settings{display:none!important}
+#scene-tools-drawer .scene-world-settings:not([open])>*:not(summary){display:none!important}
+#scene-tools-drawer .scene-world-settings #panel{height:auto!important;min-height:0!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;align-items:start!important;justify-content:stretch!important;padding:8px 0!important}
+#scene-tools-drawer #panel :is(#configuration,#configuration-slot,.sliders,.profiles){position:static!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-column:1!important;grid-row:auto!important;width:100%!important;min-width:0!important;max-width:100%!important;gap:8px!important}
+#scene-tools-drawer #panel :is(#shape-open,#advanced-open){grid-column:1!important;grid-row:auto!important;width:44px!important;justify-self:start!important}
+#scene-tools-drawer #panel .sliders label{position:static!important;display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important;width:100%!important}
+#scene-tools-drawer #panel .sliders input{position:static!important;display:block!important;flex:1!important;width:80px!important;min-width:40px!important;max-width:100%!important}
+#scene-tools-drawer #scene-readouts{position:static!important;display:flex!important;flex-wrap:wrap!important;inset:auto!important;width:100%!important;max-width:100%!important;max-height:none!important;margin:8px 0 0!important;padding:8px 0!important;border:0!important;border-top:1px solid var(--app-border)!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;gap:8px!important}
+#scene-tools-drawer #scene-readouts :is(.live-status,#site-warning){display:none!important}
+body:has(#inspection:not([hidden]):not(.world-anchored)) #scene-tools-drawer{visibility:hidden}
+@media(max-width:760px){body.simulation-workspace>header.grouped-toolbar{left:6px!important;right:6px!important;top:6px!important}#scene-tools-drawer{max-height:calc(100dvh - 74px)}}
+
+#scene-tools-drawer #current-scene-type .generator-hero .live-tray-canvas{display:none!important}
+#scene-tools-drawer #tile-chooser .tile-options{grid-column:1/-1!important;grid-row:3!important;display:flex!important;justify-content:center;width:100%!important}
+#scene-tools-drawer #tile-chooser .tile-options button{width:100%!important;flex:1!important;height:112px!important;min-height:112px!important;max-width:100%!important;padding:0!important;overflow:hidden!important}
+#scene-tools-drawer #tile-chooser .tile-options button[hidden]{display:none!important}
+#scene-tools-drawer #tile-chooser .tile-preview-status{display:block!important;font-size:11px!important}
+
+#scene-tools-drawer #tile-chooser:not([hidden]){height:auto!important;min-height:0!important}
+
+#scene-tools-drawer #tile-chooser .print-tile{grid-column:1/-1;grid-row:4;min-height:44px;background:var(--app-accent);color:var(--app-paper);border-radius:8px;font:600 14px var(--app-font)}
+#scene-tools-drawer #tile-chooser .tile-preview-status{grid-row:5!important}#scene-tools-drawer .tile-options button:disabled{cursor:wait;opacity:.65}
+/* A single aligned label/icon row, independent of font baseline metrics. */
+body.simulation-workspace>header.grouped-toolbar #compact-scene-title{line-height:1.2!important;flex-basis:180px!important}
+#compact-scene-title span:last-child{display:flex;align-items:center;justify-content:center;width:18px;height:18px}#compact-scene-title svg{display:block;flex:none;width:18px;height:18px}#compact-scene-title[aria-expanded=true] svg{transform:rotate(180deg)}
+/* Glass belongs to the control layer; tile content remains opaque and crisp. */
+html[data-app-style-name="Cartoon Pop"] body.simulation-workspace :is(header.grouped-toolbar,#scene-tools-drawer,#inspection,#compact-controls,#saved-scenes){background:rgba(255,250,244,.83)!important;border:1px solid rgba(255,255,255,.85)!important;box-shadow:inset 0 1px 0 #ffffff,inset 0 -1px 0 #aacbd844,0 8px 30px #18395426!important;border-radius:18px!important;color:#253444!important}
+@supports(backdrop-filter:blur(18px)){
+html[data-app-style-name="Cartoon Pop"] body.simulation-workspace :is(header.grouped-toolbar,#scene-tools-drawer,#inspection,#compact-controls,#saved-scenes){background:linear-gradient(145deg,rgba(255,255,255,.84),rgba(248,253,255,.66) 45%,rgba(255,243,230,.8))!important;backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4)}
+}
+html[data-app-style-name="Cartoon Pop"] #scene-tools-drawer #current-scene-type .generator-hero[aria-pressed=true]{background:#fbe0ef!important;border-color:#b52b72!important;color:#80214f!important;box-shadow:inset 0 -2px #b52b72!important}
+html[data-app-style-name="Cartoon Pop"] #saved-scenes .saved-heading{background:transparent}
+html[data-app-style-name="Cartoon Pop"] #scene-tools-drawer .generator-hero{background:#ffffffb8!important}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){html[data-app-style-name="Cartoon Pop"] body.simulation-workspace :is(header.grouped-toolbar,#scene-tools-drawer,#inspection,#compact-controls,#saved-scenes){background:#fff9ef!important;backdrop-filter:none;-webkit-backdrop-filter:none}}

@@ -1,0 +1,40 @@
+{
+ "id": "atelier/log-pile",
+ "label": "Log pile",
+ "kind": "prop",
+ "origin": "original",
+ "author": "Claude (Anthropic), Claude Code cloud session, for Evan",
+ "tool": "Blender 5.2.3 LTS (bpy module), Python 3.13.16",
+ "prompt": "Rebuild the Ranch Atelier original pack from its write-up: thirteen trees, bushes, rocks and yard props (two oaks, a birch, two firs, two bushes, two boulders, a stump, a log pile, a rain barrel and a crate stack), made from scratch in Blender by a script. Sizes and shapes follow what was measured in Northgard: simple cheap shapes, low full crowns that come almost to the ground, flat boulders about half as tall as wide, and one model repainted per land (meadow, autumn, frost; firs stay green in autumn). Nothing copied. Keep provenance for every model.",
+ "date": "2026-10-22",
+ "script": "prototypes/ranch-atelier/dist/scripts/atelier-pack/build_pack.py",
+ "scriptSha256": "f10b6f16e0e9b1df7ce2bbcc26ec2e5353ce69f553d7868885f53bab4fbf1322",
+ "referenceStudied": "Northgard (Shiro Games), studied for proportion and paint strategy only, via the measurements recorded on the Original Pack page (https://claude.ai/artifact/6aQ47M8cnig6tW8gAxDqsR). No Northgard meshes, textures, screenshots or other files were used as input.",
+ "inputs": [],
+ "randomSeed": 20261022,
+ "glb": "/simulation-assets/atelier/log-pile.glb",
+ "glbSha256": "f279fdf98aa270827c650cd8205fa58537c973ef54c8c9fa69f3159cccd72c73",
+ "triangles": 568,
+ "dimensionsMetres": {
+  "x": 1.602,
+  "y": 0.947,
+  "z": 0.708
+ },
+ "gameHeightMetres": 0.76,
+ "paintSets": [
+  "meadow",
+  "autumn",
+  "frost"
+ ],
+ "materials": [
+  "bark",
+  "wood",
+  "wood-cut"
+ ],
+ "build": {
+  "wallSeconds": 0.117,
+  "cpuSeconds": 0.262,
+  "exit": 0,
+  "host": "Linux-6.18.44-fc-v140-x86_64-with-glibc2.39"
+ }
+}

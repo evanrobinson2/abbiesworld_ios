@@ -1,0 +1,29 @@
+/* Live voice settings. Colours come from the shared app tokens in app-style.css. */
+.lv{max-width:760px}
+.mbar-link{margin-left:auto;color:var(--app-ink);font-weight:800;font-size:14px;text-decoration:none}
+.lv-card{background:var(--app-paper);border:1px solid var(--app-border);border-radius:var(--app-radius,16px);padding:16px;display:grid;gap:12px}
+.lv-card h2{margin:0;font-size:18px}
+.lv-note{margin:0;color:var(--app-muted);font-size:13px}
+.lv-choices{display:grid;gap:10px}.lv-choices.two{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.lv-choices button,.lv-voices button{display:grid;gap:4px;text-align:left;padding:12px 14px;min-height:44px;border:1.5px solid var(--app-border);border-radius:14px;background:var(--app-canvas);color:var(--app-ink);font:inherit;cursor:pointer}
+.lv-choices button span,.lv-voices button small{color:var(--app-muted);font-size:13px}
+.lv-choices button[aria-checked=true],.lv-voices button[aria-checked=true]{border-color:var(--app-accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--app-accent) 35%,transparent)}
+.lv-voices{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.lv-voices .voice{position:relative;padding-right:48px}
+.lv-voices .play{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;min-height:0;padding:0;border-radius:50%;display:grid;place-items:center;background:var(--app-accent);color:var(--app-on-accent);border:0}
+.lv-row{display:grid;gap:8px;font-weight:700}
+.lv-row input[type=range]{width:100%;accent-color:var(--app-accent)}
+.lv-row output{font-weight:600;color:var(--app-muted);margin-left:6px}
+.lv-seg{display:flex;flex-wrap:wrap;gap:6px}
+.lv-seg button{flex:1 1 auto;min-height:44px;padding:8px 14px;border:1.5px solid var(--app-border);border-radius:999px;background:var(--app-canvas);color:var(--app-ink);font:inherit;font-weight:700;cursor:pointer}
+.lv-seg button[aria-checked=true]{background:var(--app-ink);border-color:var(--app-ink);color:var(--app-paper)}
+.lv-switch{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:700}
+.lv-switch input{width:22px;height:22px;accent-color:var(--app-accent)}
+.lv-locked ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.lv-locked{background:color-mix(in srgb,var(--app-paper) 85%,var(--app-border))}
+.lv-actions{display:flex;justify-content:space-between;gap:10px}
+.lv-actions button,.lv-primary{min-height:44px;padding:10px 18px;border-radius:14px;border:1px solid var(--app-border);background:var(--app-paper);color:var(--app-ink);font:inherit;font-weight:800;text-decoration:none;display:inline-flex;align-items:center}
+.lv-primary{background:var(--app-accent);color:var(--app-on-accent);border-color:transparent}
+#toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);padding:10px 16px;border-radius:14px;background:var(--app-ink);color:var(--app-paper);font-weight:700}
+@media (max-width:520px){.lv-seg button{flex:1 1 40%}}
+.lv-voices[hidden],#toast[hidden]{display:none}

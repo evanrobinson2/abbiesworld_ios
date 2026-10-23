@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.1.0",
+  "id": "WW-004",
+  "name": "Ventilated timber seasoning rack",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "working-woodland",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Hold timber above the ground with open air gaps and a small rain cover.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/working-woodland/ww-004",
+  "biome": "working-woodland",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 41,
+    "triangles": 1276,
+    "bounds_min": [
+      -1.3949999809265137,
+      -0.6471078991889954,
+      0.0
+    ],
+    "bounds_max": [
+      1.3949999809265137,
+      0.6471078991889954,
+      2.1170222759246826
+    ],
+    "dimensions_m": [
+      2.79,
+      1.29422,
+      2.11702
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "timber-seasoning",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "load",
+      "inspect",
+      "unload",
+      "repair"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "load",
+        "position_blender_m": [
+          0.0,
+          -0.8999999761581421,
+          0.019999995827674866
+        ],
+        "role": "load"
+      },
+      {
+        "id": "shelf-high",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          1.6200000047683716
+        ],
+        "role": "shelf-high"
+      },
+      {
+        "id": "shelf-low",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.42000001668930054
+        ],
+        "role": "shelf-low"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "garden work paths",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "empty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "loaded",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "seasoning",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "ready",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "damaged",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "repaired",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Hold timber above the ground with open air gaps and a small rain cover. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See rack(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "working-woodland/batch_woodland.py",
+    "entry_point": "rack",
+    "source_sha256": "56d872cea517e070d7f26f1a8e68d8dece3082a0992630ac46cfed46e52273b1",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- working-woodland batch_woodland.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable silhouette and material separation in rendered contact-sheet inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable silhouette and material separation in rendered contact-sheet inspection"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "WW-004.glb",
+    "sha256": "49d4aff40cf05e25e33d645b3ec11321ae73333354257cfa8f2ee739c41da518",
+    "bytes": 74816
+  }
+}

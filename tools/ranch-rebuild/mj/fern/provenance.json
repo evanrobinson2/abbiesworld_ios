@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "fern",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/WW-046.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a woodland fern clump with arching feathery fronds, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "92fc3655-be81-469e-8e68-39213c4302ba",
+      "grid_url": "https://www.midjourney.com/jobs/92fc3655-be81-469e-8e68-39213c4302ba?index=3",
+      "picked_index": 3,
+      "upscale_job_id": "934cc6e3-69ca-4a17-86ae-04b78ec37689",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:58:37.065Z",
+      "grid_done_at": "2026-10-22T23:58:55.071Z",
+      "upscale_clicked_at": "2026-10-22T23:59:04.889Z",
+      "downloaded_at": "2026-10-23T00:00:13.610Z",
+      "pick_reason": "clump of arching feathery fronds with margin all round"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "8b00bb3d2bb8a2e4b6d343ab76d51ad7bbca72dc4d4fe0b8b54862eae36402a1",
+      "bytes": 3252345,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/934cc6e3-69ca-4a17-86ae-04b78ec37689/0_0.png"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "scene": "fritigern/scene-01-the-wagon",
+  "created": "2026-10-22",
+  "requested_by": "Evan",
+  "made_by": "Claude (Claude Code cloud session, project thread 'Fritigern wagon scene')",
+  "method": "Procedural, generated at load time by paper.js and props.js, plus one imported model: the Intercisa ridge helmet GLB from the paper helmet study. Shield designs and atmosphere textures are drawn on canvases at runtime. No external images or scans.",
+  "grammar_source": "Rules ported from tools/paper-warrior/paper.py on branch claude/project-thread-tdiiox (facet, plates, stiffen, matte paper material), adapted to three.js: facet, tint, plate, strip, pleats, creases.",
+  "era_reference": "docs/fritigern/EQUIPMENT.md (late Roman and Tervingi Gothic equipment, 376 to 378 AD). Historical sources cited there: Ammianus Marcellinus book 31, Notitia Dignitatum, helmet finds from Intercisa, Berkasovo and Deurne.",
+  "assets": [
+    {
+      "id": "ridge-helmet-intercisa",
+      "builder": "assets/ridge_helmet.glb (tools/paper-helmet/out/ridge_helmet.glb, PR #45, papercraft grammar, unfitted placeholder); props.js ridgeHelmet() is the fallback",
+      "status": "placeholder",
+      "notes": "Worn by the Roman guards, recoloured grey card at load. 704 triangles. Provenance: tools/paper-helmet/provenance.json on main."
+    },
+    {
+      "id": "ridge-helmet-berkasovo",
+      "builder": "props.js ridgeHelmet({berkasovo:true})",
+      "status": "placeholder, persistent story object",
+      "notes": "The officer's helmet Fritigern carries back. Gilded, brow band, nasal, glass gems. To be replaced by the paper helmet study's ridge-helmet when ready."
+    },
+    {
+      "id": "oval-shield",
+      "builder": "props.js ovalShield()",
+      "status": "placeholder",
+      "notes": "Late Roman oval shield, generic ring-and-spoke design, not a specific Notitia unit."
+    },
+    {
+      "id": "round-shield",
+      "builder": "props.js roundShield()",
+      "status": "placeholder"
+    },
+    {
+      "id": "ox-wagon",
+      "builder": "props.js wagon()",
+      "status": "placeholder",
+      "notes": "Four-wheeled wagon, hide or wool cover on hoops."
+    },
+    {
+      "id": "figure",
+      "builder": "props.js figure()",
+      "status": "blocking mannequin",
+      "notes": "Roman (mail, ridge helmet, long-sleeved tunic, trousers, cloak), Goth, woman, child."
+    },
+    {
+      "id": "ox",
+      "builder": "props.js ox()",
+      "status": "placeholder"
+    },
+    {
+      "id": "gatehouse",
+      "builder": "props.js gatehouse()",
+      "status": "placeholder",
+      "notes": "Late Roman wall with projecting towers either side of an arched gate."
+    },
+    {
+      "id": "tent, campfire, torch, stake, trees, hills, terrain",
+      "builder": "props.js and scene.js",
+      "status": "placeholder"
+    },
+    {
+      "id": "atmosphere",
+      "builder": "scene.js",
+      "status": "procedural",
+      "notes": "Gate light shafts, glows, ground mist, dust; all canvas gradients."
+    },
+    {
+      "id": "presentation-styles",
+      "builder": "overlays.js",
+      "status": "prototype",
+      "notes": "Cinema, storybook, game HUD and Telltale-style overlays. All text written for this scene; Telltale is a style reference only (see docs/oracle/BACKLOG.md)."
+    }
+  ],
+  "dramatic_licence": [
+    "Alaric as Fritigern's son is a story choice; history doesn't record Alaric's father.",
+    "Fritigern returning wounded with an officer's helmet is invented; Ammianus says he talked his way out of the Marcianople banquet.",
+    "Wulfila, the companion who supports Fritigern, is an invented character."
+  ],
+  "updated": "2026-10-22 (pass two)"
+}

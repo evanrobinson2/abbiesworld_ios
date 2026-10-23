@@ -1,0 +1,7316 @@
+{
+ "kind": "family-teleport/kit",
+ "version": 1,
+ "generatedAt": "2026-10-22T21:25:42.261Z",
+ "commit": "c599fdf",
+ "units": "1 = an adult toy person; y up; models face +z",
+ "source": "prototypes/ranch-atelier/dist/teleport/kit.mjs",
+ "purpose": "Simple, recognisable, kid-scale models that a madlib answer can summon instantly with no download or model tokens. Answers the kit cannot match become new model orders for the modeler.",
+ "tools": [
+  {
+   "name": "three.js procedural recipe",
+   "version": "r170"
+  }
+ ],
+ "count": 178,
+ "models": [
+  {
+   "id": "dog",
+   "name": "Dog",
+   "category": "animal",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#c98d55",
+    "accent": "#f2dcc0"
+   },
+   "matches": [
+    "dog",
+    "puppy",
+    "doggy",
+    "pup"
+   ],
+   "triangles": {
+    "blockout": 300,
+    "simple": 1120,
+    "full": 3320
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "cat",
+   "name": "Cat",
+   "category": "animal",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#e59a4c",
+    "accent": "#ffe6c7"
+   },
+   "matches": [
+    "cat",
+    "kitty",
+    "kitten"
+   ],
+   "triangles": {
+    "blockout": 240,
+    "simple": 900,
+    "full": 2380
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "stripe",
+      "stripe",
+      "stripe",
+      "stripe",
+      "stripe",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "pig",
+   "name": "Pig",
+   "category": "animal",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#f3a9b6",
+    "accent": "#f7c3cb"
+   },
+   "matches": [
+    "pig",
+    "piggy",
+    "piglet",
+    "hog"
+   ],
+   "triangles": {
+    "blockout": 324,
+    "simple": 1080,
+    "full": 3080
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "cow",
+   "name": "Cow",
+   "category": "animal",
+   "heightInPeople": 1.1,
+   "colors": {
+    "main": "#f6f2ea",
+    "accent": "#2e2a28"
+   },
+   "matches": [
+    "cow",
+    "moo",
+    "calf"
+   ],
+   "triangles": {
+    "blockout": 324,
+    "simple": 1320,
+    "full": 4040
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "spot",
+      "spot",
+      "spot",
+      "spot",
+      "spot",
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "horn",
+        "horn"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "horse",
+   "name": "Horse",
+   "category": "animal",
+   "heightInPeople": 1.4,
+   "colors": {
+    "main": "#8b5a3c",
+    "accent": "#5a3a26"
+   },
+   "matches": [
+    "horse",
+    "pony"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1240,
+    "full": 3280
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "mane"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "unicorn",
+   "name": "Unicorn",
+   "category": "animal",
+   "heightInPeople": 1.5,
+   "colors": {
+    "main": "#fbf6ff",
+    "accent": "#f7d3ff"
+   },
+   "matches": [
+    "unicorn",
+    "magic",
+    "sparkle"
+   ],
+   "triangles": {
+    "blockout": 324,
+    "simple": 1260,
+    "full": 3320
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "horn",
+        "mane"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": [
+    "abbies-world",
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "sheep",
+   "name": "Sheep",
+   "category": "animal",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#f6f3ec",
+    "accent": "#3a3532"
+   },
+   "matches": [
+    "sheep",
+    "lamb",
+    "wool"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1200,
+    "full": 3760
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": [
+    "sky-meadow"
+   ]
+  },
+  {
+   "id": "bunny",
+   "name": "Bunny",
+   "category": "animal",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#d8c7b4",
+    "accent": "#f6e9de"
+   },
+   "matches": [
+    "bunny",
+    "rabbit",
+    "hare"
+   ],
+   "triangles": {
+    "blockout": 456,
+    "simple": 1320,
+    "full": 4400
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "fox",
+   "name": "Fox",
+   "category": "animal",
+   "heightInPeople": 0.7,
+   "colors": {
+    "main": "#e3712f",
+    "accent": "#fff3e3"
+   },
+   "matches": [
+    "fox"
+   ],
+   "triangles": {
+    "blockout": 264,
+    "simple": 1000,
+    "full": 2800
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "bear",
+   "name": "Bear",
+   "category": "animal",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#7a4b2e",
+    "accent": "#b78a62"
+   },
+   "matches": [
+    "bear",
+    "grizzly",
+    "teddy"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1200,
+    "full": 3760
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "panda",
+   "name": "Panda",
+   "category": "animal",
+   "heightInPeople": 1.1,
+   "colors": {
+    "main": "#f7f5f0",
+    "accent": "#26231f"
+   },
+   "matches": [
+    "panda"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1200,
+    "full": 4080
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "spot",
+      "spot",
+      "spot",
+      "spot",
+      "spot",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "polar-bear",
+   "name": "Polar Bear",
+   "category": "animal",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#f7f9fb",
+    "accent": "#dfe7ee"
+   },
+   "matches": [
+    "polar-bear",
+    "polar",
+    "bear"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1200,
+    "full": 3760
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "lion",
+   "name": "Lion",
+   "category": "animal",
+   "heightInPeople": 1.1,
+   "colors": {
+    "main": "#d9a24e",
+    "accent": "#f2d39c"
+   },
+   "matches": [
+    "lion",
+    "king"
+   ],
+   "triangles": {
+    "blockout": 324,
+    "simple": 1220,
+    "full": 3800
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "mane"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "tiger",
+   "name": "Tiger",
+   "category": "animal",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#ee8a2c",
+    "accent": "#2a211b"
+   },
+   "matches": [
+    "tiger"
+   ],
+   "triangles": {
+    "blockout": 288,
+    "simple": 1100,
+    "full": 3340
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "stripe",
+      "stripe",
+      "stripe",
+      "stripe",
+      "stripe",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "elephant",
+   "name": "Elephant",
+   "category": "animal",
+   "heightInPeople": 2.2,
+   "colors": {
+    "main": "#9aa0a8",
+    "accent": "#b9bec5"
+   },
+   "matches": [
+    "elephant",
+    "jumbo"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1016,
+    "full": 2896
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "horn",
+        "horn",
+        "trunk"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "giraffe",
+   "name": "Giraffe",
+   "category": "animal",
+   "heightInPeople": 3,
+   "colors": {
+    "main": "#f1c25b",
+    "accent": "#9b5f2e"
+   },
+   "matches": [
+    "giraffe",
+    "tall"
+   ],
+   "triangles": {
+    "blockout": 300,
+    "simple": 1160,
+    "full": 3160
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "spot",
+      "spot",
+      "spot",
+      "spot",
+      "spot",
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "horn",
+        "horn"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "zebra",
+   "name": "Zebra",
+   "category": "animal",
+   "heightInPeople": 1.4,
+   "colors": {
+    "main": "#f8f8f6",
+    "accent": "#1f1c1a"
+   },
+   "matches": [
+    "zebra"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1240,
+    "full": 3340
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "stripe",
+      "stripe",
+      "stripe",
+      "stripe",
+      "stripe",
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "mane"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "deer",
+   "name": "Deer",
+   "category": "animal",
+   "heightInPeople": 1.3,
+   "colors": {
+    "main": "#b07a4b",
+    "accent": "#f3e3cc"
+   },
+   "matches": [
+    "deer",
+    "reindeer",
+    "fawn"
+   ],
+   "triangles": {
+    "blockout": 336,
+    "simple": 1200,
+    "full": 3200
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "antler",
+        "antler-tine",
+        "antler",
+        "antler-tine"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "moose",
+   "name": "Moose",
+   "category": "animal",
+   "heightInPeople": 2,
+   "colors": {
+    "main": "#5a3d2b",
+    "accent": "#7d5a40"
+   },
+   "matches": [
+    "moose"
+   ],
+   "triangles": {
+    "blockout": 324,
+    "simple": 1280,
+    "full": 3080
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "hoof"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "antler",
+        "antler-tine",
+        "antler",
+        "antler-tine"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "goat",
+   "name": "Goat",
+   "category": "animal",
+   "heightInPeople": 0.9,
+   "colors": {
+    "main": "#e9e2d6",
+    "accent": "#b9ab95"
+   },
+   "matches": [
+    "goat"
+   ],
+   "triangles": {
+    "blockout": 324,
+    "simple": 1160,
+    "full": 3400
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "horn",
+        "horn"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "mouse",
+   "name": "Mouse",
+   "category": "animal",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#a9a4a0",
+    "accent": "#f2b8c0"
+   },
+   "matches": [
+    "mouse",
+    "mice",
+    "rat",
+    "hamster"
+   ],
+   "triangles": {
+    "blockout": 288,
+    "simple": 1100,
+    "full": 3280
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "hippo",
+   "name": "Hippo",
+   "category": "animal",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#8e7f9c",
+    "accent": "#c9a7b6"
+   },
+   "matches": [
+    "hippo",
+    "hippopotamus"
+   ],
+   "triangles": {
+    "blockout": 300,
+    "simple": 1120,
+    "full": 3320
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "rhino",
+   "name": "Rhino",
+   "category": "animal",
+   "heightInPeople": 1.3,
+   "colors": {
+    "main": "#9a958e",
+    "accent": "#b9b2a7"
+   },
+   "matches": [
+    "rhino",
+    "rhinoceros"
+   ],
+   "triangles": {
+    "blockout": 264,
+    "simple": 940,
+    "full": 2400
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "horn"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "wolf",
+   "name": "Wolf",
+   "category": "animal",
+   "heightInPeople": 0.9,
+   "colors": {
+    "main": "#8d9198",
+    "accent": "#e9ecef"
+   },
+   "matches": [
+    "wolf",
+    "husky"
+   ],
+   "triangles": {
+    "blockout": 264,
+    "simple": 1000,
+    "full": 2800
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "raccoon",
+   "name": "Raccoon",
+   "category": "animal",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#8b8580",
+    "accent": "#2e2a28"
+   },
+   "matches": [
+    "raccoon"
+   ],
+   "triangles": {
+    "blockout": 264,
+    "simple": 1000,
+    "full": 2860
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "stripe",
+      "stripe",
+      "stripe",
+      "stripe",
+      "stripe",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "squirrel",
+   "name": "Squirrel",
+   "category": "animal",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#b5652f",
+    "accent": "#f2dcc0"
+   },
+   "matches": [
+    "squirrel",
+    "chipmunk"
+   ],
+   "triangles": {
+    "blockout": 264,
+    "simple": 1000,
+    "full": 2800
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "hedgehog",
+   "name": "Hedgehog",
+   "category": "animal",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#6e5440",
+    "accent": "#e8d2b5"
+   },
+   "matches": [
+    "hedgehog",
+    "porcupine"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1200,
+    "full": 3760
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "kangaroo",
+   "name": "Kangaroo",
+   "category": "animal",
+   "heightInPeople": 1.4,
+   "colors": {
+    "main": "#c08452",
+    "accent": "#e6c09a"
+   },
+   "matches": [
+    "kangaroo",
+    "roo"
+   ],
+   "triangles": {
+    "blockout": 456,
+    "simple": 1260,
+    "full": 4000
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "koala",
+   "name": "Koala",
+   "category": "animal",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#a7a3a0",
+    "accent": "#e9e6e3"
+   },
+   "matches": [
+    "koala"
+   ],
+   "triangles": {
+    "blockout": 312,
+    "simple": 1200,
+    "full": 3760
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "dragon",
+   "name": "Dragon",
+   "category": "animal",
+   "heightInPeople": 2.2,
+   "colors": {
+    "main": "#3fae6a",
+    "accent": "#ffd84a"
+   },
+   "matches": [
+    "dragon",
+    "dragons",
+    "wyvern"
+   ],
+   "triangles": {
+    "blockout": 288,
+    "simple": 980,
+    "full": 2480
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear",
+        "horn",
+        "horn"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "alligator",
+   "name": "Alligator",
+   "category": "animal",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#4f7a3a",
+    "accent": "#9fbf6e"
+   },
+   "matches": [
+    "alligator",
+    "crocodile",
+    "croc",
+    "gator"
+   ],
+   "triangles": {
+    "blockout": 216,
+    "simple": 860,
+    "full": 2240
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "llama",
+   "name": "Llama",
+   "category": "animal",
+   "heightInPeople": 1.6,
+   "colors": {
+    "main": "#efe4d0",
+    "accent": "#c9b58f"
+   },
+   "matches": [
+    "llama",
+    "alpaca"
+   ],
+   "triangles": {
+    "blockout": 480,
+    "simple": 1360,
+    "full": 4480
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "frog",
+   "name": "Frog",
+   "category": "animal",
+   "heightInPeople": 0.35,
+   "colors": {
+    "main": "#5cbf4a",
+    "accent": "#d9f2a8"
+   },
+   "matches": [
+    "frog",
+    "toad"
+   ],
+   "triangles": {
+    "blockout": 168,
+    "simple": 656,
+    "full": 1616
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "tail": []
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "turtle",
+   "name": "Turtle",
+   "category": "animal",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#6f9a4a",
+    "accent": "#a7c46a"
+   },
+   "matches": [
+    "turtle",
+    "tortoise"
+   ],
+   "triangles": {
+    "blockout": 228,
+    "simple": 880,
+    "full": 2600
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "spot",
+      "spot",
+      "spot",
+      "spot",
+      "spot",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "t-rex",
+   "name": "T-Rex",
+   "category": "animal",
+   "heightInPeople": 2.2,
+   "colors": {
+    "main": "#6aa84f",
+    "accent": "#3f6b2f"
+   },
+   "matches": [
+    "t-rex",
+    "t",
+    "rex",
+    "dinosaur",
+    "dino",
+    "trex",
+    "tyrannosaurus"
+   ],
+   "triangles": {
+    "blockout": 180,
+    "simple": 712,
+    "full": 1692
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh",
+        "foot"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "foot"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "jaw",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      "arm",
+      "arm",
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "raptor",
+   "name": "Raptor",
+   "category": "animal",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#c2894f",
+    "accent": "#7a4f2a"
+   },
+   "matches": [
+    "raptor",
+    "velociraptor"
+   ],
+   "triangles": {
+    "blockout": 180,
+    "simple": 712,
+    "full": 1692
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh",
+        "foot"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "foot"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "jaw",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      "arm",
+      "arm",
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "stegosaurus",
+   "name": "Stegosaurus",
+   "category": "animal",
+   "heightInPeople": 1.6,
+   "colors": {
+    "main": "#7da35a",
+    "accent": "#e2814a"
+   },
+   "matches": [
+    "stegosaurus",
+    "stego"
+   ],
+   "triangles": {
+    "blockout": 256,
+    "simple": 900,
+    "full": 2280
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "plate",
+    "plate",
+    "plate",
+    "plate",
+    "plate"
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "triceratops",
+   "name": "Triceratops",
+   "category": "animal",
+   "heightInPeople": 1.4,
+   "colors": {
+    "main": "#5f8fb3",
+    "accent": "#e9c46a"
+   },
+   "matches": [
+    "triceratops",
+    "trike"
+   ],
+   "triangles": {
+    "blockout": 192,
+    "simple": 732,
+    "full": 1732
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh",
+        "foot"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "foot"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "jaw",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "frill",
+        "horn",
+        "horn",
+        "horn"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "brontosaurus",
+   "name": "Brontosaurus",
+   "category": "animal",
+   "heightInPeople": 3,
+   "colors": {
+    "main": "#8ab0a0",
+    "accent": "#5d8576"
+   },
+   "matches": [
+    "brontosaurus",
+    "brachiosaurus",
+    "diplodocus",
+    "longneck"
+   ],
+   "triangles": {
+    "blockout": 240,
+    "simple": 900,
+    "full": 2320
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "snout",
+        "nose",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      }
+     ]
+    },
+    "neck"
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "pterodactyl",
+   "name": "Pterodactyl",
+   "category": "animal",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#b9744a",
+    "accent": "#e0a37a"
+   },
+   "matches": [
+    "pterodactyl",
+    "pterosaur"
+   ],
+   "triangles": {
+    "blockout": 156,
+    "simple": 656,
+    "full": 1556
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "leg": [
+        "leg-mesh",
+        "foot"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh",
+        "foot"
+       ]
+      },
+      {
+       "head": [
+        "skull",
+        "jaw",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "penguin",
+   "name": "Penguin",
+   "category": "animal",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#26303a",
+    "accent": "#26303a"
+   },
+   "matches": [
+    "penguin"
+   ],
+   "triangles": {
+    "blockout": 240,
+    "simple": 956,
+    "full": 3056
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "beak",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    },
+    "belly"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "owl",
+   "name": "Owl",
+   "category": "animal",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#9a7350",
+    "accent": "#c9a77d"
+   },
+   "matches": [
+    "owl",
+    "hoot"
+   ],
+   "triangles": {
+    "blockout": 228,
+    "simple": 876,
+    "full": 2616
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "beak",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "tuft",
+        "tuft"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "chicken",
+   "name": "Chicken",
+   "category": "animal",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#fbf8f1",
+    "accent": "#ece4d2"
+   },
+   "matches": [
+    "chicken",
+    "hen",
+    "rooster",
+    "chick"
+   ],
+   "triangles": {
+    "blockout": 216,
+    "simple": 856,
+    "full": 2576
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "beak",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "crest"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "duck",
+   "name": "Duck",
+   "category": "animal",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#fff4a3",
+    "accent": "#ffe36b"
+   },
+   "matches": [
+    "duck",
+    "duckling",
+    "ducky"
+   ],
+   "triangles": {
+    "blockout": 204,
+    "simple": 836,
+    "full": 2536
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "beak",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "flamingo",
+   "name": "Flamingo",
+   "category": "animal",
+   "heightInPeople": 1.4,
+   "colors": {
+    "main": "#ff8fb1",
+    "accent": "#ff6f9b"
+   },
+   "matches": [
+    "flamingo"
+   ],
+   "triangles": {
+    "blockout": 204,
+    "simple": 836,
+    "full": 2536
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "beak",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "parrot",
+   "name": "Parrot",
+   "category": "animal",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#2fbf5a",
+    "accent": "#2f7fe0"
+   },
+   "matches": [
+    "parrot",
+    "macaw",
+    "bird"
+   ],
+   "triangles": {
+    "blockout": 204,
+    "simple": 836,
+    "full": 2536
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "beak",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "eagle",
+   "name": "Eagle",
+   "category": "animal",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#6b4a2f",
+    "accent": "#4f3522"
+   },
+   "matches": [
+    "eagle",
+    "hawk"
+   ],
+   "triangles": {
+    "blockout": 204,
+    "simple": 836,
+    "full": 2536
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "beak",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "peacock",
+   "name": "Peacock",
+   "category": "animal",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#2a5fbf",
+    "accent": "#2fa36b"
+   },
+   "matches": [
+    "peacock"
+   ],
+   "triangles": {
+    "blockout": 216,
+    "simple": 1696,
+    "full": 6216
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "beak",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "crest"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    },
+    "tail-feather",
+    "tail-feather",
+    "tail-feather",
+    "tail-feather",
+    "tail-feather",
+    "tail-feather",
+    "tail-feather"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "monkey",
+   "name": "Monkey",
+   "category": "animal",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#8b5a3c",
+    "accent": "#f0cfa8"
+   },
+   "matches": [
+    "monkey",
+    "ape",
+    "chimp",
+    "gorilla"
+   ],
+   "triangles": {
+    "blockout": 300,
+    "simple": 1056,
+    "full": 3256
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "face",
+        "eye",
+        "pupil",
+        "eye",
+        "pupil",
+        "ear",
+        "ear"
+       ]
+      },
+      {
+       "arm": [
+        "arm-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "arm": [
+        "arm-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    },
+    "tail-mesh"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "sloth",
+   "name": "Sloth",
+   "category": "animal",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#9b8263",
+    "accent": "#e9dcc3"
+   },
+   "matches": [
+    "sloth"
+   ],
+   "triangles": {
+    "blockout": 72,
+    "simple": 496,
+    "full": 1296
+   },
+   "parts": [
+    "torso",
+    "skull",
+    "eye",
+    "pupil",
+    "eye",
+    "pupil"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "snake",
+   "name": "Snake",
+   "category": "animal",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#7cc444",
+    "accent": "#f2d14a"
+   },
+   "matches": [
+    "snake",
+    "serpent",
+    "python"
+   ],
+   "triangles": {
+    "blockout": 324,
+    "simple": 1336,
+    "full": 4936
+   },
+   "parts": [
+    "segment",
+    "segment",
+    "segment",
+    "segment",
+    "segment",
+    "segment",
+    "segment",
+    "segment",
+    "skull",
+    "eye",
+    "pupil",
+    "eye",
+    "pupil"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "snail",
+   "name": "Snail",
+   "category": "animal",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#e9c9a0",
+    "accent": "#c06f4a"
+   },
+   "matches": [
+    "snail",
+    "slug"
+   ],
+   "triangles": {
+    "blockout": 240,
+    "simple": 756,
+    "full": 2416
+   },
+   "parts": [
+    "foot",
+    "shell",
+    "shell-core",
+    "eye",
+    "pupil",
+    "eye",
+    "pupil"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "octopus",
+   "name": "Octopus",
+   "category": "animal",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#b05ad6",
+    "accent": "#d99af2"
+   },
+   "matches": [
+    "octopus",
+    "squid",
+    "kraken"
+   ],
+   "triangles": {
+    "blockout": 132,
+    "simple": 536,
+    "full": 1096
+   },
+   "parts": [
+    "head",
+    "eye",
+    "pupil",
+    "eye",
+    "pupil",
+    {
+     "tentacle": [
+      "tentacle-mesh"
+     ]
+    },
+    {
+     "tentacle": [
+      "tentacle-mesh"
+     ]
+    },
+    {
+     "tentacle": [
+      "tentacle-mesh"
+     ]
+    },
+    {
+     "tentacle": [
+      "tentacle-mesh"
+     ]
+    },
+    {
+     "tentacle": [
+      "tentacle-mesh"
+     ]
+    },
+    {
+     "tentacle": [
+      "tentacle-mesh"
+     ]
+    },
+    {
+     "tentacle": [
+      "tentacle-mesh"
+     ]
+    },
+    {
+     "tentacle": [
+      "tentacle-mesh"
+     ]
+    }
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "whale",
+   "name": "Whale",
+   "category": "animal",
+   "heightInPeople": 1.4,
+   "colors": {
+    "main": "#3e6fa8",
+    "accent": "#dbe7f2"
+   },
+   "matches": [
+    "whale",
+    "orca"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 416,
+    "full": 856
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      },
+      "fin",
+      "eye",
+      "pupil",
+      "eye",
+      "pupil"
+     ]
+    }
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "dolphin",
+   "name": "Dolphin",
+   "category": "animal",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#8fb2cf",
+    "accent": "#7aa0bf"
+   },
+   "matches": [
+    "dolphin",
+    "porpoise"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 416,
+    "full": 856
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      },
+      "fin",
+      "eye",
+      "pupil",
+      "eye",
+      "pupil"
+     ]
+    }
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "fish",
+   "name": "Fish",
+   "category": "animal",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#ff9e2c",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "fish",
+    "goldfish",
+    "clownfish",
+    "nemo"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 416,
+    "full": 880
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      },
+      "fin",
+      "eye",
+      "pupil",
+      "eye",
+      "pupil",
+      "stripe",
+      "stripe"
+     ]
+    }
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "shark",
+   "name": "Shark",
+   "category": "animal",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#8a9aa8",
+    "accent": "#6f7f8d"
+   },
+   "matches": [
+    "shark",
+    "jaws"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 416,
+    "full": 856
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "tail": [
+        "tail-mesh"
+       ]
+      },
+      "fin",
+      "eye",
+      "pupil",
+      "eye",
+      "pupil"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "crab",
+   "name": "Crab",
+   "category": "animal",
+   "heightInPeople": 0.35,
+   "colors": {
+    "main": "#e84a3a",
+    "accent": "#f27a5a"
+   },
+   "matches": [
+    "crab",
+    "lobster"
+   ],
+   "triangles": {
+    "blockout": 252,
+    "simple": 856,
+    "full": 2296
+   },
+   "parts": [
+    "shell",
+    "eye",
+    "pupil",
+    "eye",
+    "pupil",
+    "claw",
+    {
+     "leg": [
+      "leg-mesh"
+     ]
+    },
+    {
+     "leg": [
+      "leg-mesh"
+     ]
+    },
+    {
+     "leg": [
+      "leg-mesh"
+     ]
+    },
+    "claw",
+    {
+     "leg": [
+      "leg-mesh"
+     ]
+    },
+    {
+     "leg": [
+      "leg-mesh"
+     ]
+    },
+    {
+     "leg": [
+      "leg-mesh"
+     ]
+    }
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "jellyfish",
+   "name": "Jellyfish",
+   "category": "animal",
+   "heightInPeople": 0.9,
+   "colors": {
+    "main": "#f2a8ff",
+    "accent": "#ffd6ff"
+   },
+   "matches": [
+    "jellyfish",
+    "jelly"
+   ],
+   "triangles": {
+    "blockout": 180,
+    "simple": 360,
+    "full": 1000
+   },
+   "parts": [
+    "bell",
+    "tentacle",
+    "tentacle",
+    "tentacle",
+    "tentacle",
+    "tentacle",
+    "tentacle"
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "starfish",
+   "name": "Starfish",
+   "category": "animal",
+   "heightInPeople": 0.15,
+   "colors": {
+    "main": "#ff8a5c",
+    "accent": "#ffc19e"
+   },
+   "matches": [
+    "starfish",
+    "sea",
+    "star"
+   ],
+   "triangles": {
+    "blockout": 96,
+    "simple": 220,
+    "full": 720
+   },
+   "parts": [
+    "arm",
+    "arm",
+    "arm",
+    "arm",
+    "arm",
+    "centre"
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "butterfly",
+   "name": "Butterfly",
+   "category": "animal",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#ff7ac2",
+    "accent": "#7ad3ff"
+   },
+   "matches": [
+    "butterfly",
+    "moth"
+   ],
+   "triangles": {
+    "blockout": 180,
+    "simple": 660,
+    "full": 2920
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "wing": [
+        "wing-mesh",
+        "wing-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh",
+        "wing-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": [
+    "sky-meadow"
+   ]
+  },
+  {
+   "id": "bee",
+   "name": "Bee",
+   "category": "animal",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#ffd23a",
+    "accent": "#2a2420"
+   },
+   "matches": [
+    "bee",
+    "bumblebee",
+    "wasp"
+   ],
+   "triangles": {
+    "blockout": 108,
+    "simple": 628,
+    "full": 1828
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      "stripe",
+      "eye",
+      "pupil",
+      "eye",
+      "pupil",
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      },
+      {
+       "wing": [
+        "wing-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "ladybug",
+   "name": "Ladybug",
+   "category": "animal",
+   "heightInPeople": 0.2,
+   "colors": {
+    "main": "#e43b2e",
+    "accent": "#1e1a18"
+   },
+   "matches": [
+    "ladybug",
+    "ladybird",
+    "beetle",
+    "bug"
+   ],
+   "triangles": {
+    "blockout": 72,
+    "simple": 240,
+    "full": 3120
+   },
+   "parts": [
+    "shell",
+    "head",
+    "spot",
+    "spot",
+    "spot",
+    "spot"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "ghost",
+   "name": "Friendly Ghost",
+   "category": "animal",
+   "heightInPeople": 1.1,
+   "colors": {
+    "main": "#f6f7ff",
+    "accent": "#bfc6ff"
+   },
+   "matches": [
+    "ghost",
+    "friendly",
+    "boo",
+    "spooky"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 396,
+    "full": 816
+   },
+   "parts": [
+    {
+     "body": [
+      "sheet",
+      "hem",
+      "eye",
+      "pupil",
+      "eye",
+      "pupil"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "robot",
+   "name": "Robot",
+   "category": "thing",
+   "heightInPeople": 1.1,
+   "colors": {
+    "main": "#9fb8c9",
+    "accent": "#ffcf4a"
+   },
+   "matches": [
+    "robot",
+    "robots",
+    "bot",
+    "android"
+   ],
+   "triangles": {
+    "blockout": 204,
+    "simple": 488,
+    "full": 1768
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "lamp",
+        "eye",
+        "eye"
+       ]
+      },
+      {
+       "arm": [
+        "arm-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "arm": [
+        "arm-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "alien",
+   "name": "Little Alien",
+   "category": "animal",
+   "heightInPeople": 0.9,
+   "colors": {
+    "main": "#7be36b",
+    "accent": "#b7ff9f"
+   },
+   "matches": [
+    "alien",
+    "little",
+    "martian",
+    "et",
+    "space-creature"
+   ],
+   "triangles": {
+    "blockout": 384,
+    "simple": 940,
+    "full": 3760
+   },
+   "parts": [
+    {
+     "body": [
+      "torso",
+      {
+       "head": [
+        "skull",
+        "eye",
+        "antenna",
+        "antenna-tip",
+        "eye",
+        "antenna",
+        "antenna-tip"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      },
+      {
+       "leg": [
+        "leg-mesh"
+       ]
+      }
+     ]
+    }
+   ],
+   "usedIn": [
+    "moon-base"
+   ]
+  },
+  {
+   "id": "pizza",
+   "name": "Pizza",
+   "category": "food",
+   "heightInPeople": 0.15,
+   "colors": {
+    "main": "#f2c46a",
+    "accent": "#d8402c"
+   },
+   "matches": [
+    "pizza",
+    "pepperoni",
+    "slice"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 320,
+    "full": 640
+   },
+   "parts": [
+    "crust",
+    "cheese",
+    "pepperoni",
+    "pepperoni",
+    "pepperoni",
+    "pepperoni",
+    "pepperoni",
+    "pepperoni"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "donut",
+   "name": "Donut",
+   "category": "food",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#d99a5a",
+    "accent": "#ff8fc8"
+   },
+   "matches": [
+    "donut",
+    "doughnut"
+   ],
+   "triangles": {
+    "blockout": 96,
+    "simple": 400,
+    "full": 1600
+   },
+   "parts": [
+    "dough",
+    "icing"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "cupcake",
+   "name": "Cupcake",
+   "category": "food",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#f7a8d0",
+    "accent": "#8fd0ff"
+   },
+   "matches": [
+    "cupcake",
+    "muffin"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 280,
+    "full": 1120
+   },
+   "parts": [
+    "wrapper",
+    "frosting",
+    "cherry"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "ice-cream",
+   "name": "Ice Cream",
+   "category": "food",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#ffd0e0",
+    "accent": "#e3a764"
+   },
+   "matches": [
+    "ice-cream",
+    "ice",
+    "cream",
+    "icecream",
+    "gelato",
+    "sundae"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 260,
+    "full": 1080
+   },
+   "parts": [
+    "cone",
+    "scoop",
+    "scoop"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "cake",
+   "name": "Birthday Cake",
+   "category": "food",
+   "heightInPeople": 0.7,
+   "colors": {
+    "main": "#fff1f6",
+    "accent": "#ff7aa8"
+   },
+   "matches": [
+    "cake",
+    "birthday"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 880,
+    "full": 3160
+   },
+   "parts": [
+    "tier",
+    "tier",
+    "candle",
+    "flame",
+    "candle",
+    "flame",
+    "candle",
+    "flame",
+    "candle",
+    "flame",
+    "candle",
+    "flame"
+   ],
+   "usedIn": [
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "apple",
+   "name": "Apple",
+   "category": "food",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#e0322a",
+    "accent": "#4fa83a"
+   },
+   "matches": [
+    "apple"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 280,
+    "full": 1120
+   },
+   "parts": [
+    "fruit",
+    "stem",
+    "leaf"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "banana",
+   "name": "Banana",
+   "category": "food",
+   "heightInPeople": 0.2,
+   "colors": {
+    "main": "#ffe14a",
+    "accent": "#8a6a2a"
+   },
+   "matches": [
+    "banana"
+   ],
+   "triangles": {
+    "blockout": 96,
+    "simple": 200,
+    "full": 800
+   },
+   "parts": [
+    "fruit"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "watermelon",
+   "name": "Watermelon",
+   "category": "food",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#3f9a3a",
+    "accent": "#ff5a6a"
+   },
+   "matches": [
+    "watermelon",
+    "melon"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 120,
+    "full": 1040
+   },
+   "parts": [
+    "rind",
+    "stripe"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "cookie",
+   "name": "Cookie",
+   "category": "food",
+   "heightInPeople": 0.08,
+   "colors": {
+    "main": "#d9a45f",
+    "accent": "#5a3a24"
+   },
+   "matches": [
+    "cookie",
+    "biscuit"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 640,
+    "full": 2680
+   },
+   "parts": [
+    "biscuit",
+    "chip",
+    "chip",
+    "chip",
+    "chip",
+    "chip"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "burger",
+   "name": "Burger",
+   "category": "food",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#d99a4c",
+    "accent": "#6b3a22"
+   },
+   "matches": [
+    "burger",
+    "hamburger",
+    "cheeseburger"
+   ],
+   "triangles": {
+    "blockout": 84,
+    "simple": 280,
+    "full": 840
+   },
+   "parts": [
+    "bun",
+    "patty",
+    "lettuce",
+    "cheese",
+    "bun-top"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "taco",
+   "name": "Taco",
+   "category": "food",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#f2c46a",
+    "accent": "#6cc24a"
+   },
+   "matches": [
+    "taco",
+    "burrito"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 52,
+    "full": 92
+   },
+   "parts": [
+    "shell",
+    "filling"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "carrot",
+   "name": "Carrot",
+   "category": "food",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#ff8a2a",
+    "accent": "#4fa83a"
+   },
+   "matches": [
+    "carrot"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 40,
+    "full": 80
+   },
+   "parts": [
+    "root",
+    "leaves"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "strawberry",
+   "name": "Strawberry",
+   "category": "food",
+   "heightInPeople": 0.35,
+   "colors": {
+    "main": "#e8333f",
+    "accent": "#4fa83a"
+   },
+   "matches": [
+    "strawberry",
+    "berry",
+    "berries"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 160,
+    "full": 600
+   },
+   "parts": [
+    "berry",
+    "top",
+    "leaves"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "lollipop",
+   "name": "Lollipop",
+   "category": "food",
+   "heightInPeople": 0.9,
+   "colors": {
+    "main": "#ff5ab4",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "lollipop",
+    "lolly",
+    "sucker",
+    "candy",
+    "sweets"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 80,
+    "full": 960
+   },
+   "parts": [
+    "stick",
+    "candy",
+    "swirl"
+   ],
+   "usedIn": [
+    "abbies-world"
+   ]
+  },
+  {
+   "id": "candy-cane",
+   "name": "Candy Cane",
+   "category": "food",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#ffffff",
+    "accent": "#e8333f"
+   },
+   "matches": [
+    "candy-cane",
+    "candy",
+    "cane",
+    "peppermint"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 240,
+    "full": 880
+   },
+   "parts": [
+    "shaft",
+    "hook"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "cheese",
+   "name": "Cheese",
+   "category": "food",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#ffcf3a",
+    "accent": "#e6b020"
+   },
+   "matches": [
+    "cheese"
+   ],
+   "triangles": {
+    "blockout": 8,
+    "simple": 8,
+    "full": 8
+   },
+   "parts": [
+    "wedge"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "pancakes",
+   "name": "Pancakes",
+   "category": "food",
+   "heightInPeople": 0.35,
+   "colors": {
+    "main": "#e0a85c",
+    "accent": "#ffe9a0"
+   },
+   "matches": [
+    "pancakes",
+    "pancake",
+    "waffle"
+   ],
+   "triangles": {
+    "blockout": 96,
+    "simple": 172,
+    "full": 332
+   },
+   "parts": [
+    "pancake",
+    "pancake",
+    "pancake",
+    "pancake",
+    "butter"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "popcorn",
+   "name": "Popcorn",
+   "category": "food",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#fff6dc",
+    "accent": "#e8333f"
+   },
+   "matches": [
+    "popcorn"
+   ],
+   "triangles": {
+    "blockout": 240,
+    "simple": 760,
+    "full": 3200
+   },
+   "parts": [
+    "box",
+    "kernel",
+    "kernel",
+    "kernel",
+    "kernel",
+    "kernel",
+    "kernel"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "hot-dog",
+   "name": "Hot Dog",
+   "category": "food",
+   "heightInPeople": 0.2,
+   "colors": {
+    "main": "#e8b56a",
+    "accent": "#c8442a"
+   },
+   "matches": [
+    "hot-dog",
+    "hot",
+    "dog",
+    "hotdog",
+    "sausage"
+   ],
+   "triangles": {
+    "blockout": 216,
+    "simple": 360,
+    "full": 1680
+   },
+   "parts": [
+    "bun",
+    "sausage"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "broccoli",
+   "name": "Broccoli",
+   "category": "food",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#3f9a3a",
+    "accent": "#9fd07a"
+   },
+   "matches": [
+    "broccoli",
+    "vegetable",
+    "veggies"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 160,
+    "full": 600
+   },
+   "parts": [
+    "stalk",
+    "florets"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "pineapple",
+   "name": "Pineapple",
+   "category": "food",
+   "heightInPeople": 0.7,
+   "colors": {
+    "main": "#f2b632",
+    "accent": "#3f9a3a"
+   },
+   "matches": [
+    "pineapple"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 140,
+    "full": 560
+   },
+   "parts": [
+    "fruit",
+    "crown"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "cherry",
+   "name": "Cherries",
+   "category": "food",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#c8102e",
+    "accent": "#4fa83a"
+   },
+   "matches": [
+    "cherry",
+    "cherries"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 320,
+    "full": 1200
+   },
+   "parts": [
+    "cherry",
+    "stem",
+    "cherry",
+    "stem"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "egg",
+   "name": "Egg",
+   "category": "food",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#fff6e8",
+    "accent": "#ffcf3a"
+   },
+   "matches": [
+    "egg",
+    "eggs"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 120,
+    "full": 520
+   },
+   "parts": [
+    "shell"
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "spaghetti",
+   "name": "Spaghetti",
+   "category": "food",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#f2d58a",
+    "accent": "#d8402c"
+   },
+   "matches": [
+    "spaghetti",
+    "pasta",
+    "noodles",
+    "macaroni"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 400,
+    "full": 1640
+   },
+   "parts": [
+    "plate",
+    "noodles",
+    "sauce",
+    "meatball"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "sandwich",
+   "name": "Sandwich",
+   "category": "food",
+   "heightInPeople": 0.25,
+   "colors": {
+    "main": "#f2d9a8",
+    "accent": "#6cc24a"
+   },
+   "matches": [
+    "sandwich",
+    "toast"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 36,
+    "full": 36
+   },
+   "parts": [
+    "bread",
+    "filling",
+    "bread"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "chocolate",
+   "name": "Chocolate Bar",
+   "category": "food",
+   "heightInPeople": 0.1,
+   "colors": {
+    "main": "#6b3a22",
+    "accent": "#c9a77d"
+   },
+   "matches": [
+    "chocolate",
+    "bar",
+    "chocolates"
+   ],
+   "triangles": {
+    "blockout": 12,
+    "simple": 24,
+    "full": 24
+   },
+   "parts": [
+    "bar",
+    "wrapper"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "pie",
+   "name": "Pie",
+   "category": "food",
+   "heightInPeople": 0.25,
+   "colors": {
+    "main": "#e0a85c",
+    "accent": "#a33a3a"
+   },
+   "matches": [
+    "pie",
+    "tart"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 80,
+    "full": 160
+   },
+   "parts": [
+    "dish",
+    "filling"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "marshmallow",
+   "name": "Marshmallow",
+   "category": "food",
+   "heightInPeople": 0.25,
+   "colors": {
+    "main": "#fff8fb",
+    "accent": "#ffd0e0"
+   },
+   "matches": [
+    "marshmallow",
+    "smores"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 40,
+    "full": 80
+   },
+   "parts": [
+    "puff"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "gummy-bear",
+   "name": "Gummy Bear",
+   "category": "food",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#ff4a6a",
+    "accent": "#ff8aa0"
+   },
+   "matches": [
+    "gummy-bear",
+    "gummy",
+    "bear",
+    "gummies",
+    "jelly-bean"
+   ],
+   "triangles": {
+    "blockout": 144,
+    "simple": 480,
+    "full": 2080
+   },
+   "parts": [
+    "belly",
+    "head",
+    "ear",
+    "ear"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "car",
+   "name": "Car",
+   "category": "vehicle",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#3a8fe0",
+    "accent": "#cfe7ff"
+   },
+   "matches": [
+    "car",
+    "auto",
+    "automobile"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 356,
+    "full": 676
+   },
+   "parts": [
+    "chassis",
+    "cabin",
+    "windscreen",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "race-car",
+   "name": "Race Car",
+   "category": "vehicle",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#e8333f",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "race-car",
+    "race",
+    "car",
+    "racecar",
+    "racing",
+    "go-kart",
+    "kart"
+   ],
+   "triangles": {
+    "blockout": 132,
+    "simple": 356,
+    "full": 676
+   },
+   "parts": [
+    "chassis",
+    "cockpit",
+    "spoiler",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "bus",
+   "name": "School Bus",
+   "category": "vehicle",
+   "heightInPeople": 1.1,
+   "colors": {
+    "main": "#ffc62a",
+    "accent": "#2a2624"
+   },
+   "matches": [
+    "bus",
+    "school",
+    "schoolbus"
+   ],
+   "triangles": {
+    "blockout": 108,
+    "simple": 380,
+    "full": 700
+   },
+   "parts": [
+    "body",
+    "window",
+    "window",
+    "window",
+    "window",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "train",
+   "name": "Train",
+   "category": "vehicle",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#d8402c",
+    "accent": "#2a2624"
+   },
+   "matches": [
+    "train",
+    "locomotive",
+    "choo"
+   ],
+   "triangles": {
+    "blockout": 204,
+    "simple": 572,
+    "full": 1132
+   },
+   "parts": [
+    "boiler",
+    "cab",
+    "chimney",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "rocket",
+   "name": "Rocket",
+   "category": "vehicle",
+   "heightInPeople": 3,
+   "colors": {
+    "main": "#f4f1ea",
+    "accent": "#e8333f"
+   },
+   "matches": [
+    "rocket",
+    "spaceship",
+    "rocketship"
+   ],
+   "triangles": {
+    "blockout": 84,
+    "simple": 168,
+    "full": 288
+   },
+   "parts": [
+    "hull",
+    "nose",
+    "fin",
+    "fin",
+    "fin",
+    "fin",
+    "window",
+    "flame"
+   ],
+   "usedIn": [
+    "moon-base"
+   ]
+  },
+  {
+   "id": "ufo",
+   "name": "Flying Saucer",
+   "category": "vehicle",
+   "heightInPeople": 0.7,
+   "colors": {
+    "main": "#b9c6d2",
+    "accent": "#7cf2c8"
+   },
+   "matches": [
+    "ufo",
+    "flying",
+    "saucer",
+    "spaceship",
+    "flying-saucer"
+   ],
+   "triangles": {
+    "blockout": 72,
+    "simple": 1200,
+    "full": 5200
+   },
+   "parts": [
+    "saucer",
+    "dome",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light",
+    "light"
+   ],
+   "usedIn": [
+    "moon-base"
+   ]
+  },
+  {
+   "id": "hot-air-balloon",
+   "name": "Hot Air Balloon",
+   "category": "vehicle",
+   "heightInPeople": 3,
+   "colors": {
+    "main": "#ff6a3a",
+    "accent": "#ffd84a"
+   },
+   "matches": [
+    "hot-air-balloon",
+    "hot",
+    "air",
+    "balloon",
+    "balloon-ride",
+    "airship",
+    "blimp"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 412,
+    "full": 1372
+   },
+   "parts": [
+    "envelope",
+    "band",
+    "basket",
+    "rope",
+    "rope",
+    "rope",
+    "rope"
+   ],
+   "usedIn": [
+    "sky-meadow"
+   ]
+  },
+  {
+   "id": "boat",
+   "name": "Sailboat",
+   "category": "vehicle",
+   "heightInPeople": 1.6,
+   "colors": {
+    "main": "#ffffff",
+    "accent": "#3a8fe0"
+   },
+   "matches": [
+    "boat",
+    "sailboat",
+    "ship",
+    "yacht",
+    "canoe"
+   ],
+   "triangles": {
+    "blockout": 44,
+    "simple": 60,
+    "full": 100
+   },
+   "parts": [
+    "hull",
+    "mast",
+    "sail"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "pirate-ship",
+   "name": "Pirate Ship",
+   "category": "vehicle",
+   "heightInPeople": 2.5,
+   "colors": {
+    "main": "#7a4f2e",
+    "accent": "#f4f1ea"
+   },
+   "matches": [
+    "pirate-ship",
+    "pirate",
+    "ship",
+    "pirates",
+    "galleon"
+   ],
+   "triangles": {
+    "blockout": 96,
+    "simple": 140,
+    "full": 220
+   },
+   "parts": [
+    "hull",
+    "deck-castle",
+    "mast",
+    "sail",
+    "mast",
+    "sail",
+    "flag"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "submarine",
+   "name": "Submarine",
+   "category": "vehicle",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#ffd23a",
+    "accent": "#7ad3ff"
+   },
+   "matches": [
+    "submarine",
+    "sub"
+   ],
+   "triangles": {
+    "blockout": 132,
+    "simple": 332,
+    "full": 1132
+   },
+   "parts": [
+    "hull",
+    "tower",
+    "porthole",
+    "porthole",
+    "porthole",
+    "propeller"
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "airplane",
+   "name": "Airplane",
+   "category": "vehicle",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#f4f1ea",
+    "accent": "#3a8fe0"
+   },
+   "matches": [
+    "airplane",
+    "plane",
+    "jet",
+    "aeroplane"
+   ],
+   "triangles": {
+    "blockout": 144,
+    "simple": 216,
+    "full": 876
+   },
+   "parts": [
+    "fuselage",
+    "wing",
+    "tail-wing",
+    "fin"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "helicopter",
+   "name": "Helicopter",
+   "category": "vehicle",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#e8333f",
+    "accent": "#2a2624"
+   },
+   "matches": [
+    "helicopter",
+    "chopper"
+   ],
+   "triangles": {
+    "blockout": 108,
+    "simple": 208,
+    "full": 648
+   },
+   "parts": [
+    "cabin",
+    "boom",
+    {
+     "rotor": [
+      "blade",
+      "blade"
+     ]
+    },
+    "skid",
+    "skid"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "tractor",
+   "name": "Tractor",
+   "category": "vehicle",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#3f9a3a",
+    "accent": "#ffd23a"
+   },
+   "matches": [
+    "tractor",
+    "farm"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 344,
+    "full": 664
+   },
+   "parts": [
+    "engine",
+    "cab",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "fire-truck",
+   "name": "Fire Truck",
+   "category": "vehicle",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#d8202c",
+    "accent": "#f4f1ea"
+   },
+   "matches": [
+    "fire-truck",
+    "fire",
+    "truck",
+    "firetruck",
+    "fire-engine",
+    "firefighter"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 356,
+    "full": 676
+   },
+   "parts": [
+    "body",
+    "ladder",
+    "light",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "bicycle",
+   "name": "Bicycle",
+   "category": "vehicle",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#3ac2c2",
+    "accent": "#2a2624"
+   },
+   "matches": [
+    "bicycle",
+    "bike"
+   ],
+   "triangles": {
+    "blockout": 228,
+    "simple": 452,
+    "full": 1692
+   },
+   "parts": [
+    "wheel",
+    "wheel",
+    "frame",
+    "seat"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "skateboard",
+   "name": "Skateboard",
+   "category": "vehicle",
+   "heightInPeople": 0.15,
+   "colors": {
+    "main": "#ff7a2a",
+    "accent": "#2a2624"
+   },
+   "matches": [
+    "skateboard",
+    "skate"
+   ],
+   "triangles": {
+    "blockout": 108,
+    "simple": 332,
+    "full": 652
+   },
+   "parts": [
+    "deck",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "scooter",
+   "name": "Scooter",
+   "category": "vehicle",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#b05ad6",
+    "accent": "#2a2624"
+   },
+   "matches": [
+    "scooter"
+   ],
+   "triangles": {
+    "blockout": 96,
+    "simple": 224,
+    "full": 424
+   },
+   "parts": [
+    "deck",
+    "stem",
+    "handle",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "magic-carpet",
+   "name": "Magic Carpet",
+   "category": "vehicle",
+   "heightInPeople": 0.2,
+   "colors": {
+    "main": "#b02a5a",
+    "accent": "#ffd84a"
+   },
+   "matches": [
+    "magic-carpet",
+    "magic",
+    "carpet",
+    "flying-carpet"
+   ],
+   "triangles": {
+    "blockout": 12,
+    "simple": 24,
+    "full": 24
+   },
+   "parts": [
+    "carpet",
+    "trim"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "dragon-boat",
+   "name": "Swan Boat",
+   "category": "vehicle",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#ffffff",
+    "accent": "#ff9d2e"
+   },
+   "matches": [
+    "dragon-boat",
+    "dragon",
+    "boat",
+    "swan",
+    "pedal-boat"
+   ],
+   "triangles": {
+    "blockout": 108,
+    "simple": 300,
+    "full": 1160
+   },
+   "parts": [
+    "hull",
+    "neck",
+    "head",
+    "beak"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "tree",
+   "name": "Round Tree",
+   "category": "nature",
+   "heightInPeople": 2.2,
+   "colors": {
+    "main": "#5aa84a",
+    "accent": "#7cc45a"
+   },
+   "matches": [
+    "tree",
+    "round",
+    "trees",
+    "oak"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 400,
+    "full": 1640
+   },
+   "parts": [
+    "trunk",
+    "canopy",
+    "canopy-puff",
+    "canopy-puff"
+   ],
+   "usedIn": [
+    "sky-meadow"
+   ]
+  },
+  {
+   "id": "pine-tree",
+   "name": "Pine Tree",
+   "category": "nature",
+   "heightInPeople": 2.6,
+   "colors": {
+    "main": "#2f7a4a",
+    "accent": "#3f9a5a"
+   },
+   "matches": [
+    "pine-tree",
+    "pine",
+    "tree",
+    "christmas-tree",
+    "fir"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 100,
+    "full": 200
+   },
+   "parts": [
+    "trunk",
+    "canopy",
+    "canopy",
+    "canopy"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "palm-tree",
+   "name": "Palm Tree",
+   "category": "nature",
+   "heightInPeople": 2.6,
+   "colors": {
+    "main": "#3f9a3a",
+    "accent": "#5aa84a"
+   },
+   "matches": [
+    "palm-tree",
+    "palm",
+    "tree",
+    "coconut"
+   ],
+   "triangles": {
+    "blockout": 96,
+    "simple": 112,
+    "full": 152
+   },
+   "parts": [
+    "trunk",
+    "frond",
+    "frond",
+    "frond",
+    "frond",
+    "frond",
+    "frond"
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "candy-tree",
+   "name": "Candy Tree",
+   "category": "nature",
+   "heightInPeople": 2.2,
+   "colors": {
+    "main": "#ff9ad6",
+    "accent": "#ffd0ef"
+   },
+   "matches": [
+    "candy-tree",
+    "candy",
+    "tree",
+    "cotton-candy"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 400,
+    "full": 1640
+   },
+   "parts": [
+    "trunk",
+    "canopy",
+    "canopy-puff",
+    "canopy-puff"
+   ],
+   "usedIn": [
+    "abbies-world"
+   ]
+  },
+  {
+   "id": "jungle-tree",
+   "name": "Jungle Tree",
+   "category": "nature",
+   "heightInPeople": 3.4,
+   "colors": {
+    "main": "#2f8a3a",
+    "accent": "#4faa4a"
+   },
+   "matches": [
+    "jungle-tree",
+    "jungle",
+    "tree",
+    "rainforest"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 400,
+    "full": 1720
+   },
+   "parts": [
+    "trunk",
+    "canopy",
+    "canopy-puff",
+    "canopy-puff",
+    "vine"
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "autumn-tree",
+   "name": "Autumn Tree",
+   "category": "nature",
+   "heightInPeople": 2.2,
+   "colors": {
+    "main": "#e8822a",
+    "accent": "#d8402c"
+   },
+   "matches": [
+    "autumn-tree",
+    "autumn",
+    "tree",
+    "fall",
+    "maple"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 400,
+    "full": 1640
+   },
+   "parts": [
+    "trunk",
+    "canopy",
+    "canopy-puff",
+    "canopy-puff"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "bush",
+   "name": "Bush",
+   "category": "nature",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#4f9a3a",
+    "accent": "#6cba4a"
+   },
+   "matches": [
+    "bush",
+    "shrub",
+    "hedge"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 240,
+    "full": 1040
+   },
+   "parts": [
+    "leaves",
+    "leaves"
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "flower",
+   "name": "Flower",
+   "category": "nature",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#ff7ac2",
+    "accent": "#ffd84a"
+   },
+   "matches": [
+    "flower",
+    "flowers",
+    "daisy",
+    "rose",
+    "tulip",
+    "blossom"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 880,
+    "full": 3720
+   },
+   "parts": [
+    "stem",
+    "petal",
+    "petal",
+    "petal",
+    "petal",
+    "petal",
+    "petal",
+    "centre"
+   ],
+   "usedIn": [
+    "sky-meadow"
+   ]
+  },
+  {
+   "id": "giant-flower",
+   "name": "Giant Flower",
+   "category": "nature",
+   "heightInPeople": 2.5,
+   "colors": {
+    "main": "#ff6ab0",
+    "accent": "#fff04a"
+   },
+   "matches": [
+    "giant-flower",
+    "giant",
+    "flower",
+    "sunflower"
+   ],
+   "triangles": {
+    "blockout": 348,
+    "simple": 1240,
+    "full": 5280
+   },
+   "parts": [
+    "stem",
+    "petal",
+    "petal",
+    "petal",
+    "petal",
+    "petal",
+    "petal",
+    "petal",
+    "petal",
+    "centre",
+    "leaf"
+   ],
+   "usedIn": [
+    "sky-meadow"
+   ]
+  },
+  {
+   "id": "mushroom",
+   "name": "Mushroom",
+   "category": "nature",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#e8333f",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "mushroom",
+    "toadstool",
+    "mushrooms"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 160,
+    "full": 2680
+   },
+   "parts": [
+    "stalk",
+    "cap",
+    "dot",
+    "dot",
+    "dot",
+    "dot"
+   ],
+   "usedIn": [
+    "abbies-world"
+   ]
+  },
+  {
+   "id": "rock",
+   "name": "Rock",
+   "category": "nature",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#8d8a85",
+    "accent": "#a7a39d"
+   },
+   "matches": [
+    "rock",
+    "boulder",
+    "stone",
+    "rocks"
+   ],
+   "triangles": {
+    "blockout": 42,
+    "simple": 78,
+    "full": 78
+   },
+   "parts": [
+    "stone",
+    "stone"
+   ],
+   "usedIn": [
+    "dino-valley",
+    "moon-base"
+   ]
+  },
+  {
+   "id": "crystal",
+   "name": "Crystal",
+   "category": "nature",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#8fd8ff",
+    "accent": "#d7a8ff"
+   },
+   "matches": [
+    "crystal",
+    "crystals",
+    "diamond",
+    "gem",
+    "jewel"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 36,
+    "full": 36
+   },
+   "parts": [
+    "shard",
+    "shard",
+    "shard"
+   ],
+   "usedIn": [
+    "abbies-world",
+    "moon-base"
+   ]
+  },
+  {
+   "id": "cloud",
+   "name": "Cloud",
+   "category": "sky",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#ffffff",
+    "accent": "#f2f4ff"
+   },
+   "matches": [
+    "cloud",
+    "clouds"
+   ],
+   "triangles": {
+    "blockout": 72,
+    "simple": 360,
+    "full": 1560
+   },
+   "parts": [
+    "puff",
+    "puff",
+    "puff"
+   ],
+   "usedIn": [
+    "sky-meadow",
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "rainbow",
+   "name": "Rainbow",
+   "category": "sky",
+   "heightInPeople": 3,
+   "colors": {
+    "main": "#ff4a4a",
+    "accent": "#4a8aff"
+   },
+   "matches": [
+    "rainbow",
+    "rainbows"
+   ],
+   "triangles": {
+    "blockout": 288,
+    "simple": 1200,
+    "full": 4800
+   },
+   "parts": [
+    "band",
+    "band",
+    "band",
+    "band",
+    "band",
+    "band"
+   ],
+   "usedIn": [
+    "sky-meadow"
+   ]
+  },
+  {
+   "id": "volcano",
+   "name": "Volcano",
+   "category": "place",
+   "heightInPeople": 3,
+   "colors": {
+    "main": "#6b4a3a",
+    "accent": "#ff5a2a"
+   },
+   "matches": [
+    "volcano",
+    "lava",
+    "eruption"
+   ],
+   "triangles": {
+    "blockout": 42,
+    "simple": 78,
+    "full": 138
+   },
+   "parts": [
+    "mountain",
+    "lava",
+    "lava-flow"
+   ],
+   "usedIn": [
+    "dino-valley"
+   ]
+  },
+  {
+   "id": "mountain",
+   "name": "Mountain",
+   "category": "place",
+   "heightInPeople": 4,
+   "colors": {
+    "main": "#8a9aa8",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "mountain",
+    "mountains",
+    "hill"
+   ],
+   "triangles": {
+    "blockout": 28,
+    "simple": 28,
+    "full": 28
+   },
+   "parts": [
+    "peak",
+    "snowcap"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "house",
+   "name": "Cottage",
+   "category": "place",
+   "heightInPeople": 2,
+   "colors": {
+    "main": "#f2e2c4",
+    "accent": "#c8442a"
+   },
+   "matches": [
+    "house",
+    "cottage",
+    "home",
+    "cabin"
+   ],
+   "triangles": {
+    "blockout": 20,
+    "simple": 44,
+    "full": 44
+   },
+   "parts": [
+    "walls",
+    "roof",
+    "door",
+    "window"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "castle",
+   "name": "Castle",
+   "category": "place",
+   "heightInPeople": 4,
+   "colors": {
+    "main": "#d8d2c8",
+    "accent": "#5a7ad8"
+   },
+   "matches": [
+    "castle",
+    "palace",
+    "fortress",
+    "kingdom"
+   ],
+   "triangles": {
+    "blockout": 156,
+    "simple": 264,
+    "full": 552
+   },
+   "parts": [
+    "keep",
+    "tower",
+    "spire",
+    "flag",
+    "tower",
+    "spire",
+    "flag",
+    "tower",
+    "spire",
+    "flag",
+    "tower",
+    "spire",
+    "flag",
+    "gate"
+   ],
+   "usedIn": [
+    "abbies-world"
+   ]
+  },
+  {
+   "id": "tower",
+   "name": "Wizard Tower",
+   "category": "place",
+   "heightInPeople": 4,
+   "colors": {
+    "main": "#a89ac8",
+    "accent": "#3a2a7a"
+   },
+   "matches": [
+    "tower",
+    "wizard"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 180,
+    "full": 640
+   },
+   "parts": [
+    "tower",
+    "roof",
+    "star"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "windmill",
+   "name": "Windmill",
+   "category": "place",
+   "heightInPeople": 3,
+   "colors": {
+    "main": "#f2e2c4",
+    "accent": "#c8442a"
+   },
+   "matches": [
+    "windmill",
+    "mill"
+   ],
+   "triangles": {
+    "blockout": 84,
+    "simple": 108,
+    "full": 168
+   },
+   "parts": [
+    "tower",
+    "cap",
+    {
+     "sails": [
+      "sail",
+      "sail",
+      "sail",
+      "sail"
+     ]
+    }
+   ],
+   "usedIn": [
+    "sky-meadow"
+   ]
+  },
+  {
+   "id": "lighthouse",
+   "name": "Lighthouse",
+   "category": "place",
+   "heightInPeople": 3.5,
+   "colors": {
+    "main": "#ffffff",
+    "accent": "#e8333f"
+   },
+   "matches": [
+    "lighthouse"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 140,
+    "full": 280
+   },
+   "parts": [
+    "tower",
+    "stripe",
+    "lamp",
+    "cap"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "tent",
+   "name": "Tent",
+   "category": "place",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#ff9d2e",
+    "accent": "#7a4f2e"
+   },
+   "matches": [
+    "tent",
+    "camping"
+   ],
+   "triangles": {
+    "blockout": 8,
+    "simple": 8,
+    "full": 8
+   },
+   "parts": [
+    "canvas"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "igloo",
+   "name": "Igloo",
+   "category": "place",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#f2f8ff",
+    "accent": "#cfe2f2"
+   },
+   "matches": [
+    "igloo"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 160,
+    "full": 600
+   },
+   "parts": [
+    "dome",
+    "entrance"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "bridge",
+   "name": "Bridge",
+   "category": "place",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#a87a4a",
+    "accent": "#7a4f2e"
+   },
+   "matches": [
+    "bridge"
+   ],
+   "triangles": {
+    "blockout": 12,
+    "simple": 36,
+    "full": 36
+   },
+   "parts": [
+    "deck",
+    "rail",
+    "rail"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "fence",
+   "name": "Fence",
+   "category": "thing",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#e8dcc4",
+    "accent": "#c9b896"
+   },
+   "matches": [
+    "fence"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 48,
+    "full": 48
+   },
+   "parts": [
+    "post",
+    "post",
+    "post",
+    "rail"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "lamp-post",
+   "name": "Lamp Post",
+   "category": "thing",
+   "heightInPeople": 1.8,
+   "colors": {
+    "main": "#2a2624",
+    "accent": "#ffe9a0"
+   },
+   "matches": [
+    "lamp-post",
+    "lamp",
+    "post",
+    "streetlight",
+    "lantern",
+    "light"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 160,
+    "full": 600
+   },
+   "parts": [
+    "pole",
+    "lamp"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "bench",
+   "name": "Bench",
+   "category": "thing",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#a87a4a",
+    "accent": "#2a2624"
+   },
+   "matches": [
+    "bench"
+   ],
+   "triangles": {
+    "blockout": 48,
+    "simple": 48,
+    "full": 48
+   },
+   "parts": [
+    "seat",
+    "back",
+    "leg",
+    "leg"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "treasure-chest",
+   "name": "Treasure Chest",
+   "category": "thing",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#8a5a36",
+    "accent": "#ffd23a"
+   },
+   "matches": [
+    "treasure-chest",
+    "treasure",
+    "chest",
+    "gold",
+    "coins",
+    "loot"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 184,
+    "full": 624
+   },
+   "parts": [
+    "box",
+    "lid",
+    "band",
+    "gold"
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "crown",
+   "name": "Crown",
+   "category": "thing",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#ffd23a",
+    "accent": "#e8333f"
+   },
+   "matches": [
+    "crown",
+    "tiara",
+    "king",
+    "queen",
+    "princess",
+    "prince"
+   ],
+   "triangles": {
+    "blockout": 84,
+    "simple": 260,
+    "full": 800
+   },
+   "parts": [
+    "band",
+    "point",
+    "point",
+    "point",
+    "point",
+    "point",
+    "jewel"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "star",
+   "name": "Star",
+   "category": "sky",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#ffe14a",
+    "accent": "#fff6b0"
+   },
+   "matches": [
+    "star",
+    "stars",
+    "wishing-star",
+    "shooting-star"
+   ],
+   "triangles": {
+    "blockout": 96,
+    "simple": 220,
+    "full": 720
+   },
+   "parts": [
+    "point",
+    "point",
+    "point",
+    "point",
+    "point",
+    "core"
+   ],
+   "usedIn": [
+    "abbies-world",
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "moon",
+   "name": "Moon",
+   "category": "sky",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#f2efe2",
+    "accent": "#cfcabc"
+   },
+   "matches": [
+    "moon"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 120,
+    "full": 2600
+   },
+   "parts": [
+    "moon",
+    "crater",
+    "crater",
+    "crater",
+    "crater"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "planet",
+   "name": "Ringed Planet",
+   "category": "sky",
+   "heightInPeople": 1.5,
+   "colors": {
+    "main": "#f2b25a",
+    "accent": "#d99af2"
+   },
+   "matches": [
+    "planet",
+    "ringed",
+    "saturn",
+    "jupiter",
+    "planets"
+   ],
+   "triangles": {
+    "blockout": 132,
+    "simple": 320,
+    "full": 1320
+   },
+   "parts": [
+    "planet",
+    "ring"
+   ],
+   "usedIn": [
+    "moon-base"
+   ]
+  },
+  {
+   "id": "satellite",
+   "name": "Satellite",
+   "category": "sky",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#d8d2c8",
+    "accent": "#3a5ad8"
+   },
+   "matches": [
+    "satellite"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 56,
+    "full": 76
+   },
+   "parts": [
+    "core",
+    "panel",
+    "panel",
+    "dish"
+   ],
+   "usedIn": [
+    "moon-base"
+   ]
+  },
+  {
+   "id": "snowman",
+   "name": "Snowman",
+   "category": "thing",
+   "heightInPeople": 1.3,
+   "colors": {
+    "main": "#ffffff",
+    "accent": "#ff8a2a"
+   },
+   "matches": [
+    "snowman",
+    "snowmen",
+    "frosty"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 676,
+    "full": 1936
+   },
+   "parts": [
+    "base",
+    "middle",
+    "head",
+    "nose",
+    "eye",
+    "pupil",
+    "eye",
+    "pupil",
+    "hat"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "ball",
+   "name": "Beach Ball",
+   "category": "thing",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#e8333f",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "ball",
+    "beach",
+    "beachball",
+    "soccer",
+    "football",
+    "basketball"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 320,
+    "full": 1320
+   },
+   "parts": [
+    "ball",
+    "stripe"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "kite",
+   "name": "Kite",
+   "category": "sky",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#3ac2c2",
+    "accent": "#ff5ab4"
+   },
+   "matches": [
+    "kite"
+   ],
+   "triangles": {
+    "blockout": 8,
+    "simple": 48,
+    "full": 88
+   },
+   "parts": [
+    "sail",
+    "string"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "balloon",
+   "name": "Balloon",
+   "category": "sky",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#ff4a6a",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "balloon",
+    "balloons",
+    "party-balloon"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 160,
+    "full": 600
+   },
+   "parts": [
+    "balloon",
+    "string"
+   ],
+   "usedIn": [
+    "abbies-world",
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "gift",
+   "name": "Present",
+   "category": "thing",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#5a7ad8",
+    "accent": "#ffd23a"
+   },
+   "matches": [
+    "gift",
+    "present",
+    "gifts",
+    "presents",
+    "surprise",
+    "box"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 236,
+    "full": 836
+   },
+   "parts": [
+    "box",
+    "ribbon",
+    "ribbon",
+    "bow"
+   ],
+   "usedIn": [
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "sandcastle",
+   "name": "Sandcastle",
+   "category": "place",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#e8cf8f",
+    "accent": "#d4b36a"
+   },
+   "matches": [
+    "sandcastle",
+    "sand",
+    "beach"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 192,
+    "full": 372
+   },
+   "parts": [
+    "base",
+    "turret",
+    "turret",
+    "turret",
+    "turret",
+    "top"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "coral",
+   "name": "Coral",
+   "category": "nature",
+   "heightInPeople": 1,
+   "colors": {
+    "main": "#ff7a8a",
+    "accent": "#ffb06a"
+   },
+   "matches": [
+    "coral",
+    "reef"
+   ],
+   "triangles": {
+    "blockout": 540,
+    "simple": 900,
+    "full": 4200
+   },
+   "parts": [
+    "branch",
+    "branch",
+    "branch",
+    "branch",
+    "branch"
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "seaweed",
+   "name": "Seaweed",
+   "category": "nature",
+   "heightInPeople": 1.4,
+   "colors": {
+    "main": "#3fa86a",
+    "accent": "#6cc48a"
+   },
+   "matches": [
+    "seaweed",
+    "kelp"
+   ],
+   "triangles": {
+    "blockout": 324,
+    "simple": 540,
+    "full": 2520
+   },
+   "parts": [
+    {
+     "frond": [
+      "frond-mesh"
+     ]
+    },
+    {
+     "frond": [
+      "frond-mesh"
+     ]
+    },
+    {
+     "frond": [
+      "frond-mesh"
+     ]
+    }
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "shell",
+   "name": "Seashell",
+   "category": "nature",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#ffd0c0",
+    "accent": "#ffb0a0"
+   },
+   "matches": [
+    "shell",
+    "seashell",
+    "conch"
+   ],
+   "triangles": {
+    "blockout": 16,
+    "simple": 16,
+    "full": 16
+   },
+   "parts": [
+    "shell"
+   ],
+   "usedIn": [
+    "coral-reef"
+   ]
+  },
+  {
+   "id": "bubble",
+   "name": "Bubble",
+   "category": "sky",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#bfefff",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "bubble",
+    "bubbles"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 120,
+    "full": 520
+   },
+   "parts": [
+    "bubble"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "campfire",
+   "name": "Campfire",
+   "category": "thing",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#ff8a2a",
+    "accent": "#7a4f2e"
+   },
+   "matches": [
+    "campfire",
+    "fire",
+    "bonfire"
+   ],
+   "triangles": {
+    "blockout": 108,
+    "simple": 200,
+    "full": 400
+   },
+   "parts": [
+    "log",
+    "log",
+    "log",
+    "log",
+    "flame",
+    "flame"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "swing",
+   "name": "Swing Set",
+   "category": "thing",
+   "heightInPeople": 1.5,
+   "colors": {
+    "main": "#e8333f",
+    "accent": "#ffd23a"
+   },
+   "matches": [
+    "swing",
+    "set",
+    "swings",
+    "playground"
+   ],
+   "triangles": {
+    "blockout": 84,
+    "simple": 132,
+    "full": 252
+   },
+   "parts": [
+    "frame",
+    "frame",
+    "bar",
+    "seat"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "slide",
+   "name": "Slide",
+   "category": "thing",
+   "heightInPeople": 1.5,
+   "colors": {
+    "main": "#3a8fe0",
+    "accent": "#ffd23a"
+   },
+   "matches": [
+    "slide",
+    "waterslide"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 24,
+    "full": 24
+   },
+   "parts": [
+    "chute",
+    "ladder"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "trampoline",
+   "name": "Trampoline",
+   "category": "thing",
+   "heightInPeople": 0.4,
+   "colors": {
+    "main": "#2a2624",
+    "accent": "#3ac2c2"
+   },
+   "matches": [
+    "trampoline",
+    "bouncy"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 240,
+    "full": 880
+   },
+   "parts": [
+    "mat",
+    "rim"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "ferris-wheel",
+   "name": "Ferris Wheel",
+   "category": "place",
+   "heightInPeople": 4,
+   "colors": {
+    "main": "#ff5ab4",
+    "accent": "#ffe14a"
+   },
+   "matches": [
+    "ferris-wheel",
+    "ferris",
+    "wheel",
+    "funfair",
+    "fair"
+   ],
+   "triangles": {
+    "blockout": 240,
+    "simple": 376,
+    "full": 1056
+   },
+   "parts": [
+    {
+     "wheel": [
+      "rim",
+      "car",
+      "car",
+      "car",
+      "car",
+      "car",
+      "car",
+      "car",
+      "car"
+     ]
+    },
+    "leg",
+    "leg"
+   ],
+   "usedIn": [
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "carousel",
+   "name": "Carousel",
+   "category": "place",
+   "heightInPeople": 2,
+   "colors": {
+    "main": "#ff7ac2",
+    "accent": "#ffe14a"
+   },
+   "matches": [
+    "carousel",
+    "merry-go-round"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 100,
+    "full": 200
+   },
+   "parts": [
+    "base",
+    "pole",
+    "roof"
+   ],
+   "usedIn": [
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "bouncy-castle",
+   "name": "Bouncy Castle",
+   "category": "place",
+   "heightInPeople": 1.6,
+   "colors": {
+    "main": "#ff4a6a",
+    "accent": "#4a8aff"
+   },
+   "matches": [
+    "bouncy-castle",
+    "bouncy",
+    "castle"
+   ],
+   "triangles": {
+    "blockout": 108,
+    "simple": 172,
+    "full": 332
+   },
+   "parts": [
+    "floor",
+    "tower",
+    "tower",
+    "tower",
+    "tower"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "magic-wand",
+   "name": "Magic Wand",
+   "category": "thing",
+   "heightInPeople": 0.6,
+   "colors": {
+    "main": "#2a2624",
+    "accent": "#ffe14a"
+   },
+   "matches": [
+    "magic-wand",
+    "magic",
+    "wand",
+    "spell"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 160,
+    "full": 600
+   },
+   "parts": [
+    "stick",
+    "tip"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "book",
+   "name": "Storybook",
+   "category": "thing",
+   "heightInPeople": 0.2,
+   "colors": {
+    "main": "#3a5ad8",
+    "accent": "#fff6e0"
+   },
+   "matches": [
+    "book",
+    "storybook",
+    "books"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 24,
+    "full": 24
+   },
+   "parts": [
+    "cover",
+    "pages"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "umbrella",
+   "name": "Umbrella",
+   "category": "thing",
+   "heightInPeople": 1.2,
+   "colors": {
+    "main": "#ffd23a",
+    "accent": "#2a2624"
+   },
+   "matches": [
+    "umbrella",
+    "parasol"
+   ],
+   "triangles": {
+    "blockout": 40,
+    "simple": 56,
+    "full": 96
+   },
+   "parts": [
+    "shaft",
+    "canopy"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "teddy-bear",
+   "name": "Teddy Bear",
+   "category": "thing",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#c08a5a",
+    "accent": "#f0d0b0"
+   },
+   "matches": [
+    "teddy-bear",
+    "teddy",
+    "bear",
+    "plush",
+    "toy"
+   ],
+   "triangles": {
+    "blockout": 180,
+    "simple": 856,
+    "full": 2856
+   },
+   "parts": [
+    "belly",
+    "head",
+    "muzzle",
+    "ear",
+    "ear",
+    "eye",
+    "pupil",
+    "eye",
+    "pupil"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "gem",
+   "name": "Giant Gem",
+   "category": "thing",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#e8336a",
+    "accent": "#ff8ab0"
+   },
+   "matches": [
+    "gem",
+    "giant",
+    "ruby",
+    "emerald",
+    "sapphire"
+   ],
+   "triangles": {
+    "blockout": 24,
+    "simple": 24,
+    "full": 24
+   },
+   "parts": [
+    "top",
+    "bottom"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "pumpkin",
+   "name": "Pumpkin",
+   "category": "nature",
+   "heightInPeople": 0.5,
+   "colors": {
+    "main": "#ff8a1a",
+    "accent": "#4f7a2a"
+   },
+   "matches": [
+    "pumpkin",
+    "jack-o-lantern",
+    "pumpkins"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 160,
+    "full": 600
+   },
+   "parts": [
+    "gourd",
+    "stem"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "ice-castle",
+   "name": "Ice Palace",
+   "category": "place",
+   "heightInPeople": 4,
+   "colors": {
+    "main": "#cfefff",
+    "accent": "#8fd8ff"
+   },
+   "matches": [
+    "ice-castle",
+    "ice",
+    "castle",
+    "palace",
+    "frozen",
+    "ice-palace",
+    "snow-queen"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 60,
+    "full": 60
+   },
+   "parts": [
+    "keep",
+    "spire",
+    "spire",
+    "spire",
+    "spire"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "cloud-castle",
+   "name": "Cloud Castle",
+   "category": "place",
+   "heightInPeople": 5,
+   "colors": {
+    "main": "#fdf6ff",
+    "accent": "#ffcf5a"
+   },
+   "matches": [
+    "cloud-castle",
+    "cloud",
+    "castle",
+    "sky-castle"
+   ],
+   "triangles": {
+    "blockout": 204,
+    "simple": 392,
+    "full": 1052
+   },
+   "parts": [
+    "cloud-base",
+    "hall",
+    "tower",
+    "spire",
+    "tower",
+    "spire",
+    "tower",
+    "spire",
+    "tower",
+    "spire",
+    "dome"
+   ],
+   "usedIn": [
+    "cloud-castle"
+   ]
+  },
+  {
+   "id": "moon-base",
+   "name": "Moon Base Dome",
+   "category": "place",
+   "heightInPeople": 2,
+   "colors": {
+    "main": "#e8eaee",
+    "accent": "#7ad3ff"
+   },
+   "matches": [
+    "moon-base",
+    "moon",
+    "base",
+    "dome",
+    "moonbase",
+    "space-station"
+   ],
+   "triangles": {
+    "blockout": 84,
+    "simple": 200,
+    "full": 680
+   },
+   "parts": [
+    "dome",
+    "ring",
+    "airlock"
+   ],
+   "usedIn": [
+    "moon-base"
+   ]
+  },
+  {
+   "id": "lunar-rover",
+   "name": "Moon Buggy",
+   "category": "vehicle",
+   "heightInPeople": 0.7,
+   "colors": {
+    "main": "#e8eaee",
+    "accent": "#ff8a2a"
+   },
+   "matches": [
+    "lunar-rover",
+    "lunar",
+    "rover",
+    "moon",
+    "buggy",
+    "moon-buggy"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 364,
+    "full": 704
+   },
+   "parts": [
+    "deck",
+    "seat",
+    "dish",
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    },
+    {
+     "wheel": [
+      "tyre",
+      "hub"
+     ]
+    }
+   ],
+   "usedIn": [
+    "moon-base"
+   ]
+  },
+  {
+   "id": "flag",
+   "name": "Flag",
+   "category": "thing",
+   "heightInPeople": 1.5,
+   "colors": {
+    "main": "#e8333f",
+    "accent": "#ffffff"
+   },
+   "matches": [
+    "flag",
+    "banner"
+   ],
+   "triangles": {
+    "blockout": 36,
+    "simple": 52,
+    "full": 92
+   },
+   "parts": [
+    "pole",
+    "cloth"
+   ],
+   "usedIn": [
+    "moon-base"
+   ]
+  },
+  {
+   "id": "portal",
+   "name": "Teleport Pad",
+   "category": "thing",
+   "heightInPeople": 0.3,
+   "colors": {
+    "main": "#7af2ff",
+    "accent": "#b07aff"
+   },
+   "matches": [
+    "portal",
+    "teleport",
+    "pad",
+    "teleporter",
+    "transporter"
+   ],
+   "triangles": {
+    "blockout": 120,
+    "simple": 240,
+    "full": 880
+   },
+   "parts": [
+    "pad",
+    "ring"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "door",
+   "name": "Secret Door",
+   "category": "place",
+   "heightInPeople": 2.2,
+   "colors": {
+    "main": "#7a4f2e",
+    "accent": "#ffd84a"
+   },
+   "matches": [
+    "door",
+    "secret",
+    "secret-door",
+    "doorway"
+   ],
+   "triangles": {
+    "blockout": 60,
+    "simple": 156,
+    "full": 556
+   },
+   "parts": [
+    "frame",
+    "door",
+    "knob",
+    "light"
+   ],
+   "usedIn": []
+  },
+  {
+   "id": "mystery",
+   "name": "Mystery Box",
+   "category": "thing",
+   "heightInPeople": 0.8,
+   "colors": {
+    "main": "#b07aff",
+    "accent": "#ffe14a"
+   },
+   "matches": [
+    "mystery",
+    "box"
+   ],
+   "triangles": {
+    "blockout": 12,
+    "simple": 24,
+    "full": 24
+   },
+   "parts": [
+    "box",
+    "question"
+   ],
+   "usedIn": []
+  }
+ ]
+}

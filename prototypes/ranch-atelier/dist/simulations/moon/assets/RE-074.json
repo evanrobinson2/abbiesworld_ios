@@ -1,0 +1,214 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RE-074",
+  "name": "Open VTOL ferry landing cradle",
+  "version": "0.1.2",
+  "auxiliary": true,
+  "set": "rocketship-exterior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Grounded 16m landing envelope with 1.2m-high support rails and unobstructed centre for four downward thrusters. Low frame stays clear during vertical ascent.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-exterior/re-074",
+  "biome": "rocketship-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 49,
+    "triangles": 1612,
+    "bounds_min": [
+      -7.86375093460083,
+      -7.86375093460083,
+      0.0
+    ],
+    "bounds_max": [
+      7.86375093460083,
+      7.86375093460083,
+      1.21750009059906
+    ],
+    "dimensions_m": [
+      15.72750186920166,
+      15.72750186920166,
+      1.21750009059906
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "VTOL landing support",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "support-ferry"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "landing-origin.002",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          1.2000000476837158
+        ],
+        "role": "landing-origin"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "static",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Grounded 16m landing envelope with 1.2m-high support rails and unobstructed centre for four downward thrusters. Low frame stays clear during vertical ascent. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See cradle(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-exterior/batch_shell_vtol.py",
+    "entry_point": "cradle",
+    "source_sha256": "bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-exterior batch_shell_vtol.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RE-074",
+    "build_inputs_sha256": {
+      "rocketship-exterior/batch_shell_vtol.py": "bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650",
+      "production/build_scene_batch.py": "ee9388985dec24b324d75e81fb867e92abc6b13da47e412fd128ea824e2b1b4d",
+      "production/render_micro.py": "6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449",
+      "garden-farm/build_garden.py": "2917c0fe1f3e25850af16986dacde582013f4dfe4ab08018c78b6431864ca32b",
+      "market-village/build_market.py": "70c1bc50a2a77f6dcb69c02842a7e7901bd12aebcd7a66912f5308832178a420",
+      "market-village/asset_helpers.py": "113ec16c31b088557de6e6589c950f575dc37a2dd96577b3bba01415967ffd3e",
+      "market-village/architecture.py": "7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3"
+    },
+    "source_snapshots": {
+      "rocketship-exterior/batch_shell_vtol.py": "production/source-snapshots/bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650.py",
+      "production/build_scene_batch.py": "production/source-snapshots/ee9388985dec24b324d75e81fb867e92abc6b13da47e412fd128ea824e2b1b4d.py",
+      "production/render_micro.py": "production/source-snapshots/6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449.py",
+      "garden-farm/build_garden.py": "production/source-snapshots/2917c0fe1f3e25850af16986dacde582013f4dfe4ab08018c78b6431864ca32b.py",
+      "market-village/build_market.py": "production/source-snapshots/70c1bc50a2a77f6dcb69c02842a7e7901bd12aebcd7a66912f5308832178a420.py",
+      "market-village/asset_helpers.py": "production/source-snapshots/113ec16c31b088557de6e6589c950f575dc37a2dd96577b3bba01415967ffd3e.py",
+      "market-village/architecture.py": "production/source-snapshots/7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3.py"
+    },
+    "profile_evidence": "moon-vtol-release/profiles/20261021T054225Z-811d8e"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Approved open landing cradle. The card and exact front/rear assembled views show grounded base pads, connected support columns and longitudinal rails under the ferry feet. The central region remains open below the downward nozzle locations, with no raised gantry or overhead member obstructing vertical lift. The perimeter outline and side stair make the landing envelope readable. Runtime placement, clearance and effects must preserve these authored relationships.",
+    "deployed": false,
+    "catalog_include": true,
+    "visual_review_passed": true,
+    "review_note": "Approved open landing cradle. The card and exact front/rear assembled views show grounded base pads, connected support columns and longitudinal rails under the ferry feet. The central region remains open below the downward nozzle locations, with no raised gantry or overhead member obstructing vertical lift. The perimeter outline and side stair make the landing envelope readable. Runtime placement, clearance and effects must preserve these authored relationships."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    },
+    {
+      "version": "0.1.1",
+      "change": "Rebuilt authored geometry/metadata; review must be renewed.",
+      "createdAt": 1792561284.103915,
+      "previous_glb_sha256": "bb26ac628b9b729de9f3d9f56f86ee11f21e185c8baac94447131c5ba786dad7",
+      "source_sha256": "85ac8ff5e111089bc1233e8536d7a50f669d7f859ada6926a2edafea50faf8fe"
+    },
+    {
+      "version": "0.1.2",
+      "change": "Rebuilt authored geometry/metadata; review must be renewed.",
+      "createdAt": 1792561348.1346052,
+      "previous_glb_sha256": "71d0b74d785f1cda0442494bef808daa590d51923822095113ef03c43ef82643",
+      "source_sha256": "bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650"
+    }
+  ],
+  "authoredSpec": {
+    "id": "RE-074",
+    "name": "Open VTOL ferry landing cradle",
+    "category": "structure",
+    "intent": "Grounded 16m landing envelope with 1.2m-high support rails and unobstructed centre for four downward thrusters. Low frame stays clear during vertical ascent.",
+    "role": "VTOL landing support",
+    "actions": [
+      "inspect",
+      "support-ferry"
+    ],
+    "anchors": [
+      [
+        "landing-origin",
+        [
+          0,
+          0,
+          1.2
+        ]
+      ]
+    ],
+    "variants": [
+      "static"
+    ],
+    "base_increment": 1,
+    "intended_longest_dimension_range_m": [
+      15.5,
+      16.1
+    ],
+    "limitations": [
+      "Visual engineered-fiction support, not a certified structural design"
+    ]
+  },
+  "baseIncrement": 1,
+  "derivation": {},
+  "lineage": {},
+  "files": {
+    "glb": "RE-074.glb",
+    "sha256": "7db92427149578394eacf88e8230c19342f8ac13df3423ca8871c1808bb7aab8",
+    "bytes": 96088
+  }
+}

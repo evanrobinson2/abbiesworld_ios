@@ -1,0 +1,1598 @@
+{
+  "name": "Commercial Dumpster \u2014 Olive Steel, Twin Sloped Lids",
+  "rationale": "A full-scale commercial refuse bin with individually constructed steel walls, subtly displaced front panels suggesting dents, rolled perimeter rails, reinforcing ribs, open-ended side lift pockets, and four grounded caster assemblies. Two closed black lids slope toward the front and include molded ribs, hinges, and raised handles. Small, low-contrast surface patches suggest worn paint without obscuring the construction. The lift pockets establish the overall width; the lids establish the depth and height. No floor or interior contents are included.",
+  "dimensionsM": {
+    "x": 1.6,
+    "y": 0.95,
+    "z": 1.2,
+    "rotationUnits": "degrees",
+    "coordinateSystem": "X and Y horizontal, Z up",
+    "groundZ": 0,
+    "frontDirection": "-Y"
+  },
+  "animation": {
+    "implemented": false,
+    "namedPartAxes": [
+      {
+        "name": "left_lid_open",
+        "partNames": [
+          "lid_left",
+          "lid_rib_left_outer",
+          "lid_rib_left_inner",
+          "handle_left_leg_a",
+          "handle_left_leg_b",
+          "handle_left_grip"
+        ],
+        "pivot": [
+          -0.389,
+          0.443,
+          1.161
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "right_lid_open",
+        "partNames": [
+          "lid_right",
+          "lid_rib_right_inner",
+          "lid_rib_right_outer",
+          "handle_right_leg_a",
+          "handle_right_leg_b",
+          "handle_right_grip"
+        ],
+        "pivot": [
+          0.389,
+          0.443,
+          1.161
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "front_left_wheel_roll",
+        "partNames": [
+          "caster_fl_wheel",
+          "caster_fl_axle"
+        ],
+        "pivot": [
+          -0.56,
+          -0.32,
+          0.1
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "front_right_wheel_roll",
+        "partNames": [
+          "caster_fr_wheel",
+          "caster_fr_axle"
+        ],
+        "pivot": [
+          0.56,
+          -0.32,
+          0.1
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "rear_left_wheel_roll",
+        "partNames": [
+          "caster_rl_wheel",
+          "caster_rl_axle"
+        ],
+        "pivot": [
+          -0.56,
+          0.32,
+          0.1
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "rear_right_wheel_roll",
+        "partNames": [
+          "caster_rr_wheel",
+          "caster_rr_axle"
+        ],
+        "pivot": [
+          0.56,
+          0.32,
+          0.1
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "parts": [
+    {
+      "name": "steel_bottom",
+      "primitive": "box",
+      "colorhex": "#505640",
+      "location": [
+        0,
+        0,
+        0.305
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.4,
+        0.84,
+        0.032
+      ]
+    },
+    {
+      "name": "wall_left",
+      "primitive": "box",
+      "colorhex": "#60674A",
+      "location": [
+        -0.687,
+        0,
+        0.682
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.026,
+        0.84,
+        0.765
+      ]
+    },
+    {
+      "name": "wall_right",
+      "primitive": "box",
+      "colorhex": "#5B6246",
+      "location": [
+        0.687,
+        0,
+        0.682
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.026,
+        0.84,
+        0.765
+      ]
+    },
+    {
+      "name": "left_sloped_upper_wall",
+      "primitive": "box",
+      "colorhex": "#60674A",
+      "location": [
+        -0.687,
+        0,
+        1.07
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.026,
+        0.85,
+        0.09
+      ]
+    },
+    {
+      "name": "right_sloped_upper_wall",
+      "primitive": "box",
+      "colorhex": "#5B6246",
+      "location": [
+        0.687,
+        0,
+        1.07
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.026,
+        0.85,
+        0.09
+      ]
+    },
+    {
+      "name": "wall_rear",
+      "primitive": "box",
+      "colorhex": "#596044",
+      "location": [
+        0,
+        0.42,
+        0.726
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.4,
+        0.026,
+        0.852
+      ]
+    },
+    {
+      "name": "front_panel_left",
+      "primitive": "box",
+      "colorhex": "#62694C",
+      "location": [
+        -0.466,
+        -0.42,
+        0.682
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.468,
+        0.026,
+        0.765
+      ]
+    },
+    {
+      "name": "front_panel_dented_center",
+      "primitive": "box",
+      "colorhex": "#5D6448",
+      "location": [
+        0,
+        -0.409,
+        0.682
+      ],
+      "rotation": [
+        0,
+        0,
+        1.6
+      ],
+      "dimensions": [
+        0.476,
+        0.026,
+        0.765
+      ]
+    },
+    {
+      "name": "front_panel_right",
+      "primitive": "box",
+      "colorhex": "#60674B",
+      "location": [
+        0.466,
+        -0.42,
+        0.682
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.468,
+        0.026,
+        0.765
+      ]
+    },
+    {
+      "name": "corner_post_front_left",
+      "primitive": "box",
+      "colorhex": "#50583E",
+      "location": [
+        -0.681,
+        -0.416,
+        0.681
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.044,
+        0.046,
+        0.762
+      ]
+    },
+    {
+      "name": "corner_post_front_right",
+      "primitive": "box",
+      "colorhex": "#50583E",
+      "location": [
+        0.681,
+        -0.416,
+        0.681
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.044,
+        0.046,
+        0.762
+      ]
+    },
+    {
+      "name": "corner_post_rear_left",
+      "primitive": "box",
+      "colorhex": "#50583E",
+      "location": [
+        -0.681,
+        0.416,
+        0.726
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.044,
+        0.046,
+        0.852
+      ]
+    },
+    {
+      "name": "corner_post_rear_right",
+      "primitive": "box",
+      "colorhex": "#50583E",
+      "location": [
+        0.681,
+        0.416,
+        0.726
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.044,
+        0.046,
+        0.852
+      ]
+    },
+    {
+      "name": "rolled_front_rim",
+      "primitive": "beam",
+      "colorhex": "#4F573E",
+      "location": [
+        0,
+        -0.429,
+        1.061
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.7,
+        -0.429,
+        1.061
+      ],
+      "end": [
+        0.7,
+        -0.429,
+        1.061
+      ],
+      "radius": 0.014
+    },
+    {
+      "name": "rolled_rear_rim",
+      "primitive": "beam",
+      "colorhex": "#4F573E",
+      "location": [
+        0,
+        0.427,
+        1.15
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.7,
+        0.427,
+        1.15
+      ],
+      "end": [
+        0.7,
+        0.427,
+        1.15
+      ],
+      "radius": 0.014
+    },
+    {
+      "name": "rolled_left_rim",
+      "primitive": "beam",
+      "colorhex": "#4F573E",
+      "location": [
+        -0.699,
+        -0.001,
+        1.1055
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.699,
+        -0.429,
+        1.061
+      ],
+      "end": [
+        -0.699,
+        0.427,
+        1.15
+      ],
+      "radius": 0.014
+    },
+    {
+      "name": "rolled_right_rim",
+      "primitive": "beam",
+      "colorhex": "#4F573E",
+      "location": [
+        0.699,
+        -0.001,
+        1.1055
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.699,
+        -0.429,
+        1.061
+      ],
+      "end": [
+        0.699,
+        0.427,
+        1.15
+      ],
+      "radius": 0.014
+    },
+    {
+      "name": "lid_left",
+      "primitive": "box",
+      "colorhex": "#252725",
+      "location": [
+        -0.389,
+        0,
+        1.1324
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.762,
+        0.95,
+        0.036
+      ]
+    },
+    {
+      "name": "lid_right",
+      "primitive": "box",
+      "colorhex": "#292B28",
+      "location": [
+        0.389,
+        0,
+        1.1324
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.762,
+        0.95,
+        0.036
+      ]
+    },
+    {
+      "name": "lid_center_seal",
+      "primitive": "box",
+      "colorhex": "#191C19",
+      "location": [
+        0,
+        0,
+        1.113
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.04,
+        0.88,
+        0.012
+      ]
+    },
+    {
+      "name": "lid_rib_left_outer",
+      "primitive": "box",
+      "colorhex": "#30322E",
+      "location": [
+        -0.59,
+        -0.03,
+        1.153
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.028,
+        0.64,
+        0.014
+      ]
+    },
+    {
+      "name": "lid_rib_left_inner",
+      "primitive": "box",
+      "colorhex": "#30322E",
+      "location": [
+        -0.19,
+        -0.03,
+        1.153
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.028,
+        0.64,
+        0.014
+      ]
+    },
+    {
+      "name": "lid_rib_right_inner",
+      "primitive": "box",
+      "colorhex": "#333530",
+      "location": [
+        0.19,
+        -0.03,
+        1.153
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.028,
+        0.64,
+        0.014
+      ]
+    },
+    {
+      "name": "lid_rib_right_outer",
+      "primitive": "box",
+      "colorhex": "#333530",
+      "location": [
+        0.59,
+        -0.03,
+        1.153
+      ],
+      "rotation": [
+        6,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.028,
+        0.64,
+        0.014
+      ]
+    },
+    {
+      "name": "hinge_left_outer",
+      "primitive": "cylinder",
+      "colorhex": "#444942",
+      "location": [
+        -0.61,
+        0.443,
+        1.161
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.105
+    },
+    {
+      "name": "hinge_left_inner",
+      "primitive": "cylinder",
+      "colorhex": "#444942",
+      "location": [
+        -0.17,
+        0.443,
+        1.161
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.105
+    },
+    {
+      "name": "hinge_right_inner",
+      "primitive": "cylinder",
+      "colorhex": "#444942",
+      "location": [
+        0.17,
+        0.443,
+        1.161
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.105
+    },
+    {
+      "name": "hinge_right_outer",
+      "primitive": "cylinder",
+      "colorhex": "#444942",
+      "location": [
+        0.61,
+        0.443,
+        1.161
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.105
+    },
+    {
+      "name": "handle_left_leg_a",
+      "primitive": "beam",
+      "colorhex": "#373A34",
+      "location": [
+        -0.479,
+        -0.32,
+        1.129
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.479,
+        -0.32,
+        1.115
+      ],
+      "end": [
+        -0.479,
+        -0.32,
+        1.143
+      ],
+      "radius": 0.009
+    },
+    {
+      "name": "handle_left_leg_b",
+      "primitive": "beam",
+      "colorhex": "#373A34",
+      "location": [
+        -0.299,
+        -0.32,
+        1.129
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.299,
+        -0.32,
+        1.115
+      ],
+      "end": [
+        -0.299,
+        -0.32,
+        1.143
+      ],
+      "radius": 0.009
+    },
+    {
+      "name": "handle_left_grip",
+      "primitive": "beam",
+      "colorhex": "#373A34",
+      "location": [
+        -0.389,
+        -0.32,
+        1.143
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.479,
+        -0.32,
+        1.143
+      ],
+      "end": [
+        -0.299,
+        -0.32,
+        1.143
+      ],
+      "radius": 0.01
+    },
+    {
+      "name": "handle_right_leg_a",
+      "primitive": "beam",
+      "colorhex": "#373A34",
+      "location": [
+        0.299,
+        -0.32,
+        1.129
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.299,
+        -0.32,
+        1.115
+      ],
+      "end": [
+        0.299,
+        -0.32,
+        1.143
+      ],
+      "radius": 0.009
+    },
+    {
+      "name": "handle_right_leg_b",
+      "primitive": "beam",
+      "colorhex": "#373A34",
+      "location": [
+        0.479,
+        -0.32,
+        1.129
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.479,
+        -0.32,
+        1.115
+      ],
+      "end": [
+        0.479,
+        -0.32,
+        1.143
+      ],
+      "radius": 0.009
+    },
+    {
+      "name": "handle_right_grip",
+      "primitive": "beam",
+      "colorhex": "#373A34",
+      "location": [
+        0.389,
+        -0.32,
+        1.143
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.299,
+        -0.32,
+        1.143
+      ],
+      "end": [
+        0.479,
+        -0.32,
+        1.143
+      ],
+      "radius": 0.01
+    },
+    {
+      "name": "lift_pocket_left_bottom",
+      "primitive": "box",
+      "colorhex": "#50583F",
+      "location": [
+        -0.745,
+        0,
+        0.775
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.11,
+        0.34,
+        0.022
+      ]
+    },
+    {
+      "name": "lift_pocket_left_top",
+      "primitive": "box",
+      "colorhex": "#596147",
+      "location": [
+        -0.745,
+        0,
+        0.925
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.11,
+        0.34,
+        0.022
+      ]
+    },
+    {
+      "name": "lift_pocket_left_outer_web",
+      "primitive": "box",
+      "colorhex": "#555D43",
+      "location": [
+        -0.79,
+        0,
+        0.85
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.02,
+        0.34,
+        0.15
+      ]
+    },
+    {
+      "name": "lift_pocket_right_bottom",
+      "primitive": "box",
+      "colorhex": "#50583F",
+      "location": [
+        0.745,
+        0,
+        0.775
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.11,
+        0.34,
+        0.022
+      ]
+    },
+    {
+      "name": "lift_pocket_right_top",
+      "primitive": "box",
+      "colorhex": "#596147",
+      "location": [
+        0.745,
+        0,
+        0.925
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.11,
+        0.34,
+        0.022
+      ]
+    },
+    {
+      "name": "lift_pocket_right_outer_web",
+      "primitive": "box",
+      "colorhex": "#555D43",
+      "location": [
+        0.79,
+        0,
+        0.85
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.02,
+        0.34,
+        0.15
+      ]
+    },
+    {
+      "name": "front_rib_left",
+      "primitive": "box",
+      "colorhex": "#535C40",
+      "location": [
+        -0.46,
+        -0.439,
+        0.677
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.036,
+        0.025,
+        0.65
+      ]
+    },
+    {
+      "name": "front_rib_center",
+      "primitive": "box",
+      "colorhex": "#535C40",
+      "location": [
+        0,
+        -0.429,
+        0.675
+      ],
+      "rotation": [
+        0,
+        0,
+        1.6
+      ],
+      "dimensions": [
+        0.036,
+        0.025,
+        0.64
+      ]
+    },
+    {
+      "name": "front_rib_right",
+      "primitive": "box",
+      "colorhex": "#535C40",
+      "location": [
+        0.46,
+        -0.439,
+        0.677
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.036,
+        0.025,
+        0.65
+      ]
+    },
+    {
+      "name": "rear_rib_left",
+      "primitive": "box",
+      "colorhex": "#4F583E",
+      "location": [
+        -0.35,
+        0.439,
+        0.719
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.038,
+        0.025,
+        0.73
+      ]
+    },
+    {
+      "name": "rear_rib_right",
+      "primitive": "box",
+      "colorhex": "#4F583E",
+      "location": [
+        0.35,
+        0.439,
+        0.719
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.038,
+        0.025,
+        0.73
+      ]
+    },
+    {
+      "name": "caster_fl_mount",
+      "primitive": "box",
+      "colorhex": "#555A53",
+      "location": [
+        -0.56,
+        -0.32,
+        0.28
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.14,
+        0.025
+      ]
+    },
+    {
+      "name": "caster_fl_fork_outer",
+      "primitive": "box",
+      "colorhex": "#656A61",
+      "location": [
+        -0.61,
+        -0.32,
+        0.18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.08,
+        0.18
+      ]
+    },
+    {
+      "name": "caster_fl_fork_inner",
+      "primitive": "box",
+      "colorhex": "#656A61",
+      "location": [
+        -0.51,
+        -0.32,
+        0.18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.08,
+        0.18
+      ]
+    },
+    {
+      "name": "caster_fl_wheel",
+      "primitive": "cylinder",
+      "colorhex": "#30332F",
+      "location": [
+        -0.56,
+        -0.32,
+        0.1
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.1,
+      "depth": 0.065
+    },
+    {
+      "name": "caster_fl_axle",
+      "primitive": "cylinder",
+      "colorhex": "#74786E",
+      "location": [
+        -0.56,
+        -0.32,
+        0.1
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.032,
+      "depth": 0.12
+    },
+    {
+      "name": "caster_fr_mount",
+      "primitive": "box",
+      "colorhex": "#555A53",
+      "location": [
+        0.56,
+        -0.32,
+        0.28
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.14,
+        0.025
+      ]
+    },
+    {
+      "name": "caster_fr_fork_inner",
+      "primitive": "box",
+      "colorhex": "#656A61",
+      "location": [
+        0.51,
+        -0.32,
+        0.18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.08,
+        0.18
+      ]
+    },
+    {
+      "name": "caster_fr_fork_outer",
+      "primitive": "box",
+      "colorhex": "#656A61",
+      "location": [
+        0.61,
+        -0.32,
+        0.18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.08,
+        0.18
+      ]
+    },
+    {
+      "name": "caster_fr_wheel",
+      "primitive": "cylinder",
+      "colorhex": "#30332F",
+      "location": [
+        0.56,
+        -0.32,
+        0.1
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.1,
+      "depth": 0.065
+    },
+    {
+      "name": "caster_fr_axle",
+      "primitive": "cylinder",
+      "colorhex": "#74786E",
+      "location": [
+        0.56,
+        -0.32,
+        0.1
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.032,
+      "depth": 0.12
+    },
+    {
+      "name": "caster_rl_mount",
+      "primitive": "box",
+      "colorhex": "#555A53",
+      "location": [
+        -0.56,
+        0.32,
+        0.28
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.14,
+        0.025
+      ]
+    },
+    {
+      "name": "caster_rl_fork_outer",
+      "primitive": "box",
+      "colorhex": "#656A61",
+      "location": [
+        -0.61,
+        0.32,
+        0.18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.08,
+        0.18
+      ]
+    },
+    {
+      "name": "caster_rl_fork_inner",
+      "primitive": "box",
+      "colorhex": "#656A61",
+      "location": [
+        -0.51,
+        0.32,
+        0.18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.08,
+        0.18
+      ]
+    },
+    {
+      "name": "caster_rl_wheel",
+      "primitive": "cylinder",
+      "colorhex": "#30332F",
+      "location": [
+        -0.56,
+        0.32,
+        0.1
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.1,
+      "depth": 0.065
+    },
+    {
+      "name": "caster_rl_axle",
+      "primitive": "cylinder",
+      "colorhex": "#74786E",
+      "location": [
+        -0.56,
+        0.32,
+        0.1
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.032,
+      "depth": 0.12
+    },
+    {
+      "name": "caster_rr_mount",
+      "primitive": "box",
+      "colorhex": "#555A53",
+      "location": [
+        0.56,
+        0.32,
+        0.28
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.14,
+        0.025
+      ]
+    },
+    {
+      "name": "caster_rr_fork_inner",
+      "primitive": "box",
+      "colorhex": "#656A61",
+      "location": [
+        0.51,
+        0.32,
+        0.18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.08,
+        0.18
+      ]
+    },
+    {
+      "name": "caster_rr_fork_outer",
+      "primitive": "box",
+      "colorhex": "#656A61",
+      "location": [
+        0.61,
+        0.32,
+        0.18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.08,
+        0.18
+      ]
+    },
+    {
+      "name": "caster_rr_wheel",
+      "primitive": "cylinder",
+      "colorhex": "#30332F",
+      "location": [
+        0.56,
+        0.32,
+        0.1
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.1,
+      "depth": 0.065
+    },
+    {
+      "name": "caster_rr_axle",
+      "primitive": "cylinder",
+      "colorhex": "#74786E",
+      "location": [
+        0.56,
+        0.32,
+        0.1
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.032,
+      "depth": 0.12
+    },
+    {
+      "name": "wear_front_lower_left",
+      "primitive": "box",
+      "colorhex": "#696952",
+      "location": [
+        -0.55,
+        -0.4335,
+        0.405
+      ],
+      "rotation": [
+        0,
+        7,
+        0
+      ],
+      "dimensions": [
+        0.105,
+        0.0015,
+        0.026
+      ]
+    },
+    {
+      "name": "wear_front_dent_edge",
+      "primitive": "box",
+      "colorhex": "#686B54",
+      "location": [
+        0.13,
+        -0.419,
+        0.748
+      ],
+      "rotation": [
+        0,
+        -9,
+        1.6
+      ],
+      "dimensions": [
+        0.085,
+        0.0015,
+        0.019
+      ]
+    },
+    {
+      "name": "wear_front_right_scuff",
+      "primitive": "box",
+      "colorhex": "#6B6C55",
+      "location": [
+        0.55,
+        -0.4335,
+        0.605
+      ],
+      "rotation": [
+        0,
+        -5,
+        0
+      ],
+      "dimensions": [
+        0.072,
+        0.0015,
+        0.034
+      ]
+    },
+    {
+      "name": "wear_left_pocket_edge",
+      "primitive": "box",
+      "colorhex": "#737264",
+      "location": [
+        -0.7998,
+        -0.09,
+        0.908
+      ],
+      "rotation": [
+        4,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.0004,
+        0.082,
+        0.013
+      ]
+    },
+    {
+      "name": "wear_right_lower_wall",
+      "primitive": "box",
+      "colorhex": "#686851",
+      "location": [
+        0.7003,
+        0.21,
+        0.43
+      ],
+      "rotation": [
+        -8,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.001,
+        0.09,
+        0.03
+      ]
+    },
+    {
+      "name": "wear_rear_lower_seam",
+      "primitive": "box",
+      "colorhex": "#625D49",
+      "location": [
+        -0.14,
+        0.4335,
+        0.345
+      ],
+      "rotation": [
+        0,
+        3,
+        0
+      ],
+      "dimensions": [
+        0.12,
+        0.0015,
+        0.017
+      ]
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 134.99331903457642,
+    "usage": {
+      "prompt_tokens": 220,
+      "completion_tokens": 8305,
+      "total_tokens": 8525,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1536,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

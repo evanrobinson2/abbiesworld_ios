@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RF-043",
+  "name": "Open coiled clay vessel in progress",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocky-foothills",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Expose hand-laid clay coils before smoothing and firing.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocky-foothills/rf-043",
+  "biome": "rocky-foothills",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 260,
+    "triangles": 7424,
+    "bounds_min": [
+      -0.30000001192092896,
+      -0.30000001192092896,
+      0.0
+    ],
+    "bounds_max": [
+      0.5,
+      0.30000001192092896,
+      0.5370000004768372
+    ],
+    "dimensions_m": [
+      0.8,
+      0.6,
+      0.537
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "pottery-workpiece",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "coil",
+      "join",
+      "smooth"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "work",
+        "position_blender_m": [
+          0.0,
+          -0.5,
+          0.0
+        ],
+        "role": "work"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocky-foothills",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "started",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "coiled",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "smoothed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "dried",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Expose hand-laid clay coils before smoothing and firing. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See coilform(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocky-foothills/batch_foothills_5.py",
+    "entry_point": "coilform",
+    "source_sha256": "ea09a38ad7311872dcb57d1dd7cf427f99a66b2a54d7f5e89fe3537702768b55",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocky-foothills batch_foothills_5.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RF-043"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Full rendered PNG inspected. Touching coils form a coherent containing vessel with open top and visible interior.",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Full rendered PNG inspected. Touching coils form a coherent containing vessel with open top and visible interior."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RF-043.glb",
+    "sha256": "875951425571d89f5537dfc913b762ecab3c0dc940564a01ae93900d37f61049",
+    "bytes": 357336
+  }
+}

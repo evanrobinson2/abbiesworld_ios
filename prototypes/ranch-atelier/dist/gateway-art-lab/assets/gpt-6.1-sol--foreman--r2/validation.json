@@ -1,0 +1,35 @@
+{
+  "dimensionsM": [
+    0.8436828851699829,
+    1.078231930732727,
+    1.8330854177474976
+  ],
+  "boundsMin": [
+    -0.48070457577705383,
+    -0.7210670113563538,
+    0.02005566656589508
+  ],
+  "boundsMax": [
+    0.36297833919525146,
+    0.3571649491786957,
+    1.8531410694122314
+  ],
+  "triangles": 20177,
+  "materials": 19,
+  "meshObjects": 223,
+  "exportedTriangles": 20177,
+  "bytes": 1273716,
+  "animationClips": 1,
+  "animationChannels": 108,
+  "importOnlyHelpers": [
+    "Icosphere"
+  ],
+  "reimportDimensionsM": [
+    0.843683123588562,
+    1.0782318115234375,
+    1.8330851793289185
+  ],
+  "motionChanges": true,
+  "issues": [],
+  "technicalPass": true
+}

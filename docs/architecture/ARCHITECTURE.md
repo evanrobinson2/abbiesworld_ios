@@ -8,7 +8,7 @@ in [INVENTORY.md](INVENTORY.md).
 
 ```
                          ┌──────────────────────────── GitHub: evanrobinson2/abbiesworld_ios (public) ───────────────────────────┐
-                         │  main: docs, iOS app, studio-mock, workflows        claude/live-snapshot-2026-10-22: Ranch Atelier site │
+                         │  main: docs, iOS app, studio-mock, workflows, Ranch Atelier site (prototypes/ranch-atelier/dist)       │
                          │  Actions: dispatch-relay, dispatch-e2e, model-store, feedback-inbox                                    │
                          └───────▲───────────────────────────────┬───────────────────────────────────────────▲───────────────────┘
                                  │ issues/commits/PRs            │ Vercel builds (Git or API deploy)          │ commits/PRs
@@ -51,7 +51,7 @@ in [INVENTORY.md](INVENTORY.md).
 - Known issue: `tokenFrom()` in `api/mcp.js` falls back to the `ABBIES_WORLD_TOKEN` env var, so the older tools act
   without a caller token. The dispatch tools don't fall back **[verified from code, not fixed]**.
 
-### 2.4 Ranch Atelier (`prototypes/ranch-atelier/` on branch `claude/live-snapshot-2026-10-22`)
+### 2.4 Ranch Atelier (`prototypes/ranch-atelier/` on `main`)
 - Vercel project `abbies-ranch-atelier`, at `https://abbies-ranch-atelier.vercel.app` (`/sandbox`). A three.js browser game,
   installed as a home-screen app on Evan's iPhone **[verified]**.
 - Functions in `dist/api/` **[verified from code]**:
@@ -61,13 +61,13 @@ in [INVENTORY.md](INVENTORY.md).
   - `holodeck`: a WebSocket relay.
   - `ai-compose`: calls the Vercel AI Gateway.
 - `dist/vercel.json` rewrites `/r2/*` to the R2 public bucket URL, so GLBs load same-origin **[verified]**.
-- `main` does not carry this site. Ranch work merges into the live branch (CLAUDE.md).
+- Production builds from `main` (Vercel Git integration, root `prototypes/ranch-atelier/dist`). Ranch work merges into `main`; the old `claude/live-snapshot-2026-10-22` branch is an archive (merged 2026-10-23).
 
 ### 2.5 Model store (Cloudflare R2 + Postgres)
 - **R2 exists [verified]**. The Vercel project `story-forge` has `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`,
   `R2_BUCKET` and `R2_PUBLIC_BASE_URL` for production, preview and development. The public bucket URL
   `https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev` answers requests. The bucket name is stored as a sensitive value and can't be read back **[unknown name]**.
-- Writer: `tools/model-store/sync.mjs` (live branch), run by `.github/workflows/model-store.yml`. It uploads GLBs, reference images and
+- Writer: `tools/model-store/sync.mjs`, run by `.github/workflows/model-store.yml`. It uploads GLBs, reference images and
   provenance to `models/blobs/<sha256>/<file>` and writes `models/catalog.json`, `catalog-all.json` and `paths.json` **[inferred from code]**.
 - Catalogue table: `model_assets` in story-forge's Supabase Postgres (`POSTGRES_URL`), schema in `tools/model-store/schema.sql` **[inferred]**.
 - **State today [verified]**: all 5 model-store runs failed, because the R2 and Postgres secrets are not yet set on the GitHub repo.
@@ -100,7 +100,7 @@ in [INVENTORY.md](INVENTORY.md).
 | Thing | Where | How it deploys | Envs |
 | --- | --- | --- | --- |
 | studio-mock (MCP) | Vercel team `team_oyQ4CUAshGOCQbr5KHu1jYec`, iad1 | GitHub main, root `prototypes/studio-mock` (API-triggered) | production only in practice |
-| abbies-ranch-atelier | same team | live branch `prototypes/ranch-atelier/dist`; prod deploys need Evan's "ship it" | production, preview |
+| abbies-ranch-atelier | same team | `main` `prototypes/ranch-atelier/dist` (production branch) | production, preview |
 | Game server | AWS EC2 (`abbies.world`) | **[unknown]** | production |
 | iOS app | Xcode, Evan's devices | manual | n/a |
 | GitHub Actions | github.com | on push, schedule, issue events | n/a |

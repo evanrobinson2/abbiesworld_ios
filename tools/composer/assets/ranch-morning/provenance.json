@@ -1,0 +1,122 @@
+{
+ "id": "ranch-morning",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "617068dcffb6ffc26667f30af3b14f749bcc39bd5318d7611dddeb6d5406c101"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "4b6fcf9555e51715c473ab29d54e5a7931dc3fc4d51edd2087505b2b670f2276"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "30114ec5354740a924cc6f60141514b3424da4e31fa0c59ca3f6ea889f3b8e04"
+  }
+ ],
+ "title": "Ranch Morning",
+ "kind": "music",
+ "brief": "Home theme for the Ranch in daylight. Strings breathe under a harp that never stops moving; the flute sings Abbie's motif, the horn answers it in the second half. Calm enough to build to for an hour.",
+ "uses": [
+  "ranch daytime",
+  "building and placing tiles",
+  "title screen"
+ ],
+ "tags": [
+  "ranch",
+  "day",
+  "pastoral",
+  "home",
+  "theme"
+ ],
+ "score": "tools/composer/cues/ranch_morning.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/ranch_morning.py",
+  "bpm": 76,
+  "meter": "4/4",
+  "key": "D major",
+  "bars": 16,
+  "instruments": [
+   "bass",
+   "cellos",
+   "cellos_pizz",
+   "flute",
+   "glock",
+   "harp",
+   "horn",
+   "oboe",
+   "violas",
+   "violins"
+  ],
+  "percussion": [
+   "triangle"
+  ],
+  "hall_seconds": 2.6,
+  "target_lufs": -18.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": "flute bars 1-2 and 5-6; horn bars 9-11; flute and oboe in thirds bars 13-16",
+ "files": {
+  "main": {
+   "audio": "/music/composer/ranch-morning.mp3",
+   "sha256": "30114ec5354740a924cc6f60141514b3424da4e31fa0c59ca3f6ea889f3b8e04",
+   "bytes": 1195245,
+   "duration": 50.926,
+   "loudness": -18.0,
+   "peak": -5.7,
+   "loopPoints": {
+    "start": 0.2,
+    "end": 50.726316
+   },
+   "stems": [
+    {
+     "name": "foundation",
+     "url": "/music/composer/ranch-morning.stem-foundation.mp3",
+     "sha256": "3a6f5d7effa6b8d4cc48b8e53b37c335da95388f57e975f27136bb955f217233",
+     "bytes": 902445,
+     "min": 0.0,
+     "role": "sustained strings and bass, always on"
+    },
+    {
+     "name": "pulse",
+     "url": "/music/composer/ranch-morning.stem-pulse.mp3",
+     "sha256": "1f521e58be7a450a2a1dff31d0261f7a799f7f74f74ab46680900d3f7a5cc56d",
+     "bytes": 843357,
+     "min": 0.2,
+     "role": "harp, pizzicato and mallet motion"
+    },
+    {
+     "name": "melody",
+     "url": "/music/composer/ranch-morning.stem-melody.mp3",
+     "sha256": "3dd29960cb29c69ad0642e6599cec8159159aec139ebe6255abadfcdad983c5f",
+     "bytes": 910917,
+     "min": 0.45,
+     "role": "the tune: woodwinds, horn, solo strings"
+    },
+    {
+     "name": "color",
+     "url": "/music/composer/ranch-morning.stem-color.mp3",
+     "sha256": "2d4803a05a2a96dc2105cbc230009c88d3e499e2d33f73ba0a5c8c5600b570e3",
+     "bytes": 463653,
+     "min": 0.7,
+     "role": "bells, glockenspiel, triangle, high shimmer"
+    }
+   ]
+  }
+ }
+}

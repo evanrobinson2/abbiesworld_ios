@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "cow",
+  "group": "animal",
+  "replaces": "simulation-assets/organics/cow-{idle,feeding,rest}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "d6de2968-65eb-4cd0-a9d6-e38ab78d6d05",
+      "grid_url": "https://www.midjourney.com/jobs/d6de2968-65eb-4cd0-a9d6-e38ab78d6d05?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "4ccf125d-2dcf-4df9-89df-c52d518c31ae",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:44:16.469Z",
+      "grid_done_at": "2026-10-22T22:44:34.471Z",
+      "upscale_clicked_at": "2026-10-22T22:44:45.090Z",
+      "downloaded_at": "2026-10-22T22:45:53.792Z",
+      "pick_reason": "closest to a side view, brown patches, curved horns, pink muzzle, brass bell on collar"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a gentle cream-coloured dairy cow with soft brown patches, short curved horns, a pink muzzle, a small brass bell on a leather collar, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "bcd3ab81-3c1d-4165-a420-f63ad3b4b027",
+      "grid_url": "https://www.midjourney.com/jobs/bcd3ab81-3c1d-4165-a420-f63ad3b4b027?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "091b0831-5e25-49b4-8048-f71b5b9e75c4",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:46:02.844Z",
+      "grid_done_at": "2026-10-22T22:46:20.846Z",
+      "upscale_clicked_at": "2026-10-22T22:46:31.559Z",
+      "downloaded_at": "2026-10-22T22:47:52.140Z",
+      "pick_reason": "straight front, true side and straight back of one cow with bell and collar, evenly spaced"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "83591d0311d4da46a85b1d350b0a0c3b093c9a3413626b7d68080662870368a2",
+      "bytes": 2503509,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/4ccf125d-2dcf-4df9-89df-c52d518c31ae/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "eed2cf712fa8fe27eb0f90e42ba78ab795f081f92faf91cc3f1e4a8016a247a1",
+      "bytes": 1887948,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/091b0831-5e25-49b4-8048-f71b5b9e75c4/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "2a9fceac65ffcc059faaebbe2dd68462e8b18ffe3d9e6bff8457811448ddb3dc",
+      "bytes": 457614,
+      "pixels": [
+        545,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/cow [('front', 197, 742), ('side', 923, 2106), ('back', 2150, 2701)]"
+    },
+    "view_side.png": {
+      "sha256": "ad1a519c95d732d6d813e55de827dc8db9f8de5e7d0767a0c5da8ff2e8c0c6e3",
+      "bytes": 887272,
+      "pixels": [
+        1183,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/cow [('front', 197, 742), ('side', 923, 2106), ('back', 2150, 2701)]"
+    },
+    "view_back.png": {
+      "sha256": "cb3a79b07aaf020a193b089c96c7ef6de647bbd20bf55c17726a1e773f3f6b36",
+      "bytes": 411517,
+      "pixels": [
+        551,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/cow [('front', 197, 742), ('side', 923, 2106), ('back', 2150, 2701)]"
+    }
+  }
+}

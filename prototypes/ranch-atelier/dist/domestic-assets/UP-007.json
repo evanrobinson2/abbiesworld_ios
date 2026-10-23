@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "UP-007",
+  "name": "Upland shepherd dog",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "upland-pasture",
+  "batch": 1,
+  "category": "animate",
+  "intent": "Represent a distinct companion animal associated with flock movement.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/upland-pasture/up-007",
+  "biome": "upland-pasture",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 21,
+    "triangles": 744,
+    "bounds_min": [
+      -0.675223708152771,
+      -0.16999998688697815,
+      0.0
+    ],
+    "bounds_max": [
+      0.6623606085777283,
+      0.16999998688697815,
+      1.0099999904632568
+    ],
+    "dimensions_m": [
+      1.33758,
+      0.34,
+      1.01
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "herding-companion",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "follow",
+      "watch",
+      "rest",
+      "herd"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "approach.001",
+        "position_blender_m": [
+          0.0,
+          -0.6000000238418579,
+          0.0
+        ],
+        "role": "approach"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "reachable work and resting places",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "alert",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "resting",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "working",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "injured",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Represent a distinct companion animal associated with flock movement. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See build_UP_007(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "upland-pasture/batch_pasture.py",
+    "entry_point": "build_UP_007",
+    "source_sha256": "7f1f83be6fe34dfbbfc8c593cbbcf6371eeb061e394bc3f7c5304b6f91616a73",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- upland-pasture batch_pasture.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable silhouette and material separation in rendered contact-sheet inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable silhouette and material separation in rendered contact-sheet inspection"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "UP-007.glb",
+    "sha256": "c8cd250cba75681e398d2247ae3b44473cfaff1022804be2fdaded74da562d67",
+    "bytes": 59416
+  }
+}

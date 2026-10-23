@@ -1,12 +1,12 @@
 # Puts every model (GLB/glTF), its reference image and provenance into Cloudflare R2 and the model_assets table.
-# Runs when models change on main or the live Ranch Atelier branch, and on demand (Actions > model-store > Run workflow).
+# Runs when models change on main (which carries the live Ranch Atelier site), and on demand (Actions > model-store > Run workflow).
 # Needs repository secrets R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET, R2_PUBLIC_BASE_URL
 # and, for the database, POSTGRES_URL. See tools/model-store/README.md.
 name: model-store
 on:
   workflow_dispatch:
   push:
-    branches: [main, claude/live-snapshot-2026-10-22]
+    branches: [main]
     paths:
       - '**.glb'
       - '**.gltf'
@@ -26,16 +26,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: main, path: main }
-      - uses: actions/checkout@v4
-        with: { ref: claude/live-snapshot-2026-10-22, path: live }
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      # The tool and the site code live on the live branch; main only carries this workflow.
       - name: Install and test
         run: |
-          echo "TOOL=live/tools/model-store" >> "$GITHUB_ENV"
-          npm install --prefix live/tools/model-store --no-audit --no-fund
-          node --test live/tools/model-store/test.mjs
+          echo "TOOL=main/tools/model-store" >> "$GITHUB_ENV"
+          npm install --prefix main/tools/model-store --no-audit --no-fund
+          node --test main/tools/model-store/test.mjs
       - name: Check secrets
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
@@ -48,7 +45,7 @@ jobs:
           for k in R2_ACCOUNT_ID R2_ACCESS_KEY_ID R2_BUCKET R2_PUBLIC_BASE_URL; do [ -n "${!k}" ] || missing="$missing $k"; done
           if [ -n "$missing" ]; then
             echo "::error::Missing repository secrets:$missing. Add them at https://github.com/${{ github.repository }}/settings/secrets/actions then re-run this workflow."
-            node "$TOOL/sync.mjs" --tree main=main --tree live=live --dry-run
+            node "$TOOL/sync.mjs" --tree main=main --dry-run
             exit 1
           fi
       # R2_ACCESS_KEY_ID may hold a Cloudflare API token (cfat_...) instead of an S3 Access Key ID. R2's S3 key
@@ -83,7 +80,7 @@ jobs:
           R2_PUBLIC_BASE_URL: ${{ secrets.R2_PUBLIC_BASE_URL }}
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
           SITE_R2_BASE: https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev
-        run: node "$TOOL/sync.mjs" --tree main=main --tree live=live
+        run: node "$TOOL/sync.mjs" --tree main=main
       - name: Check the live site reads the store
         run: |
           code=$(curl -s -o /tmp/paths.json -w '%{http_code}' 'https://abbies-ranch-atelier.vercel.app/api/models?paths=1' || true)

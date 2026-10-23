@@ -1,0 +1,23 @@
+import {RanchRenderer} from './ranch-renderer.js';
+import * as THREE from 'three';
+import {OrbitControls} from '/vendor/OrbitControls.js';
+const styles=[['faceted','01 / Faceted','Crisp planes, angular forms, and a small earthy palette.'],['soft-toy','02 / Soft toy','Rounded bodies and softened edges, like little painted toys.'],['wooden','03 / Wooden pieces','Chunky blocks, visible joints, and warm wooden colors.']];
+const views=[];let subject='horse',serial=0,manifest=[];
+for(const [id,title,description] of styles){
+ const card=document.createElement('article');card.className='study';card.innerHTML=`<div class="viewport" aria-label="${title} interactive model"><span class="hint">Drag to turn · pinch to zoom</span></div><div class="info"><h2>${title}</h2><p>${description}</p><div class="swatches"></div><div class="meta">Preparing model</div><a class="download" download>Download model · GLB ↗</a></div>`;document.querySelector('#studies').append(card);
+ const host=card.querySelector('.viewport'),renderer=new RanchRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setClearColor('#e5e6d8');renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;host.prepend(renderer.domElement);
+ const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(35,1,.1,50);scene.add(new THREE.HemisphereLight(0xfff5df,0x849276,2));const sun=new THREE.DirectionalLight(0xfff3dc,3);sun.position.set(-3,7,5);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
+ const floor=new THREE.Mesh(new THREE.CylinderGeometry(1.9,1.9,.09,48),new THREE.MeshStandardMaterial({color:'#d2d7bd',roughness:1}));floor.position.y=-.055;floor.receiveShadow=true;scene.add(floor);
+ const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,1.1,0);controls.minDistance=3;controls.maxDistance=12;controls.maxPolarAngle=Math.PI*.49;controls.enablePan=false;
+ const render=()=>renderer.render(scene,camera);controls.addEventListener('change',()=>{render();window.RanchView?.changed();});
+ const reset=()=>{camera.position.set(4,3.0,5);controls.target.set(0,1.1,0);controls.update();render();};reset();
+ new ResizeObserver(()=>{const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();render();}).observe(host);
+ views.push({id,card,scene,camera,controls,render,reset,model:null});
+}
+async function show(next){subject=next;const stamp=++serial;document.querySelectorAll('[data-subject]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.subject===subject)));document.querySelector('#status').textContent='Loading '+subject+' studies…';try{
+ const models=await Promise.all(views.map(async v=>{const response=await fetch(`/asset-studies/${next}-${v.id}.json`);if(!response.ok)throw Error('Model unavailable');return response.json();}));if(stamp!==serial)return;
+ views.forEach((v,index)=>{if(v.model){v.scene.remove(v.model);v.model.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}const group=new THREE.Group(),colors=new Set();for(const part of models[index]){const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(part.positions,3));geometry.computeVertexNormals();const color=new THREE.Color().setRGB(...part.color,THREE.SRGBColorSpace);colors.add('#'+color.getHexString());const mesh=new THREE.Mesh(geometry,new THREE.MeshStandardMaterial({color,roughness:.88,flatShading:true}));mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);}v.model=group;v.scene.add(group);v.reset();const record=manifest.find(m=>m.id===`${next}-${v.id}`);v.card.querySelector('.meta').textContent=record?`${record.triangles.toLocaleString()} triangles · ${Math.round(record.bytes/1024)} KB GLB`:'';v.card.querySelector('.download').href=`/asset-studies/${next}-${v.id}.glb`;v.card.querySelector('.swatches').innerHTML=[...colors].map(c=>`<i style="background:${c}"></i>`).join('');});document.querySelector('#status').textContent='';window.RanchView?.changed();
+ }catch(e){document.querySelector('#status').textContent='Could not load these studies. Please refresh to retry.';console.error(e);}}
+document.querySelectorAll('[data-subject]').forEach(b=>b.onclick=()=>show(b.dataset.subject));document.querySelector('#reset').onclick=()=>views.forEach(v=>v.reset());
+window.RanchView?.register('assetStudies',()=>({subject,styles:views.map(v=>({style:v.id,camera:v.camera.position.toArray()}))}),()=>views.forEach(v=>v.render()));
+fetch('/asset-studies/manifest.json').then(r=>r.json()).then(m=>{manifest=m;show('horse');}).catch(()=>show('horse'));
