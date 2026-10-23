@@ -128,5 +128,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T15:55:35Z"
+  },
+  {
+    "id": "A6-clay",
+    "prompt": "friendly small grey alien crewmate, big eyes, green suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "20378079-a75e-4663-881f-aa6953b26112",
+    "files": [
+      "tools/meshy-heroes/refs/A6-clay/mj_20378079-a75e-4663-881f-aa6953b26112_0.png",
+      "tools/meshy-heroes/refs/A6-clay/mj_20378079-a75e-4663-881f-aa6953b26112_1.png",
+      "tools/meshy-heroes/refs/A6-clay/mj_20378079-a75e-4663-881f-aa6953b26112_2.png",
+      "tools/meshy-heroes/refs/A6-clay/mj_20378079-a75e-4663-881f-aa6953b26112_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:56:10Z"
+  },
+  {
+    "id": "A6-paint",
+    "prompt": "friendly small grey alien crewmate, big eyes, green suit lights, in a chunky Moon astronaut suit with helmet off at the hip, oxygen pack, boots and gloves, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "21814c87-7380-45cd-84b9-4c284a6c62f2",
+    "files": [
+      "tools/meshy-heroes/refs/A6-paint/mj_21814c87-7380-45cd-84b9-4c284a6c62f2_0.png",
+      "tools/meshy-heroes/refs/A6-paint/mj_21814c87-7380-45cd-84b9-4c284a6c62f2_1.png",
+      "tools/meshy-heroes/refs/A6-paint/mj_21814c87-7380-45cd-84b9-4c284a6c62f2_2.png",
+      "tools/meshy-heroes/refs/A6-paint/mj_21814c87-7380-45cd-84b9-4c284a6c62f2_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T15:56:37Z"
   }
 ]
