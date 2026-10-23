@@ -1,0 +1,25 @@
+{
+ "study": "AW-STUDY-0040 Texture Studio",
+ "note": "Context engineering: what this study read before building, and what it took from each. Org-wide rule (Evan, 2026-10-23 13:55Z): every study lists its Oracle consultation, game dev and game design blogs and tutorials.",
+ "groups": [
+  {"name": "Oracle consultation", "items": [
+   {"t": "Marvel Rivals identity record", "doc": "docs/oracle/games/marvel-rivals.json", "took": "Comic ink family: banded light, inverted-hull outlines, hand-painted surface. Its lesson, outline width follows distance, is how the ink shell thins here."},
+   {"t": "Rendering study and the Shaders article", "doc": "docs/oracle/rendering/RENDERING_STUDY.md", "took": "The toon set every look picks from (Sunday Toon, Ink, Clay as the cheap half of Storybook)."},
+   {"t": "Blender techniques for stylised 3D", "doc": "docs/oracle/blender-techniques.md", "took": "Two flat swatches per part (lit and shaded) instead of painted light; the pushed-out back-face shell for ink."},
+   {"t": "AW-STUDY-0028 Storybook Light", "href": "/studies/storybook/", "took": "Warm terminator band and wrap light for clay skin: the Clay light here."},
+   {"t": "AW-STUDY-0027 Brute Fight", "href": "/studies/brute-fight/", "took": "The rigged Meshy brutes, their 20-bone skeleton, walk and paint, reused as is."}
+  ]},
+  {"name": "Game dev talks and blogs", "items": [
+   {"t": "Junya Motomura, Guilty Gear Xrd's Art Style (GDC 2015)", "href": "https://gdcvault.com/play/1022031/GuiltyGearXrd-s-Art-Style-The", "took": "Hard lit/shaded threshold, flat colour per part, outlines from an inverted hull: the Saturday Action recipe."},
+   {"t": "Arc System Works, Guilty Gear toon line control", "href": "https://docswell.com/s/ASW_Academy/5LVY67-GG-Toonline-Eng", "took": "Outline shells need smoothed normals or they crack at hard edges; the shell now averages normals first."}
+  ]},
+  {"name": "Game design and craft reading", "items": [
+   {"t": "American Cinematographer, A Textured World (Curse of the Were-Rabbit)", "href": "https://theasc.com/magazine/oct05/curse/page2.html", "took": "Aardman keeps the thumbprints and tool marks on purpose; the Plasticine look prints them into colour and bump."},
+   {"t": "Peter Lord on Aardman's thumbiness", "href": "https://www.shortlist.com/entertainment/aardmans-sir-peter-lord-on-his-journey-from-a-kitchen-table-to-hollywood-rocket-packs-and-how-the-studio-favours-thumbiness-over-ai", "took": "Hand marks are the charm; never smooth them away."}
+  ]},
+  {"name": "Tutorials", "items": [
+   {"t": "three.js MeshToonMaterial and gradient maps (SBCODE)", "href": "https://sbcode.net/threejs/meshtoonmaterial/", "took": "Banded light from a few-texel ramp; we patch three's own physical material instead, so normal maps and sheen keep working."},
+   {"t": "Unity Toon Shader: base, 1st and 2nd shade colours", "href": "https://docs.unity3d.com/Packages/com.unity.toonshader@0.9/manual/GettingStarted.html", "took": "Per-part base and shade colours, which is how each look's part colours and posterised shading are set."}
+  ]}
+ ]
+}
