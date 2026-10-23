@@ -278,6 +278,70 @@
   "school-ready": {
    "items": [
     {
+     "k": "oracle",
+     "t": "Memory places review",
+     "href": "https://claude.ai/artifact/1qPFbCMZ81PTMb44cSfZcN",
+     "note": "The dog is the hook, headlights on a rhythm, busted slides you back to cover, the climb verb in the shared kit, one timing ring"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle consult, studies-only plan",
+     "note": "It matched building games (Bricktales, Tiny Glade); kept one rule: no wrong moves. The Oracle has no climbing or stealth study yet"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle catalog: Monaco, Shadow Tactics, Shadow of Mordor",
+     "note": "Stealth read from light and vision; being seen builds up, it isn't an instant fail"
+    },
+    {
+     "k": "oracle",
+     "t": "Shaders article and the rendering index (62 games)",
+     "href": "https://claude.ai/artifact/2qnHmuYv8iy5TV7BR4cW9z",
+     "note": "Sunday Toon: soft bands, sky-tinted shadows, warm rim, no outlines"
+    },
+    {
+     "k": "devblog",
+     "t": "Illustrative Rendering in Team Fortress 2 (Valve, 2007)",
+     "href": "https://www.advances.realtimerendering.com/s2007/Mitchell-IllustrativeRenderingInTF2(Siggraph07%20Course%20Notes).pdf",
+     "note": "Wrap the light half-way round, then a ramp; shadows never go black"
+    },
+    {
+     "k": "devblog",
+     "t": "Stylization with a Purpose (Valve, GDC 2008)",
+     "href": "https://cdn.fastly.steamstatic.com/apps/valve/2008/GDC2008_StylizationWithAPurpose_TF2.pdf",
+     "note": "Silhouette first, so a child reads the kid against the brick"
+    },
+    {
+     "k": "devblog",
+     "t": "Celeste's hidden forgiveness (Maddy Thorson)",
+     "href": "https://gigazine.net/gsc_news/en/20200317-celeste-action-feel-things",
+     "note": "Cheat in the player's favour: big thumb targets, the game picks the hand, no dead ends"
+    },
+    {
+     "k": "design",
+     "t": "Stealth game spotting, deconstructed (Critical Points)",
+     "href": "https://critpoints.net/2015/03/30/stealth-game-spotting-deconstruction/",
+     "note": "Detection meter with grace time and last known position: our burning headlights and the slide back to cover"
+    },
+    {
+     "k": "design",
+     "t": "Breath of the Wild's cut climbing rest (Destructoid)",
+     "href": "https://www.destructoid.com/you-could-originally-regain-stamina-while-climbing-in-zelda-breath-of-the-wild-but-miyamoto-nixed-it/",
+     "note": "Nintendo cut resting mid-climb; for a child we keep it: two hands on and your arms recover"
+    },
+    {
+     "k": "tutorial",
+     "t": "A toon light shader, step by step (hexaquo)",
+     "href": "https://hexaquo.at/pages/understanding-godot-light-shaders-and-light-calculations-by-implementing-a-toon-light-shader/",
+     "note": "Band the light term per light with smoothstep: how toon-kit.mjs patches three's lighting"
+    },
+    {
+     "k": "tutorial",
+     "t": "Ramp and toon shaders (UMBC)",
+     "href": "https://userpages.umbc.edu/~bailey/Courses/Tutorials/RenderingDemo/RampToonShader.html",
+     "note": "A ramp you can repaint per place"
+    },
+    {
      "k": "canon",
      "t": "The School Jump study (0026) and its speed review",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_STUDY.md"
@@ -286,9 +350,24 @@
      "k": "canon",
      "t": "Game-ready review and the canon it learned",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_READY_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "HUD and information study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Interaction grammar (climbing: tap what shines)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+    },
+    {
+     "k": "reference",
+     "t": "Evan's key art for the school jump (Midjourney)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/school/img/concepts/1-key-art.jpg"
     }
    ],
-   "recorded": "2026-10-23, gathered afterwards from the study docs"
+   "recorded": "2026-10-23, the study's own list (also its page's card)"
   },
   "basement": {
    "items": [
