@@ -28,14 +28,17 @@ export const BOOSTS = {
 export const BOOST_IDS = Object.keys(BOOSTS);
 
 const faces = new Map();
-export function boostFace(id) {
- if (!faces.has(id)) faces.set(id, (async () => {
+// The card's cell wears the player's own colour: the art is pink by default, so tinting is swapping its two colours.
+const tinted = (art, L) => !L ? art : 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(decodeURIComponent(art.slice(art.indexOf(',') + 1)).replaceAll('#ff8fd0', L.body).replaceAll('#43123c', L.ink));
+export function boostFace(id, L) {
+ const key = id + (L ? L.body : '');
+ if (!faces.has(key)) faces.set(key, (async () => {
   const B = BOOSTS[id];
-  const {canvas} = await renderFace({id: 'boost-' + id, name: B.name, art: B.art, edition: BOOST_IDS.indexOf(id) + 1, set: BOOST_IDS.length,
+  const {canvas} = await renderFace({id: 'boost-' + id + (L ? L.body : ''), name: B.name, art: tinted(B.art, L), edition: BOOST_IDS.indexOf(id) + 1, set: BOOST_IDS.length,
    palette: {name: B.name, air: '#1c3a33', ...B.palette}}, {style: 'diecut', dpi: 150});
   return canvas.toDataURL('image/png');
  })().catch(() => B_FALLBACK(id)));
- return faces.get(id);
+ return faces.get(key);
 }
 // if the card fonts or canvas fail, the art alone still reads as the card
 const B_FALLBACK = id => BOOSTS[id].art;
@@ -45,13 +48,13 @@ const CSS = `.bc-hand{position:fixed;display:flex;gap:4px;z-index:5;pointer-even
 .bc-hand img.focus{transform:translateY(-8px) scale(1.12)}
 .bc-hand img.new{animation:bc-deal .5s cubic-bezier(.2,1.4,.4,1)}
 @keyframes bc-deal{from{transform:translateY(40px) rotate(-12deg) scale(.6);opacity:0}}`;
-export function hand(el) {
+export function hand(el, L) {
  if (!document.getElementById('bc-css')) document.head.append(Object.assign(document.createElement('style'), {id: 'bc-css', textContent: CSS}));
  el.classList.add('bc-hand');
- const H = {onPlay: () => {}, ids: [],
+ const H = {onPlay: () => {}, ids: [], look: L,
   async set(ids, focus = 0) {
    const prev = H.ids; H.ids = [...ids];
-   const urls = await Promise.all(ids.map(boostFace));
+   const urls = await Promise.all(ids.map(i => boostFace(i, H.look)));
    el.replaceChildren(...urls.map((u, i) => {
     const img = new Image(); img.src = u; img.alt = BOOSTS[ids[i]].name; img.draggable = false;
     if (i === focus && ids.length > 1) img.classList.add('focus');
