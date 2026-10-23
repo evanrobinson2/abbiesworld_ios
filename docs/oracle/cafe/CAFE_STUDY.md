@@ -315,6 +315,20 @@ Evan: "dance party is a memory game.. follow my lead". Simon-says on the light-u
 - **Kind to small memories:** a miss replays the sequence slower, with no losing. Two can play: a parent leads, the
   child follows, then swap.
 
+### The old computer behind the counter (Evan, 2026-10-23 07:27Z)
+
+Evan: "there's a computer terminal behind the counter with an old CRT and the original MS-DOS typing tutor game."
+
+- **The prop:** a beige 1980s-style PC with a chunky keyboard and a curved green-or-amber CRT, on the back counter
+  by the till. It's a world object: the crew use it for orders, and customers glance at it.
+- **The game:** a typing tutor in that old-DOS look (blocky 80-column text, a blinking cursor, a beep on a mistake,
+  a drill that speeds up). It's **our own** game, not the original program: the style is borrowed and the expression
+  never is (the Game Identity rule). The drills use café words (latte, sprinkles, cherry, disco) and the names of
+  regulars.
+- **In the day:** typing the orders into the terminal is an optional job, like the others (the crew does it if
+  Abbie doesn't), and a quiet-morning drill is something to do at the counter.
+- Added to the manifest's back bar as `crt_terminal`.
+
 ### The café pets (Evan, 2026-10-23 07:26Z)
 
 Evan: "also the cafe has pets." They live in the shop (which kinds is Abbie's choice; a cat and a pup to start), and

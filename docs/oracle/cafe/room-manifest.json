@@ -488,6 +488,15 @@
    "material": "neon_pink, neon_cyan",
    "tier": "support",
    "notes": ""
+  },
+  {
+   "id": "crt_terminal",
+   "name": "Old computer with a CRT",
+   "kind": "prop",
+   "where": "back counter, by the till",
+   "material": "plastic_beige, crt_glass (green or amber glow), keyboard_beige",
+   "tier": "hero",
+   "notes": "Runs our own old-DOS-style typing tutor (style yes, expression never)"
   }
  ],
  "map_hex": {
