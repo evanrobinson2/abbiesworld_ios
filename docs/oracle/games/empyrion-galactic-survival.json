@@ -53,9 +53,9 @@
       "post": [
         "ambient occlusion"
       ],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "signature": "Block-built ships with sloped blocks and painted panels on a voxel grid.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
     },
     "motion": null,
     "palette": null,

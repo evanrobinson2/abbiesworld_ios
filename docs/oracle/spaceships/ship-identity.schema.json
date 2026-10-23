@@ -1,0 +1,224 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "abbies-world/oracle/ship-identity.schema.json",
+ "title": "Ship identity record (oracle.ship.v1)",
+ "description": "How one ship in one game is designed, in the Oracle's way, so ships compare on the same fields. Extends the game identity schema (docs/oracle/identity/game-identity.schema.json). Style yes, expression never: describe, never copy.",
+ "type": "object",
+ "required": [
+  "id",
+  "game",
+  "ship",
+  "role",
+  "silhouette",
+  "shape_language",
+  "function_parts",
+  "modularity",
+  "interior",
+  "boarding",
+  "displays",
+  "lessons",
+  "sources",
+  "confidence"
+ ],
+ "properties": {
+  "id": {
+   "type": "string"
+  },
+  "game": {
+   "type": "string"
+  },
+  "oracle_slug": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "docs/oracle/games/<slug>.json if in Evan's library"
+  },
+  "owned": {
+   "type": "boolean"
+  },
+  "ship": {
+   "type": "string"
+  },
+  "studio": {
+   "type": "string"
+  },
+  "role": {
+   "enum": [
+    "home",
+    "vehicle",
+    "character",
+    "build",
+    "board",
+    "weapon",
+    "fleet_icon",
+    "map",
+    "city"
+   ]
+  },
+  "story": {
+   "type": "string",
+   "description": "who flies it and what it has been through"
+  },
+  "size_m": {
+   "type": [
+    "array",
+    "null"
+   ],
+   "items": {
+    "type": "number"
+   },
+   "description": "length, width, height"
+  },
+  "mass_t": {
+   "type": [
+    "number",
+    "null"
+   ]
+  },
+  "silhouette": {
+   "type": "object",
+   "properties": {
+    "primary_volumes": {
+     "type": "string"
+    },
+    "rear_read": {
+     "type": "string"
+    },
+    "distance_read": {
+     "type": "string"
+    },
+    "focal_area": {
+     "type": "string"
+    }
+   }
+  },
+  "shape_language": {
+   "type": "object",
+   "properties": {
+    "words": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "family": {
+     "type": "string"
+    }
+   }
+  },
+  "function_parts": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "modularity": {
+   "type": "object",
+   "properties": {
+    "kind": {
+     "enum": [
+      "none",
+      "variants",
+      "slots",
+      "modules",
+      "blocks",
+      "procedural_parts"
+     ]
+    },
+    "changes_silhouette": {
+     "type": "boolean"
+    },
+    "changes_mass": {
+     "type": "boolean"
+    },
+    "note": {
+     "type": "string"
+    }
+   }
+  },
+  "interior": {
+   "type": "object",
+   "properties": {
+    "kind": {
+     "enum": [
+      "none",
+      "cockpit_only",
+      "cutaway",
+      "walk_through"
+     ]
+    },
+    "note": {
+     "type": "string"
+    }
+   }
+  },
+  "boarding": {
+   "type": "string"
+  },
+  "mechanics": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "displays": {
+   "type": "object",
+   "properties": {
+    "mix": {
+     "type": "object"
+    },
+    "state_on_ship": {
+     "type": "string"
+    }
+   }
+  },
+  "flight_feel": {
+   "type": "string"
+  },
+  "damage_and_upgrade": {
+   "type": "string"
+  },
+  "sound": {
+   "type": "string"
+  },
+  "rendering": {
+   "type": [
+    "object",
+    "null"
+   ]
+  },
+  "lessons": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "text",
+     "kind"
+    ],
+    "properties": {
+     "text": {
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "style",
+       "expression"
+      ]
+     }
+    }
+   }
+  },
+  "sources": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "confidence": {
+   "type": "number",
+   "minimum": 0,
+   "maximum": 1
+  }
+ }
+}

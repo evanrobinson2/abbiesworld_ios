@@ -2770,6 +2770,130 @@
           "note": "No outside tutorial read this round"
         }
       ]
+    },
+    "spaceships": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "27 space and sci-fi game profiles, plus Outer Wilds, ASTRONEER and Among Us",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "oracle",
+          "t": "\"How it's drawn\" hand-studied for 16 space games",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/steam-study/rendering_notes.py"
+        },
+        {
+          "k": "oracle",
+          "t": "Ship identity records (oracle.ship.v1, 13 ships)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/spaceships/ship-signatures.json"
+        },
+        {
+          "k": "devblog",
+          "t": "RSI: How Ideas Take Flight, the ship pipeline",
+          "href": "https://robertsspaceindustries.com/en/comm-link/transmission/14244-How-Ideas-Take-Flight-The-Star-Citizen-Ship-Pipeline"
+        },
+        {
+          "k": "devblog",
+          "t": "RSI: Aurora Mk II Q&A",
+          "href": "https://starcitizen.tools/Comm-Link:Q%26A_-_RSI_Aurora"
+        },
+        {
+          "k": "devblog",
+          "t": "Aurora Mk II reference",
+          "href": "https://starcitizen.tools/RSI_Aurora_Mk_II"
+        },
+        {
+          "k": "devblog",
+          "t": "Star Citizen pipeline and Gold Standard",
+          "href": "https://starcitizen.tools/Ship_Pipeline"
+        },
+        {
+          "k": "devblog",
+          "t": "CCP: Iconic Ships Reimagined, the Rupture",
+          "href": "https://eveonline.com/article/iconic-ships-reimagined-the-minmatar-rupture"
+        },
+        {
+          "k": "devblog",
+          "t": "CCP: Strategic Cruisers",
+          "href": "https://www.eveonline.com/article/strategic-cruisers-a-new-breed/"
+        },
+        {
+          "k": "devblog",
+          "t": "The Art of New Eden",
+          "href": "https://www.gamingnexus.com/Article/4771/GN-Unplugged-EVE-Universe--The-Art-of-New-Eden"
+        },
+        {
+          "k": "devblog",
+          "t": "Starfield: NASA-punk",
+          "href": "https://www.techradar.com/news/starfields-developers-are-aiming-for-a-nasa-punk-aesthetic"
+        },
+        {
+          "k": "devblog",
+          "t": "Starfield: habs and interiors",
+          "href": "https://dotesports.com/starfield/news/starfield-shipbuilder-habs-explained-interiors-stations-and-more"
+        },
+        {
+          "k": "devblog",
+          "t": "KSP: art and modelling",
+          "href": "https://www.gamedeveloper.com/art/environment-art-and-modeling-in-kerbal-space-program"
+        },
+        {
+          "k": "devblog",
+          "t": "GDC: the FTL postmortem",
+          "href": "https://gdcvault.com/play/1018034/Designing-Without-a-Pitch-FTL"
+        },
+        {
+          "k": "devblog",
+          "t": "GDC: Outer Wilds",
+          "href": "https://www.gdcvault.com/play/1027368/"
+        },
+        {
+          "k": "devblog",
+          "t": "Stellaris dev diary 230: ship art",
+          "href": "https://forum.paradoxplaza.com/forum/developer-diary/stellaris-dev-diary-230-the-art-of-aquatics-ships-the-drake.1495959/"
+        },
+        {
+          "k": "design",
+          "t": "Video game spaceship design",
+          "href": "https://www.creativebloq.com/sci-fi/video-game-spaceship-design-21619331"
+        },
+        {
+          "k": "tutorial",
+          "t": "Modelling a spaceship for gameplay",
+          "href": "https://creativebloq.com/how-to/modelling-a-spaceship-for-gameplay-design"
+        },
+        {
+          "k": "design",
+          "t": "Design analysis: Moth",
+          "href": "https://acapulco.artstation.com/blog/z6Br/design-analysis-moth-by-john-liberto"
+        },
+        {
+          "k": "design",
+          "t": "Star Citizen UI revisited",
+          "href": "https://www.hudsandguis.com/home/star-citizen-revisited-part-1"
+        },
+        {
+          "k": "tutorial",
+          "t": "Crafting Star Citizen's 3D concepts",
+          "href": "https://magazine.artstation.com/2015/09/crafting-star-citizens-3d-concepts/"
+        },
+        {
+          "k": "canon",
+          "t": "HUD and information study",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Game identity schema and rendering study",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/"
+        },
+        {
+          "k": "reference",
+          "t": "Spaceship study write-up",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/spaceships/SPACESHIP_STUDY.md"
+        }
+      ]
     }
   }
 }

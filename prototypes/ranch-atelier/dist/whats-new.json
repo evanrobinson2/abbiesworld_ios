@@ -465,6 +465,17 @@
       "link": "/studies/character-studio/puppet.html?move=Walk"
     },
     {
+      "id": "2026-10-23-spaceships",
+      "date": "2026-10-23",
+      "title": "Spaceship games study",
+      "line": "How Star Citizen, Starfield and EVE design their ships, all 27 space games in the Oracle, the rules Abbie's World adopts, and a white-box ship you can land, board and fly.",
+      "image": "/whats-new/2026-10-23-spaceships.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJNoFLSpdq2Dfxnhw1Dt7fJ",
+      "threadTitle": "Aurora Mk 2 spaceship",
+      "tour": false,
+      "link": "/studies/spaceships/"
+    },
+    {
       "id": "2026-10-23-study-context",
       "date": "2026-10-23",
       "title": "What each study drew on",

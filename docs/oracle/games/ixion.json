@@ -49,10 +49,13 @@
       "outlines": false,
       "outline": "none",
       "surface": "pbr",
-      "post": [],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.15
+      "post": [
+        "bloom",
+        "colour grade"
+      ],
+      "signature": "A ring-ship whose sectors are a city builder; retro-future warm interiors against cold space.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.45
     },
     "motion": null,
     "palette": null,

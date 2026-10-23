@@ -1,0 +1,934 @@
+{
+ "schema": "oracle.ship.v1",
+ "study": "AW-STUDY-0035",
+ "date": "2026-10-23",
+ "note": "Ship identity records. Style yes, expression never. Sizes and masses from the cited sources; other facts are public-knowledge estimates.",
+ "ships": [
+  {
+   "id": "sc-aurora-mk2",
+   "game": "Star Citizen",
+   "oracle_slug": null,
+   "owned": false,
+   "ship": "RSI Aurora Mk II",
+   "studio": "Cloud Imperium Games",
+   "role": "vehicle",
+   "story": "The new generation of the universe's classic starter ship: does a little of every mission.",
+   "size_m": [
+    24.5,
+    28,
+    7.5
+   ],
+   "mass_t": 63.5,
+   "silhouette": {
+    "primary_volumes": "central fuselage with cockpit, four swept wings over and under, rear module bay",
+    "rear_read": "four swept wings and the rear module bay",
+    "distance_read": "X of four wings",
+    "focal_area": "cockpit window"
+   },
+   "shape_language": {
+    "words": [
+     "swept",
+     "compact",
+     "versatile"
+    ],
+    "family": "RSI"
+   },
+   "function_parts": [
+    "cockpit",
+    "pilot seat",
+    "engineering terminal",
+    "bed",
+    "suit locker",
+    "weapon racks",
+    "2 SCU drop-down hold",
+    "VTOL fans in lower wings",
+    "folding wings",
+    "external module bay"
+   ],
+   "modularity": {
+    "kind": "modules",
+    "changes_silhouette": true,
+    "changes_mass": true,
+    "note": "Cargo (+6 SCU) and combat (missiles, shield) modules snap on with a tractor beam; both add mass and slow handling. Chosen over variants."
+   },
+   "interior": {
+    "kind": "walk_through",
+    "note": "Bigger than the Mk I because ships now need space to walk and reach items and components; components on top reachable by climbing over the cockpit window."
+   },
+   "boarding": "Circular port-side door, a nod to the Mk I",
+   "mechanics": [
+    "wings fold back for landing (forced in landing mode)",
+    "VTOL fans for hover and landing",
+    "drop-down cargo hold"
+   ],
+   "displays": {
+    "mix": {
+     "diegetic": 0.5,
+     "overlay": 0.3,
+     "spatial": 0.2
+    },
+    "state_on_ship": "Diegetic cockpit screens; wing guns go cold when folded"
+   },
+   "flight_feel": "Light fighter handling; modules make it heavier",
+   "damage_and_upgrade": "Damage per part (pipeline); modules as upgrades",
+   "sound": "Not studied",
+   "lessons": [
+    {
+     "text": "Keep three signatures of the Mk 1 (round door, bed, window) and redesign the rest for how the game plays now.",
+     "kind": "style"
+    },
+    {
+     "text": "Turn variants into visible snap-on modules that add mass.",
+     "kind": "style"
+    },
+    {
+     "text": "Grow the interior for walking and reaching components.",
+     "kind": "style"
+    },
+    {
+     "text": "The exact four-wing over-under layout and RSI styling.",
+     "kind": "expression"
+    }
+   ],
+   "sources": [
+    "https://starcitizen.tools/RSI_Aurora_Mk_II",
+    "https://starcitizen.tools/Comm-Link:Q%26A_-_RSI_Aurora"
+   ],
+   "confidence": 0.75
+  },
+  {
+   "id": "sc-aurora-mk1",
+   "game": "Star Citizen",
+   "oracle_slug": null,
+   "owned": false,
+   "ship": "RSI Aurora Mk I (LN, LX, MR, ES, CL, SE)",
+   "studio": "Cloud Imperium Games",
+   "role": "vehicle",
+   "story": "The Model-T starter ship of Star Citizen since 2013.",
+   "size_m": [
+    19,
+    8.75,
+    4.5
+   ],
+   "mass_t": 27.1,
+   "silhouette": {
+    "primary_volumes": "tubular fuselage, cockpit, short wings",
+    "rear_read": "round engine cluster",
+    "distance_read": "small light fighter",
+    "focal_area": "cockpit"
+   },
+   "shape_language": {
+    "words": [
+     "compact",
+     "utility"
+    ],
+    "family": "RSI"
+   },
+   "function_parts": [
+    "cockpit",
+    "bed",
+    "2 doors",
+    "wing hardpoints"
+   ],
+   "modularity": {
+    "kind": "variants",
+    "changes_silhouette": false,
+    "changes_mass": false,
+    "note": "Five to six variants; once separate models, later assembled from shared pieces so a cockpit change is made once."
+   },
+   "interior": {
+    "kind": "cockpit_only",
+    "note": "Pilot seat and bed"
+   },
+   "boarding": "Side door",
+   "mechanics": [],
+   "displays": {
+    "mix": {
+     "diegetic": 0.5,
+     "overlay": 0.5
+    },
+    "state_on_ship": "Cockpit screens"
+   },
+   "flight_feel": "Starter handling",
+   "damage_and_upgrade": "Per-part damage states",
+   "sound": "Not studied",
+   "lessons": [
+    {
+     "text": "Variants built from shared parts so one change reaches all.",
+     "kind": "style"
+    }
+   ],
+   "sources": [
+    "https://starcitizen.tools/Aurora_Mk_I_LN",
+    "https://robertsspaceindustries.com/en/comm-link/transmission/14244-How-Ideas-Take-Flight-The-Star-Citizen-Ship-Pipeline"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "id": "starfield-frontier",
+   "game": "Starfield",
+   "oracle_slug": "starfield",
+   "owned": true,
+   "ship": "Frontier and player-built ships",
+   "studio": "Bethesda Game Studios",
+   "role": "home",
+   "story": "Your first ship, then the ship you build into your house.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "cockpit module, habs, engines, gear",
+    "rear_read": "engine cluster",
+    "distance_read": "boxy NASA-punk stack",
+    "focal_area": "cockpit"
+   },
+   "shape_language": {
+    "words": [
+     "modular",
+     "boxy",
+     "NASA-punk",
+     "stencilled"
+    ],
+    "family": "manufacturers: Taiyo, Deimos, Hopetech, Stroud-Eklund, Nova Galactic"
+   },
+   "function_parts": [
+    "cockpit",
+    "habs",
+    "reactor",
+    "grav drive",
+    "engines",
+    "landing gear",
+    "docker",
+    "landing bay",
+    "structural parts"
+   ],
+   "modularity": {
+    "kind": "modules",
+    "changes_silhouette": true,
+    "changes_mass": true,
+    "note": "Snap kit; habs generate the interior; manufacturer changes look, not function; every hab must connect."
+   },
+   "interior": {
+    "kind": "walk_through",
+    "note": "Interior generated from habs; doors and ladders connect automatically"
+   },
+   "boarding": "Ramp or ladder through the landing bay",
+   "mechanics": [
+    "landing gear",
+    "landing and take-off shots"
+   ],
+   "displays": {
+    "mix": {
+     "diegetic": 0.4,
+     "overlay": 0.6
+    },
+    "state_on_ship": "Cockpit screens"
+   },
+   "flight_feel": "Arcade-sim",
+   "damage_and_upgrade": "Parts swap in the builder",
+   "sound": "Engine rumble, cockpit chatter",
+   "lessons": [
+    {
+     "text": "Interior generated from the parts you snap on outside.",
+     "kind": "style"
+    },
+    {
+     "text": "Manufacturer skins change look, not job.",
+     "kind": "style"
+    }
+   ],
+   "sources": [
+    "https://www.techradar.com/news/starfields-developers-are-aiming-for-a-nasa-punk-aesthetic",
+    "https://dotesports.com/starfield/news/starfield-shipbuilder-habs-explained-interiors-stations-and-more"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "id": "eve-rupture",
+   "game": "EVE Online",
+   "oracle_slug": null,
+   "owned": false,
+   "ship": "Minmatar Rupture (and the four factions)",
+   "studio": "CCP Games",
+   "role": "fleet_icon",
+   "story": "A proud scrapyard cruiser of a freed people.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "aggressive wedge, tall rear, downward hull",
+    "rear_read": "galleon transom",
+    "distance_read": "inverted pyramid",
+    "focal_area": "gun-port battery"
+   },
+   "shape_language": {
+    "words": [
+     "wedge",
+     "junk",
+     "spaced plating",
+     "exposed beams"
+    ],
+    "family": "Minmatar (vs Amarr cathedral, Caldari slab, Gallente curve)"
+   },
+   "function_parts": [
+    "gun ports",
+    "engines",
+    "armor plates"
+   ],
+   "modularity": {
+    "kind": "variants",
+    "changes_silhouette": true,
+    "changes_mass": false,
+    "note": "Tech 2 variants add plates; Tech 3 cruisers: five subsystems that change the geometry, thousands of combinations."
+   },
+   "interior": {
+    "kind": "none",
+    "note": "Warm orange windows suggest a crowded, homey interior"
+   },
+   "boarding": "None",
+   "mechanics": [
+    "gun-port covers open after warp"
+   ],
+   "displays": {
+    "mix": {
+     "overlay": 0.7,
+     "spatial": 0.3
+    },
+    "state_on_ship": "Lights and windows suggest life"
+   },
+   "flight_feel": "Space-naval, slow and heavy",
+   "damage_and_upgrade": "T2 plates and T3 subsystems change the look",
+   "sound": "Not studied",
+   "lessons": [
+    {
+     "text": "One shape language per faction: cohesion within, distinction between.",
+     "kind": "style"
+    },
+    {
+     "text": "Messy 3D blockouts find problems 2D hides; check every angle for lost silhouette.",
+     "kind": "style"
+    },
+    {
+     "text": "Warm windows say people live inside.",
+     "kind": "style"
+    },
+    {
+     "text": "The Minmatar forms themselves.",
+     "kind": "expression"
+    }
+   ],
+   "sources": [
+    "https://eveonline.com/article/iconic-ships-reimagined-the-minmatar-rupture",
+    "https://www.eveonline.com/article/strategic-cruisers-a-new-breed/",
+    "https://www.gamingnexus.com/Article/4771/GN-Unplugged-EVE-Universe--The-Art-of-New-Eden"
+   ],
+   "confidence": 0.7
+  },
+  {
+   "id": "outer-wilds-ship",
+   "game": "Outer Wilds",
+   "oracle_slug": "outer-wilds",
+   "owned": true,
+   "ship": "The Hearthian ship",
+   "studio": "Mobius Digital",
+   "role": "home",
+   "story": "A wood-and-tin rocket a small village built; it rattles and you love it.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "round cabin, tripod legs, nozzle cluster",
+    "rear_read": "engine bell",
+    "distance_read": "small round lander",
+    "focal_area": "cockpit window"
+   },
+   "shape_language": {
+    "words": [
+     "round",
+     "handmade",
+     "wood",
+     "tin"
+    ],
+    "family": "Hearthian"
+   },
+   "function_parts": [
+    "cockpit",
+    "ship log computer",
+    "landing legs",
+    "thrusters",
+    "hatch and lift"
+   ],
+   "modularity": {
+    "kind": "none",
+    "changes_silhouette": false,
+    "changes_mass": false,
+    "note": ""
+   },
+   "interior": {
+    "kind": "walk_through",
+    "note": "Tiny walk-in cabin with the ship log and suit"
+   },
+   "boarding": "Lift ramp under the hull",
+   "mechanics": [
+    "lift",
+    "hatch",
+    "landing camera"
+   ],
+   "displays": {
+    "mix": {
+     "diegetic": 0.7,
+     "overlay": 0.3
+    },
+    "state_on_ship": "Cockpit gauges, warning lights, ship log"
+   },
+   "flight_feel": "Newtonian thrusters, autopilot, matching velocity",
+   "damage_and_upgrade": "Hull breaches you patch, damage per part",
+   "sound": "Engine creaks, campfire music",
+   "lessons": [
+    {
+     "text": "A small, fragile, handmade ship that feels like home.",
+     "kind": "style"
+    },
+    {
+     "text": "Ship log as a diegetic computer.",
+     "kind": "style"
+    }
+   ],
+   "sources": [
+    "https://www.gdcvault.com/play/1027368/"
+   ],
+   "confidence": 0.55
+  },
+  {
+   "id": "ksp-craft",
+   "game": "Kerbal Space Program",
+   "oracle_slug": "kerbal-space-program",
+   "owned": true,
+   "ship": "Player-built rockets",
+   "studio": "Squad",
+   "role": "build",
+   "story": "Whatever you bolted together, with Kerbals grinning in the window.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "stacked cylinders",
+    "rear_read": "engine bells",
+    "distance_read": "tall stack",
+    "focal_area": "command pod"
+   },
+   "shape_language": {
+    "words": [
+     "cylinder",
+     "stack",
+     "chunky",
+     "toy"
+    ],
+    "family": "stock parts"
+   },
+   "function_parts": [
+    "command pod",
+    "fuel tanks",
+    "engines",
+    "decouplers",
+    "fins",
+    "landing legs",
+    "parachutes"
+   ],
+   "modularity": {
+    "kind": "modules",
+    "changes_silhouette": true,
+    "changes_mass": true,
+    "note": "Parts on attach nodes; mass and centre of mass matter; staging."
+   },
+   "interior": {
+    "kind": "cockpit_only",
+    "note": "Kerbal faces in the pod windows"
+   },
+   "boarding": "Hatch",
+   "mechanics": [
+    "decouplers",
+    "landing legs",
+    "parachutes",
+    "solar panels"
+   ],
+   "displays": {
+    "mix": {
+     "overlay": 0.6,
+     "diegetic": 0.4
+    },
+    "state_on_ship": "Faces react; parts glow and explode"
+   },
+   "flight_feel": "Physics sim",
+   "damage_and_upgrade": "Parts break off; explosions are the comedy",
+   "sound": "Engine roar",
+   "lessons": [
+    {
+     "text": "Bulky minimal part shapes with one job each read as toys.",
+     "kind": "style"
+    },
+    {
+     "text": "Mass is visible: what you add changes how it flies.",
+     "kind": "style"
+    }
+   ],
+   "sources": [
+    "https://www.gamedeveloper.com/art/environment-art-and-modeling-in-kerbal-space-program"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "id": "nms-ships",
+   "game": "No Man's Sky",
+   "oracle_slug": "no-mans-sky",
+   "owned": true,
+   "ship": "Fighters, haulers, explorers, shuttles, exotics, living ships",
+   "studio": "Hello Games",
+   "role": "character",
+   "story": "Every ship is a find with its own class.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "class-specific body sets",
+    "rear_read": "engine pods",
+    "distance_read": "class reads by outline",
+    "focal_area": "cockpit canopy"
+   },
+   "shape_language": {
+    "words": [
+     "paperback sci-fi"
+    ],
+    "family": "ship classes"
+   },
+   "function_parts": [
+    "cockpit",
+    "wings",
+    "engines",
+    "landing gear"
+   ],
+   "modularity": {
+    "kind": "procedural_parts",
+    "changes_silhouette": true,
+    "changes_mass": false,
+    "note": "Procedural assembly from class part sets; tech slots upgrade."
+   },
+   "interior": {
+    "kind": "cockpit_only",
+    "note": "Canopy cockpit"
+   },
+   "boarding": "Climb-in animation",
+   "mechanics": [
+    "canopy",
+    "landing gear"
+   ],
+   "displays": {
+    "mix": {
+     "diegetic": 0.3,
+     "spatial": 0.4,
+     "overlay": 0.3
+    },
+    "state_on_ship": "Cockpit screens"
+   },
+   "flight_feel": "Arcade",
+   "damage_and_upgrade": "Tech slots",
+   "sound": "Engine hum",
+   "lessons": [
+    {
+     "text": "Classes recognisable by silhouette.",
+     "kind": "style"
+    },
+    {
+     "text": "Collecting ships as characters.",
+     "kind": "style"
+    }
+   ],
+   "sources": [
+    "https://www.mcvuk.com/sean-murray-discusses-no-mans-sky-development-at-gdc/"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "id": "ftl-kestrel",
+   "game": "FTL: Faster Than Light",
+   "oracle_slug": "ftl-faster-than-light",
+   "owned": true,
+   "ship": "The Kestrel and other cruisers",
+   "studio": "Subset Games",
+   "role": "board",
+   "story": "A Federation ship racing ahead of the rebel fleet.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "top-down hull",
+    "rear_read": "engines",
+    "distance_read": "top-down outline",
+    "focal_area": "room grid"
+   },
+   "shape_language": {
+    "words": [
+     "cutaway"
+    ],
+    "family": "Federation"
+   },
+   "function_parts": [
+    "shields room",
+    "engines room",
+    "weapons room",
+    "oxygen",
+    "medbay",
+    "piloting",
+    "doors"
+   ],
+   "modularity": {
+    "kind": "slots",
+    "changes_silhouette": false,
+    "changes_mass": false,
+    "note": "Systems and weapons slot into rooms."
+   },
+   "interior": {
+    "kind": "cutaway",
+    "note": "The floor plan is the interface; crew walk between rooms"
+   },
+   "boarding": "None",
+   "mechanics": [
+    "doors open and close"
+   ],
+   "displays": {
+    "mix": {
+     "diegetic": 0.2,
+     "spatial": 0.5,
+     "overlay": 0.3
+    },
+    "state_on_ship": "Fire, breaches and oxygen per room"
+   },
+   "flight_feel": "Not flown",
+   "damage_and_upgrade": "Damage per room: fire, breach, system down",
+   "sound": "Alarms",
+   "lessons": [
+    {
+     "text": "Rooms and crew explain a ship faster than any HUD.",
+     "kind": "style"
+    }
+   ],
+   "sources": [
+    "https://gdcvault.com/play/1018034/Designing-Without-a-Pitch-FTL"
+   ],
+   "confidence": 0.6
+  },
+  {
+   "id": "space-engineers-grid",
+   "game": "Space Engineers",
+   "oracle_slug": "space-engineers",
+   "owned": true,
+   "ship": "Block-built ships",
+   "studio": "Keen Software House",
+   "role": "build",
+   "story": "Whatever you engineer, block by block.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "blocks",
+    "rear_read": "thrusters",
+    "distance_read": "boxy",
+    "focal_area": "cockpit block"
+   },
+   "shape_language": {
+    "words": [
+     "block",
+     "grid",
+     "industrial"
+    ],
+    "family": ""
+   },
+   "function_parts": [
+    "cockpit",
+    "thrusters",
+    "gyros",
+    "reactors",
+    "batteries",
+    "conveyors",
+    "connectors",
+    "landing gear"
+   ],
+   "modularity": {
+    "kind": "blocks",
+    "changes_silhouette": true,
+    "changes_mass": true,
+    "note": "Every block has mass and damage."
+   },
+   "interior": {
+    "kind": "walk_through",
+    "note": "Full interiors from blocks"
+   },
+   "boarding": "Doors and hatches",
+   "mechanics": [
+    "pistons",
+    "rotors",
+    "hinges",
+    "landing gear"
+   ],
+   "displays": {
+    "mix": {
+     "diegetic": 0.5,
+     "overlay": 0.5
+    },
+    "state_on_ship": "LCD panels"
+   },
+   "flight_feel": "Newtonian",
+   "damage_and_upgrade": "Blocks break individually",
+   "sound": "Industrial",
+   "lessons": [
+    {
+     "text": "Mechanisms (pistons, rotors, hinges) are the fun.",
+     "kind": "style"
+    },
+    {
+     "text": "Hide the grid under shaped armour.",
+     "kind": "style"
+    }
+   ],
+   "sources": [],
+   "confidence": 0.5
+  },
+  {
+   "id": "stellaris-sets",
+   "game": "Stellaris",
+   "oracle_slug": "stellaris",
+   "owned": true,
+   "ship": "Species ship sets",
+   "studio": "Paradox",
+   "role": "fleet_icon",
+   "story": "A species' navy.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "species shape idea",
+    "rear_read": "engines",
+    "distance_read": "one idea at many sizes",
+    "focal_area": "prow"
+   },
+   "shape_language": {
+    "words": [
+     "mammalian",
+     "aquatic",
+     "molluscoid"
+    ],
+    "family": "species"
+   },
+   "function_parts": [],
+   "modularity": {
+    "kind": "variants",
+    "changes_silhouette": true,
+    "changes_mass": false,
+    "note": "Ship sections per class."
+   },
+   "interior": {
+    "kind": "none",
+    "note": ""
+   },
+   "boarding": "None",
+   "mechanics": [],
+   "displays": {
+    "mix": {
+     "overlay": 0.8,
+     "spatial": 0.2
+    },
+    "state_on_ship": ""
+   },
+   "flight_feel": "Strategic",
+   "damage_and_upgrade": "Sections",
+   "sound": "",
+   "lessons": [
+    {
+     "text": "A ship family is one shape idea repeated at many sizes.",
+     "kind": "style"
+    }
+   ],
+   "sources": [
+    "https://forum.paradoxplaza.com/forum/developer-diary/stellaris-dev-diary-230-the-art-of-aquatics-ships-the-drake.1495959/"
+   ],
+   "confidence": 0.5
+  },
+  {
+   "id": "spaz-parts",
+   "game": "Space Pirates and Zombies 2",
+   "oracle_slug": "space-pirates-and-zombies-2",
+   "owned": true,
+   "ship": "Part-built ships",
+   "studio": "MinMax Games",
+   "role": "weapon",
+   "story": "Your scrappy fleet.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "parts",
+    "rear_read": "engines",
+    "distance_read": "cartoon",
+    "focal_area": "core"
+   },
+   "shape_language": {
+    "words": [
+     "cartoon",
+     "parts"
+    ],
+    "family": ""
+   },
+   "function_parts": [
+    "core",
+    "weapons",
+    "armour",
+    "engines"
+   ],
+   "modularity": {
+    "kind": "modules",
+    "changes_silhouette": true,
+    "changes_mass": true,
+    "note": "Parts attach and fall off when shot."
+   },
+   "interior": {
+    "kind": "none",
+    "note": ""
+   },
+   "boarding": "None",
+   "mechanics": [],
+   "displays": {
+    "mix": {
+     "overlay": 0.8
+    },
+    "state_on_ship": ""
+   },
+   "flight_feel": "Arcade",
+   "damage_and_upgrade": "Parts fall off",
+   "sound": "",
+   "lessons": [
+    {
+     "text": "Damage you can see: parts fall off.",
+     "kind": "style"
+    }
+   ],
+   "sources": [],
+   "confidence": 0.4
+  },
+  {
+   "id": "among-us-skeld",
+   "game": "Among Us",
+   "oracle_slug": "among-us",
+   "owned": true,
+   "ship": "The Skeld",
+   "studio": "Innersloth",
+   "role": "map",
+   "story": "A crew ship where someone is not who they seem.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "rooms",
+    "rear_read": "",
+    "distance_read": "map",
+    "focal_area": "cafeteria"
+   },
+   "shape_language": {
+    "words": [
+     "rooms"
+    ],
+    "family": ""
+   },
+   "function_parts": [
+    "rooms",
+    "vents",
+    "task panels"
+   ],
+   "modularity": {
+    "kind": "none",
+    "changes_silhouette": false,
+    "changes_mass": false,
+    "note": ""
+   },
+   "interior": {
+    "kind": "cutaway",
+    "note": "Top-down rooms"
+   },
+   "boarding": "None",
+   "mechanics": [
+    "doors",
+    "vents"
+   ],
+   "displays": {
+    "mix": {
+     "diegetic": 0.4,
+     "overlay": 0.6
+    },
+    "state_on_ship": "Task panels on walls"
+   },
+   "flight_feel": "Not flown",
+   "damage_and_upgrade": "Sabotage per system",
+   "sound": "",
+   "lessons": [
+    {
+     "text": "The ship as a social space of rooms.",
+     "kind": "style"
+    }
+   ],
+   "sources": [],
+   "confidence": 0.5
+  },
+  {
+   "id": "astroneer-shuttle",
+   "game": "ASTRONEER",
+   "oracle_slug": "astroneer",
+   "owned": true,
+   "ship": "Shuttles and rovers",
+   "studio": "System Era",
+   "role": "build",
+   "story": "Your little shuttle hop between pastel planets.",
+   "size_m": null,
+   "mass_t": null,
+   "silhouette": {
+    "primary_volumes": "chunky cylinder",
+    "rear_read": "engines",
+    "distance_read": "chunky toy",
+    "focal_area": "seat"
+   },
+   "shape_language": {
+    "words": [
+     "chunky",
+     "pastel",
+     "low poly"
+    ],
+    "family": ""
+   },
+   "function_parts": [
+    "seat",
+    "thrusters",
+    "module slots"
+   ],
+   "modularity": {
+    "kind": "modules",
+    "changes_silhouette": true,
+    "changes_mass": true,
+    "note": "Modules click onto slots."
+   },
+   "interior": {
+    "kind": "cockpit_only",
+    "note": "Open seat"
+   },
+   "boarding": "Seat",
+   "mechanics": [
+    "modules click on"
+   ],
+   "displays": {
+    "mix": {
+     "diegetic": 0.7,
+     "overlay": 0.3
+    },
+    "state_on_ship": "Backpack and module lights"
+   },
+   "flight_feel": "Simple",
+   "damage_and_upgrade": "Modules",
+   "sound": "",
+   "lessons": [
+    {
+     "text": "Bright chunky modules that click on, readable at any size.",
+     "kind": "style"
+    }
+   ],
+   "sources": [],
+   "confidence": 0.5
+  }
+ ]
+}
