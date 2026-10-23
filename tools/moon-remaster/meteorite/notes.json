@@ -1,0 +1,25 @@
+{
+  "asset": "meteorite",
+  "name": "Mysterious meteorite",
+  "what_i_did": "A craggy dark spheroid (Voronoi-cell plates, flat facets) split into a base bowl and five hinged petals, each leaning a few degrees out so star cracks of the glowing core show. A cyan core inside and four clusters of hexagonal crystals breaking through. In the game it sits 60% exposed in its own fresh crater, pulses once every 2 s, lights the crater cyan, and can open like origami (petals swing out over 6 s).",
+  "good": [
+    "Reads as the sheet: dark stone, cyan crystals, glow from inside the cracks.",
+    "The only #00ffd1 on the tile, so a child's eye goes straight to it.",
+    "States built in: buried, glowing, opening, open (life.meteorite.open())."
+  ],
+  "off": [
+    "Game size is 0.56 m across, not the story's 20-25 cm, so it reads from the tile camera (toy scale).",
+    "The sheet's pale weathered top plates are only hinted (a lighter rock material on upward faces).",
+    "No violet-blue highlights yet; the MeteorVein material exists for them."
+  ],
+  "rounds": [
+    {
+      "n": 1,
+      "t": "First build: too spiky, zig-zag seam at the base read as a grin."
+    },
+    {
+      "n": 2,
+      "t": "Softer cells, base seam closed, petals ajar on their hinges instead, crystals pushed out through the shell."
+    }
+  ]
+}

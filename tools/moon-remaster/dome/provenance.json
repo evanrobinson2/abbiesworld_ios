@@ -1,0 +1,28 @@
+{
+  "asset": "dome",
+  "date": "2026-10-23",
+  "study": "AW-STUDY-0007 Ranch and Moon remaster (docs/oracle/remaster/REMASTER_STUDY.md)",
+  "construction": {
+    "tool": "Blender 5.2 (bpy) headless",
+    "recipe": "build.py",
+    "helpers": "../mkit.py"
+  },
+  "scoring": "Not scored by silhouette: the pack sheets are multi-view illustrations, so this round is judged by eye on the Moon review desk.",
+  "item": "MB2",
+  "name": "The dome",
+  "game_id": "MR-002",
+  "replaces": "ME-072 (white inflatable torus habitat) on Moon tiles; Mars and the alien world keep theirs",
+  "concept": {
+    "source": "Moon Mission pack (/mnt/project-files/trek.zip)",
+    "file": "concept.jpg",
+    "original": "trek/outputs/images/moonbase.png",
+    "also": [
+      "trek/outputs/b-roll/cinematic_01_moonbase_wide.png",
+      "trek/outputs/b-roll/cinematic_20_moonbase_night.png"
+    ],
+    "midjourney": null,
+    "note": "The study asked for a turnaround sheet in house style first. Built straight from the pack's moonbase painting instead so it could land tonight; a turnaround can still be made for round 2.",
+    "picked_by": "Evan (the pack is his)"
+  },
+  "output": "dome.glb"
+}
