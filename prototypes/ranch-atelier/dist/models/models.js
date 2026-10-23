@@ -220,18 +220,27 @@ function review(){
   </div>`;
   const on = root.querySelector('.strip .on'); if (on){ const st = on.parentElement; st.scrollLeft = on.offsetLeft - st.clientWidth / 2 + on.clientWidth / 2; }
   placeSpots(root.querySelector('model-viewer'), fp);
-  laserPrint(root.querySelector('.sq2.alive'));
+  loadScreen(root.querySelector('.sq2.alive'));
+  warmNeighbours(seq, i);
   root.querySelector('model-viewer').addEventListener('pointerdown', () => root.querySelector('.chalk')?.classList.add('gone'), {once:true});
 }
 // Focal points on the model sit at fractions of its bounding box ("at": x, y, z from -0.5 to 0.5, +z facing the camera).
-// The model prints itself out of the picture: a half-second laser line sweeps up as it appears (Evan, 03:52Z).
-function laserPrint(box){
+// Loading screen: a quiet progress ring over the model's own picture until the 3D model is ready. No effects when it arrives.
+function loadScreen(box){
   if (!box) return;
-  const mv = box.querySelector('model-viewer'), go = () => { if (box.classList.contains('printing') || box.classList.contains('printed')) return; box.classList.add('printing'); setTimeout(() => box.classList.replace('printing', 'printed'), 560); };
-  box.classList.add('unprinted');
-  mv.addEventListener('load', go, {once:true}); mv.addEventListener('error', go, {once:true});
-  if (mv.loaded) go();
-  setTimeout(go, 4000);
+  const mv = box.querySelector('model-viewer'), ld = document.createElement('div');
+  ld.className = 'mload'; ld.innerHTML = '<i class="ring"></i><b class="bar"><u></u></b><span>Getting the 3D model</span>';
+  box.append(ld);
+  const bar = ld.querySelector('u'), done = () => { ld.classList.add('gone'); setTimeout(() => ld.remove(), 250); };
+  mv.addEventListener('progress', e => { bar.style.width = Math.round(100 * (e.detail?.totalProgress || 0)) + '%'; });
+  mv.addEventListener('load', done, {once:true}); mv.addEventListener('error', () => { ld.querySelector('span').textContent = 'The 3D model did not load'; ld.classList.add('err'); }, {once:true});
+  if (mv.loaded) done();
+}
+// While you look at one model, fetch the next and the previous so a swipe opens them at once.
+const warmed = new Set();
+function warmNeighbours(seq, i){
+  const go = () => [seq[i + 1], seq[i - 1]].forEach(n => { const u = n?.urls?.glb; if (u && !warmed.has(u)){ warmed.add(u); fetch(u).catch(() => {}); } });
+  setTimeout(() => (window.requestIdleCallback ? requestIdleCallback(go) : go()), 1500);
 }
 
 function placeSpots(mv, fp){
