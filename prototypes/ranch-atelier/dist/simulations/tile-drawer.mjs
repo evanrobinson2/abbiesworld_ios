@@ -8,18 +8,19 @@ import {SHAPES,shapeIcon} from './ranch-shapes.mjs?icons=5';
 const THUMBS={ranch:'ranch',garden:'garden',meadow:'meadow',moon:'moon'};
 const SIZE=[[70,'Small'],[100,'Medium'],[150,'Large']];
 const COMPLEXITY=[[1,'Simple'],[2,'Lively'],[4,'Busy']];
+const MODEL_STYLE=[['normal','Normal'],['charming','Charming']];   // simulations/model-style.mjs
 const VIEW_KEY='tile-drawer-view';
 
 function css(){if(document.querySelector('link[data-tile-drawer]'))return;const l=document.createElement('link');l.rel='stylesheet';l.dataset.tileDrawer='';l.href=new URL('./tile-drawer.css?v=1',import.meta.url).href;document.head.append(l);}
 
-// Three choices standing in for one slider or number input; the input stays the source of truth.
+// Three choices standing in for one slider or number input (or a select, matched by value); the input stays the source of truth.
 function steps(input,choices,{label,event='change'}){
  const group=document.createElement('div');group.className='td-steps';group.setAttribute('role','radiogroup');group.setAttribute('aria-label',label);
  const name=document.createElement('span');name.className='td-steps-label';name.textContent=label;group.append(name);
- const row=document.createElement('div');row.className='td-steps-row';group.append(row);
+ const row=document.createElement('div');row.className='td-steps-row';if(choices.length!==3)row.style.gridTemplateColumns=`repeat(${choices.length},minmax(0,1fr))`;group.append(row);
  const buttons=choices.map(([value,text])=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','radio');b.textContent=text;b.dataset.value=value;b.onclick=()=>{if(b.disabled)return;input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));if(event==='change')input.dispatchEvent(new Event('change',{bubbles:true}));sync();};row.append(b);return b;});
  // The nearest step lights up, so values set elsewhere (saved scenes, old sliders) still read sensibly.
- const sync=()=>{const v=Number(input.value);let best=buttons[0],gap=Infinity;for(const b of buttons){const d=Math.abs(Number(b.dataset.value)-v);if(d<gap){gap=d;best=b;}}for(const b of buttons){b.setAttribute('aria-checked',String(b===best));b.disabled=input.disabled;}};
+ const sync=()=>{const v=Number(input.value);let best=buttons.find(b=>b.dataset.value===input.value),gap=best?0:Infinity;best??=buttons[0];if(gap)for(const b of buttons){const d=Math.abs(Number(b.dataset.value)-v);if(d<gap){gap=d;best=b;}}for(const b of buttons){b.setAttribute('aria-checked',String(b===best));b.disabled=input.disabled;}};
  sync();new MutationObserver(sync).observe(input,{attributes:true});input.addEventListener('input',sync);input.addEventListener('change',sync);
  return {group,sync};
 }
@@ -67,7 +68,8 @@ export function designDrawer({drawer,panel,heroTrack,worldSettings,options,rerol
  const heading=document.createElement('div');heading.className='td-group-title';heading.textContent='This ranch';ranch.append(heading);
  const size=document.querySelector('#size'),complexity=document.querySelector('#complexity');
  const sizeSteps=size&&steps(size,SIZE,{label:'Size'}),detailSteps=complexity&&steps(complexity,COMPLEXITY,{label:'Buildings'});
- ranch.append(section('size','Size & detail',[sizeSteps?.group,detailSteps?.group].filter(Boolean),{open:true}));
+ const style=document.querySelector('#model-style'),styleSteps=style&&steps(style,MODEL_STYLE,{label:'Model style'});
+ ranch.append(section('size','Size & detail',[sizeSteps?.group,detailSteps?.group,styleSteps?.group].filter(Boolean),{open:true}));
 
  const layout=document.createElement('div');layout.className='td-layouts';layout.setAttribute('role','radiogroup');layout.setAttribute('aria-label','Hex layout');
  const renderLayouts=()=>{const current=document.querySelector('#shape-open');const chosen=current?.querySelector('svg')?.outerHTML;layout.replaceChildren();for(const [id,shape]of Object.entries(SHAPES)){const b=document.createElement('button');b.type='button';b.setAttribute('role','radio');b.dataset.shape=id;b.title=b.ariaLabel=shape.name;b.innerHTML=shapeIcon(id,true)+'<span>'+shape.name+'</span>';b.setAttribute('aria-checked',String(!!chosen&&shapeIcon(id,true)===chosen));b.onclick=()=>chooseLayout(id);layout.append(b);}};
@@ -82,5 +84,5 @@ export function designDrawer({drawer,panel,heroTrack,worldSettings,options,rerol
  drawer.append(ranch);worldSettings.hidden=true;
  if(!(adoptAdvanced()&&adoptBackdrop())){const watch=new MutationObserver(()=>{if(adoptAdvanced()&adoptBackdrop())watch.disconnect();});watch.observe(document.body,{childList:true,subtree:true});setTimeout(()=>watch.disconnect(),60000);}
 
- return {sync(){sizeSteps?.sync();detailSteps?.sync();retitle();}};
+ return {sync(){sizeSteps?.sync();detailSteps?.sync();styleSteps?.sync();retitle();}};
 }

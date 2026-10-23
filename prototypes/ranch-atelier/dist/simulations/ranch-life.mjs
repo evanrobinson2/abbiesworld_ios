@@ -25,8 +25,9 @@ import {createCareState,cancelJob,careSummary} from './ranch-life-state.mjs?graz
 import {pathNetwork} from './ranch-routes.mjs';
 import {segmentDistance} from './tile-adapter.js';
 import {GLTFLoader} from './vendor/loaders/GLTFLoader.js';
+import {styledLoad,styleKey} from './model-style.mjs';
 const S=.1,library=new Map(),loader=new GLTFLoader();
-async function prop(id){if(!library.has(id))library.set(id,loader.loadAsync('/garden-assets/'+id+'.glb').then(g=>{g.scene.traverse(o=>{if(o.isMesh){o.userData.sharedGeometry=true;for(const m of Array.isArray(o.material)?o.material:[o.material])m.userData.shared=true;}});return g.scene;}));return (await library.get(id)).clone(true);}
+async function prop(id){const url='/garden-assets/'+id+'.glb',key=styleKey(id,url);if(!library.has(key))library.set(key,styledLoad(url,u=>loader.loadAsync(u)).then(g=>{g.scene.traverse(o=>{if(o.isMesh){o.userData.sharedGeometry=true;for(const m of Array.isArray(o.material)?o.material:[o.material])m.userData.shared=true;}});return g.scene;}));return (await library.get(key)).clone(true);}
 export async function createRanchLife(composer,assembly,recipe,heightAt,engineOptions={}){
  const radius=assembly.radiusMetres??recipe.hexRadiusMetres??50,inside=hexBounds(radius),boardContains=boardBounds(assembly.plans,radius),inBoard=(p,r)=>boardContains(p,r)&&terrainWalkable(heightAt,p,r);
  const fixtures=[];const root=new T.Group();root.scale.setScalar(S);root.name='Ranch care simulation';const feelings=createFeelings(root);
