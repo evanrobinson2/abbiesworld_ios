@@ -25,10 +25,13 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   await p.evaluate(() => basement.sitDown()); await until(() => basement.cam.mode === 'screen' || basement.cam.mode === 'desk'); await shot('8');
   await p.waitForTimeout(15000); await shot('9');
   await p.evaluate(() => basement.glide('desk', 'desk')); await until(() => basement.cam.mode === 'desk');
-  await p.evaluate(() => basement.insertDisk(basement.U.disks.find(d => d.userData.disk.id === 'coin'))); await until(() => basement.cam.mode === 'screen');
+  await p.evaluate(() => basement.insertDisk(basement.U.disks.find(d => d.userData.disk.id === 'keystorm'))); await until(() => basement.cam.mode === 'screen');
   for (const k of ['A', ':', 'Enter']) await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), k);
   await p.waitForTimeout(3000);
   for (const k of ['G', 'O', 'Enter']) await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), k);
+  // The word game: put 110 of the 120 seconds in already, then play a little (any keys; the title wants one first).
+  await p.waitForTimeout(3000); await p.evaluate(() => basement.playGame(110));
+  for (let i = 0; i < 60 && !(await p.evaluate(() => basement.ending.pending || basement.ending.called)); i++) { await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), 'ASDFJKL'[i % 7]); await p.waitForTimeout(400); }
   await p.waitForTimeout(9000); await shot('10');
   // The ending: the room warms, Daddy calls down, she stands, climbs to the door, and the old set powers down.
   await until(() => basement.ending.called && document.querySelector('.aw-choice')); await shot('11');
@@ -36,6 +39,6 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   await p.waitForFunction(() => basement.ending.off > .3 && basement.ending.off < .7, null, {timeout: 240000, polling: 50}); await shot('13');
   await p.waitForFunction(() => basement.ending.home, null, {timeout: 240000, polling: 250});
   console.log('pocket', await p.evaluate(() => localStorage.getItem('aw-inventory')));
-  console.log(JSON.stringify(await p.evaluate(() => ({chores: basement.chores, text: basement.pc.text.map(r => r.join('').trimEnd()).filter(Boolean).slice(-6), coins: localStorage.getItem('aw-basement-coins')}))));
+  console.log(JSON.stringify(await p.evaluate(() => ({chores: basement.chores, text: basement.pc.text.map(r => r.join('').trimEnd()).filter(Boolean).slice(-6), charm: localStorage.getItem('aw-backpack')}))));
   await b.close();
 })();

@@ -19,7 +19,7 @@ canvas{display:block;width:100vw;height:100dvh;image-rendering:pixelated}
 <textarea id="keys" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Grace's keyboard"></textarea>
 <script type="module">
 import * as T from 'three';
-import {createBasement, createKid, createCoin, floorY, ROOM, CHORES} from '/simulations/grace-basement.mjs';
+import {createBasement, createKid, floorY, ROOM, CHORES} from '/simulations/grace-basement.mjs';
 import {GracePC} from '/simulations/grace-pc.mjs';
 import {loadGraceKid} from '/simulations/grace-kid.mjs';
 import {volunteer, playerCamera, presentation} from '/simulations/presentation-layer.mjs';
@@ -111,7 +111,7 @@ const voice = innerVoice({font: 'VT323', speak: q.has('voice'), onTouch: () => {
 const say = voice.say, once = voice.once, hush = voice.hush, spoken = {has: voice.heard, add: voice.mark};
 
 // ---------- The computer: a real PC in an emulator, on a CRT shader with real grime you wash and dry. ----------
-const pc = new GracePC({sound: k => SFX[k]?.(), found: id => { giveCoin(id, U.screen); if (id === 'coin-disk') ending.pending = true; }});
+const pc = new GracePC({sound: k => SFX[k]?.(), found: id => { if (id === 'dos-grace') say(MEMORY[id], {hold: 4200}); }});
 const screenTex = new T.CanvasTexture(pc.canvas); screenTex.colorSpace = T.SRGBColorSpace; screenTex.minFilter = T.LinearFilter;
 // Grime: red = dust and old fingerprints, green = wet streaks. Washing turns dust to wet; drying takes the wet away.
 const GW = 96, GH = 72, grime = Object.assign(document.createElement('canvas'), {width: GW, height: GH}), gx = grime.getContext('2d', {willReadFrequently: true});
@@ -399,7 +399,7 @@ renderer.domElement.addEventListener('pointerdown', e => {
   if (hit && named(hit.object, /Game Boy/)) { SFX.click(); return closeUp('gameboy'); }
   if (hit && named(hit.object, /power switch/)) return powerSwitch();
   if (hit && named(hit.object, /spray bottle|towel/) || hit?.object === U.screen && chores.dry < 1) return startWash();
-  if (hit && named(hit.object, /^manual$|Grace's manual/)) return giveCoin('manual', U.manual);
+  if (hit && named(hit.object, /^manual$|Grace's manual/)) return say(MEMORY.manual, {hold: 3000});
   if (hit && named(hit.object, /^clipboard$/)) { SFX.page(); return readAloud(); }
   if (hit && named(hit.object, /Grace's computer/) && hit.point.y > glitter.top - .06) return sparkle();
   if (hit && named(hit.object, /Grace's computer|Grace's keyboard/)) return pc.on ? glide('screen', 'screen') : (SFX.boop(), say(chores.plug ? 'The power switch is on its side.' : "It's not even plugged in..."));
@@ -419,8 +419,6 @@ renderer.domElement.addEventListener('pointerdown', e => {
  if (hit && named(hit.object, /desk chair/)) return sitDown();
  if (hit && named(hit.object, /Grace's computer/) && hit.point.y > glitter.top - .06) { walkTo(ROOM.chair.x - .25, () => { me.reach = 1; sparkle(); }); return; }
  if (hit && named(hit.object, /Grace's computer|Grace's keyboard|disk/)) { walkTo(ROOM.chair.x - .25); SFX.boop(); return say('Grace\'s computer. I could sit down in the chair...'); }
- const spot = lit && hit && U.coinSpots.find(c => c.id !== 'manual' && isIn(hit.object, c.obj));
- if (spot) return walkTo(spot.obj.getWorldPosition(new T.Vector3()).x - .35, () => { me.reach = 1; giveCoin(spot.id, spot.obj); });
  walkTo(hit ? hit.point.x : me.x);
 });
 renderer.domElement.addEventListener('pointermove', e => {
@@ -444,7 +442,7 @@ function goBack() { if (ending.called) return headHome(); hush(); walkTo(.32, ()
 
 // ---------- Disks and coins. ----------
 let inDrive = null;
-const flying = [], rewards = [];
+const flying = [];
 function insertDisk(disk) {
  if (disk === inDrive || flying.some(f => f.disk)) return;
  if (inDrive) { const old = inDrive; room.getObjectByName('disk box').attach(old); old.position.copy(old.userData.home.p); old.rotation.copy(old.userData.home.r); old.visible = true; }
@@ -459,58 +457,36 @@ function insertDisk(disk) {
  }, done() { disk.visible = false; pc.insert(disk.userData.disk); if (!chores.disk) { chores.disk = true; tick(); }
   if (pc.on) { glide('screen', 'screen'); once('typeGo', 'Now I type A... and GO!'); } else once('diskOff', 'The disk is in. Now it needs power.'); }});
 }
-const STORE = 'aw-basement-coins';
-// What she feels when each memory turns up: a little piece of Daddy as a boy, down here at Aunt Grace's.
+// What she says about things down here. (Canon, Evan 20:51Z: no coins; every reward is a backpack charm. Beating the
+// word game, KEYSTORM, by playing it two minutes in all, wins the floppy disk charm.)
 const MEMORY = {
- 'coin-disk': "A gold coin! It's Daddy's memory... he played on this computer when he was little!",
- 'keystorm-night-5': "Night five! Daddy got this far too. I can feel it!",
- 'dos-grace': "Hello, Aunt Grace. That's one of Daddy's memories... her voice on the screen.",
- manual: "Daddy's memory, tucked in Grace's book!",
+ 'dos-grace': "Hello, Aunt Grace. That's her voice on the screen...",
+ manual: "Grace's manual. It smells like old paper.",
 };
-let found = []; try { found = JSON.parse(localStorage.getItem(STORE) || '[]'); } catch {}
-for (let i = 0; i < Math.min(found.length, 10); i++) U.addJarCoin();
-function giveCoin(id, from) {
- if (found.includes(id)) return;
- found.push(id); try { localStorage.setItem(STORE, JSON.stringify(found)); } catch {}
- giveMemoryCoin(`Grace's basement:${id}`, "Grace's basement"); pocketPieces();
- const coin = createCoin(.035);
- const a = from.getWorldPosition(new T.Vector3()); if (from === U.screen) a.add(new T.Vector3(-.15, 0, 0)); else a.y += .12;
- const top = a.clone().add(new T.Vector3(0, .35, 0)), jarTop = U.jar.getWorldPosition(new T.Vector3()).add(new T.Vector3(0, .32, 0)), jarIn = jarTop.clone().add(new T.Vector3(0, -.25, 0));
- // Canon (Evan, 2026-10-23): the gold coins are Daddy's core memories, one for each of his memory places.
- // The shared gold coin reward (also the school roof's): it lifts toward you in warm light with a fanfare, then the
- // coin drops into Grace's jar.
- rewards.push({r: coinReward(T, {scene, camera, from: a, audio: audio(), presentation}), then: () => { scene.add(coin); flying.push(jarFlight); }});
- say(MEMORY[id] || (found.length === 1 ? "A gold coin... it's one of Daddy's memories!" : "Another one of Daddy's memories!"), {hold: 4200});
- const jarFlight = {t: 0, dur: 1.6, step(e) {
-  coin.rotation.set(Math.PI / 2, 0, 0); coin.rotateOnWorldAxis(new T.Vector3(0, 1, 0), e * 30);
-  if (e < .35) coin.position.copy(a).lerp(top, smooth(e / .35));
-  else if (e < .85) { const k = smooth((e - .35) / .5); coin.position.copy(top).lerp(jarTop, k); coin.position.y += Math.sin(k * Math.PI) * .4; }
-  else coin.position.copy(jarTop).lerp(jarIn, (e - .85) / .15);
- }, done() { scene.remove(coin); U.addJarCoin(); blip({f: 1400, t: .08, type: 'square', g: .04}); if (found.length === PIECES) wholeMemory(); }};
+const PLAY_STORE = 'aw-keystorm-secs', PLAY_GOAL = 120;
+let playSecs = 0; try { playSecs = +localStorage.getItem(PLAY_STORE) || 0; } catch {}
+let idleFor = 99, charmWon = false;
+try { inventory().remove('memory-grace-basement'); } catch {}   // the memory-pieces item from the coin days
+addEventListener('keydown', () => { idleFor = 0; }, true);
+// She is playing while the word game is on the screen she is looking at and her hands are on the keys (not the title card
+// sitting open, not the DOS prompt).
+function playingKeystorm() { return pc.on && inDrive?.userData.disk.id === 'keystorm' && cam.mode === 'screen' && !pc.atPrompt() && idleFor < 6; }
+function tickPlay(dt) {
+ idleFor += dt; if (charmWon || !playingKeystorm()) return;
+ playSecs += dt; if (Math.floor(playSecs) !== Math.floor(playSecs - dt)) try { localStorage.setItem(PLAY_STORE, String(Math.floor(playSecs))); } catch {}
+ if (playSecs >= PLAY_GOAL) winCharm();
 }
-
-// ---------- Coins are pieces of one memory; the memory is the thing in her pocket. ----------
-// Each coin is a piece of Daddy's memory of this basement. She carries the memory (not ten coins) in the shared player
-// inventory, and it says how many pieces she has. The full set plays the memory's closing beat at the jar.
-const PIECES = 10, MEMORY_ITEM = 'memory-grace-basement';
-function pocketPieces() {
- const n = Math.min(found.length, PIECES), inv = inventory();
- if (!n) return;
- const name = n >= PIECES ? "Daddy's memory of Grace's basement (whole)" : `Daddy's memory of Grace's basement (${n} of ${PIECES} pieces)`;
- if (inv.list().find(i => i.id === MEMORY_ITEM)?.name === name) return;
- inv.remove(MEMORY_ITEM); inv.add({id: MEMORY_ITEM, name, icon: '🪙', from: "Grace's basement"});
-}
-pocketPieces(); // pieces found on an earlier visit are already in her pocket
-const jarGlow = new T.PointLight('#ffc46a', 0, 1.6, 2); scene.add(jarGlow);
-function wholeMemory() {
- jarGlow.position.copy(U.jar.getWorldPosition(new T.Vector3())).add(new T.Vector3(0, .14, .12)); ending.jar = 1;
- // A music box: the tune's opening, slow and high, over the jar's warm glow.
- [76, 79, 81, 79, 76, 74, 72, 76].forEach((m, i) => blip({f: 440 * Math.pow(2, (m + 12 - 69) / 12), t: .9, type: 'triangle', g: .04, at: .3 + i * .32}));
- say("All ten pieces! Now I can see the whole memory... Daddy, little, typing at this desk with Aunt Grace.", {hold: 7000});
+const rewards = [];
+async function winCharm() {
+ charmWon = true;
+ let fresh = false; try { const b = await import('/simulations/backpack.mjs?v=6'); fresh = !!b.earnCharm?.('basement'); } catch {}
+ const a = U.screen.getWorldPosition(new T.Vector3()).add(new T.Vector3(-.15, 0, 0));
+ rewards.push({r: coinReward(T, {scene, camera, from: a, audio: audio(), presentation}), then: () => { ending.pending = true; }});
+ say(fresh ? "A little floppy disk charm! For my backpack. Aunt Grace would be proud of that typing." : 'Still typing like Aunt Grace!', {hold: 5200});
 }
 
 // ---------- The ending: the gold disk runs, the room warms, Daddy calls down, and she climbs back up with the memory. ----------
-const ending = {pending: false, wait: 0, called: false, warm: 0, leaving: false, off: 0, offT: 0, jar: 0};
+const ending = {pending: false, wait: 0, called: false, warm: 0, leaving: false, off: 0, offT: 0};
 const warmth = new T.HemisphereLight('#ffc890', '#3a2418', 0); scene.add(warmth);
 function callDown() {
  ending.called = true;
@@ -529,7 +505,7 @@ const talk = dialog(voice, {actions: {headHome: () => headHome()}});
 function headHome() {
  if (ending.leaving) return; ending.leaving = true; hush();
  if (cam.mode === 'close') { cam.close = null; washing = null; if (me.state === 'seated') glide('desk', 'desk'); else leaveClose(); }
- const go = () => walkTo(.32, () => { me.goneT = performance.now(); SFX.door(); pocketPieces(); say("I'll keep this one, Aunt Grace.", {hold: 3000}); });
+ const go = () => walkTo(.32, () => { me.goneT = performance.now(); SFX.door(); say("Thank you, Aunt Grace.", {hold: 3000}); });
  const up = setInterval(() => {
   if (me.state === 'seated' && ['screen', 'desk'].includes(cam.mode)) standUp();
   if (me.state === 'standing' && cam.mode !== 'glide') { clearInterval(up); go(); }
@@ -604,8 +580,8 @@ function frame(now) {
  coneM.uniforms.on.value = light2 * wob * (full ? 1 : .3); dustM.opacity = full ? .7 * light2 : 0;
  lamp1.intensity = 2.2 * light1; U.lamp1M.emissiveIntensity = 2.5 * light1;
  U.glowDot.material.color.setScalar(0).lerp(new T.Color('#8dffb0'), 1 - light1 * .9);
- ending.warm += ((ending.called ? 1 : 0) - ending.warm) * Math.min(1, dt * .6); ending.jar = Math.max(0, ending.jar - dt * .12);
- warmth.intensity = .55 * ending.warm; jarGlow.intensity = 1.4 * ending.jar * (1 + .25 * Math.sin(time * 5));
+ ending.warm += ((ending.called ? 1 : 0) - ending.warm) * Math.min(1, dt * .6);
+ warmth.intensity = .55 * ending.warm;
  hall.intensity = 5 - light1 * 2 + 5 * ending.warm; U.flame.material.color.setHSL(.62, 1, .45 + Math.sin(time * 3) * .05);
  if (hum) hum.g.gain.value = .006 * light1 + .006 * light2 + (pc.on ? .004 : 0);
  for (let i = 0; i < dustN; i++) { const [r, a, h] = dustSeed[i], hh = (h + time * .02 * (1 + r)) % 1, y = B.y - .2 - hh * (B.y - .3), rad = (B.y - y) / coneH * 1.1 * Math.sqrt(r);
@@ -624,6 +600,7 @@ function frame(now) {
  // Seated at the desk the camera is her eyes, so she steps out of her own view.
  kid.visible = !(me.state === 'seated' && ['desk', 'screen', 'close'].includes(cam.mode));
  voice.tick(now);
+ tickPlay(dt);
  U.gameboy.step(dt, cam.close === 'gameboy' || cam.mode === 'desk');
  gbLamp.intensity += ((cam.close === 'gameboy' ? .4 : 0) - gbLamp.intensity) * Math.min(1, dt * 3);
  if (!skip && !opened && time > 3.6) { opened = true; opening(); }
@@ -635,10 +612,11 @@ function frame(now) {
 function resize() { renderer.setSize(innerWidth, innerHeight, false); }
 addEventListener('resize', resize); resize();
 { const s = sideFrame(); camera.position.copy(s.pos); cam.lookAt = s.look.clone(); }
-// Test hooks: ?lit (switches right), ?x=4.5 (stand there), ?done (the list done, computer on), ?sit (sit at it too),
+// Test hooks: ?play=115 (seconds of the word game already played), ?lit (switches right), ?x=4.5 (stand there), ?done (the list done, computer on), ?sit (sit at it too),
 // ?ending (Daddy calls soon after it opens), ?stay (the ending powers down but doesn't go up to the café).
 const skip = q.has('lit') || q.has('done') || q.has('sit');
 if (skip) { sw[0] = sw[2] = true; setLights(true); light1 = light2 = 1; spoken.add('lit'); spoken.add('desk'); }
+if (q.has('play')) { playSecs = +q.get('play') || 0; }
 if (q.has('x')) { me.x = me.target = +q.get('x'); }
 if (q.has('done') || q.has('sit')) { chores.plug = true; U.setPlug(1); chores.wash = chores.dry = 1; gx.clearRect(0, 0, GW, GH); grimeTex.needsUpdate = true; chores.power = true; U.rocker.rotation.z = -.18; pc.powerOn(); U.clipboard.userData.setTicks(ticks()); }
 if (q.has('sit')) { me.x = me.target = ROOM.chair.x - .02; setTimeout(sitDown, 300); }
@@ -649,7 +627,7 @@ const opening = () => say("It's dark in here... it feels old.", {choices: [
  {label: 'Go back up', go: goBack}]});
 requestAnimationFrame(frame);
 if (embed) parent.postMessage({type: 'basement', event: 'ready'}, '*');
-window.basement = {gameboy: U.gameboy, closeUp, leaveClose, me, pc, cam, chores, sw, flipToggle, sitDown, standUp, walkTo, glide, insertDisk, giveCoin, ending, headHome, callDown, plugIn, powerSwitch, startWash, scrub: uv => scrub(uv), closeUp, leaveClose, U, say, get kid() { return kid; }, get rigged() { return rigged; }, get time() { return time; }};
+window.basement = {gameboy: U.gameboy, closeUp, leaveClose, me, pc, cam, chores, sw, flipToggle, sitDown, standUp, walkTo, glide, insertDisk, playGame: s => { playSecs = s; }, tickPlay, ending, headHome, callDown, plugIn, powerSwitch, startWash, scrub: uv => scrub(uv), closeUp, leaveClose, U, say, get kid() { return kid; }, get rigged() { return rigged; }, get time() { return time; }};
 </script>
 </body>
 </html>

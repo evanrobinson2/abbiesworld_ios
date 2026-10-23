@@ -39,10 +39,13 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
     await until(() => basement.cam.mode === 'side'); await p.evaluate(() => basement.powerSwitch()); await until(() => basement.chores.power);
     await p.evaluate(() => basement.sitDown()); await until(() => ['screen', 'desk'].includes(basement.cam.mode));
     await p.waitForTimeout(15000); await p.evaluate(() => basement.glide('desk', 'desk')); await until(() => basement.cam.mode === 'desk');
-    await p.evaluate(() => basement.insertDisk(basement.U.disks.find(d => d.userData.disk.id === 'coin'))); await until(() => basement.cam.mode === 'screen');
+    await p.evaluate(() => basement.insertDisk(basement.U.disks.find(d => d.userData.disk.id === 'keystorm'))); await until(() => basement.cam.mode === 'screen');
     for (const k of ['A', ':', 'Enter']) await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), k);
     await p.waitForTimeout(3000);
     for (const k of ['G', 'O', 'Enter']) await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), k);
+  // The word game: put 110 of the 120 seconds in already, then play a little (any keys; the title wants one first).
+  await p.waitForTimeout(3000); await p.evaluate(() => basement.playGame(110));
+  for (let i = 0; i < 60 && !(await p.evaluate(() => basement.ending.pending || basement.ending.called)); i++) { await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), 'ASDFJKL'[i % 7]); await p.waitForTimeout(400); }
   });
   await step('the ending: Daddy calls', async () => {
     await until(() => basement.ending.called && document.querySelector('.aw-choice')); await shot('5-ending'); await p.getByText('Coming, Daddy!').click();

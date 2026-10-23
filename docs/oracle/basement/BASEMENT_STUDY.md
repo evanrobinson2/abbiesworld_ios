@@ -128,6 +128,13 @@ game. So the games are ours, in the spirit of the ones he named.
 - Tour: no. Tests: `tools/minigame-test/route-cafe-basement.cjs` plays the whole route (town, café, key, door, chores,
   gold disk, ending, back up, front door).
 
+## Round 6: no coins, one charm (Evan 20:51Z)
+"Scratch the coin idea, it's all backpack charms." The ten coins, the jar fill, the gold disk and the memory-pieces
+pocket item are gone. Beating the word game (KEYSTORM) by playing it two minutes in all (counted while it is on the screen
+she is looking at and she is typing; saved as `aw-keystorm-secs`) wins the floppy disk charm through the Backpack's
+`earnCharm('basement')`, with the shared golden reward lift, and then Daddy calls her up. The gold disk is out of the box.
+Test hook `?play=115`. Tour: no.
+
 ## Next
 1. On hold: ROTOR RANGER as a GRACE-DOS program (CLOCKTOWER is a real game's name: avoid it). A phone pad for DUSKBLADE while seated.
 1b. Duels need a second pass: more guard moves, a boss, music from the PC speaker.
