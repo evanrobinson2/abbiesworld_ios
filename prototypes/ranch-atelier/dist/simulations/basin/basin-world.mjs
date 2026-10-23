@@ -8,9 +8,12 @@ export async function createBasinWorld(scene){
  const {createBasinWorld:build}=await import('./basin-view.mjs');
  const world=build({seed:Number(new URLSearchParams(location.search).get('basin-seed'))||7});scene.add(world.root);
  document.documentElement.dataset.world='basin';
- let framed=false;
+ let framed=false,land=null,sun=null;
  return {world,
-  light({floor,wall,fog,sceneFog,setFog}){floor.visible=false;wall.visible=false;setFog(sceneFog===false?null:fog);},
+  light({floor,wall,fog,sceneFog,setFog}){floor.visible=false;wall.visible=false;setFog(sceneFog===false?null:fog);
+   // The land's cells are 2.5 units across; the board's tiny shadow bias stripes them with acne under a low sun,
+   // which shows plainly once you stand on the ground (AW-STUDY-0018).
+   if(!sun)scene.traverse(o=>{if(!sun&&o.isDirectionalLight&&o.castShadow)sun=o;});if(sun)sun.shadow.normalBias=Math.max(sun.shadow.normalBias,.12);},
   // Air, not a mask: distance softens the far mountains the way it does in a real valley.
   haze(fog,reach){fog.near=Math.max(260,reach*2);fog.far=fog.near+2600;},
   // No tiles placed: the starting tiles stay hidden; tiles the player places show, and the land opens around them.
@@ -22,5 +25,12 @@ export async function createBasinWorld(scene){
    const shown=tiles.filter(t=>placed.has(t.id)),cells=[...shown,...frontier(shown.length?shown:tiles,diameter).map(c=>({center:tileCenter(c.q,c.r,diameter)}))];
    if(!shown.length)cells.push(...tiles);
    world.fitBoard({cells:cells.map(t=>({x:t.center.x*.1,z:t.center.z*.1})),radius:diameter/2*.1,heightAt});},
-  frame(camera,orbit){if(framed)return false;framed=true;world.frame(camera,orbit);return true;}};
+  frame(camera,orbit){if(framed)return false;framed=true;world.frame(camera,orbit);land?.adopt();return true;},
+  // Open land needs its own camera (AW-STUDY-0018, ../land-camera.mjs): ground-anchored, grab to move, first person at the bottom.
+  async controls({camera,orbit,canvas}){
+   const {createLandCamera}=await import('../land-camera.mjs'),{half,siteXZ:[sx,sz]}=world.land,U=.1,edge=40;
+   const lake=world.root.getObjectByName('Basin lake');
+   land=createLandCamera({camera,orbit,canvas,heightAt:world.heightAt,waterY:lake?lake.position.y:-Infinity,
+    bounds:{minX:(-half-sx)*U+edge,maxX:(half-sx)*U-edge,minZ:(-half-sz)*U+edge,maxZ:(half-sz)*U-edge}});
+   window.landCamera=land;return land;}};
 }
