@@ -185,6 +185,54 @@ We do not extract or keep a game's meshes, textures or audio (see the legal ledg
 Evan's taste cuts hard here: he hates website-like UI and 1990s menus, so `hud_coverage`, `menu_depth` and
 `ui_mode_mix` are the fields most likely to decide whether we take something.
 
+### 7b. Information grammar (schema 1.1)
+
+Added 2026-10-23 after the HUD study (`../hud/HUD_STUDY.md`, PRs #108 and #113) and the card studies
+(`../cards/`, PRs #101 and #103). The interface layer says how much UI there is; the information grammar says **how
+the game tells you things**, one kind of information at a time. It uses the HUD study's 2x2 plus "none": diegetic
+(characters know, in the world), meta (characters know, on the lens), spatial (only you know, in the world), overlay
+(only you know, on the screen), and none (the world simply behaves differently). Overlays carry information; meta
+carries feeling; diegetic carries feeling through the world.
+
+- `info_kinds`: one entry per kind of information, each with a `mix` over the five modes (weights summing to 1),
+  a `timing` (always on, on change, on threshold, summoned, absent) and a note. Recommended kinds: `body` (needs,
+  health), `time`, `threat`, `thing_state` (objects and creatures), `goals`, `tools`, `navigation`, `social`,
+  `resources`. Don't Starve's body is 0.7 overlay and 0.3 meta (badges, plus sanity bending the screen); This War of
+  Mine's threat is 0.6 spatial (noise rings where the sound is).
+- `overall_mix`: the same five weights for the game as a whole.
+- `screen_budget`: HUD coverage of the screen, the always-on count (three is the most players watch), words on
+  screen, the fade rule, and whether the HUD is drawn as a material from the world (ink, pencil, suit lights) or as
+  generic panels (`web_ui` is the red flag for Evan's taste).
+- `adaptive_state`: **the whole game adapts.** Each game-state signal (threat, time of day, sanity, season) with
+  the channels it drives together: light, music, NPCs, animals, sound, weather, lens, UI, camera, haptics.
+  `adapts_score` is the most world channels (not lens or UI) one signal drives, divided by 5 and capped at 1. Three
+  or more passes the HUD rubric's `one_signal_many_channels` check.
+- `social_channel`: how entities signal each other and the player, as weights over body language, speech bubbles,
+  audio barks, spatial icons, portrait text, dialogue UI, meta effects and none.
+- `dialects`: places or modes that shift the grammar, each with its own mix. A coffee shop that leans on meta
+  (warm vignette, music), a build mode that adds overlay, This War of Mine's day shelter (overlay text) versus its
+  night scavenging (spatial rings and darkness).
+- `card_art`: for games with cards, the art presentation modes from `../cards/CARD_ART.md` as weights: portal,
+  overlay, pop-out, shadowbox, panorama, specimen, emblem, portrait, scene, living.
+- `signatures_ref`: the game's entry in `hud-signatures.json` or `card-signatures.json`.
+
+How to measure: `footage_cv` over 20 sampled frames for coverage and always-on count; an `llm_judge` pass that labels
+each visible readout with its kind and mode (pairwise, both orders); `playtrace` for timing (when readouts appear and
+fade, and which channels change within 2 seconds of a state change). Until then, values are `estimate`.
+
+First re-scores (estimates from the HUD study, all in `examples/`):
+
+| Game | Overall mix (diegetic / spatial / meta / overlay / none) | Always on | Adapts score | Social cues | Dialects |
+|---|---|---|---|---|---|
+| This War of Mine | 0.20 / 0.35 / 0 / 0.45 / 0 | 3 | 0.6 (day/night: light, music, sound) | words on portraits | shelter by day vs scavenging at night |
+| Don't Starve | 0.20 / 0.15 / 0.20 / 0.40 / 0.05 | 4 | 0.8 (sanity and nightfall each drive 4 world channels) | quips above heads, creature behaviour | caves |
+| 9 Kings | 0.10 / 0.30 / 0 / 0.60 / 0 | 3 | 0.4 (battle: music, sound) | rival kings' portraits | battle |
+| Tiny Glade | 0.50 / 0.10 / 0 / 0.15 / 0.25 | 1 | 0.8 (time of day: light, sound, animals, weather) | ambient life | none |
+| Dorfromantik | 0.20 / 0.40 / 0 / 0.30 / 0.10 | 3 | 0.4 (season: light, sound) | ambient life | none |
+
+The house identity this points to: Tiny Glade's grammar (mostly diegetic and none, one always-on element) with Don't
+Starve's adaptivity at kid-safe strength, and This War of Mine's habit of putting state on the thing it belongs to.
+
 ### 8. Audio
 
 Measured from a 30-minute audio capture and the action log.

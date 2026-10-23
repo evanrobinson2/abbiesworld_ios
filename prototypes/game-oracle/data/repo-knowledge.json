@@ -5,7 +5,7 @@
   {
    "id": "9-kings",
    "file": "docs/oracle/identity/examples/9-kings.json",
-   "schema_version": "1.0",
+   "schema_version": "1.1",
    "game": {
     "title": "9 Kings",
     "steam_appid": null,
@@ -237,6 +237,132 @@
       "Kingdom Builder",
       "Strategy"
      ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "time": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "always_on",
+       "note": "Year counter.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "threat": {
+       "mix": {
+        "overlay": 0.5,
+        "spatial": 0.3,
+        "diegetic": 0.2
+       },
+       "timing": "on_change",
+       "note": "The next attacker is shown before the battle; armies march onto the board.",
+       "confidence": 0.4,
+       "source": "estimate"
+      },
+      "thing_state": {
+       "mix": {
+        "spatial": 0.6,
+        "overlay": 0.4
+       },
+       "timing": "on_change",
+       "note": "Plot levels and buffs on the grid.",
+       "confidence": 0.4,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "always_on",
+       "note": "Survive the years; rival kings listed.",
+       "confidence": 0.4,
+       "source": "estimate"
+      },
+      "tools": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "always_on",
+       "note": "Hand of cards at the bottom edge.",
+       "confidence": 0.6,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.1,
+      "spatial": 0.3,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.25,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "always_on_count": {
+       "value": 3,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "drawn_as": "neutral_overlay"
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "battle",
+        "channels": [
+         "music",
+         "sound",
+         "camera",
+         "ui"
+        ],
+        "note": "The board becomes a battlefield; little world adaptation outside it."
+       }
+      ],
+      "max_channels": {
+       "value": 2,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "adapts_score": {
+       "value": 0.4,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      }
+     },
+     "social_channel": {
+      "carriers": {
+       "portrait_text": 0.6,
+       "none": 0.4
+      },
+      "note": "Rival kings presented by portrait and card set."
+     },
+     "dialects": [
+      {
+       "place": "battle",
+       "mix": {
+        "spatial": 0.5,
+        "overlay": 0.3,
+        "diegetic": 0.2
+       },
+       "note": "Consequences shown on the board."
+      }
+     ],
+     "card_art": {
+      "uses_cards": true,
+      "modes": {
+       "specimen": 0.4,
+       "emblem": 0.3,
+       "portrait": 0.3
+      },
+      "note": "Small pixel-art cards in hand; confirm on capture."
+     },
+     "signatures_ref": "docs/oracle/hud/hud-signatures.json#9-kings"
     }
    },
    "ledger": {
@@ -1296,9 +1422,260 @@
    ]
   },
   {
+   "id": "dont-starve",
+   "file": "docs/oracle/identity/examples/dont-starve.json",
+   "schema_version": "1.1",
+   "game": {
+    "title": "Don't Starve",
+    "steam_appid": 219740,
+    "developer": "Klei Entertainment",
+    "publisher": "Klei Entertainment",
+    "release": "2013"
+   },
+   "core": {
+    "fantasy": "You are a gentleman scientist stranded in a strange gothic wilderness, keeping yourself fed, sane and alive one day at a time.",
+    "pillars": [
+     "Survive the night",
+     "Learn by dying",
+     "A world that turns on you as your mind slips"
+    ],
+    "signature_moment": "Sanity dropping, the screen wobbling and shadow hands reaching for the campfire.",
+    "anti_goals": [
+     "no hand-holding",
+     "no stated goal"
+    ],
+    "signatures": [
+     {
+      "id": "three_badges",
+      "layer": "information_grammar",
+      "description": "Three need badges with direction arrows and a segmented day dial are the whole always-on HUD.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "sanity_bends_world",
+      "layer": "information_grammar",
+      "description": "A meter doubled by the world: low sanity desaturates, wobbles and spawns shadows.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "ink_paper",
+      "layer": "art",
+      "description": "Everything, HUD included, is drawn in the same ink-and-paper style.",
+      "class": "expression",
+      "confidence": 0.8
+     }
+    ]
+   },
+   "layers": {
+    "information_grammar": {
+     "info_kinds": {
+      "body": {
+       "mix": {
+        "overlay": 0.7,
+        "meta": 0.3
+       },
+       "timing": "always_on",
+       "note": "Three need badges with direction arrows; sanity bends the screen as it drops.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "time": {
+       "mix": {
+        "overlay": 0.7,
+        "diegetic": 0.3
+       },
+       "timing": "always_on",
+       "note": "Segmented day dial with moon phase; dusk and night darken the world.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "threat": {
+       "mix": {
+        "meta": 0.4,
+        "diegetic": 0.3,
+        "none": 0.2,
+        "overlay": 0.1
+       },
+       "timing": "on_threshold",
+       "note": "Shadow creatures flicker, whispers start, total darkness attacks; hounds growl before a wave.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "thing_state": {
+       "mix": {
+        "diegetic": 0.6,
+        "spatial": 0.4
+       },
+       "timing": "on_change",
+       "note": "Crops, fires and creatures show state in their art; examine quips above the head.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "none": 0.8,
+        "overlay": 0.2
+       },
+       "timing": "absent",
+       "note": "No stated goal beyond surviving days.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "tools": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "always_on",
+       "note": "Inventory row and equipment slots at the bottom; crafting tabs on the left.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "social": {
+       "mix": {
+        "spatial": 0.7,
+        "diegetic": 0.3
+       },
+       "timing": "on_change",
+       "note": "The character speaks one-line quips above their head; pigs and beefalo show mood by behaviour.",
+       "confidence": 0.5,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.15,
+      "meta": 0.2,
+      "overlay": 0.4,
+      "none": 0.05
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.15,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "always_on_count": {
+       "value": 4,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Badges pulse and show numbers on change or hover; nothing fades."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "sanity",
+        "channels": [
+         "lens",
+         "sound",
+         "npcs",
+         "light"
+        ],
+        "note": "Desaturation and wobble, whispers, shadow creatures appear."
+       },
+       {
+        "signal": "time of day",
+        "channels": [
+         "light",
+         "music",
+         "sound",
+         "animals",
+         "ui"
+        ],
+        "note": "Dusk tint, night darkness, creatures go home, a dusk sting."
+       }
+      ],
+      "max_channels": {
+       "value": 4,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "adapts_score": {
+       "value": 0.8,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      }
+     },
+     "social_channel": {
+      "carriers": {
+       "speech_bubbles": 0.4,
+       "body_language": 0.4,
+       "barks_audio": 0.2
+      },
+      "note": "Spoken quips as floating text; creatures signal by behaviour."
+     },
+     "dialects": [
+      {
+       "place": "caves",
+       "mix": {
+        "overlay": 0.4,
+        "meta": 0.3,
+        "diegetic": 0.3
+       },
+       "note": "No day dial underground; light and sound carry more."
+      }
+     ],
+     "card_art": {
+      "uses_cards": false
+     },
+     "signatures_ref": "docs/oracle/hud/hud-signatures.json#dont-starve"
+    },
+    "narrative": {
+     "tone": {
+      "cozy_tense": 0.6,
+      "whimsical_grounded": -0.3,
+      "earnest_ironic": 0.3
+     },
+     "themes": [
+      "survival",
+      "madness",
+      "discovery"
+     ]
+    }
+   },
+   "ledger": {
+    "style": [
+     "a small fixed always-on set",
+     "need badges with a rate arrow",
+     "a segmented day dial",
+     "a meter doubled by the world"
+    ],
+    "expression": [
+     "the ink-and-paper look and badge art",
+     "characters, creatures and text",
+     "the gothic tone"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "information_grammar",
+      "target": "Ranch HUD",
+      "setting": "A round sun dial with day segments; night coming is shown by light, animals and sound together, at kid-safe strength.",
+      "from_signature": "sanity_bends_world"
+     }
+    ],
+    "leave": [
+     "horror effects",
+     "permadeath"
+    ]
+   },
+   "sources": [
+    "docs/oracle/hud/HUD_STUDY.md",
+    "public guides"
+   ]
+  },
+  {
    "id": "dorfromantik",
    "file": "docs/oracle/identity/examples/dorfromantik.json",
-   "schema_version": "1.0",
+   "schema_version": "1.1",
    "game": {
     "title": "Dorfromantik",
     "steam_appid": 1455840,
@@ -1677,6 +2054,105 @@
       "Puzzle",
       "Hex Grid"
      ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "time": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "always_on",
+       "note": "The tile stack count is the clock.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "thing_state": {
+       "mix": {
+        "spatial": 0.7,
+        "diegetic": 0.3
+       },
+       "timing": "on_change",
+       "note": "Edge-match highlights on the placement preview.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "spatial": 0.8,
+        "overlay": 0.2
+       },
+       "timing": "always_on",
+       "note": "Quest numbers float over tile groups; score in the corner.",
+       "confidence": 0.7,
+       "source": "estimate"
+      },
+      "tools": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "always_on",
+       "note": "Next tile preview.",
+       "confidence": 0.6,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.4,
+      "overlay": 0.3,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.07,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "always_on_count": {
+       "value": 3,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "drawn_as": "neutral_overlay"
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "season",
+        "channels": [
+         "light",
+         "sound"
+        ],
+        "note": "The palette shifts with seasons; otherwise calm and constant."
+       }
+      ],
+      "max_channels": {
+       "value": 2,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "adapts_score": {
+       "value": 0.4,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      }
+     },
+     "social_channel": {
+      "carriers": {
+       "none": 0.7,
+       "body_language": 0.3
+      },
+      "note": "Trains, boats and windmills as ambient life."
+     },
+     "dialects": [],
+     "card_art": {
+      "uses_cards": false
+     },
+     "signatures_ref": "docs/oracle/hud/hud-signatures.json#dorfromantik"
     }
    },
    "ledger": {
@@ -1724,9 +2200,258 @@
    ]
   },
   {
+   "id": "this-war-of-mine",
+   "file": "docs/oracle/identity/examples/this-war-of-mine.json",
+   "schema_version": "1.1",
+   "game": {
+    "title": "This War of Mine",
+    "steam_appid": 282070,
+    "developer": "11 bit studios",
+    "publisher": "11 bit studios",
+    "release": "2014"
+   },
+   "core": {
+    "fantasy": "You are a group of civilians trying to survive a siege, one day of scavenging and one night of fear at a time.",
+    "pillars": [
+     "People, not numbers",
+     "Hard choices with no good answer",
+     "Day to build, night to risk"
+    ],
+    "signature_moment": "Hearing a noise ring bloom in a dark room you haven't entered yet.",
+    "anti_goals": [
+     "no heroics",
+     "no combat power fantasy"
+    ],
+    "signatures": [
+     {
+      "id": "state_as_words",
+      "layer": "information_grammar",
+      "description": "Character needs are written as graded words on portraits, never bars.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "noise_rings",
+      "layer": "information_grammar",
+      "description": "Sound you make and hear is drawn as rings in the world where it happens.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "pencil_ui",
+      "layer": "art",
+      "description": "The interface is drawn in the same pencil and charcoal hand as the world.",
+      "class": "style",
+      "confidence": 0.6
+     }
+    ]
+   },
+   "layers": {
+    "information_grammar": {
+     "info_kinds": {
+      "body": {
+       "mix": {
+        "overlay": 0.6,
+        "spatial": 0.2,
+        "diegetic": 0.2
+       },
+       "timing": "always_on",
+       "note": "Survivor state as graded words (hungry, very tired, depressed) on portraits and bios; bodies slump and move slower.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "time": {
+       "mix": {
+        "overlay": 0.7,
+        "diegetic": 0.3
+       },
+       "timing": "always_on",
+       "note": "Clock and day count; a charcoal title card each morning; night falls in the cutaway.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "threat": {
+       "mix": {
+        "spatial": 0.6,
+        "diegetic": 0.3,
+        "none": 0.1
+       },
+       "timing": "on_change",
+       "note": "Noise rings around you and from unseen rooms; unexplored rooms are dark and hatched.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "thing_state": {
+       "mix": {
+        "spatial": 0.8,
+        "overlay": 0.2
+       },
+       "timing": "on_change",
+       "note": "Interaction icons over beds, stoves, rubble and doors.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "diegetic": 0.5,
+        "overlay": 0.5
+       },
+       "timing": "summoned",
+       "note": "Survive until the ceasefire; the radio carries news of prices and fighting.",
+       "confidence": 0.4,
+       "source": "estimate"
+      },
+      "tools": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "summoned",
+       "note": "Inventory and crafting panels drawn as pencil sketches.",
+       "confidence": 0.5,
+       "source": "estimate"
+      },
+      "social": {
+       "mix": {
+        "overlay": 0.5,
+        "diegetic": 0.3,
+        "spatial": 0.2
+       },
+       "timing": "on_change",
+       "note": "Moods and relationships as words on portraits plus short spoken lines.",
+       "confidence": 0.4,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.35,
+      "overlay": 0.45
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "always_on_count": {
+       "value": 3,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "drawn_as": "world_material",
+      "fade_rule": "Interaction icons appear only near usable objects."
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "day/night",
+        "channels": [
+         "light",
+         "music",
+         "sound",
+         "ui"
+        ],
+        "note": "Night switches to the scavenging map, darkness and quieter, tenser music."
+       }
+      ],
+      "max_channels": {
+       "value": 3,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "adapts_score": {
+       "value": 0.6,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      }
+     },
+     "social_channel": {
+      "carriers": {
+       "portrait_text": 0.5,
+       "body_language": 0.2,
+       "barks_audio": 0.2,
+       "spatial_icons": 0.1
+      },
+      "note": "People, not numbers: states are written as words."
+     },
+     "dialects": [
+      {
+       "place": "shelter by day",
+       "mix": {
+        "overlay": 0.5,
+        "spatial": 0.4,
+        "diegetic": 0.1
+       },
+       "note": "Management: more overlay text."
+      },
+      {
+       "place": "scavenging at night",
+       "mix": {
+        "spatial": 0.6,
+        "diegetic": 0.3,
+        "overlay": 0.1
+       },
+       "note": "Danger shown where it is: rings and darkness."
+      }
+     ],
+     "card_art": {
+      "uses_cards": false
+     },
+     "signatures_ref": "docs/oracle/hud/hud-signatures.json#this-war-of-mine"
+    },
+    "narrative": {
+     "tone": {
+      "cozy_tense": 0.9,
+      "whimsical_grounded": 0.9,
+      "earnest_ironic": -0.9
+     },
+     "themes": [
+      "war",
+      "survival",
+      "moral cost"
+     ]
+    }
+   },
+   "ledger": {
+    "style": [
+     "state as plain words or bodies rather than bars",
+     "interaction icons on objects",
+     "noise as rings in the world",
+     "UI drawn in the world's own hand"
+    ],
+    "expression": [
+     "the charcoal art and sketch frames",
+     "icons, characters and text",
+     "the war setting and tone"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "information_grammar",
+      "target": "Ranch HUD",
+      "setting": "A thirsty cow shows it on the cow (body and bubble), never on a bar.",
+      "from_signature": "state_as_words"
+     }
+    ],
+    "leave": [
+     "war theme",
+     "adult-only distress"
+    ]
+   },
+   "sources": [
+    "docs/oracle/hud/HUD_STUDY.md",
+    "public guides"
+   ]
+  },
+  {
    "id": "tiny-glade",
    "file": "docs/oracle/identity/examples/tiny-glade.json",
-   "schema_version": "1.0",
+   "schema_version": "1.1",
    "game": {
     "title": "Tiny Glade",
     "steam_appid": 2198150,
@@ -2191,6 +2916,107 @@
       "Sandbox",
       "Cute"
      ]
+    },
+    "information_grammar": {
+     "info_kinds": {
+      "time": {
+       "mix": {
+        "diegetic": 0.8,
+        "overlay": 0.2
+       },
+       "timing": "summoned",
+       "note": "Time of day is the sky; a slider when you ask.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "thing_state": {
+       "mix": {
+        "diegetic": 0.9,
+        "spatial": 0.1
+       },
+       "timing": "on_change",
+       "note": "Buildings grow and settle; handles appear on hover.",
+       "confidence": 0.6,
+       "source": "estimate"
+      },
+      "goals": {
+       "mix": {
+        "none": 1
+       },
+       "timing": "absent",
+       "note": "No goals.",
+       "confidence": 0.8,
+       "source": "estimate"
+      },
+      "tools": {
+       "mix": {
+        "overlay": 1
+       },
+       "timing": "always_on",
+       "note": "A small bottom tray of tools.",
+       "confidence": 0.6,
+       "source": "estimate"
+      }
+     },
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.1,
+      "overlay": 0.15,
+      "none": 0.25
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "always_on_count": {
+       "value": 1,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "drawn_as": "world_material"
+     },
+     "adaptive_state": {
+      "signals": [
+       {
+        "signal": "time of day / season",
+        "channels": [
+         "light",
+         "sound",
+         "animals",
+         "weather"
+        ],
+        "note": "Sky, lamps, birdsong and sheep shift together."
+       }
+      ],
+      "max_channels": {
+       "value": 4,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      },
+      "adapts_score": {
+       "value": 0.8,
+       "source": "estimate",
+       "confidence": 0.4,
+       "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+      }
+     },
+     "social_channel": {
+      "carriers": {
+       "body_language": 0.6,
+       "none": 0.4
+      },
+      "note": "Villagers and sheep only as ambient life."
+     },
+     "dialects": [],
+     "card_art": {
+      "uses_cards": false
+     },
+     "signatures_ref": "docs/oracle/hud/hud-signatures.json#tiny-glade"
     }
    },
    "ledger": {

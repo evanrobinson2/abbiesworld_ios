@@ -14,8 +14,10 @@ python steam_study.py profile APPID [...]    # writes docs/oracle/games/<slug>.j
 ```
 
 A profile has public store metadata, an engine fingerprint taken from file names in the install folder (never
-file contents), and an empty `identity` block (core loop, mechanics, UI and game feel, camera, art direction,
-palette, audio mood, pacing, lessons) for the Oracle to fill from play sessions, screenshots and public docs.
+file contents), and an empty `identity` block (core loop, mechanics, UI and game feel, information grammar, camera,
+art direction, palette, audio mood, pacing, lessons) for the Oracle to fill from play sessions, screenshots and public docs.
+Fill `information_grammar` in the shape of `layers.information_grammar` in
+`docs/oracle/identity/game-identity.schema.json` (schema 1.1; see the section in `GAME_IDENTITY.md`).
 Screenshots or captures used for study stay on the PC (`%LOCALAPPDATA%\AbbiesWorld\game-study`), not in git.
 
 `docs/oracle/games/_installed.json` is the snapshot of installed games (appid, name, size) from 2026-10-22.

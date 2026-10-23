@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "game": {
     "title": "Tiny Glade",
     "steam_appid": 2198150,
@@ -464,6 +464,107 @@
         "Sandbox",
         "Cute"
       ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "time": {
+          "mix": {
+            "diegetic": 0.8,
+            "overlay": 0.2
+          },
+          "timing": "summoned",
+          "note": "Time of day is the sky; a slider when you ask.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "thing_state": {
+          "mix": {
+            "diegetic": 0.9,
+            "spatial": 0.1
+          },
+          "timing": "on_change",
+          "note": "Buildings grow and settle; handles appear on hover.",
+          "confidence": 0.6,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "none": 1.0
+          },
+          "timing": "absent",
+          "note": "No goals.",
+          "confidence": 0.8,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "A small bottom tray of tools.",
+          "confidence": 0.6,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.1,
+        "overlay": 0.15,
+        "none": 0.25
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "always_on_count": {
+          "value": 1,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "drawn_as": "world_material"
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "time of day / season",
+            "channels": [
+              "light",
+              "sound",
+              "animals",
+              "weather"
+            ],
+            "note": "Sky, lamps, birdsong and sheep shift together."
+          }
+        ],
+        "max_channels": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "adapts_score": {
+          "value": 0.8,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        }
+      },
+      "social_channel": {
+        "carriers": {
+          "body_language": 0.6,
+          "none": 0.4
+        },
+        "note": "Villagers and sheep only as ambient life."
+      },
+      "dialects": [],
+      "card_art": {
+        "uses_cards": false
+      },
+      "signatures_ref": "docs/oracle/hud/hud-signatures.json#tiny-glade"
     }
   },
   "ledger": {

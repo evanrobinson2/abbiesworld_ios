@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "game": {
     "title": "9 Kings",
     "steam_appid": null,
@@ -231,6 +231,132 @@
         "Kingdom Builder",
         "Strategy"
       ]
+    },
+    "information_grammar": {
+      "info_kinds": {
+        "time": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Year counter.",
+          "confidence": 0.5,
+          "source": "estimate"
+        },
+        "threat": {
+          "mix": {
+            "overlay": 0.5,
+            "spatial": 0.3,
+            "diegetic": 0.2
+          },
+          "timing": "on_change",
+          "note": "The next attacker is shown before the battle; armies march onto the board.",
+          "confidence": 0.4,
+          "source": "estimate"
+        },
+        "thing_state": {
+          "mix": {
+            "spatial": 0.6,
+            "overlay": 0.4
+          },
+          "timing": "on_change",
+          "note": "Plot levels and buffs on the grid.",
+          "confidence": 0.4,
+          "source": "estimate"
+        },
+        "goals": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Survive the years; rival kings listed.",
+          "confidence": 0.4,
+          "source": "estimate"
+        },
+        "tools": {
+          "mix": {
+            "overlay": 1.0
+          },
+          "timing": "always_on",
+          "note": "Hand of cards at the bottom edge.",
+          "confidence": 0.6,
+          "source": "estimate"
+        }
+      },
+      "overall_mix": {
+        "diegetic": 0.1,
+        "spatial": 0.3,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.25,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "always_on_count": {
+          "value": 3,
+          "source": "estimate",
+          "confidence": 0.4,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "drawn_as": "neutral_overlay"
+      },
+      "adaptive_state": {
+        "signals": [
+          {
+            "signal": "battle",
+            "channels": [
+              "music",
+              "sound",
+              "camera",
+              "ui"
+            ],
+            "note": "The board becomes a battlefield; little world adaptation outside it."
+          }
+        ],
+        "max_channels": {
+          "value": 2,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        },
+        "adapts_score": {
+          "value": 0.4,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "HUD study (docs/oracle/hud/HUD_STUDY.md), public guides and prior knowledge; not yet measured on capture"
+        }
+      },
+      "social_channel": {
+        "carriers": {
+          "portrait_text": 0.6,
+          "none": 0.4
+        },
+        "note": "Rival kings presented by portrait and card set."
+      },
+      "dialects": [
+        {
+          "place": "battle",
+          "mix": {
+            "spatial": 0.5,
+            "overlay": 0.3,
+            "diegetic": 0.2
+          },
+          "note": "Consequences shown on the board."
+        }
+      ],
+      "card_art": {
+        "uses_cards": true,
+        "modes": {
+          "specimen": 0.4,
+          "emblem": 0.3,
+          "portrait": 0.3
+        },
+        "note": "Small pixel-art cards in hand; confirm on capture."
+      },
+      "signatures_ref": "docs/oracle/hud/hud-signatures.json#9-kings"
     }
   },
   "ledger": {

@@ -110,7 +110,7 @@ def profile(appid):
         "header_image": s.get("header_image"),
         "install": fingerprint(local["dir"]) if local else {"engine": "not installed"},
         "identity": {k: None for k in (
-            "core_loop", "mechanics", "ui_and_game_feel", "camera",
+            "core_loop", "mechanics", "ui_and_game_feel", "information_grammar", "camera",
             "art_direction", "palette", "audio_mood", "pacing", "lessons_for_abbies_world")},
         "sources": ["steam store api", "install file names (no contents)"],
     }
