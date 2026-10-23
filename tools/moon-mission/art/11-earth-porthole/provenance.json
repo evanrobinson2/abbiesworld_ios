@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "11. Earth from orbit through a porthole (dark mode)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "Looking out of a round spaceship porthole at the blue Earth from orbit, thick rounded white window frame with glowing pink trim lights, black sky full of stars, hard sunlight on the frame, dark and dramatic, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "7f83b7f0-46ba-409e-853e-19ba08eb77e4",
+  "page": "https://www.midjourney.com/jobs/7f83b7f0-46ba-409e-853e-19ba08eb77e4?index=0",
+  "pick_index": 0,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/7f83b7f0-46ba-409e-853e-19ba08eb77e4/0_0.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "d46af4f0b83e86344ab862673f05b3dc4201b9df87b05b9fc6c8c4e4749b9b40"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 0: chunky frame with glowing pink ring, starfield, cloud-covered Earth. All four lean photoreal rather than cartoon."
+}

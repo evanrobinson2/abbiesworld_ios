@@ -1,0 +1,507 @@
+<title>AW-STUDY-0033 - Founding City on Hexes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A new founding place for Abbie's World on a limestone headland, chosen by simulation, and the town that grows on it when the big tile splits into 217 small hexes: water by gravity, goods chains, four kinds of household, streets worn by feet, and townspeople who talk.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: the living town is the page's opening; the land that chose it, the town's year, the voices and the systems follow. */
+:root{
+ --bg:#eef0ec; --paper:#f8f8f4; --ink:#1f2a2e; --muted:#5f6b6c; --line:#d2d8d2;
+ --sea:#2b6f8f; --clay:#b4532f; --olive:#6d7a3a; --lime:#e9e3d3;
+ --glass:rgba(255,255,255,.58); --rim:rgba(255,255,255,.85); --shade:rgba(20,30,35,.18);
+ --display:"Young Serif",Georgia,"Times New Roman",serif;
+ --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#141b1e; --paper:#1c2528; --ink:#e8ece8; --muted:#9aa7a6; --line:#2f3b3e;
+ --sea:#5fb0d4; --clay:#e07a52; --olive:#a9b86a; --lime:#3a3830;
+ --glass:rgba(30,40,44,.6); --rim:rgba(255,255,255,.2); --shade:rgba(0,0,0,.4); color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#141b1e; --paper:#1c2528; --ink:#e8ece8; --muted:#9aa7a6; --line:#2f3b3e;
+ --sea:#5fb0d4; --clay:#e07a52; --olive:#a9b86a; --lime:#3a3830;
+ --glass:rgba(30,40,44,.6); --rim:rgba(255,255,255,.2); --shade:rgba(0,0,0,.4); color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 64px}
+.wrap{max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.08}
+h1{font-size:clamp(30px,5.2vw,54px)}
+h2{font-size:clamp(24px,3.4vw,34px)}
+h3{font-size:20px}
+p{margin:0;max-width:68ch}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--clay)}
+.muted{color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+section{display:flex;flex-direction:column;gap:16px}
+.head{display:flex;flex-direction:column;gap:10px}
+
+/* The town */
+.stage{position:relative;border-radius:22px;overflow:hidden;background:#9fc6d6;height:min(72vh,640px);min-height:380px;box-shadow:0 20px 50px -24px var(--shade)}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.hud{position:absolute;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;
+ background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.34));border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -10px rgba(20,40,50,.45),inset 0 1px 0 rgba(255,255,255,.9);max-width:calc(100% - 24px)}
+.hud button{width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:#24343a;display:grid;place-items:center;cursor:pointer;flex:none}
+.hud button[aria-pressed="true"]{background:rgba(255,255,255,.95);box-shadow:0 2px 8px -2px rgba(20,40,50,.4)}
+.hud button:focus-visible{outline:2px solid #24343a;outline-offset:1px}
+.hud svg{width:20px;height:20px}
+.hud input[type=range]{width:clamp(80px,22vw,220px);accent-color:#b4532f}
+.hud .sep{width:1px;height:22px;background:rgba(36,52,58,.18);flex:none}
+.year{font:500 13px var(--mono);color:#24343a;min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+.bubble{position:absolute;transform:translate(-50%,-100%);pointer-events:none;max-width:240px;padding:8px 11px;border-radius:14px;font:600 13px/1.35 var(--body);color:#1f2a2e;
+ background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.78));border:1px solid rgba(255,255,255,.95);box-shadow:0 8px 18px -8px rgba(20,40,50,.5);transition:opacity .4s}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:rgba(255,255,255,.82);transform:translateX(-50%) rotate(45deg);border-right:1px solid #fff;border-bottom:1px solid #fff}
+.bubble b{display:block;font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#b4532f;margin-bottom:2px}
+@media (max-width:560px){.hud{gap:1px;padding:4px}.hud button{width:31px;height:31px}.hud .year,.hud .sep{display:none}.hud input[type=range]{width:64px}.bubble{max-width:180px;font-size:12px}}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.fact{padding:12px 14px;border-radius:14px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;gap:2px;min-width:0}
+.fact .v{font:500 22px var(--mono);font-variant-numeric:tabular-nums}
+.fact .k{font-size:13px;color:var(--muted)}
+.kinds{display:flex;height:10px;border-radius:6px;overflow:hidden;background:var(--line)}
+.kinds span{display:block;height:100%}
+
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.map{width:100%;max-width:100%;aspect-ratio:1;border-radius:18px;background:var(--paper);border:1px solid var(--line);display:block}
+ol.log{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+ol.log li{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:baseline}
+ol.log .y{font:500 12px var(--mono);color:var(--clay)}
+.chron{max-height:420px;overflow:auto;padding-right:6px}
+
+.ask{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}
+.ask form{display:flex;gap:8px;flex-wrap:wrap}
+.ask input{flex:1 1 220px;min-width:0;font:inherit;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.ask button,.chip{font:600 14px var(--body);padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.ask button[type=submit]{background:var(--clay);border-color:var(--clay);color:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.answer{font-size:18px;line-height:1.5;max-width:62ch}
+.answer small{display:block;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+
+.systems{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.sys{padding:18px;border-radius:18px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;min-width:0}
+.sys .rule{font-size:15px}
+.sys dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
+.sys dt{font:500 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.sys dd{margin:0}
+.mode{display:inline-block;font:500 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid currentColor}
+.m-none{color:var(--olive)}.m-diegetic{color:var(--sea)}.m-spatial{color:#8a5ab8}.m-meta{color:#c2621f}.m-overlay{color:var(--muted)}
+.grid22{display:grid;grid-template-columns:auto 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.grid22>div{background:var(--paper);padding:14px;min-width:0;font-size:14px}
+.grid22 .h{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;font-size:14px;min-width:560px}
+td,th{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.num{white-space:nowrap}
+ul.plain{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.loading{position:absolute;inset:auto 0 50% 0;text-align:center;font:500 13px var(--mono);color:#24343a}
+@media (prefers-reduced-motion:reduce){.bubble{transition:none}}
+</style>
+
+<div class="wrap">
+ <section>
+  <div class="stage" id="stage">
+   <canvas id="town" aria-label="The town on the headland, live. Drag to look around."></canvas>
+   <div class="loading" id="loading">Raising the land…</div>
+   <div class="hud" role="toolbar" aria-label="Town controls">
+    <button id="play" aria-label="Play the years" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <span class="year" id="yearNum">90</span>
+    <input type="range" id="year" min="1" max="150" value="90" aria-label="Year">
+    <span class="sep"></span>
+    <button data-tool="look" aria-label="Look around" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12m0-1.5a1.5 1.5 0 0 1 3 0V12m0-.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.6 14a1.5 1.5 0 0 1 2.5-1.6L8 15"/></svg></button>
+    <button data-tool="home" aria-label="Zone homes" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11l8-6 8 6v8H4z"/><path d="M10 19v-5h4v5"/></svg></button>
+    <button data-tool="work" aria-label="Zone workshops" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 20V10l5 3V10l5 3V6h4l1 14z"/></svg></button>
+    <button data-tool="green" aria-label="Plant a garden" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v7"/></svg></button>
+    <button data-tool="clear" aria-label="Clear a block" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <span class="sep"></span>
+    <button data-lens="water" aria-label="Show who has running water" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg></button>
+    <button data-lens="tile" aria-label="Show today's single tile" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg></button>
+   </div>
+  </div>
+ </section>
+
+ <section class="head">
+  <span class="eyebrow">AW-STUDY-0033 · Oracle studies · 23 October 2026</span>
+  <h1>A founding city on hexes</h1>
+  <p>A new place for Abbie's World, found the way people found places: a limestone headland, a river, a sheltered bay and a spring high on the ridge. Then today's big tile splits into 217 small hexes, each a city block, and a town grows on them from the land up. Drag the town, play the years, zone a block and watch the town answer. Every building above was placed by the simulation when a need was measured, and the log says why.</p>
+  <p class="muted">Anno 117: Pax Romana is in the Game Oracle (installed and studied), but only as a light profile: its loop, its information mix and its Game DNA. This study adds the deeper Anno identity record the Oracle was missing, and borrows Anno's mechanics, never its look or words.</p>
+ </section>
+
+ <section>
+  <div class="facts" id="facts"></div>
+  <div class="kinds" id="kindbar" aria-label="Households by kind"></div>
+ </section>
+
+ <section class="two">
+  <div class="head" style="gap:14px">
+   <span class="eyebrow">The founding place</span>
+   <h2>The land chose it</h2>
+   <p>The headland is not drawn. A ridge is raised, rain runs off and cuts channels, rain that soaks into the limestone comes out as a spring where the rock meets the valley clay, and the sea fills the low ground. The founders land in the calmest water and walk the land, costing every place in minutes of daily walking, then turn down the places that flood, sit below the storm line or cannot see the bay.</p>
+   <ol class="log" id="foundLog"></ol>
+  </div>
+  <canvas class="map" id="map" width="640" height="640" aria-label="Map of the headland: the spring, the river, the bay, the places the founders passed over, the town tile and the water channel"></canvas>
+ </section>
+
+ <section class="two">
+  <div class="ask" id="ask">
+   <span class="eyebrow">The steward and the townspeople</span>
+   <h2>Ask the steward</h2>
+   <p class="muted">Everything a character says comes from this year's fact sheet. In the game the AI writes the words live from those facts and a designed voice speaks them; here the same facts make the line.</p>
+   <div class="chips">
+    <button class="chip" type="button" data-q="How are we doing?">How are we doing?</button>
+    <button class="chip" type="button" data-q="Is there enough water?">Is there enough water?</button>
+    <button class="chip" type="button" data-q="Do we have enough food?">Do we have enough food?</button>
+   </div>
+   <form id="askForm"><input id="askInput" maxlength="240" placeholder="Ask the steward anything about the town" aria-label="Your question for the steward"><button type="submit">Ask</button></form>
+   <p class="answer" id="answer" aria-live="polite"></p>
+  </div>
+  <div class="head" style="gap:12px">
+   <span class="eyebrow">The town's year</span>
+   <h2>What happened, and why</h2>
+   <div class="chron"><ol class="log" id="chron"></ol></div>
+  </div>
+ </section>
+
+ <section>
+  <div class="head"><span class="eyebrow">How the town works</span><h2>Nine systems, each from first principles</h2>
+  <p>Anno's lesson is that a city is chains: a need, the goods that answer it, the land and the hands that make the goods. SimCity's is that the street is where it all meets. Here each block is a hex, and each system is a rule about the physical world, not a number to tune.</p></div>
+  <div class="systems" id="systems"></div>
+ </section>
+
+ <section>
+  <div class="head"><span class="eyebrow">How the town shows it</span><h2>Feel it in the town first</h2>
+  <p>The play view has one small glass bar and no words. Everything else lives on things: the town is the readout.</p></div>
+  <div class="grid22">
+   <div class="h"></div><div class="h">The townspeople know</div><div class="h">Only you know</div>
+   <div class="h">In the town</div>
+   <div><span class="mode m-diegetic">Diegetic</span><br>Fountains run or stand dry. Thatch turns to red tile as homes grow. Smoke over the bakery. Streets wear from dirt to gravel to stone. Ships in the bay on trade days. The bell for fire.</div>
+   <div><span class="mode m-spatial">Spatial</span><br>Townspeople speak up in bubbles about what is near them: a baker at a new oven, a water carrier at the first fountain. The steward answers above the town hall.</div>
+   <div class="h">On the screen</div>
+   <div><span class="mode m-meta">Meta</span><br>The music fills out as the town grows a kind richer; a dry year sounds thinner. (Next: the arrangement per kind of household, from the music bible.)</div>
+   <div><span class="mode m-overlay">Overlay</span><br>Only when summoned: the water lens shows which blocks a fountain can ever reach (the channel's level decides). Zoning tints the block you paint. The grown-up view has the ledger below.</div>
+  </div>
+ </section>
+
+ <section>
+  <div class="head"><span class="eyebrow">From Anno 117: Pax Romana</span><h2>What we take, and what we leave</h2></div>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Anno does</th><th>Here it becomes</th><th>Why</th></tr></thead>
+   <tbody id="anno"></tbody>
+  </table></div>
+ </section>
+
+ <section>
+  <div class="head"><span class="eyebrow">The grown-up view</span><h2>The assumptions, in one table</h2>
+  <p class="muted">Every rate the run uses. Change one and the town changes; nothing else is hidden.</p></div>
+  <div class="tablewrap"><table><thead><tr><th>Assumption</th><th>Value</th></tr></thead><tbody id="assume"></tbody></table></div>
+ </section>
+
+ <section>
+  <div class="head"><span class="eyebrow">Next</span><h2>What this needs to become a game</h2></div>
+  <ul class="plain">
+   <li>Dress the blocks with the kit's real low-poly models (houses by kind, the works, the channel's arches) instead of the blocks and boxes here.</li>
+   <li>Put the headland into the world map as its own region, with the founding tile at its heart and the countryside tiles around it as the town's fields, groves, flocks and woods.</li>
+   <li>Design the town cast's voices (steward, baker, fisher, builder, water carrier) in the family-cast voice pipeline, then pick them on the cast page.</li>
+   <li>Let the child place the works too (Anno's way), with the council suggesting where by the same measured needs.</li>
+   <li>Add the music per kind of household, and seasons: olive harvest, wine pressing, winter storms closing the bay.</li>
+  </ul>
+ </section>
+</div>
+
+<script type="importmap">/*IMPORTMAP*/</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+/*MODULES*/
+
+// ---------- Run the land and the town ----------
+const SEED = 3, YEARS = 150;
+const { land, founding } = foundHeadland(SEED);
+const edits = [];
+let st = simulate(land, founding, { years: YEARS, edits });
+let year = 90;
+const H = st.tile.hexes, EX = 1.6, C = ASSUMPTIONS.cell;
+
+// ---------- Facts strip ----------
+const KCOL = ['', '#c9a45c', '#d98b55', '#b4532f', '#7a3b8f'];
+function showFacts() {
+ const y = st.years[year - 1], f = facts(st, year);
+ const items = [[y.pop.toLocaleString('en-US'), 'people in year ' + y.year], [f.food, 'of the food they need'], [f.water, 'of the water they need'],
+  [(f.works.fountain || 0) + ' / ' + (f.works.well || 0), 'fountains / wells'], [Object.values(f.works).reduce((a, b) => a + b, 0), 'works built'], [y.stock.tiles.toLocaleString('en-US'), 'roof tiles in store']];
+ document.getElementById('facts').innerHTML = items.map(([v, k]) => `<div class="fact"><span class="v">${v}</span><span class="k">${k}</span></div>`).join('');
+ const tot = y.byKind.reduce((a, b) => a + b, 0) || 1;
+ document.getElementById('kindbar').innerHTML = [1, 2, 3, 4].map(k => `<span title="${KINDS[k]}: ${y.byKind[k]}" style="width:${y.byKind[k] / tot * 100}%;background:${KCOL[k]}"></span>`).join('');
+ document.getElementById('kindbar').setAttribute('aria-label', [1, 2, 3, 4].map(k => `${KINDS[k]} ${y.byKind[k]}`).join(', '));
+ const chron = st.log.filter(e => e.text && e.year <= year).slice(-40).reverse();
+ document.getElementById('chron').innerHTML = chron.map(e => `<li><span class="y">year ${e.year}</span><span>${e.text}</span></li>`).join('');
+}
+document.getElementById('foundLog').innerHTML = founding.log.map((t, i) => `<li><span class="y">${i ? 'arrival' : 'land'}</span><span>${t}</span></li>`).join('');
+
+// ---------- Region map (2D) ----------
+(function drawMap() {
+ const cv = document.getElementById('map'), g = cv.getContext('2d'), N = land.N, S = cv.width / N, img = g.createImageData(N, N);
+ for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+  const i = y * N + x, h = land.h[i], o = i * 4;
+  let c;
+  if (h < 0) { const d = Math.min(1, -h / 30); c = [70 - 40 * d, 140 - 50 * d, 170 - 40 * d]; }
+  else { const cov = land.cover[i]; c = cov === 5 ? [70, 140, 170] : cov === 4 ? [226, 214, 176] : cov === 3 ? [176, 170, 160] : cov === 6 ? [170, 168, 128] : cov === 2 ? [150, 180, 110] : [96, 130, 82];
+   if (land.soil[i] === 3 && cov !== 5) c = [176, 188, 110];
+   const hx = land.h[Math.min(N - 1, x + 1) + y * N] - h, hy = land.h[x + Math.min(N - 1, y + 1) * N] - h, sh = Math.max(.6, Math.min(1.25, 1 - (hx + hy) * .06));
+   c = c.map(v => v * sh); }
+  img.data[o] = c[0]; img.data[o + 1] = c[1]; img.data[o + 2] = c[2]; img.data[o + 3] = 255;
+ }
+ const off = document.createElement('canvas'); off.width = off.height = N; off.getContext('2d').putImageData(img, 0, 0);
+ g.imageSmoothingEnabled = true; g.drawImage(off, 0, 0, cv.width, cv.height);
+ const P = c => [(c % N + .5) * S, (((c / N) | 0) + .5) * S];
+ // the channel
+ if (st.aqueduct) { g.strokeStyle = '#f4efe2'; g.lineWidth = 3; g.setLineDash([6, 4]); g.beginPath(); st.aqueduct.path.forEach(([x, , z], k) => { const px = (x + st.tile.ox) / C * S, pz = (z + st.tile.oz) / C * S; k ? g.lineTo(px, pz) : g.moveTo(px, pz); }); g.stroke(); g.setLineDash([]); }
+ // the tile
+ const [tx, ty] = P(founding.site), R = (CITY.R * Math.sqrt(3) + 1) * CITY.s / C * S;
+ g.strokeStyle = '#b4532f'; g.lineWidth = 3; g.beginPath(); for (let k = 0; k <= 6; k++) { const a = k * Math.PI / 3; g.lineTo(tx + Math.cos(a) * R, ty + Math.sin(a) * R); } g.stroke();
+ const dot = (c, col, label, dy = -10) => { const [x, y] = P(c); g.fillStyle = col; g.beginPath(); g.arc(x, y, 6, 0, 7); g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2; g.stroke(); g.font = '600 15px Figtree, system-ui, sans-serif'; g.lineWidth = 4; g.strokeStyle = 'rgba(255,255,255,.85)'; g.strokeText(label, x + 10, y + dy); g.fillStyle = '#1f2a2e'; g.fillText(label, x + 10, y + dy); };
+ for (const b of founding.beat.slice(0, 3)) dot(b.i, '#8a8f8a', 'passed over: ' + b.why.map(w => ({ steep: 'steep', flood: 'floods', storm: 'storms', soil: 'no soil', blind: 'no view' })[w]).join(', '), 18);
+ dot(land.spring.cell, '#2b6f8f', `spring, ${Math.round(land.spring.h)} m`);
+ dot(founding.beach, '#e2c15a', 'landing', 22);
+ dot(founding.site, '#b4532f', 'the town', -14);
+})();
+
+// ---------- Three.js scene ----------
+const canvas = document.getElementById('town'), stage = document.getElementById('stage');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#a9d1e2');
+const camera = new THREE.PerspectiveCamera(40, 1, 2, 9000); camera.position.set(-210, 190, 300);
+const controls = new OrbitControls(camera, canvas); controls.target.set(0, 12, 0); controls.enableDamping = true; controls.maxDistance = 2600; controls.minDistance = 40; controls.maxPolarAngle = 1.45;
+scene.add(new THREE.HemisphereLight('#dceeff', '#7b6a4c', 1.1));
+const sun = new THREE.DirectionalLight('#fff1d8', 2.6); sun.position.set(-260, 420, 200); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -380, right: 380, top: 380, bottom: -380, near: 10, far: 1400 }); sun.shadow.bias = -.0006; scene.add(sun);
+
+// The land around the tile
+(function terrain() {
+ const N = land.N, geo = new THREE.PlaneGeometry((N - 1) * C, (N - 1) * C, N - 1, N - 1); geo.rotateX(-Math.PI / 2);
+ const pos = geo.attributes.position, col = new Float32Array(pos.count * 3), cc = new THREE.Color();
+ for (let k = 0; k < pos.count; k++) { const gx = k % N, gy = (k / N) | 0, i = gy * N + gx, h = land.h[i];
+  pos.setXYZ(k, gx * C - st.tile.ox, (h < 0 ? h * 1.2 : h * EX) - .6, gy * C - st.tile.oz);
+  const cov = land.cover[i], s = land.soil[i];
+  cc.set(h < 0 ? '#c9c29a' : cov === 5 ? '#6f9a8c' : cov === 4 ? '#e5d9b4' : cov === 3 ? '#b8b2a6' : cov === 6 ? '#a7a777' : s === 3 ? ((gx + gy) % 4 < 2 ? '#c8bf6a' : '#9fb465') : s === 2 && land.slope[i] < .35 ? '#8f9a5a' : cov === 2 ? '#93b26a' : '#5f8650');
+  col.set([cc.r, cc.g, cc.b], k * 3); }
+ geo.setAttribute('color', new THREE.BufferAttribute(col, 3)); geo.computeVertexNormals();
+ const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: .95, flatShading: true })); m.receiveShadow = true; scene.add(m);
+ const sea = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshStandardMaterial({ color: '#3f8fb0', roughness: .25, metalness: .1, transparent: true, opacity: .86 }));
+ sea.rotation.x = -Math.PI / 2; sea.position.y = 0; scene.add(sea);
+})();
+
+// Instanced primitives, rebuilt when the year changes
+const GEO = {
+ box: new THREE.BoxGeometry(1, 1, 1).translate(0, .5, 0),
+ cyl: new THREE.CylinderGeometry(.5, .5, 1, 12).translate(0, .5, 0),
+ hex: new THREE.CylinderGeometry(1, 1, 1, 6).translate(0, -.5, 0),
+ ball: new THREE.IcosahedronGeometry(.5, 1).translate(0, .5, 0),
+ cone: new THREE.ConeGeometry(.5, 1, 8).translate(0, .5, 0),
+ dome: new THREE.SphereGeometry(.5, 12, 6, 0, Math.PI * 2, 0, Math.PI / 2),
+ roof: (() => { const g = new THREE.BufferGeometry(), v = [-.5, 0, -.5, .5, 0, -.5, 0, 1, -.5, -.5, 0, .5, .5, 0, .5, 0, 1, .5];
+  const idx = [0, 2, 1, 3, 4, 5, 0, 3, 5, 0, 5, 2, 1, 2, 5, 1, 5, 4, 0, 1, 4, 0, 4, 3]; const p = []; for (const i of idx) p.push(v[i * 3], v[i * 3 + 1], v[i * 3 + 2]);
+  g.setAttribute('position', new THREE.Float32BufferAttribute(p, 3)); g.computeVertexNormals(); return g; })()
+};
+const MAT = new THREE.MeshStandardMaterial({ roughness: .85, flatShading: true });
+const WATER = new THREE.MeshStandardMaterial({ color: '#5fb3d6', roughness: .15, metalness: .1, emissive: '#1d5a74', emissiveIntensity: .25 });
+let meshes = [];
+const groupTown = new THREE.Group(); scene.add(groupTown);
+function builder() {
+ const lists = {}; const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), v = new THREE.Vector3(), s = new THREE.Vector3(), c = new THREE.Color();
+ return {
+  add(kind, x, y, z, sx, sy, sz, color, ry = 0, water = false) { const key = kind + (water ? ':w' : ''); (lists[key] ||= []).push([x, y, z, sx, sy, sz, color, ry]); },
+  build() { for (const m of meshes) { groupTown.remove(m); m.dispose?.(); } meshes = [];
+   for (const [key, items] of Object.entries(lists)) { const [kind, w] = key.split(':'); const mesh = new THREE.InstancedMesh(GEO[kind], w ? WATER : MAT, items.length);
+    items.forEach(([x, y, z, sx, sy, sz, color, ry], i) => { e.set(0, ry, 0); q.setFromEuler(e); v.set(x, y, z); s.set(sx, sy, sz); m4.compose(v, q, s); mesh.setMatrixAt(i, m4); if (!w) mesh.setColorAt(i, c.set(color)); });
+    mesh.castShadow = kind !== 'hex'; mesh.receiveShadow = true; groupTown.add(mesh); meshes.push(mesh); if (kind === 'hex') mesh.userData.pick = items.map(it => it.hexId); }
+  }, lists };
+}
+const HS = CITY.s, top = x => Math.max(.4, x.h * EX);
+const ANG = [0, 1, 2, 3, 4, 5].map(k => -Math.PI / 6 + k * Math.PI / 3 + Math.PI / 6); // corner slots between the streets
+let hexMesh = null, lens = null, tileView = false;
+const RC = ['#c8b48a', '#c9b48a', '#d4c6a2', '#b9b4aa']; // ground under feet: earth, path, gravel, paving
+function dressTown() {
+ const y = st.years[year - 1], b = builder(), rnd = mulberry(year * 7 + 1);
+ // Today's single big tile, for the before/after
+ if (tileView) { const Rb = (CITY.R * Math.sqrt(3) + 1) * HS; b.add('hex', 0, 12 * EX, 0, Rb, 30, Rb, '#86ad62', Math.PI / 6); b.lists.hex[0].hexId = -1; b.build(); return; }
+ for (const x of H) {
+  if (x.sea) continue;
+  const i = x.id, zone = ZONES[y.zone[i]], work = y.work[i] >= 0 ? WORK_IDS[y.work[i]] : null, kind = y.kind[i], hh = y.hh[i] / 10, road = y.road[i], t = top(x);
+  let ground = x.river ? '#5f9fb8' : zone === 'home' ? (road ? RC[road] : '#c9b98f') : work === 'garden' ? '#79a85a' : zone === 'civic' || zone === 'work' || zone === 'harbour' ? (road >= 2 ? RC[road] : '#cdbf9c') : road ? RC[road] : x.soil === 3 ? '#a9b86a' : x.cover === 6 ? '#a7a777' : x.cover === 4 ? '#e5d9b4' : '#7fa35d';
+  if (lens === 'water' && !x.river) ground = y.zone[i] === 1 ? (st.aqueduct && x.h < st.aqueduct.level - 1 ? '#7ec8e3' : '#e0a089') : st.aqueduct && x.h < st.aqueduct.level - 1 ? '#bfe3ee' : '#ead2c5';
+  if (paintHint === i) ground = '#ffffff';
+  b.add('hex', x.x, x.river ? t - .8 : t, x.z, HS * .985, x.river ? 6 : t + 8, HS * .985, ground);
+  b.lists.hex[b.lists.hex.length - 1].hexId = i;
+  const base = x.river ? t - .8 : t;
+  // streets: a strip to each neighbouring street block
+  if (road) for (const j of x.n) { const o = H[j]; if (o.sea || !y.road[j] || j < i) continue; const mx = (x.x + o.x) / 2, mz = (x.z + o.z) / 2, ang = Math.atan2(o.x - x.x, o.z - x.z), len = Math.hypot(o.x - x.x, o.z - x.z), w = [0, 2.5, 3.5, 4.5][Math.min(road, y.road[j])];
+   b.add('box', mx, Math.max(base, top(o)) + .02, mz, w, .12, len, RC[Math.min(road, y.road[j])] === '#b9b4aa' ? '#a9a49c' : '#bfa97c', ang); }
+  if (zone === 'home' && hh > .05) house(b, x, base, kind, hh, y.thatch[i], rnd);
+  else if (work) works(b, x, base, work, rnd, y);
+  else if (!x.river && !road && x.cover !== 4 && rnd() < .55) tree(b, x.x + (rnd() - .5) * 20, base, x.z + (rnd() - .5) * 20, x.cover === 6 ? '#7d8a4e' : '#4f7a3f', 3 + rnd() * 4);
+ }
+ // the channel: arches where it rides above the land, a channel on top
+ if (st.aqueduct && year >= (st.log.find(e => e.tag === 'aqueduct')?.year ?? 1e9)) {
+  const P = st.aqueduct.path;
+  for (let k = 1; k < P.length; k++) { const [x0, l0, z0, g0] = P[k - 1], [x1, l1, z1, g1] = P[k], mx = (x0 + x1) / 2, mz = (z0 + z1) / 2, lv = (l0 + l1) / 2 * EX, gr = Math.max(0, (g0 + g1) / 2) * EX, len = Math.hypot(x1 - x0, z1 - z0), ang = Math.atan2(x1 - x0, z1 - z0);
+   if (lv > gr - .5) { b.add('box', mx, lv, mz, 2.6, 1.4, len + .2, '#e8dfcc', ang); if (lv - gr > 2) b.add('box', mx, gr - 1, mz, 2, lv - gr + 1, 2.2, '#d9ceb6', ang); } }
+ }
+ b.build(); hexMesh = meshes.find(m => m.userData.pick); placeEmitters(y);
+}
+function house(b, x, base, kind, hh, thatch, rnd) {
+ const wall = ['#d8c7a4', '#e8dcc3', '#f1e9d8', '#f4efe6'][kind - 1] || '#d8c7a4', roof = thatch ? '#c8a35a' : '#b4532f';
+ const n = Math.max(1, Math.min(5, Math.round(kind === 4 ? 2 : kind === 3 ? hh / 1.6 : hh / 1)));
+ if (kind === 4) { // a villa round a courtyard, a garden and a pool
+  const a = ANG[(x.id * 5) % 6], cx = x.x + Math.sin(a) * 6, cz = x.z + Math.cos(a) * 6;
+  for (let k = 0; k < 3; k++) { const ang = a + k * Math.PI / 2, wx = cx + Math.sin(ang) * 5, wz = cz + Math.cos(ang) * 5; b.add('box', wx, base, wz, 11, 4.5, 4, wall, ang); b.add('roof', wx, base + 4.5, wz, 4.6, 2.2, 11.4, roof, ang + Math.PI / 2); }
+  b.add('box', cx, base + .05, cz, 4, .3, 3, '#5fb3d6', a, true); tree(b, x.x - Math.sin(a) * 9, base, x.z - Math.cos(a) * 9, '#4f7a3f', 6); return;
+ }
+ const W = [0, 7, 9, 11][kind], D = [0, 5.5, 7, 8.5][kind], Ht = [0, 3, 4.2, 7.5][kind];
+ for (let k = 0; k < n; k++) { const a = ANG[(k + x.id) % 6], r = 11, hx = x.x + Math.sin(a) * r, hz = x.z + Math.cos(a) * r, rot = a + (rnd() - .5) * .2;
+  b.add('box', hx, base, hz, W, Ht, D, wall, rot); b.add('roof', hx, base + Ht, hz, D + .6, kind === 1 ? 2.2 : 1.6, W + .6, roof, rot + Math.PI / 2); }
+}
+function tree(b, x, y, z, color, h) { b.add('cyl', x, y, z, .5, h * .4, .5, '#6b5136'); b.add('ball', x, y + h * .3, z, h * .55, h * .6, h * .55, color); }
+function works(b, x, base, id, rnd, y) {
+ const X = x.x, Z = x.z, W = '#efe6d6', R = '#b4532f';
+ const at = (dx, dz) => [X + dx, Z + dz];
+ switch (id) {
+  case 'well': b.add('cyl', X, base, Z, 3, 1, 3, '#cfc3a8'); b.add('cyl', X, base + .9, Z, 2.2, .1, 2.2, '#3f7e97', 0, true); b.add('box', X, base, Z - 1.6, .3, 3, .3, '#6b5136'); b.add('box', X, base, Z + 1.6, .3, 3, .3, '#6b5136'); b.add('box', X, base + 3, Z, .3, .3, 3.4, '#6b5136'); break;
+  case 'fountain': b.add('cyl', X, base, Z, 6, .9, 6, '#e8dfcc'); b.add('cyl', X, base + .5, Z, 5, .5, 5, '', 0, true); b.add('cyl', X, base, Z, .9, 2.6, .9, '#e8dfcc'); break;
+  case 'castellum': b.add('box', X, base, Z, 9, 5, 9, '#e3d8c2'); b.add('dome', X, base + 5, Z, 7, 3.5, 7, '#cdbfa3'); break;
+  case 'market': for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3, r = 9; b.add('box', X + Math.sin(a) * r, base, Z + Math.cos(a) * r, 3.2, 2.2, 2.4, '#8a6a46', a); b.add('roof', X + Math.sin(a) * r, base + 2.2, Z + Math.cos(a) * r, 2.6, 1, 3.6, ['#d9534f', '#e8b04a', '#3f8fb0', '#f2efe6', '#6d7a3a', '#d98b55'][k], a + Math.PI / 2); } b.add('cyl', X, base, Z, 2, 3.4, 2, '#cfc3a8'); break;
+  case 'harbour': { const sea = x.n.map(j => H[j]).find(o => o.sea) || x, a = Math.atan2(sea.x - X, sea.z - Z);
+   b.add('box', X + Math.sin(a) * 14, .3, Z + Math.cos(a) * 14, 4, 1, 30, '#8a6a46', a);
+   for (let k = 0; k < 4; k++) { const bx = X + Math.sin(a) * (20 + k * 6) + Math.cos(a) * (k % 2 ? 6 : -6), bz = Z + Math.cos(a) * (20 + k * 6) - Math.sin(a) * (k % 2 ? 6 : -6); b.add('box', bx, 0, bz, 2, 1, 6, '#6b4a2e', a); b.add('box', bx, 1, bz, .2, 5, .2, '#f2efe6'); }
+   b.add('box', X, base, Z, 10, 3.5, 6, W, a); b.add('roof', X, base + 3.5, Z, 6.6, 2, 10.6, R, a + Math.PI / 2); break; }
+  case 'mill': b.add('box', X, base, Z, 8, 6, 7, W); b.add('roof', X, base + 6, Z, 7.6, 2.4, 8.6, R, Math.PI / 2); b.add('cyl', X + 5.5, base + 3, Z, 6, .8, 6, '#6b5136', Math.PI / 2); break;
+  case 'bakery': b.add('box', X, base, Z, 8, 3.6, 6, W); b.add('roof', X, base + 3.6, Z, 6.6, 1.8, 8.6, R, Math.PI / 2); b.add('dome', X + 5, base, Z, 4, 2.6, 4, '#c98f5e'); b.add('box', X - 2, base + 3.6, Z + 1, 1, 3, 1, '#9a8f80'); break;
+  case 'press': b.add('box', X, base, Z, 9, 3.8, 7, '#e3d7bd'); b.add('roof', X, base + 3.8, Z, 7.6, 1.8, 9.6, R, Math.PI / 2); for (let k = 0; k < 4; k++) b.add('cyl', X - 4 + k * 2.6, base, Z + 6, 1.4, 1.6, 1.4, '#a86b3c'); break;
+  case 'carpenter': b.add('box', X, base, Z, 10, 3.2, 6, '#c9b08a'); b.add('roof', X, base + 3.2, Z, 6.6, 1.6, 10.6, '#8a6a46', Math.PI / 2); for (let k = 0; k < 5; k++) b.add('cyl', X - 3 + k * .9, base + .4, Z + 6, .8, 7, .8, '#7a5a38', Math.PI / 2); break;
+  case 'weaver': b.add('box', X, base, Z, 9, 4.2, 6, W); b.add('roof', X, base + 4.2, Z, 6.6, 1.8, 9.6, R, Math.PI / 2); for (let k = 0; k < 3; k++) b.add('box', X - 3 + k * 3, base + 2, Z + 5, 2.4, 2.4, .1, ['#3f8fb0', '#d9534f', '#e8b04a'][k]); break;
+  case 'kiln': b.add('dome', X, base, Z, 9, 7, 9, '#a5603c'); b.add('cyl', X, base + 3, Z, 1.6, 4, 1.6, '#8a4a2c'); for (let k = 0; k < 6; k++) b.add('box', X - 8, base + k * .5, Z - 3 + k * 1.1, 3, .5, 1, R); break;
+  case 'bath': b.add('box', X, base, Z, 14, 5, 12, '#f1e9d8'); b.add('dome', X, base + 5, Z, 9, 4.5, 9, '#d9cfb8'); b.add('box', X + 9, base + .1, Z, 4, .4, 9, '', 0, true); break;
+  case 'school': b.add('box', X, base, Z, 12, 4.4, 7, '#f1e9d8'); b.add('roof', X, base + 4.4, Z, 7.6, 2, 12.6, R, Math.PI / 2); b.add('box', X, base, Z + 7, 9, .2, 4, '#d8c79e'); break;
+  case 'watch': b.add('box', X, base, Z, 5, 10, 5, '#d8cbb0'); b.add('cone', X, base + 10, Z, 7, 3.5, 7, R); break;
+  case 'temple': b.add('box', X, base, Z, 14, 1.6, 20, '#ece4d2'); for (let k = 0; k < 6; k++) for (const sx of [-5.4, 5.4]) b.add('cyl', X + sx, base + 1.6, Z - 8 + k * 3.2, 1.2, 7, 1.2, '#f4efe6'); b.add('box', X, base + 8.6, Z, 13, 1.2, 19, '#ece4d2'); b.add('roof', X, base + 9.8, Z, 13.4, 2.6, 19.4, R, 0); break;
+  case 'theatre': for (let k = 0; k < 6; k++) b.add('cyl', X, base + k * .9, Z, 30 - k * 3.6, .9, 30 - k * 3.6, '#e3d8c2'); b.add('box', X, base, Z + 11, 16, 5, 3, '#d9ceb6'); break;
+  case 'garden': for (let k = 0; k < 5; k++) tree(b, X + Math.sin(k * 1.3) * 10, base, Z + Math.cos(k * 1.3) * 10, k % 2 ? '#5f8a46' : '#7d9a4e', 5 + k % 3); b.add('box', X, base + .05, Z, 5, .3, 5, '', 0, true); break;
+ }
+}
+function mulberry(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+// ---------- Life: people walking, smoke, boats ----------
+const MAXW = 360, walkerMesh = new THREE.InstancedMesh(new THREE.CapsuleGeometry(.45, 1, 2, 6).translate(0, .95, 0), new THREE.MeshStandardMaterial({ roughness: .8 }), MAXW);
+walkerMesh.castShadow = true; scene.add(walkerMesh);
+let walkers = [];
+function spawnWalkers() {
+ const y = st.years[year - 1], homes = H.filter(x => y.zone[x.id] === 1 && y.hh[x.id] > 5), r = mulberry(year), col = new THREE.Color();
+ const n = Math.min(MAXW, Math.round(y.pop / 9)); walkers = [];
+ for (let k = 0; k < n && homes.length; k++) { const h = homes[(r() * homes.length) | 0]; walkers.push({ a: h.id, b: h.id, t: 1, speed: .9 + r() * .7, off: (r() - .5) * 2 }); walkerMesh.setColorAt(k, col.set(KCOL[y.kind[h.id] || 1])); }
+ walkerMesh.count = walkers.length; if (walkerMesh.instanceColor) walkerMesh.instanceColor.needsUpdate = true;
+}
+const tmpM = new THREE.Matrix4(), tmpQ = new THREE.Quaternion(), tmpV = new THREE.Vector3(), one = new THREE.Vector3(1, 1, 1), up = new THREE.Vector3(0, 1, 0);
+function stepWalkers(dt) {
+ const y = st.years[year - 1];
+ walkers.forEach((w, k) => {
+  w.t += dt * w.speed * 1.4 / (HS * Math.sqrt(3)) * 4;
+  if (w.t >= 1) { w.a = w.b; const opts = H[w.a].n.filter(j => !H[j].sea && (y.road[j] || y.zone[j] === 1 || y.work[j] >= 0)); w.b = opts.length ? opts[(Math.random() * opts.length) | 0] : w.a; w.t = 0; }
+  const A = H[w.a], B = H[w.b], x = A.x + (B.x - A.x) * w.t, z = A.z + (B.z - A.z) * w.t, hy = top(A) + (top(B) - top(A)) * w.t;
+  const ang = Math.atan2(B.x - A.x, B.z - A.z); tmpQ.setFromAxisAngle(up, ang);
+  tmpV.set(x + Math.cos(ang) * w.off, hy + .1, z - Math.sin(ang) * w.off); tmpM.compose(tmpV, tmpQ, one); walkerMesh.setMatrixAt(k, tmpM);
+ });
+ walkerMesh.instanceMatrix.needsUpdate = true;
+}
+// Smoke from ovens, kilns and the hearths of the better-off homes
+const smokeTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 2, 32, 32, 30); gr.addColorStop(0, 'rgba(255,255,255,.9)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c); })();
+const PUFFS = 420, smokeGeo = new THREE.BufferGeometry(), smokePos = new Float32Array(PUFFS * 3); smokeGeo.setAttribute('position', new THREE.BufferAttribute(smokePos, 3));
+const smoke = new THREE.Points(smokeGeo, new THREE.PointsMaterial({ map: smokeTex, size: 9, transparent: true, opacity: .55, depthWrite: false, color: '#e9e6e0' })); scene.add(smoke);
+let emitters = [], puffs = [];
+function placeEmitters(y) { emitters = []; for (const x of H) { const w = y.work[x.id] >= 0 ? WORK_IDS[y.work[x.id]] : null; if (w === 'bakery' || w === 'kiln' || w === 'mill') emitters.push([x.x, top(x) + 6, x.z, 3]); else if (y.zone[x.id] === 1 && y.kind[x.id] >= 2 && (x.id % 3 === 0)) emitters.push([x.x + 6, top(x) + 6, x.z, 1]); }
+ puffs = Array.from({ length: PUFFS }, (_, k) => ({ e: emitters.length ? k % emitters.length : -1, age: Math.random() * 6 })); }
+function stepSmoke(dt) { puffs.forEach((p, k) => { if (p.e < 0) { smokePos.set([0, -99, 0], k * 3); return; } const e = emitters[p.e]; p.age += dt * (e[3] > 1 ? 1 : .6); if (p.age > 6) p.age = 0; const a = p.age; smokePos.set([e[0] + a * 1.6 + Math.sin(k + a) * .8, e[1] + a * 3.2, e[2] - a * 2.4], k * 3); }); smokeGeo.attributes.position.needsUpdate = true; }
+
+// ---------- Speech: townspeople speak up about what is near them ----------
+const bubbles = [];
+function sayAt(hexId, who, text, ms = 4200) { const el = document.createElement('div'); el.className = 'bubble'; el.innerHTML = `<b>${who}</b>${text}`; stage.append(el); const b = { el, hex: hexId, until: performance.now() + ms }; bubbles.push(b); place(b); return b; }
+function place(b) { const x = H[b.hex] || H[0]; tmpV.set(x.x, top(x) + 18, x.z).project(camera); const r = canvas.getBoundingClientRect(); b.el.style.left = ((tmpV.x + 1) / 2 * r.width) + 'px'; b.el.style.top = ((1 - tmpV.y) / 2 * r.height) + 'px'; b.el.style.opacity = tmpV.z < 1 && Math.abs(tmpV.x) < 1.1 && Math.abs(tmpV.y) < 1.1 ? 1 : 0; }
+function tickBubbles(now) { for (let k = bubbles.length - 1; k >= 0; k--) { const b = bubbles[k]; if (now > b.until) { b.el.remove(); bubbles.splice(k, 1); } else place(b); } }
+function barksFor(y0, y1) { const evs = st.log.filter(e => e.year > y0 && e.year <= y1 && e.hex >= 0).map(bark).filter(Boolean).slice(-2); evs.forEach((l, k) => setTimeout(() => sayAt(l.hex, SPEAKERS[l.speaker].name, l.text), k * 900)); }
+
+// ---------- Ask the steward ----------
+const live = /abbies\.world$|vercel\.app$/.test(location.hostname);
+const answerEl = document.getElementById('answer');
+function hallHex() { const y = st.years[year - 1]; for (const id of ['castellum', 'market', 'well']) { const i = H.findIndex(x => y.work[x.id] === WORK_IDS.indexOf(id)); if (i >= 0) return i; } return 0; }
+async function ask(question) {
+ const f = facts(st, year); let text = '', audio = null, how = 'made from this year\'s facts';
+ if (live) { try { const r = await fetch('/api/advisor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ speaker: 'steward', facts: f, question, voice: true }) }); const j = await r.json(); if (r.ok && j.text) { text = j.text; audio = j.audio; how = 'written live by the AI from this year\'s facts'; } } catch {} }
+ if (!text) text = stewardLine(f, question);
+ answerEl.innerHTML = `${text}<small>The steward, year ${year} · ${how}</small>`;
+ sayAt(hallHex(), 'The steward', text, 7000);
+ if (audio) new Audio('data:audio/mpeg;base64,' + audio).play().catch(() => {});
+ else if ('speechSynthesis' in window) { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.rate = .98; speechSynthesis.speak(u); } catch {} }
+}
+document.querySelectorAll('[data-q]').forEach(b => b.onclick = () => ask(b.dataset.q));
+document.getElementById('askForm').onsubmit = e => { e.preventDefault(); const q = document.getElementById('askInput').value.trim(); if (q) ask(q); };
+
+// ---------- Controls: years, zoning, lenses ----------
+const yearIn = document.getElementById('year'), yearNum = document.getElementById('yearNum'), playBtn = document.getElementById('play');
+let playing = false, acc = 0, tool = 'look', paintHint = -1;
+function setYear(v, speak) { const was = year; year = Math.max(1, Math.min(YEARS, v | 0)); yearIn.value = year; yearNum.textContent = year; dressTown(); spawnWalkers(); showFacts(); if (speak) barksFor(was, year); }
+yearIn.oninput = () => setYear(+yearIn.value, false);
+playBtn.onclick = () => { playing = !playing; playBtn.setAttribute('aria-pressed', playing); playBtn.innerHTML = playing ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>' : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'; if (playing && year >= YEARS) setYear(1); };
+document.querySelectorAll('[data-tool]').forEach(b => b.onclick = () => { tool = b.dataset.tool; document.querySelectorAll('[data-tool]').forEach(o => o.setAttribute('aria-pressed', o === b)); controls.enableRotate = true; });
+document.querySelectorAll('[data-lens]').forEach(b => b.onclick = () => { const on = b.getAttribute('aria-pressed') !== 'true'; document.querySelectorAll('[data-lens]').forEach(o => o.setAttribute('aria-pressed', false)); b.setAttribute('aria-pressed', on);
+ lens = on && b.dataset.lens === 'water' ? 'water' : null; tileView = on && b.dataset.lens === 'tile'; walkerMesh.visible = smoke.visible = !tileView; dressTown(); });
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down = null;
+canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+canvas.addEventListener('pointerup', e => {
+ if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6 || tool === 'look' || !hexMesh) return;
+ const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera);
+ const hit = ray.intersectObject(hexMesh)[0]; if (!hit) return; const i = hexMesh.userData.pick[hit.instanceId]; if (i == null || i < 0) return;
+ const x = H[i]; edits.push({ year, q: x.q, r: x.r, zone: tool });
+ st = simulate(land, founding, { years: YEARS, edits }); paintHint = i; setYear(year, false); paintHint = -1; setTimeout(dressTown, 500);
+ const e2 = st.log.filter(l => l.year === year && l.tag === 'edit').pop(); sayAt(i, 'The steward', tool === 'green' ? 'A garden! The houses near it will want to grow.' : tool === 'home' ? 'New homes. Newcomers will come if there is water, food and work.' : tool === 'work' ? 'Room for a workshop. The council will use it when a need is measured.' : 'Cleared.', 3500);
+});
+
+function resize() { const r = stage.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+let last = performance.now();
+function frame(now) { const dt = Math.min(.05, (now - last) / 1000); last = now; controls.update();
+ if (playing) { acc += dt; if (acc > .5) { acc = 0; if (year < YEARS) setYear(year + 1, true); else { playing = false; playBtn.click(); playing = false; } } }
+ stepWalkers(dt); stepSmoke(dt); tickBubbles(now); renderer.render(scene, camera); requestAnimationFrame(frame); }
+document.getElementById('loading').remove();
+setYear(year, false); requestAnimationFrame(frame);
+setTimeout(() => { const l = st.log.filter(e => e.year <= year && e.hex >= 0).map(bark).filter(Boolean).pop(); if (l) sayAt(l.hex, SPEAKERS[l.speaker].name, l.text, 6000); }, 800);
+
+// ---------- Static sections from the same modules ----------
+const SYSTEMS = [
+ ['Water by gravity', 'Wells only where the water lies less than 10 m down. Later a channel from the spring at a fall of 3 m per km, on arches over dips and in tunnels through rises. It can only feed fountains below the level it arrives at.', 'Fountains run or stand dry; arches stride across the valley.', 'diegetic', 'Anno 117 makes aqueducts a network you lay; here the land decides the route and who it can reach.'],
+ ['Food from the land around', 'Fields on the alluvium, boats on the sheltered water. Field hands walk out from town; land past about an hour\'s walk gives too little of the day to be worth it.', 'Farmers stream out of the town gate toward the fields each morning.', 'diegetic', 'Anno farms are buildings with a radius; here the fields are the real soil around the tile.'],
+ ['Goods chains', 'Olives on the terra rossa to the press, flocks on the hills to the weaver, clay on the river bank to the kiln, timber from the woods to the carpenter, grain to the mill to the bakery.', 'Smoke over the oven and the kiln; red tiles stacked by the kiln; cloth drying by the weaver.', 'diegetic', 'The heart of Anno: every comfort is a chain of land, hands and a workshop.'],
+ ['Four kinds of household', 'Settlers, townsfolk, artisans and patrons. A block that has everything the next kind needs grows into it (thatch to tile, one floor to two, a villa round a courtyard). Each kind does its own work, so the council holds some blocks back.', 'Houses visibly grow; their colour on the walkers in the streets changes.', 'diegetic', 'Anno\'s population tiers and its workforce tension, kept: rich towns still need fishers.'],
+ ['Streets worn by feet', 'Every household walks to water, to market and out to the fields each day. Each footstep wears the ground: path, gravel, then stone paving once there are artisans to lay it.', 'Streets appear where people walk; paving shows the busiest way.', 'none', 'SimCity paints roads first. Here the roads come last, where the town actually goes.'],
+ ['Services within a walk', 'Market, fountain, bath, school, temple and theatre each reach as far as people will walk on the real streets (from 2 to 10 minutes). Out of reach, the council opens another among the unreached homes.', 'Crowds at the market and the bath; the theatre fills on show days.', 'diegetic', 'Anno and SimCity both use service radii; here they are walking times over real slopes.'],
+ ['Pull of a place', 'A block\'s pull rises with height and the sea view, with gardens and temples near, and falls with smoke and noise. The sea wind blows smoke inland, so the north side of a kiln is the worst place to live.', 'The best houses gather up the slope, upwind of the workshops.', 'none', 'SimCity\'s land value, made of things a child can see.'],
+ ['Fire and flood', 'Thatch burns, and fire jumps to thatched neighbours. After the first fire, a fire watch; tiles from the kiln end the risk. The river floods a little every year and badly some years; families rebuild higher.', 'A bell, smoke, the bucket line; the river at the doors.', 'diegetic', 'Anno\'s fire and illness, from causes rather than dice.'],
+ ['Trade by sea', 'With a landing stage and a market, ships take the town\'s spare oil, wine, cloth and tiles and bring grain and cloth. A small headland can feed a big town this way.', 'Sails in the bay on trade days.', 'diegetic', 'Anno\'s trade routes, kept to one harbour and one ship for now.']
+];
+document.getElementById('systems').innerHTML = SYSTEMS.map(([t, rule, feel, mode, anno]) => `<div class="sys"><h3>${t}</h3><p class="rule">${rule}</p><dl><dt>Feel</dt><dd>${feel} <span class="mode m-${mode}">${mode}</span></dd><dt>Anno</dt><dd>${anno}</dd></dl></div>`).join('');
+const ANNO = [
+ ['Population tiers whose needs grow', 'Settlers, townsfolk, artisans, patrons', 'A town you can watch get richer, block by block.'],
+ ['Production chains across islands', 'Chains across the countryside tiles around the town', 'The land around matters; every comfort has a place it comes from.'],
+ ['Workforce per tier', 'Each kind does its own work; the council holds some back', 'The best puzzle in Anno: you cannot make everyone rich.'],
+ ['Service radius of buildings', 'Walking time over the real streets and slopes', 'Hills and rivers change the city, as they should.'],
+ ['Two cultures (Roman and Celtic) in Anno 117', 'Left for later: the town has one people for now', 'Worth a study of its own before borrowing.'],
+ ['Its art, names, music and words', 'Never used', 'Style and mechanics yes, expression never (the Oracle\'s identity ledger).']
+];
+document.getElementById('anno').innerHTML = ANNO.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('');
+const A1 = [['Region', `${ASSUMPTIONS.N * ASSUMPTIONS.cell / 1000} km on a ${ASSUMPTIONS.cell} m grid`], ['Rain soaking into limestone', `${ASSUMPTIONS.recharge} m a year`], ['Founding party', `${ASSUMPTIONS.party} people by boat`],
+ ['City block', `${CITY.s} m hex (0.1 ha), ${H.length} blocks in the tile`], ['Grain', `${CITY.grain} kg/ha, a third fallow, ${CITY.farmHa} ha a household`], ['A person eats', `${CITY.eat} kg of grain a year`],
+ ['Fish', `one household feeds ${CITY.fishFeeds}`], ['Oil', `${CITY.oil} kg/ha; ${CITY.oilNeed} kg a person`], ['Wool', `${CITY.wool} kg/ha; ${CITY.clothNeed} kg of cloth a person`], ['Wine', `${CITY.wine} L/ha; ${CITY.wineNeed} L a patron`],
+ ['Water', `${CITY.litres} L a person a day; a well ${CITY.well / 1000} m³ a day; a bath ${CITY.bathLitres / 1000} m³ a day`], ['Channel', `fall ${CITY.fall * 1000} m per km, ${CITY.lossChannel * 100}% leaks`],
+ ['Households a block holds', CITY.hh.slice(1).map((v, k) => `${KINDS[k + 1]} ${v}`).join(', ')], ['Births, deaths', `${CITY.birth}, ${CITY.death} a person a year`], ['Fire in thatch', `${CITY.fireRisk * 100}% a block a year before the fire watch`],
+ ['Walking limits', Object.entries(CITY.walkTo).map(([k, v]) => `${k} ${v / 60} min`).join(', ')], ['Trade value (kg of grain)', Object.entries(CITY.trade).map(([k, v]) => `${k} ${v}`).join(', ')]];
+document.getElementById('assume').innerHTML = A1.map(([k, v]) => `<tr><td>${k}</td><td class="num">${v}</td></tr>`).join('');
+</script>

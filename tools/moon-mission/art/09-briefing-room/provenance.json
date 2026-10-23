@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "9. Crew briefing room",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "A bright white crew briefing room with a long table and chairs, on the whiteboard a child's colourful marker drawing of a pink rocket, a moon and three smiling stick figures, sunlight through big windows, white room, soft shadows, light and cheerful, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "89fab538-2780-4e77-be4b-360b66de451b",
+  "page": "https://www.midjourney.com/jobs/89fab538-2780-4e77-be4b-360b66de451b?index=1",
+  "pick_index": 1,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/89fab538-2780-4e77-be4b-360b66de451b/0_1.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "8ee6abe7aab56bc9969f44bcc0d6ce33fe76d6dbe9500e7dfae170aea8e722e3"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 1: reads most like a child's marker drawing (rocket, moon, smiling stick figures), bright white room."
+}

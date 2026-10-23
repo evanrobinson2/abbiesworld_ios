@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "13b. Chat portraits: the copper-bob girl (happy, surprised, determined)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "Character expression sheet of a fictional cartoon six-year-old girl astronaut with a copper bob haircut, white space suit with pink trim, three head-and-shoulders busts side by side: happy, surprised, determined, plain light background, stylized cartoon, Pixar-meets-NASA, game character concept art for a kids' game --ar 3:2 --v 7 --relax",
+  "job_id": "32bbbd8d-4e94-45a4-b246-48ad9d8027d5",
+  "page": "https://www.midjourney.com/jobs/32bbbd8d-4e94-45a4-b246-48ad9d8027d5?index=0",
+  "pick_index": 0,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/32bbbd8d-4e94-45a4-b246-48ad9d8027d5/0_0.png",
+    "size": [
+      1344,
+      896
+    ],
+    "sha256": "76639ac84208c5c2043741b76997bbdab0d57ffbda2d9cede9c7822c2da9153e"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 0: head-and-shoulders busts, copper bob, white suit with pink trim, three distinct expressions. Order left to right is happy, determined, surprised. Skipped 3 (real agency-style patches on the suit)."
+}
