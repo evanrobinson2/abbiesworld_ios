@@ -1,0 +1,18 @@
+{
+ "job": "brute2-retexture",
+ "tasks": [
+  {
+   "stage": "retexture",
+   "task_id": "01a16a99-61e1-7626-bd7d-223d2afd6716",
+   "credits": 10,
+   "params": {
+    "input_task_id": "01a16806-f882-743e-ae4e-ec866c693b4d",
+    "enable_original_uv": true,
+    "enable_pbr": true,
+    "text_style_prompt": "stylized brawler, hand-painted skin with real shading, blue fighting trunks, taped hands, PG"
+   },
+   "image_style": null
+  }
+ ],
+ "credits": 10
+}
