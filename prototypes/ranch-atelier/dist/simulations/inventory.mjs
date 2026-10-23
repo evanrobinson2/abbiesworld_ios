@@ -16,7 +16,7 @@
 // opens the backpack in 3D, cleaved into two half shells, with what she carries in both halves and her charms hanging
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
-import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=6';
+import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=7';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const read = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } };
@@ -68,14 +68,22 @@ function mountPocket() {
   const pushers = chrono?.querySelector('.ch-pushers');
   if (pushers) pushers.before(pocket);
   else if (chrono) chrono.append(pocket);
-  else { pocket.classList.add('aw-pocket-float'); document.body.append(pocket); }
+  // The backpack lives on the weather instrument (Evan, 22:05Z: a button floating on its own is out of place). A page
+  // without the chronograph yet keeps it out of view (B still opens it) and docks it the moment the instrument mounts.
+  else { pocket.hidden = true; waitForChrono(); }
   return pocket;
+}
+let chronoWatch = null;
+function waitForChrono() {
+  if (chronoWatch || !window.MutationObserver) return;
+  chronoWatch = new MutationObserver(() => { if (!document.getElementById('v2-chrono')) return; chronoWatch.disconnect(); chronoWatch = null; pocket?.remove(); pocket = null; drawPocket(); });
+  chronoWatch.observe(document.documentElement, {childList: true, subtree: true});
 }
 function drawPocket(bump = false) {
   if (!document.body) return;
   if (!document.getElementById('v2-chrono') && document.documentElement.classList.contains('ui-v2') && !pocket) { setTimeout(() => drawPocket(bump), 300); return; }
   const list = read(), p = mountPocket();
-  p.hidden = false; // always there: one obvious control (the backpack on the top bar, or B)
+  p.hidden = !p.isConnected; // always there on the instrument: one obvious control (the backpack register, or B)
   p.innerHTML = `<span class="ch-g">${glyph(bagLook())}</span>${list.length > 1 ? `<span class="aw-pocket-n">${list.length}</span>` : ''}`;
   p.title = (list.length ? "Abbie's backpack: " + list.map(i => i.name).join(', ') : "Abbie's backpack") + ' (B)';
   if (bump) { p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump'); }
@@ -84,7 +92,8 @@ function drawPocket(bump = false) {
 // Tapping the backpack opens it: the 3D half shell drops in under the register, nothing behind it is dimmed or blurred.
 let view = null;
 async function openPop() {
-  const list = read(), r = pocket.getBoundingClientRect();
+  // With no instrument on the page the backpack opens under the top-left corner, where the chronograph sits.
+  const list = read(), r = pocket?.isConnected ? pocket.getBoundingClientRect() : {left: 12, width: 44, bottom: 12};
   if (!pop) {
     pop = Object.assign(document.createElement('div'), {className: 'aw-pocket-pop aw-bp-pop'});
     pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', "Abbie's backpack");
@@ -100,7 +109,7 @@ async function openPop() {
   pop.querySelector('.aw-bp-charmcam').hidden = !contents.charms.length;
   try {
     if (!view) {
-      const {backpackView} = await import('./backpack.mjs?v=6');
+      const {backpackView} = await import('./backpack.mjs?v=7');
       view = await backpackView(pop.querySelector('.aw-bp-stage'), {...contents, look: bagLook(), spin: false, onChange: l => setLook(l)});
     } else { view.setLook(bagLook()); view.setContents(contents); }
     if (!pop.classList.contains('dressing')) setTimeout(() => view.open(), 120);

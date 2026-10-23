@@ -1,0 +1,44 @@
+{
+ "source": "tools/midjourney/outputs/character-studio/2-plasticine-inventor/meshy/cs-2-plasticine-inventor_rigged_character_glb.glb",
+ "out": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/cs-2-plasticine-inventor.glb",
+ "tris_before": 30907,
+ "tris": 10000,
+ "height_m": 1.718,
+ "bones": [
+  "root",
+  "hips",
+  "spine",
+  "chest",
+  "neck",
+  "head",
+  "clavicle_L",
+  "upperarm_L",
+  "forearm_L",
+  "hand_L",
+  "clavicle_R",
+  "upperarm_R",
+  "forearm_R",
+  "hand_R",
+  "thigh_L",
+  "shin_L",
+  "foot_L",
+  "thigh_R",
+  "shin_R",
+  "foot_R"
+ ],
+ "faces_per_material": {
+  "skin": 1335,
+  "suit": 6496,
+  "boots": 860,
+  "hair": 1309
+ },
+ "skin_colour": [
+  0.769,
+  0.553,
+  0.416
+ ],
+ "max_weights": 4,
+ "texture_px": 1024,
+ "bytes": 1481440,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/cleanup.py"
+}

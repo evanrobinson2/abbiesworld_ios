@@ -1,0 +1,44 @@
+{
+ "source": "tools/midjourney/outputs/character-studio/1-claymation-adventurer/meshy/cs-1-claymation-adventurer_rigged_character_glb.glb",
+ "out": "prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/cs-1-claymation-adventurer.glb",
+ "tris_before": 30723,
+ "tris": 10000,
+ "height_m": 1.705,
+ "bones": [
+  "root",
+  "hips",
+  "spine",
+  "chest",
+  "neck",
+  "head",
+  "clavicle_L",
+  "upperarm_L",
+  "forearm_L",
+  "hand_L",
+  "clavicle_R",
+  "upperarm_R",
+  "forearm_R",
+  "hand_R",
+  "thigh_L",
+  "shin_L",
+  "foot_L",
+  "thigh_R",
+  "shin_R",
+  "foot_R"
+ ],
+ "faces_per_material": {
+  "skin": 93,
+  "suit": 7265,
+  "boots": 700,
+  "hair": 1942
+ },
+ "skin_colour": [
+  0.988,
+  0.722,
+  0.525
+ ],
+ "max_weights": 4,
+ "texture_px": 1024,
+ "bytes": 1048364,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/cleanup.py"
+}

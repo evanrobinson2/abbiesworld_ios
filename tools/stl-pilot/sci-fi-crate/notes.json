@@ -1,0 +1,97 @@
+{
+  "slug": "sci-fi-crate",
+  "stages": {
+    "import": {
+      "seconds": 0.0,
+      "tris": 4980,
+      "files": [
+        "source_bottom.stl",
+        "source_top.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.01,
+      "tris": 4990,
+      "open_edges_before": 70,
+      "open_edges_after": 16,
+      "dust_shells_removed": 0,
+      "welded_verts": 17
+    },
+    "assemble_scale_pivot": {
+      "seconds": 0.0,
+      "tris": 4990,
+      "final_size_m": [
+        0.471,
+        0.6,
+        0.377
+      ]
+    },
+    "decimate": {
+      "seconds": 0.03,
+      "tris": 974,
+      "per_part": {
+        "tray": {
+          "fallback": null,
+          "before": 622,
+          "budget": 124,
+          "ratio": 0.2629,
+          "after": 126,
+          "attempts": 3
+        },
+        "lid": {
+          "fallback": null,
+          "before": 4368,
+          "budget": 875,
+          "ratio": 0.2003,
+          "after": 848,
+          "attempts": 1
+        }
+      }
+    },
+    "uv": {
+      "seconds": 1.96,
+      "tris": 968,
+      "islands": "smart_project+pack"
+    },
+    "bake": {
+      "seconds": 0.57,
+      "tris": 968,
+      "texture_px": 512,
+      "extrusion_m": 0.012
+    },
+    "material": {
+      "seconds": 0.0,
+      "tris": 968,
+      "materials": [
+        "mat_crate_plastic",
+        "mat_crate_lid"
+      ]
+    },
+    "export": {
+      "seconds": 0.36,
+      "tris": 968,
+      "glb": "sci-fi-crate.glb",
+      "bytes": 172024
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 1000,
+  "scale_to_metres": {
+    "factor": 0.006664213730196083,
+    "source_size_mm": [
+      70.63,
+      90.03,
+      56.55
+    ],
+    "final_size_m": [
+      0.471,
+      0.6,
+      0.377
+    ]
+  },
+  "high_poly_tris": 4990,
+  "final_tris": 968,
+  "script_total_s": 3.29,
+  "process_wall_s": 4.21,
+  "bake_source": "repaired high-poly (4990 tris) built from the source STL(s) in this folder; not stored separately"
+}

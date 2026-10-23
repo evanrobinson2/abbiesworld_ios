@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AW-STUDY-0055 - The Seed Beds (farm tile)</title>
+<style>
+:root{--bg:#1d2a1c;--ink:#f6efdc;--mut:#b9c4a8;--sun:#f2be54;--rose:#f08c74;--leaf:#8fcf7a;--wood:#a8693a;--soil:#5b3a24;--rule:rgba(246,239,220,.15);color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Nunito",system-ui,sans-serif;padding:0 16px 80px}
+.w{max-width:1000px;margin:0 auto;display:grid;gap:44px}h1,h2,h3{font-family:"Fredoka",system-ui,sans-serif;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3.4rem)}h2{font-size:1.7rem}header{padding-top:44px;display:grid;gap:12px}
+.eb{font:600 .78rem monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--sun)}.m{color:var(--mut)}
+section{display:grid;gap:16px}.r{max-width:68ch}
+.stage{background:#14200f;border-radius:22px;padding:16px;box-shadow:inset 0 0 0 1px var(--rule);display:grid;gap:12px}
+svg{width:100%;height:auto;display:block}
+.hand{display:flex;gap:10px;flex-wrap:wrap}
+.card{border:0;cursor:pointer;color:#2b1d10;font:700 .95rem "Fredoka",sans-serif;width:104px;padding:8px 6px 10px;border-radius:14px;background:#f6efdc;box-shadow:0 6px 0 rgba(0,0,0,.35);display:grid;gap:4px;justify-items:center}
+.card[aria-pressed=true]{outline:3px solid var(--sun);transform:translateY(-6px)}
+.card i{display:block;width:56px;height:56px;border-radius:50% 50% 46% 54%/55% 50% 50% 45%}
+.card small{font:600 .7rem "Nunito";color:#6b5a44}
+input[type=range]{width:100%;accent-color:var(--sun)}
+.row{display:flex;justify-content:space-between;gap:10px;font-size:.95rem;color:var(--mut)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.box{background:#243622;border-radius:16px;padding:14px 16px;box-shadow:inset 0 0 0 1px var(--rule)}
+.box b{font-family:"Fredoka";display:block;color:var(--sun)}
+figure{margin:0}figcaption{font-size:.9rem;color:var(--mut)}
+a{color:var(--sun)}
+</style></head><body><div class="w">
+<header><div class="eb">AW-STUDY-0055 · proposal · tour: yes</div>
+<h1>The Seed Beds</h1>
+<p class="r m">A farm tile where the cards in your hand are seed packets, and every packet is a colour. Throw one at a bed and the garden answers. Proposal only: nothing is built until Evan picks.</p></header>
+
+<section><h2>Try the idea</h2>
+<p class="r m">Pick a packet, tap a bed, then slide the day clock. This is a stand-in sketch (flat shapes, not final art) so you can feel the pacing: a sprout in seconds, a bloom in a minute, bees when two colours neighbour.</p>
+<div class="stage">
+<div class="hand" id="hand"></div>
+<svg id="board" viewBox="0 0 600 420" role="img" aria-label="Seven seed beds in a hex"></svg>
+<div class="row"><span>Day clock</span><span id="clk">Day 1, 8 AM</span></div>
+<input id="t" type="range" min="0" max="96" value="0">
+<p class="m" id="say" style="margin:0">Pick a packet.</p>
+</div></section>
+
+<section><h2>The soul</h2><div class="r">
+<p><b>I threw a little colour, and the ground said thank you.</b> This is Paint the World's feeling, slowed down and made kind. In Paint the World the sky throws paint and strange plants answer. Here <i>you</i> throw: the seed card falls like a paint drop, squashes into the bed with the same overshoot, and the colour you threw becomes the colour of what grows.</p>
+<p>The Ranch speaks in wood, bells and painted signs, so the farm does too: each bed has a small painted marker that shows its packet's splat, a bell on a post rings once at harvest, and Bub trots over to whichever bed is thirsty. No bars, no numbers.</p></div></section>
+
+<section><h2>How it plays</h2><div class="grid">
+<div class="box"><b>1. Pull the tile</b>The Farm comes off the shelf like any tile (rolls like a die, then a reveal). For the reveal I suggest the brick-rain one (E): soil, beds and fence posts tumble in and settle. Seven raised beds in a hex: one in the middle, six around it, the same shape as Winchester.</div>
+<div class="box"><b>2. Play a packet</b>Hold a seed card, drag it over a bed, let go. It splats in with the paint-drop recipe. Tap a card first and it opens as a held card; its back shows what it likes (sun, rain, neighbours) as little pictures, no words.</div>
+<div class="box"><b>3. Watch it grow</b>Growth is driven by the one day clock, like Paint the World, so pausing pauses it. Sprout in seconds, grow, bloom. A bed that wants rain droops; a scarecrow leans. Bees and butterflies arrive when a plant is ready to make a seed.</div>
+<div class="box"><b>4. Neighbours</b>Dorfromantik's idea, kindly: two beds that touch matter. Complementary colours (yellow next to blue) attract more bees, and bees leave a <b>new mixed seed</b> in the bed between. That is how you discover cards. Nothing can fail; a bad pairing is just a plainer garden.</div>
+<div class="box"><b>5. Harvest</b>When the bell rings, tap the bed. The plant pops into a harvest card (Sun stage) in your hand. Harvest cards feed the café: Paint the World already says plants should become café ingredients.</div>
+<div class="box"><b>6. Come back tomorrow</b>The farm keeps growing while you're away, from the saved day count, so there is always something to find. (Animal Crossing's lesson: always one more small thing.)</div>
+</div></section>
+
+<section><h2>Cards</h2><div class="r">
+<p>The cards are Cards v3 die-cuts: the bed stands up out of the card. Rarity is already <i>Seed, Sprout, Bloom, Harvest, Sun</i> in the Card Forge, so a seed card literally grows through its own rarity ladder as you use it. The first Ranch set is five seed packets and two helpers:</p>
+<table><tr><th>Card</th><th>Does</th><th>Look</th></tr>
+<tr><td>Sunflower</td><td>Tall, faces the sun; reliable first win</td><td>yellow splat</td></tr>
+<tr><td>Pumpkin</td><td>Slow, big; loves sunflower shade</td><td>orange splat</td></tr>
+<tr><td>Bean Pole</td><td>Climbs a painted stick; helps neighbours</td><td>green splat</td></tr>
+<tr><td>Berry Patch</td><td>Quick, small, bees love it</td><td>red splat</td></tr>
+<tr><td>Bluebell</td><td>Blue; the mixing partner</td><td>blue splat</td></tr>
+<tr><td>Rain</td><td>A helper card: a small cloud waters a bed</td><td>grey-blue</td></tr>
+<tr><td>Paint Seed</td><td>From Paint the World: throw any colour, an alien plant grows (Jelly Bloom, Glowcap...)</td><td>that paint</td></tr></table>
+<p class="m">Overlay is only the hand of cards. Everything else is in the world.</p></div></section>
+
+<section><h2>How it shows information</h2><table>
+<tr><th>Thing to know</th><th>How a character would know</th><th>Mode</th></tr>
+<tr><td>Ready to harvest</td><td>Bell rings, plant glows warmly, bees circle</td><td>diegetic</td></tr>
+<tr><td>Needs water</td><td>Leaves droop, scarecrow leans, Bub waits at the bed</td><td>diegetic + spatial (a small water-drop bubble over Bub)</td></tr>
+<tr><td>Good neighbours</td><td>Bees and butterflies come, hearts over the two plants</td><td>spatial</td></tr>
+<tr><td>Night</td><td>Paint-colour glow (Paint the World's 38%)</td><td>diegetic</td></tr>
+<tr><td>Grown-up view</td><td>A yield and seed log in the workbench, not the play screen</td><td>overlay (workbench)</td></tr></table></section>
+
+<section><h2>Assumptions table (first principles)</h2>
+<p class="r m">Per the first-principles rule, growth comes from a small visible table, not hand-placed lore. Numbers are proposals to tune in play.</p>
+<table><tr><th>Quantity</th><th>Proposed</th></tr>
+<tr><td>Sprout after planting</td><td>0.5 game hours (about 15 real seconds at default speed)</td></tr>
+<tr><td>Full growth</td><td>20 game hours, like Paint the World's plants; Pumpkin 36</td></tr>
+<tr><td>Water need</td><td>Rain once per game day; a dry bed grows at half speed, never dies</td></tr>
+<tr><td>Beds</td><td>7 per tile, 1 plant family each</td></tr>
+<tr><td>Bee pair bonus</td><td>Touching complementary colours: +1 mixed seed per bloom</td></tr>
+<tr><td>Caps</td><td>14 plants visible per bed pair, pooled meshes, one shared shader (no hitch)</td></tr></table></section>
+
+<section><h2>Rewards</h2><div class="r">
+<p>Backpack charms only, no coins. The charm set is fixed at ten, so a farm charm is a real decision for Evan: I recommend one new charm, a <b>sunflower</b>, earned when a whole tile of beds is in bloom at once ("a field facing the same way"). If you'd rather keep ten, the farm could instead pay the existing <b>heart</b> or add the café cup's ingredients with no charm. The harvest itself is the everyday reward: new cards.</p></div></section>
+
+<section><h2>Why this has an identity</h2><div class="r">
+<p>Stardew's farm is about work and routine. Ours is about <b>colour you throw, and a garden that answers</b>. It is the Ranch's cousin of Paint the World, it uses the card ladder we already ship, and it feeds the café and the Moon Mission (a bed on the Moon is a good late surprise). Tiny Glade and Dorfromantik set the taste: calm, tactile, nothing you can lose.</p>
+<p><b>Tour:</b> yes. One verb (throw a seed), a payoff within seconds. The riding school is <b>no</b> for now.</p></div></section>
+
+<section><h2>Concept art</h2>
+<p class="r m">Midjourney proofs (the farm tile at hi-fi low poly, seed card die-cut, bee-mix moment) are queued: prompts are in <code>docs/oracle/farm/FARM_STUDY.md</code>. The browser on Evan's PC was not available to this thread yet, so the sketch above stands in until the proofs land. No modelling until a pick.</p></section>
+
+<section><h2>Context engineering</h2><div class="r"><ul>
+<li>Oracle: Animal Crossing New Horizons, Dorfromantik, Tiny Glade, LEGO Bricktales, Unpacking records; Paint the World study (0049); Cards v3 (0014); Charms (0053).</li>
+<li>Game design: <a href="https://www.kokutech.com/blog/gamedev/design-patterns/world-building/stardew-valley">Stardew Valley design analysis</a>, <a href="https://deeprootdepths.substack.com/p/examining-the-design-principles-of">design principles of living in Stardew Valley</a>, <a href="https://techraptor.net/gaming/features/stardew-valley-5th-anniversary-concernedape-interview">ConcernedApe interview</a>.</li>
+<li>Gap: Stardew Valley and Spirit-type horse games have no Oracle records yet; notes are in our words from public sources.</li></ul></div></section>
+</div>
+<script>
+const SEEDS={sun:{n:"Sunflower",c:"#f2be54",d:"#c98a18",h:70,g:20},pum:{n:"Pumpkin",c:"#ee8a3b",d:"#b4561a",h:30,g:36},bean:{n:"Bean Pole",c:"#6fc86a",d:"#3b8a45",h:60,g:20},berry:{n:"Berry Patch",c:"#e5566e",d:"#a62a46",h:26,g:14},blue:{n:"Bluebell",c:"#5b8fe8",d:"#2f55b0",h:42,g:18}};
+const hand=document.getElementById('hand'),board=document.getElementById('board'),t=document.getElementById('t'),say=document.getElementById('say'),clk=document.getElementById('clk');
+let pick=null;const beds=[[300,210],[300,90],[404,150],[404,270],[300,330],[196,270],[196,150]].map(([x,y])=>({x,y,s:null,at:0}));
+Object.entries(SEEDS).forEach(([k,s])=>{const b=document.createElement('button');b.className='card';b.setAttribute('aria-pressed','false');b.innerHTML=`<i style="background:${s.c}"></i>${s.n}<small>seed packet</small>`;b.onclick=()=>{pick=k;[...hand.children].forEach(c=>c.setAttribute('aria-pressed',c===b));say.textContent=`${s.n}: tap a bed.`};hand.appendChild(b)});
+function hexPts(x,y,r){return [0,1,2,3,4,5].map(i=>{const a=Math.PI/3*i+Math.PI/6;return (x+r*Math.cos(a)).toFixed(1)+','+(y+r*Math.sin(a)).toFixed(1)}).join(' ')}
+function draw(){const now=+t.value;const day=1+Math.floor(now/24),hr=(8+now)%24;clk.textContent=`Day ${day}, ${hr%12||12} ${hr<12?'AM':'PM'}`;
+let o='<rect width="600" height="420" fill="#2f4a2a" rx="16"/>';
+beds.forEach((b,i)=>{o+=`<polygon points="${hexPts(b.x,b.y,62)}" fill="#7b4d2b"/><polygon points="${hexPts(b.x,b.y,54)}" fill="#5b3a24" data-i="${i}" style="cursor:pointer"/>`;
+ if(b.s){const s=SEEDS[b.s],age=Math.max(0,now-b.at),p=Math.min(1,age/s.g);const sp=Math.min(1,age/.5);
+  if(age>=0){const h=s.h*(.12+.88*p)*sp;o+=`<ellipse cx="${b.x}" cy="${b.y+4}" rx="${10+p*20}" ry="${6+p*8}" fill="${s.d}" opacity=".35"/>`;
+  o+=`<path d="M${b.x} ${b.y+8} q4 -${h/2} 0 -${h}" stroke="#4e9a46" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  if(p>.4)o+=`<ellipse cx="${b.x-12}" cy="${b.y-h*.5}" rx="10" ry="5" fill="#6fc86a"/><ellipse cx="${b.x+12}" cy="${b.y-h*.4}" rx="10" ry="5" fill="#6fc86a"/>`;
+  if(p>=.8)o+=`<circle cx="${b.x}" cy="${b.y-h-4}" r="${10+8*(p-.8)/.2}" fill="${s.c}"/><circle cx="${b.x}" cy="${b.y-h-4}" r="4" fill="${s.d}"/>`;
+  else if(age>0)o+=`<circle cx="${b.x}" cy="${b.y-h}" r="4" fill="#9fe08a"/>`;
+  o+=`<circle cx="${b.x+36}" cy="${b.y+34}" r="9" fill="${s.c}"/>`;}}
+});
+// bee-mix between touching complementary colours
+const pair=[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]];let mix=0;
+pair.forEach(([a,c])=>{const A=beds[a],B=beds[c];if(!A.s||!B.s)return;const ok=[['sun','blue'],['berry','bean']].some(p=>p.includes(A.s)&&p.includes(B.s));const full=(now-A.at)/SEEDS[A.s].g>=.8&&(now-B.at)/SEEDS[B.s].g>=.8;
+ if(ok&&full){mix++;const mx=(A.x+B.x)/2,my=(A.y+B.y)/2,ph=now*1.7;o+=`<text x="${mx+Math.cos(ph)*10}" y="${my+Math.sin(ph)*6}" font-size="22">🐝</text><text x="${mx-2}" y="${my-18}" font-size="18">💛</text>`}});
+board.innerHTML=o;
+board.querySelectorAll('polygon[data-i]').forEach(p=>p.onclick=()=>{if(!pick){say.textContent='Pick a packet first.';return}const b=beds[p.dataset.i];b.s=pick;b.at=+t.value;say.textContent=`${SEEDS[pick].n} planted. Slide the day clock.`;draw()});
+if(mix)say.textContent='Bees! Yellow and blue next to each other made a new mixed seed (a green card would drop into your hand).'}
+t.oninput=draw;draw();
+</script></body></html>

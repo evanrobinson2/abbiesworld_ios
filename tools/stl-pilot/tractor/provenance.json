@@ -1,0 +1,29 @@
+{
+  "slug": "tractor",
+  "title": "Tractor (base body + complete wheels)",
+  "model_url": "https://www.printables.com/model/81929-tractor",
+  "author": "Thijs",
+  "author_url": "https://www.printables.com/@Thijs",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "source_file": "tractor.stl",
+  "category": "vehicle",
+  "origin": "remix of 'Tractor' by lemairec (thingiverse.com/lemairec); credit both",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_body.stl",
+      "sha256": "ff99f9878200efe93c6f8ef903dc5f3255d65395e5dc170a7f566c1a0ba43ac2",
+      "bytes": 266176
+    },
+    {
+      "file": "source_wheels.stl",
+      "sha256": "9d07e09588da48e3c1396d43db43a69b6550eb12255149eebc7ed898efd59313",
+      "bytes": 3536323
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

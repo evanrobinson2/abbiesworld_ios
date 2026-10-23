@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-23-wesnoth-animation",
-  "updatedAt": "2026-10-23T17:34:40.877992+00:00",
+  "revision": "anatomy-2026-10-23-endless-sky-missions",
+  "updatedAt": "2026-10-23T21:39:45.161188+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 100,
+    "findings": 104,
     "runtimeObserved": 0,
-    "sourceFilesFetched": 65,
+    "sourceFilesFetched": 70,
     "selectedClassesDecompiled": 5
   },
   "method": [
@@ -1144,13 +1144,91 @@
               1227
             ]
           }
+        },
+        {
+          "domain": "systems",
+          "title": "Mission offers and acceptance have separate eligibility checks",
+          "finding": "CanOffer checks context-specific source filters, offer/failure conditions, repeat limits and feasibility of offer/accept/decline/defer actions. CanAccept separately checks acceptance conditions, offer/accept action feasibility and available space. CreateMissions skips job templates when the current planet lacks a job-board service and routes jobs separately from other offered missions. This distinguishes an offer from a capacity-validated acceptance; UI handling is not yet traced.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Mission.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp#L981-L1050",
+            "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+            "lines": [
+              981,
+              1050
+            ]
+          },
+          "supportingEvidence": [
+            "source/Mission.cpp:981-1050",
+            "source/PlayerInfo.cpp:4747-4782"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Procedural missions begin failed and become valid only after instantiation",
+          "finding": "Instantiate builds a new result with hasFailed=true, copies authored settings and selects locations from filters. Missing filtered waypoints, stopovers or destinations return the failed result. A missing or invalid fixed destination falls back to the current planet when available. The normal successful path substitutes display text and clears hasFailed at the end. CreateMissions excludes failed instantiated results before adding them to available lists. This is authored-template instantiation, not proof of procedural story generation; selection distributions and all nested action behavior remain unexamined.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Mission.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp#L1483-L1560",
+            "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+            "lines": [
+              1483,
+              1560
+            ]
+          },
+          "supportingEvidence": [
+            "source/Mission.cpp:1483-1560",
+            "source/Mission.cpp:1758-1772",
+            "source/PlayerInfo.cpp:4765-4782"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Player mission capacity includes reclaimable commodity space and extra crew bunks",
+          "finding": "HasSpace(PlayerInfo) compares mission cargo with free cargo plus commodity cargo, and passengers with free bunks plus flagship crew above required crew. The Ship overload instead tests strictly free cargo and bunks. Subsequent sale/unloading and crew-dismissal operations remain untraced.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Mission.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp#L1054-L1068",
+            "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+            "lines": [
+              1054,
+              1068
+            ]
+          },
+          "supportingEvidence": [
+            "source/Mission.cpp:1054-1068"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Default cargo-job payment scales with route and payload",
+          "finding": "A bare payment directive adds 150 to paymentMultiplier. GameAction instantiation computes payment + (jumps + 1) * payload * paymentMultiplier. Mission instantiation defines payload as cargoSize + 10*passengers. Thus the inspected Cargo [0] template, which specifies bare completion payment, derives its reward from generated cargo quantity and calculated jumps. MissionAction instantiates the action before dialog substitution and preserves completion-payment text across later actions. Route calculation and actual credit transfer remain outside this bounded trace.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/GameAction.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/GameAction.cpp#L185-L192",
+            "blobSha": "3bf8247b5b34ce8c517a10ddc399dddd318747f6",
+            "lines": [
+              185,
+              192
+            ]
+          },
+          "supportingEvidence": [
+            "source/GameAction.cpp:185-192",
+            "source/GameAction.cpp:550-552",
+            "source/Mission.cpp:1613-1620",
+            "source/MissionAction.cpp:355-380"
+          ]
         }
       ],
       "coverage": {
         "mechanics": "not yet studied",
-        "systems": "not yet studied",
+        "systems": "partial static evidence",
         "simulation": "partial static evidence",
-        "procedural-generation": "not yet studied",
+        "procedural-generation": "partial static evidence",
         "ui": "partial static evidence",
         "ux": "not yet studied",
         "rendering": "partial static evidence",
@@ -1162,9 +1240,9 @@
       "inventoryUrl": "/data/anatomy/endless-sky.json",
       "lesson": {
         "status": "design inference; not implemented in Ranch Atelier",
-        "text": "Use one map with task-specific overlays, and let simulation entities supply the data that drives their rendered parts."
+        "text": "Use one map with task-specific overlays, and let simulation entities supply the data that drives their rendered parts. Keep template eligibility, concrete instantiation and acceptance capacity as separate decisions, and prevent incomplete generated jobs from entering offer lists. Not implemented Ranch behavior."
       },
-      "nextPass": "Investigate economy updates, mission generation and AI scheduling next. Determine which content is authored versus generated; asset file counts alone cannot answer this.",
+      "nextPass": "Trace mission completion and failure recovery; runtime, route calculation and capacity reclamation remain unexamined.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },

@@ -1,0 +1,10 @@
+{
+ "source": "tools/meshy-heroes/meshy/charm-brass-key/charm-brass-key.glb",
+ "out": "prototypes/ranch-atelier/dist/simulations/assets/backpack/charms/brass-key.glb",
+ "tris_before": 8014,
+ "tris": 8000,
+ "largest_side": 1.0,
+ "textured": false,
+ "bytes": 315832,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/charm_cleanup.py"
+}

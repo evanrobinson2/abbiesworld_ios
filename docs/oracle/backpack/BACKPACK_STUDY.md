@@ -103,3 +103,15 @@ Next: bake contact shading into the vertex colours, a leather label on the pocke
 - No charm unlocks from coins any more. The Star is "Climb onto the school roof" (the school game calls
   `earnCharm('school-roof')`), and the Heart crowns the set: it comes when every other one-off charm is earned.
 - Tour: no (it is the same backpack, now worn; the tour stop stays the first pickup).
+
+## Round 5 (2026-10-23): Meshy charms
+- The six cleaned Meshy charms from the Meshy hero thread (`simulations/assets/backpack/charms/*.glb`: tardigrade
+  textured; heart, moon, rocket, star, floppy disk untextured with one "charm" material) replace the hand-built ones.
+  `loadCharmModels(ids)` reads them with a small GLB reader inside backpack.mjs (one node, plain triangles, an optional
+  base-colour image), so every page loads them with its own three.js and needs no importmap. Views and the worn
+  backpack draw the hand-built charm first and rebuild when the model lands; a charm without a model keeps its
+  hand-built stand-in (now only the toy car); bub, the coffee cup and the brass key landed later the same evening (PR #453). Untextured models are shaded by role
+  (enamel red heart and rocket, gold moon and star, blue floppy). Turns: the water bear hangs side on, the disk stands up.
+- New charm `toy-car` (the charms study's chest of eleven): 10 of the 16 stars in the toy-car coaster, granted by the
+  coaster game with `earnCharm('toy-car')`. Hand-built until it has a Midjourney pick and a Meshy model.
+- Next: textured Meshy runs for the floppy disk (Evan's picture has a yellow label and silver shutter) and the rocket.

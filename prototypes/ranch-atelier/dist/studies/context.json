@@ -2894,6 +2894,193 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/spaceships/SPACESHIP_STUDY.md"
         }
       ]
+    },
+    "farm-tile": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Animal Crossing New Horizons record (always one more small thing)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Dorfromantik record (touching tiles matter)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dorfromantik.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Tiny Glade, LEGO Bricktales, Unpacking records",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "design",
+          "t": "Stardew Valley design analysis",
+          "href": "https://www.kokutech.com/blog/gamedev/design-patterns/world-building/stardew-valley",
+          "note": "Routine and farm as the loop; we change it to colour and discovery"
+        },
+        {
+          "k": "design",
+          "t": "Design principles of living in Stardew Valley",
+          "href": "https://deeprootdepths.substack.com/p/examining-the-design-principles-of"
+        },
+        {
+          "k": "devblog",
+          "t": "TechRaptor: ConcernedApe interview, five years of Stardew Valley",
+          "href": "https://techraptor.net/gaming/features/stardew-valley-5th-anniversary-concernedape-interview"
+        },
+        {
+          "k": "canon",
+          "t": "Paint the World (0049), Cards v3 (0014), Tile pull and print (0025), Charms (0053)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/paint-world/PAINT_WORLD_STUDY.md"
+        }
+      ]
+    },
+    "riding-school": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Red Dead Redemption 2 record (the horse that remembers you)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/red-dead-redemption-2.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Animal Crossing New Horizons, Tiny Glade, Unpacking records",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "devblog",
+          "t": "Rockstar's quest for the ultimate video game horse",
+          "href": "https://www.gamedeveloper.com/design/rockstar-s-quest-for-the-ultimate-video-game-horse"
+        },
+        {
+          "k": "design",
+          "t": "RDR2 horse bonding, grooming and reviving",
+          "href": "https://www.shacknews.com/article/108131/horse-bonding-grooming-and-reviving-red-dead-redemption-2"
+        },
+        {
+          "k": "tutorial",
+          "t": "Alexandra Kurland's quick start guide to clicker training",
+          "href": "https://www.theclickercenter.com/guide-pg-3",
+          "note": "Positive reinforcement is our teaching loop"
+        },
+        {
+          "k": "canon",
+          "t": "Practice reps, Cards v3 (0014), Paint the World (0049), Tile pull and print (0025)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cards-v3/CARDS_V3.md"
+        }
+      ]
+    },
+    "effect-hunt": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: our Paint the World study and the game identity records for Splatoon and Mario Kart (inspired-by only)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/paint-world/PAINT_WORLD_STUDY.md"
+        },
+        {
+          "k": "devblog",
+          "t": "ModNation Racers: Redesigning Kart Racing (PlayStation Blog)",
+          "href": "https://blog.playstation.com/2010/03/19/modnation-racers-redesigning-kart-racing/"
+        },
+        {
+          "k": "devblog",
+          "t": "Breath of the Wild open world analysis: gravity to go forward (Game Developer)",
+          "href": "https://gamedeveloper.com/design/breath-of-the-wild-open-world-analysis-gravity-to-go-forward"
+        },
+        {
+          "k": "design",
+          "t": "How Nintendo Solved Zelda's Open World Problem (GMTK): tall landmarks pull the player on",
+          "href": "https://gmtk.substack.com/p/how-nintendo-solved-zeldas-open-world"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study, GAME_FEEL.md and the demo flow: world layer vs presentation layer, 8% HUD, no words",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/demo/DEMO_FLOW.md"
+        }
+      ]
+    },
+    "world-event-cards": {
+      "items": [
+        {
+          "k": "canon",
+          "t": "Card Forge (renderer, rarity, no-fake-materials look)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/cards/README.md"
+        },
+        {
+          "k": "canon",
+          "t": "Card art modes: events are scene art (CARD_ART.md)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cards/CARD_ART.md"
+        },
+        {
+          "k": "canon",
+          "t": "HUD and information study: an event is a spatial/overlay cue, never in the world",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Paint the World study (paint colours and alien plants)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/paint-world/PAINT_WORLD_STUDY.md"
+        }
+      ],
+      "note": "No Oracle, blog or tutorial consultation yet; recorded honestly so the card shows what is missing."
+    },
+    "coaster": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Game Oracle: not reached this round",
+          "note": "Cloud threads cannot reach the Oracle's host. Next round asks it for rail-ride and coaster studies before the big loop is redrawn."
+        },
+        {
+          "k": "devblog",
+          "t": "Feeling of Speed (Critical Points)",
+          "href": "https://critpoints.net/2016/11/24/feeling-of-speed/",
+          "note": "Narrow field of view changes, dense nearby detail and speed lines make a ride feel fast; so the track is lined with lamps, poles and bunting, and the lines and the field of view follow your speed"
+        },
+        {
+          "k": "design",
+          "t": "Designing the perfectly smooth roller coaster ride (Technology Review)",
+          "href": "https://www.technologyreview.com/s/419909/designing-the-perfectly-smooth-roller-coaster-ride/",
+          "note": "A plain circle makes the force on a rider jump; real loops use clothoids. Our loop is a circle for now; the clothoid loop is the first item in what to do next"
+        },
+        {
+          "k": "tutorial",
+          "t": "Tilt Shift shader pass (luma.gl docs), and a depth-based tilt-shift on Godot Shaders",
+          "href": "https://luma.gl/docs/api-reference/shadertools/shader-passes/tilt-shift",
+          "note": "Found by search, seen as summaries only: a sharp band across the middle and blur that grows with distance from it. We built that as one pass over the whole picture, no depth buffer"
+        },
+        {
+          "k": "reference",
+          "t": "Printables, the hotwheels tag (Evan's concept source)",
+          "href": "https://www.printables.com/tag/hotwheels",
+          "note": "The page shows no licences, so every model there is reference only and none is copied. Track pieces, loops, launchers and start gates inspired the recipe. No toy brand's name, logo or car design is used"
+        },
+        {
+          "k": "canon",
+          "t": "HUD and information study; presentation layer",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "The ride is feel first: wind, rumble and speed lines (meta); stars and a thin progress line (overlay); the countdown lamps are on the gate (diegetic)"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar: tap what shines",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md",
+          "note": "The car glows with a ring; one tap gets you in"
+        },
+        {
+          "k": "canon",
+          "t": "Speed reviews of the school jump and the basement",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_READY_STUDY.md",
+          "note": "Reused the toon kit, the headless flow test and the advance-artifact bundler"
+        },
+        {
+          "k": "canon",
+          "t": "Charms and the backpack",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/charms/CHARMS_STUDY.md",
+          "note": "The win is a charm; her keychain charms hang from the car's mirror and swing"
+        }
+      ],
+      "recorded": "2026-10-23, as the study was built"
     }
   }
 }

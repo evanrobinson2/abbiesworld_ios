@@ -1,0 +1,10 @@
+{
+ "source": "tools/meshy-heroes/meshy/charm-coffee-cup/charm-coffee-cup.glb",
+ "out": "prototypes/ranch-atelier/dist/simulations/assets/backpack/charms/coffee-cup.glb",
+ "tris_before": 6780,
+ "tris": 6780,
+ "largest_side": 1.0,
+ "textured": false,
+ "bytes": 366216,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/charm_cleanup.py"
+}

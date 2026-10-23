@@ -79,7 +79,7 @@ import {applyDorfRanch} from './dorf-ranch-materials.mjs';
 import {setLabHexDiameter} from './tile-metrics.js';
 import {OrbitControls} from './vendor/OrbitControls.js';
 import {cameraOwnsPointer,sandboxWheel} from './vendor/sandbox-camera.mjs';
-import {createRanchComposer} from './ranch-composer.js?paths=15';
+import {createRanchComposer} from './ranch-composer.js?paths=16';
 import {planAssembly} from './tile-adapter.js?paths=2';
 import {terrainSampler} from './tile-landscape.js?terrain=2';
 import {completeDomesticPaths} from './domestic-scenes.js';

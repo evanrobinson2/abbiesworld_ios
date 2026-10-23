@@ -5,7 +5,8 @@
 import {mountChrono} from './chrono.mjs?v=3';
 import {cardFace,cardArt,setCardArt} from './hand-cards.mjs?v=13';
 import {openCallout,closeCallout} from '../look/callout.mjs?v=2';
-import {inventory} from './inventory.mjs?v=8';
+import {inventory} from './inventory.mjs?v=10';
+import {mountEventHand} from './event-hand.mjs';
 if(document.documentElement.classList.contains('ui-v2'))start();
 
 function start(){
@@ -35,6 +36,7 @@ function start(){
   developer:svg('<path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 4l-4 16"/>'),
   classic:svg('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M15 9v11"/>'),
   clock:svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  events:svg('<path d="M13 2 5 13h6l-1 9 8-12h-6z"/>'),
   weather:svg('<path d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11.3 1.9A3 3 0 0 0 7 18z"/>'),
   season:svg('<path d="M12 21c-4-3-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-3 8-7 11z"/><path d="M12 21V9"/>'),
   speed:svg('<path d="M5 18a8 8 0 1 1 14 0"/><path d="m12 14 4-5"/>'),
@@ -79,9 +81,11 @@ function start(){
  // developer's signature rather than something to play with (Evan, 2026-10-23); it still opens the shelf.
  const box=make('button',{id:'v2-box',className:'v2-toy',type:'button',title:'Toy box'},'<b aria-hidden="true">&lt;/&gt;</b><span class="v2-dot"></span>');box.setAttribute('aria-label','Toy box: tap for the shelf, hold for settings');
  const shelf=make('div',{id:'v2-shelf',className:'v2-toy v2-glass',hidden:true});shelf.setAttribute('role','menu');
+ const events=mountEventHand();
  const items=[
   ['talk','Talk',()=>press('#live-toggle'),'talk'],['make','Make',()=>press('#make-toggle'),'talk'],['scenes','Scenes',()=>press('#compact-scene-title')||press('#library-open')],['tiles','Tile options',()=>toggleSheet(true)],
   ['cards',cardArt()==='concept'?'Cards: concept':'Cards: in game',()=>{const next=cardArt()==='concept'?'ingame':'concept';setCardArt(next);const b=shelf.querySelector('[data-item=cards]');if(b)b.lastElementChild.textContent=next==='concept'?'Cards: concept':'Cards: in game';}],
+  ['events','World events',()=>events.toggle()],
   ['music','Music',()=>press('#app-jukebox-toggle')],['workshop','Workshop',()=>press('.aw-fab')],['feedback','Feedback',()=>press('.afb-fab')],
   null,
   ['tour','Welcome tour',()=>window.AbbiesWelcome?.open()],['town',"Abbie's Town",()=>{location.href='/town';}],['explore','Library',()=>press('.ex-door')],['account','Sign in',()=>press('#account-chip')],['settings','Settings',()=>press('#app-settings-toggle')],['developer','Developer',()=>press('#developer-toggle')],

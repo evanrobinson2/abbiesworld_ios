@@ -10125,6 +10125,558 @@
    ],
    "outline": 0.9,
    "status": "good"
+  },
+  {
+   "id": "stl-pirate-chest",
+   "name": "Pirate's Treasure Chest - Solid",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "fantasy prop",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -25,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-pirate-chest/ref.jpg",
+    "glb": "/models/stl-pirate-chest/model.glb"
+   },
+   "good": [
+    "Right shape and proportions: rounded lid, skull plaque, chunky feet.",
+    "Solid and closed, so it is cheap and safe to drop into a scene."
+   ],
+   "off": [
+    "The carved detail is smeared into soft blobs at this size.",
+    "It is a print-style solid block, so the lid does not open.",
+    "One plain wood colour, with no metal bands or gold."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "YourBuddyDinec",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/634848-pirates-treasure-chest-solid",
+    "authorUrl": "https://www.printables.com/@YourBuddyDinec",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Pirate's Treasure Chest - Solid by YourBuddyDinec on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.5 × 0.387 × 0.42 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-potion-bottle",
+   "name": "Wizard Potion Bottle",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "fantasy prop",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -20,
+    60
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-potion-bottle/ref.jpg",
+    "glb": "/models/stl-potion-bottle/model.glb"
+   },
+   "good": [
+    "Clean, friendly bottle shape.",
+    "One tidy piece, nothing broken to repair."
+   ],
+   "off": [
+    "Plain milky grey stands in for glass, so it needs a real glass look.",
+    "The cork or cap was not included, only the bottle."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Jc Wentzel",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/257760-wizard-potion-bottle",
+    "authorUrl": "https://www.printables.com/@JcWentzel_289380",
+    "credit": "author's original creation (imported from Thingiverse by the author)"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Wizard Potion Bottle by Jc Wentzel on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.166 × 0.166 × 0.2 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-space-helmet",
+   "name": "Retro Space Helmet 1",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "sci-fi gear",
+   "status": "weak",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-space-helmet/ref.jpg",
+    "glb": "/models/stl-space-helmet/model.glb"
+   },
+   "good": [
+    "The retro look is readable from a distance."
+   ],
+   "off": [
+    "It is a thin printed shell with open edges, and shrinking it folded the sheets into a crumpled mess.",
+    "Too heavy for a small prop even after the damage.",
+    "Needs to be rebuilt from its outline instead of cleaned up."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Craig Staples",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/885271-retro-space-helmet-1",
+    "authorUrl": "https://www.printables.com/@CraigStaples_1107886",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Retro Space Helmet 1 by Craig Staples on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.36 × 0.302 × 0.324 m"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-street-lamp",
+   "name": "Parisian Street Lamp",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "town prop",
+   "status": "good",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    80
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-street-lamp/ref.jpg",
+    "glb": "/models/stl-street-lamp/model.glb"
+   },
+   "good": [
+    "The cleanest result of the set: crisp, light and the right height.",
+    "Stands on the ground with its base at the middle."
+   ],
+   "off": [
+    "Metal and lamp glass share one dark colour.",
+    "Very tall and thin, so players could walk into it from odd angles."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Citron",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/873657-parisian-street-lamp",
+    "authorUrl": "https://www.printables.com/@Citron_295663",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Parisian Street Lamp by Citron on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.426 × 1.117 × 4.2 m"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-sci-fi-crate",
+   "name": "Sci Fi Crate (90mm Single Color: bottom and top)",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "sci-fi gear",
+   "status": "weak",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    60
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-sci-fi-crate/ref.jpg",
+    "glb": "/models/stl-sci-fi-crate/model.glb"
+   },
+   "good": [
+    "Tray and lid are kept as two separate named parts."
+   ],
+   "off": [
+    "The lid and tray were printed side by side, and my guess at putting the lid on leaves it floating above the rim.",
+    "Edges are jagged after shrinking.",
+    "Rebuilding this crate would be quicker than fixing it."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Secret Person of Secrets",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/531037-sci-fi-crate",
+    "authorUrl": "https://www.printables.com/@SecretPersono_537888",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Sci Fi Crate (90mm Single Color: bottom and top) by Secret Person of Secrets on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.471 × 0.6 × 0.377 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-picnic-table",
+   "name": "Picnic Table",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "town prop",
+   "status": "good",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    55
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-picnic-table/ref.jpg",
+    "glb": "/models/stl-picnic-table/model.glb"
+   },
+   "good": [
+    "Already light, so nothing was lost.",
+    "Planks and crossed legs are right, at a sensible full size."
+   ],
+   "off": [
+    "Flat brown wood colour, with no grain or wear yet."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "makers (gunna)",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/446580-picnic-table",
+    "authorUrl": "https://www.printables.com/@gunna",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Picnic Table by makers (gunna) on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.578 × 1.8 × 0.94 m"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-park-bench",
+   "name": "the park bench",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "town prop",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -35,
+    55
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-park-bench/ref.jpg",
+    "glb": "/models/stl-park-bench/model.glb"
+   },
+   "good": [
+    "Clear bench shape with proper slats.",
+    "A huge scan-like source was brought down to a light model."
+   ],
+   "off": [
+    "The usual shrinking got stuck on this messy mesh, so it was rebuilt from a rough shell and the edges are softer than the original.",
+    "It was the slowest model to process.",
+    "The Printables picture is marked as AI-generated."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "gabi123",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/1560190-the-park-bench",
+    "authorUrl": "https://www.printables.com/@gabi123_3353521",
+    "credit": "author's original creation; page marks the preview image as AI-generated"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "the park bench by gabi123 on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.8 × 0.7 × 0.896 m"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-lighthouse",
+   "name": "Low Poly Lighthouse",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "building",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-lighthouse/ref.jpg",
+    "glb": "/models/stl-lighthouse/model.glb"
+   },
+   "good": [
+    "Already light, so it was kept almost as it came.",
+    "Reads well from far away."
+   ],
+   "off": [
+    "It is a tiny island scene, not just a tower; the rock base would have to go to use the building alone.",
+    "Rock, plaster and glass share one grey."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "erre_stvdio",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/58833-low-poly-lighthouse",
+    "authorUrl": "https://www.printables.com/@erre_stvdio",
+    "credit": "author's original creation (imported from Thingiverse by the author)"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Low Poly Lighthouse by erre_stvdio on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "6.535 × 6.442 × 9 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-tractor",
+   "name": "Tractor (base body + complete wheels)",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "vehicle",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    65
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-tractor/ref.jpg",
+    "glb": "/models/stl-tractor/model.glb"
+   },
+   "good": [
+    "Body and wheels are two separate named parts.",
+    "The wheels went onto the axle stubs automatically."
+   ],
+   "off": [
+    "It is a toy-style tractor: a boxy cab with no seat or engine detail.",
+    "Front and back wheel sizes may be the wrong way round.",
+    "Most of the detail is spent on the wheel treads."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Thijs",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/81929-tractor",
+    "authorUrl": "https://www.printables.com/@Thijs",
+    "credit": "remix of 'Tractor' by lemairec (thingiverse.com/lemairec); credit both"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Tractor (base body + complete wheels) by Thijs on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.949 × 3.6 × 2.429 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-chicken",
+   "name": "Chicken",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "creature",
+   "status": "good",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-chicken/ref.jpg",
+    "glb": "/models/stl-chicken/model.glb"
+   },
+   "good": [
+    "Cute, soft, relaxed creature that suits a storybook look.",
+    "A very heavy source came down to a light model with the shape intact."
+   ],
+   "off": [
+    "Plain clay colour, with no comb or beak colours yet.",
+    "It is a re-upload of another maker's chicken, so credit the original author."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "opslasher2000 (re-upload)",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/496190-chicken",
+    "authorUrl": "https://www.printables.com/@opslasher2000_882122",
+    "credit": "re-upload of 'Chicken' by Infalivia (thingiverse.com), CC BY; credit Infalivia as original author"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Chicken by opslasher2000 (re-upload) on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.4 × 0.266 × 0.29 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
   }
  ]
 }

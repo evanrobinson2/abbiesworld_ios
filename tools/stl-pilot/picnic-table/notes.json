@@ -1,0 +1,87 @@
+{
+  "slug": "picnic-table",
+  "stages": {
+    "import": {
+      "seconds": 0.0,
+      "tris": 490,
+      "files": [
+        "source.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.0,
+      "tris": 490,
+      "open_edges_before": 0,
+      "open_edges_after": 0,
+      "dust_shells_removed": 0,
+      "welded_verts": 0
+    },
+    "assemble_scale_pivot": {
+      "seconds": 0.0,
+      "tris": 490,
+      "final_size_m": [
+        1.578,
+        1.8,
+        0.94
+      ]
+    },
+    "decimate": {
+      "seconds": 0.0,
+      "tris": 490,
+      "per_part": {
+        "table": {
+          "fallback": null,
+          "before": 490,
+          "budget": 490,
+          "ratio": 1.0,
+          "after": 490,
+          "attempts": 1
+        }
+      }
+    },
+    "uv": {
+      "seconds": 1.06,
+      "tris": 490,
+      "islands": "smart_project+pack"
+    },
+    "bake": {
+      "seconds": 0.53,
+      "tris": 490,
+      "texture_px": 512,
+      "extrusion_m": 0.036
+    },
+    "material": {
+      "seconds": 0.0,
+      "tris": 490,
+      "materials": [
+        "mat_weathered_wood"
+      ]
+    },
+    "export": {
+      "seconds": 0.35,
+      "tris": 490,
+      "glb": "picnic-table.glb",
+      "bytes": 110392
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 490,
+  "scale_to_metres": {
+    "factor": 0.03356705918172952,
+    "source_size_mm": [
+      47.0,
+      53.62,
+      28.0
+    ],
+    "final_size_m": [
+      1.578,
+      1.8,
+      0.94
+    ]
+  },
+  "high_poly_tris": 490,
+  "final_tris": 490,
+  "script_total_s": 2.3,
+  "process_wall_s": 3.18,
+  "bake_source": "repaired high-poly (490 tris) built from the source STL(s) in this folder; not stored separately"
+}

@@ -300,3 +300,5 @@ html.fb-off .fb{display:none}
   .awbar.hero .tools{overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
   .awbar.hero{min-width:0}
 }
+
+.srcline{margin:0 0 10px;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,.05);font-size:.82rem;line-height:1.4}.srcline b{margin-right:4px}.srcline span{display:block;opacity:.7;margin-top:2px}

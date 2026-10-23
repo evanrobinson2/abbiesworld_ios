@@ -1,7 +1,7 @@
 // AW-STUDY-0036 Moon Mission couch HUD: the mission card, the clock, the caption, the choices and the per-player key panels.
 // One factory so the studies page and the Abbie's Town stage show the same thing. Words live only here and in captions.
 const CSS = `
-#mm-hud{--ink:#1b2238;--dim:#5b6785;--line:#cdd7ee;--key:#fff;--glow:#ff7eb6;--bar:rgba(255,255,255,.92);position:fixed;inset:0;pointer-events:none;color:var(--ink);font:clamp(16px,2vw,26px)/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;z-index:30}
+#mm-hud{z-index:10;--ink:#1b2238;--dim:#5b6785;--line:#cdd7ee;--key:#fff;--glow:#ff7eb6;--bar:rgba(255,255,255,.92);position:fixed;inset:0;pointer-events:none;color:var(--ink);font:clamp(16px,2vw,26px)/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;z-index:30}
 #mm-hud[data-mood=dark]{--ink:#eef1fb;--dim:#9aa6c8;--line:#26304f;--key:#121a33;--bar:rgba(5,7,15,.92)}
 #mm-hud *{box-sizing:border-box}
 #mm-hud .top{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;gap:16px;padding:12px 20px 0;align-items:flex-start}
@@ -56,7 +56,7 @@ function speak(who, text) { const s = $('say'); s.className = 'say' + (arguments
 function card(e) { const el = $('card'), t = `${e.org} · ${e.clock} · ${e.place}`; el.innerHTML = '<span></span><i></i>'; const [sp, ln] = [el.firstChild, el.lastChild]; clearInterval(typing); let n = 0;
  typing = setInterval(() => { n++; sp.textContent = t.slice(0, n); ln.style.transform = `scaleX(${n / t.length})`; if (n >= t.length) clearInterval(typing); }, 30); }
 // three cheeses buy one moon cheese backpack charm (Backpack thread API: earnCharm('moon-cheese'), repeatable, 2 on the keychain)
-function grantCheeseCharm() { import('/simulations/backpack.mjs?v=6').then(b => b.earnCharm && b.earnCharm('moon-cheese')).catch(() => {}); }
+function grantCheeseCharm() { import('/simulations/backpack.mjs?v=7').then(b => b.earnCharm && b.earnCharm('moon-cheese')).catch(() => {}); }
 function polaroid(caption) { // the Chapter 1 ending photo: the crew on the Moon with the pink ship behind them
  const d = document.createElement('div'); d.className = 'polaroid'; const cv = document.createElement('canvas'); cv.width = 380; cv.height = 300; d.append(cv); const b = document.createElement('b'); b.textContent = caption || ''; d.append(b);
  const c = cv.getContext('2d'); c.fillStyle = '#05070f'; c.fillRect(0, 0, 380, 300); for (let i = 0; i < 50; i++) { c.fillStyle = '#fff'; c.fillRect((i * 97) % 380, (i * 53) % 170, 2, 2); }

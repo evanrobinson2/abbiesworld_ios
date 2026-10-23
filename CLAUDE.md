@@ -51,6 +51,9 @@ Follow these principles; they matter more than any UI grammar. The full study is
   labels, except behind developer mode.
 - Nothing masks the world: no edge haze, fade to white or backdrop blur. The play HUD covers at most 8% of the screen
   and has zero words. Everything else lives on things, is summoned, or goes to the grown-up workbench (`GAME_FEEL.md`).
+- Four ways of acting (Evan, 2026-10-23 21:50Z): tiles create the world, cards interact with it as a god, the HUD and
+  overlay hold the simulation controls and the app, and FPS is playing as Evan, Abbie or Ani. Decide which one a feature
+  is before designing it, and never explain this to players. See `docs/design/INTERACTION_GRAMMAR.md`.
 - Keep what Evan likes: liquid glass (as objects with depth, not flat frosted panels), rich colours and live previews.
   Check a HUD with `tools/hud-rubric/check_hud.py`.
 - In practice: load the `abbies-world-designer` skill (`.claude/skills/`) for any player-facing work. It gives the
