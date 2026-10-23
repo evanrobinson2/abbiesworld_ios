@@ -1,0 +1,10 @@
+{
+  "asset": "grace-computer",
+  "study": "AW-STUDY-0024",
+  "reference": {"file": "ref.jpg", "source": "Evan's upload in the 'Coffee shop office basement' thread, 2026-10-23 07:32Z", "what": "beige 1980s all-in-one computer, IBM PS/2 Model 25 style"},
+  "image_source": "Evan's photo (no Midjourney: the brief was to model the pictured machine)",
+  "recipe": "prototypes/ranch-atelier/dist/simulations/grace-computer.mjs (createGraceComputer, createGraceKeyboard, createGraceFloppy)",
+  "exports": ["prototypes/ranch-atelier/dist/review/3d/grace-computer.glb", "prototypes/ranch-atelier/dist/review/3d/grace-floppy.glb"],
+  "camera": {"theta": -33, "phi": 80, "fov": 40, "dist": 0.8, "target_y": 0.19, "tool": "tools/grace-computer/shot.html"},
+  "rules": ["no maker's logo: generic disc badge", "parts first, low poly", "material names are shading roles"]
+}

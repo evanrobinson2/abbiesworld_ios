@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<title>AW-STUDY-0024 - Grace's Basement</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="The office under Abbie's café: Aunt Grace's 1986 basement, her computer modelled from Evan's photo, a playable 2.5D scene and the study of the games that ran on machines like it.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<script type="module" src="/vendor/model-viewer.min.js"></script>
+<style>
+/* The basement study keeps the basement's own look: warm bulb light on dark block, VT323 for the machine's voice.
+   It opens on the playable scene, then the photo beside the model from the same camera. */
+:root{--bg:#141210;--paper:#1f1c18;--ink:#efe6d4;--muted:#a89d8a;--line:#3a342c;--accent:#ffcf7a;--crt:#9fe8c0;
+ --display:"VT323","Courier New",monospace;--body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+:root[data-theme="light"]{--bg:#f2ece0;--paper:#fffaf0;--ink:#231f1a;--muted:#6d6457;--line:#d9cfbd;--accent:#a8641a;--crt:#1d7a4a;color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);padding:20px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;letter-spacing:.02em;text-wrap:balance}
+h1{font-size:clamp(44px,8vw,76px);line-height:.9;color:var(--accent)}
+h2{font-size:36px;line-height:1}
+h3{margin:0;font-size:18px}
+p{margin:0;max-width:68ch}
+.muted{color:var(--muted)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--crt)}
+header,section{display:grid;gap:14px}
+.play{position:relative;display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:#000}
+.play img{width:100%;height:100%;object-fit:cover;display:block;image-rendering:pixelated}
+.play span{position:absolute;left:50%;top:50%;translate:-50% -50%;width:84px;height:84px;border-radius:50%;background:rgba(255,207,122,.92);box-shadow:0 10px 40px rgba(255,190,90,.45)}
+.play span::after{content:"";position:absolute;left:33px;top:24px;border-left:28px solid #2a1d0c;border-top:18px solid transparent;border-bottom:18px solid transparent}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+figure img,model-viewer{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;display:block;background:#f6f6f4}
+.grid4 img{aspect-ratio:16/9;background:#000}
+model-viewer{--poster-color:transparent;height:auto}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:8px;align-content:start}
+.card .k{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card h3{font-family:var(--display);font-weight:400;font-size:30px;line-height:1;color:var(--accent)}
+.card .st{font:500 12px/1 var(--mono);color:var(--crt)}
+.card p{font-size:15px}
+.card b{font-weight:600}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.screen{background:#050806;color:var(--crt);font:22px/1.15 var(--display);border-radius:12px;padding:16px 18px;border:1px solid var(--line);overflow-x:auto;white-space:pre}
+.src a{color:var(--muted)}
+@media (max-width:700px){.pair,.grid4{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+ <header>
+  <div class="eyebrow">AW-STUDY-0024</div>
+  <h1>Grace's Basement</h1>
+  <p class="muted">The office under Abbie's café. Aunt Grace's basement, 1986: a bare bulb over a desk, her computer, a box of disks. It's a 2.5D side view, built in 3D. You turn on the light, walk down, sit, and the camera swoops in to the screen. The computer works.</p>
+ </header>
+
+ <a class="play" href="play.html" aria-label="Play the basement"><img src="img/lit.jpg" alt="The basement lit: stairs on the left, shelves, the bulb's cone of light over the desk and computer, the furnace on the right"><span></span></a>
+
+ <section>
+  <h2>The computer, beside your photo</h2>
+  <p>Your photo on the left, the model from the same camera in the middle, and the model to turn yourself on the right. It's built from parts: the shell profile, the grey bezel with its sloped screen funnel, a curved tube face, the drive plinth with the floppy and three blank bays, and the side vent ribs. 57 parts, 1,296 triangles. The badge is a plain disc with no maker's logo.</p>
+  <div class="pair">
+   <figure><img src="img/photo.jpg" alt="Evan's photo: a beige 1980s all-in-one computer"><figcaption>Your photo</figcaption></figure>
+   <figure><img src="img/model.jpg" alt="The model from the photo's camera"><figcaption>Model, same camera</figcaption></figure>
+  </div>
+  <figure><model-viewer src="/review/3d/grace-computer.glb" alt="Grace's computer in 3D" camera-controls auto-rotate auto-rotate-delay="2000" camera-orbit="-33deg 80deg auto" shadow-intensity="0.8" exposure="0.9" touch-action="pan-y" interaction-prompt="none" style="aspect-ratio:16/9"></model-viewer><figcaption>Drag to turn · <a href="/models/grace-computer" style="color:inherit">on the models page</a></figcaption></figure>
+  <p class="muted">Still off: the front bays sit a little lower than in your photo, and the bezel corners are tighter.</p>
+ </section>
+
+ <section>
+  <h2>How it plays</h2>
+  <div class="grid4">
+   <figure><img src="img/dark.jpg" alt="Dark basement, only the hall light down the stairs"><figcaption>1. Dark. The hall light spills down the stairs and the switch glows.</figcaption></figure>
+   <figure><img src="img/lit.jpg" alt="The bulb on, its cone of light over the desk"><figcaption>2. Click. The bulb flickers on and buzzes. Dust turns in its light.</figcaption></figure>
+   <figure><img src="img/mid.jpg" alt="Camera swooping in toward the seated kid"><figcaption>3. Walk down, sit. The camera swoops round your shoulder.</figcaption></figure>
+   <figure><img src="img/game.jpg" alt="The CRT up close running KEYSTORM"><figcaption>4. The screen up close: curved glass, scanlines, glow.</figcaption></figure>
+  </div>
+  <ul>
+   <li>Tap anywhere to walk; tap the desk to sit. Nothing is written on the screen, and there are no buttons.</li>
+   <li>At the screen, type. A phone brings up its keyboard when you tap the glass. Tap the edge to look down at the desk; tap the floor or press Esc to stand.</li>
+   <li>The pixels are big in the room and sharp at the screen. The picture sharpens as the camera arrives.</li>
+   <li>Everything you hear is in the room: the switch, the bulb's buzz, wood stairs and concrete, the chair creak, the drive and the keys.</li>
+  </ul>
+ </section>
+
+ <section>
+  <h2>The disks and the ten coins</h2>
+  <figure><img src="img/desk.jpg" alt="Looking down at the desk: disk box, keyboard, manual, coin jar" style="aspect-ratio:16/9;background:#000"><figcaption>At the desk: Grace's disks, the keyboard, her manual and the coin jar.</figcaption></figure>
+  <p>Tap a disk and it flies into the drive, and the computer runs it: KEYSTORM, Grace's toast recipe, an empty disk, and the gold one. The gold disk shows an 8-bit Abbie's World coin, and the coin drops into the jar on the desk. There are ten coins. Each one you find lands in the jar, so the jar shows how many you have.</p>
+  <ol>
+   <li>The gold disk</li><li>Reaching night 5 in KEYSTORM</li><li>Typing the word Grace's note hints at</li><li>Behind the furnace door</li><li>In the yellow paint can</li>
+   <li>Under the rug</li><li>In Grace's manual</li><li>In the box under the stairs</li><li>On the window sill</li><li>In the pencil mug</li>
+  </ol>
+ </section>
+
+ <section>
+  <h2>The games study</h2>
+  <p>The three games you remember, studied for how they felt, then ours in their spirit. Style yes, expression never: no copied code, art, words or characters. KEYSTORM is built and playable. The other two wait for your pick.</p>
+  <div class="cards">
+   <article class="card"><span class="k">Studied · Typing Tutor III, Letter Invaders (Kriya Systems, 1984)</span>
+    <p>A typing course with an arcade game inside. Letters drop toward you and you type them to shoot them down. It starts with the home row and adds keys in a fixed order as you get them right, then scores letters, shots, hits and accuracy, with a bonus for streaks. The game ramps up only when you're ready for it.</p>
+    <h3>KEYSTORM</h3><span class="st">BUILT · PLAYABLE</span>
+    <p>Our version. Letters drift over a little town at night. Type one and the lamp on the hill zaps it. A letter that reaches the roofs puts a window out. Each night teaches one more patch of keyboard, starting with F and J, and the march speeds up when your hits are good.</p></article>
+   <article class="card"><span class="k">Studied · Gunship (MicroProse, 1986)</span>
+    <p>A helicopter simulator. Its tension came from hiding behind hills and popping up, from damage that builds until you autorotate down, and from resupply pads that remove the time limit. A long career of ranks and medals kept you flying.</p>
+    <h3>ROTOR RANGER</h3><span class="st">DESIGNED · YOUR PICK</span>
+    <p>Ours, PG. A rescue helicopter over a valley drawn in 16 colours. You pop up over ridges to spot campers, drop water on brush fires, ferry hikers home and refuel at pads. The cockpit has round gauges, and you earn ranger badges. Nobody gets shot.</p></article>
+   <article class="card"><span class="k">Studied · Questprobe featuring Spider-Man (Adventure International, 1984)</span>
+    <p>An illustrated text adventure. A picture of each place sits over a line where you type what to do. It understood fuller sentences than earlier games, gave you puzzles from the first room, and had you collect gems while climbing a tall building full of rogues.</p>
+    <h3>CLOCKTOWER</h3><span class="st">DESIGNED · YOUR PICK</span>
+    <p>Ours, with our own hero and no Marvel characters. You're a small inventor climbing a town clock tower to find twelve lost gears. Each floor has a picture on top and the typed story below ("LOOK", "TAKE OILCAN", "CLIMB ROPE"). The puzzles are mechanical and kind.</p></article>
+  </div>
+ </section>
+
+ <section>
+  <h2>The machine and what came with it</h2>
+  <div class="cards">
+   <article class="card"><span class="k">The computer</span><p>Modelled on the 1987 IBM PS/2 Model 25: an all-in-one with an 8 MHz 8086, a 12-inch mono or colour screen (MCGA), and one 720 KB 3.5-inch drive. In our world it's Grace's machine, with a plain badge.</p></article>
+   <article class="card"><span class="k">The keyboard</span><p>A full-size beige board with function keys and a number pad, built low-poly from rows of keys. In the photo-matched set it is next after the machine.</p></article>
+   <article class="card"><span class="k">The 3.5" floppy</span><p>Shell with the cut corner, sliding metal shutter, steel hub, label and write-protect slide. 90 × 94 × 3.3 mm. <a href="/models/grace-floppy" style="color:var(--accent)">Turn it</a>.</p></article>
+   <article class="card"><span class="k">The manual</span><p>A spiral manual for GRACE-DOS with "Grace's" on the cover in pen. Next: pages you can open and read, written by us in that 1980s voice.</p></article>
+  </div>
+  <div class="screen">GRACE PERSONAL COMPUTER
+Memory test  640K OK
+
+C:\GRACE&gt;DIR
+ KEYSTORM EXE    24576  10-23-86
+ README   TXT      190  10-23-86</div>
+ </section>
+
+ <section>
+  <h2>Design card</h2>
+  <ul>
+   <li><b>What the player needs to know:</b> "The light's on, the computer's on, I found a coin."</li>
+   <li><b>How would the character know?</b> The bulb glows and buzzes; the screen lights the desk and the drive chatters; coins land in the jar.</li>
+   <li><b>Mode:</b> diegetic everywhere. The screen's text is part of the world, on Grace's computer. There's no overlay.</li>
+   <li><b>Who it's for:</b> the player. The scene also tells the director whether the light and the computer are on.</li>
+   <li><b>The whole scene adapts:</b> one switch changes the light, the dust, the hum and the hall light together.</li>
+   <li><b>Tour:</b> no, for now. It joins the tour when the café's office door leads here.</li>
+  </ul>
+ </section>
+
+ <p class="src muted">Sources: <a href="https://en.wikipedia.org/wiki/IBM_PS/2_Model_25">IBM PS/2 Model 25</a> · <a href="https://en.wikipedia.org/wiki/Gunship_(video_game)">Gunship</a> · <a href="https://en.wikipedia.org/wiki/Questprobe_featuring_Spider-Man">Questprobe featuring Spider-Man</a> · <a href="https://en.wikipedia.org/wiki/Typing_game">Typing games</a>. We read Typing Tutor III's own screens privately for pacing and layout, then deleted them. Nothing from it is in the repo.</p>
+</div>
+</html>

@@ -317,7 +317,8 @@ async function decide(verdict, notes, via){
 }
 // Paper warrior models belong to the Roman model study thread, so their verdicts also reach that thread's feedback inbox.
 const OWNER = [[/^(paper warrior|paper figures|roman parts)/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', 'Models review'],
-  [/^moon remaster/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1', 'Models review']];
+  [/^moon remaster/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1', 'Models review'],
+  [/^grace's basement/i, 'cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D', 'Coffee shop office basement']];
 async function send(m, verdict, notes, via){
   try {
     const r = await fetch('/api/model-reviews', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({id:m.id, name:`${m.name}${m.style ? ' (' + m.style + ')' : ''}`, verdict, notes, via})});
