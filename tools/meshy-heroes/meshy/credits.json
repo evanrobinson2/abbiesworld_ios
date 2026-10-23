@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 1400,
+ "total": 1420,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -476,6 +476,11 @@
    "what": "aurora_2_2 3d",
    "credits": 20,
    "at": "2026-10-23T21:36:24Z"
+  },
+  {
+   "what": "aurora_2_3 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:36:44Z"
   }
  ]
 }
