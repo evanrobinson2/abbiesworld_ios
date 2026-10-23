@@ -49,6 +49,7 @@ import {H, GYM, CANOPY, RECT, BLOCKERS, ROAD_X, LANES, FASCIA, schoolMaterials, 
 import {makeBlackLab} from '/simulations/black-lab.mjs';
 import {makeYoungDaddy} from '/simulations/young-daddy.mjs';
 import {planGrab, holdNear as kitHoldNear, bestNext} from '/simulations/climb-kit.mjs';
+import {TOON_LOOKS, toonify, inkHulls} from '/simulations/toon-kit.mjs';
 
 // Shared pieces from the basement and the presentation layer; the page still runs on its own if they are missing.
 const opt = async (path) => { try { return await import(path); } catch { return {}; } };
@@ -56,11 +57,13 @@ const [PL, GB, MC, CR] = await Promise.all([opt('/simulations/presentation-layer
 const presentation = PL.presentation || ((o) => o);
 const playerCamera = PL.playerCamera || ((c) => c);
 const Q = new URLSearchParams(location.search), TEST = Q.has('test'), PIXEL = Q.has('pixel');
+// the look, from the Shaders article's toon set: Sunday Toon by default; ?look=ink adds ink lines, ?look=plain is plain three
+const LOOK = TOON_LOOKS[Q.get('look')] !== undefined ? Q.get('look') : PIXEL ? 'plain' : 'sunday';
 if (PIXEL) document.body.classList.add('pixel');
 
 const renderer = new T.WebGLRenderer({antialias: !PIXEL, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
-renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
 document.body.prepend(renderer.domElement);
 const scene = new T.Scene();
 const camera = playerCamera(new T.PerspectiveCamera(40, 1, .05, 400));
@@ -68,19 +71,20 @@ const v3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z);
 
 // ---------- Light: one late-October dusk drives sky, sun, windows, streetlights and the fog. ----------
 const sky = duskSky(T, scene);
-scene.environment = duskEnvironment(T, renderer); scene.environmentIntensity = .55;
+scene.environment = duskEnvironment(T, renderer); scene.environmentIntensity = .42;
 scene.fog = new T.Fog('#e8a27c', 38, 175);
-const hemi = new T.HemisphereLight('#ffd2b0', '#4a3550', .7); scene.add(hemi);
+const hemi = new T.HemisphereLight('#ffd2b0', '#4a3550', .5); scene.add(hemi);
 // a low golden sun from the street side, raking across the climbing wall (Evan's key art); its shadow follows you
-const SUN_OFF = v3(-30, 11, 24).normalize().multiplyScalar(40);
+const SUN_OFF = v3(-31, 6.5, 25).normalize().multiplyScalar(40);
 const sun = new T.DirectionalLight('#ffa060', 3.2); sun.castShadow = true;
 Object.assign(sun.shadow.camera, {left: -16, right: 16, top: 16, bottom: -16, near: 1, far: 100}); sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0005; sun.shadow.normalBias = .02;
 scene.add(sun, sun.target);
 
 // ---------- The world: the school, the street, trees, grass, leaves. ----------
-const {M, occluders} = buildSchool(T, scene);
+const {M, occluders, flag} = buildSchool(T, scene);
+const flagBase = flag.geometry.attributes.position.array.slice();
 const {lamps: streetLamps} = streetFurniture(T, scene, M);
-const TREES = [[-13.5, -8, 1.1], [-12.5, 11, 1.3], [-4, 12, 1], [26, -9, 1.2, true], [14, 13, 1.1], [-14.5, 15, .9, true], [9, 12.5, 1], [26, 6, 1.4], [-25, -14, 1.2], [-25.5, 12, 1.1, true], [2, 14, 1.2], [-8, 15, 1], [20, 13, 1.1, true], [-23, -33, 1.2], [-24, 30, 1.3], [-12, -14, 1]];
+const TREES = [[-13.5, -8, 1.1], [-12.5, 11, 1.3], [-4, 12, 1], [26, -9, 1.2, true], [14, 13, 1.1], [-14.5, 15, .9, true], [9, 12.5, 1], [26, 6, 1.4], [-25, -14, 1.2], [-25.5, 12, 1.1, true], [2, 14, 1.2], [-8, 15, 1], [20, 13, 1.1, true], [-23, -33, 1.2], [-24, 30, 1.3], [-12, -14, 1], [-11.5, 6.8, 1.15]]; // the last one throws its leaf shadow across the climb, as in the key art
 plantTrees(T, scene, M, TREES);
 Object.assign(M, {
  ball: new T.MeshStandardMaterial({color: '#d7f04a', roughness: .9, emissive: '#7a8a10', emissiveIntensity: .25, name: 'tennis ball felt'}),
@@ -441,7 +445,7 @@ function tossUp() { if (!S.charging) return; S.charging = false; hangEl.style.di
 const ray = new T.Raycaster(), ndc = new T.Vector2();
 function pick(ev) { const r = renderer.domElement.getBoundingClientRect(); ndc.set((ev.clientX - r.left) / r.width * 2 - 1, -(ev.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); }
 const THROW_SPOT = SPOTS.throw.at;
-function start() { // the play orb: wake the sound, then walk bub to the wall on your own
+function start() { toonify(T, scene, TOON_LOOKS[LOOK], TOON); // the play orb: wake the sound, then walk bub to the wall on your own
  if (S.mode !== 'title') return;
  audio(); document.getElementById('go').classList.add('gone'); say(LINES.walk);
  S.mode = 'walk'; S.target = THROW_SPOT.clone(); S.onArrive = 'throw'; tweenCamera(walkView(), 1.6);
@@ -833,11 +837,12 @@ function frame(now) {
  if (S.reward && !S.reward.update(rdt)) S.reward = null;
  // the light: dusk deepens over four minutes; windows, the wall lamp and streetlamps come up as it does
  const night = Math.min(1, time / 240); sky.uniforms.night.value = night * .85;
- sun.intensity = 3.2 - 2.2 * night; sun.color.setRGB(1, .63 - .15 * night, .38 - .1 * night); scene.environmentIntensity = .55 - .35 * night;
+ sun.intensity = 3.7 - 2.5 * night; sun.color.setRGB(1, .54 - .15 * night, .3 - .1 * night); scene.environmentIntensity = .42 - .27 * night;
  scene.fog.color.setRGB(.91 - .6 * night, .64 - .45 * night, .49 - .25 * night);
  M.glass.emissiveIntensity = .15 + 1.1 * night; M.houseGlass.emissiveIntensity = .12 + 1.4 * night; M.skylight.emissiveIntensity = .05 + .6 * night;
  M.lampGlow.emissiveIntensity = night > .2 ? 2.2 : 0; streetLamps.forEach(l => l.intensity = night > .2 ? 9 : 0);
  M.wallLamp.emissiveIntensity = .3 + 2 * night; wallLampLight.intensity = 1 + 5 * night;
+ { const a = flag.geometry.attributes.position; for (let i = 0; i < a.count; i++) { const x = flagBase[i * 3]; a.array[i * 3 + 2] = Math.sin(x * 4 - performance.now() / 200) * .09 * x; } a.needsUpdate = true; flag.geometry.computeVertexNormals(); }
  renderer.render(scene, camera);
  requestAnimationFrame(frame);
 }
@@ -866,7 +871,9 @@ function updateDog(dt) {
  if (!S.leashOff) { const a = kidRig.arms[0].hand.getWorldPosition(v3()), b = bub.head.getWorldPosition(v3()).add(v3(-.12, -.12, 0)), m = a.clone().lerp(b, .5).add(v3(0, -.25, 0)); leashGeo.setFromPoints([a, m, b]); }
 }
 requestAnimationFrame(frame);
-window.schoolJump = {camera, tweenCamera, tossDown, tossUp, janitorEnding, TARGETS, finish, S, tapHold, plan, reachable, allHolds, CLIMB1, CLIMB2, CLIMB3, kid, dog, bub, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb, startDescent, wallThrow, start, holdNear, bestUp};
+const TOON = toonify(T, scene, TOON_LOOKS[LOOK]);
+if (LOOK === 'ink') for (const o of [kid, dog, ...cars.map(c => c.g)]) inkHulls(T, o, TOON_LOOKS.ink);
+window.schoolJump = {LOOK, TOON, camera, tweenCamera, tossDown, tossUp, janitorEnding, TARGETS, finish, S, tapHold, plan, reachable, allHolds, CLIMB1, CLIMB2, CLIMB3, kid, dog, bub, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb, startDescent, wallThrow, start, holdNear, bestUp};
 </script>
 </body>
 </html>

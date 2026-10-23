@@ -55,12 +55,15 @@ export function schoolMaterials(T) {
  const siding = noiseSurface(T, '#ffffff', ['#f2f2f2'], {size: 1.2, n: 50, seed: 29, lines: (g, w) => { for (let y = 0; y < w; y += w / 6) { g.fillStyle = 'rgba(0,0,0,.18)'; g.fillRect(0, y, w, 3); g.fillStyle = 'rgba(255,255,255,.3)'; g.fillRect(0, y + 3, w, 2); } }});
  const shingle = noiseSurface(T, '#5a4650', ['#6a5560', '#4a3842', '#725a64'], {size: 1.6, n: 900, seed: 31, lines: (g, w) => { g.fillStyle = 'rgba(20,10,15,.45)'; for (let y = 0; y < w; y += w / 8) { g.fillRect(0, y, w, 2); for (let x = (y / (w / 8)) % 2 * w / 12; x < w; x += w / 6) g.fillRect(x, y, 2, w / 8); } }});
  const louvre = noiseSurface(T, '#b7bcc2', ['#c9ced3', '#9ea4ab'], {size: .8, n: 300, seed: 37, lines: (g, w) => { for (let y = 0; y < w; y += 12) { g.fillStyle = 'rgba(30,35,45,.5)'; g.fillRect(0, y, w, 4); } }});
- const fascia = noiseSurface(T, '#e6dccb', ['#efe7d8', '#d6cbb8'], {size: 1.2, n: 400, seed: 41, lines: (g, w) => { g.fillStyle = 'rgba(80,60,40,.18)'; g.fillRect(0, 0, 3, w); }});
+ const fascia = noiseSurface(T, '#68727f', ['#77818e', '#5b6471', '#707a87'], {size: 1.2, n: 400, seed: 41, lines: (g, w) => { g.fillStyle = 'rgba(20,25,35,.3)'; g.fillRect(0, 0, 3, w); g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(0, 2, w, 3); }});
  const room = canvasTex(T, 256, 128, (g, w, h) => { // a classroom glimpsed through the glass: warm ceiling light, a board, chairs
   const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#ffe7b0'); gr.addColorStop(.55, '#e9a868'); gr.addColorStop(1, '#6a3a2a'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
   g.fillStyle = '#3d5a48'; g.fillRect(30, 26, 120, 40); g.fillStyle = '#7a5a3a'; for (let x = 20; x < w; x += 46) { g.fillRect(x, 92, 26, 6); g.fillRect(x + 4, 98, 3, 22); g.fillRect(x + 19, 98, 3, 22); }
   g.fillStyle = 'rgba(255,255,255,.5)'; g.fillRect(0, 4, w, 4);
  });
+ // chain-link: wire diamonds, 6 cm across, cut out with an alpha map so the fence reads as wire, not a sheet
+ const chainLink = canvasTex(T, 64, 64, (g, w) => { g.fillStyle = '#000'; g.fillRect(0, 0, w, w); g.strokeStyle = '#fff'; g.lineWidth = 5; g.beginPath(); g.moveTo(0, w / 2); g.lineTo(w / 2, 0); g.lineTo(w, w / 2); g.lineTo(w / 2, w); g.closePath(); g.stroke(); }, {srgb: false});
+ chainLink.repeat.set(16, 16); // the fence UVs are in metres
  const m = (o) => new T.MeshStandardMaterial(o);
  const tex = (s, o) => m({map: s.map, normalMap: s.normalMap, ...o});
  return {
@@ -74,7 +77,7 @@ export function schoolMaterials(T) {
   siding: (c) => tex(siding, {color: c, roughness: .85, name: 'house siding'}),
   shingle: tex(shingle, {roughness: 1, name: 'asphalt shingles'}),
   louvre: tex(louvre, {roughness: .45, metalness: .6, name: 'air handler louvres'}),
-  fascia: tex(fascia, {roughness: .55, metalness: .25, name: 'cream metal fascia'}),
+  fascia: tex(fascia, {roughness: .55, metalness: .25, name: 'slate metal roof edge'}),
   soffit: m({color: '#8e8274', roughness: .8, name: 'fascia soffit'}),
   sill: m({color: '#d4cbbf', roughness: .9, name: 'concrete sill'}),
   alu: m({color: '#c9ced3', roughness: .35, metalness: .85, name: 'aluminium window frame'}),
@@ -95,8 +98,9 @@ export function schoolMaterials(T) {
   spruce: m({color: '#3f5a3a', roughness: 1, flatShading: true, name: 'spruce needles'}),
   trim: m({color: '#f1ebe0', roughness: .7, name: 'house trim'}),
   paint: m({color: '#f1e6b0', roughness: .9, name: 'road paint'}),
+  play: m({color: '#c8452f', roughness: .6, metalness: .2, name: 'playground paint'}),
   white: m({color: '#f2efe8', roughness: .9, name: 'white line paint'}),
-  chain: m({color: '#aab2b8', roughness: .5, metalness: .7, transparent: true, opacity: .55, name: 'chain-link fence', side: T.DoubleSide, depthWrite: false}),
+  chain: m({color: '#b8c0c6', roughness: .45, metalness: .75, alphaMap: chainLink, alphaTest: .5, name: 'chain-link fence', side: T.DoubleSide}),
   lampPost: m({color: '#5a5a62', roughness: .5, metalness: .6, name: 'street lamp post'}),
   lampGlow: m({color: '#fff3c8', emissive: '#ffd27a', emissiveIntensity: 0, name: 'street lamp'}),
   wallLamp: m({color: '#fff6dc', emissive: '#ffcf80', emissiveIntensity: .3, name: 'wall lamp lens'}),
@@ -163,7 +167,7 @@ export function buildSchool(T, scene, M = schoolMaterials(T)) {
   }
   B.add('brick', box(T, w, h, d), cx, h / 2, cz);
   B.add('concrete', box(T, w + .08, .3, d + .08), cx, .15, cz);
-  const F = FASCIA, fh = .55;
+  const F = FASCIA, fh = .34; // a thin slate metal roof edge, as in the key art
   B.add('fascia', box(T, w + 2 * F, fh, F + .04), cx, h - fh / 2 + .14, z0 - F / 2); B.add('fascia', box(T, w + 2 * F, fh, F + .04), cx, h - fh / 2 + .14, z1 + F / 2);
   B.add('fascia', box(T, F + .04, fh, d), x0 - F / 2, h - fh / 2 + .14, cz); B.add('fascia', box(T, F + .04, fh, d), x1 + F / 2, h - fh / 2 + .14, cz);
   B.add('soffit', box(T, w + 2 * F, .04, d + 2 * F), cx, h - fh + .16, cz);
@@ -178,7 +182,7 @@ export function buildSchool(T, scene, M = schoolMaterials(T)) {
     if (k === 'B') windowRow(T, B, ['x', x1, 1], z0 + .2, z1, y0, y1), windowRow(T, B, ['z', z0, -1], x0 + .2, x1 - .2, y0, y1);
    }
    B.add('concrete', box(T, w + .04, .22, d + .04), cx, 3.4, cz); // the floor band between the storeys
-  } else windowRow(T, B, ['z', z0, -1], x0 + .2, x1 - .2, 1.2, 2.6, {step: 1.5, w: 1.1});
+  } else { windowRow(T, B, ['z', z0, -1], x0 + .2, x1 - .2, 1.2, 2.6, {step: 1.5, w: 1.1}); windowRow(T, B, ['x', x0, -1], z0 + .2, z1 - .2, 1.2, 2.6, {step: 1.5, w: 1.1}); } // the low wing faces the street
  }
  // the front doors under the canopy: glass double doors in an aluminium frame
  B.add('alu', box(T, .12, 2.5, 2.2), 5.03, 1.25, 1.2); B.add('glass', box(T, .14, 2.3, 1.9), 5.04, 1.15, 1.2);
@@ -237,10 +241,31 @@ export function buildSchool(T, scene, M = schoolMaterials(T)) {
   B.add('concrete', box(T, 1.6, .2, 3.6), x + d / 2 + .8, .1, z);
   plane('concrete', 5.2, 1.2, x + d / 2 + 4, z, .03);
  }
+ // ---- what makes it a school from the street: the boiler chimney, the flagpole, the playground, hopscotch, a fence ----
+ B.add('brick', box(T, 1.3, 13.5, 1.3), 8.75, 6.75, 7.2); B.add('concrete', box(T, 1.5, .25, 1.5), 8.75, 13.6, 7.2); B.add('dark', box(T, .8, .1, .8), 8.75, 13.76, 7.2);
+ for (const y of [4.5, 9]) B.add('concrete', box(T, 1.36, .14, 1.36), 8.75, y, 7.2);
+ B.add('concrete', box(T, 1, .3, 1), -15.2, .15, -7.6); B.add('alu', new T.CylinderGeometry(.045, .07, 9, 10), -15.2, 4.5, -7.6); B.add('brass', new T.SphereGeometry(.11, 10, 8), -15.2, 9.05, -7.6);
+ const sw = [4, -21]; // swing set: an A-frame each end, a top bar, three swings on chains
+ for (const dx of [-2.2, 2.2]) for (const dz of [-.8, .8]) B.add('play', new T.CylinderGeometry(.05, .05, 2.75, 8), sw[0] + dx, 1.3, sw[1] + dz * .55, q(T, dz > 0 ? .3 : -.3, 0, 0));
+ B.add('play', new T.CylinderGeometry(.06, .06, 4.5, 8), sw[0], 2.6, sw[1], q(T, 0, 0, Math.PI / 2));
+ for (const dx of [-1.3, 0, 1.3]) { for (const s2 of [-.22, .22]) B.add('steel', new T.CylinderGeometry(.012, .012, 2.05, 4), sw[0] + dx + s2, 1.57, sw[1]); B.add('dark', box(T, .5, .05, .22), sw[0] + dx, .55, sw[1]); }
+ const sl = [11, -22.5]; // the slide: a ladder, a platform, a shiny chute
+ for (const dz of [-.3, .3]) B.add('play', new T.CylinderGeometry(.04, .04, 2.2, 8), sl[0] - 1.2, 1.1, sl[1] + dz);
+ for (let y = .35; y < 2; y += .35) B.add('steel', new T.CylinderGeometry(.02, .02, .6, 6), sl[0] - 1.2, y, sl[1], q(T, Math.PI / 2, 0, 0));
+ B.add('play', box(T, .7, .08, .8), sl[0] - .9, 2.1, sl[1]); B.add('alu', box(T, 3.2, .05, .6), sl[0] + .6, 1.1, sl[1], q(T, 0, 0, -.62));
+ for (const [x, z] of [[-1, -13], [-1, -12.3], [-1.35, -11.6], [-.65, -11.6], [-1, -10.9], [-1.35, -10.2], [-.65, -10.2], [-1, -9.5]]) { // hopscotch in chalk
+  for (const [w, d, dx, dz] of [[.62, .04, 0, -.31], [.62, .04, 0, .31], [.04, .62, -.31, 0], [.04, .62, .31, 0]]) plane('white', w, d, x + dx, z + dz, .012);
+ }
+ for (let x = -7.2; x >= -11.4; x -= 2.1) B.add('steel', new T.CylinderGeometry(.03, .03, 1.8, 6), x, .9, 4.6); // a chain-link run off the wall, like the key art
+ B.add('chain', new T.PlaneGeometry(4.2, 1.8), -9.3, .9, 4.6); B.add('steel', new T.CylinderGeometry(.025, .025, 4.2, 6), -9.3, 1.8, 4.6, q(T, 0, 0, Math.PI / 2));
  const meshes = B.build(scene, M, {noShadow: ['paint', 'white', 'chain', 'glass', 'houseGlass', 'grass', 'yard', 'field', 'asphalt']});
  for (const k of ['brick', 'fascia', 'hvac', 'concrete', 'soffit']) if (meshes[k]) occluders.push(meshes[k]);
  meshes.grass.receiveShadow = meshes.yard.receiveShadow = meshes.asphalt.receiveShadow = true;
- return {M, meshes, occluders};
+ // the flag is its own mesh, so the breeze can move it
+ const flagTex = canvasTex(T, 192, 100, (g, w, h) => { for (let i = 0; i < 13; i++) { g.fillStyle = i % 2 ? '#f4efe6' : '#b4262e'; g.fillRect(0, i * h / 13, w, h / 13 + 1); } g.fillStyle = '#2d3a6b'; g.fillRect(0, 0, w * .42, h * 7 / 13); g.fillStyle = '#f4efe6'; for (let y = 6; y < h * 7 / 13 - 3; y += 8) for (let x = 6 + (y / 8 % 2) * 4; x < w * .42 - 3; x += 9) g.fillRect(x, y, 2, 2); });
+ const flag = new T.Mesh(new T.PlaneGeometry(1.5, .8, 12, 4).translate(.75, 0, 0), new T.MeshStandardMaterial({map: flagTex, side: T.DoubleSide, roughness: .9, name: 'flag cloth'}));
+ flag.position.set(-15.2, 8.5, -7.6); flag.castShadow = true; flag.name = 'flag'; scene.add(flag);
+ return {M, meshes, occluders, flag};
 }
 
 // ---------- Trees, grass tufts and fallen leaves (instanced). ----------
@@ -282,7 +307,7 @@ export function duskSky(T, scene) {
    float n(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.-2.*f); return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }
    void main(){
     float y = clamp(vDir.y, -.2, 1.);
-    vec3 horizon = mix(vec3(1.,.66,.42), vec3(.55,.32,.4), night), mid = mix(vec3(.93,.55,.55), vec3(.25,.2,.38), night), zen = mix(vec3(.42,.42,.68), vec3(.07,.07,.17), night);
+    vec3 horizon = mix(vec3(1.,.56,.3), vec3(.55,.3,.36), night), mid = mix(vec3(.88,.44,.42), vec3(.25,.2,.38), night), zen = mix(vec3(.3,.31,.6), vec3(.07,.07,.17), night);
     vec3 c = mix(horizon, mid, smoothstep(0., .18, y)); c = mix(c, zen, smoothstep(.15, .7, y));
     float s = max(0., dot(normalize(vDir), sunDir));
     c += vec3(1.,.62,.3) * (pow(s, 8.) * .55 + pow(s, 400.) * 3.) * (1. - night * .8);

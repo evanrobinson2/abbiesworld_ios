@@ -53,6 +53,19 @@ ol,ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
  </section>
 
  <section>
+  <h2>Round two: the school, and Sunday Toon</h2>
+  <p class="muted">Evan, 8:47 AM: "the school sucks really needs work, and you need to try that toon shader you just built." The building now follows the key art, with the details that say "school" from the street. The whole scene is drawn in Sunday Toon from the Shaders article.</p>
+  <div class="pair">
+   <figure><img src="img/r2-title.jpg" alt="The climbing wall at low golden sun, a tree's shadow across the brick, a thin slate roof edge, classroom windows on the low wing"><figcaption><b>The wall.</b> A low sun rakes across it and a tree's shadow falls on the climb, as in the key art. A thin slate roof edge replaces the cream slab, and the low wing has windows facing the street.</figcaption></figure>
+   <figure><img src="img/r2-aerial.jpg" alt="The school from above: a tall brick boiler chimney, a flag, hopscotch, rooftop units, rows of classroom windows"><figcaption><b>From above.</b> A brick boiler chimney, a flag on its pole, hopscotch, swings and a slide in the yard, and a chain-link run off the wall.</figcaption></figure>
+  </div>
+  <ul>
+   <li><b>Sunday Toon</b> (<code>simulations/toon-kit.mjs</code>) patches three's own materials, so every texture, shadow and fog keeps working. The light wraps round the back, falls into three soft bands and fills the shadow side with a violet sky tint, and a warm rim picks out edges. <code>?look=ink</code> adds ink lines to the kid, bub and the cars; <code>?look=plain</code> turns it off.</li>
+   <li>A deeper dusk: a lower, oranger sun, less flat fill, and a sky that runs from orange to violet.</li>
+  </ul>
+ </section>
+
+ <section>
   <h2>The climb, fixed</h2>
   <ol>
    <li><b>One tap, the right hand.</b> Tap a hold and the hand that can reach it goes there; the other hand stays put. Before, you had to let go first, so most taps did nothing and the climb stalled at the door. Tapping your own hand still lets it go.</li>

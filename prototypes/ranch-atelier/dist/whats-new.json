@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-school-toon",
+      "date": "2026-10-23",
+      "title": "The school, redone at dusk",
+      "line": "The school jump's school matches the key art now: a low golden sun, tree shadows on the brick, a slate roof edge, a boiler chimney, a flag, swings and hopscotch. It's all drawn in the new Sunday Toon look.",
+      "image": "/whats-new/2026-10-23-school-toon.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYRypkQBBpSxf7MW2R1c5GRg",
+      "threadTitle": "AW-STUDY-0032 - School Jump Game-Ready",
+      "tour": false,
+      "link": "/studies/school/play.html"
+    },
+    {
       "id": "2026-10-23-figure-fidelity",
       "date": "2026-10-23",
       "title": "Young Daddy, bub and the basement girl, rebuilt",
