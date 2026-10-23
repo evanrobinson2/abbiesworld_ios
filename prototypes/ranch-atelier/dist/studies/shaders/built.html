@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0045 - Built looks</title>
+<style>
+:root{--bg:#edf0f5;--plate:#fff;--ink:#1b2433;--soft:#56627a;--line:#d4dbe6;--pink:#c42e6b;--teal:#1f7f84}
+@media (prefers-color-scheme: dark){:root{--bg:#0f1520;--plate:#172031;--ink:#e7ecf4;--soft:#9eabc1;--line:#2a364b;--pink:#f0679c;--teal:#4cc0c4}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 ui-rounded,system-ui,sans-serif;padding:24px max(16px,env(safe-area-inset-right)) 64px max(16px,env(safe-area-inset-left))}
+main{max-width:1100px;margin:0 auto}
+h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.1;margin:0 0 8px}
+p{margin:0 0 12px;color:var(--soft)}
+a{color:var(--teal)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin-top:24px}
+.card{background:var(--plate);border:1px solid var(--line);border-radius:18px;padding:12px;display:grid;gap:8px}
+.card h2{font-size:1.1rem;margin:4px 4px 0}
+.card canvas{width:100%;aspect-ratio:4/3;border-radius:12px;display:block;touch-action:none}
+.row{display:flex;gap:10px;align-items:center;padding:0 4px;color:var(--soft);font-size:.9rem}
+.row input[type=range]{flex:1}
+button{font:inherit;border:1px solid var(--line);background:var(--plate);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+<h1>The looks you loved, built</h1>
+<p>Ink and paper, Line art, Dusk mist, One-bit and the world orb, as kits in <code>simulations/</code> (<code>look-set.mjs</code>, <code>orb-kit.mjs</code>). Each takes one signal, 0 to 1: drag it and the world follows. <a href="./">Back to the review</a>.</p>
+<div class="grid" id="grid"></div>
+</main>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/utils/BufferGeometryUtils.js":"/vendor/utils/BufferGeometryUtils.js","three/addons/utils/SkeletonUtils.js":"/vendor/utils/SkeletonUtils.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js"}}</script>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {clone} from 'three/addons/utils/SkeletonUtils.js';
+import {applyLook} from '/simulations/look-set.mjs';
+import {createOrb} from '/simulations/orb-kit.mjs';
+
+const CARDS = [
+ {id: 'inkpaper', title: 'Ink and paper: Daddy tells it', sig: 'telling', start: .85, bg: '#bfe0f2'},
+ {id: 'lineart', title: 'Line art: a comic-page place', sig: 'the page', start: 1, bg: '#a8d4f0'},
+ {id: 'dusk', title: 'Dusk mist: the ship adventure', sig: 'dusk', start: 1, bg: '#a8d4f0', lantern: true},
+ {id: 'onebit', title: 'One-bit: the old screen', sig: 'old screen', start: 1, bg: '#a8d4f0', alt: 'gameboy', altLabel: 'Game Boy green'},
+ {id: 'orb', title: 'World orb: step into a new world', orb: true, bg: '#f6b98a'},
+];
+const gltf = {};
+const load = async u => gltf[u] ||= await new GLTFLoader().loadAsync(u);
+
+function ranch(g) {
+ const m = (c, o = {}) => new T.MeshStandardMaterial({color: c, roughness: .9, ...o});
+ const add = (geo, c, x, y, z) => { const o = new T.Mesh(geo, m(c)); o.position.set(x, y, z); g.add(o); return o; };
+ add(new T.CylinderGeometry(6, 6.3, .4, 40), '#86c060', 0, 0, 0);
+ add(new T.BoxGeometry(2.4, 1.6, 2), '#c44a3a', -1.2, 1.1, -1.4);
+ const roof = add(new T.ConeGeometry(1.9, 1.1, 4), '#f0dcc0', -1.2, 2.4, -1.4); roof.rotation.y = Math.PI / 4;
+ add(new T.CylinderGeometry(.18, .26, 1.3, 8), '#6b4a2f', 2.4, .85, -1.2); add(new T.SphereGeometry(.95, 14, 10), '#3f9a4d', 2.4, 2, -1.2);
+ for (let i = 0; i < 5; i++) add(new T.BoxGeometry(.15, .8, .15), '#d9a066', -3 + i * 1.5, .6, 2.6);
+ add(new T.SphereGeometry(.5, 10, 8), '#9a8f86', 1.2, .5, 1.6);
+}
+
+async function figures(g) {
+ try {
+  const a = clone((await load('models/mannequin.glb')).scene), b = (await load('../brute-fight/red/fighter.glb'));
+  for (const [o, h, x] of [[a, 1.8, -1.2], [clone(b.scene), 2.0, 1.3]]) {
+   const box = new T.Box3().setFromObject(o); o.scale.setScalar(h / (box.max.y - box.min.y)); o.updateWorldMatrix(true, true);
+   const b2 = new T.Box3().setFromObject(o); o.position.set(x - (b2.min.x + b2.max.x) / 2, .2 - b2.min.y, 1.1); g.add(o);
+   if (o === a) continue;
+   const mx = new T.AnimationMixer(o); mx.clipAction(b.animations.find(c => /idle/i.test(c.name)) || b.animations[0]).play(); mx.update(.4);
+  }
+ } catch (e) { console.warn('figures', e); }
+}
+
+function mount(card) {
+ const el = document.createElement('div'); el.className = 'card';
+ el.innerHTML = `<h2>${card.title}</h2><canvas></canvas><div class="row"></div>`;
+ document.getElementById('grid').append(el);
+ const canvas = el.querySelector('canvas'), row = el.querySelector('.row');
+ const r = new T.WebGLRenderer({canvas, antialias: true}); r.setPixelRatio(Math.min(devicePixelRatio, 2));
+ const scene = new T.Scene(); scene.background = new T.Color(card.bg);
+ const cam = new T.PerspectiveCamera(36, 4 / 3, .1, 100);
+ const world = new T.Group(); if (!card.orb) { ranch(world); figures(world); }
+ scene.add(new T.HemisphereLight('#ffffff', '#99aa88', 1.1)); const sun = new T.DirectionalLight('#fff4e0', 2.2); sun.position.set(3, 5, 3); scene.add(sun);
+ let look = null, orb = null, lamp = null;
+ const resize = () => { const w = canvas.clientWidth, h = canvas.clientHeight; if (canvas.width !== Math.round(w * r.getPixelRatio())) { r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); } };
+ let yaw = .6, drag = false, lx = 0;
+ canvas.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; canvas.setPointerCapture(e.pointerId); });
+ canvas.addEventListener('pointerup', () => drag = false);
+ canvas.addEventListener('pointermove', e => { if (drag) { yaw -= (e.clientX - lx) * .01; lx = e.clientX; } });
+ if (card.orb) {
+  const inner = new T.Group(); ranch(inner);
+  const pedestal = new T.Mesh(new T.CylinderGeometry(.6, .9, 1, 24), new T.MeshStandardMaterial({color: '#f2d0b0'})); pedestal.position.y = .5; scene.add(pedestal);
+  orb = createOrb(T, {world: inner, radius: .9, glow: '#ffe2b0'}); orb.group.position.y = 1.9; scene.add(orb.group);
+  const b = document.createElement('button'); b.textContent = 'Step in'; row.append(b);
+  const mood = document.createElement('button'); mood.textContent = 'Night glow'; row.append(mood);
+  b.onclick = () => { if (orb.state === 'idle' || orb.state === 'leaving') { orb.enter(); b.textContent = 'Step out'; } else { orb.leave(); b.textContent = 'Step in'; } };
+  let night = false; mood.onclick = () => { night = !night; orb.setGlow(night ? '#8fa8ff' : '#ffe2b0'); mood.textContent = night ? 'Day glow' : 'Night glow'; };
+ } else {
+  const wrap = document.createElement('label'); wrap.textContent = card.sig; const s = document.createElement('input'); s.type = 'range'; s.min = 0; s.max = 1; s.step = .01; s.value = card.start; row.append(wrap, s);
+  if (card.lantern) { lamp = new T.Mesh(new T.SphereGeometry(.14, 12, 8), new T.MeshBasicMaterial({color: '#ffd27a'})); lamp.position.set(-.1, 2.6, 2.4); world.add(lamp); }
+  scene.add(world);
+  let on = card.id;
+  const build = () => { look?.restore(); look = applyLook(T, world, on, {scene, lantern: lamp ? lamp.position.clone() : undefined, signal: +s.value}); };
+  setTimeout(build, 600); // let the figures load first
+  s.oninput = () => look?.set(+s.value);
+  if (card.alt) { const b = document.createElement('button'); b.textContent = card.altLabel; row.append(b); b.onclick = () => { on = on === card.id ? card.alt : card.id; b.textContent = on === card.id ? card.altLabel : 'Black and white'; build(); }; }
+ }
+ let last = performance.now();
+ const io = new IntersectionObserver(es => { vis = es[0].isIntersecting; }); let vis = true; io.observe(canvas);
+ (function loop(now) { requestAnimationFrame(loop); if (!vis) return; const dt = Math.min(.1, (now - last) / 1000); last = now; resize();
+  const rad = orb ? 5.6 : 12, h = orb ? 2.4 : 5.4; const e = orb ? 1 - Math.min(1, orb.progress * 1.2) * .6 : 1;
+  cam.position.set(Math.sin(yaw) * rad * e, h * e + (orb ? .6 : 0), Math.cos(yaw) * rad * e); cam.lookAt(0, orb ? 1.9 : 1.2, 0);
+  orb?.update(dt, now / 1000); look?.update(now / 1000); r.render(scene, cam); })(last);
+}
+CARDS.forEach(mount);
+</script>
+<script type="module" src="/look/context-card.mjs" data-context-study="shaders"></script>
+</body>
+</html>

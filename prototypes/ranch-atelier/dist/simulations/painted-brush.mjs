@@ -100,7 +100,7 @@ export function updatePaintedBrush(U, seconds) {
 
 // facets read as noise once light is painted in strokes, so lean the shading normal toward the welded one
 const weld = new WeakSet();
-function weldNormals(T, g) {
+export function weldNormals(T, g) {
  if (g.attributes.aSmoothN || !g.attributes.normal) return false;
  const P = g.attributes.position, N = g.attributes.normal, acc = new Map(), key = i => `${P.getX(i).toFixed(4)},${P.getY(i).toFixed(4)},${P.getZ(i).toFixed(4)}`, out = new Float32Array(P.count * 3);
  for (let i = 0; i < P.count; i++) { const k = key(i), a = acc.get(k) || [0, 0, 0]; a[0] += N.getX(i); a[1] += N.getY(i); a[2] += N.getZ(i); acc.set(k, a); }
@@ -111,7 +111,7 @@ function weldNormals(T, g) {
 const roleFor = name => { const n = (name || '').toLowerCase(); return Object.keys(ROLES).find(k => n.includes(k)); };
 
 // the ink shell, bent by the same skeleton on a SkinnedMesh, broken along its length like a dry brush
-function inkHull(T, o, inkU) {
+export function inkHull(T, o, inkU) {
  const g = new T.BufferGeometry(), src = o.geometry;
  for (const k of ['position', 'normal', 'skinIndex', 'skinWeight']) if (src.attributes[k]) g.setAttribute(k, src.attributes[k].clone());
  if (src.index) g.setIndex(src.index.clone());

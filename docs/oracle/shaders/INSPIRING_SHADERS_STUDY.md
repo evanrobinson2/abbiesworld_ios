@@ -103,11 +103,22 @@ stable by anchoring it to the screen. It is diegetic (the machine is in the room
 
 Open questions for Evan (only if he wants to steer): which story is the first flashback, and what earns the first orb.
 
+### Built (Evan, 19:55Z: "built them so we have them")
+The looks are real kits, not plans. Demo: `prototypes/ranch-atelier/dist/studies/shaders/built.html`.
+- `simulations/look-set.mjs`: `applyLook(T, root, 'inkpaper' | 'lineart' | 'dusk' | 'onebit' | 'gameboy', {scene, lantern})`
+  swaps one shared material onto every mesh (Mesh, SkinnedMesh, material arrays; maps, colours and alpha kept; ink shells
+  bound to the same skeleton). `L.set(k)` is the look's signal (0 gives the original materials back), `L.update(seconds)`
+  runs the 12 fps lantern flicker, `L.restore()` undoes it. Signals: `telling` (ink and paper), `dusk` (mist), the old screen.
+- `simulations/orb-kit.mjs`: `createOrb(T, {world, radius, glow, onInside, onOutside})`. The world is shown tiny inside the
+  glass, live; `enter()` grows it to full size as the glass swells and fades, `leave()` shrinks it back, `setGlow()` carries
+  the world's mood. Not yet wired to the inventory or a real world; that is the first integration when Evan says which world.
+- Tests: `simulations/tests/look-set.test.mjs`. Not yet wired into any game scene (flashback in the school jump, ship adventure,
+  basement computer); each is a one-call integration.
+
 ## Next
 
-Read Evan's picks (`picks` collection), then move the shared shader into `prototypes/ranch-atelier/dist/simulations/`
-as a toon-set module with the loved presets, wire time of day, wind and music signals, and hand Painted Brush to the
-Meshy heroes and Texture Studio threads. Tour: no (a study).
+Wire each kit into its first scene when Evan says go: flashback (school jump intro), ship adventure mist, basement
+computer one-bit, the orb unlock. Tour: no (a study).
 
 Sources are linked on each card (GDC Vault: Hi-Fi Rush toon rendering, Ghost of Tsushima procedural grass, Guilty Gear
 Xrd art style; RedShark and 80.lv on Arcane; community Genshin breakdowns; 80.lv on lit pixel art).
