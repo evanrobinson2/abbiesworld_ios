@@ -1,0 +1,10 @@
+---
+description: Dropped review recordings go through scripts/inbox-recording.sh
+alwaysApply: true
+---
+
+# Review recordings
+
+When the user drops, attaches, or pastes a Zoom/audio/video review file, run
+`scripts/inbox-recording.sh` (skill: `inbox-review-recording`). Do not ask them
+to paste the long copy/commit/push snippet again.

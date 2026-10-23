@@ -1,0 +1,118 @@
+{
+  "file": "feedback/inbox/2026-08-25-frozen-plain-thrace.mp3",
+  "duration_sec": 209.53,
+  "duration_clock": "3:30",
+  "tempo_bpm": 107.7,
+  "tempo_bpm_from_beat_intervals": 107.7,
+  "tempo_half": 53.8,
+  "tempo_double": 215.3,
+  "beat_count": 364,
+  "key_estimate": "D# major",
+  "key_confidence": 0.766,
+  "key_alternatives": [
+    {
+      "key": "D# major",
+      "corr": 0.766
+    },
+    {
+      "key": "G minor",
+      "corr": 0.712
+    },
+    {
+      "key": "A# major",
+      "corr": 0.652
+    },
+    {
+      "key": "C minor",
+      "corr": 0.421
+    }
+  ],
+  "peak_dbfs": -0.61,
+  "rms_dbfs": -13.36,
+  "crest_factor_db": 12.74,
+  "samples_at_full_scale": 0,
+  "section_count": 9,
+  "sections": [
+    {
+      "index": 1,
+      "start": 0.0,
+      "end": 7.89,
+      "start_clock": "0:00",
+      "length_sec": 7.89,
+      "mean_rms": 0.04037,
+      "mean_dbfs": -27.9
+    },
+    {
+      "index": 2,
+      "start": 7.89,
+      "end": 16.49,
+      "start_clock": "0:08",
+      "length_sec": 8.6,
+      "mean_rms": 0.13512,
+      "mean_dbfs": -17.4
+    },
+    {
+      "index": 3,
+      "start": 16.49,
+      "end": 106.63,
+      "start_clock": "0:16",
+      "length_sec": 90.14,
+      "mean_rms": 0.18327,
+      "mean_dbfs": -14.7
+    },
+    {
+      "index": 4,
+      "start": 106.63,
+      "end": 133.61,
+      "start_clock": "1:47",
+      "length_sec": 26.98,
+      "mean_rms": 0.24767,
+      "mean_dbfs": -12.1
+    },
+    {
+      "index": 5,
+      "start": 133.61,
+      "end": 142.59,
+      "start_clock": "2:14",
+      "length_sec": 8.98,
+      "mean_rms": 0.24083,
+      "mean_dbfs": -12.4
+    },
+    {
+      "index": 6,
+      "start": 142.59,
+      "end": 179.19,
+      "start_clock": "2:23",
+      "length_sec": 36.6,
+      "mean_rms": 0.26749,
+      "mean_dbfs": -11.5
+    },
+    {
+      "index": 7,
+      "start": 179.19,
+      "end": 187.99,
+      "start_clock": "2:59",
+      "length_sec": 8.8,
+      "mean_rms": 0.06525,
+      "mean_dbfs": -23.7
+    },
+    {
+      "index": 8,
+      "start": 187.99,
+      "end": 196.14,
+      "start_clock": "3:08",
+      "length_sec": 8.15,
+      "mean_rms": 0.15011,
+      "mean_dbfs": -16.5
+    },
+    {
+      "index": 9,
+      "start": 196.14,
+      "end": 209.53,
+      "start_clock": "3:16",
+      "length_sec": 13.39,
+      "mean_rms": 0.15563,
+      "mean_dbfs": -16.2
+    }
+  ]
+}

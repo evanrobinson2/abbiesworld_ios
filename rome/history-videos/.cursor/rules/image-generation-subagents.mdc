@@ -1,0 +1,51 @@
+---
+description: Generate images via OpenAI gpt-image-2 script, never Cursor GenerateImage
+alwaysApply: true
+---
+
+# Image generation uses OpenAI gpt-image-2
+
+Never call Cursor's `GenerateImage` tool. This project uses OpenAI's Image API
+directly via `scripts/generate_image.py` with model **`gpt-image-2`**.
+
+Requires `OPENAI_API_KEY` in the environment. Cloud agents: see `docs/CLOUD-SETUP.md`.
+
+## How (local or subagent)
+
+Run in a background subagent when generating batches so the main thread does not block:
+
+```
+Task(
+  subagent_type: "generalPurpose",
+  run_in_background: true,
+  description: "Generate <short name>",
+  prompt: "Run scripts/generate_image.py once.
+
+           export OPENAI_API_KEY must already be set in the environment.
+
+           Command:
+           python3 scripts/generate_image.py \\
+             --output /absolute/path/to/output.png \\
+             --prompt '<full image description>'
+
+           Return the absolute output path and one sentence on how it turned out."
+)
+```
+
+For local runs on this machine, load the key first:
+`set -a && source ~/.env && set +a`
+
+## Rules
+
+- **One subagent per image** when generating a set; launch in parallel.
+- **Always pass `--output` with an absolute path** under this repo.
+- **Carry the full spec in `--prompt`.** Subagents cannot see this conversation or the bible.
+- Standing constraints are appended by the script; still include style/register details in the prompt.
+- Default size is `3840x2160` (16:9, ~3× delivery resolution).
+- After completion, read the file and display it in chat.
+
+## Project-specific prompt content
+
+Every prompt should describe: register (cut-paper / ink-wash / uncut paper), mood if
+known, subject, blocking, palette, and depth planes for parallax when relevant.
+See `bible/02-style-bible.md` and `bible/07-moods.md`.

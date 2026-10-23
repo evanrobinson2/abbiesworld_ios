@@ -1,0 +1,100 @@
+{
+  "file": "feedback/inbox/2026-08-24-dust-on-the-steppe.mp3",
+  "duration_sec": 163.73,
+  "duration_clock": "2:44",
+  "tempo_bpm": 112.3,
+  "tempo_bpm_from_beat_intervals": 112.3,
+  "tempo_half": 56.2,
+  "tempo_double": 224.7,
+  "beat_count": 282,
+  "key_estimate": "D# minor",
+  "key_confidence": 0.727,
+  "key_alternatives": [
+    {
+      "key": "D# minor",
+      "corr": 0.727
+    },
+    {
+      "key": "D# major",
+      "corr": 0.68
+    },
+    {
+      "key": "C minor",
+      "corr": 0.442
+    },
+    {
+      "key": "G# major",
+      "corr": 0.374
+    }
+  ],
+  "peak_dbfs": -0.48,
+  "rms_dbfs": -14.17,
+  "crest_factor_db": 13.69,
+  "samples_at_full_scale": 0,
+  "section_count": 7,
+  "sections": [
+    {
+      "index": 1,
+      "start": 0.0,
+      "end": 6.15,
+      "start_clock": "0:00",
+      "length_sec": 6.15,
+      "mean_rms": 0.12734,
+      "mean_dbfs": -17.9
+    },
+    {
+      "index": 2,
+      "start": 6.15,
+      "end": 27.65,
+      "start_clock": "0:06",
+      "length_sec": 21.5,
+      "mean_rms": 0.12542,
+      "mean_dbfs": -18.0
+    },
+    {
+      "index": 3,
+      "start": 27.65,
+      "end": 94.62,
+      "start_clock": "0:28",
+      "length_sec": 66.97,
+      "mean_rms": 0.2088,
+      "mean_dbfs": -13.6
+    },
+    {
+      "index": 4,
+      "start": 94.62,
+      "end": 96.85,
+      "start_clock": "1:35",
+      "length_sec": 2.23,
+      "mean_rms": 0.15518,
+      "mean_dbfs": -16.2
+    },
+    {
+      "index": 5,
+      "start": 96.85,
+      "end": 154.95,
+      "start_clock": "1:37",
+      "length_sec": 58.1,
+      "mean_rms": 0.18243,
+      "mean_dbfs": -14.8
+    },
+    {
+      "index": 6,
+      "start": 154.95,
+      "end": 158.08,
+      "start_clock": "2:35",
+      "length_sec": 3.13,
+      "mean_rms": 0.10769,
+      "mean_dbfs": -19.4
+    },
+    {
+      "index": 7,
+      "start": 158.08,
+      "end": 163.73,
+      "start_clock": "2:38",
+      "length_sec": 5.65,
+      "mean_rms": 0.14449,
+      "mean_dbfs": -16.8
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "file": "research/reference-video/inspiration-2/reel-audio.mp3",
+  "duration_sec": 295.87,
+  "duration_clock": "4:56",
+  "tempo_bpm": 103.4,
+  "tempo_bpm_from_beat_intervals": 103.4,
+  "tempo_half": 51.7,
+  "tempo_double": 206.7,
+  "beat_count": 488,
+  "key_estimate": "A# minor",
+  "key_confidence": 0.718,
+  "key_alternatives": [
+    {
+      "key": "A# minor",
+      "corr": 0.718
+    },
+    {
+      "key": "C# major",
+      "corr": 0.517
+    },
+    {
+      "key": "F# major",
+      "corr": 0.402
+    },
+    {
+      "key": "F minor",
+      "corr": 0.399
+    }
+  ],
+  "peak_dbfs": -2.9,
+  "rms_dbfs": -16.27,
+  "crest_factor_db": 13.38,
+  "samples_at_full_scale": 0,
+  "section_count": 10,
+  "sections": [
+    {
+      "index": 1,
+      "start": 0.0,
+      "end": 15.12,
+      "start_clock": "0:00",
+      "length_sec": 15.12,
+      "mean_rms": 0.09118,
+      "mean_dbfs": -20.8
+    },
+    {
+      "index": 2,
+      "start": 15.12,
+      "end": 20.78,
+      "start_clock": "0:15",
+      "length_sec": 5.66,
+      "mean_rms": 0.03692,
+      "mean_dbfs": -28.7
+    },
+    {
+      "index": 3,
+      "start": 20.78,
+      "end": 163.4,
+      "start_clock": "0:21",
+      "length_sec": 142.62,
+      "mean_rms": 0.14279,
+      "mean_dbfs": -16.9
+    },
+    {
+      "index": 4,
+      "start": 163.4,
+      "end": 175.03,
+      "start_clock": "2:43",
+      "length_sec": 11.63,
+      "mean_rms": 0.18445,
+      "mean_dbfs": -14.7
+    },
+    {
+      "index": 5,
+      "start": 175.03,
+      "end": 198.55,
+      "start_clock": "2:55",
+      "length_sec": 23.52,
+      "mean_rms": 0.14391,
+      "mean_dbfs": -16.8
+    },
+    {
+      "index": 6,
+      "start": 198.55,
+      "end": 239.86,
+      "start_clock": "3:19",
+      "length_sec": 41.31,
+      "mean_rms": 0.1598,
+      "mean_dbfs": -15.9
+    },
+    {
+      "index": 7,
+      "start": 239.86,
+      "end": 241.67,
+      "start_clock": "4:00",
+      "length_sec": 1.81,
+      "mean_rms": 0.09986,
+      "mean_dbfs": -20.0
+    },
+    {
+      "index": 8,
+      "start": 241.67,
+      "end": 266.73,
+      "start_clock": "4:02",
+      "length_sec": 25.06,
+      "mean_rms": 0.16617,
+      "mean_dbfs": -15.6
+    },
+    {
+      "index": 9,
+      "start": 266.73,
+      "end": 287.18,
+      "start_clock": "4:27",
+      "length_sec": 20.45,
+      "mean_rms": 0.14432,
+      "mean_dbfs": -16.8
+    },
+    {
+      "index": 10,
+      "start": 287.18,
+      "end": 295.87,
+      "start_clock": "4:47",
+      "length_sec": 8.69,
+      "mean_rms": 0.01093,
+      "mean_dbfs": -39.2
+    }
+  ]
+}
