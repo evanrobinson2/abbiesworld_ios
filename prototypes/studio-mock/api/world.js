@@ -1,4 +1,4 @@
-const ORIGIN = "http://abbies.world:8000";
+const ORIGIN = "http://game.abbies.world:8000";
 const REQUIRED_PLAYERS = ["player.abbie", "player.ani", "player.evan"];
 
 function bearer(request) {

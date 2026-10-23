@@ -72,7 +72,7 @@ import { authorizeDispatchCaller } from "./lib/dispatch-auth.js";
 import { createDispatchService, getDefaultStore as getDispatchStore } from "./lib/dispatch-service.js";
 import { ORACLE_TOOLS, ORACLE_TOOL_NAMES, callOracleTool } from "./lib/oracle.js";
 
-const ORIGIN = "http://abbies.world:8000";
+const ORIGIN = "http://game.abbies.world:8000";
 const PROTOCOL = "2025-03-26";
 const SERVER = { name: "abbies-world", version: "0.7.0" };
 const HOUSEHOLD_AUDIENCE = "https://api.abbies.world";

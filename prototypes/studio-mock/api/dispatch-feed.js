@@ -19,7 +19,7 @@ import { authorizeDispatchCaller } from "./lib/dispatch-auth.js";
 import { createDispatchService, getDefaultStore } from "./lib/dispatch-service.js";
 import { summarize as summarizeExecutionCapacity } from "./lib/execution-capacity-store.js";
 
-const ORIGIN = "http://abbies.world:8000";
+const ORIGIN = "http://game.abbies.world:8000";
 
 /** Midjourney pull workers (the Mac) as factory machines, from the household world. */
 async function midjourneyMachines() {

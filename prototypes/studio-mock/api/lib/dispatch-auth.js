@@ -14,6 +14,8 @@ export const AUTH0_ISSUER = "https://dev-33h7qd4ytudlk0ls.us.auth0.com/";
 export const GITHUB_ISSUER = "https://token.actions.githubusercontent.com";
 export const REPO = "evanrobinson2/abbiesworld_ios";
 export const MCP_AUDIENCE = "https://studio-mock-iota.vercel.app/mcp";
+// Same MCP served at its own address (ChatGPT sends resource= the URL it dials).
+export const MCP_DOMAIN_AUDIENCE = "https://mcp.abbies.world/mcp";
 export const HOUSEHOLD_AUDIENCE = "https://api.abbies.world";
 export const RELAY_AUDIENCE = "https://studio-mock-iota.vercel.app/api/dispatch-relay";
 
@@ -100,7 +102,7 @@ export async function authorizeDispatchCaller(token, opts = {}) {
   if (!token) return { ok: false, error: "auth_required" };
   const result = await verifyJwt(
     token,
-    { issuers: [AUTH0_ISSUER, GITHUB_ISSUER], audiences: [MCP_AUDIENCE, HOUSEHOLD_AUDIENCE] },
+    { issuers: [AUTH0_ISSUER, GITHUB_ISSUER], audiences: [MCP_AUDIENCE, MCP_DOMAIN_AUDIENCE, HOUSEHOLD_AUDIENCE] },
     opts
   );
   if (!result.ok) return result;
