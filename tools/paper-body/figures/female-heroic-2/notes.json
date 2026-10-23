@@ -5,8 +5,24 @@
     "Shoulder caps are about 65% of the pick's bulge (build.py SHOULDER_SCALE = 0.65): about 42 px half-width instead of 52, tucked over the arm line instead of reaching out to x=247 and up to y=235. The silhouette at the shoulders is narrower than the pick on purpose."
   ],
   "rounds": [
-    {"round": 1, "date": "2026-10-23", "score_iou": 0.894, "triangles": 2824,
-     "notes": "Built from per-row mask runs of the pick: torso rings (waist read from the mask), shoulder caps, separate upper arm, elbow strap, forearm bracer, hand, thigh, knee band, shin and pointed turned-out feet. The halter sports top and the boy-short briefs are separate Cloth parts; folded seams (under-band, cup edges, straps and leg-hole edges) let them read from the front. The bust is two folded lobes under the top. Gaps: the pick's crisp diagonal folds on the thighs, the bracer flaps and the halter collar are only roughly there, and the lobes read faintly from the front."}
+    {
+      "round": 1,
+      "date": "2026-10-23",
+      "score_iou": 0.894,
+      "triangles": 2824,
+      "notes": "Built from per-row mask runs of the pick: torso rings (waist read from the mask), shoulder caps, separate upper arm, elbow strap, forearm bracer, hand, thigh, knee band, shin and pointed turned-out feet. The halter sports top and the boy-short briefs are separate Cloth parts; folded seams (under-band, cup edges, straps and leg-hole edges) let them read from the front. The bust is two folded lobes under the top. Gaps: the pick's crisp diagonal folds on the thighs, the bracer flaps and the halter collar are only roughly there, and the lobes read faintly from the front.",
+      "archive": "rounds/r1/ (build.py, female-heroic-2.glb, shot.png)"
+    },
+    {
+      "round": 2,
+      "date": "2026-10-23",
+      "score_iou": 0.882,
+      "triangles": 4602,
+      "notes": "Rebuilt part by part against the pick. Head: a folded hood with a recessed face shield that is pointed at the forehead and the chin and widest at the eye line, a sharp nose ridge down its centre, a fold at the eye line, and the raised rim of the hood as the face outline. Hands: palm plus four three-segment fingers curling forward and a thumb toward the body, turned three-quarter to the camera; fingertips at y=781 px (pick ~790). Tall open V collar, two folded pyramid cups with a centre gore, a thin ab ridge, pleated elbow straps (seven bands), six-sided forearm bracers with a flap down the outer face, wrist cuffs, faceted six-sided shoulder caps (still 65% of the pick, per Evan's 04:39Z ask). Legs resampled every 18 px with ten-sided rings, turned down the length, and folds pressed into the paper along the pick's diagonal creases. IoU 0.882 (r1 0.894): the collar and the narrower turned hands give up a little outline.",
+      "proportion_check": "Bodies and Creatures canon (studies/bodies-study): knee halfway between the front hip point (y~560) and the floor (1318) = y 939; the knee band is centred at y 935. Elbow at the waist: waist y 467, elbow strap 470-505. Wrist at the crotch: crotch y 668, wrist cuff 660-672. Fingertips at mid-thigh: canon y~768, pick y~790, model y 781 (between them, leaning to the pick, which shows it clearly). No shin-too-short or arm-too-short error.",
+      "gaps": "The pick's leg folds are crisper and larger than the pressed creases here; the feet are still blocky wedges, not the pick's pointed folded paper; the collar lapels are rougher than the pick's soft upturned band."
+    }
   ],
-  "shot": "r/shot.png (tools/paper-body/figures/shot.py, the same camera as every figure)"
+  "shot": "r/shot.png (tools/paper-body/figures/shot.py, the same camera as every figure); r/before-after.jpg = pick | round 1 | round 2",
+  "request_r2": "Evan, 2026-10-23 05:37Z, on round 1: \"It looks like the modeler just got lazy and did not try to model this charcter, but instead created an inspired character? I wanted THIS character, and the modeler got laze and didn't bother with hands. or a real facial outline or nose\""
 }

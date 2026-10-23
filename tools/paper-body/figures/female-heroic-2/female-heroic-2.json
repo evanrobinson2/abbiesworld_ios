@@ -1,10 +1,10 @@
 {
   "figure": "female-heroic-2",
-  "round": 1,
+  "round": 2,
   "concept": "female-base-heroic_2",
   "height_m": 1.72,
   "shoulder_scale": 0.65,
-  "triangles": 2824,
+  "triangles": 4602,
   "sockets": {
     "shoulder_l": [
       -0.196,
@@ -12,7 +12,7 @@
       1.394
     ],
     "hand_l": [
-      -0.292,
+      -0.293,
       0.0,
       0.809
     ],
@@ -32,7 +32,7 @@
       1.394
     ],
     "hand_r": [
-      0.292,
+      0.293,
       0.0,
       0.809
     ],
