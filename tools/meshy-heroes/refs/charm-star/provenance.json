@@ -1,0 +1,6 @@
+{
+ "source": "Midjourney",
+ "pick": 3,
+ "proofs": "branch claude/backpack-charm-proofs tools/midjourney/outputs/backpack-0046/charms/ (MJ job ids there)",
+ "from": "Backpack thread 20:39Z"
+}

@@ -402,12 +402,12 @@
    "id": "charm-bub",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-bub/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-bub/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "stand-in render from the Backpack thread (Mac offline for MJ); black lab, brown eyes, red collar; run after the tardigrade"
+   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "brute1-retexture",
@@ -493,81 +493,89 @@
    "id": "charm-gold-coin",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-gold-coin/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-gold-coin/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
-   "hold": "waits for its Midjourney pick or Evan accepting the stand-in"
+   "single_view": true,
+   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "charm-star",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-star/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-star/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
-   "hold": "waits for its Midjourney pick or Evan accepting the stand-in"
+   "single_view": true,
+   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "charm-brass-key",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-brass-key/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-brass-key/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
-   "hold": "waits for its Midjourney pick or Evan accepting the stand-in"
+   "single_view": true,
+   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "charm-moon",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-moon/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-moon/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
-   "hold": "waits for its Midjourney pick or Evan accepting the stand-in"
+   "single_view": true,
+   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "charm-floppy-disk",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-floppy-disk/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-floppy-disk/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
-   "hold": "waits for its Midjourney pick or Evan accepting the stand-in"
+   "single_view": true,
+   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "charm-heart",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-heart/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-heart/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
-   "hold": "waits for its Midjourney pick or Evan accepting the stand-in"
+   "single_view": true,
+   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "charm-coffee-cup",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-coffee-cup/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-coffee-cup/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
-   "hold": "waits for its Midjourney pick or Evan accepting the stand-in"
+   "single_view": true,
+   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "charm-rocket",
    "kind": "image-to-3d",
    "image": "tools/meshy-heroes/refs/charm-rocket/pick.png",
-   "should_texture": true,
-   "credits": 30,
+   "should_texture": false,
+   "credits": 20,
    "save_to": "tools/meshy-heroes/meshy/charm-rocket/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
-   "hold": "waits for its Midjourney pick or Evan accepting the stand-in"
+   "single_view": true,
+   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
   },
   {
    "id": "A3-paint-suit-paint-base",
