@@ -219,6 +219,42 @@
           "bytes": 1207549
         }
       ]
+    },
+    {
+      "name": "body-types",
+      "prompt": "Character lineup sheet of eight blank base mannequin figures made of matte ivory-white folded papercraft, standing side by side in a neutral A-pose, front view, top row four male bodies and bottom row four female bodies, in each row from left to right average, heroic muscular, skinny, and fat, same height scale and same style, no clothing, simple faceted paper limbs with clear joints at shoulders, elbows, hips and knees, smooth featureless heads, crisp creases and faceted folds, orthographic, evenly spaced, plain light gray background --no text, labels, scenery --ar 16:9 --v 8.2",
+      "job_id": "e0947aa1-e326-4c43-9b1e-8bba1078ba9a",
+      "created": "2026-10-23T03:02:53Z",
+      "files": [
+        {
+          "file": "images/body-types_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/e0947aa1-e326-4c43-9b1e-8bba1078ba9a/0_0.png",
+          "sha256": "678beb053731546eecf5d45958efb44ff0990d6f18a3490779cf297b688c94c2",
+          "bytes": 1270529
+        },
+        {
+          "file": "images/body-types_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/e0947aa1-e326-4c43-9b1e-8bba1078ba9a/0_1.png",
+          "sha256": "c0ccb2de3336915f00e2d649271bf0f22482f9594f031bdb4632a2feae418766",
+          "bytes": 1190076
+        },
+        {
+          "file": "images/body-types_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/e0947aa1-e326-4c43-9b1e-8bba1078ba9a/0_2.png",
+          "sha256": "8bf4b8e00d957f03ea5df284a84268aac859b66c3e767dcd9edb69a4b0b1ffa2",
+          "bytes": 1288394
+        },
+        {
+          "file": "images/body-types_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/e0947aa1-e326-4c43-9b1e-8bba1078ba9a/0_3.png",
+          "sha256": "88af18fc7bb6350730cd89c119a7679dd28c12dce0f63c42ac16d7a31a3bf4e9",
+          "bytes": 1278025
+        }
+      ]
     }
   ]
 }
