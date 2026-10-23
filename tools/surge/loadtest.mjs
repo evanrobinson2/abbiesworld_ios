@@ -75,14 +75,16 @@ const runner=async()=>{while(launched<VISITORS){launched++;await visit(list,stat
 await Promise.all(Array.from({length:Math.min(CONCURRENCY,VISITORS)},runner));
 const seconds=(performance.now()-started)/1000;
 
-const bytesPerVisitor=stats.bytes/VISITORS,requestsPerVisitor=stats.requests/VISITORS;
+// Cost uses the captured visit (what a real browser downloads); replayed bytes shrink when requests fail.
+const bytesPerVisitor=visitBytes,requestsPerVisitor=list.length,replayedMbPerVisitor=+(stats.bytes/VISITORS/1e6).toFixed(1);
+const failedBy={};for(const [path,why] of Object.entries(stats.failed)){const key=`${why} ${path.split('/').slice(0,3).join('/')}`;failedBy[key]=(failedBy[key]||0)+1;}
 const hits=(stats.cache.HIT||0)+(stats.cache.STALE||0)+(stats.cache.PRERENDER||0);
 const report={
  url:BASE,pages:PAGES,visitors:VISITORS,concurrency:CONCURRENCY,seconds:Math.round(seconds),
  requests:stats.requests,requestsPerSecond:Math.round(stats.requests/seconds),errors:stats.errors,errorRate:+(stats.errors/stats.requests*100).toFixed(2),
  p50ms:pct(stats.times,50),p95ms:pct(stats.times,95),p99ms:pct(stats.times,99),slowest:stats.slowest,
  cacheHitRate:+(hits/stats.requests*100).toFixed(1),cache:stats.cache,byStatus:stats.byStatus,failed:Object.fromEntries(Object.entries(stats.failed).slice(0,20)),
- mbPerVisitor:+(bytesPerVisitor/1e6).toFixed(1),requestsPerVisitor:Math.round(requestsPerVisitor),
+ mbPerVisitor:+(bytesPerVisitor/1e6).toFixed(1),replayedMbPerVisitor,requestsPerVisitor:Math.round(requestsPerVisitor),failedBy,
  surgeDayCost:Object.fromEntries([10e3,50e3,100e3,250e3,500e3].map(v=>[v,Math.round(cost(v,bytesPerVisitor,requestsPerVisitor))])),
  visitorsBefore1000:Math.floor((1000/PRICE.perGB+PRICE.includedGB)/gb(bytesPerVisitor)),
  largest:[...list].sort((a,b)=>b.bytes-a.bytes).slice(0,10).map(x=>({path:x.path,mb:+(x.bytes/1e6).toFixed(2)}))
@@ -95,9 +97,12 @@ ${VISITORS} visitors, ${CONCURRENCY} at once, ${report.seconds}s. ${report.reque
 |---|---|
 | Speed p50 / p95 / p99 | ${report.p50ms} / ${report.p95ms} / ${report.p99ms} ms |
 | CDN cache hits | ${report.cacheHitRate}% |
-| One visit | ${report.mbPerVisitor} MB, ${report.requestsPerVisitor} requests |
+| One visit (browser) | ${report.mbPerVisitor} MB, ${report.requestsPerVisitor} requests |
+| Errors by status | ${Object.entries(report.byStatus).map(([k,v])=>`${k}: ${v}`).join(', ')||'none'} |
 | Visitors before $1,000 of Vercel transfer | about ${report.visitorsBefore1000.toLocaleString()} |
 ${Object.entries(report.surgeDayCost).map(([v,c])=>`| Cost of a ${(+v).toLocaleString()}-visitor day | $${c} |`).join('\n')}
+
+Failing files by status and folder: ${Object.entries(report.failedBy).sort((a,b)=>b[1]-a[1]).slice(0,12).map(([k,v])=>`${k} (${v})`).join(', ')||'none'}
 
 Largest files: ${report.largest.map(x=>`${x.path} (${x.mb} MB)`).join(', ')}
 `;
