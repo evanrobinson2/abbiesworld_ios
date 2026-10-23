@@ -500,7 +500,8 @@
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
    "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
-   "target_polycount": 8000
+   "target_polycount": 8000,
+   "hold": "dropped: Evan scratched the coin charm (20:58Z), every reward is a charm now; its 20 credits were not spent"
   },
   {
    "id": "charm-star",
@@ -547,7 +548,7 @@
    "save_to": "tools/meshy-heroes/meshy/charm-floppy-disk/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "note": "Evan's own picture (20:58Z): blue enamel floppy disk; replaces Midjourney pick #3. Untextured.",
    "target_polycount": 8000
   },
   {

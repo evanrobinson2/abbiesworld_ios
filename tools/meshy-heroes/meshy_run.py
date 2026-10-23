@@ -47,15 +47,21 @@ def call(method, path, body=None, raw=False):
     raise RuntimeError(f"{method} {path} failed after retries")
 
 
+PENDING = []  # ledger entries spent in this run and not yet pushed
+
+
+def ledger():
+    return json.loads(CREDITS.read_text()) if CREDITS.exists() else {"cap": CAP, "total": 0, "log": []}
+
+
 def spend(n, what):
+    """Refuse a task that would pass the cap. Entries stay in memory until git() merges them into the ledger
+    on top of whatever other runs pushed, so two runs never fight over credits.json."""
     with lock:
-        d = json.loads(CREDITS.read_text()) if CREDITS.exists() else {"cap": CAP, "total": 0, "log": []}
-        if d["total"] + n > CAP:
-            raise RuntimeError(f"cap: {d['total']}+{n} would pass {CAP}")
-        d["total"] += n
-        d["log"].append({"what": what, "credits": n, "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
-        CREDITS.parent.mkdir(parents=True, exist_ok=True)
-        CREDITS.write_text(json.dumps(d, indent=1))
+        total = ledger()["total"] + sum(e["credits"] for e in PENDING)
+        if total + n > CAP:
+            raise RuntimeError(f"cap: {total}+{n} would pass {CAP}")
+        PENDING.append({"what": what, "credits": n, "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
 
 
 def data_uri(path):
@@ -92,14 +98,27 @@ def views_for(job, tmp):
 
 
 def git(msg, paths):
+    """Commit outputs, rebase onto the branch, then add this run's ledger entries to the branch's credits.json."""
+    br = "claude/project-thread-4a30bd"
+    sh = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True)
     with lock:
-        subprocess.run(["git", "add", "-f"] + [str(p) for p in paths], cwd=ROOT)
-        subprocess.run(["git", "commit", "-m", msg], cwd=ROOT, capture_output=True)
-        for i in range(4):
-            if subprocess.run(["git", "pull", "--rebase", "-q", "origin", "claude/project-thread-4a30bd"], cwd=ROOT).returncode == 0 \
-               and subprocess.run(["git", "push", "-q", "origin", "HEAD:claude/project-thread-4a30bd"], cwd=ROOT).returncode == 0:
-                return
-            time.sleep(2 ** (i + 1))
+        sh("add", "-f", *[str(p) for p in paths if Path(p) != CREDITS])
+        sh("commit", "-m", msg)
+        for i in range(8):
+            sh("fetch", "-q", "origin", br)
+            if sh("rebase", "-q", "--autostash", f"origin/{br}").returncode != 0:
+                sh("rebase", "--abort"); time.sleep(2 ** min(i, 4)); continue
+            if PENDING:
+                d = ledger(); d["log"] += PENDING; d["total"] = sum(e["credits"] for e in d["log"])
+                CREDITS.parent.mkdir(parents=True, exist_ok=True)
+                CREDITS.write_text(json.dumps(d, indent=1))
+                sh("add", str(CREDITS)); sh("commit", "-m", "Meshy credits ledger")
+            if sh("push", "-q", "origin", f"HEAD:{br}").returncode == 0:
+                PENDING.clear(); return
+            if PENDING:
+                sh("reset", "-q", "HEAD~1"); sh("checkout", "--", str(CREDITS))
+            time.sleep(2 ** min(i, 4))
+        print("PUSH FAIL", msg, flush=True)
 
 
 def do_rig(job, out, prov, tid, rig, rig_credits):
@@ -182,8 +201,11 @@ def run(job):
         if kind == "multi-image-to-3d":
             prov["note"] = "fewer than 2 clean views: image-to-3d on front"
     cost = job.get("credits", 30)
-    spend(cost, f"{jid} 3d")
-    tid = call("POST", ep, body)["result"]
+    if job.get("recover_task"):  # paid for in an earlier run whose push failed
+        tid, cost = job["recover_task"], 0
+    else:
+        spend(cost, f"{jid} 3d")
+        tid = call("POST", ep, body)["result"]
     prov["tasks"].append({"stage": "3d", "endpoint": ep, "task_id": tid, "credits": cost,
                           "params": {k: v for k, v in body.items() if not k.startswith("image")},
                           "views": [v.name for v in views]})
@@ -210,6 +232,17 @@ if __name__ == "__main__":
     KEY = key()
     queue = {j["id"]: j for j in json.loads((HERE / "meshy-queue.json").read_text())["jobs"]}
     ids = sys.argv[1:]
+    if ids == ["tasks"]:  # recent image-to-3d tasks with thumbnails, to recover runs whose push failed
+        d = ROOT / "tools/meshy-heroes/meshy/recent-tasks"; d.mkdir(parents=True, exist_ok=True)
+        rows = call("GET", "/v1/image-to-3d?page_size=12&sort_by=-created_at")
+        rows = rows if isinstance(rows, list) else rows.get("result", rows)
+        keep = []
+        for t in rows:
+            keep.append({k: t.get(k) for k in ("id", "status", "created_at", "finished_at")})
+            if t.get("thumbnail_url"):
+                fetch(t["thumbnail_url"], d / f"{t['id']}.png")
+        (d / "tasks.json").write_text(json.dumps(keep, indent=1))
+        git("Meshy: recent image-to-3d tasks for recovery", [d]); sys.exit()
     if ids and ids[0] == "--rig-only":
         ids = ids[1:]
         for i in ids:

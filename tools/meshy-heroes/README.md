@@ -26,3 +26,9 @@ Budget: 2,000 credits. Astronauts 300 (plasticine untextured 20, painterly textu
 - Painterly: we build it as a reusable shader in `simulations/`, keeping the comic direction's cel ink outline as rim.
 - Deliver to `prototypes/ranch-atelier/dist/studies/character-studio/models/heroes/` on main and tell that thread.
   It plays all 40 CMU mocap moves (`tools/character-studio/mocap/retarget.py`).
+
+## Abbie wears her backpack
+On her rigged hero, attach the pack to the chest bone at runtime (Backpack thread, PR #418):
+`import {wearBackpack} from '/simulations/backpack-wear.mjs'`, then
+`const pack = await wearBackpack(chestBone, {height: .42, offset: [0, 0, -.16]})` and `pack.update(dt)` each frame.
+Her front is +z, units are metres; the module compensates for bone scale.

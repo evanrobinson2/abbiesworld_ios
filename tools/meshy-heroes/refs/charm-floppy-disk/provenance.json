@@ -1,6 +1,4 @@
 {
- "source": "Midjourney",
- "pick": 3,
- "proofs": "branch claude/backpack-charm-proofs tools/midjourney/outputs/backpack-0046/charms/ (MJ job ids there)",
- "from": "Backpack thread 20:39Z"
+ "source": "Evan's own picture, via the Backpack thread 20:58Z",
+ "replaces": "Midjourney pick #3"
 }
