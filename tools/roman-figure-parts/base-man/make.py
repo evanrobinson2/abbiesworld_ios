@@ -17,14 +17,14 @@ def mat(name, rgb, rough):
 SKIN = mat("Skin", (0.55, 0.55, 0.56), 0.55)
 CLOTH = mat("Cloth", (0.66, 0.66, 0.67), 0.8)
 
-ROUND = sys.argv[-1] if sys.argv[-1] in ("r1", "r2") else "r2"
-if ROUND == "r2":
-    d = np.load(os.path.join(HERE, "base-man-r2.npz"))
+ROUND = sys.argv[-1] if sys.argv[-1] in ("r1", "r2", "r3") else "r2"
+if ROUND in ("r2", "r3"):
+    d = np.load(os.path.join(HERE, f"base-man-{ROUND}.npz"))
     conv = lambda v: [(float(x * build.S), float((y - build.P["cx_side"]) * build.S), float((build.P["ground"] - z) * build.S)) for x, y, z in v]
-    hd = np.load(os.path.join(HERE, "base-man-r2-head.npz"))
+    hd = np.load(os.path.join(HERE, f"base-man-{ROUND}-head.npz"))
     PARTS = {"Skin": (conv(d["vs"]), d["fs"].tolist()), "Briefs": (conv(d["vb"]), d["fb"].tolist()),
              "Head": (conv(hd["vs"]), hd["fs"].tolist())}
-    R = os.path.join(HERE, "r2"); os.makedirs(R, exist_ok=True)
+    R = os.path.join(HERE, ROUND); os.makedirs(R, exist_ok=True)
 else:
     PARTS = build.PARTS
 for name, (V, F) in PARTS.items():
@@ -34,7 +34,7 @@ for name, (V, F) in PARTS.items():
     ob.data.materials.append(CLOTH if name.startswith("Briefs") else SKIN)
     for p in me.polygons: p.use_smooth = True
     bpy.context.view_layer.objects.active = ob; ob.select_set(True)
-    if ROUND == "r2":
+    if ROUND != "r1":
         bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.select_all(action="SELECT")
         bpy.ops.mesh.normals_make_consistent(inside=False); bpy.ops.object.mode_set(mode="OBJECT")
         dec = ob.modifiers.new("Lighter", "DECIMATE"); dec.ratio = 0.06 if name == "Head" else 0.18
@@ -45,7 +45,7 @@ for name, (V, F) in PARTS.items():
         bpy.ops.object.modifier_apply(modifier="Smooth")
     ob.select_set(False)
 
-bpy.ops.export_scene.gltf(filepath=os.path.join(HERE, "base-man.glb" if ROUND == "r1" else "base-man-r2.glb"), export_format="GLB", export_apply=True)
+bpy.ops.export_scene.gltf(filepath=os.path.join(HERE, "base-man.glb" if ROUND == "r1" else f"base-man-{ROUND}.glb"), export_format="GLB", export_apply=True)
 
 # ---- same-camera renders: orthographic, the reference's own scale and framing
 sc.render.engine = "CYCLES"; sc.cycles.samples = 24; sc.cycles.device = "CPU"

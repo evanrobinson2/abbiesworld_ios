@@ -1,0 +1,23 @@
+{
+"head": 0,
+"ear": 0,
+"eyes-nose-mouth": 0,
+"neck-shoulders": 2,
+"torso-front": 0,
+"torso-back": 0,
+"shoulder": 0,
+"upper-arm": 3,
+"elbow": 0,
+"forearm": 3,
+"wrist": 0,
+"hand-back": 1,
+"hand-palm": 3,
+"finger": 0,
+"thumb": 0,
+"hips": 0,
+"thigh": 1,
+"knee": 2,
+"lower-leg": 3,
+"ankle": 0,
+"foot": 0
+}
