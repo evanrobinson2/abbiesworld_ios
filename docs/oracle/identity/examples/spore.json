@@ -492,7 +492,14 @@
       "https://www.gamerevolution.com/guides/41924-spore-faqwalkthrough",
       "https://en.wikipedia.org/wiki/Spore_(2008_video_game)",
       "https://www.cgw.com/Publications/CGW/2008/Volume-31-Issue-10-Oct-2008-/Evolutionary-Chain.aspx",
-      "https://www.synthtopia.com/content/2008/09/24/brian-enos-music-for-spore/"
+      "https://www.synthtopia.com/content/2008/09/24/brian-enos-music-for-spore/",
+      "https://strategywiki.org/wiki/Spore/Cell_Creator",
+      "https://strategywiki.org/wiki/Spore/Creature_Stage",
+      "https://janeng.com/?p=143",
+      "https://gamedeveloper.com/game-platforms/gingold-talks-i-spore-i-s-magic-crayon-approach",
+      "https://www.gamespot.com/articles/gdc-07-creating-spore/1100-6167215/",
+      "https://www.engadget.com/2007-03-12-spores-power-struggle-freedom-vs-beauty.html",
+      "https://www.awn.com/animationworld/evolution-spore"
     ],
     "video": "Cloud sessions cannot reach YouTube, so public video was studied through written guides. A private recording from Evan's own copy on his PC was requested; its notes replace these estimates when it lands. Frames and recordings are study only and are never committed or published.",
     "findings_for_the_science_adventure": [
@@ -504,7 +511,40 @@
       "Parts work only where you put them, so the editor is a real decision, not decoration.",
       "Eggs that hatch into predators if left: a gentle clock without a timer.",
       "Currents and poison clouds make the water itself part of play."
-    ]
+    ],
+    "creator_and_loop_study": {
+      "date": "2026-10-23",
+      "doc": "docs/oracle/spore/SPORE_CREATOR_STUDY.md",
+      "loop": [
+        "arrive from meteor",
+        "play and eat",
+        "earn DNA bar (10 steps, ~5 foods each)",
+        "call mate and follow sound",
+        "edit live, paint",
+        "hatch and grow",
+        "see sea floor, timeline of diet, leave water"
+      ],
+      "editor": [
+        "parts panel left, stats top right",
+        "mouth required, eyes and propulsion optional",
+        "per-part caps force choices",
+        "complexity meter turns red",
+        "placement matters",
+        "paint never affects performance",
+        "pre-rigged parts with named clips retarget any body",
+        "soft mastery: few modes, immediate big feedback, hidden judgment of what looks good"
+      ],
+      "for_science_adventure": [
+        "mate call becomes a friend-blob song, editor is a zoom",
+        "four-move editor",
+        "golden reward per step",
+        "wobble meter instead of DNA numbers",
+        "parts work where placed",
+        "blur-layer depth",
+        "escape ceremony from diet timeline",
+        "creatures are tiny shareable data"
+      ]
+    }
   },
   "history": [
     {
@@ -514,6 +554,10 @@
     {
       "date": "2026-10-23",
       "change": "Deepened from public guides: size classes, growth steps, parts, editor flow, HUD layout, music."
+    },
+    {
+      "date": "2026-10-23",
+      "note": "Creator, cell HUD, evolution step and loop study added (docs/oracle/spore)."
     }
   ]
 }
